@@ -332,7 +332,7 @@ WebAssembly使用基于堆栈的虚拟机模型：
 ```text
 执行状态 {
   操作数堆栈 ← 计算中间结果
-  调用栈 ← 函数调用信息  
+  调用栈 ← 函数调用信息
   线性内存 ← 程序数据
   全局变量 ← 全局状态
   函数表 ← 间接调用目标
@@ -342,7 +342,7 @@ WebAssembly使用基于堆栈的虚拟机模型：
 **执行循环**:
 
 1. 取指令 (Fetch)
-2. 解码指令 (Decode)  
+2. 解码指令 (Decode)
 3. 执行指令 (Execute)
 4. 更新状态 (Update)
 
@@ -570,15 +570,15 @@ impl Token {
     pub fn transfer(&mut self, to: Address, amount: u64) -> Result<(), Error> {
         let sender = self.caller();
         let sender_balance = self.balances.get(&sender).copied().unwrap_or(0);
-        
+
         if sender_balance < amount {
             return Err(Error::InsufficientBalance);
         }
-        
+
         self.balances.insert(sender, sender_balance - amount);
         let recipient_balance = self.balances.get(&to).copied().unwrap_or(0);
         self.balances.insert(to, recipient_balance + amount);
-        
+
         Ok(())
     }
 }
@@ -592,11 +592,11 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub fn matrix_multiply(
-    a: &[f64], b: &[f64], 
+    a: &[f64], b: &[f64],
     m: usize, n: usize, p: usize
 ) -> Vec<f64> {
     let mut result = vec![0.0; m * p];
-    
+
     for i in 0..m {
         for j in 0..p {
             for k in 0..n {
@@ -604,7 +604,7 @@ pub fn matrix_multiply(
             }
         }
     }
-    
+
     result
 }
 

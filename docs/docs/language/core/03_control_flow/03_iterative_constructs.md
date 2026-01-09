@@ -3,12 +3,14 @@
 
 ## 📊 目录
 
-- [3.1. 无限循环: `loop`](#31-无限循环-loop)
-- [3.2. 条件循环: `while` 与 `while let`](#32-条件循环-while-与-while-let)
-  - [3.2.1. `while` 循环](#321-while-循环)
-  - [3.2.2. `while let` 循环](#322-while-let-循环)
-- [3.3. 迭代循环: `for`](#33-迭代循环-for)
-- [3.4. 控制循环: `break` 与 `continue`](#34-控制循环-break-与-continue)
+- [03. 循环结构 (Iterative Constructs)](#03-循环结构-iterative-constructs)
+  - [📊 目录](#-目录)
+  - [3.1. 无限循环: `loop`](#31-无限循环-loop)
+  - [3.2. 条件循环: `while` 与 `while let`](#32-条件循环-while-与-while-let)
+    - [3.2.1. `while` 循环](#321-while-循环)
+    - [3.2.2. `while let` 循环](#322-while-let-循环)
+  - [3.3. 迭代循环: `for`](#33-迭代循环-for)
+  - [3.4. 控制循环: `break` 与 `continue`](#34-控制循环-break-与-continue)
 
 
 循环结构是重复执行代码块的基础。Rust 提供了多种循环机制，每种都有其特定的用途和语义，并且都与所有权系统紧密集成以保证安全。
@@ -22,8 +24,8 @@
 
 **类型与所有权约束**:
 
-* 如果 `loop` 被用作表达式，则所有可能的 `break` 路径都必须返回相同类型的值。
-* 循环体内的借用必须在循环的单次迭代内结束，不能泄露到下一次迭代或循环外部，除非该借用是对循环外数据的持续借用。
+- 如果 `loop` 被用作表达式，则所有可能的 `break` 路径都必须返回相同类型的值。
+- 循环体内的借用必须在循环的单次迭代内结束，不能泄露到下一次迭代或循环外部，除非该借用是对循环外数据的持续借用。
 
 **代码示例**:
 
@@ -95,8 +97,8 @@ while let Some(top) = stack.pop() {
 
 迭代器是一个实现了 `Iterator` trait 的结构，其关键方法是 `next(&mut self)`，该方法在每次调用时返回一个 `Option<Self::Item>`。
 
-* `Some(item)`: 序列中的下一个元素。
-* `None`: 序列结束。
+- `Some(item)`: 序列中的下一个元素。
+- `None`: 序列结束。
 
 `for` 循环会自动处理这一切：调用 `.into_iter()`，然后重复调用 `.next()` 并将结果解包，直到收到 `None` 为止。
 
@@ -105,16 +107,16 @@ while let Some(top) = stack.pop() {
 `for` 循环可以以三种方式迭代集合，这取决于调用的是哪个版本的 `into_iter`：
 
 1. **`into_iter()` (按值, 消耗所有权)**:
-    * `for item in collection`
-    * 迭代器返回集合中每个元素的**所有权**。集合本身被移动（消耗），在循环后不再可用。适用于你需要在循环体内获得每个元素所有权的场景。
+    - `for item in collection`
+    - 迭代器返回集合中每个元素的**所有权**。集合本身被移动（消耗），在循环后不再可用。适用于你需要在循环体内获得每个元素所有权的场景。
 
 2. **`iter()` (按不可变引用, 借用)**:
-    * `for item in &collection`
-    * 这是最常见的形式。迭代器返回每个元素的**不可变引用** (`&T`)。集合本身被不可变地借用，在循环后仍然可用。
+    - `for item in &collection`
+    - 这是最常见的形式。迭代器返回每个元素的**不可变引用** (`&T`)。集合本身被不可变地借用，在循环后仍然可用。
 
 3. **`iter_mut()` (按可变引用, 可变借用)**:
-    * `for item in &mut collection`
-    * 迭代器返回每个元素的**可变引用** (`&mut T`)。集合本身被可变地借用，允许在循环中修改其内容。
+    - `for item in &mut collection`
+    - 迭代器返回每个元素的**可变引用** (`&mut T`)。集合本身被可变地借用，允许在循环中修改其内容。
 
 **代码示例**:
 
@@ -145,8 +147,8 @@ for name in owned_names {
 
 ## 3.4. 控制循环: `break` 与 `continue`
 
-* `break`: 立即终止当前循环。如果循环是 `loop` 表达式，可以带一个值返回。
-* `continue`: 立即结束当前这次迭代，并开始下一次迭代。
+- `break`: 立即终止当前循环。如果循环是 `loop` 表达式，可以带一个值返回。
+- `continue`: 立即结束当前这次迭代，并开始下一次迭代。
 
 Rust 还支持**带标签的 `break` 和 `continue`**，用于从嵌套循环中控制外层循环。
 
@@ -167,6 +169,6 @@ println!("Exited the outer loop");
 
 **章节导航:**
 
-* **上一章 ->** `02_conditional_expressions.md`
-* **下一章 ->** `04_functions_and_closures.md`: 讨论函数和闭包如何作为控制流的一部分。
-* **返回目录 ->** `_index.md`
+- **上一章 ->** `02_conditional_expressions.md`
+- **下一章 ->** `04_functions_and_closures.md`: 讨论函数和闭包如何作为控制流的一部分。
+- **返回目录 ->** `_index.md`

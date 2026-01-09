@@ -1,8 +1,8 @@
 # Rust Workflow Systems: Formal Theory and Philosophical Foundation
 
-**Document Version**: V1.0  
-**Creation Date**: 2025-01-27  
-**Category**: Formal Theory  
+**Document Version**: V1.0
+**Creation Date**: 2025-01-27
+**Category**: Formal Theory
 **Cross-References**: [03_control_flow](../03_control_flow/01_formal_theory.md), [05_concurrency](../05_concurrency/01_formal_theory.md), [06_async_await](../06_async_await/01_formal_theory.md)
 
 ## Table of Contents
@@ -168,7 +168,7 @@ pub trait StateMachine {
     type State;
     type Event;
     type Error;
-    
+
     fn current_state(&self) -> Self::State;
     fn transition(&mut self, event: Self::Event) -> Result<Self::State, Self::Error>;
     fn is_final(&self, state: &Self::State) -> bool;
@@ -242,7 +242,7 @@ pub trait WorkflowOrchestrator {
     type WorkflowId;
     type WorkflowState;
     type Error;
-    
+
     async fn start_workflow(&self, workflow_id: Self::WorkflowId) -> Result<(), Self::Error>;
     async fn pause_workflow(&self, workflow_id: Self::WorkflowId) -> Result<(), Self::Error>;
     async fn resume_workflow(&self, workflow_id: Self::WorkflowId) -> Result<(), Self::Error>;
@@ -318,13 +318,13 @@ impl<I, O, E> WorkflowPipeline<I, O, E> {
     pub fn process(&self, input: I) -> Result<Vec<O>, E> {
         let mut results = Vec::new();
         let mut current_input = input;
-        
+
         for stage in &self.stages {
             let output = stage.process(current_input)?;
             results.push(output.clone());
             current_input = output;
         }
-        
+
         Ok(results)
     }
 }
@@ -348,10 +348,10 @@ impl EventDrivenWorkflow {
     pub async fn handle_event(&self, event: Box<dyn Event>) -> Result<(), Error> {
         // Update state based on event
         self.state_store.update(event.payload()).await?;
-        
+
         // Notify handlers
         self.event_bus.publish(event).await?;
-        
+
         Ok(())
     }
 }
@@ -413,14 +413,14 @@ pub struct OrderWorkflow {
 impl OrderWorkflow {
     pub fn new() -> Self {
         let mut sm = WorkflowStateMachine::new(OrderState::Created);
-        
+
         // Define transitions
         sm.add_transition(OrderState::Created, OrderEvent::OrderValidated, OrderState::Validated);
         sm.add_transition(OrderState::Validated, OrderEvent::PaymentProcessed, OrderState::PaymentProcessing);
         sm.add_transition(OrderState::PaymentProcessing, OrderEvent::InventoryChecked, OrderState::InventoryChecking);
         sm.add_transition(OrderState::InventoryChecking, OrderEvent::OrderShipped, OrderState::ReadyForShipment);
         sm.add_transition(OrderState::ReadyForShipment, OrderEvent::OrderCompleted, OrderState::Completed);
-        
+
         Self { state_machine: sm }
     }
 }
@@ -436,16 +436,16 @@ pub struct DataProcessingPipeline {
 impl DataProcessingPipeline {
     pub fn new() -> Self {
         let mut pipeline = WorkflowPipeline::new("data-processing");
-        
+
         // Add processing stages
         pipeline.add_stage(Box::new(DataValidationStage));
         pipeline.add_stage(Box::new(DataTransformationStage));
         pipeline.add_stage(Box::new(DataEnrichmentStage));
         pipeline.add_stage(Box::new(DataOutputStage));
-        
+
         Self { pipeline }
     }
-    
+
     pub fn process_data(&self, input: String) -> Result<Vec<String>, String> {
         self.pipeline.process(input)
     }
@@ -463,17 +463,17 @@ impl EventDrivenOrderWorkflow {
     pub fn new() -> Self {
         let event_bus = Arc::new(EventBus::new());
         let state_store = Arc::new(StateStore::new());
-        
+
         let mut workflow = EventDrivenWorkflow::new(event_bus, state_store);
-        
+
         // Register event handlers
         workflow.register_handler("order.created", Box::new(OrderCreatedHandler));
         workflow.register_handler("order.validated", Box::new(OrderValidatedHandler));
         workflow.register_handler("payment.processed", Box::new(PaymentProcessedHandler));
-        
+
         Self { workflow }
     }
-    
+
     pub async fn handle_order_event(&self, event: OrderEvent) -> Result<(), Error> {
         self.workflow.handle_event(Box::new(event)).await
     }
@@ -524,6 +524,6 @@ impl EventDrivenOrderWorkflow {
 
 ---
 
-**Document Status**: Complete  
-**Next Review**: 2025-02-27  
+**Document Status**: Complete
+**Next Review**: 2025-02-27
 **Maintainer**: Rust Formal Theory Team

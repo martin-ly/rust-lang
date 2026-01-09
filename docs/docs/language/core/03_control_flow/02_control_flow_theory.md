@@ -916,28 +916,28 @@ fn closure_traits_examples() {
     consume_with_callback(text, |s| {
         format!("{} completed", s) // 消耗s
     });
-    
+
     // 闭包trait的继承关系
     fn accepts_fn_once<F: FnOnce()>(f: F) {
         f();
     }
-    
+
     fn accepts_fn_mut<F: FnMut()>(mut f: F) {
         f();
     }
-    
+
     fn accepts_fn<F: Fn()>(f: F) {
         f();
     }
-    
+
     let s = String::from("hello");
-    
+
     // Fn闭包可以传递给所有类型
     let print_ref = || println!("{}", s);
     accepts_fn(print_ref);
     accepts_fn_mut(print_ref);
     accepts_fn_once(print_ref);
-    
+
     // FnMut闭包可以传递给FnMut和FnOnce
     let mut count = 0;
     let mut add_one = || {
@@ -947,7 +947,7 @@ fn closure_traits_examples() {
     // accepts_fn(add_one); // 错误: FnMut不能用于Fn
     accepts_fn_mut(add_one);
     accepts_fn_once(add_one);
-    
+
     // FnOnce闭包只能传递给FnOnce
     let s = String::from("move example");
     let consume_s = move || println!("{}", s);
@@ -984,14 +984,14 @@ fn closure_ownership_examples() {
     fn create_greeter<'a>(name: &'a str) -> impl Fn() -> String + 'a {
         move || format!("Hello, {}!", name)
     }
-    
+
     {
         let name = String::from("Alice");
         let greeter = create_greeter(&name);
         println!("{}", greeter()); // 正常工作
     } // name的作用域结束
     // greeter()会在这里失败，因为闭包引用了已经释放的name
-    
+
     // 所有权转移到闭包
     let v = vec![1, 2, 3];
     let print_vector = || {
@@ -999,27 +999,27 @@ fn closure_ownership_examples() {
     };
     // 可以在这里使用v，因为闭包只借用了它
     println!("原始向量: {:?}", v);
-    
+
     let v = vec![1, 2, 3];
     let print_vector_move = move || {
         println!("Vector(moved): {:?}", v);
     };
     // v的所有权已转移到闭包，不能再使用
     // println!("原始向量: {:?}", v); // 编译错误
-    
+
     // 复杂捕获场景
     let mut value = 5;
     let borrowed = &value;
-    
+
     // 既借用value又使用borrowed
     let closure = || {
         println!("值: {}, 借用: {}", value, borrowed);
     };
-    
+
     // 此时value有两个借用，不能修改
     // value += 1; // 编译错误
     closure();
-    
+
     // 调用结束后可以修改value
     value += 1;
 }

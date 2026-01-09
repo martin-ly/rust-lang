@@ -3,11 +3,13 @@
 
 ## 📊 目录
 
-- [6.1. 异步控制流 (Asynchronous Control Flow)](#61-异步控制流-asynchronous-control-flow)
-  - [6.1.1. `async`, `await`, 与 `Future`](#611-async-await-与-future)
-  - [6.1.2. 状态机转换的形式化视角](#612-状态机转换的形式化视角)
-- [6.2. 类型驱动的控制流 (Type-Driven Control Flow)](#62-类型驱动的控制流-type-driven-control-flow)
-  - [6.2.1. 类型状态模式](#621-类型状态模式)
+- [06. 高级控制流模式 (Advanced Control Flow Patterns)](#06-高级控制流模式-advanced-control-flow-patterns)
+  - [📊 目录](#-目录)
+  - [6.1. 异步控制流 (Asynchronous Control Flow)](#61-异步控制流-asynchronous-control-flow)
+    - [6.1.1. `async`, `await`, 与 `Future`](#611-async-await-与-future)
+    - [6.1.2. 状态机转换的形式化视角](#612-状态机转换的形式化视角)
+  - [6.2. 类型驱动的控制流 (Type-Driven Control Flow)](#62-类型驱动的控制流-type-driven-control-flow)
+    - [6.2.1. 类型状态模式](#621-类型状态模式)
 
 
 除了基础的条件和循环，Rust 还提供了更高级的模式来管理复杂的控制流。本章探讨两种强大的机制：异步控制流和类型状态模式。
@@ -21,26 +23,26 @@
 Rust 的异步模型主要围绕三个核心概念构建：
 
 1. **`async fn`**:
-    * `async` 关键字用于将一个普通函数转换为异步函数。
-    * `async fn` 不会立即执行函数体，而是返回一个实现了 `Future` trait 的匿名类型。
+    - `async` 关键字用于将一个普通函数转换为异步函数。
+    - `async fn` 不会立即执行函数体，而是返回一个实现了 `Future` trait 的匿名类型。
 
 2. **`Future` Trait**:
-    * `Future` 是对一个未来某个时刻才能产生的"值"的抽象。它代表一个可以被轮询（poll）的异步计算。
-    * 其核心方法是 `poll`，它会尝试推进计算。`poll` 的返回结果是 `Poll<Self::Output>`，有两种可能：
-        * `Poll::Ready(value)`: 计算完成，返回最终值。
-        * `Poll::Pending`: 计算尚未完成，运行时应该在稍后再次轮询。
+    - `Future` 是对一个未来某个时刻才能产生的"值"的抽象。它代表一个可以被轮询（poll）的异步计算。
+    - 其核心方法是 `poll`，它会尝试推进计算。`poll` 的返回结果是 `Poll<Self::Output>`，有两种可能：
+        - `Poll::Ready(value)`: 计算完成，返回最终值。
+        - `Poll::Pending`: 计算尚未完成，运行时应该在稍后再次轮询。
 
 3. **`.await`**:
-    * `.await` 关键字用于暂停一个 `async fn` 的执行，直到其等待的 `Future` 完成。
-    * 当 `.await` 被调用时，它会将当前线程的控制权**让渡 (yield)** 给异步运行时（如 `tokio` 或 `async-std`）。运行时可以去执行其他就绪的任务。当被等待的 `Future` 完成后，运行时会唤醒这个任务并从 `.await` 的暂停点继续执行。
+    - `.await` 关键字用于暂停一个 `async fn` 的执行，直到其等待的 `Future` 完成。
+    - 当 `.await` 被调用时，它会将当前线程的控制权**让渡 (yield)** 给异步运行时（如 `tokio` 或 `async-std`）。运行时可以去执行其他就绪的任务。当被等待的 `Future` 完成后，运行时会唤醒这个任务并从 `.await` 的暂停点继续执行。
 
 ### 6.1.2. 状态机转换的形式化视角
 
 在底层，`async fn` 被编译器转换为一个**状态机 (State Machine)**。
 
-* 函数体中的每个 `.await` 点都代表一个潜在的**状态转换**。
-* 函数的所有局部变量（包括在 `.await` 点之间传递的变量）都会成为这个状态机结构体的成员。
-* 每次调用 `poll` 时，状态机会从当前状态开始执行，直到下一个 `.await` 点（进入 `Pending` 状态）或函数返回（进入 `Ready` 状态）。
+- 函数体中的每个 `.await` 点都代表一个潜在的**状态转换**。
+- 函数的所有局部变量（包括在 `.await` 点之间传递的变量）都会成为这个状态机结构体的成员。
+- 每次调用 `poll` 时，状态机会从当前状态开始执行，直到下一个 `.await` 点（进入 `Pending` 状态）或函数返回（进入 `Ready` 状态）。
 
 这种转换是零成本抽象的典范：它将高级的、看似顺序的 `async/await` 代码，编译成了高效的、基于状态机的底层实现，而无需手写复杂的回调。
 
@@ -77,16 +79,16 @@ async fn main() {
 
 **核心思想**:
 
-* 一个结构体 `Machine<State>` 的状态由其类型参数 `State` 表示。
-* 状态本身是独立的类型（通常是零大小的空结构体）。
-* 消耗 `self` 的方法 (`fn method(self) -> Machine<NewState>`) 用于实现状态转换。
+- 一个结构体 `Machine<State>` 的状态由其类型参数 `State` 表示。
+- 状态本身是独立的类型（通常是零大小的空结构体）。
+- 消耗 `self` 的方法 (`fn method(self) -> Machine<NewState>`) 用于实现状态转换。
 
 **形式化视角**:
 这实质上是在类型系统层面构建了一个有限状态自动机 (Finite State Automaton, FSA)。
 
-* **状态 (States)**: 由不同的类型（如 `Uninitialized`, `Running`, `Stopped`）表示。
-* **转换 (Transitions)**: 由消耗旧状态并返回新状态的方法表示。
-* **编译时保证**: 编译器成为状态机的验证器。任何非法的状态转换（例如，在 `Stopped` 状态下调用 `run` 方法）都会导致编译错误，因为该方法在 `Machine<Stopped>` 类型上根本不存在。
+- **状态 (States)**: 由不同的类型（如 `Uninitialized`, `Running`, `Stopped`）表示。
+- **转换 (Transitions)**: 由消耗旧状态并返回新状态的方法表示。
+- **编译时保证**: 编译器成为状态机的验证器。任何非法的状态转换（例如，在 `Stopped` 状态下调用 `run` 方法）都会导致编译错误，因为该方法在 `Machine<Stopped>` 类型上根本不存在。
 
 **代码示例**:
 
@@ -137,5 +139,5 @@ fn main() {
 
 **章节导航:**
 
-* **上一章 ->** `05_error_handling_as_control_flow.md`
-* **返回目录 ->** `_index.md`
+- **上一章 ->** `05_error_handling_as_control_flow.md`
+- **返回目录 ->** `_index.md`

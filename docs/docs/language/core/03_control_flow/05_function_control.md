@@ -297,15 +297,15 @@ $$\text{fold}(f, z, xs) = f(f(...f(z, x_1), x_2), ..., x_n)$$
 ```rust
 fn inline_function(call_site: &CallExpr, function: &Function) -> Expr {
     let mut inlined = function.body.clone();
-    
+
     // 替换参数
     for (param, arg) in function.params.iter().zip(call_site.args.iter()) {
         inlined = substitute(inlined, param, arg);
     }
-    
+
     // 重命名局部变量以避免冲突
     inlined = rename_locals(inlined);
-    
+
     inlined
 }
 ```
@@ -338,14 +338,14 @@ fn inline_function(call_site: &CallExpr, function: &Function) -> Expr {
 ```rust
 fn build_call_graph(program: &Program) -> CallGraph {
     let mut graph = CallGraph::new();
-    
+
     for function in program.functions() {
         let calls = find_function_calls(&function.body);
         for call in calls {
             graph.add_edge(function.name(), call.target());
         }
     }
-    
+
     graph
 }
 ```
@@ -358,7 +358,7 @@ fn build_call_graph(program: &Program) -> CallGraph {
 fn reachability_analysis(call_graph: &CallGraph, start: &str) -> HashSet<String> {
     let mut reachable = HashSet::new();
     let mut worklist = vec![start.to_string()];
-    
+
     while let Some(function) = worklist.pop() {
         if reachable.insert(function.clone()) {
             for callee in call_graph.callees(&function) {
@@ -366,7 +366,7 @@ fn reachability_analysis(call_graph: &CallGraph, start: &str) -> HashSet<String>
             }
         }
     }
-    
+
     reachable
 }
 ```
@@ -386,7 +386,7 @@ $$\text{effects}(f) = \{\text{read}(x), \text{write}(x), \text{call}(g) \mid x \
 ```rust
 fn analyze_side_effects(function: &Function) -> SideEffects {
     let mut effects = SideEffects::new();
-    
+
     for stmt in &function.body {
         match stmt {
             Stmt::Assign(var, _) => effects.add_write(var),
@@ -400,7 +400,7 @@ fn analyze_side_effects(function: &Function) -> SideEffects {
             _ => {}
         }
     }
-    
+
     effects
 }
 ```
@@ -514,7 +514,7 @@ fn verify_function(function: &Function, pre: &Predicate, post: &Predicate) -> bo
     if !pre.holds() {
         return false;
     }
-    
+
     // 验证函数体
     let mut state = initial_state(function);
     for stmt in &function.body {
@@ -523,7 +523,7 @@ fn verify_function(function: &Function, pre: &Predicate, post: &Predicate) -> bo
             return false;
         }
     }
-    
+
     // 验证后置条件
     post.holds(state)
 }
@@ -540,16 +540,16 @@ fn verify_function(function: &Function, pre: &Predicate, post: &Predicate) -> bo
 fn verify_equivalence(f: &Function, g: &Function) -> bool {
     // 生成测试用例
     let test_cases = generate_test_cases(f.signature());
-    
+
     for test_case in test_cases {
         let result_f = execute_function(f, test_case);
         let result_g = execute_function(g, test_case);
-        
+
         if result_f != result_g {
             return false;
         }
     }
-    
+
     true
 }
 ```

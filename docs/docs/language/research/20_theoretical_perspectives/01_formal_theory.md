@@ -1,8 +1,8 @@
 # Rust Theoretical Perspectives: Formal Theory and Philosophical Foundation
 
-**Document Version**: V1.0  
-**Creation Date**: 2025-01-27  
-**Category**: Formal Theory  
+**Document Version**: V1.0
+**Creation Date**: 2025-01-27
+**Category**: Formal Theory
 **Cross-References**: [01_ownership_borrowing](../01_ownership_borrowing/01_formal_theory.md), [02_type_system](../02_type_system/01_formal_theory.md), [19_advanced_language_features](../19_advanced_language_features/01_formal_theory.md)
 
 ## Table of Contents
@@ -234,15 +234,15 @@ impl MentalModel {
             long_term_memory: HashMap::new(),
         }
     }
-    
+
     fn add_concept(&mut self, concept: Concept) {
         self.concepts.insert(concept.name.clone(), concept);
     }
-    
+
     fn add_relationship(&mut self, relationship: Relationship) {
         self.relationships.push(relationship);
     }
-    
+
     fn load_to_working_memory(&mut self, concept_name: &str) -> Result<(), String> {
         if let Some(concept) = self.concepts.get(concept_name) {
             if self.working_memory.len() < 7 { // Miller's Law
@@ -255,18 +255,18 @@ impl MentalModel {
             Err(format!("Concept {} not found", concept_name))
         }
     }
-    
+
     fn retrieve_from_long_term_memory(&self, schema_name: &str) -> Option<&Schema> {
         self.long_term_memory.get(schema_name)
     }
-    
+
     fn calculate_cognitive_load(&self) -> f64 {
         self.working_memory.iter().map(|c| c.complexity).sum()
     }
-    
+
     fn find_related_concepts(&self, concept_name: &str) -> Vec<&Concept> {
         let mut related = Vec::new();
-        
+
         for relationship in &self.relationships {
             if relationship.source == concept_name {
                 if let Some(concept) = self.concepts.get(&relationship.target) {
@@ -278,7 +278,7 @@ impl MentalModel {
                 }
             }
         }
-        
+
         related
     }
 }
@@ -294,7 +294,7 @@ struct RustCognitiveModel {
 impl RustCognitiveModel {
     fn new() -> Self {
         let mut mental_model = MentalModel::new();
-        
+
         // Create ownership concept
         let ownership_concept = Concept {
             name: "Ownership".to_string(),
@@ -308,7 +308,7 @@ impl RustCognitiveModel {
             complexity: 0.8,
             familiarity: 0.3,
         };
-        
+
         // Create borrowing concept
         let borrowing_concept = Concept {
             name: "Borrowing".to_string(),
@@ -322,10 +322,10 @@ impl RustCognitiveModel {
             complexity: 0.9,
             familiarity: 0.2,
         };
-        
+
         mental_model.add_concept(ownership_concept);
         mental_model.add_concept(borrowing_concept);
-        
+
         // Add relationships
         mental_model.add_relationship(Relationship {
             source: "Ownership".to_string(),
@@ -333,7 +333,7 @@ impl RustCognitiveModel {
             relationship_type: RelationshipType::Uses,
             strength: 0.8,
         });
-        
+
         let ownership_schema = Schema {
             name: "Ownership".to_string(),
             slots: {
@@ -360,7 +360,7 @@ impl RustCognitiveModel {
                 },
             ],
         };
-        
+
         let borrowing_schema = Schema {
             name: "Borrowing".to_string(),
             slots: {
@@ -393,7 +393,7 @@ impl RustCognitiveModel {
                 },
             ],
         };
-        
+
         RustCognitiveModel {
             mental_model,
             ownership_schema,
@@ -406,37 +406,37 @@ impl RustCognitiveModel {
             },
         }
     }
-    
+
     fn understand_ownership(&mut self, code: &str) -> Result<f64, String> {
         // Load ownership concept to working memory
         self.mental_model.load_to_working_memory("Ownership")?;
-        
+
         // Calculate understanding based on cognitive load and familiarity
         let cognitive_load = self.mental_model.calculate_cognitive_load();
         let ownership_concept = self.mental_model.concepts.get("Ownership").unwrap();
         let familiarity = ownership_concept.familiarity;
-        
+
         // Understanding decreases with cognitive load and increases with familiarity
         let understanding = familiarity * (1.0 - cognitive_load / 10.0);
-        
+
         Ok(understanding.max(0.0).min(1.0))
     }
-    
+
     fn learn_borrowing(&mut self, examples: Vec<String>) -> Result<f64, String> {
         // Simulate learning process
         let mut total_understanding = 0.0;
-        
+
         for example in examples {
             self.mental_model.load_to_working_memory("Borrowing")?;
-            
+
             // Increase familiarity with each example
             if let Some(concept) = self.mental_model.concepts.get_mut("Borrowing") {
                 concept.familiarity = (concept.familiarity + 0.1).min(1.0);
             }
-            
+
             total_understanding += self.mental_model.calculate_cognitive_load();
         }
-        
+
         let average_understanding = total_understanding / examples.len() as f64;
         Ok(average_understanding)
     }
@@ -492,7 +492,7 @@ impl NeuralNetwork {
         let mut layers = Vec::new();
         let mut weights = HashMap::new();
         let mut biases = HashMap::new();
-        
+
         for (i, &size) in layer_sizes.iter().enumerate() {
             let layer = Layer {
                 neurons: vec![Neuron::new(); size],
@@ -503,17 +503,17 @@ impl NeuralNetwork {
                 },
             };
             layers.push(layer);
-            
+
             if i < layer_sizes.len() - 1 {
                 let next_size = layer_sizes[i + 1];
                 let weight_matrix = vec![vec![0.0; size]; next_size];
                 weights.insert(format!("layer_{}", i), weight_matrix);
-                
+
                 let bias_vector = vec![0.0; next_size];
                 biases.insert(format!("layer_{}", i), bias_vector);
             }
         }
-        
+
         NeuralNetwork {
             layers,
             weights,
@@ -521,33 +521,33 @@ impl NeuralNetwork {
             learning_rate: 0.01,
         }
     }
-    
+
     fn forward(&mut self, input: Vec<f64>) -> Vec<f64> {
         let mut current_input = input;
-        
+
         for (i, layer) in self.layers.iter_mut().enumerate() {
             let mut layer_output = Vec::new();
-            
+
             for neuron in &mut layer.neurons {
                 neuron.inputs = current_input.clone();
-                
+
                 // Calculate weighted sum
                 let mut sum = neuron.bias;
                 for (input_val, weight) in current_input.iter().zip(&neuron.weights) {
                     sum += input_val * weight;
                 }
-                
+
                 // Apply activation function
                 neuron.output = self.apply_activation(sum, &layer.activation_function);
                 layer_output.push(neuron.output);
             }
-            
+
             current_input = layer_output;
         }
-        
+
         current_input
     }
-    
+
     fn apply_activation(&self, x: f64, function: &ActivationFunction) -> f64 {
         match function {
             ActivationFunction::Sigmoid => 1.0 / (1.0 + (-x).exp()),
@@ -556,27 +556,27 @@ impl NeuralNetwork {
             ActivationFunction::Softmax => x.exp(), // Simplified
         }
     }
-    
+
     fn train(&mut self, inputs: Vec<Vec<f64>>, targets: Vec<Vec<f64>>) -> f64 {
         let mut total_error = 0.0;
-        
+
         for (input, target) in inputs.iter().zip(targets.iter()) {
             // Forward pass
             let output = self.forward(input.clone());
-            
+
             // Calculate error
             let error: f64 = output.iter().zip(target.iter())
                 .map(|(o, t)| (o - t).powi(2))
                 .sum();
             total_error += error;
-            
+
             // Backward pass (simplified)
             self.backward(input, target, &output);
         }
-        
+
         total_error / inputs.len() as f64
     }
-    
+
     fn backward(&mut self, input: &[f64], target: &[f64], output: &[f64]) {
         // Simplified backpropagation
         // In a real implementation, this would calculate gradients
@@ -607,14 +607,14 @@ impl CodeUnderstandingNetwork {
     fn new(vocab_size: usize, max_length: usize) -> Self {
         let layer_sizes = vec![vocab_size, 128, 64, 32, 10]; // 10 output classes
         let network = NeuralNetwork::new(layer_sizes);
-        
+
         CodeUnderstandingNetwork {
             network,
             vocabulary: HashMap::new(),
             max_sequence_length: max_length,
         }
     }
-    
+
     fn tokenize_code(&self, code: &str) -> Vec<usize> {
         // Simple tokenization - in practice, use a proper tokenizer
         code.split_whitespace()
@@ -623,36 +623,36 @@ impl CodeUnderstandingNetwork {
             })
             .collect()
     }
-    
+
     fn encode_sequence(&self, tokens: &[usize]) -> Vec<f64> {
         let mut encoding = vec![0.0; self.vocabulary.len()];
-        
+
         for &token in tokens {
             if token < encoding.len() {
                 encoding[token] = 1.0;
             }
         }
-        
+
         encoding
     }
-    
+
     fn understand_code(&mut self, code: &str) -> Vec<f64> {
         let tokens = self.tokenize_code(code);
         let encoding = self.encode_sequence(&tokens);
         self.network.forward(encoding)
     }
-    
+
     fn train_on_examples(&mut self, examples: Vec<(String, Vec<f64>)>) -> f64 {
         let mut inputs = Vec::new();
         let mut targets = Vec::new();
-        
+
         for (code, target) in examples {
             let tokens = self.tokenize_code(&code);
             let encoding = self.encode_sequence(&tokens);
             inputs.push(encoding);
             targets.push(target);
         }
-        
+
         self.network.train(inputs, targets)
     }
 }
@@ -739,20 +739,20 @@ impl LinguisticModel {
                 "Block", "Parameter", "ReturnType",
             ],
         };
-        
+
         // Add grammar rules
         grammar.rules.push(GrammarRule {
             lhs: "Function".to_string(),
             rhs: vec!["fn".to_string(), "Identifier".to_string(), "Parameters".to_string(), "ReturnType".to_string(), "Block".to_string()],
             probability: 1.0,
         });
-        
+
         grammar.rules.push(GrammarRule {
             lhs: "Variable".to_string(),
             rhs: vec!["let".to_string(), "mut".to_string(), "Identifier".to_string(), "Type".to_string()],
             probability: 0.8,
         });
-        
+
         LinguisticModel {
             grammar,
             syntax_tree: SyntaxTree {
@@ -766,21 +766,21 @@ impl LinguisticModel {
             semantic_roles: HashMap::new(),
         }
     }
-    
+
     fn parse_code(&mut self, code: &str) -> Result<SyntaxTree, String> {
         // Simple parsing - in practice, use a proper parser
         let tokens = self.tokenize(code);
         let tree = self.build_syntax_tree(&tokens)?;
         Ok(tree)
     }
-    
+
     fn tokenize(&self, code: &str) -> Vec<String> {
         // Simple tokenization
         code.split_whitespace()
             .map(|s| s.to_string())
             .collect()
     }
-    
+
     fn build_syntax_tree(&self, tokens: &[String]) -> Result<SyntaxTree, String> {
         let mut root = SyntaxNode {
             label: "Program".to_string(),
@@ -788,22 +788,22 @@ impl LinguisticModel {
             value: None,
             node_type: NodeType::NonTerminal,
         };
-        
+
         let mut i = 0;
         while i < tokens.len() {
             let node = self.parse_statement(&tokens[i..])?;
             root.children.push(node.0);
             i += node.1;
         }
-        
+
         Ok(SyntaxTree { root })
     }
-    
+
     fn parse_statement(&self, tokens: &[String]) -> Result<(SyntaxNode, usize), String> {
         if tokens.is_empty() {
             return Err("No tokens to parse".to_string());
         }
-        
+
         match tokens[0].as_str() {
             "fn" => self.parse_function(tokens),
             "let" => self.parse_variable(tokens),
@@ -811,19 +811,19 @@ impl LinguisticModel {
             _ => self.parse_expression(tokens),
         }
     }
-    
+
     fn parse_function(&self, tokens: &[String]) -> Result<(SyntaxNode, usize), String> {
         if tokens.len() < 4 || tokens[0] != "fn" {
             return Err("Invalid function declaration".to_string());
         }
-        
+
         let mut node = SyntaxNode {
             label: "Function".to_string(),
             children: Vec::new(),
             value: None,
             node_type: NodeType::Function,
         };
-        
+
         // Function name
         node.children.push(SyntaxNode {
             label: "Identifier".to_string(),
@@ -831,7 +831,7 @@ impl LinguisticModel {
             value: Some(tokens[1].clone()),
             node_type: NodeType::Terminal,
         });
-        
+
         // Parameters (simplified)
         node.children.push(SyntaxNode {
             label: "Parameters".to_string(),
@@ -839,22 +839,22 @@ impl LinguisticModel {
             value: None,
             node_type: NodeType::NonTerminal,
         });
-        
+
         Ok((node, 4)) // Simplified length
     }
-    
+
     fn parse_variable(&self, tokens: &[String]) -> Result<(SyntaxNode, usize), String> {
         if tokens.len() < 3 || tokens[0] != "let" {
             return Err("Invalid variable declaration".to_string());
         }
-        
+
         let mut node = SyntaxNode {
             label: "Variable".to_string(),
             children: Vec::new(),
             value: None,
             node_type: NodeType::Variable,
         };
-        
+
         // Variable name
         node.children.push(SyntaxNode {
             label: "Identifier".to_string(),
@@ -862,10 +862,10 @@ impl LinguisticModel {
             value: Some(tokens[1].clone()),
             node_type: NodeType::Terminal,
         });
-        
+
         Ok((node, 3)) // Simplified length
     }
-    
+
     fn parse_conditional(&self, tokens: &[String]) -> Result<(SyntaxNode, usize), String> {
         let mut node = SyntaxNode {
             label: "Conditional".to_string(),
@@ -873,10 +873,10 @@ impl LinguisticModel {
             value: None,
             node_type: NodeType::Statement,
         };
-        
+
         Ok((node, 1)) // Simplified length
     }
-    
+
     fn parse_expression(&self, tokens: &[String]) -> Result<(SyntaxNode, usize), String> {
         let node = SyntaxNode {
             label: "Expression".to_string(),
@@ -884,19 +884,19 @@ impl LinguisticModel {
             value: Some(tokens[0].clone()),
             node_type: NodeType::Expression,
         };
-        
+
         Ok((node, 1))
     }
-    
+
     fn extract_semantic_roles(&mut self, tree: &SyntaxTree) -> HashMap<String, SemanticRole> {
         let mut roles = HashMap::new();
-        
+
         // Extract semantic roles from syntax tree
         self.extract_roles_recursive(&tree.root, &mut roles);
-        
+
         roles
     }
-    
+
     fn extract_roles_recursive(&self, node: &SyntaxNode, roles: &mut HashMap<String, SemanticRole>) {
         match node.node_type {
             NodeType::Function => {
@@ -907,14 +907,14 @@ impl LinguisticModel {
                     location: None,
                     time: None,
                 };
-                
+
                 // Extract function name as agent
                 if let Some(child) = node.children.get(0) {
                     if let Some(value) = &child.value {
                         role.agent = Some(value.clone());
                     }
                 }
-                
+
                 if let Some(value) = &node.value {
                     roles.insert(value.clone(), role);
                 }
@@ -927,21 +927,21 @@ impl LinguisticModel {
                     location: None,
                     time: None,
                 };
-                
+
                 // Extract variable name as patient
                 if let Some(child) = node.children.get(0) {
                     if let Some(value) = &child.value {
                         role.patient = Some(value.clone());
                     }
                 }
-                
+
                 if let Some(value) = &node.value {
                     roles.insert(value.clone(), role);
                 }
             }
             _ => {}
         }
-        
+
         // Recursively process children
         for child in &node.children {
             self.extract_roles_recursive(child, roles);
@@ -1545,6 +1545,6 @@ struct FeatureImportance {
 
 ---
 
-**Document Status**: Complete  
-**Next Review**: 2025-02-27  
+**Document Status**: Complete
+**Next Review**: 2025-02-27
 **Maintainer**: Rust Formal Theory Team

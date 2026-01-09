@@ -97,7 +97,7 @@ Rust 类型系统中的其他子类型关系：
 
 - 具体类型与特征：实现某特征的类型是该特征对象的子类型
   - 形式化：若 `T: Trait`，则 `T <: dyn Trait`
-  
+
 - 特征对象之间：若一个特征是另一个特征的超特征，则前者的特征对象是后者的子类型
   - 形式化：若 `trait Sub: Super`，则 `dyn Sub <: dyn Super`
 
@@ -194,7 +194,7 @@ fn requires_cell_string(c: &Cell<String>) {
 
 fn main() {
     let cell_object = Cell::new(String::from("object"));
-    
+
     // 假设 Cell<T> 在 T 上是协变的（实际不是）
     // 如果 Cell<String> <: Cell<Object> 成立
     // requires_cell_object(&cell_string); // 这会导致类型安全问题

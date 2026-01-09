@@ -94,7 +94,7 @@ std::thread::spawn(move || {
         // 创建一个 Waker 并 poll 任务
         let waker = unimplemented!(); // 需要一个能唤醒这个循环的 Waker
         let mut context = Context::from_waker(&waker);
-        
+
         if task.as_mut().poll(&mut context) == Poll::Pending {
             // 如果任务未完成，它已经被 Waker 负责，此处无需操作
         }

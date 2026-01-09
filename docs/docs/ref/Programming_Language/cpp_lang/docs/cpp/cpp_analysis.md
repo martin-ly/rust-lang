@@ -141,12 +141,12 @@ int main() {
 // C++特有的控制结构
 void example() {
     std::vector<int> nums = {1, 2, 3, 4, 5};
-    
+
     // 基于范围的for循环
     for (const auto& n : nums) {
         std::cout << n << " ";
     }
-    
+
     // 异常处理
     try {
         throw std::runtime_error("发生错误");
@@ -230,7 +230,7 @@ void use_array() {
 void modern_use_array() {
     // 使用智能指针自动管理内存
     std::unique_ptr<int[]> data = std::make_unique<int[]>(10);
-    
+
     // 作用域结束时自动释放内存
 }
 
@@ -266,7 +266,7 @@ namespace Math {
     class Vector {
         // ...
     };
-    
+
     double calculate(double x, double y);
 }
 
@@ -344,7 +344,7 @@ public:
     Optional() : has_value(false) {}
     Optional(const T& v) : has_value(true), value(v) {}
     ~Optional() { if(has_value) value.~T(); }
-    
+
     // 函子映射
     template<typename F>
     auto map(F&& f) -> Optional<decltype(f(std::declval<T>()))> {
@@ -371,7 +371,7 @@ class TrafficLight {
 
 public:
     TrafficLight() : current_state(Red) {}
-    
+
     void change() {
         switch(current_state) {
             case Red: current_state = Green; break;
@@ -403,7 +403,7 @@ struct Person {
 
 // 和类型
 class Shape {
-public: 
+public:
     virtual ~Shape() = default;
 };
 
@@ -453,15 +453,15 @@ class BankAccount {
 private:
     double balance;
     std::string owner;
-    
+
 public:
-    BankAccount(const std::string& name, double initial) 
+    BankAccount(const std::string& name, double initial)
         : owner(name), balance(initial) {}
-        
+
     void deposit(double amount) {
         if (amount > 0) balance += amount;
     }
-    
+
     bool withdraw(double amount) {
         if (amount > 0 && balance >= amount) {
             balance -= amount;
@@ -478,7 +478,7 @@ public:
 class Animal {
 protected:
     std::string name;
-    
+
 public:
     Animal(const std::string& n) : name(n) {}
     virtual void makeSound() = 0;
@@ -533,7 +533,7 @@ public:
     T& operator[](size_t index) {
         return data[index];
     }
-    
+
     size_t size() const {
         return Size;
     }
@@ -609,7 +609,7 @@ std::vector<int> numbers = {1, 2, 3, 4, 5};
 
 // map
 std::vector<int> doubled;
-std::transform(numbers.begin(), numbers.end(), 
+std::transform(numbers.begin(), numbers.end(),
                std::back_inserter(doubled),
                [](int x) { return x * 2; });
 
@@ -638,7 +638,7 @@ public:
         data = new char[size];
         std::memcpy(data, other.data, size);
     }
-    
+
     // 移动构造
     String(String&& other) noexcept {
         data = other.data;
@@ -706,10 +706,10 @@ struct Generator {
 
     using handle_type = std::coroutine_handle<promise_type>;
     handle_type coro;
-    
+
     Generator(handle_type h) : coro(h) {}
     ~Generator() { if(coro) coro.destroy(); }
-    
+
     int next() {
         if (!coro.done()) {
             coro.resume();
@@ -737,7 +737,7 @@ class Singleton {
 private:
     Singleton() = default;
     static Singleton* instance;
-    
+
 public:
     static Singleton& getInstance() {
         if (!instance) {
@@ -745,7 +745,7 @@ public:
         }
         return *instance;
     }
-    
+
     // 线程安全版本
     static Singleton& getInstanceThreadSafe() {
         static Singleton instance;
@@ -818,12 +818,12 @@ public:
     void attach(Observer* observer) {
         observers.push_back(observer);
     }
-    
+
     void detach(Observer* observer) {
         observers.erase(std::remove(observers.begin(), observers.end(), observer),
                         observers.end());
     }
-    
+
     void notify(const std::string& message) {
         for (auto observer : observers) {
             observer->update(message);
@@ -883,19 +883,19 @@ class LinkedList {
     struct Node {
         T data;
         std::unique_ptr<Node> next;
-        
+
         Node(const T& value) : data(value), next(nullptr) {}
     };
-    
+
     std::unique_ptr<Node> head;
-    
+
 public:
     void push_front(const T& value) {
         auto new_node = std::make_unique<Node>(value);
         new_node->next = std::move(head);
         head = std::move(new_node);
     }
-    
+
     void print() const {
         Node* current = head.get();
         while (current) {

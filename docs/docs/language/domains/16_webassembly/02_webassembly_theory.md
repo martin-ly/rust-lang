@@ -103,7 +103,7 @@ impl Into<Point> for PixelCoord {
 fn main() {
     let p1 = PixelCoord(10, 20);
     let p2 = PixelCoord(30, 40);
-    
+
     // 编译后没有动态分发，直接调用优化后的具体实现
     let dist = distance(p1, p2);
     println!("Distance: {}", dist);
@@ -143,16 +143,16 @@ fn calculate_fibonacci(n: u32) -> u32 {
     if n <= 1 {
         return n;
     }
-    
+
     let mut a = 0;
     let mut b = 1;
-    
+
     for _ in 2..=n {
         let temp = a + b;
         a = b;
         b = temp;
     }
-    
+
     b
 }
 ```
@@ -166,19 +166,19 @@ fn calculate_fibonacci(n: u32) -> u32 {
     (local $b i32)
     (local $temp i32)
     (local $i i32)
-    
+
     ;; if n <= 1 return n
     (if (i32.le_u (local.get $n) (i32.const 1))
       (then
         (return (local.get $n))
       )
     )
-    
+
     ;; a = 0, b = 1
     (local.set $a (i32.const 0))
     (local.set $b (i32.const 1))
     (local.set $i (i32.const 2))
-    
+
     ;; for loop
     (block $break
       (loop $continue
@@ -188,17 +188,17 @@ fn calculate_fibonacci(n: u32) -> u32 {
         (local.set $a (local.get $b))
         ;; b = temp
         (local.set $b (local.get $temp))
-        
+
         ;; i++
         (local.set $i (i32.add (local.get $i) (i32.const 1)))
-        
+
         ;; if i <= n continue
         (br_if $continue
           (i32.le_u (local.get $i) (local.get $n))
         )
       )
     )
-    
+
     ;; return b
     (local.get $b)
   )
@@ -334,11 +334,11 @@ use wasm_bindgen::prelude::*;
 extern "C" {
     // 导入浏览器的alert函数
     fn alert(s: &str);
-    
+
     // 导入带命名空间的函数
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
-    
+
     // 带格式化的导入
     #[wasm_bindgen(js_namespace = console)]
     fn log_many(a: &str, b: &str);
@@ -358,23 +358,23 @@ impl Point {
     pub fn new(x: f64, y: f64) -> Point {
         Point { x, y }
     }
-    
+
     // 实例方法
     pub fn distance_from(&self, other: &Point) -> f64 {
         let dx = self.x - other.x;
         let dy = self.y - other.y;
         (dx * dx + dy * dy).sqrt()
     }
-    
+
     // Getter方法
     pub fn x(&self) -> f64 {
         self.x
     }
-    
+
     pub fn y(&self) -> f64 {
         self.y
     }
-    
+
     // 可以修改自身的方法
     pub fn set_x(&mut self, x: f64) {
         self.x = x;
@@ -461,31 +461,31 @@ rust-image-effects/
 ```html
 <script type="module">
   import init, { apply_grayscale } from './pkg/rust_image_effects.js';
-  
+
   async function run() {
     // 初始化WebAssembly模块
     await init();
-    
+
     // 获取图像数据
     const img = document.getElementById('source-image');
     const canvas = document.getElementById('output-canvas');
     const ctx = canvas.getContext('2d');
-    
+
     // 绘制原始图像到Canvas
     canvas.width = img.width;
     canvas.height = img.height;
     ctx.drawImage(img, 0, 0);
-    
+
     // 获取像素数据
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    
+
     // 调用Rust函数处理图像
     apply_grayscale(imageData.data);
-    
+
     // 更新Canvas显示处理后的图像
     ctx.putImageData(imageData, 0, 0);
   }
-  
+
   run();
 </script>
 ```
@@ -528,14 +528,14 @@ interface processor {
         invalid-dimensions,
         processing-failed,
     }
-    
+
     // 图像数据结构
     record image {
         width: u32,
         height: u32,
         data: list<u8>,
     }
-    
+
     // 接口函数
     grayscale: func(img: image) -> result<image, error>;
     blur: func(img: image, radius: u32) -> result<image, error>;
@@ -566,41 +566,41 @@ impl exports::example::image_processor::processor::Guest for Component {
         if img.width == 0 || img.height == 0 || img.data.len() != (img.width * img.height * 4) as usize {
             return Err(Error::InvalidDimensions);
         }
-        
+
         // 创建输出图像
         let mut output_data = img.data.clone();
-        
+
         // 应用灰度算法
         for pixel in output_data.chunks_exact_mut(4) {
             let r = pixel[0] as f32;
             let g = pixel[1] as f32;
             let b = pixel[2] as f32;
-            
+
             // 计算灰度值: 0.299*R + 0.587*G + 0.114*B
             let gray = (0.299 * r + 0.587 * g + 0.114 * b) as u8;
-            
+
             // 设置RGB通道为灰度值(保留Alpha)
             pixel[0] = gray;
             pixel[1] = gray;
             pixel[2] = gray;
             // pixel[3] 是alpha通道保持不变
         }
-        
+
         Ok(Image {
             width: img.width,
             height: img.height,
             data: output_data,
         })
     }
-    
+
     fn blur(img: Image, radius: u32) -> Result<Image, Error> {
         // 实现模糊算法...
         // ...
-        
+
         if radius > 10 {
             return Err(Error::ProcessingFailed);
         }
-        
+
         // 简化示例：返回原图
         Ok(img)
     }
@@ -650,7 +650,7 @@ impl Drop for Buffer {
 fn process() {
     // buffer拥有数据
     let buffer = Buffer::new(1024);
-    
+
     // buffer在此处超出作用域，自动调用drop
 }
 ```
@@ -662,13 +662,13 @@ fn process() {
   ;; 分配Buffer结构体
   (local $buffer i32)
   (local.set $buffer (call $allocate (i32.const 16))) ;; ptr + len + capacity
-  
+
   ;; 调用Buffer::new
   (call $Buffer_new (local.get $buffer) (i32.const 1024))
-  
+
   ;; Buffer超出作用域，显式调用drop
   (call $Buffer_drop (local.get $buffer))
-  
+
   ;; 释放Buffer结构体内存
   (call $deallocate (local.get $buffer) (i32.const 16))
 )
@@ -710,11 +710,11 @@ fn modify_array(values: &mut [i32]) {
 (func $sum_array (param $values_ptr i32) (param $values_len i32) (result i32)
   (local $total i32)
   (local $i i32)
-  
+
   ;; 初始化累加器
   (local.set $total (i32.const 0))
   (local.set $i (i32.const 0))
-  
+
   ;; 循环数组元素
   (block $break
     (loop $continue
@@ -722,7 +722,7 @@ fn modify_array(values: &mut [i32]) {
       (br_if $break
         (i32.eq (local.get $i) (local.get $values_len))
       )
-      
+
       ;; 读取当前值并累加
       (local
 ### 3.2 引用与借用在Wasm中的表示（续）
@@ -732,11 +732,11 @@ fn modify_array(values: &mut [i32]) {
 (func $sum_array (param $values_ptr i32) (param $values_len i32) (result i32)
   (local $total i32)
   (local $i i32)
-  
+
   ;; 初始化累加器
   (local.set $total (i32.const 0))
   (local.set $i (i32.const 0))
-  
+
   ;; 循环数组元素
   (block $break
     (loop $continue
@@ -744,7 +744,7 @@ fn modify_array(values: &mut [i32]) {
       (br_if $break
         (i32.eq (local.get $i) (local.get $values_len))
       )
-      
+
       ;; 读取当前值并累加
       (local.set $total
         (i32.add
@@ -757,23 +757,23 @@ fn modify_array(values: &mut [i32]) {
           )
         )
       )
-      
+
       ;; 递增索引
       (local.set $i (i32.add (local.get $i) (i32.const 1)))
       (br $continue)
     )
   )
-  
+
   ;; 返回总和
   (local.get $total)
 )
 
 (func $modify_array (param $values_ptr i32) (param $values_len i32)
   (local $i i32)
-  
+
   ;; 初始化索引
   (local.set $i (i32.const 0))
-  
+
   ;; 循环数组元素
   (block $break
     (loop $continue
@@ -781,7 +781,7 @@ fn modify_array(values: &mut [i32]) {
       (br_if $break
         (i32.eq (local.get $i) (local.get $values_len))
       )
-      
+
       ;; 计算当前元素的地址
       (local $addr i32)
       (local.set $addr
@@ -790,19 +790,19 @@ fn modify_array(values: &mut [i32]) {
           (i32.mul (local.get $i) (i32.const 4))
         )
       )
-      
+
       ;; 读取当前值
       (local $value i32)
       (local.set $value
         (i32.load offset=0 align=4 (local.get $addr))
       )
-      
+
       ;; 将值乘以2并写回内存
       (i32.store offset=0 align=4
         (local.get $addr)
         (i32.mul (local.get $value) (i32.const 2))
       )
-      
+
       ;; 递增索引
       (local.set $i (i32.add (local.get $i) (i32.const 1)))
       (br $continue)
@@ -837,13 +837,13 @@ fn use_borrower<'a>(borrower: &Borrower<'a>) -> i32 {
   ;; 分配Borrower结构体，它只包含一个指针字段
   (local $borrower_ptr i32)
   (local.set $borrower_ptr (call $allocate (i32.const 4)))
-  
+
   ;; 存储引用
   (i32.store offset=0 align=4
     (local.get $borrower_ptr)
     (local.get $value_ptr)  ;; 只是复制指针值
   )
-  
+
   ;; 返回结构体指针
   (local.get $borrower_ptr)
 )
@@ -854,7 +854,7 @@ fn use_borrower<'a>(borrower: &Borrower<'a>) -> i32 {
   (local.set $value_ptr
     (i32.load offset=0 align=4 (local.get $borrower_ptr))
   )
-  
+
   ;; 从指针加载值
   (i32.load offset=0 align=4 (local.get $value_ptr))
 )
@@ -894,19 +894,19 @@ impl AtomicCounter {
             value: Arc::new(AtomicI32::new(initial)),
         }
     }
-    
+
     pub fn increment(&self) -> i32 {
         self.value.fetch_add(1, Ordering::SeqCst) + 1
     }
-    
+
     pub fn decrement(&self) -> i32 {
         self.value.fetch_sub(1, Ordering::SeqCst) - 1
     }
-    
+
     pub fn get(&self) -> i32 {
         self.value.load(Ordering::SeqCst)
     }
-    
+
     pub fn set(&self, new_value: i32) {
         self.value.store(new_value, Ordering::SeqCst);
     }
@@ -923,7 +923,7 @@ impl AtomicCounter {
   (local.set $value_ptr
     (i32.load offset=0 align=4 (local.get $counter_ptr))
   )
-  
+
   ;; 原子fetch_add
   (local $old_value i32)
   (local.set $old_value
@@ -932,7 +932,7 @@ impl AtomicCounter {
       (i32.const 1)
     )
   )
-  
+
   ;; 返回新值
   (i32.add (local.get $old_value) (i32.const 1))
 )
@@ -943,7 +943,7 @@ impl AtomicCounter {
   (local.set $value_ptr
     (i32.load offset=0 align=4 (local.get $counter_ptr))
   )
-  
+
   ;; 原子fetch_sub
   (local $old_value i32)
   (local.set $old_value
@@ -952,7 +952,7 @@ impl AtomicCounter {
       (i32.const 1)
     )
   )
-  
+
   ;; 返回新值
   (i32.sub (local.get $old_value) (i32.const 1))
 )
@@ -1025,23 +1025,23 @@ Result<i32, String> 内存布局:
       ;; 创建错误字符串
       (local $error_str i32)
       (local.set $error_str (call $create_string (i32.const 0x100) (i32.const 15))) ;; "Division by zero"的指针和长度
-      
+
       ;; 分配Err变体内存
       (local $result_ptr i32)
       (local.set $result_ptr (call $allocate (i32.const 16))) ;; 变体+字符串元数据
-      
+
       ;; 设置标记为Err(1)
       (i32.store offset=0 align=4
         (local.get $result_ptr)
         (i32.const 1)
       )
-      
+
       ;; 存储字符串数据
       (i32.store offset=4 align=4
         (local.get $result_ptr)
         (local.get $error_str)
       )
-      
+
       ;; 返回结果指针
       (local.get $result_ptr)
     )
@@ -1051,23 +1051,23 @@ Result<i32, String> 内存布局:
       (local.set $quotient
         (i32.div_s (local.get $a) (local.get $b))
       )
-      
+
       ;; 分配Ok变体内存
       (local $result_ptr i32)
       (local.set $result_ptr (call $allocate (i32.const 8))) ;; 变体+i32
-      
+
       ;; 设置标记为Ok(0)
       (i32.store offset=0 align=4
         (local.get $result_ptr)
         (i32.const 0)
       )
-      
+
       ;; 存储计算结果
       (i32.store offset=4 align=4
         (local.get $result_ptr)
         (local.get $quotient)
       )
-      
+
       ;; 返回结果指针
       (local.get $result_ptr)
     )
@@ -1277,7 +1277,7 @@ struct FetchDataFuture {
 
 impl Future for FetchDataFuture {
     type Output = Result<String, Error>;
-    
+
     fn poll(&mut self) -> Poll<Self::Output> {
         match &mut self.state {
             FetchDataState::Start => {
@@ -1333,7 +1333,7 @@ impl Future for FetchDataFuture {
   ;; 加载当前状态
   (local $state i32)
   (local.set $state (i32.load offset=0 align=4 (local.get $future_ptr)))
-  
+
   ;; 根据状态分支
   (if (i32.eq (local.get $state) (global.get $STATE_START))
     (then
@@ -1343,12 +1343,12 @@ impl Future for FetchDataFuture {
         (local.get $future_ptr)
         (global.get $STATE_WAITING_FOR_FETCH)
       )
-      
+
       ;; 返回Poll::Pending
       (return (i32.const 0))
     )
   )
-  
+
   ;; 其他状态处理...
   ;; ...
 )
@@ -1386,27 +1386,27 @@ pub async fn fetch_data(url: String) -> Result<Uint8Array, JsValue> {
     // 创建fetch请求
     let mut opts = RequestInit::new();
     opts.method("GET");
-    
+
     let request = Request::new_with_str_and_init(&url, &opts)?;
-    
+
     // 调用JavaScript的fetch API
     let promise = web_sys::window()
         .unwrap()
         .fetch_with_request(&request);
-    
+
     // 等待Promise完成并转换为Rust Future
     let resp_value = JsFuture::from(promise).await?;
     let response: Response = resp_value.dyn_into()?;
-    
+
     // 检查响应状态
     if !response.ok() {
         return Err(JsValue::from_str("Failed to fetch"));
     }
-    
+
     // 获取响应的二进制数据
     let array_buffer = JsFuture::from(response.array_buffer()?).await?;
     let data = Uint8Array::new(&array_buffer);
-    
+
     Ok(data)
 }
 
@@ -1457,14 +1457,14 @@ pub fn run_tasks() {
         async_sleep(100).await;
         console::log_1(&"Task 1 completed".into());
     });
-    
+
     spawn_local(async {
         console::log_1(&"Task 2 started".into());
         // 模拟异步工作
         async_sleep(50).await;
         console::log_1(&"Task 2 completed".into());
     });
-    
+
     console::log_1(&"All tasks spawned".into());
 }
 
@@ -1477,7 +1477,7 @@ async fn async_sleep(ms: i32) {
             ms,
         ).unwrap();
     });
-    
+
     wasm_bindgen_futures::JsFuture::from(promise).await.unwrap();
 }
 ```
@@ -1492,7 +1492,7 @@ use tokio::runtime::Runtime;
 pub extern "C" fn run_tasks() {
     // 创建单线程tokio运行时
     let rt = Runtime::new().unwrap();
-    
+
     // 在运行时中执行多个异步任务
     rt.block_on(async {
         let task1 = tokio::spawn(async {
@@ -1500,13 +1500,13 @@ pub extern "C" fn run_tasks() {
             tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
             println!("Task 1 completed");
         });
-        
+
         let task2 = tokio::spawn(async {
             // 模拟异步工作
             tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
             println!("Task 2 completed");
         });
-        
+
         // 等待两个任务完成
         let _ = tokio::join!(task1, task2);
         println!("All tasks completed");
@@ -1522,18 +1522,18 @@ pub extern "C" fn run_tasks() {
 pub fn parallel_process(data: &[u8], thread_count: u32) -> Vec<u8> {
     // 创建共享内存
     let shared_buffer = SharedBuffer::new(data.len());
-    
+
     // 克隆数据到共享内存
     shared_buffer.copy_from(data);
-    
+
     // 创建计数信号量
     let semaphore = Arc::new(AtomicI32::new(thread_count as i32));
-    
+
     // 启动多个WebAssembly线程
     for i in 0..thread_count {
         let buffer_clone = shared_buffer.clone();
         let sem_clone = semaphore.clone();
-        
+
         wasm_threads::spawn(move || {
             // 计算此线程处理的数据范围
             let chunk_size = data.len() / thread_count as usize;
@@ -1543,20 +1543,20 @@ pub fn parallel_process(data: &[u8], thread_count: u32) -> Vec<u8> {
             } else {
                 (i as usize + 1) * chunk_size
             };
-            
+
             // 处理数据范围
             process_chunk(buffer_clone, start, end);
-            
+
             // 减少信号量计数
             sem_clone.fetch_sub(1, Ordering::SeqCst);
         });
     }
-    
+
     // 等待所有线程完成
     while semaphore.load(Ordering::SeqCst) > 0 {
         wasm_threads::yield_now();
     }
-    
+
     // 返回处理后的数据
     shared_buffer.to_vec()
 }
@@ -1599,14 +1599,14 @@ use web_sys::{HtmlElement, Event};
 extern "C" {
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
-    
+
     // 导入带有可变参数的日志函数
     #[wasm_bindgen(js_namespace = console, js_name = log)]
     fn log_many(a: &str, b: &str);
-    
+
     // 导入alert函数
     fn alert(s: &str);
-    
+
     // 导入自定义JavaScript函数
     #[wasm_bindgen(js_namespace = window)]
     fn customJsFunction(data: JsValue) -> JsValue;
@@ -1645,22 +1645,22 @@ impl UserManager {
             users_count: 0,
         }
     }
-    
+
     // 接受JavaScript对象并转换为Rust结构体
     pub fn login(&mut self, user_data: JsValue) -> Result<bool, JsValue> {
         // 将JavaScript对象转换为Rust结构体
         let user: UserProfile = serde_wasm_bindgen::from_value(user_data)
             .map_err(|e| JsValue::from_str(&format!("无法解析用户数据: {}", e)))?;
-        
+
         log(&format!("用户登录: {}", user.username));
-        
+
         // 更新当前用户
         self.current_user = Some(user);
         self.users_count += 1;
-        
+
         Ok(true)
     }
-    
+
     // 返回当前用户，转换为JavaScript对象
     pub fn get_current_user(&self) -> Result<JsValue, JsValue> {
         match &self.current_user {
@@ -1672,7 +1672,7 @@ impl UserManager {
             None => Ok(JsValue::NULL),
         }
     }
-    
+
     // 直接操作DOM元素示例
     pub fn update_profile_display(&self, element_id: &str) -> Result<(), JsValue> {
         // 获取DOM元素
@@ -1680,20 +1680,20 @@ impl UserManager {
             .ok_or_else(|| JsValue::from_str("窗口不可用"))?
             .document()
             .ok_or_else(|| JsValue::from_str("文档不可用"))?;
-        
+
         let element = document
             .get_element_by_id(element_id)
             .ok_or_else(|| JsValue::from_str(&format!("元素不存在: {}", element_id)))?;
-        
+
         // 将元素转换为HTML元素
         let html_element: HtmlElement = element.dyn_into::<HtmlElement>()?;
-        
+
         // 根据当前用户更新内容
         if let Some(user) = &self.current_user {
             let display_name = user.preferences.display_name
                 .as_deref()
                 .unwrap_or(&user.username);
-            
+
             html_element.set_inner_html(&format!(
                 "<div class='user-profile'>
                     <h2>{}</h2>
@@ -1705,46 +1705,46 @@ impl UserManager {
         } else {
             html_element.set_inner_html("未登录");
         }
-        
+
         Ok(())
     }
-    
+
     // 处理JavaScript回调示例
     pub fn process_with_callback(&self, input: &str, callback: &js_sys::Function) -> Result<(), JsValue> {
         log(&format!("处理输入: {}", input));
-        
+
         // 处理数据
         let processed = format!("已处理: {}", input.to_uppercase());
-        
+
         // 调用JavaScript回调函数
         let result = callback.call1(&JsValue::NULL, &JsValue::from_str(&processed))?;
-        
+
         log(&format!("回调结果: {:?}", result));
-        
+
         Ok(())
     }
-    
+
     // 暴露事件监听器
     pub fn setup_event_listener(&self, element_id: &str) -> Result<(), JsValue> {
         // 获取DOM元素
         let document = web_sys::window().unwrap().document().unwrap();
         let element = document.get_element_by_id(element_id).unwrap();
-        
+
         // 创建Rust闭包作为事件回调
         let closure = Closure::wrap(Box::new(move |event: web_sys::MouseEvent| {
             log(&format!("点击坐标: ({}, {})", event.client_x(), event.client_y()));
         }) as Box<dyn FnMut(_)>);
-        
+
         // 添加事件监听器
         element.add_event_listener_with_callback(
             "click",
             closure.as_ref().unchecked_ref(),
         )?;
-        
+
         // 泄漏闭包，使其在JavaScript端保持有效
         // 注意：这会造成内存泄漏，生产代码中应使用更复杂的生命周期管理
         closure.forget();
-        
+
         Ok(())
     }
 }
@@ -1771,7 +1771,7 @@ const loginUser = () => {
             display_name: "Ferris the Crab"
         }
     };
-    
+
     // 调用Rust方法并处理结果
     try {
         const success = userManager.login(userData);
@@ -1787,7 +1787,7 @@ const loginUser = () => {
 // 使用回调函数
 const processData = () => {
     const input = document.getElementById("input-field").value;
-    
+
     userManager.process_with_callback(input, (processed) => {
         document.getElementById("result").textContent = processed;
         return "回调成功执行";
@@ -1823,75 +1823,75 @@ impl DomManager {
         // 获取window和document
         let window = web_sys::window().ok_or_else(|| JsValue::from_str("无法获取window"))?;
         let document = window.document().ok_or_else(|| JsValue::from_str("无法获取document"))?;
-        
+
         Ok(DomManager { window, document })
     }
-    
+
     // 创建新元素
     pub fn create_element(&self, tag: &str, text: &str, parent_id: &str) -> Result<String, JsValue> {
         // 创建新元素
         let element = self.document.create_element(tag)?;
         element.set_text_content(Some(text));
-        
+
         // 生成唯一ID
         let id = format!("{}-{}", tag, js_sys::Math::random().to_string().replace(".", ""));
         element.set_id(&id);
-        
+
         // 查找父元素并添加新元素
         if let Some(parent) = self.document.get_element_by_id(parent_id) {
             parent.append_child(&element)?;
         } else {
             return Err(JsValue::from_str(&format!("父元素不存在: {}", parent_id)));
         }
-        
+
         Ok(id)
     }
-    
+
     // 更新元素样式
     pub fn update_style(&self, element_id: &str, style_property: &str, style_value: &str) -> Result<(), JsValue> {
         if let Some(element) = self.document.get_element_by_id(element_id) {
             // 转换为HtmlElement以访问style属性
             let html_element = element.dyn_into::<HtmlElement>()?;
-            
+
             // 设置样式
             let style = html_element.style();
             style.set_property(style_property, style_value)?;
-            
+
             Ok(())
         } else {
             Err(JsValue::from_str(&format!("元素不存在: {}", element_id)))
         }
     }
-    
+
     // 执行DOM动画
     pub fn animate_element(&self, element_id: &str, duration_ms: u32) -> Result<(), JsValue> {
         let element = self.document.get_element_by_id(element_id)
             .ok_or_else(|| JsValue::from_str(&format!("元素不存在: {}", element_id)))?
             .dyn_into::<HtmlElement>()?;
-        
+
         // 保存原始透明度
         let original_opacity = element.style().get_property_value("opacity")
             .unwrap_or_else(|_| "1".to_string());
-        
+
         // 创建动画循环
         let f = Rc::new(RefCell::new(None));
         let g = f.clone();
-        
+
         // 动画开始时间
         let start_time = js_sys::Date::now();
-        
+
         // 动画帧函数
         *g.borrow_mut() = Some(Closure::wrap(Box::new(move || {
             let current_time = js_sys::Date::now();
             let elapsed = current_time - start_time;
-            
+
             if elapsed < duration_ms as f64 {
                 // 计算当前透明度
                 let progress = elapsed / duration_ms as f64;
                 let opacity = (Math::sin(progress * std::f64::consts::PI) as f64).to_string();
-                
+
                 element.style().set_property("opacity", &opacity).unwrap();
-                
+
                 // 请求下一帧
                 let window = web_sys::window().unwrap();
                 let _ = window.request_animation_frame(f.borrow().as_ref().unwrap().as_ref().unchecked_ref());
@@ -1900,38 +1900,38 @@ impl DomManager {
                 element.style().set_property("opacity", &original_opacity).unwrap();
             }
         }) as Box<dyn FnMut()>));
-        
+
         // 开始动画
         self.window.request_animation_frame(g.borrow().as_ref().unwrap().as_ref().unchecked_ref())?;
-        
+
         Ok(())
     }
-    
+
     // 创建自定义组件
     pub fn create_card_component(&self, title: &str, content: &str, parent_id: &str) -> Result<String, JsValue> {
         // 创建容器
         let card = self.document.create_element("div")?;
         let card_id = format!("card-{}", js_sys::Math::random().to_string().replace(".", ""));
         card.set_id(&card_id);
-        
+
         // 设置卡片样式
         card.set_class_name("card");
-        
+
         // 创建标题
         let title_element = self.document.create_element("h3")?;
         title_element.set_text_content(Some(title));
         card.append_child(&title_element)?;
-        
+
         // 创建内容
         let content_element = self.document.create_element("p")?;
         content_element.set_text_content(Some(content));
         card.append_child(&content_element)?;
-        
+
         // 添加到父元素
         let parent = self.document.get_element_by_id(parent_id)
             .ok_or_else(|| JsValue::from_str(&format!("父元素不存在: {}", parent_id)))?;
         parent.append_child(&card)?;
-        
+
         Ok(card_id)
     }
 }
@@ -1963,17 +1963,17 @@ impl VNode {
             text: None,
         }
     }
-    
+
     fn with_attr(mut self, key: &str, value: &str) -> Self {
         self.attrs.insert(key.to_string(), value.to_string());
         self
     }
-    
+
     fn with_text(mut self, text: &str) -> Self {
         self.text = Some(text.to_string());
         self
     }
-    
+
     fn with_child(mut self, child: VNode) -> Self {
         self.children.push(child);
         self
@@ -1995,22 +1995,22 @@ impl VirtualDom {
             .ok_or_else(|| JsValue::from_str("无法获取window"))?
             .document()
             .ok_or_else(|| JsValue::from_str("无法获取document"))?;
-        
+
         let root = VNode::new(root_tag);
-        
+
         Ok(VirtualDom {
             document,
             root,
             current_dom: None,
         })
     }
-    
+
     // 通过JSON字符串更新虚拟DOM树
     pub fn update_tree(&mut self, json_tree: &str) -> Result<(), JsValue> {
         // 解析JSON到VNode结构
         // 在实际实现中，这里会使用serde解析JSON
         // 简化示例，直接创建一个示例树
-        
+
         self.root = VNode::new("div")
             .with_attr("class", "container")
             .with_child(
@@ -2027,54 +2027,54 @@ impl VirtualDom {
                     .with_child(VNode::new("li").with_text("Item 2"))
                     .with_child(VNode::new("li").with_text("Item 3"))
             );
-        
+
         Ok(())
     }
-    
+
     // 将虚拟DOM渲染到真实DOM
     pub fn render(&mut self, container_id: &str) -> Result<(), JsValue> {
         // 获取容器元素
         let container = self.document.get_element_by_id(container_id)
             .ok_or_else(|| JsValue::from_str(&format!("容器不存在: {}", container_id)))?;
-        
+
         // 创建真实DOM树
         let new_dom = self.create_dom_node(&self.root)?;
-        
+
         // 清空容器
         while let Some(child) = container.first_child() {
             container.remove_child(&child)?;
         }
-        
+
         // 添加新DOM树
         container.append_child(&new_dom)?;
-        
+
         // 保存当前DOM
         self.current_dom = Some(new_dom);
-        
+
         Ok(())
     }
-    
+
     // 创建DOM节点的辅助函数
     fn create_dom_node(&self, vnode: &VNode) -> Result<Element, JsValue> {
         // 创建元素
         let element = self.document.create_element(&vnode.tag)?;
-        
+
         // 设置属性
         for (key, value) in &vnode.attrs {
             element.set_attribute(key, value)?;
         }
-        
+
         // 设置文本内容
         if let Some(text) = &vnode.text {
             element.set_text_content(Some(text));
         }
-        
+
         // 递归创建子节点
         for child in &vnode.children {
             let child_element = self.create_dom_node(child)?;
             element.append_child(&child_element)?;
         }
-        
+
         Ok(element)
     }
 }
@@ -2103,7 +2103,7 @@ pub extern "C" fn process_file(input_path_ptr: *const u8, input_path_len: usize,
             Err(_) => return -1, // 错误：无效UTF-8
         }
     };
-    
+
     let output_path = unsafe {
         let slice = std::slice::from_raw_parts(output_path_ptr, output_path_len);
         match std::str::from_utf8(slice) {
@@ -2111,7 +2111,7 @@ pub extern "C" fn process_file(input_path_ptr: *const u8, input_path_len: usize,
             Err(_) => return -2, // 错误：无效UTF-8
         }
     };
-    
+
     // 读取输入文件
     let mut content = String::new();
     match File::open(input_path) {
@@ -2122,10 +2122,10 @@ pub extern "C" fn process_file(input_path_ptr: *const u8, input_path_len: usize,
         },
         Err(_) => return -4, // 错误：打开文件失败
     }
-    
+
     // 处理内容
     let processed = content.to_uppercase();
-    
+
     // 写入输出文件
     match File::create(output_path) {
         Ok(mut file) => {
@@ -2135,7 +2135,7 @@ pub extern "C" fn process_file(input_path_ptr: *const u8, input_path_len: usize,
         },
         Err(_) => return -6, // 错误：创建文件失败
     }
-    
+
     0 // 成功
 }
 
@@ -2151,13 +2151,13 @@ pub extern "C" fn list_directory(dir_path_ptr: *const u8, dir_path_len: usize,
             Err(_) => return -1, // 错误：无效UTF-8
         }
     };
-    
+
     // 读取目录内容
     let entries = match fs::read_dir(dir_path) {
         Ok(entries) => entries,
         Err(_) => return -2, // 错误：读取目录失败
     };
-    
+
     // 收集文件名
     let mut result = String::new();
     for entry in entries {
@@ -2168,18 +2168,18 @@ pub extern "C" fn list_directory(dir_path_ptr: *const u8, dir_path_len: usize,
             }
         }
     }
-    
+
     // 检查缓冲区大小
     if result.len() > buffer_len {
         return -3; // 错误：缓冲区太小
     }
-    
+
     // 写入结果到输出缓冲区
     unsafe {
         let result_bytes = result.as_bytes();
         std::ptr::copy_nonoverlapping(result_bytes.as_ptr(), buffer_ptr, result_bytes.len());
     }
-    
+
     result.len() as i32 // 返回写入的字节数
 }
 ```
@@ -2197,13 +2197,13 @@ pub extern "C" fn get_environment_info() -> i32 {
     for (i, arg) in env::args().enumerate() {
         println!("  [{}]: {}", i, arg);
     }
-    
+
     // 打印环境变量
     println!("\n环境变量:");
     for (key, value) in env::vars() {
         println!("  {}: {}", key, value);
     }
-    
+
     // 检查特定环境变量
     match env::var("RUST_WASI_MODULE_PATH") {
         Ok(value) => {
@@ -2234,9 +2234,9 @@ pub extern "C" fn run_http_server(port: u16) -> i32 {
         Ok(l) => l,
         Err(_) => return -1, // 错误：无法绑定端口
     };
-    
+
     println!("HTTP服务器运行在端口 {}", port);
-    
+
     // 接受连接
     for stream in listener.incoming() {
         match stream {
@@ -2248,22 +2248,22 @@ pub extern "C" fn run_http_server(port: u16) -> i32 {
             }
         }
     }
-    
+
     0
 }
 
 fn handle_connection(mut stream: TcpStream) {
     // 读取请求
     let mut buffer = [0; 1024];
-    
+
     if let Err(_) = stream.read(&mut buffer) {
         println!("读取请求失败");
         return;
     }
-    
+
     // 构造HTTP响应
     let response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body><h1>Hello from Rust+WASI!</h1></body></html>\r\n";
-    
+
     // 发送响应
     if let Err(e) = stream.write(response.as_bytes()) {
         println!("写入响应失败: {}", e);
@@ -2276,7 +2276,7 @@ pub extern "C" fn fetch_url(url_ptr: *const u8, url_len: usize,
                           buffer_ptr: *mut u8, buffer_len: usize) -> i32 {
     // 这是一个简化示例，实际情况需要处理DNS解析、HTTP解析等
     // 在许多WASI运行时中，这可能需要特殊权限
-    
+
     // 从内存中读取URL字符串
     let url = unsafe {
         let slice = std::slice::from_raw_parts(url_ptr, url_len);
@@ -2285,53 +2285,53 @@ pub extern "C" fn fetch_url(url_ptr: *const u8, url_len: usize,
             Err(_) => return -1, // 错误：无效UTF-8
         }
     };
-    
+
     // 解析URL（简化）
     let parts: Vec<&str> = url.split("/").collect();
     if parts.len() < 3 {
         return -2; // 错误：无效URL
     }
-    
+
     let host = parts[2];
     let path = if parts.len() > 3 {
         "/".to_string() + &parts[3..].join("/")
     } else {
         "/".to_string()
     };
-    
+
     // 连接服务器（简化为80端口）
     let mut stream = match TcpStream::connect(format!("{}:80", host)) {
         Ok(s) => s,
         Err(_) => return -3, // 错误：连接失败
     };
-    
+
     // 构造HTTP请求
     let request = format!(
         "GET {} HTTP/1.1\r\nHost: {}\r\nConnection: close\r\n\r\n",
         path, host
     );
-    
+
     // 发送请求
     if let Err(_) = stream.write(request.as_bytes()) {
         return -4; // 错误：写入失败
     }
-    
+
     // 读取响应
     let mut response = Vec::new();
     if let Err(_) = stream.read_to_end(&mut response) {
         return -5; // 错误：读取失败
     }
-    
+
     // 检查缓冲区大小
     if response.len() > buffer_len {
         return -6; // 错误：缓冲区太小
     }
-    
+
     // 写入响应到缓冲区
     unsafe {
         std::ptr::copy_nonoverlapping(response.as_ptr(), buffer_ptr, response.len());
     }
-    
+
     response.len() as i32 // 返回响应大小
 }
 ```
@@ -2378,17 +2378,17 @@ interface types {
         binary,
         custom,
     }
-    
+
     // 记录类型
     record data-chunk {
         format: data-format,
         content: list<u8>,
         timestamp: u64,
     }
-    
+
     // 结果类型
     type process-result = result<data-chunk, string>;
-    
+
     // 标志类型
     flags processing-options {
         validate,
@@ -2400,10 +2400,10 @@ interface types {
 
 interface processor {
     use types.{data-chunk, data-format, process-result, processing-options};
-    
+
     // 函数定义
     process-data: func(input: data-chunk, options: processing-options) -> process-result;
-    
+
     // 资源定义
     resource processor-state {
         constructor(format: data-format);
@@ -2455,10 +2455,10 @@ impl exports::example::data_processor::processor::Guest for Processor {
         if input.content.is_empty() {
             return Err("输入数据为空".to_string());
         }
-        
+
         // 处理数据
         let mut processed = input.content.clone();
-        
+
         // 应用选项
         if options.contains(ProcessingOptions::VALIDATE) {
             // 验证数据
@@ -2466,22 +2466,22 @@ impl exports::example::data_processor::processor::Guest for Processor {
                 return Err("数据验证失败".to_string());
             }
         }
-        
+
         if options.contains(ProcessingOptions::OPTIMIZE) {
             // 优化数据
             processed = optimize_data(processed, input.format);
         }
-        
+
         if options.contains(ProcessingOptions::COMPRESS) {
             // 压缩数据
             processed = compress_data(processed);
         }
-        
+
         if options.contains(ProcessingOptions::ENCRYPT) {
             // 加密数据
             processed = encrypt_data(processed);
         }
-        
+
         // 返回处理后的数据
         Ok(DataChunk {
             format: input.format,
@@ -2506,29 +2506,29 @@ impl exports::example::data_processor::processor::ProcessorState for ProcessorSt
             chunks: Vec::new(),
         }
     }
-    
+
     fn set_buffer_size(&mut self, size: u32) {
         self.buffer_size = size;
     }
-    
+
     fn add_chunk(&mut self, chunk: DataChunk) -> ProcessResult {
         // 验证格式匹配
         if chunk.format != self.format {
             return Err(format!("格式不匹配: 期望 {:?}, 得到 {:?}", self.format, chunk.format));
         }
-        
+
         // 验证大小
         if chunk.content.len() > self.buffer_size as usize {
             return Err(format!("块大小 ({}) 超过缓冲区大小 ({})", chunk.content.len(), self.buffer_size));
         }
-        
+
         // 处理并存储块
         let processed_chunk = self.process_chunk(chunk)?;
         self.chunks.push(processed_chunk.clone());
-        
+
         Ok(processed_chunk)
     }
-    
+
     fn finalize(&mut self) -> Vec<DataChunk> {
         let result = self.chunks.clone();
         self.chunks.clear();
@@ -2541,7 +2541,7 @@ impl ProcessorState {
     fn process_chunk(&self, chunk: DataChunk) -> ProcessResult {
         // 处理单个数据块的实现
         // ...
-        
+
         Ok(chunk)
     }
 }
@@ -2560,21 +2560,21 @@ fn validate_data(data: &[u8], format: DataFormat) -> bool {
 fn optimize_data(data: Vec<u8>, format: DataFormat) -> Vec<u8> {
     // 根据格式优化数据
     // ...
-    
+
     data
 }
 
 fn compress_data(data: Vec<u8>) -> Vec<u8> {
     // 压缩数据
     // ...
-    
+
     data
 }
 
 fn encrypt_data(data: Vec<u8>) -> Vec<u8> {
     // 加密数据
     // ...
-    
+
     data
 }
 
@@ -2597,14 +2597,14 @@ fn validate_json(data: &[u8]) -> bool {
 fn validate_xml(data: &[u8]) -> bool {
     // 验证XML格式
     // ...
-    
+
     true
 }
 
 fn validate_custom_format(data: &[u8]) -> bool {
     // 验证自定义格式
     // ...
-    
+
     true
 }
 ```
@@ -2634,7 +2634,7 @@ interface audio {
         ogg,
         flac,
     }
-    
+
     // 音频数据
     record audio-data {
         format: audio-format,
@@ -2642,7 +2642,7 @@ interface audio {
         sample-rate: u32,
         data: list<u8>,
     }
-    
+
     // 音频处理器资源
     resource audio-processor {
         constructor(channels: u8, sample-rate: u32);
@@ -2651,7 +2651,7 @@ interface audio {
         get-stats: func() -> string;
         drop: func();
     }
-    
+
     // 接口函数
     decode: func(data: list<u8>, format: audio-format) -> result<audio-data, string>;
     encode: func(data: audio-data, target-format: audio-format) -> result<list<u8>, string>;
@@ -2665,14 +2665,14 @@ interface video {
         webm,
         avi,
     }
-    
+
     // 帧数据
     record frame {
         width: u32,
         height: u32,
         data: list<u8>,
     }
-    
+
     // 视频数据
     record video-data {
         format: video-format,
@@ -2681,7 +2681,7 @@ interface video {
         fps: float32,
         frames: list<frame>,
     }
-    
+
     // 视频处理器资源
     resource video-processor {
         constructor(width: u32, height: u32);
@@ -2690,7 +2690,7 @@ interface video {
         set-filter: func(filter-name: string, params: list<float32>);
         drop: func();
     }
-    
+
     // 接口函数
     decode-video: func(data: list<u8>, format: video-format) -> result<video-data, string>;
     encode-video: func(data: video-data, target-format: video-format) -> result<list<u8>, string>;
@@ -2700,31 +2700,31 @@ interface video {
 interface media-processor {
     use audio.{audio-data, audio-format, audio-processor};
     use video.{video-data, video-format, video-processor};
-    
+
     // 混合媒体类型
     record media-file {
         path: string,
         has-audio: bool,
         has-video: bool,
     }
-    
+
     // 处理选项
     flags process-options {
         normalize-audio,
         enhance-video,
         compress,
     }
-    
+
     // 接口函数
     open-file: func(path: string) -> result<media-file, string>;
     extract-audio: func(file: media-file) -> result<audio-data, string>;
     extract-video: func(file: media-file) -> result<video-data, string>;
     process: func(file: media-file, options: process-options) -> result<string, string>;
-    
+
     // 通过传递资源实现组件合作
     process-with-processors: func(
-        file: media-file, 
-        audio-proc: borrow<audio-processor>, 
+        file: media-file,
+        audio-proc: borrow<audio-processor>,
         video-proc: borrow<video-processor>
     ) -> result<string, string>;
 }
@@ -2768,124 +2768,124 @@ impl exports::example::media_system::media_processor::Guest for MediaProcessor {
         if !std::path::Path::new(&path).exists() {
             return Err(format!("文件不存在: {}", path));
         }
-        
+
         // 分析文件以确定内容类型
         let file_info = analyze_file(&path)?;
-        
+
         Ok(MediaFile {
             path,
             has_audio: file_info.contains_audio,
             has_video: file_info.contains_video,
         })
     }
-    
+
     // 提取音频
     fn extract_audio(file: MediaFile) -> Result<AudioData, String> {
         if !file.has_audio {
             return Err("文件不包含音频".to_string());
         }
-        
+
         // 读取文件
         let file_content = std::fs::read(&file.path)
             .map_err(|e| format!("读取文件失败: {}", e))?;
-        
+
         // 确定音频格式
         let format = detect_audio_format(&file_content)?;
-        
+
         // 调用导入的音频组件解码音频
         let audio_data = imports::example::media_system::audio::decode(
             file_content,
             format,
         )?;
-        
+
         Ok(audio_data)
     }
-    
+
     // 提取视频
     fn extract_video(file: MediaFile) -> Result<VideoData, String> {
         if !file.has_video {
             return Err("文件不包含视频".to_string());
         }
-        
+
         // 读取文件
         let file_content = std::fs::read(&file.path)
             .map_err(|e| format!("读取文件失败: {}", e))?;
-        
+
         // 确定视频格式
         let format = detect_video_format(&file_content)?;
-        
+
         // 调用导入的视频组件解码视频
         let video_data = imports::example::media_system::video::decode_video(
             file_content,
             format,
         )?;
-        
+
         Ok(video_data)
     }
-    
+
     // 处理媒体文件
     fn process(file: MediaFile, options: ProcessOptions) -> Result<String, String> {
         let mut results = Vec::new();
-        
+
         // 处理音频
         if file.has_audio && options.contains(ProcessOptions::NORMALIZE_AUDIO) {
             // 提取音频
             let audio_data = Self::extract_audio(file.clone())?;
-            
+
             // 正规化音频
             let normalized_audio = normalize_audio(audio_data.clone())?;
-            
+
             // 编码回原格式
             let processed_audio = imports::example::media_system::audio::encode(
                 normalized_audio,
                 audio_data.format,
             )?;
-            
+
             // 保存处理后的音频
             let output_path = format!("{}.normalized.audio", file.path);
             std::fs::write(&output_path, &processed_audio)
                 .map_err(|e| format!("写入音频失败: {}", e))?;
-            
+
             results.push(format!("已处理音频: {}", output_path));
         }
-        
+
         // 处理视频
         if file.has_video && options.contains(ProcessOptions::ENHANCE_VIDEO) {
             // 提取视频
             let video_data = Self::extract_video(file.clone())?;
-            
+
             // 增强视频
             let enhanced_video = enhance_video(video_data.clone())?;
-            
+
             // 编码回原格式
             let processed_video = imports::example::media_system::video::encode_video(
                 enhanced_video,
                 video_data.format,
             )?;
-            
+
             // 保存处理后的视频
             let output_path = format!("{}.enhanced.video", file.path);
             std::fs::write(&output_path, &processed_video)
                 .map_err(|e| format!("写入视频失败: {}", e))?;
-            
+
             results.push(format!("已处理视频: {}", output_path));
         }
-        
+
         // 执行压缩
         if options.contains(ProcessOptions::COMPRESS) {
             // 实现压缩逻辑
             // ...
-            
+
             results.push("已压缩媒体".to_string());
         }
-        
+
         if results.is_empty() {
             Ok("未执行处理操作".to_string())
         } else {
             Ok(results.join("\n"))
         }
     }
-    
+
     // 使用外部处理器处理媒体
     fn process_with_processors(
         file: MediaFile,
@@ -2893,47 +2893,47 @@ impl exports::example::media_system::media_processor::Guest for MediaProcessor {
         video_proc: Borrow<VideoProcessor>,
     ) -> Result<String, String> {
         let mut results = Vec::new();
-        
+
         // 处理音频
         if file.has_audio {
             // 提取音频
             let audio_data = Self::extract_audio(file.clone())?;
-            
+
             // 按块处理音频数据
             let chunk_size = 4096;
             let mut processed_audio = Vec::new();
-            
+
             for chunk in audio_data.data.chunks(chunk_size) {
                 // 使用借用的音频处理器处理每个块
                 let processed_chunk = audio_proc.process_chunk(chunk.to_vec());
                 processed_audio.extend_from_slice(&processed_chunk);
             }
-            
+
             // 保存处理后的音频
             let output_path = format!("{}.processed.audio", file.path);
             std::fs::write(&output_path, &processed_audio)
                 .map_err(|e| format!("写入音频失败: {}", e))?;
-            
+
             results.push(format!("已处理音频: {}", output_path));
-            
+
             // 获取处理器统计信息
             let stats = audio_proc.get_stats();
             results.push(format!("音频处理器统计: {}", stats));
         }
-        
+
         // 处理视频
         if file.has_video {
             // 提取视频
             let video_data = Self::extract_video(file.clone())?;
-            
+
             // 处理每一帧
             for frame in video_data.frames {
                 video_proc.add_frame(frame);
             }
-            
+
             // 处理所有帧
             let processed_frames = video_proc.process_frames();
-            
+
             // 构建新的视频数据
             let processed_video = VideoData {
                 format: video_data.format,
@@ -2942,21 +2942,21 @@ impl exports::example::media_system::media_processor::Guest for MediaProcessor {
                 fps: video_data.fps,
                 frames: processed_frames,
             };
-            
+
             // 编码处理后的视频
             let encoded_video = imports::example::media_system::video::encode_video(
                 processed_video,
                 video_data.format,
             )?;
-            
+
             // 保存处理后的视频
             let output_path = format!("{}.processed.video", file.path);
             std::fs::write(&output_path, &encoded_video)
                 .map_err(|e| format!("写入视频失败: {}", e))?;
-            
+
             results.push(format!("已处理视频: {}", output_path));
         }
-        
+
         if results.is_empty() {
             Ok("未执行处理操作".to_string())
         } else {
@@ -2976,7 +2976,7 @@ struct FileInfo {
 fn analyze_file(path: &str) -> Result<FileInfo, String> {
     // 实现文件格式分析
     // ...
-    
+
     Ok(FileInfo {
         contains_audio: true,
         contains_video: true,
@@ -2987,7 +2987,7 @@ fn analyze_file(path: &str) -> Result<FileInfo, String> {
 fn detect_audio_format(data: &[u8]) -> Result<AudioFormat, String> {
     // 实现音频格式检测
     // ...
-    
+
     Ok(AudioFormat::Mp3)
 }
 
@@ -2995,7 +2995,7 @@ fn detect_audio_format(data: &[u8]) -> Result<AudioFormat, String> {
 fn detect_video_format(data: &[u8]) -> Result<VideoFormat, String> {
     // 实现视频格式检测
     // ...
-    
+
     Ok(VideoFormat::Mp4)
 }
 
@@ -3003,7 +3003,7 @@ fn detect_video_format(data: &[u8]) -> Result<VideoFormat, String> {
 fn normalize_audio(audio: AudioData) -> Result<AudioData, String> {
     // 实现音频正规化
     // ...
-    
+
     Ok(audio)
 }
 
@@ -3011,7 +3011,7 @@ fn normalize_audio(audio: AudioData) -> Result<AudioData, String> {
 fn enhance_video(video: VideoData) -> Result<VideoData, String> {
     // 实现视频增强
     // ...
-    
+
     Ok(video)
 }
 ```
@@ -3165,15 +3165,15 @@ pub fn validate_product(product: &Product) -> AppResult<()> {
     if product.name.is_empty() {
         return Err(AppError::ValidationError("产品名称不能为空".to_string()));
     }
-    
+
     if product.price < 0.0 {
         return Err(AppError::ValidationError("产品价格不能为负".to_string()));
     }
-    
+
     if product.stock > 10000 {
         return Err(AppError::ValidationError("产品库存不能超过10000".to_string()));
     }
-    
+
     Ok(())
 }
 
@@ -3181,12 +3181,12 @@ pub fn validate_order(order: &Order) -> AppResult<()> {
     if order.items.is_empty() {
         return Err(AppError::ValidationError("订单必须包含至少一个商品".to_string()));
     }
-    
+
     // 验证总价
     let calculated_total: f64 = order.items.iter()
         .map(|item| item.price * item.quantity as f64)
         .sum();
-    
+
     // 允许0.01的舍入误差
     if (order.total - calculated_total).abs() > 0.01 {
         return Err(AppError::ValidationError(format!(
@@ -3194,7 +3194,7 @@ pub fn validate_order(order: &Order) -> AppResult<()> {
             order.total, calculated_total
         )));
     }
-    
+
     Ok(())
 }
 ```
@@ -3254,7 +3254,7 @@ struct App {
 impl Component for App {
     type Message = AppMsg;
     type Properties = ();
-    
+
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         let state = AppState {
             current_user: None,
@@ -3263,18 +3263,18 @@ impl Component for App {
             is_loading: false,
             error: None,
         };
-        
+
         // 初始加载产品
         link.send_message(AppMsg::FetchProducts);
-        
+
         App { state, link }
     }
-    
+
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
             AppMsg::FetchProducts => {
                 self.state.is_loading = true;
-                
+
                 // 使用wasm-bindgen-futures调用API
                 let link = self.link.clone();
                 wasm_bindgen_futures::spawn_local(async move {
@@ -3283,7 +3283,7 @@ impl Component for App {
                         Err(e) => link.send_message(AppMsg::Error(e.to_string())),
                     }
                 });
-                
+
                 true
             },
             AppMsg::ProductsFetched(products) => {
@@ -3296,7 +3296,7 @@ impl Component for App {
                 if let Some(pos) = self.state.cart_items.iter().position(|(p, _)| p.id == product.id) {
                     // 如果已存在，增加数量
                     let (_, quantity) = &mut self.state.cart_items[pos];
-                
+
 *quantity += 1;
                 } else {
                     // 否则，添加新项
@@ -3325,19 +3325,19 @@ impl Component for App {
                     self.state.error = Some("请先登录再结账".to_string());
                     return true;
                 }
-                
+
                 if self.state.cart_items.is_empty() {
                     self.state.error = Some("购物车为空".to_string());
                     return true;
                 }
-                
+
                 // 处理结账逻辑
                 let user_id = self.state.current_user.as_ref().unwrap().id;
                 let items = self.state.cart_items.clone();
-                
+
                 // 清空购物车
                 self.state.cart_items.clear();
-                
+
                 // 发送订单到服务器
                 let link = self.link.clone();
                 wasm_bindgen_futures::spawn_local(async move {
@@ -3348,7 +3348,7 @@ impl Component for App {
                         Err(e) => link.send_message(AppMsg::Error(e.to_string())),
                     }
                 });
-                
+
                 true
             },
             AppMsg::Login(user) => {
@@ -3366,22 +3366,22 @@ impl Component for App {
             }
         }
     }
-    
+
     fn change(&mut self, _: Self::Properties) -> ShouldRender {
         false
     }
-    
+
     fn view(&self) -> Html {
         html! {
             <div class="app-container">
-                <Navbar 
-                    user=self.state.current_user.clone() 
+                <Navbar
+                    user=self.state.current_user.clone()
                     on_logout=self.link.callback(|_| AppMsg::Logout)
                 />
-                
+
                 // 错误提示
                 { self.view_error() }
-                
+
                 <main>
                     <div class="product-section">
                         <h2>{"产品列表"}</h2>
@@ -3390,7 +3390,7 @@ impl Component for App {
                                 html! { <div class="loading">{"加载中..."}</div> }
                             } else {
                                 html! {
-                                    <ProductList 
+                                    <ProductList
                                         products=self.state.products.clone()
                                         on_add_to_cart=self.link.callback(|p| AppMsg::AddToCart(p))
                                     />
@@ -3398,10 +3398,10 @@ impl Component for App {
                             }
                         }
                     </div>
-                    
+
                     <div class="cart-section">
                         <h2>{"购物车"}</h2>
-                        <Cart 
+                        <Cart
                             items=self.state.cart_items.clone()
                             on_remove=self.link.callback(|id| AppMsg::RemoveFromCart(id))
                             on_update_quantity=self.link.callback(|(id, qty)| AppMsg::UpdateCartQuantity(id, qty))
@@ -3409,7 +3409,7 @@ impl Component for App {
                         />
                     </div>
                 </main>
-                
+
                 <Footer />
             </div>
         }
@@ -3437,26 +3437,26 @@ impl App {
 async fn fetch_products() -> Result<Vec<Product>, shared::AppError> {
     // 使用web-sys和js-sys发起HTTP请求
     let window = web_sys::window().unwrap();
-    
+
     let resp_promise = window
         .fetch_with_str("/api/products")
         .catch(|e| {
             let err = e.dyn_into::<js_sys::Error>().unwrap();
             panic!("网络错误: {}", err.message());
         });
-    
+
     let resp = wasm_bindgen_futures::JsFuture::from(resp_promise).await.unwrap();
     let resp: web_sys::Response = resp.dyn_into().unwrap();
-    
+
     if !resp.ok() {
         return Err(shared::AppError::NetworkError(format!(
             "API错误: {}", resp.status()
         )));
     }
-    
+
     let json = wasm_bindgen_futures::JsFuture::from(resp.json().unwrap()).await.unwrap();
     let products: Vec<Product> = serde_wasm_bindgen::from_value(json).unwrap();
-    
+
     Ok(products)
 }
 
@@ -3470,12 +3470,12 @@ async fn create_order(user_id: u64, items: Vec<(Product, u32)>) -> Result<(), sh
             price: product.price,
         }
     }).collect::<Vec<_>>();
-    
+
     // 计算总价
     let total = items.iter().fold(0.0, |acc, (product, quantity)| {
         acc + product.price * (*quantity as f64)
     });
-    
+
     // 创建订单对象
     let order = shared::models::Order {
         id: 0, // 服务器会分配ID
@@ -3485,35 +3485,35 @@ async fn create_order(user_id: u64, items: Vec<(Product, u32)>) -> Result<(), sh
         status: shared::models::OrderStatus::Pending,
         created_at: js_sys::Date::new_0().to_iso_string().as_string().unwrap(),
     };
-    
+
     // 验证订单
     shared::validation::validate_order(&order)?;
-    
+
     // 发送到服务器
     let window = web_sys::window().unwrap();
-    
+
     // 准备请求选项
     let mut opts = web_sys::RequestInit::new();
     opts.method("POST");
     opts.body(Some(&serde_wasm_bindgen::to_value(&order).unwrap()));
-    
+
     let request = web_sys::Request::new_with_str_and_init(
         "/api/orders",
         &opts,
     ).unwrap();
-    
+
     request.headers().set("Content-Type", "application/json").unwrap();
-    
+
     let resp_promise = window.fetch_with_request(&request);
     let resp = wasm_bindgen_futures::JsFuture::from(resp_promise).await.unwrap();
     let resp: web_sys::Response = resp.dyn_into().unwrap();
-    
+
     if !resp.ok() {
         return Err(shared::AppError::NetworkError(format!(
             "创建订单失败: {}", resp.status()
         )));
     }
-    
+
     Ok(())
 }
 ```
@@ -3532,12 +3532,12 @@ mod services;
 async fn main() -> std::io::Result<()> {
     // 初始化日志
     env_logger::init_from_env(env_logger::Env::default().default_filter_or("info"));
-    
+
     // 应用配置
     let config = services::config::AppConfig::from_env();
-    
+
     log::info!("启动服务器，端口: {}", config.server_port);
-    
+
     // 构建应用
     HttpServer::new(move || {
         // CORS配置
@@ -3546,7 +3546,7 @@ async fn main() -> std::io::Result<()> {
             .allowed_methods(vec!["GET", "POST", "PUT", "DELETE"])
             .allowed_headers(vec!["Authorization", "Content-Type"])
             .max_age(3600);
-        
+
         App::new()
             .wrap(middleware::Logger::default())
             .wrap(cors)
@@ -3613,7 +3613,7 @@ async fn get_products() -> Result<impl Responder, Error> {
 
 async fn get_product(path: web::Path<u64>) -> Result<impl Responder, Error> {
     let id = path.into_inner();
-    
+
     match product_service::get_by_id(id).await {
         Ok(Some(product)) => Ok(HttpResponse::Ok().json(product)),
         Ok(None) => Ok(HttpResponse::NotFound().json(AppError::ValidationError(
@@ -3628,7 +3628,7 @@ async fn create_product(product: web::Json<Product>) -> Result<impl Responder, E
     if let Err(e) = shared::validation::validate_product(&product) {
         return Ok(HttpResponse::BadRequest().json(e));
     }
-    
+
     match product_service::create(product.into_inner()).await {
         Ok(product) => Ok(HttpResponse::Created().json(product)),
         Err(e) => Ok(HttpResponse::InternalServerError().json(e)),
@@ -3640,15 +3640,15 @@ async fn update_product(
     product: web::Json<Product>,
 ) -> Result<impl Responder, Error> {
     let id = path.into_inner();
-    
+
     // 验证产品数据
     if let Err(e) = shared::validation::validate_product(&product) {
         return Ok(HttpResponse::BadRequest().json(e));
     }
-    
+
     let mut product_data = product.into_inner();
     product_data.id = id;
-    
+
     match product_service::update(product_data).await {
         Ok(product) => Ok(HttpResponse::Ok().json(product)),
         Err(e) => Ok(HttpResponse::InternalServerError().json(e)),
@@ -3657,7 +3657,7 @@ async fn update_product(
 
 async fn delete_product(path: web::Path<u64>) -> Result<impl Responder, Error> {
     let id = path.into_inner();
-    
+
     match product_service::delete(id).await {
         Ok(true) => Ok(HttpResponse::NoContent().finish()),
         Ok(false) => Ok(HttpResponse::NotFound().json(AppError::ValidationError(
@@ -3677,7 +3677,7 @@ async fn get_orders() -> Result<impl Responder, Error> {
 
 async fn get_order(path: web::Path<u64>) -> Result<impl Responder, Error> {
     let id = path.into_inner();
-    
+
     match order_service::get_by_id(id).await {
         Ok(Some(order)) => Ok(HttpResponse::Ok().json(order)),
         Ok(None) => Ok(HttpResponse::NotFound().json(AppError::ValidationError(
@@ -3692,7 +3692,7 @@ async fn create_order(order: web::Json<Order>) -> Result<impl Responder, Error> 
     if let Err(e) = shared::validation::validate_order(&order) {
         return Ok(HttpResponse::BadRequest().json(e));
     }
-    
+
     match order_service::create(order.into_inner()).await {
         Ok(order) => Ok(HttpResponse::Created().json(order)),
         Err(e) => Ok(HttpResponse::InternalServerError().json(e)),
@@ -3704,7 +3704,7 @@ async fn update_order_status(
     status: web::Json<shared::models::OrderStatus>,
 ) -> Result<impl Responder, Error> {
     let id = path.into_inner();
-    
+
     match order_service::update_status(id, status.into_inner()).await {
         Ok(order) => Ok(HttpResponse::Ok().json(order)),
         Err(e) => Ok(HttpResponse::InternalServerError().json(e)),
@@ -3734,7 +3734,7 @@ async fn register(user_data: web::Json<user_service::RegisterData>) -> Result<im
             "无效的电子邮件地址".to_string()
         )));
     }
-    
+
     match user_service::register(user_data.into_inner()).await {
         Ok(user) => Ok(HttpResponse::Created().json(user)),
         Err(e) => Ok(HttpResponse::InternalServerError().json(e)),
@@ -3814,13 +3814,13 @@ pub fn start() -> Result<(), JsValue> {
     // 初始化日志
     console_log::init_with_level(log::Level::Debug).unwrap();
     log::info!("微前端壳应用启动");
-    
+
     // 设置事件处理
     setup_event_handlers();
-    
+
     // 初始化路由
     router::init();
-    
+
     Ok(())
 }
 
@@ -3830,15 +3830,15 @@ fn setup_event_handlers() {
         // 产品添加到购物车事件
         bus.subscribe(AppEvent::ProductAddedToCart, |data| {
             log::debug!("产品已添加到购物车: {:?}", data);
-            
+
             // 可能的实现：更新购物车计数器
             update_cart_counter();
         });
-        
+
         // 用户登录事件
         bus.subscribe(AppEvent::UserLoggedIn, |data| {
             log::debug!("用户已登录: {:?}", data);
-            
+
             // 更新UI以反映登录状态
             if let Some(user_data) = data.as_object() {
                 if let Some(username) = user_data.get("username") {
@@ -3846,7 +3846,7 @@ fn setup_event_handlers() {
                 }
             }
         });
-        
+
         // 全局错误事件
         bus.subscribe(AppEvent::Error, |data| {
             if let Some(message) = data.as_string() {
@@ -3874,11 +3874,11 @@ fn update_cart_counter() {
 async fn get_cart_count() -> Result<u32, JsValue> {
     // 调用购物车微前端的接口
     let window = window().unwrap();
-    
+
     // 假设购物车微前端注册了一个全局函数
     let cart_module = js_sys::Reflect::get(&window, &JsValue::from_str("microCartModule"))?;
     let get_count_fn = js_sys::Reflect::get(&cart_module, &JsValue::from_str("getCartCount"))?;
-    
+
     if get_count_fn.is_function() {
         let result = JsFuture::from(
             js_sys::Reflect::apply(
@@ -3887,7 +3887,7 @@ async fn get_cart_count() -> Result<u32, JsValue> {
                 &js_sys::Array::new(),
             )?
         ).await?;
-        
+
         // 转换结果为u32
         let count = result.as_f64().unwrap_or(0.0) as u32;
         Ok(count)
@@ -3902,12 +3902,12 @@ fn update_user_display(username: String) {
     if let Some(document) = window().and_then(|w| w.document()) {
         if let Some(user_info) = document.get_element_by_id("user-info") {
             user_info.set_inner_html(&format!("欢迎, {}!", username));
-            
+
             // 更新登录/注销按钮
             if let Some(login_btn) = document.get_element_by_id("login-btn") {
                 login_btn.set_class_name("hidden");
             }
-            
+
             if let Some(logout_btn) = document.get_element_by_id("logout-btn") {
                 logout_btn.set_class_name("visible");
             }
@@ -3922,7 +3922,7 @@ fn show_error_notification(message: &str) {
         let notification = document.create_element("div").unwrap();
         notification.set_class_name("error-notification");
         notification.set_inner_html(&format!("<p>{}</p><button class='close'>&times;</button>", message));
-        
+
         // 添加关闭按钮事件
         if let Ok(close_btn) = notification.query_selector(".close") {
             if let Some(btn) = close_btn {
@@ -3932,19 +3932,19 @@ fn show_error_notification(message: &str) {
                         let _ = parent.remove_child(&notification_clone);
                     }
                 }) as Box<dyn FnMut(_)>);
-                
+
                 btn.add_event_listener_with_callback("click", closure.as_ref().unchecked_ref())?;
                 closure.forget();
             }
         }
-        
+
         // 添加到文档
         if let Some(notifications_area) = document.get_element_by_id("notifications-area") {
             notifications_area.append_child(&notification)?;
         } else {
             document.body().unwrap().append_child(&notification)?;
         }
-        
+
         // 设置自动消失
         let notification_clone = notification.clone();
         let timeout_closure = Closure::wrap(Box::new(move || {
@@ -3952,15 +3952,15 @@ fn show_error_notification(message: &str) {
                 let _ = parent.remove_child(&notification_clone);
             }
         }) as Box<dyn FnMut()>);
-        
+
         window().unwrap().set_timeout_with_callback_and_timeout_and_arguments_0(
             timeout_closure.as_ref().unchecked_ref(),
             5000, // 5秒后消失
         )?;
-        
+
         timeout_closure.forget();
     }
-    
+
     Ok(())
 }
 ```
@@ -3992,22 +3992,22 @@ thread_local! {
 // 初始化路由器
 pub fn init() -> Result<(), JsValue> {
     log::debug!("初始化路由器");
-    
+
     // 注册路由
     register_routes()?;
-    
+
     // 监听popstate事件
     let window = window().unwrap();
     let callback = Closure::wrap(Box::new(|_event: Event| {
         let _ = handle_route_change();
     }) as Box<dyn FnMut(_)>);
-    
+
     window.add_event_listener_with_callback("popstate", callback.as_ref().unchecked_ref())?;
     callback.forget();
-    
+
     // 处理初始路由
     handle_route_change()?;
-    
+
     Ok(())
 }
 
@@ -4015,38 +4015,38 @@ pub fn init() -> Result<(), JsValue> {
 fn register_routes() -> Result<(), JsValue> {
     ROUTER.with(|router| {
         let mut router = router.borrow_mut();
-        
+
         // 主页路由
         router.routes.insert("/".to_string(), Box::new(|| {
             log::debug!("正在渲染主页");
             load_microfrontend("catalog")
         }));
-        
+
         // 目录路由
         router.routes.insert("/catalog".to_string(), Box::new(|| {
             log::debug!("正在渲染产品目录");
             load_microfrontend("catalog")
         }));
-        
+
         // 购物车路由
         router.routes.insert("/cart".to_string(), Box::new(|| {
             log::debug!("正在渲染购物车");
             load_microfrontend("cart")
         }));
-        
+
         // 结账路由
         router.routes.insert("/checkout".to_string(), Box::new(|| {
             log::debug!("正在渲染结账");
             load_microfrontend("checkout")
         }));
-        
+
         // 404路由
         router.routes.insert("404".to_string(), Box::new(|| {
             log::debug!("渲染404页面");
             render_404()
         }));
     });
-    
+
     Ok(())
 }
 
@@ -4054,10 +4054,10 @@ fn register_routes() -> Result<(), JsValue> {
 fn handle_route_change() -> Result<(), JsValue> {
     let path = get_current_path();
     log::debug!("路由变化: {}", path);
-    
+
     ROUTER.with(|router| {
         let mut router = router.borrow_mut();
-        
+
         // 获取路由处理程序
         let handler = if let Some(handler) = router.routes.get(&path) {
             handler
@@ -4065,7 +4065,7 @@ fn handle_route_change() -> Result<(), JsValue> {
             // 404处理
             router.routes.get("404").unwrap()
         };
-        
+
         // 调用处理程序
         router.current_route = Some(path);
         handler()
@@ -4085,10 +4085,10 @@ fn load_microfrontend(name: &str) -> Result<(), JsValue> {
     let document = window().unwrap().document().unwrap();
     let mount_point = document.get_element_by_id("app-content")
         .ok_or_else(|| JsValue::from_str("找不到挂载点"))?;
-    
+
     // 清空挂载点
     mount_point.set_inner_html("");
-    
+
     // 根据名称加载对应的微前端
     match name {
         "catalog"
@@ -4108,7 +4108,7 @@ fn load_microfrontend(name: &str) -> Result<(), JsValue> {
             return Err(JsValue::from_str(&format!("未知的微前端: {}", name)));
         }
     }
-    
+
     Ok(())
 }
 
@@ -4116,41 +4116,41 @@ fn load_microfrontend(name: &str) -> Result<(), JsValue> {
 fn load_wasm_module(module_name: &str, mount_point: &web_sys::Element) -> Result<(), JsValue> {
     // 创建加载指示器
     mount_point.set_inner_html("<div class='loading'>加载模块中...</div>");
-    
+
     // 动态导入Wasm模块
     let window = window().unwrap();
     let module_url = format!("/assets/{}", module_name);
-    
+
     // 使用动态导入
     let import_promise = js_sys::Function::new_with_args(
         "url",
-        &format!("return import(url).then(module => {{ 
+        &format!("return import(url).then(module => {{
             return module.default || module;
         }});"),
     ).call1(&JsValue::NULL, &JsValue::from_str(&module_url))?;
-    
+
     // 等待模块加载
     let promise = import_promise.dyn_into::<js_sys::Promise>()?;
-    
+
     // 创建闭包处理加载结果
     let mount_point_clone = mount_point.clone();
     let success_callback = Closure::wrap(Box::new(move |module: JsValue| {
         log::debug!("微前端模块加载成功");
-        
+
         // 清空加载指示器
         mount_point_clone.set_inner_html("");
-        
+
         // 初始化模块
         if let Some(init_fn) = js_sys::Reflect::get(&module, &JsValue::from_str("initialize"))
             .ok()
             .filter(|v| v.is_function()) {
-            
+
             let result = js_sys::Reflect::apply(
                 &init_fn.dyn_into::<js_sys::Function>().unwrap(),
                 &module,
                 &js_sys::Array::of1(&mount_point_clone),
             );
-            
+
             if let Err(e) = result {
                 log::error!("初始化微前端失败: {:?}", e);
                 mount_point_clone.set_inner_html("<div class='error'>模块初始化失败</div>");
@@ -4160,20 +4160,20 @@ fn load_wasm_module(module_name: &str, mount_point: &web_sys::Element) -> Result
             mount_point_clone.set_inner_html("<div class='error'>模块格式无效</div>");
         }
     }) as Box<dyn FnMut(JsValue)>);
-    
+
     let error_callback = Closure::wrap(Box::new(move |error: JsValue| {
         log::error!("加载微前端失败: {:?}", error);
         mount_point.set_inner_html("<div class='error'>模块加载失败</div>");
     }) as Box<dyn FnMut(JsValue)>);
-    
+
     // 注册回调
     let _ = promise.then(&success_callback);
     let _ = promise.catch(&error_callback);
-    
+
     // 防止Closure被垃圾回收
     success_callback.forget();
     error_callback.forget();
-    
+
     Ok(())
 }
 
@@ -4182,7 +4182,7 @@ fn render_404() -> Result<(), JsValue> {
     let document = window().unwrap().document().unwrap();
     let mount_point = document.get_element_by_id("app-content")
         .ok_or_else(|| JsValue::from_str("找不到挂载点"))?;
-    
+
     mount_point.set_inner_html(
         r#"
         <div class="not-found">
@@ -4192,7 +4192,7 @@ fn render_404() -> Result<(), JsValue> {
         </div>
         "#
     );
-    
+
     Ok(())
 }
 
@@ -4201,14 +4201,14 @@ fn render_404() -> Result<(), JsValue> {
 pub fn navigate_to(path: &str) -> Result<(), JsValue> {
     let window = window().unwrap();
     let history = window.history().unwrap();
-    
+
     // 使用History API导航
     history.push_state_with_url(
         &JsValue::NULL,
         "",
         Some(path),
     )?;
-    
+
     // 手动触发路由处理
     handle_route_change()
 }
@@ -4239,13 +4239,13 @@ thread_local! {
 #[wasm_bindgen]
 pub fn initialize(mount_point: Element) -> Result<(), JsValue> {
     log("初始化产品目录微前端");
-    
+
     // 渲染目录
     catalog::render_catalog(mount_point)?;
-    
+
     // 向壳应用注册事件
     register_global_handlers();
-    
+
     Ok(())
 }
 
@@ -4253,25 +4253,25 @@ pub fn initialize(mount_point: Element) -> Result<(), JsValue> {
 fn register_global_handlers() {
     // 向主应用暴露接口
     let window = web_sys::window().unwrap();
-    
+
     // 创建模块对象
     let catalog_module = js_sys::Object::new();
-    
+
     // 添加搜索产品方法
     let search_products = Closure::wrap(Box::new(move |query: String| {
         catalog::search_products(&query);
         JsValue::TRUE
     }) as Box<dyn FnMut(String) -> JsValue>);
-    
+
     js_sys::Reflect::set(
         &catalog_module,
         &JsValue::from_str("searchProducts"),
         &search_products.as_ref(),
     ).unwrap();
-    
+
     // 防止闭包被垃圾回收
     search_products.forget();
-    
+
     // 在全局作用域中注册模块
     js_sys::Reflect::set(
         &window,
@@ -4284,18 +4284,18 @@ fn register_global_handlers() {
 #[wasm_bindgen]
 pub fn add_product_to_cart(product_id: u64, name: &str, price: f64) -> Result<(), JsValue> {
     log(&format!("添加产品到购物车: {} (ID: {})", name, product_id));
-    
+
     // 创建产品数据
     let product_data = js_sys::Object::new();
     js_sys::Reflect::set(&product_data, &JsValue::from_str("id"), &JsValue::from_f64(product_id as f64))?;
     js_sys::Reflect::set(&product_data, &JsValue::from_str("name"), &JsValue::from_str(name))?;
     js_sys::Reflect::set(&product_data, &JsValue::from_str("price"), &JsValue::from_f64(price))?;
-    
+
     // 触发全局事件
     EVENT_BUS.with(|bus| {
         bus.publish(AppEvent::ProductAddedToCart, product_data);
     });
-    
+
     Ok(())
 }
 ```
@@ -4311,81 +4311,81 @@ use wasm_bindgen_futures::JsFuture;
 pub fn render_catalog(mount_point: Element) -> Result<(), JsValue> {
     // 渲染顶部控件
     render_catalog_controls(&mount_point)?;
-    
+
     // 创建产品网格容器
     let products_grid = mount_point.owner_document().unwrap()
         .create_element("div")?;
     products_grid.set_class_name("products-grid");
     products_grid.set_id("products-container");
     mount_point.append_child(&products_grid)?;
-    
+
     // 添加加载指示器
     products_grid.set_inner_html("<div class='loading'>加载产品...</div>");
-    
+
     // 异步加载产品
     load_products(products_grid);
-    
+
     Ok(())
 }
 
 // 渲染目录控件
 fn render_catalog_controls(mount_point: &Element) -> Result<(), JsValue> {
     let document = mount_point.owner_document().unwrap();
-    
+
     // 创建控件容器
     let controls = document.create_element("div")?;
     controls.set_class_name("catalog-controls");
-    
+
     // 添加标题
     let title = document.create_element("h2")?;
     title.set_text_content(Some("产品目录"));
     controls.append_child(&title)?;
-    
+
     // 添加搜索框
     let search_container = document.create_element("div")?;
     search_container.set_class_name("search-container");
-    
+
     let search_input = document.create_element("input")?;
     search_input.set_id("search-input");
     search_input.set_attribute("type", "text")?;
     search_input.set_attribute("placeholder", "搜索产品...")?;
-    
+
     let search_button = document.create_element("button")?;
     search_button.set_text_content(Some("搜索"));
-    
+
     // 添加搜索事件处理程序
     let input_clone = search_input.clone();
     let search_callback = Closure::wrap(Box::new(move |_: MouseEvent| {
         let query = input_clone.dyn_ref::<web_sys::HtmlInputElement>()
             .unwrap()
             .value();
-        
+
         search_products(&query);
     }) as Box<dyn FnMut(_)>);
-    
+
     search_button.add_event_listener_with_callback(
         "click",
         search_callback.as_ref().unchecked_ref(),
     )?;
-    
+
     // 防止回调被垃圾回收
     search_callback.forget();
-    
+
     // 添加到DOM
     search_container.append_child(&search_input)?;
     search_container.append_child(&search_button)?;
     controls.append_child(&search_container)?;
-    
+
     // 添加筛选器
     let filters = document.create_element("div")?;
     filters.set_class_name("filters");
-    
+
     let filter_label = document.create_element("label")?;
     filter_label.set_text_content(Some("分类:"));
-    
+
     let filter_select = document.create_element("select")?;
     filter_select.set_id("category-filter");
-    
+
     // 添加选项
     let categories = ["全部", "电子产品", "服装", "家居", "图书"];
     for category in categories.iter() {
@@ -4394,14 +4394,14 @@ fn render_catalog_controls(mount_point: &Element) -> Result<(), JsValue> {
         option.set_attribute("value", &category.to_lowercase())?;
         filter_select.append_child(&option)?;
     }
-    
+
     filters.append_child(&filter_label)?;
     filters.append_child(&filter_select)?;
     controls.append_child(&filters)?;
-    
+
     // 添加到挂载点
     mount_point.append_child(&controls)?;
-    
+
     Ok(())
 }
 
@@ -4425,22 +4425,22 @@ fn load_products(container: Element) {
 // 从API获取产品
 async fn fetch_products() -> Result<Array, JsValue> {
     let window = web_sys::window().unwrap();
-    
+
     // 发起API请求
     let response = JsFuture::from(
         window.fetch_with_str("/api/products")
     ).await?;
-    
+
     let response = response.dyn_into::<web_sys::Response>()?;
-    
+
     if !response.ok() {
         return Err(JsValue::from_str(&format!("API错误: {}", response.status())));
     }
-    
+
     // 解析JSON响应
     let json = JsFuture::from(response.json()?).await?;
     let products = json.dyn_into::<Array>()?;
-    
+
     Ok(products)
 }
 
@@ -4448,36 +4448,36 @@ async fn fetch_products() -> Result<Array, JsValue> {
 fn render_products(container: &Element, products: Array) -> Result<(), JsValue> {
     // 清空容器
     container.set_inner_html("");
-    
+
     let document = container.owner_document().unwrap();
-    
+
     if products.length() == 0 {
         container.set_inner_html("<div class='no-products'>没有找到产品</div>");
         return Ok(());
     }
-    
+
     // 渲染每个产品
     for i in 0..products.length() {
         let product = products.get(i);
         let product_obj = product.dyn_into::<Object>()?;
-        
+
         // 获取产品属性
         let id = js_sys::Reflect::get(&product_obj, &JsValue::from_str("id"))?
             .as_f64().unwrap() as u64;
-        
+
         let name = js_sys::Reflect::get(&product_obj, &JsValue::from_str("name"))?
             .as_string().unwrap_or_default();
-        
+
         let price = js_sys::Reflect::get(&product_obj, &JsValue::from_str("price"))?
             .as_f64().unwrap_or_default();
-        
+
         let description = js_sys::Reflect::get(&product_obj, &JsValue::from_str("description"))?
             .as_string().unwrap_or_default();
-        
+
         // 创建产品卡片
         let card = document.create_element("div")?;
         card.set_class_name("product-card");
-        
+
         // 设置产品内容
         card.set_inner_html(&format!(
             r#"
@@ -4488,31 +4488,31 @@ fn render_products(container: &Element, products: Array) -> Result<(), JsValue> 
             "#,
             name, price, description, id, name, price
         ));
-        
+
         // 添加到购物车事件
         let add_button = card.query_selector(".add-to-cart")?
             .ok_or_else(|| JsValue::from_str("找不到添加按钮"))?;
-        
+
         let id_clone = id;
         let name_clone = name.clone();
         let price_clone = price;
-        
+
         let add_callback = Closure::wrap(Box::new(move |_: MouseEvent| {
             let _ = crate::add_product_to_cart(id_clone, &name_clone, price_clone);
         }) as Box<dyn FnMut(_)>);
-        
+
         add_button.add_event_listener_with_callback(
             "click",
             add_callback.as_ref().unchecked_ref(),
         )?;
-        
+
         // 防止回调被垃圾回收
         add_callback.forget();
-        
+
         // 添加到容器
         container.append_child(&card)?;
     }
-    
+
     Ok(())
 }
 
@@ -4521,11 +4521,11 @@ pub fn search_products(query: &str) {
     // 获取产品容器
     let window = web_sys::window().unwrap();
     let document = window.document().unwrap();
-    
+
     if let Some(container) = document.get_element_by_id("products-container") {
         // 添加加载指示器
         container.set_inner_html("<div class='loading'>搜索产品...</div>");
-        
+
         // 执行搜索请求
         wasm_bindgen_futures::spawn_local(async move {
             match search_products_api(query).await {
@@ -4546,25 +4546,25 @@ pub fn search_products(query: &str) {
 // 通过API搜索产品
 async fn search_products_api(query: &str) -> Result<Array, JsValue> {
     let window = web_sys::window().unwrap();
-    
+
     // 构建搜索URL
     let url = format!("/api/products?search={}", query);
-    
+
     // 发起API请求
     let response = JsFuture::from(
         window.fetch_with_str(&url)
     ).await?;
-    
+
     let response = response.dyn_into::<web_sys::Response>()?;
-    
+
     if !response.ok() {
         return Err(JsValue::from_str(&format!("API错误: {}", response.status())));
     }
-    
+
     // 解析JSON响应
     let json = JsFuture::from(response.json()?).await?;
     let products = json.dyn_into::<Array>()?;
-    
+
     Ok(products)
 }
 ```
@@ -4605,18 +4605,18 @@ impl ProcessOperation {
 fn main() -> io::Result<()> {
     // 获取并解析命令行参数
     let args: Vec<String> = env::args().collect();
-    
+
     if args.len() < 3 {
         eprintln!("用法: {} <操作> <输入文件> [<输出文件>] [<参数>...]", args[0]);
         eprintln!("支持的操作: transform, filter, merge, split");
         return Ok(());
     }
-    
+
     let operation = ProcessOperation::from_str(&args[1])
         .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidInput, "无效的操作"))?;
-    
+
     let input_path = &args[2];
-    
+
     // 根据操作执行不同的处理
     match operation {
         ProcessOperation::Transform => {
@@ -4624,10 +4624,10 @@ fn main() -> io::Result<()> {
                 eprintln!("transform操作需要输出文件路径");
                 return Ok(());
             }
-            
+
             let output_path = &args[3];
             let transform_type = args.get(4).map(|s| s.as_str()).unwrap_or("uppercase");
-            
+
             transform_file(input_path, output_path, transform_type)?;
         },
         ProcessOperation::Filter => {
@@ -4635,10 +4635,10 @@ fn main() -> io::Result<()> {
                 eprintln!("filter操作需要输出文件路径");
                 return Ok(());
             }
-            
+
             let output_path = &args[3];
             let pattern = args.get(4).map(|s| s.as_str()).unwrap_or("");
-            
+
             filter_file(input_path, output_path, pattern)?;
         },
         ProcessOperation::Merge => {
@@ -4646,10 +4646,10 @@ fn main() -> io::Result<()> {
                 eprintln!("merge操作需要至少一个额外的输入文件和一个输出文件");
                 return Ok(());
             }
-            
+
             let additional_files: Vec<&String> = args[3..args.len()-1].iter().collect();
             let output_path = &args[args.len()-1];
-            
+
             merge_files(input_path, &additional_files, output_path)?;
         },
         ProcessOperation::Split => {
@@ -4657,21 +4657,21 @@ fn main() -> io::Result<()> {
             let chunk_size = args.get(4)
                 .and_then(|s| s.parse::<usize>().ok())
                 .unwrap_or(1000);
-            
+
             split_file(input_path, prefix, chunk_size)?;
         },
     }
-    
+
     Ok(())
 }
 
 // 转换文件内容
 fn transform_file(input_path: &str, output_path: &str, transform_type: &str) -> io::Result<()> {
     println!("正在转换文件: {} -> {}", input_path, output_path);
-    
+
     let mut content = String::new();
     File::open(input_path)?.read_to_string(&mut content)?;
-    
+
     // 应用转换
     let transformed = match transform_type {
         "uppercase" => content.to_uppercase(),
@@ -4682,10 +4682,10 @@ fn transform_file(input_path: &str, output_path: &str, transform_type: &str) -> 
             content
         }
     };
-    
+
     // 写入输出
     File::create(output_path)?.write_all(transformed.as_bytes())?;
-    
+
     println!("转换完成");
     Ok(())
 }
@@ -4693,24 +4693,24 @@ fn transform_file(input_path: &str, output_path: &str, transform_type: &str) -> 
 // 根据模式过滤文件行
 fn filter_file(input_path: &str, output_path: &str, pattern: &str) -> io::Result<()> {
     println!("正在过滤文件: {} -> {}", input_path, output_path);
-    
+
     let input = BufReader::new(File::open(input_path)?);
     let mut output = BufWriter::new(File::create(output_path)?);
-    
+
     let mut line_count = 0;
     let mut matched_count = 0;
-    
+
     // 按行读取并过滤
     for line in input.lines() {
         let line = line?;
         line_count += 1;
-        
+
         if pattern.is_empty() || line.contains(pattern) {
             matched_count += 1;
             writeln!(output, "{}", line)?;
         }
     }
-    
+
     println!("过滤完成: 总行数 {}, 匹配行数 {}", line_count, matched_count);
     Ok(())
 }
@@ -4718,30 +4718,30 @@ fn filter_file(input_path: &str, output_path: &str, pattern: &str) -> io::Result
 // 合并多个文件
 fn merge_files(main_file: &str, additional_files: &[&String], output_path: &str) -> io::Result<()> {
     println!("正在合并文件到: {}", output_path);
-    
+
     let mut output = BufWriter::new(File::create(output_path)?);
-    
+
     // 首先写入主文件
     let mut content = Vec::new();
     File::open(main_file)?.read_to_end(&mut content)?;
     output.write_all(&content)?;
-    
+
     // 添加分隔符
     writeln!(output, "\n\n--- 文件分隔符 ---\n")?;
-    
+
     // 依次写入其他文件
     for (i, file) in additional_files.iter().enumerate() {
         println!("添加文件 {}/{}: {}", i+1, additional_files.len(), file);
-        
+
         let mut content = Vec::new();
         File::open(file)?.read_to_end(&mut content)?;
         output.write_all(&content)?;
-        
+
         if i < additional_files.len() - 1 {
             writeln!(output, "\n\n--- 文件分隔符 ---\n")?;
         }
     }
-    
+
     println!("合并完成: {} 个文件", additional_files.len() + 1);
     Ok(())
 }
@@ -4749,15 +4749,15 @@ fn merge_files(main_file: &str, additional_files: &[&String], output_path: &str)
 // 将文件分割成多个小文件
 fn split_file(input_path: &str, prefix: &str, chunk_size: usize) -> io::Result<()> {
     println!("正在分割文件: {} (每块 {} 字节)", input_path, chunk_size);
-    
+
     let mut input = File::open(input_path)?;
     let mut buffer = vec![0; chunk_size];
     let mut chunk_num = 0;
-    
+
     // 确定输出目录
     let parent = Path::new(input_path).parent()
         .unwrap_or_else(|| Path::new("."));
-    
+
     loop {
         // 读取一块数据
         match input.read(&mut buffer)? {
@@ -4765,16 +4765,16 @@ fn split_file(input_path: &str, prefix: &str, chunk_size: usize) -> io::Result<(
             n => {
                 chunk_num += 1;
                 let output_path = parent.join(format!("{}_{:03}.bin", prefix, chunk_num));
-                
+
                 println!("写入块 {}: {}", chunk_num, output_path.display());
-                
+
                 // 写入这一块数据
                 let mut output = File::create(output_path)?;
                 output.write_all(&buffer[0..n])?;
             }
         }
     }
-    
+
     println!("分割完成: {} 个块", chunk_num);
     Ok(())
 }
@@ -4813,50 +4813,50 @@ impl ChatBot {
             conversation_log: Vec::new(),
         }
     }
-    
+
     // 从文件加载响应
     fn load_responses(&mut self, path: &str) -> io::Result<()> {
         println!("从'{}'加载响应", path);
-        
+
         let content = fs::read_to_string(path)?;
-        
+
         for line in content.lines() {
             if line.trim().is_empty() || line.starts_with("#") {
                 continue;
             }
-            
+
             if let Some((keyword, responses)) = line.split_once(':') {
                 let keyword = keyword.trim().to_lowercase();
                 let responses = responses.split('|')
                     .map(|r| r.trim().to_string())
                     .collect::<Vec<_>>();
-                
+
                 if !responses.is_empty() {
                     self.responses.insert(keyword, responses);
                 }
             }
         }
-        
+
         println!("已加载 {} 个关键词", self.responses.len());
         Ok(())
     }
-    
+
     // 处理用户输入
     fn process(&mut self, input: &str) -> String {
         let input = input.trim().to_lowercase();
-        
+
         // 记录用户输入
         self.log_conversation("用户".to_string(), input.clone());
-        
+
         // 查找匹配的关键词
         let response = self.find_response(&input);
-        
+
         // 记录机器人响应
         self.log_conversation(self.name.clone(), response.clone());
-        
+
         response
     }
-    
+
     // 查找合适的响应
     fn find_response(&self, input: &str) -> String {
         // 检查每个关键词
@@ -4867,29 +4867,29 @@ impl ChatBot {
                 return responses[index].clone();
             }
         }
-        
+
         // 如果没有匹配，返回默认响应
         let index = rand::random::<usize
 >() % self.default_responses.len();
         self.default_responses[index].clone()
     }
-    
+
     // 记录对话
     fn log_conversation(&mut self, speaker: String, message: String) {
         self.conversation_log.push((speaker, message));
     }
-    
+
     // 保存对话记录
     fn save_conversation(&self, path: &str) -> io::Result<()> {
         let mut file = File::create(path)?;
-        
+
         writeln!(file, "# 对话记录 - {}", chrono::Local::now())?;
         writeln!(file, "")?;
-        
+
         for (speaker, message) in &self.conversation_log {
             writeln!(file, "{}: {}", speaker, message)?;
         }
-        
+
         println!("对话记录已保存到 '{}'", path);
         Ok(())
     }
@@ -4897,15 +4897,15 @@ impl ChatBot {
 
 fn main() -> io::Result<()> {
     println!("WASI聊天机器人启动中...");
-    
+
     // 解析命令行参数
     let args: Vec<String> = env::args().collect();
     let bot_name = args.get(1).map(|s| s.as_str()).unwrap_or("助手");
     let responses_file = args.get(2).map(|s| s.as_str()).unwrap_or("responses.txt");
-    
+
     // 创建并配置聊天机器人
     let mut bot = ChatBot::new(bot_name);
-    
+
     // 尝试加载响应文件
     if Path::new(responses_file).exists() {
         if let Err(e) = bot.load_responses(responses_file) {
@@ -4926,45 +4926,45 @@ fn main() -> io::Result<()> {
             "下次再聊！".to_string(),
         ]);
     }
-    
+
     println!("{}已准备好！输入'再见'或'退出'结束对话。", bot_name);
-    
+
     // 开始对话循环
     let mut buffer = String::new();
     let stdin = io::stdin();
     let mut stdout = io::stdout();
-    
+
     loop {
         // 提示输入
         print!("> ");
         stdout.flush()?;
-        
+
         // 读取一行输入
         buffer.clear();
         stdin.read_line(&mut buffer)?;
-        
+
         let input = buffer.trim();
-        
+
         // 检查终止条件
-        if input.eq_ignore_ascii_case("exit") || 
-           input.eq_ignore_ascii_case("quit") || 
-           input.eq_ignore_ascii_case("再见") || 
+        if input.eq_ignore_ascii_case("exit") ||
+           input.eq_ignore_ascii_case("quit") ||
+           input.eq_ignore_ascii_case("再见") ||
            input.eq_ignore_ascii_case("退出") {
             println!("{}: 再见！很高兴和你聊天。", bot_name);
             break;
         }
-        
+
         // 处理输入并显示响应
         let response = bot.process(input);
         println!("{}: {}", bot_name, response);
     }
-    
+
     // 保存对话记录
     let log_file = format!("chat_log_{}.txt", chrono::Local::now().format("%Y%m%d_%H%M%S"));
     if let Err(e) = bot.save_conversation(&log_file) {
         eprintln!("保存对话记录失败: {}", e);
     }
-    
+
     Ok(())
 }
 ```
@@ -5086,7 +5086,7 @@ fn add_vectors(a: &[f32], b: &[f32], result: &mut [f32]) {
 // SIMD优化的向量加法
 fn simd_add_vectors(a: &[f32], b: &[f32], result: &mut [f32]) {
     let chunks = a.len() / 4;
-    
+
     for i in 0..chunks {
         let start = i * 4;
         let a_chunk = f32s::from_slice_unaligned(&a[start..start+4]);
@@ -5094,7 +5094,7 @@ fn simd_add_vectors(a: &[f32], b: &[f32], result: &mut [f32]) {
         let sum = a_chunk + b_chunk;
         sum.write_to_slice_unaligned(&mut result[start..start+4]);
     }
-    
+
     // 处理剩余元素
     for i in (chunks * 4)..a.len() {
         result[i] = a[i] + b[i];
@@ -5107,7 +5107,7 @@ fn simd_matrix_multiply(a: &[f32], b: &[f32], result: &mut [f32], n: usize) {
     for i in 0..n {
         for j in 0..n {
             let mut sum = f32s::splat(0.0);
-            
+
             // 使用SIMD计算点积
             for k in (0..n).step_by(4) {
                 if k + 4 <= n {
@@ -5121,10 +5121,10 @@ fn simd_matrix_multiply(a: &[f32], b: &[f32], result: &mut [f32], n: usize) {
                     sum = sum + (a_row * b_col);
                 }
             }
-            
+
             // 累加SIMD结果
             result[i*n+j] = sum.as_ref().iter().sum();
-            
+
             // 处理剩余元素
             for k in (n/4*4)..n {
                 result[i*n+j] += a[i*n+k] * b[k*n+j];
@@ -5149,18 +5149,18 @@ impl<T> Pool<T> {
         for _ in 0..capacity {
             items.push(None);
         }
-        
+
         let mut free_indices = Vec::with_capacity(capacity);
         for i in 0..capacity {
             free_indices.push(i);
         }
-        
+
         Pool {
             items,
             free_indices,
         }
     }
-    
+
     fn allocate(&mut self, item: T) -> Option<usize> {
         if let Some(index) = self.free_indices.pop() {
             self.items[index] = Some(item);
@@ -5169,33 +5169,33 @@ impl<T> Pool<T> {
             None
         }
     }
-    
+
     fn free(&mut self, index: usize) -> Option<T> {
         if index >= self.items.len() {
             return None;
         }
-        
+
         let item = self.items[index].take();
         if item.is_some() {
             self.free_indices.push(index);
         }
-        
+
         item
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         if index >= self.items.len() {
             return None;
         }
-        
+
         self.items[index].as_ref()
     }
-    
+
     fn get_mut(&mut self, index: usize) -> Option<&mut T> {
         if index >= self.items.len() {
             return None;
         }
-        
+
         self.items[index].as_mut()
     }
 }
@@ -5219,7 +5219,7 @@ impl GameObject {
             active: true,
         }
     }
-    
+
     fn update(&mut self, dt: f32) {
         if self.active {
             self.x += self.velocity_x * dt;
@@ -5239,15 +5239,15 @@ impl GameObjectManager {
             objects: Pool::new(max_objects),
         }
     }
-    
+
     fn create_object(&mut self, x: f32, y: f32) -> Option<usize> {
         self.objects.allocate(GameObject::new(x, y))
     }
-    
+
     fn destroy_object(&mut self, id: usize) {
         self.objects.free(id);
     }
-    
+
     fn update_all(&mut self, dt: f32) {
         for i in 0..self.objects.items.len() {
             if let Some(obj) = self.objects.get_mut(i) {
@@ -5321,13 +5321,13 @@ trait ProcessableItem {
 async function loadModule(name) {
     try {
         console.log(`Loading module: ${name}`);
-        
+
         // 动态导入模块
         const module = await import(`./pkg/${name}.js`);
-        
+
         // 初始化模块
         await module.default();
-        
+
         console.log(`Module ${name} loaded successfully`);
         return module;
     } catch (error) {
@@ -5340,7 +5340,7 @@ async function loadModule(name) {
 async function initApp() {
     // 初始阶段只加载核心模块
     const core = await loadModule('app_core');
-    
+
     // 根据用户操作懒加载其他模块
     document.getElementById('load-image-editor').addEventListener('click', async () => {
         try {
@@ -5351,7 +5351,7 @@ async function initApp() {
             console.error('Failed to load image editor:', error);
         }
     });
-    
+
     document.getElementById('load-data-analyzer').addEventListener('click', async () => {
         try {
             const analyzerModule = await loadModule('data_analyzer');
@@ -5398,7 +5398,7 @@ impl System<Uninitialized> {
             state: std::marker::PhantomData,
         }
     }
-    
+
     // 从未初始化到初始化状态的转换
     fn initialize(self, initial_data: Vec<u32>) -> System<Initialized> {
         System {
@@ -5425,7 +5425,7 @@ impl System<Running> {
         println!("Processing value: {}", value);
         self.data.push(value);
     }
-    
+
     // 从运行到暂停状态的转换
     fn pause(self) -> System<Paused> {
         println!("Pausing system");
@@ -5434,7 +5434,7 @@ impl System<Running> {
             state: std::marker::PhantomData,
         }
     }
-    
+
     // 从运行到停止状态的转换
     fn stop(self) -> System<Stopped> {
         println!("Stopping system");
@@ -5454,7 +5454,7 @@ impl System<Paused> {
             state: std::marker::PhantomData,
         }
     }
-    
+
     // 从暂停到停止状态的转换
     fn stop(self) -> System<Stopped> {
         println!("Stopping paused system");
@@ -5479,20 +5479,20 @@ fn main() {
     let system = System::new();
     let system = system.initialize(vec![1, 2, 3]);
     let mut system = system.start();
-    
+
     system.process(4);
     system.process(5);
-    
+
     let system = system.pause();
     let mut system = system.resume();
-    
+
     system.process(6);
-    
+
     let system = system.stop();
     let result = system.result();
-    
+
     println!("Final result: {:?}", result);
-    
+
     // 以下代码将导致编译错误，因为类型状态不允许:
     // system.process(7); // 错误：system已经消耗
     // let system2 = System::new().start(); // 错误：不能直接从Uninitialized跳到Running
@@ -5525,7 +5525,7 @@ impl<Unit> Value<Unit> {
             _unit: PhantomData,
         }
     }
-    
+
     fn get(&self) -> f64 {
         self.value
     }
@@ -5547,7 +5547,7 @@ impl Value<Seconds> {
 // 定义单位间的运算
 impl std::ops::Div<Value<Seconds>> for Value<Meters> {
     type Output = Value<MetersPerSecond>;
-    
+
     fn div(self, rhs: Value<Seconds>) -> Self::Output {
         Value::new(self.value / rhs.value)
     }
@@ -5555,7 +5555,7 @@ impl std::ops::Div<Value<Seconds>> for Value<Meters> {
 
 impl std::ops::Mul<Value<Seconds>> for Value<MetersPerSecond> {
     type Output = Value<Meters>;
-    
+
     fn mul(self, rhs: Value<Seconds>) -> Self::Output {
         Value::new(self.value * rhs.value)
     }
@@ -5563,7 +5563,7 @@ impl std::ops::Mul<Value<Seconds>> for Value<MetersPerSecond> {
 
 impl std::ops::Div<Value<Seconds>> for Value<MetersPerSecond> {
     type Output = Value<MetersPerSecondSquared>;
-    
+
     fn div(self, rhs: Value<Seconds>) -> Self::Output {
         Value::new(self.value / rhs.value)
     }
@@ -5578,7 +5578,7 @@ fn calculate_distance(
     // 使用运动学公式: s = v0*t + 0.5*a*t^2
     let first_term = initial_velocity * time;
     let second_term = Value::<Meters>::new(0.5 * acceleration.get() * time.get() * time.get());
-    
+
     Value::new(first_term.get() + second_term.get())
 }
 
@@ -5586,15 +5586,15 @@ fn calculate_distance(
 fn main() {
     let distance = Value::<Meters>::new(100.0);
     let time = Value::<Seconds>::new(10.0);
-    
+
     // 计算速度（米/秒）
     let velocity: Value<MetersPerSecond> = distance / time;
     println!("Velocity: {} m/s", velocity.get());
-    
+
     // 计算加速度（米/秒²）
     let acceleration: Value<MetersPerSecondSquared> = velocity / time;
     println!("Acceleration: {} m/s²", acceleration.get());
-    
+
     // 使用运动学计算
     let initial_velocity = Value::<MetersPerSecond>::new(5.0);
     let time_of_travel = Value::<Seconds>::new(4.0);
@@ -5603,10 +5603,10 @@ fn main() {
         acceleration,
         time_of_travel
     );
-    
+
     println!("Distance traveled: {} m", distance_traveled.get());
     println!("Distance in km: {} km", distance_traveled.as_kilometers());
-    
+
     // 以下会导致编译错误，因为单位不兼容:
     // let invalid = distance + time; // 错误：不能添加不同单位
     // let invalid_velocity: Value<MetersPerSecond> = distance; // 错误：类型不匹配
@@ -5637,13 +5637,13 @@ impl<T> NonEmptyVec<T> {
     fn new(first: T) -> Self {
         let mut data = Vec::new();
         data.push(first);
-        
+
         NonEmptyVec {
             data,
             _proof: Proof(PhantomData),
         }
     }
-    
+
     // 从已存在的向量创建
     fn from_vec(vec: Vec<T>) -> Option<Self> {
         if vec.is_empty() {
@@ -5655,18 +5655,18 @@ impl<T> NonEmptyVec<T> {
             })
         }
     }
-    
+
     // 安全获取第一个元素
     fn first(&self) -> &T {
         // 安全: 类型系统保证向量非空
         &self.data[0]
     }
-    
+
     // 添加元素
     fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     // 安全弹出元素
     fn pop(&mut self) -> Option<T> {
         if self.data.len() > 1 {
@@ -5676,12 +5676,12 @@ impl<T> NonEmptyVec<T> {
             None
         }
     }
-    
+
     // 获取长度
     fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     // 迭代元素
     fn iter(&self) -> impl Iterator<Item = &T> {
         self.data.iter()
@@ -5706,34 +5706,34 @@ impl<T: Ord> SortedVec<T> {
             _proof: Proof(PhantomData),
         }
     }
-    
+
     // 从任意向量创建，强制排序
     fn from_vec(mut vec: Vec<T>) -> Self {
         vec.sort();
-        
+
         SortedVec {
             data: vec,
             _proof: Proof(PhantomData),
         }
     }
-    
+
     // 安全插入元素保持排序
     fn insert(&mut self, item: T) {
         // 使用二分查找找到合适的插入位置
         let pos = self.data.binary_search(&item).unwrap_or_else(|e| e);
         self.data.insert(pos, item);
     }
-    
+
     // 高效二分查找
     fn contains(&self, item: &T) -> bool {
         self.data.binary_search(item).is_ok()
     }
-    
+
     // 高效区间查询
     fn range(&self, start: &T, end: &T) -> impl Iterator<Item = &T> {
         let start_pos = self.data.binary_search(start).unwrap_or_else(|e| e);
         let end_pos = self.data.binary_search(end).unwrap_or_else(|e| e);
-        
+
         self.data[start_pos..end_pos].iter()
     }
 }
@@ -5744,30 +5744,30 @@ fn main() {
     let mut non_empty = NonEmptyVec::new(10);
     non_empty.push(20);
     non_empty.push(30);
-    
+
     println!("First element: {}", non_empty.first());
-    
+
     for item in non_empty.iter() {
         println!("Item: {}", item);
     }
-    
+
     // 安全弹出
     while let Some(item) = non_empty.pop() {
         println!("Popped: {}", item);
     }
-    
+
     // 仍然可以安全访问第一个元素
     println!("First element still exists: {}", non_empty.first());
-    
+
     // 使用已排序向量
     let mut sorted = SortedVec::from_vec(vec![5, 2, 8, 1, 9]);
-    
+
     sorted.insert(3);
     sorted.insert(7);
-    
+
     println!("Contains 3: {}", sorted.contains(&3));
     println!("Contains 6: {}", sorted.contains(&6));
-    
+
     println!("Elements between 2 and 8:");
     for item in sorted.range(&2, &8) {
         println!("  {}", item);
@@ -5863,13 +5863,13 @@ mod debug {
     pub fn log_state(state: &str) {
         println!("当前状态: {}", state);
     }
-    
+
     pub fn dump_objects(objects: &[impl std::fmt::Debug]) {
         for (i, obj) in objects.iter().enumerate() {
             println!("对象[{}]: {:?}", i, obj);
         }
     }
-    
+
     pub fn trace_call(function: &str, args: &[String]) {
         println!("调用函数: {} 参数: {:?}", function, args);
     }
@@ -5890,12 +5890,12 @@ mod ui {
         // 复杂仪表板渲染
         println!("渲染复杂仪表板...");
     }
-    
+
     pub fn render_analytics() {
         // 分析图表
         println!("渲染分析图表...");
     }
-    
+
     pub fn render_settings() {
         // 高级设置页面
         println!("渲染高级设置...");
@@ -5908,7 +5908,7 @@ mod ui {
         // 基本仪表板
         println!("渲染基本仪表板...");
     }
-    
+
     // 不提供分析和高级设置
 }
 
@@ -5916,11 +5916,11 @@ fn main() {
     // 使用特性条件逻辑
     let valid = validate_input("test");
     println!("输入有效: {}", valid);
-    
+
     // 调试日志，在release构建中为空操作
     debug::log_state("初始化");
     debug::trace_call("main", &["参数1".to_string(), "参数2".to_string()]);
-    
+
     // UI渲染，根据特性提供不同级别的复杂性
     ui::render_dashboard();
 }
@@ -5977,7 +5977,7 @@ fn platform_specific_operation() {
 // 合并类似代码以减少大小
 fn process_data(data: &[u8], mode: u8) -> Vec<u8> {
     let mut result = Vec::with_capacity(data.len());
-    
+
     // 共享的处理逻辑
     for &byte in data {
         let processed = match mode {
@@ -5987,10 +5987,10 @@ fn process_data(data: &[u8], mode: u8) -> Vec<u8> {
             3 => byte.wrapping_mul(2),
             _ => byte ^ 0xFF,
         };
-        
+
         result.push(processed);
     }
-    
+
     result
 }
 
@@ -6043,18 +6043,18 @@ struct Obstacle {
 pub fn initialize_game(canvas_id: &str) -> Result<(), JsValue> {
     let window = web_sys::window().unwrap();
     let document = window.document().unwrap();
-    
+
     // 获取画布元素
     let canvas = document.get_element_by_id(canvas_id)
         .unwrap()
         .dyn_into::<HtmlCanvasElement>()?;
-    
+
     // 获取2D渲染上下文
     let context = canvas
         .get_context("2d")?
         .unwrap()
         .dyn_into::<CanvasRenderingContext2d>()?;
-    
+
     // 创建游戏状态
     let game_state = Rc::new(RefCell::new(GameState {
         canvas_width: canvas.width() as f64,
@@ -6066,13 +6066,13 @@ pub fn initialize_game(canvas_id: &str) -> Result<(), JsValue> {
         score: 0,
         game_over: false,
     }));
-    
+
     // 设置键盘事件监听器
     setup_keyboard_listeners(&window, Rc::clone(&game_state))?;
-    
+
     // 开始游戏循环
     start_game_loop(Rc::clone(&game_state), context, window)?;
-    
+
     Ok(())
 }
 
@@ -6080,11 +6080,11 @@ pub fn initialize_game(canvas_id: &str) -> Result<(), JsValue> {
 fn setup_keyboard_listeners(window: &Window, game_state: Rc<RefCell<GameState>>) -> Result<(), JsValue> {
     let keydown_callback = Closure::wrap(Box::new(move |event: web_sys::KeyboardEvent| {
         let mut state = game_state.borrow_mut();
-        
+
         if state.game_over {
             return;
         }
-        
+
         match event.key().as_str() {
             "ArrowUp" | "w" => {
                 state.player_y = (state.player_y - state.player_speed).max(0.0);
@@ -6101,14 +6101,14 @@ fn setup_keyboard_listeners(window: &Window, game_state: Rc<RefCell<GameState>>)
             _ => {},
         }
     }) as Box<dyn FnMut(_)>);
-    
+
     window.add_event_listener_with_callback(
         "keydown",
         keydown_callback.as_ref().unchecked_ref(),
     )?;
-    
+
     keydown_callback.forget();
-    
+
     Ok(())
 }
 
@@ -6121,11 +6121,11 @@ fn start_game_loop(
     // 周期性添加障碍物
     let obstacle_generator = Closure::wrap(Box::new(move || {
         let mut state = game_state.borrow_mut();
-        
+
         if state.game_over {
             return;
         }
-        
+
         // 创建新障碍物
         let obstacle = Obstacle {
             x: state.canvas_width,
@@ -6134,39 +6134,39 @@ fn start_game_loop(
             height: 50.0,
             speed: 2.0 + (js_sys::Math::random() * 3.0),
         };
-        
+
         state.obstacles.push(obstacle);
-        
+
         // 增加难度
         state.score += 1;
-        
+
     }) as Box<dyn FnMut()>);
-    
+
     // 每1.5秒生成一个新障碍物
     window.set_interval_with_callback_and_timeout_and_arguments_0(
         obstacle_generator.as_ref().unchecked_ref(),
         1500,
     )?;
-    
+
     obstacle_generator.forget();
-    
+
     // 主游戏循环
     let f = Rc::new(RefCell::new(None));
     let g = Rc::clone(&f);
-    
+
     *g.borrow_mut() = Some(Closure::wrap(Box::new(move || {
         // 更新游戏状态
         update_game(&game_state);
-        
+
         // 渲染游戏
         render_game(&context, &game_state);
-        
+
         // 请求下一帧
         request_animation_frame(window.clone(), f.borrow().as_ref().unwrap());
     }) as Box<dyn FnMut()>));
-    
+
     request_animation_frame(window, g.borrow().as_ref().unwrap());
-    
+
     Ok(())
 }
 
@@ -6180,19 +6180,19 @@ fn request_animation_frame(window: Window, f: &Closure<dyn FnMut()>) {
 // 更新游戏状态
 fn update_game(game_state: &Rc<RefCell<GameState>>) {
     let mut state = game_state.borrow_mut();
-    
+
     if state.game_over {
         return;
     }
-    
+
     // 更新障碍物位置
     for obstacle in &mut state.obstacles {
         obstacle.x -= obstacle.speed;
     }
-    
+
     // 移除超出屏幕的障碍物
     state.obstacles.retain(|o| o.x + o.width > 0.0);
-    
+
     // 检测碰撞
     for obstacle in &state.obstacles {
         if state.player_x < obstacle.x + obstacle.width &&
@@ -6208,47 +6208,47 @@ fn update_game(game_state: &Rc<RefCell<GameState>>) {
 // 渲染游戏
 fn render_game(context: &CanvasRenderingContext2d, game_state: &Rc<RefCell<GameState>>) {
     let state = game_state.borrow();
-    
+
     // 清空画布
     context.clear_rect(0.0, 0.0, state.canvas_width, state.canvas_height);
-    
+
     // 绘制玩家
     context.set_fill_style(&JsValue::from_str("blue"));
     context.fill_rect(state.player_x, state.player_y, 30.0, 30.0);
-    
+
     // 绘制障碍物
     context.set_fill_style(&JsValue::from_str("red"));
     for obstacle in &state.obstacles {
         context.fill_rect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
     }
-    
+
     // 绘制分数
     context.set_fill_style(&JsValue::from_str("black"));
     context.set_font("20px Arial");
     context.fill_text(&format!("分数: {}", state.score), 10.0, 30.0).unwrap();
-    
+
     // 如果游戏结束，显示消息
     if state.game_over {
         context.set_fill_style(&JsValue::from_str("rgba(0, 0, 0, 0.7)"));
         context.fill_rect(0.0, 0.0, state.canvas_width, state.canvas_height);
-        
+
         context.set_fill_style(&JsValue::from_str("white"));
         context.set_font("36px Arial");
         context.set_text_align("center");
-        
+
         context.fill_text(
             "游戏结束",
             state.canvas_width / 2.0,
             state.canvas_height / 2.0 - 20.0,
         ).unwrap();
-        
+
         context.set_font("24px Arial");
         context.fill_text(
             &format!("最终分数: {}", state.score),
             state.canvas_width / 2.0,
             state.canvas_height / 2.0 + 20.0,
         ).unwrap();
-        
+
         context.set_font("18px Arial");
         context.fill_text(
             "刷新页面重新开始",
@@ -6318,7 +6318,7 @@ struct TaskApp {
 impl Component for TaskApp {
     type Message = Msg;
     type Properties = ();
-    
+
     fn create(_: Self::Properties, _: ComponentLink<Self>) -> Self {
         TaskApp {
             tasks: vec![
@@ -6338,7 +6338,7 @@ impl Component for TaskApp {
             input_value: String::new(),
         }
     }
-    
+
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
             Msg::AddTask => {
@@ -6392,11 +6392,11 @@ impl Component for TaskApp {
             },
         }
     }
-    
+
     fn change(&mut self, _: Self::Properties) -> ShouldRender {
         false
     }
-    
+
     fn view(&self) -> Html {
         let filtered_tasks: Vec<&Task> = self.tasks
             .iter()
@@ -6406,18 +6406,18 @@ impl Component for TaskApp {
                 FilterState::Completed => matches!(task.status, TaskStatus::Completed),
             })
             .collect();
-        
+
         let active_count = self.tasks
             .iter()
             .filter(|task| matches!(task.status, TaskStatus::Active))
             .count();
-        
+
         html! {
             <div class="todo-app">
                 <h1>{"任务管理器"}</h1>
-                
+
                 <div class="add-task">
-                    <input 
+                    <input
                         type="text"
                         placeholder="添加新任务..."
                         value=self.input_value.clone()
@@ -6428,40 +6428,40 @@ impl Component for TaskApp {
                     />
                     <button onclick=self.link.callback(|_| Msg::AddTask)>{"添加"}</button>
                 </div>
-                
+
                 <ul class="task-list">
                     { for filtered_tasks.iter().map(|task| self.view_task(task)) }
                 </ul>
-                
+
                 <div class="task-filters">
                     <span class="task-count">
                         {format!("{} 个任务待完成", active_count)}
                     </span>
-                    
+
                     <div class="filters">
-                        <button 
+                        <button
                             class=if self.filter == FilterState::All { "selected" } else { "" }
                             onclick=self.link.callback(|_| Msg::FilterAll)
                         >
                             {"全部"}
                         </button>
-                        
-                        <button 
+
+                        <button
                             class=if self.filter == FilterState::Active { "selected" } else { "" }
                             onclick=self.link.callback(|_| Msg::FilterActive)
                         >
                             {"待完成"}
                         </button>
-                        
-                        <button 
+
+                        <button
                             class=if self.filter == FilterState::Completed { "selected" } else { "" }
                             onclick=self.link.callback(|_| Msg::FilterCompleted)
                         >
                             {"已完成"}
                         </button>
                     </div>
-                    
-                    <button 
+
+                    <button
                         class="clear-completed"
                         onclick=self.link.callback(|_| Msg::ClearCompleted)
                     >
@@ -6477,24 +6477,24 @@ impl TaskApp {
     // 渲染单个任务项
     fn view_task(&self, task: &Task) -> Html {
         let task_id = task.id;
-        
+
         html! {
             <li>
                 <div class="task-item">
-                    <input 
+                    <input
                         type="checkbox"
                         checked=matches!(task.status, TaskStatus::Completed)
                         onclick=self.link.callback(move |_| Msg::ToggleTask(task_id))
                     />
-                    
+
                     <span class=match task.status {
                         TaskStatus::Completed => "completed",
                         TaskStatus::Active => "",
                     }>
                         {&task.title}
                     </span>
-                    
-                    <button 
+
+                    <button
                         class="delete"
                         onclick=self.link.callback(move |_| Msg::DeleteTask(task_id))
                     >
@@ -6592,14 +6592,14 @@ pub fn init(
         owner: info.sender.to_string(),
         total_supply: msg.total_supply,
     };
-    
+
     // 存储状态
     deps.storage.set(STATE_KEY, &to_binary(&state)?);
-    
+
     // 将所有代币分配给创建者
     let mut balances = PrefixedStorage::new(deps.storage, BALANCES_KEY);
     balances.set(info.sender.as_bytes(), &to_binary(&msg.total_supply)?);
-    
+
     Ok(Response::new()
         .add_attribute("action", "init")
         .add_attribute("owner", info.sender)
@@ -6634,19 +6634,19 @@ fn transfer(
         }
         None => Uint128::zero(),
     };
-    
+
     // 检查余额是否足够
     if sender_balance < amount {
         return Err(StdError::generic_err("余额不足"));
     }
-    
+
     // 更新发送者余额
     let new_sender_balance = sender_balance - amount;
     balances.set(
         info.sender.as_bytes(),
         &to_binary(&new_sender_balance)?,
     );
-    
+
     // 获取接收者的余额
     let recipient_addr = deps.api.addr_validate(&recipient)?;
     let recipient_balance: Uint128 = match balances.get(recipient_addr.as_bytes()) {
@@ -6656,14 +6656,14 @@ fn transfer(
         }
         None => Uint128::zero(),
     };
-    
+
     // 更新接收者余额
     let new_recipient_balance = recipient_balance + amount;
     balances.set(
         recipient_addr.as_bytes(),
         &to_binary(&new_recipient_balance)?,
     );
-    
+
     Ok(Response::new()
         .add_attribute("action",
 "transfer")
@@ -6684,7 +6684,7 @@ pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
 fn query_balance(deps: Deps, address: String) -> StdResult<Binary> {
     let addr = deps.api.addr_validate(&address)?;
     let balances = ReadonlyPrefixedStorage::new(deps.storage, BALANCES_KEY);
-    
+
     let balance: Uint128 = match balances.get(addr.as_bytes()) {
         Some(data) => {
             let binary = Binary::from(data);
@@ -6692,7 +6692,7 @@ fn query_balance(deps: Deps, address: String) -> StdResult<Binary> {
         }
         None => Uint128::zero(),
     };
-    
+
     let response = BalanceResponse { balance };
     to_binary(&response)
 }
@@ -6702,12 +6702,12 @@ fn query_total_supply(deps: Deps) -> StdResult<Binary> {
     let state_data = deps.storage.get(STATE_KEY).ok_or_else(|| {
         StdError::generic_err("未找到状态")
     })?;
-    
+
     let state: State = from_binary(&Binary::from(state_data))?;
     let response = TotalSupplyResponse {
         total_supply: state.total_supply,
     };
-    
+
     to_binary(&response)
 }
 
@@ -6716,81 +6716,81 @@ fn query_total_supply(deps: Deps) -> StdResult<Binary> {
 mod tests {
     use super::*;
     use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
-    
+
     #[test]
     fn proper_initialization() {
         let mut deps = mock_dependencies(&[]);
-        
+
         let msg = InitMsg {
             total_supply: Uint128::new(1000000),
         };
         let info = mock_info("creator", &[]);
-        
+
         // 初始化合约
         let res = init(deps.as_mut(), mock_env(), info, msg).unwrap();
         assert_eq!(0, res.messages.len());
-        
+
         // 确认总供应量
         let res = query(deps.as_ref(), mock_env(), QueryMsg::GetTotalSupply {}).unwrap();
         let value: TotalSupplyResponse = from_binary(&res).unwrap();
         assert_eq!(Uint128::new(1000000), value.total_supply);
-        
+
         // 确认创建者余额
         let res = query(deps.as_ref(), mock_env(), QueryMsg::GetBalance { address: "creator".to_string() }).unwrap();
         let value: BalanceResponse = from_binary(&res).unwrap();
         assert_eq!(Uint128::new(1000000), value.balance);
     }
-    
+
     #[test]
     fn test_transfer() {
         let mut deps = mock_dependencies(&[]);
-        
+
         // 初始化合约
         let msg = InitMsg {
             total_supply: Uint128::new(1000000),
         };
         let info = mock_info("creator", &[]);
         init(deps.as_mut(), mock_env(), info.clone(), msg).unwrap();
-        
+
         // 转账
         let msg = HandleMsg::Transfer {
             recipient: "recipient".to_string(),
             amount: Uint128::new(1000),
         };
-        
+
         let res = handle(deps.as_mut(), mock_env(), info, msg).unwrap();
         assert_eq!(0, res.messages.len());
-        
+
         // 确认创建者余额
         let res = query(deps.as_ref(), mock_env(), QueryMsg::GetBalance { address: "creator".to_string() }).unwrap();
         let value: BalanceResponse = from_binary(&res).unwrap();
         assert_eq!(Uint128::new(999000), value.balance);
-        
+
         // 确认接收者余额
         let res = query(deps.as_ref(), mock_env(), QueryMsg::GetBalance { address: "recipient".to_string() }).unwrap();
         let value: BalanceResponse = from_binary(&res).unwrap();
         assert_eq!(Uint128::new(1000), value.balance);
     }
-    
+
     #[test]
     fn test_transfer_insufficient_funds() {
         let mut deps = mock_dependencies(&[]);
-        
+
         // 初始化合约
         let msg = InitMsg {
             total_supply: Uint128::new(1000000),
         };
         let info = mock_info("creator", &[]);
         init(deps.as_mut(), mock_env(), info.clone(), msg).unwrap();
-        
+
         // 尝试转账超过余额的金额
         let msg = HandleMsg::Transfer {
             recipient: "recipient".to_string(),
             amount: Uint128::new(1000001),
         };
-        
+
         let res = handle(deps.as_mut(), mock_env(), info, msg);
-        
+
         // 应该返回错误
         match res {
             Err(StdError::GenericErr { msg, .. }) => assert_eq!(msg, "余额不足"),
@@ -6831,33 +6831,33 @@ impl Runtime {
     fn new() -> Self {
         Runtime { memory: None }
     }
-    
+
     fn set_memory(&mut self, memory: MemoryRef) {
         self.memory = Some(memory);
     }
-    
+
     // 读取内存中的字符串
     fn read_string(&self, ptr: u32, len: u32) -> Result<String, WasmiError> {
         let memory = self.memory.as_ref().ok_or_else(|| {
             WasmiError::Instantiation("Memory not set".to_string())
         })?;
-        
+
         let mut buffer = vec![0; len as usize];
         memory.get_into(ptr, &mut buffer)?;
-        
+
         String::from_utf8(buffer)
             .map_err(|_| WasmiError::Instantiation("Invalid UTF-8 string".to_string()))
     }
-    
+
     // 写入字符串到内存
     fn write_string(&self, ptr: u32, string: &str) -> Result<(), WasmiError> {
         let memory = self.memory.as_ref().ok_or_else(|| {
             WasmiError::Instantiation("Memory not set".to_string())
         })?;
-        
+
         let buffer = string.as_bytes();
         memory.set(ptr, buffer)?;
-        
+
         Ok(())
     }
 }
@@ -6893,10 +6893,10 @@ impl ModuleImportResolver for Runtime {
                 )))
             }
         };
-        
+
         Ok(func_ref)
     }
-    
+
     fn resolve_memory(
         &self,
         field_name: &str,
@@ -6927,39 +6927,39 @@ impl Externals for Runtime {
                 // print(ptr, len) - 输出字符串
                 let ptr: u32 = args.nth(0);
                 let len: u32 = args.nth(1);
-                
+
                 if let Ok(string) = self.read_string(ptr, len) {
                     println!("{}", string);
                 } else {
                     println!("[错误的字符串]");
                 }
-                
+
                 Ok(None)
             },
             READ_FUNC_INDEX => {
                 // read(ptr, max_len) -> bytes_read - 从标准输入读取
                 let ptr: u32 = args.nth(0);
                 let max_len: u32 = args.nth(1);
-                
+
                 let memory = match self.memory.as_ref() {
                     Some(memory) => memory,
                     None => return Err(Trap::new(TrapKind::Unreachable)),
                 };
-                
+
                 // 读取标准输入
                 let mut buffer = vec![0; max_len as usize];
                 let bytes_read = io::stdin().read(&mut buffer).unwrap_or(0);
-                
+
                 // 写入内存
                 memory.set(ptr, &buffer[..bytes_read])?;
-                
+
                 Ok(Some(RuntimeValue::I32(bytes_read as i32)))
             },
             WRITE_FUNC_INDEX => {
                 // write(ptr, len) -> bytes_written - 写入到标准输出
                 let ptr: u32 = args.nth(0);
                 let len: u32 = args.nth(1);
-                
+
                 let bytes_written = match self.read_string(ptr, len) {
                     Ok(string) => {
                         print!("{}", string);
@@ -6967,7 +6967,7 @@ impl Externals for Runtime {
                     },
                     Err(_) => 0,
                 };
-                
+
                 Ok(Some(RuntimeValue::I32(bytes_written as i32)))
             },
             RANDOM_FUNC_INDEX => {
@@ -6975,7 +6975,7 @@ impl Externals for Runtime {
                 use rand::Rng;
                 let mut rng = rand::thread_rng();
                 let random_value = rng.gen::<i32>();
-                
+
                 Ok(Some(RuntimeValue::I32(random_value)))
             },
             _ => Err(Trap::new(TrapKind::Unreachable)),
@@ -6991,27 +6991,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("用法: {} <wasm文件> [参数...]", args[0]);
         return Ok(());
     }
-    
+
     let filename = &args[1];
     println!("加载模块: {}", filename);
-    
+
     let mut file = File::open(filename)?;
     let mut wasm_buffer = Vec::new();
     file.read_to_end(&mut wasm_buffer)?;
-    
+
     // 解析模块
     let module = wasmi::Module::from_buffer(&wasm_buffer)?;
-    
+
     // 创建运行环境
     let mut runtime = Runtime::new();
-    
+
     // 创建导入构建器
     let mut imports = ImportsBuilder::new();
     imports.push_resolver("env", &runtime);
-    
+
     // 实例化模块
     let instance = ModuleInstance::new(&module, &imports)?.assert_no_start();
-    
+
     // 获取导出的内存
     if let Some(memory) = instance.export_by_name("memory") {
         if let Some(memory) = memory.as_memory() {
@@ -7024,7 +7024,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("模块未导出memory");
         return Ok(());
     }
-    
+
     // 查找入口函数
     let entry_func = if instance.export_by_name("_start").is_some() {
         "_start"
@@ -7034,31 +7034,31 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("找不到入口函数(_start或main)");
         return Ok(());
     };
-    
+
     // 传递命令行参数
     if entry_func == "main" && args.len() > 2 {
         // 组装参数字符串
         let args_str = args[2..].join(" ");
-        
+
         // 分配内存并写入参数
         let malloc = instance.export_by_name("malloc")
             .and_then(|e| e.as_func())
             .ok_or_else(|| "找不到malloc函数")?;
-        
+
         let buffer_size = args_str.len() as i32;
         let buffer_ptr = malloc.invoke(&[RuntimeValue::I32(buffer_size)])?.unwrap();
-        
+
         // 将参数写入分配的内存
         let buffer_ptr_u32 = buffer_ptr.try_into::<u32>()?;
         runtime.write_string(buffer_ptr_u32, &args_str)?;
-        
+
         // 调用入口函数，传递参数指针和长度
         instance.invoke_export(
             entry_func,
             &[buffer_ptr, RuntimeValue::I32(buffer_size)],
             &mut runtime,
         )?;
-        
+
         // 释放分配的内存
         if let Some(free) = instance.export_by_name("free").and_then(|e| e.as_func()) {
             free.invoke(&[buffer_ptr], &mut runtime)?;
@@ -7067,9 +7067,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // 调用无参数入口函数
         instance.invoke_export(entry_func, &[], &mut runtime)?;
     }
-    
+
     println!("执行完成");
-    
+
     Ok(())
 }
 ```
@@ -7091,7 +7091,7 @@ pub fn optimized_function() {
     // 使用SIMD和高效内存操作的实现
 }
 
-// 2. 增量编译和缓存支持 
+// 2. 增量编译和缓存支持
 
 // 使用条件编译分开减少增量编译时间
 #[cfg(feature = "ui")]
@@ -7202,7 +7202,7 @@ impl SharedBuffer {
             data: vec![0; size],
         }
     }
-    
+
     // 直接修改JavaScript可见的数据
     pub fn fill(&mut self, value: u8) {
         for byte in &mut self.data {
@@ -7220,7 +7220,7 @@ pub async fn fetch_and_process(url: String) -> Result<JsValue, JsValue> {
     // 无运行时开销
     let response = wasm_async::fetch(&url).await?;
     let data = response.array_buffer().await?;
-    
+
     // 处理数据...
     Ok(process_data(data))
 }
@@ -7245,15 +7245,15 @@ impl Calculator {
     fn add(&self, a: f64, b: f64) -> f64 {
         a + b
     }
-    
+
     fn subtract(&self, a: f64, b: f64) -> f64 {
         a - b
     }
-    
+
     fn multiply(&self, a: f64, b: f64) -> f64 {
         a * b
     }
-    
+
     fn divide(&self, a: f64, b: f64) -> Result<f64, String> {
         if b == 0.0 {
             Err("除以零错误".to_string())
@@ -7277,7 +7277,7 @@ WebAssembly组件模型的类型级保证研究方向：
 #[wit_bindgen::interface]
 pub trait DataProcessorInterface {
     type Error;
-    
+
     fn process(&self, data: Vec<u8>) -> Result<Vec<u8>, Self::Error>;
     fn get_processor_name(&self) -> String;
     fn supports_format(&self, format: Format) -> bool;
@@ -7303,17 +7303,17 @@ pub struct JsonProcessor {
 #[wit_bindgen::implement]
 impl DataProcessorInterface for JsonProcessor {
     type Error = String;
-    
+
     fn process(&self, data: Vec<u8>) -> Result<Vec<u8>, Self::Error> {
         // JSON处理实现
         // ...
         Ok(processed_data)
     }
-    
+
     fn get_processor_name(&self) -> String {
         "JSON处理器".to_string()
     }
-    
+
     fn supports_format(&self, format: Format) -> bool {
         matches!(format, Format::Json)
     }
@@ -7329,7 +7329,7 @@ pub trait Service {
     // 后置条件: 输出也必须是有效的
     #[ensures(is_valid_output(return_value))]
     fn process(&self, input: Vec<u8>) -> Vec<u8>;
-    
+
     // 合约辅助函数
     fn is_valid_input(input: &[u8]) -> bool;
     fn is_valid_output(output: &[u8]) -> bool;
@@ -7351,14 +7351,14 @@ impl DatabaseResource for DatabaseConnection {
         // ...
         Ok(Self { /* ... */ })
     }
-    
+
     // 查询方法
     fn query(&self, sql: String) -> Result<QueryResult, QueryError> {
         // 执行查询
         // ...
         Ok(result)
     }
-    
+
     // 析构函数 - 自动调用
     fn close(self) {
         // 清理连接资源
@@ -7375,7 +7375,7 @@ pub trait ConnectionStateMachine {
     type Disconnected;
     type Connected;
     type Failed;
-    
+
     // 状态转换
     fn connect(self: Disconnected) -> Result<Connected, Failed>;
     fn send_data(self: Connected, data: Vec<u8>) -> Connected;

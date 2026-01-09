@@ -3,63 +3,65 @@
 
 ## 📊 目录
 
-- [1. Generic Implementation Fundamentals](#1-generic-implementation-fundamentals)
-  - [1.1 Generic Implementation Definition](#11-generic-implementation-definition)
-    - [Definition 1.1: Generic Implementation](#definition-11-generic-implementation)
-    - [Example 1.1: Basic Generic Implementation](#example-11-basic-generic-implementation)
-  - [1.2 Implementation Scope](#12-implementation-scope)
-    - [Definition 1.2: Implementation Scope](#definition-12-implementation-scope)
-    - [Example 1.2: Implementation Scope](#example-12-implementation-scope)
-- [2. Blanket Implementations](#2-blanket-implementations)
-  - [2.1 Blanket Implementation Definition](#21-blanket-implementation-definition)
-    - [Definition 2.1: Blanket Implementation](#definition-21-blanket-implementation)
-    - [Example 2.1: Basic Blanket Implementation](#example-21-basic-blanket-implementation)
-  - [2.2 Blanket Implementation Patterns](#22-blanket-implementation-patterns)
-    - [Definition 2.2: Blanket Implementation Patterns](#definition-22-blanket-implementation-patterns)
-    - [Example 2.2: Advanced Blanket Patterns](#example-22-advanced-blanket-patterns)
-- [3. Conditional Implementations](#3-conditional-implementations)
-  - [3.1 Conditional Implementation Definition](#31-conditional-implementation-definition)
-    - [Definition 3.1: Conditional Implementation](#definition-31-conditional-implementation)
-    - [Example 3.1: Conditional Clone Implementation](#example-31-conditional-clone-implementation)
-  - [3.2 Conditional Implementation Patterns](#32-conditional-implementation-patterns)
-    - [Definition 3.2: Conditional Implementation Patterns](#definition-32-conditional-implementation-patterns)
-    - [Example 3.2: Advanced Conditional Patterns](#example-32-advanced-conditional-patterns)
-- [4. Implementation Specialization](#4-implementation-specialization)
-  - [4.1 Specialization Definition](#41-specialization-definition)
-    - [Definition 4.1: Implementation Specialization](#definition-41-implementation-specialization)
-    - [Example 4.1: Basic Specialization](#example-41-basic-specialization)
-  - [4.2 Specialization Rules](#42-specialization-rules)
-    - [Definition 4.2: Specialization Rules](#definition-42-specialization-rules)
-    - [Example 4.2: Specialization Rules](#example-42-specialization-rules)
-- [5. Generic Implementation Strategies](#5-generic-implementation-strategies)
-  - [5.1 Strategy Patterns](#51-strategy-patterns)
-    - [Definition 5.1: Implementation Strategy](#definition-51-implementation-strategy)
-    - [Example 5.1: Strategy Examples](#example-51-strategy-examples)
-  - [5.2 Implementation Composition](#52-implementation-composition)
-    - [Definition 5.2: Implementation Composition](#definition-52-implementation-composition)
-    - [Example 5.2: Implementation Composition](#example-52-implementation-composition)
-- [6. Advanced Implementation Patterns](#6-advanced-implementation-patterns)
-  - [6.1 Higher-Order Implementations](#61-higher-order-implementations)
-    - [Definition 6.1: Higher-Order Implementation](#definition-61-higher-order-implementation)
-    - [Example 6.1: Higher-Order Patterns](#example-61-higher-order-patterns)
-  - [6.2 Phantom Type Implementations](#62-phantom-type-implementations)
-    - [Definition 6.2: Phantom Type Implementation](#definition-62-phantom-type-implementation)
-    - [Example 6.2: Phantom Type Patterns](#example-62-phantom-type-patterns)
-- [7. Implementation Coherence](#7-implementation-coherence)
-  - [7.1 Coherence Rules](#71-coherence-rules)
-    - [Definition 7.1: Coherence Rules](#definition-71-coherence-rules)
-    - [Example 7.1: Coherence Examples](#example-71-coherence-examples)
-  - [7.2 Coherence Checking](#72-coherence-checking)
-    - [Definition 7.2: Coherence Checking](#definition-72-coherence-checking)
-    - [Example 7.2: Coherence Checking Implementation](#example-72-coherence-checking-implementation)
-- [8. Formal Proofs](#8-formal-proofs)
-  - [8.1 Implementation Soundness](#81-implementation-soundness)
-    - [Theorem 8.1: Implementation Soundness](#theorem-81-implementation-soundness)
-  - [8.2 Specialization Correctness](#82-specialization-correctness)
-    - [Theorem 8.2: Specialization Correctness](#theorem-82-specialization-correctness)
-  - [8.3 Coherence Completeness](#83-coherence-completeness)
-    - [Theorem 8.3: Coherence Completeness](#theorem-83-coherence-completeness)
-- [9. Summary](#9-summary)
+- [Generic Implementations and Specialization](#generic-implementations-and-specialization)
+  - [📊 目录](#-目录)
+  - [1. Generic Implementation Fundamentals](#1-generic-implementation-fundamentals)
+    - [1.1 Generic Implementation Definition](#11-generic-implementation-definition)
+      - [Definition 1.1: Generic Implementation](#definition-11-generic-implementation)
+      - [Example 1.1: Basic Generic Implementation](#example-11-basic-generic-implementation)
+    - [1.2 Implementation Scope](#12-implementation-scope)
+      - [Definition 1.2: Implementation Scope](#definition-12-implementation-scope)
+      - [Example 1.2: Implementation Scope](#example-12-implementation-scope)
+  - [2. Blanket Implementations](#2-blanket-implementations)
+    - [2.1 Blanket Implementation Definition](#21-blanket-implementation-definition)
+      - [Definition 2.1: Blanket Implementation](#definition-21-blanket-implementation)
+      - [Example 2.1: Basic Blanket Implementation](#example-21-basic-blanket-implementation)
+    - [2.2 Blanket Implementation Patterns](#22-blanket-implementation-patterns)
+      - [Definition 2.2: Blanket Implementation Patterns](#definition-22-blanket-implementation-patterns)
+      - [Example 2.2: Advanced Blanket Patterns](#example-22-advanced-blanket-patterns)
+  - [3. Conditional Implementations](#3-conditional-implementations)
+    - [3.1 Conditional Implementation Definition](#31-conditional-implementation-definition)
+      - [Definition 3.1: Conditional Implementation](#definition-31-conditional-implementation)
+      - [Example 3.1: Conditional Clone Implementation](#example-31-conditional-clone-implementation)
+    - [3.2 Conditional Implementation Patterns](#32-conditional-implementation-patterns)
+      - [Definition 3.2: Conditional Implementation Patterns](#definition-32-conditional-implementation-patterns)
+      - [Example 3.2: Advanced Conditional Patterns](#example-32-advanced-conditional-patterns)
+  - [4. Implementation Specialization](#4-implementation-specialization)
+    - [4.1 Specialization Definition](#41-specialization-definition)
+      - [Definition 4.1: Implementation Specialization](#definition-41-implementation-specialization)
+      - [Example 4.1: Basic Specialization](#example-41-basic-specialization)
+    - [4.2 Specialization Rules](#42-specialization-rules)
+      - [Definition 4.2: Specialization Rules](#definition-42-specialization-rules)
+      - [Example 4.2: Specialization Rules](#example-42-specialization-rules)
+  - [5. Generic Implementation Strategies](#5-generic-implementation-strategies)
+    - [5.1 Strategy Patterns](#51-strategy-patterns)
+      - [Definition 5.1: Implementation Strategy](#definition-51-implementation-strategy)
+      - [Example 5.1: Strategy Examples](#example-51-strategy-examples)
+    - [5.2 Implementation Composition](#52-implementation-composition)
+      - [Definition 5.2: Implementation Composition](#definition-52-implementation-composition)
+      - [Example 5.2: Implementation Composition](#example-52-implementation-composition)
+  - [6. Advanced Implementation Patterns](#6-advanced-implementation-patterns)
+    - [6.1 Higher-Order Implementations](#61-higher-order-implementations)
+      - [Definition 6.1: Higher-Order Implementation](#definition-61-higher-order-implementation)
+      - [Example 6.1: Higher-Order Patterns](#example-61-higher-order-patterns)
+    - [6.2 Phantom Type Implementations](#62-phantom-type-implementations)
+      - [Definition 6.2: Phantom Type Implementation](#definition-62-phantom-type-implementation)
+      - [Example 6.2: Phantom Type Patterns](#example-62-phantom-type-patterns)
+  - [7. Implementation Coherence](#7-implementation-coherence)
+    - [7.1 Coherence Rules](#71-coherence-rules)
+      - [Definition 7.1: Coherence Rules](#definition-71-coherence-rules)
+      - [Example 7.1: Coherence Examples](#example-71-coherence-examples)
+    - [7.2 Coherence Checking](#72-coherence-checking)
+      - [Definition 7.2: Coherence Checking](#definition-72-coherence-checking)
+      - [Example 7.2: Coherence Checking Implementation](#example-72-coherence-checking-implementation)
+  - [8. Formal Proofs](#8-formal-proofs)
+    - [8.1 Implementation Soundness](#81-implementation-soundness)
+      - [Theorem 8.1: Implementation Soundness](#theorem-81-implementation-soundness)
+    - [8.2 Specialization Correctness](#82-specialization-correctness)
+      - [Theorem 8.2: Specialization Correctness](#theorem-82-specialization-correctness)
+    - [8.3 Coherence Completeness](#83-coherence-completeness)
+      - [Theorem 8.3: Coherence Completeness](#theorem-83-coherence-completeness)
+  - [9. Summary](#9-summary)
 
 
 ## 1. Generic Implementation Fundamentals
@@ -98,11 +100,11 @@ impl<T> Container<T> {
     fn new() -> Self {
         Container { data: Vec::new() }
     }
-    
+
     fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
@@ -492,7 +494,7 @@ impl<T> BasicContainer for Container<T> {
     fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
@@ -502,7 +504,7 @@ impl<T> AdvancedContainer for Container<T> {
     fn capacity(&self) -> usize {
         self.data.capacity()
     }
-    
+
     fn reserve(&mut self, additional: usize) {
         self.data.reserve(additional);
     }
@@ -543,7 +545,7 @@ where
     fn new(data: Vec<T>, mapper: F) -> Self {
         Mapper { data, mapper }
     }
-    
+
     fn map(self) -> Vec<U> {
         self.data.into_iter().map(self.mapper).collect()
     }
@@ -554,7 +556,7 @@ where
     F: Fn(T) -> U
 {
     type Item = U;
-    
+
     fn next(&mut self) -> Option<U> {
         self.data.pop().map(&self.mapper)
     }
@@ -598,7 +600,7 @@ impl Distance<Meter> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_meters(&self) -> f64 {
         self.value
     }
@@ -611,7 +613,7 @@ impl Distance<Second> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_seconds(&self) -> f64 {
         self.value
     }
@@ -695,7 +697,7 @@ struct CoherenceChecker {
 impl CoherenceChecker {
     fn check_coherence(&self) -> Result<(), Vec<CoherenceError>> {
         let mut errors = Vec::new();
-        
+
         for ((trait_id, type_id), impls) in &self.implementations {
             // Check orphan rule
             if !self.satisfies_orphan_rule(*trait_id, *type_id) {
@@ -704,7 +706,7 @@ impl CoherenceChecker {
                     type_name: self.get_type_name(*type_id),
                 });
             }
-            
+
             // Check for overlaps
             if impls.len() > 1 {
                 for i in 0..impls.len() {
@@ -721,7 +723,7 @@ impl CoherenceChecker {
                 }
             }
         }
-        
+
         if errors.is_empty() {
             Ok(())
         } else {

@@ -221,7 +221,7 @@ fn main() {
 
     let p = Point { x: 1.0, y: 2.0 };
     draw_item(&p); // 静态分发
-    
+
     let drawable_object: &dyn Drawable = &p; // 动态分发 (Trait Object)
     drawable_object.draw();
 }

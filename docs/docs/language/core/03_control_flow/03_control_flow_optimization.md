@@ -103,10 +103,10 @@ $$\text{DeadCodeOptimization} = \{\text{dead\_code\_elimination}, \text{unreacha
 fn loop_invariant_code_motion(cfg: &mut ControlFlowGraph) -> LoopOptimizationResult {
     let loops = detect_loops(cfg);
     let mut moved_instructions = Vec::new();
-    
+
     for loop_info in loops {
         let invariant_instructions = find_loop_invariants(&loop_info, cfg);
-        
+
         for instruction in invariant_instructions {
             if can_move_instruction(&instruction, &loop_info, cfg) {
                 move_instruction_to_preheader(&instruction, &loop_info, cfg);
@@ -114,7 +114,7 @@ fn loop_invariant_code_motion(cfg: &mut ControlFlowGraph) -> LoopOptimizationRes
             }
         }
     }
-    
+
     LoopOptimizationResult { moved_instructions }
 }
 
@@ -122,13 +122,13 @@ fn find_loop_invariants(loop_info: &Loop, cfg: &ControlFlowGraph) -> Vec<Instruc
     let mut invariants = Vec::new();
     let mut changed = true;
     let mut invariant_set = HashSet::new();
-    
+
     while changed {
         changed = false;
-        
+
         for block_id in &loop_info.body {
             let block = cfg.get_block(*block_id);
-            
+
             for instruction in &block.instructions {
                 if !invariant_set.contains(&instruction.id) && is_loop_invariant(instruction, loop_info, cfg) {
                     invariant_set.insert(instruction.id);
@@ -138,7 +138,7 @@ fn find_loop_invariants(loop_info: &Loop, cfg: &ControlFlowGraph) -> Vec<Instruc
             }
         }
     }
-    
+
     invariants
 }
 
@@ -151,7 +151,7 @@ fn is_loop_invariant(instruction: &Instruction, loop_info: &Loop, cfg: &ControlF
         }
         Instruction::Call { function, arguments } => {
             // 检查函数调用是否有副作用
-            !has_side_effects(function) && 
+            !has_side_effects(function) &&
             arguments.iter().all(|arg| is_operand_invariant(arg, loop_info, cfg))
         }
         _ => false,
@@ -166,7 +166,7 @@ fn is_operand_invariant(operand: &Expression, loop_info: &Loop, cfg: &ControlFlo
             !is_variable_defined_in_loop(var, loop_info, cfg)
         }
         Expression::BinaryOp { left, right, .. } => {
-            is_operand_invariant(left, loop_info, cfg) && 
+            is_operand_invariant(left, loop_info, cfg) &&
             is_operand_invariant(right, loop_info, cfg)
         }
         _ => false,
@@ -177,21 +177,21 @@ fn can_move_instruction(instruction: &Instruction, loop_info: &Loop, cfg: &Contr
     // 检查指令是否可以安全移动
     let defs = instruction.get_definitions();
     let uses = instruction.get_uses();
-    
+
     // 检查定义是否在循环外使用
     for def in &defs {
         if is_variable_used_outside_loop(def, loop_info, cfg) {
             return false;
         }
     }
-    
+
     // 检查使用是否在循环外定义
     for use in &uses {
         if is_variable_defined_outside_loop(use, loop_info, cfg) {
             return false;
         }
     }
-    
+
     true
 }
 ```
@@ -204,59 +204,59 @@ fn can_move_instruction(instruction: &Instruction, loop_info: &Loop, cfg: &Contr
 fn loop_unrolling(cfg: &mut ControlFlowGraph, unroll_factor: usize) -> LoopUnrollingResult {
     let loops = detect_loops(cfg);
     let mut unrolled_loops = Vec::new();
-    
+
     for loop_info in loops {
         if can_unroll_loop(&loop_info, cfg) {
             let unrolled_loop = unroll_loop(&loop_info, unroll_factor, cfg);
             unrolled_loops.push(unrolled_loop);
         }
     }
-    
+
     LoopUnrollingResult { unrolled_loops }
 }
 
 fn can_unroll_loop(loop_info: &Loop, cfg: &ControlFlowGraph) -> bool {
     // 检查循环是否可以展开
     let loop_body = &loop_info.body;
-    
+
     // 检查循环体大小
     if loop_body.len() > MAX_LOOP_BODY_SIZE {
         return false;
     }
-    
+
     // 检查循环是否有固定的迭代次数
     if !has_fixed_iteration_count(loop_info, cfg) {
         return false;
     }
-    
+
     // 检查循环体是否包含复杂的控制流
     if has_complex_control_flow(loop_info, cfg) {
         return false;
     }
-    
+
     true
 }
 
 fn unroll_loop(loop_info: &Loop, unroll_factor: usize, cfg: &mut ControlFlowGraph) -> UnrolledLoop {
     let mut unrolled_blocks = Vec::new();
     let original_body = loop_info.body.clone();
-    
+
     // 创建展开后的循环体
     for i in 0..unroll_factor {
         let mut new_blocks = Vec::new();
-        
+
         for block_id in &original_body {
             let original_block = cfg.get_block(*block_id);
             let new_block = create_unrolled_block(original_block, i, cfg);
             new_blocks.push(new_block.id);
         }
-        
+
         unrolled_blocks.push(new_blocks);
     }
-    
+
     // 更新控制流
     update_unrolled_control_flow(&unrolled_blocks, loop_info, cfg);
-    
+
     UnrolledLoop {
         original_loop: loop_info.clone(),
         unrolled_blocks,
@@ -266,12 +266,12 @@ fn unroll_loop(loop_info: &Loop, unroll_factor: usize, cfg: &mut ControlFlowGrap
 
 fn create_unrolled_block(original_block: &BasicBlock, iteration: usize, cfg: &mut ControlFlowGraph) -> BasicBlock {
     let mut new_block = BasicBlock::new();
-    
+
     for instruction in &original_block.instructions {
         let unrolled_instruction = unroll_instruction(instruction, iteration);
         new_block.add_instruction(unrolled_instruction);
     }
-    
+
     cfg.add_basic_block(new_block.clone());
     new_block
 }
@@ -299,7 +299,7 @@ fn unroll_instruction(instruction: &Instruction, iteration: usize) -> Instructio
 fn loop_fusion(cfg: &mut ControlFlowGraph) -> LoopFusionResult {
     let loops = detect_loops(cfg);
     let mut fused_loops = Vec::new();
-    
+
     // 寻找可以融合的循环对
     for i in 0..loops.len() {
         for j in i + 1..loops.len() {
@@ -309,51 +309,51 @@ fn loop_fusion(cfg: &mut ControlFlowGraph) -> LoopFusionResult {
             }
         }
     }
-    
+
     LoopFusionResult { fused_loops }
 }
 
 fn can_fuse_loops(loop1: &Loop, loop2: &Loop, cfg: &ControlFlowGraph) -> bool {
     // 检查循环是否可以融合
-    
+
     // 检查循环是否相邻
     if !are_loops_adjacent(loop1, loop2, cfg) {
         return false;
     }
-    
+
     // 检查循环是否有相同的迭代次数
     if !have_same_iteration_count(loop1, loop2, cfg) {
         return false;
     }
-    
+
     // 检查循环体之间是否有数据依赖
     if has_data_dependency(loop1, loop2, cfg) {
         return false;
     }
-    
+
     // 检查循环体大小是否合适
     if loop1.body.len() + loop2.body.len() > MAX_FUSED_LOOP_SIZE {
         return false;
     }
-    
+
     true
 }
 
 fn fuse_loops(loop1: &Loop, loop2: &Loop, cfg: &mut ControlFlowGraph) -> FusedLoop {
     let mut fused_body = Vec::new();
-    
+
     // 融合循环体
     for block_id in &loop1.body {
         fused_body.push(*block_id);
     }
-    
+
     for block_id in &loop2.body {
         fused_body.push(*block_id);
     }
-    
+
     // 更新控制流
     update_fused_control_flow(loop1, loop2, &fused_body, cfg);
-    
+
     FusedLoop {
         original_loops: vec![loop1.clone(), loop2.clone()],
         fused_body,
@@ -371,7 +371,7 @@ fn fuse_loops(loop1: &Loop, loop2: &Loop, cfg: &mut ControlFlowGraph) -> FusedLo
 fn branch_prediction_optimization(cfg: &mut ControlFlowGraph) -> BranchPredictionResult {
     let predictions = analyze_branch_predictions(cfg);
     let mut optimized_branches = Vec::new();
-    
+
     for block in cfg.get_all_blocks_mut() {
         for instruction in &mut block.instructions {
             if let Instruction::Branch { condition, true_target, false_target } = instruction {
@@ -391,7 +391,7 @@ fn branch_prediction_optimization(cfg: &mut ControlFlowGraph) -> BranchPredictio
                             *condition = negated_condition.clone();
                             *true_target = *false_target;
                             *false_target = *true_target;
-                            
+
                             optimized_branches.push(BranchOptimization::Reorder {
                                 block_id: block.id,
                                 original_condition: condition.clone(),
@@ -406,13 +406,13 @@ fn branch_prediction_optimization(cfg: &mut ControlFlowGraph) -> BranchPredictio
             }
         }
     }
-    
+
     BranchPredictionResult { optimized_branches }
 }
 
 fn analyze_branch_predictions(cfg: &ControlFlowGraph) -> HashMap<(BasicBlockId, BasicBlockId, BasicBlockId), BranchPrediction> {
     let mut predictions = HashMap::new();
-    
+
     for block in cfg.get_all_blocks() {
         for instruction in &block.instructions {
             if let Instruction::Branch { condition, true_target, false_target } = instruction {
@@ -421,7 +421,7 @@ fn analyze_branch_predictions(cfg: &ControlFlowGraph) -> HashMap<(BasicBlockId, 
             }
         }
     }
-    
+
     predictions
 }
 
@@ -452,13 +452,13 @@ fn predict_branch(condition: &Expression) -> BranchPrediction {
 fn branch_elimination(cfg: &mut ControlFlowGraph) -> BranchEliminationResult {
     let mut eliminated_branches = Vec::new();
     let mut changed = true;
-    
+
     while changed {
         changed = false;
-        
+
         for block in cfg.get_all_blocks_mut() {
             let mut new_instructions = Vec::new();
-            
+
             for instruction in &block.instructions {
                 if let Instruction::Branch { condition, true_target, false_target } = instruction {
                     if let Some(constant_value) = evaluate_constant(condition) {
@@ -486,11 +486,11 @@ fn branch_elimination(cfg: &mut ControlFlowGraph) -> BranchEliminationResult {
                     new_instructions.push(instruction.clone());
                 }
             }
-            
+
             block.instructions = new_instructions;
         }
     }
-    
+
     BranchEliminationResult { eliminated_branches }
 }
 ```
@@ -503,24 +503,24 @@ fn branch_elimination(cfg: &mut ControlFlowGraph) -> BranchEliminationResult {
 fn conditional_constant_propagation(cfg: &mut ControlFlowGraph) -> ConditionalConstantResult {
     let mut propagated_constants = Vec::new();
     let mut changed = true;
-    
+
     while changed {
         changed = false;
-        
+
         for block in cfg.get_all_blocks_mut() {
             for instruction in &mut block.instructions {
                 if let Instruction::Branch { condition, true_target, false_target } = instruction {
                     // 分析条件分支的常量传播
                     let true_constants = analyze_branch_constants(condition, true, cfg);
                     let false_constants = analyze_branch_constants(condition, false, cfg);
-                    
+
                     // 在true分支中传播常量
                     if !true_constants.is_empty() {
                         propagate_constants_in_branch(*true_target, &true_constants, cfg);
                         propagated_constants.extend(true_constants);
                         changed = true;
                     }
-                    
+
                     // 在false分支中传播常量
                     if !false_constants.is_empty() {
                         propagate_constants_in_branch(*false_target, &false_constants, cfg);
@@ -531,13 +531,13 @@ fn conditional_constant_propagation(cfg: &mut ControlFlowGraph) -> ConditionalCo
             }
         }
     }
-    
+
     ConditionalConstantResult { propagated_constants }
 }
 
 fn analyze_branch_constants(condition: &Expression, branch_value: bool, cfg: &ControlFlowGraph) -> Vec<ConstantAssignment> {
     let mut constants = Vec::new();
-    
+
     match condition {
         Expression::Comparison { op, left, right } => {
             if let (Expression::Variable(var), Expression::Constant(value)) = (left, right) {
@@ -550,7 +550,7 @@ fn analyze_branch_constants(condition: &Expression, branch_value: bool, cfg: &Co
                     (ComparisonOp::Ge, true) => Some(ConstantValue::GreaterThanOrEqual(value.clone())),
                     _ => None,
                 };
-                
+
                 if let Some(const_val) = constant_value {
                     constants.push(ConstantAssignment {
                         variable: var.clone(),
@@ -566,7 +566,7 @@ fn analyze_branch_constants(condition: &Expression, branch_value: bool, cfg: &Co
         }
         _ => {}
     }
-    
+
     constants
 }
 ```
@@ -581,13 +581,13 @@ fn analyze_branch_constants(condition: &Expression, branch_value: bool, cfg: &Co
 fn dead_code_elimination(cfg: &mut ControlFlowGraph) -> DeadCodeEliminationResult {
     let mut eliminated_instructions = Vec::new();
     let mut changed = true;
-    
+
     while changed {
         changed = false;
-        
+
         for block in cfg.get_all_blocks_mut() {
             let mut new_instructions = Vec::new();
-            
+
             for instruction in &block.instructions {
                 if is_dead_instruction(instruction, cfg) {
                     eliminated_instructions.push(instruction.clone());
@@ -596,11 +596,11 @@ fn dead_code_elimination(cfg: &mut ControlFlowGraph) -> DeadCodeEliminationResul
                     new_instructions.push(instruction.clone());
                 }
             }
-            
+
             block.instructions = new_instructions;
         }
     }
-    
+
     DeadCodeEliminationResult { eliminated_instructions }
 }
 
@@ -636,9 +636,9 @@ fn is_variable_used(variable: &str, cfg: &ControlFlowGraph) -> bool {
 fn is_branch_reachable(instruction: &Instruction, cfg: &ControlFlowGraph) -> bool {
     // 检查分支是否可达
     let reachable_blocks = reachability_analysis(cfg);
-    
+
     if let Instruction::Branch { true_target, false_target, .. } = instruction {
-        reachable_blocks.reachable_blocks.contains(true_target) || 
+        reachable_blocks.reachable_blocks.contains(true_target) ||
         reachable_blocks.reachable_blocks.contains(false_target)
     } else {
         false
@@ -654,18 +654,18 @@ fn is_branch_reachable(instruction: &Instruction, cfg: &ControlFlowGraph) -> boo
 fn unreachable_code_elimination(cfg: &mut ControlFlowGraph) -> UnreachableCodeResult {
     let reachable_blocks = reachability_analysis(cfg);
     let mut eliminated_blocks = Vec::new();
-    
+
     for block in cfg.get_all_blocks() {
         if !reachable_blocks.reachable_blocks.contains(&block.id) {
             eliminated_blocks.push(block.clone());
         }
     }
-    
+
     // 移除不可达的基本块
     for block in eliminated_blocks.iter() {
         cfg.remove_basic_block(block.id);
     }
-    
+
     UnreachableCodeResult { eliminated_blocks }
 }
 ```
@@ -678,18 +678,18 @@ fn unreachable_code_elimination(cfg: &mut ControlFlowGraph) -> UnreachableCodeRe
 fn redundant_code_elimination(cfg: &mut ControlFlowGraph) -> RedundantCodeResult {
     let mut eliminated_redundancies = Vec::new();
     let mut changed = true;
-    
+
     while changed {
         changed = false;
-        
+
         for block in cfg.get_all_blocks_mut() {
             let mut new_instructions = Vec::new();
             let mut available_expressions = HashSet::new();
-            
+
             for instruction in &block.instructions {
                 if let Instruction::Assign { variable, value } = instruction {
                     let expression_key = expression_to_key(value);
-                    
+
                     if available_expressions.contains(&expression_key) {
                         // 发现冗余计算
                         eliminated_redundancies.push(RedundantCode {
@@ -706,11 +706,11 @@ fn redundant_code_elimination(cfg: &mut ControlFlowGraph) -> RedundantCodeResult
                     new_instructions.push(instruction.clone());
                 }
             }
-            
+
             block.instructions = new_instructions;
         }
     }
-    
+
     RedundantCodeResult { eliminated_redundancies }
 }
 ```
@@ -724,28 +724,28 @@ fn redundant_code_elimination(cfg: &mut ControlFlowGraph) -> RedundantCodeResult
 ```rust
 fn apply_control_flow_optimizations(cfg: &mut ControlFlowGraph) -> OptimizationPipelineResult {
     let mut results = Vec::new();
-    
+
     // 循环优化
     let loop_result = loop_invariant_code_motion(cfg);
     results.push(OptimizationResult::Loop(loop_result));
-    
+
     let unroll_result = loop_unrolling(cfg, 4);
     results.push(OptimizationResult::LoopUnrolling(unroll_result));
-    
+
     // 分支优化
     let branch_result = branch_prediction_optimization(cfg);
     results.push(OptimizationResult::Branch(branch_result));
-    
+
     let elimination_result = branch_elimination(cfg);
     results.push(OptimizationResult::BranchElimination(elimination_result));
-    
+
     // 死代码消除
     let dead_code_result = dead_code_elimination(cfg);
     results.push(OptimizationResult::DeadCode(dead_code_result));
-    
+
     let unreachable_result = unreachable_code_elimination(cfg);
     results.push(OptimizationResult::Unreachable(unreachable_result));
-    
+
     OptimizationPipelineResult { results }
 }
 ```
@@ -758,7 +758,7 @@ fn apply_control_flow_optimizations(cfg: &mut ControlFlowGraph) -> OptimizationP
 fn analyze_optimization_impact(original_cfg: &ControlFlowGraph, optimized_cfg: &ControlFlowGraph) -> PerformanceAnalysis {
     let original_metrics = calculate_performance_metrics(original_cfg);
     let optimized_metrics = calculate_performance_metrics(optimized_cfg);
-    
+
     PerformanceAnalysis {
         instruction_count_improvement: original_metrics.instruction_count - optimized_metrics.instruction_count,
         execution_time_improvement: original_metrics.estimated_execution_time - optimized_metrics.estimated_execution_time,
@@ -769,16 +769,16 @@ fn analyze_optimization_impact(original_cfg: &ControlFlowGraph, optimized_cfg: &
 
 fn calculate_performance_metrics(cfg: &ControlFlowGraph) -> PerformanceMetrics {
     let mut metrics = PerformanceMetrics::new();
-    
+
     for block in cfg.get_all_blocks() {
         metrics.instruction_count += block.instructions.len();
-        
+
         for instruction in &block.instructions {
             metrics.estimated_execution_time += estimate_instruction_cost(instruction);
             metrics.memory_usage += estimate_memory_usage(instruction);
         }
     }
-    
+
     metrics.cache_hit_rate = estimate_cache_performance(cfg);
     metrics
 }
@@ -791,24 +791,24 @@ fn calculate_performance_metrics(cfg: &ControlFlowGraph) -> PerformanceMetrics {
 ```rust
 fn generate_optimized_code(cfg: &ControlFlowGraph) -> OptimizedCode {
     let mut code = OptimizedCode::new();
-    
+
     // 生成优化的汇编代码
     for block in cfg.get_all_blocks() {
         code.add_basic_block(block.id);
-        
+
         for instruction in &block.instructions {
             let assembly = generate_assembly(instruction);
             code.add_instruction(block.id, assembly);
         }
     }
-    
+
     // 添加优化信息
     code.add_optimization_info(OptimizationInfo {
         loop_optimizations: true,
         branch_optimizations: true,
         dead_code_elimination: true,
     });
-    
+
     code
 }
 ```
@@ -880,7 +880,7 @@ fn generate_optimized_code(cfg: &ControlFlowGraph) -> OptimizedCode {
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
-**维护者**: Rust语言形式化理论项目组  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
+**维护者**: Rust语言形式化理论项目组
 **状态**: 完成

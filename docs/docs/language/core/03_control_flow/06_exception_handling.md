@@ -157,7 +157,7 @@ fn detect_early_return_pattern(expr: &Expr) -> bool {
         Expr::Block(stmts) => {
             let mut has_question_marks = false;
             let mut has_final_ok = false;
-            
+
             for stmt in stmts {
                 if has_question_mark(stmt) {
                     has_question_marks = true;
@@ -166,7 +166,7 @@ fn detect_early_return_pattern(expr: &Expr) -> bool {
                     has_final_ok = true;
                 }
             }
-            
+
             has_question_marks && has_final_ok
         }
         _ => false
@@ -232,20 +232,20 @@ fn unwind(panic_info: PanicInfo) -> ! {
     if let Some(hook) = PANIC_HOOK.get() {
         hook(panic_info);
     }
-    
+
     // 2. 栈展开
     while let Some(frame) = current_stack_frame() {
         // 调用析构函数
         drop_locals(frame);
-        
+
         // 查找catch_unwind
         if let Some(catch) = find_catch_unwind(frame) {
             return catch.resume(panic_info);
         }
-        
+
         pop_stack_frame();
     }
-    
+
     // 3. 终止程序
     std::process::abort();
 }
@@ -276,7 +276,7 @@ where
     F: FnMut() -> Result<T, E>,
 {
     let mut last_error = None;
-    
+
     for attempt in 0..max_retries {
         match f() {
             Ok(result) => return Ok(result),
@@ -288,7 +288,7 @@ where
             }
         }
     }
-    
+
     Err(last_error.unwrap())
 }
 ```
@@ -395,7 +395,7 @@ fn read_file_content(path: &str) -> Result<String, io::Error> {
 fn process_file(path: &str) -> Result<(), Box<dyn std::error::Error>> {
     let content = read_file_content(path)
         .map_err(|e| format!("Failed to read file {}: {}", path, e))?;
-    
+
     // 处理文件内容
     println!("File content: {}", content);
     Ok(())
@@ -410,19 +410,19 @@ use serde_json;
 
 async fn fetch_user_data(user_id: u32) -> Result<User, Box<dyn std::error::Error>> {
     let url = format!("https://api.example.com/users/{}", user_id);
-    
+
     let response = reqwest::get(&url)
         .await
         .map_err(|e| format!("Network error: {}", e))?;
-    
+
     if !response.status().is_success() {
         return Err(format!("HTTP error: {}", response.status()).into());
     }
-    
+
     let user: User = response.json()
         .await
         .map_err(|e| format!("JSON parsing error: {}", e))?;
-    
+
     Ok(user)
 }
 ```
@@ -454,7 +454,7 @@ fn query_database(query: &str) -> Result<Vec<Record>, DatabaseError> {
     if query.is_empty() {
         return Err(DatabaseError::QueryFailed("Empty query".to_string()));
     }
-    
+
     // 执行查询...
     Ok(vec![Record::new()])
 }
@@ -469,7 +469,7 @@ fn robust_operation() -> Result<Data, Box<dyn std::error::Error>> {
         || perform_operation(),
         3
     );
-    
+
     match result {
         Ok(data) => Ok(data),
         Err(_) => {
@@ -498,22 +498,22 @@ fn robust_operation() -> Result<Data, Box<dyn std::error::Error>> {
 fn verify_error_handling(function: &Function) -> bool {
     // 检查是否处理了所有Result类型
     let results = find_result_types(function);
-    
+
     for result in results {
         if !is_properly_handled(result, function) {
             return false;
         }
     }
-    
+
     // 检查错误传播是否正确
     let propagations = find_error_propagations(function);
-    
+
     for propagation in propagations {
         if !is_correct_propagation(propagation) {
             return false;
         }
     }
-    
+
     true
 }
 ```
@@ -533,15 +533,15 @@ fn verify_error_handling(function: &Function) -> bool {
 fn verify_error_recovery(recovery: &RecoveryStrategy) -> bool {
     // 测试各种错误场景
     let error_scenarios = generate_error_scenarios();
-    
+
     for scenario in error_scenarios {
         let result = apply_recovery(recovery, scenario);
-        
+
         if !is_successful_recovery(result) {
             return false;
         }
     }
-    
+
     true
 }
 ```

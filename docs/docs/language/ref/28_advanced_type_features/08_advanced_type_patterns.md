@@ -86,7 +86,7 @@ impl Machine<Off> {
     fn new() -> Self {
         Machine { _state: PhantomData }
     }
-    
+
     fn turn_on(self) -> Machine<On> {
         // 从 Off 状态转换到 On 状态
         Machine { _state: PhantomData }
@@ -98,12 +98,12 @@ impl Machine<On> {
         // 操作逻辑
         Ok(())
     }
-    
+
     fn turn_off(self) -> Machine<Off> {
         // 从 On 状态转换到 Off 状态
         Machine { _state: PhantomData }
     }
-    
+
     fn break_machine(self) -> Machine<Error> {
         // 从 On 状态转换到 Error 状态
         Machine { _state: PhantomData }
@@ -241,7 +241,7 @@ struct Derived;
 
 impl Base for Derived {
     type Derived = Self;
-    
+
     fn common_behavior(&self) {
         // 实现基础行为
         self.derived_behavior();

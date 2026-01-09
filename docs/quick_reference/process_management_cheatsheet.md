@@ -149,11 +149,13 @@ ProcessConfig {
 ### 跨平台注意事项
 
 **Windows**:
+
 - 使用 `cmd /c` 适配命令
 - `working_dir` 设为 `.`
 - `PATH` 包含 `C:\\Windows\\System32`
 
 **Linux/macOS**:
+
 - 直接使用命令名
 - `working_dir` 设为 `/tmp` 或当前目录
 

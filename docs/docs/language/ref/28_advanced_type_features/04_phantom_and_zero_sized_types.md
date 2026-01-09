@@ -122,7 +122,7 @@ impl File<Closed> {
     fn new() -> Self {
         File { _state: PhantomData }
     }
-    
+
     fn open(self) -> File<Open> {
         // 打开文件的逻辑
         File { _state: PhantomData }

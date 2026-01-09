@@ -180,43 +180,43 @@ impl ProofOfWork {
             target_difficulty: difficulty,
         }
     }
-    
+
     fn mine(&self, block_header: &[u8]) -> (u64, Vec<u8>) {
         let target = 2u64.pow(256 - self.target_difficulty);
         let mut nonce = 0u64;
-        
+
         loop {
             let mut hasher = Sha256::new();
             hasher.update(block_header);
             hasher.update(&nonce.to_le_bytes());
             let hash = hasher.finalize();
-            
+
             // 检查哈希值是否小于目标值
             let hash_value = u64::from_le_bytes([
                 hash[0], hash[1], hash[2], hash[3],
                 hash[4], hash[5], hash[6], hash[7]
             ]);
-            
+
             if hash_value < target {
                 return (nonce, hash.to_vec());
             }
-            
+
             nonce += 1;
         }
     }
-    
+
     fn verify(&self, block_header: &[u8], nonce: u64) -> bool {
         let mut hasher = Sha256::new();
         hasher.update(block_header);
         hasher.update(&nonce.to_le_bytes());
         let hash = hasher.finalize();
-        
+
         let target = 2u64.pow(256 - self.target_difficulty);
         let hash_value = u64::from_le_bytes([
             hash[0], hash[1], hash[2], hash[3],
             hash[4], hash[5], hash[6], hash[7]
         ]);
-        
+
         hash_value < target
     }
 }
@@ -259,20 +259,20 @@ impl ProofOfStake {
             total_stake: 0,
         }
     }
-    
+
     fn add_validator(&mut self, address: String, stake: u64) {
         self.validators.insert(address.clone(), stake);
         self.total_stake += stake;
     }
-    
+
     fn select_validator(&self) -> Option<String> {
         if self.total_stake == 0 {
             return None;
         }
-        
+
         let mut rng = thread_rng();
         let random_value = rng.gen_range(0..self.total_stake);
-        
+
         let mut cumulative_stake = 0u64;
         for (address, stake) in &self.validators {
             cumulative_stake += stake;
@@ -280,10 +280,10 @@ impl ProofOfStake {
                 return Some(address.clone());
             }
         }
-        
+
         None
     }
-    
+
     fn slash_validator(&mut self, address: &str, slash_amount: u64) {
         if let Some(stake) = self.validators.get_mut(address) {
             let actual_slash = std::cmp::min(*stake, slash_amount);
@@ -350,18 +350,18 @@ impl SecurityAnalyzer {
             electricity_cost,
         }
     }
-    
+
     fn calculate_attack_cost(&self, attack_duration: f64) -> f64 {
         // 计算51%攻击成本
         self.attacker_hashrate * attack_duration * self.electricity_cost
     }
-    
+
     fn calculate_success_probability(&self) -> f64 {
         // 计算攻击成功概率（基于泊松分布）
         let lambda = self.attacker_hashrate / self.network_hashrate;
         1.0 - (-lambda).exp()
     }
-    
+
     fn is_secure(&self, security_threshold: f64) -> bool {
         self.calculate_success_probability() < security_threshold
     }

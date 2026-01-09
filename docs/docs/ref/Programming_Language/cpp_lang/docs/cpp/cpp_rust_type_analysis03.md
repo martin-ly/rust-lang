@@ -150,7 +150,7 @@ int main() {
         n2->next = n1; // 循环引用！ n1 和 n2 的引用计数永远不会降到 0
     } // n1, n2 作用域结束，但内存未释放 (泄漏)
     */
-   
+
     // 使用 weak_ptr 打破循环
     {
          std::shared_ptr<Node> n1 = std::make_shared<Node>(1);
@@ -203,7 +203,7 @@ fn borrow_checker_example() {
     // let ref_mut = &mut data; // 仍然错误!
 
     // ref1 和 ref2 生命周期在此结束 (NLL - Non-Lexical Lifetimes)
-    
+
     let ref_mut = &mut data; // 现在可以进行可变借用
     ref_mut.push(4);
     // let ref3 = &data; // 错误! 不能在存在可变借用时进行不可变借用

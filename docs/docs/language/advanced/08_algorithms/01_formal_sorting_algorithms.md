@@ -133,7 +133,7 @@ fn bubble_sort<T: Ord>(arr: &mut [T]) {
     if n <= 1 {
         return;
     }
-    
+
     for i in 0..n {
         let mut swapped = false;
         // 每次遍历将最大的元素放到末尾
@@ -320,17 +320,17 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
     if n <= 1 {
         return;
     }
-    
+
     let mid = n / 2;
     // 递归排序左右两半
     merge_sort(&mut arr[0..mid]);
     merge_sort(&mut arr[mid..n]);
-    
+
     // 合并两个已排序的子数组
     let mut merged = Vec::with_capacity(n);
     let mut i = 0;
     let mut j = mid;
-    
+
     while i < mid && j < n {
         if arr[i] <= arr[j] {
             merged.push(arr[i].clone());
@@ -340,11 +340,11 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
             j += 1;
         }
     }
-    
+
     // 添加剩余元素
     merged.extend_from_slice(&arr[i..mid]);
     merged.extend_from_slice(&arr[j..n]);
-    
+
     // 复制回原数组
     arr.copy_from_slice(&merged);
 }
@@ -400,7 +400,7 @@ fn quick_sort<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let pivot_index = partition(arr);
     quick_sort(&mut arr[0..pivot_index]);
     quick_sort(&mut arr[pivot_index + 1..]);
@@ -410,14 +410,14 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
     let len = arr.len();
     let pivot_index = len - 1;
     let mut i = 0;
-    
+
     for j in 0..len - 1 {
         if arr[j] <= arr[pivot_index] {
             arr.swap(i, j);
             i += 1;
         }
     }
-    
+
     arr.swap(i, pivot_index);
     i
 }
@@ -427,7 +427,7 @@ fn quick_sort_3way<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let (lt, gt) = partition_3way(arr);
     quick_sort_3way(&mut arr[0..lt]);
     quick_sort_3way(&mut arr[gt..]);
@@ -439,7 +439,7 @@ fn partition_3way<T: Ord>(arr: &mut [T]) -> (usize, usize) {
     let mut lt = 0;  // 小于pivot的元素
     let mut gt = len;  // 大于pivot的元素
     let mut i = 0;  // 当前元素
-    
+
     while i < gt {
         if arr[i] < *pivot {
             arr.swap(lt, i);
@@ -452,7 +452,7 @@ fn partition_3way<T: Ord>(arr: &mut [T]) -> (usize, usize) {
             i += 1;
         }
     }
-    
+
     (lt, gt)
 }
 ```
@@ -511,12 +511,12 @@ function max_heapify(A, i):
 ```rust
 fn heap_sort<T: Ord>(arr: &mut [T]) {
     let len = arr.len();
-    
+
     // 建堆
     for i in (0..len / 2).rev() {
         heapify(arr, i, len);
     }
-    
+
     // 逐个提取最大值
     for i in (1..len).rev() {
         arr.swap(0, i);
@@ -529,19 +529,19 @@ fn heapify<T: Ord>(arr: &mut [T], mut i: usize, heap_size: usize) {
         let left = 2 * i + 1;
         let right = 2 * i + 2;
         let mut largest = i;
-        
+
         if left < heap_size && arr[left] > arr[largest] {
             largest = left;
         }
-        
+
         if right < heap_size && arr[right] > arr[largest] {
             largest = right;
         }
-        
+
         if largest == i {
             break;
         }
-        
+
         arr.swap(i, largest);
         i = largest;
     }
@@ -563,20 +563,20 @@ fn heapify<T: Ord>(arr: &mut [T], mut i: usize, heap_size: usize) {
 function counting_sort(A[1..n], k):
     count = array of size k+1, initialized to 0
     output = array of size n
-    
+
     // 统计每个元素出现的次数
     for i = 1 to n:
         count[A[i]] += 1
-    
+
     // 计算累积计数
     for i = 1 to k:
         count[i] += count[i-1]
-    
+
     // 构建输出数组
     for i = n downto 1:
         output[count[A[i]]] = A[i]
         count[A[i]] -= 1
-    
+
     return output
 ```
 
@@ -596,24 +596,24 @@ fn counting_sort(arr: &mut [usize], max_value: usize) {
     let n = arr.len();
     let mut count = vec![0; max_value + 1];
     let mut output = vec![0; n];
-    
+
     // 统计每个元素出现的次数
     for &x in arr.iter() {
         count[x] += 1;
     }
-    
+
     // 计算累积计数
     for i in 1..=max_value {
         count[i] += count[i - 1];
     }
-    
+
     // 构建输出数组
     for &x in arr.iter().rev() {
         let index = count[x] - 1;
         output[index] = x;
         count[x] -= 1;
     }
-    
+
     // 复制回原数组
     arr.copy_from_slice(&output);
 }
@@ -649,10 +649,10 @@ fn radix_sort(arr: &mut [usize]) {
     if arr.is_empty() {
         return;
     }
-    
+
     let max_value = *arr.iter().max().unwrap();
     let mut exp = 1;
-    
+
     while max_value / exp > 0 {
         counting_sort_by_digit(arr, exp);
         exp *= 10;
@@ -663,18 +663,18 @@ fn counting_sort_by_digit(arr: &mut [usize], exp: usize) {
     let n = arr.len();
     let mut count = vec![0; 10];
     let mut output = vec![0; n];
-    
+
     // 统计每个数字出现的次数
     for &x in arr.iter() {
         let digit = (x / exp) % 10;
         count[digit] += 1;
     }
-    
+
     // 计算累积计数
     for i in 1..10 {
         count[i] += count[i - 1];
     }
-    
+
     // 构建输出数组
     for &x in arr.iter().rev() {
         let digit = (x / exp) % 10;
@@ -682,7 +682,7 @@ fn counting_sort_by_digit(arr: &mut [usize], exp: usize) {
         output[index] = x;
         count[digit] -= 1;
     }
-    
+
     // 复制回原数组
     arr.copy_from_slice(&output);
 }
@@ -731,23 +731,23 @@ fn rust_standard_sorting() {
     let mut numbers = vec![3, 1, 4, 1, 5, 9, 2, 6];
     numbers.sort();  // 稳定排序
     println!("Sorted: {:?}", numbers);
-    
+
     // 不稳定排序
     let mut numbers = vec![3, 1, 4, 1, 5, 9, 2, 6];
     numbers.sort_unstable();  // 不稳定排序，通常更快
     println!("Unstable sorted: {:?}", numbers);
-    
+
     // 自定义排序
     let mut words = vec!["banana", "apple", "cherry"];
     words.sort_by(|a, b| a.len().cmp(&b.len()));
     println!("Sorted by length: {:?}", words);
-    
+
     // 堆排序
     let mut heap = BinaryHeap::new();
     heap.push(3);
     heap.push(1);
     heap.push(4);
-    
+
     while let Some(max) = heap.pop() {
         println!("Max: {}", max);
     }

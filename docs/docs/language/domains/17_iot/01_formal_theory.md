@@ -1,8 +1,8 @@
 # Rust IoT Systems: Formal Theory and Philosophical Foundation
 
-**Document Version**: V1.0  
-**Creation Date**: 2025-01-27  
-**Category**: Formal Theory  
+**Document Version**: V1.0
+**Creation Date**: 2025-01-27
+**Category**: Formal Theory
 **Cross-References**: [01_ownership_borrowing](../01_ownership_borrowing/01_formal_theory.md), [05_concurrency](../05_concurrency/01_formal_theory.md), [16_webassembly](../16_webassembly/01_formal_theory.md)
 
 ## Table of Contents
@@ -246,7 +246,7 @@ impl Device {
             last_seen: 0,
         }
     }
-    
+
     pub fn update_status(&mut self, status: DeviceStatus) {
         self.status = status;
         self.last_seen = std::time::SystemTime::now()
@@ -254,15 +254,15 @@ impl Device {
             .unwrap_or_default()
             .as_secs();
     }
-    
+
     pub fn has_capability(&self, capability: &Capability) -> bool {
         self.capabilities.contains(capability)
     }
-    
+
     pub fn is_sensor(&self) -> bool {
         matches!(self.device_type, DeviceType::Sensor(_))
     }
-    
+
     pub fn is_actuator(&self) -> bool {
         matches!(self.device_type, DeviceType::Actuator(_))
     }
@@ -286,7 +286,7 @@ use core::fmt::Debug;
 pub trait Sensor: Send + Sync {
     type Reading: Send + Sync + Debug;
     type Error: Send + Sync + Debug;
-    
+
     async fn read(&mut self) -> Result<Self::Reading, Self::Error>;
     async fn calibrate(&mut self) -> Result<(), Self::Error>;
     fn get_accuracy(&self) -> f32;
@@ -320,7 +320,7 @@ impl TemperatureSensor {
             last_reading: None,
         }
     }
-    
+
     pub fn set_calibration_offset(&mut self, offset: f32) {
         self.calibration_offset = offset;
     }
@@ -330,11 +330,11 @@ impl TemperatureSensor {
 impl Sensor for TemperatureSensor {
     type Reading = TemperatureReading;
     type Error = SensorError;
-    
+
     async fn read(&mut self) -> Result<Self::Reading, Self::Error> {
         // Simulate reading from hardware
         let raw_value = 25.0 + self.calibration_offset;
-        
+
         let reading = TemperatureReading {
             value: raw_value,
             unit: TemperatureUnit::Celsius,
@@ -344,20 +344,20 @@ impl Sensor for TemperatureSensor {
                 .as_secs(),
             accuracy: 0.5,
         };
-        
+
         self.last_reading = Some(reading.clone());
         Ok(reading)
     }
-    
+
     async fn calibrate(&mut self) -> Result<(), Self::Error> {
         // Implement calibration logic
         Ok(())
     }
-    
+
     fn get_accuracy(&self) -> f32 {
         0.5
     }
-    
+
     fn get_range(&self) -> (f32, f32) {
         (-40.0, 125.0)
     }
@@ -388,7 +388,7 @@ pub trait Actuator: Send + Sync {
     type Command: Send + Sync + Debug;
     type State: Send + Sync + Debug;
     type Error: Send + Sync + Debug;
-    
+
     async fn execute(&mut self, command: Self::Command) -> Result<Self::State, Self::Error>;
     async fn get_state(&self) -> Result<Self::State, Self::Error>;
     fn get_capabilities(&self) -> Vec<ActuatorCapability>;
@@ -435,7 +435,7 @@ impl Actuator for RelayActuator {
     type Command = RelayCommand;
     type State = RelayState;
     type Error = ActuatorError;
-    
+
     async fn execute(&mut self, command: Self::Command) -> Result<Self::State, Self::Error> {
         match command {
             RelayCommand::TurnOn => {
@@ -457,11 +457,11 @@ impl Actuator for RelayActuator {
             }
         }
     }
-    
+
     async fn get_state(&self) -> Result<Self::State, Self::Error> {
         Ok(self.current_state.clone())
     }
-    
+
     fn get_capabilities(&self) -> Vec<ActuatorCapability> {
         vec![ActuatorCapability::OnOff]
     }
@@ -537,7 +537,7 @@ pub enum QualityOfService {
 #[async_trait]
 pub trait CommunicationProtocol: Send + Sync {
     type Error: Send + Sync + Debug;
-    
+
     async fn send(&mut self, message: Message) -> Result<(), Self::Error>;
     async fn receive(&mut self) -> Result<Option<Message>, Self::Error>;
     async fn connect(&mut self) -> Result<(), Self::Error>;
@@ -563,33 +563,33 @@ impl MqttProtocol {
 #[async_trait]
 impl CommunicationProtocol for MqttProtocol {
     type Error = ProtocolError;
-    
+
     async fn send(&mut self, message: Message) -> Result<(), Self::Error> {
         if !self.connected {
             return Err(ProtocolError::NotConnected);
         }
-        
+
         // Simulate MQTT publish
         println!("MQTT: Publishing message {:?} to broker", message.id);
         Ok(())
     }
-    
+
     async fn receive(&mut self) -> Result<Option<Message>, Self::Error> {
         if !self.connected {
             return Err(ProtocolError::NotConnected);
         }
-        
+
         // Simulate MQTT subscription
         Ok(None)
     }
-    
+
     async fn connect(&mut self) -> Result<(), Self::Error> {
         // Simulate MQTT connection
         self.connected = true;
         println!("MQTT: Connected to broker {}", self.broker_url);
         Ok(())
     }
-    
+
     async fn disconnect(&mut self) -> Result<(), Self::Error> {
         self.connected = false;
         println!("MQTT: Disconnected from broker");
@@ -692,33 +692,33 @@ impl SmartHomeSystem {
             network,
         }
     }
-    
+
     pub fn add_device(&mut self, device: Box<dyn Device>) {
         let device_id = device.get_id();
         self.devices.insert(device_id, device);
     }
-    
+
     pub async fn run(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         // Connect to network
         self.network.connect().await?;
-        
+
         loop {
             // Process incoming messages
             if let Some(message) = self.network.receive().await? {
                 self.handle_message(message).await?;
             }
-            
+
             // Collect sensor data
             self.collect_sensor_data().await?;
-            
+
             // Apply control logic
             self.apply_control_logic().await?;
-            
+
             // Sleep for a short time
             tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
         }
     }
-    
+
     async fn handle_message(&mut self, message: Message) -> Result<(), Box<dyn std::error::Error>> {
         match message.payload {
             MessagePayload::ActuatorCommand(command) => {
@@ -733,7 +733,7 @@ impl SmartHomeSystem {
         }
         Ok(())
     }
-    
+
     async fn collect_sensor_data(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         for device in self.devices.values_mut() {
             if let Some(sensor) = device.as_sensor() {
@@ -755,17 +755,17 @@ impl SmartHomeSystem {
         }
         Ok(())
     }
-    
+
     async fn apply_control_logic(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         // Implement control logic here
         Ok(())
     }
-    
+
     async fn execute_actuator_command(&mut self, command: ActuatorCommand) -> Result<(), Box<dyn std::error::Error>> {
         // Implement actuator command execution
         Ok(())
     }
-    
+
     async fn apply_configuration(&mut self, config: Configuration) -> Result<(), Box<dyn std::error::Error>> {
         // Implement configuration application
         Ok(())
@@ -815,56 +815,56 @@ impl IndustrialIoTSystem {
             network,
         }
     }
-    
+
     pub fn add_sensor(&mut self, sensor: Box<dyn Sensor>) {
         self.sensors.push(sensor);
     }
-    
+
     pub fn add_actuator(&mut self, actuator: Box<dyn Actuator>) {
         self.actuators.push(actuator);
     }
-    
+
     pub async fn run_control_loop(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         loop {
             // Read all sensors
             let readings = self.read_all_sensors().await?;
-            
+
             // Calculate control outputs
             let outputs = self.calculate_control_outputs(readings).await?;
-            
+
             // Apply control outputs to actuators
             self.apply_control_outputs(outputs).await?;
-            
+
             // Send data to cloud
             self.send_data_to_cloud(readings).await?;
-            
+
             // Wait for next control cycle
             tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
         }
     }
-    
+
     async fn read_all_sensors(&mut self) -> Result<Vec<SensorData>, Box<dyn std::error::Error>> {
         let mut readings = Vec::new();
-        
+
         for sensor in &mut self.sensors {
             if let Ok(reading) = sensor.read().await {
                 readings.push(reading);
             }
         }
-        
+
         Ok(readings)
     }
-    
+
     async fn calculate_control_outputs(&self, readings: Vec<SensorData>) -> Result<Vec<ActuatorCommand>, Box<dyn std::error::Error>> {
         // Implement control algorithm
         Ok(Vec::new())
     }
-    
+
     async fn apply_control_outputs(&mut self, outputs: Vec<ActuatorCommand>) -> Result<(), Box<dyn std::error::Error>> {
         // Apply outputs to actuators
         Ok(())
     }
-    
+
     async fn send_data_to_cloud(&self, readings: Vec<SensorData>) -> Result<(), Box<dyn std::error::Error>> {
         // Send data to cloud platform
         Ok(())
@@ -918,6 +918,6 @@ impl IndustrialIoTSystem {
 
 ---
 
-**Document Status**: Complete  
-**Next Review**: 2025-02-27  
+**Document Status**: Complete
+**Next Review**: 2025-02-27
 **Maintainer**: Rust Formal Theory Team

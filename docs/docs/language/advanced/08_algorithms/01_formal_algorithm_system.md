@@ -73,7 +73,7 @@ Rust语言中的算法系统建立在类型安全、零成本抽象和所有权�
 pub trait Sorter {
     // 算法接口定义
     fn sort<T: Ord>(&self, slice: &mut [T]);
-    
+
     // 提供默认实现的辅助方法
     fn is_sorted<T: Ord>(&self, slice: &[T]) -> bool {
         slice.windows(2).all(|w| w[0] <= w[1])
@@ -187,11 +187,11 @@ impl PathFinder {
     pub fn new(strategy: impl PathFindingStrategy + 'static) -> Self {
         Self { strategy: Box::new(strategy) }
     }
-    
+
     pub fn find_path(&self, graph: &Graph, start: NodeId, goal: NodeId) -> Option<Path> {
         self.strategy.find_path(graph, start, goal)
     }
-    
+
     pub fn set_strategy(&mut self, strategy: impl PathFindingStrategy + 'static) {
         self.strategy = Box::new(strategy);
     }
@@ -200,11 +200,11 @@ impl PathFinder {
 // 使用示例
 fn navigate() {
     let graph = Graph::new();
-    
+
     // 默认使用A*算法
     let mut finder = PathFinder::new(AStarStrategy::new(manhattan_distance));
     let path = finder.find_path(&graph, start_node, end_node);
-    
+
     // 切换到Dijkstra算法
     finder.set_strategy(DijkstraStrategy);
     let alternative_path = finder.find_path(&graph, start_node, end_node);
@@ -247,11 +247,11 @@ impl<T: Ord, S: SortStrategy> SortableCollection<T, S> {
     pub fn new(data: Vec<T>) -> Self {
         Self { data, _strategy: PhantomData }
     }
-    
+
     pub fn sort(&mut self) {
         S::sort(&mut self.data);
     }
-    
+
     pub fn get_data(&self) -> &[T] {
         &self.data
     }
@@ -262,7 +262,7 @@ fn process_data() {
     // 编译时选择排序策略
     let mut quick_collection = SortableCollection::<_, QuickSortStrategy>::new(vec![5, 2, 8, 1, 9]);
     quick_collection.sort();
-    
+
     let mut merge_collection = SortableCollection::<_, MergeSortStrategy>::new(vec![5, 2, 8, 1, 9]);
     merge_collection.sort();
 }
@@ -292,12 +292,12 @@ impl<T: Ord> SortedVec<T> {
         data.sort();
         Self { inner: data, _marker: PhantomData }
     }
-    
+
     // 高效的二分查找 - O(log n)
     pub fn contains(&self, item: &T) -> bool {
         self.inner.binary_search(item).is_ok()
     }
-    
+
     // 保持排序的插入 - O(n)
     pub fn insert(&mut self, item: T) {
         match self.inner.binary_search(&item) {
@@ -311,7 +311,7 @@ impl<T: Ord> SortedVec<T> {
 fn search_efficiently() {
     let data = vec![1, 5, 8, 10, 15];
     let sorted = SortedVec::new(data);
-    
+
     // 使用 O(log n) 而非 O(n) 的搜索
     if sorted.contains(&8) {
         println!("Found!");
@@ -332,8 +332,8 @@ pub struct Windowed<I: Iterator> {
     buffer: VecDeque<I::Item>,
 }
 
-impl<I: Iterator> Windowed<I> 
-where 
+impl<I: Iterator> Windowed<I>
+where
     I::Item: Clone,
 {
     pub fn new(iter: I, window_size: usize) -> Self {
@@ -346,12 +346,12 @@ where
 }
 
 // 实现迭代器特征
-impl<I: Iterator> Iterator for Windowed<I> 
-where 
+impl<I: Iterator> Iterator for Windowed<I>
+where
     I::Item: Clone,
 {
     type Item = Vec<I::Item>;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         // 填充缓冲区
         while self.buffer.len() < self.window_size {
@@ -366,13 +366,13 @@ where
                 return None;
             }
         }
-        
+
         // 返回当前窗口
         let result = self.buffer.iter().cloned().collect();
-        
+
         // 滑动窗口
         self.buffer.pop_front();
-        
+
         Some(result)
     }
 }
@@ -394,7 +394,7 @@ impl<T: Iterator> WindowedExt for T {}
 // 使用示例
 fn process_windows() {
     let data = vec![1, 2, 3, 4, 5];
-    
+
     // 使用零成本抽象
     for window in data.iter().windowed(3) {
         println!("{:?}", window);
@@ -432,7 +432,7 @@ impl Algorithm<Uninitialized> {
             _state: PhantomData,
         }
     }
-    
+
     // 转换到初始化状态
     pub fn initialize(self, data: Vec<i32>) -> Algorithm<Initialized> {
         Algorithm {
@@ -449,7 +449,7 @@ impl Algorithm<Initialized> {
     pub fn validate(&self) -> bool {
         !self.data.is_empty()
     }
-    
+
     // 转换到计算状态
     pub fn compute(self) -> Algorithm<Computing> {
         Algorithm {
@@ -466,7 +466,7 @@ impl Algorithm<Computing> {
     pub fn execute(mut self) -> Algorithm<Completed> {
         // 假设算法是计算总和
         let sum = self.data.iter().sum();
-        
+
         Algorithm {
             data: self.data,
             result: Some(sum),
@@ -481,7 +481,7 @@ impl Algorithm<Completed> {
     pub fn result(&self) -> Option<i32> {
         self.result
     }
-    
+
     // 重新初始化算法
     pub fn reset(self) -> Algorithm<Uninitialized> {
         Algorithm::new()
@@ -495,7 +495,7 @@ fn run_algorithm() {
         .initialize(vec![1, 2, 3, 4, 5])
         .compute()
         .execute();
-    
+
     // 只有在完成状态才能访问结果
     if let Some(result) = algorithm.result() {
         println!("Result: {}", result);
@@ -533,7 +533,7 @@ impl StateMachine<Initial> {
     pub fn new(value: i32) -> Self {
         Self { value, _state: PhantomData }
     }
-    
+
     pub fn start(self) -> StateMachine<Processing> {
         StateMachine { value: self.value, _state: PhantomData }
     }
@@ -544,7 +544,7 @@ impl StateMachine<Processing> {
     pub fn process(self) -> StateMachine<Processing> {
         StateMachine { value: self.value * 2, _state: PhantomData }
     }
-    
+
     pub fn finish(self) -> StateMachine<Final> {
         StateMachine { value: self.value, _state: PhantomData }
     }
@@ -555,7 +555,7 @@ impl StateMachine<Final> {
     pub fn result(&self) -> i32 {
         self.value
     }
-    
+
     pub fn reset(self) -> StateMachine<Initial> {
         StateMachine::new(0)
     }
@@ -568,9 +568,9 @@ fn run_state_machine() {
         .process()
         .process()
         .finish();
-    
+
     println!("Final result: {}", machine.result());
-    
+
     // 编译错误：不能在错误的状态调用方法
     // machine.process();
 }
@@ -622,7 +622,7 @@ impl<T: Ord> BinaryTree<T> {
             }
         }
     }
-    
+
     // 递归搜索
     pub fn contains(&self, value: &T) -> bool {
         match self {
@@ -647,7 +647,7 @@ fn use_binary_tree() {
     tree.insert(5);
     tree.insert(3);
     tree.insert(7);
-    
+
     assert!(tree.contains(&5));
     assert!(tree.contains(&3));
     assert!(tree.contains(&7));
@@ -680,27 +680,27 @@ impl Expr {
             Expr::Negate(expr) => -expr.evaluate(),
         }
     }
-    
+
     // 算法实现 - 表达式简化
     pub fn simplify(&self) -> Expr {
         match self {
             Expr::Value(_) => self.clone(),
-            
+
             Expr::Add(left, right) => {
                 let left = left.simplify();
                 let right = right.simplify();
-                
+
                 match (&left, &right) {
                     (Expr::Value(0), _) => right,
                     (_, Expr::Value(0)) => left,
                     _ => Expr::Add(Box::new(left), Box::new(right)),
                 }
             }
-            
+
             Expr::Multiply(left, right) => {
                 let left = left.simplify();
                 let right = right.simplify();
-                
+
                 match (&left, &right) {
                     (Expr::Value(0), _) | (_, Expr::Value(0)) => Expr::Value(0),
                     (Expr::Value(1), _) => right,
@@ -708,7 +708,7 @@ impl Expr {
                     _ => Expr::Multiply(Box::new(left), Box::new(right)),
                 }
             }
-            
+
             Expr::Negate(expr) => {
                 let inner = expr.simplify();
                 match inner {
@@ -730,11 +730,11 @@ fn expression_evaluation() {
         )),
         Box::new(Expr::Value(2))
     );
-    
+
     // 计算结果
     let result = expr.evaluate();
     println!("Result: {}", result); // 输出: Result: 4
-    
+
     // 简化表达式
     let simplified = expr.simplify();
     println!("Simplified: {:?}", simplified);
@@ -762,7 +762,7 @@ where
     F: FnMut(usize, I::Item) -> B,
 {
     type Item = B;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         let index = self.index;
         self.index += 1;
@@ -791,14 +791,14 @@ impl<T: Iterator> IteratorExt for T {}
 // 使用示例 - 迭代器组合
 fn process_with_iterators() {
     let data = vec![10, 20, 30, 40, 50];
-    
+
     // 使用多个迭代器适配器组合算法
     let result: Vec<_> = data.iter()
         .map_with_index(|i, &x| (i, x))
         .filter(|(i, _)| i % 2 == 0)
         .map(|(i, x)| format!("Item {}: {}", i, x))
         .collect();
-    
+
     println!("{:?}", result);
     // 输出: ["Item 0: 10", "Item 2: 30", "Item 4: 50"]
 }
@@ -825,7 +825,7 @@ impl LazyFibonacci {
 // 惰性计算的迭代器实现
 impl Iterator for LazyFibonacci {
     type Item = u64;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         let current = self.current;
         self.current = self.next;
@@ -842,7 +842,7 @@ fn lazy_algorithm() {
         .filter(|&x| x % 2 == 0)  // 过滤出偶数
         .map(|x| x * x)           // 计算平方
         .sum();                   // 求和
-    
+
     println!("Sum of squares of even Fibonacci numbers: {}", sum);
     // 只有在需要结果时才会计算
 }
@@ -878,14 +878,14 @@ where
     pub fn new(data: Vec<T>, operation: F) -> Self {
         Self { data, operation }
     }
-    
+
     // 并行执行算法
     pub fn execute(self) -> Vec<R> {
         self.data.into_par_iter()
             .map(|item| (self.operation)(item))
             .collect()
     }
-    
+
     // 并行执行带阈值的算法（小数据集用顺序处理）
     pub fn execute_with_threshold(self, threshold: usize) -> Vec<R> {
         if self.data.len() < threshold {
@@ -905,7 +905,7 @@ where
 // 使用示例
 fn parallel_processing() {
     let data = (0..1000).collect::<Vec<i32>>();
-    
+
     // 定义耗时操作
     let operation = |x: i32| {
         // 模拟计算密集型任务
@@ -915,11 +915,11 @@ fn parallel_processing() {
         }
         result
     };
-    
+
     // 创建并执行并行任务
     let task = ParallelTask::new(data, operation);
     let results = task.execute_with_threshold(100);
-    
+
     println!("Processed {} items", results.len());
 }
 ```
@@ -933,19 +933,19 @@ fn parallel_processing() {
 // 递归可分解的问题定义
 pub trait DivideAndConquer: Sized {
     type Result;
-    
+
     // 问题是否足够小，可以直接解决
     fn is_base_case(&self) -> bool;
-    
+
     // 直接解决小问题
     fn solve_base_case(&self) -> Self::Result;
-    
+
     // 将问题分解为子问题
     fn divide(&self) -> Vec<Self>;
-    
+
     // 合并子问题的解
     fn combine(results: Vec<Self::Result>) -> Self::Result;
-    
+
     // 解决问题（可顺序也可并行）
     fn solve(&self) -> Self::Result {
         if self.is_base_case() {
@@ -958,7 +958,7 @@ pub trait DivideAndConquer: Sized {
             Self::combine(results)
         }
     }
-    
+
     // 并行解决问题
     fn solve_parallel(&self) -> Self::Result
     where
@@ -986,15 +986,15 @@ struct SumRange {
 
 impl DivideAndConquer for SumRange {
     type Result = i64;
-    
+
     fn is_base_case(&self) -> bool {
         self.end - self.start <= self.threshold
     }
-    
+
     fn solve_base_case(&self) -> Self::Result {
         (self.start..=self.end).sum()
     }
-    
+
     fn divide(&self) -> Vec<Self> {
         let mid = self.start + (self.end - self.start) / 2;
         vec![
@@ -1002,7 +1002,7 @@ impl DivideAndConquer for SumRange {
             SumRange { start: mid + 1, end: self.end, threshold: self.threshold },
         ]
     }
-    
+
     fn combine(results: Vec<Self::Result>) -> Self::Result {
         results.into_iter().sum()
     }
@@ -1011,7 +1011,7 @@ impl DivideAndConquer for SumRange {
 // 使用分而治之模式
 fn sum_large_range() {
     let problem = SumRange { start: 1, end: 1_000_000, threshold: 1000 };
-    
+
     // 并行求解
     let result = problem.solve_parallel();
     println!("Sum: {}", result);
@@ -1032,16 +1032,16 @@ use rand::{Rng, SeedableRng, rngs::StdRng};
 pub trait RandomizedAlgorithm {
     type Input;
     type Output;
-    
+
     // 使用提供的随机数生成器执行算法
     fn execute_with_rng<R: Rng>(&self, input: &Self::Input, rng: &mut R) -> Self::Output;
-    
+
     // 使用默认随机数生成器
     fn execute(&self, input: &Self::Input) -> Self::Output {
         let mut rng = rand::thread_rng();
         self.execute_with_rng(input, &mut rng)
     }
-    
+
     // 使用种子执行（用于可重现的结果）
     fn execute_with_seed(&self, input: &Self::Input, seed: u64) -> Self::Output {
         let mut rng = StdRng::seed_from_u64(seed);
@@ -1055,20 +1055,20 @@ pub struct RandomizedQuicksort;
 impl RandomizedAlgorithm for RandomizedQuicksort {
     type Input = Vec<i32>;
     type Output = Vec<i32>;
-    
+
     fn execute_with_rng<R: Rng>(&self, input: &Self::Input, rng: &mut R) -> Self::Output {
         // 如果输入为空或只有一个元素，返回副本
         if input.len() <= 1 {
             return input.clone();
         }
-        
+
         let mut result = input.clone();
-        
+
         // 随机选择枢轴
         let pivot_index = rng.gen_range(0..result.len());
         // 将枢轴移动到末尾以简化分区过程
         result.swap(pivot_index, result.len() - 1);
-        
+
         // 分区过程
         let mut i = 0;
         for j in 0..result.len() - 1 {
@@ -1077,18 +1077,18 @@ impl RandomizedAlgorithm for RandomizedQuicksort {
                 i += 1;
             }
         }
-        
+
         // 将枢轴移回其最终位置
         result.swap(i, result.len() - 1);
-        
+
         // 递归排序两个分区
         let mut left = self.execute_with_rng(&result[0..i].to_vec(), rng);
         let mut right = self.execute_with_rng(&result[i+1..].to_vec(), rng);
-        
+
         // 组合结果
         left.push(result[i]);
         left.append(&mut right);
-        
+
         left
     }
 }
@@ -1096,17 +1096,17 @@ impl RandomizedAlgorithm for RandomizedQuicksort {
 // 使用随机化算法
 fn randomized_sorting() {
     let data = vec![5, 2, 9, 1, 5, 6];
-    
+
     let algorithm = RandomizedQuicksort;
-    
+
     // 随机执行
     let result1 = algorithm.execute(&data);
     println!("Random result: {:?}", result1);
-    
+
     // 使用相同种子的两次执行结果将相同
     let result2 = algorithm.execute_with_seed(&data, 42);
     let result3 = algorithm.execute_with_seed(&data, 42);
-    
+
     assert_eq!(result2, result3);
     println!("Deterministic result with seed: {:?}", result2);
 }
@@ -1126,20 +1126,20 @@ pub trait MonteCarlo {
     type Problem;  // 要解决的问题
     type Sample;   // 单个采样的类型
     type Result;   // 最终结果类型
-    
+
     // 生成随机样本
     fn generate_sample<R: Rng>(&self, problem: &Self::Problem, rng: &mut R) -> Self::Sample;
-    
+
     // 从样本计算贡献
     fn evaluate_sample(&self, problem: &Self::Problem, sample: &Self::Sample) -> f64;
-    
+
     // 从多个样本计算最终结果
     fn aggregate_results(&self, problem: &Self::Problem, contributions: &[f64]) -> Self::Result;
-    
+
     // 运行固定次数的迭代
     fn run_iterations<R: Rng>(
-        &self, 
-        problem: &Self::Problem, 
+        &self,
+        problem: &Self::Problem,
         iterations: usize,
         rng: &mut R
     ) -> Self::Result {
@@ -1149,10 +1149,10 @@ pub trait MonteCarlo {
                 self.evaluate_sample(problem, &sample)
             })
             .collect();
-        
+
         self.aggregate_results(problem, &contributions)
     }
-    
+
     // 运行直到达到时间限制
     fn run_timed<R: Rng>(
         &self,
@@ -1162,13 +1162,13 @@ pub trait MonteCarlo {
     ) -> Self::Result {
         let start = std::time::Instant::now();
         let mut contributions = Vec::new();
-        
+
         while start.elapsed() < time_limit {
             let sample = self.generate_sample(problem, rng);
             let contribution = self.evaluate_sample(problem, &sample);
             contributions.push(contribution);
         }
-        
+
         self.aggregate_results(problem, &contributions)
     }
 }
@@ -1182,12 +1182,12 @@ impl MonteCarlo for PiEstimator {
     type Problem = PiProblem;
     type Sample = PiSample;
     type Result = f64;  // 圆周率估计值
-    
+
     fn generate_sample<R: Rng>(&self, _problem: &Self::Problem, rng: &mut R) -> Self::Sample {
         // 在单位正方形内生成随机点
         PiSample(rng.gen_range(0.0..1.0), rng.gen_range(0.0..1.0))
     }
-    
+
     fn evaluate_sample(&self, _problem: &Self::Problem, sample: &Self::Sample) -> f64 {
         // 检查点是否在单位圆内
         if sample.0 * sample.0 + sample.1 * sample.1 <= 1.0 {
@@ -1196,7 +1196,7 @@ impl MonteCarlo for PiEstimator {
             0.0  // 在圆外
         }
     }
-    
+
     fn aggregate_results(&self, _problem: &Self::Problem, contributions: &[f64]) -> Self::Result {
         // 圆内点的比例 * 4 = π的估计值
         let in_circle: f64 = contributions.iter().sum();
@@ -1210,13 +1210,13 @@ fn estimate_pi() {
     let problem = PiProblem;
     let estimator = PiEstimator;
     let mut rng = rand::thread_rng();
-    
+
     // 使用固定迭代次数
     let pi_estimate = estimator.run_iterations(&problem, 1_000_000, &mut rng);
-    
+
     println!("Pi estimate: {:.6}", pi_estimate);
     println!("Actual Pi: {:.6}", std::f64::consts::PI);
-    
+
     // 运行一定时间
     let timed_estimate = estimator.run_timed(&problem, Duration::from_secs(1), &mut rng);
     println!("Timed Pi estimate: {:.6}", timed_estimate);
@@ -1235,13 +1235,13 @@ fn estimate_pi() {
 pub trait OptimizationProblem {
     type Solution;
     type Value: PartialOrd;
-    
+
     // 计算解的值（目标函数）
     fn evaluate(&self, solution: &Self::Solution) -> Self::Value;
-    
+
     // 生成初始解
     fn initial_solution(&self) -> Self::Solution;
-    
+
     // 生成解的邻域（局部搜索用）
     fn neighbors(&self, solution: &Self::Solution) -> Vec<Self::Solution>;
 }
@@ -1262,15 +1262,15 @@ where
     fn optimize(&self, problem: &P, iterations: usize) -> P::Solution {
         let mut current = problem.initial_solution();
         let mut current_value = problem.evaluate(&current);
-        
+
         for _ in 0..iterations {
             // 生成邻域解
             let neighbors = problem.neighbors(&current);
-            
+
             // 找到最佳的邻域解
             let mut best_neighbor = None;
             let mut best_value = current_value.clone();
-            
+
             for neighbor in neighbors {
                 let value = problem.evaluate(&neighbor);
                 if value > best_value {
@@ -1278,7 +1278,7 @@ where
                     best_neighbor = Some(neighbor);
                 }
             }
-            
+
             // 如果找到更好的解，则更新当前解
             if let Some(neighbor) = best_neighbor {
                 current = neighbor;
@@ -1288,7 +1288,7 @@ where
                 break;
             }
         }
-        
+
         current
     }
 }
@@ -1316,46 +1316,46 @@ where
         let mut current_value = problem.evaluate(&current);
         let mut best = current.clone();
         let mut best_value = current_value;
-        
+
         let mut temperature = self.initial_temperature;
-        
+
         for _ in 0..iterations {
             // 如果温度太低，则停止搜索
             if temperature < 0.01 {
                 break;
             }
-            
+
             // 随机选择一个邻域解
             let neighbors = problem.neighbors(&current);
             if neighbors.is_empty() {
                 break;
             }
-            
+
             let neighbor_idx = rng.gen_range(0..neighbors.len());
             let neighbor = &neighbors[neighbor_idx];
             let neighbor_value = problem.evaluate(neighbor);
-            
+
             // 计算能量差
             let current_energy: f64 = current_value.into();
             let neighbor_energy: f64 = neighbor_value.into();
             let delta_e = neighbor_energy - current_energy;
-            
+
             // 决定是否接受新解
             if delta_e > 0.0 || rng.gen::<f64>() < (delta_e / temperature).exp() {
                 current = neighbor.clone();
                 current_value = neighbor_value;
-                
+
                 // 更新全局最优解
                 if current_value > best_value {
                     best = current.clone();
                     best_value = current_value;
                 }
             }
-            
+
             // 降低温度
             temperature *= self.cooling_rate;
         }
-        
+
         best
     }
 }
@@ -1374,32 +1374,32 @@ struct TSPSolution {
 impl OptimizationProblem for TSP {
     type Solution = TSPSolution;
     type Value = f64;
-    
+
     fn evaluate(&self, solution: &Self::Solution) -> Self::Value {
         let mut total_distance = 0.0;
         let n = solution.tour.len();
-        
+
         for i in 0..n {
             let from = solution.tour[i];
             let to = solution.tour[(i + 1) % n];
             total_distance += self.distances[from][to];
         }
-        
+
         // 返回负距离作为值（因为我们要最大化值）
         -total_distance
     }
-    
+
     fn initial_solution(&self) -> Self::Solution {
         let n = self.distances.len();
         TSPSolution {
             tour: (0..n).collect(),
         }
     }
-    
+
     fn neighbors(&self, solution: &Self::Solution) -> Vec<Self::Solution> {
         let n = solution.tour.len();
         let mut neighbors = Vec::new();
-        
+
         // 生成2-opt邻域（交换两个城市的位置）
         for i in 0..n-1 {
             for j in i+1..n {
@@ -1408,7 +1408,7 @@ impl OptimizationProblem for TSP {
                 neighbors.push(TSPSolution { tour: new_tour });
             }
         }
-        
+
         neighbors
     }
 }
@@ -1422,9 +1422,9 @@ fn solve_tsp() {
         vec![15.0, 35.0, 0.0, 30.0],
         vec![20.0, 25.0, 30.0, 0.0],
     ];
-    
+
     let problem = TSP { distances };
-    
+
     // 使用爬山法
     let hill_climbing = HillClimbing;
     let hc_solution = hill_climbing.optimize(&problem, 100);
@@ -1433,7 +1433,7 @@ fn solve_tsp() {
         hc_solution.tour,
         -problem.evaluate(&hc_solution)
     );
-    
+
     // 使用模拟退火
     let simulated_annealing = SimulatedAnnealing::new(100.0, 0.95);
     let sa_solution = simulated_annealing.optimize(&problem, 1000);
@@ -1454,16 +1454,16 @@ fn solve_tsp() {
 // 搜索问题特征
 pub trait SearchProblem {
     type State: Clone + Eq + std::hash::Hash;
-    
+
     // 初始状态
     fn initial_state(&self) -> Self::State;
-    
+
     // 目标检查
     fn is_goal(&self, state: &Self::State) -> bool;
-    
+
     // 生成后继状态
     fn successors(&self, state: &Self::State) -> Vec<(Self::State, f64)>; // (状态, 步骤成本)
-    
+
     // 启发函数
     fn heuristic(&self, state: &Self::State) -> f64;
 }
@@ -1475,7 +1475,7 @@ impl AStar {
     pub fn search<P: SearchProblem>(problem: &P) -> Option<(Vec<P::State>, f64)> {
         use std::collections::{BinaryHeap, HashMap};
         use std::cmp::Ordering;
-        
+
         // 存储状态的节点
         #[derive(Clone, Eq, PartialEq)]
         struct Node<S> {
@@ -1484,7 +1484,7 @@ impl AStar {
             heuristic: f64,  // h(n)
             parent: Option<usize>,  // 父节点索引
         }
-        
+
         // 自定义比较，使二叉堆成为最小堆
         impl<S> PartialOrd for Node<S> {
             fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
@@ -1493,68 +1493,68 @@ impl AStar {
                 other_f.partial_cmp(&self_f)  // 注意顺序反转
             }
         }
-        
+
         impl<S> Ord for Node<S> {
             fn cmp(&self, other: &Self) -> Ordering {
                 self.partial_cmp(other).unwrap()
             }
         }
-        
+
         // 状态到节点索引的映射
         let mut state_to_index = HashMap::new();
         // 所有节点
         let mut nodes = Vec::new();
         // 优先队列
         let mut frontier = BinaryHeap::new();
-        
+
         // 初始化搜索
         let initial_state = problem.initial_state();
         let initial_heuristic = problem.heuristic(&initial_state);
-        
+
         let initial_node = Node {
             state: initial_state.clone(),
             path_cost: 0.0,
             heuristic: initial_heuristic,
             parent: None,
         };
-        
+
         nodes.push(initial_node.clone());
         state_to_index.insert(initial_state, 0);
         frontier.push(initial_node);
-        
+
         // 开始搜索
         while let Some(current) = frontier.pop() {
             let current_index = state_to_index[&current.state];
-            
+
             // 检查是否达到目标
             if problem.is_goal(&current.state) {
                 // 重建路径
                 let mut path = Vec::new();
                 let mut total_cost = current.path_cost;
                 let mut current_idx = current_index;
-                
+
                 path.push(nodes[current_idx].state.clone());
-                
+
                 while let Some(parent_idx) = nodes[current_idx].parent {
                     current_idx = parent_idx;
                     path.push(nodes[current_idx].state.clone());
                 }
-                
+
                 path.reverse();
                 return Some((path, total_cost));
             }
-            
+
             // 扩展当前节点
             for (successor, step_cost) in problem.successors(&current.state) {
                 let new_cost = current.path_cost + step_cost;
-                
+
                 // 检查是否已有更好的路径
                 if let Some(&successor_idx) = state_to_index.get(&successor) {
                     if nodes[successor_idx].path_cost <= new_cost {
                         continue;  // 已有更好的路径
                     }
                 }
-                
+
                 // 创建新节点
                 let successor_node = Node {
                     state: successor.clone(),
@@ -1562,7 +1562,7 @@ impl AStar {
                     heuristic: problem.heuristic(&successor),
                     parent: Some(current_index),
                 };
-                
+
                 // 更新或添加节点
                 if let Some(&successor_idx) = state_to_index.get(&successor) {
                     nodes[successor_idx] = successor_node.clone();
@@ -1570,11 +1570,11 @@ impl AStar {
                     state_to_index.insert(successor.clone(), nodes.len());
                     nodes.push(successor_node.clone());
                 }
-                
+
                 frontier.push(successor_node);
             }
         }
-        
+
         // 无解
         None
     }
@@ -1592,28 +1592,28 @@ impl EightPuzzle {
         let empty_pos = board.iter().position(|&x| x == 0).unwrap();
         Self { board, empty_pos }
     }
-    
+
     fn get_manhattan_distance(&self) -> f64 {
         let goal_positions = [
             (0, 0), (0, 1), (0, 2),
             (1, 0), (1, 1), (1, 2),
             (2, 0), (2, 1), (2, 2),
         ];
-        
+
         let mut distance = 0;
-        
+
         for (i, &tile) in self.board.iter().enumerate() {
             if tile == 0 {
                 continue;  // 跳过空格
             }
-            
+
             let (i_row, i_col) = (i / 3, i % 3);
             let (g_row, g_col) = goal_positions[tile as usize];
-            
-            distance += (i_row as i32 - g_row as i32).abs() + 
+
+            distance += (i_row as i32 - g_row as i32).abs() +
                        (i_col as i32 - g_col as i32).abs();
         }
-        
+
         distance as f64
     }
 }
@@ -1624,20 +1624,20 @@ struct EightPuzzleProblem {
 
 impl SearchProblem for EightPuzzleProblem {
     type State = EightPuzzle;
-    
+
     fn initial_state(&self) -> Self::State {
         self.initial.clone()
     }
-    
+
     fn is_goal(&self, state: &Self::State) -> bool {
         state.board == [1, 2, 3, 4, 5, 6, 7, 8, 0]
     }
-    
+
     fn successors(&self, state: &Self::State) -> Vec<(Self::State, f64)> {
         let mut result = Vec::new();
         let empty = state.empty_pos;
         let (row, col) = (empty / 3, empty % 3);
-        
+
         // 可能的移动：上、下、左、右
         let possible_moves = [
             (row > 0, empty - 3),           // 上
@@ -1645,25 +1645,25 @@ impl SearchProblem for EightPuzzleProblem {
             (col > 0, empty - 1),           // 左
             (col < 2, empty + 1),           // 右
         ];
-        
+
         for (can_move, new_pos) in possible_moves {
             if can_move {
                 let mut new_board = state.board;
                 new_board.swap(empty, new_pos);
-                
+
                 let new_state = EightPuzzle {
                     board: new_board,
                     empty_pos: new_pos,
                 };
-                
+
                 // 每一步的代价为1
                 result.push((new_state, 1.0));
             }
         }
-        
+
         result
     }
-    
+
     fn heuristic(&self, state: &Self::State) -> f64 {
         state.get_manhattan_distance()
     }
@@ -1674,14 +1674,14 @@ fn solve_eight_puzzle() {
     // 创建初始状态
     let initial_state = EightPuzzle::new([3, 1, 2, 6, 4, 5, 7, 8, 0]);
     let problem = EightPuzzleProblem { initial: initial_state };
-    
+
     // 使用A*搜索
     match AStar::search(&problem) {
         Some((path, cost)) => {
             println!("找到解决方案！");
             println!("步骤数: {}", path.len() - 1);
             println!("总代价: {}", cost);
-            
+
             for (i, state) in path.iter().enumerate() {
                 println!("步骤 {}:", i);
                 for row in 0..3 {

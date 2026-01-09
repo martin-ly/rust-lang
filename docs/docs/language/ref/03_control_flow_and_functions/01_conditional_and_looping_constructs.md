@@ -87,7 +87,7 @@ let result = loop {
     counter += 1;
     if counter == 10 {
         // 使用 break 退出循环并返回值
-        break counter * 2; 
+        break counter * 2;
     }
 };
 // `result` 被绑定为 20

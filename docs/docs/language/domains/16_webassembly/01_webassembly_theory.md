@@ -111,7 +111,7 @@ impl WasmModule {
             globals: Vec::new(),
         }
     }
-    
+
     pub fn execute_function(&mut self, func_index: u32, args: &[u64]) -> Result<Vec<u64>, String> {
         // 函数执行逻辑
         match func_index {
@@ -120,12 +120,12 @@ impl WasmModule {
             _ => Err("未知函数".to_string()),
         }
     }
-    
+
     fn fibonacci(&self, args: &[u64]) -> Result<Vec<u64>, String> {
         if args.len() != 1 {
             return Err("斐波那契函数需要1个参数".to_string());
         }
-        
+
         let n = args[0] as u32;
         if n <= 1 {
             Ok(vec![n as u64])
@@ -183,25 +183,25 @@ impl MemoryManager {
             size,
         }
     }
-    
+
     pub fn grow(&mut self, pages: u32) -> Result<i32, String> {
         let old_pages = self.size / 65536;
         let new_size = self.size + (pages as usize) * 65536;
-        
+
         if new_size > 65536 * 65536 { // 最大4GB
             return Err("内存超出限制".to_string());
         }
-        
+
         self.memory.resize(new_size, 0);
         self.size = new_size;
         Ok(old_pages as i32)
     }
-    
+
     pub fn read_i32(&self, offset: usize) -> Result<i32, String> {
         if offset + 4 > self.size {
             return Err("内存访问越界".to_string());
         }
-        
+
         let bytes = [
             self.memory[offset],
             self.memory[offset + 1],
@@ -210,12 +210,12 @@ impl MemoryManager {
         ];
         Ok(i32::from_le_bytes(bytes))
     }
-    
+
     pub fn write_i32(&mut self, offset: usize, value: i32) -> Result<(), String> {
         if offset + 4 > self.size {
             return Err("内存访问越界".to_string());
         }
-        
+
         let bytes = value.to_le_bytes();
         for (i, &byte) in bytes.iter().enumerate() {
             self.memory[offset + i] = byte;
@@ -298,17 +298,17 @@ impl Point {
     pub fn new(x: f32, y: f32) -> Point {
         Point { x, y }
     }
-    
+
     pub fn distance(&self, other: &Point) -> f32 {
         let dx = self.x - other.x;
         let dy = self.y - other.y;
         (dx * dx + dy * dy).sqrt()
     }
-    
+
     pub fn x(&self) -> f32 {
         self.x
     }
-    
+
     pub fn y(&self) -> f32 {
         self.y
     }
@@ -386,15 +386,15 @@ impl Calculator {
     pub fn new() -> Calculator {
         Calculator { value: 0.0 }
     }
-    
+
     pub fn add(&mut self, x: f64) {
         self.value += x;
     }
-    
+
     pub fn multiply(&mut self, x: f64) {
         self.value *= x;
     }
-    
+
     pub fn get_value(&self) -> f64 {
         self.value
     }
@@ -460,10 +460,10 @@ pub fn create_user(name: &str, email: &str) -> Result<JsValue, JsValue> {
         name: name.to_string(),
         email: email.to_string(),
     };
-    
+
     validate_user(&user)
         .map_err(|e| JsValue::from_str(&e))?;
-    
+
     Ok(serde_wasm_bindgen::to_value(&user)?)
 }
 
@@ -484,7 +484,7 @@ async fn create_user(Json(user): Json<User>) -> Result<Json<User>, String> {
 async fn main() {
     let app = Router::new()
         .route("/users", post(create_user));
-    
+
     axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
         .serve(app.into_make_service())
         .await

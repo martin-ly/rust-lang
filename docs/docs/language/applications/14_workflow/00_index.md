@@ -315,7 +315,7 @@ async fn scatter_gather<T, R>(
     let futures: Vec<_> = tasks.into_iter()
         .map(|task| task.execute(input.clone()))
         .collect();
-    
+
     futures::future::try_join_all(futures).await
 }
 ```
@@ -334,7 +334,7 @@ async fn scatter_gather<T, R>(
 // 概念示例
 trait Compensatable {
     type CompensationData;
-    
+
     async fn execute(&self) -> Result<Self::CompensationData, Error>;
     async fn compensate(&self, data: Self::CompensationData) -> Result<(), Error>;
 }
@@ -583,7 +583,7 @@ struct WorkflowStateMachine {
 
 ---
 
-**Document History**:  
+**Document History**:
 
 - Created: 2025-07-21
 - Updated: 2025-07-22 - 更新了交叉引用和相关概念部分

@@ -78,16 +78,16 @@ impl UserServiceClient {
             .json(&request)
             .send()
             .await?;
-            
+
         response.json().await.map_err(Into::into)
     }
-    
+
     pub async fn get_user(&self, user_id: u64) -> Result<UserResponse, ClientError> {
         let response = self.client
             .get(&format!("{}/users/{}", self.base_url, user_id))
             .send()
             .await?;
-            
+
         response.json().await.map_err(Into::into)
     }
 }
@@ -139,41 +139,41 @@ impl user_service_server::UserService for UserGrpcService {
         request: Request<CreateUserRequest>,
     ) -> Result<Response<UserResponse>, Status> {
         let req = request.into_inner();
-        
+
         let user = self.user_service
             .create(req.name, req.email)
             .await
             .map_err(|e| Status::new(Code::Internal, e.to_string()))?;
-            
+
         Ok(Response::new(user.into()))
     }
-    
+
     async fn get_user(
         &self,
         request: Request<GetUserRequest>,
     ) -> Result<Response<UserResponse>, Status> {
         let req = request.into_inner();
-        
+
         let user = self.user_service
             .find(req.user_id)
             .await
             .map_err(|e| Status::new(Code::NotFound, e.to_string()))?;
-            
+
         Ok(Response::new(user.into()))
     }
-    
+
     type ListUsersStream = Pin<Box<dyn Stream<Item = Result<UserResponse, Status>> + Send>>;
-    
+
     async fn list_users(
         &self,
         _request: Request<ListUsersRequest>,
     ) -> Result<Response<Self::ListUsersStream>, Status> {
         let users = self.user_service.list().await;
-        
+
         let stream = futures::stream::iter(
             users.into_iter().map(|user| Ok(user.into()))
         );
-        
+
         Ok(Response::new(Box::pin(stream)))
     }
 }
@@ -188,7 +188,7 @@ impl UserGrpcClient {
         let client = user_service_client::UserServiceClient::connect(addr).await?;
         Ok(Self { client })
     }
-    
+
     pub async fn create_user(&mut self, name: String, email: String) -> Result<UserResponse, Status> {
         let request = Request::new(CreateUserRequest { name, email });
         let response = self.client.create_user(request).await?;
@@ -222,20 +222,20 @@ impl MessagePublisher {
     pub async fn new(connection_url: &str) -> Result<Self, lapin::Error> {
         let connection = Connection::connect(connection_url, ConnectionProperties::default()).await?;
         let channel = connection.create_channel().await?;
-        
+
         Ok(Self { channel })
     }
-    
+
     pub async fn publish_order_created(&self, event: OrderCreatedEvent) -> Result<(), PublishError> {
         let queue_name = "order.created";
-        
+
         // 声明队列
         self.channel.queue_declare(
             queue_name,
             QueueDeclareOptions::default(),
             Default::default(),
         ).await?;
-        
+
         // 发布消息
         let payload = serde_json::to_vec(&event)?;
         self.channel.basic_publish(
@@ -245,7 +245,7 @@ impl MessagePublisher {
             &payload,
             BasicProperties::default(),
         ).await?;
-        
+
         Ok(())
     }
 }
@@ -259,29 +259,29 @@ impl MessageConsumer {
     pub async fn new(connection_url: &str) -> Result<Self, lapin::Error> {
         let connection = Connection::connect(connection_url, ConnectionProperties::default()).await?;
         let channel = connection.create_channel().await?;
-        
+
         Ok(Self { channel })
     }
-    
+
     pub async fn consume_order_events<F>(&self, handler: F) -> Result<(), ConsumeError>
     where
         F: Fn(OrderCreatedEvent) -> Pin<Box<dyn Future<Output = Result<(), ProcessError>> + Send>> + Send + Sync + 'static,
     {
         let queue_name = "order.created";
-        
+
         self.channel.queue_declare(
             queue_name,
             QueueDeclareOptions::default(),
             Default::default(),
         ).await?;
-        
+
         let consumer = self.channel.basic_consume(
             queue_name,
             "order_processor",
             BasicConsumeOptions::default(),
             Default::default(),
         ).await?;
-        
+
         consumer.for_each(move |delivery| {
             let handler = &handler;
             async move {
@@ -300,7 +300,7 @@ impl MessageConsumer {
                 }
             }
         }).await;
-        
+
         Ok(())
     }
 }
@@ -359,7 +359,7 @@ pub trait EventStore {
         expected_version: u64,
         events: Vec<Event<OrderEvent>>,
     ) -> Result<(), EventStoreError>;
-    
+
     async fn get_events(
         &self,
         aggregate_id: &str,
@@ -383,7 +383,7 @@ impl OrderAggregate {
     // 从事件重建聚合状态
     pub fn from_events(events: Vec<Event<OrderEvent>>) -> Result<Self, AggregateError> {
         let mut aggregate = None;
-        
+
         for event in events {
             match aggregate {
                 None => {
@@ -407,14 +407,14 @@ impl OrderAggregate {
                 }
             }
         }
-        
+
         aggregate.ok_or(AggregateError::NoEvents)
     }
-    
+
     // 应用事件到聚合
     fn apply_event(&mut self, event: Event<OrderEvent>) {
         self.version = event.metadata.version;
-        
+
         match event.data {
             OrderEvent::ItemAdded { item } => {
                 self.items.push(item.clone());
@@ -471,7 +471,7 @@ impl ServiceRegistry {
             heartbeat_timeout,
         }
     }
-    
+
     // 注册服务实例
     pub fn register(&self, instance: ServiceInstance) -> Result<(), RegistryError> {
         let mut services = self.services.write().unwrap();
@@ -481,12 +481,12 @@ impl ServiceRegistry {
             .push(instance);
         Ok(())
     }
-    
+
     // 获取健康的服务实例
     pub fn get_healthy_instances(&self, service_name: &str) -> Vec<ServiceInstance> {
         let services = self.services.read().unwrap();
         let now = Utc::now();
-        
+
         services
             .get(service_name)
             .map(|instances| {
@@ -502,31 +502,31 @@ impl ServiceRegistry {
             })
             .unwrap_or_default()
     }
-    
+
     // 心跳更新
     pub fn heartbeat(&self, service_name: &str, instance_id: &str) -> Result<(), RegistryError> {
         let mut services = self.services.write().unwrap();
-        
+
         if let Some(instances) = services.get_mut(service_name) {
             if let Some(instance) = instances.iter_mut().find(|i| i.id == instance_id) {
                 instance.last_heartbeat = Utc::now();
                 return Ok(());
             }
         }
-        
+
         Err(RegistryError::InstanceNotFound)
     }
-    
+
     // 清理过期实例
     pub async fn cleanup_expired_instances(&self) {
         let mut interval = tokio::time::interval(Duration::from_secs(30));
-        
+
         loop {
             interval.tick().await;
-            
+
             let mut services = self.services.write().unwrap();
             let now = Utc::now();
-            
+
             for instances in services.values_mut() {
                 instances.retain(|instance| {
                     now.signed_duration_since(instance.last_heartbeat).to_std()
@@ -567,12 +567,12 @@ impl LoadBalancer {
             connection_counts: Arc::new(RwLock::new(HashMap::new())),
         }
     }
-    
+
     pub fn select_instance(&self, instances: &[ServiceInstance]) -> Option<&ServiceInstance> {
         if instances.is_empty() {
             return None;
         }
-        
+
         match self.strategy {
             LoadBalancingStrategy::RoundRobin => {
                 let index = self.round_robin_counter.fetch_add(1, Ordering::Relaxed) % instances.len();
@@ -600,24 +600,24 @@ impl LoadBalancer {
             }
         }
     }
-    
+
     fn consistent_hash_select(&self, instances: &[ServiceInstance]) -> Option<&ServiceInstance> {
         // 简化的一致性哈希实现
         let hash = std::collections::hash_map::DefaultHasher::new();
         // 实现哈希环逻辑...
         instances.first() // 占位实现
     }
-    
+
     fn weighted_random_select(&self, instances: &[ServiceInstance]) -> Option<&ServiceInstance> {
         // 基于权重的随机选择
         let total_weight: f64 = instances
             .iter()
             .map(|i| i.metadata.get("weight").and_then(|w| w.parse().ok()).unwrap_or(1.0))
             .sum();
-            
+
         let mut rng = rand::thread_rng();
         let mut random_weight = rng.gen_range(0.0..total_weight);
-        
+
         for instance in instances {
             let weight = instance.metadata.get("weight")
                 .and_then(|w| w.parse().ok())
@@ -627,7 +627,7 @@ impl LoadBalancer {
                 return Some(instance);
             }
         }
-        
+
         instances.last()
     }
 }
@@ -675,25 +675,25 @@ impl ServiceMeshProxy {
             },
             dynamic_resources: None,
         };
-        
+
         Self { config, service_registry }
     }
-    
+
     pub async fn start_proxy(&self) -> Result<(), ProxyError> {
         // 启动Envoy代理进程
         let config_yaml = serde_yaml::to_string(&self.config)?;
-        
+
         // 将配置写入临时文件
         tokio::fs::write("/tmp/envoy.yaml", config_yaml).await?;
-        
+
         // 启动Envoy进程
         let mut child = tokio::process::Command::new("envoy")
             .args(&["-c", "/tmp/envoy.yaml"])
             .spawn()?;
-            
+
         // 监控进程状态
         let status = child.wait().await?;
-        
+
         if status.success() {
             Ok(())
         } else {
@@ -745,10 +745,10 @@ impl TrafficManager {
         let mut policies = self.policies.write().unwrap();
         policies.insert(service.to_string(), policy);
     }
-    
+
     pub fn route_request(&self, service: &str, request: &HttpRequest) -> Option<String> {
         let policies = self.policies.read().unwrap();
-        
+
         if let Some(policy) = policies.get(service) {
             for rule in &policy.rules {
                 if self.matches_conditions(&rule.match_conditions, request) {
@@ -756,10 +756,10 @@ impl TrafficManager {
                 }
             }
         }
-        
+
         None
     }
-    
+
     fn matches_conditions(&self, conditions: &MatchConditions, request: &HttpRequest) -> bool {
         // 检查头部匹配
         if let Some(ref headers) = conditions.headers {
@@ -769,29 +769,29 @@ impl TrafficManager {
                 }
             }
         }
-        
+
         // 检查方法匹配
         if let Some(ref method) = conditions.method {
             if request.method().as_str() != method {
                 return false;
             }
         }
-        
+
         true
     }
-    
+
     fn select_destination(&self, destinations: &[WeightedDestination]) -> Option<String> {
         let total_weight: u32 = destinations.iter().map(|d| d.weight).sum();
         let mut rng = rand::thread_rng();
         let mut random_weight = rng.gen_range(0..total_weight);
-        
+
         for destination in destinations {
             if random_weight < destination.weight {
                 return Some(destination.destination.clone());
             }
             random_weight -= destination.weight;
         }
-        
+
         destinations.first().map(|d| d.destination.clone())
     }
 }
@@ -826,7 +826,7 @@ impl ServiceAuthenticator {
             algorithm: Algorithm::HS256,
         }
     }
-    
+
     pub fn generate_token(&self, service_name: &str, permissions: Vec<String>) -> Result<String, AuthError> {
         let now = SystemTime::now().duration_since(UNIX_EPOCH)?.as_secs();
         let claims = ServiceClaims {
@@ -835,11 +835,11 @@ impl ServiceAuthenticator {
             exp: (now + 3600) as usize, // 1小时过期
             iat: now as usize,
         };
-        
+
         encode(&Header::new(self.algorithm), &claims, &self.encoding_key)
             .map_err(Into::into)
     }
-    
+
     pub fn verify_token(&self, token: &str) -> Result<ServiceClaims, AuthError> {
         let validation = Validation::new(self.algorithm);
         let token_data = decode::<ServiceClaims>(token, &self.decoding_key, &validation)?;
@@ -857,7 +857,7 @@ pub async fn service_auth_middleware(
         .get("Authorization")
         .and_then(|h| h.to_str().ok())
         .and_then(|h| h.strip_prefix("Bearer "));
-        
+
     if let Some(token) = auth_header {
         // 验证token
         match AUTHENTICATOR.verify_token(token) {
@@ -888,25 +888,25 @@ impl TlsConfig {
     pub fn new(cert_path: &Path, key_path: &Path) -> Result<Self, TlsError> {
         let cert_file = std::fs::File::open(cert_path)?;
         let key_file = std::fs::File::open(key_path)?;
-        
+
         let cert_chain = rustls_pemfile::certs(&mut BufReader::new(cert_file))?
             .into_iter()
             .map(Certificate)
             .collect();
-            
+
         let mut keys = rustls_pemfile::pkcs8_private_keys(&mut BufReader::new(key_file))?;
         let private_key = PrivateKey(keys.remove(0));
-        
+
         let config = ServerConfig::builder()
             .with_safe_defaults()
             .with_no_client_auth()
             .with_single_cert(cert_chain, private_key)?;
-            
+
         let acceptor = TlsAcceptor::from(Arc::new(config));
-        
+
         Ok(Self { acceptor })
     }
-    
+
     pub async fn accept_tls(&self, stream: TcpStream) -> Result<TlsStream<TcpStream>, TlsError> {
         self.acceptor.accept(stream).await.map_err(Into::into)
     }
@@ -936,6 +936,6 @@ impl TlsConfig {
 
 ---
 
-**文档版本**: 1.0  
-**最后更新**: 2025-06-30  
+**文档版本**: 1.0
+**最后更新**: 2025-06-30
 **维护者**: Rust微服务通信研究组

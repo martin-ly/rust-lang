@@ -1,9 +1,9 @@
 # Rust 教学与学习: 形式化理论
 
-**文档编号**: 25.01  
-**版本**: 1.0  
-**创建日期**: 2025-01-27  
-**最后更新**: 2025-01-28  
+**文档编号**: 25.01
+**版本**: 1.0
+**创建日期**: 2025-01-27
+**最后更新**: 2025-01-28
 
 ## 目录
 
@@ -189,7 +189,7 @@ impl ConceptDependencyGraph {
     // 检查学习路径是否有效
     fn is_valid_path(&self, path: &[String]) -> bool {
         let mut learned_concepts = HashSet::new();
-        
+
         for concept in path {
             // 检查先决条件是否满足
             for prereq in &self.nodes[concept].prerequisites {
@@ -197,14 +197,14 @@ impl ConceptDependencyGraph {
                     return false;
                 }
             }
-            
+
             // 将当前概念标记为已学习
             learned_concepts.insert(concept);
         }
-        
+
         true
     }
-    
+
     // 查找最优学习路径
     fn find_optimal_path(&self, start: &HashSet<String>, goal: &HashSet<String>) -> Vec<String> {
         // 使用A*或其他图搜索算法查找最优路径
@@ -296,7 +296,7 @@ function TeachOwnership(student):
     // 第1步：引入具体类比
     Analogy = "图书借阅系统，一本书只能被一个人拥有"
     Present(student, Analogy)
-    
+
     // 第2步：提供实例代码
     Examples = [
         "基本赋值例子",
@@ -306,18 +306,18 @@ function TeachOwnership(student):
     ForEach example in Examples:
         Present(student, example)
         VerifyUnderstanding(student)
-    
+
     // 第3步：提取规则
     Rules = [
         "每个值在同一时间只有一个所有者",
         "当所有者离开作用域，值被丢弃"
     ]
     Present(student, Rules)
-    
+
     // 第4步：应用扩展
     Exercises = GenerateExercises(student.level)
     AssignExercises(student, Exercises)
-    
+
     return EvaluateUnderstanding(student)
 ```
 
@@ -412,16 +412,16 @@ Rust的错误处理模式结合了函数式和命令式风格，教学模式如�
 
 ```rust
 fn optimize_learning_path(
-    learner: &LearnerModel, 
+    learner: &LearnerModel,
     concepts: &ConceptDependencyGraph,
     goal_concepts: &HashSet<String>
 ) -> Vec<String> {
     // 获取学习者已掌握的概念
     let known_concepts = learner.known_concepts();
-    
+
     // 创建优先队列，按照概念优先级排序
     let mut priority_queue = PriorityQueue::new();
-    
+
     // 初始化优先队列
     for concept in goal_concepts {
         if !known_concepts.contains(concept) {
@@ -429,11 +429,11 @@ fn optimize_learning_path(
             priority_queue.push(concept.clone(), priority);
         }
     }
-    
+
     // 生成学习路径
     let mut learning_path = Vec::new();
     let mut learned = known_concepts.clone();
-    
+
     while let Some((concept, _)) = priority_queue.pop() {
         // 检查是否所有前提条件都已满足
         let prerequisites_met = concepts.get(&concept)
@@ -441,7 +441,7 @@ fn optimize_learning_path(
             .prerequisites
             .iter()
             .all(|prereq| learned.contains(prereq));
-        
+
         if prerequisites_met {
             // 将概念添加到学习路径
             learning_path.push(concept.clone());
@@ -452,7 +452,7 @@ fn optimize_learning_path(
             priority_queue.push(concept, new_priority);
         }
     }
-    
+
     learning_path
 }
 
@@ -509,10 +509,10 @@ fn ownership_step1() {
     // 示例1: 基本所有权转移
     let s1 = String::from("hello");
     let s2 = s1;
-    
+
     // println!("{}", s1); // 编译错误：s1已移动
     println!("{}", s2); // 正常工作
-    
+
     // 解释: s1的所有权已转移给s2，s1不再有效
 }
 ```
@@ -524,10 +524,10 @@ fn ownership_step2() {
     // 示例2: 克隆而非转移所有权
     let s1 = String::from("hello");
     let s2 = s1.clone();
-    
+
     println!("{}", s1); // 正常工作
     println!("{}", s2); // 正常工作
-    
+
     // 解释: s1的数据被克隆，s1和s2各自拥有独立的数据
 }
 ```
@@ -540,7 +540,7 @@ fn ownership_step3() {
     let s = String::from("hello");
     takes_ownership(s);
     // println!("{}", s); // 编译错误：s已移动
-    
+
     let x = 5;
     takes_copy(x);
     println!("{}", x); // 正常工作，x是Copy类型
@@ -571,7 +571,7 @@ fn lifetime_step1() {
     //         y
     //     }
     // }
-    
+
     // 解释: 编译器不知道返回的引用是来自x还是y
 }
 ```
@@ -587,13 +587,13 @@ fn lifetime_step2() {
             y
         }
     }
-    
+
     let string1 = String::from("abcd");
     let string2 = "xyz";
-    
+
     let result = longest(string1.as_str(), string2);
     println!("The longest string is {}", result);
-    
+
     // 解释: 'a表示x、y和返回值的生命周期必须相互关联
 }
 ```
@@ -606,7 +606,7 @@ fn lifetime_step3() {
         // y的生命周期与返回值无关
         x
     }
-    
+
     // 解释: 只有x的生命周期与返回值相关
 }
 ```
@@ -646,19 +646,19 @@ fn assess_learning_progress(
     concepts: &ConceptDependencyGraph
 ) -> HashMap<String, f32> {
     let mut assessment = HashMap::new();
-    
+
     // 为每个概念生成评估
     for concept in concepts.nodes.keys() {
         // 针对概念创建测试
         let test = generate_test_for_concept(concept);
-        
+
         // 模拟学习者完成测试
         let score = simulate_learner_test(learner, test);
-        
+
         // 记录掌握程度
         assessment.insert(concept.clone(), score);
     }
-    
+
     assessment
 }
 ```

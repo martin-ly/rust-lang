@@ -147,19 +147,19 @@ impl<T> DynamicArray<T> {
     pub fn new() -> Self {
         Self { data: Vec::new() }
     }
-    
+
     pub fn push(&mut self, item: T) {
         self.data.push(item); // Vec已实现动态扩容
     }
-    
+
     pub fn pop(&mut self) -> Option<T> {
         self.data.pop()
     }
-    
+
     pub fn get(&self, index: usize) -> Option<&T> {
         self.data.get(index)
     }
-    
+
     pub fn len(&self) -> usize {
         self.data.len()
     }
@@ -188,7 +188,7 @@ impl<T> List<T> {
     pub fn new() -> Self {
         Self { head: None }
     }
-    
+
     pub fn push_front(&mut self, value: T) {
         let new_node = Box::new(Node {
             value,
@@ -196,7 +196,7 @@ impl<T> List<T> {
         });
         self.head = Some(new_node);
     }
-    
+
     pub fn pop_front(&mut self) -> Option<T> {
         self.head.take().map(|node| {
             self.head = node.next;
@@ -228,19 +228,19 @@ impl<T> Stack<T> {
     pub fn new() -> Self {
         Self { elements: Vec::new() }
     }
-    
+
     pub fn push(&mut self, value: T) {
         self.elements.push(value);
     }
-    
+
     pub fn pop(&mut self) -> Option<T> {
         self.elements.pop()
     }
-    
+
     pub fn peek(&self) -> Option<&T> {
         self.elements.last()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.elements.is_empty()
     }
@@ -261,7 +261,7 @@ impl<T> CircularQueue<T> {
         for _ in 0..capacity {
             elements.push(None);
         }
-        
+
         Self {
             elements,
             capacity,
@@ -270,23 +270,23 @@ impl<T> CircularQueue<T> {
             size: 0,
         }
     }
-    
+
     pub fn enqueue(&mut self, value: T) -> Result<(), &'static str> {
         if self.size == self.capacity {
             return Err("Queue is full");
         }
-        
+
         self.elements[self.tail] = Some(value);
         self.tail = (self.tail + 1) % self.capacity;
         self.size += 1;
         Ok(())
     }
-    
+
     pub fn dequeue(&mut self) -> Option<T> {
         if self.size == 0 {
             return None;
         }
-        
+
         let value = self.elements[self.head].take();
         self.head = (self.head + 1) % self.capacity;
         self.size -= 1;
@@ -324,11 +324,11 @@ impl<T> BinaryTree<T> {
     pub fn new() -> Self {
         Self { root: None }
     }
-    
+
     pub fn height(&self) -> usize {
         Self::height_recursive(&self.root)
     }
-    
+
     fn height_recursive(node: &Option<Box<Node<T>>>) -> usize {
         match node {
             None => 0,
@@ -367,11 +367,11 @@ impl<T: Ord> BinarySearchTree<T> {
     pub fn new() -> Self {
         Self { root: None }
     }
-    
+
     pub fn insert(&mut self, value: T) {
         Self::insert_recursive(&mut self.root, value);
     }
-    
+
     fn insert_recursive(node: &mut Option<Box<Node<T>>>, value: T) {
         match node {
             None => {
@@ -391,11 +391,11 @@ impl<T: Ord> BinarySearchTree<T> {
             }
         }
     }
-    
+
     pub fn search(&self, value: &T) -> bool {
         Self::search_recursive(&self.root, value)
     }
-    
+
     fn search_recursive(node: &Option<Box<Node<T>>>, value: &T) -> bool {
         match node {
             None => false,
@@ -410,11 +410,11 @@ impl<T: Ord> BinarySearchTree<T> {
             }
         }
     }
-    
+
     pub fn in_order_traversal(&self, visit: &mut impl FnMut(&T)) {
         Self::in_order_recursive(&self.root, visit);
     }
-    
+
     fn in_order_recursive(node: &Option<Box<Node<T>>>, visit: &mut impl FnMut(&T)) {
         if let Some(n) = node {
             Self::in_order_recursive(&n.left, visit);
@@ -451,54 +451,54 @@ impl<T: Ord> AVLTree<T> {
     pub fn new() -> Self {
         Self { root: None }
     }
-    
+
     fn height(node: &Option<Box<Node<T>>>) -> usize {
         match node {
             None => 0,
             Some(n) => n.height,
         }
     }
-    
+
     fn balance_factor(node: &Node<T>) -> isize {
         Self::height(&node.left) as isize - Self::height(&node.right) as isize
     }
-    
+
     fn update_height(node: &mut Node<T>) {
         node.height = 1 + std::cmp::max(
             Self::height(&node.left),
             Self::height(&node.right)
         );
     }
-    
+
     // 右旋转
     fn rotate_right(mut node: Box<Node<T>>) -> Box<Node<T>> {
         let mut left_child = node.left.take().unwrap();
         node.left = left_child.right.take();
         Self::update_height(&mut node);
-        
+
         left_child.right = Some(node);
         Self::update_height(&mut left_child);
-        
+
         left_child
     }
-    
+
     // 左旋转
     fn rotate_left(mut node: Box<Node<T>>) -> Box<Node<T>> {
         let mut right_child = node.right.take().unwrap();
         node.right = right_child.left.take();
         Self::update_height(&mut node);
-        
+
         right_child.left = Some(node);
         Self::update_height(&mut right_child);
-        
+
         right_child
     }
-    
+
     // 平衡节点
     fn balance(mut node: Box<Node<T>>) -> Box<Node<T>> {
         Self::update_height(&mut node);
         let balance = Self::balance_factor(&node);
-        
+
         if balance > 1 {
             // 左子树过高
             if let Some(left) = &node.left {
@@ -522,14 +522,14 @@ impl<T: Ord> AVLTree<T> {
             // RR情况，左旋
             return Self::rotate_left(node);
         }
-        
+
         node
     }
-    
+
     pub fn insert(&mut self, value: T) {
         self.root = Self::insert_recursive(self.root.take(), value);
     }
-    
+
     fn insert_recursive(node: Option<Box<Node<T>>>, value: T) -> Option<Box<Node<T>>> {
         match node {
             None => Some(Box::new(Node {
@@ -546,7 +546,7 @@ impl<T: Ord> AVLTree<T> {
                 } else {
                     return Some(n); // 已存在，不做改变
                 }
-                
+
                 Some(Self::balance(n))
             }
         }
@@ -592,7 +592,7 @@ impl<T: Ord> RedBlackTree<T> {
     pub fn new() -> Self {
         Self { root: None }
     }
-    
+
     // 复杂的实现，包括旋转、重新着色等操作...
 }
 ```
@@ -623,13 +623,13 @@ impl GraphMatrix {
         let adj_matrix = vec![vec![false; vertex_count]; vertex_count];
         Self { adj_matrix, vertex_count }
     }
-    
+
     pub fn add_edge(&mut self, from: usize, to: usize) {
         if from < self.vertex_count && to < self.vertex_count {
             self.adj_matrix[from][to] = true;
         }
     }
-    
+
     pub fn has_edge(&self, from: usize, to: usize) -> bool {
         from < self.vertex_count && to < self.vertex_count && self.adj_matrix[from][to]
     }
@@ -645,13 +645,13 @@ impl GraphList {
         let adj_lists = vec![Vec::new(); vertex_count];
         Self { adj_lists }
     }
-    
+
     pub fn add_edge(&mut self, from: usize, to: usize) {
         if from < self.adj_lists.len() && to < self.adj_lists.len() {
             self.adj_lists[from].push(to);
         }
     }
-    
+
     pub fn neighbors(&self, vertex: usize) -> &[usize] {
         if vertex < self.adj_lists.len() {
             &self.adj_lists[vertex]
@@ -677,31 +677,31 @@ impl GraphList {
         let mut visited = vec![false; self.adj_lists.len()];
         self.dfs_recursive(start, &mut visited, visit);
     }
-    
+
     fn dfs_recursive(&self, vertex: usize, visited: &mut [bool], visit: &mut impl FnMut(usize)) {
         if vertex >= visited.len() || visited[vertex] {
             return;
         }
-        
+
         visited[vertex] = true;
         visit(vertex);
-        
+
         for &neighbor in &self.adj_lists[vertex] {
             self.dfs_recursive(neighbor, visited, visit);
         }
     }
-    
+
     // 广度优先搜索
     pub fn bfs(&self, start: usize, visit: &mut impl FnMut(usize)) {
         let mut visited = vec![false; self.adj_lists.len()];
         let mut queue = std::collections::VecDeque::new();
-        
+
         visited[start] = true;
         queue.push_back(start);
-        
+
         while let Some(vertex) = queue.pop_front() {
             visit(vertex);
-            
+
             for &neighbor in &self.adj_lists[vertex] {
                 if !visited[neighbor] {
                     visited[neighbor] = true;
@@ -750,37 +750,37 @@ impl<K: Eq + std::hash::Hash, V> HashMap<K, V> {
             size: 0,
         }
     }
-    
+
     fn hash(&self, key: &K) -> usize {
         use std::hash::{Hash, Hasher};
         let mut hasher = std::collections::hash_map::DefaultHasher::new();
         key.hash(&mut hasher);
         hasher.finish() as usize % self.capacity
     }
-    
+
     pub fn insert(&mut self, key: K, value: V) -> Option<V> {
         let bucket_index = self.hash(&key);
         let bucket = &mut self.buckets[bucket_index];
-        
+
         // 查找key是否已存在
         for i in 0..bucket.len() {
             if bucket[i].0 == key {
                 return Some(std::mem::replace(&mut bucket[i].1, value));
             }
         }
-        
+
         // 不存在，插入新键值对
         bucket.push((key, value));
         self.size += 1;
-        
+
         // 检查是否需要扩容
         if self.size > self.capacity * 3 / 4 {
             // 扩容逻辑...
         }
-        
+
         None
     }
-    
+
     pub fn get(&self, key: &K) -> Option<&V> {
         let bucket_index = self.hash(key);
         self.buckets[bucket_index]
@@ -788,11 +788,11 @@ impl<K: Eq + std::hash::Hash, V> HashMap<K, V> {
             .find(|(k, _)| k == key)
             .map(|(_, v)| v)
     }
-    
+
     pub fn remove(&mut self, key: &K) -> Option<V> {
         let bucket_index = self.hash(key);
         let bucket = &mut self.buckets[bucket_index];
-        
+
         let pos = bucket.iter().position(|(k, _)| k == key)?;
         self.size -= 1;
         Some(bucket.swap_remove(pos).1)
@@ -823,7 +823,7 @@ pub fn quicksort<T: Ord + Clone>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let pivot_index = partition(arr);
     quicksort(&mut arr[0..pivot_index]);
     quicksort(&mut arr[pivot_index + 1..]);
@@ -832,7 +832,7 @@ pub fn quicksort<T: Ord + Clone>(arr: &mut [T]) {
 fn partition<T: Ord + Clone>(arr: &mut [T]) -> usize {
     let pivot_index = arr.len() - 1;
     let pivot = arr[pivot_index].clone();
-    
+
     let mut i = 0;
     for j in 0..pivot_index {
         if arr[j] <= pivot {
@@ -840,7 +840,7 @@ fn partition<T: Ord + Clone>(arr: &mut [T]) -> usize {
             i += 1;
         }
     }
-    
+
     arr.swap(i, pivot_index);
     i
 }
@@ -859,14 +859,14 @@ pub fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let mid = arr.len() / 2;
     merge_sort(&mut arr[0..mid]);
     merge_sort(&mut arr[mid..]);
-    
+
     let left = arr[0..mid].to_vec();
     let right = arr[mid..].to_vec();
-    
+
     merge(arr, &left, &right);
 }
 
@@ -874,7 +874,7 @@ fn merge<T: Ord + Clone>(arr: &mut [T], left: &[T], right: &[T]) {
     let mut i = 0;  // 左数组索引
     let mut j = 0;  // 右数组索引
     let mut k = 0;  // 合并数组索引
-    
+
     while i < left.len() && j < right.len() {
         if left[i] <= right[j] {
             arr[k] = left[i].clone();
@@ -885,14 +885,14 @@ fn merge<T: Ord + Clone>(arr: &mut [T], left: &[T], right: &[T]) {
         }
         k += 1;
     }
-    
+
     // 复制剩余的元素
     while i < left.len() {
         arr[k] = left[i].clone();
         i += 1;
         k += 1;
     }
-    
+
     while j < right.len() {
         arr[k] = right[j].clone();
         j += 1;
@@ -916,21 +916,21 @@ pub fn heap_sort<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
-    // 
+
+    //
 
 ```rust
 pub fn heap_sort<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     // 构建最大堆
     let len = arr.len();
     for i in (0..len/2).rev() {
         heapify(arr, len, i);
     }
-    
+
     // 逐个将堆顶元素（最大值）放到末尾
     for i in (1..len).rev() {
         arr.swap(0, i);
@@ -942,17 +942,17 @@ fn heapify<T: Ord>(arr: &mut [T], heap_size: usize, root: usize) {
     let mut largest = root;
     let left = 2 * root + 1;
     let right = 2 * root + 2;
-    
+
     // 比较左子节点
     if left < heap_size && arr[left] > arr[largest] {
         largest = left;
     }
-    
+
     // 比较右子节点
     if right < heap_size && arr[right] > arr[largest] {
         largest = right;
     }
-    
+
     // 如果最大值不是根节点，交换并继续堆化
     if largest != root {
         arr.swap(root, largest);
@@ -978,27 +978,27 @@ pub fn counting_sort(arr: &mut [usize], max_val: usize) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     // 创建计数数组
     let mut counts = vec![0; max_val + 1];
-    
+
     // 统计每个元素出现的次数
     for &val in arr.iter() {
         counts[val] += 1;
     }
-    
+
     // 累加计数，确定每个元素的结束位置
     for i in 1..counts.len() {
         counts[i] += counts[i - 1];
     }
-    
+
     // 创建辅助数组，根据计数数组重建排序结果
     let mut output = vec![0; arr.len()];
     for &val in arr.iter().rev() {
         counts[val] -= 1;
         output[counts[val]] = val;
     }
-    
+
     // 将排序结果复制回原数组
     arr.copy_from_slice(&output);
 }
@@ -1017,10 +1017,10 @@ pub fn radix_sort(arr: &mut [u32]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     // 找出最大值，确定位数
     let max_val = *arr.iter().max().unwrap_or(&0);
-    
+
     // 对每一位进行计数排序
     let mut exp = 1;
     while max_val / exp > 0 {
@@ -1032,25 +1032,25 @@ pub fn radix_sort(arr: &mut [u32]) {
 fn counting_sort_by_digit(arr: &mut [u32], exp: u32) {
     let mut output = vec![0; arr.len()];
     let mut counts = vec![0; 10];
-    
+
     // 统计当前位上每个数字出现的次数
     for &val in arr.iter() {
         let digit = (val / exp) % 10;
         counts[digit as usize] += 1;
     }
-    
+
     // 累加计数
     for i in 1..10 {
         counts[i] += counts[i - 1];
     }
-    
+
     // 构建输出数组
     for &val in arr.iter().rev() {
         let digit = (val / exp) % 10;
         counts[digit as usize] -= 1;
         output[counts[digit as usize]] = val;
     }
-    
+
     // 复制回原数组
     arr.copy_from_slice(&output);
 }
@@ -1069,22 +1069,22 @@ pub fn bucket_sort(arr: &mut [f64]) {
     if arr.len() <= 1 {
         return;
     }
-    
+
     let n = arr.len();
     let mut buckets: Vec<Vec<f64>> = vec![Vec::new(); n];
-    
+
     // 将元素分配到桶中
     for &val in arr.iter() {
         let bucket_index = (val * n as f64).floor() as usize;
         let bucket_index = bucket_index.min(n - 1); // 防止索引越界
         buckets[bucket_index].push(val);
     }
-    
+
     // 对每个桶内部排序
     for bucket in buckets.iter_mut() {
         bucket.sort_by(|a, b| a.partial_cmp(b).unwrap());
     }
-    
+
     // 合并桶
     let mut index = 0;
     for bucket in buckets.iter() {
@@ -1109,10 +1109,10 @@ Rust实现（概念性）:
 pub fn external_merge_sort(input_file: &str, output_file: &str, buffer_size: usize) {
     // 1. 分割阶段：读取输入文件，分割成多个排序好的小文件
     let temp_files = split_and_sort(input_file, buffer_size);
-    
+
     // 2. 合并阶段：合并这些排序好的小文件
     merge_files(&temp_files, output_file, buffer_size);
-    
+
     // 3. 清理临时文件
     for file in temp_files {
         std::fs::remove_file(file).expect("Failed to remove temporary file");
@@ -1188,13 +1188,13 @@ pub fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     if arr.is_empty() {
         return None;
     }
-    
+
     let mut low = 0;
     let mut high = arr.len() - 1;
-    
+
     while low <= high {
         let mid = low + (high - low) / 2;
-        
+
         match arr[mid].cmp(target) {
             std::cmp::Ordering::Equal => return Some(mid),
             std::cmp::Ordering::Less => low = mid + 1,
@@ -1206,7 +1206,7 @@ pub fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
             }
         }
     }
-    
+
     None
 }
 ```
@@ -1224,10 +1224,10 @@ pub fn interpolation_search(arr: &[i32], target: i32) -> Option<usize> {
     if arr.is_empty() {
         return None;
     }
-    
+
     let mut low = 0;
     let mut high = arr.len() - 1;
-    
+
     while low <= high && target >= arr[low] && target <= arr[high] {
         // 避免除以零
         if arr[high] == arr[low] {
@@ -1236,15 +1236,15 @@ pub fn interpolation_search(arr: &[i32], target: i32) -> Option<usize> {
             }
             return None;
         }
-        
+
         // 根据目标值估计位置
         let pos = low + (((target - arr[low]) as usize) * (high - low))
                        / ((arr[high] - arr[low]) as usize);
-        
+
         if pos >= arr.len() {
             break;
         }
-        
+
         if arr[pos] == target {
             return Some(pos);
         } else if arr[pos] < target {
@@ -1253,7 +1253,7 @@ pub fn interpolation_search(arr: &[i32], target: i32) -> Option<usize> {
             high = pos - 1;
         }
     }
-    
+
     None
 }
 ```
@@ -1305,7 +1305,7 @@ pub fn a_star(
     let mut open_set = BinaryHeap::new();
     let mut came_from = HashMap::new();
     let mut g_score = HashMap::new();
-    
+
     // 初始化起点
     g_score.insert(start, 0);
     open_set.push(Node {
@@ -1313,10 +1313,10 @@ pub fn a_star(
         cost: 0,
         heuristic: h(start),
     });
-    
+
     while let Some(current) = open_set.pop() {
         let current_pos = current.position;
-        
+
         // 到达目标
         if current_pos == goal {
             // 重建路径
@@ -1329,11 +1329,11 @@ pub fn a_star(
             path.reverse();
             return Some(path);
         }
-        
+
         // 探索邻居
         for (neighbor, move_cost) in neighbors(current_pos) {
             let tentative_g = g_score[&current_pos] + move_cost;
-            
+
             if !g_score.contains_key(&neighbor) || tentative_g < g_score[&neighbor] {
                 // 这是更好的路径
                 came_from.insert(neighbor, current_pos);
@@ -1346,7 +1346,7 @@ pub fn a_star(
             }
         }
     }
-    
+
     // 无法找到路径
     None
 }
@@ -1366,14 +1366,14 @@ pub fn jump_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     if n == 0 {
         return None;
     }
-    
+
     // 计算跳跃步长
     let step = (n as f64).sqrt() as usize;
-    
+
     // 跳跃寻找区间
     let mut prev = 0;
     let mut step_idx = step;
-    
+
     while step_idx < n && &arr[step_idx - 1] < target {
         prev = step_idx;
         step_idx += step;
@@ -1381,12 +1381,12 @@ pub fn jump_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
             return None;
         }
     }
-    
+
     // 线性搜索确定的区间
     while prev < n && &arr[prev] < target {
         prev += 1;
     }
-    
+
     // 检查是否找到
     if prev < n && &arr[prev] == target {
         Some(prev)
@@ -1412,27 +1412,27 @@ Rust实现:
 pub fn naive_string_search(text: &str, pattern: &str) -> Vec<usize> {
     let text_chars: Vec<char> = text.chars().collect();
     let pattern_chars: Vec<char> = pattern.chars().collect();
-    
+
     let mut matches = Vec::new();
-    
+
     if pattern_chars.is_empty() || pattern_chars.len() > text_chars.len() {
         return matches;
     }
-    
+
     let text_len = text_chars.len();
     let pattern_len = pattern_chars.len();
-    
+
     for i in 0..=text_len - pattern_len {
         let mut j = 0;
         while j < pattern_len && text_chars[i + j] == pattern_chars[j] {
             j += 1;
         }
-        
+
         if j == pattern_len {
             matches.push(i);
         }
     }
-    
+
     matches
 }
 ```
@@ -1449,28 +1449,28 @@ Rust实现:
 pub fn kmp_search(text: &str, pattern: &str) -> Vec<usize> {
     let text_chars: Vec<char> = text.chars().collect();
     let pattern_chars: Vec<char> = pattern.chars().collect();
-    
+
     let mut matches = Vec::new();
-    
+
     if pattern_chars.is_empty() || pattern_chars.len() > text_chars.len() {
         return matches;
     }
-    
+
     // 构建部分匹配表
     let lps = compute_lps(&pattern_chars);
-    
+
     let text_len = text_chars.len();
     let pattern_len = pattern_chars.len();
-    
+
     let mut i = 0; // 文本索引
     let mut j = 0; // 模式索引
-    
+
     while i < text_len {
         if pattern_chars[j] == text_chars[i] {
             i += 1;
             j += 1;
         }
-        
+
         if j == pattern_len {
             // 找到匹配
             matches.push(i - j);
@@ -1483,7 +1483,7 @@ pub fn kmp_search(text: &str, pattern: &str) -> Vec<usize> {
             }
         }
     }
-    
+
     matches
 }
 
@@ -1491,10 +1491,10 @@ pub fn kmp_search(text: &str, pattern: &str) -> Vec<usize> {
 fn compute_lps(pattern: &[char]) -> Vec<usize> {
     let len = pattern.len();
     let mut lps = vec![0; len];
-    
+
     let mut len_prev = 0; // 前一个LPS值
     let mut i = 1;
-    
+
     while i < len {
         if pattern[i] == pattern[len_prev] {
             len_prev += 1;
@@ -1509,7 +1509,7 @@ fn compute_lps(pattern: &[char]) -> Vec<usize> {
             }
         }
     }
-    
+
     lps
 }
 ```
@@ -1526,29 +1526,29 @@ Rust实现（简化版，只使用坏字符规则）:
 pub fn boyer_moore_search(text: &str, pattern: &str) -> Vec<usize> {
     let text_chars: Vec<char> = text.chars().collect();
     let pattern_chars: Vec<char> = pattern.chars().collect();
-    
+
     let mut matches = Vec::new();
-    
+
     if pattern_chars.is_empty() || pattern_chars.len() > text_chars.len() {
         return matches;
     }
-    
+
     let text_len = text_chars.len();
     let pattern_len = pattern_chars.len();
-    
+
     // 构建坏字符表
     let mut bad_char = vec![pattern_len; 256]; // 假设ASCII字符集
-    
+
     for i in 0..pattern_len - 1 {
         bad_char[pattern_chars[i] as usize] = pattern_len - 1 - i;
     }
-    
+
     let mut i = pattern_len - 1;
-    
+
     while i < text_len {
         let mut j = pattern_len - 1;
         let mut k = i;
-        
+
         // 从右向左比较
         while j >= 0 && text_chars[k] == pattern_chars[j] {
             if j == 0 {
@@ -1558,7 +1558,7 @@ pub fn boyer_moore_search(text: &str, pattern: &str) -> Vec<usize> {
             j -= 1;
             k -= 1;
         }
-        
+
         // 移动模式串
         let shift = if j >= 0 {
             let bc = bad_char[text_chars[k] as usize];
@@ -1570,10 +1570,10 @@ pub fn boyer_moore_search(text: &str, pattern: &str) -> Vec<usize> {
         } else {
             1
         };
-        
+
         i += shift;
     }
-    
+
     matches
 }
 ```
@@ -1598,14 +1598,14 @@ Rust实现:
 pub fn topological_sort(graph: &GraphList) -> Option<Vec<usize>> {
     let n = graph.adj_lists.len();
     let mut in_degree = vec![0; n];
-    
+
     // 计算每个顶点的入度
     for adj_list in &graph.adj_lists {
         for &v in adj_list {
             in_degree[v] += 1;
         }
     }
-    
+
     // 将所有入度为0的顶点放入队列
     let mut queue = std::collections::VecDeque::new();
     for (v, &degree) in in_degree.iter().enumerate() {
@@ -1613,13 +1613,13 @@ pub fn topological_sort(graph: &GraphList) -> Option<Vec<usize>> {
             queue.push_back(v);
         }
     }
-    
+
     let mut result = Vec::with_capacity(n);
-    
+
     // 不断删除入度为0的顶点
     while let Some(u) = queue.pop_front() {
         result.push(u);
-        
+
         // 更新相邻顶点的入度
         for &v in graph.neighbors(u) {
             in_degree[v] -= 1;
@@ -1628,7 +1628,7 @@ pub fn topological_sort(graph: &GraphList) -> Option<Vec<usize>> {
             }
         }
     }
-    
+
     // 如果结果中的顶点数小于图的顶点数，则存在环
     if result.len() == n {
         Some(result)
@@ -1664,10 +1664,10 @@ pub fn dijkstra(graph: &[Vec<(usize, usize)>], start: usize) -> Vec<Option<usize
     let n = graph.len();
     let mut dist = vec![None; n]; // 距离初始化为无穷大
     dist[start] = Some(0);
-    
+
     let mut pq = BinaryHeap::new();
     pq.push(State { cost: Reverse(0), vertex: start });
-    
+
     while let Some(State { cost: Reverse(cost), vertex }) = pq.pop() {
         // 已找到更短的路径
         if let Some(d) = dist[vertex] {
@@ -1675,18 +1675,18 @@ pub fn dijkstra(graph: &[Vec<(usize, usize)>], start: usize) -> Vec<Option<usize
                 continue;
             }
         }
-        
+
         // 遍历相邻顶点
         for &(next, weight) in &graph[vertex] {
             let next_cost = cost + weight;
-            
+
             if dist[next].map_or(true, |d| next_cost < d) {
                 dist[next] = Some(next_cost);
                 pq.push(State { cost: Reverse(next_cost), vertex: next });
             }
         }
     }
-    
+
     dist
 }
 ```
@@ -1704,11 +1704,11 @@ pub fn bellman_ford(graph: &[Vec<(usize, isize)>], start: usize) -> Option<Vec<O
     let n = graph.len();
     let mut dist = vec![None; n];
     dist[start] = Some(0);
-    
+
     // 最多需要n-1次迭代
     for _ in 0..n-1 {
         let mut updated = false;
-        
+
         // 遍历所有边
         for u in 0..n {
             if let Some(d_u) = dist[u] {
@@ -1721,13 +1721,13 @@ pub fn bellman_ford(graph: &[Vec<(usize, isize)>], start: usize) -> Option<Vec<O
                 }
             }
         }
-        
+
         // 如果没有更新，提前终止
         if !updated {
             break;
         }
     }
-    
+
     // 检测负权环
     for u in 0..n {
         if let Some(d_u) = dist[u] {
@@ -1741,7 +1741,7 @@ pub fn bellman_ford(graph: &[Vec<(usize, isize)>], start: usize) -> Option<Vec<O
             }
         }
     }
-    
+
     Some(dist)
 }
 ```
@@ -1758,12 +1758,12 @@ Rust实现:
 pub fn floyd_warshall(graph: &[Vec<Option<isize>>]) -> Vec<Vec<Option<isize>>> {
     let n = graph.len();
     let mut dist = graph.to_vec();
-    
+
     // 初始化对角线
     for i in 0..n {
         dist[i][i] = Some(0);
     }
-    
+
     // 动态规划
     for k in 0..n {
         for i in 0..n {
@@ -1777,7 +1777,7 @@ pub fn floyd_warshall(graph: &[Vec<Option<isize>>]) -> Vec<Vec<Option<isize>>> {
             }
         }
     }
-    
+
     dist
 }
 ```
@@ -1802,30 +1802,30 @@ pub fn prim(graph: &[Vec<(usize, usize)>]) -> Option<Vec<(usize, usize)>> {
     if graph.is_empty() {
         return None;
     }
-    
+
     let n = graph.len();
     let mut in_mst = vec![false; n];
     let mut mst_edges = Vec::new();
     let mut pq = BinaryHeap::new();
-    
+
     // 从顶点0开始
     in_mst[0] = true;
-    
+
     // 添加所有与顶点0相邻的边
     for &(v, weight) in &graph[0] {
         pq.push(Reverse((weight, 0, v)));
     }
-    
+
     // 选择n-1条边
     while let Some(Reverse((weight, u, v))) = pq.pop() {
         if in_mst[v] {
             continue;
         }
-        
+
         // 将v加入MST
         in_mst[v] = true;
         mst_edges.push((u, v));
-        
+
         // 添加所有与v相邻的边
         for &(next, edge_weight) in &graph[v] {
             if !in_mst[next] {
@@ -1833,7 +1833,7 @@ pub fn prim(graph: &[Vec<(usize, usize)>]) -> Option<Vec<(usize, usize)>> {
             }
         }
     }
-    
+
     // 检查是否所有顶点都在MST中
     if mst_edges.len() == n - 1 {
         Some(mst_edges)
@@ -1871,22 +1871,22 @@ impl DisjointSet {
             rank: vec![0; size],
         }
     }
-    
+
     fn find(&mut self, x: usize) -> usize {
         if self.parent[x] != x {
             self.parent[x] = self.find(self.parent[x]);
         }
         self.parent[x]
     }
-    
+
     fn union(&mut self, x: usize, y: usize) {
         let root_x = self.find(x);
         let root_y = self.find(y);
-        
+
         if root_x == root_y {
             return;
         }
-        
+
         if self.rank[root_x] < self.rank[root_y] {
             self.parent[root_x] = root_y;
         } else {
@@ -1902,17 +1902,17 @@ pub fn kruskal(n: usize, edges: &[(usize, usize, usize)]) -> Vec<(usize, usize, 
     // 边：(u, v, weight)
     let mut sorted_edges = edges.to_vec();
     sorted_edges.sort_by_key(|e| e.2);
-    
+
     let mut disjoint_set = DisjointSet::new(n);
     let mut mst = Vec::new();
-    
+
     for &(u, v, weight) in &sorted_edges {
         if disjoint_set.find(u) != disjoint_set.find(v) {
             disjoint_set.union(u, v);
             mst.push((u, v, weight));
         }
     }
-    
+
     mst
 }
 ```
@@ -1932,10 +1932,10 @@ Rust实现:
 ```rust
 pub fn ford_fulkerson(graph: &[Vec<(usize, i32)>], source: usize, sink: usize) -> i32 {
     let n = graph.len();
-    
+
     // 构建残余网络
     let mut residual_graph = vec![vec![(0, 0); 0]; n];
-    
+
     // 初始化残余网络
     for (u, edges) in graph.iter().enumerate() {
         for &(v, capacity) in edges {
@@ -1945,7 +1945,7 @@ pub fn ford_fulkerson(graph: &[Vec<(usize, i32)>], source: usize, sink: usize) -
             residual_graph[v].push((u, 0));
         }
     }
-    
+
     // 为每条边存储在残余网络中的索引
     let mut edge_indices = vec![vec![0; n]; n];
     for u in 0..n {
@@ -1953,46 +1953,46 @@ pub fn ford_fulkerson(graph: &[Vec<(usize, i32)>], source: usize, sink: usize) -
             edge_indices[u][v] = i;
         }
     }
-    
+
     let mut max_flow = 0;
-    
+
     // 寻找增广路径
     loop {
         let mut visited = vec![false; n];
         let mut path = vec![0; n];
-        
+
         // 使用BFS寻找增广路径
         if !bfs(&residual_graph, source, sink, &mut visited, &mut path) {
             break;
         }
-        
+
         // 找到路径上的最小残余容量
         let mut path_flow = i32::MAX;
         let mut current = sink;
-        
+
         while current != source {
             let prev = path[current];
             let edge_idx = edge_indices[prev][current];
             path_flow = path_flow.min(residual_graph[prev][edge_idx].1);
             current = prev;
         }
-        
+
         // 更新残余容量
         current = sink;
         while current != source {
             let prev = path[current];
             let forward_idx = edge_indices[prev][current];
             let backward_idx = edge_indices[current][prev];
-            
+
             residual_graph[prev][forward_idx].1 -= path_flow;
             residual_graph[current][backward_idx].1 += path_flow;
-            
+
             current = prev;
         }
-        
+
         max_flow += path_flow;
     }
-    
+
     max_flow
 }
 
@@ -2006,21 +2006,21 @@ fn bfs(
     let mut queue = std::collections::VecDeque::new();
     visited[source] = true;
     queue.push_back(source);
-    
+
     while let Some(u) = queue.pop_front() {
         for (i, &(v, capacity)) in graph[u].iter().enumerate() {
             if !visited[v] && capacity > 0 {
                 visited[v] = true;
                 path[v] = u;
                 queue.push_back(v);
-                
+
                 if v == sink {
                     return true;
                 }
             }
         }
     }
-    
+
     false
 }
 ```
@@ -2047,7 +2047,7 @@ Rust实现:
 pub fn is_bipartite(graph: &[Vec<usize>]) -> bool {
     let n = graph.len();
     let mut colors = vec![None; n];
-    
+
     for start in 0..n {
         if colors[start].is_none() {
             // 对每个未染色的连通分量进行BFS着色
@@ -2056,7 +2056,7 @@ pub fn is_bipartite(graph: &[Vec<usize>]) -> bool {
             }
         }
     }
-    
+
     true
 }
 
@@ -2064,7 +2064,7 @@ fn bfs_color(graph: &[Vec<usize>], start: usize, colors: &mut [Option<bool>]) ->
     let mut queue = std::collections::VecDeque::new();
     colors[start] = Some(true);
     queue.push_back(start);
-    
+
     while let Some(u) = queue.pop_front() {
         for &v in &graph[u] {
             if colors[v].is_none() {
@@ -2077,7 +2077,7 @@ fn bfs_color(graph: &[Vec<usize>], start: usize, colors: &mut [Option<bool>]) ->
             }
         }
     }
-    
+
     true
 }
 ```
@@ -2096,7 +2096,7 @@ Rust实现（使用匈牙利算法）:
 pub fn maximum_bipartite_matching(graph: &[Vec<usize>], left_size: usize) -> Vec<Option<usize>> {
     let mut matching = vec![None; graph.len()];
     let mut visited = vec![false; left_size];
-    
+
     // 尝试为每个左侧顶点找到匹配
     for u in 0..left_size {
         visited.fill(false);
@@ -2104,7 +2104,7 @@ pub fn maximum_bipartite_matching(graph: &[Vec<usize>], left_size: usize) -> Vec
             // 增广路径找到
         }
     }
-    
+
     matching
 }
 
@@ -2115,17 +2115,17 @@ fn dfs(
     visited: &mut [bool],
 ) -> bool {
     visited[u] = true;
-    
+
     // 尝试匹配右侧顶点
     for &v in &graph[u] {
         // 如果v未匹配，或者v的匹配可以找到增广路径
-        if matching[v].is_none() || 
+        if matching[v].is_none() ||
            (!visited[matching[v].unwrap()] && dfs(graph, matching[v].unwrap(), matching, visited)) {
             matching[v] = Some(u);
             return true;
         }
     }
-    
+
     false
 }
 ```
@@ -2172,7 +2172,7 @@ pub fn sieve_of_eratosthenes(n: usize) -> Vec<usize> {
     let mut is_prime = vec![true; n + 1];
     is_prime[0] = false;
     is_prime[1] = false;
-    
+
     let mut p = 2;
     while p * p <= n {
         if is_prime[p] {
@@ -2184,14 +2184,14 @@ pub fn sieve_of_eratosthenes(n: usize) -> Vec<usize> {
         }
         p += 1;
     }
-    
+
     let mut primes = Vec::new();
     for i in 2..=n {
         if is_prime[i] {
             primes.push(i);
         }
     }
-    
+
     primes
 }
 ```
@@ -2208,7 +2208,7 @@ Rust实现:
 pub fn pow_mod(mut base: u64, mut exp: u64, modulus: u64) -> u64 {
     let mut result = 1;
     base %= modulus;
-    
+
     while exp > 0 {
         if exp & 1 == 1 {
             result = (result * base) % modulus;
@@ -2216,7 +2216,7 @@ pub fn pow_mod(mut base: u64, mut exp: u64, modulus: u64) -> u64 {
         base = (base * base) % modulus;
         exp >>= 1;
     }
-    
+
     result
 }
 ```
@@ -2236,20 +2236,20 @@ pub fn newton_sqrt(n: f64, epsilon: f64) -> f64 {
     if n < 0.0 {
         panic!("Cannot compute square root of negative number");
     }
-    
+
     if n == 0.0 {
         return 0.0;
     }
-    
+
     let mut x = n; // 初始猜测值
-    
+
     loop {
         let next_x = 0.5 * (x + n / x);
-        
+
         if (next_x - x).abs() < epsilon {
             return next_x;
         }
-        
+
         x = next_x;
     }
 }
@@ -2270,12 +2270,12 @@ where
 {
     let h = (b - a) / (n as f64);
     let mut sum = 0.5 * (f(a) + f(b));
-    
+
     for i in 1..n {
         let x = a + (i as f64) * h;
         sum += f(x);
     }
-    
+
     sum * h
 }
 ```
@@ -2293,13 +2293,13 @@ pub fn matrix_multiply(a: &[Vec<f64>], b: &[Vec<f64>]) -> Option<Vec<Vec<f64>>> 
     if a.is_empty() || b.is_empty() || a[0].len() != b.len() {
         return None; // 不兼容的矩阵尺寸
     }
-    
+
     let m = a.len();
     let n = a[0].len();
     let p = b[0].len();
-    
+
     let mut result = vec![vec![0.0; p]; m];
-    
+
     for i in 0..m {
         for j in 0..p {
             for k in 0..n {
@@ -2307,7 +2307,7 @@ pub fn matrix_multiply(a: &[Vec<f64>], b: &[Vec<f64>]) -> Option<Vec<Vec<f64>>> 
             }
         }
     }
-    
+
     Some(result)
 }
 ```
@@ -2326,7 +2326,7 @@ pub fn gaussian_elimination(a: &mut [Vec<f64>], b: &mut [f64]) -> Option<Vec<f64
     if n == 0 || a[0].len() != n || b.len() != n {
         return None; // 不兼容的矩阵与向量尺寸
     }
-    
+
     // 前向消元
     for i in 0..n {
         // 找到主元
@@ -2336,29 +2336,29 @@ pub fn gaussian_elimination(a: &mut [Vec<f64>], b: &mut [f64]) -> Option<Vec<f64
                 max_row = j;
             }
         }
-        
+
         // 如果主元太小，方程组可能无解或有无穷多解
         if a[max_row][i].abs() < 1e-10 {
             return None;
         }
-        
+
         // 交换行
         if max_row != i {
             a[i].swap_with_slice(&mut a[max_row]);
             b.swap(i, max_row);
         }
-        
+
         // 消元
         for j in i+1..n {
             let factor = a[j][i] / a[i][i];
             b[j] -= factor * b[i];
-            
+
             for k in i..n {
                 a[j][k] -= factor * a[i][k];
             }
         }
     }
-    
+
     // 回代
     let mut x = vec![0.0; n];
     for i in (0..n).rev() {
@@ -2368,7 +2368,7 @@ pub fn gaussian_elimination(a: &mut [Vec<f64>], b: &mut [f64]) -> Option<Vec<f64
         }
         x[i] = sum / a[i][i];
     }
-    
+
     Some(x)
 }
 ```
@@ -2390,7 +2390,7 @@ pub fn sha256_hash(data: &[u8]) -> [u8; 32] {
     let mut hasher = Sha256::new();
     hasher.update(data);
     let result = hasher.finalize();
-    
+
     let mut output = [0u8; 32];
     output.copy_from_slice(&result);
     output
@@ -2435,25 +2435,25 @@ use rand::RngCore;
 
 pub fn aes_gcm_encrypt(key: &[u8; 32], plaintext: &[u8]) -> Result<(Vec<u8>, [u8; 12]), Box<dyn std::error::Error>> {
     let cipher = Aes256Gcm::new_from_slice(key)?;
-    
+
     // 生成随机nonce
     let mut nonce_bytes = [0u8; 12];
     OsRng.fill_bytes(&mut nonce_bytes);
     let nonce = Nonce::from_slice(&nonce_bytes);
-    
+
     // 加密
     let ciphertext = cipher.encrypt(nonce, plaintext.as_ref())?;
-    
+
     Ok((ciphertext, nonce_bytes))
 }
 
 pub fn aes_gcm_decrypt(key: &[u8; 32], ciphertext: &[u8], nonce_bytes: &[u8; 12]) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     let cipher = Aes256Gcm::new_from_slice(key)?;
     let nonce = Nonce::from_slice(nonce_bytes);
-    
+
     // 解密
     let plaintext = cipher.decrypt(nonce, ciphertext.as_ref())?;
-    
+
     Ok(plaintext)
 }
 ```
@@ -2479,7 +2479,7 @@ pub fn generate_rsa_keypair(bits: usize) -> Result<(RsaPublicKey, RsaPrivateKey)
     let mut rng = OsRng;
     let private_key = RsaPrivateKey::new(&mut rng, bits)?;
     let public_key = RsaPublicKey::from(&private_key);
-    
+
     Ok((public_key, private_key))
 }
 
@@ -2487,14 +2487,14 @@ pub fn rsa_encrypt(public_key: &RsaPublicKey, data: &[u8]) -> Result<Vec<u8>, Bo
     let mut rng = OsRng;
     let padding = PaddingScheme::new_oaep_sha256();
     let encrypted_data = public_key.encrypt(&mut rng, padding, data)?;
-    
+
     Ok(encrypted_data)
 }
 
 pub fn rsa_decrypt(private_key: &RsaPrivateKey, encrypted_data: &[u8]) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     let padding = PaddingScheme::new_oaep_sha256();
     let decrypted_data = private_key.decrypt(padding, encrypted_data)?;
-    
+
     Ok(decrypted_data)
 }
 ```
@@ -2578,19 +2578,19 @@ impl<T> LockFreeStack<T> {
             head: AtomicPtr::new(ptr::null_mut()),
         }
     }
-    
+
     pub fn push(&self, data: T) {
         let new_node = Box::into_raw(Box::new(Node {
             data,
             next: ptr::null_mut(),
         }));
-        
+
         loop {
             let current_head = self.head.load(Ordering::Relaxed);
             unsafe {
                 (*new_node).next = current_head;
             }
-            
+
             // CAS操作确保原子性
             if self.head.compare_exchange(
                 current_head,
@@ -2602,19 +2602,19 @@ impl<T> LockFreeStack<T> {
             }
         }
     }
-    
+
     pub fn pop(&self) -> Option<T> {
         loop {
             let current_head = self.head.load(Ordering::Acquire);
             if current_head.is_null() {
                 return None;
             }
-            
+
             let next;
             unsafe {
                 next = (*current_head).next;
             }
-            
+
             // CAS操作确保原子性
             if self.head.compare_exchange(
                 current_head,
@@ -2664,14 +2664,14 @@ impl<T: Clone> SharedData<T> {
             data: Arc::new(RwLock::new(initial)),
         }
     }
-    
+
     pub fn read(&self) -> Result<T, String> {
         match self.data.read() {
             Ok(guard) => Ok(guard.clone()),
             Err(_) => Err("读取锁被中毒".to_string()),
         }
     }
-    
+
     pub fn write(&self, new_value: T) -> Result<(), String> {
         match self.data.write() {
             Ok(mut guard) => {
@@ -2681,7 +2681,7 @@ impl<T: Clone> SharedData<T> {
             Err(_) => Err("写入锁被中毒".to_string()),
         }
     }
-    
+
     // 创建一个克隆，可用于在其他线程中使用
     pub fn clone(&self) -> Self {
         SharedData {
@@ -2715,22 +2715,22 @@ impl WorkStealingPool {
         for _ in 0..num_threads {
             queues.push(Arc::new(Mutex::new(VecDeque::new())));
         }
-        
+
         let mut threads = Vec::with_capacity(num_threads);
         let queues_arc = Arc::new(queues.clone());
-        
+
         for id in 0..num_threads {
             let thread_queues = Arc::clone(&queues_arc);
             let thread = thread::spawn(move || {
                 let mut rng = rand::thread_rng();
-                
+
                 loop {
                     // 尝试从自己的队列获取任务
                     let task = {
                         let mut queue = thread_queues[id].lock().unwrap();
                         queue.pop_front()
                     };
-                    
+
                     match task {
                         Some(task) => {
                             task(); // 执行任务
@@ -2742,7 +2742,7 @@ impl WorkStealingPool {
                                 let mut victim_queue = thread_queues[victim_id].lock().unwrap();
                                 victim_queue.pop_back() // 从尾部窃取
                             };
-                            
+
                             if let Some(task) = stolen {
                                 task(); // 执行窃取的任务
                             } else {
@@ -2752,16 +2752,16 @@ impl WorkStealingPool {
                     }
                 }
             });
-            
+
             threads.push(thread);
         }
-        
+
         WorkStealingPool {
             queues,
             threads,
         }
     }
-    
+
     pub fn submit<F>(&self, task: F, worker_hint: usize)
     where
         F: FnOnce() + Send + 'static,
@@ -2788,26 +2788,26 @@ pub fn activity_selection(start: &[usize], finish: &[usize]) -> Vec<usize> {
     if start.len() != finish.len() || start.is_empty() {
         return Vec::new();
     }
-    
+
     // 按结束时间排序活动
     let mut activities: Vec<(usize, usize, usize)> = start.iter()
         .zip(finish.iter())
         .enumerate()
         .map(|(i, (&s, &f))| (i, s, f))
         .collect();
-    
+
     activities.sort_by_key(|&(_, _, f)| f);
-    
+
     let mut selected = vec![activities[0].0];
     let mut last_finish = activities[0].2;
-    
+
     for &(idx, start, finish) in activities.iter().skip(1) {
         if start >= last_finish {
             selected.push(idx);
             last_finish = finish;
         }
     }
-    
+
     selected
 }
 ```
@@ -2826,10 +2826,10 @@ pub fn knapsack(weights: &[usize], values: &[usize], capacity: usize) -> usize {
     if n == 0 || n != values.len() {
         return 0;
     }
-    
+
     // 创建DP表
     let mut dp = vec![vec![0; capacity + 1]; n + 1];
-    
+
     for i in 1..=n {
         for w in 0..=capacity {
             if weights[i-1] <= w {
@@ -2844,7 +2844,7 @@ pub fn knapsack(weights: &[usize], values: &[usize], capacity: usize) -> usize {
             }
         }
     }
-    
+
     dp[n][capacity]
 }
 ```
@@ -2878,31 +2878,31 @@ pub fn closest_pair(points: &[Point]) -> Option<(Point, Point, f64)> {
     if points.len() < 2 {
         return None;
     }
-    
+
     // 按x坐标排序点
     let mut sorted_x = points.to_vec();
     sorted_x.sort_by(|a, b| a.x.partial_cmp(&b.x).unwrap_or(Ordering::Equal));
-    
+
     // 调用分治算法
     closest_pair_recursive(&sorted_x)
 }
 
 fn closest_pair_recursive(points_sorted_x: &[Point]) -> Option<(Point, Point, f64)> {
     let n = points_sorted_x.len();
-    
+
     // 基本情况
     if n <= 3 {
         return brute_force(points_sorted_x);
     }
-    
+
     // 分割点集
     let mid = n / 2;
     let mid_point = points_sorted_x[mid];
-    
+
     // 递归求解左右子问题
     let left_result = closest_pair_recursive(&points_sorted_x[..mid]);
     let right_result = closest_pair_recursive(&points_sorted_x[mid..]);
-    
+
     // 合并阶段
     let (mut best_pair, mut min_dist) = match (left_result, right_result) {
         (Some((p1, p2, d1)), Some((p3, p4, d2))) => {
@@ -2916,7 +2916,7 @@ fn closest_pair_recursive(points_sorted_x: &[Point]) -> Option<(Point, Point, f6
         (None, Some((p1, p2, d))) => ((p1, p2), d),
         _ => return None,
     };
-    
+
     // 检查跨越中线的点对
     let mut strip = Vec::new();
     for point in points_sorted_x {
@@ -2924,17 +2924,17 @@ fn closest_pair_recursive(points_sorted_x: &[Point]) -> Option<(Point, Point, f6
             strip.push(*point);
         }
     }
-    
+
     // 按y坐标排序
     strip.sort_by(|a, b| a.y.partial_cmp(&b.y).unwrap_or(Ordering::Equal));
-    
+
     // 检查条带内的点对
     for i in 0..strip.len() {
         for j in i+1..strip.len() {
             if strip[j].y - strip[i].y >= min_dist {
                 break; // 可提前终止
             }
-            
+
             let dist = strip[i].distance(&strip[j]);
             if dist < min_dist {
                 min_dist = dist;
@@ -2942,7 +2942,7 @@ fn closest_pair_recursive(points_sorted_x: &[Point]) -> Option<(Point, Point, f6
             }
         }
     }
-    
+
     Some((best_pair.0, best_pair.1, min_dist))
 }
 
@@ -2950,10 +2950,10 @@ fn brute_force(points: &[Point]) -> Option<(Point, Point, f64)> {
     if points.len() < 2 {
         return None;
     }
-    
+
     let mut min_dist = f64::INFINITY;
     let mut closest_pair = (points[0], points[1]);
-    
+
     for i in 0..points.len() {
         for j in i+1..points.len() {
             let dist = points[i].distance(&points[j]);
@@ -2963,7 +2963,7 @@ fn brute_force(points: &[Point]) -> Option<(Point, Point, f64)> {
             }
         }
     }
-    
+
     Some((closest_pair.0, closest_pair.1, min_dist))
 }
 ```
@@ -2980,9 +2980,9 @@ Rust实现（N皇后问题）:
 pub fn solve_n_queens(n: usize) -> Vec<Vec<String>> {
     let mut result = Vec::new();
     let mut board = vec![vec!['.'; n]; n];
-    
+
     backtrack(&mut result, &mut board, 0, n);
-    
+
     result
 }
 
@@ -2995,15 +2995,15 @@ fn backtrack(result: &mut Vec<Vec<String>>, board: &mut Vec<Vec<char>>, row: usi
         result.push(solution);
         return;
     }
-    
+
     for col in 0..n {
         if is_valid(board, row, col, n) {
             // 尝试在当前位置放置皇后
             board[row][col] = 'Q';
-            
+
             // 递归处理下一行
             backtrack(result, board, row + 1, n);
-            
+
             // 回溯，撤销选择
             board[row][col] = '.';
         }
@@ -3017,7 +3017,7 @@ fn is_valid(board: &[Vec<char>], row: usize, col: usize, n: usize) -> bool {
             return false;
         }
     }
-    
+
     // 检查左上对角线
     let mut i = row as isize - 1;
     let mut j = col as isize - 1;
@@ -3028,7 +3028,7 @@ fn is_valid(board: &[Vec<char>], row: usize, col: usize, n: usize) -> bool {
         i -= 1;
         j -= 1;
     }
-    
+
     // 检查右上对角线
     let mut i = row as isize - 1;
     let mut j = col as isize + 1;
@@ -3039,7 +3039,7 @@ fn is_valid(board: &[Vec<char>], row: usize, col: usize, n: usize) -> bool {
         i -= 1;
         j += 1;
     }
-    
+
     true
 }
 ```
@@ -3059,7 +3059,7 @@ pub fn randomized_quick_select<T: Ord + Copy>(arr: &mut [T], k: usize) -> Option
     if k == 0 || k > arr.len() {
         return None;
     }
-    
+
     quick_select(arr, 0, arr.len() - 1, k - 1)
 }
 
@@ -3067,10 +3067,10 @@ fn quick_select<T: Ord + Copy>(arr: &mut [T], left: usize, right: usize, k: usiz
     if left == right {
         return Some(arr[left]);
     }
-    
+
     // 随机选择枢轴
     let pivot_idx = partition(arr, left, right);
-    
+
     match k.cmp(&pivot_idx) {
         std::cmp::Ordering::Equal => Some(arr[k]),
         std::cmp::Ordering::Less => quick_select(arr, left, pivot_idx - 1, k),
@@ -3083,17 +3083,17 @@ fn partition<T: Ord + Copy>(arr: &mut [T], left: usize, right: usize) -> usize {
     let mut rng = rand::thread_rng();
     let pivot_idx = rng.gen_range(left..=right);
     arr.swap(pivot_idx, right);
-    
+
     let pivot = arr[right];
     let mut i = left;
-    
+
     for j in left..right {
         if arr[j] <= pivot {
             arr.swap(i, j);
             i += 1;
         }
     }
-    
+
     arr.swap(i, right);
     i
 }
@@ -3124,52 +3124,52 @@ impl LinearRegression {
             bias: 0.0,
         }
     }
-    
+
     pub fn fit(&mut self, x: &[Vec<f64>], y: &[f64], learning_rate: f64, epochs: usize) -> Result<(), String> {
         if x.is_empty() || y.is_empty() || x.len() != y.len() {
             return Err("数据不能为空且x与y的数量必须相同".to_string());
         }
-        
+
         let n_samples = x.len();
         let n_features = x[0].len();
-        
+
         // 初始化权重和偏置
         self.weights = vec![0.0; n_features];
         self.bias = 0.0;
-        
+
         // 梯度下降优化
         for _ in 0..epochs {
             // 预测
             let predictions: Vec<f64> = x.iter()
                 .map(|xi| self.predict_sample(xi))
                 .collect();
-            
+
             // 计算梯度
             let mut dw = vec![0.0; n_features];
             let mut db = 0.0;
-            
+
             for i in 0..n_samples {
                 let error = predictions[i] - y[i];
-                
+
                 // 权重梯度
                 for j in 0..n_features {
                     dw[j] += error * x[i][j];
                 }
-                
+
                 // 偏置梯度
                 db += error;
             }
-            
+
             // 更新参数
             for j in 0..n_features {
                 self.weights[j] -= learning_rate * dw[j] / (n_samples as f64);
             }
             self.bias -= learning_rate * db / (n_samples as f64);
         }
-        
+
         Ok(())
     }
-    
+
     fn predict_sample(&self, x: &[f64]) -> f64 {
         let mut prediction = self.bias;
         for i in 0..self.weights.len() {
@@ -3177,16 +3177,16 @@ impl LinearRegression {
         }
         prediction
     }
-    
+
     pub fn predict(&self, x: &[Vec<f64>]) -> Result<Vec<f64>, String> {
         if x.is_empty() || x[0].len() != self.weights.len() {
             return Err("输入特征数量与模型不匹配".to_string());
         }
-        
+
         let predictions = x.iter()
             .map(|xi| self.predict_sample(xi))
             .collect();
-        
+
         Ok(predictions)
     }
 }
@@ -3224,23 +3224,23 @@ impl DecisionTreeClassifier {
             max_depth,
         }
     }
-    
+
     pub fn fit(&mut self, x: &[Vec<f64>], y: &[usize]) -> Result<(), String> {
         if x.is_empty() || y.is_empty() || x.len() != y.len() {
             return Err("数据不能为空且x与y的数量必须相同".to_string());
         }
-        
+
         self.root = Some(self.build_tree(x, y, 0));
         Ok(())
     }
-    
+
     fn build_tree(&self, x: &[Vec<f64>], y: &[usize], depth: usize) -> DecisionNode {
         // 检查是否所有样本属于同一类别
         let mut class_count = HashMap::new();
         for &class in y {
             *class_count.entry(class).or_insert(0) += 1;
         }
-        
+
         // 如果只有一个类别或达到最大深度，创建叶节点
         if class_count.len() == 1 || depth >= self.max_depth {
             let majority_class = class_count
@@ -3248,19 +3248,19 @@ impl DecisionTreeClassifier {
                 .max_by_key(|&(_, count)| count)
                 .map(|(class, _)| class)
                 .unwrap_or(0);
-            
+
             return DecisionNode {
                 node_type: NodeType::Leaf { class: majority_class },
             };
         }
-        
+
         // 寻找最佳特征和阈值
         let (best_feature, best_threshold) = self.find_best_split(x, y);
-        
+
         // 根据最佳特征和阈值分割数据
         let mut left_indices = Vec::new();
         let mut right_indices = Vec::new();
-        
+
         for i in 0..x.len() {
             if x[i][best_feature] <= best_threshold {
                 left_indices.push(i);
@@ -3268,7 +3268,7 @@ impl DecisionTreeClassifier {
                 right_indices.push(i);
             }
         }
-        
+
         // 如果无法有效分割，创建叶节点
         if left_indices.is_empty() || right_indices.is_empty() {
             let majority_class = class_count
@@ -3276,23 +3276,23 @@ impl DecisionTreeClassifier {
                 .max_by_key(|&(_, count)| count)
                 .map(|(class, _)| class)
                 .unwrap_or(0);
-            
+
             return DecisionNode {
                 node_type: NodeType::Leaf { class: majority_class },
             };
         }
-        
+
         // 创建子树
         let left_x: Vec<Vec<f64>> = left_indices.iter().map(|&i| x[i].clone()).collect();
         let left_y: Vec<usize> = left_indices.iter().map(|&i| y[i]).collect();
-        
+
         let right_x: Vec<Vec<f64>> = right_indices.iter().map(|&i| x[i].clone()).collect();
         let right_y: Vec<usize> = right_indices.iter().map(|&i| y[i]).collect();
-        
+
         // 递归构建左右子树
         let left_subtree = self.build_tree(&left_x, &left_y, depth + 1);
         let right_subtree = self.build_tree(&right_x, &right_y, depth + 1);
-        
+
         DecisionNode {
             node_type: NodeType::Internal {
                 feature: best_feature,
@@ -3302,27 +3302,27 @@ impl DecisionTreeClassifier {
             },
         }
     }
-    
+
     fn find_best_split(&self, x: &[Vec<f64>], y: &[usize]) -> (usize, f64) {
         let n_features = x[0].len();
         let mut best_gini = f64::INFINITY;
         let mut best_feature = 0;
         let mut best_threshold = 0.0;
-        
+
         for feature in 0..n_features {
             // 获取特征的所有唯一值
             let mut values: Vec<f64> = x.iter().map(|sample| sample[feature]).collect();
             values.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
             values.dedup();
-            
+
             // 对每个可能的阈值计算基尼不纯度
             for i in 0..values.len() - 1 {
                 let threshold = (values[i] + values[i + 1]) / 2.0;
-                
+
                 // 分割数据
                 let mut left_y = Vec::new();
                 let mut right_y = Vec::new();
-                
+
                 for (sample, &class) in x.iter().zip(y.iter()) {
                     if sample[feature] <= threshold {
                         left_y.push(class);
@@ -3330,12 +3330,12 @@ impl DecisionTreeClassifier {
                         right_y.push(class);
                     }
                 }
-                
+
                 // 计算加权基尼不纯度
                 let n = y.len() as f64;
-                let gini = (left_y.len() as f64 / n) * self.gini_impurity(&left_y) + 
+                let gini = (left_y.len() as f64 / n) * self.gini_impurity(&left_y) +
                            (right_y.len() as f64 / n) * self.gini_impurity(&right_y);
-                
+
                 if gini < best_gini {
                     best_gini = gini;
                     best_feature = feature;
@@ -3343,31 +3343,31 @@ impl DecisionTreeClassifier {
                 }
             }
         }
-        
+
         (best_feature, best_threshold)
     }
-    
+
     fn gini_impurity(&self, y: &[usize]) -> f64 {
         if y.is_empty() {
             return 0.0;
         }
-        
+
         let mut class_count = HashMap::new();
         for &class in y {
             *class_count.entry(class).or_insert(0) += 1;
         }
-        
+
         let n = y.len() as f64;
         let mut gini = 1.0;
-        
+
         for &count in class_count.values() {
             let p = count as f64 / n;
             gini -= p * p;
         }
-        
+
         gini
     }
-    
+
     pub fn predict(&self, x: &[Vec<f64>]) -> Result<Vec<usize>, String> {
         match &self.root {
             Some(root) => {
@@ -3379,7 +3379,7 @@ impl DecisionTreeClassifier {
             None => Err("模型未训练".to_string()),
         }
     }
-    
+
     fn predict_sample(&self, x: &[f64], node: &DecisionNode) -> usize {
         match &node.node_type {
             NodeType::Leaf { class } => *class,
@@ -3420,68 +3420,68 @@ impl KMeans {
             max_iterations,
         }
     }
-    
+
     pub fn fit(&mut self, x: &[Vec<f64>]) -> Result<(), String> {
         if x.is_empty() || self.k > x.len() {
             return Err("数据太少或k值太大".to_string());
         }
-        
+
         let n_samples = x.len();
         let n_features = x[0].len();
-        
+
         // 随机初始化中心点（简单起见，直接从样本中选择）
         let mut rng = rand::thread_rng();
         let mut indices: Vec<usize> = (0..n_samples).collect();
         indices.shuffle(&mut rng);
-        
+
         self.centroids = indices[0..self.k]
             .iter()
             .map(|&idx| x[idx].clone())
             .collect();
-        
+
         // K均值迭代
         for _ in 0..self.max_iterations {
             // 分配样本到最近的中心点
             let mut clusters: Vec<Vec<usize>> = vec![Vec::new(); self.k];
-            
+
             for i in 0..n_samples {
                 let cluster_idx = self.predict_sample(&x[i]);
                 clusters[cluster_idx].push(i);
             }
-            
+
             // 保存旧中心点，用于检查收敛
             let old_centroids = self.centroids.clone();
-            
+
             // 更新中心点
             for (i, cluster) in clusters.iter().enumerate() {
                 if cluster.is_empty() {
                     continue;
                 }
-                
+
                 let mut new_centroid = vec![0.0; n_features];
-                
+
                 for &idx in cluster {
                     for j in 0..n_features {
                         new_centroid[j] += x[idx][j];
                     }
                 }
-                
+
                 for j in 0..n_features {
                     new_centroid[j] /= cluster.len() as f64;
                 }
-                
+
                 self.centroids[i] = new_centroid;
             }
-            
+
             // 检查收敛
             if self.is_converged(&old_centroids) {
                 break;
             }
         }
-        
+
         Ok(())
     }
-    
+
     fn is_converged(&self, old_centroids: &[Vec<f64>]) -> bool {
         for (old, current) in old_centroids.iter().zip(self.centroids.iter()) {
             for (old_val, current_val) in old.iter().zip(current.iter()) {
@@ -3492,23 +3492,23 @@ impl KMeans {
         }
         true
     }
-    
+
     pub fn predict(&self, x: &[Vec<f64>]) -> Result<Vec<usize>, String> {
         if self.centroids.is_empty() {
             return Err("模型未训练".to_string());
         }
-        
+
         let predictions = x.iter()
             .map(|sample| self.predict_sample(sample))
             .collect();
-        
+
         Ok(predictions)
     }
-    
+
     fn predict_sample(&self, x: &[f64]) -> usize {
         let mut min_dist = f64::INFINITY;
         let mut cluster_idx = 0;
-        
+
         for (i, centroid) in self.centroids.iter().enumerate() {
             let dist = self.euclidean_distance(x, centroid);
             if dist < min_dist {
@@ -3516,10 +3516,10 @@ impl KMeans {
                 cluster_idx = i;
             }
         }
-        
+
         cluster_idx
     }
-    
+
     fn euclidean_distance(&self, a: &[f64], b: &[f64]) -> f64 {
         a.iter()
             .zip(b.iter())
@@ -3553,19 +3553,19 @@ impl PCA {
             mean: Vec::new(),
         }
     }
-    
+
     pub fn fit_transform(&mut self, x: &[Vec<f64>]) -> Result<Vec<Vec<f64>>, String> {
         if x.is_empty() {
             return Err("数据集不能为空".to_string());
         }
-        
+
         let n_samples = x.len();
         let n_features = x[0].len();
-        
+
         if self.n_components > n_features {
             return Err("主成分数不能大于特征数".to_string());
         }
-        
+
         // 计算均值
         self.mean = vec![0.0; n_features];
         for sample in x {
@@ -3576,7 +3576,7 @@ impl PCA {
         for j in 0..n_features {
             self.mean[j] /= n_samples as f64;
         }
-        
+
         // 中心化数据
         let mut centered_x = vec![vec![0.0; n_features]; n_samples];
         for i in 0..n_samples {
@@ -3584,7 +3584,7 @@ impl PCA {
                 centered_x[i][j] = x[i][j] - self.mean[j];
             }
         }
-        
+
         // 计算协方差矩阵
         let mut cov_matrix = vec![vec![0.0; n_features]; n_features];
         for i in 0..n_features {
@@ -3596,17 +3596,17 @@ impl PCA {
                 cov_matrix[i][j] = cov / (n_samples as f64 - 1.0);
             }
         }
-        
+
         // 这里简化处理：在真实应用中，应使用特征值分解
         // 这里假设我们已经通过某种方法获得了特征向量
         // 在实际实现中，应使用数值计算库如ndarray或rust-matio
-        
+
         // 假设已获得主成分（特征向量）
         self.components = vec![vec![0.0; n_features]; self.n_components];
-        
+
         // 此处代码应执行特征值分解并选择最大特征值对应的特征向量
         // 由于这需要线性代数库支持，这里只是概念性的
-        
+
         // 应用变换，投影到主成分上
         let mut transformed = vec![vec![0.0; self.n_components]; n_samples];
         for i in 0..n_samples {
@@ -3616,22 +3616,22 @@ impl PCA {
                 }
             }
         }
-        
+
         Ok(transformed)
     }
-    
+
     pub fn transform(&self, x: &[Vec<f64>]) -> Result<Vec<Vec<f64>>, String> {
         if self.components.is_empty() {
             return Err("模型未训练".to_string());
         }
-        
+
         let n_samples = x.len();
         let n_features = x[0].len();
-        
+
         if n_features != self.mean.len() {
             return Err("特征数量与训练时不匹配".to_string());
         }
-        
+
         // 中心化数据
         let mut centered_x = vec![vec![0.0; n_features]; n_samples];
         for i in 0..n_samples {
@@ -3639,7 +3639,7 @@ impl PCA {
                 centered_x[i][j] = x[i][j] - self.mean[j];
             }
         }
-        
+
         // 投影到主成分上
         let mut transformed = vec![vec![0.0; self.n_components]; n_samples];
         for i in 0..n_samples {
@@ -3649,7 +3649,7 @@ impl PCA {
                 }
             }
         }
-        
+
         Ok(transformed)
     }
 }
@@ -3814,11 +3814,11 @@ impl<T: Clone + Send + Sync + 'static> HeterogeneousCompute<T> {
     pub fn new() -> Self {
         HeterogeneousCompute { kernels: Vec::new() }
     }
-    
+
     pub fn add_kernel(&mut self, kernel: Box<dyn ComputeKernel<T>>) {
         self.kernels.push(kernel);
     }
-    
+
     pub fn execute(&self, data: &[T], preferred_device: Option<DeviceType>) -> Vec<T> {
         // 选择最适合的内核
         let kernel = match preferred_device {
@@ -3829,7 +3829,7 @@ impl<T: Clone + Send + Sync + 'static> HeterogeneousCompute<T> {
                 }),
             None => &self.kernels[0]
         };
-        
+
         kernel.execute(data)
     }
 }
@@ -3866,12 +3866,12 @@ impl QuantumResistantCrypto for LatticeBasedEncryption {
         // 生成格基密钥对的算法
         unimplemented!()
     }
-    
+
     fn encrypt(&self, public_key: &[u8], message: &[u8]) -> Vec<u8> {
         // 基于格的加密算法
         unimplemented!()
     }
-    
+
     fn decrypt(&self, private_key: &[u8], ciphertext: &[u8]) -> Result<Vec<u8>, CryptoError> {
         // 基于格的解密算法
         unimplemented!()
@@ -3906,11 +3906,11 @@ impl<T: Ord + Clone> AdaptiveSorter<T> {
             data_characteristics: DataCharacteristics::Random,
         }
     }
-    
+
     pub fn sort(&mut self, data: &mut [T]) {
         // 分析数据特性
         self.analyze_data(data);
-        
+
         // 根据数据特性和大小选择最优算法
         match self.data_characteristics {
             DataCharacteristics::NearSorted => {
@@ -3938,7 +3938,7 @@ impl<T: Ord + Clone> AdaptiveSorter<T> {
             }
         }
     }
-    
+
     fn analyze_data(&mut self, data: &[T]) {
         // 分析数据特性以确定最优策略
         unimplemented!()
@@ -3971,15 +3971,15 @@ fn integer_sqrt(n: u64) -> u64 {
     if n == 0 {
         return 0;
     }
-    
+
     let mut x = n;
     let mut y = (x + 1) / 2;
-    
+
     while y < x {
         x = y;
         y = (x + n / x) / 2;
     }
-    
+
     x
 }
 

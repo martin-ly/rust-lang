@@ -144,7 +144,7 @@ impl File<Open> {
         // 实现关闭逻辑
         File { _state: std::marker::PhantomData }
     }
-    
+
     fn read(&self) -> Vec<u8> {
         // 实现读取逻辑
         vec![]

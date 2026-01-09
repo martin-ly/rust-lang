@@ -86,7 +86,7 @@
   ```assembly
   section .data
       myVar DD 100     ; 定义一个双字变量，初值为100
-  
+
   section .text
       MOV EAX, [myVar] ; 将myVar内存值加载到EAX
       MOV [myVar], EBX ; 将EBX值存入myVar内存
@@ -185,7 +185,7 @@
 - **控制流图（CFG）**：表示程序所有可能执行路径
   - **节点**：基本块（无分支的指令序列）
   - **边**：可能的控制转移
-  
+
 - **形式化表示**：
 
   ```math
@@ -270,13 +270,13 @@
   ```math
   ⟨I, σ⟩ → σ'
   ```
-  
+
 - **指称语义**：将程序映射到数学对象
 
   ```math
   ⟦mov eax, 5⟧(σ) = σ[eax ↦ 5]
   ```
-  
+
 - **公理语义**：使用前置条件和后置条件
 
   ```math
@@ -290,7 +290,7 @@
   ```math
   {inv} loop_body {inv}
   ```
-  
+
 - **归纳证明**：对程序结构归纳证明
   - 基本情况：简单指令正确
   - 归纳步骤：假设子结构正确，证明复合结构正确
@@ -438,21 +438,21 @@
       ; 循环体
       dec ecx
       jnz loop_start
-      
+
   ; 展开后
   ; 循环体(迭代1)
   ; 循环体(迭代2)
   ; 循环体(迭代3)
   ; 循环体(迭代4)
   ```
-  
+
   - **指令调度**：重排指令避免流水线停顿
 
   ```assembly
   ; 未调度（存在数据依赖）
   mul eax, ebx  ; 乘法耗时长
   add ecx, eax  ; 依赖上一指令结果
-  
+
   ; 调度后
   mul eax, ebx    ; 乘法开始
   ; 插入其他独立指令
@@ -525,7 +525,7 @@
       test eax, eax         ; 检查旧值
       jnz try_lock          ; 如果非零（已锁定），重试
       ret                   ; 获取锁成功
-  
+
   release_lock:
       mov DWORD [lock_var], 0  ; 释放锁
       ret
@@ -539,7 +539,7 @@
       Block(thread);
       Lock(mutex);
   }
-  
+
   Signal(cv) = {
       Unblock(thread);
   }
@@ -581,13 +581,13 @@
   sub esp, X           ; 分配局部变量空间
   mov eax, gs:[14h]    ; 获取canary值
   mov [ebp-4], eax     ; 保存canary
-  
+
   ; 函数退出前
   mov eax, [ebp-4]     ; 读取保存的canary
   xor eax, gs:[14h]    ; 与原始canary比较
   jnz canary_failed    ; 如果不匹配，检测到攻击
   ```
-  
+
 - **不可执行内存(NX/DEP)**：
 
   ```math
@@ -638,7 +638,7 @@
   ```math
   CISC：复杂指令集，单指令完成复杂操作
       MOV EAX, [EBX+ECX*4+0x10]  ; 一条指令完成复杂内存访问
-      
+
   RISC：简单指令集，组合简单指令完成复杂操作
       ADD R1, R2, R3, LSL #2  ; R1 = R2 + (R3 << 2)
       LDR R0, [R1, #0x10]     ; R0 = MEM[R1+0x10]
@@ -786,7 +786,7 @@
   1000    B8 0A 00    MOV EAX, 10
   1003    83 C0 01    ADD EAX, 1
   ```
-  
+
   - **递归遍历**：从入口点开始，递归跟踪控制流
 
   ```math
@@ -850,7 +850,7 @@
       jmp block2
   block2:
       ; ...
-  
+
   ; 混淆后
   dispatcher:
       cmp state_var, 1
@@ -864,7 +864,7 @@
   block2:
       ; ...
   ```
-  
+
   - **虚假控制流**：插入永不执行的代码
 
   ```assembly
@@ -1127,7 +1127,7 @@
   标量循环：
   for(i=0; i<n; i++)
       c[i] = a[i] + b[i];
-      
+
   向量化：
   for(i=0; i<n; i+=4)
       c[i:i+3] = a[i:i+3] + b[i:i+3]; // SIMD操作
@@ -1153,7 +1153,7 @@
   ```math
   读集 = 事务中读取的内存位置
   写集 = 事务中写入的内存位置
-  
+
   冲突：如果事务T₁的写集与事务T₂的读/写集有交集
   ```
 
@@ -1171,7 +1171,7 @@
   ; x86计算密集代码
   mov eax, [data]
   ; ...计算...
-  
+
   ; 转换为GPU代码
   mov data_buf, eax      ; 数据传输到GPU
   gpu_kernel_call        ; 调用GPU计算内核
@@ -1182,7 +1182,7 @@
 
   ```math
   系统状态 = CPU状态 ⊕ GPU状态 ⊕ 传输状态
-  
+
   CPU→GPU同步点：
   CPU执行到指定点 ∧ 所有GPU任务完成
   ```

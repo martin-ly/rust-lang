@@ -1,9 +1,9 @@
 # Module 21: Rust 应用领域 {#module-21-application-domains}
 
-**Document Version**: V2.0  
-**Module Status**: Active Development  
-**Last Updated**: 2025-01-01  
-**Maintainer**: Rust Application Domain Team  
+**Document Version**: V2.0
+**Module Status**: Active Development
+**Last Updated**: 2025-01-01
+**Maintainer**: Rust Application Domain Team
 
 ## 元数据 {#metadata}
 
@@ -27,7 +27,6 @@
     - [1.1 模块定位](#11-模块定位)
     - [1.2 核心价值](#12-核心价值)
     - [1.3 应用领域分类](#13-应用领域分类)
-  - [2. 目录结构 {#2-directory-structure}](#2-目录结构-2-directory-structure)
     - [2.1 三层架构设计](#21-三层架构设计)
     - [2.2 文档组织原则](#22-文档组织原则)
   - [3. 模块关系 {#3-module-relationships}](#3-模块关系-3-module-relationships)
@@ -123,6 +122,7 @@ Rust应用领域全景图
     ├── 构建系统
     └── 调试分析器
 ```
+
 ### 2.1 三层架构设计
 
 ```text
@@ -326,14 +326,14 @@ Rust应用领域全景图
 
 ### 5.1 领域适配性理论
 
-**定义 21.1 (领域适配性函数)**  
+**定义 21.1 (领域适配性函数)**
 给定编程语言L和应用领域D，适配性函数定义为：
 
 $$\text{Adaptability}(L, D) = \sum_{i=1}^{n} w_i \cdot \text{FeatureMatch}(L.f_i, D.r_i)$$
 
 其中$f_i$是语言特性，$r_i$是领域需求，$w_i$是权重。
 
-**定理 21.1 (Rust适配性优势)**  
+**定理 21.1 (Rust适配性优势)**
 对于安全关键领域$D_{safe}$，Rust的适配性显著优于其他系统编程语言：
 
 $$\text{Adaptability}(\text{Rust}, D_{safe}) > \text{Adaptability}(L, D_{safe})$$
@@ -342,7 +342,7 @@ $$\text{Adaptability}(\text{Rust}, D_{safe}) > \text{Adaptability}(L, D_{safe})$
 
 ### 5.2 架构模式理论
 
-**定义 21.2 (领域架构模式)**  
+**定义 21.2 (领域架构模式)**
 领域架构模式是针对特定应用领域优化的软件架构模板：
 
 $$\text{ArchPattern}(D) = (C, I, R, P)$$
@@ -354,19 +354,19 @@ $$\text{ArchPattern}(D) = (C, I, R, P)$$
 - $R$ 是关系约束
 - $P$ 是性能特征
 
-**定理 21.2 (模式有效性)**  
+**定理 21.2 (模式有效性)**
 正确应用的架构模式能够显著提升应用质量：
 
 $$\text{Quality}(\text{App}(\text{ArchPattern}(D))) > \text{Quality}(\text{App}(\text{Generic}))$$
 
 ### 5.3 性能预测理论
 
-**定义 21.3 (性能模型)**  
+**定义 21.3 (性能模型)**
 应用性能模型描述了Rust特性对不同领域性能的影响：
 
 $$\text{Performance}(App, D) = \prod_{i=1}^{m} \text{OptimizationFactor}(Feature_i, D)$$
 
-**定理 21.3 (零成本抽象保证)**  
+**定理 21.3 (零成本抽象保证)**
 在正确使用下，Rust的零成本抽象不引入运行时开销：
 
 $$\text{Runtime}(\text{Abstraction}) = \text{Runtime}(\text{Manual})$$
@@ -431,14 +431,14 @@ impl KernelAllocator {
             allocated: 0,
         }
     }
-    
+
     pub fn allocate(&mut self, size: usize, align: usize) -> Option<NonNull<u8>> {
         let aligned_size = (size + align - 1) & !(align - 1);
-        
+
         if self.allocated + aligned_size > self.heap_size {
             return None;
         }
-        
+
         unsafe {
             let ptr = self.heap_start.as_ptr().add(self.allocated);
             let aligned_ptr = (ptr as usize + align - 1) & !(align - 1);
@@ -455,15 +455,15 @@ pub struct PageTable {
 }
 
 impl PageTable {
-    pub fn map_page(&mut self, virtual_addr: VirtualAddress, 
-                    physical_addr: PhysicalAddress, 
+    pub fn map_page(&mut self, virtual_addr: VirtualAddress,
+                    physical_addr: PhysicalAddress,
                     flags: PageFlags) -> Result<(), MapError> {
         let index = virtual_addr.page_table_index();
-        
+
         if self.entries[index].is_present() {
             return Err(MapError::AlreadyMapped);
         }
-        
+
         self.entries[index] = PageTableEntry::new(physical_addr, flags);
         Ok(())
     }
@@ -494,7 +494,7 @@ impl HighPerformanceServer {
         let middleware_stack = Arc::new(MiddlewareStack::new());
         let connection_pool = Arc::new(ConnectionPool::new(config.db_config).await?);
         let metrics = Arc::new(Metrics::new());
-        
+
         Ok(Self {
             router,
             middleware_stack,
@@ -502,14 +502,14 @@ impl HighPerformanceServer {
             metrics,
         })
     }
-    
+
     pub async fn start(&self, addr: &str) -> Result<(), ServerError> {
         let listener = TcpListener::bind(addr).await?;
-        
+
         loop {
             let (stream, _) = listener.accept().await?;
             let server = self.clone();
-            
+
             tokio::spawn(async move {
                 if let Err(e) = server.handle_connection(stream).await {
                     eprintln!("Connection error: {}", e);
@@ -517,27 +517,27 @@ impl HighPerformanceServer {
             });
         }
     }
-    
+
     async fn handle_connection(&self, mut stream: TcpStream) -> Result<(), ConnectionError> {
         let mut buffer = [0; 4096];
         let bytes_read = stream.read(&mut buffer).await?;
-        
+
         let request = HttpRequest::parse(&buffer[..bytes_read])?;
-        
+
         // 应用中间件栈
         let mut context = RequestContext::new(request, self.connection_pool.clone());
         self.middleware_stack.process(&mut context).await?;
-        
+
         // 路由处理
         let response = self.router.handle(context).await?;
-        
+
         // 发送响应
         let response_bytes = response.to_bytes();
         stream.write_all(&response_bytes).await?;
-        
+
         // 更新指标
         self.metrics.increment_request_count();
-        
+
         Ok(())
     }
 }
@@ -549,28 +549,28 @@ pub struct Router {
 }
 
 impl Router {
-    pub fn add_route<H>(&self, path: &str, handler: H) 
-    where 
-        H: Handler + 'static 
+    pub fn add_route<H>(&self, path: &str, handler: H)
+    where
+        H: Handler + 'static
     {
         self.routes.insert(path.to_string(), Arc::new(handler));
     }
-    
+
     pub async fn handle(&self, context: RequestContext) -> Result<HttpResponse, RoutingError> {
         let path = context.request().path();
-        
+
         // 精确匹配
         if let Some(handler) = self.routes.get(path) {
             return handler.handle(context).await;
         }
-        
+
         // 正则匹配
         for (regex, handler) in &self.regex_routes {
             if regex.is_match(path) {
                 return handler.handle(context).await;
             }
         }
-        
+
         Err(RoutingError::NotFound)
     }
 }
@@ -596,18 +596,18 @@ impl<T: Float + Send + Sync> ParallelMatrix<T> {
             data: Array2::zeros((rows, cols)),
         }
     }
-    
+
     // 并行矩阵乘法
     pub fn multiply(&self, other: &ParallelMatrix<T>) -> Result<ParallelMatrix<T>, MatrixError> {
         let (m, k) = self.data.dim();
         let (k2, n) = other.data.dim();
-        
+
         if k != k2 {
             return Err(MatrixError::DimensionMismatch);
         }
-        
+
         let mut result = Array2::zeros((m, n));
-        
+
         // 使用Rayon进行并行计算
         result.axis_iter_mut(Axis(0))
               .into_par_iter()
@@ -621,19 +621,19 @@ impl<T: Float + Send + Sync> ParallelMatrix<T> {
                       row[j] = sum;
                   }
               });
-        
+
         Ok(ParallelMatrix { data: result })
     }
-    
+
     // SIMD优化的向量操作
     pub fn vector_add_simd(&mut self, other: &ParallelMatrix<T>) -> Result<(), MatrixError> {
         if self.data.dim() != other.data.dim() {
             return Err(MatrixError::DimensionMismatch);
         }
-        
+
         // 使用SIMD进行向量化操作
         self.data.par_mapv_inplace(|x| x + x);
-        
+
         Ok(())
     }
 }
@@ -642,19 +642,19 @@ impl<T: Float + Send + Sync> ParallelMatrix<T> {
 #[cfg(feature = "gpu")]
 pub mod gpu {
     use cudarc::driver::*;
-    
+
     pub struct GpuMatrix<T> {
         data: CudaSlice<T>,
         rows: usize,
         cols: usize,
     }
-    
+
     impl<T: Clone> GpuMatrix<T> {
         pub fn new(device: &CudaDevice, rows: usize, cols: usize) -> Result<Self, CudaError> {
             let data = device.alloc_zeros::<T>(rows * cols)?;
             Ok(Self { data, rows, cols })
         }
-        
+
         pub fn multiply_gpu(&self, other: &GpuMatrix<T>, device: &CudaDevice) -> Result<GpuMatrix<T>, CudaError> {
             // 实现GPU矩阵乘法
             todo!("GPU matrix multiplication")
@@ -681,54 +681,54 @@ pub struct InferenceEngine {
 impl InferenceEngine {
     pub fn new(model_path: &str) -> Result<Self, ModelError> {
         let device = Device::Cpu; // 或 Device::Cuda(0)
-        
+
         // 加载预训练模型
         let model = Self::load_model(model_path, &device)?;
         let input_shape = Self::get_input_shape(&model);
-        
+
         Ok(Self {
             model,
             device,
             input_shape,
         })
     }
-    
+
     pub fn predict(&self, input: &[f32]) -> Result<Vec<f32>, InferenceError> {
         // 创建输入张量
         let input_tensor = Tensor::from_slice(
-            input, 
-            &self.input_shape, 
+            input,
+            &self.input_shape,
             &self.device
         )?;
-        
+
         // 前向传播
         let output = self.model.forward(&input_tensor)?;
-        
+
         // 提取结果
         let output_vec = output.to_vec1::<f32>()?;
         Ok(output_vec)
     }
-    
+
     // 批量推理优化
     pub fn predict_batch(&self, inputs: &[Vec<f32>]) -> Result<Vec<Vec<f32>>, InferenceError> {
         let batch_size = inputs.len();
         let mut batch_input = Vec::new();
-        
+
         for input in inputs {
             batch_input.extend_from_slice(input);
         }
-        
+
         let mut batch_shape = vec![batch_size];
         batch_shape.extend_from_slice(&self.input_shape[1..]);
-        
+
         let batch_tensor = Tensor::from_slice(
             &batch_input,
             &batch_shape,
             &self.device
         )?;
-        
+
         let batch_output = self.model.forward(&batch_tensor)?;
-        
+
         // 拆分批量结果
         let output_data = batch_output.to_vec2::<f32>()?;
         Ok(output_data)
@@ -748,22 +748,22 @@ impl FeatureProcessor {
             encoders: Vec::new(),
         }
     }
-    
+
     pub fn add_normalizer(&mut self, column: usize, mean: f64, std: f64) {
         self.normalizers.push(Normalizer { column, mean, std });
     }
-    
+
     pub fn process_features(&self, raw_features: &[f64]) -> Vec<f64> {
         let mut processed = raw_features.to_vec();
-        
+
         // 应用标准化
         for normalizer in &self.normalizers {
             if normalizer.column < processed.len() {
-                processed[normalizer.column] = 
+                processed[normalizer.column] =
                     (processed[normalizer.column] - normalizer.mean) / normalizer.std;
             }
         }
-        
+
         processed
     }
 }
@@ -898,7 +898,7 @@ impl FeatureProcessor {
 
 ---
 
-**文档历史**:  
+**文档历史**:
 
 - 创建: 2025-07-23 - 初始版本
 - 更新: 2025-01-01 - V2.0版本，建立完整的应用领域理论框架

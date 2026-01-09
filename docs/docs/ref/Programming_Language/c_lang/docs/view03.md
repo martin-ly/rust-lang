@@ -355,13 +355,13 @@ void func2() {
 int sum(int n) {
     int total = 0;     // 初始 {total = 0}
     int i = 1;         // 初始 {total = 0 ∧ i = 1}
-    
+
     // 循环不变量: {total = Σ(1到i-1) ∧ 1 ≤ i ≤ n+1}
     while (i <= n) {
         total += i;
         i++;
     }
-    
+
     // 循环结束: {total = Σ(1到n) ∧ i = n+1}
     return total;
 }
@@ -735,7 +735,7 @@ void event_loop() {
 使用分离逻辑(Separation Logic)验证指针程序：
 
 ```math
-{x↦v * y↦w} 
+{x↦v * y↦w}
   swap(x,y)
 {x↦w * y↦v}
 ```
@@ -879,7 +879,7 @@ C语言深度分析
        max = a;
    else
        max = b;
-   
+
    // 数据流版本
    int max = (a > b) ? a : b;
    ```
@@ -890,7 +890,7 @@ C语言深度分析
    // 同步版本
    result = compute();
    use_result(result);
-   
+
    // 异步版本
    void on_complete(int result) {
        use_result(result);
@@ -906,7 +906,7 @@ C语言深度分析
        if (n <= 1) return 1;
        return n * factorial(n-1);
    }
-   
+
    // 迭代版本
    int factorial_iter(int n) {
        int result = 1;
@@ -1005,7 +1005,7 @@ int val = atomic_load_explicit(&counter, memory_order_acquire);
 atomic_thread_fence(memory_order_acquire);  // 获取屏障
 // 这里的读操作不会被重排到屏障之前
 
-atomic_thread_fence(memory_order_release);  // 释放屏障 
+atomic_thread_fence(memory_order_release);  // 释放屏障
 // 这里的写操作不会被重排到屏障之后
 ```
 
@@ -1206,11 +1206,11 @@ IntFunction make_adder(int a) {
     // 这里需要静态存储
     static int closure_val;
     closure_val = a;
-    
+
     static int add_fn(int b) {
         return closure_val + b;
     }
-    
+
     return add_fn;
 }
 
@@ -1397,15 +1397,15 @@ void enqueue(int value) {
     Node* new_node = malloc(sizeof(Node));
     new_node->value = value;
     new_node->next = NULL;
-    
+
     Node* old_tail;
     do {
         old_tail = atomic_load(&tail);
         // 尝试将新节点设为旧尾节点的next
-    } while (!atomic_compare_exchange_strong(&(old_tail->next), 
-                                           &(Node*)NULL, 
+    } while (!atomic_compare_exchange_strong(&(old_tail->next),
+                                           &(Node*)NULL,
                                            new_node));
-    
+
     // 更新尾指针
     atomic_store(&tail, new_node);
 }
@@ -1477,13 +1477,13 @@ void list_add(struct List* list, void* element) {
 // 中断处理函数
 void __attribute__((interrupt)) timer_isr(void) {
     // 保存上下文（部分架构自动完成）
-    
+
     // 中断处理代码
     handle_timer_event();
-    
+
     // 清除中断标志
     TIMER_INT_FLAG = 0;
-    
+
     // 恢复上下文（部分架构自动完成）
 }
 
@@ -1646,7 +1646,7 @@ int example(int* p) {
     if (p == NULL) {
         return *p;  // 空指针解引用
     }
-    
+
     int a[10];
     return a[10];  // 数组越界
 }

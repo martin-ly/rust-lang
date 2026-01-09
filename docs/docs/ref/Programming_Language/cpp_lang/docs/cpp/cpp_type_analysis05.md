@@ -710,13 +710,13 @@ y = x * 2;
 int sum(int n) {
     int total = 0;      // 初始 {total = 0}
     int i = 1;          // 初始 {total = 0 ∧ i = 1}
-    
+
     // 循环不变量: {total = Σ(1到i-1) ∧ 1 ≤ i ≤ n+1}
     while (i <= n) {
         total += i;
         i++;
     }
-    
+
     // 循环结束: {total = Σ(1到n) ∧ i = n+1}
     return total;
 }
@@ -1026,7 +1026,7 @@ void print_user_input(char* input) {
 void integer_overflow() {
     int size = get_user_input();
     char* buffer = (char*)malloc(size + 1);  // 可能溢出为负数或零
-    
+
     // 安全做法
     if (size > 0 && size < MAX_SIZE) {
         buffer = (char*)malloc(size + 1);
@@ -1067,7 +1067,7 @@ int process_age(char* input) {
 void safe_copy(char* dst, size_t dst_size, const char* src) {
     if (dst == NULL || src == NULL || dst_size == 0)
         return;
-    
+
     size_t i;
     for (i = 0; i < dst_size - 1 && src[i] != '\0'; i++) {
         dst[i] = src[i];
@@ -1082,7 +1082,7 @@ void safe_copy(char* dst, size_t dst_size, const char* src) {
 void* safe_malloc(size_t size) {
     if (size == 0)
         return NULL;
-    
+
     void* ptr = malloc(size);
     if (ptr == NULL) {
         fprintf(stderr, "内存分配失败\n");

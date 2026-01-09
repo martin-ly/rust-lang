@@ -3,43 +3,45 @@
 
 ## 📊 目录
 
-- [1. 概述](#1-概述)
-- [2. 数学符号约定](#2-数学符号约定)
-  - [2.1 基本符号](#21-基本符号)
-  - [2.2 约束系统符号](#22-约束系统符号)
-- [3. 约束类型形式化理论](#3-约束类型形式化理论)
-  - [3.1 约束语法定义](#31-约束语法定义)
-  - [3.2 约束类型理论](#32-约束类型理论)
-  - [3.3 约束集合](#33-约束集合)
-- [4. 约束求解形式化理论](#4-约束求解形式化理论)
-  - [4.1 求解器定义](#41-求解器定义)
-  - [4.2 约束统一](#42-约束统一)
-  - [4.3 约束简化](#43-约束简化)
-- [5. 约束传播形式化理论](#5-约束传播形式化理论)
-  - [5.1 传播规则](#51-传播规则)
-  - [5.2 约束图](#52-约束图)
-  - [5.3 约束传递闭包](#53-约束传递闭包)
-- [6. 约束优化形式化理论](#6-约束优化形式化理论)
-  - [6.1 约束消除](#61-约束消除)
-  - [6.2 约束排序](#62-约束排序)
-  - [6.3 约束缓存](#63-约束缓存)
-- [7. 高级约束形式化理论](#7-高级约束形式化理论)
-  - [7.1 关联类型约束](#71-关联类型约束)
-  - [7.2 生命周期约束](#72-生命周期约束)
-  - [7.3 复合约束](#73-复合约束)
-- [8. 约束系统优化](#8-约束系统优化)
-  - [8.1 编译时优化](#81-编译时优化)
-  - [8.2 运行时优化](#82-运行时优化)
-- [9. 实际应用示例](#9-实际应用示例)
-  - [9.1 基本约束](#91-基本约束)
-  - [9.2 高级约束](#92-高级约束)
-  - [9.3 生命周期约束](#93-生命周期约束)
-  - [9.4 复杂约束组合](#94-复杂约束组合)
-- [10. 形式化验证](#10-形式化验证)
-  - [10.1 约束系统正确性](#101-约束系统正确性)
-  - [10.2 约束求解验证](#102-约束求解验证)
-- [11. 总结](#11-总结)
-- [12. 参考文献](#12-参考文献)
+- [Rust约束系统形式化理论](#rust约束系统形式化理论)
+  - [📊 目录](#-目录)
+  - [1. 概述](#1-概述)
+  - [2. 数学符号约定](#2-数学符号约定)
+    - [2.1 基本符号](#21-基本符号)
+    - [2.2 约束系统符号](#22-约束系统符号)
+  - [3. 约束类型形式化理论](#3-约束类型形式化理论)
+    - [3.1 约束语法定义](#31-约束语法定义)
+    - [3.2 约束类型理论](#32-约束类型理论)
+    - [3.3 约束集合](#33-约束集合)
+  - [4. 约束求解形式化理论](#4-约束求解形式化理论)
+    - [4.1 求解器定义](#41-求解器定义)
+    - [4.2 约束统一](#42-约束统一)
+    - [4.3 约束简化](#43-约束简化)
+  - [5. 约束传播形式化理论](#5-约束传播形式化理论)
+    - [5.1 传播规则](#51-传播规则)
+    - [5.2 约束图](#52-约束图)
+    - [5.3 约束传递闭包](#53-约束传递闭包)
+  - [6. 约束优化形式化理论](#6-约束优化形式化理论)
+    - [6.1 约束消除](#61-约束消除)
+    - [6.2 约束排序](#62-约束排序)
+    - [6.3 约束缓存](#63-约束缓存)
+  - [7. 高级约束形式化理论](#7-高级约束形式化理论)
+    - [7.1 关联类型约束](#71-关联类型约束)
+    - [7.2 生命周期约束](#72-生命周期约束)
+    - [7.3 复合约束](#73-复合约束)
+  - [8. 约束系统优化](#8-约束系统优化)
+    - [8.1 编译时优化](#81-编译时优化)
+    - [8.2 运行时优化](#82-运行时优化)
+  - [9. 实际应用示例](#9-实际应用示例)
+    - [9.1 基本约束](#91-基本约束)
+    - [9.2 高级约束](#92-高级约束)
+    - [9.3 生命周期约束](#93-生命周期约束)
+    - [9.4 复杂约束组合](#94-复杂约束组合)
+  - [10. 形式化验证](#10-形式化验证)
+    - [10.1 约束系统正确性](#101-约束系统正确性)
+    - [10.2 约束求解验证](#102-约束求解验证)
+  - [11. 总结](#11-总结)
+  - [12. 参考文献](#12-参考文献)
 
 
 ## 1. 概述
@@ -111,7 +113,7 @@ $$\text{Solver}(\text{constraints}) = \text{find}(\text{impls} \mid \text{constr
 fn solve_constraints(constraints: &[Constraint]) -> Option<Vec<Impl>> {
     let mut solutions = Vec::new();
     let mut worklist = constraints.to_vec();
-    
+
     while let Some(constraint) = worklist.pop() {
         match constraint {
             Constraint::TraitBound(type_, trait_) => {
@@ -137,7 +139,7 @@ fn solve_constraints(constraints: &[Constraint]) -> Option<Vec<Impl>> {
             }
         }
     }
-    
+
     Some(solutions)
 }
 ```
@@ -154,7 +156,7 @@ $$\text{unify\_constraints}(\text{constraints}) = \text{most\_general\_unifier}(
 fn unify_constraints(constraints: &[Constraint]) -> Option<ConstraintSubstitution> {
     let mut substitution = ConstraintSubstitution::new();
     let mut worklist = constraints.to_vec();
-    
+
     while let Some(constraint) = worklist.pop() {
         match constraint {
             Constraint::Equal(c1, c2) => {
@@ -174,7 +176,7 @@ fn unify_constraints(constraints: &[Constraint]) -> Option<ConstraintSubstitutio
             }
         }
     }
-    
+
     Some(substitution)
 }
 ```
@@ -186,13 +188,13 @@ fn unify_constraints(constraints: &[Constraint]) -> Option<ConstraintSubstitutio
 ```rust
 fn simplify_constraints(constraints: &mut Vec<Constraint>) {
     let mut changed = true;
-    
+
     while changed {
         changed = false;
-        
+
         // 移除冗余约束
         constraints.retain(|c| !is_redundant(c, constraints));
-        
+
         // 合并相似约束
         for i in 0..constraints.len() {
             for j in (i + 1)..constraints.len() {
@@ -221,10 +223,10 @@ $$\text{propagate}(\text{constraints}) = \text{transitive\_closure}(\text{constr
 ```rust
 fn propagate_constraints(constraints: &mut Vec<Constraint>) {
     let mut changed = true;
-    
+
     while changed {
         changed = false;
-        
+
         for i in 0..constraints.len() {
             for j in (i + 1)..constraints.len() {
                 if let Some(new_constraints) = propagate_between_constraints(
@@ -250,7 +252,7 @@ $$G = (V, E) \text{ where } V = \text{types}, E = \text{constraints}$$
 ```rust
 fn build_constraint_graph(constraints: &[Constraint]) -> ConstraintGraph {
     let mut graph = ConstraintGraph::new();
-    
+
     for constraint in constraints {
         match constraint {
             Constraint::TraitBound(type_, trait_) => {
@@ -264,7 +266,7 @@ fn build_constraint_graph(constraints: &[Constraint]) -> ConstraintGraph {
             }
         }
     }
-    
+
     graph
 }
 ```
@@ -276,7 +278,7 @@ fn build_constraint_graph(constraints: &[Constraint]) -> ConstraintGraph {
 ```rust
 fn compute_transitive_closure(graph: &mut ConstraintGraph) {
     let nodes: Vec<_> = graph.nodes().collect();
-    
+
     for k in &nodes {
         for i in &nodes {
             for j in &nodes {
@@ -302,13 +304,13 @@ $$\text{eliminate}(\text{constraints}) = \text{remove\_redundant}(\text{constrai
 ```rust
 fn eliminate_redundant_constraints(constraints: &mut Vec<Constraint>) {
     let mut to_remove = Vec::new();
-    
+
     for (i, constraint) in constraints.iter().enumerate() {
         if is_redundant(constraint, &constraints[..i]) {
             to_remove.push(i);
         }
     }
-    
+
     // 从后往前移除，避免索引变化
     for &index in to_remove.iter().rev() {
         constraints.remove(index);
@@ -328,7 +330,7 @@ $$\text{sort\_constraints}(\text{constraints}) = \text{topological\_sort}(\text{
 fn sort_constraints(constraints: &[Constraint]) -> Vec<Constraint> {
     let graph = build_constraint_graph(constraints);
     let sorted = topological_sort(&graph);
-    
+
     sorted.into_iter()
         .filter_map(|node| {
             constraints.iter().find(|c| constraint_matches_node(c, &node)).cloned()
@@ -351,12 +353,12 @@ impl ConstraintCache {
         if let Some(cached) = self.cache.get(constraint) {
             return Some(cached.clone());
         }
-        
+
         let solution = solve_constraint(constraint);
         if let Some(sol) = &solution {
             self.cache.insert(constraint.clone(), sol.clone());
         }
-        
+
         solution
     }
 }
@@ -393,7 +395,7 @@ $$\text{CompoundConstraint}(\text{constraints}) = \text{constraints}_1 \land \te
 ```rust
 fn solve_compound_constraint(constraints: &[Constraint]) -> Option<Vec<Impl>> {
     let mut all_solutions = Vec::new();
-    
+
     for constraint in constraints {
         if let Some(solutions) = solve_constraint(constraint) {
             all_solutions.extend(solutions);
@@ -401,7 +403,7 @@ fn solve_compound_constraint(constraints: &[Constraint]) -> Option<Vec<Impl>> {
             return None; // 任何一个约束无法求解，整个复合约束失败
         }
     }
-    
+
     Some(all_solutions)
 }
 ```
@@ -416,13 +418,13 @@ fn solve_compound_constraint(constraints: &[Constraint]) -> Option<Vec<Impl>> {
 fn optimize_constraints_at_compile_time(constraints: &mut Vec<Constraint>) {
     // 1. 简化约束
     simplify_constraints(constraints);
-    
+
     // 2. 消除冗余约束
     eliminate_redundant_constraints(constraints);
-    
+
     // 3. 排序约束
     *constraints = sort_constraints(constraints);
-    
+
     // 4. 缓存约束求解结果
     cache_constraint_solutions(constraints);
 }
@@ -436,7 +438,7 @@ fn optimize_constraints_at_compile_time(constraints: &mut Vec<Constraint>) {
 fn optimize_constraints_at_runtime(constraints: &[Constraint]) -> Vec<Impl> {
     let mut cache = ConstraintCache::new();
     let mut solutions = Vec::new();
-    
+
     for constraint in constraints {
         if let Some(impls) = cache.solve(constraint) {
             solutions.extend(impls);
@@ -447,7 +449,7 @@ fn optimize_constraints_at_runtime(constraints: &[Constraint]) -> Vec<Impl> {
             }
         }
     }
-    
+
     solutions
 }
 ```
@@ -527,7 +529,7 @@ trait Database {
     type Connection: Connection;
     type Query: Query;
     type Result: Result;
-    
+
     fn connect(&self) -> Self::Connection;
     fn execute(&self, conn: &Self::Connection, query: &Self::Query) -> Self::Result;
 }
@@ -565,23 +567,23 @@ fn verify_constraint_system(constraints: &[Constraint]) -> bool {
     if solve_constraints(constraints).is_none() {
         return false;
     }
-    
+
     // 检查约束传播一致性
     let mut propagated = constraints.to_vec();
     propagate_constraints(&mut propagated);
-    
+
     if !constraints_are_consistent(&propagated) {
         return false;
     }
-    
+
     // 检查约束优化正确性
     let mut optimized = constraints.to_vec();
     optimize_constraints_at_compile_time(&mut optimized);
-    
+
     if !constraints_are_equivalent(constraints, &optimized) {
         return false;
     }
-    
+
     true
 }
 ```
@@ -593,7 +595,7 @@ fn verify_constraint_system(constraints: &[Constraint]) -> bool {
 ```rust
 fn verify_constraint_solving(constraints: &[Constraint]) -> bool {
     let solutions = solve_constraints(constraints);
-    
+
     if let Some(sols) = solutions {
         // 验证每个解决方案都满足所有约束
         for solution in sols {

@@ -146,7 +146,7 @@
   ```assembly
   section .data
       myVar DD 100     ; 定义一个名为myVar的双字变量，初始值为100
-  
+
   section .text
       MOV EAX, [myVar] ; 将myVar处内存的值加载到EAX
       MOV [myVar], EBX ; 将EBX的值存回myVar处的内存
@@ -244,7 +244,7 @@
 - **控制流图（CFG）**：表示程序所有可能执行路径
   - **节点**：基本块（无分支的指令序列）
   - **边**：可能的控制转移
-  
+
 - **应用**：优化、静态分析、测试用例生成
 
 ### 数据流分析（Data Flow Analysis）
@@ -264,7 +264,7 @@
 
 - **硬件执行流**：CPU指令处理流水线
   - 取指→译码→执行→访存→写回
-  
+
 - **调度流**：操作系统级任务调度
   - 上下文切换、中断处理
 
@@ -450,7 +450,7 @@
 ### 内存一致性模型
 
 - **顺序一致性(SC)**：所有处理器看到相同的内存访问顺序
-  
+
 - **总存储顺序(TSO)**：x86架构模型
 
   ```assembly
@@ -496,8 +496,8 @@
 - **x86-64指令示例**
 
   ```math
-  ⟦ADD dst, src⟧(σ) = σ[dst ↦ σ(dst) + σ(src), 
-                      ZF ↦ (σ(dst) + σ(src) == 0), 
+  ⟦ADD dst, src⟧(σ) = σ[dst ↦ σ(dst) + σ(src),
+                      ZF ↦ (σ(dst) + σ(src) == 0),
                       SF ↦ (σ(dst) + σ(src) < 0), ...]
   ```
 
@@ -517,7 +517,7 @@
     jmp loop_start
   loop_end:
   ```
-  
+
   **不变量**：每次循环后，`eax = (n-ecx+1)!`和`ecx ≥ 0`
 
 ### 符号执行
@@ -605,7 +605,7 @@
   ; 原始
   mov eax, [addr]  ; 可能缓存未命中
   add ebx, eax     ; 依赖eax，可能停顿
-  
+
   ; 优化（插入独立指令）
   mov eax, [addr]
   mov ecx, [other] ; 独立指令填充延迟
@@ -641,7 +641,7 @@
   mov ebp, esp
   sub esp, frame_size
   mov [ebp-4], CANARY_VALUE
-  
+
   ; 函数尾声
   cmp [ebp-4], CANARY_VALUE
   jne stack_corruption
@@ -727,7 +727,7 @@
     (* 伪代码: 证明语义保持 *)
     Theorem translation_preserves_semantics :
       forall p : C_program,
-      Semantics_Asm(compile(p)) ≈ Semantics_C(p). 
+      Semantics_Asm(compile(p)) ≈ Semantics_C(p).
     ```
 
     其中 `Semantics_Asm` 和 `Semantics_C` 是汇编和C语言的形式化语义，
@@ -1074,7 +1074,7 @@
   ```assembly
   section .data
       myVar DD 100     ; 定义一个名为myVar的双字变量，初始值为100
-  
+
   section .text
       MOV EAX, [myVar] ; 将myVar处内存的值加载到EAX
       MOV [myVar], EBX ; 将EBX的值存回myVar处的内存
@@ -1192,7 +1192,7 @@
 
 - **硬件执行流**：CPU指令处理流水线
   - 取指→译码→执行→访存→写回
-  
+
 - **调度流**：操作系统级任务调度
   - 上下文切换、中断处理
 

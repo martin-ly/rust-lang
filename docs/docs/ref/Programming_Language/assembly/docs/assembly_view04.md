@@ -90,7 +90,7 @@
 ```assembly
 section .data
   count: dd 10     ; 定义一个双字变量，初值为10
-  
+
 section .text
   mov eax, [count] ; 将count的值加载到eax
   add eax, 5       ; eax = eax + 5
@@ -113,13 +113,13 @@ section .text
 ; 条件分支示例
   cmp eax, 10     ; 比较eax与10
   jl less_than    ; 如果eax < 10则跳转
-  
+
   mov ebx, 20     ; "else"分支
   jmp end_if
-  
+
 less_than:
   mov ebx, 5      ; "if"分支
-  
+
 end_if:
   ; 继续执行
 ```
@@ -443,7 +443,7 @@ use(x)
 
 ; SSA形式
 x_1 = 1
-if (cond) 
+if (cond)
   x_2 = 2
 x_3 = φ(x_1, x_2)
 use(x_3)
@@ -615,7 +615,7 @@ vpaddd zmm0 {k1}, zmm3, zmm4    ; 仅在掩码为1处执行加法
 ```math
 ⟦mov r, v⟧(Σ) = Σ[PC++, S[r ↦ v]]
 ⟦cmp r1, r2⟧(Σ) = Σ[PC++, flags ↦ S(r1) - S(r2)]
-⟦je addr⟧(Σ) = 
+⟦je addr⟧(Σ) =
   if concreteEval(Σ.PC ∧ Σ.flags.ZF) is SAT then
     path1 = Σ[PC ↦ addr, PC ↦ PC ∧ flags.ZF]
   if concreteEval(Σ.PC ∧ ¬Σ.flags.ZF) is SAT then
@@ -686,7 +686,7 @@ ThreadLocal(R,W) ⟺ ∀t₁,t₂, i∈t₁, j∈t₂: t₁≠t₂ ⟹ R(i)∩W(
 - **函数式到指令式转换**:
 
 ```math
-⟦λx.e⟧ = 
+⟦λx.e⟧ =
   alloc space for closure
   store free variables
   return closure addr

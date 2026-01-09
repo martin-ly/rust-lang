@@ -1,9 +1,9 @@
 # Rust 工具链生态系统: 形式化理论
 
-**文档编号**: 26.01  
-**版本**: 1.0  
-**创建日期**: 2025-01-27  
-**最后更新**: 2025-01-28  
+**文档编号**: 26.01
+**版本**: 1.0
+**创建日期**: 2025-01-27
+**最后更新**: 2025-01-28
 
 ## 目录
 
@@ -157,7 +157,7 @@ struct ToolchainComponent<I, O> {
 struct Toolchain {
     components: HashMap<String, Box<dyn Any>>,
     execution_graph: DirectedGraph,
-    
+
     fn execute<I, O>(&self, input: I) -> Result<O, Error> {
         // 按照执行图执行各组件
         // ...
@@ -270,7 +270,7 @@ $$Compile(src) = Link \circ CodeGen \circ Optimize \circ MIRGen \circ HIRGen \ci
 **模型 26.1** (rustc流水线)
 
 ```text
-源代码 -> 词法分析 -> 语法分析 -> 名称解析 -> 类型检查 -> 
+源代码 -> 词法分析 -> 语法分析 -> 名称解析 -> 类型检查 ->
 借用检查 -> HIR -> MIR -> LLVM IR -> 机器代码
 ```
 
@@ -291,21 +291,21 @@ $$Resolve(P) = \{(D_1, V_1), (D_2, V_2), ..., (D_n, V_n)\}$$
 function ResolveDependencies(package):
     resolved = {}
     unresolved = package.dependencies
-    
+
     while unresolved is not empty:
         dep = unresolved.pop()
-        
+
         // 寻找满足约束的最新版本
         version = FindBestVersion(dep)
-        
+
         // 记录解析结果
         resolved[dep.name] = version
-        
+
         // 添加传递依赖
         for transitive in GetDependencies(dep, version):
             if transitive not in resolved:
                 unresolved.add(transitive)
-    
+
     return resolved
 ```
 
@@ -325,17 +325,17 @@ struct Rustup {
     installed_toolchains: HashMap<String, Toolchain>,
     active_toolchain: Option<String>,
     default_toolchain: String,
-    
+
     fn install(&mut self, version: &str, target: &str) -> Result<(), Error> {
         // 安装指定版本和目标的工具链
         // ...
     }
-    
+
     fn set_default(&mut self, toolchain: &str) -> Result<(), Error> {
         // 设置默认工具链
         // ...
     }
-    
+
     fn update(&mut self) -> Result<(), Error> {
         // 更新所有工具链
         // ...
@@ -400,13 +400,13 @@ Rust工具链生态系统可以分为以下层次:
 struct DependencyGraph {
     nodes: HashMap<String, Component>,
     edges: Vec<(String, String)>, // (from, to)
-    
+
     fn is_acyclic(&self) -> bool {
         // 检查是否无环
         // ...
         true
     }
-    
+
     fn stability_violations(&self) -> Vec<(String, String)> {
         // 返回违反稳定依赖原则的边
         // ...

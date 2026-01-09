@@ -38,7 +38,7 @@ fn basic_if_statements() {
     if x > 0 {
         println!("x is positive");
     }
-    
+
     // if-else语句
     let y = -5;
     if y > 0 {
@@ -46,7 +46,7 @@ fn basic_if_statements() {
     } else {
         println!("y is non-positive");
     }
-    
+
     // if-else if-else链
     let z = 0;
     if z > 0 {
@@ -56,7 +56,7 @@ fn basic_if_statements() {
     } else {
         println!("z is zero");
     }
-    
+
     // 条件表达式
     let result = if x > 0 { "positive" } else { "non-positive" };
     println!("x is {}", result);
@@ -73,23 +73,23 @@ fn basic_loops() {
         println!("while loop: {}", i);
         i += 1;
     }
-    
+
     // for循环
     for j in 0..5 {
         println!("for loop: {}", j);
     }
-    
+
     // for循环遍历集合
     let numbers = vec![1, 2, 3, 4, 5];
     for num in &numbers {
         println!("number: {}", num);
     }
-    
+
     // for循环带索引
     for (index, value) in numbers.iter().enumerate() {
         println!("index: {}, value: {}", index, value);
     }
-    
+
     // loop循环
     let mut k = 0;
     loop {
@@ -112,7 +112,7 @@ fn basic_pattern_matching() {
         Some(value) => println!("Got value: {}", value),
         None => println!("No value"),
     }
-    
+
     // 模式匹配带守卫
     let y = Some(10);
     match y {
@@ -120,7 +120,7 @@ fn basic_pattern_matching() {
         Some(value) => println!("Value is 5 or less: {}", value),
         None => println!("No value"),
     }
-    
+
     // 模式匹配多个值
     let tuple = (1, "hello", true);
     match tuple {
@@ -128,7 +128,7 @@ fn basic_pattern_matching() {
         (x, _, false) => println!("Got number: {}", x),
         _ => println!("Default case"),
     }
-    
+
     // 模式匹配枚举
     enum Message {
         Quit,
@@ -136,7 +136,7 @@ fn basic_pattern_matching() {
         Write(String),
         ChangeColor(i32, i32, i32),
     }
-    
+
     let msg = Message::Move { x: 10, y: 20 };
     match msg {
         Message::Quit => println!("Quit"),
@@ -156,7 +156,7 @@ fn nested_control_flow() {
     // 嵌套if语句
     let x = 10;
     let y = 5;
-    
+
     if x > 0 {
         if y > 0 {
             println!("Both x and y are positive");
@@ -166,14 +166,14 @@ fn nested_control_flow() {
     } else {
         println!("x is not positive");
     }
-    
+
     // 嵌套循环
     for i in 0..3 {
         for j in 0..3 {
             println!("i: {}, j: {}", i, j);
         }
     }
-    
+
     // 循环中的条件语句
     for i in 0..10 {
         if i % 2 == 0 {
@@ -182,7 +182,7 @@ fn nested_control_flow() {
             println!("{} is odd", i);
         }
     }
-    
+
     // 条件语句中的循环
     let numbers = vec![1, 2, 3, 4, 5];
     if !numbers.is_empty() {
@@ -204,7 +204,7 @@ fn complex_pattern_matching() {
         Some(None) => println!("Inner None"),
         None => println!("Outer None"),
     }
-    
+
     // 模式匹配带绑定
     let tuple = (Some(1), Some(2));
     match tuple {
@@ -213,7 +213,7 @@ fn complex_pattern_matching() {
         (None, Some(y)) => println!("Second value: {}", y),
         (None, None) => println!("No values"),
     }
-    
+
     // 模式匹配数组
     let array = [1, 2, 3, 4, 5];
     match array {
@@ -221,7 +221,7 @@ fn complex_pattern_matching() {
         [single] => println!("Single element: {}", single),
         [] => println!("Empty array"),
     }
-    
+
     // 模式匹配切片
     let slice = &[1, 2, 3];
     match slice {
@@ -245,9 +245,9 @@ fn control_flow_combinations() {
         .filter(|&&x| x % 2 == 0)
         .map(|&x| format!("even_{}", x))
         .collect();
-    
+
     println!("Result: {:?}", result);
-    
+
     // 迭代器控制流
     let mut iter = numbers.iter();
     while let Some(num) = iter.next() {
@@ -257,7 +257,7 @@ fn control_flow_combinations() {
             _ => println!("Other: {}", num),
         }
     }
-    
+
     // 条件迭代
     let mut count = 0;
     let result: Vec<i32> = (0..10)
@@ -267,7 +267,7 @@ fn control_flow_combinations() {
             count <= 3
         })
         .collect();
-    
+
     println!("Filtered result: {:?}", result);
 }
 ```
@@ -280,20 +280,20 @@ fn control_flow_combinations() {
 fn control_flow_graph_example() {
     // 构建简单的控制流图
     let mut cfg = ControlFlowGraph::new();
-    
+
     // 创建基本块
     let entry = cfg.create_basic_block();
     let condition = cfg.create_basic_block();
     let then_block = cfg.create_basic_block();
     let else_block = cfg.create_basic_block();
     let merge = cfg.create_basic_block();
-    
+
     // 添加指令
     entry.add_instruction(Instruction::Assign {
         variable: "x".to_string(),
         value: Expression::Integer(42),
     });
-    
+
     condition.add_instruction(Instruction::Branch {
         condition: Expression::Comparison {
             op: ComparisonOp::Gt,
@@ -303,24 +303,24 @@ fn control_flow_graph_example() {
         true_target: then_block.id,
         false_target: else_block.id,
     });
-    
+
     then_block.add_instruction(Instruction::Call {
         function: "println".to_string(),
         arguments: vec![Expression::String("positive".to_string())],
     });
-    
+
     else_block.add_instruction(Instruction::Call {
         function: "println".to_string(),
         arguments: vec![Expression::String("non-positive".to_string())],
     });
-    
+
     // 添加边
     cfg.add_edge(&entry, &condition);
     cfg.add_edge(&condition, &then_block);
     cfg.add_edge(&condition, &else_block);
     cfg.add_edge(&then_block, &merge);
     cfg.add_edge(&else_block, &merge);
-    
+
     println!("Control flow graph built with {} blocks", cfg.get_all_blocks().len());
 }
 ```
@@ -330,21 +330,21 @@ fn control_flow_graph_example() {
 ```rust
 fn data_flow_analysis_example() {
     let cfg = build_sample_cfg();
-    
+
     // 活跃变量分析
     let live_vars = live_variable_analysis(&cfg);
     println!("Live variable analysis:");
     for (block_id, live_set) in &live_vars.out_values {
         println!("Block {}: {:?}", block_id, live_set.variables);
     }
-    
+
     // 常量传播分析
     let constants = constant_propagation_analysis(&cfg);
     println!("Constant propagation:");
     for (block_id, const_map) in &constants.out_values {
         println!("Block {}: {:?}", block_id, const_map.constants);
     }
-    
+
     // 可用表达式分析
     let available = available_expression_analysis(&cfg);
     println!("Available expressions:");
@@ -355,16 +355,16 @@ fn data_flow_analysis_example() {
 
 fn build_sample_cfg() -> ControlFlowGraph {
     let mut cfg = ControlFlowGraph::new();
-    
+
     let block1 = cfg.create_basic_block();
     let block2 = cfg.create_basic_block();
     let block3 = cfg.create_basic_block();
-    
+
     block1.add_instruction(Instruction::Assign {
         variable: "a".to_string(),
         value: Expression::Integer(1),
     });
-    
+
     block2.add_instruction(Instruction::Assign {
         variable: "b".to_string(),
         value: Expression::BinaryOp {
@@ -373,15 +373,15 @@ fn build_sample_cfg() -> ControlFlowGraph {
             right: Box::new(Expression::Integer(2)),
         },
     });
-    
+
     block3.add_instruction(Instruction::Assign {
         variable: "c".to_string(),
         value: Expression::Variable("b".to_string()),
     });
-    
+
     cfg.add_edge(&block1, &block2);
     cfg.add_edge(&block2, &block3);
-    
+
     cfg
 }
 ```
@@ -391,21 +391,21 @@ fn build_sample_cfg() -> ControlFlowGraph {
 ```rust
 fn loop_analysis_example() {
     let cfg = build_loop_cfg();
-    
+
     // 检测循环
     let loops = detect_loops(&cfg);
     println!("Detected {} loops", loops.len());
-    
+
     for (i, loop_info) in loops.iter().enumerate() {
         println!("Loop {}: header={}, body={:?}", i, loop_info.header, loop_info.body);
     }
-    
+
     // 循环不变代码外提
     for loop_info in &loops {
         let invariants = find_loop_invariants(loop_info, &cfg);
         println!("Loop invariants: {:?}", invariants);
     }
-    
+
     // 循环展开
     for loop_info in &loops {
         if can_unroll_loop(loop_info, &cfg) {
@@ -417,12 +417,12 @@ fn loop_analysis_example() {
 
 fn build_loop_cfg() -> ControlFlowGraph {
     let mut cfg = ControlFlowGraph::new();
-    
+
     let entry = cfg.create_basic_block();
     let loop_header = cfg.create_basic_block();
     let loop_body = cfg.create_basic_block();
     let exit = cfg.create_basic_block();
-    
+
     // 循环头：检查条件
     loop_header.add_instruction(Instruction::Branch {
         condition: Expression::Comparison {
@@ -433,7 +433,7 @@ fn build_loop_cfg() -> ControlFlowGraph {
         true_target: loop_body.id,
         false_target: exit.id,
     });
-    
+
     // 循环体：执行操作
     loop_body.add_instruction(Instruction::Assign {
         variable: "sum".to_string(),
@@ -443,7 +443,7 @@ fn build_loop_cfg() -> ControlFlowGraph {
             right: Box::new(Expression::Variable("i".to_string())),
         },
     });
-    
+
     loop_body.add_instruction(Instruction::Assign {
         variable: "i".to_string(),
         value: Expression::BinaryOp {
@@ -452,13 +452,13 @@ fn build_loop_cfg() -> ControlFlowGraph {
             right: Box::new(Expression::Integer(1)),
         },
     });
-    
+
     // 添加边
     cfg.add_edge(&entry, &loop_header);
     cfg.add_edge(&loop_header, &loop_body);
     cfg.add_edge(&loop_body, &loop_header);
     cfg.add_edge(&loop_header, &exit);
-    
+
     cfg
 }
 ```
@@ -470,41 +470,41 @@ fn build_loop_cfg() -> ControlFlowGraph {
 ```rust
 fn dead_code_elimination_example() {
     let mut cfg = build_dead_code_cfg();
-    
+
     println!("Before dead code elimination:");
     print_cfg(&cfg);
-    
+
     // 执行死代码消除
     let result = dead_code_elimination(&mut cfg);
     println!("Eliminated {} instructions", result.eliminated_instructions.len());
-    
+
     println!("After dead code elimination:");
     print_cfg(&cfg);
 }
 
 fn build_dead_code_cfg() -> ControlFlowGraph {
     let mut cfg = ControlFlowGraph::new();
-    
+
     let block = cfg.create_basic_block();
-    
+
     // 有用的代码
     block.add_instruction(Instruction::Assign {
         variable: "x".to_string(),
         value: Expression::Integer(42),
     });
-    
+
     // 死代码：定义但未使用
     block.add_instruction(Instruction::Assign {
         variable: "dead_var".to_string(),
         value: Expression::Integer(100),
     });
-    
+
     // 有用的代码：使用x
     block.add_instruction(Instruction::Call {
         function: "println".to_string(),
         arguments: vec![Expression::Variable("x".to_string())],
     });
-    
+
     cfg
 }
 
@@ -523,36 +523,36 @@ fn print_cfg(cfg: &ControlFlowGraph) {
 ```rust
 fn branch_optimization_example() {
     let mut cfg = build_branch_cfg();
-    
+
     println!("Before branch optimization:");
     print_cfg(&cfg);
-    
+
     // 分支预测优化
     let prediction_result = branch_prediction_optimization(&mut cfg);
     println!("Branch prediction optimizations: {:?}", prediction_result.optimized_branches);
-    
+
     // 分支消除
     let elimination_result = branch_elimination(&mut cfg);
     println!("Branch eliminations: {:?}", elimination_result.eliminated_branches);
-    
+
     println!("After branch optimization:");
     print_cfg(&cfg);
 }
 
 fn build_branch_cfg() -> ControlFlowGraph {
     let mut cfg = ControlFlowGraph::new();
-    
+
     let block1 = cfg.create_basic_block();
     let block2 = cfg.create_basic_block();
     let block3 = cfg.create_basic_block();
-    
+
     // 常量分支：总是为真
     block1.add_instruction(Instruction::Branch {
         condition: Expression::Boolean(true),
         true_target: block2.id,
         false_target: block3.id,
     });
-    
+
     // 可预测的分支
     block2.add_instruction(Instruction::Branch {
         condition: Expression::Comparison {
@@ -563,12 +563,12 @@ fn build_branch_cfg() -> ControlFlowGraph {
         true_target: block3.id,
         false_target: block1.id,
     });
-    
+
     cfg.add_edge(&block1, &block2);
     cfg.add_edge(&block1, &block3);
     cfg.add_edge(&block2, &block3);
     cfg.add_edge(&block2, &block1);
-    
+
     cfg
 }
 ```
@@ -578,33 +578,33 @@ fn build_branch_cfg() -> ControlFlowGraph {
 ```rust
 fn loop_optimization_example() {
     let mut cfg = build_loop_optimization_cfg();
-    
+
     println!("Before loop optimization:");
     print_cfg(&cfg);
-    
+
     // 循环不变代码外提
     let licm_result = loop_invariant_code_motion(&mut cfg);
     println!("Moved {} invariant instructions", licm_result.moved_instructions.len());
-    
+
     // 循环展开
     let unroll_result = loop_unrolling(&mut cfg, 2);
     println!("Unrolled {} loops", unroll_result.unrolled_loops.len());
-    
+
     println!("After loop optimization:");
     print_cfg(&cfg);
 }
 
 fn build_loop_optimization_cfg() -> ControlFlowGraph {
     let mut cfg = ControlFlowGraph::new();
-    
+
     let entry = cfg.create_basic_block();
     let loop_header = cfg.create_basic_block();
     let loop_body = cfg.create_basic_block();
     let exit = cfg.create_basic_block();
-    
+
     // 循环不变量
     let invariant = Expression::Integer(100);
-    
+
     loop_body.add_instruction(Instruction::Assign {
         variable: "result".to_string(),
         value: Expression::BinaryOp {
@@ -613,7 +613,7 @@ fn build_loop_optimization_cfg() -> ControlFlowGraph {
             right: Box::new(invariant), // 循环不变量
         },
     });
-    
+
     loop_header.add_instruction(Instruction::Branch {
         condition: Expression::Comparison {
             op: ComparisonOp::Lt,
@@ -623,12 +623,12 @@ fn build_loop_optimization_cfg() -> ControlFlowGraph {
         true_target: loop_body.id,
         false_target: exit.id,
     });
-    
+
     cfg.add_edge(&entry, &loop_header);
     cfg.add_edge(&loop_header, &loop_body);
     cfg.add_edge(&loop_body, &loop_header);
     cfg.add_edge(&loop_header, &exit);
-    
+
     cfg
 }
 ```
@@ -645,17 +645,17 @@ fn result_control_flow() {
         Ok(value) => println!("Success: {}", value),
         Err(error) => println!("Error: {}", error),
     }
-    
+
     // Result链式处理
     let result = divide(10, 2)
         .and_then(|x| multiply(x, 3))
         .and_then(|x| add(x, 1));
-    
+
     match result {
         Ok(value) => println!("Final result: {}", value),
         Err(error) => println!("Error: {}", error),
     }
-    
+
     // 使用?操作符
     let result = process_data();
     match result {
@@ -697,17 +697,17 @@ fn option_control_flow() {
         Some(value) => println!("Value: {}", value),
         None => println!("No value"),
     }
-    
+
     // Option链式处理
     let result = find_user(1)
         .and_then(|user| get_user_profile(user))
         .and_then(|profile| get_profile_name(profile));
-    
+
     match result {
         Some(name) => println!("User name: {}", name),
         None => println!("User not found"),
     }
-    
+
     // 使用?操作符
     let result = process_user_data();
     match result {
@@ -762,20 +762,20 @@ async fn async_control_flow() {
     // 基本异步函数
     let result = fetch_data().await;
     println!("Fetched data: {}", result);
-    
+
     // 并发执行
     let (result1, result2) = tokio::join!(
         fetch_data_1(),
         fetch_data_2()
     );
     println!("Results: {}, {}", result1, result2);
-    
+
     // 异步循环
     let mut stream = create_data_stream();
     while let Some(data) = stream.next().await {
         println!("Received: {}", data);
     }
-    
+
     // 异步条件
     let data = fetch_data().await;
     if data > 100 {
@@ -826,7 +826,7 @@ impl DataStream {
             index: 0,
         }
     }
-    
+
     async fn next(&mut self) -> Option<i32> {
         if self.index < self.data.len() {
             let value = self.data[self.index];
@@ -854,14 +854,14 @@ async fn async_error_handling() {
         Ok(data) => println!("Success: {}", data),
         Err(error) => println!("Error: {}", error),
     }
-    
+
     // 异步错误传播
     let result = process_async_data().await;
     match result {
         Ok(processed) => println!("Processed: {}", processed),
         Err(error) => println!("Processing error: {}", error),
     }
-    
+
     // 异步Option处理
     let option = find_async_user(1).await;
     match option {
@@ -873,7 +873,7 @@ async fn async_error_handling() {
 async fn fetch_data_with_error() -> Result<String, String> {
     // 模拟可能失败的异步操作
     tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
-    
+
     if rand::random::<bool>() {
         Ok("Data fetched successfully".to_string())
     } else {
@@ -894,7 +894,7 @@ async fn process_data_async(data: String) -> Result<String, String> {
 
 async fn find_async_user(id: i32) -> Option<AsyncUser> {
     tokio::time::sleep(tokio::time::Duration::from_millis(25)).await;
-    
+
     if id > 0 {
         Some(AsyncUser { id, name: "Async John".to_string() })
     } else {
@@ -910,7 +910,7 @@ struct AsyncUser {
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
-**维护者**: Rust语言形式化理论项目组  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
+**维护者**: Rust语言形式化理论项目组
 **状态**: 完成

@@ -106,11 +106,11 @@ for (int i = 0; i < 10; ++i) {
 }
 
 auto process = [](int value) -> std::string {
-    if (value > 0) 
+    if (value > 0)
         return "positive";
-    else if (value < 0) 
+    else if (value < 0)
         return "negative";
-    else 
+    else
         return "zero";
 };
 ```
@@ -202,11 +202,11 @@ private:
     double x, y;
 public:
     Vector(double x, double y) : x(x), y(y) {}
-    
+
     Vector add(const Vector& other) const {
         return Vector(x + other.x, y + other.y);
     }
-    
+
     double dot(const Vector& other) const {
         return x * other.x + y * other.y;
     }
@@ -231,11 +231,11 @@ private:
     double radius;
 public:
     Circle(double r) : radius(r) {}
-    
+
     double area() const override {
         return M_PI * radius * radius;
     }
-    
+
     double perimeter() const override {
         return 2 * M_PI * radius;
     }
@@ -264,7 +264,7 @@ public:
     void add(const T& element) override {
         elements.push_back(element);
     }
-    
+
     T get(int index) const override {
         return elements[index];
     }
@@ -448,7 +448,7 @@ int processData(const std::vector<int>& data) {
 // 异步版本（使用C++17并行算法）
 int processDataAsync(const std::vector<int>& data) {
     std::vector<int> transformed(data.size());
-    std::transform(std::execution::par, data.begin(), data.end(), 
+    std::transform(std::execution::par, data.begin(), data.end(),
                    transformed.begin(), transform);
     return std::reduce(std::execution::par, transformed.begin(), transformed.end());
 }
@@ -483,17 +483,17 @@ public:
         result.value = std::move(value);
         return result;
     }
-    
+
     static Either<T> failure(std::exception_ptr error) {
         Either<T> result;
         result.value = error;
         return result;
     }
-    
+
     template <typename F>
     auto map(F&& f) -> Either<decltype(f(std::declval<T>()))> {
         using R = decltype(f(std::declval<T>()));
-        
+
         if (isSuccess()) {
             try {
                 return Either<R>::success(f(std::get<T>(value)));
@@ -504,11 +504,11 @@ public:
             return Either<R>::failure(std::get<std::exception_ptr>(value));
         }
     }
-    
+
     bool isSuccess() const {
         return std::holds_alternative<T>(value);
     }
-    
+
     T getOrThrow() {
         if (isSuccess()) {
             return std::get<T>(value);

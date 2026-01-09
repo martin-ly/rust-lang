@@ -67,7 +67,7 @@ const int y = 10; // 不可变变量
 class Resource {
 public:
     mutable int counter; // 即使在const环境中也可变
-    
+
     void increment() const {
         counter++; // 在const方法中修改mutable成员
     }
@@ -116,12 +116,12 @@ private:
 public:
     UniqueResource(Resource* p) : ptr(p) {}
     ~UniqueResource() { delete ptr; }
-    
+
     // 移动构造函数
     UniqueResource(UniqueResource&& other) : ptr(other.ptr) {
         other.ptr = nullptr;
     }
-    
+
     // 禁止复制
     UniqueResource(const UniqueResource&) = delete;
     UniqueResource& operator=(const UniqueResource&) = delete;
@@ -144,12 +144,12 @@ impl UniqueResource {
     fn new(r: Resource) -> Self {
         UniqueResource { ptr: Box::new(r) }
     }
-    
+
     // 使用资源(不可变借用)
     fn use_resource(&self) {
         println!("使用资源: {}", self.ptr.counter);
     }
-    
+
     // 修改资源(可变借用)
     fn modify_resource(&mut self) {
         self.ptr.counter += 1;
@@ -280,11 +280,11 @@ struct ValueContainer<T> {
 
 impl<T> Container for ValueContainer<T> {
     type Item = T;
-    
+
     fn get(&self) -> &Self::Item {
         &self.value
     }
-    
+
     fn get_mut(&mut self) -> &mut Self::Item {
         &mut self.value
     }
@@ -458,7 +458,7 @@ class Derived : public Base {};
 void demonstrate_variance() {
     Derived* d = new Derived();
     Base* b = d;  // 协变: Derived* -> Base*
-    
+
     // 函数指针逆变示例
     void (*f1)(Base*) = [](Base* b) {};
     // 以下在C++中不直接支持（需要显式转换）
@@ -483,7 +483,7 @@ fn demonstrate_variance() {
     // 协变示例
     let dog = Dog;
     let animal: &dyn Animal = &dog;  // 协变: &Dog -> &dyn Animal
-    
+
     // 生命周期协变
     let string = String::from("hello");
     let s: &'static str = "hello";  // 'static生命周期
@@ -996,11 +996,11 @@ struct ItemBox<T> {
 
 impl<T> Container for ItemBox<T> {
     type Item = T;
-    
+
     fn get(&self) -> Option<&T> {
         self.item.as_ref()
     }
-    
+
     fn insert(&mut self, item: T) {
         self.item = Some(item);
     }
@@ -1090,10 +1090,10 @@ fn use_processor_dynamic(processor: &dyn Processor, data: i32) {
 // 使用示例
 fn main() {
     let processor = DoubleProcessor;
-    
+
     // 静态分派
     use_processor_static(processor, 10);
-    
+
     // 动态分派
     use_processor_dynamic(&processor, 10);
 }
@@ -1134,16 +1134,16 @@ public:
         std::lock_guard<std::mutex> lock(mutex);
         return ++value;
     }
-    
+
     int get() const {
         std::lock_guard<std::mutex> lock(mutex);
         return value;
     }
-    
+
     void set_flag() {
         flag.store(true, std::memory_order_release);
     }
-    
+
     bool get_flag() const {
         return flag.load(std::memory_order_acquire);
     }
@@ -1181,21 +1181,21 @@ impl ThreadSafeCounter {
             flag: AtomicBool::new(false),
         }
     }
-    
+
     fn increment(&self) -> i32 {
         let mut value = self.value.lock().unwrap();
         *value += 1;
         *value
     }
-    
+
     fn get(&self) -> i32 {
         *self.value.lock().unwrap()
     }
-    
+
     fn set_flag(&self) {
         self.flag.store(true, Ordering::Release);
     }
-    
+
     fn get_flag(&self) -> bool {
         self.flag.load(Ordering::Acquire)
     }
@@ -1204,9 +1204,9 @@ impl ThreadSafeCounter {
 // 使用线程
 fn main() {
     let counter = Arc::new(ThreadSafeCounter::new());
-    
+
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let counter_clone = Arc::clone(&counter);
         let handle = thread::spawn(move || {
@@ -1216,11 +1216,11 @@ fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("最终计数: {}", counter.get());
 }
 ```
@@ -1274,19 +1274,19 @@ void memory_management() {
     Resource* r1 = new Resource();
     r1->use();
     delete r1;  // 必须手动释放
-    
+
     // 智能指针
     std::unique_ptr<Resource> r2 = std::make_unique<Resource>();
     r2->use();
     // 自动释放
-    
+
     // 共享所有权
     std::shared_ptr<Resource> r3 = std::make_shared<Resource>();
     {
         auto r4 = r3;  // 增加引用计数
         r4->use();
     }  // r4销毁，引用计数减少
-    
+
     // 容器
     std::vector<std::unique_ptr<Resource>> resources;
     resources.push_back(std::make_unique<Resource>());
@@ -1313,7 +1313,7 @@ impl Resource {
         println!("资源创建");
         Resource { data: Vec::new() }
     }
-    
+
     fn use_resource(&self) {
         println!("资源使用");
     }
@@ -1330,19 +1330,19 @@ fn memory_management() {
     let r1 = Resource::new();
     r1.use_resource();
     // 离开作用域时自动调用drop
-    
+
     // 借用
     let r2 = Resource::new();
     let r2_ref = &r2;  // 不可变借用
     r2_ref.use_resource();
     // r2仍然拥有资源
-    
+
     // 转移所有权
     let r3 = Resource::new();
     let r4 = r3;  // 所有权转移到r4
     // r3不再有效
     r4.use_resource();
-    
+
     // 容器
     let mut resources = Vec::new();
     resources.push(Resource::new());

@@ -135,7 +135,7 @@ struct ReadyFuture<T>(T);
 
 impl<T> Future for ReadyFuture<T> {
     type Output = T;
-    
+
     fn poll(self: Pin<&mut Self>, _: &mut Context<'_>) -> Poll<T> {
         Poll::Ready(self.get_mut().0)
     }
@@ -226,10 +226,10 @@ enum ExampleFuture {
 
 impl Future for ExampleFuture {
     type Output = u32;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<u32> {
         let this = unsafe { self.get_unchecked_mut() };
-        
+
         match &mut this.state {
             ExampleState::Start(x) => {
                 // 创建内部Future并转移到下一状态
@@ -301,11 +301,11 @@ impl MiniExecutor {
                 }
                 queue.pop_front().unwrap()
             };
-            
+
             // 创建Waker和Context
             let waker = Waker::from(task.clone());
             let mut context = Context::from_waker(&waker);
-            
+
             // 轮询Future
             let mut future_lock = task.future.lock().unwrap();
             if let Poll::Pending = future_lock.as_mut().poll(&mut context) {
@@ -364,7 +364,7 @@ pub trait Stream {
 #[tokio::main]
 async fn main() {
     let mut stream = create_data_stream().take(10);
-    
+
     while let Some(item) = stream.next().await {
         println!("接收到: {}", item);
     }
@@ -379,7 +379,7 @@ async fn main() {
 async fn fetch_with_timeout(url: &str, seconds: u64) -> Result<String, Error> {
     // 创建超时Future
     let timeout = tokio::time::sleep(Duration::from_secs(seconds));
-    
+
     // 使用select同时等待两个Future，哪个先完成就返回哪个
     match tokio::select! {
         result = fetch_data(url) => Ok(result?),
@@ -404,7 +404,7 @@ impl<T, R> CancellableTask<T, R> {
             handler();
         }
     }
-    
+
     pub async fn execute(&self, input: T) -> Option<R> {
         if self.is_cancelled() {
             return None;
@@ -426,10 +426,10 @@ use tokio::sync::Mutex;
 async fn process_shared_data(shared: Arc<Mutex<Vec<u32>>>) {
     // 获取锁，如果当前不可用则异步等待而非阻塞线程
     let mut data = shared.lock().await;
-    
+
     // 现在我们独占访问数据
     data.push(42);
-    
+
     // 锁自动释放
 } // 锁在这里自动释放
 ```
@@ -477,7 +477,7 @@ Schedule(T) = {
 调度策略D是公平的，当且仅当：
 
 ```math
-∀t∈T. (∃n∈ℕ. ∀h∈H. |{t'∈ready(h) | priority(t') > priority(t)}| < n) 
+∀t∈T. (∃n∈ℕ. ∀h∈H. |{t'∈ready(h) | priority(t') > priority(t)}| < n)
     ⇒ ◇scheduled(t)
 ```
 

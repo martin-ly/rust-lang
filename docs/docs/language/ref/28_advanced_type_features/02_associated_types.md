@@ -77,7 +77,7 @@ $$\lambda T. \text{Assoc}_{\text{Tr}}(T)$$
 ```rust
 trait Container {
     type Item;  // 关联类型声明
-    
+
     fn add(&mut self, item: Self::Item);
     fn get(&self, index: usize) -> Option<&Self::Item>;
     fn len(&self) -> usize;
@@ -86,15 +86,15 @@ trait Container {
 // 为 Vec<T> 实现 Container
 impl<T> Container for Vec<T> {
     type Item = T;  // 指定关联类型
-    
+
     fn add(&mut self, item: T) {
         self.push(item);
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         self.get(index)
     }
-    
+
     fn len(&self) -> usize {
         self.len()
     }
@@ -158,7 +158,7 @@ Rust允许为关联类型指定默认值，这在特征设计中非常有用：
 ```rust
 trait Iterator {
     type Item;
-    
+
     // 关联类型 Item 在 Map 中使用
     fn map<B, F>(self, f: F) -> Map<Self, F>
     where
@@ -168,7 +168,7 @@ trait Iterator {
 // 带有默认类型的关联类型
 trait Default {
     type Output = Self;  // 默认为实现类型
-    
+
     fn default() -> Self::Output;
 }
 ```
@@ -185,7 +185,7 @@ $$\text{impl Tr for T} \Rightarrow \text{T::Assoc} = D \text{ (unless explicitly
 ```rust
 trait Container {
     type Item: Clone + Debug;  // 关联类型必须实现 Clone 和 Debug
-    
+
     fn add(&mut self, item: Self::Item);
 }
 ```
@@ -202,13 +202,13 @@ Rust 1.65引入了泛型关联类型（Generic Associated Types，GATs），允�
 ```rust
 trait Collection {
     type Iter<'a> where Self: 'a;
-    
+
     fn iter<'a>(&'a self) -> Self::Iter<'a>;
 }
 
 impl<T> Collection for Vec<T> {
     type Iter<'a> = std::slice::Iter<'a, T> where T: 'a;
-    
+
     fn iter<'a>(&'a self) -> Self::Iter<'a> {
         self.iter()
     }
@@ -230,9 +230,9 @@ $$\text{Iter}_{\text{Collection}}(T, 'a) \mapsto U_{T, 'a}$$
 ```rust
 trait Iterator {
     type Item;  // 迭代器产生的元素类型
-    
+
     fn next(&mut self) -> Option<Self::Item>;
-    
+
     // 提供默认实现的方法
     fn count(mut self) -> usize
     where
@@ -257,7 +257,7 @@ trait Iterator {
 trait Collection {
     type Item;
     type Iterator<'a>: Iterator<Item = &'a Self::Item> where Self: 'a;
-    
+
     fn len(&self) -> usize;
     fn is_empty(&self) -> bool { self.len() == 0 }
     fn contains(&self, item: &Self::Item) -> bool where Self::Item: PartialEq;
@@ -274,14 +274,14 @@ trait Collection {
 ```rust
 trait Add<Rhs = Self> {
     type Output;  // 加法操作的结果类型
-    
+
     fn add(self, rhs: Rhs) -> Self::Output;
 }
 
 // 实现复数加法
 impl Add for Complex {
     type Output = Complex;
-    
+
     fn add(self, rhs: Complex) -> Complex {
         Complex {
             re: self.re + rhs.re,
@@ -293,7 +293,7 @@ impl Add for Complex {
 // 实现向量和标量的加法
 impl Add<f64> for Vector {
     type Output = Vector;
-    
+
     fn add(self, rhs: f64) -> Vector {
         Vector {
             x: self.x + rhs,
@@ -447,7 +447,7 @@ Rust的关联类型有一些限制：
 trait Graph<N, E> {
     type NodeRef;
     type EdgeRef;
-    
+
     fn nodes(&self) -> Vec<Self::NodeRef>;
     fn edges(&self) -> Vec<Self::EdgeRef>;
     fn edge_weight(&self, edge: Self::EdgeRef) -> &E;

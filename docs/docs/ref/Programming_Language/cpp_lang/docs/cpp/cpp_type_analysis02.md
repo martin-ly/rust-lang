@@ -245,7 +245,7 @@ int main() {
     std::vector<std::unique_ptr<Shape>> shapes;
     shapes.push_back(std::make_unique<Circle>());
     shapes.push_back(std::make_unique<Rectangle>());
-    
+
     // 同一控制流路径，不同执行结果
     for(auto& shape : shapes) {
         processShape(shape.get());
@@ -516,7 +516,7 @@ std::future<T> asynchronousComputation(T input) {
 
 ```cpp
 template<typename T, typename Func>
-std::future<std::invoke_result_t<Func, T>> 
+std::future<std::invoke_result_t<Func, T>>
 liftToAsync(Func f, T input) {
     // 函子F：将同步函数f提升到异步范畴
     return std::async(std::launch::async, [f, input]() {
@@ -598,7 +598,7 @@ std::future<int> computeSumAsync(const std::vector<int>& numbers) {
 std::future<int> computeSumWithPromise(const std::vector<int>& numbers) {
     std::promise<int> promise;
     std::future<int> future = promise.get_future();
-    
+
     // 启动异步计算线程
     std::thread worker([promise = std::move(promise), numbers]() mutable {
         try {
@@ -609,7 +609,7 @@ std::future<int> computeSumWithPromise(const std::vector<int>& numbers) {
         }
     });
     worker.detach();
-    
+
     return future;
 }
 ```
@@ -650,7 +650,7 @@ struct AsyncType { using type = std::future<T>; };
 
 // 形式化：态射映射 F(f: A→B) = async(f): future<A>→future<B>
 template<typename A, typename B, typename Func>
-std::function<std::future<B>(std::future<A>)> 
+std::function<std::future<B>(std::future<A>)>
 asyncMap(Func f) {
     return [f](std::future<A> futureA) -> std::future<B> {
         return std::async(std::launch::async, [f, futureA = std::move(futureA)]() mutable {
@@ -679,7 +679,7 @@ std::future<int> computeAsync() {
     auto futureB = futureA.then([](std::future<int> fa) {
         return step2(fa.get());
     });
-    
+
     return futureB.then([](std::future<int> fb) {
         std::future<int> fa = /* 需要重新获取futureA，但C++标准库不支持 */;
         return step3(fa.get(), fb.get());
@@ -701,16 +701,16 @@ private:
     std::future<T> future;
 public:
     explicit TypedFuture(std::future<T> f) : future(std::move(f)) {}
-    
+
     // 类型安全的延续
     template<typename Func>
     auto then(Func f) -> TypedFuture<std::invoke_result_t<Func, T>> {
         using ResultType = std::invoke_result_t<Func, T>;
         std::promise<ResultType> promise;
         auto resultFuture = promise.get_future();
-        
+
         // 设置延续
-        std::thread worker([promise = std::move(promise), 
+        std::thread worker([promise = std::move(promise),
                            future = std::move(future), f]() mutable {
             try {
                 T value = future.get();
@@ -721,10 +721,10 @@ public:
             }
         });
         worker.detach();
-        
+
         return TypedFuture<ResultType>(std::move(resultFuture));
     }
-    
+
     T get() { return future.get(); }
 };
 ```
@@ -765,12 +765,12 @@ struct CategoryView {
 template<typename T>
 struct ControlView {
     using state_type = T;  // 类型定义了状态空间
-    static constexpr size_t state_space_size = 
+    static constexpr size_t state_space_size =
         std::is_enum_v<T> ? std::numeric_limits<std::underlying_type_t<T>>::max() :
         std::numeric_limits<T>::max();  // 类型约束了状态空间
-    
+
     template<typename Operation>
-    static constexpr bool is_valid_operation = 
+    static constexpr bool is_valid_operation =
         std::is_invocable_v<Operation, T>;  // 类型约束了有效操作
 };
 ```
@@ -788,20 +788,20 @@ struct TypeModel {
     // 从同伦类型论角度：类型是空间，变量是点
     using Space = T;
     using Point = std::add_lvalue_reference_t<T>;  // 变量作为对类型的引用
-    
+
     // 从范畴论角度：类型是对象，函数是态射
     using Object = T;
     template<typename R>
     using Morphism = std::function<R(T)>;
-    
+
     // 从控制论角度：类型是约束，控制流是状态变换
     using StateSpace = T;
     using StateTransition = std::function<void(T&)>;  // 状态变换函数
-    
+
     // 类型安全保证：编译期前馈控制
     template<typename U>
     static constexpr bool can_assign = std::is_convertible_v<U, T>;
-    
+
     // 运行时行为约束
     static void assert_valid_state(const T& value) {
         // 在运行时验证状态有效性（特定类型可以特化实现）
@@ -822,16 +822,16 @@ struct ControlFlowModel {
     using FirstStep = std::function<U(T)>;  // T→U的态射
     using SecondStep = std::function<V(U)>;  // U→V的态射
     using ComposedFlow = std::function<V(T)>;  // T→V的复合态射
-    
+
     static ComposedFlow compose(FirstStep f, SecondStep g) {
         return [f, g](T x) -> V { return g(f(x)); };  // g ∘ f
     }
-    
+
     // 条件分支作为余积选择
     template<typename Condition>
     static ComposedFlow conditional_flow(
-        Condition cond, 
-        ComposedFlow true_path, 
+        Condition cond,
+        ComposedFlow true_path,
         ComposedFlow false_path) {
         return [=](T x) -> V {
             if (cond(x)) {
@@ -841,7 +841,7 @@ struct ControlFlowModel {
             }
         };
     }
-    
+
     // 循环作为递归态射
     static ComposedFlow loop_until(
         std::function<bool(T)> condition,
@@ -868,28 +868,28 @@ template<typename T>
 struct ExecutionModel {
     // 同步计算：直接映射
     using SyncComputation = std::function<T()>;
-    
+
     // 异步计算：延迟映射
     using AsyncComputation = std::function<std::future<T>()>;
-    
+
     // 同步到异步的转换函子
     static AsyncComputation lift_to_async(SyncComputation sync_fn) {
         return [sync_fn]() -> std::future<T> {
             return std::async(std::launch::async, sync_fn);
         };
     }
-    
+
     // 异步到同步的自然变换（阻塞等待）
     static SyncComputation lower_to_sync(AsyncComputation async_fn) {
         return [async_fn]() -> T {
             return async_fn().get();  // 阻塞直到异步计算完成
         };
     }
-    
+
     // 异步计算的单子操作（类似Promise链式调用）
     template<typename U>
-    static std::function<std::future<U>()> 
-    bind_async(AsyncComputation async_t, 
+    static std::function<std::future<U>()>
+    bind_async(AsyncComputation async_t,
                std::function<std::future<U>(T)> f) {
         return [=]() -> std::future<U> {
             return std::async(std::launch::async, [=]() -> U {
@@ -923,19 +923,19 @@ namespace hott {
     struct Space {
         static constexpr bool is_simple = std::is_arithmetic_v<T>;
     };
-    
+
     // 积类型对应于笛卡尔积空间
     template<typename T, typename U>
     struct ProductSpace {
         using type = std::pair<T, U>;
     };
-    
+
     // 和类型对应于不相交并
     template<typename T, typename U>
     struct SumSpace {
         using type = std::variant<T, U>;
     };
-    
+
     // 函数类型对应于路径空间
     template<typename Domain, typename Codomain>
     struct PathSpace {
@@ -950,13 +950,13 @@ namespace category {
     struct Object {
         using type = T;
     };
-    
+
     // 函数作为态射
     template<typename Domain, typename Codomain>
     struct Morphism {
         using type = std::function<Codomain(Domain)>;
     };
-    
+
     // 函子映射
     template<template<typename> class F, typename T, typename U>
     struct Functor {
@@ -984,12 +984,12 @@ namespace control {
     template<typename T>
     struct StateSpace {
         using type = T;
-        
+
         // 前馈控制：类型检查
         template<typename Action>
-        static constexpr bool is_safe_action = 
+        static constexpr bool is_safe_action =
             std::is_invocable_v<Action, T&>;
-        
+
         // 反馈控制：异常处理
         template<typename Action>
         static auto with_feedback(Action action) {
@@ -1003,12 +1003,12 @@ namespace control {
             };
         }
     };
-    
+
     // 控制流作为状态转换
     template<typename T>
     struct ControlFlow {
         using StateTransition = std::function<void(T&)>;
-        
+
         // 顺序执行
         static StateTransition sequence(StateTransition first, StateTransition second) {
             return [=](T& state) {
@@ -1016,7 +1016,7 @@ namespace control {
                 second(state);
             };
         }
-        
+
         // 条件分支
         static StateTransition branch(
             std::function<bool(const T&)> condition,
@@ -1030,7 +1030,7 @@ namespace control {
                 }
             };
         }
-        
+
         // 循环
         static StateTransition loop(
             std::function<bool(const T&)> condition,
@@ -1049,34 +1049,34 @@ template<typename State>
 class StateSafeProcessor {
 private:
     State state;
-    
+
 public:
     explicit StateSafeProcessor(State initial) : state(std::move(initial)) {}
-    
+
     // 安全的状态转换
     template<typename Transition>
     void apply(Transition transition) {
         // 编译时类型检查（前馈控制）
         static_assert(control::StateSpace<State>::template is_safe_action<Transition>,
                      "不安全的状态转换");
-        
+
         // 运行时反馈控制
         auto safe_transition = control::StateSpace<State>::with_feedback(transition);
         safe_transition(state);
     }
-    
+
     // 将状态映射到另一个类型（函子映射）
     template<typename Mapper, typename Result = std::invoke_result_t<Mapper, State>>
     Result map(Mapper mapper) const {
         return mapper(state);
     }
-    
+
     // 异步处理（控制流转换）
     template<typename AsyncProcessor>
     std::future<void> process_async(AsyncProcessor processor) {
         return std::async(std::launch::async, processor, std::ref(state));
     }
-    
+
     const State& get_state() const { return state; }
 };
 
@@ -1087,10 +1087,10 @@ int main() {
         struct Circle { double radius; },
         struct Rectangle { double width; double height; }
     >;
-    
+
     // 2. 状态空间与控制流（控制论）
     StateSafeProcessor<Shape> processor(Circle{5.0});
-    
+
     // 3. 安全状态转换（类型约束保证）
     processor.apply([](Shape& shape) {
         if (std::holds_alternative<Circle>(shape)) {
@@ -1098,7 +1098,7 @@ int main() {
             circle.radius *= 2;  // 安全修改Circle状态
         }
     });
-    
+
     // 4. 函子映射（范畴论）
     double area = processor.map([](const Shape& shape) -> double {
         return std::visit([](auto&& s) -> double {
@@ -1110,9 +1110,9 @@ int main() {
             }
         }, shape);
     });
-    
+
     std::cout << "面积: " << area << std::endl;
-    
+
     // 5. 异步计算（控制流转换）
     auto future = processor.process_async([](Shape& shape) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -1120,11 +1120,11 @@ int main() {
             std::get<Circle>(shape).radius += 1.0;
         }
     });
-    
+
     std::cout << "异步处理启动..." << std::endl;
     future.wait();
     std::cout << "异步处理完成" << std::endl;
-    
+
     // 最终面积
     double final_area = processor.map([](const Shape& shape) -> double {
         return std::visit([](auto&& s) -> double {
@@ -1136,9 +1136,9 @@ int main() {
             }
         }, shape);
     });
-    
+
     std::cout << "最终面积: " << final_area << std::endl;
-    
+
     return 0;
 }
 ```
@@ -1172,32 +1172,32 @@ graph TD
     A[C++类型系统多视角分析] --> B1[同伦类型论视角]
     A --> B2[范畴论视角]
     A --> B3[控制论视角]
-    
+
     B1 --> C1[类型作为空间]
     B1 --> C2[值作为点]
     B1 --> C3[类型等价作为路径]
-    
+
     B2 --> D1[类型作为对象]
     B2 --> D2[函数作为态射]
     B2 --> D3[模板作为函子]
     B2 --> D4[类型构造器]
-    
+
     B3 --> E1[类型作为约束]
     B3 --> E2[静态检查作为前馈控制]
     B3 --> E3[异常处理作为反馈控制]
-    
+
     C1 --> F1[原始类型=基本空间]
     C1 --> F2[struct=乘积空间]
     C1 --> F3[variant=和空间]
-    
+
     D1 --> G1[代数类型结构]
     D1 --> G2[型变关系]
     D1 --> G3[类型替换]
-    
+
     E1 --> H1[控制流安全]
     E1 --> H2[状态一致性]
     E1 --> H3[同步与异步转换]
-    
+
     A --> I[综合理论模型]
     I --> I1[类型安全保证]
     I --> I2[表达能力分析]

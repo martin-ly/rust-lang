@@ -107,7 +107,7 @@ $$P_1 <: P_2 \Rightarrow A<P_1> <: A<P_2>$$
 ```rust
 trait Container {
     type Item<'a> where Self: 'a;
-    
+
     fn get<'a>(&'a self) -> Self::Item<'a>;
 }
 ```
@@ -119,7 +119,7 @@ struct OwnedContainer<T>(T);
 
 impl<T> Container for OwnedContainer<T> {
     type Item<'a> where Self: 'a = &'a T;
-    
+
     fn get<'a>(&'a self) -> Self::Item<'a> {
         &self.0
     }
@@ -146,7 +146,7 @@ GATs 使得定义更灵活的迭代器抽象成为可能：
 trait AsyncIterator {
     type Item;
     type NextFuture<'a>: Future<Output = Option<Self::Item>> + 'a where Self: 'a;
-    
+
     fn next(&mut self) -> Self::NextFuture<'_>;
 }
 ```
@@ -178,7 +178,7 @@ GATs 允许将内部可变性与生命周期参数结合：
 trait RefCell {
     type Ref<'a> where Self: 'a;
     type RefMut<'a> where Self: 'a;
-    
+
     fn borrow<'a>(&'a self) -> Self::Ref<'a>;
     fn borrow_mut<'a>(&'a self) -> Self::RefMut<'a>;
 }

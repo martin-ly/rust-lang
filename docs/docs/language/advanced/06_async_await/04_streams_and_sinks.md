@@ -67,13 +67,13 @@ async fn main() {
             println!("Processing {} concurrently", x);
         })
         .await;
-    
+
     // 使用 map 和 collect 转换流
     let doubled: Vec<_> = stream::iter(1..=3)
         .map(|x| x * 2)
         .collect()
         .await;
-    
+
     println!("Doubled values: {:?}", doubled); // [2, 4, 6]
 }
 ```

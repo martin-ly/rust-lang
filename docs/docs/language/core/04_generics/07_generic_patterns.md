@@ -3,68 +3,70 @@
 
 ## 📊 目录
 
-- [1. Generic Pattern Fundamentals](#1-generic-pattern-fundamentals)
-  - [1.1 Generic Pattern Definition](#11-generic-pattern-definition)
-    - [Definition 1.1: Generic Pattern](#definition-11-generic-pattern)
-    - [Example 1.1: Basic Generic Pattern](#example-11-basic-generic-pattern)
-  - [1.2 Pattern Classification](#12-pattern-classification)
-    - [Definition 1.2: Pattern Classification](#definition-12-pattern-classification)
-- [2. Container Patterns](#2-container-patterns)
-  - [2.1 Generic Container Pattern](#21-generic-container-pattern)
-    - [Definition 2.1: Generic Container](#definition-21-generic-container)
-    - [Example 2.1: Generic Container Implementation](#example-21-generic-container-implementation)
-  - [2.2 Constrained Container Pattern](#22-constrained-container-pattern)
-    - [Definition 2.2: Constrained Container](#definition-22-constrained-container)
-    - [Example 2.2: Constrained Container](#example-22-constrained-container)
-  - [2.3 Multi-Type Container Pattern](#23-multi-type-container-pattern)
-    - [Definition 2.3: Multi-Type Container](#definition-23-multi-type-container)
-    - [Example 2.3: Multi-Type Container](#example-23-multi-type-container)
-- [3. Function Patterns](#3-function-patterns)
-  - [3.1 Generic Function Pattern](#31-generic-function-pattern)
-    - [Definition 3.1: Generic Function](#definition-31-generic-function)
-    - [Example 3.1: Generic Function Patterns](#example-31-generic-function-patterns)
-  - [3.2 Constrained Function Pattern](#32-constrained-function-pattern)
-    - [Definition 3.2: Constrained Function](#definition-32-constrained-function)
-    - [Example 3.2: Constrained Functions](#example-32-constrained-functions)
-  - [3.3 Higher-Order Function Pattern](#33-higher-order-function-pattern)
-    - [Definition 3.3: Higher-Order Function](#definition-33-higher-order-function)
-    - [Example 3.3: Higher-Order Functions](#example-33-higher-order-functions)
-- [4. Trait Patterns](#4-trait-patterns)
-  - [4.1 Generic Trait Pattern](#41-generic-trait-pattern)
-    - [Definition 4.1: Generic Trait](#definition-41-generic-trait)
-    - [Example 4.1: Generic Traits](#example-41-generic-traits)
-  - [4.2 Trait Object Pattern](#42-trait-object-pattern)
-    - [Definition 4.2: Trait Object](#definition-42-trait-object)
-    - [Example 4.2: Trait Objects](#example-42-trait-objects)
-- [5. Builder Patterns](#5-builder-patterns)
-  - [5.1 Generic Builder Pattern](#51-generic-builder-pattern)
-    - [Definition 5.1: Generic Builder](#definition-51-generic-builder)
-    - [Example 5.1: Generic Builder](#example-51-generic-builder)
-  - [5.2 Constrained Builder Pattern](#52-constrained-builder-pattern)
-    - [Definition 5.2: Constrained Builder](#definition-52-constrained-builder)
-    - [Example 5.2: Constrained Builder](#example-52-constrained-builder)
-- [6. Iterator Patterns](#6-iterator-patterns)
-  - [6.1 Generic Iterator Pattern](#61-generic-iterator-pattern)
-    - [Definition 6.1: Generic Iterator](#definition-61-generic-iterator)
-    - [Example 6.1: Generic Iterator](#example-61-generic-iterator)
-  - [6.2 Iterator Adapter Pattern](#62-iterator-adapter-pattern)
-    - [Definition 6.2: Iterator Adapter](#definition-62-iterator-adapter)
-    - [Example 6.2: Iterator Adapters](#example-62-iterator-adapters)
-- [7. Advanced Patterns](#7-advanced-patterns)
-  - [7.1 Type-Level State Pattern](#71-type-level-state-pattern)
-    - [Definition 7.1: Type-Level State](#definition-71-type-level-state)
-    - [Example 7.1: Type-Level State](#example-71-type-level-state)
-  - [7.2 Phantom Type Pattern](#72-phantom-type-pattern)
-    - [Definition 7.2: Phantom Type](#definition-72-phantom-type)
-    - [Example 7.2: Phantom Types](#example-72-phantom-types)
-- [8. Formal Proofs](#8-formal-proofs)
-  - [8.1 Generic Pattern Soundness](#81-generic-pattern-soundness)
-    - [Theorem 8.1: Generic Pattern Soundness](#theorem-81-generic-pattern-soundness)
-  - [8.2 Pattern Completeness](#82-pattern-completeness)
-    - [Theorem 8.2: Pattern Completeness](#theorem-82-pattern-completeness)
-  - [8.3 Pattern Correctness](#83-pattern-correctness)
-    - [Theorem 8.3: Pattern Correctness](#theorem-83-pattern-correctness)
-- [9. Summary](#9-summary)
+- [Generic Programming Patterns](#generic-programming-patterns)
+  - [📊 目录](#-目录)
+  - [1. Generic Pattern Fundamentals](#1-generic-pattern-fundamentals)
+    - [1.1 Generic Pattern Definition](#11-generic-pattern-definition)
+      - [Definition 1.1: Generic Pattern](#definition-11-generic-pattern)
+      - [Example 1.1: Basic Generic Pattern](#example-11-basic-generic-pattern)
+    - [1.2 Pattern Classification](#12-pattern-classification)
+      - [Definition 1.2: Pattern Classification](#definition-12-pattern-classification)
+  - [2. Container Patterns](#2-container-patterns)
+    - [2.1 Generic Container Pattern](#21-generic-container-pattern)
+      - [Definition 2.1: Generic Container](#definition-21-generic-container)
+      - [Example 2.1: Generic Container Implementation](#example-21-generic-container-implementation)
+    - [2.2 Constrained Container Pattern](#22-constrained-container-pattern)
+      - [Definition 2.2: Constrained Container](#definition-22-constrained-container)
+      - [Example 2.2: Constrained Container](#example-22-constrained-container)
+    - [2.3 Multi-Type Container Pattern](#23-multi-type-container-pattern)
+      - [Definition 2.3: Multi-Type Container](#definition-23-multi-type-container)
+      - [Example 2.3: Multi-Type Container](#example-23-multi-type-container)
+  - [3. Function Patterns](#3-function-patterns)
+    - [3.1 Generic Function Pattern](#31-generic-function-pattern)
+      - [Definition 3.1: Generic Function](#definition-31-generic-function)
+      - [Example 3.1: Generic Function Patterns](#example-31-generic-function-patterns)
+    - [3.2 Constrained Function Pattern](#32-constrained-function-pattern)
+      - [Definition 3.2: Constrained Function](#definition-32-constrained-function)
+      - [Example 3.2: Constrained Functions](#example-32-constrained-functions)
+    - [3.3 Higher-Order Function Pattern](#33-higher-order-function-pattern)
+      - [Definition 3.3: Higher-Order Function](#definition-33-higher-order-function)
+      - [Example 3.3: Higher-Order Functions](#example-33-higher-order-functions)
+  - [4. Trait Patterns](#4-trait-patterns)
+    - [4.1 Generic Trait Pattern](#41-generic-trait-pattern)
+      - [Definition 4.1: Generic Trait](#definition-41-generic-trait)
+      - [Example 4.1: Generic Traits](#example-41-generic-traits)
+    - [4.2 Trait Object Pattern](#42-trait-object-pattern)
+      - [Definition 4.2: Trait Object](#definition-42-trait-object)
+      - [Example 4.2: Trait Objects](#example-42-trait-objects)
+  - [5. Builder Patterns](#5-builder-patterns)
+    - [5.1 Generic Builder Pattern](#51-generic-builder-pattern)
+      - [Definition 5.1: Generic Builder](#definition-51-generic-builder)
+      - [Example 5.1: Generic Builder](#example-51-generic-builder)
+    - [5.2 Constrained Builder Pattern](#52-constrained-builder-pattern)
+      - [Definition 5.2: Constrained Builder](#definition-52-constrained-builder)
+      - [Example 5.2: Constrained Builder](#example-52-constrained-builder)
+  - [6. Iterator Patterns](#6-iterator-patterns)
+    - [6.1 Generic Iterator Pattern](#61-generic-iterator-pattern)
+      - [Definition 6.1: Generic Iterator](#definition-61-generic-iterator)
+      - [Example 6.1: Generic Iterator](#example-61-generic-iterator)
+    - [6.2 Iterator Adapter Pattern](#62-iterator-adapter-pattern)
+      - [Definition 6.2: Iterator Adapter](#definition-62-iterator-adapter)
+      - [Example 6.2: Iterator Adapters](#example-62-iterator-adapters)
+  - [7. Advanced Patterns](#7-advanced-patterns)
+    - [7.1 Type-Level State Pattern](#71-type-level-state-pattern)
+      - [Definition 7.1: Type-Level State](#definition-71-type-level-state)
+      - [Example 7.1: Type-Level State](#example-71-type-level-state)
+    - [7.2 Phantom Type Pattern](#72-phantom-type-pattern)
+      - [Definition 7.2: Phantom Type](#definition-72-phantom-type)
+      - [Example 7.2: Phantom Types](#example-72-phantom-types)
+  - [8. Formal Proofs](#8-formal-proofs)
+    - [8.1 Generic Pattern Soundness](#81-generic-pattern-soundness)
+      - [Theorem 8.1: Generic Pattern Soundness](#theorem-81-generic-pattern-soundness)
+    - [8.2 Pattern Completeness](#82-pattern-completeness)
+      - [Theorem 8.2: Pattern Completeness](#theorem-82-pattern-completeness)
+    - [8.3 Pattern Correctness](#83-pattern-correctness)
+      - [Theorem 8.3: Pattern Correctness](#theorem-83-pattern-correctness)
+  - [9. Summary](#9-summary)
 
 
 ## 1. Generic Pattern Fundamentals
@@ -95,11 +97,11 @@ impl<T> Container<T> {
     fn new() -> Self {
         Container { data: Vec::new() }
     }
-    
+
     fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
@@ -160,30 +162,30 @@ impl<T> GenericContainer<T> {
             capacity: 0,
         }
     }
-    
+
     fn with_capacity(capacity: usize) -> Self {
         GenericContainer {
             data: Vec::with_capacity(capacity),
             capacity,
         }
     }
-    
+
     fn push(&mut self, item: T) {
         self.data.push(item);
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         self.data.pop()
     }
-    
+
     fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
-    
+
     fn clear(&mut self) {
         self.data.clear();
     }
@@ -226,16 +228,16 @@ impl<T: Ord> SortedContainer<T> {
     fn new() -> Self {
         SortedContainer { data: Vec::new() }
     }
-    
+
     fn insert(&mut self, item: T) {
         let pos = self.data.binary_search(&item).unwrap_or_else(|e| e);
         self.data.insert(pos, item);
     }
-    
+
     fn contains(&self, item: &T) -> bool {
         self.data.binary_search(item).is_ok()
     }
-    
+
     fn remove(&mut self, item: &T) -> bool {
         if let Ok(pos) = self.data.binary_search(item) {
             self.data.remove(pos);
@@ -281,19 +283,19 @@ impl<T, U> PairContainer<T, U> {
     fn new(first: T, second: U) -> Self {
         PairContainer { first, second }
     }
-    
+
     fn get_first(&self) -> &T {
         &self.first
     }
-    
+
     fn get_second(&self) -> &U {
         &self.second
     }
-    
+
     fn set_first(&mut self, first: T) {
         self.first = first;
     }
-    
+
     fn set_second(&mut self, second: U) {
         self.second = second;
     }
@@ -498,7 +500,7 @@ where:
 ```rust
 trait Processor<T> {
     type Output;
-    
+
     fn process(&self, input: T) -> Self::Output;
     fn can_process(&self, input: &T) -> bool;
 }
@@ -507,11 +509,11 @@ struct StringProcessor;
 
 impl Processor<String> for StringProcessor {
     type Output = usize;
-    
+
     fn process(&self, input: String) -> usize {
         input.len()
     }
-    
+
     fn can_process(&self, input: &String) -> bool {
         !input.is_empty()
     }
@@ -521,11 +523,11 @@ struct NumberProcessor;
 
 impl Processor<i32> for NumberProcessor {
     type Output = f64;
-    
+
     fn process(&self, input: i32) -> f64 {
         input as f64 * 2.0
     }
-    
+
     fn can_process(&self, input: &i32) -> bool {
         *input > 0
     }
@@ -625,12 +627,12 @@ impl<T> GenericBuilder<T> {
     fn new() -> Self {
         GenericBuilder { data: None }
     }
-    
+
     fn with_data(mut self, data: T) -> Self {
         self.data = Some(data);
         self
     }
-    
+
     fn build(self) -> Result<T, String> {
         self.data.ok_or_else(|| "No data provided".to_string())
     }
@@ -673,12 +675,12 @@ impl<T: Clone + Display> ValidatedBuilder<T> {
             validation_rules: Vec::new(),
         }
     }
-    
+
     fn with_data(mut self, data: T) -> Self {
         self.data = Some(data);
         self
     }
-    
+
     fn with_validation<F>(mut self, rule: F) -> Self
     where
         F: Fn(&T) -> bool + 'static
@@ -686,16 +688,16 @@ impl<T: Clone + Display> ValidatedBuilder<T> {
         self.validation_rules.push(Box::new(rule));
         self
     }
-    
+
     fn build(self) -> Result<T, String> {
         let data = self.data.ok_or_else(|| "No data provided".to_string())?;
-        
+
         for (i, rule) in self.validation_rules.iter().enumerate() {
             if !rule(&data) {
                 return Err(format!("Validation rule {} failed for {}", i, data));
             }
         }
-        
+
         Ok(data)
     }
 }
@@ -742,7 +744,7 @@ impl<T> GenericIterator<T> {
 
 impl<T> Iterator for GenericIterator<T> {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<T> {
         if self.index < self.data.len() {
             let item = self.data.remove(self.index);
@@ -809,7 +811,7 @@ where
     F: Fn(T) -> U
 {
     type Item = U;
-    
+
     fn next(&mut self) -> Option<U> {
         self.iter.next().map(&self.f)
     }
@@ -840,7 +842,7 @@ where
     F: Fn(&T) -> bool
 {
     type Item = T;
-    
+
     fn next(&mut self) -> Option<T> {
         while let Some(item) = self.iter.next() {
             if (self.predicate)(&item) {
@@ -901,7 +903,7 @@ impl StateMachine<Uninitialized> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn initialize(self, data: String) -> StateMachine<Initialized> {
         StateMachine {
             data,
@@ -926,7 +928,7 @@ impl StateMachine<Running> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn get_data(&self) -> &str {
         &self.data
     }
@@ -975,7 +977,7 @@ impl Measurement<Meter> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_meters(&self) -> f64 {
         self.value
     }
@@ -988,7 +990,7 @@ impl Measurement<Second> {
             _phantom: PhantomData,
         }
     }
-    
+
     fn to_seconds(&self) -> f64 {
         self.value
     }

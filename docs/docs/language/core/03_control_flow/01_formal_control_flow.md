@@ -743,9 +743,9 @@ fn main() {
 **示例 9.6**: 高阶函数
 
 ```rust
-fn apply_twice<F>(f: F, x: i32) -> i32 
-where 
-    F: Fn(i32) -> i32 
+fn apply_twice<F>(f: F, x: i32) -> i32
+where
+    F: Fn(i32) -> i32
 {
     f(f(x))
 }

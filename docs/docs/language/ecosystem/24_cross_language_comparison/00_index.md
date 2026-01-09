@@ -1,9 +1,9 @@
 # Module 24: Rust 跨语言比较 {#module-24-cross-language-comparison}
 
-**Document Version**: V2.0  
-**Module Status**: Active Development  
-**Last Updated**: 2025-01-01  
-**Maintainer**: Rust Language Research Team  
+**Document Version**: V2.0
+**Module Status**: Active Development
+**Last Updated**: 2025-01-01
+**Maintainer**: Rust Language Research Team
 
 ## 元数据 {#metadata}
 
@@ -20,14 +20,50 @@
 
 ## 目录 {#table-of-contents}
 
-1. [模块概述](#1-module-overview)
-2. [核心概念映射](#2-core-concept-mapping)
-3. [理论框架](#3-theoretical-framework)
-4. [实践指导](#4-practical-guidance)
-5. [语言对比分析](#5-language-comparison-analysis)
-6. [学习路径](#6-learning-paths)
-7. [质量指标](#7-quality-indicators)
-8. [相关资源](#8-related-resources)
+- [Module 24: Rust 跨语言比较 {#module-24-cross-language-comparison}](#module-24-rust-跨语言比较-module-24-cross-language-comparison)
+  - [元数据 {#metadata}](#元数据-metadata)
+  - [目录 {#table-of-contents}](#目录-table-of-contents)
+  - [1. 模块概述 {#1-module-overview}](#1-模块概述-1-module-overview)
+    - [1.1 模块定位](#11-模块定位)
+    - [1.2 核心价值](#12-核心价值)
+    - [1.3 比较维度框架](#13-比较维度框架)
+  - [2. 核心概念映射 {#2-core-concept-mapping}](#2-核心概念映射-2-core-concept-mapping)
+    - [2.1 语言特性对比矩阵](#21-语言特性对比矩阵)
+    - [2.2 内存管理模型对比](#22-内存管理模型对比)
+  - [3. 理论框架 {#3-theoretical-framework}](#3-理论框架-3-theoretical-framework)
+    - [3.1 语言特性评估模型](#31-语言特性评估模型)
+    - [3.2 性能对比模型](#32-性能对比模型)
+  - [4. 实践指导 {#4-practical-guidance}](#4-实践指导-4-practical-guidance)
+    - [4.1 语言选择决策矩阵](#41-语言选择决策矩阵)
+    - [4.2 跨语言互操作实践](#42-跨语言互操作实践)
+  - [5. 语言对比分析 {#5-language-comparison-analysis}](#5-语言对比分析-5-language-comparison-analysis)
+    - [5.1 Rust vs C++详细对比](#51-rust-vs-c详细对比)
+    - [5.2 Rust vs Go对比](#52-rust-vs-go对比)
+    - [5.3 Rust vs Java对比](#53-rust-vs-java对比)
+  - [6. 学习路径 {#6-learning-paths}](#6-学习路径-6-learning-paths)
+    - [6.1 从C++迁移到Rust](#61-从c迁移到rust)
+    - [6.2 从Java/Python迁移到Rust](#62-从javapython迁移到rust)
+    - [6.3 多语言集成策略](#63-多语言集成策略)
+  - [7. 质量指标 {#7-quality-indicators}](#7-质量指标-7-quality-indicators)
+    - [7.1 对比分析完整性](#71-对比分析完整性)
+    - [7.2 实践价值评估](#72-实践价值评估)
+  - [8. 相关资源 {#8-related-resources}](#8-相关资源-8-related-resources)
+    - [8.1 技术文档](#81-技术文档)
+    - [8.2 实践工具](#82-实践工具)
+  - [2. Core Concepts {#2-core-concepts}](#2-core-concepts-2-core-concepts)
+    - [2.1 语言特性模型 {#2-1-language-feature-model}](#21-语言特性模型-2-1-language-feature-model)
+    - [2.2 比较框架 {#2-2-comparative-framework}](#22-比较框架-2-2-comparative-framework)
+    - [2.3 语言权衡 {#2-3-language-tradeoffs}](#23-语言权衡-2-3-language-tradeoffs)
+    - [2.4 互操作性 {#2-4-interoperability}](#24-互操作性-2-4-interoperability)
+  - [3. Key Components {#3-key-components}](#3-key-components-3-key-components)
+    - [3.1 类型系统比较 {#3-1-type-system-comparison}](#31-类型系统比较-3-1-type-system-comparison)
+    - [3.2 内存模型比较 {#3-2-memory-model-comparison}](#32-内存模型比较-3-2-memory-model-comparison)
+    - [3.3 并发模型比较 {#3-3-concurrency-model-comparison}](#33-并发模型比较-3-3-concurrency-model-comparison)
+    - [3.4 编程范式比较 {#3-4-paradigm-comparison}](#34-编程范式比较-3-4-paradigm-comparison)
+  - [4. Related Modules {#4-related-modules}](#4-related-modules-4-related-modules)
+  - [5. Module Structure {#5-module-structure}](#5-module-structure-5-module-structure)
+  - [6. References {#6-references}](#6-references-6-references)
+  - [7. Related Concepts {#7-related-concepts}](#7-related-concepts-7-related-concepts)
 
 ## 1. 模块概述 {#1-module-overview}
 
@@ -128,26 +164,26 @@ Rust vs 主流语言特性对比
 
 ### 3.1 语言特性评估模型
 
-**定义 24.1 (语言能力函数)**  
+**定义 24.1 (语言能力函数)**
 语言L在维度D上的能力评估：
 
 $$\text{Capability}(L, D) = \sum_{i=1}^{n} w_i \cdot \text{Score}(L, D_i)$$
 
 其中$w_i$是权重，$D_i$是子维度。
 
-**定理 24.1 (Rust安全性优势)**  
+**定理 24.1 (Rust安全性优势)**
 在安全关键应用中，Rust的总体能力显著优于传统系统编程语言：
 
 $$\text{Capability}(\text{Rust}, \text{Safety}) > \text{Capability}(\text{C/C++}, \text{Safety})$$
 
 ### 3.2 性能对比模型
 
-**定义 24.2 (性能等价性)**  
+**定义 24.2 (性能等价性)**
 两种语言实现相同功能的性能等价条件：
 
 $$\text{Perf}(L_1, P) \approx \text{Perf}(L_2, P) \iff |\text{Perf}(L_1, P) - \text{Perf}(L_2, P)| < \epsilon$$
 
-**定理 24.2 (零成本抽象等价性)**  
+**定理 24.2 (零成本抽象等价性)**
 Rust的零成本抽象与手工优化的C++代码性能等价：
 
 $$\text{Perf}(\text{Rust}_{\text{idiomatic}}, P) \approx \text{Perf}(\text{C++}_{\text{optimized}}, P)$$
@@ -175,18 +211,18 @@ impl SafeAllocator {
     pub fn new(size: usize, align: usize) -> Result<Self, &'static str> {
         let layout = Layout::from_size_align(size, align)
             .map_err(|_| "Invalid layout")?;
-        
+
         let ptr = unsafe { alloc(layout) };
         let non_null = NonNull::new(ptr)
             .ok_or("Allocation failed")?;
-        
+
         Ok(Self {
             ptr: non_null,
             size,
             layout,
         })
     }
-    
+
     pub fn as_slice_mut(&mut self) -> &mut [u8] {
         unsafe {
             std::slice::from_raw_parts_mut(self.ptr.as_ptr(), self.size)
@@ -208,26 +244,26 @@ class Allocator {
 private:
     void* ptr;
     size_t size;
-    
+
 public:
     Allocator(size_t size, size_t align) : size(size) {
         ptr = aligned_alloc(align, size);
         if (!ptr) throw std::bad_alloc();
     }
-    
+
     ~Allocator() {
         free(ptr);  // 需要确保正确匹配分配方式
     }
-    
+
     // 需要实现复制/移动语义以避免重复释放
     Allocator(const Allocator&) = delete;
     Allocator& operator=(const Allocator&) = delete;
-    
-    Allocator(Allocator&& other) noexcept 
+
+    Allocator(Allocator&& other) noexcept
         : ptr(other.ptr), size(other.size) {
         other.ptr = nullptr;
     }
-    
+
     uint8_t* data() { return static_cast<uint8_t*>(ptr); }
 };
 */
@@ -249,26 +285,26 @@ extern "C" {
 pub fn safe_external_call(input: &str) -> Result<String, &'static str> {
     let c_input = CString::new(input)
         .map_err(|_| "Invalid input string")?;
-    
+
     let result_ptr = unsafe {
         external_function(c_input.as_ptr())
     };
-    
+
     if result_ptr.is_null() {
         return Err("External function failed");
     }
-    
+
     let result = unsafe {
         CStr::from_ptr(result_ptr)
             .to_string_lossy()
             .into_owned()
     };
-    
+
     // 假设外部函数使用malloc分配内存
     unsafe {
         libc::free(result_ptr as *mut libc::c_void);
     }
-    
+
     Ok(result)
 }
 
@@ -278,16 +314,16 @@ pub extern "C" fn rust_function(input: *const c_char) -> *mut c_char {
     if input.is_null() {
         return std::ptr::null_mut();
     }
-    
+
     let input_str = unsafe {
         match CStr::from_ptr(input).to_str() {
             Ok(s) => s,
             Err(_) => return std::ptr::null_mut(),
         }
     };
-    
+
     let result = format!("Processed: {}", input_str);
-    
+
     match CString::new(result) {
         Ok(c_string) => c_string.into_raw(),
         Err(_) => std::ptr::null_mut(),
@@ -437,7 +473,7 @@ print(result.decode('utf-8'))
 
 ---
 
-**文档历史**:  
+**文档历史**:
 
 - 创建: 2025-07-23 - 初始版本
 - 更新: 2025-01-01 - V2.0版本，建立完整的跨语言比较框架
@@ -531,7 +567,7 @@ $$\text{Compare}(L_1, L_2, D) = \{(f_1, f_2, \sim) | f_1 \in L_1, f_2 \in L_2, \
 
 ---
 
-**Document History**:  
+**Document History**:
 
 - Created: 2025-07-23
 - Updated: 2025-07-23 - 创建了索引文件并添加了交叉引用

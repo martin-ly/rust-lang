@@ -93,7 +93,7 @@ Rust IoT开发采用分层架构，每层提供不同抽象级别。这种分层
 // 元模型：通用SPI接口的trait
 pub trait Spi {
     type Error;
-    
+
     /// 执行全双工SPI传输
     fn transfer<'w>(
         &mut self,
@@ -104,7 +104,7 @@ pub trait Spi {
 // 模型：特定MCU的SPI实现
 impl Spi for MySpi {
     type Error = MyError;
-    
+
     fn transfer<'w>(
         &mut self,
         words: &'w mut [u8],
@@ -166,7 +166,7 @@ impl I2cBus<Addressed> {
             _state: PhantomData,
         })
     }
-    
+
     // 只有寻址状态才能开始读取
     pub fn read(self, buffer: &mut [u8]) -> Result<I2cBus<Idle>, Error> {
         // 读取数据...
@@ -226,13 +226,13 @@ Rust IoT生态系统提供了多种执行环境，从裸机应用到全功能RTO
 async fn main(spawner: Spawner) {
     // 初始化外设
     let p = embassy_stm32::init(Default::default());
-    
+
     // GPIO配置
     let mut led = Output::new(p.PA5, Level::Low, Speed::Low);
-    
+
     // 生成任务
     spawner.spawn(blink_task(led)).unwrap();
-    
+
     // 生成网络任务
     let config = Config::dhcp(MacAddress::new(0,1,2,3,4,5));
     let eth = embassy_stm32::eth::Ethernet::new(
@@ -247,7 +247,7 @@ async fn main(spawner: Spawner) {
         p.PB13,
         p.PG11,
     );
-    
+
     spawner.spawn(net_task(eth, config)).unwrap();
 }
 
@@ -268,29 +268,29 @@ async fn blink_task(mut led: Output<'static>) {
 #[rtic::app(device = stm32f4xx_hal::pac, peripherals = true)]
 mod app {
     use stm32f4xx_hal::{prelude::*, gpio};
-    
+
     #[shared]
     struct Shared {
         counter: u32,
     }
-    
+
     #[local]
     struct Local {
         led: gpio::gpioa::PA5<gpio::Output<gpio::PushPull>>,
     }
-    
+
     #[init]
     fn init(cx: init::Context) -> (Shared, Local, init::Monotonics) {
         let device = cx.device;
-        
+
         // 设置系统时钟
         let rcc = device.RCC.constrain();
         let clocks = rcc.cfgr.freeze();
-        
+
         // 配置GPIO
         let gpioa = device.GPIOA.split();
         let led = gpioa.pa5.into_push_pull_output();
-        
+
         // 初始化共享资源
         (
             Shared { counter: 0 },
@@ -298,7 +298,7 @@ mod app {
             init::Monotonics(),
         )
     }
-    
+
     #[idle]
     fn idle(_: idle::Context) -> ! {
         loop {
@@ -306,13 +306,13 @@ mod app {
             cortex_m::asm::wfi();
         }
     }
-    
+
     #[task(binds = SysTick, shared = [counter], local = [led])]
     fn systick(mut cx: systick::Context) {
         // 访问共享资源
         cx.shared.counter.lock(|counter| {
             *counter += 1;
-            
+
             // 每秒闪烁LED
             if *counter % 1000 == 0 {
                 cx.local.led.toggle();
@@ -348,23 +348,23 @@ fn main() {
     // MQTT连接选项
     let mut mqttoptions = MqttOptions::new("device-1", "broker.hivemq.com", 1883);
     mqttoptions.set_keep_alive(Duration::from_secs(5));
-    
+
     // 创建客户端
     let (mut client, mut connection) = Client::new(mqttoptions, 10);
-    
+
     // 启动接收线程
     std::thread::spawn(move || {
         for notification in connection.iter() {
             println!("Notification = {:?}", notification);
         }
     });
-    
+
     // 发布消息
     client.publish("sensors/temperature", QoS::AtLeastOnce, false, b"23.5").unwrap();
-    
+
     // 订阅主题
     client.subscribe("actuators/commands", QoS::AtLeastOnce).unwrap();
-    
+
     // 保持主线程运行
     std::thread::sleep(Duration::from_secs(60));
 }
@@ -377,27 +377,27 @@ fn main() {
 async fn main(spawner: Spawner) {
     // 初始化日志
     defmt::info!("启动BLE设备");
-    
+
     // 初始化硬件
     let p = embassy_nrf::init(Default::default());
-    
+
     // 初始化软设备
     let config = Config::default();
     let sd = Softdevice::enable(&config);
-    
+
     // 创建BLE服务器
     let server_config = ServerConfig::default();
     let server = Server::new(sd, &server_config).unwrap();
-    
+
     // 创建服务
     let service_uuid = Uuid::new_16(0x1809); // 健康温度服务
     let service_handle = server.add_service(&service_uuid).unwrap();
-    
+
     // 添加特征
     let char_uuid = Uuid::new_16(0x2A1C); // 温度测量特征
     let mut char_flags = CharacteristicFlags::empty();
     char_flags.insert(CharacteristicFlags::READ | CharacteristicFlags::NOTIFY);
-    
+
     let char_handle = server.add_characteristic(
         service_handle,
         &char_uuid,
@@ -405,10 +405,10 @@ async fn main(spawner: Spawner) {
         &[],
         &[]
     ).unwrap();
-    
+
     // 生成BLE任务
     spawner.spawn(softdevice_task(sd)).unwrap();
-    
+
     // 生成温度任务
     spawner.spawn(temperature_task(server, char_handle)).unwrap();
 }
@@ -421,17 +421,17 @@ async fn softdevice_task(sd: &'static Softdevice) -> ! {
 #[embassy_executor::task]
 async fn temperature_task(server: Server, char_handle: u16) {
     let mut temp_sensor = TemperatureSensor::new();
-    
+
     loop {
         // 读取温度
         let temp = temp_sensor.read().await;
-        
+
         // 格式化温度数据
         let value = format_ieee11073_float(temp);
-        
+
         // 更新BLE特征
         server.characteristic_update(char_handle, &value).await.unwrap();
-        
+
         // 等待下一次采样
         Timer::after_secs(1).await;
     }
@@ -499,7 +499,7 @@ impl Uart<Uninitialized> {
             _state: PhantomData,
         }
     }
-    
+
     /// 初始化外设，消费未初始化状态，产生初始化状态
     pub fn initialize(self, config: UartConfig) -> Uart<Initialized> {
         // 安全地访问寄存器初始化硬件
@@ -511,7 +511,7 @@ impl Uart<Uninitialized> {
             // 启用中断
             (*self.registers).interrupt_enable.write(1);
         }
-        
+
         // 转换到已初始化状态
         Uart {
             registers: self.registers,
@@ -526,7 +526,7 @@ impl Uart<Initialized> {
         for &byte in data {
             // 等待发送缓冲区就绪
             self.wait_for_tx_ready()?;
-            
+
             // 发送字节
             unsafe {
                 (*self.registers).data.write(byte);
@@ -534,7 +534,7 @@ impl Uart<Initialized> {
         }
         Ok(())
     }
-    
+
     /// 只有已初始化UART才能接收数据
     pub fn receive(&mut self, buffer: &mut [u8]) -> Result<usize, UartError> {
         // 接收实现...
@@ -545,13 +545,13 @@ impl Uart<Initialized> {
 // 使用示例 - 编译器保证正确的初始化顺序
 fn main() {
     let uart_uninit = Uart::new(0x40001000);
-    
+
     // 以下代码不会编译，因为类型系统阻止在初始化前调用send
     // uart_uninit.send(&[1, 2, 3]); // 编译错误!
-    
+
     // 正确的初始化顺序
     let mut uart = uart_uninit.initialize(UartConfig::default());
-    
+
     // 现在可以发送数据
     uart.send(&[1, 2, 3]).unwrap();
 }
@@ -565,9 +565,9 @@ Rust支持通过注释和类型系统表达契约和不变量：
 
 ```rust
 /// 表示具有最小值和最大值约束的温度传感器读数
-/// 
+///
 /// # 不变量
-/// 
+///
 /// - `min_value <= current <= max_value`
 /// - `min_value < max_value`
 pub struct BoundedSensor {
@@ -578,52 +578,52 @@ pub struct BoundedSensor {
 
 impl BoundedSensor {
     /// 创建新的有界传感器
-    /// 
+    ///
     /// # 参数
-    /// 
+    ///
     /// * `min_value` - 允许的最小传感器值
     /// * `max_value` - 允许的最大传感器值
     /// * `initial` - 初始传感器值
-    /// 
+    ///
     /// # 错误
-    /// 
+    ///
     /// 如果 `min_value >= max_value` 或 `initial` 超出范围，返回错误
     pub fn new(min_value: i32, max_value: i32, initial: i32) -> Result<Self, &'static str> {
         // 检查参数是否满足契约
         if min_value >= max_value {
             return Err("最小值必须小于最大值");
         }
-        
+
         if initial < min_value || initial > max_value {
             return Err("初始值必须在范围内");
         }
-        
+
         Ok(Self {
             current: initial,
             min_value,
             max_value,
         })
     }
-    
+
     /// 更新传感器读数，保证在边界内
-    /// 
+    ///
     /// # 参数
-    /// 
+    ///
     /// * `new_value` - 新的传感器读数
-    /// 
+    ///
     /// # 返回值
-    /// 
+    ///
     /// 应用边界后的实际值
     pub fn update(&mut self, new_value: i32) -> i32 {
         // 应用不变量，确保值在范围内
         self.current = new_value.max(self.min_value).min(self.max_value);
         self.current
     }
-    
+
     /// 获取当前读数
-    /// 
+    ///
     /// # 保证
-    /// 
+    ///
     /// 返回值始终满足 `min_value <= result <= max_value`
     pub fn current(&self) -> i32 {
         // 不变量保证该值在范围内
@@ -636,12 +636,12 @@ impl BoundedSensor {
 fn test_bounded_sensor_invariants() {
     // 有效初始化
     let mut sensor = BoundedSensor::new(0, 100, 50).unwrap();
-    
+
     // 更新保持不变量
     assert_eq!(sensor.update(-20), 0);  // 限制在最小值
     assert_eq!(sensor.update(120), 100); // 限制在最大值
     assert_eq!(sensor.update(75), 75);   // 在范围内保持不变
-    
+
     // 验证不变量检查
     assert!(BoundedSensor::new(100, 0, 50).is_err()); // min > max
     assert!(BoundedSensor::new(0, 100, 150).is_err()); // initial > max
@@ -682,7 +682,7 @@ where
             Err("温度值超出范围")
         }
     }
-    
+
     /// 获取当前温度值
     pub fn get(&self) -> u32 {
         self.value
@@ -693,11 +693,11 @@ where
 fn main() {
     // 类型定义温度范围为0-100
     type RoomTemp = Temperature<U0, U100>;
-    
+
     // 创建有效温度
     let temp1 = RoomTemp::new(25).unwrap();
     assert_eq!(temp1.get(), 25);
-    
+
     // 超出范围的温度在运行时被拒绝
     let temp2 = RoomTemp::new(150);
     assert!(temp2.is_err());
@@ -719,24 +719,24 @@ fn verify_bounded_sensor() {
     // 允许任意范围
     let min_value = kani::any();
     let max_value = kani::any();
-    
+
     // 添加约束
     kani::assume(min_value < max_value);
-    
+
     // 任意初始值
     let initial = kani::any();
     kani::assume(initial >= min_value && initial <= max_value);
-    
+
     // 验证创建成功
     let sensor = BoundedSensor::new(min_value, max_value, initial);
     assert!(sensor.is_ok());
-    
+
     let mut sensor = sensor.unwrap();
-    
+
     // 验证更新后不变量保持
     let new_value = kani::any();
     let result = sensor.update(new_value);
-    
+
     // 验证不变量
     assert!(result >= min_value);
     assert!(result <= max_value);
@@ -799,12 +799,12 @@ impl WiFiManager<WiFiDisconnected> {
             _state: PhantomData,
         }
     }
-    
+
     // 开始连接 - 状态转换到Connecting
     pub fn connect(self, ssid: &str, password: &str) -> WiFiManager<WiFiConnecting> {
         // 发送连接命令
         self.driver.start_connection(ssid, password);
-        
+
         // 状态转换
         WiFiManager {
             driver: self.driver,
@@ -822,7 +822,7 @@ impl WiFiManager<WiFiConnecting> {
                 driver: self.driver,
                 _state: PhantomData,
             }),
-            
+
             // 连接失败，转换到Error状态
             Err(_) => Err(WiFiManager {
                 driver: self.driver,
@@ -837,11 +837,11 @@ impl WiFiManager<WiFiConnected> {
     pub fn send_data(&mut self, data: &[u8]) -> Result<(), WiFiError> {
         self.driver.send_data(data)
     }
-    
+
     // 断开连接，转换回Disconnected状态
     pub fn disconnect(self) -> WiFiManager<WiFiDisconnected> {
         self.driver.disconnect();
-        
+
         WiFiManager {
             driver: self.driver,
             _state: PhantomData,
@@ -853,13 +853,13 @@ impl WiFiManager<WiFiError> {
     // 从错误状态恢复
     pub fn reset(self) -> WiFiManager<WiFiDisconnected> {
         self.driver.reset();
-        
+
         WiFiManager {
             driver: self.driver,
             _state: PhantomData,
         }
     }
-    
+
     // 获取错误信息
     pub fn error_details(&self) -> WiFiErrorDetails {
         self.driver.get_error_details()
@@ -870,10 +870,10 @@ impl WiFiManager<WiFiError> {
 fn connect_and_send() {
     let driver = WiFiDriver::new();
     let wifi = WiFiManager::new(driver);
-    
+
     // 连接WiFi
     let connecting_wifi = wifi.connect("MyNetwork", "password123");
-    
+
     // 等待连接
     let connected_wifi = match connecting_wifi.wait_connection() {
         Ok(connected) => connected,
@@ -882,13 +882,13 @@ fn connect_and_send() {
             return error_state.reset();
         }
     };
-    
+
     // 发送数据 - 只有在连接状态才能调用
     connected_wifi.send_data(b"Hello IoT").unwrap();
-    
+
     // 断开连接
     let disconnected_wifi = connected_wifi.disconnect();
-    
+
     // 以下代码将不会编译，因为类型系统防止在断开连接状态发送数据
     // disconnected_wifi.send_data(b"This won't compile");
 }
@@ -916,26 +916,26 @@ impl PowerManager<NormalPower> {
         if battery_level > 100 {
             return Err(PowerError::InvalidBatteryLevel);
         }
-        
+
         // 正常电源需要至少40%电量
         if battery_level < 40 {
             return Err(PowerError::InsufficientPower);
         }
-        
+
         Ok(Self {
             battery_level,
             _state: PhantomData,
         })
     }
-    
+
     // 使用电池，可能转换状态
     pub fn consume_power(self, amount: u8) -> Result<PowerManagerState, PowerError> {
         if amount > self.battery_level {
             return Err(PowerError::InsufficientPower);
         }
-        
+
         let new_level = self.battery_level - amount;
-        
+
         // 状态转换逻辑
         if new_level < 20 {
             // 转换到关键状态
@@ -957,7 +957,7 @@ impl PowerManager<NormalPower> {
             }))
         }
     }
-    
+
     // 正常电源状态可以执行所有操作
     pub fn run_high_power_task(&self) -> Result<(), PowerError> {
         println!("执行高功率任务");
@@ -971,7 +971,7 @@ impl PowerManager<LowPower> {
         println!("执行中等功率任务");
         Ok(())
     }
-    
+
     // 低功耗不能执行高功率任务
     // 通过不实现run_high_power_task方法实现编译时限制
 }
@@ -982,7 +982,7 @@ impl PowerManager<CriticalPower> {
         println!("执行关键任务");
         Ok(())
     }
-    
+
     // 通过不实现其他任务方法实现编译时限制
 }
 
@@ -997,13 +997,13 @@ pub enum PowerManagerState {
 fn power_management_example() {
     // 创建电源管理器
     let power = PowerManager::<NormalPower>::new(80).unwrap();
-    
+
     // 正常电源可以运行高功率任务
     power.run_high_power_task().unwrap();
-    
+
     // 消耗电量
     let power_state = power.consume_power(50).unwrap();
-    
+
     // 根据新状态采取行动
     match power_state {
         PowerManagerState::Normal(normal_power) => {
@@ -1013,14 +1013,14 @@ fn power_management_example() {
         PowerManagerState::Low(low_power) => {
             // 低功率只能执行中等功率任务
             low_power.run_medium_power_task().unwrap();
-            
+
             // 以下代码不会编译，保证安全
             // low_power.run_high_power_task();
         },
         PowerManagerState::Critical(critical_power) => {
             // 关键电量只能执行关键任务
             critical_power.run_critical_task().unwrap();
-            
+
             // 以下代码不会编译
             // critical_power.run_medium_power_task();
             // critical_power.run_high_power_task();
@@ -1041,7 +1041,7 @@ Rust IoT架构中的设备-驱动模型通过元模型(traits)抽象，实现了
 // 设备特性 - 元模型
 pub trait I2cDevice {
     type Error;
-    
+
     fn read(&mut self, address: u8, buffer: &mut [u8]) -> Result<(), Self::Error>;
     fn write(&mut self, address: u8, bytes: &[u8]) -> Result<(), Self::Error>;
 }
@@ -1059,17 +1059,17 @@ where
     pub fn new(i2c: I2C, address: u8) -> Self {
         Self { i2c, address }
     }
-    
+
     pub fn read_temperature(&mut self) -> Result<f32, E> {
         let mut buffer = [0u8; 2];
-        
+
         // 使用I2C读取温度寄存器
         self.i2c.read(self.address, &mut buffer)?;
-        
+
         // 转换为温度值
         let raw_temp = u16::from_be_bytes(buffer);
         let temperature = (raw_temp as f32) * 0.0625;
-        
+
         Ok(temperature)
     }
 }
@@ -1081,13 +1081,13 @@ struct StmI2c {
 
 impl I2cDevice for StmI2c {
     type Error = StmI2cError;
-    
+
     fn read(&mut self, address: u8, buffer: &mut [u8]) -> Result<(), Self::Error> {
         // STM32特定I2C实现
         // ...
         Ok(())
     }
-    
+
     fn write(&mut self, address: u8, bytes: &[u8]) -> Result<(), Self::Error> {
         // STM32特定I2C实现
         // ...
@@ -1099,7 +1099,7 @@ impl I2cDevice for StmI2c {
 fn main() {
     let i2c = StmI2c { registers: 0x40005400 as *mut _ };
     let mut temp_sensor = TemperatureSensor::new(i2c, 0x48);
-    
+
     match temp_sensor.read_temperature() {
         Ok(temp) => println!("Temperature: {}°C", temp),
         Err(_) => println!("Error reading temperature"),
@@ -1117,7 +1117,7 @@ Rust IoT系统中的资源管理模型依赖于元模型(trait)定义资源规�
 // 资源描述 - 元模型
 pub trait Resource {
     type Error;
-    
+
     fn acquire(&mut self) -> Result<(), Self::Error>;
     fn release(&mut self) -> Result<(), Self::Error>;
     fn is_acquired(&self) -> bool;
@@ -1137,29 +1137,29 @@ impl<'a, R: Resource> ResourceManager<'a, R> {
             allocation_map: BitArray::new(len),
         }
     }
-    
+
     // 分配特定资源
     pub fn allocate_specific(&mut self, index: usize) -> Result<&mut R, ResourceError> {
         if index >= self.resources.len() {
             return Err(ResourceError::InvalidIndex);
         }
-        
+
         if self.allocation_map.get(index) {
             return Err(ResourceError::AlreadyAllocated);
         }
-        
+
         // 获取资源
         let resource = &mut self.resources[index];
-        
+
         // 尝试获取物理资源
         resource.acquire().map_err(|_| ResourceError::AcquisitionFailed)?;
-        
+
         // 标记为已分配
         self.allocation_map.set(index, true);
-        
+
         Ok(resource)
     }
-    
+
     // 分配任何可用资源
     pub fn allocate_any(&mut self) -> Result<&mut R, ResourceError> {
         for i in 0..self.resources.len() {
@@ -1167,29 +1167,29 @@ impl<'a, R: Resource> ResourceManager<'a, R> {
                 return self.allocate_specific(i);
             }
         }
-        
+
         Err(ResourceError::NoAvailableResources)
     }
-    
+
     // 释放资源
     pub fn release(&mut self, index: usize) -> Result<(), ResourceError> {
         if index >= self.resources.len() {
             return Err(ResourceError::InvalidIndex);
         }
-        
+
         if !self.allocation_map.get(index) {
             return Err(ResourceError::NotAllocated);
         }
-        
+
         // 获取资源
         let resource = &mut self.resources[index];
-        
+
         // 释放物理资源
         resource.release().map_err(|_| ResourceError::ReleaseFailed)?;
-        
+
         // 标记为未分配
         self.allocation_map.set(index, false);
-        
+
         Ok(())
     }
 }
@@ -1203,35 +1203,35 @@ pub struct DmaChannel {
 
 impl Resource for DmaChannel {
     type Error = DmaError;
-    
+
     fn acquire(&mut self) -> Result<(), Self::Error> {
         if self.acquired {
             return Err(DmaError::AlreadyAcquired);
         }
-        
+
         // 启用DMA通道
         unsafe {
             (*self.registers).channels[self.id as usize].cr.modify(|_, w| w.en().set_bit());
         }
-        
+
         self.acquired = true;
         Ok(())
     }
-    
+
     fn release(&mut self) -> Result<(), Self::Error> {
         if !self.acquired {
             return Err(DmaError::NotAcquired);
         }
-        
+
         // 禁用DMA通道
         unsafe {
             (*self.registers).channels[self.id as usize].cr.modify(|_, w| w.en().clear_bit());
         }
-        
+
         self.acquired = false;
         Ok(())
     }
-    
+
     fn is_acquired(&self) -> bool {
         self.acquired
     }
@@ -1240,29 +1240,29 @@ impl Resource for DmaChannel {
 // 资源使用示例
 fn main() {
     let dma_base = 0x40026000 as *mut DmaRegisters;
-    
+
     // 创建DMA通道
     let mut dma_channels = [
         DmaChannel { id: 0, registers: dma_base, acquired: false },
         DmaChannel { id: 1, registers: dma_base, acquired: false },
         DmaChannel { id: 2, registers: dma_base, acquired: false },
     ];
-    
+
     // 创建资源管理器
     let mut dma_manager = ResourceManager::new(&mut dma_channels);
-    
+
     // 分配通道
     let dma1 = dma_manager.allocate_specific(0).unwrap();
     let dma2 = dma_manager.allocate_any().unwrap(); // 获取通道1
-    
+
     // 尝试分配已分配的通道会失败
     assert!(dma_manager.allocate_specific(0).is_err());
-    
+
     // 使用DMA通道...
-    
+
     // 释放资源
     dma_manager.release(0).unwrap();
-    
+
     // 现在可以重新分配
     let dma3 = dma_manager.allocate_specific(0).unwrap();
 }
@@ -1287,7 +1287,7 @@ pub enum SensorMessage {
 // 异步任务接口 - 元模型
 pub trait AsyncTask {
     type Output;
-    
+
     fn poll(&mut self, context: &mut Context) -> Poll<Self::Output>;
 }
 
@@ -1311,42 +1311,42 @@ where
             alarm_threshold: 50.0, // 默认阈值
         }
     }
-    
+
     // 处理传入消息
     async fn process_message(&mut self, msg: SensorMessage) -> Result<(), SensorError> {
         match msg {
             SensorMessage::ReadTemperature { id } if id == self.id => {
                 let temp = self.sensor.read_temperature().await?;
                 println!("Sensor {}: Temperature = {}°C", self.id, temp);
-                
+
                 // 检查警报条件
                 if temp > self.alarm_threshold {
                     println!("ALARM: Sensor {} temperature above threshold!", self.id);
                 }
-                
+
                 Ok(())
             },
-            
+
             SensorMessage::SetAlarmThreshold { id, threshold } if id == self.id => {
                 self.alarm_threshold = threshold;
                 println!("Sensor {}: Alarm threshold set to {}°C", self.id, threshold);
                 Ok(())
             },
-            
+
             SensorMessage::PerformCalibration { id } if id == self.id => {
                 println!("Sensor {}: Performing calibration...", self.id);
                 self.sensor.calibrate().await?;
                 println!("Sensor {}: Calibration complete", self.id);
                 Ok(())
             },
-            
+
             SensorMessage::PowerOff { id } if id == self.id => {
                 println!("Sensor {}: Powering off...", self.id);
                 self.sensor.power_off().await?;
                 println!("Sensor {}: Powered off", self.id);
                 Ok(())
             },
-            
+
             _ => {
                 // 忽略不相关的消息
                 Ok(())
@@ -1358,7 +1358,7 @@ where
 // 实现异步任务特性
 impl<S: TemperatureSensor> AsyncTask for SensorTask<S> {
     type Output = ();
-    
+
     fn poll(&mut self, context: &mut Context) -> Poll<Self::Output> {
         loop {
             // 尝试接收消息
@@ -1367,7 +1367,7 @@ impl<S: TemperatureSensor> AsyncTask for SensorTask<S> {
                     // 有新消息，处理它
                     let future = self.process_message(msg);
                     pin_mut!(future);
-                    
+
                     // 轮询消息处理
                     match future.poll(context) {
                         Poll::Ready(Ok(())) => {
@@ -1403,40 +1403,40 @@ async fn main(spawner: Spawner) {
     // 创建传感器
     let sensor1 = TemperatureSensorImpl::new(/*...*/);
     let sensor2 = TemperatureSensorImpl::new(/*...*/);
-    
+
     // 创建消息通道
     let (sender, receiver1) = mpsc::channel(10);
     let receiver2 = sender.clone();
-    
+
     // 创建传感器任务
     let task1 = SensorTask::new(sensor1, 1, receiver1);
     let task2 = SensorTask::new(sensor2, 2, receiver2);
-    
+
     // 生成任务
     spawner.spawn(task1).unwrap();
     spawner.spawn(task2).unwrap();
-    
+
     // 控制逻辑
     loop {
         // 读取两个传感器温度
         sender.send(SensorMessage::ReadTemperature { id: 1 }).await.unwrap();
         sender.send(SensorMessage::ReadTemperature { id: 2 }).await.unwrap();
-        
+
         // 等待1秒
         Timer::after_secs(1).await;
-        
+
         // 设置传感器1的警报阈值
-        sender.send(SensorMessage::SetAlarmThreshold { 
-            id: 1, 
-            threshold: 45.0 
+        sender.send(SensorMessage::SetAlarmThreshold {
+            id: 1,
+            threshold: 45.0
         }).await.unwrap();
-        
+
         // 等待1秒
         Timer::after_secs(1).await;
-        
+
         // 校准传感器2
         sender.send(SensorMessage::PerformCalibration { id: 2 }).await.unwrap();
-        
+
         // 等待10秒
         Timer::after_secs(10).await;
     }
@@ -1469,31 +1469,31 @@ impl<T> SecureChannel<T> {
             authenticated: false,
         }
     }
-    
+
     // 加密通道
     pub fn encrypt(mut self) -> Self {
         // 加密数据...
         self.encrypted = true;
         self
     }
-    
+
     // 认证通道
     pub fn authenticate(mut self) -> Self {
         // 认证数据...
         self.authenticated = true;
         self
     }
-    
+
     // 获取数据 - 只有在通道安全时才允许
     pub fn get_data(self) -> Result<T, SecurityError> {
         if !self.encrypted {
             return Err(SecurityError::NotEncrypted);
         }
-        
+
         if !self.authenticated {
             return Err(SecurityError::NotAuthenticated);
         }
-        
+
         Ok(self.data)
     }
 }
@@ -1505,16 +1505,16 @@ fn verify_secure_channel_properties() {
     // 创建带有任意数据的通道
     let data: u32 = kani::any();
     let channel = SecureChannel::new(data);
-    
+
     // 验证未加密通道无法获取数据
     let unauthenticated_channel = channel.authenticate();
     assert!(unauthenticated_channel.get_data().is_err());
-    
+
     // 验证未认证通道无法获取数据
     let channel = SecureChannel::new(data);
     let unencrypted_channel = channel.encrypt();
     assert!(unencrypted_channel.get_data().is_err());
-    
+
     // 验证完全安全通道可以获取数据
     let channel = SecureChannel::new(data);
     let secure_channel = channel.encrypt().authenticate();
@@ -1540,22 +1540,22 @@ fn apply_firmware_update(
     if !verify_signature(update_data, signature, public_key) {
         return Err(UpdateError::InvalidSignature);
     }
-    
+
     // 解析固件头部
     let header = parse_firmware_header(update_data)?;
-    
+
     // 检查版本
     if header.version <= current_version {
         return Err(UpdateError::OlderVersion);
     }
-    
+
     // 检查固件完整性
     if !verify_firmware_integrity(update_data, header) {
         return Err(UpdateError::IntegrityCheckFailed);
     }
-    
+
     // 应用更新...
-    
+
     // 返回更新信息
     Ok(FirmwareInfo {
         version: header.version,
@@ -1605,33 +1605,33 @@ impl DataCollector {
         if id_string.push_str(device_id).is_err() {
             return Err(CollectorError::DeviceIdTooLong);
         }
-        
+
         Ok(Self {
             temperature_buffer: Vec::new(),
             device_id: id_string,
             config,
         })
     }
-    
+
     // 添加温度读数
     pub fn add_temperature(&mut self, temp: f32) -> Result<(), CollectorError> {
         if self.temperature_buffer.push(temp).is_err() {
             return Err(CollectorError::BufferFull);
         }
-        
+
         Ok(())
     }
-    
+
     // 计算平均温度
     pub fn average_temperature(&self) -> Option<f32> {
         if self.temperature_buffer.is_empty() {
             return None;
         }
-        
+
         let sum: f32 = self.temperature_buffer.iter().sum();
         Some(sum / self.temperature_buffer.len() as f32)
     }
-    
+
     // 清除缓冲区
     pub fn clear(&mut self) {
         self.temperature_buffer.clear();
@@ -1660,44 +1660,44 @@ impl FlashPageBuffer {
             page_address,
         }
     }
-    
+
     // 从闪存加载页
     pub fn load_from_flash(&mut self, flash: &mut dyn Flash) -> Result<(), FlashError> {
         flash.read(self.page_address, &mut self.buffer)?;
         self.dirty = false;
         Ok(())
     }
-    
+
     // 写入数据到缓冲区
     pub fn write(&mut self, data: &[u8]) -> Result<(), FlashError> {
         if self.current_position + data.len() > self.buffer.len() {
             return Err(FlashError::BufferFull);
         }
-        
+
         // 复制数据到缓冲区
         self.buffer[self.current_position..self.current_position + data.len()]
             .copy_from_slice(data);
-            
+
         self.current_position += data.len();
         self.dirty = true;
-        
+
         Ok(())
     }
-    
+
     // 刷新缓冲区到闪存
     pub fn flush(&mut self, flash: &mut dyn Flash) -> Result<(), FlashError> {
         if !self.dirty {
             return Ok(());
         }
-        
+
         // 擦除页
         flash.erase_page(self.page_address)?;
-        
+
         // 写入数据
         flash.write(self.page_address, &self.buffer[0..self.current_position])?;
-        
+
         self.dirty = false;
-        
+
         Ok(())
     }
 }
@@ -1725,41 +1725,41 @@ impl<'a> BatteryOptimizedScheduler<'a> {
             low_power_threshold: 20,
         }
     }
-    
+
     // 添加任务
     pub fn add_task(&mut self, task: Task<'a>) -> Result<(), SchedulerError> {
         if self.tasks.push(task).is_err() {
             return Err(SchedulerError::TooManyTasks);
         }
-        
+
         Ok(())
     }
-    
+
     // 运行调度器
     pub fn run(&mut self) {
         loop {
             // 获取电池电量
             let battery_level = self.battery_monitor.get_level().unwrap_or(0);
-            
+
             // 确定运行模式
             let mode = if battery_level <= self.low_power_threshold {
                 RunMode::LowPower
             } else {
                 RunMode::Normal
             };
-            
+
             // 执行任务
             for task in &mut self.tasks {
                 // 在低功耗模式下只运行关键任务
                 if mode == RunMode::LowPower && !task.is_critical {
                     continue;
                 }
-                
+
                 if task.should_run() {
                     task.run();
                 }
             }
-            
+
             // 在低功耗模式下延长睡眠时间
             match mode {
                 RunMode::Normal => sleep_ms(100),
@@ -1795,13 +1795,13 @@ impl<'a> Task<'a> {
             is_critical,
         }
     }
-    
+
     // 检查是否应该运行任务
     fn should_run(&self) -> bool {
         let now = system_time_ms();
         now - self.last_run >= self.interval_ms
     }
-    
+
     // 运行任务
     fn run(&mut self) {
         (self.function)();
@@ -1837,20 +1837,20 @@ impl SecureBootVerifier {
     pub fn new(public_key: [u8; 32], flash: &'static mut dyn Flash) -> Self {
         Self { public_key, flash }
     }
-    
+
     // 验证固件
     pub fn verify_firmware(&self, address: u32, size: u32) -> Result<(), BootError> {
         // 读取固件签名
         let mut signature = [0u8; 64];
         self.flash.read(address + size, &mut signature)?;
-        
+
         // 读取固件数据
         let mut firmware_data = Vec::<u8, U4096>::new();
         for offset in (0..size).step_by(1024) {
             let mut chunk = [0u8; 1024];
             let chunk_size = core::cmp::min(1024, size - offset);
             self.flash.read(address + offset, &mut chunk[0..chunk_size as usize])?;
-            
+
             // 添加到验证缓冲区
             for i in 0..chunk_size as usize {
                 if firmware_data.push(chunk[i]).is_err() {
@@ -1858,23 +1858,23 @@ impl SecureBootVerifier {
                 }
             }
         }
-        
+
         // 验证签名
         if !ed25519::verify(&signature, &firmware_data, &self.public_key) {
             return Err(BootError::SignatureVerificationFailed);
         }
-        
+
         Ok(())
     }
-    
+
     // 执行安全启动过程
     pub fn perform_secure_boot(&self) -> Result<(), BootError> {
         // 验证引导加载程序
         self.verify_firmware(BOOTLOADER_ADDRESS, BOOTLOADER_SIZE)?;
-        
+
         // 验证主应用固件
         self.verify_firmware(FIRMWARE_ADDRESS, FIRMWARE_SIZE)?;
-        
+
         // 验证成功，允许启动
         Ok(())
     }
@@ -1897,52 +1897,52 @@ impl<T: Transport> SecureTlsChannel<T> {
         let mut config = TlsConfig::new()?;
         config.set_ca_certificates(ca_certs)?;
         config.set_verify_hostname(true);
-        
+
         // 创建TLS会话
         let session = TlsSession::new(&config, server_name)?;
-        
+
         Ok(Self {
             transport,
             session,
         })
     }
-    
+
     // 发送数据
     pub fn send(&mut self, data: &[u8]) -> Result<usize, TlsError> {
         // 加密数据
         let encrypted_data = self.session.encrypt(data)?;
-        
+
         // 通过底层传输发送
         self.transport.send(&encrypted_data)
             .map_err(|e| TlsError::TransportError(e))
     }
-    
+
     // 接收数据
     pub fn receive(&mut self, buffer: &mut [u8]) -> Result<usize, TlsError> {
         // 从底层传输接收
         let mut encrypted_buffer = [0u8; 1024];
         let received_size = self.transport.receive(&mut encrypted_buffer)
             .map_err(|e| TlsError::TransportError(e))?;
-        
+
         // 解密数据
         let decrypted_size = self.session.decrypt(
             &encrypted_buffer[..received_size],
             buffer
         )?;
-        
+
         Ok(decrypted_size)
     }
-    
+
     // 关闭通道
     pub fn close(&mut self) -> Result<(), TlsError> {
         // 发送TLS关闭消息
         let close_msg = self.session.close()?;
-        
+
         if !close_msg.is_empty() {
             self.transport.send(&close_msg)
                 .map_err(|e| TlsError::TransportError(e))?;
         }
-        
+
         // 关闭底层传输
         self.transport.close()
             .map_err(|e| TlsError::TransportError(e))
@@ -1967,38 +1967,38 @@ impl EncryptedStorage {
             encryption_key,
         }
     }
-    
+
     // 加密并存储数据
     pub fn store(&mut self, address: u32, data: &[u8]) -> Result<(), StorageError> {
         // 创建初始化向量
         let mut iv = [0u8; 16];
         getrandom::getrandom(&mut iv).map_err(|_| StorageError::RandomError)?;
-        
+
         // 加密数据
         let mut encrypted_data = Vec::<u8, U1024>::new();
-        
+
         // 存储IV
         for &byte in &iv {
             encrypted_data.push(byte).map_err(|_| StorageError::BufferTooSmall)?;
         }
-        
+
         // 加密并添加实际数据
         let cipher = ChaCha20Poly1305::new(&self.encryption_key.into());
         let tag = cipher.encrypt_in_place(&iv.into(), &[], data, &mut encrypted_data)
             .map_err(|_| StorageError::EncryptionError)?;
-        
+
         // 添加认证标签
         for &byte in tag.as_ref() {
             encrypted_data.push(byte).map_err(|_| StorageError::BufferTooSmall)?;
         }
-        
+
         // 存储到闪存
         self.flash.erase_sector(address)?;
         self.flash.write(address, &encrypted_data)?;
-        
+
         Ok(())
     }
-    
+
     // 读取并解密数据
     pub fn load(&mut self, address: u32, buffer: &mut [u8]) -> Result<usize, StorageError> {
         // 确定读取大小
@@ -2006,41 +2006,41 @@ impl EncryptedStorage {
         if encrypted_size < 16 + 16 { // IV + 最小标签大小
             return Err(StorageError::InvalidData);
         }
-        
+
         // 读取加密数据
         let mut encrypted_data = Vec::<u8, U1024>::new();
         let mut temp_buffer = [0u8; 64];
-        
+
         for offset in (0..encrypted_size).step_by(64) {
             let chunk_size = core::cmp::min(64, encrypted_size - offset);
             self.flash.read(address + offset, &mut temp_buffer[..chunk_size as usize])?;
-            
+
             for i in 0..chunk_size as usize {
                 encrypted_data.push(temp_buffer[i])
                     .map_err(|_| StorageError::BufferTooSmall)?;
             }
         }
-        
+
         // 提取IV (前16字节)
         let iv = &encrypted_data[..16];
-        
+
         // 提取标签 (最后16字节)
         let tag_start = encrypted_data.len() - 16;
         let tag = &encrypted_data[tag_start..];
-        
+
         // 提取加密数据
         let cipher_data = &encrypted_data[16..tag_start];
-        
+
         // 解密数据
         let cipher = ChaCha20Poly1305::new(&self.encryption_key.into());
         let decrypted_size = cipher.decrypt_in_place(
-            &iv.into(), 
+            &iv.into(),
             &[],
             cipher_data,
             Tag::from_slice(tag).ok_or(StorageError::InvalidData)?,
             buffer
         ).map_err(|_| StorageError::DecryptionError)?;
-        
+
         Ok(decrypted_size)
     }
 }
@@ -2058,19 +2058,19 @@ impl EncryptedStorage {
 // 反模式：在资源受限环境中使用动态分配
 fn collect_sensor_data_bad() -> Vec<f32> {
     let mut data = Vec::new(); // 在堆上动态分配，可能导致内存不足
-    
+
     for _ in 0..10 {
         let temp = read_temperature_sensor();
         data.push(temp);
     }
-    
+
     data
 }
 
 // 正确模式：使用静态分配
 fn collect_sensor_data_good() -> heapless::Vec<f32, U16> {
     let mut data = heapless::Vec::new();
-    
+
     for _ in 0..10 {
         let temp = read_temperature_sensor();
         // 处理潜在错误
@@ -2079,7 +2079,7 @@ fn collect_sensor_data_good() -> heapless::Vec<f32, U16> {
             break;
         }
     }
-    
+
     data
 }
 ```
@@ -2110,12 +2110,12 @@ fn main_loop() {
         if INTERRUPT_FLAG.load(Ordering::SeqCst) {
             // 重置标志
             INTERRUPT_FLAG.store(false, Ordering::SeqCst);
-            
+
             // 现在可以进行耗时操作
             let data = read_sensor_with_delay();
             store_data(data);
         }
-        
+
         // 其他任务...
     }
 }
@@ -2137,24 +2137,24 @@ fn update_firmware_good(data: &[u8]) -> Result<(), FlashError> {
     // 备份当前固件
     let mut backup_buffer = [0u8; 1024];
     let size = flash.read(FIRMWARE_ADDR, &mut backup_buffer)?;
-    
+
     // 先尝试擦除
     flash.erase(FIRMWARE_ADDR)?;
-    
+
     // 写入新固件
     match flash.write(FIRMWARE_ADDR, data) {
         Ok(_) => {
             // 验证写入
             let mut verify_buffer = [0u8; 1024];
             flash.read(FIRMWARE_ADDR, &mut verify_buffer)?;
-            
+
             if !data.iter().zip(verify_buffer.iter()).all(|(a, b)| a == b) {
                 // 验证失败，还原备份
                 flash.erase(FIRMWARE_ADDR)?;
                 flash.write(FIRMWARE_ADDR, &backup_buffer[..size])?;
                 return Err(FlashError::VerificationFailed);
             }
-            
+
             Ok(())
         },
         Err(e) => {
@@ -2185,7 +2185,7 @@ fn encrypt_data_good(data: &[u8], secure_storage: &mut dyn SecureStorage) -> Res
     // 从安全存储读取密钥
     let mut key = [0u8; 16];
     secure_storage.read_key("encryption_key", &mut key)?;
-    
+
     // 使用检索到的密钥
     let cipher = Aes128::new(GenericArray::from_slice(&key));
     // ...加密逻辑...
@@ -2238,15 +2238,15 @@ fn hot_function(data: &[u8]) -> u32 {
 async fn main(spawner: Spawner) {
     // 初始化外设
     let p = embassy_stm32::init(Default::default());
-    
+
     // 配置网络
     let eth_device = setup_ethernet(p.ETH, p.PA1, p.PA2, p.PC1);
     let config = embassy_net::Config::dhcp();
     let net_stack = setup_network(eth_device, config);
-    
+
     // 生成网络任务
     spawner.spawn(net_worker(net_stack.clone())).unwrap();
-    
+
     // 生成MQTT客户端任务
     let mqtt_config = MqttConfig {
         client_id: "smart_home_controller",
@@ -2254,11 +2254,11 @@ async fn main(spawner: Spawner) {
         broker_port: 1883,
     };
     spawner.spawn(mqtt_client(net_stack.clone(), mqtt_config)).unwrap();
-    
+
     // 生成温度监控任务
     let temp_sensor = setup_temperature_sensor(p.I2C1, p.PB6, p.PB7);
     spawner.spawn(temperature_monitor(temp_sensor, net_stack.clone())).unwrap();
-    
+
     // 生成灯光控制任务
     let light_control = setup_light_control(p.PA8, p.PC7, p.PD5);
     spawner.spawn(light_controller(light_control, net_stack)).unwrap();
@@ -2271,7 +2271,7 @@ async fn temperature_monitor(
     net_stack: &'static NetworkStack
 ) {
     let mqtt = MqttClient::new(net_stack);
-    
+
     loop {
         // 读取温度
         match sensor.read().await {
@@ -2279,7 +2279,7 @@ async fn temperature_monitor(
                 // 创建JSON数据负载
                 let mut json_buffer = heapless::String::<128>::new();
                 write!(json_buffer, "{{\"temperature\":{:.1}}}", temperature).unwrap();
-                
+
                 // 发布到MQTT主题
                 if let Err(e) = mqtt.publish(
                     "home/sensors/temperature",
@@ -2293,7 +2293,7 @@ async fn temperature_monitor(
                 log::error!("温度传感器读取错误: {:?}", e);
             }
         }
-        
+
         // 等待30秒
         Timer::after_secs(30).await;
     }
@@ -2306,15 +2306,15 @@ async fn light_controller(
     net_stack: &'static NetworkStack
 ) {
     let mqtt = MqttClient::new(net_stack);
-    
+
     // 订阅灯光控制主题
     mqtt.subscribe("home/lights/+/command", QoS::AtLeastOnce).await.unwrap();
-    
+
     // 处理传入的MQTT消息
     while let Some(message) = mqtt.receive().await {
         // 解析主题
         let topic = message.topic;
-        
+
         // 提取灯光ID
         if let Some(light_id) = extract_light_id(topic) {
             // 解析命令
@@ -2358,39 +2358,39 @@ fn extract_light_id(topic: &str) -> Option<u8> {
 async fn main() -> Result<(), Box<dyn Error>> {
     // 初始化日志
     env_logger::init();
-    
+
     // 加载配置
     let config = Config::from_file("config.toml")?;
-    
+
     // 初始化GPS设备
     let mut gps = GpsDevice::new(&config.gps.port)?;
-    
+
     // 初始化LoRaWAN设备
     let lora = LoraWanDevice::new(
         &config.lora.device_eui,
         &config.lora.app_eui,
         &config.lora.app_key,
     )?;
-    
+
     // 创建Drogue IoT客户端
     let drogue = DrogueClient::new(
         &config.drogue.endpoint,
         &config.drogue.device_id,
         &config.drogue.password,
     )?;
-    
+
     // 连接LoRaWAN网络
     log::info!("连接LoRaWAN网络...");
     lora.connect().await?;
     log::info!("LoRaWAN连接成功!");
-    
+
     // 主循环
     loop {
         // 读取GPS位置
         match gps.read_location().await {
             Ok(location) => {
                 log::info!("获取GPS位置: {}, {}", location.latitude, location.longitude);
-                
+
                 // 创建遥测数据
                 let telemetry = json!({
                     "location": {
@@ -2405,7 +2405,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
                         "temperature": gps.temperature()?,
                     }
                 });
-                
+
                 // 发送遥测数据
                 match drogue.publish_telemetry("location", &telemetry).await {
                     Ok(_) => log::info!("遥测数据发送成功"),
@@ -2416,7 +2416,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 log::error!("GPS读取错误: {:?}", e);
             }
         }
-        
+
         // 等待下一次更新
         tokio::time::sleep(Duration::from_secs(config.update_interval)).await;
     }
@@ -2433,34 +2433,34 @@ impl AssetLocationProcessor {
     fn new(db_path: &str) -> Result<Self, Box<dyn Error>> {
         // 连接数据库
         let db = SqliteConnection::connect(db_path)?;
-        
+
         // 加载地理围栏
         let geofences = Self::load_geofences(&db)?;
-        
+
         Ok(Self { db, geofences })
     }
-    
+
     // 处理传入的位置更新
     async fn process_location(&self, device_id: &str, location: &Location) -> Result<(), Box<dyn Error>> {
         // 存储位置历史
         self.store_location(device_id, location).await?;
-        
+
         // 检查地理围栏违反
         let violations = self.check_geofence_violations(device_id, location);
-        
+
         // 处理违反
         for violation in violations {
             self.handle_geofence_violation(device_id, &violation).await?;
         }
-        
+
         Ok(())
     }
-    
+
     // 存储位置历史
     async fn store_location(&self, device_id: &str, location: &Location) -> Result<(), Box<dyn Error>> {
         // 插入位置记录
         sqlx::query!(
-            "INSERT INTO location_history (device_id, latitude, longitude, altitude, speed, timestamp) 
+            "INSERT INTO location_history (device_id, latitude, longitude, altitude, speed, timestamp)
              VALUES (?, ?, ?, ?, ?, ?)",
             device_id,
             location.latitude,
@@ -2471,14 +2471,14 @@ impl AssetLocationProcessor {
         )
         .execute(&self.db)
         .await?;
-        
+
         Ok(())
     }
-    
+
     // 检查地理围栏违反
     fn check_geofence_violations(&self, device_id: &str, location: &Location) -> Vec<GeofenceViolation> {
         let mut violations = Vec::new();
-        
+
         for geofence in &self.geofences {
             if geofence.applies_to_device(device_id) {
                 if !geofence.contains(location) {
@@ -2490,15 +2490,15 @@ impl AssetLocationProcessor {
                 }
             }
         }
-        
+
         violations
     }
-    
+
     // 处理地理围栏违反
     async fn handle_geofence_violation(&self, device_id: &str, violation: &GeofenceViolation) -> Result<(), Box<dyn Error>> {
         // 记录违反
         sqlx::query!(
-            "INSERT INTO geofence_violations (device_id, geofence_id, latitude, longitude, timestamp) 
+            "INSERT INTO geofence_violations (device_id, geofence_id, latitude, longitude, timestamp)
              VALUES (?, ?, ?, ?, ?)",
             device_id,
             violation.geofence_id,
@@ -2508,20 +2508,20 @@ impl AssetLocationProcessor {
         )
         .execute(&self.db)
         .await?;
-        
+
         // 发送违反通知
         self.send_violation_alert(device_id, violation).await?;
-        
+
         Ok(())
     }
-    
+
     // 发送违反警报
     async fn send_violation_alert(&self, device_id: &str, violation: &GeofenceViolation) -> Result<(), Box<dyn Error>> {
         // 查找地理围栏信息
         let geofence = self.geofences.iter()
             .find(|g| g.id == violation.geofence_id)
             .ok_or("地理围栏未找到")?;
-        
+
         // 创建警报消息
         let alert = json!({
             "type": "geofence_violation",
@@ -2536,14 +2536,14 @@ impl AssetLocationProcessor {
             },
             "timestamp": violation.timestamp,
         });
-        
+
         // 发送警报
         let client = reqwest::Client::new();
         client.post(&format!("{}/alerts", config.alert_endpoint))
             .json(&alert)
             .send()
             .await?;
-        
+
         Ok(())
     }
 }
@@ -2567,7 +2567,7 @@ async fn main() -> ! {
     // 初始化控制台
     Console::initialize();
     Console::debug("启动LoRaWAN节点应用");
-    
+
     // 初始化LoRa
     match LoRa::initialize() {
         Ok(_) => Console::debug("LoRa初始化成功"),
@@ -2576,7 +2576,7 @@ async fn main() -> ! {
             return;
         }
     }
-    
+
     // 连接到LoRaWAN网络
     match LoRa::join_otaa(DEVEUI, APPEUI, APPKEY) {
         Ok(_) => Console::debug("LoRaWAN连接成功"),
@@ -2585,7 +2585,7 @@ async fn main() -> ! {
             return;
         }
     }
-    
+
     // 主循环
     loop {
         // 读取温度
@@ -2596,7 +2596,7 @@ async fn main() -> ! {
                 0.0
             }
         };
-        
+
         // 读取电池电量
         let battery = match Sensors::read_battery() {
             Ok(b) => b,
@@ -2605,27 +2605,27 @@ async fn main() -> ! {
                 0
             }
         };
-        
+
         // 准备数据包
         let mut payload = [0u8; 8];
-        
+
         // 编码温度 (固定点格式)
         let temp_fixed = (temp * 100.0) as i16;
         payload[0] = (temp_fixed >> 8) as u8;
         payload[1] = temp_fixed as u8;
-        
+
         // 编码电池电量
         payload[2] = battery as u8;
-        
+
         // 发送LoRaWAN数据包
         match LoRa::send(&payload, 1, false) {
             Ok(_) => Console::debug("LoRaWAN数据包发送成功"),
             Err(e) => Console::debug(&format!("LoRaWAN发送失败: {:?}", e)),
         }
-        
+
         // 等待接收窗口
         Timer::sleep(3000); // 3秒
-        
+
         // 检查下行链路消息
         if let Ok(true) = LoRa::has_received() {
             let mut buffer = [0u8; 64];
@@ -2637,7 +2637,7 @@ async fn main() -> ! {
                 Err(e) => Console::debug(&format!("下行链路接收失败: {:?}", e)),
             }
         }
-        
+
         // 等待下一个发送周期
         Timer::sleep(60000); // 60秒
     }
@@ -2648,7 +2648,7 @@ fn process_downlink(data: &[u8]) {
     if data.len() < 1 {
         return;
     }
-    
+
     match data[0] {
         // 设置采样率命令
         0x01 => {
@@ -2658,13 +2658,13 @@ fn process_downlink(data: &[u8]) {
                 // 应用新设置...
             }
         },
-        
+
         // 请求数据命令
         0x02 => {
             Console::debug("收到数据请求，将立即发送数据");
             // 立即发送数据...
         },
-        
+
         // 未知命令
         _ => {
             Console::debug(&format!("未知命令: 0x{:02x}", data[0]));
@@ -2754,17 +2754,17 @@ impl VendorDriver {
         }
         Ok(Self { handle })
     }
-    
+
     pub fn read_sensor(&mut self) -> Result<f32, DriverError> {
         let mut value: f32 = 0.0;
         let result = unsafe {
             sys::driver_read_sensor(self.handle, &mut value)
         };
-        
+
         if result != 0 {
             return Err(DriverError::ReadFailed(result));
         }
-        
+
         Ok(value)
     }
 }
@@ -2822,7 +2822,7 @@ async fn sensor_task(mut sensor: I2cSensor<'static>) {
                 // 错误处理
             }
         }
-        
+
         Timer::after_millis(1000).await;
     }
 }
@@ -2841,7 +2841,7 @@ enum ReadState {
 
 impl<'a, T: I2cDevice> Future for ReadFuture<'a, T> {
     type Output = Result<SensorData, SensorError>;
-    
+
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         match self.state {
             ReadState::Idle => {
@@ -2849,7 +2849,7 @@ impl<'a, T: I2cDevice> Future for ReadFuture<'a, T> {
                 if let Err(e) = self.sensor.start_reading() {
                     return Poll::Ready(Err(e));
                 }
-                
+
                 self.state = ReadState::WaitingForReading;
                 cx.waker().wake_by_ref();
                 Poll::Pending
@@ -2895,19 +2895,19 @@ Rust IoT生态系统的关键发展趋势包括：
 async fn iot_application(spawner: Spawner) {
     // 自动生成的设备支持
     let p = embassy_stm32::init(Default::default());
-    
+
     // 自动检测和配置传感器
     let sensors = SensorManager::detect_and_configure([
         p.I2C1,
         p.I2C2,
         p.SPI1,
     ]).await?;
-    
+
     // 提供统一的传感器访问API
     for sensor in sensors {
         spawner.spawn(sensor_task(sensor)).unwrap();
     }
-    
+
     // 声明式网络配置
     let net = NetworkManager::configure(p.ETH, Config {
         mode: NetworkMode::Mqtt {
@@ -2921,7 +2921,7 @@ async fn iot_application(spawner: Spawner) {
             device_key: include_bytes!("certs/device.key"),
         },
     }).await?;
-    
+
     spawner.spawn(network_task(net)).unwrap();
 }
 ```
@@ -2943,7 +2943,7 @@ pub struct TemperatureControl {
     current_temp: f32,
     target_temp: f32,
     heater_on: bool,
-    
+
     // 建模规范
     #[invariant(self.current_temp >= 0.0, "温度不能为负")]
     #[invariant(self.target_temp >= 10.0 && self.target_temp <= 30.0, "目标温度必须在合理范围内")]
@@ -2952,7 +2952,7 @@ pub struct TemperatureControl {
 impl TemperatureControl {
     // 形式化验证的状态转换
     #[transition]
-    #[ensures(old(self.current_temp) < self.target_temp ==> self.heater_on == true, 
+    #[ensures(old(self.current_temp) < self.target_temp ==> self.heater_on == true,
               "当当前温度低于目标温度时，加热器应该开启")]
     #[ensures(old(self.current_temp) >= self.target_temp ==> self.heater_on == false,
               "当当前温度高于或等于目标温度时，加热器应该关闭")]
@@ -2960,7 +2960,7 @@ impl TemperatureControl {
         self.current_temp = new_temp;
         self.heater_on = self.current_temp < self.target_temp;
     }
-    
+
     // 形式化验证的设置操作
     #[transition]
     #[requires(new_target >= 10.0 && new_target <= 30.0, "目标温度必须在允许范围内")]
@@ -2974,18 +2974,18 @@ impl TemperatureControl {
 #[verify]
 fn verify_secure_boot_sequence() {
     let mut boot = SecureBoot::new();
-    
+
     // 验证所有可能的路径
     symbolic_execute!(|| {
         // 1. 验证启动加载程序
         let bootloader_valid = symbolic_bool!();
-        
+
         // 2. 验证固件签名
         let firmware_valid = symbolic_bool!();
-        
+
         // 执行启动序列
         let result = boot.perform_boot(bootloader_valid, firmware_valid);
-        
+
         // 验证属性
         verify!(bootloader_valid && firmware_valid ==> result.is_ok());
         verify!(!bootloader_valid ==> result.is_err());
@@ -3011,16 +3011,16 @@ fn sensor_loop() -> ! {
     loop {
         // 1. 唤醒传感器
         let sensor = Sensor::power_on().await;
-        
+
         // 2. 快速读取
         let reading = sensor.quick_read().await;
-        
+
         // 3. 立即关闭传感器
         sensor.power_off().await;
-        
+
         // 4. 处理和存储数据
         process_reading(reading);
-        
+
         // 5. 进入深度睡眠模式
         enter_deep_sleep_until_next_cycle();
     }
@@ -3041,7 +3041,7 @@ struct MqttSnClient {
 struct AnomalyDetector {
     #[input]
     sensor_data: [f32; 10],
-    
+
     #[output]
     anomaly_score: f32,
 }
@@ -3049,9 +3049,9 @@ struct AnomalyDetector {
 fn detect_anomalies(readings: &[f32; 10]) -> bool {
     let mut detector = AnomalyDetector::new().unwrap();
     detector.sensor_data.copy_from_slice(readings);
-    
+
     detector.invoke().unwrap();
-    
+
     detector.anomaly_score > 0.8
 }
 ```

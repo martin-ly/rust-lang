@@ -1,9 +1,9 @@
 # Module 17: Rust 物联网系统 {#module-17-iot}
 
-**Document Version**: V2.0  
-**Module Status**: Active Development  
-**Last Updated**: 2025-01-01  
-**Maintainer**: Rust Language Team  
+**Document Version**: V2.0
+**Module Status**: Active Development
+**Last Updated**: 2025-01-01
+**Maintainer**: Rust Language Team
 
 ## 元数据 {#metadata}
 
@@ -241,7 +241,7 @@ IoT系统架构
 
 ### 5.1 形式化IoT系统模型
 
-**定义 17.1 (IoT系统)**  
+**定义 17.1 (IoT系统)**
 物联网系统 $\mathcal{I}$ 形式化定义为七元组：
 
 $$\mathcal{I} = (D, S, A, N, P, C, E)$$
@@ -249,19 +249,19 @@ $$\mathcal{I} = (D, S, A, N, P, C, E)$$
 其中：
 
 - $D = \{d_1, d_2, \ldots, d_n\}$ 是设备集合
-- $S = \{s_1, s_2, \ldots, s_m\}$ 是传感器集合  
+- $S = \{s_1, s_2, \ldots, s_m\}$ 是传感器集合
 - $A = \{a_1, a_2, \ldots, a_k\}$ 是执行器集合
 - $N = (V, E)$ 是网络拓扑图
 - $P$ 是协议栈集合
 - $C$ 是通信模型
 - $E$ 是环境上下文
 
-**定理 17.1 (IoT系统连通性)**  
+**定理 17.1 (IoT系统连通性)**
 对于IoT系统 $\mathcal{I}$，存在有效通信路径当且仅当网络图 $N$ 是连通的：
 
 $$\forall d_i, d_j \in D : \text{reachable}(d_i, d_j) \iff \text{connected}(N)$$
 
-**定理 17.2 (实时性保证)**  
+**定理 17.2 (实时性保证)**
 IoT系统满足实时性要求当且仅当所有关键任务的响应时间满足约束：
 
 $$\forall t \in T_{\text{critical}} : R(t) \leq D(t)$$
@@ -270,7 +270,7 @@ $$\forall t \in T_{\text{critical}} : R(t) \leq D(t)$$
 
 ### 5.2 嵌入式系统理论
 
-**定义 17.2 (嵌入式系统)**  
+**定义 17.2 (嵌入式系统)**
 嵌入式系统 $\mathcal{E}$ 定义为：
 
 $$\mathcal{E} = (H, S, T, R, C)$$
@@ -283,14 +283,14 @@ $$\mathcal{E} = (H, S, T, R, C)$$
 - $R$ 是资源约束
 - $C$ 是控制逻辑
 
-**定理 17.3 (资源约束满足)**  
+**定理 17.3 (资源约束满足)**
 嵌入式系统可调度当且仅当所有任务的资源需求在约束范围内：
 
 $$\sum_{t \in T} \text{usage}(t, r) \leq \text{capacity}(r) \quad \forall r \in R$$
 
 ### 5.3 通信协议理论
 
-**定义 17.3 (IoT通信协议)**  
+**定义 17.3 (IoT通信协议)**
 IoT通信协议 $\Pi$ 定义为状态机：
 
 $$\Pi = (Q, \Sigma, \delta, q_0, F)$$
@@ -512,7 +512,7 @@ fn main() -> ! {
 
 ---
 
-**文档历史**:  
+**文档历史**:
 
 - 创建: 2025-07-21 - 初始版本
 - 更新: 2025-01-01 - V2.0版本，大幅扩展内容，建立完整理论框架

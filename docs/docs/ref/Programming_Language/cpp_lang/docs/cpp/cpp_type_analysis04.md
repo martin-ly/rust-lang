@@ -601,10 +601,10 @@ int compute_value() {
 void async_example() {
     // 启动异步任务
     std::future<int> result = std::async(std::launch::async, compute_value);
-    
+
     // 做其他工作
     std::cout << "等待计算结果...\n";
-    
+
     // 获取结果（如果尚未完成会阻塞）
     int value = result.get();
     std::cout << "结果: " << value << "\n";
@@ -651,9 +651,9 @@ void bubble_sort(int arr[], int n) {
 void verify_sort() {
     int arr[] = {5, 2, 9, 1, 5, 6};
     int n = sizeof(arr) / sizeof(arr[0]);
-    
+
     bubble_sort(arr, n);
-    
+
     // 验证排序结果
     for (int i = 0; i < n - 1; i++) {
         assert(arr[i] <= arr[i+1]); // 形式化验证排序正确性
@@ -868,28 +868,28 @@ func_ref(ri); // T推导为const int
 class BankAccount {
 private:
     double balance;  // 私有状态
-    
+
     // 不变量：balance >= 0
     void validateTransaction(double amount) {
         if (balance + amount < 0) {
             throw std::invalid_argument("Insufficient funds");
         }
     }
-    
+
 public:
     BankAccount(double initialBalance = 0) : balance(initialBalance) {
         if (initialBalance < 0) {
             throw std::invalid_argument("Initial balance cannot be negative");
         }
     }
-    
+
     void deposit(double amount) {
         if (amount <= 0) {
             throw std::invalid_argument("Deposit amount must be positive");
         }
         balance += amount;
     }
-    
+
     void withdraw(double amount) {
         if (amount <= 0) {
             throw std::invalid_argument("Withdrawal amount must be positive");
@@ -897,7 +897,7 @@ public:
         validateTransaction(-amount);
         balance -= amount;
     }
-    
+
     double getBalance() const {
         return balance;
     }
@@ -940,14 +940,14 @@ public:
 class Circle : public Shape {
 private:
     double radius;
-    
+
 public:
     Circle(double r) : radius(r) {}
-    
+
     double area() const override {
         return 3.14159 * radius * radius;
     }
-    
+
     void draw() const override {
         std::cout << "Drawing a circle with radius " << radius << "\n";
     }
@@ -956,14 +956,14 @@ public:
 class Rectangle : public Shape {
 private:
     double width, height;
-    
+
 public:
     Rectangle(double w, double h) : width(w), height(h) {}
-    
+
     double area() const override {
         return width * height;
     }
-    
+
     void draw() const override {
         std::cout << "Drawing a rectangle " << width << "x" << height << "\n";
     }
@@ -978,7 +978,7 @@ void printArea(const Shape& shape) {
 int main() {
     Circle c(5);
     Rectangle r(4, 6);
-    
+
     printArea(c);  // 通过Shape引用调用Circle实现
     printArea(r);  // 通过Shape引用调用Rectangle实现
 }
@@ -1018,20 +1018,20 @@ class Car {
 private:
     Engine engine;  // 组合：引擎是汽车的组成部分
     std::vector<Wheel> wheels;  // 组合：轮子是汽车的组成部分
-    
+
 public:
     Car() : wheels(4) {}  // 创建4个轮子
-    
+
     void start() {
         engine.start();
         std::cout << "Car started\n";
     }
-    
+
     void stop() {
         engine.stop();
         std::cout << "Car stopped\n";
     }
-    
+
     void inflateTires(int pressure) {
         for (auto& wheel : wheels) {
             wheel.inflate(pressure);
@@ -1044,14 +1044,14 @@ class Driver {
 private:
     std::string name;
     Car* car;  // 聚合：驾驶员使用汽车，但不拥有它
-    
+
 public:
     Driver(const std::string& n) : name(n), car(nullptr) {}
-    
+
     void setCar(Car* c) {
         car = c;
     }
-    
+
     void drive() {
         if (car) {
             std::cout << name << " is driving the car\n";
@@ -1112,7 +1112,7 @@ private:
     std::string filename;
 public:
     FileLogger(const std::string& file) : filename(file) {}
-    
+
     void log(const std::string& message) override {
         // 将日志写入文件
         std::cout << "Writing to " << filename << ": " << message << std::endl;
@@ -1123,10 +1123,10 @@ public:
 class UserManager {
 private:
     Logger& logger;  // 依赖抽象，非具体实现
-    
+
 public:
     UserManager(Logger& log) : logger(log) {}
-    
+
     void createUser(const std::string& username) {
         // 创建用户逻辑...
         logger.log("Created user: " + username);
@@ -1205,7 +1205,7 @@ void memory_issues() {
     // 内存泄漏
     int* leak = new int(42);
     // 缺少 delete leak;
-    
+
     // 悬空指针
     int* dangling;
     {
@@ -1213,12 +1213,12 @@ void memory_issues() {
         dangling = &x;  // x离开作用域后指针悬空
     }
     // *dangling = 20;  // 未定义行为
-    
+
     // 缓冲区溢出
     int* buffer = new int[5];
     // buffer[10] = 0;  // 越界访问
     delete[] buffer;
-    
+
     // 双重释放
     int* doubleFree = new int(5);
     delete doubleFree;
@@ -1262,12 +1262,12 @@ void ownership_example() {
     // 独占所有权
     std::unique_ptr<Resource> uniq = std::make_unique<Resource>();
     uniq->use();
-    
+
     // 所有权转移
     std::unique_ptr<Resource> uniq2 = std::move(uniq);
     // uniq->use();  // 错误：uniq现在是空指针
     uniq2->use();
-    
+
     // 共享所有权
     std::shared_ptr<Resource> shared1 = std::make_shared<Resource>();
     {
@@ -1276,16 +1276,16 @@ void ownership_example() {
         // 离开作用域，shared2销毁，引用计数减少
     }
     std::cout << "Ref count: " << shared1.use_count() << std::endl;
-    
+
     // 弱引用
     std::weak_ptr<Resource> weak = shared1;
     std::cout << "Is expired? " << weak.expired() << std::endl;
-    
+
     // 提升弱引用
     if (auto sp = weak.lock()) {
         sp->use();
     }
-    
+
     // 释放共享指针
     shared1.reset();
     std::cout << "Is expired? " << weak.expired() << std::endl;
@@ -1322,7 +1322,7 @@ void ownership_example() {
 class File {
 private:
     std::fstream file;
-    
+
 public:
     File(const std::string& filename, std::ios::openmode mode)
         : file(filename, mode) {
@@ -1330,17 +1330,17 @@ public:
             throw std::runtime_error("Could not open file");
         }
     }
-    
+
     ~File() {
         if (file.is_open()) {
             file.close();
         }
     }
-    
+
     void write(const std::string& data) {
         file << data;
     }
-    
+
     std::string read() {
         std::string content;
         std::string line;
@@ -1355,16 +1355,16 @@ public:
 class LockGuard {
 private:
     std::mutex& mutex;
-    
+
 public:
     explicit LockGuard(std::mutex& m) : mutex(m) {
         mutex.lock();
     }
-    
+
     ~LockGuard() {
         mutex.unlock();
     }
-    
+
     // 禁止复制和移动
     LockGuard(const LockGuard&) = delete;
     LockGuard& operator=(const LockGuard&) = delete;
@@ -1372,7 +1372,7 @@ public:
 
 void raii_example() {
     std::mutex m;
-    
+
     try {
         // 自动锁管理
         LockGuard lock(m);  // 获取锁
@@ -1383,7 +1383,7 @@ void raii_example() {
         std::cout << "Caught exception: " << e.what() << std::endl;
         // 此时锁已经释放
     }
-    
+
     // 文件自动管理
     try {
         File logFile("log.txt", std::ios::out | std::ios::app);
@@ -1428,27 +1428,27 @@ void work(int id, int duration) {
 void thread_example() {
     // 创建线程
     std::thread t1(work, 1, 2);
-    
+
     // 创建另一个线程
     std::thread t2(work, 2, 3);
-    
+
     std::cout << "Main thread continues execution\n";
-    
+
     // 等待线程完成
     t1.join();
     std::cout << "Thread 1 joined\n";
-    
+
     // 分离线程
     t2.detach();
     std::cout << "Thread 2 detached\n";
-    
+
     // 检查线程是否可连接
     if (t1.joinable()) {
         std::cout << "T1 is still joinable\n";
     } else {
         std::cout << "T1 is not joinable\n";
     }
-    
+
     if (t2.joinable()) {
         std::cout << "T2 is still joinable\n";
     } else {
@@ -1491,7 +1491,7 @@ private:
     std::queue<T> queue;
     mutable std::mutex mutex;
     std::condition_variable cv;
-    
+
 public:
     void push(T value) {
         {
@@ -1500,7 +1500,7 @@ public:
         }
         cv.notify_one();  // 通知等待的线程
     }
-    
+
     bool try_pop(T& value) {
         std::lock_guard<std::mutex> lock(mutex);
         if (queue.empty()) {
@@ -1510,14 +1510,14 @@ public:
         queue.pop();
         return true;
     }
-    
+
     void wait_and_pop(T& value) {
         std::unique_lock<std::mutex> lock(mutex);
         cv.wait(lock, [this]{ return !queue.empty(); });
         value = std::move(queue.front());
         queue.pop();
     }
-    
+
     bool empty() const {
         std::lock_guard<std::mutex> lock(mutex);
         return queue.empty();
@@ -1526,7 +1526,7 @@ public:
 
 void thread_safe_queue_example() {
     ThreadSafeQueue<int> queue;
-    
+
     std::thread producer([&queue]{
         for (int i = 0; i < 10; ++i) {
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -1534,7 +1534,7 @@ void thread_safe_queue_example() {
             queue.push(i);
         }
     });
-    
+
     std::thread consumer([&queue]{
         for (int i = 0; i < 10; ++i) {
             int value;
@@ -1542,7 +1542,7 @@ void thread_safe_queue_example() {
             std::cout << "Consuming: " << value << std::endl;
         }
     });
-    
+
     producer.join();
     consumer.join();
 }
@@ -1583,20 +1583,20 @@ void atomic_example() {
         while (!ready.load(std::memory_order_acquire)) {
             std::this_thread::yield();
         }
-        
+
         // ready为true后，counter增加
         for (int i = 0; i < 1000; ++i) {
             counter.fetch_add(1, std::memory_order_relaxed);
         }
     });
-    
+
     // 准备工作...
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    
+
     // 设置ready标志
     ready.store(true, std::memory_order_release);
     worker.join();
-    
+
     std::cout << "Final counter: " << counter.load() << std::endl;
 }
 
@@ -1604,14 +1604,14 @@ void atomic_example() {
 class SpinLock {
 private:
     std::atomic_flag flag = ATOMIC_FLAG_INIT;
-    
+
 public:
     void lock() {
         while (flag.test_and_set(std::memory_order_acquire)) {
             // 自旋等待
         }
     }
-    
+
     void unlock() {
         flag.clear(std::memory_order_release);
     }
@@ -1648,7 +1648,7 @@ private:
     std::mutex queue_mutex;
     std::condition_variable condition;
     bool stop;
-    
+
 public:
     ThreadPool(size_t threads) : stop(false) {
         for (size_t i = 0; i < threads; ++i) {
@@ -1660,26 +1660,26 @@ public:
                         condition.wait(lock, [this]{
                             return stop || !tasks.empty();
                         });
-                        
+
                         if (stop && tasks.empty()) {
                             return;
                         }
-                        
+
                         task = std::move(tasks.front());
                         tasks.pop();
                     }
-                    
+
                     task();
                 }
             });
         }
     }
-    
+
     template<class F, class... Args>
-    auto enqueue(F&& f, Args&&... args) 
+    auto enqueue(F&& f, Args&&... args)
         -> std::future<typename std::result_of<F(Args...)>::type> {
         using return_type = typename std::result_of<F(Args...)>::type;
-        
+
         auto task = std::make_shared<std::
 
 # C++编程语言分析（续2）
@@ -1689,9 +1689,9 @@ public:
         auto task = std::make_shared<std::packaged_task<return_type()>>(
             std::bind(std::forward<F>(f), std::forward<Args>(args)...)
         );
-        
+
         std::future<return_type> result = task->get_future();
-        
+
         {
             std::unique_lock<std::mutex> lock(queue_mutex);
             if (stop) {
@@ -1699,19 +1699,19 @@ public:
             }
             tasks.emplace([task](){ (*task)(); });
         }
-        
+
         condition.notify_one();
         return result;
     }
-    
+
     ~ThreadPool() {
         {
             std::unique_lock<std::mutex> lock(queue_mutex);
             stop = true;
         }
-        
+
         condition.notify_all();
-        
+
         for (std::thread &worker : workers) {
             worker.join();
         }
@@ -1720,18 +1720,18 @@ public:
 
 void thread_pool_example() {
     ThreadPool pool(4);  // 创建4个工作线程
-    
+
     // 提交任务并获取future
     auto result1 = pool.enqueue([](int a, int b) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         return a + b;
     }, 10, 20);
-    
+
     auto result2 = pool.enqueue([](int x) {
         std::this_thread::sleep_for(std::chrono::seconds(2));
         return x * x;
     }, 5);
-    
+
     // 获取结果
     std::cout << "Result 1: " << result1.get() << std::endl;  // 输出30
     std::cout << "Result 2: " << result2.get() << std::endl;  // 输出25
@@ -1763,7 +1763,7 @@ void thread_pool_example() {
 template<typename T>
 void process_numeric(T value) {
     static_assert(std::is_arithmetic<T>::value, "需要数值类型");
-    
+
     if constexpr (std::is_integral<T>::value) {
         std::cout << "处理整数: " << value << std::endl;
     } else if constexpr (std::is_floating_point<T>::value) {
@@ -1775,9 +1775,9 @@ void process_numeric(T value) {
 template<typename T>
 void process_reference(T&& value) {
     using ValueType = typename std::remove_reference<T>::type;
-    
+
     static_assert(!std::is_pointer<ValueType>::value, "不接受指针");
-    
+
     ValueType copy = value;  // 创建副本
     std::cout << "处理值: " << copy << std::endl;
 }
@@ -1875,10 +1875,10 @@ struct Concat<TypeList<Ts1...>, TypeList<Ts2...>> {
 void template_metaprogramming_example() {
     std::cout << "5! = " << Factorial<5>::value << std::endl;  // 120
     std::cout << "Fibonacci(7) = " << Fibonacci<7>::value << std::endl;  // 13
-    
+
     using MyTypes = TypeList<int, double, std::string>;
     std::cout << "Type list length: " << Length<MyTypes>::value << std::endl;  // 3
-    
+
     using ExtendedTypes = PushFront<char, MyTypes>::type;
     std::cout << "Extended type list length: " << Length<ExtendedTypes>::value << std::endl;  // 4
 }
@@ -1992,41 +1992,41 @@ void lambda_examples() {
     // 基本语法
     auto add = [](int a, int b) -> int { return a + b; };
     std::cout << "5 + 3 = " << add(5, 3) << std::endl;
-    
+
     // 变量捕获
     int x = 10;
     auto add_x = [x](int a) { return a + x; };
     std::cout << "15 + x = " << add_x(15) << std::endl;
-    
+
     // 引用捕获
     auto increment_x = [&x] { x++; };
     increment_x();
     std::cout << "x = " << x << std::endl;  // 输出11
-    
+
     // 隐式捕获
     int y = 20;
     auto sum_vars = [=] { return x + y; };  // 隐式值捕获
     auto modify_vars = [&] { x += 5; y += 5; };  // 隐式引用捕获
-    
+
     std::cout << "Sum: " << sum_vars() << std::endl;
     modify_vars();
     std::cout << "x = " << x << ", y = " << y << std::endl;
-    
+
     // 泛型lambda（C++14）
     auto generic_add = [](auto a, auto b) { return a + b; };
     std::cout << "5 + 3 = " << generic_add(5, 3) << std::endl;
     std::cout << "3.5 + 2.5 = " << generic_add(3.5, 2.5) << std::endl;
-    
+
     // 在算法中使用
     std::vector<int> nums = {1, 2, 3, 4, 5};
     std::transform(nums.begin(), nums.end(), nums.begin(),
                    [](int n) { return n * n; });
-                   
+
     for (int n : nums) {
         std::cout << n << " ";  // 输出：1 4 9 16 25
     }
     std::cout << std::endl;
-    
+
     // 可变lambda
     int counter = 0;
     auto increment = [counter]() mutable { return ++counter; };
@@ -2082,27 +2082,27 @@ void higher_order_function_examples() {
     // 组合函数
     auto square = [](int x) { return x * x; };
     auto negate = [](int x) { return -x; };
-    
+
     int result = compose(negate, square, 5);
     std::cout << "negate(square(5)) = " << result << std::endl;  // -25
-    
+
     // 使用makeMultiplier生成新函数
     auto double_func = makeMultiplier(2);
     auto triple_func = makeMultiplier(3);
-    
+
     std::cout << "double(5) = " << double_func(5) << std::endl;  // 10
     std::cout << "triple(5) = " << triple_func(5) << std::endl;  // 15
-    
+
     // 部分应用
     std::function<int(int, int)> add = [](int a, int b) { return a + b; };
     auto add5 = std::bind(add, 5, std::placeholders::_1);
-    
+
     std::cout << "add5(10) = " << add5(10) << std::endl;  // 15
-    
+
     // 柯里化
     auto curriedAdd = curry<int, int, int>(add);
     auto add7 = curriedAdd(7);
-    
+
     std::cout << "add7(8) = " << add7(8) << std::endl;  // 15
 }
 ```
@@ -2132,7 +2132,7 @@ void higher_order_function_examples() {
 template<template<typename...> class Container, typename A, typename B, typename... Args>
 Container<B, Args...> fmap(std::function<B(A)> f, const Container<A, Args...>& container) {
     Container<B, Args...> result;
-    std::transform(container.begin(), container.end(), 
+    std::transform(container.begin(), container.end(),
                    std::back_inserter(result), f);
     return result;
 }
@@ -2157,16 +2157,16 @@ void functor_monad_examples() {
     // 函子示例
     std::vector<int> numbers = {1, 2, 3, 4, 5};
     auto square = [](int x) { return x * x; };
-    
+
     // 映射操作
     std::vector<int> squared = fmap<std::vector>(square, numbers);
-    
+
     std::cout << "Squares: ";
     for (int n : squared) {
         std::cout << n << " ";  // 1 4 9 16 25
     }
     std::cout << std::endl;
-    
+
     // 单子示例：optional
     std::function<std::optional<int>(int)> half = [](int x) -> std::optional<int> {
         if (x % 2 == 0) {
@@ -2175,7 +2175,7 @@ void functor_monad_examples() {
             return std::nullopt;
         }
     };
-    
+
     std::function<std::optional<std::string>(int)> toString = [](int x) -> std::optional<std::string> {
         if (x >= 0) {
             return std::to_string(x);
@@ -2183,12 +2183,12 @@ void functor_monad_examples() {
             return std::nullopt;
         }
     };
-    
+
     // 单子操作：链式调用
     auto result1 = mbind(mreturn(10), half);  // optional(5)
     auto result2 = mbind(mbind(mreturn(10), half), toString);  // optional("5")
     auto result3 = mbind(mbind(mreturn(9), half), toString);  // nullopt
-    
+
     std::cout << "Result 1: " << (result1 ? std::to_string(*result1) : "nullopt") << std::endl;
     std::cout << "Result 2: " << (result2 ? *result2 : "nullopt") << std::endl;
     std::cout << "Result 3: " << (result3 ? *result3 : "nullopt") << std::endl;
@@ -2227,20 +2227,20 @@ void functor_monad_examples() {
 void operation_semantics_example() {
     int x = 0;
     // {x = 0}
-    
+
     if (x == 0) {
         x = 1;
     } else {
         x = 2;
     }
     // {x = 1}
-    
+
     for (int i = 0; i < 3; i++) {
         x *= 2;
     }
     // 循环不变量：每次迭代后，x = 初始值 * 2^i
     // {x = 8}
-    
+
     std::cout << "Final x: " << x << std::endl;
 }
 ```
@@ -2289,12 +2289,12 @@ template<typename T>
 class SafeContainer<T, typename std::enable_if<std::is_copy_constructible<T>::value>::type> {
 private:
     std::vector<T> data;
-    
+
 public:
     void add(const T& item) {
         data.push_back(item);
     }
-    
+
     T get(size_t index) const {
         if (index < data.size()) {
             return data[index];
@@ -2314,7 +2314,7 @@ void type_safety_examples() {
     // 静态类型检查
     int a = 5;
     // std::string s = a;  // 编译错误：类型不兼容
-    
+
     // 动态类型检查
     try {
         std::vector<int> v = {1, 2, 3};
@@ -2322,15 +2322,15 @@ void type_safety_examples() {
     } catch (const std::exception& e) {
         std::cout << "Exception: " << e.what() << std::endl;
     }
-    
+
     // 类型约束
     auto result = safe_add(5, 10);
     // auto invalid = safe_add("hello", "world");  // 编译错误：非数值类型
-    
+
     // 安全容器
     SafeContainer<int> intContainer;
     intContainer.add(42);
-    
+
     // SafeContainer<NonCopyable> ncContainer;  // 编译错误：NonCopyable不可复制
 }
 ```
@@ -2363,11 +2363,11 @@ int binary_search(int arr[], int left, int right, int target)
     while (left <= right) {
         // 循环不变量: 如果target在数组中，它必在arr[left..right]范围内
         int mid = left + (right - left) / 2;
-        
+
         if (arr[mid] == target) {
             return mid;
         }
-        
+
         if (arr[mid] < target) {
             left = mid + 1;
         } else {
@@ -2375,7 +2375,7 @@ int binary_search(int arr[], int left, int right, int target)
         }
         // 循环变体: right - left，每次迭代都会减小
     }
-    
+
     return -1;
 }
 {后置条件: 返回-1表示target不在数组中，否则返回的索引i满足arr[i] = target}
@@ -2387,35 +2387,35 @@ int binary_search(int arr[], int left, int right, int target)
 int verified_binary_search(int arr[], int size, int target) {
     // 前置条件检查
     assert(size >= 0);
-    
+
     int left = 0;
     int right = size - 1;
-    
+
     while (left <= right) {
         // 循环不变量：如果target在arr中，它必在arr[left..right]范围内
         assert(left >= 0 && right < size);
-        
+
         int mid = left + (right - left) / 2;
         assert(mid >= left && mid <= right);
-        
+
         if (arr[mid] == target) {
             // 后置条件：arr[mid] = target
             return mid;
         }
-        
+
         int old_range = right - left + 1;
-        
+
         if (arr[mid] < target) {
             left = mid + 1;
         } else {
             right = mid - 1;
         }
-        
+
         // 循环变体：范围大小减小
         int new_range = right - left + 1;
         assert(new_range < old_range);  // 确保终止
     }
-    
+
     // 后置条件：target不在arr中
     return -1;
 }
@@ -2497,11 +2497,11 @@ template<reflectable T>
 void describe_type() {
     std::cout << "Type name: " << T::name() << std::endl;
     std::cout << "Member variables:" << std::endl;
-    
+
     for (const auto& member : T::members()) {
         std::cout << "  - " << member.type().name() << " " << member.name() << std::endl;
     }
-    
+
     std::cout << "Member functions:" << std::endl;
     for (const auto& function : T::functions()) {
         std::cout << "  - " << function.signature() << std::endl;
@@ -2532,23 +2532,23 @@ class Resource {
 private:
     std::string name;
     std::vector<int> data;
-    
+
 public:
     Resource(std::string n, size_t size)
         : name(std::move(n)), data(size) {
         std::cout << "Resource " << name << " constructed" << std::endl;
     }
-    
+
     ~Resource() {
         std::cout << "Resource " << name << " destroyed" << std::endl;
     }
-    
+
     // 使用移动语义避免不必要复制
     Resource(Resource&& other) noexcept
         : name(std::move(other.name)), data(std::move(other.data)) {
         std::cout << "Resource moved" << std::endl;
     }
-    
+
     Resource& operator=(Resource&& other) noexcept {
         if (this != &other) {
             name = std::move(other.name);
@@ -2557,7 +2557,7 @@ public:
         }
         return *this;
     }
-    
+
     // 禁用复制
     Resource(const Resource&) = delete;
     Resource& operator=(const Resource&) = delete;
@@ -2566,12 +2566,12 @@ public:
 class ResourceManager {
 private:
     std::vector<std::unique_ptr<Resource>> resources;
-    
+
 public:
     void addResource(std::string name, size_t size) {
         resources.push_back(std::make_unique<Resource>(std::move(name), size));
     }
-    
+
     void removeResource(size_t index) {
         if (index < resources.size()) {
             resources.erase(resources.begin() + index);
@@ -2586,12 +2586,12 @@ void modern_cpp_features() {
         {"Bob", 87},
         {"Charlie", 92}
     };
-    
+
     // 结构化绑定
     for (const auto& [name, score] : scores) {
         std::cout << name << ": " << score << std::endl;
     }
-    
+
     // 使用std::optional处理可能不存在的值
     std::optional<int> findScore(const std::string& name) {
         auto it = scores.find(name);
@@ -2600,7 +2600,7 @@ void modern_cpp_features() {
         }
         return std::nullopt;
     }
-    
+
     if (auto score = findScore("David"); score) {
         std::cout << "David's score: " << *score << std::endl;
     } else {
@@ -2690,14 +2690,14 @@ int main() {
     print_hash(42);        // OK：int是Hashable
     print_hash("hello");   // OK：const char*是Hashable
     // print_hash(std::cin); // 错误：std::istream不是Hashable
-    
+
     std::cout << add(5, 10) << std::endl;           // OK：int是Arithmetic
     std::cout << add(3.14, 2.71) << std::endl;      // OK：double是Arithmetic
     // std::cout << add("a", "b") << std::endl;     // 错误：std::string不是Arithmetic
-    
+
     std::cout << double_it(7) << std::endl;         // OK：int支持加法
     std::cout << double_it(std::string("abc")) << std::endl; // OK：string支持加法
-    
+
     Container c = {1, 2, 3}; // 自动推导为Container<int>
 }
 ```
@@ -2735,9 +2735,9 @@ struct SimpleTask {
         void return_void() {}
         void unhandled_exception() { std::terminate(); }
     };
-    
+
     std::coroutine_handle<promise_type> handle;
-    
+
     SimpleTask(std::coroutine_handle<promise_type> h) : handle(h) {}
     ~SimpleTask() {
         if (handle) handle.destroy();
@@ -2755,14 +2755,14 @@ struct ResumableTask {
         void return_void() {}
         void unhandled_exception() { std::terminate(); }
     };
-    
+
     std::coroutine_handle<promise_type> handle;
-    
+
     ResumableTask(std::coroutine_handle<promise_type> h) : handle(h) {}
     ~ResumableTask() {
         if (handle) handle.destroy();
     }
-    
+
     bool resume() {
         if (!handle.done())
             handle.resume();
@@ -2773,16 +2773,16 @@ struct ResumableTask {
 // 自定义awaitable
 struct Sleeper {
     std::chrono::milliseconds duration;
-    
+
     bool await_ready() const { return false; }
-    
+
     void await_suspend(std::coroutine_handle<> h) {
         std::thread([h, this]() {
             std::this_thread::sleep_for(duration);
             h.resume();
         }).detach();
     }
-    
+
     void await_resume() {}
 };
 
@@ -2792,11 +2792,11 @@ class Generator {
 public:
     struct promise_type {
         T value;
-        
+
         Generator<T> get_return_object() {
             return Generator{std::coroutine_handle<promise_type>::from_promise(*this)};
         }
-        
+
         std::suspend_always initial_suspend() { return {}; }
         std::suspend_always final_suspend() noexcept { return {}; }
         std::suspend_always yield_value(T val) {
@@ -2806,18 +2806,18 @@ public:
         void return_void() {}
         void unhandled_exception() { std::terminate(); }
     };
-    
+
     std::coroutine_handle<promise_type> handle;
-    
+
     Generator(std::coroutine_handle<promise_type> h) : handle(h) {}
     ~Generator() { if (handle) handle.destroy(); }
-    
+
     T next() {
         handle.resume();
         if (handle.done()) throw std::out_of_range("Generator is done");
         return handle.promise().value;
     }
-    
+
     bool has_next() {
         return !handle.done();
     }
@@ -2852,7 +2852,7 @@ SimpleTask async_wait() {
 Generator<int> fibonacci(int n) {
     if (n > 0) co_yield 0;
     if (n > 1) co_yield 1;
-    
+
     int a = 0, b = 1;
     for (int i = 2; i < n; ++i) {
         int next = a + b;
@@ -2866,20 +2866,20 @@ void coroutine_examples() {
     // 简单协程
     std::cout << "--- 简单协程 ---" << std::endl;
     auto task1 = simple_coroutine();
-    
+
     // 可恢复协程
     std::cout << "\n--- 可恢复协程 ---" << std::endl;
     auto task2 = counter(5);
     while (task2.resume()) {
         std::cout << "  主线程继续执行" << std::endl;
     }
-    
+
     // 异步等待
     std::cout << "\n--- 异步等待 ---" << std::endl;
     auto task3 = async_wait();
     std::cout << "主线程等待异步任务..." << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(4000));
-    
+
     // 生成器
     std::cout << "\n--- 斐波那契生成器 ---" << std::endl;
     auto fib = fibonacci(10);
@@ -2959,15 +2959,15 @@ import :advanced;  // 导入指定分区
 
 int main() {
     double x = 3.0;
-    
+
     std::cout << "Square of " << x << ": " << square(x) << std::endl;
     std::cout << "Cube of " << x << ": " << cube(x) << std::endl;
     std::cout << "Power of " << x << "^4: " << power(x, 4) << std::endl;
-    
+
     // 使用导出的常量
     std::cout << "Pi: " << math_constants::pi << std::endl;
     std::cout << "e: " << math_constants::e << std::endl;
-    
+
     // internal_helper(x);  // 错误：内部函数不可访问
 }
 
@@ -3001,69 +3001,69 @@ int main() {
 
 void ranges_views_examples() {
     std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    
+
     // 基本范围操作
     for (int n : numbers) {
         std::cout << n << " ";
     }
     std::cout << std::endl;
-    
+
     // 过滤视图：只保留偶数
     auto even = numbers | std::views::filter([](int n) { return n % 2 == 0; });
     for (int n : even) {
         std::cout << n << " ";  // 输出：2 4 6 8 10
     }
     std::cout << std::endl;
-    
+
     // 转换视图：平方所有元素
     auto squares = numbers | std::views::transform([](int n) { return n * n; });
     for (int n : squares) {
         std::cout << n << " ";  // 输出：1 4 9 16 25 36 49 64 81 100
     }
     std::cout << std::endl;
-    
+
     // 组合视图：过滤后转换
-    auto even_squares = numbers 
+    auto even_squares = numbers
         | std::views::filter([](int n) { return n % 2 == 0; })
         | std::views::transform([](int n) { return n * n; });
-    
+
     for (int n : even_squares) {
         std::cout << n << " ";  // 输出：4 16 36 64 100
     }
     std::cout << std::endl;
-    
+
     // 取前N个元素
     auto first_three = numbers | std::views::take(3);
     for (int n : first_three) {
         std::cout << n << " ";  // 输出：1 2 3
     }
     std::cout << std::endl;
-    
+
     // 跳过前N个元素
     auto skip_first_five = numbers | std::views::drop(5);
     for (int n : skip_first_five) {
         std::cout << n << " ";  // 输出：6 7 8 9 10
     }
     std::cout << std::endl;
-    
+
     // 反向视图
     auto reversed = numbers | std::views::reverse;
     for (int n : reversed) {
         std::cout << n << " ";  // 输出：10 9 8 7 6 5 4 3 2 1
     }
     std::cout << std::endl;
-    
+
     // 复杂组合：取偶数，平方，取前3个
-    auto complex = numbers 
+    auto complex = numbers
         | std::views::filter([](int n) { return n % 2 == 0; })
         | std::views::transform([](int n) { return n * n; })
         | std::views::take(3);
-    
+
     for (int n : complex) {
         std::cout << n << " ";  // 输出：4 16 36
     }
     std::cout << std::endl;
-    
+
     // 字符串视图
     std::string str = "Hello, Ranges!";
     auto chars = str | std::views::split(' ');
@@ -3073,12 +3073,12 @@ void ranges_views_examples() {
         }
         std::cout << std::endl;
     }
-    
+
     // 无限序列（惰性求值）
     auto infinite = std::views::iota(1)  // 从1开始的无限序列
         | std::views::transform([](int n) { return n * n; })
         | std::views::take(10);  // 只取前10个
-    
+
     for (int n : infinite) {
         std::cout << n << " ";  // 输出：1 4 9 16 25 36 49 64 81 100
     }
@@ -3112,64 +3112,64 @@ void format_examples() {
     // 基本格式化
     std::string message = std::format("Hello, {}!", "World");
     std::cout << message << std::endl;  // 输出：Hello, World!
-    
+
     // 多参数格式化
     std::string result = std::format("The result is: {}", 42);
     std::cout << result << std::endl;  // 输出：The result is: 42
-    
+
     // 参数索引
     std::string reordered = std::format("{1} comes before {0}", "World", "Hello");
     std::cout << reordered << std::endl;  // 输出：Hello comes before World
-    
+
     // 参数重用
     std::string repeated = std::format("{0}, {0}, {0}!", "Hello");
     std::cout << repeated << std::endl;  // 输出：Hello, Hello, Hello!
-    
+
     // 数值格式化
     // 十六进制格式
     std::string hex = std::format("Hex: {0:x}, uppercase: {0:X}", 255);
     std::cout << hex << std::endl;  // 输出：Hex: ff, uppercase: FF
-    
+
     // 小数位数
     std::string precision = std::format("Pi: {:.3f}", 3.14159265359);
     std::cout << precision << std::endl;  // 输出：Pi: 3.142
-    
+
     // 填充与对齐
     std::string padded = std::format("{:*^15}", "centered");
     std::cout << padded << std::endl;  // 输出：***centered****
-    
+
     std::string left_aligned = std::format("{:<10}", "left");
-    std::cout << left_aligned << std::endl;  // 输出：left      
-    
+    std::cout << left_aligned << std::endl;  // 输出：left
+
     std::string right_aligned = std::format("{:>10}", "right");
     std::cout << right_aligned << std::endl;  // 输出：     right
-    
+
     // 自定义类型格式化
     struct Point {
         double x, y;
     };
-    
+
     // 为Point实现格式化支持
     template<>
     struct std::formatter<Point> {
         constexpr auto parse(std::format_parse_context& ctx) {
             return ctx.begin();
         }
-        
+
         auto format(const Point& p, std::format_context& ctx) const {
             return std::format_to(ctx.out(), "({:.1f}, {:.1f})", p.x, p.y);
         }
     };
-    
+
     Point p{3.5, 7.2};
     std::string point_str = std::format("Point: {}", p);
     std::cout << point_str << std::endl;  // 输出：Point: (3.5, 7.2)
-    
+
     // 条件格式化
     bool condition = true;
     std::string conditional = std::format("Status: {}", condition ? "Active" : "Inactive");
     std::cout << conditional << std::endl;  // 输出：Status: Active
-    
+
     // 容器格式化
     std::vector<int> vec = {1, 2, 3, 4, 5};
     std::string vec_str;
@@ -3211,27 +3211,27 @@ namespace hardware {
     constexpr uintptr_t GPIO_BASE = 0x40020000;
     constexpr uintptr_t GPIO_MODE = GPIO_BASE + 0x00;
     constexpr uintptr_t GPIO_OUTPUT = GPIO_BASE + 0x04;
-    
+
     // 寄存器访问函数
     template<typename T = uint32_t>
     inline T read_reg(uintptr_t addr) {
         return *reinterpret_cast<volatile T*>(addr);
     }
-    
+
     template<typename T = uint32_t>
     inline void write_reg(uintptr_t addr, T value) {
         *reinterpret_cast<volatile T*>(addr) = value;
     }
-    
+
     // 位操作辅助函数
     inline void set_bit(uintptr_t addr, uint8_t bit) {
         write_reg(addr, read_reg(addr) | (1 << bit));
     }
-    
+
     inline void clear_bit(uintptr_t addr, uint8_t bit) {
         write_reg(addr, read_reg(addr) & ~(1 << bit));
     }
-    
+
     inline bool read_bit(uintptr_t addr, uint8_t bit) {
         return (read_reg(addr) & (1 << bit)) != 0;
     }
@@ -3245,30 +3245,30 @@ private:
     size_t head = 0;
     size_t tail = 0;
     bool full = false;
-    
+
 public:
     bool push(const T& item) {
         if (full) return false;
-        
+
         buffer[head] = item;
         head = (head + 1) % Size;
         full = head == tail;
         return true;
     }
-    
+
     bool pop(T& item) {
         if (empty()) return false;
-        
+
         item = buffer[tail];
         tail = (tail + 1) % Size;
         full = false;
         return true;
     }
-    
+
     bool empty() const {
         return !full && (head == tail);
     }
-    
+
     bool is_full() const {
         return full;
     }
@@ -3278,7 +3278,7 @@ public:
 class LedController {
 private:
     static constexpr uint8_t LED_PIN = 5;  // 示例引脚号
-    
+
 public:
     // 初始化LED引脚为输出模式
     void init() {
@@ -3288,17 +3288,17 @@ public:
         mode |= (0x1 << (LED_PIN * 2));   // 设置为输出模式
         hardware::write_reg(hardware::GPIO_MODE, mode);
     }
-    
+
     // 打开LED
     void on() {
         hardware::set_bit(hardware::GPIO_OUTPUT, LED_PIN);
     }
-    
+
     // 关闭LED
     void off() {
         hardware::clear_bit(hardware::GPIO_OUTPUT, LED_PIN);
     }
-    
+
     // 切换LED状态
     void toggle() {
         if (hardware::read_bit(hardware::GPIO_OUTPUT, LED_PIN)) {
@@ -3313,12 +3313,12 @@ public:
 extern "C" void ISR_TIMER0() {
     static LedController led;
     static bool initialized = false;
-    
+
     if (!initialized) {
         led.init();
         initialized = true;
     }
-    
+
     // 在定时器中断中切换LED状态
     led.toggle();
 }
@@ -3328,10 +3328,10 @@ void embedded_main() {
     // 初始化硬件
     LedController led;
     led.init();
-    
+
     // 创建固定大小的消息缓冲区
     CircularBuffer<uint8_t, 16> msgBuffer;
-    
+
     // 主循环
     while (true) {
         // 处理消息
@@ -3346,7 +3346,7 @@ void embedded_main() {
                 led.toggle();
             }
         }
-        
+
         // 低功耗模式等待中断
         // 平台相关的代码
     }
@@ -3393,35 +3393,35 @@ private:
     float x = 0, y = 0, z = 0;
     float rotationX = 0, rotationY = 0, rotationZ = 0;
     float scaleX = 1, scaleY = 1, scaleZ = 1;
-    
+
 public:
     void setPosition(float x, float y, float z) {
         this->x = x;
         this->y = y;
         this->z = z;
     }
-    
+
     void setRotation(float x, float y, float z) {
         rotationX = x;
         rotationY = y;
         rotationZ = z;
     }
-    
+
     void setScale(float x, float y, float z) {
         scaleX = x;
         scaleY = y;
         scaleZ = z;
     }
-    
+
     // 获取位置、旋转、缩放的方法
     std::tuple<float, float, float> getPosition() const {
         return {x, y, z};
     }
-    
+
     std::tuple<float, float, float> getRotation() const {
         return {rotationX, rotationY, rotationZ};
     }
-    
+
     std::tuple<float, float, float> getScale() const {
         return {scaleX, scaleY, scaleZ};
     }
@@ -3433,23 +3433,23 @@ private:
     std::string meshPath;
     std::string texturePath;
     bool visible = true;
-    
+
 public:
     RenderComponent(const std::string& mesh, const std::string& texture)
         : meshPath(mesh), texturePath(texture) {}
-    
+
     void setVisible(bool visible) {
         this->visible = visible;
     }
-    
+
     bool isVisible() const {
         return visible;
     }
-    
+
     const std::string& getMesh() const {
         return meshPath;
     }
-    
+
     const std::string& getTexture() const {
         return texturePath;
     }
@@ -3461,26 +3461,26 @@ private:
     float mass = 1.0f;
     float velocityX = 0, velocityY = 0, velocityZ = 0;
     bool hasGravity = true;
-    
+
 public:
     PhysicsComponent(float mass) : mass(mass) {}
-    
+
     void setVelocity(float x, float y, float z) {
         velocityX = x;
         velocityY = y;
         velocityZ = z;
     }
-    
+
     void setGravity(bool enabled) {
         hasGravity = enabled;
     }
-    
+
     void update(float deltaTime) override {
         // 简单物理更新
         if (hasGravity) {
             velocityY -= 9.8f * deltaTime;
         }
-        
+
         // 更新位置逻辑
     }
 };
@@ -3491,10 +3491,10 @@ private:
     uint64_t id;
     std::string name;
     std::unordered_map<std::string, std::unique_ptr<Component>> components;
-    
+
 public:
     Entity(uint64_t id, const std::string& name) : id(id), name(name) {}
-    
+
     template<typename T, typename... Args>
     T* addComponent(const std::string& key, Args&&... args) {
         auto component = std::make_unique<T>(std::forward<Args>(args)...);
@@ -3502,23 +3502,23 @@ public:
         components[key] = std::move(component);
         return comp_ptr;
     }
-    
+
     Component* getComponent(const std::string& key) {
         auto it = components.find(key);
         return it != components.end() ? it->second.get() : nullptr;
     }
-    
+
     template<typename T>
     T* getComponentAs(const std::string& key) {
         return dynamic_cast<T*>(getComponent(key));
     }
-    
+
     void update(float deltaTime) {
         for (auto& [key, component] : components) {
             component->update(deltaTime);
         }
     }
-    
+
     uint64_t getId() const { return id; }
     const std::string& getName() const { return name; }
 };
@@ -3537,13 +3537,13 @@ public:
         for (auto entity : entities) {
             auto render = entity->getComponentAs<RenderComponent>("render");
             auto transform = entity->getComponentAs<TransformComponent>("transform");
-            
+
             if (render && transform && render->isVisible()) {
                 // 在实际引擎中，这里会调用图形API渲染实体
                 auto [x, y, z] = transform->getPosition();
-                std::cout << "Rendering " << entity->getName() 
+                std::cout << "Rendering " << entity->getName()
                           << " at position (" << x << ", " << y << ", " << z << ")"
-                          << " using mesh " << render->getMesh() 
+                          << " using mesh " << render->getMesh()
                           << " and texture " << render->getTexture() << std::endl;
             }
         }
@@ -3557,11 +3557,11 @@ public:
         for (auto entity : entities) {
             auto physics = entity->getComponentAs<PhysicsComponent>("physics");
             auto transform = entity->getComponentAs<TransformComponent>("transform");
-            
+
             if (physics && transform) {
                 // 更新物理组件
                 physics->update(deltaTime);
-                
+
                 // 在实际引擎中，这里会处理碰撞检测、物理响应等
                 std::cout << "Updating physics for " << entity->getName() << std::endl;
             }
@@ -3582,7 +3582,7 @@ private:
     std::vector<std::unique_ptr<Entity>> entities;
     std::vector<std::unique_ptr<System>> systems;
     uint64_t nextEntityId = 0;
-    
+
 public:
     Entity* createEntity(const std::string& name) {
         auto entity = std::make_unique<Entity>(nextEntityId++, name);
@@ -3590,18 +3590,18 @@ public:
         entities.push_back(std::move(entity));
         return ptr;
     }
-    
+
     void addSystem(std::unique_ptr<System> system) {
         systems.push_back(std::move(system));
     }
-    
+
     void update(float deltaTime) {
         // 准备实体指针列表供系统使用
         std::vector<Entity*> entityPtrs;
         for (auto& entity : entities) {
             entityPtrs.push_back(entity.get());
         }
-        
+
         // 更新所有系统
         for (auto& system : systems) {
             system->update(entityPtrs, deltaTime);
@@ -3615,13 +3615,13 @@ private:
     struct Resource {
         void* data;
         size_t refCount;
-        
+
         Resource() : data(nullptr), refCount(0) {}
         ~Resource() { if (data) free(data); }
     };
-    
+
     std::unordered_map<std::string, Resource> resources;
-    
+
 public:
     template<typename T>
     T* loadResource(const std::string& path) {
@@ -3630,16 +3630,16 @@ public:
             it->second.refCount++;
             return static_cast<T*>(it->second.data);
         }
-        
+
         // 实际应用中，这里会加载文件、创建纹理等
         T* resource = new T();
         resources[path].data = resource;
         resources[path].refCount = 1;
-        
+
         std::cout << "Loaded resource: " << path << std::endl;
         return resource;
     }
-    
+
     void releaseResource(const std::string& path) {
         auto it = resources.find(path);
         if (it != resources.end()) {
@@ -3649,7 +3649,7 @@ public:
             }
         }
     }
-    
+
     ~ResourceManager() {
         if (!resources.empty()) {
             std::cout << "Warning: " << resources.size() << " resources not properly released" << std::endl;
@@ -3661,37 +3661,37 @@ public:
 void game_development_example() {
     // 创建游戏世界
     GameWorld world;
-    
+
     // 添加系统
     world.addSystem(std::make_unique<PhysicsSystem>());
     world.addSystem(std::make_unique<RenderSystem>());
-    
+
     // 创建玩家实体
     Entity* player = world.createEntity("Player");
-    
+
     // 添加组件
     auto transform = player->addComponent<TransformComponent>("transform");
     transform->setPosition(0, 0, 0);
-    
+
     player->addComponent<RenderComponent>("render", "player.mesh", "player.texture");
     player->addComponent<PhysicsComponent>("physics", 70.0f);
-    
+
     // 创建敌人实体
     Entity* enemy = world.createEntity("Enemy");
     auto enemyTransform = enemy->addComponent<TransformComponent>("transform");
     enemyTransform->setPosition(10, 0, 5);
-    
+
     enemy->addComponent<RenderComponent>("render", "enemy.mesh", "enemy.texture");
     enemy->addComponent<PhysicsComponent>("physics", 50.0f);
-    
+
     // 游戏主循环
     float deltaTime = 0.016f; // 约60FPS
     for (int frame = 0; frame < 10; ++frame) {
         std::cout << "\n--- Frame " << frame << " ---" << std::endl;
-        
+
         // 更新游戏世界
         world.update(deltaTime);
-        
+
         // 在实际游戏中，这里会处理输入、AI、音频等
     }
 }
@@ -3730,7 +3730,7 @@ void game_development_example() {
 void vector_add_simd(const float* a, const float* b, float* result, size_t size) {
     // 确保数据对齐
     constexpr size_t VECTOR_SIZE = 4; // SSE使用128位寄存器，可以同时处理4个float
-    
+
     // 处理可向量化部分
     size_t aligned_size = size - (size % VECTOR_SIZE);
     for (size_t i = 0; i < aligned_size; i += VECTOR_SIZE) {
@@ -3739,7 +3739,7 @@ void vector_add_simd(const float* a, const float* b, float* result, size_t size)
         __m128 vresult = _mm_add_ps(va, vb);
         _mm_storeu_ps(result + i, vresult);
     }
-    
+
     // 处理剩余部分
     for (size_t i = aligned_size; i < size; ++i) {
         result[i] = a[i] + b[i];
@@ -3764,20 +3764,20 @@ void vector_add_standard(const float* a, const float* b, float* result, size_t s
 // 多线程向量加法
 void vector_add_parallel(const float* a, const float* b, float* result, size_t size, size_t num_threads) {
     std::vector<std::future<void>> futures;
-    
+
     size_t chunk_size = size / num_threads;
-    
+
     for (size_t t = 0; t < num_threads; ++t) {
         size_t start = t * chunk_size;
         size_t end = (t == num_threads - 1) ? size : (t + 1) * chunk_size;
-        
+
         futures.push_back(std::async(std::launch::async, [=]() {
             for (size_t i = start; i < end; ++i) {
                 result[i] = a[i] + b[i];
             }
         }));
     }
-    
+
     // 等待所有线程完成
     for (auto& future : futures) {
         future.wait();
@@ -3787,28 +3787,28 @@ void vector_add_parallel(const float* a, const float* b, float* result, size_t s
 // 缓存友好的矩阵乘法
 void matrix_multiply_cache_friendly(const float* a, const float* b, float* result, size_t rows_a, size_t cols_a, size_t cols_b) {
     // 假设b的行数等于a的列数
-    
+
     // 传统实现：C[i][j] += A[i][k] * B[k][j]
     // 将B转置可以提高缓存命中率
     std::vector<float> b_transposed(cols_a * cols_b);
-    
+
     // 转置B
     for (size_t i = 0; i < cols_a; ++i) {
         for (size_t j = 0; j < cols_b; ++j) {
             b_transposed[j * cols_a + i] = b[i * cols_b + j];
         }
     }
-    
+
     // 计算乘积
     for (size_t i = 0; i < rows_a; ++i) {
         for (size_t j = 0; j < cols_b; ++j) {
             float sum = 0.0f;
-            
+
             // 使用转置后的B，提高缓存局部性
             for (size_t k = 0; k < cols_a; ++k) {
                 sum += a[i * cols_a + k] * b_transposed[j * cols_a + k];
             }
-            
+
             result[i * cols_b + j] = sum;
         }
     }
@@ -3820,29 +3820,29 @@ private:
     void* pool;
     size_t pool_size;
     size_t used;
-    
+
 public:
     MemoryPool(size_t size) : pool_size(size), used(0) {
         pool = std::aligned_alloc(64, size); // 64字节对齐，适合AVX指令
     }
-    
+
     ~MemoryPool() {
         free(pool);
     }
-    
+
     void* allocate(size_t size, size_t alignment = 8) {
         // 对齐used指针
         size_t aligned_used = (used + alignment - 1) & ~(alignment - 1);
-        
+
         if (aligned_used + size > pool_size) {
             return nullptr; // 内存不足
         }
-        
+
         void* ptr = static_cast<char*>(pool) + aligned_used;
         used = aligned_used + size;
         return ptr;
     }
-    
+
     void reset() {
         used = 0;
     }
@@ -3852,16 +3852,16 @@ public:
 void hpc_examples() {
     constexpr size_t VECTOR_SIZE = 10000000;
     constexpr size_t NUM_THREADS = 4;
-    
+
     // 分配向量
     std::vector<float> a(VECTOR_SIZE), b(VECTOR_SIZE), result(VECTOR_SIZE);
-    
+
     // 初始化
     for (size_t i = 0; i < VECTOR_SIZE; ++i) {
         a[i] = static_cast<float>(i);
         b[i] = static_cast<float>(VECTOR_SIZE - i);
     }
-    
+
     // 时间测量
     auto time_function = [](const std::string& name, auto func) {
         auto start = std::chrono::high_resolution_clock::now();
@@ -3870,53 +3870,53 @@ void hpc_examples() {
         std::chrono::duration<double, std::milli> elapsed = end - start;
         std::cout << name << " took " << elapsed.count() << " ms" << std::endl;
     };
-    
+
     // 标准向量加法
     time_function("Standard vector addition", [&]() {
         vector_add_standard(a.data(), b.data(), result.data(), VECTOR_SIZE);
     });
-    
+
     // SIMD向量加法
     time_function("SIMD vector addition", [&]() {
         vector_add_simd(a.data(), b.data(), result.data(), VECTOR_SIZE);
     });
-    
+
     // 多线程向量加法
     time_function("Parallel vector addition", [&]() {
         vector_add_parallel(a.data(), b.data(), result.data(), VECTOR_SIZE, NUM_THREADS);
     });
-    
+
     // 矩阵乘法示例
     constexpr size_t MATRIX_SIZE = 500;
     std::vector<float> matrix_a(MATRIX_SIZE * MATRIX_SIZE);
     std::vector<float> matrix_b(MATRIX_SIZE * MATRIX_SIZE);
     std::vector<float> matrix_c(MATRIX_SIZE * MATRIX_SIZE);
-    
+
     // 初始化矩阵
     for (size_t i = 0; i < MATRIX_SIZE * MATRIX_SIZE; ++i) {
         matrix_a[i] = static_cast<float>(i % 10);
         matrix_b[i] = static_cast<float>((i + 5) % 10);
     }
-    
+
     // 缓存友好的矩阵乘法
     time_function("Cache-friendly matrix multiplication", [&]() {
-        matrix_multiply_cache_friendly(matrix_a.data(), matrix_b.data(), matrix_c.data(), 
+        matrix_multiply_cache_friendly(matrix_a.data(), matrix_b.data(), matrix_c.data(),
                                       MATRIX_SIZE, MATRIX_SIZE, MATRIX_SIZE);
     });
-    
+
     // 内存池示例
     MemoryPool pool(1024 * 1024); // 1MB内存池
-    
+
     float* pooled_vector = static_cast<float*>(pool.allocate(100 * sizeof(float), 32));
     if (pooled_vector) {
         for (size_t i = 0; i < 100; ++i) {
             pooled_vector[i] = static_cast<float>(i);
         }
-        
+
         float sum = std::accumulate(pooled_vector, pooled_vector + 100, 0.0f);
         std::cout << "Sum of pooled vector: " << sum << std::endl;
     }
-    
+
     pool.reset();
 }
 ```
@@ -3953,54 +3953,54 @@ class FixedPoint {
 private:
     int64_t value;
     static constexpr int SCALE = 10000; // 四位小数精度
-    
+
 public:
     FixedPoint() : value(0) {}
-    
+
     explicit FixedPoint(double d) : value(static_cast<int64_t>(d * SCALE)) {}
-    
+
     FixedPoint(int64_t v) : value(v * SCALE) {}
-    
+
     FixedPoint operator+(const FixedPoint& other) const {
         FixedPoint result;
         result.value = value + other.value;
         return result;
     }
-    
+
     FixedPoint operator-(const FixedPoint& other) const {
         FixedPoint result;
         result.value = value - other.value;
         return result;
     }
-    
+
     FixedPoint operator*(const FixedPoint& other) const {
         FixedPoint result;
         result.value = (value * other.value) / SCALE;
         return result;
     }
-    
+
     FixedPoint operator/(const FixedPoint& other) const {
         FixedPoint result;
         result.value = (value * SCALE) / other.value;
         return result;
     }
-    
+
     bool operator<(const FixedPoint& other) const {
         return value < other.value;
     }
-    
+
     bool operator>(const FixedPoint& other) const {
         return value > other.value;
     }
-    
+
     bool operator==(const FixedPoint& other) const {
         return value == other.value;
     }
-    
+
     double toDouble() const {
         return static_cast<double>(value) / SCALE;
     }
-    
+
     std::string toString() const {
         std::stringstream ss;
         ss << std::fixed << std::setprecision(4) << toDouble();
@@ -4027,7 +4027,7 @@ struct Order {
     int quantity;
     uint64_t timestamp;
     std::string traderId;
-    
+
     // 比较运算符，用于订单队列排序
     bool operator<(const Order& other) const {
         if (side == OrderSide::BUY) {
@@ -4059,44 +4059,44 @@ private:
     std::priority_queue<Order> sellOrders;
     std::vector<Trade> trades;
     uint64_t nextTradeId = 1;
-    
+
 public:
     OrderBook(const std::string& sym) : symbol(sym) {}
-    
+
     // 添加订单
     void addOrder(const Order& order) {
         if (order.symbol != symbol) {
             throw std::invalid_argument("Order symbol doesn't match order book");
         }
-        
+
         if (order.side == OrderSide::BUY) {
             buyOrders.push(order);
         } else {
             sellOrders.push(order);
         }
-        
+
         // 尝试撮合订单
         matchOrders();
     }
-    
+
     // 撮合订单
     void matchOrders() {
         while (!buyOrders.empty() && !sellOrders.empty()) {
             Order buyOrder = buyOrders.top();
             Order sellOrder = sellOrders.top();
-            
+
             // 如果最高买价小于最低卖价，无法撮合
             if (buyOrder.price < sellOrder.price) {
                 break;
             }
-            
+
             // 移除顶部订单
             buyOrders.pop();
             sellOrders.pop();
-            
+
             // 确定成交量
             int tradeQuantity = std::min(buyOrder.quantity, sellOrder.quantity);
-            
+
             // 创建成交记录
             Trade trade{
                 nextTradeId++,
@@ -4107,50 +4107,50 @@ public:
                 tradeQuantity,
                 getCurrentTimestamp()
             };
-            
+
             trades.push_back(trade);
-            
-            std::cout << "Trade executed: " << tradeQuantity 
-                      << " of " << symbol 
-                      << " at " << sellOrder.price.toString() 
+
+            std::cout << "Trade executed: " << tradeQuantity
+                      << " of " << symbol
+                      << " at " << sellOrder.price.toString()
                       << std::endl;
-            
+
             // 处理部分成交
             buyOrder.quantity -= tradeQuantity;
             sellOrder.quantity -= tradeQuantity;
-            
+
             // 如果订单还有剩余，重新放回队列
             if (buyOrder.quantity > 0) {
                 buyOrders.push(buyOrder);
             }
-            
+
             if (sellOrder.quantity > 0) {
                 sellOrders.push(sellOrder);
             }
         }
     }
-    
+
     // 获取当前最优买卖价
     std::pair<FixedPoint, FixedPoint> getBestPrices() const {
         FixedPoint bestBid(0.0);
         FixedPoint bestAsk(1000000.0);  // 设一个很大的初始值
-        
+
         if (!buyOrders.empty()) {
             bestBid = buyOrders.top().price;
         }
-        
+
         if (!sellOrders.empty()) {
             bestAsk = sellOrders.top().price;
         }
-        
+
         return {bestBid, bestAsk};
     }
-    
+
     // 获取成交历史
     const std::vector<Trade>& getTradeHistory() const {
         return trades;
     }
-    
+
 private:
     uint64_t getCurrentTimestamp() const {
         return std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -4163,57 +4163,57 @@ private:
 class OptionPricer {
 private:
     std::mt19937_64 rng;
-    
+
 public:
     OptionPricer() : rng(std::random_device{}()) {}
-    
+
     // 欧式看涨期权蒙特卡洛定价
-    double priceEuropeanCall(double spot, double strike, double volatility, 
-                            double riskFreeRate, double timeToMaturity, 
+    double priceEuropeanCall(double spot, double strike, double volatility,
+                            double riskFreeRate, double timeToMaturity,
                             int numSimulations) {
         std::normal_distribution<double> normalDist(0.0, 1.0);
-        
+
         double dt = timeToMaturity;
         double drift = (riskFreeRate - 0.5 * volatility * volatility) * dt;
         double diffusion = volatility * std::sqrt(dt);
-        
+
         double sumPayoffs = 0.0;
-        
+
         for (int i = 0; i < numSimulations; ++i) {
             double z = normalDist(rng);
             double stockPrice = spot * std::exp(drift + diffusion * z);
             double payoff = std::max(stockPrice - strike, 0.0);
             sumPayoffs += payoff;
         }
-        
+
         double mean = sumPayoffs / numSimulations;
         double price = mean * std::exp(-riskFreeRate * timeToMaturity);
-        
+
         return price;
     }
-    
+
     // 欧式看跌期权蒙特卡洛定价
-    double priceEuropeanPut(double spot, double strike, double volatility, 
-                           double riskFreeRate, double timeToMaturity, 
+    double priceEuropeanPut(double spot, double strike, double volatility,
+                           double riskFreeRate, double timeToMaturity,
                            int numSimulations) {
         std::normal_distribution<double> normalDist(0.0, 1.0);
-        
+
         double dt = timeToMaturity;
         double drift = (riskFreeRate - 0.5 * volatility * volatility) * dt;
         double diffusion = volatility * std::sqrt(dt);
-        
+
         double sumPayoffs = 0.0;
-        
+
         for (int i = 0; i < numSimulations; ++i) {
             double z = normalDist(rng);
             double stockPrice = spot * std::exp(drift + diffusion * z);
             double payoff = std::max(strike - stockPrice, 0.0);
             sumPayoffs += payoff;
         }
-        
+
         double mean = sumPayoffs / numSimulations;
         double price = mean * std::exp(-riskFreeRate * timeToMaturity);
-        
+
         return price;
     }
 };
@@ -4226,61 +4226,61 @@ private:
         int quantity;
         double entryPrice;
     };
-    
+
     std::vector<Position> positions;
     std::unordered_map<std::string, double> currentPrices;
-    
+
 public:
     void addPosition(const std::string& symbol, int quantity, double entryPrice) {
         positions.push_back({symbol, quantity, entryPrice});
         currentPrices[symbol] = entryPrice;  // 初始化当前价格为买入价格
     }
-    
+
     void updatePrice(const std::string& symbol, double price) {
         currentPrices[symbol] = price;
     }
-    
+
     // 计算投资组合总价值
     double calculatePortfolioValue() const {
         double totalValue = 0.0;
-        
+
         for (const auto& position : positions) {
             auto it = currentPrices.find(position.symbol);
             if (it != currentPrices.end()) {
                 totalValue += position.quantity * it->second;
             }
         }
-        
+
         return totalValue;
     }
-    
+
     // 计算投资组合收益
     double calculatePortfolioReturn() const {
         double currentValue = calculatePortfolioValue();
         double initialValue = 0.0;
-        
+
         for (const auto& position : positions) {
             initialValue += position.quantity * position.entryPrice;
         }
-        
+
         if (initialValue == 0.0) {
             return 0.0;
         }
-        
+
         return (currentValue - initialValue) / initialValue * 100.0;
     }
-    
+
     // 计算投资组合风险（简单标准差）
     double calculatePortfolioRisk(int numSimulations, double volatility) {
         std::mt19937_64 rng(std::random_device{}());
         std::normal_distribution<double> normalDist(0.0, 1.0);
-        
+
         double currentValue = calculatePortfolioValue();
         std::vector<double> simulatedReturns(numSimulations);
-        
+
         for (int i = 0; i < numSimulations; ++i) {
             double simulatedValue = 0.0;
-            
+
             for (const auto& position : positions) {
                 auto it = currentPrices.find(position.symbol);
                 if (it != currentPrices.end()) {
@@ -4290,34 +4290,34 @@ public:
                     simulatedValue += position.quantity * simulatedPrice;
                 }
             }
-            
+
             double simulatedReturn = (simulatedValue - currentValue) / currentValue;
             simulatedReturns[i] = simulatedReturn;
         }
-        
+
         // 计算标准差
         double mean = std::accumulate(simulatedReturns.begin(), simulatedReturns.end(), 0.0) / numSimulations;
-        
+
         double variance = 0.0;
         for (double ret : simulatedReturns) {
             variance += (ret - mean) * (ret - mean);
         }
         variance /= numSimulations;
-        
+
         return std::sqrt(variance);
     }
-    
+
     // 计算风险价值(Value at Risk)
     double calculateVaR(double confidenceLevel, int numSimulations, double volatility) {
         std::mt19937_64 rng(std::random_device{}());
         std::normal_distribution<double> normalDist(0.0, 1.0);
-        
+
         double currentValue = calculatePortfolioValue();
         std::vector<double> simulatedLosses(numSimulations);
-        
+
         for (int i = 0; i < numSimulations; ++i) {
             double simulatedValue = 0.0;
-            
+
             for (const auto& position : positions) {
                 auto it = currentPrices.find(position.symbol);
                 if (it != currentPrices.end()) {
@@ -4327,13 +4327,13 @@ public:
                     simulatedValue += position.quantity * simulatedPrice;
                 }
             }
-            
+
             simulatedLosses[i] = currentValue - simulatedValue;
         }
-        
+
         // 按损失排序
         std::sort(simulatedLosses.begin(), simulatedLosses.end());
-        
+
         // 计算指定置信度的VaR
         int index = static_cast<int>(numSimulations * confidenceLevel);
         return simulatedLosses[index];
@@ -4344,67 +4344,67 @@ public:
 void financial_system_examples() {
     // 订单簿示例
     OrderBook book("AAPL");
-    
+
     // 添加一些订单
     uint64_t timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::system_clock::now().time_since_epoch()
     ).count();
-    
+
     // 买单
     book.addOrder({1, "AAPL", OrderSide::BUY, FixedPoint(150.50), 100, timestamp, "trader1"});
     book.addOrder({2, "AAPL", OrderSide::BUY, FixedPoint(151.00), 50, timestamp, "trader2"});
-    
+
     // 卖单
     book.addOrder({3, "AAPL", OrderSide::SELL, FixedPoint(152.00), 75, timestamp, "trader3"});
     book.addOrder({4, "AAPL", OrderSide::SELL, FixedPoint(151.00), 60, timestamp, "trader4"});
-    
+
     // 查看最优价格
     auto [bestBid, bestAsk] = book.getBestPrices();
     std::cout << "Best bid: " << bestBid.toString() << ", Best ask: " << bestAsk.toString() << std::endl;
-    
+
     // 期权定价示例
     OptionPricer pricer;
-    
+
     double spot = 100.0;
     double strike = 100.0;
     double volatility = 0.2;
     double riskFreeRate = 0.05;
     double timeToMaturity = 1.0;
     int numSimulations = 100000;
-    
+
     double callPrice = pricer.priceEuropeanCall(
         spot, strike, volatility, riskFreeRate, timeToMaturity, numSimulations
     );
-    
+
     double putPrice = pricer.priceEuropeanPut(
         spot, strike, volatility, riskFreeRate, timeToMaturity, numSimulations
     );
-    
+
     std::cout << "European Call Option Price: " << callPrice << std::endl;
     std::cout << "European Put Option Price: " << putPrice << std::endl;
-    
+
     // 投资组合分析示例
     PortfolioAnalyzer portfolio;
-    
+
     portfolio.addPosition("AAPL", 100, 150.0);
     portfolio.addPosition("GOOGL", 50, 2500.0);
     portfolio.addPosition("MSFT", 200, 210.0);
-    
+
     // 更新当前价格
     portfolio.updatePrice("AAPL", 155.0);
     portfolio.updatePrice("GOOGL", 2550.0);
     portfolio.updatePrice("MSFT", 215.0);
-    
+
     double portfolioValue = portfolio.calculatePortfolioValue();
     double portfolioReturn = portfolio.calculatePortfolioReturn();
-    
+
     std::cout << "Portfolio Value: $" << portfolioValue << std::endl;
     std::cout << "Portfolio Return: " << portfolioReturn << "%" << std::endl;
-    
+
     // 风险分析
     double portfolioRisk = portfolio.calculatePortfolioRisk(10000, 0.02);
     double var95 = portfolio.calculateVaR(0.95, 10000, 0.02);
-    
+
     std::cout << "Portfolio Risk (Volatility): " << portfolioRisk * 100 << "%" << std::endl;
     std::cout << "Value at Risk (95% confidence): $" << var95 << std::endl;
 }
@@ -4448,7 +4448,7 @@ public:
         const char* value = std::getenv(name.c_str());
         return value ? value : "";
     }
-    
+
     // 设置环境变量
     static bool setEnvironmentVariable(const std::string& name, const std::string& value) {
     #ifdef _WIN32
@@ -4457,12 +4457,12 @@ public:
         return setenv(name.c_str(), value.c_str(), 1) == 0;
     #endif
     }
-    
+
     // 获取当前工作目录
     static std::string getCurrentDirectory() {
         return std::filesystem::current_path().string();
     }
-    
+
     // 改变当前工作目录
     static bool changeDirectory(const std::string& path) {
         try {
@@ -4472,7 +4472,7 @@ public:
             return false;
         }
     }
-    
+
     // 获取主机名
     static std::string getHostName() {
         char hostname[256];
@@ -4488,12 +4488,12 @@ public:
     #endif
         return "unknown";
     }
-    
+
     // 执行系统命令
     static int executeCommand(const std::string& command) {
         return std::system(command.c_str());
     }
-    
+
     // 获取当前进程ID
     static int getProcessId() {
     #ifdef _WIN32
@@ -4502,7 +4502,7 @@ public:
         return static_cast<int>(getpid());
     #endif
     }
-    
+
     // 睡眠（毫秒）
     static void sleep(unsigned int milliseconds) {
     #ifdef _WIN32
@@ -4520,7 +4520,7 @@ public:
     static bool fileExists(const std::string& path) {
         return std::filesystem::exists(path);
     }
-    
+
     // 创建目录
     static bool createDirectory(const std::string& path) {
         try {
@@ -4529,7 +4529,7 @@ public:
             return false;
         }
     }
-    
+
     // 删除文件
     static bool removeFile(const std::string& path) {
         try {
@@ -4538,7 +4538,7 @@ public:
             return false;
         }
     }
-    
+
     // 获取文件大小
     static std::uintmax_t getFileSize(const std::string& path) {
         try {
@@ -4547,11 +4547,11 @@ public:
             return 0;
         }
     }
-    
+
     // 列出目录内容
     static std::vector<std::string> listDirectory(const std::string& path) {
         std::vector<std::string> entries;
-        
+
         try {
             for (const auto& entry : std::filesystem::directory_iterator(path)) {
                 entries.push_back(entry.path().filename().string());
@@ -4559,15 +4559,15 @@ public:
         } catch (const std::filesystem::filesystem_error&) {
             // 处理错误
         }
-        
+
         return entries;
     }
-    
+
     // 复制文件
     static bool copyFile(const std::string& source, const std::string& destination) {
         try {
             std::filesystem::copy_file(
-                source, destination, 
+                source, destination,
                 std::filesystem::copy_options::overwrite_existing
             );
             return true;
@@ -4575,7 +4575,7 @@ public:
             return false;
         }
     }
-    
+
     // 移动文件
     static bool moveFile(const std::string& source, const std::string& destination) {
         try {
@@ -4599,11 +4599,11 @@ public:
     #ifdef _WIN32
         STARTUPINFO si;
         PROCESS_INFORMATION pi;
-        
+
         ZeroMemory(&si, sizeof(si));
         si.cb = sizeof(si);
         ZeroMemory(&pi, sizeof(pi));
-        
+
         // 创建进程
         if (!CreateProcess(
                 nullptr,               // 应用程序名称
@@ -4619,22 +4619,22 @@ public:
             )) {
             return -1;
         }
-        
+
         // 等待进程结束
         WaitForSingleObject(pi.hProcess, INFINITE);
-        
+
         // 获取退出码
         DWORD exitCode;
         GetExitCodeProcess(pi.hProcess, &exitCode);
-        
+
         // 关闭句柄
         CloseHandle(pi.hProcess);
         CloseHandle(pi.hThread);
-        
+
         return static_cast<int>(exitCode);
     #else
         pid_t pid = fork();
-        
+
         if (pid < 0) {
             // 创建进程失败
             return -1;
@@ -4646,16 +4646,16 @@ public:
             // 父进程
             int status;
             waitpid(pid, &status, 0);
-            
+
             if (WIFEXITED(status)) {
                 return WEXITSTATUS(status);
             }
-            
+
             return -1;
         }
     #endif
     }
-    
+
     // 检查进程是否运行
     static bool isProcessRunning(int pid) {
     #ifdef _WIN32
@@ -4663,7 +4663,7 @@ public:
         if (!process) {
             return false;
         }
-        
+
         DWORD exitCode;
         bool isRunning = (GetExitCodeProcess(process, &exitCode) && exitCode == STILL_ACTIVE);
         CloseHandle(process);
@@ -4672,7 +4672,7 @@ public:
         return kill(pid, 0) == 0;
     #endif
     }
-    
+
     // 终止进程
     static bool terminateProcess(int pid) {
     #ifdef _WIN32
@@ -4680,7 +4680,7 @@ public:
         if (!process) {
             return false;
         }
-        
+
         bool result = TerminateProcess(process, 1) != 0;
         CloseHandle(process);
         return result;
@@ -4694,56 +4694,56 @@ public:
 void system_interaction_examples() {
     // 环境变量
     std::cout << "PATH: " << SystemInteraction::getEnvironmentVariable("PATH") << std::endl;
-    
+
     SystemInteraction::setEnvironmentVariable("MY_VARIABLE", "test_value");
     std::cout << "MY_VARIABLE: " << SystemInteraction::getEnvironmentVariable("MY_VARIABLE") << std::endl;
-    
+
     // 工作目录
     std::cout << "Current directory: " << SystemInteraction::getCurrentDirectory() << std::endl;
-    
+
     // 主机名
     std::cout << "Hostname: " << SystemInteraction::getHostName() << std::endl;
-    
+
     // 进程ID
     std::cout << "Process ID: " << SystemInteraction::getProcessId() << std::endl;
-    
+
     // 文件系统操作
     std::string testDir = "test_dir";
     std::string testFile = testDir + "/test.txt";
-    
+
     // 创建目录
     if (FileSystem::createDirectory(testDir)) {
         std::cout << "Created directory: " << testDir << std::endl;
-        
+
         // 创建文件
         {
             std::ofstream file(testFile);
             file << "Hello, world!" << std::endl;
         }
-        
+
         // 检查文件
         if (FileSystem::fileExists(testFile)) {
             std::cout << "File exists: " << testFile << std::endl;
             std::cout << "File size: " << FileSystem::getFileSize(testFile) << " bytes" << std::endl;
         }
-        
+
         // 列出目录内容
         std::cout << "Directory contents:" << std::endl;
         for (const auto& entry : FileSystem::listDirectory(testDir)) {
             std::cout << "  " << entry << std::endl;
         }
-        
+
         // 删除文件
         if (FileSystem::removeFile(testFile)) {
             std::cout << "Removed file: " << testFile << std::endl;
         }
     }
-    
+
     // 执行命令
     std::cout << "Executing command: date" << std::endl;
     int exitCode = SystemInteraction::executeCommand("date");
     std::cout << "Exit code: " << exitCode << std::endl;
-    
+
     // 进程操作
     std::cout << "Creating process..." << std::endl;
 #ifdef _WIN32
@@ -4793,17 +4793,17 @@ private:
     void* mappedData = nullptr;
     size_t mappedSize = 0;
     bool readOnly = true;
-    
+
 public:
     MemoryMappedFile() = default;
     ~MemoryMappedFile() {
         close();
     }
-    
+
     // 打开并映射文件
     bool open(const std::string& filename, bool readOnly = true, size_t size = 0) {
         this->readOnly = readOnly;
-        
+
 #ifdef _WIN32
         // 打开文件
         fileHandle = CreateFile(
@@ -4815,11 +4815,11 @@ public:
             FILE_ATTRIBUTE_NORMAL,
             nullptr
         );
-        
+
         if (fileHandle == INVALID_HANDLE_VALUE) {
             return false;
         }
-        
+
         // 获取文件大小
         LARGE_INTEGER fileSize;
         if (!GetFileSizeEx(fileHandle, &fileSize)) {
@@ -4827,14 +4827,14 @@ public:
             fileHandle = INVALID_HANDLE_VALUE;
             return false;
         }
-        
+
         // 如果是只读，使用文件的实际大小
         if (readOnly) {
             mappedSize = static_cast<size_t>(fileSize.QuadPart);
         } else {
             // 如果是写入模式且指定了大小，使用指定大小
             mappedSize = size > 0 ? size : static_cast<size_t>(fileSize.QuadPart);
-            
+
             // 设置文件大小
             if (mappedSize > static_cast<size_t>(fileSize.QuadPart)) {
                 LARGE_INTEGER newSize;
@@ -4847,7 +4847,7 @@ public:
                 }
             }
         }
-        
+
         // 创建文件映射
         mappingHandle = CreateFileMapping(
             fileHandle,
@@ -4856,13 +4856,13 @@ public:
             0, 0,
             nullptr
         );
-        
+
         if (!mappingHandle) {
             CloseHandle(fileHandle);
             fileHandle = INVALID_HANDLE_VALUE;
             return false;
         }
-        
+
         // 映射视图
         mappedData = MapViewOfFile(
             mappingHandle,
@@ -4870,7 +4870,7 @@ public:
             0, 0,
             mappedSize
         );
-        
+
         if (!mappedData) {
             CloseHandle(mappingHandle);
             CloseHandle(fileHandle);
@@ -4885,11 +4885,11 @@ public:
             readOnly ? O_RDONLY : (O_RDWR | O_CREAT),
             S_IRUSR | S_IWUSR
         );
-        
+
         if (fileDescriptor == -1) {
             return false;
         }
-        
+
         // 获取文件大小
         struct stat fileStat;
         if (fstat(fileDescriptor, &fileStat) == -1) {
@@ -4897,14 +4897,14 @@ public:
             fileDescriptor = -1;
             return false;
         }
-        
+
         // 如果是只读，使用文件的实际大小
         if (readOnly) {
             mappedSize = static_cast<size_t>(fileStat.st_size);
         } else {
             // 如果是写入模式且指定了大小，使用指定大小
             mappedSize = size > 0 ? size : static_cast<size_t>(fileStat.st_size);
-            
+
             // 设置文件大小
             if (mappedSize > static_cast<size_t>(fileStat.st_size)) {
                 if (ftruncate(fileDescriptor, mappedSize) == -1) {
@@ -4914,7 +4914,7 @@ public:
                 }
             }
         }
-        
+
         // 映射文件
         int protection = readOnly ? PROT_READ : (PROT_READ | PROT_WRITE);
         mappedData = mmap(
@@ -4925,7 +4925,7 @@ public:
             fileDescriptor,
             0
         );
-        
+
         if (mappedData == MAP_FAILED) {
             ::close(fileDescriptor);
             fileDescriptor = -1;
@@ -4933,10 +4933,10 @@ public:
             return false;
         }
 #endif
-        
+
         return true;
     }
-    
+
     // 关闭映射
     void close() {
 #ifdef _WIN32
@@ -4944,12 +4944,12 @@ public:
             UnmapViewOfFile(mappedData);
             mappedData = nullptr;
         }
-        
+
         if (mappingHandle) {
             CloseHandle(mappingHandle);
             mappingHandle = nullptr;
         }
-        
+
         if (fileHandle != INVALID_HANDLE_VALUE) {
             CloseHandle(fileHandle);
             fileHandle = INVALID_HANDLE_VALUE;
@@ -4959,7 +4959,7 @@ public:
             munmap(mappedData, mappedSize);
             mappedData = nullptr;
         }
-        
+
         if (fileDescriptor != -1) {
             ::close(fileDescriptor);
             fileDescriptor = -1;
@@ -4967,39 +4967,39 @@ public:
 #endif
         mappedSize = 0;
     }
-    
+
     // 刷新映射到磁盘
     bool flush() {
         if (!mappedData) {
             return false;
         }
-        
+
 #ifdef _WIN32
         return FlushViewOfFile(mappedData, mappedSize) != 0;
 #else
         return msync(mappedData, mappedSize, MS_SYNC) == 0;
 #endif
     }
-    
+
     // 获取映射数据指针
     void* data() const {
         return mappedData;
     }
-    
+
     // 获取映射大小
     size_t size() const {
         return mappedSize;
     }
-    
+
     // 是否有效
     bool isValid() const {
         return mappedData != nullptr;
     }
-    
+
     // 禁止拷贝
     MemoryMappedFile(const MemoryMappedFile&) = delete;
     MemoryMappedFile& operator=(const MemoryMappedFile&) = delete;
-    
+
     // 允许移动
     MemoryMappedFile(MemoryMappedFile&& other) noexcept
         : mappedData(other.mappedData), mappedSize(other.mappedSize), readOnly(other.readOnly) {
@@ -5015,15 +5015,15 @@ public:
         other.mappedData = nullptr;
         other.mappedSize = 0;
     }
-    
+
     MemoryMappedFile& operator=(MemoryMappedFile&& other) noexcept {
         if (this != &other) {
             close();
-            
+
             mappedData = other.mappedData;
             mappedSize = other.mappedSize;
             readOnly = other.readOnly;
-            
+
 #ifdef _WIN32
             fileHandle = other.fileHandle;
             mappingHandle = other.mappingHandle;
@@ -5048,79 +5048,79 @@ void memory_mapped_file_example() {
         const char* testData = "Hello, Memory Mapped World!";
         testFile.write(testData, strlen(testData));
     }
-    
+
     // 读取模式
     {
         MemoryMappedFile mmapFile;
-        
+
         if (mmapFile.open("test_mmap.dat", true)) {
             const char* data = static_cast<const char*>(mmapFile.data());
             size_t size = mmapFile.size();
-            
+
             std::cout << "Memory mapped file size: " << size << " bytes" << std::endl;
             std::cout << "Content: " << std::string(data, size) << std::endl;
         } else {
             std::cerr << "Failed to open memory mapped file in read mode" << std::endl;
         }
     }
-    
+
     // 写入模式
     {
         MemoryMappedFile mmapFile;
-        
+
         if (mmapFile.open("test_mmap.dat", false, 100)) {
             char* data = static_cast<char*>(mmapFile.data());
-            
+
             // 修改内容
             strcpy(data + 7, "Modified");
-            
+
             // 刷新到磁盘
             mmapFile.flush();
-            
+
             std::cout << "File content modified using memory mapping" << std::endl;
         } else {
             std::cerr << "Failed to open memory mapped file in write mode" << std::endl;
         }
     }
-    
+
     // 再次读取验证修改
     {
         MemoryMappedFile mmapFile;
-        
+
         if (mmapFile.open("test_mmap.dat", true)) {
             const char* data = static_cast<const char*>(mmapFile.data());
             size_t size = mmapFile.size();
-            
+
             std::cout << "Updated content: " << std::string(data, size) << std::endl;
         }
     }
-    
+
     // 大文件示例
     {
         constexpr size_t largeFileSize = 100 * 1024 * 1024; // 100 MB
-        
+
         std::cout << "Creating large file... ";
-        
+
         MemoryMappedFile mmapFile;
-        
+
         if (mmapFile.open("large_file.dat", false, largeFileSize)) {
             char* data = static_cast<char*>(mmapFile.data());
-            
+
             // 在文件的开始、中间和结尾写入标记
             strcpy(data, "START");
             strcpy(data + largeFileSize / 2, "MIDDLE");
             strcpy(data + largeFileSize - 6, "END");
-            
+
             mmapFile.flush();
             mmapFile.close();
-            
+
             std::cout << "Done" << std::endl;
-            
+
             // 验证内容
             mmapFile.open("large_file.dat", true);
-            
+
             const char* readData = static_cast<const char*>(mmapFile.data());
-            
+
             std::cout << "Verifying large file:" << std::endl;
             std::cout << "Start: " << std::string(readData, 5) << std::endl;
             std::cout << "Middle: " << std::string(readData + largeFileSize / 2, 6) << std::endl;
@@ -5129,7 +5129,7 @@ void memory_mapped_file_example() {
             std::cerr << "Failed to create large file" << std::endl;
         }
     }
-    
+
     // 清理文件
     remove("test_mmap.dat");
     remove("large_file.dat");
@@ -5171,11 +5171,11 @@ void memory_mapped_file_example() {
 class SystemCallInitializer {
 private:
     static bool initialized;
-    
+
 public:
     static bool initialize() {
         if (initialized) return true;
-        
+
 #ifdef _WIN32
         WSADATA wsaData;
         int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -5184,31 +5184,31 @@ public:
             return false;
         }
 #endif
-        
+
         initialized = true;
         return true;
     }
-    
+
     static void cleanup() {
         if (!initialized) return;
-        
+
 #ifdef _WIN32
         WSACleanup();
 #endif
-        
+
         initialized = false;
     }
-    
+
     // 确保初始化只运行一次的单例模式
     static SystemCallInitializer& instance() {
         static SystemCallInitializer instance;
         return instance;
     }
-    
+
     SystemCallInitializer() {
         initialize();
     }
-    
+
     ~SystemCallInitializer() {
         cleanup();
     }
@@ -5225,17 +5225,17 @@ private:
     int handle = -1;
 #endif
     bool blocking = true;
-    
+
 public:
     Socket() {
         SystemCallInitializer::initialize();
     }
-    
+
     explicit Socket(int type, int protocol = 0) {
         SystemCallInitializer::initialize();
-        
+
         handle = socket(AF_INET, type, protocol);
-        
+
 #ifdef _WIN32
         if (handle == INVALID_SOCKET) {
             throw std::system_error(WSAGetLastError(), std::system_category(),
@@ -5248,11 +5248,11 @@ public:
         }
 #endif
     }
-    
+
     ~Socket() {
         close();
     }
-    
+
     // 关闭套接字
     void close() {
 #ifdef _WIN32
@@ -5267,21 +5267,21 @@ public:
         }
 #endif
     }
-    
+
     // 绑定到地址
     void bind(const std::string& ip, uint16_t port) {
         sockaddr_in addr{};
         addr.sin_family = AF_INET;
         addr.sin_port = htons(port);
-        
+
 #ifdef _WIN32
         inet_pton(AF_INET, ip.c_str(), &addr.sin_addr);
 #else
         addr.sin_addr.s_addr = inet_addr(ip.c_str());
 #endif
-        
+
         int result = ::bind(handle, reinterpret_cast<sockaddr*>(&addr), sizeof(addr));
-        
+
 #ifdef _WIN32
         if (result == SOCKET_ERROR) {
             throw std::system_error(WSAGetLastError(), std::system_category(),
@@ -5294,11 +5294,11 @@ public:
         }
 #endif
     }
-    
+
     // 监听连接
     void listen(int backlog = 5) {
         int result = ::listen(handle, backlog);
-        
+
 #ifdef _WIN32
         if (result == SOCKET_ERROR) {
             throw std::system_error(WSAGetLastError(), std::system_category(),
@@ -5311,46 +5311,46 @@ public:
         }
 #endif
     }
-    
+
     // 接受连接
     Socket accept() {
         Socket clientSocket;
         sockaddr_in clientAddr{};
         socklen_t addrLen = sizeof(clientAddr);
-        
+
 #ifdef _WIN32
         clientSocket.handle = ::accept(handle, reinterpret_cast<sockaddr*>(&clientAddr), &addrLen);
-        
+
         if (clientSocket.handle == INVALID_SOCKET) {
             throw std::system_error(WSAGetLastError(), std::system_category(),
                                    "Failed to accept connection");
         }
 #else
         clientSocket.handle = ::accept(handle, reinterpret_cast<sockaddr*>(&clientAddr), &addrLen);
-        
+
         if (clientSocket.handle == -1) {
             throw std::system_error(errno, std::system_category(),
                                    "Failed to accept connection");
         }
 #endif
-        
+
         return clientSocket;
     }
-    
+
     // 连接到服务器
     void connect(const std::string& ip, uint16_t port) {
         sockaddr_in serverAddr{};
         serverAddr.sin_family = AF_INET;
         serverAddr.sin_port = htons(port);
-        
+
 #ifdef _WIN32
         inet_pton(AF_INET, ip.c_str(), &serverAddr.sin_addr);
 #else
         serverAddr.sin_addr.s_addr = inet_addr(ip.c_str());
 #endif
-        
+
         int result = ::connect(handle, reinterpret_cast<sockaddr*>(&serverAddr), sizeof(serverAddr));
-        
+
 #ifdef _WIN32
         if (result == SOCKET_ERROR) {
             throw std::system_error(WSAGetLastError(), std::system_category(),
@@ -5363,33 +5363,33 @@ public:
         }
 #endif
     }
-    
+
     // 发送数据
     int send(const void* data, size_t length, int flags = 0) {
 #ifdef _WIN32
         int result = ::send(handle, static_cast<const char*>(data), static_cast<int>(length), flags);
-        
+
         if (result == SOCKET_ERROR) {
             throw std::system_error(WSAGetLastError(), std::system_category(),
                                    "Failed to send data");
         }
 #else
         int result = ::send(handle, static_cast<const char*>(data), length, flags);
-        
+
         if (result == -1) {
             throw std::system_error(errno, std::system_category(),
                                    "Failed to send data");
         }
 #endif
-        
+
         return result;
     }
-    
+
     // 接收数据
     int receive(void* buffer, size_t length, int flags = 0) {
 #ifdef _WIN32
         int result = ::recv(handle, static_cast<char*>(buffer), static_cast<int>(length), flags);
-        
+
         if (result == SOCKET_ERROR) {
             int error = WSAGetLastError();
             if (error == WSAEWOULDBLOCK) {
@@ -5400,7 +5400,7 @@ public:
         }
 #else
         int result = ::recv(handle, static_cast<char*>(buffer), length, flags);
-        
+
         if (result == -1) {
             if (errno == EAGAIN || errno == EWOULDBLOCK) {
                 return 0; // 非阻塞模式下无数据可读
@@ -5409,14 +5409,14 @@ public:
                                    "Failed to receive data");
         }
 #endif
-        
+
         return result;
     }
-    
+
     // 设置为非阻塞模式
     void setBlocking(bool blocking) {
         this->blocking = blocking;
-        
+
 #ifdef _WIN32
         u_long mode = blocking ? 0 : 1;
         if (ioctlsocket(handle, FIONBIO, &mode) == SOCKET_ERROR) {
@@ -5429,20 +5429,20 @@ public:
             throw std::system_error(errno, std::system_category(),
                                    "Failed to get socket flags");
         }
-        
+
         if (blocking) {
             flags &= ~O_NONBLOCK;
         } else {
             flags |= O_NONBLOCK;
         }
-        
+
         if (fcntl(handle, F_SETFL, flags) == -1) {
             throw std::system_error(errno, std::system_category(),
                                    "Failed to set socket flags");
         }
 #endif
     }
-    
+
     // 是否有效
     bool isValid() const {
 #ifdef _WIN32
@@ -5451,7 +5451,7 @@ public:
         return handle != -1;
 #endif
     }
-    
+
     // 获取原始句柄
 #ifdef _WIN32
     SOCKET getHandle() const {
@@ -5460,11 +5460,11 @@ public:
 #endif
         return handle;
     }
-    
+
     // 禁止拷贝
     Socket(const Socket&) = delete;
     Socket& operator=(const Socket&) = delete;
-    
+
     // 允许移动
     Socket(Socket&& other) noexcept : handle(other.handle), blocking(other.blocking) {
 #ifdef _WIN32
@@ -5473,7 +5473,7 @@ public:
         other.handle = -1;
 #endif
     }
-    
+
     Socket& operator=(Socket&& other) noexcept {
         if (this != &other) {
             close();
@@ -5494,14 +5494,14 @@ public:
 class SignalHandler {
 private:
     static std::unordered_map<int, std::function<void(int)>> handlers;
-    
+
     static void signalHandler(int signal) {
         auto it = handlers.find(signal);
         if (it != handlers.end()) {
             it->second(signal);
         }
     }
-    
+
 public:
     // 注册信号处理函数
     static void registerHandler(int signal, const std::function<void(int)>& handler) {
@@ -5512,7 +5512,7 @@ public:
         sa.sa_flags = 0;
         sigaction(signal, &sa, nullptr);
     }
-    
+
     // 忽略信号
     static void ignoreSignal(int signal) {
         struct sigaction sa;
@@ -5521,7 +5521,7 @@ public:
         sa.sa_flags = 0;
         sigaction(signal, &sa, nullptr);
     }
-    
+
     // 恢复默认处理
     static void resetToDefault(int signal) {
         handlers.erase(signal);
@@ -5540,49 +5540,49 @@ std::unordered_map<int, std::function<void(int)>> SignalHandler::handlers;
 void system_call_examples() {
     // 确保系统初始化
     SystemCallInitializer::initialize();
-    
+
     // TCP Echo Server示例
     try {
         // 创建TCP套接字
         Socket serverSocket(SOCK_STREAM);
-        
+
         std::cout << "Created TCP socket" << std::endl;
-        
+
         // 绑定到本地地址
         serverSocket.bind("127.0.0.1", 8080);
         std::cout << "Bound to 127.0.0.1:8080" << std::endl;
-        
+
         // 监听连接
         serverSocket.listen(5);
         std::cout << "Listening for connections..." << std::endl;
-        
+
         // 非阻塞模式
         serverSocket.setBlocking(false);
-        
+
         // 简单的服务器循环
         int iterationsLeft = 100; // 限制循环次数，避免无限循环
         while (iterationsLeft-- > 0) {
             try {
                 // 尝试接受连接
                 Socket clientSocket = serverSocket.accept();
-                
+
                 std::cout << "Accepted client connection" << std::endl;
-                
+
                 // 接收数据
                 char buffer[1024] = {0};
                 int bytesRead = clientSocket.receive(buffer, sizeof(buffer));
-                
+
                 if (bytesRead > 0) {
                     std::cout << "Received: " << buffer << std::endl;
-                    
+
                     // 回显数据
                     clientSocket.send(buffer, bytesRead);
                     std::cout << "Echoed data back to client" << std::endl;
                 }
-                
+
                 // 关闭客户端连接
                 clientSocket.close();
-                
+
                 // 收到连接就退出示例循环
                 break;
             } catch (const std::system_error& e) {
@@ -5604,24 +5604,24 @@ void system_call_examples() {
     } catch (const std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
-    
+
     // 信号处理示例
 #ifndef _WIN32
     std::cout << "\nSignal handling example (UNIX only)" << std::endl;
-    
+
     // 注册SIGINT处理程序
     SignalHandler::registerHandler(SIGINT, [](int signal) {
         std::cout << "Received SIGINT signal (" << signal << ")" << std::endl;
     });
-    
+
     std::cout << "Registered SIGINT handler. Try pressing Ctrl+C..." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    
+
     // 恢复默认处理
     SignalHandler::resetToDefault(SIGINT);
     std::cout << "Reset SIGINT to default handler" << std::endl;
 #endif
-    
+
     // 清理
     SystemCallInitializer::cleanup();
 }
@@ -5671,11 +5671,11 @@ public:
 #ifdef _WIN32
         STARTUPINFO si;
         PROCESS_INFORMATION pi;
-        
+
         ZeroMemory(&si, sizeof(si));
         si.cb = sizeof(si);
         ZeroMemory(&pi, sizeof(pi));
-        
+
         // 创建进程
         if (!CreateProcess(
                 nullptr,               // 应用程序名称
@@ -5691,23 +5691,23 @@ public:
             )) {
             return -1;
         }
-        
+
         // 等待进程结束
         WaitForSingleObject(pi.hProcess, INFINITE);
-        
+
         // 获取退出码
         DWORD exitCode;
         GetExitCodeProcess(pi.hProcess, &exitCode);
-        
+
         // 关闭句柄
         CloseHandle(pi.hProcess);
         CloseHandle(pi.hThread);
-        
+
         return static_cast<int>(exitCode);
 #else
         int status;
         pid_t pid = fork();
-        
+
         if (pid < 0) {
             // 创建进程失败
             return -1;
@@ -5718,11 +5718,11 @@ public:
         } else {
             // 父进程
             waitpid(pid, &status, 0);
-            
+
             if (WIFEXITED(status)) {
                 return WEXITSTATUS(status);
             }
-            
+
             return
 
 ```cpp
@@ -5730,17 +5730,17 @@ public:
         }
 #endif
     }
-    
+
     // 创建进程不等待完成
     static bool startProcess(const std::string& command) {
 #ifdef _WIN32
         STARTUPINFO si;
         PROCESS_INFORMATION pi;
-        
+
         ZeroMemory(&si, sizeof(si));
         si.cb = sizeof(si);
         ZeroMemory(&pi, sizeof(pi));
-        
+
         // 创建进程
         if (!CreateProcess(
                 nullptr,               // 应用程序名称
@@ -5756,15 +5756,15 @@ public:
             )) {
             return false;
         }
-        
+
         // 关闭句柄，不等待进程
         CloseHandle(pi.hProcess);
         CloseHandle(pi.hThread);
-        
+
         return true;
 #else
         pid_t pid = fork();
-        
+
         if (pid < 0) {
             // 创建进程失败
             return false;
@@ -5773,41 +5773,41 @@ public:
             execl("/bin/sh", "sh", "-c", command.c_str(), nullptr);
             exit(1); // 如果execl失败
         }
-        
+
         // 父进程继续，不等待子进程
         return true;
 #endif
     }
-    
+
     // 管道通信示例
     static std::string captureProcessOutput(const std::string& command) {
         std::string result;
-        
+
 #ifdef _WIN32
         // 创建管道
         HANDLE hReadPipe, hWritePipe;
         SECURITY_ATTRIBUTES saAttr;
-        
+
         saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
         saAttr.bInheritHandle = TRUE;
         saAttr.lpSecurityDescriptor = nullptr;
-        
+
         if (!CreatePipe(&hReadPipe, &hWritePipe, &saAttr, 0)) {
             return "";
         }
-        
+
         // 设置子进程输出重定向
         STARTUPINFO si;
         PROCESS_INFORMATION pi;
-        
+
         ZeroMemory(&si, sizeof(si));
         si.cb = sizeof(si);
         si.hStdOutput = hWritePipe;
         si.hStdError = hWritePipe;
         si.dwFlags |= STARTF_USESTDHANDLES;
-        
+
         ZeroMemory(&pi, sizeof(pi));
-        
+
         // 创建进程
         if (!CreateProcess(
                 nullptr,                // 应用程序名称
@@ -5825,22 +5825,22 @@ public:
             CloseHandle(hWritePipe);
             return "";
         }
-        
+
         // 关闭不需要的写入端
         CloseHandle(hWritePipe);
-        
+
         // 读取输出
         char buffer[4096];
         DWORD bytesRead;
-        
+
         while (ReadFile(hReadPipe, buffer, sizeof(buffer) - 1, &bytesRead, nullptr) && bytesRead != 0) {
             buffer[bytesRead] = '\0';
             result += buffer;
         }
-        
+
         // 等待进程结束
         WaitForSingleObject(pi.hProcess, INFINITE);
-        
+
         // 清理
         CloseHandle(pi.hProcess);
         CloseHandle(pi.hThread);
@@ -5851,9 +5851,9 @@ public:
         if (pipe(pipefd) == -1) {
             return "";
         }
-        
+
         pid_t pid = fork();
-        
+
         if (pid < 0) {
             // 创建进程失败
             close(pipefd[0]);
@@ -5862,36 +5862,36 @@ public:
         } else if (pid == 0) {
             // 子进程
             close(pipefd[0]); // 关闭读取端
-            
+
             // 重定向标准输出到管道
             dup2(pipefd[1], STDOUT_FILENO);
             dup2(pipefd[1], STDERR_FILENO);
             close(pipefd[1]);
-            
+
             execl("/bin/sh", "sh", "-c", command.c_str(), nullptr);
             exit(1); // 如果execl失败
         }
-        
+
         // 父进程
         close(pipefd[1]); // 关闭写入端
-        
+
         // 读取子进程输出
         char buffer[4096];
         ssize_t bytes_read;
-        
+
         while ((bytes_read = read(pipefd[0], buffer, sizeof(buffer) - 1)) > 0) {
             buffer[bytes_read] = '\0';
             result += buffer;
         }
-        
+
         // 关闭读取端
         close(pipefd[0]);
-        
+
         // 等待子进程结束
         int status;
         waitpid(pid, &status, 0);
 #endif
-        
+
         return result;
     }
 };
@@ -5904,7 +5904,7 @@ private:
     std::mutex queue_mutex;
     std::condition_variable condition;
     bool stop;
-    
+
 public:
     // 构造函数
     ThreadPool(size_t numThreads) : stop(false) {
@@ -5912,73 +5912,73 @@ public:
             workers.emplace_back([this] {
                 while (true) {
                     std::function<void()> task;
-                    
+
                     {
                         std::unique_lock<std::mutex> lock(queue_mutex);
-                        
+
                         // 等待直到有任务或需要停止
                         condition.wait(lock, [this] {
                             return stop || !tasks.empty();
                         });
-                        
+
                         // 如果线程池停止且没有任务，退出线程
                         if (stop && tasks.empty()) {
                             return;
                         }
-                        
+
                         // 获取任务
                         task = std::move(tasks.front());
                         tasks.pop();
                     }
-                    
+
                     // 执行任务
                     task();
                 }
             });
         }
     }
-    
+
     // 提交任务到线程池
     template<class F, class... Args>
     auto enqueue(F&& f, Args&&... args) -> std::future<typename std::result_of<F(Args...)>::type> {
         using return_type = typename std::result_of<F(Args...)>::type;
-        
+
         // 创建一个可共享的打包任务
         auto task = std::make_shared<std::packaged_task<return_type()>>(
             std::bind(std::forward<F>(f), std::forward<Args>(args)...)
         );
-        
+
         // 获取任务的future
         std::future<return_type> result = task->get_future();
-        
+
         {
             std::unique_lock<std::mutex> lock(queue_mutex);
-            
+
             // 如果线程池已停止，不能添加任务
             if (stop) {
                 throw std::runtime_error("Cannot enqueue on stopped ThreadPool");
             }
-            
+
             // 添加任务到队列
             tasks.emplace([task]() { (*task)(); });
         }
-        
+
         // 通知一个等待中的线程
         condition.notify_one();
-        
+
         return result;
     }
-    
+
     // 析构函数
     ~ThreadPool() {
         {
             std::unique_lock<std::mutex> lock(queue_mutex);
             stop = true;
         }
-        
+
         // 通知所有线程
         condition.notify_all();
-        
+
         // 等待所有线程完成
         for (std::thread& worker : workers) {
             if (worker.joinable()) {
@@ -5995,7 +5995,7 @@ private:
     std::queue<T> queue;
     mutable std::mutex mutex;
     std::condition_variable cv;
-    
+
 public:
     // 添加元素
     void push(T value) {
@@ -6005,48 +6005,48 @@ public:
         }
         cv.notify_one();
     }
-    
+
     // 获取元素（阻塞）
     T pop() {
         std::unique_lock<std::mutex> lock(mutex);
         cv.wait(lock, [this] { return !queue.empty(); });
-        
+
         T value = std::move(queue.front());
         queue.pop();
         return value;
     }
-    
+
     // 尝试获取元素（非阻塞）
     bool tryPop(T& value) {
         std::lock_guard<std::mutex> lock(mutex);
         if (queue.empty()) {
             return false;
         }
-        
+
         value = std::move(queue.front());
         queue.pop();
         return true;
     }
-    
+
     // 等待并获取元素（有超时）
     bool waitAndPop(T& value, const std::chrono::milliseconds& timeout) {
         std::unique_lock<std::mutex> lock(mutex);
-        
+
         if (!cv.wait_for(lock, timeout, [this] { return !queue.empty(); })) {
             return false;
         }
-        
+
         value = std::move(queue.front());
         queue.pop();
         return true;
     }
-    
+
     // 判断是否为空
     bool empty() const {
         std::lock_guard<std::mutex> lock(mutex);
         return queue.empty();
     }
-    
+
     // 获取大小
     size_t size() const {
         std::lock_guard<std::mutex> lock(mutex);
@@ -6058,7 +6058,7 @@ public:
 void process_thread_management_examples() {
     // 进程执行示例
     std::cout << "=== Process Management ===" << std::endl;
-    
+
 #ifdef _WIN32
     std::string listCommand = "dir";
     std::string echoCommand = "echo Hello from subprocess";
@@ -6066,34 +6066,34 @@ void process_thread_management_examples() {
     std::string listCommand = "ls -la";
     std::string echoCommand = "echo Hello from subprocess";
 #endif
-    
+
     // 执行进程并等待
     std::cout << "Executing command: " << listCommand << std::endl;
     int exitCode = ProcessManager::executeProcess(listCommand);
     std::cout << "Process exit code: " << exitCode << std::endl;
-    
+
     // 捕获进程输出
     std::cout << "\nCapturing process output:" << std::endl;
     std::string output = ProcessManager::captureProcessOutput(echoCommand);
     std::cout << "Output: " << output << std::endl;
-    
+
     // 启动进程不等待
     std::cout << "\nStarting process without waiting..." << std::endl;
     bool success = ProcessManager::startProcess(echoCommand);
     std::cout << "Process started: " << (success ? "yes" : "no") << std::endl;
-    
+
     // 线程池示例
     std::cout << "\n=== Thread Pool ===" << std::endl;
-    
+
     {
         // 创建线程池
         ThreadPool pool(4);
-        
+
         // 提交一些任务
         std::vector<std::future<int>> results;
-        
+
         std::cout << "Submitting tasks to thread pool..." << std::endl;
-        
+
         for (int i = 0; i < 8; ++i) {
             results.emplace_back(
                 pool.enqueue([i] {
@@ -6103,19 +6103,19 @@ void process_thread_management_examples() {
                 })
             );
         }
-        
+
         // 获取结果
         std::cout << "\nResults:" << std::endl;
         for (size_t i = 0; i < results.size(); ++i) {
             std::cout << "Task " << i << " result: " << results[i].get() << std::endl;
         }
     } // 线程池在这里析构，等待所有任务完成
-    
+
     // 线程安全队列示例
     std::cout << "\n=== Thread Safe Queue ===" << std::endl;
-    
+
     ThreadSafeQueue<std::string> messageQueue;
-    
+
     // 生产者线程
     std::thread producer([&messageQueue] {
         for (int i = 0; i < 5; ++i) {
@@ -6125,12 +6125,12 @@ void process_thread_management_examples() {
             std::this_thread::sleep_for(std::chrono::milliseconds(300));
         }
     });
-    
+
     // 消费者线程
     std::thread consumer([&messageQueue] {
         for (int i = 0; i < 5; ++i) {
             std::string message;
-            
+
             // 等待消息
             if (messageQueue.waitAndPop(message, std::chrono::milliseconds(1000))) {
                 std::cout << "Consumer: Received " << message << std::endl;
@@ -6139,7 +6139,7 @@ void process_thread_management_examples() {
             }
         }
     });
-    
+
     // 等待线程完成
     producer.join();
     consumer.join();
@@ -6217,20 +6217,20 @@ public:
 class Singleton {
 private:
     Singleton() = default;
-    
+
 public:
     // 禁止拷贝和移动
     Singleton(const Singleton&) = delete;
     Singleton& operator=(const Singleton&) = delete;
     Singleton(Singleton&&) = delete;
     Singleton& operator=(Singleton&&) = delete;
-    
+
     // 获取实例
     static Singleton& getInstance() {
         static Singleton instance;
         return instance;
     }
-    
+
     void someBusinessLogic() {
         // 单例的业务逻辑
         std::cout << "Singleton business logic called" << std::endl;
@@ -6250,12 +6250,12 @@ class Subject {
 private:
     std::vector<std::shared_ptr<Observer>> observers;
     int state = 0;
-    
+
 public:
     void attach(std::shared_ptr<Observer> observer) {
         observers.push_back(observer);
     }
-    
+
     void detach(std::shared_ptr<Observer> observer) {
         observers.erase(
             std::remove_if(observers.begin(), observers.end(),
@@ -6265,16 +6265,16 @@ public:
             observers.end()
         );
     }
-    
+
     void setState(int state) {
         this->state = state;
         notify();
     }
-    
+
     int getState() const {
         return state;
     }
-    
+
     void notify() {
         for (const auto& observer : observers) {
             observer->update(*this);
@@ -6285,10 +6285,10 @@ public:
 class ConcreteObserverA : public Observer {
 private:
     std::string name;
-    
+
 public:
     explicit ConcreteObserverA(std::string name) : name(std::move(name)) {}
-    
+
     void update(Subject& subject) override {
         std::cout << name << " observed state change to " << subject.getState() << std::endl;
     }
@@ -6304,11 +6304,11 @@ public:
 class SimpleCommand : public Command {
 private:
     std::function<void()> action;
-    
+
 public:
     explicit SimpleCommand(std::function<void()> action)
         : action(std::move(action)) {}
-    
+
     void execute() override {
         action();
     }
@@ -6318,11 +6318,11 @@ class ComplexCommand : public Command {
 private:
     std::function<void()> begin_action;
     std::function<void()> end_action;
-    
+
 public:
     ComplexCommand(std::function<void()> begin, std::function<void()> end)
         : begin_action(std::move(begin)), end_action(std::move(end)) {}
-    
+
     void execute() override {
         begin_action();
         end_action();
@@ -6333,24 +6333,24 @@ class Invoker {
 private:
     Command* on_start = nullptr;
     Command* on_finish = nullptr;
-    
+
 public:
     void setOnStart(Command* command) {
         on_start = command;
     }
-    
+
     void setOnFinish(Command* command) {
         on_finish = command;
     }
-    
+
     void doSomething() {
         std::cout << "Invoker: Does anybody want something done before I begin?" << std::endl;
         if (on_start) {
             on_start->execute();
         }
-        
+
         std::cout << "Invoker: ...doing something really important..." << std::endl;
-        
+
         std::cout << "Invoker: Does anybody want something done after I finish?" << std::endl;
         if (on_finish) {
             on_finish->execute();
@@ -6375,11 +6375,11 @@ public:
 class Decorator : public Component {
 protected:
     std::unique_ptr<Component> component;
-    
+
 public:
     explicit Decorator(std::unique_ptr<Component> component)
         : component(std::move(component)) {}
-    
+
     std::string operation() const override {
         return component->operation();
     }
@@ -6389,7 +6389,7 @@ class ConcreteDecoratorA : public Decorator {
 public:
     explicit ConcreteDecoratorA(std::unique_ptr<Component> component)
         : Decorator(std::move(component)) {}
-    
+
     std::string operation() const override {
         return "ConcreteDecoratorA(" + Decorator::operation() + ")";
     }
@@ -6399,7 +6399,7 @@ class ConcreteDecoratorB : public Decorator {
 public:
     explicit ConcreteDecoratorB(std::unique_ptr<Component> component)
         : Decorator(std::move(component)) {}
-    
+
     std::string operation() const override {
         return "ConcreteDecoratorB(" + Decorator::operation() + ")";
     }
@@ -6409,67 +6409,67 @@ public:
 void design_patterns_examples() {
     // 工厂模式
     std::cout << "=== Factory Pattern ===" << std::endl;
-    
+
     std::unique_ptr<Factory> factoryA = std::make_unique<ConcreteFactoryA>();
     std::unique_ptr<Product> productA = factoryA->createProduct();
     std::cout << productA->operation() << std::endl;
-    
+
     std::unique_ptr<Factory> factoryB = std::make_unique<ConcreteFactoryB>();
     std::unique_ptr<Product> productB = factoryB->createProduct();
     std::cout << productB->operation() << std::endl;
-    
+
     // 单例模式
     std::cout << "\n=== Singleton Pattern ===" << std::endl;
-    
+
     Singleton& singleton = Singleton::getInstance();
     singleton.someBusinessLogic();
-    
+
     // 观察者模式
     std::cout << "\n=== Observer Pattern ===" << std::endl;
-    
+
     Subject subject;
-    
+
     auto observerA = std::make_shared<ConcreteObserverA>("Observer A");
     auto observerB = std::make_shared<ConcreteObserverA>("Observer B");
-    
+
     subject.attach(observerA);
     subject.attach(observerB);
-    
+
     subject.setState(123);
-    
+
     subject.detach(observerB);
-    
+
     subject.setState(456);
-    
+
     // 命令模式
     std::cout << "\n=== Command Pattern ===" << std::endl;
-    
+
     SimpleCommand simpleCommand([]() {
         std::cout << "Simple command executed" << std::endl;
     });
-    
+
     ComplexCommand complexCommand(
         []() { std::cout << "Complex command: begin action" << std::endl; },
         []() { std::cout << "Complex command: end action" << std::endl; }
     );
-    
+
     Invoker invoker;
     invoker.setOnStart(&simpleCommand);
     invoker.setOnFinish(&complexCommand);
-    
+
     invoker.doSomething();
-    
+
     // 装饰器模式
     std::cout << "\n=== Decorator Pattern ===" << std::endl;
-    
+
     std::unique_ptr<Component> simple = std::make_unique<ConcreteComponent>();
     std::cout << "Client: " << simple->operation() << std::endl;
-    
-    std::unique_ptr<Component> decorator1 = 
+
+    std::unique_ptr<Component> decorator1 =
         std::make_unique<ConcreteDecoratorA>(std::move(simple));
     std::cout << "Client: " << decorator1->operation() << std::endl;
-    
-    std::unique_ptr<Component> decorator2 = 
+
+    std::unique_ptr<Component> decorator2 =
         std::make_unique<ConcreteDecoratorB>(std::move(decorator1));
     std::cout << "Client: " << decorator2->operation() << std::endl;
 }
@@ -6510,7 +6510,7 @@ namespace functional {
             return f(g(std::forward<decltype(args)>(args)...));
         };
     }
-    
+
     // 柯里化：将接受多个参数的函数转换为接受一个参数的函数链
     template<typename Func, typename Arg>
     auto curry(Func&& f, Arg&& arg) {
@@ -6518,7 +6518,7 @@ namespace functional {
             return f(arg, std::forward<decltype(args)>(args)...);
         };
     }
-    
+
     // 部分应用：固定函数的一些参数
     template<typename Func, typename... Args>
     auto partial(Func&& f, Args&&... args) {
@@ -6533,13 +6533,13 @@ namespace functional {
             );
         };
     }
-    
+
     // 管道操作符：x | f = f(x)
     template<typename T, typename F>
     auto operator|(T&& value, F&& f) -> decltype(f(std::forward<T>(value))) {
         return f(std::forward<T>(value));
     }
-    
+
     // Maybe (Optional) Monad
     template<typename T, typename F>
     auto bind(const std::optional<T>& opt, F&& f) -> decltype(f(std::declval<T>())) {
@@ -6553,67 +6553,67 @@ namespace functional {
 // 函数式风格的数据处理示例
 void functional_programming_examples() {
     using namespace functional;
-    
+
     std::cout << "=== C++ Functional Programming ===" << std::endl;
-    
+
     // 高阶函数示例
     std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    
+
     // 使用纯函数进行转换
     auto square = [](int x) { return x * x; };
     auto isEven = [](int x) { return x % 2 == 0; };
     auto toString = [](int x) { return std::to_string(x); };
-    
+
     // 函数组合
     auto squareAndToString = compose(toString, square);
-    
+
     std::cout << "Composed function: " << squareAndToString(5) << std::endl;
-    
+
     // 柯里化和部分应用
     auto add = [](int a, int b) { return a + b; };
     auto add5 = curry(add, 5);
-    
+
     std::cout << "Curried function (add5): " << add5(10) << std::endl;
-    
+
     auto multiply = [](int a, int b, int c) { return a * b * c; };
     auto multiplyBy2And3 = partial(multiply, 2, 3);
-    
+
     std::cout << "Partial application: " << multiplyBy2And3(4) << std::endl;
-    
+
     // 管道操作
     int result = 5 | square | add5;
     std::cout << "Pipeline (5 | square | add5): " << result << std::endl;
-    
+
     // 数据处理示例
     std::cout << "\nData processing example:" << std::endl;
-    
+
     auto transformNumbers = [&]() {
         std::vector<std::string> result;
-        
+
         for (const auto& num : numbers) {
             if (num % 2 == 0) {
                 result.push_back(std::to_string(num * num));
             }
         }
-        
+
         return result;
     };
-    
+
     auto functionalTransform = [&]() {
         std::vector<int> evenNumbers;
         std::copy_if(numbers.begin(), numbers.end(), std::back_inserter(evenNumbers), isEven);
-        
+
         std::vector<int> squaredNumbers;
         std::transform(evenNumbers.begin(), evenNumbers.end(), std::back_inserter(squaredNumbers), square);
-        
+
         std::vector<std::string> result;
         std::transform(squaredNumbers.begin(), squaredNumbers.end(), std::back_inserter(result), toString);
-        
+
         return result;
     };
-    
+
     auto modernTransform = [&]() {
-        return numbers 
+        return numbers
                | [](const auto& nums) { // 过滤偶数
                    std::vector<int> result;
                    std::copy_if(nums.begin(), nums.end(), std::back_inserter(result), isEven);
@@ -6630,46 +6630,46 @@ void functional_programming_examples() {
                    return result;
                };
     };
-    
+
     auto results = modernTransform();
-    
+
     std::cout << "Even squared numbers: ";
     for (const auto& str : results) {
         std::cout << str << " ";
     }
     std::cout << std::endl;
-    
+
     // Maybe (Optional) Monad示例
     std::cout << "\nOptional monad example:" << std::endl;
-    
+
     auto safeDivide = [](int a, int b) -> std::optional<int> {
         if (b == 0) return std::nullopt;
         return a / b;
     };
-    
+
     auto safeSqrt = [](int x) -> std::optional<double> {
         if (x < 0) return std::nullopt;
         return std::sqrt(x);
     };
-    
+
     // 使用monadic绑定进行链式操作
     auto computeResult = [&](int a, int b) {
         return bind(safeDivide(a, b), [](int div_result) {
             return safeSqrt(div_result);
         });
     };
-    
+
     auto goodResult = computeResult(16, 4);  // 16/4 = 4, sqrt(4) = 2
     auto badResult1 = computeResult(16, 0);  // 除以零
     auto badResult2 = computeResult(-4, 4);  // 尝试对负数求平方根
-    
-    std::cout << "16/4 then sqrt: " 
+
+    std::cout << "16/4 then sqrt: "
               << (goodResult ? std::to_string(*goodResult) : "Error") << std::endl;
-    
-    std::cout << "16/0 then sqrt: " 
+
+    std::cout << "16/0 then sqrt: "
               << (badResult1 ? std::to_string(*badResult1) : "Error") << std::endl;
-    
-    std::cout << "-4/4 then sqrt: " 
+
+    std::cout << "-4/4 then sqrt: "
               << (badResult2 ? std::to_string(*badResult2) : "Error") << std::endl;
 }
 ```
@@ -6715,7 +6715,7 @@ public:
         // 调用派生类的实现
         static_cast<Derived*>(this)->implementation();
     }
-    
+
     // 提供默认实现
     void implementation() {
         std::cout << "Default implementation in Base" << std::endl;
@@ -6772,17 +6772,17 @@ template<typename T>
 class Vector {
 private:
     std::vector<T> data;
-    
+
 public:
     explicit Vector(size_t size) : data(size) {}
-    
+
     Vector(std::initializer_list<T> init) : data(init) {}
-    
+
     size_t size() const { return data.size(); }
-    
+
     T& operator[](size_t index) { return data[index]; }
     const T& operator[](size_t index) const { return data[index]; }
-    
+
     // 支持表达式模板的加法
     template<typename Expr>
     Vector& operator+=(const Expr& expr) {
@@ -6791,7 +6791,7 @@ public:
         }
         return *this;
     }
-    
+
     // 普通加法
     Vector& operator+=(const Vector& other) {
         for (size_t i = 0; i < size(); ++i) {
@@ -6807,15 +6807,15 @@ class VectorAddExpr {
 private:
     const LhsExpr& lhs;
     const RhsExpr& rhs;
-    
+
 public:
     VectorAddExpr(const LhsExpr& lhs, const RhsExpr& rhs)
         : lhs(lhs), rhs(rhs) {}
-    
+
     auto operator[](size_t index) const {
         return lhs[index] + rhs[index];
     }
-    
+
     size_t size() const { return lhs.size(); }
 };
 
@@ -6881,8 +6881,8 @@ template<typename SM, char C, char... Cs, size_t Pos>
 struct Parser<SM, std::integer_sequence<char, C, Cs...>, Pos> {
     using NextState = typename SM::template Transition<C>;
     using Result = typename Parser<
-        NextState, 
-        std::integer_sequence<char, Cs...>, 
+        NextState,
+        std::integer_sequence<char, Cs...>,
         Pos + 1
     >::Result;
 };
@@ -6890,66 +6890,66 @@ struct Parser<SM, std::integer_sequence<char, C, Cs...>, Pos> {
 // 元编程设计模式示例
 void metaprogramming_examples() {
     std::cout << "=== Metaprogramming Design Patterns ===" << std::endl;
-    
+
     // 编译期计算示例
     constexpr int fact5 = Factorial<5>::value;
     std::cout << "Factorial of 5 (compile-time): " << fact5 << std::endl;
-    
+
     // CRTP示例
     std::cout << "\nCRTP Example:" << std::endl;
-    
+
     Derived1 d1;
     d1.interface();  // 调用Derived1的实现
-    
+
     Derived2 d2;
     d2.interface();  // 使用Base的默认实现
-    
+
     // 类型列表示例
     std::cout << "\nType List Example:" << std::endl;
-    
+
     using MyTypes = TypeList<int, double, std::string, float>;
-    
+
     std::cout << "Length of type list: " << Length<MyTypes>::value << std::endl;
-    
+
     using SecondType = typename TypeAt<1, MyTypes>::type;
-    std::cout << "Second type is double: " 
+    std::cout << "Second type is double: "
               << std::is_same<SecondType, double>::value << std::endl;
-    
+
     using ExtendedList = typename PushFront<char, MyTypes>::type;
     std::cout << "Extended list length: " << Length<ExtendedList>::value << std::endl;
-    
+
     // 表达式模板示例
     std::cout << "\nExpression Templates Example:" << std::endl;
-    
+
     Vector<double> v1 = {1.0, 2.0, 3.0, 4.0};
     Vector<double> v2 = {5.0, 6.0, 7.0, 8.0};
     Vector<double> v3 = {9.0, 10.0, 11.0, 12.0};
     Vector<double> result(4);
-    
+
     // 不使用表达式模板：每个加法都创建一个临时向量
     // result = v1 + v2 + v3;
-    
+
     // 使用表达式模板：避免创建临时向量
     result += v1 + v2 + v3;
-    
+
     std::cout << "Result vector: ";
     for (size_t i = 0; i < result.size(); ++i) {
         std::cout << result[i] << " ";
     }
     std::cout << std::endl;
-    
+
     // 编译期状态机示例
     std::cout << "\nCompile-time State Machine Example:" << std::endl;
-    
+
     using ValidInput = std::integer_sequence<char, '{', 'a', 'b', 'c', '}'>;
     using InvalidInput = std::integer_sequence<char, '{', 'a', 'b', 'c'>;
-    
+
     using ValidResult = Parser<StateMachine<State::Start>, ValidInput>::Result;
     using InvalidResult = Parser<StateMachine<State::Start>, InvalidInput>::Result;
-    
+
     std::cout << "Valid input parsing ends in State::End: "
               << std::is_same<ValidResult, StateMachine<State::End>>::value << std::endl;
-    
+
     std::cout << "Invalid input parsing ends in State::Error: "
               << std::is_same<InvalidResult, StateMachine<State::Error>>::value << std::endl;
 }
@@ -6988,11 +6988,11 @@ class Timer {
 private:
     std::chrono::high_resolution_clock::time_point start_time;
     std::string name;
-    
+
 public:
     explicit Timer(std::string name = "Operation")
         : start_time(std::chrono::high_resolution_clock::now()), name(std::move(name)) {}
-    
+
     ~Timer() {
         auto end_time = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
@@ -7009,24 +7009,24 @@ private:
         char data[BlockSize];
         Block* next;
     };
-    
+
     struct Chunk {
         Chunk* next;
     };
-    
+
     Block* current_block = nullptr;
     Chunk* free_chunk = nullptr;
     size_t chunks_per_block;
-    
+
 public:
     using value_type = T;
-    
+
     PoolAllocator() : chunks_per_block(BlockSize / sizeof(T)) {
         if (sizeof(T) < sizeof(Chunk)) {
             chunks_per_block = BlockSize / sizeof(Chunk);
         }
     }
-    
+
     ~PoolAllocator() {
         Block* block = current_block;
         while (block) {
@@ -7035,61 +7035,61 @@ public:
             block = next;
         }
     }
-    
+
     T* allocate(size_t n = 1) {
         if (n > 1) {
             // 如果需要分配多个对象，回退到标准分配器
             return static_cast<T*>(::operator new(n * sizeof(T)));
         }
-        
+
         if (free_chunk) {
             T* result = reinterpret_cast<T*>(free_chunk);
             free_chunk = free_chunk->next;
             return result;
         }
-        
+
         if (!current_block || chunks_per_block == 0) {
             // 分配新块
             Block* new_block = new Block;
             new_block->next = current_block;
             current_block = new_block;
-            
+
             // 初始化块中的所有chunk
             char* chunk_start = current_block->data;
             free_chunk = reinterpret_cast<Chunk*>(chunk_start);
-            
+
             for (size_t i = 0; i < chunks_per_block - 1; ++i) {
-                reinterpret_cast<Chunk*>(chunk_start)->next = 
+                reinterpret_cast<Chunk*>(chunk_start)->next =
                     reinterpret_cast<Chunk*>(chunk_start + sizeof(T));
                 chunk_start += sizeof(T);
             }
-            
+
             reinterpret_cast<Chunk*>(chunk_start)->next = nullptr;
         }
-        
+
         T* result = reinterpret_cast<T*>(free_chunk);
         free_chunk = free_chunk->next;
         return result;
     }
-    
+
     void deallocate(T* p, size_t n = 1) {
         if (n > 1) {
             // 如果分配了多个对象，回退到标准释放
             ::operator delete(p);
             return;
         }
-        
+
         // 将对象添加回空闲列表
         Chunk* chunk = reinterpret_cast<Chunk*>(p);
         chunk->next = free_chunk;
         free_chunk = chunk;
     }
-    
+
     template<typename... Args>
     void construct(T* p, Args&&... args) {
         new(p) T(std::forward<Args>(args)...);
     }
-    
+
     void destroy(T* p) {
         p->~T();
     }
@@ -7101,28 +7101,28 @@ class ObjectPool {
 private:
     std::vector<std::unique_ptr<T>> pool;
     std::vector<T*> free_objects;
-    
+
 public:
     explicit ObjectPool(size_t initial_size = 10) {
         for (size_t i = 0; i < initial_size; ++i) {
             add_object();
         }
     }
-    
+
     T* acquire() {
         if (free_objects.empty()) {
             add_object();
         }
-        
+
         T* object = free_objects.back();
         free_objects.pop_back();
         return object;
     }
-    
+
     void release(T* object) {
         free_objects.push_back(object);
     }
-    
+
 private:
     void add_object() {
         pool.push_back(std::make_unique<T>());
@@ -7144,7 +7144,7 @@ struct ParticlesSoA {  // Structure of Arrays
     std::vector<float> vx, vy, vz; // 速度数组
     std::vector<float> r, g, b;    // 颜色数组
     std::vector<float> size;       // 大小数组
-    
+
     void resize(size_t n) {
         x.resize(n); y.resize(n); z.resize(n);
         vx.resize(n); vy.resize(n); vz.resize(n);
@@ -7160,11 +7160,11 @@ private:
     std::function<T()> compute_func;
     mutable bool computed = false;
     mutable T value;
-    
+
 public:
     explicit LazyValue(std::function<T()> func)
         : compute_func(std::move(func)) {}
-    
+
     const T& get() const {
         if (!computed) {
             value = compute_func();
@@ -7172,7 +7172,7 @@ public:
         }
         return value;
     }
-    
+
     void reset() {
         computed = false;
     }
@@ -7181,44 +7181,44 @@ public:
 // 性能优化模式示例
 void performance_optimization_examples() {
     std::cout << "=== Performance Optimization Patterns ===" << std::endl;
-    
+
     // 内存池分配器示例
     std::cout << "\nMemory Pool Example:" << std::endl;
-    
+
     constexpr int N = 100000;
-    
+
     {
         Timer timer("Standard allocation");
         std::vector<int*> pointers;
         for (int i = 0; i < N; ++i) {
             pointers.push_back(new int(i));
         }
-        
+
         for (auto ptr : pointers) {
             delete ptr;
         }
     }
-    
+
     {
         Timer timer("Pool allocation");
         PoolAllocator<int> pool;
         std::vector<int*> pointers;
-        
+
         for (int i = 0; i < N; ++i) {
             int* p = pool.allocate();
             pool.construct(p, i);
             pointers.push_back(p);
         }
-        
+
         for (auto ptr : pointers) {
             pool.destroy(ptr);
             pool.deallocate(ptr);
         }
     }
-    
+
     // 对象池示例
     std::cout << "\nObject Pool Example:" << std::endl;
-    
+
     class ExpensiveObject {
     public:
         ExpensiveObject() {
@@ -7226,16 +7226,16 @@ void performance_optimization_examples() {
             data.resize(1000);
             std::fill(data.begin(), data.end(), 0);
         }
-        
+
         void reset() {
             // 重置对象状态而不是销毁重建
             std::fill(data.begin(), data.end(), 0);
         }
-        
+
     private:
         std::vector<int> data;
     };
-    
+
     {
         Timer timer("Without object pool");
         for (int i = 0; i < 1000; ++i) {
@@ -7243,11 +7243,11 @@ void performance_optimization_examples() {
             // 使用对象...
         }
     }
-    
+
     {
         Timer timer("With object pool");
         ObjectPool<ExpensiveObject> pool(10);
-        
+
         for (int i = 0; i < 1000; ++i) {
             auto* obj = pool.acquire();
             // 使用对象...
@@ -7255,22 +7255,22 @@ void performance_optimization_examples() {
             pool.release(obj);
         }
     }
-    
+
     // 数据布局优化示例
     std::cout << "\nData Layout Optimization Example:" << std::endl;
-    
+
     constexpr int NUM_PARTICLES = 100000;
-    
+
     // 生成随机数
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<float> dist(-1.0f, 1.0f);
-    
+
     // 初始化数据
     std::vector<ParticleAoS> particles_aos(NUM_PARTICLES);
     ParticlesSoA particles_soa;
     particles_soa.resize(NUM_PARTICLES);
-    
+
     for (int i = 0; i < NUM_PARTICLES; ++i) {
         // AoS初始化
         particles_aos[i].x = dist(gen);
@@ -7283,7 +7283,7 @@ void performance_optimization_examples() {
         particles_aos[i].g = dist(gen);
         particles_aos[i].b = dist(gen);
         particles_aos[i].size = dist(gen);
-        
+
         // SoA初始化
         particles_soa.x[i] = particles_aos[i].x;
         particles_soa.y[i] = particles_aos[i].y;
@@ -7296,7 +7296,7 @@ void performance_optimization_examples() {
         particles_soa.b[i] = particles_aos[i].b;
         particles_soa.size[i] = particles_aos[i].size;
     }
-    
+
     // 测试AoS性能
     {
         Timer timer("AoS particle update");
@@ -7307,7 +7307,7 @@ void performance_optimization_examples() {
             particles_aos[i].z += particles_aos[i].vz * 0.1f;
         }
     }
-    
+
     // 测试SoA性能
     {
         Timer timer("SoA particle update");
@@ -7318,26 +7318,26 @@ void performance_optimization_examples() {
             particles_soa.z[i] += particles_soa.vz[i] * 0.1f;
         }
     }
-    
+
     // 惰性求值示例
     std::cout << "\nLazy Evaluation Example:" << std::endl;
-    
+
     auto expensive_computation = []() {
         std::cout << "Performing expensive computation..." << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
         return 42;
     };
-    
+
     LazyValue<int> lazy_value(expensive_computation);
-    
+
     std::cout << "Lazy value created, but not computed yet" << std::endl;
-    
+
     // 第一次获取值时会计算
     std::cout << "First access: " << lazy_value.get() << std::endl;
-    
+
     // 后续获取直接返回缓存值
     std::cout << "Second access: " << lazy_value.get() << std::endl;
-    
+
     // 重置后再次访问将重新计算
     lazy_value.reset();
     std::cout << "After reset, accessing again: " << lazy_value.get() << std::endl;
@@ -7347,16 +7347,16 @@ void performance_optimization_examples() {
 int main() {
     // 设计模式示例
     design_patterns_examples();
-    
+
     // 函数式编程模式示例
     functional_programming_examples();
-    
+
     // 元编程设计模式示例
     metaprogramming_examples();
-    
+
     // 性能优化模式示例
     performance_optimization_examples();
-    
+
     return 0;
 }
 ```

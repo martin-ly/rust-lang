@@ -59,7 +59,7 @@ use std::pin::Pin;
 // 中间件特质定义
 pub trait Middleware<Req, Res> {
     type Future: Future<Output = Res>;
-    
+
     fn call(&self, req: Req, next: Box<dyn Fn(Req) -> Pin<Box<dyn Future<Output = Res>>>>) -> Self::Future;
 }
 
@@ -77,7 +77,7 @@ where
     Res: 'static,
 {
     type Future = Pin<Box<dyn Future<Output = Res>>>;
-    
+
     fn call(&self, req: Req, next: Box<dyn Fn(Req) -> Pin<Box<dyn Future<Output = Res>>>>) -> Self::Future {
         let second = &self.second;
         Box::pin(self.first.call(req, Box::new(move |req| {
@@ -100,7 +100,7 @@ where
     Res: 'static,
 {
     type Future = Pin<Box<dyn Future<Output = Res>>>;
-    
+
     fn call(&self, req: Req, next: Box<dyn Fn(Req) -> Pin<Box<dyn Future<Output = Res>>>>) -> Self::Future {
         next(req)
     }
@@ -136,20 +136,20 @@ where
     Res: std::fmt::Debug + 'static,
 {
     type Future = Pin<Box<dyn Future<Output = Res>>>;
-    
+
     #[instrument]
     fn call(&self, req: Req, next: Box<dyn Fn(Req) -> Pin<Box<dyn Future<Output = Res>>>>) -> Self::Future {
         Box::pin(async move {
             if self.log_requests {
                 info!("Request: {:?}", req);
             }
-            
+
             let response = next(req).await;
-            
+
             if self.log_responses {
                 info!("Response: {:?}", response);
             }
-            
+
             response
         })
     }
@@ -182,7 +182,7 @@ impl AuthMiddleware {
     pub fn new(tokens: HashMap<String, String>) -> Self {
         Self { valid_tokens: tokens }
     }
-    
+
     fn validate_token(&self, token: &str) -> Result<String, AuthError> {
         self.valid_tokens
             .get(token)
@@ -197,7 +197,7 @@ where
     Res: 'static,
 {
     type Future = Pin<Box<dyn Future<Output = Result<Res, AuthError>>>>;
-    
+
     fn call(
         &self,
         req: AuthRequest<T>,
@@ -244,22 +244,22 @@ impl RateLimitMiddleware {
             window,
         }
     }
-    
+
     fn check_rate_limit(&self, client_id: &str) -> Result<(), RateLimitError> {
         let mut requests = self.requests.lock().unwrap();
         let now = Instant::now();
-        
+
         let client_requests = requests.entry(client_id.to_string()).or_insert_with(Vec::new);
-        
+
         // 清理过期请求
         client_requests.retain(|&time| now.duration_since(time) < self.window);
-        
+
         if client_requests.len() >= self.max_requests {
             return Err(RateLimitError {
                 retry_after: self.window,
             });
         }
-        
+
         client_requests.push(now);
         Ok(())
     }
@@ -277,7 +277,7 @@ where
     Res: 'static,
 {
     type Future = Pin<Box<dyn Future<Output = Result<Res, RateLimitError>>>>;
-    
+
     fn call(
         &self,
         req: RateLimitRequest<T>,
@@ -317,7 +317,7 @@ where
     Res: 'static,
 {
     type Future = Pin<Box<dyn Future<Output = Res>>>;
-    
+
     fn call(&self, req: Req, next: Box<dyn Fn(Req) -> Pin<Box<dyn Future<Output = Res>>>>) -> Self::Future {
         if (self.predicate)(&req) {
             self.middleware.call(req, next)
@@ -351,7 +351,7 @@ where
     Res: 'static,
 {
     type Future = Pin<Box<dyn Future<Output = Result<Res, E>>>>;
-    
+
     fn call(
         &self,
         req: Req,
@@ -390,7 +390,7 @@ where
     Res: 'static,
 {
     type Future = Pin<Box<dyn Future<Output = Vec<Res>>>>;
-    
+
     fn call(
         &self,
         req: Req,
@@ -403,7 +403,7 @@ where
                 middleware.call(req_clone, Box::new(|_| Box::pin(async { unreachable!() })))
             })
             .collect();
-        
+
         Box::pin(async move {
             join_all(futures).await
         })
@@ -432,7 +432,7 @@ where
             _phantom: std::marker::PhantomData,
         }
     }
-    
+
     // 只允许兼容的中间件组合
     pub fn compose<M2, Out2>(
         self,
@@ -466,7 +466,7 @@ where
             middlewares: Vec::new(),
         }
     }
-    
+
     pub fn add<M>(mut self, middleware: M) -> Self
     where
         M: Middleware<Req, Res> + 'static,
@@ -474,7 +474,7 @@ where
         self.middlewares.push(Box::new(middleware));
         self
     }
-    
+
     pub fn build(self) -> impl Middleware<Req, Res> {
         StackMiddleware {
             middlewares: self.middlewares,
@@ -492,16 +492,16 @@ where
     Res: 'static,
 {
     type Future = Pin<Box<dyn Future<Output = Res>>>;
-    
+
     fn call(&self, req: Req, final_handler: Box<dyn Fn(Req) -> Pin<Box<dyn Future<Output = Res>>>>) -> Self::Future {
         let mut next = final_handler;
-        
+
         // 从后向前组合中间件
         for middleware in self.middlewares.iter().rev() {
             let current_next = next;
             next = Box::new(move |req| middleware.call(req, current_next));
         }
-        
+
         next(req)
     }
 }
@@ -526,7 +526,7 @@ pub fn create_web_app() -> Router {
             }))
         }))
         .build();
-    
+
     Router::new()
         .route("/api/data", get(handle_data))
         .layer(middleware_stack)
@@ -562,7 +562,7 @@ where
             _phantom: std::marker::PhantomData,
         }
     }
-    
+
     pub fn with_validation<V>(self, validator: V) -> Self
     where
         V: Fn(&T) -> Result<(), ValidationError> + 'static,
@@ -570,7 +570,7 @@ where
         // 添加验证中间件
         self
     }
-    
+
     pub fn with_transformation<F, U>(self, transformer: F) -> DataProcessingPipeline<U>
     where
         F: Fn(T) -> U + 'static,
@@ -581,7 +581,7 @@ where
             _phantom: std::marker::PhantomData,
         }
     }
-    
+
     pub fn with_caching(self) -> Self {
         // 添加缓存中间件
         self
@@ -639,7 +639,7 @@ where
     M: Middleware<Req, Res>,
 {
     type Future = M::Future;
-    
+
     fn call(&self, req: Req, next: Box<dyn Fn(Req) -> Pin<Box<dyn Future<Output = Res>>>>) -> Self::Future {
         self.inner.call(req, next)
     }
@@ -667,6 +667,6 @@ where
 
 ---
 
-**文档版本**: 1.0  
-**最后更新**: 2025-06-30  
+**文档版本**: 1.0
+**最后更新**: 2025-06-30
 **维护者**: Rust中间件研究组

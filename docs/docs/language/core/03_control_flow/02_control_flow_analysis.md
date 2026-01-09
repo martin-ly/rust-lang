@@ -119,12 +119,12 @@ enum AnalysisDirection {
     Backward,
 }
 
-fn analyze_data_flow<D>(cfg: &ControlFlowGraph, analysis: &DataFlowAnalysis<D>) -> DataFlowResult<D> 
+fn analyze_data_flow<D>(cfg: &ControlFlowGraph, analysis: &DataFlowAnalysis<D>) -> DataFlowResult<D>
 where D: Clone + PartialEq {
     let mut in_values = HashMap::new();
     let mut out_values = HashMap::new();
     let mut changed = true;
-    
+
     // 初始化
     for block in cfg.get_all_blocks() {
         match analysis.direction {
@@ -146,15 +146,15 @@ where D: Clone + PartialEq {
             }
         }
     }
-    
+
     // 迭代计算
     while changed {
         changed = false;
-        
+
         for block in cfg.get_all_blocks() {
             let old_in = in_values[&block.id].clone();
             let old_out = out_values[&block.id].clone();
-            
+
             match analysis.direction {
                 AnalysisDirection::Forward => {
                     // 计算in值
@@ -163,7 +163,7 @@ where D: Clone + PartialEq {
                         new_in = (analysis.meet)(&new_in, &out_values[pred]);
                     }
                     in_values.insert(block.id, new_in);
-                    
+
                     // 计算out值
                     let mut new_out = in_values[&block.id].clone();
                     for instruction in &block.instructions {
@@ -178,7 +178,7 @@ where D: Clone + PartialEq {
                         new_out = (analysis.meet)(&new_out, &in_values[succ]);
                     }
                     out_values.insert(block.id, new_out);
-                    
+
                     // 计算in值
                     let mut new_in = out_values[&block.id].clone();
                     for instruction in block.instructions.iter().rev() {
@@ -187,13 +187,13 @@ where D: Clone + PartialEq {
                     in_values.insert(block.id, new_in);
                 }
             }
-            
+
             if old_in != in_values[&block.id] || old_out != out_values[&block.id] {
                 changed = true;
             }
         }
     }
-    
+
     DataFlowResult { in_values, out_values }
 }
 ```
@@ -213,17 +213,17 @@ impl LiveVariableDomain {
             variables: HashSet::new(),
         }
     }
-    
+
     fn bottom() -> Self {
         LiveVariableDomain::new()
     }
-    
+
     fn top() -> Self {
         LiveVariableDomain {
             variables: HashSet::new(), // 所有变量都活跃
         }
     }
-    
+
     fn meet(&self, other: &Self) -> Self {
         LiveVariableDomain {
             variables: self.variables.union(&other.variables).cloned().collect(),
@@ -233,12 +233,12 @@ impl LiveVariableDomain {
 
 fn live_variable_transfer(instruction: &Instruction, domain: &LiveVariableDomain) -> LiveVariableDomain {
     let mut new_domain = domain.clone();
-    
+
     match instruction {
         Instruction::Assign { variable, value } => {
             // 移除定义的变量
             new_domain.variables.remove(variable);
-            
+
             // 添加使用的变量
             let uses = extract_variable_uses(value);
             for var in uses {
@@ -256,7 +256,7 @@ fn live_variable_transfer(instruction: &Instruction, domain: &LiveVariableDomain
         }
         _ => {}
     }
-    
+
     new_domain
 }
 
@@ -267,7 +267,7 @@ fn live_variable_analysis(cfg: &ControlFlowGraph) -> DataFlowResult<LiveVariable
         meet: Box::new(|a, b| a.meet(b)),
         direction: AnalysisDirection::Backward,
     };
-    
+
     analyze_data_flow(cfg, &analysis)
 }
 ```
@@ -294,14 +294,14 @@ impl ConstantDomain {
             constants: HashMap::new(),
         }
     }
-    
+
     fn bottom() -> Self {
         ConstantDomain::new()
     }
-    
+
     fn meet(&self, other: &Self) -> Self {
         let mut result = ConstantDomain::new();
-        
+
         for (var, value1) in &self.constants {
             if let Some(value2) = other.constants.get(var) {
                 let meet_value = match (value1, value2) {
@@ -318,14 +318,14 @@ impl ConstantDomain {
                 result.constants.insert(var.clone(), meet_value);
             }
         }
-        
+
         result
     }
 }
 
 fn constant_propagation_transfer(instruction: &Instruction, domain: &ConstantDomain) -> ConstantDomain {
     let mut new_domain = domain.clone();
-    
+
     match instruction {
         Instruction::Assign { variable, value } => {
             let constant_value = evaluate_constant(value, domain);
@@ -333,7 +333,7 @@ fn constant_propagation_transfer(instruction: &Instruction, domain: &ConstantDom
         }
         _ => {}
     }
-    
+
     new_domain
 }
 
@@ -346,7 +346,7 @@ fn evaluate_constant(expression: &Expression, domain: &ConstantDomain) -> Consta
         Expression::BinaryOp { op, left, right } => {
             let left_val = evaluate_constant(left, domain);
             let right_val = evaluate_constant(right, domain);
-            
+
             match (left_val, right_val) {
                 (ConstantValue::Constant(l), ConstantValue::Constant(r)) => {
                     match op {
@@ -377,7 +377,7 @@ fn constant_propagation_analysis(cfg: &ControlFlowGraph) -> DataFlowResult<Const
         meet: Box::new(|a, b| a.meet(b)),
         direction: AnalysisDirection::Forward,
     };
-    
+
     analyze_data_flow(cfg, &analysis)
 }
 ```
@@ -399,31 +399,31 @@ fn trace_execution(program: &Program, initial_state: ProgramState) -> ExecutionT
         states: vec![initial_state.clone()],
         transitions: Vec::new(),
     };
-    
+
     let mut current_state = initial_state;
     let mut pc = 0;
-    
+
     while pc < program.instructions.len() {
         let instruction = &program.instructions[pc];
         let next_state = execute_instruction(instruction, &current_state);
-        
+
         trace.transitions.push(Transition {
             from: current_state.clone(),
             to: next_state.clone(),
             instruction: instruction.clone(),
         });
-        
+
         trace.states.push(next_state.clone());
         current_state = next_state;
         pc += 1;
     }
-    
+
     trace
 }
 
 fn execute_instruction(instruction: &Instruction, state: &ProgramState) -> ProgramState {
     let mut new_state = state.clone();
-    
+
     match instruction {
         Instruction::Assign { variable, value } => {
             let evaluated_value = evaluate_expression(value, state);
@@ -441,7 +441,7 @@ fn execute_instruction(instruction: &Instruction, state: &ProgramState) -> Progr
             new_state.pc += 1;
         }
     }
-    
+
     new_state
 }
 ```
@@ -463,27 +463,27 @@ fn profile_execution(program: &Program, test_cases: &[TestInput]) -> Performance
         instruction_executions: HashMap::new(),
         timing: HashMap::new(),
     };
-    
+
     for test_case in test_cases {
         let start_time = Instant::now();
         let trace = trace_execution(program, test_case.initial_state);
-        
+
         // 统计执行次数
         for transition in &trace.transitions {
             let block_id = get_block_id(&transition.instruction);
             *profile.block_executions.entry(block_id).or_insert(0) += 1;
-            
+
             let instruction_id = transition.instruction.id;
             *profile.instruction_executions.entry(instruction_id).or_insert(0) += 1;
         }
-        
+
         // 统计执行时间
         let execution_time = start_time.elapsed();
         for block_id in get_executed_blocks(&trace) {
             *profile.timing.entry(block_id).or_insert(Duration::ZERO) += execution_time;
         }
     }
-    
+
     profile
 }
 ```
@@ -501,17 +501,17 @@ struct ErrorDetector {
 fn detect_errors(program: &Program, test_cases: &[TestInput]) -> Vec<Error> {
     let mut errors = Vec::new();
     let detector = ErrorDetector::new();
-    
+
     for test_case in test_cases {
         let trace = trace_execution(program, test_case.initial_state);
-        
+
         // 检查错误模式
         for pattern in &detector.error_patterns {
             if pattern.matches(&trace) {
                 errors.push(Error::PatternViolation(pattern.clone()));
             }
         }
-        
+
         // 检查违反规则
         for checker in &detector.violation_checkers {
             if let Some(violation) = checker.check(&trace) {
@@ -519,7 +519,7 @@ fn detect_errors(program: &Program, test_cases: &[TestInput]) -> Vec<Error> {
             }
         }
     }
-    
+
     errors
 }
 
@@ -544,13 +544,13 @@ struct ViolationChecker {
 fn enumerate_paths(cfg: &ControlFlowGraph, max_paths: usize) -> Vec<ExecutionPath> {
     let mut paths = Vec::new();
     let mut worklist = VecDeque::new();
-    
+
     // 从入口节点开始
     worklist.push_back(vec![cfg.get_entry_block().id]);
-    
+
     while let Some(current_path) = worklist.pop_front() {
         let current_block = current_path.last().unwrap();
-        
+
         if *current_block == cfg.get_exit_block().id {
             // 找到完整路径
             paths.push(current_path);
@@ -567,7 +567,7 @@ fn enumerate_paths(cfg: &ControlFlowGraph, max_paths: usize) -> Vec<ExecutionPat
             }
         }
     }
-    
+
     paths
 }
 ```
@@ -579,11 +579,11 @@ fn enumerate_paths(cfg: &ControlFlowGraph, max_paths: usize) -> Vec<ExecutionPat
 ```rust
 fn check_path_feasibility(path: &[BasicBlockId], cfg: &ControlFlowGraph) -> FeasibilityResult {
     let mut constraints = Vec::new();
-    
+
     for i in 0..path.len() - 1 {
         let current_block = cfg.get_block(path[i]);
         let next_block = cfg.get_block(path[i + 1]);
-        
+
         // 收集路径约束
         for instruction in &current_block.instructions {
             if let Instruction::Branch { condition, true_target, false_target } = instruction {
@@ -595,10 +595,10 @@ fn check_path_feasibility(path: &[BasicBlockId], cfg: &ControlFlowGraph) -> Feas
             }
         }
     }
-    
+
     // 检查约束可满足性
     let satisfiable = check_constraint_satisfiability(&constraints);
-    
+
     FeasibilityResult {
         feasible: satisfiable,
         constraints,
@@ -608,11 +608,11 @@ fn check_path_feasibility(path: &[BasicBlockId], cfg: &ControlFlowGraph) -> Feas
 fn check_constraint_satisfiability(constraints: &[Expression]) -> bool {
     // 使用SMT求解器检查约束可满足性
     let mut solver = SmtSolver::new();
-    
+
     for constraint in constraints {
         solver.add_constraint(constraint);
     }
-    
+
     solver.check_satisfiable()
 }
 ```
@@ -631,18 +631,18 @@ struct PathCoverage {
 fn analyze_path_coverage(cfg: &ControlFlowGraph, test_cases: &[TestInput]) -> PathCoverage {
     let all_paths = enumerate_paths(cfg, 1000); // 限制路径数量
     let mut covered_paths = HashSet::new();
-    
+
     for test_case in test_cases {
         let trace = trace_execution(&test_case.program, test_case.initial_state);
         let executed_path = extract_path_from_trace(&trace);
         covered_paths.insert(executed_path);
     }
-    
+
     let uncovered_paths: HashSet<_> = all_paths.iter()
         .filter(|path| !covered_paths.contains(*path))
         .cloned()
         .collect();
-    
+
     PathCoverage {
         total_paths: all_paths.len(),
         covered_paths,
@@ -660,22 +660,22 @@ fn analyze_path_coverage(cfg: &ControlFlowGraph, test_cases: &[TestInput]) -> Pa
 ```rust
 fn apply_optimizations(cfg: &mut ControlFlowGraph) -> OptimizationResult {
     let mut optimizations = Vec::new();
-    
+
     // 常量传播
     let constant_result = constant_propagation_analysis(cfg);
     let constant_opt = apply_constant_propagation(cfg, &constant_result);
     optimizations.push(constant_opt);
-    
+
     // 死代码消除
     let live_result = live_variable_analysis(cfg);
     let dead_code_opt = eliminate_dead_code(cfg, &live_result);
     optimizations.push(dead_code_opt);
-    
+
     // 循环优化
     let loops = detect_loops(cfg);
     let loop_opt = optimize_loops(cfg, &loops);
     optimizations.push(loop_opt);
-    
+
     OptimizationResult { optimizations }
 }
 ```
@@ -687,7 +687,7 @@ fn apply_optimizations(cfg: &mut ControlFlowGraph) -> OptimizationResult {
 ```rust
 fn verify_program(program: &Program, properties: &[Property]) -> VerificationResult {
     let mut results = Vec::new();
-    
+
     for property in properties {
         match property {
             Property::Reachability(target) => {
@@ -713,7 +713,7 @@ fn verify_program(program: &Program, properties: &[Property]) -> VerificationRes
             }
         }
     }
-    
+
     VerificationResult::Multiple(results)
 }
 ```
@@ -725,19 +725,19 @@ fn verify_program(program: &Program, properties: &[Property]) -> VerificationRes
 ```rust
 fn debug_program(program: &Program, bug_report: &BugReport) -> DebugResult {
     let mut debug_info = DebugInfo::new();
-    
+
     // 分析错误路径
     let error_path = analyze_error_path(program, bug_report);
     debug_info.error_path = error_path;
-    
+
     // 生成测试用例
     let test_cases = generate_test_cases(program, &error_path);
     debug_info.test_cases = test_cases;
-    
+
     // 提供修复建议
     let suggestions = generate_fix_suggestions(program, bug_report);
     debug_info.suggestions = suggestions;
-    
+
     DebugResult { debug_info }
 }
 ```
@@ -809,7 +809,7 @@ fn debug_program(program: &Program, bug_report: &BugReport) -> DebugResult {
 
 ---
 
-**文档版本**: 1.0.0  
-**最后更新**: 2025-01-27  
-**维护者**: Rust语言形式化理论项目组  
+**文档版本**: 1.0.0
+**最后更新**: 2025-01-27
+**维护者**: Rust语言形式化理论项目组
 **状态**: 完成

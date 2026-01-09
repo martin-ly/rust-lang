@@ -1,9 +1,9 @@
 # 性能优化正式理论
 
-**文档编号**: 22.01  
-**版本**: 1.1  
-**创建日期**: 2025-01-27  
-**最后更新**: 2025-06-25  
+**文档编号**: 22.01
+**版本**: 1.1
+**创建日期**: 2025-01-27
+**最后更新**: 2025-06-25
 
 ## 目录
 
@@ -178,21 +178,21 @@ impl ControlFlowGraph {
     fn optimize(&mut self) {
         // 死代码消除
         self.eliminate_dead_code();
-        
+
         // 常量折叠
         self.constant_folding();
-        
+
         // 循环优化
         self.loop_optimization();
-        
+
         // 内联优化
         self.inline_optimization();
     }
-    
+
     fn eliminate_dead_code(&mut self) {
         // 标记活跃变量
         let mut live_vars = HashSet::new();
-        
+
         // 从出口块开始反向遍历
         let mut worklist = vec![self.exit];
         while let Some(block_id) = worklist.pop() {
@@ -227,7 +227,7 @@ impl ControlFlowGraph {
                 }
             }
         }
-        
+
         // 移除死代码
         for block in self.blocks.values_mut() {
             block.instructions.retain(|inst| {
@@ -241,7 +241,7 @@ impl ControlFlowGraph {
             });
         }
     }
-    
+
     fn constant_folding(&mut self) {
         for block in self.blocks.values_mut() {
             for instruction in &mut block.instructions {
@@ -271,44 +271,44 @@ impl ControlFlowGraph {
             }
         }
     }
-    
+
     fn loop_optimization(&mut self) {
         // 识别循环
         let loops = self.identify_loops();
-        
+
         for loop_info in loops {
             // 循环不变式提升
             self.hoist_invariants(&loop_info);
-            
+
             // 循环展开
             if loop_info.trip_count <= 4 {
                 self.unroll_loop(&loop_info);
             }
         }
     }
-    
+
     fn inline_optimization(&mut self) {
         // 识别内联候选
         let inline_candidates = self.identify_inline_candidates();
-        
+
         for candidate in inline_candidates {
             if self.should_inline(&candidate) {
                 self.perform_inline(&candidate);
             }
         }
     }
-    
+
     fn identify_loops(&self) -> Vec<LoopInfo> {
         // 使用深度优先搜索识别循环
         let mut loops = Vec::new();
         let mut visited = HashSet::new();
         let mut stack = Vec::new();
-        
+
         self.dfs_loops(self.entry, &mut visited, &mut stack, &mut loops);
         loops
     }
-    
-    fn dfs_loops(&self, block_id: BasicBlockId, visited: &mut HashSet<BasicBlockId>, 
+
+    fn dfs_loops(&self, block_id: BasicBlockId, visited: &mut HashSet<BasicBlockId>,
                  stack: &mut Vec<BasicBlockId>, loops: &mut Vec<LoopInfo>) {
         if visited.contains(&block_id) {
             // 找到回边，识别循环
@@ -322,34 +322,34 @@ impl ControlFlowGraph {
             }
             return;
         }
-        
+
         visited.insert(block_id);
         stack.push(block_id);
-        
+
         if let Some(block) = self.blocks.get(&block_id) {
             for &successor in &block.successors {
                 self.dfs_loops(successor, visited, stack, loops);
             }
         }
-        
+
         stack.pop();
     }
-    
+
     fn hoist_invariants(&mut self, loop_info: &LoopInfo) {
         // 识别循环不变式
         let invariants = self.identify_invariants(loop_info);
-        
+
         // 将不变式提升到循环头
         for invariant in invariants {
             self.move_instruction_to_header(invariant, loop_info.header);
         }
     }
-    
+
     fn unroll_loop(&mut self, loop_info: &LoopInfo) {
         // 循环展开
         let unroll_factor = 2;
         let mut new_blocks = Vec::new();
-        
+
         for i in 0..unroll_factor {
             for &block_id in &loop_info.body {
                 if let Some(block) = self.blocks.get(&block_id) {
@@ -359,16 +359,16 @@ impl ControlFlowGraph {
                 }
             }
         }
-        
+
         // 更新控制流
         for new_block in new_blocks {
             self.blocks.insert(new_block.id, new_block);
         }
     }
-    
+
     fn identify_inline_candidates(&self) -> Vec<InlineCandidate> {
         let mut candidates = Vec::new();
-        
+
         for block in self.blocks.values() {
             for instruction in &block.instructions {
                 if let IRNode::Call { func, args, .. } = instruction {
@@ -380,22 +380,22 @@ impl ControlFlowGraph {
                 }
             }
         }
-        
+
         candidates
     }
-    
+
     fn should_inline(&self, candidate: &InlineCandidate) -> bool {
         // 内联启发式：小函数、频繁调用
         let function_size = self.get_function_size(&candidate.function);
         let call_frequency = self.get_call_frequency(&candidate.function);
-        
+
         function_size <= 10 && call_frequency >= 5
     }
-    
+
     fn perform_inline(&mut self, candidate: &InlineCandidate) {
         // 执行内联
         let function_body = self.get_function_body(&candidate.function);
-        
+
         // 替换调用点
         if let Some(block) = self.blocks.get_mut(&candidate.call_site) {
             for (i, instruction) in block.instructions.iter_mut().enumerate() {
@@ -468,43 +468,43 @@ impl MemoryLayoutAnalyzer {
         alignment.insert(Type::Int, 8);
         alignment.insert(Type::Float, 8);
         alignment.insert(Type::Bool, 1);
-        
+
         MemoryLayoutAnalyzer {
             cache_line_size: 64,
             alignment_requirements: alignment,
         }
     }
-    
+
     fn optimize_struct_layout(&self, fields: &[(String, Type)]) -> Vec<(String, Type, usize)> {
         // 按对齐要求排序字段
         let mut sorted_fields: Vec<_> = fields.iter()
             .map(|(name, ty)| (name.clone(), ty.clone(), self.get_alignment(ty)))
             .collect();
-        
+
         sorted_fields.sort_by(|a, b| b.2.cmp(&a.2)); // 按对齐要求降序排列
-        
+
         // 计算偏移量
         let mut offset = 0;
         let mut result = Vec::new();
-        
+
         for (name, ty, alignment) in sorted_fields {
             // 对齐到边界
             offset = (offset + alignment - 1) / alignment * alignment;
             result.push((name, ty, offset));
             offset += self.get_size(ty);
         }
-        
+
         result
     }
-    
+
     fn analyze_cache_performance(&self, access_pattern: &[MemoryAccess]) -> CacheAnalysis {
         let mut cache_misses = 0;
         let mut cache_hits = 0;
         let mut cache_lines = HashSet::new();
-        
+
         for access in access_pattern {
             let cache_line = access.address / self.cache_line_size;
-            
+
             if cache_lines.contains(&cache_line) {
                 cache_hits += 1;
             } else {
@@ -512,7 +512,7 @@ impl MemoryLayoutAnalyzer {
                 cache_lines.insert(cache_line);
             }
         }
-        
+
         CacheAnalysis {
             total_accesses: access_pattern.len(),
             cache_hits,
@@ -520,25 +520,25 @@ impl MemoryLayoutAnalyzer {
             hit_rate: cache_hits as f64 / access_pattern.len() as f64,
         }
     }
-    
+
     fn suggest_optimizations(&self, analysis: &CacheAnalysis) -> Vec<OptimizationSuggestion> {
         let mut suggestions = Vec::new();
-        
+
         if analysis.hit_rate < 0.8 {
             suggestions.push(OptimizationSuggestion::DataLocality);
         }
-        
+
         if analysis.cache_misses > analysis.total_accesses / 2 {
             suggestions.push(OptimizationSuggestion::MemoryLayout);
         }
-        
+
         suggestions
     }
-    
+
     fn get_alignment(&self, ty: &Type) -> usize {
         self.alignment_requirements.get(ty).copied().unwrap_or(1)
     }
-    
+
     fn get_size(&self, ty: &Type) -> usize {
         match ty {
             Type::Int => 8,
@@ -591,35 +591,35 @@ impl ParallelizationAnalyzer {
             task_costs: HashMap::new(),
         }
     }
-    
+
     fn analyze_dependencies(&mut self, tasks: &[Task]) -> DependencyAnalysis {
         // 构建依赖图
         for (i, task) in tasks.iter().enumerate() {
             let mut dependencies = Vec::new();
-            
+
             for (j, other_task) in tasks.iter().enumerate() {
                 if i != j && self.has_dependency(task, other_task) {
                     dependencies.push(j);
                 }
             }
-            
+
             self.dependency_graph.insert(i, dependencies);
             self.task_costs.insert(i, task.cost);
         }
-        
+
         // 计算关键路径
         let critical_path = self.compute_critical_path(tasks.len());
-        
+
         // 计算并行度
         let parallelism = self.compute_parallelism();
-        
+
         DependencyAnalysis {
             critical_path_length: critical_path,
             max_parallelism: parallelism,
             dependency_count: self.dependency_graph.values().map(|deps| deps.len()).sum(),
         }
     }
-    
+
     fn has_dependency(&self, task1: &Task, task2: &Task) -> bool {
         // 检查数据依赖
         for output in &task1.outputs {
@@ -627,45 +627,45 @@ impl ParallelizationAnalyzer {
                 return true;
             }
         }
-        
+
         // 检查控制依赖
         if task1.control_dependent_on.contains(&task2.id) {
             return true;
         }
-        
+
         false
     }
-    
+
     fn compute_critical_path(&self, num_tasks: usize) -> f64 {
         let mut dp = vec![0.0; num_tasks];
-        
+
         // 拓扑排序计算最长路径
         for i in 0..num_tasks {
             if let Some(cost) = self.task_costs.get(&i) {
                 let mut max_dep_cost = 0.0;
-                
+
                 if let Some(dependencies) = self.dependency_graph.get(&i) {
                     for &dep in dependencies {
                         max_dep_cost = max_dep_cost.max(dp[dep]);
                     }
                 }
-                
+
                 dp[i] = max_dep_cost + cost;
             }
         }
-        
+
         dp.into_iter().fold(0.0, f64::max)
     }
-    
+
     fn compute_parallelism(&self) -> usize {
         // 计算最大并行度
         let mut max_parallel = 0;
         let mut current_parallel = 0;
-        
+
         // 使用拓扑排序计算并行度
         let mut in_degree: HashMap<usize, usize> = HashMap::new();
         let mut ready_tasks = Vec::new();
-        
+
         // 初始化入度
         for (task_id, dependencies) in &self.dependency_graph {
             in_degree.insert(*task_id, dependencies.len());
@@ -673,48 +673,48 @@ impl ParallelizationAnalyzer {
                 ready_tasks.push(*task_id);
             }
         }
-        
+
         while !ready_tasks.is_empty() {
             current_parallel = ready_tasks.len();
             max_parallel = max_parallel.max(current_parallel);
-            
+
             let mut next_ready = Vec::new();
-            
+
             for task_id in ready_tasks {
                 // 更新依赖任务的入度
                 for (other_task, dependencies) in &self.dependency_graph {
                     if dependencies.contains(&task_id) {
                         let new_degree = in_degree.get(other_task).unwrap() - 1;
                         in_degree.insert(*other_task, new_degree);
-                        
+
                         if new_degree == 0 {
                             next_ready.push(*other_task);
                         }
                     }
                 }
             }
-            
+
             ready_tasks = next_ready;
         }
-        
+
         max_parallel
     }
-    
+
     fn suggest_parallelization(&self, analysis: &DependencyAnalysis) -> Vec<ParallelizationSuggestion> {
         let mut suggestions = Vec::new();
-        
+
         if analysis.max_parallelism > 1 {
             suggestions.push(ParallelizationSuggestion::TaskParallelism);
         }
-        
+
         if analysis.dependency_count < analysis.max_parallelism * 2 {
             suggestions.push(ParallelizationSuggestion::DataParallelism);
         }
-        
+
         if analysis.critical_path_length > 0.8 {
             suggestions.push(ParallelizationSuggestion::PipelineParallelism);
         }
-        
+
         suggestions
     }
 }
@@ -802,23 +802,23 @@ impl DataFlowOptimizer {
             live_variables: HashMap::new(),
         }
     }
-    
+
     fn analyze_reaching_definitions(&mut self, cfg: &ControlFlowGraph) {
         // 计算到达定义
         let mut changed = true;
         while changed {
             changed = false;
-            
+
             for (block_id, block) in &cfg.blocks {
                 let mut in_set = HashSet::new();
-                
+
                 // 合并前驱的定义
                 for &pred_id in &block.predecessors {
                     if let Some(pred_defs) = self.reaching_definitions.get(&pred_id) {
                         in_set.extend(pred_defs);
                     }
                 }
-                
+
                 // 计算本块的定义
                 let mut out_set = in_set.clone();
                 for instruction in &block.instructions {
@@ -834,7 +834,7 @@ impl DataFlowOptimizer {
                         }
                     }
                 }
-                
+
                 // 检查是否有变化
                 let old_set = self.reaching_definitions.get(block_id).cloned().unwrap_or_default();
                 if out_set != old_set {
@@ -844,23 +844,23 @@ impl DataFlowOptimizer {
             }
         }
     }
-    
+
     fn analyze_live_variables(&mut self, cfg: &ControlFlowGraph) {
         // 计算活跃变量
         let mut changed = true;
         while changed {
             changed = false;
-            
+
             for (block_id, block) in &cfg.blocks {
                 let mut out_set = HashSet::new();
-                
+
                 // 合并后继的活跃变量
                 for &succ_id in &block.successors {
                     if let Some(succ_live) = self.live_variables.get(&succ_id) {
                         out_set.extend(succ_live);
                     }
                 }
-                
+
                 // 计算本块的活跃变量
                 let mut in_set = out_set.clone();
                 for instruction in block.instructions.iter().rev() {
@@ -889,7 +889,7 @@ impl DataFlowOptimizer {
                         _ => {}
                     }
                 }
-                
+
                 // 检查是否有变化
                 let old_set = self.live_variables.get(block_id).cloned().unwrap_or_default();
                 if in_set != old_set {
@@ -899,18 +899,18 @@ impl DataFlowOptimizer {
             }
         }
     }
-    
+
     fn optimize(&mut self, cfg: &mut ControlFlowGraph) {
         // 执行数据流分析
         self.analyze_reaching_definitions(cfg);
         self.analyze_live_variables(cfg);
-        
+
         // 基于分析结果进行优化
         self.eliminate_dead_code(cfg);
         self.constant_propagation(cfg);
         self.copy_propagation(cfg);
     }
-    
+
     fn eliminate_dead_code(&self, cfg: &mut ControlFlowGraph) {
         for block in cfg.blocks.values_mut() {
             if let Some(live_vars) = self.live_variables.get(&block.id) {
@@ -936,12 +936,12 @@ impl DataFlowOptimizer {
             }
         }
     }
-    
+
     fn constant_propagation(&self, cfg: &mut ControlFlowGraph) {
         // 常量传播优化
         for block in cfg.blocks.values_mut() {
             let mut constants = HashMap::new();
-            
+
             for instruction in &mut block.instructions {
                 match instruction {
                     IRNode::Load { addr, ty } => {
@@ -966,12 +966,12 @@ impl DataFlowOptimizer {
             }
         }
     }
-    
+
     fn copy_propagation(&self, cfg: &mut ControlFlowGraph) {
         // 复制传播优化
         for block in cfg.blocks.values_mut() {
             let mut copies = HashMap::new();
-            
+
             for instruction in &mut block.instructions {
                 match instruction {
                     IRNode::Load { addr, ty } => {
@@ -1021,55 +1021,55 @@ impl MemoryPool {
     fn new() -> Self {
         let pool_sizes = vec![8, 16, 32, 64, 128, 256, 512, 1024];
         let mut pools = HashMap::new();
-        
+
         for &size in &pool_sizes {
             pools.insert(size, Vec::new());
         }
-        
+
         MemoryPool {
             pools,
             allocated: HashSet::new(),
             pool_sizes,
         }
     }
-    
+
     fn allocate(&mut self, size: usize) -> Result<*mut u8, AllocationError> {
         // 找到合适的池大小
         let pool_size = self.find_pool_size(size);
-        
+
         if let Some(pool) = self.pools.get_mut(&pool_size) {
             if let Some(ptr) = pool.pop() {
                 self.allocated.insert(ptr);
                 return Ok(ptr);
             }
         }
-        
+
         // 分配新的内存块
         let ptr = unsafe { std::alloc::alloc(std::alloc::Layout::from_size_align(pool_size, 8)?) };
         if ptr.is_null() {
             return Err(AllocationError::OutOfMemory);
         }
-        
+
         self.allocated.insert(ptr);
         Ok(ptr)
     }
-    
+
     fn deallocate(&mut self, ptr: *mut u8, size: usize) -> Result<(), DeallocationError> {
         if !self.allocated.contains(&ptr) {
             return Err(DeallocationError::InvalidPointer);
         }
-        
+
         let pool_size = self.find_pool_size(size);
-        
+
         // 返回到池中
         if let Some(pool) = self.pools.get_mut(&pool_size) {
             pool.push(ptr);
         }
-        
+
         self.allocated.remove(&ptr);
         Ok(())
     }
-    
+
     fn find_pool_size(&self, size: usize) -> usize {
         for &pool_size in &self.pool_sizes {
             if pool_size >= size {
@@ -1078,18 +1078,18 @@ impl MemoryPool {
         }
         size
     }
-    
+
     fn optimize(&mut self) {
         // 合并小的池
         self.merge_small_pools();
-        
+
         // 清理未使用的内存
         self.cleanup_unused();
     }
-    
+
     fn merge_small_pools(&mut self) {
         let mut to_merge = Vec::new();
-        
+
         for &size in &self.pool_sizes {
             if let Some(pool) = self.pools.get(&size) {
                 if pool.len() > 100 {
@@ -1097,7 +1097,7 @@ impl MemoryPool {
                 }
             }
         }
-        
+
         for size in to_merge {
             if let Some(pool) = self.pools.get_mut(&size) {
                 while pool.len() > 50 {
@@ -1110,7 +1110,7 @@ impl MemoryPool {
             }
         }
     }
-    
+
     fn cleanup_unused(&mut self) {
         // 清理长时间未使用的内存
         // 这里可以实现更复杂的清理策略
@@ -1146,7 +1146,7 @@ fn optimize_loop_example() {
     for i in 0..1000 {
         sum += i * 2;
     }
-    
+
     // 优化后的循环
     let mut sum = 0;
     // 循环展开
@@ -1156,7 +1156,7 @@ fn optimize_loop_example() {
         sum += (i + 2) * 2;
         sum += (i + 3) * 2;
     }
-    
+
     // 进一步优化：常量折叠
     let sum = 999 * 1000; // 等差数列求和公式
 }
@@ -1164,21 +1164,21 @@ fn optimize_loop_example() {
 // 向量化优化
 fn vectorized_sum(data: &[f32]) -> f32 {
     use std::simd::*;
-    
+
     let mut sum = f32x8::splat(0.0);
     let chunks = data.chunks_exact(8);
-    
+
     for chunk in chunks {
         let simd_chunk = f32x8::from_slice(chunk);
         sum += simd_chunk;
     }
-    
+
     // 处理剩余元素
     let mut result = sum.horizontal_sum();
     for &x in chunks.remainder() {
         result += x;
     }
-    
+
     result
 }
 ```
@@ -1203,20 +1203,20 @@ impl CacheFriendlyMatrix {
             cols,
         }
     }
-    
+
     fn get(&self, row: usize, col: usize) -> f64 {
         self.data[row * self.cols + col]
     }
-    
+
     fn set(&mut self, row: usize, col: usize, value: f64) {
         self.data[row * self.cols + col] = value;
     }
-    
+
     fn multiply(&self, other: &CacheFriendlyMatrix) -> CacheFriendlyMatrix {
         assert_eq!(self.cols, other.rows);
-        
+
         let mut result = CacheFriendlyMatrix::new(self.rows, other.cols);
-        
+
         // 缓存友好的乘法：按行访问
         for i in 0..self.rows {
             for k in 0..self.cols {
@@ -1228,7 +1228,7 @@ impl CacheFriendlyMatrix {
                 }
             }
         }
-        
+
         result
     }
 }
@@ -1246,19 +1246,19 @@ where
     fn new(capacity: usize) -> Self {
         let mut objects = Vec::with_capacity(capacity);
         let mut available = Vec::with_capacity(capacity);
-        
+
         for i in 0..capacity {
             objects.push(T::default());
             available.push(i);
         }
-        
+
         ObjectPool { objects, available }
     }
-    
+
     fn acquire(&mut self) -> Option<&mut T> {
         self.available.pop().map(|index| &mut self.objects[index])
     }
-    
+
     fn release(&mut self, index: usize) {
         if index < self.objects.len() {
             self.available.push(index);
@@ -1302,44 +1302,44 @@ impl WorkStealingScheduler {
         for _ in 0..num_workers {
             queues.push(VecDeque::new());
         }
-        
+
         WorkStealingScheduler {
             queues,
             num_workers,
         }
     }
-    
+
     fn submit(&mut self, task: Task, worker_id: usize) {
         self.queues[worker_id].push_back(task);
     }
-    
+
     fn steal(&mut self, thief_id: usize) -> Option<Task> {
         // 随机选择一个受害者
         let victim_id = (thief_id + 1) % self.num_workers;
-        
+
         if let Some(task) = self.queues[victim_id].pop_front() {
             Some(task)
         } else {
             None
         }
     }
-    
+
     fn execute(&mut self) {
         let mut workers = Vec::new();
-        
+
         for worker_id in 0..self.num_workers {
             let mut queue = std::mem::take(&mut self.queues[worker_id]);
-            
+
             workers.push(std::thread::spawn(move || {
                 while let Some(task) = queue.pop_front() {
                     task.execute();
                 }
-                
+
                 // 工作窃取
                 // 这里需要更复杂的实现
             }));
         }
-        
+
         for worker in workers {
             worker.join().unwrap();
         }
@@ -1362,7 +1362,7 @@ impl Task {
             work: Box::new(work),
         }
     }
-    
+
     fn execute(self) {
         (self.work)();
     }
@@ -1382,7 +1382,7 @@ fn inline_optimization_example() {
     fn original_function() {
         // 函数体
     }
-    
+
     // 优化后的函数
     fn optimized_function() {
         // 函数体
@@ -1397,7 +1397,7 @@ fn inline_optimization_example() {
 fn constant_folding_example() {
     // 原始表达式
     let x = 5 + 3;
-    
+
     // 优化后的表达式
     let x = 8;
 }
@@ -1468,35 +1468,35 @@ struct StaticPerformanceAnalyzer {
 impl StaticPerformanceAnalyzer {
     fn analyze(&self, code: &str) -> StaticAnalysisResult {
         let ast = self.code_analyzer.parse(code);
-        
+
         let complexity = self.complexity_analyzer.analyze(&ast);
         let memory_usage = self.memory_analyzer.analyze(&ast);
-        
+
         StaticAnalysisResult {
             complexity,
             memory_usage,
             bottlenecks: self.identify_bottlenecks(&ast),
         }
     }
-    
+
     fn identify_bottlenecks(&self, ast: &AST) -> Vec<Bottleneck> {
         // 识别潜在的性能瓶颈
         let mut bottlenecks = Vec::new();
-        
+
         // 检查复杂的循环嵌套
         for node in ast.find_nodes(NodeType::Loop) {
             if node.nesting_level > 2 {
                 bottlenecks.push(Bottleneck::ComplexLoopNesting(node.location));
             }
         }
-        
+
         // 检查大量的内存分配
         for node in ast.find_nodes(NodeType::Allocation) {
             if node.allocation_size > 1024 * 1024 {
                 bottlenecks.push(Bottleneck::LargeMemoryAllocation(node.location));
             }
         }
-        
+
         bottlenecks
     }
 }
@@ -1520,10 +1520,10 @@ impl DynamicPerformanceAnalyzer {
         // 执行程序并收集性能数据
         let trace = self.trace_collector.collect(program, input);
         let profile = self.profiler.profile(program, input);
-        
+
         // 聚合性能指标
         let metrics = self.metrics_aggregator.aggregate(&trace, &profile);
-        
+
         DynamicAnalysisResult {
             execution_time: metrics.execution_time,
             memory_usage: metrics.memory_usage,
@@ -1531,34 +1531,34 @@ impl DynamicPerformanceAnalyzer {
             bottlenecks: self.identify_bottlenecks(&trace),
         }
     }
-    
+
     fn identify_hotspots(&self, profile: &Profile) -> Vec<Hotspot> {
         // 识别执行时间热点
         let mut hotspots = Vec::new();
-        
+
         for (function, stats) in &profile.function_stats {
             if stats.execution_time > profile.total_time * 0.1 {
                 hotspots.push(Hotspot::Function(function.clone(), stats.clone()));
             }
         }
-        
+
         hotspots
     }
-    
+
     fn identify_bottlenecks(&self, trace: &Trace) -> Vec<Bottleneck> {
         // 识别性能瓶颈
         let mut bottlenecks = Vec::new();
-        
+
         // 检查缓存未命中
         if trace.cache_miss_rate > 0.1 {
             bottlenecks.push(Bottleneck::HighCacheMissRate);
         }
-        
+
         // 检查锁竞争
         if trace.lock_contention_rate > 0.2 {
             bottlenecks.push(Bottleneck::HighLockContention);
         }
-        
+
         bottlenecks
     }
 }
@@ -1606,15 +1606,15 @@ struct OptimizationStrategySelector {
 impl OptimizationStrategySelector {
     fn select_strategies(&self, analysis_result: &AnalysisResult) -> Vec<OptimizationStrategy> {
         let mut strategies = Vec::new();
-        
+
         // 根据分析结果选择优化策略
         for bottleneck in &analysis_result.bottlenecks {
             let candidate_strategies = self.strategy_database.get_strategies_for_bottleneck(bottleneck);
-            
+
             // 评估每个候选策略
             let mut best_strategy = None;
             let mut best_score = 0.0;
-            
+
             for strategy in candidate_strategies {
                 let score = self.strategy_evaluator.evaluate(&strategy, analysis_result);
                 if score > best_score {
@@ -1622,12 +1622,12 @@ impl OptimizationStrategySelector {
                     best_strategy = Some(strategy);
                 }
             }
-            
+
             if let Some(strategy) = best_strategy {
                 strategies.push(strategy);
             }
         }
-        
+
         strategies
     }
 }
@@ -1651,7 +1651,7 @@ impl OptimizationValidator {
     fn validate(&self, original: &Program, optimized: &Program, input: &Input) -> ValidationResult {
         // 验证正确性
         let correctness = self.correctness_checker.check(original, optimized, input);
-        
+
         if !correctness.is_correct {
             return ValidationResult {
                 is_valid: false,
@@ -1660,21 +1660,21 @@ impl OptimizationValidator {
                 issues: vec![ValidationIssue::CorrectnessFailure],
             };
         }
-        
+
         // 分析性能
         let original_performance = self.performance_analyzer.analyze(original, input);
         let optimized_performance = self.performance_analyzer.analyze(optimized, input);
-        
+
         // 计算性能改进
-        let time_improvement = (original_performance.execution_time - optimized_performance.execution_time) 
+        let time_improvement = (original_performance.execution_time - optimized_performance.execution_time)
             / original_performance.execution_time;
-        
+
         let memory_improvement = (original_performance.memory_usage - optimized_performance.memory_usage)
             / original_performance.memory_usage;
-        
+
         // 综合评分
         let performance_improvement = 0.7 * time_improvement + 0.3 * memory_improvement;
-        
+
         ValidationResult {
             is_valid: performance_improvement > 0.0,
             performance_improvement,
@@ -1713,42 +1713,42 @@ impl PerformanceSafetyTradeoffAnalyzer {
     fn analyze_tradeoff(&self, program: &Program) -> TradeoffAnalysis {
         // 生成程序变体
         let variants = self.variant_generator.generate_variants(program);
-        
+
         // 分析每个变体的性能和安全性
         let mut tradeoff_points = Vec::new();
-        
+
         for variant in variants {
             let performance = self.performance_analyzer.analyze(&variant);
             let safety = self.safety_analyzer.analyze(&variant);
-            
+
             tradeoff_points.push(TradeoffPoint {
                 variant,
                 performance,
                 safety,
             });
         }
-        
+
         // 计算帕累托前沿
         let pareto_frontier = self.compute_pareto_frontier(&tradeoff_points);
-        
+
         TradeoffAnalysis {
             tradeoff_points,
             pareto_frontier,
         }
     }
-    
+
     fn compute_pareto_frontier(&self, points: &[TradeoffPoint]) -> Vec<TradeoffPoint> {
         let mut frontier = Vec::new();
-        
+
         for p in points {
-            if !points.iter().any(|q| 
+            if !points.iter().any(|q|
                 q.performance > p.performance && q.safety >= p.safety ||
                 q.performance >= p.performance && q.safety > p.safety
             ) {
                 frontier.push(p.clone());
             }
         }
-        
+
         frontier
     }
 }
@@ -1771,16 +1771,16 @@ struct SafeOptimizer {
 impl SafeOptimizer {
     fn optimize(&self, program: &Program) -> OptimizedProgram {
         let mut current = program.clone();
-        
+
         for strategy in &self.optimization_strategies {
             let optimized = strategy.apply(&current);
-            
+
             // 验证安全性
             if self.safety_checker.check(&optimized).is_safe {
                 current = optimized;
             }
         }
-        
+
         OptimizedProgram {
             program: current,
             safety_preserved: true,
@@ -1813,15 +1813,15 @@ impl UnsafeCodeAnalyzer {
         // 分析性能增益
         let safe_performance = self.performance_analyzer.analyze(safe_version);
         let unsafe_performance = self.performance_analyzer.analyze(unsafe_version);
-        
+
         let performance_gain = unsafe_performance.score / safe_performance.score;
-        
+
         // 分析安全风险
         let safety_loss = self.safety_analyzer.analyze_difference(safe_version, unsafe_version);
-        
+
         // 分析风险
         let risk_assessment = self.risk_analyzer.analyze(unsafe_version);
-        
+
         UnsafeGainAnalysis {
             performance_gain,
             safety_loss,

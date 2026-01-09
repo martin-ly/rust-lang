@@ -3,45 +3,47 @@
 
 ## 📊 目录
 
-- [1. 概述](#1-概述)
-- [2. 数学符号约定](#2-数学符号约定)
-  - [2.1 基本符号](#21-基本符号)
-  - [2.2 泛型编程符号](#22-泛型编程符号)
-- [3. 泛型函数形式化理论](#3-泛型函数形式化理论)
-  - [3.1 语法定义](#31-语法定义)
-  - [3.2 泛型函数类型理论](#32-泛型函数类型理论)
-  - [3.3 泛型函数实例化](#33-泛型函数实例化)
-- [4. 泛型结构体形式化理论](#4-泛型结构体形式化理论)
-  - [4.1 结构体定义](#41-结构体定义)
-  - [4.2 泛型结构体类型理论](#42-泛型结构体类型理论)
-  - [4.3 结构体实例化](#43-结构体实例化)
-- [5. 泛型枚举形式化理论](#5-泛型枚举形式化理论)
-  - [5.1 枚举定义](#51-枚举定义)
-  - [5.2 泛型枚举类型理论](#52-泛型枚举类型理论)
-  - [5.3 枚举实例化](#53-枚举实例化)
-- [6. 泛型Trait形式化理论](#6-泛型trait形式化理论)
-  - [6.1 Trait定义](#61-trait定义)
-  - [6.2 泛型Trait类型理论](#62-泛型trait类型理论)
-  - [6.3 Trait实现](#63-trait实现)
-- [7. 泛型约束形式化理论](#7-泛型约束形式化理论)
-  - [7.1 约束类型](#71-约束类型)
-  - [7.2 约束检查](#72-约束检查)
-  - [7.3 约束传播](#73-约束传播)
-- [8. 泛型编程优化](#8-泛型编程优化)
-  - [8.1 单态化优化](#81-单态化优化)
-  - [8.2 泛型代码生成](#82-泛型代码生成)
-  - [8.3 泛型缓存](#83-泛型缓存)
-- [9. 实际应用示例](#9-实际应用示例)
-  - [9.1 泛型函数](#91-泛型函数)
-  - [9.2 泛型结构体](#92-泛型结构体)
-  - [9.3 泛型枚举](#93-泛型枚举)
-  - [9.4 泛型Trait](#94-泛型trait)
-  - [9.5 高级泛型编程](#95-高级泛型编程)
-- [10. 形式化验证](#10-形式化验证)
-  - [10.1 泛型代码正确性](#101-泛型代码正确性)
-  - [10.2 泛型约束验证](#102-泛型约束验证)
-- [11. 总结](#11-总结)
-- [12. 参考文献](#12-参考文献)
+- [Rust泛型编程形式化理论](#rust泛型编程形式化理论)
+  - [📊 目录](#-目录)
+  - [1. 概述](#1-概述)
+  - [2. 数学符号约定](#2-数学符号约定)
+    - [2.1 基本符号](#21-基本符号)
+    - [2.2 泛型编程符号](#22-泛型编程符号)
+  - [3. 泛型函数形式化理论](#3-泛型函数形式化理论)
+    - [3.1 语法定义](#31-语法定义)
+    - [3.2 泛型函数类型理论](#32-泛型函数类型理论)
+    - [3.3 泛型函数实例化](#33-泛型函数实例化)
+  - [4. 泛型结构体形式化理论](#4-泛型结构体形式化理论)
+    - [4.1 结构体定义](#41-结构体定义)
+    - [4.2 泛型结构体类型理论](#42-泛型结构体类型理论)
+    - [4.3 结构体实例化](#43-结构体实例化)
+  - [5. 泛型枚举形式化理论](#5-泛型枚举形式化理论)
+    - [5.1 枚举定义](#51-枚举定义)
+    - [5.2 泛型枚举类型理论](#52-泛型枚举类型理论)
+    - [5.3 枚举实例化](#53-枚举实例化)
+  - [6. 泛型Trait形式化理论](#6-泛型trait形式化理论)
+    - [6.1 Trait定义](#61-trait定义)
+    - [6.2 泛型Trait类型理论](#62-泛型trait类型理论)
+    - [6.3 Trait实现](#63-trait实现)
+  - [7. 泛型约束形式化理论](#7-泛型约束形式化理论)
+    - [7.1 约束类型](#71-约束类型)
+    - [7.2 约束检查](#72-约束检查)
+    - [7.3 约束传播](#73-约束传播)
+  - [8. 泛型编程优化](#8-泛型编程优化)
+    - [8.1 单态化优化](#81-单态化优化)
+    - [8.2 泛型代码生成](#82-泛型代码生成)
+    - [8.3 泛型缓存](#83-泛型缓存)
+  - [9. 实际应用示例](#9-实际应用示例)
+    - [9.1 泛型函数](#91-泛型函数)
+    - [9.2 泛型结构体](#92-泛型结构体)
+    - [9.3 泛型枚举](#93-泛型枚举)
+    - [9.4 泛型Trait](#94-泛型trait)
+    - [9.5 高级泛型编程](#95-高级泛型编程)
+  - [10. 形式化验证](#10-形式化验证)
+    - [10.1 泛型代码正确性](#101-泛型代码正确性)
+    - [10.2 泛型约束验证](#102-泛型约束验证)
+  - [11. 总结](#11-总结)
+  - [12. 参考文献](#12-参考文献)
 
 
 ## 1. 概述
@@ -105,20 +107,20 @@ fn instantiate_generic_function(
     type_args: &[Type]
 ) -> Function {
     let mut specialized = generic_fn.clone();
-    
+
     // 替换类型参数
     for (param, arg) in generic_fn.type_params.iter().zip(type_args.iter()) {
         specialized = substitute_type(specialized, param, arg);
     }
-    
+
     // 检查约束
     if !check_constraints(&specialized, type_args) {
         panic!("Type arguments do not satisfy constraints");
     }
-    
+
     // 优化生成的代码
     optimize_specialized_function(&mut specialized);
-    
+
     specialized
 }
 ```
@@ -154,19 +156,19 @@ fn instantiate_generic_struct(
     type_args: &[Type]
 ) -> Struct {
     let mut specialized = generic_struct.clone();
-    
+
     // 替换字段类型中的类型参数
     for field in &mut specialized.fields {
         field.field_type = substitute_type_in_type(field.field_type.clone(), type_args);
     }
-    
+
     // 检查字段类型约束
     for field in &specialized.fields {
         if !check_field_type_constraints(field, type_args) {
             panic!("Field type constraints not satisfied");
         }
     }
-    
+
     specialized
 }
 ```
@@ -202,7 +204,7 @@ fn instantiate_generic_enum(
     type_args: &[Type]
 ) -> Enum {
     let mut specialized = generic_enum.clone();
-    
+
     // 替换变体中的类型参数
     for variant in &mut specialized.variants {
         match variant {
@@ -218,7 +220,7 @@ fn instantiate_generic_enum(
             }
         }
     }
-    
+
     specialized
 }
 ```
@@ -255,7 +257,7 @@ fn implement_generic_trait(
     impl_items: &[ImplItem]
 ) -> Impl {
     let mut impl_ = Impl::new(trait_def, type_);
-    
+
     // 检查实现项是否匹配Trait定义
     for item in impl_items {
         if !matches_trait_item(item, trait_def) {
@@ -263,14 +265,14 @@ fn implement_generic_trait(
         }
         impl_.add_item(item.clone());
     }
-    
+
     // 检查是否实现了所有必需项
     for required_item in &trait_def.required_items {
         if !impl_.has_item(required_item.name()) {
             panic!("Missing required trait item: {}", required_item.name());
         }
     }
-    
+
     impl_
 }
 ```
@@ -315,10 +317,10 @@ fn propagate_generic_constraints(
     constraints: &mut Vec<GenericConstraint>
 ) {
     let mut changed = true;
-    
+
     while changed {
         changed = false;
-        
+
         for i in 0..constraints.len() {
             for j in (i + 1)..constraints.len() {
                 if let Some(new_constraints) = propagate_between_generic_constraints(
@@ -349,16 +351,16 @@ fn monomorphize_generic_code(
     type_args: &[Type]
 ) -> SpecializedCode {
     let mut specialized = generic_code.clone();
-    
+
     // 替换所有类型参数
     specialized = substitute_all_type_params(specialized, type_args);
-    
+
     // 内联泛型函数调用
     inline_generic_function_calls(&mut specialized);
-    
+
     // 优化生成的代码
     optimize_specialized_code(&mut specialized);
-    
+
     specialized
 }
 ```
@@ -373,20 +375,20 @@ fn generate_generic_code(
     type_args: &[Type]
 ) -> GeneratedCode {
     let mut generated = GeneratedCode::new();
-    
+
     // 生成类型定义
     generated.add_type_definition(generate_type_definition(generic_def, type_args));
-    
+
     // 生成函数实现
     generated.add_function_implementations(
         generate_function_implementations(generic_def, type_args)
     );
-    
+
     // 生成Trait实现
     generated.add_trait_implementations(
         generate_trait_implementations(generic_def, type_args)
     );
-    
+
     generated
 }
 ```
@@ -407,14 +409,14 @@ impl GenericCache {
         type_args: &[Type]
     ) -> GeneratedCode {
         let signature = TypeSignature::new(generic_def, type_args);
-        
+
         if let Some(cached) = self.cache.get(&signature) {
             return cached.clone();
         }
-        
+
         let generated = generate_generic_code(generic_def, type_args);
         self.cache.insert(signature, generated.clone());
-        
+
         generated
     }
 }
@@ -458,15 +460,15 @@ impl<T> Stack<T> {
     fn new() -> Self {
         Stack { items: Vec::new() }
     }
-    
+
     fn push(&mut self, item: T) {
         self.items.push(item);
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         self.items.pop()
     }
-    
+
     fn peek(&self) -> Option<&T> {
         self.items.last()
     }
@@ -504,7 +506,7 @@ trait Container<T> {
 
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -561,11 +563,11 @@ impl<T: Ord> BinaryTree<T> {
     fn new() -> Self {
         BinaryTree { root: None }
     }
-    
+
     fn insert(&mut self, value: T) {
         self.root = Some(Box::new(self.insert_recursive(self.root.take(), value)));
     }
-    
+
     fn insert_recursive(&self, node: Option<Box<Node<T>>>, value: T) -> Node<T> {
         match node {
             None => Node {
@@ -607,12 +609,12 @@ fn verify_generic_code(generic_code: &GenericCode) -> bool {
             return false;
         }
     }
-    
+
     // 检查类型安全
     if !is_type_safe(generic_code) {
         return false;
     }
-    
+
     // 检查实例化正确性
     let test_types = generate_test_types(&generic_code.type_params);
     for type_args in test_types {
@@ -624,7 +626,7 @@ fn verify_generic_code(generic_code: &GenericCode) -> bool {
             return false;
         }
     }
-    
+
     true
 }
 ```
@@ -642,7 +644,7 @@ fn verify_generic_constraints(
     if type_params.len() != type_args.len() {
         return false;
     }
-    
+
     // 检查每个类型参数满足其约束
     for (param, arg) in type_params.iter().zip(type_args.iter()) {
         for bound in &param.bounds {
@@ -651,7 +653,7 @@ fn verify_generic_constraints(
             }
         }
     }
-    
+
     true
 }
 ```

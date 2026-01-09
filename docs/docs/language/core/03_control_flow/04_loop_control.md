@@ -225,16 +225,16 @@ $$\text{unroll}(L, n) = \text{repeat}(L, n)$$
 ```rust
 fn unroll_loop(loop_expr: &LoopExpr, factor: usize) -> Vec<Stmt> {
     let mut unrolled = Vec::new();
-    
+
     for _ in 0..factor {
         unrolled.push(loop_expr.body.clone());
     }
-    
+
     // 添加剩余迭代
     if let Some(remainder) = calculate_remainder(loop_expr, factor) {
         unrolled.push(remainder);
     }
-    
+
     unrolled
 }
 ```
@@ -334,7 +334,7 @@ fn check_termination(loop_expr: &LoopExpr) -> TerminationResult {
 ```rust
 fn analyze_dependencies(loop_body: &[Stmt]) -> DependencyGraph {
     let mut graph = DependencyGraph::new();
-    
+
     for (i, stmt1) in loop_body.iter().enumerate() {
         for (j, stmt2) in loop_body.iter().enumerate() {
             if i != j {
@@ -343,7 +343,7 @@ fn analyze_dependencies(loop_body: &[Stmt]) -> DependencyGraph {
             }
         }
     }
-    
+
     graph
 }
 ```
@@ -382,13 +382,13 @@ fn parallelize_loop(loop_expr: &LoopExpr) -> Option<ParallelLoop> {
 ```rust
 fn find_invariant_code(loop_expr: &LoopExpr) -> Vec<Expr> {
     let mut invariants = Vec::new();
-    
+
     for expr in loop_expr.body.iter() {
         if is_loop_invariant(expr, loop_expr) {
             invariants.push(expr.clone());
         }
     }
-    
+
     invariants
 }
 ```
@@ -400,7 +400,7 @@ fn find_invariant_code(loop_expr: &LoopExpr) -> Vec<Expr> {
 ```rust
 fn hoist_invariant_code(loop_expr: &mut LoopExpr) {
     let invariants = find_invariant_code(loop_expr);
-    
+
     // 将不变代码移到循环外
     for invariant in invariants {
         loop_expr.pre_loop.push(invariant);
@@ -422,7 +422,7 @@ struct Range {
 
 impl Iterator for Range {
     type Item = i32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.current < self.end {
             let result = self.current;
@@ -458,7 +458,7 @@ for i in (0..1000).step_by(4) {
     let x1 = expensive_calculation(i + 1);
     let x2 = expensive_calculation(i + 2);
     let x3 = expensive_calculation(i + 3);
-    
+
     sum += x0 * x0 + x1 * x1 + x2 * x2 + x3 * x3;
 }
 ```
@@ -500,18 +500,18 @@ fn verify_loop(loop_expr: &LoopExpr, pre: &Predicate, post: &Predicate) -> bool 
     if !pre.holds() {
         return false;
     }
-    
+
     // 验证循环不变量
     let invariant = find_loop_invariant(loop_expr);
     if !invariant.holds() {
         return false;
     }
-    
+
     // 验证终止性
     if !is_terminating(loop_expr) {
         return false;
     }
-    
+
     // 验证后置条件
     post.holds()
 }
@@ -529,7 +529,7 @@ $$S = \{(pc, \sigma) \mid pc \in \text{ProgramCounter}, \sigma \in \text{State}\
 fn explore_state_space(loop_expr: &LoopExpr) -> StateSpace {
     let mut states = HashSet::new();
     let mut worklist = vec![initial_state(loop_expr)];
-    
+
     while let Some(state) = worklist.pop() {
         if states.insert(state.clone()) {
             for successor in successors(state, loop_expr) {
@@ -537,7 +537,7 @@ fn explore_state_space(loop_expr: &LoopExpr) -> StateSpace {
             }
         }
     }
-    
+
     StateSpace::new(states)
 }
 ```

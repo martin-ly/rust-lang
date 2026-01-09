@@ -234,7 +234,7 @@ fn binary_search<T: Ord>(slice: &[T], target: &T) -> Result<usize, usize> {
 **Search Semantics:**
 
 ```math
-\text{binary\_search}(sorted, target) = 
+\text{binary\_search}(sorted, target) =
 \begin{cases}
 \text{Ok}(i) & \text{if } sorted[i] = target \\
 \text{Err}(i) & \text{if } target \text{ should be inserted at } i
@@ -377,7 +377,7 @@ where
 **Search Semantics:**
 
 ```math
-\text{binary\_search\_by}(sorted, target, cmp) = 
+\text{binary\_search\_by}(sorted, target, cmp) =
 \begin{cases}
 \text{Ok}(i) & \text{if } cmp(sorted[i], target) = \text{Equal} \\
 \text{Err}(i) & \text{if } target \text{ should be inserted at } i

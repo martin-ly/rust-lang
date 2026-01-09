@@ -1,9 +1,9 @@
 # Rust 中间件系统形式理论
 
-**Document Version**: V1.0  
-**Creation Date**: 2025-01-27  
-**Last Updated**: 2025-07-21  
-**Category**: Formal Theory  
+**Document Version**: V1.0
+**Creation Date**: 2025-01-27
+**Last Updated**: 2025-07-21
+**Category**: Formal Theory
 **Cross-References**:
 
 - [Module 11: Frameworks](../11_frameworks/00_index.md)
@@ -326,12 +326,12 @@ async fn logging_middleware<B>(
 ) -> Result<Response, Error> {
     let start = std::time::Instant::now();
     let path = req.uri().path().to_owned();
-    
+
     let response = next.run(req).await;
-    
+
     let duration = start.elapsed();
     println!("Request to {} took {:?}", path, duration);
-    
+
     Ok(response)
 }
 ```
@@ -363,7 +363,7 @@ where
     fn call(&self, req: Req) -> Self::Future {
         let span = self.tracer.create_span();
         let inner = self.inner.call(req);
-        
+
         Box::pin(async move {
             let _guard = span.enter();
             inner.await

@@ -1,9 +1,9 @@
 # Module 20: Rust 理论视角 {#module-20-theoretical-perspectives}
 
-**Document Version**: V2.0  
-**Module Status**: Active Development  
-**Last Updated**: 2025-01-01  
-**Maintainer**: Rust Language Team  
+**Document Version**: V2.0
+**Module Status**: Active Development
+**Last Updated**: 2025-01-01
+**Maintainer**: Rust Language Team
 
 ## 元数据 {#metadata}
 
@@ -20,16 +20,48 @@
 
 ## 目录 {#table-of-contents}
 
-1. [模块概述](#1-module-overview)
-2. [目录结构](#2-directory-structure)
-3. [模块关系](#3-module-relationships)
-4. [核心概念映射](#4-core-concept-mapping)
-5. [理论框架](#5-theoretical-framework)
-6. [数学符号系统](#6-mathematical-notation)
-7. [实践指导](#7-practical-guidance)
-8. [学习路径](#8-learning-paths)
-9. [质量指标](#9-quality-indicators)
-10. [相关资源](#10-related-resources)
+- [Module 20: Rust 理论视角 {#module-20-theoretical-perspectives}](#module-20-rust-理论视角-module-20-theoretical-perspectives)
+  - [元数据 {#metadata}](#元数据-metadata)
+  - [目录 {#table-of-contents}](#目录-table-of-contents)
+  - [1. 模块概述 {#1-module-overview}](#1-模块概述-1-module-overview)
+    - [1.1 模块定位](#11-模块定位)
+    - [1.2 核心价值](#12-核心价值)
+    - [1.3 理论视角分类](#13-理论视角分类)
+    - [2.1 三层架构设计](#21-三层架构设计)
+    - [2.2 文档组织原则](#22-文档组织原则)
+  - [3. 模块关系 {#3-module-relationships}](#3-模块关系-3-module-relationships)
+    - [3.1 输入依赖](#31-输入依赖)
+    - [3.2 输出影响](#32-输出影响)
+    - [3.3 横向关联](#33-横向关联)
+  - [4. 核心概念映射 {#4-core-concept-mapping}](#4-核心概念映射-4-core-concept-mapping)
+    - [4.1 理论视角层次结构](#41-理论视角层次结构)
+    - [4.2 Rust特性的理论映射](#42-rust特性的理论映射)
+  - [5. 理论框架 {#5-theoretical-framework}](#5-理论框架-5-theoretical-framework)
+    - [5.1 类型理论视角](#51-类型理论视角)
+    - [5.2 范畴论视角](#52-范畴论视角)
+    - [5.3 并发理论视角](#53-并发理论视角)
+    - [5.4 形式语义视角](#54-形式语义视角)
+  - [6. 数学符号系统 {#6-mathematical-notation}](#6-数学符号系统-6-mathematical-notation)
+    - [6.1 基础符号](#61-基础符号)
+    - [6.2 范畴论符号](#62-范畴论符号)
+    - [6.3 逻辑符号](#63-逻辑符号)
+  - [7. 实践指导 {#7-practical-guidance}](#7-实践指导-7-practical-guidance)
+    - [7.1 理论应用于语言设计](#71-理论应用于语言设计)
+    - [7.2 形式化验证实践](#72-形式化验证实践)
+    - [7.3 理论指导的性能优化](#73-理论指导的性能优化)
+    - [7.4 并发系统的理论设计](#74-并发系统的理论设计)
+  - [8. 学习路径 {#8-learning-paths}](#8-学习路径-8-learning-paths)
+    - [8.1 基础路径 (Basic Path)](#81-基础路径-basic-path)
+    - [8.2 标准路径 (Standard Path)](#82-标准路径-standard-path)
+    - [8.3 专家路径 (Expert Path)](#83-专家路径-expert-path)
+  - [9. 质量指标 {#9-quality-indicators}](#9-质量指标-9-quality-indicators)
+    - [9.1 文档完备性](#91-文档完备性)
+    - [9.2 理论深度](#92-理论深度)
+    - [9.3 实践价值](#93-实践价值)
+  - [10. 相关资源 {#10-related-resources}](#10-相关资源-10-related-resources)
+    - [10.1 依赖模块](#101-依赖模块)
+    - [10.2 外部参考](#102-外部参考)
+    - [10.3 验证工具](#103-验证工具)
 
 ## 1. 模块概述 {#1-module-overview}
 
@@ -69,6 +101,7 @@ Rust理论视角模块从多个学术角度深入分析Rust语言的理论基础
     ├── 抽象解释
     └── 符号执行
 ```
+
 ### 2.1 三层架构设计
 
 ```text
@@ -258,7 +291,7 @@ Rust特性理论映射
 
 ### 5.1 类型理论视角
 
-**定义 20.1 (Rust类型系统)**  
+**定义 20.1 (Rust类型系统)**
 Rust类型系统可以形式化为一个四元组：
 
 $$\mathcal{T}_{\text{Rust}} = (\mathcal{T}, \Gamma, \vdash, \mathcal{R})$$
@@ -270,7 +303,7 @@ $$\mathcal{T}_{\text{Rust}} = (\mathcal{T}, \Gamma, \vdash, \mathcal{R})$$
 - $\vdash$ 是类型判断关系
 - $\mathcal{R}$ 是类型规则集合
 
-**定理 20.1 (类型安全性)**  
+**定理 20.1 (类型安全性)**
 Rust类型系统满足进展性和保持性：
 
 $$\text{Progress}: \forall e: \tau. \ e \ \text{value} \lor \exists e'. e \rightarrow e'$$
@@ -278,7 +311,7 @@ $$\text{Preservation}: \forall e, e': \tau. \ e \rightarrow e' \implies e': \tau
 
 ### 5.2 范畴论视角
 
-**定义 20.2 (Rust函数范畴)**  
+**定义 20.2 (Rust函数范畴)**
 Rust中的函数形成范畴 $\mathbf{Rust}$：
 
 $$\mathbf{Rust} = (\text{Obj}, \text{Mor}, \circ, \text{id})$$
@@ -290,7 +323,7 @@ $$\mathbf{Rust} = (\text{Obj}, \text{Mor}, \circ, \text{id})$$
 - $\circ$ 是函数组合操作
 - $\text{id}_A$ 是类型$A$上的恒等函数
 
-**定理 20.2 (函子性质)**  
+**定理 20.2 (函子性质)**
 Option和Result类型构成函子：
 
 $$\text{Option}: \mathbf{Rust} \rightarrow \mathbf{Rust}$$
@@ -298,7 +331,7 @@ $$\text{Result}: \mathbf{Rust} \times \mathbf{Rust} \rightarrow \mathbf{Rust}$$
 
 ### 5.3 并发理论视角
 
-**定义 20.3 (Rust并发模型)**  
+**定义 20.3 (Rust并发模型)**
 Rust并发模型基于CSP理论，定义为：
 
 $$\mathcal{C}_{\text{Rust}} = (\mathcal{P}, \mathcal{C}, \parallel, \text{sync})$$
@@ -306,25 +339,25 @@ $$\mathcal{C}_{\text{Rust}} = (\mathcal{P}, \mathcal{C}, \parallel, \text{sync})
 其中：
 
 - $\mathcal{P}$ 是进程集合
-- $\mathcal{C}$ 是通道集合  
+- $\mathcal{C}$ 是通道集合
 - $\parallel$ 是并行组合操作
 - $\text{sync}$ 是同步机制
 
-**定理 20.3 (无数据竞争)**  
+**定理 20.3 (无数据竞争)**
 在类型系统约束下，Rust程序不存在数据竞争：
 
 $$\forall P \in \mathcal{P}_{\text{well-typed}}. \ \neg \text{DataRace}(P)$$
 
 ### 5.4 形式语义视角
 
-**定义 20.4 (操作语义)**  
+**定义 20.4 (操作语义)**
 Rust的操作语义定义为转移系统：
 
 $$\langle e, \sigma \rangle \rightarrow \langle e', \sigma' \rangle$$
 
 其中$e$是表达式，$\sigma$是内存状态。
 
-**定理 20.4 (语义保持性)**  
+**定理 20.4 (语义保持性)**
 编译后的程序保持源程序的语义：
 
 $$\forall P. \ \llbracket P \rrbracket = \llbracket \text{compile}(P) \rrbracket$$
@@ -378,7 +411,7 @@ $$\forall P. \ \llbracket P \rrbracket = \llbracket \text{compile}(P) \rrbracket
 // 类型理论指导的API设计
 trait Functor<F> {
     type Wrapped<T>;
-    
+
     fn fmap<A, B>(self, f: impl FnOnce(A) -> B) -> Self::Wrapped<B>
     where
         Self: Functor<F, Wrapped<A>>;
@@ -429,10 +462,10 @@ fn pop<T>(v: &mut Vec<T>) -> Option<T> {
 // 基于范畴论的抽象优化
 trait Monad<M> {
     type Wrapped<T>;
-    
+
     fn pure<T>(value: T) -> Self::Wrapped<T>;
     fn bind<A, B>(
-        self, 
+        self,
         f: impl FnOnce(A) -> Self::Wrapped<B>
     ) -> Self::Wrapped<B>;
 }
@@ -458,14 +491,14 @@ use std::thread;
 fn csp_pattern() {
     let (tx1, rx1) = mpsc::channel();
     let (tx2, rx2) = mpsc::channel();
-    
+
     // 进程P
     thread::spawn(move || {
         tx1.send(42).unwrap();
         let result = rx2.recv().unwrap();
         println!("P received: {}", result);
     });
-    
+
     // 进程Q
     thread::spawn(move || {
         let value = rx1.recv().unwrap();
@@ -585,7 +618,7 @@ fn csp_pattern() {
 
 ---
 
-**文档历史**:  
+**文档历史**:
 
 - 创建: 2025-07-22 - 初始版本
 - 更新: 2025-01-01 - V2.0版本，建立完整的理论视角框架

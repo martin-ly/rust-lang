@@ -137,7 +137,7 @@ fn apply_type_constructor<F<_>, T>(constructor: F<_>, value: T) -> F<T> {
 trait Functor {
     // 关联类型表示应用类型构造器的结果
     type Target<B>;
-    
+
     // map 操作
     fn map<A, B, F>(self, f: F) -> Self::Target<B>
     where
@@ -147,7 +147,7 @@ trait Functor {
 // 为 Option 实现 Functor
 impl<A> Functor for Option<A> {
     type Target<B> = Option<B>;
-    
+
     fn map<B, F>(self, f: F) -> Option<B>
     where
         F: FnOnce(A) -> B,
@@ -211,18 +211,18 @@ Rust 1.65引入了泛型关联类型（Generic Associated Types，GATs），为�
 ```rust
 trait Functor {
     type Map<B>;
-    
+
     fn map<B, F>(self, f: F) -> Self::Map<B>
     where
         F: FnOnce(Self::Item) -> B;
-    
+
     type Item;
 }
 
 impl<A> Functor for Option<A> {
     type Map<B> = Option<B>;
     type Item = A;
-    
+
     fn map<B, F>(self, f: F) -> Option<B>
     where
         F: FnOnce(A) -> B,
@@ -246,7 +246,7 @@ impl<A> Functor for Option<A> {
 ```rust
 trait Functor<A> {
     type Target<B>;
-    
+
     fn map<B, F>(self, f: F) -> Self::Target<B>
     where
         F: FnOnce(A) -> B;
@@ -258,7 +258,7 @@ trait Functor<A> {
 ```rust
 trait Applicative<A>: Functor<A> {
     fn pure<B>(b: B) -> Self::Target<B>;
-    
+
     fn apply<B, F>(self, f: Self::Target<F>) -> Self::Target<B>
     where
         F: FnOnce(A) -> B;
@@ -294,11 +294,11 @@ impl Container for VecHKT {
     fn empty<T>() -> Vec<T> {
         Vec::new()
     }
-    
+
     fn singleton<T>(item: T) -> Vec<T> {
         vec![item]
     }
-    
+
     fn append<T>(mut a: Vec<T>, mut b: Vec<T>) -> Vec<T> {
         a.append(&mut b);
         a
@@ -333,11 +333,11 @@ trait Query: HKT {
     fn select<T, F>(selector: F) -> Self::Applied<T>
     where
         F: Fn() -> T;
-    
+
     fn filter<T, F>(query: Self::Applied<T>, predicate: F) -> Self::Applied<T>
     where
         F: Fn(&T) -> bool;
-    
+
     fn execute<T>(query: Self::Applied<T>) -> Vec<T>;
 }
 ```

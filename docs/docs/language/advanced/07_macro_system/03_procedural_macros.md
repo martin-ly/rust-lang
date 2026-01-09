@@ -165,7 +165,7 @@ depth(macro_expansion) ≤ MAX_DEPTH
 **递归限制定理**：
 
 ```text
-∀ m ∈ MacroCall: 
+∀ m ∈ MacroCall:
   expansion_depth(m) < ∞ ⇒ termination_guaranteed(m)
 ```
 
@@ -203,7 +203,7 @@ depth(macro_expansion) ≤ MAX_DEPTH
 #### 展开后类型正确性
 
 ```text
-TypeCheck(original_code) = ✓ ∧ 
+TypeCheck(original_code) = ✓ ∧
 MacroExpand(original_code) = expanded_code
 ⇒ TypeCheck(expanded_code) = ✓ ∨ CompileError
 ```
@@ -265,7 +265,7 @@ MacroState: Global → Local → TokenStream
 struct Data<T> { field: T }
 
 // 生成：
-impl<T> Serialize for Data<T> 
+impl<T> Serialize for Data<T>
 where T: Serialize
 {
     fn serialize<S>(&self, serializer: S) → Result<S::Ok, S::Error>
@@ -292,7 +292,7 @@ trait AsyncTrait {
 
 // 展开为：
 trait AsyncTrait {
-    fn method<'life0>(&'life0 self) 
+    fn method<'life0>(&'life0 self)
         → Pin<Box<dyn Future<Output = Result<(), Error>> + 'life0>>;
 }
 ```
@@ -316,7 +316,7 @@ MacroCache: (MacroId, InputTokens) → OutputTokens
 #### 增量编译支持
 
 ```text
-IncrementalExpansion: 
+IncrementalExpansion:
   ΔInput → ΔOutput ∨ FullRecompile
 ```
 

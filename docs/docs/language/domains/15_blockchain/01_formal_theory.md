@@ -1,8 +1,8 @@
 # Rust Blockchain Systems: Formal Theory and Philosophical Foundation
 
-**Document Version**: V1.0  
-**Creation Date**: 2025-01-27  
-**Category**: Formal Theory  
+**Document Version**: V1.0
+**Creation Date**: 2025-01-27
+**Category**: Formal Theory
 **Cross-References**: [01_ownership_borrowing](../01_ownership_borrowing/01_formal_theory.md), [05_concurrency](../05_concurrency/01_formal_theory.md), [13_microservices](../13_microservices/01_formal_theory.md)
 
 ## Table of Contents
@@ -191,17 +191,17 @@ impl Transaction {
             signature: Vec::new(),
         }
     }
-    
+
     pub fn sign(&mut self, private_key: &[u8]) {
         let message = self.serialize_for_signing();
         self.signature = sign_message(&message, private_key);
     }
-    
+
     pub fn verify(&self, public_key: &[u8]) -> bool {
         let message = self.serialize_for_signing();
         verify_signature(&message, &self.signature, public_key)
     }
-    
+
     fn serialize_for_signing(&self) -> Vec<u8> {
         let mut data = Vec::new();
         data.extend_from_slice(self.sender.as_bytes());
@@ -256,17 +256,17 @@ impl Block {
             nonce: 0,
             difficulty,
         };
-        
+
         let mut block = Block {
             header,
             transactions,
             hash: [0; 32],
         };
-        
+
         block.hash = block.calculate_hash();
         block
     }
-    
+
     pub fn calculate_hash(&self) -> [u8; 32] {
         let mut hasher = Sha256::new();
         hasher.update(self.header.index.to_be_bytes());
@@ -277,50 +277,50 @@ impl Block {
         hasher.update(self.header.difficulty.to_be_bytes());
         hasher.finalize().into()
     }
-    
+
     pub fn calculate_merkle_root(transactions: &[Transaction]) -> [u8; 32] {
         if transactions.is_empty() {
             return [0; 32];
         }
-        
+
         if transactions.len() == 1 {
             let mut hasher = Sha256::new();
             hasher.update(&transactions[0].serialize_for_signing());
             return hasher.finalize().into();
         }
-        
+
         let mid = transactions.len() / 2;
         let left_root = Self::calculate_merkle_root(&transactions[..mid]);
         let right_root = Self::calculate_merkle_root(&transactions[mid..]);
-        
+
         let mut hasher = Sha256::new();
         hasher.update(&left_root);
         hasher.update(&right_root);
         hasher.finalize().into()
     }
-    
+
     pub fn mine(&mut self) -> u64 {
         let target = self.calculate_target();
         let mut nonce = 0;
-        
+
         loop {
             self.header.nonce = nonce;
             let hash = self.calculate_hash();
-            
+
             if self.hash_to_number(&hash) < target {
                 self.hash = hash;
                 return nonce;
             }
-            
+
             nonce += 1;
         }
     }
-    
+
     fn calculate_target(&self) -> u64 {
         // Simplified target calculation based on difficulty
         u64::MAX >> self.header.difficulty
     }
-    
+
     fn hash_to_number(&self, hash: &[u8; 32]) -> u64 {
         u64::from_be_bytes([
             hash[0], hash[1], hash[2], hash[3],
@@ -355,7 +355,7 @@ impl Blockchain {
             vec![],
             difficulty,
         );
-        
+
         Blockchain {
             blocks: vec![genesis_block],
             pending_transactions: Vec::new(),
@@ -363,29 +363,29 @@ impl Blockchain {
             mining_reward: 100,
         }
     }
-    
+
     pub fn add_transaction(&mut self, transaction: Transaction) -> Result<(), String> {
         if !self.is_transaction_valid(&transaction) {
             return Err("Invalid transaction".to_string());
         }
-        
+
         self.pending_transactions.push(transaction);
         Ok(())
     }
-    
+
     pub fn mine_pending_transactions(&mut self, miner_address: &str) -> Result<Block, String> {
         let mut block = Block::new(
             self.get_latest_block().hash,
             self.pending_transactions.clone(),
             self.difficulty,
         );
-        
+
         block.header.index = self.blocks.len() as u64;
-        
+
         // Mine the block
         let nonce = block.mine();
         println!("Block mined with nonce: {}", nonce);
-        
+
         // Add mining reward transaction
         let reward_tx = Transaction::new(
             "system".to_string(),
@@ -393,57 +393,57 @@ impl Blockchain {
             self.mining_reward,
             0,
         );
-        
+
         block.transactions.push(reward_tx);
-        
+
         // Add block to chain
         self.blocks.push(block.clone());
-        
+
         // Clear pending transactions
         self.pending_transactions.clear();
-        
+
         Ok(block)
     }
-    
+
     pub fn is_chain_valid(&self) -> bool {
         for i in 1..self.blocks.len() {
             let current_block = &self.blocks[i];
             let previous_block = &self.blocks[i - 1];
-            
+
             // Check if current block's hash is valid
             if current_block.hash != current_block.calculate_hash() {
                 return false;
             }
-            
+
             // Check if current block points to previous block
             if current_block.header.prev_hash != previous_block.hash {
                 return false;
             }
-            
+
             // Check if block meets difficulty requirement
             if !self.is_block_valid(current_block) {
                 return false;
             }
         }
-        
+
         true
     }
-    
+
     fn is_block_valid(&self, block: &Block) -> bool {
         let target = block.calculate_target();
         let hash_number = block.hash_to_number(&block.hash);
         hash_number < target
     }
-    
+
     fn is_transaction_valid(&self, transaction: &Transaction) -> bool {
         // Check if sender has sufficient balance
         let sender_balance = self.get_balance(&transaction.sender);
         sender_balance >= transaction.value
     }
-    
+
     pub fn get_balance(&self, address: &str) -> u64 {
         let mut balance = 0;
-        
+
         for block in &self.blocks {
             for transaction in &block.transactions {
                 if transaction.recipient == address {
@@ -454,10 +454,10 @@ impl Blockchain {
                 }
             }
         }
-        
+
         balance
     }
-    
+
     pub fn get_latest_block(&self) -> &Block {
         &self.blocks[self.blocks.len() - 1]
     }
@@ -477,7 +477,7 @@ $$\text{PoW}(B, D) = \text{hash}(B) < 2^{256-D}$$
 pub trait ConsensusProtocol {
     type Block;
     type State;
-    
+
     fn initialize() -> Self::State;
     fn mine_block(&self, state: &mut Self::State, block: &mut Self::Block) -> Result<(), String>;
     fn validate_block(&self, state: &Self::State, block: &Self::Block) -> bool;
@@ -492,34 +492,34 @@ impl ProofOfWork {
     pub fn new(difficulty: u32) -> Self {
         ProofOfWork { difficulty }
     }
-    
+
     pub fn mine(&self, block: &mut Block) -> u64 {
         let target = self.calculate_target();
         let mut nonce = 0;
-        
+
         loop {
             block.header.nonce = nonce;
             let hash = block.calculate_hash();
-            
+
             if self.hash_to_number(&hash) < target {
                 block.hash = hash;
                 return nonce;
             }
-            
+
             nonce += 1;
         }
     }
-    
+
     pub fn validate(&self, block: &Block) -> bool {
         let target = self.calculate_target();
         let hash_number = self.hash_to_number(&block.hash);
         hash_number < target
     }
-    
+
     fn calculate_target(&self) -> u64 {
         u64::MAX >> self.difficulty
     }
-    
+
     fn hash_to_number(&self, hash: &[u8; 32]) -> u64 {
         u64::from_be_bytes([
             hash[0], hash[1], hash[2], hash[3],
@@ -618,7 +618,7 @@ use std::collections::HashMap;
 fn main() {
     // Create a new blockchain
     let mut blockchain = Blockchain::new(4); // Difficulty of 4
-    
+
     // Add some transactions
     blockchain.add_transaction(Transaction::new(
         "Alice".to_string(),
@@ -626,21 +626,21 @@ fn main() {
         50,
         1,
     )).unwrap();
-    
+
     blockchain.add_transaction(Transaction::new(
         "Bob".to_string(),
         "Charlie".to_string(),
         30,
         1,
     )).unwrap();
-    
+
     // Mine a block
     let block = blockchain.mine_pending_transactions("miner1").unwrap();
     println!("Block mined: {:?}", block);
-    
+
     // Check chain validity
     println!("Chain valid: {}", blockchain.is_chain_valid());
-    
+
     // Check balances
     println!("Alice balance: {}", blockchain.get_balance("Alice"));
     println!("Bob balance: {}", blockchain.get_balance("Bob"));
@@ -668,11 +668,11 @@ impl SmartContract {
             balance: 0,
         }
     }
-    
+
     pub fn execute(&mut self, input: &[u8]) -> Result<Vec<u8>, String> {
         // Simplified smart contract execution
         // In practice, this would involve a full virtual machine
-        
+
         match input {
             b"get_balance" => Ok(self.balance.to_be_bytes().to_vec()),
             b"deposit" => {
@@ -711,85 +711,85 @@ impl MerkleTree {
                 hasher.finalize().into()
             })
             .collect();
-        
+
         let root = Self::build_tree(&leaves);
-        
+
         MerkleTree { root, leaves }
     }
-    
+
     fn build_tree(leaves: &[[u8; 32]]) -> [u8; 32] {
         if leaves.is_empty() {
             return [0; 32];
         }
-        
+
         if leaves.len() == 1 {
             return leaves[0];
         }
-        
+
         let mut level = leaves.to_vec();
-        
+
         while level.len() > 1 {
             let mut next_level = Vec::new();
-            
+
             for chunk in level.chunks(2) {
                 let mut hasher = Sha256::new();
                 hasher.update(&chunk[0]);
-                
+
                 if chunk.len() > 1 {
                     hasher.update(&chunk[1]);
                 } else {
                     hasher.update(&chunk[0]); // Duplicate for odd number
                 }
-                
+
                 next_level.push(hasher.finalize().into());
             }
-            
+
             level = next_level;
         }
-        
+
         level[0]
     }
-    
+
     pub fn generate_proof(&self, index: usize) -> Option<Vec<([u8; 32], bool)>> {
         if index >= self.leaves.len() {
             return None;
         }
-        
+
         let mut proof = Vec::new();
         let mut current_index = index;
         let mut current_level = self.leaves.clone();
-        
+
         while current_level.len() > 1 {
             let is_right = current_index % 2 == 1;
             let sibling_index = if is_right { current_index - 1 } else { current_index + 1 };
-            
+
             if sibling_index < current_level.len() {
                 proof.push((current_level[sibling_index], is_right));
             }
-            
+
             current_index /= 2;
             current_level = Self::build_next_level(&current_level);
         }
-        
+
         Some(proof)
     }
-    
+
     fn build_next_level(level: &[[u8; 32]]) -> Vec<[u8; 32]> {
         let mut next_level = Vec::new();
-        
+
         for chunk in level.chunks(2) {
             let mut hasher = Sha256::new();
             hasher.update(&chunk[0]);
-            
+
             if chunk.len() > 1 {
                 hasher.update(&chunk[1]);
             } else {
                 hasher.update(&chunk[0]);
             }
-            
+
             next_level.push(hasher.finalize().into());
         }
-        
+
         next_level
     }
 }
@@ -842,6 +842,6 @@ impl MerkleTree {
 
 ---
 
-**Document Status**: Complete  
-**Next Review**: 2025-02-27  
+**Document Status**: Complete
+**Next Review**: 2025-02-27
 **Maintainer**: Rust Formal Theory Team

@@ -3,50 +3,52 @@
 
 ## 📊 目录
 
-- [1. 概述](#1-概述)
-- [2. 数学符号约定](#2-数学符号约定)
-  - [2.1 基本符号](#21-基本符号)
-  - [2.2 Trait系统符号](#22-trait系统符号)
-- [3. Trait定义形式化理论](#3-trait定义形式化理论)
-  - [3.1 语法定义](#31-语法定义)
-  - [3.2 Trait类型理论](#32-trait类型理论)
-  - [3.3 Trait方法理论](#33-trait方法理论)
-- [4. Trait实现形式化理论](#4-trait实现形式化理论)
-  - [4.1 实现语法](#41-实现语法)
-  - [4.2 实现类型规则](#42-实现类型规则)
-  - [4.3 实现一致性](#43-实现一致性)
-- [5. Trait对象形式化理论](#5-trait对象形式化理论)
-  - [5.1 Trait对象定义](#51-trait对象定义)
-  - [5.2 对象安全](#52-对象安全)
-  - [5.3 Trait对象类型规则](#53-trait对象类型规则)
-- [6. Trait约束形式化理论](#6-trait约束形式化理论)
-  - [6.1 约束语法](#61-约束语法)
-  - [6.2 约束类型规则](#62-约束类型规则)
-  - [6.3 约束求解](#63-约束求解)
-- [7. Trait继承形式化理论](#7-trait继承形式化理论)
-  - [7.1 继承语法](#71-继承语法)
-  - [7.2 继承类型规则](#72-继承类型规则)
-  - [7.3 继承一致性](#73-继承一致性)
-- [8. 关联类型形式化理论](#8-关联类型形式化理论)
-  - [8.1 关联类型定义](#81-关联类型定义)
-  - [8.2 关联类型实现](#82-关联类型实现)
-  - [8.3 关联类型约束](#83-关联类型约束)
-- [9. 默认实现形式化理论](#9-默认实现形式化理论)
-  - [9.1 默认实现定义](#91-默认实现定义)
-  - [9.2 默认实现覆盖](#92-默认实现覆盖)
-- [10. Trait系统优化](#10-trait系统优化)
-  - [10.1 单态化优化](#101-单态化优化)
-  - [10.2 虚函数表优化](#102-虚函数表优化)
-- [11. 实际应用示例](#11-实际应用示例)
-  - [11.1 基本Trait定义](#111-基本trait定义)
-  - [11.2 泛型Trait](#112-泛型trait)
-  - [11.3 Trait对象](#113-trait对象)
-  - [11.4 高级Trait约束](#114-高级trait约束)
-- [12. 形式化验证](#12-形式化验证)
-  - [12.1 Trait实现验证](#121-trait实现验证)
-  - [12.2 Trait对象安全验证](#122-trait对象安全验证)
-- [13. 总结](#13-总结)
-- [14. 参考文献](#14-参考文献)
+- [Rust Trait系统形式化理论](#rust-trait系统形式化理论)
+  - [📊 目录](#-目录)
+  - [1. 概述](#1-概述)
+  - [2. 数学符号约定](#2-数学符号约定)
+    - [2.1 基本符号](#21-基本符号)
+    - [2.2 Trait系统符号](#22-trait系统符号)
+  - [3. Trait定义形式化理论](#3-trait定义形式化理论)
+    - [3.1 语法定义](#31-语法定义)
+    - [3.2 Trait类型理论](#32-trait类型理论)
+    - [3.3 Trait方法理论](#33-trait方法理论)
+  - [4. Trait实现形式化理论](#4-trait实现形式化理论)
+    - [4.1 实现语法](#41-实现语法)
+    - [4.2 实现类型规则](#42-实现类型规则)
+    - [4.3 实现一致性](#43-实现一致性)
+  - [5. Trait对象形式化理论](#5-trait对象形式化理论)
+    - [5.1 Trait对象定义](#51-trait对象定义)
+    - [5.2 对象安全](#52-对象安全)
+    - [5.3 Trait对象类型规则](#53-trait对象类型规则)
+  - [6. Trait约束形式化理论](#6-trait约束形式化理论)
+    - [6.1 约束语法](#61-约束语法)
+    - [6.2 约束类型规则](#62-约束类型规则)
+    - [6.3 约束求解](#63-约束求解)
+  - [7. Trait继承形式化理论](#7-trait继承形式化理论)
+    - [7.1 继承语法](#71-继承语法)
+    - [7.2 继承类型规则](#72-继承类型规则)
+    - [7.3 继承一致性](#73-继承一致性)
+  - [8. 关联类型形式化理论](#8-关联类型形式化理论)
+    - [8.1 关联类型定义](#81-关联类型定义)
+    - [8.2 关联类型实现](#82-关联类型实现)
+    - [8.3 关联类型约束](#83-关联类型约束)
+  - [9. 默认实现形式化理论](#9-默认实现形式化理论)
+    - [9.1 默认实现定义](#91-默认实现定义)
+    - [9.2 默认实现覆盖](#92-默认实现覆盖)
+  - [10. Trait系统优化](#10-trait系统优化)
+    - [10.1 单态化优化](#101-单态化优化)
+    - [10.2 虚函数表优化](#102-虚函数表优化)
+  - [11. 实际应用示例](#11-实际应用示例)
+    - [11.1 基本Trait定义](#111-基本trait定义)
+    - [11.2 泛型Trait](#112-泛型trait)
+    - [11.3 Trait对象](#113-trait对象)
+    - [11.4 高级Trait约束](#114-高级trait约束)
+  - [12. 形式化验证](#12-形式化验证)
+    - [12.1 Trait实现验证](#121-trait实现验证)
+    - [12.2 Trait对象安全验证](#122-trait对象安全验证)
+  - [13. 总结](#13-总结)
+  - [14. 参考文献](#14-参考文献)
 
 
 ## 1. 概述
@@ -180,19 +182,19 @@ fn is_object_safe(trait_def: &TraitDef) -> bool {
     if has_associated_types(trait_def) {
         return false;
     }
-    
+
     // 检查是否有泛型参数
     if has_generic_parameters(trait_def) {
         return false;
     }
-    
+
     // 检查所有方法是否对象安全
     for method in &trait_def.methods {
         if !is_method_object_safe(method) {
             return false;
         }
     }
-    
+
     true
 }
 ```
@@ -239,7 +241,7 @@ $$\text{solve}(\text{constraints}) = \text{find}(\text{impls} \mid \text{constra
 ```rust
 fn solve_constraints(constraints: &[TraitBound]) -> Option<Vec<Impl>> {
     let mut solutions = Vec::new();
-    
+
     for constraint in constraints {
         if let Some(impls) = find_implementations(constraint) {
             solutions.extend(impls);
@@ -247,7 +249,7 @@ fn solve_constraints(constraints: &[TraitBound]) -> Option<Vec<Impl>> {
             return None; // 无法求解
         }
     }
-    
+
     Some(solutions)
 }
 ```
@@ -285,19 +287,19 @@ fn check_inheritance_consistency(trait_def: &TraitDef) -> bool {
     if has_circular_inheritance(trait_def) {
         return false;
     }
-    
+
     // 检查超Trait对象安全
     for super_trait in &trait_def.super_traits {
         if !is_object_safe(super_trait) {
             return false;
         }
     }
-    
+
     // 检查方法签名冲突
     if has_method_signature_conflicts(trait_def) {
         return false;
     }
-    
+
     true
 }
 ```
@@ -375,12 +377,12 @@ fn resolve_method_implementation(
     if let Some(custom_impl) = impl_def.get_method(method_name) {
         return Some(custom_impl);
     }
-    
+
     // 然后查找默认实现
     if let Some(default_impl) = trait_def.get_default_impl(method_name) {
         return Some(default_impl);
     }
-    
+
     None
 }
 ```
@@ -401,15 +403,15 @@ fn monomorphize(
     type_args: &[Type]
 ) -> SpecializedCode {
     let mut specialized = generic_code.clone();
-    
+
     // 替换类型参数
     for (param, arg) in generic_code.params.iter().zip(type_args.iter()) {
         specialized = substitute_type(specialized, param, arg);
     }
-    
+
     // 优化生成的代码
     optimize_specialized_code(&mut specialized);
-    
+
     specialized
 }
 ```
@@ -426,7 +428,7 @@ fn optimize_vtable(vtable: &mut VTable) {
             inline_method(method);
         }
     }
-    
+
     // 缓存方法指针
     cache_method_pointers(vtable);
 }
@@ -469,9 +471,9 @@ impl Debug for Point {
 ```rust
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
-    
+
     fn size_hint(&self) -> (usize, Option<usize>) {
         (0, None)
     }
@@ -485,7 +487,7 @@ struct Range {
 
 impl Iterator for Range {
     type Item = i32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.current < self.end {
             let result = self.current;
@@ -604,19 +606,19 @@ fn verify_trait_implementation(
         if !impl_def.has_method(required_method.name()) {
             return false;
         }
-        
+
         if !signatures_match(required_method, impl_def.get_method(required_method.name())) {
             return false;
         }
     }
-    
+
     // 检查关联类型
     for associated_type in &trait_def.associated_types {
         if !impl_def.has_associated_type(associated_type.name()) {
             return false;
         }
     }
-    
+
     true
 }
 ```
@@ -633,17 +635,17 @@ fn verify_object_safety(trait_def: &TraitDef) -> bool {
             return false;
         }
     }
-    
+
     // 检查关联类型
     if !trait_def.associated_types.is_empty() {
         return false;
     }
-    
+
     // 检查泛型参数
     if !trait_def.generic_params.is_empty() {
         return false;
     }
-    
+
     true
 }
 ```

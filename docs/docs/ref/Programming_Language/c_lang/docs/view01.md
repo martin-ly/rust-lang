@@ -265,13 +265,13 @@ y = x * 2;
 int sum(int n) {
     int total = 0;     // 初始 {total = 0}
     int i = 1;         // 初始 {total = 0 ∧ i = 1}
-    
+
     // 循环不变量: {total = Σ(1到i-1) ∧ 1 ≤ i ≤ n+1}
     while (i <= n) {
         total += i;
         i++;
     }
-    
+
     // 循环结束: {total = Σ(1到n) ∧ i = n+1}
     return total;
 }
@@ -739,13 +739,13 @@ int subtract(int a, int b) { return a - b; }
 
 int main() {
     int (*operation)(int, int);  // 声明函数指针
-    
+
     operation = add;
     printf("%d\n", operation(5, 3));  // 输出8
-    
+
     operation = subtract;
     printf("%d\n", operation(5, 3));  // 输出2
-    
+
     return 0;
 }
 ```
@@ -773,12 +773,12 @@ int h = a >> 1; // 右移：0010 (2)
 int sum(int count, ...) {
     va_list args;
     va_start(args, count);
-    
+
     int total = 0;
     for (int i = 0; i < count; i++) {
         total += va_arg(args, int);
     }
-    
+
     va_end(args);
     return total;
 }
@@ -815,7 +815,7 @@ void print_user_input(char* input) {
 void integer_overflow() {
     int length = get_user_input();
     char* buffer = (char*)malloc(length + 1);  // 可能溢出
-    
+
     // 安全做法
     if (length > 0 && length < MAX_SIZE) {
         buffer = (char*)malloc(length + 1);
@@ -862,13 +862,13 @@ void copy_data(char* dst, size_t dst_size, const char* src) {
     if (dst == NULL || src == NULL) {
         return;  // 防止空指针
     }
-    
+
     size_t src_len = strlen(src);
     if (src_len >= dst_size) {
         // 处理缓冲区不足
         src_len = dst_size - 1;
     }
-    
+
     memcpy(dst, src, src_len);
     dst[src_len] = '\0';  // 确保以null结尾
 }

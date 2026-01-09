@@ -126,7 +126,7 @@ impl ConfigurableSensor for MyTempSensor {
 
 // 基于元模型的通用函数
 fn configure_and_read<S: ConfigurableSensor>(
-    sensor: &mut S, 
+    sensor: &mut S,
     new_config: S::Config
 ) -> Result<i32, S::Error> {
     sensor.apply_config(new_config)?;
@@ -369,12 +369,12 @@ where
 
     pub fn read_sensor(&mut self) -> Result<u16, Spi::Error> {
         self.cs_pin.set_low()?;
-        
+
         let mut buffer = [0u8; 2];
         self.spi.read(&mut buffer)?;
-        
+
         self.cs_pin.set_high()?;
-        
+
         let value = ((buffer[0] as u16) << 8) | (buffer[1] as u16);
         Ok(value)
     }
@@ -526,7 +526,7 @@ impl OtaManager {
     pub fn new(flash: FlashInterface, public_key: PublicKey) -> Self {
         let partitions = Self::read_partition_table(&flash);
         let (current, target) = Self::find_partitions(&partitions);
-        
+
         Self {
             flash,
             current_partition: current,
@@ -538,19 +538,19 @@ impl OtaManager {
     pub async fn start_update(&mut self, firmware_url: &str) -> Result<(), OtaError> {
         // 1. 下载固件
         let firmware_data = self.download_firmware(firmware_url).await?;
-        
+
         // 2. 验证固件
         if !self.verify_firmware(&firmware_data).await? {
             return Err(OtaError::VerificationFailed);
         }
-        
+
         // 3. 写入目标分区
         self.write_firmware(&firmware_data).await?;
-        
+
         // 4. 更新分区状态
         self.target_partition.status = OtaStatus::Ready;
         self.update_partition_table().await?;
-        
+
         Ok(())
     }
 
@@ -559,7 +559,7 @@ impl OtaManager {
         let mut hasher = Hasher::new(Algorithm::SHA256);
         hasher.update(firmware_data);
         let hash = hasher.finish();
-        
+
         // 验证签名
         let signature = self.extract_signature(firmware_data)?;
         Ok(self.public_key.verify(&hash, &signature).is_ok())
@@ -568,10 +568,10 @@ impl OtaManager {
     async fn write_firmware(&mut self, firmware_data: &[u8]) -> Result<(), OtaError> {
         // 擦除目标分区
         self.flash.erase(self.target_partition.start_addr, self.target_partition.size)?;
-        
+
         // 写入固件数据
         self.flash.write(self.target_partition.start_addr, firmware_data)?;
-        
+
         Ok(())
     }
 }
@@ -674,7 +674,7 @@ impl DifferentialPrivacy {
     pub fn new(epsilon: f64) -> Self {
         Self { epsilon }
     }
-    
+
     // 拉普拉斯噪声机制
     pub fn add_laplace_noise(&self, value: f64, sensitivity: f64) -> f64 {
         let mut rng = rand::thread_rng();
@@ -682,14 +682,14 @@ impl DifferentialPrivacy {
         let noise = rng.gen_range(-scale..scale);
         value + noise
     }
-    
+
     // 数据脱敏
     pub fn anonymize_data(&self, data: &[u8]) -> Vec<u8> {
         data.iter()
             .map(|&b| b.wrapping_add(self.generate_noise() as u8))
             .collect()
     }
-    
+
     fn generate_noise(&self) -> i32 {
         let mut rng = rand::thread_rng();
         rng.gen_range(-10..10)
@@ -723,10 +723,10 @@ impl SecureConnection {
     pub fn new() -> Result<Self, Box<dyn std::error::Error>> {
         let mut config = ClientConfig::new();
         config.root_store.add_server_trust_anchors(&webpki_roots::TLS_SERVER_ROOTS);
-        
+
         Ok(Self { config })
     }
-    
+
     pub async fn connect(&self, host: &str, port: u16) -> Result<TlsStream, Box<dyn std::error::Error>> {
         let connector = TlsConnector::from(Arc::new(self.config.clone()));
         let stream = TcpStream::connect(format!("{}:{}", host, port)).await?;
@@ -744,7 +744,7 @@ impl MessageIntegrity {
     pub fn new(key: [u8; 32]) -> Self {
         Self { key }
     }
-    
+
     pub fn sign(&self, message: &[u8]) -> [u8; 32] {
         use sha2::{Sha256, Digest};
         let mut hasher = Sha256::new();
@@ -752,7 +752,7 @@ impl MessageIntegrity {
         hasher.update(&self.key);
         hasher.finalize().into()
     }
-    
+
     pub fn verify(&self, message: &[u8], signature: &[u8; 32]) -> bool {
         let expected = self.sign(message);
         signature == &expected
@@ -794,11 +794,11 @@ impl ImmutableData {
     pub fn new(data: Vec<u8>) -> Self {
         Self { data }
     }
-    
+
     pub fn get_data(&self) -> &[u8] {
         &self.data
     }
-    
+
     // 编译时保证：无法修改data
     // pub fn modify_data(&mut self) { ... } // 不存在此方法
 }
@@ -828,13 +828,13 @@ impl ThreadSafeCounter {
             count: Arc::new(Mutex::new(0)),
         }
     }
-    
+
     pub fn increment(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut count = self.count.lock()?;
         *count += 1;
         Ok(())
     }
-    
+
     pub fn get_count(&self) -> Result<u32, Box<dyn std::error::Error>> {
         let count = self.count.lock()?;
         Ok(*count)
@@ -884,19 +884,19 @@ impl EdgeNode {
             network: NetworkInterface::new(),
         }
     }
-    
+
     pub async fn process_task(&mut self, task: Task) -> Result<TaskResult, EdgeError> {
         // 本地处理任务
         let result = self.compute_pool.execute(task).await?;
-        
+
         // 存储结果
         self.storage.store(&result).await?;
-        
+
         // 必要时上传到云端
         if result.needs_cloud_sync() {
             self.network.upload(&result).await?;
         }
-        
+
         Ok(result)
     }
 }
@@ -911,7 +911,7 @@ impl ComputePool {
             workers: Vec::new(),
         }
     }
-    
+
     pub async fn execute(&self, task: Task) -> Result<TaskResult, ComputeError> {
         // 任务调度和执行
         let worker = self.select_worker();
@@ -951,14 +951,14 @@ impl AIModel {
             .model_for_path(path)?
             .into_optimized()?
             .into_runnable()?;
-        
+
         Ok(Self { model })
     }
-    
+
     pub fn predict(&self, input: &[f32]) -> Result<Vec<f32>, Box<dyn std::error::Error>> {
         let input_tensor = tract_ndarray::arr1(input).into_shape((1, input.len()))?;
         let result = self.model.run(tvec!(input_tensor.into()))?;
-        
+
         let output = result[0].to_array_view::<f32>()?;
         Ok(output.to_vec())
     }
@@ -979,23 +979,23 @@ impl QuantizedModel {
             zero_point,
         }
     }
-    
+
     pub fn predict_quantized(&self, input: &[i8]) -> Result<Vec<i8>, Box<dyn std::error::Error>> {
         // 反量化输入
         let float_input: Vec<f32> = input
             .iter()
             .map(|&x| (x as f32 - self.zero_point as f32) * self.scale)
             .collect();
-        
+
         // 推理
         let float_output = self.model.predict(&float_input)?;
-        
+
         // 量化输出
         let quantized_output: Vec<i8> = float_output
             .iter()
             .map(|&x| ((x / self.scale) + self.zero_point as f32).round() as i8)
             .collect();
-        
+
         Ok(quantized_output)
     }
 }
@@ -1036,19 +1036,19 @@ impl FederatedLearning {
             global_model: ModelParameters::default(),
         }
     }
-    
+
     pub async fn local_training(&mut self, local_data: &[f32]) -> ModelParameters {
         // 本地训练
         self.local_model.train(local_data).await;
-        
+
         // 返回本地参数
         self.local_model.get_parameters()
     }
-    
+
     pub async fn aggregate_models(&mut self, client_models: Vec<ModelParameters>) {
         // 联邦平均
         let num_clients = client_models.len() as f32;
-        
+
         let aggregated_weights: Vec<f32> = (0..self.global_model.weights.len())
             .map(|i| {
                 client_models.iter()
@@ -1056,7 +1056,7 @@ impl FederatedLearning {
                     .sum::<f32>() / num_clients
             })
             .collect();
-        
+
         let aggregated_bias: Vec<f32> = (0..self.global_model.bias.len())
             .map(|i| {
                 client_models.iter()
@@ -1064,13 +1064,13 @@ impl FederatedLearning {
                     .sum::<f32>() / num_clients
             })
             .collect();
-        
+
         self.global_model = ModelParameters {
             weights: aggregated_weights,
             bias: aggregated_bias,
         };
     }
-    
+
     pub fn update_local_model(&mut self) {
         // 更新本地模型参数
         self.local_model.set_parameters(&self.global_model);

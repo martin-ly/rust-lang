@@ -59,7 +59,7 @@
   ```assembly
   section .data
   counter dd 0     ; 定义双字变量counter，初值为0
-  
+
   section .text
   inc dword [counter] ; 增加内存中counter的值
   ```
@@ -163,7 +163,7 @@
 ### 2.2 数据流分析
 
 - **定义**：分析数据(变量/寄存器值)在程序中如何传播和变化
-  
+
 - **常见数据流分析类型**：
   - **到达定义分析**：哪些变量赋值可能到达程序某点
   - **活跃变量分析**：哪些变量的值在某点后可能被使用
@@ -186,7 +186,7 @@
 ### 2.3 执行流分析
 
 - **概念**：分析指令实际执行顺序及时间特性
-  
+
 - **关键方面**：
   - **指令级并行**：流水线、超标量、乱序执行
   - **微架构影响**：缓存、分支预测、指令获取
@@ -236,7 +236,7 @@
     ```math
     \langle \text{MOV }r, imm, \sigma \rangle \rightarrow \sigma[r \mapsto imm]
     ```
-  
+
   - **大步语义**：整体计算结果
 
     ```math
@@ -247,8 +247,8 @@
 
   ```math
   ⟦ADD dst, src⟧(σ) = σ[
-    dst ↦ σ(dst) + σ(src), 
-    ZF ↦ (σ(dst) + σ(src) == 0), 
+    dst ↦ σ(dst) + σ(src),
+    ZF ↦ (σ(dst) + σ(src) == 0),
     SF ↦ (σ(dst) + σ(src) < 0),
     ... ]
   ```
@@ -306,7 +306,7 @@
     dec ecx
     jmp loop_start
   loop_end:
-  
+
   ; 不变量：迭代后，eax = (n-ecx+1)! 且 ecx ≥ 0
   ```
 
@@ -326,7 +326,7 @@
 ### 4.2 调度与系统交互
 
 - **进程调度**：操作系统如何分配CPU时间
-  
+
 - **上下文切换**：
 
   ```assembly
@@ -606,7 +606,7 @@ WebAssembly (Wasm) 是一种面向网络的低级字节码格式，对比传统�
   mov eax, 5
   add eax, 3
   mov ebx, eax
-  
+
   ; 优化后
   mov ebx, 8
   ```
@@ -616,7 +616,7 @@ WebAssembly (Wasm) 是一种面向网络的低级字节码格式，对比传统�
   ```assembly
   ; 优化前 - 乘法
   imul eax, 8
-  
+
   ; 优化后 - 位移
   shl eax, 3
   ```
@@ -630,7 +630,7 @@ WebAssembly (Wasm) 是一种面向网络的低级字节码格式，对比传统�
   add ebx, 5
   mov [var3], ebx
   mov ecx, [var1]
-  
+
   ; 优化后 - 寄存器复用
   mov ebx, eax    ; 保留var1值在寄存器
   add ebx, 5      ; var2+5直接在寄存器计算
@@ -712,7 +712,7 @@ WebAssembly (Wasm) 是一种面向网络的低级字节码格式，对比传统�
     ; ...
   %endif
   %endmacro
-  
+
   ; 使用宏
   PUSH_ALL
   ```
@@ -785,10 +785,10 @@ WebAssembly (Wasm) 是一种面向网络的低级字节码格式，对比传统�
 
   ```math
   {P} C {Q}  // 如果执行前P为真，执行C后Q为真
-  
+
   赋值规则：
   {P[E/x]} x := E {P}
-  
+
   顺序规则：
   {P} C₁ {R}, {R} C₂ {Q}
   ----------------------

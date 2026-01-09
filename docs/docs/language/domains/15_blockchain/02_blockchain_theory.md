@@ -109,13 +109,13 @@ fn compute_hash<T: AsRef<[u8]>>(data: T) -> Vec<u8> {
 fn test_hash_properties() {
     let data1 = b"blockchain data";
     let data2 = b"blockchain data!";
-    
+
     let hash1 = compute_hash(data1);
     let hash2 = compute_hash(data2);
-    
+
     // 即使输入只相差一个字符，哈希值也应完全不同
     assert_ne!(hash1, hash2);
-    
+
     // 相同输入总是产生相同哈希值
     assert_eq!(hash1, compute_hash(data1));
 }
@@ -199,13 +199,13 @@ fn verify_signature(public_key: &PublicKey, message: &[u8], signature: &Signatur
 fn test_signature() {
     let keypair = generate_keypair();
     let message = b"blockchain transaction";
-    
+
     // 使用私钥签名
     let signature = sign_message(&keypair, message);
-    
+
     // 使用公钥验证
     assert!(verify_signature(&keypair.public, message, &signature));
-    
+
     // 篡改消息后验证应失败
     let altered_message = b"altered transaction";
     assert!(!verify_signature(&keypair.public, altered_message, &signature));
@@ -260,7 +260,7 @@ fn check_proof_of_work(block_header: &[u8], nonce: u64, difficulty: usize) -> bo
     hasher.update(block_header);
     hasher.update(&nonce.to_le_bytes());
     let result = hasher.finalize();
-    
+
     // 检查前difficulty/4个字节是否为0
     let hex_representation = hex::encode(result);
     hex_representation.starts_with(&"0".repeat(difficulty))
@@ -279,10 +279,10 @@ fn mine_block(block_header: &[u8], difficulty: usize) -> u64 {
 fn test_pow() {
     let block_data = b"test block data";
     let difficulty = 4; // 要求哈希以4个0开头
-    
+
     let nonce = mine_block(block_data, difficulty);
     assert!(check_proof_of_work(block_data, nonce, difficulty));
-    
+
     // 验证不同nonce会导致验证失败
     assert!(!check_proof_of_work(block_data, nonce + 1, difficulty));
 }
@@ -403,14 +403,14 @@ impl TokenContract {
     fn new(owner: &str, initial_supply: u64) -> Self {
         let mut balances = std::collections::HashMap::new();
         balances.insert(owner.to_string(), initial_supply);
-        
+
         TokenContract {
             balances,
             total_supply: initial_supply,
             owner: owner.to_string(),
         }
     }
-    
+
     // 转账功能
     fn transfer(&mut self, from: &str, to: &str, amount: u64) -> Result<(), &'static str> {
         // 前置条件：发送方有足够的余额
@@ -418,15 +418,15 @@ impl TokenContract {
         if from_balance < amount {
             return Err("Insufficient balance");
         }
-        
+
         // 执行转账
         *self.balances.entry(from.to_string()).or_insert(0) -= amount;
         *self.balances.entry(to.to_string()).or_insert(0) += amount;
-        
+
         // 后置条件：总供应量不变
         let sum: u64 = self.balances.values().sum();
         assert_eq!(sum, self.total_supply, "Total supply invariant violated");
-        
+
         Ok(())
     }
 }
@@ -436,15 +436,15 @@ impl TokenContract {
 fn verify_token_contract() {
     // 初始状态
     let mut contract = TokenContract::new("Alice", 1000);
-    
+
     // 验证转账功能
     assert!(contract.transfer("Alice", "Bob", 500).is_ok());
     assert_eq!(*contract.balances.get("Alice").unwrap(), 500);
     assert_eq!(*contract.balances.get("Bob").unwrap(), 500);
-    
+
     // 验证余额不足的情况
     assert!(contract.transfer("Alice", "Bob", 1000).is_err());
-    
+
     // 验证总供应量不变的不变量
     let sum: u64 = contract.balances.values().sum();
     assert_eq!(sum, contract.total_supply);
@@ -522,16 +522,16 @@ impl Block {
             previous_hash: previous_hash.to_string(),
         }
     }
-    
+
     fn hash(&self) -> String {
         // 将区块序列化为JSON
         let serialized = serde_json::to_string(&self).unwrap();
-        
+
         // 计算SHA-256哈希
         let mut hasher = Sha256::new();
         hasher.update(serialized.as_bytes());
         let result = hasher.finalize();
-        
+
         // 转换为十六进制字符串
         format!("{:x}", result)
     }
@@ -554,7 +554,7 @@ fn valid_proof(last_proof: u64, proof: u64, last_hash: &str, difficulty: usize) 
     let mut hasher = Sha256::new();
     hasher.update(guess.as_bytes());
     let guess_hash = format!("{:x}", hasher.finalize());
-    
+
     guess_hash.starts_with(&"0".repeat(difficulty))
 }
 
@@ -563,7 +563,7 @@ fn test_proof_of_work() {
     let last_proof = 100;
     let last_hash = "1abc00000000";
     let difficulty = 4;
-    
+
     let proof = proof_of_work(last_proof, last_hash, difficulty);
     assert!(valid_proof(last_proof, proof, last_hash, difficulty));
 }
@@ -584,22 +584,22 @@ impl Blockchain {
         let mut blockchain = Blockchain {
             chain: Vec::new(),
             current_transactions: Vec::new(),
-            
+
 
 ```rust
             difficulty,
         };
-        
+
         // 创建创世区块
         blockchain.create_genesis_block();
         blockchain
     }
-    
+
     fn create_genesis_block(&mut self) {
         let genesis_block = Block::new(0, Vec::new(), 100, "0");
         self.chain.push(genesis_block);
     }
-    
+
     fn add_transaction(&mut self, sender: &str, recipient: &str, amount: u64) -> u64 {
         self.current_transactions.push(Transaction {
             sender: sender.to_string(),
@@ -607,55 +607,55 @@ impl Blockchain {
             amount,
             signature: None, // 简化处理，实际应使用数字签名
         });
-        
+
         // 返回该交易将被添加到的区块索引
         self.last_block().index + 1
     }
-    
+
     fn new_block(&mut self, proof: u64) -> Block {
         let previous_block = self.last_block();
         let previous_hash = previous_block.hash();
-        
+
         let block = Block::new(
             self.chain.len() as u64,
             std::mem::take(&mut self.current_transactions),
             proof,
             &previous_hash,
         );
-        
+
         self.chain.push(block.clone());
         block
     }
-    
+
     fn last_block(&self) -> &Block {
         self.chain.last().unwrap()
     }
-    
+
     fn mine(&mut self) -> Block {
         // 获取工作量证明
         let last_block = self.last_block();
         let last_proof = last_block.proof;
         let last_hash = last_block.hash();
-        
+
         let proof = proof_of_work(last_proof, &last_hash, self.difficulty);
-        
+
         // 给矿工的奖励
         self.add_transaction("0", "miner", 1); // "0"表示系统奖励
-        
+
         // 创建新区块
         self.new_block(proof)
     }
-    
+
     fn is_valid_chain(&self) -> bool {
         for i in 1..self.chain.len() {
             let current = &self.chain[i];
             let previous = &self.chain[i - 1];
-            
+
             // 检查区块的哈希是否正确
             if current.previous_hash != previous.hash() {
                 return false;
             }
-            
+
             // 检查工作量证明是否正确
             if !valid_proof(previous.proof, current.proof, &previous.hash(), self.difficulty) {
                 return false;
@@ -668,14 +668,14 @@ impl Blockchain {
 #[test]
 fn test_blockchain() {
     let mut blockchain = Blockchain::new(4);
-    
+
     // 添加一些交易
     blockchain.add_transaction("Alice", "Bob", 50);
     blockchain.add_transaction("Bob", "Charlie", 25);
-    
+
     // 挖矿以创建新区块
     let block = blockchain.mine();
-    
+
     // 验证区块链
     assert!(blockchain.is_valid_chain());
     assert_eq!(blockchain.chain.len(), 2);
@@ -735,7 +735,7 @@ impl MerkleTree {
         if data_blocks.is_empty() {
             return MerkleTree { root: None };
         }
-        
+
         // 创建叶子节点
         let mut leaves: Vec<MerkleNode> = data_blocks.into_iter()
             .map(|data| {
@@ -743,59 +743,59 @@ impl MerkleTree {
                 MerkleNode::Leaf { hash, data }
             })
             .collect();
-        
+
         // 如果叶子数量为奇数，复制最后一个
         if leaves.len() % 2 == 1 {
             leaves.push(leaves.last().unwrap().clone());
         }
-        
+
         // 构建树
         let root = Self::build_tree(leaves);
         MerkleTree { root: Some(root) }
     }
-    
+
     fn build_tree(nodes: Vec<MerkleNode>) -> MerkleNode {
         if nodes.len() == 1 {
             return nodes.into_iter().next().unwrap();
         }
-        
+
         let mut parents = Vec::new();
-        
+
         for i in (0..nodes.len()).step_by(2) {
             let left = &nodes[i];
             let right = &nodes[i+1];
-            
+
             let combined_hash = hash_pair(left.get_hash(), right.get_hash());
-            
+
             parents.push(MerkleNode::Branch {
                 hash: combined_hash,
                 left: Box::new(nodes[i].clone()),
                 right: Box::new(nodes[i+1].clone()),
             });
         }
-        
+
         Self::build_tree(parents)
     }
-    
+
     // 获取树的根哈希
     fn get_root_hash(&self) -> Option<Vec<u8>> {
         self.root.as_ref().map(|node| node.get_hash().clone())
     }
-    
+
     // 生成特定数据块的证明路径
     fn generate_proof(&self, data: &[u8]) -> Option<Vec<(bool, Vec<u8>)>> {
         let data_hash = hash(data);
         let mut proof = Vec::new();
-        
+
         if let Some(root) = &self.root {
             if Self::generate_proof_helper(root, &data_hash, &mut proof) {
                 return Some(proof);
             }
         }
-        
+
         None
     }
-    
+
     fn generate_proof_helper(node: &MerkleNode, target_hash: &[u8], proof: &mut Vec<(bool, Vec<u8>)>) -> bool {
         match node {
             MerkleNode::Leaf { hash, .. } => hash == target_hash,
@@ -814,11 +814,11 @@ impl MerkleTree {
             }
         }
     }
-    
+
     // 验证证明
     fn verify_proof(root_hash: &[u8], data: &[u8], proof: &[(bool, Vec<u8>)]) -> bool {
         let mut computed_hash = hash(data);
-        
+
         for (is_left, hash) in proof {
             if *is_left {
                 // 证明哈希在左侧
@@ -828,7 +828,7 @@ impl MerkleTree {
                 computed_hash = hash_pair(&computed_hash, hash);
             }
         }
-        
+
         &computed_hash == root_hash
     }
 }
@@ -859,18 +859,18 @@ fn test_merkle_tree() {
         b"transaction3".to_vec(),
         b"transaction4".to_vec(),
     ];
-    
+
     // 构建默克尔树
     let tree = MerkleTree::new(data_blocks.clone());
     let root_hash = tree.get_root_hash().unwrap();
-    
+
     // 为第二个交易生成证明
     let target_data = &data_blocks[1];
     let proof = tree.generate_proof(target_data).unwrap();
-    
+
     // 验证证明
     assert!(MerkleTree::verify_proof(&root_hash, target_data, &proof));
-    
+
     // 篡改数据后验证应该失败
     let tampered_data = b"tampered_transaction".to_vec();
     assert!(!MerkleTree::verify_proof(&root_hash, &tampered_data, &proof));
