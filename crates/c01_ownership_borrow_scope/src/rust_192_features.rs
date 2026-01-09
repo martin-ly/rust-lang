@@ -21,12 +21,12 @@ use std::marker::PhantomData;
 ///
 /// Rust 1.92.0 正式文档化了 `MaybeUninit` 的内部表示和有效性约束：
 /// Rust 1.92.0 officially documents the internal representation and validity constraints of `MaybeUninit`:
-
+///
 /// ## 1.1 `MaybeUninit` 安全使用模式 / Safe Usage Patterns for `MaybeUninit`
 ///
 /// Rust 1.92.0 提供了更清晰的 `MaybeUninit` 使用指南：
 /// Rust 1.92.0 provides clearer guidelines for using `MaybeUninit`:
-
+///
 /// `MaybeUninit` 包装器，提供安全的未初始化内存管理
 /// Rust 1.92.0: 正式文档化的表示和有效性约束
 #[derive(Debug)]
@@ -104,7 +104,7 @@ impl<T> Default for SafeMaybeUninit<T> {
 ///
 /// Rust 1.92.0 允许在安全代码中使用原始引用（`&raw mut` 或 `&raw const`）访问联合体字段：
 /// Rust 1.92.0 allows using raw references (`&raw mut` or `&raw const`) to access union fields in safe code:
-
+///
 /// 联合体示例 / Union Example
 #[repr(C)]
 pub union Rust192Union {
@@ -153,7 +153,7 @@ impl Rust192Union {
 ///
 /// Rust 1.92.0 改进了自动特征和 `Sized` 边界的处理，优先考虑关联类型的项边界而不是 where 边界：
 /// Rust 1.92.0 improves auto-trait and `Sized` bounds handling, prioritizing item bounds of associated types over where-bounds:
-
+///
 /// 关联类型示例 / Associated Type Example
 pub trait Rust192Trait {
     /// 关联类型 / Associated type
@@ -179,7 +179,7 @@ impl Rust192Trait for String {
 ///
 /// Rust 1.92.0 优化了零长度数组的处理，当类型 `X` 是未定大小时，避免具体化类型 `X`：
 /// Rust 1.92.0 optimizes handling of zero-length arrays, avoiding materializing type `X` when it's unsized:
-
+///
 /// 零大小数组示例 / Zero-Sized Array Example
 pub struct Rust192ZeroSizedArray<T> {
     /// 零大小数组 / Zero-sized array
@@ -219,7 +219,7 @@ impl<T> Default for Rust192ZeroSizedArray<T> {
 ///
 /// Rust 1.92.0 允许组合使用 `#[track_caller]` 和 `#[no_mangle]` 属性：
 /// Rust 1.92.0 allows combining `#[track_caller]` and `#[no_mangle]` attributes:
-
+///
 /// Rust 1.92.0: 组合使用 `#[track_caller]` 和 `#[no_mangle]`
 /// Combined use of `#[track_caller]` and `#[no_mangle]`
 #[track_caller]
@@ -243,7 +243,7 @@ pub extern "Rust" fn rust_192_tracked_function(value: i32) -> i32 {
 /// Rust 1.92.0 sets the following lints to deny by default:
 /// - `never_type_fallback_flowing_into_unsafe`
 /// - `dependency_on_unit_never_type_fallback`
-
+///
 /// Never 类型示例 / Never Type Example
 #[allow(unreachable_code)]
 pub fn rust_192_never_type_example() {
@@ -262,7 +262,7 @@ pub fn rust_192_never_type_example() {
 ///
 /// Rust 1.92.0 允许为同一个关联项指定多个边界（除了 trait 对象）：
 /// Rust 1.92.0 allows specifying multiple bounds for the same associated item (except in trait objects):
-
+///
 /// 多边界关联类型示例 / Multiple Bounds Associated Type Example
 pub trait Rust192MultipleBounds {
     /// Rust 1.92.0: 关联项可以有多个边界
@@ -285,7 +285,7 @@ impl Rust192MultipleBounds for Vec<u8> {
 ///
 /// Rust 1.92.0 增强了关于高阶区域的一致性规则：
 /// Rust 1.92.0 strengthens coherence rules concerning higher-ranked regions:
-
+///
 /// 高阶生命周期示例 / Higher-Ranked Lifetime Example
 pub fn rust_192_higher_ranked_lifetime<F>(f: F)
 where
@@ -300,7 +300,7 @@ where
 ///
 /// Rust 1.92.0 改进了 `unused_must_use` lint，不再对 `Result<(), Uninhabited>` 或 `ControlFlow<Uninhabited, ()>` 发出警告：
 /// Rust 1.92.0 refines `unused_must_use` lint, no longer warning on `Result<(), Uninhabited>` or `ControlFlow<Uninhabited, ()>`:
-
+///
 /// 改进的 `unused_must_use` 示例 / Refined `unused_must_use` Example
 #[must_use]
 pub fn rust_192_must_use_result() -> Result<(), std::convert::Infallible> {
@@ -315,7 +315,7 @@ pub fn rust_192_must_use_result() -> Result<(), std::convert::Infallible> {
 ///
 /// Rust 1.92.0 稳定化了以下 API：
 /// Rust 1.92.0 stabilizes the following APIs:
-
+///
 /// ## 10.1 `NonZero<u{N}>::div_ceil`
 ///
 /// 非零整数的向上除法 / Ceiling division for non-zero integers
@@ -354,7 +354,7 @@ pub fn rust_192_rotate_right_example() {
 ///
 /// Rust 1.92.0 为 `TrustedLen` 迭代器特化了 `Iterator::eq` 和 `Iterator::eq_by` 方法：
 /// Rust 1.92.0 specializes `Iterator::eq` and `Iterator::eq_by` methods for `TrustedLen` iterators:
-
+///
 /// 迭代器比较示例 / Iterator Comparison Example
 pub fn rust_192_iterator_eq_example() {
     let vec1 = vec![1, 2, 3, 4, 5];
@@ -376,7 +376,7 @@ pub fn rust_192_iterator_eq_example() {
 ///
 /// Rust 1.92.0 简化了 `Extend` trait 对元组的实现：
 /// Rust 1.92.0 simplifies the `Extend` trait implementation for tuples:
-
+///
 /// 元组扩展示例 / Tuple Extension Example
 pub fn rust_192_tuple_extend_example() {
     let mut tuple = (vec![1, 2], vec![3, 4]);
@@ -408,7 +408,7 @@ pub fn rust_192_encode_wide_example() {
 ///
 /// Rust 1.92.0 中，`iter::Repeat` 的 `last` 和 `count` 方法现在会在无限循环时 panic：
 /// In Rust 1.92.0, the `last` and `count` methods on `iter::Repeat` will now panic instead of entering infinite loops:
-
+///
 /// `iter::Repeat` 示例 / `iter::Repeat` Example
 pub fn rust_192_repeat_example() {
     use std::iter;

@@ -21,7 +21,6 @@ use std::task::{Context, Poll};
 use std::sync::{Mutex};
 
 /// # 1. 生成器特性（使用标准库实现）/ Generator Features (Using Standard Library Implementation)
-
 /// 同步生成器示例 / Synchronous Generator Example
 /// 使用标准库的迭代器实现生成器功能
 pub fn sync_generator_example() {
@@ -83,7 +82,6 @@ pub fn advanced_generator_patterns() {
 }
 
 /// # 2. 改进的模式匹配特性 / Improved Pattern Matching Features
-
 /// 增强的模式匹配示例 / Enhanced Pattern Matching Example
 pub fn enhanced_pattern_matching() {
     println!("=== 增强的模式匹配 / Enhanced Pattern Matching ===");
@@ -130,7 +128,6 @@ pub fn enhanced_pattern_matching() {
 }
 
 /// # 3. 增强的借用检查器特性 / Enhanced Borrow Checker Features
-
 /// 改进的借用检查器示例 / Improved Borrow Checker Example
 pub fn improved_borrow_checker() {
     println!("=== 改进的借用检查器 / Improved Borrow Checker ===");
@@ -172,7 +169,6 @@ pub fn improved_borrow_checker() {
 }
 
 /// # 4. 新的智能指针特性 / New Smart Pointer Features
-
 /// 智能指针优化示例 / Smart Pointer Optimization Example
 pub fn smart_pointer_optimization() {
     println!("=== 智能指针优化 / Smart Pointer Optimization ===");
@@ -218,7 +214,6 @@ pub fn smart_pointer_optimization() {
 }
 
 /// # 5. 优化的作用域管理特性 / Optimized Scope Management Features
-
 /// 精确作用域控制示例 / Precise Scope Control Example
 pub fn precise_scope_control() {
     println!("=== 精确作用域控制 / Precise Scope Control ===");
@@ -249,7 +244,6 @@ pub fn precise_scope_control() {
 }
 
 /// # 6. 增强的并发安全特性 / Enhanced Concurrency Safety Features
-
 /// 高级并发模式示例 / Advanced Concurrency Pattern Example
 pub fn advanced_concurrency_patterns() {
     println!("=== 高级并发模式 / Advanced Concurrency Patterns ===");
@@ -313,7 +307,6 @@ pub fn advanced_concurrency_patterns() {
 }
 
 /// # 7. 智能内存管理特性 / Smart Memory Management Features
-
 /// 智能内存分配示例 / Smart Memory Allocation Example
 pub fn smart_memory_allocation() {
     println!("=== 智能内存分配 / Smart Memory Allocation ===");
@@ -347,7 +340,6 @@ pub fn smart_memory_allocation() {
 }
 
 /// # 8. 性能优化特性 / Performance Optimization Features
-
 /// 内联优化示例 / Inline Optimization Example
 pub fn inline_optimization() {
     println!("=== 内联优化 / Inline Optimization ===");
@@ -378,7 +370,6 @@ pub fn inline_optimization() {
 }
 
 /// # 9. 错误处理改进 / Error Handling Improvements
-
 /// 高级错误处理示例 / Advanced Error Handling Example
 pub fn advanced_error_handling() {
     println!("=== 高级错误处理 / Advanced Error Handling ===");
@@ -440,7 +431,6 @@ pub fn advanced_error_handling() {
 }
 
 /// # 主要功能函数 / Main Function Functions
-
 /// 运行所有 Rust 1.90 最新特性示例 / Run all Rust 1.90 latest features examples
 pub fn run_all_rust_190_latest_features_examples() {
     println!("=== Rust 1.90 最新特性示例 / Rust 1.90 Latest Features Examples ===");
@@ -500,7 +490,6 @@ pub async fn run_async_examples() {
 
 /// 生成器特征 / Generator Traits
 /// 为自定义生成器提供基础特征
-
 /// 同步生成器特征 / Synchronous Generator Trait
 pub trait SyncGenerator<T> {
     fn next(&mut self) -> Option<T>;
@@ -561,7 +550,6 @@ impl AsyncGenerator<i32> for CustomAsyncGenerator {
 }
 
 /// 生成器工具函数 / Generator Utility Functions
-
 /// 创建数字生成器 / Create number generator
 pub fn create_number_generator(max: i32) -> impl Iterator<Item = i32> {
     (0..max).into_iter()
@@ -584,7 +572,6 @@ where
 }
 
 /// 生成器组合器 / Generator Combinators
-
 /// 合并两个生成器 / Combine two generators
 pub fn combine_generators<G1, G2, T>(gen1: G1, gen2: G2) -> impl Iterator<Item = T>
 where
@@ -604,7 +591,6 @@ where
 }
 
 /// 生成器性能分析 / Generator Performance Analysis
-
 /// 生成器性能指标 / Generator Performance Metrics
 #[derive(Debug)]
 pub struct GeneratorMetrics {
@@ -687,7 +673,6 @@ where
 }
 
 /// 生成器缓存 / Generator Caching
-
 /// 缓存生成器 / Cached Generator
 pub struct CachedGenerator<G>
 where

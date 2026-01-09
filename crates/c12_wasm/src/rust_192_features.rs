@@ -55,8 +55,8 @@ impl WasmBuffer {
     /// 调用者必须确保不会超出缓冲区容量，且写入的数据不会导致未定义行为
     pub unsafe fn write(&mut self, data: &[u8]) -> usize {
         let write_len = data.len().min(self.buffer.len() - self.initialized_len);
-        for i in 0..write_len {
-            self.buffer[self.initialized_len + i].write(data[i]);
+        for (i, &byte) in data.iter().enumerate().take(write_len) {
+            self.buffer[self.initialized_len + i].write(byte);
         }
         self.initialized_len += write_len;
         write_len

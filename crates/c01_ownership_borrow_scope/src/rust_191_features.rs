@@ -19,7 +19,7 @@ use std::time::Duration;
 ///
 /// Rust 1.91 对类型检查器进行了优化，特别是在借用检查方面：
 /// Rust 1.91 optimizes the type checker, especially in borrow checking:
-
+///
 /// ## 1.1 改进的借用检查器性能 / Improved Borrow Checker Performance
 ///
 /// Rust 1.91 中的借用检查器性能提升包括：
@@ -28,7 +28,7 @@ use std::time::Duration;
 /// - 更好的借用检查算法 / Better borrow checking algorithms
 /// - 优化的借用检查缓存 / Optimized borrow checking cache
 /// - 更智能的借用冲突检测 / Smarter borrow conflict detection
-
+///
 /// 改进的借用检查器 / Improved Borrow Checker
 /// Rust 1.91 版本，包含性能优化
 #[derive(Debug, Clone)]
@@ -289,7 +289,7 @@ impl Rust191BorrowChecker {
 ///
 /// Rust 1.91 允许在 const 上下文中创建对非静态常量的引用：
 /// Rust 1.91 allows creating references to non-static constants in const contexts:
-
+///
 /// 生命周期参数 / Lifetime Parameter
 #[derive(Debug, Clone)]
 pub struct LifetimeParam191 {
@@ -399,7 +399,7 @@ impl ConstContextLifetimeInferencer191 {
 ///
 /// Rust 1.91 对内存分配器进行了优化，特别是在处理小对象时：
 /// Rust 1.91 optimizes the memory allocator, especially when handling small objects:
-
+///
 /// 优化的内存管理器 / Optimized Memory Manager
 pub struct OptimizedMemoryManager191 {
     /// 内存分配记录 / Memory allocation records
@@ -558,7 +558,7 @@ impl OptimizedMemoryManager191 {
 /// # 4. 改进的生命周期推断（编译时优化）/ Improved Lifetime Inference (Compile-time Optimizations)
 ///
 /// Rust 1.91 改进了生命周期推断算法，减少编译时间：
-
+///
 /// 优化的生命周期推断器 / Optimized Lifetime Inferencer
 pub struct OptimizedLifetimeInferencer191 {
     /// 生命周期映射 / Lifetime mapping
