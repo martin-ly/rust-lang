@@ -405,7 +405,7 @@ cargo run -p c05_threads --example rust_192_features_demo
 # 运行 Rust 1.90 特性演示（历史参考）
 cargo run -p c05_threads --example rust_190_features_demo
 
-# 运行高级 Rust 1.90 特性演示
+# 运行高级 Rust 1.90 特性演示（历史参考）
 cargo run -p c05_threads --example advanced_rust190_demo
 
 # 启用 tokio 特性运行异步演示

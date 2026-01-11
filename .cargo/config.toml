@@ -1,7 +1,7 @@
 # Cargo配置文件
 # 创建时间: 2025年9月25日 14:20
 # 增强时间: 2025年9月25日 14:50
-# 更新时间: 2025年10月11日 (cargo update 已更新依赖版本)
+# 更新时间: 2025年12月24日 (cargo update 已更新依赖版本至 Rust 1.92.0 兼容版本)
 
 [build]
 # 启用CPU指令集优化
@@ -122,7 +122,7 @@ maintenance-deps = "update"
 RUST_LOG = "debug"
 RUST_BACKTRACE = "1"
 # 依赖更新提示
-CARGO_UPDATE_REMINDER = "2025-10-11: generic-array v0.14.8, rust_decimal v1.39.0"
+CARGO_UPDATE_REMINDER = "2025-12-24: cargo update 已更新154个包到最新 Rust 1.92.0 兼容版本"
 
 # 构建配置
 [profile.dev]

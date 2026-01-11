@@ -244,7 +244,7 @@ wasmedge target/wasm32-wasi/release/wasi-app.wasm input.txt
 | --- | --- | --- |
 | [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md) | Rust 1.92.0 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
 | [Rust 1.92.0 WASM 快速参考](./docs/RUST_192_QUICK_REFERENCE.md) | 快速查找和代码模板 | ⭐⭐ |
-| [Rust 1.92.0 WASM 迁移指南](./docs/RUST_192_MIGRATION_GUIDE.md) | 从 Rust 1.91 迁移指南 | ⭐⭐⭐ |
+| [Rust 1.92.0 WASM 迁移指南](./docs/RUST_192_MIGRATION_GUIDE.md) | 从 Rust 1.91 迁移指南（当前推荐） | ⭐⭐⭐ |
 | [Rust 1.92.0 特性对比](./docs/RUST_192_FEATURE_COMPARISON.md) | Rust 1.92.0 vs 1.91 对比 | ⭐⭐⭐ |
 | [Rust 1.92.0 最佳实践](./docs/RUST_192_BEST_PRACTICES.md) | 最佳实践指南 | ⭐⭐⭐⭐ |
 | [Rust 1.92.0 性能基准测试](./docs/RUST_192_PERFORMANCE_BENCHMARKS.md) | 性能测试结果 | ⭐⭐⭐ |
@@ -259,7 +259,7 @@ wasmedge target/wasm32-wasi/release/wasi-app.wasm input.txt
 | 文档 | 内容 | 难度 |
 | --- | --- | --- |
 | [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md) | Rust 1.92.0 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
-| [Rust 1.90 生态库与设计模式](./docs/tier_04_advanced/04_rust_190_生态库与设计模式.md) | 生态库、设计模式（历史参考） | ⭐⭐⭐⭐⭐ |
+| [Rust 1.90 生态库与设计模式](./docs/tier_04_advanced/04_rust_190_生态库与设计模式.md) | 生态库、设计模式（历史参考，已更新至 1.92.0） | ⭐⭐⭐⭐⭐ |
 
 ### 思维表征方式 ⭐ NEW
 

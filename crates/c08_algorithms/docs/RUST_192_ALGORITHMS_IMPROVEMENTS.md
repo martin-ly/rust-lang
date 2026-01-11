@@ -30,7 +30,10 @@ Rust 1.92.0 在算法实现方面带来了重要的改进，主要包括：
 1. **rotate_right** - 高效的循环移位和缓冲区操作
 2. **NonZero::div_ceil** - 精确的分块和分页计算
 3. **迭代器方法特化** - 提升数组和集合比较性能
-4. **改进的 Lint 行为** - 更安全的算法实现
+4. **btree_map::Entry::insert_entry** ⭐ **新增** - 更高效的 BTreeMap 插入操作
+5. **改进的 Lint 行为** - 更安全的算法实现
+6. **展开表默认启用** ⭐ **新增** - 即使使用 `-Cpanic=abort` 也能正确回溯
+7. **panic::catch_unwind 性能优化** ⭐ **新增** - 算法错误处理性能提升
 
 ---
 
@@ -126,6 +129,105 @@ pub fn compare_arrays<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
    - 使用 `rotate_right` 优化循环移位算法
    - 使用 `NonZero::div_ceil` 精确计算分块和分页
    - 利用迭代器特化提升比较算法性能
+
+---
+
+## btree_map::Entry::insert_entry (Rust 1.92.0 新增) ⭐
+
+Rust 1.92.0 稳定化了 `btree_map::Entry::insert_entry` 和 `btree_map::VacantEntry::insert_entry` 方法，提供更高效的 BTreeMap 插入操作。
+
+### 使用场景
+
+- **缓存系统**: 插入或更新缓存项
+- **计数器**: 高效的计数和更新
+- **配置管理**: 配置项的插入和更新
+- **性能优化**: 避免额外的查找操作
+
+### 代码示例
+
+```rust
+use std::collections::BTreeMap;
+
+// 缓存系统示例
+pub struct Cache<K, V> {
+    data: BTreeMap<K, V>,
+}
+
+impl<K: Ord, V> Cache<K, V> {
+    pub fn new() -> Self {
+        Self {
+            data: BTreeMap::new(),
+        }
+    }
+
+    /// 插入或更新缓存项（使用 insert_entry 优化）
+    pub fn insert_or_update(&mut self, key: K, value: V) -> &mut V {
+        // Rust 1.92.0: 使用 insert_entry 避免额外的查找
+        self.data.entry(key).insert_entry(value)
+    }
+
+    /// 获取缓存项
+    pub fn get(&self, key: &K) -> Option<&V> {
+        self.data.get(key)
+    }
+}
+```
+
+### 性能优势
+
+- **减少查找**: 避免先查找再插入的开销
+- **原子操作**: 插入和返回在同一个操作中完成
+- **内存效率**: 更高效的内存使用
+
+---
+
+## 展开表默认启用 (Rust 1.92.0 新增) ⭐
+
+Rust 1.92.0 中，即使使用 `-Cpanic=abort` 选项，展开表也会默认启用。这对于算法库的调试非常有用。
+
+### 配置说明
+
+在 `Cargo.toml` 中：
+
+```toml
+[profile.release]
+panic = "abort"  # 即使使用 abort，展开表也会启用
+```
+
+### 优势
+
+- **更好的调试体验**: 即使使用 `panic = "abort"`，也能获得完整的回溯信息
+- **算法调试**: 在算法实现中更容易定位问题
+- **生产环境友好**: 可以在生产环境中获得有用的错误信息
+
+---
+
+## panic::catch_unwind 性能优化 (Rust 1.92.0 新增) ⭐
+
+Rust 1.92.0 优化了 `panic::catch_unwind` 函数，不再在入口处访问线程本地存储，提高了性能。
+
+### 在算法中的应用
+
+```rust
+use std::panic;
+
+// Rust 1.92.0: 优化后的 catch_unwind 性能更好
+pub fn safe_algorithm_execution<F, T>(algorithm: F) -> Result<T, String>
+where
+    F: FnOnce() -> T + std::panic::UnwindSafe,
+{
+    match panic::catch_unwind(algorithm) {
+        Ok(result) => Ok(result),
+        Err(_) => Err("算法执行失败".to_string()),
+    }
+}
+```
+
+### 性能影响
+
+- **减少开销**: 不再访问线程本地存储，减少函数调用开销
+- **提高吞吐量**: 在高频调用的算法中性能提升明显
+- **自动受益**: 所有使用 `panic::catch_unwind` 的算法代码自动受益
 
 ---
 

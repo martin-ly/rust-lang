@@ -860,7 +860,7 @@ cargo bench -p c06_async
 # 运行 Rust 1.92.0 特性基准测试
 cargo bench --bench rust_192_comprehensive_benchmarks
 
-# 运行 Rust 1.90 特性基准测试
+# 运行 Rust 1.90 特性基准测试（历史参考）
 cargo bench --bench rust_190_comprehensive_benchmarks
 
 # 可选：在浏览器查看指标（如使用 bench_with_metrics）
