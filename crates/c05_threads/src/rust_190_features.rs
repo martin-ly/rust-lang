@@ -270,8 +270,8 @@ impl PerformanceOptimizations {
         let mut data = [1.0f32, 2.0, 3.0, 4.0];
 
         // 使用 SIMD 进行向量化计算
-        for i in 0..data.len() {
-            data[i] = data[i] * 2.0;
+        for item in data.iter_mut() {
+            *item *= 2.0;
         }
 
         println!("向量化结果: {:?}", data);

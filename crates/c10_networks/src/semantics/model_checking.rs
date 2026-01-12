@@ -541,7 +541,7 @@ impl TlaModelChecker {
     /// 生成变量声明
     fn generate_variables(&self, model: &SemanticModel) -> String {
         model.state_variables.keys()
-            .map(|name| name.clone())
+            .cloned()
             .collect::<Vec<_>>()
             .join(", ")
     }
@@ -567,7 +567,7 @@ impl TlaModelChecker {
     /// 生成变量列表
     fn generate_variable_list(&self, model: &SemanticModel) -> String {
         model.state_variables.keys()
-            .map(|name| name.clone())
+            .cloned()
             .collect::<Vec<_>>()
             .join(", ")
     }

@@ -438,17 +438,17 @@ pub fn summary_ranges(nums: Vec<i32>) -> Vec<String> {
     let mut end = nums[0];
 
     // Rust 1.91 JIT 优化：单次遍历
-    for i in 1..nums.len() {
-        if nums[i] == end + 1 {
-            end = nums[i];
+    for num in nums.iter().skip(1) {
+        if *num == end + 1 {
+            end = *num;
         } else {
             if start == end {
                 result.push(start.to_string());
             } else {
                 result.push(format!("{}->{}", start, end));
             }
-            start = nums[i];
-            end = nums[i];
+            start = *num;
+            end = *num;
         }
     }
 

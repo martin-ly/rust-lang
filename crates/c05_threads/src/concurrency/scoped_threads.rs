@@ -130,8 +130,8 @@ impl ScopedThreadsDemo {
 
             // 生产者线程
             s.spawn(move || {
-                for i in 0..data_len {
-                    data_ref[i] *= 3;
+                for item in data_ref.iter_mut() {
+                    *item *= 3;
                     thread::sleep(Duration::from_millis(1));
 
                     let mut guard = mutex_ref.lock().unwrap();

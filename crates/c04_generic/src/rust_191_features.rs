@@ -97,7 +97,7 @@ pub mod generic_jit_optimizations {
         items
             .iter()
             .filter(|x| predicate(x))
-            .map(|x| x.clone())
+            .cloned()
             .take(100)
             .collect()
     }

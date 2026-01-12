@@ -431,10 +431,10 @@ impl FormalVerifier {
 pub trait AlgorithmImplementation {
     /// 获取算法名称
     fn name(&self) -> &str;
-    
+
     /// 执行算法
     fn execute(&self, input: &[i32]) -> Result<Vec<i32>>;
-    
+
     /// 获取算法复杂度
     fn complexity(&self) -> ComplexitySpecification;
 }
@@ -596,19 +596,20 @@ impl ProofValidator {
 
 impl fmt::Display for FormalProof {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "证明ID: {}\n", self.id)?;
-        write!(f, "算法: {}\n", self.algorithm_name)?;
-        write!(f, "验证类型: {:?}\n", self.verification_type)?;
-        write!(f, "状态: {:?}\n", self.status)?;
-        write!(f, "证明时间: {:?}\n", self.proof_time)?;
-        write!(f, "证明者: {}\n", self.prover)?;
-        write!(f, "证明日期: {}\n", self.proof_date)?;
-        
-        write!(f, "\n证明步骤:\n")?;
+        writeln!(f, "证明ID: {}", self.id)?;
+        writeln!(f, "算法: {}", self.algorithm_name)?;
+        writeln!(f, "验证类型: {:?}", self.verification_type)?;
+        writeln!(f, "状态: {:?}", self.status)?;
+        writeln!(f, "证明时间: {:?}", self.proof_time)?;
+        writeln!(f, "证明者: {}", self.prover)?;
+        writeln!(f, "证明日期: {}", self.proof_date)?;
+
+        writeln!(f)?;
+        writeln!(f, "证明步骤:")?;
         for step in &self.steps {
-            write!(f, "  {}. {}\n", step.step_number, step.description)?;
+            writeln!(f, "  {}. {}", step.step_number, step.description)?;
         }
-        
+
         Ok(())
     }
 }
@@ -695,7 +696,7 @@ mod tests {
     #[test]
     fn test_proof_manager() {
         let mut manager = ProofManager::new();
-        
+
         let spec = AlgorithmSpecification {
             name: "TestAlgorithm".to_string(),
             input_spec: InputSpecification {
@@ -720,7 +721,7 @@ mod tests {
 
         manager.add_specification(spec);
         let algorithm = TestAlgorithm;
-        
+
         let proofs = manager.verify_algorithm("TestAlgorithm", &algorithm).unwrap();
         assert_eq!(proofs.len(), 4); // 正确性、复杂度、终止性、安全性
 

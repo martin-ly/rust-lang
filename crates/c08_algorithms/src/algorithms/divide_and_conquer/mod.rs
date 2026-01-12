@@ -43,8 +43,8 @@ impl DivideAndConquerAlgorithms {
         let mut right_sum = i32::MIN;
         sum = 0;
         
-        for i in (mid + 1)..=right {
-            sum += arr[i];
+        for item in arr.iter().skip(mid + 1).take(right - mid) {
+            sum += *item;
             right_sum = right_sum.max(sum);
         }
         
