@@ -37,12 +37,18 @@ pub struct PerformanceBenchmark {
     warmup_iterations: u32,
 }
 
-impl PerformanceBenchmark {
-    pub fn new() -> Self {
+impl Default for PerformanceBenchmark {
+    fn default() -> Self {
         Self {
             results: Arc::new(Mutex::new(Vec::new())),
             warmup_iterations: 10,
         }
+    }
+}
+
+impl PerformanceBenchmark {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 运行基准测试
@@ -221,11 +227,17 @@ pub struct AsyncPerformanceTests {
     benchmark: PerformanceBenchmark,
 }
 
+impl Default for AsyncPerformanceTests {
+    fn default() -> Self {
+        Self {
+            benchmark: PerformanceBenchmark::default(),
+        }
+    }
+}
+
 impl AsyncPerformanceTests {
     pub fn new() -> Self {
-        Self {
-            benchmark: PerformanceBenchmark::new(),
-        }
+        Self::default()
     }
 
     /// 测试异步闭包性能
@@ -353,12 +365,18 @@ pub struct AsyncTestStateMachine {
     data: Arc<Mutex<HashMap<String, String>>>,
 }
 
-impl AsyncTestStateMachine {
-    pub fn new() -> Self {
+impl Default for AsyncTestStateMachine {
+    fn default() -> Self {
         Self {
             state: Arc::new(RwLock::new(AsyncTestState::Initializing)),
             data: Arc::new(Mutex::new(HashMap::new())),
         }
+    }
+}
+
+impl AsyncTestStateMachine {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn transition_to(&self, new_state: AsyncTestState) -> Result<()> {
@@ -393,11 +411,17 @@ pub struct MemoryPerformanceTests {
     benchmark: PerformanceBenchmark,
 }
 
+impl Default for MemoryPerformanceTests {
+    fn default() -> Self {
+        Self {
+            benchmark: PerformanceBenchmark::default(),
+        }
+    }
+}
+
 impl MemoryPerformanceTests {
     pub fn new() -> Self {
-        Self {
-            benchmark: PerformanceBenchmark::new(),
-        }
+        Self::default()
     }
 
     /// 测试元组集合内存使用
@@ -503,11 +527,17 @@ pub struct ConcurrencyPerformanceTests {
     benchmark: PerformanceBenchmark,
 }
 
+impl Default for ConcurrencyPerformanceTests {
+    fn default() -> Self {
+        Self {
+            benchmark: PerformanceBenchmark::default(),
+        }
+    }
+}
+
 impl ConcurrencyPerformanceTests {
     pub fn new() -> Self {
-        Self {
-            benchmark: PerformanceBenchmark::new(),
-        }
+        Self::default()
     }
 
     /// 测试并发任务处理

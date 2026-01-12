@@ -21,6 +21,7 @@ use std::collections::VecDeque;
 /// 使用 rotate_right 实现进程优先级队列
 ///
 /// Rust 1.92.0: 新增的 `rotate_right` 方法可以高效实现进程队列的轮转调度
+#[derive(Default)]
 pub struct ProcessQueue {
     processes: VecDeque<ProcessInfo>,
 }
@@ -69,6 +70,10 @@ impl ProcessQueue {
     /// 获取队列长度
     pub fn len(&self) -> usize {
         self.processes.len()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.processes.is_empty()
     }
 }
 

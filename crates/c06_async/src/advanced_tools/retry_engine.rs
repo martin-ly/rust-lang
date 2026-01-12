@@ -238,7 +238,7 @@ impl RetryEngine {
                     }
 
                     // 检查重试条件
-                    if !self.should_retry(&_last_error.as_ref().unwrap()) {
+                    if !self.should_retry(_last_error.as_ref().unwrap()) {
                         let total_time = start_time.elapsed();
                         self.update_stats(false, attempt_time, total_time).await;
                         

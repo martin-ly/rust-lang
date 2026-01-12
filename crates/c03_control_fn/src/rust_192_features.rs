@@ -206,14 +206,12 @@ pub fn control_flow_match(value: Option<i32>) -> i32 {
 
 /// 获取 Rust 1.92.0 控制流特性信息
 pub fn get_rust_192_control_flow_info() -> String {
-    format!(
-        "Rust 1.92.0 控制流特性:\n\
+    "Rust 1.92.0 控制流特性:\n\
         - #[track_caller] 在控制流场景中的改进\n\
         - 更严格的 Never 类型 Lint 检查\n\
         - Location API 在错误报告中的增强\n\
         - 改进的控制流分析\n\
-        - 优化的错误处理和上下文捕获"
-    )
+        - 优化的错误处理和上下文捕获".to_string()
 }
 
 /// 演示 Rust 1.92.0 控制流特性
@@ -358,7 +356,7 @@ impl ControlFlowMatcher {
     pub fn match_with_guard(value: i32) -> &'static str {
         match value {
             v if v < 0 => "负数",
-            v if v == 0 => "零",
+            0 => "零",
             v if v <= 10 => "小正数",
             v if v <= 100 => "中等正数",
             _ => "大正数",
@@ -887,7 +885,7 @@ pub mod parallel_control_flow {
         num_threads: usize,
     ) -> ParallelControlFlowResult<i32> {
         let result = Arc::new(Mutex::new(ParallelControlFlowResult::new()));
-        let chunks: Vec<&[i32]> = values.chunks((values.len() + num_threads - 1) / num_threads).collect();
+        let chunks: Vec<&[i32]> = values.chunks(values.len().div_ceil(num_threads)).collect();
 
         let handles: Vec<_> = chunks
             .into_iter()
@@ -1110,7 +1108,7 @@ impl ControlFlowDecorator {
     where
         F: FnOnce() -> T,
     {
-        profiler.profile_branch(|| f())
+        profiler.profile_branch(f)
     }
 
     /// 添加验证的装饰器

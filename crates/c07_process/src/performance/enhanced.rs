@@ -645,14 +645,21 @@ pub struct PerformanceReport {
 }
 
 #[cfg(feature = "async")]
-impl MemoryMonitor {
-    pub fn new() -> Self {
+impl Default for MemoryMonitor {
+    fn default() -> Self {
         Self {
             memory_usage: Arc::new(AtomicU64::new(0)),
             peak_memory: Arc::new(AtomicU64::new(0)),
             memory_history: Arc::new(TokioRwLock::new(Vec::new())),
             leak_detector: Arc::new(MemoryLeakDetector::new()),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl MemoryMonitor {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn get_memory_stats(&self) -> MemorySnapshot {
@@ -682,14 +689,21 @@ impl MemoryMonitor {
 }
 
 #[cfg(feature = "async")]
-impl CpuMonitor {
-    pub fn new() -> Self {
+impl Default for CpuMonitor {
+    fn default() -> Self {
         Self {
             cpu_usage: Arc::new(AtomicUsize::new(0)),
             peak_cpu: Arc::new(AtomicUsize::new(0)),
             cpu_history: Arc::new(TokioRwLock::new(Vec::new())),
             thermal_monitor: Arc::new(ThermalMonitor::new()),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl CpuMonitor {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn get_cpu_usage(&self) -> f64 {
@@ -721,8 +735,8 @@ impl CpuMonitor {
 }
 
 #[cfg(feature = "async")]
-impl IoMonitor {
-    pub fn new() -> Self {
+impl Default for IoMonitor {
+    fn default() -> Self {
         Self {
             io_stats: Arc::new(TokioMutex::new(IoStats {
                 total_read_bytes: 0,
@@ -738,6 +752,13 @@ impl IoMonitor {
             io_history: Arc::new(TokioRwLock::new(Vec::new())),
             bandwidth_monitor: Arc::new(BandwidthMonitor::new()),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl IoMonitor {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn get_io_stats(&self) -> IoStats {
@@ -768,8 +789,8 @@ impl IoMonitor {
 }
 
 #[cfg(feature = "async")]
-impl CacheManager {
-    pub fn new() -> Self {
+impl Default for CacheManager {
+    fn default() -> Self {
         Self {
             cache_stats: Arc::new(TokioMutex::new(CacheStats {
                 hit_count: 0,
@@ -784,6 +805,13 @@ impl CacheManager {
             eviction_strategies: Arc::new(TokioMutex::new(Vec::new())),
         }
     }
+}
+
+#[cfg(feature = "async")]
+impl CacheManager {
+    pub fn new() -> Self {
+        Self::default()
+    }
 
     pub async fn get_cache_stats(&self) -> CacheStats {
         let stats = self.cache_stats.lock().await;
@@ -792,13 +820,20 @@ impl CacheManager {
 }
 
 #[cfg(feature = "async")]
-impl PerformanceOptimizer {
-    pub fn new() -> Self {
+impl Default for PerformanceOptimizer {
+    fn default() -> Self {
         Self {
             optimization_rules: Arc::new(TokioMutex::new(Vec::new())),
             optimization_history: Arc::new(TokioRwLock::new(Vec::new())),
             auto_optimization: true,
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl PerformanceOptimizer {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn record_optimization_attempt(&self, rule_name: &str, success: bool, performance_gain: f64) {
@@ -828,8 +863,8 @@ impl PerformanceOptimizer {
 }
 
 #[cfg(feature = "async")]
-impl MemoryLeakDetector {
-    pub fn new() -> Self {
+impl Default for MemoryLeakDetector {
+    fn default() -> Self {
         Self {
             memory_tracker: Arc::new(TokioMutex::new(HashMap::new())),
             leak_threshold: 100 * 1024 * 1024, // 100MB
@@ -839,8 +874,15 @@ impl MemoryLeakDetector {
 }
 
 #[cfg(feature = "async")]
-impl ThermalMonitor {
+impl MemoryLeakDetector {
     pub fn new() -> Self {
+        Self::default()
+    }
+}
+
+#[cfg(feature = "async")]
+impl Default for ThermalMonitor {
+    fn default() -> Self {
         Self {
             temperature: Arc::new(AtomicUsize::new(45)), // 45°C
             thermal_state: Arc::new(TokioMutex::new(ThermalState::Normal)),
@@ -850,13 +892,27 @@ impl ThermalMonitor {
 }
 
 #[cfg(feature = "async")]
-impl BandwidthMonitor {
+impl ThermalMonitor {
     pub fn new() -> Self {
+        Self::default()
+    }
+}
+
+#[cfg(feature = "async")]
+impl Default for BandwidthMonitor {
+    fn default() -> Self {
         Self {
             bandwidth_usage: Arc::new(AtomicU64::new(0)),
             peak_bandwidth: Arc::new(AtomicU64::new(0)),
             bandwidth_history: Arc::new(TokioRwLock::new(Vec::new())),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl BandwidthMonitor {
+    pub fn new() -> Self {
+        Self::default()
     }
 }
 

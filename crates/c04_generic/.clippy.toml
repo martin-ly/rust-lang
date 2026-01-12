@@ -2,7 +2,7 @@
 # 项目特定的配置
 
 # 最低 Rust 版本
-msrv = "1.70"
+msrv = "1.92.0"
 
 # 复杂度阈值
 cognitive-complexity-threshold = 15

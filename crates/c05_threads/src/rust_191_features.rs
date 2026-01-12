@@ -79,7 +79,7 @@ pub mod thread_jit_optimizations {
     ///
     /// Rust 1.91 优化：多线程数据分割和处理性能提升
     pub fn multi_thread_processing(data: Vec<i32>, thread_count: usize) -> i32 {
-        let chunk_size = (data.len() + thread_count - 1) / thread_count;
+        let chunk_size = data.len().div_ceil(thread_count);
         let data = Arc::new(data);
         let results = Arc::new(Mutex::new(Vec::new()));
 
@@ -221,7 +221,7 @@ pub mod thread_error_handling {
             return ControlFlow::Break("数据为空".to_string());
         }
 
-        let chunk_size = (data.len() + thread_count - 1) / thread_count;
+        let chunk_size = data.len().div_ceil(thread_count);
         let data = Arc::new(data.to_vec());
         let errors = Arc::new(Mutex::new(Vec::new()));
         let valid_items = Arc::new(Mutex::new(Vec::new()));
@@ -317,7 +317,7 @@ pub mod comprehensive_thread_examples {
             M: Fn(&T) -> U + Send + Sync + 'static,
             Red: Fn(Vec<U>) -> R,
         {
-            let chunk_size = (self.data.len() + self.thread_count - 1) / self.thread_count;
+            let chunk_size = self.data.len().div_ceil(self.thread_count);
             let data = Arc::new(self.data.clone());
             let results = Arc::new(Mutex::new(Vec::new()));
             let mapper = Arc::new(mapper);

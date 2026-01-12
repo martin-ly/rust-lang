@@ -254,10 +254,25 @@ where
     T: Default,
 {
     pub fn new() -> Self {
+        Self::default()
+    }
+}
+
+impl<T, const N: usize> Default for Array<T, N>
+where
+    T: Default,
+{
+    fn default() -> Self {
         Array {
             data: [(); N].map(|_| T::default()),
         }
     }
+}
+
+impl<T, const N: usize> Array<T, N>
+where
+    T: Default,
+{
     
     pub fn len(&self) -> usize {
         N

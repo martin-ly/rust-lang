@@ -57,7 +57,6 @@ use std::num::NonZeroUsize;
 ///
 /// Rust 1.92.0 允许为同一个关联项指定多个边界（除了 trait 对象）：
 /// Rust 1.92.0 allows specifying multiple bounds for the same associated item (except in trait objects):
-
 /// 类型转换器 Trait - 演示多边界关联类型
 ///
 /// Rust 1.92.0: 关联类型可以有多个边界约束
@@ -126,7 +125,6 @@ where
 ///
 /// Rust 1.92.0 增强了关于高阶区域的一致性规则：
 /// Rust 1.92.0 strengthens coherence rules concerning higher-ranked regions:
-
 /// 高阶生命周期在类型转换中的应用
 ///
 /// Rust 1.92.0: 更强的 HRTB 一致性规则
@@ -169,7 +167,6 @@ impl HigherRankedLifetimeProcessor for StringReverser {
 ///
 /// Rust 1.92.0 改进了自动特征的推断和 `Sized` 边界的处理：
 /// Rust 1.92.0 improves auto-trait inference and `Sized` bounds handling:
-
 /// 改进的自动特征推断示例
 ///
 /// Rust 1.92.0: 更智能的自动特征推断
@@ -206,7 +203,6 @@ pub trait SizedBoundExample {
 ///
 /// Rust 1.92.0 文档化了 `MaybeUninit` 的表示和有效性：
 /// Rust 1.92.0 documents `MaybeUninit` representation and validity:
-
 /// 类型安全的未初始化内存管理器
 ///
 /// Rust 1.92.0: 使用文档化的 MaybeUninit 模式
@@ -274,7 +270,6 @@ impl<T> Default for TypeSafeUninitManager<T> {
 ///
 /// Rust 1.92.0: 新稳定化的 API
 /// Rust 1.92.0: Newly stabilized API
-
 /// 计算类型数组的对齐大小
 ///
 /// Rust 1.92.0: 使用 div_ceil 安全地计算对齐后的类型大小
@@ -330,7 +325,6 @@ impl TypeSizeCalculator {
 ///
 /// Rust 1.92.0: Iterator::eq 为 TrustedLen 迭代器特化，性能更好
 /// Rust 1.92.0: Iterator::eq is specialized for TrustedLen iterators, better performance
-
 /// 比较两个类型列表
 ///
 /// Rust 1.92.0: 使用特化的迭代器比较方法

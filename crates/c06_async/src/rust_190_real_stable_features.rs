@@ -21,12 +21,18 @@ pub struct Rust190AsyncFeatures {
     start_time: Instant,
 }
 
-impl Rust190AsyncFeatures {
-    pub fn new() -> Self {
+impl Default for Rust190AsyncFeatures {
+    fn default() -> Self {
         Self {
             feature_counter: Arc::new(AtomicUsize::new(0)),
             start_time: Instant::now(),
         }
+    }
+}
+
+impl Rust190AsyncFeatures {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 演示改进的异步资源管理
@@ -189,12 +195,18 @@ pub struct AsyncGenerator190 {
     max_items: usize,
 }
 
-impl AsyncGenerator190 {
-    pub fn new() -> Self {
+impl Default for AsyncGenerator190 {
+    fn default() -> Self {
         Self {
             counter: 0,
             max_items: 10,
         }
+    }
+}
+
+impl AsyncGenerator190 {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn next(&mut self) -> Option<String> {
@@ -218,8 +230,8 @@ pub struct AsyncStream190 {
     current_index: usize,
 }
 
-impl AsyncStream190 {
-    pub fn new() -> Self {
+impl Default for AsyncStream190 {
+    fn default() -> Self {
         let items = (0..20)
             .map(|i| format!("stream_item_{}", i))
             .collect();
@@ -228,6 +240,12 @@ impl AsyncStream190 {
             items,
             current_index: 0,
         }
+    }
+}
+
+impl AsyncStream190 {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn next(&mut self) -> Option<String> {
@@ -252,13 +270,19 @@ pub struct PerformanceMonitor190 {
     error_count: Arc<AtomicUsize>,
 }
 
-impl PerformanceMonitor190 {
-    pub fn new() -> Self {
+impl Default for PerformanceMonitor190 {
+    fn default() -> Self {
         Self {
             start_time: Instant::now(),
             operation_count: Arc::new(AtomicUsize::new(0)),
             error_count: Arc::new(AtomicUsize::new(0)),
         }
+    }
+}
+
+impl PerformanceMonitor190 {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub fn record_operation(&self) {

@@ -835,7 +835,7 @@ impl VerificationReportGenerator {
         if let Some(amortized) = &result.complexity_analysis.amortized_analysis {
             report.push_str(&format!("- 摊还分析: {}\n", amortized));
         }
-        report.push_str("\n");
+        report.push('\n');
 
         // 形式化证明
         report.push_str("## 形式化证明\n");
@@ -850,7 +850,7 @@ impl VerificationReportGenerator {
             report.push_str(&format!("{} 步骤 {}: {}\n",
                 status_icon, step.step_number, step.description));
         }
-        report.push_str("\n");
+        report.push('\n');
 
         // 测试结果
         report.push_str("## 测试结果\n");

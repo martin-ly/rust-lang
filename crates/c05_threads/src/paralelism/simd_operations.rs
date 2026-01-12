@@ -47,6 +47,11 @@ impl SimdVector {
         self.length
     }
 
+    /// 检查向量是否为空
+    pub fn is_empty(&self) -> bool {
+        self.length == 0
+    }
+
     /// 获取向量数据
     pub fn data(&self) -> &[f32] {
         &self.data

@@ -133,7 +133,7 @@ impl TaskManager {
             tasks: Arc::new(RwLock::new(HashMap::new())),
             task_queue: Arc::new(Mutex::new(BinaryHeap::new())),
             running_tasks: Arc::new(Mutex::new(HashMap::new())),
-            executor: executor,
+            executor,
             stats: Arc::new(Mutex::new(TaskStats::default())),
             shutdown_notify: Arc::new(Notify::new()),
             max_concurrent_tasks,

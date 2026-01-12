@@ -149,13 +149,19 @@ pub struct EventMetrics {
     average_processing_time: Duration,
 }
 
-impl AsyncEventBus {
-    pub fn new() -> Self {
+impl Default for AsyncEventBus {
+    fn default() -> Self {
         Self {
             handlers: Arc::new(RwLock::new(Vec::new())),
             event_queue: Arc::new(Mutex::new(VecDeque::new())),
             metrics: Arc::new(Mutex::new(EventMetrics::default())),
         }
+    }
+}
+
+impl AsyncEventBus {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 注册事件处理器
@@ -480,7 +486,7 @@ pub struct PipelineData {
     pub timestamp: Instant,
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Clone)]
 pub struct PipelineMetrics {
     pub total_processed: u64,
     pub total_errors: u64,
@@ -537,17 +543,6 @@ impl AsyncDataPipeline {
     /// 获取管道指标
     pub async fn get_metrics(&self) -> PipelineMetrics {
         self.metrics.lock().await.clone()
-    }
-}
-
-impl Clone for PipelineMetrics {
-    fn clone(&self) -> Self {
-        Self {
-            total_processed: self.total_processed,
-            total_errors: self.total_errors,
-            average_processing_time: self.average_processing_time,
-            throughput_per_second: self.throughput_per_second,
-        }
     }
 }
 

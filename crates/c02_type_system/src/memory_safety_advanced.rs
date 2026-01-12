@@ -471,13 +471,19 @@ pub mod memory_leak_detection {
         pub stack_trace: Vec<String>,
     }
 
-    impl MemoryLeakDetector {
-        pub fn new() -> Self {
+    impl Default for MemoryLeakDetector {
+        fn default() -> Self {
             Self {
                 allocations: Arc::new(Mutex::new(HashMap::new())),
                 total_allocated: AtomicUsize::new(0),
                 total_deallocated: AtomicUsize::new(0),
             }
+        }
+    }
+
+    impl MemoryLeakDetector {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub fn track_allocation(&self, ptr: *mut u8, size: usize) {
@@ -666,12 +672,18 @@ pub mod memory_alignment_cache {
         pub cold_data: [u8; 32],   // 冷数据，很少访问
     }
 
-    impl CacheFriendlyStruct {
-        pub fn new() -> Self {
+    impl Default for CacheFriendlyStruct {
+        fn default() -> Self {
             Self {
                 hot_data: [0; 8],
                 cold_data: [0; 32],
             }
+        }
+    }
+
+    impl CacheFriendlyStruct {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub fn update_hot_data(&mut self, index: usize, value: u64) {

@@ -260,7 +260,7 @@ pub mod termination_proofs {
     /// ## 度量函数 (Ranking Function)
     /// ```text
     /// φ(n) = n
-    /// 
+    ///
     /// 性质:
     /// 1. φ(n) ≥ 0  (非负)
     /// 2. 每次迭代 φ 严格递减
@@ -273,10 +273,10 @@ pub mod termination_proofs {
         while n > 0 {
             println!("  当前度量: φ({}) = {}", n, n);
             sleep(Duration::from_millis(100)).await;
-            
+
             let old_n = n;
             n -= 1; // 度量严格递减
-            
+
             println!("  度量递减: {} → {}", old_n, n);
             assert!(n < old_n, "度量函数必须严格递减");
         }
@@ -293,18 +293,18 @@ pub mod termination_proofs {
     /// ```
     pub async fn binary_search_with_proof(arr: Vec<i32>, target: i32) -> Option<usize> {
         println!("\n=== 终止性证明: 二分查找 ===");
-        
+
         let mut left = 0;
         let mut right = arr.len();
-        
+
         println!("初始度量: φ({}, {}) = {}", left, right, right - left);
 
         while left < right {
             let old_metric = right - left;
             println!("  当前度量: φ({}, {}) = {}", left, right, old_metric);
-            
+
             let mid = left + (right - left) / 2;
-            
+
             if arr[mid] == target {
                 println!("找到目标，返回");
                 return Some(mid);
@@ -313,11 +313,11 @@ pub mod termination_proofs {
             } else {
                 right = mid;
             }
-            
+
             let new_metric = right - left;
             println!("  度量递减: {} → {}", old_metric, new_metric);
             assert!(new_metric < old_metric, "度量函数必须严格递减");
-            
+
             sleep(Duration::from_millis(50)).await;
         }
 
@@ -341,24 +341,30 @@ pub mod deadlock_detection {
         resource_holders: Arc<Mutex<std::collections::HashMap<String, String>>>,
     }
 
-    impl ResourceGraph {
-        pub fn new() -> Self {
+    impl Default for ResourceGraph {
+        fn default() -> Self {
             Self {
                 resource_holders: Arc::new(Mutex::new(std::collections::HashMap::new())),
             }
+        }
+    }
+
+    impl ResourceGraph {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         /// 请求资源
         pub async fn acquire(&self, task: &str, resource: &str) -> Result<(), &'static str> {
             let mut holders = self.resource_holders.lock().await;
-            
+
             if let Some(holder) = holders.get(resource) {
                 if holder != task {
                     println!("  [Warning] {} 等待资源 {}，当前持有者: {}", task, resource, holder);
                     return Err("资源被占用");
                 }
             }
-            
+
             holders.insert(resource.to_string(), task.to_string());
             println!("  [Acquire] {} 获取资源 {}", task, resource);
             Ok(())
@@ -375,12 +381,12 @@ pub mod deadlock_detection {
     /// 演示死锁场景
     pub async fn demo_deadlock_scenario() {
         println!("\n=== 死锁检测演示 ===");
-        
+
         let graph = Arc::new(ResourceGraph::new());
-        
+
         let res_a = Arc::new(Mutex::new(()));
         let res_b = Arc::new(Mutex::new(()));
-        
+
         let g1 = graph.clone();
         let a1 = res_a.clone();
         let b1 = res_b.clone();
@@ -388,18 +394,18 @@ pub mod deadlock_detection {
             println!("Task1: 尝试获取资源 A");
             let _lock_a = a1.lock().await;
             g1.acquire("Task1", "ResourceA").await.ok();
-            
+
             sleep(Duration::from_millis(50)).await;
-            
+
             println!("Task1: 尝试获取资源 B");
             let _lock_b = b1.lock().await;
             g1.acquire("Task1", "ResourceB").await.ok();
-            
+
             println!("Task1: 完成工作");
             g1.release("Task1", "ResourceA").await;
             g1.release("Task1", "ResourceB").await;
         });
-        
+
         let g2 = graph.clone();
         let a2 = res_a.clone();
         let b2 = res_b.clone();
@@ -407,18 +413,18 @@ pub mod deadlock_detection {
             println!("Task2: 尝试获取资源 B");
             let _lock_b = b2.lock().await;
             g2.acquire("Task2", "ResourceB").await.ok();
-            
+
             sleep(Duration::from_millis(50)).await;
-            
+
             println!("Task2: 尝试获取资源 A");
             let _lock_a = a2.lock().await;
             g2.acquire("Task2", "ResourceA").await.ok();
-            
+
             println!("Task2: 完成工作");
             g2.release("Task2", "ResourceB").await;
             g2.release("Task2", "ResourceA").await;
         });
-        
+
         // 添加超时以避免真正的死锁
         tokio::select! {
             _ = task1 => println!("Task1 完成"),
@@ -427,7 +433,7 @@ pub mod deadlock_detection {
                 println!("⚠️  检测到潜在死锁（超时）");
             }
         }
-        
+
         println!("✓ 死锁检测完成");
     }
 }
@@ -444,7 +450,7 @@ pub async fn run_all_verifications() {
 
     // 2. 终止性证明
     termination_proofs::countdown_with_proof(5).await;
-    
+
     let arr = vec![1, 3, 5, 7, 9, 11, 13, 15];
     termination_proofs::binary_search_with_proof(arr, 7).await;
 
@@ -475,4 +481,3 @@ mod tests {
         deadlock_detection::demo_deadlock_scenario().await;
     }
 }
-

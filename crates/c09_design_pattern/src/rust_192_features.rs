@@ -19,7 +19,6 @@ use std::panic::Location;
 
 /// 使用 MaybeUninit 实现的对象池
 ///
-///
 /// Rust 1.92.0: 改进的 MaybeUninit 文档和有效性检查
 pub struct ObjectPool<T> {
     pool: Vec<MaybeUninit<T>>,
@@ -39,6 +38,14 @@ impl<T> ObjectPool<T> {
     /// 从池中获取一个对象
     ///
     /// Rust 1.92.0: 使用 MaybeUninit 确保安全性
+    ///
+    /// # Safety
+    ///
+    /// 调用者必须确保：
+    /// - 对象池已正确初始化
+    /// - 从池中获取的对象在使用完后必须正确归还
+    /// - 不会并发调用此方法
+    /// - 返回的对象必须是有效的已初始化值
     pub unsafe fn acquire(&mut self) -> Option<T> {
         if self.size == 0 {
             return None;
@@ -48,6 +55,14 @@ impl<T> ObjectPool<T> {
     }
 
     /// 将对象归还到池中
+    ///
+    /// # Safety
+    ///
+    /// 调用者必须确保：
+    /// - 对象池未满（size < pool.len()）
+    /// - `obj` 是从同一个对象池获取的，或者是新创建的有效对象
+    /// - 不会并发调用此方法
+    /// - 对象在归还后不应再使用
     pub unsafe fn release(&mut self, obj: T) {
         if self.size < self.pool.len() {
             self.pool[self.size].write(obj);
@@ -65,6 +80,12 @@ impl<T> ObjectPool<T> {
 pub struct Singleton<T> {
     instance: MaybeUninit<T>,
     initialized: bool,
+}
+
+impl<T> Default for Singleton<T> {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<T> Singleton<T> {

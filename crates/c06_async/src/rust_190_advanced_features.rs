@@ -160,14 +160,20 @@ pub struct BatchMetrics {
     pub processing_errors: Arc<AtomicUsize>,
 }
 
-impl AdvancedAsyncFeatures190 {
-    pub fn new() -> Self {
+impl Default for AdvancedAsyncFeatures190 {
+    fn default() -> Self {
         Self {
             feature_registry: Arc::new(RwLock::new(VecDeque::new())),
-            performance_monitor: Arc::new(PerformanceMonitor190::new()),
+            performance_monitor: Arc::new(PerformanceMonitor190::default()),
             resource_pool: Arc::new(ResourcePool190::new(100)),
             concurrency_controller: Arc::new(ConcurrencyController190::new(50)),
         }
+    }
+}
+
+impl AdvancedAsyncFeatures190 {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 演示高级异步特性
@@ -462,7 +468,7 @@ impl ConcurrencyController190 {
             priority_levels: Arc::new(RwLock::new(vec![
                 PriorityLevel { level: 0, weight: 1.0, max_concurrent: max_concurrent / 2 },
                 PriorityLevel { level: 1, weight: 2.0, max_concurrent: max_concurrent * 3 / 4 },
-                PriorityLevel { level: 2, weight: 3.0, max_concurrent: max_concurrent },
+                PriorityLevel { level: 2, weight: 3.0, max_concurrent },
             ])),
         }
     }

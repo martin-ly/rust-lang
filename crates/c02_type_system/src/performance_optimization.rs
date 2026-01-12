@@ -140,6 +140,14 @@ pub mod zero_cost_abstractions {
         _phantom: std::marker::PhantomData<T>,
     }
 
+    impl<T> Default for TypeId<T> {
+        fn default() -> Self {
+            Self {
+                _phantom: std::marker::PhantomData,
+            }
+        }
+    }
+
     impl<T> TypeId<T> {
         pub const fn new() -> Self {
             Self {
@@ -282,13 +290,19 @@ pub mod branch_prediction {
         table: [u32; 256],
     }
 
-    impl LookupTable {
-        pub fn new() -> Self {
+    impl Default for LookupTable {
+        fn default() -> Self {
             let mut table = [0u32; 256];
             for i in 0..256 {
                 table[i] = (i as u32).wrapping_mul(3).wrapping_add(1);
             }
             Self { table }
+        }
+    }
+
+    impl LookupTable {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         #[inline(always)]
@@ -331,6 +345,14 @@ pub mod simd_optimization {
     use super::*;
 
     /// SIMD 向量加法（需要 x86_64 支持）
+    ///
+    /// # Safety
+    ///
+    /// 调用者必须确保：
+    /// - CPU 支持 SSE 指令集
+    /// - 所有切片长度至少为 4，且 `result.len() >= min(a.len(), b.len())`
+    /// - 所有指针都是有效的、对齐的，且指向已初始化的内存
+    /// - 不会发生数据竞争
     #[cfg(target_arch = "x86_64")]
     pub unsafe fn simd_add_vectors(a: &[f32], b: &[f32], result: &mut [f32]) {
         let len = a.len().min(b.len()).min(result.len());
@@ -431,6 +453,14 @@ pub mod compile_time_optimization {
         _phantom: std::marker::PhantomData<T>,
     }
 
+    impl<T> Default for CompileTimeChecker<T> {
+        fn default() -> Self {
+            Self {
+                _phantom: std::marker::PhantomData,
+            }
+        }
+    }
+
     impl<T> CompileTimeChecker<T> {
         pub const fn new() -> Self {
             Self {
@@ -492,12 +522,18 @@ pub mod profiling_tools {
         pub peak: usize,
     }
 
-    impl MemoryStats {
-        pub fn new() -> Self {
+    impl Default for MemoryStats {
+        fn default() -> Self {
             Self {
                 allocated: 0,
                 peak: 0,
             }
+        }
+    }
+
+    impl MemoryStats {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub fn allocate(&mut self, size: usize) {

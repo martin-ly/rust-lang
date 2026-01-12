@@ -3,7 +3,7 @@
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//! 
+//!
 //! 本模块实现了Rust 1.90版本中真正可用的语言特性，包括：
 //! - 真正的AsyncDrop实现
 //! - 真正的AsyncIterator实现
@@ -21,7 +21,7 @@ use std::future::Future;
 use std::pin::Pin;
 
 /// 真正的AsyncDrop实现
-/// 
+///
 /// 在Rust 1.90中，AsyncDrop trait已经稳定，这里实现真正的异步资源清理
 pub struct AsyncResource190 {
     id: String,
@@ -41,10 +41,10 @@ impl AsyncResource190 {
     pub async fn process_data(&self, input: &[u8]) -> Result<Vec<u8>> {
         let mut data = self.data.lock().await;
         data.extend_from_slice(input);
-        
+
         // 模拟异步处理
         sleep(Duration::from_millis(10)).await;
-        
+
         Ok(data.clone())
     }
 
@@ -64,7 +64,7 @@ impl AsyncResource190 {
 impl Drop for AsyncResource190 {
     fn drop(&mut self) {
         println!("AsyncResource190 {} 开始销毁", self.id);
-        
+
         // 如果有清理Future，执行它
         if let Some(cleanup_future) = self.cleanup_future.take() {
             // 在Drop中执行异步清理
@@ -75,13 +75,13 @@ impl Drop for AsyncResource190 {
                 }
             });
         }
-        
+
         println!("AsyncResource190 {} 销毁完成", self.id);
     }
 }
 
 /// 真正的异步迭代器实现
-/// 
+///
 /// 在Rust 1.90中，我们使用自定义的异步迭代器实现
 pub struct AsyncDataStream190 {
     data: Vec<i32>,
@@ -109,7 +109,7 @@ impl AsyncDataStream190 {
 
         // 模拟异步处理
         sleep(self.delay).await;
-        
+
         Some(value)
     }
 
@@ -138,19 +138,19 @@ impl PoloniusBorrowDemo {
     }
 
     /// 演示Polonius借用检查器的改进
-    /// 
+    ///
     /// 在Rust 1.90中，Polonius借用检查器能够更好地处理复杂的借用场景
     pub async fn complex_borrow_operation(&self, key: String, value: String) -> Result<String> {
         let _permit = self.semaphore.acquire().await?;
-        
+
         // Polonius借用检查器能够更好地理解这种复杂的借用模式
         let result = {
             let mut data = self.data.lock().await;
-            
+
             // 在同一个作用域中进行多次借用操作
             let existing = data.get(&key).cloned();
             data.insert(key.clone(), value.clone());
-            
+
             // Polonius能够理解这里的借用关系
             if let Some(existing_value) = existing {
                 data.insert(format!("{}_backup", key), existing_value.clone());
@@ -160,23 +160,23 @@ impl PoloniusBorrowDemo {
                 "not_found".to_string()
             }
         };
-        
+
         Ok(result)
     }
 
     /// 演示更智能的借用分析
     pub async fn smart_borrow_analysis(&self) -> Result<Vec<String>> {
         let mut results = Vec::new();
-        
+
         // Polonius能够更好地理解这种模式
         for i in 0..5 {
             let key = format!("key_{}", i);
             let value = format!("value_{}", i);
-            
+
             let result = self.complex_borrow_operation(key, value).await?;
             results.push(result);
         }
-        
+
         Ok(results)
     }
 }
@@ -187,12 +187,18 @@ pub struct NextGenTraitSolver {
     computation_count: Arc<Mutex<usize>>,
 }
 
-impl NextGenTraitSolver {
-    pub fn new() -> Self {
+impl Default for NextGenTraitSolver {
+    fn default() -> Self {
         Self {
             cache: Arc::new(Mutex::new(HashMap::new())),
             computation_count: Arc::new(Mutex::new(0)),
         }
+    }
+}
+
+impl NextGenTraitSolver {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 演示下一代特质求解器的性能优化
@@ -201,7 +207,7 @@ impl NextGenTraitSolver {
         T: std::fmt::Display + std::hash::Hash + Eq + Clone,
     {
         let input_str = input.to_string();
-        
+
         // 检查缓存
         {
             let cache = self.cache.lock().await;
@@ -209,16 +215,16 @@ impl NextGenTraitSolver {
                 return Ok(cached);
             }
         }
-        
+
         // 执行计算
         let result = self.compute_with_optimization(&input_str).await?;
-        
+
         // 更新缓存
         {
             let mut cache = self.cache.lock().await;
             cache.insert(input_str, result);
         }
-        
+
         Ok(result)
     }
 
@@ -228,10 +234,10 @@ impl NextGenTraitSolver {
             let mut count = self.computation_count.lock().await;
             *count += 1;
         }
-        
+
         // 模拟复杂的特质求解过程
         sleep(Duration::from_millis(10)).await;
-        
+
         // 使用优化的算法
         let hash = input.len() * 31 + input.chars().count() * 17;
         Ok(hash)
@@ -250,13 +256,19 @@ pub struct ParallelFrontendOptimizer {
     results: Arc<Mutex<Vec<String>>>,
 }
 
-impl ParallelFrontendOptimizer {
-    pub fn new() -> Self {
+impl Default for ParallelFrontendOptimizer {
+    fn default() -> Self {
         Self {
             workers: num_cpus::get(),
             task_queue: Arc::new(Mutex::new(Vec::new())),
             results: Arc::new(Mutex::new(Vec::new())),
         }
+    }
+}
+
+impl ParallelFrontendOptimizer {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 演示并行编译优化
@@ -266,16 +278,16 @@ impl ParallelFrontendOptimizer {
             let mut queue = self.task_queue.lock().await;
             *queue = tasks;
         }
-        
+
         let semaphore = Arc::new(Semaphore::new(self.workers));
         let mut handles = Vec::new();
-        
+
         // 启动工作线程
         for _ in 0..self.workers {
             let semaphore = Arc::clone(&semaphore);
             let task_queue = Arc::clone(&self.task_queue);
             let results = Arc::clone(&self.results);
-            
+
             let handle = tokio::spawn(async move {
                 while let Some(task) = {
                     let mut queue = task_queue.lock().await;
@@ -283,20 +295,20 @@ impl ParallelFrontendOptimizer {
                 } {
                     let _permit = semaphore.acquire().await.unwrap();
                     let compiled_task = Self::compile_task_optimized(task).await;
-                    
+
                     let mut results = results.lock().await;
                     results.push(compiled_task);
                 }
             });
-            
+
             handles.push(handle);
         }
-        
+
         // 等待所有任务完成
         for handle in handles {
             handle.await.map_err(|e| anyhow::anyhow!("Task failed: {}", e))?;
         }
-        
+
         // 返回结果
         let results = self.results.lock().await;
         Ok(results.clone())
@@ -335,7 +347,7 @@ pub async fn demonstrate_rust_190_real_features() -> Result<()> {
     let polonius_demo = PoloniusBorrowDemo::new(3);
     let result = polonius_demo.complex_borrow_operation("key1".to_string(), "value1".to_string()).await?;
     println!("  复杂借用结果: {}", result);
-    
+
     let smart_results = polonius_demo.smart_borrow_analysis().await?;
     println!("  智能借用分析结果: {:?}", smart_results);
 
@@ -344,7 +356,7 @@ pub async fn demonstrate_rust_190_real_features() -> Result<()> {
     let trait_solver = NextGenTraitSolver::new();
     let hash_result = trait_solver.optimized_trait_solving("test_input").await?;
     println!("  优化特质求解结果: {}", hash_result);
-    
+
     let count = trait_solver.get_computation_count().await;
     println!("  计算次数: {}", count);
 
@@ -375,11 +387,11 @@ mod tests {
     async fn test_real_async_iterator() {
         let mut stream = AsyncDataStream190::new(vec![1, 2, 3], 1);
         let mut results = Vec::new();
-        
+
         while let Some(value) = stream.next().await {
             results.push(value);
         }
-        
+
         assert_eq!(results, vec![1, 2, 3]);
     }
 
@@ -395,7 +407,7 @@ mod tests {
         let solver = NextGenTraitSolver::new();
         let result = solver.optimized_trait_solving("test").await.unwrap();
         assert!(result > 0);
-        
+
         let count = solver.get_computation_count().await;
         assert_eq!(count, 1);
     }

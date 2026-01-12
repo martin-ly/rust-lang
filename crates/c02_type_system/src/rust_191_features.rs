@@ -609,12 +609,21 @@ pub mod comprehensive_examples {
         pub const DOUBLE_BUFFER: usize = *Self::BUFFER_REF * 2;
 
         pub fn new() -> Self {
+            Self::default()
+        }
+    }
+
+    impl Default for ComprehensiveConfig {
+        fn default() -> Self {
             Self {
                 max_workers: Self::MAX_WORKERS,
                 buffer_size: Self::BUFFER_SIZE,
                 total_buffer: Self::TOTAL_BUFFER,
             }
         }
+    }
+
+    impl ComprehensiveConfig {
 
         pub fn demonstrate() {
             println!("\n=== 综合配置系统示例 ===");

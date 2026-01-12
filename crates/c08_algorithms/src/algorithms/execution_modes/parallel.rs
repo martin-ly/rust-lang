@@ -301,7 +301,7 @@ impl<T> ThreadScalingResults<T> {
                 let efficiency = speedup / result.thread_count as f64;
                 report.push_str(&format!("  并行效率: {:.2}%\n", efficiency * 100.0));
             }
-            report.push_str("\n");
+            report.push('\n');
         }
 
         if let Some(optimal) = self.optimal_thread_count() {
@@ -455,7 +455,7 @@ impl<T> ParallelBenchmarkResults<T> {
                 "  并行效率: {:.2}%\n",
                 result.stats.parallel_efficiency(single_thread_time) * 100.0
             ));
-            report.push_str("\n");
+            report.push('\n');
         }
 
         if let Some(best) = self.best_performance() {

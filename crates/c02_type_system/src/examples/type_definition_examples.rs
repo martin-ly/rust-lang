@@ -25,8 +25,8 @@ pub fn basic_data_types_examples() {
              i8_val, u8_val, i32_val, u64_val);
     
     // 浮点类型
-    let f32_val: f32 = 3.14;
-    let f64_val: f64 = 2.718281828459045;
+    let f32_val: f32 = std::f32::consts::PI;
+    let f64_val: f64 = std::f64::consts::E;
     
     println!("f32: {}, f64: {}", f32_val, f64_val);
     

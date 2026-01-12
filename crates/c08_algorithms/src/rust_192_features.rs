@@ -203,20 +203,24 @@ pub fn demonstrate_btree_map_insert_entry() {
     // Rust 1.92.0: 使用 insert_entry 方法
     // 如果键不存在，插入并返回值的可变引用
     // 如果键已存在，返回现有值的可变引用
-    let value = map.entry("key1".to_string()).insert_entry(100);
-    *value = 200; // 可以直接修改
+    {
+        let mut value_entry = map.entry("key1".to_string()).insert_entry(100);
+        *value_entry.get_mut() = 200; // 可以直接修改
+    }
     println!("1. 插入新键 'key1' 并修改值: {}", map.get("key1").unwrap());
 
     // 如果键已存在，返回现有值的可变引用
-    let existing_value = map.entry("key1".to_string()).insert_entry(300);
-    println!("2. 键 'key1' 已存在，返回现有值: {}", existing_value);
+    {
+        let existing_value_entry = map.entry("key1".to_string()).insert_entry(300);
+        println!("2. 键 'key1' 已存在，返回现有值: {}", existing_value_entry.get());
+    }
     println!("3. 最终值: {}", map.get("key1").unwrap());
 
     // 使用 insert_entry 实现计数器
     let mut counter = BTreeMap::new();
     for word in ["hello", "world", "hello", "rust", "world"] {
-        let count = counter.entry(word.to_string()).insert_entry(0);
-        *count += 1;
+        let mut count_entry = counter.entry(word.to_string()).insert_entry(0);
+        *count_entry.get_mut() += 1;
     }
     println!("4. 单词计数: {:?}", counter);
 }
@@ -226,17 +230,23 @@ pub struct Cache<K, V> {
     data: BTreeMap<K, V>,
 }
 
-impl<K: Ord, V> Cache<K, V> {
-    pub fn new() -> Self {
+impl<K: Ord, V> Default for Cache<K, V> {
+    fn default() -> Self {
         Self {
             data: BTreeMap::new(),
         }
+    }
+}
+
+impl<K: Ord, V> Cache<K, V> {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 插入或更新缓存项（使用 insert_entry 优化）
     pub fn insert_or_update(&mut self, key: K, value: V) -> &mut V {
         // Rust 1.92.0: 使用 insert_entry 避免额外的查找
-        self.data.entry(key).insert_entry(value)
+        self.data.entry(key).insert_entry(value).into_mut()
     }
 
     /// 获取缓存项
@@ -252,26 +262,26 @@ mod btree_map_insert_entry_tests {
     #[test]
     fn test_btree_map_insert_entry() {
         let mut map = BTreeMap::new();
-        
+
         // 插入新键
-        let value = map.entry("key1".to_string()).insert_entry(100);
-        assert_eq!(*value, 100);
-        
-        // 键已存在，返回现有值
-        let existing = map.entry("key1".to_string()).insert_entry(200);
-        assert_eq!(*existing, 100); // 返回的是旧值，不是新值
-        *existing = 200; // 可以修改
-        assert_eq!(map.get("key1"), Some(&200));
+        let value_entry = map.entry("key1".to_string()).insert_entry(100);
+        assert_eq!(*value_entry.get(), 100);
+
+        // 键已存在，insert_entry 会替换值并返回 OccupiedEntry
+        let mut existing_entry = map.entry("key1".to_string()).insert_entry(200);
+        assert_eq!(*existing_entry.get(), 200); // insert_entry 会替换值
+        *existing_entry.get_mut() = 300; // 可以修改
+        assert_eq!(map.get("key1"), Some(&300));
     }
 
     #[test]
     fn test_cache_insert_or_update() {
         let mut cache = Cache::new();
-        
+
         let value = cache.insert_or_update("key1".to_string(), 100);
         assert_eq!(*value, 100);
-        
+
         *value = 200;
-        assert_eq!(cache.get("key1"), Some(&200));
+        assert_eq!(cache.get(&"key1".to_string()), Some(&200));
     }
 }

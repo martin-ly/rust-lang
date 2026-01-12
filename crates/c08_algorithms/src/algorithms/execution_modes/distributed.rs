@@ -471,7 +471,7 @@ impl DistributedBenchmarkResults {
                 "  节点数: {}\n",
                 result.stats.node_count
             ));
-            report.push_str("\n");
+            report.push('\n');
         }
 
         if let Some(best) = self.best_performance() {
@@ -545,10 +545,8 @@ impl DistributedLoadBalancer {
     /// 完成任务
     pub fn complete_task(&self, node_id: &str) {
         let mut node_loads = self.node_loads.lock().unwrap();
-        if let Some(load) = node_loads.get_mut(node_id) {
-            if *load > 0 {
-                *load -= 1;
-            }
+        if let Some(load) = node_loads.get_mut(node_id) && *load > 0 {
+            *load -= 1;
         }
     }
 

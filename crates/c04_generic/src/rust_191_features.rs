@@ -82,7 +82,7 @@ pub mod generic_jit_optimizations {
         // Rust 1.91 优化：泛型迭代器性能提升
         items
             .iter()
-            .map(|x| x.clone())
+            .cloned()
             .collect()
     }
 
@@ -162,7 +162,7 @@ pub mod optimized_generic_containers {
         T: Clone + std::cmp::Ord,
     {
         // Rust 1.91 优化：集合操作性能提升
-        let mut result: Vec<T> = items.iter().cloned().collect();
+        let mut result: Vec<T> = items.to_vec();
         result.sort();  // Rust 1.91 优化：排序性能提升
         result.dedup(); // Rust 1.91 优化：去重性能提升
         result
@@ -491,7 +491,7 @@ pub mod higher_ranked_trait_bounds {
         T: Clone,
     {
         // Rust 1.91 优化：HRTB 处理更高效
-        items.iter().map(|item| mapper(item)).collect()
+        items.iter().map(mapper).collect()
     }
 
     /// HRTB 在 trait 对象中的应用
@@ -676,7 +676,7 @@ pub mod generic_constraints {
         T: Clone + PartialOrd,
     {
         // Rust 1.91 优化：trait bound 检查更智能
-        let mut result: Vec<T> = items.iter().cloned().collect();
+        let mut result: Vec<T> = items.to_vec();
         result.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         result
     }

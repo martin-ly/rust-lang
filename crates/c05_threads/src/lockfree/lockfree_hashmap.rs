@@ -302,6 +302,11 @@ where
         self.segments.iter().map(|s| s.len()).sum()
     }
 
+    /// 检查是否为空
+    pub fn is_empty(&self) -> bool {
+        self.segments.iter().all(|s| s.is_empty())
+    }
+
     /// 运行示例
     pub fn run_example() {
         println!("=== 分段无锁哈希表示例 ===");
@@ -463,6 +468,11 @@ where
     /// 获取大小
     pub fn len(&self) -> usize {
         self.map.len()
+    }
+
+    /// 检查是否为空
+    pub fn is_empty(&self) -> bool {
+        self.map.is_empty()
     }
 
     /// 运行示例

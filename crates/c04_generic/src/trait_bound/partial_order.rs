@@ -304,19 +304,15 @@ impl PartialEq for PartialOrdExample {
 impl PartialOrd for PartialOrdExample {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         // 先按优先级排序，再按值排序，最后按名称排序
-        self.priority.partial_cmp(&other.priority).and_then(|ord| {
-            if ord == Ordering::Equal {
-                self.value.partial_cmp(&other.value).map(|ord| {
-                    if ord == Ordering::Equal {
-                        self.name.cmp(&other.name)
-                    } else {
-                        ord
-                    }
-                })
-            } else {
-                Some(ord)
-            }
-        })
+        let priority_ord = self.priority.partial_cmp(&other.priority)?;
+        if priority_ord != Ordering::Equal {
+            return Some(priority_ord);
+        }
+        let value_ord = self.value.partial_cmp(&other.value)?;
+        if value_ord != Ordering::Equal {
+            return Some(value_ord);
+        }
+        Some(self.name.cmp(&other.name))
     }
 }
 
@@ -530,16 +526,14 @@ fn demonstrate_partial_comparison() {
     println!("Partial comparison:");
     for (i, p1) in points.iter().enumerate() {
         for (j, p2) in points.iter().enumerate() {
-            if i != j {
-                if let Some(ord) = p1.partial_cmp(p2) {
-                    match ord {
-                        Ordering::Less => println!("p{} < p{}", i, j),
-                        Ordering::Equal => println!("p{} == p{}", i, j),
-                        Ordering::Greater => println!("p{} > p{}", i, j),
-                    }
-                } else {
-                    println!("p{} and p{} are incomparable", i, j);
-                }
+            if i == j {
+                continue;
+            }
+            match p1.partial_cmp(p2) {
+                Some(Ordering::Less) => println!("p{} < p{}", i, j),
+                Some(Ordering::Equal) => println!("p{} == p{}", i, j),
+                Some(Ordering::Greater) => println!("p{} > p{}", i, j),
+                None => println!("p{} and p{} are incomparable", i, j),
             }
         }
     }

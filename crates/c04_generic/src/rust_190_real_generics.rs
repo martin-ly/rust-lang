@@ -23,12 +23,18 @@ pub struct ConstGenericMatrix<T, const ROWS: usize, const COLS: usize> {
     current_row: usize,
 }
 
-impl<T: Default + Copy, const ROWS: usize, const COLS: usize> ConstGenericMatrix<T, ROWS, COLS> {
-    pub fn new() -> Self {
+impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Default for ConstGenericMatrix<T, ROWS, COLS> {
+    fn default() -> Self {
         Self {
             data: [[T::default(); COLS]; ROWS],
             current_row: 0,
         }
+    }
+}
+
+impl<T: Default + Copy, const ROWS: usize, const COLS: usize> ConstGenericMatrix<T, ROWS, COLS> {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub fn push_row(&mut self, row: [T; COLS]) -> Result<()> {
@@ -111,12 +117,18 @@ pub struct TypeInferenceOptimized<T> {
     metadata: HashMap<String, String>,
 }
 
-impl<T> TypeInferenceOptimized<T> {
-    pub fn new() -> Self {
+impl<T> Default for TypeInferenceOptimized<T> {
+    fn default() -> Self {
         Self {
             data: Vec::new(),
             metadata: HashMap::new(),
         }
+    }
+}
+
+impl<T> TypeInferenceOptimized<T> {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub fn push(&mut self, value: T) {

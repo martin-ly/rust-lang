@@ -32,12 +32,18 @@ pub struct AsyncClosureDemo {
     cache: HashMap<String, String>,
 }
 
-impl AsyncClosureDemo {
-    pub fn new() -> Self {
+impl Default for AsyncClosureDemo {
+    fn default() -> Self {
         Self {
             data: vec!["hello".to_string(), "world".to_string(), "rust".to_string()],
             cache: HashMap::new(),
         }
+    }
+}
+
+impl AsyncClosureDemo {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 使用异步闭包进行数据处理
@@ -109,11 +115,17 @@ pub struct TupleCollectionDemo {
     data: Vec<i32>,
 }
 
-impl TupleCollectionDemo {
-    pub fn new() -> Self {
+impl Default for TupleCollectionDemo {
+    fn default() -> Self {
         Self {
             data: (1..=20).collect(),
         }
+    }
+}
+
+impl TupleCollectionDemo {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 演示元组的 FromIterator 实现
@@ -132,7 +144,7 @@ impl TupleCollectionDemo {
 
         // 按范围分组
         let small: Vec<i32> = self.data.iter().filter(|&&x| x < 10).cloned().collect();
-        let medium: Vec<i32> = self.data.iter().filter(|&&x| x >= 10 && x <= 20).cloned().collect();
+        let medium: Vec<i32> = self.data.iter().filter(|&&x| (10..=20).contains(&x)).cloned().collect();
         let large: Vec<i32> = self.data.iter().filter(|&&x| x > 20).cloned().collect();
         println!("  按范围分组 - 小: {}, 中: {}, 大: {}", small.len(), medium.len(), large.len());
 
@@ -354,11 +366,17 @@ pub struct ProcessorWrapper {
     processor: Box<dyn AsyncProcessor + Send + Sync>,
 }
 
-impl AsyncProcessorManager {
-    pub fn new() -> Self {
+impl Default for AsyncProcessorManager {
+    fn default() -> Self {
         Self {
             processors: Vec::new(),
         }
+    }
+}
+
+impl AsyncProcessorManager {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub fn add_processor(&mut self, processor: Box<dyn AsyncProcessor + Send + Sync>) {
@@ -559,13 +577,19 @@ impl FileResource {
 }
 
 
-#[allow(dead_code)]
-impl CompleteAsyncResourceManager {
-    pub fn new() -> Self {
+impl Default for CompleteAsyncResourceManager {
+    fn default() -> Self {
         Self {
             resources: HashMap::new(),
             cleanup_tasks: Vec::new(),
         }
+    }
+}
+
+#[allow(dead_code)]
+impl CompleteAsyncResourceManager {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn add_resource(&mut self, resource: CompleteAsyncResource) -> Result<()> {

@@ -94,9 +94,9 @@ impl AsyncProcessManager {
                 if let Some(ref mut stdin) = child.stdin {
                     use tokio::io::AsyncWriteExt;
                     stdin.write_all(data).await
-                        .map_err(|e| ProcessError::Io(std::io::Error::new(std::io::ErrorKind::Other, format!("Failed to write to stdin: {}", e))))?;
+                        .map_err(|e| ProcessError::Io(std::io::Error::other(format!("Failed to write to stdin: {}", e))))?;
                     stdin.flush().await
-                        .map_err(|e| ProcessError::Io(std::io::Error::new(std::io::ErrorKind::Other, format!("Failed to flush stdin: {}", e))))?;
+                        .map_err(|e| ProcessError::Io(std::io::Error::other(format!("Failed to flush stdin: {}", e))))?;
                     Ok(())
                 } else {
                     Err(ProcessError::InvalidConfig("stdin not available".to_string()))
@@ -134,7 +134,7 @@ impl AsyncProcessManager {
                     use tokio::io::AsyncReadExt;
                     let mut buf = Vec::new();
                     stdout.read_to_end(&mut buf).await
-                        .map_err(|e| ProcessError::Io(std::io::Error::new(std::io::ErrorKind::Other, format!("Failed to read stdout: {}", e))))?;
+                        .map_err(|e| ProcessError::Io(std::io::Error::other(format!("Failed to read stdout: {}", e))))?;
                     Ok(buf)
                 } else {
                     Err(ProcessError::InvalidConfig("stdout not available".to_string()))
@@ -156,7 +156,7 @@ impl AsyncProcessManager {
                     use tokio::io::AsyncReadExt;
                     let mut buf = Vec::new();
                     stderr.read_to_end(&mut buf).await
-                        .map_err(|e| ProcessError::Io(std::io::Error::new(std::io::ErrorKind::Other, format!("Failed to read stderr: {}", e))))?;
+                        .map_err(|e| ProcessError::Io(std::io::Error::other(format!("Failed to read stderr: {}", e))))?;
                     Ok(buf)
                 } else {
                     Err(ProcessError::InvalidConfig("stderr not available".to_string()))
@@ -263,10 +263,8 @@ impl AsyncProcessManager {
             response: response_sender,
         };
 
-        if let Ok(()) = self.command_sender.send(command).await {
-            if let Ok(result) = response_receiver.await {
-                return result;
-            }
+        if self.command_sender.send(command).await.is_ok() && let Ok(result) = response_receiver.await {
+            return result;
         }
 
         Vec::new()

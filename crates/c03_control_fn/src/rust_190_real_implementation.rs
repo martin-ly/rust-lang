@@ -24,12 +24,18 @@ pub struct ConstGenericArray<T, const N: usize> {
     current_index: usize,
 }
 
-impl<T: Default + Copy, const N: usize> ConstGenericArray<T, N> {
-    pub fn new() -> Self {
+impl<T: Default + Copy, const N: usize> Default for ConstGenericArray<T, N> {
+    fn default() -> Self {
         Self {
             data: [T::default(); N],
             current_index: 0,
         }
+    }
+}
+
+impl<T: Default + Copy, const N: usize> ConstGenericArray<T, N> {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub fn push(&mut self, value: T) -> Result<()> {
@@ -52,6 +58,10 @@ impl<T: Default + Copy, const N: usize> ConstGenericArray<T, N> {
 
     pub fn len(&self) -> usize {
         self.current_index
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.current_index == 0
     }
 
     pub fn capacity(&self) -> usize {
@@ -134,12 +144,18 @@ pub struct ErrorHandling190 {
     success_count: std::sync::atomic::AtomicUsize,
 }
 
-impl ErrorHandling190 {
-    pub fn new() -> Self {
+impl Default for ErrorHandling190 {
+    fn default() -> Self {
         Self {
             error_count: std::sync::atomic::AtomicUsize::new(0),
             success_count: std::sync::atomic::AtomicUsize::new(0),
         }
+    }
+}
+
+impl ErrorHandling190 {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 演示改进的错误处理
@@ -198,12 +214,18 @@ pub struct StandardLibrary190 {
     cache: std::collections::BTreeMap<String, String>,
 }
 
-impl StandardLibrary190 {
-    pub fn new() -> Self {
+impl Default for StandardLibrary190 {
+    fn default() -> Self {
         Self {
             data: HashMap::new(),
             cache: std::collections::BTreeMap::new(),
         }
+    }
+}
+
+impl StandardLibrary190 {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 演示新的标准库特性

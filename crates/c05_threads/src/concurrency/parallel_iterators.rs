@@ -65,11 +65,11 @@ where
     use std::thread;
 
     let num_threads = num_cpus::get().min(items.len());
-    let chunk_size = (items.len() + num_threads - 1) / num_threads;
+    let chunk_size = items.len().div_ceil(num_threads);
 
     // 对于小数据集，直接顺序处理
     if items.len() < 100 {
-        return items.iter().map(|item| f(item)).collect();
+        return items.iter().map(f).collect();
     }
 
     let results: Arc<Mutex<Vec<R>>> = Arc::new(Mutex::new(Vec::new()));
@@ -114,7 +114,7 @@ where
     }
 
     let num_threads = num_cpus::get().min(items.len());
-    let chunk_size = (items.len() + num_threads - 1) / num_threads;
+    let chunk_size = items.len().div_ceil(num_threads);
 
     let results: Arc<Mutex<Vec<T>>> = Arc::new(Mutex::new(Vec::new()));
     let predicate = Arc::new(predicate);
@@ -157,11 +157,11 @@ where
 
     // 对于小数据集，直接顺序处理
     if items.len() < 100 {
-        return items.iter().fold(identity.clone(), |acc, item| op(acc, item));
+        return items.iter().fold(identity.clone(), op);
     }
 
     let num_threads = num_cpus::get().min(items.len());
-    let chunk_size = (items.len() + num_threads - 1) / num_threads;
+    let chunk_size = items.len().div_ceil(num_threads);
 
     let results: Arc<Mutex<Vec<T>>> = Arc::new(Mutex::new(Vec::new()));
     let op = Arc::new(op);
@@ -206,11 +206,11 @@ where
 
     // 对于小数据集，直接顺序处理
     if items.len() < 100 {
-        return items.iter().position(|item| predicate(item));
+        return items.iter().position(predicate);
     }
 
     let num_threads = num_cpus::get().min(items.len());
-    let chunk_size = (items.len() + num_threads - 1) / num_threads;
+    let chunk_size = items.len().div_ceil(num_threads);
 
     let found = Arc::new(AtomicBool::new(false));
     let result_index = Arc::new(AtomicUsize::new(usize::MAX));

@@ -37,8 +37,8 @@
 
 use std::mem::MaybeUninit;
 use std::num::NonZeroUsize;
-use std::sync::{Arc, Mutex, RwLock, RwLockWriteGuard};
-use std::collections::{VecDeque, HashMap};
+use std::sync::{Arc, Mutex};
+use std::collections::VecDeque;
 
 // ==================== 1. MaybeUninit 在并发编程中的应用 ====================
 
@@ -62,16 +62,38 @@ impl<T> ThreadSafeUninitBuffer<T> {
     /// 在指定位置初始化数据
     ///
     /// Rust 1.92.0: 使用 MaybeUninit 确保安全性
+    ///
+    /// # Safety
+    ///
+    /// 调用者必须确保：
+    /// - `index` 在有效范围内（0 <= index < capacity）
+    /// - 该位置之前未被初始化，或已正确清理
+    /// - 不会并发调用此方法
     pub unsafe fn init_at(&mut self, index: usize, value: T) {
         self.buffer[index].write(value);
     }
 
     /// 获取已初始化的引用
+    ///
+    /// # Safety
+    ///
+    /// 调用者必须确保：
+    /// - `index` 在有效范围内（0 <= index < capacity）
+    /// - 该位置已通过 `init_at` 正确初始化
+    /// - 返回的引用在有效生命周期内不会被释放
     pub unsafe fn get(&self, index: usize) -> &T {
         unsafe { self.buffer[index].assume_init_ref() }
     }
 
     /// 获取可变引用
+    ///
+    /// # Safety
+    ///
+    /// 调用者必须确保：
+    /// - `index` 在有效范围内（0 <= index < capacity）
+    /// - 该位置已通过 `init_at` 正确初始化
+    /// - 返回的可变引用在有效生命周期内不会被释放
+    /// - 不会与其他引用产生数据竞争
     pub unsafe fn get_mut(&mut self, index: usize) -> &mut T {
         unsafe { self.buffer[index].assume_init_mut() }
     }
@@ -150,6 +172,13 @@ impl ThreadPoolQueue {
     }
 
     /// 添加任务（线程安全，需要外部同步）
+    ///
+    /// # Safety
+    ///
+    /// 调用者必须确保：
+    /// - 在单线程环境中调用，或已提供外部同步机制
+    /// - `initialized_count` 小于 `tasks` 的长度
+    /// - 不会并发调用此方法
     pub unsafe fn push(&mut self, task: ThreadTask) {
         if self.initialized_count < self.tasks.len() {
             self.tasks[self.initialized_count].write(task);
@@ -511,7 +540,7 @@ where
     I: IntoIterator<Item = u64>,
 {
     ids.into_iter()
-        .map(|id| ThreadTask::high_priority(id))
+        .map(ThreadTask::high_priority)
         .collect()
 }
 
@@ -530,7 +559,7 @@ where
     I: IntoIterator<Item = u64>,
 {
     ids.into_iter()
-        .map(|id| ThreadTask::low_priority(id))
+        .map(ThreadTask::low_priority)
         .collect()
 }
 

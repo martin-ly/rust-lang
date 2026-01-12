@@ -11,7 +11,7 @@ pub async fn channel_exp11() {
     // 启动一个任务
     tokio::spawn(async move {
         for i in 0..5 {
-            if let Err(_) = tx.send(i).await {
+            if tx.send(i).await.is_err() {
                 println!("Receiver dropped");
                 return;
             }
@@ -41,7 +41,7 @@ pub async fn channel_exp12() {
     // 启动一个任务来发送消息
     tokio::spawn(async move {
         for i in 0..5 {
-            if let Err(_) = tx.send(i).await {
+            if tx.send(i).await.is_err() {
                 println!("Receiver dropped");
                 return;
             }

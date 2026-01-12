@@ -264,7 +264,7 @@ impl<T> BenchmarkResults<T> {
                 "  最大执行时间: {:?}\n",
                 result.stats.max_execution_time()
             ));
-            report.push_str("\n");
+            report.push('\n');
         }
 
         if let Some(best) = self.best_performance() {

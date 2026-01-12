@@ -71,11 +71,7 @@ harness = false
 path = "benches/simple_benchmarks.rs"
 
 [[example]]
-name = "comprehensive_algorithm_demo"
-path = "examples/comprehensive_algorithm_demo.rs"
-
-[[example]]
-name = "rust_2024_features_demo"
-path = "examples/rust_2024_features_demo.rs"
+name = "algorithm_comprehensive_demo"
+path = "examples/algorithm_comprehensive_demo.rs"
 
 #[profile] moved to workspace root

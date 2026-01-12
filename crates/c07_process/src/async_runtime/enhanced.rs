@@ -1,5 +1,5 @@
 //! 增强的异步运行时功能
-//! 
+//!
 //! 这个模块提供了完整的异步进程管理功能，包括异步闭包支持、
 //! 智能错误恢复、性能监控等 Rust 1.90 新特性
 
@@ -213,7 +213,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步启动进程（带回调版本 - 使用异步闭包）
-    /// 
+    ///
     /// 这是 Rust 1.90 新特性的演示，支持异步闭包
     pub async fn spawn_with_callback<F>(
         &self,
@@ -303,10 +303,8 @@ impl EnhancedAsyncProcessManager {
             response: response_sender,
         };
 
-        if let Ok(()) = self.command_sender.send(command) {
-            if let Ok(result) = response_receiver.await {
-                return result;
-            }
+        if self.command_sender.send(command).is_ok() && let Ok(result) = response_receiver.await {
+            return result;
         }
 
         Vec::new()
@@ -316,10 +314,10 @@ impl EnhancedAsyncProcessManager {
     pub async fn get_performance_stats(&self) -> ProcessResult<PerformanceStats> {
         let processes = self.processes.read().await;
         let mut stats = PerformanceStats::default();
-        
+
         for (_pid, process) in processes.iter() {
             let metrics = process.performance_metrics.lock().await;
-            
+
             // 使用 Rust 1.90 改进的模式匹配
             match (metrics.cpu_usage, metrics.memory_usage) {
                 (cpu, _mem) if cpu > 80.0 => {
@@ -336,15 +334,15 @@ impl EnhancedAsyncProcessManager {
                     stats.total_memory_usage += mem;
                 }
             }
-            
+
             stats.total_processes += 1;
         }
-        
+
         if stats.total_processes > 0 {
             stats.average_cpu_usage = stats.total_cpu_usage / stats.total_processes as f64;
             stats.average_memory_usage = stats.total_memory_usage / stats.total_processes as u64;
         }
-        
+
         Ok(stats)
     }
 
@@ -374,8 +372,8 @@ impl EnhancedAsyncProcessManager {
                     stdin
                         .write_all(data)
                         .await
-                        .map_err(|e| ProcessError::Io(e))?;
-                    stdin.flush().await.map_err(|e| ProcessError::Io(e))?;
+                        .map_err(ProcessError::Io)?;
+                    stdin.flush().await.map_err(ProcessError::Io)?;
                     return Ok(());
                 }
                 return Err(ProcessError::InvalidConfig("stdin not available".to_string()));
@@ -395,7 +393,7 @@ impl EnhancedAsyncProcessManager {
                     stdout
                         .read_to_end(&mut buffer)
                         .await
-                        .map_err(|e| ProcessError::Io(e))?;
+                        .map_err(ProcessError::Io)?;
                     return Ok(buffer);
                 }
                 return Err(ProcessError::InvalidConfig("stdout not available".to_string()));
@@ -406,7 +404,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步启动进程（使用 Rust 1.90 异步闭包特性）
-    /// 
+    ///
     /// 这个版本使用了 Rust 1.90 的新异步闭包特性
     /// 注意：由于异步闭包仍不稳定，这里使用 Future trait 作为替代
     pub async fn spawn_with_async_callback<F, Fut>(
@@ -451,24 +449,24 @@ impl EnhancedAsyncProcessManager {
         if let Some(managed_process) = processes.get_mut(&pid) {
             if let Some(child) = managed_process.child.as_mut() {
                 let start_time = Instant::now();
-                
+
                 // 使用超时等待
                 match timeout(timeout_duration, child.wait()).await {
                     Ok(Ok(exit_status)) => {
                         let duration = start_time.elapsed();
                         let exit_code = exit_status.code();
-                        
+
                         // 读取输出
                         let stdout = self.read_stdout(pid).await.unwrap_or_default();
                         let stderr = self.read_stderr(pid).await.unwrap_or_default();
-                        
+
                         let output = ProcessOutput {
                             stdout,
                             stderr,
                             exit_code,
                             duration,
                         };
-                        
+
                         Ok(Some(output))
                     }
                     Ok(Err(e)) => Err(ProcessError::WaitFailed(e.to_string())),
@@ -492,7 +490,7 @@ impl EnhancedAsyncProcessManager {
                     stderr
                         .read_to_end(&mut buffer)
                         .await
-                        .map_err(|e| ProcessError::Io(e))?;
+                        .map_err(ProcessError::Io)?;
                     return Ok(buffer);
                 }
                 return Err(ProcessError::InvalidConfig("stderr not available".to_string()));
@@ -578,11 +576,11 @@ impl EnhancedAsyncProcessManager {
         // 创建进程
         let mut command = Command::new(&config.program);
         command.args(&config.args);
-        
+
         for (key, value) in &config.env {
             command.env(key, value);
         }
-        
+
         if let Some(dir) = &config.working_dir {
             command.current_dir(dir);
         }
@@ -687,7 +685,7 @@ impl EnhancedAsyncProcessManager {
                     }
                 }
             }
-            
+
             managed_process.info.status = ProcessStatus::Stopped;
             Ok(())
         } else {
@@ -738,12 +736,12 @@ impl EnhancedAsyncProcessManager {
         processes: &Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,
     ) -> ProcessResult<()> {
         let mut processes_guard = processes.write().await;
-        
+
         // 清理已终止的进程
         processes_guard.retain(|_, process| {
             process.info.status == ProcessStatus::Running
         });
-        
+
         Ok(())
     }
 
@@ -754,16 +752,16 @@ impl EnhancedAsyncProcessManager {
         processes: Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,
     ) {
         let mut interval = tokio::time::interval(Duration::from_secs(1));
-        
+
         loop {
             interval.tick().await;
-            
+
         let processes_guard = processes.read().await;
         for (_pid, process) in processes_guard.iter() {
                 // 更新性能指标
                 let mut metrics = process.performance_metrics.lock().await;
                 metrics.last_update = Instant::now();
-                
+
                 // 这里可以添加实际的性能监控逻辑
                 // 比如读取 /proc/pid/stat 或使用系统调用
             }
@@ -772,12 +770,19 @@ impl EnhancedAsyncProcessManager {
 }
 
 #[cfg(feature = "async")]
-impl PerformanceMonitor {
-    pub fn new() -> Self {
+impl Default for PerformanceMonitor {
+    fn default() -> Self {
         Self {
             metrics: Arc::new(TokioMutex::new(HashMap::new())),
             update_interval: Duration::from_secs(1),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl PerformanceMonitor {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     #[allow(unused_variables)]
@@ -790,7 +795,7 @@ impl PerformanceMonitor {
             start_time: Instant::now(),
             last_update: Instant::now(),
         };
-        
+
         self.metrics.lock().await.insert(pid, metrics);
     }
 
@@ -804,12 +809,19 @@ impl PerformanceMonitor {
 }
 
 #[cfg(feature = "async")]
-impl ErrorRecovery {
-    pub fn new() -> Self {
+impl Default for ErrorRecovery {
+    fn default() -> Self {
         Self {
             retry_policies: Arc::new(TokioMutex::new(HashMap::new())),
             recovery_strategies: Arc::new(TokioMutex::new(HashMap::new())),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl ErrorRecovery {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn add_retry_policy(&self, name: String, policy: RetryPolicy) {
@@ -855,7 +867,7 @@ mod tests {
     #[tokio::test]
     async fn test_enhanced_async_process_manager() {
         let manager = EnhancedAsyncProcessManager::new(10).await.unwrap();
-        
+
         let mut env = HashMap::new();
         if cfg!(windows) {
             env.insert("PATH".to_string(), "C:\\Windows\\System32".to_string());
@@ -903,7 +915,7 @@ mod tests {
     #[tokio::test]
     async fn test_spawn_with_callback() {
         let manager = EnhancedAsyncProcessManager::new(10).await.unwrap();
-        
+
         let mut env = HashMap::new();
         if cfg!(windows) {
             env.insert("PATH".to_string(), "C:\\Windows\\System32".to_string());
@@ -958,7 +970,7 @@ mod tests {
     #[ignore] // 暂时忽略，spawn_with_async_callback 需要重构以支持异步回调
     async fn test_spawn_with_async_callback() {
         let manager = EnhancedAsyncProcessManager::new(10).await.unwrap();
-        
+
         let mut env = HashMap::new();
         if cfg!(windows) {
             env.insert("PATH".to_string(), "C:\\Windows\\System32".to_string());
@@ -1015,7 +1027,7 @@ mod tests {
     #[tokio::test]
     async fn test_performance_stats() {
         let manager = EnhancedAsyncProcessManager::new(10).await.unwrap();
-        
+
         let mut env = HashMap::new();
         if cfg!(windows) {
             env.insert("PATH".to_string(), "C:\\Windows\\System32".to_string());

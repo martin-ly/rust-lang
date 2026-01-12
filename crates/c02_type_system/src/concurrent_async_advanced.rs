@@ -42,13 +42,19 @@ pub mod async_patterns {
         state_changes: broadcast::Sender<AsyncState>,
     }
 
-    impl AsyncStateMachine {
-        pub fn new() -> Self {
+    impl Default for AsyncStateMachine {
+        fn default() -> Self {
             let (tx, _) = broadcast::channel(100);
             Self {
                 state: Arc::new(AsyncMutex::new(AsyncState::Idle)),
                 state_changes: tx,
             }
+        }
+    }
+
+    impl AsyncStateMachine {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub async fn transition_to(&self, new_state: AsyncState) -> Result<(), String> {
@@ -545,10 +551,25 @@ pub mod async_streams {
         T: Send + Sync + 'static,
     {
         pub fn new() -> Self {
+            Self::default()
+        }
+    }
+
+    impl<T> Default for AsyncPipeline<T>
+    where
+        T: Send + Sync + 'static,
+    {
+        fn default() -> Self {
             Self {
                 stages: Vec::new(),
             }
         }
+    }
+
+    impl<T> AsyncPipeline<T>
+    where
+        T: Send + Sync + 'static,
+    {
 
         pub fn add_stage<F>(&mut self, stage: F)
         where
@@ -804,11 +825,17 @@ pub mod async_sync_primitives {
         inner: Arc<(AsyncMutex<bool>, Condvar)>,
     }
 
-    impl AsyncConditionVariable {
-        pub fn new() -> Self {
+    impl Default for AsyncConditionVariable {
+        fn default() -> Self {
             Self {
                 inner: Arc::new((AsyncMutex::new(false), Condvar::new())),
             }
+        }
+    }
+
+    impl AsyncConditionVariable {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub async fn wait(&self) {
@@ -890,11 +917,17 @@ pub mod concurrent_safe_structures {
         data: Arc<Mutex<Vec<T>>>,
     }
 
-    impl<T> ConcurrentStack<T> {
-        pub fn new() -> Self {
+    impl<T> Default for ConcurrentStack<T> {
+        fn default() -> Self {
             Self {
                 data: Arc::new(Mutex::new(Vec::new())),
             }
+        }
+    }
+
+    impl<T> ConcurrentStack<T> {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub fn push(&self, item: T) {
@@ -931,11 +964,17 @@ pub mod concurrent_safe_structures {
         data: Arc<Mutex<VecDeque<T>>>,
     }
 
-    impl<T> ConcurrentQueue<T> {
-        pub fn new() -> Self {
+    impl<T> Default for ConcurrentQueue<T> {
+        fn default() -> Self {
             Self {
                 data: Arc::new(Mutex::new(VecDeque::new())),
             }
+        }
+    }
+
+    impl<T> ConcurrentQueue<T> {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub fn enqueue(&self, item: T) {
@@ -972,11 +1011,17 @@ pub mod concurrent_safe_structures {
         data: Arc<Mutex<VecDeque<T>>>,
     }
 
-    impl<T> ConcurrentDeque<T> {
-        pub fn new() -> Self {
+    impl<T> Default for ConcurrentDeque<T> {
+        fn default() -> Self {
             Self {
                 data: Arc::new(Mutex::new(VecDeque::new())),
             }
+        }
+    }
+
+    impl<T> ConcurrentDeque<T> {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub fn push_front(&self, item: T) {
@@ -1130,12 +1175,18 @@ pub mod performance_monitoring {
         start_time: Instant,
     }
 
-    impl AsyncPerformanceMonitor {
-        pub fn new() -> Self {
+    impl Default for AsyncPerformanceMonitor {
+        fn default() -> Self {
             Self {
                 metrics: Arc::new(AsyncMutex::new(HashMap::new())),
                 start_time: Instant::now(),
             }
+        }
+    }
+
+    impl AsyncPerformanceMonitor {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub async fn record_metric(&self, name: String, value: f64) {
@@ -1170,11 +1221,17 @@ pub mod performance_monitoring {
         task_times: Arc<AsyncMutex<HashMap<String, Vec<Duration>>>>,
     }
 
-    impl AsyncTaskProfiler {
-        pub fn new() -> Self {
+    impl Default for AsyncTaskProfiler {
+        fn default() -> Self {
             Self {
                 task_times: Arc::new(AsyncMutex::new(HashMap::new())),
             }
+        }
+    }
+
+    impl AsyncTaskProfiler {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub async fn profile_task<F, R>(&self, task_name: String, task: F) -> R

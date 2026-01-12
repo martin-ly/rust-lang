@@ -28,12 +28,18 @@ pub struct GenericArray<T, const N: usize> {
     data: [T; N],
 }
 
-impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
-    /// 创建新的泛型数组
-    pub fn new() -> Self {
+impl<T: Default + Copy, const N: usize> Default for GenericArray<T, N> {
+    fn default() -> Self {
         Self {
             data: [T::default(); N],
         }
+    }
+}
+
+impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
+    /// 创建新的泛型数组
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 使用显式推断创建数组
@@ -480,12 +486,18 @@ pub struct HighPerformanceCounter {
     cache_line_padding: [u8; 64], // 避免伪共享
 }
 
-impl HighPerformanceCounter {
-    pub fn new() -> Self {
+impl Default for HighPerformanceCounter {
+    fn default() -> Self {
         Self {
             value: AtomicUsize::new(0),
             cache_line_padding: [0; 64],
         }
+    }
+}
+
+impl HighPerformanceCounter {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     /// 使用内存屏障优化的原子递增
@@ -572,8 +584,8 @@ pub struct LockFreeRingBuffer<const N: usize> {
     mask: usize,
 }
 
-impl<const N: usize> LockFreeRingBuffer<N> {
-    pub fn new() -> Self {
+impl<const N: usize> Default for LockFreeRingBuffer<N> {
+    fn default() -> Self {
         assert!(N.is_power_of_two(), "Buffer size must be a power of two");
 
         Self {
@@ -582,6 +594,12 @@ impl<const N: usize> LockFreeRingBuffer<N> {
             tail: AtomicUsize::new(0),
             mask: N - 1,
         }
+    }
+}
+
+impl<const N: usize> LockFreeRingBuffer<N> {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub fn try_push(&self, _value: usize) -> Result<(), ()> {

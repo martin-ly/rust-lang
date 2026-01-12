@@ -72,6 +72,10 @@ impl<T: Copy + Default, const N: usize> OptimizedVector<T, N> {
     pub fn len(&self) -> usize {
         self.len
     }
+
+    pub fn is_empty(&self) -> bool {
+        self.len == 0
+    }
 }
 
 /// 编译时类型检查

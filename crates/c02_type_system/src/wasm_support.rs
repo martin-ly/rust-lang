@@ -487,7 +487,7 @@ pub fn demonstrate_wasm_features() {
     let sum = WasmOperations::add(a, b);
     println!("  10 + 20 = {:?}", sum);
     
-    let c = WasmType::F64(3.14);
+    let c = WasmType::F64(std::f64::consts::PI);
     let d = WasmType::F64(2.86);
     let product = WasmOperations::multiply(c, d);
     println!("  3.14 * 2.86 = {:?}", product);

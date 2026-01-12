@@ -391,7 +391,7 @@ impl<T> AsyncBenchmarkResults<T> {
             if let Some(timeout) = result.timeout {
                 report.push_str(&format!("  超时设置: {:?}\n", timeout));
             }
-            report.push_str("\n");
+            report.push('\n');
         }
 
         if let Some(best) = self.best_performance() {

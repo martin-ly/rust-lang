@@ -225,7 +225,7 @@ pub mod error_handling {
 
         // 第二级：检查范围
         for (idx, &n) in data.iter().enumerate() {
-            if n < 0 || n > 1000 {
+            if !(0..=1000).contains(&n) {
                 return ControlFlow::Break(format!("第 {} 个元素 {} 超出范围 [0, 1000]", idx + 1, n));
             }
         }
@@ -520,15 +520,25 @@ pub mod function_call_optimization {
         cache: HashMap<K, V>,
     }
 
+    impl<K, V> Default for FunctionCache<K, V>
+    where
+        K: std::hash::Hash + Eq + Clone,
+        V: Clone,
+    {
+        fn default() -> Self {
+            Self {
+                cache: HashMap::new(),
+            }
+        }
+    }
+
     impl<K, V> FunctionCache<K, V>
     where
         K: std::hash::Hash + Eq + Clone,
         V: Clone,
     {
         pub fn new() -> Self {
-            Self {
-                cache: HashMap::new(),
-            }
+            Self::default()
         }
 
         /// 缓存函数调用结果

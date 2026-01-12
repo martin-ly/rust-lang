@@ -180,9 +180,9 @@ pub struct SearchingEngine;
 
 impl SearchingEngine {
     /// 同步线性搜索
-    pub fn linear_search_sync<T: PartialEq>(data: &[T], target: &T) -> SearchResult<T>
+    pub fn linear_search_sync<T>(data: &[T], target: &T) -> SearchResult<T>
     where
-        T: Clone,
+        T: PartialEq + Clone,
     {
         let start = Instant::now();
         let mut comparisons = 0;
@@ -222,9 +222,9 @@ impl SearchingEngine {
     }
 
     /// 并行线性搜索
-    pub fn linear_search_parallel<T: PartialEq + Send + Sync>(data: &[T], target: &T) -> SearchResult<T>
+    pub fn linear_search_parallel<T>(data: &[T], target: &T) -> SearchResult<T>
     where
-        T: Clone,
+        T: PartialEq + Send + Sync + Clone,
     {
         let start = Instant::now();
 
@@ -264,12 +264,12 @@ impl SearchingEngine {
     }
 
     /// 异步线性搜索
-    pub async fn linear_search_async<T: PartialEq + Send + 'static>(
+    pub async fn linear_search_async<T>(
         data: Vec<T>,
         target: T,
     ) -> Result<SearchResult<T>>
     where
-        T: Clone,
+        T: PartialEq + Send + Clone + 'static,
     {
         let handle = tokio::task::spawn_blocking(move || {
             Self::linear_search_sync(&data, &target)
@@ -279,9 +279,9 @@ impl SearchingEngine {
     }
 
     /// 同步二分搜索
-    pub fn binary_search_sync<T: Ord>(data: &[T], target: &T) -> SearchResult<T>
+    pub fn binary_search_sync<T>(data: &[T], target: &T) -> SearchResult<T>
     where
-        T: Clone,
+        T: Ord + Clone,
     {
         let start = Instant::now();
         let mut comparisons = 0;
@@ -332,12 +332,12 @@ impl SearchingEngine {
     }
 
     /// 异步二分搜索
-    pub async fn binary_search_async<T: Ord + Send + 'static>(
+    pub async fn binary_search_async<T>(
         data: Vec<T>,
         target: T,
     ) -> Result<SearchResult<T>>
     where
-        T: Clone,
+        T: Ord + Send + Clone + 'static,
     {
         let handle = tokio::task::spawn_blocking(move || {
             Self::binary_search_sync(&data, &target)
@@ -347,9 +347,9 @@ impl SearchingEngine {
     }
 
     /// 指数搜索
-    pub fn exponential_search_sync<T: Ord>(data: &[T], target: &T) -> SearchResult<T>
+    pub fn exponential_search_sync<T>(data: &[T], target: &T) -> SearchResult<T>
     where
-        T: Clone,
+        T: Ord + Clone,
     {
         let start = Instant::now();
         let mut comparisons = 0;
@@ -504,9 +504,9 @@ impl SearchingEngine {
     }
 
     /// 跳跃搜索
-    pub fn jump_search_sync<T: Ord>(data: &[T], target: &T) -> SearchResult<T>
+    pub fn jump_search_sync<T>(data: &[T], target: &T) -> SearchResult<T>
     where
-        T: Clone,
+        T: Ord + Clone,
     {
         let start = Instant::now();
         let mut comparisons = 0;
@@ -542,7 +542,7 @@ impl SearchingEngine {
         }
 
         // 线性搜索阶段
-        let start_linear = if prev >= step { prev - step } else { 0 };
+        let start_linear = prev.saturating_sub(step);
         let end_linear = prev.min(n);
 
         for i in start_linear..end_linear {

@@ -854,8 +854,8 @@ pub struct ErrorPrediction {
 fn now_instant() -> SystemTime { SystemTime::now() }
 
 #[cfg(feature = "async")]
-impl ErrorStatistics {
-    pub fn new() -> Self {
+impl Default for ErrorStatistics {
+    fn default() -> Self {
         Self {
             total_errors: 0,
             error_type_counts: HashMap::new(),
@@ -868,14 +868,28 @@ impl ErrorStatistics {
 }
 
 #[cfg(feature = "async")]
-impl ErrorRecovery {
+impl ErrorStatistics {
     pub fn new() -> Self {
+        Self::default()
+    }
+}
+
+#[cfg(feature = "async")]
+impl Default for ErrorRecovery {
+    fn default() -> Self {
         Self {
             recovery_strategies: Arc::new(TokioMutex::new(HashMap::new())),
             recovery_history: Arc::new(TokioMutex::new(Vec::new())),
             max_recovery_attempts: 3,
             recovery_timeout: Duration::from_secs(30),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl ErrorRecovery {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     #[allow(unused_variables)]
@@ -891,13 +905,20 @@ impl ErrorRecovery {
 }
 
 #[cfg(feature = "async")]
-impl ErrorClassifier {
-    pub fn new() -> Self {
+impl Default for ErrorClassifier {
+    fn default() -> Self {
         Self {
             classification_rules: Arc::new(TokioMutex::new(Vec::new())),
             classification_cache: Arc::new(TokioMutex::new(HashMap::new())),
             auto_classification: true,
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl ErrorClassifier {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn classify_error(&self, error: &dyn StdError, context: &HashMap<String, String>) -> ErrorClassification {
@@ -954,13 +975,20 @@ impl ErrorClassifier {
 }
 
 #[cfg(feature = "async")]
-impl ErrorChainTracker {
-    pub fn new() -> Self {
+impl Default for ErrorChainTracker {
+    fn default() -> Self {
         Self {
             error_chains: Arc::new(TokioMutex::new(HashMap::new())),
             chain_timeout: Duration::from_secs(300), // 5 minutes
             max_chain_length: 10,
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl ErrorChainTracker {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     #[allow(unused_variables)]
@@ -993,13 +1021,20 @@ impl ErrorChainTracker {
 }
 
 #[cfg(feature = "async")]
-impl ErrorNotifier {
-    pub fn new() -> Self {
+impl Default for ErrorNotifier {
+    fn default() -> Self {
         Self {
             notification_channels: Arc::new(TokioMutex::new(Vec::new())),
             notification_rules: Arc::new(TokioMutex::new(Vec::new())),
             notification_history: Arc::new(TokioMutex::new(Vec::new())),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl ErrorNotifier {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn get_matching_rules(&self, error_entry: &EnhancedErrorEntry) -> Vec<NotificationRule> {

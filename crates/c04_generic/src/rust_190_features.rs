@@ -34,7 +34,7 @@ impl<T> Data<T> {
                 // 简单的过滤逻辑
                 true
             })
-            .map(|x| x.clone())
+            .cloned()
             .take(100) // 限制输出数量
     }
 }
@@ -48,7 +48,7 @@ where
         items
             .iter()
             .filter(|_| true)
-            .map(|x| x.clone())
+            .cloned()
             .take(100)
     )
 }

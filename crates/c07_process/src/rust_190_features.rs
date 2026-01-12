@@ -3,7 +3,7 @@
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//! 
+//!
 //! 这个模块展示了如何在 c07_process 项目中使用最新的 Rust 1.90 特性
 
 use crate::error::{ProcessError, ProcessResult};
@@ -40,7 +40,7 @@ impl Rust190Features {
     }
 
     /// 演示异步闭包特性
-    /// 
+    ///
     /// Rust 1.90 引入了异步闭包，允许在闭包中使用 async/await
     #[allow(dead_code)]
     pub async fn demonstrate_async_closures(&self) -> ProcessResult<()> {
@@ -50,14 +50,14 @@ impl Rust190Features {
         #[allow(unused_variables)]
         let async_closure = async |config: ProcessConfig| -> ProcessResult<u32> {
             println!("异步闭包处理进程配置: {}", config.program);
-            
+
             // 模拟异步处理
             tokio::time::sleep(Duration::from_millis(100)).await;
-            
+
             let mut next_pid = self.next_pid.lock().unwrap();
             *next_pid += 1;
             let pid = *next_pid;
-            
+
             Ok(pid)
         };
 
@@ -80,7 +80,7 @@ impl Rust190Features {
     }
 
     /// 演示改进的模式匹配
-    /// 
+    ///
     /// Rust 1.90 改进了模式匹配的精确性和性能
     #[allow(dead_code)]
     pub fn demonstrate_improved_pattern_matching(&self, result: ProcessResult<u32>) {
@@ -116,7 +116,7 @@ impl Rust190Features {
     }
 
     /// 演示改进的迭代器
-    /// 
+    ///
     /// Rust 1.90 提供了更高效的迭代器方法
     #[allow(dead_code)]
     pub fn demonstrate_improved_iterators(&self, configs: Vec<ProcessConfig>) -> Vec<u32> {
@@ -140,7 +140,7 @@ impl Rust190Features {
     }
 
     /// 演示改进的错误处理
-    /// 
+    ///
     /// Rust 1.90 提供了更好的错误处理机制
     #[allow(dead_code)]
     pub fn demonstrate_improved_error_handling(&self) -> ProcessResult<()> {
@@ -167,7 +167,7 @@ impl Rust190Features {
     }
 
     /// 演示新的类型推断
-    /// 
+    ///
     /// Rust 1.90 改进了类型推断能力
     #[allow(dead_code)]
     pub fn demonstrate_improved_type_inference(&self) {
@@ -176,20 +176,20 @@ impl Rust190Features {
         // 编译器可以更好地推断复杂类型
         let process_map: HashMap<u32, ProcessInfo> = HashMap::new();
         let arc_map = Arc::new(Mutex::new(process_map));
-        
+
         // 类型推断更智能
         let _closure = |pid: u32| -> ProcessResult<ProcessInfo> {
             let map = arc_map.lock().unwrap();
             map.get(&pid)
                 .cloned()
-                .ok_or_else(|| ProcessError::NotFound(pid))
+                .ok_or(ProcessError::NotFound(pid))
         };
 
         println!("✅ 类型推断成功");
     }
 
     /// 演示改进的宏系统
-    /// 
+    ///
     /// Rust 1.90 提供了更强大的宏功能
     #[allow(dead_code)]
     pub fn demonstrate_improved_macros(&self) {
@@ -204,15 +204,15 @@ impl Rust190Features {
     }
 
     /// 演示新的标准库特性
-    /// 
+    ///
     /// Rust 1.90 标准库的新特性
     #[allow(dead_code)]
     pub fn demonstrate_std_library_features(&self) {
         println!("📚 演示标准库新特性");
 
         // 使用新的标准库方法
-        let vec = vec![1, 2, 3, 4, 5];
-        
+        let vec = [1, 2, 3, 4, 5];
+
         // 新的迭代器方法
         let doubled: Vec<i32> = vec.iter().map(|x| x * 2).collect();
         println!("翻倍后的向量: {:?}", doubled);
@@ -222,12 +222,12 @@ impl Rust190Features {
         set.insert(1);
         set.insert(2);
         set.insert(3);
-        
+
         println!("集合大小: {}", set.len());
     }
 
     /// 演示改进的并发特性
-    /// 
+    ///
     /// Rust 1.90 的并发改进
     #[allow(dead_code)]
     pub async fn demonstrate_improved_concurrency(&self) -> ProcessResult<()> {
@@ -303,7 +303,7 @@ impl Default for Rust190Features {
 // 宏已上移至文件顶部
 
 /// 异步任务演示
-/// 
+///
 /// 展示如何使用 Rust 1.90 的异步特性
 #[allow(dead_code)]
 pub struct AsyncTaskDemo {
@@ -369,10 +369,10 @@ mod tests {
     #[test]
     fn test_improved_pattern_matching() {
         let features = Rust190Features::new();
-        
+
         // 测试成功情况
         features.demonstrate_improved_pattern_matching(Ok(1234));
-        
+
         // 测试错误情况
         features.demonstrate_improved_pattern_matching(Err(ProcessError::NotFound(5678)));
     }
@@ -402,7 +402,7 @@ mod tests {
                 resource_limits: Default::default(),
             },
         ];
-        
+
         let pids = features.demonstrate_improved_iterators(configs);
         assert_eq!(pids.len(), 2);
     }

@@ -304,12 +304,18 @@ pub mod comprehensive_async_examples {
         pub buffer_size: usize,
     }
 
-    impl AsyncPipeline {
-        pub fn new() -> Self {
+    impl Default for AsyncPipeline {
+        fn default() -> Self {
             Self {
                 max_concurrent: const_async_config::AsyncConfig::MAX_CONNECTIONS,
                 buffer_size: const_async_config::AsyncConfig::BUFFER_SIZE,
             }
+        }
+    }
+
+    impl AsyncPipeline {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         /// Rust 1.91 优化：异步处理管道性能提升

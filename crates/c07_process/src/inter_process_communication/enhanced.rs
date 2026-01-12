@@ -520,7 +520,7 @@ impl EnhancedIpcManager {
                         IpcError::ChannelNotFound(_) => return Err(e),
                         IpcError::SendFailed(_) => {
                             // 尝试错误恢复
-                            if let Err(_) = self.error_recovery.attempt_recovery(&e).await {
+                            if self.error_recovery.attempt_recovery(&e).await.is_err() {
                                 return Err(e);
                             }
                         }
@@ -649,7 +649,7 @@ impl EnhancedIpcManager {
                             format!("Data size {} exceeds region size {}", data_len, region_len)
                         ));
                     }
-                    (data_len, _region_len) if data_len == 0 => {
+                    (0, _region_len) => {
                         return Err(IpcError::SendFailed("Empty data not allowed".to_string()));
                     }
                     (data_len, _region_len) => {
@@ -778,12 +778,19 @@ impl ConnectionPool {
 }
 
 #[cfg(feature = "async")]
-impl IpcPerformanceMonitor {
-    pub fn new() -> Self {
+impl Default for IpcPerformanceMonitor {
+    fn default() -> Self {
         Self {
             metrics: Arc::new(TokioMutex::new(HashMap::new())),
             update_interval: Duration::from_secs(1),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl IpcPerformanceMonitor {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn add_channel(&self, channel_name: &str) {
@@ -838,12 +845,19 @@ impl IpcPerformanceMonitor {
 }
 
 #[cfg(feature = "async")]
-impl IpcErrorRecovery {
-    pub fn new() -> Self {
+impl Default for IpcErrorRecovery {
+    fn default() -> Self {
         Self {
             retry_policies: Arc::new(TokioMutex::new(HashMap::new())),
             recovery_strategies: Arc::new(TokioMutex::new(HashMap::new())),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl IpcErrorRecovery {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn add_retry_policy(&self, name: String, policy: IpcRetryPolicy) {

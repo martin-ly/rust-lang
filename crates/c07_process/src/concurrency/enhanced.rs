@@ -1033,7 +1033,7 @@ impl EnhancedSyncPrimitiveTrait for EnhancedMutex {
                 tracing::info!("Adaptive: Low load ({:.2}) and contention ({}), enabling coarse-grained locking", low_load, contention);
                 Ok(())
             }
-            (medium_load, contention) if 0.3 <= medium_load && medium_load <= 0.7 && contention > 50 => {
+            (medium_load, contention) if (0.3..=0.7).contains(&medium_load) && contention > 50 => {
                 // 中等负载但高争用：启用读写锁优化
                 tracing::info!("Adaptive: Medium load ({:.2}) but high contention ({}), optimizing read-write patterns", medium_load, contention);
                 Ok(())
@@ -1048,15 +1048,22 @@ impl EnhancedSyncPrimitiveTrait for EnhancedMutex {
 }
 
 #[cfg(feature = "async")]
-#[allow(dead_code)]
-impl DeadlockDetector {
-    pub fn new() -> Self {
+impl Default for DeadlockDetector {
+    fn default() -> Self {
         Self {
             lock_graph: Arc::new(TokioMutex::new(HashMap::new())),
             wait_graph: Arc::new(TokioMutex::new(HashMap::new())),
             detection_interval: Duration::from_secs(1),
             last_detection: Arc::new(TokioMutex::new(Instant::now())),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+#[allow(dead_code)]
+impl DeadlockDetector {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     #[allow(dead_code)]
@@ -1118,13 +1125,20 @@ impl DeadlockDetector {
 }
 
 #[cfg(feature = "async")]
-impl SyncPerformanceMonitor {
-    pub fn new() -> Self {
+impl Default for SyncPerformanceMonitor {
+    fn default() -> Self {
         Self {
             metrics: Arc::new(TokioMutex::new(HashMap::new())),
             update_interval: Duration::from_secs(1),
             last_update: Arc::new(TokioMutex::new(Instant::now())),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl SyncPerformanceMonitor {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn add_primitive(&self, name: &str) {
@@ -1155,7 +1169,7 @@ impl SyncPerformanceMonitor {
 
         for (_name, m) in metrics_map.iter_mut() {
             // 指标衰减，模拟时间窗口滑动
-            m.throughput = m.throughput * 0.9;
+            m.throughput *= 0.9;
             m.latency = m.latency.saturating_mul(9) / 10;
             m.contention_rate = (m.contention_rate * 0.9).min(1.0);
             m.utilization = (m.utilization * 0.9).min(1.0);
@@ -1168,14 +1182,21 @@ impl SyncPerformanceMonitor {
 }
 
 #[cfg(feature = "async")]
-impl AdaptiveScheduler {
-    pub fn new() -> Self {
+impl Default for AdaptiveScheduler {
+    fn default() -> Self {
         Self {
             load_history: Arc::new(TokioMutex::new(Vec::new())),
             max_history_size: 100,
             adjustment_threshold: 0.1,
             last_adjustment: Arc::new(TokioMutex::new(Instant::now())),
         }
+    }
+}
+
+#[cfg(feature = "async")]
+impl AdaptiveScheduler {
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub async fn record_load(&self, load: f64) {

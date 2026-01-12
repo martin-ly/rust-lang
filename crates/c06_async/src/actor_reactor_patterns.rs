@@ -302,9 +302,15 @@ pub mod simple_actor_system {
         count: i32,
     }
 
+    impl Default for Counter {
+        fn default() -> Self {
+            Self { count: 0 }
+        }
+    }
+
     impl Counter {
         pub fn new() -> Self {
-            Self { count: 0 }
+            Self::default()
         }
     }
 
@@ -377,9 +383,15 @@ pub mod actix_analysis {
         total: i32,
     }
 
+    impl Default for Calculator {
+        fn default() -> Self {
+            Self { total: 0 }
+        }
+    }
+
     impl Calculator {
         pub fn new() -> Self {
-            Self { total: 0 }
+            Self::default()
         }
     }
 
@@ -503,12 +515,18 @@ pub mod reactor_pattern {
         event_queue: Arc<Mutex<Vec<Event>>>,
     }
 
-    impl SimpleReactor {
-        pub fn new() -> Self {
+    impl Default for SimpleReactor {
+        fn default() -> Self {
             Self {
                 handlers: Arc::new(Mutex::new(HashMap::new())),
                 event_queue: Arc::new(Mutex::new(Vec::new())),
             }
+        }
+    }
+
+    impl SimpleReactor {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         /// 注册事件处理器
@@ -587,11 +605,17 @@ pub mod reactor_pattern {
         count: Arc<Mutex<usize>>,
     }
 
-    impl CounterHandler {
-        pub fn new() -> Self {
+    impl Default for CounterHandler {
+        fn default() -> Self {
             Self {
                 count: Arc::new(Mutex::new(0)),
             }
+        }
+    }
+
+    impl CounterHandler {
+        pub fn new() -> Self {
+            Self::default()
         }
 
         pub fn get_count(&self) -> usize {
@@ -909,4 +933,3 @@ mod tests {
         tokio_reactor_analysis::demo_event_loop().await;
     }
 }
-
