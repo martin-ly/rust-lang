@@ -19,6 +19,7 @@
 #### 1.1 Deny-by-Default Never Type Lints ✅
 
 **官方说明**:
+
 - 为了推进 `!` (never) 类型的稳定化，以下 lint 现在设置为默认拒绝：
   - `never_type_fallback_flowing_into_unsafe` - 默认 deny
   - `dependency_on_unit_never_type_fallback` - 默认 deny
@@ -29,6 +30,7 @@
 #### 1.2 改进的 `unused_must_use` Lint ✅
 
 **官方说明**:
+
 - `unused_must_use` lint 已更新，当忽略返回 `Result<(), UninhabitedType>` 或 `ControlFlow<UninhabitedType, ()>` 的函数返回值时不再警告
 - 这减少了对无法失败的函数的不必要警告
 
@@ -41,6 +43,7 @@
 #### 2.1 展开表默认启用（Unwind Tables with `-Cpanic=abort`）✅
 
 **官方说明**:
+
 - Rust 1.92.0 中，即使使用 `-Cpanic=abort` 选项，展开表也会默认启用
 - 这确保了在这些条件下回溯功能正常工作
 - 如果不需要展开表，可以使用 `-Cforce-unwind-tables=no` 显式禁用
@@ -50,6 +53,7 @@
 #### 2.2 增强的宏导出验证（Enhanced Macro Export Validation）✅
 
 **官方说明**:
+
 - 编译器现在对 `#[macro_export]` 属性的输入执行更严格的验证
 - 某些检查已升级为默认拒绝的 lint
 - 这旨在为内置属性提供更一致和有用的诊断信息
@@ -121,6 +125,7 @@
 #### 4.1 `panic::catch_unwind` 性能优化 ✅
 
 **官方说明**:
+
 - `panic::catch_unwind` 函数已优化，不再在入口处访问线程本地存储
 - 这提高了性能
 

@@ -30,6 +30,23 @@
   - [✅ 对齐结论](#-对齐结论)
     - [总体评估](#总体评估)
     - [对齐统计](#对齐统计)
+  - [🔄 5. 网络最新信息补充（2025-12-24 更新）](#-5-网络最新信息补充2025-12-24-更新)
+    - [5.1 编译器改进](#51-编译器改进)
+      - [5.1.1 展开表默认启用（Unwind Tables with `-Cpanic=abort`）](#511-展开表默认启用unwind-tables-with--cpanicabort)
+      - [5.1.2 增强的宏导出验证（Enhanced Macro Export Validation）](#512-增强的宏导出验证enhanced-macro-export-validation)
+    - [5.2 语言增强](#52-语言增强)
+      - [5.2.1 Deny-by-Default Never Type Lints](#521-deny-by-default-never-type-lints)
+      - [5.2.2 改进的 `unused_must_use` Lint](#522-改进的-unused_must_use-lint)
+    - [5.3 新增稳定 API](#53-新增稳定-api)
+      - [5.3.1 `RwLockWriteGuard::downgrade`](#531-rwlockwriteguarddowngrade)
+      - [5.3.2 `btree_map::Entry::insert_entry` 和 `btree_map::VacantEntry::insert_entry`](#532-btree_mapentryinsert_entry-和-btree_mapvacantentryinsert_entry)
+      - [5.3.3 `Extend` 实现用于 `proc_macro::TokenStream`](#533-extend-实现用于-proc_macrotokenstream)
+      - [5.3.4 `rotate_left` 和 `rotate_right` 在 const 上下文中稳定](#534-rotate_left-和-rotate_right-在-const-上下文中稳定)
+    - [5.4 性能优化](#54-性能优化)
+      - [5.4.1 `panic::catch_unwind` 性能优化](#541-paniccatch_unwind-性能优化)
+    - [5.5 Cargo 文档更新](#55-cargo-文档更新)
+      - [5.5.1 "Optimizing Build Performance" 章节](#551-optimizing-build-performance-章节)
+  - [📊 6. 完整特性对比表（更新版）](#-6-完整特性对比表更新版)
 
 ---
 
@@ -223,6 +240,7 @@ cargo test --workspace
 #### 5.1.1 展开表默认启用（Unwind Tables with `-Cpanic=abort`）
 
 **网络最新信息**:
+
 - Rust 1.92.0 中，即使使用 `-Cpanic=abort` 选项，展开表也会默认启用
 - 这确保了在这些条件下回溯功能正常工作
 - 如果不需要展开表，可以使用 `-Cforce-unwind-tables=no` 显式禁用
@@ -234,6 +252,7 @@ cargo test --workspace
 #### 5.1.2 增强的宏导出验证（Enhanced Macro Export Validation）
 
 **网络最新信息**:
+
 - 编译器现在对 `#[macro_export]` 属性的输入执行更严格的验证
 - 某些检查已升级为默认拒绝的 lint
 - 这旨在为内置属性提供更一致和有用的诊断信息
@@ -247,6 +266,7 @@ cargo test --workspace
 #### 5.2.1 Deny-by-Default Never Type Lints
 
 **网络最新信息**:
+
 - 为了推进 `!` (never) 类型的稳定化，以下 lint 现在设置为默认拒绝：
   - `never_type_fallback_flowing_into_unsafe` - 默认 deny
   - `dependency_on_unit_never_type_fallback` - 默认 deny
@@ -259,6 +279,7 @@ cargo test --workspace
 #### 5.2.2 改进的 `unused_must_use` Lint
 
 **网络最新信息**:
+
 - `unused_must_use` lint 已更新，当忽略返回 `Result<(), UninhabitedType>` 或 `ControlFlow<UninhabitedType, ()>` 的函数返回值时不再警告
 - 这减少了对无法失败的函数的不必要警告
 
@@ -271,6 +292,7 @@ cargo test --workspace
 #### 5.3.1 `RwLockWriteGuard::downgrade`
 
 **网络最新信息**:
+
 - `RwLockWriteGuard::downgrade` 方法已稳定
 - 允许将写锁降级为读锁
 
@@ -281,6 +303,7 @@ cargo test --workspace
 #### 5.3.2 `btree_map::Entry::insert_entry` 和 `btree_map::VacantEntry::insert_entry`
 
 **网络最新信息**:
+
 - `btree_map::Entry::insert_entry` 和 `btree_map::VacantEntry::insert_entry` 已稳定
 - 提供更高效的 BTreeMap 插入操作
 
@@ -291,6 +314,7 @@ cargo test --workspace
 #### 5.3.3 `Extend` 实现用于 `proc_macro::TokenStream`
 
 **网络最新信息**:
+
 - `Extend` trait 的实现已稳定，用于 `proc_macro::TokenStream` 与以下类型的组合：
   - `proc_macro::Group`
   - `proc_macro::Literal`
@@ -304,6 +328,7 @@ cargo test --workspace
 #### 5.3.4 `rotate_left` 和 `rotate_right` 在 const 上下文中稳定
 
 **网络最新信息**:
+
 - `<[_]>::rotate_left` 和 `<[_]>::rotate_right` 方法现在在 const 上下文中稳定
 
 **项目实现**: ✅ 已在代码中实现
@@ -315,6 +340,7 @@ cargo test --workspace
 #### 5.4.1 `panic::catch_unwind` 性能优化
 
 **网络最新信息**:
+
 - `panic::catch_unwind` 函数已优化，不再在入口处访问线程本地存储
 - 这提高了性能
 
@@ -327,6 +353,7 @@ cargo test --workspace
 #### 5.5.1 "Optimizing Build Performance" 章节
 
 **网络最新信息**:
+
 - Cargo 书中新增了"Optimizing Build Performance"章节
 - 提供了改进构建时间的指导
 

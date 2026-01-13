@@ -191,7 +191,7 @@ impl TypeValidator {
             stats: Arc::new(Mutex::new(ValidationStats::default())),
         }
     }
-    
+
     /// 添加验证规则
     pub fn add_validation_rule<F>(&mut self, name: String, description: String, validator: F)
     where
@@ -203,25 +203,25 @@ impl TypeValidator {
             validator: Box::new(validator),
         });
     }
-    
+
     /// 验证类型
     pub fn validate_type(&self, type_: &Type) -> Vec<ValidationResult> {
         let env = self.type_env.lock().unwrap();
         let mut results = Vec::new();
-        
+
         for rule in &self.validation_rules {
             let result = (rule.validator)(type_, &env);
             results.push(result);
         }
-        
+
         // 更新统计
         {
             let mut stats = self.stats.lock().unwrap();
             stats.total_validations += 1;
-            
+
             let type_name = self.get_type_name(type_);
             *stats.validations_by_type.entry(type_name).or_insert(0) += 1;
-            
+
             for result in &results {
                 if result.valid {
                     stats.successful_validations += 1;
@@ -231,15 +231,15 @@ impl TypeValidator {
                 *stats.validations_by_severity.entry(result.severity).or_insert(0) += 1;
             }
         }
-        
+
         results
     }
-    
+
     /// 验证类型兼容性
     #[allow(unused_variables)]
     pub fn validate_compatibility(&self, from: &Type, to: &Type) -> ValidationResult {
         let env = self.type_env.lock().unwrap();
-        
+
         if self.types_equal(from, to) {
             return ValidationResult {
                 valid: true,
@@ -248,7 +248,7 @@ impl TypeValidator {
                 severity: ValidationSeverity::Info,
             };
         }
-        
+
         if self.is_subtype(from, to) {
             return ValidationResult {
                 valid: true,
@@ -257,10 +257,10 @@ impl TypeValidator {
                 severity: ValidationSeverity::Info,
             };
         }
-        
+
         ValidationResult {
             valid: false,
-            message: format!("Type {} is not compatible with {}", 
+            message: format!("Type {} is not compatible with {}",
                            self.format_type(from), self.format_type(to)),
             suggestions: vec![
                 "Consider using explicit type conversion".to_string(),
@@ -269,12 +269,12 @@ impl TypeValidator {
             severity: ValidationSeverity::Error,
         }
     }
-    
+
     /// 验证生命周期
     #[allow(unused_variables)]
     pub fn validate_lifetime(&self, lifetime: &LifetimeType) -> ValidationResult {
         let env = self.type_env.lock().unwrap();
-        
+
         // 检查生命周期是否已定义
         if !env.lifetime_definitions.contains_key(&lifetime.name) {
             return ValidationResult {
@@ -287,7 +287,7 @@ impl TypeValidator {
                 severity: ValidationSeverity::Error,
             };
         }
-        
+
         // 检查生命周期约束
         for constraint in &lifetime.constraints {
             if !self.validate_lifetime_constraint(&LifetimeConstraint::Outlives(constraint.clone(), constraint.clone()), &env) {
@@ -302,7 +302,7 @@ impl TypeValidator {
                 };
             }
         }
-        
+
         ValidationResult {
             valid: true,
             message: "Lifetime is valid".to_string(),
@@ -310,11 +310,11 @@ impl TypeValidator {
             severity: ValidationSeverity::Info,
         }
     }
-    
+
     /// 验证泛型类型
     pub fn validate_generic_type(&self, generic: &GenericType) -> ValidationResult {
         let env = self.type_env.lock().unwrap();
-        
+
         // 检查泛型参数数量
         if generic.parameters.is_empty() {
             return ValidationResult {
@@ -327,7 +327,7 @@ impl TypeValidator {
                 severity: ValidationSeverity::Warning,
             };
         }
-        
+
         // 验证每个参数
         for (i, param) in generic.parameters.iter().enumerate() {
             let param_results = self.validate_type(param);
@@ -342,7 +342,7 @@ impl TypeValidator {
                 }
             }
         }
-        
+
         // 验证约束
         for constraint in &generic.constraints {
             if !self.validate_constraint(constraint, &env) {
@@ -357,7 +357,7 @@ impl TypeValidator {
                 };
             }
         }
-        
+
         ValidationResult {
             valid: true,
             message: "Generic type is valid".to_string(),
@@ -365,30 +365,30 @@ impl TypeValidator {
             severity: ValidationSeverity::Info,
         }
     }
-    
+
     /// 添加类型定义
     pub fn add_type_definition(&self, name: String, type_: Type) {
         let mut env = self.type_env.lock().unwrap();
         env.type_definitions.insert(name, type_);
     }
-    
+
     /// 添加变量类型
     pub fn add_variable_type(&self, name: String, type_: Type) {
         let mut env = self.type_env.lock().unwrap();
         env.variable_types.insert(name, type_);
     }
-    
+
     /// 添加生命周期定义
     pub fn add_lifetime_definition(&self, name: String, lifetime: LifetimeType) {
         let mut env = self.type_env.lock().unwrap();
         env.lifetime_definitions.insert(name, lifetime);
     }
-    
+
     /// 获取验证统计
     pub fn get_stats(&self) -> ValidationStats {
         self.stats.lock().unwrap().clone()
     }
-    
+
     /// 类型相等检查
     fn types_equal(&self, a: &Type, b: &Type) -> bool {
         match (a, b) {
@@ -401,18 +401,18 @@ impl TypeValidator {
             _ => false,
         }
     }
-    
+
     /// 子类型检查
     fn is_subtype(&self, from: &Type, to: &Type) -> bool {
         // 简化实现，实际中需要更复杂的子类型关系
-        match (from, to) {
-            (Type::Primitive(PrimitiveType::I8), Type::Primitive(PrimitiveType::I32)) => true,
-            (Type::Primitive(PrimitiveType::I16), Type::Primitive(PrimitiveType::I32)) => true,
-            (Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::I64)) => true,
-            _ => false,
-        }
+        matches!(
+            (from, to),
+            (Type::Primitive(PrimitiveType::I8), Type::Primitive(PrimitiveType::I32))
+                | (Type::Primitive(PrimitiveType::I16), Type::Primitive(PrimitiveType::I32))
+                | (Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::I64))
+        )
     }
-    
+
     /// 验证生命周期约束
     fn validate_lifetime_constraint(&self, constraint: &LifetimeConstraint, _env: &TypeEnvironment) -> bool {
         // 简化实现
@@ -421,7 +421,7 @@ impl TypeValidator {
             LifetimeConstraint::Equals(_, _) => true,
         }
     }
-    
+
     /// 验证约束
     fn validate_constraint(&self, constraint: &TypeConstraint, _env: &TypeEnvironment) -> bool {
         // 简化实现
@@ -432,7 +432,7 @@ impl TypeValidator {
             TypeConstraint::Subtype(_, _) => true,
         }
     }
-    
+
     /// 获取类型名称
     fn get_type_name(&self, type_: &Type) -> String {
         match type_ {
@@ -445,15 +445,15 @@ impl TypeValidator {
             Type::Unknown => "Unknown".to_string(),
         }
     }
-    
+
     /// 格式化类型
     fn format_type(&self, type_: &Type) -> String {
         match type_ {
             Type::Primitive(p) => format!("{:?}", p),
             Type::Composite(c) => format!("{:?}", c),
-            Type::Generic(g) => format!("{}<{}>", g.name, 
+            Type::Generic(g) => format!("{}<{}>", g.name,
                 g.parameters.iter().map(|p| self.format_type(p)).collect::<Vec<_>>().join(", ")),
-            Type::Function(f) => format!("fn({}) -> {}", 
+            Type::Function(f) => format!("fn({}) -> {}",
                 f.parameters.iter().map(|p| self.format_type(p)).collect::<Vec<_>>().join(", "),
                 self.format_type(&f.return_type)),
             Type::Reference(r) => {
@@ -515,7 +515,7 @@ impl TypeInferencer {
             stats: Arc::new(Mutex::new(InferenceStats::default())),
         }
     }
-    
+
     /// 推断表达式类型
     pub fn infer_expression_type(&self, expression: &Expression) -> Result<Type, String> {
         match expression {
@@ -535,7 +535,7 @@ impl TypeInferencer {
             },
         }
     }
-    
+
     /// 推断字面量类型
     fn infer_literal_type(&self, literal: &Literal) -> Type {
         match literal {
@@ -546,7 +546,7 @@ impl TypeInferencer {
             Literal::Char(_) => Type::Primitive(PrimitiveType::Char),
         }
     }
-    
+
     /// 推断变量类型
     fn infer_variable_type(&self, name: &str) -> Result<Type, String> {
         let env = self.type_env.lock().unwrap();
@@ -554,12 +554,12 @@ impl TypeInferencer {
             .cloned()
             .ok_or_else(|| format!("Variable '{}' is not defined", name))
     }
-    
+
     /// 推断二元操作类型
     fn infer_binary_operation_type(&self, left: &Expression, operator: &BinaryOperator, right: &Expression) -> Result<Type, String> {
         let left_type = self.infer_expression_type(left)?;
         let right_type = self.infer_expression_type(right)?;
-        
+
         match operator {
             BinaryOperator::Add | BinaryOperator::Sub | BinaryOperator::Mul | BinaryOperator::Div => {
                 self.infer_arithmetic_type(&left_type, &right_type)
@@ -577,11 +577,11 @@ impl TypeInferencer {
             },
         }
     }
-    
+
     /// 推断一元操作类型
     fn infer_unary_operation_type(&self, operator: &UnaryOperator, operand: &Expression) -> Result<Type, String> {
         let operand_type = self.infer_expression_type(operand)?;
-        
+
         match operator {
             UnaryOperator::Not => {
                 if self.types_compatible(&operand_type, &Type::Primitive(PrimitiveType::Bool)) {
@@ -599,19 +599,19 @@ impl TypeInferencer {
             },
         }
     }
-    
+
     /// 推断函数调用类型
     fn infer_function_call_type(&self, name: &str, arguments: &[Expression]) -> Result<Type, String> {
         let env = self.type_env.lock().unwrap();
-        
+
         if let Some(function_type) = env.type_definitions.get(name) {
             if let Type::Function(func_type) = function_type {
                 // 验证参数数量
                 if arguments.len() != func_type.parameters.len() {
-                    return Err(format!("Function '{}' expects {} arguments, got {}", 
+                    return Err(format!("Function '{}' expects {} arguments, got {}",
                                      name, func_type.parameters.len(), arguments.len()));
                 }
-                
+
                 // 验证参数类型
                 for (i, (arg, expected_type)) in arguments.iter().zip(func_type.parameters.iter()).enumerate() {
                     let arg_type = self.infer_expression_type(arg)?;
@@ -619,7 +619,7 @@ impl TypeInferencer {
                         return Err(format!("Argument {} of function '{}' has incompatible type", i, name));
                     }
                 }
-                
+
                 Ok(*func_type.return_type.clone())
             } else {
                 Err(format!("'{}' is not a function", name))
@@ -628,24 +628,24 @@ impl TypeInferencer {
             Err(format!("Function '{}' is not defined", name))
         }
     }
-    
+
     /// 推断 if 表达式类型
     fn infer_if_expression_type(&self, condition: &Expression, then_branch: &Expression, else_branch: &Expression) -> Result<Type, String> {
         let condition_type = self.infer_expression_type(condition)?;
         if !self.types_compatible(&condition_type, &Type::Primitive(PrimitiveType::Bool)) {
             return Err("If condition must be boolean".to_string());
         }
-        
+
         let then_type = self.infer_expression_type(then_branch)?;
         let else_type = self.infer_expression_type(else_branch)?;
-        
+
         if self.types_compatible(&then_type, &else_type) {
             Ok(then_type)
         } else {
             Err("If branches must have compatible types".to_string())
         }
     }
-    
+
     /// 推断算术类型
     fn infer_arithmetic_type(&self, left: &Type, right: &Type) -> Result<Type, String> {
         match (left, right) {
@@ -664,38 +664,38 @@ impl TypeInferencer {
             _ => Err("Arithmetic operations require numeric types".to_string()),
         }
     }
-    
+
     /// 检查类型兼容性
     fn types_compatible(&self, from: &Type, to: &Type) -> bool {
         if from == to {
             return true;
         }
-        
+
         // 简化实现
-        match (from, to) {
-            (Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::F64)) => true,
-            (Type::Primitive(PrimitiveType::F64), Type::Primitive(PrimitiveType::I32)) => true,
-            _ => false,
-        }
+        matches!(
+            (from, to),
+            (Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::F64))
+                | (Type::Primitive(PrimitiveType::F64), Type::Primitive(PrimitiveType::I32))
+        )
     }
-    
+
     /// 检查是否为数值类型
     fn is_numeric_type(&self, type_: &Type) -> bool {
         matches!(type_, Type::Primitive(PrimitiveType::I32 | PrimitiveType::F64))
     }
-    
+
     /// 添加类型定义
     pub fn add_type_definition(&self, name: String, type_: Type) {
         let mut env = self.type_env.lock().unwrap();
         env.type_definitions.insert(name, type_);
     }
-    
+
     /// 添加变量类型
     pub fn add_variable_type(&self, name: String, type_: Type) {
         let mut env = self.type_env.lock().unwrap();
         env.variable_types.insert(name, type_);
     }
-    
+
     /// 获取推断统计
     pub fn get_stats(&self) -> InferenceStats {
         self.stats.lock().unwrap().clone()
@@ -762,11 +762,11 @@ pub enum UnaryOperator {
 #[allow(unused_variables)]
 pub fn demonstrate_type_system_validation() {
     println!("=== 类型系统验证演示 ===\n");
-    
+
     // 1. 类型验证器演示
     println!("1. 类型验证器演示:");
     let mut validator = TypeValidator::new();
-    
+
     // 添加验证规则
     validator.add_validation_rule(
         "primitive_type_validation".to_string(),
@@ -788,7 +788,7 @@ pub fn demonstrate_type_system_validation() {
             }
         },
     );
-    
+
     validator.add_validation_rule(
         "generic_type_validation".to_string(),
         "验证泛型类型".to_string(),
@@ -820,7 +820,7 @@ pub fn demonstrate_type_system_validation() {
             }
         },
     );
-    
+
     // 测试各种类型
     let test_types = vec![
         ("整数类型", Type::Primitive(PrimitiveType::I32)),
@@ -837,7 +837,7 @@ pub fn demonstrate_type_system_validation() {
             constraints: Vec::new(),
         })),
     ];
-    
+
     for (type_name, type_) in test_types {
         println!("  验证 {}:", type_name);
         let results = validator.validate_type(&type_);
@@ -852,7 +852,7 @@ pub fn demonstrate_type_system_validation() {
         }
         println!();
     }
-    
+
     // 2. 类型兼容性验证演示
     println!("2. 类型兼容性验证演示:");
     let compatibility_tests = vec![
@@ -861,28 +861,28 @@ pub fn demonstrate_type_system_validation() {
         ("f64 -> i32", Type::Primitive(PrimitiveType::F64), Type::Primitive(PrimitiveType::I32)),
         ("bool -> i32", Type::Primitive(PrimitiveType::Bool), Type::Primitive(PrimitiveType::I32)),
     ];
-    
+
     for (test_name, from, to) in compatibility_tests {
         let result = validator.validate_compatibility(&from, &to);
         let status = if result.valid { "✅" } else { "❌" };
         println!("  {} {}: {}", status, test_name, result.message);
     }
     println!();
-    
+
     // 3. 生命周期验证演示
     println!("3. 生命周期验证演示:");
     let lifetime = LifetimeType {
         name: "a".to_string(),
         constraints: Vec::new(),
     };
-    
+
     validator.add_lifetime_definition("a".to_string(), lifetime.clone());
-    
+
     let result = validator.validate_lifetime(&lifetime);
     let status = if result.valid { "✅" } else { "❌" };
     println!("  {} 生命周期验证: {}", status, result.message);
     println!();
-    
+
     // 4. 泛型类型验证演示
     println!("4. 泛型类型验证演示:");
     let generic_type = GenericType {
@@ -893,16 +893,16 @@ pub fn demonstrate_type_system_validation() {
         ],
         constraints: Vec::new(),
     };
-    
+
     let result = validator.validate_generic_type(&generic_type);
     let status = if result.valid { "✅" } else { "❌" };
     println!("  {} 泛型类型验证: {}", status, result.message);
     println!();
-    
+
     // 5. 类型推断演示
     println!("5. 类型推断演示:");
     let inferencer = TypeInferencer::new();
-    
+
     // 添加函数定义
     let add_function = Type::Function(FunctionType {
         parameters: vec![
@@ -912,9 +912,9 @@ pub fn demonstrate_type_system_validation() {
         return_type: Box::new(Type::Primitive(PrimitiveType::I32)),
         lifetime_params: Vec::new(),
     });
-    
+
     inferencer.add_type_definition("add".to_string(), add_function);
-    
+
     // 测试表达式推断
     let expressions = vec![
         ("字面量", Expression::Literal(Literal::Integer(42))),
@@ -931,7 +931,7 @@ pub fn demonstrate_type_system_validation() {
             ],
         }),
     ];
-    
+
     for (expr_name, expr) in expressions {
         match inferencer.infer_expression_type(&expr) {
             Ok(type_) => println!("  ✅ {} 推断类型: {}", expr_name, validator.format_type(&type_)),
@@ -939,7 +939,7 @@ pub fn demonstrate_type_system_validation() {
         }
     }
     println!();
-    
+
     // 6. 验证统计演示
     println!("6. 验证统计演示:");
     let stats = validator.get_stats();
@@ -948,10 +948,10 @@ pub fn demonstrate_type_system_validation() {
     println!("  失败验证: {}", stats.failed_validations);
     println!("  按类型分布: {:?}", stats.validations_by_type);
     println!("  按严重程度分布: {:?}", stats.validations_by_severity);
-    
+
     let inference_stats = inferencer.get_stats();
     println!("  推断统计: {:?}", inference_stats);
-    
+
     println!("\n=== 类型系统验证演示完成 ===");
 }
 
@@ -960,7 +960,7 @@ pub fn demonstrate_type_system_validation() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_type_validation() {
         let validator = TypeValidator::new();
@@ -969,7 +969,7 @@ mod tests {
         // 基础类型验证应该成功（无错误），所以结果可能为空
         assert!(results.is_empty(), "基础类型验证应该没有错误");
     }
-    
+
     #[test]
     fn test_type_compatibility() {
         let validator = TypeValidator::new();
@@ -978,7 +978,7 @@ mod tests {
         let result = validator.validate_compatibility(&from, &to);
         assert!(result.valid);
     }
-    
+
     #[test]
     fn test_lifetime_validation() {
         let validator = TypeValidator::new();
@@ -990,7 +990,7 @@ mod tests {
         let result = validator.validate_lifetime(&lifetime);
         assert!(result.valid);
     }
-    
+
     #[test]
     fn test_type_inference() {
         let inferencer = TypeInferencer::new();

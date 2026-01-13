@@ -319,7 +319,7 @@ pub fn max_area(height: Vec<i32>) -> i32 {
 /// ## 复杂度
 /// - 时间复杂度: O(n)
 /// - 空间复杂度: O(1)
-pub fn remove_duplicates(nums: &mut Vec<i32>) -> usize {
+pub fn remove_duplicates(nums: &mut [i32]) -> usize {
     if nums.is_empty() {
         return 0;
     }
@@ -349,7 +349,7 @@ pub fn remove_duplicates(nums: &mut Vec<i32>) -> usize {
 /// ## 复杂度
 /// - 时间复杂度: O(n)
 /// - 空间复杂度: O(1)
-pub fn remove_element(nums: &mut Vec<i32>, val: i32) -> usize {
+pub fn remove_element(nums: &mut [i32], val: i32) -> usize {
     let mut write_pos = 0;
 
     // Rust 1.91 JIT 优化：单次遍历

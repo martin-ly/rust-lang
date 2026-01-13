@@ -436,4 +436,3 @@ mod tests {
         assert!(http.contains("test"));
     }
 }
-

@@ -464,4 +464,3 @@ mod tests {
         assert_eq!(config.output_file, "test.txt");
     }
 }
-

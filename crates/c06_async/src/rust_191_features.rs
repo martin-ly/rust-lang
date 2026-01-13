@@ -686,7 +686,7 @@ pub mod async_cache_system {
                 let now = Instant::now();
                 let remove_key = cache
                     .iter()
-                    .find(|(_, entry)| entry.expires_at.map_or(false, |exp| exp < now))
+                    .find(|(_, entry)| entry.expires_at.is_some_and(|exp| exp < now))
                     .map(|(k, _)| k.clone())
                     .or_else(|| cache.keys().next().cloned());
 
@@ -727,7 +727,7 @@ pub mod async_cache_system {
                 .filter(|(_, entry)| {
                     entry
                         .expires_at
-                        .map_or(false, |expires| expires < now)
+                        .is_some_and(|expires| expires < now)
                 })
                 .map(|(k, _)| k.clone())
                 .collect();

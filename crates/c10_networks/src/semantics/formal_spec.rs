@@ -697,7 +697,7 @@ impl HttpFormalSpec {
                 false
             }
             HttpRuleCondition::HeaderCondition { name, value } => {
-                headers.get(name).map_or(false, |header_value| header_value.contains(value))
+                headers.get(name).is_some_and(|header_value| header_value.contains(value))
             }
             HttpRuleCondition::CompoundCondition { operator, conditions } => {
                 match operator {

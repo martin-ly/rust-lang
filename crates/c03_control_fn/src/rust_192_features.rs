@@ -260,6 +260,7 @@ pub fn demonstrate_rust_192_control_flow() {
 // ==================== 6. 高级控制流特性 ====================
 
 /// 控制流分析器：用于分析函数的控制流路径
+#[derive(Default)]
 pub struct ControlFlowAnalyzer {
     branch_count: usize,
     loop_count: usize,
@@ -307,11 +308,6 @@ impl ControlFlowAnalyzer {
     }
 }
 
-impl Default for ControlFlowAnalyzer {
-    fn default() -> Self {
-        Self::new()
-    }
-}
 
 /// 控制流优化器：提供控制流优化建议
 pub struct ControlFlowOptimizer;
@@ -442,6 +438,7 @@ impl ControlFlowCombinator {
 }
 
 /// 控制流性能分析器：分析控制流性能
+#[derive(Default)]
 pub struct ControlFlowProfiler {
     branch_times: Vec<u128>,
     loop_times: Vec<u128>,
@@ -525,11 +522,6 @@ impl ControlFlowProfiler {
     }
 }
 
-impl Default for ControlFlowProfiler {
-    fn default() -> Self {
-        Self::new()
-    }
-}
 
 /// 控制流验证器：验证控制流的正确性
 pub struct ControlFlowValidator;
@@ -643,8 +635,9 @@ pub mod async_control_flow {
 // ==================== 9. 控制流状态机 ====================
 
 /// 控制流状态机：用于管理复杂的状态转换
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum ControlFlowState {
+    #[default]
     Initial,
     Processing,
     Validating,
@@ -653,6 +646,7 @@ pub enum ControlFlowState {
 }
 
 /// 控制流状态机实现
+#[derive(Default)]
 pub struct ControlFlowStateMachine {
     current_state: ControlFlowState,
     transition_count: usize,
@@ -669,15 +663,15 @@ impl ControlFlowStateMachine {
     #[track_caller]
     pub fn transition_to(&mut self, new_state: ControlFlowState) -> Result<(), LocatedError> {
         // 状态转换验证
-        let valid = match (self.current_state, new_state) {
-            (ControlFlowState::Initial, ControlFlowState::Processing) => true,
-            (ControlFlowState::Processing, ControlFlowState::Validating) => true,
-            (ControlFlowState::Validating, ControlFlowState::Completed) => true,
-            (ControlFlowState::Validating, ControlFlowState::Error) => true,
-            (ControlFlowState::Error, ControlFlowState::Initial) => true,
-            (ControlFlowState::Completed, ControlFlowState::Initial) => true,
-            _ => false,
-        };
+        let valid = matches!(
+            (self.current_state, new_state),
+            (ControlFlowState::Initial, ControlFlowState::Processing)
+                | (ControlFlowState::Processing, ControlFlowState::Validating)
+                | (ControlFlowState::Validating, ControlFlowState::Completed)
+                | (ControlFlowState::Validating, ControlFlowState::Error)
+                | (ControlFlowState::Error, ControlFlowState::Initial)
+                | (ControlFlowState::Completed, ControlFlowState::Initial)
+        );
 
         if valid {
             self.current_state = new_state;
@@ -724,11 +718,6 @@ impl ControlFlowStateMachine {
     }
 }
 
-impl Default for ControlFlowStateMachine {
-    fn default() -> Self {
-        Self::new()
-    }
-}
 
 // ==================== 10. 迭代器控制流扩展 ====================
 
@@ -820,6 +809,7 @@ pub mod parallel_control_flow {
     use std::thread;
 
     /// 并行控制流处理结果
+    #[derive(Default)]
     pub struct ParallelControlFlowResult<T> {
         results: Vec<Result<T, LocatedError>>,
         errors: Vec<LocatedError>,
@@ -873,11 +863,6 @@ pub mod parallel_control_flow {
         }
     }
 
-    impl<T> Default for ParallelControlFlowResult<T> {
-        fn default() -> Self {
-            Self::new()
-        }
-    }
 
     /// 并行处理控制流分支
     pub fn parallel_control_flow_branch(
@@ -914,6 +899,7 @@ pub mod parallel_control_flow {
 
 /// 控制流可视化信息
 #[derive(Debug, Clone)]
+#[derive(Default)]
 pub struct ControlFlowVisualization {
     pub branches: Vec<String>,
     pub loops: Vec<String>,
@@ -986,11 +972,6 @@ impl ControlFlowVisualization {
     }
 }
 
-impl Default for ControlFlowVisualization {
-    fn default() -> Self {
-        Self::new()
-    }
-}
 
 // ==================== 13. 实用工具函数 ====================
 

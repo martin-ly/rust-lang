@@ -188,7 +188,14 @@ mod tests {
 
     #[test]
     fn test_async_demo() {
-        demonstrate_async_with_190_features();
+        #[cfg(feature = "tokio")]
+        {
+            demonstrate_async_with_190_features();
+        }
+        #[cfg(not(feature = "tokio"))]
+        {
+            println!("  异步功能需要启用tokio特性");
+        }
     }
 
     #[test]

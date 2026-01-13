@@ -209,19 +209,12 @@ impl ErrorHandling190 {
 /// 利用Rust 1.90新的标准库特性
 ///
 /// 在Rust 1.90中，标准库得到了许多新特性
+#[derive(Default)]
 pub struct StandardLibrary190 {
     data: HashMap<String, Vec<u8>>,
     cache: std::collections::BTreeMap<String, String>,
 }
 
-impl Default for StandardLibrary190 {
-    fn default() -> Self {
-        Self {
-            data: HashMap::new(),
-            cache: std::collections::BTreeMap::new(),
-        }
-    }
-}
 
 impl StandardLibrary190 {
     pub fn new() -> Self {

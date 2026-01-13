@@ -356,6 +356,7 @@ impl AsyncProcessor for CompleteAdvancedDataProcessor {
 
 /// 异步处理器管理器
 #[allow(dead_code)]
+#[derive(Default)]
 pub struct AsyncProcessorManager {
     processors: Vec<Box<dyn AsyncProcessor + Send + Sync>>,
 }
@@ -366,13 +367,6 @@ pub struct ProcessorWrapper {
     processor: Box<dyn AsyncProcessor + Send + Sync>,
 }
 
-impl Default for AsyncProcessorManager {
-    fn default() -> Self {
-        Self {
-            processors: Vec::new(),
-        }
-    }
-}
 
 impl AsyncProcessorManager {
     pub fn new() -> Self {
@@ -434,6 +428,7 @@ pub enum CompleteAsyncResource {
 
 /// 完整异步资源管理器
 #[allow(dead_code)]
+#[derive(Default)]
 pub struct CompleteAsyncResourceManager {
     resources: HashMap<String, CompleteAsyncResource>,
     cleanup_tasks: Vec<tokio::task::JoinHandle<()>>,
@@ -577,14 +572,6 @@ impl FileResource {
 }
 
 
-impl Default for CompleteAsyncResourceManager {
-    fn default() -> Self {
-        Self {
-            resources: HashMap::new(),
-            cleanup_tasks: Vec::new(),
-        }
-    }
-}
 
 #[allow(dead_code)]
 impl CompleteAsyncResourceManager {

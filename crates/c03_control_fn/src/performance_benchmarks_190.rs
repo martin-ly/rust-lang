@@ -223,17 +223,11 @@ impl PerformanceBenchmark {
 }
 
 /// 异步性能测试
+#[derive(Default)]
 pub struct AsyncPerformanceTests {
     benchmark: PerformanceBenchmark,
 }
 
-impl Default for AsyncPerformanceTests {
-    fn default() -> Self {
-        Self {
-            benchmark: PerformanceBenchmark::default(),
-        }
-    }
-}
 
 impl AsyncPerformanceTests {
     pub fn new() -> Self {

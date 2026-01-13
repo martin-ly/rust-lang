@@ -1,5 +1,5 @@
 //! 模型检查模块
-//! 
+//!
 //! 本模块提供了基于TLA+和Alloy的模型检查功能，包括：
 //! - 状态空间探索
 //! - 属性验证
@@ -24,7 +24,7 @@ pub struct ModelChecker {
 }
 
 /// 模型检查配置
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct ModelCheckingConfig {
     /// 最大状态数
     pub max_states: usize,
@@ -38,17 +38,6 @@ pub struct ModelCheckingConfig {
     pub verbose: bool,
 }
 
-impl Default for ModelCheckingConfig {
-    fn default() -> Self {
-        Self {
-            max_states: 10000,
-            timeout: Duration::from_secs(300),
-            parallel_exploration: true,
-            state_compression: true,
-            verbose: false,
-        }
-    }
-}
 
 /// 模型检查结果
 #[derive(Debug, Clone)]
@@ -120,30 +109,30 @@ impl ModelChecker {
             property_checkers: Vec::new(),
         }
     }
-    
+
     /// 添加属性检查器
     pub fn add_property_checker(&mut self, checker: Box<dyn PropertyChecker>) {
         self.property_checkers.push(checker);
     }
-    
+
     /// 添加状态转换
     pub fn add_transition(&mut self, transition: StateTransition) {
         self.transitions.push(transition);
     }
-    
+
     /// 执行模型检查
     pub fn check_model(&mut self, initial_state: NetworkState) -> NetworkResult<ModelCheckingResult> {
         let start_time = Instant::now();
-        
+
         // 清空状态空间
         self.state_space.clear();
-        
+
         // 添加初始状态
         self.state_space.insert(initial_state.id.clone(), initial_state.clone());
-        
+
         // 执行状态空间探索
         let exploration_result = self.explore_state_space(initial_state)?;
-        
+
         // 构建结果
         let result = ModelCheckingResult {
             success: exploration_result.violations.is_empty(),
@@ -154,10 +143,10 @@ impl ModelChecker {
             memory_usage: self.estimate_memory_usage(),
             coverage: exploration_result.coverage,
         };
-        
+
         Ok(result)
     }
-    
+
     /// 探索状态空间
     fn explore_state_space(&mut self, initial_state: NetworkState) -> NetworkResult<ExplorationResult> {
         let start_time = Instant::now();
@@ -165,13 +154,13 @@ impl ModelChecker {
         let mut queue = VecDeque::new();
         let mut violations = Vec::new();
         let mut counter_examples = Vec::new();
-        
+
         // 初始化
         queue.push_back(initial_state.id.clone());
         visited.insert(initial_state.id.clone());
-        
+
         let _states_processed = 0;
-        
+
         while let Some(current_state_id) = queue.pop_front() {
             // 检查超时
             if start_time.elapsed() > self.config.timeout {
@@ -184,7 +173,7 @@ impl ModelChecker {
                     coverage: self.calculate_coverage(&visited),
                 });
             }
-            
+
             // 检查状态数限制
             if visited.len() > self.config.max_states {
                 return Ok(ExplorationResult {
@@ -196,15 +185,15 @@ impl ModelChecker {
                     coverage: self.calculate_coverage(&visited),
                 });
             }
-            
+
             let current_state = self.state_space.get(&current_state_id)
                 .ok_or_else(|| crate::error::NetworkError::InvalidState(current_state_id.clone()))?;
-            
+
             // 检查属性
             for checker in &self.property_checkers {
                 if let Some(violation) = checker.check_property(current_state) {
                     violations.push(violation.clone());
-                    
+
                     // 生成反例
                     if let Some(counter_example) = self.generate_counter_example(
                         current_state,
@@ -215,7 +204,7 @@ impl ModelChecker {
                     }
                 }
             }
-            
+
             // 探索后继状态
             let current_state_clone = current_state.clone();
             let transitions_to_apply = self.transitions.clone();
@@ -230,10 +219,10 @@ impl ModelChecker {
                     }
                 }
             }
-            
+
             // states_processed += 1;
         }
-        
+
         Ok(ExplorationResult {
             states_explored: visited.len(),
             violations,
@@ -243,22 +232,22 @@ impl ModelChecker {
             coverage: self.calculate_coverage(&visited),
         })
     }
-    
+
     /// 应用状态转换
     fn apply_transition(&self, state: &NetworkState, transition: &StateTransition) -> Option<NetworkState> {
         // 检查守卫条件
         if !self.evaluate_guard(&transition.guard, state) {
             return None;
         }
-        
+
         // 应用动作
         let mut new_state = state.clone();
         self.apply_action(&transition.action, &mut new_state);
         new_state.id = transition.to.clone();
-        
+
         Some(new_state)
     }
-    
+
     /// 评估守卫条件
     fn evaluate_guard(&self, guard: &Guard, state: &NetworkState) -> bool {
         match guard {
@@ -286,7 +275,7 @@ impl ModelChecker {
             }
         }
     }
-    
+
     /// 比较值
     fn compare_values(&self, left: &Value, right: &Value, operator: &ComparisonOperator) -> bool {
         match (left, right) {
@@ -327,7 +316,7 @@ impl ModelChecker {
             _ => false, // 类型不匹配
         }
     }
-    
+
     /// 应用动作
     fn apply_action(&self, action: &Action, state: &mut NetworkState) {
         match action {
@@ -350,10 +339,10 @@ impl ModelChecker {
                 }
             }
         }
-        
+
         state.timestamp += 1;
     }
-    
+
     /// 生成反例
     fn generate_counter_example(
         &self,
@@ -365,7 +354,7 @@ impl ModelChecker {
         let mut execution_path = Vec::new();
         let mut current_state_id = violating_state.id.clone();
         let mut step_number = 0;
-        
+
         // 反向搜索路径
         while let Some(state) = self.state_space.get(&current_state_id) {
             execution_path.push(ExecutionStep {
@@ -374,7 +363,7 @@ impl ModelChecker {
                 transition: None, // 简化：不包含转换信息
                 timestamp: state.timestamp,
             });
-            
+
             // 寻找前驱状态（简化实现）
             if let Some(predecessor_id) = self.find_predecessor(current_state_id, visited_states) {
                 current_state_id = predecessor_id;
@@ -383,10 +372,10 @@ impl ModelChecker {
                 break;
             }
         }
-        
+
         // 反转路径
         execution_path.reverse();
-        
+
         Some(CounterExample {
             id: format!("counter_example_{}", violation.violation_type.clone() as u8),
             violated_property: violation.description.clone(),
@@ -395,7 +384,7 @@ impl ModelChecker {
             description: format!("Counter example for violation: {}", violation.description),
         })
     }
-    
+
     /// 寻找前驱状态
     fn find_predecessor(&self, state_id: String, visited_states: &HashSet<String>) -> Option<String> {
         // 简化实现：返回第一个可能的前驱状态
@@ -406,25 +395,25 @@ impl ModelChecker {
         }
         None
     }
-    
+
     /// 计算覆盖度
     fn calculate_coverage(&self, visited_states: &HashSet<String>) -> CoverageStats {
         let total_states = self.state_space.len();
         let total_transitions = self.transitions.len();
-        
+
         let state_coverage = if total_states > 0 {
             visited_states.len() as f64 / total_states as f64
         } else {
             0.0
         };
-        
+
         let transition_coverage = if total_transitions > 0 {
             // 简化计算：假设所有转换都被访问过
             1.0
         } else {
             0.0
         };
-        
+
         CoverageStats {
             state_coverage,
             transition_coverage,
@@ -432,12 +421,12 @@ impl ModelChecker {
             branch_coverage: transition_coverage, // 简化
         }
     }
-    
+
     /// 估算内存使用
     fn estimate_memory_usage(&self) -> usize {
         let state_size = std::mem::size_of::<NetworkState>();
         let transition_size = std::mem::size_of::<StateTransition>();
-        
+
         state_size * self.state_space.len() + transition_size * self.transitions.len()
     }
 }
@@ -469,7 +458,7 @@ pub struct TlaModelChecker {
 }
 
 /// TLA+配置
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 #[allow(dead_code)]
 pub struct TlaConfig {
     /// 最大状态数
@@ -482,16 +471,6 @@ pub struct TlaConfig {
     pub deadlock_check: bool,
 }
 
-impl Default for TlaConfig {
-    fn default() -> Self {
-        Self {
-            max_states: 100000,
-            timeout: Duration::from_secs(600),
-            symmetry_reduction: true,
-            deadlock_check: true,
-        }
-    }
-}
 
 #[allow(dead_code)]
 impl TlaModelChecker {
@@ -499,7 +478,7 @@ impl TlaModelChecker {
     pub fn new(spec: String, config: TlaConfig) -> Self {
         Self { spec, config }
     }
-    
+
     /// 检查TLA+规范
     pub fn check_spec(&self) -> NetworkResult<ModelCheckingResult> {
         // 这里应该调用TLA+工具进行实际检查
@@ -519,7 +498,7 @@ impl TlaModelChecker {
             },
         })
     }
-    
+
     /// 生成TLA+规范
     pub fn generate_spec(&self, model: &SemanticModel) -> String {
         format!(
@@ -537,7 +516,7 @@ impl TlaModelChecker {
             self.generate_variable_list(model)
         )
     }
-    
+
     /// 生成变量声明
     fn generate_variables(&self, model: &SemanticModel) -> String {
         model.state_variables.keys()
@@ -545,25 +524,25 @@ impl TlaModelChecker {
             .collect::<Vec<_>>()
             .join(", ")
     }
-    
+
     /// 生成类型OK谓词
     fn generate_type_ok(&self, _model: &SemanticModel) -> String {
         // 简化实现
         "TRUE".to_string()
     }
-    
+
     /// 生成Init谓词
     fn generate_init(&self, _model: &SemanticModel) -> String {
         // 简化实现
         "TRUE".to_string()
     }
-    
+
     /// 生成Next谓词
     fn generate_next(&self, _model: &SemanticModel) -> String {
         // 简化实现
         "TRUE".to_string()
     }
-    
+
     /// 生成变量列表
     fn generate_variable_list(&self, model: &SemanticModel) -> String {
         model.state_variables.keys()
@@ -576,7 +555,7 @@ impl TlaModelChecker {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_model_checker_creation() {
         let config = ModelCheckingConfig::default();
@@ -584,12 +563,12 @@ mod tests {
         assert_eq!(checker.state_space.len(), 0);
         assert_eq!(checker.transitions.len(), 0);
     }
-    
+
     #[test]
     fn test_guard_evaluation() {
         let config = ModelCheckingConfig::default();
         let checker = ModelChecker::new(config);
-        
+
         let mut state = NetworkState {
             id: "test".to_string(),
             connections: HashMap::new(),
@@ -597,24 +576,24 @@ mod tests {
             global_vars: HashMap::new(),
             timestamp: 0,
         };
-        
+
         state.global_vars.insert("x".to_string(), Value::Int(5));
-        
+
         let guard = Guard::VariableComparison {
             variable: "x".to_string(),
             operator: ComparisonOperator::Equal,
             value: Value::Int(5),
         };
-        
+
         assert!(checker.evaluate_guard(&guard, &state));
     }
-    
+
     #[test]
     fn test_tla_model_checker_creation() {
         let spec = "EXTENDS Naturals".to_string();
         let config = TlaConfig::default();
         let checker = TlaModelChecker::new(spec, config);
-        
+
         assert_eq!(checker.spec, "EXTENDS Naturals");
     }
 }

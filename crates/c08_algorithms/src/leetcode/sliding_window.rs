@@ -57,6 +57,83 @@ pub fn length_of_longest_substring(s: String) -> i32 {
     max_len
 }
 
+/// 76. Minimum Window Substring（最小覆盖子串）
+///
+/// ## 问题描述
+/// 给你一个字符串 `s`、一个字符串 `t`。返回 `s` 中涵盖 `t` 所有字符的最小子串。
+/// 如果 `s` 中不存在涵盖 `t` 所有字符的子串，则返回空字符串 `""`。
+///
+/// ## Rust 1.91 特性应用
+/// - **JIT 优化**: 滑动窗口操作性能提升
+/// - **内存优化**: 使用 HashMap 和数组优化窗口状态
+///
+/// ## 复杂度
+/// - 时间复杂度: O(|s| + |t|)
+/// - 空间复杂度: O(|s| + |t|)
+pub fn min_window(s: String, t: String) -> String {
+    if s.is_empty() || t.is_empty() || s.len() < t.len() {
+        return String::new();
+    }
+
+    use std::collections::HashMap;
+    
+    // 统计 t 中每个字符的出现次数
+    let mut need: HashMap<char, i32> = HashMap::new();
+    for ch in t.chars() {
+        *need.entry(ch).or_insert(0) += 1;
+    }
+    
+    let need_count = need.len();
+    let mut window: HashMap<char, i32> = HashMap::new();
+    let mut valid = 0;
+    
+    let s_chars: Vec<char> = s.chars().collect();
+    let mut left = 0;
+    let mut right = 0;
+    let mut start = 0;
+    let mut len = usize::MAX;
+    
+    // Rust 1.91 JIT 优化：滑动窗口
+    while right < s_chars.len() {
+        let c = s_chars[right];
+        right += 1;
+        
+        // 更新窗口
+        if need.contains_key(&c) {
+            *window.entry(c).or_insert(0) += 1;
+            if window.get(&c) == need.get(&c) {
+                valid += 1;
+            }
+        }
+        
+        // 收缩窗口
+        while valid == need_count {
+            // 更新最小覆盖子串
+            if right - left < len {
+                start = left;
+                len = right - left;
+            }
+            
+            let d = s_chars[left];
+            left += 1;
+            
+            // 更新窗口
+            if need.contains_key(&d) {
+                if window.get(&d) == need.get(&d) {
+                    valid -= 1;
+                }
+                *window.get_mut(&d).unwrap() -= 1;
+            }
+        }
+    }
+    
+    if len == usize::MAX {
+        String::new()
+    } else {
+        s_chars[start..start + len].iter().collect()
+    }
+}
+
 /// 209. Minimum Size Subarray Sum（长度最小的子数组）
 ///
 /// ## 问题描述
@@ -292,8 +369,8 @@ pub fn find_max_average(nums: Vec<i32>, k: i32) -> f64 {
     let mut sum: i64 = 0;
 
     // Rust 1.91 JIT 优化：初始化窗口
-    for i in 0..k {
-        sum += nums[i] as i64;
+    for num in nums.iter().take(k) {
+        sum += *num as i64;
     }
 
     let mut max_sum = sum;
@@ -414,6 +491,29 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             },
         },
         LeetCodeProblem {
+            problem_id: 76,
+            title: "最小覆盖子串".to_string(),
+            title_en: "Minimum Window Substring".to_string(),
+            difficulty: "Hard".to_string(),
+            tags: vec![LeetCodeTag::HashTable, LeetCodeTag::String, LeetCodeTag::SlidingWindow],
+            description: "给你一个字符串 s、一个字符串 t。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 \"\"。".to_string(),
+            examples: vec![
+                "输入：s = \"ADOBECODEBANC\", t = \"ABC\"\n输出：\"BANC\"".to_string(),
+            ],
+            constraints: vec![
+                "1 <= s.length, t.length <= 10^5".to_string(),
+            ],
+            rust_191_features: vec![
+                "JIT 优化：滑动窗口操作性能提升".to_string(),
+                "内存优化：使用 HashMap 优化窗口状态".to_string(),
+            ],
+            complexity: ComplexityInfo {
+                time_complexity: "O(|s| + |t|)".to_string(),
+                space_complexity: "O(|s| + |t|)".to_string(),
+                explanation: Some("滑动窗口算法".to_string()),
+            },
+        },
+        LeetCodeProblem {
             problem_id: 209,
             title: "长度最小的子数组".to_string(),
             title_en: "Minimum Size Subarray Sum".to_string(),
@@ -492,6 +592,13 @@ mod tests {
         assert!(result.contains(&0));
         assert!(result.contains(&6));
         assert_eq!(result.len(), 2);
+    }
+
+    #[test]
+    fn test_min_window() {
+        assert_eq!(min_window("ADOBECODEBANC".to_string(), "ABC".to_string()), "BANC");
+        assert_eq!(min_window("a".to_string(), "a".to_string()), "a");
+        assert_eq!(min_window("a".to_string(), "aa".to_string()), "");
     }
 
     #[test]

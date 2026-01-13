@@ -819,6 +819,7 @@ impl EnhancedErrorManager {
 /// 错误统计信息
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default)]
 pub struct ErrorStatistics {
     pub total_errors: u64,
     pub error_type_counts: HashMap<ErrorType, u64>,
@@ -854,18 +855,6 @@ pub struct ErrorPrediction {
 fn now_instant() -> SystemTime { SystemTime::now() }
 
 #[cfg(feature = "async")]
-impl Default for ErrorStatistics {
-    fn default() -> Self {
-        Self {
-            total_errors: 0,
-            error_type_counts: HashMap::new(),
-            severity_counts: HashMap::new(),
-            source_counts: HashMap::new(),
-            successful_recoveries: 0,
-            failed_recoveries: 0,
-        }
-    }
-}
 
 #[cfg(feature = "async")]
 impl ErrorStatistics {

@@ -35,6 +35,7 @@ use wasm_bindgen::prelude::*;
 ///
 /// 这是一个简单的计数器示例，展示了如何在 Rust 和 JavaScript 之间共享状态
 #[wasm_bindgen]
+#[derive(Default)]
 pub struct Counter {
     value: i32,
 }
@@ -187,11 +188,6 @@ impl Counter {
     }
 }
 
-impl Default for Counter {
-    fn default() -> Self {
-        Self::new()
-    }
-}
 
 #[wasm_bindgen(start)]
 #[allow(clippy::main_recursion)]

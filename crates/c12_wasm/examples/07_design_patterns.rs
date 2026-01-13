@@ -20,6 +20,7 @@ use wasm_bindgen::prelude::*;
 ///
 /// 根据类型创建不同的渲染器实例
 #[wasm_bindgen]
+#[derive(Default)]
 pub struct RendererFactory;
 
 #[wasm_bindgen]
@@ -54,11 +55,6 @@ impl RendererFactory {
     }
 }
 
-impl Default for RendererFactory {
-    fn default() -> Self {
-        Self::new()
-    }
-}
 
 // ============================================================================
 // 建造者模式 (Builder Pattern)
@@ -121,6 +117,7 @@ impl HttpConfig {
 /// console.log(config.describe());
 /// ```
 #[wasm_bindgen]
+#[derive(Default)]
 pub struct HttpConfigBuilder {
     timeout: Option<u32>,
     retries: Option<u32>,
@@ -180,11 +177,6 @@ impl HttpConfigBuilder {
     }
 }
 
-impl Default for HttpConfigBuilder {
-    fn default() -> Self {
-        Self::new()
-    }
-}
 
 // ============================================================================
 // 单例模式 (Singleton Pattern)
@@ -240,6 +232,7 @@ pub fn get_app_version() -> Result<String, JsValue> {
 
 /// 排序策略
 #[wasm_bindgen]
+#[derive(Default)]
 pub struct Sorter;
 
 #[wasm_bindgen]
@@ -315,11 +308,6 @@ impl Sorter {
     }
 }
 
-impl Default for Sorter {
-    fn default() -> Self {
-        Self::new()
-    }
-}
 
 // ============================================================================
 // 观察者模式 (Observer Pattern)
@@ -329,6 +317,7 @@ impl Default for Sorter {
 ///
 /// 简单的观察者模式实现
 #[wasm_bindgen]
+#[derive(Default)]
 pub struct EventEmitter {
     listeners: Vec<js_sys::Function>,
 }
@@ -377,11 +366,6 @@ impl EventEmitter {
     }
 }
 
-impl Default for EventEmitter {
-    fn default() -> Self {
-        Self::new()
-    }
-}
 
 #[wasm_bindgen(start)]
 #[allow(clippy::main_recursion)]

@@ -81,8 +81,8 @@ pub fn rob(nums: Vec<i32>) -> i32 {
     let mut prev1 = nums[0];
 
     // Rust 1.91 JIT 优化：滚动数组 DP
-    for i in 1..nums.len() {
-        let current = prev1.max(prev2 + nums[i]);
+    for num in nums.iter().skip(1) {
+        let current = prev1.max(prev2 + *num);
         prev2 = prev1;
         prev1 = current;
     }
@@ -245,8 +245,8 @@ pub fn min_cost_climbing_stairs(cost: Vec<i32>) -> i32 {
     let mut prev1 = cost[1];
 
     // Rust 1.91 JIT 优化：滚动数组 DP
-    for i in 2..cost.len() {
-        let current = cost[i] + prev1.min(prev2);
+    for cost_item in cost.iter().skip(2) {
+        let current = *cost_item + prev1.min(prev2);
         prev2 = prev1;
         prev1 = current;
     }

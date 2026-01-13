@@ -60,7 +60,7 @@ fn main() {
     // 额外演示：进程池大小计算
     println!("\n=== 额外演示：进程池大小计算 ===");
     let chunk_size = NonZeroUsize::new(8).unwrap();
-    let total_tasks = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    let total_tasks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     let pool_size = calculate_process_pool_size(total_tasks.len(), chunk_size);
     println!("总任务数: {}", total_tasks.len());
     println!("每进程任务数: {}", chunk_size);

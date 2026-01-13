@@ -302,19 +302,23 @@ pub fn longest_palindrome(s: String) -> i32 {
 pub fn add_strings(num1: String, num2: String) -> String {
     let mut result = Vec::new();
     let mut carry = 0;
-    let mut i = (num1.len()).saturating_sub(1);
-    let mut j = (num2.len()).saturating_sub(1);
+    let num1_chars: Vec<char> = num1.chars().collect();
+    let num2_chars: Vec<char> = num2.chars().collect();
+    let mut i = num1_chars.len();
+    let mut j = num2_chars.len();
 
     // Rust 1.91 JIT 优化：从后往前遍历
-    while i != usize::MAX || j != usize::MAX || carry > 0 {
-        let digit1 = if i != usize::MAX {
-            num1.chars().nth(i).unwrap_or('0').to_digit(10).unwrap_or(0)
+    while i > 0 || j > 0 || carry > 0 {
+        let digit1 = if i > 0 {
+            i -= 1;
+            num1_chars[i].to_digit(10).unwrap_or(0)
         } else {
             0
         };
 
-        let digit2 = if j != usize::MAX {
-            num2.chars().nth(j).unwrap_or('0').to_digit(10).unwrap_or(0)
+        let digit2 = if j > 0 {
+            j -= 1;
+            num2_chars[j].to_digit(10).unwrap_or(0)
         } else {
             0
         };
@@ -322,15 +326,6 @@ pub fn add_strings(num1: String, num2: String) -> String {
         let sum = digit1 + digit2 + carry;
         result.push((b'0' + (sum % 10) as u8) as char);
         carry = sum / 10;
-
-        if i != usize::MAX {
-            i = i.saturating_sub(1);
-            if i == usize::MAX { i = usize::MAX; }
-        }
-        if j != usize::MAX {
-            j = j.saturating_sub(1);
-            if j == usize::MAX { j = usize::MAX; }
-        }
     }
 
     result.into_iter().rev().collect()

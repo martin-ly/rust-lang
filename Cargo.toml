@@ -130,7 +130,8 @@ axum = { version = "0.8.7", features = ["macros", "multipart", "tracing"] }
 # axum-core: axum的核心功能库 (与axum 0.8.x配套)
 axum-core = "0.5.6"
 # tower: 异步服务抽象层，提供中间件和超时支持
-tower = "0.5.2"
+# 2025-12-25: 更新至 0.5.3
+tower = "0.5.3"
 # tower-http: tower的HTTP中间件集合
 tower-http = { version = "0.6.8", features = [
     "cors",           # 跨域资源共享支持
@@ -312,8 +313,8 @@ libc = "0.2.180"
 rand = "0.9.2"
 # rand_chacha: ChaCha20随机数生成器 - 2025年10月11日更新
 rand_chacha = "0.9.0"
-# rand_core: 随机数核心库 - 2025年10月11日更新
-rand_core = "0.9.3"
+# rand_core: 随机数核心库 - 2025年12月25日更新
+rand_core = "0.9.4"
 # sha2: SHA-2哈希算法实现
 sha2 = "0.10.9"
 # hex: 十六进制编码/解码库
