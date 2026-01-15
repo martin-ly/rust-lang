@@ -36,6 +36,9 @@ pub mod performance_benchmarks;
 // 形式化验证示例模块
 pub mod formal_verification_examples;
 
+// 组合模式工程案例
+pub mod pattern_combinations;
+
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误
 

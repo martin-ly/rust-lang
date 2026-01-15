@@ -1,7 +1,7 @@
 //! 网络编程错误处理模块
 //!
 //! 本模块定义了网络编程中使用的各种错误类型，
-//! 利用 Rust 1.89 的新特性提供更好的错误处理体验。
+//! 利用 Rust 1.92.0 的新特性提供更好的错误处理体验。
 
 use std::time::Duration;
 use thiserror::Error;
@@ -40,7 +40,7 @@ pub enum NetworkError {
     /// 其他错误
     #[error("Other error: {0}")]
     Other(String),
-    
+
     /// 无效状态错误
     #[error("Invalid state: {0}")]
     InvalidState(String),

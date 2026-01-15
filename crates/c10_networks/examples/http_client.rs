@@ -118,7 +118,7 @@ async fn main() -> NetworkResult<()> {
 
     response.add_header("Content-Type", "application/json");
     response.add_header("Server", "c10_networks/0.1.0");
-    response.set_body(r#"{"message": "Hello from Rust 1.89!", "status": "success"}"#);
+    response.set_body(r#"{"message": "Hello from Rust 1.92.0!", "status": "success"}"#);
 
     println!("📥 创建 HTTP 响应:");
     println!("   状态码: {}", response.status);

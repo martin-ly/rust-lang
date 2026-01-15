@@ -85,7 +85,7 @@ async fn main() -> NetworkResult<()> {
     let messages = vec![
         "Hello, Server!",
         "This is a test message",
-        "Rust 1.89 is awesome!",
+        "Rust 1.92.0 is awesome!",
         "Goodbye!",
     ];
 

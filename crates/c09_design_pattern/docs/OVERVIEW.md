@@ -2,6 +2,9 @@
 
 本模块系统整理结构型、创建型、行为型模式以及并发/异步/并行等现代范式在 Rust 的落地方式，并提供跨领域模式清单。
 
+**最后更新**: 2025-12-25
+**适用版本**: Rust 1.92.0+ (Edition 2024)
+
 ---
 
 ## 目录导航
@@ -31,9 +34,14 @@
 
 ## 快速开始
 
-1) 从 `09_design_patterns.md` 了解模块结构
-2) 在 `src/structural/` 与 `src/behavioral/` 按模式逐个运行示例
-3) 查阅 `tests/` 的集成测试以把握组合场景
+1) 从 [Tier 1 基础层](./tier_01_foundations/) 开始学习
+   - [项目概览](./tier_01_foundations/01_项目概览.md) - 快速了解设计模式
+   - [主索引导航](./tier_01_foundations/02_主索引导航.md) - 找到适合你的学习路径
+   - [术语表](./tier_01_foundations/03_术语表.md) - 核心术语速查
+   - [常见问题](./tier_01_foundations/04_常见问题.md) - 解决常见疑问
+2) 从 `09_design_patterns.md` 了解模块结构
+3) 在 `src/structural/` 与 `src/behavioral/` 按模式逐个运行示例
+4) 查阅 `tests/` 的集成测试以把握组合场景
 
 ---
 
@@ -44,16 +52,22 @@
 
 ### 组合模式工程案例（补全）
 
-- 案例 A：Web 服务
+- ✅ **案例 A：Web 服务** (`src/pattern_combinations.rs`)
   - 组合：Facade + Builder + Strategy（路由策略）+ Circuit Breaker（并发模式）
-  - 指标：QPS、P95、错误率、熔断触发与半开恢复时间
+  - 实现：`WebServerFacade`、`HttpRequestBuilder`、`RoutingStrategy`、`CircuitBreaker`
+  - 测试：`tests/pattern_combinations_tests.rs`
+  - 指标：QPS、错误率、熔断触发与半开恢复时间
 
-- 案例 B：游戏引擎子系统
+- ✅ **案例 B：游戏引擎子系统** (`src/pattern_combinations.rs`)
   - 组合：Observer（事件总线）+ Command（输入映射）+ State（AI 状态机）
-  - 指标：帧耗时、事件延迟、资源占用
+  - 实现：`GameEngine`、`EventBus`、`CommandMapper`、`AiStateManager`
+  - 测试：`tests/pattern_combinations_tests.rs`
+  - 指标：事件延迟、状态转换、资源占用
 
-- 评测建议
-  - 固定工作负载与资源配额；以回归测试验证行为正确性，以基准测试评估吞吐与延迟
+- ✅ **评测与测试**
+  - 集成测试：验证模式组合的正确性
+  - 并发安全测试：多线程环境下的正确性
+  - 性能测试：吞吐量与延迟评估
 
 ### 互链
 

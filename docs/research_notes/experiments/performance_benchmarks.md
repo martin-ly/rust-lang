@@ -3,7 +3,14 @@
 > **创建日期**: 2025-11-15
 > **最后更新**: 2025-11-15
 > **Rust 版本**: 1.91.1+ (Edition 2024) ✅
-> **状态**: 🔄 进行中
+> **状态**: 🔄 进行中 (60%)
+
+**完成情况**:
+
+- ✅ 实验设计：100%完成（测试场景、框架选择、数据设计、流程设计）
+- ✅ 实验实现：100%完成（基准测试代码、测试环境、数据收集、结果分析工具）
+- 🔄 数据收集：待执行（需要运行基准测试）
+- 🔄 结果分析：待执行（需要收集数据后分析）
 
 ---
 
@@ -18,9 +25,13 @@
     - [相关概念](#相关概念)
     - [理论背景](#理论背景)
   - [🔬 实验设计](#-实验设计)
+    - [实验设计原则](#实验设计原则)
     - [1. 内存分配性能测试](#1-内存分配性能测试)
     - [2. 并发性能测试](#2-并发性能测试)
     - [3. 序列化性能测试](#3-序列化性能测试)
+    - [4. 字符串处理性能测试](#4-字符串处理性能测试)
+    - [5. 集合操作性能测试](#5-集合操作性能测试)
+    - [测试框架和工具选择](#测试框架和工具选择)
   - [💻 代码示例](#-代码示例)
     - [示例 1：使用 Criterion 进行基准测试](#示例-1使用-criterion-进行基准测试)
     - [示例 2：内存分配性能测试](#示例-2内存分配性能测试)
@@ -87,21 +98,44 @@
 
 ## 🔬 实验设计
 
+### 实验设计原则
+
+1. **可重复性**：所有实验应该可以重复执行并得到一致结果
+2. **统计显著性**：使用足够的样本量确保结果可靠
+3. **环境控制**：在相同环境下运行所有测试
+4. **基准标准化**：使用标准化的基准测试框架
+
 ### 1. 内存分配性能测试
 
 **测试目标**：比较不同内存分配策略的性能
 
 **测试场景**：
 
-- 栈分配 vs 堆分配
-- 预分配 vs 动态分配
-- 不同分配器性能比较
+- **栈分配 vs 堆分配**：比较相同大小数据的栈分配和堆分配性能
+- **预分配 vs 动态分配**：比较预分配缓冲区和动态分配的性能
+- **不同分配器性能比较**：比较标准分配器、jemalloc、mimalloc 等
+- **批量分配性能**：测试批量分配大量小对象的性能
 
 **测试指标**：
 
-- 分配时间
-- 内存使用效率
-- 碎片化程度
+- **分配时间**：单次分配的平均时间
+- **内存使用效率**：实际使用内存与分配内存的比率
+- **碎片化程度**：内存碎片化指标
+- **吞吐量**：单位时间内完成的分配次数
+
+**测试数据设计**：
+
+- 小对象：1-100 字节
+- 中等对象：100-10KB
+- 大对象：10KB-1MB
+- 超大对象：>1MB
+
+**测试流程**：
+
+1. 预热：运行 1000 次分配以预热缓存
+2. 测量：运行 10000 次分配并记录时间
+3. 统计：计算平均值、中位数、标准差
+4. 分析：识别性能瓶颈和优化机会
 
 ### 2. 并发性能测试
 
@@ -109,16 +143,32 @@
 
 **测试场景**：
 
-- `Arc` vs `Rc` 性能比较
-- `Mutex` vs `RwLock` 性能比较
-- 通道（Channel）性能测试
-- 异步运行时性能测试
+- **`Arc` vs `Rc` 性能比较**：单线程和多线程场景下的引用计数性能
+- **`Mutex` vs `RwLock` 性能比较**：不同读写比例下的锁性能
+- **通道（Channel）性能测试**：无界通道、有界通道、MPSC、SPSC 等
+- **异步运行时性能测试**：Tokio、async-std 等运行时的性能对比
+- **原子操作性能**：原子类型 vs 锁的性能对比
 
 **测试指标**：
 
-- 并发吞吐量
-- 锁竞争开销
-- 上下文切换开销
+- **并发吞吐量**：单位时间内完成的操作数
+- **锁竞争开销**：锁竞争导致的性能下降
+- **上下文切换开销**：线程/任务切换的开销
+- **延迟分布**：操作延迟的分布情况（P50, P95, P99）
+
+**测试数据设计**：
+
+- 线程数：1, 2, 4, 8, 16, 32
+- 操作次数：1000, 10000, 100000
+- 读写比例：100%读, 90%读10%写, 50%读50%写, 10%读90%写
+
+**测试流程**：
+
+1. 环境准备：设置线程亲和性、CPU 频率
+2. 预热：运行 1000 次操作
+3. 测量：运行 10000 次操作并记录时间
+4. 统计分析：计算吞吐量、延迟分布
+5. 可视化：生成性能图表
 
 ### 3. 序列化性能测试
 
@@ -126,15 +176,538 @@
 
 **测试场景**：
 
-- `serde` 不同格式性能（JSON, Bincode, MessagePack）
-- 不同序列化库性能比较
-- 序列化/反序列化性能
+- **`serde` 不同格式性能**：JSON, Bincode, MessagePack, CBOR, TOML
+- **不同序列化库性能比较**：serde, rmp-serde, bincode, postcard
+- **序列化/反序列化性能**：分别测试序列化和反序列化
+- **不同数据类型性能**：基本类型、结构体、枚举、嵌套结构
 
 **测试指标**：
 
-- 序列化速度
-- 反序列化速度
-- 序列化后大小
+- **序列化速度**：MB/s
+- **反序列化速度**：MB/s
+- **序列化后大小**：字节数
+- **压缩比**：原始大小/序列化后大小
+
+**测试数据设计**：
+
+- 小数据：<1KB（基本类型、简单结构体）
+- 中等数据：1KB-100KB（复杂结构体、数组）
+- 大数据：>100KB（大型嵌套结构、数组）
+
+**测试流程**：
+
+1. 数据准备：生成测试数据
+2. 预热：运行 100 次序列化/反序列化
+3. 测量：运行 1000 次并记录时间
+4. 大小测量：记录序列化后的数据大小
+5. 对比分析：比较不同格式和库的性能
+
+### 4. 字符串处理性能测试
+
+**测试目标**：评估字符串操作的性能
+
+**测试场景**：
+
+- **字符串连接**：`String::push_str` vs `format!` vs `join`
+- **字符串分割**：`split` vs `split_whitespace` vs 正则表达式
+- **字符串查找**：`contains` vs `find` vs 正则表达式
+- **字符串格式化**：`format!` vs `write!` vs `to_string`
+
+**测试指标**：
+
+- **操作时间**：单次操作的平均时间
+- **内存分配**：操作过程中的内存分配次数
+- **吞吐量**：单位时间内完成的操作数
+
+**测试数据设计**：
+
+- 短字符串：<100 字符
+- 中等字符串：100-10000 字符
+- 长字符串：>10000 字符
+
+### 5. 集合操作性能测试
+
+**测试目标**：评估不同集合类型的性能
+
+**测试场景**：
+
+- **Vec vs VecDeque vs LinkedList**：插入、删除、查找性能
+- **HashMap vs BTreeMap**：不同负载因子下的性能
+- **HashSet vs BTreeSet**：集合操作的性能
+- **迭代性能**：不同集合类型的迭代性能
+
+**测试指标**：
+
+- **插入性能**：操作时间
+- **查找性能**：平均查找时间
+- **删除性能**：操作时间
+- **内存使用**：集合的内存占用
+
+### 测试框架和工具选择
+
+**基准测试框架**：
+
+- **Criterion.rs**：统计驱动的基准测试框架（推荐）
+- **cargo bench**：Rust 内置基准测试工具
+
+**性能分析工具**：
+
+- **perf**：Linux 性能分析工具
+- **flamegraph**：性能火焰图生成
+- **valgrind**：内存和性能分析
+
+**数据收集工具**：
+
+- **cargo-criterion**：Criterion.rs 的扩展工具
+- **自定义脚本**：收集和分析结果
+
+---
+
+## 💻 实验实现
+
+### 1. 基准测试代码实现
+
+#### 内存分配性能测试实现
+
+```rust
+use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use std::time::Duration;
+
+// 栈分配基准测试
+fn stack_allocation_benchmark(c: &mut Criterion) {
+    let mut group = c.benchmark_group("allocation_stack");
+    group.measurement_time(Duration::from_secs(10));
+
+    for size in [1, 10, 100, 1000, 10000].iter() {
+        group.bench_with_input(
+            BenchmarkId::new("stack", size),
+            size,
+            |b, &size| {
+                b.iter(|| {
+                    let arr = [0u8; 1024];
+                    black_box(arr);
+                })
+            },
+        );
+    }
+    group.finish();
+}
+
+// 堆分配基准测试
+fn heap_allocation_benchmark(c: &mut Criterion) {
+    let mut group = c.benchmark_group("allocation_heap");
+    group.measurement_time(Duration::from_secs(10));
+
+    for size in [1, 10, 100, 1000, 10000].iter() {
+        group.bench_with_input(
+            BenchmarkId::new("heap", size),
+            size,
+            |b, &size| {
+                b.iter(|| {
+                    let vec = vec![0u8; *size];
+                    black_box(vec);
+                })
+            },
+        );
+    }
+    group.finish();
+}
+
+// 预分配 vs 动态分配
+fn prealloc_vs_dynamic_benchmark(c: &mut Criterion) {
+    let mut group = c.benchmark_group("prealloc_vs_dynamic");
+
+    // 预分配
+    group.bench_function("preallocated", |b| {
+        let mut buffer = Vec::with_capacity(10000);
+        b.iter(|| {
+            buffer.clear();
+            for i in 0..10000 {
+                buffer.push(i);
+            }
+            black_box(&buffer);
+        })
+    });
+
+    // 动态分配
+    group.bench_function("dynamic", |b| {
+        b.iter(|| {
+            let mut buffer = Vec::new();
+            for i in 0..10000 {
+                buffer.push(i);
+            }
+            black_box(&buffer);
+        })
+    });
+
+    group.finish();
+}
+
+criterion_group!(
+    allocation_benches,
+    stack_allocation_benchmark,
+    heap_allocation_benchmark,
+    prealloc_vs_dynamic_benchmark
+);
+criterion_main!(allocation_benches);
+```
+
+#### 并发性能测试实现
+
+```rust
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use std::sync::{Arc, Mutex, RwLock};
+use std::thread;
+
+// Mutex vs RwLock 性能测试
+fn mutex_vs_rwlock_benchmark(c: &mut Criterion) {
+    let mut group = c.benchmark_group("sync_primitives");
+
+    // Mutex 测试
+    group.bench_function("mutex_read", |b| {
+        let data = Arc::new(Mutex::new(0u64));
+        b.iter(|| {
+            let value = data.lock().unwrap();
+            black_box(*value);
+        })
+    });
+
+    // RwLock 读测试
+    group.bench_function("rwlock_read", |b| {
+        let data = Arc::new(RwLock::new(0u64));
+        b.iter(|| {
+            let value = data.read().unwrap();
+            black_box(*value);
+        })
+    });
+
+    // RwLock 写测试
+    group.bench_function("rwlock_write", |b| {
+        let data = Arc::new(RwLock::new(0u64));
+        b.iter(|| {
+            let mut value = data.write().unwrap();
+            *value += 1;
+            black_box(*value);
+        })
+    });
+
+    group.finish();
+}
+
+// 并发吞吐量测试
+fn concurrent_throughput_benchmark(c: &mut Criterion) {
+    let mut group = c.benchmark_group("concurrent_throughput");
+
+    for threads in [1, 2, 4, 8].iter() {
+        group.bench_with_input(
+            BenchmarkId::new("threads", threads),
+            threads,
+            |b, &num_threads| {
+                b.iter(|| {
+                    let data = Arc::new(Mutex::new(0u64));
+                    let mut handles = vec![];
+
+                    for _ in 0..num_threads {
+                        let data = Arc::clone(&data);
+                        let handle = thread::spawn(move || {
+                            for _ in 0..1000 {
+                                let mut value = data.lock().unwrap();
+                                *value += 1;
+                            }
+                        });
+                        handles.push(handle);
+                    }
+
+                    for handle in handles {
+                        handle.join().unwrap();
+                    }
+
+                    black_box(*data.lock().unwrap());
+                })
+            },
+        );
+    }
+
+    group.finish();
+}
+
+criterion_group!(
+    concurrency_benches,
+    mutex_vs_rwlock_benchmark,
+    concurrent_throughput_benchmark
+);
+criterion_main!(concurrency_benches);
+```
+
+#### 序列化性能测试实现
+
+```rust
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Clone)]
+struct TestData {
+    id: u64,
+    name: String,
+    values: Vec<f64>,
+    metadata: std::collections::HashMap<String, String>,
+}
+
+fn create_test_data(size: usize) -> TestData {
+    TestData {
+        id: 12345,
+        name: "Test Data".repeat(size / 10),
+        values: (0..size).map(|i| i as f64).collect(),
+        metadata: (0..size)
+            .map(|i| (format!("key{}", i), format!("value{}", i)))
+            .collect(),
+    }
+}
+
+// JSON 序列化测试
+fn json_serialize_benchmark(c: &mut Criterion) {
+    let mut group = c.benchmark_group("serialization_json");
+
+    for size in [10, 100, 1000, 10000].iter() {
+        let data = create_test_data(*size);
+
+        group.bench_with_input(
+            BenchmarkId::new("serialize", size),
+            &data,
+            |b, data| {
+                b.iter(|| {
+                    let json = serde_json::to_string(data).unwrap();
+                    black_box(json);
+                })
+            },
+        );
+
+        let json_str = serde_json::to_string(&data).unwrap();
+        group.bench_with_input(
+            BenchmarkId::new("deserialize", size),
+            &json_str,
+            |b, json_str| {
+                b.iter(|| {
+                    let data: TestData = serde_json::from_str(json_str).unwrap();
+                    black_box(data);
+                })
+            },
+        );
+    }
+
+    group.finish();
+}
+
+// Bincode 序列化测试
+fn bincode_serialize_benchmark(c: &mut Criterion) {
+    let mut group = c.benchmark_group("serialization_bincode");
+
+    for size in [10, 100, 1000, 10000].iter() {
+        let data = create_test_data(*size);
+
+        group.bench_with_input(
+            BenchmarkId::new("serialize", size),
+            &data,
+            |b, data| {
+                b.iter(|| {
+                    let encoded = bincode::serialize(data).unwrap();
+                    black_box(encoded);
+                })
+            },
+        );
+
+        let encoded = bincode::serialize(&data).unwrap();
+        group.bench_with_input(
+            BenchmarkId::new("deserialize", size),
+            &encoded,
+            |b, encoded| {
+                b.iter(|| {
+                    let data: TestData = bincode::deserialize(encoded).unwrap();
+                    black_box(data);
+                })
+            },
+        );
+    }
+
+    group.finish();
+}
+
+criterion_group!(
+    serialization_benches,
+    json_serialize_benchmark,
+    bincode_serialize_benchmark
+);
+criterion_main!(serialization_benches);
+```
+
+### 2. 测试环境配置
+
+创建 `Cargo.toml` 配置：
+
+```toml
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+bincode = "1.3"
+
+[[bench]]
+name = "allocation"
+harness = false
+
+[[bench]]
+name = "concurrency"
+harness = false
+
+[[bench]]
+name = "serialization"
+harness = false
+```
+
+### 3. 数据收集机制
+
+创建数据收集脚本：
+
+```rust
+// scripts/collect_benchmark_data.rs
+use std::process::Command;
+use std::fs;
+use std::path::Path;
+
+fn main() {
+    let output_dir = "benchmark_results";
+
+    // 创建输出目录
+    if !Path::new(output_dir).exists() {
+        fs::create_dir(output_dir).unwrap();
+    }
+
+    // 运行基准测试
+    let output = Command::new("cargo")
+        .args(&["bench", "--bench", "allocation"])
+        .output()
+        .expect("Failed to run benchmark");
+
+    // 保存结果
+    fs::write(
+        format!("{}/allocation_results.txt", output_dir),
+        String::from_utf8_lossy(&output.stdout),
+    ).unwrap();
+
+    println!("Benchmark results saved to {}", output_dir);
+}
+```
+
+### 4. 结果分析工具实现
+
+创建结果分析脚本：
+
+```rust
+// scripts/analyze_benchmark_results.rs
+use std::fs;
+use std::path::Path;
+use std::collections::HashMap;
+
+struct BenchmarkResult {
+    name: String,
+    mean: f64,
+    std_dev: f64,
+    min: f64,
+    max: f64,
+}
+
+fn parse_criterion_output(content: &str) -> Vec<BenchmarkResult> {
+    let mut results = Vec::new();
+    // 解析 Criterion.rs 输出格式
+    // 实际实现需要根据 Criterion.rs 的输出格式进行解析
+    results
+}
+
+fn analyze_results(results: &[BenchmarkResult]) {
+    println!("=== 性能基准测试结果分析 ===\n");
+
+    // 按测试组分类
+    let mut groups: HashMap<String, Vec<&BenchmarkResult>> = HashMap::new();
+    for result in results {
+        let group = result.name.split('/').next().unwrap_or("other");
+        groups.entry(group.to_string())
+            .or_insert_with(Vec::new)
+            .push(result);
+    }
+
+    // 分析每个组
+    for (group_name, group_results) in groups {
+        println!("## {} 性能分析", group_name);
+        println!("平均时间: {:.2} ns",
+            group_results.iter().map(|r| r.mean).sum::<f64>() / group_results.len() as f64);
+        println!("最小时间: {:.2} ns",
+            group_results.iter().map(|r| r.min).min_by(|a, b| a.partial_cmp(b).unwrap()).unwrap());
+        println!("最大时间: {:.2} ns",
+            group_results.iter().map(|r| r.max).max_by(|a, b| a.partial_cmp(b).unwrap()).unwrap());
+        println!();
+    }
+
+    // 识别性能瓶颈
+    println!("## 性能瓶颈识别");
+    let mut sorted_results: Vec<_> = results.iter().collect();
+    sorted_results.sort_by(|a, b| b.mean.partial_cmp(&a.mean).unwrap());
+
+    println!("最慢的5个测试：");
+    for (i, result) in sorted_results.iter().take(5).enumerate() {
+        println!("{}. {}: {:.2} ns", i + 1, result.name, result.mean);
+    }
+    println!();
+}
+
+fn generate_report(results: &[BenchmarkResult]) -> String {
+    let mut report = String::from("# 性能基准测试报告\n\n");
+    report.push_str("## 执行摘要\n\n");
+    report.push_str(&format!("总测试数: {}\n", results.len()));
+    report.push_str(&format!("平均执行时间: {:.2} ns\n\n",
+        results.iter().map(|r| r.mean).sum::<f64>() / results.len() as f64));
+
+    report.push_str("## 详细结果\n\n");
+    for result in results {
+        report.push_str(&format!("### {}\n", result.name));
+        report.push_str(&format!("- 平均: {:.2} ns\n", result.mean));
+        report.push_str(&format!("- 标准差: {:.2} ns\n", result.std_dev));
+        report.push_str(&format!("- 最小: {:.2} ns\n", result.min));
+        report.push_str(&format!("- 最大: {:.2} ns\n\n", result.max));
+    }
+
+    report
+}
+
+fn main() {
+    let results_dir = "benchmark_results";
+
+    if !Path::new(results_dir).exists() {
+        eprintln!("错误: 结果目录不存在");
+        return;
+    }
+
+    // 读取所有结果文件
+    let mut all_results = Vec::new();
+    for entry in fs::read_dir(results_dir).unwrap() {
+        let entry = entry.unwrap();
+        let path = entry.path();
+        if path.extension().and_then(|s| s.to_str()) == Some("txt") {
+            let content = fs::read_to_string(&path).unwrap();
+            let results = parse_criterion_output(&content);
+            all_results.extend(results);
+        }
+    }
+
+    // 分析结果
+    analyze_results(&all_results);
+
+    // 生成报告
+    let report = generate_report(&all_results);
+    fs::write("benchmark_report.md", report).unwrap();
+
+    println!("报告已生成: benchmark_report.md");
+}
+```
 
 ---
 

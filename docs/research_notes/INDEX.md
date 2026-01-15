@@ -68,6 +68,12 @@
    - 研究主题覆盖
    - 系统评估
 
+5. **[PROOF_INDEX.md](./PROOF_INDEX.md)** - 形式化证明文档索引 🆕
+   - 按研究领域分类的证明索引
+   - 按证明类型分类的证明索引
+   - 证明完成度统计
+   - 证明方法统计
+
 ### 进展跟踪
 
 1. **[PROGRESS_TRACKING.md](./PROGRESS_TRACKING.md)** - 研究进展跟踪

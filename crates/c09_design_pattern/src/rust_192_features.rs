@@ -334,8 +334,21 @@ mod tests {
         assert_eq!(pool.available(), 3);
 
         unsafe {
-            pool.release(42);
-            assert_eq!(pool.available(), 4); // 注意：这里会超过容量，实际应该检查
+            // 先初始化一些对象到池中
+            pool.release(10);
+            pool.release(20);
+            pool.release(30);
+            assert_eq!(pool.available(), 3); // 池已满
+
+            // 获取一个对象
+            if let Some(obj) = pool.acquire() {
+                assert!(obj == 10 || obj == 20 || obj == 30);
+                assert_eq!(pool.available(), 2);
+
+                // 归还对象
+                pool.release(obj);
+                assert_eq!(pool.available(), 3);
+            }
         }
     }
 

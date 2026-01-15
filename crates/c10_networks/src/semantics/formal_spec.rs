@@ -697,7 +697,10 @@ impl HttpFormalSpec {
                 false
             }
             HttpRuleCondition::HeaderCondition { name, value } => {
-                headers.get(name).is_some_and(|header_value| header_value.contains(value))
+                // 检查header值是否包含规则中指定的值，或者规则值是否包含header值（支持逗号分隔的值列表）
+                headers.get(name).is_some_and(|header_value| {
+                    header_value.contains(value) || value.contains(header_value)
+                })
             }
             HttpRuleCondition::CompoundCondition { operator, conditions } => {
                 match operator {

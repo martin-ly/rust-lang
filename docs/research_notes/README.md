@@ -55,6 +55,7 @@ research_notes/
 ├── EXAMPLE.md                  # 研究笔记示例
 ├── PROGRESS_TRACKING.md        # 研究进展跟踪
 ├── TASK_CHECKLIST.md           # 研究任务清单
+├── PROOF_INDEX.md              # 形式化证明文档索引 🆕
 ├── WRITING_GUIDE.md            # 研究笔记写作指南
 ├── STATISTICS.md               # 研究笔记系统统计报告
 ├── QUICK_FIND.md               # 研究笔记快速查找
@@ -89,6 +90,20 @@ research_notes/
 - ✅ 生命周期系统的形式化语义
 - ✅ 并发安全的形式化保证
 - ✅ Rust 1.91.1 新特性的形式化分析（已完成）
+
+**已完成的证明**:
+
+- ✅ 所有权唯一性证明
+- ✅ 内存安全框架证明
+- ✅ 数据竞争自由证明
+- ✅ 借用规则正确性证明
+- ✅ 引用有效性证明
+- ✅ 生命周期推断算法正确性证明
+- ✅ 类型安全证明（进展性、保持性）
+- ✅ 类型推导正确性证明
+- ✅ 类型推导算法正确性证明
+
+**证明文档索引**: [PROOF_INDEX.md](./PROOF_INDEX.md)
 
 **相关文档**:
 

@@ -1,4 +1,4 @@
-﻿# C09 设计模式: 常见问题解答 (FAQ)
+# C09 设计模式: 常见问题解答 (FAQ)
 
 > **文档定位**: 设计模式学习和实践中的常见问题快速解答
 > **使用方式**: 遇到问题时快速查找解决方案和最佳实践
@@ -36,7 +36,7 @@
     - [Q17: 团队如何统一设计模式的使用？](#q17-团队如何统一设计模式的使用)
   - [📚 延伸阅读](#-延伸阅读)
 
-**最后更新**: 2025-12-11
+**最后更新**: 2025-12-25
 **适用版本**: Rust 1.92.0+ (Edition 2024)
 **文档类型**: 📚 问题解答
 
@@ -958,7 +958,10 @@ enum-variant-names-threshold = 3
 
 - [主索引](./00_MASTER_INDEX.md) - 完整文档导航
 - [README](./README.md) - 项目概述
-- [Glossary](./Glossary.md) - 术语表
+- [Glossary](./Glossary.md) - 术语表（完整版）
+- [Tier 1 基础层](./tier_01_foundations/) - 快速入门和基础参考
+- [Tier 1 术语表](./tier_01_foundations/03_术语表.md) - 核心术语快速参考
+- [Tier 1 常见问题](./tier_01_foundations/04_常见问题.md) - 新手常见问题解答
 - [综合指南](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 深度学习
 - [OVERVIEW](./OVERVIEW.md) - 文档概览
 

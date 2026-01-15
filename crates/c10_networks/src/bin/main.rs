@@ -1,6 +1,6 @@
 //! C10 Networks 示例程序
 //!
-//! 展示基于 Rust 1.89 的网络编程功能
+//! 展示基于 Rust 1.92.0 的网络编程功能
 
 use c10_networks::{
     NAME, VERSION,
@@ -13,7 +13,7 @@ async fn main() -> NetworkResult<()> {
     // 初始化日志
     tracing_subscriber::fmt::init();
 
-    println!("🚀 {} v{} - Rust 1.89 网络编程示例", NAME, VERSION);
+    println!("🚀 {} v{} - Rust 1.92.0 网络编程示例", NAME, VERSION);
 
     // 演示 HTTP 客户端
     demo_http_client().await?;
@@ -53,7 +53,7 @@ async fn demo_http_client() -> NetworkResult<()> {
 
     response.add_header("Content-Type", "application/json");
     response.add_header("Server", format!("{}/{}", NAME, VERSION));
-    response.set_body(r#"{"message": "Hello from Rust 1.89!"}"#);
+    response.set_body(r#"{"message": "Hello from Rust 1.92.0!"}"#);
 
     println!("📥 创建 HTTP 响应:");
     println!("   状态码: {}", response.status);

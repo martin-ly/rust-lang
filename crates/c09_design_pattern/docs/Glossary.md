@@ -1,4 +1,4 @@
-﻿# C09 设计模式: 术语表 (Glossary)
+# C09 设计模式: 术语表 (Glossary)
 
 > **文档定位**: 设计模式核心术语快速参考，涵盖模式、并发、形式化等关键概念
 > **使用方式**: 通过术语索引快速查找定义，理解设计模式核心概念
@@ -37,7 +37,7 @@
     - [Pin](#pin)
   - [📚 延伸阅读](#-延伸阅读)
 
-**最后更新**: 2025-12-11
+**最后更新**: 2025-12-25
 **适用版本**: Rust 1.92.0+ (Edition 2024)
 **文档类型**: 📚 参考资料
 
@@ -678,7 +678,10 @@ fn use_pinned(pinned: Pin<&mut SelfReferential>) {
 ## 📚 延伸阅读
 
 - [主索引](./00_MASTER_INDEX.md) - 完整文档导航
-- [FAQ](./FAQ.md) - 常见问题解答
+- [FAQ](./FAQ.md) - 常见问题解答（完整版）
+- [Tier 1 基础层](./tier_01_foundations/) - 快速入门和基础参考
+- [Tier 1 术语表](./tier_01_foundations/03_术语表.md) - 核心术语快速参考
+- [Tier 1 常见问题](./tier_01_foundations/04_常见问题.md) - 新手常见问题解答
 - [README](./README.md) - 项目概述
 - [综合指南](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 深度学习
 - [形式化理论文档](./ASYNC_SYNC_EQUIVALENCE_THEORY.md) - 理论基础

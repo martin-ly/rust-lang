@@ -635,7 +635,7 @@ async fn main() -> c10_networks::NetworkResult<()> {
 - [Rust 官方文档](https://doc.rust-lang.org/)
 - [Tokio 异步运行时](https://tokio.rs/)
 - [网络编程最佳实践](https://doc.rust-lang.org/book/)
-- [Rust 1.89 发布说明](https://blog.rust-lang.org/)
+- [Rust 1.92.0 发布说明](https://blog.rust-lang.org/)
 
 ## 📞 支持
 
