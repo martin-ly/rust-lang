@@ -241,8 +241,15 @@ C08 算法:     ████████████████░░░░ 80%
 
 ### 系统优化 ⭐⭐⭐
 
-1. **优化建议**: `docs/docs/PERSONAL_KNOWLEDGE_SYSTEM_OPTIMIZATION_2025_10_30.md`
-2. **执行计划**: `docs/docs/SUSTAINABLE_EXECUTION_PLAN_2025_10_30.md`
+> ⚠️ **历史文档** - 以下链接为历史参考，实际文档请查看项目根目录的完成状态报告
+> 
+> **当前文档**:
+> - 项目完成状态: `PROJECT_COMPLETION_STATUS_2025_12_25.md`
+> - 文档索引: `docs/README.md`
+> - 快速参考: `docs/quick_reference/README.md`
+
+1. **优化建议**: `docs/docs/PERSONAL_KNOWLEDGE_SYSTEM_OPTIMIZATION_2025_10_30.md` (历史文档)
+2. **执行计划**: `docs/docs/SUSTAINABLE_EXECUTION_PLAN_2025_10_30.md` (历史文档)
 
 ---
 
@@ -320,10 +327,13 @@ alias rconcept='cd /path/to/rust-lang && ./tools/concept_lookup.sh'
 
 ### 文档说明
 
-- **完整评价**: `docs/docs/CRATES_CRITICAL_EVALUATION_2025_10_30.md`
-- **优化建议**: `docs/docs/PERSONAL_KNOWLEDGE_SYSTEM_OPTIMIZATION_2025_10_30.md`
-- **执行计划**: `docs/docs/SUSTAINABLE_EXECUTION_PLAN_2025_10_30.md`
-- **完成报告**: `docs/docs/PERSONAL_KNOWLEDGE_SYSTEM_COMPLETE_2025_10_30.md`
+> ⚠️ **历史文档** - 以下链接为历史参考，实际文档请查看项目根目录
+
+- **项目完成状态**: `PROJECT_COMPLETION_STATUS_2025_12_25.md` (当前)
+- **完整评价**: `docs/docs/CRATES_CRITICAL_EVALUATION_2025_10_30.md` (历史文档)
+- **优化建议**: `docs/docs/PERSONAL_KNOWLEDGE_SYSTEM_OPTIMIZATION_2025_10_30.md` (历史文档)
+- **执行计划**: `docs/docs/SUSTAINABLE_EXECUTION_PLAN_2025_10_30.md` (历史文档)
+- **完成报告**: `docs/docs/PERSONAL_KNOWLEDGE_SYSTEM_COMPLETE_2025_10_30.md` (历史文档)
 
 ### 常见问题
 

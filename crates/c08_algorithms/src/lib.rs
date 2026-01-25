@@ -94,11 +94,29 @@ pub const VERSION: &str = "0.3.0";
 pub const RUST_VERSION: &str = "1.92.0";
 
 /// 获取库版本信息
+///
+/// # Examples
+///
+/// ```
+/// use c08_algorithms::get_version;
+///
+/// let version = get_version();
+/// assert!(!version.is_empty());
+/// ```
 pub fn get_version() -> &'static str {
     VERSION
 }
 
 /// 获取支持的 Rust 版本
+///
+/// # Examples
+///
+/// ```
+/// use c08_algorithms::get_rust_version;
+///
+/// let rust_version = get_rust_version();
+/// assert!(!rust_version.is_empty());
+/// ```
 pub fn get_rust_version() -> &'static str {
     RUST_VERSION
 }

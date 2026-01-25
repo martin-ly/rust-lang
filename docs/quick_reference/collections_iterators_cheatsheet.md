@@ -1,7 +1,7 @@
 # 📦 Rust 集合与迭代器速查卡
 
 > **快速参考** | [完整文档](../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md) | [代码示例](../../crates/)
-> **最后更新**: 2025-11-15 | **Rust 版本**: 1.91.1+ | **Edition**: 2024
+> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -696,14 +696,25 @@ let vec = vec![1, 2, 3, 4, 5];
 
 ## 📚 相关资源
 
+### 官方文档
 - [Rust 集合文档](https://doc.rust-lang.org/std/collections/)
 - [Iterator trait 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
+- [Rust Reference - Collections](https://doc.rust-lang.org/reference/items/collections.html)
+
+### 项目内部文档
 - [完整迭代器参考](../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md)
+- [集合研究笔记](../../docs/research_notes/)
+
+### 相关速查卡
+- [控制流与函数速查卡](./control_flow_functions_cheatsheet.md) - 循环与迭代器
+- [类型系统速查卡](./type_system.md) - 集合类型
+- [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与集合
+- [字符串与格式化速查卡](./strings_formatting_cheatsheet.md) - 字符串集合
 
 ---
 
-**最后更新**: 2025-11-15
+**最后更新**: 2026-01-26
 **维护者**: 文档团队
-**状态**: 持续更新中 📝
+**状态**: ✅ **Rust 1.93.0 更新完成**
 
 🎯 **掌握集合与迭代器，高效处理数据！**

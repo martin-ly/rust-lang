@@ -1,7 +1,7 @@
 # 📦 Rust 模块系统速查卡
 
-> **快速参考** | [完整文档](../../docs/docs/ref/Programming_Language/rust/cargo_package_mod.md) | [代码示例](../../crates/)
-> **最后更新**: 2025-11-15 | **Rust 版本**: 1.91.1+ | **Edition**: 2024
+> **快速参考** | [Cargo/包索引](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md) | [Rust 官方模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [代码示例](../../crates/)
+> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -52,6 +52,9 @@
     - [模块测试](#模块测试)
     - [特性模块](#特性模块)
   - [📚 相关资源](#-相关资源)
+    - [官方文档](#官方文档)
+    - [项目内部文档](#项目内部文档)
+    - [相关速查卡](#相关速查卡)
 
 
 ---
@@ -603,14 +606,28 @@ mod sync_impl {
 
 ## 📚 相关资源
 
+### 官方文档
+
 - [Rust 模块系统文档](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
 - [Cargo 文档](https://doc.rust-lang.org/cargo/)
-- [完整模块系统文档](../../docs/docs/ref/Programming_Language/rust/cargo_package_mod.md)
+
+### 项目内部文档
+
+- [Cargo 包管理与模块索引](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
+- [类型系统速查卡](./type_system.md) - 类型系统与模块的关系
+- [Cargo 速查卡](./cargo_cheatsheet.md) - Cargo 包管理
+- [字符串与格式化速查卡](./strings_formatting_cheatsheet.md) - 模块中的字符串处理
+
+### 相关速查卡
+
+- [所有权系统速查卡](./ownership_cheatsheet.md) - 模块中的所有权规则
+- [错误处理速查卡](./error_handling_cheatsheet.md) - 模块中的错误处理
+- [测试速查卡](./testing_cheatsheet.md) - 模块测试
 
 ---
 
-**最后更新**: 2025-11-15
+**最后更新**: 2026-01-26
 **维护者**: 文档团队
-**状态**: 持续更新中 📝
+**状态**: ✅ **Rust 1.93.0 更新完成**
 
 🎯 **掌握模块系统，组织清晰代码！**

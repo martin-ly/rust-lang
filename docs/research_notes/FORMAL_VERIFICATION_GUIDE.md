@@ -1,8 +1,8 @@
 # 形式化工具验证指南
 
 > **创建日期**: 2025-12-25
-> **最后更新**: 2025-12-25
-> **状态**: 📝 准备中
+> **最后更新**: 2026-01-26
+> **状态**: ✅ **指南 100% 完成**
 
 ---
 
@@ -11,11 +11,32 @@
 - [形式化工具验证指南](#形式化工具验证指南)
   - [📊 目录](#-目录)
   - [🎯 概述](#-概述)
+    - [验证目标](#验证目标)
   - [🛠️ 工具选择](#️-工具选择)
+    - [Coq](#coq)
+    - [Isabelle/HOL](#isabellehol)
   - [📚 验证准备工作](#-验证准备工作)
+    - [1. 环境准备](#1-环境准备)
+    - [2. 理论准备](#2-理论准备)
+    - [3. 验证框架设计](#3-验证框架设计)
   - [🔬 验证实施步骤](#-验证实施步骤)
+    - [步骤 1: 所有权模型验证](#步骤-1-所有权模型验证)
+    - [步骤 2: 借用检查器验证](#步骤-2-借用检查器验证)
+    - [步骤 3: 生命周期验证](#步骤-3-生命周期验证)
+    - [步骤 4: 类型系统验证](#步骤-4-类型系统验证)
+    - [步骤 5: 异步状态机验证](#步骤-5-异步状态机验证)
+    - [步骤 6: Pin 与自引用验证](#步骤-6-pin-与自引用验证)
   - [📋 验证任务清单](#-验证任务清单)
+    - [所有权模型验证](#所有权模型验证)
+    - [借用检查器验证](#借用检查器验证)
+    - [生命周期验证](#生命周期验证)
+    - [类型系统验证](#类型系统验证)
+    - [异步状态机验证](#异步状态机验证)
+    - [Pin 与自引用验证](#pin-与自引用验证)
   - [🔗 相关资源](#-相关资源)
+    - [学习资源](#学习资源)
+    - [相关项目](#相关项目)
+    - [工具资源](#工具资源)
 
 ---
 
@@ -23,12 +44,16 @@
 
 本指南提供了使用形式化工具（Coq、Isabelle）验证 Rust 形式化定义的完整流程。
 
+**文档状态**：本指南结构与全部六类验证的 Coq/Isabelle 框架、任务清单已完整；验证任务清单中的方框供实施时勾选。
+
 ### 验证目标
 
 1. **所有权模型验证**：验证所有权规则的正确性
 2. **借用检查器验证**：验证借用规则的正确性
 3. **生命周期验证**：验证生命周期规则的正确性
 4. **类型系统验证**：验证类型系统的正确性
+5. **异步状态机验证**：验证 Future 状态一致性与并发安全
+6. **Pin 与自引用验证**：验证 Pin 保证与自引用类型安全
 
 ---
 
@@ -37,11 +62,13 @@
 ### Coq
 
 **优势**：
+
 - 强大的证明自动化
 - 丰富的标准库
 - 活跃的社区支持
 
 **安装**：
+
 ```bash
 # 使用 opam 安装
 opam install coq
@@ -55,6 +82,7 @@ brew install coq
 ```
 
 **基本使用**：
+
 ```coq
 (* 定义所有权状态 *)
 Inductive OwnershipState : Type :=
@@ -73,17 +101,20 @@ Definition move_rule (s: OwnershipState) : OwnershipState :=
 ### Isabelle/HOL
 
 **优势**：
+
 - 强大的自动化证明
 - 丰富的理论库
 - 良好的文档支持
 
 **安装**：
+
 ```bash
 # 下载并安装 Isabelle
 # https://isabelle.in.tum.de/
 ```
 
 **基本使用**：
+
 ```isabelle
 theory OwnershipModel
 imports Main
@@ -104,11 +135,13 @@ end
 ### 1. 环境准备
 
 **Coq 环境**：
+
 - [ ] 安装 Coq（版本 8.15+）
 - [ ] 安装 CoqIDE 或 Proof General
 - [ ] 配置开发环境
 
 **Isabelle 环境**：
+
 - [ ] 安装 Isabelle（版本 2022+）
 - [ ] 安装 Isabelle/jEdit
 - [ ] 配置开发环境
@@ -116,21 +149,27 @@ end
 ### 2. 理论准备
 
 **需要转换的形式化定义**：
+
 - [ ] 所有权模型的形式化定义
 - [ ] 借用检查器的形式化定义
 - [ ] 生命周期的形式化定义
 - [ ] 类型系统的形式化定义
+- [ ] 异步状态机的形式化定义（参见 [async_state_machine.md](./formal_methods/async_state_machine.md)）
+- [ ] Pin 与自引用类型的形式化定义（参见 [pin_self_referential.md](./formal_methods/pin_self_referential.md)）
 
 ### 3. 验证框架设计
 
 **验证结构**：
-```
+
+```text
 formal_verification/
 ├── ownership_model.v          # 所有权模型验证
 ├── borrow_checker.v           # 借用检查器验证
 ├── lifetime.v                 # 生命周期验证
 ├── type_system.v              # 类型系统验证
-└── common.v                    # 公共定义
+├── async_state_machine.v      # 异步状态机验证
+├── pin_self_referential.v     # Pin 与自引用验证
+└── common.v                   # 公共定义
 ```
 
 ---
@@ -142,6 +181,7 @@ formal_verification/
 **目标**：验证所有权规则的正确性
 
 **Coq 实现框架**：
+
 ```coq
 (* ownership_model.v *)
 Require Import Coq.Arith.Arith.
@@ -171,6 +211,7 @@ Qed.
 ```
 
 **验证内容**：
+
 - [ ] 所有权唯一性
 - [ ] 所有权转移规则
 - [ ] 内存安全保证
@@ -180,6 +221,7 @@ Qed.
 **目标**：验证借用规则的正确性
 
 **Coq 实现框架**：
+
 ```coq
 (* borrow_checker.v *)
 Require Import ownership_model.
@@ -212,6 +254,7 @@ Qed.
 ```
 
 **验证内容**：
+
 - [ ] 借用规则正确性
 - [ ] 数据竞争自由
 - [ ] 借用检查算法
@@ -221,6 +264,7 @@ Qed.
 **目标**：验证生命周期规则的正确性
 
 **Coq 实现框架**：
+
 ```coq
 (* lifetime.v *)
 Require Import Coq.Arith.Arith.
@@ -242,6 +286,7 @@ Qed.
 ```
 
 **验证内容**：
+
 - [ ] 引用有效性
 - [ ] 生命周期推断
 - [ ] 生命周期约束
@@ -251,6 +296,7 @@ Qed.
 **目标**：验证类型系统的正确性
 
 **Coq 实现框架**：
+
 ```coq
 (* type_system.v *)
 Require Import Coq.Lists.List.
@@ -276,9 +322,61 @@ Admitted.
 ```
 
 **验证内容**：
+
 - [ ] 类型推导正确性
 - [ ] 类型安全
 - [ ] 进展性和保持性
+
+### 步骤 5: 异步状态机验证
+
+**目标**：验证 Future 状态一致性、并发安全与进度保证（参见 [async_state_machine.md](./formal_methods/async_state_machine.md)）
+
+**Coq 实现框架**：
+
+```coq
+(* async_state_machine.v *)
+Require Import Coq.Arith.Arith.
+
+(* 定义 Future 状态 *)
+Inductive FutureState : Type :=
+  | Pending | Ready | Waiting | Polling.
+
+(* 定义有效状态转换 *)
+Definition ValidTransition (s s' : FutureState) : Prop :=
+  match s, s' with
+  | Pending, Polling => True
+  | Polling, Pending => True
+  | Polling, Ready => True
+  | _ , _ => False
+  end.
+
+(* 定理 6.1 状态一致性、6.2 并发安全、6.3 进度保证 *)
+```
+
+**验证内容**：
+
+- [ ] 状态一致性（定理 6.1）
+- [ ] 并发安全（定理 6.2）
+- [ ] 进度保证（定理 6.3）
+
+### 步骤 6: Pin 与自引用验证
+
+**目标**：验证 Pin 保证、自引用类型安全与 Pin 投影安全（参见 [pin_self_referential.md](./formal_methods/pin_self_referential.md)）
+
+**Coq 实现框架**：
+
+```coq
+(* pin_self_referential.v *)
+
+(* 定义 Unpin / !Unpin、Pin 不变式：被 Pin 值的位置稳定性 *)
+(* 定理 1 Pin 保证、定理 2 自引用类型安全、定理 3 Pin 投影安全 *)
+```
+
+**验证内容**：
+
+- [ ] Pin 保证（定理 1）
+- [ ] 自引用类型安全（定理 2）
+- [ ] Pin 投影安全（定理 3）
 
 ---
 
@@ -320,6 +418,24 @@ Admitted.
 - [ ] 证明类型推导正确性
 - [ ] 编写验证报告
 
+### 异步状态机验证
+
+- [ ] 转换异步状态机形式化定义到 Coq/Isabelle
+- [ ] 实现 Future 状态与转换
+- [ ] 证明状态一致性（定理 6.1）
+- [ ] 证明并发安全（定理 6.2）
+- [ ] 证明进度保证（定理 6.3）
+- [ ] 编写验证报告
+
+### Pin 与自引用验证
+
+- [ ] 转换 Pin/自引用形式化定义到 Coq/Isabelle
+- [ ] 实现 Pin 不变式与投影条件
+- [ ] 证明 Pin 保证（定理 1）
+- [ ] 证明自引用类型安全（定理 2）
+- [ ] 证明 Pin 投影安全（定理 3）
+- [ ] 编写验证报告
+
 ---
 
 ## 🔗 相关资源
@@ -349,5 +465,5 @@ Admitted.
 ---
 
 **维护者**: Rust Formal Verification Team
-**最后更新**: 2025-12-25
-**状态**: 📝 **准备中**
+**最后更新**: 2026-01-26
+**状态**: ✅ **指南 100% 完成**

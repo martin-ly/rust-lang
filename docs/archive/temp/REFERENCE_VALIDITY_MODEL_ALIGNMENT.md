@@ -1,5 +1,13 @@
 # 引用一致性模型对齐报告
 
+> ⚠️ **历史文档** - 本文档为历史参考文档，部分链接可能已失效
+> 
+> **实际文档位置**:
+> - 形式化所有权系统: `docs/research_notes/formal_methods/ownership_model.md`
+> - 类型系统基础: `docs/research_notes/type_theory/type_system_foundations.md`
+> - 所有权文档: `crates/c01_ownership_borrow_scope/docs/`
+> - 类型系统文档: `crates/c02_type_system/docs/`
+
 ## 概述
 
 本文档记录了使用"引用一致性类型系统"视角对项目中相关文档进行全面梳理和修改的工作。根据 `rust_logic_view.md` 中提出的核心观点，Rust 的类型系统并非建立在"内存引用"这一物理概念之上，而是建立在"引用一致性（Reference Validity）"这一逻辑契约之上。

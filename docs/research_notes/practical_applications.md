@@ -1,9 +1,9 @@
 # 实际应用案例研究
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2025-11-15
-> **Rust 版本**: 1.91.1+ (Edition 2024) ✅
-> **状态**: 🔄 进行中
+> **最后更新**: 2026-01-26
+> **Rust 版本**: 1.93.0+ (Edition 2024) ✅
+> **状态**: ✅ 已完成 (100%)
 
 ---
 
@@ -40,6 +40,13 @@
     - [网络应用最佳实践](#网络应用最佳实践)
     - [并发系统最佳实践](#并发系统最佳实践)
     - [嵌入式系统最佳实践](#嵌入式系统最佳实践)
+  - [📋 案例报告与应用指南](#-案例报告与应用指南)
+    - [案例报告模板](#案例报告模板)
+    - [应用指南](#应用指南)
+  - [🔗 系统集成与案例索引](#-系统集成与案例索引)
+    - [与形式化方法的关联](#与形式化方法的关联)
+    - [与类型理论、实验研究的关联](#与类型理论实验研究的关联)
+    - [案例快速索引](#案例快速索引)
   - [📖 参考文献](#-参考文献)
     - [实际项目](#实际项目)
     - [相关文档](#相关文档)
@@ -883,6 +890,55 @@ impl<T> Drop for SafeVec<T> {
    - 处理异常情况
    - 记录系统状态
 
+---
+
+## 📋 案例报告与应用指南
+
+### 案例报告模板
+
+撰写单个案例报告时，建议包含以下部分：
+
+1. **项目概述**：名称、领域、规模、主要功能
+2. **Rust 特性应用**：所有权、借用、并发、异步、零成本抽象、类型安全等在该项目中的体现
+3. **关键代码示例**：1–2 段具代表性的代码，附简要说明
+4. **性能/安全/可维护性**：量化指标或定性结论（若有）
+5. **研究价值**：对形式化、类型理论、实验或方法论的启发
+6. **参考链接**：仓库、文档、博客
+
+### 应用指南
+
+- **选型**：系统编程、网络、并发、嵌入式可分别从「案例分类」中选取对标项目；性能与安全诉求可参考「案例分析」与各实验的基准。
+- **落地**：按「最佳实践总结」的四个领域逐条对照；异步、错误处理、并发原语选型可结合 [async_state_machine](../formal_methods/async_state_machine.md)、[concurrency_performance](./experiments/concurrency_performance.md)。
+- **扩展**：新案例可按「案例报告模板」录入，并纳入下方「系统集成与案例索引」。
+
+---
+
+## 🔗 系统集成与案例索引
+
+### 与形式化方法的关联
+
+- **所有权模型** [ownership_model.md](./formal_methods/ownership_model.md)：Redox、Tock、Firecracker、SafeVec 等案例中的资源管理与 `unsafe` 边界，可对照所有权规则做形式化抽查。
+- **借用检查器** [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)：TiKV、Actix、Linkerd 等并发与迭代场景，可对照借用规则验证无数据竞争。
+- **异步状态机** [async_state_machine.md](./formal_methods/async_state_machine.md)：Tokio、Actix、ScyllaDB 驱动、案例 1–2 的 async 设计，可对应 Future/Poll/Waker 形式化。
+
+### 与类型理论、实验研究的关联
+
+- **类型系统 / Trait** [type_system_foundations.md](./type_theory/type_system_foundations.md)、[trait_system_formalization.md](./type_theory/trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
+- **性能基准** [performance_benchmarks.md](./experiments/performance_benchmarks.md)、**并发性能** [concurrency_performance.md](./experiments/concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
+- **内存分析** [memory_analysis.md](./experiments/memory_analysis.md)、**编译器优化** [compiler_optimizations.md](./experiments/compiler_optimizations.md)：案例中的分配策略、`-O2`/LTO 等可与实验指南结合，做上线前检查。
+
+### 案例快速索引
+
+| 领域 | 案例 | 文档内锚点 / 关键词 |
+|------|------|---------------------|
+| 系统 | Redox, Tokio, Firecracker | 案例 1.1, 1.2, 1.3 |
+| 网络 | Actix-web, Linkerd | 案例 2.1, 2.2 |
+| 并发 | TiKV, ScyllaDB 驱动 | 案例 3.1, 3.2 |
+| 嵌入式 | Tock, Drone | 案例 4.1, 4.2 |
+| 综合示例 | Web 服务器, 数据处理, SafeVec | 案例 1, 2, 3 |
+
+---
+
 ## 📖 参考文献
 
 ### 实际项目
@@ -904,5 +960,5 @@ impl<T> Drop for SafeVec<T> {
 ---
 
 **维护者**: Rust Application Research Team
-**最后更新**: 2025-11-15
-**状态**: 🔄 **进行中**
+**最后更新**: 2026-01-26
+**状态**: ✅ **已完成** (100%)

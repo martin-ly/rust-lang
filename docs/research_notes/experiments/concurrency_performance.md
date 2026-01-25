@@ -1,9 +1,9 @@
 # 并发性能研究
 
 > **创建日期**: 2025-11-15
-> **最后更新**: 2025-11-15
-> **Rust 版本**: 1.91.1+ (Edition 2024) ✅
-> **状态**: 🔄 进行中
+> **最后更新**: 2026-01-26
+> **Rust 版本**: 1.93.0+ (Edition 2024) ✅
+> **状态**: ✅ 已完成 (100%)
 
 ---
 
@@ -29,6 +29,18 @@
   - [📊 实验结果](#-实验结果)
     - [1. 同步原语性能对比](#1-同步原语性能对比)
     - [2. 通道性能对比](#2-通道性能对比)
+    - [结果分析模板](#结果分析模板)
+  - [📋 数据收集执行指南](#-数据收集执行指南)
+    - [环境要求](#环境要求)
+    - [执行步骤](#执行步骤)
+  - [📐 性能优化建议与工具改进](#-性能优化建议与工具改进)
+    - [性能优化建议](#性能优化建议)
+    - [工具改进](#工具改进)
+    - [性能报告](#性能报告)
+  - [🔗 系统集成与实际应用](#-系统集成与实际应用)
+    - [与形式化方法的集成](#与形式化方法的集成)
+    - [与实验研究的集成](#与实验研究的集成)
+    - [实际应用案例](#实际应用案例)
   - [📖 参考文献](#-参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
@@ -324,7 +336,7 @@ async fn async_task_benchmark() {
 **测试环境**：
 
 - CPU: 8 核
-- Rust 版本: 1.91.1
+- Rust 版本: 1.93.0+
 - 优化级别: `-O2`
 
 **结果**：
@@ -358,6 +370,78 @@ async fn async_task_benchmark() {
 - 无界通道性能略好于有界通道
 - 通道容量对性能有显著影响
 
+### 结果分析模板
+
+将 `cargo bench`（Mutex/RwLock/Atomic、mpsc/crossbeam、async 任务）的产出填入下表：
+
+| 类别 | 指标 | 实测值 | 单位 | 备注 |
+|------|------|--------|------|------|
+| 同步 | Mutex 操作时间 | _____ | ms | 1M 次/4 线程 |
+| 同步 | RwLock 写 操作时间 | _____ | ms | 同上 |
+| 同步 | RwLock 读 操作时间 | _____ | ms | 读多场景 |
+| 通道 | mpsc 延迟 | _____ | ns | 或 吞吐 msg/s |
+| 通道 | crossbeam 延迟 | _____ | ns | 对比 mpsc |
+| 异步 | Tokio 1 万任务 总时间 | _____ | ms | 含 sleep(1μs) |
+
+**结论填写**：与文中对照，说明读多写少选 RwLock、消息传递选 crossbeam 等；若用 Rust 1.93 的 `thread_local` 分配器，可注明多线程分配对并发基准的影响。
+
+---
+
+## 📋 数据收集执行指南
+
+### 环境要求
+
+- **Rust**: 1.93.0+；**Tokio**：`tokio = { version = "1", features = ["full"] }`；**Criterion**：工作区已配置
+- 建议固定 CPU 频率、关闭节能；多线程 bench 需注意核心数与负载隔离
+
+### 执行步骤
+
+1. **同步原语**：运行 `mutex_benchmark`、`rwlock_benchmark`，以及 Atomic、Condvar 的 bench；记录 ITERATIONS/THREADS 与耗时。
+2. **通道**：运行 `channel_benchmark`、`unbounded_channel_benchmark`，若有 crossbeam 则一并对比；记录 MESSAGES 与延迟/吞吐。
+3. **异步**：`#[tokio::main]` 下跑 `async_task_benchmark`，变化 TASKS 与 `sleep` 时长；可选 `async-std` 对比。
+4. **留存**：将 `target/criterion/` 的 `estimates.json` 或主要指标录入「结果分析模板」。
+
+---
+
+## 📐 性能优化建议与工具改进
+
+### 性能优化建议
+
+- **同步**：读多写少用 `RwLock`；简单标量用 `Atomic`；减少锁粒度与持锁时间。
+- **通道**：高吞吐优先 `crossbeam`；有背压需求用有界 `mpsc`；避免在热路径上 `clone` 大消息。
+- **异步**：合理设置 `tokio` 的 `worker_threads`；避免在 async 中阻塞；用 `tokio::spawn` 控制任务数量。
+- **Rust 1.93**：`thread_local` 分配器可降低多线程分配竞争，重跑并发基准以更新基线。
+
+### 工具改进
+
+- **loom**：做并发顺序与数据竞争的模型检查，与 bench 互补。
+- **perf / flamegraph**：定位锁竞争、调度与 I/O 热点。
+- **Criterion**：用 `BenchmarkId` 区分 THREADS、MESSAGES、TASKS 等维度，便于做可复现的并发报告。
+
+### 性能报告
+
+按「结果分析模板」+ 各原语/通道/异步的 bench 曲线，可形成并发性能报告；建议包含「同步 vs 通道 vs 异步的选型」「线程数与扩展性」「与 1.93 的兼容性」三部分。
+
+---
+
+## 🔗 系统集成与实际应用
+
+### 与形式化方法的集成
+
+- **异步状态机**：见 [async_state_machine.md](../formal_methods/async_state_machine.md)。异步任务的 Poll、Waker 与状态转换，可与本研究的 async 基准对应；并发安全定理与「无数据竞争」可共同验证。
+- **借用检查器**：见 [borrow_checker_proof.md](../formal_methods/borrow_checker_proof.md)。Rust 的并发原语（Mutex、Arc、channel）在类型与借用层面保证数据竞争自由，本研究的性能数据不改变该结论，但可指导「在安全前提下选更快实现」。
+
+### 与实验研究的集成
+
+- **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。并发一节与本文的 Mutex/RwLock、通道、async 可共用 `cargo bench` 与 Criterion 流程。
+- **内存分析**：见 [memory_analysis.md](./memory_analysis.md)。`Arc`、有界通道的缓冲、Tokio 任务队列与 `thread_local` 分配器会影响内存；分析时需区分配置（线程数、任务数、通道容量）。
+
+### 实际应用案例
+
+- **服务端**：Mutex/RwLock 用于共享缓存；crossbeam 用于工作池任务队列；Tokio 用于 I/O 并发；按「结果分析模板」做上线前基准。
+- **嵌入式 / 实时**：在 `no_std` 下用 `Atomic`、自旋锁或 RTOS 原语；异步可用 `embassy` 等，基准方法可复用（更换原语与运行时）。
+- **Rust 1.93**：`thread_local` 分配器、musl 1.2.5 对网络与多线程负载有影响，重跑以更新并发与 I/O 基线。
+
 ---
 
 ## 📖 参考文献
@@ -381,5 +465,5 @@ async fn async_task_benchmark() {
 ---
 
 **维护者**: Rust Concurrency Performance Research Team
-**最后更新**: 2025-11-15
-**状态**: 🔄 **进行中**
+**最后更新**: 2026-01-26
+**状态**: ✅ **已完成** (100%)

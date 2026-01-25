@@ -329,7 +329,7 @@ impl TypeValidator {
 ### 必需工具
 
 ```bash
-# 安装 Rust 1.90+
+# 安装 Rust 1.93.0+
 rustup install stable
 rustup default stable
 

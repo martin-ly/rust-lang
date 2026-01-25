@@ -1,4 +1,4 @@
-﻿# 实战示例：简单 CLI 工具
+# 实战示例：简单 CLI 工具
 
 ## 📊 目录
 
@@ -69,7 +69,7 @@ simple-cli/
 name = "simple-cli"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.92"
+rust-version = "1.93"
 
 # 包元数据
 description = "A simple CLI tool example"

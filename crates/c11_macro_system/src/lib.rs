@@ -1,4 +1,4 @@
-﻿//! # C11: Rust宏系统 (Macro System)
+//! # C11: Rust宏系统 (Macro System)
 //!
 //! 本模块提供Rust宏系统的系统化学习内容，包括声明宏和过程宏。
 //!
@@ -72,9 +72,25 @@ pub use rust_192_features::{
 };
 
 /// 模块版本信息
+///
+/// # Examples
+///
+/// ```
+/// use c11_macro_system::VERSION;
+///
+/// assert!(!VERSION.is_empty());
+/// ```
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// 模块名称
+///
+/// # Examples
+///
+/// ```
+/// use c11_macro_system::MODULE_NAME;
+///
+/// assert_eq!(MODULE_NAME, "C11: Macro System");
+/// ```
 pub const MODULE_NAME: &str = "C11: Macro System";
 
 #[cfg(test)]

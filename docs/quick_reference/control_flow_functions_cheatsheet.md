@@ -1,7 +1,7 @@
 # 🔄 Rust 控制流与函数速查卡
 
 > **快速参考** | [完整文档](../../crates/c03_control_fn/docs/) | [代码示例](../../crates/c03_control_fn/examples/)
-> **最后更新**: 2025-11-15 | **Rust 版本**: 1.91.1+ | **Edition**: 2024
+> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -124,7 +124,7 @@ if let Some(value) = option {
     println!("无值");
 }
 
-// 链式 if let (Rust 1.92.0+)
+// 链式 if let (Rust 1.93.0+)
 if let Some(a) = option1 && let Some(b) = option2 {
     println!("都有值: {} {}", a, b);
 }
@@ -606,15 +606,25 @@ fn factorial_tail(n: u64, acc: u64) -> u64 {
 
 ## 📚 相关资源
 
+### 官方文档
 - [Rust 控制流文档](https://doc.rust-lang.org/book/ch03-05-control-flow.html)
 - [Rust 函数文档](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html)
 - [Rust 闭包文档](https://doc.rust-lang.org/book/ch13-01-closures.html)
+
+### 项目内部文档
 - [完整控制流文档](../../crates/c03_control_fn/docs/)
+- [控制流研究笔记](../../docs/research_notes/)
+
+### 相关速查卡
+- [错误处理速查卡](./error_handling_cheatsheet.md) - 错误处理模式
+- [类型系统速查卡](./type_system.md) - 类型与函数
+- [集合与迭代器速查卡](./collections_iterators_cheatsheet.md) - 迭代器与循环
+- [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与闭包
 
 ---
 
-**最后更新**: 2025-11-15
+**最后更新**: 2026-01-26
 **维护者**: 文档团队
-**状态**: 持续更新中 📝
+**状态**: ✅ **Rust 1.93.0 更新完成**
 
 🎯 **掌握控制流，编写清晰代码！**

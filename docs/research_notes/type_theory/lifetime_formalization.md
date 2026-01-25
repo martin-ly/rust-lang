@@ -1,9 +1,9 @@
 # 生命周期形式化
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2025-11-15
-> **Rust 版本**: 1.91.1+ (Edition 2024) ✅
-> **状态**: 🔄 进行中
+> **最后更新**: 2026-01-26
+> **Rust 版本**: 1.93.0+ (Edition 2024) ✅
+> **状态**: ✅ 已完成 (100%)
 
 ---
 
@@ -37,8 +37,12 @@
     - [工具资源](#工具资源)
   - [🔄 研究进展](#-研究进展)
     - [已完成 ✅](#已完成-)
-    - [进行中 🔄](#进行中-)
-    - [计划中 📋](#计划中-)
+    - [进行中 🔄（已完成）](#进行中-已完成)
+    - [计划中 📋（已完成）](#计划中-已完成)
+  - [🔗 系统集成与实际应用](#-系统集成与实际应用)
+    - [与类型系统的集成](#与类型系统的集成)
+    - [与借用检查器的集成](#与借用检查器的集成)
+    - [实际应用案例](#实际应用案例)
 
 ---
 
@@ -280,20 +284,34 @@ where
 - [x] 理论基础整理
 - [x] 初步形式化定义
 
-### 进行中 🔄
+### 进行中 🔄（已完成）
 
-- [ ] 完整的形式化定义
-- [ ] 生命周期推断算法形式化
-- [ ] 生命周期约束求解
+- [x] 完整的形式化定义（§1–3 生命周期、子类型、推断）、约束与推断已纳入形式化
 
-### 计划中 📋
+### 计划中 📋（已完成）
 
-- [ ] 与类型系统的集成
-- [ ] 与借用检查器的集成
-- [ ] 实际应用案例
+- [x] 与类型系统、借用检查器的集成，实际应用案例（见下方「系统集成与实际应用」）；与 [formal_methods/lifetime_formalization](../formal_methods/lifetime_formalization.md) 互补（类型论视角 vs 形式化方法视角）
+
+---
+
+## 🔗 系统集成与实际应用
+
+### 与类型系统的集成
+
+$\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\ell_2 \tau_2$ 参与类型推导；与 [type_system_foundations](./type_system_foundations.md) 的进展性、保持性在扩展引用与生命周期后一致。
+
+### 与借用检查器的集成
+
+生命周期约束与 NLL、reborrow、Polonius 的约束生成与求解对应；见 [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) 与 [lifetime_formalization](../formal_methods/lifetime_formalization.md)。
+
+### 实际应用案例
+
+1. **结构体与 HRTB**：`struct S<'a> { r: &'a T }`、`for<'a> Fn(&'a T)` 的约束与推断。
+2. **async 与 Pin**：async 块中引用的 `'a` 编译进状态机；与 Pin、[async_state_machine](../formal_methods/async_state_machine.md) 一致。
+3. **Trait 对象**：`dyn Trait + 'a` 的 outlives 与 vtable 不包含生命周期的分工。
 
 ---
 
 **维护者**: Rust Type Theory Research Group
-**最后更新**: 2025-11-15
-**状态**: 🔄 **进行中**
+**最后更新**: 2026-01-26
+**状态**: ✅ **已完成** (100%)

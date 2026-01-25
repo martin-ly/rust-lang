@@ -136,6 +136,21 @@ impl ProjectInfo {
 }
 
 /// 初始化项目
+///
+/// 初始化控制流与函数模块，设置日志系统并打印项目信息。
+///
+/// # Examples
+///
+/// ```
+/// use c03_control_fn::init;
+///
+/// // 初始化项目
+/// init();
+/// ```
+///
+/// # Note
+///
+/// 此函数会初始化日志系统，多次调用是安全的。
 pub fn init() {
     // 设置日志
     tracing_subscriber::fmt::init();

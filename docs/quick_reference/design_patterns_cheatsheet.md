@@ -1,8 +1,8 @@
 # 设计模式快速参考卡片
 
 **模块**: C09 Design Patterns
-**Rust 版本**: 1.92.0
-**最后更新**: 2025-12-11
+**Rust 版本**: 1.93.0+
+**最后更新**: 2026-01-26
 
 ---
 
@@ -138,12 +138,25 @@ impl Door<Closed> {
 
 ---
 
-## 📚 相关文档
+## 📚 相关资源
 
-- [完整文档](../crates/c09_design_pattern/README.md)
-- [设计模式使用指南](../DESIGN_PATTERNS_USAGE_GUIDE.md)
-- [GoF 模式](../crates/c09_design_pattern/docs/tier_02_guides/01_GoF设计模式.md)
+### 官方文档
+- [Rust 设计模式](https://rust-unofficial.github.io/patterns/)
+- [Rust API 指南](https://rust-lang.github.io/api-guidelines/)
+
+### 项目内部文档
+- [完整文档](../../crates/c09_design_pattern/README.md)
+- [设计模式使用指南](../../docs/DESIGN_PATTERNS_USAGE_GUIDE.md)
+- [GoF 模式](../../crates/c09_design_pattern/docs/tier_02_guides/01_GoF设计模式.md)
+
+### 相关速查卡
+- [类型系统速查卡](./type_system.md) - Trait 与设计模式
+- [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权模式
+- [泛型编程速查卡](./generics_cheatsheet.md) - 泛型与模式
+- [智能指针速查卡](./smart_pointers_cheatsheet.md) - 指针模式
 
 ---
 
+**最后更新**: 2026-01-26
+**Rust 版本**: 1.93.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档

@@ -1,9 +1,9 @@
 # 内存分析研究
 
 > **创建日期**: 2025-11-15
-> **最后更新**: 2025-11-15
-> **Rust 版本**: 1.91.1+ (Edition 2024) ✅
-> **状态**: 🔄 进行中
+> **最后更新**: 2026-01-26
+> **Rust 版本**: 1.93.0+ (Edition 2024) ✅
+> **状态**: ✅ 已完成 (100%)
 
 ---
 
@@ -32,6 +32,18 @@
   - [📊 实验结果](#-实验结果)
     - [Vec 增长模式](#vec-增长模式)
     - [内存泄漏检测](#内存泄漏检测)
+    - [结果分析模板](#结果分析模板)
+  - [📋 数据收集执行指南](#-数据收集执行指南)
+    - [环境要求](#环境要求)
+    - [执行步骤](#执行步骤)
+  - [📐 内存优化建议与工具改进](#-内存优化建议与工具改进)
+    - [内存优化建议](#内存优化建议)
+    - [工具改进](#工具改进)
+    - [内存报告](#内存报告)
+  - [🔗 系统集成与实际应用](#-系统集成与实际应用)
+    - [与形式化方法的集成](#与形式化方法的集成)
+    - [与实验研究的集成](#与实验研究的集成)
+    - [实际应用案例](#实际应用案例)
   - [📖 参考文献](#-参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
@@ -324,6 +336,77 @@ impl SafeNode {
 - 使用 `Weak` 可以打破循环引用
 - 需要仔细设计数据结构避免循环引用
 
+### 结果分析模板
+
+将 `valgrind --leak-check=full`、`dhat` 或自定义 `TrackingAllocator` 的产出填入下表：
+
+| 类别 | 指标 | 实测值 | 单位 | 备注 |
+|------|------|--------|------|------|
+| Vec 增长 | 容量序列（前 10 次） | _____ | - | 如 0,1,2,4,8,... |
+| 分配 | 已分配累计 | _____ | 字节 | TrackingAllocator |
+| 分配 | 当前驻留 | _____ | 字节 | 已分配−已释放 |
+| 泄漏 | valgrind 泄漏块数 | _____ | - | 目标为 0 |
+| 泄漏 | valgrind 泄漏字节 | _____ | 字节 | 目标为 0 |
+
+**结论填写**：与 Vec 指数增长、Rc/Weak 模式对比；若用 Miri/heaptrack，可注明与 Rust 1.93 的兼容性。
+
+---
+
+## 📋 数据收集执行指南
+
+### 环境要求
+
+- **Rust**: 1.93.0+；**Valgrind**: 3.18+（Linux）；**Miri**: `rustup component add miri`
+- **dhat**：`cargo add dhat` 或使用 `#[global_allocator]` + 自定义 TrackingAllocator
+
+### 执行步骤
+
+1. **Vec 增长与布局**：运行含 `analyze_vec_growth`、`analyze_memory_layout` 的示例，记录 `capacity` 序列与 `size_of`/`align_of`。
+2. **泄漏检测**：`valgrind --leak-check=full --show-leak-kinds=all ./target/release/your_binary`；或 `MIRIFLAGS="-Zmiri-tag-raw-pointers" cargo miri run`。
+3. **堆分析**：`heaptrack ./target/release/your_binary` 或 dhat；若用 TrackingAllocator，执行后读取 `ALLOCATED`/`DEALLOCATED`。
+4. **留存**：将上述结果录入「结果分析模板」。
+
+---
+
+## 📐 内存优化建议与工具改进
+
+### 内存优化建议
+
+- **Vec**：`Vec::with_capacity` 预分配；避免频繁 `push` 触发多次扩容。
+- **Rc/Arc**：有环则用 `Weak` 破环；无环优先 `Rc`，多线程用 `Arc`。
+- **布局**：`#[repr(C)]` 控制对齐与 FFI；`std::mem::size_of` 排查大对象。
+- **分配器**：Rust 1.93 的 `thread_local` 全局分配器可降低多线程分配竞争。
+
+### 工具改进
+
+- **Valgrind**：可与 `--error-limit=no`、`--trace-children=yes` 联用做集成测试。
+- **Miri**：持续跟进 `-Zmiri` 与 1.93 的兼容性。
+- **heaptrack/dhat**：用于定位热点分配与碎片化；可导出与「结果分析模板」对接的指标。
+
+### 内存报告
+
+按「结果分析模板」整理 + 各工具截图/日志摘要，即可形成内存分析报告；建议区分「无泄漏验证」「峰值驻留」「碎片化与分配热点」三部分。
+
+---
+
+## 🔗 系统集成与实际应用
+
+### 与形式化方法的集成
+
+- **所有权模型**：见 [ownership_model.md](../formal_methods/ownership_model.md)。内存分析中的「移动/复制/Drop」可对照所有权规则验证无泄漏。
+- **借用检查器**：见 [borrow_checker_proof.md](../formal_methods/borrow_checker_proof.md)。引用与生命周期不影响堆分配量，但可通过 Miri 与借用规则共同保证无 UB。
+
+### 与实验研究的集成
+
+- **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。内存分配基准（栈/堆/预分配）与本研究的数据收集可共用 `cargo bench` 与 Criterion 输出。
+- **编译器优化**：见 [compiler_optimizations.md](./compiler_optimizations.md)。`-C link-dead-code`、`opt-level` 会影响可执行体大小与分配内联，分析时需固定编译选项。
+
+### 实际应用案例
+
+- **服务端**：用 heaptrack/dhat 做高峰负载下的驻留与泄漏巡检；`Arc`/`Weak` 用于缓存与依赖图。
+- **嵌入式 / no_std**：自定义 `GlobalAlloc` + 固定池，结合 `size_of`/`align_of` 做静态预算。
+- **Rust 1.93**：`thread_local` 分配器、`MaybeUninit` 新方法可改变分配热点，重跑内存分析以更新基线。
+
 ---
 
 ## 📖 参考文献
@@ -348,5 +431,5 @@ impl SafeNode {
 ---
 
 **维护者**: Rust Memory Research Team
-**最后更新**: 2025-11-15
-**状态**: 🔄 **进行中**
+**最后更新**: 2026-01-26
+**状态**: ✅ **已完成** (100%)

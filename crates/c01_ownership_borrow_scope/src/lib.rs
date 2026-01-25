@@ -514,6 +514,19 @@ pub use rust_192_features::{
 pub const VERSION: &str = "1.0.0";
 
 /// 模块初始化 / Module Initialization
+///
+/// # Examples
+///
+/// ```
+/// use c01_ownership_borrow_scope::init;
+///
+/// let result = init();
+/// assert!(result.is_ok());
+/// ```
+///
+/// # Errors
+///
+/// 如果初始化失败，返回错误。
 pub fn init() -> Result<(), Box<dyn std::error::Error>> {
     println!(
         "Rust所有权和借用作用域模块已初始化 / Rust Ownership and Borrowing Scope Module Initialized"
@@ -522,6 +535,15 @@ pub fn init() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// 获取模块信息 / Get Module Information
+///
+/// # Examples
+///
+/// ```
+/// use c01_ownership_borrow_scope::get_module_info;
+///
+/// let info = get_module_info();
+/// assert!(info.contains("Ownership"));
+/// ```
 pub fn get_module_info() -> &'static str {
     "Rust Ownership and Borrowing Scope Module v1.0.0"
 }
@@ -538,11 +560,29 @@ pub fn run_tests() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// 运行基础语法示例 / Run Basic Syntax Examples
+///
+/// # Examples
+///
+/// ```
+/// use c01_ownership_borrow_scope::run_basic_syntax_examples;
+///
+/// // 运行所有基础语法示例
+/// run_basic_syntax_examples();
+/// ```
 pub fn run_basic_syntax_examples() {
     basic_syntax::run_all_basic_syntax_examples();
 }
 
 /// 获取基础语法信息 / Get Basic Syntax Information
+///
+/// # Examples
+///
+/// ```
+/// use c01_ownership_borrow_scope::get_basic_syntax_info;
+///
+/// let info = get_basic_syntax_info();
+/// assert!(!info.is_empty());
+/// ```
 pub fn get_basic_syntax_info() -> &'static str {
     basic_syntax::get_basic_syntax_info()
 }

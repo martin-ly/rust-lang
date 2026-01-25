@@ -19,7 +19,7 @@ members = [
 
 [workspace.package]
 edition = "2024"
-rust-version = "1.92.0" # 使用最新稳定版本 (Rust 1.92.0)
+rust-version = "1.93.0" # 使用最新稳定版本 (Rust 1.93.0)
 
 
 [profile.release]
@@ -95,11 +95,10 @@ codegen-units = 1
 [profile.bench.build-override]
 opt-level = 2
 
-# 工作区级别的依赖版本统一 - 2025年12月11日最新稳定版本
-# 更新时间: 2025-12-11 (全面更新至最新成熟稳定版本，兼容Rust 1.92.0)
+# 工作区级别的依赖版本统一 - 2026年1月26日最新稳定版本
+# 更新时间: 2026-01-26 (cargo update 更新23个包，兼容 Rust 1.92/1.93)
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
-# 全面升级至2025年12月11日最新稳定版本，兼容Rust 1.92.0
-# cargo update 更新了45个包到最新 Rust 1.92.0 兼容版本
+# rust-version: 1.92.0 -> 1.93.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 2025年12月11日最新稳定版本
@@ -181,7 +180,8 @@ mio = "1.1.1"
 # tungstenite: WebSocket协议的Rust实现 - 2025年10月最新版本
 tungstenite = "0.28.0"
 # rcgen: X.509证书生成库
-rcgen = "0.14.5"
+# 2026-01-26: 0.14.5 -> 0.14.7 (cargo update)
+rcgen = "0.14.7"
 
 # 基础依赖统一 - 2025年10月6日最新稳定版本
 # dotenvy: 环境变量管理库，dotenv的维护良好的分支
@@ -216,7 +216,8 @@ protobuf = "4.33.2-release" # 修复递归崩溃漏洞
 # rustls: 现代TLS库，用Rust编写，提供高性能和安全性 - 版本 0.23+ (字母索引)
 rustls = { version = "0.23.36", features = ["ring"] }
 # rustls-webpki: rustls的WebPKI支持
-rustls-webpki = "0.103.8"
+# 2026-01-26: 0.103.8 -> 0.103.9 (cargo update)
+rustls-webpki = "0.103.9"
 # rustls-pemfile: rustls的PEM文件解析支持
 rustls-pemfile = "2.2.0"
 # tokio-rustls: tokio与rustls的集成
@@ -228,7 +229,8 @@ webpki-roots = "1.0.5"
 
 # 错误处理 - 2025年12月11日最新稳定版本
 # thiserror: 错误类型派生宏库，简化错误处理 - 版本 1.0+ (字母索引)
-thiserror = "2.0.17"
+# 2026-01-26: 2.0.17 -> 2.0.18 (cargo update)
+thiserror = "2.0.18"
 # anyhow: 灵活的错误处理库，基于std::error::Error构建 - 版本 1.0.89+ (字母索引)
 anyhow = "1.0.100"
 
@@ -292,11 +294,13 @@ metrics-exporter-prometheus = "0.18.1"
 # chrono: 日期和时间处理库，支持多种日期格式和时区 - 版本 0.4+ (字母索引)
 chrono = { version = "0.4.43", features = ["serde"] }
 # time: 现代时间处理库，提供高性能的时间操作 - 版本 0.3+ (字母索引)
-time = { version = "0.3.45", features = ["serde", "macros"] }
+# 2026-01-26: 0.3.45 -> 0.3.46 (cargo update)
+time = { version = "0.3.46", features = ["serde", "macros"] }
 
 # 其他常用库 - 2025年12月11日最新稳定版本
 # uuid: UUID生成和解析库，支持多种UUID版本 - 版本 1.10+ (字母索引)
-uuid = { version = "1.19.0", features = ["v4", "serde"] }
+# 2026-01-26: 1.19.0 -> 1.20.0 (cargo update)
+uuid = { version = "1.20.0", features = ["v4", "serde"] }
 # url: URL解析和操作库
 url = "2.5.8"
 # bytes: 字节缓冲区处理库，提供高效的字节操作 - 版本 1.7+ (字母索引)
@@ -442,7 +446,8 @@ glommio = "0.9.0"
 # ahash: 高性能哈希算法实现，替代fxhash (未维护)
 ahash = "0.8.12"
 # quote: 代码生成宏库，替代paste (未维护)
-quote = "1.0.43"
+# 2026-01-26: 1.0.43 -> 1.0.44 (cargo update)
+quote = "1.0.44"
 # proc-macro-error2: 过程宏错误处理库，替代proc-macro-error (未维护)
 proc-macro-error2 = "2.0.1"
 # is-terminal: 终端检测库，替代atty (有安全漏洞)
@@ -1084,4 +1089,45 @@ nix = "0.30.1"
 # - chrono, time, rand_core 和 wasm-bindgen 已在工作区依赖中更新
 # - 其他更新为传递依赖，由其他依赖自动管理
 # - 所有更新已通过 cargo update 验证兼容性
+# ============================================================
+#
+# 依赖更新日志 - 2026年1月26日 cargo update（Rust 1.92/1.93 兼容版本）
+# ============================================================
+# cargo update 更新了23个包到最新 Rust 1.92 兼容版本
+# 更新时间: 2026-01-26
+#
+# 工作区依赖更新（已更新 Cargo.toml）：
+# - rcgen: 0.14.5 -> 0.14.7
+# - rustls-webpki: 0.103.8 -> 0.103.9
+# - thiserror: 2.0.17 -> 2.0.18
+# - time: 0.3.45 -> 0.3.46
+# - uuid: 1.19.0 -> 1.20.0
+# - quote: 1.0.43 -> 1.0.44
+#
+# rust-version: 1.92.0 -> 1.93.0
+#
+# 传递依赖更新（自动更新，无需手动配置）：
+# - aws-lc-rs: 1.15.3 -> 1.15.4
+# - aws-lc-sys: 0.36.0 -> 0.37.0
+# - cc: 1.2.52 -> 1.2.54
+# - find-msvc-tools: 0.1.7 -> 0.1.8
+# - libm: 0.2.15 -> 0.2.16
+# - libp2p-swarm: 0.47.0 -> 0.47.1
+# - libp2p-tcp: 0.44.0 -> 0.44.1
+# - netlink-sys: 0.8.7 -> 0.8.8
+# - num-conv: 0.1.0 -> 0.2.0
+# - openssl-probe: 0.2.0 -> 0.2.1
+# - proc-macro2: 1.0.105 -> 1.0.106
+# - quote: 1.0.43 -> 1.0.44
+# - rustls-pki-types: 1.13.2 -> 1.14.0
+# - socket2: 0.6.1 -> 0.6.2
+# - thiserror-impl: 2.0.17 -> 2.0.18
+# - time-core: 0.1.7 -> 0.1.8
+# - time-macros: 0.2.25 -> 0.2.26
+# - zmij: 1.0.14 -> 1.0.16
+#
+# 重要说明：
+# - rcgen, rustls-webpki, thiserror, time, uuid, quote 已在工作区依赖中更新
+# - 其他为传递依赖，由 Cargo 自动管理
+# - 所有更新已通过 cargo check 验证兼容性
 # ============================================================

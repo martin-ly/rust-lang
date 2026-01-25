@@ -139,6 +139,22 @@ pub const AUTHORS: &str = env!("CARGO_PKG_AUTHORS");
 pub const DESCRIPTION: &str = env!("CARGO_PKG_DESCRIPTION");
 
 /// 初始化库
+/// 初始化进程管理库
+///
+/// 初始化进程管理库，设置必要的资源。
+///
+/// # Examples
+///
+/// ```
+/// use c07_process::init;
+///
+/// let result = init();
+/// assert!(result.is_ok());
+/// ```
+///
+/// # Errors
+///
+/// 如果初始化失败，返回错误。
 pub fn init() -> Result<()> {
     // 初始化日志系统
     tracing_subscriber::fmt()
@@ -152,6 +168,23 @@ pub fn init() -> Result<()> {
 /// 库清理函数
 ///
 /// 清理全局资源和状态
+/// 清理进程管理库资源
+///
+/// 清理进程管理库占用的资源。
+///
+/// # Examples
+///
+/// ```
+/// use c07_process::{init, cleanup};
+///
+/// init().unwrap();
+/// let result = cleanup();
+/// assert!(result.is_ok());
+/// ```
+///
+/// # Errors
+///
+/// 如果清理失败，返回错误。
 pub fn cleanup() -> Result<()> {
     tracing::info!("Cleaning up C07 Process Management Library");
 
@@ -162,6 +195,19 @@ pub fn cleanup() -> Result<()> {
 }
 
 /// 获取库信息
+/// 获取库信息
+///
+/// 返回进程管理库的版本和功能信息。
+///
+/// # Examples
+///
+/// ```
+/// use c07_process::get_library_info;
+///
+/// let info = get_library_info();
+/// assert!(!info.name.is_empty());
+/// assert!(!info.version.is_empty());
+/// ```
 pub fn get_library_info() -> LibraryInfo {
     LibraryInfo {
         name: "c07_process".to_string(),

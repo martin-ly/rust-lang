@@ -1,4 +1,4 @@
-﻿# 实战示例：特性丰富的库
+# 实战示例：特性丰富的库
 
 ## 📊 目录
 
@@ -84,7 +84,7 @@ feature-lib/
 name = "feature-lib"
 version = "0.2.0"
 edition = "2024"
-rust-version = "1.92"
+rust-version = "1.93"
 
 # 包元数据
 description = "A library demonstrating Cargo features"

@@ -1,8 +1,8 @@
 # WASM 快速参考卡片
 
 **模块**: C12 WASM
-**Rust 版本**: 1.92.0
-**最后更新**: 2025-12-11
+**Rust 版本**: 1.93.0+
+**最后更新**: 2026-01-26
 
 ---
 
@@ -24,7 +24,10 @@
   - [⚡ 性能优化](#-性能优化)
     - [减小二进制大小](#减小二进制大小)
     - [使用 wasm-opt](#使用-wasm-opt)
-  - [📚 相关文档](#-相关文档)
+  - [📚 相关资源](#-相关资源)
+    - [官方文档](#官方文档)
+    - [项目内部文档](#项目内部文档)
+    - [相关速查卡](#相关速查卡)
 
 ---
 
@@ -164,12 +167,29 @@ wasm-opt -Os pkg/my_project_bg.wasm -o pkg/my_project_optimized.wasm
 
 ---
 
-## 📚 相关文档
+## 📚 相关资源
 
-- [完整文档](../crates/c12_wasm/README.md)
-- [WASM 使用指南](../WASM_USAGE_GUIDE.md)
-- [JavaScript 互操作](../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
+### 官方文档
+
+- [wasm-bindgen 文档](https://rustwasm.github.io/wasm-bindgen/)
+- [wasm-pack 文档](https://rustwasm.github.io/wasm-pack/)
+- [WebAssembly 官方文档](https://webassembly.org/)
+
+### 项目内部文档
+
+- [完整文档](../../crates/c12_wasm/README.md)
+- [WASM 使用指南](../../docs/WASM_USAGE_GUIDE.md)
+- [JavaScript 互操作](../../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
+
+### 相关速查卡
+
+- [异步编程速查卡](./async_patterns.md) - WASM 异步
+- [类型系统速查卡](./type_system.md) - WASM 类型
+- [错误处理速查卡](./error_handling_cheatsheet.md) - WASM 错误处理
+- [测试速查卡](./testing_cheatsheet.md) - WASM 测试
 
 ---
 
+**最后更新**: 2026-01-26
+**Rust 版本**: 1.93.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档

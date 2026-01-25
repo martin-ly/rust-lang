@@ -1,27 +1,45 @@
 # 📚 形式化证明文档索引
 
 > **创建日期**: 2025-12-25
-> **最后更新**: 2025-12-25
-> **Rust 版本**: 1.92.0+ (Edition 2024) ✅
-> **状态**: ✅ **持续更新中**
+> **最后更新**: 2026-01-26
+> **Rust 版本**: 1.93.0+ (Edition 2024) ✅
+> **状态**: ✅ **证明索引 100% 完成**（26 个证明已全部收录，Rust 1.93.0 更新完成）
 
 ---
 
 ## 📊 目录
 
-- [形式化证明文档索引](#形式化证明文档索引)
+- [📚 形式化证明文档索引](#-形式化证明文档索引)
   - [📊 目录](#-目录)
   - [🎯 索引说明](#-索引说明)
   - [📚 按研究领域分类](#-按研究领域分类)
     - [所有权与借用](#所有权与借用)
+      - [所有权模型形式化](#所有权模型形式化)
+      - [借用检查器证明](#借用检查器证明)
     - [生命周期](#生命周期)
+      - [生命周期形式化](#生命周期形式化)
     - [类型系统](#类型系统)
+      - [类型系统基础](#类型系统基础)
+    - [异步状态机与 Pin](#异步状态机与-pin)
+      - [异步状态机形式化](#异步状态机形式化)
+      - [Pin 和自引用类型形式化](#pin-和自引用类型形式化)
+    - [类型理论扩展](#类型理论扩展)
+      - [Trait 系统形式化](#trait-系统形式化)
+      - [型变理论](#型变理论)
+      - [高级类型特性](#高级类型特性)
   - [🔬 按证明类型分类](#-按证明类型分类)
     - [唯一性证明](#唯一性证明)
     - [安全性证明](#安全性证明)
     - [正确性证明](#正确性证明)
   - [📈 证明完成度统计](#-证明完成度统计)
+    - [按研究领域统计](#按研究领域统计)
+    - [按证明类型统计](#按证明类型统计)
+    - [按证明方法统计](#按证明方法统计)
   - [🔗 相关资源](#-相关资源)
+    - [核心文档](#核心文档)
+    - [形式化方法研究](#形式化方法研究)
+    - [类型理论研究](#类型理论研究)
+    - [工具资源](#工具资源)
 
 ---
 
@@ -30,11 +48,13 @@
 本文档索引了所有已完成的形式化证明，帮助研究者快速查找和参考相关证明工作。
 
 **证明状态**:
+
 - ✅ 已完成：证明已完成，包含完整的证明过程
 - 🔄 进行中：证明正在进行中
 - 📋 计划中：证明计划中
 
 **证明方法**:
+
 - 结构归纳法
 - 规则归纳法
 - 反证法
@@ -167,6 +187,83 @@
      - 充分性：由定理4得出
      - 必要性：结构归纳法
 
+### 异步状态机与 Pin
+
+#### 异步状态机形式化
+
+**文档**: [async_state_machine.md](./formal_methods/async_state_machine.md)
+
+**已完成的证明**:
+
+1. **定理 6.1 (状态一致性)** ✅
+   - **形式化表示**: $\forall F, s, s': \text{State}(F)=s \land \text{Transition}(F)=s' \rightarrow \text{ValidTransition}(s, s')$
+   - **证明方法**: 归纳法 + 案例分析 + 不变式验证
+   - **证明位置**: [async_state_machine.md#定理-61-状态一致性](./formal_methods/async_state_machine.md#定理-61-状态一致性)
+
+2. **定理 6.2 (并发安全)** ✅
+   - **形式化表示**: $\forall \{F_1,\ldots,F_n\}: (\forall i: \text{Send}(F_i)\land\text{Sync}(F_i)) \rightarrow \text{DataRaceFree}(\text{ConcurrentExec}[\{F_1,\ldots,F_n\}])$
+   - **证明方法**: 类型系统保证 + 运行时保证 + 组合性
+   - **证明位置**: [async_state_machine.md#定理-62-并发安全](./formal_methods/async_state_machine.md#定理-62-并发安全)
+
+3. **定理 6.3 (进度保证)** ✅
+   - **形式化表示**: $\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F,n) \land \text{State}(F)=\text{Ready}(v)$
+   - **证明方法**: 有限性假设 + 进度性 + 终止性
+   - **证明位置**: [async_state_machine.md#定理-63-进度保证](./formal_methods/async_state_machine.md#定理-63-进度保证)
+
+#### Pin 和自引用类型形式化
+
+**文档**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
+
+**已完成的证明**:
+
+1. **定理 1 (Pin 保证)** ✅
+   - **形式化表示**: 对于非 `Unpin` 类型 $T$ 和 $\text{Pin}[\Box[T]]$，被 Pin 的值在内存中的位置不会改变
+   - **证明方法**: 类型系统 + 编译器保证
+   - **证明位置**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
+
+2. **定理 2 (自引用类型安全)** ✅
+   - **形式化表示**: 若自引用类型 $T$ 被 Pin，则其自引用字段安全，无悬垂指针
+   - **证明方法**: Pin 保证 + 位置稳定
+   - **证明位置**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
+
+3. **定理 3 (Pin 投影安全)** ✅
+   - **形式化表示**: 从被 Pin 的结构体中按安全条件投影出的被 Pin 字段仍满足 Pin 保证
+   - **证明方法**: 安全条件 + Pin 保证
+   - **证明位置**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
+
+### 类型理论扩展
+
+#### Trait 系统形式化
+
+**文档**: [trait_system_formalization.md](./type_theory/trait_system_formalization.md)
+
+**已完成的证明**:
+
+1. **定理 1 (Trait 对象类型安全)** ✅ — 方法：类型系统；[证明位置](./type_theory/trait_system_formalization.md#定理-1-trait-对象类型安全-)
+2. **定理 2 (Trait 实现一致性)** ✅ — 方法：规则归纳；[证明位置](./type_theory/trait_system_formalization.md#定理-2-trait-实现一致性-)
+3. **定理 3 (Trait 解析正确性)** ✅ — 方法：算法正确性；[证明位置](./type_theory/trait_system_formalization.md#定理-3-trait-解析正确性-)
+
+#### 型变理论
+
+**文档**: [variance_theory.md](./type_theory/variance_theory.md)
+
+**已完成的证明**:
+
+1. **定理 1 (协变安全性)** ✅ — 方法：型变规则；[证明位置](./type_theory/variance_theory.md)
+2. **定理 2 (逆变安全性)** ✅ — 方法：型变规则；[证明位置](./type_theory/variance_theory.md)
+3. **定理 3 (不变安全性)** ✅ — 方法：型变规则；[证明位置](./type_theory/variance_theory.md)
+4. **定理 4 (函数类型型变)** ✅ — 方法：型变规则；[证明位置](./type_theory/variance_theory.md)
+
+#### 高级类型特性
+
+**文档**: [advanced_types.md](./type_theory/advanced_types.md)
+
+**已完成的证明**:
+
+1. **定理 1 (GAT 类型安全)** ✅ — 方法：基于 GAT 类型规则；[证明位置](./type_theory/advanced_types.md)
+2. **定理 2 (const 泛型类型安全)** ✅ — 方法：基于 const 泛型规则；[证明位置](./type_theory/advanced_types.md)
+3. **定理 3 (受限依赖类型安全)** ✅ — 方法：基于依赖类型约束；[证明位置](./type_theory/advanced_types.md)
+
 ---
 
 ## 🔬 按证明类型分类
@@ -191,27 +288,21 @@
   - 方法：由进展性和保持性得出
   - 结果：良型程序不会出现类型错误
 
+- ✅ **并发安全** ([async_state_machine.md](./formal_methods/async_state_machine.md#定理-62-并发安全))
+- ✅ **Pin 保证、自引用类型安全、Pin 投影安全** ([pin_self_referential.md](./formal_methods/pin_self_referential.md))
+- ✅ **协变、逆变、不变、函数类型型变** ([variance_theory.md](./type_theory/variance_theory.md))
+- ✅ **GAT、const 泛型、受限依赖类型安全** ([advanced_types.md](./type_theory/advanced_types.md))
+
 ### 正确性证明
 
 - ✅ **借用规则正确性** ([borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-2-借用规则正确性))
-  - 方法：规则归纳法
-  - 结果：借用检查器正确执行借用规则
-
 - ✅ **引用有效性** ([lifetime_formalization.md](./formal_methods/lifetime_formalization.md#定理-2-引用有效性))
-  - 方法：三步骤证明
-  - 结果：引用在生命周期内有效
-
 - ✅ **生命周期推断算法正确性** ([lifetime_formalization.md](./formal_methods/lifetime_formalization.md#定理-3-生命周期推断算法正确性))
-  - 方法：算法正确性证明
-  - 结果：算法正确推断生命周期
-
 - ✅ **类型推导正确性** ([type_system_foundations.md](./type_theory/type_system_foundations.md#定理-4-类型推导正确性))
-  - 方法：基于类型规则的正确性
-  - 结果：推导出的类型满足类型规则
-
 - ✅ **类型推导算法正确性** ([type_system_foundations.md](./type_theory/type_system_foundations.md#定理-5-类型推导算法正确性))
-  - 方法：充分性和必要性双向证明
-  - 结果：算法推导的类型与类型规则一致
+- ✅ **状态一致性** ([async_state_machine.md](./formal_methods/async_state_machine.md#定理-61-状态一致性))
+- ✅ **进度保证** ([async_state_machine.md](./formal_methods/async_state_machine.md#定理-63-进度保证))
+- ✅ **Trait 对象类型安全、实现一致性、解析正确性** ([trait_system_formalization.md](./type_theory/trait_system_formalization.md))
 
 ---
 
@@ -224,26 +315,33 @@
 | 所有权与借用 | 3个 | 100% | ✅ 完成 |
 | 生命周期 | 2个 | 100% | ✅ 完成 |
 | 类型系统 | 5个 | 100% | ✅ 完成 |
-| **总计** | **10个** | **100%** | ✅ |
+| 异步状态机 | 3个 | 100% | ✅ 完成 |
+| Pin 和自引用类型 | 3个 | 100% | ✅ 完成 |
+| Trait 系统 | 3个 | 100% | ✅ 完成 |
+| 型变理论 | 4个 | 100% | ✅ 完成 |
+| 高级类型特性 | 3个 | 100% | ✅ 完成 |
+| **总计** | **26个** | **100%** | ✅ |
 
 ### 按证明类型统计
 
 | 证明类型 | 证明数量 | 完成度 | 状态 |
 |---------|---------|--------|------|
 | 唯一性证明 | 1个 | 100% | ✅ 完成 |
-| 安全性证明 | 3个 | 100% | ✅ 完成 |
-| 正确性证明 | 6个 | 100% | ✅ 完成 |
-| **总计** | **10个** | **100%** | ✅ |
+| 安全性证明 | 14个 | 100% | ✅ 完成 |
+| 正确性证明 | 11个 | 100% | ✅ 完成 |
+| **总计** | **26个** | **100%** | ✅ |
 
 ### 按证明方法统计
 
 | 证明方法 | 证明数量 | 占比 |
 |---------|---------|------|
-| 结构归纳法 | 6个 | 60% |
-| 规则归纳法 | 1个 | 10% |
-| 反证法 | 1个 | 10% |
-| 双向证明 | 1个 | 10% |
-| 其他方法 | 1个 | 10% |
+| 结构归纳法 | 9个 | 35% |
+| 规则归纳法 | 3个 | 12% |
+| 反证法 | 1个 | 4% |
+| 双向证明 | 1个 | 4% |
+| 三步骤/算法/归纳+案例等 | 5个 | 19% |
+| 其他（型变规则、类型系统、Pin 等） | 7个 | 27% |
+| **总计** | **26个** | 100% |
 
 ---
 
@@ -254,6 +352,7 @@
 - [研究笔记主索引](./README.md)
 - [研究进展跟踪](./PROGRESS_TRACKING.md)
 - [研究任务清单](./TASK_CHECKLIST.md)
+- [形式化工具验证指南](./FORMAL_VERIFICATION_GUIDE.md)（✅ 指南 100% 完成）
 
 ### 形式化方法研究
 
@@ -261,11 +360,16 @@
 - [所有权模型形式化](./formal_methods/ownership_model.md)
 - [借用检查器证明](./formal_methods/borrow_checker_proof.md)
 - [生命周期形式化](./formal_methods/lifetime_formalization.md)
+- [异步状态机形式化](./formal_methods/async_state_machine.md)
+- [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md)
 
 ### 类型理论研究
 
 - [类型理论研究索引](./type_theory/README.md)
 - [类型系统基础](./type_theory/type_system_foundations.md)
+- [Trait 系统形式化](./type_theory/trait_system_formalization.md)
+- [型变理论](./type_theory/variance_theory.md)
+- [高级类型特性](./type_theory/advanced_types.md)
 
 ### 工具资源
 
@@ -276,5 +380,5 @@
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2025-12-25
-**状态**: ✅ **持续更新中**
+**最后更新**: 2026-01-26
+**状态**: ✅ **证明索引 100% 完成**（26 个证明已全部收录）

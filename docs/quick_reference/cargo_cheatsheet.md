@@ -1,7 +1,7 @@
 # 📦 Cargo 速查卡
 
 > **快速参考** | [Cargo 官方文档](https://doc.rust-lang.org/cargo/) | [代码示例](../../crates/)
-> **最后更新**: 2025-11-15 | **Rust 版本**: 1.91.1+ | **Edition**: 2024
+> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -357,7 +357,7 @@ tokio = { version = "1.0", features = ["full"] }
 name = "my_project"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.91.1"
+rust-version = "1.93"
 
 [dependencies]
 serde = "1.0"
@@ -626,14 +626,25 @@ cargo build --target <target>
 
 ## 📚 相关资源
 
+### 官方文档
 - [Cargo 官方文档](https://doc.rust-lang.org/cargo/)
 - [Cargo Book](https://doc.rust-lang.org/cargo/book/)
 - [Cargo 参考手册](https://doc.rust-lang.org/cargo/reference/)
 
+### 项目内部文档
+- [Cargo 包管理完整文档](../../crates/c02_type_system/docs/cargo_package_management/)
+- [工具链文档](../../docs/toolchain/)
+- [Cargo 工作空间指南](../../docs/toolchain/02_cargo_workspace_guide.md)
+
+### 相关速查卡
+- [模块系统速查卡](./modules_cheatsheet.md) - Crate 和模块
+- [测试速查卡](./testing_cheatsheet.md) - Cargo 测试命令
+- [类型系统速查卡](./type_system.md) - 依赖类型管理
+
 ---
 
-**最后更新**: 2025-11-15
+**最后更新**: 2026-01-26
 **维护者**: 文档团队
-**状态**: 持续更新中 📝
+**状态**: ✅ **Rust 1.93.0 更新完成**
 
 🎯 **掌握 Cargo，高效管理项目！**

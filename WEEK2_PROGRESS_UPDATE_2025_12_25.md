@@ -17,22 +17,27 @@
 ### 2. 证明内容
 
 #### 定理 1 (进展性)
+
 - 形式化表示：$\Gamma \vdash e : \tau \rightarrow e \text{ is value} \lor \exists e': e \to e'$
 - 完整证明：使用结构归纳法，覆盖所有表达式类型
 
 #### 定理 2 (保持性)
+
 - 形式化表示：$\Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash e' : \tau$
 - 完整证明：使用结构归纳法，覆盖所有求值步骤
 
 #### 定理 3 (类型安全)
+
 - 形式化表示：$\Gamma \vdash e : \tau \rightarrow \neg \exists e': e \to^* e' \land \text{type\_error}(e')$
 - 完整证明：由进展性和保持性直接得出
 
 #### 定理 4 (类型推导正确性)
+
 - 形式化表示：$\text{infer}(\Gamma, e) = \tau \rightarrow \Gamma \vdash e : \tau$
 - 完整证明：基于类型规则的正确性
 
 #### 定理 5 (类型推导算法正确性)
+
 - 形式化表示：$\text{infer}(\Gamma, e) = \tau \leftrightarrow \Gamma \vdash e : \tau$
 - 完整证明：充分性和必要性双向证明
 

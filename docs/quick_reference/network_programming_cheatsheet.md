@@ -1,8 +1,8 @@
 # 网络编程快速参考卡片
 
 **模块**: C10 Networks
-**Rust 版本**: 1.92.0
-**最后更新**: 2025-12-11
+**Rust 版本**: 1.93.0+
+**最后更新**: 2026-01-26
 
 ---
 
@@ -32,6 +32,10 @@
     - [连接池](#连接池)
     - [压缩](#压缩)
   - [📚 相关文档](#-相关文档)
+  - [📚 相关资源](#-相关资源)
+    - [官方文档](#官方文档)
+    - [项目内部文档](#项目内部文档)
+    - [相关速查卡](#相关速查卡)
 
 ---
 
@@ -287,11 +291,28 @@ let response = client
 
 ## 📚 相关文档
 
-- [完整文档](../crates/c10_networks/README.md)
-- [HTTP 指南](../crates/c10_networks/docs/tier_02_guides/01_HTTP指南.md)
-- [TCP/UDP 指南](../crates/c10_networks/docs/tier_02_guides/02_TCP_UDP指南.md)
-- [WebSocket 指南](../crates/c10_networks/docs/tier_02_guides/03_WebSocket指南.md)
+## 📚 相关资源
+
+### 官方文档
+
+- [std::net 文档](https://doc.rust-lang.org/std/net/)
+- [Tokio 网络文档](https://tokio.rs/)
+
+### 项目内部文档
+
+- [完整文档](../../crates/c10_networks/README.md)
+- [HTTP 指南](../../crates/c10_networks/docs/tier_02_guides/01_HTTP指南.md)
+- [TCP/UDP 指南](../../crates/c10_networks/docs/tier_02_guides/02_TCP_UDP指南.md)
+- [WebSocket 指南](../../crates/c10_networks/docs/tier_02_guides/03_WebSocket指南.md)
+
+### 相关速查卡
+
+- [异步编程速查卡](./async_patterns.md) - 异步网络编程
+- [错误处理速查卡](./error_handling_cheatsheet.md) - 网络错误处理
+- [线程与并发速查卡](./threads_concurrency_cheatsheet.md) - 并发网络编程
 
 ---
 
+**最后更新**: 2026-01-26
+**Rust 版本**: 1.93.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档

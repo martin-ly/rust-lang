@@ -47,9 +47,25 @@ pub use security::tls_reload::TlsReloader;
 pub use unified_api::NetClient;
 
 /// 库版本信息
+///
+/// # Examples
+///
+/// ```
+/// use c10_networks::VERSION;
+///
+/// assert!(!VERSION.is_empty());
+/// ```
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// 库名称
+///
+/// # Examples
+///
+/// ```
+/// use c10_networks::NAME;
+///
+/// assert_eq!(NAME, "c10_networks");
+/// ```
 pub const NAME: &str = env!("CARGO_PKG_NAME");
 
 // 导出由 tonic-build 生成的 protobuf/gRPC 模块

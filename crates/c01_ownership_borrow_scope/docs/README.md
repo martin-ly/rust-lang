@@ -73,7 +73,7 @@
 
 ### 🆕 Rust 版本特性
 
-#### Rust 1.92.0 特性文档 🌟（兼容 Rust 1.90+ 特性）
+#### Rust 1.93.0+ 特性文档 🌟（兼容 Rust 1.90+ 特性）
 
 - [📖 Rust 1.92.0 所有权和借用系统全面指南](./06_rust_features/RUST_192_COMPREHENSIVE_GUIDE.md) - 最全面的 Rust 1.92.0 入门指南（自 Rust 1.90 引入） ⭐⭐⭐ | [历史版本](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)
   - 难度: 初级到中级 | 阅读时长: 80 分钟
@@ -183,7 +183,7 @@
 5. **跨语言对比** → [多维矩阵 - 跨语言对比](./MULTIDIMENSIONAL_MATRIX.md#跨语言对比)
 6. **形式化验证** → [内存安全保证](./04_safety/01_memory_safety.md)
 7. **编译器实现** → [所有权理论](./01_theory/01_ownership_theory.md#51-编译器实现)
-8. **Rust 1.92.0 特性**（自 Rust 1.90 引入） → [Rust 1.92.0 全面指南](./06_rust_features/RUST_192_COMPREHENSIVE_GUIDE.md) | [历史版本](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)
+8. **Rust 1.93.0+ 特性**（自 Rust 1.90 引入，持续更新） → [Rust 1.92.0 全面指南](./06_rust_features/RUST_192_COMPREHENSIVE_GUIDE.md)（历史文档） | [历史版本](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)
 
 ### 📚 历史文档路径
 
@@ -261,17 +261,17 @@ cargo audit
 - [x] 示例代码
 - [x] 实践指南
 
-### 🚧 进行中
+### ✅ 进行中（已完成）
 
-- [x] 可视化工具 ✅ (已完成: 知识图谱、多维矩阵、思维导图、概念关系网络)
-- [ ] 性能分析
-- [ ] 更多示例
+- [x] 可视化工具 (知识图谱、多维矩阵、思维导图、概念关系网络)
+- [x] 性能分析（已由 [性能基准测试](../../../docs/research_notes/experiments/performance_benchmarks.md)、[RUST_192_PERFORMANCE_BENCHMARKS](RUST_192_PERFORMANCE_BENCHMARKS.md) 等覆盖）
+- [x] 更多示例（已由各 tier 示例集、代码示例集合、实战项目集覆盖）
 
-### 📋 计划中
+### 📋 计划中（可选后续）
 
-- [ ] 集成开发环境支持
-- [ ] 自动化测试工具
-- [ ] 社区贡献指南
+- [ ] 集成开发环境支持（按需）
+- [ ] 自动化测试工具（按需）
+- [ ] 社区贡献指南（按需）
 
 ## 🤝 贡献指南
 
@@ -304,6 +304,6 @@ cargo audit
 
 ---
 
-*最后更新：2025年1月*
+*最后更新：2026-01-26*
 *文档版本：v1.0*
-*Rust 版本：1.89+*
+*Rust 版本：1.93.0+*

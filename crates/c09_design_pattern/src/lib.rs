@@ -46,6 +46,15 @@ pub mod pattern_combinations;
 pub const VERSION: &str = "1.0.1";
 
 /// 获取库版本信息
+///
+/// # Examples
+///
+/// ```
+/// use c09_design_pattern::get_version;
+///
+/// let version = get_version();
+/// assert!(!version.is_empty());
+/// ```
 pub fn get_version() -> &'static str {
     VERSION
 }
@@ -84,6 +93,15 @@ pub struct PatternInfo {
 }
 
 /// 获取所有设计模式信息
+///
+/// # Examples
+///
+/// ```
+/// use c09_design_pattern::get_all_patterns;
+///
+/// let patterns = get_all_patterns();
+/// assert!(!patterns.is_empty());
+/// ```
 pub fn get_all_patterns() -> Vec<PatternInfo> {
     vec![
         // 创建型模式

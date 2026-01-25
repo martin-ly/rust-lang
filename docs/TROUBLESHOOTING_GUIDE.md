@@ -1,8 +1,8 @@
 # 故障排查指南
 
 **创建日期**: 2025-12-11
-**最后更新**: 2025-12-11
-**Rust 版本**: 1.92.0
+**最后更新**: 2026-01-26
+**Rust 版本**: 1.93.0+
 **Edition**: 2024
 
 ---
@@ -84,7 +84,7 @@ println!("{}", x);
 
 **错误信息**:
 
-```
+```text
 error[E0597]: `x` does not live long enough
 ```
 
@@ -283,20 +283,38 @@ match timeout(Duration::from_secs(5), connect()).await {
 error: failed to resolve hostname
 ```
 
+**Rust 1.93 改进**：Rust 1.93 更新了 musl 到 1.2.5，显著改进了 DNS 解析器的可靠性，特别是对于大型 DNS 记录和递归名称服务器。如果使用 musl 目标，升级到 Rust 1.93 可以解决许多 DNS 解析问题。
+
 **解决方案**:
 
 ```rust
-use c10_networks::dns::DnsResolver;
+use std::net::TcpStream;
 
-// 使用系统 DNS 配置
-let resolver = DnsResolver::from_system().await?;
+// Rust 1.93+ (musl 1.2.5) 改进了 DNS 解析
+// 对于静态链接的 musl 二进制文件，DNS 解析更可靠
+let stream = TcpStream::connect("example.com:80")?;
+
+// 或者使用异步 DNS 解析
+use tokio::net::TcpStream;
+
+let stream = TcpStream::connect("example.com:80").await?;
+```
+
+**如果仍遇到问题，可以添加重试机制**:
+
+```rust
+use std::net::TcpStream;
+use std::time::Duration;
 
 // 添加重试机制
 let mut retries = 3;
 while retries > 0 {
-    match resolver.lookup_ipv4("example.com").await {
-        Ok(ips) => {
-            println!("解析成功: {:?}", ips);
+    match TcpStream::connect_timeout(
+        &"example.com:80".parse()?,
+        Duration::from_secs(5)
+    ) {
+        Ok(stream) => {
+            println!("连接成功");
             break;
         }
         Err(e) => {
@@ -304,11 +322,22 @@ while retries > 0 {
             if retries == 0 {
                 return Err(e);
             }
-            tokio::time::sleep(Duration::from_secs(1)).await;
+            std::thread::sleep(Duration::from_secs(1));
         }
     }
 }
 ```
+
+**musl 1.2.5 改进说明**（Rust 1.93+）：
+- 改进了 DNS 解析器，特别是对于大型 DNS 记录
+- 更好地处理递归名称服务器
+- 提高了静态链接 musl 二进制文件的网络可靠性
+
+**兼容性检查**：
+- 确保使用 libc >= 0.2.146（如果使用 musl 目标）
+
+**升级建议**：
+- 如果使用 musl 目标且遇到 DNS 解析问题，强烈建议升级到 Rust 1.93.0+
 
 ---
 
@@ -411,4 +440,4 @@ A: 使用 `cargo tree` 查看依赖关系
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 持续更新
-**最后更新**: 2025-12-11
+**最后更新**: 2026-01-26

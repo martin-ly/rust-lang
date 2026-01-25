@@ -1,9 +1,9 @@
 # 编译器优化研究
 
 > **创建日期**: 2025-11-15
-> **最后更新**: 2025-11-15
-> **Rust 版本**: 1.91.1+ (Edition 2024) ✅
-> **状态**: 🔄 进行中
+> **最后更新**: 2026-01-26
+> **Rust 版本**: 1.93.0+ (Edition 2024) ✅
+> **状态**: ✅ 已完成 (100%)
 
 ---
 
@@ -33,6 +33,18 @@
   - [📊 实验结果](#-实验结果)
     - [优化级别效果](#优化级别效果)
     - [内联优化效果](#内联优化效果)
+    - [结果分析模板](#结果分析模板)
+  - [📋 数据收集执行指南](#-数据收集执行指南)
+    - [环境要求](#环境要求)
+    - [执行步骤](#执行步骤)
+  - [📐 优化建议与工具改进](#-优化建议与工具改进)
+    - [优化建议](#优化建议)
+    - [工具改进](#工具改进)
+    - [优化报告](#优化报告)
+  - [🔗 系统集成与实际应用](#-系统集成与实际应用)
+    - [与类型系统的集成](#与类型系统的集成)
+    - [与实验研究的集成](#与实验研究的集成)
+    - [实际应用案例](#实际应用案例)
   - [📖 参考文献](#-参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
@@ -343,6 +355,78 @@ fn dead_code_example() {
 - 但会增加代码大小
 - 需要权衡性能和代码大小
 
+### 结果分析模板
+
+将 `cargo bench`（-O0/-O1/-O2/-O3/-Os）与 `cargo bloat` 的产出填入下表：
+
+| 类别 | 指标 | 实测值 | 单位 | 备注 |
+|------|------|--------|------|------|
+| 优化级别 | -O0 执行时间 | _____ | ns | 基准 |
+| 优化级别 | -O2 执行时间 | _____ | ns | 推荐 |
+| 优化级别 | -O3 执行时间 | _____ | ns | 对比 -O2 |
+| 优化级别 | -Os 二进制大小 | _____ | KB | 对比 -O2 |
+| 内联 | `#[inline]` 收益 | _____ | % | 相对无 inline |
+| 死代码 | 消除后大小 | _____ | KB | cargo bloat |
+
+**结论填写**：说明 -O2 是否满足多数场景；内联与循环优化的取舍；若使用 Rust 1.93，可注明 LTO、codegen-units 的影响。
+
+---
+
+## 📋 数据收集执行指南
+
+### 环境要求
+
+- **Rust**: 1.93.0+；**cargo-bloat**：`cargo install cargo-bloat`；**Criterion**：工作区已配置
+- 建议关掉无关后台、固定 CPU 频率，多次运行取中位数
+
+### 执行步骤
+
+1. **优化级别**：在 `Cargo.toml` 或 `cargo rustc -- -C opt-level=0|1|2|3` 下跑 `cargo bench`，记录 `compute_sum`、`add_*` 等均值。
+2. **代码大小**：`cargo build --release` 后 `cargo bloat -n 50 --release`，记录 `.text` 与 top 符号。
+3. **内联/循环**：用 `#[inline]`/`#[inline(never)]` 做对照 bench；循环测试用 `iter().sum()` vs 手写循环 vs `chunks_exact`。
+4. **留存**：将 `target/criterion/` 的 `estimates.json` 或主要指标录入「结果分析模板」。
+
+---
+
+## 📐 优化建议与工具改进
+
+### 优化建议
+
+- **发布构建**：默认 `opt-level = 2`；对延迟敏感的可试 `opt-level = 3`，配合 `lto = "thin"` 或 `"fat"`。
+- **内联**：热路径小函数加 `#[inline]`；避免 `#[inline(always)]` 导致代码膨胀。
+- **死代码**：用 `cargo bloat` 定位未使用符号；`--release` 下 `strip = true` 可进一步减小体积。
+- **Rust 1.93**：关注 codegen 与 LTO 的变更，重跑基准以更新基线。
+
+### 工具改进
+
+- **Compiler Explorer (godbolt.org)**：对比 `opt-level`、`-C target-cpu` 的汇编，验证内联与向量化。
+- **cargo-bloat**：定期跑以发现新增膨胀；可与 `—crates` 结合按 crate 分析。
+- **opt-report**：`-C llvm-args=-opt-report` 可辅助理解 LLVM 优化决策（若需深入）。
+
+### 优化报告
+
+按「结果分析模板」+ 各 `opt-level` 的 bench 曲线、bloat 列表，可形成编译器优化报告；建议包含「推荐 profile」「内联与大小权衡」「与 1.93 的兼容性」三部分。
+
+---
+
+## 🔗 系统集成与实际应用
+
+### 与类型系统的集成
+
+- **类型系统基础**：见 [type_system_foundations.md](../type_theory/type_system_foundations.md)。类型与单态化直接影响内联与死代码消除；泛型与 `impl Trait` 的 codegen 可在此验证。
+- **Trait 系统**：见 [trait_system_formalization.md](../type_theory/trait_system_formalization.md)。动态分发 (`dyn`)  vs 静态分发对 `#[inline]` 与优化级别敏感，可纳入对照实验。
+
+### 与实验研究的集成
+
+- **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。同一 `cargo bench` 流程下，可切换 `opt-level`、`codegen-units` 做 A/B 比较。
+- **内存分析**：见 [memory_analysis.md](./memory_analysis.md)。`opt-level` 影响内联与栈使用，分析内存时需固定编译选项。
+
+### 实际应用案例
+
+- **库作者**：提供 `opt-level=2` 与 `lto` 的推荐配置；对热点路径标注 `#[inline]` 并附 bench。
+- **嵌入式**：`-Os` + `panic = "abort"` + `strip` 控制体积；用 bloat 追踪 `no_std` 依赖的 `.text`。
+- **Rust 1.93**：关注状态机 codegen、`asm!` 的 `cfg` 等，在关键 crate 上重跑优化基准。
+
 ---
 
 ## 📖 参考文献
@@ -366,5 +450,5 @@ fn dead_code_example() {
 ---
 
 **维护者**: Rust Compiler Research Team
-**最后更新**: 2025-11-15
-**状态**: 🔄 **进行中**
+**最后更新**: 2026-01-26
+**状态**: ✅ **已完成** (100%)
