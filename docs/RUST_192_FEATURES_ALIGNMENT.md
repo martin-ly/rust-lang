@@ -86,7 +86,7 @@
 
 ### 对齐来源
 
-1. **官方发布说明**: 
+1. **官方发布说明**:
    - [Rust 1.93.0 Release Notes](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0) 🆕
    - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)（历史）
 2. **Rust Blog**: [Rust Blog](https://blog.rust-lang.org/)

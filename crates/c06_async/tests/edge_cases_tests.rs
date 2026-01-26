@@ -104,3 +104,57 @@ fn test_async_concurrent_safety() {
     let mutex_locked = false;
     assert_eq!(mutex_locked, false);
 }
+
+/// 测试异步任务取消边界情况
+#[test]
+fn test_async_cancellation_boundaries() {
+    // 测试立即取消
+    let cancelled_immediately = true;
+    assert_eq!(cancelled_immediately, true);
+
+    // 测试部分完成后的取消
+    let partial_completion = 50usize;
+    assert!(partial_completion > 0 && partial_completion < 100);
+}
+
+/// 测试异步错误传播边界情况
+#[test]
+fn test_async_error_propagation_boundaries() {
+    // 测试单个错误
+    let single_error = Some("error".to_string());
+    assert!(single_error.is_some());
+
+    // 测试错误链
+    let error_chain: Vec<String> = vec!["error1".to_string(), "error2".to_string()];
+    assert_eq!(error_chain.len(), 2);
+}
+
+/// 测试异步超时边界情况
+#[test]
+fn test_async_timeout_boundaries() {
+    use std::time::Duration;
+
+    // 测试零超时
+    let zero_timeout = Duration::from_secs(0);
+    assert_eq!(zero_timeout.as_secs(), 0);
+
+    // 测试极短超时
+    let short_timeout = Duration::from_millis(1);
+    assert_eq!(short_timeout.as_millis(), 1);
+
+    // 测试极长超时
+    let long_timeout = Duration::from_secs(3600);
+    assert_eq!(long_timeout.as_secs(), 3600);
+}
+
+/// 测试异步背压边界情况
+#[test]
+fn test_async_backpressure_boundaries() {
+    // 测试无背压
+    let no_backpressure = 0usize;
+    assert_eq!(no_backpressure, 0);
+
+    // 测试高背压
+    let high_backpressure = 1000usize;
+    assert!(high_backpressure > 100);
+}

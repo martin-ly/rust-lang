@@ -54,6 +54,9 @@
     - [依赖问题](#依赖问题)
     - [构建问题](#构建问题)
   - [📚 相关资源](#-相关资源)
+    - [官方文档](#官方文档)
+    - [项目内部文档](#项目内部文档)
+    - [相关速查卡](#相关速查卡)
 
 
 ---
@@ -627,16 +630,19 @@ cargo build --target <target>
 ## 📚 相关资源
 
 ### 官方文档
+
 - [Cargo 官方文档](https://doc.rust-lang.org/cargo/)
 - [Cargo Book](https://doc.rust-lang.org/cargo/book/)
 - [Cargo 参考手册](https://doc.rust-lang.org/cargo/reference/)
 
 ### 项目内部文档
+
 - [Cargo 包管理完整文档](../../crates/c02_type_system/docs/cargo_package_management/)
 - [工具链文档](../../docs/toolchain/)
 - [Cargo 工作空间指南](../../docs/toolchain/02_cargo_workspace_guide.md)
 
 ### 相关速查卡
+
 - [模块系统速查卡](./modules_cheatsheet.md) - Crate 和模块
 - [测试速查卡](./testing_cheatsheet.md) - Cargo 测试命令
 - [类型系统速查卡](./type_system.md) - 依赖类型管理

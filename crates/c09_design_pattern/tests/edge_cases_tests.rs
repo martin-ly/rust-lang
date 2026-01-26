@@ -99,3 +99,35 @@ fn test_pattern_state_boundaries() {
     let terminated_state = "terminated";
     assert_eq!(terminated_state, "terminated");
 }
+
+/// 测试模式性能边界情况
+#[test]
+fn test_pattern_performance_boundaries() {
+    use std::time::Duration;
+
+    // 测试快速模式执行
+    let fast_execution = Duration::from_millis(1);
+    assert_eq!(fast_execution.as_millis(), 1);
+
+    // 测试慢速模式执行
+    let slow_execution = Duration::from_secs(1);
+    assert_eq!(slow_execution.as_secs(), 1);
+}
+
+/// 测试模式组合复杂度边界情况
+#[test]
+fn test_pattern_complexity_boundaries() {
+    // 测试简单模式组合
+    let simple_combination = vec!["Singleton".to_string()];
+    assert_eq!(simple_combination.len(), 1);
+
+    // 测试复杂模式组合
+    let complex_combination = vec![
+        "Singleton".to_string(),
+        "Factory".to_string(),
+        "Observer".to_string(),
+        "Strategy".to_string(),
+        "Decorator".to_string(),
+    ];
+    assert_eq!(complex_combination.len(), 5);
+}

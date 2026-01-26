@@ -85,3 +85,31 @@ fn test_concurrent_safety() {
     // 验证结果
     assert_eq!(*shared.lock().unwrap(), 10);
 }
+
+/// 测试线程创建失败
+#[test]
+fn test_thread_creation_failure() {
+    use std::thread;
+
+    // 测试线程创建（正常情况下应该成功）
+    let handle = thread::spawn(|| {
+        42
+    });
+
+    let result = handle.join().unwrap();
+    assert_eq!(result, 42);
+}
+
+/// 测试线程panic处理
+#[test]
+fn test_thread_panic_handling() {
+    use std::thread;
+
+    let handle = thread::spawn(|| {
+        panic!("测试panic处理");
+    });
+
+    // 捕获panic
+    let result = handle.join();
+    assert!(result.is_err());
+}

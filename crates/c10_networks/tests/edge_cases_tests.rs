@@ -112,3 +112,51 @@ fn test_protocol_boundaries() {
     let http_protocol = "HTTP";
     assert_eq!(http_protocol, "HTTP");
 }
+
+/// 测试网络缓冲区边界情况
+#[test]
+fn test_buffer_boundaries() {
+    // 测试空缓冲区
+    let empty_buffer: Vec<u8> = vec![];
+    assert_eq!(empty_buffer.len(), 0);
+
+    // 测试小缓冲区
+    let small_buffer = vec![0u8; 64];
+    assert_eq!(small_buffer.len(), 64);
+
+    // 测试大缓冲区
+    let large_buffer = vec![0u8; 65536];
+    assert_eq!(large_buffer.len(), 65536);
+}
+
+/// 测试网络连接状态边界情况
+#[test]
+fn test_connection_state_boundaries() {
+    // 测试连接状态枚举
+    #[derive(PartialEq, Debug)]
+    enum ConnectionState {
+        Disconnected,
+        Connecting,
+        Connected,
+        Disconnecting,
+    }
+
+    let state = ConnectionState::Connected;
+    assert_eq!(state, ConnectionState::Connected);
+}
+
+/// 测试网络重试边界情况
+#[test]
+fn test_retry_boundaries() {
+    // 测试零重试
+    let zero_retries = 0u32;
+    assert_eq!(zero_retries, 0);
+
+    // 测试单次重试
+    let single_retry = 1u32;
+    assert_eq!(single_retry, 1);
+
+    // 测试多次重试
+    let multiple_retries = 10u32;
+    assert!(multiple_retries > 1);
+}

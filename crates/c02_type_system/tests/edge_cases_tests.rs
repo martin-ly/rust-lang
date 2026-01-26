@@ -23,7 +23,7 @@ fn test_generic_boundaries() {
     fn identity<T>(x: T) -> T {
         x
     }
-    
+
     assert_eq!(identity(42), 42);
     assert_eq!(identity("test"), "test");
 
@@ -31,7 +31,7 @@ fn test_generic_boundaries() {
     fn constrained<T: Clone>(x: T) -> T {
         x.clone()
     }
-    
+
     assert_eq!(constrained(42), 42);
 }
 
@@ -42,13 +42,13 @@ fn test_trait_boundaries() {
     trait Display {
         fn display(&self) -> String;
     }
-    
+
     impl Display for i32 {
         fn display(&self) -> String {
             format!("{}", self)
         }
     }
-    
+
     let value: i32 = 42;
     assert_eq!(value.display(), "42");
 
@@ -56,13 +56,13 @@ fn test_trait_boundaries() {
     trait CloneAndDisplay: Clone {
         fn display(&self) -> String;
     }
-    
+
     impl CloneAndDisplay for i32 {
         fn display(&self) -> String {
             format!("{}", self)
         }
     }
-    
+
     let cloned = value.clone();
     assert_eq!(cloned, value);
 }
@@ -76,11 +76,11 @@ fn test_error_paths() {
 
     // 测试Trait边界不满足的情况
     trait Marker {}
-    
+
     impl Marker for i32 {}
-    
+
     fn require_marker<T: Marker>(_item: T) {}
-    
+
     require_marker(42i32); // 应该编译通过
 }
 
@@ -90,7 +90,7 @@ fn test_boundary_value_combinations() {
     // 测试最小值和最大值
     let min_i32 = i32::MIN;
     let max_i32 = i32::MAX;
-    
+
     assert_eq!(min_i32, i32::MIN);
     assert_eq!(max_i32, i32::MAX);
 

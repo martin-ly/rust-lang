@@ -11,6 +11,7 @@
 ### 1. 集成测试全面完成 ✅
 
 **为所有剩余模块添加集成测试**:
+
 - ✅ c01_ownership_borrow_scope: 创建 `integration_tests.rs`
   - 所有权转移集成测试
   - 借用集成测试
@@ -66,6 +67,7 @@
 ### 2. 模糊测试基础结构创建 ✅
 
 **为关键模块添加模糊测试**:
+
 - ✅ c01_ownership_borrow_scope: 创建 `fuzz/fuzz_targets/ownership_fuzz.rs`
 - ✅ c08_algorithms: 创建 `fuzz/fuzz_targets/algorithm_fuzz.rs`
 

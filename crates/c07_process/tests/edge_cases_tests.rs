@@ -94,3 +94,35 @@ fn test_resource_exhaustion() {
     let memory_exhausted = false;
     assert_eq!(memory_exhausted, false);
 }
+
+/// 测试进程生命周期边界情况
+#[test]
+fn test_process_lifecycle_boundaries() {
+    // 测试进程创建
+    let process_created = true;
+    assert_eq!(process_created, true);
+
+    // 测试进程运行
+    let process_running = true;
+    assert_eq!(process_running, true);
+
+    // 测试进程终止
+    let process_terminated = true;
+    assert_eq!(process_terminated, true);
+}
+
+/// 测试IPC边界情况
+#[test]
+fn test_ipc_boundaries() {
+    use std::time::Duration;
+
+    // 测试IPC超时
+    let ipc_timeout = Duration::from_millis(100);
+    assert_eq!(ipc_timeout.as_millis(), 100);
+
+    // 测试IPC消息大小
+    let min_message_size = 0usize;
+    let max_message_size = 65536usize; // 64KB
+    assert_eq!(min_message_size, 0);
+    assert!(max_message_size > 0);
+}

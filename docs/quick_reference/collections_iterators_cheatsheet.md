@@ -54,6 +54,9 @@
     - [去重](#去重)
     - [窗口操作](#窗口操作)
   - [📚 相关资源](#-相关资源)
+    - [官方文档](#官方文档)
+    - [项目内部文档](#项目内部文档)
+    - [相关速查卡](#相关速查卡)
 
 ---
 
@@ -697,15 +700,18 @@ let vec = vec![1, 2, 3, 4, 5];
 ## 📚 相关资源
 
 ### 官方文档
+
 - [Rust 集合文档](https://doc.rust-lang.org/std/collections/)
 - [Iterator trait 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 - [Rust Reference - Collections](https://doc.rust-lang.org/reference/items/collections.html)
 
 ### 项目内部文档
+
 - [完整迭代器参考](../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md)
 - [集合研究笔记](../../docs/research_notes/)
 
 ### 相关速查卡
+
 - [控制流与函数速查卡](./control_flow_functions_cheatsheet.md) - 循环与迭代器
 - [类型系统速查卡](./type_system.md) - 集合类型
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与集合

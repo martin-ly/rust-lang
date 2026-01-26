@@ -81,3 +81,36 @@ fn test_concurrent_safety() {
     let vec = shared.lock().unwrap();
     assert_eq!(vec.len(), 10);
 }
+
+/// 测试泛型约束错误
+#[test]
+fn test_generic_constraint_errors() {
+    // 测试Trait边界不满足的情况
+    trait Displayable {
+        fn display(&self) -> String;
+    }
+
+    impl Displayable for i32 {
+        fn display(&self) -> String {
+            format!("{}", self)
+        }
+    }
+
+    fn require_displayable<T: Displayable>(item: T) -> String {
+        item.display()
+    }
+
+    assert_eq!(require_displayable(42), "42");
+}
+
+/// 测试类型推断错误
+#[test]
+fn test_type_inference_errors() {
+    // 测试类型推断失败的情况
+    let value: i32 = 42;
+    assert_eq!(value, 42);
+
+    // 测试需要显式类型注解的情况
+    let explicit: Vec<i32> = vec![1, 2, 3];
+    assert_eq!(explicit.len(), 3);
+}

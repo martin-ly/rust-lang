@@ -18,11 +18,11 @@ fn test_error_inputs() {
 fn test_error_states() {
     // 测试Trait边界不满足的情况
     trait Marker {}
-    
+
     impl Marker for i32 {}
-    
+
     fn require_marker<T: Marker>(_item: T) {}
-    
+
     require_marker(42i32); // 应该编译通过
 }
 

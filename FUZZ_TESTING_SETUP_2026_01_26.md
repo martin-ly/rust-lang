@@ -10,6 +10,7 @@
 ### 1. 模糊测试基础结构 ✅
 
 **为关键模块添加模糊测试**:
+
 - ✅ 为c01_ownership_borrow_scope创建模糊测试目标
   - `fuzz/fuzz_targets/ownership_fuzz.rs`
   - 测试所有权和借用处理任意输入
@@ -20,6 +21,7 @@
 ### 2. 集成测试完成 ✅
 
 **为所有剩余模块添加集成测试**:
+
 - ✅ c01_ownership_borrow_scope: 创建 `integration_tests.rs`
 - ✅ c03_control_fn: 创建 `integration_tests.rs`
 - ✅ c04_generic: 创建 `integration_tests.rs`
