@@ -1,7 +1,7 @@
 # 🔀 Rust 线程与并发速查卡
 
 > **快速参考** | [完整文档](../../crates/c05_threads/docs/) | [代码示例](../../crates/c05_threads/examples/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -22,6 +22,8 @@
   - [🔧 无锁数据结构](#-无锁数据结构)
     - [Atomic 类型](#atomic-类型)
     - [内存顺序](#内存顺序)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [🔗 相关资源](#-相关资源)
   - [🆕 Rust 1.93.0 并发改进](#-rust-1930-并发改进)
     - [内存分配优化](#内存分配优化)
@@ -187,13 +189,26 @@ Ordering::Relaxed
 
 ---
 
-## 🔗 相关资源
+## 📚 相关文档
 
-- [线程编程完整文档](../../crates/c05_threads/docs/)
-- [并发模式速查卡](./async_patterns.md)
-- [Rust 官方文档 - 并发](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+- [线程与并发完整文档](../../crates/c05_threads/docs/)
+- [线程与并发 README](../../crates/c05_threads/README.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c05_threads/examples/`，可直接运行（例如：`cargo run -p c05_threads --example message_passing_demo`）。
+
+- [消息传递与高级并发](../../crates/c05_threads/examples/message_passing_demo.rs)、[advanced_concurrency_patterns_demo.rs](../../crates/c05_threads/examples/advanced_concurrency_patterns_demo.rs)
+- [背压与流式处理](../../crates/c05_threads/examples/backpressure_overview_demo.rs)、[stream_backpressure_demo.rs](../../crates/c05_threads/examples/stream_backpressure_demo.rs)、[stream_rate_batch_demo.rs](../../crates/c05_threads/examples/stream_rate_batch_demo.rs)
+- [优先级通道与实战模式](../../crates/c05_threads/examples/priority_channels_demo.rs)、[real_world_threading_demo.rs](../../crates/c05_threads/examples/real_world_threading_demo.rs)、[performance_optimization_demo.rs](../../crates/c05_threads/examples/performance_optimization_demo.rs)
+- [Rust 1.92 特性演示](../../crates/c05_threads/examples/rust_192_features_demo.rs)、[rust_190_features_demo.rs](../../crates/c05_threads/examples/rust_190_features_demo.rs)
 
 ---
+
+## 🔗 相关资源
+
+- [并发模式速查卡](./async_patterns.md)
+- [Rust 官方文档 - 并发](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 ---
 
@@ -242,5 +257,5 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)

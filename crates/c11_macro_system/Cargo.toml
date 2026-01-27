@@ -30,6 +30,8 @@ serde_json = { workspace = true, optional = true }
 # 测试依赖
 tokio = { workspace = true }
 trybuild = "1.0.114"
+# 基准测试
+criterion = { workspace = true }
 
 [features]
 default = []
@@ -54,6 +56,10 @@ path = "examples/04_recursive_macros.rs"
 [[example]]
 name = "rust_192_features_demo"
 path = "examples/rust_192_features_demo.rs"
+
+[[bench]]
+name = "performance_benchmarks"
+harness = false
 
 [package.metadata.docs.rs]
 all-features = true

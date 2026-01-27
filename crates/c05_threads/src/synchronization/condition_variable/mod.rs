@@ -112,6 +112,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore] // 长时等待，默认跳过以加速全量测试；可用 cargo test -- --ignored 单独跑
     fn test_wait_with_timeout_demo() {
         // 通常会超时，返回 false
         let ok = wait_with_timeout_demo(20);

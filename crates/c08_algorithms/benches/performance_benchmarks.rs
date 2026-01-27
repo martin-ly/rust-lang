@@ -1,6 +1,7 @@
 //! 算法模块性能基准测试 / Algorithms Module Performance Benchmarks
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
 
 fn bench_vector_operations(c: &mut Criterion) {
     c.bench_function("vector_operations", |b| {
@@ -26,8 +27,11 @@ fn bench_search_operations(c: &mut Criterion) {
     c.bench_function("search_operations", |b| {
         let vec: Vec<i32> = (0..1000).collect();
         b.iter(|| {
-            let result = vec.binary_search(&black_box(500));
-            black_box(result);
+            let idx = match vec.binary_search(&black_box(500)) {
+                Ok(i) => i,
+                Err(insertion_point) => insertion_point,
+            };
+            black_box(idx);
         });
     });
 }

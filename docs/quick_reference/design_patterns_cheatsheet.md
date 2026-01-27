@@ -2,7 +2,7 @@
 
 **模块**: C09 Design Patterns
 **Rust 版本**: 1.93.0+
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 
 ---
 
@@ -21,6 +21,8 @@
     - [Newtype 模式](#newtype-模式)
     - [RAII 模式](#raii-模式)
     - [类型状态模式](#类型状态模式)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -141,6 +143,24 @@ impl Door<Closed> {
 
 ---
 
+## 📚 相关文档
+
+- [设计模式完整文档](../../crates/c09_design_pattern/docs/)
+- [设计模式 README](../../crates/c09_design_pattern/README.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c09_design_pattern/examples/`，可直接运行（例如：`cargo run -p c09_design_pattern --example oncelock_singleton_comprehensive`）。
+
+- [单例与 OnceLock](../../crates/c09_design_pattern/examples/oncelock_singleton_comprehensive.rs)
+- [事件总线](../../crates/c09_design_pattern/examples/event_bus_demo.rs)
+- [观察者与 GAT](../../crates/c09_design_pattern/examples/gats_observer_demo.rs)
+- [管道与迭代器](../../crates/c09_design_pattern/examples/pipeline_iter_demo.rs)
+- [异步 trait 演示](../../crates/c09_design_pattern/examples/async_trait_demo.rs)
+- [dyn upcasting 适配器](../../crates/c09_design_pattern/examples/dyn_upcasting_adapter.rs)
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -163,6 +183,6 @@ impl Door<Closed> {
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档

@@ -2,7 +2,7 @@
 
 **模块**: C12 WASM
 **Rust 版本**: 1.93.0+
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 
 ---
 
@@ -24,6 +24,8 @@
   - [⚡ 性能优化](#-性能优化)
     - [减小二进制大小](#减小二进制大小)
     - [使用 wasm-opt](#使用-wasm-opt)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -167,6 +169,23 @@ wasm-opt -Os pkg/my_project_bg.wasm -o pkg/my_project_optimized.wasm
 
 ---
 
+## 📚 相关文档
+
+- [WASM 完整文档](../../crates/c12_wasm/docs/)
+- [WASM README](../../crates/c12_wasm/README.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c12_wasm/examples/`，可直接运行（例如：`cargo run -p c12_wasm --example 01_basic_add`）。
+
+- [基础加法与导出](../../crates/c12_wasm/examples/01_basic_add.rs)
+- [字符串与数组](../../crates/c12_wasm/examples/02_string_operations.rs)、[03_array_processing.rs](../../crates/c12_wasm/examples/03_array_processing.rs)
+- [计数器与 WASI](../../crates/c12_wasm/examples/04_counter_class.rs)、[05_wasi_file_processor.rs](../../crates/c12_wasm/examples/05_wasi_file_processor.rs)
+- [异步 fetch、设计模式、微服务](../../crates/c12_wasm/examples/06_async_fetch.rs)、[07_design_patterns.rs](../../crates/c12_wasm/examples/07_design_patterns.rs)、[08_container_microservice.rs](../../crates/c12_wasm/examples/08_container_microservice.rs)
+- [Rust 1.91/1.92 特性演示](../../crates/c12_wasm/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../crates/c12_wasm/examples/rust_192_features_demo.rs)
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -190,6 +209,6 @@ wasm-opt -Os pkg/my_project_bg.wasm -o pkg/my_project_optimized.wasm
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档

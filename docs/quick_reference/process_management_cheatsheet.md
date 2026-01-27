@@ -2,7 +2,7 @@
 
 **模块**: C07 Process Management
 **Rust 版本**: 1.93.0+
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 
 ---
 
@@ -23,6 +23,8 @@
   - [⚡ 性能优化](#-性能优化)
     - [启用性能监控](#启用性能监控)
   - [🐛 错误处理](#-错误处理)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -201,6 +203,23 @@ match manager.spawn(config) {
 
 ---
 
+## 📚 相关文档
+
+- [进程管理完整文档](../../crates/c07_process/docs/)
+- [进程管理 README](../../crates/c07_process/README.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c07_process/examples/`，可直接运行（例如：`cargo run -p c07_process --example process_management_demo`）。
+
+- [进程管理演示](../../crates/c07_process/examples/process_management_demo.rs)
+- [异步进程与 IPC](../../crates/c07_process/examples/async_process_demo.rs)、[ipc_communication_demo.rs](../../crates/c07_process/examples/ipc_communication_demo.rs)
+- [信号处理与进程组](../../crates/c07_process/examples/signal_handling_demo.rs)、[process_group_demo.rs](../../crates/c07_process/examples/process_group_demo.rs)
+- [进程监控与性能优化](../../crates/c07_process/examples/process_monitoring_demo.rs)、[performance_optimization_demo.rs](../../crates/c07_process/examples/performance_optimization_demo.rs)
+- [跨平台演示](../../crates/c07_process/examples/cross_platform_demo.rs)
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -222,6 +241,6 @@ match manager.spawn(config) {
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档

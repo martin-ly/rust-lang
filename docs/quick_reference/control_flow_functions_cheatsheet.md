@@ -1,7 +1,7 @@
 # 🔄 Rust 控制流与函数速查卡
 
 > **快速参考** | [完整文档](../../crates/c03_control_fn/docs/) | [代码示例](../../crates/c03_control_fn/examples/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -40,6 +40,8 @@
     - [模式匹配与解构](#模式匹配与解构)
     - [函数式编程](#函数式编程)
     - [递归函数](#递归函数)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -607,6 +609,21 @@ fn factorial_tail(n: u64, acc: u64) -> u64 {
 
 ---
 
+## 📚 相关文档
+
+- [控制流与函数完整文档](../../crates/c03_control_fn/docs/)
+- [控制流与函数 README](../../crates/c03_control_fn/README.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c03_control_fn/examples/`，可直接运行（例如：`cargo run -p c03_control_fn --example control_flow_example`）。
+
+- [控制流基础与模式匹配](../../crates/c03_control_fn/examples/control_flow_example.rs)、[control_flow_overview.rs](../../crates/c03_control_fn/examples/control_flow_overview.rs)、[control_flow_pattern_matching.rs](../../crates/c03_control_fn/examples/control_flow_pattern_matching.rs)
+- [闭包与 let-else、循环](../../crates/c03_control_fn/examples/closures_and_fn_traits.rs)、[let_else_patterns_handbook.rs](../../crates/c03_control_fn/examples/let_else_patterns_handbook.rs)、[loops_and_iterators_control.rs](../../crates/c03_control_fn/examples/loops_and_iterators_control.rs)
+- [Rust 1.91/1.92 特性演示](../../crates/c03_control_fn/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../crates/c03_control_fn/examples/rust_192_features_demo.rs)
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -629,7 +646,7 @@ fn factorial_tail(n: u64, acc: u64) -> u64 {
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **维护者**: 文档团队
 **状态**: ✅ **Rust 1.93.0 更新完成**
 

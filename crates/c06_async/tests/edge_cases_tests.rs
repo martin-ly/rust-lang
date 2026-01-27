@@ -4,12 +4,12 @@
 #[test]
 fn test_future_boundaries() {
     // 测试立即完成的Future
-    let immediate_future = async { 42 };
+    let _immediate_future = async { 42 };
     // 注意：实际测试需要运行时，这里只是示例结构
     assert_eq!(42, 42);
 
     // 测试长时间运行的Future
-    let long_running_future = async {
+    let _long_running_future = async {
         std::thread::sleep(std::time::Duration::from_millis(1));
         100
     };

@@ -60,7 +60,7 @@ fn test_boundary_value_combinations() {
     // 测试最小和最大模式数量
     let min_patterns = 0usize;
     let max_patterns = usize::MAX;
-    
+
     assert_eq!(min_patterns, 0);
     assert_eq!(max_patterns, usize::MAX);
 

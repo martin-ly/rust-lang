@@ -1,7 +1,7 @@
 # ⚠️ Rust 错误处理速查卡
 
 > **快速参考** | [完整文档](../../crates/c03_control_fn/docs/) | [代码示例](../../crates/c03_control_fn/examples/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -22,6 +22,8 @@
   - [🎯 错误处理库](#-错误处理库)
     - [anyhow - 灵活的错误处理](#anyhow---灵活的错误处理)
     - [thiserror - 自定义错误类型](#thiserror---自定义错误类型)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [🔗 相关资源](#-相关资源)
   - [🆕 Rust 1.93.0 错误处理改进](#-rust-1930-错误处理改进)
     - [MaybeUninit 错误处理增强](#maybeuninit-错误处理增强)
@@ -165,13 +167,23 @@ enum MyError {
 
 ---
 
-## 🔗 相关资源
+## 📚 相关文档
 
-- [控制流完整文档](../../crates/c03_control_fn/docs/)
-- [错误处理最佳实践](../../crates/c03_control_fn/docs/tier_02_guides/)
-- [Rust 官方文档 - 错误处理](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+- [控制流与错误处理文档](../../crates/c03_control_fn/docs/)
+- [错误处理指南](../../crates/c03_control_fn/docs/tier_02_guides/05_错误处理指南.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c03_control_fn/examples/`，可直接运行（例如：`cargo run -p c03_control_fn --example error_handling_control_flow`）。
+
+- [错误处理与控制流](../../crates/c03_control_fn/examples/error_handling_control_flow.rs)
+- [try 块与高级控制流](../../crates/c03_control_fn/examples/try_blocks_advanced.rs)、[control_flow_example.rs](../../crates/c03_control_fn/examples/control_flow_example.rs)
 
 ---
+
+## 🔗 相关资源
+
+- [Rust 官方文档 - 错误处理](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 
 ---
 
@@ -239,5 +251,5 @@ fn validate(value: i32) -> ControlFlow<String, i32> {
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)

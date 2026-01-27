@@ -1,7 +1,7 @@
 # 🎯 Rust 智能指针速查卡
 
 > **快速参考** | [完整文档](../../crates/c01_ownership_borrow_scope/docs/) | [代码示例](../../crates/c01_ownership_borrow_scope/examples/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -48,6 +48,8 @@
     - [决策树](#决策树)
     - [性能对比](#性能对比)
     - [常见组合](#常见组合)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -676,6 +678,21 @@ println!("{:?}", vec.borrow()); // [1, 2, 3, 4, 5]
 
 ---
 
+## 📚 相关文档
+
+- [所有权与智能指针文档](../../crates/c01_ownership_borrow_scope/docs/)
+- [智能指针 API 参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c01_ownership_borrow_scope/examples/`，可直接运行（例如：`cargo run -p c01_ownership_borrow_scope --example advanced_ownership_examples`）。
+
+- [高级所有权与智能指针](../../crates/c01_ownership_borrow_scope/examples/advanced_ownership_examples.rs)、[advanced_ownership_patterns.rs](../../crates/c01_ownership_borrow_scope/examples/advanced_ownership_patterns.rs)
+- [综合所有权示例](../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs)、[moving00.rs](../../crates/c01_ownership_borrow_scope/examples/moving00.rs)～[moving06.rs](../../crates/c01_ownership_borrow_scope/examples/moving06.rs)
+- [Rust 1.91/1.92 特性演示](../../crates/c01_ownership_borrow_scope/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs)
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -698,7 +715,7 @@ println!("{:?}", vec.borrow()); // [1, 2, 3, 4, 5]
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **维护者**: 文档团队
 **状态**: ✅ **Rust 1.93.0 更新完成**
 

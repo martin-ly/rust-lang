@@ -1,7 +1,7 @@
 # 🔧 Rust 宏系统速查卡
 
 > **快速参考** | [完整文档](../../crates/c11_macro_system/docs/) | [代码示例](../../crates/c11_macro_system/examples/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -21,7 +21,8 @@
   - [🎯 常见模式](#-常见模式)
     - [模式 1: 重复](#模式-1-重复)
     - [模式 2: 条件编译](#模式-2-条件编译)
-  - [🔗 相关资源](#-相关资源)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [🆕 Rust 1.93.0 宏系统改进](#-rust-1930-宏系统改进)
     - [`cfg` 属性在 `asm!` 行上](#cfg-属性在-asm-行上)
   - [Rust 1.92.0 宏系统改进（历史）](#rust-1920-宏系统改进历史)
@@ -178,12 +179,21 @@ macro_rules! platform_specific {
 
 ---
 
-## 🔗 相关资源
+## 📚 相关文档
 
 - [宏系统完整文档](../../crates/c11_macro_system/docs/)
-- [Rust 官方文档 - 宏](https://doc.rust-lang.org/book/ch19-06-macros.html)
+- [宏系统 README](../../crates/c11_macro_system/README.md)
 
----
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c11_macro_system/examples/`，可直接运行（例如：`cargo run -p c11_macro_system --example 01_macro_rules_basics`）。
+
+- [声明宏基础](../../crates/c11_macro_system/examples/01_macro_rules_basics.rs)
+- [模式匹配](../../crates/c11_macro_system/examples/02_pattern_matching.rs)
+- [重复语法](../../crates/c11_macro_system/examples/03_repetition.rs)
+- [递归宏](../../crates/c11_macro_system/examples/04_recursive_macros.rs)
+- [Rust 1.91 特性演示](../../crates/c11_macro_system/examples/rust_191_features_demo.rs)
+- [Rust 1.92 特性演示](../../crates/c11_macro_system/examples/rust_192_features_demo.rs)
 
 ---
 
@@ -258,5 +268,5 @@ macro_rules! my_macro {
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)

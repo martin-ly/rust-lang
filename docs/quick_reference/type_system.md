@@ -1,7 +1,7 @@
 # 🔷 Rust 类型系统速查卡
 
 > **快速参考** | [完整文档](../../crates/c02_type_system/docs/) | [代码示例](../../crates/c02_type_system/examples/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -55,6 +55,8 @@
     - [切片到数组转换](#切片到数组转换)
   - [Rust 1.92.0 新特性（历史）](#rust-1920-新特性历史)
     - [const 上下文增强](#const-上下文增强)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -662,6 +664,20 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 
 ---
 
+## 📚 相关文档
+
+- [类型系统完整文档](../../crates/c02_type_system/docs/)
+- [类型系统 README](../../crates/c02_type_system/README.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c02_type_system/examples/`，可直接运行（例如：`cargo run -p c02_type_system --example type_system_example`）。
+
+- [类型系统基础](../../crates/c02_type_system/examples/type_system_example.rs)、[类型定义与等价](../../crates/c02_type_system/examples/type_definition_examples.rs)、[type_equivalence_newtype_examples.rs](../../crates/c02_type_system/examples/type_equivalence_newtype_examples.rs)
+- [Trait 对象与型变](../../crates/c02_type_system/examples/trait_objects_safety.rs)、[variance_examples.rs](../../crates/c02_type_system/examples/variance_examples.rs)
+- [Pin/自引用、Never 类型、模式匹配](../../crates/c02_type_system/examples/pin_self_referential_basics.rs)、[never_type_control_flow.rs](../../crates/c02_type_system/examples/never_type_control_flow.rs)、[pattern_matching_advanced.rs](../../crates/c02_type_system/examples/pattern_matching_advanced.rs)
+- [Rust 1.91/1.92 特性演示](../../crates/c02_type_system/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../crates/c02_type_system/examples/rust_192_features_demo.rs)、[rust_192_comprehensive_demo.rs](../../crates/c02_type_system/examples/rust_192_comprehensive_demo.rs)
+
 ---
 
 ## 📚 相关资源
@@ -686,7 +702,7 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)
 
 🔷 **Rust 类型系统，安全与表达力的极致！**

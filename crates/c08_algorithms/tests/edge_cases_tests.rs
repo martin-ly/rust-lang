@@ -42,17 +42,20 @@ fn test_single_element() {
 #[test]
 fn test_large_arrays() {
     // 大数组创建
-    let large_size = 100000;
-    let large_vec: Vec<i32> = (0..large_size).collect();
+    let large_size: usize = 100000;
+    let large_vec: Vec<i32> = (0..(large_size as i32)).collect();
     assert_eq!(large_vec.len(), large_size);
 
     // 大数组操作
     let sum: i32 = large_vec.iter().sum();
-    assert_eq!(sum, (0..large_size).sum::<i32>());
+    assert_eq!(sum, (0..(large_size as i32)).sum::<i32>());
 
     // 大数组查找
     assert_eq!(large_vec.iter().find(|&&x| x == 50000), Some(&50000));
-    assert_eq!(large_vec.iter().find(|&&x| x == large_size), None);
+    assert_eq!(
+        large_vec.iter().find(|&&x| x == large_size as i32),
+        None
+    );
 }
 
 /// 测试算法边界条件

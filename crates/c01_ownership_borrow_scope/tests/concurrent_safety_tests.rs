@@ -67,7 +67,14 @@ fn test_memory_safety() {
             let mut mgr = manager.lock().unwrap();
             let scope_name = format!("scope_{}", i);
             mgr.enter_scope(scope_name, ScopeType::Block).unwrap();
-            mgr.add_variable(format!("var_{}", i)).unwrap();
+            mgr.declare_variable(
+                format!("var_{}", i),
+                "i32".to_string(),
+                i.to_string(),
+                false,
+                None,
+            )
+            .unwrap();
         });
         handles.push(handle);
     }
@@ -86,12 +93,12 @@ fn test_memory_safety() {
 fn test_atomic_operations() {
     use std::sync::atomic::{AtomicUsize, Ordering};
 
-    let counter = AtomicUsize::new(0);
+    let counter = Arc::new(AtomicUsize::new(0));
     let mut handles = vec![];
 
     // 创建多个线程同时增加原子计数器
     for _ in 0..100 {
-        let counter = &counter;
+        let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
             counter.fetch_add(1, Ordering::SeqCst);
         });

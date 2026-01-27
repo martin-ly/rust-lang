@@ -41,8 +41,8 @@ fn test_exception_cases() {
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量进程创建（模拟）
-    let large_number = 10000;
-    let processes: Vec<u32> = (1..=large_number).collect();
+    let large_number: usize = 10000;
+    let processes: Vec<u32> = (1..=(large_number as u32)).collect();
     assert_eq!(processes.len(), large_number);
 
     // 测试内存耗尽（模拟）

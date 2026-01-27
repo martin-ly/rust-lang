@@ -1,6 +1,7 @@
 //! 类型系统模块性能基准测试 / Type System Module Performance Benchmarks
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
 
 fn bench_type_conversion(c: &mut Criterion) {
     c.bench_function("type_conversion", |b| {
@@ -40,13 +41,13 @@ fn bench_trait_operations(c: &mut Criterion) {
             trait Display {
                 fn display(&self) -> String;
             }
-            
+
             impl Display for i32 {
                 fn display(&self) -> String {
                     format!("{}", self)
                 }
             }
-            
+
             let value: i32 = 42;
             let result = value.display();
             black_box(result);

@@ -1,7 +1,5 @@
 //! 进程管理模块边界情况测试套件 / Process Management Module Edge Cases Test Suite
 
-use c07_process::*;
-
 /// 测试进程数量边界情况
 #[test]
 fn test_process_count_boundaries() {
@@ -24,7 +22,7 @@ fn test_resource_limit_boundaries() {
     // 测试资源限制边界值
     let min_limit = 0;
     let max_limit = u32::MAX;
-    
+
     assert_eq!(min_limit, 0);
     assert_eq!(max_limit, u32::MAX);
 
@@ -73,7 +71,7 @@ fn test_boundary_value_combinations() {
     // 测试最小值和最大值组合
     let min_pid = 1u32;
     let max_pid = u32::MAX;
-    
+
     assert_eq!(min_pid, 1);
     assert_eq!(max_pid, u32::MAX);
 
@@ -86,8 +84,8 @@ fn test_boundary_value_combinations() {
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量进程创建（模拟）
-    let large_number = 10000;
-    let processes: Vec<u32> = (1..=large_number).collect();
+    let large_number: usize = 10000;
+    let processes: Vec<u32> = (1..=(large_number as u32)).collect();
     assert_eq!(processes.len(), large_number);
 
     // 测试内存耗尽（模拟）

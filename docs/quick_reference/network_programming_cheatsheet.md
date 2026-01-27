@@ -2,7 +2,7 @@
 
 **模块**: C10 Networks
 **Rust 版本**: 1.93.0+
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 
 ---
 
@@ -32,6 +32,7 @@
     - [连接池](#连接池)
     - [压缩](#压缩)
   - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -291,6 +292,22 @@ let response = client
 
 ## 📚 相关文档
 
+- [网络模块完整文档](../../crates/c10_networks/docs/)
+- [网络模块 README](../../crates/c10_networks/README.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c10_networks/examples/`，可直接运行（例如：`cargo run -p c10_networks --example tcp_echo_server`）。
+
+- [TCP 回显服务/客户端](../../crates/c10_networks/examples/tcp_echo_server.rs)、[tcp_client.rs](../../crates/c10_networks/examples/tcp_client.rs)
+- [UDP 回显与自定义](../../crates/c10_networks/examples/udp_echo.rs)、[udp_custom_demo.rs](../../crates/c10_networks/examples/udp_custom_demo.rs)
+- [HTTP 客户端](../../crates/c10_networks/examples/http_client.rs)
+- [WebSocket 演示与回显](../../crates/c10_networks/examples/websocket_demo.rs)、[ws_echo_server.rs](../../crates/c10_networks/examples/ws_echo_server.rs)、[ws_echo_client.rs](../../crates/c10_networks/examples/ws_echo_client.rs)
+- [DNS 解析与记录](../../crates/c10_networks/examples/dns_lookup.rs)、[dns_records.rs](../../crates/c10_networks/examples/dns_records.rs)、[unified_dns.rs](../../crates/c10_networks/examples/unified_dns.rs)
+- [gRPC 客户端/服务端](../../crates/c10_networks/examples/grpc_client.rs)、[grpc_server.rs](../../crates/c10_networks/examples/grpc_server.rs)
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -313,6 +330,6 @@ let response = client
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档

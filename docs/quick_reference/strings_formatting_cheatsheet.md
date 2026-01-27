@@ -1,7 +1,7 @@
 # 📝 Rust 字符串与格式化速查卡
 
 > **快速参考** | [完整文档](../../crates/c02_type_system/docs/) | [代码示例](../../crates/c02_type_system/examples/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -43,6 +43,8 @@
     - [错误消息格式化](#错误消息格式化)
     - [表格格式化](#表格格式化)
     - [进度条格式化](#进度条格式化)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -563,6 +565,19 @@ print!("\r[{}{}] {:.1}%",
 
 ---
 
+## 📚 相关文档
+
+- [类型系统模块（String/&str 相关）](../../crates/c02_type_system/README.md)
+- [算法模块（字符串算法与数据处理）](../../crates/c08_algorithms/README.md)
+- [WASM 模块（字符串互操作示例）](../../crates/c12_wasm/README.md)
+
+## 🧩 相关示例代码
+
+以下示例与字符串/格式化高度相关，可直接运行：
+
+- [字符串算法演示（C08）](../../crates/c08_algorithms/examples/string_algorithms_demo.rs)（`cargo run -p c08_algorithms --example string_algorithms_demo`）
+- [WASM 字符串操作（C12）](../../crates/c12_wasm/examples/02_string_operations.rs)（`cargo run -p c12_wasm --example 02_string_operations`）
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -585,7 +600,7 @@ print!("\r[{}{}] {:.1}%",
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **维护者**: 文档团队
 **状态**: ✅ **Rust 1.93.0 更新完成**
 

@@ -1,7 +1,7 @@
 # 📦 Rust 集合与迭代器速查卡
 
 > **快速参考** | [完整文档](../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md) | [代码示例](../../crates/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -53,6 +53,8 @@
     - [分组](#分组)
     - [去重](#去重)
     - [窗口操作](#窗口操作)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -697,6 +699,21 @@ let vec = vec![1, 2, 3, 4, 5];
 
 ---
 
+## 📚 相关文档
+
+- [迭代器参考](../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md)
+- [算法与数据结构文档](../../crates/c08_algorithms/README.md)
+
+## 🧩 相关示例代码
+
+以下示例与集合/迭代器相关，位于 `crates/c08_algorithms/examples/`，可直接运行（例如：`cargo run -p c08_algorithms --example data_structures_demo`）。
+
+- [数据结构与集合用法](../../crates/c08_algorithms/examples/data_structures_demo.rs)
+- [排序、搜索与图算法](../../crates/c08_algorithms/examples/sorting_algorithms_demo.rs)、[searching_algorithms_demo.rs](../../crates/c08_algorithms/examples/searching_algorithms_demo.rs)、[graph_algorithms_demo.rs](../../crates/c08_algorithms/examples/graph_algorithms_demo.rs)
+- [动态规划与贪心](../../crates/c08_algorithms/examples/dynamic_programming_demo.rs)、[greedy_algorithms_demo.rs](../../crates/c08_algorithms/examples/greedy_algorithms_demo.rs)
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -719,7 +736,7 @@ let vec = vec![1, 2, 3, 4, 5];
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **维护者**: 文档团队
 **状态**: ✅ **Rust 1.93.0 更新完成**
 

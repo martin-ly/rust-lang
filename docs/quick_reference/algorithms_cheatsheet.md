@@ -35,6 +35,7 @@
     - [越界访问](#越界访问)
     - [整数溢出](#整数溢出)
   - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -300,7 +301,18 @@ let result = a.checked_add(b)?;
 
 ## 📚 相关文档
 
-- [完整文档](../crates/c08_algorithms/README.md)
+- [完整文档](../../crates/c08_algorithms/README.md)
+
+## 🧩 相关示例代码
+
+这些示例都在 `crates/c08_algorithms/examples/` 下，可直接运行（例如：`cargo run -p c08_algorithms --example sorting_algorithms_demo`）。
+
+- [排序算法演示](../../crates/c08_algorithms/examples/sorting_algorithms_demo.rs)
+- [搜索算法演示](../../crates/c08_algorithms/examples/searching_algorithms_demo.rs)
+- [图算法演示](../../crates/c08_algorithms/examples/graph_algorithms_demo.rs)
+- [动态规划演示](../../crates/c08_algorithms/examples/dynamic_programming_demo.rs)
+- [算法复杂度演示](../../crates/c08_algorithms/examples/algorithm_complexity_demo.rs)
+- [算法优化演示](../../crates/c08_algorithms/examples/algorithm_optimization_demo.rs)
 
 ## 📚 相关资源
 
@@ -323,6 +335,6 @@ let result = a.checked_add(b)?;
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档

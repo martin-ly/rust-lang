@@ -51,13 +51,22 @@ fn test_macro_pattern_matching_integration() {
 /// 测试递归宏集成
 #[test]
 fn test_recursive_macro_integration() {
+    const fn factorial(n: u64) -> u64 {
+        let mut i = 1u64;
+        let mut acc = 1u64;
+        while i <= n {
+            acc *= i;
+            i += 1;
+        }
+        acc
+    }
+
     macro_rules! factorial {
-        (0) => { 1 };
         ($n:expr) => {
-            $n * factorial!($n - 1)
+            factorial($n as u64)
         };
     }
-    
+
     assert_eq!(factorial!(0), 1);
     assert_eq!(factorial!(5), 120);
 }

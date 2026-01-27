@@ -82,12 +82,12 @@ fn test_memory_safety() {
 fn test_atomic_operations() {
     use std::sync::atomic::{AtomicUsize, Ordering};
 
-    let counter = AtomicUsize::new(0);
+    let counter = Arc::new(AtomicUsize::new(0));
     let mut handles = vec![];
 
     // 创建多个线程同时增加原子计数器
     for _ in 0..100 {
-        let counter = &counter;
+        let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
             counter.fetch_add(1, Ordering::SeqCst);
         });

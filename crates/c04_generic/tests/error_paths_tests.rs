@@ -45,8 +45,8 @@ fn test_exception_cases() {
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量泛型实例化
-    let large_number = 10000;
-    let types: Vec<i32> = (0..large_number).collect();
+    let large_number: usize = 10000;
+    let types: Vec<i32> = (0..(large_number as i32)).collect();
     assert_eq!(types.len(), large_number);
 
     // 测试内存耗尽（模拟）

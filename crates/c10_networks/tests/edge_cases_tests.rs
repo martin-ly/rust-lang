@@ -75,7 +75,7 @@ fn test_boundary_value_combinations() {
     // 测试最小和最大端口号
     let min_port = 1u16;
     let max_port = 65535u16;
-    
+
     assert_eq!(min_port, 1);
     assert_eq!(max_port, 65535);
 
@@ -88,8 +88,8 @@ fn test_boundary_value_combinations() {
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量连接（模拟）
-    let large_number = 10000;
-    let connections: Vec<u32> = (1..=large_number).collect();
+    let large_number: usize = 10000;
+    let connections: Vec<u32> = (1..=(large_number as u32)).collect();
     assert_eq!(connections.len(), large_number);
 
     // 测试内存耗尽（模拟）
@@ -131,9 +131,11 @@ fn test_buffer_boundaries() {
 
 /// 测试网络连接状态边界情况
 #[test]
+#[warn(dead_code)]
 fn test_connection_state_boundaries() {
     // 测试连接状态枚举
     #[derive(PartialEq, Debug)]
+    #[allow(dead_code)]
     enum ConnectionState {
         Disconnected,
         Connecting,

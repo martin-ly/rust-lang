@@ -50,7 +50,7 @@ fn test_trait_boundaries() {
     }
 
     let value: i32 = 42;
-    assert_eq!(value.display(), "42");
+    assert_eq!(Display::display(&value), "42");
 
     // 测试多个Trait边界
     trait CloneAndDisplay: Clone {
@@ -63,7 +63,12 @@ fn test_trait_boundaries() {
         }
     }
 
-    let cloned = value.clone();
+    // 通过泛型约束使用 CloneAndDisplay，验证 trait 边界
+    fn show_and_clone<T: CloneAndDisplay>(x: &T) -> (String, T) {
+        (CloneAndDisplay::display(x), x.clone())
+    }
+    let (s, cloned) = show_and_clone(&value);
+    assert_eq!(s, "42");
     assert_eq!(cloned, value);
 }
 
@@ -103,8 +108,8 @@ fn test_boundary_value_combinations() {
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量类型实例化（模拟）
-    let large_number = 10000;
-    let types: Vec<i32> = (0..large_number).collect();
+    let large_number: usize = 10000;
+    let types: Vec<i32> = (0..(large_number as i32)).collect();
     assert_eq!(types.len(), large_number);
 
     // 测试内存耗尽（模拟）

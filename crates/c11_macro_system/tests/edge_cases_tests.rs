@@ -1,7 +1,5 @@
 //! 宏系统模块边界情况测试套件 / Macro System Module Edge Cases Test Suite
 
-use c11_macro_system::*;
-
 /// 测试宏展开边界情况
 #[test]
 fn test_macro_expansion_boundaries() {
@@ -11,7 +9,7 @@ fn test_macro_expansion_boundaries() {
             42
         };
     }
-    
+
     assert_eq!(simple_macro!(), 42);
 
     // 测试带参数的宏展开
@@ -20,7 +18,7 @@ fn test_macro_expansion_boundaries() {
             $a + $b
         };
     }
-    
+
     assert_eq!(add_macro!(1, 2), 3);
     assert_eq!(add_macro!(0, 0), 0);
     assert_eq!(add_macro!(100, 200), 300);
@@ -39,7 +37,7 @@ fn test_nesting_depth_boundaries() {
             }
         };
     }
-    
+
     // 注意：实际宏递归需要特殊处理，这里只是示例
     assert_eq!(0, 0); // 占位测试
 
@@ -47,7 +45,7 @@ fn test_nesting_depth_boundaries() {
     let nested_level_1 = vec![1];
     let nested_level_2 = vec![vec![1]];
     let nested_level_3 = vec![vec![vec![1]]];
-    
+
     assert_eq!(nested_level_1.len(), 1);
     assert_eq!(nested_level_2.len(), 1);
     assert_eq!(nested_level_3.len(), 1);
@@ -66,7 +64,7 @@ fn test_error_paths() {
             $x
         };
     }
-    
+
     assert_eq!(test_macro!(42), 42);
 }
 
@@ -76,7 +74,7 @@ fn test_boundary_value_combinations() {
     // 测试最小值和最大值
     let min_value = 0usize;
     let max_value = usize::MAX;
-    
+
     assert_eq!(min_value, 0);
     assert_eq!(max_value, usize::MAX);
 
@@ -106,7 +104,7 @@ fn test_complex_macro_scenarios() {
         (true) => { 1 };
         (false) => { 0 };
     }
-    
+
     assert_eq!(conditional_macro!(true), 1);
     assert_eq!(conditional_macro!(false), 0);
 
@@ -116,7 +114,7 @@ fn test_complex_macro_scenarios() {
             vec![$item; $count]
         };
     }
-    
+
     let repeated = repeat_macro!(42; 5);
     assert_eq!(repeated.len(), 5);
     assert_eq!(repeated[0], 42);
@@ -145,7 +143,7 @@ fn test_macro_recursion_boundaries() {
         (0) => { 0 };
         ($n:expr) => { shallow_recursion!($n - 1) + 1 };
     }
-    
+
     // 注意：实际宏递归需要特殊处理
     assert_eq!(0, 0); // 占位测试
 }

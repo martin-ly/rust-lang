@@ -1,7 +1,7 @@
 # 📦 Rust 模块系统速查卡
 
 > **快速参考** | [Cargo/包索引](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md) | [Rust 官方模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [代码示例](../../crates/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -51,6 +51,8 @@
     - [模块初始化](#模块初始化)
     - [模块测试](#模块测试)
     - [特性模块](#特性模块)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -604,6 +606,24 @@ mod sync_impl {
 
 ---
 
+## 📚 相关文档
+
+- [项目结构说明](../../PROJECT_STRUCTURE.md)
+- [Cargo 包管理与模块索引（项目内）](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
+- [Workspace 模块示例：控制流与函数模块 README](../../crates/c03_control_fn/README.md)
+- [Workspace 模块示例：线程与并发模块 README](../../crates/c05_threads/README.md)
+- [Workspace 模块示例：类型系统模块 README](../../crates/c02_type_system/README.md)
+
+## 🧩 相关示例代码
+
+这些文件展示了“模块/子模块/导出”的真实组织方式（可直接打开阅读）：
+
+- [C01 crate 根与模块组织](../../crates/c01_ownership_borrow_scope/src/lib.rs)
+- [C02 crate 根与模块组织](../../crates/c02_type_system/src/lib.rs)
+- [C03 crate 根与模块组织](../../crates/c03_control_fn/src/lib.rs)
+- [C05 crate 根与模块组织](../../crates/c05_threads/src/lib.rs)
+- [C10 crate 根与统一 API 组织](../../crates/c10_networks/src/lib.rs)、[unified_api.rs](../../crates/c10_networks/src/unified_api.rs)
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -626,7 +646,7 @@ mod sync_impl {
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **维护者**: 文档团队
 **状态**: ✅ **Rust 1.93.0 更新完成**
 

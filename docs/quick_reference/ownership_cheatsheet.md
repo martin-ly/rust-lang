@@ -1,7 +1,7 @@
 # 🦀 所有权系统速查卡
 
 > **快速参考** | [完整文档](../../crates/c01_ownership_borrow_scope/docs/) | [代码示例](../../crates/c01_ownership_borrow_scope/examples/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -39,6 +39,8 @@
     - [形式化理论](#形式化理论)
   - [🆕 Rust 1.92.0 内存优化](#-rust-1920-内存优化)
     - [内存分配优化](#内存分配优化)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -408,6 +410,21 @@ for i in 0..1000 {
 
 ---
 
+## 📚 相关文档
+
+- [所有权系统完整文档](../../crates/c01_ownership_borrow_scope/docs/)
+- [所有权系统 README](../../crates/c01_ownership_borrow_scope/README.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c01_ownership_borrow_scope/examples/`，可直接运行（例如：`cargo run -p c01_ownership_borrow_scope --example moving00`）。
+
+- [所有权转移与移动](../../crates/c01_ownership_borrow_scope/examples/moving00.rs)～[moving06.rs](../../crates/c01_ownership_borrow_scope/examples/moving06.rs)
+- [作用域与高级所有权](../../crates/c01_ownership_borrow_scope/examples/scope01.rs)、[advanced_scope_examples.rs](../../crates/c01_ownership_borrow_scope/examples/advanced_scope_examples.rs)、[advanced_ownership_examples.rs](../../crates/c01_ownership_borrow_scope/examples/advanced_ownership_examples.rs)、[comprehensive_ownership_examples.rs](../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs)
+- [Rust 1.91/1.92 特性演示](../../crates/c01_ownership_borrow_scope/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs)
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -431,7 +448,7 @@ for i in 0..1000 {
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)
 **打印友好**: 可直接打印为桌面参考
 

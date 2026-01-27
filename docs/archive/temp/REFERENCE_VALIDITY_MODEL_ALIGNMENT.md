@@ -1,8 +1,9 @@
 # 引用一致性模型对齐报告
 
 > ⚠️ **历史文档** - 本文档为历史参考文档，部分链接可能已失效
-> 
+>
 > **实际文档位置**:
+>
 > - 形式化所有权系统: `docs/research_notes/formal_methods/ownership_model.md`
 > - 类型系统基础: `docs/research_notes/type_theory/type_system_foundations.md`
 > - 所有权文档: `crates/c01_ownership_borrow_scope/docs/`

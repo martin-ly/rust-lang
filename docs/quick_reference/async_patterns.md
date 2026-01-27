@@ -1,7 +1,7 @@
 # ⚡ Rust 异步编程速查卡
 
 > **快速参考** | [完整文档](../../crates/c06_async/docs/) | [代码示例](../../crates/c06_async/examples/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -50,6 +50,8 @@
   - [Rust 1.92.0 异步改进（历史）](#rust-1920-异步改进历史)
     - [异步迭代器性能提升](#异步迭代器性能提升)
     - [JIT 编译器优化](#jit-编译器优化)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -643,6 +645,22 @@ async fn process_stream() {
 
 ---
 
+## 📚 相关文档
+
+- [异步编程完整文档](../../crates/c06_async/docs/)
+- [异步编程 README](../../crates/c06_async/README.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c06_async/examples/`，可直接运行（例如：`cargo run -p c06_async --example async_patterns_demo`）。
+
+- [异步模式与综合演示](../../crates/c06_async/examples/async_patterns_demo.rs)、[async_comprehensive_demo.rs](../../crates/c06_async/examples/async_comprehensive_demo.rs)、[comprehensive_async_demo.rs](../../crates/c06_async/examples/comprehensive_async_demo.rs)
+- [Tokio / smol / 运行时对比](../../crates/c06_async/examples/tokio_patterns.rs)、[smol_patterns.rs](../../crates/c06_async/examples/smol_patterns.rs)、[runtime_comparison_demo.rs](../../crates/c06_async/examples/runtime_comparison_demo.rs)
+- [Stream、Actor、分布式与微服务](../../crates/c06_async/examples/stream_processing_backpressure.rs)、[distributed_systems_demo.rs](../../crates/c06_async/examples/distributed_systems_demo.rs)、[microservices_async_demo.rs](../../crates/c06_async/examples/microservices_async_demo.rs)
+- [Rust 1.91/1.92 特性演示](../../crates/c06_async/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../crates/c06_async/examples/rust_192_features_demo.rs)
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -665,7 +683,7 @@ async fn process_stream() {
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)
 **运行时版本**: Tokio 1.48.0+
 

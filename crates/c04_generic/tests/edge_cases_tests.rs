@@ -1,14 +1,12 @@
 //! 泛型模块边界情况测试套件 / Generics Module Edge Cases Test Suite
 
-use c04_generic::*;
-
 /// 测试泛型参数边界情况
 #[test]
 fn test_generic_parameter_boundaries() {
     // 测试基本泛型类型
     let int_value: i32 = 42;
     let string_value: String = "test".to_string();
-    
+
     assert_eq!(int_value, 42);
     assert_eq!(string_value, "test");
 
@@ -16,7 +14,7 @@ fn test_generic_parameter_boundaries() {
     fn identity<T>(x: T) -> T {
         x
     }
-    
+
     assert_eq!(identity(42), 42);
     assert_eq!(identity("test"), "test");
     assert_eq!(identity(true), true);
@@ -29,29 +27,39 @@ fn test_trait_boundaries() {
     trait Display {
         fn display(&self) -> String;
     }
-    
+
     impl Display for i32 {
         fn display(&self) -> String {
             format!("{}", self)
         }
     }
-    
-    let value: i32 = 42;
-    assert_eq!(value.display(), "42");
 
-    // 测试多个Trait边界
+    let value: i32 = 42;
+    assert_eq!(Display::display(&value), "42");
+
+    // 测试多个Trait边界（trait 通过 impl、泛型约束与完全限定调用使用）
+    #[allow(dead_code)]
     trait CloneAndDisplay: Clone {
         fn display(&self) -> String;
     }
-    
+
     impl CloneAndDisplay for i32 {
         fn display(&self) -> String {
             format!("{}", self)
         }
     }
-    
+
+    // 通过泛型约束使用 trait，避免 dead_code 警告
+    fn format_via_clone_display<T: CloneAndDisplay>(x: &T) -> String {
+        CloneAndDisplay::display(x)
+    }
+
     let cloned = value.clone();
     assert_eq!(cloned, value);
+    // 使用 CloneAndDisplay trait 的 display 方法（显式限定语法，使 trait 被判定为已使用）
+    assert_eq!(<i32 as CloneAndDisplay>::display(&value), "42");
+    assert_eq!(format_via_clone_display(&value), "42");
+    assert_eq!(format_via_clone_display(&cloned), "42");
 }
 
 /// 测试类型推断边界情况
@@ -72,7 +80,7 @@ fn test_type_inference_boundaries() {
     fn process<T: Clone>(item: T) -> T {
         item.clone()
     }
-    
+
     let result = process(42);
     assert_eq!(result, 42);
 }
@@ -86,11 +94,11 @@ fn test_error_paths() {
 
     // 测试Trait边界不满足的情况
     trait Marker {}
-    
+
     impl Marker for i32 {}
-    
+
     fn require_marker<T: Marker>(_item: T) {}
-    
+
     require_marker(42i32); // 应该编译通过
 }
 
@@ -100,7 +108,7 @@ fn test_boundary_value_combinations() {
     // 测试最小值和最大值
     let min_i32 = i32::MIN;
     let max_i32 = i32::MAX;
-    
+
     assert_eq!(min_i32, i32::MIN);
     assert_eq!(max_i32, i32::MAX);
 
@@ -111,7 +119,7 @@ fn test_boundary_value_combinations() {
     // 测试不同类型边界值
     let min_u32 = u32::MIN;
     let max_u32 = u32::MAX;
-    
+
     assert_eq!(min_u32, 0);
     assert_eq!(max_u32, u32::MAX);
 }
@@ -129,16 +137,16 @@ fn test_complex_generic_scenarios() {
         type Item;
         fn get(&self) -> Self::Item;
     }
-    
+
     struct IntContainer(i32);
-    
+
     impl Container for IntContainer {
         type Item = i32;
         fn get(&self) -> Self::Item {
             self.0
         }
     }
-    
+
     let container = IntContainer(42);
     assert_eq!(container.get(), 42);
 }

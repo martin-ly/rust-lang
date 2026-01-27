@@ -95,6 +95,7 @@ fn test_associated_type_integration() {
 
 /// 测试泛型方法集成
 #[test]
+#[allow(dead_code)]
 fn test_generic_method_integration() {
     struct Point<T> {
         x: T,

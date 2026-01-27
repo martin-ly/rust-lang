@@ -1,7 +1,7 @@
 # 🔷 Rust 泛型编程速查卡
 
 > **快速参考** | [完整文档](../../crates/c04_generic/docs/) | [代码示例](../../crates/c04_generic/examples/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -26,6 +26,8 @@
     - [模式 3: 泛型 Trait 实现](#模式-3-泛型-trait-实现)
   - [📚 性能考虑](#-性能考虑)
     - [单态化 (Monomorphization)](#单态化-monomorphization)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [🔗 相关资源](#-相关资源)
   - [🆕 Rust 1.93.0 泛型改进](#-rust-1930-泛型改进)
     - [MaybeUninit 泛型支持增强](#maybeuninit-泛型支持增强)
@@ -212,13 +214,24 @@ let float = largest(&[1.0, 2.0]);   // 生成 largest_f64
 
 ---
 
-## 🔗 相关资源
+## 📚 相关文档
 
 - [泛型编程完整文档](../../crates/c04_generic/docs/)
+- [泛型编程 README](../../crates/c04_generic/README.md)
+
+## 🧩 相关示例代码
+
+以下示例位于 `crates/c04_generic/examples/`，可直接运行（例如：`cargo run -p c04_generic --example generic_collections_demo`）。
+
+- [泛型集合与 GAT](../../crates/c04_generic/examples/generic_collections_demo.rs)、[generic_gat_demo.rs](../../crates/c04_generic/examples/generic_gat_demo.rs)
+- [HRTB、特化与 Trait 对象](../../crates/c04_generic/examples/generic_hrtb_demo.rs)、[generic_specialization_demo.rs](../../crates/c04_generic/examples/generic_specialization_demo.rs)、[generic_trait_object_demo.rs](../../crates/c04_generic/examples/generic_trait_object_demo.rs)
+- [类型状态与零成本抽象](../../crates/c04_generic/examples/generic_type_state_demo.rs)、[generic_zero_cost_demo.rs](../../crates/c04_generic/examples/generic_zero_cost_demo.rs)
+- [Rust 1.91/1.92 特性演示](../../crates/c04_generic/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../crates/c04_generic/examples/rust_192_features_demo.rs)
+
+## 🔗 相关资源
+
 - [类型系统速查卡](./type_system.md)
 - [Rust 官方文档 - 泛型](https://doc.rust-lang.org/book/ch10-00-generics.html)
-
----
 
 ---
 
@@ -289,5 +302,5 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **Rust 版本**: 1.93.0+ (Edition 2024)

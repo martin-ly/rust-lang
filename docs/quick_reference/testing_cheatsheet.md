@@ -1,7 +1,7 @@
 # 🧪 Rust 测试速查卡
 
 > **快速参考** | [完整文档](../../docs/rust-formal-engineering-system/05_software_engineering/07_testing/) | [代码示例](../../crates/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -84,6 +84,8 @@
     - [常用测试命令](#常用测试命令)
     - [测试覆盖率工具](#测试覆盖率工具)
     - [性能分析工具](#性能分析工具)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [测试框架和工具](#测试框架和工具)
@@ -1375,6 +1377,25 @@ heaptrack cargo test
 
 ---
 
+## 📚 相关文档
+
+- [完整测试文档（项目内）](../../docs/rust-formal-engineering-system/05_software_engineering/07_testing/)
+- [测试覆盖率指南](../../docs/TESTING_COVERAGE_GUIDE.md)
+- [tarpaulin 配置](../../tarpaulin.toml)
+
+## 🧩 相关示例代码
+
+项目内可直接参考/运行的测试样例（覆盖单元测试、集成测试、并发安全、错误路径）：
+
+- **顶层集成测试**：[`tests/cross_module_integration_tests.rs`](../../tests/cross_module_integration_tests.rs)
+- **典型 crate 测试目录**：
+  - C02 类型系统：[`crates/c02_type_system/tests/error_paths_tests.rs`](../../crates/c02_type_system/tests/error_paths_tests.rs)、[`edge_cases_tests.rs`](../../crates/c02_type_system/tests/edge_cases_tests.rs)
+  - C06 异步：[`crates/c06_async/tests/integration_tests.rs`](../../crates/c06_async/tests/integration_tests.rs)
+  - C05 并发：[`crates/c05_threads/tests/concurrent_safety_tests.rs`](../../crates/c05_threads/tests/concurrent_safety_tests.rs)
+  - C08 算法：[`crates/c08_algorithms/tests/edge_cases_tests.rs`](../../crates/c08_algorithms/tests/edge_cases_tests.rs)
+  - C01 所有权：[`crates/c01_ownership_borrow_scope/tests/integration_tests.rs`](../../crates/c01_ownership_borrow_scope/tests/integration_tests.rs)
+  - C10 网络：[`crates/c10_networks/tests/error_paths_tests.rs`](../../crates/c10_networks/tests/error_paths_tests.rs)
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -1421,7 +1442,7 @@ heaptrack cargo test
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **维护者**: 文档团队
 **状态**: ✅ **Rust 1.93.0 更新完成**
 

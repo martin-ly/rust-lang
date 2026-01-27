@@ -1,16 +1,17 @@
 # 归档文件说明
 
-> **归档日期**: 2025-11-15
+> **归档日期**: 2025-11-15（最近更新 2026-01-27）
 > **归档原因**: 清理与主题子主题不相关的文件，保持项目结构清晰
 
 ---
 
 ## 📋 归档目录结构
 
-```
+```text
 docs/archive/
 ├── README.md                    # 本说明文件
-├── ARCHIVE_QUICK_GUIDE.md       # 归档快速指南
+├── root_completion_reports/     # 根目录完成度/状态类报告（2026-01-27 全面归档）⭐
+├── legacy_root_archive/         # 原根目录 archive/ 迁入（2026-01-27 全面归档）⭐ NEW
 ├── spell_check/                 # 拼写检查相关文件
 ├── status/                      # 项目状态报告
 ├── updates/                     # 更新报告
@@ -21,6 +22,29 @@ docs/archive/
 ---
 
 ## 📁 各目录说明
+
+### root_completion_reports/ - 根目录完成度与状态报告（2026-01-27）
+
+与**项目主题（Rust 学习资源）**无直接关系的完成度、推进、周报类文件，已统一归档到此目录，便于根目录只保留核心文档与配置。
+
+**归档范围**：原位于仓库根目录的、以完成度/状态/周报等为主题的 `.md` 报告，例如：
+
+- `FINAL_*`、`PUSH_TO_100_*`、`PROGRESS_*`、`PROJECT_*_COMPLETE*`
+- `WEEK1_*`、`WEEK2_*`、`ULTIMATE_*`、`TASK_PROGRESS_*`
+- `TEST_COVERAGE_*`、`TEST_CASES_*`、`FUZZ_TESTING_*`
+- `MODULE_FEATURES_*`、`RESEARCH_TASKS_*`、`COMPLETION_*`、`ACHIEVEMENT_*` 等
+
+**保留在根目录的文档**：`README.md`、`README.en.md`、`PROJECT_STRUCTURE.md`、`MIGRATION_GUIDE_1.91.1_TO_1.92.0.md`。
+
+**说明**：归档副本位于 `docs/archive/root_completion_reports/`。**2026-01-27 全面归档**：根目录中与主题无关的完成度/推进/周报类 .md 已全部复制到本目录并从根目录删除；`docs/research_notes/` 中的完成度类报告（`COMPLETION_SUMMARY_2025_12_25.md`、`COMPREHENSIVE_PROGRESS_REPORT_2025_12_25.md`、`FINAL_COMPLETION_STATUS_2025_12_25.md`、`ULTIMATE_COMPLETION_REPORT_2025_12_25.md`）已一并迁入本目录。完成度与 100% 认定以 [FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md](root_completion_reports/FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md) 为准。
+
+---
+
+### legacy_root_archive/ - 原根目录 archive/（2026-01-27 全面归档）
+
+原位于仓库根目录的 `archive/` 文件夹（含 `reports/2025-12-25/` 等完成度/任务/状态类报告）已整体迁入本目录，根目录不再保留 `archive/`。
+
+---
 
 ### spell_check/ - 拼写检查相关文件
 
@@ -105,9 +129,9 @@ docs/archive/
 
 ## 📊 归档统计
 
-- **归档文件总数**: 约 30+ 个文件
-- **归档目录数**: 5 个分类目录
-- **归档日期**: 2025-11-15
+- **归档文件总数**: 约 30+ 个文件（不含 root_completion_reports）+ root_completion_reports 内约 87 个
+- **归档目录数**: 6 个分类目录（含 root_completion_reports）
+- **归档日期**: 2025-11-15；root_completion_reports 于 2026-01-27 新增
 
 ---
 
@@ -129,4 +153,4 @@ docs/archive/
 
 ---
 
-**最后更新**: 2025-11-15
+**最后更新**: 2026-01-27

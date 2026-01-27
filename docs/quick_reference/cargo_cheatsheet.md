@@ -1,7 +1,7 @@
 # 📦 Cargo 速查卡
 
 > **快速参考** | [Cargo 官方文档](https://doc.rust-lang.org/cargo/) | [代码示例](../../crates/)
-> **最后更新**: 2026-01-26 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
+> **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
 
@@ -53,6 +53,8 @@
     - [清理和重建](#清理和重建)
     - [依赖问题](#依赖问题)
     - [构建问题](#构建问题)
+  - [📚 相关文档](#-相关文档)
+  - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -627,6 +629,27 @@ cargo build --target <target>
 
 ---
 
+## 📚 相关文档
+
+- [工具链文档索引](../../docs/toolchain/README.md)
+- [Cargo 工作空间指南](../../docs/toolchain/02_cargo_workspace_guide.md)
+- [Cargo 包管理与工作空间索引（项目内）](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
+
+## 🧩 相关示例代码
+
+这些示例可帮助你把 Cargo 的核心命令串成完整工作流：
+
+- **Cargo 项目模板（文档示例）**：`crates/c02_type_system/docs/cargo_package_management/examples/`
+  - [简单 CLI 项目](../../crates/c02_type_system/docs/cargo_package_management/examples/01_simple_cli.md)
+  - [带 features 的库](../../crates/c02_type_system/docs/cargo_package_management/examples/02_library_with_features.md)
+  - [Workspace 项目](../../crates/c02_type_system/docs/cargo_package_management/examples/03_workspace_project.md)
+- **运行 examples（真实 workspace 例子）**：
+  - `cargo run -p c03_control_fn --example control_flow_example`
+  - `cargo run -p c05_threads --example message_passing_demo`
+  - `cargo run -p c08_algorithms --example sorting_algorithms_demo`
+  - `cargo run -p c10_networks --example tcp_echo_server`
+  - `cargo run -p c12_wasm --example 02_string_operations`
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -649,7 +672,7 @@ cargo build --target <target>
 
 ---
 
-**最后更新**: 2026-01-26
+**最后更新**: 2026-01-27
 **维护者**: 文档团队
 **状态**: ✅ **Rust 1.93.0 更新完成**
 

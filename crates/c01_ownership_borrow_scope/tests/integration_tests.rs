@@ -57,11 +57,10 @@ fn test_lifetime_integration() {
     }
     
     let string1 = String::from("long string");
-    let result;
-    {
+    let result = {
         let string2 = String::from("xyz");
-        result = longest(string1.as_str(), string2.as_str());
-    }
+        longest(string1.as_str(), string2.as_str()).to_string()
+    };
     
     assert_eq!(result, "long string");
 }
@@ -74,6 +73,7 @@ fn test_concurrent_ownership_integration() {
     
     let mut value = shared_clone.lock().unwrap();
     *value += 1;
+    drop(value);
     
     assert_eq!(*shared.lock().unwrap(), 1);
 }
