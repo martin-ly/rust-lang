@@ -1,7 +1,5 @@
 //! 设计模式模块边界情况测试套件 / Design Patterns Module Edge Cases Test Suite
 
-use c09_design_pattern::*;
-
 /// 测试模式组合边界情况
 #[test]
 fn test_pattern_combination_boundaries() {

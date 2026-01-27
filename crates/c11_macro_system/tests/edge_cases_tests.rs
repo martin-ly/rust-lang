@@ -28,18 +28,18 @@ fn test_macro_expansion_boundaries() {
 #[test]
 fn test_nesting_depth_boundaries() {
     // 测试浅层嵌套
+    #[allow(unused_macros)]
     macro_rules! nested_macro {
-        ($depth:expr) => {
-            if $depth == 0 {
-                0
-            } else {
-                nested_macro!($depth - 1) + 1
-            }
+        () => {
+            0
+        };
+        (_ $($rest:tt)*) => {
+            nested_macro!($($rest)*) + 1
         };
     }
 
-    // 注意：实际宏递归需要特殊处理，这里只是示例
-    assert_eq!(0, 0); // 占位测试
+    // 使用 token 递归来安全地验证“嵌套深度”场景
+    assert_eq!(nested_macro!(_ _ _), 3);
 
     // 测试多层嵌套结构
     let nested_level_1 = vec![1];
@@ -139,13 +139,13 @@ fn test_macro_performance_boundaries() {
 #[test]
 fn test_macro_recursion_boundaries() {
     // 测试浅层递归
+    #[allow(unused_macros)]
     macro_rules! shallow_recursion {
-        (0) => { 0 };
-        ($n:expr) => { shallow_recursion!($n - 1) + 1 };
+        () => { 0 };
+        (_ $($rest:tt)*) => { shallow_recursion!($($rest)*) + 1 };
     }
 
-    // 注意：实际宏递归需要特殊处理
-    assert_eq!(0, 0); // 占位测试
+    assert_eq!(shallow_recursion!(_ _ _ _), 4);
 }
 
 /// 测试宏参数类型边界情况
@@ -158,9 +158,10 @@ fn test_macro_parameter_type_boundaries() {
     assert_eq!(expr_macro!(42), 42);
 
     // 测试标识符参数
+    #[allow(unused_macros)]
     macro_rules! ident_macro {
         ($i:ident) => { $i };
     }
     let test_var = 42;
-    assert_eq!(test_var, 42);
+    assert_eq!(ident_macro!(test_var), 42);
 }
