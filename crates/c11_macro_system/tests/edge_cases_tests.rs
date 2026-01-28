@@ -1,5 +1,22 @@
 //! 宏系统模块边界情况测试套件 / Macro System Module Edge Cases Test Suite
 
+// 共享辅助宏：用 token 递归计数（可终止、可用于“嵌套/递归”示例）
+macro_rules! count_tokens {
+    () => {
+        0usize
+    };
+    (_ $($rest:tt)*) => {
+        count_tokens!($($rest)*) + 1usize
+    };
+}
+
+// 共享辅助宏：标识符透传
+macro_rules! passthrough_ident {
+    ($i:ident) => {
+        $i
+    };
+}
+
 /// 测试宏展开边界情况
 #[test]
 fn test_macro_expansion_boundaries() {
@@ -27,19 +44,8 @@ fn test_macro_expansion_boundaries() {
 /// 测试嵌套深度边界情况
 #[test]
 fn test_nesting_depth_boundaries() {
-    // 测试浅层嵌套
-    #[allow(unused_macros)]
-    macro_rules! nested_macro {
-        () => {
-            0
-        };
-        (_ $($rest:tt)*) => {
-            nested_macro!($($rest)*) + 1
-        };
-    }
-
     // 使用 token 递归来安全地验证“嵌套深度”场景
-    assert_eq!(nested_macro!(_ _ _), 3);
+    assert_eq!(count_tokens!(_ _ _), 3);
 
     // 测试多层嵌套结构
     let nested_level_1 = vec![1];
@@ -138,14 +144,8 @@ fn test_macro_performance_boundaries() {
 /// 测试宏递归边界情况
 #[test]
 fn test_macro_recursion_boundaries() {
-    // 测试浅层递归
-    #[allow(unused_macros)]
-    macro_rules! shallow_recursion {
-        () => { 0 };
-        (_ $($rest:tt)*) => { shallow_recursion!($($rest)*) + 1 };
-    }
-
-    assert_eq!(shallow_recursion!(_ _ _ _), 4);
+    // 使用同一个 token 递归宏来模拟“浅层递归”
+    assert_eq!(count_tokens!(_ _ _ _), 4);
 }
 
 /// 测试宏参数类型边界情况
@@ -158,10 +158,6 @@ fn test_macro_parameter_type_boundaries() {
     assert_eq!(expr_macro!(42), 42);
 
     // 测试标识符参数
-    #[allow(unused_macros)]
-    macro_rules! ident_macro {
-        ($i:ident) => { $i };
-    }
     let test_var = 42;
-    assert_eq!(ident_macro!(test_var), 42);
+    assert_eq!(passthrough_ident!(test_var), 42);
 }

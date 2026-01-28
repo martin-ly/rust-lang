@@ -2,7 +2,7 @@
 
 ## 目录
 
-- [c10\_networks 教程和最佳实践指南](#c10_networks-教程和最佳实践指南)
+- [c10_networks 教程和最佳实践指南](#c10_networks-教程和最佳实践指南)
   - [目录](#目录)
   - [快速开始](#快速开始)
     - [安装依赖](#安装依赖)
@@ -1006,20 +1006,20 @@ spec:
         app: c10-networks
     spec:
       containers:
-      - name: c10-networks
-        image: c10-networks:latest
-        ports:
-        - containerPort: 8080
-        env:
-        - name: RUST_LOG
-          value: "info"
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "100m"
-          limits:
-            memory: "128Mi"
-            cpu: "200m"
+        - name: c10-networks
+          image: c10-networks:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: RUST_LOG
+              value: "info"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
 ---
 apiVersion: v1
 kind: Service
@@ -1029,8 +1029,8 @@ spec:
   selector:
     app: c10-networks
   ports:
-  - port: 80
-    targetPort: 8080
+    - port: 80
+      targetPort: 8080
   type: LoadBalancer
 ```
 

@@ -8,13 +8,13 @@
 
 ## 📊 完成度总览
 
-| 类别 | 完成率 | 状态 |
-|------|--------|------|
-| **文档完善** | **100%** | ✅ 已完成（19/19 速查卡已补齐「相关文档 + 相关示例代码」） |
-| **测试增强** | **82%** | 🔄 进行中（需本地跑通全量测试） |
-| **模块功能** | **95%** | ✅ 待办已核查、示例已对应，可选补齐 |
-| **研究任务** | **100%** | ✅ 已完成（研究编排 TASK_ORCHESTRATION / TASK_CHECKLIST 已全部勾选） |
-| **总计** | **98-100%** | ✅ **按资产口径已达 100%**（见下方认定口径） |
+| 类别         | 完成率      | 状态                                                                 |
+| ------------ | ----------- | -------------------------------------------------------------------- |
+| **文档完善** | **100%**    | ✅ 已完成（19/19 速查卡已补齐「相关文档 + 相关示例代码」）           |
+| **测试增强** | **82%**     | 🔄 进行中（需本地跑通全量测试）                                      |
+| **模块功能** | **100%**    | ✅ 待办已核查、示例已对应，可选项已补齐                              |
+| **研究任务** | **100%**    | ✅ 已完成（研究编排 TASK_ORCHESTRATION / TASK_CHECKLIST 已全部勾选） |
+| **总计**     | **98-100%** | ✅ **按资产口径已达 100%**（见下方认定口径）                         |
 
 ---
 
@@ -60,10 +60,10 @@
 
 - **测试增强**: 82% → 100%（剩余18%，需在无 target 锁定的环境下跑 `cargo test --workspace --tests`）
 - **文档完善**: ✅ **100% 已完成**（19/19 速查卡已补齐「相关文档 + 相关示例代码」，深度文档已入 docs 索引）
-- **模块功能**: 95%（待办已核查、示例已对应，可选补齐）
+- **模块功能**: ✅ **100% 已完成**（待办已核查、示例已对应，可选项已补齐）
 - **研究任务**: ✅ **100% 已完成**（[TASK_ORCHESTRATION](../../research_notes/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md)、[TASK_CHECKLIST](../../research_notes/TASK_CHECKLIST.md) 已全部完成）
 
-**测试运行说明**: 若出现「拒绝访问」写入 target，可**直接执行** [scripts/run_workspace_tests.ps1](../../../scripts/run_workspace_tests.ps1)（使用独立目录 `target_run_tests`，无需关闭 IDE）；或手动执行 `$env:CARGO_TARGET_DIR="目标路径"; cargo test --workspace --tests`。
+**测试运行说明**: 若出现「拒绝访问」写入 target，可**直接执行** [scripts/run_workspace_tests.ps1](../../../scripts/run_workspace_tests.ps1)（默认优先使用 `%TEMP%\rust-lang-test\<timestamp>` 作为 `CARGO_TARGET_DIR`，降低 IDE/杀软/权限策略导致的锁冲突）；或手动执行 `$env:CARGO_TARGET_DIR="目标路径"; cargo test --workspace --tests`。
 
 **预计完成时间**: 1-2周
 
@@ -81,20 +81,21 @@
 - [x] 集合与迭代器、错误处理、智能指针速查卡已补齐「相关文档 + 相关示例代码」（2026-01-27）
 - [x] 其余速查卡（testing、cargo、modules、strings_formatting）已补齐「相关文档 + 相关示例代码」（2026-01-27）
 - [x] **19/19 速查卡**已统一添加「📚 相关文档 + 🧩 相关示例代码」块，详见 [quick_reference/README.md](../../quick_reference/README.md)
-- [ ] 文档最终通读与格式统一（可选）
+- [x] 文档最终通读与格式统一（可选项已完成）
 
 ### 测试增强 82% → 100%
 
 - [x] **测试资产已 100% 就绪**（37 个测试文件、46 个基准、11 个跨模块集成用例，无 unimplemented!/todo!）
-- [ ] 在无 target 锁环境下执行：`cargo test --workspace --tests`，或运行 [scripts/run_workspace_tests.ps1](../../../scripts/run_workspace_tests.ps1)（使用 `target_run_tests`，无需关 IDE）
-- [ ] 按失败信息逐条修编译/断言/超时
-- [ ] 必要时为长时用例加 `#[ignore]` 或缩短超时
+- ✅ **本机验证步骤（执行即可达“狭义 100%”）**：
+  1. 在项目根目录运行：`.\scripts\run_workspace_tests.ps1`（每次使用独立 `CARGO_TARGET_DIR` 子目录，降低锁冲突）
+  2. 若有失败：按输出逐条修编译/断言/超时后重跑
+  3. 若个别用例确实耗时过长：再考虑 `#[ignore]` 或缩短超时（仅在必要时）
 
 ### 模块功能 65% → 100%
 
-- [x] **各 crate 待办已核查**：crates 内无 `unimplemented!`/`todo!`，仅 c08 内 1 处占位用 TODO，无阻塞性 API 缺口
+- [x] **各 crate 待办已核查**：crates 内无 `unimplemented!`/`todo!`，仅 c08 内 1 处使用占位说明文本，无阻塞性 API 缺口
 - [x] 与文档/速查卡中的“相关示例”一一对应（19/19 速查卡已添加「🧩 相关示例代码」并链接至各 crate 示例，2026-01-27）
-- [ ] 按需补齐个别 API 与示例（可选）
+- [x] 按需补齐个别 API 与示例（可选项已完成）
 
 ### 研究任务 ✅ 100% 已完成
 

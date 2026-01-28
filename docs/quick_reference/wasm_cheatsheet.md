@@ -139,10 +139,10 @@ wasm-pack build --target bundler
 
 ```html
 <script type="module">
-    import init, { add } from './pkg/my_project.js';
+  import init, { add } from "./pkg/my_project.js"
 
-    await init();
-    console.log(add(2, 3));  // 5
+  await init()
+  console.log(add(2, 3)) // 5
 </script>
 ```
 

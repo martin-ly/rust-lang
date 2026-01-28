@@ -49,45 +49,45 @@
 
 1. **安装 Rust** (1.90+)
 
-    ```bash
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    ```
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
 
 2. **安装 WASM 工具链**
 
-    ```bash
-    rustup target add wasm32-unknown-unknown
-    rustup target add wasm32-wasi
-    ```
+   ```bash
+   rustup target add wasm32-unknown-unknown
+   rustup target add wasm32-wasi
+   ```
 
 3. **安装 wasm-pack**
 
-    ```bash
-    curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-    ```
+   ```bash
+   curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+   ```
 
 4. **安装开发工具**
 
-    ```bash
-    # 代码格式化
-    rustup component add rustfmt
+   ```bash
+   # 代码格式化
+   rustup component add rustfmt
 
-    # 代码检查
-    rustup component add clippy
+   # 代码检查
+   rustup component add clippy
 
-    # 覆盖率工具（可选）
-    cargo install cargo-tarpaulin
-    ```
+   # 覆盖率工具（可选）
+   cargo install cargo-tarpaulin
+   ```
 
 ### Fork 和克隆
 
 1. Fork 本项目到您的 GitHub 账户
 2. 克隆您的 Fork
 
-    ```bash
-    git clone https://github.com/YOUR_USERNAME/rust-lang-learning.git
-    cd rust-lang-learning/crates/c12_wasm
-    ```
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/rust-lang-learning.git
+   cd rust-lang-learning/crates/c12_wasm
+   ```
 
 3. 添加上游仓库
 
@@ -183,104 +183,104 @@ git push origin feature/your-feature-name
 
 1. **使用 rustfmt 格式化代码**
 
-    ```bash
-    cargo fmt
-    ```
+   ```bash
+   cargo fmt
+   ```
 
 2. **遵循 Clippy 建议**
 
-    ```bash
-    cargo clippy -- -D warnings
-    ```
+   ```bash
+   cargo clippy -- -D warnings
+   ```
 
 3. **代码注释**
 
-    ```rust
-    /// 计算两个数的和
-    ///
-    /// # 参数
-    /// - `a`: 第一个加数
-    /// - `b`: 第二个加数
-    ///
-    /// # 返回值
-    /// 返回两个数的和
-    ///
-    /// # 示例
-    /// ```
-    /// use c12_wasm::basic_examples::add;
-    /// assert_eq!(add(2, 3), 5);
-    /// ```
-    #[wasm_bindgen]
-    pub fn add(a: i32, b: i32) -> i32 {
-        a + b
-    }
-    ```
+   ````rust
+   /// 计算两个数的和
+   ///
+   /// # 参数
+   /// - `a`: 第一个加数
+   /// - `b`: 第二个加数
+   ///
+   /// # 返回值
+   /// 返回两个数的和
+   ///
+   /// # 示例
+   /// ```
+   /// use c12_wasm::basic_examples::add;
+   /// assert_eq!(add(2, 3), 5);
+   /// ```
+   #[wasm_bindgen]
+   pub fn add(a: i32, b: i32) -> i32 {
+       a + b
+   }
+   ````
 
 4. **错误处理**
 
-    ```rust
-    // ✅ 好的做法
-    #[wasm_bindgen]
-    pub fn safe_operation(x: i32) -> Result<i32, JsValue> {
-        if x < 0 {
-            Err(JsValue::from_str("x must be positive"))
-        } else {
-            Ok(x * 2)
-        }
-    }
+   ```rust
+   // ✅ 好的做法
+   #[wasm_bindgen]
+   pub fn safe_operation(x: i32) -> Result<i32, JsValue> {
+       if x < 0 {
+           Err(JsValue::from_str("x must be positive"))
+       } else {
+           Ok(x * 2)
+       }
+   }
 
-    // ❌ 不好的做法
-    #[wasm_bindgen]
-    pub fn unsafe_operation(x: i32) -> i32 {
-        assert!(x >= 0); // 可能 panic
-        x * 2
-    }
-    ```
+   // ❌ 不好的做法
+   #[wasm_bindgen]
+   pub fn unsafe_operation(x: i32) -> i32 {
+       assert!(x >= 0); // 可能 panic
+       x * 2
+   }
+   ```
 
 5. **性能考虑**
 
-    ```rust
-    // ✅ 好的做法：避免不必要的克隆
-    #[wasm_bindgen]
-    pub fn process(data: &[i32]) -> Vec<i32> {
-        data.iter().filter(|&&x| x > 0).copied().collect()
-    }
+   ```rust
+   // ✅ 好的做法：避免不必要的克隆
+   #[wasm_bindgen]
+   pub fn process(data: &[i32]) -> Vec<i32> {
+       data.iter().filter(|&&x| x > 0).copied().collect()
+   }
 
-    // ❌ 不好的做法：不必要的克隆
-    #[wasm_bindgen]
-    pub fn process_bad(data: Vec<i32>) -> Vec<i32> {
-        data.clone().into_iter().filter(|&x| x > 0).collect()
-    }
-    ```
+   // ❌ 不好的做法：不必要的克隆
+   #[wasm_bindgen]
+   pub fn process_bad(data: Vec<i32>) -> Vec<i32> {
+       data.clone().into_iter().filter(|&x| x > 0).collect()
+   }
+   ```
 
 ### JavaScript 代码规范
 
 1. **使用现代 JavaScript**
 
-    ```javascript
-    // ✅ 使用 async/await
-    async function loadWasm() {
-        const module = await init();
-        return module;
-    }
+   ```javascript
+   // ✅ 使用 async/await
+   async function loadWasm() {
+     const module = await init()
+     return module
+   }
 
-    // ❌ 避免回调地狱
-    init().then(module => {
-        // ...
-    });
-    ```
+   // ❌ 避免回调地狱
+   init().then(module => {
+     // ...
+   })
+   ```
 
 2. **错误处理**
 
-    ```javascript
-    // ✅ 处理错误
-    try {
-        const result = wasmModule.risky_operation();
-        console.log(result);
-    } catch (err) {
-        console.error('Error:', err);
-    }
-    ```
+   ```javascript
+   // ✅ 处理错误
+   try {
+     const result = wasmModule.risky_operation()
+     console.log(result)
+   } catch (err) {
+     console.error("Error:", err)
+   }
+   ```
 
 ## 📬 提交规范
 
@@ -413,7 +413,7 @@ criterion_main!(benches);
 
 所有公共 API 必须有文档注释：
 
-```rust
+````rust
 /// 计算数组的平均值
 ///
 /// # 参数
@@ -435,7 +435,7 @@ criterion_main!(benches);
 pub fn calculate_average(numbers: &[f64]) -> f64 {
     // 实现...
 }
-```
+````
 
 ### 2. Markdown 文档
 
@@ -466,6 +466,7 @@ pub fn calculate_average(numbers: &[f64]) -> f64 {
 ## 常见问题
 
 ### Q: 问题？
+
 **A**: 答案
 ```
 

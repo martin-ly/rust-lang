@@ -89,27 +89,27 @@
 
 ### 类型系统
 
-| 研究笔记系统 | 形式化工程系统 | 关系 |
-|------------|-------------|------|
-| [类型系统基础](./type_theory/type_system_foundations.md) | [类型系统理论基础](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/core_theory/01_basic_type_system.md) | 研究笔记提供研究问题，形式化系统提供理论基础 |
-| [Trait 系统形式化](./type_theory/trait_system_formalization.md) | [Trait 系统理论](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/core_theory/02_trait_system.md) | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
-| [型变理论](./type_theory/variance_theory.md) | [类型系统高级理论](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/advanced_theory/) | 研究笔记提供理论研究，形式化系统提供详细定义 |
+| 研究笔记系统                                                    | 形式化工程系统                                                                                                                         | 关系                                             |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| [类型系统基础](./type_theory/type_system_foundations.md)        | [类型系统理论基础](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/core_theory/01_basic_type_system.md) | 研究笔记提供研究问题，形式化系统提供理论基础     |
+| [Trait 系统形式化](./type_theory/trait_system_formalization.md) | [Trait 系统理论](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/core_theory/02_trait_system.md)        | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
+| [型变理论](./type_theory/variance_theory.md)                    | [类型系统高级理论](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/advanced_theory/)                    | 研究笔记提供理论研究，形式化系统提供详细定义     |
 
 ### 形式化方法
 
-| 研究笔记系统 | 形式化工程系统 | 关系 |
-|------------|-------------|------|
-| [所有权模型形式化](./formal_methods/ownership_model.md) | [所有权系统理论](../../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/) | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
-| [借用检查器证明](./formal_methods/borrow_checker_proof.md) | [借用系统理论](../../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/) | 研究笔记提供证明研究，形式化系统提供证明框架 |
+| 研究笔记系统                                                 | 形式化工程系统                                                                                          | 关系                                             |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| [所有权模型形式化](./formal_methods/ownership_model.md)      | [所有权系统理论](../../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/)  | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
+| [借用检查器证明](./formal_methods/borrow_checker_proof.md)   | [借用系统理论](../../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/)    | 研究笔记提供证明研究，形式化系统提供证明框架     |
 | [生命周期形式化](./formal_methods/lifetime_formalization.md) | [生命周期系统理论](../../rust-formal-engineering-system/01_theoretical_foundations/03_lifetime_system/) | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
 
 ### 实验研究
 
-| 研究笔记系统 | 形式化工程系统 | 关系 |
-|------------|-------------|------|
-| [性能基准测试](./experiments/performance_benchmarks.md) | [性能优化理论](../../rust-formal-engineering-system/02_practical_applications/performance/) | 研究笔记提供实验数据，形式化系统提供优化理论 |
-| [内存分析](./experiments/memory_analysis.md) | [内存管理理论](../../rust-formal-engineering-system/02_practical_applications/memory/) | 研究笔记提供分析结果，形式化系统提供管理理论 |
-| [编译器优化](./experiments/compiler_optimizations.md) | [编译器理论](../../rust-formal-engineering-system/03_compiler_theory/) | 研究笔记提供优化研究，形式化系统提供编译器理论 |
+| 研究笔记系统                                            | 形式化工程系统                                                                              | 关系                                           |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [性能基准测试](./experiments/performance_benchmarks.md) | [性能优化理论](../../rust-formal-engineering-system/02_practical_applications/performance/) | 研究笔记提供实验数据，形式化系统提供优化理论   |
+| [内存分析](./experiments/memory_analysis.md)            | [内存管理理论](../../rust-formal-engineering-system/02_practical_applications/memory/)      | 研究笔记提供分析结果，形式化系统提供管理理论   |
+| [编译器优化](./experiments/compiler_optimizations.md)   | [编译器理论](../../rust-formal-engineering-system/03_compiler_theory/)                      | 研究笔记提供优化研究，形式化系统提供编译器理论 |
 
 ---
 

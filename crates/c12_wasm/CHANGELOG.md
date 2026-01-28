@@ -133,16 +133,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Project Statistics
 
-| Category | Count |
-| --- | --- |
-| Source Files | 6 |
-| Example Files | 7 |
-| Test Files | 4 |
-| Benchmark Files | 3 |
-| Documentation Files | 21+ |
-| Total Code Lines | ~5,250 |
-| Total Tests | 58+ |
-| Test Pass Rate | 100% |
+| Category            | Count  |
+| ------------------- | ------ |
+| Source Files        | 6      |
+| Example Files       | 7      |
+| Test Files          | 4      |
+| Benchmark Files     | 3      |
+| Documentation Files | 21+    |
+| Total Code Lines    | ~5,250 |
+| Total Tests         | 58+    |
+| Test Pass Rate      | 100%   |
 
 ### Features
 
@@ -174,7 +174,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Planned
 
-- [ ] 补充 tier_04_advanced/04_rust_190_生态库与设计模式.md 文档
+- [ ] 补充 tier*04_advanced/04_rust_190*生态库与设计模式.md 文档
 - [ ] 添加更多 wasm-bindgen-test 浏览器测试
 - [ ] CI/CD 配置文件（GitHub Actions）
 - [ ] 更多实战项目示例
@@ -201,21 +201,27 @@ Each release follows this format:
 ## [Version] - YYYY-MM-DD
 
 ### Added
+
 - New features
 
 ### Changed
+
 - Changes in existing functionality
 
 ### Deprecated
+
 - Soon-to-be removed features
 
 ### Removed
+
 - Removed features
 
 ### Fixed
+
 - Bug fixes
 
 ### Security
+
 - Security fixes
 ```
 

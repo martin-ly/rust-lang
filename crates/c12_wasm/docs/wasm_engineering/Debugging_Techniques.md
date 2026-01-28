@@ -47,7 +47,7 @@
 
 **调试复杂度定理**：
 \[
-T_{\text{debug}} \propto \frac{\text{SystemComplexity} \times \text{Abstraction}}{\text{Observability}}
+T\_{\text{debug}} \propto \frac{\text{SystemComplexity} \times \text{Abstraction}}{\text{Observability}}
 \]
 
 **Wasm 调试挑战**：
@@ -57,7 +57,7 @@ T_{\text{debug}} \propto \frac{\text{SystemComplexity} \times \text{Abstraction}
 
 **工具链影响**：
 \[
-\text{Debug}_{\text{quality}} = f(\text{SourceMap}, \text{Symbols}, \text{Runtime})
+\text{Debug}\_{\text{quality}} = f(\text{SourceMap}, \text{Symbols}, \text{Runtime})
 \]
 
 ---
@@ -90,7 +90,7 @@ wasm-bindgen --debug --keep-debug --out-dir pkg target/wasm32-unknown-unknown/de
 
    ```javascript
    // 不暂停执行，仅打印
-   console.log('x =', x, 'y =', y)
+   console.log("x =", x, "y =", y)
    ```
 
 3. **监视表达式 (Watch)**：
@@ -105,14 +105,14 @@ wasm-bindgen --debug --keep-debug --out-dir pkg target/wasm32-unknown-unknown/de
 ```javascript
 // 检查 Wasm 线性内存
 function inspectWasmMemory(instance, offset, length) {
-  const memory = new Uint8Array(instance.exports.memory.buffer);
+  const memory = new Uint8Array(instance.exports.memory.buffer)
   return Array.from(memory.slice(offset, offset + length))
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join(' ');
+    .map(b => b.toString(16).padStart(2, "0"))
+    .join(" ")
 }
 
 // 使用
-console.log(inspectWasmMemory(wasmInstance, 0x1000, 64));
+console.log(inspectWasmMemory(wasmInstance, 0x1000, 64))
 // 输出: 00 01 02 03 04 05 06 07 ...
 ```
 
@@ -121,16 +121,16 @@ console.log(inspectWasmMemory(wasmInstance, 0x1000, 64));
 ```javascript
 // 捕获混合调用栈 (JS ↔ Wasm)
 function captureStackTrace() {
-  const err = new Error();
-  const stack = err.stack.split('\n');
+  const err = new Error()
+  const stack = err.stack.split("\n")
 
   stack.forEach(line => {
-    if (line.includes('.wasm')) {
-      console.log('[WASM]', line);
+    if (line.includes(".wasm")) {
+      console.log("[WASM]", line)
     } else {
-      console.log('[JS]', line);
+      console.log("[JS]", line)
     }
-  });
+  })
 }
 ```
 
@@ -146,7 +146,7 @@ function captureStackTrace() {
 
 ```javascript
 // 在 Firefox 中启用 Wasm 调试
-about:config
+about: config
 devtools.debugger.features.wasm = true
 ```
 
@@ -349,13 +349,13 @@ pub fn get_allocation_count() -> usize {
 **使用示例**：
 
 ```javascript
-console.log('Allocations before:', wasmInstance.get_allocation_count());
+console.log("Allocations before:", wasmInstance.get_allocation_count())
 
-const ptr = wasmInstance.allocate_buffer(1024);
-console.log('Allocations after alloc:', wasmInstance.get_allocation_count());
+const ptr = wasmInstance.allocate_buffer(1024)
+console.log("Allocations after alloc:", wasmInstance.get_allocation_count())
 
-wasmInstance.free_buffer(ptr, 1024);
-console.log('Allocations after free:', wasmInstance.get_allocation_count());
+wasmInstance.free_buffer(ptr, 1024)
+console.log("Allocations after free:", wasmInstance.get_allocation_count())
 ```
 
 ---
@@ -368,30 +368,30 @@ console.log('Allocations after free:', wasmInstance.get_allocation_count());
 
 ```javascript
 // JS 端
-performance.mark('js-start');
-const input = prepareData();
-performance.mark('js-end');
+performance.mark("js-start")
+const input = prepareData()
+performance.mark("js-end")
 
 // Wasm 调用
-performance.mark('wasm-start');
-const result = wasmInstance.process(input);
-performance.mark('wasm-end');
+performance.mark("wasm-start")
+const result = wasmInstance.process(input)
+performance.mark("wasm-end")
 
 // 后处理
-performance.mark('post-start');
-displayResult(result);
-performance.mark('post-end');
+performance.mark("post-start")
+displayResult(result)
+performance.mark("post-end")
 
 // 测量
-performance.measure('js-prepare', 'js-start', 'js-end');
-performance.measure('wasm-compute', 'wasm-start', 'wasm-end');
-performance.measure('post-process', 'post-start', 'post-end');
+performance.measure("js-prepare", "js-start", "js-end")
+performance.measure("wasm-compute", "wasm-start", "wasm-end")
+performance.measure("post-process", "post-start", "post-end")
 
 // 分析
-const entries = performance.getEntriesByType('measure');
+const entries = performance.getEntriesByType("measure")
 entries.forEach(entry => {
-  console.log(`${entry.name}: ${entry.duration.toFixed(2)}ms`);
-});
+  console.log(`${entry.name}: ${entry.duration.toFixed(2)}ms`)
+})
 ```
 
 **Wasm 内部计时**：
@@ -443,15 +443,15 @@ cat trace.log | awk '{print $NF}' | sort | uniq -c | sort -rn | head -20
 ```javascript
 // 检查导入需求
 WebAssembly.Module.imports(wasmModule).forEach(imp => {
-  console.log(`Import: ${imp.module}.${imp.name} (${imp.kind})`);
-});
+  console.log(`Import: ${imp.module}.${imp.name} (${imp.kind})`)
+})
 
 // 检查提供的导入
 Object.keys(imports).forEach(module => {
   Object.keys(imports[module]).forEach(name => {
-    console.log(`Provided: ${module}.${name}`);
-  });
-});
+    console.log(`Provided: ${module}.${name}`)
+  })
+})
 ```
 
 **解决方案**：
@@ -461,9 +461,11 @@ Object.keys(imports).forEach(module => {
 const imports = {
   env: {
     // 补全缺失的函数
-    missing_function: () => { console.log('stub'); },
+    missing_function: () => {
+      console.log("stub")
+    },
   },
-};
+}
 ```
 
 ### 问题 2: "RuntimeError: unreachable"
@@ -551,38 +553,38 @@ curl http://localhost:9222/json
 **Puppeteer 自动化调试**：
 
 ```javascript
-const puppeteer = require('puppeteer');
+const puppeteer = require("puppeteer")
 
-(async () => {
+;(async () => {
   const browser = await puppeteer.launch({
     headless: false,
     devtools: true,
-  });
+  })
 
-  const page = await browser.newPage();
+  const page = await browser.newPage()
 
   // 捕获控制台输出
-  page.on('console', msg => {
-    console.log(`[PAGE] ${msg.text()}`);
-  });
+  page.on("console", msg => {
+    console.log(`[PAGE] ${msg.text()}`)
+  })
 
   // 捕获 Wasm 错误
-  page.on('pageerror', error => {
-    console.error(`[ERROR] ${error.message}`);
-  });
+  page.on("pageerror", error => {
+    console.error(`[ERROR] ${error.message}`)
+  })
 
-  await page.goto('http://localhost:8000');
+  await page.goto("http://localhost:8000")
 
   // 等待 Wasm 加载
-  await page.waitForFunction(() => window.wasmLoaded === true);
+  await page.waitForFunction(() => window.wasmLoaded === true)
 
   // 执行测试
   const result = await page.evaluate(() => {
-    return window.wasmModule.compute(42);
-  });
+    return window.wasmModule.compute(42)
+  })
 
-  console.log('Result:', result);
-})();
+  console.log("Result:", result)
+})()
 ```
 
 ---
@@ -659,27 +661,25 @@ class WasmDebugger:
 **Sentry 集成**：
 
 ```javascript
-import * as Sentry from "@sentry/browser";
+import * as Sentry from "@sentry/browser"
 
 Sentry.init({
   dsn: "YOUR_DSN",
-  integrations: [
-    new Sentry.BrowserTracing(),
-  ],
+  integrations: [new Sentry.BrowserTracing()],
   tracesSampleRate: 1.0,
-});
+})
 
 // 捕获 Wasm 错误
 try {
-  wasmInstance.risky_function();
+  wasmInstance.risky_function()
 } catch (error) {
   Sentry.captureException(error, {
-    tags: { component: 'wasm' },
+    tags: { component: "wasm" },
     extra: {
       memorySize: wasmInstance.exports.memory.buffer.byteLength,
       // 附加上下文
     },
-  });
+  })
 }
 ```
 
@@ -711,29 +711,31 @@ pub fn log_event(event_type: &str, data: &JsValue) {
 
 **对比**：
 
-| 功能 | Native C++ | Wasm (最佳情况) | 差距 |
-| --- | --- | --- | --- |
-| 断点调试 | ★★★★★ | ★★★☆☆ | -40% |
-| 变量检查 | ★★★★★ | ★★☆☆☆ | -60% |
-| 内存分析 | ★★★★★ | ★★☆☆☆ | -60% |
-| 性能分析 | ★★★★★ | ★★★☆☆ | -40% |
-| 调用栈 | ★★★★★ | ★★★★☆ | -20% |
+| 功能     | Native C++ | Wasm (最佳情况) | 差距 |
+| -------- | ---------- | --------------- | ---- |
+| 断点调试 | ★★★★★      | ★★★☆☆           | -40% |
+| 变量检查 | ★★★★★      | ★★☆☆☆           | -60% |
+| 内存分析 | ★★★★★      | ★★☆☆☆           | -60% |
+| 性能分析 | ★★★★★      | ★★★☆☆           | -40% |
+| 调用栈   | ★★★★★      | ★★★★☆           | -20% |
 
 **批判**：
+
 > Wasm 的调试体验显著劣于原生代码。优化构建几乎无法调试，开发者被迫在"性能"与"可调试性"间二选一。
 
 ### 成本-收益分析
 
 **调试时间统计**：
 
-| 问题类型 | Native | Wasm | 增加比例 |
-| --- | --- | --- | --- |
-| 简单 bug | 10 min | 25 min | +150% |
-| 内存问题 | 1 h | 4 h | +300% |
-| 性能问题 | 2 h | 6 h | +200% |
-| 并发问题 | 4 h | 12 h | +200% |
+| 问题类型 | Native | Wasm   | 增加比例 |
+| -------- | ------ | ------ | -------- |
+| 简单 bug | 10 min | 25 min | +150%    |
+| 内存问题 | 1 h    | 4 h    | +300%    |
+| 性能问题 | 2 h    | 6 h    | +200%    |
+| 并发问题 | 4 h    | 12 h   | +200%    |
 
 **批判**：
+
 > Wasm 的调试成本是原生代码的 2-3 倍。对于复杂项目，额外的调试时间可能抵消 Wasm 带来的其他收益。
 
 ---

@@ -164,5 +164,5 @@ cargo run --example dns_lookup
 
 ---
 
-*最后更新: 2025-12-11*
-*维护者: C10 Networks 开发团队*
+_最后更新: 2025-12-11_
+_维护者: C10 Networks 开发团队_

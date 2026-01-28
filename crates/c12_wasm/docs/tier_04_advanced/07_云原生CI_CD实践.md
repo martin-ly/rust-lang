@@ -138,14 +138,14 @@
 
 ### 多维概念对比矩阵
 
-| CI/CD 技术 | 易用性 | 功能完整性 | 性能 | 适用场景 | Rust 1.92.0 |
-| --- | --- | --- | --- | --- | --- |
-| **GitHub Actions** | 高 | 高 | 中 | GitHub 项目 | ✅ |
-| **GitLab CI** | 高 | 高 | 中 | GitLab 项目 | ✅ |
-| **Jenkins** | 中 | 最高 | 中 | 企业级 CI/CD | ✅ |
-| **滚动更新** | 中 | 中 | 高 | 无停机部署 | ✅ |
-| **蓝绿部署** | 中 | 中 | 中 | 快速回滚 | ✅ |
-| **金丝雀发布** | 中 | 中 | 中 | 渐进式发布 | ✅ |
+| CI/CD 技术         | 易用性 | 功能完整性 | 性能 | 适用场景     | Rust 1.92.0 |
+| ------------------ | ------ | ---------- | ---- | ------------ | ----------- |
+| **GitHub Actions** | 高     | 高         | 中   | GitHub 项目  | ✅          |
+| **GitLab CI**      | 高     | 高         | 中   | GitLab 项目  | ✅          |
+| **Jenkins**        | 中     | 最高       | 中   | 企业级 CI/CD | ✅          |
+| **滚动更新**       | 中     | 中         | 高   | 无停机部署   | ✅          |
+| **蓝绿部署**       | 中     | 中         | 中   | 快速回滚     | ✅          |
+| **金丝雀发布**     | 中     | 中         | 中   | 渐进式发布   | ✅          |
 
 ### 决策树图
 
@@ -179,13 +179,13 @@
 
 相比传统应用，Wasm CI/CD 具有以下特点：
 
-| 特性 | 传统应用 | Wasm 应用 | 优势 |
-| --- | --- | --- | --- |
-| **构建时间** | 5-15分钟 | 1-3分钟 | ⚡ **快5倍** |
-| **镜像大小** | 100MB-1GB | 1-10MB | 📦 **小100倍** |
-| **部署速度** | 30-60秒 | 1-5秒 | 🚀 **快10倍** |
-| **资源占用** | 高 | 极低 | 💰 **成本降低** |
-| **跨平台** | 需多次构建 | 一次构建 | 🌐 **真正可移植** |
+| 特性         | 传统应用   | Wasm 应用 | 优势              |
+| ------------ | ---------- | --------- | ----------------- |
+| **构建时间** | 5-15分钟   | 1-3分钟   | ⚡ **快5倍**      |
+| **镜像大小** | 100MB-1GB  | 1-10MB    | 📦 **小100倍**    |
+| **部署速度** | 30-60秒    | 1-5秒     | 🚀 **快10倍**     |
+| **资源占用** | 高         | 极低      | 💰 **成本降低**   |
+| **跨平台**   | 需多次构建 | 一次构建  | 🌐 **真正可移植** |
 
 ---
 
@@ -296,12 +296,12 @@ main (production)
 
 **优化效果对比**:
 
-| 阶段 | 大小 | 说明 |
-| --- | --- | --- |
-| 原始编译 | ~2.5MB | cargo build --release |
-| opt-level="z" | ~1.8MB | Cargo.toml 配置 |
-| wasm-opt -Oz | ~1.2MB | wasm-opt 优化 |
-| strip-debug | ~0.9MB | 移除调试信息 |
+| 阶段          | 大小   | 说明                  |
+| ------------- | ------ | --------------------- |
+| 原始编译      | ~2.5MB | cargo build --release |
+| opt-level="z" | ~1.8MB | Cargo.toml 配置       |
+| wasm-opt -Oz  | ~1.2MB | wasm-opt 优化         |
+| strip-debug   | ~0.9MB | 移除调试信息          |
 
 #### 3. 多平台 Docker 构建
 
@@ -328,8 +328,8 @@ main (production)
   uses: aquasecurity/trivy-action@master
   with:
     image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-    format: 'sarif'
-    output: 'trivy-results.sarif'
+    format: "sarif"
+    output: "trivy-results.sarif"
 ```
 
 #### 5. Kubernetes 部署
@@ -423,8 +423,8 @@ build:wasm:
     - cargo build --target wasm32-wasi --release
     # 优化
     - wasm-opt -Oz --strip-debug --strip-producers
-        target/wasm32-wasi/release/*.wasm
-        -o app-optimized.wasm
+      target/wasm32-wasi/release/*.wasm
+      -o app-optimized.wasm
     - ls -lh app-optimized.wasm
   artifacts:
     paths:
@@ -462,11 +462,11 @@ package:docker:
     # 构建镜像
     - docker buildx create --use
     - docker buildx build
-        --platform linux/amd64,linux/arm64,wasi/wasm
-        -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-        -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
-        --push
-        -f deployment/docker/Dockerfile.wasm .
+      --platform linux/amd64,linux/arm64,wasi/wasm
+      -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+      -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+      --push
+      -f deployment/docker/Dockerfile.wasm .
     # Latest tag for main branch
     - |
       if [ "$CI_COMMIT_BRANCH" == "main" ]; then
@@ -492,8 +492,8 @@ deploy:staging:
     - export KUBECONFIG=kubeconfig
   script:
     - kubectl set image deployment/wasm-microservice
-        wasm-app=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
-        -n wasm-staging
+      wasm-app=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+      -n wasm-staging
     - kubectl rollout status deployment/wasm-microservice -n wasm-staging
   environment:
     name: staging
@@ -509,13 +509,13 @@ deploy:production:
     - export KUBECONFIG=kubeconfig
   script:
     - kubectl set image deployment/wasm-microservice
-        wasm-app=$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
-        -n wasm-prod
+      wasm-app=$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+      -n wasm-prod
     - kubectl rollout status deployment/wasm-microservice -n wasm-prod
   environment:
     name: production
     url: https://wasm-api.example.com
-  when: manual  # 手动触发
+  when: manual # 手动触发
   only:
     - tags
 
@@ -659,8 +659,8 @@ test:e2e:
 strategy:
   type: RollingUpdate
   rollingUpdate:
-    maxSurge: 2        # 最多额外创建2个 Pod
-    maxUnavailable: 1  # 最多1个 Pod 不可用
+    maxSurge: 2 # 最多额外创建2个 Pod
+    maxUnavailable: 1 # 最多1个 Pod 不可用
 ```
 
 **流程**:
@@ -722,23 +722,23 @@ metadata:
   name: wasm-app
 spec:
   http:
-  - match:
-    - headers:
-        canary:
-          exact: "true"
-    route:
-    - destination:
-        host: wasm-app
-        subset: v2
-  - route:
-    - destination:
-        host: wasm-app
-        subset: v1
-      weight: 90
-    - destination:
-        host: wasm-app
-        subset: v2
-      weight: 10
+    - match:
+        - headers:
+            canary:
+              exact: "true"
+      route:
+        - destination:
+            host: wasm-app
+            subset: v2
+    - route:
+        - destination:
+            host: wasm-app
+            subset: v1
+          weight: 90
+        - destination:
+            host: wasm-app
+            subset: v2
+          weight: 10
 ```
 
 ---
@@ -781,19 +781,19 @@ spec:
   strategy:
     canary:
       steps:
-      - setWeight: 10
-      - pause: {duration: 1m}
-      - setWeight: 50
-      - pause: {duration: 2m}
-      - setWeight: 100
+        - setWeight: 10
+        - pause: { duration: 1m }
+        - setWeight: 50
+        - pause: { duration: 2m }
+        - setWeight: 100
 
       # 自动回滚条件
       analysis:
         templates:
-        - templateName: error-rate-check
+          - templateName: error-rate-check
         args:
-        - name: service-name
-          value: wasm-app
+          - name: service-name
+            value: wasm-app
 
       # 失败阈值
       trafficRouting:
@@ -893,13 +893,13 @@ feature/*    develop       main/tags
 
 ### 关键指标
 
-| 指标 | 目标值 | 实际 |
-| --- | --- | --- |
-| 构建时间 | < 3分钟 | ✅ |
-| 测试覆盖率 | > 80% | ✅ |
-| 部署时间 | < 5分钟 | ✅ |
-| 错误率 | < 0.1% | ✅ |
-| 回滚时间 | < 1分钟 | ✅ |
+| 指标       | 目标值  | 实际 |
+| ---------- | ------- | ---- |
+| 构建时间   | < 3分钟 | ✅   |
+| 测试覆盖率 | > 80%   | ✅   |
+| 部署时间   | < 5分钟 | ✅   |
+| 错误率     | < 0.1%  | ✅   |
+| 回滚时间   | < 1分钟 | ✅   |
 
 ---
 

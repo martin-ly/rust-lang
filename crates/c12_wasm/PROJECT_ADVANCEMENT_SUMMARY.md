@@ -126,7 +126,7 @@ c12_wasm/
 ### 代码统计
 
 | 类别 | 文件数 | 代码行数 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
+param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 核心库 | 6 | ~2,000 | ✅ |
 | 示例代码 | 7 | ~1,300 | ✅ |
 | 测试代码 | 4 | ~900 | ✅ |
@@ -138,7 +138,7 @@ c12_wasm/
 ### 文档统计
 
 | 类别 | 数量 | 字数 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
+param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | Tier 1 (基础) | 4 | ~15,000 | ✅ |
 | Tier 2 (实践) | 4 | ~25,000 | ✅ |
 | Tier 3 (参考) | 3 | ~20,000 | ✅ |
@@ -150,7 +150,7 @@ c12_wasm/
 ### 功能统计
 
 | 功能 | 数量 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
+param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | WASM 绑定函数 | 30+ | ✅ |
 | 设计模式实现 | 6 | ✅ |
 | 测试用例 | 58+ | ✅ |
@@ -193,7 +193,7 @@ c12_wasm/
 ### 开发体验改进
 
 | 方面 | 改进前 | 改进后 | 提升 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
+param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 环境设置 | 手动配置 | 一键脚本 | ⬆️ 90% |
 | 上手时间 | 30+ 分钟 | 5 分钟 | ⬆️ 80% |
 | 文档完整性 | 85% | 100% | ⬆️ 15% |
@@ -223,7 +223,7 @@ c12_wasm/
 ## 🏆 最终评分
 
 | 维度 | 评分 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
+param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | 代码质量 | ⭐⭐⭐⭐⭐ 95/100 | 优秀 |
 | 测试覆盖 | ⭐⭐⭐⭐⭐ 90/100 | 良好 |
 | 文档完整 | ⭐⭐⭐⭐⭐ 100/100 | 完美 |
@@ -239,7 +239,7 @@ c12_wasm/
 ### 推进前 vs 推进后
 
 | 项目 | 推进前 | 推进后 | 变化 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
+param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 总文件数 | 18 | 27 | ⬆️ +9 |
 | 代码行数 | ~5,250 | ~5,750 | ⬆️ +500 |
 | 文档字数 | ~100,000 | ~115,000 | ⬆️ +15,000 |

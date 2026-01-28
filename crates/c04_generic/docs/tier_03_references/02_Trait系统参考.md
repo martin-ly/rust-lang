@@ -238,18 +238,18 @@ impl Iterator for Counter {
 
 ### 3.1 常用 Trait 参考
 
-| Trait | 用途 | 方法 | 示例 |
-| --- | --- | --- | --- |
-| `Clone` | 值复制 | `clone(&self) -> Self` | `x.clone()` |
-| `Copy` | 位复制 (标记 trait) | 无 | 自动复制 |
-| `Debug` | 调试输出 | `fmt(&self, f: &mut Formatter)` | `{:?}` |
-| `Display` | 用户输出 | `fmt(&self, f: &mut Formatter)` | `{}` |
-| `Default` | 默认值 | `default() -> Self` | `T::default()` |
-| `PartialEq` | 相等比较 | `eq(&self, other: &Self) -> bool` | `==`, `!=` |
-| `Eq` | 全等 (标记 trait) | 无 | 继承 `PartialEq` |
-| `PartialOrd` | 部分排序 | `partial_cmp(&self, other: &Self)` | `<`, `>` |
-| `Ord` | 全排序 | `cmp(&self, other: &Self)` | `cmp()` |
-| `Hash` | 哈希 | `hash(&self, state: &mut H)` | `HashMap` 键 |
+| Trait        | 用途                | 方法                               | 示例             |
+| ------------ | ------------------- | ---------------------------------- | ---------------- |
+| `Clone`      | 值复制              | `clone(&self) -> Self`             | `x.clone()`      |
+| `Copy`       | 位复制 (标记 trait) | 无                                 | 自动复制         |
+| `Debug`      | 调试输出            | `fmt(&self, f: &mut Formatter)`    | `{:?}`           |
+| `Display`    | 用户输出            | `fmt(&self, f: &mut Formatter)`    | `{}`             |
+| `Default`    | 默认值              | `default() -> Self`                | `T::default()`   |
+| `PartialEq`  | 相等比较            | `eq(&self, other: &Self) -> bool`  | `==`, `!=`       |
+| `Eq`         | 全等 (标记 trait)   | 无                                 | 继承 `PartialEq` |
+| `PartialOrd` | 部分排序            | `partial_cmp(&self, other: &Self)` | `<`, `>`         |
+| `Ord`        | 全排序              | `cmp(&self, other: &Self)`         | `cmp()`          |
+| `Hash`       | 哈希                | `hash(&self, state: &mut H)`       | `HashMap` 键     |
 
 ### 3.2 Clone Trait
 
@@ -668,17 +668,17 @@ impl Deref for MyVec {
 
 ### 7.1 派生宏速查
 
-| Derive | 要求 | 用途 |
-| --- | --- | --- |
-| `Clone` | 所有字段实现 `Clone` | 值复制 |
-| `Copy` | 所有字段实现 `Copy` | 位复制 |
-| `Debug` | 所有字段实现 `Debug` | 调试输出 |
-| `Default` | 所有字段实现 `Default` | 默认值 |
-| `PartialEq` | 所有字段实现 `PartialEq` | 相等比较 |
-| `Eq` | 实现 `PartialEq` | 全等 |
-| `PartialOrd` | 实现 `PartialEq` | 部分排序 |
-| `Ord` | 实现 `PartialOrd` + `Eq` | 全排序 |
-| `Hash` | 所有字段实现 `Hash` | 哈希 |
+| Derive       | 要求                     | 用途     |
+| ------------ | ------------------------ | -------- |
+| `Clone`      | 所有字段实现 `Clone`     | 值复制   |
+| `Copy`       | 所有字段实现 `Copy`      | 位复制   |
+| `Debug`      | 所有字段实现 `Debug`     | 调试输出 |
+| `Default`    | 所有字段实现 `Default`   | 默认值   |
+| `PartialEq`  | 所有字段实现 `PartialEq` | 相等比较 |
+| `Eq`         | 实现 `PartialEq`         | 全等     |
+| `PartialOrd` | 实现 `PartialEq`         | 部分排序 |
+| `Ord`        | 实现 `PartialOrd` + `Eq` | 全排序   |
+| `Hash`       | 所有字段实现 `Hash`      | 哈希     |
 
 ### 7.2 Trait 关系图
 
@@ -712,8 +712,8 @@ AsMut<T>
 
 ## 📚 相关参考
 
-- [01_泛型语法参考.md](./01_泛型语法参考.md) - 泛型语法
-- [03_边界约束参考.md](./03_边界约束参考.md) - 约束语法
+- [01\_泛型语法参考.md](./01_泛型语法参考.md) - 泛型语法
+- [03\_边界约束参考.md](./03_边界约束参考.md) - 约束语法
 - [../tier_02_guides/02_Trait系统指南.md](../tier_02_guides/02_Trait系统指南.md) - Trait 实践指南
 
 ---

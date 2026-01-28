@@ -295,16 +295,16 @@ impl Counter {
 
 ### 类型映射
 
-| Rust 类型 | JavaScript 类型 |
-| --- | --- |
-| `i32`, `u32` | `number` |
-| `i64`, `u64` | `BigInt` |
-| `f32`, `f64` | `number` |
-| `bool` | `boolean` |
-| `String` | `string` |
-| `Vec<T>` | `Array` |
-| `Option<T>` | `T \| undefined` |
-| `Result<T, E>` | `Promise<T>` |
+| Rust 类型      | JavaScript 类型  |
+| -------------- | ---------------- |
+| `i32`, `u32`   | `number`         |
+| `i64`, `u64`   | `BigInt`         |
+| `f32`, `f64`   | `number`         |
+| `bool`         | `boolean`        |
+| `String`       | `string`         |
+| `Vec<T>`       | `Array`          |
+| `Option<T>`    | `T \| undefined` |
+| `Result<T, E>` | `Promise<T>`     |
 
 ### 复杂类型
 
@@ -364,7 +364,7 @@ wasm-pack publish
 
 ### 示例 1: 简单函数
 
-```rust
+````rust
 use wasm_bindgen::prelude::*;
 
 /// 简单的加法函数
@@ -385,7 +385,7 @@ use wasm_bindgen::prelude::*;
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
-```
+````
 
 **编译和使用**:
 
@@ -445,16 +445,16 @@ impl Counter {
 **在 JavaScript 中使用**:
 
 ```javascript
-import { Counter } from './pkg/hello_wasm';
+import { Counter } from "./pkg/hello_wasm"
 
 // 创建计数器实例
-const counter = new Counter();
-console.log(counter.value()); // 0
+const counter = new Counter()
+console.log(counter.value()) // 0
 
 // 增加计数
-counter.increment();
-counter.increment();
-console.log(counter.value()); // 2
+counter.increment()
+counter.increment()
+console.log(counter.value()) // 2
 ```
 
 ### 示例 3: 数组处理
@@ -497,22 +497,22 @@ pub fn find_max(numbers: &[i32]) -> Option<i32> {
 **在 JavaScript 中使用**:
 
 ```javascript
-import { calculate_average, find_max } from './pkg/hello_wasm';
+import { calculate_average, find_max } from "./pkg/hello_wasm"
 
 // 计算平均值
-const numbers = new Float64Array([1.0, 2.0, 3.0, 4.0, 5.0]);
-const avg = calculate_average(numbers);
-console.log(avg); // 3.0
+const numbers = new Float64Array([1.0, 2.0, 3.0, 4.0, 5.0])
+const avg = calculate_average(numbers)
+console.log(avg) // 3.0
 
 // 查找最大值
-const integers = new Int32Array([10, 5, 20, 15]);
-const max = find_max(integers);
-console.log(max); // 20
+const integers = new Int32Array([10, 5, 20, 15])
+const max = find_max(integers)
+console.log(max) // 20
 ```
 
 ### 示例 4: 字符串处理
 
-```rust
+````rust
 use wasm_bindgen::prelude::*;
 
 /// 反转字符串
@@ -550,11 +550,11 @@ pub fn is_palindrome(s: &str) -> bool {
     let reversed: String = s_lower.chars().rev().collect();
     s_lower == reversed
 }
-```
+````
 
 ### 示例 5: 使用 Web API（Fetch）
 
-```rust
+````rust
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::JsFuture;
 use web_sys::{Request, RequestInit, RequestMode, Response};
@@ -597,11 +597,11 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 
     Ok(json)
 }
-```
+````
 
 ### 示例 6: 错误处理
 
-```rust
+````rust
 use wasm_bindgen::prelude::*;
 
 /// 安全的除法运算
@@ -630,7 +630,7 @@ pub fn safe_divide(a: f64, b: f64) -> Result<f64, JsValue> {
         Ok(a / b)
     }
 }
-```
+````
 
 ### 示例 7: 性能优化（重用缓冲区）
 

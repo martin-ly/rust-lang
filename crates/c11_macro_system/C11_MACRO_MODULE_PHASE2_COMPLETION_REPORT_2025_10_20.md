@@ -17,11 +17,11 @@
   - [1. 实施内容](#1-实施内容)
     - [1.1 创建的教程文档](#11-创建的教程文档)
   - [2. 内容详解](#2-内容详解)
-    - [2.1 基础教程 (01\_macro\_rules\_basics.md)](#21-基础教程-01_macro_rules_basicsmd)
-    - [2.2 模式匹配教程 (02\_pattern\_matching.md)](#22-模式匹配教程-02_pattern_matchingmd)
-    - [2.3 重复语法教程 (03\_repetition\_syntax.md)](#23-重复语法教程-03_repetition_syntaxmd)
-    - [2.4 高级模式教程 (04\_advanced\_patterns.md)](#24-高级模式教程-04_advanced_patternsmd)
-    - [2.5 递归宏教程 (05\_recursive\_macros.md)](#25-递归宏教程-05_recursive_macrosmd)
+    - [2.1 基础教程 (01_macro_rules_basics.md)](#21-基础教程-01_macro_rules_basicsmd)
+    - [2.2 模式匹配教程 (02_pattern_matching.md)](#22-模式匹配教程-02_pattern_matchingmd)
+    - [2.3 重复语法教程 (03_repetition_syntax.md)](#23-重复语法教程-03_repetition_syntaxmd)
+    - [2.4 高级模式教程 (04_advanced_patterns.md)](#24-高级模式教程-04_advanced_patternsmd)
+    - [2.5 递归宏教程 (05_recursive_macros.md)](#25-递归宏教程-05_recursive_macrosmd)
   - [3. 文档特色](#3-文档特色)
     - [3.1 结构统一](#31-结构统一)
     - [3.2 难度递进](#32-难度递进)
@@ -81,7 +81,7 @@
 ### 1.1 创建的教程文档
 
 | 文档 | 行数 | 难度 | 主题 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
+param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | `01_macro_rules_basics.md` | 532 | ⭐ | macro_rules!基础语法 |
 | `02_pattern_matching.md` | 625 | ⭐⭐ | 模式匹配技巧 |
 | `03_repetition_syntax.md` | 583 | ⭐⭐ | 重复语法详解 |
@@ -351,7 +351,7 @@ macro_rules! tail_recursive_sum {
 ### 4.1 按主题分类
 
 | 主题 | 示例数量 | 复杂度 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
+param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 基础语法 | 20+ | 简单 |
 | 模式匹配 | 25+ | 中等 |
 | 重复语法 | 20+ | 中等 |
@@ -510,7 +510,7 @@ macro_rules! tail_recursive_sum {
 ### 10.1 文档统计
 
 | 指标 | 数量 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
+param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | **教程文档** | 5篇 |
 | **总行数** | 3000+ |
 | **代码示例** | 100+ |

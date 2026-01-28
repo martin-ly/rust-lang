@@ -76,7 +76,7 @@
 ### 1. 核心文档创建 (4个) ✅
 
 | 文档 | 行数 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
+param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **CHANGELOG.md** | 450+ | 完整的版本变更记录，v1.0 至 v2.1 |
 | **CONTRIBUTING.md** | 722+ | 详细的贡献指南，包含规范和流程 |
 | **FINAL_DELIVERY_REPORT_2025_10_22.md** | 570+ | 项目交付报告，全面总结 |
@@ -186,7 +186,7 @@ c02_type_system/
 ### 对学习者的价值
 
 | 用户类型 | 核心收益 | 推荐路径 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
+param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **初学者** 🚀 | 系统化学习路径 + 200+基础示例 | 02_core → examples |
 | **中级开发者** 💻 | 高级特性深入 + 300+进阶示例 | 03_advanced → 05_practice |
 | **高级开发者** 🔬 | 理论深度 + 知识体系 | 01_theory → knowledge_system |
@@ -272,7 +272,7 @@ c02_type_system/
 ### 维护承诺
 
 | 维护项 | 频率 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
+param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | Rust版本更新 | 每个版本 | 跟进最新特性 |
 | 文档审核 | 季度 | 确保准确性 |
 | 示例验证 | 季度 | 代码可运行 |

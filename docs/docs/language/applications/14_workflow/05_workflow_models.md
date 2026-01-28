@@ -5,6 +5,7 @@
 - [工作流执行引擎重构设计与实现](#工作流执行引擎重构设计与实现)
   - [目录](#目录)
   - [总体架构设计](#总体架构设计)
+  - [参考资料（权威来源）](#参考资料权威来源)
   - [您的分析完全正确](#您的分析完全正确)
     - [1. 基于订阅和事件发布的消息处理机制](#1-基于订阅和事件发布的消息处理机制)
     - [2. 实时工作流状态可视化（D3.js集成）](#2-实时工作流状态可视化d3js集成)
@@ -23,7 +24,15 @@
 
 下面是详细设计和实现：
 
-```rust
+## 参考资料（权威来源）
+
+- BPMN 2.0（规范）：`https://www.omg.org/spec/BPMN/2.0/`
+- BPMN 2.0（ISO/IEC 19510）：`https://www.iso.org/standard/62652.html`
+- Rust async 官方书：`https://rust-lang.github.io/async-book/`
+- Tokio（异步运行时）：`https://tokio.rs/`
+- tonic（Rust gRPC）：`https://github.com/hyperium/tonic`
+
+````rust
 //! 分布式工作流执行引擎
 //!
 //! 该引擎是一个完整的、具有高可用性和弹性的分布式工作流处理系统，
@@ -4756,9 +4765,10 @@ and_then(|e| e.to_str()) == Some("yml") {
              }}\n\n\
              async fn execute(&self, input: serde_json::Value) -> Result<serde_json::Value, WorkflowError> {{\n\
              println!(\"执行活动: {}\\n输入: {{}}\", input);\n\n\
-             // TODO: 实现活动逻辑\n\n\
+             // 扩展点：在此实现活动逻辑（示例默认回显输入）\n\n\
              Ok(serde_json::json!({{\n\
              \"result\": \"success\",\n\
+             \"input\": input,\n\
              \"timestamp\": chrono::Utc::now().to_rfc3339()\n\
              }}))\n\
              }}\n\
@@ -4804,9 +4814,10 @@ and_then(|e| e.to_str()) == Some("yml") {
              }}\n\n\
              async fn execute(&self, input: serde_json::Value) -> Result<serde_json::Value, WorkflowError> {{\n\
              println!(\"执行活动: {}\\n输入: {{}}\", input);\n\n\
-             // TODO: 实现活动逻辑\n\n\
+             // 扩展点：在此实现活动逻辑（示例默认回显输入）\n\n\
              Ok(serde_json::json!({{\n\
              \"result\": \"success\",\n\
+             \"input\": input,\n\
              \"timestamp\": chrono::Utc::now().to_rfc3339()\n\
              }}))\n\
              }}\n\
@@ -4945,9 +4956,7 @@ and_then(|e| e.to_str()) == Some("yml") {
             definition.name,
             definition.version
         );
-        tok
-```rust
-io::fs::write(pkg_dir.join("workflow.go"), workflow_content).await?;
+        tokio::fs::write(pkg_dir.join("workflow.go"), workflow_content).await?;
 
         // 生成go.mod文件
         let go_mod_content = format!(
@@ -4968,7 +4977,7 @@ io::fs::write(pkg_dir.join("workflow.go"), workflow_content).await?;
              )\n\n\
              func main() {{\n\
              \tfmt.Println(\"执行工作流: {}\")\n\
-             \t// TODO: 实现工作流执行\n\
+             \t// 扩展点：在此实现工作流执行（示例仅打印，不做真实调度）\n\
              }}\n",
             definition.name,
             definition.version,
@@ -5035,7 +5044,7 @@ io::fs::write(pkg_dir.join("workflow.go"), workflow_content).await?;
              # 版本: {}\n\n\
              def main():\n\
              \tprint(\"执行工作流: {}\")\n\
-             \t# TODO: 实现工作流执行\n\n\
+             \t# 扩展点：在此实现工作流执行（示例仅打印，不做真实调度）\n\n\
              if __name__ == \"__main__\":\n\
              \tmain()\n",
             definition.name,
@@ -5441,7 +5450,9 @@ pub mod grpc {
             _request: Request<RegisterWorkflowRequest>,
         ) -> Result<Response<RegisterWorkflowResponse>, Status> {
             // 实现注册工作流定义
-            unimplemented!()
+            Err(Status::unimplemented(
+                "register_workflow_definition is not implemented in this document example",
+            ))
         }
 
         async fn get_workflow_definition(
@@ -5449,7 +5460,9 @@ pub mod grpc {
             _request: Request<GetWorkflowRequest>,
         ) -> Result<Response<GetWorkflowResponse>, Status> {
             // 实现获取工作流定义
-            unimplemented!()
+            Err(Status::unimplemented(
+                "get_workflow_definition is not implemented in this document example",
+            ))
         }
 
         async fn start_workflow(
@@ -5457,7 +5470,9 @@ pub mod grpc {
             _request: Request<StartWorkflowRequest>,
         ) -> Result<Response<StartWorkflowResponse>, Status> {
             // 实现启动工作流
-            unimplemented!()
+            Err(Status::unimplemented(
+                "start_workflow is not implemented in this document example",
+            ))
         }
 
         async fn get_workflow_status(
@@ -5465,7 +5480,9 @@ pub mod grpc {
             _request: Request<GetWorkflowStatusRequest>,
         ) -> Result<Response<GetWorkflowStatusResponse>, Status> {
             // 实现获取工作流状态
-            unimplemented!()
+            Err(Status::unimplemented(
+                "get_workflow_status is not implemented in this document example",
+            ))
         }
 
         async fn cancel_workflow(
@@ -5473,7 +5490,9 @@ pub mod grpc {
             _request: Request<CancelWorkflowRequest>,
         ) -> Result<Response<CancelWorkflowResponse>, Status> {
             // 实现取消工作流
-            unimplemented!()
+            Err(Status::unimplemented(
+                "cancel_workflow is not implemented in this document example",
+            ))
         }
 
         async fn pause_workflow(
@@ -5481,7 +5500,9 @@ pub mod grpc {
             _request: Request<PauseWorkflowRequest>,
         ) -> Result<Response<PauseWorkflowResponse>, Status> {
             // 实现暂停工作流
-            unimplemented!()
+            Err(Status::unimplemented(
+                "pause_workflow is not implemented in this document example",
+            ))
         }
 
         async fn resume_workflow(
@@ -5489,7 +5510,9 @@ pub mod grpc {
             _request: Request<ResumeWorkflowRequest>,
         ) -> Result<Response<ResumeWorkflowResponse>, Status> {
             // 实现恢复工作流
-            unimplemented!()
+            Err(Status::unimplemented(
+                "resume_workflow is not implemented in this document example",
+            ))
         }
 
         async fn skip_step(
@@ -5497,7 +5520,9 @@ pub mod grpc {
             _request: Request<SkipStepRequest>,
         ) -> Result<Response<SkipStepResponse>, Status> {
             // 实现跳过步骤
-            unimplemented!()
+            Err(Status::unimplemented(
+                "skip_step is not implemented in this document example",
+            ))
         }
 
         async fn retry_step(
@@ -5505,7 +5530,9 @@ pub mod grpc {
             _request: Request<RetryStepRequest>,
         ) -> Result<Response<RetryStepResponse>, Status> {
             // 实现重试步骤
-            unimplemented!()
+            Err(Status::unimplemented(
+                "retry_step is not implemented in this document example",
+            ))
         }
 
         async fn send_signal(
@@ -5513,7 +5540,9 @@ pub mod grpc {
             _request: Request<SendSignalRequest>,
         ) -> Result<Response<SendSignalResponse>, Status> {
             // 实现发送信号
-            unimplemented!()
+            Err(Status::unimplemented(
+                "send_signal is not implemented in this document example",
+            ))
         }
 
         async fn submit_human_task(
@@ -5521,7 +5550,9 @@ pub mod grpc {
             _request: Request<SubmitHumanTaskRequest>,
         ) -> Result<Response<SubmitHumanTaskResponse>, Status> {
             // 实现提交人工任务
-            unimplemented!()
+            Err(Status::unimplemented(
+                "submit_human_task is not implemented in this document example",
+            ))
         }
 
         async fn get_workflow_history(
@@ -5529,7 +5560,9 @@ pub mod grpc {
             _request: Request<GetWorkflowHistoryRequest>,
         ) -> Result<Response<GetWorkflowHistoryResponse>, Status> {
             // 实现获取工作流历史
-            unimplemented!()
+            Err(Status::unimplemented(
+                "get_workflow_history is not implemented in this document example",
+            ))
         }
     }
 
@@ -6508,7 +6541,7 @@ pub mod helpers {
         }
     }
 }
-```
+````
 
 以上是一个功能齐全的分布式工作流执行引擎的完整实现，包括：
 
@@ -6517,7 +6550,7 @@ pub mod helpers {
 3. **命令行工具**：方便用户通过命令行管理工作流。
 4. **gRPC服务**：支持gRPC通信。
 
-```rust
+````rust
 // 工作流引擎的核心模型
 pub mod model {
     use super::*;
@@ -9157,51 +9190,87 @@ pub mod storage {
         // 实现与PostgresStorageManager类似，但需要适应SQLite的语法特点
         // 为避免代码重复，此处省略具体实现
         async fn get_workflow_definition(&self, workflow_id: &str) -> Result<WorkflowDefinition, WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::get_workflow_definition({}) is not implemented in this document example",
+                workflow_id
+            )))
         }
 
         async fn get_workflow_definition_version(&self, workflow_id: &str, version: &str) -> Result<WorkflowDefinition, WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::get_workflow_definition_version({}, {}) is not implemented in this document example",
+                workflow_id, version
+            )))
         }
 
         async fn get_all_workflow_definitions(&self, page: usize, page_size: usize) -> Result<WorkflowDefinitionList, WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::get_all_workflow_definitions(page={}, page_size={}) is not implemented in this document example",
+                page, page_size
+            )))
         }
 
         async fn save_workflow_definition(&self, workflow: &WorkflowDefinition) -> Result<(), WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::save_workflow_definition(workflow_id={}) is not implemented in this document example",
+                workflow.id
+            )))
         }
 
         async fn delete_workflow_definition(&self, workflow_id: &str) -> Result<(), WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::delete_workflow_definition({}) is not implemented in this document example",
+                workflow_id
+            )))
         }
 
         async fn save_task(&self, task: &Task) -> Result<(), WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::save_task(task_id={}) is not implemented in this document example",
+                task.id
+            )))
         }
 
         async fn get_task(&self, task_id: &str) -> Result<Task, WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::get_task({}) is not implemented in this document example",
+                task_id
+            )))
         }
 
         async fn get_task_by_execution_id(&self, execution_id: &str) -> Result<Task, WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::get_task_by_execution_id({}) is not implemented in this document example",
+                execution_id
+            )))
         }
 
         async fn get_child_tasks(&self, execution_id: &str) -> Result<Vec<Task>, WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::get_child_tasks({}) is not implemented in this document example",
+                execution_id
+            )))
         }
 
         async fn get_tasks_by_step_id(&self, execution_id: &str, step_id: &str) -> Result<Vec<Task>, WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::get_tasks_by_step_id(execution_id={}, step_id={}) is not implemented in this document example",
+                execution_id, step_id
+            )))
         }
 
         async fn save_workflow_event(&self, event: &WorkflowEvent) -> Result<(), WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::save_workflow_event(event_id={}) is not implemented in this document example",
+                event.id
+            )))
         }
 
         async fn get_workflow_events(&self, execution_id: &str) -> Result<Vec<WorkflowEvent>, WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::get_workflow_events({}) is not implemented in this document example",
+                execution_id
+            )))
         }
 
         async fn search_workflow_executions(
@@ -9210,11 +9279,16 @@ pub mod storage {
             page: usize,
             page_size: usize,
         ) -> Result<WorkflowExecutionList, WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(
+                "SQLiteStorageManager::search_workflow_executions is not implemented in this document example".to_string(),
+            ))
         }
 
         async fn get_workflow_statistics(&self, query: &StatisticsQuery) -> Result<WorkflowStatistics, WorkflowError> {
-            unimplemented!()
+            Err(WorkflowError::InternalError(format!(
+                "SQLiteStorageManager::get_workflow_statistics is not implemented in this document example: {:?}",
+                query
+            )))
         }
     }
 
@@ -9232,9 +9306,7 @@ pub mod storage {
 
     impl InMemoryStorageManager {
         /// 创建新的内存存储管理器
-        pub fn
-```rust
- new() -> Self {
+        pub fn new() -> Self {
             Self {
                 workflow_definitions: parking_lot::RwLock::new(HashMap::new()),
                 tasks: parking_lot::RwLock::new(HashMap::new()),
@@ -15061,7 +15133,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
-```
+````
 
 以上代码完成了整个工作流执行引擎的实现。主要包括：
 

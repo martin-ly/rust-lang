@@ -219,85 +219,85 @@ wasmedge target/wasm32-wasi/release/wasi-app.wasm input.txt
 
 ## 🎯 快速链接
 
-| 链接 | 描述 |
-| --- | --- |
-| [🚀 快速开始](./QUICK_START.md) | 5 分钟上手指南 |
-| [📖 贡献指南](./CONTRIBUTING.md) | 如何参与贡献 |
-| [📋 更新日志](./CHANGELOG.md) | 版本更新记录 |
-| [📊 项目状态](./PROJECT_STATUS.md) | 项目完成情况 |
-| [🛠️ 设置脚本](./scripts/) | 自动化设置工具 |
+| 链接                               | 描述           |
+| ---------------------------------- | -------------- |
+| [🚀 快速开始](./QUICK_START.md)    | 5 分钟上手指南 |
+| [📖 贡献指南](./CONTRIBUTING.md)   | 如何参与贡献   |
+| [📋 更新日志](./CHANGELOG.md)      | 版本更新记录   |
+| [📊 项目状态](./PROJECT_STATUS.md) | 项目完成情况   |
+| [🛠️ 设置脚本](./scripts/)          | 自动化设置工具 |
 
 ## 📚 学习资源与文档
 
 ### 核心文档 📖
 
-| 文档 | 内容 | 难度 |
-| --- | --- | --- |
-| [项目概览](./docs/tier_01_foundations/01_项目概览.md) | WASM 与 Rust 概览 | ⭐⭐ |
-| [主索引导航](./docs/tier_01_foundations/02_主索引导航.md) | 完整文档导航 | ⭐ |
-| [术语表](./docs/tier_01_foundations/03_术语表.md) | WASM 核心术语 | ⭐ |
-| [常见问题](./docs/tier_01_foundations/04_常见问题.md) | FAQ 解答 | ⭐⭐ |
+| 文档                                                      | 内容              | 难度 |
+| --------------------------------------------------------- | ----------------- | ---- |
+| [项目概览](./docs/tier_01_foundations/01_项目概览.md)     | WASM 与 Rust 概览 | ⭐⭐ |
+| [主索引导航](./docs/tier_01_foundations/02_主索引导航.md) | 完整文档导航      | ⭐   |
+| [术语表](./docs/tier_01_foundations/03_术语表.md)         | WASM 核心术语     | ⭐   |
+| [常见问题](./docs/tier_01_foundations/04_常见问题.md)     | FAQ 解答          | ⭐⭐ |
 
 ### Rust 1.92.0 特性与优化 ⭐ NEW
 
-| 文档 | 内容 | 难度 |
-| --- | --- | --- |
-| [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md) | Rust 1.92.0 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
-| [Rust 1.92.0 WASM 快速参考](./docs/RUST_192_QUICK_REFERENCE.md) | 快速查找和代码模板 | ⭐⭐ |
-| [Rust 1.92.0 WASM 迁移指南](./docs/RUST_192_MIGRATION_GUIDE.md) | 从 Rust 1.91 迁移指南（当前推荐） | ⭐⭐⭐ |
-| [Rust 1.92.0 特性对比](./docs/RUST_192_FEATURE_COMPARISON.md) | Rust 1.92.0 vs 1.91 对比 | ⭐⭐⭐ |
-| [Rust 1.92.0 最佳实践](./docs/RUST_192_BEST_PRACTICES.md) | 最佳实践指南 | ⭐⭐⭐⭐ |
-| [Rust 1.92.0 性能基准测试](./docs/RUST_192_PERFORMANCE_BENCHMARKS.md) | 性能测试结果 | ⭐⭐⭐ |
-| [Rust 1.92.0 代码示例集合](./docs/RUST_192_CODE_EXAMPLES_COLLECTION.md) | 完整代码示例 | ⭐⭐⭐ |
-| [Rust 1.92.0 故障排除指南](./docs/RUST_192_TROUBLESHOOTING.md) | 常见问题解决 | ⭐⭐⭐ |
-| [Rust 1.92.0 特性路线图](./docs/RUST_192_FEATURE_ROADMAP.md) | 学习路线图 | ⭐⭐⭐ |
-| [Rust 1.92.0 完整指南](./docs/RUST_192_COMPLETE_GUIDE.md) | 一站式学习指南 | ⭐⭐⭐ |
-| [Rust 1.92.0 文档索引](./docs/RUST_192_INDEX.md) | 完整文档索引 | ⭐⭐ |
+| 文档                                                                    | 内容                               | 难度     |
+| ----------------------------------------------------------------------- | ---------------------------------- | -------- |
+| [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md)       | Rust 1.92.0 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
+| [Rust 1.92.0 WASM 快速参考](./docs/RUST_192_QUICK_REFERENCE.md)         | 快速查找和代码模板                 | ⭐⭐     |
+| [Rust 1.92.0 WASM 迁移指南](./docs/RUST_192_MIGRATION_GUIDE.md)         | 从 Rust 1.91 迁移指南（当前推荐）  | ⭐⭐⭐   |
+| [Rust 1.92.0 特性对比](./docs/RUST_192_FEATURE_COMPARISON.md)           | Rust 1.92.0 vs 1.91 对比           | ⭐⭐⭐   |
+| [Rust 1.92.0 最佳实践](./docs/RUST_192_BEST_PRACTICES.md)               | 最佳实践指南                       | ⭐⭐⭐⭐ |
+| [Rust 1.92.0 性能基准测试](./docs/RUST_192_PERFORMANCE_BENCHMARKS.md)   | 性能测试结果                       | ⭐⭐⭐   |
+| [Rust 1.92.0 代码示例集合](./docs/RUST_192_CODE_EXAMPLES_COLLECTION.md) | 完整代码示例                       | ⭐⭐⭐   |
+| [Rust 1.92.0 故障排除指南](./docs/RUST_192_TROUBLESHOOTING.md)          | 常见问题解决                       | ⭐⭐⭐   |
+| [Rust 1.92.0 特性路线图](./docs/RUST_192_FEATURE_ROADMAP.md)            | 学习路线图                         | ⭐⭐⭐   |
+| [Rust 1.92.0 完整指南](./docs/RUST_192_COMPLETE_GUIDE.md)               | 一站式学习指南                     | ⭐⭐⭐   |
+| [Rust 1.92.0 文档索引](./docs/RUST_192_INDEX.md)                        | 完整文档索引                       | ⭐⭐     |
 
 ### Rust 1.92.0 特性与生态
 
-| 文档 | 内容 | 难度 |
-| --- | --- | --- |
-| [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md) | Rust 1.92.0 在 WASM 中的改进和优化 | ⭐⭐⭐⭐ |
+| 文档                                                                                  | 内容                                          | 难度       |
+| ------------------------------------------------------------------------------------- | --------------------------------------------- | ---------- |
+| [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md)                     | Rust 1.92.0 在 WASM 中的改进和优化            | ⭐⭐⭐⭐   |
 | [Rust 1.90 生态库与设计模式](./docs/tier_04_advanced/04_rust_190_生态库与设计模式.md) | 生态库、设计模式（历史参考，已更新至 1.92.0） | ⭐⭐⭐⭐⭐ |
 
 ### 思维表征方式 ⭐ NEW
 
-| 文档 | 内容 | 难度 |
-| --- | --- | --- |
-| [WASM 思维导图集合](./docs/WASM_MIND_MAPS.md) | 可视化知识结构和概念关系 | ⭐⭐⭐ |
-| [WASM 多维概念对比矩阵](./docs/WASM_CONCEPT_MATRIX.md) | 技术方案对比和选型参考 | ⭐⭐⭐ |
-| [WASM 决策树图](./docs/WASM_DECISION_TREE.md) | 技术选型决策支持 | ⭐⭐⭐ |
-| [WASM 证明树图](./docs/WASM_PROOF_TREE.md) | 形式化证明结构 | ⭐⭐⭐⭐ |
+| 文档                                                   | 内容                     | 难度     |
+| ------------------------------------------------------ | ------------------------ | -------- |
+| [WASM 思维导图集合](./docs/WASM_MIND_MAPS.md)          | 可视化知识结构和概念关系 | ⭐⭐⭐   |
+| [WASM 多维概念对比矩阵](./docs/WASM_CONCEPT_MATRIX.md) | 技术方案对比和选型参考   | ⭐⭐⭐   |
+| [WASM 决策树图](./docs/WASM_DECISION_TREE.md)          | 技术选型决策支持         | ⭐⭐⭐   |
+| [WASM 证明树图](./docs/WASM_PROOF_TREE.md)             | 形式化证明结构           | ⭐⭐⭐⭐ |
 
 ### 实践指南 📝
 
-| 文档 | 内容 | 难度 |
-| --- | --- | --- |
-| [WASM 基础指南](./docs/tier_02_guides/01_wasm_基础指南.md) | WASM 入门与实践 | ⭐⭐⭐ |
-| [Rust 编译 WASM](./docs/tier_02_guides/02_rust_编译_wasm.md) | 编译流程与实践 | ⭐⭐⭐ |
-| [JavaScript 互操作](./docs/tier_02_guides/03_javascript_互操作.md) | wasm-bindgen 使用 | ⭐⭐⭐ |
-| [性能优化指南](./docs/tier_02_guides/04_性能优化指南.md) | 大小与性能优化 | ⭐⭐⭐⭐ |
+| 文档                                                               | 内容              | 难度     |
+| ------------------------------------------------------------------ | ----------------- | -------- |
+| [WASM 基础指南](./docs/tier_02_guides/01_wasm_基础指南.md)         | WASM 入门与实践   | ⭐⭐⭐   |
+| [Rust 编译 WASM](./docs/tier_02_guides/02_rust_编译_wasm.md)       | 编译流程与实践    | ⭐⭐⭐   |
+| [JavaScript 互操作](./docs/tier_02_guides/03_javascript_互操作.md) | wasm-bindgen 使用 | ⭐⭐⭐   |
+| [性能优化指南](./docs/tier_02_guides/04_性能优化指南.md)           | 大小与性能优化    | ⭐⭐⭐⭐ |
 
 ### 参考文档 📖
 
-| 文档 | 内容 | 难度 |
-| --- | --- | --- |
-| [API 参考](./docs/tier_03_references/01_api_参考.md) | wasm-bindgen API | ⭐⭐⭐ |
-| [工具链参考](./docs/tier_03_references/02_工具链参考.md) | 工具使用手册 | ⭐⭐ |
-| [最佳实践](./docs/tier_03_references/03_最佳实践.md) | 开发规范 | ⭐⭐⭐ |
+| 文档                                                     | 内容             | 难度   |
+| -------------------------------------------------------- | ---------------- | ------ |
+| [API 参考](./docs/tier_03_references/01_api_参考.md)     | wasm-bindgen API | ⭐⭐⭐ |
+| [工具链参考](./docs/tier_03_references/02_工具链参考.md) | 工具使用手册     | ⭐⭐   |
+| [最佳实践](./docs/tier_03_references/03_最佳实践.md)     | 开发规范         | ⭐⭐⭐ |
 
 ### 高级主题 🚀
 
-| 文档 | 内容 | 难度 |
-| --- | --- | --- |
-| [WASI 深入](./docs/tier_04_advanced/01_wasi_深入.md) | WASI 系统接口 | ⭐⭐⭐⭐ |
-| [性能分析与优化](./docs/tier_04_advanced/02_性能分析与优化.md) | 高级优化技术 | ⭐⭐⭐⭐⭐ |
-| [生产级部署](./docs/tier_04_advanced/03_生产级部署.md) | 部署与监控 | ⭐⭐⭐⭐ |
-| [WasmEdge 与新技术深入](./docs/tier_04_advanced/05_wasmedge_与新技术深入.md) | WasmEdge 高级特性 | ⭐⭐⭐⭐⭐ |
-| 🆕 [**容器技术深度集成**](./docs/tier_04_advanced/06_容器技术深度集成.md) | **Docker/K8s/containerd** | ⭐⭐⭐⭐⭐ |
-| 🆕 [**云原生CI/CD实践**](./docs/tier_04_advanced/07_云原生CI_CD实践.md) | **GitHub Actions/GitLab CI** | ⭐⭐⭐⭐⭐ |
-| 🆕 [**监控与可观测性实践**](./docs/tier_04_advanced/08_监控与可观测性实践.md) | **Prometheus/Grafana/Loki** | ⭐⭐⭐⭐⭐ |
+| 文档                                                                          | 内容                         | 难度       |
+| ----------------------------------------------------------------------------- | ---------------------------- | ---------- |
+| [WASI 深入](./docs/tier_04_advanced/01_wasi_深入.md)                          | WASI 系统接口                | ⭐⭐⭐⭐   |
+| [性能分析与优化](./docs/tier_04_advanced/02_性能分析与优化.md)                | 高级优化技术                 | ⭐⭐⭐⭐⭐ |
+| [生产级部署](./docs/tier_04_advanced/03_生产级部署.md)                        | 部署与监控                   | ⭐⭐⭐⭐   |
+| [WasmEdge 与新技术深入](./docs/tier_04_advanced/05_wasmedge_与新技术深入.md)  | WasmEdge 高级特性            | ⭐⭐⭐⭐⭐ |
+| 🆕 [**容器技术深度集成**](./docs/tier_04_advanced/06_容器技术深度集成.md)     | **Docker/K8s/containerd**    | ⭐⭐⭐⭐⭐ |
+| 🆕 [**云原生CI/CD实践**](./docs/tier_04_advanced/07_云原生CI_CD实践.md)       | **GitHub Actions/GitLab CI** | ⭐⭐⭐⭐⭐ |
+| 🆕 [**监控与可观测性实践**](./docs/tier_04_advanced/08_监控与可观测性实践.md) | **Prometheus/Grafana/Loki**  | ⭐⭐⭐⭐⭐ |
 
 ---
 
@@ -504,4 +504,4 @@ npm start
 
 ---
 
-*本模块专注于 Rust WASM 的学习，提供系统性的学习路径和实践示例。如有任何问题或建议，欢迎反馈。*
+_本模块专注于 Rust WASM 的学习，提供系统性的学习路径和实践示例。如有任何问题或建议，欢迎反馈。_

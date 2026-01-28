@@ -387,21 +387,21 @@ fn test_proc_macro() {
 
 ## 片段指定符完整列表
 
-| 指定符 | 匹配内容 | 示例 |
-| --- | --- | --- |
-| `item` | 项（函数、结构体等） | `fn foo() {}` |
-| `block` | 代码块 | `{ let x = 1; }` |
-| `stmt` | 语句 | `let x = 1;` |
-| `pat` | 模式 | `Some(x)` |
-| `expr` | 表达式 | `1 + 2` |
-| `ty` | 类型 | `Vec<i32>` |
-| `ident` | 标识符 | `foo` |
-| `path` | 路径 | `std::vec::Vec` |
-| `tt` | Token树 | `(a b c)` |
-| `meta` | 属性内容 | `derive(Debug)` |
-| `lifetime` | 生命周期 | `'a` |
-| `vis` | 可见性 | `pub` |
-| `literal` | 字面量 | `42`, `"text"` |
+| 指定符     | 匹配内容             | 示例             |
+| ---------- | -------------------- | ---------------- |
+| `item`     | 项（函数、结构体等） | `fn foo() {}`    |
+| `block`    | 代码块               | `{ let x = 1; }` |
+| `stmt`     | 语句                 | `let x = 1;`     |
+| `pat`      | 模式                 | `Some(x)`        |
+| `expr`     | 表达式               | `1 + 2`          |
+| `ty`       | 类型                 | `Vec<i32>`       |
+| `ident`    | 标识符               | `foo`            |
+| `path`     | 路径                 | `std::vec::Vec`  |
+| `tt`       | Token树              | `(a b c)`        |
+| `meta`     | 属性内容             | `derive(Debug)`  |
+| `lifetime` | 生命周期             | `'a`             |
+| `vis`      | 可见性               | `pub`            |
+| `literal`  | 字面量               | `42`, `"text"`   |
 
 ---
 

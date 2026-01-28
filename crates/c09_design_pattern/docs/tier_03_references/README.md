@@ -8,14 +8,14 @@
 
 ## 📚 核心技术参考 (NEW)
 
-| 序号 | 文档 | 内容 | 行数 | 状态 |
-| --- | --- | --- | --- | --- |
-| 1 | [01_设计模式分类参考.md](./01_设计模式分类参考.md) | GoF + 并发 + Rust特有模式完整分类 | ~900 | ✅ |
-| 2 | [02_模式实现对比.md](./02_模式实现对比.md) | Trait vs 泛型、同步vs异步、性能对比 | ~650 | ✅ |
-| 3 | [03_Rust190特性应用参考.md](./03_Rust190特性应用参考.md) | async fn、GATs、let-else、RPITIT等特性 | ~750 | ✅ |
-| 4 | [04_模式性能评估参考.md](./04_模式性能评估参考.md) | 基准测试、性能数据、优化建议 | ~800 | ✅ |
-| 5 | [05_模式选择最佳实践.md](./05_模式选择最佳实践.md) | 决策树、场景驱动、反模式避免 | ~700 | ✅ |
-| 6 | [06_模式使用快速参考.md](./06_模式使用快速参考.md) | 何时使用/避免、复杂度、线程安全性 | ~960 | ✅ |
+| 序号 | 文档                                                     | 内容                                   | 行数 | 状态 |
+| ---- | -------------------------------------------------------- | -------------------------------------- | ---- | ---- |
+| 1    | [01\_设计模式分类参考.md](./01_设计模式分类参考.md)      | GoF + 并发 + Rust特有模式完整分类      | ~900 | ✅   |
+| 2    | [02\_模式实现对比.md](./02_模式实现对比.md)              | Trait vs 泛型、同步vs异步、性能对比    | ~650 | ✅   |
+| 3    | [03_Rust190特性应用参考.md](./03_Rust190特性应用参考.md) | async fn、GATs、let-else、RPITIT等特性 | ~750 | ✅   |
+| 4    | [04\_模式性能评估参考.md](./04_模式性能评估参考.md)      | 基准测试、性能数据、优化建议           | ~800 | ✅   |
+| 5    | [05\_模式选择最佳实践.md](./05_模式选择最佳实践.md)      | 决策树、场景驱动、反模式避免           | ~700 | ✅   |
+| 6    | [06\_模式使用快速参考.md](./06_模式使用快速参考.md)      | 何时使用/避免、复杂度、线程安全性      | ~960 | ✅   |
 
 **总计**: 6 篇核心文档，~4,760 行，400+ 代码示例
 
@@ -23,20 +23,20 @@
 
 ## 🗺️ 现有理论资源
 
-| 资源 | 说明 |
-| --- | --- |
-| [00_MASTER_INDEX.md](../00_MASTER_INDEX.md) | 完整索引 |
-| [FAQ.md](../FAQ.md) | 常见问题（完整版） |
-| [Glossary.md](../Glossary.md) | 术语表（完整版） |
-| [Tier 1 基础层](../tier_01_foundations/) | 快速入门和基础参考 |
-| [Tier 1 术语表](../tier_01_foundations/03_术语表.md) | 核心术语快速参考 |
-| [Tier 1 常见问题](../tier_01_foundations/04_常见问题.md) | 新手常见问题解答 |
-| [OVERVIEW.md](../OVERVIEW.md) | 概览 |
-| [KNOWLEDGE_GRAPH.md](../KNOWLEDGE_GRAPH.md) | 知识图谱 |
-| [MIND_MAP.md](../MIND_MAP.md) | 思维导图 |
-| [RUST_192_COMPREHENSIVE_MINDMAP.md](../RUST_192_COMPREHENSIVE_MINDMAP.md) | Rust 1.92.0导图（自 Rust 1.90 引入） |
-| [RUST_190_COMPREHENSIVE_MINDMAP.md](../RUST_190_COMPREHENSIVE_MINDMAP.md) | Rust 1.90导图（历史版本） |
-| [MULTIDIMENSIONAL_MATRIX_COMPARISON.md](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md) | 多维对比 |
+| 资源                                                                              | 说明                                 |
+| --------------------------------------------------------------------------------- | ------------------------------------ |
+| [00_MASTER_INDEX.md](../00_MASTER_INDEX.md)                                       | 完整索引                             |
+| [FAQ.md](../FAQ.md)                                                               | 常见问题（完整版）                   |
+| [Glossary.md](../Glossary.md)                                                     | 术语表（完整版）                     |
+| [Tier 1 基础层](../tier_01_foundations/)                                          | 快速入门和基础参考                   |
+| [Tier 1 术语表](../tier_01_foundations/03_术语表.md)                              | 核心术语快速参考                     |
+| [Tier 1 常见问题](../tier_01_foundations/04_常见问题.md)                          | 新手常见问题解答                     |
+| [OVERVIEW.md](../OVERVIEW.md)                                                     | 概览                                 |
+| [KNOWLEDGE_GRAPH.md](../KNOWLEDGE_GRAPH.md)                                       | 知识图谱                             |
+| [MIND_MAP.md](../MIND_MAP.md)                                                     | 思维导图                             |
+| [RUST_192_COMPREHENSIVE_MINDMAP.md](../RUST_192_COMPREHENSIVE_MINDMAP.md)         | Rust 1.92.0导图（自 Rust 1.90 引入） |
+| [RUST_190_COMPREHENSIVE_MINDMAP.md](../RUST_190_COMPREHENSIVE_MINDMAP.md)         | Rust 1.90导图（历史版本）            |
+| [MULTIDIMENSIONAL_MATRIX_COMPARISON.md](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md) | 多维对比                             |
 
 ---
 
@@ -44,12 +44,12 @@
 
 **推荐阅读顺序**:
 
-1. 01_设计模式分类参考 → 了解完整分类体系
-2. 06_模式使用快速参考 → 快速查找模式使用指南（⭐ 新增）
+1. 01\_设计模式分类参考 → 了解完整分类体系
+2. 06\_模式使用快速参考 → 快速查找模式使用指南（⭐ 新增）
 3. 03_Rust192特性应用 → 掌握现代Rust特性（自 Rust 1.90 引入）
-4. 02_模式实现对比 → 理解不同实现权衡
-5. 04_模式性能评估 → 性能基准与优化
-6. 05_模式选择最佳实践 → 实战决策指南
+4. 02\_模式实现对比 → 理解不同实现权衡
+5. 04\_模式性能评估 → 性能基准与优化
+6. 05\_模式选择最佳实践 → 实战决策指南
 
 ---
 

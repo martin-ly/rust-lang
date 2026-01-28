@@ -61,6 +61,7 @@ let output = converter.convert(input);
 ```
 
 **关键点**:
+
 - 关联类型 `Input` 和 `Output` 都有多个边界约束
 - 确保类型满足 `Clone + Send + Sync + 'static`
 - 支持跨线程安全的数据转换
@@ -78,6 +79,7 @@ let processed = process_strings(input, |s| s);
 ```
 
 **关键点**:
+
 - 使用 `for<'b>` 语法处理任意生命周期
 - 提供更强的类型安全保障
 - 减少生命周期标注的复杂性
@@ -97,6 +99,7 @@ if let Some(value) = manager.get() {
 ```
 
 **关键点**:
+
 - 类型安全的未初始化内存管理
 - 明确的初始化状态检查
 - 零成本抽象
@@ -115,6 +118,7 @@ let aligned_size = calculator.calculate_aligned::<u64>(10);
 ```
 
 **关键点**:
+
 - 使用 `NonZero::div_ceil` 安全计算
 - 避免除零错误
 - 精确的内存对齐
@@ -133,6 +137,7 @@ let result = compare_type_lists(&list1, &list2);
 ```
 
 **关键点**:
+
 - 利用 `TrustedLen` 迭代器特化
 - 性能优化的比较操作
 - 自动特化，无需额外配置

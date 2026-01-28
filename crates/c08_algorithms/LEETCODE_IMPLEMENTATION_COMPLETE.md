@@ -8,37 +8,37 @@
 
 ### ✅ 已完成的模块（29个模块，200+个算法）
 
-| 模块 | 算法数量 | 状态 | 测试通过 |
-|------|---------|------|---------|
-| **array.rs** | 14 | ✅ | ✅ 12/12 |
-| **string_algorithms.rs** | 11 | ✅ | ✅ 10/10 |
-| **hash_table.rs** | 13 | ✅ | ✅ 13/13 |
-| **dynamic_programming.rs** | 10 | ✅ | ✅ 10/10 |
-| **two_pointers.rs** | 9 | ✅ | ✅ 9/9 |
-| **binary_search.rs** | 11 | ✅ | ✅ 11/11 |
-| **sliding_window.rs** | 10 | ✅ | ✅ 10/10 |
-| **stack.rs** | 6 | ✅ | ✅ 6/6 |
-| **heap.rs** | 7 | ✅ | ✅ 7/7 |
-| **tree.rs** | 15 | ✅ | ✅ 15/15 |
-| **graph.rs** | 8 | ✅ | ✅ 8/8 |
-| **backtracking.rs** | 11 | ✅ | ✅ 11/11 |
-| **trie.rs** | 4 | ✅ | ✅ 4/4 |
-| **bit_manipulation.rs** | 12 | ✅ | ✅ 12/12 |
-| **matrix.rs** | 5 | ✅ | ✅ 5/5 |
-| **math.rs** | 10 | ✅ | ✅ 10/10 |
-| **greedy.rs** | 5 | ✅ | ✅ 5/5 |
-| **linked_list.rs** | 8 | ✅ | ✅ 3/3 |
-| **union_find.rs** | 5 | ✅ | ✅ 3/3 |
-| **monotonic_stack.rs** | 6 | ✅ | ✅ 5/5 |
-| **queue.rs** | 4 | ✅ | ✅ 4/4 |
-| **recursion.rs** | 5 | ✅ | ✅ 5/5 |
-| **sorting.rs** | 6 | ✅ | ✅ 5/5 |
-| **design.rs** | 6 | ✅ | ✅ 2/2 |
-| **breadth_first_search.rs** | 5 | ✅ | ✅ 2/2 |
-| **depth_first_search.rs** | 5 | ✅ | ✅ 3/3 |
-| **segment_tree.rs** | 4 | ✅ | ✅ 2/2 |
-| **binary_indexed_tree.rs** | 3 | ✅ | ✅ 1/1 |
-| **ordered_map.rs** | 3 | ✅ | ✅ 2/2 |
+| 模块                        | 算法数量 | 状态 | 测试通过 |
+| --------------------------- | -------- | ---- | -------- |
+| **array.rs**                | 14       | ✅   | ✅ 12/12 |
+| **string_algorithms.rs**    | 11       | ✅   | ✅ 10/10 |
+| **hash_table.rs**           | 13       | ✅   | ✅ 13/13 |
+| **dynamic_programming.rs**  | 10       | ✅   | ✅ 10/10 |
+| **two_pointers.rs**         | 9        | ✅   | ✅ 9/9   |
+| **binary_search.rs**        | 11       | ✅   | ✅ 11/11 |
+| **sliding_window.rs**       | 10       | ✅   | ✅ 10/10 |
+| **stack.rs**                | 6        | ✅   | ✅ 6/6   |
+| **heap.rs**                 | 7        | ✅   | ✅ 7/7   |
+| **tree.rs**                 | 15       | ✅   | ✅ 15/15 |
+| **graph.rs**                | 8        | ✅   | ✅ 8/8   |
+| **backtracking.rs**         | 11       | ✅   | ✅ 11/11 |
+| **trie.rs**                 | 4        | ✅   | ✅ 4/4   |
+| **bit_manipulation.rs**     | 12       | ✅   | ✅ 12/12 |
+| **matrix.rs**               | 5        | ✅   | ✅ 5/5   |
+| **math.rs**                 | 10       | ✅   | ✅ 10/10 |
+| **greedy.rs**               | 5        | ✅   | ✅ 5/5   |
+| **linked_list.rs**          | 8        | ✅   | ✅ 3/3   |
+| **union_find.rs**           | 5        | ✅   | ✅ 3/3   |
+| **monotonic_stack.rs**      | 6        | ✅   | ✅ 5/5   |
+| **queue.rs**                | 4        | ✅   | ✅ 4/4   |
+| **recursion.rs**            | 5        | ✅   | ✅ 5/5   |
+| **sorting.rs**              | 6        | ✅   | ✅ 5/5   |
+| **design.rs**               | 6        | ✅   | ✅ 2/2   |
+| **breadth_first_search.rs** | 5        | ✅   | ✅ 2/2   |
+| **depth_first_search.rs**   | 5        | ✅   | ✅ 3/3   |
+| **segment_tree.rs**         | 4        | ✅   | ✅ 2/2   |
+| **binary_indexed_tree.rs**  | 3        | ✅   | ✅ 1/1   |
+| **ordered_map.rs**          | 3        | ✅   | ✅ 2/2   |
 
 **总计**: 200+ 个算法实现，所有测试通过 ✅
 

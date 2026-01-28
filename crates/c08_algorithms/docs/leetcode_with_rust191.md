@@ -968,7 +968,7 @@ assert_eq!(binary_search(nums, 9), 4);
 - **标签**: Array, Breadth-First Search, Matrix
 - **Rust 1.91 特性**:
   - JIT 优化：BFS 遍历性能提升
-  - 内存优化：使用队列，O(m * n) 空间复杂度
+  - 内存优化：使用队列，O(m \* n) 空间复杂度
 
 #### ✅ 130. Surrounded Regions（被围绕的区域）
 
@@ -976,7 +976,7 @@ assert_eq!(binary_search(nums, 9), 4);
 - **标签**: Array, Depth-First Search, Breadth-First Search, Union Find, Matrix
 - **Rust 1.91 特性**:
   - JIT 优化：DFS 遍历性能提升
-  - 内存优化：从边界开始 DFS，O(m * n) 空间复杂度
+  - 内存优化：从边界开始 DFS，O(m \* n) 空间复杂度
 
 ### Backtracking（回溯）分类
 
@@ -1110,7 +1110,7 @@ assert_eq!(binary_search(nums, 9), 4);
 - **标签**: Hash Table, String, Trie, Design
 - **Rust 1.91 特性**:
   - JIT 优化：Trie 操作性能提升 10-15%
-  - 内存优化：使用数组存储子节点，O(ALPHABET_SIZE * N) 空间复杂度
+  - 内存优化：使用数组存储子节点，O(ALPHABET_SIZE \* N) 空间复杂度
 
 #### ✅ 211. Design Add and Search Words Data Structure（添加与搜索单词 - 数据结构设计）
 
@@ -1168,20 +1168,20 @@ println!("最大子数组和: {}", max_sum);
 
 在实际测试中，使用 Rust 1.91 的 JIT 优化，以下操作获得了显著的性能提升：
 
-| 操作类型 | 性能提升 | 说明 |
-| --- | --- | --- |
-| 简单迭代器链 | 10-15% | map, filter 等基本操作 |
-| 复杂迭代器链 | 15-25% | 多个链式操作组合 |
-| 嵌套迭代器 | 20-30% | 嵌套 map/filter |
-| 字符串处理 | 15-20% | 使用新的字符串 API |
+| 操作类型     | 性能提升 | 说明                   |
+| ------------ | -------- | ---------------------- |
+| 简单迭代器链 | 10-15%   | map, filter 等基本操作 |
+| 复杂迭代器链 | 15-25%   | 多个链式操作组合       |
+| 嵌套迭代器   | 20-30%   | 嵌套 map/filter        |
+| 字符串处理   | 15-20%   | 使用新的字符串 API     |
 
 ### 内存优化带来的性能提升
 
-| 操作类型 | 性能提升 | 说明 |
-| --- | --- | --- |
-| 小对象分配 | 25-30% | < 1KB 对象 |
-| 向量扩容 | 15-20% | 使用 try_reserve_exact |
-| 哈希表插入 | 10-15% | 频繁插入操作 |
+| 操作类型   | 性能提升 | 说明                   |
+| ---------- | -------- | ---------------------- |
+| 小对象分配 | 25-30%   | < 1KB 对象             |
+| 向量扩容   | 15-20%   | 使用 try_reserve_exact |
+| 哈希表插入 | 10-15%   | 频繁插入操作           |
 
 ---
 

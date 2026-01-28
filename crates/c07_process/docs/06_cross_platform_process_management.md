@@ -112,12 +112,12 @@
 
 ### 多维概念对比矩阵
 
-| 平台 | 进程管理 | 服务管理 | 路径分隔符 | 信号处理 | Rust 1.92.0 |
-| --- | --- | --- | --- | --- | --- |
-| **Windows** | CreateProcess | Windows 服务 | `\` | Windows 信号 | ✅ |
-| **Linux** | fork/exec | Systemd | `/` | Unix 信号 | ✅ |
-| **macOS** | fork/exec | Launchd | `/` | Unix 信号 | ✅ |
-| **Unix** | fork/exec | init.d | `/` | Unix 信号 | ✅ |
+| 平台        | 进程管理      | 服务管理     | 路径分隔符 | 信号处理     | Rust 1.92.0 |
+| ----------- | ------------- | ------------ | ---------- | ------------ | ----------- |
+| **Windows** | CreateProcess | Windows 服务 | `\`        | Windows 信号 | ✅          |
+| **Linux**   | fork/exec     | Systemd      | `/`        | Unix 信号    | ✅          |
+| **macOS**   | fork/exec     | Launchd      | `/`        | Unix 信号    | ✅          |
+| **Unix**    | fork/exec     | init.d       | `/`        | Unix 信号    | ✅          |
 
 ### 决策树图
 

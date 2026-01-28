@@ -70,7 +70,7 @@ $updatedCount = 0
 foreach ($file in $files189) {
     try {
         $content = Get-Content $file.FullName -Raw -Encoding UTF8
-        
+
         # 检查是否包含旧模式
         if ($content -match "⚠️ \*\*注意\*\*.*Rust 1\.90\.0 Release Notes") {
             $content = $content -replace [regex]::Escape($oldPattern189), $newPattern189

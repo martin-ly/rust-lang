@@ -10,13 +10,13 @@
     - [Cargo.toml](#cargotoml)
     - [src/lib.rs](#srclibrs)
     - [src/sync.rs](#srcsyncrs)
-    - [src/async\_impl.rs](#srcasync_implrs)
-    - [src/serde\_impl.rs](#srcserde_implrs)
+    - [src/async_impl.rs](#srcasync_implrs)
+    - [src/serde_impl.rs](#srcserde_implrs)
     - [src/crypto.rs](#srccryptors)
     - [src/utils.rs](#srcutilsrs)
     - [examples/basic.rs](#examplesbasicrs)
-    - [examples/async\_example.rs](#examplesasync_examplers)
-    - [examples/serde\_example.rs](#examplesserde_examplers)
+    - [examples/async_example.rs](#examplesasync_examplers)
+    - [examples/serde_example.rs](#examplesserde_examplers)
   - [🚀 使用示例](#-使用示例)
     - [基础使用](#基础使用)
     - [使用异步特性](#使用异步特性)
@@ -786,4 +786,4 @@ required-features = ["async"]
 **适用场景**: 可配置的库、多特性库
 **难度等级**: ⭐⭐⭐ 中级
 
-*完整的特性系统示例，可直接用作库开发模板！* 🦀📚
+_完整的特性系统示例，可直接用作库开发模板！_ 🦀📚

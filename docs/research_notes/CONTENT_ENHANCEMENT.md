@@ -123,7 +123,7 @@
 
 **示例**:
 
-```markdown
+````markdown
 ### 1. 所有权转移
 
 **定义 1.1 (所有权转移)**: 所有权从变量 `x` 转移到变量 `y`，记为 `x → y`。
@@ -140,6 +140,7 @@ $$\text{move}(x, y) : \Omega(x) = \text{Owned} \rightarrow \Omega(x) = \text{Mov
 let s1 = String::from("hello");
 let s2 = s1;  // 所有权转移: s1 → s2
 ```
+````
 
 ### 2. 添加更多规则
 
@@ -171,7 +172,7 @@ let s2 = s1;  // 所有权转移: s1 → s2
 
 **示例**:
 
-```markdown
+````markdown
 ### 示例 1: 基本所有权转移
 
 ```rust
@@ -181,6 +182,7 @@ fn main() {
     println!("{}", s2);
 }
 ```
+````
 
 **说明**: 这是最基本的所有权转移示例。`s1` 的所有权转移到 `s2` 后，`s1` 不再可用。
 
@@ -218,7 +220,7 @@ fn main() {
 
 **示例**:
 
-```markdown
+````markdown
 ### 示例: 常见错误
 
 ```rust
@@ -228,6 +230,7 @@ fn main() {
     println!("{}", s1);  // 错误：s1 不再拥有值
 }
 ```
+````
 
 **错误信息**:
 

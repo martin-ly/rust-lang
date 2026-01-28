@@ -57,63 +57,63 @@
 
 ### 所有权和借用
 
-| 关键词 | 相关研究笔记 | 状态 |
-|-------|------------|------|
-| 所有权 | [所有权模型形式化](./formal_methods/ownership_model.md) | ✅ 100% |
-| 借用 | [借用检查器证明](./formal_methods/borrow_checker_proof.md) | ✅ 100% |
+| 关键词     | 相关研究笔记                                               | 状态    |
+| ---------- | ---------------------------------------------------------- | ------- |
+| 所有权     | [所有权模型形式化](./formal_methods/ownership_model.md)    | ✅ 100% |
+| 借用       | [借用检查器证明](./formal_methods/borrow_checker_proof.md) | ✅ 100% |
 | 借用检查器 | [借用检查器证明](./formal_methods/borrow_checker_proof.md) | ✅ 100% |
-| 数据竞争 | [借用检查器证明](./formal_methods/borrow_checker_proof.md) | ✅ 100% |
-| 内存安全 | [所有权模型形式化](./formal_methods/ownership_model.md) | ✅ 100% |
+| 数据竞争   | [借用检查器证明](./formal_methods/borrow_checker_proof.md) | ✅ 100% |
+| 内存安全   | [所有权模型形式化](./formal_methods/ownership_model.md)    | ✅ 100% |
 
 ### 类型系统
 
-| 关键词 | 相关研究笔记 | 状态 |
-|-------|------------|------|
-| 类型系统 | [类型系统基础](./type_theory/type_system_foundations.md) | ✅ 100% |
-| Trait | [Trait 系统形式化](./type_theory/trait_system_formalization.md) | ✅ 100% |
-| 泛型 | [高级类型特性](./type_theory/advanced_types.md) | ✅ 100% |
-| GATs | [高级类型特性](./type_theory/advanced_types.md) | ✅ 100% |
-| const 泛型 | [高级类型特性](./type_theory/advanced_types.md) | ✅ 100% |
-| 型变 | [型变理论](./type_theory/variance_theory.md) | ✅ 100% |
-| 协变 | [型变理论](./type_theory/variance_theory.md) | ✅ 100% |
-| 逆变 | [型变理论](./type_theory/variance_theory.md) | ✅ 100% |
+| 关键词     | 相关研究笔记                                                    | 状态    |
+| ---------- | --------------------------------------------------------------- | ------- |
+| 类型系统   | [类型系统基础](./type_theory/type_system_foundations.md)        | ✅ 100% |
+| Trait      | [Trait 系统形式化](./type_theory/trait_system_formalization.md) | ✅ 100% |
+| 泛型       | [高级类型特性](./type_theory/advanced_types.md)                 | ✅ 100% |
+| GATs       | [高级类型特性](./type_theory/advanced_types.md)                 | ✅ 100% |
+| const 泛型 | [高级类型特性](./type_theory/advanced_types.md)                 | ✅ 100% |
+| 型变       | [型变理论](./type_theory/variance_theory.md)                    | ✅ 100% |
+| 协变       | [型变理论](./type_theory/variance_theory.md)                    | ✅ 100% |
+| 逆变       | [型变理论](./type_theory/variance_theory.md)                    | ✅ 100% |
 
 ### 生命周期
 
-| 关键词 | 相关研究笔记 | 状态 |
-|-------|------------|------|
-| 生命周期 | [生命周期形式化](./formal_methods/lifetime_formalization.md) | ✅ 100% |
-| 生命周期推断 | [生命周期形式化](./type_theory/lifetime_formalization.md) | ✅ 100% |
-| 引用有效性 | [生命周期形式化](./formal_methods/lifetime_formalization.md) | ✅ 100% |
-| 区域类型 | [生命周期形式化](./type_theory/lifetime_formalization.md) | ✅ 100% |
+| 关键词       | 相关研究笔记                                                 | 状态    |
+| ------------ | ------------------------------------------------------------ | ------- |
+| 生命周期     | [生命周期形式化](./formal_methods/lifetime_formalization.md) | ✅ 100% |
+| 生命周期推断 | [生命周期形式化](./type_theory/lifetime_formalization.md)    | ✅ 100% |
+| 引用有效性   | [生命周期形式化](./formal_methods/lifetime_formalization.md) | ✅ 100% |
+| 区域类型     | [生命周期形式化](./type_theory/lifetime_formalization.md)    | ✅ 100% |
 
 ### 异步和并发
 
-| 关键词 | 相关研究笔记 | 状态 |
-|-------|------------|------|
-| 异步 | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
-| Future | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
+| 关键词      | 相关研究笔记                                                | 状态    |
+| ----------- | ----------------------------------------------------------- | ------- |
+| 异步        | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
+| Future      | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
 | async/await | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
-| 并发 | [并发性能研究](./experiments/concurrency_performance.md) | ✅ 100% |
-| 并发安全 | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
+| 并发        | [并发性能研究](./experiments/concurrency_performance.md)    | ✅ 100% |
+| 并发安全    | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
 
 ### 性能优化
 
-| 关键词 | 相关研究笔记 | 状态 |
-|-------|------------|------|
-| 性能 | [性能基准测试](./experiments/performance_benchmarks.md) | ✅ 100% |
-| 基准测试 | [性能基准测试](./experiments/performance_benchmarks.md) | ✅ 100% |
-| 内存分析 | [内存分析](./experiments/memory_analysis.md) | ✅ 100% |
-| 编译器优化 | [编译器优化](./experiments/compiler_optimizations.md) | ✅ 100% |
-| 优化 | [编译器优化](./experiments/compiler_optimizations.md) | ✅ 100% |
+| 关键词     | 相关研究笔记                                            | 状态    |
+| ---------- | ------------------------------------------------------- | ------- |
+| 性能       | [性能基准测试](./experiments/performance_benchmarks.md) | ✅ 100% |
+| 基准测试   | [性能基准测试](./experiments/performance_benchmarks.md) | ✅ 100% |
+| 内存分析   | [内存分析](./experiments/memory_analysis.md)            | ✅ 100% |
+| 编译器优化 | [编译器优化](./experiments/compiler_optimizations.md)   | ✅ 100% |
+| 优化       | [编译器优化](./experiments/compiler_optimizations.md)   | ✅ 100% |
 
 ### 宏系统
 
-| 关键词 | 相关研究笔记 | 状态 |
-|-------|------------|------|
-| 宏 | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
-| 宏展开 | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
-| 过程宏 | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
+| 关键词   | 相关研究笔记                                                   | 状态    |
+| -------- | -------------------------------------------------------------- | ------- |
+| 宏       | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
+| 宏展开   | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
+| 过程宏   | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
 | 编译时间 | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
 
 ---
@@ -124,46 +124,46 @@
 
 **研究领域**: 对 Rust 核心机制进行形式化建模和证明
 
-| 研究笔记 | 研究目标 | 状态 | 完成度 |
-|---------|---------|------|--------|
-| [所有权模型形式化](./formal_methods/ownership_model.md) | 形式化定义所有权系统，证明内存安全 | ✅ 已完成 | 100% |
-| [借用检查器证明](./formal_methods/borrow_checker_proof.md) | 形式化定义借用检查器，证明数据竞争自由 | ✅ 已完成 | 100% |
-| [异步状态机形式化](./formal_methods/async_state_machine.md) | 形式化定义 Future/Poll 状态机，证明并发安全 | ✅ 已完成 | 100% |
-| [生命周期形式化](./formal_methods/lifetime_formalization.md) | 形式化定义生命周期系统，证明引用有效性 | ✅ 已完成 | 100% |
-| [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md) | 形式化定义 Pin 类型和自引用类型，证明安全性 | ✅ 已完成 | 100% |
+| 研究笔记                                                           | 研究目标                                    | 状态      | 完成度 |
+| ------------------------------------------------------------------ | ------------------------------------------- | --------- | ------ |
+| [所有权模型形式化](./formal_methods/ownership_model.md)            | 形式化定义所有权系统，证明内存安全          | ✅ 已完成 | 100%   |
+| [借用检查器证明](./formal_methods/borrow_checker_proof.md)         | 形式化定义借用检查器，证明数据竞争自由      | ✅ 已完成 | 100%   |
+| [异步状态机形式化](./formal_methods/async_state_machine.md)        | 形式化定义 Future/Poll 状态机，证明并发安全 | ✅ 已完成 | 100%   |
+| [生命周期形式化](./formal_methods/lifetime_formalization.md)       | 形式化定义生命周期系统，证明引用有效性      | ✅ 已完成 | 100%   |
+| [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md) | 形式化定义 Pin 类型和自引用类型，证明安全性 | ✅ 已完成 | 100%   |
 
 ### 类型理论
 
 **研究领域**: Rust 类型系统的理论基础和形式化定义
 
-| 研究笔记 | 研究目标 | 状态 | 完成度 |
-|---------|---------|------|--------|
-| [类型系统基础](./type_theory/type_system_foundations.md) | 形式化定义 Rust 类型系统基础 | ✅ 已完成 | 100% |
-| [Trait 系统形式化](./type_theory/trait_system_formalization.md) | 形式化定义 Trait 系统，理解类型理论基础 | ✅ 已完成 | 100% |
-| [生命周期形式化](./type_theory/lifetime_formalization.md) | 形式化定义生命周期系统，理解类型理论解释 | ✅ 已完成 | 100% |
-| [高级类型特性](./type_theory/advanced_types.md) | 深入分析 GATs、const 泛型和依赖类型 | ✅ 已完成 | 100% |
-| [型变理论](./type_theory/variance_theory.md) | 深入理解型变理论，形式化定义型变规则 | ✅ 已完成 | 100% |
+| 研究笔记                                                        | 研究目标                                 | 状态      | 完成度 |
+| --------------------------------------------------------------- | ---------------------------------------- | --------- | ------ |
+| [类型系统基础](./type_theory/type_system_foundations.md)        | 形式化定义 Rust 类型系统基础             | ✅ 已完成 | 100%   |
+| [Trait 系统形式化](./type_theory/trait_system_formalization.md) | 形式化定义 Trait 系统，理解类型理论基础  | ✅ 已完成 | 100%   |
+| [生命周期形式化](./type_theory/lifetime_formalization.md)       | 形式化定义生命周期系统，理解类型理论解释 | ✅ 已完成 | 100%   |
+| [高级类型特性](./type_theory/advanced_types.md)                 | 深入分析 GATs、const 泛型和依赖类型      | ✅ 已完成 | 100%   |
+| [型变理论](./type_theory/variance_theory.md)                    | 深入理解型变理论，形式化定义型变规则     | ✅ 已完成 | 100%   |
 
 ### 实验研究
 
 **研究领域**: 通过实验验证理论假设，优化实践
 
-| 研究笔记 | 研究目标 | 状态 | 完成度 |
-|---------|---------|------|--------|
-| [性能基准测试](./experiments/performance_benchmarks.md) | 通过基准测试评估不同实现的性能特征 | ✅ 已完成 | 100% |
-| [内存分析](./experiments/memory_analysis.md) | 分析内存使用模式，识别内存优化机会 | ✅ 已完成 | 100% |
-| [编译器优化](./experiments/compiler_optimizations.md) | 评估编译器优化效果，了解如何编写编译器友好的代码 | ✅ 已完成 | 100% |
-| [并发性能研究](./experiments/concurrency_performance.md) | 评估不同并发模型的性能特征 | ✅ 已完成 | 100% |
-| [宏展开性能分析](./experiments/macro_expansion_performance.md) | 分析宏展开性能，识别性能瓶颈 | ✅ 已完成 | 100% |
+| 研究笔记                                                       | 研究目标                                         | 状态      | 完成度 |
+| -------------------------------------------------------------- | ------------------------------------------------ | --------- | ------ |
+| [性能基准测试](./experiments/performance_benchmarks.md)        | 通过基准测试评估不同实现的性能特征               | ✅ 已完成 | 100%   |
+| [内存分析](./experiments/memory_analysis.md)                   | 分析内存使用模式，识别内存优化机会               | ✅ 已完成 | 100%   |
+| [编译器优化](./experiments/compiler_optimizations.md)          | 评估编译器优化效果，了解如何编写编译器友好的代码 | ✅ 已完成 | 100%   |
+| [并发性能研究](./experiments/concurrency_performance.md)       | 评估不同并发模型的性能特征                       | ✅ 已完成 | 100%   |
+| [宏展开性能分析](./experiments/macro_expansion_performance.md) | 分析宏展开性能，识别性能瓶颈                     | ✅ 已完成 | 100%   |
 
 ### 综合研究
 
 **研究领域**: 实际应用和综合研究
 
-| 研究笔记 | 研究目标 | 状态 | 完成度 |
-|---------|---------|------|--------|
-| [实际应用案例研究](./practical_applications.md) | 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果 | ✅ 已完成 | 100% |
-| [研究方法论](./research_methodology.md) | 建立 Rust 研究的方法论体系，为研究提供系统化的方法指导 | ✅ 已完成 | 100% |
+| 研究笔记                                        | 研究目标                                                   | 状态      | 完成度 |
+| ----------------------------------------------- | ---------------------------------------------------------- | --------- | ------ |
+| [实际应用案例研究](./practical_applications.md) | 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果 | ✅ 已完成 | 100%   |
+| [研究方法论](./research_methodology.md)         | 建立 Rust 研究的方法论体系，为研究提供系统化的方法指导     | ✅ 已完成 | 100%   |
 
 ---
 

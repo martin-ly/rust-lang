@@ -8,14 +8,14 @@
 
 **特点**: 实践导向，循序渐进
 
-| 文档 | 难度 | 时长 | 说明 |
-| --- | --- | --- | --- |
-| 01_quick_start | ⭐ | 30min | 快速入门 |
-| 02_basics | ⭐⭐ | 2-3h | 基础指南 |
-| 03_advanced_topics | ⭐⭐⭐ | 4-6h | 高级主题 |
-| 04_best_practices | ⭐⭐⭐⭐ | 参考 | 最佳实践 |
-| 05_style_guide | ⭐⭐⭐ | 参考 | 代码风格 |
-| 06_run_guide | ⭐ | 15min | 运行指南 |
+| 文档               | 难度     | 时长  | 说明     |
+| ------------------ | -------- | ----- | -------- |
+| 01_quick_start     | ⭐       | 30min | 快速入门 |
+| 02_basics          | ⭐⭐     | 2-3h  | 基础指南 |
+| 03_advanced_topics | ⭐⭐⭐   | 4-6h  | 高级主题 |
+| 04_best_practices  | ⭐⭐⭐⭐ | 参考  | 最佳实践 |
+| 05_style_guide     | ⭐⭐⭐   | 参考  | 代码风格 |
+| 06_run_guide       | ⭐       | 15min | 运行指南 |
 
 **查看详情**: [guides/README.md](./guides/README.md)
 
@@ -25,14 +25,14 @@
 
 **特点**: 理论系统，深度解析
 
-| 文档 | 难度 | 重要性 | 说明 |
-| --- | --- | --- | --- |
-| 01_introduction_and_philosophy | ⭐⭐ | ⭐⭐⭐⭐⭐ | 设计哲学 |
-| 02_runtime_and_execution_model | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 执行模型 |
-| 03_pinning_and_unsafe_foundations | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | Pin机制 |
-| 04_streams_and_sinks | ⭐⭐⭐ | ⭐⭐⭐⭐ | 流处理 |
-| 05_async_in_traits_and_ecosystem | ⭐⭐⭐ | ⭐⭐⭐⭐ | Trait支持 |
-| 06_critical_analysis_and_advanced_topics | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | 深度分析 |
+| 文档                                     | 难度       | 重要性     | 说明      |
+| ---------------------------------------- | ---------- | ---------- | --------- |
+| 01_introduction_and_philosophy           | ⭐⭐       | ⭐⭐⭐⭐⭐ | 设计哲学  |
+| 02_runtime_and_execution_model           | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | 执行模型  |
+| 03_pinning_and_unsafe_foundations        | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | Pin机制   |
+| 04_streams_and_sinks                     | ⭐⭐⭐     | ⭐⭐⭐⭐   | 流处理    |
+| 05_async_in_traits_and_ecosystem         | ⭐⭐⭐     | ⭐⭐⭐⭐   | Trait支持 |
+| 06_critical_analysis_and_advanced_topics | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     | 深度分析  |
 
 **查看详情**: [core/README.md](./core/README.md)
 
@@ -222,31 +222,31 @@
 
 ### 重组后统计
 
-| 类别 | 文档数 | 说明 |
-| --- | --- | --- |
-| **学习指南** | 6 | guides/ |
-| **核心概念** | 6 | core/ |
-| **运行时** | 4 | runtimes/ |
-| **设计模式** | 3 | patterns/ |
-| **性能优化** | 3 | performance/ |
-| **生态系统** | 3 | ecosystem/ |
-| **API参考** | 3 | references/ |
-| **综合指南** | 2 | comprehensive/ |
-| **多视角** | 20 | views/ |
-| **工具配置** | 1+N | tools/ |
-| **核心文档** | 4 | README, INDEX, FAQ, Glossary |
-| **归档文档** | 13 | archives/ |
-| **总计** | **68** | 清晰分类 |
+| 类别         | 文档数 | 说明                         |
+| ------------ | ------ | ---------------------------- |
+| **学习指南** | 6      | guides/                      |
+| **核心概念** | 6      | core/                        |
+| **运行时**   | 4      | runtimes/                    |
+| **设计模式** | 3      | patterns/                    |
+| **性能优化** | 3      | performance/                 |
+| **生态系统** | 3      | ecosystem/                   |
+| **API参考**  | 3      | references/                  |
+| **综合指南** | 2      | comprehensive/               |
+| **多视角**   | 20     | views/                       |
+| **工具配置** | 1+N    | tools/                       |
+| **核心文档** | 4      | README, INDEX, FAQ, Glossary |
+| **归档文档** | 13     | archives/                    |
+| **总计**     | **68** | 清晰分类                     |
 
 ### 与重组前对比
 
-| 指标 | 重组前 | 重组后 | 改进 |
-| --- | --- | --- | --- |
-| **根目录文件** | 60+ | 4 | ✅ -93% |
-| **目录层级** | 混乱 | 清晰 | ✅ 规范 |
-| **查找难度** | 困难 | 容易 | ✅ 大幅降低 |
-| **冗余文档** | 多 | 已归档 | ✅ 已清理 |
-| **导航系统** | 缺失 | 完善 | ✅ 已建立 |
+| 指标           | 重组前 | 重组后 | 改进        |
+| -------------- | ------ | ------ | ----------- |
+| **根目录文件** | 60+    | 4      | ✅ -93%     |
+| **目录层级**   | 混乱   | 清晰   | ✅ 规范     |
+| **查找难度**   | 困难   | 容易   | ✅ 大幅降低 |
+| **冗余文档**   | 多     | 已归档 | ✅ 已清理   |
+| **导航系统**   | 缺失   | 完善   | ✅ 已建立   |
 
 ---
 

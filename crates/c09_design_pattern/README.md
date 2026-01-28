@@ -106,15 +106,15 @@
 
 ### 📖 Tier 3 文档完善 🎉
 
-- ✅ **新增模式使用快速参考** ([tier_03_references/06_模式使用快速参考.md](./docs/tier_03_references/06_模式使用快速参考.md))
+- ✅ **新增模式使用快速参考** ([tier*03_references/06*模式使用快速参考.md](./docs/tier_03_references/06_模式使用快速参考.md))
   - 为每个模式提供：何时使用/避免、复杂度、线程安全性
   - 覆盖所有 GoF 模式、并发模式和 Rust 特有模式
   - 包含 Rust 特性说明和实现要点
 
 ### 📖 Tier 1 文档完善 🎉
 
-- ✅ **新增 Tier 1 术语表** ([tier_01_foundations/03_术语表.md](./docs/tier_01_foundations/03_术语表.md)) - 核心术语快速参考
-- ✅ **新增 Tier 1 常见问题** ([tier_01_foundations/04_常见问题.md](./docs/tier_01_foundations/04_常见问题.md)) - 新手常见问题解答
+- ✅ **新增 Tier 1 术语表** ([tier*01_foundations/03*术语表.md](./docs/tier_01_foundations/03_术语表.md)) - 核心术语快速参考
+- ✅ **新增 Tier 1 常见问题** ([tier*01_foundations/04*常见问题.md](./docs/tier_01_foundations/04_常见问题.md)) - 新手常见问题解答
 - ✅ **完善 Tier 1 基础层** - 4个文档全部完成
 - ✅ **更新文档链接** - 所有交叉引用已更新
 
@@ -271,23 +271,23 @@
 
 ### 核心文档 📖
 
-| 文档 | 内容 | 难度 |
-| --- | --- | --- |
+| 文档                                                                                    | 内容                                             | 难度       |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------ | ---------- |
 | [`COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md`](docs/COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | 🌟**综合指南**：所有模式的理论、实践、形式化验证 | ⭐⭐⭐⭐⭐ |
-| [`09_design_patterns.md`](09_design_patterns.md) | 设计模式定义、数学表示、伪代码索引 | ⭐⭐⭐ |
-| [`IMPLEMENTATION_ROADMAP.md`](IMPLEMENTATION_ROADMAP.md) | Rust 1.92.0对齐路线图与实施计划 | ⭐⭐⭐⭐ |
-| [`PROJECT_COMPLETION_REPORT.md`](PROJECT_COMPLETION_REPORT.md) | 项目完成状态与1.90特性集成报告 | ⭐⭐⭐ |
+| [`09_design_patterns.md`](09_design_patterns.md)                                        | 设计模式定义、数学表示、伪代码索引               | ⭐⭐⭐     |
+| [`IMPLEMENTATION_ROADMAP.md`](IMPLEMENTATION_ROADMAP.md)                                | Rust 1.92.0对齐路线图与实施计划                  | ⭐⭐⭐⭐   |
+| [`PROJECT_COMPLETION_REPORT.md`](PROJECT_COMPLETION_REPORT.md)                          | 项目完成状态与1.90特性集成报告                   | ⭐⭐⭐     |
 
 ### 形式化理论文档 🔬
 
 #### 本模块形式化文档
 
-| 文档 | 主题 | 核心内容 |
-| --- | --- | --- |
-| [`docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md`](docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md) | **异步vs同步等价性** | CPS变换、Monad语义、控制流分析、性能对比 |
-| [`docs/ACTOR_REACTOR_PATTERNS.md`](docs/ACTOR_REACTOR_PATTERNS.md) | **Actor与Reactor模式** | 消息传递、事件驱动、调度机制、形式化证明 |
-| [`docs/CSP_VS_ASYNC_ANALYSIS.md`](docs/CSP_VS_ASYNC_ANALYSIS.md) | **CSP vs Rust Async** | Golang对比、Channel语义、调度模型、性能分析 |
-| [`docs/ASYNC_RECURSION_ANALYSIS.md`](docs/ASYNC_RECURSION_ANALYSIS.md) | **异步递归** | Box::pin原理、尾递归优化、性能分析、形式化证明 |
+| 文档                                                                             | 主题                   | 核心内容                                       |
+| -------------------------------------------------------------------------------- | ---------------------- | ---------------------------------------------- |
+| [`docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md`](docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md) | **异步vs同步等价性**   | CPS变换、Monad语义、控制流分析、性能对比       |
+| [`docs/ACTOR_REACTOR_PATTERNS.md`](docs/ACTOR_REACTOR_PATTERNS.md)               | **Actor与Reactor模式** | 消息传递、事件驱动、调度机制、形式化证明       |
+| [`docs/CSP_VS_ASYNC_ANALYSIS.md`](docs/CSP_VS_ASYNC_ANALYSIS.md)                 | **CSP vs Rust Async**  | Golang对比、Channel语义、调度模型、性能分析    |
+| [`docs/ASYNC_RECURSION_ANALYSIS.md`](docs/ASYNC_RECURSION_ANALYSIS.md)           | **异步递归**           | Box::pin原理、尾递归优化、性能分析、形式化证明 |
 
 #### 🔬 形式化工程系统理论
 
@@ -561,7 +561,7 @@ cargo bench
 
 ---
 
-*本模块专注于Rust设计模式的学习，提供系统性的学习路径和实践示例。如有任何问题或建议，欢迎反馈。*
+_本模块专注于Rust设计模式的学习，提供系统性的学习路径和实践示例。如有任何问题或建议，欢迎反馈。_
 
 ---
 

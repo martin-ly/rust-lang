@@ -114,7 +114,7 @@
 ### 1. 完整的应用场景覆盖
 
 | Rust 1.92.0 特性（自 Rust 1.90 引入） | 示例 | 实际场景数 | 代码行数 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
+param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
 | OnceLock | 单例模式 | 4 | 600 |
 | GATs | 观察者模式 | 4 | 700 |
 | async trait | 异步应用 | 4 | 650 |
@@ -347,4 +347,4 @@ OnceLock 访问:     1 ns
 
 ---
 
-*感谢使用 Rust 设计模式学习模块！如有任何问题或建议，欢迎反馈。*
+_感谢使用 Rust 设计模式学习模块！如有任何问题或建议，欢迎反馈。_

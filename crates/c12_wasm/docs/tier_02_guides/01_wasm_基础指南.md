@@ -332,7 +332,7 @@ WAT (WebAssembly Text) 是 WASM 的文本表示格式。
 
 ### 示例 1: 简单计算
 
-```rust
+````rust
 use wasm_bindgen::prelude::*;
 
 /// 加法函数
@@ -355,7 +355,7 @@ use wasm_bindgen::prelude::*;
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
-```
+````
 
 **编译和使用**:
 
@@ -408,7 +408,7 @@ pub fn reverse_string(s: &str) -> String {
 
 ### 示例 3: 数组操作
 
-```rust
+````rust
 use wasm_bindgen::prelude::*;
 
 /// 计算数组元素的和
@@ -460,29 +460,29 @@ pub fn calculate_average(numbers: &[f64]) -> f64 {
 pub fn find_max(numbers: &[i32]) -> Option<i32> {
     numbers.iter().max().copied()
 }
-```
+````
 
 **JavaScript 使用示例**:
 
 ```javascript
-import { sum_array, calculate_average, find_max } from './pkg/hello_wasm.js';
+import { sum_array, calculate_average, find_max } from "./pkg/hello_wasm.js"
 
 // 整数数组求和
-const intArray = new Int32Array([1, 2, 3, 4, 5]);
-console.log(sum_array(intArray)); // 15
+const intArray = new Int32Array([1, 2, 3, 4, 5])
+console.log(sum_array(intArray)) // 15
 
 // 浮点数数组平均值
-const floatArray = new Float64Array([1.5, 2.5, 3.5]);
-console.log(calculate_average(floatArray)); // 2.5
+const floatArray = new Float64Array([1.5, 2.5, 3.5])
+console.log(calculate_average(floatArray)) // 2.5
 
 // 查找最大值
-const maxArray = new Int32Array([10, 5, 20, 15]);
-console.log(find_max(maxArray)); // 20
+const maxArray = new Int32Array([10, 5, 20, 15])
+console.log(find_max(maxArray)) // 20
 ```
 
 ### 示例 4: 结构体和方法
 
-```rust
+````rust
 use wasm_bindgen::prelude::*;
 
 /// 计数器结构体
@@ -528,7 +528,7 @@ impl Counter {
         self.value
     }
 }
-```
+````
 
 ### 示例 5: 完整的 WAT 文本格式示例
 

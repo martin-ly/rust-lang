@@ -22,23 +22,23 @@ cargo run --example algorithm_comprehensive_demo
 
 ### 示例列表
 
-| 示例文件 | 说明 | 主要功能 |
-|---------|------|---------|
-| **algorithm_comprehensive_demo.rs** | 综合算法演示 | 展示排序、搜索、图算法、动态规划的综合使用 |
-| **algorithm_comparison_demo.rs** | 算法对比演示 | 对比不同算法的性能和复杂度 |
-| **algorithm_complexity_demo.rs** | 复杂度分析演示 | 展示算法复杂度分析和性能测量 |
-| **algorithm_optimization_demo.rs** | 算法优化演示 | 展示算法优化技巧和性能提升 |
-| **backtracking_algorithms_demo.rs** | 回溯算法演示 | N皇后、全排列、子集等回溯问题 |
-| **comprehensive_network_async_demo.rs** | 异步网络算法演示 | 展示异步图算法和网络处理 |
-| **cross_module_integration_demo.rs** | 跨模块集成演示 | 展示多个模块的协同使用 |
-| **data_structures_demo.rs** | 数据结构演示 | 展示各种数据结构的用法 |
-| **divide_conquer_demo.rs** | 分治算法演示 | 最大子段和、最近点对等分治问题 |
-| **dynamic_programming_demo.rs** | 动态规划演示 | LCS、背包问题等动态规划算法 |
-| **graph_algorithms_demo.rs** | 图算法演示 | BFS、DFS、最短路径、最小生成树 |
-| **greedy_algorithms_demo.rs** | 贪心算法演示 | 活动选择、霍夫曼编码等贪心问题 |
-| **searching_algorithms_demo.rs** | 搜索算法演示 | 线性搜索、二分搜索、并行搜索 |
-| **sorting_algorithms_demo.rs** | 排序算法演示 | 快速排序、归并排序、堆排序等 |
-| **string_algorithms_demo.rs** | 字符串算法演示 | KMP、Rabin-Karp、Aho-Corasick |
+| 示例文件                                | 说明             | 主要功能                                   |
+| --------------------------------------- | ---------------- | ------------------------------------------ |
+| **algorithm_comprehensive_demo.rs**     | 综合算法演示     | 展示排序、搜索、图算法、动态规划的综合使用 |
+| **algorithm_comparison_demo.rs**        | 算法对比演示     | 对比不同算法的性能和复杂度                 |
+| **algorithm_complexity_demo.rs**        | 复杂度分析演示   | 展示算法复杂度分析和性能测量               |
+| **algorithm_optimization_demo.rs**      | 算法优化演示     | 展示算法优化技巧和性能提升                 |
+| **backtracking_algorithms_demo.rs**     | 回溯算法演示     | N皇后、全排列、子集等回溯问题              |
+| **comprehensive_network_async_demo.rs** | 异步网络算法演示 | 展示异步图算法和网络处理                   |
+| **cross_module_integration_demo.rs**    | 跨模块集成演示   | 展示多个模块的协同使用                     |
+| **data_structures_demo.rs**             | 数据结构演示     | 展示各种数据结构的用法                     |
+| **divide_conquer_demo.rs**              | 分治算法演示     | 最大子段和、最近点对等分治问题             |
+| **dynamic_programming_demo.rs**         | 动态规划演示     | LCS、背包问题等动态规划算法                |
+| **graph_algorithms_demo.rs**            | 图算法演示       | BFS、DFS、最短路径、最小生成树             |
+| **greedy_algorithms_demo.rs**           | 贪心算法演示     | 活动选择、霍夫曼编码等贪心问题             |
+| **searching_algorithms_demo.rs**        | 搜索算法演示     | 线性搜索、二分搜索、并行搜索               |
+| **sorting_algorithms_demo.rs**          | 排序算法演示     | 快速排序、归并排序、堆排序等               |
+| **string_algorithms_demo.rs**           | 字符串算法演示   | KMP、Rabin-Karp、Aho-Corasick              |
 
 ## 📖 详细说明
 
@@ -47,11 +47,13 @@ cargo run --example algorithm_comprehensive_demo
 **综合算法演示** - 最完整的示例，展示库的核心功能。
 
 **运行**:
+
 ```bash
 cargo run --example algorithm_comprehensive_demo
 ```
 
 **主要内容**:
+
 - 排序算法（同步/并行/异步）
 - 搜索算法（线性/二分/并行）
 - 图算法（BFS/DFS/最短路径）
@@ -63,11 +65,13 @@ cargo run --example algorithm_comprehensive_demo
 **算法对比演示** - 对比不同算法的性能。
 
 **运行**:
+
 ```bash
 cargo run --example algorithm_comparison_demo
 ```
 
 **主要内容**:
+
 - 排序算法性能对比
 - 搜索算法性能对比
 - 复杂度分析
@@ -77,11 +81,13 @@ cargo run --example algorithm_comparison_demo
 **复杂度分析演示** - 展示算法复杂度分析方法。
 
 **运行**:
+
 ```bash
 cargo run --example algorithm_complexity_demo
 ```
 
 **主要内容**:
+
 - 时间复杂度分析
 - 空间复杂度分析
 - 性能基准测试
@@ -91,11 +97,13 @@ cargo run --example algorithm_complexity_demo
 **算法优化演示** - 展示算法优化技巧。
 
 **运行**:
+
 ```bash
 cargo run --example algorithm_optimization_demo
 ```
 
 **主要内容**:
+
 - 编译期优化
 - 运行时优化
 - 并行化优化
@@ -105,11 +113,13 @@ cargo run --example algorithm_optimization_demo
 **回溯算法演示** - 展示回溯算法的应用。
 
 **运行**:
+
 ```bash
 cargo run --example backtracking_algorithms_demo
 ```
 
 **主要内容**:
+
 - N皇后问题
 - 全排列生成
 - 子集生成
@@ -119,11 +129,13 @@ cargo run --example backtracking_algorithms_demo
 **异步网络算法演示** - 展示异步图算法和网络处理。
 
 **运行**:
+
 ```bash
 cargo run --example comprehensive_network_async_demo
 ```
 
 **主要内容**:
+
 - 异步图遍历
 - 异步最短路径
 - 异步网络处理
@@ -133,11 +145,13 @@ cargo run --example comprehensive_network_async_demo
 **跨模块集成演示** - 展示多个模块的协同使用。
 
 **运行**:
+
 ```bash
 cargo run --example cross_module_integration_demo
 ```
 
 **主要内容**:
+
 - 模块间数据传递
 - 组合使用多个算法
 - 复杂场景处理
@@ -147,11 +161,13 @@ cargo run --example cross_module_integration_demo
 **数据结构演示** - 展示各种数据结构的用法。
 
 **运行**:
+
 ```bash
 cargo run --example data_structures_demo
 ```
 
 **主要内容**:
+
 - 栈和队列
 - 堆和优先队列
 - 树和图结构
@@ -161,11 +177,13 @@ cargo run --example data_structures_demo
 **分治算法演示** - 展示分治算法的应用。
 
 **运行**:
+
 ```bash
 cargo run --example divide_conquer_demo
 ```
 
 **主要内容**:
+
 - 最大子段和
 - 最近点对问题
 - 分治排序
@@ -175,11 +193,13 @@ cargo run --example divide_conquer_demo
 **动态规划演示** - 展示动态规划算法的应用。
 
 **运行**:
+
 ```bash
 cargo run --example dynamic_programming_demo
 ```
 
 **主要内容**:
+
 - 最长公共子序列（LCS）
 - 0-1背包问题
 - 斐波那契数列
@@ -189,11 +209,13 @@ cargo run --example dynamic_programming_demo
 **图算法演示** - 展示图算法的应用。
 
 **运行**:
+
 ```bash
 cargo run --example graph_algorithms_demo
 ```
 
 **主要内容**:
+
 - 广度优先搜索（BFS）
 - 深度优先搜索（DFS）
 - 最短路径算法
@@ -204,11 +226,13 @@ cargo run --example graph_algorithms_demo
 **贪心算法演示** - 展示贪心算法的应用。
 
 **运行**:
+
 ```bash
 cargo run --example greedy_algorithms_demo
 ```
 
 **主要内容**:
+
 - 活动选择问题
 - 霍夫曼编码
 - 最小生成树（Kruskal）
@@ -218,11 +242,13 @@ cargo run --example greedy_algorithms_demo
 **搜索算法演示** - 展示搜索算法的应用。
 
 **运行**:
+
 ```bash
 cargo run --example searching_algorithms_demo
 ```
 
 **主要内容**:
+
 - 线性搜索
 - 二分搜索
 - 并行搜索
@@ -232,11 +258,13 @@ cargo run --example searching_algorithms_demo
 **排序算法演示** - 展示排序算法的应用。
 
 **运行**:
+
 ```bash
 cargo run --example sorting_algorithms_demo
 ```
 
 **主要内容**:
+
 - 快速排序
 - 归并排序
 - 堆排序
@@ -247,11 +275,13 @@ cargo run --example sorting_algorithms_demo
 **字符串算法演示** - 展示字符串算法的应用。
 
 **运行**:
+
 ```bash
 cargo run --example string_algorithms_demo
 ```
 
 **主要内容**:
+
 - KMP算法
 - Rabin-Karp算法
 - Aho-Corasick多模式匹配

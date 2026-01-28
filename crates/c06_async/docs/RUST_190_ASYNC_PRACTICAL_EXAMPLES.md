@@ -35,7 +35,7 @@
 
 Rust 1.90 允许在 trait 中直接使用 `async fn`，无需 `#[async_trait]` 宏。
 
-```rust
+````rust
 //! Rust 1.90: async trait 原生支持
 //!
 //! Cargo.toml:
@@ -131,7 +131,7 @@ pub async fn demo_async_trait() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
-```
+````
 
 ### 2. async closure
 

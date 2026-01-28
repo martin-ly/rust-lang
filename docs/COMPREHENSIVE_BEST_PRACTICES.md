@@ -282,7 +282,7 @@ fn test_integration() {
 
 **✅ 最佳实践**:
 
-```rust
+````rust
 /// 计算两个数的和
 ///
 /// # 示例
@@ -294,7 +294,7 @@ fn test_integration() {
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
-```
+````
 
 ---
 
@@ -304,7 +304,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 **✅ 最佳实践**:
 
-```rust
+````rust
 /// 处理数据的函数
 ///
 /// # 参数
@@ -324,7 +324,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 pub fn process_data(data: &[i32]) -> i32 {
     data.iter().sum()
 }
-```
+````
 
 ### 5.2 README 文档
 

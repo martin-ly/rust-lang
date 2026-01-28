@@ -134,7 +134,7 @@ cargo test
 
 #### 文档规范
 
-```rust
+````rust
 /// 异步资源管理器
 ///
 /// 提供异步资源的生命周期管理，支持自动清理和资源池化。
@@ -158,7 +158,7 @@ cargo test
 pub struct AsyncResourceManager {
     // ...
 }
-```
+````
 
 ### 3. 问题报告
 

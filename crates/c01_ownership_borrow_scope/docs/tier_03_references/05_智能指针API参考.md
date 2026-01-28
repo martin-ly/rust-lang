@@ -115,7 +115,7 @@ let weak_count = weak.weak_count();
 
 **相关文档**:
 
-- [Tier 2: 05_智能指针实践](../tier_02_guides/05_智能指针实践.md)
+- [Tier 2: 05\_智能指针实践](../tier_02_guides/05_智能指针实践.md)
 
 ---
 

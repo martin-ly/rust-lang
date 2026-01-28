@@ -68,13 +68,13 @@
 
 **核心原则**:
 
-| 原则 | 说明 | 价值 |
-| --- | --- | --- |
-| 早测试 | 开发过程中持续测试 | 及早发现问题 |
-| 自动化 | 尽可能自动化测试流程 | 提高效率 |
-| 快速反馈 | 单元测试应秒级完成 | 快速迭代 |
-| 真实环境 | 测试接近生产环境 | 发现实际问题 |
-| 全面覆盖 | 覆盖边界和异常情况 | 提高质量 |
+| 原则     | 说明                 | 价值         |
+| -------- | -------------------- | ------------ |
+| 早测试   | 开发过程中持续测试   | 及早发现问题 |
+| 自动化   | 尽可能自动化测试流程 | 提高效率     |
+| 快速反馈 | 单元测试应秒级完成   | 快速迭代     |
+| 真实环境 | 测试接近生产环境     | 发现实际问题 |
+| 全面覆盖 | 覆盖边界和异常情况   | 提高质量     |
 
 ---
 
@@ -255,30 +255,30 @@ add_test(NAME WasmTests COMMAND tests)
 
 ```typescript
 // assembly/__tests__/example.spec.ts
-import { fibonacci, isPalindrome } from "../index";
+import { fibonacci, isPalindrome } from "../index"
 
 describe("Math Functions", () => {
   it("should calculate fibonacci correctly", () => {
-    expect(fibonacci(0)).toBe(0);
-    expect(fibonacci(1)).toBe(1);
-    expect(fibonacci(10)).toBe(55);
-  });
+    expect(fibonacci(0)).toBe(0)
+    expect(fibonacci(1)).toBe(1)
+    expect(fibonacci(10)).toBe(55)
+  })
 
   it("should handle large numbers", () => {
-    expect(fibonacci(20)).toBe(6765);
-  });
-});
+    expect(fibonacci(20)).toBe(6765)
+  })
+})
 
 describe("String Functions", () => {
   it("should detect palindromes", () => {
-    expect(isPalindrome("racecar")).toBe(true);
-    expect(isPalindrome("hello")).toBe(false);
-  });
+    expect(isPalindrome("racecar")).toBe(true)
+    expect(isPalindrome("hello")).toBe(false)
+  })
 
   it("should be case insensitive", () => {
-    expect(isPalindrome("RaceCar")).toBe(true);
-  });
-});
+    expect(isPalindrome("RaceCar")).toBe(true)
+  })
+})
 ```
 
 **运行测试**:
@@ -304,85 +304,85 @@ npm test -- --coverage
 
 ```typescript
 // tests/integration.test.ts
-import { describe, it, expect, beforeAll } from 'vitest';
-import init, { greet, process_data, Counter } from '../pkg/mylib';
+import { describe, it, expect, beforeAll } from "vitest"
+import init, { greet, process_data, Counter } from "../pkg/mylib"
 
-describe('Wasm Integration Tests', () => {
+describe("Wasm Integration Tests", () => {
   beforeAll(async () => {
     // 初始化 WASM 模块
-    await init();
-  });
+    await init()
+  })
 
-  describe('Basic Functions', () => {
-    it('should greet correctly', () => {
-      expect(greet('World')).toBe('Hello, World!');
-      expect(greet('')).toBe('Hello, !');
-    });
+  describe("Basic Functions", () => {
+    it("should greet correctly", () => {
+      expect(greet("World")).toBe("Hello, World!")
+      expect(greet("")).toBe("Hello, !")
+    })
 
-    it('should handle special characters', () => {
-      expect(greet('测试')).toBe('Hello, 测试!');
-    });
-  });
+    it("should handle special characters", () => {
+      expect(greet("测试")).toBe("Hello, 测试!")
+    })
+  })
 
-  describe('Data Processing', () => {
-    it('should process large data efficiently', () => {
-      const input = new Uint8Array(1_000_000);
-      input.fill(42);
+  describe("Data Processing", () => {
+    it("should process large data efficiently", () => {
+      const input = new Uint8Array(1_000_000)
+      input.fill(42)
 
-      const start = performance.now();
-      const output = process_data(input);
-      const duration = performance.now() - start;
+      const start = performance.now()
+      const output = process_data(input)
+      const duration = performance.now() - start
 
-      expect(output.length).toBe(1_000_000);
-      expect(duration).toBeLessThan(100); // < 100ms
-    });
+      expect(output.length).toBe(1_000_000)
+      expect(duration).toBeLessThan(100) // < 100ms
+    })
 
-    it('should handle edge cases', () => {
-      expect(() => process_data(null)).toThrow();
-      expect(process_data(new Uint8Array(0))).toHaveLength(0);
-    });
-  });
+    it("should handle edge cases", () => {
+      expect(() => process_data(null)).toThrow()
+      expect(process_data(new Uint8Array(0))).toHaveLength(0)
+    })
+  })
 
-  describe('Class Instances', () => {
-    it('should manage state correctly', () => {
-      const counter = new Counter();
-      expect(counter.value()).toBe(0);
+  describe("Class Instances", () => {
+    it("should manage state correctly", () => {
+      const counter = new Counter()
+      expect(counter.value()).toBe(0)
 
-      counter.increment();
-      expect(counter.value()).toBe(1);
+      counter.increment()
+      expect(counter.value()).toBe(1)
 
-      counter.increment();
-      expect(counter.value()).toBe(2);
+      counter.increment()
+      expect(counter.value()).toBe(2)
 
-      counter.reset();
-      expect(counter.value()).toBe(0);
-    });
-  });
-});
+      counter.reset()
+      expect(counter.value()).toBe(0)
+    })
+  })
+})
 ```
 
 **性能基准测试**:
 
 ```typescript
 // tests/benchmark.test.ts
-import { bench, describe } from 'vitest';
-import { wasmSum, jsSum } from '../src';
+import { bench, describe } from "vitest"
+import { wasmSum, jsSum } from "../src"
 
-describe('Performance Comparison', () => {
-  const largeArray = new Int32Array(1_000_000).fill(1);
+describe("Performance Comparison", () => {
+  const largeArray = new Int32Array(1_000_000).fill(1)
 
-  bench('WASM implementation', () => {
-    wasmSum(largeArray);
-  });
+  bench("WASM implementation", () => {
+    wasmSum(largeArray)
+  })
 
-  bench('JavaScript implementation', () => {
-    jsSum(largeArray);
-  });
+  bench("JavaScript implementation", () => {
+    jsSum(largeArray)
+  })
 
-  bench('Native array reduce', () => {
-    largeArray.reduce((a, b) => a + b, 0);
-  });
-});
+  bench("Native array reduce", () => {
+    largeArray.reduce((a, b) => a + b, 0)
+  })
+})
 ```
 
 ---
@@ -474,143 +474,146 @@ echo "✅ Tests passed in $RUNTIME"
 
 ```typescript
 // tests/e2e/app.spec.ts
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test"
 
-test.describe('WASM Application E2E', () => {
+test.describe("WASM Application E2E", () => {
   test.beforeEach(async ({ page }) => {
     // 导航到应用
-    await page.goto('http://localhost:3000');
+    await page.goto("http://localhost:3000")
 
     // 等待 WASM 加载完成
-    await page.waitForFunction(() => {
-      return typeof window.wasmReady !== 'undefined' && window.wasmReady === true;
-    }, { timeout: 10000 });
-  });
+    await page.waitForFunction(
+      () => {
+        return typeof window.wasmReady !== "undefined" && window.wasmReady === true
+      },
+      { timeout: 10000 }
+    )
+  })
 
-  test('应用加载并初始化', async ({ page }) => {
+  test("应用加载并初始化", async ({ page }) => {
     // 检查标题
-    await expect(page).toHaveTitle(/WASM App/);
+    await expect(page).toHaveTitle(/WASM App/)
 
     // 检查主要元素
-    await expect(page.locator('#app')).toBeVisible();
-    await expect(page.locator('#compute-button')).toBeEnabled();
-  });
+    await expect(page.locator("#app")).toBeVisible()
+    await expect(page.locator("#compute-button")).toBeEnabled()
+  })
 
-  test('基本计算功能', async ({ page }) => {
+  test("基本计算功能", async ({ page }) => {
     // 输入数据
-    await page.fill('#input', '42');
+    await page.fill("#input", "42")
 
     // 点击计算
-    await page.click('#compute-button');
+    await page.click("#compute-button")
 
     // 等待结果
-    await page.waitForSelector('#result:not(:empty)');
+    await page.waitForSelector("#result:not(:empty)")
 
     // 验证结果
-    const result = await page.textContent('#result');
-    expect(result).toBe('1764'); // 42^2
-  });
+    const result = await page.textContent("#result")
+    expect(result).toBe("1764") // 42^2
+  })
 
-  test('处理大文件上传', async ({ page }) => {
+  test("处理大文件上传", async ({ page }) => {
     // 创建 10MB 测试文件
-    const testFile = Buffer.alloc(10 * 1024 * 1024, 'A');
+    const testFile = Buffer.alloc(10 * 1024 * 1024, "A")
 
     // 上传文件
-    const fileInput = await page.locator('input[type="file"]');
+    const fileInput = await page.locator('input[type="file"]')
     await fileInput.setInputFiles({
-      name: 'test.bin',
-      mimeType: 'application/octet-stream',
+      name: "test.bin",
+      mimeType: "application/octet-stream",
       buffer: testFile,
-    });
+    })
 
     // 开始处理
-    await page.click('#process-button');
+    await page.click("#process-button")
 
     // 等待进度条
     await page.waitForSelector('#progress[value="100"]', {
-      timeout: 30000
-    });
+      timeout: 30000,
+    })
 
     // 验证下载链接
-    const downloadLink = await page.getAttribute('#download-link', 'href');
-    expect(downloadLink).toMatch(/^blob:/);
-  });
+    const downloadLink = await page.getAttribute("#download-link", "href")
+    expect(downloadLink).toMatch(/^blob:/)
+  })
 
-  test('性能监控', async ({ page }) => {
-    const start = Date.now();
+  test("性能监控", async ({ page }) => {
+    const start = Date.now()
 
     // 执行计算
-    await page.click('#heavy-compute-button');
-    await page.waitForSelector('#result:not(:empty)');
+    await page.click("#heavy-compute-button")
+    await page.waitForSelector("#result:not(:empty)")
 
-    const duration = Date.now() - start;
+    const duration = Date.now() - start
 
     // 验证性能
-    expect(duration).toBeLessThan(5000); // < 5秒
+    expect(duration).toBeLessThan(5000) // < 5秒
 
     // 检查性能指标
     const metrics = await page.evaluate(() => {
-      const entries = performance.getEntriesByType('measure');
+      const entries = performance.getEntriesByType("measure")
       return entries.map(e => ({
         name: e.name,
-        duration: e.duration
-      }));
-    });
+        duration: e.duration,
+      }))
+    })
 
-    console.log('Performance metrics:', metrics);
-  });
+    console.log("Performance metrics:", metrics)
+  })
 
-  test('错误处理', async ({ page }) => {
+  test("错误处理", async ({ page }) => {
     // 触发错误
-    await page.fill('#input', 'invalid');
-    await page.click('#compute-button');
+    await page.fill("#input", "invalid")
+    await page.click("#compute-button")
 
     // 验证错误消息
-    await expect(page.locator('.error-message')).toBeVisible();
-    await expect(page.locator('.error-message')).toContainText('Invalid input');
-  });
-});
+    await expect(page.locator(".error-message")).toBeVisible()
+    await expect(page.locator(".error-message")).toContainText("Invalid input")
+  })
+})
 ```
 
 **配置文件**:
 
 ```typescript
 // playwright.config.ts
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test"
 
 export default defineConfig({
-  testDir: './tests/e2e',
+  testDir: "./tests/e2e",
   timeout: 30000,
   retries: 2,
   workers: 4,
 
   use: {
-    baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
+    baseURL: "http://localhost:3000",
+    trace: "on-first-retry",
+    screenshot: "only-on-failure",
   },
 
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
     },
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
     },
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
     },
   ],
 
   webServer: {
-    command: 'npm run dev',
+    command: "npm run dev",
     port: 3000,
     reuseExistingServer: !process.env.CI,
   },
-});
+})
 ```
 
 ---
@@ -772,78 +775,80 @@ warm_up_time = 3
 
 ```javascript
 // tests/memory-leak.test.js
-import { test, expect } from 'vitest';
-import init, { processData } from '../pkg/mylib';
+import { test, expect } from "vitest"
+import init, { processData } from "../pkg/mylib"
 
-test('检测内存泄漏', async () => {
-  await init();
+test("检测内存泄漏", async () => {
+  await init()
 
-  const iterations = 10000;
-  const measurements = [];
+  const iterations = 10000
+  const measurements = []
 
   for (let i = 0; i < iterations; i++) {
     // 执行操作
-    const data = new Uint8Array(1024);
-    processData(data);
+    const data = new Uint8Array(1024)
+    processData(data)
 
     // 每 1000 次记录内存使用
     if (i % 1000 === 0) {
       // 强制 GC（Node.js）
       if (global.gc) {
-        global.gc();
+        global.gc()
       }
 
-      const usage = process.memoryUsage();
+      const usage = process.memoryUsage()
       measurements.push({
         iteration: i,
         heapUsed: usage.heapUsed,
         external: usage.external,
-      });
+      })
 
-      console.log(`Iteration ${i}: Heap ${(usage.heapUsed / 1024 / 1024).toFixed(2)} MB`);
+      console.log(`Iteration ${i}: Heap ${(usage.heapUsed / 1024 / 1024).toFixed(2)} MB`)
     }
   }
 
   // 分析内存增长趋势
-  const firstMeasure = measurements[0].heapUsed;
-  const lastMeasure = measurements[measurements.length - 1].heapUsed;
-  const growth = lastMeasure - firstMeasure;
-  const growthPercent = (growth / firstMeasure) * 100;
+  const firstMeasure = measurements[0].heapUsed
+  const lastMeasure = measurements[measurements.length - 1].heapUsed
+  const growth = lastMeasure - firstMeasure
+  const growthPercent = (growth / firstMeasure) * 100
 
-  console.log(`Memory growth: ${(growth / 1024 / 1024).toFixed(2)} MB (${growthPercent.toFixed(2)}%)`);
+  console.log(
+    `Memory growth: ${(growth / 1024 / 1024).toFixed(2)} MB (${growthPercent.toFixed(2)}%)`
+  )
 
   // 内存增长应该小于 10%
-  expect(growthPercent).toBeLessThan(10);
-});
+  expect(growthPercent).toBeLessThan(10)
+})
 ```
 
 **WebAssembly 内存监控**:
 
 ```javascript
-test('WASM 线性内存增长测试', async () => {
-  const module = await WebAssembly.compile(wasmBytes);
+test("WASM 线性内存增长测试", async () => {
+  const module = await WebAssembly.compile(wasmBytes)
   const memory = new WebAssembly.Memory({
-    initial: 1,    // 64KB
-    maximum: 100   // 6.4MB
-  });
+    initial: 1, // 64KB
+    maximum: 100, // 6.4MB
+  })
 
   const instance = await WebAssembly.instantiate(module, {
-    env: { memory }
-  });
+    env: { memory },
+  })
 
   // 初始大小
-  expect(memory.buffer.byteLength).toBe(65536); // 1 page
+  expect(memory.buffer.byteLength).toBe(65536) // 1 page
 
   // 分配大缓冲区
-  instance.exports.allocate_large_buffer(1000000); // 1MB
+  instance.exports.allocate_large_buffer(1000000) // 1MB
 
   // 检查内存增长
-  const pages = memory.buffer.byteLength / 65536;
-  expect(pages).toBeGreaterThan(1);
-  expect(pages).toBeLessThanOrEqual(100);
+  const pages = memory.buffer.byteLength / 65536
+  expect(pages).toBeGreaterThan(1)
+  expect(pages).toBeLessThanOrEqual(100)
 
-  console.log(`Memory pages: ${pages}`);
-});
+  console.log(`Memory pages: ${pages}`)
+})
 ```
 
 ---
@@ -980,36 +985,36 @@ if __name__ == '__main__':
 
 ```typescript
 // tests/snapshot.test.ts
-import { test, expect } from 'vitest';
-import { renderWasmOutput } from '../src/renderer';
+import { test, expect } from "vitest"
+import { renderWasmOutput } from "../src/renderer"
 
-test('渲染输出快照测试', () => {
+test("渲染输出快照测试", () => {
   const input = {
     data: [1, 2, 3, 4, 5],
-    options: { format: 'json' }
-  };
+    options: { format: "json" },
+  }
 
-  const output = renderWasmOutput(input);
+  const output = renderWasmOutput(input)
 
   // 第一次运行会创建快照
   // 后续运行会对比快照
-  expect(output).toMatchSnapshot();
-});
+  expect(output).toMatchSnapshot()
+})
 
-test('复杂数据结构快照', () => {
+test("复杂数据结构快照", () => {
   const complexData = {
     users: [
-      { id: 1, name: 'Alice', roles: ['admin'] },
-      { id: 2, name: 'Bob', roles: ['user'] }
+      { id: 1, name: "Alice", roles: ["admin"] },
+      { id: 2, name: "Bob", roles: ["user"] },
     ],
     metadata: {
-      version: '1.0',
-      timestamp: 1234567890
-    }
-  };
+      version: "1.0",
+      timestamp: 1234567890,
+    },
+  }
 
-  expect(processComplexData(complexData)).toMatchSnapshot();
-});
+  expect(processComplexData(complexData)).toMatchSnapshot()
+})
 ```
 
 **更新快照**:
@@ -1159,53 +1164,53 @@ mod property_tests {
 
 ```javascript
 // tests/mock-imports.test.js
-import { test, expect } from 'vitest';
+import { test, expect } from "vitest"
 
-test('Mock WASM 导入', async () => {
-  const logBuffer = [];
-  const fetchResponses = new Map();
+test("Mock WASM 导入", async () => {
+  const logBuffer = []
+  const fetchResponses = new Map()
 
   // 创建 Mock 导入
   const mockImports = {
     env: {
       // Mock 日志函数
       log: (ptr, len) => {
-        const message = readWasmString(ptr, len);
-        logBuffer.push(message);
-        console.log('[MOCK LOG]', message);
+        const message = readWasmString(ptr, len)
+        logBuffer.push(message)
+        console.log("[MOCK LOG]", message)
       },
 
       // Mock 数据获取
       fetch_data: (url_ptr, url_len) => {
-        const url = readWasmString(url_ptr, url_len);
-        const response = fetchResponses.get(url) || 'default response';
-        return writeWasmString(response);
+        const url = readWasmString(url_ptr, url_len)
+        const response = fetchResponses.get(url) || "default response"
+        return writeWasmString(response)
       },
 
       // Mock 时间函数
       get_time: () => {
-        return 1234567890; // 固定时间戳
+        return 1234567890 // 固定时间戳
       },
     },
-  };
+  }
 
   // 设置测试数据
-  fetchResponses.set('https://api.example.com/data', '{"value": 42}');
+  fetchResponses.set("https://api.example.com/data", '{"value": 42}')
 
   // 实例化 WASM 模块
-  const module = await WebAssembly.compile(wasmBytes);
-  const instance = await WebAssembly.instantiate(module, mockImports);
+  const module = await WebAssembly.compile(wasmBytes)
+  const instance = await WebAssembly.instantiate(module, mockImports)
 
   // 运行测试
-  instance.exports.run_test();
+  instance.exports.run_test()
 
   // 验证日志
-  expect(logBuffer).toContain('Test started');
-  expect(logBuffer).toContain('Fetching data');
+  expect(logBuffer).toContain("Test started")
+  expect(logBuffer).toContain("Fetching data")
 
   // 验证调用
-  expect(logBuffer.length).toBeGreaterThan(0);
-});
+  expect(logBuffer.length).toBeGreaterThan(0)
+})
 ```
 
 **WASI Mock**:
@@ -1327,7 +1332,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm ci
@@ -1519,10 +1524,10 @@ if __name__ == '__main__':
 **比例分配**:
 
 | 测试类型 | 比例 | 数量示例 | 运行时间 |
-| --- | --- | --- | --- |
-| 单元测试 | 70% | 700+ | 秒级 |
-| 集成测试 | 20% | 200+ | 分钟级 |
-| E2E 测试 | 10% | 100+ | 小时级 |
+| -------- | ---- | -------- | -------- |
+| 单元测试 | 70%  | 700+     | 秒级     |
+| 集成测试 | 20%  | 200+     | 分钟级   |
+| E2E 测试 | 10%  | 100+     | 小时级   |
 
 **实施策略**:
 

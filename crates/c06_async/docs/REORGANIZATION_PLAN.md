@@ -103,32 +103,32 @@ docs/
 
 ### 文件映射表
 
-| 旧文件名 | 新文件名 | 操作 |
-| --- | --- | --- |
-| `quick_start.md` + `QUICK_START_2025.md` | `guides/01_quick_start.md` | 合并 |
-| `async_basics_guide.md` | `guides/02_basics.md` | 移动+重命名 |
-| `async_advanced_topics.md` | `guides/03_advanced_topics.md` | 移动+重命名 |
-| `async_best_practices.md` | `guides/04_best_practices.md` | 移动+重命名 |
-| `async_style_guide.md` | `guides/05_style_guide.md` | 移动+重命名 |
-| `run_guide.md` | `guides/06_run_guide.md` | 移动+重命名 |
-| `ASYNC_RUNTIME_COMPARISON_2025.md` | `runtimes/01_comparison_2025.md` | 移动+重命名 |
-| `tokio_best_practices_2025.md` | `runtimes/02_tokio_best_practices.md` | 移动+重命名 |
-| `smol_best_practices_2025.md` | `runtimes/03_smol_best_practices.md` | 移动+重命名 |
-| `async_cookbook_tokio_smol.md` | `runtimes/04_cookbook.md` | 移动+重命名 |
-| `ASYNC_PATTERNS_COMPARISON_2025.md` | `patterns/01_patterns_comparison.md` | 移动+重命名 |
-| `async_patterns_and_pitfalls.md` | `patterns/02_patterns_and_pitfalls.md` | 移动 |
-| `advanced_patterns_summary.md` | `patterns/03_advanced_patterns.md` | 移动+重命名 |
-| `async_performance_optimization_2025.md` | `performance/01_optimization_guide.md` | 移动+重命名 |
-| `benchmark_analysis_guide.md` | `performance/02_benchmark_analysis.md` | 移动+重命名 |
-| `benchmark_results.md` | `performance/03_benchmark_results.md` | 移动 |
-| `RUST_ASYNC_ECOSYSTEM_...2025.md` + 2个 | `ecosystem/01_ecosystem_analysis_2025.md` | 合并 |
-| `async_language_features_190.md` | `ecosystem/02_language_features_190.md` | 移动 |
-| `formal_methods_async.md` | `ecosystem/03_formal_methods.md` | 移动+重命名 |
-| `ASYNC_COMPREHENSIVE_GUIDE_2025.md` | `comprehensive/comprehensive_guide_2025.md` | 移动 |
-| `ULTIMATE_ASYNC_GUIDE_2025_CN.md` | `comprehensive/ultimate_guide_cn.md` | 移动+重命名 |
-| `tokio_console_and_tracing.md` | `tools/tokio_console_tracing.md` | 移动+重命名 |
-| `view01.md` ... `view14.md` | `views/basic/view01.md` ... | 移动 |
-| `views/*` | `views/specialized/*` | 移动并重命名 |
+| 旧文件名                                 | 新文件名                                    | 操作         |
+| ---------------------------------------- | ------------------------------------------- | ------------ |
+| `quick_start.md` + `QUICK_START_2025.md` | `guides/01_quick_start.md`                  | 合并         |
+| `async_basics_guide.md`                  | `guides/02_basics.md`                       | 移动+重命名  |
+| `async_advanced_topics.md`               | `guides/03_advanced_topics.md`              | 移动+重命名  |
+| `async_best_practices.md`                | `guides/04_best_practices.md`               | 移动+重命名  |
+| `async_style_guide.md`                   | `guides/05_style_guide.md`                  | 移动+重命名  |
+| `run_guide.md`                           | `guides/06_run_guide.md`                    | 移动+重命名  |
+| `ASYNC_RUNTIME_COMPARISON_2025.md`       | `runtimes/01_comparison_2025.md`            | 移动+重命名  |
+| `tokio_best_practices_2025.md`           | `runtimes/02_tokio_best_practices.md`       | 移动+重命名  |
+| `smol_best_practices_2025.md`            | `runtimes/03_smol_best_practices.md`        | 移动+重命名  |
+| `async_cookbook_tokio_smol.md`           | `runtimes/04_cookbook.md`                   | 移动+重命名  |
+| `ASYNC_PATTERNS_COMPARISON_2025.md`      | `patterns/01_patterns_comparison.md`        | 移动+重命名  |
+| `async_patterns_and_pitfalls.md`         | `patterns/02_patterns_and_pitfalls.md`      | 移动         |
+| `advanced_patterns_summary.md`           | `patterns/03_advanced_patterns.md`          | 移动+重命名  |
+| `async_performance_optimization_2025.md` | `performance/01_optimization_guide.md`      | 移动+重命名  |
+| `benchmark_analysis_guide.md`            | `performance/02_benchmark_analysis.md`      | 移动+重命名  |
+| `benchmark_results.md`                   | `performance/03_benchmark_results.md`       | 移动         |
+| `RUST_ASYNC_ECOSYSTEM_...2025.md` + 2个  | `ecosystem/01_ecosystem_analysis_2025.md`   | 合并         |
+| `async_language_features_190.md`         | `ecosystem/02_language_features_190.md`     | 移动         |
+| `formal_methods_async.md`                | `ecosystem/03_formal_methods.md`            | 移动+重命名  |
+| `ASYNC_COMPREHENSIVE_GUIDE_2025.md`      | `comprehensive/comprehensive_guide_2025.md` | 移动         |
+| `ULTIMATE_ASYNC_GUIDE_2025_CN.md`        | `comprehensive/ultimate_guide_cn.md`        | 移动+重命名  |
+| `tokio_console_and_tracing.md`           | `tools/tokio_console_tracing.md`            | 移动+重命名  |
+| `view01.md` ... `view14.md`              | `views/basic/view01.md` ...                 | 移动         |
+| `views/*`                                | `views/specialized/*`                       | 移动并重命名 |
 
 ---
 

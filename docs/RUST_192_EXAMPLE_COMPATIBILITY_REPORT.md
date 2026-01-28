@@ -79,103 +79,113 @@
 
 ### 2.1 根目录示例
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
-| `examples/algorithm_comprehensive_demo.rs` | ✅ 兼容 | 算法综合演示 |
+| 文件路径                                       | 状态      | 说明                                 |
+| ---------------------------------------------- | --------- | ------------------------------------ |
+| `examples/algorithm_comprehensive_demo.rs`     | ✅ 兼容   | 算法综合演示                         |
 | `examples/comprehensive_network_async_demo.rs` | ✅ 已检查 | 网络异步综合演示（Rust 1.93.0 兼容） |
-| `examples/cross_module_integration_demo.rs` | ⏳ 待检查 | 跨模块集成演示 |
+| `examples/cross_module_integration_demo.rs`    | ⏳ 待检查 | 跨模块集成演示                       |
 
 ### 2.2 C01 - 所有权和借用作用域
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
-| `crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs` | ✅ 兼容 | Rust 1.92.0 特性演示 |
-| `crates/c01_ownership_borrow_scope/examples/rust_192_new_zeroed_demo.rs` | ✅ 兼容 | Box::new_zeroed 演示 |
-| `crates/c01_ownership_borrow_scope/examples/rust_191_features_demo.rs` | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
+| 文件路径                                                                   | 状态        | 说明                     |
+| -------------------------------------------------------------------------- | ----------- | ------------------------ |
+| `crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs`     | ✅ 兼容     | Rust 1.92.0 特性演示     |
+| `crates/c01_ownership_borrow_scope/examples/rust_192_new_zeroed_demo.rs`   | ✅ 兼容     | Box::new_zeroed 演示     |
+| `crates/c01_ownership_borrow_scope/examples/rust_191_features_demo.rs`     | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
 | `crates/c01_ownership_borrow_scope/examples/rust_190_features_examples.rs` | ⚠️ 历史版本 | Rust 1.90 特性（已标记） |
 | `crates/c01_ownership_borrow_scope/examples/rust_189_features_examples.rs` | ⚠️ 历史版本 | Rust 1.89 特性（已标记） |
 
 ### 2.3 C02 - 类型系统
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
+| 文件路径                                                    | 状态        | 说明                     |
+| ----------------------------------------------------------- | ----------- | ------------------------ |
 | `crates/c02_type_system/examples/rust_191_features_demo.rs` | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
 
 ### 2.4 C03 - 控制流和函数
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
-| `crates/c03_control_fn/examples/rust_189_*` | ⚠️ 历史版本 | Rust 1.89 特性（已标记） |
-| `crates/c03_control_fn/examples/rust_190_*` | ⚠️ 历史版本 | Rust 1.90 特性（已标记） |
+| 文件路径                                                   | 状态        | 说明                     |
+| ---------------------------------------------------------- | ----------- | ------------------------ |
+| `crates/c03_control_fn/examples/rust_189_*`                | ⚠️ 历史版本 | Rust 1.89 特性（已标记） |
+| `crates/c03_control_fn/examples/rust_190_*`                | ⚠️ 历史版本 | Rust 1.90 特性（已标记） |
 | `crates/c03_control_fn/examples/rust_191_features_demo.rs` | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
 
 ### 2.5 C04 - 泛型
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
-| `crates/c04_generic/examples/generic_collections_demo.rs` | ⏳ 待检查 | 泛型集合演示 |
-| `crates/c04_generic/examples/rust_191_features_demo.rs` | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
+| 文件路径                                                  | 状态        | 说明                     |
+| --------------------------------------------------------- | ----------- | ------------------------ |
+| `crates/c04_generic/examples/generic_collections_demo.rs` | ⏳ 待检查   | 泛型集合演示             |
+| `crates/c04_generic/examples/rust_191_features_demo.rs`   | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
 
 ### 2.6 C05 - 线程和并发
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
-| 待补充 | ⏳ 待检查 | - |
+| 文件路径                                                            | 状态        | 说明                     |
+| ------------------------------------------------------------------- | ----------- | ------------------------ |
+| `crates/c05_threads/examples/rust_192_features_demo.rs`             | ✅ 兼容     | Rust 1.92.0 特性演示     |
+| `crates/c05_threads/examples/rust_190_features_demo.rs`             | ⚠️ 历史版本 | Rust 1.90 特性（已标记） |
+| `crates/c05_threads/examples/advanced_rust190_demo.rs`              | ⚠️ 历史版本 | Rust 1.90 特性（已标记） |
+| `crates/c05_threads/examples/message_passing_demo.rs`               | ⏳ 待检查   | 消息传递示例             |
+| `crates/c05_threads/examples/priority_channels_demo.rs`             | ⏳ 待检查   | 优先级通道示例           |
+| `crates/c05_threads/examples/stream_backpressure_demo.rs`           | ⏳ 待检查   | 流式背压示例             |
+| `crates/c05_threads/examples/stream_rate_batch_demo.rs`             | ⏳ 待检查   | 限速/批处理示例          |
+| `crates/c05_threads/examples/backpressure_overview_demo.rs`         | ⏳ 待检查   | 背压概览示例             |
+| `crates/c05_threads/examples/performance_optimization_demo.rs`      | ⏳ 待检查   | 性能优化示例             |
+| `crates/c05_threads/examples/real_world_threading_demo.rs`          | ⏳ 待检查   | 真实场景线程示例         |
+| `crates/c05_threads/examples/advanced_concurrency_patterns_demo.rs` | ⏳ 待检查   | 高级并发模式示例         |
 
 ### 2.7 C06 - 异步编程
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
-| `crates/c06_async/examples/rust_191_features_demo.rs` | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
-| `crates/c06_async/examples/comprehensive_async_patterns_2025.rs` | ⏳ 待检查 | 异步模式综合演示 |
+| 文件路径                                                         | 状态        | 说明                     |
+| ---------------------------------------------------------------- | ----------- | ------------------------ |
+| `crates/c06_async/examples/rust_191_features_demo.rs`            | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
+| `crates/c06_async/examples/comprehensive_async_patterns_2025.rs` | ⏳ 待检查   | 异步模式综合演示         |
 
 ### 2.8 C07 - 进程管理
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
-| `crates/c07_process/examples/process_management_demo.rs` | ⏳ 待检查 | 进程管理演示 |
+| 文件路径                                                       | 状态      | 说明         |
+| -------------------------------------------------------------- | --------- | ------------ |
+| `crates/c07_process/examples/process_management_demo.rs`       | ⏳ 待检查 | 进程管理演示 |
 | `crates/c07_process/examples/performance_optimization_demo.rs` | ⏳ 待检查 | 性能优化演示 |
 
 ### 2.9 C08 - 算法
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
-| `crates/c08_algorithms/examples/graph_algorithms_demo.rs` | ✅ 兼容 | 图算法演示 |
-| `crates/c08_algorithms/examples/sorting_algorithms_demo.rs` | ⏳ 待检查 | 排序算法演示 |
-| `crates/c08_algorithms/examples/searching_algorithms_demo.rs` | ⏳ 待检查 | 搜索算法演示 |
+| 文件路径                                                         | 状态      | 说明         |
+| ---------------------------------------------------------------- | --------- | ------------ |
+| `crates/c08_algorithms/examples/graph_algorithms_demo.rs`        | ✅ 兼容   | 图算法演示   |
+| `crates/c08_algorithms/examples/sorting_algorithms_demo.rs`      | ⏳ 待检查 | 排序算法演示 |
+| `crates/c08_algorithms/examples/searching_algorithms_demo.rs`    | ⏳ 待检查 | 搜索算法演示 |
 | `crates/c08_algorithms/examples/comprehensive_algorithm_demo.rs` | ⏳ 待检查 | 算法综合演示 |
 
 ### 2.10 C09 - 设计模式
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
+| 文件路径                                                 | 状态      | 说明            |
+| -------------------------------------------------------- | --------- | --------------- |
 | `crates/c09_design_pattern/examples/async_trait_demo.rs` | ⏳ 待检查 | 异步 trait 演示 |
-| `crates/c09_design_pattern/examples/event_bus_demo.rs` | ⏳ 待检查 | 事件总线演示 |
+| `crates/c09_design_pattern/examples/event_bus_demo.rs`   | ⏳ 待检查 | 事件总线演示    |
 
 ### 2.11 C10 - 网络编程
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
+| 文件路径                            | 状态      | 说明         |
+| ----------------------------------- | --------- | ------------ |
 | `crates/c10_networks/examples/*.rs` | ⏳ 待检查 | 多个网络示例 |
 
 ### 2.12 C11 - 宏系统
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
-| `crates/c11_macro_system/examples/rust_192_features_demo.rs` | ✅ 兼容 | Rust 1.92.0 特性演示 |
+| 文件路径                                                     | 状态        | 说明                     |
+| ------------------------------------------------------------ | ----------- | ------------------------ |
+| `crates/c11_macro_system/examples/rust_192_features_demo.rs` | ✅ 兼容     | Rust 1.92.0 特性演示     |
 | `crates/c11_macro_system/examples/rust_191_features_demo.rs` | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
-| `crates/c11_macro_system/examples/01_macro_rules_basics.rs` | ⏳ 待检查 | 声明宏基础 |
-| `crates/c11_macro_system/examples/02_pattern_matching.rs` | ⏳ 待检查 | 模式匹配 |
-| `crates/c11_macro_system/examples/03_repetition.rs` | ⏳ 待检查 | 重复模式 |
-| `crates/c11_macro_system/examples/04_recursive_macros.rs` | ⏳ 待检查 | 递归宏 |
+| `crates/c11_macro_system/examples/01_macro_rules_basics.rs`  | ⏳ 待检查   | 声明宏基础               |
+| `crates/c11_macro_system/examples/02_pattern_matching.rs`    | ⏳ 待检查   | 模式匹配                 |
+| `crates/c11_macro_system/examples/03_repetition.rs`          | ⏳ 待检查   | 重复模式                 |
+| `crates/c11_macro_system/examples/04_recursive_macros.rs`    | ⏳ 待检查   | 递归宏                   |
 
 ### 2.13 C12 - WebAssembly
 
-| 文件路径 | 状态 | 说明 |
-|---------|------|------|
-| `crates/c12_wasm/examples/rust_192_features_demo.rs` | ✅ 兼容 | Rust 1.92.0 特性演示 |
-| `crates/c12_wasm/examples/rust_191_features_demo.rs` | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
-| `crates/c12_wasm/examples/12_rust_192_comprehensive_demo.rs` | ✅ 兼容 | Rust 1.92.0 综合演示 |
+| 文件路径                                                     | 状态        | 说明                     |
+| ------------------------------------------------------------ | ----------- | ------------------------ |
+| `crates/c12_wasm/examples/rust_192_features_demo.rs`         | ✅ 兼容     | Rust 1.92.0 特性演示     |
+| `crates/c12_wasm/examples/rust_191_features_demo.rs`         | ⚠️ 历史版本 | Rust 1.91 特性（已标记） |
+| `crates/c12_wasm/examples/12_rust_192_comprehensive_demo.rs` | ✅ 兼容     | Rust 1.92.0 综合演示     |
 
 ---
 
@@ -324,11 +334,11 @@ cargo test --workspace --examples
 
 ### 6.2 按状态分类
 
-| 状态 | 数量 | 百分比 |
-|------|------|--------|
-| ✅ 兼容 | 5+ | ~5% |
-| ⏳ 待检查 | 80+ | ~80% |
-| ⚠️ 历史版本 | 20+ | ~15% |
+| 状态        | 数量 | 百分比 |
+| ----------- | ---- | ------ |
+| ✅ 兼容     | 5+   | ~5%    |
+| ⏳ 待检查   | 80+  | ~80%   |
+| ⚠️ 历史版本 | 20+  | ~15%   |
 
 ---
 

@@ -4,9 +4,9 @@
 
 ## 📚 演示页面列表
 
-| 文件 | 描述 | 功能数 |
-| --- | --- | --- |
-| [index.html](./index.html) | 综合示例页面 | 20+ |
+| 文件                       | 描述         | 功能数 |
+| -------------------------- | ------------ | ------ |
+| [index.html](./index.html) | 综合示例页面 | 20+    |
 
 ## 🚀 快速开始
 
@@ -110,38 +110,38 @@ http://localhost:8080/demo/index.html
 
 1. 在 `src/lib.rs` 中添加新的 WASM 函数：
 
-    ```rust
-    #[wasm_bindgen]
-    pub fn my_new_function(input: i32) -> i32 {
-        input * 2
-    }
-    ```
+   ```rust
+   #[wasm_bindgen]
+   pub fn my_new_function(input: i32) -> i32 {
+       input * 2
+   }
+   ```
 
 2. 重新构建 WASM：
 
-    ```bash
-    wasm-pack build --target web
-    ```
+   ```bash
+   wasm-pack build --target web
+   ```
 
 3. 在 `index.html` 中添加 UI 和调用代码：
 
-    ```html
-    <div class="demo-section">
-        <h3>新功能</h3>
-        <input type="number" id="new-input" value="10" />
-        <button onclick="runNewFunction()">运行</button>
-        <div id="new-result" class="result-box"></div>
-    </div>
+   ```html
+   <div class="demo-section">
+     <h3>新功能</h3>
+     <input type="number" id="new-input" value="10" />
+     <button onclick="runNewFunction()">运行</button>
+     <div id="new-result" class="result-box"></div>
+   </div>
 
-    <script>
-    window.runNewFunction = function() {
-        if (!wasmModule) return alert('WASM 未加载');
-        const input = parseInt(document.getElementById('new-input').value);
-        const result = wasmModule.my_new_function(input);
-        showResult('new-result', `结果: ${result}`, 'success');
-    };
-    </script>
-    ```
+   <script>
+     window.runNewFunction = function () {
+       if (!wasmModule) return alert("WASM 未加载")
+       const input = parseInt(document.getElementById("new-input").value)
+       const result = wasmModule.my_new_function(input)
+       showResult("new-result", `结果: ${result}`, "success")
+     }
+   </script>
+   ```
 
 ## 🔧 开发技巧
 
@@ -173,13 +173,13 @@ live-server --port=8080
 
 ```javascript
 // 在代码中添加性能标记
-performance.mark('wasm-start');
-const result = wasmModule.heavy_computation();
-performance.mark('wasm-end');
-performance.measure('wasm-duration', 'wasm-start', 'wasm-end');
+performance.mark("wasm-start")
+const result = wasmModule.heavy_computation()
+performance.mark("wasm-end")
+performance.measure("wasm-duration", "wasm-start", "wasm-end")
 
 // 查看结果
-console.log(performance.getEntriesByName('wasm-duration'));
+console.log(performance.getEntriesByName("wasm-duration"))
 ```
 
 ### 4. 错误处理
@@ -188,10 +188,10 @@ WASM 函数可能抛出错误，使用 try-catch 捕获：
 
 ```javascript
 try {
-    const result = wasmModule.risky_function();
-    showResult('result', result, 'success');
+  const result = wasmModule.risky_function()
+  showResult("result", result, "success")
 } catch (err) {
-    showResult('result', `错误: ${err}`, 'error');
+  showResult("result", `错误: ${err}`, "error")
 }
 ```
 
@@ -207,10 +207,10 @@ try {
 ### 检查浏览器支持
 
 ```javascript
-if (typeof WebAssembly === 'object') {
-    console.log('浏览器支持 WebAssembly');
+if (typeof WebAssembly === "object") {
+  console.log("浏览器支持 WebAssembly")
 } else {
-    alert('您的浏览器不支持 WebAssembly，请升级浏览器');
+  alert("您的浏览器不支持 WebAssembly，请升级浏览器")
 }
 ```
 

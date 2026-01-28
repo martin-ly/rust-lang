@@ -255,7 +255,7 @@ fn test_integration() {
 
 **✅ 最佳实践**:
 
-```rust
+````rust
 /// 计算两个数的和
 ///
 /// # Examples
@@ -268,7 +268,7 @@ fn test_integration() {
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
-```
+````
 
 ---
 
@@ -278,7 +278,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 **✅ 最佳实践**:
 
-```rust
+````rust
 /// 处理用户数据的函数
 ///
 /// # Arguments
@@ -303,7 +303,7 @@ pub fn process_user_data(
 ) -> Result<Vec<u8>, Error> {
     // ...
 }
-```
+````
 
 ### 2. README 文档
 

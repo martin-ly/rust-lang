@@ -21,8 +21,8 @@
     - [思维导图](#思维导图)
   - [🎯 概述](#-概述)
   - [🔧 核心宏](#-核心宏)
-    - [#\[wasm\_bindgen\]](#wasm_bindgen)
-    - [#\[wasm\_bindgen(start)\]](#wasm_bindgenstart)
+    - [#\[wasm_bindgen\]](#wasm_bindgen)
+    - [#\[wasm_bindgen(start)\]](#wasm_bindgenstart)
   - [📦 类型系统](#-类型系统)
     - [基本类型映射](#基本类型映射)
   - [🌐 Web API](#-web-api)
@@ -128,17 +128,17 @@ pub fn main() {
 
 ### 基本类型映射
 
-| Rust 类型 | JavaScript 类型 |
-| --- | --- |
-| `i32`, `u32` | `number` |
-| `i64`, `u64` | `BigInt` |
-| `f32`, `f64` | `number` |
-| `bool` | `boolean` |
-| `String` | `string` |
-| `&str` | `string` |
-| `Vec<T>` | `Array` |
-| `Option<T>` | `T \| undefined` |
-| `Result<T, E>` | `Promise<T>` |
+| Rust 类型      | JavaScript 类型  |
+| -------------- | ---------------- |
+| `i32`, `u32`   | `number`         |
+| `i64`, `u64`   | `BigInt`         |
+| `f32`, `f64`   | `number`         |
+| `bool`         | `boolean`        |
+| `String`       | `string`         |
+| `&str`         | `string`         |
+| `Vec<T>`       | `Array`          |
+| `Option<T>`    | `T \| undefined` |
+| `Result<T, E>` | `Promise<T>`     |
 
 ---
 

@@ -75,12 +75,12 @@ let hybrid_side = get_patterns_by_execution_model(ExecutionModel::Hybrid);
 
 **对比表（概要）**：
 
-| 维度 | 同步 (Sync) | 异步 (Async) | 混合 (Hybrid) |
-| --- | --- | --- | --- |
-| 典型场景 | CPU 计算、确定性步骤 | IO 密集、高并发连接 | 同步对外 + 异步内部或反向 |
-| API 形态 | 阻塞函数 | `async fn`/`Future` | 组合/适配 |
-| 复杂度 | 低 | 中-高 | 中-高 |
-| 线程模型 | 多线程/无特定要求 | 事件循环 + 任务 | 双栈：同步/异步边界 |
+| 维度     | 同步 (Sync)               | 异步 (Async)               | 混合 (Hybrid)                       |
+| -------- | ------------------------- | -------------------------- | ----------------------------------- |
+| 典型场景 | CPU 计算、确定性步骤      | IO 密集、高并发连接        | 同步对外 + 异步内部或反向           |
+| API 形态 | 阻塞函数                  | `async fn`/`Future`        | 组合/适配                           |
+| 复杂度   | 低                        | 中-高                      | 中-高                               |
+| 线程模型 | 多线程/无特定要求         | 事件循环 + 任务            | 双栈：同步/异步边界                 |
 | 典型模式 | Singleton/Factory/Builder | Actor/Channel/Event-driven | Proxy/Decorator/Observer/Repository |
 
 > 选择建议：优先按“是否等待 IO”为一号判断，其次看是否需兼容现有同步接口，再考虑团队对异步生态（Tokio、异步锁、执行器）的掌握程度。

@@ -1,6 +1,6 @@
 # Rust 1.89 代码文件版本说明模板
 
-> **用途**: 为所有 rust_189_*.rs 文件添加版本说明
+> **用途**: 为所有 rust*189*\*.rs 文件添加版本说明
 > **创建时间**: 2025-10-26
 > **Phase**: Phase 2 - 代码标记
 
@@ -10,7 +10,7 @@
 
 ### 完整版本（用于examples和主要功能文件）
 
-```rust
+````rust
 //! # Rust 1.89 特性示例 (历史版本)
 //!
 //! ⚠️ **注意**: 本示例针对 Rust 1.89 版本编写，部分特性在 Rust 1.90 中已有更新。
@@ -61,7 +61,7 @@
 //! - [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //! - [Edition 2024 Guide](https://doc.rust-lang.org/edition-guide/)
 //! - 项目文档: docs/archives/legacy_rust_189_features/
-```
+````
 
 ---
 
@@ -98,21 +98,21 @@
 ### 类别1: Examples（示例文件）- 使用完整版本
 
 - c01_ownership_borrow_scope/examples/rust_189_features_examples.rs
-- c02_type_system/examples/*.rs
-- c03_control_fn/examples/*.rs
+- c02_type_system/examples/\*.rs
+- c03_control_fn/examples/\*.rs
 - 其他 examples/ 下的文件
 
 ### 类别2: 主要功能文件 - 使用完整版本
 
-- c02_type_system/src/rust_189_*.rs
-- c03_control_fn/src/rust_189_*.rs
-- c04_generic/src/rust_189_*.rs
+- c02*type_system/src/rust_189*\*.rs
+- c03*control_fn/src/rust_189*\*.rs
+- c04*generic/src/rust_189*\*.rs
 - c05_threads/src/rust_189_threads.rs
 - c09_design_pattern/src/rust_189_features.rs
 
 ### 类别3: 测试文件 - 使用简化版本
 
-- c03_control_fn/tests/rust_189_*.rs
+- c03*control_fn/tests/rust_189*\*.rs
 
 ### 类别4: 工具文件 - 使用简化版本
 

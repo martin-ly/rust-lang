@@ -77,11 +77,11 @@
 
 **工具选择原则**:
 
-| 语言 | 推荐工具链 | 适用场景 |
-| --- | --- | --- |
-| Rust | rustc + wasm-bindgen + wasm-pack | ✅ 首选，类型安全 |
-| C/C++ | Emscripten | 现有 C/C++ 代码移植 |
-| AssemblyScript | asc | TypeScript 开发者快速上手 |
+| 语言           | 推荐工具链                       | 适用场景                  |
+| -------------- | -------------------------------- | ------------------------- |
+| Rust           | rustc + wasm-bindgen + wasm-pack | ✅ 首选，类型安全         |
+| C/C++          | Emscripten                       | 现有 C/C++ 代码移植       |
+| AssemblyScript | asc                              | TypeScript 开发者快速上手 |
 
 ---
 
@@ -165,12 +165,12 @@ impl Counter {
 **生成的 TypeScript 类型**:
 
 ```typescript
-export function greet(name: string): string;
+export function greet(name: string): string
 
 export class Counter {
-  constructor();
-  increment(): void;
-  value(): number;
+  constructor()
+  increment(): void
+  value(): number
 }
 ```
 
@@ -178,12 +178,12 @@ export class Counter {
 
 **大小优化对比**:
 
-| 配置 | 二进制大小 | 编译时间 | 运行性能 |
-| --- | --- | --- | --------- |
-| Debug | 1.2 MB | 5s | 60% |
-| Release (默认) | 450 KB | 30s | 95% |
-| Release (优化) | 180 KB | 90s | 98% |
-| + wasm-opt -Oz | 120 KB | +15s | 98% |
+| 配置           | 二进制大小 | 编译时间 | 运行性能 |
+| -------------- | ---------- | -------- | -------- |
+| Debug          | 1.2 MB     | 5s       | 60%      |
+| Release (默认) | 450 KB     | 30s      | 95%      |
+| Release (优化) | 180 KB     | 90s      | 98%      |
+| + wasm-opt -Oz | 120 KB     | +15s     | 98%      |
 
 **完整构建脚本**:
 
@@ -243,14 +243,14 @@ emcc main.c -o main.html \
 
 #### 优化级别对比
 
-| 级别 | 代码大小 | 启动时间 | 峰值性能 | 适用场景 |
-| --- | --- | --- | --- | --- |
-| -O0 | 基线 (100%) | 基线 | 50% | 开发调试 |
-| -O1 | 80% | 90% | 70% | 快速迭代 |
-| -O2 | 60% | 80% | 85% | 平衡 |
-| -O3 | 50% | 75% | 95% | 生产环境 |
-| -Os | 40% | 70% | 80% | 带宽受限 |
-| -Oz | 35% | 70% | 75% | 极限压缩 |
+| 级别 | 代码大小    | 启动时间 | 峰值性能 | 适用场景 |
+| ---- | ----------- | -------- | -------- | -------- |
+| -O0  | 基线 (100%) | 基线     | 50%      | 开发调试 |
+| -O1  | 80%         | 90%      | 70%      | 快速迭代 |
+| -O2  | 60%         | 80%      | 85%      | 平衡     |
+| -O3  | 50%         | 75%      | 95%      | 生产环境 |
+| -Os  | 40%         | 70%      | 80%      | 带宽受限 |
+| -Oz  | 35%         | 70%      | 75%      | 极限压缩 |
 
 #### 核心特性
 
@@ -272,24 +272,24 @@ emcc main.c -o main.html \
 ```typescript
 // 编译为纯 Wasm
 export function fibonacci(n: i32): i32 {
-  if (n <= 1) return n;
-  return fibonacci(n - 1) + fibonacci(n - 2);
+  if (n <= 1) return n
+  return fibonacci(n - 1) + fibonacci(n - 2)
 }
 
 // 内存管理（手动）
-const ptr = memory.allocate(1024);
-memory.free(ptr);
+const ptr = memory.allocate(1024)
+memory.free(ptr)
 ```
 
 **对比分析**:
 
-| 维度 | AssemblyScript | Rust | TypeScript |
-| --- | --- | --- | --- |
-| 学习曲线 | ⭐⭐☆☆☆ | ⭐⭐⭐⭐☆ | ⭐☆☆☆☆ |
-| 生态系统 | ⭐⭐☆☆☆ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| 输出大小 | ⭐⭐⭐⭐☆ | ⭐⭐⭐⭐⭐ | ⭐⭐☆☆☆ |
-| 性能 | ⭐⭐⭐☆☆ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐☆ |
-| 类型安全 | ⭐⭐⭐⭐☆ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| 维度     | AssemblyScript | Rust       | TypeScript |
+| -------- | -------------- | ---------- | ---------- |
+| 学习曲线 | ⭐⭐☆☆☆        | ⭐⭐⭐⭐☆  | ⭐☆☆☆☆     |
+| 生态系统 | ⭐⭐☆☆☆        | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| 输出大小 | ⭐⭐⭐⭐☆      | ⭐⭐⭐⭐⭐ | ⭐⭐☆☆☆    |
+| 性能     | ⭐⭐⭐☆☆       | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐☆  |
+| 类型安全 | ⭐⭐⭐⭐☆      | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 
 ---
 
@@ -324,21 +324,21 @@ RUSTFLAGS="-C debuginfo=2" cargo build --target wasm32-unknown-unknown
 
 ```javascript
 // 检查 Wasm 线性内存
-const memory = instance.exports.memory;
-const view = new Uint8Array(memory.buffer);
-console.log(view.slice(0, 100)); // 查看前 100 字节
+const memory = instance.exports.memory
+const view = new Uint8Array(memory.buffer)
+console.log(view.slice(0, 100)) // 查看前 100 字节
 ```
 
 **3. 性能监控**:
 
 ```javascript
 // 标记关键区域
-performance.mark('wasm-start');
-await wasmModule.compute();
-performance.mark('wasm-end');
-performance.measure('wasm-compute', 'wasm-start', 'wasm-end');
+performance.mark("wasm-start")
+await wasmModule.compute()
+performance.mark("wasm-end")
+performance.measure("wasm-compute", "wasm-start", "wasm-end")
 
-console.log(performance.getEntriesByName('wasm-compute'));
+console.log(performance.getEntriesByName("wasm-compute"))
 ```
 
 ---
@@ -407,10 +407,10 @@ wasm-opt input.wasm \
 
 **优化效果实测**:
 
-| 模块 | 原始大小 | -O3 | -Oz | gzip后 |
-| --- | --- | --- | --- | --- |
-| hello.wasm | 120 KB | 85 KB (-29%) | 72 KB (-40%) | 28 KB (-77%) |
-| game_engine.wasm | 4.5 MB | 3.2 MB (-29%) | 2.8 MB (-38%) | 980 KB (-78%) |
+| 模块             | 原始大小 | -O3           | -Oz           | gzip后        |
+| ---------------- | -------- | ------------- | ------------- | ------------- |
+| hello.wasm       | 120 KB   | 85 KB (-29%)  | 72 KB (-40%)  | 28 KB (-77%)  |
+| game_engine.wasm | 4.5 MB   | 3.2 MB (-29%) | 2.8 MB (-38%) | 980 KB (-78%) |
 
 **注意事项**:
 
@@ -432,18 +432,18 @@ wasm-opt input.wasm \
 
 ```javascript
 // 开始记录
-performance.mark('compute-start');
+performance.mark("compute-start")
 
 // 执行 WASM 计算
-const result = await wasmModule.compute(data);
+const result = await wasmModule.compute(data)
 
 // 结束记录
-performance.mark('compute-end');
-performance.measure('wasm-compute', 'compute-start', 'compute-end');
+performance.mark("compute-end")
+performance.measure("wasm-compute", "compute-start", "compute-end")
 
 // 查看结果
-const measures = performance.getEntriesByName('wasm-compute');
-console.log('Duration:', measures[0].duration, 'ms');
+const measures = performance.getEntriesByName("wasm-compute")
+console.log("Duration:", measures[0].duration, "ms")
 ```
 
 **2. 分析火焰图**:
@@ -538,17 +538,17 @@ pkg/
 
 ```javascript
 // Webpack/Vite 自动处理
-import init, { greet } from 'my-wasm-lib';
+import init, { greet } from "my-wasm-lib"
 
 async function main() {
   // 初始化 WASM 模块
-  await init();
+  await init()
 
   // 调用 Rust 函数
-  console.log(greet("World"));
+  console.log(greet("World"))
 }
 
-main();
+main()
 ```
 
 ---
@@ -696,10 +696,10 @@ wasm-opt build/dist/myapp.wasm -Oz -o build/dist/myapp.wasm
 ```json
 {
   "recommendations": [
-    "rust-lang.rust-analyzer",     // Rust 语言支持
-    "WebAssembly.wasm-language",   // WASM 语法高亮
-    "ms-vscode.wasm-debug",        // WASM 调试器
-    "tamasfe.even-better-toml"     // TOML 支持
+    "rust-lang.rust-analyzer", // Rust 语言支持
+    "WebAssembly.wasm-language", // WASM 语法高亮
+    "ms-vscode.wasm-debug", // WASM 调试器
+    "tamasfe.even-better-toml" // TOML 支持
   ]
 }
 ```
@@ -739,12 +739,7 @@ wasm-opt build/dist/myapp.wasm -Oz -o build/dist/myapp.wasm
       "label": "Build WASM",
       "type": "shell",
       "command": "cargo",
-      "args": [
-        "build",
-        "--target",
-        "wasm32-unknown-unknown",
-        "--release"
-      ]
+      "args": ["build", "--target", "wasm32-unknown-unknown", "--release"]
     },
     {
       "label": "Build with wasm-pack",
@@ -756,12 +751,7 @@ wasm-opt build/dist/myapp.wasm -Oz -o build/dist/myapp.wasm
       "label": "Optimize WASM",
       "type": "shell",
       "command": "wasm-opt",
-      "args": [
-        "pkg/mylib_bg.wasm",
-        "-Oz",
-        "-o",
-        "pkg/mylib_bg.wasm"
-      ]
+      "args": ["pkg/mylib_bg.wasm", "-Oz", "-o", "pkg/mylib_bg.wasm"]
     }
   ]
 }
@@ -808,7 +798,7 @@ CMD ["/bin/bash"]
 **docker-compose.yml**:
 
 ```yaml
-version: '3.8'
+version: "3.8"
 services:
   dev:
     build: .
@@ -951,10 +941,10 @@ pub fn debug_function(value: i32) {
 
 ```javascript
 // 监控内存增长
-const memoryBefore = instance.exports.memory.buffer.byteLength;
-await wasmModule.compute();
-const memoryAfter = instance.exports.memory.buffer.byteLength;
-console.log('Memory growth:', memoryAfter - memoryBefore, 'bytes');
+const memoryBefore = instance.exports.memory.buffer.byteLength
+await wasmModule.compute()
+const memoryAfter = instance.exports.memory.buffer.byteLength
+console.log("Memory growth:", memoryAfter - memoryBefore, "bytes")
 ```
 
 ---

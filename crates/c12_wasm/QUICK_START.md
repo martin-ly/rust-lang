@@ -77,15 +77,15 @@ wasm-pack build --target web
 ### 第 3 步：在 JavaScript 中使用
 
 ```javascript
-import init, { hello } from './pkg/c12_wasm.js';
+import init, { hello } from "./pkg/c12_wasm.js"
 
 async function run() {
-    await init();
-    const greeting = hello("WASM");
-    console.log(greeting); // "Hello, WASM!"
+  await init()
+  const greeting = hello("WASM")
+  console.log(greeting) // "Hello, WASM!"
 }
 
-run();
+run()
 ```
 
 ### 第 4 步：在 HTML 中使用
@@ -93,34 +93,34 @@ run();
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>My First WASM</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>My First WASM App</h1>
     <input type="text" id="name" value="World" />
     <button onclick="greet()">Greet</button>
     <p id="result"></p>
 
     <script type="module">
-        import init, { hello } from './pkg/c12_wasm.js';
+      import init, { hello } from "./pkg/c12_wasm.js"
 
-        let wasm;
+      let wasm
 
-        async function initWasm() {
-            wasm = await init();
-        }
+      async function initWasm() {
+        wasm = await init()
+      }
 
-        window.greet = function() {
-            const name = document.getElementById('name').value;
-            const greeting = wasm.hello(name);
-            document.getElementById('result').textContent = greeting;
-        };
+      window.greet = function () {
+        const name = document.getElementById("name").value
+        const greeting = wasm.hello(name)
+        document.getElementById("result").textContent = greeting
+      }
 
-        initWasm();
+      initWasm()
     </script>
-</body>
+  </body>
 </html>
 ```
 

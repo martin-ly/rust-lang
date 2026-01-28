@@ -294,7 +294,7 @@ fn benchmark_performance(b: &mut Bencher) { /* ... */ }
 
 ### 3. 文档结构
 
-```markdown
+````markdown
     # 标题
 
     ## 概述
@@ -315,8 +315,7 @@ fn benchmark_performance(b: &mut Bencher) { /* ... */ }
     ## 注意事项
 
     使用时的注意事项
-
-```
+````
 
 ---
 

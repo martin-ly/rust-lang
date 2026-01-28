@@ -132,22 +132,22 @@ JavaScript 互操作
 
 ```javascript
 // 方式 1: 使用 ES 模块
-import init, { greet } from './pkg/hello_wasm';
+import init, { greet } from "./pkg/hello_wasm"
 
 async function loadWasm() {
-  await init();
-  const result = greet("World");
-  console.log(result);
+  await init()
+  const result = greet("World")
+  console.log(result)
 }
 
-loadWasm();
+loadWasm()
 ```
 
 ```javascript
 // 方式 2: 使用动态导入
-const wasmModule = await import('./pkg/hello_wasm');
-await wasmModule.default();
-const result = wasmModule.greet("World");
+const wasmModule = await import("./pkg/hello_wasm")
+await wasmModule.default()
+const result = wasmModule.greet("World")
 ```
 
 ---
@@ -157,27 +157,27 @@ const result = wasmModule.greet("World");
 ### 基本用法
 
 ```jsx
-import React, { useEffect, useState } from 'react';
-import init, { greet } from './pkg/hello_wasm';
+import React, { useEffect, useState } from "react"
+import init, { greet } from "./pkg/hello_wasm"
 
 function App() {
-  const [wasmReady, setWasmReady] = useState(false);
+  const [wasmReady, setWasmReady] = useState(false)
 
   useEffect(() => {
     init().then(() => {
-      setWasmReady(true);
-    });
-  }, []);
+      setWasmReady(true)
+    })
+  }, [])
 
   if (!wasmReady) {
-    return <div>Loading WASM...</div>;
+    return <div>Loading WASM...</div>
   }
 
   return (
     <div>
       <h1>{greet("React")}</h1>
     </div>
-  );
+  )
 }
 ```
 
@@ -185,17 +185,17 @@ function App() {
 
 ```jsx
 function useWasm() {
-  const [wasm, setWasm] = useState(null);
+  const [wasm, setWasm] = useState(null)
 
   useEffect(() => {
-    import('./pkg/hello_wasm').then(module => {
+    import("./pkg/hello_wasm").then(module => {
       module.default().then(() => {
-        setWasm(module);
-      });
-    });
-  }, []);
+        setWasm(module)
+      })
+    })
+  }, [])
 
-  return wasm;
+  return wasm
 }
 ```
 
@@ -213,19 +213,19 @@ function useWasm() {
 </template>
 
 <script>
-import init, { greet } from './pkg/hello_wasm';
+import init, { greet } from "./pkg/hello_wasm"
 
 export default {
   data() {
     return {
-      message: 'Loading...'
-    };
+      message: "Loading...",
+    }
   },
   async mounted() {
-    await init();
-    this.message = greet('Vue');
-  }
-};
+    await init()
+    this.message = greet("Vue")
+  },
+}
 </script>
 ```
 
@@ -237,25 +237,25 @@ export default {
 
 ```javascript
 // 使用 wasm-pack 的 nodejs 目标
-const wasm = require('./pkg/hello_wasm');
+const wasm = require("./pkg/hello_wasm")
 
 async function main() {
-  await wasm.default();
-  const result = wasm.greet("Node.js");
-  console.log(result);
+  await wasm.default()
+  const result = wasm.greet("Node.js")
+  console.log(result)
 }
 
-main();
+main()
 ```
 
 ### ES 模块
 
 ```javascript
-import init, { greet } from './pkg/hello_wasm.js';
+import init, { greet } from "./pkg/hello_wasm.js"
 
-await init();
-const result = greet("Node.js");
-console.log(result);
+await init()
+const result = greet("Node.js")
+console.log(result)
 ```
 
 ---
@@ -266,23 +266,23 @@ wasm-pack 会自动生成 TypeScript 类型定义文件：
 
 ```typescript
 // pkg/hello_wasm.d.ts
-export function greet(name: string): string;
+export function greet(name: string): string
 export class Counter {
-  constructor();
-  increment(): void;
-  readonly value: number;
+  constructor()
+  increment(): void
+  readonly value: number
 }
 ```
 
 ### 使用类型
 
 ```typescript
-import init, { greet, Counter } from './pkg/hello_wasm';
+import init, { greet, Counter } from "./pkg/hello_wasm"
 
-await init();
-const result: string = greet("TypeScript");
-const counter = new Counter();
-counter.increment();
+await init()
+const result: string = greet("TypeScript")
+const counter = new Counter()
+counter.increment()
 ```
 
 ---
@@ -346,8 +346,8 @@ pub fn add(a: i32, b: i32) -> i32 {
 ```
 
 ```javascript
-import { add } from './pkg/hello_wasm';
-const result = add(2, 3); // 5
+import { add } from "./pkg/hello_wasm"
+const result = add(2, 3) // 5
 ```
 
 ### 示例 2: 数组处理
@@ -360,8 +360,8 @@ pub fn sum_array(arr: &[i32]) -> i32 {
 ```
 
 ```javascript
-import { sum_array } from './pkg/hello_wasm';
-const result = sum_array(new Int32Array([1, 2, 3, 4, 5])); // 15
+import { sum_array } from "./pkg/hello_wasm"
+const result = sum_array(new Int32Array([1, 2, 3, 4, 5])) // 15
 ```
 
 ---

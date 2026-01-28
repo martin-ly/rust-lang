@@ -146,13 +146,13 @@ WASI 0.2 组件模型深度指南
 
 ### 多维概念对比矩阵
 
-| WASI 0.2 技术 | 功能 | 性能 | 复杂度 | 适用场景 | Rust 1.92.0 |
-| --- | --- | --- | --- | --- | --- |
-| **组件** | 高 | 高 | 中 | 组件化应用 | ✅ |
-| **接口** | 高 | 高 | 低 | 接口定义 | ✅ |
-| **资源** | 高 | 高 | 中 | 资源管理 | ✅ |
-| **WIT** | 高 | 高 | 中 | 类型系统 | ✅ |
-| **组件组合** | 高 | 高 | 高 | 组件组合 | ✅ |
+| WASI 0.2 技术 | 功能 | 性能 | 复杂度 | 适用场景   | Rust 1.92.0 |
+| ------------- | ---- | ---- | ------ | ---------- | ----------- |
+| **组件**      | 高   | 高   | 中     | 组件化应用 | ✅          |
+| **接口**      | 高   | 高   | 低     | 接口定义   | ✅          |
+| **资源**      | 高   | 高   | 中     | 资源管理   | ✅          |
+| **WIT**       | 高   | 高   | 中     | 类型系统   | ✅          |
+| **组件组合**  | 高   | 高   | 高     | 组件组合   | ✅          |
 
 ### 决策树图
 
@@ -177,14 +177,14 @@ WASI 0.2 (也称为 Preview 2) 是 WebAssembly System Interface 的第二个预�
 
 ### 主要改进
 
-| 特性 | WASI 0.1 (Preview 1) | WASI 0.2 (Preview 2) |
-| --- | --- | --- |
-| **接口定义** | 函数级导入/导出 | WIT 声明式接口 |
-| **类型系统** | 基础类型 | 丰富类型（variant、record、resource） |
-| **模块组合** | 链接时绑定 | 组件模型动态组合 |
-| **多语言互操作** | 有限 | 完整支持 |
-| **版本管理** | 无 | 语义化版本控制 |
-| **资源管理** | 手动 | 自动生命周期管理 |
+| 特性             | WASI 0.1 (Preview 1) | WASI 0.2 (Preview 2)                  |
+| ---------------- | -------------------- | ------------------------------------- |
+| **接口定义**     | 函数级导入/导出      | WIT 声明式接口                        |
+| **类型系统**     | 基础类型             | 丰富类型（variant、record、resource） |
+| **模块组合**     | 链接时绑定           | 组件模型动态组合                      |
+| **多语言互操作** | 有限                 | 完整支持                              |
+| **版本管理**     | 无                   | 语义化版本控制                        |
+| **资源管理**     | 手动                 | 自动生命周期管理                      |
 
 ### 为什么要升级到 WASI 0.2
 
@@ -898,15 +898,15 @@ wasmtime run target/wasm32-wasip2/release/my_app.wasm
 
 #### 3. API 映射表
 
-| WASI 0.1 | WASI 0.2 | 说明 |
-| --- | --- | --- |
-| `wasi::fd_read` | `wasi:io/streams.read` | 文件读取 |
-| `wasi::fd_write` | `wasi:io/streams.write` | 文件写入 |
-| `wasi::path_open` | `wasi:filesystem/types.open-at` | 打开文件 |
-| `wasi::environ_get` | `wasi:cli/environment.get-environment` | 环境变量 |
-| `wasi::args_get` | `wasi:cli/environment.get-arguments` | 命令行参数 |
-| `wasi::clock_time_get` | `wasi:clocks/wall-clock.now` | 获取时间 |
-| `wasi::random_get` | `wasi:random/random.get-random-bytes` | 随机数 |
+| WASI 0.1               | WASI 0.2                               | 说明       |
+| ---------------------- | -------------------------------------- | ---------- |
+| `wasi::fd_read`        | `wasi:io/streams.read`                 | 文件读取   |
+| `wasi::fd_write`       | `wasi:io/streams.write`                | 文件写入   |
+| `wasi::path_open`      | `wasi:filesystem/types.open-at`        | 打开文件   |
+| `wasi::environ_get`    | `wasi:cli/environment.get-environment` | 环境变量   |
+| `wasi::args_get`       | `wasi:cli/environment.get-arguments`   | 命令行参数 |
+| `wasi::clock_time_get` | `wasi:clocks/wall-clock.now`           | 获取时间   |
+| `wasi::random_get`     | `wasi:random/random.get-random-bytes`  | 随机数     |
 
 ---
 
@@ -1086,12 +1086,12 @@ mod tests {
 
 ### 核心工具
 
-| 工具 | 用途 | 链接 |
-| --- | --- | --- |
-| **wit-bindgen** | 从 WIT 生成语言绑定 | [GitHub](https://github.com/bytecodealliance/wit-bindgen) |
-| **wasm-tools** | Wasm 组件工具集 | [GitHub](https://github.com/bytecodealliance/wasm-tools) |
-| **cargo-component** | Cargo 组件子命令 | [GitHub](https://github.com/bytecodealliance/cargo-component) |
-| **wasmtime** | WASI 0.2 运行时 | [GitHub](https://github.com/bytecodealliance/wasmtime) |
+| 工具                | 用途                | 链接                                                          |
+| ------------------- | ------------------- | ------------------------------------------------------------- |
+| **wit-bindgen**     | 从 WIT 生成语言绑定 | [GitHub](https://github.com/bytecodealliance/wit-bindgen)     |
+| **wasm-tools**      | Wasm 组件工具集     | [GitHub](https://github.com/bytecodealliance/wasm-tools)      |
+| **cargo-component** | Cargo 组件子命令    | [GitHub](https://github.com/bytecodealliance/cargo-component) |
+| **wasmtime**        | WASI 0.2 运行时     | [GitHub](https://github.com/bytecodealliance/wasmtime)        |
 
 ### 常用命令
 
@@ -1150,4 +1150,4 @@ wasm-tools compose component-a.wasm component-b.wasm -o composed.wasm
 
 ---
 
-*WASI 0.2 组件模型代表了 WebAssembly 生态系统的重大飞跃，掌握它将使你能够构建更加模块化、可维护和高性能的应用程序。* 🚀
+_WASI 0.2 组件模型代表了 WebAssembly 生态系统的重大飞跃，掌握它将使你能够构建更加模块化、可维护和高性能的应用程序。_ 🚀

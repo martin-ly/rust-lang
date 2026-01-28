@@ -40,17 +40,17 @@
 
 **自动化投资回报**：
 \[
-\text{ROI}_{\text{CI/CD}} = \frac{\text{Time}_{\text{saved}} + \text{Bugs}_{\text{prevented}}}{\text{Setup\_cost} + \text{Maintenance\_cost}}
+\text{ROI}_{\text{CI/CD}} = \frac{\text{Time}_{\text{saved}} + \text{Bugs}\_{\text{prevented}}}{\text{Setup_cost} + \text{Maintenance_cost}}
 \]
 
 **构建可靠性定理**：
 \[
-\text{Reliability}_{\text{system}} = \prod_{i=1}^n \text{Reliability}_{\text{component}_i}
+\text{Reliability}_{\text{system}} = \prod_{i=1}^n \text{Reliability}\_{\text{component}\_i}
 \]
 
 **部署频率与质量**：
 \[
-\text{Quality} \propto \sqrt{\text{Deploy\_frequency}} \quad (\text{DevOps 研究})
+\text{Quality} \propto \sqrt{\text{Deploy_frequency}} \quad (\text{DevOps 研究})
 \]
 
 ---
@@ -66,9 +66,9 @@ name: Build WebAssembly
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -127,7 +127,7 @@ jobs:
       - name: Setup Emscripten
         uses: mymindstorm/setup-emsdk@v12
         with:
-          version: 'latest'
+          version: "latest"
 
       - name: Build C++ module
         run: |
@@ -291,7 +291,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # 获取完整历史
+          fetch-depth: 0 # 获取完整历史
 
       - name: Run benchmarks
         run: cargo bench --target wasm32-wasi -- --save-baseline current
@@ -687,8 +687,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "18"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Build package
         run: wasm-pack build --release --target web
@@ -744,7 +744,7 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          text: 'Production deployment health check failed!'
+          text: "Production deployment health check failed!"
           webhook_url: ${{ secrets.SLACK_WEBHOOK }}
 ```
 
@@ -756,14 +756,15 @@ jobs:
 
 **Wasm 特殊挑战**：
 
-| 挑战 | 传统 Web | Wasm | 增加复杂度 |
-| --- | --- | --- | --- |
-| 构建时间 | 1-2 min | 5-10 min | +400% |
-| 工具链依赖 | npm | Rust+Emscripten+WABT | +300% |
-| 测试环境 | Node.js | 多运行时 | +200% |
-| 优化步骤 | Terser | wasm-opt+brotli | +100% |
+| 挑战       | 传统 Web | Wasm                 | 增加复杂度 |
+| ---------- | -------- | -------------------- | ---------- |
+| 构建时间   | 1-2 min  | 5-10 min             | +400%      |
+| 工具链依赖 | npm      | Rust+Emscripten+WABT | +300%      |
+| 测试环境   | Node.js  | 多运行时             | +200%      |
+| 优化步骤   | Terser   | wasm-opt+brotli      | +100%      |
 
 **批判**：
+
 > Wasm 的 CI/CD 流水线显著复杂于纯 JS 项目。多语言工具链、跨运行时测试、额外优化步骤都增加了维护负担。
 
 ### 构建时间分析
@@ -797,6 +798,7 @@ jobs:
 ```
 
 **批判**：
+
 > 构建时间是纯 JS 项目的 3-5 倍。对于高频部署场景（如 Trunk-Based Development），等待时间成为开发瓶颈。
 
 ---

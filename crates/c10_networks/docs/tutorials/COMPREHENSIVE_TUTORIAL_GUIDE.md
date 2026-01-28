@@ -176,10 +176,10 @@ criterion = { version = "0.5", features = ["html_reports"] }
 
 ```json
 {
-    "rust-analyzer.checkOnSave.command": "clippy",
-    "rust-analyzer.cargo.features": "all",
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.cargo.features": "all",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "rust-lang.rust-analyzer"
 }
 ```
 
@@ -1160,6 +1160,6 @@ impl HttpResponse {
 
 **C10 Networks 综合教程指南** - 为网络编程提供完整的学习路径！
 
-*最后更新: 2025年1月*
-*文档版本: v2.0*
-*维护者: C10 Networks 开发团队*
+_最后更新: 2025年1月_
+_文档版本: v2.0_
+_维护者: C10 Networks 开发团队_

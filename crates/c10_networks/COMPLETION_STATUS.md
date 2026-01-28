@@ -16,25 +16,25 @@
 
 ### ✅ 功能模块
 
-| 模块 | 状态 | 说明 |
-|------|------|------|
-| **异步通信** | ✅ 完成 | `asynchronous_communication/` |
-| **诊断工具** | ✅ 完成 | `diagnostics.rs` |
-| **epoll支持** | ✅ 完成 | `epoll/` |
-| **错误处理** | ✅ 完成 | `error.rs` |
-| **MAC地址** | ✅ 完成 | `mac/` |
-| **网络拓扑** | ✅ 完成 | `network_topology/` |
-| **P2P网络** | ✅ 完成 | `p2p/` (DHT, Discovery, NAT, PubSub) |
-| **数据包处理** | ✅ 完成 | `packet/` (Buffer, Parser, Serializer, Stream) |
-| **性能优化** | ✅ 完成 | `performance/` (Cache, Memory Pool, Metrics) |
-| **协议实现** | ✅ 完成 | `protocol/` (HTTP, WebSocket, TCP, UDP, DNS) |
-| **安全功能** | ✅ 完成 | `security/` (ACME, TLS Reload) |
-| **形式化语义** | ✅ 完成 | `semantics/` (Formal Spec, Model Checking) |
-| **抓包功能** | ✅ 完成 | `sniff/` (ARP, Live PCAP, Offline, TCP Monitor) |
-| **套接字封装** | ✅ 完成 | `socket/` (TCP, UDP) |
-| **统一API** | ✅ 完成 | `unified_api.rs` |
-| **Rust 1.91特性** | ✅ 完成 | `rust_191_features.rs` |
-| **Rust 1.92特性** | ✅ 完成 | `rust_192_features.rs` |
+| 模块              | 状态    | 说明                                            |
+| ----------------- | ------- | ----------------------------------------------- |
+| **异步通信**      | ✅ 完成 | `asynchronous_communication/`                   |
+| **诊断工具**      | ✅ 完成 | `diagnostics.rs`                                |
+| **epoll支持**     | ✅ 完成 | `epoll/`                                        |
+| **错误处理**      | ✅ 完成 | `error.rs`                                      |
+| **MAC地址**       | ✅ 完成 | `mac/`                                          |
+| **网络拓扑**      | ✅ 完成 | `network_topology/`                             |
+| **P2P网络**       | ✅ 完成 | `p2p/` (DHT, Discovery, NAT, PubSub)            |
+| **数据包处理**    | ✅ 完成 | `packet/` (Buffer, Parser, Serializer, Stream)  |
+| **性能优化**      | ✅ 完成 | `performance/` (Cache, Memory Pool, Metrics)    |
+| **协议实现**      | ✅ 完成 | `protocol/` (HTTP, WebSocket, TCP, UDP, DNS)    |
+| **安全功能**      | ✅ 完成 | `security/` (ACME, TLS Reload)                  |
+| **形式化语义**    | ✅ 完成 | `semantics/` (Formal Spec, Model Checking)      |
+| **抓包功能**      | ✅ 完成 | `sniff/` (ARP, Live PCAP, Offline, TCP Monitor) |
+| **套接字封装**    | ✅ 完成 | `socket/` (TCP, UDP)                            |
+| **统一API**       | ✅ 完成 | `unified_api.rs`                                |
+| **Rust 1.91特性** | ✅ 完成 | `rust_191_features.rs`                          |
+| **Rust 1.92特性** | ✅ 完成 | `rust_192_features.rs`                          |
 
 ### ✅ 测试覆盖
 
@@ -50,20 +50,20 @@
 
 ### ✅ 示例代码
 
-| 示例 | 文件 | 状态 |
-|------|------|------|
-| TCP Echo服务器 | `tcp_echo_server.rs` | ✅ |
-| TCP客户端 | `tcp_client.rs` | ✅ |
-| HTTP客户端 | `http_client.rs` | ✅ |
-| WebSocket演示 | `websocket_demo.rs` | ✅ |
-| P2P最小示例 | `p2p_minimal.rs` | ✅ |
-| UDP Echo | `udp_echo.rs` | ✅ |
-| ARP抓包 | `arp_sniff.rs` | ✅ |
-| TCP监控 | `tcp_monitor.rs` | ✅ |
-| DNS查询 | `dns_lookup.rs` | ✅ |
-| gRPC服务器 | `grpc_server.rs` | ✅ |
-| gRPC客户端 | `grpc_client.rs` | ✅ |
-| Rust 1.92特性演示 | `rust_192_async_features_demo.rs` | ✅ |
+| 示例              | 文件                              | 状态 |
+| ----------------- | --------------------------------- | ---- |
+| TCP Echo服务器    | `tcp_echo_server.rs`              | ✅   |
+| TCP客户端         | `tcp_client.rs`                   | ✅   |
+| HTTP客户端        | `http_client.rs`                  | ✅   |
+| WebSocket演示     | `websocket_demo.rs`               | ✅   |
+| P2P最小示例       | `p2p_minimal.rs`                  | ✅   |
+| UDP Echo          | `udp_echo.rs`                     | ✅   |
+| ARP抓包           | `arp_sniff.rs`                    | ✅   |
+| TCP监控           | `tcp_monitor.rs`                  | ✅   |
+| DNS查询           | `dns_lookup.rs`                   | ✅   |
+| gRPC服务器        | `grpc_server.rs`                  | ✅   |
+| gRPC客户端        | `grpc_client.rs`                  | ✅   |
+| Rust 1.92特性演示 | `rust_192_async_features_demo.rs` | ✅   |
 
 **总计**: 24个示例，全部可编译 ✅
 

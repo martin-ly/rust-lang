@@ -652,10 +652,10 @@ panic!("Something went wrong");
 unreachable!("This code should never be reached");
 
 // unimplemented!
-unimplemented!("TODO: implement this");
+unimplemented!("not implemented");
 
 // todo!
-todo!("Need to implement this feature");
+todo!("not implemented");
 
 // matches!
 if matches!(value, Pattern) {

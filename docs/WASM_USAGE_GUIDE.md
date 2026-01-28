@@ -217,36 +217,36 @@ wasm-pack build --target no-modules
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>WASM Example</title>
-</head>
-<body>
+  </head>
+  <body>
     <script type="module">
-        import init, { add, greet } from './pkg/my_wasm_project.js';
+      import init, { add, greet } from "./pkg/my_wasm_project.js"
 
-        async function run() {
-            await init();
+      async function run() {
+        await init()
 
-            console.log(add(2, 3));  // 5
-            console.log(greet("World"));  // "Hello, World!"
-        }
+        console.log(add(2, 3)) // 5
+        console.log(greet("World")) // "Hello, World!"
+      }
 
-        run();
+      run()
     </script>
-</body>
+  </body>
 </html>
 ```
 
 ### 2. Node.js 示例
 
 ```javascript
-const wasm = require('./pkg/my_wasm_project.js');
+const wasm = require("./pkg/my_wasm_project.js")
 
 wasm.init().then(() => {
-    console.log(wasm.add(2, 3));  // 5
-    console.log(wasm.greet("World"));  // "Hello, World!"
-});
+  console.log(wasm.add(2, 3)) // 5
+  console.log(wasm.greet("World")) // "Hello, World!"
+})
 ```
 
 ---

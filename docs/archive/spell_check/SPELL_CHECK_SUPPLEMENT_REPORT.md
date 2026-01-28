@@ -176,15 +176,15 @@ AppVeyor      - Windows CI 平台
 
 ### 按类别统计
 
-| 类别 | 原有数量 | 新增数量 | 总数 | 增长率 |
-|------|---------|---------|------|--------|
-| WASM 相关 | 16 | 9 | 25 | +56% |
-| 网络协议 | 10 | 14 | 24 | +140% |
-| 宏系统 | 10 | 19 | 29 | +190% |
-| Rust 生态 | 16 | 11 | 27 | +69% |
-| 算法术语 | 17 | 15 | 32 | +88% |
-| 数据库/中间件 | 0 | 13 | 13 | ∞ |
-| CI/CD 平台 | 0 | 12 | 12 | ∞ |
+| 类别          | 原有数量 | 新增数量 | 总数 | 增长率 |
+| ------------- | -------- | -------- | ---- | ------ |
+| WASM 相关     | 16       | 9        | 25   | +56%   |
+| 网络协议      | 10       | 14       | 24   | +140%  |
+| 宏系统        | 10       | 19       | 29   | +190%  |
+| Rust 生态     | 16       | 11       | 27   | +69%   |
+| 算法术语      | 17       | 15       | 32   | +88%   |
+| 数据库/中间件 | 0        | 13       | 13   | ∞      |
+| CI/CD 平台    | 0        | 12       | 12   | ∞      |
 
 ### 总体统计
 
@@ -249,13 +249,13 @@ grep "Observer|Singleton|Factory" crates/c09_design_pattern/docs
 
 ### 文档覆盖率
 
-| 子项目 | 扫描文件数 | 发现新术语 | 覆盖率 |
-|--------|----------|----------|--------|
-| c08_algorithms | 45+ | 15 | ✅ 100% |
-| c09_design_pattern | 24+ | 0 | ✅ 100% |
-| c10_networks | 26+ | 14 | ✅ 100% |
-| c11_macro_system | 24+ | 19 | ✅ 100% |
-| c12_wasm | 30+ | 9 | ✅ 100% |
+| 子项目             | 扫描文件数 | 发现新术语 | 覆盖率  |
+| ------------------ | ---------- | ---------- | ------- |
+| c08_algorithms     | 45+        | 15         | ✅ 100% |
+| c09_design_pattern | 24+        | 0          | ✅ 100% |
+| c10_networks       | 26+        | 14         | ✅ 100% |
+| c11_macro_system   | 24+        | 19         | ✅ 100% |
+| c12_wasm           | 30+        | 9          | ✅ 100% |
 
 ---
 
@@ -275,18 +275,23 @@ Ctrl+Shift+P → "Reload Window" → 回车
 
 ```markdown
 # 网络协议
+
 gRPC, protobuf, GraphQL, REST, MQTT, Kafka
 
 # 宏系统
+
 DeriveInput, Span, Ident, TokenStream, macro-rules
 
 # 数据库
+
 PostgreSQL, MongoDB, Redis, Elasticsearch
 
 # 云平台
+
 AWS, Azure, GCP, Kubernetes, Docker
 
 # 监控
+
 Prometheus, Grafana, Jaeger, OpenTelemetry
 ```
 
@@ -296,9 +301,9 @@ Prometheus, Grafana, Jaeger, OpenTelemetry
 
 ### 文件大小变化
 
-| 文件 | 补充前 | 补充后 | 增长 |
-|------|--------|--------|------|
-| `.vscode/settings.json` | 11 KB | 13 KB | +18% |
+| 文件                    | 补充前 | 补充后 | 增长 |
+| ----------------------- | ------ | ------ | ---- |
+| `.vscode/settings.json` | 11 KB  | 13 KB  | +18% |
 
 ### 配置行数变化
 

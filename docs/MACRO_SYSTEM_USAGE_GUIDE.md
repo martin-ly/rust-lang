@@ -269,7 +269,7 @@ let config = Config::new()
 
 ### 2. 文档
 
-```rust
+````rust
 /// 这是一个有用的宏
 ///
 /// # Examples
@@ -280,7 +280,7 @@ let config = Config::new()
 macro_rules! my_macro {
     // ...
 }
-```
+````
 
 ### 3. 错误处理
 

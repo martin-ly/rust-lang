@@ -1012,22 +1012,22 @@ graph LR
 
 ## 📊 算法应用场景映射
 
-| 算法类别 | 核心算法 | 应用场景 | Rust 1.92.0 特性 | 时间复杂度 |
-| --- | --- | --- | --- | --- |
-| **排序** | 快速排序 | 通用排序、Top-K | 并行化 `rayon::join` | O(n log n) |
-| | 归并排序 | 稳定排序、外部排序 | `async fn in trait` | O(n log n) |
-| | 堆排序 | 优先级队列 | `const generics` | O(n log n) |
-| **搜索** | 二分搜索 | 有序数据查找 | `Option::is_some_and` | O(log n) |
-| | BFS | 最短路径、层次遍历 | 并行层处理 | O(V + E) |
-| | DFS | 拓扑排序、连通性 | 栈优化 | O(V + E) |
-| **图论** | Dijkstra | 单源最短路径 | `async fn in trait` | O(E + V log V) |
-| | Floyd-Warshall | 全源最短路径 | 并行化 | O(V³) |
-| | Kruskal | 最小生成树 | 并查集优化 | O(E log E) |
-| **动态规划** | LCS | 文本相似度、diff | 滚动数组 | O(mn) |
-| | 0-1背包 | 资源分配 | `async task` | O(nW) |
-| | 编辑距离 | 拼写检查 | SIMD 加速 | O(mn) |
-| **字符串** | KMP | 模式匹配 | `const generics` | O(m + n) |
-| | Aho-Corasick | 多模式匹配 | Trie + 状态机 | O(n + m + z) |
+| 算法类别     | 核心算法       | 应用场景           | Rust 1.92.0 特性      | 时间复杂度     |
+| ------------ | -------------- | ------------------ | --------------------- | -------------- |
+| **排序**     | 快速排序       | 通用排序、Top-K    | 并行化 `rayon::join`  | O(n log n)     |
+|              | 归并排序       | 稳定排序、外部排序 | `async fn in trait`   | O(n log n)     |
+|              | 堆排序         | 优先级队列         | `const generics`      | O(n log n)     |
+| **搜索**     | 二分搜索       | 有序数据查找       | `Option::is_some_and` | O(log n)       |
+|              | BFS            | 最短路径、层次遍历 | 并行层处理            | O(V + E)       |
+|              | DFS            | 拓扑排序、连通性   | 栈优化                | O(V + E)       |
+| **图论**     | Dijkstra       | 单源最短路径       | `async fn in trait`   | O(E + V log V) |
+|              | Floyd-Warshall | 全源最短路径       | 并行化                | O(V³)          |
+|              | Kruskal        | 最小生成树         | 并查集优化            | O(E log E)     |
+| **动态规划** | LCS            | 文本相似度、diff   | 滚动数组              | O(mn)          |
+|              | 0-1背包        | 资源分配           | `async task`          | O(nW)          |
+|              | 编辑距离       | 拼写检查           | SIMD 加速             | O(mn)          |
+| **字符串**   | KMP            | 模式匹配           | `const generics`      | O(m + n)       |
+|              | Aho-Corasick   | 多模式匹配         | Trie + 状态机         | O(n + m + z)   |
 
 ---
 

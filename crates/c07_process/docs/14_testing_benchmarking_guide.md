@@ -710,9 +710,9 @@ name: Process Management Tests
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -723,31 +723,31 @@ jobs:
         rust: [stable, beta, nightly]
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Install Rust
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: ${{ matrix.rust }}
-        override: true
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust }}
+          override: true
 
-    - name: Run tests
-      run: cargo test --verbose
+      - name: Run tests
+        run: cargo test --verbose
 
-    - name: Run integration tests
-      run: cargo test --test integration --verbose
+      - name: Run integration tests
+        run: cargo test --test integration --verbose
 
-    - name: Run security tests
-      run: cargo test --test security --verbose
+      - name: Run security tests
+        run: cargo test --test security --verbose
 
-    - name: Run benchmarks
-      run: cargo bench --verbose
+      - name: Run benchmarks
+        run: cargo bench --verbose
 
-    - name: Check formatting
-      run: cargo fmt -- --check
+      - name: Check formatting
+        run: cargo fmt -- --check
 
-    - name: Run clippy
-      run: cargo clippy -- -D warnings
+      - name: Run clippy
+        run: cargo clippy -- -D warnings
 ```
 
 ### 测试覆盖率

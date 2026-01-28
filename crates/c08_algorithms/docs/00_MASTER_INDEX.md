@@ -67,13 +67,13 @@ docs/
 
 适合日常开发和学习使用的实用文档。
 
-| 文档 | 主要内容 | 适合人群 |
-| --- | --- | --- |
-| [algorithm_complexity.md](./guides/algorithm_complexity.md) | 时间/空间复杂度、Big-O、主定理、摊还分析 | 初学者、面试准备 |
-| [data_structures.md](./guides/data_structures.md) | 线性表、树、图、高级数据结构 | 所有开发者 |
-| [async_algorithms.md](./guides/async_algorithms.md) | 异步算法设计、Tokio、Futures | 异步编程学习者 |
-| [performance_optimization.md](./guides/performance_optimization.md) | 编译期优化、运行时优化、SIMD | 性能优化工程师 |
-| [benchmarking_guide.md](./guides/benchmarking_guide.md) | Criterion、性能测试、对比分析 | 性能调优人员 |
+| 文档                                                                | 主要内容                                 | 适合人群         |
+| ------------------------------------------------------------------- | ---------------------------------------- | ---------------- |
+| [algorithm_complexity.md](./guides/algorithm_complexity.md)         | 时间/空间复杂度、Big-O、主定理、摊还分析 | 初学者、面试准备 |
+| [data_structures.md](./guides/data_structures.md)                   | 线性表、树、图、高级数据结构             | 所有开发者       |
+| [async_algorithms.md](./guides/async_algorithms.md)                 | 异步算法设计、Tokio、Futures             | 异步编程学习者   |
+| [performance_optimization.md](./guides/performance_optimization.md) | 编译期优化、运行时优化、SIMD             | 性能优化工程师   |
+| [benchmarking_guide.md](./guides/benchmarking_guide.md)             | Criterion、性能测试、对比分析            | 性能调优人员     |
 
 **学习路径**: algorithm_complexity → data_structures → async_algorithms → performance_optimization
 
@@ -81,15 +81,15 @@ docs/
 
 深入的形式化理论、数学模型和证明方法。
 
-| 文档 | 主要内容 | 难度 |
-| --- | --- | --- |
-| [ALGORITHM_CLASSIFICATION_AND_MODELS.md](./theory/ALGORITHM_CLASSIFICATION_AND_MODELS.md) | 算法分类、形式化定义、计算模型、语义模型 | ⭐⭐⭐ |
-| [FORMAL_ALGORITHM_MODELS.md](./theory/FORMAL_ALGORITHM_MODELS.md) | 算法形式化、图灵机、λ演算、霍尔逻辑 | ⭐⭐⭐ |
-| [DESIGN_PATTERNS_SEMANTICS_MAPPING.md](./theory/DESIGN_PATTERNS_SEMANTICS_MAPPING.md) | 设计模式、语义模型、等价关系 | ⭐⭐⭐ |
-| [ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md](./theory/ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md) | 异步同步等价性、CPS变换、证明 | ⭐⭐⭐ |
-| [CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md](./theory/CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md) | 控制流形式化、状态机、等价性定理 | ⭐⭐⭐ |
-| [ACTOR_REACTOR_CSP_PATTERNS.md](./theory/ACTOR_REACTOR_CSP_PATTERNS.md) | Actor模型、Reactor模式、CSP理论 | ⭐⭐⭐ |
-| [ASYNC_RECURSION_ANALYSIS.md](./theory/ASYNC_RECURSION_ANALYSIS.md) | 异步递归、不动点理论、实现模式 | ⭐⭐⭐ |
+| 文档                                                                                              | 主要内容                                 | 难度   |
+| ------------------------------------------------------------------------------------------------- | ---------------------------------------- | ------ |
+| [ALGORITHM_CLASSIFICATION_AND_MODELS.md](./theory/ALGORITHM_CLASSIFICATION_AND_MODELS.md)         | 算法分类、形式化定义、计算模型、语义模型 | ⭐⭐⭐ |
+| [FORMAL_ALGORITHM_MODELS.md](./theory/FORMAL_ALGORITHM_MODELS.md)                                 | 算法形式化、图灵机、λ演算、霍尔逻辑      | ⭐⭐⭐ |
+| [DESIGN_PATTERNS_SEMANTICS_MAPPING.md](./theory/DESIGN_PATTERNS_SEMANTICS_MAPPING.md)             | 设计模式、语义模型、等价关系             | ⭐⭐⭐ |
+| [ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md](./theory/ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md)             | 异步同步等价性、CPS变换、证明            | ⭐⭐⭐ |
+| [CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md](./theory/CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md) | 控制流形式化、状态机、等价性定理         | ⭐⭐⭐ |
+| [ACTOR_REACTOR_CSP_PATTERNS.md](./theory/ACTOR_REACTOR_CSP_PATTERNS.md)                           | Actor模型、Reactor模式、CSP理论          | ⭐⭐⭐ |
+| [ASYNC_RECURSION_ANALYSIS.md](./theory/ASYNC_RECURSION_ANALYSIS.md)                               | 异步递归、不动点理论、实现模式           | ⭐⭐⭐ |
 
 **学习路径（理论研究）**: ALGORITHM_CLASSIFICATION → FORMAL_ALGORITHM_MODELS → ASYNC_SYNC_EQUIVALENCE
 
@@ -99,22 +99,22 @@ docs/
 
 深入的算法专题，涵盖各个领域。
 
-| 文档 | 主题 | 关键词 |
-| --- | --- | --- |
-| [algorithm_exp01.md](./advanced/algorithm_exp01.md) | Rust类型设计准则 | 类型系统、泛型、策略模式 |
-| [algorithm_exp02.md](./advanced/algorithm_exp02.md) | 高级排序算法 | 排序、自适应、并行 |
-| [algorithm_exp03.md](./advanced/algorithm_exp03.md) | 图算法 | 图遍历、最短路径、MST |
-| [algorithm_exp04.md](./advanced/algorithm_exp04.md) | 动态规划 | DP、状态压缩、优化 |
-| [algorithm_exp05.md](./advanced/algorithm_exp05.md) | 字符串算法 | KMP、后缀数组、AC自动机 |
-| [algorithm_exp06.md](./advanced/algorithm_exp06.md) | 高级数据结构 | 平衡树、线段树、跳表 |
-| [algorithm_exp07.md](./advanced/algorithm_exp07.md) | 并行算法 | 并行模型、数据并行、任务并行 |
-| [algorithm_exp08.md](./advanced/algorithm_exp08.md) | 执行模型全景 | 控制流、异步模型、形式化 |
-| [algorithm_exp09.md](./advanced/algorithm_exp09.md) | 异步编程模式 | Future、状态机、执行器 |
-| [algorithm_exp10.md](./advanced/algorithm_exp10.md) | 优化技术 | 缓存、内存、SIMD |
-| [algorithm_exp11.md](./advanced/algorithm_exp11.md) | 形式化验证 | 类型证明、并发证明 |
-| [algorithm_exp12.md](./advanced/algorithm_exp12.md) | 分布式算法 | Raft、Paxos、一致性 |
-| [algorithm_exp13.md](./advanced/algorithm_exp13.md) | 机器学习算法 | 监督学习、神经网络 |
-| [algorithm_exp14.md](./advanced/algorithm_exp14.md) | 算法工程 | 工程实践、调优、部署 |
+| 文档                                                | 主题             | 关键词                       |
+| --------------------------------------------------- | ---------------- | ---------------------------- |
+| [algorithm_exp01.md](./advanced/algorithm_exp01.md) | Rust类型设计准则 | 类型系统、泛型、策略模式     |
+| [algorithm_exp02.md](./advanced/algorithm_exp02.md) | 高级排序算法     | 排序、自适应、并行           |
+| [algorithm_exp03.md](./advanced/algorithm_exp03.md) | 图算法           | 图遍历、最短路径、MST        |
+| [algorithm_exp04.md](./advanced/algorithm_exp04.md) | 动态规划         | DP、状态压缩、优化           |
+| [algorithm_exp05.md](./advanced/algorithm_exp05.md) | 字符串算法       | KMP、后缀数组、AC自动机      |
+| [algorithm_exp06.md](./advanced/algorithm_exp06.md) | 高级数据结构     | 平衡树、线段树、跳表         |
+| [algorithm_exp07.md](./advanced/algorithm_exp07.md) | 并行算法         | 并行模型、数据并行、任务并行 |
+| [algorithm_exp08.md](./advanced/algorithm_exp08.md) | 执行模型全景     | 控制流、异步模型、形式化     |
+| [algorithm_exp09.md](./advanced/algorithm_exp09.md) | 异步编程模式     | Future、状态机、执行器       |
+| [algorithm_exp10.md](./advanced/algorithm_exp10.md) | 优化技术         | 缓存、内存、SIMD             |
+| [algorithm_exp11.md](./advanced/algorithm_exp11.md) | 形式化验证       | 类型证明、并发证明           |
+| [algorithm_exp12.md](./advanced/algorithm_exp12.md) | 分布式算法       | Raft、Paxos、一致性          |
+| [algorithm_exp13.md](./advanced/algorithm_exp13.md) | 机器学习算法     | 监督学习、神经网络           |
+| [algorithm_exp14.md](./advanced/algorithm_exp14.md) | 算法工程         | 工程实践、调优、部署         |
 
 **按兴趣选择**:
 
@@ -127,12 +127,12 @@ docs/
 
 Rust 语言特性在算法中的应用。
 
-| 文档 | 版本 | 主要内容 |
-| --- | --- | --- |
-| [rust_189_features.md](./rust-features/rust_189_features.md) | 1.89 | 特性概览 |
-| [RUST_189_FEATURES_GUIDE.md](./rust-features/RUST_189_FEATURES_GUIDE.md) | 1.89 | 详细指南 |
+| 文档                                                                                 | 版本 | 主要内容                 |
+| ------------------------------------------------------------------------------------ | ---- | ------------------------ |
+| [rust_189_features.md](./rust-features/rust_189_features.md)                         | 1.89 | 特性概览                 |
+| [RUST_189_FEATURES_GUIDE.md](./rust-features/RUST_189_FEATURES_GUIDE.md)             | 1.89 | 详细指南                 |
 | [RUST_190_FEATURES_APPLICATION.md](./rust-features/RUST_190_FEATURES_APPLICATION.md) | 1.90 | Async traits、GATs、应用 |
-| [Edition_2024_Features.md](./rust-features/Edition_2024_Features.md) | 2024 | 新语法特性 |
+| [Edition_2024_Features.md](./rust-features/Edition_2024_Features.md)                 | 2024 | 新语法特性               |
 
 **特性亮点**:
 
@@ -145,11 +145,11 @@ Rust 语言特性在算法中的应用。
 
 快速查阅和索引文档。
 
-| 文档 | 用途 | 适合场景 |
-| --- | --- | --- |
-| [algorithm_index.md](./references/algorithm_index.md) | 算法索引 | 快速查找算法 |
+| 文档                                                                    | 用途          | 适合场景     |
+| ----------------------------------------------------------------------- | ------------- | ------------ |
+| [algorithm_index.md](./references/algorithm_index.md)                   | 算法索引      | 快速查找算法 |
 | [ALGORITHM_INDEX_RUST_189.md](./references/ALGORITHM_INDEX_RUST_189.md) | Rust 1.89索引 | 版本特定查询 |
-| [08_algorithms_basics.md](./references/08_algorithms_basics.md) | 基础教程 | 入门学习 |
+| [08_algorithms_basics.md](./references/08_algorithms_basics.md)         | 基础教程      | 入门学习     |
 
 ---
 
@@ -254,9 +254,9 @@ Week 4: 实战项目
 - **图算法** → advanced/algorithm_exp03.md, src/graph/
 - **动态规划** → advanced/algorithm_exp04.md, src/dynamic_programming/
 - **字符串算法** → advanced/algorithm_exp05.md, src/string_algorithms/
-- **异步编程** → guides/async_algorithms.md, theory/ASYNC_*.md
+- **异步编程** → guides/async*algorithms.md, theory/ASYNC*\*.md
 - **性能优化** → guides/performance_optimization.md, advanced/algorithm_exp10.md
-- **形式化** → theory/FORMAL_*.md, advanced/algorithm_exp11.md
+- **形式化** → theory/FORMAL\_\*.md, advanced/algorithm_exp11.md
 
 ### 按难度查找
 
@@ -366,13 +366,13 @@ Week 4: 实战项目
 
 ## 📊 文档统计
 
-| 类别 | 文档数 | 状态 |
-| --- | --- | --- |
-| 实用指南 | 5 | ✅ |
-| 理论文档 | 7 | ✅ |
-| 高级专题 | 14 | ✅ |
-| Rust特性 | 4 | ✅ |
-| 参考资料 | 3 | ✅ |
+| 类别     | 文档数 | 状态   |
+| -------- | ------ | ------ |
+| 实用指南 | 5      | ✅     |
+| 理论文档 | 7      | ✅     |
+| 高级专题 | 14     | ✅     |
+| Rust特性 | 4      | ✅     |
+| 参考资料 | 3      | ✅     |
 | **总计** | **33** | **✅** |
 
 ---

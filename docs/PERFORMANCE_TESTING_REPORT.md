@@ -40,20 +40,20 @@
 
 ### 核心模块性能测试
 
-| 模块 | 基准测试文件数 | 文件列表 |
-|------|--------------|---------|
-| c01_ownership_borrow_scope | 2 | performance_benchmarks.rs, rust_192_benchmarks.rs |
-| c02_type_system | 3 | performance_benchmarks.rs, rust_190_simple_benchmarks.rs, rust_192_benchmarks.rs |
-| c03_control_fn | 2 | performance_benchmarks.rs, rust_192_benchmarks.rs |
-| c04_generic | 2 | performance_benchmarks.rs, rust_192_benchmarks.rs |
-| c05_threads | 4 | rust_192_benchmarks.rs, priority_channels_bench.rs, concurrency_benchmark.rs, backpressure_bench.rs |
-| c06_async | 8 | performance_benchmarks.rs, rust_192_comprehensive_benchmarks.rs, glommio_benchmarks.rs, bench_with_metrics.rs, async_ecosystem_performance_benchmarks.rs, async_ecosystem_benchmarks.rs, async_benchmarks.rs, async_benches.rs |
-| c07_process | 1 | performance_benchmarks.rs |
-| c08_algorithms | 4 | performance_benchmarks.rs, simple_benchmarks.rs, ml_benchmarks.rs, alg_benches.rs, algorithm_benchmarks.rs |
-| c09_design_pattern | 4 | performance_benchmarks.rs, pattern_scenarios.rs, pattern_benchmarks.rs, async_gats_benches.rs |
-| c10_networks | 6 | performance_benchmarks.rs, error_handling_performance.rs, concurrency_performance.rs, network_benchmarks.rs, protocol_performance.rs, packet_performance.rs, memory_performance.rs |
-| c11_macro_system | 1 | performance_benchmarks.rs |
-| c12_wasm | 4 | performance_benchmarks.rs, string_operations_bench.rs, design_patterns_bench.rs, array_processing_bench.rs |
+| 模块                       | 基准测试文件数 | 文件列表                                                                                                                                                                                                                       |
+| -------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| c01_ownership_borrow_scope | 2              | performance_benchmarks.rs, rust_192_benchmarks.rs                                                                                                                                                                              |
+| c02_type_system            | 3              | performance_benchmarks.rs, rust_190_simple_benchmarks.rs, rust_192_benchmarks.rs                                                                                                                                               |
+| c03_control_fn             | 2              | performance_benchmarks.rs, rust_192_benchmarks.rs                                                                                                                                                                              |
+| c04_generic                | 2              | performance_benchmarks.rs, rust_192_benchmarks.rs                                                                                                                                                                              |
+| c05_threads                | 4              | rust_192_benchmarks.rs, priority_channels_bench.rs, concurrency_benchmark.rs, backpressure_bench.rs                                                                                                                            |
+| c06_async                  | 8              | performance_benchmarks.rs, rust_192_comprehensive_benchmarks.rs, glommio_benchmarks.rs, bench_with_metrics.rs, async_ecosystem_performance_benchmarks.rs, async_ecosystem_benchmarks.rs, async_benchmarks.rs, async_benches.rs |
+| c07_process                | 1              | performance_benchmarks.rs                                                                                                                                                                                                      |
+| c08_algorithms             | 4              | performance_benchmarks.rs, simple_benchmarks.rs, ml_benchmarks.rs, alg_benches.rs, algorithm_benchmarks.rs                                                                                                                     |
+| c09_design_pattern         | 4              | performance_benchmarks.rs, pattern_scenarios.rs, pattern_benchmarks.rs, async_gats_benches.rs                                                                                                                                  |
+| c10_networks               | 6              | performance_benchmarks.rs, error_handling_performance.rs, concurrency_performance.rs, network_benchmarks.rs, protocol_performance.rs, packet_performance.rs, memory_performance.rs                                             |
+| c11_macro_system           | 1              | performance_benchmarks.rs                                                                                                                                                                                                      |
+| c12_wasm                   | 4              | performance_benchmarks.rs, string_operations_bench.rs, design_patterns_bench.rs, array_processing_bench.rs                                                                                                                     |
 
 **总计**: 46个性能基准测试文件
 

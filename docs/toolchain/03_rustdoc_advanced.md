@@ -115,7 +115,7 @@ target/doc/
 
 **外部文档注释** (`///`):
 
-```rust
+````rust
 /// 这是一个公开函数的文档
 ///
 /// # Examples
@@ -127,7 +127,7 @@ target/doc/
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
-```
+````
 
 **内部文档注释** (`//!`):
 
@@ -407,7 +407,7 @@ pub fn external_links() {}
 
 ### 5.1 模块级文档
 
-```rust
+````rust
 //! # 模块名称
 //!
 //! 模块描述
@@ -420,7 +420,7 @@ pub fn external_links() {}
 //! ```
 
 pub fn function() {}
-```
+````
 
 ---
 
@@ -428,7 +428,7 @@ pub fn function() {}
 
 **`src/lib.rs`**:
 
-```rust
+````rust
 //! # My Crate
 //!
 //! 这是 crate 的主文档
@@ -447,7 +447,7 @@ pub fn function() {}
 
 #![doc(html_logo_url = "https://example.com/logo.png")]
 #![doc(html_favicon_url = "https://example.com/favicon.ico")]
-```
+````
 
 ---
 
@@ -455,7 +455,7 @@ pub fn function() {}
 
 **标准章节**:
 
-```rust
+````rust
 /// # Examples
 ///
 /// ```
@@ -487,7 +487,7 @@ pub fn function() {}
 /// 时间复杂度: O(n)
 /// 空间复杂度: O(1)
 pub fn documented_function() {}
-```
+````
 
 ---
 
@@ -566,10 +566,10 @@ rustdoc-args = ["--html-in-header", "header.html"]
 
 ```html
 <style>
-    :root {
-        --main-background-color: #1e1e1e;
-        --main-color: #ddd;
-    }
+  :root {
+    --main-background-color: #1e1e1e;
+    --main-color: #ddd;
+  }
 </style>
 ```
 
@@ -770,7 +770,7 @@ docs.example.com
 
 **完整示例**:
 
-```rust
+````rust
 //! # My Awesome Crate
 //!
 //! 这个 crate 提供了高性能的数据处理功能。
@@ -885,7 +885,7 @@ impl Processor {
 
 #[derive(Default)]
 struct Config;
-```
+````
 
 ---
 

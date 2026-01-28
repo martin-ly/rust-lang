@@ -100,7 +100,7 @@ c08_algorithms/
 ### Phase 2: 重组 docs 目录 (步骤 4-8)
 
 - [ ] 4. 创建新的子目录结构 (guides/, theory/, advanced/, rust-features/, references/, archives/)
-- [ ] 5. 重命名并移动 algorithm_exp*.md 文件到 advanced/ 目录
+- [ ] 5. 重命名并移动 algorithm_exp\*.md 文件到 advanced/ 目录
 - [ ] 6. 移动理论文档到 theory/ 目录
 - [ ] 7. 移动指南文档到 guides/ 目录
 - [ ] 8. 移动 Rust 特性文档到 rust-features/ 目录
@@ -121,22 +121,22 @@ c08_algorithms/
 
 ### algorithm_exp 系列重命名
 
-| 原文件 | 新文件 | 主题 |
-| --- | --- | --- |
+| 原文件             | 新文件                           | 主题             |
+| ------------------ | -------------------------------- | ---------------- |
 | algorithm_exp01.md | 01_type_design_for_algorithms.md | Rust类型设计准则 |
-| algorithm_exp02.md | 02_advanced_sorting.md | 高级排序算法 |
-| algorithm_exp03.md | 03_graph_algorithms.md | 图算法 |
-| algorithm_exp04.md | 04_dynamic_programming.md | 动态规划 |
-| algorithm_exp05.md | 05_string_algorithms.md | 字符串算法 |
-| algorithm_exp06.md | 06_data_structures.md | 数据结构 |
-| algorithm_exp07.md | 07_parallel_algorithms.md | 并行算法 |
-| algorithm_exp08.md | 08_execution_models.md | 执行模型 |
-| algorithm_exp09.md | 09_async_patterns.md | 异步模式 |
-| algorithm_exp10.md | 10_optimization_techniques.md | 优化技术 |
-| algorithm_exp11.md | 11_formal_verification.md | 形式化验证 |
-| algorithm_exp12.md | 12_distributed_algorithms.md | 分布式算法 |
-| algorithm_exp13.md | 13_machine_learning.md | 机器学习 |
-| algorithm_exp14.md | 14_algorithm_engineering.md | 算法工程 |
+| algorithm_exp02.md | 02_advanced_sorting.md           | 高级排序算法     |
+| algorithm_exp03.md | 03_graph_algorithms.md           | 图算法           |
+| algorithm_exp04.md | 04_dynamic_programming.md        | 动态规划         |
+| algorithm_exp05.md | 05_string_algorithms.md          | 字符串算法       |
+| algorithm_exp06.md | 06_data_structures.md            | 数据结构         |
+| algorithm_exp07.md | 07_parallel_algorithms.md        | 并行算法         |
+| algorithm_exp08.md | 08_execution_models.md           | 执行模型         |
+| algorithm_exp09.md | 09_async_patterns.md             | 异步模式         |
+| algorithm_exp10.md | 10_optimization_techniques.md    | 优化技术         |
+| algorithm_exp11.md | 11_formal_verification.md        | 形式化验证       |
+| algorithm_exp12.md | 12_distributed_algorithms.md     | 分布式算法       |
+| algorithm_exp13.md | 13_machine_learning.md           | 机器学习         |
+| algorithm_exp14.md | 14_algorithm_engineering.md      | 算法工程         |
 
 ### 根目录报告文件归档
 

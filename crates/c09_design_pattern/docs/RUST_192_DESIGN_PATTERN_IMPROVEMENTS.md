@@ -15,7 +15,7 @@
   - [MaybeUninit 在对象池模式中的应用](#maybeuninit-在对象池模式中的应用)
     - [Rust 1.92.0 改进概述](#rust-1920-改进概述)
   - [关联项多边界在设计模式中的应用](#关联项多边界在设计模式中的应用)
-  - [Location::file\_as\_c\_str 在错误处理中的应用](#locationfile_as_c_str-在错误处理中的应用)
+  - [Location::file_as_c_str 在错误处理中的应用](#locationfile_as_c_str-在错误处理中的应用)
   - [实际应用示例](#实际应用示例)
   - [迁移指南](#迁移指南)
     - [从 Rust 1.91 迁移到 Rust 1.92.0](#从-rust-191-迁移到-rust-1920)

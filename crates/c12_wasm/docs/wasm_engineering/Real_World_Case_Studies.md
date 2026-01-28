@@ -55,7 +55,7 @@
 
 **技术债务累积**：
 \[
-\text{Debt}(t) = \text{Debt}_0 \times e^{r \cdot t} \quad (\text{指数增长})
+\text{Debt}(t) = \text{Debt}\_0 \times e^{r \cdot t} \quad (\text{指数增长})
 \]
 
 ---
@@ -122,30 +122,30 @@ const memory = new WebAssembly.Memory({
   initial: 256,
   maximum: 512,
   shared: true,
-});
+})
 
-const renderWorker = new Worker('render-worker.js');
-renderWorker.postMessage({ memory, module: wasmModule });
+const renderWorker = new Worker("render-worker.js")
+renderWorker.postMessage({ memory, module: wasmModule })
 
 // 主线程处理 UI 事件
-document.addEventListener('mousemove', (e) => {
+document.addEventListener("mousemove", e => {
   renderWorker.postMessage({
-    type: 'mouse_move',
+    type: "mouse_move",
     x: e.clientX,
     y: e.clientY,
-  });
-});
+  })
+})
 ```
 
 ### 性能结果
 
 **对比**：
 
-| 指标 | 纯 JavaScript | Wasm 版本 | 改进 |
-| --- | --- | --- | --- |
-| 渲染 1万图层 | 850ms | 120ms | **7.1×** |
-| 内存占用 | 1.2 GB | 450 MB | **2.7×** |
-| 首次加载 | 3.5s | 1.8s | **1.9×** |
+| 指标         | 纯 JavaScript | Wasm 版本 | 改进     |
+| ------------ | ------------- | --------- | -------- |
+| 渲染 1万图层 | 850ms         | 120ms     | **7.1×** |
+| 内存占用     | 1.2 GB        | 450 MB    | **2.7×** |
+| 首次加载     | 3.5s          | 1.8s      | **1.9×** |
 
 ### 遇到的坑
 
@@ -165,16 +165,16 @@ document.addEventListener('mousemove', (e) => {
 
 ```javascript
 // 使用 SharedArrayBuffer + Atomics
-const sharedBuffer = new SharedArrayBuffer(4096);
-const view = new Int32Array(sharedBuffer);
+const sharedBuffer = new SharedArrayBuffer(4096)
+const view = new Int32Array(sharedBuffer)
 
 // 主线程写入任务
-Atomics.store(view, 0, taskId);
-Atomics.notify(view, 0, 1);
+Atomics.store(view, 0, taskId)
+Atomics.notify(view, 0, 1)
 
 // Worker 读取任务
-Atomics.wait(view, 0, 0);
-const task = Atomics.load(view, 0);
+Atomics.wait(view, 0, 0)
+const task = Atomics.load(view, 0)
 ```
 
 **问题 2: Wasm 内存增长导致卡顿**:
@@ -259,19 +259,19 @@ emcc src/geometry/*.cpp src/renderer/*.cpp \
 ```javascript
 // 按需加载模块
 async function loadModule(name) {
-  const response = await fetch(`/modules/${name}.wasm`);
-  const buffer = await response.arrayBuffer();
-  const module = await WebAssembly.instantiate(buffer, imports);
-  return module.instance.exports;
+  const response = await fetch(`/modules/${name}.wasm`)
+  const buffer = await response.arrayBuffer()
+  const module = await WebAssembly.instantiate(buffer, imports)
+  return module.instance.exports
 }
 
 // 延迟加载非核心功能
-document.getElementById('open-file').addEventListener('click', async () => {
+document.getElementById("open-file").addEventListener("click", async () => {
   if (!fileModule) {
-    fileModule = await loadModule('file-io');
+    fileModule = await loadModule("file-io")
   }
-  fileModule.open_dialog();
-});
+  fileModule.open_dialog()
+})
 ```
 
 ### 性能优化
@@ -308,14 +308,15 @@ public:
 
 ```javascript
 // 主线程
-const workers = Array.from({ length: navigator.hardwareConcurrency }, () =>
-  new Worker('parser-worker.js')
-);
+const workers = Array.from(
+  { length: navigator.hardwareConcurrency },
+  () => new Worker("parser-worker.js")
+)
 
-const chunks = splitFileIntoChunks(fileBuffer);
+const chunks = splitFileIntoChunks(fileBuffer)
 const results = await Promise.all(
   chunks.map((chunk, i) => workers[i % workers.length].parse(chunk))
-);
+)
 ```
 
 **最终性能**：
@@ -356,13 +357,14 @@ autocad-web/
 
 **运行性能**：
 
-| 操作 | 桌面版 | Web 版 | 比率 |
-| --- | --- | --- | --- |
-| 打开文件 | 5s | 8s | 0.63 |
-| 渲染场景 | 16ms | 22ms | 0.73 |
-| 几何运算 | 100% | 92% | 0.92 |
+| 操作     | 桌面版 | Web 版 | 比率 |
+| -------- | ------ | ------ | ---- |
+| 打开文件 | 5s     | 8s     | 0.63 |
+| 渲染场景 | 16ms   | 22ms   | 0.73 |
+| 几何运算 | 100%   | 92%    | 0.92 |
 
 **批判**：
+
 > AutoCAD Web 证明了复杂桌面应用可以迁移到 Web，但性能仍有 10-40% 损失。对于专业用户，桌面版仍是首选。
 
 ---
@@ -450,7 +452,7 @@ const featherShader = `
 
     gl_FragColor = vec4(sum, sum, sum, 1.0);
   }
-`;
+`
 ```
 
 ### 性能优化2
@@ -497,14 +499,12 @@ Total: 45ms/frame (无法达到 30fps)
 
    ```javascript
    // 4 个 Worker 并行处理
-   const workers = createWorkerPool(4);
+   const workers = createWorkerPool(4)
 
    async function processFrame(frame) {
-       const tiles = splitIntoTiles(frame, 2, 2);  // 2×2 网格
-       const results = await Promise.all(
-           tiles.map((tile, i) => workers[i].process(tile))
-       );
-       return mergeResults(results);
+     const tiles = splitIntoTiles(frame, 2, 2) // 2×2 网格
+     const results = await Promise.all(tiles.map((tile, i) => workers[i].process(tile)))
+     return mergeResults(results)
    }
    ```
 
@@ -540,13 +540,13 @@ python quantize_model.py --input model.tflite --output model_q.tflite
 
 ```javascript
 // 先加载低质量模型
-const quickModel = await loadModel('model_quick.wasm');  // 1 MB
-startProcessing(quickModel);
+const quickModel = await loadModel("model_quick.wasm") // 1 MB
+startProcessing(quickModel)
 
 // 后台加载高质量模型
-loadModel('model_full.wasm').then(fullModel => {
-  replaceModel(fullModel);  // 无缝切换
-});
+loadModel("model_full.wasm").then(fullModel => {
+  replaceModel(fullModel) // 无缝切换
+})
 ```
 
 ### 经验总结
@@ -622,28 +622,28 @@ public:
 
 ```javascript
 // 文件上传时自动压缩
-document.getElementById('upload').addEventListener('change', async (e) => {
-  const file = e.target.files[0];
-  console.log(`Original: ${(file.size / 1024 / 1024).toFixed(2)} MB`);
+document.getElementById("upload").addEventListener("change", async e => {
+  const file = e.target.files[0]
+  console.log(`Original: ${(file.size / 1024 / 1024).toFixed(2)} MB`)
 
   // Wasm 压缩
-  const compressed = await wasmCompressor.compress(file, { quality: 85 });
-  console.log(`Compressed: ${(compressed.size / 1024 / 1024).toFixed(2)} MB`);
+  const compressed = await wasmCompressor.compress(file, { quality: 85 })
+  console.log(`Compressed: ${(compressed.size / 1024 / 1024).toFixed(2)} MB`)
 
   // 上传压缩后的文件
-  uploadToServer(compressed);
-});
+  uploadToServer(compressed)
+})
 ```
 
 ### 成本节省
 
 **对比分析**：
 
-| 方案 | 带宽成本 | 存储成本 | 总成本/月 |
-| --- | --- | --- | --- |
-| 原始方案 | $80,000 | $50,000 | **$130,000** |
-| 服务端压缩 | $50,000 | $15,000 | **$65,000** |
-| 客户端 Wasm | $15,000 | $15,000 | **$30,000** |
+| 方案        | 带宽成本 | 存储成本 | 总成本/月    |
+| ----------- | -------- | -------- | ------------ |
+| 原始方案    | $80,000  | $50,000  | **$130,000** |
+| 服务端压缩  | $50,000  | $15,000  | **$65,000**  |
+| 客户端 Wasm | $15,000  | $15,000  | **$30,000**  |
 
 **ROI**：
 
@@ -665,21 +665,21 @@ document.getElementById('upload').addEventListener('change', async (e) => {
 ```javascript
 // 设备自适应
 function getCompressionQuality() {
-  const memory = navigator.deviceMemory || 4;
-  const cores = navigator.hardwareConcurrency || 2;
+  const memory = navigator.deviceMemory || 4
+  const cores = navigator.hardwareConcurrency || 2
 
   if (memory < 2 || cores < 2) {
-    return 70;  // 低端设备：快速压缩
+    return 70 // 低端设备：快速压缩
   } else if (memory < 4) {
-    return 80;  // 中端设备：平衡
+    return 80 // 中端设备：平衡
   } else {
-    return 90;  // 高端设备：高质量
+    return 90 // 高端设备：高质量
   }
 }
 
 // Web Worker 防止 UI 阻塞
-const worker = new Worker('compressor-worker.js');
-worker.postMessage({ image, quality: getCompressionQuality() });
+const worker = new Worker("compressor-worker.js")
+worker.postMessage({ image, quality: getCompressionQuality() })
 ```
 
 ---
@@ -720,6 +720,7 @@ worker.postMessage({ image, quality: getCompressionQuality() });
 - 调试困难
 
 **教训**：
+
 > Wasm 不是万能药。简单的业务逻辑用 JavaScript 更合适。
 
 **反模式 2: 忽略 JS ↔ Wasm 边界开销**:
@@ -729,12 +730,12 @@ worker.postMessage({ image, quality: getCompressionQuality() });
 ```javascript
 // ❌ 错误：频繁跨边界
 for (let i = 0; i < 1000000; i++) {
-  result[i] = wasmModule.process(data[i]);  // 每次调用 1μs 开销
+  result[i] = wasmModule.process(data[i]) // 每次调用 1μs 开销
 }
 // 总开销：1 秒（纯粹浪费在调用上）
 
 // ✅ 正确：批量处理
-const result = wasmModule.processBatch(data);  // 单次调用
+const result = wasmModule.processBatch(data) // 单次调用
 ```
 
 **反模式 3: 盲目使用 Wasm**:
@@ -748,6 +749,7 @@ const result = wasmModule.processBatch(data);  // 单次调用
 - 维护成本增加
 
 **教训**：
+
 > 先 profile，证明瓶颈，再重写。不要为了 Wasm 而 Wasm。
 
 ---

@@ -25,9 +25,9 @@
 
 ### 快速开始
 
-1) 从 `RUST_189_FEATURES_SUMMARY.md` 了解版本变化
-2) 阅读 `view01.md` / `view02.md` 建立控制流全景
-3) 跑通 `snippets/` 的异步控制流示例
+1. 从 `RUST_189_FEATURES_SUMMARY.md` 了解版本变化
+2. 阅读 `view01.md` / `view02.md` 建立控制流全景
+3. 跑通 `snippets/` 的异步控制流示例
 
 ---
 

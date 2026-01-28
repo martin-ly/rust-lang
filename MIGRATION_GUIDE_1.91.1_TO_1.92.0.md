@@ -149,7 +149,7 @@ rust-version = "1.92"  # 更新所有 crate
 更新所有 README.md 中的版本引用：
 
 ```markdown
-**Rust版本**: 1.92.0+（历史记录，当前版本为 1.93.0+）  # 从 1.91.1+ 更新
+**Rust版本**: 1.92.0+（历史记录，当前版本为 1.93.0+） # 从 1.91.1+ 更新
 **最后更新**: 2026-01-26
 ```
 
@@ -302,7 +302,7 @@ returns_result();  // 警告：未使用 Result
 
 **错误信息**:
 
-```
+```text
 error: package `xxx` requires rustc 1.91.1 or newer
 ```
 
@@ -320,7 +320,7 @@ rustup default stable
 
 **错误信息**:
 
-```
+```text
 error: failed to select a version for `xxx`
 ```
 
@@ -337,7 +337,7 @@ cargo update
 
 **错误信息**:
 
-```
+```text
 error: `div_ceil` is not a member of trait `NonZeroU32`
 ```
 

@@ -630,37 +630,37 @@ jobs:
         rust: [stable, beta, nightly]
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Install Rust
-      uses: actions-rs/toolchain@v1
-      with:
-        profile: minimal
-        toolchain: ${{ matrix.rust }}
-        override: true
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.rust }}
+          override: true
 
-    - name: Run tests
-      run: cargo test --all-features
+      - name: Run tests
+        run: cargo test --all-features
 
-    - name: Run benchmarks
-      run: cargo bench --no-run
+      - name: Run benchmarks
+        run: cargo bench --no-run
 
-    - name: Run stress tests
-      run: cargo test --release -- --ignored --test-threads=1
+      - name: Run stress tests
+        run: cargo test --release -- --ignored --test-threads=1
 
   coverage:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Install tarpaulin
-      run: cargo install cargo-tarpaulin
+      - name: Install tarpaulin
+        run: cargo install cargo-tarpaulin
 
-    - name: Generate coverage
-      run: cargo tarpaulin --out Xml
+      - name: Generate coverage
+        run: cargo tarpaulin --out Xml
 
-    - name: Upload coverage
-      uses: codecov/codecov-action@v2
+      - name: Upload coverage
+        uses: codecov/codecov-action@v2
 ```
 
 ### 5.2 性能回归检测
@@ -672,35 +672,35 @@ name: Performance Regression
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   bench:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Install Rust
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
 
-    - name: Run benchmarks (baseline)
-      run: |
-        git checkout main
-        cargo bench --bench process_bench -- --save-baseline main
+      - name: Run benchmarks (baseline)
+        run: |
+          git checkout main
+          cargo bench --bench process_bench -- --save-baseline main
 
-    - name: Run benchmarks (PR)
-      run: |
-        git checkout ${{ github.sha }}
-        cargo bench --bench process_bench -- --baseline main
+      - name: Run benchmarks (PR)
+        run: |
+          git checkout ${{ github.sha }}
+          cargo bench --bench process_bench -- --baseline main
 
-    - name: Check for regression
-      run: |
-        if grep -q "regressed" target/criterion/*/report/index.html; then
-          echo "Performance regression detected!"
-          exit 1
-        fi
+      - name: Check for regression
+        run: |
+          if grep -q "regressed" target/criterion/*/report/index.html; then
+            echo "Performance regression detected!"
+            exit 1
+          fi
 ```
 
 ---
@@ -871,7 +871,7 @@ assert!(condition);
 
 ---
 
-**下一步**: [05_现代进程库.md](./05_现代进程库.md)
+**下一步**: [05\_现代进程库.md](./05_现代进程库.md)
 
 ---
 

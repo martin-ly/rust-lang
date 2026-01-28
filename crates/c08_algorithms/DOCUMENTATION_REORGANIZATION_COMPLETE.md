@@ -87,7 +87,7 @@
 
 #### 2.3 高级专题 (advanced/)
 
-移动 14 个 algorithm_exp*.md 文件到 `docs/advanced/`:
+移动 14 个 algorithm_exp\*.md 文件到 `docs/advanced/`:
 
 - algorithm_exp01.md - Rust 类型设计准则
 - algorithm_exp02.md - 高级排序算法
@@ -181,7 +181,7 @@
 ### 文档分布
 
 | 目录 | 文档数 | 难度等级 | 主要内容 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
+param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
 | guides/ | 5 | ⭐~⭐⭐ | 实用指南 |
 | theory/ | 7 | ⭐⭐⭐ | 理论文档 |
 | advanced/ | 14 | ⭐⭐~⭐⭐⭐ | 高级专题 |
@@ -368,7 +368,7 @@ c08_algorithms/
 
 ### 中期任务（1 个月）
 
-1. [ ] 为每个 algorithm_exp*.md 文件添加更详细的描述
+1. [ ] 为每个 algorithm_exp\*.md 文件添加更详细的描述
 2. [ ] 创建交互式学习路径图
 3. [ ] 添加更多代码示例到文档
 4. [ ] 建立文档自动化检查工具

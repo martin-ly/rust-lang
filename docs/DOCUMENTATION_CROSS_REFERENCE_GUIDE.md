@@ -75,55 +75,55 @@
 
 ### C01 - 所有权与借用
 
-- **主索引**: [c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md](../crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c01*ownership_borrow_scope/docs/tier_01_foundations/02*主索引导航.md](../crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [ownership_cheatsheet.md](./quick_reference/ownership_cheatsheet.md)
 - **研究笔记**: [ownership_model.md](./research_notes/formal_methods/ownership_model.md)
 
 ### C02 - 类型系统
 
-- **主索引**: [c02_type_system/docs/tier_01_foundations/02_主索引导航.md](../crates/c02_type_system/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c02*type_system/docs/tier_01_foundations/02*主索引导航.md](../crates/c02_type_system/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [type_system.md](./quick_reference/type_system.md)
 - **研究笔记**: [type_system_foundations.md](./research_notes/type_theory/type_system_foundations.md)
 
 ### C03 - 控制流与函数
 
-- **主索引**: [c03_control_fn/docs/tier_01_foundations/02_主索引导航.md](../crates/c03_control_fn/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c03*control_fn/docs/tier_01_foundations/02*主索引导航.md](../crates/c03_control_fn/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [control_flow_functions_cheatsheet.md](./quick_reference/control_flow_functions_cheatsheet.md)
 
 ### C04 - 泛型编程
 
-- **主索引**: [c04_generic/docs/tier_01_foundations/02_主索引导航.md](../crates/c04_generic/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c04*generic/docs/tier_01_foundations/02*主索引导航.md](../crates/c04_generic/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [generics_cheatsheet.md](./quick_reference/generics_cheatsheet.md)
 
 ### C05 - 线程与并发
 
-- **主索引**: [c05_threads/docs/tier_01_foundations/02_主索引导航.md](../crates/c05_threads/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c05*threads/docs/tier_01_foundations/02*主索引导航.md](../crates/c05_threads/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [threads_concurrency_cheatsheet.md](./quick_reference/threads_concurrency_cheatsheet.md)
 
 ### C06 - 异步编程
 
-- **主索引**: [c06_async/docs/tier_01_foundations/02_主索引导航.md](../crates/c06_async/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c06*async/docs/tier_01_foundations/02*主索引导航.md](../crates/c06_async/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [async_patterns.md](./quick_reference/async_patterns.md)
 - **研究笔记**: [async_state_machine.md](./research_notes/formal_methods/async_state_machine.md)
 
 ### C07 - 进程管理
 
-- **主索引**: [c07_process/docs/tier_01_foundations/02_主索引导航.md](../crates/c07_process/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c07*process/docs/tier_01_foundations/02*主索引导航.md](../crates/c07_process/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [process_management_cheatsheet.md](./quick_reference/process_management_cheatsheet.md)
 
 ### C08 - 算法与数据结构
 
-- **主索引**: [c08_algorithms/docs/tier_01_foundations/02_主索引导航.md](../crates/c08_algorithms/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c08*algorithms/docs/tier_01_foundations/02*主索引导航.md](../crates/c08_algorithms/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [algorithms_cheatsheet.md](./quick_reference/algorithms_cheatsheet.md)
 
 ### C09 - 设计模式
 
-- **主索引**: [c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md](../crates/c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c09*design_pattern/docs/tier_01_foundations/02*主索引导航.md](../crates/c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [design_patterns_cheatsheet.md](./quick_reference/design_patterns_cheatsheet.md)
 
 ### C10 - 网络编程
 
-- **主索引**: [c10_networks/docs/tier_01_foundations/02_主索引导航.md](../crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c10*networks/docs/tier_01_foundations/02*主索引导航.md](../crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [network_programming_cheatsheet.md](./quick_reference/network_programming_cheatsheet.md)
 
 ### C11 - 宏系统
@@ -133,7 +133,7 @@
 
 ### C12 - WASM
 
-- **主索引**: [c12_wasm/docs/tier_01_foundations/02_主索引导航.md](../crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md)
+- **主索引**: [c12*wasm/docs/tier_01_foundations/02*主索引导航.md](../crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md)
 - **速查卡**: [wasm_cheatsheet.md](./quick_reference/wasm_cheatsheet.md)
 
 ---

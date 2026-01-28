@@ -95,24 +95,24 @@ loop {
 
 ### HTTP 客户端
 
-| 操作 | 方法 | 说明 |
-|------|------|------|
-| GET | `get(url)` | 发送 GET 请求 |
-| POST | `post(url)` | 发送 POST 请求 |
-| PUT | `put(url)` | 发送 PUT 请求 |
-| DELETE | `delete(url)` | 发送 DELETE 请求 |
-| 设置头部 | `.header(key, value)` | 设置请求头 |
-| JSON 数据 | `.json(data)` | 发送 JSON 数据 |
-| 表单数据 | `.form(data)` | 发送表单数据 |
+| 操作      | 方法                  | 说明             |
+| --------- | --------------------- | ---------------- |
+| GET       | `get(url)`            | 发送 GET 请求    |
+| POST      | `post(url)`           | 发送 POST 请求   |
+| PUT       | `put(url)`            | 发送 PUT 请求    |
+| DELETE    | `delete(url)`         | 发送 DELETE 请求 |
+| 设置头部  | `.header(key, value)` | 设置请求头       |
+| JSON 数据 | `.json(data)`         | 发送 JSON 数据   |
+| 表单数据  | `.form(data)`         | 发送表单数据     |
 
 ### TCP/UDP
 
-| 操作 | TCP | UDP |
-|------|-----|-----|
-| 监听 | `TcpListener::bind()` | `UdpSocket::bind()` |
+| 操作 | TCP                    | UDP                    |
+| ---- | ---------------------- | ---------------------- |
+| 监听 | `TcpListener::bind()`  | `UdpSocket::bind()`    |
 | 连接 | `TcpStream::connect()` | `UdpSocket::connect()` |
-| 接收 | `recv()` | `recv_from()` |
-| 发送 | `send()` | `send_to()` |
+| 接收 | `recv()`               | `recv_from()`          |
+| 发送 | `send()`               | `send_to()`            |
 
 ### WebSocket
 

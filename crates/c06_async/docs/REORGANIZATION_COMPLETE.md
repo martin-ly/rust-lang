@@ -45,45 +45,45 @@ docs/
 
 ### 移动和重命名
 
-| 操作 | 数量 | 目标位置 |
-| --- | --- | --- |
-| **核心概念移动** | 6 | → core/ |
-| **学习指南整理** | 6 | → guides/ |
-| **运行时文档** | 4 | → runtimes/ |
-| **模式文档** | 3 | → patterns/ |
-| **性能文档** | 3 | → performance/ |
-| **生态系统** | 3 | → ecosystem/ |
-| **API参考** | 3 | → references/ |
-| **综合指南** | 2 | → comprehensive/ |
-| **View文档** | 20 | → views/ |
-| **工具配置** | 1+N | → tools/ |
+| 操作             | 数量 | 目标位置         |
+| ---------------- | ---- | ---------------- |
+| **核心概念移动** | 6    | → core/          |
+| **学习指南整理** | 6    | → guides/        |
+| **运行时文档**   | 4    | → runtimes/      |
+| **模式文档**     | 3    | → patterns/      |
+| **性能文档**     | 3    | → performance/   |
+| **生态系统**     | 3    | → ecosystem/     |
+| **API参考**      | 3    | → references/    |
+| **综合指南**     | 2    | → comprehensive/ |
+| **View文档**     | 20   | → views/         |
+| **工具配置**     | 1+N  | → tools/         |
 
 ### 归档文档
 
-| 类别 | 数量 | 位置 |
-| --- | --- | --- |
-| **旧README** | 3 | archives/old_readmes/ |
-| **完成报告** | 3 | archives/completion_reports/ |
-| **废弃文档** | 7 | archives/deprecated/ |
-| **总计** | 13 | archives/ |
+| 类别         | 数量 | 位置                         |
+| ------------ | ---- | ---------------------------- |
+| **旧README** | 3    | archives/old_readmes/        |
+| **完成报告** | 3    | archives/completion_reports/ |
+| **废弃文档** | 7    | archives/deprecated/         |
+| **总计**     | 13   | archives/                    |
 
 ### 新建文档
 
-| 文档 | 用途 |
-| --- | --- |
-| **guides/README.md** | 学习指南导航 |
-| **core/README.md** | 核心概念导航 |
-| **runtimes/README.md** | 运行时导航 |
-| **patterns/README.md** | 设计模式导航 |
-| **performance/README.md** | 性能优化导航 |
-| **ecosystem/README.md** | 生态系统导航 |
-| **references/README.md** | API参考导航 |
-| **comprehensive/README.md** | 综合指南导航 |
-| **views/README.md** | 多视角导航 |
-| **tools/README.md** | 工具配置导航 |
-| **archives/README.md** | 归档说明 |
-| **REORGANIZATION_PLAN.md** | 重组方案 |
-| **REORGANIZATION_COMPLETE.md** | 本报告 |
+| 文档                           | 用途         |
+| ------------------------------ | ------------ |
+| **guides/README.md**           | 学习指南导航 |
+| **core/README.md**             | 核心概念导航 |
+| **runtimes/README.md**         | 运行时导航   |
+| **patterns/README.md**         | 设计模式导航 |
+| **performance/README.md**      | 性能优化导航 |
+| **ecosystem/README.md**        | 生态系统导航 |
+| **references/README.md**       | API参考导航  |
+| **comprehensive/README.md**    | 综合指南导航 |
+| **views/README.md**            | 多视角导航   |
+| **tools/README.md**            | 工具配置导航 |
+| **archives/README.md**         | 归档说明     |
+| **REORGANIZATION_PLAN.md**     | 重组方案     |
+| **REORGANIZATION_COMPLETE.md** | 本报告       |
 
 ---
 
@@ -91,15 +91,15 @@ docs/
 
 ### 重组前后对比
 
-| 指标 | 重组前 | 重组后 | 改进 |
-| --- | --- | --- | --- |
-| **根目录文件数** | 60+ | 4 | ↓ 93% |
-| **主题目录数** | 2 | 10 | ↑ 400% |
-| **导航README** | 0 | 11 | ✅ 新增 |
-| **归档文档** | 0 | 13 | ✅ 已归档 |
-| **文档总数** | 67 | 68 | +1 (新增报告) |
-| **可查找性** | ❌ 困难 | ✅ 简单 | 大幅提升 |
-| **学习路径** | ❌ 模糊 | ✅ 清晰 | 明确指引 |
+| 指标             | 重组前  | 重组后  | 改进          |
+| ---------------- | ------- | ------- | ------------- |
+| **根目录文件数** | 60+     | 4       | ↓ 93%         |
+| **主题目录数**   | 2       | 10      | ↑ 400%        |
+| **导航README**   | 0       | 11      | ✅ 新增       |
+| **归档文档**     | 0       | 13      | ✅ 已归档     |
+| **文档总数**     | 67      | 68      | +1 (新增报告) |
+| **可查找性**     | ❌ 困难 | ✅ 简单 | 大幅提升      |
+| **学习路径**     | ❌ 模糊 | ✅ 清晰 | 明确指引      |
 
 ### 目录层级对比
 
@@ -208,7 +208,7 @@ docs/
 
 **采用规则**:
 
-- 使用编号前缀：01_, 02_, 03_...
+- 使用编号前缀：01*, 02*, 03\_...
 - 使用下划线分隔：word_word_word
 - 描述性名称：说明文档内容
 - 统一小写：避免大小写混淆

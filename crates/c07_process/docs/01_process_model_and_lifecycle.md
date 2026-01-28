@@ -182,7 +182,7 @@ fn safe_process_management() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2.1 进程状态机
 
-- **状态流转**：Created → Running → (Waiting →)* → Terminated
+- **状态流转**：Created → Running → (Waiting →)\* → Terminated
 - **核心类型**：`std::process::Command`（进程构建器）、`Child`（子进程句柄）
 
 ```rust

@@ -13,7 +13,7 @@
   - [📋 目录](#-目录)
   - [🎯 概述](#-概述)
   - [🔧 编译问题](#-编译问题)
-    - [问题 1: 找不到 rust\_192\_features 模块](#问题-1-找不到-rust_192_features-模块)
+    - [问题 1: 找不到 rust_192_features 模块](#问题-1-找不到-rust_192_features-模块)
     - [问题 2: 类型推断失败](#问题-2-类型推断失败)
     - [问题 3: 编译错误 "unresolved import"](#问题-3-编译错误-unresolved-import)
   - [⚡ 性能问题](#-性能问题)
@@ -258,14 +258,14 @@ TypeError: wasm function is not a function
 
 ```javascript
 // ✅ 正确：先初始化
-import init, { add } from './pkg/c12_wasm.js';
+import init, { add } from "./pkg/c12_wasm.js"
 
-await init();
-const result = add(2, 3);
+await init()
+const result = add(2, 3)
 
 // ❌ 错误：未初始化
-import { add } from './pkg/c12_wasm.js';
-const result = add(2, 3); // 错误
+import { add } from "./pkg/c12_wasm.js"
+const result = add(2, 3) // 错误
 ```
 
 1. **检查 wasm-bindgen 版本**:

@@ -11,26 +11,26 @@
 
 - [Rust 1.90 现代网络技术实战 (2025)](#rust-190-现代网络技术实战-2025)
   - [📊 目录](#-目录)
-  - [io\_uring 革命性异步I/O](#io_uring-革命性异步io)
-    - [1. io\_uring 原理与优势](#1-io_uring-原理与优势)
+  - [io_uring 革命性异步I/O](#io_uring-革命性异步io)
+    - [1. io_uring 原理与优势](#1-io_uring-原理与优势)
     - [2. tokio-uring 实战](#2-tokio-uring-实战)
     - [3. Monoio 运行时 (字节跳动)](#3-monoio-运行时-字节跳动)
     - [4. Glommio 运行时 (Datadog)](#4-glommio-运行时-datadog)
   - [零拷贝技术深入](#零拷贝技术深入)
     - [1. 多种零拷贝方法对比](#1-多种零拷贝方法对比)
     - [2. sendfile 系统调用](#2-sendfile-系统调用)
-    - [3. io\_uring 零拷贝](#3-io_uring-零拷贝)
+    - [3. io_uring 零拷贝](#3-io_uring-零拷贝)
     - [4. mmap 内存映射](#4-mmap-内存映射)
   - [HTTP/3 和 QUIC 深入](#http3-和-quic-深入)
     - [1. HTTP/3 完整实现](#1-http3-完整实现)
     - [2. QUIC 高级特性](#2-quic-高级特性)
   - [内核旁路和高性能包处理](#内核旁路和高性能包处理)
-    - [1. AF\_XDP 高性能数据包处理](#1-af_xdp-高性能数据包处理)
+    - [1. AF_XDP 高性能数据包处理](#1-af_xdp-高性能数据包处理)
     - [2. eBPF 网络监控](#2-ebpf-网络监控)
   - [综合实战：高性能文件服务器](#综合实战高性能文件服务器)
-    - [基于 io\_uring 的零拷贝文件服务器](#基于-io_uring-的零拷贝文件服务器)
+    - [基于 io_uring 的零拷贝文件服务器](#基于-io_uring-的零拷贝文件服务器)
   - [性能对比分析](#性能对比分析)
-    - [传统 I/O vs io\_uring 性能对比](#传统-io-vs-io_uring-性能对比)
+    - [传统 I/O vs io_uring 性能对比](#传统-io-vs-io_uring-性能对比)
   - [📚 技术选型指南](#-技术选型指南)
   - [🔗 相关依赖配置](#-相关依赖配置)
   - [🎯 学习路径](#-学习路径)
@@ -68,7 +68,7 @@ io_uring 模型:
 
 ### 2. tokio-uring 实战
 
-```rust
+````rust
 //! tokio-uring: Tokio 的 io_uring 集成
 //!
 //! Cargo.toml:
@@ -233,11 +233,11 @@ pub fn demo_tokio_uring() -> Result<()> {
 
     Ok(())
 }
-```
+````
 
 ### 3. Monoio 运行时 (字节跳动)
 
-```rust
+````rust
 //! Monoio: 字节跳动开源的基于 io_uring 的 Rust 异步运行时
 //!
 //! Cargo.toml:
@@ -362,11 +362,11 @@ pub fn demo_monoio() -> std::io::Result<()> {
 
     Ok(())
 }
-```
+````
 
 ### 4. Glommio 运行时 (Datadog)
 
-```rust
+````rust
 //! Glommio: Datadog 开源的线程本地异步运行时（基于 io_uring）
 //!
 //! Cargo.toml:
@@ -497,7 +497,7 @@ pub fn demo_glommio() -> std::io::Result<()> {
 
     Ok(())
 }
-```
+````
 
 ---
 
@@ -830,7 +830,7 @@ pub fn demo_mmap() -> io::Result<()> {
 
 ### 1. HTTP/3 完整实现
 
-```rust
+````rust
 //! HTTP/3: 基于 QUIC 的下一代 HTTP 协议
 //!
 //! Cargo.toml:
@@ -1045,7 +1045,7 @@ pub async fn demo_http3() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
-```
+````
 
 ### 2. QUIC 高级特性
 
@@ -1178,7 +1178,7 @@ pub async fn demo_quic_advanced() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 1. AF_XDP 高性能数据包处理
 
-```rust
+````rust
 //! AF_XDP: Linux 内核旁路技术
 //!
 //! 特性:
@@ -1273,11 +1273,11 @@ pub fn demo_af_xdp() {
     AfXdpProcessor::example_concept();
     AfXdpProcessor::performance_comparison();
 }
-```
+````
 
 ### 2. eBPF 网络监控
 
-```rust
+````rust
 //! eBPF: 扩展的伯克利包过滤器
 //!
 //! 特性:
@@ -1378,7 +1378,7 @@ pub fn demo_ebpf() {
     EbpfNetworkMonitor::xdp_program_example();
     EbpfNetworkMonitor::rust_toolchain();
 }
-```
+````
 
 ---
 
@@ -1803,7 +1803,7 @@ xsk-rs = "0.2"               # AF_XDP Rust 绑定
 ## ⚠️ 平台兼容性说明
 
 | 技术 | Linux | Windows | macOS | 最低版本 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- '
+param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **io_uring** | ✅ | ❌ | ❌ | Kernel 5.1+ |
 | **tokio-uring** | ✅ | ❌ | ❌ | Kernel 5.1+ |
 | **Monoio** | ✅ | ❌ | ❌ | Kernel 5.10+ |

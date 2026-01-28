@@ -161,7 +161,7 @@ test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured
 ## 📊 修复统计
 
 | 类别 | 修复数量 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
+param($match) $match.Value -replace '[-:]+', ' --- ' ---------|
 | 编译错误 | 8 个 |
 | 弃用警告 | 7 个 |
 | Clippy 警告 | 15 个 |

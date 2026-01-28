@@ -21,13 +21,13 @@
       - [Week 6-7: 高级应用](#week-6-7-高级应用)
       - [Week 8: Rust 1.92.0特性（自 Rust 1.90 引入）](#week-8-rust-1920特性自-rust-190-引入)
   - [📖 文档结构](#-文档结构)
-    - [01\_theory/ - 理论基础](#01_theory---理论基础)
-    - [02\_declarative/ - 声明宏](#02_declarative---声明宏)
-    - [03\_procedural/ - 过程宏](#03_procedural---过程宏)
-    - [04\_advanced/ - 高级主题](#04_advanced---高级主题)
-    - [05\_practice/ - 最佳实践](#05_practice---最佳实践)
+    - [01_theory/ - 理论基础](#01_theory---理论基础)
+    - [02_declarative/ - 声明宏](#02_declarative---声明宏)
+    - [03_procedural/ - 过程宏](#03_procedural---过程宏)
+    - [04_advanced/ - 高级主题](#04_advanced---高级主题)
+    - [05_practice/ - 最佳实践](#05_practice---最佳实践)
     - [📦 06. Rust 1.92.0特性（自 Rust 1.90 引入）](#-06-rust-1920特性自-rust-190-引入)
-    - [🧠 理论增强 (theory\_enhanced/)](#-理论增强-theory_enhanced)
+    - [🧠 理论增强 (theory_enhanced/)](#-理论增强-theory_enhanced)
   - [💻 代码示例](#-代码示例)
     - [运行示例](#运行示例)
     - [示例列表](#示例列表)
@@ -36,7 +36,7 @@
     - [我有Rust基础](#我有rust基础)
     - [我想深入理解](#我想深入理解)
   - [🔍 按主题导航](#-按主题导航)
-    - [声明宏 (macro\_rules!)](#声明宏-macro_rules)
+    - [声明宏 (macro_rules!)](#声明宏-macro_rules)
     - [过程宏 (Procedural Macros)](#过程宏-procedural-macros)
     - [Rust 1.92.0特性](#rust-1920特性)
     - [DSL与代码生成](#dsl与代码生成)
@@ -164,72 +164,72 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 
 ### 01_theory/ - 理论基础
 
-| 文档 | 难度 | 预计时间 |
-| --- | --- | --- |
-| [01_macro_fundamentals.md](./01_theory/01_macro_fundamentals.md) | ⭐ | 2小时 |
-| [02_hygiene_and_scope.md](./01_theory/02_hygiene_and_scope.md) | ⭐⭐ | 2小时 |
-| [03_expansion_mechanism.md](./01_theory/03_expansion_mechanism.md) | ⭐⭐ | 3小时 |
-| [04_macro_theory.md](./01_theory/04_macro_theory.md) | ⭐⭐⭐ | 4小时 |
+| 文档                                                               | 难度   | 预计时间 |
+| ------------------------------------------------------------------ | ------ | -------- |
+| [01_macro_fundamentals.md](./01_theory/01_macro_fundamentals.md)   | ⭐     | 2小时    |
+| [02_hygiene_and_scope.md](./01_theory/02_hygiene_and_scope.md)     | ⭐⭐   | 2小时    |
+| [03_expansion_mechanism.md](./01_theory/03_expansion_mechanism.md) | ⭐⭐   | 3小时    |
+| [04_macro_theory.md](./01_theory/04_macro_theory.md)               | ⭐⭐⭐ | 4小时    |
 
 ### 02_declarative/ - 声明宏
 
-| 文档 | 难度 | 预计时间 |
-| --- | --- | --- |
-| [01_macro_rules_basics.md](./02_declarative/01_macro_rules_basics.md) | ⭐ | 2小时 |
-| [02_pattern_matching.md](./02_declarative/02_pattern_matching.md) | ⭐⭐ | 3小时 |
-| [03_repetition_syntax.md](./02_declarative/03_repetition_syntax.md) | ⭐⭐ | 3小时 |
-| [04_advanced_patterns.md](./02_declarative/04_advanced_patterns.md) | ⭐⭐⭐ | 4小时 |
-| [05_recursive_macros.md](./02_declarative/05_recursive_macros.md) | ⭐⭐⭐ | 4小时 |
+| 文档                                                                  | 难度   | 预计时间 |
+| --------------------------------------------------------------------- | ------ | -------- |
+| [01_macro_rules_basics.md](./02_declarative/01_macro_rules_basics.md) | ⭐     | 2小时    |
+| [02_pattern_matching.md](./02_declarative/02_pattern_matching.md)     | ⭐⭐   | 3小时    |
+| [03_repetition_syntax.md](./02_declarative/03_repetition_syntax.md)   | ⭐⭐   | 3小时    |
+| [04_advanced_patterns.md](./02_declarative/04_advanced_patterns.md)   | ⭐⭐⭐ | 4小时    |
+| [05_recursive_macros.md](./02_declarative/05_recursive_macros.md)     | ⭐⭐⭐ | 4小时    |
 
 ### 03_procedural/ - 过程宏
 
-| 文档 | 难度 | 预计时间 |
-| --- | --- | --- |
-| [01_proc_macro_basics.md](./03_procedural/01_proc_macro_basics.md) | ⭐⭐ | 3小时 |
-| [02_derive_macros.md](./03_procedural/02_derive_macros.md) | ⭐⭐⭐ | 5小时 |
-| [03_attribute_macros.md](./03_procedural/03_attribute_macros.md) | ⭐⭐⭐ | 5小时 |
-| [04_function_macros.md](./03_procedural/04_function_macros.md) | ⭐⭐⭐ | 5小时 |
-| [05_token_streams.md](./03_procedural/05_token_streams.md) | ⭐⭐⭐⭐ | 6小时 |
+| 文档                                                               | 难度     | 预计时间 |
+| ------------------------------------------------------------------ | -------- | -------- |
+| [01_proc_macro_basics.md](./03_procedural/01_proc_macro_basics.md) | ⭐⭐     | 3小时    |
+| [02_derive_macros.md](./03_procedural/02_derive_macros.md)         | ⭐⭐⭐   | 5小时    |
+| [03_attribute_macros.md](./03_procedural/03_attribute_macros.md)   | ⭐⭐⭐   | 5小时    |
+| [04_function_macros.md](./03_procedural/04_function_macros.md)     | ⭐⭐⭐   | 5小时    |
+| [05_token_streams.md](./03_procedural/05_token_streams.md)         | ⭐⭐⭐⭐ | 6小时    |
 
 ### 04_advanced/ - 高级主题
 
-| 文档 | 难度 | 预计时间 | 状态 |
-| --- | --- | --- |------|
-| [README.md](./04_advanced/README.md) ⭐ | ⭐⭐⭐⭐ | 30分钟 | ✅ 完成 |
-| [macro_metaprogramming.md](./04_advanced/macro_metaprogramming.md) ⭐ | ⭐⭐⭐⭐⭐ | 6小时 | ✅ 完成 |
-| [dsl_construction.md](./04_advanced/dsl_construction.md) ⭐ | ⭐⭐⭐⭐⭐ | 8小时 | ✅ 完成 |
-| [macro_optimization.md](./04_advanced/macro_optimization.md) ⭐ | ⭐⭐⭐⭐ | 4小时 | ✅ 完成 |
-| [02_code_generation.md](./04_advanced/02_code_generation.md) ⭐ | ⭐⭐⭐⭐ | 6小时 | ✅ 新增 |
-| [03_macro_debugging.md](./04_advanced/03_macro_debugging.md) ⭐ | ⭐⭐⭐ | 4小时 | ✅ 新增 |
-| [05_macro_testing.md](./04_advanced/05_macro_testing.md) ⭐ | ⭐⭐⭐ | 4小时 | ✅ 新增 |
-| [COMPLETION_REPORT.md](./04_advanced/COMPLETION_REPORT.md) ⭐ | - | 15分钟 | ✅ 新增 |
+| 文档                                                                  | 难度       | 预计时间 | 状态    |
+| --------------------------------------------------------------------- | ---------- | -------- | ------- |
+| [README.md](./04_advanced/README.md) ⭐                               | ⭐⭐⭐⭐   | 30分钟   | ✅ 完成 |
+| [macro_metaprogramming.md](./04_advanced/macro_metaprogramming.md) ⭐ | ⭐⭐⭐⭐⭐ | 6小时    | ✅ 完成 |
+| [dsl_construction.md](./04_advanced/dsl_construction.md) ⭐           | ⭐⭐⭐⭐⭐ | 8小时    | ✅ 完成 |
+| [macro_optimization.md](./04_advanced/macro_optimization.md) ⭐       | ⭐⭐⭐⭐   | 4小时    | ✅ 完成 |
+| [02_code_generation.md](./04_advanced/02_code_generation.md) ⭐       | ⭐⭐⭐⭐   | 6小时    | ✅ 新增 |
+| [03_macro_debugging.md](./04_advanced/03_macro_debugging.md) ⭐       | ⭐⭐⭐     | 4小时    | ✅ 新增 |
+| [05_macro_testing.md](./04_advanced/05_macro_testing.md) ⭐           | ⭐⭐⭐     | 4小时    | ✅ 新增 |
+| [COMPLETION_REPORT.md](./04_advanced/COMPLETION_REPORT.md) ⭐         | -          | 15分钟   | ✅ 新增 |
 
 ### 05_practice/ - 最佳实践
 
-| 文档 | 难度 | 预计时间 |
-| --- | --- | --- |
-| [01_common_patterns.md](./05_practice/01_common_patterns.md) | ⭐⭐ | 3小时 |
-| [02_best_practices.md](./05_practice/02_best_practices.md) | ⭐⭐ | 3小时 |
-| [03_anti_patterns.md](./05_practice/03_anti_patterns.md) | ⭐⭐ | 2小时 |
-| [04_real_world_examples.md](./05_practice/04_real_world_examples.md) | ⭐⭐⭐ | 4小时 |
+| 文档                                                                 | 难度   | 预计时间 |
+| -------------------------------------------------------------------- | ------ | -------- |
+| [01_common_patterns.md](./05_practice/01_common_patterns.md)         | ⭐⭐   | 3小时    |
+| [02_best_practices.md](./05_practice/02_best_practices.md)           | ⭐⭐   | 3小时    |
+| [03_anti_patterns.md](./05_practice/03_anti_patterns.md)             | ⭐⭐   | 2小时    |
+| [04_real_world_examples.md](./05_practice/04_real_world_examples.md) | ⭐⭐⭐ | 4小时    |
 
 ### 📦 06. Rust 1.92.0特性（自 Rust 1.90 引入）
 
-| 文档 | 难度 | 预计时间 |
-| --- | --- | --- |
-| [00_INDEX.md](./06_rust_190_features/00_INDEX.md) | ⭐ | 30分钟 |
-| [README.md](./06_rust_190_features/README.md) | ⭐⭐⭐⭐ | 4小时 |
-| [COMPREHENSIVE_FEATURES.md](./06_rust_190_features/COMPREHENSIVE_FEATURES.md) | ⭐⭐⭐⭐ | 5小时 |
-| [EXAMPLES.md](./06_rust_190_features/EXAMPLES.md) | ⭐⭐⭐ | 3小时 |
+| 文档                                                                          | 难度     | 预计时间 |
+| ----------------------------------------------------------------------------- | -------- | -------- |
+| [00_INDEX.md](./06_rust_190_features/00_INDEX.md)                             | ⭐       | 30分钟   |
+| [README.md](./06_rust_190_features/README.md)                                 | ⭐⭐⭐⭐ | 4小时    |
+| [COMPREHENSIVE_FEATURES.md](./06_rust_190_features/COMPREHENSIVE_FEATURES.md) | ⭐⭐⭐⭐ | 5小时    |
+| [EXAMPLES.md](./06_rust_190_features/EXAMPLES.md)                             | ⭐⭐⭐   | 3小时    |
 
 ### 🧠 理论增强 (theory_enhanced/)
 
-| 文档 | 难度 | 预计时间 |
-| --- | --- | --- |
-| [00_INDEX.md](./theory_enhanced/00_INDEX.md) | ⭐ | 20分钟 |
-| [KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md](./theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) ⭐ | ⭐⭐⭐ | 2小时 |
-| [MULTI_DIMENSIONAL_COMPARISON_MATRIX.md](./theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md) | ⭐⭐⭐⭐ | 2小时 |
-| [MINDMAP_AND_VISUALIZATION.md](./theory_enhanced/MINDMAP_AND_VISUALIZATION.md) | ⭐⭐ | 1.5小时 |
+| 文档                                                                                                      | 难度     | 预计时间 |
+| --------------------------------------------------------------------------------------------------------- | -------- | -------- |
+| [00_INDEX.md](./theory_enhanced/00_INDEX.md)                                                              | ⭐       | 20分钟   |
+| [KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md](./theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) ⭐ | ⭐⭐⭐   | 2小时    |
+| [MULTI_DIMENSIONAL_COMPARISON_MATRIX.md](./theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)        | ⭐⭐⭐⭐ | 2小时    |
+| [MINDMAP_AND_VISUALIZATION.md](./theory_enhanced/MINDMAP_AND_VISUALIZATION.md)                            | ⭐⭐     | 1.5小时  |
 
 ---
 
@@ -250,16 +250,16 @@ cargo run --example 04_recursive_macros
 
 ### 示例列表
 
-| 示例 | 主题 | 难度 |
-| --- | --- | --- |
-| `01_macro_rules_basics.rs` | 声明宏基础 | ⭐ |
-| `02_pattern_matching.rs` | 模式匹配 | ⭐⭐ |
-| `03_repetition.rs` | 重复语法 | ⭐⭐ |
-| `04_recursive_macros.rs` | 递归宏 | ⭐⭐⭐ |
-| `05_derive_macro_demo.rs` | 派生宏 | ⭐⭐⭐ |
-| `06_attribute_macro_demo.rs` | 属性宏 | ⭐⭐⭐ |
-| `07_function_macro_demo.rs` | 函数式宏 | ⭐⭐⭐ |
-| `08_dsl_example.rs` | DSL构建 | ⭐⭐⭐⭐ |
+| 示例                         | 主题       | 难度     |
+| ---------------------------- | ---------- | -------- |
+| `01_macro_rules_basics.rs`   | 声明宏基础 | ⭐       |
+| `02_pattern_matching.rs`     | 模式匹配   | ⭐⭐     |
+| `03_repetition.rs`           | 重复语法   | ⭐⭐     |
+| `04_recursive_macros.rs`     | 递归宏     | ⭐⭐⭐   |
+| `05_derive_macro_demo.rs`    | 派生宏     | ⭐⭐⭐   |
+| `06_attribute_macro_demo.rs` | 属性宏     | ⭐⭐⭐   |
+| `07_function_macro_demo.rs`  | 函数式宏   | ⭐⭐⭐   |
+| `08_dsl_example.rs`          | DSL构建    | ⭐⭐⭐⭐ |
 
 ---
 

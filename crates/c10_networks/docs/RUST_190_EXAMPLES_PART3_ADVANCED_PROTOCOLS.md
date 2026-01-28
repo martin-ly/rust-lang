@@ -40,7 +40,7 @@
 
 ### 1. gRPC服务端 (四种RPC模式)
 
-```rust
+````rust
 //! gRPC 服务端完整实现
 //! 支持四种RPC模式: Unary, Server Streaming, Client Streaming, Bidirectional Streaming
 //!
@@ -370,7 +370,7 @@ pub async fn run_grpc_server() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
-```
+````
 
 ### 2. gRPC客户端 (连接池+重试)
 
@@ -814,7 +814,7 @@ pub async fn run_server_with_interceptors() -> Result<(), Box<dyn std::error::Er
 
 ### 1. MQTT发布者 (QoS支持)
 
-```rust
+````rust
 //! MQTT 发布者完整实现
 //! 特性: QoS 0/1/2, Retain消息, Will消息, TLS支持
 //!
@@ -1117,7 +1117,7 @@ pub async fn demo_mqtt_publisher() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n✅ 所有示例完成");
     Ok(())
 }
-```
+````
 
 ### 2. MQTT订阅者 (自动重连)
 
@@ -1602,7 +1602,7 @@ pub async fn demo_mqtt_bridge() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 1. QUIC服务器
 
-```rust
+````rust
 //! QUIC 服务器实现
 //! 基于 quinn 库
 //!
@@ -1729,7 +1729,7 @@ pub async fn demo_quic_server() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
-```
+````
 
 ### 2. QUIC客户端
 
@@ -1922,7 +1922,7 @@ pub async fn demo_quic_multiplexing() -> Result<(), Box<dyn std::error::Error>> 
 
 ### 1. AMQP生产者
 
-```rust
+````rust
 //! AMQP 生产者实现
 //! 基于 lapin 库
 //!
@@ -2086,7 +2086,7 @@ pub async fn demo_amqp_producer() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n✅ 生产者示例完成");
     Ok(())
 }
-```
+````
 
 ### 2. AMQP消费者
 
@@ -2354,7 +2354,7 @@ pub async fn demo_amqp_worker_pool() -> Result<(), Box<dyn std::error::Error>> {
 
 ## GraphQL over HTTP
 
-```rust
+````rust
 //! GraphQL over HTTP 实现
 //!
 //! Cargo.toml:
@@ -2516,13 +2516,13 @@ pub async fn demo_graphql_client() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n✅ GraphQL示例完成");
     Ok(())
 }
-```
+````
 
 ---
 
 ## SSE (Server-Sent Events)
 
-```rust
+````rust
 //! Server-Sent Events (SSE) 实现
 //!
 //! Cargo.toml:
@@ -2667,7 +2667,7 @@ pub async fn demo_sse_client() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n✅ SSE示例完成");
     Ok(())
 }
-```
+````
 
 ---
 
@@ -2912,7 +2912,7 @@ pub async fn demo_microservices() -> Result<(), Box<dyn std::error::Error>> {
 ### 技术选型指南
 
 | 场景 | 推荐协议 | 原因 |
- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
+param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 微服务RPC | gRPC | 高性能、类型安全、双向流 |
 | IoT设备通信 | MQTT | 轻量级、QoS支持、低带宽 |
 | 实时游戏 | QUIC | 低延迟、多路复用、0-RTT |

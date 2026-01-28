@@ -299,17 +299,20 @@ cargo build --release
 ## 使用
 
 ### 读取文件
+
 \`\`\`bash
 scli read file.txt
 scli read file.txt --verbose
 \`\`\`
 
 ### 写入文件
+
 \`\`\`bash
 scli write output.txt "Hello, World!"
 \`\`\`
 
 ### 列出目录
+
 \`\`\`bash
 scli list
 scli list /path/to/dir
@@ -542,4 +545,4 @@ pb.set_style(ProgressStyle::default_bar()
 **适用场景**: CLI 工具、命令行应用
 **难度等级**: ⭐⭐ 初级
 
-*这是一个完整可运行的示例，可以直接复制使用！* 🦀🔧
+_这是一个完整可运行的示例，可以直接复制使用！_ 🦀🔧

@@ -34,14 +34,14 @@
 
 ## 快速开始
 
-1) 从 [Tier 1 基础层](./tier_01_foundations/) 开始学习
+1. 从 [Tier 1 基础层](./tier_01_foundations/) 开始学习
    - [项目概览](./tier_01_foundations/01_项目概览.md) - 快速了解设计模式
    - [主索引导航](./tier_01_foundations/02_主索引导航.md) - 找到适合你的学习路径
    - [术语表](./tier_01_foundations/03_术语表.md) - 核心术语速查
    - [常见问题](./tier_01_foundations/04_常见问题.md) - 解决常见疑问
-2) 从 `09_design_patterns.md` 了解模块结构
-3) 在 `src/structural/` 与 `src/behavioral/` 按模式逐个运行示例
-4) 查阅 `tests/` 的集成测试以把握组合场景
+2. 从 `09_design_patterns.md` 了解模块结构
+3. 在 `src/structural/` 与 `src/behavioral/` 按模式逐个运行示例
+4. 查阅 `tests/` 的集成测试以把握组合场景
 
 ---
 

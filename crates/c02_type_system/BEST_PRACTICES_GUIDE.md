@@ -847,7 +847,7 @@ criterion_main!(benches);
 
 #### 文档注释
 
-```rust
+````rust
 /// 高级数据处理器
 ///
 /// 这个结构体提供了一个高性能的数据处理接口，支持：
@@ -879,7 +879,7 @@ criterion_main!(benches);
 pub struct AdvancedProcessor<T> {
     // ...
 }
-```
+````
 
 ### 2. 示例代码
 

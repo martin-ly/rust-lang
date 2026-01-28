@@ -73,7 +73,7 @@
 
 ### 基本格式
 
-```rust
+````rust
 /// 函数描述
 ///
 /// # Examples
@@ -91,11 +91,11 @@
 pub fn function_name() -> Result<(), Error> {
     // 实现
 }
-```
+````
 
 ### 高级格式
 
-```rust
+````rust
 /// 函数描述
 ///
 /// # Arguments
@@ -126,7 +126,7 @@ pub fn function_name() -> Result<(), Error> {
 pub fn function_name(arg1: Type1, arg2: Type2) -> Result<ReturnType, Error> {
     // 实现
 }
-```
+````
 
 ---
 

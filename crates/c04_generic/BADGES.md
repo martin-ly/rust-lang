@@ -87,19 +87,19 @@
 
 ```html
 <a href="https://github.com/your-repo/c04_generic">
-    <img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status">
+  <img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status" />
 </a>
 <a href="https://github.com/your-repo/c04_generic">
-    <img src="https://img.shields.io/badge/tests-90%20passed-brightgreen.svg" alt="Test Coverage">
+  <img src="https://img.shields.io/badge/tests-90%20passed-brightgreen.svg" alt="Test Coverage" />
 </a>
 <a href="https://github.com/your-repo/c04_generic">
-    <img src="https://img.shields.io/badge/clippy-passing-brightgreen.svg" alt="Code Quality">
+  <img src="https://img.shields.io/badge/clippy-passing-brightgreen.svg" alt="Code Quality" />
 </a>
 <a href="https://www.rust-lang.org/">
-    <img src="https://img.shields.io/badge/rust-1.70+-blue.svg" alt="Rust Version">
+  <img src="https://img.shields.io/badge/rust-1.70+-blue.svg" alt="Rust Version" />
 </a>
 <a href="LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" />
 </a>
 ```
 

@@ -3,7 +3,7 @@
 > **文档版本**: 1.0
 > **创建日期**: 2026-01-26
 > **Rust 1.93 发布日期**: 2026年1月22日
-> **Rust 1.92 发布日期**: 2024年12月19日
+> **Rust 1.92 发布日期**: 2025年12月11日
 > **Edition**: 2024
 
 ---
@@ -43,7 +43,7 @@
       - [切片到数组转换](#切片到数组转换)
       - [Duration 扩展](#duration-扩展)
       - [char 常量](#char-常量)
-      - [fmt::from\_fn](#fmtfrom_fn)
+      - [fmt::from_fn](#fmtfrom_fn)
   - [编译器改进](#编译器改进)
     - [平台支持](#平台支持)
     - [其他改进](#其他改进)
@@ -519,7 +519,10 @@ println!("{}", formatter);  // 输出: Custom: 42
 
 ### 平台支持
 
-- **riscv64gc-unknown-linux-gnu** 提升到 Tier 2 支持
+Rust 1.93 的 release post 并未将“平台 tier 变更”作为核心亮点展开说明。若你需要核对平台支持现状或变更，请以权威来源为准：
+
+- Rustc 平台支持总览：`https://doc.rust-lang.org/rustc/platform-support.html`
+- Rust 1.93.0 GitHub release tag：`https://github.com/rust-lang/rust/releases/tag/1.93.0`
 
 ### 其他改进
 
@@ -747,9 +750,10 @@ unsafe impl GlobalAlloc for MyAllocator {
 
 ## 参考资源
 
-- [Rust 1.93.0 Release Notes](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0)
+- [Rust 1.93.0 Release Notes](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)
 - [Rust 1.93.0 详细发布说明](https://doc.rust-lang.org/stable/releases.html#version-1930-2026-01-22)
-- [Rust 1.92.0 Release Notes](https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html)
+- [Rust 1.92.0 Release Notes](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/)
+- [Rust 1.92.0 详细发布说明](https://doc.rust-lang.org/stable/releases.html#version-1920-2025-12-11)
 - [musl 1.2.5 发布说明](https://musl.libc.org/releases.html)
 - [libc 兼容性修复](https://github.com/rust-lang/libc/pull/2935)
 
