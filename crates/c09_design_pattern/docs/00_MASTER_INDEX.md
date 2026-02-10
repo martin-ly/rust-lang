@@ -4,6 +4,14 @@
 > **使用方式**: 作为学习起点，根据需求选择合适的文档和代码模块
 > **相关文档**: [README](./README.md) | [FAQ](./FAQ.md) | [Glossary](./Glossary.md)
 
+## 📚 官方资源映射
+
+| 官方资源 | 链接 | 与本模块对应 |
+|----------|------|--------------|
+| **The Rust Book** | [Ch. 13 Functional Language Features](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | 迭代器、闭包模式 |
+| **Rust By Example** | [Design Patterns](https://doc.rust-lang.org/rust-by-example/) | 惯用模式 |
+| **Rust API Guidelines** | [API Guidelines](https://rust-lang.github.io/api-guidelines/) | Rust 惯用设计 |
+
 ## 📊 目录
 
 - [C09 设计模式: 主索引 (Master Index)](#c09-设计模式-主索引-master-index)

@@ -71,7 +71,7 @@
 
 ```mermaid
 mindmap
-  root((Rust 1.92.0<br/>核心特性))
+  root((Rust 1.92.0 核心特性))
     语言特性改进
       MaybeUninit 文档化
         零成本抽象
@@ -141,7 +141,7 @@ mindmap
 
 ```mermaid
 mindmap
-  root((Rust 1.92.0<br/>应用场景))
+  root((Rust 1.92.0 应用场景))
     系统编程
       MaybeUninit
         内存池管理
@@ -180,7 +180,7 @@ mindmap
 
 ```mermaid
 mindmap
-  root((Rust 1.92.0<br/>学习路径))
+  root((Rust 1.92.0 学习路径))
     阶段1: 基础理解
       阅读发布说明
         官方文档

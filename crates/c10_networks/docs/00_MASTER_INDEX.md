@@ -1,8 +1,16 @@
-﻿# C10 网络编程: 主索引 (Master Index)
+# C10 网络编程: 主索引 (Master Index)
 
 > **文档定位**: 网络编程学习路径总导航，快速定位所有网络相关资源
 > **使用方式**: 作为学习起点，根据需求选择合适的文档和代码模块
 > **相关文档**: [README](./README.md) | [FAQ](references/FAQ.md) | [Glossary](references/Glossary.md)
+
+## 📚 官方资源映射
+
+| 官方资源 | 链接 | 与本模块对应 |
+|----------|------|--------------|
+| **Tokio** | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 异步网络 |
+| **Hyper** | [Hyper Guide](https://hyper.rs/guides/) | HTTP 实现 |
+| **Rust std** | [std::net](https://doc.rust-lang.org/std/net/) | TCP/UDP 基础 API |
 
 ## 📊 目录
 

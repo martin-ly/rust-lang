@@ -57,6 +57,16 @@
   - [🏆 项目荣誉](#-项目荣誉)
     - [核心优势](#核心优势)
     - [适用人群](#适用人群)
+  - [📚 官方资源映射](#-官方资源映射)
+
+## 📚 官方资源映射
+
+| 官方资源 | 链接 | 与本模块对应 |
+|----------|------|--------------|
+| **The Rust Book** | [Ch. 4 Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | 所有权、借用、切片 |
+| **Rust By Example** | [Scope and lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html) | 生命周期、作用域 |
+| **Rust Reference** | [References and Borrowing](https://doc.rust-lang.org/reference/types/pointer.html) | 引用与借用规范 |
+| **Rustonomicon** | [Unsafe code](https://doc.rust-lang.org/nomicon/) | 高级所有权、unsafe |
 
 ## 🎯 快速开始
 

@@ -52,6 +52,15 @@
   - [📞 获取帮助](#-获取帮助)
     - [问题解决](#问题解决)
     - [社区支持](#社区支持)
+  - [📚 官方资源映射](#-官方资源映射)
+
+## 📚 官方资源映射
+
+| 官方资源 | 链接 | 与本模块对应 |
+|----------|------|--------------|
+| **The Rust Book** | [Ch. 3 Common Programming Concepts](https://doc.rust-lang.org/book/ch03-00-comments.html), [Ch. 6 Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) | 控制流、模式匹配 |
+| **Rust By Example** | [Control Flow](https://doc.rust-lang.org/rust-by-example/flow_control.html), [Closures](https://doc.rust-lang.org/rust-by-example/fn/closures.html) | 条件、循环、闭包 |
+| **Rust Reference** | [Expressions](https://doc.rust-lang.org/reference/expressions.html) | 表达式、控制流规范 |
 
 ## 📋 快速导航
 

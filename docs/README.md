@@ -153,6 +153,17 @@ docs/
 - [跨模块集成示例](./CROSS_MODULE_INTEGRATION_EXAMPLES.md) - 6 个完整示例
 - [文档完善最终指南](./FINAL_DOCUMENTATION_COMPLETION_GUIDE.md) - 文档完善度 100%（19/19 速查卡已补齐相关文档+示例代码）
 
+#### 6. 专题指南（2026-02 新增）
+
+**用途**: 专项主题深入指南
+
+**入口**:
+
+- [Unsafe Rust 专题](./UNSAFE_RUST_GUIDE.md) - Rustonomicon 导航与安全抽象原则
+- [思维表征方式](./THINKING_REPRESENTATION_METHODS.md) - 思维导图、决策树、证明树
+- [多维概念矩阵](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 技术选型、错误处理、测试矩阵
+- [形式化验证工具](./research_notes/TOOLS_GUIDE.md) - Prusti、Kani、Creusot 实战
+
 ---
 
 ## 🎯 按角色导航

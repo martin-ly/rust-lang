@@ -16,7 +16,9 @@
   - [🗺️ 1. 思维导图 (Mind Map)](#️-1-思维导图-mind-map)
     - [1.1 Rust 1.93.0 核心特性思维导图](#11-rust-1930-核心特性思维导图)
     - [1.2 特性应用场景思维导图](#12-特性应用场景思维导图)
-    - [1.3 学习路径思维导图](#13-学习路径思维导图)
+    - [1.3 跨模块概念依赖思维导图](#13-跨模块概念依赖思维导图)
+    - [1.4 模块级思维导图索引](#14-模块级思维导图索引)
+    - [1.5 学习路径思维导图](#15-学习路径思维导图)
   - [📊 2. 多维矩阵 (Multidimensional Matrix)](#-2-多维矩阵-multidimensional-matrix)
     - [2.1 Rust 1.93.0 特性对比矩阵](#21-rust-1930-特性对比矩阵)
     - [2.2 版本迁移对比矩阵](#22-版本迁移对比矩阵)
@@ -26,10 +28,15 @@
     - [3.1 Rust 1.93.0 特性使用决策树](#31-rust-1930-特性使用决策树)
     - [3.2 迁移决策树](#32-迁移决策树)
     - [3.3 性能优化决策树](#33-性能优化决策树)
+    - [3.4 应用场景决策树](#34-应用场景决策树)
+    - [3.5 技术选型决策树](#35-技术选型决策树)
   - [🔬 4. 证明树图 (Proof Tree)](#-4-证明树图-proof-tree)
     - [4.1 MaybeUninit 安全性证明树](#41-maybeuninit-安全性证明树)
     - [4.2 Never 类型 Lint 严格化证明树](#42-never-类型-lint-严格化证明树)
     - [4.3 联合体原始引用安全性证明树](#43-联合体原始引用安全性证明树)
+    - [4.4 借用检查器安全性证明树](#44-借用检查器安全性证明树)
+    - [4.5 生命周期安全性证明树](#45-生命周期安全性证明树)
+    - [4.6 Send/Sync 安全性证明树](#46-sendsync-安全性证明树)
   - [📈 5. 概念关系网络图 (Concept Relationship Network)](#-5-概念关系网络图-concept-relationship-network)
   - [🎯 6. 使用指南](#-6-使用指南)
     - [6.1 何时使用思维导图](#61-何时使用思维导图)
@@ -60,7 +67,7 @@
 
 ```mermaid
 mindmap
-  root((Rust 1.93.0<br/>核心特性))
+  root((Rust 1.93.0 核心特性))
     语言特性改进
       MaybeUninit 文档化
         零成本抽象
@@ -136,7 +143,7 @@ mindmap
 
 ```mermaid
 mindmap
-  root((Rust 1.93.0<br/>应用场景))
+  root((Rust 1.93.0 应用场景))
     系统编程
       MaybeUninit
         内存池管理
@@ -171,11 +178,73 @@ mindmap
         自动特征改进
 ```
 
-### 1.3 学习路径思维导图
+### 1.3 跨模块概念依赖思维导图
 
 ```mermaid
 mindmap
-  root((Rust 1.93.0<br/>学习路径))
+  root((Rust 模块依赖))
+    C01 所有权
+      借用 生命周期
+      基础 所有模块依赖
+    C02 类型系统
+      泛型 Trait
+      依赖 C01
+    C03 控制流
+      闭包 模式匹配
+      依赖 C01 C02
+    C04 泛型
+      高级泛型 GATs
+      依赖 C01 C02
+    C05 并发
+      线程 锁 通道
+      依赖 C01 C02
+    C06 异步
+      Future async
+      依赖 C01 C02 C05
+    C07 进程
+      进程 IPC 信号
+      依赖 C01 C05
+    C08 算法
+      排序 搜索 图
+      依赖 C02 C03
+    C09 设计模式
+      GoF Rust模式
+      依赖 C01-C06
+    C10 网络
+      TCP HTTP
+      依赖 C06
+    C11 宏系统
+      声明宏 过程宏
+      依赖 C02 C04
+    C12 WASM
+      wasm-bindgen
+      依赖 C06 C10
+```
+
+### 1.4 模块级思维导图索引
+
+各模块的思维导图与知识可视化资源：
+
+| 模块 | 思维导图/知识图谱 | 路径 |
+|------|------------------|------|
+| C01 | 所有权知识图谱 | crates/c01_ownership_borrow_scope/docs/ |
+| C02 | 类型系统多维矩阵 | crates/c02_type_system/docs/ |
+| C03 | 控制流 MIND_MAP | crates/c03_control_fn/docs/MIND_MAP.md |
+| C04 | 泛型概念关系 | crates/c04_generic/docs/ |
+| C05 | 并发模型对比 | crates/c05_threads/docs/ |
+| C06 | 异步编程决策树 | crates/c06_async/docs/ |
+| C07 | 进程管理速查 | docs/quick_reference/process_management_cheatsheet.md |
+| C08 | 算法复杂度矩阵 | docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md |
+| C09 | 设计模式矩阵 | crates/c09_design_pattern/docs/ |
+| C10 | 网络协议矩阵 | docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md |
+| C11 | 宏系统层级 | crates/c11_macro_system/docs/ |
+| C12 | WASM 思维导图 | crates/c12_wasm/docs/WASM_MIND_MAPS.md |
+
+### 1.5 学习路径思维导图
+
+```mermaid
+mindmap
+  root((Rust 1.93.0 学习路径))
     阶段1: 基础理解
       阅读发布说明
         官方文档
@@ -386,6 +455,63 @@ graph TD
     style Opt3 fill:#ffe1e1
 ```
 
+### 3.4 应用场景决策树
+
+```mermaid
+graph TD
+    Start[应用场景选择] --> Q1{主要应用类型?}
+    Q1 -->|CLI 工具| CLI[CLI 应用]
+    Q1 -->|Web 服务| Web[Web 应用]
+    Q1 -->|系统编程| Sys[系统编程]
+    Q1 -->|嵌入式| Emb[嵌入式]
+    Q1 -->|分布式| Dist[分布式]
+
+    CLI --> CLI1[使用 clap 解析参数]
+    CLI --> CLI2[同步 I/O 为主]
+    CLI --> CLI3[模块: C03 C07 C08]
+
+    Web --> Web1[选择 Tokio 异步运行时]
+    Web --> Web2[axum 或 actix-web]
+    Web --> Web3[模块: C06 C10]
+
+    Sys --> Sys1[进程 IPC 信号]
+    Sys --> Sys2[可能需 unsafe]
+    Sys --> Sys3[模块: C07 C05]
+
+    Emb --> Emb1[no_std 可选]
+    Emb --> Emb2[参考 Embedded Book]
+    Emb --> Emb3[模块: C01 C02 C05]
+
+    Dist --> Dist1[消息队列 分布式锁]
+    Dist --> Dist2[异步 + 网络]
+    Dist --> Dist3[模块: C06 C10 C11]
+```
+
+### 3.5 技术选型决策树
+
+```mermaid
+graph TD
+    Start[技术选型] --> Q1{并发还是同步?}
+    Q1 -->|I/O 密集| Async[选择异步]
+    Q1 -->|CPU 密集| Sync[选择同步]
+
+    Async --> Async1[Tokio 运行时]
+    Async --> Async2[async-std 备选]
+
+    Sync --> Q2{共享状态?}
+    Q2 -->|是| Q3{读多写少?}
+    Q2 -->|否| Chan[通道 mpsc]
+
+    Q3 -->|是| RwLock[RwLock]
+    Q3 -->|否| Mutex[Mutex]
+
+    Start --> Q4{集合类型?}
+    Q4 -->|双端操作| VecDeque[VecDeque]
+    Q4 -->|顺序访问| Vec[Vec]
+    Q4 -->|键值查找| HashMap[HashMap]
+    Q4 -->|有序键值| BTreeMap[BTreeMap]
+```
+
 ---
 
 ## 🔬 4. 证明树图 (Proof Tree)
@@ -485,6 +611,54 @@ graph TD
     style G2 fill:#e1ffe1
     style G3 fill:#e1ffe1
     style G4 fill:#e1ffe1
+```
+
+### 4.4 借用检查器安全性证明树
+
+```mermaid
+graph TD
+    Root[借用检查器安全性证明]
+    Root --> P1[前提1: 任意时刻最多一个可变借用]
+    Root --> P2[前提2: 或多个不可变借用]
+    Root --> P3[前提3: 借用不能outlive所有者]
+    P1 --> C1[结论1: 无数据竞争]
+    P2 --> C2[结论2: 读写互斥保证]
+    P3 --> C3[结论3: 无悬垂引用]
+    C1 --> Final[最终结论: 内存安全]
+    C2 --> Final
+    C3 --> Final
+```
+
+### 4.5 生命周期安全性证明树
+
+```mermaid
+graph TD
+    Root[生命周期安全性证明]
+    Root --> P1[前提1: 生命周期标注约束引用有效期]
+    Root --> P2[前提2: 输出引用不能outlive输入引用]
+    Root --> P3[前提3: 编译器静态验证]
+    P1 --> C1[结论1: 无悬垂引用]
+    P2 --> C2[结论2: 引用有效性保证]
+    P3 --> C3[结论3: 零运行时开销]
+    C1 --> Final[最终结论: 生命周期保障内存安全]
+    C2 --> Final
+    C3 --> Final
+```
+
+### 4.6 Send/Sync 安全性证明树
+
+```mermaid
+graph TD
+    Root[Send Sync 安全性证明]
+    Root --> P1[前提1: Send 允许跨线程传输所有权]
+    Root --> P2[前提2: Sync 允许跨线程共享借用]
+    Root --> P3[前提3: 编译器自动推导]
+    P1 --> C1[结论1: 线程间安全传递]
+    P2 --> C2[结论2: 共享引用线程安全]
+    P3 --> C3[结论3: 误用导致编译错误]
+    C1 --> Final[最终结论: Send Sync 保障并发安全]
+    C2 --> Final
+    C3 --> Final
 ```
 
 ---

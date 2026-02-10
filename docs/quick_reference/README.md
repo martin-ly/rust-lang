@@ -475,9 +475,9 @@
 
 ### 研究笔记
 
-- [形式化方法研究](../../research_notes/formal_methods/)
-- [类型理论研究](../../research_notes/type_theory/)
-- [实验研究](../../research_notes/experiments/)
+- [形式化方法研究](../research_notes/formal_methods/)
+- [类型理论研究](../research_notes/type_theory/)
+- [实验研究](../research_notes/experiments/)
 
 ---
 

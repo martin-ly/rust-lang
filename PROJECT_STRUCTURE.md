@@ -1,7 +1,7 @@
-﻿# 📁 项目结构说明 (Project Structure)
+# 📁 项目结构说明 (Project Structure)
 
 > **文档定位**: 详细解释项目的目录结构和组织方式
-> **最后更新**: 2025-10-20
+> **最后更新**: 2026-02-11
 > **项目版本**: v1.0
 
 ---
@@ -22,9 +22,8 @@
       - [🏗️ 模块标准结构](#️-模块标准结构)
     - [guides/ - 学习指南](#guides---学习指南)
       - [📖 指南分类](#-指南分类)
-    - [reports/ - 项目报告](#reports---项目报告)
-      - [📊 报告结构](#-报告结构)
-      - [📋 主要报告类型](#-主要报告类型)
+    - [项目报告 (archive/)](#项目报告-archive)
+      - [📊 报告位置](#-报告位置)
     - [docs/ - 深度文档](#docs---深度文档)
       - [📚 文档分类](#-文档分类)
     - [automation/ - 自动化配置](#automation---自动化配置)
@@ -100,38 +99,17 @@ rust-lang/
 │   ├── c08_algorithms/              # C08: 算法与数据结构
 │   ├── c09_design_pattern/          # C09: 设计模式
 │   ├── c10_networks/                # C10: 网络编程
-│   ├── c11_libraries/             # C11: 中间件集成
-│   ├── c12_model/                   # C12: 模型与架构
-│   └── c13_reliability/             # C13: 可靠性框架
+│   ├── c11_macro_system/            # C11: 宏系统（声明宏、过程宏）
+│   └── c12_wasm/                    # C12: WebAssembly
 │
-├── 📖 guides/                       # 学习指南 ⭐⭐
+├── 📖 guides/                       # 学习指南入口 ⭐⭐
 │   ├── README.md                    # 指南目录索引
-│   ├── AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md
-│   ├── AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.en.md
-│   ├── RUST_COMPILER_INTERNALS_GUIDE_2025.md
-│   ├── RUST_COMPILER_INTERNALS_GUIDE_2025.en.md
-│   ├── COGNITIVE_SCIENCE_LEARNING_GUIDE_2025.md
-│   ├── QUICK_START_GUIDE_2025_10_20.md
-│   ├── COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md
-│   ├── INTERACTIVE_LEARNING_PLATFORM.md
-│   ├── MASTER_DOCUMENTATION_INDEX.md
-│   ├── PRACTICAL_PROJECTS_ROADMAP_2025_10_20.md
-│   ├── GLOBAL_THEORETICAL_FRAMEWORK_2025_10_20.md
-│   ├── DOCUMENTATION_TOOLCHAIN_DESIGN_2025_10_20.md
-│   └── [其他指南文档...]
+│   └── AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md  # AI 辅助编程指南
 │
-├── 📊 reports/                      # 项目报告 ⭐
-│   ├── README.md                    # 报告目录索引
-│   ├── dependencies/                # 依赖更新报告
-│   │   ├── DEPENDENCY_*.md
-│   │   └── REDIS_*.md
-│   ├── modules/                     # 模块完成报告
-│   │   ├── ALL_MODULES_COMPLETION_REPORT_2025_10_20.md
-│   │   └── [其他模块报告...]
-│   ├── phases/                      # 阶段报告
-│   │   ├── PHASE1_COMPLETION_REPORT_2025_10_20.md
-│   │   └── PHASE2_*.md
-│   └── [其他综合报告...]
+├── 📊 报告 (见 archive/)             # 项目报告已归档 ⭐
+│   ├── archive/reports/             # 阶段报告、模块报告
+│   ├── docs/archive/reports/        # 归档报告
+│   └── docs/archive/root_completion_reports/  # 根完成报告
 │
 ├── 📖 docs/                         # 深度文档
 │   ├── formal_rust/                 # 形式化Rust (3500+ 文件)
@@ -191,7 +169,7 @@ rust-lang/
 | `QUICK_REFERENCE.md`    | 快速参考       | 查找语法速查 ⭐ |
 | `RESOURCES.md`          | 学习资源       | 寻找学习材料    |
 | `ROADMAP.md`            | 项目路线图     | 了解项目规划    |
-| `TROUBLESHOOTING.md`    | 故障排查       | 遇到问题时 ⭐   |
+| `TROUBLESHOOTING.md`     | 故障排查       | 遇到问题时 ⭐   |
 | `PROJECT_STRUCTURE.md`  | 项目结构       | 了解目录组织    |
 
 #### 📦 配置文件
@@ -225,9 +203,8 @@ rust-lang/
 | **C08** | 算法与数据结构 | ⭐⭐⭐     | 经典算法               |
 | **C09** | 设计模式       | ⭐⭐⭐⭐   | GoF模式、Rust模式      |
 | **C10** | 网络编程       | ⭐⭐⭐     | TCP/UDP、HTTP          |
-| **C11** | 中间件集成     | ⭐⭐⭐     | 数据库、消息队列       |
-| **C12** | 模型与架构     | ⭐⭐⭐⭐   | 架构模式、建模         |
-| **C13** | 可靠性框架     | ⭐⭐⭐⭐⭐ | 容错、分布式           |
+| **C11** | 宏系统         | ⭐⭐⭐⭐   | 声明宏、过程宏、DSL    |
+| **C12** | WebAssembly    | ⭐⭐⭐⭐   | WASM、wasm-bindgen     |
 
 #### 🏗️ 模块标准结构
 
@@ -260,74 +237,34 @@ c##_module_name/
 
 #### 📖 指南分类
 
-**🤖 AI辅助开发**:
+**指南入口**: [guides/README.md](./guides/README.md) 提供指南导航和官方资源映射
 
-- `AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md` - AI辅助编程完整指南（中文）
-- `AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.en.md` - AI辅助编程完整指南（英文）
+**实际指南位置**:
 
-**🔧 编译器与底层**:
+- **docs/** - 异步编程、设计模式、宏系统、线程并发、WASM、性能调优、故障排查等使用指南
+- **crates/*/docs/** - 各模块的 Tier 指南、快速开始、实践指南
+- **docs/quick_reference/** - 19 个速查卡
 
-- `RUST_COMPILER_INTERNALS_GUIDE_2025.md` - 编译器内部机制（中文）
-- `RUST_COMPILER_INTERNALS_GUIDE_2025.en.md` - 编译器内部机制（英文）
+**已完善**: AI 辅助指南 ([guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md](./guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md))、Unsafe 专题 ([docs/UNSAFE_RUST_GUIDE.md](./docs/UNSAFE_RUST_GUIDE.md))
 
-**🧠 学习方法**:
+**计划完善**（后续版本）: 编译器内部、认知科学、交互式学习平台等
 
-- `COGNITIVE_SCIENCE_LEARNING_GUIDE_2025.md` - 认知科学学习指南
-- `QUICK_START_GUIDE_2025_10_20.md` - 快速开始指南
-
-**🎓 学术对标**:
-
-- `COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md` - 大学课程对标
-- `ALIGNMENT_QUICK_REFERENCE.md` - 对标快速参考
-- `ALIGNMENT_VISUALIZATION_2025.md` - 对标可视化
-
-**💻 实践项目**:
-
-- `PRACTICAL_PROJECTS_ROADMAP_2025_10_20.md` - 实践项目路线图
-- `INTERACTIVE_LEARNING_PLATFORM.md` - 交互式学习平台
-
-**📊 理论与工具**:
-
-- `GLOBAL_THEORETICAL_FRAMEWORK_2025_10_20.md` - 全局理论框架
-- `DOCUMENTATION_TOOLCHAIN_DESIGN_2025_10_20.md` - 文档工具链设计
-- `MASTER_DOCUMENTATION_INDEX.md` - 主文档索引
-
-👉 查看 [guides/README.md](./guides/README.md) 了解详细分类和使用指南
+👉 查看 [guides/README.md](./guides/README.md) 了解完整导航
 
 ---
 
-### reports/ - 项目报告
+### 项目报告 (archive/)
 
-**项目各阶段的完成报告、更新总结和分析文档**。
+**项目各阶段的完成报告、更新总结和分析文档**，已归档至以下位置：
 
-#### 📊 报告结构
+#### 📊 报告位置
 
-```text
-reports/
-├── dependencies/        # 依赖更新报告
-├── modules/            # 模块完成报告
-├── phases/             # 阶段性报告
-└── [其他综合报告]
-```
-
-#### 📋 主要报告类型
-
-**🔧 依赖更新** (`dependencies/`)
-
-- 记录依赖库的更新历史
-- Redis等重要组件的升级文档
-
-**📦 模块完成** (`modules/`)
-
-- 各模块（C01-C13）的完成情况
-- 功能增强和扩展总结
-
-**🎯 阶段里程碑** (`phases/`)
-
-- PHASE1: 基础模块完成
-- PHASE2: 高级功能和优化完成
-
-👉 查看 [reports/README.md](./reports/README.md) 了解详细分类
+| 类型         | 路径 |
+| ------------ | ---- |
+| 阶段/模块报告 | [archive/reports/](./archive/reports/) |
+| 归档报告     | [docs/archive/reports/](./docs/archive/reports/) |
+| 根完成报告   | [docs/archive/root_completion_reports/](./docs/archive/root_completion_reports/) |
+| 计划实施完成 | [docs/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md](./docs/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md) |
 
 ---
 
@@ -427,15 +364,15 @@ scripts/
 
 1. **完全新手** → [README.md](./README.md) → [C01模块](./crates/c01_ownership_borrow_scope/)
 2. **选择路径** → [学习路径](./README.md#学习路径推荐)
-3. **快速上手** → [快速开始指南](./guides/QUICK_START_GUIDE_2025_10_20.md)
+3. **快速上手** → [学习指南](./guides/README.md)
 
 #### 查找资料
 
-1. **快速查询** → [QUICK_REFERENCE.md](./QUICK_REFERENCE.md)
+1. **快速查询** → [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) 或 [速查卡目录](./docs/quick_reference/README.md)
 2. **深入学习** → 各模块的 `docs/00_MASTER_INDEX.md`
 3. **常见问题** → 各模块的 `docs/FAQ.md`
 4. **术语查询** → 各模块的 `docs/Glossary.md`
-5. **所有文档** → [主文档索引](./guides/MASTER_DOCUMENTATION_INDEX.md)
+5. **所有文档** → [文档中心](./docs/README.md)
 
 #### 解决问题
 
@@ -451,8 +388,8 @@ scripts/
 
 #### 了解项目进度
 
-1. **整体进度** → [PHASE2完成报告](./reports/phases/PHASE2_FINAL_COMPLETION_REPORT_2025_10_20.md)
-2. **模块进度** → [模块完成报告](./reports/modules/)
+1. **整体进度** → [archive/reports/](./archive/reports/)
+2. **模块进度** → [archive/reports/](./archive/reports/)
 3. **更新历史** → [CHANGELOG.md](./CHANGELOG.md)
 4. **未来规划** → [ROADMAP.md](./ROADMAP.md)
 
@@ -470,7 +407,7 @@ scripts/
 
 ```text
 📁 目录结构：
-├─ 学习模块：13 个 (C01-C13)
+├─ 学习模块：12 个 (C01-C12)
 ├─ 指南文档：15+ 篇
 ├─ 项目报告：30+ 篇
 ├─ 深度文档：5000+ 个文件
@@ -483,7 +420,7 @@ scripts/
 └─ 基准测试：50+ 个
 
 📚 学习资源：
-├─ 主索引文档：13 个
+├─ 主索引文档：12 个
 ├─ FAQ：79 个问题
 ├─ 术语定义：165+ 个
 └─ 实践项目：10+ 个
@@ -504,7 +441,7 @@ scripts/
 
 - **项目入口**: [README.md](./README.md) ⭐
 - **学习指南**: [guides/](./guides/) ⭐⭐
-- **项目报告**: [reports/](./reports/)
+- **项目报告**: [archive/reports/](./archive/reports/)
 - **贡献指南**: [CONTRIBUTING.md](./CONTRIBUTING.md)
 - **项目路线**: [ROADMAP.md](./ROADMAP.md)
 - **学习资源**: [RESOURCES.md](./RESOURCES.md)
@@ -515,6 +452,6 @@ scripts/
 
 了解项目结构有助于更好地利用学习资源。
 
-**最后更新**: 2025-10-20
+**最后更新**: 2026-02-11
 **维护团队**: Rust 学习社区
 **版本**: v2.0

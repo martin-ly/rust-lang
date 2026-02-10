@@ -6,7 +6,7 @@
 
 **Project Status**: ✅ **100% Core Tasks Complete** ⭐⭐⭐⭐⭐
 **Last Updated**: 2025-12-11
-**Rust Version**: 1.92.0+ | Edition 2024
+**Rust Version**: 1.93.0+ | Edition 2024
 **Project Rating**: **Excellent** (All modules A-grade or above)
 
 ---
@@ -53,14 +53,14 @@ We have successfully completed all **24 core tasks**, achieving **100% completio
 | ------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | **🎓 International Alignment Report** | Alignment with top universities, Rust 1.90, formal theory | [View Report](./COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md) ⭐⭐⭐         |
 | **📊 Alignment Executive Summary**    | Quick understanding of international level comparison     | [View Summary](./UNIVERSITY_ALIGNMENT_EXECUTIVE_SUMMARY.md) ⭐⭐⭐                |
-| **⚡ Quick Start Guide**              | Get started in 10 minutes                                 | [Start Now](./QUICK_START_GUIDE_2025_10_20.md) ⭐                                 |
+| **⚡ Quick Start**                    | Get started with guides                                  | [Start Now](./guides/README.md) ⭐                                                 |
 | **🔍 Smart Document Search**          | Full-text search tool                                     | [Use Search](./tools/doc_search/README.md) ⭐                                     |
-| **🎓 Global Theoretical Framework**   | Cross-module theoretical system                           | [Deep Dive](./GLOBAL_THEORETICAL_FRAMEWORK_2025_10_20.md) ⭐                      |
-| **🔬 Formal Verification Tools**      | Prusti + Kani + Creusot practical guide                   | [View Guide](./crates/c13_reliability/docs/FORMAL_VERIFICATION_TOOLS_GUIDE.md) ⭐ |
+| **🎓 Learning Guides**                 | Guides, exercises, AI assistance                          | [Browse](./guides/README.md) ⭐                                                    |
+| **🔬 Formal Verification Tools**      | Prusti + Kani + Creusot practical guide                   | [View Guide](./docs/research_notes/TOOLS_GUIDE.md) ⭐ |
 
 ### 🎯 Each Module Now Includes
 
-For core modules (C01-C13), each module now contains:
+For core modules (C01-C12), each module now contains:
 
 - 📊 **Knowledge Graph & Concept Relations** - Systematic theoretical framework
 - 📐 **Multi-dimensional Comparison Matrix** - Technology selection and performance comparison
@@ -79,7 +79,7 @@ For core modules (C01-C13), each module now contains:
 | **🌱 Beginner**     | 2-4 weeks       | C01-C03      | Master basic syntax and core concepts        |
 | **🚀 Intermediate** | 4-8 weeks       | C04-C06      | Understand advanced features and concurrency |
 | **⚡ Advanced**     | 8-12 weeks      | C07-C10      | System programming and network applications  |
-| **🏆 Expert**       | Continuous      | C11-C13      | Architecture design and production practices |
+| **🏆 Expert**       | Continuous      | C11-C12      | Macro system, WASM, advanced practices      |
 
 ### 📖 Core Learning Modules
 
@@ -108,13 +108,12 @@ For core modules (C01-C13), each module now contains:
 | **C09** | [Design Patterns](./crates/c09_design_pattern/)          | GoF patterns, Rust-specific patterns | [📖 Master Index](./crates/c09_design_pattern/docs/00_MASTER_INDEX.md) |
 | **C10** | [Network Programming](./crates/c10_networks/)            | TCP/UDP, HTTP, WebSocket             | [📖 Master Index](./crates/c10_networks/docs/00_MASTER_INDEX.md)       |
 
-#### Phase 4: Production Practices (C11-C13)
+#### Phase 4: Advanced Practices (C11-C12)
 
-| Module  | Name                                               | Core Content                                        | Documentation                                                       |
-| ------- | -------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------- |
-| **C11** | [Middleware Integration](./crates/c11_libraries/)  | Databases, message queues, caching                  | [📖 Master Index](./crates/c11_libraries/docs/00_MASTER_INDEX.md)   |
-| **C12** | [Models & Architecture](./crates/c12_model/)       | Architecture patterns, domain modeling              | [📖 Master Index](./crates/c12_model/docs/00_MASTER_INDEX.md)       |
-| **C13** | [Reliability Framework](./crates/c13_reliability/) | Fault tolerance, distributed systems, observability | [📖 Master Index](./crates/c13_reliability/docs/00_MASTER_INDEX.md) |
+| Module  | Name                                               | Core Content                                    | Documentation                                                       |
+| ------- | -------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------- |
+| **C11** | [Macro System](./crates/c11_macro_system/)         | Declarative macros, procedural macros, DSL      | [📖 Master Index](./crates/c11_macro_system/docs/00_MASTER_INDEX.md) |
+| **C12** | [WebAssembly](./crates/c12_wasm/)                  | WASM, wasm-bindgen, WASI                        | [📖 Master Index](./crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md) |
 
 ---
 
@@ -166,7 +165,7 @@ Jump directly to relevant modules based on needs:
 - **Need to understand ownership?** → [C01](./crates/c01_ownership_borrow_scope/)
 - **Want to learn async programming?** → [C06](./crates/c06_async/)
 - **Need network programming?** → [C10](./crates/c10_networks/)
-- **Focus on reliability?** → [C13](./crates/c13_reliability/)
+- **Focus on formal verification?** → [research_notes/TOOLS_GUIDE](./docs/research_notes/TOOLS_GUIDE.md) (Prusti, Kani, Creusot)
 
 ### Using the Documentation Search Tool
 
@@ -249,8 +248,8 @@ Week 5-8: Practice Project 2 - Web Server
 ### For Advanced Engineers
 
 ```text
-Week 1-2: C10 Network Programming + C11 Middleware
-Week 3-4: C12 Architecture + C13 Reliability
+Week 1-2: C10 Network Programming + C11 Macro System
+Week 3-4: C12 WASM + Advanced Practice
 Week 5-12: Practice Project 3 - Distributed System
 ```
 
@@ -314,7 +313,7 @@ fn factorial(n: u32) -> u64 {
 }
 ```
 
-**Detailed Tutorial**: [Formal Verification Tools Guide](./crates/c13_reliability/docs/FORMAL_VERIFICATION_TOOLS_GUIDE.md)
+**Detailed Tutorial**: [Formal Verification Tools Guide](./docs/research_notes/TOOLS_GUIDE.md) (Prusti, Kani)
 
 ---
 

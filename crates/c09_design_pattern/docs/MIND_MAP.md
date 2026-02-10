@@ -1,4 +1,4 @@
-﻿# 设计模式思维导图 (Design Patterns Mind Map)
+# 设计模式思维导图 (Design Patterns Mind Map)
 
 > **文档定位**: 可视化学习路径、决策树和知识结构
 > **适用版本**: Rust 1.92.0+ (Edition 2024)
@@ -65,7 +65,7 @@
 
 ```mermaid
 mindmap
-  root((设计模式<br/>入门))
+  root((设计模式入门))
     (第1周: 基础概念)
       [创建型模式]
         ::icon(fa fa-plus-circle)
@@ -483,7 +483,7 @@ graph TD
 
 ```mermaid
 mindmap
-  root((设计模式<br/>关联))
+  root((设计模式关联))
     (创建型关联)
       [单例 ← 对象池]
         {{池是多实例单例}}
@@ -770,7 +770,7 @@ gantt
 
 ```mermaid
 mindmap
-  root((设计模式<br/>技能树))
+  root((设计模式技能树))
     (Level 1: 初级)
       [理解基础概念]
         {{GoF 23种模式}}

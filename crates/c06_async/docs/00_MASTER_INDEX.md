@@ -1,6 +1,15 @@
-﻿# C06 异步编程 - 主索引
+# C06 异步编程 - 主索引
 
 > **文档定位**: 本文档是C06异步编程模块的完整导航系统，提供清晰的文档分类和学习路径。
+
+## 📚 官方资源映射
+
+| 官方资源 | 链接 | 与本模块对应 |
+|----------|------|--------------|
+| **The Rust Book** | [Ch. 16 (async)](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 并发与异步概念 |
+| **Rust By Example** | [Async](https://doc.rust-lang.org/rust-by-example/async.html) | async/await 语法 |
+| **Rust Reference** | [Async blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) | async 规范 |
+| **Tokio** | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 主流异步运行时 |
 
 ## 📂 目录详解
 

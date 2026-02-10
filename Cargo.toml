@@ -95,8 +95,8 @@ codegen-units = 1
 [profile.bench.build-override]
 opt-level = 2
 
-# 工作区级别的依赖版本统一 - 2026年1月26日最新稳定版本
-# 更新时间: 2026-01-26 (cargo update 更新23个包，兼容 Rust 1.92/1.93)
+# 工作区级别的依赖版本统一 - 2026年2月11日最新稳定版本
+# 更新时间: 2026-02-11 (cargo update 更新60个包，兼容 Rust 1.92/1.93)
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
 # rust-version: 1.92.0 -> 1.93.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
@@ -105,12 +105,12 @@ opt-level = 2
 # reqwest: 高级HTTP客户端库，支持异步请求和JSON序列化 - 版本 0.13+ (字母索引)
 # 注意: reqwest 0.12.x 使用 "rustls-tls" 特性，0.13.x 使用 "rustls" 特性
 # 由于 surf 2.3.2 需要 reqwest 0.13.x，升级到 0.13.x 版本
-reqwest = { version = "0.13", features = ["json", "rustls"] }
+reqwest = { version = "0.13.2", features = ["json", "rustls"] }
 # hyper: 底层HTTP库，提供高性能的HTTP/1.1和HTTP/2支持 - 版本 1.4+ (字母索引)
 hyper = { version = "1.8.1", features = ["full"] }
 # hyper-util: hyper的实用工具库，提供连接池和服务器功能
 # 2025-12-11: 更新至 0.1.19
-hyper-util = "0.1.19"
+hyper-util = "0.1.20"
 # hyper-rustls: hyper与rustls的集成，提供安全的TLS连接
 hyper-rustls = "0.28.1"
 # hyper-tls: hyper与native-tls的集成，提供TLS支持
@@ -187,18 +187,18 @@ rcgen = "0.14.7"
 # dotenvy: 环境变量管理库，dotenv的维护良好的分支
 dotenvy = "0.15.7"
 # tempfile: 临时文件和目录管理库
-tempfile = "3.24.0"
+tempfile = "3.25.0"
 
 # gRPC 相关 - 2025年12月11日最新稳定版本
 # tonic: 高性能的gRPC over HTTP/2实现，专注于互操作性和灵活性 - 版本 0.12+ (字母索引)
-tonic = { version = "0.14.2", features = [
+tonic = { version = "0.14.3", features = [
     "transport",        # 传输层支持
     "tls-ring",         # 使用ring的TLS支持
     "tls-webpki-roots", # WebPKI根证书支持
     "channel",          # 客户端通道支持
 ] }
 # tonic-build: tonic的构建工具，用于生成gRPC代码
-tonic-build = "0.14.2"
+tonic-build = "0.14.3"
 # prost: Protocol Buffers的Rust实现
 prost = "0.14.3"
 # prost-build: prost的构建工具
@@ -225,14 +225,14 @@ tokio-rustls = "0.26.4"  # 更新至最新稳定版本
 # ring: 加密原语库，提供高性能的加密算法实现 - 版本 0.17+ (字母索引)
 ring = "0.17.14"
 # webpki-roots: WebPKI根证书集合 - 2025年10月6日更新
-webpki-roots = "1.0.5"
+webpki-roots = "1.0.6"
 
 # 错误处理 - 2025年12月11日最新稳定版本
 # thiserror: 错误类型派生宏库，简化错误处理 - 版本 1.0+ (字母索引)
 # 2026-01-26: 2.0.17 -> 2.0.18 (cargo update)
 thiserror = "2.0.18"
 # anyhow: 灵活的错误处理库，基于std::error::Error构建 - 版本 1.0.89+ (字母索引)
-anyhow = "1.0.100"
+anyhow = "1.0.101"
 
 # 序列化 - 2025年12月11日最新稳定版本
 # serde: 通用序列化/反序列化框架，支持多种数据格式 - 版本 1.0+ (字母索引)
@@ -295,7 +295,7 @@ metrics-exporter-prometheus = "0.18.1"
 chrono = { version = "0.4.43", features = ["serde"] }
 # time: 现代时间处理库，提供高性能的时间操作 - 版本 0.3+ (字母索引)
 # 2026-01-26: 0.3.45 -> 0.3.46 (cargo update)
-time = { version = "0.3.46", features = ["serde", "macros"] }
+time = { version = "0.3.47", features = ["serde", "macros"] }
 
 # 其他常用库 - 2025年12月11日最新稳定版本
 # uuid: UUID生成和解析库，支持多种UUID版本 - 版本 1.10+ (字母索引)
@@ -304,7 +304,7 @@ uuid = { version = "1.20.0", features = ["v4", "serde"] }
 # url: URL解析和操作库
 url = "2.5.8"
 # bytes: 字节缓冲区处理库，提供高效的字节操作 - 版本 1.7+ (字母索引)
-bytes = "1.11.0"
+bytes = "1.11.1"
 # indexmap: 保持插入顺序的HashMap实现 - 2025年12月11日更新
 indexmap = "2.13.0"
 # once_cell: 单次初始化单元格，用于全局变量初始化
@@ -312,7 +312,7 @@ once_cell = "1.21.3"
 # num_cpus: CPU核心数检测库
 num_cpus = "1.17.0"
 # libc: 系统调用接口库，提供与C库的绑定
-libc = "0.2.180"
+libc = "0.2.181"
 # rand: 随机数生成库，提供高质量的随机数生成 - 版本 0.8+ (字母索引)
 rand = "0.9.2"
 # rand_chacha: ChaCha20随机数生成器 - 2025年10月11日更新
@@ -344,7 +344,7 @@ sqlx = { version = "0.8.6", features = [  # 更新至最新稳定版本
     "uuid",                # UUID类型支持
 ], default-features = false }
 # redis: Redis客户端库，支持异步操作 - 版本 1.0+ (稳定版！)
-redis = "1.0.2"  # 2025年12月11日：从RC升级到稳定版
+redis = "1.0.3"  # 2025年12月11日：从RC升级到稳定版
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.38.0", default-features = false }
 # mysql_async: MySQL异步客户端 - 2025年10月20日更新
@@ -357,13 +357,13 @@ mysql-common-derive = "0.32.1"
 # 性能测试和基准测试 - 2025年12月11日最新稳定版本
 # criterion: 统计驱动的微基准测试库，提供详细的性能分析 - 版本 0.5+ (字母索引)
 # 2025-12-11: 更新至 0.8.1 (最新稳定版本)
-criterion = "0.8.1"
+criterion = "0.8.2"
 
 # 配置管理 - 2025年12月11日最新稳定版本
 # config: 分层配置系统，支持多种配置格式
 config = "0.15.19"  # 更新至最新稳定版本
 # toml: TOML格式的编码器和解码器 - 版本 0.8+ (字母索引)
-toml = "0.9.11"
+toml = "0.9.12+spec-1.1.0"
 
 # 并发和同步 - 2025年12月11日最新稳定版本
 # crossbeam: 并发编程工具库，提供无锁数据结构和同步原语 - 版本 0.8+ (字母索引)
@@ -381,7 +381,7 @@ syn = "2.0.114"
 # mockall: 强大的模拟对象库，用于单元测试 - 版本 0.13+ (字母索引)
 mockall = "0.14.0"
 # proptest: 基于属性的测试库，类似Hypothesis - 版本 1.5+ (字母索引)
-proptest = "1.9.0"
+proptest = "1.10.0"
 # rstest: 基于fixture的测试框架，支持参数化测试
 rstest = "0.26.1"  # 更新至最新稳定版本
 # cargo-tarpaulin: 代码覆盖率测试工具
@@ -1089,6 +1089,41 @@ nix = "0.30.1"
 # - chrono, time, rand_core 和 wasm-bindgen 已在工作区依赖中更新
 # - 其他更新为传递依赖，由其他依赖自动管理
 # - 所有更新已通过 cargo update 验证兼容性
+# ============================================================
+#
+# 依赖更新日志 - 2026年2月11日 cargo update（Rust 1.92/1.93 兼容版本）
+# ============================================================
+# cargo update 更新了60个包到最新 Rust 1.92 兼容版本
+# 更新时间: 2026-02-11
+#
+# 工作区依赖更新（已更新 Cargo.toml）：
+# - anyhow: 1.0.100 -> 1.0.101
+# - hyper-util: 0.1.19 -> 0.1.20
+# - tempfile: 3.24.0 -> 3.25.0
+# - tonic: 0.14.2 -> 0.14.3
+# - tonic-build: 0.14.2 -> 0.14.3
+# - webpki-roots: 1.0.5 -> 1.0.6
+# - reqwest: 0.13.1 -> 0.13.2
+# - time: 0.3.46 -> 0.3.47
+# - bytes: 1.11.0 -> 1.11.1
+# - libc: 0.2.180 -> 0.2.181
+# - redis: 1.0.2 -> 1.0.3
+# - criterion: 0.8.1 -> 0.8.2
+# - toml: 0.9.11+spec-1.1.0 -> 0.9.12+spec-1.1.0
+# - proptest: 1.9.0 -> 1.10.0
+#
+# 传递依赖更新（自动更新，无需手动配置）：
+# - arc-swap, cc, clap, criterion-plot, find-msvc-tools, flate2
+# - hyper-util, jiff, libc, memchr, pest, portable-atomic, regex
+# - reqwest, ryu, slab, tempfile, time-macros, toml_parser, tonic-prost
+# - trybuild, unicode-ident, webpki-root-certs, zerocopy, zmij 等
+# 新增: getrandom, id-arena, leb128fmt, system-configuration, wasip3
+#       wasm-encoder, wasm-metadata, wasmparser, wit-bindgen-*, wit-component, wit-parser
+#
+# 重要说明：
+# - 所有工作区依赖已更新至 Cargo.toml
+# - 传递依赖由 Cargo 自动管理
+# - 所有更新已通过 cargo check 验证兼容性
 # ============================================================
 #
 # 依赖更新日志 - 2026年1月26日 cargo update（Rust 1.92/1.93 兼容版本）

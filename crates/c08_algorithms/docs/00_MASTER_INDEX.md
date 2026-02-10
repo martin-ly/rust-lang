@@ -1,4 +1,12 @@
-﻿# C08 Algorithms - 主索引
+# C08 Algorithms - 主索引
+
+## 📚 官方资源映射
+
+| 官方资源 | 链接 | 与本模块对应 |
+|----------|------|--------------|
+| **Rust By Example** | [Vectors](https://doc.rust-lang.org/rust-by-example/std/vec.html), [Iterators](https://doc.rust-lang.org/rust-by-example/trait/iter.html) | 集合与迭代器 |
+| **Rust std** | [std::collections](https://doc.rust-lang.org/std/collections/), [std::iter](https://doc.rust-lang.org/std/iter/) | 标准库数据结构 |
+| **Algorithm courses** | MIT 6.006, CLRS | 算法复杂度理论 |
 
 ## 🗂️ 文档目录结构
 

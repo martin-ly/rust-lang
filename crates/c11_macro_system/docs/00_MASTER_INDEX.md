@@ -4,6 +4,15 @@
 > **最后更新**: 2025-12-11
 > **适用版本**: Rust 1.92.0+
 
+## 📚 官方资源映射
+
+| 官方资源 | 链接 | 与本模块对应 |
+|----------|------|--------------|
+| **The Rust Book** | [Ch. 19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | 宏基础 |
+| **Rust By Example** | [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | 声明宏 |
+| **Rust Reference** | [Macros](https://doc.rust-lang.org/reference/macros.html) | 宏规范 |
+| **The Little Book of Rust Macros** | [dtolnay/rust-macros](https://danielkeep.github.io/tlborm/book/) | 宏深入 |
+
 ---
 
 ## 📋 目录

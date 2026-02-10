@@ -1,8 +1,7 @@
 # Cargo工作区配置文件
 # 创建时间: 2025年9月25日 14:50
-# 更新时间: 2025年10月20日 (系统时间已同步)
-# 系统时间已同步，所有依赖库版本已更新至最新成熟版本
-# 全面升级至2025年10月20日最新稳定版本，兼容Rust 1.90
+# 更新时间: 2026-02-11
+# 工作区成员与根 Cargo.toml 保持一致 (C01-C12)
 
 [workspace]
 # 工作区成员
@@ -17,9 +16,8 @@ members = [
     "crates/c08_algorithms",
     "crates/c09_design_pattern",
     "crates/c10_networks",
-    "crates/c11_middlewares",
-    "crates/c12_model",
-    "crates/c13_reliability",
+    "crates/c11_macro_system",
+    "crates/c12_wasm",
 ]
 
 # 排除的成员
@@ -43,9 +41,8 @@ default-members = [
     "crates/c08_algorithms",
     "crates/c09_design_pattern",
     "crates/c10_networks",
-    "crates/c11_middlewares",
-    "crates/c12_model",
-    "crates/c13_reliability",
+    "crates/c11_macro_system",
+    "crates/c12_wasm",
 ]
 
 # 工作区元数据

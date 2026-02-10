@@ -2,15 +2,34 @@
 //!
 //! 本模块包含使用 Loom 进行的全面并发测试，确保并发代码的正确性。
 //! This module contains comprehensive concurrency tests using Loom to ensure correctness of concurrent code.
+//!
+//! 在 Windows 上使用 4MB 栈以避免 loom 状态空间探索导致的栈溢出。
+//! Uses 4MB stack on Windows to avoid stack overflow from loom's state space exploration.
 
 use loom::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use loom::sync::{Arc, Condvar, Mutex};
 use loom::thread;
 use std::sync::mpsc;
 
+/// 在较大栈上运行 loom 模型，避免 Windows 上栈溢出
+fn loom_model<F, R>(f: F) -> R
+where
+    F: FnOnce() -> R + Send + 'static,
+    R: Send + 'static,
+{
+    const STACK_SIZE: usize = 4 * 1024 * 1024; // 4MB
+    std::thread::Builder::new()
+        .stack_size(STACK_SIZE)
+        .spawn(f)
+        .unwrap()
+        .join()
+        .unwrap()
+}
+
 /// 测试基本的原子操作 / Test basic atomic operations
 #[test]
 fn test_atomic_operations() {
+    loom_model(|| {
     loom::model(|| {
         let atomic = Arc::new(AtomicUsize::new(0));
         let atomic_clone1 = atomic.clone();
@@ -29,11 +48,13 @@ fn test_atomic_operations() {
         
         assert_eq!(atomic.load(Ordering::SeqCst), 2);
     });
+    });
 }
 
 /// 测试原子布尔值 / Test atomic boolean
 #[test]
 fn test_atomic_boolean() {
+    loom_model(|| {
     loom::model(|| {
         let flag = Arc::new(AtomicBool::new(false));
         let flag_clone1 = flag.clone();
@@ -54,11 +75,13 @@ fn test_atomic_boolean() {
         
         assert!(flag.load(Ordering::SeqCst));
     });
+    });
 }
 
 /// 测试互斥锁 / Test mutex
 #[test]
 fn test_mutex() {
+    loom_model(|| {
     loom::model(|| {
         let data = Arc::new(Mutex::new(0));
         let data_clone1 = data.clone();
@@ -79,11 +102,13 @@ fn test_mutex() {
         
         assert_eq!(*data.lock().unwrap(), 2);
     });
+    });
 }
 
 /// 测试条件变量 / Test condition variable
 #[test]
 fn test_condition_variable() {
+    loom_model(|| {
     loom::model(|| {
         let pair = Arc::new((Mutex::new(false), Condvar::new()));
         let pair_clone = pair.clone();
@@ -106,11 +131,13 @@ fn test_condition_variable() {
         t1.join().unwrap();
         t2.join().unwrap();
     });
+    });
 }
 
 /// 测试生产者-消费者模式 / Test producer-consumer pattern
 #[test]
 fn test_producer_consumer() {
+    loom_model(|| {
     loom::model(|| {
         let (tx, rx) = mpsc::channel();
         let tx_clone = tx.clone();
@@ -134,11 +161,13 @@ fn test_producer_consumer() {
         
         assert_eq!(received, 10);
     });
+    });
 }
 
 /// 测试有界通道 / Test bounded channel
 #[test]
 fn test_bounded_channel() {
+    loom_model(|| {
     loom::model(|| {
         let (tx, rx) = mpsc::sync_channel(2);
         let tx_clone = tx.clone();
@@ -162,11 +191,13 @@ fn test_bounded_channel() {
         
         assert_eq!(received, 5);
     });
+    });
 }
 
 /// 测试读写锁 / Test read-write lock
 #[test]
 fn test_rwlock() {
+    loom_model(|| {
     loom::model(|| {
         use loom::sync::RwLock;
         
@@ -188,11 +219,13 @@ fn test_rwlock() {
         
         assert_eq!(read_value, 1);
     });
+    });
 }
 
 /// 测试屏障 / Test barrier
 #[test]
 fn test_barrier() {
+    loom_model(|| {
     loom::model(|| {
         use loom::sync::Barrier;
         
@@ -210,11 +243,13 @@ fn test_barrier() {
         t1.join().unwrap();
         t2.join().unwrap();
     });
+    });
 }
 
 /// 测试信号量 / Test semaphore
 #[test]
 fn test_semaphore() {
+    loom_model(|| {
     loom::model(|| {
         // 使用原子计数器模拟信号量 / Use atomic counter to simulate semaphore
         let semaphore = Arc::new(AtomicUsize::new(2));
@@ -244,11 +279,13 @@ fn test_semaphore() {
         t1.join().unwrap();
         t2.join().unwrap();
     });
+    });
 }
 
 /// 测试复杂的并发场景 / Test complex concurrency scenario
 #[test]
 fn test_complex_concurrency() {
+    loom_model(|| {
     loom::model(|| {
         let shared_data = Arc::new(Mutex::new(Vec::new()));
         let counter = Arc::new(AtomicUsize::new(0));
@@ -309,11 +346,13 @@ fn test_complex_concurrency() {
         let processed = consumer.join().unwrap();
         assert_eq!(processed, 30);
     });
+    });
 }
 
 /// 测试死锁检测 / Test deadlock detection
 #[test]
 fn test_deadlock_prevention() {
+    loom_model(|| {
     loom::model(|| {
         let lock1 = Arc::new(Mutex::new(0));
         let lock2 = Arc::new(Mutex::new(0));
@@ -334,11 +373,13 @@ fn test_deadlock_prevention() {
         t1.join().unwrap();
         t2.join().unwrap();
     });
+    });
 }
 
 /// 测试内存顺序 / Test memory ordering
 #[test]
 fn test_memory_ordering() {
+    loom_model(|| {
     loom::model(|| {
         let data = Arc::new(AtomicUsize::new(0));
         let ready = Arc::new(AtomicBool::new(false));
@@ -363,11 +404,13 @@ fn test_memory_ordering() {
         
         assert_eq!(value, 42);
     });
+    });
 }
 
 /// 测试取消机制 / Test cancellation mechanism
 #[test]
 fn test_cancellation() {
+    loom_model(|| {
     loom::model(|| {
         let cancelled = Arc::new(AtomicBool::new(false));
         let cancelled_clone = cancelled.clone();
@@ -389,11 +432,13 @@ fn test_cancellation() {
         let work_count = worker.join().unwrap();
         assert!(work_count > 0);
     });
+    });
 }
 
 /// 测试超时机制 / Test timeout mechanism
 #[test]
 fn test_timeout() {
+    loom_model(|| {
     loom::model(|| {
         let data = Arc::new(Mutex::new(0));
         let data_clone = data.clone();
@@ -414,6 +459,7 @@ fn test_timeout() {
         
         // 超时后应该能够获取锁 / Should be able to acquire lock after timeout
         let _guard = data.lock().unwrap();
+    });
     });
 }
 

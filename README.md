@@ -7,7 +7,7 @@
 > **学习方式**: 理论 + 实践 + 项目驱动
 
 **项目状态**: ✅ **按资产口径 100% 完成**（狭义 100% 需本地跑通 `.\scripts\run_workspace_tests.ps1`）⭐⭐⭐⭐⭐
-**最后更新**: 2026-01-27
+**最后更新**: 2026-02-11
 **Rust 版本**: 1.93.0+ | Edition 2024
 **项目评级**: **优秀** (所有模块A级以上)
 **第1周推进**: ✅ **圆满完成，超出预期** (完成度28%→70%，+42%)
@@ -19,6 +19,16 @@
 ---
 
 ## 🎉 最新更新
+
+### 2026-02-11 🆕
+
+- ✅ **计划实施 100% 完成**：批判性评价改进计划全部落实
+  - 项目结构统一（guides/、C11/C12 表述）
+  - 各模块官方资源映射（Book/Reference/RBE）
+  - 思维表征补全（决策树、证明树、矩阵扩展）
+  - 新增：AI 辅助指南、Unsafe 专题、学习检查清单、交互式练习入口
+  - 断链修复：README.en、PROJECT_STRUCTURE、development-guides
+  - 详见 [计划实施完成报告](./docs/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md)
 
 ### 2026-01-27 🆕
 
@@ -181,12 +191,12 @@ mdbook serve --open
 - ✅ **总行数**: 150,000+ 行高质量内容
 - ✅ **文档数**: 220+ 个系统化文档
 - ✅ **代码示例**: 800+ 个可运行示例
-- ✅ **完成模块**: 13/14 (93%)
-- ✅ **A级以上**: 14/14 (100%)
+- ✅ **完成模块**: 12/12 (100%)
+- ✅ **A级以上**: 12/12 (100%)
 
 **模块分级** (真实评估):
 
-- 🌟 **A+级 (9个, 64%)**: C01, C02, C04, C06, C07, C09, C11, C12, C13 (优秀)
+- 🌟 **A+级 (9个, 64%)**: C01, C02, C04, C06, C07, C09, C11, C12 (优秀)
 - ⭐ **A级 (3个, 22%)**: C03, C08, C10 (良好)
 - ✨ **A-级 (2个, 14%)**: C05, C14 (可用)
 
@@ -253,27 +263,19 @@ mdbook serve --open
 
 | 资源                           | 说明                                   | 快速链接                                                                                  |
 | ------------------------------ | -------------------------------------- | ----------------------------------------------------------------------------------------- |
-| **🎓 国际对标分析报告**        | 对标顶尖大学、Rust 1.93.0+、形式化理论 | [查看报告](./guides/COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md) ⭐⭐⭐             |
+| **📖 学习指南入口**            | 指南导航与官方资源映射                 | [浏览指南](./guides/README.md) ⭐⭐⭐                                                     |
 | **📊 对标执行摘要**            | 快速了解国际水平对比                   | [查看摘要](./reports/UNIVERSITY_ALIGNMENT_EXECUTIVE_SUMMARY.md) ⭐⭐⭐                    |
-| **⚡ 快速开始指南**            | 10分钟快速上手                         | [立即开始](./guides/QUICK_START_GUIDE_2025_10_20.md) ⭐                                   |
+| **⚡ 快速开始**                | 所有权/异步等模块快速入门               | [guides/README.md](./guides/README.md) → 各模块 docs/                                     |
 | **🔍 智能文档搜索**            | 全文搜索工具                           | [使用搜索](./tools/doc_search/README.md) ⭐                                               |
-| **🎓 交互式学习平台**          | 练习题库 + Playground集成              | [开始练习](./guides/INTERACTIVE_LEARNING_PLATFORM.md) ⭐                                  |
 | **🎉 第一阶段完成报告**        | Q1路线图全部完成                       | [查看报告](./reports/phases/PHASE1_COMPLETION_REPORT_2025_10_20.md) ⭐⭐⭐                |
-| **🔧 编译器内部机制指南**      | MIR、借用检查器、LLVM后端              | [深入编译器](./guides/RUST_COMPILER_INTERNALS_GUIDE_2025.md) ⭐⭐⭐                       |
-| **🤖 AI辅助编程完整指南**      | Copilot、提示词工程、AI代码审查        | [AI助力开发](./guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md) ⭐⭐⭐                  |
-| **🧠 认知科学学习指南**        | 元认知、记忆优化、刻意练习             | [科学学习](./guides/COGNITIVE_SCIENCE_LEARNING_GUIDE_2025.md) ⭐⭐⭐                      |
 | **🎉 第二阶段完成报告**        | Q2-Q3全部任务圆满完成（96/100分）      | [查看报告](./reports/phases/PHASE2_FINAL_COMPLETION_REPORT_2025_10_20.md) ⭐⭐⭐⭐⭐      |
-| **🎓 全局理论框架**            | 跨模块理论体系分析                     | [深入理论](./guides/GLOBAL_THEORETICAL_FRAMEWORK_2025_10_20.md) ⭐                        |
 | **📋 实施完成总结**            | 完整工作总结                           | [查看总结](./reports/FINAL_IMPLEMENTATION_SUMMARY_2025_10_20.md)                          |
 | **📘 总增强报告**              | 全模块增强完成总结                     | [查看报告](./reports/COMPREHENSIVE_ENHANCEMENT_FINAL_REPORT_2025_10_20.md)                |
-| **📚 完整文档索引**            | 35篇增强文档导航                       | [浏览索引](./guides/MASTER_DOCUMENTATION_INDEX.md)                                        |
-| **🚀 实践项目路线图**          | 10个渐进式实战项目                     | [查看路线图](./guides/PRACTICAL_PROJECTS_ROADMAP_2025_10_20.md)                           |
-| **🛠️ 文档工具链设计**          | 6个核心学习工具                        | [查看工具链](./guides/DOCUMENTATION_TOOLCHAIN_DESIGN_2025_10_20.md)                       |
-| **📦 Rust 开源库生态全景指南** | 240+ 核心库完整梳理 (Rust 1.93.0+)     | [探索生态](./crates/c11_libraries/docs/RUST_ESSENTIAL_CRATES_GUIDE_2025.md) ⭐⭐⭐⭐⭐ 🔥 |
+| **📚 文档主索引**              | docs/ 深度文档与速查卡                  | [docs/README.md](./docs/README.md)                                                       |
 
 ### 🎯 每个模块现包含
 
-对于核心模块（C01-C13），每个模块现在都包含：
+对于核心模块（C01-C12），每个模块现在都包含：
 
 - 📊 **知识图谱与概念关系** - 系统化的理论体系
 - 📐 **多维矩阵对比分析** - 技术选型和性能对比
@@ -292,7 +294,7 @@ mdbook serve --open
 | **🌱 入门** | 2-4 周   | C01-C03          | 掌握基础语法和核心概念        |
 | **🚀 进阶** | 4-8 周   | C04-C06          | 理解高级特性和并发编程        |
 | **⚡ 高级** | 8-12 周  | C07-C10          | 系统编程和网络应用            |
-| **🏆 专家** | 持续学习 | C11-C13 + 生态库 | 架构设计和生产实践 + 开源生态 |
+| **🏆 专家** | 持续学习 | C11-C12 | 宏系统、WASM、进阶实践 |
 
 ### 📖 核心学习模块
 
@@ -321,40 +323,12 @@ mdbook serve --open
 | **C09** | [设计模式](./crates/c09_design_pattern/)   | GoF 模式、Rust 特定模式  | [📖 主索引](./crates/c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md) |
 | **C10** | [网络编程](./crates/c10_networks/)         | TCP/UDP、HTTP、WebSocket | [📖 主索引](./crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md)       |
 
-#### 第四阶段：生产实践 (C11-C13)
+#### 第四阶段：进阶实践 (C11-C12)
 
-| 模块    | 名称                                      | 核心内容                    | 文档入口                                                                        |
-| ------- | ----------------------------------------- | --------------------------- | ------------------------------------------------------------------------------- |
-| **C11** | [开发库知识体系](./crates/c11_libraries/) | 数据库、Web框架、异步运行时 | [📖 主入口](./crates/c11_libraries/README.md) ⭐⭐⭐ 🔥                         |
-| **C12** | [模型与架构](./crates/c12_model/)         | 架构模式、领域建模          | [📖 主索引](./crates/c12_model/docs/tier_01_foundations/02_主索引导航.md)       |
-| **C13** | [可靠性框架](./crates/c13_reliability/)   | 容错、分布式、可观测性      | [📖 主索引](./crates/c13_reliability/docs/tier_01_foundations/02_主索引导航.md) |
-
-#### 🌟 特别推荐：C11 开发库知识体系 (100% 完成) 🔥
-
-**项目状态**: ✅ 100% 完成 (2025-10-21) | v2025.4.0
-
-C11 模块现已升级为完整的 **Rust 开发库知识体系**，包含 25 个核心文档 + 8 个项目报告：
-
-| 文档层级           | 文档数 | 总行数 | 核心价值                                   |
-| ------------------ | ------ | ------ | ------------------------------------------ |
-| **Tier 1: 核心层** | 4      | 3,800+ | 项目概览、主索引、术语表、FAQ              |
-| **Tier 2: 指南层** | 5      | 6,900+ | 数据库、缓存、消息队列、Web框架、异步      |
-| **Tier 3: 参考层** | 5      | 5,500+ | Rust 1.93.0+、生态全景、成熟度、性能、架构 |
-| **Tier 4: 高级层** | 4      | 7,125+ | 进阶主题、跨行业、形式化验证、未来趋势     |
-
-**核心特色**:
-
-- ✨ **700+ 代码示例** - 100% 可运行，生产级质量
-- 🔗 **250+ 库覆盖** - 全面的 Rust 开发库生态
-- 📊 **98.4/100 质量评分** - 优秀的文档质量
-- 🔄 **季度更新** - 持续跟踪 Rust 生态演进
-
-**快速开始**:
-
-- 📖 **主入口**: [C11 README](./crates/c11_libraries/README.md)
-- 🚀 **项目概览**: [1.0 项目概览](./crates/c11_libraries/docs/1.0_项目概览.md)
-- 📚 **完整导航**: [1.1 主索引导航](./crates/c11_libraries/docs/1.1_主索引导航.md)
-- 📝 **项目报告**: [项目完成与维护计划](./crates/c11_libraries/docs/PROJECT_COMPLETION_AND_MAINTENANCE_PLAN_2025_10_21.md)
+| 模块    | 名称                                      | 核心内容                   | 文档入口                                                                       |
+| ------- | ----------------------------------------- | -------------------------- | ------------------------------------------------------------------------------ |
+| **C11** | [宏系统](./crates/c11_macro_system/)      | 声明宏、过程宏、DSL 构建   | [📖 主索引](./crates/c11_macro_system/docs/tier_01_foundations/02_主索引导航.md) |
+| **C12** | [WebAssembly](./crates/c12_wasm/)         | WASM、wasm-bindgen、WASI   | [📖 主索引](./crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md)       |
 
 ---
 
@@ -406,7 +380,7 @@ cargo test
 - **需要理解所有权？** → [C01](./crates/c01_ownership_borrow_scope/)
 - **想学习异步编程？** → [C06](./crates/c06_async/)
 - **需要网络编程？** → [C10](./crates/c10_networks/)
-- **关注可靠性？** → [C13](./crates/c13_reliability/)
+- **关注宏与元编程？** → [C11](./crates/c11_macro_system/)
 
 ---
 
@@ -436,7 +410,7 @@ cargo test
 
 ```text
 📊 总体统计：
-├─ 核心模块：13 个 (C01-C13)
+├─ 核心模块：12 个 (C01-C12)
 ├─ 主索引：13 个
 ├─ FAQ：79 个问题
 ├─ 术语定义：165+ 个
@@ -498,7 +472,7 @@ cargo test
 
 #### Week 5-6: 生产实践
 
-- C11 + C13: 中间件集成和可靠性
+- C11 + C12: 宏系统与 WASM
 - 架构设计和最佳实践
 
 ### ⚡ 路径 3：Rust 老手 (按需学习)
@@ -507,7 +481,7 @@ cargo test
 
 - **异步高手**: C06 深度学习 → 自定义 Runtime
 - **网络专家**: C10 全面掌握 → 高性能服务器
-- **架构师**: C09 + C12 + C13 → 系统设计
+- **架构师**: C09 + C12 → 设计模式与 WASM
 - **性能优化**: 所有模块的性能章节 → 极致优化
 
 ---
@@ -634,10 +608,10 @@ git push origin feature/your-feature
 
 ### 本项目资源
 
-- [文档标准](./docs/DOCUMENTATION_STANDARDS.md) - 文档规范
-- [开发环境](./development-guides/RUST_DEVELOPMENT_ENVIRONMENT_SETUP.md) - 环境配置
-- [性能优化](./development-guides/RUST_PERFORMANCE_OPTIMIZATION.md) - 性能指南
-- [安全编程](./security/RUST_SECURITY_PROGRAMMING_GUIDE.md) - 安全实践
+- [文档中心](./docs/README.md) - 文档索引
+- [学习指南](./guides/README.md) - 指南与官方资源映射
+- [性能调优](./docs/PERFORMANCE_TUNING_GUIDE.md) - 性能优化指南
+- [故障排查](./docs/TROUBLESHOOTING_GUIDE.md) - 常见问题解决
 
 ### 辅助工具
 

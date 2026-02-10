@@ -1,7 +1,7 @@
 # Cargo配置文件
 # 创建时间: 2025年9月25日 14:20
 # 增强时间: 2025年9月25日 14:50
-# 更新时间: 2026年1月28日 (cargo update 已更新5个包至 Rust 1.92 兼容版本：clap/clap_builder/clap_derive 4.5.55，zerocopy/zerocopy-derive 0.8.35)
+# 更新时间: 2026年2月11日 (cargo update 已更新60个包至 Rust 1.92 兼容版本：clap 4.5.57，zerocopy 0.8.39，tonic 0.14.3 等)
 
 [build]
 # 启用CPU指令集优化
@@ -124,7 +124,7 @@ maintenance-deps = "update"
 RUST_LOG = "debug"
 RUST_BACKTRACE = "1"
 # 依赖更新提示
-CARGO_UPDATE_REMINDER = "2026-01-28: cargo update 已更新5个包到最新 Rust 1.92 兼容版本（clap 4.5.55, clap_builder 4.5.55, clap_derive 4.5.55, zerocopy 0.8.35, zerocopy-derive 0.8.35）"
+CARGO_UPDATE_REMINDER = "2026-02-11: cargo update 已更新60个包到最新 Rust 1.92 兼容版本（anyhow 1.0.101, tonic 0.14.3, reqwest 0.13.2, criterion 0.8.2 等）"
 
 # 构建配置
 [profile.dev]
