@@ -27,7 +27,8 @@
   - 各模块官方资源映射（Book/Reference/RBE）
   - 思维表征补全（决策树、证明树、矩阵扩展）
   - 新增：AI 辅助指南、Unsafe 专题、学习检查清单、交互式练习入口
-  - 断链修复：README.en、PROJECT_STRUCTURE、development-guides
+  - 断链修复：README.en、PROJECT_STRUCTURE、C13→形式化工具、新增 CONTRIBUTING/RESOURCES/ROADMAP
+  - Cargo.workspace 与 Cargo.toml 对齐（c11_macro_system、c12_wasm）
   - 详见 [计划实施完成报告](./docs/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md)
 
 ### 2026-01-27 🆕
