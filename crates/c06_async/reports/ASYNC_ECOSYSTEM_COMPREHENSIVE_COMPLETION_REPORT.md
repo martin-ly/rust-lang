@@ -60,7 +60,7 @@
 #### 1.2 特性对比分析
 
 | 特性 | std | tokio | async-std | smol |
- param($match) $match.Value -replace '[-:]+', ' --- ' ----- param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ----- param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 性能 | 需要外部运行时 | 优秀 | 良好 | 良好 |
 | 生态系统 | 基础 | 极其丰富 | 良好 | 中等 |
 | 学习曲线 | 简单 | 中等 | 简单 | 简单 |

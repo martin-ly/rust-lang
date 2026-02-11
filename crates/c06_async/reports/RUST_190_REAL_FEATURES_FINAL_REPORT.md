@@ -100,7 +100,7 @@
 ### 关键性能指标
 
 | 特性 | 执行时间 | 吞吐量 | 内存效率 | 稳定性 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 异步资源管理 | 20.72ms | 48 ops/sec | 优秀 | ✅ 稳定 |
 | 异步迭代器 | 348.17ms | 29 ops/sec | 优秀 | ✅ 稳定 |
 | 错误处理 | 0.11ms | 45,455 ops/sec | 优秀 | ✅ 稳定 |

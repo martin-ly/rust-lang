@@ -40,8 +40,8 @@
   - [🙏 致谢 | Acknowledgments](#-致谢--acknowledgments)
   - [📞 联系方式 | Contact](#-联系方式--contact)
 
-**日期**: 2025年10月6日  
-**更新范围**: 工作空间所有 crate  
+**日期**: 2025年10月6日
+**更新范围**: 工作空间所有 crate
 **更新状态**: ✅ 成功完成
 
 ---
@@ -64,7 +64,7 @@
 ### 已更新的依赖 (9个)
 
 | 依赖名称 | 旧版本 | 新版本 | 更新类型 | 说明 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **leptos** | 0.8.9 | 0.8.10 | 兼容 | 全栈Web框架 |
 | **rcgen** | 0.14.4 | 0.14.5 | 兼容 | X.509证书生成库 |
 | **redis** | 1.0.0-alpha.1 | 1.0.0-alpha.2 | 兼容 | Redis客户端库 |
@@ -230,7 +230,7 @@ cargo check --workspace
 ### 总体统计
 
 | 指标 | 数量 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **工作空间依赖更新** | 6个 | ✅ |
 | **各 crate 依赖更新** | 9个 | ✅ |
 | **总更新数量** | 15个 | ✅ |
@@ -240,7 +240,7 @@ cargo check --workspace
 ### 按类型分类
 
 | 类型 | 数量 | 占比 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **兼容更新** | 15 | 39% |
 | **不兼容更新 (保持)** | 23 | 61% |
 | **总计** | 38 | 100% |
@@ -386,8 +386,8 @@ cargo check --workspace
 
 ---
 
-**最后更新**: 2025-10-06  
-**报告版本**: 1.0.0  
+**最后更新**: 2025-10-06
+**报告版本**: 1.0.0
 **状态**: ✅ 完成
 
 **感谢使用本项目！欢迎提交 Issue 和 Pull Request！**

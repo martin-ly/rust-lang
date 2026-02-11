@@ -152,7 +152,7 @@ use tokio::sync::Semaphore;
 ## 📊 修复统计
 
 | 修复类别 | 修复数量 | 状态 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 访问级别修复 | 6个方法 | ✅ 完成 |
 | 类型转换修复 | 4处 | ✅ 完成 |
 | 导入清理 | 3处 | ✅ 完成 |

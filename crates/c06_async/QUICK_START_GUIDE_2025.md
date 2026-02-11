@@ -26,7 +26,7 @@
       - [3. 实战项目 (2+ 小时)](#3-实战项目-2-小时)
   - [🔍 常见问题速查](#-常见问题速查)
     - [Q1: async/await 和线程有什么区别?](#q1-asyncawait-和线程有什么区别)
-    - [Q2: 什么时候使用 spawn_blocking?](#q2-什么时候使用-spawn_blocking)
+    - [Q2: 什么时候使用 spawn\_blocking?](#q2-什么时候使用-spawn_blocking)
     - [Q3: 如何选择 Actor/Reactor/CSP?](#q3-如何选择-actorreactorcsp)
     - [Q4: 如何调试异步代码?](#q4-如何调试异步代码)
     - [Q5: 内存泄漏怎么办?](#q5-内存泄漏怎么办)

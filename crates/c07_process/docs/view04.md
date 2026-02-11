@@ -264,7 +264,7 @@ Rust 标准库对这些模型的直接支持程度不同。
   - `notify_all()`: 唤醒所有正在等待的线程。
 - **形式化语义 (Wait/Notify Logic)**：
   - **`wait(guard)` Precondition**: `HoldsLock(current_thread, mutex)`
-  - **`wait(guard)` Action**: 1. `ReleaseLock(mutex)` 2. `AddToWaitQueue(condvar, current_thread)` 3. `BlockThread(current_thread)` 4. _Upon Wakeup_: `RemoveFromWaitQueue(condvar, current_thread)` 5. `AcquireLock(mutex)` -> Returns `new_guard`
+  - **`wait(guard)` Action**: 1. `ReleaseLock(mutex)` 2. `AddToWaitQueue(condvar, current_thread)` 3. `BlockThread(current_thread)` 4. *Upon Wakeup*: `RemoveFromWaitQueue(condvar, current_thread)` 5. `AcquireLock(mutex)` -> Returns `new_guard`
   - **`notify_one()` Action**: 1. `Select t from WaitQueue(condvar)` (if not empty) 2. `WakeupThread(t)`
   - **循环等待定理**：由于伪唤醒，`wait` 的正确使用模式必须是 `while !condition { guard = condvar.wait(guard).unwrap(); }`。
 

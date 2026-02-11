@@ -471,7 +471,7 @@ mod tests {
 ### 2. 运行时对比
 
 | 运行时 | 启动时间 | 内存占用 | 吞吐量 | 适用场景 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | Tokio | 15ms | 45MB | 1,400,000 ops/sec | 生产环境 |
 | Smol | 8ms | 25MB | 1,200,000 ops/sec | 轻量级应用 |
 | async-std | 20ms | 50MB | 1,100,000 ops/sec | 标准库兼容 |

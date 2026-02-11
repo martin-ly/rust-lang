@@ -189,7 +189,7 @@ pub struct AsyncConcurrencyController {
 ### 运行时对比分析
 
 | 特性维度 | tokio | async-std | smol | std |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **设计理念** | 高性能生产级 | 易用性优先 | 轻量级可组合 | 基础支持 |
 | **代码量** | 大型 | 中等 | 极简(~1500行) | 最小 |
 | **内存使用** | 中等 | 低-中等 | 极低 | 极低 |

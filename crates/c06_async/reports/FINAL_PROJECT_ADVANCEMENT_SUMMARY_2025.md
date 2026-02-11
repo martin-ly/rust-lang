@@ -179,7 +179,7 @@ pub struct AsyncStateMachine {
 impl AsyncStateMachine {
     pub async fn transition(&self, from: AsyncState, to: AsyncState, reason: String) -> Result<()> {
         let current_state = self.state.read().await.clone();
-        
+
         if current_state != from {
             return Err(anyhow::anyhow!("Invalid transition from {:?} to {:?}", current_state, to));
         }
@@ -417,7 +417,7 @@ cat docs/async_performance_optimization_2025.md
 
 ---
 
-*报告生成时间: 2025-09-24*  
-*项目版本: v0.1.0*  
-*Rust 版本: 1.90*  
+*报告生成时间: 2025-09-24*
+*项目版本: v0.1.0*
+*Rust 版本: 1.90*
 *推进状态: 完成*

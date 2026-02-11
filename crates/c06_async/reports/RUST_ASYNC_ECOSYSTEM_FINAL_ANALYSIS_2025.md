@@ -81,7 +81,7 @@ Rust异步生态系统在2025年已经非常成熟，主要包含四个核心组
 ### 2.1 概念定义与特性对比
 
 | 特性维度 | std | tokio | async-std | smol |
- param($match) $match.Value -replace '[-:]+', ' --- ' ----- param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ----- param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- '
 | **设计理念** | 基础支持 | 高性能生产级 | 易用性优先 | 轻量级可组合 |
 | **代码量** | 最小 | 大型 | 中等 | 极简(~1500行) |
 | **内存使用** | 极低 | 中等 | 低-中等 | 极低 |
@@ -216,7 +216,7 @@ async fn hybrid_operation() -> Result<()> {
 ### 6.1 适用场景矩阵
 
 | 应用场景 | 推荐运行时 | 理由 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------------ param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **高性能Web服务器** | tokio | 优秀的并发性能和丰富的生态系统 |
 | **微服务架构** | tokio | 生产级稳定性和高性能 |
 | **CLI工具** | smol | 轻量级和快速启动 |

@@ -53,9 +53,9 @@
 
 ## Comprehensive Async Programming Enhancement Report 2025
 
-**项目**: c06_async  
-**版本**: Rust 1.90 | Tokio 1.41.1 | Smol 2.0.2  
-**日期**: 2025年10月4日  
+**项目**: c06_async
+**版本**: Rust 1.90 | Tokio 1.41.1 | Smol 2.0.2
+**日期**: 2025年10月4日
 **状态**: ✅ 已完成
 
 ---
@@ -331,7 +331,7 @@ Actor 不变量:
 **学习路径**:
 
 ```text
-初学者: 
+初学者:
   ASYNC_COMPREHENSIVE_GUIDE_2025.md (理论)
   ↓
   simple examples (futures_smoke.rs)
@@ -358,7 +358,7 @@ Actor 不变量:
 ### 文档统计
 
 | 文档 | 行数 | 字数 | 主题数 | 示例数 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | ASYNC_COMPREHENSIVE_GUIDE_2025.md | 800+ | 35,000+ | 15 | 40+ |
 | ASYNC_RUNTIME_COMPARISON_2025.md | 1,200+ | 48,000+ | 7 | 60+ |
 | comprehensive_async_patterns_2025.rs | 1,100+ | 8,000+ | 5 | 20+ |
@@ -367,7 +367,7 @@ Actor 不变量:
 ### 代码示例统计
 
 | 类别 | 示例数 | 总行数 |
- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | Actor 模式 | 8 | 500+ |
 | Reactor 模式 | 6 | 400+ |
 | CSP 模式 | 12 | 600+ |
@@ -526,7 +526,7 @@ async fn load_config() -> Result<Config> {
     let data = tokio::fs::read("config.toml")
         .await
         .context("Failed to read config file")?;
-    
+
     toml::from_slice(&data)
         .context("Failed to parse config")
 }
@@ -757,9 +757,9 @@ let read = rwlock.read().await; // 允许并发读
 
 ---
 
-**维护者**: Rust Async Team  
-**贡献者**: AI Assistant  
-**最后更新**: 2025-10-04  
+**维护者**: Rust Async Team
+**贡献者**: AI Assistant
+**最后更新**: 2025-10-04
 **许可证**: MIT
 
 ---

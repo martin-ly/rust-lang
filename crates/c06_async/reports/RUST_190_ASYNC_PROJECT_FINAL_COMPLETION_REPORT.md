@@ -191,7 +191,7 @@ pub struct StructuredConcurrency {
 ### 异步操作性能对比
 
 | 运行时 | 任务创建时间 (μs) | 上下文切换时间 (μs) | 内存使用 (MB) | 吞吐量 (ops/sec) |
- param($match) $match.Value -replace '[-:]+', ' --- ' ------------------ param($match) $match.Value -replace '[-:]+', ' --- ' --------------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------ param($match) $match.Value -replace '[-:]+', ' --- ' --------------- param($match) $match.Value -replace '[-:]+', ' --- '
 | Tokio  | 0.8              | 0.3               | 45.2          | 1,250,000        |
 | Smol   | 0.6              | 0.2               | 38.7          | 1,450,000        |
 | AsyncStd | 0.9            | 0.4               | 52.1          | 1,100,000        |

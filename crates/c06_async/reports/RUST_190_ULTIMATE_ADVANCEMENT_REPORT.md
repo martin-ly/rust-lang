@@ -232,7 +232,7 @@ prometheus = { workspace = true }
 ### 基础性能指标
 
 | 测试项目 | 性能指标 | 优化效果 |
- param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' 
+ param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 异步资源管理 | 20.72ms | 快速资源分配和回收 |
 | 异步迭代器 | 348.17ms (10项) | 高效流式处理 |
 | 错误处理 | 0.11ms (5项) | 45,455 ops/sec |

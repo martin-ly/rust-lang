@@ -42,7 +42,7 @@
     - [8.1 Runtime 宏](#81-runtime-宏)
     - [8.2 测试宏](#82-测试宏)
     - [8.3 select! 宏](#83-select-宏)
-    - [8.4 join! 和 try_join! 宏](#84-join-和-try_join-宏)
+    - [8.4 join! 和 try\_join! 宏](#84-join-和-try_join-宏)
   - [9. 配置参考](#9-配置参考)
     - [9.1 Cargo Features](#91-cargo-features)
   - [📚 延伸阅读](#-延伸阅读)
