@@ -39,11 +39,11 @@
 
 ## ⚠️ 完备性声明
 
-**本目录形式化论证不充分**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
+**本目录形式化论证持续完善**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
 
-- **Rust 1.93 类型系统特性**：LUB coercion、Copy specialization 移除、const 变更等未覆盖
-- **组合法则**：Trait coherence 定理、孤儿规则、类型+生命周期+型变 三元组合 未形式化
-- **Trait 特性**：RPITIT、async fn in trait、negative impls、fundamental 等未完备
+- **Rust 1.93 类型系统特性**：LUB coercion、Copy specialization、offset_of!、never_type、type ascription、newtype、deref_nullptr ✅ Def 已补全；const &mut static、existential 等见 [00_completeness_gaps](00_completeness_gaps.md)
+- **组合法则**：Trait coherence、类型+生命周期+型变、negative impls、impl/dyn 边界、const 求值失败 ✅ 已补全；孤儿规则放宽为倡议未稳定
+- **Trait 特性**：RPITIT、async fn in trait ✅ 已补全（Def RPIT1/ASYNC1、定理 RPIT-T1/ASYNC-T1）；negative impls、fundamental 等为扩展缺口
 
 ---
 
@@ -144,7 +144,7 @@
 
 *证明*：由 type_system T1–T3、trait 对象安全、lifetime T2、variance T1–T4；良型 + 各定理 ⇒ 类型安全。∎
 
-**定理 TT-T2（不完备性）**：$\mathcal{T}$ 对 Rust 1.93 类型系统**不完备**；存在 [00_completeness_gaps](00_completeness_gaps.md) 所列缺口（LUB、Copy、coherence 定理、RPITIT、组合法则等）。
+**定理 TT-T2（不完备性）**：$\mathcal{T}$ 对 Rust 1.93 类型系统**不完备**；存在 [00_completeness_gaps](00_completeness_gaps.md) 所列缺口（LUB、Copy、coherence、RPITIT、组合法则等部分已补全；孤儿规则、offset_of!、const 等仍为缺口）。
 
 *证明*：由 [00_completeness_gaps](00_completeness_gaps.md) 定理 CGI-T1；缺口项均为 Def CGI 实例。∎
 
@@ -155,11 +155,11 @@
 | 文档 | 核心公理/定理 | 证明要点 | 缺口 |
 | :--- | :--- | :--- | :--- |
 | [00_completeness_gaps](./00_completeness_gaps.md) | Def CGI、Axiom CGI1、CGI-T1 | 不完备性形式化 | 缺口索引 |
-| [type_system_foundations](./type_system_foundations.md) | T1–T3 进展性、保持性、类型安全 | 良型不卡住、求值保型 | LUB、Copy、offset_of! |
-| [trait_system_formalization](./trait_system_formalization.md) | 对象安全、impl 解析、coherence | dyn、孤儿规则 | coherence 定理、RPITIT |
+| [type_system_foundations](./type_system_foundations.md) | T1–T5、LUB-T1、COP-T1、OFFSET-T1、ASC-T1、BOT-T1、NEWTYPE-T1、DEREF-NULL1 | 良型不卡住、求值保型 | 类型推断歧义 |
+| [trait_system_formalization](./trait_system_formalization.md) | 对象安全、impl 解析、COH-T1、RPIT-T1、ASYNC-T1、NEG-T1、DYN-T1、TRAIT-GAT1、SPEC-T1 | dyn | 孤儿放宽（倡议） |
 | [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、见 formal_methods | 与型变组合 |
-| [advanced_types](./advanced_types.md) | GAT、const 泛型、PhantomData | 关联类型、类型级常量 | const 求值失败 |
-| [variance_theory](./variance_theory.md) | T1–T4 型变规则、反例 | 协变/逆变/不变 | Copy 变更 |
+| [advanced_types](./advanced_types.md) | GAT、const 泛型、PhantomData、CONST-EVAL-T1、CONST-MUT1、EXIST1 | 关联类型、类型级常量 | existential 完整规则 |
+| [variance_theory](./variance_theory.md) | T1–T4、VAR-COM-T1/C1 | 协变/逆变/不变、组合传递 | 三元组合已补全 |
 
 本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md) 衔接。
 

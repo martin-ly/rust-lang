@@ -148,7 +148,7 @@ fn visit<V: Visitor>(v: &mut V, e: &Expr) {
 
 ## 选型决策树
 
-```
+```text
 需要按节点类型施加不同操作？
 ├── 是 → 结构稳定、操作常变？ → Visitor（match 或 accept）
 │       └── 操作简单、顺序遍历？ → Iterator

@@ -24,6 +24,8 @@
 
 **定理 CM-T2**：`Box<dyn Fn()>` 可存储、可跨边界传递；满足 Send 则可跨线程。
 
+**推论 CM-C1**：Command 为纯 Safe；闭包或 trait 封装操作，无 `unsafe`。由 CM-T1、CM-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例
@@ -151,7 +153,7 @@ impl ReversibleCommand for SendEmailCommand {
 
 ## 选型决策树
 
-```
+```text
 需要封装可存储/可撤销的操作？
 ├── 是 → 需撤销？ → trait ReversibleCommand
 │       └── 仅执行？ → Box<dyn Fn> 或 trait Command

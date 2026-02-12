@@ -32,6 +32,11 @@
     - [3. 泛型 Trait](#3-泛型-trait)
     - [4. Trait 解析算法](#4-trait-解析算法)
     - [5. Trait 对象语义](#5-trait-对象语义)
+    - [Trait Coherence（一致性）形式化](#trait-coherence一致性形式化)
+    - [孤儿规则与 Negative Impls](#孤儿规则与-negative-impls)
+    - [RPITIT 与 async fn in trait（Rust 1.93 稳定化）](#rpitit-与-async-fn-in-traitrust-193-稳定化)
+    - [impl Trait 与 dyn Trait 可替换边界](#impl-trait-与-dyn-trait-可替换边界)
+    - [Trait + 泛型 + GAT 组合与 Specialization](#trait--泛型--gat-组合与-specialization)
   - [⚠️ 反例：违反 Trait 规则](#️-反例违反-trait-规则)
   - [🌳 公理-定理证明树](#-公理-定理证明树)
     - [证明工作完成总结](#证明工作完成总结)
@@ -404,6 +409,78 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 
 ---
 
+### Trait Coherence（一致性）形式化
+
+**Axiom COH1（孤儿规则）**：impl 的 self 类型或 Trait 至少其一为本 crate 定义；否则 impl 为"孤儿"且被拒绝。
+
+**Axiom COH2（重叠规则）**：若 $I_1$、$I_2$ 均为 `impl T for τ` 形式，则 $I_1$ 与 $I_2$ 的覆盖类型不重叠；重叠则编译错误。
+
+**定理 COH-T1（Trait coherence：至多一个 impl）**：对任意 (Trait $T$, Type $\tau$)，至多存在一个 impl 满足 $\tau : T$。
+
+*证明思路*：（1）由 Axiom COH1，孤儿 impl 被拒绝；故 impl 仅来自本 crate 或 Trait/类型定义方。（2）由 Axiom COH2，重叠 impl 被拒绝；故对同一 $(\tau, T)$ 无两个 impl 同时适用。（3）由定义 4.3 唯一性，$\text{Resolve}(\tau, T)$ 若有解则唯一。综上，至多一个 impl。∎
+
+**推论 COH-C1**：若编译通过，则对任意 $(\tau, T)$ 恰好零个或一个 impl；不存在歧义。见 [00_completeness_gaps](00_completeness_gaps.md)：孤儿规则放宽、negative impls 为扩展缺口。
+
+---
+
+### 孤儿规则与 Negative Impls
+
+**Def ORPH1（孤儿规则）**：impl 为**孤儿**当且仅当：self 类型 $\tau$ 与 Trait $T$ **均**为外部 crate 定义。形式化：$\text{Orphan}(\text{impl } T \text{ for } \tau) \leftrightarrow \neg \text{Local}(\tau) \land \neg \text{Local}(T)$。Axiom COH1 等价于：孤儿 impl 被拒绝。
+
+**Def ORPH-RELAX1（孤儿规则放宽倡议）**：2024 放宽倡议提议在满足「覆盖集」约束下允许部分原孤儿 impl；实验性；尚未稳定。形式化：$\text{OrphanRelax}(\text{impl}) \rightarrow \text{CoverageSet}(\text{impl})$ 且当前实现未采纳。
+
+**Def NEG1（Negative impl 语义）**：`impl !Trait for T` 表示 $\tau \not: T$，即类型 $\tau$ **不实现** Trait $T$；用于特化、auto trait 等场景。形式化：$\text{NegImpl}(\tau, T) \leftrightarrow \neg(\tau : T)$。
+
+**Axiom NEG1（Negative impl 与 coherence）**：若存在 $\text{NegImpl}(\tau, T)$，则 $\text{Resolve}(\tau, T) = \text{None}$；negative impl 与 positive impl 互斥；同时存在则违反 COH2 重叠规则，编译错误。
+
+**定理 NEG-T1（Negative impl 一致性）**：$\text{NegImpl}(\tau, T) \land \text{Resolve}(\tau, T) = \text{None}$；negative impl 确保该类型不实现该 Trait，与 coherence 无冲突。
+
+*证明思路*：由 Axiom NEG1，negative impl 使 Resolve 返回 None；与 positive impl 互斥；由 COH-T1 对 positive 的唯一性，系统一致。∎
+
+**Def FUND1（fundamental 类型）**：`#[fundamental]` 对类型 $\tau$ 标记，使孤儿规则对 $\tau$ 的泛型实例有例外；RFC 1023。形式化：$\text{Fundamental}(\tau) \rightarrow \text{OrphanRule}(\tau[\alpha])$ 有例外；用于 `Box`、`Fn` 等标准库类型，允许为 `impl<T> Trait for Box<T>` 等 blanket impl 时放宽孤儿规则。
+
+---
+
+### RPITIT 与 async fn in trait（Rust 1.93 稳定化）
+
+**Def RPIT1（RPITIT 语义）**：Return Position Impl Trait In Trait：Trait 方法签名中使用 `impl Trait` 作为返回类型。形式化：方法 $m$ 的签名为 $m : \tau_{\text{self}} \to \exists \alpha. \tau(\alpha)$，其中 $\exists \alpha. \tau(\alpha)$ 为存在类型，由 impl 具体化；每个 impl 提供具体返回类型 $\tau_{\text{impl}}$ 满足 $\tau_{\text{impl}} : \tau(\alpha)$。
+
+**Def ASYNC1（async fn in trait 类型）**：Trait 中 `async fn m(...) -> R` 等价于 `fn m(...) -> impl Future<Output = R>`；类型为 $\tau_{\text{self}} \to \text{Future}[\tau_R]$，其中 $\text{Future}[\tau_R]$ 为由 impl 决定的具体 future 类型。
+
+**定理 RPIT-T1（RPITIT 与 impl 解析）**：若 Trait $T$ 含 RPITIT 方法 $m$，则对 $\tau : T$，$\text{Resolve}(\tau, T)$ 返回的 impl 决定 $m$ 的返回类型；该类型在编译时单态化，与 [COH-T1](#trait-coherence一致性形式化) 一致，至多一个 impl 故返回类型唯一。
+
+*证明思路*：RPITIT 的返回类型由 impl 绑定；由 COH-T1，$(\tau, T)$ 至多一个 impl，故返回类型唯一。∎
+
+**定理 ASYNC-T1（async fn Send 边界）**：若 `async fn m(...) -> R` 用于跨线程（如 `Send` 边界），则其生成的 Future 类型须满足 `Future: Send`；等价于 $\tau_R$ 及相关借用的生命周期、自引用约束满足 Send。见 [async_state_machine](../formal_methods/async_state_machine.md) 定理 6.2。
+
+*证明思路*：async fn 脱糖为 `impl Future`；Send 由 Future 的 poll 状态与捕获的 `&self`/`&mut self` 决定；类型系统在 Trait 约束传播时检查。∎
+
+**推论 RPIT-C1**：RPITIT 与 dyn Trait 的交互：若 Trait 含 RPITIT 方法，则 `dyn T` 的对象安全需额外条件——返回的 `impl Trait` 在 vtable 中需可擦除；1.93 中 RPITIT 稳定化后，对象安全规则见 [00_completeness_gaps](00_completeness_gaps.md) 对象安全缺口。
+
+---
+
+### impl Trait 与 dyn Trait 可替换边界
+
+**Def DYN-IMPL1（impl Trait 与 dyn 可替换边界）**：设 Trait $T$ 满足**对象安全**（无泛型方法、无 Self 除接收者外、无 RPITIT 返回非同名类型等）。则 `impl T` 与 `dyn T` 在以下边界可互换：（1）**参数位置**：`fn f(x: impl T)` 与 `fn f(x: &dyn T)` 均可接受实现了 $T$ 的类型；（2）**替换方向**：`impl T` 可传给 `&dyn T`（coerce）；反向（`dyn T` → `impl T`）不可，因存在类型擦除。
+
+**定理 DYN-T1（可替换条件）**：`impl T` 可安全替换为 `dyn T` 当且仅当 $T$ 对象安全且无返回 `impl Trait` 的方法（或满足 RPIT-C1 的 vtable 可擦除条件）。
+
+*证明思路*：impl T 为具体类型，可 coerce 到 dyn T；反向需类型信息，dyn 已擦除；RPITIT 使 vtable 需额外约束。∎
+
+**推论 DYN-C1**：若 Trait 含泛型方法或返回 `impl Trait` 的非对象安全方法，则 `impl T` 与 `dyn T` **不可互换**；必须选用其一。
+
+---
+
+### Trait + 泛型 + GAT 组合与 Specialization
+
+**Def TRAIT-GAT1（Trait + 泛型 + GAT 组合）**：`impl<T> Trait for Vec<T>` 与 GAT 组合时，解析优先级：具体 impl 优先于泛型 impl；GAT 约束在单态化时检查。形式化：$\text{Resolve}(\tau[\vec{\alpha}], T)$ 中优先匹配最具体 impl；GAT 约束 $A[P] : B[P]$ 在 [advanced_types](../advanced_types.md) AT-L1 衔接。
+
+**Def SPEC1（specialization）**： overlapping impl 时（不稳定），更具体的 impl 优先；`default` 方法可被更具体 impl 覆盖；与 COH2 冲突——specialization 需放宽重叠规则，当前仅 nightly。
+
+**定理 SPEC-T1**：若 specialization 稳定化，则 overlapping impl 需满足「一个更具体」条件；与 COH-T1 的至多一个 impl 在非 overlapping 情况下一致。
+
+---
+
 ## ⚠️ 反例：违反 Trait 规则
 
 | 反例 | 违反规则 | 后果 | 说明 |
@@ -411,7 +488,8 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 | 方法签名不匹配 | 定理 2 实现一致性 | 编译错误 | `impl` 中方法签名与 Trait 定义不一致 |
 | 冲突的 blanket impl | 定理 3 解析唯一性 | 编译错误 | 两个 impl 同时适用同一类型 |
 | 对象安全性违规 | 定理 1 对象安全 | 编译错误 | 包含泛型方法的 Trait 不能做成 `dyn` |
-| 孤儿规则违反 | impl 规则 | 编译错误 | 为外部类型实现外部 Trait |
+| 孤儿规则违反 | Axiom COH1 / Def ORPH1 | 编译错误 | 为外部类型实现外部 Trait |
+| 正负 impl 冲突 | Axiom NEG1 | 编译错误 | 同时 `impl T for τ` 与 `impl !T for τ` |
 | 重复/重叠 impl | 定理 3 | 编译错误 | 两个 impl 重叠覆盖同一类型 |
 
 ---
@@ -433,9 +511,21 @@ Trait 系统安全性证明树
   │   （方法签名匹配）
   │   公理链: Def(Trait) + 类型检查规则 → T2
   │
-  └─ 解析算法 + 冲突检测 ──────────→ 定理 3: Trait 解析正确性
-      （完备性 + 一致性）
-      公理链: Resolve + 完备性 + 一致性 → T3
+  ├─ 解析算法 + 冲突检测 ──────────→ 定理 3: Trait 解析正确性
+  │   （完备性 + 一致性）
+  │   公理链: Resolve + 完备性 + 一致性 → T3
+  │
+  ├─ Axiom COH1/COH2 ──────────────→ 定理 COH-T1: Trait coherence
+  │   （至多一个 impl）
+  │
+  ├─ Def RPIT1/ASYNC1 ──────────────→ 定理 RPIT-T1、ASYNC-T1
+  │   （RPITIT、async fn in trait；1.93 稳定化）
+  │   推论 RPIT-C1: dyn 对象安全交互
+  │
+  ├─ Def ORPH1、Def NEG1、Axiom NEG1 ─→ 定理 NEG-T1（孤儿规则、negative impls）
+  │
+  └─ Def DYN-IMPL1 ─────────────────→ 定理 DYN-T1、推论 DYN-C1
+      （impl Trait 与 dyn Trait 可替换边界）
 ```
 
 ---

@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Bridge 结构）**
+**Def 1.1（Bridge 结构）**:
 
 设 $\mathcal{A}$ 为抽象类型，$\mathcal{I}$ 为实现类型。Bridge 满足：
 
@@ -21,6 +21,8 @@
 **Axiom BR2**：委托时借用：$\mathcal{A}.\mathit{op}$ 调用 $\mathcal{I}.\mathit{impl\_op}$，满足借用规则。
 
 **定理 BR-T1**：由 [trait_system_formalization](../../../type_theory/trait_system_formalization.md)，trait 对象或泛型保证类型安全。
+
+**推论 BR-C1**：Bridge 为纯 Safe；trait 解耦抽象与实现，无 `unsafe`。由 BR-T1 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
 
 ---
 
@@ -122,7 +124,7 @@ struct BadCircle {
 
 ## 选型决策树
 
-```
+```text
 抽象与实现需独立变化？
 ├── 是 → 实现类型有限？ → 泛型 `A<R: Impl>`（零成本）
 │       └── 实现类型运行时决定？ → `Box<dyn Impl>`

@@ -24,6 +24,8 @@
 
 **定理 CR-T2**：递归或循环处理时借用规则满足；由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
 
+**推论 CR-C1**：Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。由 CR-T1、CR-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例
@@ -99,7 +101,7 @@ h1.handle(&"B".into());  // 委托至 h2
 | :--- | :--- | :--- |
 | 结构体链 | `Option<Box<Handler>>`，如上示例 | 链固定、类型同质 |
 | trait 链 | `trait Handler { fn handle(&self, req: &R) -> Option<()>; fn next(&self) -> Option<&dyn Handler>; }` | 需多态处理器 |
-| 迭代器链 | `handlers.iter().find_map(|h| h.handle(req))` | 链为 `Vec`，顺序尝试 |
+| 迭代器链 | `handlers.iter().find_map(\|h\| h.handle(req))` | 链为 `Vec`，顺序尝试 |
 
 ---
 
@@ -118,7 +120,7 @@ h1.handle(&"B".into());  // 委托至 h2
 
 ## 选型决策树
 
-```
+```text
 请求需沿链传递、首个能处理者消费？
 ├── 是 → 链式委托？ → Option<Box<Handler>>
 │       └── Vec 顺序尝试？ → handlers.iter().find_map
@@ -133,7 +135,7 @@ h1.handle(&"B".into());  // 委托至 h2
 | GoF | Rust 对应 | 差异 |
 | :--- | :--- | :--- |
 | Handler 链 | Option<Box<Handler>> | 等价 |
-| 委托 next | as_deref().and_then(|n| n.handle(req)) | 等价 |
+| 委托 next | as_deref().and_then(\|n\| n.handle(req)) | 等价 |
 | 无环 | Box 单向所有权 | 天然无环 |
 
 ---

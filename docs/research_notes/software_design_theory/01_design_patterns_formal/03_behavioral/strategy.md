@@ -24,6 +24,8 @@
 
 **定理 SR-T2**：策略调用时借用规则：`&self` 不可变调用策略；`&mut self` 可变时仍满足互斥。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
 
+**推论 SR-C1**：Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。由 SR-T1、SR-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例
@@ -147,7 +149,7 @@ impl Strategy for BadStrategy {
 
 ## 选型决策树
 
-```
+```text
 需要可替换算法？
 ├── 是 → 编译期确定？ → Context<S: Strategy>（泛型）
 │       └── 运行时选择？ → Box<dyn Strategy>

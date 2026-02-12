@@ -24,6 +24,8 @@
 
 **定理 IT-T2**：`&mut self` 可变借用保证迭代器内部状态一致；由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
 
+**推论 IT-C1**：Iterator 为纯 Safe；`Iterator` trait 标准库定义，`for` 糖语法，无 `unsafe`。由 IT-T1、IT-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例
@@ -117,7 +119,7 @@ for x in v.iter() {
 
 ## 选型决策树
 
-```
+```text
 需要顺序遍历集合/序列？
 ├── 是 → 标准集合？ → iter()/into_iter()
 │       └── 自定义序列？ → impl Iterator

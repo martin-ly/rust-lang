@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Template Method 结构）**
+**Def 1.1（Template Method 结构）**:
 
 设 $T$ 为模板类型。Template Method 满足：
 
@@ -130,7 +130,7 @@ impl Algorithm for BadImpl {
 
 ## 选型决策树
 
-```
+```text
 需要算法骨架、步骤可定制？
 ├── 是 → trait 默认方法？ → Template Method
 ├── 需完全替换算法？ → Strategy

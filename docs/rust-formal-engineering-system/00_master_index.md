@@ -100,7 +100,7 @@
 
 | 资源 | 说明 |
 |------|------|
-| [PROOF_INDEX](../research_notes/PROOF_INDEX.md) | 形式化证明索引（26 个证明，与思维表征证明树交叉引用） |
+| [PROOF_INDEX](../research_notes/PROOF_INDEX.md) | 形式化证明索引（87+ 个证明，与思维表征证明树交叉引用） |
 | [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) | 证明树图（MaybeUninit、借用检查器、生命周期、Send/Sync 等） |
 
 ---

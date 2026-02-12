@@ -8,19 +8,19 @@
 
 ## 形式化定义
 
-**Def 1.1（Future 类型）**
+**Def 1.1（Future 类型）**:
 
 $\mathrm{Future}\langle T \rangle$ 为惰性计算的表示，满足：
 
 $$\mathrm{Future}\langle T \rangle = \mathrm{Pending} \mid \mathrm{Ready}(T)$$
 
-**Def 1.2（Poll 操作）**
+**Def 1.2（Poll 操作）**:
 
 $\mathit{poll}(f, cx) : \mathrm{Future}\langle T \rangle \times \mathrm{Context} \to \mathrm{Poll}\langle T \rangle$，其中：
 
 $$\mathrm{Poll}\langle T \rangle = \mathrm{Pending} \mid \mathrm{Ready}(T)$$
 
-**Def 1.3（async/await 语义）**
+**Def 1.3（async/await 语义）**:
 
 $\mathit{async}\, \{ e \}$ 产生 $\mathrm{Future}\langle \tau \rangle$，其中 $\tau$ 为 $e$ 的类型。$\mathit{await}\, f$ 在 $f$ 为 $\mathrm{Ready}(v)$ 时求值为 $v$，否则挂起。
 
@@ -42,7 +42,7 @@ $\mathit{async}\, \{ e \}$ 产生 $\mathrm{Future}\langle \tau \rangle$，其中
 
 ## 操作语义（简化）
 
-```
+```text
 poll(Pending)     →  Pending
 poll(Ready(v))    →  Ready(v)
 await Ready(v)    →  v
@@ -126,15 +126,15 @@ impl SelfReferential {
 
 ### Waker 与 Executor
 
-**Def 1.4（Waker）**
+**Def 1.4（Waker）**:
 
 $Waker$ 为唤醒器，当 Future 可继续执行时通过 `wake()` 通知 executor 重新 poll。
 
-**Def 1.5（Executor）**
+**Def 1.5（Executor）**:
 
 Executor 负责调度 Future：轮询 Pending 的 Future，在 `wake()` 后重新调度。
 
-```
+```text
 Future 执行流程（简化）：
   poll(f) → Pending
     → 注册 Waker 到 I/O 源

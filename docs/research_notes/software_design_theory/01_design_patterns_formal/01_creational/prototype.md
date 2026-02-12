@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Prototype 结构）**
+**Def 1.1（Prototype 结构）**:
 
 设 $T$ 为原型类型。Prototype 满足：
 
@@ -23,6 +23,8 @@
 **定理 P-T1**：若 $T$ 实现 `Clone`，则 $\mathit{clone}(t)$ 类型为 $T$，所有权独立。由 [type_system_foundations](../../../type_theory/type_system_foundations.md)。
 
 **定理 P-T2**：`&self` 借用，返回值拥有所有权；原对象仍有效。由 ownership T2。
+
+**推论 P-C1**：若 $T : \text{Clone}$，则 $\mathit{clone}(t)$ 产生的副本可安全传递、存储；与原对象生命周期独立。由 P-T1、P-T2 及 ownership 唯一性。
 
 ---
 
@@ -121,7 +123,7 @@ impl Clone for BadNode {
 
 ## 选型决策树
 
-```
+```text
 需要基于已有对象创建副本？
 ├── 是 → 浅拷贝即可？ → Clone / Copy
 │       └── 深拷贝？ → 手动 Clone impl

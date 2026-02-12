@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Decorator 结构）**
+**Def 1.1（Decorator 结构）**:
 
 设 $D$ 为装饰器类型，$T$ 为被装饰类型。Decorator 满足：
 
@@ -21,6 +21,8 @@
 **Axiom DE2**：委托链：$D_1(D_2(D_3(\cdots)))$，递归委托至最内层。
 
 **定理 DE-T1**：由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)，委托时 `&self.inner` 借用有效，无数据竞争。
+
+**推论 DE-C1**：Decorator 为纯 Safe；仅用泛型包装、委托、trait impl，无 `unsafe`。由 DE-T1 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
 
 ---
 
@@ -113,7 +115,7 @@ impl<C: Coffee> Coffee for BadDecorator<C> {
 
 ## 选型决策树
 
-```
+```text
 需要动态扩展行为且保持同接口？
 ├── 是 → 装饰链可叠加？ → Decorator（泛型或 Box<dyn>）
 ├── 否 → 需转换接口？ → Adapter

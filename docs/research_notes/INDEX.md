@@ -1,9 +1,9 @@
 # 研究笔记完整索引
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记全部完成，Rust 1.93.0 更新完成）
+> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记、23 种设计模式形式化、类型理论阶段 1–7）
 
 ---
 
@@ -258,27 +258,32 @@
 
 **目录**: [type_theory/](./type_theory/)
 
-1. **[type_system_foundations.md](./type_theory/type_system_foundations.md)** - 类型系统基础
+1. **[00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)** - 类型理论完备性缺口
+   - 研究目标: 形式化论证不充分声明；LUB、Copy、RPITIT、组合法则等缺口索引
+   - 状态: ⚠️ 缺口已声明；补全路线图
+   - 关键词: 完备性、LUB、Copy、RPITIT、coherence、组合法则
+
+2. **[type_system_foundations.md](./type_theory/type_system_foundations.md)** - 类型系统基础
    - 研究目标: 形式化定义 Rust 类型系统基础
    - 状态: ✅ 已完成 (100%)
    - 关键词: 类型系统、类型推导、类型安全
 
-2. **[trait_system_formalization.md](./type_theory/trait_system_formalization.md)** - Trait 系统形式化
+3. **[trait_system_formalization.md](./type_theory/trait_system_formalization.md)** - Trait 系统形式化
    - 研究目标: 形式化定义 Trait 系统，理解类型理论基础
    - 状态: ✅ 已完成 (100%)
    - 关键词: Trait、类型类、存在类型
 
-3. **[lifetime_formalization.md](./type_theory/lifetime_formalization.md)** - 生命周期形式化
+4. **[lifetime_formalization.md](./type_theory/lifetime_formalization.md)** - 生命周期形式化
    - 研究目标: 形式化定义生命周期系统，理解类型理论解释
    - 状态: ✅ 已完成 (100%)
    - 关键词: 生命周期、区域类型、约束求解
 
-4. **[advanced_types.md](./type_theory/advanced_types.md)** - 高级类型特性
+5. **[advanced_types.md](./type_theory/advanced_types.md)** - 高级类型特性
    - 研究目标: 深入分析 GATs、const 泛型和依赖类型
    - 状态: ✅ 已完成 (100%)
    - 关键词: GATs、const 泛型、依赖类型、类型族
 
-5. **[variance_theory.md](./type_theory/variance_theory.md)** - 型变理论
+6. **[variance_theory.md](./type_theory/variance_theory.md)** - 型变理论
    - 研究目标: 深入理解型变理论，形式化定义型变规则
    - 状态: ✅ 已完成 (100%)
    - 关键词: 型变、协变、逆变、不变、子类型
@@ -364,6 +369,7 @@
 
 ### 类型系统
 
+- [类型理论完备性缺口](./type_theory/00_completeness_gaps.md)
 - [类型系统基础](./type_theory/type_system_foundations.md)
 - [Trait 系统形式化](./type_theory/trait_system_formalization.md)
 - [高级类型特性](./type_theory/advanced_types.md)

@@ -372,12 +372,12 @@ Qed.
 
 ### 案例研究索引
 
-| 类型     | 文档                                                                                                                                                                                                                                                                                                                                        | 说明                                   |
+| 类型 | 文档 | 说明 |
 | :--- | :--- | :--- |
-| 形式化   | [ownership_model](./formal_methods/ownership_model.md), [borrow_checker_proof](./formal_methods/borrow_checker_proof.md), [async_state_machine](./formal_methods/async_state_machine.md), [lifetime_formalization](./formal_methods/lifetime_formalization.md), [pin_self_referential](./formal_methods/pin_self_referential.md)            | 形式化方法 + 证明/定理 + 系统集成      |
-| 类型理论 | [type_system_foundations](./type_theory/type_system_foundations.md), [trait_system_formalization](./type_theory/trait_system_formalization.md), [lifetime_formalization](./type_theory/lifetime_formalization.md), [advanced_types](./type_theory/advanced_types.md), [variance_theory](./type_theory/variance_theory.md)                   | 类型、Trait、生命周期、型变            |
-| 实验     | [performance_benchmarks](./experiments/performance_benchmarks.md), [memory_analysis](./experiments/memory_analysis.md), [compiler_optimizations](./experiments/compiler_optimizations.md), [concurrency_performance](./experiments/concurrency_performance.md), [macro_expansion_performance](./experiments/macro_expansion_performance.md) | 数据收集指南 + 结果分析模板            |
-| 实证     | [practical_applications](./practical_applications.md)                                                                                                                                                                                                                                                                                       | 案例报告模板 + 案例快速索引 + 最佳实践 |
+| 形式化 | [ownership_model](./formal_methods/ownership_model.md), [borrow_checker_proof](./formal_methods/borrow_checker_proof.md), [async_state_machine](./formal_methods/async_state_machine.md), [lifetime_formalization](./formal_methods/lifetime_formalization.md), [pin_self_referential](./formal_methods/pin_self_referential.md) | 形式化方法 + 证明/定理 + 系统集成 |
+| 类型理论 | [type_system_foundations](./type_theory/type_system_foundations.md), [trait_system_formalization](./type_theory/trait_system_formalization.md), [lifetime_formalization](./type_theory/lifetime_formalization.md), [advanced_types](./type_theory/advanced_types.md), [variance_theory](./type_theory/variance_theory.md) | 类型、Trait、生命周期、型变 |
+| 实验 | [performance_benchmarks](./experiments/performance_benchmarks.md), [memory_analysis](./experiments/memory_analysis.md), [compiler_optimizations](./experiments/compiler_optimizations.md), [concurrency_performance](./experiments/concurrency_performance.md), [macro_expansion_performance](./experiments/macro_expansion_performance.md) | 数据收集指南 + 结果分析模板 |
+| 实证 | [practical_applications](./practical_applications.md) | 案例报告模板 + 案例快速索引 + 最佳实践 |
 
 ---
 

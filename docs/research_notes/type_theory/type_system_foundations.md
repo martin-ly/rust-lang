@@ -63,6 +63,7 @@
     - [const 上下文增强（Rust 1.91.1+）](#const-上下文增强rust-1911)
     - [类型系统改进](#类型系统改进)
     - [Rust 1.93.0 补充](#rust-1930-补充)
+    - [低优先级扩展（形式化占位）](#低优先级扩展形式化占位)
 
 ---
 
@@ -839,7 +840,40 @@ fn main() {
 
 **与类型系统相关**:
 
+- **LUB coercion**：1.93 修正 least upper bound 推断，涉及函数项与安全性；类型规则：若 $e_1 : \tau_1$、$e_2 : \tau_2$，则 `if c { e1 } else { e2 }` 的 LUB 推断更严格，避免错误 coerce。形式化属 [00_completeness_gaps](00_completeness_gaps.md) 阶段 2。
+- **Copy 与 specialization**：1.93 移除 Copy 的内部 specialization；`impl Copy for T` 不再依赖生命周期 specialization，类型安全有增强。对 `Clone + Copy` 类型的 `clone()` 调用语义不变，但 impl 解析路径变更。见 [00_completeness_gaps](00_completeness_gaps.md)。
+
+**Def LUB1（LUB 类型推断）**：设 $e_1 : \tau_1$、$e_2 : \tau_2$，则 `if c { e1 } else { e2 }` 的类型为 $\mathrm{LUB}(\tau_1, \tau_2)$；1.93 修正函数项、安全性，使 LUB 推断更严格。
+
+**Def COP1（Copy 与 specialization）**：1.93 前 `impl Copy for T` 可依赖生命周期 specialization；1.93 移除该内部 specialization，`Copy` 与 `Clone` 的 impl 解析不再有此路径。
+
+**定理 LUB-T1**：LUB 推断修正后，`if c { e1 } else { e2 }` 的类型为 $\tau_1$ 与 $\tau_2$ 的最小上界；若不存在则编译错误。由 Chalk/类型检查器实现保证。
+
+**定理 COP-T1**：1.93 后 `Copy` 与 `Clone` 的 impl 解析不再依赖生命周期 specialization；类型安全有增强；见 [variance_theory](variance_theory.md) 与 [00_completeness_gaps](00_completeness_gaps.md)。
+
 - **全局分配器与 `thread_local`**：1.93 允许 `#[global_allocator]` 实现中使用 `thread_local!` 和 `std::thread::current()`，类型上涉及 `Allocator` trait 与线程局部；对类型推导、单态化无新增规则，但对 `alloc` 相关泛型与 `impl` 的选用有影响。
 - **`MaybeUninit` 新方法**：`assume_init_drop`、`write_copy_of_slice`、`write_clone_of_slice` 等已稳定，类型为 `MaybeUninit<T>` 及其切片，形式化上可纳入 `MaybeUninit` 的定型与操作语义扩展。
 - **`asm!` 中 `cfg`**：在 `asm!` 语句上使用 `cfg` 不改变类型系统，仅影响条件编译与代码生成；类型检查在宏展开与 `cfg` 之后进行。
 - **状态机 codegen（ roadmap ）**：若今后对 `loop`–`match` 等状态机形态有专门 codegen，可能涉及控制流与类型化；当前仍属 MIR/LLVM 优化范畴，类型规则未变。
+
+---
+
+### 低优先级扩展（形式化占位）
+
+**Def OFFSET1（offset_of! well-formed）**：`offset_of!(Type, field)` 的 well-formed 条件：（1）`Type` 为有效结构体/联合体类型；（2）`field` 为该类型的有效字段名；（3）类型布局可确定。违反则编译错误。1.93 强化 well-formed 检查。
+
+**定理 OFFSET-T1**：若 `offset_of!(τ, f)` 通过 well-formed 检查，则其值为 `τ` 中字段 `f` 的字节偏移；类型为 `usize`。由编译器布局计算保证。
+
+**Def ASC1（类型 ascription）**：`e: T` 的语义：表达式 $e$ 被显式标注为类型 $\tau$；类型检查要求 $\Gamma \vdash e : \tau$；若 $e$ 推断类型 $\tau'$ 与 $\tau$ 不兼容则编译错误。用于消除歧义、约束推断。
+
+**定理 ASC-T1**：$\Gamma \vdash (e : \tau) : \tau$ 当且仅当 $\Gamma \vdash e : \tau$；ascription 不改变类型，仅约束推断。
+
+**Def BOT1（never type !）**：类型 $\bot$（`!`）为无 inhabitant 类型；$\forall \tau.\, \bot <: \tau$；1.92+ Lint 严格化使 `!` 的用法更受限，与类型论 $\bot$ 对应。
+
+**定理 BOT-T1**：若 $e : \bot$ 则 $e$ 不终止或无正常返回值；$\bot$ 可 coerce 到任意类型；控制流分析中 `!` 分支视为不可达。
+
+**Def NEWTYPE1（newtype 与 repr(transparent)）**：`#[repr(transparent)]` 结构体 $\tau_w$ 包装单字段类型 $\tau$ 时，$\tau_w$ 与 $\tau$ 有相同布局与 ABI；零成本抽象。形式化：$\text{Transparent}(\tau_w, \tau) \rightarrow \text{Layout}(\tau_w) = \text{Layout}(\tau)$。
+
+**定理 NEWTYPE-T1**：`repr(transparent)` 保证单字段包装零成本；类型检查与 `transmute` 安全见 [UNSAFE_RUST_GUIDE](../UNSAFE_RUST_GUIDE.md)。
+
+**Def DEREF-NULL1（deref_nullptr deny）**：1.93 中 `deref_nullptr` lint 默认 deny；对 `*const T`/`*mut T` 解引用需非空保证；与类型系统衔接：裸指针解引用 $*p$ 在 $p$ 可能为 null 时产生 lint 错误。

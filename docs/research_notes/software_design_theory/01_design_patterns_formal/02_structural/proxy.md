@@ -22,6 +22,8 @@
 
 **定理 PR-T1**：委托时借用/所有权规则保证正确性。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
 
+**推论 PR-C1**：Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。由 PR-T1 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例
@@ -132,7 +134,7 @@ struct BadProxy {
 
 ## 选型决策树
 
-```
+```text
 需要控制对目标的访问？
 ├── 延迟加载？ → OnceLock/LazyLock 代理
 ├── 访问控制？ → 保护代理（包装 + 检查）

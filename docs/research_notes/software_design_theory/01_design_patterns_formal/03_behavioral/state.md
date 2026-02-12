@@ -22,6 +22,8 @@
 
 **定理 ST-T2**：类型状态模式（泛型相位）在编译期消除非法状态；如 `Locked` 与 `Unlocked` 为不同类型。
 
+**推论 ST-C1**：State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。由 ST-T1、ST-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例
@@ -130,7 +132,7 @@ match &self.state {
 
 ## 选型决策树
 
-```
+```text
 需要状态转换、非法状态不可达？
 ├── 是 → 编译期保证？ → 类型状态泛型
 │       └── 运行时灵活？ → 枚举 + match

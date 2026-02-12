@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Factory Method 结构）**
+**Def 1.1（Factory Method 结构）**:
 
 设 $T$ 为产品类型，$C$ 为创建者类型。Factory Method 满足：
 
@@ -129,7 +129,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 
 ## 选型决策树
 
-```
+```text
 需要创建对象但类型由运行时/上下文决定？
 ├── 是 → 单产品？ → Factory Method（trait create）
 │       └── 产品族？ → Abstract Factory
@@ -144,7 +144,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 | GoF | Rust 对应 | 差异 |
 | :--- | :--- | :--- |
 | 虚工厂方法 | trait fn create | 等价 |
-|  Creator 持有 Product | 可选 | 等价 |
+| Creator 持有 Product | 可选 | 等价 |
 | 多态创建 | impl Trait | 等价 |
 
 ---

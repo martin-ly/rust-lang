@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Singleton 结构）**
+**Def 1.1（Singleton 结构）**:
 
 设 $T$ 为单例类型。Singleton 满足：
 
@@ -27,6 +27,8 @@
 *证明*：`static mut` 多线程访问为 UB；`Mutex` 封装内部 `unsafe`，对外 Safe。见 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T2。∎
 
 **引理 S-L1**：若用 `OnceLock<T>` 且 $T$ 无 `Send`/`Sync` 要求，则 `get_or_init` 闭包仅执行一次；多线程并发调用时由内部同步序列化。
+
+**推论 S-C1**：`OnceLock`/`LazyLock` 实现的 Singleton 为纯 Safe；标准库封装内部 `unsafe`，对外无暴露。由 S-T1、S-L1 及 SBM-T1。
 
 ---
 

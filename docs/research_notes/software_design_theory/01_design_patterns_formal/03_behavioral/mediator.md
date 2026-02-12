@@ -22,6 +22,8 @@
 
 **定理 ME-T1**：`Rc`/`Weak` 或 `Arc` 管理循环引用时避免自引用；由 [ownership_model](../../../formal_methods/ownership_model.md) 与借用规则。
 
+**推论 ME-C1**：Mediator 为纯 Safe；`Vec<Box<dyn Fn>>` 或 channel 路由，无 `unsafe`。由 ME-T1 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例
@@ -127,7 +129,7 @@ struct BadColleague {
 
 ## 选型决策树
 
-```
+```text
 需要多对象协调、避免直接耦合？
 ├── 是 → 集中路由？ → Mediator（结构体 + channel / Weak）
 ├── 需一对多通知？ → Observer

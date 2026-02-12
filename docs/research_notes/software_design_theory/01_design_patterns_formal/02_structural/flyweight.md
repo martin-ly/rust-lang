@@ -24,6 +24,8 @@
 
 **定理 FL-T2**：跨线程共享需 `Arc` + `Sync`；单线程可用 `Rc`。
 
+**推论 FL-C1**：Flyweight 为纯 Safe；`Arc`/`Rc` 共享不可变，无 `unsafe`；可变状态外置时用 `Mutex` 等 Safe 抽象。由 FL-T1、FL-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例
@@ -116,7 +118,7 @@ struct BadFlyweight {
 
 ## 选型决策树
 
-```
+```text
 需要共享不可变实例？
 ├── 是 → 按 key 共享？ → Flyweight（HashMap + Arc）
 │       └── 全局唯一？ → Singleton
@@ -132,7 +134,7 @@ struct BadFlyweight {
 | :--- | :--- | :--- |
 | 享元工厂 | struct + HashMap | 等价 |
 | 共享状态 | Arc<T> | 引用计数 |
-|  extrinsic | 方法参数 | 等价 |
+| extrinsic | 方法参数 | 等价 |
 
 ---
 

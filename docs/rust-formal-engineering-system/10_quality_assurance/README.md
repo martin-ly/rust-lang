@@ -75,10 +75,11 @@
 ## 🔗 与 research_notes 衔接
 
 | 文档 | 用途 |
-|------|------|
+| :--- | :--- |
 | [QUALITY_CHECKLIST](../../research_notes/QUALITY_CHECKLIST.md) | 研究笔记质量检查 |
 | [experiments/performance_benchmarks](../../research_notes/experiments/performance_benchmarks.md) | 性能基准方法论 |
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全边界与 UB |
+| [type_theory/00_completeness_gaps](../../research_notes/type_theory/00_completeness_gaps.md) | 类型理论完备性缺口（形式化论证不充分声明） |
 
 ---
 

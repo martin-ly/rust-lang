@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Composite 结构）**
+**Def 1.1（Composite 结构）**:
 
 设 $C$ 为组件类型。Composite 满足：
 
@@ -25,6 +25,8 @@ $$C = \mathrm{Leaf}(T) \mid \mathrm{Composite}(\mathrm{Vec}\langle C \rangle)$$
 **定理 CO-T1**：`Box` 或 `Vec` 递归结构保证有界深度；由 [ownership_model](../../../formal_methods/ownership_model.md) 无泄漏、无悬垂。
 
 **定理 CO-T2**：遍历时 `&self` 借用全部子节点；`&mut self` 可变遍历需小心别名。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md) 保证无数据竞争。
+
+**推论 CO-C1**：Composite 为纯 Safe；`enum` + `Vec`/`Box` 递归，无 `unsafe`；无环由类型结构保证。由 CO-T1、CO-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
 
 ---
 
@@ -104,7 +106,7 @@ assert_eq!(tree.sum(), 6);
 
 ## 选型决策树
 
-```
+```text
 需要表示树状/层次结构？
 ├── 是 → 节点同质？ → 枚举递归（Leaf/Composite）
 │       └── 节点异质？ → trait + Box<dyn>

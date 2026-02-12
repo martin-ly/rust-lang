@@ -11,7 +11,7 @@
 
 ### 1.1 理论层次
 
-```
+```text
 应用与边界层（本体系所在）
 ├── 01_design_patterns_formal     ← 设计模式形式化（公理/定义/定理）
 ├── 02_workflow_safe_complete_models ← 23 安全 / 43 完全模型

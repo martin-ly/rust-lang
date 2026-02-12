@@ -16,6 +16,7 @@
     - [1.1 类型系统基础](#11-类型系统基础)
     - [1.2 Trait 系统](#12-trait-系统)
     - [1.3 型变理论](#13-型变理论)
+    - [1.4 类型理论完备性缺口（持续完善）](#14-类型理论完备性缺口持续完善)
   - [📚 阶段二：形式化验证](#-阶段二形式化验证)
     - [2.1 所有权系统](#21-所有权系统)
     - [2.2 借用检查器](#22-借用检查器)
@@ -87,6 +88,16 @@
   - 型变与内存安全
 
 **预期成果**: 型变规则的完整证明
+
+### 1.4 类型理论完备性缺口（持续完善）
+
+- [x] [完备性缺口](./type_theory/00_completeness_gaps.md) ✅ 阶段 1–7 已补全
+  - LUB coercion、Copy 与 specialization（LUB-T1、COP-T1）— type_system_foundations 已补全
+  - RPITIT、async fn in trait、coherence 定理（COH-T1、RPIT-T1、ASYNC-T1）— 已补全
+  - 组合法则、三元（VAR-COM-T1）、impl/dyn 边界（DYN-T1）、const 求值失败（CONST-EVAL-T1）— 已补全
+  - 低优先级扩展（offset_of!、never_type、type ascription、newtype 等）— Def 占位已补全
+
+**预期成果**: 缺口补全路线图见 [00_completeness_gaps](type_theory/00_completeness_gaps.md)；全部缺口均有 Def 占位。
 
 ---
 

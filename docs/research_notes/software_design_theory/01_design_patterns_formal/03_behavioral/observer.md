@@ -24,6 +24,8 @@
 
 **定理 OB-T2**：共享 `Rc<RefCell<Vec<Callback>>>` 需 `RefCell` 运行时借用检查；`Mutex` 为 Safe 抽象。由 [ownership_model](../../../formal_methods/ownership_model.md) 与 unsafe 契约。
 
+**推论 OB-C1**：Channel 实现 Observer 为纯 Safe；`mpsc`/`broadcast` 消息传递无共享可变。由 OB-T1、OB-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例
@@ -115,7 +117,7 @@ impl Subject {
 
 ## 选型决策树
 
-```
+```text
 需要一对多通知？
 ├── 是 → 跨线程？ → mpsc/broadcast channel（纯 Safe）
 │       └── 单线程？ → RefCell<Vec<Callback>>

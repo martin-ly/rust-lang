@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Builder 结构）**
+**Def 1.1（Builder 结构）**:
 
 设 $B$ 为 Builder 类型，$T$ 为目标类型。Builder 满足：
 
@@ -23,6 +23,8 @@
 **定理 B-T1**：由 [ownership_model](../../../formal_methods/ownership_model.md) T2，`build(self)` 消费 $B$ 后 $B$ 无效，无双重使用。
 
 **定理 B-T2**：类型状态模式可强制编译期必填：`ConfigBuilder<SetHost>` 与 `ConfigBuilder<SetPort>` 等相位类型，仅当所有相位完成时 `build` 可用。
+
+**推论 B-C1**：Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe`。由 B-T1、B-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
 
 ---
 
@@ -128,7 +130,7 @@ let config = ConfigBuilder::new()
 
 ## 选型决策树
 
-```
+```text
 需要多步骤、可选参数构建？
 ├── 是 → 需编译期必填？ → 类型状态 Builder
 │       └── 运行时校验即可？ → Option + ok_or

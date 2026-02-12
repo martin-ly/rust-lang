@@ -51,7 +51,8 @@
 | CE-T2 | 组合保持数据竞争自由 |
 | CE-T3 | 组合保持类型安全 |
 
-组合时所有权传递、借用规则、Send/Sync 在模块边界不变。详见 [02_effectiveness_proofs](02_effectiveness_proofs.md)。
+组合时所有权传递、借用规则、Send/Sync 在模块边界不变。
+详见 [02_effectiveness_proofs](02_effectiveness_proofs.md)。
 
 ---
 

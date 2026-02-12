@@ -22,6 +22,8 @@
 
 **定理 FA-T1**：模块系统与 `pub` 可见性保证封装边界。由 Rust 模块语义。
 
+**推论 FA-C1**：Facade 为纯 Safe；仅用结构体聚合、私有字段、`pub fn` 委托，无 `unsafe`。由 FA-T1 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例
@@ -121,7 +123,7 @@ pub struct BadFacade {
 
 ## 选型决策树
 
-```
+```text
 需要简化多子系统调用？
 ├── 是 → 仅协调调用顺序？ → Facade（结构体聚合）
 │       └── 需调解对象间通信？ → Mediator

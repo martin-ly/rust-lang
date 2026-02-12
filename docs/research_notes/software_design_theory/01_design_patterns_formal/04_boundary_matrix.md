@@ -9,11 +9,11 @@
 
 ## 形式化定义与公理
 
-**Def 1.1（设计模式边界）**
+**Def 1.1（设计模式边界）**:
 
 设 $P$ 为 GoF 设计模式，$B_s(P)$、$B_p(P)$、$B_e(P)$ 分别为安全、支持、表达边界。定义见 [05_boundary_system](../05_boundary_system/README.md) Def B1–B3。
 
-**Def 1.2（三维边界一致性）**
+**Def 1.2（三维边界一致性）**:
 
 若 $B_s(P)$、$B_p(P)$、$B_e(P)$ 与 [safe_unsafe_matrix](../05_boundary_system/safe_unsafe_matrix.md)、[supported_unsupported_matrix](../05_boundary_system/supported_unsupported_matrix.md)、[expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md) 三矩阵对应一致，则称模式 $P$ 的边界**与体系一致**。
 
@@ -118,7 +118,7 @@ Singleton、Interpreter、Memento、Observer、Template Method、Visitor 为近�
 
 ## 选型决策树（模式 → 边界）
 
-```
+```text
 选模式 X？
 ├── 需纯 Safe？
 │   ├── 是 → 排除 static mut、裸 FFI；用 OnceLock、channel

@@ -27,13 +27,23 @@
 
 #### 🔷 类型理论研究
 
-| 主题             | 文件                                                                         | 状态    |
+| 主题 | 文件 | 状态 |
 | :--- | :--- | :--- |
-| 类型系统基础     | [type_system_foundations.md](./type_theory/type_system_foundations.md)       | ✅ 100% |
+| 完备性缺口 | [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md) | ⚠️ 缺口已声明 |
+| 类型系统基础 | [type_system_foundations.md](./type_theory/type_system_foundations.md) | ✅ 100% |
 | Trait 系统形式化 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md) | ✅ 100% |
 | 生命周期形式化   | [lifetime_formalization.md](./type_theory/lifetime_formalization.md)         | ✅ 100% |
 | 高级类型特性     | [advanced_types.md](./type_theory/advanced_types.md)                         | ✅ 100% |
 | 型变理论         | [variance_theory.md](./type_theory/variance_theory.md)                       | ✅ 100% |
+
+#### 🌐 软件设计理论
+
+| 主题 | 文件 | 状态 |
+| :--- | :--- | :--- |
+| 设计模式形式化 | [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/) | ✅ 23 模式 |
+| 23/43 模型 | [02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/) | ✅ 100% |
+| 执行模型 | [03_execution_models](./software_design_theory/03_execution_models/) | ✅ 五模型 |
+| 组合工程 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/) | ✅ CE-T1–T3 |
 
 #### ⚡ 实验研究
 
@@ -108,6 +118,7 @@
 - GATs → [advanced_types.md](./type_theory/advanced_types.md)
 - const 泛型 → [advanced_types.md](./type_theory/advanced_types.md)
 - 型变 → [variance_theory.md](./type_theory/variance_theory.md)
+- 类型理论缺口 → [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)
 
 ### 异步相关
 
@@ -181,6 +192,7 @@
 
 - [主索引](./README.md) - 完整的研究笔记索引
 - [完整索引](./INDEX.md) - 所有研究笔记的详细索引
+- [软件设计理论](./software_design_theory/README.md) - 设计模式、23/43、执行模型、组合工程
 - [快速入门指南](./GETTING_STARTED.md) - 新用户入门指南
 - [常见问题解答](./FAQ.md) - 常见问题解答
 - [维护指南](./MAINTENANCE_GUIDE.md) - 系统维护指南

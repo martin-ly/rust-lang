@@ -24,6 +24,8 @@
 
 **定理 AF-T2**：由 [ownership_model](../../../formal_methods/ownership_model.md) T2，产品所有权唯一。
 
+**推论 AF-C1**：Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 `unsafe`。由 AF-T1、AF-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
 ---
 
 ## Rust 实现与代码示例

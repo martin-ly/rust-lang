@@ -328,6 +328,12 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 
 *证明*：由 Def 2.1–2.3；const 参数在编译时求值；编译器拒绝非法 const；依 Axiom AT2。∎
 
+**Def CONST-EVAL1（const 表达式求值失败）**：const 表达式 $e$ 在 const 上下文中求值失败时，记 $\text{Eval}_c(e) = \bot$；类型 $T[N]$ 若 $N$ 的求值失败则 $T[N]$ 为 ill-formed。
+
+**定理 CONST-EVAL-T1（const 求值失败即类型错误）**：若 const 泛型形参位置接收的表达式 $e$ 满足 $\text{Eval}_c(e) = \bot$，则类型 $T[e]$ 为 ill-formed，编译错误。
+
+*证明思路*：const 参数须在编译时确定；求值失败则 $N$ 无合法值；$T[N]$ 无法构造；编译器报类型错误。∎
+
 **定理 AT-T3 (受限依赖类型安全)**：Rust 的受限依赖类型系统保证类型安全，无运行时类型错误。
 
 *证明*：由 Def 3.1–3.2；依赖仅限于编译时常量；类型检查在编译时完成；由 AT-T1、AT-T2 组合。∎
@@ -337,6 +343,10 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 *证明*：由 Def 1.3；GAT 为 trait 关联类型扩展；impl 解析在类型检查阶段；约束违反则编译错误。∎
 
 **推论 AT-C1**：违反 GAT、const 泛型、依赖类型规则的代码无法通过编译；反例见下文「反例」表。
+
+**Def CONST-MUT1（const 中 &mut static）**：1.93 允许 const 上下文含 `&mut static`；`const_item_interior_mutations` lint 约束可修改的 interior；形式化：const 求值中 `&mut STATIC` 的 mutation 受 lint 规则约束。
+
+**Def EXIST1（existential type）**：存在类型 `type X = impl Trait`（不稳定）对应类型论 $\exists \alpha. \tau(\alpha)$；由 impl 绑定具体类型；与 GAT、RPITIT 语义衔接。
 
 ---
 
@@ -349,6 +359,7 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 | 依赖类型用运行时值 | AT-T3 | 编译错误 | Rust 不支持 `Vec<T>` 依赖 `len()` 运行时值 |
 | 类型族循环依赖 | GAT 解析 | 编译错误 | 递归 GAT 约束无解 |
 | const 泛型非整数 | const 泛型规则 | 编译错误 | 仅 supports integral/char/bool |
+| const 表达式求值失败 | CONST-EVAL-T1 | 编译错误 | $T[e]$ 若 $\text{Eval}_c(e)=\bot$ 则 ill-formed |
 
 ---
 
@@ -363,6 +374,8 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
   ├─ GAT 类型推导 + 约束 ──────────→ AT-T1: GAT 类型安全
   │
   ├─ const 编译时常量检查 ─────────→ AT-T2: const 泛型类型安全
+  │   │
+  │   └─ Def CONST-EVAL1 ──────────→ CONST-EVAL-T1: const 求值失败即类型错误
   │
   ├─ GAT 与 trait impl 衔接 ───────→ AT-L1
   │

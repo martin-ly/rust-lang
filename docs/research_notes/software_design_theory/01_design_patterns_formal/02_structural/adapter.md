@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Adapter 结构）**
+**Def 1.1（Adapter 结构）**:
 
 设 $A$ 为适配器类型，$T$ 为目标接口类型，$S$ 为被适配类型。Adapter 满足：
 
@@ -121,7 +121,7 @@ impl Logger for BadAdapter {
 
 ## 选型决策树
 
-```
+```text
 需要让类型 S 满足接口 T？
 ├── S 已拥有类似功能，仅接口不同 → Adapter（包装 + 委托）
 ├── S 需扩展行为（同接口） → Decorator

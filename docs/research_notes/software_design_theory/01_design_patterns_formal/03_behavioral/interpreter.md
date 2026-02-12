@@ -125,7 +125,7 @@ GoF 用继承定义 AST 节点；Rust 用枚举更简洁，且穷尽匹配保证
 
 ## 选型决策树
 
-```
+```text
 需要解析并求值 DSL/表达式？
 ├── 是 → 枚举 AST + match 求值？ → Interpreter
 │       └── 需多操作（求值、打印、优化）？ → Visitor

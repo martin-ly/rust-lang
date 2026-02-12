@@ -70,6 +70,7 @@
 | 关键词     | 相关研究笔记                                                    | 状态    |
 | :--- | :--- | :--- |
 | 类型系统   | [类型系统基础](./type_theory/type_system_foundations.md)        | ✅ 100% |
+| 类型理论缺口 | [完备性缺口](./type_theory/00_completeness_gaps.md)           | ⚠️ 缺口已声明 |
 | Trait      | [Trait 系统形式化](./type_theory/trait_system_formalization.md) | ✅ 100% |
 | 泛型       | [高级类型特性](./type_theory/advanced_types.md)                 | ✅ 100% |
 | GATs       | [高级类型特性](./type_theory/advanced_types.md)                 | ✅ 100% |
@@ -138,11 +139,24 @@
 
 | 研究笔记                                                        | 研究目标                                 | 状态      | 完成度 |
 | :--- | :--- | :--- | :--- |
+| [完备性缺口](./type_theory/00_completeness_gaps.md)             | 形式化论证不充分声明；LUB、Copy、RPITIT 等缺口 | ⚠️ 缺口已声明 | 路线图 |
 | [类型系统基础](./type_theory/type_system_foundations.md)        | 形式化定义 Rust 类型系统基础             | ✅ 已完成 | 100%   |
 | [Trait 系统形式化](./type_theory/trait_system_formalization.md) | 形式化定义 Trait 系统，理解类型理论基础  | ✅ 已完成 | 100%   |
 | [生命周期形式化](./type_theory/lifetime_formalization.md)       | 形式化定义生命周期系统，理解类型理论解释 | ✅ 已完成 | 100%   |
 | [高级类型特性](./type_theory/advanced_types.md)                 | 深入分析 GATs、const 泛型和依赖类型      | ✅ 已完成 | 100%   |
 | [型变理论](./type_theory/variance_theory.md)                    | 深入理解型变理论，形式化定义型变规则     | ✅ 已完成 | 100%   |
+
+### 软件设计理论
+
+**研究领域**: 设计模式形式化、23/43 模型、执行模型、组合工程
+
+| 研究笔记                                                                    | 研究目标                           | 状态      | 完成度 |
+| :--- | :--- | :--- | :--- |
+| [软件设计理论体系](./software_design_theory/README.md)                     | 设计模式、23/43、执行模型、组合工程 | ✅ 已完成 | 100%   |
+| [设计模式形式化](./software_design_theory/01_design_patterns_formal/)       | GoF 23 种模式形式化                | ✅ 已完成 | 100%   |
+| [23/43 模型](./software_design_theory/02_workflow_safe_complete_models/)   | 安全 vs 完全模型                   | ✅ 已完成 | 100%   |
+| [执行模型](./software_design_theory/03_execution_models/)                   | 同步、异步、并发、并行、分布式     | ✅ 已完成 | 100%   |
+| [组合工程](./software_design_theory/04_compositional_engineering/)          | CE-T1–T3 有效性证明                | ✅ 已完成 | 100%   |
 
 ### 实验研究
 
@@ -184,10 +198,18 @@
 **类型理论研究**:
 
 - **类型系统基础** → [类型系统基础](./type_theory/type_system_foundations.md)
+- **类型理论缺口** → [完备性缺口](./type_theory/00_completeness_gaps.md)（LUB、Copy、RPITIT 等）
 - **Trait 系统** → [Trait 系统形式化](./type_theory/trait_system_formalization.md)
 - **生命周期** → [生命周期形式化](./type_theory/lifetime_formalization.md)
 - **高级类型特性** → [高级类型特性](./type_theory/advanced_types.md)
 - **型变规则** → [型变理论](./type_theory/variance_theory.md)
+
+**软件设计理论**:
+
+- **设计模式** → [设计模式形式化](./software_design_theory/01_design_patterns_formal/)
+- **23/43 模型** → [安全 vs 完全模型](./software_design_theory/02_workflow_safe_complete_models/)
+- **执行模型** → [五模型形式化](./software_design_theory/03_execution_models/)
+- **组合工程** → [CE-T1–T3 有效性](./software_design_theory/04_compositional_engineering/)
 
 ### 我想优化性能
 
