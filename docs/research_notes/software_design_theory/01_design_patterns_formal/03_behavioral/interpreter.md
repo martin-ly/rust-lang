@@ -85,6 +85,40 @@ assert_eq!(e.eval(), 7);
 
 ---
 
+## 典型场景完整代码示例（过滤表达式）
+
+**场景**：配置中允许简单过滤表达式 `field > 100`，运行时求值。
+
+```rust
+use std::collections::HashMap;
+
+#[derive(Clone)]
+enum FilterExpr {
+    Lit(i64),
+    Field(&'static str),
+    Gt(Box<FilterExpr>, Box<FilterExpr>),
+}
+
+impl FilterExpr {
+    fn eval(&self, ctx: &HashMap<&str, i64>) -> Option<bool> {
+        match self {
+            FilterExpr::Lit(n) => Some(*n != 0),
+            FilterExpr::Field(f) => ctx.get(*f).map(|&v| v != 0),
+            FilterExpr::Gt(a, b) => {
+                let va = match a.as_ref() { FilterExpr::Lit(n) => *n, FilterExpr::Field(f) => *ctx.get(*f)?, _ => return None };
+                let vb = match b.as_ref() { FilterExpr::Lit(n) => *n, FilterExpr::Field(f) => *ctx.get(*f)?, _ => return None };
+                Some(va > vb)
+            }
+        }
+    }
+}
+
+// 示例：FilterExpr::Gt(Box::new(FilterExpr::Field("count")), Box::new(FilterExpr::Lit(10)))
+// 表示 "count > 10"；ctx = [("count", 15)] => Some(true)
+```
+
+---
+
 ## 相关模式
 
 | 模式 | 关系 |

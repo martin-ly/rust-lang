@@ -10,10 +10,17 @@
 ## 目录
 
 - [语义边界图](#语义边界图)
+  - [目录](#目录)
   - [总览](#总览)
-  - [三维交叉矩阵](#三维交叉矩阵扩展)
+  - [三维交叉矩阵（扩展）](#三维交叉矩阵扩展)
   - [边界决策树](#边界决策树)
-  - [模式选取示例](#模式选取示例)
+  - [模式选取完整示例（场景→模式→代码）](#模式选取完整示例场景模式代码)
+    - [示例 1：跨平台 UI 组件族](#示例-1跨平台-ui-组件族)
+    - [示例 2：HTTP 中间件链](#示例-2http-中间件链)
+    - [示例 3：可撤销操作（编辑器）](#示例-3可撤销操作编辑器)
+    - [示例 4：事件通知（多订阅者）](#示例-4事件通知多订阅者)
+    - [示例 5：领域逻辑 + 持久化](#示例-5领域逻辑--持久化)
+  - [模式选取示例（简表）](#模式选取示例简表)
   - [反模式：误选](#反模式误选)
   - [形式化边界定理](#形式化边界定理)
   - [边界冲突与化解](#边界冲突与化解)
@@ -98,7 +105,110 @@
 
 ---
 
-## 模式选取示例
+## 模式选取完整示例（场景→模式→代码）
+
+以下为**实质内容**：从真实需求出发，到模式选型，到可运行代码骨架。
+
+### 示例 1：跨平台 UI 组件族
+
+**场景**：Windows/Linux 需不同风格的按钮、文本框；运行时根据平台选择。
+
+**选型**：Abstract Factory（产品族）。
+
+**代码骨架**：
+
+```rust
+trait Button { fn render(&self) -> String; }
+trait TextBox { fn render(&self) -> String; }
+trait UIFactory {
+    fn create_button(&self) -> Box<dyn Button>;
+    fn create_textbox(&self) -> Box<dyn TextBox>;
+}
+struct WinFactory;
+impl UIFactory for WinFactory {
+    fn create_button(&self) -> Box<dyn Button> { /* Win 风格 */ }
+    fn create_textbox(&self) -> Box<dyn TextBox> { /* Win 风格 */ }
+}
+// 运行时：let factory: Box<dyn UIFactory> = if cfg!(windows) { ... } else { ... };
+```
+
+### 示例 2：HTTP 中间件链
+
+**场景**：请求需经认证→日志→限流→业务处理。
+
+**选型**：Chain of Responsibility。
+
+**代码骨架**：
+
+```rust
+type Next = Option<Box<dyn Handler>>;
+trait Handler {
+    fn handle(&self, req: &mut Request, next: Next) -> Response;
+}
+struct AuthHandler { next: Next }
+impl Handler for AuthHandler {
+    fn handle(&self, req: &mut Request, next: Next) -> Response {
+        if !validate(req) { return Response::unauthorized(); }
+        next.map(|n| n.handle(req, self.next)).unwrap_or(Response::ok())
+    }
+}
+// 链：Auth → Log → RateLimit → Service
+```
+
+### 示例 3：可撤销操作（编辑器）
+
+**场景**：支持 undo/redo。
+
+**选型**：Command。
+
+**代码骨架**：
+
+```rust
+trait Command {
+    fn execute(&self, ctx: &mut Context);
+    fn undo(&self, ctx: &mut Context);
+}
+struct InsertCmd { chars: String, pos: usize }
+impl Command for InsertCmd {
+    fn execute(&self, ctx: &mut Context) { ctx.insert(self.pos, &self.chars); }
+    fn undo(&self, ctx: &mut Context) { ctx.delete(self.pos, self.chars.len()); }
+}
+// 栈：undo_stack.push(cmd.execute()); redo 时 pop 并 undo
+```
+
+### 示例 4：事件通知（多订阅者）
+
+**场景**：订单状态变更需通知库存、物流、通知服务。
+
+**选型**：Observer（channel 实现）。
+
+**代码骨架**：
+
+```rust
+use tokio::sync::broadcast;
+let (tx, _) = broadcast::channel::<OrderEvent>(32);
+// 发布者：tx.send(OrderEvent::Shipped { id: 1 });
+// 订阅者：let mut rx = tx.subscribe(); while let Ok(e) = rx.recv().await { ... }
+```
+
+### 示例 5：领域逻辑 + 持久化
+
+**场景**：订单用例：校验→创建→持久化→发事件。
+
+**选型**：Domain Model + Service Layer + Repository + DTO。
+
+**代码骨架**：
+
+```rust
+// Domain Model：Order 含 add_item、submit 等
+// Service Layer：OrderService::place_order 编排
+// Repository：OrderRepository::save
+// DTO：PlaceOrderRequest、OrderResponse 跨边界
+```
+
+---
+
+## 模式选取示例（简表）
 
 | 需求 | 推荐模式 | 理由 |
 | :--- | :--- | :--- |

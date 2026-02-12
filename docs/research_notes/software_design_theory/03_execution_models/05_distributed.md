@@ -84,14 +84,33 @@ impl Handler<MyMessage> for MyActor {
 
 ---
 
-## 典型场景
+## 典型场景（实质内容）
 
-| 场景 | 说明 |
+| 场景 | 说明 | 选型 |
+| :--- | :--- | :--- |
+| 微服务 | gRPC、HTTP API | tonic、axum、actix-web |
+| 消息队列 | Kafka、RabbitMQ 客户端 | rdkafka、lapin |
+| Actor 集群 | 分布式 actor 系统 | actix |
+| 分布式存储 | 客户端协议 | etcd、redis 客户端 |
+| 服务发现 | 健康检查、负载均衡 | consul、自定义 |
+
+### 与设计模式组合
+
+| 组合 | 说明 |
 | :--- | :--- |
-| 微服务 | gRPC、HTTP API |
-| 消息队列 | Kafka、RabbitMQ 客户端 |
-| Actor 集群 | 分布式 actor 系统 |
-| 分布式存储 | 客户端协议 |
+| 分布式 + DTO | 跨边界序列化；见 [02_complete_43_catalog](../../02_workflow_safe_complete_models/02_complete_43_catalog.md) DTO |
+| 分布式 + Gateway | 外部系统集成；见 [02_complete_43_catalog](../../02_workflow_safe_complete_models/02_complete_43_catalog.md) Gateway |
+| 分布式 + Remote Facade | 粗粒度接口；batch 减少 RPC；见 02_complete_43_catalog |
+| 分布式 + Observer | 事件总线、消息队列；见 [observer](../../01_design_patterns_formal/03_behavioral/observer.md) |
+
+### 常见陷阱
+
+| 陷阱 | 后果 | 规避 |
+| :--- | :--- | :--- |
+| 忽略超时 | 永久阻塞 | `tokio::time::timeout`、`tokio::time::interval` |
+| 非幂等重试 | 重复操作 | 设计幂等接口；或去重 |
+| 序列化版本不兼容 | 反序列化失败 | 版本管理；向后兼容 schema |
+| 无熔断 | 雪崩 | 熔断器、限流；见 [02_effectiveness_proofs](../../04_compositional_engineering/02_effectiveness_proofs.md) |
 
 ---
 

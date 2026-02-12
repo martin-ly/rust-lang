@@ -9,7 +9,17 @@
 
 ## 宗旨
 
-将 Rust 社区惯用模式（Idioms）与软件设计理论、形式化基础衔接，提供**实质内容**：形式化对应、与 GoF 模式关系、典型场景、常见陷阱。
+将 Rust 社区惯用模式（Idioms）与软件设计理论、形式化基础衔接，提供**实质内容**：形式化对应、与 GoF 模式关系、典型场景、常见陷阱、代码示例。
+
+---
+
+## 层次推进（阅读顺序）
+
+| 层次 | 内容 | 先修 |
+| :--- | :--- | :--- |
+| **L1 基础** | RAII、Newtype | 所有权、类型系统 |
+| **L2 进阶** | 类型状态、Error handling | L1 |
+| **L3 扩展** | Cow、Option/Result 模式、Builder 变体 | L2 |
 
 ---
 
@@ -32,7 +42,34 @@
 | 网络连接 | `TcpStream`、`impl Drop` | 资源管理 |
 | 内存 | `Box`、`Vec` | 与 ownership 直接对应 |
 
-### 1.3 常见陷阱
+### 1.3 完整代码示例
+
+```rust
+// RAII：文件句柄自动关闭
+use std::fs::File;
+use std::io::{BufRead, BufReader};
+
+fn read_lines(path: &str) -> Result<Vec<String>, std::io::Error> {
+    let f = File::open(path)?;           // 获取资源
+    let buf = BufReader::new(f);
+    buf.lines().collect()                 // 返回时 f、buf 自动 drop
+}
+// 若中间 panic，栈展开时按创建逆序 drop；无泄漏
+```
+
+```rust
+// RAII：MutexGuard 自动释放锁
+use std::sync::Mutex;
+
+let m = Mutex::new(0);
+{
+    let mut g = m.lock().unwrap();       // 获取锁
+    *g += 1;                              // 持锁期间修改
+}                                         // 作用域结束，g drop，锁释放
+```
+
+
+### 1.4 常见陷阱
 
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -40,7 +77,7 @@
 | 过早 drop | 悬垂引用 | 保证生命周期 outlives |
 | 忘记 `impl Drop` | 资源泄漏 | 显式 RAII 封装 |
 
-### 1.4 与设计模式衔接
+### 1.5 与设计模式衔接
 
 - **Builder**：`build(self)` 消费后由调用方负责 drop；RAII 保证中间资源正确释放
 - **Factory Method**：产品常为 RAII 类型；工厂返回 `Box<T>` 时 ownership 清晰
@@ -66,7 +103,36 @@
 | 防止误用 | `struct UserId(u64)` | 与 DTO 衔接 |
 | 品牌类型 | `struct Branded<T>` | 类型安全 |
 
-### 2.3 常见陷阱
+### 2.3 完整代码示例
+
+```rust
+#[derive(Clone, PartialEq, Eq)]
+pub struct UserId(pub u64);
+
+#[derive(Clone, PartialEq, Eq)]
+pub struct OrderId(pub u64);
+
+fn process_order(user: UserId, order: OrderId) {
+    // 类型系统防止：process_order(order_id, user_id) 错误
+}
+```
+
+```rust
+#[repr(transparent)]
+pub struct Meter(f64);
+
+impl Meter {
+    pub fn new(v: f64) -> Self { Self(v) }
+}
+impl std::ops::Add for Meter {
+    type Output = Meter;
+    fn add(self, other: Meter) -> Meter { Meter(self.0 + other.0) }
+}
+// 零成本；防止 Meter + Kilogram 混用
+```
+
+
+### 2.4 常见陷阱
 
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -74,7 +140,7 @@
 | 过度包装 | 样板代码 | 仅在需语义区分时用 |
 | 泄漏内部类型 | 封装破坏 | 谨慎 `pub` |
 
-### 2.4 与设计模式衔接
+### 2.5 与设计模式衔接
 
 - **Adapter**：Newtype 可作适配器包装；`impl Trait for Newtype` 委托
 - **Value Object**：Fowler 的 Value Object 与 Newtype 等价；不可变、相等性
@@ -136,8 +202,88 @@
 
 ---
 
-## 六、引用
+---
+
+---
+
+## 六、Error handling 与 Result/? 惯用
+
+### 6.1 定义与形式化
+
+**Def EH1（Error handling 惯用）**：错误通过 `Result<T, E>` 显式传播；`?` 操作符实现早期返回；$\text{query}(e) \equiv \text{match } e \text{ with Ok}(v) \rightarrow v \mid \text{Err}(e) \rightarrow \text{return Err}(e.\text{into}())$。
+
+**定理 EH-T1**：`?` 与 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) Def QUERY1 一致；错误传播不违反借用规则。
+
+### 6.2 典型场景
+
+| 场景 | 实现 | 与设计模式关系 |
+| :--- | :--- | :--- |
+| 函数链错误传播 | `fn f() -> Result<T, E> { g()?; h()? }` | 与 Chain 模式衔接 |
+| 错误转换 | `map_err`、`From` trait | Adapter 错误类型 |
+| 可选操作 | `Option` + `ok_or` | 与 Builder 必填校验衔接 |
+
+### 6.3 常见陷阱
+
+| 陷阱 | 后果 | 规避 |
+| :--- | :--- | :--- |
+| `unwrap()` 滥用 | panic 不可恢复 | 用 `?` 或 `match` 传播 |
+| 错误类型不统一 | 传播繁琐 | `thiserror`、`From` 实现 |
+| 忽略 `Result` | 静默失败 | 必须 `let _ =` 或显式处理 |
+
+---
+
+## 七、Option/Result 组合模式
+
+### 7.1 定义与形式化
+
+**Def OR1（Option/Result 组合）**：`Option` 表示可选值；`Result` 表示成功或错误；组合模式包括 `and_then`、`map`、`map_err`、`unwrap_or`、`ok_or`。
+
+**定理 OR-T1**：`Option`/`Result` 与 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) 构造性语义一致；无 null，无异常隐式传播。
+
+### 7.2 典型场景
+
+| 场景 | 实现 | 示例 |
+| :--- | :--- | :--- |
+| 链式可选 | `opt.and_then(\|x\| f(x))` | 解析链 |
+| 默认值 | `opt.unwrap_or(default)` | 配置项 |
+| 必填校验 | `opt.ok_or(Error::Missing)` | Builder 必填 |
+
+---
+
+## 八、Cow（Clone-on-Write）模式
+
+### 8.1 定义与形式化
+
+**Def COW1（Cow）**：`Cow<'a, T>` 表示「借用或拥有」；可读时用 `&T` 避免复制；需写时克隆为 `T`。形式化：$\text{Cow} = \text{Borrowed}(\&T) \mid \text{Owned}(T)$；$\text{to\_mut}(c) \rightarrow \text{若 Borrowed 则 clone 转为 Owned}$。
+
+**定理 COW-T1**：Cow 与 ownership 规则一致；读时不转移所有权；写时取得独占所有权。
+
+### 8.2 典型场景
+
+| 场景 | 实现 | 与设计模式关系 |
+| :--- | :--- | :--- |
+| 字符串处理 | `Cow<str>` | 避免不必要的 `String` 分配 |
+| 配置解析 | 引用默认 +  owned 覆盖 | 与 Flyweight 共享思路衔接 |
+| 条件克隆 | 仅修改时克隆 | 延迟复制 |
+
+---
+
+## 九、智能指针选型决策
+
+| 需求 | 选型 | 形式化对应 |
+| :--- | :--- | :--- |
+| 独占堆 | `Box<T>` | [ownership_model](../../formal_methods/ownership_model.md) Def BOX1 |
+| 单线程共享 | `Rc<T>` | Def RC1 |
+| 跨线程共享 | `Arc<T>` | Def ARC1 |
+| 内部可变单线程 | `RefCell<T>` | Def REFCELL1 |
+| 可选写 | `Cow<'a, T>` | Def COW1 |
+| 延迟初始化 | `OnceCell`/`LazyLock` | Singleton 模式 |
+
+---
+
+## 十、引用
 
 - [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/)：Rust Idioms 官方来源
 - [ownership_model](../../formal_methods/ownership_model.md)
+- [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) Def QUERY1
 - [01_design_patterns_formal](01_design_patterns_formal/README.md)

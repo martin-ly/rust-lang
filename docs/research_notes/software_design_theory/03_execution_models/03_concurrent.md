@@ -96,14 +96,34 @@ assert_eq!(*data.lock().unwrap(), 10);
 
 ---
 
-## 典型场景
+## 典型场景（实质内容）
 
-| 场景 | 说明 |
+| 场景 | 说明 | 选型 |
+| :--- | :--- | :--- |
+| 生产者-消费者 | 任务队列、流水线 | `mpsc::channel` |
+| 共享缓存 | 多线程读、单写 | `Arc<RwLock<HashMap>>` |
+| 后台任务 | 主线程不阻塞 | `thread::spawn(move \|\| { ... })` |
+| 多路 I/O | 等待多个套接字 | `select!` 或 async |
+| 并行计算 | CPU 密集、多核 | 见 [04_parallel](04_parallel.md) rayon |
+| 工作池 | 固定线程处理任务 | `mpsc` + `spawn` 池 |
+
+### 与设计模式组合
+
+| 组合 | 说明 |
 | :--- | :--- |
-| 生产者-消费者 | `mpsc` 通道、任务队列 |
-| 共享缓存 | `Arc<RwLock<HashMap>>` |
-| 后台任务 | `spawn` 执行耗时操作 |
-| 多路 I/O | `select!`、`join!` |
+| 并发 + Observer | `mpsc` 或 `broadcast` 替代回调；见 [observer](../../01_design_patterns_formal/03_behavioral/observer.md) |
+| 并发 + Flyweight | `Arc` 跨线程共享不可变；见 [flyweight](../../01_design_patterns_formal/02_structural/flyweight.md) |
+| 并发 + Command | 任务队列化；`tx.send(Command::new(...))` |
+| 并发 + Mediator | 多组件通过 channel 协调 |
+
+### 常见陷阱（扩展）
+
+| 陷阱 | 后果 | 规避 |
+| :--- | :--- | :--- |
+| 锁顺序不一致 | 死锁 | 全局锁顺序（如按地址排序） |
+| 锁内持锁 | 死锁 | 缩小锁范围、`try_lock` |
+| 忘记 `join` | 子线程被强制终止 | `handles.push(spawn(...))`；`for h in handles { h.join()? }` |
+| 通道发送端未 drop | Receiver 永远阻塞 | 显式 drop(tx) 或克隆后 move |
 
 ---
 

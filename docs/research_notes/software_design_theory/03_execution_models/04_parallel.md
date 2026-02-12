@@ -74,14 +74,34 @@ assert_eq!(a + b, 15);
 
 ---
 
-## 典型场景
+## 典型场景（实质内容）
 
-| 场景 | 说明 |
+| 场景 | 说明 | 代码示例 |
+| :--- | :--- | :--- |
+| 批量计算 | 矩阵运算、图像处理 | `v.par_iter().map(\|x\| x * 2).collect()` |
+| 归约/聚合 | `par_iter().sum()`、`reduce` | `v.par_iter().sum()`、`reduce(\|\| 0, \|a, b\| a + b)` |
+| 并行搜索 | 大集合中查找 | `par_iter().find_any(\|x\| x > 100)` |
+| 分治 | `join` 递归划分 | `rayon::join(\|\| left(), \|\| right())` |
+| 并行排序 | 多核快排 | `v.par_sort()`、`par_sort_unstable()` |
+| 并行构建 | 并行构造集合 | `par_iter().map().collect()` |
+
+### 与设计模式组合
+
+| 组合 | 说明 |
 | :--- | :--- |
-| 批量计算 | 矩阵运算、图像处理 |
-| 归约/聚合 | `par_iter().sum()`、`reduce` |
-| 并行搜索 | 大集合中查找 |
-| 分治 | `join` 递归划分 |
+| 并行 + Iterator | `par_iter` 扩展 `Iterator`；见 [iterator](../../01_design_patterns_formal/03_behavioral/iterator.md) |
+| 并行 + Strategy | 可替换算法；`par_iter().map(\|x\| strategy.apply(x))` |
+| 并行 + Flyweight | 共享不可变；`Arc` 在闭包中 move；见 [flyweight](../../01_design_patterns_formal/02_structural/flyweight.md) |
+| 并行 + 通道 | 结果归约；`par_iter().for_each(\|x\| tx.send(x).ok())` |
+
+### 常见陷阱
+
+| 陷阱 | 后果 | 规避 |
+| :--- | :--- | :--- |
+| 闭包捕获非 Send | 编译错误 | 用 `Arc`；或 move 克隆 |
+| 小数据量用 rayon | 调度开销大于收益 | 通常 > 1000 元素才考虑 |
+| 归约非结合 | 结果非确定 | 仅用结合律操作（sum、product、min、max） |
+| 并行闭包中共享可变 | 数据竞争 | 用 `Mutex` 或 每个任务独立输出后合并 |
 
 ---
 

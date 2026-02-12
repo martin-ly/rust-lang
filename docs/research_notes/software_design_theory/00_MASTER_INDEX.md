@@ -78,20 +78,34 @@
 
 ---
 
-## 四、内容概览
+## 四、层次推进学习路径
+
+| 阶段 | 阅读顺序 | 内容深度 | 预计时间 |
+| :--- | :--- | :--- | :--- |
+| **入门** | 01_design_patterns_formal（Factory Method、Strategy、Adapter）→ 06_rust_idioms（RAII、Newtype） | Def/定理 + 代码示例 | 2–4h |
+| **进阶** | 02_workflow 01_safe_23、03_semantic_boundary_map → 05_boundary_system 三维矩阵 | 模式选取、边界决策 | 2–3h |
+| **深入** | 03_execution_models、04_compositional_engineering、02_complete_43 → 07_anti_patterns | 组合证明、扩展模式、反模式 | 4–6h |
+
+**层次原则**：先模式形式化 → 再边界与选型 → 最后组合与反模式；每层依赖前层。
+
+---
+
+## 五、内容概览
 
 本体系各文档已充实为实质内容：
 
 - **设计模式**：每模式含 Def/Axiom/定理、Rust 代码示例、证明思路、**典型场景**、**相关模式**、**实现变体**、**反例**、与理论衔接（23 模式均有典型场景、相关模式、实现变体；13 反例）
+- **43 完全**：20 种扩展模式**全部**含 Rust 代码示例（Domain Model、Repository、DTO、Event Sourcing、Table Data Gateway、Active Record、Gateway、MVC、Front Controller、Remote Facade、Lazy Load、Plugin、Optimistic Offline Lock 等）
+- **Rust Idioms**：RAII、Newtype、类型状态、**Error handling**、**Option/Result 组合**、**Cow**、**智能指针选型**；层次推进 L1→L2→L3
 - **执行模型**：形式化定义、操作语义、Rust 示例、**典型场景**、与 async/borrow 衔接（五模型）
-- **组合工程**：CE-T1–T3 完整证明思路、模块/Crate 组合代码示例、**设计模式组合示例**、与 ownership/borrow/trait 衔接
-- **边界体系**：安全/支持/表达三维矩阵、决策树、反例、扩展模式详情、**模式选取示例**
+- **组合工程**：CE-T1–T3 完整证明思路、**Builder+Factory、Repository+Service+DTO 完整代码示例**、与 ownership/borrow/trait 衔接
+- **边界体系**：安全/支持/表达三维矩阵、**场景化 Safe 决策 3 例**、**模式选取与边界判定完整流程**、反例
 - **Rust Idioms**：RAII、Newtype、类型状态（Def/Axiom/定理、典型场景、常见陷阱、与 GoF 衔接）
-- **反模式**：13 反例索引、反模式分类、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接、规避策略
+- **反模式**：13 反例索引、反模式分类、**代码示例**（所有权、借用、过度泛型、Clone 满足借用）、**规避策略实质指南**、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接
 
 ---
 
-## 五、学习与选型
+## 六、学习与选型
 
 | 阶段 | 内容 |
 | :--- | :--- |
@@ -104,7 +118,7 @@
 
 ---
 
-## 六、文档快速导航
+## 七、文档快速导航
 
 | 需求 | 入口文档 |
 | :--- | :--- |
@@ -118,7 +132,7 @@
 
 ---
 
-## 七、扩展阅读
+## 八、扩展阅读
 
 - [Refactoring.Guru](https://refactoring.guru/design-patterns)：各模式结构图
 - [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/)：Rust 惯用模式
@@ -126,12 +140,12 @@
 
 ---
 
-## 八、推进阶段
+## 九、推进阶段
 
 | 阶段 | 内容 | 状态 |
 | :--- | :--- | :--- |
 | 第一阶段 | 框架与边界 | 100% 完成 |
 | 第二阶段 | 设计模式形式化 | 100% 完成（23 模式） |
-| 第三阶段 | 工作流与执行模型 | 100% 完成（23/43、五执行模型） |
+| 第三阶段 | 工作流与执行模型 | 100% 完成（23/43、五执行模型）；**2026-02 增强**：常见陷阱、形式化衔接、模式选取完整示例 |
 | 第四阶段 | 组合工程与证明 | 100% 完成（CE-T1–T3） |
-| 第五阶段 | Rust Idioms 与反模式 | 100% 完成（06、07） |
+| 第五阶段 | Rust Idioms 与反模式 | 100% 完成（06、07）；**2026-02 增强**：完整代码示例、规避示例 |

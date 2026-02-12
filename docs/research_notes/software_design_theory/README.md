@@ -3,8 +3,18 @@
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: 100% 完成
+> **状态**: 100% 完成；**层次推进增强**（2026-02-12）
 > **目标**: 面向 Rust 语言机制的软件设计形式分析、边界论证与组合工程有效性
+
+---
+
+## 层次推进（阅读顺序）
+
+| 层次 | 内容 | 入口 |
+| :--- | :--- | :--- |
+| **L1 入门** | 设计模式形式化（Factory Method、Strategy、Adapter）、Rust Idioms（RAII、Newtype） | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](06_rust_idioms.md) |
+| **L2 进阶** | 23 安全/43 完全、语义边界图、三维边界矩阵 | [02_workflow_safe_complete_models](02_workflow_safe_complete_models/README.md)、[05_boundary_system](05_boundary_system/README.md) |
+| **L3 深入** | 执行模型、组合工程、扩展模式代码、反模式与规避 | [03_execution_models](03_execution_models/README.md)、[04_compositional_engineering](04_compositional_engineering/README.md)、[07_anti_patterns](07_anti_patterns.md) |
 
 ---
 
@@ -92,15 +102,26 @@
 
 ## 完成度总览
 
-| 模块 | 状态 |
-| :--- | :--- |
-| 01_design_patterns_formal（23 模式） | 100% |
-| 02_workflow_safe_complete_models（23/43） | 100% |
-| 03_execution_models（五模型） | 100% |
-| 04_compositional_engineering（CE-T1–T3） | 100% |
-| 05_boundary_system（三维矩阵） | 100% |
-| 06_rust_idioms（RAII、Newtype、类型状态） | 100% |
-| 07_anti_patterns（反模式） | 100% |
+| 模块 | 状态 | 2026-02 增强 |
+| :--- | :--- | :--- |
+| 01_design_patterns_formal（23 模式） | 100% | Interpreter 过滤表达式完整示例 |
+| 02_workflow_safe_complete_models（23/43） | 100% | 场景→模式→代码完整链条（Web API、可撤销编辑器） |
+| 03_execution_models（五模型） | 100% | 典型场景、与设计模式组合、常见陷阱 |
+| 04_compositional_engineering（CE-T1–T3） | 100% | Builder+Factory、Repository+Service+DTO 完整代码示例 |
+| 05_boundary_system（三维矩阵） | 100% | 场景化决策示例、模式选取与边界判定完整流程 |
+| 06_rust_idioms（RAII、Newtype、类型状态） | 100% | 完整代码示例 |
+| 07_anti_patterns（反模式） | 100% | 完整规避示例（场景→反模式→正确写法） |
+
+---
+
+## 实质内容索引（层次推进）
+
+| 层次 | 入口 | 实质内容 |
+| :--- | :--- | :--- |
+| **L1 入门** | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](06_rust_idioms.md) | 每模式 Def/定理/代码/典型场景/反例；RAII/Newtype/类型状态完整示例 |
+| **L2 选型** | [02_workflow 03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md)、[05_boundary_system](05_boundary_system/README.md) | 5 个模式选取完整示例；三维边界决策树；场景化 Safe 决策 3 例 |
+| **L3 组合** | [04_compositional_engineering](04_compositional_engineering/README.md)、[02_workflow README](02_workflow_safe_complete_models/README.md) | Builder+Factory、Repository+Service+DTO 完整代码；Web API/可撤销编辑器链条 |
+| **L4 实践** | [07_anti_patterns](07_anti_patterns.md)、[01_safe_23 常见陷阱](02_workflow_safe_complete_models/01_safe_23_catalog.md) | 13 反例索引；5 个场景→反模式→正确写法；23 模式陷阱与规避 |
 
 ---
 

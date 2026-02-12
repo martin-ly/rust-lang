@@ -34,8 +34,12 @@
 - **STATISTICS**：最后更新 2026-02-12；形式化定义统计增加软件设计理论 69+；最近更新记录类型理论阶段 1–7、设计模式推论；PROOF_INDEX 87+ 加入相关资源
 - **formal_methods 完备性缺口**：新增 [00_completeness_gaps](formal_methods/00_completeness_gaps.md)；✅ **Phase 1–6 全部补全 100%**；ownership_model 新增 DROP/DEREF/REPR/CONST_MUT_STATIC；borrow_checker_proof 新增 EXTERN/CVARIADIC/QUERY；async_state_machine 新增 SPAWN；PROOF_INDEX 105+ 证明；ARGUMENTATION_GAP_INDEX 标 formal_methods 为 100% 完成
 - **全局 100% 推进**：formal_methods README 状态改为 100%；RESEARCH_ROADMAP 新增 2.5 形式化方法完备性缺口、17/17 项完成；INDEX、QUICK_FIND、QUICK_REFERENCE 更新 formal_methods Phase 1–6 完成状态
+- **software_design_theory 层次推进增强**：02_workflow 01_safe_23 添加常见陷阱、形式化 Def 衔接；02_complete_43 扩展形式化对应至全部 20 项、典型场景；03_semantic_boundary_map 添加模式选取完整示例（场景→模式→代码）；04_expressiveness_boundary 补全 20 项表达边界；03_execution_models 同步/并发/并行/分布式添加典型场景、与设计模式组合、常见陷阱；06_rust_idioms、07_anti_patterns 添加完整代码示例与规避示例
 - **software_design_theory 层次推进扩展**：新增 [06_rust_idioms](software_design_theory/06_rust_idioms.md)（RAII、Newtype、类型状态、与 GoF 衔接）、[07_anti_patterns](software_design_theory/07_anti_patterns.md)（13 反例、反模式分类）；丰富 02_workflow、03_execution_models、04_compositional_engineering README；02_complete_43_catalog 扩展模式形式化对应；00_MASTER_INDEX 第五阶段；PROOF_INDEX、INDEX、QUICK_FIND 收录 06/07；06/07 状态标为 100% 完成
 - **type_theory README**：状态由「持续完善」改为「核心缺口已补全；全部缺口 Def 占位」；定理 TT-T2 更新为「缺口 Def 占位」；research_notes README 目录结构增加 formal_methods/00_completeness_gaps.md
+- **software_design_theory 层次推进丰富**：safe_unsafe_matrix 新增场景化决策 3 例（全局配置、Observer、FFI Gateway）；04_compositional_engineering 新增 Builder+Factory、Repository+Service+DTO 完整代码；02_workflow README 新增场景→模式→代码完整链条（Web API、可撤销编辑器）；05_boundary_system README 新增模式选取与边界判定完整流程；interpreter 新增过滤表达式完整示例；README 新增实质内容索引
+- **software_design_theory 层次推进**：02_complete_43_catalog 补全 10 扩展模式 Rust 代码（Table Data Gateway、Active Record、Gateway、MVC、Front Controller、Remote Facade、Lazy Load、Plugin、Optimistic Offline Lock）；04_expressiveness_boundary 增加等价/近似表达完整代码示例；01_safe_23_catalog 增加典型场景与快速示例表；02_workflow README 增加层次推进阅读路径；04_compositional_engineering 增加设计模式组合示例
+- **software_design_theory 层次推进**：06_rust_idioms 扩展 Error handling、Option/Result、Cow、智能指针选型；07_anti_patterns 增加代码示例（所有权、借用、过度泛型、Clone 满足借用）、规避策略实质指南；02_complete_43 增加 Domain Model、Unit of Work、Data Mapper、Value Object、Registry、Identity Map 代码示例；00_MASTER_INDEX 增加层次推进学习路径；05_boundary_system 增加模式选取决策依据；README 增加 层次推进 L1–L3
 
 ---
 

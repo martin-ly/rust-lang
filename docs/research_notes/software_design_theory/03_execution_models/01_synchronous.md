@@ -96,13 +96,32 @@ main()
 
 ---
 
-## 典型场景
+## 典型场景（实质内容）
 
-| 场景 | 说明 |
+| 场景 | 说明 | 代码示例 |
+| :--- | :--- | :--- |
+| 批处理 | 顺序处理、无 I/O 等待 | `for item in items { process(item)?; }` |
+| 脚本 | 一次性任务 | `fn main() { run_pipeline()?; }` |
+| 算法核心 | 纯计算、无并发 | 排序、搜索、图算法 |
+| 配置解析 | 启动时加载 | `let config = Config::load("config.toml")?;` |
+| 单请求处理 | 简单 CLI/工具 | `let result = compute(input); println!("{}", result);` |
+
+### 与设计模式组合
+
+| 组合 | 说明 |
 | :--- | :--- |
-| 批处理 | 顺序处理、无 I/O 等待 |
-| 脚本 | 一次性任务 |
-| 算法核心 | 纯计算、无并发 |
+| 同步 + Factory Method | 运行时决定产品类型；`let product = factory.create();` |
+| 同步 + Strategy | 可替换算法；`ctx.execute(&data)` |
+| 同步 + Template Method | 算法骨架；`algorithm.run()` |
+| 同步 + State | 状态机；`state.handle(&mut ctx)` |
+
+### 常见陷阱
+
+| 陷阱 | 后果 | 规避 |
+| :--- | :--- | :--- |
+| 同步中阻塞 I/O | 整个流程卡住 | 需 I/O 并发时用 async 或 spawn |
+| 长计算无 yield | 单线程无响应 | 分批处理、或改为并行 |
+| 递归过深 | 栈溢出 | 改为迭代、或 `Box` 堆分配 |
 
 ---
 

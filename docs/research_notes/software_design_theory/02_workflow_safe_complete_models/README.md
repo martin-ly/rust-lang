@@ -60,6 +60,17 @@
 
 ---
 
+## 层次推进阅读路径
+
+| 层次 | 读者 | 阅读顺序 | 产出 |
+| :--- | :--- | :--- | :--- |
+| **L1 基础** | 初学者 | 01_safe_23_catalog → 按分类索引 + 典型场景 | 熟悉 23 安全、快速示例 |
+| **L2 选型** | 实践者 | 03_semantic_boundary_map → 模式选取示例 + 按需求反向查 | 能按需求选模式 |
+| **L3 扩展** | 架构师 | 02_complete_43_catalog → 扩展模式代码 + 选型决策树 | 企业/分布式模式实现 |
+| **L4 论证** | 理论关注 | 04_expressiveness_boundary → 等价/近似代码示例 | 理解 Rust 与 OOP 差异 |
+
+---
+
 ## 23 vs 43 选型指南（实质内容）
 
 | 场景 | 推荐 | 理由 |
@@ -71,6 +82,48 @@
 | 需外部系统集成 | 43 完全 → Gateway | 需 FFI 时可能 unsafe |
 
 **扩展模式深入**：20 种扩展模式均有 Rust 实现、核心意图、与 23 安全的关系；见 [02_complete_43_catalog](02_complete_43_catalog.md) 扩展模式选型决策树。
+
+---
+
+## 场景→模式→代码完整链条（实质内容）
+
+### 链条 1：Web API 分层
+
+**场景**：REST API 处理订单请求；需校验、持久化、返回 DTO。
+
+**模式选取**：Service Layer（编排）+ Repository（持久化）+ DTO（跨边界）+ Domain Model（业务规则）。
+
+**代码骨架**：
+
+```rust
+// 请求 DTO
+struct PlaceOrderRequest { items: Vec<ItemDto> }
+// 响应 DTO
+struct OrderResponse { id: u64 }
+// Domain Model
+struct Order { id: u64, items: Vec<OrderItem> }
+impl Order {
+    fn from_req(req: &PlaceOrderRequest) -> Result<Self, String> { /* 校验 */ }
+}
+// Repository
+trait OrderRepo { fn save(&mut self, o: Order) -> Result<u64, String>; }
+// Service
+impl OrderService {
+    fn place_order(&mut self, req: PlaceOrderRequest) -> Result<OrderResponse, String> {
+        let order = Order::from_req(&req)?;
+        let id = self.repo.save(order)?;
+        Ok(OrderResponse { id })
+    }
+}
+```
+
+### 链条 2：可撤销编辑器
+
+**场景**：文本编辑器支持 undo/redo。
+
+**模式选取**：Command（封装操作）+ Memento（快照，可选）+ State（编辑状态）。
+
+**代码骨架**：见 [03_semantic_boundary_map](03_semantic_boundary_map.md) 示例 3。
 
 ---
 

@@ -181,6 +181,60 @@
 
 ---
 
+## 场景化决策完整示例（实质内容）
+
+### 示例 1：需全局配置的单例
+
+**场景**：应用启动时加载配置，全局只读访问。
+
+**决策**：需 Safe → 用 `OnceLock`；无需 unsafe。
+
+```rust
+use std::sync::OnceLock;
+
+struct Config { db_url: String, port: u16 }
+static CONFIG: OnceLock<Config> = OnceLock::new();
+
+fn config() -> &'static Config {
+    CONFIG.get_or_init(|| Config { db_url: "localhost".into(), port: 5432 })
+}
+// 安全：OnceLock 线程安全；无 static mut
+```
+
+### 示例 2：需共享可变状态的 Observer
+
+**场景**：多订阅者接收事件；发布者与订阅者可能跨线程。
+
+**决策**：共享可变 → 用 channel 或 `Arc<Mutex<Vec<Callback>>>`；channel 为纯 Safe，无共享可变。
+
+```rust
+use std::sync::mpsc;
+let (tx, rx) = mpsc::channel::<Event>();
+// 发布者：tx.send(e)
+// 订阅者：rx.recv() 或 for e in rx
+// 安全：消息传递无共享；Send 约束保证
+```
+
+### 示例 3：需 FFI 的 Gateway
+
+**场景**：调用 C 库支付接口。
+
+**决策**：需 FFI → 局部 unsafe；封装为 Safe trait。
+
+```rust
+pub trait PaymentGateway { fn charge(&self, amount: u64) -> Result<(), String>; }
+
+struct FFIPaymentGateway { /* 持有 *mut c_void 等 */ }
+impl PaymentGateway for FFIPaymentGateway {
+    fn charge(&self, amount: u64) -> Result<(), String> {
+        unsafe { /* 调用 C 库；满足 FFI 契约 */ }
+    }
+}
+// 调用方：仅用 trait，无 unsafe；SafeB(Gateway) = Unsafe 但对外 Safe
+```
+
+---
+
 ## 引用
 
 - [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)

@@ -25,6 +25,70 @@
 
 ---
 
+## 组合完整代码示例（层次推进）
+
+### 示例 1：Builder + Factory Method
+
+```rust
+trait Product { fn name(&self) -> &str; }
+
+struct Config { host: String, port: u16 }
+struct ConfigBuilder { host: Option<String>, port: Option<u16> }
+impl ConfigBuilder {
+    fn new() -> Self { Self { host: None, port: None } }
+    fn host(mut self, h: &str) -> Self { self.host = Some(h.into()); self }
+    fn port(mut self, p: u16) -> Self { self.port = Some(p); self }
+    fn build(self) -> Result<Config, String> {
+        Ok(Config {
+            host: self.host.ok_or("host required")?,
+            port: self.port.unwrap_or(8080),
+        })
+    }
+}
+
+trait ConfigFactory {
+    fn create(&self) -> Result<Config, String>;
+}
+struct DefaultFactory;
+impl ConfigFactory for DefaultFactory {
+    fn create(&self) -> Result<Config, String> {
+        ConfigBuilder::new().host("localhost").port(8080).build()
+    }
+}
+// 工厂返回 Builder 链；所有权与 CE-T1 一致
+```
+
+### 示例 2：Repository + Service Layer + DTO（完整链条）
+
+```rust
+// DTO：跨边界
+#[derive(Clone, serde::Serialize, serde::Deserialize)]
+pub struct OrderDto { pub id: u64, pub amount: u64 }
+
+// Domain Model
+pub struct Order { id: u64, amount: u64 }
+impl From<OrderDto> for Order { fn from(d: OrderDto) -> Self { Self { id: d.id, amount: d.amount } } }
+
+// Repository
+trait OrderRepository {
+    fn save(&mut self, o: &Order) -> Result<(), String>;
+    fn find(&self, id: u64) -> Option<Order>;
+}
+
+// Service Layer：编排
+pub struct OrderService<R: OrderRepository> { repo: R }
+impl<R: OrderRepository> OrderService<R> {
+    pub fn place_order(&mut self, dto: OrderDto) -> Result<u64, String> {
+        let order = Order::from(dto);
+        self.repo.save(&order)?;
+        Ok(order.id)
+    }
+}
+// 模块依赖：Service 依赖 Repository；所有权沿调用链传递；CE-T1/T2/T3
+```
+
+---
+
 ## 文档索引
 
 | 文档 | 内容 |

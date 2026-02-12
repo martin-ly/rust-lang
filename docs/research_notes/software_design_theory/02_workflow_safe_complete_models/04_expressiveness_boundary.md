@@ -20,7 +20,9 @@
   - [不可表达或极难表达](#不可表达或极难表达)
   - [扩展模式（43 完全之 20）表达边界](#扩展模式43-完全之-20表达边界)
   - [等价表达示例（代码级）](#等价表达示例代码级)
+    - [等价表达完整代码示例](#等价表达完整代码示例)
   - [近似表达示例（代码级）](#近似表达示例代码级)
+    - [近似表达完整代码示例](#近似表达完整代码示例)
   - [选择建议](#选择建议)
   - [不可表达边界的替代策略](#不可表达边界的替代策略)
   - [表达边界与性能](#表达边界与性能)
@@ -98,16 +100,28 @@
 
 | 模式 | 表达 | 说明 |
 | :--- | :--- | :--- |
-| Domain Model | 等价 | 结构体 + 方法 |
-| Service Layer | 等价 | 模块 |
-| Repository | 等价 | trait |
-| Unit of Work | 等价 | 结构体收集变更 |
-| Data Mapper | 等价 | 转换函数/结构体 |
-| Gateway | 等价 | trait + 实现 |
-| MVC | 等价 | 模块分层 |
-| DTO | 等价 | 结构体 |
-| Value Object | 等价 | 结构体 + Eq |
-| Event Sourcing | 等价 | Vec 事件日志 |
+| Domain Model | 等价 | 结构体 + 方法；无贫血模型 |
+| Service Layer | 等价 | 模块、`pub fn` 编排 |
+| Repository | 等价 | trait + impl |
+| Unit of Work | 等价 | 结构体收集变更、`commit()` |
+| Data Mapper | 等价 | `From`/`Into`、serde |
+| Table Data Gateway | 等价 | 表级 API、async |
+| Active Record | 等价 | 对象持 Connection |
+| Gateway | 等价 | trait + 实现；FFI 时近似 |
+| MVC | 等价 | 模块分层、model/view/controller |
+| Front Controller | 等价 | Router、match 路径 |
+| DTO | 等价 | 结构体 + serde；无行为 |
+| Remote Facade | 等价 | 批量接口、gRPC |
+| Value Object | 等价 | 结构体 + Eq、Clone |
+| Registry | 等价 | OnceLock、HashMap |
+| Identity Map | 等价 | HashMap<Id, Arc<T>> |
+| Lazy Load | 等价 | OnceLock、Option |
+| Plugin | 等价 | trait + Box<dyn Trait> |
+| Optimistic Offline Lock | 等价 | version + CAS |
+| Specification | 等价 | trait Spec + and/or |
+| Event Sourcing | 等价 | Vec<Event> + fold |
+
+**论证**：扩展 20 绝大部分与 Fowler EAA 语义等价；Rust 的 trait、枚举、所有权可自然表达；Gateway 在 FFI 场景为近似（需 unsafe 封装）。
 
 ---
 
@@ -121,6 +135,56 @@
 | Factory Method | 虚工厂方法 | `fn create(&self) -> T` in trait |
 | Bridge | 抽象类 + 实现类 | `struct A<R: Impl> { impl: R }` |
 
+### 等价表达完整代码示例
+
+**Strategy 模式**：
+
+```rust
+trait SortStrategy {
+    fn sort(&self, data: &mut [i32]);
+}
+struct QuickSort;
+impl SortStrategy for QuickSort {
+    fn sort(&self, data: &mut [i32]) { data.sort_unstable(); }
+}
+struct Context<S: SortStrategy> { strategy: S }
+impl<S: SortStrategy> Context<S> {
+    fn execute(&self, data: &mut [i32]) { self.strategy.sort(data); }
+}
+// 与 GoF：Context 持有 Strategy 接口；Rust 用 trait 等价
+```
+
+**Factory Method 模式**：
+
+```rust
+trait Product { fn name(&self) -> &str; }
+impl Product for String { fn name(&self) -> &str { self } }
+
+trait Creator {
+    fn create(&self) -> Box<dyn Product>;
+}
+struct StringCreator;
+impl Creator for StringCreator {
+    fn create(&self) -> Box<dyn Product> { Box::new("default".to_string()) }
+}
+// 虚工厂方法：create 在 trait 中；子类 impl 对应 Rust 的 impl
+```
+
+**Bridge 模式**：
+
+```rust
+trait Renderer { fn render(&self, s: &str) -> String; }
+struct HtmlRenderer;
+impl Renderer for HtmlRenderer {
+    fn render(&self, s: &str) -> String { format!("<p>{}</p>", s) }
+}
+struct Page<R: Renderer> { renderer: R, content: String }
+impl<R: Renderer> Page<R> {
+    fn display(&self) -> String { self.renderer.render(&self.content) }
+}
+// 抽象与实现解耦；R 可替换，无继承
+```
+
 ---
 
 ## 近似表达示例（代码级）
@@ -131,6 +195,58 @@
 | Observer | Subject/Observer 继承 | `mpsc::channel` | 消息传递替代回调注册 |
 | Visitor | 双重分发 | `match e { ... }` + `Visitor` trait | 单分发 + 穷尽匹配 |
 | Memento | 私有封装快照 | `Clone` / serde | 无私有，需类型可序列化 |
+
+### 近似表达完整代码示例
+
+**Singleton 近似**：
+
+```rust
+use std::sync::OnceLock;
+static INSTANCE: OnceLock<Config> = OnceLock::new();
+
+fn config() -> &'static Config {
+    INSTANCE.get_or_init(|| Config::default())
+}
+// 差异：无全局可变；显式 get_or_init；线程安全由 OnceLock 保证
+```
+
+**Observer 近似（channel 替代）**：
+
+```rust
+use std::sync::mpsc;
+let (tx, rx) = mpsc::channel();
+// 发布者：tx.send(event)
+// 订阅者：rx.recv() 或 for msg in rx
+// 差异：消息传递而非回调注册；一对多需 broadcast channel
+```
+
+**Visitor 近似（match 穷尽）**：
+
+```rust
+enum Expr { Lit(i32), Add(Box<Expr>, Box<Expr>) }
+
+fn interpret(e: &Expr) -> i32 {
+    match e {
+        Expr::Lit(n) => *n,
+        Expr::Add(a, b) => interpret(a) + interpret(b),
+    }
+}
+// 差异：单分发 match 替代 OOP 双重分发；穷尽匹配保证覆盖
+```
+
+**Memento 近似（Clone）**：
+
+```rust
+#[derive(Clone, serde::Serialize, serde::Deserialize)]
+struct State { data: String }
+
+struct Originator { state: State }
+impl Originator {
+    fn save(&self) -> State { self.state.clone() }
+    fn restore(&mut self, m: State) { self.state = m; }
+}
+// 差异：无私有封装；State 可被任意修改；需类型 impl Clone/Serialize
+```
 
 ---
 

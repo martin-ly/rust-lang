@@ -105,6 +105,50 @@ fn main() {
 
 ---
 
+## 设计模式组合示例
+
+**Repository + Factory Method**：
+
+```rust
+trait Repository<T> { fn find(&self, id: u64) -> Option<T>; fn save(&mut self, t: T); }
+trait Product { fn id(&self) -> u64; }
+trait ProductFactory { fn create(&self) -> Box<dyn Product>; }
+
+struct Order { id: u64 }
+impl Order {
+    fn from_product(p: Box<dyn Product>) -> Self { Self { id: p.id() } }
+}
+
+struct OrderService<R: Repository<Order>, F: ProductFactory> {
+    repo: R,
+    factory: F,
+}
+impl<R: Repository<Order>, F: ProductFactory> OrderService<R, F> {
+    fn place_order(&mut self) -> Result<(), String> {
+        let product = self.factory.create();
+        let order = Order::from_product(product);
+        self.repo.save(order);
+        Ok(())
+    }
+}
+// 组合满足 CE-T1：各组件 Safe 则组合 Safe
+```
+
+**Decorator 链组合**：
+
+```rust
+trait Service { fn call(&self) -> i32; }
+struct Core;
+impl Service for Core { fn call(&self) -> i32 { 42 } }
+struct Logging<S: Service>(S);
+impl<S: Service> Service for Logging<S> {
+    fn call(&self) -> i32 { println!("call"); self.0.call() }
+}
+// Logging(Core) 或 Logging(Logging(Core))；组合无环
+```
+
+---
+
 ## Crate 组合
 
 ```rust
