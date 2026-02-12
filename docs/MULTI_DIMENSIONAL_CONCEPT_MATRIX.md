@@ -34,6 +34,13 @@
     - [1. 数据结构性能矩阵](#1-数据结构性能矩阵)
     - [2. 算法性能矩阵](#2-算法性能矩阵)
     - [3. 并发原语性能矩阵](#3-并发原语性能矩阵)
+  - [⚠️ Rust 1.93 行为变更影响（性能矩阵补充）](#️-rust-193-行为变更影响性能矩阵补充)
+  - [📐 形式化理论概念对比矩阵](#-形式化理论概念对比矩阵)
+    - [表达能力边界矩阵（新增）](#表达能力边界矩阵新增)
+    - [型变概念对比矩阵](#型变概念对比矩阵)
+    - [证明方法决策矩阵](#证明方法决策矩阵)
+    - [设计机制论证矩阵（新增）](#设计机制论证矩阵新增)
+    - [公理-定理依赖矩阵](#公理-定理依赖矩阵)
   - [🛡️ 安全性对比矩阵](#️-安全性对比矩阵)
   - [📚 相关文档](#-相关文档)
 
@@ -262,6 +269,77 @@
 
 ---
 
+## 📐 形式化理论概念对比矩阵
+
+> 用于梳理概念定义、公理、定理、证明方法与反例的对应关系。详见 [FORMAL_PROOF_SYSTEM_GUIDE](research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)。
+
+### 表达能力边界矩阵（新增）
+
+> 用于论证「何者可表达、何者不可表达、边界在哪里」。详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
+
+| 维度 | 可表达 | 边界 | 不可表达 | 论证依据 |
+|------|--------|------|----------|----------|
+| **内存** | 所有权、借用、RAII | 无 GC、无手动 malloc/free | 跨线程共享无同步 | ownership_model T2, T3 |
+| **类型** | 泛型、Trait、类型推断 | 无运行时类型反射 | 完整依赖类型 | type_system_foundations, advanced_types |
+| **并发** | Send/Sync、async、线程 | 数据竞争自由 | 无 GC 的共享可变 | async_state_machine T6.2, borrow_checker_proof T1 |
+| **异步** | Future、Pin、async/await | 有限 Future 终将 Ready | 无限延迟未标记 | async_state_machine T6.3 |
+| **引用** | 生命周期、NLL | 引用不超被引用对象 | 无界引用 | lifetime_formalization T2 |
+| **别名** | 独占可变、多只读 | 可变借用独占 | 共享可变（安全子集） | borrow_checker_proof 规则 5–8 |
+| **多态** | 静态分发、dyn | 编译时单态化 | 运行时类型擦除 | trait_system_formalization |
+| **型变** | 协变、逆变、不变 | 违反则悬垂 | 任意型变 | variance_theory T1–T4 |
+
+### 型变概念对比矩阵
+
+| 概念 | 形式化定义 | 子类型方向 | 典型类型 | 定理 | 反例（若违反） |
+|------|------------|------------|----------|------|----------------|
+| **协变** | $S <: T \Rightarrow F[S] <: F[T]$ | 同向 | `&'a T`, `Box<T>`, `Vec<T>` | T1 协变安全性 | - |
+| **逆变** | $S <: T \Rightarrow F[T] <: F[S]$ | 反向 | `fn(T) -> R` 参数 | T2 逆变安全性 | 参数协变→悬垂 |
+| **不变** | $S \neq T \Rightarrow F[S] \not<: F[T]$ | 无 | `&mut T`, `Cell<T>` | T3 不变安全性 | 协变→悬垂引用 |
+
+### 证明方法决策矩阵
+
+| 证明目标 | 推荐方法 | 适用场景 | 典型文档 |
+|----------|----------|----------|----------|
+| 唯一性 | 结构归纳 | 归纳于状态转换 | ownership_model |
+| 安全性 | 反证法 | 假设违反导出矛盾 | 内存安全、型变 |
+| 正确性 | 规则归纳 | 归纳于推导规则 | type_system, borrow_checker |
+| 算法正确性 | 双向证明 | 充分性+必要性 | 类型推导 |
+
+### 设计机制论证矩阵（新增）
+
+> 用于梳理「为何如此设计」的理由与完整论证。详见 [DESIGN_MECHANISM_RATIONALE](research_notes/DESIGN_MECHANISM_RATIONALE.md)。
+
+| 机制 | 动机 | 设计决策 | 形式化文档 | 决策树/反例 |
+|------|------|----------|------------|-------------|
+| **Pin 堆/栈区分** | 自引用移动→悬垂 | 栈仅 Unpin、堆可任意类型 | pin_self_referential | 决策树、反例 |
+| 所有权 | 无 GC 内存安全 | 默认移动、显式 Copy | ownership_model | 决策树、反例 |
+| 借用 | 数据竞争自由 | 可变独占、不可变可多 | borrow_checker_proof | 决策树、反例 |
+| 生命周期 | 引用有效性 | NLL + 显式标注 | lifetime_formalization | 反例 |
+| 型变 | 子类型在泛型中的传递 | 协变/逆变/不变 | variance_theory | 反例 |
+| 异步 Future | 自引用 Future | poll 用 Pin、堆固定 | async_state_machine, pin | 决策树、反例 |
+| Send/Sync | 跨线程安全 | Send=可转移、Sync=可共享 | async_state_machine | 反例 |
+| Trait 对象 | 运行时多态 | vtable、对象安全 | trait_system_formalization | 反例 |
+
+### 公理-定理依赖矩阵
+
+| 定理 | 依赖公理/规则 | 证明方法 | 文档 |
+|------|---------------|----------|------|
+| 所有权唯一性 | 规则 1, 2 | 结构归纳 | ownership_model |
+| 内存安全框架 | 定理 2, 规则 3 | 反证 | ownership_model |
+| 数据竞争自由 | 规则 1, 2 | 三步证明 | borrow_checker_proof |
+| 引用有效性 | 定理 3, 借用检查器 | 三步骤 | lifetime_formalization |
+| 状态一致性 | 定义 4.1–4.3 | 归纳+案例 | async_state_machine |
+| 并发安全 | Send/Sync, 定义 5.1–5.2 | 类型系统+组合 | async_state_machine |
+| Pin 保证 | 定义 1.1–1.3 | 类型系统 | pin_self_referential |
+| 协变安全性 | Def 1.1, 子类型语义 | 直接推导 | variance_theory |
+| 类型安全 | 进展性, 保持性 | 组合 | type_system_foundations |
+| Trait 对象类型安全 | vtable, 存在类型 | 类型系统 | trait_system_formalization |
+| 解析正确性 | Resolve 算法 | 完备性+一致性 | trait_system_formalization |
+| GAT 类型安全 | GAT 约束 | 类型推导 | advanced_types |
+| const 泛型安全 | 编译时常量 | 编译时检查 | advanced_types |
+
+---
+
 ## 🛡️ 安全性对比矩阵
 
 | 机制           | 内存安全   | 类型安全   | 线程安全   | 适用场景 | 推荐度     |
@@ -276,6 +354,10 @@
 
 ## 📚 相关文档
 
+- [全局统一系统化框架](./research_notes/UNIFIED_SYSTEMATIC_FRAMEWORK.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
+- [构造性语义与表达能力边界](./research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 操作/指称/公理语义、表达能力边界论证
+- [全面系统化梳理总览](./research_notes/COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪
+- [形式化论证系统梳理指南](./research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、概念-公理-定理映射
 - [知识结构框架](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 完整知识结构体系
 - [决策图网](./DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
 - [证明图网](./PROOF_GRAPH_NETWORK.md) - 形式化证明结构

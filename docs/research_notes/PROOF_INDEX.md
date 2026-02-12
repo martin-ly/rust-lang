@@ -11,6 +11,7 @@
 
 - [📚 形式化证明文档索引](#-形式化证明文档索引)
   - [📊 目录](#-目录)
+  - [🔢 公理编号规范 (Axiom Numbering Convention)](#-公理编号规范-axiom-numbering-convention)
   - [🎯 索引说明](#-索引说明)
   - [📚 按研究领域分类](#-按研究领域分类)
     - [所有权与借用](#所有权与借用)
@@ -58,6 +59,8 @@
 **引用格式**: 在证明树中可写 `A1 → L1 → T1 → C1` 表示公理→引理→定理→推论链。
 
 **对应文档**: [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) 第 4 节证明树、[PROOF_GRAPH_NETWORK](../PROOF_GRAPH_NETWORK.md)。
+
+**顶层框架**: [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) —— 本索引的证明归属理论体系第 3 层（性质定理层）。
 
 ---
 
@@ -267,10 +270,10 @@
 
 **已完成的证明**:
 
-1. **定理 1 (协变安全性)** ✅ — 方法：型变规则；[证明位置](./type_theory/variance_theory.md)
-2. **定理 2 (逆变安全性)** ✅ — 方法：型变规则；[证明位置](./type_theory/variance_theory.md)
-3. **定理 3 (不变安全性)** ✅ — 方法：型变规则；[证明位置](./type_theory/variance_theory.md)
-4. **定理 4 (函数类型型变)** ✅ — 方法：型变规则；[证明位置](./type_theory/variance_theory.md)
+1. **定理 1 (协变安全性)** ✅ — 方法：直接推导；完整证明+反例+证明树；[证明位置](./type_theory/variance_theory.md#1-协变-covariance)
+2. **定理 2 (逆变安全性)** ✅ — 方法：直接推导；完整证明；[证明位置](./type_theory/variance_theory.md#2-逆变-contravariance)
+3. **定理 3 (不变安全性)** ✅ — 方法：直接推导；完整证明；[证明位置](./type_theory/variance_theory.md#3-不变-invariance)
+4. **定理 4 (函数类型型变)** ✅ — 方法：案例分析；完整证明（参数逆变、返回值协变）；[证明位置](./type_theory/variance_theory.md#4-型变规则)
 
 #### 高级类型特性
 
@@ -281,6 +284,16 @@
 1. **定理 1 (GAT 类型安全)** ✅ — 方法：基于 GAT 类型规则；[证明位置](./type_theory/advanced_types.md)
 2. **定理 2 (const 泛型类型安全)** ✅ — 方法：基于 const 泛型规则；[证明位置](./type_theory/advanced_types.md)
 3. **定理 3 (受限依赖类型安全)** ✅ — 方法：基于依赖类型约束；[证明位置](./type_theory/advanced_types.md)
+
+#### 软件设计理论
+
+**文档**: [02_effectiveness_proofs.md](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md)
+
+**已完成的证明**:
+
+1. **定理 CE-T1 (组合保持内存安全)** ✅ — 方法：由 ownership_model T2、T3 归纳；证明思路；[证明位置](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md#定理-陈述)
+2. **定理 CE-T2 (组合保持数据竞争自由)** ✅ — 方法：由 borrow_checker_proof T1、Send/Sync 语义；证明思路；[证明位置](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md#定理-陈述)
+3. **定理 CE-T3 (组合保持类型安全)** ✅ — 方法：由 type_system_foundations T1–T3；证明思路；[证明位置](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md#定理-陈述)
 
 ---
 
@@ -321,6 +334,7 @@
 - ✅ **状态一致性** ([async_state_machine.md](./formal_methods/async_state_machine.md#定理-61-状态一致性))
 - ✅ **进度保证** ([async_state_machine.md](./formal_methods/async_state_machine.md#定理-63-进度保证))
 - ✅ **Trait 对象类型安全、实现一致性、解析正确性** ([trait_system_formalization.md](./type_theory/trait_system_formalization.md))
+- ✅ **组合保持内存安全、数据竞争自由、类型安全** ([02_effectiveness_proofs.md](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md) CE-T1–T3)
 
 ---
 
@@ -338,28 +352,29 @@
 | Trait 系统       | 3个      | 100%     | ✅ 完成 |
 | 型变理论         | 4个      | 100%     | ✅ 完成 |
 | 高级类型特性     | 3个      | 100%     | ✅ 完成 |
-| **总计**         | **26个** | **100%** | ✅      |
+| 软件设计理论     | 3个      | 100%     | ✅ 完成 |
+| **总计**         | **29个** | **100%** | ✅      |
 
 ### 按证明类型统计
 
 | 证明类型   | 证明数量 | 完成度   | 状态    |
 | ---------- | -------- | -------- | ------- |
 | 唯一性证明 | 1个      | 100%     | ✅ 完成 |
-| 安全性证明 | 14个     | 100%     | ✅ 完成 |
+| 安全性证明 | 17个     | 100%     | ✅ 完成 |
 | 正确性证明 | 11个     | 100%     | ✅ 完成 |
-| **总计**   | **26个** | **100%** | ✅      |
+| **总计**   | **29个** | **100%** | ✅      |
 
 ### 按证明方法统计
 
 | 证明方法                           | 证明数量 | 占比 |
 | ---------------------------------- | -------- | ---- |
-| 结构归纳法                         | 9个      | 35%  |
-| 规则归纳法                         | 3个      | 12%  |
-| 反证法                             | 1个      | 4%   |
-| 双向证明                           | 1个      | 4%   |
-| 三步骤/算法/归纳+案例等            | 5个      | 19%  |
-| 其他（型变规则、类型系统、Pin 等） | 7个      | 27%  |
-| **总计**                           | **26个** | 100% |
+| 结构归纳法                         | 9个      | 31%  |
+| 规则归纳法                         | 3个      | 10%  |
+| 反证法                             | 1个      | 3%   |
+| 双向证明                           | 1个      | 3%   |
+| 三步骤/算法/归纳+案例等            | 5个      | 17%  |
+| 其他（型变规则、类型系统、Pin、组合工程等） | 10个     | 35%  |
+| **总计**                           | **29个** | 100% |
 
 ---
 
@@ -367,6 +382,10 @@
 
 ### 核心文档
 
+- [理论体系与论证体系结构](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 顶层框架，本索引归属第 3 层
+- [全局统一系统化框架](./UNIFIED_SYSTEMATIC_FRAMEWORK.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
+- [构造性语义与表达能力边界](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 操作/指称/公理语义、表达能力边界论证
+- [形式化论证系统梳理指南](./FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、概念-公理-定理映射、反例索引
 - [研究笔记主索引](./README.md)
 - [研究进展跟踪](./PROGRESS_TRACKING.md)
 - [研究任务清单](./TASK_CHECKLIST.md)
@@ -388,6 +407,12 @@
 - [Trait 系统形式化](./type_theory/trait_system_formalization.md)
 - [型变理论](./type_theory/variance_theory.md)
 - [高级类型特性](./type_theory/advanced_types.md)
+
+### 软件设计理论
+
+- [软件设计理论体系](./software_design_theory/README.md)
+- [设计模式形式化](./software_design_theory/01_design_patterns_formal/README.md)
+- [组合软件工程有效性](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md)（定理 CE-T1、CE-T2、CE-T3）
 
 ### 工具资源
 
@@ -413,5 +438,5 @@
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-01-26
-**状态**: ✅ **证明索引 100% 完成**（26 个证明已全部收录）
+**最后更新**: 2026-02-12
+**状态**: ✅ **证明索引 100% 完成**（26 个证明 + CE-T1–T3 已全部收录，形式化论证系统 10/10 模块均已补充反例与证明树）

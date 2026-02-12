@@ -133,6 +133,7 @@
 
 ### 核心文档
 
+- [形式化论证系统梳理指南](../FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、反例索引、公理-定理证明树
 - [形式化工程系统 - 理论基础](../../rust-formal-engineering-system/01_theoretical_foundations/)
 - [所有权与借用文档](../../crates/c01_ownership_borrow_scope/docs/)
 - [异步语义理论](../../crates/c06_async/src/async_semantics_theory.rs)

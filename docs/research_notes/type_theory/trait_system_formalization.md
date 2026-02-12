@@ -32,6 +32,8 @@
     - [3. 泛型 Trait](#3-泛型-trait)
     - [4. Trait 解析算法](#4-trait-解析算法)
     - [5. Trait 对象语义](#5-trait-对象语义)
+  - [⚠️ 反例：违反 Trait 规则](#️-反例违反-trait-规则)
+  - [🌳 公理-定理证明树](#-公理-定理证明树)
     - [证明工作完成总结](#证明工作完成总结)
       - [定理 1: Trait 对象类型安全 ✅](#定理-1-trait-对象类型安全-)
       - [定理 2: Trait 实现一致性 ✅](#定理-2-trait-实现一致性-)
@@ -370,6 +372,8 @@ $$\tau : T \rightarrow \text{SafeCoerce}(\tau, \text{dyn } T)$$
 - 存在类型语义保证类型转换的安全性
 - 虚函数表中的方法指针类型与 Trait 定义匹配
 
+**公理链标注**：定义（vtable、存在类型 $\exists \tau. \tau : T$）→ 定理 1。
+
 **定理 2 (Trait 实现一致性)**:
 如果类型 $\tau$ 实现 Trait $T$，则 $\tau$ 必须实现 $T$ 中的所有方法，且方法签名必须匹配。
 
@@ -382,6 +386,8 @@ $$\tau : T \leftrightarrow \forall m \in T: \text{signature}(\text{impl}_m) = \t
 - 类型检查器确保实现的方法签名与 Trait 定义一致
 - 编译时检查保证运行时安全
 
+**公理链标注**：Trait 定义（方法集合、签名） + 类型检查规则 → 定理 2。
+
 **定理 3 (Trait 解析正确性)**:
 Trait 解析算法是正确、完备和一致的。
 
@@ -393,6 +399,46 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 - 解析算法覆盖所有实现情况
 - 类型检查器验证解析结果的正确性
 - 冲突检测确保唯一性
+
+**公理链标注**：Resolve 算法定义 + 完备性（$\tau : T \rightarrow \text{Resolve}(\tau,T) \neq \text{None}$）+ 一致性（$\text{Resolve}(\tau,T) = \text{Some}(\text{impl}) \rightarrow \tau : T$）→ 定理 3。
+
+---
+
+## ⚠️ 反例：违反 Trait 规则
+
+| 反例 | 违反规则 | 后果 | 说明 |
+|------|----------|------|------|
+| 方法签名不匹配 | 定理 2 实现一致性 | 编译错误 | `impl` 中方法签名与 Trait 定义不一致 |
+| 冲突的 blanket impl | 定理 3 解析唯一性 | 编译错误 | 两个 impl 同时适用同一类型 |
+| 对象安全性违规 | 定理 1 对象安全 | 编译错误 | 包含泛型方法的 Trait 不能做成 `dyn` |
+| 孤儿规则违反 | impl 规则 | 编译错误 | 为外部类型实现外部 Trait |
+| 重复/重叠 impl | 定理 3 | 编译错误 | 两个 impl 重叠覆盖同一类型 |
+
+---
+
+## 🌳 公理-定理证明树
+
+```text
+Trait 系统安全性证明树
+
+  定义: Trait 定义、Trait 对象、泛型 Trait
+  定义: Resolve 解析算法
+  vtable 语义、存在类型语义
+  │
+  ├─ vtable + 存在类型 ──────────────→ 定理 1: Trait 对象类型安全
+  │   （τ:T ⇒ SafeCoerce(τ, dyn T)）
+  │   公理链: Def(vtable, ∃τ.τ:T) → T1
+  │
+  ├─ Trait 定义约束 + 类型检查 ─────→ 定理 2: Trait 实现一致性
+  │   （方法签名匹配）
+  │   公理链: Def(Trait) + 类型检查规则 → T2
+  │
+  └─ 解析算法 + 冲突检测 ──────────→ 定理 3: Trait 解析正确性
+      （完备性 + 一致性）
+      公理链: Resolve + 完备性 + 一致性 → T3
+```
+
+---
 
 ### 证明工作完成总结
 

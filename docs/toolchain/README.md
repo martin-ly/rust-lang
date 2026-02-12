@@ -332,6 +332,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.93 兼容性深度解析](./09_rust_1.93_compatibility_deep_dive.md) 🆕
 - [Rust 1.89→1.93 累积特性总览](./10_rust_1.89_to_1.93_cumulative_features_overview.md) 🆕
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](./11_rust_1.93_cargo_rustdoc_changes.md) 🆕
+- [Rust 1.93 语言特性全面分析（92 项设计论证）](../research_notes/RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 🆕
 
 ### 官方资源
 

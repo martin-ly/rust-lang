@@ -594,6 +594,7 @@ graph TD
 
 ## 📚 相关文档
 
+- [全面系统化梳理总览](./research_notes/COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
 - [决策图网](./DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
 - [证明图网](./PROOF_GRAPH_NETWORK.md) - 形式化证明结构
 - [项目架构指南](./PROJECT_ARCHITECTURE_GUIDE.md) - 整体架构设计

@@ -104,8 +104,13 @@ docs/
 
 **入口**: [research_notes/README.md](./research_notes/README.md)
 
+**顶层框架** 🆕: [理论体系与论证体系结构](./research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) —— 四层理论架构、五层论证结构、安全与非安全全面论证
+
 **包含**:
 
+- **理论体系**：公理层→语义层→定理层→边界层
+- **论证体系**：概念定义→属性关系→解释论证→形式化证明→思维表征
+- **安全与非安全**：[全面论证](./research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)
 - 形式化方法研究（所有权模型、借用检查器、异步状态机等）
 - 类型理论研究（类型系统基础、Trait系统、生命周期等）
 - 实验研究（性能基准、内存分析、编译器优化等）

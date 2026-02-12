@@ -34,7 +34,7 @@
     - [示例 1：基本 Future](#示例-1基本-future)
     - [示例 2：异步函数](#示例-2异步函数)
     - [示例 3：组合 Future](#示例-3组合-future)
-  - [💻 代码示例](#-代码示例-1)
+  - [💻 代码示例1](#-代码示例1)
     - [示例 1：Future 状态机实现](#示例-1future-状态机实现)
     - [示例 2：异步状态转换](#示例-2异步状态转换)
     - [示例 3：并发安全保证](#示例-3并发安全保证)
@@ -52,6 +52,8 @@
     - [与类型系统的集成](#与类型系统的集成)
     - [与生命周期的集成](#与生命周期的集成)
     - [实际应用案例](#实际应用案例)
+  - [⚠️ 反例：违反异步安全规则](#️-反例违反异步安全规则)
+  - [🌳 公理-定理证明树](#-公理-定理证明树)
   - [📖 参考文献](#-参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
@@ -452,7 +454,7 @@ async fn combined_future() -> i32 {
 - 状态 1：等待第二个 `async_function`（`Pending`）
 - 状态 2：计算并返回结果（`Ready(a + b)`）
 
-## 💻 代码示例
+## 💻 代码示例1
 
 ### 示例 1：Future 状态机实现
 
@@ -841,11 +843,21 @@ $$\forall \{F_1, \ldots, F_n\}: (\forall i: \text{Send}(F_i) \land \text{Sync}(F
    - Mutex、Channel 等同步原语保证共享数据安全
    - 锁机制防止并发访问冲突
 
-**证明步骤**：
+**证明步骤**（结构化）：
 
-1. 类型系统保证：Send/Sync 约束由类型系统保证
-2. 运行时保证：同步原语提供运行时保护
-3. 组合性：多个安全 Future 的组合也是安全的
+1. **类型系统保证**： Send/Sync 约束由类型检查保证，违反则编译失败
+   - $\neg(\text{Send}(F) \land \text{Sync}(F)) \rightarrow \text{Reject}(F)$
+
+2. **运行时保证**： 满足 Send/Sync 的 Future 满足：
+   - Send：$\text{Send}(F) \rightarrow \forall t_1, t_2: \text{SafeTransfer}(\text{State}(F), t_1, t_2)$
+   - Sync：$\text{Sync}(F) \rightarrow \forall t: \text{SafeShare}(\& \text{State}(F), t)$
+
+3. **组合性**： 设 $F_1, \ldots, F_n$ 均满足 Send/Sync，则 $\text{ConcurrentExec}[\{F_1,\ldots,F_n\}]$ 中：
+   - 各 $F_i$ 状态隔离（定义 5.1–5.2）
+   - 无共享可变状态（由 Sync 语义保证共享引用安全）
+   - 故 $\text{DataRaceFree}(\text{ConcurrentExec}[\cdots])$
+
+**公理链标注**：定义 4.1–4.3, 5.1–5.2 + Send/Sync 语义 → 定理 6.2。
 
 #### 定理 6.3 (进度保证)
 
@@ -868,11 +880,22 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
    - 有限计算最终会完成
    - 状态会从 Pending 转换到 Ready
 
-**证明步骤**：
+**证明步骤**（结构化）：
 
-1. 归纳法：对计算步骤数进行归纳
-2. 反证法：假设不终止，导出矛盾
-3. 不变式：维护进度不变式
+1. **归纳于 Poll 次数 $n$**：
+   - **基础情况** ($n=0$)：初始状态为 Pending，符合定义
+   - **归纳步骤**：假设前 $n$ 次 Poll 后要么 $\text{State}(F)=\text{Ready}(v)$，要么仍为 Pending 且存在后续 Poll 可推进
+     - 若已 Ready：终止，目标成立
+     - 若仍 Pending：由有限性假设，计算有界；每次 Poll 要么返回 Ready，要么推进内部状态（定义 4.2）
+     - 故存在 $N$ 使得第 $N$ 次 Poll 后 $\text{State}(F)=\text{Ready}(v)$
+
+2. **反证法**：假设 $\forall n: \text{AfterPoll}(F,n) \land \text{State}(F)=\text{Pending}$
+   - 则 Future 永远不推进，违反「有限计算」假设
+   - 矛盾，故 $\exists n: \text{State}(F)=\text{Ready}(v)$
+
+3. **不变式**：$\text{Progress}(F) \equiv$ 每次 Poll 要么 Ready 要么向 Ready 推进。
+
+**公理链标注**：定义 4.1–4.3（状态、转换）+ 有限性假设 → 定理 6.3。
 
 ---
 
@@ -895,6 +918,38 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 1. **异步 I/O 与运行时**：Tokio/async-std 中的 `AsyncRead`/`AsyncWrite`、`TcpStream` 等；每个 `poll_*` 对应状态机的一次 Poll 与状态转换，满足定理 6.1–6.3。
 2. **并发与 Select**：`tokio::select!`、`FuturesUnordered` 等多路复用；多个 `Future` 并发 Poll，由 Send/Sync 与定理 6.2 保证数据竞争自由。
 3. **结构化并发与取消**：`tokio_util::CancellationToken`、`JoinSet`；取消即状态机提前到终止状态，不违反进度性的有限性假设（“有限计算”排除显式取消前的无限等待）。
+
+---
+
+## ⚠️ 反例：违反异步安全规则
+
+| 反例 | 违反规则 | 后果 | 说明 |
+|------|----------|------|------|
+| 非 Send Future 跨线程 | Send 约束 | 编译错误 | `!Send` Future 不能在多线程运行时使用 |
+| 多线程共享 !Sync 状态 | Sync 约束 | 数据竞争、UB | 如 `Rc` 跨线程共享 |
+| 未 Pin 自引用 Future | Pin 保证 | 悬垂引用 | 自引用 Future 移动后引用失效 |
+| 无限 Poll 不返回 Ready | 进度性 | 死锁 | 违反定理 6.3 有限性假设 |
+
+---
+
+## 🌳 公理-定理证明树
+
+```text
+异步状态机安全性证明树
+
+  定义 4.1–4.3: Future 状态、async 块状态机
+  定义 5.1–5.2: 并发执行、数据竞争自由
+  前提: Send/Sync 语义
+  │
+  ├─ 状态机规则 + 归纳 ──────────────→ 定理 6.1: 状态一致性
+  │   （ValidTransition 满足）
+  │
+  ├─ Send + Sync + 状态隔离 ─────────→ 定理 6.2: 并发安全
+  │   （DataRaceFree）
+  │
+  └─ Finite(F) + 进度性 ─────────────→ 定理 6.3: 进度保证
+      （Eventually Ready）
+```
 
 ---
 

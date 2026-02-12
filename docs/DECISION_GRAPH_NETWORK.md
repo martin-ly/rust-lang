@@ -23,6 +23,8 @@
     - [2. 类型系统决策树](#2-类型系统决策树)
     - [3. 控制流决策树](#3-控制流决策树)
     - [4. 异步编程决策树](#4-异步编程决策树)
+    - [5. Pin 使用场景决策树 🆕](#5-pin-使用场景决策树-)
+    - [6. 表达能力边界决策树](#6-表达能力边界决策树)
   - [⚡ 特性选择决策](#-特性选择决策)
     - [Rust 1.93.0 特性选择矩阵](#rust-1930-特性选择矩阵)
     - [特性组合决策](#特性组合决策)
@@ -171,6 +173,47 @@ graph TD
 └── 否 → 使用同步编程
 ```
 
+### 5. Pin 使用场景决策树 🆕
+
+> 用于判断何时用栈固定 vs 堆固定。详见 [DESIGN_MECHANISM_RATIONALE](research_notes/DESIGN_MECHANISM_RATIONALE.md#-pin堆栈区分使用场景的完整论证)。
+
+```text
+需要固定 T？
+├── T : Unpin？
+│   ├── 是 → 栈固定：Pin::new(&mut t)（零开销）
+│   └── 否 → 必须堆固定：Box::pin(t)（自引用，移动导致悬垂）
+├── 存储位置？
+│   ├── 栈上局部变量 → Pin::new（仅 Unpin）
+│   ├── 堆上分配 → Box::pin（任意 T）
+│   └── 集合/容器内 → Box::pin 或 Pin<Box<T>>
+└── 性能考量？
+    ├── 零开销优先 → 栈 + Unpin
+    └── 必须有自引用 → 堆固定（必要开销）
+```
+
+### 6. 表达能力边界决策树
+
+> 用于判断「何者可表达、何者不可表达」。详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
+
+```text
+需要表达 X？
+├── 内存管理
+│   ├── 单所有者 → ✅ 所有权
+│   ├── 共享只读 → ✅ 多不可变借用
+│   ├── 共享可变 → ❌ 安全子集不可（需 Mutex/Cell）
+│   └── 手动控制 → ⚠️ unsafe
+├── 类型多态
+│   ├── 编译时 → ✅ 泛型 + Trait
+│   ├── 运行时 → ✅ dyn Trait
+│   └── 依赖类型 → ⚠️ 受限 GAT
+├── 并发
+│   ├── 数据竞争自由 → ✅ Send/Sync + 借用
+│   └── 共享可变无锁 → ❌ 需 unsafe
+└── 异步
+    ├── 终将完成 → ✅ 有限 Future
+    └── 可能永久挂起 → ⚠️ 需超时/取消
+```
+
 ---
 
 ## ⚡ 特性选择决策
@@ -289,9 +332,10 @@ graph TD
 
 ## 🔗 相关文档
 
-- [RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md](./RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md)
+- [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md) - Pin 堆/栈区分、设计机制论证
+- [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 表达能力边界
 - [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md)
-- [RUST_192_ALL_REPORTS_INDEX.md](../RUST_192_ALL_REPORTS_INDEX.md)
+- [RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md](./RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md)
 
 ---
 

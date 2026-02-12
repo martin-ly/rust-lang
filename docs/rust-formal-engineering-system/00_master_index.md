@@ -8,6 +8,15 @@
 
 ---
 
+## 🏛️ 理论体系与论证体系结构（顶层入口）
+
+| 文档 | 说明 |
+|------|------|
+| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 理论四层、论证五层、安全与非安全边界 |
+| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全与非安全全面论证、契约、UB |
+
+---
+
 ## 理论基础 (01_theoretical_foundations)
 
 | 子模块 | 映射目标 | 说明 |
@@ -67,6 +76,7 @@
 | 子模块 | 映射目标 |
 |--------|----------|
 | 07 测试 | [quick_reference/testing_cheatsheet.md](../quick_reference/testing_cheatsheet.md) |
+| 应用分析 | [APPLICATIONS_ANALYSIS_VIEW.md](../APPLICATIONS_ANALYSIS_VIEW.md) — 应用场景→技术选型→论证依据 |
 
 ---
 

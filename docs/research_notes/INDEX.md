@@ -74,6 +74,46 @@
    - 证明完成度统计
    - 证明方法统计
 
+6. **[COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md)** - 全面系统化梳理总览
+   - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）
+   - 语义归纳与概念族谱
+   - 全局一致性矩阵
+   - 论证缺口详细追踪
+   - 思维表征方式全索引
+   - 公理-定理-证明全链路图
+
+7. **[UNIFIED_SYSTEMATIC_FRAMEWORK.md](./UNIFIED_SYSTEMATIC_FRAMEWORK.md)** - 全局统一系统化框架 🆕
+   - 全景思维导图：Rust 形式化知识
+   - 多维概念对比矩阵总览
+   - 公理-定理-证明全链路逻辑推进图
+   - 决策树总览（论证、表达能力、思维表征选型）
+   - 反例总索引
+   - 语义归纳与概念族谱统一
+
+8. **[LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)** - 构造性语义与表达能力边界 🆕
+
+9. **[DESIGN_MECHANISM_RATIONALE.md](./DESIGN_MECHANISM_RATIONALE.md)** - 设计机制论证 🆕
+   - Pin 堆/栈区分使用场景的完整论证
+   - 所有权、借用、生命周期、型变、异步等设计理由
+   - 动机→设计决策→形式化→决策树→反例
+
+10. **[ARGUMENTATION_GAP_INDEX.md](./ARGUMENTATION_GAP_INDEX.md)** - 论证缺口与设计理由综合索引 🆕
+   - 四维缺口分类（定义、关系、证明、设计理由）
+   - 论证缺口追踪矩阵、设计理由缺口追踪矩阵
+   - 思维表征覆盖矩阵
+
+6. **[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md)** - 理论体系与论证体系结构 🆕
+   - 理论体系四层架构（公理→语义→定理→边界）
+   - 论证体系五层结构（概念→属性→论证→证明→表征）
+   - 安全与非安全全面论证
+
+7. **[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)** - 安全与非安全全面论证与分析 🆕
+   - 安全/unsafe 定义与边界、契约体系、UB 分类、安全抽象
+
+11. **[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)** - Rust 1.93 语言特性全面分析 🆕
+   - 92 项语言特性全覆盖（内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增）
+   - 每项含动机、设计决策、形式化引用、反例
+
 ### 进展跟踪
 
 1. **[PROGRESS_TRACKING.md](./PROGRESS_TRACKING.md)** - 研究进展跟踪
@@ -133,6 +173,16 @@
 3. **[FORMAL_VERIFICATION_GUIDE.md](./FORMAL_VERIFICATION_GUIDE.md)** - 形式化工具验证指南 ✅ 100%
    - Coq/Isabelle 验证流程
    - 六类验证（所有权、借用、生命周期、类型系统、异步状态机、Pin）框架与任务清单
+
+4. **[FORMAL_PROOF_SYSTEM_GUIDE.md](./FORMAL_PROOF_SYSTEM_GUIDE.md)** - 形式化论证系统梳理指南 🆕
+   - 论证缺口分析（定义、关系、证明）
+   - 概念-公理-定理映射表
+   - 思维表征方式索引（思维导图、矩阵、证明树、决策树、反例）
+   - 证明完成度矩阵与实施路线图
+
+5. **[ARGUMENTATION_GAP_INDEX.md](./ARGUMENTATION_GAP_INDEX.md)** - 论证缺口与设计理由综合索引 🆕
+   - 四维缺口分类、论证缺口追踪矩阵
+   - 设计理由缺口追踪矩阵、思维表征覆盖矩阵
 
 ### 实际应用
 
@@ -260,6 +310,30 @@
    - 研究目标: 分析宏展开性能，识别性能瓶颈
    - 状态: ✅ 已完成 (100%)
    - 关键词: 宏展开、编译时间、性能分析
+
+---
+
+### 软件设计理论研究
+
+**目录**: [software_design_theory/](./software_design_theory/)
+
+1. **[software_design_theory/README.md](./software_design_theory/README.md)** - 软件设计理论体系
+   - 研究目标: 设计模式形式化、23/43 模型、执行模型、组合工程有效性
+   - 状态: 100% 完成
+   - 关键词: 设计模式、安全边界、执行模型、组合工程
+
+2. **[01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/)** - 设计模式形式分析
+   - GoF 23 种模式形式化（创建型、结构型、行为型）
+   - 与 ownership、borrow、trait 衔接
+
+3. **[02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/)** - 23 安全 vs 43 完全模型
+   - 安全设计模型索引、语义边界
+
+4. **[03_execution_models](./software_design_theory/03_execution_models/)** - 执行模型形式化
+   - 同步、异步、并发、并行、分布式
+
+5. **[04_compositional_engineering](./software_design_theory/04_compositional_engineering/)** - 组合软件工程有效性
+   - 定理 CE-T1、CE-T2、CE-T3
 
 ---
 

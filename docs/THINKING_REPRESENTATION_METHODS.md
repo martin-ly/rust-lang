@@ -41,6 +41,7 @@
       - [3.6.5 生命周期转换树](#365-生命周期转换树)
       - [3.6.6 错误传播转换树](#366-错误传播转换树)
       - [3.6.7 何时使用转换树](#367-何时使用转换树)
+      - [3.6.8 Rust 1.93 转换树：MaybeUninit 与 raw parts](#368-rust-193-转换树maybeuninit-与-raw-parts)
   - [🔬 4. 证明树图 (Proof Tree)](#-4-证明树图-proof-tree)
     - [4.1 MaybeUninit 安全性证明树](#41-maybeuninit-安全性证明树)
       - [公理→定理链（Rust 1.93 API 扩展）](#公理定理链rust-193-api-扩展)

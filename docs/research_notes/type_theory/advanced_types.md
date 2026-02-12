@@ -28,10 +28,13 @@
       - [2. Const Generics in Rust](#2-const-generics-in-rust)
       - [3. Dependent Types and Rust](#3-dependent-types-and-rust)
   - [🔬 形式化定义](#-形式化定义)
+    - [定义依赖链（前置概念）](#定义依赖链前置概念)
     - [1. GATs 形式化](#1-gats-形式化)
     - [2. const 泛型形式化](#2-const-泛型形式化)
     - [3. 依赖类型关系](#3-依赖类型关系)
     - [4. 类型系统扩展](#4-类型系统扩展)
+  - [⚠️ 反例：违反高级类型规则](#️-反例违反高级类型规则)
+  - [🌳 公理-定理证明树](#-公理-定理证明树)
   - [✅ 证明目标](#-证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
@@ -270,6 +273,19 @@ $$\text{DependentType}[\tau, v] = \text{Type} \text{ where } v : \text{Const}$$
 
 ## 🔬 形式化定义
 
+### 定义依赖链（前置概念）
+
+以下定义依赖 [type_system_foundations](type_system_foundations.md) 与 [trait_system_formalization](trait_system_formalization.md) 中的基础概念：
+
+| 前置概念 | 来源 | 在本文档中的使用 |
+|----------|------|------------------|
+| $\text{Type}$（类型） | type_system_foundations | GAT、const 泛型、依赖类型的值域 |
+| 关联类型 (Associated Type) | trait_system_formalization | GAT 扩展关联类型 |
+| $\text{Const}$（编译时常量） | 类型系统 const 上下文 | const 泛型参数、受限依赖类型 |
+| 子类型 $S <: T$ | type_system_foundations, variance_theory | GAT 约束 $A[P] : B[P]$ |
+
+**定义顺序**：Def 1.1–1.3 (GAT) → Def 2.1–2.3 (const 泛型) → Def 3.1–3.2 (受限依赖类型)。
+
 ### 1. GATs 形式化
 
 **定义 1.1 (GAT)**: 泛型关联类型 $A[P_1, \ldots, P_n]$ 是一个类型级函数：
@@ -308,8 +324,12 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 - GAT 的类型推导算法保证类型正确性
 - GAT 约束保证类型参数满足要求
 
+**公理链标注**：定义 1.1–1.3 + 类型推导规则（[type_system_foundations](type_system_foundations.md) 定理 4、5）→ 定理 1。
+
 **定理 2 (const 泛型类型安全)**:
 如果 const 泛型类型 $T[N]$ 的 const 参数 $N$ 是编译时常量，则类型是安全的。
+
+**公理链标注**：定义 2.1–2.3 + 编译时常量检查 → 定理 2。
 
 **证明思路**:
 
@@ -323,6 +343,36 @@ Rust 的受限依赖类型系统保证类型安全，不会出现运行时类型
 
 - 依赖关系仅限于编译时常量
 - 类型检查在编译时完成
+
+**公理链标注**：定义 3.1–3.2 + 定理 1（GAT）+ 定理 2（const 泛型）→ 定理 3。
+
+---
+
+## ⚠️ 反例：违反高级类型规则
+
+| 反例 | 违反规则 | 后果 | 说明 |
+|------|----------|------|------|
+| 非 const 作为 const 泛型参数 | 定理 2 | 编译错误 | 运行时值不能作为 `[T; N]` 的 N |
+| GAT 约束违反 | 定理 1 | 编译错误 | 关联类型不满足 where 子句约束 |
+| 依赖类型用运行时值 | 定理 3 | 编译错误 | Rust 不支持 `Vec<T>` 依赖 `len()` 运行时值 |
+| 类型族循环依赖 | GAT 解析 | 编译错误 | 递归 GAT 约束无解 |
+| const 泛型非整数 | const 泛型规则 | 编译错误 | 仅 supports integral/char/bool |
+
+---
+
+## 🌳 公理-定理证明树
+
+```text
+高级类型安全性证明树
+
+  定义: GAT 形式化、const 泛型、受限依赖类型
+  │
+  ├─ GAT 类型推导 + 约束 ──────────→ 定理 1: GAT 类型安全
+  │
+  ├─ const 编译时常量检查 ─────────→ 定理 2: const 泛型类型安全
+  │
+  └─ 编译时依赖 + 定理 1,2 ────────→ 定理 3: 受限依赖类型安全
+```
 
 ---
 

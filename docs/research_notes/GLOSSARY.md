@@ -114,6 +114,14 @@
 - **应用**: 用于建模 Rust 的所有权转移
 - **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
 
+### N
+
+**NLL (Non-Lexical Lifetimes)**:
+
+- **定义**: 非词法生命周期，允许借用检查在更精确的作用域内进行
+- **效果**: 减少不必要的生命周期标注，使借用尽早结束
+- **相关**: [生命周期形式化](./formal_methods/lifetime_formalization.md)
+
 ### O
 
 **所有权 (Ownership)**:
@@ -122,6 +130,12 @@
 - **规则**:
   - 每个值只有一个所有者
   - 当所有者离开作用域时，值被释放
+- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+
+**RAII (Resource Acquisition Is Initialization)**:
+
+- **定义**: 资源获取即初始化，资源生命周期与对象绑定
+- **应用**: `Drop` trait 在对象离开作用域时自动释放资源；`MutexGuard`、`File` 等
 - **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
 
 ### P
@@ -141,6 +155,62 @@
 ---
 
 ## 🔬 类型理论术语
+
+### M
+
+**MIR (Mid-level IR)**:
+
+- **定义**: Rust 编译器的中间表示，介于 HIR 与 LLVM IR 之间
+- **应用**: 借用检查、优化、诊断
+- **相关**: [借用检查器证明](./formal_methods/borrow_checker_proof.md)
+
+**Move (移动)**:
+
+- **定义**: 默认转移所有权；原变量不再有效
+- **与 Copy**: 非 Copy 类型赋值时发生移动
+- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+
+### C
+
+**Copy (复制)**:
+
+- **定义**: 位复制语义；类型实现后赋值不移动
+- **约束**: 仅 `Copy` 类型可 `Copy`；含 `Drop` 的不可 `Copy`
+- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+
+**Clone (克隆)**:
+
+- **定义**: 显式复制，可自定义逻辑
+- **与 Copy**: `Copy` 隐含 `Clone`；大对象常用 `Clone`
+- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+
+### S
+
+**Send**:
+
+- **定义**: 类型可安全跨线程转移所有权
+- **示例**: `i32`、`String`、`Box<T>`（若 `T: Send`）
+- **反例**: `Rc` 非 Send（多线程持会导致竞态）
+- **相关**: [异步状态机形式化](./formal_methods/async_state_machine.md)
+
+**Sync**:
+
+- **定义**: `&T` 可安全跨线程共享；等价于 `&T: Send`
+- **示例**: `i32`、`Arc<T>`（若 `T: Sync`）
+- **反例**: `Cell` 非 Sync（内部可变无同步）
+- **相关**: [异步状态机形式化](./formal_methods/async_state_machine.md)
+
+### U
+
+**UB (Undefined Behavior, 未定义行为)**:
+
+- **定义**: 程序违反语言契约时，编译器可做任意假设
+- **示例**: 解引用空指针、读取未初始化内存、数据竞争
+- **相关**: [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)
+
+---
+
+## 🔬 类型理论术语（A–V）
 
 ### A
 

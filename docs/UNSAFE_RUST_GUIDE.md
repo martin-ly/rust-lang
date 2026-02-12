@@ -37,6 +37,8 @@
 
 ## 本项目 unsafe 相关资源
 
+- **理论体系与安全论证**（顶层）: [research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 安全与非安全边界、理论四层
+- **安全与非安全全面论证**: [research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) - 契约、UB、安全抽象
 - **C01**: [高级所有权模式](../crates/c01_ownership_borrow_scope/docs/tier_03_references/06_高级所有权模式参考.md)
 - **C05**: 同步原语、原子操作
 - **forms**: [research_notes/formal_methods/](../research_notes/formal_methods/) - 借用检查器证明、生命周期形式化

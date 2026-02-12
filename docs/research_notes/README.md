@@ -3,7 +3,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-01-26
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记全部完成）
+> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记 + 软件设计理论体系全部完成）
 > **更新内容**: Rust 1.93.0 特性研究更新完成 ✅
 
 ---
@@ -27,6 +27,12 @@ research_notes/
 │   ├── lifetime_formalization.md
 │   ├── advanced_types.md
 │   └── variance_theory.md
+├── software_design_theory/      # 软件设计理论研究
+│   ├── 01_design_patterns_formal/  # 设计模式形式化（GoF 23）
+│   ├── 02_workflow_safe_complete_models/  # 23 安全 / 43 完全模型
+│   ├── 03_execution_models/       # 同步/异步/并发/并行/分布式
+│   ├── 04_compositional_engineering/  # 组合工程有效性
+│   └── 05_boundary_system/        # 边界体系统一分析
 └── experiments/                 # 实验研究
     ├── README.md
     ├── performance_benchmarks.md
@@ -106,6 +112,24 @@ research_notes/
 - ✅ 类型推导算法正确性证明
 
 **证明文档索引**: [PROOF_INDEX.md](./PROOF_INDEX.md)
+
+**论证系统指南**: [FORMAL_PROOF_SYSTEM_GUIDE.md](./FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、概念-公理-定理映射、反例与证明树索引
+
+**全面系统化梳理总览**: [COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
+
+**全局统一系统化框架**: [UNIFIED_SYSTEMATIC_FRAMEWORK.md](./UNIFIED_SYSTEMATIC_FRAMEWORK.md) - 全景思维导图、多维矩阵、公理-定理证明全链路、决策树、反例总索引
+
+**构造性语义与表达能力边界**: [LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 操作/指称/公理语义形式化、表达能力边界论证
+
+**设计机制论证**: [DESIGN_MECHANISM_RATIONALE.md](./DESIGN_MECHANISM_RATIONALE.md) - Pin 堆/栈区分、所有权、借用、型变等设计理由与完整论证
+
+**论证缺口与设计理由综合索引**: [ARGUMENTATION_GAP_INDEX.md](./ARGUMENTATION_GAP_INDEX.md) - 缺口追踪、设计理由矩阵、思维表征覆盖
+
+**理论体系与论证体系结构**（顶层框架）: [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 四层理论架构、五层论证结构、安全与非安全全面论证
+
+**安全与非安全全面论证**: [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) - 边界、契约、UB 分类、安全抽象
+
+**Rust 1.93 语言特性全面分析**: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) - 92 项语言特性全覆盖、设计论证
 
 **相关文档**:
 
