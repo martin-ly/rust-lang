@@ -113,7 +113,7 @@
 ### 堆与栈固定：使用场景区分与设计论证
 
 | 维度 | 栈固定 `Pin::new` | 堆固定 `Box::pin` |
-|------|-------------------|-------------------|
+| :--- | :--- | :--- |
 | **内存区域** | 栈上局部变量 | 堆上分配 |
 | **类型约束** | 必须 $T : \text{Unpin}$ | 任意 $T$（含 $\lnot\text{Unpin}$） |
 | **设计理由** | 栈变量可被优化重排；非 Unpin 时调用者可能移动，无法保证 | 堆地址在 `Box` 存活期间不变，满足位置稳定 |
@@ -183,7 +183,7 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 ## ⚠️ 反例：违反 Pin 规则
 
 | 反例 | 违反规则 | 后果 | 说明 |
-|------|----------|------|------|
+| :--- | :--- | :--- | :--- |
 | 移动未 Pin 自引用类型 | Pin 保证 | 悬垂引用 | 自引用指向旧地址 |
 | 非安全 Pin 投影 | 投影安全条件 | UB | 投影出非 Pin 字段后移动 |
 | 对非 Unpin 值使用 `Pin::new` | 栈固定要求 | 编译错误 | 非 Unpin 需 `Box::pin` |
@@ -496,11 +496,14 @@ async fn use_future() {
 
 ### 与异步系统的集成
 
-`Future::poll(self: Pin<&mut Self>, ctx)` 的 `Pin` 保证 `Self` 在 poll 间不移动，满足自引用与 `Waker` 存储的不变式；与 [async_state_machine](./async_state_machine.md) 的 Pin、状态机语义一致。形式化：$\text{Pin}[P] \rightarrow \neg \text{move}(\text{target}(P))$。
+`Future::poll(self: Pin<&mut Self>, ctx)` 的 `Pin` 保证 `Self` 在 poll 间不移动，满足自引用与 `Waker` 存储的不变式；
+与 [async_state_machine](./async_state_machine.md) 的 Pin、状态机语义一致。
+形式化：$\text{Pin}[P] \rightarrow \neg \text{move}(\text{target}(P))$。
 
 ### 与生命周期的集成
 
-自引用中 `&'a T` 的 `'a` 覆盖包含自引用结构体；Pin 保证移动不发生，故 `'a` 不悬垂。与 [lifetime_formalization](./lifetime_formalization.md) 的 outlives、NLL 兼容。
+自引用中 `&'a T` 的 `'a` 覆盖包含自引用结构体；Pin 保证移动不发生，故 `'a` 不悬垂。
+与 [lifetime_formalization](./lifetime_formalization.md) 的 outlives、NLL 兼容。
 
 ### 实际应用案例
 

@@ -18,29 +18,59 @@
 
 ### 格式与形式论证扩展（2026-02-12）🆕
 
-**表格格式统一**：参照 PROOF_INDEX.md 行 55 规范，research_notes 表格分隔行统一为 `| :--- | :--- | :--- |` 格式；已修复 PROOF_INDEX、QUICK_FIND、QUICK_REFERENCE、PROGRESS_TRACKING、TASK_CHECKLIST；WRITING_GUIDE、QUALITY_CHECKLIST 补充格式规范与 Def QC1。
+**表格格式统一**：参照 PROOF_INDEX.md 行 55 规范，research_notes 表格分隔行统一为 `| :--- | :--- | :--- |` 格式；已修复 50+ 文件：formal_methods、type_theory、01_design_patterns_formal（23 模式）、02_workflow_safe_complete_models、03_execution_models、04_compositional_engineering、FORMAL_PROOF_SYSTEM_GUIDE、THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE、experiments、BEST_PRACTICES、TASK_ORCHESTRATION_AND_EXECUTION_PLAN、practical_applications 等。
 
 **形式论证扩展**：
 
+- **formal_methods/lifetime_formalization**：定理 LF-T1/T2/T3 统一编号、LF-T3 双向证明、移除重复
+- **DESIGN_MECHANISM_RATIONALE**：Option/Result 新增 Def OR1、Axiom OR1、定理 OR-T1、推论 OR-C1
+- **BEST_PRACTICES**：新增 Axiom BP1、定理 BP-T1（完备性蕴涵可追溯）
+- **PROOF_INDEX**：设计机制论证（OR-T1/OR-C1）、生命周期 LF-T1/T2/T3 更新
+- **ARGUMENTATION_GAP_INDEX**：lifetime_formalization P1 ⚠️→✅；Result/Option 动机/设计 ⚠️→✅
 - **01_formal_composition**：新增 CE-T1–T3 定理、CE-L1 引理、CE-C1/C2 推论（引用 02_effectiveness_proofs）
 - **04_boundary_matrix**：新增 Def 1.1–1.2、Axiom BMP1、定理 BMP-T1/T2、引理 BMP-L1、推论 BMP-C1
 - **04_compositional_engineering/README**：新增 Def CE1、Axiom CE1、推论 CE-C1
 - **experiments/README**：新增定理 EX-T2（可重复性）、推论 EX-C1；强化 EX-L1 证明
 - **COMPREHENSIVE_SYSTEMATIC_OVERVIEW**：新增引理 CSO-L1、推论 CSO-C1
 - **UNIFIED_SYSTEMATIC_FRAMEWORK**：新增 Def USF1、Axiom USF1、定理 USF-T1、推论 USF-C1
+- **PROOF_INDEX**：新增边界系统、语义与表达能力、顶层框架、实验与形式化衔接、形式化验证、质量检查、执行模型扩展；统计更新至 69+
+- **FORMAL_VERIFICATION_GUIDE**：新增 Def FV1、Axiom FV1、定理 FV-T1、引理 FV-L1、推论 FV-C1
+- **QUALITY_CHECKLIST**：新增 Def QC1、Axiom QC1、定理 QC-T1、推论 QC-C1
+- **practical_applications**：新增引理 PA-L1（unsafe 案例边界）
+- **03_execution_models**：02_async AS-L1/AS-C1；03_concurrent CC-L1/CC-C1（CC 前缀）；04_parallel PL-L1/PL-C1；05_distributed DI-L1/DI-C1
+- **type_theory/00_completeness_gaps**：新增完备性缺口文档；明确 Rust 1.93 类型系统、组合法则、Trait 特性**不充分**；README 状态改为「持续完善」
+- **formal_methods/README**：新增引理 FM-L1（族内定理无循环依赖）、推论 FM-C1
+- **experiments**：performance_benchmarks、memory_analysis、concurrency_performance、macro_expansion_performance 新增 Def、形式化论证与实验衔接表；补充 MA-T1/MA-C1、PB-T1/PB-C1、CP-T1/CP-C1、MP-T1/MP-C1 定理与推论
 - **05_boundary_system**：三矩阵补充定理证明（∎ 结尾）、引理、推论、反例；README 定理 B-T1
 - **LANGUAGE_SEMANTICS_EXPRESSIVENESS**：EB-Meta 证明、引理 EB-L1、推论 EB-C1
 - **04_compositional_engineering**：CE-L1、CE-C1、CE-C2、IT-L1、IT-C1
 - **03_execution_models**：06_boundary_analysis 引理 EB-EX-L1、推论 EB-EX-C1
 - **DESIGN_MECHANISM_RATIONALE**：所有权 Def OM1、Axiom OM1、定理 OM-T1；借用 Def BC1、Axiom BC1、定理 BC-T1
 - **experiments**：Axiom EX2、定理 EX-T1、引理 EX-L1
-- **01_design_patterns_formal**：singleton 定理证明、引理 S-L1
+- **01_design_patterns_formal**：singleton 定理证明、引理 S-L1；Memento、Visitor、Interpreter、Template Method 新增定理证明、引理 MO-L1/VI-L1/IN-L1/TM-L1、推论 MO-C1/VI-C1/IN-C1/TM-C1、反例
+- **experiments/compiler_optimizations**：Def CO1、Axiom CO1、定理 CO-T1、推论 CO-C1（与 type_system 保持性衔接）
+- **research_methodology**：新增 Def RM1、Axiom RM1、定理 RM-T1、推论 RM-C1（方法衔接与完备性）
+- **BEST_PRACTICES**：新增「形式化论证最佳实践」、Def BP1（形式化完备性）
+- **experiments**：macro_expansion 新增 MP-L1；concurrency 新增 CP-L1；memory_analysis 新增 MA-L1；performance_benchmarks 新增 PB-L1
+- **PROOF_INDEX**：收录研究方法论 RM-T1、实验引理 MA-L1/PB-L1/CP-L1/MP-L1
+- **compiler_optimizations**：新增引理 CO-L1（优化阶段顺序）
+- **practical_applications**：新增 Def PA1、Axiom PA1、定理 PA-T1、推论 PA-C1（案例与形式化衔接）
+- **PROOF_INDEX**：补充实验推论 MA-C1、PB-C1、CP-C1、MP-C1、CO-C1、CO-L1；实际应用案例 PA-T1、PA-C1；实验与形式化统计更新至 18 个
+- **PROOF_INDEX**：补充 BMP-L1、BMP-C1、Def USF1、Axiom USF1（边界系统、顶层框架）；收录设计模式行为型引理与推论（MO-L1、VI-L1、IN-L1、TM-L1、MO-C1、VI-C1、IN-C1、TM-C1）
+- **Adapter 设计模式**：新增推论 AD-C1（纯 Safe）
+- **03_semantic_boundary_map**：新增引理 SB-L1（边界冲突可化解）
+- **type_theory/lifetime_formalization**：新增 Axiom LT1–LT2、定理 LT-T1/T2、引理 LT-L1、推论 LT-C1/C2；与 formal_methods 衔接
+- **type_theory/advanced_types**：新增 Axiom AT1/AT2、定理 AT-T1/T2/T3、引理 AT-L1、推论 AT-C1；公理链与证明树更新
+- **formal_methods/lifetime_formalization**：新增 Axiom LF1/LF2、引理 LF-L1、推论 LF-C1
+- **CONTENT_ENHANCEMENT**：新增 Def CE1、Axiom CE1、定理 CE-T1
+- **PROOF_INDEX**：补充 type_theory/lifetime_formalization 入口
 
 ---
 
 ### 应用分析视图 100% 完成（2026-02-12）🆕
 
 **APPLICATIONS_ANALYSIS_VIEW.md 全面丰富**:
+
 - ✅ 应用场景选型决策树（顶层）
 - ✅ 各场景决策树（CLI、Web、系统、嵌入式、分布式、数据科学、游戏、区块链、WASM、DevOps）
 - ✅ WASM 与跨平台、DevOps 与 CI 新增章节
@@ -53,6 +83,7 @@
 ### 论证形式化全面推进（2026-02-12）🆕
 
 **形式化论证扩展**（Def/Axiom/定理）:
+
 - ✅ 05_boundary_system：safe_unsafe_matrix（Def 1.1–1.2、Axiom SBM1–2、定理 SBM-T1/T2）；supported_unsupported_matrix（Def 1.1–1.2、Axiom SUM1–2、定理 SUM-T1/T2）；expressive_inexpressive_matrix（Def 1.1–1.2、Axiom EIM1–2、定理 EIM-T1/T2）；README 形式化定义
 - ✅ 04_compositional_engineering/03_integration_theory：Def 1.1–1.2、Axiom IT1–2、定理 IT-T1/T2（跨模块所有权、Send/Sync）
 - ✅ 03_execution_models/06_boundary_analysis：定理 EB-T1/T2（五模型安全边界、边界一致性）
@@ -66,6 +97,7 @@
 ### 形式论证全面推进（2026-02-12）🆕
 
 **形式化论证扩展**（针对「形式论证不充分」）：
+
 - ✅ 05_boundary_system：SBM-L2/L2-C2、SUM-L2/SUM-C2、EIM-L2/EIM-C2；README 定理 B-T2
 - ✅ formal_methods/README：Def FM1、Axiom FM1、定理 FM-T1
 - ✅ type_theory/README：Def TT1、Axiom TT1、定理 TT-T1
@@ -80,6 +112,7 @@
 ### 工作流安全/完全模型 100% 完成（2026-02-12）🆕
 
 **02_workflow_safe_complete_models 全面完善**:
+
 - ✅ 01_safe_23_catalog：选型决策树、与 43 完全衔接
 - ✅ 02_complete_43_catalog：扩展模式选型决策树、Service Layer/Specification 代码示例
 - ✅ 04_expressiveness_boundary：目录、状态标记
@@ -90,6 +123,7 @@
 ### 内容全面丰富（2026-02-12 持续推进）🆕
 
 **执行模型增强**:
+
 - ✅ 02_async：Waker/Executor、join!/select!、运行时选型、错误传播与取消
 - ✅ 03_concurrent：原子操作与内存顺序、死锁避免、通道选型
 - ✅ 04_parallel：Rayon 工作窃取、原子操作、分治递归、与异步组合
@@ -97,16 +131,19 @@
 - ✅ 01_synchronous：栈展开与 panic、选型决策树
 
 **设计模式增强**（选型决策树 + 与 GoF 对比）:
+
 - ✅ 创建型 5：abstract_factory、builder、factory_method、prototype、singleton
 - ✅ 结构型 7：adapter、bridge、composite、decorator、facade、flyweight、proxy
 - ✅ 04_boundary_matrix：选型决策树、与 43 完全衔接
 
 **边界与术语**:
+
 - ✅ supported_unsupported_matrix：no_std、Cargo 特性、版本兼容
 - ✅ expressive_inexpressive_matrix：Adapter/Composite 示例、不可表达扩展
 - ✅ GLOSSARY：NLL、RAII、MIR、Move、Copy、Clone、Send、Sync、UB
 
 **其他**:
+
 - ✅ rust-formal-engineering-system/10_quality_assurance：完整质量保障索引
 - ✅ 03_semantic_boundary_map：形式化边界定理、边界冲突化解
 - ✅ 04_expressiveness_boundary：不可表达替代策略、表达边界与性能

@@ -72,7 +72,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 多态创建 | 根据配置/运行类型创建不同产品 |
 | 子类定制 | 子类重写工厂方法返回特定产品 |
 | 依赖注入 | 注入工厂以解耦创建逻辑 |
@@ -82,7 +82,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Abstract Factory](abstract_factory.md) | 多个工厂方法组成抽象工厂 |
 | [Builder](builder.md) | 工厂可返回 Builder |
 | [Prototype](prototype.md) | 工厂可基于 Prototype 克隆 |
@@ -92,7 +92,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | `fn create(&self) -> T` | trait 方法 | 多态工厂 |
 | `match` + `Box<dyn Product>` | 返回 trait 对象 | 运行时选择 |
 | 关联类型 | `type Product; fn create(&self) -> Self::Product` | 类型族 |
@@ -120,7 +120,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 ## 与理论衔接
 
 | 机制 | 引用 |
-|------|------|
+| :--- | :--- |
 | 所有权转移 | ownership_model T2、T3 |
 | 类型保持 | type_system_foundations T2 |
 | Trait 对象 | trait_system_formalization |
@@ -142,7 +142,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | 虚工厂方法 | trait fn create | 等价 |
 |  Creator 持有 Product | 可选 | 等价 |
 | 多态创建 | impl Trait | 等价 |
@@ -152,7 +152,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

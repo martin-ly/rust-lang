@@ -20,6 +20,16 @@
 
 **定理 VI-T1**：Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达为近似。
 
+*证明*：由 Axiom VI1；`match` 穷尽所有变体，编译期检查；新 Visitor 实现 trait 即可扩展；无 OOP 虚函数双重分发，故为近似。∎
+
+**引理 VI-L1（穷尽匹配）**：`match e { ... }` 必须覆盖 $E$ 所有变体；新增变体需新增分支，否则编译错误。
+
+*证明*：由 Rust 类型系统；穷尽匹配为语言保证；[type_system_foundations](../../../type_theory/type_system_foundations.md) 保持性。∎
+
+**推论 VI-C1**：Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{Visitor}) = \mathrm{Approx}$。
+
+**反例**：若 `match` 漏分支，编译错误；若用 `dyn Trait` 做双重分发，需对象安全，`Self` 返回等可能违规。
+
 ---
 
 ## Rust 实现与代码示例
@@ -89,7 +99,7 @@ GoF 双重分发：`e.accept(v)` 内调用 `v.visit(e)`，根据 $e$ 与 $v$ 类
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | AST 遍历 | 编译器、解释器、代码生成 |
 | 文档/树遍历 | DOM、配置树、语法树 |
 | 序列化/反序列化 | 各节点类型不同处理 |
@@ -100,7 +110,7 @@ GoF 双重分发：`e.accept(v)` 内调用 `v.visit(e)`，根据 $e$ 与 $v$ 类
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Composite](../02_structural/composite.md) | 遍历 Composite 常用 Visitor |
 | [Interpreter](interpreter.md) | 同为 AST 处理；Interpreter 求值，Visitor 遍历 |
 | [Iterator](iterator.md) | 遍历方式不同；Visitor 深度优先，Iterator 可定制 |
@@ -110,7 +120,7 @@ GoF 双重分发：`e.accept(v)` 内调用 `v.visit(e)`，根据 $e$ 与 $v$ 类
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | match + 函数 | `fn visit<V: Visitor>(v: &mut V, e: &Expr)` | 单分发；穷尽 |
 | trait accept | `fn accept<V: Visitor>(&self, v: &mut V)` | 模拟双重分发 |
 | 宏 | 自动生成 visit 分支 | 减少样板 |
@@ -151,7 +161,7 @@ fn visit<V: Visitor>(v: &mut V, e: &Expr) {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 近似 |

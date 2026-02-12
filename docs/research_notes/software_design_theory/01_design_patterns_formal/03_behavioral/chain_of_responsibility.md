@@ -75,7 +75,7 @@ h1.handle(&"B".into());  // 委托至 h2
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 请求过滤/中间件 | HTTP 中间件链、日志/认证/限流 |
 | 事件处理 | 事件沿链传递，首个能处理者消费 |
 | 错误恢复 | 多级 fallback，逐级尝试 |
@@ -86,7 +86,7 @@ h1.handle(&"B".into());  // 委托至 h2
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Command](command.md) | 链中每节点可封装为 Command |
 | [Decorator](../02_structural/decorator.md) | 链式包装，但 Chain 为委托传递 |
 | [Composite](../02_structural/composite.md) | 树结构 vs 链结构；可组合使用 |
@@ -96,7 +96,7 @@ h1.handle(&"B".into());  // 委托至 h2
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 结构体链 | `Option<Box<Handler>>`，如上示例 | 链固定、类型同质 |
 | trait 链 | `trait Handler { fn handle(&self, req: &R) -> Option<()>; fn next(&self) -> Option<&dyn Handler>; }` | 需多态处理器 |
 | 迭代器链 | `handlers.iter().find_map(|h| h.handle(req))` | 链为 `Vec`，顺序尝试 |
@@ -131,7 +131,7 @@ h1.handle(&"B".into());  // 委托至 h2
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | Handler 链 | Option<Box<Handler>> | 等价 |
 | 委托 next | as_deref().and_then(|n| n.handle(req)) | 等价 |
 | 无环 | Box 单向所有权 | 天然无环 |
@@ -141,7 +141,7 @@ h1.handle(&"B".into());  // 委托至 h2
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

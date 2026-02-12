@@ -90,7 +90,7 @@ impl Subject {
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Command](command.md) | 观察者可接收命令；命令可作为事件 |
 | [Mediator](mediator.md) | 同为解耦；Observer 一对多，Mediator 集中路由 |
 | [State](state.md) | 状态转换可通知观察者 |
@@ -100,7 +100,7 @@ impl Subject {
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | `mpsc::channel` | 单消费者；所有权转移 | 事件队列、任务分发 |
 | `broadcast::channel` | 多消费者；克隆消息 | 广播、Pub/Sub |
 | `RefCell<Vec<Callback>>` | 回调注册；单线程 | 简单事件、UI 回调 |
@@ -128,7 +128,7 @@ impl Subject {
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | Subject/Observer 继承 | channel 或 回调 Vec | 无继承；消息传递 |
 | 注册/注销 | 持有 Sender / Vec push | 等价 |
 | 通知顺序 | channel FIFO / Vec 顺序 | 等价 |
@@ -138,7 +138,7 @@ impl Subject {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | Safe（channel）或 Safe（RefCell/Mutex） |
 | 支持 | 原生 |
 | 表达 | 近似（无继承） |

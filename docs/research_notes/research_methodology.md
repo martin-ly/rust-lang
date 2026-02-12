@@ -14,6 +14,7 @@
   - [🎯 研究目标](#-研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
+  - [形式化论证汇总](#形式化论证汇总)
   - [📚 研究方法](#-研究方法)
     - [1. 形式化研究方法](#1-形式化研究方法)
     - [2. 实验研究方法](#2-实验研究方法)
@@ -68,6 +69,20 @@
 - Rust 研究方法论框架
 - 研究工具使用指南
 - 研究质量评估标准
+
+---
+
+## 形式化论证汇总
+
+**Def RM1（研究方法完备性）**：设 $\mathcal{R}$ 为研究方法族，$\mathcal{R} = \{\text{形式化},\, \text{实验},\, \text{实证},\, \text{理论}\}$。若研究 $Q$ 同时采用形式化证明与实验验证，则称 $Q$ **方法完备**。
+
+**Axiom RM1**：形式化证明保证正确性；实验验证提供经验支持；二者互补，不可相互替代。见 [experiments/README](experiments/README.md) 推论 EX-C1。
+
+**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 的论证链。
+
+*证明*：由 [experiments/README](experiments/README.md) 定理 EX-T1；实验验证与定理结论一致；形式化证明在 PROOF_INDEX 可查。∎
+
+**推论 RM-C1**：research_notes 中形式化方法、类型理论、实验研究均遵循 Def RM1；新研究应建立与已有定理的衔接。
 
 ---
 

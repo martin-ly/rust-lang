@@ -87,7 +87,7 @@ impl<T: Subject> Subject for Proxy<T> {
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 虚拟代理 | 延迟加载、懒初始化 |
 | 保护代理 | 访问控制、权限检查 |
 | 远程代理 | 封装 RPC、跨进程调用 |
@@ -98,7 +98,7 @@ impl<T: Subject> Subject for Proxy<T> {
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Decorator](decorator.md) | 同为包装；Proxy 控制访问，Decorator 扩展行为 |
 | [Flyweight](flyweight.md) | Proxy 可包装 Flyweight 做延迟/缓存 |
 | [Facade](facade.md) | Proxy 委托单对象；Facade 聚合多对象 |
@@ -108,7 +108,7 @@ impl<T: Subject> Subject for Proxy<T> {
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | `OnceLock`/`LazyLock` | 虚拟代理；延迟加载 | 耗时初始化 |
 | `Arc<Mutex<T>>` | 保护代理；跨线程 | 访问控制 |
 | 智能指针 | `Rc`、`Arc` 即引用计数代理 | 共享、生命周期 |
@@ -146,7 +146,7 @@ struct BadProxy {
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | 虚拟代理 | OnceLock | 等价 |
 | 保护代理 | 包装 + 委托 | 等价 |
 | 远程代理 | tonic/HTTP 客户端 | 等价 |
@@ -156,7 +156,7 @@ struct BadProxy {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

@@ -8,7 +8,7 @@
 
 ## 形式化定义与公理
 
-**Def 1.1（ Safe 边界）**
+**Def 1.1（ Safe 边界）**:
 
 设 $P$ 为实现某模式/功能的 Rust 程序。定义安全边界函数 $\mathit{SafeB}(P) \in \{\mathrm{Safe},\, \mathrm{Unsafe},\, \mathrm{Inexpr}\}$：
 
@@ -16,7 +16,7 @@
 - **需 unsafe**：$\mathit{SafeB}(P) = \mathrm{Unsafe}$ 当且仅当 $P$ 需局部 `unsafe`（FFI、裸指针、transmute），但可封装为对外 Safe 的 API
 - **无法表达**：$\mathit{SafeB}(P) = \mathrm{Inexpr}$ 当且仅当无法在 Rust 中表达，或需大量 unsafe 且难以安全封装
 
-**Def 1.2（安全抽象）**
+**Def 1.2（安全抽象）**:
 
 设 $A$ 为封装 unsafe 的 Rust 模块。若 $A$ 对外 API 满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 与 [ownership_model](../../formal_methods/ownership_model.md) 的 Safe 规则，则称 $A$ 为**安全抽象**。
 
@@ -49,7 +49,7 @@
 ## 定义（非形式化对照）
 
 | 分类 | 定义 |
-|------|------|
+| :--- | :--- |
 | **纯 Safe** | 仅用安全 API 即可完整实现，无 `unsafe` 块 |
 | **需 unsafe** | 实现需局部 `unsafe`（如 FFI、裸指针、transmute），可封装为安全抽象 |
 | **无法表达** | 在 Rust 中无法表达或需大量 unsafe 且难以安全封装 |
@@ -119,7 +119,7 @@
 ## 执行模型 × 安全边界
 
 | 模型 | 安全边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | 同步 | 纯 Safe | 顺序执行，默认 |
 | 异步 | 纯 Safe | Future + async/await，Pin 由库封装 |
 | 并发 | 纯 Safe | Send/Sync + channels/Mutex |
@@ -131,7 +131,7 @@
 ## 扩展模式（43 完全之 20）安全边界
 
 | 模式 | 安全边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | Domain Model | 纯 Safe | 结构体 + 方法 |
 | Service Layer | 纯 Safe | 模块/结构体 |
 | Repository | 纯 Safe | trait + impl |
@@ -152,7 +152,7 @@
 ## 反例：违反安全边界
 
 | 反例 | 后果 |
-|------|------|
+| :--- | :--- |
 | Singleton 用 `static mut` 且多线程无同步 | 数据竞争、UB |
 | Observer 回调中修改共享状态无 Mutex | 数据竞争 |
 | Gateway 直接 transmute 外部指针 | UB |

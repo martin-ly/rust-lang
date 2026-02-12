@@ -18,6 +18,8 @@
     - [3. 异步状态机形式化](#3-异步状态机形式化)
     - [4. 生命周期形式化](#4-生命周期形式化)
     - [5. Pin 和自引用类型形式化](#5-pin-和自引用类型形式化)
+  - [形式化论证汇总](#形式化论证汇总)
+  - [公理-定理形式化索引](#公理-定理形式化索引)
   - [📝 研究笔记](#-研究笔记)
     - [已完成 ✅](#已完成-)
   - [🔗 相关资源](#-相关资源)
@@ -127,12 +129,20 @@
 
 *证明*：由 ownership T2/T3、borrow T1、lifetime T2、async T6.2、pin T1–T3；各定理分别保证不同性质，组合无冲突。∎
 
+**引理 FM-L1（族内定理无循环依赖）**：$\mathcal{M}$ 中 ownership、borrow、lifetime、async、pin 的定理依赖链无环；ownership 为 borrow 上游，borrow 与 lifetime 为 async 上游。
+
+*证明*：由各文档定义；ownership 规则 1–3 为 borrow 规则 5–8 前提；lifetime 与 borrow 关联；async 依赖 Pin 与 Send/Sync；依赖图无环。∎
+
+**推论 FM-C1**：若 $P$ 违反 $\mathcal{M}$ 中任一定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
+
+*证明*：由 FM-T1 逆否；违反 ⇒ 不满足全部定理 ⇒ 非 Safe 或非良型。∎
+
 ---
 
 ## 公理-定理形式化索引
 
 | 文档 | 核心公理/定理 | 证明要点 |
-|------|---------------|----------|
+| :--- | :--- | :--- |
 | [ownership_model](./ownership_model.md) | 所有权规则 1–3、T2/T3 内存安全 | 唯一性、RAII、无悬垂 |
 | [borrow_checker_proof](./borrow_checker_proof.md) | 借用规则 5–8、T1 数据竞争自由 | 互斥借用、Send/Sync |
 | [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、NLL |

@@ -69,7 +69,7 @@
 
 ## 📐 五大梳理维度
 
-```
+```text
                     全面系统化梳理
                            │
         ┌──────────────────┼──────────────────┐
@@ -192,7 +192,7 @@ Rust 语义族谱（顶层归纳）
 ### 2. 公理编号全局一致性
 
 | 前缀 | 含义 | 示例 | 使用范围 |
-|------| :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | **A** | Axiom | A1: 未初始化内存不具合法值 | PROOF_INDEX、FORMAL_PROOF_SYSTEM_GUIDE |
 | **L** | Lemma | L1: 读取未初始化内存是 UB | MaybeUninit、类型系统 |
 | **T** | Theorem | T1: assume_init_drop 正确 | 各模块定理 |
@@ -286,7 +286,7 @@ Axiom/规则层
 ### 按表征类型索引
 
 | 类型 | 文档 | 用途 | 覆盖范围 |
-|------| :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | **思维导图** | [MIND_MAP_COLLECTION](../MIND_MAP_COLLECTION.md) | 核心概念、模块知识、关联 | Rust 核心、所有权、类型、并发、异步、系统编程、C01–C08 |
 | **思维导图** | [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) §1 | Rust 1.93 特性、学习路径 | 1.93 特性、跨模块依赖 |
 | **多维矩阵** | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 所有权、类型、并发、同步原语、形式化理论 | 型变、证明方法、公理-定理依赖 |
@@ -438,7 +438,7 @@ Axiom/规则层
 ## 📂 相关文档快速导航
 
 | 文档 | 用途 |
-|------|------|
+| :--- | :--- |
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | **🏛️ 理论体系与论证体系结构**：四层理论架构、五层论证结构、安全与非安全全面论证 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论体系**：设计模式形式化、23/43 模型、执行模型、组合工程有效性 |
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | **安全与非安全全面论证**：边界、契约、UB 分类、安全抽象 |

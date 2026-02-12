@@ -67,7 +67,7 @@ assert_eq!(tree.sum(), 6);
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 文件系统 | 文件/目录树 |
 | UI 组件树 | 控件/容器层级 |
 | 表达式 AST | 叶子/复合节点 |
@@ -79,7 +79,7 @@ assert_eq!(tree.sum(), 6);
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Visitor](../03_behavioral/visitor.md) | 遍历 Composite 常用 Visitor |
 | [Decorator](decorator.md) | 同为组合；Decorator 为链式，Composite 为树 |
 | [Chain of Responsibility](../03_behavioral/chain_of_responsibility.md) | 链 vs 树；委托传递 |
@@ -89,7 +89,7 @@ assert_eq!(tree.sum(), 6);
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 枚举递归 `enum { Leaf(T), Composite(Vec<Node>) }` | 同质节点；简单 | AST、配置树 |
 | trait + Box | 异质节点；多态 | UI 控件、插件系统 |
 | `Rc`/`Weak` | 父→子→父 引用；需破环 | 图结构、DOM 式 |
@@ -117,7 +117,7 @@ assert_eq!(tree.sum(), 6);
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | 组合 + 叶子 | 枚举 Leaf/Composite | 完全等价 |
 | 统一接口 | trait Component | 等价 |
 | 循环引用 | Rc + Weak | 需显式破环 |
@@ -127,7 +127,7 @@ assert_eq!(tree.sum(), 6);
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

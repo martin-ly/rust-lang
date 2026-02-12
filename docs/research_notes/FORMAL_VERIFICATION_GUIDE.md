@@ -12,6 +12,7 @@
   - [📊 目录](#-目录)
   - [🎯 概述](#-概述)
     - [验证目标](#验证目标)
+  - [形式化论证（验证框架）](#形式化论证验证框架)
   - [🛠️ 工具选择](#️-工具选择)
     - [Coq](#coq)
     - [Isabelle/HOL](#isabellehol)
@@ -54,6 +55,24 @@
 4. **类型系统验证**：验证类型系统的正确性
 5. **异步状态机验证**：验证 Future 状态一致性与并发安全
 6. **Pin 与自引用验证**：验证 Pin 保证与自引用类型安全
+
+---
+
+## 形式化论证（验证框架）
+
+**Def FV1（形式化验证）**：设 $T$ 为形式化定理（如 ownership T2、borrow T1），$V$ 为 Coq/Isabelle 等工具的验证活动。若 $V$ 生成机器可检查证明，且证明的结论与 $T$ 的陈述一致，则称 $V$ **验证** $T$。
+
+**Axiom FV1**：形式化验证不能替代定理正确性论证，但可排除证明中的隐含错误；验证通过 ⇒ 证明无语法/逻辑遗漏。
+
+**定理 FV-T1（验证与定理衔接）**：若 $V$ 验证 $T$，则 $T$ 的证明在验证工具的逻辑框架内成立；与 [PROOF_INDEX](PROOF_INDEX.md) 的手工证明互为补充。
+
+*证明*：由 Def FV1；机器验证保证证明结构正确；手工证明提供直觉与文档；二者一致则论证完备。∎
+
+**引理 FV-L1（六类验证覆盖）**：所有权、借用、生命周期、类型系统、异步、Pin 六类验证覆盖 Rust 核心安全机制；与 [formal_methods/README](formal_methods/README.md) FM-T1 对应。
+
+*证明*：由 Def FV1 与验证目标；六类对应 ownership_model、borrow_checker_proof、lifetime_formalization、type_system_foundations、async_state_machine、pin_self_referential。∎
+
+**推论 FV-C1**：验证任务清单完成 ⇔ 六类均有机器可检查证明；与 [ARGUMENTATION_GAP_INDEX](ARGUMENTATION_GAP_INDEX.md) 论证缺口追踪衔接。
 
 ---
 

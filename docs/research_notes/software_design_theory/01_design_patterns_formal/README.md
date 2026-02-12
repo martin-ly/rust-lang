@@ -25,7 +25,7 @@
 ## 生命周期考虑
 
 | 模式 | 生命周期要点 |
-|------|--------------|
+| :--- | :--- |
 | Chain、Composite | `Box` 递归；无引用则无生命周期标注 |
 | Observer | channel 转移所有权；无引用生命周期 |
 | Adapter、Decorator | `inner` 为拥有；`&self` 借用无 `'a` |
@@ -36,7 +36,7 @@
 ## 跨线程考虑
 
 | 模式 | Send/Sync 要点 |
-|------|----------------|
+| :--- | :--- |
 | Singleton | `OnceLock` 内部同步；`T` 需 `Send` 才可跨线程 |
 | Observer | `mpsc`/`broadcast` 需消息 `Send`；回调需 `Sync` |
 | Flyweight | 跨线程用 `Arc` 不用 `Rc`；`T` 需 `Sync` |
@@ -49,7 +49,7 @@
 ## Box / Rc / Arc 选型
 
 | 类型 | 所有权 | 适用 |
-|------|--------|------|
+| :--- | :--- | :--- |
 | `Box<T>` | 独占 | Chain 的 next、Composite 的 children、递归结构 |
 | `Rc<T>` | 共享；单线程 | Flyweight 单线程、Observable 回调 |
 | `Arc<T>` | 共享；跨线程 | Flyweight 跨线程、Singleton、Observer channel |
@@ -71,7 +71,7 @@
 形式化分析引用以下已有证明：
 
 | 依赖 | 文档 | 引用定理 |
-|------|------|----------|
+| :--- | :--- | :--- |
 | 所有权 | [ownership_model](../../formal_methods/ownership_model.md) | T2 唯一性、T3 内存安全 |
 | 借用 | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) | 数据竞争自由 T1 |
 | 生命周期 | [lifetime_formalization](../../formal_methods/lifetime_formalization.md) | 引用有效性 T2 |
@@ -85,7 +85,7 @@
 ### 01_creational（创建型，5）
 
 | 模式 | 文档 |
-|------|------|
+| :--- | :--- |
 | Factory Method | [factory_method](01_creational/factory_method.md) |
 | Abstract Factory | [abstract_factory](01_creational/abstract_factory.md) |
 | Builder | [builder](01_creational/builder.md) |
@@ -95,7 +95,7 @@
 ### 02_structural（结构型，7）
 
 | 模式 | 文档 |
-|------|------|
+| :--- | :--- |
 | Adapter | [adapter](02_structural/adapter.md) |
 | Bridge | [bridge](02_structural/bridge.md) |
 | Composite | [composite](02_structural/composite.md) |
@@ -107,7 +107,7 @@
 ### 03_behavioral（行为型，11）
 
 | 模式 | 文档 |
-|------|------|
+| :--- | :--- |
 | Chain of Responsibility | [chain_of_responsibility](03_behavioral/chain_of_responsibility.md) |
 | Command | [command](03_behavioral/command.md) |
 | Interpreter | [interpreter](03_behavioral/interpreter.md) |
@@ -135,7 +135,7 @@
 ## 创建型模式对比
 
 | 模式 | 适用场景 | 核心机制 |
-|------|----------|----------|
+| :--- | :--- | :--- |
 | Factory Method | 单产品、多态创建 | `fn create(&self) -> T` |
 | Abstract Factory | 产品族、风格一致 | 关联类型、枚举族 |
 | Builder | 多步骤、可选参数 | 链式 + `build(self)` |
@@ -147,7 +147,7 @@
 ## 结构型模式对比
 
 | 模式 | 适用场景 | 核心机制 |
-|------|----------|----------|
+| :--- | :--- | :--- |
 | Adapter | 适配已有接口 | 包装 + `impl Trait for Wrapper` |
 | Bridge | 解耦抽象与实现 | trait 解耦 |
 | Composite | 树状结构 | 枚举递归、`Vec<Node>` |
@@ -161,7 +161,7 @@
 ## 行为型模式对比
 
 | 模式 | 适用场景 | 核心机制 |
-|------|----------|----------|
+| :--- | :--- | :--- |
 | Chain | 请求沿链传递 | `Option<Box<Handler>>` |
 | Command | 封装操作、可撤销 | `Fn`、trait |
 | Interpreter | 表达式求值 | 枚举 AST + match |
@@ -179,7 +179,7 @@
 ## 常见模式组合
 
 | 组合 | 说明 |
-|------|------|
+| :--- | :--- |
 | Composite + Visitor | 树遍历；[composite](02_structural/composite.md)、[visitor](03_behavioral/visitor.md) |
 | Builder + Factory Method | 构建由工厂创建；[builder](01_creational/builder.md)、[factory_method](01_creational/factory_method.md) |
 | Decorator + Strategy | 装饰器持有多态策略；[decorator](02_structural/decorator.md)、[strategy](03_behavioral/strategy.md) |
@@ -191,7 +191,7 @@
 ## 错误处理
 
 | 模式 | Result vs panic |
-|------|-----------------|
+| :--- | :--- |
 | Builder | `build() -> Result<T, E>` 推荐；缺必填返回 Err |
 | Factory | 可返回 `Option`/`Result`；match 穷尽避免 panic |
 | Command | `execute() -> Result` 可传播错误 |
@@ -202,7 +202,7 @@
 ## 测试建议
 
 | 模式类型 | 测试要点 |
-|----------|----------|
+| :--- | :--- |
 | 创建型 | 产品类型正确；所有权转移 |
 | 结构型 | 委托链正确；无遗漏调用 |
 | 行为型 | 状态转换；Observer 通知顺序；Chain 委托 |
@@ -213,7 +213,7 @@
 ## 何时不选用
 
 | 模式 | 不适用场景 |
-|------|------------|
+| :--- | :--- |
 | Singleton | 需多实例、可测试性优先 |
 | Abstract Factory | 仅单产品 → 用 Factory Method |
 | Visitor | 结构稳定、操作常变 → 用 match 内联 |
@@ -239,7 +239,7 @@
 设计模式违反边界时的反例见 [FORMAL_PROOF_SYSTEM_GUIDE](../../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)：
 
 | 模式 | 反例 |
-|------|------|
+| :--- | :--- |
 | Singleton | 全局可变未同步 → 数据竞争 |
 | Observer | 共享可变无 Mutex → 数据竞争 |
 | Composite | 循环引用 → 所有权无法表达 |

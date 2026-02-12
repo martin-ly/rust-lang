@@ -122,7 +122,7 @@
 ### 1.3 理论覆盖范围矩阵
 
 | 理论族 | 公理/定义 | 语义模型 | 核心定理 | 边界/反例 |
-|--------|-----------|----------|----------|-----------|
+| :--- | :--- | :--- | :--- | :--- |
 | 内存安全 | 规则 1–3, Def 1.1–1.3 | 所有权状态 Ω | T2 唯一性, T3 内存安全 | 使用已移动值 |
 | 借用 | 规则 5–8 | 借用状态 | 数据竞争自由 T1 | 双重可变借用 |
 | 生命周期 | ℓ ⊆ lft | 区域类型 | 引用有效性 T2 | 返回局部引用 |
@@ -197,7 +197,7 @@
 ### 2.3 论证体系索引
 
 | 论证要素 | 索引文档 | 覆盖范围 |
-|----------|----------|----------|
+| :--- | :--- | :--- |
 | 概念定义 | KNOWLEDGE_STRUCTURE_FRAMEWORK、各 research_notes | 所有权、借用、类型、型变、Pin、异步 |
 | 公理-定理映射 | FORMAL_PROOF_SYSTEM_GUIDE、PROOF_INDEX | 概念→公理→定理→推论 |
 | 论证缺口 | ARGUMENTATION_GAP_INDEX、FORMAL_PROOF_SYSTEM_GUIDE | D1/D2/R1/R2/P1/P2/M1/M2 |
@@ -251,7 +251,7 @@
 ### 3.2 安全保证形式化汇总
 
 | 保证类型 | 安全机制 | 形式化定理 | 违反后果 |
-|----------|----------|------------|----------|
+| :--- | :--- | :--- | :--- |
 | **内存安全** | 所有权、借用、生命周期 | ownership T2,T3、borrow T1、lifetime T2 | 悬垂、双重释放、泄漏 |
 | **数据竞争自由** | 借用、Send/Sync | borrow T1、async T6.2 | 数据竞争、UB |
 | **类型安全** | 类型系统 | type_system T1–T3 | 类型错误、UB |
@@ -263,7 +263,7 @@
 ### 3.3 unsafe 契约矩阵
 
 | 操作 | 前置条件 P | 后置条件 Q | 违反后果 |
-|------|------------|------------|----------|
+| :--- | :--- | :--- | :--- |
 | `*ptr`（裸指针解引用） | 非空、对齐、有效、无别名写 | 访问有效 | UB |
 | `MaybeUninit::assume_init` | 内存已初始化 | 返回有效 T | UB |
 | `MaybeUninit::assume_init_drop` | 内存已初始化 | 调用 drop、内存未初始化 | UB |
@@ -291,7 +291,7 @@
 ### 3.5 UB 分类与反例
 
 | UB 类别 | 典型原因 | 反例 |
-|---------|----------|------|
+| :--- | :--- | :--- |
 | **内存 UB** | 悬垂、双重释放、越界、未初始化读取 | 解引用空指针、assume_init 未初始化 |
 | **类型 UB** | 无效 transmute、错误类型 | transmute 大小不等 |
 | **并发 UB** | 数据竞争、错误内存顺序 | 非 Send 跨线程、原子顺序错误 |
@@ -338,7 +338,7 @@
 ## 📚 相关文档
 
 | 文档 | 用途 |
-|------|------|
+| :--- | :--- |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳、概念族谱 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](UNIFIED_SYSTEMATIC_FRAMEWORK.md) | 全局统一框架、思维导图、矩阵、全链路图 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义、表达能力边界、unsafe 契约 |

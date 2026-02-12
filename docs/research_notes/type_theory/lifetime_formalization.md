@@ -21,6 +21,8 @@
     - [1. 生命周期](#1-生命周期)
     - [2. 生命周期子类型](#2-生命周期子类型)
     - [3. 生命周期推断](#3-生命周期推断)
+  - [公理、定理与引理](#公理定理与引理)
+  - [与 formal\_methods 衔接](#与-formal_methods-衔接)
   - [✅ 证明目标](#-证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
@@ -108,19 +110,49 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 ---
 
+## 公理、定理与引理
+
+**Axiom LT1**：引用生命周期 $\ell_r$ 必须为被引用对象生命周期 $\ell_{target}$ 的子类型；$\ell_r <: \ell_{target}$ 即 $\ell_r \subseteq \ell_{target}$。
+
+**Axiom LT2**：生命周期约束系统一致当且仅当存在满足所有约束的 $\Lambda$；约束冲突则程序非良型。
+
+**定理 LT-T1（引用有效性）**：若程序通过生命周期检查，则对任意引用 $r : \&\ell \tau$，$r$ 在 $\ell$ 内有效，无悬垂引用。
+
+*证明*：由 Axiom LT1；约束保证 $\ell_r \subseteq \ell_{target}$；推断算法 + 借用检查器保证使用时刻有效。完整证明见 [formal_methods/lifetime_formalization](../formal_methods/lifetime_formalization.md) 定理 2。∎
+
+**定理 LT-T2（推断正确性）**：生命周期推断算法生成的约束系统一致当且仅当程序良型；一致则有解。
+
+*证明*：由 Axiom LT2；约束生成规则正确反映程序语义；求解算法完备。见 [formal_methods/lifetime_formalization](../formal_methods/lifetime_formalization.md) 定理 3。∎
+
+**引理 LT-L1（子类型传递）**：若 $\ell_3 <: \ell_2$ 且 $\ell_2 <: \ell_1$，则 $\ell_3 <: \ell_1$；由 Def 2.1 包含关系传递。
+
+*证明*：$\ell_1 \supseteq \ell_2 \supseteq \ell_3 \Rightarrow \ell_1 \supseteq \ell_3$。∎
+
+**推论 LT-C1**：$\&\ell_1 \tau <: \&\ell_2 \tau$ 当且仅当 $\ell_2 <: \ell_1$（较长生命周期引用可协变替换较短）；由 Def 2.2。
+
+**推论 LT-C2**：违反生命周期约束的代码无法通过编译；编译器拒绝悬垂引用、存储短生命周期等。反例见 [formal_methods/lifetime_formalization](../formal_methods/lifetime_formalization.md) § 反例。
+
+---
+
+## 与 formal_methods 衔接
+
+本文档为**类型论视角**；[formal_methods/lifetime_formalization](../formal_methods/lifetime_formalization.md) 为**形式化方法视角**，含完整定理 1–3 证明、公理-定理证明树、反例表。两者互补：类型论侧重 $\ell <:$ 与类型系统的集成；形式化方法侧重约束生成、求解与引用有效性证明。
+
+---
+
 ## ✅ 证明目标
 
 ### 待证明的性质
 
-1. **生命周期推断正确性**: 生命周期推断算法正确推断生命周期
-2. **生命周期约束一致性**: 生命周期约束是一致的
-3. **引用有效性**: 生命周期系统保证引用有效
+1. **生命周期推断正确性**: 见定理 LT-T2
+2. **生命周期约束一致性**: 见 Axiom LT2、定理 LT-T2
+3. **引用有效性**: 见定理 LT-T1
 
 ### 证明方法
 
-- **约束求解**: 证明生命周期约束求解的正确性
-- **子类型证明**: 证明生命周期子类型的正确性
-- **语义证明**: 证明生命周期系统的语义正确性
+- **约束求解**: 定理 LT-T2 证明思路
+- **子类型证明**: 引理 LT-L1、推论 LT-C1
+- **语义证明**: 定理 LT-T1、与 ownership/borrow 衔接
 
 ---
 

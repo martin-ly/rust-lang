@@ -25,7 +25,7 @@
 本体系依赖以下已有形式化基础：
 
 | 依赖 | 文档 |
-|------|------|
+| :--- | :--- |
 | 所有权 | [ownership_model](../formal_methods/ownership_model.md) |
 | 借用 | [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) |
 | 生命周期 | [lifetime_formalization](../formal_methods/lifetime_formalization.md) |
@@ -42,7 +42,7 @@
 ### 2.1 三维边界
 
 | 维度 | 内容 | 文档 |
-|------|------|------|
+| :--- | :--- | :--- |
 | **安全 vs 非安全** | 纯 Safe / 需 unsafe / 无法表达 | [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md) |
 | **支持 vs 不支持** | 原生支持 / 库支持 / 需 FFI | [supported_unsupported_matrix](05_boundary_system/supported_unsupported_matrix.md) |
 | **充分 vs 非充分表达** | 等价表达 / 近似表达 / 不可表达 | [expressive_inexpressive_matrix](05_boundary_system/expressive_inexpressive_matrix.md) |
@@ -90,7 +90,7 @@
 ## 五、学习与选型
 
 | 阶段 | 内容 |
-|------|------|
+| :--- | :--- |
 | 入门 | Factory Method、Strategy、Adapter |
 | 结构 | Composite、Decorator、Facade |
 | 行为 | Observer、Command、State |
@@ -103,7 +103,7 @@
 ## 六、文档快速导航
 
 | 需求 | 入口文档 |
-|------|----------|
+| :--- | :--- |
 | 设计模式形式化分析 | [01_design_patterns_formal/README](01_design_patterns_formal/README.md) |
 | 23 安全 / 43 完全模型 | [02_workflow_safe_complete_models/README](02_workflow_safe_complete_models/README.md) |
 | 同步/异步/并发/分布式 | [03_execution_models/README](03_execution_models/README.md) |
@@ -123,7 +123,7 @@
 ## 八、推进阶段
 
 | 阶段 | 内容 | 状态 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 第一阶段 | 框架与边界 | 100% 完成 |
 | 第二阶段 | 设计模式形式化 | 100% 完成（23 模式） |
 | 第三阶段 | 工作流与执行模型 | 100% 完成（23/43、五执行模型） |

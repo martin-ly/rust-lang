@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（并发执行）**
+**Def 1.1（并发执行）**:
 
 并发执行满足：
 
@@ -16,28 +16,34 @@
 - 执行序列非确定：$e_1 \parallel e_2$ 表示 $e_1$ 与 $e_2$ 可交错执行
 - 无数据竞争：由类型系统保证（Send/Sync）
 
-**Def 1.2（Send）**
+**Def 1.2（Send）**:
 
 $T : \mathrm{Send}$ 当且仅当 $T$ 可安全跨线程边界转移所有权。形式化：若 $v : T$ 在线程 $t_1$ 中，转移至 $t_2$ 后 $t_1$ 不再访问，且 $t_2$ 可安全使用。
 
-**Def 1.3（Sync）**
+**Def 1.3（Sync）**:
 
 $T : \mathrm{Sync}$ 当且仅当 $\&T$ 可安全跨线程共享。形式化：多线程同时持有 $\&T$ 时无数据竞争。
 
-**Axiom CO1**：非 Send 类型不可跨线程传递；违反则编译错误。
+**Axiom CC1**：非 Send 类型不可跨线程传递；违反则编译错误。
 
-**Axiom CO2**：非 Sync 类型不可多线程共享；违反则编译错误。
+**Axiom CC2**：非 Sync 类型不可多线程共享；违反则编译错误。
 
-**定理 CO-T1**：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 数据竞争自由；Send/Sync 为结构性质，组合保持。
+**定理 CC-T1**：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 数据竞争自由；Send/Sync 为结构性质，组合保持。
 
-**定理 CO-T2**：由 [async_state_machine](../../formal_methods/async_state_machine.md) 定理 6.2，Send + Sync 保证并发安全。
+**定理 CC-T2**：由 [async_state_machine](../../formal_methods/async_state_machine.md) 定理 6.2，Send + Sync 保证并发安全。
+
+**引理 CC-L1（通道无共享）**：`mpsc::channel` 的 Sender/Receiver 分离所有权；无共享可变；消息传递语义不违反借用规则。
+
+*证明*：由 Def 1.2、1.3；Send 转移所有权；Receiver 独占消费；无 `&T` 跨线程共享，故无数据竞争。∎
+
+**推论 CC-C1**：Mutex/Arc 组合时，$T$ 需 Send；Arc 内部需 Sync；由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1、[ownership_model](../../formal_methods/ownership_model.md) T2。∎
 
 ---
 
 ## Rust 并发原语
 
 | 原语 | 用途 | 所有权/借用 |
-|------|------|-------------|
+| :--- | :--- | :--- |
 | `std::thread::spawn` | 创建线程 | 闭包需 `Send`，捕获值转移 |
 | `mpsc::channel` | 消息传递 | `Sender`/`Receiver` 分离，无共享 |
 | `Mutex<T>` | 互斥共享 | 持有所有权，`lock()` 返回 `MutexGuard` |
@@ -93,7 +99,7 @@ assert_eq!(*data.lock().unwrap(), 10);
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 生产者-消费者 | `mpsc` 通道、任务队列 |
 | 共享缓存 | `Arc<RwLock<HashMap>>` |
 | 后台任务 | `spawn` 执行耗时操作 |
@@ -103,12 +109,12 @@ assert_eq!(*data.lock().unwrap(), 10);
 
 ## 原子操作与内存顺序
 
-**Def 1.4（原子类型）**
+**Def 1.4（原子类型）**:
 
 `AtomicUsize`、`AtomicBool` 等提供无锁并发。内存顺序（Ordering）控制可见性：
 
 | Ordering | 说明 |
-|----------|------|
+| :--- | :--- |
 | `SeqCst` | 顺序一致，最强保证 |
 | `Acquire` | 读屏障，后续操作不可重排到之前 |
 | `Release` | 写屏障，之前操作不可重排到之后 |
@@ -134,7 +140,7 @@ assert_eq!(*data.lock().unwrap(), 10);
 ## 通道与共享状态选型
 
 | 需求 | 选型 | 说明 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 多生产者单消费者 | `mpsc::channel` | 无共享 |
 | 多生产者多消费者 | `sync_channel` 或 `broadcast` | 有界/无界 |
 | 共享可变 | `Mutex` / `RwLock` | 锁保护 |
@@ -146,7 +152,7 @@ assert_eq!(*data.lock().unwrap(), 10);
 ## 典型反例
 
 | 反例 | 后果 |
-|------|------|
+| :--- | :--- |
 | `Rc` 跨线程 | 编译错误（非 Send） |
 | `RefCell` 跨线程共享 | 编译错误（非 Sync） |
 | 锁内持锁 | 死锁 |
@@ -157,7 +163,7 @@ assert_eq!(*data.lock().unwrap(), 10);
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

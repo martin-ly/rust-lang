@@ -15,6 +15,7 @@
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
   - [📚 理论基础](#-理论基础)
+    - [形式化论证与实验衔接](#形式化论证与实验衔接)
     - [相关概念](#相关概念)
     - [理论背景](#理论背景)
   - [🔬 实验设计](#-实验设计)
@@ -72,6 +73,29 @@
 ---
 
 ## 📚 理论基础
+
+### 形式化论证与实验衔接
+
+**Def CP1（并发实验验证）**：并发性能实验 $E$ 验证 [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) T1、[async_state_machine](../formal_methods/async_state_machine.md) T6.2，当且仅当 $E$ 在观测下无数据竞争。
+
+**Axiom CP1**：ThreadSanitizer 等工具可检测数据竞争；实验观测与 borrow T1、async T6.2 结论一致即验证。
+
+**定理 CP-T1（并发观测蕴涵）**：若 $E$ 在 TSan 下无数据竞争报告，且满足 Send/Sync 约束，则 $E$ 与 borrow T1、async T6.2 结论一致。
+
+*证明*：由 [experiments/README](../experiments/README.md) 定理 EX-T1；TSan 与定理结论一致即验证。∎
+
+**引理 CP-L1（Send/Sync 与 borrow T1 衔接）**：若类型 $T$ 满足 `Send + Sync` 且跨线程共享，则 borrow T1 保证无数据竞争；TSan 观测与 borrow T1、async T6.2 结论一致。
+
+*证明*：由 [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) T1、[async_state_machine](../formal_methods/async_state_machine.md) T6.2；Send/Sync 为跨线程传递的必要条件；满足则无数据竞争。∎
+
+**推论 CP-C1**：Mutex、channel 等并发原语性能开销可实验测量；形式化保证正确性，性能需实验评估。
+
+| 实验类型 | 形式化定理 | 验证目标 |
+|----------|------------|----------|
+| 多线程性能 | borrow T1 | 无数据竞争；Send/Sync 约束 |
+| 异步性能 | async T6.2 | 并发安全；Future 状态一致 |
+
+**引用**：[experiments/README](../experiments/README.md) 定理 EX-T1、EX-T2；[FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)。
 
 ### 相关概念
 
@@ -342,7 +366,7 @@ async fn async_task_benchmark() {
 **结果**：
 
 | 原语        | 操作时间 (ms) | 吞吐量 (ops/s) |
-| ----------- | ------------- | -------------- |
+| :--- | :--- | :--- |
 | Mutex       | 245           | 4,081,633      |
 | RwLock (写) | 280           | 3,571,429      |
 | RwLock (读) | 120           | 8,333,333      |
@@ -359,7 +383,7 @@ async fn async_task_benchmark() {
 **结果**：
 
 | 通道类型           | 延迟 (ns) | 吞吐量 (msg/s) |
-| ------------------ | --------- | -------------- |
+| :--- | :--- | :--- |
 | mpsc::channel      | 45        | 22,222,222     |
 | mpsc::unbounded    | 38        | 26,315,789     |
 | crossbeam::channel | 32        | 31,250,000     |
@@ -375,7 +399,7 @@ async fn async_task_benchmark() {
 将 `cargo bench`（Mutex/RwLock/Atomic、mpsc/crossbeam、async 任务）的产出填入下表：
 
 | 类别 | 指标                  | 实测值 | 单位 | 备注          |
-| ---- | --------------------- | ------ | ---- | ------------- |
+| :--- | :--- | :--- | :--- | :--- |
 | 同步 | Mutex 操作时间        | **\_** | ms   | 1M 次/4 线程  |
 | 同步 | RwLock 写 操作时间    | **\_** | ms   | 同上          |
 | 同步 | RwLock 读 操作时间    | **\_** | ms   | 读多场景      |

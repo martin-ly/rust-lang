@@ -16,7 +16,7 @@
 ## 执行模型分类
 
 | 模型 | 定义 | 形式化文档 |
-|------|------|------------|
+| :--- | :--- | :--- |
 | 同步 | 顺序执行，单线程 | [01_synchronous](01_synchronous.md) |
 | 异步 | Future、async/await、单线程协作式多任务 | [02_async](02_async.md) |
 | 并发 | 多线程、Send/Sync、消息传递/共享状态 | [03_concurrent](03_concurrent.md) |
@@ -28,7 +28,7 @@
 ## 依赖引用
 
 | 依赖 | 文档 |
-|------|------|
+| :--- | :--- |
 | 异步状态机 | [async_state_machine](../../formal_methods/async_state_machine.md) |
 | Pin | [pin_self_referential](../../formal_methods/pin_self_referential.md) |
 | 借用 | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) |
@@ -47,7 +47,7 @@
 ## 模型选择速查
 
 | 需求 | 推荐模型 | crate |
-|------|----------|-------|
+| :--- | :--- | :--- |
 | 顺序执行 | 同步 | std |
 | I/O 密集、高并发连接 | 异步 | tokio、async-std |
 | 多线程、消息传递 | 并发 | std::thread、mpsc |

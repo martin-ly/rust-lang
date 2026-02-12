@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（分布式执行）**
+**Def 1.1（分布式执行）**:
 
 分布式执行满足：
 
@@ -16,7 +16,7 @@
 - 无共享内存；仅通过消息传递
 - 网络 I/O、序列化、RPC、消息队列
 
-**Def 1.2（Actor 模型）**
+**Def 1.2（Actor 模型）**:
 
 Actor 为封装状态与行为的单元；通过消息传递通信。形式化：
 
@@ -28,6 +28,12 @@ Actor 为封装状态与行为的单元；通过消息传递通信。形式化�
 **Axiom DI2**：失败与超时；分布式系统需处理部分失败。
 
 **定理 DI-T1**：tonic、actix 等库封装网络与序列化；Rust 类型系统保证序列化前后类型一致。FFI 绑定需 unsafe。
+
+**引理 DI-L1（序列化类型安全）**：若 $T$ 实现 `Serialize`/`Deserialize`，则 `serde` 保证序列化 $v:T$ 与反序列化结果类型一致；跨边界无类型混淆。
+
+*证明*：由 serde 实现；类型信息编码于格式；反序列化时类型确定；Axiom DI1 类型安全。∎
+
+**推论 DI-C1**：分布式模型为 Safe 当且仅当无裸 FFI；tonic、actix 为 Safe；自定义 C 绑定需 unsafe 封装。见 [06_boundary_analysis](06_boundary_analysis.md) EB-T1。
 
 ---
 
@@ -81,7 +87,7 @@ impl Handler<MyMessage> for MyActor {
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 微服务 | gRPC、HTTP API |
 | 消息队列 | Kafka、RabbitMQ 客户端 |
 | Actor 集群 | 分布式 actor 系统 |
@@ -98,7 +104,7 @@ impl Handler<MyMessage> for MyActor {
 **失败模式**：
 
 | 失败 | 处理 | Rust 对应 |
-|------|------|-----------|
+| :--- | :--- | :--- |
 | 网络超时 | 超时设置、重试 | `tokio::time::timeout` |
 | 部分失败 | 幂等、补偿 | `Result`、`?` 传播 |
 | 节点宕机 | 副本、心跳 | 库实现 |
@@ -108,7 +114,7 @@ impl Handler<MyMessage> for MyActor {
 
 ## 序列化与类型安全
 
-**Def 1.3（序列化契约）**
+**Def 1.3（序列化契约）**:
 
 设 $T$ 为可序列化类型。$\mathit{serialize}(v : T) \to \mathit{bytes}$，$\mathit{deserialize}(\mathit{bytes}) \to \mathit{Result}\langle T, E \rangle$。类型 $T$ 在序列化前后一致。
 
@@ -128,7 +134,7 @@ let parsed: Request = serde_json::from_slice(&bytes)?;
 ## RPC 与 Actor 对比
 
 | 模型 | 通信 | 语义 | 典型库 |
-|------|------|------|--------|
+| :--- | :--- | :--- | :--- |
 | RPC | 请求-响应 | 同步风格 | tonic、tarpc |
 | Actor | 消息传递 | 异步、无共享 | actix |
 | 消息队列 | 发布-订阅 | 解耦 | rdkafka、lapin |
@@ -162,7 +168,7 @@ where
 ## 安全边界与 FFI
 
 | 边界 | 说明 |
-|------|------|
+| :--- | :--- |
 | 纯 Safe | tonic、actix、serde 等高层 API |
 | 需 unsafe | 直接 `extern`、`libc` 绑定、自定义协议 |
 | 安全抽象 | 将 unsafe 封装在库内，对外 Safe API |
@@ -172,7 +178,7 @@ where
 ## 与形式化基础衔接
 
 | 模型 | 引用 |
-|------|------|
+| :--- | :--- |
 | 消息传递 | Send 类型跨边界；无共享内存 |
 | 序列化 | 类型安全；无 transmute |
 | 超时 | 有限 Future（async T6.3） |
@@ -182,7 +188,7 @@ where
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe（库封装）；FFI 需 unsafe |
 | 支持 | 库支持 |
 | 表达 | 近似（无内置 RPC） |

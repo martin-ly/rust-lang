@@ -278,7 +278,7 @@ $$\text{DependentType}[\tau, v] = \text{Type} \text{ where } v : \text{Const}$$
 以下定义依赖 [type_system_foundations](type_system_foundations.md) 与 [trait_system_formalization](trait_system_formalization.md) 中的基础概念：
 
 | 前置概念 | 来源 | 在本文档中的使用 |
-|----------|------|------------------|
+| :--- | :--- | :--- |
 | $\text{Type}$（类型） | type_system_foundations | GAT、const 泛型、依赖类型的值域 |
 | 关联类型 (Associated Type) | trait_system_formalization | GAT 扩展关联类型 |
 | $\text{Const}$（编译时常量） | 类型系统 const 上下文 | const 泛型参数、受限依赖类型 |
@@ -316,45 +316,37 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 
 ### 4. 类型系统扩展
 
-**定理 1 (GAT 类型安全)**:
-如果 GAT $A[P]$ 的类型推导正确，则 GAT 的使用是类型安全的。
+**Axiom AT1**：GAT 类型推导规则与 [type_system_foundations](type_system_foundations.md) 定理 4、5 一致；约束违反则编译错误。
 
-**证明思路**:
+**Axiom AT2**：const 泛型参数必须为编译时常量；运行时常量不能作为类型参数；违反则编译错误。
 
-- GAT 的类型推导算法保证类型正确性
-- GAT 约束保证类型参数满足要求
+**定理 AT-T1 (GAT 类型安全)**：若 GAT $A[P]$ 的类型推导正确，则 GAT 的使用是类型安全的。
 
-**公理链标注**：定义 1.1–1.3 + 类型推导规则（[type_system_foundations](type_system_foundations.md) 定理 4、5）→ 定理 1。
+*证明*：由 Def 1.1–1.3；GAT 约束 $A[P] : B[P]$ 在类型推导时检查；[type_system_foundations](type_system_foundations.md) 定理 4、5 保证推导正确性；违反则编译错误。依 Axiom AT1。∎
 
-**定理 2 (const 泛型类型安全)**:
-如果 const 泛型类型 $T[N]$ 的 const 参数 $N$ 是编译时常量，则类型是安全的。
+**定理 AT-T2 (const 泛型类型安全)**：若 const 泛型类型 $T[N]$ 的 const 参数 $N$ 为编译时常量，则类型安全。
 
-**公理链标注**：定义 2.1–2.3 + 编译时常量检查 → 定理 2。
+*证明*：由 Def 2.1–2.3；const 参数在编译时求值；编译器拒绝非法 const；依 Axiom AT2。∎
 
-**证明思路**:
+**定理 AT-T3 (受限依赖类型安全)**：Rust 的受限依赖类型系统保证类型安全，无运行时类型错误。
 
-- const 参数必须是编译时常量
-- 编译时检查保证 const 参数的有效性
+*证明*：由 Def 3.1–3.2；依赖仅限于编译时常量；类型检查在编译时完成；由 AT-T1、AT-T2 组合。∎
 
-**定理 3 (受限依赖类型安全)**:
-Rust 的受限依赖类型系统保证类型安全，不会出现运行时类型错误。
+**引理 AT-L1 (GAT 与 trait 衔接)**：GAT 约束 $A[P] : B[P]$ 在 `impl` 解析时检查；满足 [trait_system_formalization](trait_system_formalization.md) 解析正确性。
 
-**证明思路**:
+*证明*：由 Def 1.3；GAT 为 trait 关联类型扩展；impl 解析在类型检查阶段；约束违反则编译错误。∎
 
-- 依赖关系仅限于编译时常量
-- 类型检查在编译时完成
-
-**公理链标注**：定义 3.1–3.2 + 定理 1（GAT）+ 定理 2（const 泛型）→ 定理 3。
+**推论 AT-C1**：违反 GAT、const 泛型、依赖类型规则的代码无法通过编译；反例见下文「反例」表。
 
 ---
 
 ## ⚠️ 反例：违反高级类型规则
 
 | 反例 | 违反规则 | 后果 | 说明 |
-|------|----------|------|------|
-| 非 const 作为 const 泛型参数 | 定理 2 | 编译错误 | 运行时值不能作为 `[T; N]` 的 N |
-| GAT 约束违反 | 定理 1 | 编译错误 | 关联类型不满足 where 子句约束 |
-| 依赖类型用运行时值 | 定理 3 | 编译错误 | Rust 不支持 `Vec<T>` 依赖 `len()` 运行时值 |
+| :--- | :--- | :--- | :--- |
+| 非 const 作为 const 泛型参数 | AT-T2 | 编译错误 | 运行时值不能作为 `[T; N]` 的 N |
+| GAT 约束违反 | AT-T1 | 编译错误 | 关联类型不满足 where 子句约束 |
+| 依赖类型用运行时值 | AT-T3 | 编译错误 | Rust 不支持 `Vec<T>` 依赖 `len()` 运行时值 |
 | 类型族循环依赖 | GAT 解析 | 编译错误 | 递归 GAT 约束无解 |
 | const 泛型非整数 | const 泛型规则 | 编译错误 | 仅 supports integral/char/bool |
 
@@ -365,13 +357,18 @@ Rust 的受限依赖类型系统保证类型安全，不会出现运行时类型
 ```text
 高级类型安全性证明树
 
-  定义: GAT 形式化、const 泛型、受限依赖类型
+  定义: Def 1.1–1.3 (GAT)、Def 2.1–2.3 (const)、Def 3.1–3.2 (受限依赖)
+  Axiom: AT1 (GAT 推导)、AT2 (const 编译时常量)
   │
-  ├─ GAT 类型推导 + 约束 ──────────→ 定理 1: GAT 类型安全
+  ├─ GAT 类型推导 + 约束 ──────────→ AT-T1: GAT 类型安全
   │
-  ├─ const 编译时常量检查 ─────────→ 定理 2: const 泛型类型安全
+  ├─ const 编译时常量检查 ─────────→ AT-T2: const 泛型类型安全
   │
-  └─ 编译时依赖 + 定理 1,2 ────────→ 定理 3: 受限依赖类型安全
+  ├─ GAT 与 trait impl 衔接 ───────→ AT-L1
+  │
+  └─ 编译时依赖 + AT-T1, AT-T2 ────→ AT-T3: 受限依赖类型安全
+       │
+       └────────────────────────────→ AT-C1: 违反则编译错误
 ```
 
 ---

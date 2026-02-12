@@ -21,6 +21,7 @@
     - [形式化方法研究](#形式化方法研究)
     - [类型理论研究](#类型理论研究)
     - [实验研究](#实验研究)
+    - [软件设计理论研究](#软件设计理论研究)
     - [综合研究](#综合研究)
   - [🔍 按主题分类](#-按主题分类)
     - [所有权和借用](#所有权和借用)
@@ -98,21 +99,23 @@
    - 动机→设计决策→形式化→决策树→反例
 
 10. **[ARGUMENTATION_GAP_INDEX.md](./ARGUMENTATION_GAP_INDEX.md)** - 论证缺口与设计理由综合索引 🆕
-   - 四维缺口分类（定义、关系、证明、设计理由）
-   - 论证缺口追踪矩阵、设计理由缺口追踪矩阵
-   - 思维表征覆盖矩阵
 
-6. **[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md)** - 理论体系与论证体系结构 🆕
+- 四维缺口分类（定义、关系、证明、设计理由）
+- 论证缺口追踪矩阵、设计理由缺口追踪矩阵
+- 思维表征覆盖矩阵
+
+1. **[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md)** - 理论体系与论证体系结构 🆕
    - 理论体系四层架构（公理→语义→定理→边界）
    - 论证体系五层结构（概念→属性→论证→证明→表征）
    - 安全与非安全全面论证
 
-7. **[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)** - 安全与非安全全面论证与分析 🆕
+2. **[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)** - 安全与非安全全面论证与分析 🆕
    - 安全/unsafe 定义与边界、契约体系、UB 分类、安全抽象
 
-11. **[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)** - Rust 1.93 语言特性全面分析 🆕
-   - 92 项语言特性全覆盖（内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增）
-   - 每项含动机、设计决策、形式化引用、反例
+3. **[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)** - Rust 1.93 语言特性全面分析 🆕
+
+- 92 项语言特性全覆盖（内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增）
+- 每项含动机、设计决策、形式化引用、反例
 
 ### 进展跟踪
 

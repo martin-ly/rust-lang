@@ -32,7 +32,7 @@
 ### 创建型（5）
 
 | 模式 | 安全实现 | 核心 Rust 机制 | 形式化文档 |
-|------|----------|----------------|------------|
+| :--- | :--- | :--- | :--- |
 | Factory Method | 纯 Safe | trait 工厂方法、泛型 | [factory_method](../01_design_patterns_formal/01_creational/factory_method.md) |
 | Abstract Factory | 纯 Safe | 枚举/结构体族、trait | [abstract_factory](../01_design_patterns_formal/01_creational/abstract_factory.md) |
 | Builder | 纯 Safe | 方法链、`Option`/类型状态 | [builder](../01_design_patterns_formal/01_creational/builder.md) |
@@ -44,7 +44,7 @@
 ### 结构型（7）
 
 | 模式 | 安全实现 | 核心 Rust 机制 | 形式化文档 |
-|------|----------|----------------|------------|
+| :--- | :--- | :--- | :--- |
 | Adapter | 纯 Safe | 结构体包装、`impl Trait for Wrapper` | [adapter](../01_design_patterns_formal/02_structural/adapter.md) |
 | Bridge | 纯 Safe | trait 解耦抽象与实现 | [bridge](../01_design_patterns_formal/02_structural/bridge.md) |
 | Composite | 纯 Safe | `Box`、`Vec`、递归枚举 | [composite](../01_design_patterns_formal/02_structural/composite.md) |
@@ -58,7 +58,7 @@
 ### 行为型（11）
 
 | 模式 | 安全实现 | 核心 Rust 机制 | 形式化文档 |
-|------|----------|----------------|------------|
+| :--- | :--- | :--- | :--- |
 | Chain of Responsibility | 纯 Safe | `Option<Box<Handler>>` 链表 | [chain_of_responsibility](../01_design_patterns_formal/03_behavioral/chain_of_responsibility.md) |
 | Command | 纯 Safe | `Fn`、闭包、`Box<dyn Fn()>` | [command](../01_design_patterns_formal/03_behavioral/command.md) |
 | Interpreter | 纯 Safe | 枚举 AST、`match` | [interpreter](../01_design_patterns_formal/03_behavioral/interpreter.md) |
@@ -78,7 +78,7 @@
 ## 实现约束与注意事项
 
 | 约束 | 适用模式 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | 无 `static mut` | Singleton | 用 OnceLock/LazyLock |
 | `Send`/`Sync` | 跨线程 Observer、Flyweight | 选 `Arc` 而非 `Rc` |
 | 生命周期 | Mediator、Chain | 链式结构用 `Box` 避免自引用 |

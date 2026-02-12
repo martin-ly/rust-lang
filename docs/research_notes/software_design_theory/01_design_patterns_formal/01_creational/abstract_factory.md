@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Abstract Factory 结构）**
+**Def 1.1（Abstract Factory 结构）**:
 
 设 $\mathcal{F}$ 为抽象工厂族，$T_1, \ldots, T_n$ 为产品类型族。Abstract Factory 满足：
 
@@ -71,7 +71,7 @@ impl GuiFactory for WinFactory {
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 跨平台 UI | Win/Mac/Linux 各自 Button、Dialog 族 |
 | 主题/皮肤 | 暗色/亮色控件族 |
 | 数据库抽象 | 不同驱动产生的 Connection、Statement 族 |
@@ -82,7 +82,7 @@ impl GuiFactory for WinFactory {
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Factory Method](factory_method.md) | 抽象工厂由多个工厂方法组成 |
 | [Builder](builder.md) | 可组合：Builder 由 Factory 创建 |
 | [Singleton](singleton.md) | 工厂可为单例 |
@@ -92,7 +92,7 @@ impl GuiFactory for WinFactory {
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 关联类型 | `type B: Button; type D: Dialog` | 类型族编译期 |
 | 枚举 | `enum Theme { Dark, Light }` + match | 有限主题 |
 | trait 对象 | `Box<dyn GuiFactory>` | 运行时选择 |
@@ -116,7 +116,7 @@ let ui = (win_factory.create_button(), mac_factory.create_dialog());
 
 ## 选型决策树
 
-```
+```text
 需要创建产品族（风格一致）？
 ├── 是 → 跨平台/主题/格式族？ → Abstract Factory（关联类型或枚举）
 ├── 否 → 仅单产品？ → Factory Method
@@ -128,7 +128,7 @@ let ui = (win_factory.create_button(), mac_factory.create_dialog());
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | 抽象工厂接口 | trait + 关联类型 | 等价 |
 | 具体工厂 | impl for XxxFactory | 等价 |
 | 产品族一致 | 关联类型 type B, type D | 编译期保证 |
@@ -138,7 +138,7 @@ let ui = (win_factory.create_button(), mac_factory.create_dialog());
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

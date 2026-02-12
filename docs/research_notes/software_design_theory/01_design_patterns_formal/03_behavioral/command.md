@@ -105,7 +105,7 @@ impl ReversibleCommand for IncrementCommand {
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 撤销/重做 | 编辑器、事务、历史记录 |
 | 任务队列 | 延迟执行、批处理 |
 | 宏/脚本 | 录制与回放操作 |
@@ -116,7 +116,7 @@ impl ReversibleCommand for IncrementCommand {
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Observer](observer.md) | 观察者可接收命令；命令可作为事件 |
 | [Chain of Responsibility](chain_of_responsibility.md) | 链中节点可封装为 Command |
 | [Memento](memento.md) | 撤销需 Memento 保存状态 |
@@ -126,7 +126,7 @@ impl ReversibleCommand for IncrementCommand {
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | `Box<dyn Fn()>` | 无参数、无返回值 | 简单操作 |
 | `Box<dyn FnOnce()>` | 消费型；可移动捕获 | 一次性执行 |
 | `trait Command` | 可扩展、可存储 | 撤销/重做、队列 |
@@ -164,7 +164,7 @@ impl ReversibleCommand for SendEmailCommand {
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | 命令接口 | trait Command 或 Fn | 等价 |
 | 具体命令 | impl Command | 等价 |
 | 撤销 | undo 方法 | 等价 |
@@ -174,7 +174,7 @@ impl ReversibleCommand for SendEmailCommand {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

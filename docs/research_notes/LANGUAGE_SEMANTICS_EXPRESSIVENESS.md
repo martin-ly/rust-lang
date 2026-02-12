@@ -150,7 +150,7 @@ Rust 的 `Result<T, E>` 对应构造性逻辑中的 $T \lor E$：可构造的要
 ### 3. 表达能力边界：指称语义视角
 
 | 可表达 | 不可表达 | 边界论证 |
-|--------| :--- | :--- |
+| :--- | :--- | :--- |
 | 存在类型（`impl Trait`、dyn） | 完整依赖类型 | 受限 GAT；依赖类型需额外约束 |
 | 高阶类型（`Vec<T>`） | 无界高阶 | 类型构造子有限；无 type-level 计算 |
 | 线性/仿射类型（所有权） | 全息类型（可复制任意次） | 默认移动；Copy 需显式 |
@@ -169,7 +169,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 `unsafe` 块要求程序员保证前置条件，编译器信任后置条件。
 
 | 构造 | 前置条件 | 后置条件 |
-|------| :--- | :--- |
+| :--- | :--- | :--- |
 | `MaybeUninit::assume_init` | 内存已初始化 | 返回有效 $T$ |
 | `ptr::read` | 指针有效、对齐 | 返回值副本 |
 | `ManuallyDrop::drop` | 值未被 drop | 已 drop |
@@ -183,7 +183,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ### 3. 表达能力边界：公理语义视角
 
 | 可表达 | 不可表达 | 边界论证 |
-|--------| :--- | :--- |
+| :--- | :--- | :--- |
 | 模块化规格（各函数契约） | 全局不变量自动维持 | 需手动在调用链传递 |
 | unsafe 块内任意操作 | 安全子集中绕过检查 | 安全抽象边界；越界则 UB |
 | 生命周期约束 | 跨函数指针有效性 | 生命周期必须语法可表达 |
@@ -195,7 +195,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ### 1. 多维表达能力边界矩阵
 
 | 维度 | 可表达 | 边界 | 不可表达 | 论证依据 |
-|------|--------|------| :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- |
 | **内存** | 所有权、借用、RAII | 无 GC、无手动 malloc/free | 跨线程共享无同步 | [ownership_model](formal_methods/ownership_model.md) T2, T3 |
 | **类型** | 泛型、Trait、类型推断 | 无运行时类型反射 | 完整依赖类型 | [type_system_foundations](type_theory/type_system_foundations.md)、[advanced_types](type_theory/advanced_types.md) |
 | **并发** | Send/Sync、async、线程 | 数据竞争自由 | 无 GC 的共享可变 | [async_state_machine](formal_methods/async_state_machine.md) T6.2、[borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1 |
@@ -233,7 +233,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 **公理 EB0**：表达能力边界由类型系统、所有权、借用、生命周期、型变、异步、Pin 等机制共同定义；违反则编译错误或 UB。
 
 | 定理 | 陈述 | 证明文档 |
-| :--- | :--- |----------|
+| :--- | :--- | :--- |
 | **EB1** | 安全 Rust 不允许数据竞争 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1 |
 | **EB2** | 安全 Rust 不允许悬垂引用 | [lifetime_formalization](formal_methods/lifetime_formalization.md) T2、[ownership_model](formal_methods/ownership_model.md) T3 |
 | **EB3** | 良型程序不退化为类型错误 | [type_system_foundations](type_theory/type_system_foundations.md) T3 |
@@ -262,7 +262,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ### 语义范式 vs 表达能力
 
 | 语义范式 | 表达能力覆盖 | 边界清晰度 | 与现有证明衔接 |
-|----------|--------------|------------|----------------|
+| :--- | :--- | :--- | :--- |
 | 操作语义 | 求值、存储、控制流 | 高（规则即边界） | type_system、ownership、borrow |
 | 指称语义 | 类型、命题、构造性 | 中（需补充依赖类型限制） | type_system、advanced_types |
 | 公理语义 | 契约、unsafe 边界 | 高（前置/后置即边界） | 各 unsafe API 文档 |
@@ -302,7 +302,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ## ⚠️ 反例：表达能力边界 violation
 
 | 反例 | 违反的边界 | 后果 | 文档 |
-| :--- | :--- | :--- |------|
+| :--- | :--- | :--- | :--- |
 | 双重可变借用 | 借用互斥 | 编译错误 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) |
 | 返回局部引用 | 生命周期 outlives | 编译错误 | [lifetime_formalization](formal_methods/lifetime_formalization.md) |
 | `&mut T` 协变 | 型变边界 | 悬垂引用 | [variance_theory](type_theory/variance_theory.md) |

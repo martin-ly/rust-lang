@@ -8,7 +8,7 @@
 
 ## 形式化定义与公理
 
-**Def 1.1（表达边界）**
+**Def 1.1（表达边界）**:
 
 设 $P_{\mathrm{OOP}}$ 为 GoF/OOP 模式 $P$ 的语义，$P_{\mathrm{Rust}}$ 为 Rust 对应实现。定义表达边界函数 $\mathit{ExprB}(P) \in \{\mathrm{Same},\, \mathrm{Approx},\, \mathrm{NoExpr}\}$：
 
@@ -16,7 +16,7 @@
 - **近似表达**：$\mathit{ExprB}(P) = \mathrm{Approx}$ 当且仅当 $P_{\mathrm{Rust}}$ 可实现核心意图，但实现方式或约束不同，有语义偏移
 - **不可表达**：$\mathit{ExprB}(P) = \mathrm{NoExpr}$ 当且仅当 $P_{\mathrm{Rust}}$ 无法表达或需显著变形
 
-**Def 1.2（语义等价）**
+**Def 1.2（语义等价）**:
 
 $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$ 当且仅当：对任意输入 $x$，$P_{\mathrm{Rust}}(x)$ 与 $P_{\mathrm{OOP}}(x)$ 行为等价（观察等价）；且类型/约束对应关系一致。
 
@@ -59,7 +59,7 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$ 当且仅当：对任意输入 $x$�
 ## 定义（非形式化对照）
 
 | 分类 | 定义 |
-|------|------|
+| :--- | :--- |
 | **等价表达** | 与 GoF/OOP 语义完全等价，无信息损失 |
 | **近似表达** | 可实现核心意图，但实现方式或约束不同 |
 | **不可表达** | 无法在 Rust 中表达或需显著变形 |

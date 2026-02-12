@@ -8,7 +8,7 @@
 
 ## 形式化定义与公理
 
-**Def 1.1（支持边界）**
+**Def 1.1（支持边界）**:
 
 设 $F$ 为待实现的功能或模式。定义支持边界函数 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib},\, \mathrm{FFI}\}$：
 
@@ -16,7 +16,7 @@
 - **库支持**：$\mathit{SuppB}(F) = \mathrm{Lib}$ 当且仅当 $F$ 需第三方 crate（如 tokio、rayon）
 - **需 FFI**：$\mathit{SuppB}(F) = \mathrm{FFI}$ 当且仅当 $F$ 需 `extern` 调用 C/外部库
 
-**Def 1.2（依赖闭包）**
+**Def 1.2（依赖闭包）**:
 
 设 $\mathit{deps}(C)$ 为 crate $C$ 的传递依赖集。若 $\mathit{std} \in \mathit{deps}(C)$ 或 $\mathit{core} \in \mathit{deps}(C)$ 且无其他 crate，则 $\mathit{SuppB}(C) = \mathrm{Native}$。
 
@@ -59,7 +59,7 @@
 ## 定义（非形式化对照）
 
 | 分类 | 定义 |
-|------|------|
+| :--- | :--- |
 | **原生支持** | 语言/标准库直接提供，无需第三方 crate |
 | **库支持** | 需第三方 crate（如 tokio、rayon、actix） |
 | **需 FFI** | 需通过 `extern` 调用 C/外部库 |
@@ -122,7 +122,7 @@
 
 ## 决策树：判定支持边界
 
-```
+```text
 实现某模式/功能时，是否需要第三方 crate？
 ├── 否 → 原生支持（std、core）
 └── 是 → 是否涉及 extern/C FFI？
@@ -135,7 +135,7 @@
 ## 典型 crate 映射
 
 | 支持边界 | 设计模式/执行模型 | 典型 crate |
-|----------|-------------------|------------|
+| :--- | :--- | :--- |
 | 原生 | 绝大多数 GoF 23 | std、core |
 | 库 | 异步 | tokio、async-std |
 | 库 | 并行 | rayon |
@@ -148,7 +148,7 @@
 ## 选型建议
 
 | 需求 | 建议 |
-|------|------|
+| :--- | :--- |
 | 零依赖 | 用原生支持；GoF 23 均可用 std |
 | 异步 | 加 tokio/async-std；库支持 |
 | 并行 | 加 rayon；库支持 |
@@ -173,7 +173,7 @@
 ## Cargo 特性与可选依赖
 
 | 依赖类型 | 说明 |
-|----------|------|
+| :--- | :--- |
 | 默认 | 必需功能 |
 | 可选 `[features]` | 按需启用，如 `tokio/full` |
 | `optional = true` | 可选 crate，配合 feature 启用 |
@@ -183,7 +183,7 @@
 ## 版本兼容性
 
 | 策略 | 说明 |
-|------|------|
+| :--- | :--- |
 | 语义化版本 | 主版本变更可能有破坏性 |
 | 最小版本 | `cargo update -Z minimal-versions` |
 | MSRV | 最低 Rust 版本 |

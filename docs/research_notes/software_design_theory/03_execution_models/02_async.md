@@ -32,6 +32,12 @@ $\mathit{async}\, \{ e \}$ 产生 $\mathrm{Future}\langle \tau \rangle$，其中
 
 **定理 AS-T2**：由 [pin_self_referential](../../formal_methods/pin_self_referential.md)，Pin 保证自引用 Future 移动安全。
 
+**引理 AS-L1（await 挂起语义）**：$\mathit{await}\, f$ 在 $f = \mathrm{Pending}$ 时挂起；恢复后 $f$ 的 poll 由运行时调度；单线程协作式，无抢占。
+
+*证明*：由 Axiom AS2；await 为 yield 点；运行时（tokio 等）在 Ready 时唤醒；无抢占故无数据竞争。∎
+
+**推论 AS-C1**：有限 Future 终将 Ready；由 [async_state_machine](../../formal_methods/async_state_machine.md) T6.3；无限延迟需超时/取消显式处理。
+
 ---
 
 ## 操作语义（简化）
@@ -98,7 +104,7 @@ impl SelfReferential {
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 网络 I/O | HTTP 客户端、gRPC、WebSocket |
 | 文件 I/O | 异步读写、watch |
 | 高并发连接 | 单线程处理大量连接 |
@@ -109,7 +115,7 @@ impl SelfReferential {
 ## 与同步/并发对比
 
 | 模型 | 线程 | 调度 | 适用场景 |
-|------|------|------|----------|
+| :--- | :--- | :--- | :--- |
 | 同步 | 1 | 无 | CPU 密集 |
 | 异步 | 1 | 协作式 | I/O 密集、高并发连接 |
 | 并发 | N | 抢占式 | 多核并行 |
@@ -142,7 +148,7 @@ Future 执行流程（简化）：
 ### 多任务组合
 
 | 组合 | 语义 | 示例 |
-|------|------|------|
+| :--- | :--- | :--- |
 | `join!(a, b)` | 并行执行，等待全部完成 | `tokio::join!(f1(), f2())` |
 | `select!(a, b)` | 先完成者优先，取消其余 | `tokio::select!(r1 = f1() => ..., r2 = f2() => ...)` |
 | `try_join!` | 任一失败即返回 | `tokio::try_join!(f1(), f2())` |
@@ -169,7 +175,7 @@ handle.abort();  // 显式取消
 ## 运行时选型
 
 | 运行时 | 特点 | 适用 |
-|--------|------|------|
+| :--- | :--- | :--- |
 | **tokio** | 多线程、work-stealing、生态丰富 | 生产、网络服务 |
 | **async-std** | 接近 std API、兼容性好 | 快速原型 |
 | **smol** | 轻量、可嵌入 | 嵌入式、资源受限 |
@@ -180,7 +186,7 @@ handle.abort();  // 显式取消
 ## 反例与边界
 
 | 反例 | 后果 | 说明 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 自引用 Future 未 Pin | 悬垂 | 移动后自引用指针失效 |
 | 非 Send 跨 await | 编译错误 | async 块可能跨线程 |
 | 在 Future 中持有 borrow | 生命周期错误 | await 后可能切换任务 |
@@ -191,7 +197,7 @@ handle.abort();  // 显式取消
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe（Pin 由库封装） |
 | 支持 | 库支持（tokio/async-std） |
 | 表达 | 等价 |

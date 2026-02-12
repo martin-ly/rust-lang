@@ -16,7 +16,7 @@
 ## 定义
 
 | 概念 | 定义 |
-|------|------|
+| :--- | :--- |
 | **23 安全模型** | GoF 23 种设计模式中，可**纯 Safe** 实现的子集 |
 | **43 完全模型** | GoF 23 + 扩展 20（Fowler EAA/DDD：Domain Model、Repository、Service Layer、Gateway、DTO、Event Sourcing 等） |
 
@@ -25,7 +25,7 @@
 ## 文档索引
 
 | 文档 | 内容 |
-|------|------|
+| :--- | :--- |
 | [01_safe_23_catalog](01_safe_23_catalog.md) | 23 种安全设计模型索引 |
 | [02_complete_43_catalog](02_complete_43_catalog.md) | 43 种完全模型索引 |
 | [03_semantic_boundary_map](03_semantic_boundary_map.md) | 语义边界图 |
@@ -52,7 +52,7 @@
 ## 快速参考
 
 | 需求 | 首选文档 |
-|------|----------|
+| :--- | :--- |
 | 我要选一个 GoF 模式 | 03_semantic_boundary_map → 按需求反向查模式 |
 | 需要企业/分布式模式 | 02_complete_43_catalog → 扩展模式选型决策树 |
 | 模式在 Rust 里能等价实现吗 | 04_expressiveness_boundary → 等价/近似/不可表达表 |

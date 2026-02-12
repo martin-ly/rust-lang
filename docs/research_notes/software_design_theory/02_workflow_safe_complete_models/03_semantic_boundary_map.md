@@ -58,7 +58,7 @@
 ## 三维交叉矩阵（扩展）
 
 | 模式/模型 | 安全 | 支持 | 表达 | 说明 |
-|-----------|------|------|------|------|
+| :--- | :--- | :--- | :--- | :--- |
 | Factory Method | Safe | 原生 | 等价 | trait + impl |
 | Abstract Factory | Safe | 原生 | 等价 | 枚举/结构体族 |
 | Builder | Safe | 原生 | 等价 | 链式 + build |
@@ -101,7 +101,7 @@
 ## 模式选取示例
 
 | 需求 | 推荐模式 | 理由 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | 创建对象但类型由运行时决定 | Factory Method / Abstract Factory | trait + match 或枚举 |
 | 多步骤构建 | Builder | 链式 + 类型状态 |
 | 适配外部接口 | Adapter | 结构体包装 + impl Trait |
@@ -123,7 +123,7 @@
 ## 反模式：误选
 
 | 误选 | 后果 | 应选 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 单产品用 Abstract Factory | 过度设计 | Factory Method |
 | 简单调用用 Chain | 不必要的链 | 直接调用 |
 | 无共享用 Flyweight | 无收益 | 普通创建 |
@@ -136,19 +136,23 @@
 **Def SB1（语义边界）**：设 $D$ 为设计模式或执行模型，$B_s(D)$、$B_p(D)$、$B_e(D)$ 分别为安全、支持、表达边界（见 [05_boundary_system](../05_boundary_system/README.md)）。
 
 | 定理 | 陈述 | 证明 |
-|------|------|------|
+| :--- | :--- | :--- |
 | **SB1** | 若 $B_s(D) = \mathrm{Safe}$，则 $D$ 的 Rust 实现不引入 UB | 由 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 定义 1.1；Safe 子集即编译器静态验证；无 unsafe 则无 UB 契约 |
 | **SB2** | 若 $B_p(D) = \mathrm{Native}$，则 $D$ 可仅用 std/core 实现 | 由 [supported_unsupported_matrix](../05_boundary_system/supported_unsupported_matrix.md) Def 1.1、定理 SUM-T1 |
 | **SB3** | 若 $B_e(D) = \mathrm{Same}$，则 $D$ 的 Rust 实现与 GoF/OOP 语义等价 | 由 [expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md) Def 1.2、定理 EIM-T1 |
 
 **推论 SB-C1**：若 $D$ 满足 $B_s = \mathrm{Safe} \land B_p = \mathrm{Native} \land B_e = \mathrm{Same}$，则 $D$ 可在零依赖下安全、等价实现。
 
+**引理 SB-L1（边界冲突可化解）**：对任意冲突「需 Safe 但传统实现用 unsafe」「需原生但功能在库」「需等价但 Rust 无继承」，存在化解策略（见下表）；策略由 05_boundary_system 与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 定义支持。
+
+*证明*：由 Def SB1；化解策略为 Safe 抽象（OnceLock、Mutex）、库依赖评估、trait 组合；各策略在对应文档有形式化论证。∎
+
 ---
 
 ## 边界冲突与化解
 
 | 冲突 | 化解 |
-|------|------|
+| :--- | :--- |
 | 需 Safe 但模式传统实现用 unsafe | 用 OnceLock、Mutex 等 Safe 抽象替代 static mut |
 | 需原生但功能在库 | 评估 std 是否足够；或接受库依赖 |
 | 需等价但 Rust 无继承 | 用 trait + 组合；文档化差异 |

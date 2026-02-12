@@ -924,7 +924,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ## ⚠️ 反例：违反异步安全规则
 
 | 反例 | 违反规则 | 后果 | 说明 |
-|------|----------|------|------|
+| :--- | :--- | :--- | :--- |
 | 非 Send Future 跨线程 | Send 约束 | 编译错误 | `!Send` Future 不能在多线程运行时使用 |
 | 多线程共享 !Sync 状态 | Sync 约束 | 数据竞争、UB | 如 `Rc` 跨线程共享 |
 | 未 Pin 自引用 Future | Pin 保证 | 悬垂引用 | 自引用 Future 移动后引用失效 |

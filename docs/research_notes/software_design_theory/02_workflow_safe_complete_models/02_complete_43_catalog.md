@@ -28,7 +28,7 @@
 ## 构成方案
 
 | 来源 | 数量 | 模式 |
-|------|------|------|
+| :--- | :--- | :--- |
 | **GoF 23** | 23 | 创建型 5、结构型 7、行为型 11 |
 | **企业/分布式扩展** | 20 | 见下表 |
 
@@ -37,7 +37,7 @@
 参考 [Fowler EAA](https://martinfowler.com/eaaCatalog/)、Core J2EE 等权威 catalog，20 项构成如下：
 
 | # | 模式 | 来源 | 分类 | Rust 安全边界 |
-|---|------|------|------|---------------|
+| :--- | :--- | :--- | :--- | :--- |
 | 1 | Domain Model | Fowler EAA | 业务层 | 纯 Safe |
 | 2 | Service Layer | Fowler EAA | 业务层 | 纯 Safe |
 | 3 | Repository | Fowler EAA | 数据层 | 纯 Safe |
@@ -62,7 +62,7 @@
 ### 扩展模式简要说明
 
 | 模式 | 核心意图 | Rust 典型实现 |
-|------|----------|---------------|
+| :--- | :--- | :--- |
 | Domain Model | 业务逻辑封装为领域对象 | `struct` + 方法、无贫血模型 |
 | Service Layer | 用例编排、事务边界 | `struct` + `async fn`、事务封装 |
 | Repository | 集合式抽象、持久化隔离 | `trait Repository<T>` + `impl` |
@@ -174,7 +174,7 @@ impl<T, A: Specification<T>, B: Specification<T>> Specification<T> for AndSpec<A
 ## 安全边界
 
 | 子集 | 安全边界 |
-|------|----------|
+| :--- | :--- |
 | GoF 23 | 绝大部分纯 Safe；Singleton 部分实现可需 unsafe |
 | 扩展 20 | 绝大部分纯 Safe；Gateway 在 FFI 场景需 unsafe |
 
@@ -208,7 +208,7 @@ impl<T, A: Specification<T>, B: Specification<T>> Specification<T> for AndSpec<A
 ## 扩展模式选型
 
 | 需求 | 推荐模式 |
-|------|----------|
+| :--- | :--- |
 | 领域逻辑封装 | Domain Model |
 | 用例编排、事务 | Service Layer |
 | 持久化抽象 | Repository、Unit of Work |

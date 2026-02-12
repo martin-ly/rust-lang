@@ -23,7 +23,7 @@
 ## 目录结构
 
 | 目录 | 内容 |
-|------|------|
+| :--- | :--- |
 | [00_MASTER_INDEX](00_MASTER_INDEX.md) | 主索引、层次、边界、扩展路线 |
 | [01_design_patterns_formal](01_design_patterns_formal/) | 设计模式形式分析（GoF 23） |
 | [02_workflow_safe_complete_models](02_workflow_safe_complete_models/) | 23 安全 vs 43 完全模型 |
@@ -46,7 +46,7 @@
 ## 与 Rust 生态衔接
 
 | 模式/模型 | 相关 crate |
-|-----------|------------|
+| :--- | :--- |
 | 异步 | tokio、async-std |
 | 并行 | rayon |
 | 分布式 | tonic、actix |
@@ -58,7 +58,7 @@
 ## 权威对标
 
 | 来源 | 说明 |
-|------|------|
+| :--- | :--- |
 | GoF (1994) | 23 种经典设计模式 |
 | Refactoring.Guru | 设计模式目录，含 Rust 示例 |
 | rust-unofficial.github.io/patterns | Rust 社区 Idioms + Patterns + Anti-patterns |
@@ -80,7 +80,7 @@
 ## 快速导航
 
 | 需求 | 入口 |
-|------|------|
+| :--- | :--- |
 | 查某模式是否纯 Safe | [01_safe_23_catalog](02_workflow_safe_complete_models/01_safe_23_catalog.md) |
 | 查某模式 Rust 实现 | [01_design_patterns_formal](01_design_patterns_formal/) 对应模式文档 |
 | 选执行模型（同步/异步/并发/并行/分布式） | [06_boundary_analysis](03_execution_models/06_boundary_analysis.md) |
@@ -91,7 +91,7 @@
 ## 完成度总览
 
 | 模块 | 状态 |
-|------|------|
+| :--- | :--- |
 | 01_design_patterns_formal（23 模式） | 100% |
 | 02_workflow_safe_complete_models（23/43） | 100% |
 | 03_execution_models（五模型） | 100% |
@@ -103,7 +103,7 @@
 ## 文档统计
 
 | 类别 | 数量 | 说明 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 设计模式 | 23 | 创建型 5、结构型 7、行为型 11 |
 | 扩展模式 | 20 | 43 完全 = 23 + 20 |
 | 执行模型 | 5 | 同步、异步、并发、并行、分布式 |
@@ -115,7 +115,7 @@
 ## 术语速查
 
 | 术语 | 含义 |
-|------|------|
+| :--- | :--- |
 | 23 安全 | GoF 23 中可纯 Safe 实现的模式 |
 | 43 完全 | 23 + 扩展 20（Fowler EAA/DDD） |
 | 等价表达 | 与 GoF 语义完全一致 |
@@ -127,7 +127,7 @@
 ## 常见问题
 
 | 问题 | 答案 |
-|------|------|
+| :--- | :--- |
 | 某模式是否纯 Safe？ | 见 [01_safe_23_catalog](02_workflow_safe_complete_models/01_safe_23_catalog.md)；23 模式绝大部分纯 Safe |
 | Factory Method 与 Abstract Factory 区别？ | 单产品 vs 产品族；见 [创建型模式对比](01_design_patterns_formal/README.md#创建型模式对比) |
 | Observer 用 channel 还是回调？ | 跨线程用 channel；单线程简单场景可用 RefCell+回调 |
@@ -140,7 +140,7 @@
 ## 扩展阅读
 
 | 来源 | 内容 |
-|------|------|
+| :--- | :--- |
 | [Refactoring.Guru 设计模式](https://refactoring.guru/design-patterns) | 各模式结构、示例、关系 |
 | [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/) | Rust Idioms、Patterns、Anti-patterns |
 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | 命名、错误处理、文档 |
@@ -151,7 +151,7 @@
 ## 相关文档
 
 | 文档 | 用途 |
-|------|------|
+| :--- | :--- |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](../COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理 |
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全与非安全论证 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义与表达能力 |

@@ -53,7 +53,7 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | ownership_model | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | borrow_checker_proof | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
-| lifetime_formalization | ✅ | ✅ | ✅ | ✅ | ⚠️ | ✅ | 较好 |
+| lifetime_formalization | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | async_state_machine | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | pin_self_referential | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | type_system_foundations | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
@@ -62,7 +62,11 @@
 | advanced_types | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | software_design_theory | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | **05_boundary_system** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
+| **type_theory/lifetime_formalization** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
+| **type_theory（整体）** | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | **不充分** |
 | **02_workflow 语义边界** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
+
+*type_theory（整体）*：各子文档（type_system、trait、lifetime、advanced、variance）有 Def/Theorem，但 Rust 1.93 类型系统特性、组合法则、Trait 特性（RPITIT、coherence 定理等）**不完备**；见 [type_theory/00_completeness_gaps](type_theory/00_completeness_gaps.md)。
 
 **图例**：✅ 已满足 | ⚠️ 存在缺口 | ❌ 严重缺失
 
@@ -78,18 +82,39 @@
 - **04_boundary_matrix**：✅ Def 1.1–1.2、Axiom BMP1、BMP-T1/T2、BMP-L1、BMP-C1
 - **04_compositional_engineering/README**：✅ Def CE1、Axiom CE1、推论 CE-C1
 - **experiments/README**：✅ EX-T2、EX-C1；EX-L1 证明
+- **research_methodology**：✅ Def RM1、Axiom RM1、定理 RM-T1、推论 RM-C1
+- **BEST_PRACTICES**：✅ 形式化论证最佳实践、Def BP1
+- **experiments**：✅ memory_analysis MA-T1/MA-C1/MA-L1；performance_benchmarks PB-T1/PB-C1/PB-L1；concurrency_performance CP-T1/CP-C1/CP-L1；macro_expansion_performance MP-T1/MP-C1/MP-L1
 - **COMPREHENSIVE_SYSTEMATIC_OVERVIEW**：✅ CSO-L1、CSO-C1
 - **UNIFIED_SYSTEMATIC_FRAMEWORK**：✅ Def USF1、Axiom USF1、USF-T1、USF-C1
+- **PROOF_INDEX**：✅ 边界系统、语义与表达能力、顶层框架、实验与形式化衔接、形式化验证、质量检查、执行模型扩展；统计 69+
+- **formal_methods/README**：✅ FM-L1、FM-C1
+- **FORMAL_VERIFICATION_GUIDE**：✅ Def FV1、Axiom FV1、定理 FV-T1、引理 FV-L1、推论 FV-C1
+- **QUALITY_CHECKLIST**：✅ Def QC1、Axiom QC1、定理 QC-T1、推论 QC-C1
+- **practical_applications**：✅ 引理 PA-L1（unsafe 案例边界）
+- **03_execution_models**：✅ 02_async AS-L1/AS-C1；03_concurrent CC-L1/CC-C1（CC 前缀避免与 CO 冲突）；04_parallel PL-L1/PL-C1；05_distributed DI-L1/DI-C1
+- **experiments**：✅ performance_benchmarks、memory_analysis、concurrency_performance、macro_expansion_performance 形式化论证与实验衔接
 - **05_boundary_system**：✅ SBM-L2/SBM-C2、SUM-L2/SUM-C2、EIM-L2/EIM-C2；README 定理 B-T2
 - **LANGUAGE_SEMANTICS_EXPRESSIVENESS**：✅ EB-Meta、EB-L1、EB-C1、EB-C2
 - **04_compositional_engineering**：✅ CE-L1、CE-C1、CE-C2；IT-L1、IT-C1
 - **03_execution_models**：✅ 06_boundary_analysis EB-EX-L1、EB-EX-C1、EB-EX-L2、EB-EX-C2
+- **04_boundary_matrix**：✅ BMP-L1、BMP-C1 已收录 PROOF_INDEX
+- **Adapter 设计模式**：✅ 推论 AD-C1（纯 Safe）
+- **03_semantic_boundary_map**：✅ 引理 SB-L1（边界冲突可化解）
 - **DESIGN_MECHANISM_RATIONALE**：✅ OM1/OM-T1、BC1/BC-T1 已形式化
 - **formal_methods/README**：✅ Def FM1、Axiom FM1、定理 FM-T1
+- **type_theory/00_completeness_gaps**：✅ 新增完备性缺口文档；Def CGI、Axiom CGI1、定理 CGI-T1；Rust 1.93 类型系统、组合法则、Trait 特性缺口列表；README 状态改为「持续完善」
 - **type_theory/README**：✅ Def TT1、Axiom TT1、定理 TT-T1
 - **SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS**：✅ 引理 SU-L1、推论 SU-C1
 - **COMPREHENSIVE_SYSTEMATIC_OVERVIEW**：✅ 定理 CSO-T1
 - **singleton**：✅ S-T1 证明扩展、S-L1
+- **type_theory/lifetime_formalization**：✅ Axiom LT1–LT2、定理 LT-T1/T2、引理 LT-L1、推论 LT-C1/C2；与 formal_methods 衔接
+- **type_theory/advanced_types**：✅ Axiom AT1/AT2、定理 AT-T1/T2/T3、引理 AT-L1、推论 AT-C1
+- **formal_methods/lifetime_formalization**：✅ 定理 LF-T1/T2/T3 统一编号、LF-T3 双向证明、移除重复
+- **DESIGN_MECHANISM_RATIONALE**：✅ Option/Result Def OR1、Axiom OR1、定理 OR-T1、推论 OR-C1
+- **BEST_PRACTICES**：✅ Axiom BP1、定理 BP-T1（完备性蕴涵可追溯）
+- **formal_methods/lifetime_formalization**：✅ Axiom LF1/LF2、引理 LF-L1、推论 LF-C1
+- **CONTENT_ENHANCEMENT**：✅ Def CE1、Axiom CE1、定理 CE-T1
 
 ---
 
@@ -106,7 +131,7 @@
 | 类型安全 | ✅ | ✅ | ✅ | ✅ | 好 |
 | Trait 对象 | ✅ | ✅ | ✅ | ✅ | 好 |
 | Send/Sync | ✅ | ✅ | ✅ | ✅ | 好 |
-| Result/Option | ⚠️ | ⚠️ | ✅ | - | 可选 |
+| Result/Option | ✅ | ✅ | ✅ | ✅ | 好 |
 
 ---
 

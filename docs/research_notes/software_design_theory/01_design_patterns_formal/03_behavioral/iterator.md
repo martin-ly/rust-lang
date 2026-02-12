@@ -64,7 +64,7 @@ for n in Counter { count: 0 } {
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 集合遍历 | `Vec`、`HashMap`、`BTreeMap` 等 |
 | 惰性流 | `map`、`filter`、`take` 链式 |
 | 自定义序列 | 计数器、生成器、游标 |
@@ -75,7 +75,7 @@ for n in Counter { count: 0 } {
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Visitor](visitor.md) | 遍历方式不同；Iterator 顺序，Visitor 深度优先 |
 | [Composite](../02_structural/composite.md) | 可对 Composite 实现 Iterator |
 | [Chain of Responsibility](chain_of_responsibility.md) | 链式传递 vs 迭代消费 |
@@ -100,7 +100,7 @@ for x in v.iter() {
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 结构体 + next | 自定义迭代器；实现 trait | 新集合类型 |
 | 适配器链 | `iter().map().filter()` | 惰性转换 |
 | 消费器 | `collect`、`sum`、`fold` | 聚合结果 |
@@ -130,7 +130,7 @@ for x in v.iter() {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

@@ -42,7 +42,7 @@
 ### 核心问题响应
 
 | 用户反馈 | 本文档应对 |
-|----------|------------|
+| :--- | :--- |
 | **Pin 堆/栈区分说明不足** | § Pin：堆/栈区分使用场景的完整论证 |
 | **设计机制缺乏理由** | 每个机制：动机 → 设计决策 → 论证 → 反例 |
 | **论证不完整** | 形式化定义 + 公理链 + 决策树 + 反例 |
@@ -80,7 +80,7 @@
 **关键洞察**：栈与堆的**内存语义不同**，导致「固定」的可行性不同。
 
 | 内存区域 | 语义特性 | 移动风险 | Pin 可行策略 |
-|----------|----------|----------|--------------|
+| :--- | :--- | :--- | :--- |
 | **栈** | 帧内局部变量，函数返回时销毁；变量可被**覆盖/复用** | 栈帧内变量可能被编译器优化重排 | 仅当 $T : \text{Unpin}$ 时，`Pin::new(&mut t)` 安全 |
 | **堆** | 分配后地址稳定，除非显式 `realloc`/移动 | 堆分配地址在释放前不变 | `Box::pin(t)` 可固定任意 $T$（含 $\lnot\text{Unpin}$） |
 
@@ -151,7 +151,7 @@ Pin 使用场景决策树
 ### 5. 反例：违反堆/栈约束的后果
 
 | 反例 | 违反约束 | 后果 | 说明 |
-|------|----------|------|------|
+| :--- | :--- | :--- | :--- |
 | 对 $\lnot\text{Unpin}$ 使用 `Pin::new` | 栈固定要求 Unpin | 编译错误或 UB | 非 Unpin 需 `Box::pin` |
 | 移动未 Pin 的自引用类型 | Pin 保证 | 悬垂引用 | 自引用指向旧地址 |
 | 在 Pin 内 `mem::swap` | Pin 不变性 | UB | 违反位置稳定 |
@@ -327,6 +327,18 @@ Pin 使用场景决策树
 
 **设计决策**：`Option<T>` 表示有/无；`Result<T, E>` 表示成功/失败。无 null 类型。
 
+**形式化论证**：
+
+**Def OR1（Option/Result 语义）**：$\mathit{Option}[T] = \mathrm{Some}(T) \mid \mathrm{None}$；$\mathit{Result}[T, E] = \mathrm{Ok}(T) \mid \mathrm{Err}(E)$。无 null 类型；「无值」显式编码为变体。
+
+**Axiom OR1**：类型系统强制穷尽匹配；调用者必须处理 `None`/`Err` 方能编译；排中律不成立（构造性逻辑）。
+
+**定理 OR-T1（显式错误处理）**：若 $e : \mathit{Result}[T, E]$ 且无 `unwrap`/`expect`，则 $e$ 的 `None`/`Err` 分支必被处理；编译时保证。
+
+*证明*：由 match 穷尽规则；`?` 操作符将 `Err` 传播至调用者，调用者需处理或标注 `-> Result<_, E>`。见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) 定理 3.1。∎
+
+**推论 OR-C1**：`Option`/`Result` 与构造性逻辑 $T \lor E$ 对应；`!` (never) 对应 $\bot$；无隐式 null。
+
 **论证**：类型系统强制处理 None/Err；`?` 操作符传播错误；构造性逻辑（Curry-Howard）对应 $T \lor E$。见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
 
 **反例**：unwrap 空 Option/Err 导致 panic；未处理 Result 编译警告。
@@ -336,7 +348,7 @@ Pin 使用场景决策树
 ## 📐 设计机制论证矩阵总览
 
 | 机制 | 动机 | 设计决策 | 形式化文档 | 反例 |
-|------|------|----------|------------|------|
+| :--- | :--- | :--- | :--- | :--- |
 | Pin | 自引用移动→悬垂 | 堆/栈区分：Unpin 栈固定，非 Unpin 堆固定 | pin_self_referential | 非 Unpin 用 Pin::new、移动未 Pin |
 | 所有权 | 无 GC 内存安全 | 默认移动，显式 Copy | ownership_model | 使用已移动值 |
 | 借用 | 数据竞争自由 | 可变独占，不可变可多 | borrow_checker_proof | 双重可变借用 |
@@ -347,6 +359,7 @@ Pin 使用场景决策树
 | Trait 对象 | 运行时多态 | vtable、对象安全 | trait_system_formalization | 对象安全违规 |
 | Send/Sync | 跨线程安全 | Send=可转移、Sync=可共享 | async_state_machine | Rc 非 Send、Cell 非 Sync |
 | 宏 | 代码生成、DSL | 声明宏/过程宏分离、卫生 | - | 意外捕获 |
+| Option/Result | 避免 null、显式错误处理 | 无 null；穷尽匹配；构造性逻辑 | LANGUAGE_SEMANTICS_EXPRESSIVENESS、OR-T1 | unwrap 空值 panic |
 | 闭包 | 捕获环境 | Fn/FnMut/FnOnce 三种 | - | 非 Send 跨线程 |
 | 模式匹配 | 代数类型、解构 | 穷尽、_ 通配 | - | 非穷尽 match |
 | Option/Result | 无 null、显式错误 | 构造性、? 传播 | LANGUAGE_SEMANTICS | unwrap 空值 |
@@ -356,7 +369,7 @@ Pin 使用场景决策树
 ## 📚 相关文档
 
 | 文档 | 用途 |
-|------|------|
+| :--- | :--- |
 | [pin_self_referential](formal_methods/pin_self_referential.md) | Pin 形式化定义、定理、反例 |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义、表达能力边界 |

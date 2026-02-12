@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（并行执行）**
+**Def 1.1（并行执行）**:
 
 并行执行满足：
 
@@ -16,22 +16,28 @@
 - 数据并行：对集合 $S$ 划分为 $S_1, \ldots, S_k$，各子任务处理 $S_i$，结果合并
 - 任务并行：fork-join，独立任务并行执行后汇合
 
-**Def 1.2（数据并行）**
+**Def 1.2（数据并行）**:
 
 $\mathit{par\_map}(f, S) = \mathit{merge}(\mathit{map}(f, S_1), \ldots, \mathit{map}(f, S_k))$，其中 $S = S_1 \cup \cdots \cup S_k$ 且 $S_i \cap S_j = \emptyset$。
 
-**Axiom PA1**：并行任务无共享可变状态；或通过 Sync 保护。
+**Axiom PL1**：并行任务无共享可变状态；或通过 Sync 保护。
 
-**Axiom PA2**：任务结果合并顺序可无关（如归约满足结合律）；或任务顺序确定。
+**Axiom PL2**：任务结果合并顺序可无关（如归约满足结合律）；或任务顺序确定。
 
-**定理 PA-T1**：Rayon 等库保证数据竞争自由；由 Send/Sync 与 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)。
+**定理 PL-T1**：Rayon 等库保证数据竞争自由；由 Send/Sync 与 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)。
+
+**引理 PL-L1（无共享可变）**：`par_iter` 闭包捕获为 move 或只读引用；各子任务无共享可变；归约满足结合律时结果确定。
+
+*证明*：由 Axiom PL1；Rayon 工作窃取划分迭代器；闭包 `|x| x * 2` 无共享状态；`sum` 为结合归约。∎
+
+**推论 PL-C1**：并行与异步可组合（如 `tokio::task::spawn_blocking` + rayon）；组合时 Send/Sync 约束取并集。
 
 ---
 
 ## 与并发的区别
 
 | 概念 | 并发 | 并行 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 定义 | 多任务可交错 | 多任务同时执行 |
 | 单核 | 可并发（时间片） | 不可并行 |
 | 多核 | 可并发可并行 | 可并行 |
@@ -71,7 +77,7 @@ assert_eq!(a + b, 15);
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 批量计算 | 矩阵运算、图像处理 |
 | 归约/聚合 | `par_iter().sum()`、`reduce` |
 | 并行搜索 | 大集合中查找 |
@@ -81,7 +87,7 @@ assert_eq!(a + b, 15);
 
 ## Rayon 工作窃取与调度
 
-**Def 1.3（Work Stealing）**
+**Def 1.3（Work Stealing）**:
 
 Rayon 使用工作窃取调度：线程池中空闲线程从忙碌线程的任务队列窃取任务，实现负载均衡。
 
@@ -91,7 +97,7 @@ Rayon 使用工作窃取调度：线程池中空闲线程从忙碌线程的任�
 
 ## 原子操作与无锁
 
-**Def 1.4（原子操作）**
+**Def 1.4（原子操作）**:
 
 ```rust
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -136,8 +142,8 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ## 典型场景扩展
 
 | 场景 | Rayon API | 说明 |
-|------|-----------|------|
-|  map-reduce | `par_iter().map().reduce()` | 归约满足结合律 |
+| :--- | :--- | :--- |
+| map-reduce | `par_iter().map().reduce()` | 归约满足结合律 |
 | 并行查找 | `par_iter().find_any()` | 找到即返回，不保证顺序 |
 | 并行构造 | `par_iter().map().collect()` | 结果类型可 `FromParallelIterator` |
 | 自定义并行 | `scope()`、`spawn()` | 受限作用域内 spawn |
@@ -147,7 +153,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ## 与异步组合
 
 | 组合 | 说明 | 示例 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 异步 + rayon | 在 async 中调用 `rayon::spawn` | CPU 密集在 rayon，I/O 在 tokio |
 | 并行 + 通道 | 多个 rayon 任务向 channel 发送 | 生产者-消费者 |
 
@@ -156,7 +162,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ## 反例
 
 | 反例 | 后果 |
-|------|------|
+| :--- | :--- |
 | 闭包捕获非 Send | 编译错误 |
 | 在并行闭包中修改共享可变 | 数据竞争 |
 | 递归深度过大 | 栈溢出；改用迭代 |
@@ -166,7 +172,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 库支持（rayon）；std 提供 thread |
 | 表达 | 等价 |

@@ -68,7 +68,7 @@ let copy = tree.clone();  // 递归 clone
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 对象复制 | 配置、文档、游戏实体 |
 | 缓存模板 | 以原型为基础做小修改 |
 | 深拷贝结构 | 树、图等嵌套结构 |
@@ -78,7 +78,7 @@ let copy = tree.clone();  // 递归 clone
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Factory Method](factory_method.md) | 工厂可基于 Prototype 克隆 |
 | [Builder](builder.md) | Builder 可基于 Prototype 克隆 |
 | [Memento](../03_behavioral/memento.md) | Clone 可作 Memento 实现 |
@@ -88,7 +88,7 @@ let copy = tree.clone();  // 递归 clone
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | `#[derive(Clone)]` | 自动实现；浅拷贝 | 无嵌套引用 |
 | 手动 Clone | 自定义深拷贝 | 含 Rc、引用等 |
 | `Copy` | 隐式复制；无堆 | 小值类型 |
@@ -134,7 +134,7 @@ impl Clone for BadNode {
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | clone() | Clone::clone | 等价 |
 | 原型注册 | HashMap + Clone | 等价 |
 | 深拷贝 | 手动 Clone | 等价 |
@@ -144,7 +144,7 @@ impl Clone for BadNode {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

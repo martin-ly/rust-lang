@@ -22,6 +22,16 @@
 
 **定理 IN-T1**：枚举 + match 求值，由 [type_system_foundations](../../../type_theory/type_system_foundations.md) 穷尽匹配保证完备性。
 
+*证明*：由 Axiom IN1、IN2；枚举定义 $E$ 结构，match 穷尽所有变体；递归求值由结构归纳保证终止；type_system 保持性保证类型正确。∎
+
+**引理 IN-L1（终止性）**：若 $E$ 有穷且无环，则 $\mathit{eval}(e)$ 终止。
+
+*证明*：由 Axiom IN1；$E$ 为树结构，递归下降至叶节点（Const）；结构归纳保证每步子表达式规模减小。∎
+
+**推论 IN-C1**：Interpreter 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{Interpreter}) = \mathrm{Approx}$（无 OOP 继承）。
+
+**反例**：若 AST 含环（自引用），递归求值不终止；由 Axiom IN1 排除。若漏 match 分支，编译错误。
+
 ---
 
 ## Rust 实现与代码示例
@@ -68,7 +78,7 @@ assert_eq!(e.eval(), 7);
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 表达式求值 | 算术、布尔、正则 |
 | 脚本解析 | DSL、配置语言 |
 | 查询解析 | SQL 子集、过滤表达式 |
@@ -78,7 +88,7 @@ assert_eq!(e.eval(), 7);
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Visitor](visitor.md) | 同为 AST 处理；Interpreter 求值，Visitor 遍历 |
 | [Composite](../02_structural/composite.md) | AST 即 Composite 结构 |
 | [Strategy](strategy.md) | 不同求值策略可替换 |
@@ -88,7 +98,7 @@ assert_eq!(e.eval(), 7);
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 枚举 + match | 同质 AST；穷尽匹配 | 简单 DSL |
 | trait 节点 | 异质节点；多态求值 | 可扩展语法 |
 | 访问者分离 | 求值逻辑在 Visitor | 多操作（求值、打印、优化） |
@@ -128,7 +138,7 @@ GoF 用继承定义 AST 节点；Rust 用枚举更简洁，且穷尽匹配保证
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 近似（无继承，用枚举） |

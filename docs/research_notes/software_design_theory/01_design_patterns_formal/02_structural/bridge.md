@@ -78,7 +78,7 @@ c.draw();
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 渲染后端 | 向量/光栅、OpenGL/Vulkan |
 | 存储抽象 | 内存/文件/网络 |
 | 序列化 | JSON/MessagePack/Binary |
@@ -89,7 +89,7 @@ c.draw();
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Adapter](adapter.md) | Bridge 解耦；Adapter 适配已有接口 |
 | [Strategy](../03_behavioral/strategy.md) | 实现可视为策略 |
 | [Abstract Factory](../01_creational/abstract_factory.md) | 工厂可创建抽象+实现组合 |
@@ -99,7 +99,7 @@ c.draw();
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 泛型 `A<R: Impl>` | 编译期；零成本 | 实现类型已知 |
 | `Box<dyn Impl>` | 运行时多态 | 动态选择实现 |
 | 枚举实现 | `enum Impl { A, B }` | 有限实现集 |
@@ -135,7 +135,7 @@ struct BadCircle {
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | 抽象类 + 实现类 | trait + impl | trait 无状态 |
 | 继承层次 | 组合 + trait | 无继承 |
 | 运行时绑定 | `Box<dyn Impl>` | 等价 |
@@ -145,7 +145,7 @@ struct BadCircle {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

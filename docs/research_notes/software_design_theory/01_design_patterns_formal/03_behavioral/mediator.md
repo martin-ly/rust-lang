@@ -82,7 +82,7 @@ impl Mediator {
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 对话框/表单 | 多个控件互不引用，通过 Mediator 协调 |
 | 聊天室 | 用户仅知 Mediator，消息经其广播 |
 | 工作流编排 | 任务节点通过协调器通信 |
@@ -93,7 +93,7 @@ impl Mediator {
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Observer](observer.md) | 同为解耦；Mediator 集中路由，Observer 一对多 |
 | [Facade](../02_structural/facade.md) | Facade 简化接口；Mediator 协调多对象 |
 | [Chain of Responsibility](chain_of_responsibility.md) | 链式传递 vs 集中路由 |
@@ -103,7 +103,7 @@ impl Mediator {
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | `Vec<Box<dyn Fn>>` | 广播回调；无同事引用 | 简单事件总线 |
 | `Weak<Colleague>` | 同事注册；避免循环 | 需同事身份 |
 | channel | 消息传递；完全解耦 | 异步、跨线程 |
@@ -140,7 +140,7 @@ struct BadColleague {
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | 中介者接口 | trait 或 结构体 | 等价 |
 | 同事注册 | Vec、Weak | 等价 |
 | 无直接引用 | 仅持 Mediator | 等价 |
@@ -150,7 +150,7 @@ struct BadColleague {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

@@ -86,7 +86,7 @@ let config = ConfigBuilder::new()
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 复杂配置 | 多可选参数、默认值 |
 | SQL/查询构建 | 链式添加条件 |
 | 请求构建 | HTTP 请求头、体、参数 |
@@ -97,7 +97,7 @@ let config = ConfigBuilder::new()
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Factory Method](factory_method.md) | Builder 可由 Factory 创建 |
 | [Abstract Factory](abstract_factory.md) | 可组合：Factory 返回 Builder |
 | [Prototype](prototype.md) | 可组合：Builder 基于 Prototype 克隆 |
@@ -107,7 +107,7 @@ let config = ConfigBuilder::new()
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | Option + ok_or | 运行时校验；缺省返回 Err | 简单构建 |
 | 类型状态 Builder | 相位类型；编译期强制顺序 | 必填→可选→build |
 | derive_builder | 宏生成；减少样板代码 | 结构体多字段 |
@@ -141,7 +141,7 @@ let config = ConfigBuilder::new()
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | Director + Builder | 可选；Rust 常直接链式 | 等价 |
 | 链式 set | `fn set(self, v) -> Self` | 消费 self 更安全 |
 | build 消费 | `fn build(self) -> T` | 单次构建，等价 |
@@ -151,7 +151,7 @@ let config = ConfigBuilder::new()
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

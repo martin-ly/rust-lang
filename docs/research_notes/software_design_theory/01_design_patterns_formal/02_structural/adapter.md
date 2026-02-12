@@ -24,6 +24,10 @@
 
 **定理 AD-T2**：由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)，委托链上无双重可变借用。
 
+**推论 AD-C1**：Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsafe`。由 AD-T1、AD-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
+*证明*：持有 $S$ 为所有权；委托为借用；无裸指针、无 FFI；故纯 Safe。∎
+
 ---
 
 ## Rust 实现与代码示例
@@ -70,7 +74,7 @@ a.log("hello");
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 第三方库适配 | 旧版 API 适配新 trait |
 | 跨 crate 接口 | 外部类型实现本 crate trait |
 | 序列化适配 | 外部格式 → 内部类型 |
@@ -81,7 +85,7 @@ a.log("hello");
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Decorator](decorator.md) | 同为包装；Adapter 转换接口，Decorator 同接口延伸 |
 | [Facade](facade.md) | Facade 简化多接口；Adapter 转换单接口 |
 | [Bridge](bridge.md) | Bridge 解耦抽象与实现；Adapter 适配已有接口 |
@@ -91,7 +95,7 @@ a.log("hello");
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 结构体包装 | `struct Adapter { inner: S }` + `impl Trait` | 所有权适配 |
 | 引用适配 | `impl Trait for &Legacy` | 不拥有被适配者 |
 | 泛型适配 | `impl<T: Legacy> Trait for Adapter<T>` | 多类型适配 |
@@ -130,7 +134,7 @@ impl Logger for BadAdapter {
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | 类继承适配 | 结构体包装 + impl Trait | 无继承；组合 |
 | 对象适配器 | `struct Adapter { inner: S }` | 完全等价 |
 | 类适配器（多重继承） | 无直接对应 | Rust 无类继承 |
@@ -140,7 +144,7 @@ impl Logger for BadAdapter {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

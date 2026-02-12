@@ -8,7 +8,7 @@
 
 ## 定义
 
-**Def 1.1（模块）**
+**Def 1.1（模块）**:
 
 模块 $M$ 为一个命名空间，包含：
 
@@ -16,11 +16,11 @@
 - 函数/方法：$\mathit{fns}(M) = \{f_1, \ldots, f_m\}$
 - 可见性：$\mathit{pub}(M) \subseteq \mathit{types}(M) \cup \mathit{fns}(M)$
 
-**Def 1.2（模块依赖）**
+**Def 1.2（模块依赖）**:
 
 $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `pub` 项。依赖图 $G = (V, E)$ 其中 $V = \{M_i\}$，$(M_i, M_j) \in E \Leftrightarrow M_i \prec M_j$。
 
-**Def 1.3（组合）**
+**Def 1.3（组合）**:
 
 组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足：
 
@@ -28,14 +28,14 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 2. **接口一致**：$M_i$ 使用 $M_j$ 的项时，类型签名匹配
 3. **命名无冲突**：$\mathit{pub}(M_i) \cap \mathit{pub}(M_j) = \emptyset$ 当 $i \neq j$（或通过路径隔离）
 
-**Def 1.4（Trait 组合）**
+**Def 1.4（Trait 组合）**:
 
 设 trait $T$ 由 $T_1, \ldots, T_k$ 约束（$T: T_1 + T_2 + \cdots$）。`impl T for A` 的组合满足：
 
 - $A$ 满足 $T_1, \ldots, T_k$ 的约束
 - 实现 $T$ 的所有 required 方法
 
-**Def 1.5（泛型组合）**
+**Def 1.5（泛型组合）**:
 
 设 $F\langle T \rangle$ 为泛型结构。组合满足：
 

@@ -8,7 +8,7 @@
 
 ## 公理与定义
 
-**Def 1.1（模块组合）**
+**Def 1.1（模块组合）**:
 
 设 $M_1, \ldots, M_n$ 为模块。组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足：
 
@@ -109,7 +109,7 @@ fn main() {
 ## 定理应用示例
 
 | 定理 | 应用场景 |
-|------|----------|
+| :--- | :--- |
 | CE-T1 | 多 crate 项目：各 crate 内 Safe，组合后仍内存安全 |
 | CE-T2 | 跨线程：只有 `Send` 类型跨线程传递，`Sync` 类型共享 |
 | CE-T3 | 泛型模块：`fn f<T: Trait>(x: T)` 组合时类型检查在边界完成 |
@@ -119,7 +119,7 @@ fn main() {
 ## 验证方法
 
 | 定理 | 验证手段 |
-|------|----------|
+| :--- | :--- |
 | CE-T1 | `cargo build` 无 unsafe 泄漏；`Valgrind`/`MIRI` 无内存错误 |
 | CE-T2 | `cargo clippy` 检查 Send/Sync；无 `Rc` 跨线程 |
 | CE-T3 | `cargo check` 通过；类型在 `pub` 边界一致 |

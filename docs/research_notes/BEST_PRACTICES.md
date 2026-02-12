@@ -13,6 +13,7 @@
   - [📊 目录](#-目录)
   - [📋 概述](#-概述)
     - [目标](#目标)
+  - [形式化论证最佳实践](#形式化论证最佳实践)
   - [✍️ 编写最佳实践](#️-编写最佳实践)
     - [1. 明确研究目标](#1-明确研究目标)
     - [2. 提供理论基础](#2-提供理论基础)
@@ -61,6 +62,27 @@
 - 确保内容质量和一致性
 - 优化用户体验
 - 促进协作和贡献
+
+---
+
+## 形式化论证最佳实践
+
+**Def BP1（形式化完备性）**：研究笔记 $N$ 满足**形式化完备**，当且仅当 $N$ 对核心概念有 Def/Axiom、对主要结论有定理及证明或证明思路、对边界有反例。
+
+**Axiom BP1**：形式化完备的研究笔记与 [PROOF_INDEX](PROOF_INDEX.md) 的论证链一致；公理→引理→定理→推论可追溯。
+
+**定理 BP-T1（完备性蕴涵可追溯）**：若 $N$ 满足 Def BP1，则 $N$ 的核心定理可追溯至 [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 的概念-公理-定理映射。
+
+*证明*：由 Def BP1；形式化完备蕴含定理有证明或证明思路；证明引用公理/引理，故可追溯至映射表。∎
+
+**最佳实践**：
+
+- ✅ 核心概念：给出形式化定义（Def）或引用已有定义
+- ✅ 主要结论：用定理（T）陈述，并给出证明或证明思路
+- ✅ 边界条件：重要断言补充反例
+- ✅ 交叉引用：与 [PROOF_INDEX](PROOF_INDEX.md)、[FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 衔接
+
+**引用**：[FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 论证要素规范、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) 论证体系五层。
 
 ---
 
@@ -370,7 +392,7 @@ fn main() {
 ### 性能分析工具
 
 | 工具         | 用途     | 特点           |
-| ------------ | -------- | -------------- |
+| :--- | :--- | :--- |
 | Criterion.rs | 基准测试 | 统计分析       |
 | perf         | 性能分析 | Linux 系统工具 |
 | flamegraph   | 火焰图   | 可视化性能     |

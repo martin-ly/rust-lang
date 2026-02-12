@@ -70,7 +70,7 @@ assert_eq!(coffee.cost(), 2.5);
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 中间件/装饰 | 日志、度量、缓存、重试 |
 | I/O 装饰 | 压缩、加密、缓冲 |
 | 权限/审计 | 装饰器增加检查逻辑 |
@@ -80,7 +80,7 @@ assert_eq!(coffee.cost(), 2.5);
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Strategy](../03_behavioral/strategy.md) | 装饰器可持有多态策略 |
 | [Adapter](adapter.md) | 同为包装；Decorator 同接口，Adapter 转换接口 |
 | [Composite](composite.md) | Decorator 为链式，Composite 为树 |
@@ -90,7 +90,7 @@ assert_eq!(coffee.cost(), 2.5);
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 泛型 `Decorator<C: Component>` | 编译期单态化，零成本 | 装饰链固定 |
 | `Box<dyn Component>` | 运行时多态 | 装饰链动态 |
 | 宏/派生 | 减少样板；如 `#[derive(Decor)]` | 简单装饰 |
@@ -125,7 +125,7 @@ impl<C: Coffee> Coffee for BadDecorator<C> {
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | 抽象类 + 具体装饰 | trait + impl | 无继承 |
 | 装饰器链 | 泛型嵌套 | 完全等价 |
 | 透明性 | 同 trait 接口 | 等价 |
@@ -135,7 +135,7 @@ impl<C: Coffee> Coffee for BadDecorator<C> {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |

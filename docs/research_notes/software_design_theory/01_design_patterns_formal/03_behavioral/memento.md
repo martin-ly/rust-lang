@@ -22,6 +22,16 @@
 
 **定理 MO-T1**：`Clone` 或 `serde` 序列化可实现；Rust 无私有访问 OOP 风格，表达为近似。
 
+*证明*：由 Axiom MO1、MO2；`Clone` 生成独立副本，`serde` 序列化/反序列化保证状态可恢复；Rust 无 C++ 友元/私有，$M$ 可被任意代码读取，故为近似表达。∎
+
+**引理 MO-L1（状态一致性）**：若 $M = \mathit{save}(O)$ 且 $O$ 未变，则 $\mathit{restore}(O, M)$ 使 $O$ 回到 $\mathit{save}$ 时状态。
+
+*证明*：由 Def 1.1；$M$ 捕获 $O$ 状态；$\mathit{restore}$ 覆盖 $O$ 为 $M$ 内状态；无外部依赖故一致性成立。∎
+
+**推论 MO-C1**：Memento 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{Memento}) = \mathrm{Approx}$。
+
+**反例**：若 $M$ 与 $O$ 版本不兼容（如 $O$ 新增字段），`restore` 可能产生非法状态；由 Axiom MO2，需版本兼容或默认值。
+
 ---
 
 ## Rust 实现与代码示例
@@ -74,7 +84,7 @@ assert_eq!(o.state, "A");
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 撤销/重做 | 编辑器、表单、配置 |
 | 快照/检查点 | 游戏存档、事务回滚 |
 | 审计日志 | 状态历史、合规 |
@@ -84,7 +94,7 @@ assert_eq!(o.state, "A");
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Command](command.md) | 撤销需 Memento 保存状态 |
 | [State](state.md) | 保存/恢复状态 |
 | [Prototype](../01_creational/prototype.md) | Clone 可作 Memento 实现 |
@@ -94,7 +104,7 @@ assert_eq!(o.state, "A");
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | `Clone` | 简单结构；内存复制 | 小对象、无环 |
 | serde | 序列化/反序列化 | 持久化、跨进程 |
 | 快照类型 | 显式 `Snapshot` 结构体 | 版本兼容、校验 |
@@ -122,7 +132,7 @@ assert_eq!(o.state, "A");
 ## 与 GoF 对比
 
 | GoF | Rust 对应 | 差异 |
-|-----|-----------|------|
+| :--- | :--- | :--- |
 | Memento 私有 | 无；Clone/serde 公开 | 近似 |
 | Originator 封装 | 快照类型或 Clone | 等价 |
 | Caretaker 存储 | Vec<Snapshot> 等 | 等价 |
@@ -132,7 +142,7 @@ assert_eq!(o.state, "A");
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 近似（无私有封装） |

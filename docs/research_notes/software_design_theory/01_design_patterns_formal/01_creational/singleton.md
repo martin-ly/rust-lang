@@ -82,7 +82,7 @@ fn get_instance() -> Arc<Mutex<i32>> {
 ## 典型场景
 
 | 场景 | 说明 |
-|------|------|
+| :--- | :--- |
 | 配置/全局设置 | 应用配置、环境变量 |
 | 连接池 | 数据库、HTTP 客户端 |
 | 日志/追踪 | 全局 logger、tracer |
@@ -93,7 +93,7 @@ fn get_instance() -> Arc<Mutex<i32>> {
 ## 相关模式
 
 | 模式 | 关系 |
-|------|------|
+| :--- | :--- |
 | [Abstract Factory](abstract_factory.md) | 工厂常为单例 |
 | [Facade](../02_structural/facade.md) | 外观常为单例 |
 | Registry（43 完全） | 服务定位即单例；[02_complete_43_catalog](../../02_workflow_safe_complete_models/02_complete_43_catalog.md) |
@@ -103,7 +103,7 @@ fn get_instance() -> Arc<Mutex<i32>> {
 ## 实现变体
 
 | 变体 | 说明 | 适用 |
-|------|------|------|
+| :--- | :--- | :--- |
 | `OnceLock<T>` | 惰性、线程安全；首次 get_or_init | 简单单例 |
 | `LazyLock<T>` | 声明时指定初始化；线程安全 | 初始化逻辑简单 |
 | `Arc<Mutex<T>>` + OnceLock | 内部可变单例 | 需修改状态 |
@@ -120,7 +120,7 @@ fn get_instance() -> Arc<Mutex<i32>> {
 ## 边界
 
 | 维度 | 分类 |
-|------|------|
+| :--- | :--- |
 | 安全 | Safe（OnceLock/LazyLock）或 需 unsafe（static mut） |
 | 支持 | 原生 |
 | 表达 | 近似（无全局可变） |
