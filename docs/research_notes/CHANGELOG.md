@@ -34,7 +34,7 @@
 - **STATISTICS**：最后更新 2026-02-12；形式化定义统计增加软件设计理论 69+；最近更新记录类型理论阶段 1–7、设计模式推论；PROOF_INDEX 87+ 加入相关资源
 - **formal_methods 完备性缺口**：新增 [00_completeness_gaps](formal_methods/00_completeness_gaps.md)；✅ **Phase 1–6 全部补全 100%**；ownership_model 新增 DROP/DEREF/REPR/CONST_MUT_STATIC；borrow_checker_proof 新增 EXTERN/CVARIADIC/QUERY；async_state_machine 新增 SPAWN；PROOF_INDEX 105+ 证明；ARGUMENTATION_GAP_INDEX 标 formal_methods 为 100% 完成
 - **全局 100% 推进**：formal_methods README 状态改为 100%；RESEARCH_ROADMAP 新增 2.5 形式化方法完备性缺口、17/17 项完成；INDEX、QUICK_FIND、QUICK_REFERENCE 更新 formal_methods Phase 1–6 完成状态
-- **software_design_theory 层次推进扩展**：新增 [06_rust_idioms](software_design_theory/06_rust_idioms.md)（RAII、Newtype、类型状态、与 GoF 衔接）、[07_anti_patterns](software_design_theory/07_anti_patterns.md)（13 反例、反模式分类）；丰富 02_workflow、03_execution_models、04_compositional_engineering README（实质选型指南、决策表）；02_complete_43_catalog 扩展模式形式化对应；00_MASTER_INDEX 第五阶段
+- **software_design_theory 层次推进扩展**：新增 [06_rust_idioms](software_design_theory/06_rust_idioms.md)（RAII、Newtype、类型状态、与 GoF 衔接）、[07_anti_patterns](software_design_theory/07_anti_patterns.md)（13 反例、反模式分类）；丰富 02_workflow、03_execution_models、04_compositional_engineering README；02_complete_43_catalog 扩展模式形式化对应；00_MASTER_INDEX 第五阶段；PROOF_INDEX、INDEX、QUICK_FIND 收录 06/07；06/07 状态标为 100% 完成
 - **type_theory README**：状态由「持续完善」改为「核心缺口已补全；全部缺口 Def 占位」；定理 TT-T2 更新为「缺口 Def 占位」；research_notes README 目录结构增加 formal_methods/00_completeness_gaps.md
 
 ---

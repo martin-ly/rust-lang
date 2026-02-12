@@ -343,6 +343,12 @@
 5. **[04_compositional_engineering](./software_design_theory/04_compositional_engineering/)** - 组合软件工程有效性
    - 定理 CE-T1、CE-T2、CE-T3
 
+6. **[06_rust_idioms](./software_design_theory/06_rust_idioms.md)** - Rust 惯用模式
+   - RAII、Newtype、类型状态；与 GoF 衔接
+
+7. **[07_anti_patterns](./software_design_theory/07_anti_patterns.md)** - 反模式与边界
+   - 13 反例索引、反模式分类、规避策略
+
 ---
 
 ### 综合研究

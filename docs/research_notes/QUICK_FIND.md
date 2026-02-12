@@ -159,6 +159,8 @@
 | [23/43 模型](./software_design_theory/02_workflow_safe_complete_models/)   | 安全 vs 完全模型                   | ✅ 已完成 | 100%   |
 | [执行模型](./software_design_theory/03_execution_models/)                   | 同步、异步、并发、并行、分布式     | ✅ 已完成 | 100%   |
 | [组合工程](./software_design_theory/04_compositional_engineering/)          | CE-T1–T3 有效性证明                | ✅ 已完成 | 100%   |
+| [Rust 惯用模式](./software_design_theory/06_rust_idioms.md)                | RAII、Newtype、类型状态            | ✅ 已完成 | 100%   |
+| [反模式与边界](./software_design_theory/07_anti_patterns.md)                | 13 反例、反模式分类、规避策略      | ✅ 已完成 | 100%   |
 
 ### 实验研究
 
@@ -214,6 +216,8 @@
 - **23/43 模型** → [安全 vs 完全模型](./software_design_theory/02_workflow_safe_complete_models/)
 - **执行模型** → [五模型形式化](./software_design_theory/03_execution_models/)
 - **组合工程** → [CE-T1–T3 有效性](./software_design_theory/04_compositional_engineering/)
+- **Rust 惯用模式** → [RAII、Newtype、类型状态](./software_design_theory/06_rust_idioms.md)
+- **反模式与边界** → [13 反例、规避策略](./software_design_theory/07_anti_patterns.md)
 
 ### 我想优化性能
 

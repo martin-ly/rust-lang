@@ -66,6 +66,11 @@
 - **Anti-patterns** ✅ [07_anti_patterns](07_anti_patterns.md)：13 反例索引、反模式分类、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接、三维边界
 - 扩展 20（43 完全）：Repository、DTO、Event Sourcing 等已纳入 02_complete_43_catalog
 
+### 3.2 执行模型扩展
+
+- 五模型（同步、异步、并发、并行、分布式）✅
+- 可选扩展：Actor（actix）、CSP（channel）、事件溯源（02_complete_43 Event Sourcing）
+
 ### 3.3 工作流模型扩展
 
 - 23 安全：GoF 23 纯安全子集
@@ -81,6 +86,8 @@
 - **执行模型**：形式化定义、操作语义、Rust 示例、**典型场景**、与 async/borrow 衔接（五模型）
 - **组合工程**：CE-T1–T3 完整证明思路、模块/Crate 组合代码示例、**设计模式组合示例**、与 ownership/borrow/trait 衔接
 - **边界体系**：安全/支持/表达三维矩阵、决策树、反例、扩展模式详情、**模式选取示例**
+- **Rust Idioms**：RAII、Newtype、类型状态（Def/Axiom/定理、典型场景、常见陷阱、与 GoF 衔接）
+- **反模式**：13 反例索引、反模式分类、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接、规避策略
 
 ---
 

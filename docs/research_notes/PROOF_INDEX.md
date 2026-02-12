@@ -434,6 +434,13 @@
 7. **推论 CR-C1、CM-C1、SR-C1、IT-C1、ME-C1、OB-C1、ST-C1** ✅ — 行为型 7 种（Chain、Command、Strategy、Iterator、Mediator、Observer、State）纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/)
 8. **推论 AD-C1** ✅ — Adapter 纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/02_structural/adapter.md)
 
+**Rust Idioms 与反模式**：
+
+9. **Def RAII1、Axiom RAII1、定理 RAII-T1** ✅ — RAII 与 ownership 规则 3 一致；[证明位置](./software_design_theory/06_rust_idioms.md)
+10. **Def NW1、定理 NW-T1** ✅ — Newtype 零成本抽象；[证明位置](./software_design_theory/06_rust_idioms.md)
+11. **Def TS1、定理 TS-T1** ✅ — 类型状态与 Builder B-T2 一致；[证明位置](./software_design_theory/06_rust_idioms.md)
+12. **Def AP1、Axiom AP1** ✅ — 反模式形式化；13 反例索引；[证明位置](./software_design_theory/07_anti_patterns.md)
+
 #### 边界系统
 
 **文档**: [05_boundary_system](../software_design_theory/05_boundary_system/)、[04_boundary_matrix](../software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)、[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md)
