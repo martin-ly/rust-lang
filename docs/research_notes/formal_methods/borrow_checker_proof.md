@@ -48,6 +48,10 @@
   - [✅ 证明目标](#-证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
+  - [Rust 1.93 与并发/裸指针扩展（形式化占位）](#rust-193-与并发裸指针扩展形式化占位)
+  - [unsafe 契约与 borrow/ownership 衔接（Phase 3）](#unsafe-契约与-borrowownership-衔接phase-3)
+  - [控制流与借用衔接（Phase 5）](#控制流与借用衔接phase-5)
+  - [FFI、extern、C variadic、? 操作符（Phase 6）](#ffiexternc-variadic-操作符phase-6)
   - [📖 参考文献](#-参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
@@ -571,6 +575,42 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 **Def RAW1（裸指针与 deref_nullptr）**：`*const T`/`*mut T` 无自动借用；解引用需 `unsafe`；1.93 `deref_nullptr` deny-by-default 禁止解引用可能为 null 的指针。形式化：$\text{deref}(p)$ 合法仅当 $\text{nonnull}(p)$；违反为 UB。
 
 **定理 RAW-T1**：裸指针解引用不与借用检查器冲突；借用检查器不检查裸指针；`deref_nullptr` lint 减少 null 解引用 UB。与 [type_system_foundations](../type_theory/type_system_foundations.md) Def DEREF-NULL1 衔接。
+
+---
+
+## unsafe 契约与 borrow/ownership 衔接（Phase 3）
+
+**Def UNSAFE1（unsafe 契约）**：`unsafe` 块承诺满足编译器无法验证的**前置条件**；调用者或实现者须保证：$\text{pre}(C) \rightarrow \text{safe}(C)$，其中 $C$ 为 unsafe 契约、$\text{pre}$ 为前置、$\text{safe}$ 为安全语义。违反前置为 UB。
+
+**定理 UNSAFE-T1（unsafe 与 borrow 衔接）**：若 unsafe 块内产生的引用或裸指针满足借用规则的前置（非悬垂、非别名冲突），则其与 [borrow_checker_proof](borrow_checker_proof.md) 定理 1 数据竞争自由相容。形式化：$\text{pre}(C) \land \text{borrow\_compliant}(r) \rightarrow \text{DataRaceFree}(P)$。由 unsafe 契约与借用规则无冲突。
+
+**定理 UNSAFE-T2（unsafe 与所有权衔接）**：`unsafe` 中对 `Box::from_raw`、`ManuallyDrop` 等使用若保持 [ownership_model](ownership_model.md) 规则 2、3（唯一所有者、作用域释放），则与定理 3 内存安全相容。
+
+---
+
+## 控制流与借用衔接（Phase 5）
+
+**Def MATCH1（match 穷尽性）**：`match e { p_1 => ..., p_n => ... }` 满足**穷尽性**当且仅当 $\forall v: \tau.\, \exists i: p_i \text{ matches } v$；类型系统保证穷尽，不可达分支为 `!` 类型。
+
+**定理 MATCH-T1（穷尽性与不可达）**：穷尽 match 保证所有值被处理；若存在 `_ => unreachable!()` 或 `!` 分支，则类型系统保证该分支不可达。与 [borrow_checker_proof](borrow_checker_proof.md) 规则 3 结合：match 各分支内借用作用域独立，无跨分支冲突。
+
+**Def FOR1（for 迭代与借用）**：`for x in iter` 等价于 `IntoIterator::into_iter` 取得所有权或借用；迭代期间 `iter` 被可变借用（`IterMut`）或不可变借用（`Iter`）；迭代中修改集合违反借用规则。
+
+**定理 FOR-T1（迭代中修改集合）**：`for x in &mut v { v.push(...); }` 被借用检查器拒绝——`&mut v` 与 `v.push` 的 `&mut self` 冲突。由 [borrow_checker_proof](borrow_checker_proof.md) 规则 1 直接保证。
+
+---
+
+## FFI、extern、C variadic、? 操作符（Phase 6）
+
+**Def EXTERN1（extern ABI 边界）**：`extern "C"` 或 `extern "system"` 声明函数采用**外部 ABI**；调用时 Rust 不验证实参；调用者须保证类型与布局与目标 ABI 一致；违反为 UB。
+
+**定理 EXTERN-T1**：extern 函数与借用检查器边界：Rust 仅检查 Rust 侧；调用 extern 时传入的引用若在 extern 调用期间被外部代码修改，则需 `unsafe` 契约保证。与 [borrow_checker_proof](borrow_checker_proof.md) 定理 1 相容——extern 不引入 Rust 借用冲突。
+
+**Def CVARIADIC1（C variadic 1.93）**：`extern "system" fn(..., ...)` 为 1.93 稳定的 C 风格可变参数；调用者须按 C 约定传递参数；`va_list` 等需 FFI 正确使用。
+
+**Def QUERY1（? 操作符）**：`e?` 为错误传播语法糖；`e: Result<T, E>` 或 `Option<T>`；`Ok(v)/Some(v)` 提取值，`Err(e)/None` 早期返回。形式化：$\text{query}(e) \equiv \text{match } e \text{ with Ok/Some} \rightarrow v \mid \text{Err/None} \rightarrow \text{return}$。
+
+**定理 QUERY-T1**：`?` 与借用：`e` 在 `?` 前求值完成，借用可结束；`?` 所在函数返回类型与 `e` 的 `E` 相容；不影响 [borrow_checker_proof](borrow_checker_proof.md) 规则 1、2。
 
 ---
 

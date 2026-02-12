@@ -60,6 +60,20 @@
 
 ---
 
+## 23 vs 43 选型指南（实质内容）
+
+| 场景 | 推荐 | 理由 |
+| :--- | :--- | :--- |
+| 纯业务逻辑、无持久化 | 23 安全 | GoF 足够；Factory、Strategy、State |
+| 需持久化抽象 | 43 完全 → Repository | 见 [02_complete_43_catalog](02_complete_43_catalog.md) |
+| 需用例编排、事务 | 43 完全 → Service Layer | 见 02_complete_43_catalog |
+| 需跨边界传输 | 43 完全 → DTO | 见 02_complete_43_catalog |
+| 需外部系统集成 | 43 完全 → Gateway | 需 FFI 时可能 unsafe |
+
+**扩展模式深入**：20 种扩展模式均有 Rust 实现、核心意图、与 23 安全的关系；见 [02_complete_43_catalog](02_complete_43_catalog.md) 扩展模式选型决策树。
+
+---
+
 ## 权威对标
 
 - **GoF (1994)**：23 种经典模式

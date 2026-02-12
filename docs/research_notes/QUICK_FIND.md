@@ -22,6 +22,7 @@
   - [📚 按研究领域查找](#-按研究领域查找)
     - [形式化方法](#形式化方法)
     - [类型理论](#类型理论)
+    - [软件设计理论](#软件设计理论)
     - [实验研究](#实验研究)
     - [综合研究](#综合研究)
   - [🎯 按研究目标查找](#-按研究目标查找)
@@ -70,7 +71,8 @@
 | 关键词     | 相关研究笔记                                                    | 状态    |
 | :--- | :--- | :--- |
 | 类型系统   | [类型系统基础](./type_theory/type_system_foundations.md)        | ✅ 100% |
-| 类型理论缺口 | [完备性缺口](./type_theory/00_completeness_gaps.md)           | ⚠️ 缺口已声明 |
+| 类型理论缺口 | [完备性缺口](./type_theory/00_completeness_gaps.md)           | ✅ 阶段 1–7 Def 占位 |
+| 形式化方法缺口 | [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md) | ✅ Phase 1–6 100% |
 | Trait      | [Trait 系统形式化](./type_theory/trait_system_formalization.md) | ✅ 100% |
 | 泛型       | [高级类型特性](./type_theory/advanced_types.md)                 | ✅ 100% |
 | GATs       | [高级类型特性](./type_theory/advanced_types.md)                 | ✅ 100% |
@@ -192,13 +194,15 @@
 - **并发安全** → [异步状态机形式化](./formal_methods/async_state_machine.md)
 - **引用有效性** → [生命周期形式化](./formal_methods/lifetime_formalization.md)
 - **内存位置稳定性** → [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md)
+- **形式化方法完备性** → [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
 
 ### 我想理解某个概念
 
 **类型理论研究**:
 
 - **类型系统基础** → [类型系统基础](./type_theory/type_system_foundations.md)
-- **类型理论缺口** → [完备性缺口](./type_theory/00_completeness_gaps.md)（LUB、Copy、RPITIT 等）
+- **类型理论缺口** → [完备性缺口](./type_theory/00_completeness_gaps.md)（LUB、Copy、RPITIT 等；阶段 1–7 Def 占位）
+- **形式化方法缺口** → [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
 - **Trait 系统** → [Trait 系统形式化](./type_theory/trait_system_formalization.md)
 - **生命周期** → [生命周期形式化](./type_theory/lifetime_formalization.md)
 - **高级类型特性** → [高级类型特性](./type_theory/advanced_types.md)

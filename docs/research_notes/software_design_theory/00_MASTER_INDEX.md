@@ -17,7 +17,9 @@
 ├── 02_workflow_safe_complete_models ← 23 安全 / 43 完全模型
 ├── 03_execution_models           ← 同步/异步/并发/并行/分布式
 ├── 04_compositional_engineering  ← 组合工程有效性
-└── 05_boundary_system            ← 三维边界矩阵
+├── 05_boundary_system            ← 三维边界矩阵
+├── 06_rust_idioms                ← Rust 惯用模式（RAII、Newtype、类型状态）
+└── 07_anti_patterns              ← 反模式与边界
 ```
 
 ### 1.2 依赖关系
@@ -60,14 +62,9 @@
 ### 3.1 设计模式扩展
 
 - GoF 23 模式（当前）✅
-- Rust Idioms（待扩展）：RAII、Newtype、类型状态、Builder 变体
-- Anti-patterns（待扩展）：13 反例已收录于 FORMAL_PROOF_SYSTEM_GUIDE
+- **Rust Idioms** ✅ [06_rust_idioms](06_rust_idioms.md)：RAII、Newtype、类型状态、Builder 变体；含 Def/Axiom/定理、典型场景、常见陷阱、与 GoF 衔接
+- **Anti-patterns** ✅ [07_anti_patterns](07_anti_patterns.md)：13 反例索引、反模式分类、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接、三维边界
 - 扩展 20（43 完全）：Repository、DTO、Event Sourcing 等已纳入 02_complete_43_catalog
-
-### 3.2 执行模型扩展
-
-- 当前：同步、异步、并发、并行、分布式
-- 待扩展：Actor、CSP、反应式、事件溯源
 
 ### 3.3 工作流模型扩展
 
@@ -109,6 +106,8 @@
 | 同步/异步/并发/分布式 | [03_execution_models/README](03_execution_models/README.md) |
 | 组合工程有效性 | [04_compositional_engineering/README](04_compositional_engineering/README.md) |
 | 边界体系总览 | [05_boundary_system/README](05_boundary_system/README.md) |
+| **Rust 惯用模式** | [06_rust_idioms](06_rust_idioms.md) — RAII、Newtype、类型状态、与设计模式衔接 |
+| **反模式与边界** | [07_anti_patterns](07_anti_patterns.md) — 13 反例、反模式分类、规避策略 |
 
 ---
 
@@ -128,3 +127,4 @@
 | 第二阶段 | 设计模式形式化 | 100% 完成（23 模式） |
 | 第三阶段 | 工作流与执行模型 | 100% 完成（23/43、五执行模型） |
 | 第四阶段 | 组合工程与证明 | 100% 完成（CE-T1–T3） |
+| 第五阶段 | Rust Idioms 与反模式 | 100% 完成（06、07） |

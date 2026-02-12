@@ -252,6 +252,18 @@ impl<T, A: Specification<T>, B: Specification<T>> Specification<T> for AndSpec<A
 
 ---
 
+## 扩展模式形式化对应（深入）
+
+| 模式 | 形式化对应 | 与 23 安全组合 |
+| :--- | :--- | :--- |
+| Repository | 见 [02_effectiveness_proofs](../../04_compositional_engineering/02_effectiveness_proofs.md) CE-T1；trait 泛型约束 | 可与 Factory Method、Builder 组合 |
+| Service Layer | 模块依赖、trait 组合；见 [03_integration_theory](../../04_compositional_engineering/03_integration_theory.md) IT-T1 | 编排 Repository、Factory |
+| DTO | 结构体 + serde；无行为；所有权转移 | 与 Remote Facade、Gateway 组合 |
+| Event Sourcing | `Vec<Event>` + `fold`；无共享可变；见 [ownership_model](../../../formal_methods/ownership_model.md) | 与 Command、Memento 概念衔接 |
+| Specification | `trait Spec` + `and`/`or`；组合模式；见 [composite](../../01_design_patterns_formal/02_structural/composite.md) | 业务规则组合 |
+
+---
+
 ## 权威来源
 
 - [Fowler EAA Catalog](https://martinfowler.com/eaaCatalog/)

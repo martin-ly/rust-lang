@@ -13,6 +13,18 @@
 
 ---
 
+## 设计模式组合示例（实质内容）
+
+| 组合 | 实现要点 | 形式化衔接 |
+| :--- | :--- | :--- |
+| Builder + Factory Method | 工厂返回 Builder | CE-T1、CE-T3 |
+| Decorator + Strategy | 装饰器持 `impl Strategy` | CE-T2（无共享可变） |
+| Observer + Command | channel 传 `Box<dyn Command>` | CE-T2（Send 约束） |
+| Composite + Visitor | `match` 遍历 + `Visitor` trait | CE-T1、CE-T3 |
+| Repository + Service Layer | 模块依赖、trait 组合 | [03_integration_theory](03_integration_theory.md) IT-T1 |
+
+---
+
 ## 文档索引
 
 | 文档 | 内容 |

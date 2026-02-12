@@ -30,6 +30,8 @@
 | [03_execution_models](03_execution_models/) | 同步/异步/并发/并行/分布式 |
 | [04_compositional_engineering](04_compositional_engineering/) | 组合软件工程有效性形式论证 |
 | [05_boundary_system](05_boundary_system/) | 边界体系统一分析 |
+| [06_rust_idioms](06_rust_idioms.md) | Rust 惯用模式（RAII、Newtype、类型状态） |
+| [07_anti_patterns](07_anti_patterns.md) | 反模式与边界、13 反例索引 |
 
 ---
 
@@ -97,6 +99,8 @@
 | 03_execution_models（五模型） | 100% |
 | 04_compositional_engineering（CE-T1–T3） | 100% |
 | 05_boundary_system（三维矩阵） | 100% |
+| 06_rust_idioms（RAII、Newtype、类型状态） | 100% |
+| 07_anti_patterns（反模式） | 100% |
 
 ---
 

@@ -64,14 +64,14 @@
 | **借用** | 数据竞争自由 | 可变独占、不可变可多 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) | 双重可变借用 |
 | **生命周期** | 引用有效性 | NLL + 显式标注 | [lifetime_formalization](formal_methods/lifetime_formalization.md) | 返回局部引用 |
 | **Pin** | 自引用移动→悬垂 | 堆/栈区分：Unpin 栈、非 Unpin 堆 | [pin_self_referential](formal_methods/pin_self_referential.md) | 非 Unpin 用 Pin::new |
-| **Box** | 堆分配、单一所有权 | 移动语义、RAII | ownership_model | 使用已移动 Box |
-| **Rc/Arc** | 共享所有权 | 引用计数、Rc 非 Send | ownership_model | 跨线程用 Rc |
-| **Cell/RefCell** | 内部可变性 | 非 Sync（Cell）、运行时借用（RefCell） | borrow_checker | Cell 跨线程共享 |
-| **MaybeUninit** | 延迟初始化 | 未初始化内存、assume_init 契约 | PROOF_INDEX | 未初始化 assume_init |
-| **智能指针** | 自定义所有权语义 | Deref/Drop trait | - | 违反 Drop 顺序 |
-| **裸指针** | FFI、unsafe 底层 | *const T、*mut T 无自动借用 | - | 解引用空指针 |
+| **Box** | 堆分配、单一所有权 | 移动语义、RAII | [ownership_model](formal_methods/ownership_model.md) Def BOX1 | 使用已移动 Box |
+| **Rc/Arc** | 共享所有权 | 引用计数、Rc 非 Send | [ownership_model](formal_methods/ownership_model.md) Def RC1/ARC1 | 跨线程用 Rc |
+| **Cell/RefCell** | 内部可变性 | 非 Sync（Cell）、运行时借用（RefCell） | [ownership_model](formal_methods/ownership_model.md) Def CELL1/REFCELL1 | Cell 跨线程共享 |
+| **MaybeUninit** | 延迟初始化 | 未初始化内存、assume_init 契约 | [ownership_model](formal_methods/ownership_model.md) Def MAYBEUNINIT1 | 未初始化 assume_init |
+| **智能指针** | 自定义所有权语义 | Deref/Drop trait | [ownership_model](formal_methods/ownership_model.md) Def DROP1/DEREF1 | 违反 Drop 顺序 |
+| **裸指针** | FFI、unsafe 底层 | *const T、*mut T 无自动借用 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def RAW1 | 解引用空指针 |
 | **引用** | 借用、零成本 | &T、&mut T | borrow_checker | 悬垂引用 |
-| **内存布局** | 与 C 互操作 | repr(C)、repr(transparent) | - | 错误布局导致 UB |
+| **内存布局** | 与 C 互操作 | repr(C)、repr(transparent) | [ownership_model](formal_methods/ownership_model.md) Def REPR1 | 错误布局导致 UB |
 
 ---
 
@@ -119,12 +119,12 @@
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
 | **if/else** | 条件分支 | 表达式、必须返回同类型 | - | - |
-| **match** | 穷尽模式匹配 | 必须覆盖所有变体 | - | 非穷尽 match |
+| **match** | 穷尽模式匹配 | 必须覆盖所有变体 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def MATCH1 | 非穷尽 match |
 | **if let** | 单模式匹配 | 简化 Option/Result | - | - |
 | **loop** | 无限循环 | loop、break 返回值 | - | - |
 | **while** | 条件循环 | while、while let | - | - |
-| **for** | 迭代 | IntoIterator | - | 迭代中修改集合 |
-| **? 操作符** | 错误传播 | Result/Option 早期返回 | - | 非 Result 类型 |
+| **for** | 迭代 | IntoIterator | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def FOR1 | 迭代中修改集合 |
+| **? 操作符** | 错误传播 | Result/Option 早期返回 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def QUERY1 | 非 Result 类型 |
 | **模式** | 解构、绑定 | ref、mut、@、.. | - | 非穷尽 |
 
 ---
@@ -133,14 +133,14 @@
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
-| **线程** | 多核并行 | thread::spawn、JoinHandle | - | 非 Send 跨线程 |
+| **线程** | 多核并行 | thread::spawn、JoinHandle | [async_state_machine](formal_methods/async_state_machine.md) Def SPAWN1 | 非 Send 跨线程 |
 | **Future** | 异步 I/O | Poll、Pin、async/await | [async_state_machine](formal_methods/async_state_machine.md) | 未 Pin 自引用 |
 | **async/await** | 异步语法糖 | 生成状态机、自引用 | async_state_machine | 非 Send 跨 await |
 | **Pin** | Future 位置稳定 | 见内存族 | pin_self_referential | - |
 | **Send/Sync** | 见 Trait 族 | - | async_state_machine | - |
-| **通道** | 消息传递 | mpsc、sync_channel | - | 发送端 drop 后接收 |
-| **Mutex/RwLock** | 共享可变 | 锁保护、RAII | - | 死锁 |
-| **原子操作** | 无锁并发 | AtomicUsize 等 | - | 错误内存顺序 |
+| **通道** | 消息传递 | mpsc、sync_channel | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def CHAN1 | 发送端 drop 后接收 |
+| **Mutex/RwLock** | 共享可变 | 锁保护、RAII | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def MUTEX1 | 死锁 |
+| **原子操作** | 无锁并发 | AtomicUsize 等 | [ownership_model](formal_methods/ownership_model.md) Def ATOMIC1 | 错误内存顺序 |
 
 ---
 
@@ -184,12 +184,12 @@
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
-| **unsafe** | 绕过借用、类型检查 | unsafe 块、契约 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 违反契约 UB |
-| **extern** | C/FFI 互操作 | extern "C"、extern "system" | - | ABI 不匹配 |
-| **C variadic** | 1.93 C 风格可变参数 | extern "system" fn f(..., ...) | [07_rust_1.93_full_changelog](../toolchain/07_rust_1.93_full_changelog.md) | 1.93 ... future-incompat |
-| **裸指针** | 见内存族 | - | - | deref_nullptr 1.93 deny |
-| **union** | C 互操作 | union、&raw 访问 | - | 非活动字段读取 |
-| **transmute** | 类型重解释 | 极度 unsafe | - | 大小/对齐不匹配 |
+| **unsafe** | 绕过借用、类型检查 | unsafe 块、契约 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def UNSAFE1 | 违反契约 UB |
+| **extern** | C/FFI 互操作 | extern "C"、extern "system" | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def EXTERN1 | ABI 不匹配 |
+| **C variadic** | 1.93 C 风格可变参数 | extern "system" fn f(..., ...) | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def CVARIADIC1 | 1.93 ... future-incompat |
+| **裸指针** | 见内存族 | - | borrow_checker_proof Def RAW1 | deref_nullptr 1.93 deny |
+| **union** | C 互操作 | union、&raw 访问 | [ownership_model](formal_methods/ownership_model.md) Def UNION1 | 非活动字段读取 |
+| **transmute** | 类型重解释 | 极度 unsafe | [ownership_model](formal_methods/ownership_model.md) Def TRANSMUTE1 | 大小/对齐不匹配 |
 
 ---
 

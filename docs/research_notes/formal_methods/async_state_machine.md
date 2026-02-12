@@ -63,6 +63,7 @@
     - [全局分配器与异步状态机](#全局分配器与异步状态机)
     - [asm! 块中的 cfg 属性](#asm-块中的-cfg-属性)
     - [状态机代码生成改进（2025年目标）](#状态机代码生成改进2025年目标)
+  - [thread::spawn 与 JoinHandle（Phase 6）](#threadspawn-与-joinhandlephase-6)
 
 ---
 
@@ -1065,3 +1066,11 @@ Rust 1.93.0 允许在 `asm!` 块中对单个语句应用 `cfg` 属性，这对�
 **形式化表示**：
 
 $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[\text{StateTransition}]$$
+
+---
+
+## thread::spawn 与 JoinHandle（Phase 6）
+
+**Def SPAWN1（thread::spawn）**：`thread::spawn(|| body)` 创建新线程；闭包需 `F: Send + 'static`；所有权转移至新线程；`JoinHandle<T>` 持有所得权，`join()` 阻塞直到线程完成并返回 `Result<T>`。
+
+**定理 SPAWN-T1**：spawn 与 Send 约束保证数据竞争自由：闭包捕获的 `T` 必须 `Send`，故跨线程无共享可变；与 [borrow_checker_proof](borrow_checker_proof.md) 定理 1、[async_state_machine](async_state_machine.md) 定理 6.2 一致。

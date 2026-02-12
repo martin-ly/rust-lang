@@ -32,7 +32,10 @@
 - **设计模式 Prototype**：新增推论 P-C1（Clone 副本可安全传递）
 - **设计模式 23 种全部补全推论**：Facade（FA-C1）、Decorator（DE-C1）、Composite（CO-C1）、Bridge（BR-C1）、Flyweight（FL-C1）、Proxy（PR-C1）、Builder（B-C1）、Abstract Factory（AF-C1）、Singleton（S-C1）、Chain（CR-C1）、Command（CM-C1）、Strategy（SR-C1）、Iterator（IT-C1）、Mediator（ME-C1）、Observer（OB-C1）、State（ST-C1）；先前已有：Adapter、Factory Method、Template Method、Interpreter、Visitor、Memento
 - **STATISTICS**：最后更新 2026-02-12；形式化定义统计增加软件设计理论 69+；最近更新记录类型理论阶段 1–7、设计模式推论；PROOF_INDEX 87+ 加入相关资源
-- **formal_methods 完备性缺口**：新增 [00_completeness_gaps](formal_methods/00_completeness_gaps.md)；ownership_model 新增 Def RC1/ARC1/CELL1/REFCELL1/BOX1、定理 RC-T1/REFCELL-T1/BOX-T1；borrow_checker_proof 新增 Def CHAN1/MUTEX1/RAW1、定理 CHAN-T1/MUTEX-T1/RAW-T1；README 状态改为「持续完善」；ARGUMENTATION_GAP_INDEX 增加 formal_methods 缺口
+- **formal_methods 完备性缺口**：新增 [00_completeness_gaps](formal_methods/00_completeness_gaps.md)；✅ **Phase 1–6 全部补全 100%**；ownership_model 新增 DROP/DEREF/REPR/CONST_MUT_STATIC；borrow_checker_proof 新增 EXTERN/CVARIADIC/QUERY；async_state_machine 新增 SPAWN；PROOF_INDEX 105+ 证明；ARGUMENTATION_GAP_INDEX 标 formal_methods 为 100% 完成
+- **全局 100% 推进**：formal_methods README 状态改为 100%；RESEARCH_ROADMAP 新增 2.5 形式化方法完备性缺口、17/17 项完成；INDEX、QUICK_FIND、QUICK_REFERENCE 更新 formal_methods Phase 1–6 完成状态
+- **software_design_theory 层次推进扩展**：新增 [06_rust_idioms](software_design_theory/06_rust_idioms.md)（RAII、Newtype、类型状态、与 GoF 衔接）、[07_anti_patterns](software_design_theory/07_anti_patterns.md)（13 反例、反模式分类）；丰富 02_workflow、03_execution_models、04_compositional_engineering README（实质选型指南、决策表）；02_complete_43_catalog 扩展模式形式化对应；00_MASTER_INDEX 第五阶段
+- **type_theory README**：状态由「持续完善」改为「核心缺口已补全；全部缺口 Def 占位」；定理 TT-T2 更新为「缺口 Def 占位」；research_notes README 目录结构增加 formal_methods/00_completeness_gaps.md
 
 ---
 

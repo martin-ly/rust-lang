@@ -3,7 +3,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-01-26
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ 路线图 16/16 项已 100% 完成
+> **状态**: ✅ 路线图 17/17 项已 100% 完成（含 formal_methods 完备性缺口）
 
 ---
 
@@ -140,6 +140,14 @@
   - 引用有效性证明
 
 **预期成果**: 生命周期系统的形式化定义
+
+### 2.5 形式化方法完备性缺口
+
+- [x] [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md) ✅ 100%
+  - Phase 1–6 全部补全（RC/ARC/CELL/REFCELL/BOX、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、MAYBEUNINIT/ATOMIC/UNION/TRANSMUTE、EXTERN/CVARIADIC/QUERY、DROP/DEREF/REPR/CONST_MUT_STATIC、SPAWN）
+  - 无剩余缺口
+
+**预期成果**: Rust 1.93 语言特性与 formal_methods 全面衔接
 
 ---
 
@@ -305,4 +313,4 @@
 
 **维护团队**: Rust Research Community
 **最后更新**: 2026-01-26
-**状态**: ✅ **路线图 16/16 项已 100% 完成**
+**状态**: ✅ **路线图 17/17 项已 100% 完成**（含 formal_methods 2.5 完备性缺口）

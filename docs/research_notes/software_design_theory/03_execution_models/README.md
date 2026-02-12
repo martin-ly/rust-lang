@@ -44,6 +44,20 @@
 
 ---
 
+## 模型选型决策（实质内容）
+
+| 需求组合 | 推荐模型 | 典型场景 |
+| :--- | :--- | :--- |
+| 单线程、无 I/O 等待 | 同步 | 批处理、脚本、算法核心 |
+| 多 I/O、高并发连接 | 异步 | Web 服务、数据库、网络 |
+| 多线程、消息传递 | 并发 | 生产者-消费者、多工作者 |
+| CPU 密集、批量计算 | 并行 | 图像处理、数据分析、rayon |
+| 跨节点通信 | 分布式 | tonic、actix、RPC |
+
+**与设计模式映射**：同步—全部 23；异步—Observer、Command、State；并发—Singleton、Observer、Mediator；并行—Strategy、Iterator；分布式—Proxy、Gateway、DTO。详见 [06_boundary_analysis](06_boundary_analysis.md)。
+
+---
+
 ## 模型选择速查
 
 | 需求 | 推荐模型 | crate |

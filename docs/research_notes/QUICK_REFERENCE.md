@@ -17,8 +17,9 @@
 
 #### 🔬 形式化方法研究
 
-| 主题             | 文件                                                                    | 状态    |
+| 主题  | 文件 | 状态 |
 | :--- | :--- | :--- |
+| 完备性缺口 | [00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md)       | ✅ Phase 1–6 100% |
 | 所有权模型形式化 | [ownership_model.md](./formal_methods/ownership_model.md)               | ✅ 100% |
 | 借用检查器证明   | [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)     | ✅ 100% |
 | 异步状态机形式化 | [async_state_machine.md](./formal_methods/async_state_machine.md)       | ✅ 100% |
@@ -29,7 +30,7 @@
 
 | 主题 | 文件 | 状态 |
 | :--- | :--- | :--- |
-| 完备性缺口 | [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md) | ⚠️ 缺口已声明 |
+| 完备性缺口 | [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md) | ✅ 阶段 1–7 Def 占位 |
 | 类型系统基础 | [type_system_foundations.md](./type_theory/type_system_foundations.md) | ✅ 100% |
 | Trait 系统形式化 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md) | ✅ 100% |
 | 生命周期形式化   | [lifetime_formalization.md](./type_theory/lifetime_formalization.md)         | ✅ 100% |

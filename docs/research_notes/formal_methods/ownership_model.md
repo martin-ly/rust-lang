@@ -58,6 +58,9 @@
     - [与借用检查器的集成](#与借用检查器的集成)
     - [与生命周期的集成](#与生命周期的集成)
     - [实际应用案例](#实际应用案例)
+  - [Rust 1.93 与智能指针扩展（形式化占位）](#rust-193-与智能指针扩展形式化占位)
+  - [MaybeUninit、原子操作、union、transmute（Phase 4）](#maybeuninit原子操作uniontransmutephase-4)
+  - [Deref/Drop、repr、const \&mut static（Phase 6）](#derefdropreprconst-mut-staticphase-6)
 
 ---
 
@@ -741,6 +744,44 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$：借用 $r$ 的活跃区间由生命�
 **Def BOX1（Box RAII）**：`Box<T>` 独占堆所有权；drop 时自动释放；$\Omega(\text{Box}) = \text{Owned}$，移动时转移。与规则 2、3 一致。
 
 **定理 BOX-T1**：`Box` drop 顺序与 RAII 一致；栈展开时按创建逆序 drop；无双重释放。由 [ownership_model](ownership_model.md) 规则 3。
+
+---
+
+## MaybeUninit、原子操作、union、transmute（Phase 4）
+
+**Def MAYBEUNINIT1（MaybeUninit 1.93）**：`MaybeUninit<T>` 表示可能未初始化内存；`assume_init()` 承诺已初始化；1.93 `assume_init_drop` 等扩展需满足：调用前已正确初始化，否则 UB。形式化：$\text{assume\_init}(m)$ 合法仅当 $\text{initialized}(m)$。
+
+**定理 MAYBEUNINIT-T1**：`MaybeUninit::assume_init_drop` 正确调用等价于已初始化值的 drop；与 [ownership_model](ownership_model.md) 规则 3 一致。见 [PROOF_INDEX](../PROOF_INDEX.md) MaybeUninit 相关证明。
+
+**Def ATOMIC1（原子操作）**：`AtomicUsize` 等原子类型提供**无锁同步**；内存顺序（Ordering）约束可见性；`load`/`store`/`compare_and_swap` 满足 C11 内存模型子集。
+
+**定理 ATOMIC-T1**：正确使用原子操作（Release/Acquire 配对）保证跨线程同步；与 [borrow_checker_proof](borrow_checker_proof.md) 定理 1 数据竞争自由相容——原子操作替代锁或通道时，仍满足无数据竞争。
+
+**Def UNION1（union 非活动字段）**：`union U { a: T, b: S }` 仅**活动字段**可读；读取非活动字段为 UB。形式化：$\text{read}(u, f)$ 合法仅当 $f = \text{active}(u)$。
+
+**Def TRANSMUTE1（transmute）**：`mem::transmute::<A, B>(x)` 将位模式重解释；需 $\text{size\_of}(A) = \text{size\_of}(B) \land \text{align\_of}(A) \leq \text{align\_of}(B)$；违反为 UB。
+
+**定理 TRANSMUTE-T1**：transmute 与所有权：若 $A$、$B$ 均为 `Copy` 或正确实现 `Drop`，transmute 不违反唯一性；否则需 `ManuallyDrop` 等显式管理。
+
+---
+
+## Deref/Drop、repr、const &mut static（Phase 6）
+
+**Def DROP1（Drop trait）**：`Drop::drop(&mut self)` 在值离开作用域时自动调用；按**创建逆序**执行；不可递归调用；形式化：$\text{drop}(x)$ 在 $\text{scope\_end}(x)$ 时发生，$\text{drop\_order} = \text{reverse}(\text{creation\_order})$。
+
+**定理 DROP-T1**：Drop 与 RAII 一致；与 [ownership_model](ownership_model.md) 规则 3 一致；无双重 drop 由唯一性保证。
+
+**Def DEREF1（Deref trait）**：`Deref::deref(&self) -> &Target` 提供**解引用强制**；`*x` 等价于 `*x.deref()`；借用传播：`&x` 产生 `&Target`，生命周期与 `x` 同。
+
+**定理 DEREF-T1**：Deref 与借用规则相容；`deref` 返回的引用为借用，不转移所有权；与 [borrow_checker_proof](borrow_checker_proof.md) 规则 1、2 无冲突。
+
+**Def REPR1（内存布局 repr）**：`repr(C)` 保证与 C 布局一致；`repr(transparent)` 保证单字段零成本包装；`repr(Rust)` 为默认、未指定布局。形式化：$\text{layout}(T) = \text{repr}(T)$。
+
+**定理 REPR-T1**：repr 与 FFI：`repr(C)` 类型可安全传递给 FFI；与 [borrow_checker_proof](borrow_checker_proof.md) Def EXTERN1 衔接。
+
+**Def CONST_MUT_STATIC1（const &mut static 1.93）**：1.93 允许 const 含 `&mut static`；非常 unsafe；`const_item_interior_mutations` lint 为 warn-by-default。形式化：$\text{const}(c) \land \&mut \text{static} \rightarrow \text{Unsafe}(c)$。
+
+**定理 CONST_MUT_STATIC-T1**：const &mut static 需显式 unsafe；与 [ownership_model](ownership_model.md) 规则 2、3 一致——static 无唯一所有者，修改需谨慎。
 
 ---
 

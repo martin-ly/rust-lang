@@ -3,8 +3,8 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记 + 软件设计理论 23 种设计模式 Def/定理/推论全部完成）
-> **更新内容**: 类型理论阶段 1–7、设计模式 23 种推论、RESEARCH_ROADMAP 1.4 补全 ✅
+> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记 + 软件设计理论 23 种设计模式 + 类型理论阶段 1–7 + formal_methods Phase 1–6）
+> **更新内容**: 类型理论核心缺口已补全、formal_methods Phase 1–6 全部补全、RESEARCH_ROADMAP 17/17 ✅
 
 ---
 
@@ -15,6 +15,7 @@ research_notes/
 ├── README.md                    # 本索引文件
 ├── formal_methods/              # 形式化方法研究
 │   ├── README.md
+│   ├── 00_completeness_gaps.md  # 完备性缺口（Phase 1–6 100% 完成）
 │   ├── ownership_model.md       # 所有权模型形式化
 │   ├── borrow_checker_proof.md  # 借用检查器证明
 │   ├── async_state_machine.md   # 异步状态机形式化

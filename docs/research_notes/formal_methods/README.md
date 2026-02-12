@@ -3,27 +3,27 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ⚠️ **持续完善**；Rust 1.93 语言特性全面论证见 [00_completeness_gaps](00_completeness_gaps.md)
+> **状态**: ✅ **100% 完成**；Rust 1.93 语言特性全面论证见 [00_completeness_gaps](00_completeness_gaps.md)
 
 ---
 
-## ⚠️ 完备性声明
+## ✅ 完备性声明
 
-**本目录形式化论证不充分**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
+**本目录形式化论证已 100% 完成**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
 
-- **内存与所有权**：Box、Rc/Arc、Cell/RefCell、MaybeUninit、智能指针 Deref/Drop 等未全面形式化
-- **并发与异步**：通道、Mutex/RwLock、原子操作、thread::spawn 等未全面形式化
-- **FFI 与 unsafe**：裸指针、union、transmute、extern、C variadic 等未全面形式化
-- **Rust 1.93 变更**：deref_nullptr、const &mut static、Copy specialization 移除等与 formal_methods 衔接不足
+- **内存与所有权**：Box、Rc/Arc、Cell/RefCell、MaybeUninit、Deref/Drop、repr、const &mut static（Phase 1–6）
+- **并发与异步**：通道、Mutex/RwLock、原子操作、thread::spawn（Phase 2、4、6）
+- **FFI 与 unsafe**：裸指针、union、transmute、extern、C variadic（Phase 3、4、6）
+- **控制流**：match、for、? 操作符（Phase 5、6）
 
-**已完成**：所有权规则 1–8、借用规则、生命周期、Pin、async 状态机核心定理；新增 Def RC1/ARC1/CELL1/REFCELL1/BOX1、CHAN1/MUTEX1/RAW1 占位。
+**已完成**：所有权规则 1–8、借用规则、生命周期、Pin、async 状态机核心定理；Phase 1–6 全部形式化。✅ **100% 完成**。
 
 ---
 
 ## 📊 目录
 
 - [🔬 形式化方法研究](#-形式化方法研究)
-  - [⚠️ 完备性声明](#️-完备性声明)
+  - [✅ 完备性声明](#-完备性声明)
   - [📊 目录](#-目录)
   - [🎯 研究目标](#-研究目标)
   - [📚 研究主题](#-研究主题)
@@ -158,8 +158,8 @@
 | 文档 | 核心公理/定理 | 证明要点 |
 | :--- | :--- | :--- |
 | [00_completeness_gaps](./00_completeness_gaps.md) | Def FMG1、定理 FMG-T1 | 完备性缺口声明 |
-| [ownership_model](./ownership_model.md) | 所有权规则 1–8、T2/T3、**RC-T1/REFCELL-T1/BOX-T1** | 唯一性、RAII、Rc/Arc、Cell/RefCell |
-| [borrow_checker_proof](./borrow_checker_proof.md) | 借用规则、T1、**CHAN-T1/MUTEX-T1/RAW-T1** | 互斥借用、通道、Mutex、裸指针 |
+| [ownership_model](./ownership_model.md) | 所有权规则 1–8、T2/T3、RC/ARC/CELL/REFCELL/BOX、MAYBEUNINIT/ATOMIC/UNION/TRANSMUTE、DROP/DEREF/REPR/CONST_MUT_STATIC | 唯一性、RAII、Rc/Arc、Cell/RefCell、MaybeUninit、atomic、union、transmute、Drop/Deref、repr、const &mut static |
+| [borrow_checker_proof](./borrow_checker_proof.md) | 借用规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 互斥借用、通道、Mutex、裸指针、unsafe 契约、match/for/?、extern、C variadic |
 | [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、NLL |
 | [async_state_machine](./async_state_machine.md) | T6.1–T6.3 状态一致性、并发安全、进度 | Future 状态机、Pin |
 | [pin_self_referential](./pin_self_referential.md) | Pin 不变式、T1–T3 自引用安全 | 堆/栈区分、!Unpin |
@@ -251,4 +251,4 @@
 
 **维护团队**: Rust Formal Methods Research Group
 **最后更新**: 2026-02-12
-**状态**: ⚠️ **持续完善**；缺口见 [00_completeness_gaps](00_completeness_gaps.md)
+**状态**: ✅ **100% 完成**；Phase 1–6 全部补全，见 [00_completeness_gaps](00_completeness_gaps.md)

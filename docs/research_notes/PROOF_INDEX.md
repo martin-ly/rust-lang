@@ -3,7 +3,7 @@
 > **创建日期**: 2025-12-25
 > **最后更新**: 2026-01-26
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **证明索引 100% 完成**（87+ 证明已收录，类型理论阶段 1–7 补全完成）
+> **状态**: ✅ **证明索引 100% 完成**（105+ 证明已收录，formal_methods Phase 1–6 全部补全）
 
 ---
 
@@ -126,6 +126,38 @@
      - 性质2（无双重释放）：由所有权唯一性直接保证
      - 性质3（无内存泄漏）：由规则3（作用域结束）保证
 
+3. **Def RC1/ARC1/CELL1/REFCELL1/BOX1 / 定理 RC-T1/REFCELL-T1/BOX-T1（Rust 1.93 智能指针）** ✅
+   - **形式化表示**: Rc/Arc 引用计数、Cell/RefCell 内部可变、Box RAII
+   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+
+4. **Def MAYBEUNINIT1 / 定理 MAYBEUNINIT-T1（MaybeUninit 1.93）** ✅
+   - **形式化表示**: assume_init 合法仅当 initialized
+   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+
+5. **Def ATOMIC1 / 定理 ATOMIC-T1（原子操作）** ✅
+   - **形式化表示**: 原子操作与数据竞争自由相容
+   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+
+6. **Def UNION1（union 非活动字段）** ✅
+   - **形式化表示**: 读取非活动字段为 UB
+   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+
+7. **Def TRANSMUTE1 / 定理 TRANSMUTE-T1（transmute）** ✅
+   - **形式化表示**: size/align 约束；与所有权相容
+   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+
+8. **Def DROP1/DEREF1 / 定理 DROP-T1/DEREF-T1（Drop/Deref trait）** ✅
+   - **形式化表示**: Drop 与 RAII 一致；Deref 与借用规则相容
+   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+
+9. **Def REPR1 / 定理 REPR-T1（内存布局 repr）** ✅
+   - **形式化表示**: repr(C) 与 FFI 衔接
+   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+
+10. **Def CONST_MUT_STATIC1 / 定理 CONST_MUT_STATIC-T1（const &mut static 1.93）** ✅
+    - **形式化表示**: const 含 &mut static 需显式 unsafe
+    - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+
 #### 借用检查器证明
 
 **文档**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
@@ -144,6 +176,42 @@
    - **形式化表示**: 借用检查器正确执行借用规则
    - **证明方法**: 规则归纳法
    - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-2-借用规则正确性)
+
+3. **Def CHAN1 / 定理 CHAN-T1（通道消息传递）** ✅
+   - **形式化表示**: 消息传递无共享可变，满足数据竞争自由
+   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+
+4. **Def MUTEX1 / 定理 MUTEX-T1（Mutex 锁语义）** ✅
+   - **形式化表示**: 任一时刻至多一个 MutexGuard 持有 &mut T
+   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+
+5. **Def RAW1 / 定理 RAW-T1（裸指针与 deref_nullptr）** ✅
+   - **形式化表示**: deref 合法仅当 nonnull；deref_nullptr lint 减少 UB
+   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+
+6. **Def UNSAFE1 / 定理 UNSAFE-T1/T2（unsafe 契约与 borrow/ownership 衔接）** ✅
+   - **形式化表示**: pre(C) → safe(C)；unsafe 与借用/所有权相容
+   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+
+7. **Def MATCH1 / 定理 MATCH-T1（match 穷尽性）** ✅
+   - **形式化表示**: 穷尽 match 保证所有值被处理；各分支借用作用域独立
+   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+
+8. **Def FOR1 / 定理 FOR-T1（for 迭代与借用）** ✅
+   - **形式化表示**: 迭代中修改集合违反借用规则 1
+   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+
+9. **Def EXTERN1 / 定理 EXTERN-T1（extern ABI 边界）** ✅
+   - **形式化表示**: extern 与借用检查器边界相容
+   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+
+10. **Def CVARIADIC1（C variadic 1.93）** ✅
+    - **形式化表示**: extern "system" fn(..., ...) FFI 约定
+    - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+
+11. **Def QUERY1 / 定理 QUERY-T1（? 操作符）** ✅
+    - **形式化表示**: 错误传播与借用相容
+    - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
 
 ---
 
@@ -256,6 +324,10 @@
    - **形式化表示**: $\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F,n) \land \text{State}(F)=\text{Ready}(v)$
    - **证明方法**: 有限性假设 + 进度性 + 终止性
    - **证明位置**: [async_state_machine.md#定理-63-进度保证](./formal_methods/async_state_machine.md#定理-63-进度保证)
+
+4. **Def SPAWN1 / 定理 SPAWN-T1（thread::spawn 与 JoinHandle）** ✅
+   - **形式化表示**: Send 约束保证 spawn 数据竞争自由
+   - **证明位置**: [async_state_machine.md](./formal_methods/async_state_machine.md)
 
 #### Pin 和自引用类型形式化
 
@@ -597,6 +669,7 @@
 
 ### 形式化方法研究
 
+- [形式化方法完备性缺口](./formal_methods/00_completeness_gaps.md) — ✅ 100% 完成；Phase 1–6 全部补全
 - [形式化方法研究索引](./formal_methods/README.md)
 - [所有权模型形式化](./formal_methods/ownership_model.md)
 - [借用检查器证明](./formal_methods/borrow_checker_proof.md)

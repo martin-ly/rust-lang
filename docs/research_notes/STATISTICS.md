@@ -3,7 +3,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **研究笔记系统 100% 完成**（类型理论阶段 1–7、23 种设计模式 Def/定理/推论全部完成）
+> **状态**: ✅ **研究笔记系统 100% 完成**（类型理论阶段 1–7、formal_methods Phase 1–6、23 种设计模式 Def/定理/推论全部完成）
 
 ---
 
@@ -204,6 +204,7 @@
 
 **最近更新（2026-02-12）**:
 
+- formal_methods Phase 1–6 全部补全 100%（EXTERN/CVARIADIC/QUERY、DROP/DEREF/REPR/CONST_MUT_STATIC、SPAWN；PROOF_INDEX 105+ 证明）
 - 类型理论阶段 1–7 补全（00_completeness_gaps 全部缺口 Def 占位；PROOF_INDEX 87+ 证明）
 - 设计模式 23 种推论补全（FA-C1、DE-C1、CO-C1、BR-C1、FL-C1、PR-C1、B-C1、AF-C1、S-C1、CR-C1、CM-C1、SR-C1、IT-C1、ME-C1、OB-C1、ST-C1 等）
 - RESEARCH_ROADMAP 1.4 类型理论完备性缺口标为完成

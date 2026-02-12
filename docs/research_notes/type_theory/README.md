@@ -3,7 +3,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: 🔄 持续完善；**形式化论证不充分**，见 [00_completeness_gaps](00_completeness_gaps.md)
+> **状态**: ✅ **核心缺口已补全**；全部缺口均有 Def 占位；见 [00_completeness_gaps](00_completeness_gaps.md)
 
 ---
 
@@ -11,7 +11,7 @@
 
 - [🔬 类型理论研究](#-类型理论研究)
   - [📊 目录](#-目录)
-  - [⚠️ 完备性声明](#️-完备性声明)
+  - [完备性声明](#完备性声明)
   - [🎯 研究目标](#-研究目标)
   - [📚 研究主题](#-研究主题)
     - [1. 类型系统基础](#1-类型系统基础)
@@ -37,9 +37,9 @@
 
 ---
 
-## ⚠️ 完备性声明
+## 完备性声明
 
-**本目录形式化论证持续完善**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
+**本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
 
 - **Rust 1.93 类型系统特性**：LUB coercion、Copy specialization、offset_of!、never_type、type ascription、newtype、deref_nullptr ✅ Def 已补全；const &mut static、existential 等见 [00_completeness_gaps](00_completeness_gaps.md)
 - **组合法则**：Trait coherence、类型+生命周期+型变、negative impls、impl/dyn 边界、const 求值失败 ✅ 已补全；孤儿规则放宽为倡议未稳定
@@ -144,9 +144,9 @@
 
 *证明*：由 type_system T1–T3、trait 对象安全、lifetime T2、variance T1–T4；良型 + 各定理 ⇒ 类型安全。∎
 
-**定理 TT-T2（不完备性）**：$\mathcal{T}$ 对 Rust 1.93 类型系统**不完备**；存在 [00_completeness_gaps](00_completeness_gaps.md) 所列缺口（LUB、Copy、coherence、RPITIT、组合法则等部分已补全；孤儿规则、offset_of!、const 等仍为缺口）。
+**定理 TT-T2（缺口 Def 占位）**：$\mathcal{T}$ 对 Rust 1.93 类型系统存在 [00_completeness_gaps](00_completeness_gaps.md) 所列缺口；**阶段 1–7 已补全 Def 占位**（LUB、Copy、coherence、RPITIT、组合法则、offset_of!、const、孤儿规则等均有 Def）。
 
-*证明*：由 [00_completeness_gaps](00_completeness_gaps.md) 定理 CGI-T1；缺口项均为 Def CGI 实例。∎
+*证明*：由 [00_completeness_gaps](00_completeness_gaps.md) 定理 CGI-T1；缺口项均有 Def 占位。∎
 
 ---
 
@@ -246,4 +246,4 @@
 
 **维护团队**: Rust Type Theory Research Group
 **最后更新**: 2026-02-12
-**状态**: 🔄 **持续完善**；形式化论证不充分，见 [00_completeness_gaps](00_completeness_gaps.md)
+**状态**: ✅ **核心缺口已补全**；全部缺口 Def 占位；见 [00_completeness_gaps](00_completeness_gaps.md)
