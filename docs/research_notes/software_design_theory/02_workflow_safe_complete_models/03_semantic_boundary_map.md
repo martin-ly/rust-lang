@@ -133,11 +133,15 @@
 
 ## 形式化边界定理
 
-| 定理 | 陈述 | 文档 |
+**Def SB1（语义边界）**：设 $D$ 为设计模式或执行模型，$B_s(D)$、$B_p(D)$、$B_e(D)$ 分别为安全、支持、表达边界（见 [05_boundary_system](../05_boundary_system/README.md)）。
+
+| 定理 | 陈述 | 证明 |
 |------|------|------|
-| SB1 | 纯 Safe 模式不引入 UB | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
-| SB2 | 原生支持模式无需第三方 crate | [supported_unsupported_matrix](../05_boundary_system/supported_unsupported_matrix.md) |
-| SB3 | 等价表达模式语义无损失 | [expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md) |
+| **SB1** | 若 $B_s(D) = \mathrm{Safe}$，则 $D$ 的 Rust 实现不引入 UB | 由 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 定义 1.1；Safe 子集即编译器静态验证；无 unsafe 则无 UB 契约 |
+| **SB2** | 若 $B_p(D) = \mathrm{Native}$，则 $D$ 可仅用 std/core 实现 | 由 [supported_unsupported_matrix](../05_boundary_system/supported_unsupported_matrix.md) Def 1.1、定理 SUM-T1 |
+| **SB3** | 若 $B_e(D) = \mathrm{Same}$，则 $D$ 的 Rust 实现与 GoF/OOP 语义等价 | 由 [expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md) Def 1.2、定理 EIM-T1 |
+
+**推论 SB-C1**：若 $D$ 满足 $B_s = \mathrm{Safe} \land B_p = \mathrm{Native} \land B_e = \mathrm{Same}$，则 $D$ 可在零依赖下安全、等价实现。
 
 ---
 

@@ -22,7 +22,13 @@
 
 **定理 FM-T1**：由 [type_system_foundations](../../../type_theory/type_system_foundations.md) 保持性，$\mathit{factory}(c)$ 良型则求值结果类型为 $T$。
 
+*证明*：由 Axiom FM1；类型规则保证返回类型；type_system 保持性定理保证求值后类型不变。∎
+
 **定理 FM-T2**：由 [ownership_model](../../../formal_methods/ownership_model.md) T2，返回值所有权转移至调用者；无悬垂。
+
+*证明*：由 Axiom FM2；产品所有权独立；ownership T2 保证唯一所有者，无双重释放。∎
+
+**推论 FM-C1**：Factory Method 为纯 Safe；仅用 trait、impl、Box，无 unsafe。
 
 ---
 

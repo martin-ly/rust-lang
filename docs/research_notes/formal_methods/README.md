@@ -117,6 +117,32 @@
 
 ---
 
+## 形式化论证汇总
+
+**Def FM1（形式化方法覆盖）**：设 $\mathcal{M}$ 为形式化方法族，$\mathcal{M} = \{\text{ownership},\, \text{borrow},\, \text{lifetime},\, \text{async},\, \text{pin}\}$。每 $m \in \mathcal{M}$ 有 Def、Axiom、Theorem 及证明。
+
+**Axiom FM1**：形式化方法族 $\mathcal{M}$ 覆盖 Rust 内存安全、并发安全、引用有效性的核心机制；各机制定理可组合。
+
+**定理 FM-T1（形式化完备性）**：若程序 $P$ 满足 $\mathcal{M}$ 中全部定理，则 $P$ 满足内存安全、数据竞争自由、引用有效性。
+
+*证明*：由 ownership T2/T3、borrow T1、lifetime T2、async T6.2、pin T1–T3；各定理分别保证不同性质，组合无冲突。∎
+
+---
+
+## 公理-定理形式化索引
+
+| 文档 | 核心公理/定理 | 证明要点 |
+|------|---------------|----------|
+| [ownership_model](./ownership_model.md) | 所有权规则 1–3、T2/T3 内存安全 | 唯一性、RAII、无悬垂 |
+| [borrow_checker_proof](./borrow_checker_proof.md) | 借用规则 5–8、T1 数据竞争自由 | 互斥借用、Send/Sync |
+| [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、NLL |
+| [async_state_machine](./async_state_machine.md) | T6.1–T6.3 状态一致性、并发安全、进度 | Future 状态机、Pin |
+| [pin_self_referential](./pin_self_referential.md) | Pin 不变式、T1–T3 自引用安全 | 堆/栈区分、!Unpin |
+
+本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md) 衔接。
+
+---
+
 ## 📝 研究笔记
 
 ### 已完成 ✅

@@ -63,6 +63,20 @@
 
 ---
 
+## 引理与推论
+
+**引理 CE-L1（模块无环）**：若 $C = M_1 \oplus \cdots \oplus M_n$ 满足 Def 1.1，则依赖图 $G$ 为 DAG；$M_i \prec^* M_j \land M_j \prec^* M_i \Rightarrow \bot$。
+
+*证明*：由 Def 1.1 无循环依赖；$\prec^*$ 为传递闭包，环存在则 $M_i \prec^* M_i$，矛盾。∎
+
+**推论 CE-C1**：组合 CE-T1、CE-T2、CE-T3 可组合；若 $C$ 满足 CE-T1、CE-T2、CE-T3，则 $C$ 为 Safe 且良型。
+
+*证明*：由各定理陈述；内存安全 + 数据竞争自由 + 类型安全 ⇒ Safe。∎
+
+**推论 CE-C2（组合反例）**：若 $M_n$ 的 `pub` API 泄漏 `unsafe` 或违反借用规则，则 CE-T1 或 CE-T2 不成立；组合后可能 UB。
+
+---
+
 ## 代码示例：模块组合
 
 ```rust

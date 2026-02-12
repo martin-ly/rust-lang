@@ -16,6 +16,28 @@
 
 ## [1.3.0] - 2026-02-12 🆕
 
+### 格式与形式论证扩展（2026-02-12）🆕
+
+**表格格式统一**：参照 PROOF_INDEX.md 行 55 规范，research_notes 表格分隔行统一为 `| :--- | :--- | :--- |` 格式；已修复 PROOF_INDEX、QUICK_FIND、QUICK_REFERENCE、PROGRESS_TRACKING、TASK_CHECKLIST；WRITING_GUIDE、QUALITY_CHECKLIST 补充格式规范与 Def QC1。
+
+**形式论证扩展**：
+
+- **01_formal_composition**：新增 CE-T1–T3 定理、CE-L1 引理、CE-C1/C2 推论（引用 02_effectiveness_proofs）
+- **04_boundary_matrix**：新增 Def 1.1–1.2、Axiom BMP1、定理 BMP-T1/T2、引理 BMP-L1、推论 BMP-C1
+- **04_compositional_engineering/README**：新增 Def CE1、Axiom CE1、推论 CE-C1
+- **experiments/README**：新增定理 EX-T2（可重复性）、推论 EX-C1；强化 EX-L1 证明
+- **COMPREHENSIVE_SYSTEMATIC_OVERVIEW**：新增引理 CSO-L1、推论 CSO-C1
+- **UNIFIED_SYSTEMATIC_FRAMEWORK**：新增 Def USF1、Axiom USF1、定理 USF-T1、推论 USF-C1
+- **05_boundary_system**：三矩阵补充定理证明（∎ 结尾）、引理、推论、反例；README 定理 B-T1
+- **LANGUAGE_SEMANTICS_EXPRESSIVENESS**：EB-Meta 证明、引理 EB-L1、推论 EB-C1
+- **04_compositional_engineering**：CE-L1、CE-C1、CE-C2、IT-L1、IT-C1
+- **03_execution_models**：06_boundary_analysis 引理 EB-EX-L1、推论 EB-EX-C1
+- **DESIGN_MECHANISM_RATIONALE**：所有权 Def OM1、Axiom OM1、定理 OM-T1；借用 Def BC1、Axiom BC1、定理 BC-T1
+- **experiments**：Axiom EX2、定理 EX-T1、引理 EX-L1
+- **01_design_patterns_formal**：singleton 定理证明、引理 S-L1
+
+---
+
 ### 应用分析视图 100% 完成（2026-02-12）🆕
 
 **APPLICATIONS_ANALYSIS_VIEW.md 全面丰富**:
@@ -25,6 +47,33 @@
 - ✅ 跨场景选型矩阵（表格式）、选型冲突与化解
 - ✅ 与形式化体系衔接（ownership、async、type_system、CE-T1–T3）
 - ✅ 与 research_notes、practical_applications、执行模型交叉引用
+
+---
+
+### 论证形式化全面推进（2026-02-12）🆕
+
+**形式化论证扩展**（Def/Axiom/定理）:
+- ✅ 05_boundary_system：safe_unsafe_matrix（Def 1.1–1.2、Axiom SBM1–2、定理 SBM-T1/T2）；supported_unsupported_matrix（Def 1.1–1.2、Axiom SUM1–2、定理 SUM-T1/T2）；expressive_inexpressive_matrix（Def 1.1–1.2、Axiom EIM1–2、定理 EIM-T1/T2）；README 形式化定义
+- ✅ 04_compositional_engineering/03_integration_theory：Def 1.1–1.2、Axiom IT1–2、定理 IT-T1/T2（跨模块所有权、Send/Sync）
+- ✅ 03_execution_models/06_boundary_analysis：定理 EB-T1/T2（五模型安全边界、边界一致性）
+- ✅ 02_workflow_safe_complete_models/03_semantic_boundary_map：Def SB1、定理 SB1–SB3 证明、推论 SB-C1
+- ✅ LANGUAGE_SEMANTICS_EXPRESSIVENESS：公理 EB0、定理 EB-Meta（边界完备性）
+- ✅ formal_methods/README、type_theory/README：公理-定理形式化索引
+- ✅ ARGUMENTATION_GAP_INDEX：05_boundary_system、02_workflow 语义边界追踪
+
+---
+
+### 形式论证全面推进（2026-02-12）🆕
+
+**形式化论证扩展**（针对「形式论证不充分」）：
+- ✅ 05_boundary_system：SBM-L2/L2-C2、SUM-L2/SUM-C2、EIM-L2/EIM-C2；README 定理 B-T2
+- ✅ formal_methods/README：Def FM1、Axiom FM1、定理 FM-T1
+- ✅ type_theory/README：Def TT1、Axiom TT1、定理 TT-T1
+- ✅ SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS：引理 SU-L1、推论 SU-C1
+- ✅ COMPREHENSIVE_SYSTEMATIC_OVERVIEW：定理 CSO-T1
+- ✅ LANGUAGE_SEMANTICS_EXPRESSIVENESS：推论 EB-C2
+- ✅ 03_execution_models/06_boundary_analysis：EB-EX-L2、EB-EX-C2
+- ✅ singleton：S-T1 证明扩展
 
 ---
 

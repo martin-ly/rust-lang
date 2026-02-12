@@ -26,11 +26,33 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$ 当且仅当：对任意输入 $x$�
 
 **定理 EIM-T1**：若模式 $P$ 仅依赖接口、多态、组合、委托，则 $\mathit{ExprB}(P) = \mathrm{Same}$。
 
-*证明*：trait 即接口；`impl Trait for T` 即多态；结构体包装即组合；委托即方法转发。由 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) EB1–EB3。
+*证明*：trait 即接口；`impl Trait for T` 即多态；结构体包装即组合；委托即方法转发。由 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) EB1–EB3。对任意输入 $x$，$P_{\mathrm{Rust}}(x)$ 与 $P_{\mathrm{OOP}}(x)$ 行为等价；依 Def 1.2 得 $\mathit{ExprB}(P) = \mathrm{Same}$。∎
 
 **定理 EIM-T2**：若模式 $P$ 依赖全局可变、继承、反射，则 $\mathit{ExprB}(P) \in \{\mathrm{Approx},\, \mathrm{NoExpr}\}$。
 
-*证明*：由 Axiom EIM1；Rust 故意限制此类能力以换取安全与可预测性。
+*证明*：由 Axiom EIM1；Rust 无隐式全局可变、无类继承、无运行时反射。若 $P$ 核心依赖三者之一，则 $P_{\mathrm{Rust}}$ 必用替代（OnceLock、trait、宏）或无法实现；故 $\mathit{ExprB}(P) \in \{\mathrm{Approx},\, \mathrm{NoExpr}\}$。∎
+
+**引理 EIM-L1**：Singleton 的 $\mathit{ExprB}(\mathrm{Singleton}) = \mathrm{Approx}$，因 GoF 依赖 `static` 可变，Rust 用 OnceLock 替代。
+
+*证明*：由 Axiom EIM1；OnceLock 语义与 static 可变单例等价，但实现路径不同；依 Def 1.1 为 Approx。∎
+
+**推论 EIM-C1**：等价表达模式（Factory Method、Strategy、Adapter 等）满足零成本抽象；近似表达模式可能有额外间接（如 channel）。
+
+**引理 EIM-L2（组合表达边界）**：若 $P_1$、$P_2$ 各自 $\mathit{ExprB}(P_i) \in \{\mathrm{Same},\, \mathrm{Approx}\}$，则组合 $P_1 \circ P_2$ 的 $\mathit{ExprB}(P_1 \circ P_2) \in \{\mathrm{Same},\, \mathrm{Approx}\}$，不退化至 NoExpr。
+
+*证明*：由 Axiom EIM2；trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；最坏为 Approx。∎
+
+**推论 EIM-C2**：等价表达模式在 `no_std` 下仍等价；近似表达模式可能有额外间接（如 channel 需 std）。
+
+---
+
+## 反例：违反表达边界
+
+| 反例 | 后果 | 论证 |
+| :--- | :--- | :--- |
+| 在 Rust 中实现经典多继承菱形 | 无法表达；无类继承 | 由 Axiom EIM1、定理 EIM-T2 |
+| 假设 `dyn Trait` 可向下转型 | 编译错误；无内置反射 | 由 Axiom EIM1 |
+| 用 `static mut` 实现 Singleton 且多线程 | UB；违反 Safe 边界 | 见 [safe_unsafe_matrix](safe_unsafe_matrix.md) |
 
 ---
 
@@ -49,7 +71,7 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$ 当且仅当：对任意输入 $x$�
 ### 创建型（5）
 
 | 模式 | 表达边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | Factory Method | 等价表达 | trait 工厂方法，语义一致 |
 | Abstract Factory | 等价表达 | 枚举/结构体族 |
 | Builder | 等价表达 | 链式构建，类型状态可增强 |
@@ -59,7 +81,7 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$ 当且仅当：对任意输入 $x$�
 ### 结构型（7）
 
 | 模式 | 表达边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | Adapter | 等价表达 | 包装 + 委托 |
 | Bridge | 等价表达 | trait 解耦抽象与实现 |
 | Composite | 等价表达 | 枚举递归结构 |
@@ -71,7 +93,7 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$ 当且仅当：对任意输入 $x$�
 ### 行为型（11）
 
 | 模式 | 表达边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | Chain of Responsibility | 等价表达 | Option/链表传递 |
 | Command | 等价表达 | 闭包即命令对象 |
 | Interpreter | 近似表达 | 无继承，用枚举+match |
@@ -89,7 +111,7 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$ 当且仅当：对任意输入 $x$�
 ## 执行模型 × 表达边界
 
 | 模型 | 表达边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | 同步 | 等价表达 | 顺序执行，语义一致 |
 | 异步 | 等价表达 | Future 模型，await 语义清晰 |
 | 并发 | 等价表达 | Send/Sync 提供更强保证 |
@@ -101,7 +123,7 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$ 当且仅当：对任意输入 $x$�
 ## 近似表达详解
 
 | 模式/模型 | 近似原因 | Rust 替代方案 |
-|-----------|----------|---------------|
+| :--- | :--- | :--- |
 | Singleton | 无全局可变；GoF 依赖 static 可变 | OnceLock、LazyLock、依赖注入 |
 | Interpreter | 无继承；GoF 用类层次 | 枚举 + match、穷尽匹配 |
 | Memento | 无私有状态封装；GoF 有 Originator 私有 | Clone、serde、快照类型 |
@@ -129,7 +151,7 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 ## 不可表达边界说明
 
 | 类型 | 示例 | Rust 限制 |
-|------|------|-----------|
+| :--- | :--- | :--- |
 | 全局可变隐式共享 | 经典 Singleton 的 static 可变 | 无 `static mut` 安全用法；用 OnceLock |
 | 多继承 | 菱形继承、混入 | 仅 trait 多实现；无类继承 |
 | 运行时反射 | 动态调用、属性注入 | 无内置反射；用宏或 trait 显式 |
@@ -140,7 +162,7 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 ## 从 OOP 迁移建议
 
 | OOP 概念 | Rust 对应 | 注意 |
-|----------|-----------|------|
+| :--- | :--- | :--- |
 | 继承 | trait + 组合 | 无类继承；用委托 |
 | 多态 | trait + impl / dyn | 对象安全；无向下转型 |
 | 全局单例 | OnceLock | 无 static mut |
@@ -198,7 +220,7 @@ impl Node {
 ## 不可表达边界说明（扩展）
 
 | 类型 | 示例 | Rust 限制 |
-|------|------|-----------|
+| :--- | :--- | :--- |
 | 全局可变隐式共享 | 经典 Singleton 的 static 可变 | 无 `static mut` 安全用法；用 OnceLock |
 | 多继承 | 菱形继承、混入 | 仅 trait 多实现；无类继承 |
 | 运行时反射 | 动态调用、属性注入 | 无内置反射；用宏或 trait 显式 |

@@ -121,6 +121,32 @@
 
 ---
 
+## 形式化论证汇总
+
+**Def TT1（类型理论覆盖）**：设 $\mathcal{T}$ 为类型理论族，$\mathcal{T} = \{\text{type\_system},\, \text{trait},\, \text{lifetime},\, \text{advanced},\, \text{variance}\}$。每 $t \in \mathcal{T}$ 有 Def、Axiom、Theorem 及证明。
+
+**Axiom TT1**：类型理论族 $\mathcal{T}$ 覆盖 Rust 类型安全、多态、子类型、型变的核心机制；各机制定理可组合。
+
+**定理 TT-T1（类型理论完备性）**：若程序 $P$ 良型且满足 $\mathcal{T}$ 中全部定理，则 $P$ 满足类型安全、进展性、保持性。
+
+*证明*：由 type_system T1–T3、trait 对象安全、lifetime T2、variance T1–T4；良型 + 各定理 ⇒ 类型安全。∎
+
+---
+
+## 公理-定理形式化索引
+
+| 文档 | 核心公理/定理 | 证明要点 |
+|------|---------------|----------|
+| [type_system_foundations](./type_system_foundations.md) | T1–T3 进展性、保持性、类型安全 | 良型不卡住、求值保型 |
+| [trait_system_formalization](./trait_system_formalization.md) | 对象安全、impl 解析、coherence | dyn、孤儿规则 |
+| [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、见 formal_methods |
+| [advanced_types](./advanced_types.md) | GAT、const 泛型、PhantomData | 关联类型、类型级常量 |
+| [variance_theory](./variance_theory.md) | T1–T4 型变规则、反例 | 协变/逆变/不变 |
+
+本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md) 衔接。
+
+---
+
 ## 📝 研究笔记
 
 ### 已完成 ✅

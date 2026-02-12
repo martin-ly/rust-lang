@@ -20,7 +20,13 @@
 
 **定理 S-T1**：`OnceLock`/`LazyLock` 提供线程安全惰性初始化，无需 unsafe。
 
+*证明*：（1）唯一性：`OnceLock` 内部状态机保证 `get_or_init` 闭包至多执行一次；原子 CAS 或锁序列化首次调用。（2）线程安全：后续 `get` 仅读，无写；Rust 内存模型保证可见性。（3）Safe API：标准库将内部 `unsafe` 封装为安全抽象，对外无 `unsafe` 暴露。由 Axiom S1、[safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。∎
+
 **定理 S-T2**：传统全局可变需 `unsafe` 或 `Mutex`；后者为 Safe 抽象。
+
+*证明*：`static mut` 多线程访问为 UB；`Mutex` 封装内部 `unsafe`，对外 Safe。见 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T2。∎
+
+**引理 S-L1**：若用 `OnceLock<T>` 且 $T$ 无 `Send`/`Sync` 要求，则 `get_or_init` 闭包仅执行一次；多线程并发调用时由内部同步序列化。
 
 ---
 

@@ -35,7 +35,7 @@
 ## 📐 四维缺口分类
 
 | 维度 | 缺口类型 | 含义 | 示例 | 目标文档 |
-|------|----------|------|------|----------|
+| :--- | :--- | :--- | :--- | :--- |
 | **D** | 定义缺失 (D1) | 概念无形式化定义 | 仅文字描述「协变」 | 各 research_notes |
 | **D** | 定义含糊 (D2) | 定义依赖未定义术语 | 子类型未定义就讨论型变 | FORMAL_PROOF_SYSTEM_GUIDE |
 | **R** | 关系缺证 (R1) | 属性/关系无推导 | 「型变保证内存安全」无证明 | 各 module |
@@ -50,7 +50,7 @@
 ## 📊 论证缺口追踪矩阵
 
 | 模块 | D1 | D2 | R1 | R2 | P1 | P2 | 综合 |
-|------|----|----|----|----|----|----|------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | ownership_model | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | borrow_checker_proof | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | lifetime_formalization | ✅ | ✅ | ✅ | ✅ | ⚠️ | ✅ | 较好 |
@@ -61,17 +61,42 @@
 | trait_system_formalization | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | advanced_types | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | software_design_theory | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
+| **05_boundary_system** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
+| **02_workflow 语义边界** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 
 **图例**：✅ 已满足 | ⚠️ 存在缺口 | ❌ 严重缺失
 
 *software_design_theory*：设计模式形式化框架已建立，23 模式有 Def/Axiom/定理；组合工程 CE-T1–T3 有证明思路；反例已补入 FORMAL_PROOF_SYSTEM_GUIDE。
+
+*05_boundary_system*（2026-02 扩展）：safe_unsafe、supported_unsupported、expressive_inexpressive 三矩阵补充 Def 1.1–1.2、Axiom、定理 SBM-T1/T2、SUM-T1/T2、EIM-T1/T2；README 补充 Def B1–B3、Axiom B1。
+
+*02_workflow 语义边界*：03_semantic_boundary_map 补充 Def SB1、定理 SB1–SB3 证明、推论 SB-C1。
+
+**2026-02 形式论证扩展**：全面推进形式论证补全——✅ 已完成
+
+- **01_formal_composition**：✅ CE-T1–T3、CE-L1、CE-C1/C2（引用 02_effectiveness_proofs）
+- **04_boundary_matrix**：✅ Def 1.1–1.2、Axiom BMP1、BMP-T1/T2、BMP-L1、BMP-C1
+- **04_compositional_engineering/README**：✅ Def CE1、Axiom CE1、推论 CE-C1
+- **experiments/README**：✅ EX-T2、EX-C1；EX-L1 证明
+- **COMPREHENSIVE_SYSTEMATIC_OVERVIEW**：✅ CSO-L1、CSO-C1
+- **UNIFIED_SYSTEMATIC_FRAMEWORK**：✅ Def USF1、Axiom USF1、USF-T1、USF-C1
+- **05_boundary_system**：✅ SBM-L2/SBM-C2、SUM-L2/SUM-C2、EIM-L2/EIM-C2；README 定理 B-T2
+- **LANGUAGE_SEMANTICS_EXPRESSIVENESS**：✅ EB-Meta、EB-L1、EB-C1、EB-C2
+- **04_compositional_engineering**：✅ CE-L1、CE-C1、CE-C2；IT-L1、IT-C1
+- **03_execution_models**：✅ 06_boundary_analysis EB-EX-L1、EB-EX-C1、EB-EX-L2、EB-EX-C2
+- **DESIGN_MECHANISM_RATIONALE**：✅ OM1/OM-T1、BC1/BC-T1 已形式化
+- **formal_methods/README**：✅ Def FM1、Axiom FM1、定理 FM-T1
+- **type_theory/README**：✅ Def TT1、Axiom TT1、定理 TT-T1
+- **SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS**：✅ 引理 SU-L1、推论 SU-C1
+- **COMPREHENSIVE_SYSTEMATIC_OVERVIEW**：✅ 定理 CSO-T1
+- **singleton**：✅ S-T1 证明扩展、S-L1
 
 ---
 
 ## 📊 设计理由缺口追踪矩阵
 
 | 机制 | 动机论证 | 设计决策论证 | 使用场景/决策树 | 反例 | 综合 |
-|------|----------|--------------|-----------------|------|------|
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **Pin 堆/栈区分** | ✅ | ✅ | ✅ | ✅ | 好 |
 | 所有权 | ✅ | ✅ | ✅ | ✅ | 好 |
 | 借用 | ✅ | ✅ | ✅ | ✅ | 好 |
@@ -88,7 +113,7 @@
 ## 🗺️ 思维表征覆盖矩阵
 
 | 领域 | 思维导图 | 多维矩阵 | 证明树 | 决策树 | 反例 |
-|------|----------|----------|--------|--------|------|
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | 所有权/借用 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 类型系统 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 生命周期 | ✅ | ✅ | ✅ | - | ✅ |
@@ -105,7 +130,7 @@
 ## 📚 文档导航
 
 | 文档 | 用途 |
-|------|------|
+| :--- | :--- |
 | [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) | **设计机制论证**：Pin 堆/栈、所有权、借用、生命周期、型变、异步等理由与完整论证 |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳、概念族谱、全局一致性 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](UNIFIED_SYSTEMATIC_FRAMEWORK.md) | 全局统一框架、全景思维导图、多维矩阵、全链路图 |

@@ -28,6 +28,12 @@
 
 *证明*：由 [async_state_machine](../../formal_methods/async_state_machine.md) T6.1–T6.3；Future 跨 await 点持有时，需 Send 才能跨线程。
 
+**引理 IT-L1（跨模块引用生命周期）**：若 $M_1$ 的 `pub fn` 返回 `&'a T`，则 `'a` 必须 outlive 调用者可见的生命周期；否则编译错误。
+
+*证明*：由 [lifetime_formalization](../../formal_methods/lifetime_formalization.md) T2；跨模块不改变 outlives 规则。∎
+
+**推论 IT-C1**：组合保持 CE-T1、CE-T2、CE-T3 当且仅当各模块满足 Axiom IT1、IT2 且跨模块调用不违反 IT-T1、IT-T2、IT-L1。
+
 ---
 
 ## 衔接关系图

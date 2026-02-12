@@ -26,9 +26,23 @@
 
 **定理 SBM-T1**：若模式 $X$ 仅用 `OnceLock`、`Mutex`、`Channel`、`Arc` 等 Safe 抽象，则 $\mathit{SafeB}(X) = \mathrm{Safe}$。
 
-*证明*：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1、[ownership_model](../../formal_methods/ownership_model.md) T2/T3，Safe API 保证内存安全与无数据竞争。
+*证明*：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1、[ownership_model](../../formal_methods/ownership_model.md) T2/T3，Safe API 保证内存安全与无数据竞争。依 Axiom SBM1，Safe 代码不触发 UB；故 $\mathit{SafeB}(X) = \mathrm{Safe}$。∎
 
 **定理 SBM-T2**：若模式 $X$ 需 FFI 或裸指针，则 $\mathit{SafeB}(X) = \mathrm{Unsafe}$；封装为安全抽象后，调用方仍视为 Safe。
+
+*证明*：由 Def 1.1，需 `unsafe` 块则 $\mathit{SafeB}(X) = \mathrm{Unsafe}$。由 Def 1.2、Axiom SBM2，安全抽象对外 API 满足 Safe 规则，调用方无需写 `unsafe`。∎
+
+**引理 SBM-L1**：若 $A$ 为安全抽象，则 $A$ 的 `unsafe` 块需满足其 UB 契约（如 dereference 合法指针、FFI 调用约定）。
+
+*证明*：由 Axiom SBM2；安全抽象需满足契约并对外隐藏 `unsafe`。∎
+
+**推论 SBM-C1**：GoF 23 中 Singleton 用 OnceLock 为 Safe；用 `static mut` 且无同步为 Unsafe 或 Inexpr。
+
+**引理 SBM-L2（反模式边界）**：若 $P$ 用 `static mut` 且多线程无同步，则 $\mathit{SafeB}(P) = \mathrm{Inexpr}$ 或违反 UB 契约。
+
+*证明*：由 Axiom SBM1；`static mut` 多线程写入为数据竞争，违反 borrow T1；依 Def 1.1 无法表达或需大量 unsafe。∎
+
+**推论 SBM-C2**：设计模式与执行模型组合时，若每子组件 Safe，则组合 Safe；由 SBM-T1 与模块组合 CE-T1、CE-T2。
 
 ---
 
@@ -65,7 +79,7 @@
 ### 创建型（5）
 
 | 模式 | 安全边界 | 实现要点 |
-|------|----------|----------|
+| :--- | :--- | :--- |
 | Factory Method | 纯 Safe | Trait + impl，`fn create(&self) -> T` |
 | Abstract Factory | 纯 Safe | 关联类型或枚举产品族 |
 | Builder | 纯 Safe | 链式 `self` 返回，`build(self)` 消费 |
@@ -75,7 +89,7 @@
 ### 结构型（7）
 
 | 模式 | 安全边界 | 实现要点 |
-|------|----------|----------|
+| :--- | :--- | :--- |
 | Adapter | 纯 Safe | 结构体包装 `inner: S`，实现目标 trait |
 | Bridge | 纯 Safe | `impl Trait` 或 `Box<dyn Trait>` |
 | Composite | 纯 Safe | `enum { Leaf(T), Composite(Vec<Node>) }` |
@@ -87,7 +101,7 @@
 ### 行为型（11）
 
 | 模式 | 安全边界 | 实现要点 |
-|------|----------|----------|
+| :--- | :--- | :--- |
 | Chain of Responsibility | 纯 Safe | `Option<Box<Handler>>` 链 |
 | Command | 纯 Safe | `Box<dyn Fn()>` 或 `Fn` trait |
 | Interpreter | 纯 Safe | 枚举 AST + match 求值 |
@@ -159,7 +173,7 @@
 ## 常见错误与排查
 
 | 错误 | 原因 | 解决 |
-|------|------|------|
+| :--- | :--- | :--- |
 | 编译错误：`Rc` 不满足 `Send` | 跨线程传递 Rc | 改用 `Arc` |
 | 运行时 panic：RefCell borrow 冲突 | 同时 borrow 与 borrow_mut | 缩小借用范围；或改用 Mutex |
 | 数据竞争 | 共享可变无同步 | 加 Mutex/RwLock；或改用 channel |

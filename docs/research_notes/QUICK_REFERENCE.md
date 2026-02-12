@@ -18,7 +18,7 @@
 #### 🔬 形式化方法研究
 
 | 主题             | 文件                                                                    | 状态    |
-| ---------------- | ----------------------------------------------------------------------- | ------- |
+| :--- | :--- | :--- |
 | 所有权模型形式化 | [ownership_model.md](./formal_methods/ownership_model.md)               | ✅ 100% |
 | 借用检查器证明   | [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)     | ✅ 100% |
 | 异步状态机形式化 | [async_state_machine.md](./formal_methods/async_state_machine.md)       | ✅ 100% |
@@ -28,7 +28,7 @@
 #### 🔷 类型理论研究
 
 | 主题             | 文件                                                                         | 状态    |
-| ---------------- | ---------------------------------------------------------------------------- | ------- |
+| :--- | :--- | :--- |
 | 类型系统基础     | [type_system_foundations.md](./type_theory/type_system_foundations.md)       | ✅ 100% |
 | Trait 系统形式化 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md) | ✅ 100% |
 | 生命周期形式化   | [lifetime_formalization.md](./type_theory/lifetime_formalization.md)         | ✅ 100% |
@@ -38,7 +38,7 @@
 #### ⚡ 实验研究
 
 | 主题         | 文件                                                                           | 状态    |
-| ------------ | ------------------------------------------------------------------------------ | ------- |
+| :--- | :--- | :--- |
 | 性能基准测试 | [performance_benchmarks.md](./experiments/performance_benchmarks.md)           | ✅ 100% |
 | 内存分析     | [memory_analysis.md](./experiments/memory_analysis.md)                         | ✅ 100% |
 | 编译器优化   | [compiler_optimizations.md](./experiments/compiler_optimizations.md)           | ✅ 100% |
@@ -48,7 +48,7 @@
 #### 🌐 综合研究
 
 | 主题         | 文件                                                     | 状态    |
-| ------------ | -------------------------------------------------------- | ------- |
+| :--- | :--- | :--- |
 | 实际应用案例 | [practical_applications.md](./practical_applications.md) | ✅ 100% |
 | 研究方法论   | [research_methodology.md](./research_methodology.md)     | ✅ 100% |
 

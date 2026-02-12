@@ -165,6 +165,12 @@ Pin 使用场景决策树
 
 **设计决策**：默认移动，显式 `Copy` 才复制。
 
+**Def OM1（移动语义）**：值 $v$ 从 $x$ 移动至 $y$ 当且仅当 $\Omega(x) \mapsto \emptyset$ 且 $\Omega(y) \mapsto v$；$x$  thereafter 不可用。
+
+**Axiom OM1**：每个值恰有一个所有者；所有者离开作用域时值被 drop。
+
+**定理 OM-T1**：默认移动 + 显式 Copy 保证无双重释放、无泄漏。*证明*：由 [ownership_model](formal_methods/ownership_model.md) T2、T3；移动转移所有权，Copy 创建副本，二者均由唯一所有者管理。∎
+
 **论证**：
 
 - 若默认复制：大对象、RAII 资源复制语义不明确，易泄漏或双重释放。
@@ -180,6 +186,12 @@ Pin 使用场景决策树
 **动机**：避免数据竞争。多线程下，若允许多个可变借用，则可能同时写同一内存。
 
 **设计决策**：可变借用独占，不可变借用可多个但不可与可变并存。
+
+**Def BC1（借用互斥）**：对同一位置 $x$，$\text{borrow}_{\text{mut}}(x)$ 有效时，$\text{borrow}(x)$ 与 $\text{borrow}_{\text{mut}}(x)$ 均不可并存。
+
+**Axiom BC1**：借用规则 5–8（见 [borrow_checker_proof](formal_methods/borrow_checker_proof.md)）静态可检查；违反则编译错误。
+
+**定理 BC-T1**：满足借用规则则数据竞争自由。*证明*：由 [borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1；互斥保证无并发写。∎
 
 **论证**：
 

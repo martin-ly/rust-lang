@@ -16,7 +16,7 @@
 ## 文档索引
 
 | 文档 | 内容 |
-|------|------|
+| :--- | :--- |
 | [01_formal_composition](01_formal_composition.md) | 组合的形式化定义 |
 | [02_effectiveness_proofs](02_effectiveness_proofs.md) | 有效性定理与证明 |
 | [03_integration_theory](03_integration_theory.md) | 与 ownership/borrow/trait 的衔接 |
@@ -31,10 +31,22 @@
 
 ---
 
+## 形式化论证汇总
+
+**Def CE1（组合有效性）**：设 $C = M_1 \oplus \cdots \oplus M_n$ 为模块组合。若 $C$ 满足 CE-T1、CE-T2、CE-T3，则称 $C$ **有效**。
+
+**Axiom CE1**：组合无循环依赖；`pub` 边界为模块间唯一接口；跨模块调用保持类型与所有权 semantics。
+
+**定理 CE-T1–T3**：见 [01_formal_composition](01_formal_composition.md)、[02_effectiveness_proofs](02_effectiveness_proofs.md)；组合保持内存安全、数据竞争自由、类型安全。
+
+**推论 CE-C1**：若各 $M_i$ 为 Safe 且良型，则有效组合 $C$ 为 Safe 且良型。*证明*：由 CE-T1、CE-T2、CE-T3 直接。∎
+
+---
+
 ## 定理速查
 
 | 定理 | 陈述 |
-|------|------|
+| :--- | :--- |
 | CE-T1 | 组合保持内存安全 |
 | CE-T2 | 组合保持数据竞争自由 |
 | CE-T3 | 组合保持类型安全 |

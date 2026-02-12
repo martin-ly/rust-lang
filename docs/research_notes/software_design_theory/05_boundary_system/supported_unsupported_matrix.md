@@ -26,9 +26,33 @@
 
 **定理 SUM-T1**：若模式 $X$ 仅用 `trait`、`impl`、`struct`、`enum`、`Box`、`Vec`、`Option`、`Result` 等，则 $\mathit{SuppB}(X) = \mathrm{Native}$。
 
-*证明*：上述类型均为 `std`/`core` 提供；无需 `extern crate`。
+*证明*：由 Axiom SUM1、SUM2。上述类型均为 `std`/`core` 提供；无需 `extern crate`。依 Def 1.1，$\mathit{SuppB}(X) = \mathrm{Native}$。∎
 
 **定理 SUM-T2**：若 $F$ 涉及异步运行时、线程池或通信，则 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib}\}$；`std` 提供 `thread`、`mpsc`，但 `tokio`/`rayon` 为 Lib。
+
+*证明*：由 Def 1.1。异步运行时（Waker、Executor）不由 `std` 提供，需 tokio/async-std；线程与 mpsc 由 `std` 提供；故为 Native 或 Lib。∎
+
+**引理 SUM-L1**：若 $C$ 为 `no_std` crate 且 $\mathit{deps}(C) \subseteq \{\mathrm{core},\, \mathrm{alloc}\}$，则 $\mathit{SuppB}(C) \in \{\mathrm{Native},\, \mathrm{Lib}\}$。
+
+*证明*：`core`、`alloc` 随编译器分发；由 Axiom SUM1。∎
+
+**推论 SUM-C1**：GoF 23 种设计模式中，除需网络/异步/并行的 Observer、分布式扩展外，其余均为 Native。
+
+**引理 SUM-L2（no_std 边界）**：若 $F$ 需 `Vec`、`String`、`Box`，则 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib}\}$；`std` 或 `alloc` 提供。
+
+*证明*：`core` 为 `no_std` 最小子集；`std` 扩展 `alloc`；由 Axiom SUM1。∎
+
+**推论 SUM-C2**：组合模式 $C = M_1 \oplus \cdots \oplus M_n$ 的 $\mathit{SuppB}(C) = \max_i \mathit{SuppB}(M_i)$；取依赖最重者。
+
+---
+
+## 反例：违反支持边界
+
+| 反例 | 后果 | 论证 |
+| :--- | :--- | :--- |
+| 假设 `std` 提供 tokio 功能 | 编译失败；`tokio` 需 `extern crate` | 由 Axiom SUM2 |
+| 在 `no_std` 下使用 `Vec` 无 `alloc` | 编译失败 | 由 Def 1.2、Axiom SUM1 |
+| 裸机环境用 `std::fs` | 链接失败；无 syscall 实现 | 由 Def 1.1 |
 
 ---
 
@@ -47,7 +71,7 @@
 ### 创建型（5）
 
 | 模式 | 支持边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | Factory Method | 原生支持 | trait + impl |
 | Abstract Factory | 原生支持 | 枚举/结构体 |
 | Builder | 原生支持 | 方法链 |
@@ -57,7 +81,7 @@
 ### 结构型（7）
 
 | 模式 | 支持边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | Adapter | 原生支持 | 结构体包装 |
 | Bridge | 原生支持 | trait |
 | Composite | 原生支持 | Box、Vec、枚举 |
@@ -69,7 +93,7 @@
 ### 行为型（11）
 
 | 模式 | 支持边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | Chain of Responsibility | 原生支持 | Option、链表 |
 | Command | 原生支持 | Fn、闭包 |
 | Interpreter | 原生支持 | match、枚举 |
@@ -87,7 +111,7 @@
 ## 执行模型 × 支持边界
 
 | 模型 | 支持边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | 同步 | 原生支持 | 默认执行模型 |
 | 异步 | 库支持 | 需 tokio/async-std 等运行时 |
 | 并发 | 原生支持 | std::thread、mpsc、Mutex |
@@ -136,7 +160,7 @@
 ## `no_std` 与嵌入式支持
 
 | 环境 | 支持边界 | 说明 |
-|------|----------|------|
+| :--- | :--- | :--- |
 | `std` | 全功能 | 标准库、线程、文件、网络 |
 | `core` | `no_std` | 无分配、无 I/O；需 `alloc` 做堆 |
 | `alloc` | `no_std` + 分配 | `Vec`、`String`、`Box` |
