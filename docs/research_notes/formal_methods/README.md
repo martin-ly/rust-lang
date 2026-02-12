@@ -1,15 +1,29 @@
 # 🔬 形式化方法研究
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ 全部 100% 完成
+> **状态**: ⚠️ **持续完善**；Rust 1.93 语言特性全面论证见 [00_completeness_gaps](00_completeness_gaps.md)
+
+---
+
+## ⚠️ 完备性声明
+
+**本目录形式化论证不充分**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
+
+- **内存与所有权**：Box、Rc/Arc、Cell/RefCell、MaybeUninit、智能指针 Deref/Drop 等未全面形式化
+- **并发与异步**：通道、Mutex/RwLock、原子操作、thread::spawn 等未全面形式化
+- **FFI 与 unsafe**：裸指针、union、transmute、extern、C variadic 等未全面形式化
+- **Rust 1.93 变更**：deref_nullptr、const &mut static、Copy specialization 移除等与 formal_methods 衔接不足
+
+**已完成**：所有权规则 1–8、借用规则、生命周期、Pin、async 状态机核心定理；新增 Def RC1/ARC1/CELL1/REFCELL1/BOX1、CHAN1/MUTEX1/RAW1 占位。
 
 ---
 
 ## 📊 目录
 
 - [🔬 形式化方法研究](#-形式化方法研究)
+  - [⚠️ 完备性声明](#️-完备性声明)
   - [📊 目录](#-目录)
   - [🎯 研究目标](#-研究目标)
   - [📚 研究主题](#-研究主题)
@@ -143,13 +157,14 @@
 
 | 文档 | 核心公理/定理 | 证明要点 |
 | :--- | :--- | :--- |
-| [ownership_model](./ownership_model.md) | 所有权规则 1–3、T2/T3 内存安全 | 唯一性、RAII、无悬垂 |
-| [borrow_checker_proof](./borrow_checker_proof.md) | 借用规则 5–8、T1 数据竞争自由 | 互斥借用、Send/Sync |
+| [00_completeness_gaps](./00_completeness_gaps.md) | Def FMG1、定理 FMG-T1 | 完备性缺口声明 |
+| [ownership_model](./ownership_model.md) | 所有权规则 1–8、T2/T3、**RC-T1/REFCELL-T1/BOX-T1** | 唯一性、RAII、Rc/Arc、Cell/RefCell |
+| [borrow_checker_proof](./borrow_checker_proof.md) | 借用规则、T1、**CHAN-T1/MUTEX-T1/RAW-T1** | 互斥借用、通道、Mutex、裸指针 |
 | [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、NLL |
 | [async_state_machine](./async_state_machine.md) | T6.1–T6.3 状态一致性、并发安全、进度 | Future 状态机、Pin |
 | [pin_self_referential](./pin_self_referential.md) | Pin 不变式、T1–T3 自引用安全 | 堆/栈区分、!Unpin |
 
-本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md) 衔接。
+本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 衔接。
 
 ---
 
@@ -157,8 +172,9 @@
 
 ### 已完成 ✅
 
-- [x] [所有权模型形式化](./ownership_model.md) - 100%
-- [x] [借用检查器证明](./borrow_checker_proof.md) - 100%
+- [x] [完备性缺口](./00_completeness_gaps.md) - 缺口声明与路线图
+- [x] [所有权模型形式化](./ownership_model.md) - 100%；含 RC/ARC/CELL/REFCELL/BOX 扩展
+- [x] [借用检查器证明](./borrow_checker_proof.md) - 100%；含 CHAN/MUTEX/RAW 扩展
 - [x] [异步状态机形式化](./async_state_machine.md) - 100%
 - [x] [生命周期形式化](./lifetime_formalization.md) - 100%
 - [x] [Pin 和自引用类型形式化](./pin_self_referential.md) - 100%
@@ -234,5 +250,5 @@
 ---
 
 **维护团队**: Rust Formal Methods Research Group
-**最后更新**: 2026-01-26
-**状态**: ✅ **全部 100% 完成**
+**最后更新**: 2026-02-12
+**状态**: ⚠️ **持续完善**；缺口见 [00_completeness_gaps](00_completeness_gaps.md)

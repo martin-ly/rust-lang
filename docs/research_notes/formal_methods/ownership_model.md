@@ -724,6 +724,26 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$：借用 $r$ 的活跃区间由生命�
 
 ---
 
+## Rust 1.93 与智能指针扩展（形式化占位）
+
+**Def RC1（Rc 共享所有权）**：`Rc<T>` 为引用计数智能指针；多所有者共享同一值；$\text{strong\_count}(r) \geq 1$ 时值有效；clone 增加计数，drop 减少；计数归零时释放。单线程；非 Send。
+
+**Def ARC1（Arc 跨线程共享）**：`Arc<T>` 为原子引用计数；与 Rc 语义一致，但 `Arc: Send + Sync` 当 $T: \text{Send} + \text{Sync}$；跨线程共享安全。
+
+**定理 RC-T1**：`Rc`/`Arc` 满足所有权规则扩展：多所有者 $\Omega_1, \ldots, \Omega_n$ 共享；任一 drop 使计数减 1；最后 drop 时 $\Omega \rightarrow \text{Moved}$，值释放。由 [borrow_checker_proof](borrow_checker_proof.md) T1 与 Send/Sync 约束。
+
+**Def CELL1（Cell 内部可变）**：`Cell<T>` 通过 `get`/`set` 提供内部可变；无引用、仅值替换；`Cell: !Sync`，单线程。形式化：$\text{replace}(c, v)$ 原子替换，无借用冲突。
+
+**Def REFCELL1（RefCell 运行时借用）**：`RefCell<T>` 运行时借用检查；`borrow`/`borrow_mut` 满足借用规则；违反时 panic。形式化：$\text{RefCell}$ 维护 $\text{borrow\_state} \in \{\text{None},\, \text{Immutable},\, \text{Mutable}\}$；规则与 [borrow_checker_proof](borrow_checker_proof.md) 一致。
+
+**定理 REFCELL-T1**：`RefCell` 运行时检查等价于编译期借用规则；若运行时检查通过则无数据竞争。由 RefCell 实现与 borrow checker 规则同构。
+
+**Def BOX1（Box RAII）**：`Box<T>` 独占堆所有权；drop 时自动释放；$\Omega(\text{Box}) = \text{Owned}$，移动时转移。与规则 2、3 一致。
+
+**定理 BOX-T1**：`Box` drop 顺序与 RAII 一致；栈展开时按创建逆序 drop；无双重释放。由 [ownership_model](ownership_model.md) 规则 3。
+
+---
+
 **维护者**: Rust Formal Methods Research Group
 **最后更新**: 2026-01-26
 **状态**: ✅ **已完成** (100%)

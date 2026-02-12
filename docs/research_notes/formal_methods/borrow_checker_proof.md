@@ -558,6 +558,22 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 ---
 
+## Rust 1.93 与并发/裸指针扩展（形式化占位）
+
+**Def CHAN1（通道消息传递）**：`mpsc::channel` 或 `broadcast` 实现**消息传递**语义；发送者与接收者间无共享内存；所有权随消息转移。形式化：$\text{send}(tx, v) \rightarrow \Omega(v) \mapsto \text{Receiver}$；无 $\&mut$ 共享，故无数据竞争。
+
+**定理 CHAN-T1**：通道实现为纯 Safe；消息传递无共享可变；满足 [borrow_checker_proof](borrow_checker_proof.md) 定理 1 数据竞争自由。由 Send 约束与所有权转移。
+
+**Def MUTEX1（Mutex 锁语义）**：`Mutex<T>` 封装内部可变；`lock()` 返回 `MutexGuard` 持有可变借用；guard drop 时释放锁。形式化：$\text{lock}(m) \rightarrow \&mut T$ 仅在持锁期间有效；互斥保证无并发写。
+
+**定理 MUTEX-T1**：`Mutex` 为 Safe 抽象；内部 `unsafe` 封装；对外满足借用规则——任一时刻至多一个 `MutexGuard` 持有 `&mut T`。由 [borrow_checker_proof](borrow_checker_proof.md) 规则 1。
+
+**Def RAW1（裸指针与 deref_nullptr）**：`*const T`/`*mut T` 无自动借用；解引用需 `unsafe`；1.93 `deref_nullptr` deny-by-default 禁止解引用可能为 null 的指针。形式化：$\text{deref}(p)$ 合法仅当 $\text{nonnull}(p)$；违反为 UB。
+
+**定理 RAW-T1**：裸指针解引用不与借用检查器冲突；借用检查器不检查裸指针；`deref_nullptr` lint 减少 null 解引用 UB。与 [type_system_foundations](../type_theory/type_system_foundations.md) Def DEREF-NULL1 衔接。
+
+---
+
 ## 📖 参考文献
 
 ### 学术论文

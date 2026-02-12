@@ -64,9 +64,12 @@
 | **05_boundary_system** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | **type_theory/lifetime_formalization** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | **type_theory（整体）** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **好** |
+| **formal_methods（整体）** | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | **不充分** |
 | **02_workflow 语义边界** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 
-*type_theory（整体）*：各子文档有 Def/Theorem；阶段 1–5 已补全（COH-T1、LUB/COP、VAR-COM、RPITIT/async fn、NEG-T1、DYN-T1、CONST-EVAL-T1）；高/中优先级缺口已补全，见 [type_theory/00_completeness_gaps](type_theory/00_completeness_gaps.md)。
+*type_theory（整体）*：各子文档有 Def/Theorem；阶段 1–7 已补全；高/中优先级缺口已补全，见 [type_theory/00_completeness_gaps](type_theory/00_completeness_gaps.md)。
+
+*formal_methods（整体）*：各子文档有核心定理；Rust 1.93 语言特性（Rc/Arc、Cell/RefCell、通道、Mutex、裸指针等）未全面形式化；见 [formal_methods/00_completeness_gaps](formal_methods/00_completeness_gaps.md)。已新增 Def RC1/ARC1/CELL1/REFCELL1/BOX1、CHAN1/MUTEX1/RAW1 占位。
 
 **图例**：✅ 已满足 | ⚠️ 存在缺口 | ❌ 严重缺失
 
