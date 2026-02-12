@@ -82,6 +82,43 @@ a.log("hello");
 
 ---
 
+## 完整场景示例：第三方 HTTP 客户端适配
+
+**场景**：现有 `reqwest` 返回 `Result<Response, reqwest::Error>`；需适配为统一 `trait HttpClient` 返回 `Result<String, Box<dyn std::error::Error>>`。
+
+```rust
+trait HttpClient {
+    fn get(&self, url: &str) -> Result<String, Box<dyn std::error::Error>>;
+}
+
+// 被适配者（假设外部 crate）
+struct ReqwestClient;
+impl ReqwestClient {
+    fn fetch(&self, url: &str) -> Result<String, reqwest::Error> {
+        // 实际 reqwest::blocking::get(url)?.text()
+        Ok(String::new())
+    }
+}
+
+// 适配器
+struct ReqwestAdapter { inner: ReqwestClient }
+
+impl HttpClient for ReqwestAdapter {
+    fn get(&self, url: &str) -> Result<String, Box<dyn std::error::Error>> {
+        self.inner.fetch(url).map_err(|e| e.into())
+    }
+}
+
+// 客户端仅依赖 HttpClient trait
+fn fetch_data<H: HttpClient>(client: &H, url: &str) -> Result<String, Box<dyn std::error::Error>> {
+    client.get(url)
+}
+```
+
+**形式化对应**：`ReqwestAdapter` 即 $A$；`HttpClient` 即 $T$；`ReqwestClient` 即 $S$；`map_err` 转换错误类型，满足 Axiom AD1。
+
+---
+
 ## 相关模式
 
 | 模式 | 关系 |

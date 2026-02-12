@@ -3,7 +3,7 @@
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: 🔄 持续完善直至 100%
+> **状态**: ✅ formal_methods 100% 完成；整体框架已就绪
 > **目标**: 系统性追踪论证缺口、设计理由缺位、证明不足，并提供全局一致性索引
 
 ---
@@ -90,7 +90,7 @@
 - **experiments**：✅ memory_analysis MA-T1/MA-C1/MA-L1；performance_benchmarks PB-T1/PB-C1/PB-L1；concurrency_performance CP-T1/CP-C1/CP-L1；macro_expansion_performance MP-T1/MP-C1/MP-L1
 - **COMPREHENSIVE_SYSTEMATIC_OVERVIEW**：✅ CSO-L1、CSO-C1
 - **UNIFIED_SYSTEMATIC_FRAMEWORK**：✅ Def USF1、Axiom USF1、USF-T1、USF-C1
-- **PROOF_INDEX**：✅ 边界系统、语义与表达能力、顶层框架、实验与形式化衔接、形式化验证、质量检查、执行模型扩展；统计 87+（阶段 1–7 补全完成）
+- **PROOF_INDEX**：✅ 边界系统、语义与表达能力、顶层框架、实验与形式化衔接、形式化验证、质量检查、执行模型扩展；统计 105+（formal_methods Phase 1–6、阶段 1–7 补全完成）
 - **formal_methods/README**：✅ FM-L1、FM-C1
 - **FORMAL_VERIFICATION_GUIDE**：✅ Def FV1、Axiom FV1、定理 FV-T1、引理 FV-L1、推论 FV-C1
 - **QUALITY_CHECKLIST**：✅ Def QC1、Axiom QC1、定理 QC-T1、推论 QC-C1
@@ -106,7 +106,7 @@
 - **03_semantic_boundary_map**：✅ 引理 SB-L1（边界冲突可化解）
 - **DESIGN_MECHANISM_RATIONALE**：✅ OM1/OM-T1、BC1/BC-T1 已形式化
 - **formal_methods/README**：✅ Def FM1、Axiom FM1、定理 FM-T1
-- **type_theory/00_completeness_gaps**：✅ 新增完备性缺口文档；Def CGI、Axiom CGI1、定理 CGI-T1；Rust 1.93 类型系统、组合法则、Trait 特性缺口列表；README 状态改为「持续完善」
+- **type_theory/00_completeness_gaps**：✅ 新增完备性缺口文档；Def CGI、Axiom CGI1、定理 CGI-T1；Rust 1.93 类型系统、组合法则、Trait 特性缺口列表；**阶段 1–7 已补全 Def 占位**
 - **type_theory 阶段 2–7**：✅ LUB/COP、VAR-COM、RPITIT/async fn、NEG-T1、DYN-T1、CONST-EVAL-T1；Def OFFSET1/ASC1/BOT1、NEWTYPE1/DEREF-NULL1、CONST-MUT1/EXIST1、TRAIT-GAT1/SPEC1；定理 NEWTYPE-T1/SPEC-T1；全部缺口 Def 占位完成
 - **type_theory/trait_system_formalization**：✅ 阶段 1 补全；Axiom COH1/COH2、定理 COH-T1（Trait coherence）、推论 COH-C1
 - **type_theory/README**：✅ Def TT1、Axiom TT1、定理 TT-T1

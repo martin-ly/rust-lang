@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（State 结构）**
+**Def 1.1（State 结构）**:
 
 设 $C$ 为上下文类型，$S$ 为状态类型。State 满足：
 
@@ -90,6 +90,45 @@ impl Config<Unlocked> {
 | 订单状态 | 待支付/已支付/已发货/已完成 |
 | 门/锁 | Locked/Unlocked（类型状态） |
 | 解析器 | 解析阶段状态机 |
+
+---
+
+## 完整场景示例：订单状态机（枚举 + match）
+
+**场景**：订单流程 Pending → Paid → Shipped → Completed；非法转换返回 Err。
+
+```rust
+#[derive(Clone, Copy, PartialEq)]
+enum OrderState { Pending, Paid, Shipped, Completed }
+
+struct Order { id: u64, state: OrderState }
+
+impl Order {
+    fn new(id: u64) -> Self { Self { id, state: OrderState::Pending } }
+    fn pay(&mut self) -> Result<(), String> {
+        match self.state {
+            OrderState::Pending => { self.state = OrderState::Paid; Ok(()) }
+            _ => Err("cannot pay".into()),
+        }
+    }
+    fn ship(&mut self) -> Result<(), String> {
+        match self.state {
+            OrderState::Paid => { self.state = OrderState::Shipped; Ok(()) }
+            _ => Err("cannot ship".into()),
+        }
+    }
+    fn complete(&mut self) -> Result<(), String> {
+        match self.state {
+            OrderState::Shipped => { self.state = OrderState::Completed; Ok(()) }
+            _ => Err("cannot complete".into()),
+        }
+    }
+}
+
+// 使用：let mut o = Order::new(1); o.pay()?; o.ship()?; o.complete()?;
+```
+
+**形式化对应**：`Order` 即 $C$；`OrderState` 即 $S$；`pay`/`ship`/`complete` 为状态转换；由 Axiom ST1，穷尽 match 保证完备。
 
 ---
 

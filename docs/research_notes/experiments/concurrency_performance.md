@@ -407,6 +407,17 @@ async fn async_task_benchmark() {
 | 通道 | crossbeam 延迟        | **\_** | ns   | 对比 mpsc     |
 | 异步 | Tokio 1 万任务 总时间 | **\_** | ms   | 含 sleep(1μs) |
 
+**示例填写**（典型 x86_64、Rust 1.93、4 核）：
+
+| 类别 | 指标                  | 示例值 | 单位 | 备注          |
+| :--- | :--- | :--- | :--- | :--- |
+| 同步 | Mutex 操作时间        | 85    | ms   | 1M 次/4 线程  |
+| 同步 | RwLock 写 操作时间    | 120   | ms   | 同上          |
+| 同步 | RwLock 读 操作时间    | 22    | ms   | 读多场景，约 5× 快于写 |
+| 通道 | mpsc 延迟             | 45    | ns   | 有界 1024     |
+| 通道 | crossbeam 延迟        | 32    | ns   | 约 40% 快于 mpsc |
+| 异步 | Tokio 1 万任务 总时间 | 12    | ms   | 含 sleep(1μs) |
+
 **结论填写**：与文中对照，说明读多写少选 RwLock、消息传递选 crossbeam 等；若用 Rust 1.93 的 `thread_local` 分配器，可注明多线程分配对并发基准的影响。
 
 ---

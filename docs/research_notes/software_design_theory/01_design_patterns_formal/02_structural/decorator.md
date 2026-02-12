@@ -79,6 +79,51 @@ assert_eq!(coffee.cost(), 2.5);
 
 ---
 
+## 完整场景示例：HTTP 客户端装饰链（日志 + 重试）
+
+**场景**：底层 client 发请求；LogDecorator 记录请求；RetryDecorator 失败重试；同接口叠加。
+
+```rust
+trait HttpClient {
+    fn get(&self, url: &str) -> Result<String, String>;
+}
+
+struct ReqwestClient;
+impl HttpClient for ReqwestClient {
+    fn get(&self, url: &str) -> Result<String, String> {
+        Ok(format!("body of {}", url))
+    }
+}
+
+struct LogDecorator<C: HttpClient> { inner: C }
+impl<C: HttpClient> HttpClient for LogDecorator<C> {
+    fn get(&self, url: &str) -> Result<String, String> {
+        println!("[log] GET {}", url);
+        self.inner.get(url)
+    }
+}
+
+struct RetryDecorator<C: HttpClient> { inner: C, max_retries: u32 }
+impl<C: HttpClient> HttpClient for RetryDecorator<C> {
+    fn get(&self, url: &str) -> Result<String, String> {
+        let mut last_err = String::new();
+        for _ in 0..=self.max_retries {
+            match self.inner.get(url) {
+                Ok(s) => return Ok(s),
+                Err(e) => last_err = e,
+            }
+        }
+        Err(last_err)
+    }
+}
+
+// 使用：LogDecorator { inner: RetryDecorator { inner: ReqwestClient, max_retries: 2 } }
+```
+
+**形式化对应**：`LogDecorator`/`RetryDecorator` 即 $D$；委托链满足 Axiom DE1、DE2。
+
+---
+
 ## 相关模式
 
 | 模式 | 关系 |

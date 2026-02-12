@@ -96,6 +96,56 @@ let config = ConfigBuilder::new()
 
 ---
 
+## 完整场景示例：HTTP 请求构建器
+
+**场景**：构建 HTTP 请求；URL 必填，headers/body 可选；链式调用 + `ok_or` 校验。
+
+```rust
+struct HttpRequest { url: String, headers: Vec<(String, String)>, body: Option<String> }
+
+struct HttpRequestBuilder {
+    url: Option<String>,
+    headers: Vec<(String, String)>,
+    body: Option<String>,
+}
+
+impl HttpRequestBuilder {
+    fn new() -> Self {
+        Self { url: None, headers: vec![], body: None }
+    }
+    fn url(mut self, u: &str) -> Self {
+        self.url = Some(u.into());
+        self
+    }
+    fn header(mut self, k: &str, v: &str) -> Self {
+        self.headers.push((k.into(), v.into()));
+        self
+    }
+    fn body(mut self, b: &str) -> Self {
+        self.body = Some(b.into());
+        self
+    }
+    fn build(self) -> Result<HttpRequest, String> {
+        Ok(HttpRequest {
+            url: self.url.ok_or("url required")?,
+            headers: self.headers,
+            body: self.body,
+        })
+    }
+}
+
+// 使用：链式构建，缺必填则 Err
+let req = HttpRequestBuilder::new()
+    .url("https://api.example.com")
+    .header("Content-Type", "application/json")
+    .body(r#"{"key":"value"}"#)
+    .build()?;
+```
+
+**形式化对应**：`build(self)` 消费 $B$；`ok_or` 保证必填；由 Axiom B1、B2。
+
+---
+
 ## 相关模式
 
 | 模式 | 关系 |

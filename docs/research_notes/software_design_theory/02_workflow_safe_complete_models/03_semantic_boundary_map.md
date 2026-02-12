@@ -20,11 +20,18 @@
     - [示例 3：可撤销操作（编辑器）](#示例-3可撤销操作编辑器)
     - [示例 4：事件通知（多订阅者）](#示例-4事件通知多订阅者)
     - [示例 5：领域逻辑 + 持久化](#示例-5领域逻辑--持久化)
+    - [示例 6：可撤销编辑器（完整链条）](#示例-6可撤销编辑器完整链条)
+  - [场景化 Safe 决策 3 例（层次推进）](#场景化-safe-决策-3-例层次推进)
+    - [场景 7：全局配置（Singleton）](#场景-7全局配置singleton)
+    - [场景 8：跨线程缓存（Flyweight + Arc）](#场景-8跨线程缓存flyweight--arc)
+    - [场景 9：FFI 绑定（unsafe 封装）](#场景-9ffi-绑定unsafe-封装)
   - [模式选取示例（简表）](#模式选取示例简表)
   - [反模式：误选](#反模式误选)
   - [形式化边界定理](#形式化边界定理)
   - [边界冲突与化解](#边界冲突与化解)
   - [按需求反向查模式](#按需求反向查模式)
+    - [快速查找（扩展：20+ 实质场景）](#快速查找扩展20-实质场景)
+    - [决策树（精简）](#决策树精简)
   - [与理论衔接](#与理论衔接)
 
 ---
@@ -201,10 +208,173 @@ let (tx, _) = broadcast::channel::<OrderEvent>(32);
 
 ```rust
 // Domain Model：Order 含 add_item、submit 等
+pub struct Order { id: u64, items: Vec<OrderItem>, status: OrderStatus }
+impl Order {
+    pub fn add_item(&mut self, item: OrderItem) -> Result<(), String> {
+        if self.status != OrderStatus::Draft { return Err("...".into()); }
+        self.items.push(item); Ok(())
+    }
+}
+
 // Service Layer：OrderService::place_order 编排
-// Repository：OrderRepository::save
-// DTO：PlaceOrderRequest、OrderResponse 跨边界
+pub struct OrderService<R: OrderRepository> { repo: R }
+impl<R: OrderRepository> OrderService<R> {
+    pub fn place_order(&mut self, dto: PlaceOrderDto) -> Result<u64, String> {
+        let order = Order::from_dto(&dto)?;
+        self.repo.save(&order)?;
+        Ok(order.id)
+    }
+}
+
+// Repository：trait OrderRepository { fn save(&mut self, o: &Order) -> Result<(), String>; }
+// DTO：PlaceOrderRequest、OrderResponse 跨边界（serde 序列化）
 ```
+
+### 示例 6：可撤销编辑器（完整链条）
+
+**场景**：文本编辑器支持 undo/redo，需历史栈与命令封装。
+
+**选型**：Command + Memento（可选）+ State。
+
+**代码骨架**：
+
+```rust
+trait Command {
+    fn execute(&self, ctx: &mut EditorContext);
+    fn undo(&self, ctx: &mut EditorContext);
+}
+struct InsertCmd { text: String, pos: usize }
+impl Command for InsertCmd {
+    fn execute(&self, ctx: &mut EditorContext) { ctx.insert(self.pos, &self.text); }
+    fn undo(&self, ctx: &mut EditorContext) { ctx.delete(self.pos, self.text.len()); }
+}
+
+struct Editor {
+    undo_stack: Vec<Box<dyn Command>>,
+    redo_stack: Vec<Box<dyn Command>>,
+}
+impl Editor {
+    fn execute(&mut self, cmd: Box<dyn Command>, ctx: &mut EditorContext) {
+        cmd.execute(ctx);
+        self.undo_stack.push(cmd);
+        self.redo_stack.clear();
+    }
+    fn undo(&mut self, ctx: &mut EditorContext) {
+        if let Some(cmd) = self.undo_stack.pop() {
+            cmd.undo(ctx);
+            self.redo_stack.push(cmd);
+        }
+    }
+}
+```
+
+---
+
+## 场景化 Safe 决策 3 例（层次推进）
+
+以下为需求→ Safe 选型→实现路径的实质性决策流程。
+
+### 场景 7：全局配置（Singleton）
+
+**需求**：应用启动时从文件加载配置，全局只读访问；多线程需共享。
+
+**决策**：纯 Safe 优先 → 使用 `OnceLock`；避免 `static mut` / `lazy_static` 中 unsafe。
+
+**实现**：
+
+```rust
+use std::sync::OnceLock;
+
+struct AppConfig { db_url: String, log_level: u8 }
+static CONFIG: OnceLock<AppConfig> = OnceLock::new();
+
+fn init_config(path: &str) -> Result<(), String> {
+    let cfg = AppConfig { db_url: String::from("..."), log_level: 0 };
+    CONFIG.set(cfg).map_err(|_| "already init")?;
+    Ok(())
+}
+
+fn config() -> &'static AppConfig {
+    CONFIG.get().expect("config not initialized")
+}
+// 多线程：config() 返回 &'static，共享只读，Safe
+```
+
+**边界**：$B_s = \mathrm{Safe}$，$B_p = \mathrm{Native}$，$B_e = \mathrm{Same}$，符合 SB-C1。
+
+---
+
+### 场景 8：跨线程缓存（Flyweight + Arc）
+
+**需求**：解析器大量重复字符串；多线程共享同一 intern 池。
+
+**决策**：共享不可变 → Flyweight；跨线程 → `Arc` + `RwLock`；避免 `Rc`、`RefCell` 跨线程。
+
+**实现**：
+
+```rust
+use std::collections::HashMap;
+use std::sync::{Arc, RwLock};
+
+struct InternPool {
+    map: RwLock<HashMap<String, Arc<str>>>,
+}
+
+impl InternPool {
+    fn intern(&self, s: &str) -> Arc<str> {
+        if let Ok(guard) = self.map.read() {
+            if let Some(v) = guard.get(s) {
+                return Arc::clone(v);
+            }
+        }
+        let arc = Arc::from(s.to_string().into_boxed_str());
+        self.map.write().unwrap().insert(s.to_string(), Arc::clone(&arc));
+        arc
+    }
+}
+
+// 跨线程：Arc<InternPool> 或 &InternPool 可传入 spawn；Arc<str> 为 Send + Sync
+let pool = Arc::new(InternPool { map: RwLock::new(HashMap::new()) });
+let p2 = Arc::clone(&pool);
+std::thread::spawn(move || {
+    let _ = p2.intern("hello");
+});
+```
+
+**边界**：$B_s = \mathrm{Safe}$；`Arc`、`RwLock` 为 Safe 抽象；`Arc<str>` 不可变。
+
+---
+
+### 场景 9：FFI 绑定（unsafe 封装）
+
+**需求**：调用 C 库；对外暴露 Safe Rust API。
+
+**决策**：unsafe 隔离在最小边界；对外提供 Safe 接口 + 契约文档。
+
+**实现**：
+
+```rust
+// ffi 模块内
+#[repr(C)]
+struct CConfig { enabled: i32, timeout: i32 }
+
+extern "C" {
+    fn c_init(config: *const CConfig) -> i32;
+}
+
+pub fn safe_init(enabled: bool, timeout: i32) -> Result<(), String> {
+    let cfg = CConfig {
+        enabled: if enabled { 1 } else { 0 },
+        timeout,
+    };
+    let rc = unsafe { c_init(&cfg) };
+    if rc == 0 { Ok(()) } else { Err("init failed".into()) }
+}
+```
+
+**契约**：`c_init` 不修改 `cfg`；不持有 `cfg` 指针；调用方保证 `&cfg` 在调用期间有效（栈上保证）。
+
+**边界**：$B_s = \mathrm{unsafe}$；内部 unsafe 封装；对外 API 为 Safe；符合 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 封装原则。
 
 ---
 
@@ -270,6 +440,46 @@ let (tx, _) = broadcast::channel::<OrderEvent>(32);
 ---
 
 ## 按需求反向查模式
+
+### 快速查找（扩展：20+ 实质场景）
+
+| 需求描述 | 推荐模式 | 典型 crate/实现 |
+| :--- | :--- | :--- |
+| 运行时决定产品类型 | Factory Method | trait + impl |
+| 跨平台 UI 组件族 | Abstract Factory | 枚举产品族 |
+| 配置多步骤构建、必填校验 | Builder | 类型状态、ok_or |
+| 克隆已有对象 | Prototype | Clone trait |
+| 全局唯一配置/连接池 | Singleton | OnceLock、LazyLock |
+| 第三方 API 适配本 trait | Adapter | 结构体包装 + impl Trait |
+| UI 抽象与渲染实现解耦 | Bridge | trait + 泛型 |
+| 文件系统/表达式树 | Composite | 枚举递归、Box |
+| 日志/鉴权链式包装 | Decorator | 结构体包装委托 |
+| 多子系统简化入口 | Facade | 模块/结构体 |
+| 字体/纹理跨线程共享 | Flyweight | Arc、HashMap 缓存 |
+| 懒加载、访问控制 | Proxy | OnceLock、委托 |
+| 中间件链、审批流 | Chain of Responsibility | Option\<Box\<Handler>> |
+| 可撤销/重做 | Command | Box\<dyn Fn()> |
+| DSL 表达式求值 | Interpreter | 枚举 AST + match |
+| 集合遍历 | Iterator | Iterator trait |
+| 聊天室、多组件协调 | Mediator | 结构体 + channel |
+| 快照保存/恢复 | Memento | Clone、serde |
+| 事件发布订阅 | Observer | mpsc、broadcast |
+| 订单/连接状态机 | State | 枚举或类型状态 |
+| 排序/加密算法切换 | Strategy | trait |
+| 算法骨架 + 钩子 | Template Method | trait 默认方法 |
+| AST 遍历 + 类型操作 | Visitor | match 或 trait |
+| 领域逻辑封装 | Domain Model | struct + 方法 |
+| 用例编排、事务 | Service Layer | struct + async fn |
+| 持久化抽象 | Repository | trait + impl |
+| 批量提交 | Unit of Work | 收集 + commit |
+| API 请求/响应 | DTO | struct + serde |
+| 支付/短信外部调用 | Gateway | trait + HTTP 客户端 |
+| 业务规则组合 | Specification | trait Spec + and/or |
+| 审计、事件重放 | Event Sourcing | Vec\<Event> + fold |
+
+---
+
+### 决策树（精简）
 
 ```text
 需求 → 模式映射

@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Strategy 结构）**
+**Def 1.1（Strategy 结构）**:
 
 设 $C$ 为上下文类型，$S$ 为策略类型。Strategy 满足：
 
@@ -96,6 +96,51 @@ GoF 中 Strategy 为接口 + 多实现；Rust 用 trait + impl 等价表达，�
 | 压缩/序列化 | 多种格式策略 |
 | 验证规则 | 不同校验策略 |
 | 渲染/布局 | 不同渲染后端 |
+
+---
+
+## 完整场景示例：压缩格式策略（零成本抽象）
+
+**场景**：数据导出支持 gzip、zstd 多种压缩；运行时选择格式。
+
+```rust
+trait CompressStrategy {
+    fn compress(&self, data: &[u8]) -> Vec<u8>;
+}
+
+struct GzipStrategy;
+impl CompressStrategy for GzipStrategy {
+    fn compress(&self, data: &[u8]) -> Vec<u8> {
+        // 实际：use flate2::Compression; flate2::write::GzEncoder::new(...)
+        data.to_vec()
+    }
+}
+
+struct ZstdStrategy;
+impl CompressStrategy for ZstdStrategy {
+    fn compress(&self, data: &[u8]) -> Vec<u8> {
+        // 实际：zstd::encode_all(data, 3)
+        data.to_vec()
+    }
+}
+
+struct Exporter<S: CompressStrategy> {
+    strategy: S,
+}
+
+impl<S: CompressStrategy> Exporter<S> {
+    fn new(strategy: S) -> Self { Self { strategy } }
+    fn export(&self, data: &[u8]) -> Vec<u8> {
+        self.strategy.compress(data)
+    }
+}
+
+// 编译期多态：无虚调用开销
+let ex = Exporter::new(GzipStrategy);
+let _ = ex.export(b"hello");
+```
+
+**形式化对应**：`Exporter<S>` 即 $C \supset S$；`CompressStrategy` 为策略 trait；Axiom SR1 由 trait 签名一致保证。
 
 ---
 

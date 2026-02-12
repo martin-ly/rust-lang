@@ -222,7 +222,37 @@ impl std::ops::Add for Meter {
 | 错误转换 | `map_err`、`From` trait | Adapter 错误类型 |
 | 可选操作 | `Option` + `ok_or` | 与 Builder 必填校验衔接 |
 
-### 6.3 常见陷阱
+### 6.3 完整代码示例：错误传播链
+
+```rust
+#[derive(Debug)]
+enum AppError {
+    Io(std::io::Error),
+    Parse(std::num::ParseIntError),
+    Missing(String),
+}
+
+impl From<std::io::Error> for AppError {
+    fn from(e: std::io::Error) -> Self { AppError::Io(e) }
+}
+impl From<std::num::ParseIntError> for AppError {
+    fn from(e: std::num::ParseIntError) -> Self { AppError::Parse(e) }
+}
+
+fn read_config(path: &str) -> Result<u32, AppError> {
+    let s = std::fs::read_to_string(path)?;           // Io → AppError
+    let n: u32 = s.trim().parse().map_err(|e| AppError::Parse(e))?;
+    Ok(n)
+}
+
+fn load_or_default(path: &str) -> Result<u32, AppError> {
+    let s = std::fs::read_to_string(path)?;
+    let n = s.trim().parse().unwrap_or(0);           // 解析失败时默认 0，避免 panic
+    Ok(n)
+}
+```
+
+### 6.4 常见陷阱
 
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -248,6 +278,47 @@ impl std::ops::Add for Meter {
 | 默认值 | `opt.unwrap_or(default)` | 配置项 |
 | 必填校验 | `opt.ok_or(Error::Missing)` | Builder 必填 |
 
+### 7.3 完整代码示例：配置解析链
+
+```rust
+fn parse_port(env: &str) -> Option<u16> {
+    std::env::var(env).ok()           // Option<String>
+        .and_then(|s| s.parse().ok()) // Option<u16>
+}
+
+fn parse_config() -> Result<(String, u16), String> {
+    let host = std::env::var("HOST").unwrap_or_else(|_| "localhost".into());
+    let port = parse_port("PORT").ok_or("PORT must be set")?;
+    Ok((host, port))
+}
+
+// 链式 Optional：仅当所有 Some 时继续
+fn combine_all() -> Option<u32> {
+    Some(1).and_then(|a| {
+        Some(2).and_then(|b| {
+            Some(3).map(|c| a + b + c)
+        })
+    })
+}
+```
+
+### 7.4 与 Builder 必填校验衔接
+
+```rust
+struct ConfigBuilder {
+    host: Option<String>,
+    port: Option<u16>,
+}
+impl ConfigBuilder {
+    fn build(self) -> Result<Config, String> {
+        Ok(Config {
+            host: self.host.ok_or("host required")?,
+            port: self.port.ok_or("port required")?,
+        })
+    }
+}
+```
+
 ---
 
 ## 八、Cow（Clone-on-Write）模式
@@ -265,6 +336,44 @@ impl std::ops::Add for Meter {
 | 字符串处理 | `Cow<str>` | 避免不必要的 `String` 分配 |
 | 配置解析 | 引用默认 +  owned 覆盖 | 与 Flyweight 共享思路衔接 |
 | 条件克隆 | 仅修改时克隆 | 延迟复制 |
+
+### 8.3 完整代码示例：字符串处理
+
+```rust
+use std::borrow::Cow;
+
+fn process_string(s: &str) -> Cow<str> {
+    if s.contains("bad") {
+        Cow::Owned(s.replace("bad", "good"))
+    } else {
+        Cow::Borrowed(s)  // 无修改，直接借用
+    }
+}
+
+fn prefix_if_needed(s: Cow<str>) -> Cow<str> {
+    if s.starts_with("prefix:") {
+        s
+    } else {
+        Cow::Owned(format!("prefix:{}", s))
+    }
+}
+
+// 配置：默认值引用，覆盖时 owned
+const DEFAULT: &str = "default";
+fn get_config(override_val: Option<String>) -> Cow<str> {
+    match override_val {
+        Some(s) => Cow::Owned(s),
+        None => Cow::Borrowed(DEFAULT),
+    }
+}
+```
+
+### 8.4 常见陷阱
+
+| 陷阱 | 后果 | 规避 |
+| :--- | :--- | :--- |
+| 频繁 `to_mut()` | 丧失零成本 | 仅修改时调用 |
+| 混用借用与 owned | 生命周期复杂 | 保证借用 outlives |
 
 ---
 

@@ -956,6 +956,19 @@ impl<T> Drop for SafeVec<T> {
 | 嵌入式   | Tock, Drone                   | 案例 4.1, 4.2       |
 | 综合示例 | Web 服务器, 数据处理, SafeVec | 案例 1, 2, 3        |
 
+### 与形式化衔接的案例索引（层次推进）
+
+| 案例 | 形式化定理 | 衔接要点 |
+| :--- | :--- | :--- |
+| Redox, Tock, Firecracker | [ownership_model](formal_methods/ownership_model.md) T2/T3、BOX-T1 | 资源 RAII、唯一所有权、无双重释放 |
+| Tokio, Actix, ScyllaDB | [async_state_machine](formal_methods/async_state_machine.md) T6.1–T6.3、SPAWN-T1 | Future、Send/Sync、无数据竞争 |
+| TiKV, Linkerd | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1、CHAN-T1、MUTEX-T1 | 通道、锁、借用规则 |
+| 所有案例 | [type_system_foundations](type_theory/type_system_foundations.md) T1–T3 | 良型、进展性、保持性 |
+| 组合案例 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) CE-T1–T3 | 模块组合、CE-T1/T2/T3 |
+| unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)、PA-L1 | 安全抽象、契约 |
+
+**引用**：案例分析可引用 [PROOF_INDEX](PROOF_INDEX.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
+
 ---
 
 ## 📖 参考文献

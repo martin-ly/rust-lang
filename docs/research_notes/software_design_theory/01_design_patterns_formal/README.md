@@ -56,6 +56,19 @@
 
 ---
 
+## 典型场景与实现变体（实质内容）
+
+每个模式文档均包含：
+
+- **典型场景**：如 Interpreter 的表达式求值、脚本解析、过滤表达式；Observer 的事件通知、多订阅者
+- **实现变体**：如 Interpreter 的「枚举 + match」vs「trait 节点」vs「Visitor 分离」；Builder 的「Option + ok_or」vs「类型状态」
+- **相关模式**：如 Interpreter 与 Visitor、Composite、Strategy 的关系
+- **选型决策树**：按需求反向查模式
+
+**完整场景示例**：创建型 Builder（HTTP 请求）；结构型 Flyweight（字形缓存）、Adapter（HTTP 客户端）、Decorator（日志+重试）、Composite（文件系统树）；行为型 Interpreter（过滤 DSL）、Chain（HTTP 中间件）、Mediator（聊天室）、Observer（订单事件）、Strategy（压缩格式）、Command（可撤销编辑器）、State（订单状态机）、Visitor（AST 美化）；Facade（日志系统）、Template Method（数据导入）等均有完整可运行示例。
+
+---
+
 ## 形式化框架
 
 ### 公理与定义

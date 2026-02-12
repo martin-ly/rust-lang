@@ -132,6 +132,49 @@ fn visit<V: Visitor>(v: &mut V, node: &Node) {
 
 ---
 
+## 完整多模式组合链条：Builder + Factory + Repository
+
+**场景**：订单创建（Builder）→ 工厂选择（Factory）→ 持久化（Repository + DTO）。
+
+```rust
+// DTO
+struct OrderDto { id: u64, amount: u64 }
+
+// Repository
+trait OrderRepo {
+    fn save(&self, dto: OrderDto) -> Result<(), String>;
+}
+
+// Builder
+struct OrderBuilder { amount: Option<u64> }
+impl OrderBuilder {
+    fn new() -> Self { Self { amount: None } }
+    fn amount(mut self, v: u64) -> Self { self.amount = Some(v); self }
+    fn build(self) -> Result<OrderDto, String> {
+        Ok(OrderDto { id: 0, amount: self.amount.ok_or("amount required")? })
+    }
+}
+
+// Factory：选择不同 Builder 变体
+enum OrderType { Standard, Premium }
+fn create_builder(t: OrderType) -> OrderBuilder {
+    match t {
+        OrderType::Standard => OrderBuilder::new(),
+        OrderType::Premium => OrderBuilder::new(),
+    }
+}
+
+// 组合调用：Factory → Builder → Repository
+fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), String> {
+    let dto = create_builder(t).amount(amount).build()?;
+    repo.save(dto)
+}
+```
+
+**形式化对应**：Builder 满足 B-T2；Factory 满足 FM-T1；Repository 为 43 完全扩展模式；组合由 CE-T1–T3 保持内存安全、数据竞争自由、类型安全。
+
+---
+
 ## 组合验证清单
 
 组合多模块/多模式时，确认：
@@ -165,6 +208,176 @@ fn visit<V: Visitor>(v: &mut V, node: &Node) {
 | pub 暴露 unsafe | 破坏 CE-T1 |
 | 跨模块传递 `Rc` 到 spawn | 编译错误（非 Send） |
 | trait 方法返回 `Self` 做 dyn | 对象安全违规 |
+
+---
+
+## 多层次组合链条（实质内容）
+
+### 链条 1：Builder + Factory + Repository
+
+**场景**：订单创建需配置校验、持久化。
+
+```rust
+// Builder：多步骤构建
+struct OrderBuilder { items: Vec<Item>, valid: bool }
+impl OrderBuilder {
+    fn new() -> Self { Self { items: vec![], valid: true } }
+    fn add_item(mut self, i: Item) -> Self { self.items.push(i); self }
+    fn build(self) -> Result<Order, String> {
+        if self.items.is_empty() { Err("empty".into()) }
+        else { Ok(Order { items: self.items }) }
+    }
+}
+
+// Factory：创建 Builder 或预配置订单
+trait OrderFactory { fn create_builder(&self) -> OrderBuilder; }
+
+// Repository：持久化
+trait OrderRepo { fn save(&mut self, o: Order) -> Result<u64, String>; }
+
+// 组合：Factory.create_builder().add_item(...).build()? → repo.save(order)?
+```
+
+### 链条 2：Decorator + Strategy + Observer（完整实现）
+
+**场景**：可配置的日志装饰服务，执行后发事件；Strategy 切换算法，Observer 通知完成。
+
+```rust
+use std::sync::mpsc;
+
+trait Service { fn call(&self) -> i32; }
+
+struct Logging<S: Service>(S);
+impl<S: Service> Service for Logging<S> {
+    fn call(&self) -> i32 {
+        println!("[before]");
+        let r = self.0.call();
+        println!("[after] {}", r);
+        r
+    }
+}
+
+trait Algo { fn run(&self) -> i32; }
+struct AlgoA;
+impl Algo for AlgoA { fn run(&self) -> i32 { 1 } }
+struct AlgoB;
+impl Algo for AlgoB { fn run(&self) -> i32 { 2 } }
+
+struct ServiceWithStrategy<A: Algo> { algo: A }
+impl<A: Algo> Service for ServiceWithStrategy<A> {
+    fn call(&self) -> i32 { self.algo.run() }
+}
+
+// Observer：call 完成后发送事件
+fn run_with_observer<S: Service>(s: &S, tx: &mpsc::Sender<i32>) -> i32 {
+    let r = s.call();
+    let _ = tx.send(r);
+    r
+}
+
+// 组合：Logging(ServiceWithStrategy(AlgoB)) + Observer
+// let (tx, rx) = mpsc::channel();
+// let svc = Logging(ServiceWithStrategy { algo: AlgoB });
+// run_with_observer(&svc, &tx);
+// assert_eq!(rx.recv().unwrap(), 2);
+```
+
+### 链条 3：Composite + Visitor + Iterator（完整实现）
+
+**场景**：树结构遍历、收集、统计；Visitor 访问各节点，Iterator 展平为叶值序列。
+
+```rust
+enum Node { Leaf(i32), Branch(Vec<Node>) }
+
+trait Visitor {
+    fn visit_leaf(&mut self, n: &i32);
+    fn visit_branch(&mut self, children: &[Node]);
+}
+
+struct SumVisitor { sum: i32 }
+impl Visitor for SumVisitor {
+    fn visit_leaf(&mut self, n: &i32) { self.sum += n; }
+    fn visit_branch(&mut self, children: &[Node]) {
+        for c in children { c.accept(self); }
+    }
+}
+
+impl Node {
+    fn accept<V: Visitor>(&self, v: &mut V) {
+        match self {
+            Node::Leaf(n) => v.visit_leaf(n),
+            Node::Branch(children) => v.visit_branch(children),
+        }
+    }
+    fn iter(&self) -> impl Iterator<Item = i32> + '_ {
+        let mut stack = vec![self];
+        std::iter::from_fn(move || {
+            while let Some(n) = stack.pop() {
+                match n {
+                    Node::Leaf(x) => return Some(*x),
+                    Node::Branch(cs) => stack.extend(cs.iter().rev()),
+                }
+            }
+            None
+        })
+    }
+}
+
+// 使用：let t = Node::Branch(vec![Node::Leaf(1), Node::Leaf(2)]);
+// let mut v = SumVisitor { sum: 0 }; t.accept(&mut v); assert_eq!(v.sum, 3);
+// assert_eq!(t.iter().collect::<Vec<_>>(), vec![2, 1]);
+```
+
+### 链条 4：Chain of Responsibility + Command + Observer
+
+**场景**：HTTP 请求经认证→限流→业务处理；每步可封装为 Command；处理完成后发事件。
+
+```rust
+// 链式处理器：Vec 顺序尝试，替代 Option<Box<Handler>>
+fn handle_chain(handlers: &[Box<dyn Handler>], req: &Request) -> Response {
+    for h in handlers {
+        if let Some(r) = h.try_handle(req) { return r; }
+    }
+    Response::ok()
+}
+
+trait Handler {
+    fn try_handle(&self, req: &Request) -> Option<Response>;
+}
+
+struct AuthHandler;
+impl Handler for AuthHandler {
+    fn try_handle(&self, req: &Request) -> Option<Response> {
+        if req.valid_token() { None } else { Some(Response::unauthorized()) }
+    }
+}
+
+struct CommandHandler<C: Command> { cmd: C }
+impl<C: Command> Handler for CommandHandler<C> {
+    fn try_handle(&self, req: &Request) -> Option<Response> {
+        Some(self.cmd.execute(req))
+    }
+}
+
+trait Command { fn execute(&self, req: &Request) -> Response; }
+
+// 组合：handlers = [Auth, RateLimit, CommandHandler(PlaceOrderCmd)]
+// 业务完成后：tx.send(ProcessedEvent) — Observer
+```
+
+**组合要点**：链为 `Vec<Box<dyn Handler>>` 顺序尝试；业务节点持 `Command`；处理完成后通过 channel 发送事件；符合 CE-T1、CE-T2。
+
+---
+
+## 跨模块边界最佳实践
+
+| 实践 | 说明 |
+| :--- | :--- |
+| **最小 pub** | 仅暴露必要接口；内部实现 `pub(crate)` |
+| **trait 边界** | 泛型 `T: Trait` 在模块边界明确；避免 `dyn Trait` 泛滥 |
+| **所有权传递** | 跨模块用值传递或 `&`/`&mut`；避免跨模块持有裸指针 |
+| **错误类型** | 模块间用 `Result<T, E>` 或自定义 `Error`；`From` 实现转换 |
+| **文档契约** | `pub fn` 文档化前置/后置条件；unsafe 契约显式标注 |
 
 ---
 

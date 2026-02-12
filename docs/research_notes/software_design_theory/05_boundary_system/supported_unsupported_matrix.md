@@ -190,6 +190,37 @@
 
 ---
 
+## 场景化决策示例（层次推进）
+
+### 示例 1：是否需要第三方 crate
+
+**场景**：实现 Web API 服务。
+
+**决策**：需异步运行时 → 库支持（tokio）；$\mathit{SuppB} = \mathrm{Lib}$。
+
+```rust
+// Cargo.toml: tokio = { version = "1", features = ["full"] }
+use tokio::net::TcpListener;
+async fn serve() {
+    let listener = TcpListener::bind("0.0.0.0:8080").await.unwrap();
+    // ...
+}
+```
+
+### 示例 2：no_std 嵌入式
+
+**场景**：裸机无 libc。
+
+**决策**：仅 `core` + `alloc` → $\mathit{SuppB} \in \{\mathrm{Native},\, \mathrm{Lib}\}$；Factory、Strategy、Adapter 等可用。
+
+### 示例 3：FFI 绑定 C 库
+
+**场景**：调用 OpenSSL。
+
+**决策**：需 `extern crate openssl` 或 `libc` → $\mathit{SuppB} = \mathrm{FFI}$；封装为 Safe trait。
+
+---
+
 ## 引用
 
 - [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)

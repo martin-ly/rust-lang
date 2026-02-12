@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Iterator 结构）**
+**Def 1.1（Iterator 结构）**:
 
 设 $I$ 为迭代器类型，$T$ 为元素类型。Iterator 满足：
 

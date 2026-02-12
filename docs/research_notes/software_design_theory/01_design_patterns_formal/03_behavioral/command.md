@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Command 结构）**
+**Def 1.1（Command 结构）**:
 
 设 $C$ 为命令类型。Command 满足：
 
@@ -112,6 +112,57 @@ impl ReversibleCommand for IncrementCommand {
 | 任务队列 | 延迟执行、批处理 |
 | 宏/脚本 | 录制与回放操作 |
 | 异步调度 | Future 即可恢复命令 |
+
+---
+
+## 完整场景示例：可撤销文本编辑器
+
+**场景**：插入/删除字符；支持 undo/redo 栈；命令对象封装操作与逆操作。
+
+```rust
+trait EditorCommand {
+    fn execute(&mut self, doc: &mut String);
+    fn undo(&mut self, doc: &mut String);
+}
+
+struct InsertCommand { pos: usize, ch: char }
+impl EditorCommand for InsertCommand {
+    fn execute(&mut self, doc: &mut String) {
+        doc.insert(self.pos, self.ch);
+    }
+    fn undo(&mut self, doc: &mut String) {
+        doc.remove(self.pos);
+    }
+}
+
+struct DeleteCommand { pos: usize, removed: Option<char> }
+impl EditorCommand for DeleteCommand {
+    fn execute(&mut self, doc: &mut String) {
+        if self.pos < doc.len() {
+            self.removed = Some(doc.remove(self.pos));
+        }
+    }
+    fn undo(&mut self, doc: &mut String) {
+        if let Some(c) = self.removed.take() {
+            doc.insert(self.pos, c);
+        }
+    }
+}
+
+struct Editor {
+    doc: String,
+    undo_stack: Vec<Box<dyn EditorCommand>>,
+}
+impl Editor {
+    fn apply(&mut self, mut cmd: Box<dyn EditorCommand>) {
+        cmd.execute(&mut self.doc);
+        self.undo_stack.push(cmd);
+    }
+}
+// 使用：editor.apply(Box::new(InsertCommand { pos: 0, ch: 'x' }));
+```
+
+**形式化对应**：`EditorCommand` 即 $C$；`execute`/`undo` 为可逆操作；由 Axiom CM1、CM2。
 
 ---
 

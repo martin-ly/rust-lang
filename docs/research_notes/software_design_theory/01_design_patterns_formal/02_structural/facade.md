@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Facade 结构）**
+**Def 1.1（Facade 结构）**:
 
 设 $F$ 为外观类型，$S_1, \ldots, S_n$ 为子系统类型。Facade 满足：
 
@@ -84,6 +84,42 @@ assert_eq!(f.simplified_op(), "B(A)");
 | 库/API 简化 | 复杂 SDK 封装为简单入口 |
 | 子系统协调 | 编排多个模块的调用顺序 |
 | 遗留系统 | 封装旧接口为新接口 |
+
+---
+
+## 完整场景示例：日志系统外观
+
+**场景**：日志需经由格式化、写入、轮转三个子系统；客户端仅需 `log(level, message)`。
+
+```rust
+mod formatter {
+    pub(super) fn format(level: &str, msg: &str) -> String {
+        format!("[{}] {}", level, msg)
+    }
+}
+
+mod writer {
+    pub(super) fn write(s: &str) { println!("{}", s); }
+}
+
+mod rotator {
+    pub(super) fn maybe_rotate() { /* 按大小/时间轮转 */ }
+}
+
+pub struct LogFacade;
+
+impl LogFacade {
+    pub fn log(level: &str, msg: &str) {
+        rotator::maybe_rotate();
+        let formatted = formatter::format(level, msg);
+        writer::write(&formatted);
+    }
+}
+
+// 客户端：LogFacade::log("INFO", "started");
+```
+
+**形式化对应**：`LogFacade` 为 $F$；formatter、writer、rotator 为私有子系统；`log` 为 $\mathit{simplified\_op}$；Axiom FA1 由 `pub(super)` 隐藏实现保证。
 
 ---
 

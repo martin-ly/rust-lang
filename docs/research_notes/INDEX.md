@@ -3,7 +3,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记、23 种设计模式形式化、类型理论阶段 1–7、formal_methods Phase 1–6）
+> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记、23 种设计模式、类型理论阶段 1–7、formal_methods Phase 1–6、层次推进三阶段）
 
 ---
 
@@ -63,19 +63,20 @@
    - 时间规划
    - 成功标准
 
-4. **[SYSTEM_SUMMARY.md](./SYSTEM_SUMMARY.md)** - 系统总结
+4. **[CONTENT_ENHANCEMENT.md](./CONTENT_ENHANCEMENT.md)** - 内容完善指南（含层次推进计划、实质内容检查清单）
+5. **[SYSTEM_SUMMARY.md](./SYSTEM_SUMMARY.md)** - 系统总结
    - 系统概览
    - 文档统计
    - 研究主题覆盖
    - 系统评估
 
-5. **[PROOF_INDEX.md](./PROOF_INDEX.md)** - 形式化证明文档索引 🆕
+6. **[PROOF_INDEX.md](./PROOF_INDEX.md)** - 形式化证明文档索引 🆕
    - 按研究领域分类的证明索引
    - 按证明类型分类的证明索引
    - 证明完成度统计
    - 证明方法统计
 
-6. **[COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md)** - 全面系统化梳理总览
+7. **[COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md)** - 全面系统化梳理总览
    - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）
    - 语义归纳与概念族谱
    - 全局一致性矩阵
@@ -83,7 +84,7 @@
    - 思维表征方式全索引
    - 公理-定理-证明全链路图
 
-7. **[UNIFIED_SYSTEMATIC_FRAMEWORK.md](./UNIFIED_SYSTEMATIC_FRAMEWORK.md)** - 全局统一系统化框架 🆕
+8. **[UNIFIED_SYSTEMATIC_FRAMEWORK.md](./UNIFIED_SYSTEMATIC_FRAMEWORK.md)** - 全局统一系统化框架 🆕
    - 全景思维导图：Rust 形式化知识
    - 多维概念对比矩阵总览
    - 公理-定理-证明全链路逻辑推进图
@@ -91,28 +92,29 @@
    - 反例总索引
    - 语义归纳与概念族谱统一
 
-8. **[LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)** - 构造性语义与表达能力边界 🆕
+9. **[LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)** - 构造性语义与表达能力边界 🆕
 
-9. **[DESIGN_MECHANISM_RATIONALE.md](./DESIGN_MECHANISM_RATIONALE.md)** - 设计机制论证 🆕
-   - Pin 堆/栈区分使用场景的完整论证
-   - 所有权、借用、生命周期、型变、异步等设计理由
-   - 动机→设计决策→形式化→决策树→反例
+10. **[DESIGN_MECHANISM_RATIONALE.md](./DESIGN_MECHANISM_RATIONALE.md)** - 设计机制论证 🆕
 
-10. **[ARGUMENTATION_GAP_INDEX.md](./ARGUMENTATION_GAP_INDEX.md)** - 论证缺口与设计理由综合索引 🆕
+- Pin 堆/栈区分使用场景的完整论证
+- 所有权、借用、生命周期、型变、异步等设计理由
+- 动机→设计决策→形式化→决策树→反例
+
+11. **[ARGUMENTATION_GAP_INDEX.md](./ARGUMENTATION_GAP_INDEX.md)** - 论证缺口与设计理由综合索引 🆕
 
 - 四维缺口分类（定义、关系、证明、设计理由）
 - 论证缺口追踪矩阵、设计理由缺口追踪矩阵
 - 思维表征覆盖矩阵
 
-1. **[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md)** - 理论体系与论证体系结构 🆕
+12. **[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md)** - 理论体系与论证体系结构 🆕
    - 理论体系四层架构（公理→语义→定理→边界）
    - 论证体系五层结构（概念→属性→论证→证明→表征）
    - 安全与非安全全面论证
 
-2. **[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)** - 安全与非安全全面论证与分析 🆕
+13. **[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)** - 安全与非安全全面论证与分析 🆕
    - 安全/unsafe 定义与边界、契约体系、UB 分类、安全抽象
 
-3. **[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)** - Rust 1.93 语言特性全面分析 🆕
+14. **[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)** - Rust 1.93 语言特性全面分析 🆕
 
 - 92 项语言特性全覆盖（内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增）
 - 每项含动机、设计决策、形式化引用、反例
@@ -260,7 +262,7 @@
 
 1. **[00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)** - 类型理论完备性缺口
    - 研究目标: 形式化论证不充分声明；LUB、Copy、RPITIT、组合法则等缺口索引
-   - 状态: ⚠️ 缺口已声明；补全路线图
+   - 状态: ✅ 缺口已声明；阶段 1–7 Def 占位完成
    - 关键词: 完备性、LUB、Copy、RPITIT、coherence、组合法则
 
 2. **[type_system_foundations.md](./type_theory/type_system_foundations.md)** - 类型系统基础

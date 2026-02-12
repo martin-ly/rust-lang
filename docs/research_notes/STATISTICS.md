@@ -204,8 +204,9 @@
 
 **最近更新（2026-02-12）**:
 
+- **层次推进 100% 完成**：CONTENT_ENHANCEMENT 三阶段全部完成；04_compositional_engineering 组合决策树与反例；practical_applications 与形式化衔接索引
 - formal_methods Phase 1–6 全部补全 100%（EXTERN/CVARIADIC/QUERY、DROP/DEREF/REPR/CONST_MUT_STATIC、SPAWN；PROOF_INDEX 105+ 证明）
-- 类型理论阶段 1–7 补全（00_completeness_gaps 全部缺口 Def 占位；PROOF_INDEX 87+ 证明）
+- 类型理论阶段 1–7 补全（00_completeness_gaps 全部缺口 Def 占位；PROOF_INDEX 105+ 证明）
 - 设计模式 23 种推论补全（FA-C1、DE-C1、CO-C1、BR-C1、FL-C1、PR-C1、B-C1、AF-C1、S-C1、CR-C1、CM-C1、SR-C1、IT-C1、ME-C1、OB-C1、ST-C1 等）
 - RESEARCH_ROADMAP 1.4 类型理论完备性缺口标为完成
 - PROOF_INDEX 设计模式形式化条目更新
@@ -278,8 +279,8 @@
 - 初始状态: 0% (规划中)
 - 第 1 周: 20% (框架建立)
 - 第 2 周: 30% (内容填充)
-- 第 3 周: 33% (持续完善)
-- **当前: 100%** (17/17 研究笔记、23 种设计模式形式化、类型理论阶段 1–7、PROOF_INDEX 87+ 证明)
+- 第 3 周: 33% (持续完善中)
+- **当前: 100%** (17/17 研究笔记、23 种设计模式形式化、类型理论阶段 1–7、formal_methods Phase 1–6、PROOF_INDEX 105+ 证明)
 
 **进展趋势**: 已达成 100% 目标；类型理论缺口 Def 占位、设计模式推论、边界矩阵与 05 体系一致；后续可随 Rust 新版本与反馈持续扩充
 
@@ -290,7 +291,7 @@
 ### 核心文档
 
 - [研究笔记主索引](./README.md)
-- [形式化证明索引](./PROOF_INDEX.md) — 87+ 证明、类型理论阶段 1–7、设计模式 23 种
+- [形式化证明索引](./PROOF_INDEX.md) — 105+ 证明、formal_methods Phase 1–6、类型理论阶段 1–7、设计模式 23 种
 - [系统总结](./SYSTEM_SUMMARY.md)
 - [研究进展跟踪](./PROGRESS_TRACKING.md)
 - [研究任务清单](./TASK_CHECKLIST.md)

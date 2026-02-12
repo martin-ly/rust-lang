@@ -78,6 +78,43 @@ assert_eq!(tree.sum(), 6);
 
 ---
 
+## 完整场景示例：文件系统树（File/Directory）
+
+**场景**：文件与目录组成树；目录可含子文件/子目录；递归计算大小。
+
+```rust
+enum FsNode {
+    File { name: String, size: u64 },
+    Dir { name: String, children: Vec<FsNode> },
+}
+
+impl FsNode {
+    fn size(&self) -> u64 {
+        match self {
+            FsNode::File { size, .. } => *size,
+            FsNode::Dir { children, .. } => children.iter().map(|c| c.size()).sum(),
+        }
+    }
+}
+
+// 构建：docs/ 含 readme.txt、src/main.rs
+let tree = FsNode::Dir {
+    name: "docs".into(),
+    children: vec![
+        FsNode::File { name: "readme.txt".into(), size: 100 },
+        FsNode::Dir {
+            name: "src".into(),
+            children: vec![FsNode::File { name: "main.rs".into(), size: 500 }],
+        },
+    ],
+};
+assert_eq!(tree.size(), 600);
+```
+
+**形式化对应**：`FsNode` 即 $C$；`File` 为 Leaf；`Dir` 为 Composite；由 Axiom CO1、CO2。
+
+---
+
 ## 相关模式
 
 | 模式 | 关系 |

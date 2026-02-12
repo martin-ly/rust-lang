@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Memento 结构）**
+**Def 1.1（Memento 结构）**:
 
 设 $M$ 为备忘类型，$O$ 为原发器类型。Memento 满足：
 

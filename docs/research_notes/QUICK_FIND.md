@@ -141,7 +141,7 @@
 
 | 研究笔记                                                        | 研究目标                                 | 状态      | 完成度 |
 | :--- | :--- | :--- | :--- |
-| [完备性缺口](./type_theory/00_completeness_gaps.md)             | 形式化论证不充分声明；LUB、Copy、RPITIT 等缺口 | ⚠️ 缺口已声明 | 路线图 |
+| [完备性缺口](./type_theory/00_completeness_gaps.md)             | 形式化论证不充分声明；LUB、Copy、RPITIT 等缺口 | ✅ 阶段 1–7 Def 占位 | 路线图 |
 | [类型系统基础](./type_theory/type_system_foundations.md)        | 形式化定义 Rust 类型系统基础             | ✅ 已完成 | 100%   |
 | [Trait 系统形式化](./type_theory/trait_system_formalization.md) | 形式化定义 Trait 系统，理解类型理论基础  | ✅ 已完成 | 100%   |
 | [生命周期形式化](./type_theory/lifetime_formalization.md)       | 形式化定义生命周期系统，理解类型理论解释 | ✅ 已完成 | 100%   |

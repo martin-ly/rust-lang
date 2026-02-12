@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Visitor 结构）**
+**Def 1.1（Visitor 结构）**:
 
 设 $E$ 为元素类型（AST/节点），$V$ 为访问者类型。Visitor 满足：
 
@@ -93,6 +93,45 @@ impl Node for Expr {
 ## 与 GoF 对比
 
 GoF 双重分发：`e.accept(v)` 内调用 `v.visit(e)`，根据 $e$ 与 $v$ 类型选择。Rust 用 `match` 单分发更自然，风格不同但等价。
+
+---
+
+## 完整场景示例：AST 美化打印（Visitor）
+
+**场景**：对 Expr AST 做多种遍历；PrettyPrintVisitor 输出可读字符串。
+
+```rust
+enum Expr { Int(i32), Add(Box<Expr>, Box<Expr>) }
+
+trait ExprVisitor<T> {
+    fn visit_int(&mut self, n: i32) -> T;
+    fn visit_add(&mut self, a: &Expr, b: &Expr, la: T, lb: T) -> T;
+}
+
+fn visit<V: ExprVisitor<String>>(v: &mut V, e: &Expr) -> String {
+    match e {
+        Expr::Int(n) => v.visit_int(*n),
+        Expr::Add(a, b) => {
+            let la = visit(v, a);
+            let lb = visit(v, b);
+            v.visit_add(a, b, la, lb)
+        }
+    }
+}
+
+struct PrettyPrint;
+impl ExprVisitor<String> for PrettyPrint {
+    fn visit_int(&mut self, n: i32) -> String { n.to_string() }
+    fn visit_add(&mut self, _: &Expr, _: &Expr, la: String, lb: String) -> String {
+        format!("({} + {})", la, lb)
+    }
+}
+
+// 使用：visit(&mut PrettyPrint, &Expr::Add(Box::new(Expr::Int(1)), Box::new(Expr::Int(2))))
+// 输出："(1 + 2)"
+```
+
+**形式化对应**：`visit` 即 $\mathit{visit}$；`match` 穷尽变体；由 Axiom VI1、引理 VI-L1。
 
 ---
 

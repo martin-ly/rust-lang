@@ -1,7 +1,7 @@
 # 🔬 实验研究
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ 全部 100% 完成
 
@@ -202,12 +202,12 @@
 
 **推论 EX-C1**：实验不能替代形式化证明；形式化证明不能替代实验验证（性能、资源消耗等经验性质）。
 
-| 实验类型 | 形式化定理 | 验证目标 |
-| :--- | :--- | :--- |
-| 内存分析 | ownership T2/T3 | 无泄漏、无双重释放 |
-| 并发性能 | borrow T1、async T6.2 | 无数据竞争 |
-| 编译器优化 | type_system 保持性 | 优化保持类型 |
-| 宏展开 | 宏卫生、展开正确性 | 编译时间与正确性 |
+| 实验类型 | 形式化定理 | 验证目标 | 文档链接 |
+| :--- | :--- | :--- | :--- |
+| 内存分析 | ownership T2/T3、RC-T1、REFCELL-T1 | 无泄漏、无双重释放 | [ownership_model](../formal_methods/ownership_model.md) |
+| 并发性能 | borrow T1、CHAN-T1、MUTEX-T1、async T6.2、SPAWN-T1 | 无数据竞争 | [borrow_checker_proof](../formal_methods/borrow_checker_proof.md)、[async_state_machine](../formal_methods/async_state_machine.md) |
+| 编译器优化 | type_system 保持性 | 优化保持类型 | [type_system_foundations](../type_theory/type_system_foundations.md) |
+| 宏展开 | 宏卫生、展开正确性 | 编译时间与正确性 | — |
 
 ---
 
@@ -219,6 +219,8 @@
 | 固定依赖版本 | `Cargo.lock` 提交 |
 | 环境变量 | 文档化 CPU governor、thermal 等 |
 | 统计报告 | Criterion 输出均值、置信区间 |
+
+各实验文档的「结果分析模板」均含**示例填写**（典型 x86_64、Rust 1.93 环境下的示例数据），便于对照和复现。
 
 ---
 
@@ -245,5 +247,5 @@
 ---
 
 **维护团队**: Rust Performance Research Group
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-12
 **状态**: ✅ **全部 100% 完成**

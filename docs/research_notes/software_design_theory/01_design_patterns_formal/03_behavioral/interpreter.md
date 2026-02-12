@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Interpreter 结构）**
+**Def 1.1（Interpreter 结构）**:
 
 设 $E$ 为表达式类型（AST），$V$ 为值类型。Interpreter 满足：
 
@@ -116,6 +116,108 @@ impl FilterExpr {
 // 示例：FilterExpr::Gt(Box::new(FilterExpr::Field("count")), Box::new(FilterExpr::Lit(10)))
 // 表示 "count > 10"；ctx = [("count", 15)] => Some(true)
 ```
+
+---
+
+## 完整 DSL 示例：简易查询语言（层次推进）
+
+**场景**：配置层允许 `field op value` 形式过滤，支持 `>`, `==`, `&&`, `||`；解析→AST→求值。
+
+### 1. AST 定义（Def 1.1 对应）
+
+```rust
+#[derive(Debug, Clone)]
+pub enum QueryExpr {
+    Lit(i64),
+    Field(String),
+    Eq(Box<QueryExpr>, Box<QueryExpr>),
+    Gt(Box<QueryExpr>, Box<QueryExpr>),
+    And(Box<QueryExpr>, Box<QueryExpr>),
+    Or(Box<QueryExpr>, Box<QueryExpr>),
+}
+
+impl QueryExpr {
+    pub fn eval(&self, ctx: &std::collections::HashMap<String, i64>) -> Option<bool> {
+        match self {
+            QueryExpr::Lit(n) => Some(*n != 0),
+            QueryExpr::Field(f) => ctx.get(f).map(|&v| v != 0),
+            QueryExpr::Eq(a, b) => {
+                let (va, vb) = (eval_num(a, ctx)?, eval_num(b, ctx)?);
+                Some(va == vb)
+            }
+            QueryExpr::Gt(a, b) => {
+                let (va, vb) = (eval_num(a, ctx)?, eval_num(b, ctx)?);
+                Some(va > vb)
+            }
+            QueryExpr::And(a, b) => Some(a.eval(ctx)? && b.eval(ctx)?),
+            QueryExpr::Or(a, b) => Some(a.eval(ctx)? || b.eval(ctx)?),
+        }
+    }
+}
+
+fn eval_num(e: &QueryExpr, ctx: &std::collections::HashMap<String, i64>) -> Option<i64> {
+    match e {
+        QueryExpr::Lit(n) => Some(*n),
+        QueryExpr::Field(f) => ctx.get(f).copied(),
+        _ => None,
+    }
+}
+```
+
+### 2. 简易解析器（递归下降，先低优先级后高优先级）
+
+```rust
+fn parse(s: &str) -> Result<QueryExpr, String> {
+    let s = s.trim();
+    if let Some(idx) = s.rfind("||") {
+        let (left, right) = (s[..idx].trim(), s[idx + 2..].trim());
+        if !left.is_empty() && !right.is_empty() {
+            return Ok(QueryExpr::Or(Box::new(parse(left)?), Box::new(parse(right)?)));
+        }
+    }
+    if let Some(idx) = s.rfind("&&") {
+        let (left, right) = (s[..idx].trim(), s[idx + 2..].trim());
+        if !left.is_empty() && !right.is_empty() {
+            return Ok(QueryExpr::And(Box::new(parse(left)?), Box::new(parse(right)?)));
+        }
+    }
+    if let Some(idx) = s.find('>') {
+        let (left, right) = (s[..idx].trim(), s[idx + 1..].trim());
+        if !left.is_empty() && !right.is_empty() {
+            return Ok(QueryExpr::Gt(Box::new(parse(left)?), Box::new(parse(right)?)));
+        }
+    }
+    if let Some(idx) = s.find("==") {
+        let (left, right) = (s[..idx].trim(), s[idx + 2..].trim());
+        if !left.is_empty() && !right.is_empty() {
+            return Ok(QueryExpr::Eq(Box::new(parse(left)?), Box::new(parse(right)?)));
+        }
+    }
+    if let Ok(n) = s.parse::<i64>() {
+        return Ok(QueryExpr::Lit(n));
+    }
+    if !s.is_empty() && s.chars().all(|c| c.is_alphanumeric() || c == '_') {
+        return Ok(QueryExpr::Field(s.to_string()));
+    }
+    Err(format!("cannot parse: {}", s))
+}
+```
+
+### 3. 使用示例
+
+```rust
+// "age > 18 && score == 100"
+let ast = parse("age > 18 && score == 100")?;
+let ctx: HashMap<_, _> = [("age".into(), 20), ("score".into(), 100)].into();
+assert_eq!(ast.eval(&ctx), Some(true));
+
+// "x > 0 || y > 0"
+let ast = parse("x > 0 || y > 0")?;
+let ctx: HashMap<_, _> = [("x".into(), 0), ("y".into(), 1)].into();
+assert_eq!(ast.eval(&ctx), Some(true));
+```
+
+**形式化对应**：AST 即 $E$；`parse` 为语法→$E$；`eval` 即 $\mathit{eval}$；Axiom IN1 由 `Box` 递归深度有界保证；Axiom IN2 由 `match` 穷尽保证。
 
 ---
 

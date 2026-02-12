@@ -3,7 +3,7 @@
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: 100% 完成
+> **状态**: ✅ **100% 完成**（层次推进三阶段全部完成）
 
 ---
 
@@ -62,14 +62,15 @@
 ### 3.1 设计模式扩展
 
 - GoF 23 模式（当前）✅
-- **Rust Idioms** ✅ [06_rust_idioms](06_rust_idioms.md)：RAII、Newtype、类型状态、Builder 变体；含 Def/Axiom/定理、典型场景、常见陷阱、与 GoF 衔接
-- **Anti-patterns** ✅ [07_anti_patterns](07_anti_patterns.md)：13 反例索引、反模式分类、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接、三维边界
+- **Rust Idioms** ✅ [06_rust_idioms](06_rust_idioms.md)：RAII、Newtype、类型状态、Error/Option/Cow、Builder 变体；含 Def/Axiom/定理、完整代码示例、典型场景、常见陷阱、与 GoF 衔接
+- **Anti-patterns** ✅ [07_anti_patterns](07_anti_patterns.md)：13 反例索引、反模式分类、5 个场景→反模式→正确写法、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接、三维边界
 - 扩展 20（43 完全）：Repository、DTO、Event Sourcing 等已纳入 02_complete_43_catalog
 
 ### 3.2 执行模型扩展
 
 - 五模型（同步、异步、并发、并行、分布式）✅
 - 可选扩展：Actor（actix）、CSP（channel）、事件溯源（02_complete_43 Event Sourcing）
+- **层次推进**：三阶段已完成；见 [CONTENT_ENHANCEMENT](../CONTENT_ENHANCEMENT.md) 层次推进计划
 
 ### 3.3 工作流模型扩展
 
@@ -90,7 +91,18 @@
 
 ---
 
-## 五、内容概览
+## 五、层次推进实质内容深化路线
+
+| 层次 | 深化入口 | 新增/充实内容 |
+| :--- | :--- | :--- |
+| **L1 基础** | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](06_rust_idioms.md) | 23 模式均有 Def/定理/典型场景/反例；16+ 模式有完整场景示例（Builder/Adapter/Decorator/Composite/Flyweight/Facade/Chain/Mediator/Observer/Strategy/Command/State/Visitor/Interpreter/Template）；RAII/Newtype/类型状态/Error handling/Cow |
+| **L2 选型** | [03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md)、[05_boundary_system](05_boundary_system/README.md) | 5 个场景→模式→代码；**场景化 Safe 决策 3 例**（全局配置、跨线程缓存、FFI）；按需求反向查模式表 |
+| **L3 组合** | [04_compositional_engineering](04_compositional_engineering/README.md)、[03_execution_models](03_execution_models/README.md) | **验证工作流与检查清单**；**组合反例详解**；**三层架构完整示例**；**Builder+Factory+Repository、Decorator+Strategy+Observer 链条**；**执行模型 + 设计模式组合 4 例** |
+| **L4 实践** | [07_anti_patterns](07_anti_patterns.md) | 13 反例；5 个场景→反模式→正确写法；常见陷阱与规避 |
+
+---
+
+## 六、内容概览
 
 本体系各文档已充实为实质内容：
 
@@ -105,7 +117,7 @@
 
 ---
 
-## 六、学习与选型
+## 七、学习与选型
 
 | 阶段 | 内容 |
 | :--- | :--- |
@@ -118,7 +130,7 @@
 
 ---
 
-## 七、文档快速导航
+## 八、文档快速导航
 
 | 需求 | 入口文档 |
 | :--- | :--- |
@@ -132,7 +144,7 @@
 
 ---
 
-## 八、扩展阅读
+## 九、扩展阅读
 
 - [Refactoring.Guru](https://refactoring.guru/design-patterns)：各模式结构图
 - [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/)：Rust 惯用模式
@@ -140,7 +152,7 @@
 
 ---
 
-## 九、推进阶段
+## 十、推进阶段
 
 | 阶段 | 内容 | 状态 |
 | :--- | :--- | :--- |

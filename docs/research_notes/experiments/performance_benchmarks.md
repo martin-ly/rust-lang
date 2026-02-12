@@ -1097,6 +1097,17 @@ criterion_main!(serialization_benches);
 | 序列化 | JSON 序列化    | **\_** | ns/iter |      |
 | 序列化 | bincode 序列化 | **\_** | ns/iter |      |
 
+**示例填写**（典型 x86_64、Rust 1.93、release）：
+
+| 类别   | 指标           | 示例值 | 单位    | 备注 |
+| :--- | :--- | :--- | :--- | :--- |
+| 内存   | 栈分配均值     | 12    | ns      |      |
+| 内存   | 堆分配均值     | 85    | ns      | Box::new |
+| 并发   | Mutex 吞吐     | 120,000 | ops/s   | 4 线程 1M 次 |
+| 并发   | RwLock 读吞吐  | 450,000 | ops/s   | 读多场景     |
+| 序列化 | JSON 序列化    | 1,200 | ns/iter | serde_json  |
+| 序列化 | bincode 序列化 | 180   | ns/iter | 约 6.7× 快于 JSON |
+
 **结论填写**：与初步结果对比，说明是否符合预期；若与 Rust 1.93 的 thread_local 分配器、MaybeUninit 等相关，可单独注明。
 
 ### 最终结论

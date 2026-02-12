@@ -174,6 +174,22 @@ where
 
 ---
 
+## 六、与 05_boundary_system 衔接
+
+- [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)：SBM-L2 反模式边界
+- [02_workflow 03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md)：反模式误选表
+- [01_design_patterns_formal](01_design_patterns_formal/README.md)：各模式反例
+
+---
+
+## 七、引用
+
+- [FORMAL_PROOF_SYSTEM_GUIDE](../../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)
+- [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/) Anti-patterns
+- [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)
+
+---
+
 ## 八、完整规避示例（场景→反模式→正确写法）
 
 ### 场景 1：需要共享可变
@@ -248,15 +264,7 @@ let x = match result {
 
 ---
 
-## 六、与 05_boundary_system 衔接
-
-- [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)：SBM-L2 反模式边界
-- [02_workflow 03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md)：反模式误选表
-- [01_design_patterns_formal](01_design_patterns_formal/README.md)：各模式反例
-
----
-
-## 七、引用
+## 九、引用
 
 - [FORMAL_PROOF_SYSTEM_GUIDE](../../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)
 - [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/) Anti-patterns

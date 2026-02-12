@@ -128,6 +128,70 @@ fn main() {
 
 ---
 
+## 组合有效性验证工作流（实质指南）
+
+### 新增模块纳入组合时的检查清单
+
+| 步骤 | 动作 | 验证 CE-T1/T2/T3 |
+| :--- | :--- | :--- |
+| 1 | 确认 `pub` 接口无 `unsafe` 泄漏 | CE-T1 |
+| 2 | 跨线程类型检查 `Send`/`Sync` | CE-T2 |
+| 3 | `cargo check` 通过 | CE-T3 |
+| 4 | `cargo clippy` 无 Rc 跨线程、无双重借用 | CE-T2 |
+| 5 | 可选：`MIRI` 检测未定义行为 | CE-T1 |
+| 6 | 依赖图无环：`cargo tree` 检查 | Def 1.3 |
+
+### 组合反例详解（何时定理不成立）
+
+| 反例 | 违反定理 | 形式化说明 |
+| :--- | :--- | :--- |
+| `pub fn leak_raw(p: *mut T)` | CE-T1 | 泄漏裸指针违反 ownership 唯一性 |
+| `pub fn spawn_rc(rc: Rc<T>)` | CE-T2 | Rc 非 Send，跨线程传递导致编译错误 |
+| `pub fn bad_return<T>() -> T` | CE-T3 | 返回类型未约束，调用处类型推断失败 |
+| `mod a { use super::b; } mod b { use super::a; }` | 引理 CE-L1 | 循环依赖，编译失败 |
+| 泛型约束不一致 | CE-T3 | `impl<T: Trait> Service for T` 与 `Service<U>` 边界冲突 |
+
+### 完整应用链示例：三层架构
+
+**场景**：Web API 订单处理（表示层 + 业务层 + 数据层）。
+
+```rust
+// 层 1：DTO（跨边界）
+#[derive(serde::Serialize, serde::Deserialize)]
+pub struct PlaceOrderDto { pub items: Vec<ItemDto> }
+
+// 层 2：Domain + Service（业务逻辑）
+pub struct Order { id: u64, items: Vec<OrderItem> }
+impl Order {
+    fn from_dto(d: &PlaceOrderDto) -> Result<Self, String> { /* 校验 */ }
+}
+
+pub trait OrderRepository {
+    fn save(&mut self, o: &Order) -> Result<(), String>;
+}
+
+pub struct OrderService<R: OrderRepository> { repo: R }
+impl<R: OrderRepository> OrderService<R> {
+    pub fn place_order(&mut self, dto: PlaceOrderDto) -> Result<u64, String> {
+        let order = Order::from_dto(&dto)?;
+        self.repo.save(&order)?;
+        Ok(order.id)
+    }
+}
+
+// 层 3：Controller（表示层，组合 Service）
+pub struct OrderController<S: OrderServiceTrait> { service: S }
+impl<S: OrderServiceTrait> OrderController<S> {
+    pub fn handle(&mut self, req: PlaceOrderDto) -> Response {
+        self.service.place_order(req).into()
+    }
+}
+```
+
+**CE-T1/T2/T3 验证**：各层 Safe；所有权沿 DTO→Order→Repository 传递；无共享可变；`cargo check` 通过即 CE-T3。
+
+---
+
 ## 与 PROOF_INDEX 衔接
 
 本部分定理纳入 [PROOF_INDEX](../../PROOF_INDEX.md)，按「组合软件工程」领域分类。

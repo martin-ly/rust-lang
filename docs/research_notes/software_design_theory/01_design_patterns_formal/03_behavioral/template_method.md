@@ -92,6 +92,43 @@ GoF 用继承；Rust 用 trait + 默认方法，无继承，组合优于继承�
 | 生命周期钩子 | 初始化/清理、before/after |
 | 测试框架 | setup/teardown、用例执行流程 |
 
+### 典型场景完整示例：数据导入流水线
+
+**场景**：不同数据源（CSV、JSON）导入，骨架固定：验证 → 解析 → 转换 → 持久化；各步骤可定制。
+
+```rust
+trait DataImport {
+    fn run(&self, raw: &str) -> Result<u64, String> {
+        let validated = self.validate(raw)?;
+        let parsed = self.parse(&validated)?;
+        let transformed = self.transform(parsed)?;
+        self.persist(&transformed)
+    }
+    fn validate(&self, raw: &str) -> Result<String, String>;
+    fn parse(&self, s: &str) -> Result<Vec<Record>, String>;
+    fn transform(&self, records: Vec<Record>) -> Result<Vec<Record>, String>;
+    fn persist(&self, records: &[Record]) -> Result<u64, String>;
+}
+
+struct Record { id: u64, name: String }
+
+struct CsvImport;
+impl DataImport for CsvImport {
+    fn validate(&self, raw: &str) -> Result<String, String> {
+        if raw.is_empty() { Err("empty".into()) } else { Ok(raw.into()) }
+    }
+    fn parse(&self, s: &str) -> Result<Vec<Record>, String> {
+        Ok(s.lines().enumerate().map(|(i, l)| Record { id: i as u64, name: l.into() }).collect())
+    }
+    fn transform(&self, r: Vec<Record>) -> Result<Vec<Record>, String> { Ok(r) }
+    fn persist(&self, r: &[Record]) -> Result<u64, String> { Ok(r.len() as u64) }
+}
+
+// 使用：let imp = CsvImport; imp.run("a\nb\nc")?;
+```
+
+**形式化对应**：`run` 即 $\mathit{template\_op}$；`validate`、`parse`、`transform`、`persist` 为钩子。
+
 ---
 
 ## 相关模式

@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Mediator 结构）**
+**Def 1.1（Mediator 结构）**:
 
 设 $M$ 为中介者类型，$C_1, \ldots, C_n$ 为同事类型。Mediator 满足：
 
@@ -89,6 +89,43 @@ impl Mediator {
 | 聊天室 | 用户仅知 Mediator，消息经其广播 |
 | 工作流编排 | 任务节点通过协调器通信 |
 | 事件总线 | 发布/订阅中心化路由 |
+
+---
+
+## 完整场景示例：聊天室（channel 实现）
+
+**场景**：多用户聊天；用户仅知 Mediator，消息经其广播；无直接 P2P 引用。
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+struct ChatMessage { from: String, content: String }
+
+struct ChatMediator {
+    tx: mpsc::Sender<ChatMessage>,
+}
+
+impl ChatMediator {
+    fn broadcast(&self, msg: ChatMessage) {
+        let _ = self.tx.send(msg);
+    }
+}
+
+fn run_room(rx: mpsc::Receiver<ChatMessage>) {
+    for msg in rx {
+        println!("[broadcast] {}: {}", msg.from, msg.content);
+    }
+}
+
+// 使用：Mediator 持有 tx；各 Colleague 持 Mediator 引用，发送时 mediator.broadcast(msg)
+// let (tx, rx) = mpsc::channel();
+// thread::spawn(move || run_room(rx));
+// let m = ChatMediator { tx };
+// m.broadcast(ChatMessage { from: "A".into(), content: "hi".into() });
+```
+
+**形式化对应**：`ChatMediator` 即 $M$；`ChatMessage` 为路由消息；Colleague 仅持 `&ChatMediator`，无直接引用；Axiom ME1 满足。
 
 ---
 

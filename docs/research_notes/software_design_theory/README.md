@@ -3,7 +3,7 @@
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: 100% 完成；**层次推进增强**（2026-02-12）
+> **状态**: 100% 完成；**层次推进实质内容扩充**（2026-02-12）
 > **目标**: 面向 Rust 语言机制的软件设计形式分析、边界论证与组合工程有效性
 
 ---
@@ -15,6 +15,8 @@
 | **L1 入门** | 设计模式形式化（Factory Method、Strategy、Adapter）、Rust Idioms（RAII、Newtype） | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](06_rust_idioms.md) |
 | **L2 进阶** | 23 安全/43 完全、语义边界图、三维边界矩阵 | [02_workflow_safe_complete_models](02_workflow_safe_complete_models/README.md)、[05_boundary_system](05_boundary_system/README.md) |
 | **L3 深入** | 执行模型、组合工程、扩展模式代码、反模式与规避 | [03_execution_models](03_execution_models/README.md)、[04_compositional_engineering](04_compositional_engineering/README.md)、[07_anti_patterns](07_anti_patterns.md) |
+
+**实操入口**：执行模型 + 设计模式可运行示例见 [03_execution_models 可运行示例](03_execution_models/README.md#可运行示例层次推进)；语义边界 Safe 决策 3 例见 [03_semantic_boundary_map 场景 7–9](02_workflow_safe_complete_models/03_semantic_boundary_map.md#场景化-safe-决策-3-例)。
 
 ---
 
@@ -104,12 +106,12 @@
 
 | 模块 | 状态 | 2026-02 增强 |
 | :--- | :--- | :--- |
-| 01_design_patterns_formal（23 模式） | 100% | Interpreter 过滤表达式完整示例 |
+| 01_design_patterns_formal（23 模式） | 100% | 16+ 模式有完整场景示例（Builder/Adapter/Decorator/Composite/Flyweight/Facade/Chain/Mediator/Observer/Strategy/Command/State/Visitor/Interpreter/Template 等） |
 | 02_workflow_safe_complete_models（23/43） | 100% | 场景→模式→代码完整链条（Web API、可撤销编辑器） |
 | 03_execution_models（五模型） | 100% | 典型场景、与设计模式组合、常见陷阱 |
 | 04_compositional_engineering（CE-T1–T3） | 100% | Builder+Factory、Repository+Service+DTO 完整代码示例 |
-| 05_boundary_system（三维矩阵） | 100% | 场景化决策示例、模式选取与边界判定完整流程 |
-| 06_rust_idioms（RAII、Newtype、类型状态） | 100% | 完整代码示例 |
+| 05_boundary_system（三维矩阵） | 100% | 场景化决策示例（Safe/支持/表达各 3 例）、模式选取与边界判定完整流程 |
+| 06_rust_idioms（RAII、Newtype、类型状态、Error/Cow/Option） | 100% | 完整代码示例、Error 传播链、Option 组合、Cow 字符串 |
 | 07_anti_patterns（反模式） | 100% | 完整规避示例（场景→反模式→正确写法） |
 
 ---
@@ -119,8 +121,8 @@
 | 层次 | 入口 | 实质内容 |
 | :--- | :--- | :--- |
 | **L1 入门** | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](06_rust_idioms.md) | 每模式 Def/定理/代码/典型场景/反例；RAII/Newtype/类型状态完整示例 |
-| **L2 选型** | [02_workflow 03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md)、[05_boundary_system](05_boundary_system/README.md) | 5 个模式选取完整示例；三维边界决策树；场景化 Safe 决策 3 例 |
-| **L3 组合** | [04_compositional_engineering](04_compositional_engineering/README.md)、[02_workflow README](02_workflow_safe_complete_models/README.md) | Builder+Factory、Repository+Service+DTO 完整代码；Web API/可撤销编辑器链条 |
+| **L2 选型** | [02_workflow 03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md)、[05_boundary_system](05_boundary_system/README.md) | 5 个模式选取完整示例；三维边界决策树；**场景化 Safe 决策 3 例**（全局配置、跨线程缓存、FFI） |
+| **L3 组合** | [04_compositional_engineering](04_compositional_engineering/README.md)、[03_execution_models](03_execution_models/README.md) | Builder+Factory、Repository+Service+DTO 完整代码；**验证工作流、组合反例详解、三层架构示例**；**执行模型 + 设计模式组合 4 例**（批处理、异步、并行、分布式） |
 | **L4 实践** | [07_anti_patterns](07_anti_patterns.md)、[01_safe_23 常见陷阱](02_workflow_safe_complete_models/01_safe_23_catalog.md) | 13 反例索引；5 个场景→反模式→正确写法；23 模式陷阱与规避 |
 
 ---
@@ -156,9 +158,11 @@
 | 某模式是否纯 Safe？ | 见 [01_safe_23_catalog](02_workflow_safe_complete_models/01_safe_23_catalog.md)；23 模式绝大部分纯 Safe |
 | Factory Method 与 Abstract Factory 区别？ | 单产品 vs 产品族；见 [创建型模式对比](01_design_patterns_formal/README.md#创建型模式对比) |
 | Observer 用 channel 还是回调？ | 跨线程用 channel；单线程简单场景可用 RefCell+回调 |
-| 如何选执行模型？ | 见 [06_boundary_analysis](03_execution_models/06_boundary_analysis.md) 决策树 |
+| 如何选执行模型？ | 见 [06_boundary_analysis](03_execution_models/06_boundary_analysis.md) 决策树；[03_execution_models README](03_execution_models/README.md) 含典型场景与设计模式组合 |
 | 泛型 vs dyn Trait？ | 编译期确定用泛型（零成本）；运行时选择用 `Box<dyn Trait>` |
 | 何时用 Box / Rc / Arc？ | 独占用 Box；单线程共享用 Rc；跨线程共享用 Arc |
+| 组合多模块如何验证？ | 见 [02_effectiveness_proofs](04_compositional_engineering/02_effectiveness_proofs.md) 验证工作流；CE-T1/T2/T3 检查清单 |
+| 模式组合如何选？ | Builder+Factory、Decorator+Strategy、Composite+Visitor 见 [03_integration_theory](04_compositional_engineering/03_integration_theory.md) 多层次组合链条 |
 
 ---
 

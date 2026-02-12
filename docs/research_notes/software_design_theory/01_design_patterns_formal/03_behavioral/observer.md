@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Observer 结构）**
+**Def 1.1（Observer 结构）**:
 
 设 $S$ 为主体类型，$O$ 为观察者类型。Observer 满足：
 
@@ -79,6 +79,42 @@ impl Subject {
 ```
 
 **形式化对应**：Channel 方式无共享可变；回调方式 `RefCell` 提供运行时借用检查，仍为 Safe。
+
+---
+
+## 完整场景示例：订单事件通知（mpsc 单订阅者）
+
+**场景**：订单服务发布事件；计费模块订阅并处理；跨线程、无共享可变。
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+enum OrderEvent { Created(u64), Paid(u64) }
+
+fn main() {
+    let (tx, rx) = mpsc::channel::<OrderEvent>();
+
+    // 订阅者：在独立线程处理事件
+    let handle = thread::spawn(move || {
+        for ev in rx {
+            match ev {
+                OrderEvent::Created(id) => println!("[订阅者] 订单 {} 已创建", id),
+                OrderEvent::Paid(id) => println!("[订阅者] 订单 {} 已付款", id),
+            }
+        }
+    });
+
+    // 发布者：主线程发送事件
+    tx.send(OrderEvent::Created(1)).unwrap();
+    tx.send(OrderEvent::Paid(1)).unwrap();
+    drop(tx);  // 关闭发送端，rx 循环结束
+
+    handle.join().unwrap();
+}
+```
+
+**形式化对应**：`tx`/`rx` 为消息传递；无共享可变；Send 约束保证跨线程安全；由 OB-T1 纯 Safe。多订阅者可用 `broadcast::channel` 或每订阅者一对 `mpsc::channel`。
 
 ---
 

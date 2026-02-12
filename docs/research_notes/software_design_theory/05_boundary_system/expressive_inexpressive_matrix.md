@@ -230,6 +230,34 @@ impl Node {
 
 ---
 
+## 场景化决策示例（层次推进）
+
+### 示例 1：OOP 继承迁移
+
+**场景**：原 Java 类 `Button extends Widget`。
+
+**决策**：Rust 无继承 → 用 trait + 组合；$\mathit{ExprB} = \mathrm{Same}$（组合替代继承）。
+
+```rust
+trait Widget { fn render(&self); }
+struct Button { label: String }
+impl Widget for Button { fn render(&self) { /* ... */ } }
+```
+
+### 示例 2：观察者模式
+
+**场景**：原 OOP Subject/Observer 继承。
+
+**决策**：Rust 用 channel → $\mathit{ExprB} = \mathrm{Approx}$；消息传递替代回调，语义等价。
+
+### 示例 3：多继承不可表达
+
+**场景**：`class C extends A, B` 菱形继承。
+
+**决策**：Rust 无类继承 → $\mathit{ExprB} = \mathrm{NoExpr}$；用 trait 多实现 + 组合替代。
+
+---
+
 ## 引用
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)

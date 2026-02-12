@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Flyweight 结构）**
+**Def 1.1（Flyweight 结构）**:
 
 设 $F$ 为享元类型，$K$ 为键类型。Flyweight 满足：
 
@@ -78,6 +78,91 @@ assert!(Arc::ptr_eq(&a, &b));  // 同一实例
 | 配置/主题 | 共享只读配置 |
 | 图元/纹理 | 游戏、图形共享资源 |
 | 类型对象 | 共享元数据 |
+
+---
+
+## 完整场景示例：字形缓存（层次推进）
+
+**场景**：文本渲染需大量重复字形（glyph）；相同字符+字体共享位图，避免重复加载。
+
+### 1. 享元定义
+
+```rust
+use std::collections::HashMap;
+use std::sync::{Arc, RwLock};
+
+#[derive(Clone, Hash, Eq, PartialEq)]
+struct GlyphKey {
+    char: char,
+    font_id: u32,
+    size_px: u16,
+}
+
+struct GlyphData {
+    width: u32,
+    height: u32,
+    pixels: Vec<u8>,  // 不可变位图
+}
+
+struct GlyphCache {
+    cache: RwLock<HashMap<GlyphKey, Arc<GlyphData>>>,
+}
+
+impl GlyphCache {
+    fn get(&self, key: GlyphKey) -> Arc<GlyphData> {
+        if let Ok(guard) = self.cache.read() {
+            if let Some(g) = guard.get(&key) {
+                return Arc::clone(g);
+            }
+        }
+        let glyph = Arc::new(self.rasterize(&key));  // 实际渲染逻辑
+        self.cache.write().unwrap().insert(key.clone(), Arc::clone(&glyph));
+        glyph
+    }
+    fn rasterize(&self, _key: &GlyphKey) -> GlyphData {
+        GlyphData { width: 8, height: 16, pixels: vec![0; 128] }
+    }
+}
+```
+
+### 2. 外置可变状态（Axiom FL1）
+
+位置、颜色等每实例不同，作为 extrinsic 传入：
+
+```rust
+struct GlyphInstance {
+    glyph: Arc<GlyphData>,  // 共享、不可变
+    x: i32, y: i32,        // 外置
+    color: [u8; 4],        // 外置
+}
+
+fn render_text(cache: &GlyphCache, s: &str, font_id: u32) -> Vec<GlyphInstance> {
+    s.chars().enumerate().map(|(i, c)| {
+        let glyph = cache.get(GlyphKey { char: c, font_id, size_px: 16 });
+        GlyphInstance {
+            glyph,
+            x: i as i32 * 8,
+            y: 0,
+            color: [255, 255, 255, 255],
+        }
+    }).collect()
+}
+```
+
+### 3. 跨线程共享（定理 FL-T2）
+
+```rust
+// GlyphCache 需 Sync：RwLock + HashMap 内部保证
+// Arc<GlyphData> 跨线程共享只读位图
+let cache = Arc::new(GlyphCache { cache: RwLock::new(HashMap::new()) });
+let c2 = Arc::clone(&cache);
+std::thread::spawn(move || {
+    let g = c2.get(GlyphKey { char: 'A', font_id: 0, size_px: 16 });
+    // 渲染线程安全使用
+});
+```
+
+**形式化对应**：`GlyphKey` 即 $K$；`Arc<GlyphData>` 即 $F$；`get` 即 $\mathit{get}$；Axiom FL1 由 `GlyphData` 不可变、 extrinsic 外置保证。
 
 ---
 

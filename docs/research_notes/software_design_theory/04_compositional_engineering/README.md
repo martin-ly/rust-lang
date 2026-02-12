@@ -22,6 +22,7 @@
 | Observer + Command | channel 传 `Box<dyn Command>` | CE-T2（Send 约束） |
 | Composite + Visitor | `match` 遍历 + `Visitor` trait | CE-T1、CE-T3 |
 | Repository + Service Layer | 模块依赖、trait 组合 | [03_integration_theory](03_integration_theory.md) IT-T1 |
+| Builder + Factory + Repository | 订单创建→工厂选择→持久化完整链条 | [03_integration_theory](03_integration_theory.md) § 完整多模式组合链条 |
 
 ---
 
@@ -138,3 +139,30 @@ impl<R: OrderRepository> OrderService<R> {
 - **pub 边界**：跨模块仅通过 `pub` 接口；内部实现可私有
 - **trait 约束**：泛型 `T: Trait` 在组合边界保持
 - **验证**：组合后运行测试；CE-T1/T2/T3 用 cargo、clippy、MIRI 验证
+
+---
+
+## 组合选型决策树（层次推进）
+
+```text
+需组合多模块/多模式？
+├── 创建 + 构建？ → Builder + Factory Method
+├── 编排 + 持久化？ → Service Layer + Repository + DTO
+├── 装饰 + 策略？ → Decorator + Strategy
+├── 事件 + 操作？ → Observer + Command（channel 传命令）
+├── 树 + 遍历？ → Composite + Visitor
+├── 需事务边界？ → Unit of Work + Repository
+└── 需跨边界？ → DTO + Gateway + Remote Facade
+```
+
+---
+
+## 组合反例（层次推进）
+
+| 反例 | 后果 | 规避 |
+| :--- | :--- | :--- |
+| 循环依赖 A→B→A | 编译失败 | 提取公共模块、依赖倒置 |
+| 跨模块泄漏 `unsafe` | 破坏 CE-T1 | 最小化 unsafe 边界、安全抽象 |
+| 跨线程传 `Rc` | 编译错误 | 用 `Arc`；Send/Sync 约束 |
+| 泛型约束不一致 | 类型不匹配 | 统一 trait 约束、文档化接口 |
+| pub 泄漏内部可变 | 破坏封装 | 仅 pub 必要 API；内部 RefCell 封装 |

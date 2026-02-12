@@ -105,6 +105,34 @@
 
 ---
 
+## 场景化 Safe 决策示例（实质内容）
+
+### 示例 1：需全局唯一配置
+
+**需求**：应用启动时加载配置，全局访问。
+
+**步骤**：查模式 → Singleton；判安全 → [safe_unsafe_matrix](safe_unsafe_matrix.md) 创建型 → **OnceLock 为纯 Safe**；判支持 → 原生 `std::sync::OnceLock`。
+
+**结论**：`OnceLock<Config>`，零 unsafe。
+
+### 示例 2：需跨线程共享缓存
+
+**需求**：多线程可读共享缓存，偶有更新。
+
+**步骤**：查模式 → Flyweight + 缓存；判安全 → 共享用 `Arc`；跨线程需 `Sync` → **Arc\<RwLock\<HashMap>>** 为纯 Safe。
+
+**结论**：`Arc<RwLock<HashMap<K, V>>>` 或 `dashmap`，零 unsafe。
+
+### 示例 3：需 FFI 调用 C 库
+
+**需求**：调用 C 的 `malloc`/`free`。
+
+**步骤**：判安全 → 需 `unsafe`；可封装为 Safe API（`Box::from_raw` 等）→ **需 unsafe、可安全抽象**。
+
+**结论**：内部 `unsafe`；对外 `pub fn` 为 Safe 抽象；见 [borrow_checker_proof](borrow_checker_proof.md) Def UNSAFE1。
+
+---
+
 ## 与顶层衔接
 
 本边界体系与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 衔接，扩展至设计模式与执行模型维度。

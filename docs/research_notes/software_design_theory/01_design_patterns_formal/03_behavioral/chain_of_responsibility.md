@@ -8,7 +8,7 @@
 
 ## 形式化定义
 
-**Def 1.1（Chain of Responsibility 结构）**
+**Def 1.1（Chain of Responsibility 结构）**:
 
 设 $H$ 为处理器类型，$R$ 为请求类型。Chain 满足：
 
@@ -82,6 +82,52 @@ h1.handle(&"B".into());  // 委托至 h2
 | 事件处理 | 事件沿链传递，首个能处理者消费 |
 | 错误恢复 | 多级 fallback，逐级尝试 |
 | 权限检查 | 多级审批，层级委托 |
+
+---
+
+## 完整场景示例：HTTP 中间件链
+
+**场景**：请求依次经日志→认证；任一失败则短路返回。
+
+```rust
+type Request = (String, Vec<String>);  // (path, headers)
+
+struct LogHandler { next: Option<Box<AuthHandler>> }
+struct AuthHandler { next: Option<Box<EndHandler>> }
+struct EndHandler;
+
+impl LogHandler {
+    fn handle(&self, req: &Request) -> Option<String> {
+        println!("Request: {}", req.0);
+        self.next.as_ref().and_then(|n| n.handle(req))
+    }
+}
+
+impl AuthHandler {
+    fn handle(&self, req: &Request) -> Option<String> {
+        if req.1.iter().any(|h| h.starts_with("Auth: ")) {
+            self.next.as_ref().and_then(|n| n.handle(req))
+        } else {
+            Some("401 Unauthorized".into())
+        }
+    }
+}
+
+impl EndHandler {
+    fn handle(&self, _req: &Request) -> Option<String> {
+        Some("OK".into())
+    }
+}
+
+// 链：Log → Auth → End；请求沿链传递
+let chain = LogHandler {
+    next: Some(Box::new(AuthHandler {
+        next: Some(Box::new(EndHandler)),
+    })),
+};
+```
+
+**形式化对应**：`LogHandler`、`AuthHandler` 即 $H$；`Request` 即 $R$；`next` 即 $\mathrm{Option}\langle H \rangle$；Axiom CR1 由 `Box` 链无环保证。
 
 ---
 
