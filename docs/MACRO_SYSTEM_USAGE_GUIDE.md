@@ -302,8 +302,8 @@ macro_rules! safe_divide {
 ## 📚 相关文档
 
 - [完整文档](../crates/c11_macro_system/README.md)
-- [声明宏指南](../crates/c11_macro_system/docs/tier_02_guides/01_声明宏指南.md)
-- [过程宏指南](../crates/c11_macro_system/docs/tier_02_guides/02_过程宏指南.md)
+- [声明宏指南](../crates/c11_macro_system/docs/tier_02_guides/01_声明宏实践指南.md)
+- [过程宏指南](../crates/c11_macro_system/docs/tier_02_guides/02_Derive宏开发指南.md)
 
 ---
 

@@ -394,9 +394,9 @@ let counter = Arc::new(Mutex::new(0));
 ## 📚 相关文档
 
 - [完整文档](../crates/c05_threads/README.md)
-- [线程管理指南](../crates/c05_threads/docs/tier_02_guides/01_线程管理指南.md)
-- [并发控制指南](../crates/c05_threads/docs/tier_02_guides/02_并发控制指南.md)
-- [无锁数据结构](../crates/c05_threads/docs/tier_03_references/03_无锁数据结构参考.md)
+- [线程管理指南](../crates/c05_threads/docs/tier_02_guides/01_线程基础与生命周期.md)
+- [并发控制指南](../crates/c05_threads/docs/tier_02_guides/02_同步原语实践.md)
+- [无锁数据结构](../crates/c05_threads/docs/tier_03_references/02_无锁编程参考.md)
 
 ---
 

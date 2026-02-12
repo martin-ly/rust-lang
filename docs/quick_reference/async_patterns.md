@@ -39,6 +39,10 @@
     - [陷阱 1: 在 async 中使用标准库阻塞 API](#陷阱-1-在-async-中使用标准库阻塞-api)
     - [陷阱 2: 持有 MutexGuard 跨 await](#陷阱-2-持有-mutexguard-跨-await)
     - [陷阱 3: 忘记 spawn 导致串行](#陷阱-3-忘记-spawn-导致串行)
+  - [🚫 反例速查](#-反例速查)
+    - [反例 1–2](#反例-12)
+    - [反例 3: 忘记 spawn 导致串行](#反例-3-忘记-spawn-导致串行)
+    - [反例 4: 持有锁跨越 await](#反例-4-持有锁跨越-await)
   - [🎯 选择决策树](#-选择决策树)
   - [📊 Tokio 完整功能](#-tokio-完整功能)
   - [🔗 快速跳转](#-快速跳转)
@@ -519,6 +523,53 @@ async fn good() {
     let h1 = tokio::spawn(task1());
     let h2 = tokio::spawn(task2());
     let (r1, r2) = tokio::join!(h1, h2);
+}
+```
+
+---
+
+## 🚫 反例速查
+
+采用统一模板：错误示例 → 原因 → 修正。与「常见陷阱」互补。
+
+### 反例 1–2
+
+见上方「陷阱 1」「陷阱 2」。
+
+### 反例 3: 忘记 spawn 导致串行
+
+**错误示例**: 直接 `task1().await; task2().await` 串行执行。
+
+**原因**: 顺序 await 无并发。
+
+**修正**: 使用 `tokio::join!` 或 `tokio::spawn` 并发执行。
+
+### 反例 4: 持有锁跨越 await
+
+**错误示例**:
+
+```rust
+// ❌ 持有 MutexGuard 跨越 await 可能导致死锁
+async fn bad(mutex: Arc<Mutex<i32>>) {
+    let guard = mutex.lock().unwrap();
+    tokio::time::sleep(Duration::from_secs(1)).await;  // 持锁期间 await
+    // guard 在 await 点被持有，阻塞其他任务
+}
+```
+
+**原因**: 异步任务可能在持锁时挂起，阻塞其他等待同一锁的任务，导致死锁或性能退化。
+
+**修正**:
+
+```rust
+// ✅ 缩小锁的作用域，在 await 前释放
+async fn good(mutex: Arc<Mutex<i32>>) {
+    {
+        let guard = mutex.lock().unwrap();
+        let val = *guard;
+        // 在作用域内完成需要持锁的操作
+    }
+    tokio::time::sleep(Duration::from_secs(1)).await;
 }
 ```
 

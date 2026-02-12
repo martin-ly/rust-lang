@@ -104,10 +104,10 @@
 - **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
 - **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - WASM 对比矩阵
 - **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - WASM 思维导图
-- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
-- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+- **[决策图网](../../docs/DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../docs/PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
 
-### Rust 1.92.0 WASM 专用文档 ⭐ NEW
+### Rust 1.92/1.93 WASM 专用文档
 
 - **[WASM 思维导图集合](./docs/WASM_MIND_MAPS.md)** - 8 个核心思维导图
 - **[WASM 多维概念对比矩阵](./docs/WASM_CONCEPT_MATRIX.md)** - 10+ 个对比矩阵
@@ -124,7 +124,7 @@
 **模块类型**: 高级学习模块 + 跨平台开发
 **学习重点**: WebAssembly、Rust 与 WASM 集成、跨平台应用开发
 **适用对象**: Rust 中级到高级开发者、前端开发者、全栈工程师
-**Rust 版本**: 1.92.0+ (Edition 2024)
+**Rust 版本**: 1.93.0+ (Edition 2024)
 **WASM 版本**: WASM 2.0 + WASI 0.2
 
 ---
@@ -137,8 +137,8 @@
 2. **Rust 集成**: wasm-bindgen、wasm-pack、wasmtime 等工具链
 3. **性能优化**: 二进制大小优化、运行时性能调优
 4. **实战应用**: 前端集成、后端服务、边缘计算
-5. **Rust 1.92.0 特性**: 改进的类型检查器、增强的 const 上下文、优化的编译器性能 ⭐ NEW!
-6. **Rust 1.92.0 特性**: MaybeUninit文档化、联合体原始引用、自动特征改进、关联项多边界、迭代器方法特化
+5. **Rust 1.93.0 特性**: MaybeUninit API 增强、String/Vec into_raw_parts、VecDeque pop_*_if、asm_cfg、全局分配器 thread_local 等
+6. **Rust 1.92.0 特性**: MaybeUninit 文档化、联合体原始引用、自动特征改进、关联项多边界、迭代器方法特化
 7. **成熟生态库**: Yew、Leptos、Dioxus 等前端框架分析
 8. **设计模式**: 工厂、建造者、观察者、策略、适配器、单例模式
 
@@ -151,7 +151,7 @@
 - ✅ 理解 WASM 性能优化技术和最佳实践
 - ✅ 学会在实际项目中应用 WASM 技术
 - ✅ 掌握 WASI 和跨平台应用开发
-- ✅ 了解 Rust 1.92.0 最新特性在 WASM 中的应用 ⭐ NEW!
+- ✅ 了解 Rust 1.93.0 最新特性在 WASM 中的应用
 - ✅ 了解 Rust 1.92.0 特性在 WASM 中的应用
 - ✅ 学习成熟的 WASM 生态库（Yew、Leptos、Dioxus）⭐ NEW!
 - ✅ 掌握设计模式在 WASM 项目中的实践 ⭐ NEW!
@@ -493,9 +493,10 @@ npm start
 
 ---
 
-**模块状态**: ✅ Rust 1.92.0 特性更新完成 + 思维表征方式完善
-**最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+ (Edition 2024), WASM 2.0 + WASI 0.2
+**模块状态**: ✅ Rust 1.93.0 兼容
+**最后更新**: 2026-02-12
+**适用版本**: Rust 1.93.0+ (Edition 2024), WASM 2.0 + WASI 0.2
+**1.93 兼容性**: [docs/toolchain/06_rust_1.93_compatibility_notes.md](../../docs/toolchain/06_rust_1.93_compatibility_notes.md)
 **新增内容**:
 
 - ✅ Rust 1.92.0 WASM 特性实现和文档

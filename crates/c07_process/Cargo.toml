@@ -9,7 +9,7 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/c07_process"
 keywords = ["process", "ipc", "synchronization", "system-programming"]
 categories = ["system-programming", "concurrency"]
-rust-version = "1.92"
+rust-version = "1.93"
 
 [dependencies]
 # 核心异步运行时（可选）

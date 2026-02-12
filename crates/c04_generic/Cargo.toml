@@ -3,7 +3,7 @@ name = "c04_generic"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.92"
+rust-version = "1.93"
 
 [dependencies]
 itertools = "0.14.0"

@@ -49,6 +49,21 @@ git push origin feature/your-feature
 
 ---
 
+---
+
+## 文档链接规范
+
+**链接格式**：确保文档内链接正确指向目标文件。
+
+- **从 docs/ 引用 crates**：使用 `../crates/` 或 `../../crates/`（取决于文档所在目录深度）
+- **tier 目录**：统一使用 `tier_01_foundations`、`tier_02_guides`、`tier_03_references`、`tier_04_advanced` 命名（不含 `tier1_foundation`、`tier3_advanced` 等旧格式）
+- **文件名**：与实际文件名保持一致（大小写、下划线），如 `01_wasm_基础指南.md` 而非 `01_WASM快速入门.md`
+- **链接检查**：提交 PR 前建议运行 `cargo deadlinks` 或 `markdown-link-check` 检查断链
+
+详见 [LINK_FIX_PLAN_2026_02.md](./docs/LINK_FIX_PLAN_2026_02.md) 与 [PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md](./docs/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md)。
+
+---
+
 ## 相关文档
 
 - [项目结构](./PROJECT_STRUCTURE.md)

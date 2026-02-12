@@ -261,6 +261,7 @@
     "fastrace",
     "fastrand",
     "deque",
+    "btreemap",
     "memmap",
     "libpnet",
     "pnet",

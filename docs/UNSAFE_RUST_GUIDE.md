@@ -37,7 +37,7 @@
 
 ## 本项目 unsafe 相关资源
 
-- **C01**: [高级所有权模式](../crates/c01_ownership_borrow_scope/docs/tier3_advanced/)
+- **C01**: [高级所有权模式](../crates/c01_ownership_borrow_scope/docs/tier_03_references/06_高级所有权模式参考.md)
 - **C05**: 同步原语、原子操作
 - **forms**: [research_notes/formal_methods/](../research_notes/formal_methods/) - 借用检查器证明、生命周期形式化
 

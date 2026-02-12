@@ -96,9 +96,9 @@ codegen-units = 1
 opt-level = 2
 
 # 工作区级别的依赖版本统一 - 2026年2月11日最新稳定版本
-# 更新时间: 2026-02-11 (cargo update 更新60个包，兼容 Rust 1.92/1.93)
+# 更新时间: 2026-02-11 (cargo update 锁定 8 包至 Rust 1.92 兼容版本，累计兼容 1.92/1.93)
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
-# rust-version: 1.92.0 -> 1.93.0
+# rust-version: 1.93.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 2025年12月11日最新稳定版本
@@ -1165,4 +1165,23 @@ nix = "0.30.1"
 # - rcgen, rustls-webpki, thiserror, time, uuid, quote 已在工作区依赖中更新
 # - 其他为传递依赖，由 Cargo 自动管理
 # - 所有更新已通过 cargo check 验证兼容性
+# ============================================================
+#
+# 依赖更新日志 - 2026年2月11日 cargo update（Rust 1.92 兼容版本）
+# ============================================================
+# Locking 8 packages to latest Rust 1.92 compatible versions
+# 更新时间: 2026-02-11
+#
+# 本次更新的包（传递依赖，由 Cargo.lock 锁定）：
+# - aws-lc-sys: 0.37.0 -> 0.37.1
+# - clap: 4.5.57 -> 4.5.58
+# - clap_builder: 4.5.57 -> 4.5.58
+# - clap_complete: 4.5.65 -> 4.5.66
+# - clap_lex: 0.7.7 -> 1.0.0
+# - deranged: 0.5.5 -> 0.5.6
+# - env_filter: 0.1.4 -> 1.0.0
+# - env_logger: 0.11.8 -> 0.11.9
+#
+# 说明：以上为传递依赖，无需在 [workspace.dependencies] 中显式配置；
+# 使用 `cargo update --verbose` 可查看未变更的依赖。
 # ============================================================

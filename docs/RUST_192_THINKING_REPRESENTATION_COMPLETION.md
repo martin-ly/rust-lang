@@ -190,8 +190,8 @@ cargo test --workspace --lib
 ## 🔗 相关文档
 
 - `docs/THINKING_REPRESENTATION_METHODS.md` - 思维表征方式文档
-- `crates/DECISION_GRAPH_NETWORK.md` - 决策图网
-- `crates/PROOF_GRAPH_NETWORK.md` - 证明图网
+- [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) - 决策图网
+- [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网
 - `RUST_192_UPDATE_SUMMARY.md` - Rust 1.92.0 更新总结
 - `RUST_192_VERIFICATION_REPORT.md` - 验证报告
 

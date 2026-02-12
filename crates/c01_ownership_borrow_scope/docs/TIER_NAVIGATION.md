@@ -108,10 +108,10 @@ graph TD
 
 | #   | 文档                                                  | 内容               | 时长    |
 | --- | ----------------------------------------------------- | ------------------ | ------- |
-| 2.1 | [所有权系统](./tier2_core_concepts/2.1_所有权系统.md) | 所有权完整机制     | 4-6小时 |
-| 2.2 | [借用检查器](./tier2_core_concepts/2.2_借用检查器.md) | 借用规则和检查机制 | 4-6小时 |
-| 2.3 | [生命周期](./tier2_core_concepts/2.3_生命周期.md)     | 生命周期系统详解   | 3-5小时 |
-| 2.4 | [作用域规则](./tier2_core_concepts/2.4_作用域规则.md) | 作用域和资源管理   | 2-4小时 |
+| 2.1 | [所有权快速入门](./tier_02_guides/01_所有权快速入门.md) | 所有权完整机制     | 4-6小时 |
+| 2.2 | [借用实践指南](./tier_02_guides/02_借用实践指南.md) | 借用规则和检查机制 | 4-6小时 |
+| 2.3 | [生命周期实践](./tier_02_guides/03_生命周期实践.md)     | 生命周期系统详解   | 3-5小时 |
+| 2.4 | [作用域管理实践](./tier_02_guides/04_作用域管理实践.md) | 作用域和资源管理   | 2-4小时 |
 
 ### 🎯 学习成果2
 
@@ -122,7 +122,7 @@ graph TD
 
 ### 🚀 开始学习2
 
-**[👉 进入 Tier 2](./tier2_core_concepts/README.md)**
+**[👉 进入 Tier 2](./tier_02_guides/README.md)**
 
 ---
 
@@ -136,10 +136,10 @@ graph TD
 
 | #   | 文档                                                         | 内容           | 时长    |
 | --- | ------------------------------------------------------------ | -------------- | ------- |
-| 3.1 | [高级所有权模式](./tier3_advanced/3.1_高级所有权模式.md)     | 复杂所有权设计 | 3-4小时 |
-| 3.2 | [零成本抽象](./tier3_advanced/3.2_零成本抽象.md)             | 性能优化原理   | 2-3小时 |
-| 3.3 | [内存安全最佳实践](./tier3_advanced/3.3_内存安全最佳实践.md) | 内存安全指南   | 2-3小时 |
-| 3.4 | [性能优化](./tier3_advanced/3.4_性能优化.md)                 | 实战优化技巧   | 2-3小时 |
+| 3.1 | [高级所有权模式](./tier_03_references/06_高级所有权模式参考.md)     | 复杂所有权设计 | 3-4小时 |
+| 3.2 | [零成本抽象](./tier_03_references/07_零成本抽象参考.md)             | 性能优化原理   | 2-3小时 |
+| 3.3 | [内存安全最佳实践](./tier_03_references/08_内存安全参考.md) | 内存安全指南   | 2-3小时 |
+| 3.4 | [性能优化](./tier_03_references/09_性能优化参考.md)                 | 实战优化技巧   | 2-3小时 |
 
 ### 🎯 学习成果3
 
@@ -150,7 +150,7 @@ graph TD
 
 ### 🚀 开始学习3
 
-**[👉 进入 Tier 3](./tier3_advanced/README.md)**
+**[👉 进入 Tier 3](./tier_03_references/README.md)**
 
 ---
 
@@ -265,7 +265,7 @@ Week 2+: 根据需要学习 Tier 4
 ### 如何选择起点
 
 1. **我是完全新手**: 从 [Tier 1](./tier1_foundation/README.md) 开始
-2. **我学过一些 Rust**: 浏览 Tier 1，从 [Tier 2](./tier2_core_concepts/README.md) 深入学习
+2. **我学过一些 Rust**: 浏览 Tier 1，从 [Tier 2](./tier_02_guides/README.md) 深入学习
 3. **我想解决具体问题**: 查看 [FAQ](./FAQ.md) 或 [术语表](./Glossary.md)
 4. **我对理论感兴趣**: 直接跳到 [Tier 4](./tier4_theoretical/README.md)
 
@@ -299,8 +299,8 @@ Week 2+: 根据需要学习 Tier 4
 准备好了吗？选择适合你的起点开始学习：
 
 - 🟢 **新手**: [Tier 1: 基础文档层](./tier1_foundation/README.md)
-- 🟡 **中级**: [Tier 2: 核心概念层](./tier2_core_concepts/README.md)
-- 🔴 **高级**: [Tier 3: 高级应用层](./tier3_advanced/README.md)
+- 🟡 **中级**: [Tier 2: 核心概念层](./tier_02_guides/README.md)
+- 🔴 **高级**: [Tier 3: 高级应用层](./tier_03_references/README.md)
 - 🔬 **专家**: [Tier 4: 理论深化层](./tier4_theoretical/README.md)
 
 ---

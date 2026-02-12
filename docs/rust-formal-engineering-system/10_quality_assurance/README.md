@@ -1,0 +1,8 @@
+# 质量保障
+
+> 内容已整合至：
+
+- [TESTING_COVERAGE_GUIDE.md](../TESTING_COVERAGE_GUIDE.md)
+- [PERFORMANCE_TESTING_REPORT.md](../PERFORMANCE_TESTING_REPORT.md)
+
+[返回主索引](../00_master_index.md)

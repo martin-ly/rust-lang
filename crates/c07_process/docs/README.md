@@ -5,7 +5,7 @@
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [FAQ](./FAQ.md) | [Glossary](./Glossary.md)
 
 **最后更新**: 2025-12-25
-**适用版本**: Rust 1.92.0+ (Edition 2024)
+**适用版本**: Rust 1.93.0+ (Edition 2024)
 **难度等级**: ⭐⭐⭐⭐ 中高级
 **文档类型**: 📖 入门指南
 
@@ -108,7 +108,7 @@ c07_process/docs/
 ├── 🎓 核心概念系列 (01-10)
 │   ├── 01_process_model_and_lifecycle.md     - 进程模型和生命周期
 │   ├── 02_ipc_mechanisms.md                  - IPC通信机制
-│   ├── 03_rust_192_features.md               - Rust 1.92.0特性
+│   ├── 03_rust_192_features.md               - Rust 1.93.0特性
 │   ├── 04_advanced_process_management.md     - 高级进程管理
 │   ├── 05_async_process_management.md        - 异步进程管理
 │   ├── 06_cross_platform_process_management.md - 跨平台管理

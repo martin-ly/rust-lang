@@ -10,6 +10,9 @@
 | **Rust Reference** | [std::process](https://doc.rust-lang.org/std/process/), [std::os](https://doc.rust-lang.org/std/os/) | 进程、OS API |
 | **Command Line Book** | [CLI Book](https://rust-cli.github.io/book/) | CLI 工具开发 |
 
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**思维表征**: [决策图网](../../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/THINKING_REPRESENTATION_METHODS.md)
+
 ## 📊 目录
 
 - [C07 进程管理 - 主索引](#c07-进程管理---主索引)
@@ -354,6 +357,8 @@
 - [x] 更新主索引和概览文档 ✅
 
 ### 待完善工作
+
+详见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)。
 
 - [ ] 补充更多代码示例
 - [ ] 完善跨平台差异案例

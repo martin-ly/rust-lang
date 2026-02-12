@@ -1,5 +1,7 @@
 # C12 WASM - Rust 1.92.0 全面更新报告
 
+> **Rust 1.93 对应文档**: [RUST_193_WASM_IMPROVEMENTS.md](docs/RUST_193_WASM_IMPROVEMENTS.md) | [05_rust_193_特性参考](docs/tier_03_references/05_rust_193_特性参考.md)
+
 **更新日期**: 2025-12-11
 **Rust 版本**: 1.92.0（历史记录，当前版本为 1.93.0+）
 **更新状态**: ✅ **全面完成**
@@ -237,7 +239,7 @@
 
 ### 核心文档
 
-```
+```text
 docs/
 ├── RUST_192_WASM_IMPROVEMENTS.md          # 改进文档
 ├── RUST_192_QUICK_REFERENCE.md            # 快速参考
@@ -252,14 +254,14 @@ docs/
 
 ### 参考文档
 
-```
+```text
 docs/tier_03_references/
 └── 04_rust_192_特性参考.md                 # 特性参考
 ```
 
 ### 示例代码
 
-```
+```text
 examples/
 ├── rust_192_features_demo.rs              # 基础演示
 └── 12_rust_192_comprehensive_demo.rs      # 综合应用

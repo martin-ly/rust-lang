@@ -24,15 +24,12 @@
       - [📖 指南分类](#-指南分类)
     - [项目报告 (archive/)](#项目报告-archive)
       - [📊 报告位置](#-报告位置)
-    - [docs/ - 深度文档](#docs---深度文档)
+    - [docs/ - 跨模块文档与指南](#docs---跨模块文档与指南)
       - [📚 文档分类](#-文档分类)
-    - [automation/ - 自动化配置](#automation---自动化配置)
-    - [deployment/ - 部署配置](#deployment---部署配置)
     - [scripts/ - 脚本工具](#scripts---脚本工具)
-    - [tools/ - 开发工具](#tools---开发工具)
-    - [examples/ - 示例项目](#examples---示例项目)
-    - [templates/ - 项目模板](#templates---项目模板)
+    - [examples/ - 根级综合示例](#examples---根级综合示例)
     - [tests/ - 集成测试](#tests---集成测试)
+    - [exercises/ - 练习入口](#exercises---练习入口)
   - [导航指南](#导航指南)
     - [🎯 我想](#-我想)
       - [学习Rust](#学习rust)
@@ -111,44 +108,31 @@ rust-lang/
 │   ├── docs/archive/reports/        # 归档报告
 │   └── docs/archive/root_completion_reports/  # 根完成报告
 │
-├── 📖 docs/                         # 深度文档
-│   ├── formal_rust/                 # 形式化Rust (3500+ 文件)
-│   ├── language/                    # 语言特性详解 (400+ 文件)
-│   └── ref/                         # 参考文档 (860+ 文件)
-│
-├── 🤖 automation/                   # 自动化配置
-│   ├── CI_CD_AUTOMATION_CONFIG.md
-│   ├── MONITORING_AUTOMATION_CONFIG.md
-│   └── PROJECT_AUTOMATION_GUIDE.md
-│
-├── 🚀 deployment/                   # 部署配置
-│   ├── DEPLOYMENT_AUTOMATION_CONFIGURATION.md
-│   └── RUST_DEPLOYMENT_GUIDE.md
+├── 📖 docs/                         # 跨模块文档与指南
+│   ├── quick_reference/             # 速查卡 (21 个)
+│   ├── toolchain/                   # 工具链与版本说明
+│   ├── rust-formal-engineering-system/  # 形式化工程索引
+│   ├── research_notes/              # 研究笔记
+│   ├── archive/                     # 归档报告
+│   └── [使用指南、思维导图等 .md]
 │
 ├── 🔧 scripts/                      # 脚本工具
 │   ├── *.ps1                        # PowerShell脚本
 │   ├── *.sh                         # Bash脚本
+│   ├── check_links.ps1              # 文档链接检查
 │   └── README.md
 │
-├── 🛠️ tools/                        # 开发工具
-│   ├── doc_search/                  # 文档搜索工具
-│   └── [其他工具...]
-│
-├── 💡 examples/                     # 示例项目
-│   ├── ai_assisted/                 # AI辅助开发示例
-│   └── compiler_internals/          # 编译器内部示例
-│
-├── 📝 templates/                    # 项目模板
-│   ├── basic_library/
-│   ├── cli_app/
-│   └── web_app/
+├── 💡 examples/                     # 根级综合示例（非 workspace 成员）
+│   ├── advanced_usage_examples.rs
+│   ├── comprehensive_integration_example.rs
+│   ├── module_complete_examples.rs
+│   └── real_world_applications.rs
 │
 ├── 🧪 tests/                        # 集成测试
 │   └── [测试文件...]
 │
-└── 🎯 exercises/                    # 练习题
-    ├── c01_ownership/
-    └── c06_async/
+└── 🎯 exercises/                    # 练习入口（仅 README，指向外部工具）
+    └── README.md
 ```
 
 ---
@@ -169,7 +153,7 @@ rust-lang/
 | `QUICK_REFERENCE.md`    | 快速参考       | 查找语法速查 ⭐ |
 | `RESOURCES.md`          | 学习资源       | 寻找学习材料    |
 | `ROADMAP.md`            | 项目路线图     | 了解项目规划    |
-| `TROUBLESHOOTING.md`     | 故障排查       | 遇到问题时 ⭐   |
+| `TROUBLESHOOTING.md`    | 故障排查       | 遇到问题时 ⭐   |
 | `PROJECT_STRUCTURE.md`  | 项目结构       | 了解目录组织    |
 
 #### 📦 配置文件
@@ -187,7 +171,7 @@ rust-lang/
 
 ### crates/ - 学习模块
 
-**核心学习内容**，13个独立模块，从基础到高级全面覆盖Rust。
+**核心学习内容**，12 个独立模块，从基础到高级全面覆盖 Rust。
 
 #### 📚 模块列表
 
@@ -259,52 +243,27 @@ c##_module_name/
 
 #### 📊 报告位置
 
-| 类型         | 路径 |
+| 类型 | 路径 |
 | ------------ | ---- |
 | 阶段/模块报告 | [archive/reports/](./archive/reports/) |
-| 归档报告     | [docs/archive/reports/](./docs/archive/reports/) |
-| 根完成报告   | [docs/archive/root_completion_reports/](./docs/archive/root_completion_reports/) |
+| 归档报告 | [docs/archive/reports/](./docs/archive/reports/) |
+| 根完成报告 | [docs/archive/root_completion_reports/](./docs/archive/root_completion_reports/) |
 | 计划实施完成 | [docs/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md](./docs/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md) |
 
 ---
 
-### docs/ - 深度文档
+### docs/ - 跨模块文档与指南
 
-**深度理论文档和参考资料**，包含5000+个文档文件。
+**跨模块通用文档、速查卡、工具链说明和研究笔记**。各模块深度内容以 `crates/*/docs/` 为准。
 
 #### 📚 文档分类
 
-- **formal_rust/** - 形式化Rust理论（3500+ 文件）
-  - 类型理论
-  - 形式化验证
-  - 安全证明
-
-- **language/** - 语言特性详解（400+ 文件）
-  - 详细的语言机制
-  - 底层实现原理
-
-- **ref/** - 参考文档（860+ 文件）
-  - 标准库文档
-  - RFC文档
-
----
-
-### automation/ - 自动化配置
-
-**CI/CD和自动化工具配置**。
-
-- `CI_CD_AUTOMATION_CONFIG.md` - CI/CD自动化配置
-- `MONITORING_AUTOMATION_CONFIG.md` - 监控自动化配置
-- `PROJECT_AUTOMATION_GUIDE.md` - 项目自动化指南
-
----
-
-### deployment/ - 部署配置
-
-**生产环境部署配置和指南**。
-
-- `DEPLOYMENT_AUTOMATION_CONFIGURATION.md` - 部署自动化配置
-- `RUST_DEPLOYMENT_GUIDE.md` - Rust部署指南
+- **quick_reference/** - 21 个速查卡
+- **toolchain/** - 编译器、Cargo、Rust 版本演进说明
+- **rust-formal-engineering-system/** - 形式化工程系统索引（内容整合至 research_notes）
+- **research_notes/** - 研究笔记、实验、形式化方法
+- **archive/** - 归档报告
+- **根目录 .md** - 使用指南（WASM、线程并发、宏系统等）、思维导图、知识结构
 
 ---
 
@@ -316,43 +275,38 @@ c##_module_name/
 scripts/
 ├── *.ps1               # PowerShell脚本
 ├── *.sh                # Bash脚本
+├── check_links.ps1     # 文档链接检查（含旧路径扫描）
 └── README.md           # 脚本说明
 ```
 
 ---
 
-### tools/ - 开发工具
+### examples/ - 根级综合示例
 
-**辅助开发的工具集**。
+**跨模块综合示例**，展示多模块协同用法。这些 `.rs` 文件非 Cargo workspace 成员，可复制到 [Rust Playground](https://play.rust-lang.org/) 运行，或作为参考代码学习。
 
-- `doc_search/` - 文档搜索工具
-  - 全文搜索引擎
-  - 快速定位文档
+- `advanced_usage_examples.rs` - 高级用法
+- `comprehensive_integration_example.rs` - 综合集成
+- `module_complete_examples.rs` - 模块完整示例
+- `real_world_applications.rs` - 实际应用场景
 
----
-
-### examples/ - 示例项目
-
-**完整的示例项目**，展示实际应用。
-
-- `ai_assisted/` - AI辅助开发示例
-- `compiler_internals/` - 编译器内部示例
-
----
-
-### templates/ - 项目模板
-
-**快速启动项目的模板**。
-
-- `basic_library/` - 基础库模板
-- `cli_app/` - CLI应用模板
-- `web_app/` - Web应用模板
+**注**：各模块的 `crates/*/examples/` 为可运行示例，使用 `cargo run -p <crate> --example <name>` 运行。
 
 ---
 
 ### tests/ - 集成测试
 
 **工作空间级别的集成测试**。
+
+---
+
+### exercises/ - 练习入口
+
+**交互式练习导航**。本项目无内置练习题，[exercises/README.md](./exercises/README.md) 提供外部工具入口：
+
+- **Rustlings** - 官方命令行交互式学习
+- **Rust Playground** - 在线运行代码
+- **各模块 examples** - 可运行 `cargo run -p <crate> --example <name>` 实践
 
 ---
 

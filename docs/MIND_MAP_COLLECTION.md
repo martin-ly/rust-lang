@@ -657,8 +657,8 @@ Rust 知识体系
 
 - [知识结构框架](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 完整知识结构体系
 - [多维概念矩阵](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 概念对比矩阵
-- [决策图网](../crates/DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
-- [证明图网](../crates/PROOF_GRAPH_NETWORK.md) - 形式化证明结构
+- [决策图网](./DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
+- [证明图网](./PROOF_GRAPH_NETWORK.md) - 形式化证明结构
 
 ---
 

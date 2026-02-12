@@ -19,25 +19,25 @@
 
 **Tier 3 高级实践指南 (4 份深度文档)**:
 
-- **3.1 高级所有权模式** (`docs/tier3_advanced/3.1_高级所有权模式.md`) - 1,676 行
+- **3.1 高级所有权模式** (`docs/tier_03_references/06_高级所有权模式参考.md`) - 1,676 行
   - 内部可变性模式完整指南 (RefCell, Cell, Mutex, RwLock)
   - 智能指针高级用法 (Box, Rc, Arc, Weak)
   - 复杂所有权设计模式 (自引用、树、图、观察者)
   - 实战案例 (Web 服务器、连接池、缓存、插件系统)
 
-- **3.2 零成本抽象** (`docs/tier3_advanced/3.2_零成本抽象.md`) - 1,145 行
+- **3.2 零成本抽象** (`docs/tier_03_references/07_零成本抽象参考.md`) - 1,145 行
   - 编译器优化机制深度剖析
   - 单态化、内联、死代码消除详解
   - Trait 对象 vs 泛型性能对比
   - 与 C++ 零开销抽象的对比分析
 
-- **3.3 内存安全最佳实践** (`docs/tier3_advanced/3.3_内存安全最佳实践.md`) - 1,282 行
+- **3.3 内存安全最佳实践** (`docs/tier_03_references/08_内存安全参考.md`) - 1,282 行
   - Unsafe Rust 使用指南和审计清单
   - FFI 安全性和跨语言互操作
   - 并发安全模式和内存泄漏预防
   - Miri/Clippy/静态分析工具详解
 
-- **3.4 性能优化** (`docs/tier3_advanced/3.4_性能优化.md`) - 1,161 行
+- **3.4 性能优化** (`docs/tier_03_references/09_性能优化参考.md`) - 1,161 行
   - 性能分析工具链 (perf, Valgrind, Criterion)
   - 内存布局和缓存局部性优化
   - LTO/PGO 编译器优化实战
@@ -130,14 +130,14 @@
 
 **Tier 2 核心概念层** (导航文档)
 
-- **2.1 所有权系统** (`docs/tier2_core_concepts/2.1_所有权系统.md`)
-- **2.2 借用检查器** (`docs/tier2_core_concepts/2.2_借用检查器.md`)
-- **2.3 生命周期** (`docs/tier2_core_concepts/2.3_生命周期.md`)
-- **2.4 作用域规则** (`docs/tier2_core_concepts/2.4_作用域规则.md`)
+- **2.1 所有权系统** (`docs/tier_02_guides/01_所有权快速入门.md`)
+- **2.2 借用检查器** (`docs/tier_02_guides/02_借用实践指南.md`)
+- **2.3 生命周期** (`docs/tier_02_guides/03_生命周期实践.md`)
+- **2.4 作用域规则** (`docs/tier_02_guides/04_作用域管理实践.md`)
 
 **Tier 3 高级应用层** (导航框架，Phase 4 中扩展)
 
-- 创建 `docs/tier3_advanced/` 目录
+- 创建 `docs/tier_03_references/` 目录（原 tier3_advanced 已重构）
 - 4 份导航文档框架
 
 **Tier 4 理论深化层** (导航框架，Phase 4 中扩展)

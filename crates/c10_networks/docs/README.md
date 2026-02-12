@@ -1,8 +1,11 @@
 # C10 Networks 文档中心
 
-> 适用范围：Rust 1.92.0+，Tokio 1.35+。文档风格遵循 [`STYLE.md`](STYLE.md)。
+> 适用范围：Rust 1.93.0+，Tokio 1.35+。文档风格遵循 [`STYLE.md`](STYLE.md)。
 
-[![Rust](https://img.shields.io/badge/rust-1.92.0+-orange.svg)](https://www.rust-lang.org/)
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**思维表征**: [决策图网](../../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/THINKING_REPRESENTATION_METHODS.md)
+
+[![Rust](https://img.shields.io/badge/rust-1.93.0+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
 [![Crates.io](https://img.shields.io/crates/v/c10_networks.svg)](https://crates.io/crates/c10_networks)
 

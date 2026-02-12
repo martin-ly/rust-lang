@@ -2,7 +2,10 @@
 
 ## 📚 文档总览
 
-本模块提供了 Rust 设计模式的完整文档体系，涵盖从基础概念到高级应用的所有内容，特别关注 Rust 1.92.0 版本的最新特性。
+本模块提供了 Rust 设计模式的完整文档体系，涵盖从基础概念到高级应用的所有内容，特别关注 Rust 1.93.0 版本的最新特性。
+
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**思维表征**: [决策图网](../../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/THINKING_REPRESENTATION_METHODS.md)
 
 ## 🎯 快速导航
 
@@ -11,7 +14,7 @@
 - [📖 概述与导航](./OVERVIEW.md) - 文档结构和阅读路径
 - [📚 顶层说明](../README.md) - 项目概述和快速开始
 - [📋 章节导引](../09_design_patterns.md) - 设计模式章节导引
-- [🚀 Rust 1.92.0 分析](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) - 版本对齐分析
+- [🚀 Rust 1.93.0 分析](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) - 版本对齐分析
 
 ### Tier 1 基础层 ⭐ NEW
 
@@ -369,4 +372,4 @@ cargo bench
 
 _最后更新：2025-12-25_
 _文档版本：v1.1_
-_Rust 版本：1.92.0+ (Edition 2024)_
+_Rust 版本：1.93.0+ (Edition 2024)_

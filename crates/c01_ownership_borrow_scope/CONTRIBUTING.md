@@ -190,7 +190,7 @@ cargo test --all
 
 ```bash
 # 编辑文档
-vim docs/tier3_advanced/3.1_高级所有权模式.md
+vim docs/tier_03_references/06_高级所有权模式参考.md
 
 # 检查格式
 # (确保使用一致的 Markdown 格式)
@@ -312,8 +312,8 @@ Closes #issue-number
 ```text
 docs/
 ├── tier1_foundation/      # 基础入门 (Tier 1)
-├── tier2_core_concepts/   # 核心概念 (Tier 2)
-├── tier3_advanced/        # 高级实践 (Tier 3)
+├── tier_02_guides/        # 核心概念 (Tier 2)
+├── tier_03_references/    # 高级实践 (Tier 3)
 └── tier4_theoretical/     # 理论深度 (Tier 4)
 ```
 

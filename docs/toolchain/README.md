@@ -160,6 +160,38 @@
 
 **文档**: [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md)
 
+#### 6. [Rust 1.93 兼容性注意事项](./06_rust_1.93_compatibility_notes.md) 🆕
+
+**涵盖内容**:
+
+- ✅ **破坏性变更**: deref_nullptr deny 升级、#[test] 无效位置报错、offset_of! 类型检查、rustdoc 文档属性校验
+- ✅ **未来不兼容警告**: ... 可变参数、repr(C) enum discriminant、repr(transparent)
+- ✅ **平台变更**: Emscripten unwinding ABI、musl 1.2.5
+- ✅ **Cargo 变更**: CARGO_CFG_DEBUG_ASSERTIONS、cargo publish、static-init 兼容性
+
+**适用场景**:
+
+- 升级到 Rust 1.93 前的兼容性检查
+- 迁移问题排查
+
+#### 7. [Rust 1.93 兼容性深度解析](./09_rust_1.93_compatibility_deep_dive.md) 🆕
+
+**涵盖内容**:
+
+- ✅ **pin_v2** 内置属性
+- ✅ **Emscripten unwinding ABI** 变更
+- ✅ **#[test]** 属性严格化
+- ✅ **offset_of!** 类型检查
+- ✅ **deref_nullptr** deny-by-default
+- ✅ **... 可变参数** future-incompat
+- ✅ **repr(C) enum** 判别值警告
+- ✅ **repr(transparent)** 忽略 repr(C) 警告
+
+**适用场景**:
+
+- 深入理解 1.93 兼容性变更
+- 迁移问题根因分析
+
 ---
 
 ### Rust 1.91 主要改进
@@ -294,6 +326,12 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rustdoc 高级](./03_rustdoc_advanced.md)
 - [Rust 1.91 vs 1.90 对比分析（对齐官方发布说明）](./04_rust_1.91_vs_1.90_comparison.md)
 - [Rust 1.93 vs 1.92 对比分析](./05_rust_1.93_vs_1.92_comparison.md) 🆕
+- [Rust 1.93 兼容性注意事项](./06_rust_1.93_compatibility_notes.md) 🆕
+- [Rust 1.93 完整变更清单](./07_rust_1.93_full_changelog.md) 🆕
+- [Rust 版本演进链 1.89–1.93](./08_rust_version_evolution_1.89_to_1.93.md) 🆕
+- [Rust 1.93 兼容性深度解析](./09_rust_1.93_compatibility_deep_dive.md) 🆕
+- [Rust 1.89→1.93 累积特性总览](./10_rust_1.89_to_1.93_cumulative_features_overview.md) 🆕
+- [Rust 1.93 Cargo 与 Rustdoc 变更详解](./11_rust_1.93_cargo_rustdoc_changes.md) 🆕
 
 ### 官方资源
 

@@ -10,6 +10,9 @@
 | **Rust By Example** | [Generics](https://doc.rust-lang.org/rust-by-example/generics.html) | 泛型语法 |
 | **Rust Reference** | [Trait and lifetime bounds](https://doc.rust-lang.org/reference/trait-bounds.html) | 泛型约束规范 |
 
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**思维表征**: [决策图网](../../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/THINKING_REPRESENTATION_METHODS.md)
+
 ## 📚 文档导航总览
 
 本索引提供 `c04_generic` 模块所有文档的快速访问入口，帮助您快速找到所需的学习资源和参考文档。

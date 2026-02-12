@@ -1,9 +1,10 @@
 # 多维概念矩阵对比文档
 
 **创建日期**: 2025-12-11
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-12
 **Rust 版本**: 1.93.0+
 **Edition**: 2024
+**最后对照 releases.rs**: 2026-02-12
 
 ---
 
@@ -249,6 +250,18 @@
 
 ---
 
+## ⚠️ Rust 1.93 行为变更影响（性能矩阵补充）
+
+**Copy specialization 移除**：Rust 1.93 中 `Copy` trait 的实现不再依赖编译器内部 specialization，可能导致部分 `Vec<T>`、迭代器复制等热点路径的轻微性能回归。建议在性能关键路径上使用 `criterion` 做 A/B 对比；若发现回归，可尝试显式 `clone()` 或调整数据布局。
+
+| 变更               | 影响类型 | 性能影响     | 应对建议                     |
+| ------------------ | -------- | ------------ | ---------------------------- |
+| **Copy specialization 移除** | 标准库   | 可能轻微回归 | 关注 Vec/迭代器复制热点，必要时显式 clone |
+| **BTreeMap::append** | 行为     | 无           | 相同 key 时保留目标值，注意迁移逻辑 |
+| **vec::IntoIter RefUnwindSafe** | 约束放宽 | 无           | 更多类型可跨 panic 边界使用   |
+
+---
+
 ## 🛡️ 安全性对比矩阵
 
 | 机制           | 内存安全   | 类型安全   | 线程安全   | 适用场景 | 推荐度     |
@@ -264,8 +277,8 @@
 ## 📚 相关文档
 
 - [知识结构框架](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 完整知识结构体系
-- [决策图网](../crates/DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
-- [证明图网](../crates/PROOF_GRAPH_NETWORK.md) - 形式化证明结构
+- [决策图网](./DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
+- [证明图网](./PROOF_GRAPH_NETWORK.md) - 形式化证明结构
 - [最佳实践指南](./BEST_PRACTICES_GUIDE.md) - 开发最佳实践
 
 ---

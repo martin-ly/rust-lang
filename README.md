@@ -502,6 +502,8 @@ cargo run --package c01_ownership_borrow_scope --example ownership_demo
 ./scripts/run_examples.sh
 ```
 
+**说明**：根目录 `examples/` 为跨模块综合示例（非 workspace 成员），可复制到 [Rust Playground](https://play.rust-lang.org/) 运行；各模块的 `crates/*/examples/` 为可运行示例。
+
 ### 运行测试
 
 ```bash

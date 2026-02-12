@@ -8,6 +8,9 @@
 | **Rust std** | [std::collections](https://doc.rust-lang.org/std/collections/), [std::iter](https://doc.rust-lang.org/std/iter/) | 标准库数据结构 |
 | **Algorithm courses** | MIT 6.006, CLRS | 算法复杂度理论 |
 
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**思维表征**: [决策图网](../../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/THINKING_REPRESENTATION_METHODS.md)
+
 ## 🗂️ 文档目录结构
 
 ```text

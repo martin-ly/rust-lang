@@ -40,6 +40,24 @@
     - [形式化方法研究](#形式化方法研究)
     - [类型理论研究](#类型理论研究)
     - [工具资源](#工具资源)
+    - [思维表征文档中的证明树](#思维表征文档中的证明树)
+
+---
+
+## 🔢 公理编号规范 (Axiom Numbering Convention)
+
+**用途**: 统一证明树、证明图网中的形式化引用，便于交叉引用与追溯。
+
+| 前缀 | 含义 | 示例 |
+|------|------|------|
+| **A** | Axiom（公理） | A1: 未初始化内存不具合法值 |
+| **L** | Lemma（引理） | L1: 读取未初始化内存是 UB |
+| **T** | Theorem（定理） | T1: assume_init_drop 正确调用 drop |
+| **C** | Corollary（推论） | C1: MaybeUninit 1.93 API 安全性 |
+
+**引用格式**: 在证明树中可写 `A1 → L1 → T1 → C1` 表示公理→引理→定理→推论链。
+
+**对应文档**: [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) 第 4 节证明树、[PROOF_GRAPH_NETWORK](../PROOF_GRAPH_NETWORK.md)。
 
 ---
 
@@ -376,6 +394,21 @@
 - [Coq](https://coq.inria.fr/): 类型理论证明助手
 - [Agda](https://agda.readthedocs.io/): 依赖类型编程语言
 - [Iris](https://iris-project.org/): 分离逻辑框架
+
+### 思维表征文档中的证明树
+
+以下证明树与本文档中的形式化证明对应，提供可视化证明结构：
+
+| 证明树（THINKING_REPRESENTATION_METHODS） | 对应 research_notes 文档 |
+|-------------------------------------------|--------------------------|
+| MaybeUninit 安全性证明树                   | 本文档（Rust 1.93 API） |
+| Never 类型 Lint 严格化证明树              | 类型系统、借检相关      |
+| 联合体原始引用安全性证明树                | 类型系统                |
+| 借用检查器安全性证明树                    | [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
+| 生命周期安全性证明树                      | [lifetime_formalization.md](./formal_methods/lifetime_formalization.md) |
+| Send/Sync 安全性证明树                    | [async_state_machine.md](./formal_methods/async_state_machine.md) |
+
+**相关文档**: [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) - 思维导图、决策树、转换树、证明树
 
 ---
 

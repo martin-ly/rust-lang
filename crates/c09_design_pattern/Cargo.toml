@@ -3,7 +3,7 @@ name = "c09_design_pattern"
 version = "1.0.1"
 edition = "2024"
 resolver = "3"
-rust-version = "1.92"
+rust-version = "1.93"
 
 [dependencies]
 async-trait = { workspace = true }

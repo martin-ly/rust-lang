@@ -3,7 +3,7 @@ name = "c08_algorithms"
 version = "0.2.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.92"
+rust-version = "1.93"
 
 # 算法库CPU指令集优化配置在根Cargo.toml中统一管理
 
@@ -73,5 +73,9 @@ path = "benches/simple_benchmarks.rs"
 [[example]]
 name = "algorithm_comprehensive_demo"
 path = "examples/algorithm_comprehensive_demo.rs"
+
+[[example]]
+name = "rust_193_features_demo"
+path = "examples/rust_193_features_demo.rs"
 
 #[profile] moved to workspace root

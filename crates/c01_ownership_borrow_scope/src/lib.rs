@@ -304,6 +304,33 @@
 //!     Ok(())
 //! }
 //! ```
+//!
+//! ## 反例与 compile_fail 验证 / Anti-patterns and compile_fail Sanity
+//!
+//! 以下反例应编译失败，用于验证所有权规则：
+//!
+//! ```rust,compile_fail
+//! // 反例：移动后使用——应编译失败
+//! let s = String::from("hello");
+//! let s2 = s;
+//! println!("{}", s);  // 错误：s 已失效
+//! ```
+//!
+//! ```rust,compile_fail
+//! // 反例：可变借用与不可变借用冲突——应编译失败
+//! let mut v = vec![1, 2, 3];
+//! let r1 = &v;
+//! let r2 = &mut v;  // 错误：已有不可变借用
+//! let _ = (r1, r2);  // 必须使用 r1，才能保证冲突
+//! ```
+//!
+//! ```rust,compile_fail
+//! // 反例：返回悬垂引用——应编译失败
+//! fn dangle() -> &String {
+//!     let s = String::from("hello");
+//!     &s  // 错误：s 即将被 drop
+//! }
+//! ```
 
 // 核心类型定义 / Core Type Definitions
 pub mod basic_syntax;

@@ -116,7 +116,7 @@ dev = ["cargo-tarpaulin", "cargo-audit", "cargo-outdated"]
 # 最小Rust版本
 min-rust-version = "1.70"
 # 目标Rust版本
-target-rust-version = "1.92"
+target-rust-version = "1.93"
 # 工作区类型
 workspace-type = "library"
 # 工作区语言

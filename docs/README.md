@@ -160,9 +160,18 @@ docs/
 **入口**:
 
 - [Unsafe Rust 专题](./UNSAFE_RUST_GUIDE.md) - Rustonomicon 导航与安全抽象原则
-- [思维表征方式](./THINKING_REPRESENTATION_METHODS.md) - 思维导图、决策树、证明树
+- [思维表征方式](./THINKING_REPRESENTATION_METHODS.md) - 思维导图、决策树、转换树、证明树
 - [多维概念矩阵](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 技术选型、错误处理、测试矩阵
+- [应用分析视图](./APPLICATIONS_ANALYSIS_VIEW.md) - 应用场景→技术选型→论证依据
+- [边界条件与特例](./EDGE_CASES_AND_SPECIAL_CASES.md) - 空集、零长度、溢出等特例
+- [官方资源映射](./OFFICIAL_RESOURCES_MAPPING.md) - 本项目 ↔ The Rust Book / Reference / RBE
+- [跨语言对比](./CROSS_LANGUAGE_COMPARISON.md) - Rust vs C++/Go/Python
+- [Rust 发布追踪 Checklist](./RUST_RELEASE_TRACKING_CHECKLIST.md) - 新版本发布后的更新流程
+- [各模块 1.93 适配状态一览表](./MODULE_1.93_ADAPTATION_STATUS.md) - C01–C12 模块 1.93 适配状态
 - [形式化验证工具](./research_notes/TOOLS_GUIDE.md) - Prusti、Kani、Creusot 实战
+- [项目批判性评估报告](./PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md) - 全面评估、差距与改进计划 ⭐
+- [改进完成总结](./IMPROVEMENT_COMPLETION_SUMMARY_2026_02.md) - P0/P1 100% 完成 (2026-02-12)
+- [文档主题梳理与重组规划](./DOCUMENTATION_THEME_ORGANIZATION_PLAN.md) - 文档结构规划、主题分类、执行策略 ⭐
 
 ---
 

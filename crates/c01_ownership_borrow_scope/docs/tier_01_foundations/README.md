@@ -85,7 +85,7 @@ graph LR
 ## 📚 相关资源
 
 - **上层导航**: [主索引](../00_MASTER_INDEX.md)
-- **下一层级**: [Tier 2: 核心概念层](../tier2_core_concepts/README.md)
+- **下一层级**: [Tier 2: 核心概念层](../tier_02_guides/README.md)
 - **代码示例**: [examples/](../../examples/)
 - **可视化资源**: [可视化文档索引](../VISUALIZATION_INDEX.md)
 
@@ -118,5 +118,5 @@ graph LR
 ---
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+
+**适用版本**: Rust 1.93.0+
 **维护状态**: ✅ 活跃维护

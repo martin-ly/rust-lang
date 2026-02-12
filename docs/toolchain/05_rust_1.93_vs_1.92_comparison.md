@@ -43,7 +43,7 @@
       - [切片到数组转换](#切片到数组转换)
       - [Duration 扩展](#duration-扩展)
       - [char 常量](#char-常量)
-      - [fmt::from_fn](#fmtfrom_fn)
+      - [fmt::from\_fn](#fmtfrom_fn)
   - [编译器改进](#编译器改进)
     - [平台支持](#平台支持)
     - [其他改进](#其他改进)
@@ -760,5 +760,6 @@ unsafe impl GlobalAlloc for MyAllocator {
 ---
 
 **文档维护**: Documentation Team
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-12
+**最后对照 releases.rs**: 2026-02-12
 **下次更新**：Rust 1.94 发布时

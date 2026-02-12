@@ -4,8 +4,11 @@
 > **先修知识**: [C01 所有权](../../c01_ownership_borrow_scope/docs/README.md) | [C05 线程](../../c05_threads/docs/README.md)
 > **相关文档**: [主索引](./00_MASTER_INDEX.md) | [FAQ](./FAQ.md) | [Glossary](./Glossary.md)
 
-**最后更新**: 2025-12-11
-**适用版本**: Rust 1.75+ (推荐 1.92.0+)
+**最后更新**: 2026-02-12
+**适用版本**: Rust 1.75+ (推荐 1.93.0+)
+
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**思维表征**: [决策图网](../../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/THINKING_REPRESENTATION_METHODS.md)
 **难度等级**: ⭐⭐⭐⭐ 中高级
 **文档类型**: 📖 入门指南
 

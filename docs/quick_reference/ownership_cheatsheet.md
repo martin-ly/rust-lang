@@ -33,6 +33,10 @@
   - [📊 性能提示](#-性能提示)
     - [✅ 高效模式](#-高效模式)
     - [⚠️ 低效模式](#️-低效模式)
+  - [🚫 反例速查](#-反例速查)
+    - [反例 1: 移动后使用](#反例-1-移动后使用)
+    - [反例 2: 可变借用与不可变借用冲突](#反例-2-可变借用与不可变借用冲突)
+    - [反例 3: 返回悬垂引用](#反例-3-返回悬垂引用)
   - [🔗 快速跳转](#-快速跳转)
     - [深入学习](#深入学习)
     - [代码示例](#代码示例)
@@ -359,11 +363,84 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
+## 🚫 反例速查
+
+### 反例 1: 移动后使用
+
+**错误示例**:
+
+```rust
+let s = String::from("hello");
+let s2 = s;  // 所有权转移
+println!("{}", s);  // ❌ 编译错误：s 已失效
+```
+
+**原因**: 值移动后原变量不可用。
+
+**修正**:
+
+```rust
+let s = String::from("hello");
+let s2 = s.clone();  // 或借用 &s
+println!("{}", s);
+```
+
+---
+
+### 反例 2: 可变借用与不可变借用冲突
+
+**错误示例**:
+
+```rust
+let mut v = vec![1, 2, 3];
+let r1 = &v;
+let r2 = &mut v;  // ❌ 编译错误：已有不可变借用
+```
+
+**原因**: 同一时刻不能同时存在可变借用和不可变借用。
+
+**修正**:
+
+```rust
+let mut v = vec![1, 2, 3];
+{
+    let r1 = &v;
+    // 使用 r1
+}
+let r2 = &mut v;  // r1 已离开作用域
+```
+
+---
+
+### 反例 3: 返回悬垂引用
+
+**错误示例**:
+
+```rust
+fn dangle() -> &String {
+    let s = String::from("hello");
+    &s  // ❌ 编译错误：s 即将被 drop
+}
+```
+
+**原因**: 引用不能 outlive 所有者。
+
+**修正**:
+
+```rust
+fn no_dangle() -> String {
+    let s = String::from("hello");
+    s  // 转移所有权
+}
+```
+
+---
+
 ## 🔗 快速跳转
 
 ### 深入学习
 
-- [完整所有权教程](../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_所有权实践.md)
+- [完整所有权教程](../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_所有权快速入门.md)
 - [借用检查器详解](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
 - [智能指针 API](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
 

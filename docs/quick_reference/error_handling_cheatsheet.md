@@ -22,6 +22,10 @@
   - [🎯 错误处理库](#-错误处理库)
     - [anyhow - 灵活的错误处理](#anyhow---灵活的错误处理)
     - [thiserror - 自定义错误类型](#thiserror---自定义错误类型)
+  - [🚫 反例速查](#-反例速查)
+    - [反例 1: 生产代码滥用 unwrap](#反例-1-生产代码滥用-unwrap)
+    - [反例 2: 在非 Result 返回类型函数中使用 ?](#反例-2-在非-result-返回类型函数中使用-)
+    - [反例 3: 混淆 Option 与 Result 语义](#反例-3-混淆-option-与-result-语义)
   - [📚 相关文档](#-相关文档)
   - [🧩 相关示例代码](#-相关示例代码)
   - [🔗 相关资源](#-相关资源)
@@ -162,6 +166,81 @@ enum MyError {
     Parse(#[from] serde_json::Error),
     #[error("自定义错误: {message}")]
     Custom { message: String },
+}
+```
+
+---
+
+## 🚫 反例速查
+
+### 反例 1: 生产代码滥用 unwrap
+
+**错误示例**:
+
+```rust
+fn read_config() -> Config {
+    let content = std::fs::read_to_string("config.toml").unwrap();  // ❌ 失败即 panic
+    toml::from_str(&content).unwrap()
+}
+```
+
+**原因**: `unwrap` 在错误时 panic，不适合生产环境。
+
+**修正**:
+
+```rust
+fn read_config() -> Result<Config, Box<dyn std::error::Error>> {
+    let content = std::fs::read_to_string("config.toml")?;
+    Ok(toml::from_str(&content)?)
+}
+```
+
+---
+
+### 反例 2: 在非 Result 返回类型函数中使用 ?
+
+**错误示例**:
+
+```rust
+fn main() {
+    let f = std::fs::File::open("missing.txt")?;  // ❌ main 不返回 Result
+}
+```
+
+**原因**: `?` 只能用于返回 `Result` 或 `Option` 的函数。
+
+**修正**:
+
+```rust
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let _f = std::fs::File::open("missing.txt")?;
+    Ok(())
+}
+```
+
+---
+
+### 反例 3: 混淆 Option 与 Result 语义
+
+**错误示例**:
+
+```rust
+fn find_user(id: u32) -> Result<User, ()> {  // ❌ 用 Result 表示“未找到”
+    if let Some(u) = cache.get(id) {
+        Ok(u.clone())
+    } else {
+        Err(())  // 未找到不是错误，是正常情况
+    }
+}
+```
+
+**原因**: “未找到”应用 `Option`，可恢复错误用 `Result`。
+
+**修正**:
+
+```rust
+fn find_user(id: u32) -> Option<User> {
+    cache.get(id).cloned()
 }
 ```
 

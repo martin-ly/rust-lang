@@ -1,7 +1,7 @@
 # 🦀 C03 控制流与函数 - 文档中心
 
 **版本**：v2.0
-**Rust 版本**：1.92.0+
+**Rust 版本**：1.93.0+
 **文档数量**：35+
 **最后更新**：2025-12-11
 
@@ -15,7 +15,7 @@
 - ✅ **分级学习**：初学者/进阶/专家三条路径
 - ✅ **完善导航**：多维度索引，快速定位
 - ✅ **实战导向**：设计模式、陷阱避免、性能优化
-- ✅ **与时俱进**：完整覆盖 Rust 1.92.0 新特性
+- ✅ **与时俱进**：完整覆盖 Rust 1.93.0 新特性
 
 ## 🚀 快速开始
 
@@ -166,25 +166,25 @@ docs/
 4. **📌 [完整文档索引](./DOCUMENTATION_INDEX.md)**
    所有文档的完整导航和学习建议
 
-### 🆕 Rust 1.92.0 新特性
+### 🆕 Rust 1.93.0 新特性
 
 想了解最新版本的特性？查看这些文档：
 
 **⭐ 完整特性总结（推荐首选）**:
 
-- [Rust 1.92.0 特性总结](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) ⭐ NEW
+- [Rust 1.93.0 特性总结](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) ⭐ NEW
   - 所有新特性一览、性能数据、迁移指南、最佳实践
 
 **快速参考**:
 
-- [Rust 1.92.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 新特性总览 🆕
-- [高级模式匹配（Rust 1.92.0）](tier_04_advanced/01_高级模式匹配.md) - 模式匹配增强
+- [Rust 1.93.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 新特性总览 🆕
+- [高级模式匹配（Rust 1.93.0）](tier_04_advanced/01_高级模式匹配.md) - 模式匹配增强
 - [模式匹配指南](tier_02_guides/04_模式匹配指南.md) - 模式匹配语法
 
 **版本特性目录**:
 
-- [Rust 1.92.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) ⭐ NEW - 最新特性文档
-- [Rust 1.92.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 最新版本特性文档 🆕
+- [Rust 1.93.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) ⭐ NEW - 最新特性文档
+- [Rust 1.93.0 控制流改进](RUST_192_CONTROL_FLOW_IMPROVEMENTS.md) - 最新版本特性文档 🆕
 
 ## 📚 辅助资源
 
@@ -279,7 +279,7 @@ cargo doc --open --package c03_control_fn
 - [ ] 理解并使用 Fn/FnMut/FnOnce 特征
 - [ ] 使用 let-else 和标签块优化代码
 - [ ] 利用迭代器组合处理数据
-- [ ] 应用 Rust 1.92.0 的新特性
+- [ ] 应用 Rust 1.93.0 的新特性
 
 ### 🔬 专家检查点
 
@@ -403,5 +403,5 @@ cargo doc --open --package c03_control_fn
 
 _最后更新：2025年1月_
 _文档版本：v2.0_
-_Rust 版本：1.92.0+_
+_Rust 版本：1.93.0+_
 _维护团队：Rust 学习社区_
