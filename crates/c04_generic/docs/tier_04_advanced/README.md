@@ -294,7 +294,7 @@
 
 **发现问题？**
 
-- 查看 [../tier*01_foundations/04*常见问题.md](../tier_01_foundations/04_常见问题.md)
+- 查看 [../tier_01_foundations/04_常见问题.md](../tier_01_foundations/04_常见问题.md)
 - 提交 Issue 到项目仓库
 
 **想要贡献？**

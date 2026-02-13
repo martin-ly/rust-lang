@@ -512,7 +512,7 @@ cargo llvm-cov test --workspace --html
 
 ### 使用指南
 
-- **[算法速查卡](../../docs/quick_reference/algorithms_cheatsheet.md)** ⭐ NEW! - 快速参考
+- **[算法速查卡](../../docs/02_reference/quick_reference/algorithms_cheatsheet.md)** ⭐ NEW! - 快速参考
 
 ## 📄 许可证
 
@@ -531,11 +531,11 @@ cargo llvm-cov test --workspace --html
 ### 使用指南
 
 - **[算法综合演示程序](../../examples/algorithm_comprehensive_demo.rs)** ⭐ NEW! - 排序/搜索/图/动态规划/数据结构综合示例
-- **[快速参考卡片](../../docs/quick_reference/algorithms_cheatsheet.md)** ⭐ NEW! - 算法与数据结构速查卡
+- **[快速参考卡片](../../docs/02_reference/quick_reference/algorithms_cheatsheet.md)** ⭐ NEW! - 算法与数据结构速查卡
 
 ### 项目文档
 
-- **[项目最佳实践指南](../../docs/BEST_PRACTICES_GUIDE.md)** - 代码质量、性能优化、测试指南
+- **[项目最佳实践指南](../../docs/05_guides/BEST_PRACTICES.md)** - 代码质量、性能优化、测试指南
 - **[性能调优指南](../../docs/PERFORMANCE_TUNING_GUIDE.md)** - 完整的性能调优指南
 
 ## 📞 联系方式

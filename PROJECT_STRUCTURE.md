@@ -109,8 +109,8 @@ rust-lang/
 │   └── docs/archive/root_completion_reports/  # 根完成报告
 │
 ├── 📖 docs/                         # 跨模块文档与指南
-│   ├── quick_reference/             # 速查卡 (21 个)
-│   ├── toolchain/                   # 工具链与版本说明
+│   ├── 02_reference/quick_reference/  # 速查卡 (20 个，含 AI/ML)
+│   ├── 06_toolchain/                   # 工具链与版本说明
 │   ├── rust-formal-engineering-system/  # 形式化工程索引
 │   ├── research_notes/              # 研究笔记
 │   ├── archive/                     # 归档报告
@@ -227,9 +227,9 @@ c##_module_name/
 
 - **docs/** - 异步编程、设计模式、宏系统、线程并发、WASM、性能调优、故障排查等使用指南
 - **crates/*/docs/** - 各模块的 Tier 指南、快速开始、实践指南
-- **docs/quick_reference/** - 19 个速查卡
+- **docs/02_reference/quick_reference/** - 20 个速查卡（含 AI/ML）
 
-**已完善**: AI 辅助指南 ([guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md](./guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md))、Unsafe 专题 ([docs/UNSAFE_RUST_GUIDE.md](./docs/UNSAFE_RUST_GUIDE.md))
+**已完善**: AI 辅助指南 ([guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md](./guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md))、Unsafe 专题 ([docs/05_guides/UNSAFE_RUST_GUIDE.md](./docs/05_guides/UNSAFE_RUST_GUIDE.md))
 
 **计划完善**（后续版本）: 编译器内部、认知科学、交互式学习平台等
 
@@ -248,7 +248,7 @@ c##_module_name/
 | 阶段/模块报告 | [archive/reports/](./archive/reports/) |
 | 归档报告 | [docs/archive/reports/](./docs/archive/reports/) |
 | 根完成报告 | [docs/archive/root_completion_reports/](./docs/archive/root_completion_reports/) |
-| 计划实施完成 | [docs/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md](./docs/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md) |
+| 计划实施完成 | [docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md](./docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md) |
 
 ---
 
@@ -258,8 +258,8 @@ c##_module_name/
 
 #### 📚 文档分类
 
-- **quick_reference/** - 21 个速查卡
-- **toolchain/** - 编译器、Cargo、Rust 版本演进说明
+- **quick_reference/** - 20 个速查卡（含 AI/ML）
+- **06_toolchain/** - 编译器、Cargo、Rust 版本演进说明
 - **rust-formal-engineering-system/** - 形式化工程系统索引（内容整合至 research_notes）
 - **research_notes/** - 研究笔记、实验、形式化方法
 - **archive/** - 归档报告
@@ -322,7 +322,7 @@ scripts/
 
 #### 查找资料
 
-1. **快速查询** → [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) 或 [速查卡目录](./docs/quick_reference/README.md)
+1. **快速查询** → [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) 或 [速查卡目录](./docs/02_reference/quick_reference/README.md)
 2. **深入学习** → 各模块的 `docs/00_MASTER_INDEX.md`
 3. **常见问题** → 各模块的 `docs/FAQ.md`
 4. **术语查询** → 各模块的 `docs/Glossary.md`

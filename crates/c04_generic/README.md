@@ -249,7 +249,7 @@ c04_generic/docs/
   - **技术选型决策矩阵** | 按场景/性能需求精准推荐
   - **适合**: 技术选型、性能优化、深度技术对比
 
-- **🗺️ [Rust 1.93.0 综合思维导图](./docs/RUST_192_COMPREHENSIVE_MINDMAP.md)** (NEW! 2025-12-11)
+- **🗺️ [Rust 1.92/1.93 泛型改进](./docs/RUST_192_GENERIC_IMPROVEMENTS.md)** (NEW! 2025-12-11)
   - **ASCII艺术图表** | 整体架构/泛型/Trait/多态系统
   - **GAT/RPITIT/async trait可视化** | 完整特性展示
   - **3级学习路径** | 初学者/进阶/专家(2-10周)

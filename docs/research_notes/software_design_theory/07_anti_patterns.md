@@ -262,10 +262,3 @@ let x = match result {
 };
 ```
 
----
-
-## 九、引用
-
-- [FORMAL_PROOF_SYSTEM_GUIDE](../../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)
-- [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/) Anti-patterns
-- [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)

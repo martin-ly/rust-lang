@@ -52,6 +52,7 @@
     - [月度检查清单](#月度检查清单)
     - [季度检查清单](#季度检查清单)
     - [年度检查清单](#年度检查清单)
+  - [📦 Rust 版本增量更新](#-rust-版本增量更新)
   - [🔗 相关资源](#-相关资源)
     - [核心文档](#核心文档)
     - [维护相关](#维护相关)
@@ -364,6 +365,19 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 - [ ] 生成年度报告
 - [ ] 全面质量评估
 - [ ] 系统优化和重构
+
+---
+
+## 📦 Rust 版本增量更新
+
+**每 Rust 新版本发布后**，按 [INCREMENTAL_UPDATE_FLOW](INCREMENTAL_UPDATE_FLOW.md) 执行：
+
+1. 收集 releases.rs、Blog 变更
+2. 更新 RUST_XXX、toolchain 文档
+3. 评估 formal_methods、type_theory 缺口
+4. 更新 INDEX、README、CHANGELOG
+
+详见 [INCREMENTAL_UPDATE_FLOW](INCREMENTAL_UPDATE_FLOW.md)。
 
 ---
 

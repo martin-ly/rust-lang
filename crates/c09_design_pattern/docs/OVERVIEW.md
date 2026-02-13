@@ -71,4 +71,4 @@
 
 ### 互链
 
-- 与 `c11_frameworks`：对齐 MVC/MVVM、依赖注入、插件化架构的模式清单
+- 与 [c11_macro_system](../../c11_macro_system/)：宏元编程、DSL 构建、代码生成与设计模式的协同（见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)）

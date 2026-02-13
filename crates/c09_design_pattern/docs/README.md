@@ -4,8 +4,8 @@
 
 本模块提供了 Rust 设计模式的完整文档体系，涵盖从基础概念到高级应用的所有内容，特别关注 Rust 1.93.0 版本的最新特性。
 
-**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
-**思维表征**: [决策图网](../../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/THINKING_REPRESENTATION_METHODS.md)
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**思维表征**: [决策图网](../../../docs/04_thinking/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/04_thinking/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/04_thinking/THINKING_REPRESENTATION_METHODS.md)
 
 ## 🎯 快速导航
 
@@ -14,7 +14,7 @@
 - [📖 概述与导航](./OVERVIEW.md) - 文档结构和阅读路径
 - [📚 顶层说明](../README.md) - 项目概述和快速开始
 - [📋 章节导引](../09_design_patterns.md) - 设计模式章节导引
-- [🚀 Rust 1.93.0 分析](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) - 版本对齐分析
+- [🚀 Rust 1.93.0 设计模式改进](./RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md) - 版本对齐分析
 
 ### Tier 1 基础层 ⭐ NEW
 

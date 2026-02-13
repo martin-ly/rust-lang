@@ -1,6 +1,6 @@
 # AI 辅助 Rust 编程指南
 
-> **最后更新**: 2026-02-11
+> **最后更新**: 2026-02-13
 > **目的**: 结合 AI 工具高效学习 Rust 与构建项目
 
 ---
@@ -32,10 +32,12 @@
 
 ### 1.2 与本项目结合
 
-- **RAG 检索**: 将 `docs/quick_reference/`、`crates/*/docs/` 纳入检索范围
+- **RAG 检索**: 将 `docs/02_reference/quick_reference/`、`crates/*/docs/` 纳入检索范围
 - **Embedding 索引**: 建议将速查卡、00_MASTER_INDEX、决策树文档纳入向量索引，便于语义检索
 - **上下文拼接**: 提问时附带相关速查卡或模块文档链接
 - **示例驱动**: 引用本项目 `examples/` 中的示例让 AI 生成类似代码
+- **错误码上下文**: 遇到编译错误时，附带 [ERROR_CODE_MAPPING](../docs/02_reference/ERROR_CODE_MAPPING.md) 中对应文档
+- **练习巩固**: 结合 [RUSTLINGS_MAPPING](../exercises/RUSTLINGS_MAPPING.md) 让 AI 推荐对应习题
 
 ---
 
@@ -62,7 +64,25 @@
 
 ---
 
-## 4. 注意事项
+## 4. AI 辅助工作流（推荐）
+
+| 阶段 | 工作流 | 工具 |
+|------|--------|------|
+| **学习概念** | 提示词「解释 [概念] + 示例」→ 附带速查卡链接 | Claude/GPT |
+| **写代码** | 注释描述意图 → Copilot/Cursor 补全 → 验证 | Cursor/Copilot |
+| **遇到错误** | 粘贴错误码 + [ERROR_CODE_MAPPING](../docs/02_reference/ERROR_CODE_MAPPING.md) 对应文档 | Claude/GPT |
+| **巩固练习** | 学完模块 → 查 [RUSTLINGS_MAPPING](../exercises/RUSTLINGS_MAPPING.md) → 做对应习题 | Rustlings |
+| **代码审查** | 粘贴代码 + 要求「按 Rust 惯用法审查」 | Claude/GPT |
+
+---
+
+## 5. 用 Rust 构建 AI 应用
+
+Rust 在 AI/ML 领域有 Burn、Candle、llm 等生态，详见 [AI+Rust 生态指南](../docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md)。
+
+---
+
+## 6. 注意事项
 
 1. **验证输出**: AI 生成的 Rust 代码务必 `cargo build` 和 `cargo test` 验证
 2. **版本一致**: 明确指定 Rust 1.93.0+ 和 Edition 2024
@@ -70,8 +90,11 @@
 
 ---
 
-## 5. 相关文档
+## 7. 相关文档
 
 - [guides/README.md](./README.md) - 指南入口
-- [docs/quick_reference/](../docs/quick_reference/) - 速查卡
+- [AI+Rust 生态指南](../docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) - Burn/Candle/LLM、用 Rust 构建 AI
+- [docs/02_reference/quick_reference/](../docs/02_reference/quick_reference/) - 速查卡
 - [LEARNING_CHECKLIST.md](../LEARNING_CHECKLIST.md) - 学习清单与自测
+- [ERROR_CODE_MAPPING.md](../docs/02_reference/ERROR_CODE_MAPPING.md) - 错误码→文档映射
+- [RUSTLINGS_MAPPING.md](../exercises/RUSTLINGS_MAPPING.md) - 模块↔习题对应

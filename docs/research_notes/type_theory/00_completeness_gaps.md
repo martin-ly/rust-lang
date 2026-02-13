@@ -41,6 +41,8 @@
 | **never_type (!) 严格化** | ✅ 已补全 | Def BOT1、定理 BOT-T1；1.92+ 与 ⊥ 对应；[type_system_foundations](type_system_foundations.md) | type_system_foundations |
 | **deref_nullptr deny** | ⚠️ 部分 | Def DEREF-NULL1；1.93 deny-by-default；[type_system_foundations](type_system_foundations.md) | type_system_foundations |
 
+**对类型构造能力的影响**：上述 ⚠️ 缺口可能影响 [construction_capability](construction_capability.md) 中的构造路径判定。impl Trait 捕获、Trait 继承菱形、DST 规则、类型推断歧义、对象安全完整规则 → 见 [construction_capability § 类型理论缺口对构造能力的影响](construction_capability.md#类型理论缺口对构造能力的影响)。
+
 ---
 
 ## 2. 组合法则缺口
@@ -83,6 +85,8 @@
 | **blanket impl 冲突** | ⚠️ 部分 | 有反例；**冲突检测算法**无形式化 | trait_system_formalization |
 | **Trait 方法默认参数** | ❌ 未覆盖 | 若稳定化；与 impl 解析的交互 | - |
 
+**对类型构造能力的影响**：对象安全、Trait 继承菱形、blanket impl 冲突 → 可能 Multi 或 Impossible；见 [construction_capability § 类型理论缺口](construction_capability.md#类型理论缺口对构造能力的影响)。
+
 ---
 
 ## 4. 类型系统特性缺口
@@ -95,6 +99,8 @@
 | **existential type** | ⚠️ 部分 | Def EXIST1；不稳定；存在类型；[advanced_types](advanced_types.md) | advanced_types |
 | **higher-ranked trait bounds** | ⚠️ 部分 | `for<'a> T: Trait<'a>` 有描述；**与生命周期推断**的交互未形式化 | lifetime_formalization, trait_system_formalization |
 | **newtype 与零成本** | ⚠️ 部分 | Def NEWTYPE1、定理 NEWTYPE-T1；repr(transparent)；[type_system_foundations](type_system_foundations.md) | type_system_foundations |
+
+**对类型构造能力的影响**：类型推断歧义、unsized 类型（DST）→ 可能 Multi 或 Impossible；见 [construction_capability](construction_capability.md)。
 
 ---
 
@@ -152,6 +158,7 @@
 
 ## 引用
 
+- [construction_capability](construction_capability.md) — 类型构造能力；§ 类型理论缺口对构造能力的影响 与本缺口对应
 - [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) — 92 项特性；类型相关需与本缺口对照
 - [ARGUMENTATION_GAP_INDEX](../ARGUMENTATION_GAP_INDEX.md) — 论证缺口追踪
 - [RFC 1023 Rebalancing Coherence](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)

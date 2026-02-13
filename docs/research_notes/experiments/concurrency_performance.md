@@ -36,6 +36,8 @@
     - [执行步骤](#执行步骤)
   - [📐 性能优化建议与工具改进](#-性能优化建议与工具改进)
     - [性能优化建议](#性能优化建议)
+    - [原子内存顺序选型决策树](#原子内存顺序选型决策树)
+    - [死锁检测与运行时验证工具](#死锁检测与运行时验证工具)
     - [工具改进](#工具改进)
     - [性能报告](#性能报告)
   - [🔗 系统集成与实际应用](#-系统集成与实际应用)
@@ -446,6 +448,27 @@ async fn async_task_benchmark() {
 - **通道**：高吞吐优先 `crossbeam`；有背压需求用有界 `mpsc`；避免在热路径上 `clone` 大消息。
 - **异步**：合理设置 `tokio` 的 `worker_threads`；避免在 async 中阻塞；用 `tokio::spawn` 控制任务数量。
 - **Rust 1.93**：`thread_local` 分配器可降低多线程分配竞争，重跑并发基准以更新基线。
+
+### 原子内存顺序选型决策树
+
+| 场景 | 推荐 Ordering | 说明 |
+| :--- | :--- | :--- |
+| 需全局顺序保证、调试 | `SeqCst` | 最强、开销最大；ownership_model ATOMIC1 |
+| 锁/同步点、happens-before | `Acquire`/`Release`/`AcqRel` | 获取-释放语义；Mutex 内部 |
+| 纯计数器、无跨线程依赖 | `Relaxed` | 最弱、最快；仅需原子性 |
+
+**引用**：[ownership_model](../formal_methods/ownership_model.md) Def ATOMIC1；[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证。
+
+### 死锁检测与运行时验证工具
+
+| 工具 | 用途 | 说明 |
+| :--- | :--- | :--- |
+| **Miri** | 未定义行为、数据竞争 | `cargo +nightly miri test` |
+| **loom** | 并发调度穷举测试 | 依赖 `loom` crate |
+| **cargo-deadlock** | 潜在死锁检测 | `cargo install cargo-deadlock` |
+| **ThreadSanitizer** | 数据竞争 | `RUSTFLAGS="-Z sanitizer=thread" cargo test` |
+
+**说明**：死锁无法静态判定；见 [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证。
 
 ### 工具改进
 

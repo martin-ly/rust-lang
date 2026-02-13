@@ -6,6 +6,24 @@
 
 ---
 
+## 目录
+
+- [执行模型边界分析](#执行模型边界分析)
+  - [五模型 × 三维边界](#五模型--三维边界)
+  - [形式化定义](#形式化定义)
+  - [执行确定性形式化](#执行确定性形式化)
+  - [Rust 1.93 执行模型相关变更](#rust-193-执行模型相关变更)
+  - [静态判定 vs 运行时验证](#静态判定-vs-运行时验证)
+  - [确定性判定决策树](#确定性判定决策树)
+  - [并发 vs 并行判定](#并发-vs-并行判定)
+  - [决策树：选择执行模型](#决策树选择执行模型)
+  - [执行模型与设计模式映射](#执行模型与设计模式映射)
+  - [边界证明思路](#边界证明思路)
+  - [常见组合](#常见组合)
+  - [与形式化基础衔接](#与形式化基础衔接)
+
+---
+
 ## 五模型 × 三维边界
 
 | 模型 | 安全 | 支持 | 表达 |
@@ -51,6 +69,93 @@
 *证明*：由 Axiom EB2；组合时若任一子模型需 unsafe，则组合需 unsafe；支持取 max（Native < Lib < FFI）；表达取 min（Equivalent > Approximate > Inexpressible）。∎
 
 **推论 EB-EX-C2**：五模型与 [05_boundary_system](../05_boundary_system/) 三维矩阵一致；执行模型选型可复用安全/支持/表达决策树。
+
+---
+
+## 执行确定性形式化
+
+**Def EB-DET1（执行确定性）**：
+
+设 $M$ 为执行模型。**执行确定性** $\mathit{Det}(M) \in \{\mathrm{Sequential}, \mathrm{Interleaved}, \mathrm{Parallel}, \mathrm{Distributed}\}$ 定义如下：
+
+- **Sequential**：单线程顺序执行；执行顺序完全确定；同步模型
+- **Interleaved**：多任务交错执行；调度非确定，但无数据竞争；异步、并发（消息传递）
+- **Parallel**：多核同时执行；任务间可能同时运行；并行（rayon、join）
+- **Distributed**：跨节点；网络延迟与故障非确定；分布式
+
+**Axiom EB-DET1**：$\mathit{Det}(\mathrm{Sync}) = \mathrm{Sequential}$；$\mathit{Det}(\mathrm{Async}) = \mathit{Det}(\mathrm{Concurrent}) = \mathrm{Interleaved}$；$\mathit{Det}(\mathrm{Parallel}) = \mathrm{Parallel}$；$\mathit{Det}(\mathrm{Distributed}) = \mathrm{Distributed}$。
+
+**定理 EB-DET-T1（确定性蕴涵数据竞争自由）**：若 $M$ 为 Sync、Async、Concurrent 或 Parallel，且程序满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 定理 T1（数据竞争自由）及 Send/Sync 约束，则执行无数据竞争；执行顺序的非确定性不导致 UB。
+
+*证明*：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1；Send/Sync 保证跨线程传递安全；ownership/borrow 保证无别名违规；Interleaved/Parallel 的调度非确定性仅影响执行顺序，不影响内存安全。∎
+
+**推论 EB-DET-C1（控制确定性判定）**：对于「需保证执行顺序」的需求，选 Sync；对于「可接受非确定调度」的 I/O 并发，选 Async；对于「需 CPU 并行」的需求，选 Parallel；由 Def EB-DET1 与决策树。
+
+---
+
+## Rust 1.93 执行模型相关变更
+
+以下 Rust 1.93 变更影响执行模型与并发/并行设计；详见 [07_rust_1.93_full_changelog](../../../06_toolchain/07_rust_1.93_full_changelog.md)、[05_rust_1.93_vs_1.92_comparison](../../../06_toolchain/05_rust_1.93_vs_1.92_comparison.md)。
+
+| 变更 | 影响 | 说明 |
+| :--- | :--- | :--- |
+| **全局分配器 thread_local** | 并发/异步 | 1.93 允许全局分配器使用 `thread_local!` 和 `std::thread::current()` 而无重入担忧；影响自定义分配器与 async 运行时的组合 |
+| **asm_cfg** | 底层/并行 | `#[cfg]` 可应用于 `asm!` 块内单行；条件汇编与平台特定并行代码（如 SIMD）的交互更灵活 |
+| **musl 1.2.5** | 分布式/网络 | 静态 musl 构建的 DNS 解析可靠性提升；影响分布式系统中 musl 目标 |
+
+---
+
+## 静态判定 vs 运行时验证
+
+**Def EB-VER1（确定性判定可验证性）**：设 $M$ 为执行模型。**静态判定**：编译期可完全确定（`cargo check`、clippy）；**运行时验证**：需实际执行或额外工具（Miri、集成测试、模糊测试）才能判定。
+
+| 情形 | 判定方式 | 说明 |
+| :--- | :--- | :--- |
+| **Sync、单线程** | 静态 | ownership、borrow、type_system 完全可静态检查 |
+| **Async、Send 边界** | 静态 | Future 的 Send 约束、跨 await 点检查；编译器可判定 |
+| **Concurrent、std::thread** | 静态 | Send/Sync 约束在 spawn 点检查；无数据竞争可静态保证 |
+| **Parallel、rayon** | 静态 | join/scope 的闭包需 Send；编译器可判定 |
+| **死锁** | 运行时 | 锁顺序、循环等待无法静态判定；需 Miri、测试 |
+| **分布式、网络故障** | 运行时 | 超时、重试、一致性需集成测试、契约验证 |
+
+**决策分支**：需确定性保证？→ 静态可判定（Sync/Async/Concurrent/Parallel 满足 Send/Sync）→ 选上述模型；需死锁自由？→ 运行时验证；需分布式一致性？→ 契约 + 集成测试。
+
+---
+
+## 确定性判定决策树
+
+```text
+需求：执行顺序是否必须确定？
+├── 是（顺序敏感）→ 同步（Sync）
+│   └── 单线程；Determinism = Sequential
+└── 否（可接受非确定）
+    ├── 需求：跨节点？
+    │   └── 是 → 分布式（Distributed）
+    │       └── 网络延迟、故障非确定
+    └── 否（单节点）
+        ├── 需求：I/O 并发？
+        │   └── 是 → 异步（Async）
+        │       └── Interleaved；调度非确定，无数据竞争
+        ├── 需求：CPU 并行？
+        │   └── 是 → 并行（Parallel）
+        │       └── Parallel；多核同时，任务完成顺序非确定
+        └── 否则 → 并发（Concurrent）
+            └── Interleaved；消息传递或锁保护
+```
+
+---
+
+## 并发 vs 并行判定
+
+| 维度 | 并发 (Concurrent) | 并行 (Parallel) |
+| :--- | :--- | :--- |
+| **定义** | 多任务可交错执行；不必同时运行 | 多任务可同时运行；利用多核 |
+| **执行** | 单核可模拟；调度器交错 | 多核/多 CPU 同时执行 |
+| **确定性** | Interleaved；调度非确定 | Parallel；完成顺序非确定 |
+| **典型** | std::thread + mpsc、tokio 多任务 | rayon、join、std::thread 多核 |
+| **选型** | I/O 等待、事件驱动 | CPU 密集、数据并行 |
+
+**判定树**：需要 I/O 并发（等待网络/磁盘）→ 选 Async/Concurrent；需要 CPU 并行（计算密集）→ 选 Parallel。
 
 ---
 
@@ -112,7 +217,9 @@
 | 模型 | 引用定理 | 文档 |
 | :--- | :--- | :--- |
 | 同步 | ownership T2/T3、borrow T1、type_system T1–T3 | [ownership_model](../../formal_methods/ownership_model.md)、[type_system_foundations](../../type_theory/type_system_foundations.md) |
-| 异步 | async T6.1–T6.3、pin T1–T3 | [async_state_machine](../../formal_methods/async_state_machine.md)、[pin_self_referential](../../formal_methods/pin_self_referential.md) |
-| 并发 | borrow T1、Send/Sync 语义 | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) |
-| 并行 | 同上 + rayon 不变式 | 同上 |
+| 异步 | async T6.1–T6.3（状态一致性、并发安全、进度保证）、pin T1–T3、Send 边界 | [async_state_machine](../../formal_methods/async_state_machine.md)、[pin_self_referential](../../formal_methods/pin_self_referential.md) |
+| 并发 | borrow T1（数据竞争自由）、Send/Sync 语义、EB-DET-T1、CHAN-T1、MUTEX-T1 | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)、[async_state_machine](../../formal_methods/async_state_machine.md) |
+| 并行 | 同上 + rayon 不变式、EB-DET-T1、SPAWN-T1 | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)、[async_state_machine](../../formal_methods/async_state_machine.md) |
 | 分布式 | 序列化类型安全、FFI 契约 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+
+**确定性形式化**：Def EB-DET1、定理 EB-DET-T1 与 [FORMAL_PROOF_SYSTEM_GUIDE](../../FORMAL_PROOF_SYSTEM_GUIDE.md) Send/Sync、borrow T1 衔接；静态 vs 运行时验证见 § [静态判定 vs 运行时验证](#静态判定-vs-运行时验证)；确定性判定决策树见上文。

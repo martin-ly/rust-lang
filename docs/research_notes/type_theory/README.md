@@ -72,6 +72,17 @@
 
 **状态**: ✅ 已完成 (100%)
 
+### 1b. 类型构造能力
+
+**研究问题**:
+
+- 哪些类型可构造、用何种语法、构造路径是否唯一？
+- 何时可推断、何时需注解、何时必然失败？
+
+**相关笔记**: [construction_capability.md](./construction_capability.md)
+
+**状态**: ✅ 已完成
+
 ---
 
 ### 2. Trait 系统形式化
@@ -156,6 +167,7 @@
 | :--- | :--- | :--- | :--- |
 | [00_completeness_gaps](./00_completeness_gaps.md) | Def CGI、Axiom CGI1、CGI-T1 | 不完备性形式化 | 缺口索引 |
 | [type_system_foundations](./type_system_foundations.md) | T1–T5、LUB-T1、COP-T1、OFFSET-T1、ASC-T1、BOT-T1、NEWTYPE-T1、DEREF-NULL1 | 良型不卡住、求值保型 | 类型推断歧义 |
+| [construction_capability](./construction_capability.md) | Def TCON1、TCON-T1、TCON-L1、TCON-C1 | 类型构造能力、确定性判定树 | - |
 | [trait_system_formalization](./trait_system_formalization.md) | 对象安全、impl 解析、COH-T1、RPIT-T1、ASYNC-T1、NEG-T1、DYN-T1、TRAIT-GAT1、SPEC-T1 | dyn | 孤儿放宽（倡议） |
 | [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、见 formal_methods | 与型变组合 |
 | [advanced_types](./advanced_types.md) | GAT、const 泛型、PhantomData、CONST-EVAL-T1、CONST-MUT1、EXIST1 | 关联类型、类型级常量 | existential 完整规则 |
@@ -172,6 +184,7 @@
 ### 已完成 ✅
 
 - [x] [类型系统基础](./type_system_foundations.md) - 100%
+- [x] [类型构造能力](./construction_capability.md) - Def TCON1、矩阵、决策树
 - [x] [Trait 系统形式化](./trait_system_formalization.md) - 100%
 - [x] [生命周期形式化](./lifetime_formalization.md) - 100%
 - [x] [高级类型特性](./advanced_types.md) - 100%

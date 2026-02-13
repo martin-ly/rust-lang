@@ -3,7 +3,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-01-26
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **Rust 1.93.0 更新完成**
+> **状态**: ✅ **研究笔记系统 100% 完成**（全面检查推进计划 Phase 1–8）
 
 ---
 
@@ -71,6 +71,8 @@
 | 关键词     | 相关研究笔记                                                    | 状态    |
 | :--- | :--- | :--- |
 | 类型系统   | [类型系统基础](./type_theory/type_system_foundations.md)        | ✅ 100% |
+| 类型构造能力 | [construction_capability](./type_theory/construction_capability.md) | ✅ Def TCON1、矩阵、决策树 |
+| 核心特性完整链 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | ✅ 13 项 Def→示例→论证→证明 |
 | 类型理论缺口 | [完备性缺口](./type_theory/00_completeness_gaps.md)           | ✅ 阶段 1–7 Def 占位 |
 | 形式化方法缺口 | [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md) | ✅ Phase 1–6 100% |
 | Trait      | [Trait 系统形式化](./type_theory/trait_system_formalization.md) | ✅ 100% |
@@ -98,6 +100,8 @@
 | Future      | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
 | async/await | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
 | 并发        | [并发性能研究](./experiments/concurrency_performance.md)    | ✅ 100% |
+| 执行确定性 | [06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md) | ✅ Def EB-DET1、确定性判定树 |
+| 组件成熟度 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | ✅ Def CE-MAT1、L1–L4 |
 | 并发安全    | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
 
 ### 性能优化

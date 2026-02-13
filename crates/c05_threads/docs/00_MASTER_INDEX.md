@@ -53,7 +53,7 @@
 | **Rust By Example** | [Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | 线程创建、通道 |
 | **Rust Reference** | [std::thread](https://doc.rust-lang.org/std/thread/), [std::sync](https://doc.rust-lang.org/std/sync/) | 标准库 API 规范 |
 
-**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 **思维表征**: [决策图网](../../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/THINKING_REPRESENTATION_METHODS.md)
 
 ## 📚 文档导航总览

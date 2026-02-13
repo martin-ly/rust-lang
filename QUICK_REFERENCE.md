@@ -16,4 +16,4 @@
 | 集合与迭代器 | [collections_iterators_cheatsheet.md](./docs/quick_reference/collections_iterators_cheatsheet.md) |
 | Cargo        | [cargo_cheatsheet.md](./docs/quick_reference/cargo_cheatsheet.md) |
 
-**完整列表**: [docs/quick_reference/README.md](./docs/quick_reference/README.md) - 共 19 个速查卡
+**完整列表**: [docs/02_reference/quick_reference/README.md](./docs/02_reference/quick_reference/README.md) - 共 20 个速查卡（含 AI/ML）

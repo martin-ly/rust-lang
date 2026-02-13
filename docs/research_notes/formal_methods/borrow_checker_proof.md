@@ -1,7 +1,7 @@
 # 借用检查器证明
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-12（国际权威对标补全）
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ 已完成 (100%)
 
@@ -53,7 +53,7 @@
   - [控制流与借用衔接（Phase 5）](#控制流与借用衔接phase-5)
   - [FFI、extern、C variadic、? 操作符（Phase 6）](#ffiexternc-variadic-操作符phase-6)
   - [📖 参考文献](#-参考文献)
-    - [学术论文](#学术论文)
+    - [学术论文（国际权威）](#学术论文国际权威)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
 
@@ -616,23 +616,46 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 ## 📖 参考文献
 
-### 学术论文
+### 学术论文（国际权威）
 
-1. **"RustBelt: Logical Foundations for the Future of Safe Systems Programming"**
-   - 作者: Ralf Jung, et al.
-   - 年份: 2018
-   - 会议: POPL 2018
-   - 摘要: 为 Rust 的所有权和借用系统提供形式化基础
+1. **RustBelt: Securing the Foundations of the Rust Programming Language** (POPL 2018)
+   - 作者: Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
+   - 链接: <https://plv.mpi-sws.org/rustbelt/popl18/>
+   - 摘要: 借用规则形式化；数据竞争自由证明；Iris 分离逻辑
+   - 与本目录: 借用规则、定理 T1 直接对应
 
-2. **"The RustBelt Project: Formalizing Rust's Type System"**
-   - 作者: Derek Dreyer
-   - 年份: 2017
-   - 摘要: Rust 类型系统的形式化研究
+2. **Stacked Borrows: An Aliasing Model for Rust** (POPL 2020)
+   - 作者: Ralf Jung, Hoang-Hai Dang, Jeehoon Kang, Derek Dreyer
+   - 链接: <https://plv.mpi-sws.org/rustbelt/stacked-borrows/>
+   - 摘要: 别名规则；&mut 唯一性；违反为 UB；Miri 实现
+   - 与本目录: 规则 1（互斥借用）、RAW1、UNSAFE-T1 对应
+
+3. **RustBelt Meets Relaxed Memory** (POPL 2020)
+   - 链接: <https://plv.mpi-sws.org/rustbelt/rbrlx/>
+   - 摘要: relaxed memory、Arc 数据竞争、锁与通道同步
+   - 与本目录: CHAN-T1、MUTEX-T1、并发语义对应
+
+4. **Tree Borrows** (PLDI 2025 — Distinguished Paper Award)
+   - 作者: Neven Villani, Johannes Hostert, Derek Dreyer, Ralf Jung
+   - 链接: [ETH 项目页](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[ACM PDF](https://dl.acm.org/doi/pdf/10.1145/3735592)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf)、[Ralf 博客](https://www.ralfj.de/blog/2025/07/07/tree-borrows-paper.html)
+   - 摘要: Stacked Borrows 演进；树结构；30k crates 54% 更少拒绝；Rocq 形式化证明
+   - 与本目录: 借用规则、RAW1 演进；Miri 未来可能采用
+
+5. **Polonius** — 形式化 borrow 分析
+   - 链接: <https://rust-lang.github.io/polonius/>
+   - 与本目录: lifetime、borrow 规则；datalog 形式化；NLL 后继
+
+6. **Prusti / Kani / Miri** — 验证工具
+   - Prusti: <https://prusti.org/> — deductive verification
+   - Kani: <https://model-checking.github.io/kani/> — model checking、UB
+   - Miri: <https://github.com/rust-lang/miri> — Stacked Borrows 实现
+   - 与本目录: 可验证本 Def/定理对应的程序属性
 
 ### 官方文档
 
 - [Rust 借用检查器](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
-- [Rust 内存模型](https://doc.rust-lang.org/nomicon/)
+- [Rust Reference - Undefined behavior](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
+- [Rustonomicon](https://doc.rust-lang.org/nomicon/) — 内存模型、unsafe
 
 ### 相关代码
 
@@ -641,5 +664,7 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-12（国际权威对标补全）
 **状态**: ✅ **已完成** (100%)
+
+**国际权威对标**：[Stacked Borrows POPL 2020](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)、[Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[Polonius](https://rust-lang.github.io/polonius/)；[FLS Ch. 15.4](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) Borrowing、[Ch. 19](https://spec.ferrocene.dev/unsafety.html) Unsafety；Miri 实现 Stacked Borrows。

@@ -8,12 +8,27 @@
 
 ---
 
+## 📚 权威来源对齐
+
+| 来源 | 链接 | 用途 |
+| :--- | :--- | :--- |
+| **Rust 1.93 发布说明** | [blog.rust-lang.org/2026/01/22/Rust-1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/) | 语言特性权威公告 |
+| **releases.rs 1.93.0** | [releases.rs/docs/1.93.0](https://releases.rs/docs/1.93.0/) | 完整变更清单 |
+| **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范（Rust 2021 Edition） |
+| **RustBelt / Stacked Borrows / Tree Borrows** | [plv.mpi-sws.org/rustbelt](https://plv.mpi-sws.org/rustbelt/) | 所有权/借用形式化 |
+
+**版本说明**：Ferrocene FLS 当前覆盖 **Rust 2021 Edition** 与 rustc 1.93.0。本项目文档使用 **Edition 2024**；Edition 2024 新增语法与语义尚未纳入 FLS 正式章节，形式化引用以 FLS 当前覆盖范围为准。
+
+---
+
 ## 📋 目录
 
 - [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
+  - [📚 权威来源对齐](#-权威来源对齐)
   - [📋 目录](#-目录)
   - [🎯 文档宗旨](#-文档宗旨)
   - [📐 特性覆盖矩阵总览](#-特性覆盖矩阵总览)
+  - [特性→Def/Axiom/Theorem 映射表](#特性defaxiomtheorem-映射表)
   - [1. 内存与所有权族](#1-内存与所有权族)
   - [2. 类型系统族](#2-类型系统族)
   - [3. Trait 与多态族](#3-trait-与多态族)
@@ -53,6 +68,53 @@
 | FFI 与不安全 | 6 | 6 | - | 100% |
 | Rust 1.93 新增 | 18 | 18 | toolchain docs | 100% |
 | **总计** | **92** | **92** | - | **100%** |
+
+---
+
+## 特性→Def/Axiom/Theorem 映射表
+
+本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，便于追溯与交叉引用。详见 [PROOF_INDEX](PROOF_INDEX.md)。
+
+| 特性族 | 特性 | Def | Axiom | Theorem | 文档 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **内存与所有权** | 所有权 | 1.1–1.3 | 规则 1–3 | T2 唯一性、T3 内存安全 | ownership_model |
+| | 借用 | - | 规则 5–8 | T1 数据竞争自由 | borrow_checker_proof |
+| | 生命周期 | $\ell \subseteq \text{lft}$ | - | T2 引用有效性 | lifetime_formalization |
+| | Pin | 1.1–2.2 | - | T1–T3 | pin_self_referential |
+| | Box | BOX1 | - | BOX-T1 | ownership_model |
+| | Rc/Arc | RC1/ARC1 | - | RC-T1 | ownership_model |
+| | Cell/RefCell | CELL1/REFCELL1 | - | REFCELL-T1 | ownership_model |
+| | MaybeUninit | MAYBEUNINIT1 | - | MAYBEUNINIT-T1 | ownership_model |
+| | 智能指针 | DROP1/DEREF1 | - | DROP-T1/DEREF-T1 | ownership_model |
+| | 裸指针 | RAW1 | - | RAW-T1 | borrow_checker_proof |
+| | 内存布局 | REPR1 | - | REPR-T1 | ownership_model |
+| **类型系统** | 基本类型 | - | - | 进展性 T1、保持性 T2 | type_system_foundations |
+| | Never (!) | BOT1 | - | BOT-T1 | type_system_foundations |
+| | 型变 | Def 1.1–3.1 | - | T1–T4 | variance_theory |
+| | 类型构造 | TCON1 | TCON1–TCON2 | TCON-T1 | construction_capability |
+| | impl Trait | - | - | DYN-T1 | trait_system_formalization |
+| **Trait** | Trait | - | COH1/COH2 | COH-T1 | trait_system_formalization |
+| | GATs | - | - | AT-L1 | advanced_types |
+| | Send/Sync | - | - | T6.1–T6.3 | async_state_machine |
+| | Unpin | Def 2.2 | - | T1–T3 | pin_self_referential |
+| **控制流** | match | MATCH1 | - | MATCH-T1 | borrow_checker_proof |
+| | for | FOR1 | - | FOR-T1 | borrow_checker_proof |
+| | ? 操作符 | QUERY1 | - | QUERY-T1 | borrow_checker_proof |
+| **并发** | 线程 | SPAWN1 | - | SPAWN-T1 | async_state_machine |
+| | Future | Def 4.1–5.2 | - | T6.1–T6.3 | async_state_machine |
+| | 通道 | CHAN1 | - | CHAN-T1 | borrow_checker_proof |
+| | Mutex | MUTEX1 | - | MUTEX-T1 | borrow_checker_proof |
+| | 原子操作 | ATOMIC1 | - | ATOMIC-T1 | ownership_model |
+| **FFI** | unsafe | UNSAFE1 | - | UNSAFE-T1/T2 | borrow_checker_proof |
+| | extern | EXTERN1 | - | EXTERN-T1 | borrow_checker_proof |
+| | C variadic | CVARIADIC1 | - | - | borrow_checker_proof |
+| | union | UNION1 | - | - | ownership_model |
+| | transmute | TRANSMUTE1 | - | TRANSMUTE-T1 | ownership_model |
+| **执行模型** | 确定性 | EB-DET1 | EB-DET1 | EB-DET-T1 | 06_boundary_analysis |
+| **组合工程** | 组件成熟度 | CE-MAT1 | CE-MAT1 | CE-MAT-T1 | 04_compositional_engineering |
+| | 组合有效性 | CE1 | CE1 | CE-T1–T3 | 04_compositional_engineering |
+
+**说明**：表中仅列出已形式化的特性；未列出的特性（如 if/else、mod、cfg 等）无对应 Def/Axiom/Theorem，但均在特性覆盖矩阵中列明设计决策与反例。
 
 ---
 
@@ -174,7 +236,7 @@
 | **const** | 编译期常量 | const X: T = ... | [advanced_types](type_theory/advanced_types.md) | 非常量表达式 |
 | **const fn** | 编译期可求值函数 | 受限操作、无 I/O | advanced_types | 非 const 操作 |
 | **const 泛型** | 见 Trait 族 | - | advanced_types | - |
-| **const 中 mutable ref** | 1.93 允许 const 含 &mut static | 非常 unsafe | [07_rust_1.93_full_changelog](../toolchain/07_rust_1.93_full_changelog.md) | 1.93 const_item_interior_mutations lint |
+| **const 中 mutable ref** | 1.93 允许 const 含 &mut static | 非常 unsafe | [07_rust_1.93_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) | 1.93 const_item_interior_mutations lint |
 | **const-eval** | 编译期求值 | 1.93 指针字节复制 | 07_rust_1.93 | - |
 | **inline** | 内联提示 | #[inline]、#[inline(always)] | - | - |
 
@@ -195,24 +257,26 @@
 
 ## 10. Rust 1.93 新增/变更特性
 
+**权威链接**：[releases.rs 1.93.0](https://releases.rs/docs/1.93.0/) § Language、[Rust 1.93 发布说明](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)
+
 | 特性 | 动机 | 设计决策 | 文档 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
-| **s390x vector** | s390x SIMD | is_s390x_feature_detected! | [07_rust_1.93](../toolchain/07_rust_1.93_full_changelog.md) | 非 s390x 架构 |
-| **C variadic** | printf 等 FFI | extern "system" fn(..., ...) | 07_rust_1.93 | 非 system ABI |
-| **cfg 关键词** | 避免误用 | 关键词作 cfg 谓词报错 | [09_rust_1.93_compatibility](../toolchain/09_rust_1.93_compatibility_deep_dive.md) | - |
-| **asm_cfg** | 条件汇编 | #[cfg] 在 asm! 行上 | 07_rust_1.93, 05_comparison | - |
+| **s390x vector** | s390x SIMD | is_s390x_feature_detected! | [07_rust_1.93](../06_toolchain/07_rust_1.93_full_changelog.md)、[releases.rs](https://releases.rs/docs/1.93.0/) | 非 s390x 架构 |
+| **C variadic** | printf 等 FFI | extern "system" fn(..., ...) | 07_rust_1.93、[releases.rs](https://releases.rs/docs/1.93.0/) | 非 system ABI |
+| **cfg 关键词** | 避免误用 | 关键词作 cfg 谓词报错 | [09_rust_1.93_compatibility](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md)、[releases.rs](https://releases.rs/docs/1.93.0/) | - |
+| **asm_cfg** | 条件汇编 | #[cfg] 在 asm! 行上 | 07_rust_1.93、05_comparison、[releases.rs](https://releases.rs/docs/1.93.0/) | - |
 | **LUB coercion** | 类型推断正确性 | 修正函数项、安全性 | 07_rust_1.93 | - |
 | **const &mut static** | 允许特定 const | 非常 unsafe | 07_rust_1.93 | const_item_interior_mutations |
 | **const_item_interior_mutations** | 安全警示 | warn-by-default lint | 07_rust_1.93 | - |
 | **function_casts_as_integer** | 可移植性 | warn-by-default | 07_rust_1.93 | - |
-| **deref_nullptr** | 安全 | deny-by-default | [09_compatibility](../toolchain/09_rust_1.93_compatibility_deep_dive.md) | 解引用空指针 |
+| **deref_nullptr** | 安全 | deny-by-default | [09_compatibility](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) | 解引用空指针 |
 | **#[test] 严格** | 避免误用 | 非函数位置报错 | 09_compatibility | trait 方法上 #[test] |
 | **offset_of!** | 类型检查 | well-formed 检查 | 09_compatibility | 非法类型 |
 | **... variadic** | 未来兼容 | future-incompat | 09_compatibility | - |
 | **repr(C) enum** | 可预测布局 | 判别值警告 | 09_compatibility | - |
 | **repr(transparent)** | 忽略 repr(C) 警告 | 单字段透明 | 09_compatibility | - |
 | **pin_v2** | Pin API 内部 | 内置属性命名空间 | 09_compatibility | 命名冲突 |
-| **Copy specialization 移除** | 生命周期安全 | 不再内部 specialization | [07_rust_1.93](../toolchain/07_rust_1.93_full_changelog.md) | 可能性能回归 |
+| **Copy specialization 移除** | 生命周期安全 | 不再内部 specialization | [07_rust_1.93](../06_toolchain/07_rust_1.93_full_changelog.md) | 可能性能回归 |
 | **全局分配器 thread_local** | 避免重入 | 允许 thread_local! | 05_comparison | - |
 | **Emscripten unwinding** | ABI 一致性 | wasm 异常处理 ABI | 09_compatibility | C 链接需 -fwasm-exceptions |
 
@@ -222,12 +286,16 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
+| [RUST_193_FEATURE_MATRIX](RUST_193_FEATURE_MATRIX.md) | 按特性族展开的五维矩阵（概念-公理-定理-证明方法-反例） |
+| [releases.rs 1.93.0](https://releases.rs/docs/1.93.0/) | 权威变更清单 |
+| [Ferrocene FLS](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范 |
+| [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链（Def→示例→论证→证明） |
 | [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) | 核心机制设计论证（Pin、所有权、借用等） |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义、表达能力边界 |
-| [toolchain/07_rust_1.93_full_changelog](../toolchain/07_rust_1.93_full_changelog.md) | Rust 1.93 完整变更清单 |
-| [toolchain/09_rust_1.93_compatibility_deep_dive](../toolchain/09_rust_1.93_compatibility_deep_dive.md) | Rust 1.93 兼容性深度解析 |
-| [toolchain/10_rust_1.89_to_1.93_cumulative_features_overview](../toolchain/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 1.89→1.93 累积特性总览 |
+| [toolchain/07_rust_1.93_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) | Rust 1.93 完整变更清单 |
+| [toolchain/09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) | Rust 1.93 兼容性深度解析 |
+| [toolchain/10_rust_1.89_to_1.93_cumulative_features_overview](../06_toolchain/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 1.89→1.93 累积特性总览 |
 
 ---
 

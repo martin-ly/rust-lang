@@ -16,6 +16,25 @@
 
 ## [1.3.0] - 2026-02-12 🆕
 
+### 全面检查推进计划实施（2026-02-12）🆕
+
+- **Phase 1 权威对齐**：RUST_193 新增权威来源对齐表（releases.rs、Rust Blog、Ferrocene FLS、RustBelt）；Edition 2024 与 FLS 范围说明；formal_methods README 新增权威来源快速链接、版本说明
+- **Phase 2 类型构造能力**：新建 [type_theory/construction_capability.md](type_theory/construction_capability.md)；Def TCON1、TCON 矩阵、类型构造决策树、确定性判定；type_theory README 收录
+- **Phase 3 并发确定性**：扩展 [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md)；Def EB-DET1、 theorem EB-DET-T1、确定性判定决策树、并发 vs 并行判定表；与 FORMAL_PROOF_SYSTEM_GUIDE 衔接
+- **Phase 4 组件成熟度**：扩展 [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md)；Def CE-MAT1（L1–L4 成熟度）、 theorem CE-MAT-T1、构建能力确定性判定树；与 02_workflow、05_boundary_system 衔接
+- **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md)；13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一 Def→示例→论证→证明链
+- **Phase 6 全局索引增强**：UNIFIED_SYSTEMATIC_FRAMEWORK 新增「按特性族/类型族/执行模型子索引」；设计模式表征与组件构建索引
+- **Phase 7 92 特性精简模板**：新建 [FEATURE_TEMPLATE](FEATURE_TEMPLATE.md)；概念→形式化引用→反例模板；与 RUST_193 对应
+- **Phase 8 增量流程**：新建 [INCREMENTAL_UPDATE_FLOW](INCREMENTAL_UPDATE_FLOW.md)；1.94+ 发布后更新步骤与检查清单；MAINTENANCE_GUIDE 新增版本增量更新节
+- **INDEX**：新增 CORE_FEATURES_FULL_CHAIN、FEATURE_TEMPLATE、INCREMENTAL_UPDATE_FLOW 条目
+
+### 持续推进至 100% 收尾（2026-02-12）🆕
+
+- **统一 100% 状态**：UNIFIED_SYSTEMATIC_FRAMEWORK 中 lifetime_formalization、pin_self_referential 证明完成度 4.6→5.0；STATISTICS、README 更新全面检查推进计划完成状态
+- **新文档纳入索引**：QUICK_REFERENCE、QUICK_FIND 新增 construction_capability、CORE_FEATURES_FULL_CHAIN、FEATURE_TEMPLATE、INCREMENTAL_UPDATE_FLOW、执行确定性、组件成熟度
+- **PROOF_INDEX**：新增 construction_capability（Def TCON1、TCON-T1、TCON-L1、TCON-C1）；06_boundary_analysis（Def EB-DET1、EB-DET-T1、EB-DET-C1）；04_compositional_engineering（Def CE-MAT1、CE-MAT-T1、CE-MAT-C1）；证明总数 110+
+- **ARGUMENTATION_GAP_INDEX**：文档导航新增 CORE_FEATURES_FULL_CHAIN、FEATURE_TEMPLATE、INCREMENTAL_UPDATE_FLOW、construction_capability；状态更新为全面检查推进计划实施完成
+
 ### 持续推进至 100%（2026-02-12）🆕
 
 - **类型理论阶段 2–5 完成**：阶段 2–4 见上；阶段 5：trait_system_formalization Def ORPH1/NEG1、定理 NEG-T1、Def DYN-IMPL1、定理 DYN-T1、推论 DYN-C1；advanced_types Def CONST-EVAL1、定理 CONST-EVAL-T1；00_completeness_gaps 高/中优先级缺口全部 ✅
@@ -43,6 +62,15 @@
 - **层次推进 100% 完成**：CONTENT_ENHANCEMENT 三阶段标为完成；04_compositional_engineering 新增组合决策树、组合反例表；practical_applications 新增与形式化衔接的案例索引；software_design_theory 00_MASTER_INDEX 标 100% 完成
 - **整体 100% 收尾**：CONTENT_ENHANCEMENT 状态改为「100% 完成」；ARGUMENTATION_GAP_INDEX 标 formal_methods 100%、整体框架已就绪；INDEX 编号修正（11–14）；README、根 README、STATISTICS 更新层次推进完成状态
 - **框架文档 100% 完成**：COMPREHENSIVE_SYSTEMATIC_OVERVIEW、DESIGN_MECHANISM_RATIONALE、LANGUAGE_SEMANTICS_EXPRESSIVENESS、SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS、RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS 状态由「持续完善直至 100%」改为「✅ 100% 完成」；RESEARCH_ROADMAP 1.4 标题改为「已完成」；ARGUMENTATION_GAP_INDEX type_theory 表述更新
+- **实质内容不足修复体系**：BEST_PRACTICES 新增 Def BP3、常见表现表、四步修复法、逐文档自检；CONTENT_ENHANCEMENT 新增实质内容自检表、薄弱文档优先修复指引；QUALITY_CHECKLIST 新增实质内容检查项；RESOURCES 新增资源与形式化衔接表；TOOLS_GUIDE 新增 Prusti/Kani/Miri 与 formal_methods 衔接说明
+- **100% 收尾**：INDEX、README、STATISTICS 补充实质内容自检体系；EXAMPLE 示例说明优化；根 README 研究笔记系统补实质内容自检体系；BEST_PRACTICES 状态与日期更新
+- **formal_methods 国际权威对标 100% 完成**：ownership_model 新增 Tree Borrows PLDI 2025；borrow_checker_proof 修正 Tree Borrows 会议年份与链接；README 新增 FLS 精确章节直接链接、权威奖项（ACM SIGPLAN John C. Reynolds、PLDI 2025 Distinguished Paper）、Tree Borrows 源码；00_completeness_gaps、pin_self_referential、lifetime_formalization、async_state_machine 新增 Ferrocene FLS 章节引用
+- **收尾完成**：07_anti_patterns 去除重复「九、引用」章节；README 更新内容补充 formal_methods 国际权威对标、07 收尾
+- **归类与扩展**：新建 [CLASSIFICATION.md](CLASSIFICATION.md) 文档分类体系（按文档角色、知识层次、主题域、扩展路线）；INDEX 增加文档分类体系节、扩展按主题分类（安全与 unsafe、设计模式与工程、版本与特性）；README 修正目录结构（补充 06/07、CLASSIFICATION、去除重复 CONTENT_ENHANCEMENT）；QUICK_REFERENCE 扩展 05/06/07、CLASSIFICATION 链接；ARGUMENTATION_GAP_INDEX 增加分类体系入口
+- **formal_methods 国际权威对标 100% 完成**：Tree Borrows 更新为 PLDI 2025（Distinguished Paper Award、Rocq 证明、30k crates 54% 更少拒绝）；新增 Ferrocene FLS 章节与本目录对应表（Ch. 15/17/19/21、Appendix C）；ownership_model、borrow_checker_proof、lifetime_formalization、pin_self_referential、async_state_machine 各文档新增国际权威对标脚注
+- **formal_methods 国际权威对标补全**：00_completeness_gaps、README 补充 Tree Borrows (OOPSLA 2024)、Polonius、FLS 官方采纳 2025；ownership_model 补 Safe Systems Programming in Rust (CACM 2021)；borrow_checker_proof 补 Tree Borrows、Polonius、Miri；lifetime_formalization 补 Polonius 规则链接
+- **formal_methods 国际权威对标**：README 新增「国际权威对标」节（RustBelt POPL 2018/2020、Stacked Borrows、Ferrocene FLS、Prusti/Kani 对照表）；ownership_model、borrow_checker_proof、async_state_machine、pin_self_referential、lifetime_formalization 参考文献补全权威论文链接与对应说明；00_completeness_gaps 新增 §9 国际权威对标
+- **实质内容充实**：BEST_PRACTICES 新增「研究笔记与形式化体系衔接」、Def BP2、实践对照表、Rust 示例与定理对应；GETTING_STARTED 增加「第一个可运行示例」、形式化定理链接；practical_applications 案例 1–3 与形式化定理对应表扩展；EXAMPLE 增加实质内容链接；FAQ 新增 Q2.5「如何判断实质内容」
 - **实验结果分析模板补全**：5 个实验文档（compiler_optimizations、concurrency_performance、memory_analysis、macro_expansion_performance、performance_benchmarks）的「结果分析模板」新增「示例填写」行，含典型 x86_64 环境下的示例数据，使模板有实质参考
 - **执行模型与可视化索引**：01_synchronous 新增反例表；VISUALIZATION_INDEX 状态改为「100% 完成」
 - **索引与实验 100% 完善**：INDEX type_theory 00_completeness_gaps 状态改为「✅ 阶段 1–7 Def 占位完成」；QUICK_FIND 完备性缺口状态更新；STATISTICS 证明数 105+、formal_methods Phase 1–6；experiments README 实验与形式化衔接表新增定理与文档链接列；PROOF_INDEX、experiments 最后更新 2026-02-12
@@ -273,7 +301,7 @@
 
 ### 新增文档
 
-- ✅ [Rust 1.93 vs 1.92 全面对比分析](../toolchain/05_rust_1.93_vs_1.92_comparison.md)
+- ✅ [Rust 1.93 vs 1.92 全面对比分析](../06_toolchain/05_rust_1.93_vs_1.92_comparison.md)
 
 ---
 

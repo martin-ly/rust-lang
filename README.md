@@ -7,18 +7,28 @@
 > **学习方式**: 理论 + 实践 + 项目驱动
 
 **项目状态**: ✅ **按资产口径 100% 完成**（狭义 100% 需本地跑通 `.\scripts\run_workspace_tests.ps1`）⭐⭐⭐⭐⭐
-**最后更新**: 2026-02-11
+**最后更新**: 2026-02-13
 **Rust 版本**: 1.93.0+ | Edition 2024
 **项目评级**: **优秀** (所有模块A级以上)
 **第1周推进**: ✅ **圆满完成，超出预期** (完成度28%→70%，+42%)
 **当前推进**: ✅ **全面推进至 100% 已完成**（详见 [向100%推进最终总结](./docs/archive/root_completion_reports/FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md)）
-**研究笔记系统**: ✅ **100%完成**（17/17研究笔记、类型理论阶段1–7、formal_methods Phase1–6、23种设计模式、层次推进三阶段）
-**文档完善度**: ✅ **100%完成**（19/19 速查卡已补齐「相关文档 + 相关示例代码」，深度文档已入 docs 索引）
+**研究笔记系统**: ✅ **100%完成**（17/17研究笔记、类型理论阶段1–7、formal_methods Phase1–6、23种设计模式、层次推进三阶段、实质内容自检体系）
+**文档完善度**: ✅ **100%完成**（20/20 速查卡含 AI/ML，深度文档已入 docs 索引）
 **测试资产**: ✅ **100%就绪**（37 测试文件、46 基准、11 跨模块用例）；狭义 100% 需本地执行 [run_workspace_tests.ps1](./scripts/run_workspace_tests.ps1)
 
 ---
 
 ## 🎉 最新更新
+
+### 2026-02-13 🆕
+
+- ✅ **100% 持续推进完成**：国际化对标、CLI/嵌入式专题、Rustlings 映射、错误码映射、Brown/RBE 入口、C01 英文导航
+  - [Rustlings 模块映射](exercises/RUSTLINGS_MAPPING.md)、[错误码映射](docs/02_reference/ERROR_CODE_MAPPING.md)
+  - [CLI 应用开发指南](docs/05_guides/CLI_APPLICATIONS_GUIDE.md)、[嵌入式 Rust 指南](docs/05_guides/EMBEDDED_RUST_GUIDE.md)
+  - [C01 主索引英文版](crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md)
+  - UNSAFE_RUST_GUIDE 对标 Rustonomicon、权威源元数据规范
+- **AI+Rust 扩展**：[AI+Rust 生态指南](docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md)（Burn/Candle/LLM）、AI 辅助工作流
+  - 详见 [TASK_INDEX](docs/07_project/TASK_INDEX.md)、[国际化对标评估](docs/07_project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md)
 
 ### 2026-02-11 🆕
 
@@ -29,7 +39,7 @@
   - 新增：AI 辅助指南、Unsafe 专题、学习检查清单、交互式练习入口
   - 断链修复：README.en、PROJECT_STRUCTURE、C13→形式化工具、新增 CONTRIBUTING/RESOURCES/ROADMAP
   - Cargo.workspace 与 Cargo.toml 对齐（c11_macro_system、c12_wasm）
-  - 详见 [计划实施完成报告](./docs/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md)
+  - 详见 [计划实施完成报告](./docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md)
 
 ### 2026-01-27 🆕
 
@@ -96,7 +106,7 @@
 
 - **性能优化使用指南**: 包含快速开始、核心功能、高级用法、配置选项、最佳实践
 - **跨模块集成示例**: 展示 C01-C12 模块的综合使用
-- **快速参考卡片**: 新增进程管理、网络编程、算法、设计模式、WASM速查卡（总计 19 个）
+- **快速参考卡片**: 20 个速查卡（含 AI/ML、进程管理、网络编程、算法、设计模式、WASM）
 - **最佳实践指南**: 完整的代码质量、性能优化、测试、文档指南
 - **模块使用指南**: 6个完整使用指南（性能优化、线程并发、异步编程、设计模式、WASM、宏系统）
 - **综合示例程序**: 4个综合示例（性能优化、跨模块集成、网络异步、算法综合）
@@ -683,7 +693,7 @@ git push origin feature/your-feature
 
 从 [C01 所有权与借用](./crates/c01_ownership_borrow_scope/) 开始，或者直接跳转到你感兴趣的模块！
 
-**最后更新**: 2025-12-25
+**最后更新**: 2026-02-13
 **维护团队**: Rust 学习社区
 **项目版本**: v1.0
 **第1周推进**: ✅ **圆满完成，超出预期** (完成度28%→70%，+42%)

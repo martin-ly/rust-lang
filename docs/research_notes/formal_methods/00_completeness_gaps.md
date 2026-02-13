@@ -1,7 +1,7 @@
 # 形式化方法完备性缺口：形式化论证不充分声明
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-12（Phase 6 完成，100%）
+> **最后更新**: 2026-02-12（Phase 6 完成，100%；国际权威对标补全）
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ **100% 完成**（Phase 1–6 全部补全）
 
@@ -123,6 +123,24 @@
 | 阶段 6 | extern、Deref/Drop、repr、?、const&mut static、spawn | Def EXTERN1/CVARIADIC1/QUERY1、DROP1/DEREF1/REPR1/CONST_MUT_STATIC1、SPAWN1 | ✅ |
 
 **状态**：✅ **100% 完成**，无剩余缺口。
+
+---
+
+## 9. 国际权威对标
+
+本目录 Def/定理与下述国际权威来源对应；详见 [README § 国际权威对标](README.md#国际权威对标authoritative-references)。
+
+| 权威来源 | 本目录对应 | 说明 |
+| :--- | :--- | :--- |
+| **RustBelt POPL 2018** | ownership 规则 1–3、T2/T3；borrow 规则、T1 | Iris 分离逻辑、unsafe 安全抽象；[论文](https://plv.mpi-sws.org/rustbelt/popl18/)；Ralf Jung 博士论文获 **ACM SIGPLAN John C. Reynolds Doctoral Dissertation Award** |
+| **Stacked Borrows POPL 2020** | 借用规则 1、RAW1、UNSAFE-T1 | 别名模型、&mut 唯一性、UB；Miri 实现；[论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) |
+| **Tree Borrows PLDI 2025** | 借用规则、RAW1 演进 | **Distinguished Paper Award**；树结构；30k crates 54% 更少拒绝；Rocq 证明；[ETH](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[ACM PDF](https://dl.acm.org/doi/pdf/10.1145/3735592)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf) |
+| **RustBelt Meets Relaxed Memory POPL 2020** | CHAN-T1、MUTEX-T1、ATOMIC1、ARC1 | relaxed memory、Arc 数据竞争；[论文](https://plv.mpi-sws.org/rustbelt/rbrlx/) |
+| **Polonius** | lifetime 推断、borrow 分析 | datalog 形式化、NLL 后继；[规则](https://rust-lang.github.io/polonius/) |
+| **Rust Reference** | UB 列表、RAW1、REPR1 | 官方规范；[UB](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) |
+| **Rustonomicon** | UNSAFE1、TRANSMUTE1、UNION1 | unsafe、内存布局；[文档](https://doc.rust-lang.org/nomicon/) |
+| **Ferrocene FLS** | 语法与 legality | Rust 1.93 形式化规范；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/)；[spec](https://spec.ferrocene.dev/) |
+| **Prusti / Kani / Miri** | 可验证 ownership/borrow | 验证工具；Miri 实现 Stacked Borrows |
 
 ---
 

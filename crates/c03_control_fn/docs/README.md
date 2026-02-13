@@ -172,7 +172,7 @@ docs/
 
 **⭐ 完整特性总结（推荐首选）**:
 
-- [Rust 1.93.0 特性总结](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) ⭐ NEW
+- [Rust 1.93.0 特性总结](../../../docs/archive/version_reports/RUST_192_VERIFICATION_SUMMARY.md) ⭐ NEW
   - 所有新特性一览、性能数据、迁移指南、最佳实践
 
 **快速参考**:
@@ -193,6 +193,10 @@ docs/
 - [常见问题](tier_01_foundations/04_常见问题.md) - 快速查找问题答案
 - [术语表](tier_01_foundations/03_术语表.md) - 控制流相关术语
 - [控制流参考](tier_03_references/01_控制流参考.md) - 技术参考
+
+### 相关模块
+
+- [c06_async 异步编程](../../c06_async/) - async/await 与控制流的协同（详见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)）
 
 ### 历史文档
 

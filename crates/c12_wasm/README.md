@@ -496,7 +496,7 @@ npm start
 **模块状态**: ✅ Rust 1.93.0 兼容
 **最后更新**: 2026-02-12
 **适用版本**: Rust 1.93.0+ (Edition 2024), WASM 2.0 + WASI 0.2
-**1.93 兼容性**: [docs/toolchain/06_rust_1.93_compatibility_notes.md](../../docs/toolchain/06_rust_1.93_compatibility_notes.md)
+**1.93 兼容性**: [docs/06_toolchain/06_rust_1.93_compatibility_notes.md](../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md)
 **新增内容**:
 
 - ✅ Rust 1.92.0 WASM 特性实现和文档

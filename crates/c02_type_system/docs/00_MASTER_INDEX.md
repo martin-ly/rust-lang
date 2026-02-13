@@ -29,7 +29,7 @@
 | **Rust Reference** | [Type system](https://doc.rust-lang.org/reference/types.html) | 类型系统规范 |
 | **Rustonomicon** | [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html) | 型变、高级类型 |
 
-**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 
 ---
 

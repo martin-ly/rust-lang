@@ -34,6 +34,11 @@
   - [🔗 全局一致性校验矩阵](#-全局一致性校验矩阵)
     - [术语一致性](#术语一致性)
     - [公理编号一致性](#公理编号一致性)
+  - [📑 按特性族/类型族/执行模型子索引](#-按特性族类型族执行模型子索引)
+    - [按特性族](#按特性族)
+    - [按类型族](#按类型族)
+    - [按执行模型](#按执行模型)
+    - [设计模式表征与组件构建](#设计模式表征与组件构建)
   - [📚 文档交叉引用总索引](#-文档交叉引用总索引)
 
 ---
@@ -169,11 +174,11 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | ownership_model | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
 | borrow_checker_proof | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
-| lifetime_formalization | ✅ | ✅ | ✅ | ✅ | ⚠️ | ✅ | 4.6 |
+| lifetime_formalization | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
 | type_system_foundations | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
 | variance_theory | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
 | async_state_machine | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
-| pin_self_referential | ✅ | ✅ | ✅ | ✅ | ⚠️ | ✅ | 4.6 |
+| pin_self_referential | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
 | trait_system_formalization | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
 | advanced_types | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
 
@@ -378,6 +383,47 @@ Pin ──→ 自引用安全
 
 ---
 
+## 📑 按特性族/类型族/执行模型子索引
+
+### 按特性族
+
+| 特性族 | 矩阵 | 决策树 | 完整链 |
+| :--- | :--- | :--- | :--- |
+| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](RUST_193_FEATURE_MATRIX.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) |
+| **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) 所有权/借用 |
+| **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](type_theory/construction_capability.md) |
+| **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) Trait/泛型 |
+| **控制流** | - | - | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) match/for/? |
+| **并发与异步** | 五维矩阵 § Future/Pin | 表达能力边界决策树 § 并发/异步 | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) Send/Sync/Future |
+
+### 按类型族
+
+| 类型族 | 构造能力 | 决策树 | 文档 |
+| :--- | :--- | :--- | :--- |
+| **基本类型** | TCON 矩阵 Unique | 类型构造决策树 | [construction_capability](type_theory/construction_capability.md) |
+| **复合类型** | struct/enum/tuple | 同上 | [construction_capability](type_theory/construction_capability.md) |
+| **泛型/GAT** | Multi 或 Unique | 同上 | [construction_capability](type_theory/construction_capability.md)、[advanced_types](type_theory/advanced_types.md) |
+| **impl Trait / dyn Trait** | Unique | 同上 | [trait_system_formalization](type_theory/trait_system_formalization.md) |
+
+### 按执行模型
+
+| 模型 | 边界 | 确定性判定 | 文档 |
+| :--- | :--- | :--- | :--- |
+| **同步** | 五模型 × 三维边界 | Def EB-DET1 Sequential | [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md) |
+| **异步** | 同上 | Interleaved | 同上 |
+| **并发** | 同上 | Interleaved；并发 vs 并行判定 | 同上 |
+| **并行** | 同上 | Parallel | 同上 |
+| **分布式** | 同上 | Distributed | 同上 |
+
+### 设计模式表征与组件构建
+
+| 维度 | 决策树 | 文档 |
+| :--- | :--- | :--- |
+| **设计模式表达** | [04_expressiveness_boundary](software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md) | 等价/近似/不可表达 |
+| **组件构建** | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) 构建能力确定性判定树 | Def CE-MAT1、L1–L4 成熟度 |
+
+---
+
 ## 📚 文档交叉引用总索引
 
 | 文档 | 用途 |
@@ -394,6 +440,9 @@ Pin ──→ 自引用安全
 | [PROOF_GRAPH_NETWORK](../PROOF_GRAPH_NETWORK.md) | 证明图网 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构、概念定义、思维表征 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
+| [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |
+| [FEATURE_TEMPLATE](FEATURE_TEMPLATE.md) | 79 项特性精简模板 |
+| [INCREMENTAL_UPDATE_FLOW](INCREMENTAL_UPDATE_FLOW.md) | 版本增量更新流程 |
 
 ---
 

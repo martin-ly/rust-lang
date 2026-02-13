@@ -6,7 +6,7 @@
 > **创建日期**: 2025-01-27
 > **适用版本**: Rust 1.91.0+（历史版本）
 > **相关模块**: `c04_generic`
-> **注意**: 本文档为历史版本。请查看 [Rust 1.92.0 综合梳理](../../RUST_192_COMPREHENSIVE_DOCUMENTATION_REVIEW.md) 了解最新特性。
+> **注意**: 本文档为历史版本。请查看 [Rust 1.92/1.93 泛型改进](./RUST_192_GENERIC_IMPROVEMENTS.md) 了解最新特性。
 
 ---
 

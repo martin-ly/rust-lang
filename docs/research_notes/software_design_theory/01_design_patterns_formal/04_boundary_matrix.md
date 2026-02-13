@@ -133,6 +133,86 @@ Singleton、Interpreter、Memento、Observer、Template Method、Visitor 为近�
 
 ---
 
+## 设计模式表征能力形式化树图
+
+**Def BMP-TREE1（模式→实现路径→定理）**：设 $P$ 为 GoF 模式，$I(P)$ 为 Rust 实现路径，$T(P)$ 为对应形式化定理。表征能力由三元组 $(P, I(P), T(P))$ 确定。
+
+### Mermaid 形式化树图
+
+```mermaid
+flowchart TB
+    subgraph 创建型
+        FM[Factory Method] --> FM_impl[trait 工厂方法]
+        FM_impl --> FM_th[BMP-T1 边界唯一]
+        AF[Abstract Factory] --> AF_impl[enum + 关联类型]
+        AF_impl --> AF_th[BMP-T1]
+        B[Builder] --> B_impl[链式 + 类型状态]
+        B_impl --> B_th[BMP-T1]
+        P[Prototype] --> P_impl[Clone trait]
+        P_impl --> P_th[BMP-T1]
+        S[Singleton] --> S_impl[OnceLock / static mut]
+        S_impl --> S_th[BMP-L1 近似表达]
+    end
+    subgraph 结构型
+        A[Adapter] --> A_impl[包装 + 委托]
+        A_impl --> A_th[BMP-T1]
+        BR[Bridge] --> BR_impl[trait 解耦]
+        BR_impl --> BR_th[BMP-T1]
+        C[Composite] --> C_impl[enum 递归]
+        C_impl --> C_th[BMP-T1]
+    end
+    subgraph 行为型
+        CO[Command] --> CO_impl[闭包 / Box&lt;dyn Fn&gt;]
+        CO_impl --> CO_th[BMP-T1]
+        IT[Iterator] --> IT_impl[Iterator trait]
+        IT_impl --> IT_th[BMP-T1]
+        OB[Observer] --> OB_impl[channel / RefCell]
+        OB_impl --> OB_th[BMP-L1 近似]
+        V[Visitor] --> V_impl[match / trait]
+        V_impl --> V_th[BMP-L1 近似]
+    end
+```
+
+### ASCII 形式化树图（模式→实现路径→定理）
+
+```text
+设计模式表征能力形式化树
+═══════════════════════════════════════════════════════════════
+
+创建型
+├── Factory Method   → trait 工厂方法        → BMP-T1 等价
+├── Abstract Factory → enum + 关联类型       → BMP-T1 等价
+├── Builder          → 链式 + 类型状态      → BMP-T1 等价
+├── Prototype        → Clone trait          → BMP-T1 等价
+└── Singleton        → OnceLock / static mut → BMP-L1 近似
+
+结构型
+├── Adapter          → 包装 + 委托          → BMP-T1 等价
+├── Bridge           → trait 解耦           → BMP-T1 等价
+├── Composite        → enum 递归            → BMP-T1 等价
+├── Decorator        → 结构体包装           → BMP-T1 等价
+├── Facade           → 模块/结构体          → BMP-T1 等价
+├── Flyweight        → Arc 共享             → BMP-T1 等价
+└── Proxy            → 委托/延迟             → BMP-T1 等价
+
+行为型
+├── Chain of Resp.   → Option/链表          → BMP-T1 等价
+├── Command          → 闭包/Box<dyn Fn>     → BMP-T1 等价
+├── Interpreter      → 枚举 + match         → BMP-L1 近似
+├── Iterator         → Iterator trait       → BMP-T1 等价
+├── Mediator         → 结构体协调           → BMP-T1 等价
+├── Memento          → Clone/serde          → BMP-L1 近似
+├── Observer         → channel/RefCell    → BMP-L1 近似
+├── State            → enum/类型状态        → BMP-T1 等价
+├── Strategy         → trait               → BMP-T1 等价
+├── Template Method  → trait 默认方法       → BMP-L1 近似
+└── Visitor          → match/trait         → BMP-L1 近似
+
+定理说明：BMP-T1 边界唯一；BMP-L1 近似表达（见 expressive_inexpressive_matrix）
+```
+
+---
+
 ## 与 43 完全模型衔接
 
 扩展 20 种模式见 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md)；绝大部分为纯 Safe、原生支持、等价表达。

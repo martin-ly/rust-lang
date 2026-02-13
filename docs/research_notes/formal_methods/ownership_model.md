@@ -1,7 +1,7 @@
 # 所有权模型形式化
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-12（国际权威对标补全）
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ 已完成 (100%)
 
@@ -41,7 +41,7 @@
     - [示例 5: 复杂所有权场景](#示例-5-复杂所有权场景)
     - [示例 6: 所有权与函数返回](#示例-6-所有权与函数返回)
   - [📖 参考文献](#-参考文献)
-    - [学术论文](#学术论文)
+    - [学术论文（国际权威）](#学术论文国际权威)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
     - [工具资源](#工具资源)
@@ -552,22 +552,46 @@ fn main() {
 
 ## 📖 参考文献
 
-### 学术论文
+### 学术论文（国际权威）
 
-1. **RustBelt: Logical Foundations for the Future of Safe Systems Programming**
-   - 作者: Ralf Jung, et al.
-   - 年份: 2018
-   - 摘要: 为 Rust 的所有权和借用系统提供形式化基础
+1. **RustBelt: Securing the Foundations of the Rust Programming Language** (POPL 2018)
+   - 作者: Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
+   - 链接: <https://plv.mpi-sws.org/rustbelt/popl18/>
+   - 摘要: 首个 Rust 安全形式化证明；Iris 分离逻辑；unsafe 安全抽象条件
+   - 与本目录: 所有权规则 1–3、定理 T2/T3 对应；RAII、Box、Rc 等已验证
 
-2. **The RustBelt Project: Formalizing Rust's Type System**
-   - 作者: Derek Dreyer
-   - 年份: 2017
-   - 摘要: Rust 类型系统的形式化研究
+2. **Stacked Borrows: An Aliasing Model for Rust** (POPL 2020)
+   - 作者: Ralf Jung, Hoang-Hai Dang, Jeehoon Kang, Derek Dreyer
+   - 链接: <https://plv.mpi-sws.org/rustbelt/stacked-borrows/>
+   - 摘要: 指针别名模型；&mut 唯一性；Miri 实现；Coq 证明优化 soundness
+   - 与本目录: 借用规则、RAW1 裸指针、UB 定义对应
+
+3. **RustBelt Meets Relaxed Memory** (POPL 2020)
+   - 链接: <https://plv.mpi-sws.org/rustbelt/rbrlx/>
+   - 摘要: relaxed memory、Arc 数据竞争、synchronized ghost state
+   - 与本目录: ATOMIC1、RC1/ARC1 并发语义对应
+
+4. **Ferrocene Language Specification (FLS)** — Rust 1.93 形式化规范
+   - 链接: <https://spec.ferrocene.dev/>；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/)
+   - 与本目录: 语法与 legality 互补；本目录侧重语义与安全性质
+
+5. **Tree Borrows** (PLDI 2025 — Distinguished Paper Award)
+   - 作者: Neven Villani, Johannes Hostert, Derek Dreyer, Ralf Jung
+   - 链接: [ETH 项目页](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[ACM PDF](https://dl.acm.org/doi/pdf/10.1145/3735592)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf)
+   - 摘要: Stacked Borrows 演进；树结构替代栈；30k crates 测试 54% 更少拒绝；Rocq 形式化证明
+   - 与本目录: 借用规则、RAW1 演进；与 ownership 规则 2、3 兼容
+
+6. **Safe Systems Programming in Rust** (CACM 2021)
+   - 作者: Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
+   - 链接: <https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/>
+   - 与本目录: 所有权与借用综述；Rust 安全论证高层总结
 
 ### 官方文档
 
 - [Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
+- [Rust Reference - Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
+- [Rustonomicon](https://doc.rust-lang.org/nomicon/) — unsafe、内存布局
 
 ### 相关代码
 
@@ -786,5 +810,7 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$：借用 $r$ 的活跃区间由生命�
 ---
 
 **维护者**: Rust Formal Methods Research Group
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-12
 **状态**: ✅ **已完成** (100%)
+
+**国际权威对标**：[RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)（Iris、规则 1–3）；[FLS Ch. 15](https://spec.ferrocene.dev/ownership-and-deconstruction.html) Ownership and Destruction；[Rustonomicon](https://doc.rust-lang.org/nomicon/) 内存布局。

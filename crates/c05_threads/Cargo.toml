@@ -60,3 +60,7 @@ harness = false
 [[bench]]
 name = "rust_192_benchmarks"
 harness = false
+
+[[bench]]
+name = "false_sharing_bench"
+harness = false

@@ -3,13 +3,15 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-01-26
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记全部完成，Rust 1.93.0 更新完成）
+> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记 + 全面检查推进计划 Phase 1–8 完成）
 
 ---
 
 ## 📊 快速导航
 
 > 💡 **提示**: 需要更详细的查找功能？请查看 [快速查找工具](./QUICK_FIND.md)！
+> 📐 **分类体系**: 按文档角色、知识层次、主题域查找 → [CLASSIFICATION.md](./CLASSIFICATION.md)
+> 📋 **速查卡**: 按主题的语法速查、代码示例、反例 → [docs/quick_reference](../quick_reference/README.md)
 
 ---
 
@@ -31,6 +33,7 @@
 | 主题 | 文件 | 状态 |
 | :--- | :--- | :--- |
 | 完备性缺口 | [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md) | ✅ 阶段 1–7 Def 占位 |
+| 类型构造能力 | [construction_capability.md](./type_theory/construction_capability.md) | ✅ Def TCON1、矩阵、决策树 |
 | 类型系统基础 | [type_system_foundations.md](./type_theory/type_system_foundations.md) | ✅ 100% |
 | Trait 系统形式化 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md) | ✅ 100% |
 | 生命周期形式化   | [lifetime_formalization.md](./type_theory/lifetime_formalization.md)         | ✅ 100% |
@@ -45,6 +48,9 @@
 | 23/43 模型 | [02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/) | ✅ 100% |
 | 执行模型 | [03_execution_models](./software_design_theory/03_execution_models/) | ✅ 五模型 |
 | 组合工程 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/) | ✅ CE-T1–T3 |
+| 边界体系 | [05_boundary_system](./software_design_theory/05_boundary_system/) | ✅ 三维矩阵 |
+| Rust 惯用模式 | [06_rust_idioms](./software_design_theory/06_rust_idioms.md) | ✅ RAII、Newtype、类型状态 |
+| 反模式与边界 | [07_anti_patterns](./software_design_theory/07_anti_patterns.md) | ✅ 13 反例、规避策略 |
 
 #### ⚡ 实验研究
 
@@ -114,6 +120,7 @@
 
 ### 类型系统相关
 
+- 类型构造能力 → [construction_capability.md](./type_theory/construction_capability.md)
 - 类型推导 → [type_system_foundations.md](./type_theory/type_system_foundations.md)
 - Trait → [trait_system_formalization.md](./type_theory/trait_system_formalization.md)
 - GATs → [advanced_types.md](./type_theory/advanced_types.md)
@@ -192,6 +199,7 @@
 ### 核心文档
 
 - [主索引](./README.md) - 完整的研究笔记索引
+- [速查卡快速参考](../02_reference/quick_reference/README.md) - 20 个速查卡（含 AI/ML、类型、所有权、并发、设计模式等）；与本研究笔记互为补充
 - [完整索引](./INDEX.md) - 所有研究笔记的详细索引
 - [软件设计理论](./software_design_theory/README.md) - 设计模式、23/43、执行模型、组合工程
 - [快速入门指南](./GETTING_STARTED.md) - 新用户入门指南
@@ -204,6 +212,9 @@
 - [研究笔记示例](./EXAMPLE.md) - 完整的研究笔记示例
 - [形式化方法索引](./formal_methods/README.md)
 - [类型理论索引](./type_theory/README.md)
+- [核心特性完整链](./CORE_FEATURES_FULL_CHAIN.md) - 13 项核心特性 Def→示例→论证→证明
+- [特性精简模板](./FEATURE_TEMPLATE.md) - 79 项非核心特性模板
+- [版本增量更新流程](./INCREMENTAL_UPDATE_FLOW.md) - 1.94+ 发布后更新步骤
 - [实验研究索引](./experiments/README.md)
 - [工具使用指南](./TOOLS_GUIDE.md) - 研究工具详细指南
 
@@ -216,5 +227,5 @@
 ---
 
 **维护团队**: Rust Research Community
-**最后更新**: 2026-01-26
-**状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记全部完成）
+**最后更新**: 2026-02-12
+**状态**: ✅ **研究笔记系统 100% 完成**（全面检查推进计划 Phase 1–8 完成）

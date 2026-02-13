@@ -1,9 +1,9 @@
 # 研究笔记最佳实践
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **Rust 1.93.0 更新完成**
+> **状态**: ✅ **100% 完成**（含实质内容不足判断与四步修复法）
 
 ---
 
@@ -14,6 +14,8 @@
   - [📋 概述](#-概述)
     - [目标](#目标)
   - [形式化论证最佳实践](#形式化论证最佳实践)
+  - [研究笔记与形式化体系衔接](#研究笔记与形式化体系衔接)
+  - [实质内容不足判断与修复](#实质内容不足判断与修复)
   - [✍️ 编写最佳实践](#️-编写最佳实践)
     - [1. 明确研究目标](#1-明确研究目标)
     - [2. 提供理论基础](#2-提供理论基础)
@@ -83,6 +85,77 @@
 - ✅ 交叉引用：与 [PROOF_INDEX](PROOF_INDEX.md)、[FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 衔接
 
 **引用**：[FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 论证要素规范、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) 论证体系五层。
+
+---
+
+## 研究笔记与形式化体系衔接
+
+**Def BP2（实质内容完备）**：研究笔记 $N$ 满足**实质内容完备**，当且仅当 $N$ 含：形式化（Def/定理）、可运行代码、典型场景、反例或边界、与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md)、[PROOF_INDEX](PROOF_INDEX.md) 的交叉引用。
+
+**实践对照表**：
+
+| 检查项 | 示例 | 形式化链接 |
+| :--- | :--- | :--- |
+| **形式化** | Def OW1、定理 T2 | [ownership_model](formal_methods/ownership_model.md) |
+| **代码** | `let s = String::from("x"); take_ownership(s);` | 对应 T2 移动语义 |
+| **场景** | 所有权转移、借用、生命周期 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) |
+| **反例** | 双重可变借用、悬垂引用 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+| **衔接** | 定理引用 PROOF_INDEX | [PROOF_INDEX](PROOF_INDEX.md) |
+
+**Rust 实质示例与定理对应**：
+
+```rust
+// 对应 ownership_model 定理 T2：移动后原绑定失效
+fn example_ownership() {
+    let s = String::from("hi");
+    let t = s;  // 移动
+    // println!("{}", s);  // 错误：s 已失效
+}
+
+// 对应 borrow_checker_proof 定理 T1：不可变借用可共存
+fn example_borrow() {
+    let x = 5;
+    let r1 = &x;
+    let r2 = &x;
+    assert_eq!(*r1, *r2);
+}
+
+// 反例：违反借用规则
+fn example_anti_pattern() {
+    let mut v = vec![1, 2, 3];
+    let r = &v[0];      // 不可变借用
+    v.push(4);          // 错误：可变借用与不可变借用冲突
+}
+```
+
+**引理 BP-L1**：若研究笔记满足 Def BP2，则其满足 Def BP1；实质内容完备蕴含形式化完备。
+
+*证明*：由 Def BP1、BP2；形式化 + 代码 + 场景 + 反例 + 衔接 ⇒ 形式化完备。∎
+
+---
+
+## 实质内容不足判断与修复
+
+**Def BP3（实质内容不足）**：研究笔记 $N$ 存在**实质内容不足**，当且仅当 $N$ 存在以下至少一项：无 Def/定理或仅占位、无可运行代码或代码与论点无关、无典型场景或仅泛泛描述、无反例或边界说明、无与 [formal_methods](formal_methods/README.md)/[type_theory](type_theory/README.md)/[PROOF_INDEX](PROOF_INDEX.md) 的交叉引用。
+
+**常见无实质内容表现**：
+
+| 表现 | 反例（不足） | 正例（充足） |
+| :--- | :--- | :--- |
+| 形式化 | 仅「定义见 X」无具体 Def | Def OW1、定理 T2 及证明思路 |
+| 代码 | 伪代码或不可运行片段 | `cargo run` 可执行、对应某定理 |
+| 场景 | 「可用于多种场景」无具体例 | 「Web API 请求→Builder 模式→Axum」 |
+| 反例 | 无 | 双重可变借用、悬垂引用、unwrap 空值 |
+| 衔接 | 无引用 | 链接至 ownership_model T2、PROOF_INDEX |
+
+**四步修复法**：
+
+1. **补形式化**：为核心概念添加 Def（含符号、前置条件、结论）；为结论添加定理及证明思路；引用 [PROOF_INDEX](PROOF_INDEX.md) 中已有证明。
+2. **补代码**：添加可运行 Rust 示例（`cargo build` 通过）；在注释中标明对应定理（如 `// 对应 ownership T2`）。
+3. **补场景与反例**：添加 1–3 个典型使用场景；添加 1–2 个反例及规避策略。
+4. **补衔接**：在相关段落增加 `[文档名](path)` 链接至 formal_methods、type_theory、practical_applications。
+
+**逐文档自检**：按 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) 实质内容检查清单逐项核对；若任一项为空或仅占位，则需修复。见 [FAQ Q2.5](FAQ.md#q25-如何判断研究笔记是否有实质内容) 快速判断指引。
 
 ---
 
@@ -552,5 +625,5 @@ git commit -m "添加所有权模型形式化研究笔记
 ---
 
 **维护团队**: Rust Research Community
-**最后更新**: 2026-01-26
-**状态**: ✅ **Rust 1.93.0 更新完成**
+**最后更新**: 2026-02-12
+**状态**: ✅ **100% 完成**（含形式化衔接、实质内容检查表、Rust 示例与定理对应）

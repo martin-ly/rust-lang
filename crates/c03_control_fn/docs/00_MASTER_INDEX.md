@@ -62,7 +62,7 @@
 | **Rust By Example** | [Control Flow](https://doc.rust-lang.org/rust-by-example/flow_control.html), [Closures](https://doc.rust-lang.org/rust-by-example/fn/closures.html) | 条件、循环、闭包 |
 | **Rust Reference** | [Expressions](https://doc.rust-lang.org/reference/expressions.html) | 表达式、控制流规范 |
 
-**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 
 ## 📋 快速导航
 

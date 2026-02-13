@@ -157,9 +157,9 @@
 
 - **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 设计模式完整体系
 - **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - GoF/并发模式全面对比
-- **🗺️ [Rust 1.93.0 综合思维导图](./docs/RUST_192_COMPREHENSIVE_MINDMAP.md)** ⭐ NEW!
+- **🗺️ [Rust 1.93.0 设计模式改进与思维导图](./docs/RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md)** ⭐ NEW!
   - GoF模式/并发模式/Rust特有模式 | 3级学习路径(1-6周)
-- **💻 [Rust 1.93.0 实战示例集](./docs/RUST_192_EXAMPLES_COLLECTION.md)** ⭐ NEW!
+- **💻 [Rust 实战示例集](./docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐ NEW!
   - 800+行代码 | Builder/Factory/Strategy/Observer/Actor/Type State
 
 **完整度**: 📊 知识图谱 + 📐 多维矩阵 + 🗺️ 思维导图 + 💻 实战示例 = **100%** ✨

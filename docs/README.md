@@ -1,213 +1,68 @@
 # 📚 Rust 学习系统 - 文档中心
 
 > **项目主页**: [返回主 README](../README.md)
-> **核心文档导航**: [docs/README.md](./README.md)（本文件）
+> **主索引**: [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) - 按主题分类的完整文档导航
 
 ---
 
-## 🎯 文档结构概览
+## 🎯 按主题快速导航
 
-```text
-docs/
-├── README.md                      # 📋 文档中心主索引（本文件）
-│
-├── quick_reference/               # ⚡ 快速参考速查卡
-│   ├── README.md
-│   └── [19个速查卡文件] ⭐ (新增进程管理、网络编程、算法、设计模式、WASM速查卡)
-│
-├── research_notes/                # 🔬 研究笔记系统
-│   ├── README.md
-│   ├── formal_methods/            # 形式化方法研究
-│   ├── type_theory/               # 类型理论研究
-│   └── experiments/               # 实验研究
-│
-├── rust-formal-engineering-system/ # 🎓 形式化工程系统
-│   ├── 00_master_index.md         # 主索引
-│   ├── README.md
-│   ├── 01_theoretical_foundations/  # 理论基础
-│   ├── 02_programming_paradigms/    # 编程范式
-│   ├── 03_design_patterns/          # 设计模式
-│   └── ... (10个专业模块)
-│
-├── toolchain/                     # 🔧 工具链文档
-│   ├── README.md
-│   └── [4个工具链指南]
-│
-├── docs/                          # 📚 深度文档
-│   └── [语言特性、参考文档等]
-│
-├── archive/                       # 📦 归档文件
-│   ├── README.md                  # 归档说明
-│   ├── spell_check/               # 拼写检查相关
-│   ├── status/                    # 项目状态报告
-│   ├── updates/                   # 更新报告
-│   ├── reports/                   # 各种报告
-│   └── temp/                      # 临时文件
-│
-└── backup/                        # 💾 备份文件（.rar）
-```
-
----
-
-## 🚀 快速入口
-
-### 🌟 核心文档（必读）
-
-**从这里开始** → [📋 文档中心主索引](./README.md)（本文件）
-
-**主要文档系统**：
-
-1. **[快速参考](./quick_reference/)** - 19个速查卡 ⭐ (新增进程管理、网络编程、算法、设计模式、WASM速查卡)，快速查找语法和模式
-2. **[研究笔记](./research_notes/)** - 形式化方法、类型理论、实验研究
-3. **[形式化工程系统](./rust-formal-engineering-system/)** - 完整的理论体系
-4. **[工具链文档](./toolchain/)** - 编译器、Cargo、rustdoc 等工具指南
-
-### 📚 四大文档系统
-
-#### 1. 快速参考（quick_reference/）
-
-**用途**: 快速查找 Rust 语法、模式、最佳实践
-
-**入口**: [quick_reference/README.md](./quick_reference/README.md)
-
-**包含**:
-
-- 类型系统速查卡
-- 所有权系统速查卡
-- 异步编程速查卡
-- 泛型编程速查卡
-- 错误处理速查卡
-- 线程与并发速查卡
-- 宏系统速查卡
-- 测试速查卡
-- 控制流与函数速查卡
-- 集合与迭代器速查卡
-- 智能指针速查卡
-- 模块系统速查卡
-- 字符串与格式化速查卡
-- Cargo 速查卡
-- 进程管理速查卡 ⭐ NEW
-- 网络编程速查卡 ⭐ NEW
-- 算法与数据结构速查卡 ⭐ NEW
-- 设计模式速查卡 ⭐ NEW
-- WASM 速查卡 ⭐ NEW
-
-**特色**:
-
-- ✅ 所有19个速查卡已完成交叉引用增强
-- ✅ 统一格式：官方文档、项目内部文档、相关速查卡
-- ✅ 版本一致性：所有速查卡已更新到 Rust 1.93.0+
-
-#### 2. 研究笔记（research_notes/）
-
-**用途**: 深入的研究和形式化方法文档
-
-**入口**: [research_notes/README.md](./research_notes/README.md)
-
-**顶层框架** 🆕: [理论体系与论证体系结构](./research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) —— 四层理论架构、五层论证结构、安全与非安全全面论证
-
-**包含**:
-
-- **理论体系**：公理层→语义层→定理层→边界层
-- **论证体系**：概念定义→属性关系→解释论证→形式化证明→思维表征
-- **安全与非安全**：[全面论证](./research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)
-- 形式化方法研究（所有权模型、借用检查器、异步状态机等）
-- 类型理论研究（类型系统基础、Trait系统、生命周期等）
-- 实验研究（性能基准、内存分析、编译器优化等）
-
-#### 3. 形式化工程系统（rust-formal-engineering-system/）
-
-**用途**: 完整的理论体系和实践文档
-
-**入口**: [rust-formal-engineering-system/00_master_index.md](./rust-formal-engineering-system/00_master_index.md)
-
-**包含**:
-
-- 01 - 理论基础（类型系统、内存安全、所有权等）
-- 02 - 编程范式（同步、异步、函数式等）
-- 03 - 设计模式（创建型、结构型、行为型）
-- 04 - 应用领域（金融、游戏、IoT、AI等）
-- 05 - 软件工程（架构、微服务、测试等）
-- 06 - 工具链生态（编译器、Clippy、Miri等）
-- 07 - 跨语言比较（与C++、Go、Python等对比）
-- 08 - 实用示例
-- 09 - 研究议程
-- 10 - 质量保障
-
-#### 4. 工具链文档（toolchain/）
-
-**用途**: Rust 工具链使用指南
-
-**入口**: [toolchain/README.md](./toolchain/README.md)
-
-**包含**:
-
-- 编译器特性详解
-- Cargo 工作空间和依赖管理
-- rustdoc 高级用法
-- Rust 1.93 vs 1.92 对比 🆕
-- Rust 1.91 vs 1.90 对比
-
-#### 5. 深度文档与完善指南
-
-**用途**: 高级主题、跨模块示例与文档完善指引
-
-**入口**:
-
-- [高级主题深度指南](./ADVANCED_TOPICS_DEEP_DIVE.md) - 8 个高级主题
-- [跨模块集成示例](./CROSS_MODULE_INTEGRATION_EXAMPLES.md) - 6 个完整示例
-- [文档完善最终指南](./FINAL_DOCUMENTATION_COMPLETION_GUIDE.md) - 文档完善度 100%（19/19 速查卡已补齐相关文档+示例代码）
-
-#### 6. 专题指南（2026-02 新增）
-
-**用途**: 专项主题深入指南
-
-**入口**:
-
-- [Unsafe Rust 专题](./UNSAFE_RUST_GUIDE.md) - Rustonomicon 导航与安全抽象原则
-- [思维表征方式](./THINKING_REPRESENTATION_METHODS.md) - 思维导图、决策树、转换树、证明树
-- [多维概念矩阵](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 技术选型、错误处理、测试矩阵
-- [应用分析视图](./APPLICATIONS_ANALYSIS_VIEW.md) - 应用场景→技术选型→论证依据
-- [边界条件与特例](./EDGE_CASES_AND_SPECIAL_CASES.md) - 空集、零长度、溢出等特例
-- [官方资源映射](./OFFICIAL_RESOURCES_MAPPING.md) - 本项目 ↔ The Rust Book / Reference / RBE
-- [跨语言对比](./CROSS_LANGUAGE_COMPARISON.md) - Rust vs C++/Go/Python
-- [Rust 发布追踪 Checklist](./RUST_RELEASE_TRACKING_CHECKLIST.md) - 新版本发布后的更新流程
-- [各模块 1.93 适配状态一览表](./MODULE_1.93_ADAPTATION_STATUS.md) - C01–C12 模块 1.93 适配状态
-- [形式化验证工具](./research_notes/TOOLS_GUIDE.md) - Prusti、Kani、Creusot 实战
-- [项目批判性评估报告](./PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md) - 全面评估、差距与改进计划 ⭐
-- [改进完成总结](./IMPROVEMENT_COMPLETION_SUMMARY_2026_02.md) - P0/P1 100% 完成 (2026-02-12)
-- [文档主题梳理与重组规划](./DOCUMENTATION_THEME_ORGANIZATION_PLAN.md) - 文档结构规划、主题分类、执行策略 ⭐
+| 主题 | 入口 | 说明 |
+|------|------|------|
+| **学习路径** | [00_MASTER_INDEX § 01_learning](./00_MASTER_INDEX.md#01-学习路径与导航) | 学习规划、官方资源映射 |
+| **速查参考** | [02_reference](#-核心文档系统) | 20 个速查卡、边界特例 |
+| **形式化理论** | [03_theory](#-核心文档系统) | 研究笔记、证明索引 |
+| **思维表征** | [04_thinking](./00_MASTER_INDEX.md#04-思维表征) | 思维导图、决策树、矩阵 |
+| **专题指南** | [05_guides](./00_MASTER_INDEX.md#05-专题指南) | 异步、线程、WASM、Unsafe 等 |
+| **工具链** | [06_toolchain](#-核心文档系统) | 编译器、Cargo、版本演进 |
+| **项目元文档** | [07_project](./00_MASTER_INDEX.md#07-项目元文档) | 知识结构、版本追踪 |
 
 ---
 
 ## 🎯 按角色导航
 
-### 👨‍🎓 学习者
+- **初学者** → 学习路径 → 速查卡 → C01 模块
+- **开发者** → 专题指南 → 速查卡 → 边界特例
+- **研究者** → 形式化理论 → 思维表征 → 证明索引
+- **维护者** → 项目元文档 → 版本追踪
 
-**推荐路径**:
+---
 
-1. [快速参考](./quick_reference/README.md) - 快速查找语法和模式
-2. [研究笔记](./research_notes/README.md) - 深入理解 Rust 核心概念
-3. [形式化工程系统](./rust-formal-engineering-system/00_master_index.md) - 完整的理论体系
-4. [工具链文档](./toolchain/README.md) - 工具使用指南
+## 🚀 核心文档系统
 
-### 👨‍💻 开发者
+### 1. 快速参考（quick_reference/）
 
-**推荐路径**:
+**用途**: 快速查找 Rust 语法、模式、最佳实践
 
-1. [快速参考](./quick_reference/) - 语法和模式速查
-2. [研究笔记](./research_notes/) - 形式化方法和类型理论
-3. [形式化工程系统](./rust-formal-engineering-system/) - 设计模式和实践
-4. [工具链文档](./toolchain/) - Cargo、编译器、rustdoc
+**入口**: [quick_reference/README.md](./02_reference/quick_reference/README.md)
 
-### 👨‍🔧 维护者
+**包含**: 20 个速查卡（含 AI/ML、类型、所有权、异步、泛型、错误处理、线程、宏、测试等）
 
-**推荐路径**:
+**特色**: 所有 20 个速查卡已完成交叉引用、反例速查，版本 Rust 1.93.0+
 
-1. [文档归档说明](./archive/README.md) - 归档文件说明
-2. [归档总结报告](./archive/ARCHIVE_SUMMARY_2025_11_15.md) - 归档详情
-3. [项目结构说明](../PROJECT_STRUCTURE.md) - 项目结构
-4. [主 README](../README.md) - 项目概览
+---
+
+### 2. 研究笔记（research_notes/）
+
+**用途**: 形式化方法、类型理论、软件设计理论
+
+**入口**: [research_notes/README.md](./research_notes/README.md) | [形式化工程系统](./rust-formal-engineering-system/00_master_index.md)（索引层，映射到 research_notes）
+
+**说明**: 形式化理论以 **research_notes** 为主内容，**rust-formal-engineering-system** 为索引映射层。
+
+---
+
+### 3. 工具链文档（06_toolchain/）
+
+**用途**: 编译器、Cargo、rustdoc、Rust 1.89–1.93 版本演进
+
+**入口**: [06_toolchain/README.md](./06_toolchain/README.md)
+
+---
+
+### 4. 完整文档索引
+
+**所有根目录文档按主题分类** → [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
 
 ---
 
@@ -215,12 +70,12 @@ docs/
 
 ### 文档系统统计
 
-- **快速参考**: 19 个速查卡 ⭐ (新增进程管理、网络编程、算法、设计模式、WASM速查卡)
+- **快速参考**: 20 个速查卡 ⭐ (含 AI/ML、进程管理、网络编程、算法、设计模式、WASM)
 - **研究笔记**: 45+ 个研究文档（研究笔记系统100%完成）
 - **形式化系统**: 500+ 个理论文档
 - **工具链文档**: 5 个工具指南（包含 Rust 1.93 vs 1.92 对比）
 - **归档文件**: 100 个文件已归档
-- **文档完善度**: 100% ✅（19/19 速查卡已统一添加「📚 相关文档 + 🧩 相关示例代码」）
+- **文档完善度**: 100% ✅（20/20 速查卡已统一添加「📚 相关文档 + 🧩 相关示例代码」）
 - **交叉引用**: 100% ✅ (所有19个速查卡已完成交叉引用增强)
 - **高级主题文档**: 100% ✅ (8个高级主题深度文档)
 - **综合最佳实践**: 100% ✅ (10个最佳实践主题)
@@ -294,6 +149,16 @@ cargo run -p rust-doc-search -- search --fuzzy "borrowing"
 
 ## 🎉 最新更新
 
+### 2026-02-13 🆕
+
+- ✅ **主索引创建**：00_MASTER_INDEX.md 按主题分类导航
+- ✅ **README 重构**：按主题分块展示，链至主索引
+- ✅ **主题目录重组**：01_learning、02_reference、04_thinking、05_guides、06_toolchain、07_project
+- ✅ **最佳实践合并**：BEST_PRACTICES_GUIDE + COMPREHENSIVE_BEST_PRACTICES → BEST_PRACTICES.md
+- ✅ **版本文档归档**：RUST_192_* → archive/version_reports/；过程性文档 → archive/process_reports/
+- ✅ **docs/docs 迁移**：14_workflow → 05_guides/workflow/
+- ✅ **链接修复 100%**：MODULE_1.93、DOCUMENTATION_CROSS_REFERENCE_GUIDE、quick_reference、PROJECT_STRUCTURE、CONTRIBUTING、guides 等
+
 ### 2026-01-27 🆕
 
 - ✅ **高级主题文档**：高级主题深度指南已创建（8个高级主题）
@@ -330,7 +195,7 @@ cargo run -p rust-doc-search -- search --fuzzy "borrowing"
 ---
 
 **维护团队**: Rust Learning Community
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-13
 **状态**: ✅ **Rust 1.93.0 更新完成**
 
 ---

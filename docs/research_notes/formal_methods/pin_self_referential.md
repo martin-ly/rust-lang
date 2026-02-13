@@ -1,7 +1,7 @@
 # Pin 和自引用类型形式化
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-12（国际权威对标补全）
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ 已完成 (100%)
 
@@ -37,7 +37,7 @@
     - [示例 4: 自引用结构体](#示例-4-自引用结构体)
     - [示例 5: Pin 投影](#示例-5-pin-投影)
   - [📖 参考文献](#-参考文献)
-    - [学术论文](#学术论文)
+    - [学术论文（国际权威）](#学术论文国际权威)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
     - [工具资源](#工具资源)
@@ -442,22 +442,26 @@ async fn use_future() {
 
 ## 📖 参考文献
 
-### 学术论文
+### 学术论文（国际权威）
 
-1. **Pin and Unpin**
-   - 作者: Rust 团队
-   - 年份: 2018
-   - 摘要: Pin 类型的 RFC 和实现
+1. **Pin API (RFC 2349)** — 自引用与 Future 安全
+   - 链接: <https://rust-lang.github.io/rfcs/2349-pin.html>
+   - 与本目录: Pin T1–T3、!Unpin、自引用安全对应
 
-2. **Self-Referential Types**
-   - 作者: 研究社区
-   - 摘要: 自引用类型的形式化研究
+2. **RustBelt** (POPL 2018)
+   - 链接: <https://plv.mpi-sws.org/rustbelt/popl18/>
+   - 与本目录: unsafe 安全抽象、Pin 保证对应
+
+3. **Ferrocene FLS** — Rust 1.93 形式化规范
+   - [Ch. 17.3 Asynchronous Computation](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation)
+   - 与本目录: Pin 与 Future、自引用、!Unpin 对应；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/)
 
 ### 官方文档
 
-- [Pin RFC](https://github.com/rust-lang/rfcs/blob/master/text/2349-pin.md)
+- [Pin RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)
 - [Pin 文档](https://doc.rust-lang.org/std/pin/index.html)
 - [Unpin Trait](https://doc.rust-lang.org/std/marker/trait.Unpin.html)
+- [Future Trait](https://doc.rust-lang.org/std/future/trait.Future.html)
 
 ### 相关代码
 
@@ -514,5 +518,7 @@ async fn use_future() {
 ---
 
 **维护者**: Rust Formal Methods Research Group
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-12
 **状态**: ✅ **已完成** (100%)
+
+**国际权威对标**：[Rust RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)、[std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)；[FLS Ch. 17.3](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation) Asynchronous Computation。

@@ -1,7 +1,7 @@
 # 生命周期形式化
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-12（国际权威对标补全）
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ 已完成 (100%)
 
@@ -44,7 +44,7 @@
     - [示例 6: 生命周期错误示例](#示例-6-生命周期错误示例)
     - [示例 3: 生命周期约束（原示例保留）](#示例-3-生命周期约束原示例保留)
   - [📖 参考文献](#-参考文献)
-    - [学术论文](#学术论文)
+    - [学术论文（国际权威）](#学术论文国际权威)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
     - [工具资源](#工具资源)
@@ -540,22 +540,28 @@ impl<'a> ImportantExcerpt<'a> {
 
 ## 📖 参考文献
 
-### 学术论文
+### 学术论文（国际权威）
 
-1. **Region-Based Memory Management**
-   - 作者: Mads Tofte, Jean-Pierre Talpin
-   - 年份: 1997
-   - 摘要: 基于区域的内存管理
+1. **RustBelt** (POPL 2018)
+   - 链接: <https://plv.mpi-sws.org/rustbelt/popl18/>
+   - 与本目录: 区域类型、outlives、引用有效性 T2 对应
 
-2. **Lifetimes for Verification**
-   - 作者: Rust 团队
-   - 摘要: Rust 生命周期系统的验证
+2. **Polonius** — 形式化 borrow/lifetime 分析
+   - 链接: <https://rust-lang.github.io/polonius/>（规则）；<https://github.com/rust-lang/polonius>（源码）
+   - 与本目录: NLL、loan 分析、origin 与 subset 关系；datalog 形式化；生命周期推断 LF-T3
+
+3. **Region-Based Memory Management** (Tofte & Talpin 1997)
+   - 与本目录: 生命周期/区域理论背景对应
+
+4. **Ferrocene FLS** — Rust 1.93 形式化规范
+   - [Ch. 15.3 References](https://spec.ferrocene.dev/ownership-and-deconstruction.html#references)、[15.4 Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing)
+   - 与本目录: outlives、引用有效性 T2 对应；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/)
 
 ### 官方文档
 
 - [Rust Book - Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
 - [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)
-- [生命周期推断](https://doc.rust-lang.org/reference/lifetime-elision.html)
+- [NLL (Non-Lexical Lifetimes)](https://blog.rust-lang.org/2022/08/05/nll-by-default.html)
 
 ### 相关代码
 
@@ -605,5 +611,7 @@ $\text{lft}(r) \subseteq \text{lft}(\text{target}(r))$：引用寿命不超过�
 ---
 
 **维护者**: Rust Formal Methods Research Group
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-12（国际权威对标补全）
 **状态**: ✅ **已完成** (100%)
+
+**国际权威对标**：[RustBelt](https://plv.mpi-sws.org/rustbelt/)、[Polonius](https://rust-lang.github.io/polonius/)；区域类型、NLL、datalog 形式化；[FLS Ch. 15.3–15.4](https://spec.ferrocene.dev/ownership-and-deconstruction.html) References、Borrowing。

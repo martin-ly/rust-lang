@@ -2,7 +2,8 @@
 
 > **版本**: 5.0 - Rust 1.92.0 对齐版
 > **适用版本**: Rust 1.93.0+
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-13
+> **English**: [00_MASTER_INDEX.en.md](./00_MASTER_INDEX.en.md)
 > **项目状态**: ✅ Phase 5 已完成 (质量评分: 100/100 🏆)
 
 ---
@@ -68,7 +69,7 @@
 | **Rust Reference** | [References and Borrowing](https://doc.rust-lang.org/reference/types/pointer.html) | 引用与借用规范 |
 | **Rustonomicon** | [Unsafe code](https://doc.rust-lang.org/nomicon/) | 高级所有权、unsafe |
 
-**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/toolchain/09_rust_1.93_compatibility_deep_dive.md)
+**Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 
 ## 🎯 快速开始
 

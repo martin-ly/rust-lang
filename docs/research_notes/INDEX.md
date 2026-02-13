@@ -3,7 +3,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记、23 种设计模式、类型理论阶段 1–7、formal_methods Phase 1–6、层次推进三阶段）
+> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记、23 种设计模式、类型理论阶段 1–7、formal_methods Phase 1–6、层次推进三阶段、实质内容自检体系）
 
 ---
 
@@ -11,6 +11,7 @@
 
 - [研究笔记完整索引](#研究笔记完整索引)
   - [📊 目录](#-目录)
+  - [📐 文档分类体系](#-文档分类体系)
   - [📚 核心文档索引](#-核心文档索引)
     - [导航和索引](#导航和索引)
     - [进展跟踪](#进展跟踪)
@@ -28,8 +29,11 @@
     - [类型系统](#类型系统)
     - [生命周期](#生命周期)
     - [异步和并发](#异步和并发)
+    - [安全与 unsafe](#安全与-unsafe)
+    - [设计模式与工程](#设计模式与工程)
     - [性能优化](#性能优化)
     - [实际应用](#实际应用-1)
+    - [版本与特性](#版本与特性)
   - [📈 统计信息](#-统计信息)
     - [文档统计](#文档统计)
     - [研究领域统计](#研究领域统计)
@@ -38,6 +42,18 @@
   - [🔗 相关资源](#-相关资源)
     - [核心文档](#核心文档)
     - [目录索引](#目录索引)
+
+---
+
+## 📐 文档分类体系
+
+**多维度分类**：见 [CLASSIFICATION.md](./CLASSIFICATION.md) — 按文档角色、知识层次、主题域、扩展路线。
+
+| 维度 | 简要 |
+| :--- | :--- |
+| **按角色** | 导航、证明索引、框架、分析、指南、运维、参考、规划、内容 |
+| **按层次** | 理论基础、应用层、工程层、实验层、综合层 |
+| **按主题域** | 内存与所有权、类型系统、生命周期、并发与异步、安全与 unsafe、设计模式与工程、实验与性能、版本与特性 |
 
 ---
 
@@ -63,20 +79,21 @@
    - 时间规划
    - 成功标准
 
-4. **[CONTENT_ENHANCEMENT.md](./CONTENT_ENHANCEMENT.md)** - 内容完善指南（含层次推进计划、实质内容检查清单）
-5. **[SYSTEM_SUMMARY.md](./SYSTEM_SUMMARY.md)** - 系统总结
+4. **[CONTENT_ENHANCEMENT.md](./CONTENT_ENHANCEMENT.md)** - 内容完善指南（含层次推进计划、实质内容检查清单、实质内容自检表）
+5. **[CLASSIFICATION.md](./CLASSIFICATION.md)** - 文档分类体系（按角色、层次、主题域、扩展路线）
+6. **[SYSTEM_SUMMARY.md](./SYSTEM_SUMMARY.md)** - 系统总结
    - 系统概览
    - 文档统计
    - 研究主题覆盖
    - 系统评估
 
-6. **[PROOF_INDEX.md](./PROOF_INDEX.md)** - 形式化证明文档索引 🆕
+7. **[PROOF_INDEX.md](./PROOF_INDEX.md)** - 形式化证明文档索引 🆕
    - 按研究领域分类的证明索引
    - 按证明类型分类的证明索引
    - 证明完成度统计
    - 证明方法统计
 
-7. **[COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md)** - 全面系统化梳理总览
+8. **[COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md)** - 全面系统化梳理总览
    - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）
    - 语义归纳与概念族谱
    - 全局一致性矩阵
@@ -84,7 +101,7 @@
    - 思维表征方式全索引
    - 公理-定理-证明全链路图
 
-8. **[UNIFIED_SYSTEMATIC_FRAMEWORK.md](./UNIFIED_SYSTEMATIC_FRAMEWORK.md)** - 全局统一系统化框架 🆕
+9. **[UNIFIED_SYSTEMATIC_FRAMEWORK.md](./UNIFIED_SYSTEMATIC_FRAMEWORK.md)** - 全局统一系统化框架 🆕
    - 全景思维导图：Rust 形式化知识
    - 多维概念对比矩阵总览
    - 公理-定理-证明全链路逻辑推进图
@@ -92,32 +109,48 @@
    - 反例总索引
    - 语义归纳与概念族谱统一
 
-9. **[LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)** - 构造性语义与表达能力边界 🆕
+10. **[LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)** - 构造性语义与表达能力边界 🆕
 
-10. **[DESIGN_MECHANISM_RATIONALE.md](./DESIGN_MECHANISM_RATIONALE.md)** - 设计机制论证 🆕
+11. **[DESIGN_MECHANISM_RATIONALE.md](./DESIGN_MECHANISM_RATIONALE.md)** - 设计机制论证 🆕
 
 - Pin 堆/栈区分使用场景的完整论证
 - 所有权、借用、生命周期、型变、异步等设计理由
 - 动机→设计决策→形式化→决策树→反例
 
-11. **[ARGUMENTATION_GAP_INDEX.md](./ARGUMENTATION_GAP_INDEX.md)** - 论证缺口与设计理由综合索引 🆕
+1. **[ARGUMENTATION_GAP_INDEX.md](./ARGUMENTATION_GAP_INDEX.md)** - 论证缺口与设计理由综合索引 🆕
 
 - 四维缺口分类（定义、关系、证明、设计理由）
 - 论证缺口追踪矩阵、设计理由缺口追踪矩阵
 - 思维表征覆盖矩阵
 
-12. **[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md)** - 理论体系与论证体系结构 🆕
-   - 理论体系四层架构（公理→语义→定理→边界）
-   - 论证体系五层结构（概念→属性→论证→证明→表征）
-   - 安全与非安全全面论证
+1. **[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md)** - 理论体系与论证体系结构 🆕
 
-13. **[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)** - 安全与非安全全面论证与分析 🆕
-   - 安全/unsafe 定义与边界、契约体系、UB 分类、安全抽象
+- 理论体系四层架构（公理→语义→定理→边界）
+- 论证体系五层结构（概念→属性→论证→证明→表征）
+- 安全与非安全全面论证
 
-14. **[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)** - Rust 1.93 语言特性全面分析 🆕
+1. **[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)** - 安全与非安全全面论证与分析 🆕
+
+- 安全/unsafe 定义与边界、契约体系、UB 分类、安全抽象
+
+1. **[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)** - Rust 1.93 语言特性全面分析 🆕
 
 - 92 项语言特性全覆盖（内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增）
 - 每项含动机、设计决策、形式化引用、反例
+- 配套 [RUST_193_FEATURE_MATRIX](./RUST_193_FEATURE_MATRIX.md) 按特性族五维矩阵
+
+1. **[CORE_FEATURES_FULL_CHAIN.md](./CORE_FEATURES_FULL_CHAIN.md)** - 核心特性完整链 🆕
+
+- 13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一链
+- 定义→概念→属性→关系→解释→示例→论证→形式化证明
+
+1. **[FEATURE_TEMPLATE.md](./FEATURE_TEMPLATE.md)** - 特性精简模板 🆕
+
+- 79 项非核心特性的「概念→形式化引用→反例」模板
+
+1. **[INCREMENTAL_UPDATE_FLOW.md](./INCREMENTAL_UPDATE_FLOW.md)** - 版本增量更新流程 🆕
+
+- 1.94+ 发布后：对比、更新 RUST_XXX、补新特性；检查清单
 
 ### 进展跟踪
 
@@ -127,20 +160,24 @@
    - 完成度分析
    - 下一步计划
 
-2. **[TASK_CHECKLIST.md](./TASK_CHECKLIST.md)** - 研究任务清单
+2. **[COMPREHENSIVE_REVIEW_REPORT_2026_02.md](./COMPREHENSIVE_REVIEW_REPORT_2026_02.md)** - research_notes 与 quick_reference 全面检查报告 🆕
+   - 四大检查维度、权威来源对齐
+   - 六阶段分步推进方案（100% 完成）
+
+3. **[TASK_CHECKLIST.md](./TASK_CHECKLIST.md)** - 研究任务清单
    - 具体可执行任务
    - 任务优先级分类
    - 任务状态跟踪
    - 任务统计信息
 
-3. **[WRITING_GUIDE.md](./WRITING_GUIDE.md)** - 研究笔记写作指南
+4. **[WRITING_GUIDE.md](./WRITING_GUIDE.md)** - 研究笔记写作指南
    - 写作前准备
    - 各部分写作技巧
    - 格式规范
    - 内容组织
    - 质量检查
 
-4. **[STATISTICS.md](./STATISTICS.md)** - 研究笔记系统统计报告
+5. **[STATISTICS.md](./STATISTICS.md)** - 研究笔记系统统计报告
    - 文档统计
    - 研究笔记统计
    - 内容统计
@@ -148,13 +185,13 @@
    - 质量统计
    - 趋势分析
 
-5. **[QUICK_FIND.md](./QUICK_FIND.md)** - 研究笔记快速查找
+6. **[QUICK_FIND.md](./QUICK_FIND.md)** - 研究笔记快速查找
    - 按关键词查找
    - 按研究领域查找
    - 按研究目标查找
    - 按优先级查找
 
-6. **[CONTENT_ENHANCEMENT.md](./CONTENT_ENHANCEMENT.md)** - 研究笔记内容完善指南
+7. **[CONTENT_ENHANCEMENT.md](./CONTENT_ENHANCEMENT.md)** - 研究笔记内容完善指南
    - 理论基础部分完善
    - 形式化定义部分完善
    - 代码示例部分完善
@@ -392,6 +429,20 @@
 
 - [异步状态机形式化](./formal_methods/async_state_machine.md)
 - [并发性能研究](./experiments/concurrency_performance.md)
+- [执行模型](software_design_theory/03_execution_models/README.md)（同步/异步/并发/并行/分布式）
+
+### 安全与 unsafe
+
+- [安全与非安全全面论证](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)
+- [05_boundary_system 三维边界](software_design_theory/05_boundary_system/README.md)
+- [07_anti_patterns 反模式](software_design_theory/07_anti_patterns.md)
+
+### 设计模式与工程
+
+- [设计模式形式化](software_design_theory/01_design_patterns_formal/README.md)（GoF 23）
+- [23 安全 / 43 完全模型](software_design_theory/02_workflow_safe_complete_models/README.md)
+- [组合工程](software_design_theory/04_compositional_engineering/README.md)
+- [06_rust_idioms](software_design_theory/06_rust_idioms.md)、[07_anti_patterns](software_design_theory/07_anti_patterns.md)
 
 ### 性能优化
 
@@ -404,6 +455,11 @@
 
 - [实际应用案例研究](./practical_applications.md)
 - [研究方法论](./research_methodology.md)
+
+### 版本与特性
+
+- [Rust 1.93 语言特性全面分析](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)
+- [Rust 1.92 研究更新](./RUST_192_RESEARCH_UPDATE_2025_12_11.md)、[Rust 1.91 研究更新](./RUST_191_RESEARCH_UPDATE_2025_11_15.md)
 
 ---
 

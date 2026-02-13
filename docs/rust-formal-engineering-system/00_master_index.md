@@ -63,10 +63,10 @@
 
 | 子模块 | 映射目标 |
 |--------|----------|
-| 工具链 | [toolchain/](../toolchain/) |
-| 01 编译器 | [toolchain/01_compiler_features.md](../toolchain/01_compiler_features.md) |
-| 02 包管理器 | [toolchain/02_cargo_workspace_guide.md](../toolchain/02_cargo_workspace_guide.md) |
-| 03 构建工具 | [toolchain/](../toolchain/) |
+| 工具链 | [06_toolchain/](../06_toolchain/) |
+| 01 编译器 | [06_toolchain/01_compiler_features.md](../06_toolchain/01_compiler_features.md) |
+| 02 包管理器 | [06_toolchain/02_cargo_workspace_guide.md](../06_toolchain/02_cargo_workspace_guide.md) |
+| 03 构建工具 | [06_toolchain/](../06_toolchain/) |
 
 ---
 
@@ -74,8 +74,8 @@
 
 | 子模块 | 映射目标 |
 |--------|----------|
-| 07 测试 | [quick_reference/testing_cheatsheet.md](../quick_reference/testing_cheatsheet.md) |
-| 应用分析 | [APPLICATIONS_ANALYSIS_VIEW.md](../APPLICATIONS_ANALYSIS_VIEW.md) — 应用场景→技术选型→论证依据 |
+| 07 测试 | [quick_reference/testing_cheatsheet.md](../02_reference/quick_reference/testing_cheatsheet.md) |
+| 应用分析 | [APPLICATIONS_ANALYSIS_VIEW.md](../04_thinking/APPLICATIONS_ANALYSIS_VIEW.md) — 应用场景→技术选型→论证依据 |
 
 ---
 
@@ -101,7 +101,7 @@
 | 资源 | 说明 |
 |------|------|
 | [PROOF_INDEX](../research_notes/PROOF_INDEX.md) | 形式化证明索引（87+ 个证明，与思维表征证明树交叉引用） |
-| [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) | 证明树图（MaybeUninit、借用检查器、生命周期、Send/Sync 等） |
+| [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) | 证明树图（MaybeUninit、借用检查器、生命周期、Send/Sync 等） |
 
 ---
 

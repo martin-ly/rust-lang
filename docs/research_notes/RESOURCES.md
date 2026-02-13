@@ -33,6 +33,7 @@
   - [📰 新闻和博客](#-新闻和博客)
     - [官方博客](#官方博客)
     - [社区博客](#社区博客)
+  - [资源与形式化衔接](#资源与形式化衔接)
   - [🔗 相关资源](#-相关资源)
     - [核心文档](#核心文档)
     - [研究笔记](#研究笔记)
@@ -76,6 +77,7 @@
    - 作者: Various
    - 摘要: Rust 类型系统的相关研究
    - 相关: [类型系统基础](./type_theory/type_system_foundations.md)
+   - 形式化衔接: [00_completeness_gaps](type_theory/00_completeness_gaps.md)、[PROOF_INDEX](PROOF_INDEX.md)
 
 ### 性能优化相关论文
 
@@ -292,6 +294,19 @@
 - **Rustacean Station**
   - 链接: <https://rustacean-station.org/>
   - 描述: Rust 播客
+
+---
+
+## 资源与形式化衔接
+
+| 资源类型 | 形式化文档 | 可验证/支撑的定理 |
+| :--- | :--- | :--- |
+| RustBelt、Stacked Borrows | [ownership_model](formal_methods/ownership_model.md)、[borrow_checker_proof](formal_methods/borrow_checker_proof.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1 |
+| Rust 类型系统研究 | [type_system_foundations](type_theory/type_system_foundations.md)、[trait_system_formalization](type_theory/trait_system_formalization.md) | 类型保持、coherence、RPITIT |
+| Prusti、Kani | [formal_methods](formal_methods/README.md) | 所有权、借用、unsafe 契约 |
+| Criterion、Miri | [experiments/README](experiments/README.md) | EX-T1、EX-T2；内存安全验证 |
+
+详见 [PROOF_INDEX](PROOF_INDEX.md) 全证明索引、[practical_applications](practical_applications.md) 案例与定理对应。
 
 ---
 

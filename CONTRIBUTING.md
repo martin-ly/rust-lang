@@ -60,7 +60,7 @@ git push origin feature/your-feature
 - **文件名**：与实际文件名保持一致（大小写、下划线），如 `01_wasm_基础指南.md` 而非 `01_WASM快速入门.md`
 - **链接检查**：提交 PR 前建议运行 `cargo deadlinks` 或 `markdown-link-check` 检查断链
 
-详见 [LINK_FIX_PLAN_2026_02.md](./docs/LINK_FIX_PLAN_2026_02.md) 与 [PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md](./docs/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md)。
+详见 [LINK_FIX_PLAN_2026_02.md](./docs/archive/process_reports/LINK_FIX_PLAN_2026_02.md) 与 [PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md](./docs/07_project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md)。
 
 ---
 

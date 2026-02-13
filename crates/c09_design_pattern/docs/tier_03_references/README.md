@@ -34,7 +34,7 @@
 | [OVERVIEW.md](../OVERVIEW.md)                                                     | 概览                                 |
 | [KNOWLEDGE_GRAPH.md](../KNOWLEDGE_GRAPH.md)                                       | 知识图谱                             |
 | [MIND_MAP.md](../MIND_MAP.md)                                                     | 思维导图                             |
-| [RUST_192_COMPREHENSIVE_MINDMAP.md](../RUST_192_COMPREHENSIVE_MINDMAP.md)         | Rust 1.93.0导图（自 Rust 1.90 引入） |
+| [RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md](../RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md)         | Rust 1.93.0导图（自 Rust 1.90 引入） |
 | [RUST_190_COMPREHENSIVE_MINDMAP.md](../RUST_190_COMPREHENSIVE_MINDMAP.md)         | Rust 1.90导图（历史版本）            |
 | [MULTIDIMENSIONAL_MATRIX_COMPARISON.md](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md) | 多维对比                             |
 

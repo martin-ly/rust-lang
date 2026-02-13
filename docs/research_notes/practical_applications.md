@@ -48,6 +48,7 @@
     - [与形式化方法的关联](#与形式化方法的关联)
     - [与类型理论、实验研究的关联](#与类型理论实验研究的关联)
     - [案例快速索引](#案例快速索引)
+    - [与形式化衔接的案例索引（层次推进）](#与形式化衔接的案例索引层次推进)
   - [📖 参考文献](#-参考文献)
     - [实际项目](#实际项目)
     - [相关文档](#相关文档)
@@ -948,7 +949,7 @@ impl<T> Drop for SafeVec<T> {
 
 ### 案例快速索引
 
-| 领域     | 案例                          | 文档内锚点 / 关键词 |
+| 领域 | 案例 | 文档内锚点 / 关键词 |
 | :--- | :--- | :--- |
 | 系统     | Redox, Tokio, Firecracker     | 案例 1.1, 1.2, 1.3  |
 | 网络     | Actix-web, Linkerd            | 案例 2.1, 2.2       |
@@ -963,6 +964,9 @@ impl<T> Drop for SafeVec<T> {
 | Redox, Tock, Firecracker | [ownership_model](formal_methods/ownership_model.md) T2/T3、BOX-T1 | 资源 RAII、唯一所有权、无双重释放 |
 | Tokio, Actix, ScyllaDB | [async_state_machine](formal_methods/async_state_machine.md) T6.1–T6.3、SPAWN-T1 | Future、Send/Sync、无数据竞争 |
 | TiKV, Linkerd | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1、CHAN-T1、MUTEX-T1 | 通道、锁、借用规则 |
+| **案例 1** Web 服务器（Axum + RwLock） | MUTEX-T1、async T6、RC-T1/ARC-T1 | `Arc<RwLock<T>>` 共享状态、异步 I/O |
+| **案例 2** 并发数据处理（mpsc） | CHAN-T1、SPAWN-T1、borrow T1 | 通道、tokio::spawn、无共享可变 |
+| **案例 3** SafeVec/内存安全 | ownership T2/T3、REFCELL-T1 |  interior mutability、RAII |
 | 所有案例 | [type_system_foundations](type_theory/type_system_foundations.md) T1–T3 | 良型、进展性、保持性 |
 | 组合案例 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) CE-T1–T3 | 模块组合、CE-T1/T2/T3 |
 | unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)、PA-L1 | 安全抽象、契约 |

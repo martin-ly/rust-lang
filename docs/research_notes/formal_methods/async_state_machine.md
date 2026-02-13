@@ -55,7 +55,7 @@
   - [⚠️ 反例：违反异步安全规则](#️-反例违反异步安全规则)
   - [🌳 公理-定理证明树](#-公理-定理证明树)
   - [📖 参考文献](#-参考文献)
-    - [学术论文](#学术论文)
+    - [学术论文（国际权威）](#学术论文国际权威)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
     - [工具资源](#工具资源)
@@ -956,29 +956,23 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 
 ## 📖 参考文献
 
-### 学术论文
+### 学术论文（国际权威）
 
-1. **"Async/await for Rust: A Language Perspective"**
-   - 作者: Rust Async Working Group
-   - 年份: 2019
-   - 摘要: Rust 异步编程模型的完整设计和形式化
-   - 链接: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)
+1. **RustBelt: Securing the Foundations of the Rust Programming Language** (POPL 2018)
+   - 链接: <https://plv.mpi-sws.org/rustbelt/popl18/>
+   - 与本目录: 类型系统、Send/Sync、并发安全；T6.2 对应
 
-2. **"Formal Verification of Async Rust Programs"**
-   - 作者: Ralf Jung, et al.
-   - 年份: 2020
-   - 摘要: 异步 Rust 程序的形式化验证方法
-   - 链接: [相关研究](https://plv.mpi-sws.org/rustbelt/)
+2. **RustBelt Meets Relaxed Memory** (POPL 2020)
+   - 链接: <https://plv.mpi-sws.org/rustbelt/rbrlx/>
+   - 与本目录: relaxed memory、Arc 并发；SPAWN-T1 对应
 
-3. **"The RustBelt Project: Formalizing Rust's Type System"**
-   - 作者: Ralf Jung, et al.
-   - 年份: 2018
-   - 摘要: Rust 类型系统的完整形式化，包括异步系统
-   - 链接: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/)
+3. **Async/await for Rust** (RFC 2394)
+   - 链接: <https://rust-lang.github.io/rfcs/2394-async_await.html>
+   - 与本目录: Future/Poll 状态机、Pin 语义对应
 
-4. **"Concurrent Futures: A Formal Model"**
-   - 作者: Various researchers
-   - 摘要: 并发 Future 的形式化模型
+4. **Ferrocene FLS** — Rust 1.93 形式化规范
+   - [Ch. 17.3 Asynchronous Computation](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation)
+   - 与本目录: Send/Sync、Future、async 状态机对应；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/)
 
 ### 官方文档
 
@@ -1003,7 +997,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-12（国际权威对标补全）
 **状态**: ✅ **已完成** (100%)
 
 **完成情况**:
@@ -1074,3 +1068,11 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 **Def SPAWN1（thread::spawn）**：`thread::spawn(|| body)` 创建新线程；闭包需 `F: Send + 'static`；所有权转移至新线程；`JoinHandle<T>` 持有所得权，`join()` 阻塞直到线程完成并返回 `Result<T>`。
 
 **定理 SPAWN-T1**：spawn 与 Send 约束保证数据竞争自由：闭包捕获的 `T` 必须 `Send`，故跨线程无共享可变；与 [borrow_checker_proof](borrow_checker_proof.md) 定理 1、[async_state_machine](async_state_machine.md) 定理 6.2 一致。
+
+---
+
+**维护者**: Rust Formal Methods Research Group
+**最后更新**: 2026-02-12
+**状态**: ✅ **已完成** (100%)
+
+**国际权威对标**：[RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/)；[FLS Ch. 17](https://spec.ferrocene.dev/concurrency.html) Concurrency（17.1 Send/Sync、17.2 Atomics、17.3 Asynchronous Computation）；[std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)。

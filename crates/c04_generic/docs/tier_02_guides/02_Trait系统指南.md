@@ -1,4 +1,4 @@
-﻿# C04 泛型编程 - Trait 系统指南
+# C04 泛型编程 - Trait 系统指南
 
 **文档类型**: Tier 2 实践指南
 **难度级别**: ⭐⭐⭐ 中级
@@ -1090,8 +1090,8 @@ trait ObjectSafe {
 
 - [03\_关联类型指南.md](./03_关联类型指南.md) - 学习关联类型
 - [../tier_03_references/02_Trait系统参考.md](../tier_03_references/02_Trait系统参考.md) - 完整 trait 参考
-- [../tier*04_advanced/02*泛型与生命周期.md](../tier_04_advanced/02_泛型与生命周期.md) - trait 与生命周期
-- [../tier*01_foundations/03*术语表.md](../tier_01_foundations/03_术语表.md) - Trait 相关术语
+- [../tier_04_advanced/02_泛型与生命周期.md](../tier_04_advanced/02_泛型与生命周期.md) - trait 与生命周期
+- [../tier_01_foundations/03_术语表.md](../tier_01_foundations/03_术语表.md) - Trait 相关术语
 
 ---
 

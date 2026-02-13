@@ -3,8 +3,8 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记 + 23 种设计模式 + 类型理论阶段 1–7 + formal_methods Phase 1–6 + 层次推进三阶段）
-> **更新内容**: 层次推进三阶段全部完成；CONTENT_ENHANCEMENT、04_compositional_engineering、practical_applications 丰富完成 ✅
+> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记 + 23 种设计模式 + 类型理论阶段 1–7 + formal_methods Phase 1–6 + 层次推进三阶段 + 全面检查推进计划 Phase 1–8）
+> **更新内容**: 全面检查推进计划实施完成（类型构造能力、并发确定性、组件成熟度、核心特性完整链、92 特性模板、增量流程）；07_anti_patterns 重复章节去除 ✅
 
 ---
 
@@ -24,6 +24,7 @@ research_notes/
 ├── type_theory/                 # 类型理论研究
 │   ├── README.md
 │   ├── 00_completeness_gaps.md  # 完备性缺口（形式化论证不充分声明）
+│   ├── construction_capability.md  # 类型构造能力（Def TCON1、矩阵、决策树）
 │   ├── type_system_foundations.md
 │   ├── trait_system_formalization.md
 │   ├── lifetime_formalization.md
@@ -34,7 +35,9 @@ research_notes/
 │   ├── 02_workflow_safe_complete_models/  # 23 安全 / 43 完全模型
 │   ├── 03_execution_models/       # 同步/异步/并发/并行/分布式
 │   ├── 04_compositional_engineering/  # 组合工程有效性
-│   └── 05_boundary_system/        # 边界体系统一分析
+│   ├── 05_boundary_system/        # 边界体系统一分析
+│   ├── 06_rust_idioms.md          # Rust 惯用模式（RAII、Newtype、类型状态）
+│   └── 07_anti_patterns.md        # 反模式与边界
 └── experiments/                 # 实验研究
     ├── README.md
     ├── performance_benchmarks.md
@@ -64,11 +67,11 @@ research_notes/
 ├── PROGRESS_TRACKING.md        # 研究进展跟踪
 ├── TASK_CHECKLIST.md           # 研究任务清单
 ├── PROOF_INDEX.md              # 形式化证明文档索引 🆕
-├── CONTENT_ENHANCEMENT.md      # 内容完善指南（含层次推进计划）🆕
+├── CONTENT_ENHANCEMENT.md      # 内容完善指南（含层次推进、实质内容自检表）🆕
+├── CLASSIFICATION.md           # 文档分类体系（按角色/层次/主题域）🆕
 ├── WRITING_GUIDE.md            # 研究笔记写作指南
 ├── STATISTICS.md               # 研究笔记系统统计报告
-├── QUICK_FIND.md               # 研究笔记快速查找
-└── CONTENT_ENHANCEMENT.md      # 研究笔记内容完善指南
+└── QUICK_FIND.md               # 研究笔记快速查找
 ```
 
 ---
@@ -331,7 +334,7 @@ research_notes/
    - DNS 解析器可靠性改进分析
    - 大型 DNS 记录处理机制研究
    - 递归名称服务器支持改进
-   - 相关笔记: [故障排查指南](../TROUBLESHOOTING_GUIDE.md)
+   - 相关笔记: [故障排查指南](../05_guides/TROUBLESHOOTING_GUIDE.md)
 
 2. **全局分配器线程本地存储支持研究**
    - 全局分配器使用 `thread_local!` 的机制分析
@@ -346,9 +349,9 @@ research_notes/
 4. **`cfg` 属性在 `asm!` 行上研究**
    - 内联汇编条件编译的改进
    - 平台特定代码简化策略
-   - 相关笔记: [工具链文档](../toolchain/05_rust_1.93_vs_1.92_comparison.md)
+   - 相关笔记: [工具链文档](../06_toolchain/05_rust_1.93_vs_1.92_comparison.md)
 
-**详细更新**: 参见 [Rust 1.93 vs 1.92 全面对比分析](../toolchain/05_rust_1.93_vs_1.92_comparison.md)
+**详细更新**: 参见 [Rust 1.93 vs 1.92 全面对比分析](../06_toolchain/05_rust_1.93_vs_1.92_comparison.md)
 
 ---
 
@@ -429,7 +432,7 @@ research_notes/
 - [快速入门指南](./GETTING_STARTED.md) - 新用户入门指南
 - [常见问题解答](./FAQ.md) - 常见问题解答
 - [维护指南](./MAINTENANCE_GUIDE.md) - 系统维护指南
-- [最佳实践](./BEST_PRACTICES.md) - 研究笔记最佳实践
+- [最佳实践](./BEST_PRACTICES.md) - 研究笔记最佳实践（含实质内容不足判断与四步修复法）
 - [术语表](./GLOSSARY.md) - 专业术语解释
 - [研究资源汇总](./RESOURCES.md) - 学术和工具资源
 - [系统集成指南](./SYSTEM_INTEGRATION.md) - 与形式化工程系统的集成

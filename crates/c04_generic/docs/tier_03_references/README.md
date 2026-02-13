@@ -171,7 +171,7 @@
 
 - [../tier_02_guides/](../tier_02_guides/) - 实践指南
 - [../tier_04_advanced/](../tier_04_advanced/) - 高级主题
-- [../tier*01_foundations/04*常见问题.md](../tier_01_foundations/04_常见问题.md) - 常见问题
+- [../tier_01_foundations/04_常见问题.md](../tier_01_foundations/04_常见问题.md) - 常见问题
 
 **外部资源**:
 

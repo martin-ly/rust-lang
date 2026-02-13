@@ -60,6 +60,8 @@
 
 **注意**: 这是一个示例文档，展示了研究笔记的标准格式和内容结构。实际研究笔记应该基于 [研究笔记模板](./TEMPLATE.md) 创建。
 
+**实质内容链接**：本示例的所有权、借用、生命周期形式化，在 [ownership_model](./formal_methods/ownership_model.md)、[borrow_checker_proof](./formal_methods/borrow_checker_proof.md)、[lifetime_formalization](./formal_methods/lifetime_formalization.md) 中有完整 Def/定理/证明；代码示例可对照 [PROOF_INDEX](./PROOF_INDEX.md) 追溯。
+
 ---
 
 ## 📝 完整示例
@@ -70,10 +72,11 @@
 
 ## 所有权模型形式化（示例）
 
+> **说明**：以下为示例内容，展示研究笔记的完整格式（含进行中、计划中状态示例）
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: 🔄 进行中
+> **状态**: 🔄 进行中（示例格式）
 
 ---
 

@@ -136,8 +136,8 @@ let f = fmt::from_fn(|f| write!(f, "WASM[{}]", 42));
 
 ## 相关文档
 
-- [Rust 1.93 vs 1.92 对比](../../docs/toolchain/05_rust_1.93_vs_1.92_comparison.md)
-- [Rust 1.93 兼容性注意事项](../../docs/toolchain/06_rust_1.93_compatibility_notes.md)
+- [Rust 1.93 vs 1.92 对比](../../../docs/06_toolchain/05_rust_1.93_vs_1.92_comparison.md)
+- [Rust 1.93 兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md)
 - [Rust 1.92 WASM 改进](./RUST_192_WASM_IMPROVEMENTS.md)
 
 ---

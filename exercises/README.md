@@ -28,6 +28,8 @@ rustlings watch
 
 **官方资源**: <https://github.com/rust-lang/rustlings>
 
+**模块映射**: [RUSTLINGS_MAPPING.md](./RUSTLINGS_MAPPING.md) — 本项目 C01–C12 与 Rustlings 习题主题对应表
+
 ### 2. Rust Playground
 
 **Rust Playground** 是在线运行 Rust 代码的环境，无需本地安装。

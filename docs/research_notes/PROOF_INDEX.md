@@ -28,6 +28,7 @@
       - [Trait 系统形式化](#trait-系统形式化)
       - [型变理论](#型变理论)
       - [类型理论完备性缺口](#类型理论完备性缺口)
+      - [类型构造能力](#类型构造能力)
       - [高级类型特性](#高级类型特性)
       - [软件设计理论](#软件设计理论)
       - [边界系统](#边界系统)
@@ -394,6 +395,17 @@
 
 **缺口索引**: Rust 1.93 类型系统、组合法则、Trait 特性缺口列表；补全路线图。
 
+#### 类型构造能力
+
+**文档**: [construction_capability.md](./type_theory/construction_capability.md)
+
+**已完成的证明**:
+
+1. **Def TCON1 (类型构造能力)** ✅ — 三元组 Syntax、Constraints、Determinism；[证明位置](./type_theory/construction_capability.md)
+2. **定理 TCON-T1 (构造与类型安全)** ✅ — 可构造 ⇒ 求值保持类型；[证明位置](./type_theory/construction_capability.md)
+3. **引理 TCON-L1 (推断失败可判定)** ✅ — 歧义/不可推断 ⇒ Multi 或 Impossible；[证明位置](./type_theory/construction_capability.md)
+4. **推论 TCON-C1** ✅ — 良型程序添加注解后构造路径唯一；[证明位置](./type_theory/construction_capability.md)
+
 #### 高级类型特性
 
 **文档**: [advanced_types.md](./type_theory/advanced_types.md)
@@ -422,6 +434,10 @@
 4. **引理 CE-L1 (模块无环)** ✅ — 方法：由 Def 1.3 无环；传递闭包；[证明位置](./software_design_theory/04_compositional_engineering/01_formal_composition.md)
 5. **推论 CE-C1** ✅ — 组合 CE-T1–T3 可组合；有效组合为 Safe 且良型
 6. **推论 CE-C2** ✅ — 组合反例；pub 泄漏 unsafe 则 CE-T1/T2 不成立
+7. **Def CE-MAT1 (组件成熟度)** ✅ — L1 单模块/L2 多模块/L3 crate 生态/L4 架构模式；[证明位置](./software_design_theory/04_compositional_engineering/README.md)
+8. **Axiom CE-MAT1** ✅ — 成熟度层级传递
+9. **定理 CE-MAT-T1 (构建能力确定性)** ✅ — L1/L2 可静态判定；L3/L4 需运行时验证；[证明位置](./software_design_theory/04_compositional_engineering/README.md)
+10. **推论 CE-MAT-C1** ✅ — 目标架构→依赖图→有效性检查；[证明位置](./software_design_theory/04_compositional_engineering/README.md)
 
 **设计模式形式化（23 种 Def/Axiom/定理/推论）**：
 
@@ -452,7 +468,10 @@
 3. **引理 BMP-L1 (近似表达模式)** ✅ — Singleton、Interpreter 等 6 种为 Approx；[证明位置](../software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
 4. **推论 BMP-C1** ✅ — 等价表达模式满足零成本抽象；[证明位置](../software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
 5. **定理 EB-T1/T2、引理 EB-EX-L1/L2、推论 EB-EX-C1/C2** ✅ — 执行模型边界；[证明位置](../software_design_theory/03_execution_models/06_boundary_analysis.md)
-6. **Def SB1、定理 SB1–SB3、推论 SB-C1、引理 SB-L1 (边界冲突可化解)** ✅ — 语义边界图；[证明位置](../software_design_theory/02_workflow_safe_complete_models/03_semantic_boundary_map.md)
+6. **Def EB-DET1 (执行确定性)** ✅ — Sequential/Interleaved/Parallel/Distributed；[证明位置](../software_design_theory/03_execution_models/06_boundary_analysis.md)
+7. **定理 EB-DET-T1 (确定性蕴涵数据竞争自由)** ✅ — 满足 borrow T1、Send/Sync 则无数据竞争；[证明位置](../software_design_theory/03_execution_models/06_boundary_analysis.md)
+8. **推论 EB-DET-C1 (控制确定性判定)** ✅ — 需求→模型选型；[证明位置](../software_design_theory/03_execution_models/06_boundary_analysis.md)
+9. **Def SB1、定理 SB1–SB3、推论 SB-C1、引理 SB-L1 (边界冲突可化解)** ✅ — 语义边界图；[证明位置](../software_design_theory/02_workflow_safe_complete_models/03_semantic_boundary_map.md)
 
 #### 语义与表达能力
 
@@ -725,4 +744,4 @@
 
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-12
-**状态**: ✅ **证明索引 100% 完成**（105+ 证明已收录，formal_methods Phase 1–6、类型理论阶段 1–7、全部缺口 Def 占位完成）
+**状态**: ✅ **证明索引 100% 完成**（110+ 证明已收录，formal_methods Phase 1–6、类型理论阶段 1–7、construction_capability、执行确定性、组件成熟度、全部缺口 Def 占位完成）
