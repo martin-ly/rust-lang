@@ -6,26 +6,31 @@
 > **适用人群**: 所有想要系统学习 Rust 的开发者
 > **学习方式**: 理论 + 实践 + 项目驱动
 
-**项目状态**: ✅ **按资产口径 100% 完成**（狭义 100% 需本地跑通 `.\scripts\run_workspace_tests.ps1`）⭐⭐⭐⭐⭐
-**最后更新**: 2026-02-13
+**项目状态**: ✅ **100% 完成**（按资产口径 + 狭义 100%，`.\scripts\run_workspace_tests.ps1` 已通过）⭐⭐⭐⭐⭐
+**最后更新**: 2026-02-14
 **Rust 版本**: 1.93.0+ | Edition 2024
 **项目评级**: **优秀** (所有模块A级以上)
 **第1周推进**: ✅ **圆满完成，超出预期** (完成度28%→70%，+42%)
 **当前推进**: ✅ **全面推进至 100% 已完成**（详见 [向100%推进最终总结](./docs/archive/root_completion_reports/FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md)）
-**研究笔记系统**: ✅ **100%完成**（17/17研究笔记、类型理论阶段1–7、formal_methods Phase1–6、23种设计模式、层次推进三阶段、实质内容自检体系）
+**研究笔记系统**: ✅ **100%完成**（17/17研究笔记、formal_methods Phase1–6、形式语言与形式证明、T-OW2/T-BR1/T-TY3 Coq 骨架、23种设计模式）
 **文档完善度**: ✅ **100%完成**（20/20 速查卡含 AI/ML，深度文档已入 docs 索引）
-**测试资产**: ✅ **100%就绪**（37 测试文件、46 基准、11 跨模块用例）；狭义 100% 需本地执行 [run_workspace_tests.ps1](./scripts/run_workspace_tests.ps1)
+**测试资产**: ✅ **100%就绪**（37 测试文件、46 基准、11 跨模块用例）；狭义 100% 已达成，可执行 [run_workspace_tests.ps1](./scripts/run_workspace_tests.ps1) 验证
 
 ---
 
 ## 🎉 最新更新
 
+### 2026-02-14 🆕
+
+- ✅ **狭义 100% 达成**：全工作区测试通过（`.\scripts\run_workspace_tests.ps1`）；c06/c08/c09/c10/c12 测试修复与 ignore 调整
+- ✅ **形式化 100% 推进**：形式语言与形式证明、T-BR1/T-TY3 Coq 骨架、分布式/工作流表达力、组合反例→错误码映射、英文摘要、Aeneas 首个示例；详见 [FORMAL_LANGUAGE_AND_PROOFS](docs/research_notes/FORMAL_LANGUAGE_AND_PROOFS.md)、[TASK_INDEX](docs/07_project/TASK_INDEX.md)
+
 ### 2026-02-13 🆕
 
-- ✅ **100% 持续推进完成**：国际化对标、CLI/嵌入式专题、Rustlings 映射、错误码映射、Brown/RBE 入口、C01 英文导航
+- ✅ **100% 持续推进完成**：国际化对标、CLI/嵌入式专题、Rustlings 映射、错误码映射、Brown/RBE 入口、C01/C02 英文导航
   - [Rustlings 模块映射](exercises/RUSTLINGS_MAPPING.md)、[错误码映射](docs/02_reference/ERROR_CODE_MAPPING.md)
   - [CLI 应用开发指南](docs/05_guides/CLI_APPLICATIONS_GUIDE.md)、[嵌入式 Rust 指南](docs/05_guides/EMBEDDED_RUST_GUIDE.md)
-  - [C01 主索引英文版](crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md)
+  - [C01 主索引英文版](crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md)、[C02 主索引英文版](crates/c02_type_system/docs/00_MASTER_INDEX.en.md)
   - UNSAFE_RUST_GUIDE 对标 Rustonomicon、权威源元数据规范
 - **AI+Rust 扩展**：[AI+Rust 生态指南](docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md)（Burn/Candle/LLM）、AI 辅助工作流
   - 详见 [TASK_INDEX](docs/07_project/TASK_INDEX.md)、[国际化对标评估](docs/07_project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md)

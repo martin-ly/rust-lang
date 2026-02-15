@@ -33,11 +33,11 @@
 
 ## 🗺️ 增强理论资源
 
-**theory_enhanced/ 目录**:
+**思维表征资源**:
 
-- [KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md](../theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)
-- [MULTI_DIMENSIONAL_COMPARISON_MATRIX.md](../theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)
-- [MINDMAP_VISUALIZATION.md](../theory_enhanced/MINDMAP_VISUALIZATION.md)
+- [KNOWLEDGE_GRAPH.md](../KNOWLEDGE_GRAPH.md)
+- [MULTIDIMENSIONAL_MATRIX_COMPARISON.md](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md)
+- [MIND_MAP.md](../MIND_MAP.md)
 
 ---
 

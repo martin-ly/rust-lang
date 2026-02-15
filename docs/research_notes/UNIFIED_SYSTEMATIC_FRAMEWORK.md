@@ -436,8 +436,8 @@ Pin ──→ 自引用安全
 | [INDEX](INDEX.md) | 研究笔记完整索引 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵 |
 | [MIND_MAP_COLLECTION](../MIND_MAP_COLLECTION.md) | 思维导图集合 |
-| [DECISION_GRAPH_NETWORK](../DECISION_GRAPH_NETWORK.md) | 决策树 |
-| [PROOF_GRAPH_NETWORK](../PROOF_GRAPH_NETWORK.md) | 证明图网 |
+| [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策树 |
+| [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | 证明图网 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构、概念定义、思维表征 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
 | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |

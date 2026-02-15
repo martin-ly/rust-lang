@@ -467,10 +467,10 @@
 ## 📚 相关文档
 
 - [知识结构框架](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 完整知识结构体系
-- [多维概念矩阵](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 概念对比矩阵
-- [思维导图集合](./MIND_MAP_COLLECTION.md) - 思维导图集合
-- [决策图网](./DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
-- [证明图网](./PROOF_GRAPH_NETWORK.md) - 形式化证明结构
+- [多维概念矩阵](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 概念对比矩阵
+- [思维导图集合](../04_thinking/MIND_MAP_COLLECTION.md) - 思维导图集合
+- [决策图网](../04_thinking/DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
+- [证明图网](../04_thinking/PROOF_GRAPH_NETWORK.md) - 形式化证明结构
 
 ---
 

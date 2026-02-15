@@ -481,6 +481,8 @@ pub fn safe_init(enabled: bool, timeout: i32) -> Result<(), String> {
 
 ### 决策树（精简）
 
+**设计模式选型决策树**：按需求选模式；各分支对应模式文档见 [01_design_patterns_formal §23 模式多维对比矩阵](../../01_design_patterns_formal/README.md#23-模式多维对比矩阵) 及该节下表「形式化文档」列。上表「快速查找」中「推荐模式」即本决策树叶子。
+
 ```text
 需求 → 模式映射
 

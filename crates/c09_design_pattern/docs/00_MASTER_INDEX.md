@@ -9,7 +9,7 @@
 | 官方资源 | 链接 | 与本模块对应 |
 |----------|------|--------------|
 | **The Rust Book** | [Ch. 13 Functional Language Features](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | 迭代器、闭包模式 |
-| **Rust By Example** | [Design Patterns](https://doc.rust-lang.org/rust-by-example/) | 惯用模式 |
+| **RBE 练习** | [Functional](https://doc.rust-lang.org/rust-by-example/fn.html) · [Structs](https://doc.rust-lang.org/rust-by-example/custom_types/structs.html) · [Enums](https://doc.rust-lang.org/rust-by-example/custom_types/enum.html) | 惯用模式实践 |
 | **Rust API Guidelines** | [API Guidelines](https://rust-lang.github.io/api-guidelines/) | Rust 惯用设计 |
 
 ## 📊 目录
@@ -72,6 +72,8 @@
 ---
 
 ## 📋 快速导航
+
+📄 **一页纸总结**: [ONE_PAGE_SUMMARY](./ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
 
 ### 🎯 按角色导航
 
@@ -355,11 +357,11 @@ cargo bench -p c09_design_pattern
 深入学习设计模式的形式化理论基础：
 
 - 📐 **[设计模式形式化理论](../../../docs/rust-formal-engineering-system/03_design_patterns/)** - 完整的模式定义和类型规则
-- 🔬 **[形式化验证理论](../../../docs/rust-formal-engineering-system/01_theoretical_foundations/09_formal_verification/)** - 形式化验证方法
+- 🔬 **[形式化验证理论](../../../docs/research_notes/TOOLS_GUIDE.md)** - Prusti、Kani、Creusot
 - 🎯 **[类型系统理论](../../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 设计模式中的类型系统应用
-- 🧮 **[数学基础](../../../docs/rust-formal-engineering-system/01_theoretical_foundations/10_mathematical_foundations/)** - 模式背后的数学理论
-- ⚡ **[并发模型理论](../../../docs/rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models/)** - 并发模式的形式化描述
-- 🔄 **[异步编程范式](../../../docs/rust-formal-engineering-system/02_programming_paradigms/02_async/)** - 异步模式的理论基础
+- 🧮 **[数学基础](../../../docs/research_notes/type_theory/)** - 模式背后的数学理论
+- ⚡ **[并发模型理论](../../../docs/rust-formal-engineering-system/02_practical_applications/)** - 并发与异步实践
+- 🔄 **[异步编程范式](../../../crates/c06_async/)** - 异步模式的理论基础
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
 

@@ -1,7 +1,7 @@
 # 学习路径规划文档
 
 **创建日期**: 2025-12-11
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-14
 **Rust 版本**: 1.93.0+
 **Edition**: 2024
 
@@ -112,8 +112,8 @@
 
 **推荐资源**:
 
-- [线程并发使用指南](./THREADS_CONCURRENCY_USAGE_GUIDE.md)
-- [异步编程使用指南](./ASYNC_PROGRAMMING_USAGE_GUIDE.md)
+- [线程并发使用指南](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md)
+- [异步编程使用指南](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)
 - [网络编程速查卡](../02_reference/quick_reference/network_programming_cheatsheet.md)
 
 ---
@@ -153,9 +153,9 @@
 
 **推荐资源**:
 
-- [性能调优指南](./PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 - [项目最佳实践指南](../05_guides/BEST_PRACTICES.md)
-- [设计模式使用指南](./DESIGN_PATTERNS_USAGE_GUIDE.md)
+- [设计模式使用指南](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md)
 
 ---
 
@@ -182,10 +182,15 @@
    - 区块链开发
    - 系统编程
 
+4. **形式化与验证（研究者路径）**
+   - [形式化证明批判性分析与推进计划](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+   - [核心定理完整证明](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)
+   - [国际对标索引](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
+
 **推荐资源**:
 
-- [项目架构指南](./PROJECT_ARCHITECTURE_GUIDE.md)
-- [性能调优指南](./PERFORMANCE_TUNING_GUIDE.md)
+- [项目架构指南](../07_project/PROJECT_ARCHITECTURE_GUIDE.md)
+- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 - [故障排查指南](../05_guides/TROUBLESHOOTING_GUIDE.md)
 
 ---
@@ -266,7 +271,7 @@
 ### 项目资源
 
 - [快速参考卡片](../02_reference/quick_reference/README.md)
-- [使用指南](./)
+- [使用指南](../05_guides/README.md)
 - [最佳实践指南](../05_guides/BEST_PRACTICES.md)
 
 ### 社区资源
@@ -314,7 +319,7 @@
 
 ## 📚 相关文档
 
-- [项目架构指南](./PROJECT_ARCHITECTURE_GUIDE.md)
+- [项目架构指南](../07_project/PROJECT_ARCHITECTURE_GUIDE.md)
 - [最佳实践指南](../05_guides/BEST_PRACTICES.md)
 - [故障排查指南](../05_guides/TROUBLESHOOTING_GUIDE.md)
 - [快速参考卡片](../02_reference/quick_reference/README.md)

@@ -26,13 +26,13 @@ pub struct ObjectPool<T> {
 }
 
 impl<T> ObjectPool<T> {
-    /// 创建指定大小的对象池
-    pub fn new(size: usize) -> Self {
-        let mut pool = Vec::with_capacity(size);
+    /// 创建指定容量的对象池（初始可用数为 0，需通过 release 添加对象）
+    pub fn new(capacity: usize) -> Self {
+        let mut pool = Vec::with_capacity(capacity);
         unsafe {
-            pool.set_len(size);
+            pool.set_len(capacity);
         }
-        ObjectPool { pool, size }
+        ObjectPool { pool, size: 0 }
     }
 
     /// 从池中获取一个对象
@@ -331,7 +331,7 @@ mod tests {
     #[test]
     fn test_object_pool() {
         let mut pool: ObjectPool<i32> = ObjectPool::new(3);
-        assert_eq!(pool.available(), 3);
+        assert_eq!(pool.available(), 0);
 
         unsafe {
             // 先初始化一些对象到池中
@@ -340,9 +340,9 @@ mod tests {
             pool.release(30);
             assert_eq!(pool.available(), 3); // 池已满
 
-            // 获取一个对象
+            // 获取一个对象（LIFO，应得到 30）
             if let Some(obj) = pool.acquire() {
-                assert!(obj == 10 || obj == 20 || obj == 30);
+                assert_eq!(obj, 30);
                 assert_eq!(pool.available(), 2);
 
                 // 归还对象

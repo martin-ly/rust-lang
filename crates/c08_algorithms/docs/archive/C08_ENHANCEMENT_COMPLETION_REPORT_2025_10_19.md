@@ -581,7 +581,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $ma
 
 1. 参考 [知识图谱](./KNOWLEDGE_GRAPH.md) 理解算法关系
 2. 使用 [多维矩阵对比](./MULTIDIMENSIONAL_MATRIX_COMPARISON.md) 选择算法
-3. 深入学习 [理论文档](./theory/)
+3. 深入学习 [理论文档](../tier_04_advanced/)
 4. 探索 [高级专题](./advanced/)
 
 ### 对于工程应用

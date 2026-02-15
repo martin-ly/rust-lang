@@ -194,7 +194,7 @@ fn test_packet_filter() {
     let packet1 = Packet::new(PacketType::Http, Bytes::copy_from_slice(b"GET /"));
     let packet2 = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"data"));
     let packet3 = Packet::new(PacketType::Http, Bytes::copy_from_slice(b"very long data"));
-    let packet4 = Packet::new(PacketType::Http, Bytes::copy_from_slice(b"short"));
+    let packet4 = Packet::new(PacketType::Http, Bytes::copy_from_slice(b"ab")); // 2字节 < min_size(5)
     
     assert!(filter.matches(&packet1)); // HTTP类型，大小在范围内
     assert!(!filter.matches(&packet2)); // 类型不匹配

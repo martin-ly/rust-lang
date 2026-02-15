@@ -19,6 +19,7 @@
   - [近似表达的模式](#近似表达的模式)
   - [不可表达或极难表达](#不可表达或极难表达)
   - [扩展模式（43 完全之 20）表达边界](#扩展模式43-完全之-20表达边界)
+  - [分布式模式形式化边界（Event Sourcing、Saga、CQRS）](#分布式模式形式化边界event-sourcingsagacqrs)
   - [等价表达示例（代码级）](#等价表达示例代码级)
     - [等价表达完整代码示例](#等价表达完整代码示例)
   - [近似表达示例（代码级）](#近似表达示例代码级)
@@ -36,6 +37,26 @@
 | :--- | :--- |
 | **充分表达** | 与 GoF/OOP 语义等价，无信息损失，实现路径自然 |
 | **非充分表达** | 可实现核心意图，但实现方式或约束不同，有语义偏移 |
+
+---
+
+## 等价/近似/不可表达判定规则
+
+**Def EB-DET1（判定规则）**：给定模式 $P$ 与 Rust 实现 $R$，按下列步骤判定表达分类：
+
+| 步骤 | 检查项 | 等价 | 近似 | 不可表达 |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | 核心意图是否可实现 | 是 | 是 | 否 |
+| 2 | 实现是否依赖 unsafe/FFI | 否 | 可选 | 是（且无法封装） |
+| 3 | 与 OOP 语义是否一致（无信息损失） | 是 | 否（有偏移） | — |
+| 4 | 是否依赖全局可变/隐式共享/多继承/反射 | 否 | 否 | 是 |
+| 5 | Rust 惯用替代是否存在 | — | 是 | 否 |
+
+**判定流程**：1→不可则「不可表达」；2→需 unsafe 且可封装则「近似」；3→一致则「等价」；4→依赖则「不可表达」；5→有替代则「近似」。
+
+**反例类型**：等价违反→类型错误/所有权错误；近似违反→运行时 panic/逻辑错误；不可表达→编译拒绝或 UB。
+
+**引用**：[LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) EB1–EB6。
 
 ---
 
@@ -122,6 +143,49 @@
 | Event Sourcing | 等价 | Vec<Event> + fold |
 
 **论证**：扩展 20 绝大部分与 Fowler EAA 语义等价；Rust 的 trait、枚举、所有权可自然表达；Gateway 在 FFI 场景为近似（需 unsafe 封装）。
+
+---
+
+## 分布式模式形式化边界（Event Sourcing、Saga、CQRS）
+
+| 模式 | 表达 | 形式化边界 | Rust 实现要点 |
+| :--- | :--- | :--- | :--- |
+| **Event Sourcing** | 等价 | $\text{State} = \text{fold}(\text{Events})$；事件不可变；append-only log | `Vec<Event>` + `fold`；`serde` 序列化；`Arc` 共享只读 |
+| **Saga** | 近似 | 补偿链 $\text{Comp}_1 \circ \text{Comp}_2 \circ \cdots$；无分布式事务 | `Result` + 补偿闭包；`async` 编排；需显式补偿顺序 |
+| **CQRS** | 等价 | 读写分离；$\text{Write Model} \neq \text{Read Model}$；事件驱动同步 | trait 分离 Command/Query；channel 或 Event Sourcing 同步读模型 |
+
+**等价论证**：
+
+- **Event Sourcing**：Rust 的 `Vec`、`fold`、不可变事件与 Fowler 语义一致；无信息损失。
+- **CQRS**：trait 分离、模块边界、channel 传事件与 CQRS 读写分离语义等价。
+
+**近似论证（Saga）**：
+
+- **Saga**：Rust 无分布式 2PC；补偿需显式实现；`Result` + 闭包可表达补偿链，但无 Saga 编排器内置支持；与 Temporal/Cadence 等引擎对接时为近似（需外部编排）。
+
+**引用**：[06_boundary_analysis 并发选型](../../03_execution_models/06_boundary_analysis.md)、[04_compositional_engineering](../../04_compositional_engineering/README.md)
+
+---
+
+## 工作流形式化与引擎表达力（D3.1–D3.3）
+
+**Def WF1（工作流）**：工作流 = 多步骤业务过程 + 状态转换 + 可选补偿 + 可选人工任务 + 超时/重试。与 23/43 构建块正交；与执行模型（同步/异步/并发/分布式）为不同维度。
+
+**Def WF2（状态机）**：有限状态集 $S$，转换 $\delta: S \times E \to S$；Rust 等价：`enum State` + `match`。
+
+**Def WF3（补偿链）**：同 [05_distributed](../../03_execution_models/05_distributed.md) Saga Def DI-SG1；$\mathit{Comp}_1 \circ \mathit{Comp}_2 \circ \cdots$。
+
+**Def WF4（长事务）**：跨步骤、可补偿的原子语义；Rust 近似：`async` 块 + `Result` + 补偿闭包。
+
+| 工作流能力 | 表达 | Rust 实现 | 说明 |
+| :--- | :--- | :--- | :--- |
+| **状态机** | 等价 | 枚举 + match；类型状态 | 穷尽匹配保证覆盖 |
+| **补偿（Saga）** | 近似 | `Result` + 补偿闭包；显式 `rollback()` | 无内置 Saga 编排器 |
+| **Temporal 式** | 近似 | temporal-sdk、cadence 客户端 | 编排在服务端；Rust 定义 Activity/Workflow |
+| **人工任务** | 近似 | 状态等待、channel 阻塞 | 需外部任务队列 |
+| **超时/重试** | 等价 | `tokio::time::timeout`、指数退避 | 与 async 自然衔接 |
+
+**引用**：[02_workflow README 23/43 与工作流关系](README.md#2343-与工作流关系d34)、[05_distributed](../../03_execution_models/05_distributed.md)。
 
 ---
 
@@ -286,3 +350,4 @@ impl Originator {
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)：边界定理 EB1–EB6
 - [DESIGN_MECHANISM_RATIONALE](../../DESIGN_MECHANISM_RATIONALE.md)：设计机制理由
+- [04_compositional_engineering 表达力×组合联合判定树](../../04_compositional_engineering/README.md#表达力组合联合判定树支柱-23)：表达力与组合层级 L1–L4 联合选型

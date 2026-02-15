@@ -2,6 +2,7 @@
 
 > **创建日期**: 2025-12-25
 > **最后更新**: 2026-01-26
+> **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ **指南 100% 完成**
 
 ---
@@ -37,6 +38,7 @@
   - [🔗 相关资源](#-相关资源)
     - [学习资源](#学习资源)
     - [相关项目](#相关项目)
+    - [工具链扩展任务（Rust → 证明助手）](#工具链扩展任务rust--证明助手)
     - [工具资源](#工具资源)
 
 ---
@@ -46,6 +48,8 @@
 本指南提供了使用形式化工具（Coq、Isabelle）验证 Rust 形式化定义的完整流程。
 
 **文档状态**：本指南结构与全部六类验证的 Coq/Isabelle 框架、任务清单已完整；验证任务清单中的方框供实施时勾选。
+
+**Coq 证明骨架**：所有权唯一性（T-OW2）的 Coq 定理骨架已创建，见 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)、[COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)。
 
 ### 验证目标
 
@@ -474,6 +478,15 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 - **RustBelt**：Rust 类型系统的形式化验证
 - **Creusot**：Rust 程序的形式化验证工具
 - **Prusti**：Rust 程序的形式化验证工具
+
+### 工具链扩展任务（Rust → 证明助手）
+
+| 工具 | 输入 | 输出 | 对接状态 | 任务入口 |
+| :--- | :--- | :--- | :--- | :--- |
+| **Aeneas** | Safe Rust (MIR/THIR) | Coq/F*/HOL4/Lean | 📋 计划中 | [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md) |
+| **coq-of-rust** | THIR | Rocq (Coq) | 📋 计划中 | [COQ_OF_RUST_INTEGRATION_PLAN](./COQ_OF_RUST_INTEGRATION_PLAN.md) |
+
+完成 Aeneas/coq-of-rust 对接后，在 [PROOF_INDEX](./PROOF_INDEX.md) 中标注对应定理为 L3（机器可检查）。
 
 ### 工具资源
 

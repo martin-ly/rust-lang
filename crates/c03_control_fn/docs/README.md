@@ -172,7 +172,7 @@ docs/
 
 **⭐ 完整特性总结（推荐首选）**:
 
-- [Rust 1.93.0 特性总结](../../../docs/archive/version_reports/RUST_192_VERIFICATION_SUMMARY.md) ⭐ NEW
+- [Rust 1.92 验证总结](../../../docs/archive/version_reports/RUST_192_VERIFICATION_SUMMARY.md) ⭐ NEW
   - 所有新特性一览、性能数据、迁移指南、最佳实践
 
 **快速参考**:

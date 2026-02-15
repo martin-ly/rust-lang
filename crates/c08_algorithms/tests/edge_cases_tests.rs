@@ -38,8 +38,8 @@ fn test_single_element() {
 /// 测试大数组边界情况
 #[test]
 fn test_large_arrays() {
-    // 大数组创建
-    let large_size: usize = 100000;
+    // 大数组创建（规模控制在 i32 不溢出：sum(0..5000)=12497500 < i32::MAX）
+    let large_size: usize = 5000;
     let large_vec: Vec<i32> = (0..(large_size as i32)).collect();
     assert_eq!(large_vec.len(), large_size);
 
@@ -48,7 +48,7 @@ fn test_large_arrays() {
     assert_eq!(sum, (0..(large_size as i32)).sum::<i32>());
 
     // 大数组查找
-    assert_eq!(large_vec.iter().find(|&&x| x == 50000), Some(&50000));
+    assert_eq!(large_vec.iter().find(|&&x| x == 2500), Some(&2500));
     assert_eq!(
         large_vec.iter().find(|&&x| x == large_size as i32),
         None

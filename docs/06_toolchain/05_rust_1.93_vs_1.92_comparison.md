@@ -761,5 +761,5 @@ unsafe impl GlobalAlloc for MyAllocator {
 
 **文档维护**: Documentation Team
 **最后更新**: 2026-02-12
-**最后对照 releases.rs**: 2026-02-12
+**最后对照 releases.rs**: 2026-02-14
 **下次更新**：Rust 1.94 发布时

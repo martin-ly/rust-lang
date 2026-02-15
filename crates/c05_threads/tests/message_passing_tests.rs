@@ -87,14 +87,14 @@ fn test_watch_changed_and_borrow() {
     let second = rx.changed(&mut ver);
     assert_eq!(first, 1);
     assert_eq!(second, 2);
+    h.join().unwrap(); // 先 join 确保 sender 已 close
     assert!(rx.is_closed());
-    h.join().unwrap();
 }
 
 #[test]
 fn test_watch_try_changed() {
     let (tx, rx) = watch::channel(100i32);
-    let mut ver = 0u64;
+    let mut ver = u64::MAX; // 从未见过，首次 try_changed 返回初始值
     // 初次可见
     assert_eq!(rx.try_changed(&mut ver), Some(100));
     // 未变化时返回 None

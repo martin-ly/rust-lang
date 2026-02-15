@@ -1,9 +1,10 @@
 # 🔬 类型理论研究
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-14
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ **核心缺口已补全**；全部缺口均有 Def 占位；见 [00_completeness_gaps](00_completeness_gaps.md)
+> **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../../DOCS_STRUCTURE_OVERVIEW.md) § 2.7 type_theory
 
 ---
 
@@ -15,6 +16,7 @@
   - [🎯 研究目标](#-研究目标)
   - [📚 研究主题](#-研究主题)
     - [1. 类型系统基础](#1-类型系统基础)
+    - [1b. 类型构造能力](#1b-类型构造能力)
     - [2. Trait 系统形式化](#2-trait-系统形式化)
     - [3. 生命周期形式化](#3-生命周期形式化)
     - [4. 高级类型特性](#4-高级类型特性)
@@ -207,6 +209,7 @@
 
 ### 学术资源
 
+- [CORE_THEOREMS_FULL_PROOFS](../CORE_THEOREMS_FULL_PROOFS.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../coq_skeleton/) — Coq 证明骨架
 - **Types and Programming Languages** (Benjamin C. Pierce)
 - **Advanced Topics in Types and Programming Languages**
 - **Category Theory for Programmers** (Bartosz Milewski)
@@ -258,5 +261,5 @@
 ---
 
 **维护团队**: Rust Type Theory Research Group
-**最后更新**: 2026-02-12
+**最后更新**: 2026-02-14
 **状态**: ✅ **核心缺口已补全**；全部缺口 Def 占位；见 [00_completeness_gaps](00_completeness_gaps.md)

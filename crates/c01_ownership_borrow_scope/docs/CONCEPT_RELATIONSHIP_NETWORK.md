@@ -1238,7 +1238,7 @@ graph LR
 - [知识图谱](./KNOWLEDGE_GRAPH.md) - 概念可视化
 - [多维矩阵](./MULTIDIMENSIONAL_MATRIX.md) - 多维对比
 - [思维导图](./MIND_MAP.md) - 学习路径
-- [Rust 1.90 全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md) - 最新特性
+- [Rust 1.90 全面指南](./RUST_190_COMPREHENSIVE_MINDMAP.md) - 最新特性
 
 ---
 

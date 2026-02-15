@@ -175,7 +175,7 @@ graph TD
 
 ### 5. Pin 使用场景决策树 🆕
 
-> 用于判断何时用栈固定 vs 堆固定。详见 [DESIGN_MECHANISM_RATIONALE](research_notes/DESIGN_MECHANISM_RATIONALE.md#-pin堆栈区分使用场景的完整论证)。
+> 用于判断何时用栈固定 vs 堆固定。详见 [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md#-pin堆栈区分使用场景的完整论证)。
 
 ```text
 需要固定 T？
@@ -193,7 +193,7 @@ graph TD
 
 ### 6. 表达能力边界决策树
 
-> 用于判断「何者可表达、何者不可表达」。详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
+> 用于判断「何者可表达、何者不可表达」。详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
 
 ```text
 需要表达 X？

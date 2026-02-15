@@ -104,8 +104,8 @@
 - **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
 - **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - WASM 对比矩阵
 - **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - WASM 思维导图
-- **[决策图网](../../docs/DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
-- **[证明图网](../../docs/PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+- **[决策图网](../../docs/04_thinking/DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../docs/04_thinking/PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
 
 ### Rust 1.92/1.93 WASM 专用文档
 

@@ -396,10 +396,10 @@ async fn good_example() {
 
 ## 📚 相关文档
 
-- [完整文档](../crates/c06_async/README.md)
-- [异步编程指南](../crates/c06_async/docs/tier_02_guides/01_异步编程快速入门.md)
-- [Reactor 模式](../crates/c06_async/docs/tier_03_references/02_Reactor模式参考.md)
-- [Actor 模式](../crates/c06_async/docs/tier_03_references/03_Actor模式参考.md)
+- [完整文档](../../crates/c06_async/README.md)
+- [异步编程指南](../../crates/c06_async/docs/tier_02_guides/01_异步编程快速入门.md)
+- [Reactor 模式](../../crates/c06_async/docs/tier_03_references/02_Reactor模式参考.md)
+- [Actor 模式](../../crates/c06_async/docs/tier_03_references/03_Actor模式参考.md)
 
 ---
 

@@ -1,6 +1,6 @@
 # 📦 Rust 模块系统速查卡
 
-> **快速参考** | [Cargo/包索引](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md) | [Rust 官方模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [代码示例](../../crates/)
+> **快速参考** | [Cargo/包索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md) | [Rust 官方模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [代码示例](../../../crates/)
 > **最后更新**: 2026-01-27 | **Rust 版本**: 1.93.0+ | **Edition**: 2024
 
 ---
@@ -650,20 +650,20 @@ mod inner {
 ## 📚 相关文档
 
 - [项目结构说明](../../PROJECT_STRUCTURE.md)
-- [Cargo 包管理与模块索引（项目内）](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
-- [Workspace 模块示例：控制流与函数模块 README](../../crates/c03_control_fn/README.md)
-- [Workspace 模块示例：线程与并发模块 README](../../crates/c05_threads/README.md)
-- [Workspace 模块示例：类型系统模块 README](../../crates/c02_type_system/README.md)
+- [Cargo 包管理与模块索引（项目内）](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
+- [Workspace 模块示例：控制流与函数模块 README](../../../crates/c03_control_fn/README.md)
+- [Workspace 模块示例：线程与并发模块 README](../../../crates/c05_threads/README.md)
+- [Workspace 模块示例：类型系统模块 README](../../../crates/c02_type_system/README.md)
 
 ## 🧩 相关示例代码
 
 这些文件展示了“模块/子模块/导出”的真实组织方式（可直接打开阅读）：
 
-- [C01 crate 根与模块组织](../../crates/c01_ownership_borrow_scope/src/lib.rs)
-- [C02 crate 根与模块组织](../../crates/c02_type_system/src/lib.rs)
-- [C03 crate 根与模块组织](../../crates/c03_control_fn/src/lib.rs)
-- [C05 crate 根与模块组织](../../crates/c05_threads/src/lib.rs)
-- [C10 crate 根与统一 API 组织](../../crates/c10_networks/src/lib.rs)、[unified_api.rs](../../crates/c10_networks/src/unified_api.rs)
+- [C01 crate 根与模块组织](../../../crates/c01_ownership_borrow_scope/src/lib.rs)
+- [C02 crate 根与模块组织](../../../crates/c02_type_system/src/lib.rs)
+- [C03 crate 根与模块组织](../../../crates/c03_control_fn/src/lib.rs)
+- [C05 crate 根与模块组织](../../../crates/c05_threads/src/lib.rs)
+- [C10 crate 根与统一 API 组织](../../../crates/c10_networks/src/lib.rs)、[unified_api.rs](../../../crates/c10_networks/src/unified_api.rs)
 
 ## 📚 相关资源
 
@@ -674,7 +674,7 @@ mod inner {
 
 ### 项目内部文档
 
-- [Cargo 包管理与模块索引](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
+- [Cargo 包管理与模块索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
 - [类型系统速查卡](./type_system.md) - 类型系统与模块的关系
 - [Cargo 速查卡](./cargo_cheatsheet.md) - Cargo 包管理
 - [字符串与格式化速查卡](./strings_formatting_cheatsheet.md) - 模块中的字符串处理

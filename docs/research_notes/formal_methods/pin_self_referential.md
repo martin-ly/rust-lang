@@ -4,6 +4,7 @@
 > **最后更新**: 2026-02-12（国际权威对标补全）
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ 已完成 (100%)
+> **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 5 行（Pin）
 
 ---
 
@@ -517,8 +518,19 @@ async fn use_future() {
 
 ---
 
+### 相关思维表征
+
+| 类型 | 位置 |
+| :--- | :--- |
+| 多维矩阵 | [README §六篇并表](README.md#formal_methods-六篇并表) 第 5 行 |
+| 证明树 | 本文 Pin Def/T1–T3 结构；[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) |
+
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
+
+---
+
 **维护者**: Rust Formal Methods Research Group
-**最后更新**: 2026-02-12
+**最后更新**: 2026-02-14
 **状态**: ✅ **已完成** (100%)
 
 **国际权威对标**：[Rust RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)、[std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)；[FLS Ch. 17.3](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation) Asynchronous Computation。

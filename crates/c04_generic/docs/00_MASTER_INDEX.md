@@ -1,17 +1,20 @@
 # C04 泛型编程 - 主索引
 
 > **文档定位**: 本文档是完整的文档索引系统，提供所有文档的分类导航、学习路径和快速查找。初次访问建议从 [README.md](./README.md) 开始。
+> **English**: [00_MASTER_INDEX.en.md](./00_MASTER_INDEX.en.md)
 
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
 |----------|------|--------------|
 | **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、Trait、生命周期 |
-| **Rust By Example** | [Generics](https://doc.rust-lang.org/rust-by-example/generics.html) | 泛型语法 |
+| **RBE 练习** | [Generics](https://doc.rust-lang.org/rust-by-example/generics.html) | 泛型语法实践 |
 | **Rust Reference** | [Trait and lifetime bounds](https://doc.rust-lang.org/reference/trait-bounds.html) | 泛型约束规范 |
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 **思维表征**: [决策图网](../../../docs/04_thinking/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/04_thinking/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/04_thinking/THINKING_REPRESENTATION_METHODS.md)
+
+**一页纸总结**: [ONE_PAGE_SUMMARY.md](./ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
 
 ## 📚 文档导航总览
 

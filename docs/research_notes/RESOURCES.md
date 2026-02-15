@@ -301,12 +301,12 @@
 
 | 资源类型 | 形式化文档 | 可验证/支撑的定理 |
 | :--- | :--- | :--- |
-| RustBelt、Stacked Borrows | [ownership_model](formal_methods/ownership_model.md)、[borrow_checker_proof](formal_methods/borrow_checker_proof.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1 |
+| RustBelt、Stacked Borrows | [ownership_model](formal_methods/ownership_model.md)、[borrow_checker_proof](formal_methods/borrow_checker_proof.md)、[coq_skeleton](coq_skeleton/)、[RUSTBELT_ALIGNMENT](RUSTBELT_ALIGNMENT.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
 | Rust 类型系统研究 | [type_system_foundations](type_theory/type_system_foundations.md)、[trait_system_formalization](type_theory/trait_system_formalization.md) | 类型保持、coherence、RPITIT |
 | Prusti、Kani | [formal_methods](formal_methods/README.md) | 所有权、借用、unsafe 契约 |
 | Criterion、Miri | [experiments/README](experiments/README.md) | EX-T1、EX-T2；内存安全验证 |
 
-详见 [PROOF_INDEX](PROOF_INDEX.md) 全证明索引、[practical_applications](practical_applications.md) 案例与定理对应。
+详见 [PROOF_INDEX](PROOF_INDEX.md) 全证明索引、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) 国际对标、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 批判性分析与推进计划、[practical_applications](practical_applications.md) 案例与定理对应。
 
 ---
 
@@ -324,8 +324,17 @@
 - [类型理论研究](./type_theory/README.md) - 类型理论索引
 - [实验研究](./experiments/README.md) - 实验研究索引
 
+### 形式化证明体系（2026-02-14）
+
+- [批判性分析与推进计划](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 阶段 1–3 完成总结
+- [国际对标索引](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) - RustBelt、Aeneas、RustSEM 等
+- [形式化全模型入口](./FORMAL_FULL_MODEL_OVERVIEW.md) - 统一形式系统
+- [核心定理完整证明](./CORE_THEOREMS_FULL_PROOFS.md) - L2 级 ownership T2、borrow T1、type T3
+- [Coq 证明骨架](./coq_skeleton/) - T-OW2 所有权唯一性
+- [L3 实施指南](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) - Coq/Isabelle 补全路线
+
 ---
 
 **维护团队**: Rust Research Community
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-14
 **状态**: ✅ **Rust 1.93.0 更新完成**

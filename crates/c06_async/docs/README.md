@@ -8,7 +8,7 @@
 **适用版本**: Rust 1.75+ (推荐 1.93.0+)
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
-**思维表征**: [决策图网](../../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/THINKING_REPRESENTATION_METHODS.md)
+**思维表征**: [决策图网](../../../docs/04_thinking/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/04_thinking/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/04_thinking/THINKING_REPRESENTATION_METHODS.md)
 **难度等级**: ⭐⭐⭐⭐ 中高级
 **文档类型**: 📖 入门指南
 
@@ -80,15 +80,15 @@ cargo bench
 
 **🎯 快速入门** (3-5天):
 
-1. [guides/01_quick_start.md](./guides/01_quick_start.md) - 基础概念和第一个程序
+1. [tier_02_guides/01_异步编程快速入门](./tier_02_guides/01_异步编程快速入门.md) - 基础概念和第一个程序
 2. [core/01_introduction_and_philosophy.md](./core/01_introduction_and_philosophy.md) - 理解异步哲学
-3. [guides/02_basics.md](./guides/02_basics.md) - 掌握基础语法
+3. [tier_02_guides/02_Future与Executor机制](./tier_02_guides/02_Future与Executor机制.md) - 掌握基础机制
 
 **📚 系统学习** (2-3周):
 
 1. 核心系列 [core/](./core/) - 深入理解
 2. [runtimes/01_comparison_2025.md](./runtimes/01_comparison_2025.md) - 选择合适的运行时
-3. [guides/04_best_practices.md](./guides/04_best_practices.md) - 编写高质量代码
+3. [tier_02_guides/04_异步设计模式实践](./tier_02_guides/04_异步设计模式实践.md) - 编写高质量代码
 
 **🚀 专家进阶** (持续):
 
@@ -303,7 +303,7 @@ while let Some(item) = stream.next().await {
 - ❓ **[FAQ](./FAQ.md)** - 常见问题解答
 - 📚 **[Glossary](./Glossary.md)** - 核心术语表
 - 📖 **[核心系列](./core/)** - 01-06系统学习
-- 📚 **[学习指南](./guides/)** - 实践导向教程
+- 📚 **[学习指南](./tier_02_guides/)** - 实践导向教程
 - 🚀 **[综合指南](./comprehensive/)** - 2025最新全面分析
 
 ### 代码资源
@@ -408,11 +408,11 @@ async-trait = "0.1"
 
 ### 按学习阶段
 
-- **第1天**: [guides/01_quick_start](./guides/01_quick_start.md) → [core/01_introduction](./core/01_introduction_and_philosophy.md)
-- **第2-3天**: [core/02_runtime](./core/02_runtime_and_execution_model.md) → [guides/02_basics](./guides/02_basics.md)
+- **第1天**: [01_异步编程快速入门](./tier_02_guides/01_异步编程快速入门.md) → [01_项目概览](./tier_01_foundations/01_项目概览.md)
+- **第2-3天**: [02_Future与Executor机制](./tier_02_guides/02_Future与Executor机制.md) → [02_主索引导航](./tier_01_foundations/02_主索引导航.md)
 - **第4-5天**: [core/03_pinning](./core/03_pinning_and_unsafe_foundations.md) → [core/04_streams](./core/04_streams_and_sinks.md)
 - **第2周**: [core/05_traits](./core/05_async_in_traits_and_ecosystem.md) → [runtimes/01_comparison](./runtimes/01_comparison_2025.md)
-- **第3周**: [guides/04_best_practices](./guides/04_best_practices.md) → [performance/01_optimization](./performance/01_optimization_guide.md)
+- **第3周**: [04_异步设计模式实践](./tier_02_guides/04_异步设计模式实践.md) → [05_异步性能优化指南](./tier_02_guides/05_异步性能优化指南.md)
 
 ### 按问题类型
 
@@ -434,7 +434,7 @@ async-trait = "0.1"
 
 准备好了吗？选择你的路径：
 
-1. **🚀 快速体验** → [guides/01_quick_start.md](./guides/01_quick_start.md)
+1. **🚀 快速体验** → [01_异步编程快速入门](./tier_02_guides/01_异步编程快速入门.md)
 2. **📚 系统学习** → [core/01_introduction_and_philosophy.md](./core/01_introduction_and_philosophy.md)
 3. **🔍 查找文档** → [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) ⭐ 推荐先看
 4. **❓ 解决问题** → [FAQ.md](./FAQ.md)

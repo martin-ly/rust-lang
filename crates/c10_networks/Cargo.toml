@@ -88,11 +88,11 @@ tungstenite = { workspace = true }
 # Protobuf / gRPC（使用工作区统一版本）
 prost = { workspace = true }
 tonic = { workspace = true, features = ["transport"] }
-tonic-prost = "0.14.2"
+tonic-prost = { workspace = true }
 
 [build-dependencies]
 prost-build = { workspace = true }
-tonic-prost-build = "0.14.2"
+tonic-prost-build = { workspace = true }
 protoc-bin-vendored = "3"
 
 [dev-dependencies]

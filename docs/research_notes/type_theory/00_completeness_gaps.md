@@ -163,3 +163,15 @@
 - [ARGUMENTATION_GAP_INDEX](../ARGUMENTATION_GAP_INDEX.md) — 论证缺口追踪
 - [RFC 1023 Rebalancing Coherence](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)
 - [Relaxing the Orphan Rule (2024)](https://rust-lang.github.io/rust-project-goals/2024h2/Relaxing-the-Orphan-Rule.html)
+
+---
+
+## 8. 国际对标缺口（与阶段 1 交付物联动）
+
+**详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+
+| 缺口类型 | 说明 | 对标成果 |
+| :--- | :--- | :--- |
+| **L3 机器可检查证明** | 类型系统 T-TY3 骨架已创建（[TYPE_SAFETY.v](../coq_skeleton/TYPE_SAFETY.v)，证明 Admitted 待补全）；T-OW2/T-BR1 骨架见 [coq_skeleton](../coq_skeleton/) | RustBelt、Aeneas |
+| **范畴论对应** | 指称语义与类型论（Fω、System F）的范畴论对应未形式化 | 学术前沿 |
+| **工具对接** | 无 Aeneas、coq-of-rust 对接 | [AENEAS_INTEGRATION_PLAN](../AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../COQ_OF_RUST_INTEGRATION_PLAN.md) |

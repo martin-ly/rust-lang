@@ -34,11 +34,11 @@
     - [📍 文档导航 (2025-10-22 更新)](#-文档导航-2025-10-22-更新)
     - [🆕 新增学习资源 (2025-10-19)](#-新增学习资源-2025-10-19)
     - [📚 文档分类](#-文档分类)
-      - [1. 📖 实用指南 (guides/) - ⭐~⭐⭐](#1--实用指南-guides---)
-      - [2. 🔬 理论文档 (theory/) - ⭐⭐⭐](#2--理论文档-theory---)
-      - [3. 🚀 高级专题 (advanced/) - ⭐⭐~⭐⭐⭐](#3--高级专题-advanced---)
-      - [4. ✨ Rust 特性 (rust-features/) - ⭐⭐](#4--rust-特性-rust-features---)
-      - [5. 📚 参考资料 (references/) - ⭐~⭐⭐](#5--参考资料-references---)
+      - [1. 📖 实用指南 (tier_02_guides/) - ⭐~⭐⭐](#1--实用指南-tier_02_guides---)
+      - [2. 🔬 理论文档 (tier_04_advanced/) - ⭐⭐⭐](#2--理论文档-tier_04_advanced---)
+      - [3. 🚀 高级专题 (tier_04_advanced/) - ⭐⭐~⭐⭐⭐](#3--高级专题-tier_04_advanced---)
+      - [4. ✨ Rust 特性 (tier_03_references/) - ⭐⭐](#4--rust-特性-tier_03_references---)
+      - [5. 📚 参考资料 (tier_03_references/) - ⭐~⭐⭐](#5--参考资料-tier_03_references---)
     - [🎓 学习路径](#-学习路径)
     - [🔥 推荐文档](#-推荐文档)
     - [测试覆盖率](#测试覆盖率)
@@ -86,14 +86,14 @@
 
 ## 🌟 2025-10-20 核心增强更新
 
-- **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 算法与数据结构完整体系
-- **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - 算法/数据结构全面对比
-- **🗺️ [Rust 1.93.0 综合思维导图](./docs/RUST_192_COMPREHENSIVE_MINDMAP.md)** ⭐ NEW!
+- **📊 [知识图谱与概念关系](./docs/KNOWLEDGE_GRAPH.md)** - 算法与数据结构完整体系
+- **📐 [多维矩阵对比分析](./docs/MULTIDIMENSIONAL_MATRIX_COMPARISON.md)** - 算法/数据结构全面对比
+- **🗺️ [Rust 1.93.0 算法思维导图](./docs/MIND_MAP.md)** ⭐
   - ASCII艺术图表 | 数据结构/算法分类/并发算法完整体系
   - 算法选择决策树 | 排序/搜索/图算法/并发选择指南
   - 3级学习路径(2-16周) | 问题诊断树
   - 时间空间复杂度对比 | Rayon并行算法实践
-- **💻 [Rust 1.93.0 实战示例集](./docs/RUST_192_EXAMPLES_COLLECTION.md)** ⭐ NEW!
+- **💻 [Rust 1.93.0 实战示例集](./docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐
   - 850+行可运行代码 | LRU缓存/Trie树/图算法完整实现
   - Rust 1.93.0特性 | 泛型/所有权/并发算法最佳实践
   - Rayon并行算法 | 并行排序/Map-Reduce实战
@@ -380,59 +380,48 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 
 ### 📚 文档分类
 
-#### 1. 📖 实用指南 (guides/) - ⭐~⭐⭐
+#### 1. 📖 实用指南 (tier_02_guides/) - ⭐~⭐⭐
 
 适合日常开发和学习使用：
 
-- [算法复杂度分析](docs/guides/algorithm_complexity.md) - 时间/空间复杂度、Big-O、主定理
-- [数据结构实现](docs/guides/data_structures.md) - 线性表、树、图、高级数据结构
-- [异步算法指南](docs/guides/async_algorithms.md) - 异步编程与算法设计
-- [性能优化技巧](docs/guides/performance_optimization.md) - 编译期优化、SIMD、并行化
-- [基准测试指南](docs/guides/benchmarking_guide.md) - Criterion 使用、性能分析
+- [算法复杂度分析](docs/tier_02_guides/03_算法复杂度分析.md) - 时间/空间复杂度、Big-O、主定理
+- [数据结构实现](docs/tier_02_guides/02_数据结构实践.md) - 线性表、树、图、高级数据结构
+- [并行与异步算法](docs/tier_02_guides/05_并行与异步算法.md) - 异步编程与算法设计
+- [性能优化技巧](docs/tier_02_guides/04_性能优化实践.md) - 编译期优化、SIMD、并行化
+- [算法性能参考](docs/tier_03_references/04_算法性能参考.md) - Criterion 使用、性能分析
 
-#### 2. 🔬 理论文档 (theory/) - ⭐⭐⭐
+#### 2. 🔬 理论文档 (tier_04_advanced/) - ⭐⭐⭐
 
 深入的形式化理论和数学模型：
 
-- **[算法分类与形式化体系](docs/theory/ALGORITHM_CLASSIFICATION_AND_MODELS.md)** ⭐⭐⭐
-  - 算法的形式化定义、计算模型、语义模型、复杂度理论、正确性证明
+- **[形式化算法理论](docs/tier_04_advanced/01_形式化算法理论.md)** ⭐⭐⭐
+  - 算法分类、形式化定义、计算模型、语义模型、复杂度理论
 
-- **[设计模式语义映射](docs/theory/DESIGN_PATTERNS_SEMANTICS_MAPPING.md)** ⭐⭐⭐
-  - 经典设计模式、算法专属模式、并发模式、语义模型映射
-
-- **[异步同步等价关系](docs/theory/ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md)** ⭐⭐⭐
-  - 图灵等价性、执行模型对比、CPS 变换、形式化证明
-
-- **[控制流执行流等价性](docs/theory/CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md)** ⭐⭐⭐
-  - 五大等价性定理、CPS 变换推导、性能等价性分析
-
-- **[Actor/Reactor/CSP 模式](docs/theory/ACTOR_REACTOR_CSP_PATTERNS.md)** ⭐⭐⭐
+- **[并发算法模式](docs/tier_04_advanced/02_并发算法模式.md)** ⭐⭐⭐
   - Actor 模型、Reactor 模式、CSP 理论、形式化验证
 
-- **[异步递归分析](docs/theory/ASYNC_RECURSION_ANALYSIS.md)** ⭐⭐⭐
-  - 不动点理论、四大实现模式、终止性与等价性证明
+- **[分布式算法](docs/tier_04_advanced/03_分布式算法.md)** ⭐⭐⭐
+  - 分布式系统算法、一致性协议
 
-#### 3. 🚀 高级专题 (advanced/) - ⭐⭐~⭐⭐⭐
+- **[算法工程实践](docs/tier_04_advanced/04_算法工程实践.md)** ⭐⭐⭐
+  - 工程应用最佳实践、性能调优
 
-14 个深入的算法专题文档，涵盖类型设计、排序、图算法、动态规划、字符串算法、数据结构、并行算法、执行模型、异步模式、优化技术、形式化验证、分布式算法、机器学习和算法工程。
+- **[前沿算法技术](docs/tier_04_advanced/05_前沿算法技术.md)** ⭐⭐⭐
+  - 机器学习与前沿研究
 
-详见 [docs/advanced/README.md](docs/advanced/README.md)
+#### 3. 🚀 高级专题 (tier_04_advanced/) - ⭐⭐~⭐⭐⭐
 
-#### 4. ✨ Rust 特性 (rust-features/) - ⭐⭐
+详见 [docs/tier_04_advanced/README.md](docs/tier_04_advanced/README.md)
 
-Rust 1.89、1.90、1.91、1.92、1.93.0 和 Edition 2024 的特性应用：
+#### 4. ✨ Rust 特性 (tier_03_references/) - ⭐⭐
 
-- [Rust 1.89 特性](docs/rust-features/rust_189_features.md) (历史参考)
-- [Rust 1.90 特性应用](docs/rust-features/RUST_190_FEATURES_APPLICATION.md) (历史参考)
-- [Rust 1.93.0 特性应用](docs/rust-features/RUST_192_FEATURES_APPLICATION.md) ⭐ 最新
-- [Edition 2024 特性](docs/rust-features/Edition_2024_Features.md)
+- [Rust 1.90 特性参考](docs/tier_03_references/03_Rust190特性参考.md)
+- [Rust 1.93.0 算法特性](docs/RUST_192_ALGORITHMS_IMPROVEMENTS.md) ⭐ 最新
 
-#### 5. 📚 参考资料 (references/) - ⭐~⭐⭐
+#### 5. 📚 参考资料 (tier_03_references/) - ⭐~⭐⭐
 
-快速查阅和索引：
-
-- [算法索引](docs/references/algorithm_index.md) - 按类别索引所有算法
-- [算法基础教程](docs/references/08_algorithms_basics.md) - 入门教程
+- [算法分类参考](docs/tier_03_references/01_算法分类参考.md) - 按类别索引
+- [数据结构参考](docs/tier_03_references/02_数据结构参考.md)
 
 ### 🎓 学习路径
 
@@ -446,21 +435,21 @@ Rust 1.89、1.90、1.91、1.92、1.93.0 和 Edition 2024 的特性应用：
 
 **新手必读**:
 
-1. [算法基础教程](docs/references/08_algorithms_basics.md)
-2. [算法复杂度分析](docs/guides/algorithm_complexity.md)
-3. [数据结构实现](docs/guides/data_structures.md)
+1. [算法快速入门](docs/tier_02_guides/01_算法快速入门.md)
+2. [算法复杂度分析](docs/tier_02_guides/03_算法复杂度分析.md)
+3. [数据结构实现](docs/tier_02_guides/02_数据结构实践.md)
 
 **进阶阅读**:
 
-1. [异步算法指南](docs/guides/async_algorithms.md)
-2. [Actor/Reactor/CSP 模式](docs/theory/ACTOR_REACTOR_CSP_PATTERNS.md)
-3. [性能优化技巧](docs/guides/performance_optimization.md)
+1. [并行与异步算法](docs/tier_02_guides/05_并行与异步算法.md)
+2. [并发算法模式](docs/tier_04_advanced/02_并发算法模式.md)
+3. [性能优化实践](docs/tier_02_guides/04_性能优化实践.md)
 
 **理论深入**:
 
-1. [算法分类与形式化](docs/theory/ALGORITHM_CLASSIFICATION_AND_MODELS.md)
-2. [异步同步等价关系](docs/theory/ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md)
-3. [控制流执行流等价性](docs/theory/CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md)
+1. [形式化算法理论](docs/tier_04_advanced/01_形式化算法理论.md)
+2. [并发算法模式](docs/tier_04_advanced/02_并发算法模式.md)
+3. [分布式算法](docs/tier_04_advanced/03_分布式算法.md)
 
 ### 测试覆盖率
 
@@ -507,8 +496,8 @@ cargo llvm-cov test --workspace --html
 - **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
 - **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 算法对比矩阵
 - **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 算法思维导图
-- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
-- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+- **[决策图网](../../docs/04_thinking/DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../docs/04_thinking/PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
 
 ### 使用指南
 

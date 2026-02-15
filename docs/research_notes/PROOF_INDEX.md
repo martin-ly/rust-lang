@@ -1,7 +1,7 @@
 # 📚 形式化证明文档索引
 
 > **创建日期**: 2025-12-25
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-14
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ **证明索引 100% 完成**（105+ 证明已收录，formal_methods Phase 1–6 全部补全）
 
@@ -12,6 +12,7 @@
 - [📚 形式化证明文档索引](#-形式化证明文档索引)
   - [📊 目录](#-目录)
   - [🔢 公理编号规范 (Axiom Numbering Convention)](#-公理编号规范-axiom-numbering-convention)
+  - [📐 证明深度层次 (Proof Depth)](#-证明深度层次-proof-depth)
   - [🎯 索引说明](#-索引说明)
   - [📚 按研究领域分类](#-按研究领域分类)
     - [所有权与借用](#所有权与借用)
@@ -41,6 +42,7 @@
       - [形式化验证指南](#形式化验证指南)
       - [质量检查清单](#质量检查清单)
       - [执行模型扩展（引理/推论）](#执行模型扩展引理推论)
+  - [📐 按证明深度导航](#-按证明深度导航)
   - [🔬 按证明类型分类](#-按证明类型分类)
     - [唯一性证明](#唯一性证明)
     - [安全性证明](#安全性证明)
@@ -48,6 +50,7 @@
   - [📈 证明完成度统计](#-证明完成度统计)
     - [按研究领域统计](#按研究领域统计)
     - [按证明类型统计](#按证明类型统计)
+    - [按证明深度统计](#按证明深度统计)
     - [按证明方法统计](#按证明方法统计)
   - [🔗 相关资源](#-相关资源)
     - [核心文档](#核心文档)
@@ -72,9 +75,23 @@
 
 **引用格式**: 在证明树中可写 `A1 → L1 → T1 → C1` 表示公理→引理→定理→推论链。
 
-**对应文档**: [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) 第 4 节证明树、[PROOF_GRAPH_NETWORK](../PROOF_GRAPH_NETWORK.md)。
+**对应文档**: [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) 第 4 节证明树、[PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md)。
 
 **顶层框架**: [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) —— 本索引的证明归属理论体系第 3 层（性质定理层）。
+
+---
+
+## 📐 证明深度层次 (Proof Depth)
+
+**用途**: 区分证明充分性，便于对标国际机器可检查证明。见 [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)。
+
+| 深度 | 含义 | 示例 |
+| :--- | :--- | :--- |
+| **L1** | 证明思路 / 证明草图 | 结构归纳法描述、关键步骤概述 |
+| **L2** | 完整证明 | 归纳基、归纳步、辅助引理编号、形式化陈述 |
+| **L3** | 机器可检查 | Coq/Isabelle/Lean 证明代码 |
+
+**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](./coq_skeleton/) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)、[FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md)。
 
 ---
 
@@ -107,7 +124,7 @@
 
 **已完成的证明**:
 
-1. **定理 2 (所有权唯一性)** ✅
+1. **定理 2 (所有权唯一性)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §2
    - **形式化表示**: 对于任何值 $v$，在任意时刻，最多存在一个变量 $x$ 使得 $\Omega(x) = \text{Owned}$ 且 $\Gamma(x) = v$
    - **证明方法**: 结构归纳法
    - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md#定理-2-所有权唯一性)
@@ -115,7 +132,7 @@
      - 基础情况：初始状态唯一性
      - 归纳步骤：移动操作、复制操作、作用域结束
 
-2. **定理 3 (内存安全框架)** ✅
+2. **定理 3 (内存安全框架)** ✅ `L1`
    - **形式化表示**:
      - 无悬垂指针: $\forall x: \text{valid}(x) \rightarrow \text{owner}(x) \neq \emptyset$
      - 无双重释放: $\forall x, y: x \neq y \land \text{owner}(x) = \text{owner}(y) \rightarrow \text{false}$
@@ -127,7 +144,7 @@
      - 性质2（无双重释放）：由所有权唯一性直接保证
      - 性质3（无内存泄漏）：由规则3（作用域结束）保证
 
-3. **Def RC1/ARC1/CELL1/REFCELL1/BOX1 / 定理 RC-T1/REFCELL-T1/BOX-T1（Rust 1.93 智能指针）** ✅
+3. **Def RC1/ARC1/CELL1/REFCELL1/BOX1 / 定理 RC-T1/REFCELL-T1/BOX-T1（Rust 1.93 智能指针）** ✅ `L1`
    - **形式化表示**: Rc/Arc 引用计数、Cell/RefCell 内部可变、Box RAII
    - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
 
@@ -165,7 +182,7 @@
 
 **已完成的证明**:
 
-1. **定理 1 (数据竞争自由)** ✅
+1. **定理 1 (数据竞争自由)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §3
    - **形式化表示**: 在借用检查器下，程序执行过程中不会出现数据竞争
    - **证明方法**: 结构归纳法
    - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由)
@@ -173,7 +190,7 @@
      - 基础情况：单线程执行
      - 归纳步骤：借用规则保证互斥访问
 
-2. **定理 2 (借用规则正确性)** ✅
+2. **定理 2 (借用规则正确性)** ✅ `L1`
    - **形式化表示**: 借用检查器正确执行借用规则
    - **证明方法**: 规则归纳法
    - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-2-借用规则正确性)
@@ -269,7 +286,7 @@
      - 基础情况：$\beta$ 归约
      - 归纳步骤：函数应用求值
 
-3. **定理 3 (类型安全)** ✅
+3. **定理 3 (类型安全)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §4
    - **形式化表示**: $\Gamma \vdash e : \tau \rightarrow \neg \exists e': e \to^* e' \land \text{type\_error}(e')$
    - **证明方法**: 由进展性和保持性直接得出
    - **证明位置**: [type_system_foundations.md](./type_theory/type_system_foundations.md#定理-3-类型安全)
@@ -592,11 +609,21 @@
 
 ---
 
+## 📐 按证明深度导航
+
+| 深度 | 证明列表（示例） |
+| :--- | :--- |
+| **L1** | 所有权 T3、借用 T2、生命周期 LF-T1–T3、类型 T1/T2/T4/T5、异步 T6.1–T6.3、Pin T1–T3、Trait T1–T3、设计模式推论、实验定理 |
+| **L2** | 所有权 T2、借用 T1、类型 T3（见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)）；型变 T1–T4、组合工程 CE-T1–T3、边界 BMP-T1/T2 |
+| **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+
+---
+
 ## 🔬 按证明类型分类
 
 ### 唯一性证明
 
-- ✅ **所有权唯一性** ([ownership_model.md](./formal_methods/ownership_model.md#定理-2-所有权唯一性))
+- ✅ **所有权唯一性** `L2` ([ownership_model.md](./formal_methods/ownership_model.md#定理-2-所有权唯一性)、[CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §2)
   - 方法：结构归纳法
   - 结果：每个值最多有一个所有者
 
@@ -606,11 +633,11 @@
   - 方法：反证法 + 结构归纳法
   - 结果：无悬垂指针、无双重释放、无内存泄漏
 
-- ✅ **数据竞争自由** ([borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由))
+- ✅ **数据竞争自由** `L2` ([borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由)、[CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §3)
   - 方法：结构归纳法
   - 结果：程序执行过程中不会出现数据竞争
 
-- ✅ **类型安全** ([type_system_foundations.md](./type_theory/type_system_foundations.md#定理-3-类型安全))
+- ✅ **类型安全** `L2` ([type_system_foundations.md](./type_theory/type_system_foundations.md#定理-3-类型安全)、[CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §4)
   - 方法：由进展性和保持性得出
   - 结果：良型程序不会出现类型错误
 
@@ -666,6 +693,16 @@
 | 正确性证明 | 11个     | 100%     | ✅ 完成 |
 | **总计**   | **29个** | **100%** | ✅      |
 
+### 按证明深度统计
+
+| 深度 | 含义 | 数量 | 占比 |
+| :--- | :--- | :--- | :--- |
+| **L1** | 证明思路/草图 | ~92 | ~88% |
+| **L2** | 完整证明 | ~15 | ~12% |
+| **L3** | 机器可检查 | 0 | 0% |
+
+**L2 示例**: 型变定理 1–4、组合工程 CE-T1–T3、边界系统 BMP-T1/T2、variance_theory 完整证明。
+
 ### 按证明方法统计
 
 | 证明方法                           | 证明数量 | 占比 |
@@ -684,7 +721,11 @@
 
 ### 核心文档
 
+- [形式语言与形式证明](./FORMAL_LANGUAGE_AND_PROOFS.md) — 推理规则、操作语义、判定形式、形式证明推导树（数学级，与 Coq 互补）
+- [核心定理完整证明](./CORE_THEOREMS_FULL_PROOFS.md) — T-OW2、T-BR1、T-TY3 L2 级完整证明
 - [理论体系与论证体系结构](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 顶层框架，本索引归属第 3 层
+- [完整总结综合](./00_COMPREHENSIVE_SUMMARY.md) - 项目全貌、知识地图、论证总览
+- [论证脉络关系与论证思路](./ARGUMENTATION_CHAIN_AND_FLOW.md) - 论证五步法、概念→定理 DAG、文档依赖、推导链
 - [全局统一系统化框架](./UNIFIED_SYSTEMATIC_FRAMEWORK.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
 - [构造性语义与表达能力边界](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 操作/指称/公理语义、表达能力边界论证
 - [形式化论证系统梳理指南](./FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、概念-公理-定理映射、反例索引
@@ -736,12 +777,12 @@
 | 联合体原始引用安全性证明树                | 类型系统                |
 | 借用检查器安全性证明树                    | [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
 | 生命周期安全性证明树                      | [lifetime_formalization.md](./formal_methods/lifetime_formalization.md) |
-| Send/Sync 安全性证明树                    | [async_state_machine.md](./formal_methods/async_state_machine.md) |
+| Send/Sync 安全性证明树                    | [send_sync_formalization.md](./formal_methods/send_sync_formalization.md)（Def SEND1/SYNC1、SEND-T1/SYNC-T1）；[async_state_machine.md](./formal_methods/async_state_machine.md) 定理 6.2 |
 
-**相关文档**: [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) - 思维导图、决策树、转换树、证明树
+**相关文档**: [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) - 思维导图、决策树、转换树、证明树
 
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-12
-**状态**: ✅ **证明索引 100% 完成**（110+ 证明已收录，formal_methods Phase 1–6、类型理论阶段 1–7、construction_capability、执行确定性、组件成熟度、全部缺口 Def 占位完成）
+**最后更新**: 2026-02-14
+**状态**: ✅ **证明索引 100% 完成**（110+ 证明已收录；证明深度 L1/L2/L3 已标注；按深度导航已增加；见 [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)）

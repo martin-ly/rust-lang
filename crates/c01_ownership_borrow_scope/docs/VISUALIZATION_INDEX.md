@@ -1,4 +1,4 @@
-﻿# Rust 所有权系统可视化文档导航
+# Rust 所有权系统可视化文档导航
 
 ## 📊 目录
 
@@ -142,9 +142,9 @@ graph TB
 
 #### 🔗 相关章节
 
-- [所有权理论](./01_theory/01_ownership_theory.md)
-- [借用理论](./01_theory/02_borrowing_theory.md)
-- [生命周期理论](./01_theory/03_lifetime_theory.md)
+- [所有权理论](./tier_04_advanced/01_ownership_theory.md)
+- [借用理论](./tier_04_advanced/02_borrowing_theory.md)
+- [生命周期理论](./tier_04_advanced/03_lifetime_theory.md)
 
 ---
 
@@ -189,9 +189,9 @@ graph TB
 
 #### 🔗 相关章节2
 
-- [所有权基础](./02_core/01_ownership_fundamentals.md)
-- [借用系统](./02_core/02_borrowing_system.md)
-- [智能指针](./03_advanced/04_smart_pointers.md)
+- [所有权基础](./tier_02_guides/01_ownership_fundamentals.md)
+- [借用系统](./tier_02_guides/02_borrowing_system.md)
+- [智能指针](./tier_03_references/04_smart_pointers.md)
 
 ---
 
@@ -242,9 +242,9 @@ graph TB
 
 #### 🔗 相关章节3
 
-- [最佳实践](./05_practice/02_best_practices.md)
-- [常见陷阱](./05_practice/03_common_pitfalls.md)
-- [性能调优](./05_practice/04_performance_tuning.md)
+- [最佳实践](./tier_01_foundations/04_常见问题.md)
+- [常见陷阱](./tier_01_foundations/04_常见问题.md)
+- [性能调优](./tier_03_references/09_性能优化参考.md)
 
 ---
 
@@ -296,9 +296,9 @@ graph TB
 
 #### 🔗 相关章节4
 
-- [高级所有权](./03_advanced/01_advanced_ownership.md)
-- [高级借用](./03_advanced/02_advanced_borrowing.md)
-- [高级生命周期](./03_advanced/03_advanced_lifetimes.md)
+- [高级所有权](./tier_03_references/01_advanced_ownership.md)
+- [高级借用](./tier_03_references/02_advanced_borrowing.md)
+- [高级生命周期](./tier_03_references/03_生命周期参考.md)
 
 ---
 
@@ -434,37 +434,37 @@ mmdc -i CONCEPT_RELATIONSHIP_NETWORK.md -o network.png
 
 | 理论文档                                               | 对应可视化章节              |
 | ------------------------------------------------------ | --------------------------- |
-| [所有权理论](./01_theory/01_ownership_theory.md)       | 知识图谱-所有权系统完整图谱 |
-| [借用理论](./01_theory/02_borrowing_theory.md)         | 知识图谱-借用系统完整图谱   |
-| [生命周期理论](./01_theory/03_lifetime_theory.md)      | 概念关系网络-生命周期关系网 |
-| [内存安全理论](./01_theory/04_memory_safety_theory.md) | 概念关系网络-内存安全保证网 |
+| [所有权理论](./tier_04_advanced/01_ownership_theory.md)       | 知识图谱-所有权系统完整图谱 |
+| [借用理论](./tier_04_advanced/02_borrowing_theory.md)         | 知识图谱-借用系统完整图谱   |
+| [生命周期理论](./tier_04_advanced/03_lifetime_theory.md)      | 概念关系网络-生命周期关系网 |
+| [内存安全理论](./tier_04_advanced/04_memory_safety_theory.md) | 概念关系网络-内存安全保证网 |
 
 ### 核心概念文档
 
 | 核心文档                                             | 对应可视化章节          |
 | ---------------------------------------------------- | ----------------------- |
-| [所有权基础](./02_core/01_ownership_fundamentals.md) | 多维矩阵-所有权概念对比 |
-| [借用系统](./02_core/02_borrowing_system.md)         | 多维矩阵-借用模式对比   |
-| [生命周期注解](./02_core/03_lifetime_annotations.md) | 多维矩阵-生命周期对比   |
-| [作用域管理](./02_core/04_scope_management.md)       | 知识图谱-作用域系统     |
+| [所有权基础](./tier_02_guides/01_ownership_fundamentals.md) | 多维矩阵-所有权概念对比 |
+| [借用系统](./tier_02_guides/02_borrowing_system.md)         | 多维矩阵-借用模式对比   |
+| [生命周期注解](./tier_02_guides/03_lifetime_annotations.md) | 多维矩阵-生命周期对比   |
+| [作用域管理](./tier_02_guides/04_scope_management.md)       | 知识图谱-作用域系统     |
 
 ### 高级特性文档
 
 | 高级文档                                               | 对应可视化章节              |
 | ------------------------------------------------------ | --------------------------- |
-| [高级所有权](./03_advanced/01_advanced_ownership.md)   | 概念关系网络-所有权核心关系 |
-| [高级借用](./03_advanced/02_advanced_borrowing.md)     | 概念关系网络-借用检查器网络 |
-| [高级生命周期](./03_advanced/03_advanced_lifetimes.md) | 概念关系网络-生命周期关系网 |
-| [智能指针](./03_advanced/04_smart_pointers.md)         | 思维导图-智能指针生态树     |
+| [高级所有权](./tier_03_references/01_advanced_ownership.md)   | 概念关系网络-所有权核心关系 |
+| [高级借用](./tier_03_references/02_advanced_borrowing.md)     | 概念关系网络-借用检查器网络 |
+| [高级生命周期](./tier_03_references/03_生命周期参考.md) | 概念关系网络-生命周期关系网 |
+| [智能指针](./tier_03_references/04_smart_pointers.md)         | 思维导图-智能指针生态树     |
 
 ### 实践应用文档
 
 | 实践文档                                           | 对应可视化章节            |
 | -------------------------------------------------- | ------------------------- |
-| [设计模式](./05_practice/01_design_patterns.md)    | 知识图谱-设计模式与所有权 |
-| [最佳实践](./05_practice/02_best_practices.md)     | 多维矩阵-最佳实践决策树   |
-| [常见陷阱](./05_practice/03_common_pitfalls.md)    | 思维导图-常见错误诊断树   |
-| [性能调优](./05_practice/04_performance_tuning.md) | 概念关系网络-性能优化网络 |
+| [设计模式](./tier_02_guides/07_实战项目集.md)    | 知识图谱-设计模式与所有权 |
+| [最佳实践](./tier_01_foundations/04_常见问题.md)     | 多维矩阵-最佳实践决策树   |
+| [常见陷阱](./tier_01_foundations/04_常见问题.md)    | 思维导图-常见错误诊断树   |
+| [性能调优](./tier_03_references/09_性能优化参考.md) | 概念关系网络-性能优化网络 |
 
 ## 📈 学习建议
 
@@ -495,21 +495,21 @@ mmdc -i CONCEPT_RELATIONSHIP_NETWORK.md -o network.png
 
 1. ✅ 阅读 [思维导图-初学者路径](./MIND_MAP.md#初学者学习路径0-3个月)
 2. ✅ 学习 [知识图谱-核心层](./KNOWLEDGE_GRAPH.md#核心层知识图谱)
-3. ✅ 实践 [所有权基础](./02_core/01_ownership_fundamentals.md)
-4. ✅ 练习 [借用系统](./02_core/02_borrowing_system.md)
+3. ✅ 实践 [所有权基础](./tier_02_guides/01_ownership_fundamentals.md)
+4. ✅ 练习 [借用系统](./tier_02_guides/02_borrowing_system.md)
 
 ### 进阶者
 
 1. ✅ 阅读 [思维导图-进阶路径](./MIND_MAP.md#进阶学习路径3-12个月)
 2. ✅ 研究 [概念关系网络-智能指针](./CONCEPT_RELATIONSHIP_NETWORK.md#智能指针关系网络)
 3. ✅ 应用 [多维矩阵-智能指针选择](./MULTIDIMENSIONAL_MATRIX.md#智能指针选择决策矩阵)
-4. ✅ 掌握 [高级所有权模式](./03_advanced/01_advanced_ownership.md)
+4. ✅ 掌握 [高级所有权模式](./tier_03_references/01_advanced_ownership.md)
 
 ### 专家
 
 1. ✅ 深入 [概念关系网络-完整网络](./CONCEPT_RELATIONSHIP_NETWORK.md)
 2. ✅ 对比 [多维矩阵-跨语言对比](./MULTIDIMENSIONAL_MATRIX.md#跨语言对比)
-3. ✅ 研究 [Rust 1.90 特性](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)
+3. ✅ 研究 [Rust 1.90 特性](./RUST_190_COMPREHENSIVE_MINDMAP.md)
 4. ✅ 贡献开源项目
 
 ## 📚 参考资料
@@ -529,9 +529,9 @@ mmdc -i CONCEPT_RELATIONSHIP_NETWORK.md -o network.png
 
 ### 版本特性
 
-- [Rust 1.90 全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md)
-- [Rust 1.90 特性分析](./06_rust_features/RUST_190_COMPREHENSIVE_FEATURES.md)
-- [Rust 1.89 特性分析](./06_rust_features/RUST_189_COMPREHENSIVE_FEATURES.md)
+- [Rust 1.90 全面指南](./RUST_190_COMPREHENSIVE_MINDMAP.md)
+- [Rust 1.90 特性分析](./RUST_190_EXAMPLES_COLLECTION.md)
+- [Rust 1.89 特性分析](./RUST_190_COMPREHENSIVE_MINDMAP.md)
 
 ## 🤝 反馈与贡献
 

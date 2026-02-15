@@ -21,19 +21,13 @@
 
 ## 🔗 原有优质文档
 
-**theory/ 目录** - 8篇形式化理论文档:
+**形式化理论** - 已整合至本 Tier 及 c09 设计模式:
 
-- [ALGORITHM_CLASSIFICATION_AND_MODELS.md](../theory/ALGORITHM_CLASSIFICATION_AND_MODELS.md) ⭐⭐⭐⭐⭐
-- [ACTOR_REACTOR_CSP_PATTERNS.md](../theory/ACTOR_REACTOR_CSP_PATTERNS.md) ⭐⭐⭐⭐⭐
-- [ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md](../theory/ASYNC_SYNC_EQUIVALENCE_ALGORITHMS.md) ⭐⭐⭐⭐⭐
-- [CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md](../theory/CONTROL_FLOW_EXECUTION_FLOW_EQUIVALENCE.md) ⭐⭐⭐⭐⭐
-- [ASYNC_RECURSION_ANALYSIS.md](../theory/ASYNC_RECURSION_ANALYSIS.md) ⭐⭐⭐⭐
-- [DESIGN_PATTERNS_SEMANTICS_MAPPING.md](../theory/DESIGN_PATTERNS_SEMANTICS_MAPPING.md) ⭐⭐⭐⭐
-- [FORMAL_ALGORITHM_MODELS.md](../theory/FORMAL_ALGORITHM_MODELS.md) ⭐⭐⭐⭐⭐
-
-**advanced/ 目录** - 14篇高级专题:
-
-- [algorithm_exp01-14.md](../advanced/) - 涵盖类型设计、排序、图算法、动态规划等
+- [01_形式化算法理论](./01_形式化算法理论.md) - 算法分类与形式化体系 ⭐⭐⭐⭐⭐
+- [02_并发算法模式](./02_并发算法模式.md) - Actor/Reactor/CSP ⭐⭐⭐⭐⭐
+- [ACTOR_REACTOR_PATTERNS](../../../c09_design_pattern/docs/ACTOR_REACTOR_PATTERNS.md) - c09 设计模式专题 ⭐⭐⭐⭐⭐
+- [ASYNC_SYNC_EQUIVALENCE_THEORY](../../../c09_design_pattern/docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md) - c09 异步同步等价 ⭐⭐⭐⭐⭐
+- [ASYNC_RECURSION_ANALYSIS](../../../c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md) - c09 异步递归 ⭐⭐⭐⭐
 
 ---
 
@@ -61,10 +55,10 @@
 
 ## 📖 补充资源
 
-**theory_enhanced/ 目录**:
+**补充资源**:
 
-- [KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md](../theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)
-- [MULTI_DIMENSIONAL_COMPARISON_MATRIX.md](../theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)
+- [KNOWLEDGE_GRAPH](../KNOWLEDGE_GRAPH.md) - 算法知识图谱
+- [MULTIDIMENSIONAL_MATRIX_COMPARISON](../MULTIDIMENSIONAL_MATRIX_COMPARISON.md) - 多维矩阵对比
 
 ---
 

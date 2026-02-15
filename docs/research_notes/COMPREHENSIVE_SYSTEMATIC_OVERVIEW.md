@@ -288,13 +288,13 @@ Axiom/规则层
 | 类型 | 文档 | 用途 | 覆盖范围 |
 | :--- | :--- | :--- | :--- |
 | **思维导图** | [MIND_MAP_COLLECTION](../MIND_MAP_COLLECTION.md) | 核心概念、模块知识、关联 | Rust 核心、所有权、类型、并发、异步、系统编程、C01–C08 |
-| **思维导图** | [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) §1 | Rust 1.93 特性、学习路径 | 1.93 特性、跨模块依赖 |
+| **思维导图** | [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) §1 | Rust 1.93 特性、学习路径 | 1.93 特性、跨模块依赖 |
 | **多维矩阵** | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 所有权、类型、并发、同步原语、形式化理论 | 型变、证明方法、公理-定理依赖 |
-| **公理-定理证明树** | [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) §4 | MaybeUninit、Never、借用、生命周期、Send/Sync | 证明树 |
-| **公理-定理证明树** | [PROOF_GRAPH_NETWORK](../PROOF_GRAPH_NETWORK.md) | 证明结构模板、核心证明路径 | MaybeUninit、联合体、迭代器 |
+| **公理-定理证明树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) §4 | MaybeUninit、Never、借用、生命周期、Send/Sync | 证明树 |
+| **公理-定理证明树** | [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | 证明结构模板、核心证明路径 | MaybeUninit、联合体、迭代器 |
 | **公理-定理证明树** | 各 research_notes「公理-定理证明树」小节 | 所有权、借用、生命周期、异步、Pin、型变 | 模块级证明树 |
-| **决策树** | [DECISION_GRAPH_NETWORK](../DECISION_GRAPH_NETWORK.md) | 所有权、类型、异步、性能、安全决策 | 技术选型 |
-| **决策树** | [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) §3 | 特性使用、迁移、性能、应用场景 | 1.93 特性决策 |
+| **决策树** | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 所有权、类型、异步、性能、安全决策 | 技术选型 |
+| **决策树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) §3 | 特性使用、迁移、性能、应用场景 | 1.93 特性决策 |
 | **反例** | [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md#️-反例索引) | 型变、所有权、生命周期、异步、Pin、Trait、高级类型 | 反例汇总 |
 | **反例** | 各 research_notes「反例」小节 | 模块级反例 | 详见 PROOF_INDEX |
 
@@ -327,7 +327,7 @@ Axiom/规则层
 
 ### 决策树快速导航
 
-> 完整决策树见 [DECISION_GRAPH_NETWORK](../DECISION_GRAPH_NETWORK.md)、[THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) §3。
+> 完整决策树见 [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md)、[THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) §3。
 
 ```text
 所有权决策: 需要共享？→ Rc/Arc | 需要内部可变？→ Cell/RefCell | 未初始化内存？→ MaybeUninit
@@ -455,9 +455,9 @@ Axiom/规则层
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构、概念定义、思维表征 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵、形式化理论对比 |
 | [MIND_MAP_COLLECTION](../MIND_MAP_COLLECTION.md) | 思维导图集合 |
-| [DECISION_GRAPH_NETWORK](../DECISION_GRAPH_NETWORK.md) | 决策树 |
-| [PROOF_GRAPH_NETWORK](../PROOF_GRAPH_NETWORK.md) | 证明图网 |
-| [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) | 思维表征方式（导图、矩阵、决策树、证明树） |
+| [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策树 |
+| [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | 证明图网 |
+| [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) | 思维表征方式（导图、矩阵、决策树、证明树） |
 
 ---
 

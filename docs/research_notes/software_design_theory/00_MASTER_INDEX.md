@@ -1,9 +1,9 @@
 # 软件设计理论体系：主索引
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-15
 > **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: ✅ **100% 完成**（层次推进三阶段全部完成）
+> **状态**: ✅ **100% 完成**（层次推进三阶段 + 全面论证 D1–D3 全部完成）
 
 ---
 
@@ -141,6 +141,7 @@
 | 边界体系总览 | [05_boundary_system/README](05_boundary_system/README.md) |
 | **Rust 惯用模式** | [06_rust_idioms](06_rust_idioms.md) — RAII、Newtype、类型状态、与设计模式衔接 |
 | **反模式与边界** | [07_anti_patterns](07_anti_patterns.md) — 13 反例、反模式分类、规避策略 |
+| **全面论证缺口与推进计划** | [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md) — 设计模式、分布式、工作流论证深化 |
 
 ---
 
@@ -161,3 +162,4 @@
 | 第三阶段 | 工作流与执行模型 | 100% 完成（23/43、五执行模型）；**2026-02 增强**：常见陷阱、形式化衔接、模式选取完整示例 |
 | 第四阶段 | 组合工程与证明 | 100% 完成（CE-T1–T3） |
 | 第五阶段 | Rust Idioms 与反模式 | 100% 完成（06、07）；**2026-02 增强**：完整代码示例、规避示例 |
+| **全面论证推进** | 设计模式、分布式模式、工作流模式 | ✅ 100% 完成 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md) |

@@ -10,13 +10,16 @@
 
 **Def 1.1（跨模块边界）**:
 
-设 $M_1$、$M_2$ 为模块，$f : M_1 \to M_2$ 为 `pub fn` 调用。**跨模块边界**指 $f$ 的参数与返回值在 $M_1$ 与 $M_2$ 间传递。
+设 $M_1$、$M_2$ 为模块，$f : M_1 \to M_2$ 为 `pub fn` 调用。
+**跨模块边界**指 $f$ 的参数与返回值在 $M_1$ 与 $M_2$ 间传递。
 
 **Def 1.2（性质保持）**:
 
-设 $\Phi$ 为性质（如内存安全、无数据竞争、类型安全）。若 $M_1$、$M_2$ 各自满足 $\Phi$，且跨模块调用不破坏 $\Phi$，则称**组合保持 $\Phi$**。
+设 $\Phi$ 为性质（如内存安全、无数据竞争、类型安全）。
+若 $M_1$、$M_2$ 各自满足 $\Phi$，且跨模块调用不破坏 $\Phi$，则称**组合保持 $\Phi$**。
 
-**Axiom IT1**：所有权在跨模块值传递时转移；引用传递遵守借用规则。由 [ownership_model](../../formal_methods/ownership_model.md) 规则 1–3、[borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 规则 5–8。
+**Axiom IT1**：所有权在跨模块值传递时转移；引用传递遵守借用规则。
+由 [ownership_model](../../formal_methods/ownership_model.md) 规则 1–3、[borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 规则 5–8。
 
 **Axiom IT2**：`Send`/`Sync` 为结构性质；若 $T$ 的所有字段为 Send，则 $T$ 为 Send。组合不改变字段类型。
 

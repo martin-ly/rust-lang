@@ -4,9 +4,10 @@
 > **使用方式**: 作为学习起点，根据需求选择合适的学习路径和文档
 > **相关文档**: [README](../README.md) | [FAQ](./FAQ.md) | [Glossary](./Glossary.md)
 
-**最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+
+**最后更新**: 2026-02-14
+**适用版本**: Rust 1.93.0+
 **文档类型**: 📚 导航索引
+**English**: [00_MASTER_INDEX.en.md](./00_MASTER_INDEX.en.md)
 
 ---
 
@@ -14,7 +15,7 @@
 
 - [C03 控制流与函数: 主索引 (Master Index)](#c03-控制流与函数-主索引-master-index)
   - [📊 目录](#-目录)
-  - [� 官方资源映射](#-官方资源映射)
+  - [📚 官方资源映射](#-官方资源映射)
   - [📋 快速导航](#-快速导航)
     - [🎯 按角色导航](#-按角色导航)
     - [📚 按主题导航](#-按主题导航)
@@ -59,10 +60,12 @@
 | 官方资源 | 链接 | 与本模块对应 |
 |----------|------|--------------|
 | **The Rust Book** | [Ch. 3 Common Programming Concepts](https://doc.rust-lang.org/book/ch03-00-comments.html), [Ch. 6 Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) | 控制流、模式匹配 |
-| **Rust By Example** | [Control Flow](https://doc.rust-lang.org/rust-by-example/flow_control.html), [Closures](https://doc.rust-lang.org/rust-by-example/fn/closures.html) | 条件、循环、闭包 |
+| **RBE 练习** | [Flow Control](https://doc.rust-lang.org/rust-by-example/flow_control.html) · [Option](https://doc.rust-lang.org/rust-by-example/std/option.html) · [Error](https://doc.rust-lang.org/rust-by-example/error.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html) · [Closures](https://doc.rust-lang.org/rust-by-example/fn/closures.html) | 条件、循环、Option、错误处理、迭代器实践 |
 | **Rust Reference** | [Expressions](https://doc.rust-lang.org/reference/expressions.html) | 表达式、控制流规范 |
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
+
+**一页纸总结**: [ONE_PAGE_SUMMARY.md](./ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
 
 ## 📋 快速导航
 

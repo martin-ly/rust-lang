@@ -4,6 +4,7 @@
 > **最后更新**: 2026-01-26
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ 已完成 (100%)
+> **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 4 行（异步）
 
 ---
 
@@ -1071,8 +1072,21 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 
 ---
 
+### 相关思维表征
+
+| 类型 | 位置 |
+| :--- | :--- |
+| 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) §5、C06 |
+| 多维矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §3,5；[README §六篇并表](README.md#formal_methods-六篇并表) 第 4 行 |
+| 证明树 | 本文状态机与定理结构；[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) |
+| 决策树 | [DECISION_GRAPH_NETWORK](../../04_thinking/DECISION_GRAPH_NETWORK.md) §4 |
+
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
+
+---
+
 **维护者**: Rust Formal Methods Research Group
-**最后更新**: 2026-02-12
+**最后更新**: 2026-02-14
 **状态**: ✅ **已完成** (100%)
 
 **国际权威对标**：[RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/)；[FLS Ch. 17](https://spec.ferrocene.dev/concurrency.html) Concurrency（17.1 Send/Sync、17.2 Atomics、17.3 Asynchronous Computation）；[std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)。

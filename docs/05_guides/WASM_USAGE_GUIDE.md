@@ -319,9 +319,9 @@ pub fn process(data: &str) -> String {
 
 ## 📚 相关文档
 
-- [完整文档](../crates/c12_wasm/README.md)
-- [WASM 指南](../crates/c12_wasm/docs/tier_02_guides/01_wasm_基础指南.md)
-- [JavaScript 互操作](../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
+- [完整文档](../../crates/c12_wasm/README.md)
+- [WASM 指南](../../crates/c12_wasm/docs/tier_02_guides/01_wasm_基础指南.md)
+- [JavaScript 互操作](../../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
 
 ---
 

@@ -233,7 +233,7 @@ c04_generic/docs/
 
 ### 5分钟快速体验
 
-- **📊 [知识图谱与概念关系增强版](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** (NEW!)
+- **📊 [知识图谱与概念关系增强版](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** (NEW!)
   - **5+ Mermaid 可视化图表** | 完整泛型与Trait体系
   - **泛型系统概念总览** | Trait层次结构可视化
   - **概念关系三元组** | 技术演化时间线
@@ -241,7 +241,7 @@ c04_generic/docs/
   - **3级学习路径** | 初学者(2-3周) → 中级(3-4周) → 高级(持续)
   - **适合**: 系统化学习、建立泛型全局认知
 
-- **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** (NEW!)
+- **📐 [多维矩阵对比分析](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** (NEW!)
   - **7大技术领域全面对比** | 泛型形式/Trait系统/关联类型/高级特性
   - **20+ 性能对比表格** | 实测数据（100万次操作）
   - **impl Trait vs dyn Trait** | RPITIT vs Box返回详细对比
@@ -441,15 +441,13 @@ cargo bench --bench rust_192_benchmarks
 
 ### 分析资料
 
-- **🔬 Analysis 索引**: [`docs/analysis/README.md`](./docs/analysis/README.md)
-- **知识图谱**: [`docs/analysis/theory_deep_dive/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md`](./docs/analysis/theory_deep_dive/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)
-- **多维对比矩阵**: [`docs/analysis/theory_deep_dive/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md`](./docs/analysis/theory_deep_dive/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)
+- **🔬 深度分析**: [`docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md`](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)
+- **知识图谱**: [`docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md`](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)
 
 ### 辅助资源
 
-- **📎 Appendices 索引**: [`docs/appendices/README.md`](./docs/appendices/README.md)
-- **代码示例集**: [`docs/appendices/01_代码示例集/RUST_190_EXAMPLES_COLLECTION.md`](./docs/appendices/01_代码示例集/RUST_190_EXAMPLES_COLLECTION.md)
-- **综合思维导图**: [`docs/appendices/02_思维导图/RUST_190_COMPREHENSIVE_MINDMAP.md`](./docs/appendices/02_思维导图/RUST_190_COMPREHENSIVE_MINDMAP.md)
+- **📎 实战参考**: [`tier_02_guides/05_实战模式指南.md`](./docs/tier_02_guides/05_实战模式指南.md)
+- **思维导图**: [`docs/04_thinking/MIND_MAP_COLLECTION.md`](../../docs/04_thinking/MIND_MAP_COLLECTION.md)
 
 ### 项目报告
 

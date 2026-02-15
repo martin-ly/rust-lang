@@ -503,7 +503,7 @@ Rust 1.91 在 WebAssembly 开发方面带来了显著的改进：
 
 **参考资源**:
 
-- [Rust 1.91 Features Comprehensive](../../../docs/RUST_1.91_FEATURES_COMPREHENSIVE.md)
+- [Rust 1.91 Features Comprehensive](../../../docs/archive/reports/RUST_1.91_FEATURES_COMPREHENSIVE.md)
 - [Rust 1.91 Release Notes](https://blog.rust-lang.org/)
 - [WebAssembly Module Documentation](../README.md)
 

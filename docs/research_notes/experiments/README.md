@@ -4,6 +4,7 @@
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ 全部 100% 完成
+> **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../../DOCS_STRUCTURE_OVERVIEW.md) § 2.7 experiments
 
 ---
 

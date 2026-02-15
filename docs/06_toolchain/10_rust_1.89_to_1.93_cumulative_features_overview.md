@@ -104,3 +104,7 @@
 | 1.93 兼容性深度 | [09_rust_1.93_compatibility_deep_dive.md](./09_rust_1.93_compatibility_deep_dive.md) |
 | 1.93 完整变更 | [07_rust_1.93_full_changelog.md](./07_rust_1.93_full_changelog.md) |
 | 发布追踪清单 | [../RUST_RELEASE_TRACKING_CHECKLIST.md](../RUST_RELEASE_TRACKING_CHECKLIST.md) |
+
+---
+
+**最后对照 releases.rs**: 2026-02-14

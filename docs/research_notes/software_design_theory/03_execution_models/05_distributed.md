@@ -1,8 +1,28 @@
 # 分布式执行模型形式化
 
 > **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-14
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 形式化完成
 > **分类**: 执行模型
 > **安全边界**: 纯 Safe 或 需 unsafe
+
+---
+
+## 📊 目录
+
+- [分布式执行模型形式化](#分布式执行模型形式化)
+  - [形式化定义](#形式化定义)
+  - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [典型场景（实质内容）](#典型场景实质内容)
+  - [分布式系统特性](#分布式系统特性)
+  - [序列化与类型安全](#序列化与类型安全)
+  - [RPC 与 Actor 对比](#rpc-与-actor-对比)
+  - [重试与熔断](#重试与熔断)
+  - [安全边界与 FFI](#安全边界与-ffi)
+  - [与形式化基础衔接](#与形式化基础衔接)
+  - [边界](#边界)
+  - [分布式专用模式形式化（D2.1 扩展）](#分布式专用模式形式化d21-扩展)
 
 ---
 
@@ -211,3 +231,53 @@ where
 | 安全 | 纯 Safe（库封装）；FFI 需 unsafe |
 | 支持 | 库支持 |
 | 表达 | 近似（无内置 RPC） |
+
+---
+
+## 分布式专用模式形式化（D2.1 扩展）
+
+### Event Sourcing
+
+**Def DI-ES1（Event Sourcing）**：状态由事件序列重建；$\mathit{State} = \mathrm{fold}(\mathit{Events})$；事件不可变、append-only。
+
+**Axiom DI-ES1**：事件序列确定唯一状态；无副作用事件。
+
+**定理 DI-ES-T1**：`Vec<Event>` + `fold` + `serde` 与 Fowler Event Sourcing 语义等价；类型安全由 DI-L1。
+
+### Saga（补偿链）
+
+**Def DI-SG1（Saga 补偿链）**：设步骤 $S_1, \ldots, S_n$；补偿 $\mathit{Comp}_i$ 撤销 $S_i$。Saga 语义：若 $S_k$ 失败，则执行 $\mathit{Comp}_{k-1} \circ \cdots \circ \mathit{Comp}_1$。
+
+**Axiom DI-SG1**：补偿幂等；补偿顺序与执行逆序。
+
+**定理 DI-SG-T1**：Rust 用 `Result` + 补偿闭包 `Vec<Box<dyn Fn() -> Result<(), E>>>` 可近似表达 Saga；无内置编排器，与 Temporal 对接时为近似。见 [04_expressiveness_boundary](../../02_workflow_safe_complete_models/04_expressiveness_boundary.md)。
+
+### CQRS
+
+**Def DI-CQ1（CQRS）**：读写分离；$\mathit{Write\ Model} \neq \mathit{Read\ Model}$；事件驱动同步读模型。
+
+**定理 DI-CQ-T1**：trait 分离 Command/Query、channel 或 Event Sourcing 同步，与 CQRS 语义等价。
+
+### Circuit Breaker（熔断器）
+
+**Def DI-CB1（熔断器）**：状态机 Closed → Open（失败超阈值）→ HalfOpen（探测）→ Closed。Open 时快速失败。
+
+**Axiom DI-CB1**：失败计数、超时、半开探测为可配置参数。
+
+**Rust 实现**：`tokio-util::sync::CircuitBreaker` 或自定义状态机。
+
+### Bulkhead（舱壁）
+
+**Def DI-BH1（舱壁）**：隔离资源池；某池失败不波及其他。形式化：$P_1 \parallel P_2 \parallel \cdots$，各 $P_i$ 独立并发限制。
+
+**Rust 实现**：`tower::limit::ConcurrencyLimit`  per 服务；或 semaphore 隔离。
+
+### CAP/BASE 与 Rust 衔接（D2.3）
+
+**Axiom DI3**（已有）：CAP 至多两项。
+
+**Def DI-BASE1（BASE）**：Basically Available、Soft state、Eventually consistent。与 Rust：`Option`/`Result` 表达可能不可用；最终一致性由异步同步、事件日志实现。
+
+**推论 DI-BASE-C1**：`Result<T, E>` 传播部分失败；`?` 与补偿链衔接；类型系统保证错误显式处理。
+
+---

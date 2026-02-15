@@ -36,7 +36,7 @@
 | 维度 | 内容 | 文档 |
 |------|------|------|
 | **测试覆盖** | 单元/集成/基准、覆盖率报告 | [TESTING_COVERAGE_GUIDE](../TESTING_COVERAGE_GUIDE.md) |
-| **性能测试** | 基准测试、性能回归、分析工具 | [PERFORMANCE_TESTING_REPORT](../PERFORMANCE_TESTING_REPORT.md) |
+| **性能测试** | 基准测试、性能回归、分析工具 | [PERFORMANCE_TESTING_REPORT](../../05_guides/PERFORMANCE_TESTING_REPORT.md) |
 | **内存安全** | MIRI、Valgrind、无 UB 验证 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 | **形式化验证** | Prusti、Kani、Creusot | [TOOLS_GUIDE](../../research_notes/TOOLS_GUIDE.md)、[FORMAL_VERIFICATION_GUIDE](../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
 | **代码质量** | Clippy、rustfmt、文档 | [QUALITY_CHECKLIST](../../research_notes/QUALITY_CHECKLIST.md) |
@@ -46,7 +46,7 @@
 ## 📚 核心文档
 
 - [**TESTING_COVERAGE_GUIDE.md**](../TESTING_COVERAGE_GUIDE.md) — 测试策略、覆盖率、MIRI 集成
-- [**PERFORMANCE_TESTING_REPORT.md**](../PERFORMANCE_TESTING_REPORT.md) — 性能基准、报告、回归
+- [**PERFORMANCE_TESTING_REPORT.md**](../../05_guides/PERFORMANCE_TESTING_REPORT.md) — 性能基准、报告、回归
 
 ---
 

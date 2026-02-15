@@ -1,9 +1,9 @@
 # 研究笔记完整索引
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-14
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记、23 种设计模式、类型理论阶段 1–7、formal_methods Phase 1–6、层次推进三阶段、实质内容自检体系）
+> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记、23 种设计模式、formal_methods Phase 1–6、形式语言与形式证明、T-OW2/T-BR1/T-TY3 Coq 骨架、英文摘要）
 
 ---
 
@@ -61,6 +61,38 @@
 
 ### 导航和索引
 
+1. **[00_ORGANIZATION_AND_NAVIGATION.md](./00_ORGANIZATION_AND_NAVIGATION.md)** - 组织架构与导航（按目标、按支柱、层级结构；首次使用必读）
+
+0a. **[00_COMPREHENSIVE_SUMMARY.md](./00_COMPREHENSIVE_SUMMARY.md)** - 完整总结综合 🆕
+
+- 项目全貌一句话、三大支柱概览、全项目知识地图
+- 论证脉络总览、各文档职责与定位、推荐阅读路径
+
+0b. **[ARGUMENTATION_CHAIN_AND_FLOW.md](./ARGUMENTATION_CHAIN_AND_FLOW.md)** - 论证脉络关系与论证思路 🆕
+
+- 论证五步法、论证流向（自上而下/自底而上）
+- 概念→公理→定理→推论 DAG、三大支柱论证衔接
+- 文档间论证关系、论证链条索引、论证思路示例
+
+0c. **[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md](./RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)** - 批判性分析与可持续改进计划 🆕
+
+- 概念定义/属性关系/解释论证/多维矩阵/层次化/思维表征 缺口与批判性意见
+- 建议（P0–P3）：层次化规范、映射总结、多维矩阵、思维表征-文档结合、文档依赖
+- 四阶段可持续推进任务与计划（规范→矩阵→思维表征→依赖与机制）
+
+0c2. **[FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md)** - 格式统一与内容充分性、Rust 1.93 对齐计划 🆕
+
+- 格式不统一（元信息、标题、目录、文末块）意见与建议
+- 内容充分性（概念定义-属性关系-解释论证、五维自检、1.93 显式对齐、反例索引）
+- 与 Rust 1.93 完全对齐（92 项落点、重点变更在子文档体现、权威来源约定）
+- 可持续推进计划 F1–F4（格式统一→内容充分性→1.93 对齐→持续机制）
+
+0d. **[HIERARCHICAL_MAPPING_AND_SUMMARY.md](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)** - 层次化梳理与映射总结 🆕
+
+- 按三大支柱的文档树
+- 概念族↔文档↔Def/Axiom/定理 映射表（支柱 1/2/3）
+- 文档↔思维表征 映射表（思维导图/矩阵/证明树/决策树）、文档依赖简表
+
 1. **[README.md](./README.md)** - 主索引和导航中心
    - 系统概述
    - 研究方向
@@ -93,7 +125,46 @@
    - 证明完成度统计
    - 证明方法统计
 
-8. **[COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md)** - 全面系统化梳理总览
+7a. **[INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)** - 国际形式化验证对标索引 🆕
+
+- RustBelt、Aeneas、coq-of-rust、Crux、RustSEM、AutoVerus 等对标
+- 与本项目 PROOF_INDEX 的映射与差距
+
+7b. **[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)** - 批判性分析与可持续推进计划 🆕
+
+- 现状诊断、国际差距、论证充分性缺口
+
+7b1. **[RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md](./RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md)** - 三大支柱与可持续推进计划 🆕
+
+- 支柱 1 公理判定系统（类型、控制、变量形式化）
+- 支柱 2 语言表达力（设计模式、并发/分布式、工作流）
+- 支柱 3 组件组合法则（组合有效性、构建能力确定性）
+- 国际权威对标、批判性意见、层次推进方案
+- 整体性与层次性改进建议
+- 三阶段可持续推进方案
+
+7c. **[FORMAL_FULL_MODEL_OVERVIEW.md](./FORMAL_FULL_MODEL_OVERVIEW.md)** - 形式化全模型入口 🆕
+
+- 统一形式系统（ownership+borrow+lifetime+type+trait+async+pin）
+- 公理列表、定理依赖 DAG、与子文档映射
+- 按证明深度、按抽象层次导航
+
+7d. **[RUSTBELT_ALIGNMENT.md](./RUSTBELT_ALIGNMENT.md)** - RustBelt 逐章对标 🆕
+7e. **[EXECUTABLE_SEMANTICS_ROADMAP.md](./EXECUTABLE_SEMANTICS_ROADMAP.md)** - 可执行语义路线图（K-Framework、PLT Redex）🆕
+7f. **[AENEAS_INTEGRATION_PLAN.md](./AENEAS_INTEGRATION_PLAN.md)** - Aeneas 对接调研与集成计划 🆕
+7g. **[COQ_OF_RUST_INTEGRATION_PLAN.md](./COQ_OF_RUST_INTEGRATION_PLAN.md)** - coq-of-rust 对接调研与集成计划 🆕
+7h. **[CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md)** - 核心定理完整证明（L2 级）🆕
+7i. **[CORE_THEOREMS_EN_SUMMARY.md](./CORE_THEOREMS_EN_SUMMARY.md)** - 核心定理英文摘要
+7j. **[FORMAL_FULL_MODEL_EN_SUMMARY.md](./FORMAL_FULL_MODEL_EN_SUMMARY.md)** - 形式化全模型英文摘要
+7k. **[FORMAL_LANGUAGE_AND_PROOFS.md](./FORMAL_LANGUAGE_AND_PROOFS.md)** - 形式语言与形式证明（推理规则、操作语义、判定形式）
+
+- ownership T2、borrow T1、type T3 完整证明
+- 辅助引理显式编号、证明依赖 DAG、反例形式化否定
+
+7l. **[COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)** - Coq/Isabelle 证明骨架与 L3 实施指南 🆕
+7m. **[coq_skeleton/](./coq_skeleton/)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）🆕
+
+1. **[COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md)** - 全面系统化梳理总览
    - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）
    - 语义归纳与概念族谱
    - 全局一致性矩阵
@@ -101,7 +172,7 @@
    - 思维表征方式全索引
    - 公理-定理-证明全链路图
 
-9. **[UNIFIED_SYSTEMATIC_FRAMEWORK.md](./UNIFIED_SYSTEMATIC_FRAMEWORK.md)** - 全局统一系统化框架 🆕
+2. **[UNIFIED_SYSTEMATIC_FRAMEWORK.md](./UNIFIED_SYSTEMATIC_FRAMEWORK.md)** - 全局统一系统化框架 🆕
    - 全景思维导图：Rust 形式化知识
    - 多维概念对比矩阵总览
    - 公理-定理-证明全链路逻辑推进图
@@ -109,9 +180,9 @@
    - 反例总索引
    - 语义归纳与概念族谱统一
 
-10. **[LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)** - 构造性语义与表达能力边界 🆕
+3. **[LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)** - 构造性语义与表达能力边界 🆕
 
-11. **[DESIGN_MECHANISM_RATIONALE.md](./DESIGN_MECHANISM_RATIONALE.md)** - 设计机制论证 🆕
+4. **[DESIGN_MECHANISM_RATIONALE.md](./DESIGN_MECHANISM_RATIONALE.md)** - 设计机制论证 🆕
 
 - Pin 堆/栈区分使用场景的完整论证
 - 所有权、借用、生命周期、型变、异步等设计理由
@@ -134,6 +205,7 @@
 - 安全/unsafe 定义与边界、契约体系、UB 分类、安全抽象
 
 1. **[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)** - Rust 1.93 语言特性全面分析 🆕
+2. **[RUST_193_COUNTEREXAMPLES_INDEX.md](./RUST_193_COUNTEREXAMPLES_INDEX.md)** - Rust 1.93 相关反例与边界集中索引 🆕（与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F2.4 对齐）
 
 - 92 项语言特性全覆盖（内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增）
 - 每项含动机、设计决策、形式化引用、反例
@@ -290,6 +362,26 @@
    - 研究目标: 形式化定义 Pin 类型和自引用类型，证明安全性
    - 状态: ✅ 已完成 (100%)
    - 关键词: Pin、自引用类型、内存位置稳定性
+
+6. **[send_sync_formalization.md](./formal_methods/send_sync_formalization.md)** - Send/Sync 形式化
+   - 研究目标: Def SEND1/SYNC1、SEND-T1/SYNC-T1、与 spawn/Future/Arc 衔接、反例
+   - 状态: ✅ 已完成 (100%)
+   - 关键词: Send、Sync、跨线程安全、数据竞争自由
+
+7. **[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md](./formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)** - formal_methods 意见与建议、安全可判定机制梳理、完备特性对比、可持续推进计划
+   - 研究目标: 阶段 A–D 已完成（Send/Sync 专篇、安全可判定总览、四维表、思维表征绑定）
+   - 状态: ✅ 阶段 A–D 100% 完成
+   - 关键词: Send、Sync、安全可判定、完备特性对比、思维表征
+
+8. **[SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)** - 安全可判定机制总览
+   - 研究目标: 每机制概念定义、属性关系、解释论证、形式证明、反例；并发+Trait 族四维表
+   - 状态: ✅ 已完成 (100%)
+   - 关键词: 安全可判定、ownership、borrow、Send、Sync、Pin、async
+
+9. **[FORMAL_METHODS_COMPLETENESS_CHECKLIST.md](./formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)** - formal_methods 完备性检查表
+   - 研究目标: 六篇×六维（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）自检，确保充分完整完备
+   - 状态: ✅ 六篇全覆盖
+   - 关键词: 完备性、六维、formal_methods、自检
 
 ---
 

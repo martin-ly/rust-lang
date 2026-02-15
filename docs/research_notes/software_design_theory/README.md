@@ -1,10 +1,11 @@
 # Rust 软件设计理论体系
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-14
 > **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: 100% 完成；**层次推进实质内容扩充**（2026-02-12）
+> **状态**: 100% 完成；**层次推进实质内容扩充**（2026-02-14 与分布式模式、并发选型衔接）
 > **目标**: 面向 Rust 语言机制的软件设计形式分析、边界论证与组合工程有效性
+> **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../../DOCS_STRUCTURE_OVERVIEW.md) § 2.7 software_design_theory
 
 ---
 
@@ -17,6 +18,8 @@
 | **L3 深入** | 执行模型、组合工程、扩展模式代码、反模式与规避 | [03_execution_models](03_execution_models/README.md)、[04_compositional_engineering](04_compositional_engineering/README.md)、[07_anti_patterns](07_anti_patterns.md) |
 
 **实操入口**：执行模型 + 设计模式可运行示例见 [03_execution_models 可运行示例](03_execution_models/README.md#可运行示例层次推进)；语义边界 Safe 决策 3 例见 [03_semantic_boundary_map 场景 7–9](02_workflow_safe_complete_models/03_semantic_boundary_map.md#场景化-safe-决策-3-例)。
+
+**全面论证推进**：设计模式、分布式模式、工作流模式论证深化见 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md)。
 
 ---
 
@@ -186,4 +189,4 @@
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义与表达能力 |
 | [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) | 设计机制论证 |
 | [PROOF_INDEX](../PROOF_INDEX.md) | 形式化证明索引 |
-| [DESIGN_PATTERNS_USAGE_GUIDE](../../DESIGN_PATTERNS_USAGE_GUIDE.md) | 设计模式实践指南 |
+| [DESIGN_PATTERNS_USAGE_GUIDE](../../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | 设计模式实践指南 |

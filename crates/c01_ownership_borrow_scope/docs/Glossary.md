@@ -55,7 +55,7 @@ let s2 = s1; // 所有权转移
 // s1 不再有效
 ```
 
-**相关**: [01_theory/01_ownership_theory.md](./01_theory/01_ownership_theory.md)
+**相关**: [01_theory/06_类型系统理论.md](./tier_04_advanced/06_类型系统理论.md)
 
 ---
 
@@ -79,7 +79,7 @@ let mut s = String::from("hello");
 let r = &mut s; // 可变借用（唯一）
 ```
 
-**相关**: [02_core/02_borrowing_system.md](./02_core/02_borrowing_system.md)
+**相关**: [02_core/02_借用实践指南.md](./tier_02_guides/02_借用实践指南.md)
 
 ---
 
@@ -104,7 +104,7 @@ let r = &mut y; // 可变引用
 *r += 1;
 ```
 
-**相关**: [02_core/02_borrowing_system.md](./02_core/02_borrowing_system.md)
+**相关**: [02_core/02_借用实践指南.md](./tier_02_guides/02_借用实践指南.md)
 
 ---
 
@@ -128,7 +128,7 @@ struct ImportantExcerpt<'a> {
 
 **生命周期省略规则**: 编译器在某些情况下自动推导
 
-**相关**: [02_core/03_lifetime_annotations.md](./02_core/03_lifetime_annotations.md)
+**相关**: [02_core/03_生命周期实践.md](./tier_02_guides/03_生命周期实践.md)
 
 ---
 
@@ -154,7 +154,7 @@ let v2 = v1; // Move
 // v1 不再有效
 ```
 
-**相关**: [02_core/01_ownership_fundamentals.md](./02_core/01_ownership_fundamentals.md)
+**相关**: [02_core/01_所有权快速入门.md](./tier_02_guides/01_所有权快速入门.md)
 
 ---
 
@@ -189,7 +189,7 @@ struct Point {
 }
 ```
 
-**相关**: [02_core/01_ownership_fundamentals.md](./02_core/01_ownership_fundamentals.md)
+**相关**: [02_core/01_所有权快速入门.md](./tier_02_guides/01_所有权快速入门.md)
 
 ---
 
@@ -215,7 +215,7 @@ let v2 = v1.clone();
 // v1 和 v2 都有效
 ```
 
-**相关**: [02_core/01_ownership_fundamentals.md](./02_core/01_ownership_fundamentals.md)
+**相关**: [02_core/01_所有权快速入门.md](./tier_02_guides/01_所有权快速入门.md)
 
 ---
 
@@ -239,7 +239,7 @@ let v2 = v1.clone();
 // s不再有效
 ```
 
-**相关**: [02_core/04_scope_management.md](./02_core/04_scope_management.md)
+**相关**: [02_core/04_作用域管理实践.md](./tier_02_guides/04_作用域管理实践.md)
 
 ---
 
@@ -275,7 +275,7 @@ impl Drop for CustomSmartPointer {
 } // drop自动调用
 ```
 
-**相关**: [02_core/04_scope_management.md](./02_core/04_scope_management.md)
+**相关**: [02_core/04_作用域管理实践.md](./tier_02_guides/04_作用域管理实践.md)
 
 ---
 
@@ -302,7 +302,7 @@ let b = Rc::clone(&a); // 引用计数+1
 println!("count: {}", Rc::strong_count(&a)); // 2
 ```
 
-**相关**: [03_advanced/04_smart_pointers.md](./03_advanced/04_smart_pointers.md)
+**相关**: [03_advanced/05_智能指针API参考.md](./tier_03_references/05_智能指针API参考.md)
 
 ---
 
@@ -326,7 +326,7 @@ let data = RefCell::new(5);
 *data.borrow_mut() += 1; // 运行时借用检查
 ```
 
-**相关**: [03_advanced/01_advanced_ownership.md](./03_advanced/01_advanced_ownership.md)
+**相关**: [03_advanced/06_高级所有权模式参考.md](./tier_03_references/06_高级所有权模式参考.md)
 
 ---
 
@@ -353,7 +353,7 @@ let x = Box::new(5);
 assert_eq!(*x, 5);
 ```
 
-**相关**: [03_advanced/04_smart_pointers.md](./03_advanced/04_smart_pointers.md)
+**相关**: [03_advanced/05_智能指针API参考.md](./tier_03_references/05_智能指针API参考.md)
 
 ---
 
@@ -379,7 +379,7 @@ fn no_dangle() -> String {
 }
 ```
 
-**相关**: [04_safety/01_memory_safety.md](./04_safety/01_memory_safety.md)
+**相关**: [04_safety/01_memory_safety.md](./tier_03_references/08_内存安全参考.md)
 
 ---
 
@@ -404,7 +404,7 @@ fn no_dangle() -> String {
 } // file自动关闭
 ```
 
-**相关**: [04_safety/01_memory_safety.md](./04_safety/01_memory_safety.md)
+**相关**: [04_safety/01_memory_safety.md](./tier_03_references/08_内存安全参考.md)
 
 ---
 
@@ -413,9 +413,9 @@ fn no_dangle() -> String {
 - [主索引](./00_MASTER_INDEX.md) - 完整文档导航
 - [FAQ](./FAQ.md) - 常见问题解答
 - [README](./README.md) - 项目概述
-- [理论基础](./01_theory/) - 深入学习
-- [核心概念](./02_core/) - 基础知识
-- [高级主题](./03_advanced/) - 进阶内容
+- [理论基础](./tier_04_advanced/) - 深入学习
+- [核心概念](./tier_02_guides/) - 基础知识
+- [高级主题](./tier_03_references/) - 进阶内容
 
 ---
 
@@ -423,4 +423,4 @@ fn no_dangle() -> String {
 
 - 查看 [示例代码](../examples/)
 - 运行 [测试用例](../tests/)
-- 阅读 [最佳实践](./05_practice/02_best_practices.md)
+- 阅读 [最佳实践](./tier_01_foundations/04_常见问题.md)

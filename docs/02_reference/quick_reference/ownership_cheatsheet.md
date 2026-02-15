@@ -367,9 +367,9 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 反例 1: 移动后使用
 
-**错误示例**:
+**错误示例**（以下代码无法通过编译）:
 
-```rust
+```rust,compile_fail
 let s = String::from("hello");
 let s2 = s;  // 所有权转移
 println!("{}", s);  // ❌ 编译错误：s 已失效
@@ -389,9 +389,9 @@ println!("{}", s);
 
 ### 反例 2: 可变借用与不可变借用冲突
 
-**错误示例**:
+**错误示例**（以下代码无法通过编译）:
 
-```rust
+```rust,compile_fail
 let mut v = vec![1, 2, 3];
 let r1 = &v;
 let r2 = &mut v;  // ❌ 编译错误：已有不可变借用
@@ -414,9 +414,9 @@ let r2 = &mut v;  // r1 已离开作用域
 
 ### 反例 3: 返回悬垂引用
 
-**错误示例**:
+**错误示例**（以下代码无法通过编译）:
 
-```rust
+```rust,compile_fail
 fn dangle() -> &String {
     let s = String::from("hello");
     &s  // ❌ 编译错误：s 即将被 drop

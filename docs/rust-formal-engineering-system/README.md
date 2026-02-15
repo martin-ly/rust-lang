@@ -4,6 +4,7 @@
 > **最后更新**: 2026-02-12
 > **Rust 版本**: 1.93.0+
 > **说明**: 本目录为**单一索引层**，形式化理论内容已整合至 [研究笔记](../research_notes/) 及各 crates。子目录 README 仅为占位重定向，请以 [00_master_index.md](./00_master_index.md) 为完整导航入口。
+> **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) § 2.9
 
 ---
 

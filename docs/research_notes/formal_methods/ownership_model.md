@@ -4,6 +4,7 @@
 > **最后更新**: 2026-02-12（国际权威对标补全）
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ 已完成 (100%)
+> **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 1 行（所有权）
 
 ---
 
@@ -209,6 +210,12 @@ $$\Gamma : \text{Var} \to \text{Val}$$
 
 **定义 1.3 (所有权环境)**: 所有权环境 $\Omega$ 是一个从变量到所有权的映射：
 $$\Omega : \text{Var} \to \{\text{Owned}, \text{Borrowed}, \text{Moved}\}$$
+
+**定义 1.4 (变量绑定)**: 变量绑定 $\text{bind}(x, v)$ 在环境 $\Gamma$ 中建立 $x \mapsto v$；若 $x$ 已存在则更新。所有权环境 $\Omega$ 中 $x$ 初始为 $\text{Owned}$（若 $v$ 为 owned 值）。
+
+**定义 1.5 (变量遮蔽)**: 变量遮蔽 $\text{shadow}(x, v')$ 在同一作用域内用新绑定 $x \mapsto v'$ 覆盖旧绑定 $x \mapsto v$。形式化：旧绑定 $x$ 在遮蔽点后**不可再访问**；若旧值非 `Copy` 则按规则 3 在遮蔽点**隐式 drop**（或按 NLL 在最后一次使用后 drop）。新绑定 $x \mapsto v'$ 获得独立所有权。
+
+*与 T-TY3 衔接*：遮蔽不违反类型安全；类型检查保证 $v'$ 与 $v$ 类型兼容（若在同一分支）。
 
 ### 2. 所有权规则
 
@@ -806,6 +813,19 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$：借用 $r$ 的活跃区间由生命�
 **Def CONST_MUT_STATIC1（const &mut static 1.93）**：1.93 允许 const 含 `&mut static`；非常 unsafe；`const_item_interior_mutations` lint 为 warn-by-default。形式化：$\text{const}(c) \land \&mut \text{static} \rightarrow \text{Unsafe}(c)$。
 
 **定理 CONST_MUT_STATIC-T1**：const &mut static 需显式 unsafe；与 [ownership_model](ownership_model.md) 规则 2、3 一致——static 无唯一所有者，修改需谨慎。
+
+---
+
+### 相关思维表征
+
+| 类型 | 位置 |
+| :--- | :--- |
+| 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) §2、C01 |
+| 多维矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §1；[README §六篇并表](README.md#formal_methods-六篇并表) 第 1 行 |
+| 证明树 | 本文「公理-定理证明树」；[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) |
+| 决策树 | [DECISION_GRAPH_NETWORK](../../04_thinking/DECISION_GRAPH_NETWORK.md) §1 |
+
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
 
 ---
 

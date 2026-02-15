@@ -4,12 +4,14 @@
 > **最后更新**: 2025-12-11
 > **适用版本**: Rust 1.92.0+
 
+📄 **一页纸总结**: [ONE_PAGE_SUMMARY](./ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
+
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
 |----------|------|--------------|
 | **The Rust Book** | [Ch. 19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | 宏基础 |
-| **Rust By Example** | [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | 声明宏 |
+| **RBE 练习** | [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | 声明宏实践 |
 | **Rust Reference** | [Macros](https://doc.rust-lang.org/reference/macros.html) | 宏规范 |
 | **The Little Book of Rust Macros** | [dtolnay/rust-macros](https://danielkeep.github.io/tlborm/book/) | 宏深入 |
 
@@ -31,13 +33,12 @@
       - [Week 6-7: 高级应用](#week-6-7-高级应用)
       - [Week 8: Rust 1.92.0特性（自 Rust 1.90 引入）](#week-8-rust-1920特性自-rust-190-引入)
   - [📖 文档结构](#-文档结构)
-    - [01\_theory/ - 理论基础](#01_theory---理论基础)
-    - [02\_declarative/ - 声明宏](#02_declarative---声明宏)
-    - [03\_procedural/ - 过程宏](#03_procedural---过程宏)
-    - [04\_advanced/ - 高级主题](#04_advanced---高级主题)
-    - [05\_practice/ - 最佳实践](#05_practice---最佳实践)
-    - [📦 06. Rust 1.92.0特性（自 Rust 1.90 引入）](#-06-rust-1920特性自-rust-190-引入)
-    - [🧠 理论增强 (theory\_enhanced/)](#-理论增强-theory_enhanced)
+    - [tier_* 文档结构](#tier_01_foundations--tier_02_guides---基础与指南)
+    - [tier_02_guides - 声明宏与过程宏](#tier_02_guides---声明宏与过程宏)
+    - [tier_03_references - 参考](#tier_03_references---参考)
+    - [tier_04_advanced - 高级主题](#tier_04_advanced---高级主题)
+    - [📦 Rust 1.92.0 宏特性](#-rust-1920-宏特性)
+    - [🧠 思维表征](#-思维表征-docs04_thinking)
   - [💻 代码示例](#-代码示例)
     - [运行示例](#运行示例)
     - [示例列表](#示例列表)
@@ -88,34 +89,34 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 
 **第1天-2天: 理论基础**:
 
-- [ ] [宏基础理论](./01_theory/01_macro_fundamentals.md)
-- [ ] [卫生宏与作用域](./01_theory/02_hygiene_and_scope.md)
+- [ ] [宏基础理论](./tier_02_guides/01_声明宏实践指南.md)
+- [ ] [卫生宏与作用域](./tier_03_references/04_宏卫生性参考.md)
 - [ ] 运行示例: `01_macro_rules_basics.rs`
 
 **第3天-4天: 声明宏入门**:
 
-- [ ] [macro_rules!基础](./02_declarative/01_macro_rules_basics.md)
-- [ ] [模式匹配](./02_declarative/02_pattern_matching.md)
+- [ ] [macro_rules!基础](./tier_02_guides/01_声明宏实践指南.md)
+- [ ] [模式匹配](./tier_03_references/01_声明宏完整参考.md)
 - [ ] 运行示例: `02_pattern_matching.rs`
 
 **第5天-7天: 声明宏进阶**:
 
-- [ ] [重复语法](./02_declarative/03_repetition_syntax.md)
-- [ ] [高级模式](./02_declarative/04_advanced_patterns.md)
+- [ ] [重复语法](./tier_03_references/01_声明宏完整参考.md)
+- [ ] [高级模式](./tier_03_references/01_声明宏完整参考.md)
 - [ ] 运行示例: `03_repetition.rs`
 
 #### Week 2-3: 递归宏与实践
 
 **Week 2**:
 
-- [ ] [递归宏](./02_declarative/05_recursive_macros.md)
+- [ ] [递归宏](./tier_02_guides/01_声明宏实践指南.md)
 - [ ] 运行示例: `04_recursive_macros.rs`
 - [ ] 完成练习: 实现5个自定义宏
 
 **Week 3**:
 
-- [ ] [常用模式](./05_practice/01_common_patterns.md)
-- [ ] [最佳实践](./05_practice/02_best_practices.md)
+- [ ] [常用模式](./tier_04_advanced/05_生产级宏开发.md)
+- [ ] [最佳实践](./tier_04_advanced/05_生产级宏开发.md)
 - [ ] 项目实战: 创建宏库
 
 ### 🚀 进阶路径 (3-4周)
@@ -124,122 +125,104 @@ Rust宏系统是一个强大的元编程框架，允许在编译期进行代码�
 
 **派生宏 (Derive Macros)**:
 
-- [ ] [过程宏基础](./03_procedural/01_proc_macro_basics.md)
-- [ ] [派生宏](./03_procedural/02_derive_macros.md)
+- [ ] [过程宏基础](./tier_02_guides/02_Derive宏开发指南.md)
+- [ ] [派生宏](./tier_02_guides/02_Derive宏开发指南.md)
 - [ ] 实践: 实现Builder派生宏
 
 **属性宏 (Attribute Macros)**:
 
-- [ ] [属性宏](./03_procedural/03_attribute_macros.md)
+- [ ] [属性宏](./tier_02_guides/03_属性宏开发指南.md)
 - [ ] 实践: 实现路由属性宏
 
 **函数式宏 (Function-like Macros)**:
 
-- [ ] [函数式宏](./03_procedural/04_function_macros.md)
+- [ ] [函数式宏](./tier_02_guides/04_函数宏开发指南.md)
 - [ ] 实践: 实现SQL查询宏
 
 **Token流处理**:
 
-- [ ] [Token流](./03_procedural/05_token_streams.md)
+- [ ] [Token流](./tier_03_references/02_过程宏API参考.md)
 
 #### Week 6-7: 高级应用
 
 **DSL构建**:
 
-- [ ] [DSL构建技术](./04_advanced/01_dsl_construction.md)
+- [ ] [DSL构建技术](./tier_04_advanced/02_DSL构建实践.md)
 - [ ] 实践: 实现配置DSL
 
 **代码生成**:
 
-- [ ] [代码生成](./04_advanced/02_code_generation.md)
-- [ ] [性能考量](./04_advanced/04_performance_considerations.md)
+- [ ] [代码生成](./tier_04_advanced/03_代码生成优化.md)
+- [ ] [性能考量](./tier_04_advanced/03_代码生成优化.md)
 
 **调试与测试**:
 
-- [ ] [宏调试](./04_advanced/03_macro_debugging.md)
-- [ ] [宏测试](./04_advanced/05_macro_testing.md)
+- [ ] [宏调试](./tier_04_advanced/04_宏调试深化.md)
+- [ ] [宏测试](./tier_02_guides/05_宏调试与测试.md)
 
 #### Week 8: Rust 1.92.0特性（自 Rust 1.90 引入）
 
 **版本特性掌握**:
 
 - [ ] [Rust 1.92.0特性总览](./RUST_192_MACRO_IMPROVEMENTS.md)
-- [ ] [完整特性清单](./06_rust_190_features/COMPREHENSIVE_FEATURES.md)
-- [ ] [实例代码学习](./06_rust_190_features/EXAMPLES.md)
+- [ ] [完整特性清单](./RUST_192_MACRO_IMPROVEMENTS.md)
+- [ ] [实例代码学习](./RUST_192_MACRO_IMPROVEMENTS.md)
 - [ ] 实践: 使用最新特性重构现有宏
 
 ---
 
 ## 📖 文档结构
 
-### 01_theory/ - 理论基础
+### tier_01_foundations / tier_02_guides - 基础与指南
 
 | 文档                                                               | 难度   | 预计时间 |
 | ------------------------------------------------------------------ | ------ | -------- |
-| [01_macro_fundamentals.md](./01_theory/01_macro_fundamentals.md)   | ⭐     | 2小时    |
-| [02_hygiene_and_scope.md](./01_theory/02_hygiene_and_scope.md)     | ⭐⭐   | 2小时    |
-| [03_expansion_mechanism.md](./01_theory/03_expansion_mechanism.md) | ⭐⭐   | 3小时    |
-| [04_macro_theory.md](./01_theory/04_macro_theory.md)               | ⭐⭐⭐ | 4小时    |
+| [01_声明宏实践指南](./tier_02_guides/01_声明宏实践指南.md)         | ⭐     | 2小时    |
+| [04_宏卫生性参考](./tier_03_references/04_宏卫生性参考.md)         | ⭐⭐   | 2小时    |
+| [01_声明宏完整参考](./tier_03_references/01_声明宏完整参考.md)     | ⭐⭐   | 3小时    |
+| [01_宏元编程](./tier_04_advanced/01_宏元编程.md)                   | ⭐⭐⭐ | 4小时    |
 
-### 02_declarative/ - 声明宏
+### tier_02_guides - 声明宏与过程宏
 
 | 文档                                                                  | 难度   | 预计时间 |
 | --------------------------------------------------------------------- | ------ | -------- |
-| [01_macro_rules_basics.md](./02_declarative/01_macro_rules_basics.md) | ⭐     | 2小时    |
-| [02_pattern_matching.md](./02_declarative/02_pattern_matching.md)     | ⭐⭐   | 3小时    |
-| [03_repetition_syntax.md](./02_declarative/03_repetition_syntax.md)   | ⭐⭐   | 3小时    |
-| [04_advanced_patterns.md](./02_declarative/04_advanced_patterns.md)   | ⭐⭐⭐ | 4小时    |
-| [05_recursive_macros.md](./02_declarative/05_recursive_macros.md)     | ⭐⭐⭐ | 4小时    |
+| [01_声明宏实践指南](./tier_02_guides/01_声明宏实践指南.md)            | ⭐     | 2小时    |
+| [02_Derive宏开发指南](./tier_02_guides/02_Derive宏开发指南.md)       | ⭐⭐⭐ | 5小时    |
+| [03_属性宏开发指南](./tier_02_guides/03_属性宏开发指南.md)           | ⭐⭐⭐ | 5小时    |
+| [04_函数宏开发指南](./tier_02_guides/04_函数宏开发指南.md)           | ⭐⭐⭐ | 5小时    |
+| [05_宏调试与测试](./tier_02_guides/05_宏调试与测试.md)                | ⭐⭐   | 4小时    |
 
-### 03_procedural/ - 过程宏
+### tier_03_references - 参考
 
 | 文档                                                               | 难度     | 预计时间 |
 | ------------------------------------------------------------------ | -------- | -------- |
-| [01_proc_macro_basics.md](./03_procedural/01_proc_macro_basics.md) | ⭐⭐     | 3小时    |
-| [02_derive_macros.md](./03_procedural/02_derive_macros.md)         | ⭐⭐⭐   | 5小时    |
-| [03_attribute_macros.md](./03_procedural/03_attribute_macros.md)   | ⭐⭐⭐   | 5小时    |
-| [04_function_macros.md](./03_procedural/04_function_macros.md)     | ⭐⭐⭐   | 5小时    |
-| [05_token_streams.md](./03_procedural/05_token_streams.md)         | ⭐⭐⭐⭐ | 6小时    |
+| [01_声明宏完整参考](./tier_03_references/01_声明宏完整参考.md)      | ⭐⭐     | 3小时    |
+| [02_过程宏API参考](./tier_03_references/02_过程宏API参考.md)       | ⭐⭐⭐   | 5小时    |
+| [04_宏卫生性参考](./tier_03_references/04_宏卫生性参考.md)          | ⭐⭐     | 2小时    |
 
-### 04_advanced/ - 高级主题
+### tier_04_advanced - 高级主题
 
-| 文档                                                                  | 难度       | 预计时间 | 状态    |
-| --------------------------------------------------------------------- | ---------- | -------- | ------- |
-| [README.md](./04_advanced/README.md) ⭐                               | ⭐⭐⭐⭐   | 30分钟   | ✅ 完成 |
-| [macro_metaprogramming.md](./04_advanced/macro_metaprogramming.md) ⭐ | ⭐⭐⭐⭐⭐ | 6小时    | ✅ 完成 |
-| [dsl_construction.md](./04_advanced/dsl_construction.md) ⭐           | ⭐⭐⭐⭐⭐ | 8小时    | ✅ 完成 |
-| [macro_optimization.md](./04_advanced/macro_optimization.md) ⭐       | ⭐⭐⭐⭐   | 4小时    | ✅ 完成 |
-| [02_code_generation.md](./04_advanced/02_code_generation.md) ⭐       | ⭐⭐⭐⭐   | 6小时    | ✅ 新增 |
-| [03_macro_debugging.md](./04_advanced/03_macro_debugging.md) ⭐       | ⭐⭐⭐     | 4小时    | ✅ 新增 |
-| [05_macro_testing.md](./04_advanced/05_macro_testing.md) ⭐           | ⭐⭐⭐     | 4小时    | ✅ 新增 |
-| [COMPLETION_REPORT.md](./04_advanced/COMPLETION_REPORT.md) ⭐         | -          | 15分钟   | ✅ 新增 |
+| 文档                                                                  | 难度       | 预计时间 |
+| --------------------------------------------------------------------- | ---------- | -------- |
+| [01_宏元编程](./tier_04_advanced/01_宏元编程.md)                       | ⭐⭐⭐⭐   | 6小时    |
+| [02_DSL构建实践](./tier_04_advanced/02_DSL构建实践.md)                 | ⭐⭐⭐⭐⭐ | 8小时    |
+| [03_代码生成优化](./tier_04_advanced/03_代码生成优化.md)               | ⭐⭐⭐⭐   | 6小时    |
+| [04_宏调试深化](./tier_04_advanced/04_宏调试深化.md)                   | ⭐⭐⭐     | 4小时    |
+| [05_生产级宏开发](./tier_04_advanced/05_生产级宏开发.md)              | ⭐⭐⭐     | 4小时    |
 
-### 05_practice/ - 最佳实践
-
-| 文档                                                                 | 难度   | 预计时间 |
-| -------------------------------------------------------------------- | ------ | -------- |
-| [01_common_patterns.md](./05_practice/01_common_patterns.md)         | ⭐⭐   | 3小时    |
-| [02_best_practices.md](./05_practice/02_best_practices.md)           | ⭐⭐   | 3小时    |
-| [03_anti_patterns.md](./05_practice/03_anti_patterns.md)             | ⭐⭐   | 2小时    |
-| [04_real_world_examples.md](./05_practice/04_real_world_examples.md) | ⭐⭐⭐ | 4小时    |
-
-### 📦 06. Rust 1.92.0特性（自 Rust 1.90 引入）
+### 📦 Rust 1.92.0 宏特性
 
 | 文档                                                                          | 难度     | 预计时间 |
 | ----------------------------------------------------------------------------- | -------- | -------- |
-| [00_INDEX.md](./06_rust_190_features/00_INDEX.md)                             | ⭐       | 30分钟   |
-| [README.md](./06_rust_190_features/README.md)                                 | ⭐⭐⭐⭐ | 4小时    |
-| [COMPREHENSIVE_FEATURES.md](./06_rust_190_features/COMPREHENSIVE_FEATURES.md) | ⭐⭐⭐⭐ | 5小时    |
-| [EXAMPLES.md](./06_rust_190_features/EXAMPLES.md)                             | ⭐⭐⭐   | 3小时    |
+| [RUST_192_MACRO_IMPROVEMENTS](./RUST_192_MACRO_IMPROVEMENTS.md)               | ⭐       | 30分钟   |
+| [RUST_192_MACRO_IMPROVEMENTS](./RUST_192_MACRO_IMPROVEMENTS.md)                | ⭐⭐⭐⭐ | 4小时    |
 
-### 🧠 理论增强 (theory_enhanced/)
+### 🧠 思维表征 (docs/04_thinking)
 
 | 文档                                                                                                      | 难度     | 预计时间 |
 | --------------------------------------------------------------------------------------------------------- | -------- | -------- |
-| [00_INDEX.md](./theory_enhanced/00_INDEX.md)                                                              | ⭐       | 20分钟   |
-| [KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md](./theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) ⭐ | ⭐⭐⭐   | 2小时    |
-| [MULTI_DIMENSIONAL_COMPARISON_MATRIX.md](./theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)        | ⭐⭐⭐⭐ | 2小时    |
-| [MINDMAP_AND_VISUALIZATION.md](./theory_enhanced/MINDMAP_AND_VISUALIZATION.md)                            | ⭐⭐     | 1.5小时  |
+| [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)             | ⭐⭐⭐   | 2小时    |
+| [MIND_MAP_COLLECTION](../../docs/04_thinking/MIND_MAP_COLLECTION.md)                                      | ⭐⭐     | 1.5小时  |
 
 ---
 
@@ -279,8 +262,8 @@ cargo run --example 04_recursive_macros
 
 **学习顺序**:
 
-1. 从[宏基础理论](./01_theory/01_macro_fundamentals.md)开始
-2. 学习[macro_rules!基础](./02_declarative/01_macro_rules_basics.md)
+1. 从[宏基础理论](./tier_02_guides/01_声明宏实践指南.md)开始
+2. 学习[macro_rules!基础](./tier_02_guides/01_声明宏实践指南.md)
 3. 运行示例 `01_macro_rules_basics.rs`
 4. 查看[FAQ](./FAQ.md)解答疑惑
 
@@ -293,19 +276,19 @@ cargo run --example 04_recursive_macros
 
 **快速通道**:
 
-1. 浏览[理论文档](./01_theory/)
-2. 直接学习[声明宏](./02_declarative/)
+1. 浏览[理论文档](./tier_02_guides/01_声明宏实践指南.md)
+2. 直接学习[声明宏](./tier_02_guides/01_声明宏实践指南.md)
 3. 完成所有基础示例
-4. 进入[过程宏](./03_procedural/)学习
+4. 进入[过程宏](./tier_02_guides/02_Derive宏开发指南.md)学习
 
 ### 我想深入理解
 
 **深度路径**:
 
-1. 详细学习[宏理论](./01_theory/04_macro_theory.md)
-2. 研究[展开机制](./01_theory/03_expansion_mechanism.md)
-3. 掌握[Token流](./03_procedural/05_token_streams.md)
-4. 实践[DSL构建](./04_advanced/01_dsl_construction.md)
+1. 详细学习[宏理论](./tier_04_advanced/01_宏元编程.md)
+2. 研究[展开机制](./tier_03_references/01_声明宏完整参考.md)
+3. 掌握[Token流](./tier_03_references/02_过程宏API参考.md)
+4. 实践[DSL构建](./tier_04_advanced/02_DSL构建实践.md)
 
 ---
 
@@ -315,9 +298,9 @@ cargo run --example 04_recursive_macros
 
 **核心文档**:
 
-- [基础语法](./02_declarative/01_macro_rules_basics.md)
-- [模式匹配](./02_declarative/02_pattern_matching.md)
-- [递归实现](./02_declarative/05_recursive_macros.md)
+- [基础语法](./tier_02_guides/01_声明宏实践指南.md)
+- [模式匹配](./tier_03_references/01_声明宏完整参考.md)
+- [递归实现](./tier_02_guides/01_声明宏实践指南.md)
 
 **示例**:
 
@@ -328,9 +311,9 @@ cargo run --example 04_recursive_macros
 
 **三种类型**:
 
-1. [派生宏](./03_procedural/02_derive_macros.md) - `#[derive(Trait)]`
-2. [属性宏](./03_procedural/03_attribute_macros.md) - `#[attribute]`
-3. [函数式宏](./03_procedural/04_function_macros.md) - `macro!()`
+1. [派生宏](./tier_02_guides/02_Derive宏开发指南.md) - `#[derive(Trait)]`
+2. [属性宏](./tier_02_guides/03_属性宏开发指南.md) - `#[attribute]`
+3. [函数式宏](./tier_02_guides/04_函数宏开发指南.md) - `macro!()`
 
 **示例**:
 
@@ -342,10 +325,8 @@ cargo run --example 04_recursive_macros
 
 **核心文档**:
 
-- [特性索引](./06_rust_190_features/00_INDEX.md) ⭐ 起点
-- [主指南](./06_rust_190_features/README.md) - 10大特性板块
-- [完整特性](./06_rust_190_features/COMPREHENSIVE_FEATURES.md) - 详尽列表
-- [示例集合](./06_rust_190_features/EXAMPLES.md) - 15+示例
+- [RUST_192_MACRO_IMPROVEMENTS](./RUST_192_MACRO_IMPROVEMENTS.md) ⭐ 起点
+- [RUST_192_MACRO_IMPROVEMENTS](./RUST_192_MACRO_IMPROVEMENTS.md) - 10大特性板块
 
 **学习重点**:
 
@@ -359,8 +340,8 @@ cargo run --example 04_recursive_macros
 
 **核心主题**:
 
-- [DSL构建](./04_advanced/01_dsl_construction.md)
-- [代码生成](./04_advanced/02_code_generation.md)
+- [DSL构建](./tier_04_advanced/02_DSL构建实践.md)
+- [代码生成](./tier_04_advanced/03_代码生成优化.md)
 
 **示例**:
 
@@ -425,9 +406,8 @@ trace_macros!(true);
 
 ### 深度学习资源 ⭐
 
-- [知识图谱与概念关系](./theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) - 系统化知识体系
-- [多维矩阵对比分析](./theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md) - 全方位对比
-- [思维导图与可视化](./theory_enhanced/MINDMAP_AND_VISUALIZATION.md) - 可视化学习
+- [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 系统化知识体系
+- [MIND_MAP_COLLECTION](../../docs/04_thinking/MIND_MAP_COLLECTION.md) - 可视化学习
 
 ---
 
@@ -468,7 +448,7 @@ trace_macros!(true);
 1. **系统学习** → 按[初学者路径](#-初学者路径-2-3周)开始
 2. **快速上手** → 直接运行[示例代码](#运行示例)
 3. **解决问题** → 查看[FAQ](./FAQ.md)
-4. **深入理解** → 阅读[理论文档](./01_theory/)
+4. **深入理解** → 阅读[理论文档](./tier_02_guides/01_声明宏实践指南.md)
 
 ---
 

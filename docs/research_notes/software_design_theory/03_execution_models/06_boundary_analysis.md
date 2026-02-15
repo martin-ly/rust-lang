@@ -6,7 +6,7 @@
 
 ---
 
-## 目录
+## 📊 目录
 
 - [执行模型边界分析](#执行模型边界分析)
   - [五模型 × 三维边界](#五模型--三维边界)
@@ -16,6 +16,7 @@
   - [静态判定 vs 运行时验证](#静态判定-vs-运行时验证)
   - [确定性判定决策树](#确定性判定决策树)
   - [并发 vs 并行判定](#并发-vs-并行判定)
+  - [并发选型决策树（Actor、channel、async、Mutex）](#并发选型决策树actorchannelasyncmutex)
   - [决策树：选择执行模型](#决策树选择执行模型)
   - [执行模型与设计模式映射](#执行模型与设计模式映射)
   - [边界证明思路](#边界证明思路)
@@ -159,6 +160,39 @@
 
 ---
 
+## 并发选型决策树（Actor、channel、async、Mutex）
+
+**用途**：在已选定「并发」模型后，进一步选择 Actor、channel、async、Mutex 等具体机制；与 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) CHAN-T1、MUTEX-T1 形式化衔接。
+
+```text
+并发场景细分
+├── 需 I/O 并发（网络、磁盘、定时器）？
+│   └── 是 → async/await（tokio、async-std）
+│       └── 形式化：async_state_machine T6.1–T6.3；Send 跨 await
+├── 需共享可变状态？
+│   ├── 是、且临界区短 → Mutex/RwLock
+│   │   └── 形式化：MUTEX-T1；任一时刻至多一个 &mut T
+│   └── 是、且临界区长 → 考虑 channel 解耦，避免持锁过久
+├── 需消息传递、无共享可变？
+│   ├── 一对一、多生产者单消费者 → mpsc
+│   │   └── 形式化：CHAN-T1；消息传递无共享可变
+│   ├── 一对多广播 → broadcast
+│   └── 多 Actor、每 Actor 独立状态 → Actor（actix、bastion）
+│       └── 形式化：每 Actor 独占状态；消息传递；与 CHAN-T1 一致
+└── 需 CPU 并行 → rayon、join（见上文并行判定）
+```
+
+| 机制 | 适用场景 | 形式化边界 | crate |
+| :--- | :--- | :--- | :--- |
+| **async** | I/O 并发、高连接数 | T6.1–T6.3、Send 约束 | tokio、async-std |
+| **channel (mpsc)** | 生产者-消费者、任务分发 | CHAN-T1 | std::sync::mpsc |
+| **Mutex** | 共享可变、短临界区 | MUTEX-T1 | std::sync::Mutex |
+| **Actor** | 独立状态、消息驱动 | 每 Actor 独占；消息即 channel | actix、bastion |
+
+**选型原则**：优先 channel 解耦，避免共享可变；若必须共享则 Mutex；I/O 密集用 async。
+
+---
+
 ## 决策树：选择执行模型
 
 ```text
@@ -223,3 +257,14 @@
 | 分布式 | 序列化类型安全、FFI 契约 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 
 **确定性形式化**：Def EB-DET1、定理 EB-DET-T1 与 [FORMAL_PROOF_SYSTEM_GUIDE](../../FORMAL_PROOF_SYSTEM_GUIDE.md) Send/Sync、borrow T1 衔接；静态 vs 运行时验证见 § [静态判定 vs 运行时验证](#静态判定-vs-运行时验证)；确定性判定决策树见上文。
+
+---
+
+### 相关思维表征
+
+| 类型 | 位置 |
+| :--- | :--- |
+| 多维矩阵 | [README §执行模型多维对比矩阵](README.md#执行模型多维对比矩阵) |
+| 决策树 | 本文 § 并发选型决策树、§ 决策树：选择执行模型；[DECISION_GRAPH_NETWORK](../../../04_thinking/DECISION_GRAPH_NETWORK.md) |
+
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../../../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。

@@ -1,7 +1,7 @@
 # 研究笔记快速参考
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-14
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记 + 全面检查推进计划 Phase 1–8 完成）
 
@@ -19,32 +19,32 @@
 
 #### 🔬 形式化方法研究
 
-| 主题  | 文件 | 状态 |
-| :--- | :--- | :--- |
-| 完备性缺口 | [00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md)       | ✅ Phase 1–6 100% |
-| 所有权模型形式化 | [ownership_model.md](./formal_methods/ownership_model.md)               | ✅ 100% |
-| 借用检查器证明   | [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)     | ✅ 100% |
-| 异步状态机形式化 | [async_state_machine.md](./formal_methods/async_state_machine.md)       | ✅ 100% |
-| 生命周期形式化   | [lifetime_formalization.md](./formal_methods/lifetime_formalization.md) | ✅ 100% |
-| Pin 和自引用类型 | [pin_self_referential.md](./formal_methods/pin_self_referential.md)     | ✅ 100% |
+| 主题             | 文件                                                                               | 状态             |
+|:-----------------|:-----------------------------------------------------------------------------------|:-----------------|
+| 完备性缺口       | [00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md)                | ✅ Phase 1–6 100% |
+| 所有权模型形式化 | [ownership_model.md](./formal_methods/ownership_model.md)                          | ✅ 100%           |
+| 借用检查器证明   | [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)                | ✅ 100%           |
+| 异步状态机形式化 | [async_state_machine.md](./formal_methods/async_state_machine.md)                  | ✅ 100%           |
+| 生命周期形式化   | [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)            | ✅ 100%           |
+| Pin 和自引用类型 | [pin_self_referential.md](./formal_methods/pin_self_referential.md)                | ✅ 100%           |
 
 #### 🔷 类型理论研究
 
-| 主题 | 文件 | 状态 |
-| :--- | :--- | :--- |
-| 完备性缺口 | [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md) | ✅ 阶段 1–7 Def 占位 |
-| 类型构造能力 | [construction_capability.md](./type_theory/construction_capability.md) | ✅ Def TCON1、矩阵、决策树 |
-| 类型系统基础 | [type_system_foundations.md](./type_theory/type_system_foundations.md) | ✅ 100% |
-| Trait 系统形式化 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md) | ✅ 100% |
-| 生命周期形式化   | [lifetime_formalization.md](./type_theory/lifetime_formalization.md)         | ✅ 100% |
-| 高级类型特性     | [advanced_types.md](./type_theory/advanced_types.md)                         | ✅ 100% |
-| 型变理论         | [variance_theory.md](./type_theory/variance_theory.md)                       | ✅ 100% |
+| 主题             | 文件                                                                           | 状态                 |
+|:-----------------|:-------------------------------------------------------------------------------|:---------------------|
+| 完备性缺口       | [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)               | ✅ 阶段 1–7 Def 占位 |
+| 类型构造能力     | [construction_capability.md](./type_theory/construction_capability.md)         | ✅ Def TCON1、矩阵、决策树 |
+| 类型系统基础     | [type_system_foundations.md](./type_theory/type_system_foundations.md)         | ✅ 100%               |
+| Trait 系统形式化 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md)   | ✅ 100%               |
+| 生命周期形式化   | [lifetime_formalization.md](./type_theory/lifetime_formalization.md)           | ✅ 100%               |
+| 高级类型特性     | [advanced_types.md](./type_theory/advanced_types.md)                           | ✅ 100%               |
+| 型变理论         | [variance_theory.md](./type_theory/variance_theory.md)                         | ✅ 100%               |
 
 #### 🌐 软件设计理论
 
-| 主题 | 文件 | 状态 |
-| :--- | :--- | :--- |
-| 设计模式形式化 | [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/) | ✅ 23 模式 |
+| 主题             | 文件                                                                                         | 状态        |
+|:-----------------|:---------------------------------------------------------------------------------------------|:------------|
+| 设计模式形式化   | [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/)             | ✅ 23 模式  |
 | 23/43 模型 | [02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/) | ✅ 100% |
 | 执行模型 | [03_execution_models](./software_design_theory/03_execution_models/) | ✅ 五模型 |
 | 组合工程 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/) | ✅ CE-T1–T3 |
@@ -54,26 +54,32 @@
 
 #### ⚡ 实验研究
 
-| 主题         | 文件                                                                           | 状态    |
-| :--- | :--- | :--- |
-| 性能基准测试 | [performance_benchmarks.md](./experiments/performance_benchmarks.md)           | ✅ 100% |
-| 内存分析     | [memory_analysis.md](./experiments/memory_analysis.md)                         | ✅ 100% |
-| 编译器优化   | [compiler_optimizations.md](./experiments/compiler_optimizations.md)           | ✅ 100% |
-| 并发性能     | [concurrency_performance.md](./experiments/concurrency_performance.md)         | ✅ 100% |
-| 宏展开性能   | [macro_expansion_performance.md](./experiments/macro_expansion_performance.md) | ✅ 100% |
+| 主题           | 文件                                                                               | 状态    |
+|:---------------|:-----------------------------------------------------------------------------------|:--------|
+| 性能基准测试   | [performance_benchmarks.md](./experiments/performance_benchmarks.md)               | ✅ 100% |
+| 内存分析       | [memory_analysis.md](./experiments/memory_analysis.md)                             | ✅ 100% |
+| 编译器优化     | [compiler_optimizations.md](./experiments/compiler_optimizations.md)               | ✅ 100% |
+| 并发性能       | [concurrency_performance.md](./experiments/concurrency_performance.md)             | ✅ 100% |
+| 宏展开性能     | [macro_expansion_performance.md](./experiments/macro_expansion_performance.md)     | ✅ 100% |
 
 #### 🌐 综合研究
 
-| 主题         | 文件                                                     | 状态    |
-| :--- | :--- | :--- |
-| 实际应用案例 | [practical_applications.md](./practical_applications.md) | ✅ 100% |
-| 研究方法论   | [research_methodology.md](./research_methodology.md)     | ✅ 100% |
+| 主题           | 文件                                                       | 状态    |
+|:---------------|:-----------------------------------------------------------|:--------|
+| 实际应用案例   | [practical_applications.md](./practical_applications.md)   | ✅ 100% |
+| 研究方法论     | [research_methodology.md](./research_methodology.md)       | ✅ 100% |
 
 ---
 
 ## 🎯 按研究目标查找
 
 ### 我想证明某个性质
+
+**形式化证明体系**（2026-02-14）:
+
+- 批判性分析与推进计划 → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+- 核心定理完整证明 → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)（L2）
+- Coq 证明骨架 → [coq_skeleton](./coq_skeleton/)、[COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)
 
 **形式化方法研究**:
 

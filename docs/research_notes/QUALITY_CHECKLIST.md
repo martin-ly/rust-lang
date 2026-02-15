@@ -80,6 +80,22 @@
 - [ ] 状态标记正确（📋 规划中 / 🔄 进行中 / ✅ 已完成）
 - [ ] 维护者信息完整
 
+### research_notes 元信息统一模板
+
+本目录下所有含 blockquote 元信息的 .md **至少**使用以下字段（可选字段按需增加）：
+
+```markdown
+> **创建日期**: YYYY-MM-DD
+> **最后更新**: YYYY-MM-DD
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: 📋 规划中 / 🔄 进行中 / ✅ 已完成
+> **用途**: （可选）文档定位、推荐读者
+```
+
+- **子目录扩展**：formal_methods、type_theory、software_design_theory 子文档可增加「分类」「安全边界」「23 模式矩阵」等；与上述五类并存，不替代「Rust 版本」。
+- **格式**：每行一条 `> **key**: value`；key 与冒号间无空格，冒号后一空格。
+- 详见 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) F1.1。
+
 ---
 
 ## 📝 内容质量检查
@@ -259,6 +275,15 @@
 - [ ] 更新了相应目录的 README.md
 - [ ] 更新了主索引 README.md（如需要）
 - [ ] 更新了快速参考 QUICK_REFERENCE.md（如需要）
+
+### 概念定义-属性关系-解释论证 层次化（核心研究笔记建议）
+
+- [ ] **概念定义层**：本页 Def/Axiom 以表格或列表列出（或已有形式化定义小节）
+- [ ] **属性关系层**：本页定理/推论与公理/引理依赖可追溯（表格或 DAG 片段）
+- [ ] **解释论证层**：关键定理含「陈述→依赖→证明/思路→反例」块或证明思路
+- [ ] （可选）**相关思维表征**：注明对应思维导图/矩阵/证明树/决策树，见 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md)
+
+*适用*：formal_methods、type_theory、software_design_theory 核心文档；索引/概览类可放宽。依据：[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)。**formal_methods 六篇完备性**（六篇×六维自检）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
 
 ---
 

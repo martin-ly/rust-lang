@@ -1,5 +1,5 @@
 {
-    "DeprecationNote": "Generated 2025-10-22. Source files may have been archived. Current tier structure: tier_01_foundations, tier_02_guides, tier_03_references, tier_04_advanced. Run scripts/check_links.ps1 for current status.",
+    "DeprecationNote": "Generated 2025-10-22. Historical report - tier1_foundation/tier3_advanced/tier4_theoretical 已全面修复为 tier_01_foundations/tier_03_references/tier_04_advanced (2026-02-14). Run scripts/check_links.ps1 for current status.",
     "Statistics":  {
                        "ValidLinks":  974,
                        "TotalLinks":  1050,

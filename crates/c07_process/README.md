@@ -32,8 +32,8 @@
 
 ## 🌟 2025-10-20 核心增强更新
 
-- **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 进程管理完整体系
-- **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - IPC/同步原语全面对比
+- **📊 [知识图谱与概念关系](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** - 进程管理完整体系
+- **📐 [多维矩阵对比分析](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** - IPC/同步原语全面对比
 - **🗺️ [Rust 1.93.0 综合思维导图](./docs/RUST_192_COMPREHENSIVE_MINDMAP.md)** ⭐ NEW!
   - ASCII艺术图表 | 进程创建/IPC/信号完整体系
   - 跨平台设计模式 | Unix/Windows特定API对比
@@ -564,8 +564,8 @@ cargo run --features async --example performance_optimization_demo
 - **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
 - **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 进程管理对比矩阵
 - **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 进程管理思维导图
-- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
-- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+- **[决策图网](../../docs/04_thinking/DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../docs/04_thinking/PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
 
 ### 使用指南
 

@@ -1,4 +1,4 @@
-﻿# 2.4 Rust 类型系统 - Trait 系统指南
+# 2.4 Rust 类型系统 - Trait 系统指南
 
 > **文档类型**: Tier 2 - 指南层
 > **文档定位**: 深入学习 Rust Trait 系统
@@ -1836,8 +1836,8 @@ fn main() {
 
 **深度分析**:
 
-- [Trait 系统原理](../analysis/rust_theory/trait_system.md)
-- [对象安全分析](../analysis/rust_theory/object_safety.md)
+- [Trait 系统原理](../tier_04_advanced/02_高级泛型模式.md)
+- [对象安全分析](../tier_03_references/03_分派机制参考.md)
 
 ---
 

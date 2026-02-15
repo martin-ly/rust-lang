@@ -49,6 +49,8 @@
 
 欢迎来到 Rust 研究笔记系统！本指南将帮助您快速了解和使用研究笔记系统。
 
+**第一步**：按你的目标选路径 → **[00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md)**（单入口、按目标、三大支柱映射）
+
 ### 系统简介
 
 研究笔记系统是一个完整的 Rust 语言研究文档体系，包含：

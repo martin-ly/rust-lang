@@ -116,7 +116,7 @@ let r2 = &mut v;
 /// ```
 ```
 
-**参考**: [testing_cheatsheet](./testing_cheatsheet.md) 编译测试；[c11 宏模块 trybuild](../../crates/c11_macro_system/) 过程宏编译失败测试。
+**参考**: [testing_cheatsheet](./testing_cheatsheet.md) 编译测试；[c11 宏模块 trybuild](../../../crates/c11_macro_system/) 过程宏编译失败测试。
 
 ---
 

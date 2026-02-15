@@ -142,14 +142,14 @@
 
 ## 🌟 2025-10-20 核心增强更新
 
-- **📊 [知识图谱与概念关系增强版](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** (NEW!)
+- **📊 [知识图谱与概念关系增强版](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** (NEW!)
   - **4+ Mermaid 可视化图表** | 异步系统完整架构
   - **Future状态机模型** | Runtime架构体系可视化
   - **技术演化Gantt图** | Rust 1.93.0特性映射
   - **3级学习路径** | 初学者→中级→高级
   - **适合**: 系统化学习、建立异步编程全局认知
 
-- **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** (NEW!)
+- **📐 [多维矩阵对比分析](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** (NEW!)
   - **5大技术领域全面对比** | Runtime/Future/并发模式/性能
   - **15+ 性能对比表格** | 实测数据（100万次操作）
   - **Tokio vs async-std vs Smol** | 详细Runtime对比

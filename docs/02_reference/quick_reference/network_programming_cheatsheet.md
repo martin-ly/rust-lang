@@ -330,19 +330,19 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 
 ## 📚 相关文档
 
-- [网络模块完整文档](../../crates/c10_networks/docs/)
-- [网络模块 README](../../crates/c10_networks/README.md)
+- [网络模块完整文档](../../../crates/c10_networks/docs/)
+- [网络模块 README](../../../crates/c10_networks/README.md)
 
 ## 🧩 相关示例代码
 
 以下示例位于 `crates/c10_networks/examples/`，可直接运行（例如：`cargo run -p c10_networks --example tcp_echo_server`）。
 
-- [TCP 回显服务/客户端](../../crates/c10_networks/examples/tcp_echo_server.rs)、[tcp_client.rs](../../crates/c10_networks/examples/tcp_client.rs)
-- [UDP 回显与自定义](../../crates/c10_networks/examples/udp_echo.rs)、[udp_custom_demo.rs](../../crates/c10_networks/examples/udp_custom_demo.rs)
-- [HTTP 客户端](../../crates/c10_networks/examples/http_client.rs)
-- [WebSocket 演示与回显](../../crates/c10_networks/examples/websocket_demo.rs)、[ws_echo_server.rs](../../crates/c10_networks/examples/ws_echo_server.rs)、[ws_echo_client.rs](../../crates/c10_networks/examples/ws_echo_client.rs)
-- [DNS 解析与记录](../../crates/c10_networks/examples/dns_lookup.rs)、[dns_records.rs](../../crates/c10_networks/examples/dns_records.rs)、[unified_dns.rs](../../crates/c10_networks/examples/unified_dns.rs)
-- [gRPC 客户端/服务端](../../crates/c10_networks/examples/grpc_client.rs)、[grpc_server.rs](../../crates/c10_networks/examples/grpc_server.rs)
+- [TCP 回显服务/客户端](../../../crates/c10_networks/examples/tcp_echo_server.rs)、[tcp_client.rs](../../../crates/c10_networks/examples/tcp_client.rs)
+- [UDP 回显与自定义](../../../crates/c10_networks/examples/udp_echo.rs)、[udp_custom_demo.rs](../../../crates/c10_networks/examples/udp_custom_demo.rs)
+- [HTTP 客户端](../../../crates/c10_networks/examples/http_client.rs)
+- [WebSocket 演示与回显](../../../crates/c10_networks/examples/websocket_demo.rs)、[ws_echo_server.rs](../../../crates/c10_networks/examples/ws_echo_server.rs)、[ws_echo_client.rs](../../../crates/c10_networks/examples/ws_echo_client.rs)
+- [DNS 解析与记录](../../../crates/c10_networks/examples/dns_lookup.rs)、[dns_records.rs](../../../crates/c10_networks/examples/dns_records.rs)、[unified_dns.rs](../../../crates/c10_networks/examples/unified_dns.rs)
+- [gRPC 客户端/服务端](../../../crates/c10_networks/examples/grpc_client.rs)、[grpc_server.rs](../../../crates/c10_networks/examples/grpc_server.rs)
 
 ---
 
@@ -355,10 +355,10 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 
 ### 项目内部文档
 
-- [完整文档](../../crates/c10_networks/README.md)
-- [HTTP 指南](../../crates/c10_networks/docs/tier_02_guides/02_HTTP客户端开发.md)
-- [TCP/UDP 指南](../../crates/c10_networks/docs/tier_02_guides/04_TCP_UDP编程.md)
-- [WebSocket 指南](../../crates/c10_networks/docs/tier_02_guides/03_WebSocket实时通信.md)
+- [完整文档](../../../crates/c10_networks/README.md)
+- [HTTP 指南](../../../crates/c10_networks/docs/tier_02_guides/02_HTTP客户端开发.md)
+- [TCP/UDP 指南](../../../crates/c10_networks/docs/tier_02_guides/04_TCP_UDP编程.md)
+- [WebSocket 指南](../../../crates/c10_networks/docs/tier_02_guides/03_WebSocket实时通信.md)
 
 ### 相关速查卡
 

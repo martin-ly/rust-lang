@@ -102,7 +102,7 @@
 | **属性** | 结构性质；编译器自动推导 |
 | **关系** | `T: Sync` ⇔ `&T: Send`；Rc 非 Send |
 | **解释** | 跨线程传递需 Send；共享需 Sync |
-| **示例** | `thread::spawn(|| { ... })` 闭包需 Send |
+| **示例** | `thread::spawn(\|\| { ... })` 闭包需 Send |
 | **论证** | [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) § Send/Sync |
 | **形式化** | [async_state_machine](formal_methods/async_state_machine.md) SPAWN1、Send/Sync 语义 |
 | **反例** | Rc 跨线程；见 05_boundary_system safe_unsafe_matrix |
@@ -214,7 +214,7 @@
 | **属性** | 按引用/可变/移动捕获 |
 | **关系** | 与 ownership/borrow 协同；Send 约束 |
 | **解释** | 闭包类型由使用处唯一确定 |
-| **示例** | `let f = |x| x + 1;` |
+| **示例** | `let f = \|x\| x + 1;` |
 | **论证** | [type_system_foundations](type_theory/type_system_foundations.md) |
 | **形式化** | 闭包类型规则 |
 | **反例** | 跨线程传非 Send 闭包 |
@@ -237,6 +237,18 @@
 
 ---
 
+### 相关思维表征
+
+| 类型 | 位置 |
+| :--- | :--- |
+| 多维矩阵 | [UNIFIED_SYSTEMATIC_FRAMEWORK](UNIFIED_SYSTEMATIC_FRAMEWORK.md) 概念-公理-定理-证明方法-反例矩阵；[formal_methods/README §六篇并表](formal_methods/README.md#formal_methods-六篇并表) |
+| 证明树 | [PROOF_INDEX](PROOF_INDEX.md)、各特性对应 formal_methods/type_theory 文档 |
+| 决策树 | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md)、[DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) 选型决策树 |
+
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
+
+---
+
 ## 相关文档
 
 | 文档 | 用途 |
@@ -249,4 +261,4 @@
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-12
+**最后更新**: 2026-02-14

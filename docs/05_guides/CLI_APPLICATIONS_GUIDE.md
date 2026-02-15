@@ -1,7 +1,7 @@
 # CLI 应用开发指南
 
-> **创建日期**: 2026-02-13  
-> **权威源**: [Command Line Applications in Rust](https://rust-cli.github.io/book/)  
+> **创建日期**: 2026-02-13
+> **权威源**: [Command Line Applications in Rust](https://rust-cli.github.io/book/)
 > **用途**: 对标官方 CLI Book，提供本项目内导航与补充
 
 ---

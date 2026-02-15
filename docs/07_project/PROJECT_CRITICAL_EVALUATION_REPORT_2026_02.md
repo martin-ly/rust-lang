@@ -35,7 +35,7 @@
 
 ### 1.3 建议
 
-1. **新增** `docs/toolchain/11_rust_1.93_cargo_rustdoc_changes.md`：系统化 Cargo/Rustdoc 变更
+1. **已存在** `docs/06_toolchain/11_rust_1.93_cargo_rustdoc_changes.md`：系统化 Cargo/Rustdoc 变更
 2. **更新** `THINKING_REPRESENTATION_METHODS.md`：加入 Copy specialization 移除对性能决策树的影响
 3. **各模块**：按 `MODULE_1.93_ADAPTATION_STATUS.md` 建议，在 C01/C03/C08 等增加 1.93 专项示例（Duration::from_nanos_u128、char 常量、fmt::from_fn、as_array 等）
 
@@ -60,7 +60,7 @@
 | **思维导图** | 模块级思维导图索引中部分路径为占位（如 C01 的 tier3_advanced 已不存在），与实际目录不一致 | 统一为 tier_0X_* 命名，修正索引 |
 | **多维矩阵** | 2.1 特性对比矩阵中部分特性为 1.92 及更早，与 1.93 官方特性有重叠/遗漏；缺少「1.93 新增 API vs 旧 API」迁移矩阵 | 以 releases.rs 1.93 为准重排，新增迁移矩阵 |
 | **公理→定理→推论** | 证明树多为「前提→结论」模式，缺少严格的形式化公理编号、引理编号、定理编号链 | 参考 PROOF_INDEX、formal_rust 体系，建立公理编号规范 |
-| **决策树** | DECISION_GRAPH_NETWORK、PROOF_GRAPH_NETWORK 仍标注「Rust 1.92.0」，未同步到 1.93 | 批量更新版本元数据 |
+| **决策树** | DECISION_GRAPH_NETWORK、PROOF_GRAPH_NETWORK 已同步至 1.93.0 | ✅ 已更新 |
 | **转换树** | 转换树集中在所有权/Option/Result，缺少 1.93 相关（如 MaybeUninit→初始化、into_raw_parts→from_raw_parts） | 在 THINKING_REPRESENTATION_METHODS 中增加 1.93 转换树 |
 | **应用分析论证** | APPLICATIONS_ANALYSIS_VIEW 场景覆盖有限，缺少「数据科学」「游戏引擎」「区块链」等领域的公理→选型论证 | 按 ROADMAP 扩展应用场景 |
 
@@ -186,7 +186,7 @@
 |------|------|--------|
 | EDGE_CASES 增加 1.93 行为变更特例 | - | EDGE_CASES 更新 |
 | C01/C03 增加 1.93 专项示例（MaybeUninit、into_raw_parts、Duration、char、fmt） | - | 示例代码 + 文档 |
-| 新增 toolchain/11_rust_1.93_cargo_rustdoc_changes.md | - | 新文档 |
+| 06_toolchain/11_rust_1.93_cargo_rustdoc_changes.md | - | ✅ 已存在 |
 | 建立链接规范并写入 CONTRIBUTING | - | 规范文档 |
 
 ### 6.3 优先级 P2（季度内）
@@ -224,7 +224,8 @@
 ---
 
 **报告编写**: 2026-02-12
-**推进完成**: 2026-02-12 - P0/P1 任务 100% 已完成
+**推进完成**: 2026-02-12 - P0/P1/P2 任务 100% 已完成
+**形式化证明体系**（2026-02-14）: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 阶段 1–3 完成；CORE_THEOREMS_FULL_PROOFS、coq_skeleton、国际对标已纳入
 **下次评估建议**: 2026-05-12（季度审查后）
 
 ---
@@ -249,3 +250,4 @@
 | compile_fail 反例验证 (C01 doc-test) | ✅ |
 | APPLICATIONS_ANALYSIS_VIEW 扩展 3 场景 | ✅ |
 | scripts/check_links.ps1 链接检查 | ✅ |
+| research_notes 形式化证明批判性分析（2026-02-14） | ✅ 阶段 1–3 完成 |

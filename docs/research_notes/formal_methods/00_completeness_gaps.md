@@ -33,6 +33,7 @@
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
+| **变量绑定与遮蔽** | ✅ | Def 1.4 变量绑定、Def 1.5 变量遮蔽 | ownership_model |
 | **Box** | ✅ | Def BOX1、定理 BOX-T1 | ownership_model |
 | **Rc/Arc** | ✅ | Def RC1/ARC1、定理 RC-T1 | ownership_model |
 | **Cell/RefCell** | ✅ | Def CELL1/REFCELL1、定理 REFCELL-T1 | ownership_model |
@@ -74,6 +75,7 @@
 | **match 穷尽** | ✅ | Def MATCH1、定理 MATCH-T1 | borrow_checker |
 | **for 迭代** | ✅ | Def FOR1、定理 FOR-T1 | borrow_checker |
 | **? 操作符** | ✅ | Def QUERY1、定理 QUERY-T1 | borrow_checker |
+| **控制流公理** | ✅ | A-CF1：控制流归约保持类型与所有权；与 T-TY3 衔接 | [README § 控制流形式化](README.md#控制流形式化) |
 
 ---
 
@@ -124,6 +126,8 @@
 
 **状态**：✅ **100% 完成**，无剩余缺口。
 
+**后续可持续推进**：✅ 阶段 A–D 已完成：Send/Sync 独立形式化 [send_sync_formalization](send_sync_formalization.md)、安全可判定机制总览 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)、并发+Trait 族四维表、思维表征四类绑定（HIERARCHICAL_MAPPING、六篇并表）。详见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)。
+
 ---
 
 ## 9. 国际权威对标
@@ -141,6 +145,22 @@
 | **Rustonomicon** | UNSAFE1、TRANSMUTE1、UNION1 | unsafe、内存布局；[文档](https://doc.rust-lang.org/nomicon/) |
 | **Ferrocene FLS** | 语法与 legality | Rust 1.93 形式化规范；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/)；[spec](https://spec.ferrocene.dev/) |
 | **Prusti / Kani / Miri** | 可验证 ownership/borrow | 验证工具；Miri 实现 Stacked Borrows |
+
+---
+
+## 10. 国际对标缺口（与阶段 1 交付物联动）
+
+**详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+
+| 缺口类型 | 说明 | 对标成果 |
+| :--- | :--- | :--- |
+| **L3 机器可检查证明** | 本目录证明多为 L1 证明思路；无 Coq/Isabelle 证明 | RustBelt、Aeneas、coq-of-rust |
+| **可执行语义** | 无可执行小步操作语义 | RustSEM (K-Framework)、[EXECUTABLE_SEMANTICS_ROADMAP](../EXECUTABLE_SEMANTICS_ROADMAP.md) |
+| **松弛内存模型** | 原子操作、Arc 仅 Def 级；无松弛内存形式化 | RustBelt Meets Relaxed Memory |
+| **MIR/THIR 级** | 无编译器 IR 级建模 | RustBelt MIR、coq-of-rust THIR |
+| **工具对接** | 无 Aeneas、coq-of-rust 对接 | [AENEAS_INTEGRATION_PLAN](../AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../COQ_OF_RUST_INTEGRATION_PLAN.md) |
+
+**RustBelt 逐章对标**: [RUSTBELT_ALIGNMENT](../RUSTBELT_ALIGNMENT.md)
 
 ---
 

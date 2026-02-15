@@ -1,7 +1,7 @@
 # 支持 vs 不支持边界矩阵
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-14
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 
 ---
@@ -224,4 +224,4 @@ async fn serve() {
 ## 引用
 
 - [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)
-- [DESIGN_PATTERNS_USAGE_GUIDE](../../../DESIGN_PATTERNS_USAGE_GUIDE.md)
+- [DESIGN_PATTERNS_USAGE_GUIDE](../../../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md)

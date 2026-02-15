@@ -77,6 +77,28 @@
 
 ---
 
+## 定理 CE-PAT1（模式组合 CE 保持）
+
+**陈述**：设模式 $A$、$B$ 各自满足 CE-T1、CE-T2、CE-T3（作为独立模块）。若组合 $A \circ B$ 的接口满足 [03_integration_theory](03_integration_theory.md) IT-T1（跨模块所有权保持）、IT-T2（Send/Sync 传递）、IT-L1（生命周期约束），则 $A \circ B$ 保持 CE-T1、CE-T2、CE-T3。
+
+**证明**：
+
+1. **CE-T1**：$A$、$B$ 各自内存安全；组合时值/引用经 `pub fn` 边界传递，所有权转移符合 IT-T1；无新分配泄漏、无悬垂。由 ownership T2、T3。
+2. **CE-T2**：$A$、$B$ 各自无数据竞争；跨模块调用顺序执行；跨线程仅 Send 类型，由 IT-T2。由 borrow T1、Send/Sync 结构性质。
+3. **CE-T3**：$A$、$B$ 各自良型；跨模块实参/形参一致，由 IT-L1 与 type_system 保持性。∎
+
+**推论 CE-PAT-C1**：Builder∘Factory、Decorator∘Strategy、Observer∘Command、Composite∘Visitor、Repository∘Service∘DTO 等组合，若满足 IT-T1/IT-T2/IT-L1，则保持 CE-T1–T3。
+
+**组合推导示例（Builder + Factory）**：
+
+- 接口：`Factory::create(&self) -> Builder`；`Builder::build(self) -> T`
+- IT-T1：`create` 返回 Builder 所有权转移；`build` 消费 Builder 返回 T，所有权链完整
+- IT-T2：若跨线程，Builder、T 需 `Send`；单线程则无约束
+- IT-L1：无跨模块引用返回，不涉及
+- **结论**：Builder∘Factory 保持 CE-T1–T3。∎
+
+---
+
 ## 代码示例：模块组合
 
 ```rust

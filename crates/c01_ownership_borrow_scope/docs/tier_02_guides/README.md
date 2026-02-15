@@ -209,15 +209,15 @@ graph TD
 
 **文档资源**:
 
-- 📖 [Tier 1: 基础文档层](../tier1_foundation/README.md) - 快速回顾基础
+- 📖 [Tier 1: 基础文档层](../tier_01_foundations/README.md) - 快速回顾基础
 - 📊 [可视化资源](../VISUALIZATION_INDEX.md) - 图形化理解概念
 - 📚 [主索引](../00_MASTER_INDEX.md) - 所有文档导航
 
 **代码资源**:
 
-- 💻 **所有权示例** → [所有权系统基础](../02_core/01_ownership_fundamentals.md) (15+ 示例)
-- 📦 **借用示例** → [借用系统详解](../02_core/02_borrowing_system.md) (20+ 示例)
-- ⏰ **生命周期示例** → [生命周期注解](../02_core/03_lifetime_annotations.md) (18+ 示例)
+- 💻 **所有权示例** → [所有权系统基础](./01_所有权快速入门.md) (15+ 示例)
+- 📦 **借用示例** → [借用系统详解](./02_借用实践指南.md) (20+ 示例)
+- ⏰ **生命周期示例** → [生命周期注解](./03_生命周期实践.md) (18+ 示例)
 - 🧪 **综合示例集** → [Rust 1.90 实战示例](../RUST_190_EXAMPLES_COLLECTION.md) (138+ 示例)
 
 **可视化资源**:
@@ -280,9 +280,9 @@ graph TD
 
 ### 其他层级
 
-- 📚 [Tier 1: 基础文档层](../tier1_foundation/README.md)
+- 📚 [Tier 1: 基础文档层](../tier_01_foundations/README.md)
 - 🎨 [Tier 3: 高级应用层](../tier_03_references/README.md)
-- 🔬 [Tier 4: 理论深化层](../tier4_theoretical/README.md)
+- 🔬 [Tier 4: 理论深化层](../tier_04_advanced/README.md)
 
 ### 导航
 

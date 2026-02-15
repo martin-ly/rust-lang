@@ -701,16 +701,16 @@ graph TB
 
 ### 核心文档链接
 
-- [所有权理论](./01_theory/01_ownership_theory.md) - 理论基础
-- [借用系统](./02_core/02_borrowing_system.md) - 核心概念
-- [生命周期注解](./02_core/03_lifetime_annotations.md) - 高级应用
-- [Rust 1.90 全面指南](./06_rust_features/RUST_190_COMPREHENSIVE_GUIDE.md) - 最新特性
+- [所有权理论](./tier_04_advanced/06_类型系统理论.md) - 理论基础
+- [借用系统](./tier_02_guides/02_借用实践指南.md) - 核心概念
+- [生命周期注解](./tier_02_guides/03_生命周期实践.md) - 高级应用
+- [Rust 1.90 全面指南](./RUST_190_COMPREHENSIVE_MINDMAP.md) - 最新特性
 
 ### 实践指南
 
-- [设计模式](./05_practice/01_design_patterns.md) - 模式应用
-- [最佳实践](./05_practice/02_best_practices.md) - 实践建议
-- [性能优化](./05_practice/04_performance_tuning.md) - 优化技巧
+- [设计模式](./tier_02_guides/07_实战项目集.md) - 模式应用
+- [最佳实践](./tier_01_foundations/04_常见问题.md) - 实践建议
+- [性能优化](./tier_03_references/09_性能优化参考.md) - 优化技巧
 
 ---
 

@@ -1,8 +1,9 @@
 # C02 类型系统 - 主索引
 
 > **学习导航**: C02 类型系统模块的完整学习路径和资源导航
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-13
 > **适用版本**: Rust 1.93.0+
+> **English**: [00_MASTER_INDEX.en.md](./00_MASTER_INDEX.en.md)
 
 ---
 
@@ -25,11 +26,13 @@
 | 官方资源 | 链接 | 与本模块对应 |
 |----------|------|--------------|
 | **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、Trait、生命周期 |
-| **Rust By Example** | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) | 结构体、枚举 |
+| **RBE 练习** | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) · [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) · [Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html) | 结构体、枚举、Trait、类型转换实践 |
 | **Rust Reference** | [Type system](https://doc.rust-lang.org/reference/types.html) | 类型系统规范 |
 | **Rustonomicon** | [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html) | 型变、高级类型 |
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
+
+**一页纸总结**: [ONE_PAGE_SUMMARY.md](./ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
 
 ---
 

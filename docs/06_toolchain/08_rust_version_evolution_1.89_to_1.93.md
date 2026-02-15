@@ -82,3 +82,7 @@
 - [Rust 1.93 vs 1.92 对比](./05_rust_1.93_vs_1.92_comparison.md)
 - [Rust 1.93 兼容性注意事项](./06_rust_1.93_compatibility_notes.md)
 - [Rust 1.93 完整变更清单](./07_rust_1.93_full_changelog.md)
+
+---
+
+**最后对照 releases.rs**: 2026-02-14

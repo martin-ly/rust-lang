@@ -135,6 +135,35 @@
 
 ---
 
+## 概念定义-属性关系-解释论证 层次化小节规范（2026-02 新增）
+
+**依据**：[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) 建议 P0。核心 research_notes 文档宜具备**层次化三块**（可合并到现有结构，不必另起标题）：
+
+| 层次 | 名称 | 内容要求 | 形式 |
+| :--- | :--- | :--- | :--- |
+| **概念定义层** | Def/Axiom 列表 | 本页涉及的形式化定义与公理 | 表格或列表，每项可带编号与来源 |
+| **属性关系层** | 引理/定理/推论及依赖 | 本页定理与公理/引理的依赖关系 | 表格或 DAG 片段（如 A→L→T→C） |
+| **解释论证层** | 关键定理的论证块 | 陈述 → 依赖 → 证明步骤/思路 → 反例（若有） | 每定理至少「证明思路」或完整证明；注明引用链 |
+
+**可选**：文末「相关思维表征」注明本页对应的思维导图章节、矩阵位置、证明树、决策树（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md)）。
+
+**检查**：见 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md#概念定义-属性关系-解释论证-层次化) 对应项。
+
+---
+
+## 矩阵与文档双向链接规范（2026-02 新增）
+
+**依据**：[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) 建议 P2。凡有「多维对比矩阵」的领域，宜满足双向链接：
+
+| 位置 | 要求 |
+| :--- | :--- |
+| **矩阵文档**（如 01_design_patterns_formal/README §23 模式矩阵、03_execution_models/README §执行模型矩阵、formal_methods/README §六篇并表） | 每行/每格注明「详见 [xx](path/to/doc.md)」或列「形式化文档」列链接到具体子文档 |
+| **子文档**（各模式、各执行模型、ownership/borrow/…、send_sync） | 元信息或文末注明「本概念在 [矩阵文档 §节名](path) 第 x 行/第 y 列」或「23 模式矩阵」「六篇并表」等 |
+
+**已实施**：23 模式均在元信息中含「23 模式矩阵」行号；执行模型矩阵、formal_methods **六篇并表**均含文档列。新增矩阵时按上表补全双向链接；见 [MAINTENANCE_GUIDE](MAINTENANCE_GUIDE.md) 更新流程。
+
+---
+
 ## 📚 理论基础部分完善
 
 ### 1. 补充相关概念

@@ -199,11 +199,11 @@ fn read_config() -> Result<Config, Box<dyn std::error::Error>> {
 
 ### 反例 2: 在非 Result 返回类型函数中使用 ?
 
-**错误示例**:
+**错误示例**（以下代码无法通过编译）:
 
-```rust
+```rust,compile_fail
 fn main() {
-    let f = std::fs::File::open("missing.txt")?;  // ❌ main 不返回 Result
+    let _f = std::fs::File::open("missing.txt")?;  // ❌ main 不返回 Result
 }
 ```
 
@@ -241,6 +241,15 @@ fn find_user(id: u32) -> Result<User, ()> {  // ❌ 用 Result 表示“未找�
 ```rust
 fn find_user(id: u32) -> Option<User> {
     cache.get(id).cloned()
+}
+```
+
+**反例 3b: 在 #[test] 中未返回 Result 却使用 ?**（以下代码无法通过编译）:
+
+```rust,compile_fail
+#[test]
+fn test_read() {
+    let _f = std::fs::File::open("missing.txt")?;  // ❌ test 函数未声明 -> Result
 }
 ```
 

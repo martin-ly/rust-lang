@@ -531,7 +531,7 @@ Rust 1.91 在异步编程方面带来了显著的改进：
 
 **参考资源**:
 
-- [Rust 1.91 Features Comprehensive](../../../docs/RUST_1.91_FEATURES_COMPREHENSIVE.md)
+- [Rust 1.91 Features Comprehensive](../../../docs/archive/reports/RUST_1.91_FEATURES_COMPREHENSIVE.md)
 - [Rust 1.91 Release Notes](https://blog.rust-lang.org/)
 - [Async Module Documentation](../README.md)
 

@@ -348,18 +348,18 @@ v.sort_by(|a, b| a.1.cmp(&b.1));  // 可能破坏第一键顺序
 
 ## 📚 相关文档
 
-- [完整文档](../../crates/c08_algorithms/README.md)
+- [完整文档](../../../crates/c08_algorithms/README.md)
 
 ## 🧩 相关示例代码
 
 这些示例都在 `crates/c08_algorithms/examples/` 下，可直接运行（例如：`cargo run -p c08_algorithms --example sorting_algorithms_demo`）。
 
-- [排序算法演示](../../crates/c08_algorithms/examples/sorting_algorithms_demo.rs)
-- [搜索算法演示](../../crates/c08_algorithms/examples/searching_algorithms_demo.rs)
-- [图算法演示](../../crates/c08_algorithms/examples/graph_algorithms_demo.rs)
-- [动态规划演示](../../crates/c08_algorithms/examples/dynamic_programming_demo.rs)
-- [算法复杂度演示](../../crates/c08_algorithms/examples/algorithm_complexity_demo.rs)
-- [算法优化演示](../../crates/c08_algorithms/examples/algorithm_optimization_demo.rs)
+- [排序算法演示](../../../crates/c08_algorithms/examples/sorting_algorithms_demo.rs)
+- [搜索算法演示](../../../crates/c08_algorithms/examples/searching_algorithms_demo.rs)
+- [图算法演示](../../../crates/c08_algorithms/examples/graph_algorithms_demo.rs)
+- [动态规划演示](../../../crates/c08_algorithms/examples/dynamic_programming_demo.rs)
+- [算法复杂度演示](../../../crates/c08_algorithms/examples/algorithm_complexity_demo.rs)
+- [算法优化演示](../../../crates/c08_algorithms/examples/algorithm_optimization_demo.rs)
 
 ## 📚 相关资源
 
@@ -370,9 +370,9 @@ v.sort_by(|a, b| a.1.cmp(&b.1));  // 可能破坏第一键顺序
 
 ### 项目内部文档
 
-- [算法指南](../../crates/c08_algorithms/docs/tier_02_guides/01_算法快速入门.md)
-- [数据结构指南](../../crates/c08_algorithms/docs/tier_02_guides/02_数据结构实践.md)
-- [性能优化](../../crates/c08_algorithms/docs/tier_02_guides/04_性能优化实践.md)
+- [算法指南](../../../crates/c08_algorithms/docs/tier_02_guides/01_算法快速入门.md)
+- [数据结构指南](../../../crates/c08_algorithms/docs/tier_02_guides/02_数据结构实践.md)
+- [性能优化](../../../crates/c08_algorithms/docs/tier_02_guides/04_性能优化实践.md)
 
 ### 相关速查卡
 

@@ -8,7 +8,7 @@
 
 ---
 
-## 📚 权威来源对齐
+## 📚 权威来源对齐<a id="权威来源对齐"></a>
 
 | 来源 | 链接 | 用途 |
 | :--- | :--- | :--- |
@@ -21,13 +21,14 @@
 
 ---
 
-## 📋 目录
+## 📋 目录<a id="目录"></a>
 
+<!-- markdownlint-disable MD051 -->
 - [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
-  - [📚 权威来源对齐](#-权威来源对齐)
-  - [📋 目录](#-目录)
-  - [🎯 文档宗旨](#-文档宗旨)
-  - [📐 特性覆盖矩阵总览](#-特性覆盖矩阵总览)
+  - [📚 权威来源对齐](#权威来源对齐)
+  - [📋 目录](#目录)
+  - [🎯 文档宗旨](#文档宗旨)
+  - [📐 特性覆盖矩阵总览](#特性覆盖矩阵总览)
   - [特性→Def/Axiom/Theorem 映射表](#特性defaxiomtheorem-映射表)
   - [1. 内存与所有权族](#1-内存与所有权族)
   - [2. 类型系统族](#2-类型系统族)
@@ -39,11 +40,12 @@
   - [8. 常量与编译期族](#8-常量与编译期族)
   - [9. FFI 与不安全族](#9-ffi-与不安全族)
   - [10. Rust 1.93 新增/变更特性](#10-rust-193-新增变更特性)
-  - [📚 相关文档](#-相关文档)
+  - [📚 相关文档](#相关文档)
+<!-- markdownlint-enable MD051 -->
 
 ---
 
-## 🎯 文档宗旨
+## 🎯 文档宗旨<a id="文档宗旨"></a>
 
 本文档针对「论证未全面分析 Rust 1.93 所有语言特性」的缺口，系统化补全：
 
@@ -53,7 +55,7 @@
 
 ---
 
-## 📐 特性覆盖矩阵总览
+## 📐 特性覆盖矩阵总览<a id="特性覆盖矩阵总览"></a>
 
 | 类别 | 特性数 | 已论证 | 形式化文档 | 完成度 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -71,9 +73,9 @@
 
 ---
 
-## 特性→Def/Axiom/Theorem 映射表
+## 特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）
 
-本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，便于追溯与交叉引用。详见 [PROOF_INDEX](PROOF_INDEX.md)。
+本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，**最后一列「文档」即该特性的推荐落点文档**；与 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) F3.1 对齐。详见 [PROOF_INDEX](PROOF_INDEX.md)。
 
 | 特性族 | 特性 | Def | Axiom | Theorem | 文档 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -95,7 +97,7 @@
 | | impl Trait | - | - | DYN-T1 | trait_system_formalization |
 | **Trait** | Trait | - | COH1/COH2 | COH-T1 | trait_system_formalization |
 | | GATs | - | - | AT-L1 | advanced_types |
-| | Send/Sync | - | - | T6.1–T6.3 | async_state_machine |
+| | Send/Sync | SEND1/SYNC1 | SYNC-L1 | SEND-T1/SYNC-T1、SEND-SYNC-T1 | [send_sync_formalization](formal_methods/send_sync_formalization.md)；async T6.2 |
 | | Unpin | Def 2.2 | - | T1–T3 | pin_self_referential |
 | **控制流** | match | MATCH1 | - | MATCH-T1 | borrow_checker_proof |
 | | for | FOR1 | - | FOR-T1 | borrow_checker_proof |
@@ -169,7 +171,7 @@
 | **GATs** | 泛型关联类型 | type Item<'a> | [advanced_types](type_theory/advanced_types.md) | 约束违反 |
 | **const 泛型** | 编译时常量参数 | [T; N]、const N: usize | advanced_types | 非 const 作参数 |
 | **Trait 对象** | 运行时多态 | dyn Trait、vtable | trait_system | 对象安全违规 |
-| **Send/Sync** | 跨线程安全 | Send=可转移、Sync=可共享 | [async_state_machine](formal_methods/async_state_machine.md) | Rc 非 Send |
+| **Send/Sync** | 跨线程安全 | Send=可转移、Sync=可共享 | [send_sync_formalization](formal_methods/send_sync_formalization.md) Def SEND1/SYNC1、SEND-T1/SYNC-T1；[async_state_machine](formal_methods/async_state_machine.md) T6.2 | Rc 非 Send、Cell 非 Sync |
 | **Unpin** | Pin 的反面 | 默认实现、PhantomPinned | [pin_self_referential](formal_methods/pin_self_referential.md) | 非 Unpin 栈固定 |
 | **blanket impl** | 泛型实现 | impl<T: Trait> Foo for T | trait_system | 冲突 impl |
 | **Trait 继承** | Trait 组合 | trait B: A | trait_system | - |
@@ -199,7 +201,7 @@
 | **Future** | 异步 I/O | Poll、Pin、async/await | [async_state_machine](formal_methods/async_state_machine.md) | 未 Pin 自引用 |
 | **async/await** | 异步语法糖 | 生成状态机、自引用 | async_state_machine | 非 Send 跨 await |
 | **Pin** | Future 位置稳定 | 见内存族 | pin_self_referential | - |
-| **Send/Sync** | 见 Trait 族 | - | async_state_machine | - |
+| **Send/Sync** | 见 Trait 族 | - | [send_sync_formalization](formal_methods/send_sync_formalization.md)、async_state_machine T6.2 | - |
 | **通道** | 消息传递 | mpsc、sync_channel | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def CHAN1 | 发送端 drop 后接收 |
 | **Mutex/RwLock** | 共享可变 | 锁保护、RAII | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def MUTEX1 | 死锁 |
 | **原子操作** | 无锁并发 | AtomicUsize 等 | [ownership_model](formal_methods/ownership_model.md) Def ATOMIC1 | 错误内存顺序 |
@@ -282,7 +284,7 @@
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档<a id="相关文档"></a>
 
 | 文档 | 用途 |
 | :--- | :--- |

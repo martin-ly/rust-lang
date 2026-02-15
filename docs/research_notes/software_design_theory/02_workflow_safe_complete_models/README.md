@@ -127,8 +127,41 @@ impl OrderService {
 
 ---
 
+## 工作流引擎表达力（状态机、补偿、Temporal 式）
+
+| 能力 | 表达 | Rust 实现 | 说明 |
+| :--- | :--- | :--- | :--- |
+| **状态机** | 等价 | 枚举 + match；`#[derive(StateMachine)]` 宏；类型状态 | 与 23 安全 State 模式一致；穷尽匹配保证覆盖 |
+| **补偿（Compensation）** | 近似 | `Result` + 补偿闭包；`async` 编排；显式 `rollback()` | 无内置 Saga 编排器；需显式实现补偿链 |
+| **Temporal 式工作流** | 近似 | `temporal-sdk`、`cadence` 等 Rust 客户端 | 编排在服务端；Rust 实现 Activity/Workflow 定义；需外部运行时 |
+
+**等价论证（状态机）**：Rust 枚举 + match 与有限状态机语义等价；类型状态可编译时约束非法转换。
+
+**近似论证（补偿、Temporal）**：补偿需显式实现；Temporal 式需依赖外部编排服务；Rust 可表达 Activity 逻辑，但编排语义由引擎提供。
+
+**引用**：[04_expressiveness_boundary 分布式模式](04_expressiveness_boundary.md#分布式模式形式化边界event-sourcingsagacqrs)、[06_boundary_analysis 并发选型](../03_execution_models/06_boundary_analysis.md)
+
+---
+
 ## 权威对标
 
 - **GoF (1994)**：23 种经典模式
 - **Fowler EAA**：企业应用架构模式（Domain Model、Repository、Service Layer、Gateway、DTO 等）
 - **Core J2EE**：表示层、业务层、集成层模式
+
+---
+
+## 23/43 与工作流关系（D3.4）
+
+**Def WF-REL1（层次关系）**：23 安全、43 完全为**构建块层**（模式目录）；工作流为**编排层**（状态转换、补偿、长事务、人工任务）。二者**正交**：选型时先选模式（23/43），再选编排（状态机/补偿/Temporal）。
+
+| 层次 | 内容 | 选型顺序 |
+| :--- | :--- | :--- |
+| **构建块** | 23 安全、43 完全（Domain Model、Repository、DTO、Event Sourcing 等） | 先选 |
+| **编排** | 状态机、补偿链、Temporal 式工作流 | 后选 |
+
+**工作流定义**：工作流 = 多步骤业务过程 + 状态转换 + 可选补偿 + 可选人工任务 + 超时/重试。与执行模型（同步/异步/并发/分布式）为不同维度：工作流关注**业务编排语义**，执行模型关注**运行时模型**。
+
+**选型流程**：需求 → 选 23/43 模式（如 Repository、Service Layer、Event Sourcing）→ 选执行模型（如分布式）→ 选编排（状态机 / Saga 补偿 / Temporal）。
+
+**引用**：[03_execution_models](../03_execution_models/README.md)、[04_expressiveness_boundary](04_expressiveness_boundary.md) 工作流引擎表达力、[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](../COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md)。

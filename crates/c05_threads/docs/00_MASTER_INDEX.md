@@ -50,11 +50,13 @@
 | 官方资源 | 链接 | 与本模块对应 |
 |----------|------|--------------|
 | **The Rust Book** | [Ch. 16 Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 线程、消息传递、共享状态 |
-| **Rust By Example** | [Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | 线程创建、通道 |
+| **RBE 练习** | [Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | 线程创建、通道实践 |
 | **Rust Reference** | [std::thread](https://doc.rust-lang.org/std/thread/), [std::sync](https://doc.rust-lang.org/std/sync/) | 标准库 API 规范 |
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
-**思维表征**: [决策图网](../../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/THINKING_REPRESENTATION_METHODS.md)
+**思维表征**: [决策图网](../../../docs/04_thinking/DECISION_GRAPH_NETWORK.md) | [证明图网](../../../docs/04_thinking/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../../docs/04_thinking/THINKING_REPRESENTATION_METHODS.md)
+
+**一页纸总结**: [ONE_PAGE_SUMMARY.md](./ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
 
 ## 📚 文档导航总览
 

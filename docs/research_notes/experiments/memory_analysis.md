@@ -23,13 +23,10 @@
     - [2. 内存泄漏检测](#2-内存泄漏检测)
     - [3. 内存碎片化分析](#3-内存碎片化分析)
   - [💻 代码示例](#-代码示例)
-    - [示例 1：Vec 增长模式分析](#示例-1vec-增长模式分析)
-    - [示例 2：内存泄漏检测](#示例-2内存泄漏检测)
-    - [示例 3：内存布局分析](#示例-3内存布局分析)
-  - [💻 代码示例1](#-代码示例1)
     - [示例 1：内存使用分析](#示例-1内存使用分析)
     - [示例 2：Vec 增长模式分析](#示例-2vec-增长模式分析)
     - [示例 3：内存泄漏检测](#示例-3内存泄漏检测)
+    - [示例 4：内存布局分析](#示例-4内存布局分析)
   - [📊 实验结果](#-实验结果)
     - [Vec 增长模式](#vec-增长模式)
     - [内存泄漏检测](#内存泄漏检测)
@@ -113,7 +110,7 @@
 **推论 MA-C1**：循环引用（Rc/Arc）导致的逻辑泄漏不在 ownership T3 无泄漏范围内；RAII 保证物理释放，逻辑泄漏需结构化设计避免。
 
 | 分析目标 | 形式化定理 | 验证方法 |
-|----------|------------|----------|
+| :--- | :--- | :--- |
 | 无泄漏 | ownership T3 性质3 | Valgrind、Miri、泄漏检测 |
 | 无悬垂 | ownership T3 性质1 | Miri、ASan |
 | 无双重释放 | ownership T3 性质2 | Miri |
@@ -157,72 +154,6 @@
 ---
 
 ## 💻 代码示例
-
-### 示例 1：Vec 增长模式分析
-
-```rust
-use std::alloc::{GlobalAlloc, Layout, System};
-
-fn analyze_vec_growth() {
-    let mut vec = Vec::new();
-    let mut capacities = Vec::new();
-
-    for i in 0..100 {
-        vec.push(i);
-        capacities.push(vec.capacity());
-    }
-
-    println!("容量增长模式: {:?}", capacities);
-}
-```
-
-**分析结果**：
-
-- Vec 初始容量：0
-- 第一次分配：1
-- 后续分配：每次翻倍（1, 2, 4, 8, 16, ...）
-
-### 示例 2：内存泄漏检测
-
-```rust
-use std::rc::Rc;
-
-fn detect_memory_leak() {
-    // 创建循环引用
-    let a = Rc::new(5);
-    let b = Rc::clone(&a);
-
-    // 如果形成循环引用，会导致内存泄漏
-    // 使用 Weak 可以避免循环引用
-}
-```
-
-**检测方法**：
-
-- 使用 `valgrind` 检测内存泄漏
-- 使用 `Miri` 检测未定义行为
-- 使用 `dhat` 分析堆内存使用
-
-### 示例 3：内存布局分析
-
-```rust
-use std::mem;
-
-struct Example {
-    a: u8,
-    b: u32,
-    c: u8,
-}
-
-fn analyze_memory_layout() {
-    println!("Example 大小: {} 字节", mem::size_of::<Example>());
-    println!("对齐: {} 字节", mem::align_of::<Example>());
-
-    // 使用 #[repr(C)] 控制内存布局
-}
-```
-
-## 💻 代码示例1
 
 ### 示例 1：内存使用分析
 
@@ -340,6 +271,27 @@ impl SafeNode {
     }
 }
 ```
+
+### 示例 4：内存布局分析
+
+```rust
+use std::mem;
+
+struct Example {
+    a: u8,
+    b: u32,
+    c: u8,
+}
+
+fn analyze_memory_layout() {
+    println!("Example 大小: {} 字节", mem::size_of::<Example>());
+    println!("对齐: {} 字节", mem::align_of::<Example>());
+
+    // 使用 #[repr(C)] 控制内存布局
+}
+```
+
+**分析要点**：`size_of`/`align_of` 与 [ALIGNMENT_GUIDE](../../02_reference/ALIGNMENT_GUIDE.md) 对齐知识衔接；`#[repr(C)]` 用于 FFI 与布局控制。
 
 ---
 

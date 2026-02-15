@@ -45,19 +45,19 @@
 
 **Tier 4 理论深度指南 (3 份学术文档)**:
 
-- **4.1 类型系统理论** (`docs/tier4_theoretical/4.1_类型系统理论.md`) - 944 行
+- **4.1 类型系统理论** (`docs/tier_04_advanced/06_类型系统理论.md`) - 944 行
   - 仿射类型和线性类型理论详解
   - 区域推断算法 (NLL) 形式化
   - 所有权系统的数学基础
   - Substructural 类型系统研究
 
-- **4.2 形式化验证** (`docs/tier4_theoretical/4.2_形式化验证.md`) - 629 行
+- **4.2 形式化验证** (`docs/tier_04_advanced/07_形式化验证.md`) - 629 行
   - RustBelt 项目完整解析
   - Coq 和 Iris 框架应用指南
   - 类型健全性和内存安全性证明
   - Prusti/Creusot/Kani 工具实战
 
-- **4.3 学术研究** (`docs/tier4_theoretical/4.3_学术研究.md`) - 519 行
+- **4.3 学术研究** (`docs/tier_04_advanced/08_学术研究.md`) - 519 行
   - POPL/PLDI/OOPSLA 顶级论文综述
   - Rust 前沿研究方向 (View types, Session types, Effect handlers)
   - 学术资源和研究起步指南
@@ -109,21 +109,21 @@
 
 **Tier 1 基础文档层** (新建 4 份入门文档)
 
-- **1.1 项目概览** (`docs/tier1_foundation/1.1_项目概览.md`)
+- **1.1 项目概览** (`docs/tier_01_foundations/01_项目概览.md`)
   - 项目介绍和目标
   - 核心特性和优势
   - 目标受众和使用场景
 
-- **1.2 快速开始指南** (`docs/tier1_foundation/1.2_快速开始指南.md`)
+- **1.2 快速开始指南** (`docs/tier_01_foundations/02_快速开始指南.md`)
   - 5 分钟快速入门
   - 核心概念速览
   - 学习计划建议
 
-- **1.3 核心概念术语表** (`docs/tier1_foundation/1.3_核心概念术语表.md`)
+- **1.3 核心概念术语表** (`docs/tier_01_foundations/03_核心概念术语表.md`)
   - 所有权系统关键术语
   - 每个术语的定义、示例和要点
 
-- **1.4 常见问题解答** (`docs/tier1_foundation/1.4_常见问题解答.md`)
+- **1.4 常见问题解答** (`docs/tier_01_foundations/04_常见问题解答.md`)
   - 初学者常见困惑
   - 编译错误解决方案
   - 最佳实践建议
@@ -142,7 +142,7 @@
 
 **Tier 4 理论深化层** (导航框架，Phase 4 中扩展)
 
-- 创建 `docs/tier4_theoretical/` 目录
+- 创建 `docs/tier_04_advanced/` 目录
 - 3 份导航文档框架
 
 **导航系统**:

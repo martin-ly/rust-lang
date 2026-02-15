@@ -442,7 +442,7 @@ Rust 语言核心
 
 ### 7. 形式化与语义思维导图 🆕
 
-> 用于全面系统化梳理：构造性语义、表达能力边界、论证结构。详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)、[UNIFIED_SYSTEMATIC_FRAMEWORK](research_notes/UNIFIED_SYSTEMATIC_FRAMEWORK.md)。
+> 用于全面系统化梳理：构造性语义、表达能力边界、论证结构。详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)、[UNIFIED_SYSTEMATIC_FRAMEWORK](../research_notes/UNIFIED_SYSTEMATIC_FRAMEWORK.md)。
 
 ```text
 形式化与语义
@@ -484,7 +484,7 @@ Rust 语言核心
 
 ### 8. 理论体系与论证体系结构思维导图 🆕
 
-> 顶层框架：理论四层、论证五层、安全与非安全边界。详见 [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md)。
+> 顶层框架：理论四层、论证五层、安全与非安全边界。详见 [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md)。
 
 ```text
 理论体系（四层）
@@ -512,7 +512,7 @@ Rust 语言核心
 
 ### 9. 设计机制论证思维导图
 
-> 用于梳理「为何如此设计」的理由与完整论证。详见 [DESIGN_MECHANISM_RATIONALE](research_notes/DESIGN_MECHANISM_RATIONALE.md)。
+> 用于梳理「为何如此设计」的理由与完整论证。详见 [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md)。
 
 ```text
 设计机制论证

@@ -287,7 +287,7 @@ Rust 核心概念
 
 ### 3. 决策图网
 
-决策图网已在 [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) 中详细定义，包含：
+决策图网已在 [DECISION_GRAPH_NETWORK.md](../04_thinking/DECISION_GRAPH_NETWORK.md) 中详细定义，包含：
 
 - 决策流程总览
 - 模块化决策树
@@ -295,18 +295,18 @@ Rust 核心概念
 - 性能优化决策
 - 安全保证决策
 
-详见: [决策图网文档](./DECISION_GRAPH_NETWORK.md)
+详见: [决策图网文档](../04_thinking/DECISION_GRAPH_NETWORK.md)
 
 ### 4. 证明图网
 
-证明图网已在 [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) 中详细定义，包含：
+证明图网已在 [PROOF_GRAPH_NETWORK.md](../04_thinking/PROOF_GRAPH_NETWORK.md) 中详细定义，包含：
 
 - 核心证明路径
 - 特性组合证明
 - 安全性证明
 - 性能优化证明
 
-详见: [证明图网文档](./PROOF_GRAPH_NETWORK.md)
+详见: [证明图网文档](../04_thinking/PROOF_GRAPH_NETWORK.md)
 
 ### 5. 知识图谱
 
@@ -594,9 +594,9 @@ graph TD
 
 ## 📚 相关文档
 
-- [全面系统化梳理总览](./research_notes/COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
-- [决策图网](./DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
-- [证明图网](./PROOF_GRAPH_NETWORK.md) - 形式化证明结构
+- [全面系统化梳理总览](../research_notes/COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
+- [决策图网](../04_thinking/DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
+- [证明图网](../04_thinking/PROOF_GRAPH_NETWORK.md) - 形式化证明结构
 - [项目架构指南](./PROJECT_ARCHITECTURE_GUIDE.md) - 整体架构设计
 - [学习路径规划](./LEARNING_PATH_PLANNING.md) - 系统化学习路径
 

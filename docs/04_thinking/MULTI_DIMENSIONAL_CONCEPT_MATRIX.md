@@ -271,11 +271,11 @@
 
 ## 📐 形式化理论概念对比矩阵
 
-> 用于梳理概念定义、公理、定理、证明方法与反例的对应关系。详见 [FORMAL_PROOF_SYSTEM_GUIDE](research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)。
+> 用于梳理概念定义、公理、定理、证明方法与反例的对应关系。详见 [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)。
 
 ### 表达能力边界矩阵（新增）
 
-> 用于论证「何者可表达、何者不可表达、边界在哪里」。详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
+> 用于论证「何者可表达、何者不可表达、边界在哪里」。详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
 
 | 维度 | 可表达 | 边界 | 不可表达 | 论证依据 |
 |------|--------|------|----------|----------|
@@ -307,7 +307,7 @@
 
 ### 设计机制论证矩阵（新增）
 
-> 用于梳理「为何如此设计」的理由与完整论证。详见 [DESIGN_MECHANISM_RATIONALE](research_notes/DESIGN_MECHANISM_RATIONALE.md)。
+> 用于梳理「为何如此设计」的理由与完整论证。详见 [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md)。
 
 | 机制 | 动机 | 设计决策 | 形式化文档 | 决策树/反例 |
 |------|------|----------|------------|-------------|

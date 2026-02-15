@@ -17,7 +17,7 @@
 
 | 组合 | 实现要点 | 形式化衔接 |
 | :--- | :--- | :--- |
-| Builder + Factory Method | 工厂返回 Builder | CE-T1、CE-T3 |
+| Builder + Factory Method | 工厂返回 Builder | CE-T1、CE-T3；[CE-PAT1](02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持)、[模式组合约束 DAG](../01_design_patterns_formal/04_boundary_matrix.md#模式组合约束-dagd15) |
 | Decorator + Strategy | 装饰器持 `impl Strategy` | CE-T2（无共享可变） |
 | Observer + Command | channel 传 `Box<dyn Command>` | CE-T2（Send 约束） |
 | Composite + Visitor | `match` 遍历 + `Visitor` trait | CE-T1、CE-T3 |
@@ -208,6 +208,32 @@ impl<R: OrderRepository> OrderService<R> {
 
 ---
 
+## 表达力×组合联合判定树（支柱 2+3）
+
+**用途**：选型时同时考虑「表达边界」（等价/近似/不可表达）与「组合层级」（L1–L4）。
+
+```text
+模式选型 = 表达力 × 组合层级
+├── 表达力：等价 / 近似 / 不可表达（见 04_expressiveness_boundary）
+└── 组合层级：L1 单模块 / L2 多模块 / L3 多 crate / L4 跨进程
+
+联合判定示例：
+├── 等价 + L1/L2 → cargo check 即可；如 Factory、Builder、Repository
+├── 近似 + L1/L2 → 选 Rust 替代（OnceLock、channel）；如 Singleton、Observer
+├── 等价 + L3/L4 → 需集成测试、契约；如 DTO、Gateway、Remote Facade
+└── 不可表达 → 规避或重构；如全局可变、多继承
+```
+
+| 表达力 | L1/L2 | L3/L4 |
+| :--- | :--- | :--- |
+| **等价** | cargo check 判定 CE-T1–T3 | cargo check + 集成测试 + 契约 |
+| **近似** | 选 Rust 惯用替代；cargo check | 替代 + 跨边界验证 |
+| **不可表达** | 规避；重构为等价/近似 | 同上 |
+
+**引用**：[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) 等价/近似/不可表达表；[RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](../../RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md) 支柱 2+3。
+
+---
+
 ## 组件构建能力形式化树图（与 43 模式联合）
 
 **Def CE-TREE1（模块→crate→进程→网络）**：设 $G$ 为依赖图，$\mathit{Level}(G) \in \{\mathrm{L1}, \mathrm{L2}, \mathrm{L3}, \mathrm{L4}\}$ 由 $G$ 的粒度确定。架构模式 $P$ 映射到 $\mathit{Level}(P)$ 由 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md) 与 CE-MAT1 联合定义。
@@ -340,3 +366,22 @@ L4 跨进程/跨网络（分布式、微服务）
 | 跨线程传 `Rc` | 编译错误 | 用 `Arc`；Send/Sync 约束 |
 | 泛型约束不一致 | 类型不匹配 | 统一 trait 约束、文档化接口 |
 | pub 泄漏内部可变 | 破坏封装 | 仅 pub 必要 API；内部 RefCell 封装 |
+
+---
+
+## 组合反例→编译错误映射（CE-T1/T2/T3）
+
+| 违反定理 | 典型错误码 | 典型信息 | 修复方向 |
+| :--- | :--- | :--- | :--- |
+| **CE-T1**（内存安全） | E0382 | borrow of moved value | 避免使用已移动值；检查所有权 |
+| | E0503 | cannot use (value was moved) | 同上 |
+| | E0505 | cannot move out of (value is borrowed) | 缩短借用作用域；先 drop 借用 |
+| | E0507 | cannot move out of borrowed content | 用 `clone` 或重构所有权 |
+| **CE-T2**（数据竞争自由） | E0499 | cannot borrow as mutable more than once | 避免并发可变借用；用 channel |
+| | E0502 | cannot borrow as immutable (already borrowed as mutable) | 缩短可变借用作用域 |
+| | E0378 | Send/Sync 相关 | 跨线程用 `Arc`；确保 `T: Send + Sync` |
+| **CE-T3**（类型安全） | E0308 | mismatched types | 统一类型；检查 `From`/`Into` |
+| | E0277 | trait bound not satisfied | 满足泛型约束；`T: Trait` |
+| | E0433 | unresolved import | 检查 `pub`、模块路径 |
+
+**引用**：[ERROR_CODE_MAPPING](../../../02_reference/ERROR_CODE_MAPPING.md)

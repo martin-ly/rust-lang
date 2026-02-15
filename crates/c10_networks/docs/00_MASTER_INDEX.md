@@ -4,10 +4,13 @@
 > **使用方式**: 作为学习起点，根据需求选择合适的文档和代码模块
 > **相关文档**: [README](./README.md) | [FAQ](references/FAQ.md) | [Glossary](references/Glossary.md)
 
+📄 **一页纸总结**: [ONE_PAGE_SUMMARY](./ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
+
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
 |----------|------|--------------|
+| **RBE 练习** | [TCP](https://doc.rust-lang.org/rust-by-example/std_misc/net.html) | 网络基础实践 |
 | **Tokio** | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 异步网络 |
 | **Hyper** | [Hyper Guide](https://hyper.rs/guides/) | HTTP 实现 |
 | **Rust std** | [std::net](https://doc.rust-lang.org/std/net/) | TCP/UDP 基础 API |

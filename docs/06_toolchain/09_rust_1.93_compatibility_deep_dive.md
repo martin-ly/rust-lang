@@ -243,4 +243,4 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 
 ---
 
-**最后对照 releases.rs**: 2026-02-12
+**最后对照 releases.rs**: 2026-02-14

@@ -25,17 +25,17 @@
 
 ## 模块 → 官方章节映射
 
-| 项目模块 | 本项目路径 | The Rust Book | Rust by Example | Reference |
-|----------|------------|---------------|-----------------|-----------|
-| **C01 所有权** | crates/c01_ownership_borrow_scope | Ch 4 Understanding Ownership | [Scope](https://doc.rust-lang.org/rust-by-example/scope.html) | [Ownership](https://doc.rust-lang.org/reference/ownership.html) |
-| **C02 类型系统** | crates/c02_type_system | Ch 3 Types, Ch 10 Traits | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) | [Types](https://doc.rust-lang.org/reference/types.html) |
-| **C03 控制流** | crates/c03_control_fn | Ch 3 Control Flow, Ch 6 Enums | [Flow Control](https://doc.rust-lang.org/rust-by-example/flow_control.html) | [Statements](https://doc.rust-lang.org/reference/statements.html) |
+| 项目模块 | 本项目路径 | The Rust Book | RBE 练习（可点击） | Reference |
+|----------|------------|---------------|-------------------|-----------|
+| **C01 所有权** | crates/c01_ownership_borrow_scope | Ch 4 Understanding Ownership | [Scope](https://doc.rust-lang.org/rust-by-example/scope.html) · [Move](https://doc.rust-lang.org/rust-by-example/scope/move.html) · [Borrow](https://doc.rust-lang.org/rust-by-example/scope/borrow.html) · [Lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html) | [Ownership](https://doc.rust-lang.org/reference/ownership.html) |
+| **C02 类型系统** | crates/c02_type_system | Ch 3 Types, Ch 10 Traits | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) · [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) · [Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html) | [Types](https://doc.rust-lang.org/reference/types.html) |
+| **C03 控制流** | crates/c03_control_fn | Ch 3 Control Flow, Ch 6 Enums | [Flow Control](https://doc.rust-lang.org/rust-by-example/flow_control.html) · [Option](https://doc.rust-lang.org/rust-by-example/std/option.html) · [Error](https://doc.rust-lang.org/rust-by-example/error.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html) | [Statements](https://doc.rust-lang.org/reference/statements.html) |
 | **C04 泛型** | crates/c04_generic | Ch 10 Generic Types, Traits | [Generics](https://doc.rust-lang.org/rust-by-example/generics.html) | [Items](https://doc.rust-lang.org/reference/items/generics.html) |
-| **C05 线程** | crates/c05_threads | Ch 16 Fearless Concurrency | [Concurrency](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [Send/Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) |
+| **C05 线程** | crates/c05_threads | Ch 16 Fearless Concurrency | [Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [Send/Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) |
 | **C06 异步** | crates/c06_async | Ch 16 Async | [Async](https://doc.rust-lang.org/rust-by-example/async.html) | [Coroutines](https://doc.rust-lang.org/reference/items/coroutines.html) |
 | **C07 进程** | crates/c07_process | - | [Process](https://doc.rust-lang.org/rust-by-example/std_misc/process.html) | [Process](https://doc.rust-lang.org/std/process/) |
-| **C08 算法** | crates/c08_algorithms | - | [Error handling](https://doc.rust-lang.org/rust-by-example/error.html) | [Iterator](https://doc.rust-lang.org/std/iter/) |
-| **C09 设计模式** | crates/c09_design_pattern | Ch 17 OOP | [Functional](https://doc.rust-lang.org/rust-by-example/fn.html) | - |
+| **C08 算法** | crates/c08_algorithms | - | [Vectors](https://doc.rust-lang.org/rust-by-example/std/vec.html) · [HashMap](https://doc.rust-lang.org/rust-by-example/std/hash.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html) | [Iterator](https://doc.rust-lang.org/std/iter/) |
+| **C09 设计模式** | crates/c09_design_pattern | Ch 17 OOP | [Functional](https://doc.rust-lang.org/rust-by-example/fn.html) · [Structs](https://doc.rust-lang.org/rust-by-example/custom_types/structs.html) · [Enums](https://doc.rust-lang.org/rust-by-example/custom_types/enum.html) | - |
 | **C10 网络** | crates/c10_networks | - | [TCP](https://doc.rust-lang.org/rust-by-example/std_misc/net.html) | [net](https://doc.rust-lang.org/std/net/) |
 | **C11 宏** | crates/c11_macro_system | Ch 19 Macros | [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | [Macros](https://doc.rust-lang.org/reference/macros.html) |
 | **C12 WASM** | crates/c12_wasm | - | - | [wasm-bindgen](https://rustwasm.github.io/wasm-bindgen/) |
@@ -46,16 +46,16 @@
 
 | 官方章节 | 小节 | 本项目补充内容 |
 |----------|------|----------------|
-| **Book Ch 4** | 4.1-4.3 Ownership, Borrowing, Slices | 思维导图、决策树、证明树（[THINKING_REPRESENTATION_METHODS](./THINKING_REPRESENTATION_METHODS.md)）；边界特例（[EDGE_CASES](./EDGE_CASES_AND_SPECIAL_CASES.md)） |
+| **Book Ch 4** | 4.1-4.3 Ownership, Borrowing, Slices | 思维导图、决策树、证明树（[THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md)）；边界特例（[EDGE_CASES](../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md)） |
 | **Book Ch 10** | 10.1-10.3 Traits, Lifetimes | 型变理论、生命周期形式化（[research_notes](../research_notes/)）；转换树 |
-| **Reference** | Types, Ownership, Special Types | 形式化工程系统（[rust-formal-engineering-system](./rust-formal-engineering-system/)）；variance 专项 |
+| **Reference** | Types, Ownership, Special Types | 形式化工程系统（[rust-formal-engineering-system](../rust-formal-engineering-system/)）；variance 专项 |
 | **Reference** | Macros by Example, Procedural Macros | 宏系统决策树、反例（[macros_cheatsheet](../02_reference/quick_reference/macros_cheatsheet.md)） |
 | **Book Ch 16** | 16.1-16.3 Async | 空 Future、持锁跨 await 反例（[async_patterns](../02_reference/quick_reference/async_patterns.md)）；EDGE_CASES |
-| **Book Ch 3** | 3.1-3.5 Types, Control Flow | 控制流（[C03](../crates/c03_control_fn/docs/)）；模式匹配决策树 |
-| **Book Ch 9** | 9.1-9.3 Error Handling | 错误传播转换树（[THINKING_REPRESENTATION_METHODS](./THINKING_REPRESENTATION_METHODS.md)）；[error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
+| **Book Ch 3** | 3.1-3.5 Types, Control Flow | 控制流（[C03](../../crates/c03_control_fn/docs/)）；模式匹配决策树 |
+| **Book Ch 9** | 9.1-9.3 Error Handling | 错误传播转换树（[THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md)）；[error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
 | **Book Ch 11** | 11.1-11.3 Testing | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md)；#[test] 1.93 严格化（[09_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md)） |
 | **Reference** | Attributes, Macros | offset_of! 类型检查（1.93）；[macros_cheatsheet](../02_reference/quick_reference/macros_cheatsheet.md) |
-| **Reference** | Type system, Variance | [variance_theory](../research_notes/type_theory/variance_theory.md)；[PROOF_INDEX](./research_notes/PROOF_INDEX.md) |
+| **Reference** | Type system, Variance | [variance_theory](../research_notes/type_theory/variance_theory.md)；[PROOF_INDEX](../research_notes/PROOF_INDEX.md) |
 | **releases.rs** | 1.93 Language/Libraries | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md)；[07_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) |
 
 > 标注「本项目补充」表示官方资源未覆盖或简略，本项目提供额外深度。
@@ -79,10 +79,18 @@
 
 ## RBE 练习与 Rustlings 映射
 
-- **Rust by Example 练习**：各章节底部常有「练习」链接，可与本项目模块对应学习
-- **Rustlings 模块映射**：[exercises/RUSTLINGS_MAPPING.md](../../exercises/RUSTLINGS_MAPPING.md) — C01–C12 与 Rustlings 习题主题对应表
+- **RBE 练习**：上表「RBE 练习（可点击）」列提供各模块对应的 RBE 章节链接，可直接点击进入练习
+- **Rustlings 模块映射**：[exercises/RUSTLINGS_MAPPING.md](../../exercises/RUSTLINGS_MAPPING.md) — C01–C12 与 Rustlings 习题主题对应表（含可点击 GitHub 链接）
 
 ---
+
+## 形式化证明体系（2026-02-14）
+
+| 资源 | 说明 |
+|------|------|
+| [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) | 批判性分析与推进计划 |
+| [CORE_THEOREMS_FULL_PROOFS](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明（L2） |
+| [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | 国际对标 |
 
 ## 相关文档
 

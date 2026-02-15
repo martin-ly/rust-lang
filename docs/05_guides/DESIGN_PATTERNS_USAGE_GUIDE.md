@@ -350,9 +350,9 @@ impl Door<Open> {
 
 ## 📚 相关文档
 
-- [完整文档](../crates/c09_design_pattern/README.md)
-- [GoF 模式](../crates/c09_design_pattern/docs/tier_02_guides/01_创建型模式指南.md)
-- [Rust 特有模式](../crates/c09_design_pattern/docs/tier_02_guides/05_最佳实践与反模式.md)
+- [完整文档](../../crates/c09_design_pattern/README.md)
+- [GoF 模式](../../crates/c09_design_pattern/docs/tier_02_guides/01_创建型模式指南.md)
+- [Rust 特有模式](../../crates/c09_design_pattern/docs/tier_02_guides/05_最佳实践与反模式.md)
 
 ---
 

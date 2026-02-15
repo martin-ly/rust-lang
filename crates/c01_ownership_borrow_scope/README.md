@@ -16,19 +16,19 @@
 
 | Tier                                      | 名称       | 定位     | 适合      | 时间  |
 | ----------------------------------------- | ---------- | -------- | --------- | ----- |
-| **[Tier 1](./docs/tier1_foundation/)**    | 基础文档层 | 快速入门 | 🆕 新手   | 2-4h  |
+| **[Tier 1](./docs/tier_01_foundations/)** | 基础文档层 | 快速入门 | 🆕 新手   | 2-4h  |
 | **[Tier 2](./docs/tier_02_guides/)** | 核心概念层 | 系统掌握 | 💼 开发者 | 2-3天 |
 | **[Tier 3](./docs/tier_03_references/)**  | 高级应用层 | 深入实践 | 🏗️ 架构师 | 1-2周 |
-| **[Tier 4](./docs/tier4_theoretical/)**   | 理论深化层 | 学术研究 | 🔬 研究者 | 持续  |
+| **[Tier 4](./docs/tier_04_advanced/)**   | 理论深化层 | 学术研究 | 🔬 研究者 | 持续  |
 
 ### 🎯 快速开始
 
 根据你的水平选择起点：
 
-- 🟢 **完全新手**: [Tier 1: 项目概览](./docs/tier1_foundation/1.1_项目概览.md) → [快速开始指南](./docs/tier1_foundation/1.2_快速开始指南.md)
+- 🟢 **完全新手**: [Tier 1: 项目概览](./docs/tier_01_foundations/01_项目概览.md) → [快速开始指南](./docs/tier_01_foundations/1.2_快速开始指南.md)
 - 🟡 **有基础**: [Tier 2: 所有权快速入门](./docs/tier_02_guides/01_所有权快速入门.md)
 - 🔴 **进阶学习**: [Tier 3: 高级所有权模式](./docs/tier_03_references/06_高级所有权模式参考.md)
-- 🔬 **深入研究**: [Tier 4: 类型系统理论](./docs/tier4_theoretical/4.1_类型系统理论.md)
+- 🔬 **深入研究**: [Tier 4: 类型系统理论](./docs/tier_04_advanced/06_类型系统理论.md)
 
 📖 **完整导航**: [分层学习导航](./docs/TIER_NAVIGATION.md)
 
@@ -114,19 +114,19 @@
 
 #### Tier 4 理论深度指南 (3 份学术文档)
 
-- **🔬 [4.1 类型系统理论](./docs/tier4_theoretical/4.1_类型系统理论.md)** - 944 行
+- **🔬 [4.1 类型系统理论](./docs/tier_04_advanced/06_类型系统理论.md)** - 944 行
   - 仿射类型和线性类型理论详解
   - 区域推断算法 (NLL) 形式化
   - 所有权系统的数学基础
   - Substructural 类型系统研究
 
-- **📐 [4.2 形式化验证](./docs/tier4_theoretical/4.2_形式化验证.md)** - 629 行
+- **📐 [4.2 形式化验证](./docs/tier_04_advanced/07_形式化验证.md)** - 629 行
   - RustBelt 项目完整解析
   - Coq 和 Iris 框架应用
   - 类型健全性和内存安全性证明
   - Prusti/Creusot/Kani 工具实战
 
-- **📚 [4.3 学术研究](./docs/tier4_theoretical/4.3_学术研究.md)** - 519 行
+- **📚 [4.3 学术研究](./docs/tier_04_advanced/08_学术研究.md)** - 519 行
   - POPL/PLDI/OOPSLA 顶级论文综述
   - Rust 前沿研究方向 (View types, Session types)
   - 学术资源和研究起步指南
@@ -689,8 +689,8 @@ cargo test --example rust_190_rich_practical_examples
 - **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
 - **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 所有权系统对比矩阵
 - **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 所有权系统思维导图
-- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
-- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+- **[决策图网](../../docs/04_thinking/DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../docs/04_thinking/PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
 
 ## 📞 相关链接
 

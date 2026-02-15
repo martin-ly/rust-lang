@@ -74,7 +74,7 @@ fn main() {
 }
 ```
 
-**相关**: [01_theory/01_ownership_theory.md](./01_theory/01_ownership_theory.md)
+**相关**: [01_theory/06_类型系统理论.md](./tier_04_advanced/06_类型系统理论.md)
 
 ---
 
@@ -107,7 +107,7 @@ let s2 = s1; // 移动
 // println!("{}", s1); // 错误
 ```
 
-**相关**: [02_core/01_ownership_fundamentals.md](./02_core/01_ownership_fundamentals.md)
+**相关**: [02_core/01_所有权快速入门.md](./tier_02_guides/01_所有权快速入门.md)
 
 ---
 
@@ -138,7 +138,7 @@ let r1 = &s;
 let r2 = &mut s; // 错误
 ```
 
-**相关**: [02_core/02_borrowing_system.md](./02_core/02_borrowing_system.md)
+**相关**: [02_core/02_借用实践指南.md](./tier_02_guides/02_借用实践指南.md)
 
 ---
 
@@ -193,7 +193,7 @@ let r2 = &mut s;
 r2.push_str("!");
 ```
 
-**相关**: [05_practice/03_common_pitfalls.md](./05_practice/03_common_pitfalls.md)
+**相关**: [05_practice/03_common_pitfalls.md](./tier_01_foundations/04_常见问题.md)
 
 ---
 
@@ -233,7 +233,7 @@ struct ImportantExcerpt<'a> {
 2. 只有一个输入生命周期，返回值使用该生命周期
 3. 方法中，返回值使用 `&self` 的生命周期
 
-**相关**: [02_core/03_lifetime_annotations.md](./02_core/03_lifetime_annotations.md)
+**相关**: [02_core/03_生命周期实践.md](./tier_02_guides/03_生命周期实践.md)
 
 ---
 
@@ -259,7 +259,7 @@ let leaked: &'static str = Box::leak(Box::new(String::from("hello")));
 
 **注意**: 不要过度使用 `'static`，大多数情况下应该使用适当的生命周期标注。
 
-**相关**: [03_advanced/03_advanced_lifetimes.md](./03_advanced/03_advanced_lifetimes.md)
+**相关**: [03_advanced/03_生命周期参考.md](./tier_03_references/03_生命周期参考.md)
 
 ---
 
@@ -293,7 +293,7 @@ fn no_dangle() -> String {
 }
 ```
 
-**相关**: [04_safety/01_memory_safety.md](./04_safety/01_memory_safety.md)
+**相关**: [04_safety/01_memory_safety.md](./tier_03_references/08_内存安全参考.md)
 
 ---
 
@@ -352,7 +352,7 @@ impl SelfReferential {
 }
 ```
 
-**相关**: [03_advanced/04_smart_pointers.md](./03_advanced/04_smart_pointers.md)
+**相关**: [03_advanced/05_智能指针API参考.md](./tier_03_references/05_智能指针API参考.md)
 
 ---
 
@@ -391,7 +391,7 @@ thread::spawn(move || {
 });
 ```
 
-**相关**: [03_advanced/04_smart_pointers.md](./03_advanced/04_smart_pointers.md)
+**相关**: [03_advanced/05_智能指针API参考.md](./tier_03_references/05_智能指针API参考.md)
 
 ---
 
@@ -442,7 +442,7 @@ fn append(v: &mut Vec<i32>, value: i32) {
 }
 ```
 
-**相关**: [05_practice/04_performance_tuning.md](./05_practice/04_performance_tuning.md)
+**相关**: [05_practice/04_performance_tuning.md](./tier_03_references/09_性能优化参考.md)
 
 ---
 
@@ -451,8 +451,8 @@ fn append(v: &mut Vec<i32>, value: i32) {
 - [主索引](./00_MASTER_INDEX.md) - 完整文档导航
 - [README](./README.md) - 项目概述
 - [Glossary](./Glossary.md) - 核心术语表
-- [理论基础](./01_theory/01_ownership_theory.md) - 深入理论
-- [最佳实践](./05_practice/02_best_practices.md) - 实践指南
+- [理论基础](./tier_04_advanced/06_类型系统理论.md) - 深入理论
+- [最佳实践](./tier_01_foundations/04_常见问题.md) - 实践指南
 
 ---
 
@@ -460,4 +460,4 @@ fn append(v: &mut Vec<i32>, value: i32) {
 
 - 查看 [示例代码](../examples/)
 - 运行 [测试用例](../tests/)
-- 阅读 [核心文档](./02_core/)
+- 阅读 [核心文档](./tier_02_guides/)

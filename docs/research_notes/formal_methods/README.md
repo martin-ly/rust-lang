@@ -4,6 +4,7 @@
 > **最后更新**: 2026-02-12（国际权威对标补全：Tree Borrows、Polonius、FLS 采纳）
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ **100% 完成**；Rust 1.93 语言特性全面论证见 [00_completeness_gaps](00_completeness_gaps.md)
+> **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../../DOCS_STRUCTURE_OVERVIEW.md) § 2.7 formal_methods
 
 ---
 
@@ -20,10 +21,22 @@
 
 ---
 
+## 控制流形式化
+
+**Axiom A-CF1（控制流归约保持）**：若 $e$ 为控制流表达式（`if`/`loop`/`match`/`for`/`?`），$e \to e'$ 为一步归约，则 $\Gamma \vdash e : \tau \land e \to e' \Rightarrow \Gamma \vdash e' : \tau$。即控制流归约保持类型与所有权。
+
+**与子文档衔接**：
+
+- [borrow_checker_proof](borrow_checker_proof.md) Def MATCH1/FOR1/QUERY1、定理 MATCH-T1/FOR-T1/QUERY-T1
+- [type_system_foundations](../type_theory/type_system_foundations.md) 定理 T2（保持性）、T3（类型安全）
+
+---
+
 ## 📊 目录
 
 - [🔬 形式化方法研究](#-形式化方法研究)
   - [✅ 完备性声明](#-完备性声明)
+  - [控制流形式化](#控制流形式化)
   - [📊 目录](#-目录)
   - [🎯 研究目标](#-研究目标)
   - [📚 研究主题](#-研究主题)
@@ -140,19 +153,50 @@
 
 ---
 
+### 6. Send/Sync 形式化
+
+**研究问题**:
+
+- Send/Sync 的形式化定义与属性关系？
+- 与 thread::spawn、Future、Arc 的衔接？
+- 反例（Rc !Send、Cell !Sync）与数据竞争自由？
+
+**相关笔记**: [send_sync_formalization.md](./send_sync_formalization.md)
+
+**状态**: ✅ 已完成 (100%)
+
+---
+
+## formal_methods 六篇并表
+
+下表为本目录六篇核心文档的**概念×公理×定理×证明方法×反例**并表；用于跨篇对比与 [HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) 衔接。各子文档内可注明「本概念在 README §formal_methods 六篇并表 第 x 行」。
+
+| 概念 | 公理/定义 | 定理 | 证明方法 | 反例 |
+| :--- | :--- | :--- | :--- | :--- |
+| **所有权** | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 结构归纳、反证 | [ownership_model](ownership_model.md) 使用已移动值、双重释放 |
+| **借用** | 规则 5–8 | T1 数据竞争自由, T2 | 规则归纳 | [borrow_checker_proof](borrow_checker_proof.md) 双重可变借用 |
+| **生命周期** | Axiom LF1–LF2, Def 1.4, $\ell \subseteq \text{lft}$ | LF-T1–T3 引用有效性 | 三步骤、约束求解 | [lifetime_formalization](lifetime_formalization.md) 返回局部引用、存储短生命周期 |
+| **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | T6.1 状态一致, T6.2 并发安全, T6.3 进度 | 归纳+案例分析 | [async_state_machine](async_state_machine.md) 非 Send 跨线程、移动未 Pin |
+| **Pin** | Def 1.1–2.2（位置稳定、自引用） | T1–T3 Pin 保证/自引用/投影 | 类型系统、位置稳定 | [pin_self_referential](pin_self_referential.md) 移动未 Pin 自引用 |
+| **Send/Sync** | Def SEND1, SYNC1；SYNC-L1 $T:\text{Sync} \Leftrightarrow \&T:\text{Send}$ | SEND-T1, SYNC-T1, SEND-SYNC-T1 | 与 borrow/async 衔接 | [send_sync_formalization](send_sync_formalization.md) Rc !Send、Cell !Sync、非 Send spawn |
+
+*控制流*：A-CF1 见本 README「控制流形式化」；变量 Def 1.4/1.5 见 ownership_model。
+
+---
+
 ## 形式化论证汇总
 
-**Def FM1（形式化方法覆盖）**：设 $\mathcal{M}$ 为形式化方法族，$\mathcal{M} = \{\text{ownership},\, \text{borrow},\, \text{lifetime},\, \text{async},\, \text{pin}\}$。每 $m \in \mathcal{M}$ 有 Def、Axiom、Theorem 及证明。
+**Def FM1（形式化方法覆盖）**：设 $\mathcal{M}$ 为形式化方法族，$\mathcal{M} = \{\text{ownership},\, \text{borrow},\, \text{lifetime},\, \text{async},\, \text{pin},\, \text{send\_sync}\}$。每 $m \in \mathcal{M}$ 有 Def、Axiom、Theorem 及证明。
 
 **Axiom FM1**：形式化方法族 $\mathcal{M}$ 覆盖 Rust 内存安全、并发安全、引用有效性的核心机制；各机制定理可组合。
 
 **定理 FM-T1（形式化完备性）**：若程序 $P$ 满足 $\mathcal{M}$ 中全部定理，则 $P$ 满足内存安全、数据竞争自由、引用有效性。
 
-*证明*：由 ownership T2/T3、borrow T1、lifetime T2、async T6.2、pin T1–T3；各定理分别保证不同性质，组合无冲突。∎
+*证明*：由 ownership T2/T3、borrow T1、lifetime T2、async T6.2、pin T1–T3、send_sync SEND-T1/SYNC-T1；各定理分别保证不同性质，组合无冲突。∎
 
-**引理 FM-L1（族内定理无循环依赖）**：$\mathcal{M}$ 中 ownership、borrow、lifetime、async、pin 的定理依赖链无环；ownership 为 borrow 上游，borrow 与 lifetime 为 async 上游。
+**引理 FM-L1（族内定理无循环依赖）**：$\mathcal{M}$ 中 ownership、borrow、lifetime、async、pin、send_sync 的定理依赖链无环；ownership 为 borrow 上游；async 与 spawn 依赖 Send/Sync；send_sync 与 borrow/async 衔接。
 
-*证明*：由各文档定义；ownership 规则 1–3 为 borrow 规则 5–8 前提；lifetime 与 borrow 关联；async 依赖 Pin 与 Send/Sync；依赖图无环。∎
+*证明*：由各文档定义；ownership 规则 1–3 为 borrow 规则 5–8 前提；lifetime 与 borrow 关联；async 依赖 Pin 与 Send/Sync；send_sync 独立成篇且被 async/spawn/Arc 引用；依赖图无环。∎
 
 **推论 FM-C1**：若 $P$ 违反 $\mathcal{M}$ 中任一定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
 
@@ -170,6 +214,7 @@
 | [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、NLL |
 | [async_state_machine](./async_state_machine.md) | T6.1–T6.3 状态一致性、并发安全、进度 | Future 状态机、Pin |
 | [pin_self_referential](./pin_self_referential.md) | Pin 不变式、T1–T3 自引用安全 | 堆/栈区分、!Unpin |
+| [send_sync_formalization](./send_sync_formalization.md) | Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1 | 跨线程转移/共享、与 spawn/Future/Arc 衔接 |
 
 本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 衔接。
 
@@ -185,6 +230,7 @@
 - [x] [异步状态机形式化](./async_state_machine.md) - 100%
 - [x] [生命周期形式化](./lifetime_formalization.md) - 100%
 - [x] [Pin 和自引用类型形式化](./pin_self_referential.md) - 100%
+- [x] [Send/Sync 形式化](./send_sync_formalization.md) - 100%；Def SEND1/SYNC1、SEND-T1/SYNC-T1、与 spawn/Future/Arc 衔接
 
 ---
 
@@ -328,4 +374,4 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 
 **维护团队**: Rust Formal Methods Research Group
 **最后更新**: 2026-02-12
-**状态**: ✅ **100% 完成**；Phase 1–6 全部补全，见 [00_completeness_gaps](00_completeness_gaps.md)
+**状态**: ✅ **100% 完成**；Phase 1–6 全部补全，见 [00_completeness_gaps](00_completeness_gaps.md)。**意见与可持续推进**（Send/Sync 独立形式化、安全可判定机制全面梳理、完备特性对比、思维表征四类绑定）：[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)。**完备性检查表**（六篇×六维）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。

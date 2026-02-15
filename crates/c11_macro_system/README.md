@@ -9,7 +9,7 @@
 > **Rust版本**: 1.93.0+ (Edition 2024)
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
-**思维表征**: [决策图网](../../docs/DECISION_GRAPH_NETWORK.md) | [证明图网](../../docs/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../docs/THINKING_REPRESENTATION_METHODS.md)
+**思维表征**: [决策图网](../../docs/04_thinking/DECISION_GRAPH_NETWORK.md) | [证明图网](../../docs/04_thinking/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../docs/04_thinking/THINKING_REPRESENTATION_METHODS.md)
 
 ## 🎯 2025-10-22 文档标准化完成 ✨
 
@@ -244,7 +244,7 @@ cargo test declarative_tests
 
 **Week 1: 宏基础**:
 
-1. 阅读理论文档 → `docs/01_theory/`
+1. 阅读理论文档 → `docs/tier_02_guides/01_声明宏实践指南.md`
 2. 学习声明宏基础 → `docs/02_declarative/01_macro_rules_basics.md`
 3. 实践基础示例 → `examples/01_*.rs`
 

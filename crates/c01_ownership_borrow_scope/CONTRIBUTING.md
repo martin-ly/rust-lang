@@ -311,10 +311,10 @@ Closes #issue-number
 
 ```text
 docs/
-├── tier1_foundation/      # 基础入门 (Tier 1)
+├── tier_01_foundations/   # 基础入门 (Tier 1)
 ├── tier_02_guides/        # 核心概念 (Tier 2)
 ├── tier_03_references/    # 高级实践 (Tier 3)
-└── tier4_theoretical/     # 理论深度 (Tier 4)
+└── tier_04_advanced/     # 理论深度 (Tier 4)
 ```
 
 ### 文档标准

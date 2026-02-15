@@ -2,6 +2,7 @@
 
 > **项目主页**: [返回主 README](../README.md)
 > **主索引**: [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) - 按主题分类的完整文档导航
+> **完整结构**: [DOCS_STRUCTURE_OVERVIEW.md](./DOCS_STRUCTURE_OVERVIEW.md) - 按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖 docs
 
 ---
 

@@ -1,7 +1,7 @@
 # 研究笔记快速查找
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-14
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ **研究笔记系统 100% 完成**（全面检查推进计划 Phase 1–8）
 
@@ -26,6 +26,8 @@
     - [实验研究](#实验研究)
     - [综合研究](#综合研究)
   - [🎯 按研究目标查找](#-按研究目标查找)
+    - [我想看完整总结与论证脉络](#我想看完整总结与论证脉络)
+    - [我想看批判性意见与改进计划](#我想看批判性意见与改进计划)
     - [我想证明某个性质](#我想证明某个性质)
     - [我想理解某个概念](#我想理解某个概念)
     - [我想优化性能](#我想优化性能)
@@ -43,6 +45,8 @@
 
 ## 🎯 使用说明
 
+**首次使用？** 建议先看 [00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md) 按目标选路径。
+
 本文档提供研究笔记的快速查找功能，帮助您快速找到需要的研究笔记。
 
 **查找方式**:
@@ -55,6 +59,15 @@
 ---
 
 ## 🔍 按关键词查找
+
+### 形式语言与形式证明
+
+| 关键词     | 相关研究笔记                                               | 状态    |
+| :--- | :--- | :--- |
+| 形式语言   | [形式语言与形式证明](./FORMAL_LANGUAGE_AND_PROOFS.md)      | ✅ 100% |
+| 形式证明   | [形式语言与形式证明](./FORMAL_LANGUAGE_AND_PROOFS.md)      | ✅ 100% |
+| 推理规则   | [形式语言与形式证明](./FORMAL_LANGUAGE_AND_PROOFS.md)      | ✅ 100% |
+| 操作语义   | [形式语言与形式证明](./FORMAL_LANGUAGE_AND_PROOFS.md)      | ✅ 100% |
 
 ### 所有权和借用
 
@@ -103,6 +116,9 @@
 | 执行确定性 | [06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md) | ✅ Def EB-DET1、确定性判定树 |
 | 组件成熟度 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | ✅ Def CE-MAT1、L1–L4 |
 | 并发安全    | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
+| Send/Sync   | [Send/Sync 形式化](./formal_methods/send_sync_formalization.md)、[异步状态机形式化](./formal_methods/async_state_machine.md)、[设计机制论证](./DESIGN_MECHANISM_RATIONALE.md) §Send/Sync | ✅ Def SEND1/SYNC1、SEND-T1/SYNC-T1；六篇并表 |
+| 安全可判定机制 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md) | ✅ 总览每机制一节；并发+Trait 族四维表；阶段 A–D 已完成 |
+| formal_methods 完备性 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md) | ✅ 六篇×六维自检（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
 
 ### 性能优化
 
@@ -133,6 +149,7 @@
 
 | 研究笔记                                                           | 研究目标                                    | 状态      | 完成度 |
 | :--- | :--- | :--- | :--- |
+| [形式语言与形式证明](./FORMAL_LANGUAGE_AND_PROOFS.md)             | 推理规则、操作语义、判定形式、形式证明推导树 | ✅ 已完成 | 100%   |
 | [所有权模型形式化](./formal_methods/ownership_model.md)            | 形式化定义所有权系统，证明内存安全          | ✅ 已完成 | 100%   |
 | [借用检查器证明](./formal_methods/borrow_checker_proof.md)         | 形式化定义借用检查器，证明数据竞争自由      | ✅ 已完成 | 100%   |
 | [异步状态机形式化](./formal_methods/async_state_machine.md)        | 形式化定义 Future/Poll 状态机，证明并发安全 | ✅ 已完成 | 100%   |
@@ -191,7 +208,26 @@
 
 ## 🎯 按研究目标查找
 
+### 我想看完整总结与论证脉络
+
+- **完整总结综合** → [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)（项目全貌、三大支柱、知识地图、论证总览）
+- **论证脉络关系** → [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md)（论证五步法、概念→定理 DAG、文档依赖、论证思路示例）
+
+### 我想看批判性意见与改进计划
+
+- **批判性分析与可持续改进计划** → [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](./RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)（概念定义/属性关系/解释论证/多维矩阵/层次化/思维表征 缺口；建议 P0–P3；四阶段可持续推进任务与计划）
+- **层次化映射总结** → [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)（文档树、概念族↔文档↔Def/定理、文档↔思维表征、文档依赖）
+
 ### 我想证明某个性质
+
+**形式化证明体系**（2026-02-14 完成）:
+
+- **批判性分析与推进计划** → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+- **核心定理完整证明** → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)（L2 级 ownership T2、borrow T1、type T3）
+- **Coq 证明骨架** → [coq_skeleton](./coq_skeleton/)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)
+- **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[RUSTBELT_ALIGNMENT](./RUSTBELT_ALIGNMENT.md)
+- **三大支柱与推进计划** → [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](./RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md)（公理系统、表达力、组合法则）
+- **工具对接** → [Aeneas 集成计划](./AENEAS_INTEGRATION_PLAN.md)、[coq-of-rust 集成计划](./COQ_OF_RUST_INTEGRATION_PLAN.md)
 
 **形式化方法研究**:
 
@@ -263,7 +299,7 @@
 2. [Trait 系统形式化](./type_theory/trait_system_formalization.md) - 35% 完成度
 3. [生命周期形式化](./type_theory/lifetime_formalization.md) - 35% 完成度
 4. [性能基准测试](./experiments/performance_benchmarks.md) - 30% 完成度
-5. [内存分析](./experiments/memory_analysis.md) - 30% 完成度
+5. [内存分析](./experiments/memory_analysis.md) - 100% 完成度
 6. [编译器优化](./experiments/compiler_optimizations.md) - 30% 完成度
 7. [并发性能研究](./experiments/concurrency_performance.md) - 30% 完成度
 8. [实际应用案例研究](./practical_applications.md) - 25% 完成度

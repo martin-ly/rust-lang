@@ -190,6 +190,42 @@
 
 ---
 
+## 23 模式多维对比矩阵
+
+下表为 23 种设计模式的**概念定义/属性关系/表达力**多维对比；每行链接到对应模式文档。用于选型与「文档↔矩阵」双向追溯（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../HIERARCHICAL_MAPPING_AND_SUMMARY.md)）。
+
+| 模式 | 所有权特征 | 借用特征 | 安全边界 | 典型场景 | Rust 机制衔接 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| [Factory Method](01_creational/factory_method.md) | 工厂返回拥有 | 多态创建只读/可变 | 纯 Safe | 单产品多态创建 | trait 返回 `impl Trait`/Box |
+| [Abstract Factory](01_creational/abstract_factory.md) | 产品族拥有 | 族内一致 | 纯 Safe | 产品族、风格一致 | 关联类型、枚举族 |
+| [Builder](01_creational/builder.md) | `build(self)` 消费 | 链式 `self` 移动 | 纯 Safe | 多步骤、可选参数 | 链式 + 所有权消费 |
+| [Prototype](01_creational/prototype.md) | 克隆新拥有 | 可借出只读 | 纯 Safe | 克隆已有对象 | `Clone` |
+| [Singleton](01_creational/singleton.md) | 全局唯一拥有 | 共享只读/同步可变 | 纯 Safe（OnceLock） | 全局唯一实例 | `OnceLock`、`LazyLock` |
+| [Adapter](02_structural/adapter.md) | 包装拥有 inner | 委托 `&self` | 纯 Safe | 适配已有接口 | 包装 + `impl Trait for Wrapper` |
+| [Bridge](02_structural/bridge.md) | 抽象持实现 | trait 解耦 | 纯 Safe | 抽象与实现解耦 | trait 对象/泛型 |
+| [Composite](02_structural/composite.md) | 树递归拥有 | 遍历借用 | 纯 Safe | 树状结构 | `Vec<Node>`、枚举递归 |
+| [Decorator](02_structural/decorator.md) | 包装拥有 inner | 委托 `&self`/`&mut` | 纯 Safe | 链式扩展行为 | 包装 + 委托 |
+| [Facade](02_structural/facade.md) | 聚合多子组件 | 内部借用 | 纯 Safe | 简化多接口 | 模块/结构体聚合 |
+| [Flyweight](02_structural/flyweight.md) | 共享不可变 | `Arc` 共享读 | 纯 Safe | 共享不可变 | `Arc` + `HashMap` |
+| [Proxy](02_structural/proxy.md) | 延迟拥有目标 | 委托访问 | 纯 Safe | 控制访问、延迟 | 委托、OnceLock |
+| [Chain](03_behavioral/chain_of_responsibility.md) | 链节点拥有 next | 沿链借用 | 纯 Safe | 请求沿链传递 | `Option<Box<Handler>>` |
+| [Command](03_behavioral/command.md) | 封装操作拥有 | 执行时借用 | 纯 Safe | 封装操作、可撤销 | `Fn`、trait |
+| [Interpreter](03_behavioral/interpreter.md) | AST 拥有子节点 | 求值只读 | 纯 Safe | 表达式求值 | 枚举 AST + match |
+| [Iterator](03_behavioral/iterator.md) | 迭代器持有状态 | `&mut self` next | 纯 Safe | 顺序遍历 | `Iterator` trait |
+| [Mediator](03_behavioral/mediator.md) | 中介持同事 | channel/引用 | 纯 Safe | 多对象协调 | 结构体、channel |
+| [Memento](03_behavioral/memento.md) | 快照拥有状态 | 恢复时消费 | 纯 Safe | 保存/恢复状态 | Clone、serde |
+| [Observer](03_behavioral/observer.md) | 主题/订阅者 | channel 转移所有权 | 纯 Safe | 一对多通知 | channel、回调 |
+| [State](03_behavioral/state.md) | 状态机拥有当前 | 转换借用 | 纯 Safe | 状态转换 | 枚举、类型状态 |
+| [Strategy](03_behavioral/strategy.md) | 持有策略 trait | 运行时多态 | 纯 Safe | 可替换算法 | trait |
+| [Template Method](03_behavioral/template_method.md) | 骨架拥有 | 钩子 `&self` | 纯 Safe | 算法骨架 | trait 默认方法 |
+| [Visitor](03_behavioral/visitor.md) | 访问者拥有 | 遍历只读/可变 | 纯 Safe | 树遍历 | match + trait |
+
+*安全边界*：当前 23 模式均为纯 Safe；若某模式扩展使用 `unsafe`，见 [04_boundary_matrix](04_boundary_matrix.md)、[05_boundary_system](../05_boundary_system/README.md)。
+
+**选型决策树（按需求选模式）**：见 [03_semantic_boundary_map §按需求反向查模式](../02_workflow_safe_complete_models/03_semantic_boundary_map.md#按需求反向查模式)（快速查找表 + 决策树精简）；本矩阵与彼处一一对应。
+
+---
+
 ## 常见模式组合
 
 | 组合 | 说明 |
@@ -261,3 +297,21 @@
 | Memento | 恢复非法状态 → 不变式违反 |
 | Iterator | 迭代中修改集合 → 借用冲突 |
 | Prototype | Clone 浅拷贝共享 → 隐式耦合 |
+
+---
+
+## 反例→错误码映射（D1.4）
+
+| 模式反例 | 典型错误码 | 典型信息 | 修复方向 |
+| :--- | :--- | :--- | :--- |
+| Singleton：Rc 跨线程 | E0378 | `Rc` cannot be sent between threads | 用 `Arc`；`T: Send + Sync` |
+| Observer：双重可变借用 | E0499 | cannot borrow as mutable more than once | 用 channel 替代共享可变 |
+| Composite：循环引用 | E0382 / 运行时 | borrow of moved value / 引用环 | 用 `Weak` 打破环；或重构 |
+| Builder：使用已移动值 | E0382 | borrow of moved value | 链式返回 `self`；`build(self)` 消费 |
+| Memento：非法状态恢复 | 运行时 | panic / 不变式违反 | 校验恢复状态；用 `Result` |
+| Iterator：迭代中修改 | E0502 | cannot borrow (already borrowed as mutable) | 不用 `&mut`  during iteration |
+| Prototype：浅拷贝共享可变 | E0499 / 运行时 | 数据竞争 / 隐式耦合 | 深拷贝 `Clone`；或显式共享 `Arc` |
+| Flyweight：Rc 跨线程 | E0378 | `Rc` cannot be sent | 跨线程用 `Arc` |
+| Mediator：跨线程传 Rc | E0378 | `Rc` cannot be sent | 用 `Arc<Mutex<T>>` 或 channel |
+
+**引用**：[ERROR_CODE_MAPPING](../../../02_reference/ERROR_CODE_MAPPING.md)、[04_compositional_engineering 组合反例→错误映射](../../04_compositional_engineering/README.md#组合反例编译错误映射ce-t1t2t3)。

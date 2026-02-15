@@ -236,22 +236,22 @@ cargo run --example rust_190_rich_practical_examples
 
 ### Day 3-4: 深入核心
 
-- [ ] 阅读 [所有权理论](./01_theory/01_ownership_theory.md)
-- [ ] 阅读 [借用理论](./01_theory/02_borrowing_theory.md)
+- [ ] 阅读 [所有权理论](./tier_04_advanced/06_类型系统理论.md)
+- [ ] 阅读 [借用理论](./tier_04_advanced/06_类型系统理论.md)
 - [ ] 完成 [多维矩阵对比](./MULTIDIMENSIONAL_MATRIX.md) 阅读
 - [ ] 运行所有核心示例（示例14-17）
 
 ### Day 5-6: 应用实战
 
-- [ ] 阅读 [智能指针系统](./03_advanced/04_smart_pointers.md)
-- [ ] 阅读 [并发安全](./04_safety/02_concurrency_safety.md)
+- [ ] 阅读 [智能指针系统](./tier_03_references/05_智能指针API参考.md)
+- [ ] 阅读 [并发安全](../tier_04_advanced/05_跨线程所有权.md)
 - [ ] 运行所有应用示例（示例18-21）
 - [ ] 完成小项目：实现一个简单的缓存
 
 ### Day 7: 综合提升
 
-- [ ] 阅读 [最佳实践](./05_practice/02_best_practices.md)
-- [ ] 研究 [设计模式](./05_practice/01_design_patterns.md)
+- [ ] 阅读 [最佳实践](../tier_01_foundations/04_常见问题.md)
+- [ ] 研究 [设计模式](../tier_02_guides/07_实战项目集.md)
 - [ ] 完成 [LRU缓存项目](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#51-完整项目安全的并发缓存)
 - [ ] 总结一周学习成果
 

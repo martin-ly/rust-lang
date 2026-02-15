@@ -28,7 +28,7 @@
   - [五、缓存行对齐与并发](#五缓存行对齐与并发)
     - [5.1 伪共享（False Sharing）](#51-伪共享false-sharing)
     - [5.2 数据局部性：AoS vs SoA](#52-数据局部性aos-vs-soa)
-    - [5.3 工具验证](#53-工具验证)
+    - [5.3 工具验证与量化数据](#53-工具验证与量化数据)
   - [六、权威来源（非技术对齐）](#六权威来源非技术对齐)
   - [七、对齐选型决策树](#七对齐选型决策树)
   - [八、相关文档与示例](#八相关文档与示例)
@@ -288,6 +288,7 @@ struct CacheLinePadded {
 - **基准测试**：`cargo bench -p c05_threads --bench false_sharing_bench`
 
 **实测数据**（x64，双线程各 10 万次 fetch_add）：
+
 - 伪共享（BadCounters）：~1.55 ms
 - 缓存行隔离（GoodCounters）：~465 µs
 - **约 3.3x 加速**

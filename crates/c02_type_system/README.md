@@ -46,7 +46,7 @@
     - [📖 术语查询](#-术语查询)
   - [🎯 项目愿景](#-项目愿景)
   - [🔖 版本特性文档](#-版本特性文档)
-    - [Rust 1.93.0 (最新)](#rust-1920-最新)
+    - [Rust 1.93.0 (最新)](#rust-1930-最新)
     - [Rust 1.89 (历史版本)](#rust-189-历史版本)
   - [📦 Cargo 包管理文档](#-cargo-包管理文档)
     - [🔬 形式化理论](#-形式化理论)
@@ -113,32 +113,23 @@
 
 ### 🔬 深度分析专区 (38文档，10,000+行)
 
-#### **[Analysis 目录](./docs/analysis/)** - 研究者和高级开发者的宝库
+#### **深度分析资源** - 研究者和高级开发者的宝库
 
-- **[知识增强体系](./docs/analysis/knowledge_enhanced/)** (29文档)
-  - 知识图谱 + 概念本体 + 关系网络
-  - 6个多维对比矩阵 (类型/泛型/生命周期/转换/所有权/演化)
-  - 6个思维导图 (类型系统/泛型/Trait/生命周期/所有权/推断)
-  - 5个理论基础文档
-
-- **[Rust理论基础](./docs/analysis/rust_theory/)** (9文档)
-  - 类型系统理论、仿射类型理论
-  - 范畴论、同伦类型理论
-  - 线性类型论、子类型理论
-  - 类型推断理论
+- **[类型理论研究](../../docs/research_notes/type_theory/README.md)** - 知识图谱、概念关系
+- **[多维概念矩阵](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** - 类型/泛型/生命周期对比
+- **[类型理论深度](./docs/tier_04_advanced/01_类型理论深度.md)** - 类型系统理论、范畴论
 
 **适合**: 深入理论，可视化学习，建立全局认知
 
 ---
 
-### 📚 实用附录 (18+文档，8,000+行)
+### 📚 实用附录
 
-#### **[Appendices 目录](./docs/appendices/)** - 实战指南和补充资源
+#### **实战与参考** - 按需查阅
 
-- **[安全性指南](./docs/appendices/01_安全性指南/)** - 内存/类型/性能/FFI安全
-- **[实践指南](./docs/appendices/02_实践指南/)** - 设计模式/最佳实践/常见陷阱
-- **[Rust特性](./docs/appendices/03_Rust特性/)** - Rust 1.89-1.93.0+完整特性（历史版本已标记）
-- **[历史文档](./docs/appendices/04_历史文档/)** - 项目演化报告归档
+- **[实战项目集](./docs/tier_02_guides/07_实战项目集.md)** - 实战案例
+- **[类型转换参考](./docs/tier_03_references/01_类型转换参考.md)** - From/Into/As
+- **[Rust 1.92 类型系统改进](./docs/RUST_192_TYPE_SYSTEM_IMPROVEMENTS.md)** - 版本特性
 
 **适合**: 按需查阅，实战参考
 
@@ -181,7 +172,7 @@
 | **初学者** | [项目概览](./docs/tier_01_foundations/01_项目概览.md) → [基础类型指南](./docs/tier_02_guides/01_基础类型指南.md)    | 1-2周    |
 | **开发者** | [主索引导航](./docs/tier_01_foundations/02_主索引导航.md) → 按需查阅 Tier 2-3                                       | 按需     |
 | **架构师** | [高级泛型模式](./docs/tier_04_advanced/02_高级泛型模式.md) + [设计模式集](./docs/tier_04_advanced/05_设计模式集.md) | 3-4天    |
-| **研究者** | [Analysis目录](./docs/analysis/) → [类型系统形式化](./docs/tier_04_advanced/03_类型系统形式化.md)                   | 1-2周    |
+| **研究者** | [类型理论研究](../../docs/research_notes/type_theory/README.md) → [类型系统形式化](./docs/tier_04_advanced/03_类型系统形式化.md) | 1-2周    |
 
 ### ⚡ 快速查询
 
@@ -194,8 +185,8 @@
 
 **想深入？**
 
-- **可视化学习** → [知识图谱](./docs/analysis/knowledge_enhanced/)
-- **理论深度** → [Rust理论](./docs/analysis/rust_theory/)
+- **可视化学习** → [多维概念矩阵](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)
+- **理论深度** → [类型理论研究](../../docs/research_notes/type_theory/README.md)
 - **设计参考** → [设计模式集](./docs/tier_04_advanced/05_设计模式集.md)
 
 ---
@@ -441,8 +432,8 @@ Week 2:
 - **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
 - **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 类型系统对比矩阵
 - **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 类型系统思维导图
-- **[决策图网](../../docs/DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
-- **[证明图网](../../docs/PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+- **[决策图网](../../docs/04_thinking/DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../docs/04_thinking/PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
 
 ---
 

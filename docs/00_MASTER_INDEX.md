@@ -1,8 +1,11 @@
 # 文档中心 - 主索引
 
 > **创建日期**: 2026-02-13
+> **最后更新**: 2026-02-15
+> **Rust 版本**: 1.93.0+ (Edition 2024)
 > **用途**: 文档总入口，按主题分类导航
 > **状态**: 100% 完成（阶段 1–4 + 链接修复）
+> **完整结构**: [DOCS_STRUCTURE_OVERVIEW](./DOCS_STRUCTURE_OVERVIEW.md)（按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖）
 
 ---
 
@@ -10,6 +13,8 @@
 
 | 主题 | 入口 | 说明 |
 |------|------|------|
+| **📋 完整结构总览** | [DOCS_STRUCTURE_OVERVIEW](./DOCS_STRUCTURE_OVERVIEW.md) | 按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖 docs |
+| **一页纸总结** | [ONE_PAGE_SUMMARY_TEMPLATE](./07_project/ONE_PAGE_SUMMARY_TEMPLATE.md) | C01–C12 模块速览（12/12 完成） |
 | **学习路径** | [01_learning](#01-学习路径与导航) | 学习规划、官方资源映射 |
 | **速查参考** | [02_reference](#02-参考与速查) | 20 个速查卡、边界特例、标准库 |
 | **形式化理论** | [03_theory](#03-理论与形式化) | 研究笔记、证明索引 |
@@ -56,8 +61,20 @@
 | 文档/目录 | 说明 |
 |-----------|------|
 | [research_notes/](./research_notes/) | 形式化方法、类型理论、软件设计理论（主内容） |
+| [00_ORGANIZATION_AND_NAVIGATION](./research_notes/00_ORGANIZATION_AND_NAVIGATION.md) | 研究笔记组织架构与按目标导航（首次使用入口） |
+| [00_COMPREHENSIVE_SUMMARY](./research_notes/00_COMPREHENSIVE_SUMMARY.md) | 完整总结综合（项目全貌、知识地图、论证总览） |
+| [ARGUMENTATION_CHAIN_AND_FLOW](./research_notes/ARGUMENTATION_CHAIN_AND_FLOW.md) | 论证脉络关系与论证思路（DAG、文档依赖、推导链） |
+| [HIERARCHICAL_MAPPING_AND_SUMMARY](./research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 层次化映射总结（文档树、概念↔定理、文档↔思维表征） |
 | [rust-formal-engineering-system/](./rust-formal-engineering-system/) | 形式化工程系统索引（映射到 research_notes） |
 | [research_notes/PROOF_INDEX.md](./research_notes/PROOF_INDEX.md) | 公理-定理-证明索引 |
+| [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) | 批判性分析与推进计划（阶段 1–3 完成） |
+| [TOC_AND_CONTENT_DEEPENING_PLAN](./research_notes/TOC_AND_CONTENT_DEEPENING_PLAN.md) | 目录缺失与内容深化计划 |
+| [CORE_THEOREMS_FULL_PROOFS](./research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明（L2 级） |
+| [FORMAL_LANGUAGE_AND_PROOFS](./research_notes/FORMAL_LANGUAGE_AND_PROOFS.md) | 形式语言与形式证明（推理规则、操作语义、判定形式） |
+| [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | 国际形式化验证对标 |
+| [formal_methods/](research_notes/formal_methods/)（六篇并表） | 所有权、借用、生命周期、异步、Pin、**Send/Sync** 形式化；[send_sync_formalization](research_notes/formal_methods/send_sync_formalization.md)、[README §六篇并表](research_notes/formal_methods/README.md#formal_methods-六篇并表) |
+| [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](research_notes/SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) | 安全可判定机制总览（每机制一节、并发+Trait 族四维表）；[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](research_notes/formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md) 阶段 A–D 已完成 |
+| [FORMAL_METHODS_COMPLETENESS_CHECKLIST](research_notes/formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md) | formal_methods 六篇×六维完备性检查表（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
 
 ---
 
@@ -104,6 +121,7 @@
 | 文档/目录 | 说明 |
 |-----------|------|
 | [06_toolchain/](./06_toolchain/) | 编译器、Cargo、rustdoc、Rust 1.89–1.93 版本演进 |
+| [00_rust_2024_edition_learning_impact.md](./06_toolchain/00_rust_2024_edition_learning_impact.md) | Rust 2024 Edition 对学习路径的影响 |
 
 **Rust 1.92 版本文档**（已归档）:
 

@@ -1,4 +1,4 @@
-﻿# C08 算法: 常见问题解答 (FAQ)
+# C08 算法: 常见问题解答 (FAQ)
 
 > **文档定位**: 算法常见问题快速解答，涵盖算法选择、复杂度分析、异步算法等核心疑问
 > **使用方式**: 通过问题索引快速定位问题，获取详细答案和示例
@@ -69,7 +69,7 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
 5. 编写基准测试验证
 ```
 
-**相关**: [algorithm_index](./references/algorithm_index.md) | [algorithm_complexity](./guides/algorithm_complexity.md)
+**相关**: [algorithm_index](./tier_03_references/01_算法分类参考.md) | [algorithm_complexity](./tier_02_guides/03_算法复杂度分析.md)
 
 ---
 
@@ -237,7 +237,7 @@ async fn async_fibonacci(n: u64) -> u64 {
 - ⚠️ 异步开销可能超过收益
 - ⚠️ 使用`spawn_blocking`处理阻塞操作
 
-**相关**: [async_algorithms](./guides/async_algorithms.md) | [ASYNC_RECURSION_ANALYSIS](./theory/ASYNC_RECURSION_ANALYSIS.md)
+**相关**: [并行与异步算法](./tier_02_guides/05_并行与异步算法.md) | [ASYNC_RECURSION_ANALYSIS](../../c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md)
 
 ---
 
@@ -336,7 +336,7 @@ fn fib_optimal(n: u64) -> u64 {
 4. 验证 (再次测量)
 ```
 
-**相关**: [performance_optimization](./guides/performance_optimization.md) | [benchmarking_guide](./guides/benchmarking_guide.md)
+**相关**: [性能优化实践](./tier_02_guides/04_性能优化实践.md) | [算法性能参考](./tier_03_references/04_算法性能参考.md)
 
 ---
 

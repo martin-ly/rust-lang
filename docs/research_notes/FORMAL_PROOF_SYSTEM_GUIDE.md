@@ -155,7 +155,7 @@ Corollary（推论）   → 由定理直接推导
 | 文档 | 用途 |
 | :--- | :--- |
 | [MIND_MAP_COLLECTION](../MIND_MAP_COLLECTION.md) | 核心概念、模块知识、关联思维导图 |
-| [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) §1 | Rust 1.93 特性思维导图 |
+| [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) §1 | Rust 1.93 特性思维导图 |
 
 ### 2. 多维矩阵 (Multidimensional Matrix)
 
@@ -168,15 +168,15 @@ Corollary（推论）   → 由定理直接推导
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [THINKING_REPRESENTATION_METHODS](../THINKING_REPRESENTATION_METHODS.md) §4 | MaybeUninit、Never、借用、生命周期、Send/Sync 证明树 |
-| [PROOF_GRAPH_NETWORK](../PROOF_GRAPH_NETWORK.md) | 证明结构模板、核心证明路径 |
+| [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) §4 | MaybeUninit、Never、借用、生命周期、Send/Sync 证明树 |
+| [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | 证明结构模板、核心证明路径 |
 | [PROOF_INDEX](PROOF_INDEX.md) | 证明索引与公理编号规范 |
 
 ### 4. 决策树 (Decision Tree)
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [DECISION_GRAPH_NETWORK](../DECISION_GRAPH_NETWORK.md) | 所有权、类型、并发、异步、性能、安全决策树 |
+| [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 所有权、类型、并发、异步、性能、安全决策树 |
 
 ### 5. 反例 (Counterexamples)
 

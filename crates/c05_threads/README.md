@@ -122,22 +122,22 @@
 
 ### 📚 核心增强文档
 
-1. **[知识图谱与概念关系](docs/analysis/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** ⭐⭐⭐⭐⭐
+1. **[知识图谱与概念关系](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐⭐⭐⭐⭐
    - Mermaid 可视化图表 + 概念三元组 + 技术演化时间线
    - 完整的 Rust 类型层次映射 + Send/Sync 决策树
    - 并发模式分类 + 性能与安全知识图
 
-2. **[多维矩阵对比分析](docs/analysis/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** ⭐⭐⭐⭐⭐
+2. **[多维矩阵对比分析](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐⭐⭐⭐⭐
    - 同步原语/并发模型/线程池全面对比 + 性能基准代码
    - 无锁数据结构对比 + 通道实现对比
    - 内存顺序对比 + 第三方库生态对比
 
-3. **[网络编程思维导图](docs/appendices/RUST_190_COMPREHENSIVE_MINDMAP.md)** ⭐⭐⭐⭐⭐
+3. **[思维导图集合](../../docs/04_thinking/MIND_MAP_COLLECTION.md)** ⭐⭐⭐⭐⭐
    - ASCII 艺术知识结构 + 完整学习路径 (初/中/高级)
    - 问题诊断树 + 性能优化金字塔
    - 技术选型决策树 + 检查清单
 
-4. **[Rust 1.93.0 实战示例 Part 1](docs/appendices/RUST_192_EXAMPLES_COLLECTION.md)** ⭐⭐⭐⭐⭐
+4. **[Rust 1.93.0 实战示例](../../docs/archive/version_reports/)** ⭐⭐⭐⭐⭐
    - 线程创建与管理 (8个示例) + thread::scope 实战
    - Channel 消息传递 (4个示例) + 同步原语 (7个示例)
    - 综合项目：并发 Web 爬虫 + 任务调度器
@@ -670,8 +670,8 @@ cargo test rust_192_features
 - **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
 - **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 并发模型对比矩阵
 - **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 线程并发思维导图
-- **[决策图网](../../DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
-- **[证明图网](../../PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
+- **[决策图网](../../docs/04_thinking/DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
+- **[证明图网](../../docs/04_thinking/PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
 
 ### 使用指南
 

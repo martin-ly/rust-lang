@@ -1,7 +1,7 @@
 # 论证缺口与设计理由综合索引
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-14
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ formal_methods 100% 完成；整体框架已就绪
 > **目标**: 系统性追踪论证缺口、设计理由缺位、证明不足，并提供全局一致性索引
@@ -91,6 +91,7 @@
 - **COMPREHENSIVE_SYSTEMATIC_OVERVIEW**：✅ CSO-L1、CSO-C1
 - **UNIFIED_SYSTEMATIC_FRAMEWORK**：✅ Def USF1、Axiom USF1、USF-T1、USF-C1
 - **PROOF_INDEX**：✅ 边界系统、语义与表达能力、顶层框架、实验与形式化衔接、形式化验证、质量检查、执行模型扩展；统计 105+（formal_methods Phase 1–6、阶段 1–7 补全完成）
+- **FORMAL_LANGUAGE_AND_PROOFS**：✅ 推理规则、操作语义、判定形式、形式证明推导树（数学级，与 Coq 骨架互补；缓解 P2 证明无结构）
 - **formal_methods/README**：✅ FM-L1、FM-C1
 - **FORMAL_VERIFICATION_GUIDE**：✅ Def FV1、Axiom FV1、定理 FV-T1、引理 FV-L1、推论 FV-C1
 - **QUALITY_CHECKLIST**：✅ Def QC1、Axiom QC1、定理 QC-T1、推论 QC-C1
@@ -120,6 +121,7 @@
 - **BEST_PRACTICES**：✅ Axiom BP1、定理 BP-T1（完备性蕴涵可追溯）
 - **formal_methods/lifetime_formalization**：✅ Axiom LF1/LF2、引理 LF-L1、推论 LF-C1
 - **CONTENT_ENHANCEMENT**：✅ Def CE1、Axiom CE1、定理 CE-T1
+- **形式化证明批判性分析与推进计划（2026-02-14）**：✅ [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 阶段 1–3 100%；[CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md) L2 完整证明；[coq_skeleton](coq_skeleton/) T-OW2 Coq 骨架；[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) 国际对标；证明深度 L1/L2/L3 标注
 
 ---
 
@@ -163,6 +165,10 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
+| [00_COMPREHENSIVE_SUMMARY](00_COMPREHENSIVE_SUMMARY.md) | **完整总结综合**：项目全貌、知识地图、论证脉络总览、各文档职责 |
+| [ARGUMENTATION_CHAIN_AND_FLOW](ARGUMENTATION_CHAIN_AND_FLOW.md) | **论证脉络关系**：论证五步法、概念→定理 DAG、文档依赖、论证思路示例 |
+| [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) | **批判性分析与改进计划**：概念/属性/论证/矩阵/层次化/思维表征缺口、建议、四阶段可持续推进计划 |
+| [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md) | **层次化映射总结**：文档树、概念族↔文档↔Def/定理、文档↔思维表征、文档依赖 |
 | [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) | **设计机制论证**：Pin 堆/栈、所有权、借用、生命周期、型变、异步等理由与完整论证 |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳、概念族谱、全局一致性 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](UNIFIED_SYSTEMATIC_FRAMEWORK.md) | 全局统一框架、全景思维导图、多维矩阵、全链路图 |
@@ -176,6 +182,9 @@
 | [FEATURE_TEMPLATE](FEATURE_TEMPLATE.md) | **特性精简模板**：79 项非核心特性 |
 | [INCREMENTAL_UPDATE_FLOW](INCREMENTAL_UPDATE_FLOW.md) | **版本增量更新流程**：1.94+ 发布后更新步骤 |
 | [construction_capability](type_theory/construction_capability.md) | **类型构造能力**：Def TCON1、矩阵、决策树 |
+| [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) | **批判性分析与推进计划**：国际对标、证明深度、全模型入口、Coq 骨架 |
+| [CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md) | **核心定理完整证明**：ownership T2、borrow T1、type T3（L2 级） |
+| [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | **国际对标索引**：RustBelt、Aeneas、RustSEM 等 |
 | [INDEX](INDEX.md) | 研究笔记完整索引 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论体系**：设计模式形式化、23/43 模型、执行模型、组合工程 |
 
@@ -183,4 +192,4 @@
 
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-12
-**状态**: ✅ **100% 完成**（Send/Sync、Trait 对象设计理由已补全；全面检查推进计划 Phase 1–8 实施完成；类型构造能力、并发确定性、组件成熟度、核心特性完整链已补全）
+**状态**: ✅ **100% 完成**（形式化证明批判性分析与推进计划阶段 1–3 已补全；CORE_THEOREMS_FULL_PROOFS、coq_skeleton、国际对标已纳入）

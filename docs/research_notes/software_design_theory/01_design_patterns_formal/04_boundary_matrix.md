@@ -213,6 +213,44 @@ flowchart TB
 
 ---
 
+## 模式组合约束 DAG（D1.5）
+
+**Def BMP-DAG1（模式组合约束）**：设 $P_1 \to P_2$ 表示 $P_1$ 可组合于 $P_2$（$P_1$ 产出作为 $P_2$ 输入）。推荐组合形成 DAG；禁止组合由约束违反确定。
+
+### 推荐组合（保持 CE-T1–T3）
+
+```text
+Builder ──→ Factory Method ──→ Repository
+   │              │                  │
+   └──────────────┴──────────────────┴──→ Service Layer
+                                              │
+Decorator ──→ Strategy                        │
+   │              │                           │
+Composite ──→ Visitor ◄───────────────────────┘
+   │
+Observer ──→ Command
+```
+
+| 组合 | 约束 | 引用 |
+| :--- | :--- | :--- |
+| Builder + Factory | 工厂返回 Builder；IT-T1 满足 | [CE-PAT1](../../04_compositional_engineering/02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持) |
+| Decorator + Strategy | 装饰器持 `impl Strategy`；无共享可变 | CE-PAT-C1 |
+| Observer + Command | channel 传 `Box<dyn Command + Send>`；Send 约束 | CE-PAT-C1 |
+| Composite + Visitor | `match` 遍历 + `Visitor` trait | CE-PAT-C1 |
+| Repository + Service + DTO | 模块依赖 DAG；所有权沿调用链 | [03_integration_theory](../../04_compositional_engineering/03_integration_theory.md) |
+
+### 禁止/慎用组合
+
+| 组合 | 原因 |
+| :--- | :--- |
+| Singleton + 任意跨线程共享可变 | 违反 CE-T2；需 OnceLock 或 Mutex 封装 |
+| Rc + 跨线程 | 编译拒绝；Rc 非 Send |
+| Observer 回调持有 `&mut` 跨线程 | 数据竞争；用 channel 替代 |
+
+**引用**：[04_compositional_engineering](04_compositional_engineering/README.md)、[CE-PAT1](../../04_compositional_engineering/02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持)。
+
+---
+
 ## 与 43 完全模型衔接
 
 扩展 20 种模式见 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md)；绝大部分为纯 Safe、原生支持、等价表达。

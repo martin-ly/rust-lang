@@ -1,7 +1,7 @@
 # 嵌入式 Rust 专题指南
 
-> **创建日期**: 2026-02-13  
-> **权威源**: [The Embedded Rust Book](https://doc.rust-lang.org/embedded-book/)  
+> **创建日期**: 2026-02-13
+> **权威源**: [The Embedded Rust Book](https://doc.rust-lang.org/embedded-book/)
 > **用途**: 对标官方 Embedded Book，提供本项目内导航与补充
 
 ---

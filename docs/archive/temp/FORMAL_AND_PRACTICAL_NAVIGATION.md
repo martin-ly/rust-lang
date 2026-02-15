@@ -30,11 +30,11 @@
 
 #### 💻 实际代码
 
-- **[C01 所有权模块](../../crates/c01_ownership_borrow_scope/)** - 完整的学习模块
-  - [代码示例](../../crates/c01_ownership_borrow_scope/examples/) - 150+ 个所有权示例
-  - [综合示例](../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs) - 完整的所有权应用
-  - [测试用例](../../crates/c01_ownership_borrow_scope/tests/) - 完整的测试套件
-  - [Tier 文档](../../crates/c01_ownership_borrow_scope/docs/) - 4-Tier 分层学习文档
+- **[C01 所有权模块](../../../crates/c01_ownership_borrow_scope/)** - 完整的学习模块
+  - [代码示例](../../../crates/c01_ownership_borrow_scope/examples/) - 150+ 个所有权示例
+  - [综合示例](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs) - 完整的所有权应用
+  - [测试用例](../../../crates/c01_ownership_borrow_scope/tests/) - 完整的测试套件
+  - [Tier 文档](../../../crates/c01_ownership_borrow_scope/docs/) - 4-Tier 分层学习文档
 
 **学习路径**:
 
@@ -56,11 +56,11 @@
 
 #### 💻 实际代码
 
-- **[C02 类型系统模块](../../crates/c02_type_system/)** - 完整的学习模块
-  - [代码示例](../../crates/c02_type_system/examples/) - 类型系统实际代码示例
-  - [Tier 文档](../../crates/c02_type_system/docs/) - 4-Tier 分层学习文档
-  - [测试用例](../../crates/c02_type_system/tests/) - 完整的测试套件
-  - [分析文档](../../crates/c02_type_system/docs/analysis/) - 深度分析文档
+- **[C02 类型系统模块](../../../crates/c02_type_system/)** - 完整的学习模块
+  - [代码示例](../../../crates/c02_type_system/examples/) - 类型系统实际代码示例
+  - [Tier 文档](../../../crates/c02_type_system/docs/) - 4-Tier 分层学习文档
+  - [测试用例](../../../crates/c02_type_system/tests/) - 完整的测试套件
+  - [深度分析](../../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
 
 **学习路径**:
 
@@ -83,14 +83,14 @@
 
 #### 💻 实际代码
 
-- **[C05 线程模块](../../crates/c05_threads/)** - 完整的并发编程学习模块
-  - [代码示例](../../crates/c05_threads/examples/) - 385+ 个并发编程示例
-  - [并发控制实现](../../crates/c05_threads/src/concurrency/) - 作用域线程、工作窃取等实现
-  - [无锁数据结构实现](../../crates/c05_threads/src/lockfree/) - 无锁环形缓冲区、哈希表等实现
-  - [同步原语实现](../../crates/c05_threads/src/synchronization/) - 自适应锁、无锁屏障等实现
-  - [并行计算实现](../../crates/c05_threads/src/paralelism/) - NUMA感知、SIMD操作等实现
-  - [测试用例](../../crates/c05_threads/tests/) - 完整的测试套件
-  - [Tier 文档](../../crates/c05_threads/docs/) - 4-Tier 分层学习文档
+- **[C05 线程模块](../../../crates/c05_threads/)** - 完整的并发编程学习模块
+  - [代码示例](../../../crates/c05_threads/examples/) - 385+ 个并发编程示例
+  - [并发控制实现](../../../crates/c05_threads/src/concurrency/) - 作用域线程、工作窃取等实现
+  - [无锁数据结构实现](../../../crates/c05_threads/src/lockfree/) - 无锁环形缓冲区、哈希表等实现
+  - [同步原语实现](../../../crates/c05_threads/src/synchronization/) - 自适应锁、无锁屏障等实现
+  - [并行计算实现](../../../crates/c05_threads/src/paralelism/) - NUMA感知、SIMD操作等实现
+  - [测试用例](../../../crates/c05_threads/tests/) - 完整的测试套件
+  - [Tier 文档](../../../crates/c05_threads/docs/) - 4-Tier 分层学习文档
 
 **学习路径**:
 
@@ -112,12 +112,12 @@
 
 #### 💻 实际代码
 
-- **[C06 异步编程模块](../../crates/c06_async/)** - 完整的学习模块
-  - [代码示例](../../crates/c06_async/examples/) - 460+ 个异步编程示例
-  - [Reactor 模式实现](../../crates/c06_async/src/reactor/) - Reactor 模式完整实现
-  - [Actor 模式实现](../../crates/c06_async/src/actix/) - Actor 模式完整实现
-  - [CSP 模式实现](../../crates/c06_async/src/csp_model_comparison.rs) - CSP 模式实现
-  - [测试用例](../../crates/c06_async/tests/) - 完整的测试套件
+- **[C06 异步编程模块](../../../crates/c06_async/)** - 完整的学习模块
+  - [代码示例](../../../crates/c06_async/examples/) - 460+ 个异步编程示例
+  - [Reactor 模式实现](../../../crates/c06_async/src/reactor/) - Reactor 模式完整实现
+  - [Actor 模式实现](../../../crates/c06_async/src/actix/) - Actor 模式完整实现
+  - [CSP 模式实现](../../../crates/c06_async/src/csp_model_comparison.rs) - CSP 模式实现
+  - [测试用例](../../../crates/c06_async/tests/) - 完整的测试套件
 
 **学习路径**:
 
@@ -139,13 +139,13 @@
 
 #### 💻 实际代码
 
-- **[C09 设计模式模块](../../crates/c09_design_pattern/)** - 完整的学习模块
-  - [代码示例](../../crates/c09_design_pattern/examples/) - 150+ 个设计模式示例
-  - [创建型模式实现](../../crates/c09_design_pattern/src/creational/) - 创建型模式实现
-  - [结构型模式实现](../../crates/c09_design_pattern/src/structural/) - 结构型模式实现
-  - [行为型模式实现](../../crates/c09_design_pattern/src/behavioral/) - 行为型模式实现
-  - [并发模式实现](../../crates/c09_design_pattern/src/concurrency/) - 并发模式实现
-  - [测试用例](../../crates/c09_design_pattern/tests/) - 完整的测试套件
+- **[C09 设计模式模块](../../../crates/c09_design_pattern/)** - 完整的学习模块
+  - [代码示例](../../../crates/c09_design_pattern/examples/) - 150+ 个设计模式示例
+  - [创建型模式实现](../../../crates/c09_design_pattern/src/creational/) - 创建型模式实现
+  - [结构型模式实现](../../../crates/c09_design_pattern/src/structural/) - 结构型模式实现
+  - [行为型模式实现](../../../crates/c09_design_pattern/src/behavioral/) - 行为型模式实现
+  - [并发模式实现](../../../crates/c09_design_pattern/src/concurrency/) - 并发模式实现
+  - [测试用例](../../../crates/c09_design_pattern/tests/) - 完整的测试套件
 
 **学习路径**:
 
@@ -167,11 +167,11 @@
 
 #### 💻 实际代码
 
-- **[C11 宏系统模块](../../crates/c11_macro_system/)** - 完整的学习模块
-  - [代码示例](../../crates/c11_macro_system/examples/) - 宏系统实际代码示例
-  - [声明宏示例](../../crates/c11_macro_system/examples/) - `macro_rules!` 示例
-  - [过程宏示例](../../crates/c11_macro_system/src/) - 过程宏实现
-  - [测试用例](../../crates/c11_macro_system/tests/) - 完整的测试套件
+- **[C11 宏系统模块](../../../crates/c11_macro_system/)** - 完整的学习模块
+  - [代码示例](../../../crates/c11_macro_system/examples/) - 宏系统实际代码示例
+  - [声明宏示例](../../../crates/c11_macro_system/examples/) - `macro_rules!` 示例
+  - [过程宏示例](../../../crates/c11_macro_system/src/) - 过程宏实现
+  - [测试用例](../../../crates/c11_macro_system/tests/) - 完整的测试套件
 
 **学习路径**:
 
@@ -193,11 +193,11 @@
 
 #### 💻 实际代码
 
-- **[C03 控制流与函数模块](../../crates/c03_control_fn/)** - 完整的学习模块
-  - [代码示例](../../crates/c03_control_fn/examples/) - 500+ 个控制流示例
-  - [Tier 文档](../../crates/c03_control_fn/docs/) - 4-Tier 分层学习文档（19个文档，12,000+行）
-  - [深度分析文档](../../crates/c03_control_fn/docs/analysis/) - 13+ 深度分析文档
-  - [测试用例](../../crates/c03_control_fn/tests/) - 完整的测试套件
+- **[C03 控制流与函数模块](../../../crates/c03_control_fn/)** - 完整的学习模块
+  - [代码示例](../../../crates/c03_control_fn/examples/) - 500+ 个控制流示例
+  - [Tier 文档](../../../crates/c03_control_fn/docs/) - 4-Tier 分层学习文档（19个文档，12,000+行）
+  - [深度分析](../../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
+  - [测试用例](../../../crates/c03_control_fn/tests/) - 完整的测试套件
 
 **学习路径**:
 
@@ -247,12 +247,12 @@
 
 #### 💻 实际代码
 
-- **[C04 泛型编程模块](../../crates/c04_generic/)** - 完整的学习模块
-  - [代码示例](../../crates/c04_generic/examples/) - 泛型实际代码示例
-  - [Tier 文档](../../crates/c04_generic/docs/) - 4-Tier 分层学习文档（78+ 文档，27,300+ 行）
-  - [知识图谱](../../crates/c04_generic/docs/analysis/theory_deep_dive/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md) - 完整的知识图谱体系
-  - [对比矩阵](../../crates/c04_generic/docs/analysis/theory_deep_dive/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md) - 25+ 详细对比表格
-  - [测试用例](../../crates/c04_generic/tests/) - 完整的测试套件
+- **[C04 泛型编程模块](../../../crates/c04_generic/)** - 完整的学习模块
+  - [代码示例](../../../crates/c04_generic/examples/) - 泛型实际代码示例
+  - [Tier 文档](../../../crates/c04_generic/docs/) - 4-Tier 分层学习文档（78+ 文档，27,300+ 行）
+  - [知识图谱](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
+  - [对比矩阵](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 25+ 详细对比表格
+  - [测试用例](../../../crates/c04_generic/tests/) - 完整的测试套件
 
 **学习路径**:
 
@@ -273,14 +273,14 @@
 ### 主项目入口
 
 - **[主项目 README](../../README.md)**
-- **[C01 所有权模块](../../crates/c01_ownership_borrow_scope/README.md)**
-- **[C02 类型系统模块](../../crates/c02_type_system/README.md)**
-- **[C03 控制流与函数模块](../../crates/c03_control_fn/README.md)**
-- **[C04 泛型编程模块](../../crates/c04_generic/README.md)**
-- **[C05 线程模块](../../crates/c05_threads/README.md)**
-- **[C06 异步编程模块](../../crates/c06_async/README.md)**
-- **[C09 设计模式模块](../../crates/c09_design_pattern/README.md)**
-- **[C11 宏系统模块](../../crates/c11_macro_system/README.md)**
+- **[C01 所有权模块](../../../crates/c01_ownership_borrow_scope/README.md)**
+- **[C02 类型系统模块](../../../crates/c02_type_system/README.md)**
+- **[C03 控制流与函数模块](../../../crates/c03_control_fn/README.md)**
+- **[C04 泛型编程模块](../../../crates/c04_generic/README.md)**
+- **[C05 线程模块](../../../crates/c05_threads/README.md)**
+- **[C06 异步编程模块](../../../crates/c06_async/README.md)**
+- **[C09 设计模式模块](../../../crates/c09_design_pattern/README.md)**
+- **[C11 宏系统模块](../../../crates/c11_macro_system/README.md)**
 - **[工具链文档](../../docs/toolchain/README.md)**
 
 ---

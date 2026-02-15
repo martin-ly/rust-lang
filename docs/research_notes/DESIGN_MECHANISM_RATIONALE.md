@@ -259,7 +259,7 @@ Pin 使用场景决策树
 
 - **Send**：$T : \text{Send} \Leftrightarrow \forall t : T.\, \text{transfer}(t, \text{thread}_1, \text{thread}_2)$ 安全。若含非 Send 字段（如 `Rc`）则不可跨线程传递，否则可能多线程持有同一 `Rc` 导致竞态。
 - **Sync**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$。即多线程共享 `&T` 时，`T` 内部无可变全局状态或需同步保护。
-- 形式化：见 [async_state_machine](formal_methods/async_state_machine.md) 定理 6.2。
+- **形式化专篇**：[send_sync_formalization](formal_methods/send_sync_formalization.md) Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1、与 spawn/Future/Arc 衔接；[async_state_machine](formal_methods/async_state_machine.md) 定理 6.2 依赖 Send/Sync 约束。
 
 **决策树**：需跨线程传递？→ `T : Send`；需多线程共享 `&T`？→ `T : Sync`。
 
@@ -366,6 +366,18 @@ Pin 使用场景决策树
 
 ---
 
+### 相关思维表征
+
+| 类型 | 位置 |
+| :--- | :--- |
+| 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) §8 设计机制论证 |
+| 决策树 | 本文各机制「使用场景/决策树」；[DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) |
+| 多维矩阵 | [DESIGN_MECHANISM_RATIONALE 矩阵总览](#-设计机制论证矩阵总览)；[UNIFIED_SYSTEMATIC_FRAMEWORK](UNIFIED_SYSTEMATIC_FRAMEWORK.md) |
+
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
+
+---
+
 ## 📚 相关文档
 
 | 文档 | 用途 |
@@ -374,11 +386,11 @@ Pin 使用场景决策树
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义、表达能力边界 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射 |
-| [MIND_MAP_COLLECTION](../MIND_MAP_COLLECTION.md) | 设计机制论证思维导图（§8） |
+| [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 设计机制论证思维导图（§8） |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖 |
 
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-12
+**最后更新**: 2026-02-14
 **状态**: ✅ **100% 完成**（Pin、所有权、借用、生命周期、型变、异步、Send/Sync、Trait 对象设计理由均已补全）

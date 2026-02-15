@@ -1,10 +1,28 @@
 # 🔬 Rust 研究笔记
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-14
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
-> **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记 + 23 种设计模式 + 类型理论阶段 1–7 + formal_methods Phase 1–6 + 层次推进三阶段 + 全面检查推进计划 Phase 1–8）
-> **更新内容**: 全面检查推进计划实施完成（类型构造能力、并发确定性、组件成熟度、核心特性完整链、92 特性模板、增量流程）；07_anti_patterns 重复章节去除 ✅
+> **状态**: ✅ **研究笔记系统 100% 完成**
+
+---
+
+## 🚀 从这里开始
+
+**首次使用？** 按目标选一条路径 → **[00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md)**
+
+| 目标 | 入口 |
+| :--- | :--- |
+| 理解形式化证明 | [FORMAL_FULL_MODEL_OVERVIEW](./FORMAL_FULL_MODEL_OVERVIEW.md) → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) |
+| 查概念/证明 | [QUICK_FIND](./QUICK_FIND.md) |
+| 选设计模式/并发模型 | [software_design_theory/00_MASTER_INDEX](./software_design_theory/00_MASTER_INDEX.md) |
+| 理解三大支柱 | [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](./RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md) |
+| 完整总结与论证脉络 | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) → [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md) |
+| 批判性意见与改进计划 | [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](./RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) |
+| 格式统一与内容/Rust 1.93 对齐计划 | [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) |
+| 层次化映射（文档树/概念↔定理/文档↔思维表征） | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) |
+| **docs 全结构梳理**（100% 覆盖） | [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) |
+| **目录缺失与内容深化计划** | [TOC_AND_CONTENT_DEEPENING_PLAN](./TOC_AND_CONTENT_DEEPENING_PLAN.md) |
 
 ---
 
@@ -12,6 +30,7 @@
 
 ```text
 research_notes/
+├── 00_ORGANIZATION_AND_NAVIGATION.md  # 组织架构与按目标导航（首次使用入口）
 ├── README.md                    # 本索引文件
 ├── formal_methods/              # 形式化方法研究
 │   ├── README.md
@@ -67,6 +86,16 @@ research_notes/
 ├── PROGRESS_TRACKING.md        # 研究进展跟踪
 ├── TASK_CHECKLIST.md           # 研究任务清单
 ├── PROOF_INDEX.md              # 形式化证明文档索引 🆕
+├── INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md  # 国际形式化验证对标索引 🆕
+├── FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md  # 批判性分析与可持续推进计划 🆕
+├── FORMAL_FULL_MODEL_OVERVIEW.md  # 形式化全模型入口（统一形式系统）🆕
+├── RUSTBELT_ALIGNMENT.md  # RustBelt 逐章对标 🆕
+├── EXECUTABLE_SEMANTICS_ROADMAP.md  # 可执行语义路线图 🆕
+├── AENEAS_INTEGRATION_PLAN.md  # Aeneas 对接计划 🆕
+├── COQ_OF_RUST_INTEGRATION_PLAN.md  # coq-of-rust 对接计划 🆕
+├── CORE_THEOREMS_FULL_PROOFS.md  # 核心定理完整证明（L2 级）🆕
+├── COQ_ISABELLE_PROOF_SCAFFOLDING.md  # Coq/Isabelle 证明骨架与 L3 实施指南 🆕
+├── coq_skeleton/  # Coq 证明骨架（T-OW2）🆕
 ├── CONTENT_ENHANCEMENT.md      # 内容完善指南（含层次推进、实质内容自检表）🆕
 ├── CLASSIFICATION.md           # 文档分类体系（按角色/层次/主题域）🆕
 ├── WRITING_GUIDE.md            # 研究笔记写作指南
@@ -119,6 +148,12 @@ research_notes/
 
 **证明文档索引**: [PROOF_INDEX.md](./PROOF_INDEX.md)
 
+**按证明深度/层次导航**:
+
+- [按证明深度](PROOF_INDEX.md#-按证明深度导航) — L1 证明思路 / L2 完整证明 / L3 机器可检查
+- [按抽象层次](FORMAL_FULL_MODEL_OVERVIEW.md#四抽象层次对应) — 语言级 / MIR 级 / 内存级
+- [形式化全模型入口](FORMAL_FULL_MODEL_OVERVIEW.md) — 统一形式系统、公理列表、定理依赖 DAG
+
 **论证系统指南**: [FORMAL_PROOF_SYSTEM_GUIDE.md](./FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、概念-公理-定理映射、反例与证明树索引
 
 **全面系统化梳理总览**: [COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
@@ -136,6 +171,14 @@ research_notes/
 **安全与非安全全面论证**: [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) - 边界、契约、UB 分类、安全抽象
 
 **Rust 1.93 语言特性全面分析**: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) - 92 项语言特性全覆盖、设计论证
+
+**批判性分析与推进计划**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 形式化证明体系批判性分析、国际对标、可持续推进方案
+
+**核心定理完整证明**: [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) - ownership T2、borrow T1、type T3 的 L2 级完整证明（归纳基/步、辅助引理、反例否定）
+
+**国际形式化验证对标**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) - RustBelt、Aeneas、RustSEM 等对标与差距
+
+**三大支柱与可持续推进**: [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md](./RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md) - 公理判定系统、语言表达力、组件组合法则；国际对标与层次推进
 
 **相关文档**:
 

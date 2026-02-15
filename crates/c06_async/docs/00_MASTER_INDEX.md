@@ -7,9 +7,11 @@
 | 官方资源 | 链接 | 与本模块对应 |
 |----------|------|--------------|
 | **The Rust Book** | [Ch. 16 (async)](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 并发与异步概念 |
-| **Rust By Example** | [Async](https://doc.rust-lang.org/rust-by-example/async.html) | async/await 语法 |
+| **RBE 练习** | [Async](https://doc.rust-lang.org/rust-by-example/async.html) | async/await 语法实践 |
 | **Rust Reference** | [Async blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) | async 规范 |
 | **Tokio** | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 主流异步运行时 |
+
+**一页纸总结**: [ONE_PAGE_SUMMARY.md](./ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
 
 ## 📂 目录详解
 
@@ -26,7 +28,7 @@
 | 05_style_guide     | ⭐⭐⭐   | 参考  | 代码风格 |
 | 06_run_guide       | ⭐       | 15min | 运行指南 |
 
-**查看详情**: [guides/README.md](./guides/README.md)
+**查看详情**: [tier_02_guides/README.md](./tier_02_guides/README.md)
 
 ---
 
@@ -164,8 +166,8 @@
 **Day 1-2**: 基础入门
 
 - [README.md](./README.md)
-- [guides/01_quick_start.md](./guides/01_quick_start.md)
-- [guides/02_basics.md](./guides/02_basics.md)
+- [tier_02_guides/01_异步编程快速入门.md](./tier_02_guides/01_异步编程快速入门.md)
+- [tier_02_guides/02_Future与Executor机制.md](./tier_02_guides/02_Future与Executor机制.md)
 
 **Day 3-4**: 运行时实践
 
@@ -187,13 +189,13 @@
 **第1周**: 核心概念
 
 - [core/](./core/) 全部6个文档
-- [guides/03_advanced_topics.md](./guides/03_advanced_topics.md)
+- [tier_02_guides/03_异步运行时选择指南.md](./tier_02_guides/03_异步运行时选择指南.md)
 
 **第2周**: 实践应用
 
 - [patterns/](./patterns/) 设计模式
 - [performance/](./performance/) 性能优化
-- [guides/04_best_practices.md](./guides/04_best_practices.md)
+- [tier_02_guides/04_异步设计模式实践.md](./tier_02_guides/04_异步设计模式实践.md)
 
 **第3周**: 深入研究
 
@@ -263,8 +265,8 @@
 
 ### 按学习阶段
 
-- **入门新手** → [guides/01_quick_start.md](./guides/01_quick_start.md)
-- **初级学习** → [guides/02_basics.md](./guides/02_basics.md)
+- **入门新手** → [01_异步编程快速入门](./tier_02_guides/01_异步编程快速入门.md)
+- **初级学习** → [02_Future与Executor机制](./tier_02_guides/02_Future与Executor机制.md)
 - **中级进阶** → [core/](./core/) + [patterns/](./patterns/)
 - **高级深入** → [comprehensive/](./comprehensive/) + [views/](./views/)
 - **专家级别** → [core/06_critical_analysis...](./core/06_critical_analysis_and_advanced_topics.md)

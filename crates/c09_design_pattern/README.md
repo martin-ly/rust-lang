@@ -155,8 +155,8 @@
 
 ## 🌟 2025-10-20 核心增强更新
 
-- **📊 [知识图谱与概念关系](./docs/theory_enhanced/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)** - 设计模式完整体系
-- **📐 [多维矩阵对比分析](./docs/theory_enhanced/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** - GoF/并发模式全面对比
+- **📊 [知识图谱与概念关系](./docs/KNOWLEDGE_GRAPH.md)** - 设计模式完整体系
+- **📐 [多维矩阵对比分析](./docs/MULTIDIMENSIONAL_MATRIX_COMPARISON.md)** - GoF/并发模式全面对比
 - **🗺️ [Rust 1.93.0 设计模式改进与思维导图](./docs/RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md)** ⭐ NEW!
   - GoF模式/并发模式/Rust特有模式 | 3级学习路径(1-6周)
 - **💻 [Rust 实战示例集](./docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐ NEW!
@@ -294,9 +294,9 @@
 深入学习设计模式的形式化理论基础：
 
 - 📐 **[设计模式形式化理论](../../docs/rust-formal-engineering-system/03_design_patterns/)** - 完整的模式定义和类型规则
-- 🔬 **[形式化验证理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/09_formal_verification/)** - 形式化验证方法
+- 🔬 **[形式化验证理论](../../docs/research_notes/TOOLS_GUIDE.md)** - Prusti、Kani、Creusot
 - 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 设计模式中的类型系统应用
-- 🧮 **[数学基础](../../docs/rust-formal-engineering-system/01_theoretical_foundations/10_mathematical_foundations/)** - 模式背后的数学理论
+- 🧮 **[数学基础](../../docs/research_notes/type_theory/)** - 模式背后的数学理论
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
 

@@ -1,7 +1,7 @@
 # 充分表达 vs 非充分表达边界矩阵
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-14
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 
 ---
@@ -262,3 +262,4 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)
 - [DESIGN_MECHANISM_RATIONALE](../../DESIGN_MECHANISM_RATIONALE.md)
+- [04_expressiveness_boundary 分布式模式形式化](../02_workflow_safe_complete_models/04_expressiveness_boundary.md#分布式模式形式化边界event-sourcingsagacqrs) — Event Sourcing、Saga、CQRS 与 Rust 表达力边界

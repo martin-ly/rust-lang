@@ -4,6 +4,7 @@
 > **最后更新**: 2026-02-12（国际权威对标补全）
 > **Rust 版本**: 1.93.0+ (Edition 2024) ✅
 > **状态**: ✅ 已完成 (100%)
+> **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 3 行（生命周期）
 
 ---
 
@@ -610,8 +611,19 @@ $\text{lft}(r) \subseteq \text{lft}(\text{target}(r))$：引用寿命不超过�
 
 ---
 
+### 相关思维表征
+
+| 类型 | 位置 |
+| :--- | :--- |
+| 多维矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §形式化；[README §六篇并表](README.md#formal_methods-六篇并表) 第 3 行 |
+| 证明树 | [THINKING_REPRESENTATION_METHODS](../../04_thinking/THINKING_REPRESENTATION_METHODS.md) §4.5；[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) |
+
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
+
+---
+
 **维护者**: Rust Formal Methods Research Group
-**最后更新**: 2026-02-12（国际权威对标补全）
+**最后更新**: 2026-02-14（国际权威对标补全）
 **状态**: ✅ **已完成** (100%)
 
 **国际权威对标**：[RustBelt](https://plv.mpi-sws.org/rustbelt/)、[Polonius](https://rust-lang.github.io/polonius/)；区域类型、NLL、datalog 形式化；[FLS Ch. 15.3–15.4](https://spec.ferrocene.dev/ownership-and-deconstruction.html) References、Borrowing。

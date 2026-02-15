@@ -93,7 +93,7 @@
 **推论 CP-C1**：Mutex、channel 等并发原语性能开销可实验测量；形式化保证正确性，性能需实验评估。
 
 | 实验类型 | 形式化定理 | 验证目标 |
-|----------|------------|----------|
+| :--- | :--- | :--- |
 | 多线程性能 | borrow T1 | 无数据竞争；Send/Sync 约束 |
 | 异步性能 | async T6.2 | 并发安全；Future 状态一致 |
 
@@ -367,12 +367,12 @@ async fn async_task_benchmark() {
 
 **结果**：
 
-| 原语        | 操作时间 (ms) | 吞吐量 (ops/s) |
+| 原语 | 操作时间 (ms) | 吞吐量 (ops/s) |
 | :--- | :--- | :--- |
-| Mutex       | 245           | 4,081,633      |
-| RwLock (写) | 280           | 3,571,429      |
-| RwLock (读) | 120           | 8,333,333      |
-| Atomic      | 85            | 11,764,706     |
+| Mutex | 245 | 4,081,633 |
+| RwLock (写) | 280 | 3,571,429 |
+| RwLock (读) | 120 | 8,333,333 |
+| Atomic | 85 | 11,764,706 |
 
 **分析**：
 
@@ -384,11 +384,11 @@ async fn async_task_benchmark() {
 
 **结果**：
 
-| 通道类型           | 延迟 (ns) | 吞吐量 (msg/s) |
+| 通道类型 | 延迟 (ns) | 吞吐量 (msg/s) |
 | :--- | :--- | :--- |
-| mpsc::channel      | 45        | 22,222,222     |
-| mpsc::unbounded    | 38        | 26,315,789     |
-| crossbeam::channel | 32        | 31,250,000     |
+| mpsc::channel | 45 | 22,222,222 |
+| mpsc::unbounded | 38 | 26,315,789 |
+| crossbeam::channel | 32 | 31,250,000 |
 
 **分析**：
 
@@ -400,7 +400,7 @@ async fn async_task_benchmark() {
 
 将 `cargo bench`（Mutex/RwLock/Atomic、mpsc/crossbeam、async 任务）的产出填入下表：
 
-| 类别 | 指标                  | 实测值 | 单位 | 备注          |
+| 类别 | 指标 | 实测值 | 单位 | 备注          |
 | :--- | :--- | :--- | :--- | :--- |
 | 同步 | Mutex 操作时间        | **\_** | ms   | 1M 次/4 线程  |
 | 同步 | RwLock 写 操作时间    | **\_** | ms   | 同上          |
