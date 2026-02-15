@@ -7,6 +7,7 @@
 > **分类**: 创建型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 2 行（Abstract Factory）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Abstract Factory 形式化分析](#abstract-factory-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -23,6 +25,8 @@
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -45,6 +49,14 @@
 **定理 AF-T2**：由 [ownership_model](../../../formal_methods/ownership_model.md) T2，产品所有权唯一。
 
 **推论 AF-C1**：Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 `unsafe`。由 AF-T1、AF-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Abstract Factory 结构）、Axiom AF1/AF2（产品族一致、所有权） | 上 |
+| **属性关系层** | Axiom AF1/AF2 → 定理 AF-T1/AF-T2 → 推论 AF-C1；依赖 trait、ownership | 上 |
+| **解释论证层** | 证明思路：关联类型保证一致、trait 解析；反例：混用不同族产品 | §证明思路、§反例 |
 
 ---
 
@@ -164,3 +176,25 @@ let ui = (win_factory.create_button(), mac_factory.create_dialog());
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Abstract Factory 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、Axiom AF1、定理 AF-T1（L2） |
+| 代码 | ✅ | 可运行示例 |
+| 场景 | ✅ | 典型场景表 |
+| 反例 | ✅ | 混用不同族产品 |
+| 衔接 | ✅ | ownership、CE-PAT1、04_boundary_matrix |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

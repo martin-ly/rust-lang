@@ -7,6 +7,7 @@
 > **分类**: 创建型
 > **安全边界**: 纯 Safe 或 需 unsafe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 5 行（Singleton）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Singleton 形式化分析](#singleton-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -21,6 +23,8 @@
   - [实现变体](#实现变体)
   - [反例](#反例)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -47,6 +51,14 @@
 **引理 S-L1**：若用 `OnceLock<T>` 且 $T$ 无 `Send`/`Sync` 要求，则 `get_or_init` 闭包仅执行一次；多线程并发调用时由内部同步序列化。
 
 **推论 S-C1**：`OnceLock`/`LazyLock` 实现的 Singleton 为纯 Safe；标准库封装内部 `unsafe`，对外无暴露。由 S-T1、S-L1 及 SBM-T1。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Singleton 结构）、Axiom S1（唯一性、线程安全） | 上 |
+| **属性关系层** | Axiom S1 → 定理 S-T1/S-T2、引理 S-L1 → 推论 S-C1；依赖 safe_unsafe_matrix | 上 |
+| **解释论证层** | S-T1/S-T2 完整证明；反例：static mut 多线程 UB | 上、§反例 |
 
 ---
 
@@ -144,3 +156,27 @@ fn get_instance() -> Arc<Mutex<i32>> {
 | 安全 | Safe（OnceLock/LazyLock）或 需 unsafe（static mut） |
 | 支持 | 原生 |
 | 表达 | 近似（无全局可变） |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| `LazyLock` 稳定 | 方式二 | 1.80+ 稳定；与 `OnceLock` 同为推荐实现 |
+| `OnceLock` | 方式一 | 1.70+ 稳定，惰性初始化首选 |
+| 无新增影响 | — | 1.93 无影响 Singleton 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、Axiom S1、定理 S-T1/T2（L2）、推论 S-C1 |
+| 代码 | ✅ | 三方式可运行示例 |
+| 场景 | ✅ | 典型场景表（配置、连接池、日志等） |
+| 反例 | ✅ | `static mut` 多线程 UB |
+| 衔接 | ✅ | safe_unsafe_matrix、02_complete_43 |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

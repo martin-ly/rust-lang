@@ -21,6 +21,8 @@
   - [运行时选型](#运行时选型)
   - [反例与边界](#反例与边界)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -219,3 +221,25 @@ handle.abort();  // 显式取消
 | 安全 | 纯 Safe（Pin 由库封装） |
 | 支持 | 库支持（tokio/async-std） |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模型 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | async/await 语义稳定，1.93 无变更 |
+| 92 项落点 | 无 | 见 [06_boundary_analysis](06_boundary_analysis.md#rust-193-执行模型相关变更) |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Future、Def、定理 AS-T1/T2/T3 |
+| 代码 | ✅ | 可运行示例 |
+| 场景 | ✅ | 典型场景、运行时选型 |
+| 反例 | ✅ | 自引用未 Pin、阻塞 executor |
+| 衔接 | ✅ | async_state_machine、pin、Send/Sync |
+| 权威对应 | ✅ | [RustBelt RBRlx](https://plv.mpi-sws.org/rustbelt/rbrlx/)、[formal_methods](../../formal_methods/README.md) |

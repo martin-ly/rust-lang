@@ -21,6 +21,8 @@
   - [通道与共享状态选型](#通道与共享状态选型)
   - [典型反例](#典型反例)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -205,3 +207,25 @@ assert_eq!(*data.lock().unwrap(), 10);
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模型 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | thread、Mutex、channel 语义稳定 |
+| 92 项落点 | 无 | 见 [06_boundary_analysis](06_boundary_analysis.md#rust-193-执行模型相关变更) |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、原子、内存顺序 |
+| 代码 | ✅ | 可运行示例 |
+| 场景 | ✅ | 典型场景、选型 |
+| 反例 | ✅ | Rc 跨线程、死锁 |
+| 衔接 | ✅ | Send/Sync、borrow、ownership |
+| 权威对应 | ✅ | [RustBelt RBRlx](https://plv.mpi-sws.org/rustbelt/rbrlx/)、[formal_methods](../../formal_methods/README.md) |

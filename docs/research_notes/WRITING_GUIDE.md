@@ -26,6 +26,8 @@
     - [1. Markdown 格式](#1-markdown-格式)
     - [2. 数学公式](#2-数学公式)
     - [4. 链接和引用](#4-链接和引用)
+    - [5. 目录（TOC）门禁](#5-目录toc门禁)
+    - [6. 概念定义-属性关系-解释论证 层次化](#6-概念定义-属性关系-解释论证-层次化)
   - [🔍 内容组织](#-内容组织)
     - [1. 逻辑结构](#1-逻辑结构)
     - [2. 章节划分](#2-章节划分)
@@ -454,6 +456,47 @@
 - [所有权模型形式化](./formal_methods/ownership_model.md)
 - [研究路线图](./RESEARCH_ROADMAP.md)
 ```
+
+### 5. 目录（TOC）门禁
+
+**门禁要求**（见 [TOC_AND_CONTENT_DEEPENING_PLAN](TOC_AND_CONTENT_DEEPENING_PLAN.md)）：
+
+- 凡 **≥3 个二级标题**的文档，须在元信息 blockquote 之后、正文第一个 `##` 之前增加 `## 📊 目录`
+- 目录须包含至少二级（`##`）的锚点链接，尽量到三级（`###`）
+- 锚点格式：标题转小写、空格替换为连字符（如 `## 形式化定义` → `#形式化定义`）
+- 新文档提交前须通过 TOC 门禁；见 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § 目录结构
+
+**示例**:
+
+```markdown
+---
+
+## 📊 目录
+
+- [文档标题](#文档标题)
+  - [形式化定义](#形式化定义)
+  - [Rust 实现](#rust-实现)
+  - [边界](#边界)
+
+---
+
+## 形式化定义
+...
+```
+
+### 6. 概念定义-属性关系-解释论证 层次化（核心研究笔记）
+
+**依据**：[CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) § 概念定义-属性关系-解释论证 层次化小节规范、[QUALITY_CHECKLIST](QUALITY_CHECKLIST.md)。
+
+凡含 Def/Axiom/定理的形式化文档，宜在形式化定义节末增加 **「概念定义-属性关系-解释论证 层次汇总」** 子节，用表格显式三层次：
+
+| 层次 | 内容 |
+| :--- | :--- |
+| **概念定义层** | Def、Axiom 列表及编号 |
+| **属性关系层** | 公理→定理→推论依赖 DAG |
+| **解释论证层** | 证明思路、反例所在节 |
+
+**示例**：见 [state](software_design_theory/01_design_patterns_formal/03_behavioral/state.md)、[02_effectiveness_proofs](software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md)。
 
 ---
 

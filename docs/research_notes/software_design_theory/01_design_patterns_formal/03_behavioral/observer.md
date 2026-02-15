@@ -15,6 +15,7 @@
 
 - [Observer 形式化分析](#observer-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [完整场景示例：订单事件通知（mpsc 单订阅者）](#完整场景示例订单事件通知mpsc-单订阅者)
   - [证明思路](#证明思路)
@@ -24,6 +25,8 @@
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -46,6 +49,14 @@
 **定理 OB-T2**：共享 `Rc<RefCell<Vec<Callback>>>` 需 `RefCell` 运行时借用检查；`Mutex` 为 Safe 抽象。由 [ownership_model](../../../formal_methods/ownership_model.md) 与 unsafe 契约。
 
 **推论 OB-C1**：Channel 实现 Observer 为纯 Safe；`mpsc`/`broadcast` 消息传递无共享可变。由 OB-T1、OB-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Observer 结构）、Axiom OB1/OB2（通知顺序、无循环、借用约束） | 上 |
+| **属性关系层** | Axiom OB1/OB2 → 定理 OB-T1/OB-T2 → 推论 OB-C1；依赖 borrow、ownership、Send/Sync | 上 |
+| **解释论证层** | 证明思路：channel 无共享可变、RefCell 运行时检查；反例：反例小节 | §证明思路、§反例 |
 
 ---
 
@@ -201,3 +212,25 @@ fn main() {
 | 安全 | Safe（channel）或 Safe（RefCell/Mutex） |
 | 支持 | 原生 |
 | 表达 | 近似（无继承） |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Observer 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、定理 OB-T1（L2） |
+| 代码 | ✅ | 可运行示例、订单通知 |
+| 场景 | ✅ | 典型场景、完整示例 |
+| 反例 | ✅ | 反例小节 |
+| 衔接 | ✅ | mpsc、Send/Sync、CE-T2 |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

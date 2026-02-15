@@ -157,7 +157,7 @@
 
 ## 六、任务依赖与建议顺序
 
-```
+```text
 T1.1 ─┬─→ T1.2 ─→ T1.3 ─→ T1.4 ─→ T1.5 ─→ T1.6
       └─→ T1.7（可与 T1.1 并行）
 
@@ -185,15 +185,39 @@ T3.* 在 T1、T2 有成果后接入
 
 ## 八、简要检查清单（执行时用）
 
-- [ ] 设计模式 23 篇：TOC 补全、五维自检
-- [ ] 执行模型 01–06：TOC 补全
-- [ ] formal_methods、type_theory、compositional：TOC 校验/补全、层次化
-- [ ] 根目录框架文档：TOC 补全
-- [ ] TEMPLATE/WRITING_GUIDE：TOC 模板、门禁
-- [ ] MAINTENANCE_GUIDE：季度 TOC+内容抽查
+- [x] 设计模式 23 篇：TOC 补全、五维自检、1.93 对应
+- [x] 执行模型 01–06：TOC 补全、1.93 对应、五维自检、权威对应
+- [x] formal_methods、type_theory、compositional：TOC 已有/校验完成
+- [x] 根目录框架文档：TOC 补全（T1.6）
+- [x] TEMPLATE/WRITING_GUIDE：TOC 模板、门禁（T1.7）
+- [x] MAINTENANCE_GUIDE：季度 TOC+内容抽查（T1.7）
 
 ---
 
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-15
-**状态**: 📋 计划文档，待执行
+**状态**: ✅ **100% 完成** — T1 全完成；T2.1/T2.2/T2.3/T2.4/T2.5 全部落地
+
+---
+
+## 九、T1 执行记录（2026-02-15）
+
+| 任务 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| T1.1 设计模式 23 篇 TOC | ✅ | 全部补全 `## 📊 目录` + 锚点 |
+| T1.2 执行模型 01–06 + README TOC | ✅ | 全部补全 |
+| T1.3 formal_methods | ✅ | 已有 TOC，无需补充 |
+| T1.4 type_theory | ✅ | 已有 TOC；construction_capability 已升级为 📊 |
+| T1.5 04_compositional_engineering 四篇 | ✅ | 01/02/03/README 补全 |
+| T1.6 根目录框架文档 | ✅ | ARGUMENTATION_CHAIN、HIERARCHICAL_MAPPING、FORMAL_FULL_MODEL、CORE_THEOREMS 补全；workflow 01–04 升级为 📊 |
+| T1.7 TOC 门禁入 TEMPLATE/WRITING_GUIDE/MAINTENANCE | ✅ | WRITING_GUIDE §5 目录门禁；MAINTENANCE_GUIDE 季度 TOC 抽查项 |
+
+### T2 执行记录（2026-02-15）
+
+| 任务 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| T2.1 五维自检 | ✅ 100% | 23 篇设计模式 + 执行模型 01–05 全部增加「实质内容五维自检」表 |
+| T2.4 1.93 对应 | ✅ 100% | 23 篇设计模式 + 执行模型 01–05 全部增加「与 Rust 1.93 的对应」段 |
+| T2.5 权威对标 | ✅ 100% | 23 篇设计模式 + 执行模型 01–05 五维自检表增加「权威对应」行 |
+| T2.2 概念定义-属性关系-解释论证 | ✅ 100% | formal_methods 六篇 + 23 模式 + 02_effectiveness_proofs 全部补「概念定义-属性关系-解释论证 层次汇总」；WRITING_GUIDE §6 规范 |
+| T2.3 证明深度 L2 | ✅ 100% | 23 篇设计模式全部标注 L2（完整证明草图）；五维自检表形式化行同步 |

@@ -22,6 +22,8 @@
   - [安全边界与 FFI](#安全边界与-ffi)
   - [与形式化基础衔接](#与形式化基础衔接)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
   - [分布式专用模式形式化（D2.1 扩展）](#分布式专用模式形式化d21-扩展)
 
 ---
@@ -231,6 +233,28 @@ where
 | 安全 | 纯 Safe（库封装）；FFI 需 unsafe |
 | 支持 | 库支持 |
 | 表达 | 近似（无内置 RPC） |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模型 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 分布式跨进程语义由库定义 |
+| 92 项落点 | 无 | 见 [06_boundary_analysis](06_boundary_analysis.md#rust-193-执行模型相关变更) |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、Event Sourcing、Saga、CQRS、熔断 |
+| 代码 | ✅ | 可运行示例 |
+| 场景 | ✅ | 典型场景、RPC、重试 |
+| 反例 | ✅ | 安全边界与 FFI |
+| 衔接 | ✅ | Send、序列化、形式化基础 |
+| 权威对应 | ✅ | [Fowler EAA](https://martinfowler.com/eaaCatalog/)、[formal_methods](../../formal_methods/README.md)、[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) |
 
 ---
 

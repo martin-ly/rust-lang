@@ -7,6 +7,7 @@
 > **分类**: 结构型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 8 行（Composite）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Composite 形式化分析](#composite-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -24,6 +26,8 @@
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -48,6 +52,14 @@ $$C = \mathrm{Leaf}(T) \mid \mathrm{Composite}(\mathrm{Vec}\langle C \rangle)$$
 **定理 CO-T2**：遍历时 `&self` 借用全部子节点；`&mut self` 可变遍历需小心别名。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md) 保证无数据竞争。
 
 **推论 CO-C1**：Composite 为纯 Safe；`enum` + `Vec`/`Box` 递归，无 `unsafe`；无环由类型结构保证。由 CO-T1、CO-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Composite 结构）、Axiom CO1/CO2（无环、遍历借用） | 上 |
+| **属性关系层** | Axiom CO1/CO2 → 定理 CO-T1/CO-T2 → 推论 CO-C1；依赖 ownership、borrow | 上 |
+| **解释论证层** | 证明思路：结构有界、遍历安全；反例：§反例 | §证明思路、§反例 |
 
 ---
 
@@ -191,3 +203,25 @@ assert_eq!(tree.size(), 600);
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Composite 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、Axiom CO1/CO2、定理 CO-T1/T2（L2） |
+| 代码 | ✅ | 可运行示例、完整场景 |
+| 场景 | ✅ | 典型场景、文件系统树 |
+| 反例 | ✅ | 反例小节 |
+| 衔接 | ✅ | ownership、borrow、CE-T1 |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

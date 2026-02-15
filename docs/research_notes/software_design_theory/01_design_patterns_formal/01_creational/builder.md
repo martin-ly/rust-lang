@@ -7,6 +7,7 @@
 > **分类**: 创建型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 3 行（Builder）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Builder 形式化分析](#builder-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -25,6 +27,8 @@
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -47,6 +51,14 @@
 **定理 B-T2**：类型状态模式可强制编译期必填：`ConfigBuilder<SetHost>` 与 `ConfigBuilder<SetPort>` 等相位类型，仅当所有相位完成时 `build` 可用。
 
 **推论 B-C1**：Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe`。由 B-T1、B-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Builder 结构）、Axiom B1/B2（必填、消费 self） | 上 |
+| **属性关系层** | Axiom B1/B2 → 定理 B-T1/B-T2 → 推论 B-C1；依赖 ownership、safe_unsafe_matrix | 上 |
+| **解释论证层** | 证明思路：build 消费、类型状态；反例：缺必填、双重 build | §证明思路、§反例 |
 
 ---
 
@@ -229,3 +241,25 @@ let req = HttpRequestBuilder::new()
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Builder 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def BU1、定理 BU-T1/BU-T2（L2） |
+| 代码 | ✅ | 可运行示例、类型状态 Builder |
+| 场景 | ✅ | 典型场景、错误处理 |
+| 反例 | ✅ | 缺必填字段、双重 build |
+| 衔接 | ✅ | ownership、CE-T1、CE-PAT1 |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[Fowler EAA](https://martinfowler.com/eaaCatalog/)、[formal_methods](../../../formal_methods/README.md) |

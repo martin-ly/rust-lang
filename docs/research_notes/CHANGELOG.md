@@ -14,6 +14,35 @@
 
 ---
 
+## [1.4.3] - 2026-02-15 🆕
+
+### TOC 与内容深化 100% 完成（2026-02-15）🆕
+
+- **T2.2 formal_methods 六篇 层次汇总**：ownership_model、borrow_checker_proof、lifetime_formalization、async_state_machine、pin_self_referential、send_sync_formalization 全部补「概念定义-属性关系-解释论证 层次汇总」；TOC 锚点同步
+- **T2.2 层次汇总 TOC 锚点**：8 篇行为模式（chain_of_responsibility、command、interpreter、iterator、mediator、memento、template_method、visitor）在 `## 📊 目录` 中补全「概念定义-属性关系-解释论证 层次汇总」锚点链接
+- **T2.3 证明深度 L2**：19 篇设计模式（singleton、builder、abstract_factory、prototype、adapter、bridge、composite、decorator、facade、flyweight、proxy、chain_of_responsibility、command、interpreter、iterator、mediator、memento、template_method、visitor）补全 L2 元信息与五维自检表形式化行；23 篇设计模式全部 L2
+
+### 目录补全（T1）100% 完成（2026-02-15）🆕
+
+- **T1.1 设计模式 23 篇**：全部补全 `## 📊 目录` + 锚点（01_creational 5 篇、02_structural 7 篇、03_behavioral 11 篇）
+- **T1.2 执行模型**：01_synchronous–05_distributed、06_boundary_analysis、README 补全 TOC
+- **T1.5 组合工程**：04_compositional_engineering 四篇（01_formal_composition、02_effectiveness_proofs、03_integration_theory、README）补全
+- **T1.6 根目录与 workflow**：ARGUMENTATION_CHAIN_AND_FLOW、HIERARCHICAL_MAPPING_AND_SUMMARY、FORMAL_FULL_MODEL_OVERVIEW、CORE_THEOREMS_FULL_PROOFS 补全；02_workflow 01–04 升级为 📊；CORE_FEATURES、INCREMENTAL_UPDATE_FLOW、RUST_193_FEATURE_MATRIX、construction_capability 统一为 📊
+- **T1.7 持续机制**：WRITING_GUIDE §5 目录门禁；MAINTENANCE_GUIDE 季度 TOC 有效性抽查项
+- **TOC_AND_CONTENT_DEEPENING_PLAN**：T1 执行记录已更新
+
+### 内容深化（T2）设计模式 + 执行模型 100% 完成（2026-02-15）🆕
+
+- **T2.1 五维自检**：23 篇设计模式 + 执行模型 01–05 全部增加「实质内容五维自检」表
+- **T2.4 1.93 对应**：23 篇设计模式 + 执行模型 01–05 全部增加「与 Rust 1.93 的对应」段
+- **T2.5 权威对标**：23 篇设计模式 + 执行模型 01–05 五维自检表增加「权威对应」行（GoF、formal_methods、RustBelt、Fowler EAA、INTERNATIONAL_FORMAL_VERIFICATION_INDEX）
+- **TOC 同步**：执行模型 01–05 目录已增加 1.93、五维自检锚点
+- **MAINTENANCE_GUIDE**：季度维护增加「五维自检复核」抽查项
+- **T2.2 概念定义-属性关系-解释论证**：✅ 100% — 23 篇设计模式 + 02_effectiveness_proofs 全部补「概念定义-属性关系-解释论证 层次汇总」；TOC 锚点补全；WRITING_GUIDE §6 层次化规范
+- **T2.3 证明深度 L2**：✅ 100% — 23 篇设计模式全部标注 L2（完整证明草图）；五维自检表形式化行同步
+
+---
+
 ## [1.4.2] - 2026-02-15 🆕
 
 ### 设计模式/分布式/工作流全面论证 100% 完成（2026-02-15）🆕

@@ -7,6 +7,7 @@
 > **分类**: 结构型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 12 行（Proxy）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Proxy 形式化分析](#proxy-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -23,6 +25,8 @@
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -43,6 +47,14 @@
 **定理 PR-T1**：委托时借用/所有权规则保证正确性。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
 
 **推论 PR-C1**：Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。由 PR-T1 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Proxy 结构）、Axiom PR1/PR2（接口一致、委托规则） | 上 |
+| **属性关系层** | Axiom PR1/PR2 → 定理 PR-T1 → 推论 PR-C1；依赖 borrow、safe_unsafe_matrix | 上 |
+| **解释论证层** | 证明思路：委托借用；反例：代理持有 mut 且未同步 | §证明思路、§反例 |
 
 ---
 
@@ -182,3 +194,25 @@ struct BadProxy {
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Proxy 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、定理 PR-T1（L2） |
+| 代码 | ✅ | 可运行示例 |
+| 场景 | ✅ | 典型场景表 |
+| 反例 | ✅ | 代理持有 mut 且未同步 |
+| 衔接 | ✅ | borrow、ownership、CE-T1 |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

@@ -15,6 +15,7 @@
 
 - [Strategy 形式化分析](#strategy-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [与 GoF 对比](#与-gof-对比)
@@ -26,6 +27,8 @@
   - [性能考虑](#性能考虑)
   - [选型决策树](#选型决策树)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -48,6 +51,14 @@
 **定理 SR-T2**：策略调用时借用规则：`&self` 不可变调用策略；`&mut self` 可变时仍满足互斥。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
 
 **推论 SR-C1**：Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。由 SR-T1、SR-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Strategy 结构）、Axiom SR1/SR2（接口一致、无循环） | 上 |
+| **属性关系层** | Axiom SR1/SR2 → 定理 SR-T1/SR-T2 → 推论 SR-C1；依赖 trait、borrow、CE-PAT1 | 上 |
+| **解释论证层** | 证明思路：trait 多态、借用互斥；反例：策略持有共享可变状态 | §证明思路、§反例 |
 
 ---
 
@@ -234,3 +245,25 @@ impl Strategy for BadStrategy {
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Strategy 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、定理 SG-T1（L2） |
+| 代码 | ✅ | 可运行示例、压缩格式策略 |
+| 场景 | ✅ | 典型场景、完整示例 |
+| 反例 | ✅ | 策略持有共享可变状态 |
+| 衔接 | ✅ | trait、ownership、CE-T2、CE-PAT1 |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

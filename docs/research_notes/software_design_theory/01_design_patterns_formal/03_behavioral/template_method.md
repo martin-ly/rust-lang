@@ -7,6 +7,7 @@
 > **分类**: 行为型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 22 行（Template Method）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Template Method 形式化分析](#template-method-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [与继承对比](#与继承对比)
@@ -23,6 +25,8 @@
   - [反例：覆盖 template 破坏骨架](#反例覆盖-template-破坏骨架)
   - [选型决策树](#选型决策树)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -51,6 +55,14 @@
 **推论 TM-C1**：Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{TemplateMethod}) = \mathrm{Approx}$。
 
 **反例**：若钩子内调用 `template` 形成递归，需保证终止；否则栈溢出。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Template Method 结构）、Axiom TM1/TM2（骨架不变、钩子可覆盖） | 上 |
+| **属性关系层** | Axiom TM1/TM2 → 定理 TM-T1、引理 TM-L1 → 推论 TM-C1；依赖 trait、expressive_inexpressive_matrix | 上 |
+| **解释论证层** | 证明：TM-T1、TM-L1；反例：覆盖 template 破坏骨架、递归未终止 | 上、§反例 |
 
 ---
 
@@ -204,3 +216,25 @@ impl Algorithm for BadImpl {
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 近似（无继承） |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Template Method 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、定理 TM-T1（L2） |
+| 代码 | ✅ | 可运行示例 |
+| 场景 | ✅ | 典型场景表 |
+| 反例 | ✅ | 覆盖 template 破坏骨架 |
+| 衔接 | ✅ | trait 默认方法、ownership |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

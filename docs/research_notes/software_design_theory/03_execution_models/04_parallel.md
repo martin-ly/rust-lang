@@ -23,6 +23,8 @@
   - [与异步组合](#与异步组合)
   - [反例](#反例)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -216,3 +218,25 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 | 安全 | 纯 Safe |
 | 支持 | 库支持（rayon）；std 提供 thread |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模型 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | rayon、并行原语语义稳定 |
+| 92 项落点 | 无 | 见 [06_boundary_analysis](06_boundary_analysis.md#rust-193-执行模型相关变更) |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、与并发区别 |
+| 代码 | ✅ | 可运行示例 |
+| 场景 | ✅ | 典型场景、Rayon 调度 |
+| 反例 | ✅ | 闭包非 Send、共享可变 |
+| 衔接 | ✅ | Send、ownership、async 组合 |
+| 权威对应 | ✅ | [formal_methods](../../formal_methods/README.md)、[Rayon](https://github.com/rayon-rs/rayon) |

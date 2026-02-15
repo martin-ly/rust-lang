@@ -7,6 +7,7 @@
 > **分类**: 创建型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 4 行（Prototype）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Prototype 形式化分析](#prototype-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -24,6 +26,8 @@
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -46,6 +50,14 @@
 **定理 P-T2**：`&self` 借用，返回值拥有所有权；原对象仍有效。由 ownership T2。
 
 **推论 P-C1**：若 $T : \text{Clone}$，则 $\mathit{clone}(t)$ 产生的副本可安全传递、存储；与原对象生命周期独立。由 P-T1、P-T2 及 ownership 唯一性。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Prototype 结构）、Axiom P1/P2（独立副本、浅/深拷贝） | 上 |
+| **属性关系层** | Axiom P1/P2 → 定理 P-T1/P-T2 → 推论 P-C1；依赖 type、ownership | 上 |
+| **解释论证层** | 证明思路：clone 所有权、类型；反例：Clone 含浅拷贝引用 | §证明思路、§反例 |
 
 ---
 
@@ -171,3 +183,25 @@ impl Clone for BadNode {
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Prototype 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、Axiom P1/P2、定理 P-T1/T2（L2）、推论 P-C1 |
+| 代码 | ✅ | Clone impl 示例 |
+| 场景 | ✅ | 典型场景、与 Copy 关系 |
+| 反例 | ✅ | Clone 含浅拷贝引用 |
+| 衔接 | ✅ | ownership、borrow、04_boundary_matrix |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

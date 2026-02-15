@@ -7,6 +7,7 @@
 > **分类**: 行为型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 15 行（Interpreter）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Interpreter 形式化分析](#interpreter-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -25,6 +27,8 @@
   - [反例：AST 含环或无限递归](#反例ast-含环或无限递归)
   - [选型决策树](#选型决策树)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -53,6 +57,14 @@
 **推论 IN-C1**：Interpreter 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{Interpreter}) = \mathrm{Approx}$（无 OOP 继承）。
 
 **反例**：若 AST 含环（自引用），递归求值不终止；由 Axiom IN1 排除。若漏 match 分支，编译错误。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Interpreter 结构）、Axiom IN1/IN2（AST 有穷、match 穷尽） | 上 |
+| **属性关系层** | Axiom IN1/IN2 → 定理 IN-T1、引理 IN-L1 → 推论 IN-C1；依赖 type_system | 上 |
+| **解释论证层** | 证明：IN-T1、IN-L1；反例：AST 含环、漏 match | 上、§反例 |
 
 ---
 
@@ -300,3 +312,25 @@ GoF 用继承定义 AST 节点；Rust 用枚举更简洁，且穷尽匹配保证
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 近似（无继承，用枚举） |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Interpreter 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、定理 IN-T1（L2） |
+| 代码 | ✅ | 可运行示例、过滤表达式、DSL |
+| 场景 | ✅ | 典型场景、完整示例 |
+| 反例 | ✅ | AST 含环或无限递归 |
+| 衔接 | ✅ | ownership、递归类型 |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

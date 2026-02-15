@@ -7,6 +7,7 @@
 > **分类**: 行为型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 14 行（Command）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Command 形式化分析](#command-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -24,6 +26,8 @@
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -46,6 +50,14 @@
 **定理 CM-T2**：`Box<dyn Fn()>` 可存储、可跨边界传递；满足 Send 则可跨线程。
 
 **推论 CM-C1**：Command 为纯 Safe；闭包或 trait 封装操作，无 `unsafe`。由 CM-T1、CM-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Command 结构）、Axiom CM1/CM2（可存储、闭包即命令） | 上 |
+| **属性关系层** | Axiom CM1/CM2 → 定理 CM-T1/CM-T2 → 推论 CM-C1；依赖 type、ownership、Send | 上 |
+| **解释论证层** | 证明思路：闭包类型安全、Send 跨线程；反例：命令副作用不可逆 | §证明思路、§反例 |
 
 ---
 
@@ -252,3 +264,25 @@ impl ReversibleCommand for SendEmailCommand {
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Command 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、定理 CM-T1（L2） |
+| 代码 | ✅ | 可运行示例、可撤销编辑器 |
+| 场景 | ✅ | 典型场景、完整示例 |
+| 反例 | ✅ | 命令副作用不可逆 |
+| 衔接 | ✅ | ownership、CE-T2、Send |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

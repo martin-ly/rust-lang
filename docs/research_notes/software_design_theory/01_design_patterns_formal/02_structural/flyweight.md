@@ -7,6 +7,7 @@
 > **分类**: 结构型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 11 行（Flyweight）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Flyweight 形式化分析](#flyweight-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -24,6 +26,8 @@
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -46,6 +50,14 @@
 **定理 FL-T2**：跨线程共享需 `Arc` + `Sync`；单线程可用 `Rc`。
 
 **推论 FL-C1**：Flyweight 为纯 Safe；`Arc`/`Rc` 共享不可变，无 `unsafe`；可变状态外置时用 `Mutex` 等 Safe 抽象。由 FL-T1、FL-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Flyweight 结构）、Axiom FL1/FL2（共享不可变、缓存单射） | 上 |
+| **属性关系层** | Axiom FL1/FL2 → 定理 FL-T1/FL-T2 → 推论 FL-C1；依赖 ownership、Send/Sync | 上 |
+| **解释论证层** | 证明思路：Arc 共享安全；反例：共享可变状态 | §证明思路、§反例 |
 
 ---
 
@@ -251,3 +263,25 @@ struct BadFlyweight {
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Flyweight 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、Axiom FW1、定理 FW-T1（L2） |
+| 代码 | ✅ | 可运行示例、字形缓存 |
+| 场景 | ✅ | 典型场景、完整示例 |
+| 反例 | ✅ | 共享可变状态 |
+| 衔接 | ✅ | Arc、ownership、Send/Sync |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

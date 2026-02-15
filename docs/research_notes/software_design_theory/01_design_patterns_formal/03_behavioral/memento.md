@@ -7,6 +7,7 @@
 > **分类**: 行为型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 18 行（Memento）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Memento 形式化分析](#memento-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -23,6 +25,8 @@
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -51,6 +55,14 @@
 **推论 MO-C1**：Memento 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{Memento}) = \mathrm{Approx}$。
 
 **反例**：若 $M$ 与 $O$ 版本不兼容（如 $O$ 新增字段），`restore` 可能产生非法状态；由 Axiom MO2，需版本兼容或默认值。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Memento 结构）、Axiom MO1/MO2（状态可恢复、兼容） | 上 |
+| **属性关系层** | Axiom MO1/MO2 → 定理 MO-T1、引理 MO-L1 → 推论 MO-C1；依赖 expressive_inexpressive_matrix | 上 |
+| **解释论证层** | 证明：MO-T1、MO-L1；反例：版本不兼容 | 上、§反例 |
 
 ---
 
@@ -166,3 +178,25 @@ assert_eq!(o.state, "A");
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 近似（无私有封装） |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Memento 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、定理 ME-T1（L2） |
+| 代码 | ✅ | 可运行示例 |
+| 场景 | ✅ | 典型场景表 |
+| 反例 | ✅ | 反例小节 |
+| 衔接 | ✅ | Clone、ownership |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

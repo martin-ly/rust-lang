@@ -7,6 +7,7 @@
 > **分类**: 行为型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 16 行（Iterator）
+> **证明深度**: L2（完整证明草图）
 
 ---
 
@@ -14,6 +15,7 @@
 
 - [Iterator 形式化分析](#iterator-形式化分析)
   - [形式化定义](#形式化定义)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [证明思路](#证明思路)
   - [典型场景](#典型场景)
@@ -23,6 +25,8 @@
   - [与标准库衔接](#与标准库衔接)
   - [选型决策树](#选型决策树)
   - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
@@ -45,6 +49,14 @@
 **定理 IT-T2**：`&mut self` 可变借用保证迭代器内部状态一致；由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
 
 **推论 IT-C1**：Iterator 为纯 Safe；`Iterator` trait 标准库定义，`for` 糖语法，无 `unsafe`。由 IT-T1、IT-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def 1.1（Iterator 结构）、Axiom IT1/IT2（无重复、可变借用） | 上 |
+| **属性关系层** | Axiom IT1/IT2 → 定理 IT-T1/IT-T2 → 推论 IT-C1；依赖 type、borrow | 上 |
+| **解释论证层** | 证明思路：Iterator trait、借用；反例：迭代中修改集合 | §证明思路、§反例 |
 
 ---
 
@@ -156,3 +168,25 @@ for x in v.iter() {
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
 | 表达 | 等价 |
+
+---
+
+## 与 Rust 1.93 的对应
+
+| 1.93 特性 | 与本模式 | 说明 |
+| :--- | :--- | :--- |
+| 无新增影响 | — | 1.93 无影响 Iterator 语义的变更 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+
+---
+
+## 实质内容五维自检
+
+| 自检项 | 状态 | 说明 |
+| :--- | :--- | :--- |
+| 形式化 | ✅ | Def 1.1、定理 IT-T1（L2） |
+| 代码 | ✅ | 可运行示例 |
+| 场景 | ✅ | 典型场景表 |
+| 反例 | ✅ | 迭代中修改集合 |
+| 衔接 | ✅ | 标准库 Iterator、ownership |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

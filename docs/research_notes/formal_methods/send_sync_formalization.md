@@ -18,6 +18,7 @@
   - [📚 理论基础](#-理论基础)
   - [🔬 形式化定义](#-形式化定义)
   - [定理与引理](#定理与引理)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [⚠️ 反例](#️-反例)
   - [🌳 公理-定理证明树](#-公理-定理证明树)
   - [🔗 与 spawn/Future/Arc 衔接](#-与-spawnfuturearc-衔接)
@@ -92,6 +93,14 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 **定理 SEND-SYNC-T1（spawn 数据竞争自由）**：若闭包类型 $F$ 满足 $F : \text{Send} + \text{'static}$，则 `thread::spawn(|| body)` 与 [async_state_machine](async_state_machine.md) Def SPAWN1、定理 SPAWN-T1 一致，跨线程无数据竞争。
 
 *证明*：SPAWN1 要求闭包 `Send + 'static`；由 SEND-T1，捕获的 $T$ 转移至新线程后原线程不再访问，故满足数据竞争自由。∎
+
+### 概念定义-属性关系-解释论证 层次汇总
+
+| 层次 | 内容 | 本页对应 |
+| :--- | :--- | :--- |
+| **概念定义层** | Def SEND1、SYNC1（SafeTransfer、SafeShare）；等价形式 Sync ⇔ Send(&T) | §形式化定义 |
+| **属性关系层** | Def → SYNC-L1 → SEND-T1/SYNC-T1 → SEND-SYNC-T1；依赖 borrow、ownership、async | §定理与引理、§公理-定理证明树 |
+| **解释论证层** | 各定理证明块；反例：Rc !Send、Cell !Sync、非 Send spawn | §定理与引理、§反例 |
 
 ---
 
