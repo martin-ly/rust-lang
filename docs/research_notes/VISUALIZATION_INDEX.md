@@ -190,6 +190,132 @@
 
 ---
 
+## 💻 可视化代码示例
+
+### 示例 1: Mermaid 思维导图代码
+
+```mermaid
+graph TB
+    subgraph "理论基础"
+        A1["所有权规则 1-3"]
+        A2["借用规则 5-8"]
+        A3["生命周期规则"]
+    end
+
+    subgraph "核心定理"
+        T1["T-OW2 所有权唯一性"]
+        T2["T-BR1 数据竞争自由"]
+        T3["T-TY3 类型安全"]
+    end
+
+    subgraph "应用保证"
+        G1["内存安全"]
+        G2["并发安全"]
+        G3["类型安全"]
+    end
+
+    A1 --> T1
+    A2 --> T2
+    A3 --> T2
+    
+    T1 --> G1
+    T2 --> G2
+    T3 --> G3
+    
+    style A1 fill:#f9f
+    style T1 fill:#bbf
+    style G1 fill:#bfb
+```
+
+### 示例 2: 概念对比矩阵代码
+
+```markdown
+| 特性 | 形式化方法 | 实验验证 | 工具支持 |
+| :--- | :--- | :--- | :--- |
+| 所有权 | Coq/Isabelle | Miri | rustc |
+| 借用 | Coq/Isabelle | 并发测试 | clippy |
+| 类型 | Coq/Isabelle | 基准测试 | rust-analyzer |
+```
+
+### 示例 3: 决策树代码
+
+```text
+开始研究选择
+│
+├─ 选择研究类型
+│  ├─ 理论研究 → 形式化方法
+│  │   ├─ 使用 Coq → 构造主义逻辑
+│  │   └─ 使用 Isabelle → 高阶逻辑
+│  └─ 实验研究 → 性能分析
+│      ├─ 微基准 → Criterion.rs
+│      └─ 宏基准 → 实际应用测试
+│
+└─ 验证方法
+   ├─ 形式化证明 → 定理证明器
+   └─ 经验验证 → 测试套件
+```
+
+### 示例 4: Rust 可视化代码
+
+```rust
+// 研究场景：性能数据可视化
+use std::collections::HashMap;
+
+fn visualize_performance_data(data: &[(String, f64)]) {
+    let max_val = data.iter()
+        .map(|(_, v)| *v)
+        .fold(0.0, f64::max);
+    
+    for (name, value) in data {
+        let bar_length = ((value / max_val) * 50.0) as usize;
+        let bar = "█".repeat(bar_length);
+        println!("{:20} |{} {:.2}", name, bar, value);
+    }
+}
+
+fn main() {
+    let perf_data = vec![
+        ("Vec::push".to_string(), 15.2),
+        ("VecDeque::push".to_string(), 12.8),
+        ("LinkedList::push".to_string(), 45.5),
+        ("HashMap::insert".to_string(), 28.3),
+    ];
+    
+    visualize_performance_data(&perf_data);
+}
+```
+
+---
+
+## 🔗 形式化链接
+
+### 可视化文档索引
+
+| 可视化类型 | 文档 | 内容 |
+| :--- | :--- | :--- |
+| 思维导图 | [MIND_MAP_COLLECTION](./MIND_MAP_COLLECTION.md) | 知识结构化思维导图 |
+| 概念矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念对比矩阵 |
+| 决策树 | [DECISION_GRAPH_NETWORK](./DECISION_GRAPH_NETWORK.md) | 决策图网络 |
+| 证明树 | [PROOF_INDEX](./PROOF_INDEX.md) | 证明树结构 |
+
+### 研究笔记链接
+
+| 类别 | 文档 | 可视化内容 |
+| :--- | :--- | :--- |
+| 形式化方法 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) | 所有权状态图 |
+| 类型理论 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) | 类型推导树 |
+| 实验研究 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) | 性能图表 |
+
+### 形式化定理链接
+
+| 定理 | 可视化表示 | 代码示例位置 |
+| :--- | :--- | :--- |
+| T-OW2 | 所有权状态转换图 | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| T-BR1 | 借用生命周期图 | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| T-TY3 | 类型推导树 | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+
+---
+
 **维护者**: Rust Research Visualization Team
-**最后更新**: 2025-12-25
-**状态**: 📊 **持续更新中**
+**最后更新**: 2026-02-20
+**状态**: ✅ **已完成**
