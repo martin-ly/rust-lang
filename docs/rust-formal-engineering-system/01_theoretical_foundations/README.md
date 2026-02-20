@@ -91,6 +91,33 @@ impl<'input> Parser<'input> {
 }
 ```
 
+## 知识结构思维导图
+
+```mermaid
+mindmap
+  root((理论基础))
+    所有权系统
+      资源管理代数
+      Move语义
+      Copy语义
+    借用与能力
+      只读能力
+      排他读写能力
+    生命周期
+      区域理论
+      生命周期约束
+    形式化方法
+      类型系统
+      证明与验证
+```
+
+## 与核心文档的关联
+
+| 本文档 | 核心文档 | 关系 |
+|:---|:---|:---|
+| 本README | research_notes/formal_methods/ | 索引/重定向 |
+| 本README | research_notes/type_theory/ | 索引/重定向 |
+
 [返回主索引](../00_master_index.md)
 
 ---

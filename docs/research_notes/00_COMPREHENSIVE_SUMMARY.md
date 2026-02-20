@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 单一入口的完整总结、全项目知识地图、论证脉络总览；解决「无完整总结综合、无论证脉络关系」的缺口
-> **上位文档**: [00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md)、[RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](./RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md)
+> **上位文档**: [00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md)、[AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)
 > **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md)（按本格式 100% 覆盖 docs）
 
 ---
@@ -112,7 +112,7 @@
 | **UNIFIED_SYSTEMATIC_FRAMEWORK** | 思维导图、矩阵、决策树、反例 | 统一框架 |
 | **FORMAL_PROOF_SYSTEM_GUIDE** | 论证要素规范、概念-公理-定理映射 | 论证规范 |
 | **ARGUMENTATION_GAP_INDEX** | 论证缺口、设计理由、思维表征覆盖 | 缺口追踪 |
-| **RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN** | 三大支柱、缺口、可持续推进 | 支柱总览 |
+| **AUTHORITATIVE_ALIGNMENT_GUIDE** | 权威对齐指南、技术决策参考 | 三大支柱与权威来源对齐指南 |
 
 ---
 
@@ -120,7 +120,7 @@
 
 | 目标 | 路径 |
 | :--- | :--- |
-| **快速把握全貌** | 本文件 → RESEARCH_PILLARS |
+| **快速把握全貌** | 本文件 → AUTHORITATIVE_ALIGNMENT_GUIDE |
 | **理解论证脉络** | ARGUMENTATION_CHAIN_AND_FLOW → FORMAL_FULL_MODEL_OVERVIEW |
 | **查具体定理** | PROOF_INDEX → CORE_THEOREMS_FULL_PROOFS / 各子文档 |
 | **选设计/并发模式** | software_design_theory/00_MASTER_INDEX → 06_boundary_analysis |

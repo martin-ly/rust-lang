@@ -283,4 +283,42 @@ mod contracts {
 
 ---
 
+## 知识结构思维导图
+
+```mermaid
+mindmap
+  root((质量保障))
+    测试覆盖
+      单元测试
+      集成测试
+      基准测试
+    内存安全
+      MIRI检测
+      Valgrind
+      UB验证
+    性能保障
+      性能回归
+      分析工具
+    形式化验证
+      模型检查
+      定理证明
+      契约验证
+    代码质量
+      Clippy
+      rustfmt
+      文档规范
+    质量检查
+      构建检查
+      测试检查
+      覆盖率检查
+```
+
+## 与核心文档的关联
+
+| 本文档 | 核心文档 | 关系 |
+|:---|:---|:---|
+| 本README | research_notes/QUALITY_CHECKLIST.md | 索引/重定向 |
+| 本README | research_notes/TOOLS_GUIDE.md | 索引/重定向 |
+| 本README | TESTING_COVERAGE_GUIDE.md | 索引/重定向 |
+
 [返回主索引](../00_master_index.md)

@@ -148,6 +148,7 @@
 ### 目标: 通过 Rust 面试
 
 **推荐路径**:
+
 1. [Brown 交互版 Book](https://rust-book.cs.brown.edu/) - 完成所有测验
 2. [Rustlings](https://github.com/rust-lang/rustlings) - 完成 80% 以上练习
 3. [Compiler Error Index](https://doc.rust-lang.org/error-index.html) - 熟悉常见错误
@@ -155,6 +156,7 @@
 ### 目标: 开发生产项目
 
 **推荐路径**:
+
 1. [The Rust Book](https://doc.rust-lang.org/book/) - 完整阅读
 2. [Rust Reference](https://doc.rust-lang.org/reference/) - 查阅语言规范
 3. [Command Line Book](https://rust-cli.github.io/book/) - CLI 项目
@@ -163,6 +165,7 @@
 ### 目标: 贡献 Rust 编译器
 
 **推荐路径**:
+
 1. [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) - 编译器开发指南
 2. [Rust Reference](https://doc.rust-lang.org/reference/) - 理解语言规范
 3. [Ferrocene FLS](https://spec.ferrocene.dev/) - 形式化规范
@@ -170,6 +173,7 @@
 ### 目标: 学术研究（形式化验证）
 
 **推荐路径**:
+
 1. [RustBelt 论文](https://plv.mpi-sws.org/rustbelt/popl18/) - 理论基础
 2. [Ferrocene FLS](https://spec.ferrocene.dev/) - 形式化规范
 3. 本项目 [formal_methods](../research_notes/formal_methods/) - 中文形式化论证
@@ -182,7 +186,7 @@
 
 | 资源 | 说明 | 形式化链接 |
 | :--- | :--- | :--- |
-| [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) | 批判性分析与推进计划 | [formal_methods/README](../research_notes/formal_methods/README.md) |
+| [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) | 批判性分析与推进计划 | [formal_methods/README](../research_notes/formal_methods/README.md) |
 | [CORE_THEOREMS_FULL_PROOFS](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明（L2） | [ownership_model](../research_notes/formal_methods/ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | 国际对标 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)、[Ferrocene FLS](https://spec.ferrocene.dev/) |
 
@@ -210,11 +214,13 @@
 ### 学习路径建议
 
 **初学者路径** (Microsoft课程 → 本项目):
+
 1. 完成 edX Microsoft 入门课程
 2. 结合本项目 [LEARNING_PATH_PLANNING.md](./LEARNING_PATH_PLANNING.md) 深化理解
 3. 通过 [Rustlings 练习](../../exercises/RUSTLINGS_MAPPING.md) 巩固知识
 
 **开发者进阶路径** (Linux Foundation课程 → 本项目):
+
 1. 完成 edX Linux Foundation 开发者课程
 2. 参考本项目 [05_guides/](../05_guides/) 专题指南
 3. 阅读 [异步模式速查](../02_reference/quick_reference/async_patterns.md) 等进阶内容

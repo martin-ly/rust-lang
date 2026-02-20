@@ -1,4 +1,13 @@
 # 权威来源对齐进度报告
+>
+> **创建日期**: 2026-02-20
+> **最后更新**: 2026-02-20
+> **归档日期**: 2026-02-20
+> **归档原因**: 过程性文档归档
+> **状态**: 📦 已归档
+
+---
+
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-20
@@ -32,7 +41,8 @@
 | MIT 6.858 | ownership_model.md | ✅ |
 
 **添加内容**:
-- MIT 6.826/6.858 课程链接 (https://6826.csail.mit.edu/, https://css.csail.mit.edu/6.858/)
+
+- MIT 6.826/6.858 课程链接 (<https://6826.csail.mit.edu/>, <https://css.csail.mit.edu/6.858/>)
 - Spatial/Temporal Safety 形式化定义
 - Capability-based Security 与 Rust 所有权对比
 - Symbolic Execution 与 Borrow Checker 关系
@@ -47,8 +57,9 @@
 | CS110L | ownership_model.md | ✅ |
 
 **添加内容**:
-- Stanford CS242 链接 (https://cs242.stanford.edu/)
-- Stanford CS110L 链接 (https://web.stanford.edu/class/cs110l/)
+
+- Stanford CS242 链接 (<https://cs242.stanford.edu/>)
+- Stanford CS110L 链接 (<https://web.stanford.edu/class/cs110l/>)
 - **完整Curry-Howard对应表** (9行，含Rust示例)
 - **Progress/Preservation定理** (Stanford形式化)
 - Safety without GC 对比分析
@@ -67,6 +78,7 @@
 | CMU 15-799 | lifetime_formalization.md | ✅ |
 
 **添加内容**:
+
 - **Separation Logic** 与 Rust 所有权对应
 - **Hoare Triple** `{P} C {Q}` 与 Rust 形式化
 - **Concurrent Separation Logic** 与 Send/Sync
@@ -83,6 +95,7 @@
 | EPFL | Concurrent Programming | ownership_model.md | ✅ |
 
 **添加内容**:
+
 - ETH Zurich (David Evangelista) 课程对齐
 - University of Cambridge Rust课程对齐
 - EPFL 并发编程对齐
@@ -106,12 +119,14 @@
 ### Ferrocene FLS 逐章深化 🔄
 
 **目标章节**:
+
 - [ ] Ch. 5: Types - 类型系统形式化
 - [ ] Ch. 15: Ownership and Destruction
 - [ ] Ch. 16: State Memory - 内存模型
 - [ ] Ch. 17: Concurrency - 并发形式化
 
 **目标文档**:
+
 - formal_methods/ownership_model.md
 - formal_methods/borrow_checker_proof.md
 - type_theory/type_system_foundations.md
@@ -119,12 +134,14 @@
 ### Aeneas 完整整合 🔄
 
 **目标内容**:
+
 - [ ] Aeneas 理论基础
 - [ ] Characteristic Prophecy Variables
 - [ ] borrow_generated_from 关系
 - [ ] 与 RustBelt 的对比
 
 **目标文档**:
+
 - formal_methods/ownership_model.md
 - research_notes/AENEAS_INTEGRATION_PLAN.md (更新)
 
@@ -135,15 +152,18 @@
 ### 顶级会议论文深化
 
 **POPL论文**:
+
 - [ ] Patina (Microsoft Research)
 - [ ] Verus (Systems Verification)
 - [ ] Prusti (Viper Framework)
 
 **PLDI论文**:
+
 - [ ] 其他Rust相关PLDI论文
 - [ ] 编译器优化相关
 
 **ICFP论文**:
+
 - [ ] GADTs相关论文
 - [ ] 类型类/Trait系统论文
 - [ ] 异步/效果系统论文
@@ -155,16 +175,19 @@
 ### 在线平台整合
 
 **Coursera**:
+
 - [ ] 识别Rust课程
 - [ ] 对齐内容
 - [ ] 添加链接
 
 **edX**:
+
 - [ ] 识别Rust课程
 - [ ] 对齐内容
 - [ ] 添加链接
 
 **Udacity**:
+
 - [ ] Systems Programming课程
 - [ ] 其他相关课程
 
@@ -187,14 +210,17 @@
 ## 下一步行动
 
 ### 立即执行
+
 1. **Ferrocene FLS 逐章深化** - 4个关键章节
 2. **Aeneas 完整整合** - 理论到实践
 
 ### 后续执行
-3. 顶级会议论文深化
-4. 在线平台整合
+
+1. 顶级会议论文深化
+2. 在线平台整合
 
 ### 预计完成时间
+
 - **Sprint 3**: 2周
 - **Sprint 4**: 2周
 - **Sprint 5**: 1周

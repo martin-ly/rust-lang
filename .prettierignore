@@ -1,9 +1,11 @@
 # Dependencies
+
 node_modules/
 target/
 Cargo.lock
 
 # Build outputs
+
 dist/
 build/
 *.exe
@@ -12,17 +14,21 @@ build/
 *.dylib
 
 # Archives
+
 *.rar
 *.zip
 *.tar.gz
 
 # Backup files
+
 docs/backup/
 *.backup
 
 # Generated files
+
 *.generated.*
 **/reports/
 
 # Documentation that should not be formatted
+
 docs_backup_*.zip

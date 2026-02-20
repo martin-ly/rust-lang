@@ -12,7 +12,7 @@
 ## Aeneas 介绍
 
 - **开发**: EPFL (École Polytechnique Fédérale de Lausanne)
-- **网址**: https://github.com/AeneasVerif/aeneas
+- **网址**: <https://github.com/AeneasVerif/aeneas>
 - **论文**: ICFP 2022 - "Aeneas: Rust Verification by Functional Translation"
 
 ---
@@ -122,11 +122,13 @@ fn main() {
 Aeneas使用**预言变量(Prophecy Variables)**来模拟Rust的可变引用(`&mut T`)。在函数式翻译中，可变引用难以直接表示，因为函数式语言通常不支持可变性。
 
 **核心思想**:
+
 - 预言变量用于**预测未来的值**(predict future values)
 - 当创建可变借用 `&mut x` 时，引入一个预言变量 `π` 代表 `x` 在借用结束后的最终值
 - 这允许在纯函数式设置中模拟可变的副作用
 
 **形式化表示**:
+
 ```
 let r = &mut x;  // 创建预言变量 π，r 指向 (current, π)
 *r = new_val;    // 更新当前值，π 保持不变
@@ -134,6 +136,7 @@ let r = &mut x;  // 创建预言变量 π，r 指向 (current, π)
 ```
 
 **与所有权模型的联系**:
+
 - 预言变量保持了借用规则的形式化语义
 - 与 [ownership_model](./formal_methods/ownership_model.md) 中的规则 6-8 兼容
 
@@ -142,15 +145,18 @@ let r = &mut x;  // 创建预言变量 π，r 指向 (current, π)
 **borrow_generated_from** 是Aeneas中用于追踪借用来源的形式化关系。
 
 **定义**:
+
 - `borrow_generated_from(b, x)` 表示借用 `b` 是从变量 `x` 生成的
 - 这是一个**形式化借用依赖**关系，用于验证借用的有效性
 
 **性质**:
+
 1. **传递性**: 若 `borrow_generated_from(b1, b2)` 且 `borrow_generated_from(b2, x)`，则 `borrow_generated_from(b1, x)`
 2. **有效性**: `borrow_generated_from(b, x)` 蕴含 `x` 在借用创建点存活
 3. **唯一性**: 每个借用有唯一的生成源
 
 **形式化与本文档的对应**:
+
 - 与 [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 中的 Def 1.3（借用有效性）对应
 - 与 Axiom 3（借用有效性保持）兼容
 
@@ -159,11 +165,13 @@ let r = &mut x;  // 创建预言变量 π，r 指向 (current, π)
 Aeneas的核心贡献是将Rust代码**翻译到纯函数式语言**：
 
 **翻译过程**:
+
 ```
 Rust MIR/THIR → Aeneas IL → Coq/HOL4/Lean
 ```
 
 **关键转换**:
+
 | Rust 特性 | 函数式表示 | 说明 |
 |:---|:---|:---|
 | `let x = v;` | `let x = v in ...` | 标准 let-binding |
@@ -173,6 +181,7 @@ Rust MIR/THIR → Aeneas IL → Coq/HOL4/Lean
 | 函数调用 | 显式状态传递 | 输入状态 → 输出状态 |
 
 **类型保持**:
+
 - 翻译保持Rust的类型结构
 - 所有权信息编码在类型中
 - 借用规则通过类型系统强制执行
@@ -189,6 +198,7 @@ Aeneas支持多个定理证明器后端：
 | **F\*** | 依赖类型，SMT自动化 | 自动化验证 |
 
 **推荐选择**:
+
 - 对于与 [RustBelt](./formal_methods/ownership_model.md#rustbelt) 对比研究：选择 **Coq**
 - 对于自动化验证：选择 **F\***
 - 对于现代证明开发：选择 **Lean**
@@ -207,6 +217,7 @@ Aeneas支持多个定理证明器后端：
 | **适用场景** | 标准库验证 | 应用代码验证 |
 
 **互补性**:
+
 - RustBelt 验证 Unsafe 代码的**安全抽象**
 - Aeneas 验证 Safe Rust 代码的**功能正确性**
 - 两者结合覆盖 Rust 全生态
@@ -254,6 +265,7 @@ Aeneas的翻译保持类型结构，与 [type_system_foundations](./type_theory/
 | 生命周期 | `'a` | 隐式在借用关系中 |
 
 **整合建议**:
+
 - 在 [type_system_foundations](./type_theory/type_system_foundations.md) 添加"函数式视角"小节
 - 对比 Rust 类型系统与函数式翻译的对应
 - 参考 Aeneas ICFP 2022 论文的类型系统章节
@@ -280,6 +292,7 @@ Aeneas的翻译保持类型结构，与 [type_system_foundations](./type_theory/
 ```
 
 **推荐工作流**:
+
 1. 使用 **Miri** 检测 UB 和借用违规
 2. 使用 **Kani** 验证关键属性（如边界检查）
 3. 使用 **Prusti** 验证函数契约

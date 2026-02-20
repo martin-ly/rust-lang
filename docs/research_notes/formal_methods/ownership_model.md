@@ -26,15 +26,53 @@
     - [相关学术论文的详细分析](#相关学术论文的详细分析)
       - [1. RustBelt: Logical Foundations for the Future of Safe Systems Programming](#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming)
       - [2. The RustBelt Project: Formalizing Rust's Type System](#2-the-rustbelt-project-formalizing-rusts-type-system)
-    - [Aeneas 函数式翻译方法](#aeneas-函数式翻译方法)
+    - [顶级会议论文对齐 (POPL)](#顶级会议论文对齐-popl)
+      - [Patina (Microsoft Research)](#patina-microsoft-research)
+      - [Verus (POPL 2023)](#verus-popl-2023)
+      - [Prusti (Viper Framework)](#prusti-viper-framework)
+    - [ICFP (International Conference on Functional Programming)](#icfp-international-conference-on-functional-programming)
+      - [Linear Types can Change the World (Wadler)](#linear-types-can-change-the-world-wadler)
+      - [Ownership Types for Flexible Alias Protection](#ownership-types-for-flexible-alias-protection)
+    - [OOPSLA](#oopsla)
+      - [RustBelt相关](#rustbelt相关)
+    - [CAV (Computer Aided Verification)](#cav-computer-aided-verification)
+      - [Kani Rust Verifier](#kani-rust-verifier)
+      - [Mirai (Microsoft Research)](#mirai-microsoft-research)
+      - [SMACK for Rust](#smack-for-rust)
+  - [Aeneas 函数式翻译方法](#aeneas-函数式翻译方法)
+    - [Aeneas 核心概念](#aeneas-核心概念)
       - [1. Characteristic Prophecy Variables (CPV)](#1-characteristic-prophecy-variables-cpv)
-      - [2. borrow_generated_from 关系](#2-borrow_generated_from-关系)
+      - [2. borrow\_generated\_from 关系](#2-borrow_generated_from-关系)
       - [3. 函数式翻译与所有权](#3-函数式翻译与所有权)
-      - [4. Aeneas 与 RustBelt 对比](#4-aeneas-与-rustbelt-对比)
-      - [5. Aeneas 验证后端](#5-aeneas-验证后端)
-      - [6. 与本文档形式化的对应](#6-与本文档形式化的对应)
+    - [Aeneas 与 RustBelt 对比](#aeneas-与-rustbelt-对比)
+    - [Aeneas 验证后端](#aeneas-验证后端)
+    - [与本文档形式化的对应](#与本文档形式化的对应)
+    - [参考文献](#参考文献)
+  - [欧洲大学课程对齐](#欧洲大学课程对齐)
+    - [ETH Zurich (瑞士联邦理工学院)](#eth-zurich-瑞士联邦理工学院)
+    - [University of Cambridge](#university-of-cambridge)
+    - [EPFL](#epfl)
+    - [总结表格](#总结表格)
     - [MIT 课程对齐：计算机系统安全与内存安全](#mit-课程对齐计算机系统安全与内存安全)
+      - [MIT 6.826: Computer Systems Security](#mit-6826-computer-systems-security)
+      - [MIT 6.858: Computer Systems](#mit-6858-computer-systems)
+      - [Memory Safety vs Capability-based Security 对比分析](#memory-safety-vs-capability-based-security-对比分析)
+      - [Spatial/Temporal Safety 形式化定义](#spatialtemporal-safety-形式化定义)
+      - [MIT 课程对齐表](#mit-课程对齐表)
     - [Stanford CS110L (Safety in Systems Programming)](#stanford-cs110l-safety-in-systems-programming)
+      - [对齐内容](#对齐内容)
+      - [Safety without GC: Rust vs Traditional Approaches](#safety-without-gc-rust-vs-traditional-approaches)
+      - [实验资源](#实验资源)
+    - [CMU 15-799 (Formal Methods for Systems)](#cmu-15-799-formal-methods-for-systems)
+      - [分离逻辑与 Rust 所有权](#分离逻辑与-rust-所有权)
+      - [Hoare Triple 与 Rust](#hoare-triple-与-rust)
+      - [Separation Logic 在 Rust 中的体现](#separation-logic-在-rust-中的体现)
+      - [形式化方法对比表](#形式化方法对比表)
+      - [CMU 15-799 课程对齐表](#cmu-15-799-课程对齐表)
+    - [Ferrocene Language Specification (FLS) 对齐](#ferrocene-language-specification-fls-对齐)
+      - [已对齐章节](#已对齐章节)
+      - [FLS与本文档的差异](#fls与本文档的差异)
+      - [差异分析：Rust 如何解决 MIT 课程中的问题](#差异分析rust-如何解决-mit-课程中的问题)
   - [🔬 形式化定义](#-形式化定义)
     - [1. 值与环境](#1-值与环境)
     - [2. 所有权规则](#2-所有权规则)
@@ -212,26 +250,32 @@
 ### 顶级会议论文对齐 (POPL)
 
 #### Patina (Microsoft Research)
+
 - **论文**: Patina: Formal Foundations for Rust
 - **机构**: Microsoft Research
 - **对齐内容**:
+
   | Patina内容 | Rust概念 | 本文档对应 |
   |:---|:---|:---|
   | 形式化基础 | 所有权模型 | §形式化定义 |
 
 #### Verus (POPL 2023)
+
 - **论文**: Verus: Verifying Rust Programs using Linear Ghost Types
-- **GitHub**: https://github.com/verus-lang/verus
+- **GitHub**: <https://github.com/verus-lang/verus>
 - **对齐内容**:
+
   | Verus内容 | Rust概念 | 本文档对应 |
   |:---|:---|:---|
   | Linear Ghost Types | 所有权追踪 | §所有权环境 |
   | 验证条件生成 | 定理证明 | §证明目标 |
 
 #### Prusti (Viper Framework)
+
 - **工具**: Prusti
-- **GitHub**: https://github.com/viperproject/prusti
+- **GitHub**: <https://github.com/viperproject/prusti>
 - **对齐内容**:
+
   | Prusti内容 | Rust概念 | 本文档对应 |
   |:---|:---|:---|
   | 分离逻辑验证 | 借用检查 | §借用规则 |
@@ -239,16 +283,19 @@
 ### ICFP (International Conference on Functional Programming)
 
 #### Linear Types can Change the World (Wadler)
+
 - **作者**: Philip Wadler
 - **会议**: ICFP
 - **内容**: 线性类型理论
-- **与Rust关系**: 
+- **与Rust关系**:
+
   | Wadler论文 | Rust概念 | 本文档对应 |
   |:---|:---|:---|
   | 线性类型 | 所有权/移动语义 | §移动语义 |
   | 使用即消耗 | Move语义 | §所有权转移 |
 
 #### Ownership Types for Flexible Alias Protection
+
 - **会议**: ICFP
 - **内容**: 所有权类型
 - **与Rust关系**: Rust所有权类型理论基础
@@ -256,6 +303,7 @@
 ### OOPSLA
 
 #### RustBelt相关
+
 - **会议**: OOPSLA
 - **内容**: Rust面向对象与类型系统
 - **与本文档**: 形式化方法对应
@@ -265,10 +313,12 @@
 ### CAV (Computer Aided Verification)
 
 #### Kani Rust Verifier
+
 - **工具**: Kani
-- **GitHub**: https://github.com/model-checking/kani
+- **GitHub**: <https://github.com/model-checking/kani>
 - **类型**: 模型检查器 (Model Checker)
 - **与本文档关系**:
+
   | Kani特性 | 验证目标 | 本文档对应 |
   |:---|:---|:---|
   | 模型检查 | 内存安全 | §内存安全定理 |
@@ -276,12 +326,14 @@
   | unsafe检查 | UB检测 | §unsafe |
 
 #### Mirai (Microsoft Research)
+
 - **工具**: Mirai
 - **机构**: Microsoft Research
 - **类型**: 抽象解释器
 - **用途**: 静态分析Rust代码
 
 #### SMACK for Rust
+
 - **工具**: SMACK
 - **类型**: LLVM位码验证
 - **用途**: 底层验证
@@ -299,11 +351,13 @@
 **核心问题**: 如何在纯函数式语言中表示 Rust 的可变引用 (`&mut T`)？
 
 **Aeneas 解决方案**:
+
 - 引入**预言变量 (Prophecy Variables)** 来预测未来的值
 - 可变借用 `&mut x` 翻译为 `(current_value, prophecy)` 对
 - 预言变量 `π` 代表借用结束后 `x` 的最终值
 
 **形式化示例**:
+
 ```rust
 // Rust 代码
 fn example() {
@@ -325,6 +379,7 @@ Definition example : unit :=
 ```
 
 **与本文档的对应**:
+
 - 预言变量保持了本文规则 6（借用唯一性）的语义
 - `finalize_borrow` 对应规则 7（借用与所有权共存）
 - 借用作用域对应规则 8（借用作用域）
@@ -334,6 +389,7 @@ Definition example : unit :=
 **定义**: `borrow_generated_from(b, x)` 表示借用 `b` 从变量 `x` 生成。
 
 **性质**:
+
 1. **追踪来源**: 记录每个借用的生成源
 2. **验证有效性**: 确保借用的目标在创建点存活
 3. **防止悬垂**: 借用生成关系保证无悬垂引用
@@ -344,6 +400,7 @@ $$
 $$
 
 **与本文档的对应**:
+
 - 与 Def 1.3（所有权环境）兼容
 - 与规则 8（借用作用域）一致
 - 强化定理 3（无悬垂指针）的保证
@@ -351,6 +408,7 @@ $$
 #### 3. 函数式翻译与所有权
 
 **移动语义翻译**:
+
 | Rust | 函数式表示 | 所有权状态 |
 |:---|:---|:---|
 | `let y = x;` (非Copy) | `let y = x in ...` | $\Omega(x) = \text{Moved}$ |
@@ -358,6 +416,7 @@ $$
 | `drop(x)` | 隐式在作用域结束 | $\Omega(x) = \text{Moved}$ |
 
 **借用翻译**:
+
 | Rust | 函数式表示 | 说明 |
 |:---|:---|:---|
 | `&x` | `mk_imm_borrow x` | 不可变借用 |
@@ -378,6 +437,7 @@ $$
 | **引用论文** | ICFP 2022 | POPL 2018 |
 
 **互补使用**:
+
 - **Aeneas**: 验证 Safe Rust 应用代码的功能正确性
 - **RustBelt**: 验证 Unsafe 核心库的安全抽象
 - 两者结合提供 Rust 生态的完整验证覆盖
@@ -423,9 +483,11 @@ $$
 ## 欧洲大学课程对齐
 
 ### ETH Zurich (瑞士联邦理工学院)
+
 - **课程**: Rust Programming
 - **讲师**: David Evangelista
 - **对齐内容**:
+
   | ETH内容 | Rust概念 | 本文档对应 |
   |:---|:---|:---|
   | Ownership | 所有权系统 | §所有权规则 |
@@ -434,18 +496,22 @@ $$
   | Concurrency | Send/Sync | §并发安全 |
 
 ### University of Cambridge
+
 - **课程**: Computer Science Tripos (Rust部分)
 - **对齐内容**:
+
   | Cambridge内容 | Rust概念 | 本文档对应 |
   |:---|:---|:---|
   | Type Systems | Rust类型系统 | §类型系统 |
   | Memory Management | 所有权 | §内存管理 |
 
 ### EPFL
+
 - **课程**: Concurrent and Parallel Programming
 - **对齐内容**: Send/Sync与并发理论
 
 ### 总结表格
+
 | 大学 | 课程 | 对齐状态 |
 |:---|:---|:---:|
 | ETH Zurich | Rust Programming | ✅ |
@@ -463,16 +529,19 @@ $$
 MIT 6.826 是一门专注于系统安全的课程，其核心内容与本研究的所有权模型高度相关：
 
 **Lab 1: Buffer Overflows & Memory Safety**
+
 - 6.826 Lab 1 通过缓冲区溢出实验展示了传统 C/C++ 代码中的内存安全漏洞
 - **Rust 所有权解决方案**: 所有权唯一性（规则 1）保证每个值只有一个所有者，编译时阻止 use-after-free 和 double-free
 - **形式化对应**: 6.826 中的内存安全漏洞对应本文定理 3 中的"无悬垂指针"、"无双重释放"保证
 
 **Lab 2: Privilege Separation & Capabilities**
+
 - 6.826 Lab 2 研究基于权能（capability）的访问控制
 - **Rust 所有权与权能的对应**: Rust 所有权可视为一种**权能系统**——拥有值的所有权意味着拥有操作该值的权能
 - **形式化对应**: `&T` 和 `&mut T` 对应只读/读写权能，所有权转移对应权能委托
 
 **Lecture: Memory Safety Vulnerabilities**
+
 - 6.826 讲座涵盖的内存安全漏洞类型：
   - **Use-after-free** → Rust 所有权规则 2（移动后原变量失效）+ 规则 3（作用域结束释放）防止
   - **Double-free** → Rust 所有权唯一性（定理 2）保证
@@ -485,16 +554,19 @@ MIT 6.826 是一门专注于系统安全的课程，其核心内容与本研究�
 MIT 6.858 从系统层面研究计算机安全，其内容与本研究的所有权模型形成互补：
 
 **Lab 1: Buffer Overflows & x86 Assembly**
+
 - 6.858 Lab 1 通过 x86 汇编分析缓冲区溢出的底层机制
 - **Rust 内存模型对应**: Rust 的所有权环境 $\Omega$ 和值环境 $\Gamma$ 在抽象层消除了汇编层面的内存错误
 - **形式化对应**: 定义 1.3（所有权环境）在编译时静态保证内存安全，避免运行时汇编层面的检查开销
 
 **Lab 2: Privilege Separation**
+
 - 6.858 Lab 2 研究用户态/内核态隔离
 - **Rust 所有权隔离**: 不同变量拥有不同值的所有权，形成天然的**内存隔离**——一个变量无法访问另一个变量拥有的值，除非显式借用或转移
 - **形式化对应**: 分离逻辑中的 $P * Q$（分离合取）对应 Rust 中不同所有权的值持有不相交的内存
 
 **Lab 3: Symbolic Execution**
+
 - 6.858 Lab 3 使用符号执行发现程序中的安全漏洞
 - **Rust 借用检查器的静态分析**: 借用检查器可视为一种**编译期符号执行**，在编译时枚举所有可能的执行路径并验证借用规则
 - **形式化对应**: Axiom 4（借用检查完备性）对应符号执行的完备性——所有违反借用规则的路径都被检测到
@@ -517,6 +589,7 @@ MIT 6.858 从系统层面研究计算机安全，其内容与本研究的所有�
 $$\text{SpatialSafe}(P) \leftrightarrow \forall p \in P: \text{Access}(p, addr) \rightarrow addr \in \text{Allocated}(p)$$
 
 **Rust 保证**:
+
 - 借用规则 8: $\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$
 - 切片和 `Vec` 等容器在运行时进行边界检查
 - 引用总是指向有效内存（定理 3: 无悬垂指针）
@@ -528,6 +601,7 @@ $$\text{SpatialSafe}(P) \leftrightarrow \forall p \in P: \text{Access}(p, addr) 
 $$\text{TemporalSafe}(P) \leftrightarrow \forall p \in P: \text{Access}(p, addr) \rightarrow \text{Valid}(addr, \text{time}(p))$$
 
 **Rust 保证**:
+
 - 所有权规则 2（移动语义）: 移动后原变量标记为 $\text{Moved}$，不能再访问
 - 所有权规则 3（作用域结束）: 值在作用域结束时释放，无法后续访问
 - 定理 2（所有权唯一性）: 每个值只有一个所有者，防止多重释放
@@ -547,7 +621,7 @@ $$\text{TemporalSafe}(P) \leftrightarrow \forall p \in P: \text{Access}(p, addr)
 
 ### Stanford CS110L (Safety in Systems Programming)
 
-**课程链接**: https://web.stanford.edu/class/cs110l/
+**课程链接**: <https://web.stanford.edu/class/cs110l/>
 
 Stanford CS110L专注于使用Rust进行安全的系统编程。
 
@@ -562,19 +636,22 @@ Stanford CS110L专注于使用Rust进行安全的系统编程。
 #### Safety without GC: Rust vs Traditional Approaches
 
 对比分析：
+
 - C/C++: 手动管理，易出错
 - Java/Go: GC，运行时开销
 - Rust: 所有权，编译时保证
 
 #### 实验资源
+
 CS110L提供的实验可以作为练习：
+
 - Lab 1: Ownership basics
 - Lab 2: Structs and ownership
 - Lab 3: Lifetimes
 
 ### CMU 15-799 (Formal Methods for Systems)
 
-**课程链接**: https://www.cs.cmu.edu/~15-799/
+**课程链接**: <https://www.cs.cmu.edu/~15-799/>
 
 **课程主题**: 系统形式化方法
 
@@ -621,6 +698,7 @@ CMU 15-799 中的 Frame Rule：
 $$\frac{\{P\} C \{Q\}}{\{P * R\} C \{Q * R\}}$$
 
 对应 Rust 借用规则：**借用不破坏原有所有权**。当创建借用 `&x` 时：
+
 - 原变量保持所有权：$\Omega(x) = \text{Owned}$
 - 借用持有引用权限：$\text{Valid}(&x)$
 - 两者可以共存：$\text{Owned}(x) * \text{Borrow}(&x)$
@@ -648,7 +726,7 @@ $$\frac{\{P\} C \{Q\}}{\{P * R\} C \{Q * R\}}$$
 
 ### Ferrocene Language Specification (FLS) 对齐
 
-**FLS链接**: https://spec.ferrocene.dev/
+**FLS链接**: <https://spec.ferrocene.dev/>
 
 Ferrocene Language Specification是Rust的正式规范，于2025年3月被Rust官方采纳。
 
@@ -662,6 +740,7 @@ Ferrocene Language Specification是Rust的正式规范，于2025年3月被Rust�
 | Ch.17 Concurrency | 并发 | §Send/Sync | ✅ |
 
 #### FLS与本文档的差异
+
 - FLS关注语法和合法性(legality)
 - 本文档关注语义和安全性质
 - 两者互补

@@ -10,6 +10,39 @@
 - [借用检查器证明](../../../research_notes/formal_methods/borrow_checker_proof.md)
 - [生命周期形式化](../../../research_notes/formal_methods/lifetime_formalization.md)
 
+## 知识结构思维导图
+
+```mermaid
+mindmap
+  root((所有权与借用))
+    资源管理代数
+      线性类型
+      所有权转移
+      部分使用
+    借用检查器
+      唯一可变引用
+      读写互斥
+      生命周期包含
+    NLL
+      非词法生命周期
+      控制流优化
+    内部可变性
+      Cell
+      RefCell
+      Arc<Mutex>
+    并发安全
+      Send Trait
+      Sync Trait
+```
+
+## 与核心文档的关联
+
+| 本文档 | 核心文档 | 关系 |
+|:---|:---|:---|
+| 本README | research_notes/formal_methods/ownership_model.md | 索引/重定向 |
+| 本README | research_notes/formal_methods/borrow_checker_proof.md | 索引/重定向 |
+| 本README | research_notes/formal_methods/lifetime_formalization.md | 索引/重定向 |
+
 [返回主索引](../../00_master_index.md)
 
 ---

@@ -6,6 +6,36 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： [c09_design_pattern/](../../../crates/c09_design_pattern/)
 
+## 知识结构思维导图
+
+```mermaid
+mindmap
+  root((设计模式))
+    创建型模式
+      构造器模式
+      工厂模式
+    结构型模式
+      新类型模式
+      适配器模式
+    行为型模式
+      策略模式
+      访问者模式
+      状态模式
+    Rust特有模式
+      类型状态模式
+      RAII模式
+    Trait驱动设计
+      接口抽象
+      依赖注入
+```
+
+## 与核心文档的关联
+
+| 本文档 | 核心文档 | 关系 |
+|:---|:---|:---|
+| 本README | crates/c09_design_pattern/ | 索引/重定向 |
+| 本README | research_notes/software_design_theory/ | 索引/重定向 |
+
 [返回主索引](../00_master_index.md)
 
 ---

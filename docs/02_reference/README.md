@@ -7,7 +7,6 @@
 > **用途**: 语法/模式/边界/错误码速查；20 速查卡 + 边界特例 + 错误码映射
 > **判定目标**: 速查完整、边界可查、错误码可落点
 > **完整结构**: [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) § 2.2
-
 > **概念说明**: 参考与速查文档提供 Rust 语法、标准库 API、边界特例和错误码的快速查找，包含 20 个主题速查卡，支持开发者快速定位问题和解决方案。
 
 ---
@@ -57,8 +56,8 @@ let atomic = Arc::new(5);                // 多线程原子引用计数
 
 | 主题 | 文件 | 描述 |
 | :--- | :--- | :--- |
-| **所有权与借用** | ownership_borrowing_cheatsheet.md | 所有权规则、生命周期 |
-| **类型系统** | type_system_cheatsheet.md | 泛型、trait、类型转换 |
+| **所有权与借用** | ownership_cheatsheet.md | 所有权规则、生命周期 |
+| **类型系统** | type_system.md | 泛型、trait、类型转换 |
 | **异步编程** | async_cheatsheet.md | async/await、Future |
 | **并发** | concurrency_cheatsheet.md | 线程、同步、Send/Sync |
 | **宏系统** | macros_cheatsheet.md | 声明宏、过程宏 |

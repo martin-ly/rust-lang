@@ -1,9 +1,9 @@
 # 学习路径规划文档
 
 **创建日期**: 2025-12-11
-**最后更新**: 2026-02-14
-**Rust 版本**: 1.93.0+
-**Edition**: 2024
+**最后更新**: 2026-02-20
+**Rust 版本**: 1.93.0+ (Edition 2024)
+**状态**: ✅ 已完成
 
 ---
 
@@ -183,7 +183,7 @@
    - 系统编程
 
 4. **形式化与验证（研究者路径）**
-   - [形式化证明批判性分析与推进计划](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+   - [形式化证明系统指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
    - [核心定理完整证明](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)
    - [国际对标索引](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
 
@@ -229,6 +229,91 @@
 - [ ] 能够编写 WASM 应用
 - [ ] 理解 Rust 内部机制
 - [ ] 完成专业领域项目
+
+---
+
+## 💻 学习路径代码示例
+
+### 路径 1 代码示例：基础语法实践
+
+```rust
+// 所有权与借用基础示例
+fn main() {
+    // 所有权转移
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 的所有权转移到 s2
+    // println!("{}", s1);  // 错误：s1 不再有效
+    println!("{}", s2);     // 正确
+
+    // 借用示例
+    let len = calculate_length(&s2);
+    println!("'{}' 长度: {}", s2, len);  // s2 仍然可用
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+
+### 路径 2 代码示例：并发编程实践
+
+```rust
+use std::thread;
+use std::sync::mpsc;
+
+// 多线程消息传递示例
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        let msg = String::from("来自子线程的消息");
+        tx.send(msg).unwrap();
+    });
+
+    let received = rx.recv().unwrap();
+    println!("收到: {}", received);
+}
+```
+
+### 路径 3 代码示例：异步编程实践
+
+```rust
+use tokio::time::{sleep, Duration};
+
+// 异步函数示例
+async fn fetch_data() -> String {
+    sleep(Duration::from_secs(1)).await;
+    "数据获取完成".to_string()
+}
+
+#[tokio::main]
+async fn main() {
+    let result = fetch_data().await;
+    println!("{}", result);
+}
+```
+
+### 路径 4 代码示例：高级特性实践
+
+```rust
+// 宏系统示例
+macro_rules! say_hello {
+    ($name:expr) => {
+        println!("Hello, {}!", $name);
+    };
+}
+
+// 泛型与 Trait 边界示例
+fn process<T: ToString>(item: T) -> String {
+    format!("处理结果: {}", item.to_string())
+}
+
+fn main() {
+    say_hello!("Rust");
+    println!("{}", process(42));
+    println!("{}", process("文本"));
+}
+```
 
 ---
 
@@ -283,12 +368,14 @@
 ### Coursera 在线课程
 
 #### Rust Programming Specialization (Duke University)
-- **链接**: https://www.coursera.org/specializations/rust-programming
+
+- **链接**: <https://www.coursera.org/specializations/rust-programming>
 - **内容**: Rust基础、数据结构、并发编程
-- **适合路径**: 
+- **适合路径**:
   - 路径 1: 完全新手（0 基础）
   - 路径 2: 有编程经验（其他语言）
 - **与本文档对齐**:
+
   | Coursera 模块 | 本文档对应章节 |
   |:---|:---|
   | Rust Basics | C01-C03 基础阶段 |
@@ -296,14 +383,16 @@
   | Concurrency | C08 并发编程 |
 
 #### Programming in Rust (University of Colorado Boulder)
-- **链接**: https://www.coursera.org/learn/programming-in-rust
+
+- **链接**: <https://www.coursera.org/learn/programming-in-rust>
 - **内容**: Rust编程基础
 - **适合路径**: 路径 1: 完全新手（0 基础）
 - **与本文档对齐**: C01-C03 基础阶段
 
 #### Practical System Programming in Rust (Coursera Project)
+
 - **内容**: 系统编程实践
-- **适合路径**: 
+- **适合路径**:
   - 路径 2: 有编程经验（其他语言）
   - 路径 3: 中级开发者（有 Rust 基础）
 - **与本文档对齐**: C07 进程管理、C10 网络编程
@@ -383,6 +472,7 @@
 ```
 
 **推荐资源**:
+
 - [Rust Book 中文版](https://kaisery.github.io/trpl-zh-cn/)
 - [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
 - [所有权速查卡](../02_reference/quick_reference/ownership_cheatsheet.md)
@@ -438,6 +528,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ```
 
 **推荐资源**:
+
 - [跨语言对比文档](../02_reference/CROSS_LANGUAGE_COMPARISON.md)
 - [线程并发使用指南](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md)
 - [异步编程使用指南](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)
@@ -472,7 +563,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 └── 实践: 分析并发算法的安全性证明
 
 第 13-16 周: 前沿研究
-├── [形式化证明批判性分析](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+├── [形式化证明系统指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
 ├── [核心定理完整证明](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)
 ├── [国际对标索引](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
 └── 研究项目: 选择一个开放问题深入研究
@@ -520,6 +611,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ```
 
 **推荐资源**:
+
 - [Rust 编译器开发指南](https://rustc-dev-guide.rust-lang.org/)
 - [Rustonomicon](https://doc.rust-lang.org/nomicon/) (unsafe 代码指南)
 - [形式化工程系统](../../rust-formal-engineering-system/)
@@ -530,12 +622,14 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ## 📚 相关文档
 
 ### 学习支持
+
 - [项目架构指南](../07_project/PROJECT_ARCHITECTURE_GUIDE.md)
 - [最佳实践指南](../05_guides/BEST_PRACTICES.md)
 - [故障排查指南](../05_guides/TROUBLESHOOTING_GUIDE.md)
 - [快速参考卡片](../02_reference/quick_reference/README.md)
 
 ### 形式化研究（研究者路径）
+
 - [形式化方法研究](../research_notes/formal_methods/README.md)
 - [形式化证明系统指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
 - [证明索引](../research_notes/PROOF_INDEX.md)

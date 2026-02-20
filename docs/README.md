@@ -254,10 +254,29 @@ cargo run -p rust-doc-search -- search --fuzzy "borrowing"
 
 ---
 
+## 📁 归档文件
+
+过程性文档（完成报告、进度报告、审计报告、计划文档等）已归档至 [archive/process_reports/2026_02/](./archive/process_reports/2026_02/) 以保持核心内容的清晰。
+
+**归档文件包括**:
+
+- 内容改进/深度强化完成报告
+- 格式修复进度/完成报告
+- 权威对齐审计/进度报告
+- 项目评估/计划文档
+
+**查看归档**:
+
+- [归档摘要](./archive/process_reports/2026_02/ARCHIVE_SUMMARY.md) - 完整归档文件列表
+- [archive/README.md](./archive/README.md) - 归档系统说明
+
+---
+
 ## 🎉 最新更新
 
 ### 2026-02-20 🆕
 
+- ✅ **文件归档**：34个过程性文档归档，核心内容更清晰
 - ✅ **README 增强**：为所有索引层 README 添加代码示例和形式化链接
 
 ### 2026-02-13 🆕

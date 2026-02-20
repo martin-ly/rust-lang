@@ -7,7 +7,6 @@
 > **用途**: 学习规划与官方资源映射；解决「如何规划学习、与官方资源如何映射」
 > **判定目标**: 学习路径可执行、官方资源可追溯
 > **完整结构**: [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) § 2.1
-
 > **概念说明**: Rust 学习路径提供从入门到精通的系统化学习路线，涵盖语言基础、所有权系统、类型系统、异步编程、Unsafe 等核心主题，并与 The Rust Book、Rust Reference 等官方资源映射对应。
 
 ---
@@ -84,8 +83,8 @@ fn handle_message(msg: Message) {
 
 | 主题 | 文档 | 描述 |
 | :--- | :--- | :--- |
-| 形式化分析 | [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) | 证明分析与计划 |
-| 核心定理证明 | [CORE_THEOREMS_FULL_PROOFS](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 完整形式化证明 |
+| 形式化分析 | [FORMAL_PROOF_SYSTEM_GUIDE.md](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) | 形式化证明系统指南 |
+| 核心定理证明 | [CORE_THEOREMS_FULL_PROOFS.md](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 完整形式化证明 |
 | 证明索引 | [PROOF_INDEX](../research_notes/PROOF_INDEX.md) | 形式化证明集合 |
 
 ```rust
@@ -108,20 +107,23 @@ fn ownership_theorem() {
 ### Coursera
 
 #### Rust Programming Specialization (Duke University)
-- **链接**: https://www.coursera.org/specializations/rust-programming
-- **内容**: 
+
+- **链接**: <https://www.coursera.org/specializations/rust-programming>
+- **内容**:
   - Rust基础语法
   - 数据结构
   - 并发编程
-- **与本文档对齐**: 
+- **与本文档对齐**:
+
   | Coursera内容 | 本文档对应 |
-  |:---|:---|
+  | :--- | :--- |
   | Rust Basics | 01_learning/ |
   | Data Structures | 02_reference/quick_reference/collections_iterators_cheatsheet.md |
   | Concurrency | 05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md |
 
 #### Programming in Rust (University of Colorado Boulder)
-- **链接**: https://www.coursera.org/learn/programming-in-rust
+
+- **链接**: <https://www.coursera.org/learn/programming-in-rust>
 - **内容**: Rust编程基础
 - **与本文档对齐**: 01_learning/目录
 
@@ -160,16 +162,19 @@ fn ownership_theorem() {
 #### Udacity
 
 ##### C++ for Programmers
+
 - **平台**: Udacity
 - **用途**: 与Rust系统编程概念对比学习
 - **对比内容**:
+
   | C++概念 | Rust对应 | 本文档 |
-  |:---|:---|:---|
+  | :--- | :--- | :--- |
   | 手动内存管理 | 所有权系统 | [formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) |
   | 智能指针 | Box/Rc/Arc | [02_reference/smart_pointers_cheatsheet.md](../02_reference/smart_pointers_cheatsheet.md) |
   | 模板 | 泛型 | [02_reference/generics_cheatsheet.md](../02_reference/generics_cheatsheet.md) |
 
 ##### Memory Management
+
 - **平台**: Udacity
 - **用途**: 理解内存管理与Rust所有权的关系
 - **与本文档对齐**: [formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) §内存安全

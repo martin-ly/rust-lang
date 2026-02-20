@@ -34,5 +34,3 @@ unknown-git = "deny"
 
 [[sources.allow-registry]]
 name = "https://github.com/rust-lang/crates.io-index"
-
-

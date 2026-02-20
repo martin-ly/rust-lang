@@ -259,7 +259,7 @@ impl<R: OrderRepository> OrderService<R> {
 | **近似** | 选 Rust 惯用替代；cargo check | 替代 + 跨边界验证 |
 | **不可表达** | 规避；重构为等价/近似 | 同上 |
 
-**引用**：[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) 等价/近似/不可表达表；[RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](../../RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md) 支柱 2+3。
+**引用**：[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) 等价/近似/不可表达表；~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN~~（已归档至 `../../../archive/process_reports/2026_02/`）支柱 2+3；现参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](../../AUTHORITATIVE_ALIGNMENT_GUIDE.md)。
 
 ---
 

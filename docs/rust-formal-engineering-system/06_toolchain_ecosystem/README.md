@@ -277,4 +277,40 @@ fn main() {
 
 ---
 
+## 知识结构思维导图
+
+```mermaid
+mindmap
+  root((工具链生态))
+    rustc编译器
+      编译流程
+      优化选项
+      目标平台
+    Cargo包管理
+      依赖管理
+      工作空间
+      构建配置
+    代码质量工具
+      Clippy
+      rustfmt
+      MIRI
+    文档工具
+      rustdoc
+      文档测试
+    形式化验证
+      Prusti
+      Kani
+      Creusot
+    构建脚本
+      build.rs
+      条件编译
+```
+
+## 与核心文档的关联
+
+| 本文档 | 核心文档 | 关系 |
+|:---|:---|:---|
+| 本README | 06_toolchain/ | 索引/重定向 |
+| 本README | research_notes/TOOLS_GUIDE.md | 索引/重定向 |
+
 [返回主索引](../00_master_index.md) | [编译器理论](./01_compiler/README.md) | [包管理器理论](./02_package_manager/README.md) | [构建工具理论](./03_build_tools/README.md)

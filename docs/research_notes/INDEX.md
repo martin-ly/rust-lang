@@ -134,14 +134,14 @@
 
 - 现状诊断、国际差距、论证充分性缺口
 
-7b1. **[RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md](./RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md)** - 三大支柱与可持续推进计划 🆕
+> **注意**: 原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md 已归档至 `../archive/process_reports/2026_02/`，请查阅 [AUTHORITATIVE_ALIGNMENT_GUIDE.md](./AUTHORITATIVE_ALIGNMENT_GUIDE.md) 获取最新对齐指南。
 
-- 支柱 1 公理判定系统（类型、控制、变量形式化）
-- 支柱 2 语言表达力（设计模式、并发/分布式、工作流）
-- 支柱 3 组件组合法则（组合有效性、构建能力确定性）
-- 国际权威对标、批判性意见、层次推进方案
-- 整体性与层次性改进建议
-- 三阶段可持续推进方案
+7b1. **[AUTHORITATIVE_ALIGNMENT_GUIDE.md](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)** - 权威对齐指南 🆕
+
+- 研究笔记权威来源对齐
+- 技术决策参考与最佳实践
+- 形式化验证对标与差距分析
+- 可持续推进方案与改进建议
 
 7c. **[FORMAL_FULL_MODEL_OVERVIEW.md](./FORMAL_FULL_MODEL_OVERVIEW.md)** - 形式化全模型入口 🆕
 

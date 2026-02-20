@@ -20,7 +20,7 @@
 | **04_thinking 思维表征** | 思维导图、决策树、证明树、矩阵如何组织 | 概念↔文档↔思维表征可双向追溯 | [MIND_MAP_COLLECTION](04_thinking/MIND_MAP_COLLECTION.md)、[DECISION_GRAPH_NETWORK](04_thinking/DECISION_GRAPH_NETWORK.md)、[PROOF_GRAPH_NETWORK](04_thinking/PROOF_GRAPH_NETWORK.md)、[MULTI_DIMENSIONAL_CONCEPT_MATRIX](04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) |
 | **05_guides 专题指南** | 异步/线程/设计模式/宏/WASM/Unsafe 等如何实践 | 每专题有完整使用指南与最佳实践 | [ASYNC_PROGRAMMING_USAGE_GUIDE](05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)、[THREADS_CONCURRENCY_USAGE_GUIDE](05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md)、[DESIGN_PATTERNS_USAGE_GUIDE](05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md)、[BEST_PRACTICES](05_guides/BEST_PRACTICES.md) 等 |
 | **06_toolchain 工具链与版本** | 编译器/Cargo/rustdoc、1.89–1.93 版本演进 | 版本变更可追溯、兼容性可判定 | [00_rust_2024_edition_learning_impact](06_toolchain/00_rust_2024_edition_learning_impact.md)、[08_rust_version_evolution](06_toolchain/08_rust_version_evolution_1.89_to_1.93.md)、[09_rust_1.93_compatibility_deep_dive](06_toolchain/09_rust_1.93_compatibility_deep_dive.md) |
-| **07_project 项目元文档** | 知识结构、版本追踪、文档交叉引用 | 结构可维护、任务可追踪 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)、[TASK_INDEX](07_project/TASK_INDEX.md)、[MODULE_1.93_ADAPTATION_STATUS](07_project/MODULE_1.93_ADAPTATION_STATUS.md) |
+| **07_project 项目元文档** | 知识结构、版本追踪、文档交叉引用 | 结构可维护、任务可追踪 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)、[TASK_INDEX](../archive/process_reports/2026_02/project/TASK_INDEX.md)、[MODULE_1.93_ADAPTATION_STATUS](../archive/process_reports/2026_02/project/MODULE_1.93_ADAPTATION_STATUS.md) |
 | **archive 归档** | 过程性报告、历史版本文档 | 历史可查、主目录简洁 | [archive/README](archive/README.md)、[archive/process_reports](archive/process_reports/)、[archive/version_reports](archive/version_reports/) |
 | **rust-formal-engineering-system** | 形式化工程系统索引（映射到 research_notes） | 索引层统一入口 | [00_master_index](rust-formal-engineering-system/00_master_index.md) |
 
@@ -118,7 +118,7 @@
 | **type_theory/** | 类型系统、型变、Trait、高级类型 | 类型安全可证明 | [type_system_foundations](research_notes/type_theory/type_system_foundations.md)、[variance_theory](research_notes/type_theory/variance_theory.md)、[trait_system_formalization](research_notes/type_theory/trait_system_formalization.md)、[advanced_types](research_notes/type_theory/advanced_types.md) |
 | **software_design_theory/** | 设计模式 23/43、执行模型、组合、边界 | 模式可选型、组合可证明 | [00_MASTER_INDEX](research_notes/software_design_theory/00_MASTER_INDEX.md)、[01_design_patterns_formal](research_notes/software_design_theory/01_design_patterns_formal/README.md)、[02_workflow_safe_complete_models](research_notes/software_design_theory/02_workflow_safe_complete_models/README.md)、[03_execution_models](research_notes/software_design_theory/03_execution_models/README.md)、[04_compositional_engineering](research_notes/software_design_theory/04_compositional_engineering/README.md)、[05_boundary_system](research_notes/software_design_theory/05_boundary_system/README.md) |
 | **experiments/** | 性能、内存、并发、宏、编译器优化 | 实验可复现 | [performance_benchmarks](research_notes/experiments/performance_benchmarks.md)、[memory_analysis](research_notes/experiments/memory_analysis.md)、[concurrency_performance](research_notes/experiments/concurrency_performance.md)、[macro_expansion_performance](research_notes/experiments/macro_expansion_performance.md)、[compiler_optimizations](research_notes/experiments/compiler_optimizations.md) |
-| **版本与对齐** | Rust 1.93、92 项、反例索引 | 版本可追溯、反例可查 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](research_notes/RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)、[RUST_193_COUNTEREXAMPLES_INDEX](research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md)、[FORMAT_AND_CONTENT_ALIGNMENT_PLAN](research_notes/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) |
+| **版本与对齐** | Rust 1.93、92 项、反例索引 | 版本可追溯、反例可查 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](research_notes/RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)、[RUST_193_COUNTEREXAMPLES_INDEX](research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md)、[FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) |
 | **贡献与维护** | 贡献流程、质量检查、维护指南 | 流程可执行 | [CONTRIBUTING](research_notes/CONTRIBUTING.md)、[QUALITY_CHECKLIST](research_notes/QUALITY_CHECKLIST.md)、[MAINTENANCE_GUIDE](research_notes/MAINTENANCE_GUIDE.md) |
 
 ### 2.8 archive（按类别）
@@ -196,7 +196,7 @@
 | 目标 | 路径 |
 | :--- | :--- |
 | **快速把握 docs 全貌** | 本文件 → [00_MASTER_INDEX](./00_MASTER_INDEX.md) |
-| **理解研究笔记三大支柱** | [00_COMPREHENSIVE_SUMMARY](research_notes/00_COMPREHENSIVE_SUMMARY.md) → [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](research_notes/RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md) |
+| **理解研究笔记三大支柱** | [00_COMPREHENSIVE_SUMMARY](research_notes/00_COMPREHENSIVE_SUMMARY.md) → [AUTHORITATIVE_ALIGNMENT_GUIDE](research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md) |
 | **按主题查找** | [00_MASTER_INDEX](./00_MASTER_INDEX.md) 按 01–07 主题 |
 | **速查语法/模式** | [02_reference/quick_reference](02_reference/quick_reference/README.md) |
 | **形式化证明** | [PROOF_INDEX](research_notes/PROOF_INDEX.md) → [CORE_THEOREMS_FULL_PROOFS](research_notes/CORE_THEOREMS_FULL_PROOFS.md) |

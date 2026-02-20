@@ -6,6 +6,35 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： [borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md)
 
+## 知识结构思维导图
+
+```mermaid
+mindmap
+  root((内存安全语义))
+    核心保证
+      无空指针解引用
+      无悬垂指针
+      无数据竞争
+      无Use-after-free
+    内存布局
+      对齐要求
+      结构体布局
+      空指针优化
+    安全抽象
+      unsafe边界
+      安全封装
+    编译时检查
+      边界检查
+      借用检查
+```
+
+## 与核心文档的关联
+
+| 本文档 | 核心文档 | 关系 |
+|:---|:---|:---|
+| 本README | research_notes/formal_methods/borrow_checker_proof.md | 索引/重定向 |
+| 本README | research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md | 索引/重定向 |
+
 [返回理论基础](../README.md) | [返回主索引](../../00_master_index.md)
 
 ---

@@ -11,6 +11,35 @@
 - [型变理论](../../../research_notes/type_theory/variance_theory.md)
 - [生命周期形式化](../../../research_notes/formal_methods/lifetime_formalization.md)
 
+## 知识结构思维导图
+
+```mermaid
+mindmap
+  root((类型系统理论))
+    Curry-Howard对应
+      类型即命题
+      程序即证明
+    泛型多态
+      全称量词
+      约束量词
+    型变理论
+      协变
+      逆变
+      不变
+    类型推导
+      Hindley-Milner
+      自动推断
+    类型安全
+      编译时检查
+      空指针安全
+```
+
+## 与核心文档的关联
+
+| 本文档 | 核心文档 | 关系 |
+|:---|:---|:---|
+| 本README | research_notes/type_theory/ | 索引/重定向 |
+
 [返回主索引](../../00_master_index.md)
 
 ---

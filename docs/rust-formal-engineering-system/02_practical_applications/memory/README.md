@@ -6,6 +6,36 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： [memory_analysis.md](../../../../research_notes/experiments/memory_analysis.md)
 
+## 知识结构思维导图
+
+```mermaid
+mindmap
+  root((内存管理))
+    所有权驱动
+      栈分配
+      堆分配
+    智能指针
+      Box<T>
+      Rc<T>
+      Arc<T>
+      RefCell<T>
+    零成本抽象
+      迭代器优化
+    资源管理
+      自定义智能指针
+      Drop Trait
+    对象池
+      内存复用
+      性能优化
+```
+
+## 与核心文档的关联
+
+| 本文档 | 核心文档 | 关系 |
+|:---|:---|:---|
+| 本README | research_notes/experiments/memory_analysis.md | 索引/重定向 |
+| 本README | research_notes/formal_methods/ownership_model.md | 索引/重定向 |
+
 [返回主索引](../../00_master_index.md)
 
 ---

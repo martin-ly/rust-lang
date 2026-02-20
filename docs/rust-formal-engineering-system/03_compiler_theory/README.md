@@ -6,6 +6,44 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： [compiler_optimizations.md](../../research_notes/experiments/compiler_optimizations.md)、[01_compiler_features.md](../06_toolchain/01_compiler_features.md)
 
+## 知识结构思维导图
+
+```mermaid
+mindmap
+  root((编译器理论))
+    编译流程
+      词法分析
+      语法分析
+      语义分析
+      代码生成
+    MIR表示
+      中级IR
+      借用检查
+    编译优化
+      常量折叠
+      内联优化
+      死代码消除
+    单态化
+      泛型实例化
+      代码生成
+    生命周期擦除
+      编译时检查
+      运行时无开销
+    宏系统
+      属性宏
+      派生宏
+    unsafe边界
+      安全检查
+      程序员责任
+```
+
+## 与核心文档的关联
+
+| 本文档 | 核心文档 | 关系 |
+|:---|:---|:---|
+| 本README | research_notes/experiments/compiler_optimizations.md | 索引/重定向 |
+| 本README | 06_toolchain/01_compiler_features.md | 索引/重定向 |
+
 [返回主索引](../00_master_index.md)
 
 ---

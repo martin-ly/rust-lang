@@ -25,6 +25,7 @@
       - [1. Async/await for Rust: A Language Perspective](#1-asyncawait-for-rust-a-language-perspective)
       - [2. Formal Verification of Async Rust Programs](#2-formal-verification-of-async-rust-programs)
       - [3. The RustBelt Project: Formalizing Rust's Type System](#3-the-rustbelt-project-formalizing-rusts-type-system)
+  - [权威来源对齐](#权威来源对齐)
   - [🔬 形式化定义](#-形式化定义)
     - [1. Future 状态](#1-future-状态)
     - [2. Poll 操作](#2-poll-操作)

@@ -18,11 +18,12 @@
 | **我想理解 Rust 形式化证明** | [FORMAL_FULL_MODEL_OVERVIEW](./FORMAL_FULL_MODEL_OVERVIEW.md) → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | 30min |
 | **我想查某个概念的证明/定义** | [QUICK_FIND](./QUICK_FIND.md)（按关键词） | 2min |
 | **我想选设计模式/并发模型** | [software_design_theory/00_MASTER_INDEX](./software_design_theory/00_MASTER_INDEX.md) → 03_semantic_boundary_map、06_boundary_analysis | 15min |
-| **我想理解三大支柱体系** | [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](./RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md) | 10min |
+| **我想理解权威对齐体系** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md) | 10min |
+| **三大支柱** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） | 10min |
 | **我想看完整总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) → [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md) | 15min |
 | **我想看批判性意见与改进计划** | [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](./RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) | 15min |
-| **我想看格式统一与 Rust 1.93 对齐计划** | [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) | 10min |
-| **我想看目录缺失与内容深化计划** | [TOC_AND_CONTENT_DEEPENING_PLAN](./TOC_AND_CONTENT_DEEPENING_PLAN.md) | 10min |
+| **我想看格式统一与 Rust 1.93 对齐计划** | [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) (归档) | 10min |
+| **我想看目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) | 10min |
 | **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 5min |
 | **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](./formal_methods/send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) | 5min |
 | **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md) | 2min |
@@ -32,7 +33,7 @@
 
 ## 二、按三大支柱组织（核心架构）
 
-本目录围绕 [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](./RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md) 三大支柱组织：
+本目录围绕 [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md) 所述的三大支柱组织，现推荐参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)：
 
 ```text
 支柱 1：公理判定系统（形式系统）
@@ -86,7 +87,7 @@ research_notes/
 └── 【导航/框架/指南】（按需查阅）
     ├── 00_COMPREHENSIVE_SUMMARY.md      ← 完整总结综合、知识地图、论证总览
     ├── ARGUMENTATION_CHAIN_AND_FLOW.md  ← 论证思路、论证脉络关系、文档依赖
-    ├── RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md
+    ├── [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md) - 权威对齐指南、技术决策参考
     ├── CLASSIFICATION.md                ← 按角色/层次/主题分类
     ├── RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md  ← 批判性分析、层次化/矩阵/思维表征缺口、可持续改进计划
     ├── HIERARCHICAL_MAPPING_AND_SUMMARY.md                      ← 文档树、概念↔文档↔Def/定理、文档↔思维表征映射
@@ -106,7 +107,7 @@ research_notes/
 | **证明** | PROOF_INDEX、CORE_THEOREMS、FORMAL_LANGUAGE_AND_PROOFS | 查定理、公理、证明 |
 | **选型** | software_design_theory、06_boundary_analysis、04_expressiveness_boundary | 选模式、选并发模型 |
 | **完整总结** | 00_COMPREHENSIVE_SUMMARY、ARGUMENTATION_CHAIN_AND_FLOW | 全貌、论证思路与脉络 |
-| **框架** | RESEARCH_PILLARS、FORMAL_FULL_MODEL、CLASSIFICATION | 理解整体架构 |
+| **框架** | AUTHORITATIVE_ALIGNMENT_GUIDE、FORMAL_FULL_MODEL、CLASSIFICATION | 理解整体架构 |
 | **贡献** | CONTRIBUTING、QUALITY_CHECKLIST、BEST_PRACTICES | 编写/维护内容 |
 
 ---

@@ -6,6 +6,40 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： [performance_benchmarks.md](../../../../research_notes/experiments/performance_benchmarks.md)、[PERFORMANCE_TUNING_GUIDE.md](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
+## 知识结构思维导图
+
+```mermaid
+mindmap
+  root((性能优化))
+    零成本抽象
+      迭代器优化
+    内存布局
+      字段排序
+      对齐优化
+    SIMD优化
+      向量化
+      并行计算
+    缓存优化
+      行优先访问
+      分块优化
+    编译器优化
+      内联
+      分支预测
+    无锁结构
+      原子操作
+      无锁队列
+    基准测试
+      Criterion
+      性能分析
+```
+
+## 与核心文档的关联
+
+| 本文档 | 核心文档 | 关系 |
+|:---|:---|:---|
+| 本README | research_notes/experiments/performance_benchmarks.md | 索引/重定向 |
+| 本README | 05_guides/PERFORMANCE_TUNING_GUIDE.md | 索引/重定向 |
+
 [返回主索引](../../00_master_index.md)
 
 ---

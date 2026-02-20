@@ -28,6 +28,19 @@
     - [相关学术论文的详细分析](#相关学术论文的详细分析)
       - [1. Region-Based Memory Management](#1-region-based-memory-management)
       - [2. The RustBelt Project: Formalizing Rust's Type System](#2-the-rustbelt-project-formalizing-rusts-type-system)
+    - [CMU 15-799 区域类型理论](#cmu-15-799-区域类型理论)
+      - [区域类型与 Rust 生命周期](#区域类型与-rust-生命周期)
+      - [区域类型理论的形式化对应](#区域类型理论的形式化对应)
+      - [区域子类型与生命周期包含](#区域子类型与生命周期包含)
+      - [区域推断算法对比](#区域推断算法对比)
+      - [CMU 15-799 区域类型对齐表](#cmu-15-799-区域类型对齐表)
+      - [理论基础补充](#理论基础补充)
+  - [权威来源对齐](#权威来源对齐)
+  - [欧洲大学课程对齐](#欧洲大学课程对齐)
+    - [ETH Zurich (瑞士联邦理工学院)](#eth-zurich-瑞士联邦理工学院)
+    - [University of Cambridge (剑桥大学)](#university-of-cambridge-剑桥大学)
+    - [EPFL (瑞士洛桑联邦理工学院)](#epfl-瑞士洛桑联邦理工学院)
+    - [欧洲大学课程对比总结](#欧洲大学课程对比总结)
   - [🔬 形式化定义](#-形式化定义)
     - [1. 生命周期语义](#1-生命周期语义)
     - [2. 生命周期约束](#2-生命周期约束)
@@ -219,7 +232,7 @@
 
 ### CMU 15-799 区域类型理论
 
-**课程链接**: https://www.cs.cmu.edu/~15-799/
+**课程链接**: <https://www.cs.cmu.edu/~15-799/>
 
 CMU 15-799 的区域类型理论（Region Type Theory）与 Rust 生命周期系统有直接对应关系。
 
@@ -305,8 +318,8 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 
 ### ETH Zurich (瑞士联邦理工学院)
 
-**课程**: Rust Programming  
-**讲师**: David Evangelista  
+**课程**: Rust Programming
+**讲师**: David Evangelista
 **课程链接**: <https://inf.ethz.ch/courses>
 
 **内容对齐**:
@@ -325,7 +338,7 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 
 ### University of Cambridge (剑桥大学)
 
-**课程**: Computer Science Tripos (Rust部分)  
+**课程**: Computer Science Tripos (Rust部分)
 **课程链接**: <https://www.cl.cam.ac.uk/teaching/>
 
 **内容对齐**:
@@ -344,7 +357,7 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 
 ### EPFL (瑞士洛桑联邦理工学院)
 
-**课程**: Concurrent and Parallel Programming  
+**课程**: Concurrent and Parallel Programming
 **课程链接**: <https://www.epfl.ch/schools/ic/>
 
 **内容对齐**:
