@@ -2,6 +2,7 @@
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-20
+> **更新内容**: 添加 CMU 15-799 并发验证课程内容对齐
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 2 行（借用）
@@ -331,6 +332,77 @@ MIT 6.826 Lab 2 研究基于权能的安全模型：
 | 6.858 | Lab 2 | Privilege separation → 借用隔离 | ✅ |
 | 6.858 | Lab 3 | Symbolic execution → 借用检查路径分析 | ✅ |
 | 6.858 | Lecture | Type safety → 借用规则 + 类型系统 | ✅ |
+
+### CMU 15-799 并发验证
+
+**课程链接**: https://www.cs.cmu.edu/~15-799/
+
+CMU 15-799 的并发验证主题与 Rust 借用检查器的并发保证直接对应。
+
+#### 并发分离逻辑与 Rust
+
+| CMU 内容 | Rust 应用 | 本文档对应 |
+|:---|:---|:---|
+| Concurrent Separation Logic | Send/Sync trait | §并发安全（Corollary 2） |
+| Resource Invariants | Mutex/RwLock | Def MUTEX1 |
+| Ghost State | Unsafe 代码契约 | §unsafe 契约 |
+| Linearizability | 原子操作语义 | Def ATOMIC1 |
+
+#### 并发分离逻辑形式化
+
+**Concurrent Separation Logic (CSL)** 在 CMU 15-799 中的核心概念：
+
+$$\{P\} C \{Q\} \text{ (并发环境下)}$$
+
+**Rust 对应**:
+
+| CSL 概念 | 形式化 | Rust 实现 |
+|:---|:---|:---|
+| Thread-local assertion | $P_t$ | 线程本地所有权环境 $\Delta_t$ |
+| Shared resource | $\exists R. \, R$ | `Arc<T>`, `Mutex<T>` |
+| Resource invariant | $I(R)$ | `Mutex` 的锁不变式 |
+| Parallel composition | $C_1 \| C_2$ | `thread::spawn` |
+
+#### Resource Invariants 与 Mutex
+
+CMU 15-799 中的 Resource Invariant：
+$$\{P * I(R)\} \text{ acquire}(R) \{P * R\}$$
+$$\{P * R\} \text{ release}(R) \{P * I(R)\}$$
+
+对应 Rust `Mutex<T>`：
+
+```rust
+// acquire: lock() 获取资源
+let guard = mutex.lock().unwrap();  // {I(R)} lock() {R}
+// 使用资源...
+// release: guard drop 释放资源
+// {R} drop(guard) {I(R)}
+```
+
+**形式化对应**（Def MUTEX1）：
+- $I(R)$: `Mutex<T>` 的锁不变式（内部数据满足某些条件）
+- $\text{acquire}(R)$: `lock()` 操作
+- $\text{release}(R)$: `MutexGuard` drop
+
+#### Ghost State 与 Unsafe 契约
+
+CMU 15-799 使用 Ghost State 进行并发验证的辅助推理。在 Rust 中，这对应于 `unsafe` 代码的契约：
+
+| Ghost State 用途 | Rust unsafe 对应 |
+|:---|:---|
+| 跟踪资源所有权 | `PhantomData<T>` |
+| 标记线程安全 | `Send`/`Sync` marker trait |
+| 验证不变式 | `debug_assert!` + 文档约定 |
+
+#### CMU 15-799 并发验证对齐表
+
+| CMU 15-799 主题 | 本文档对应 | 状态 |
+|:---|:---|:---:|
+| Concurrent Separation Logic | Theorem 1 (数据竞争自由) | ✅ |
+| Resource Invariants | Def MUTEX1, Def RWLOCK1 | ✅ |
+| Ghost State | §unsafe 契约与 borrow/ownership | ✅ |
+| Linearizability | Def ATOMIC1 (原子操作) | ✅ |
+| Thread Safety Proof | Corollary 2 (并发安全) | ✅ |
 
 #### 差异分析：Rust 如何解决 MIT 课程中的并发安全问题
 

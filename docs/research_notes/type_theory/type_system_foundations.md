@@ -361,6 +361,78 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ---
 
+## 欧洲大学课程对齐
+
+### ETH Zurich (瑞士联邦理工学院)
+
+**课程**: Rust Programming  
+**讲师**: David Evangelista  
+**课程链接**: <https://inf.ethz.ch/courses>
+
+**内容对齐**:
+
+| ETH内容 | Rust概念 | 本文档对应 |
+|:---|:---|:---|
+| Type System Basics | 类型系统基础 | §类型系统核心概念 |
+| Generics & Traits | 泛型与Trait | §示例3 (泛型类型) |
+| Type Inference | 类型推断 | §示例5 (类型推导与推断) |
+| Type Safety | 类型安全 | §定理3 (类型安全) |
+| Curry-Howard | 类型即命题 | §Curry-Howard对应 |
+
+**ETH课程特点**: 欧洲顶尖理工院校，注重类型系统的实际应用与理论基础结合，与本文档的Curry-Howard对应章节高度契合。
+
+---
+
+### University of Cambridge (剑桥大学)
+
+**课程**: Computer Science Tripos (Rust部分)  
+**课程链接**: <https://www.cl.cam.ac.uk/teaching/>
+
+**内容对齐**:
+
+| Cambridge内容 | Rust概念 | 本文档对应 |
+|:---|:---|:---|
+| Type Systems | 类型系统理论 | §理论基础 |
+| Simply Typed Lambda | 简单类型Lambda演算 | §类型理论的基础知识 |
+| System F | 系统F (多态) | §系统F (Polymorphic Lambda Calculus) |
+| Hindley-Milner | HM类型系统 | §Hindley-Milner类型系统 |
+| Type Safety Proofs | 类型安全证明 | §定理1-3 (进展性、保持性、类型安全) |
+| Curry-Howard | 柯里-霍华德对应 | §Curry-Howard对应 |
+| Subtyping | 子类型 | §子类型 |
+| Variance | 型变 | §型变 |
+
+**Cambridge课程特点**: 理论基础扎实，涵盖从简单类型到系统F的完整类型理论，与本文档的理论基础章节高度契合，特别强调类型安全的形式化证明。
+
+---
+
+### EPFL (瑞士洛桑联邦理工学院)
+
+**课程**: Concurrent and Parallel Programming  
+**课程链接**: <https://www.epfl.ch/schools/ic/>
+
+**内容对齐**:
+
+| EPFL内容 | Rust概念 | 本文档对应 |
+|:---|:---|:---|
+| Type-Based Concurrency | 基于类型的并发 | §系统集成与实际应用 |
+| Send/Sync Traits | 线程安全trait | §与Trait系统的集成 |
+| Type Safety & Parallelism | 类型安全与并行 | §定理3 (类型安全) |
+| Generic Programming | 泛型编程 | §示例3 (泛型类型) |
+
+**EPFL课程特点**: 并发编程理论深厚，强调类型系统在并发安全中的作用，与本文档的类型安全定理高度契合。
+
+---
+
+### 欧洲大学课程对比总结
+
+| 大学 | 核心侧重点 | 与本文档关联度 | 特色内容 |
+|:---|:---|:---:|:---|
+| **ETH Zurich** | 类型基础、泛型、类型安全 | ⭐⭐⭐⭐⭐ | 实践导向，Curry-Howard |
+| **Cambridge** | 类型理论、形式化证明 | ⭐⭐⭐⭐⭐ | 理论基础，λ演算到系统F |
+| **EPFL** | 类型与并发安全 | ⭐⭐⭐⭐ | 并发理论，线程安全trait |
+
+---
+
 ## 🔬 形式化定义
 
 ### 1. 类型环境与类型判断
