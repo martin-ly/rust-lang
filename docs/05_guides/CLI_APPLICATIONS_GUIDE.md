@@ -44,12 +44,12 @@ use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    
+
     if args.len() < 2 {
         eprintln!("用法: {} <名称>", args[0]);
         std::process::exit(1);
     }
-    
+
     println!("你好, {}!", args[1]);
 }
 ```
@@ -132,9 +132,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let response = reqwest::get(&args.url).await?;
     let body = response.text().await?;
-    
+
     println!("{}", body);
-    
+
     Ok(())
 }
 ```
@@ -177,10 +177,10 @@ use thiserror::Error;
 enum CliError {
     #[error("IO 错误: {0}")]
     Io(#[from] std::io::Error),
-    
+
     #[error("解析错误: {0}")]
     Parse(String),
-    
+
     #[error("无效参数: {0}")]
     InvalidArg(String),
 }
@@ -191,7 +191,7 @@ fn process_file(path: &str) -> Result<String> {
     if path.is_empty() {
         return Err(CliError::InvalidArg("路径不能为空".to_string()));
     }
-    
+
     let content = std::fs::read_to_string(path)?;
     Ok(content)
 }
@@ -270,6 +270,58 @@ fn main() -> ExitCode {
     }
 }
 ```
+
+---
+
+## 使用场景
+
+### 场景1: 简单命令行工具
+
+快速构建文件处理工具：
+
+```rust
+// 使用 std::env 处理简单参数
+// 适用于：批量重命名、日志分析、数据转换
+```
+
+### 场景2: 专业级 CLI 应用
+
+构建类似 `cargo` 或 `rg` 的专业工具：
+
+- 使用 [clap](#2-使用-clap-构建专业-cli) 定义复杂子命令
+- 添加 [进度条](#4-带进度条的-cli) 提升用户体验
+- 实现 [彩色输出](#2-提供有意义的错误信息)
+
+### 场景3: 异步 CLI 工具
+
+构建网络相关的 CLI 工具：
+
+- 使用 [tokio](#3-异步-cli-示例) 处理并发请求
+- 实现 [超时处理](#错误处理最佳实践)
+- 参考 [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) 深入学习
+
+### 场景4: TUI 应用
+
+构建终端用户界面应用：
+
+- 使用 `ratatui` 创建交互式界面
+- 结合 [C07 进程管理](../../crates/c07_process/) 处理子进程
+- 实现键盘导航和事件处理
+
+---
+
+## 形式化链接
+
+| 链接类型 | 目标文档 |
+| :--- | :--- |
+| **前置知识** | [C03 控制流](../../crates/c03_control_fn/docs/00_MASTER_INDEX.md) |
+| | [C07 进程管理](../../crates/c07_process/docs/00_MASTER_INDEX.md) |
+| **错误处理** | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
+| **异步编程** | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
+| | [async_patterns](../02_reference/quick_reference/async_patterns.md) |
+| **Cargo 工具** | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
+| **相关指南** | [TROUBLESHOOTING_GUIDE.md](./TROUBLESHOOTING_GUIDE.md) |
+| | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
 
 ---
 

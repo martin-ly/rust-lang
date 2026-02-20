@@ -111,20 +111,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let device = Device::Cpu;
     let varmap = VarMap::new();
     let vb = VarBuilder::from_varmap(&varmap, DType::F32, &device);
-    
+
     // 创建一个简单的线性层
     let linear = Linear::new(
         vb.get((784, 10), "weight")?,
         Some(vb.get(10, "bias")?),
     );
-    
+
     // 创建输入数据 (batch_size=1, features=784)
     let input = Tensor::zeros((1, 784), DType::F32, &device)?;
-    
+
     // 前向传播
     let output = linear.forward(&input)?;
     println!("输出形状: {:?}", output.shape());
-    
+
     Ok(())
 }
 ```
@@ -145,22 +145,22 @@ type Backend = NdArrayBackend<f32>;
 
 fn main() {
     let device = Default::default();
-    
+
     // 创建张量
     let tensor1: Tensor<Backend, 2> = Tensor::from_floats([
         [1.0, 2.0, 3.0],
         [4.0, 5.0, 6.0],
     ], &device);
-    
+
     let tensor2: Tensor<Backend, 2> = Tensor::from_floats([
         [7.0, 8.0, 9.0],
         [10.0, 11.0, 12.0],
     ], &device);
-    
+
     // 张量运算
     let sum = tensor1.clone() + tensor2.clone();
     let product = tensor1.matmul(tensor2.transpose());
-    
+
     println!("Sum: {:?}", sum.to_data());
     println!("Product: {:?}", product.to_data());
 }
@@ -176,25 +176,25 @@ use tokenizers::Tokenizer;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let device = Device::Cpu;
-    
+
     // 加载 tokenizer
     let tokenizer = Tokenizer::from_file("tokenizer.json")?;
-    
+
     // 编码文本
     let encoding = tokenizer.encode("Hello, world!", true)?;
     let input_ids = Tensor::new(&encoding.get_ids(), &device)?;
-    
+
     // 加载模型配置和权重
     let config = Config::from_file("config.json")?;
     let weights = candle_core::safetensors::load("model.safetensors", &device)?;
-    
+
     // 创建模型
     let model = BertModel::load(weights, &config)?;
-    
+
     // 推理
     let embeddings = model.forward(&input_ids.unsqueeze(0)?, None)?;
     println!("嵌入形状: {:?}", embeddings.shape());
-    
+
     Ok(())
 }
 ```
@@ -218,14 +218,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Default::default(),
         llm::load_progress_callback_stdout,
     )?;
-    
+
     // 创建推理会话
     let mut session = model.start_session(Default::default());
-    
+
     // 推理
     let prompt = "Once upon a time,";
     let mut output = String::new();
-    
+
     session.infer::<std::convert::Infallible>(
         model.as_ref(),
         &mut rand::thread_rng(),
@@ -244,7 +244,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             _ => Ok(llm::InferenceFeedback::Continue),
         },
     )?;
-    
+
     println!("{}", output);
     Ok(())
 }
@@ -270,19 +270,19 @@ impl DataLoader {
             current_index: Arc::new(Mutex::new(0)),
         }
     }
-    
+
     fn next_batch(&self) -> Option<Vec<Vec<f32>>> {
         let mut idx = self.current_index.lock().ok()?;
         let data = self.data.lock().ok()?;
-        
+
         if *idx >= data.len() {
             return None;
         }
-        
+
         let end = (*idx + self.batch_size).min(data.len());
         let batch: Vec<Vec<f32>> = data[*idx..end].to_vec();
         *idx = end;
-        
+
         Some(batch)
     }
 }
@@ -290,7 +290,7 @@ impl DataLoader {
 // 并行预处理
 fn parallel_preprocess(data: Vec<String>) -> Vec<Vec<f32>> {
     use rayon::prelude::*;
-    
+
     data.par_iter()
         .map(|text| tokenize_and_embed(text))
         .collect()
@@ -332,14 +332,14 @@ use candle_core::{Device, Tensor};
 
 fn process_large_tensor() -> candle_core::Result<()> {
     let device = Device::Cpu;
-    
+
     // 使用 no_grad 上下文避免保存梯度
     {
         let input = Tensor::zeros((1000, 1000), candle_core::DType::F32, &device)?;
         let output = input.matmul(&input)?;
         println!("输出: {:?}", output.shape());
     } // 张量在这里被释放
-    
+
     Ok(())
 }
 ```
@@ -349,7 +349,7 @@ fn process_large_tensor() -> candle_core::Result<()> {
 ```rust
 fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {
     const BATCH_SIZE: usize = 32;
-    
+
     inputs
         .chunks(BATCH_SIZE)
         .map(|batch| {
@@ -369,10 +369,10 @@ use thiserror::Error;
 enum AIError {
     #[error("模型加载错误: {0}")]
     ModelLoad(String),
-    
+
     #[error("推理错误: {0}")]
     Inference(String),
-    
+
     #[error("张量错误: {0}")]
     Tensor(#[from] candle_core::Error),
 }
@@ -393,7 +393,59 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ---
 
-## 八、相关文档
+## 八、使用场景
+
+### 场景1: AI 辅助 Rust 学习
+
+使用 AI 工具快速理解 Rust 复杂概念：
+
+- 将所有权错误信息粘贴给 AI，获取详细解释
+- 让 AI 根据 [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) 推荐练习
+- 使用 AI 审查代码并提供改进建议
+
+### 场景2: 本地 LLM 推理服务
+
+构建轻量级本地 LLM 服务：
+
+```rust
+// 使用 mistral.rs 或 llm crate 构建本地推理 API
+// 适用于：隐私敏感场景、离线环境、边缘设备
+```
+
+### 场景3: 嵌入式 AI 推理
+
+在资源受限设备运行 AI 模型：
+
+- 使用 Candle 的轻量级特性
+- 结合 [嵌入式 Rust 指南](./EMBEDDED_RUST_GUIDE.md) 进行边缘部署
+
+### 场景4: 生产级 ML Pipeline
+
+构建端到端机器学习工作流：
+
+- 数据预处理（并行 + 异步）
+- 模型训练（Burn 多后端支持）
+- 推理服务（WASM 部署或原生服务）
+
+---
+
+## 九、形式化链接
+
+| 链接类型 | 目标文档 |
+| :--- | :--- |
+| **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
+| | [C05 线程与并发](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
+| **进阶主题** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| | [WASM_USAGE_GUIDE.md](./WASM_USAGE_GUIDE.md) |
+| **相关指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md) |
+| | [EMBEDDED_RUST_GUIDE.md](./EMBEDDED_RUST_GUIDE.md) |
+| **参考文档** | [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) |
+| | [ERROR_CODE_MAPPING](../02_reference/ERROR_CODE_MAPPING.md) |
+
+---
+
+## 十、相关文档
 
 - [AI 辅助编程指南](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md)
 - [guides/README](../../guides/README.md)

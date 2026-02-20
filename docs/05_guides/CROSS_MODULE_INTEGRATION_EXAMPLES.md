@@ -29,6 +29,12 @@
     - [2. 错误处理统一](#2-错误处理统一)
     - [3. 性能考虑](#3-性能考虑)
     - [4. 测试策略](#4-测试策略)
+  - [使用场景](#使用场景)
+    - [场景1: 全栈 Rust 应用](#场景1-全栈-rust-应用)
+    - [场景2: 高性能数据处理系统](#场景2-高性能数据处理系统)
+    - [场景3: 嵌入式 + 云端协同](#场景3-嵌入式--云端协同)
+    - [场景4: 可扩展的插件系统](#场景4-可扩展的插件系统)
+  - [形式化链接](#形式化链接)
 
 ---
 
@@ -319,6 +325,64 @@ fn test_wasm_integration() {
 - 为每个模块编写单元测试
 - 编写集成测试验证模块协作
 - 使用基准测试验证性能
+
+---
+
+## 使用场景
+
+### 场景1: 全栈 Rust 应用
+
+构建前后端统一的 Rust 应用：
+
+```rust
+// 后端：异步 HTTP + 数据库 + 业务逻辑
+// 前端：WASM + 共享类型定义
+// 共享：C02 类型系统定义的通用数据结构
+```
+
+### 场景2: 高性能数据处理系统
+
+结合多线程 + 异步 + 算法优化：
+
+- 使用 [C05 线程池](#示例3-线程与进程管理集成) 并行处理
+- [C06 异步](#示例2-异步与网络编程集成) 处理 I/O
+- [C08 算法](#示例5-算法与性能优化集成) 优化核心计算
+
+### 场景3: 嵌入式 + 云端协同
+
+边缘设备 + 云服务架构：
+
+- 嵌入式端：[C12 WASM](#示例6-wasm与跨平台集成) 或裸机 Rust
+- 服务端：[C10 网络](#示例2-异步与网络编程集成) + [C06 异步](#示例2-异步与网络编程集成)
+- 通信：共享的类型定义（[C02 类型系统](#示例1-所有权与类型系统集成)）
+
+### 场景4: 可扩展的插件系统
+
+使用宏 + 设计模式构建插件架构：
+
+- [C11 宏](#示例4-宏系统与设计模式集成) 定义 DSL
+- [C09 设计模式](#示例4-宏系统与设计模式集成) 实现插件接口
+- [C04 泛型](../CROSS_MODULE_INTEGRATION_EXAMPLES.md) 保证类型安全
+
+---
+
+## 形式化链接
+
+| 链接类型 | 目标文档 |
+| :--- | :--- |
+| **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
+| | [C04 泛型](../../crates/c04_generic/docs/00_MASTER_INDEX.md) |
+| | [C05 线程](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
+| | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
+| | [C07 进程](../../crates/c07_process/docs/00_MASTER_INDEX.md) |
+| | [C08 算法](../../crates/c08_algorithms/docs/00_MASTER_INDEX.md) |
+| | [C09 设计模式](../../crates/c09_design_pattern/docs/00_MASTER_INDEX.md) |
+| | [C10 网络](../../crates/c10_networks/docs/00_MASTER_INDEX.md) |
+| | [C11 宏系统](../../crates/c11_macro_system/docs/00_MASTER_INDEX.md) |
+| | [C12 WASM](../../crates/c12_wasm/docs/00_MASTER_INDEX.md) |
+| **相关指南** | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
+| | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
 
 ---
 

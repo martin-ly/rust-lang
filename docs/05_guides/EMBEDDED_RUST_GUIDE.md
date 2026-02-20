@@ -74,9 +74,9 @@ fn main() -> ! {
     let dp = pac::Peripherals::take().unwrap();
     let rcc = dp.RCC.constrain();
     let gpioc = dp.GPIOC.split();
-    
+
     let mut led = gpioc.pc13.into_push_pull_output();
-    
+
     loop {
         led.set_high().unwrap();
         cortex_m::asm::delay(8_000_000);
@@ -104,18 +104,18 @@ static TIMER: Mutex<RefCell<Option<TIM2>>> = Mutex::new(RefCell::new(None));
 fn main() -> ! {
     let cp = cortex_m::Peripherals::take().unwrap();
     let dp = pac::Peripherals::take().unwrap();
-    
+
     // 初始化定时器
     let tim2 = dp.TIM2;
     cortex_m::interrupt::free(|cs| {
         TIMER.borrow(cs).replace(Some(tim2));
     });
-    
+
     // 启用中断
     unsafe {
         NVIC::unmask(interrupt::TIM2);
     }
-    
+
     loop {
         cortex_m::asm::wfi();
     }
@@ -163,7 +163,7 @@ unsafe impl GlobalAlloc for EmbeddedAllocator {
         // 实现分配逻辑
         core::ptr::null_mut()
     }
-    
+
     unsafe fn dealloc(&self, _ptr: *mut u8, _layout: Layout) {
         // 实现释放逻辑
     }
@@ -183,7 +183,7 @@ impl StaticPool {
     const fn new() -> Self {
         StaticPool { used: [false; 32] }
     }
-    
+
     fn allocate(&mut self, size: usize) -> Option<&'static mut [u8]> {
         let blocks_needed = (size + 31) / 32;
         // 查找连续的块
@@ -212,28 +212,28 @@ use panic_halt as _;
 #[app(device = stm32f4xx_hal::pac, peripherals = true)]
 mod app {
     use stm32f4xx_hal::prelude::*;
-    
+
     #[shared]
     struct Shared {
         led: LedPin,
     }
-    
+
     #[local]
     struct Local {}
-    
+
     #[init]
     fn init(cx: init::Context) -> (Shared, Local, init::Monotonics) {
         let dp = cx.device;
         let rcc = dp.RCC.constrain();
         let gpioc = dp.GPIOC.split();
         let led = gpioc.pc13.into_push_pull_output();
-        
+
         // 启动任务
         blink::spawn_after(1.secs()).unwrap();
-        
+
         (Shared { led }, Local {}, init::Monotonics())
     }
-    
+
     #[task(shared = [led])]
     fn blink(cx: blink::Context) {
         let led = cx.shared.led;
@@ -304,6 +304,61 @@ fn update_data(value: u32) {
     });
 }
 ```
+
+---
+
+## 使用场景
+
+### 场景1: 裸机嵌入式开发
+
+为 ARM Cortex-M 微控制器编写固件：
+
+```rust
+#![no_std]
+#![no_main]
+// 直接操作寄存器，无运行时开销
+// 适用于：传感器节点、电机控制、实时系统
+```
+
+### 场景2: 实时操作系统 (RTOS) 集成
+
+使用 RTIC 构建实时应用：
+
+- 确定性的任务调度
+- 零成本抽象
+- 参考 [RTIC 示例](#6-rtic-real-time-interrupt-driven-concurrency)
+
+### 场景3: 物联网 (IoT) 边缘设备
+
+连接传感器的低功耗设备：
+
+- 使用 `defmt` 进行高效日志记录
+- [无锁数据结构](#4-无锁数据结构) 保证实时性
+- 结合 [C12 WASM](#相关文档) 实现边缘 AI
+
+### 场景4: 嵌入式 Linux 系统
+
+在 Linux 嵌入式设备上运行 Rust：
+
+- 可以使用标准库（有 `std`）
+- 利用 Rust 的内存安全保证系统稳定性
+- 使用 `std::process` 管理外部进程
+
+---
+
+## 形式化链接
+
+| 链接类型 | 目标文档 |
+| :--- | :--- |
+| **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
+| | [C05 线程与并发](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
+| **外部资源** | [Embedded Rust Book](https://doc.rust-lang.org/embedded-book/) |
+| | [Discovery Book](https://docs.rust-embedded.org/discovery/) |
+| | [Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) |
+| **相关指南** | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
+| | [CROSS_MODULE_INTEGRATION_EXAMPLES.md](./CROSS_MODULE_INTEGRATION_EXAMPLES.md) |
+| | [AI_RUST_ECOSYSTEM_GUIDE.md](./AI_RUST_ECOSYSTEM_GUIDE.md) |
 
 ---
 

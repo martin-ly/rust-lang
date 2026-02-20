@@ -151,5 +151,52 @@ cargo bench --package c02_type_system --bench performance_benchmarks
 
 ---
 
+## 使用场景
+
+### 场景1: 性能回归测试
+在 CI/CD 中集成性能测试：
+```bash
+# 每次提交前运行基准测试
+cargo bench --workspace
+# 与历史结果对比，检测性能回归
+```
+
+### 场景2: 模块性能对比
+比较不同实现的性能：
+- 使用 [Criterion](../PERFORMANCE_TUNING_GUIDE.md#1-使用-criterion-基准测试) 进行精确测量
+- 运行特定模块的基准测试（[运行特定模块](#运行特定模块的性能测试)）
+- 生成性能报告进行对比分析
+
+### 场景3: 优化验证
+验证性能优化的效果：
+1. 建立 [性能基准](#性能基准测试文件统计)
+2. 实施优化策略（参考 [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md)）
+3. 重新运行测试，对比结果
+
+### 场景4: 发布前性能审计
+在版本发布前进行性能审计：
+- 运行 [所有性能测试](#运行所有性能测试)
+- 检查各模块覆盖率（[测试覆盖范围](#测试覆盖范围)）
+- 确认满足性能指标要求
+
+---
+
+## 形式化链接
+
+| 链接类型 | 目标文档 |
+| :--- | :--- |
+| **核心模块** | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
+| | [C05 线程](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
+| | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
+| | [C08 算法](../../crates/c08_algorithms/docs/00_MASTER_INDEX.md) |
+| | [C09 设计模式](../../crates/c09_design_pattern/docs/00_MASTER_INDEX.md) |
+| | [C10 网络](../../crates/c10_networks/docs/00_MASTER_INDEX.md) |
+| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
+| **外部工具** | [Criterion.rs](https://github.com/bheisler/criterion.rs) |
+| | [Rust性能手册](https://nnethercote.github.io/perf-book/) |
+
+---
+
 **报告日期**: 2026-01-27
 **维护者**: Rust 项目推进团队

@@ -32,8 +32,7 @@
   - [5. 文档最佳实践](#5-文档最佳实践)
     - [5.1 代码文档](#51-代码文档)
     - [5.2 README 文档](#52-readme-文档)
-  - [6. 安全性最佳实践](#6-安全性最佳实践)
-    - [6.1 输入验证](#61-输入验证)
+  - [文档](#文档)
     - [6.2 资源管理](#62-资源管理)
   - [7. 并发编程最佳实践](#7-并发编程最佳实践)
     - [7.1 线程安全](#71-线程安全)
@@ -58,6 +57,12 @@
     - [13.1 新类型模式](#131-新类型模式)
     - [13.2 Builder 模式](#132-builder-模式)
     - [13.3 状态机模式](#133-状态机模式)
+  - [14. 使用场景](#14-使用场景)
+    - [场景1: 新项目启动](#场景1-新项目启动)
+    - [场景2: 代码审查](#场景2-代码审查)
+    - [场景3: 性能优化](#场景3-性能优化)
+    - [场景4: 团队代码规范](#场景4-团队代码规范)
+  - [15. 形式化链接](#15-形式化链接)
   - [相关资源](#相关资源)
 
 ---
@@ -147,10 +152,10 @@ use thiserror::Error;
 pub enum AppError {
     #[error("IO 错误: {0}")]
     Io(#[from] std::io::Error),
-    
+
     #[error("解析错误: {message}")]
     Parse { message: String, line: u32 },
-    
+
     #[error("无效参数: {0}")]
     InvalidArg(String),
 }
@@ -261,10 +266,10 @@ use std::fmt;
 pub enum DatabaseError {
     #[error("连接失败: {0}")]
     ConnectionFailed(String),
-    
+
     #[error("查询错误: {0}")]
     QueryError(#[from] sqlx::Error),
-    
+
     #[error("记录未找到: id={0}")]
     NotFound(u64),
 }
@@ -293,14 +298,14 @@ impl std::error::Error for CustomError {}
 fn process_file(path: &str) -> Result<Vec<u8>, AppError> {
     // ? 操作符自动转换错误类型
     let content = std::fs::read(path)?;
-    
+
     // map_err 自定义错误信息
     let parsed = parse_data(&content)
         .map_err(|e| AppError::Parse {
             message: format!("解析 {} 失败: {}", path, e),
             line: 0,
         })?;
-    
+
     Ok(parsed)
 }
 ```
@@ -351,10 +356,10 @@ fn test_complete_workflow() {
     // 设置
     let config = Config::default();
     let mut app = Application::new(config);
-    
+
     // 执行
     app.process_data("input").unwrap();
-    
+
     // 验证
     assert_eq!(app.status(), Status::Completed);
 }
@@ -362,10 +367,10 @@ fn test_complete_workflow() {
 #[test]
 fn test_concurrent_access() {
     use std::thread;
-    
+
     let data = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let data = Arc::clone(&data);
         handles.push(thread::spawn(move || {
@@ -373,11 +378,11 @@ fn test_concurrent_access() {
             *num += 1;
         }));
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     assert_eq!(*data.lock().unwrap(), 10);
 }
 ```
@@ -483,6 +488,7 @@ let result = client.do_something().await?;
 
 - [API 文档](https://docs.rs/my_crate)
 - [用户指南](https://my_crate.github.io/guide)
+
 ```
 
 ---
@@ -500,10 +506,10 @@ use validator::{Validate, ValidationError};
 pub struct UserInput {
     #[validate(length(min = 1, max = 100))]
     pub name: String,
-    
+
     #[validate(email)]
     pub email: String,
-    
+
     #[validate(range(min = 18, max = 150))]
     pub age: u8,
 }
@@ -638,11 +644,11 @@ async fn fetch_data(url: &str) -> Result<String, reqwest::Error> {
 
 async fn process_concurrently(urls: Vec<String>) -> Vec<Result<String, reqwest::Error>> {
     use futures::future::join_all;
-    
+
     let futures: Vec<_> = urls.iter()
         .map(|url| fetch_data(url))
         .collect();
-    
+
     join_all(futures).await
 }
 
@@ -676,7 +682,7 @@ async fn complex_operation() -> Result<(), Box<dyn Error + Send + Sync>> {
 enum AsyncError {
     #[error("网络错误: {0}")]
     Network(#[from] reqwest::Error),
-    
+
     #[error("超时")]
     Timeout,
 }
@@ -715,13 +721,13 @@ pub use core::types::{Config, Result};
 mod inner {
     // 私有项
     fn private_fn() {}
-    
+
     // 当前 crate 可见
     pub(crate) fn crate_fn() {}
-    
+
     // 父模块可见
     pub(super) fn super_fn() {}
-    
+
     // 完全公开
     pub fn public_fn() {}
 }
@@ -900,7 +906,7 @@ impl UserId {
     pub fn new(id: u64) -> Self {
         UserId(id)
     }
-    
+
     pub fn as_u64(&self) -> u64 {
         self.0
     }
@@ -914,7 +920,7 @@ impl fmt::Display for UserId {
 
 impl FromStr for UserId {
     type Err = ParseError;
-    
+
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         s.parse::<u64>()
             .map(UserId::new)
@@ -953,22 +959,22 @@ impl ConfigBuilder {
         self.host = Some(host.into());
         self
     }
-    
+
     pub fn port(mut self, port: u16) -> Self {
         self.port = Some(port);
         self
     }
-    
+
     pub fn timeout(mut self, timeout: Duration) -> Self {
         self.timeout = Some(timeout);
         self
     }
-    
+
     pub fn retries(mut self, retries: u32) -> Self {
         self.retries = Some(retries);
         self
     }
-    
+
     pub fn build(self) -> Result<Config, ConfigError> {
         Ok(Config {
             host: self.host.ok_or(ConfigError::MissingField("host"))?,
@@ -1009,7 +1015,7 @@ impl StateMachine<Idle> {
     pub fn new() -> Self {
         StateMachine { state: Idle }
     }
-    
+
     pub fn start(self) -> StateMachine<Running> {
         StateMachine {
             state: Running {
@@ -1026,7 +1032,7 @@ impl StateMachine<Running> {
             state: Stopped { duration },
         }
     }
-    
+
     pub fn elapsed(&self) -> Duration {
         self.state.start_time.elapsed()
     }
@@ -1036,7 +1042,7 @@ impl StateMachine<Stopped> {
     pub fn duration(&self) -> Duration {
         self.state.duration
     }
-    
+
     pub fn restart(self) -> StateMachine<Running> {
         StateMachine {
             state: Running {
@@ -1053,6 +1059,60 @@ let running = machine.start();
 let stopped = running.stop();
 println!("运行时长: {:?}", stopped.duration());
 ```
+
+---
+
+## 14. 使用场景
+
+### 场景1: 新项目启动
+
+为新 Rust 项目建立最佳实践基线：
+
+1. 参考 [项目组织最佳实践](#10-项目组织最佳实践) 建立目录结构
+2. 配置 [Clippy](#111-clippy) 和 [rustfmt](#112-rustfmt)
+3. 设置 [CI/CD 测试](#41-单元测试) 流程
+
+### 场景2: 代码审查
+
+使用本指南进行代码审查：
+
+- 检查所有权和借用模式（[1.1 节](#11-所有权和借用)）
+- 验证错误处理策略（[3. 错误处理](#3-错误处理最佳实践)）
+- 评估性能优化机会（[2. 性能优化](#2-性能优化最佳实践)）
+
+### 场景3: 性能优化
+
+系统性地优化 Rust 代码性能：
+
+1. 使用 [Criterion](#121-基准测试) 建立性能基准
+2. 应用 [内存优化](#21-内存管理) 技巧
+3. 实施 [迭代器优化](#22-迭代器优化)
+4. 参考 [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) 深度优化
+
+### 场景4: 团队代码规范
+
+建立团队统一的 Rust 编码规范：
+
+- 定义错误处理模式（[3. 错误处理](#3-错误处理最佳实践)）
+- 约定文档标准（[5. 文档](#5-文档最佳实践)）
+- 设定测试覆盖率目标（[4. 测试](#4-测试最佳实践)）
+
+---
+
+## 15. 形式化链接
+
+| 链接类型 | 目标文档 |
+| :--- | :--- |
+| **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
+| | [C03 控制流](../../crates/c03_control_fn/docs/00_MASTER_INDEX.md) |
+| | [C04 泛型](../../crates/c04_generic/docs/00_MASTER_INDEX.md) |
+| **高级主题** | [C05 线程](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
+| | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
+| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| | [TESTING_COVERAGE_GUIDE.md](./TESTING_COVERAGE_GUIDE.md) |
+| | [TROUBLESHOOTING_GUIDE.md](./TROUBLESHOOTING_GUIDE.md) |
+| | [CLI_APPLICATIONS_GUIDE.md](./CLI_APPLICATIONS_GUIDE.md) |
 
 ---
 
