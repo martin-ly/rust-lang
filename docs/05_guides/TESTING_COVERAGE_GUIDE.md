@@ -359,6 +359,52 @@ exclude-files = [
 
 ---
 
+## 使用场景
+
+### 场景1: 新模块测试策略
+为新开发的模块建立测试体系：
+1. 编写 [单元测试](#1-单元测试) 覆盖核心功能
+2. 添加 [集成测试](#2-集成测试) 验证模块协作
+3. 使用 [文档测试](#3-文档测试) 保证示例可用
+
+### 场景2: CI/CD 集成
+在持续集成中集成覆盖率检查：
+```yaml
+# 使用 cargo-tarpaulin 生成覆盖率报告
+# 设置覆盖率阈值阻止低质量代码合并
+```
+
+### 场景3: 覆盖率提升
+系统性地提高项目测试覆盖率：
+- 识别未覆盖代码区域
+- 添加 [边界情况测试](#1-测试边界情况)
+- 补充 [错误路径测试](#2-测试错误路径)
+- 验证 [并发场景](#3-测试并发场景)
+
+### 场景4: 发布前质量验证
+在版本发布前验证测试质量：
+1. 运行完整 [覆盖率测试](#-快速开始)
+2. 检查是否达到 [覆盖率目标](#-覆盖率目标)
+3. 审查未覆盖代码的合理性
+4. 生成 [覆盖率报告](#-覆盖率报告)
+
+---
+
+## 形式化链接
+
+| 链接类型 | 目标文档 |
+| :--- | :--- |
+| **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| | [C05 线程](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
+| | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
+| **相关指南** | [PERFORMANCE_TESTING_REPORT.md](./PERFORMANCE_TESTING_REPORT.md) |
+| | [TROUBLESHOOTING_GUIDE.md](./TROUBLESHOOTING_GUIDE.md) |
+| | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
+| **外部资源** | [cargo-tarpaulin文档](https://github.com/xd009642/tarpaulin) |
+| | [Rust测试指南](https://doc.rust-lang.org/book/ch11-00-testing.html) |
+
+---
+
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 持续更新
 **最后更新**: 2026-01-26
