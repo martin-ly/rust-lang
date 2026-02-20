@@ -1,7 +1,7 @@
 # 本项目概念与官方资源映射表
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-12
+> **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 本项目概念/模块 ↔ The Rust Book / Reference / Rust by Example
@@ -194,6 +194,30 @@
 | [Ferrocene FLS - Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
 | [Ferrocene FLS - Concurrency](https://spec.ferrocene.dev/concurrency.html) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md)、[async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
 | [Rust Reference - Undefined Behavior](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | [EDGE_CASES_AND_SPECIAL_CASES](./EDGE_CASES_AND_SPECIAL_CASES.md) |
+
+---
+
+## edX 课程资源映射
+
+### 课程与项目内容对齐
+
+| 课程 | 机构 | 链接 | 主要内容 | 本项目对应路径 |
+| :--- | :--- | :--- | :--- | :--- |
+| Introduction to Rust Programming | Microsoft | <https://www.edx.org/learn/rust/microsoft-introduction-to-rust-programming> | Rust语法基础、所有权、类型系统 | [01_learning/](./) - C01-C04 基础阶段 |
+| Rust for Developers | Linux Foundation | <https://www.edx.org/learn/rust/the-linux-foundation-rust-for-developers> | 实战开发、项目构建、最佳实践 | [05_guides/](../05_guides/) - 开发指南 |
+| Programming with Rust | W3C | <https://www.edx.org/learn/rust/w3cx-programming-with-rust> | 语法速查、模式匹配、标准库 | [02_reference/quick_reference/](../02_reference/quick_reference/) - 速查卡 |
+
+### 学习路径建议
+
+**初学者路径** (Microsoft课程 → 本项目):
+1. 完成 edX Microsoft 入门课程
+2. 结合本项目 [LEARNING_PATH_PLANNING.md](./LEARNING_PATH_PLANNING.md) 深化理解
+3. 通过 [Rustlings 练习](../../exercises/RUSTLINGS_MAPPING.md) 巩固知识
+
+**开发者进阶路径** (Linux Foundation课程 → 本项目):
+1. 完成 edX Linux Foundation 开发者课程
+2. 参考本项目 [05_guides/](../05_guides/) 专题指南
+3. 阅读 [异步模式速查](../02_reference/quick_reference/async_patterns.md) 等进阶内容
 
 ---
 

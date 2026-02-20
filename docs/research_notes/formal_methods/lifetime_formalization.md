@@ -288,6 +288,17 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 
 3. **区域约束求解**: CMU 课程中的约束求解算法与 Rust 编译器的生命周期推断算法在原理上同构。
 
+## 权威来源对齐
+
+| 来源 | 内容 | 本文档对应 | 对齐状态 |
+|:---|:---|:---|:---:|
+| Tofte & Talpin 1997 | Regional Memory Management | §生命周期形式化 | ✅ |
+| RustBelt | Lifetime formalization | §形式化定义 | ✅ |
+| Polonius | NLL, loan analysis | §生命周期推断 | ✅ |
+| Stanford CS242 | Type systems | §类型理论 | ✅ |
+| CMU 15-799 | Regional Types | §区域理论 | ✅ |
+| Ferrocene FLS Ch.15 | References | §引用 | ✅ |
+
 ---
 
 ## 欧洲大学课程对齐

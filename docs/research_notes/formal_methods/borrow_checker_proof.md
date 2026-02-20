@@ -334,6 +334,14 @@ MIT 6.826 Lab 2 研究基于权能的安全模型：
 | 6.858 | Lab 3 | Symbolic execution → 借用检查路径分析 | ✅ |
 | 6.858 | Lecture | Type safety → 借用规则 + 类型系统 | ✅ |
 
+### CAV工具与Borrow Checker
+
+| CAV工具 | 验证方法 | 与Borrow Checker关系 |
+|:---|:---|:---|
+| Kani | 模型检查 | 补充Borrow Checker运行时验证 |
+| Mirai | 抽象解释 | 静态分析与Borrow Checker互补 |
+| SMACK | 位码验证 | 底层内存安全验证 |
+
 ### CMU 15-799 并发验证
 
 **课程链接**: https://www.cs.cmu.edu/~15-799/

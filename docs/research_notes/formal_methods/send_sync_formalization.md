@@ -54,6 +54,16 @@
 
 **与 Rc/Arc/Cell 的关系**：见 [ownership_model](ownership_model.md) Def RC1/ARC1/CELL1。`Rc: !Send`（非原子计数）；`Arc: Send + Sync` 当 $T: \text{Send} + \text{Sync}$；`Cell: !Sync`（内部可变无同步）。
 
+## 权威来源对齐
+
+| 来源 | 内容 | 本文档对应 | 对齐状态 |
+|:---|:---|:---|:---:|
+| RustBelt Meets Relaxed Memory POPL 2020 | Arc, Send/Sync | §Def SEND1/SYNC1 | ✅ |
+| Ferrocene FLS Ch.17 | Send and Sync | §形式化定义 | ✅ |
+| Rust Reference | Send/Sync trait | §定义 | ✅ |
+| MIT 6.826 | Concurrency safety | §定理 | ✅ |
+| EPFL Concurrent Programming | Concurrency theory | §并发 | ✅ |
+
 ---
 
 ## 🔬 形式化定义

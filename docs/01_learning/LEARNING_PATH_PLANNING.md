@@ -280,6 +280,34 @@
 - [Rust 中文社区](https://rustcc.cn/)
 - [Rust 周报](https://this-week-in-rust.org/)
 
+### Coursera 在线课程
+
+#### Rust Programming Specialization (Duke University)
+- **链接**: https://www.coursera.org/specializations/rust-programming
+- **内容**: Rust基础、数据结构、并发编程
+- **适合路径**: 
+  - 路径 1: 完全新手（0 基础）
+  - 路径 2: 有编程经验（其他语言）
+- **与本文档对齐**:
+  | Coursera 模块 | 本文档对应章节 |
+  |:---|:---|
+  | Rust Basics | C01-C03 基础阶段 |
+  | Data Structures | C04 集合与错误 |
+  | Concurrency | C08 并发编程 |
+
+#### Programming in Rust (University of Colorado Boulder)
+- **链接**: https://www.coursera.org/learn/programming-in-rust
+- **内容**: Rust编程基础
+- **适合路径**: 路径 1: 完全新手（0 基础）
+- **与本文档对齐**: C01-C03 基础阶段
+
+#### Practical System Programming in Rust (Coursera Project)
+- **内容**: 系统编程实践
+- **适合路径**: 
+  - 路径 2: 有编程经验（其他语言）
+  - 路径 3: 中级开发者（有 Rust 基础）
+- **与本文档对齐**: C07 进程管理、C10 网络编程
+
 ---
 
 ## 🔄 学习路径调整

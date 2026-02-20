@@ -1118,10 +1118,23 @@ println!("运行时长: {:?}", stopped.duration());
 
 ## 相关资源
 
+### 官方资源
+
 - [Rust 官方文档](https://doc.rust-lang.org/)
 - [Rust API 指南](https://rust-lang.github.io/api-guidelines/)
 - [Rust 性能书](https://nnethercote.github.io/perf-book/)
 - [研究笔记最佳实践](./research_notes/BEST_PRACTICES.md) - 研究笔记写作规范
+
+### 在线课程 (Coursera)
+
+- [Rust Programming Specialization](https://www.coursera.org/specializations/rust-programming) (Duke University) - Rust基础、数据结构、并发编程
+- [Programming in Rust](https://www.coursera.org/learn/programming-in-rust) (University of Colorado Boulder) - Rust编程基础
+- Practical System Programming in Rust (Coursera Project) - 系统编程实践
+
+> **提示**: 这些 Coursera 课程提供了结构化的学习路径，可作为本文档最佳实践的补充学习资源。
+
+### 项目资源
+
 - [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md)
 - [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md)
 - [C05 线程与并发](../../crates/c05_threads/docs/00_MASTER_INDEX.md)

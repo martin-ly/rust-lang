@@ -103,6 +103,30 @@ fn ownership_theorem() {
 
 ---
 
+## 在线学习资源
+
+### Coursera
+
+#### Rust Programming Specialization (Duke University)
+- **链接**: https://www.coursera.org/specializations/rust-programming
+- **内容**: 
+  - Rust基础语法
+  - 数据结构
+  - 并发编程
+- **与本文档对齐**: 
+  | Coursera内容 | 本文档对应 |
+  |:---|:---|
+  | Rust Basics | 01_learning/ |
+  | Data Structures | 02_reference/quick_reference/collections_iterators_cheatsheet.md |
+  | Concurrency | 05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md |
+
+#### Programming in Rust (University of Colorado Boulder)
+- **链接**: https://www.coursera.org/learn/programming-in-rust
+- **内容**: Rust编程基础
+- **与本文档对齐**: 01_learning/目录
+
+---
+
 ## 相关资源
 
 ### 官方资源
@@ -122,6 +146,33 @@ fn ownership_theorem() {
 | 专题指南 | [../05_guides/](../05_guides/) | 异步、线程、Unsafe 等 |
 | 工具链 | [../06_toolchain/](../06_toolchain/) | 编译器、Cargo |
 | 形式化理论 | [../research_notes/](../research_notes/) | 类型理论、证明 |
+
+### 在线学习资源
+
+#### edX
+
+| 课程 | 机构 | 链接 | 内容 | 与本文档对齐 |
+| :--- | :--- | :--- | :--- | :--- |
+| Introduction to Rust Programming | Microsoft | <https://www.edx.org/learn/rust/microsoft-introduction-to-rust-programming> | Rust编程入门 | 01_learning/基础内容 |
+| Rust for Developers | Linux Foundation | <https://www.edx.org/learn/rust/the-linux-foundation-rust-for-developers> | 开发者Rust教程 | 05_guides/开发指南 |
+| Programming with Rust | W3C | <https://www.edx.org/learn/rust/w3cx-programming-with-rust> | Rust编程 | 02_reference/速查卡 |
+
+#### Udacity
+
+##### C++ for Programmers
+- **平台**: Udacity
+- **用途**: 与Rust系统编程概念对比学习
+- **对比内容**:
+  | C++概念 | Rust对应 | 本文档 |
+  |:---|:---|:---|
+  | 手动内存管理 | 所有权系统 | [formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) |
+  | 智能指针 | Box/Rc/Arc | [02_reference/smart_pointers_cheatsheet.md](../02_reference/smart_pointers_cheatsheet.md) |
+  | 模板 | 泛型 | [02_reference/generics_cheatsheet.md](../02_reference/generics_cheatsheet.md) |
+
+##### Memory Management
+- **平台**: Udacity
+- **用途**: 理解内存管理与Rust所有权的关系
+- **与本文档对齐**: [formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) §内存安全
 
 ---
 

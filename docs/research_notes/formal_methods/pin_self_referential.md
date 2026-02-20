@@ -134,6 +134,15 @@
 
 **内存安全理论**: Pin 是 Rust 内存安全保证的重要组成部分，确保自引用类型的安全性。
 
+## 权威来源对齐
+
+| 来源 | 内容 | 本文档对应 | 对齐状态 |
+|:---|:---|:---|:---:|
+| RFC 2349 | Pin API | §形式化定义 | ✅ |
+| RustBelt | unsafe abstractions | §安全保证 | ✅ |
+| Ferrocene FLS Ch.17 | Async computation | §自引用 | ✅ |
+| Stanford CS242 | Type safety | §类型安全 | ✅ |
+
 ---
 
 ## 🔬 形式化定义

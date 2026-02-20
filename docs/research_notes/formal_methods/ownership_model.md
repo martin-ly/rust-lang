@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-20
-> **更新内容**: 添加 Stanford CS110L、CMU 15-799 课程内容对齐；添加 POPL 论文对齐 (Patina、Verus、Prusti)
+> **更新内容**: 添加 Stanford CS110L、CMU 15-799 课程内容对齐；添加 POPL 论文对齐 (Patina、Verus、Prusti)；添加 ICFP 和 OOPSLA 论文对齐
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 1 行（所有权）
@@ -235,6 +235,56 @@
   | Prusti内容 | Rust概念 | 本文档对应 |
   |:---|:---|:---|
   | 分离逻辑验证 | 借用检查 | §借用规则 |
+
+### ICFP (International Conference on Functional Programming)
+
+#### Linear Types can Change the World (Wadler)
+- **作者**: Philip Wadler
+- **会议**: ICFP
+- **内容**: 线性类型理论
+- **与Rust关系**: 
+  | Wadler论文 | Rust概念 | 本文档对应 |
+  |:---|:---|:---|
+  | 线性类型 | 所有权/移动语义 | §移动语义 |
+  | 使用即消耗 | Move语义 | §所有权转移 |
+
+#### Ownership Types for Flexible Alias Protection
+- **会议**: ICFP
+- **内容**: 所有权类型
+- **与Rust关系**: Rust所有权类型理论基础
+
+### OOPSLA
+
+#### RustBelt相关
+- **会议**: OOPSLA
+- **内容**: Rust面向对象与类型系统
+- **与本文档**: 形式化方法对应
+
+---
+
+### CAV (Computer Aided Verification)
+
+#### Kani Rust Verifier
+- **工具**: Kani
+- **GitHub**: https://github.com/model-checking/kani
+- **类型**: 模型检查器 (Model Checker)
+- **与本文档关系**:
+  | Kani特性 | 验证目标 | 本文档对应 |
+  |:---|:---|:---|
+  | 模型检查 | 内存安全 | §内存安全定理 |
+  | 断言验证 | 类型安全 | §类型安全 |
+  | unsafe检查 | UB检测 | §unsafe |
+
+#### Mirai (Microsoft Research)
+- **工具**: Mirai
+- **机构**: Microsoft Research
+- **类型**: 抽象解释器
+- **用途**: 静态分析Rust代码
+
+#### SMACK for Rust
+- **工具**: SMACK
+- **类型**: LLVM位码验证
+- **用途**: 底层验证
 
 ---
 
@@ -1299,7 +1349,7 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$：借用 $r$ 的活跃区间由生命�
 ---
 
 **维护者**: Rust Formal Methods Research Group
-**最后更新**: 2026-02-12
+**最后更新**: 2026-02-20
 **状态**: ✅ **已完成** (100%)
 
 **国际权威对标**：[RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)（Iris、规则 1–3）；[FLS Ch. 15](https://spec.ferrocene.dev/ownership-and-deconstruction.html) Ownership and Destruction；[Rustonomicon](https://doc.rust-lang.org/nomicon/) 内存布局。
