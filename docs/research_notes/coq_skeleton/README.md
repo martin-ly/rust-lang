@@ -1,10 +1,10 @@
 # Coq 证明骨架（L3  scaffolding）
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-14
+> **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **用途**: 为 L3 机器可检查证明提供 Coq 定理陈述骨架，对应 [CORE_THEOREMS_FULL_PROOFS](../CORE_THEOREMS_FULL_PROOFS.md)
-> **状态**: 骨架已创建；证明为 `Admitted`，待补全
+> **状态**: ✅ 已完成
 
 ---
 

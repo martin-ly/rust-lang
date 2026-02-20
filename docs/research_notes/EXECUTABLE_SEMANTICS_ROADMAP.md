@@ -1,8 +1,9 @@
 # 可执行语义路线图
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-14
+> **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已完成
 > **用途**: 与 K-Framework、PLT Redex 等可执行语义工具的对接可能性与路线图
 > **参考**: [RustSEM (K-Framework, 2024)](https://link.springer.com/article/10.1007/s10703-024-00460-3)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
 

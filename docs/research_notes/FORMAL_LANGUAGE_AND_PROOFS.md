@@ -1,8 +1,9 @@
 # 形式语言与形式证明
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-14
+> **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已完成
 > **用途**: 用形式语言（推理规则、操作语义、判定形式）表达 Rust 核心定理，提供数学级形式证明；与 Coq 骨架互补（形式语言为规范，Coq 为机器可检查实现）
 > **上位文档**: [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)、[FORMAL_FULL_MODEL_OVERVIEW](./FORMAL_FULL_MODEL_OVERVIEW.md)
 

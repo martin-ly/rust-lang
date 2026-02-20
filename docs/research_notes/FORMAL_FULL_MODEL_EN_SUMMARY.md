@@ -2,7 +2,7 @@
 
 > **Source**: [FORMAL_FULL_MODEL_OVERVIEW.md](./FORMAL_FULL_MODEL_OVERVIEW.md) (Chinese)
 > **Rust version**: 1.93.0+ (Edition 2024)
-> **Last updated**: 2026-02-14
+> **Last updated**: 2026-02-20
 
 ---
 

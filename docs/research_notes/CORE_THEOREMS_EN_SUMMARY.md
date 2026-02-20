@@ -2,7 +2,7 @@
 
 > **Source**: [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) (Chinese)
 > **Proof depth**: L2 (full proofs; L3 machine-checkable scaffolding in progress)
-> **Last updated**: 2026-02-14
+> **Last updated**: 2026-02-20
 
 ---
 

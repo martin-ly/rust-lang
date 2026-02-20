@@ -1,8 +1,9 @@
 # coq-of-rust 对接调研与集成计划
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-14
+> **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已完成
 > **用途**: 调研 coq-of-rust（THIR → Rocq/Coq）的输入要求，给出「本项目文档 → 工具输入」的映射方案
 > **参考**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
 
