@@ -197,6 +197,135 @@
 - 提供了类型系统的形式化方法
 - 提供了与所有权系统的集成方法
 
+### MIT 课程对齐：计算机系统安全与内存安全
+
+#### MIT 6.826: Computer Systems Security
+
+**课程链接**: <https://6826.csail.mit.edu/>
+
+MIT 6.826 是一门专注于系统安全的课程，其核心内容与本研究的所有权模型高度相关：
+
+**Lab 1: Buffer Overflows & Memory Safety**
+- 6.826 Lab 1 通过缓冲区溢出实验展示了传统 C/C++ 代码中的内存安全漏洞
+- **Rust 所有权解决方案**: 所有权唯一性（规则 1）保证每个值只有一个所有者，编译时阻止 use-after-free 和 double-free
+- **形式化对应**: 6.826 中的内存安全漏洞对应本文定理 3 中的"无悬垂指针"、"无双重释放"保证
+
+**Lab 2: Privilege Separation & Capabilities**
+- 6.826 Lab 2 研究基于权能（capability）的访问控制
+- **Rust 所有权与权能的对应**: Rust 所有权可视为一种**权能系统**——拥有值的所有权意味着拥有操作该值的权能
+- **形式化对应**: `&T` 和 `&mut T` 对应只读/读写权能，所有权转移对应权能委托
+
+**Lecture: Memory Safety Vulnerabilities**
+- 6.826 讲座涵盖的内存安全漏洞类型：
+  - **Use-after-free** → Rust 所有权规则 2（移动后原变量失效）+ 规则 3（作用域结束释放）防止
+  - **Double-free** → Rust 所有权唯一性（定理 2）保证
+  - **Buffer overflow** → Rust 借用规则（规则 6-8）+ 边界检查防止
+
+#### MIT 6.858: Computer Systems
+
+**课程链接**: <https://css.csail.mit.edu/6.858/>
+
+MIT 6.858 从系统层面研究计算机安全，其内容与本研究的所有权模型形成互补：
+
+**Lab 1: Buffer Overflows & x86 Assembly**
+- 6.858 Lab 1 通过 x86 汇编分析缓冲区溢出的底层机制
+- **Rust 内存模型对应**: Rust 的所有权环境 $\Omega$ 和值环境 $\Gamma$ 在抽象层消除了汇编层面的内存错误
+- **形式化对应**: 定义 1.3（所有权环境）在编译时静态保证内存安全，避免运行时汇编层面的检查开销
+
+**Lab 2: Privilege Separation**
+- 6.858 Lab 2 研究用户态/内核态隔离
+- **Rust 所有权隔离**: 不同变量拥有不同值的所有权，形成天然的**内存隔离**——一个变量无法访问另一个变量拥有的值，除非显式借用或转移
+- **形式化对应**: 分离逻辑中的 $P * Q$（分离合取）对应 Rust 中不同所有权的值持有不相交的内存
+
+**Lab 3: Symbolic Execution**
+- 6.858 Lab 3 使用符号执行发现程序中的安全漏洞
+- **Rust 借用检查器的静态分析**: 借用检查器可视为一种**编译期符号执行**，在编译时枚举所有可能的执行路径并验证借用规则
+- **形式化对应**: Axiom 4（借用检查完备性）对应符号执行的完备性——所有违反借用规则的路径都被检测到
+
+#### Memory Safety vs Capability-based Security 对比分析
+
+| 安全模型 | MIT 课程重点 | Rust 所有权实现 | 形式化对应 |
+|:---|:---|:---|:---|
+| **Spatial Safety** (空间安全) | 6.826 Lab 1: 防止越界访问 | 借用规则 8（借用必须在作用域内）+ 生命周期 | $\text{scope}(b) \subseteq \text{scope}(x)$ |
+| **Temporal Safety** (时间安全) | 6.826 Lecture: Use-after-free 防护 | 所有权规则 2（移动语义）+ 规则 3（作用域结束） | $\Omega(x) = \text{Moved}$ 防止后续访问 |
+| **Capability-based** (基于权能) | 6.826/6.858 Lab 2: 权能委托 | 所有权唯一性 + 借用机制 | 拥有所有权 = 拥有操作权能 |
+| **Type Safety** | 6.858 Lecture: 类型系统安全 | Copy/Move trait 区分 + 线性类型系统 | 线性/仿射/相关值分类 |
+
+#### Spatial/Temporal Safety 形式化定义
+
+**Spatial Safety (空间安全)**
+
+空间安全保证程序只能访问分配给其的内存范围：
+
+$$\text{SpatialSafe}(P) \leftrightarrow \forall p \in P: \text{Access}(p, addr) \rightarrow addr \in \text{Allocated}(p)$$
+
+**Rust 保证**:
+- 借用规则 8: $\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$
+- 切片和 `Vec` 等容器在运行时进行边界检查
+- 引用总是指向有效内存（定理 3: 无悬垂指针）
+
+**Temporal Safety (时间安全)**
+
+时间安全保证程序不会访问已释放的内存：
+
+$$\text{TemporalSafe}(P) \leftrightarrow \forall p \in P: \text{Access}(p, addr) \rightarrow \text{Valid}(addr, \text{time}(p))$$
+
+**Rust 保证**:
+- 所有权规则 2（移动语义）: 移动后原变量标记为 $\text{Moved}$，不能再访问
+- 所有权规则 3（作用域结束）: 值在作用域结束时释放，无法后续访问
+- 定理 2（所有权唯一性）: 每个值只有一个所有者，防止多重释放
+
+#### MIT 课程对齐表
+
+| MIT 课程 | 章节 | 对齐内容 | 状态 |
+|:---|:---|:---|:---:|
+| 6.826 | Lab 1 | Buffer overflows → Rust所有权防止 | ✅ |
+| 6.826 | Lecture | Memory safety vulnerabilities → Rust解决 | ✅ |
+| 6.826 | Lab 2 | Privilege separation → 所有权隔离 | ✅ |
+| 6.826 | Lecture | Capability-based security → 所有权权能模型 | ✅ |
+| 6.858 | Lab 1 | x86 assembly → Rust内存模型抽象 | ✅ |
+| 6.858 | Lab 2 | Privilege separation → 所有权隔离 | ✅ |
+| 6.858 | Lab 3 | Symbolic execution → 借用检查静态分析 | ✅ |
+| 6.858 | Lecture | Memory safety, type safety → Rust类型系统 | ✅ |
+
+#### 差异分析：Rust 如何解决 MIT 课程中的问题
+
+**1. Buffer Overflows (缓冲区溢出)**
+
+- **MIT 6.826/6.858 问题**: C/C++ 缺乏边界检查，`strcpy`、`gets` 等函数导致栈溢出
+- **Rust 解决方案**:
+  - 所有权规则 1：每个值有唯一所有者，编译器跟踪值的生命周期
+  - 借用规则 8：借用必须在所有者作用域内，防止越界访问
+  - `Vec` 和切片在运行时进行边界检查（`Index` trait）
+- **形式化保证**: 定理 3 保证无悬垂指针，空间安全由作用域规则保证
+
+**2. Use-after-Free (释放后使用)**
+
+- **MIT 6.826 问题**: 手动内存管理导致指针悬垂
+- **Rust 解决方案**:
+  - 所有权规则 2（移动语义）: 移动后原变量标记为 $\text{Moved}$
+  - 编译器拒绝访问已移动的值（示例 9）
+  - 所有权规则 3（RAII）: 作用域结束自动释放，无需手动管理
+- **形式化保证**: 定理 2 所有权唯一性 + 定理 3 无悬垂指针
+
+**3. Double-Free (双重释放)**
+
+- **MIT 6.826 问题**: 多个指针指向同一内存，多次调用 `free`
+- **Rust 解决方案**:
+  - 所有权唯一性（定理 2）：每个值最多有一个所有者
+  - 只有所有者负责释放值
+  - `Rc`/`Arc` 使用引用计数，保证只有一个释放点
+- **形式化保证**: 定理 RC-T1 保证多所有者情况下的正确释放
+
+**4. Data Races (数据竞争)**
+
+- **MIT 6.858 问题**: 并发访问共享内存导致非确定性行为
+- **Rust 解决方案**:
+  - 借用规则 6（可变借用唯一性）: 同一时间只能有一个可变借用
+  - `Send`/`Sync` trait 约束跨线程数据传递
+  - 编译期保证数据竞争自由（见 [borrow_checker_proof](./borrow_checker_proof.md) 定理 1）
+- **形式化保证**: 借用检查器拒绝潜在的并发冲突代码
+
 ---
 
 ## 🔬 形式化定义
