@@ -9,6 +9,118 @@
 
 ---
 
+## 代码示例
+
+### 版本检查与兼容性验证脚本
+
+```rust
+//! 检查项目 Rust 版本兼容性
+use std::process::Command;
+
+fn get_rustc_version() -> Option<String> {
+    let output = Command::new("rustc")
+        .args(["--version"])
+        .output()
+        .ok()?;
+    String::from_utf8(output.stdout).ok()
+}
+
+fn check_edition_2024_compatibility() -> bool {
+    // 检查 Cargo.toml 中的 edition
+    let cargo_toml = std::fs::read_to_string("Cargo.toml")
+        .unwrap_or_default();
+    cargo_toml.contains(r#"edition = "2024""#)
+}
+
+fn main() {
+    if let Some(version) = get_rustc_version() {
+        println!("当前 Rust 版本: {}", version.trim());
+        println!("Edition 2024 兼容: {}", check_edition_2024_compatibility());
+    }
+}
+```
+
+### 反例验证示例（compile_fail）
+
+```rust
+/// 展示编译失败的反例
+/// ```rust,compile_fail
+/// let s = String::from("hello");
+/// let r = &s;
+/// drop(s); // 错误：不能在使用引用后移动所有权
+/// println!("{}", r);
+/// ```
+
+/// 展示正确的做法
+/// ```rust
+/// let s = String::from("hello");
+/// let r = &s;
+/// println!("{}", r); // 先使用引用
+/// drop(s); // 然后可以安全地移动
+/// ```
+```
+
+### 权威源同步检查工具
+
+```rust
+use std::fs;
+use std::io::{self, Write};
+use regex::Regex;
+
+/// 检查文档中的权威源日期标记
+fn check_authoritative_source_dates(dir: &str) -> Vec<(String, bool)> {
+    let mut results = Vec::new();
+    
+    if let Ok(entries) = fs::read_dir(dir) {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.extension().map_or(false, |e| e == "md") {
+                if let Ok(content) = fs::read_to_string(&path) {
+                    let has_date = content.contains("最后对照 releases.rs");
+                    results.push((
+                        path.file_name().unwrap().to_string_lossy().to_string(),
+                        has_date
+                    ));
+                }
+            }
+        }
+    }
+    results
+}
+
+fn main() -> io::Result<()> {
+    println!("检查 toolchain 文档的权威源日期标记...");
+    let results = check_authoritative_source_dates("docs/06_toolchain");
+    
+    for (file, has_date) in results {
+        let status = if has_date { "✅" } else { "❌" };
+        println!("{} {} - 日期标记: {}", status, file, has_date);
+    }
+    
+    Ok(())
+}
+```
+
+---
+
+## 形式化链接
+
+### 研究笔记关联
+
+- **形式化验证**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 与国际形式化验证社区对标
+- **公理系统**: [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 证明索引与公理编号规范
+- **三大支柱**: [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md](../research_notes/RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md) - 研究笔记的三大支柱与可持续推进计划
+
+### 实施场景
+
+| 场景 | 实施步骤 | 参考文档 |
+| :--- | :--- | :--- |
+| **Rust 新版本发布** | 1. 执行 RUST_RELEASE_TRACKING_CHECKLIST<br>2. 更新权威源日期标记<br>3. 执行反例 compile_fail 验证 | [RUST_RELEASE_TRACKING_CHECKLIST](./RUST_RELEASE_TRACKING_CHECKLIST.md) |
+| **季度审查** | 1. 检查 DECISION_GRAPH_NETWORK 引用<br>2. 核对版本声明<br>3. 更新累积文档 | [PROJECT_CRITICAL_EVALUATION_REPORT_2026_02](./PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md) |
+| **Unsafe 深度对齐** | 1. 按 Nomicon 目录逐章标注<br>2. 增加「对应 Nomicon 第 X 章」 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
+
+---
+
 ## 一、权威信息对标摘要
 
 ### 1.1 官方学习资源现状（2025–2026）

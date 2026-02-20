@@ -16,7 +16,8 @@
 ### 核心入口
 
 | 模块 | 入口路径 | 说明 |
-| :--- | :--- | :--- || **形式化方法** | [research_notes/formal_methods/](../research_notes/formal_methods/) | 所有权模型、借用检查器、生命周期、Pin、异步状态机 |
+| :--- | :--- | :--- |
+| **形式化方法** | [research_notes/formal_methods/](../research_notes/formal_methods/) | 所有权模型、借用检查器、生命周期、Pin、异步状态机 |
 | **类型理论** | [research_notes/type_theory/](../research_notes/type_theory/) | 类型系统基础、Trait 形式化、型变理论、生命周期 |
 | **主索引** | [00_master_index.md](./00_master_index.md) | 完整模块映射与导航 |
 
@@ -32,8 +33,92 @@
 
 ---
 
+## 核心概念简介
+
+### 1. 所有权系统
+
+Rust 的所有权系统是其内存安全保证的核心：
+
+```rust
+// 所有权三规则的形式化理解
+// 1. 每个值都有一个所有者
+// 2. 同一时间只能有一个所有者
+// 3. 当所有者离开作用域，值被丢弃
+
+fn ownership_demo() {
+    let s1 = String::from("hello");  // s1 拥有这个 String
+    let s2 = s1;                      // 所有权转移到 s2
+    // println!("{}", s1);            // 错误：s1 不再拥有该值
+
+    let s3 = s2.clone();              // 克隆创建新的所有权
+    println!("s2 = {}, s3 = {}", s2, s3);  // 两者都可用
+}  // s2 和 s3 在这里被丢弃
+```
+
+### 2. 借用检查
+
+借用检查器在编译时验证引用有效性：
+
+```rust
+// 借用规则的形式化表达
+// ∀r: Reference, lifetime(r) ⊆ lifetime(pointee(r))
+// ∀t: Time, has_mut_ref(l, t) → count_imm_refs(l, t) = 0
+
+fn borrowing_demo() {
+    let mut x = 5;
+
+    // 可变借用
+    let r1 = &mut x;
+    *r1 += 1;
+    // r1 在这里结束生命周期
+
+    // 现在可以创建新的借用
+    let r2 = &x;  // 不可变借用
+    println!("{}", r2);
+}
+```
+
+### 3. 类型系统
+
+Rust 的类型系统基于 Hindley-Milner 类型推导：
+
+```rust
+// 类型系统的形式化基础
+// - 结构类型 vs 名义类型
+// - 参数多态（泛型）
+// - 特设多态（Trait）
+
+trait Drawable {
+    fn draw(&self);
+}
+
+// 参数多态：T 可以是任何类型
+fn identity<T>(x: T) -> T {
+    x
+}
+
+// 约束多态：T 必须实现 Drawablen render<T: Drawable>(item: T) {
+    item.draw();
+}
+```
+
+---
+
 ## 相关文档
 
 - [研究笔记主入口](../research_notes/README.md)
 - [思维表征方式](../THINKING_REPRESENTATION_METHODS.md)
 - [多维概念矩阵](../MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)
+
+---
+
+## 研究笔记完整链接
+
+| 研究笔记目录 | 路径 | 内容概述 |
+| :--- | :--- | :--- |
+| **formal_methods/** | [../research_notes/formal_methods/](../research_notes/formal_methods/) | 所有权模型、借用检查器、生命周期、异步状态机、Pin |
+| **type_theory/** | [../research_notes/type_theory/](../research_notes/type_theory/) | 类型系统、Trait 系统、型变理论、类型推导 |
+| **experiments/** | [../research_notes/experiments/](../research_notes/experiments/) | 性能实验、内存分析、编译器优化 |
+| **PROOF_INDEX.md** | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) | 形式化证明索引（87+ 个证明） |
+| **TOOLS_GUIDE.md** | [../research_notes/TOOLS_GUIDE.md](../research_notes/TOOLS_GUIDE.md) | 形式化验证工具（Prusti、Kani、Creusot） |
+| **SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md** | [../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全/非安全边界分析 |

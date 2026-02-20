@@ -765,7 +765,203 @@ Rust 知识体系
 
 ---
 
-## 📚 相关文档
+## 💻 代码示例
+
+### 示例 1: 使用代码生成思维导图结构
+
+```rust
+use std::collections::HashMap;
+
+/// 思维导图节点
+#[derive(Debug, Clone)]
+struct MindMapNode {
+    name: String,
+    children: Vec<MindMapNode>,
+}
+
+impl MindMapNode {
+    fn new(name: &str) -> Self {
+        Self {
+            name: name.to_string(),
+            children: Vec::new(),
+        }
+    }
+    
+    fn add_child(&mut self, child: MindMapNode) {
+        self.children.push(child);
+    }
+    
+    /// 生成 Mermaid 思维导图语法
+    fn to_mermaid(&self, indent: usize) -> String {
+        let mut result = String::new();
+        let spaces = "  ".repeat(indent);
+        
+        for child in &self.children {
+            result.push_str(&format!("{}{}\n", spaces, child.name));
+            result.push_str(&child.to_mermaid(indent + 1));
+        }
+        result
+    }
+}
+
+/// 创建 Rust 所有权系统思维导图
+fn create_ownership_mindmap() -> MindMapNode {
+    let mut root = MindMapNode::new("所有权系统");
+    
+    let mut ownership = MindMapNode::new("所有权规则");
+    ownership.add_child(MindMapNode::new("每个值有一个所有者"));
+    ownership.add_child(MindMapNode::new("所有者离开作用域时释放"));
+    ownership.add_child(MindMapNode::new("值只能有一个所有者"));
+    
+    let mut borrowing = MindMapNode::new("借用规则");
+    borrowing.add_child(MindMapNode::new("不可变借用: &T"));
+    borrowing.add_child(MindMapNode::new("可变借用: &mut T"));
+    borrowing.add_child(MindMapNode::new("借用检查器"));
+    
+    root.add_child(ownership);
+    root.add_child(borrowing);
+    
+    root
+}
+
+fn main() {
+    let mindmap = create_ownership_mindmap();
+    println!("生成的思维导图结构:");
+    println!("{:?}", mindmap);
+}
+```
+
+### 示例 2: 从代码结构提取思维导图
+
+```rust
+/// 分析模块依赖关系，生成知识关联图
+fn analyze_module_dependencies() -> HashMap<&'static str, Vec<&'static str>> {
+    let mut deps = HashMap::new();
+    
+    // 基础层依赖
+    deps.insert("C01 所有权", vec!["所有其他模块"]);  
+    deps.insert("C02 类型系统", vec!["C04 泛型", "C08 算法"]);
+    deps.insert("C03 控制流", vec!["C05 并发", "C06 异步"]);
+    
+    // 进阶层依赖
+    deps.insert("C04 泛型", vec!["C08 算法", "C09 设计模式"]);
+    deps.insert("C05 线程并发", vec!["C06 异步", "C07 进程"]);
+    deps.insert("C06 异步", vec!["C10 网络"]);
+    
+    deps
+}
+
+/// 可视化依赖关系
+fn visualize_dependencies(deps: &HashMap<&str, Vec<&str>>) {
+    println!("```mermaid");
+    println!("graph LR");
+    
+    for (module, dependencies) in deps {
+        for dep in dependencies {
+            println!("    {} --> {}", module.replace(' ', '_'), dep.replace(' ', '_'));
+        }
+    }
+    
+    println!("```");
+}
+```
+
+### 示例 3: 使用思维导图进行学习路径规划
+
+```rust
+/// 学习阶段
+#[derive(Debug, Clone, Copy)]
+enum LearningStage {
+    Stage1,  // 基础理解
+    Stage2,  // 实践应用
+    Stage3,  // 深入掌握
+}
+
+/// 学习任务
+struct LearningTask {
+    name: &'static str,
+    stage: LearningStage,
+    duration_hours: u32,
+}
+
+/// 生成学习路径思维导图数据
+fn generate_learning_path() -> Vec<LearningTask> {
+    vec![
+        // 阶段 1: 基础理解
+        LearningTask { name: "阅读发布说明", stage: LearningStage::Stage1, duration_hours: 2 },
+        LearningTask { name: "理解核心概念", stage: LearningStage::Stage1, duration_hours: 4 },
+        LearningTask { name: "查看示例代码", stage: LearningStage::Stage1, duration_hours: 3 },
+        
+        // 阶段 2: 实践应用
+        LearningTask { name: "更新现有代码", stage: LearningStage::Stage2, duration_hours: 8 },
+        LearningTask { name: "运行测试验证", stage: LearningStage::Stage2, duration_hours: 4 },
+        
+        // 阶段 3: 深入掌握
+        LearningTask { name: "理解实现原理", stage: LearningStage::Stage3, duration_hours: 10 },
+        LearningTask { name: "优化性能", stage: LearningStage::Stage3, duration_hours: 6 },
+    ]
+}
+
+fn print_learning_path(tasks: &[LearningTask]) {
+    use LearningStage::*;
+    
+    println!("## Rust 学习路径");
+    println!();
+    
+    for stage in [Stage1, Stage2, Stage3] {
+        let stage_name = match stage {
+            Stage1 => "阶段 1: 基础理解",
+            Stage2 => "阶段 2: 实践应用", 
+            Stage3 => "阶段 3: 深入掌握",
+        };
+        
+        println!("### {}", stage_name);
+        let stage_tasks: Vec<_> = tasks.iter()
+            .filter(|t| std::mem::discriminant(&t.stage) == std::mem::discriminant(&stage))
+            .collect();
+            
+        for task in stage_tasks {
+            println!("- {} ({}小时)", task.name, task.duration_hours);
+        }
+        println!();
+    }
+}
+```
+
+## 🎯 使用场景
+
+### 何时使用思维导图
+
+| 场景 | 使用方式 | 预期收益 |
+| :--- | :--- | :--- |
+| **概念学习** | 浏览语言核心思维导图 | 建立知识框架 |
+| **模块导航** | 查看模块知识思维导图 | 快速定位内容 |
+| **依赖分析** | 查看知识关联思维导图 | 理解概念依赖 |
+| **路径规划** | 使用学习路径思维导图 | 有序学习 |
+| **复习巩固** | 使用文本思维导图自测 | 检查理解程度 |
+
+### 思维导图工具链
+
+```bash
+# 1. 使用 cargo 生成项目结构思维导图
+cargo tree --depth 2
+
+# 2. 使用 rustdoc 生成文档结构
+rustdoc --document-private-items src/lib.rs
+
+# 3. 使用 mdbook 构建知识图谱
+cd docs && mdbook build
+```
+
+## 🔗 形式化链接
+
+### 理论基础
+
+- [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
+- [LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 语言语义与表达能力
+- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 理论体系架构
+
+### 相关文档
 
 - [知识结构框架](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 完整知识结构体系
 - [多维概念矩阵](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 概念对比矩阵

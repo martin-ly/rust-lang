@@ -928,6 +928,341 @@ graph LR
 
 ---
 
+## 💻 代码示例
+
+### 示例 1: 思维导图生成器
+
+```rust
+use std::collections::HashMap;
+
+/// 思维导图生成器 - 将 Rust 知识结构化
+pub struct MindMapGenerator {
+    root: String,
+    nodes: HashMap<String, Vec<String>>,
+}
+
+impl MindMapGenerator {
+    pub fn new(root: &str) -> Self {
+        Self {
+            root: root.to_string(),
+            nodes: HashMap::new(),
+        }
+    }
+    
+    pub fn add_node(&mut self, parent: &str, child: &str) {
+        self.nodes
+            .entry(parent.to_string())
+            .or_default()
+            .push(child.to_string());
+    }
+    
+    /// 生成 Mermaid 思维导图
+    pub fn to_mermaid(&self) -> String {
+        let mut output = format!("```mermaid\nmindmap\n  root(({}))\n", self.root);
+        
+        for (parent, children) in &self.nodes {
+            output.push_str(&format!("    {}\n", parent));
+            for child in children {
+                output.push_str(&format!("      {}\n", child));
+            }
+        }
+        
+        output.push_str("```\n");
+        output
+    }
+}
+
+/// 创建 Rust 1.93 特性思维导图
+fn create_rust193_mindmap() -> MindMapGenerator {
+    let mut mm = MindMapGenerator::new("Rust 1.93.0");
+    
+    // 语言特性分支
+    mm.add_node("语言特性", "MaybeUninit API");
+    mm.add_node("语言特性", "联合体原始引用");
+    mm.add_node("语言特性", "Never 类型 Lint");
+    
+    // 标准库分支
+    mm.add_node("标准库", "String::into_raw_parts");
+    mm.add_node("标准库", "Vec::into_raw_parts");
+    mm.add_node("标准库", "VecDeque 条件弹出");
+    
+    mm
+}
+```
+
+### 示例 2: 决策矩阵工具
+
+```rust
+/// 多维决策矩阵 - 用于特性对比分析
+#[derive(Debug)]
+struct DecisionMatrix {
+    features: Vec<String>,
+    criteria: Vec<String>,
+    scores: HashMap<(usize, usize), Score>,
+}
+
+#[derive(Debug, Clone, Copy)]
+enum Score {
+    Stars(u8),        // ⭐⭐⭐⭐⭐
+    Impact(&'static str), // ✅ 正面 / ⚠️ 注意
+    Level(&'static str),  // 高/中/低
+}
+
+impl DecisionMatrix {
+    fn new(criteria: Vec<String>) -> Self {
+        Self {
+            features: Vec::new(),
+            criteria,
+            scores: HashMap::new(),
+        }
+    }
+    
+    fn add_feature(&mut self, name: &str, scores: Vec<Score>) {
+        let idx = self.features.len();
+        self.features.push(name.to_string());
+        
+        for (c_idx, score) in scores.iter().enumerate() {
+            self.scores.insert((idx, c_idx), *score);
+        }
+    }
+    
+    /// 生成 Markdown 表格
+    fn to_markdown(&self) -> String {
+        let mut output = String::new();
+        
+        // 表头
+        output.push_str("| 特性 | ");
+        for c in &self.criteria {
+            output.push_str(&format!("{} | ", c));
+        }
+        output.push_str("\n| :--- | ");
+        for _ in &self.criteria {
+            output.push_str(":--- | ");
+        }
+        output.push('\n');
+        
+        // 数据行
+        for (f_idx, feature) in self.features.iter().enumerate() {
+            output.push_str(&format!("| {} | ", feature));
+            for c_idx in 0..self.criteria.len() {
+                let score = self.scores.get(&(f_idx, c_idx));
+                let text = match score {
+                    Some(Score::Stars(n)) => "⭐".repeat(*n as usize),
+                    Some(Score::Impact(s)) => s.to_string(),
+                    Some(Score::Level(s)) => s.to_string(),
+                    None => "-".to_string(),
+                };
+                output.push_str(&format!("{} | ", text));
+            }
+            output.push('\n');
+        }
+        
+        output
+    }
+}
+
+/// 创建 Rust 1.93 特性决策矩阵
+fn create_rust193_matrix() -> DecisionMatrix {
+    let criteria = vec![
+        "重要性".to_string(),
+        "影响范围".to_string(),
+        "迁移难度".to_string(),
+        "性能影响".to_string(),
+    ];
+    
+    let mut matrix = DecisionMatrix::new(criteria);
+    
+    matrix.add_feature(
+        "MaybeUninit API",
+        vec![
+            Score::Stars(5),
+            Score::Level("全局"),
+            Score::Level("低"),
+            Score::Impact("✅ 零成本"),
+        ],
+    );
+    
+    matrix.add_feature(
+        "联合体原始引用",
+        vec![
+            Score::Stars(4),
+            Score::Level("中等"),
+            Score::Level("中"),
+            Score::Impact("✅ 零成本"),
+        ],
+    );
+    
+    matrix
+}
+```
+
+### 示例 3: 证明树生成器
+
+```rust
+/// 证明树节点类型
+#[derive(Debug)]
+enum ProofNodeType {
+    Axiom,      // 公理 - 基础真理
+    Lemma,      // 引理 - 中间结论
+    Theorem,    // 定理 - 重要结论
+    Corollary,  // 推论 - 从定理导出
+}
+
+/// 证明树节点
+#[derive(Debug)]
+struct ProofNode {
+    id: String,
+    node_type: ProofNodeType,
+    statement: String,
+    dependencies: Vec<String>,
+}
+
+/// 证明树构建器
+struct ProofTreeBuilder {
+    nodes: Vec<ProofNode>,
+}
+
+impl ProofTreeBuilder {
+    fn new() -> Self {
+        Self { nodes: Vec::new() }
+    }
+    
+    fn add_axiom(&mut self, id: &str, statement: &str) -> &mut Self {
+        self.nodes.push(ProofNode {
+            id: id.to_string(),
+            node_type: ProofNodeType::Axiom,
+            statement: statement.to_string(),
+            dependencies: Vec::new(),
+        });
+        self
+    }
+    
+    fn add_theorem(&mut self, id: &str, statement: &str, deps: Vec<&str>) -> &mut Self {
+        self.nodes.push(ProofNode {
+            id: id.to_string(),
+            node_type: ProofNodeType::Theorem,
+            statement: statement.to_string(),
+            dependencies: deps.iter().map(|s| s.to_string()).collect(),
+        });
+        self
+    }
+    
+    /// 生成公理→定理链
+    fn generate_axiom_theorem_chain(&self) -> String {
+        let mut output = String::new();
+        output.push_str("```mermaid\n");
+        output.push_str("flowchart TD\n");
+        
+        // 添加节点
+        for node in &self.nodes {
+            let style = match node.node_type {
+                ProofNodeType::Axiom => "fill:#e1f5ff",
+                ProofNodeType::Theorem => "fill:#ffe1e1",
+                _ => "fill:#fff5e1",
+            };
+            output.push_str(&format!(
+                "    {}[\"{}: {}\"]\n",
+                node.id, node.id, node.statement
+            ));
+            output.push_str(&format!("    style {} {}\n", node.id, style));
+        }
+        
+        // 添加依赖边
+        for node in &self.nodes {
+            for dep in &node.dependencies {
+                output.push_str(&format!("    {} --> {}\n", dep, node.id));
+            }
+        }
+        
+        output.push_str("```\n");
+        output
+    }
+}
+
+/// 创建 MaybeUninit 安全性证明树
+fn create_maybeuninit_proof_tree() -> ProofTreeBuilder {
+    let mut tree = ProofTreeBuilder::new();
+    
+    tree
+        .add_axiom("A1", "未初始化内存不具合法值")
+        .add_axiom("A2", "写入后内存具合法值")
+        .add_axiom("A3", "assume_init 要求调用者保证已初始化")
+        .add_theorem("T1", "assume_init_drop 正确调用 drop", vec!["A2"])
+        .add_theorem("T2", "assume_init_ref 返回合法引用", vec!["A2"])
+        .add_theorem("T3", "assume_init_mut 返回合法可变引用", vec!["A2"])
+        .add_theorem("C1", "MaybeUninit 1.93 API 安全性", vec!["T1", "T2", "T3"]);
+    
+    tree
+}
+```
+
+## 🎯 使用场景指南
+
+### 场景矩阵：何时使用哪种表征
+
+| 你的目标 | 推荐表征 | 代码示例 | 形式化链接 |
+| :--- | :--- | :--- | :--- |
+| **学习新概念** | 思维导图 | `create_rust193_mindmap()` | [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) |
+| **对比选择** | 多维矩阵 | `create_rust193_matrix()` | [MULTI_DIMENSIONAL_CONCEPT_MATRIX.md](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) |
+| **技术决策** | 决策树 | [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) | [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md) |
+| **验证安全性** | 证明树 | `create_maybeuninit_proof_tree()` | [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) |
+| **理解转换** | 转换树 | [DECISION_GRAPH_NETWORK.md#转换树](./DECISION_GRAPH_NETWORK.md#转换树图-transformation-tree) | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
+| **查看关系** | 概念网络 | [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) |
+
+### 工作流集成示例
+
+```rust
+/// 完整的思维表征工作流
+fn thinking_representation_workflow() {
+    // 1. 学习阶段 - 使用思维导图
+    println!("=== 阶段 1: 学习 ===");
+    let mindmap = create_rust193_mindmap();
+    println!("{}", mindmap.to_mermaid());
+    
+    // 2. 对比阶段 - 使用决策矩阵
+    println!("\n=== 阶段 2: 对比 ===");
+    let matrix = create_rust193_matrix();
+    println!("{}", matrix.to_markdown());
+    
+    // 3. 决策阶段 - 使用决策树
+    println!("\n=== 阶段 3: 决策 ===");
+    let need_thread_safe = true;
+    let choice = if need_thread_safe {
+        "Arc<T> - 跨线程共享"
+    } else {
+        "Rc<T> - 单线程共享"
+    };
+    println!("决策结果: {}", choice);
+    
+    // 4. 验证阶段 - 使用证明树
+    println!("\n=== 阶段 4: 验证 ===");
+    let proof = create_maybeuninit_proof_tree();
+    println!("{}", proof.generate_axiom_theorem_chain());
+}
+```
+
+## 🔗 形式化链接
+
+### 证明与理论基础
+
+- [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引（与本节证明树交叉引用）
+- [CORE_THEOREMS_FULL_PROOFS.md](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) - 核心定理完整证明
+- [FORMAL_LANGUAGE_AND_PROOFS.md](../research_notes/FORMAL_LANGUAGE_AND_PROOFS.md) - 形式化语言与证明
+- [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md) - 设计机制论证
+
+### 语义与表达能力
+
+- [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 语言语义与表达能力
+- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 理论体系架构
+
+### 相关文档
+
+- [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) - 决策图网详细文档
+- [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网详细文档
+- [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) - 思维导图集合
+- [MULTI_DIMENSIONAL_CONCEPT_MATRIX.md](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
+- [RUST_192 综合思维表征](../archive/version_reports/RUST_192_COMPREHENSIVE_MIND_REPRESENTATIONS.md) - 综合思维表征文档
+
 ## 📚 7. 参考资源
 
 ### 7.1 官方资源
@@ -943,13 +1278,6 @@ graph LR
 - [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) - 决策图网
 - [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网
 - [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) - 思维导图集合
-- [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引（与本节证明树交叉引用）
-
-### 7.3 相关文档
-
-- [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) - 决策图网详细文档
-- [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网详细文档
-- [RUST_192 综合思维表征](../archive/version_reports/RUST_192_COMPREHENSIVE_MIND_REPRESENTATIONS.md) - 综合思维表征文档
 
 ---
 

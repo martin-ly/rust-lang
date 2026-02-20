@@ -9,6 +9,386 @@
 
 ---
 
+## 代码示例
+
+### 批判性评估检查清单自动化
+
+```rust
+//! 项目批判性评估检查清单执行器
+use std::collections::HashMap;
+
+struct CriticalEvaluationChecklist {
+    checks: HashMap<String, Vec<CheckItem>>,
+}
+
+struct CheckItem {
+    description: String,
+    priority: Priority,
+    completed: bool,
+    evidence: Option<String>,
+}
+
+#[derive(Debug, Clone)]
+enum Priority {
+    P0, // 立即修复
+    P1, // 短期内
+    P2, // 季度内
+}
+
+impl CriticalEvaluationChecklist {
+    fn new() -> Self {
+        let mut checks = HashMap::new();
+        
+        // P0 检查项
+        checks.insert("P0".to_string(), vec![
+            CheckItem {
+                description: "修复所有已发现的链接错误".to_string(),
+                priority: Priority::P0,
+                completed: true,
+                evidence: Some("15+ 处链接已修复".to_string()),
+            },
+            CheckItem {
+                description: "更新 DECISION/PROOF_GRAPH 版本至 1.93".to_string(),
+                priority: Priority::P0,
+                completed: true,
+                evidence: None,
+            },
+            CheckItem {
+                description: "修正 C01 00_MASTER_INDEX 中 tier3_advanced 引用".to_string(),
+                priority: Priority::P0,
+                completed: true,
+                evidence: None,
+            },
+        ]);
+        
+        // P1 检查项
+        checks.insert("P1".to_string(), vec![
+            CheckItem {
+                description: "EDGE_CASES 增加 1.93 行为变更特例".to_string(),
+                priority: Priority::P1,
+                completed: true,
+                evidence: None,
+            },
+            CheckItem {
+                description: "C01/C03 增加 1.93 专项示例".to_string(),
+                priority: Priority::P1,
+                completed: true,
+                evidence: Some("rust_193_features_demo.rs 已添加".to_string()),
+            },
+        ]);
+        
+        // P2 检查项
+        checks.insert("P2".to_string(), vec![
+            CheckItem {
+                description: "公理编号规范 PROOF_INDEX".to_string(),
+                priority: Priority::P2,
+                completed: true,
+                evidence: Some("A1/L1/T1 编号规范已建立".to_string()),
+            },
+            CheckItem {
+                description: "compile_fail 反例验证".to_string(),
+                priority: Priority::P2,
+                completed: true,
+                evidence: Some("C01 doc-test 已添加".to_string()),
+            },
+        ]);
+        
+        Self { checks }
+    }
+    
+    fn generate_report(&self) -> String {
+        let mut report = String::from("# 批判性评估执行报告\n\n");
+        
+        for (priority, items) in &self.checks {
+            report.push_str(&format!("## {} 优先级任务\n\n", priority));
+            report.push_str("| 任务 | 状态 | 证据 |\n");
+            report.push_str("| :--- | :--- | :--- |\n");
+            
+            let completed = items.iter().filter(|i| i.completed).count();
+            let total = items.len();
+            
+            for item in items {
+                let status = if item.completed { "✅" } else { "❌" };
+                let evidence = item.evidence.as_deref().unwrap_or("-");
+                report.push_str(&format!(
+                    "| {} | {} | {} |\n",
+                    item.description, status, evidence
+                ));
+            }
+            
+            report.push_str(&format!(
+                "\n**完成度**: {}/{} ({:.0}%)\n\n",
+                completed, total, (completed as f64 / total as f64) * 100.0
+            ));
+        }
+        
+        report
+    }
+    
+    fn overall_progress(&self) -> f64 {
+        let total: usize = self.checks.values().map(|v| v.len()).sum();
+        let completed: usize = self.checks.values()
+            .map(|v| v.iter().filter(|i| i.completed).count())
+            .sum();
+        
+        if total == 0 { 0.0 } else { (completed as f64 / total as f64) * 100.0 }
+    }
+}
+
+fn main() {
+    let checklist = CriticalEvaluationChecklist::new();
+    
+    println!("{}", checklist.generate_report());
+    println!("\n## 总体进度\n");
+    println!("完成度: {:.0}%", checklist.overall_progress());
+}
+```
+
+### 链接错误扫描器
+
+```rust
+//! 扫描项目文档中的链接错误
+use std::collections::HashMap;
+use std::fs;
+use std::path::Path;
+use regex::Regex;
+
+struct LinkErrorScanner {
+    errors: Vec<LinkError>,
+    known_issues: HashMap<String, String>, // 错误链接 -> 正确路径
+}
+
+#[derive(Debug)]
+struct LinkError {
+    file: String,
+    line: usize,
+    broken_link: String,
+    link_text: String,
+}
+
+impl LinkErrorScanner {
+    fn new() -> Self {
+        let known_issues: HashMap<String, String> = [
+            ("tier3_advanced".to_string(), "tier_03_references".to_string()),
+            ("01_线程管理指南.md".to_string(), "01_线程基础与生命周期.md".to_string()),
+            ("01_并发控制指南.md".to_string(), "02_同步原语实践.md".to_string()),
+        ].into_iter().collect();
+        
+        Self {
+            errors: Vec::new(),
+            known_issues,
+        }
+    }
+    
+    fn scan_file(&mut self, file_path: &str) {
+        let content = match fs::read_to_string(file_path) {
+            Ok(c) => c,
+            Err(_) => return,
+        };
+        
+        let link_regex = Regex::new(r"\[([^\]]+)\]\(([^)]+)\)").unwrap();
+        
+        for (line_num, line) in content.lines().enumerate() {
+            for cap in link_regex.captures_iter(line) {
+                let link_text = cap[1].to_string();
+                let link_path = cap[2].to_string();
+                
+                // 检查已知错误
+                for (wrong, correct) in &self.known_issues {
+                    if link_path.contains(wrong) {
+                        self.errors.push(LinkError {
+                            file: file_path.to_string(),
+                            line: line_num + 1,
+                            broken_link: link_path.clone(),
+                            link_text: link_text.clone(),
+                        });
+                        break;
+                    }
+                }
+                
+                // 检查相对路径有效性
+                if !link_path.starts_with("http") && !link_path.starts_with("#") {
+                    let base = Path::new(file_path).parent().unwrap_or(Path::new("."));
+                    let target = base.join(&link_path);
+                    
+                    if !target.exists() && !link_path.contains(".md") {
+                        self.errors.push(LinkError {
+                            file: file_path.to_string(),
+                            line: line_num + 1,
+                            broken_link: link_path,
+                            link_text,
+                        });
+                    }
+                }
+            }
+        }
+    }
+    
+    fn scan_directory(&mut self, dir: &str) {
+        if let Ok(entries) = fs::read_dir(dir) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.is_dir() {
+                    self.scan_directory(&path.to_string_lossy());
+                } else if path.extension().map_or(false, |e| e == "md") {
+                    self.scan_file(&path.to_string_lossy());
+                }
+            }
+        }
+    }
+    
+    fn generate_fix_script(&self) -> String {
+        let mut script = String::from("#!/bin/bash\n# 自动修复链接错误\n\n");
+        
+        for error in &self.errors {
+            if let Some((wrong, correct)) = self.known_issues.iter()
+                .find(|(w, _)| error.broken_link.contains(*w)) {
+                script.push_str(&format!(
+                    "sed -i 's/{}/{}/g' {}\n",
+                    wrong, correct, error.file
+                ));
+            }
+        }
+        
+        script
+    }
+}
+
+fn main() {
+    let mut scanner = LinkErrorScanner::new();
+    scanner.scan_directory("docs");
+    scanner.scan_directory("crates");
+    
+    if scanner.errors.is_empty() {
+        println!("✅ 未发现链接错误");
+    } else {
+        println!("发现 {} 个链接错误:\n", scanner.errors.len());
+        for error in &scanner.errors {
+            println!(
+                "{}:{} - [{}] -> {}",
+                error.file, error.line, error.link_text, error.broken_link
+            );
+        }
+        
+        // 生成修复脚本
+        fs::write("fix_links.sh", scanner.generate_fix_script()).unwrap();
+        println!("\n修复脚本已生成: fix_links.sh");
+    }
+}
+```
+
+### 文档元数据验证器
+
+```rust
+//! 验证文档元数据（版本、日期等）
+use std::fs;
+use regex::Regex;
+
+struct DocMetadataValidator {
+    issues: Vec<String>,
+}
+
+impl DocMetadataValidator {
+    fn new() -> Self {
+        Self { issues: Vec::new() }
+    }
+    
+    fn validate_file(&mut self, file_path: &str) {
+        let content = match fs::read_to_string(file_path) {
+            Ok(c) => c,
+            Err(_) => return,
+        };
+        
+        // 检查必需的元数据字段
+        let required_fields = vec![
+            ("创建日期", Regex::new(r"> \*\*创建日期\*\*").unwrap()),
+            ("Rust 版本", Regex::new(r"> \*\*Rust 版本\*\*").unwrap()),
+            ("状态", Regex::new(r"> \*\*状态\*\*").unwrap()),
+        ];
+        
+        for (field_name, pattern) in required_fields {
+            if !pattern.is_match(&content) {
+                self.issues.push(format!(
+                    "{}: 缺少元数据字段 '{}'",
+                    file_path, field_name
+                ));
+            }
+        }
+        
+        // 检查权威源日期（toolchain 文档）
+        if file_path.contains("toolchain") {
+            if !content.contains("最后对照 releases.rs") {
+                self.issues.push(format!(
+                    "{}: toolchain 文档缺少 '最后对照 releases.rs' 日期",
+                    file_path
+                ));
+            }
+        }
+        
+        // 检查版本格式
+        let version_regex = Regex::new(r"\d+\.\d+\.\d+\+?").unwrap();
+        if content.contains("Rust 版本") {
+            if let Some(line) = content.lines().find(|l| l.contains("Rust 版本")) {
+                if !version_regex.is_match(line) {
+                    self.issues.push(format!(
+                        "{}: 版本格式不正确",
+                        file_path
+                    ));
+                }
+            }
+        }
+    }
+    
+    fn report(&self) {
+        if self.issues.is_empty() {
+            println!("✅ 所有文档元数据验证通过");
+        } else {
+            println!("发现 {} 个元数据问题:\n", self.issues.len());
+            for issue in &self.issues {
+                println!("- {}", issue);
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut validator = DocMetadataValidator::new();
+    
+    // 检查关键文档
+    let files = vec![
+        "docs/07_project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md",
+        "docs/07_project/RUST_RELEASE_TRACKING_CHECKLIST.md",
+        "docs/07_project/MODULE_1.93_ADAPTATION_STATUS.md",
+    ];
+    
+    for file in files {
+        validator.validate_file(file);
+    }
+    
+    validator.report();
+}
+```
+
+---
+
+## 形式化链接
+
+### 研究笔记关联
+
+- **证明体系**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 形式化证明批判性分析与计划
+- **知识对齐**: [ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md](./ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md) - 对齐知识批判性评估
+- **权威对标**: [AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md](./AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md) - 权威信息对标评估
+
+### 实施场景
+
+| 场景 | 实施步骤 | 参考代码 |
+| :--- | :--- | :--- |
+| **定期评估** | 1. 使用检查清单执行评估<br>2. 记录完成状态和证据<br>3. 生成进度报告 | `CriticalEvaluationChecklist` |
+| **链接维护** | 1. 运行链接错误扫描器<br>2. 生成修复脚本<br>3. 执行修复并验证 | `LinkErrorScanner` |
+| **元数据审核** | 1. 验证文档元数据完整性<br>2. 检查版本和日期格式<br>3. 修复不合规项 | `DocMetadataValidator` |
+
+---
+
 ## 执行摘要
 
 本项目是 Rust 语言、标准库、软件设计、集成等方面的全面梳理，体量宏大（12 个学习模块、5000+ 文档、50,000+ 行代码）。经递归批判性评估，**在五个维度均存在不充分之处**，需系统化修订与补充。本报告给出具体缺陷、对标差距、改进建议及可持续推进计划。

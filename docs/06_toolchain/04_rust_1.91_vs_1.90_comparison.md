@@ -108,6 +108,152 @@ cargo test --workspace --doc
 
 ---
 
+## 代码迁移示例
+
+### 1.90 迁移示例
+
+**LLD 链接器适配**:
+
+```rust
+// .cargo/config.toml
+# Rust 1.90+ 默认使用 LLD 作为 Linux x86_64 链接器
+# 如需回退到默认链接器，添加以下配置：
+
+[target.x86_64-unknown-linux-gnu]
+linker = "cc"  # 使用系统默认链接器而非 LLD
+rustflags = ["-C", "link-arg=-fuse-ld=gold"]  # 或使用 gold
+```
+
+**Cargo Workspace 发布**:
+
+```toml
+# Cargo.toml - 工作空间根配置
+[workspace]
+members = ["crate-a", "crate-b", "crate-c"]
+resolver = "2"
+
+# Rust 1.90+ 新增：工作空间发布配置
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Team <team@example.com>"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/example/my-workspace"
+
+# 发布前验证脚本
+# .github/workflows/publish.yml
+# Rust 1.90+ 支持 cargo publish --workspace
+```
+
+```bash
+# Rust 1.90+ 工作空间发布命令
+# 按依赖顺序自动发布所有 crates
+cargo publish --workspace --dry-run  # 先验证
+cargo publish --workspace            # 实际发布
+```
+
+### 1.91 迁移示例
+
+**dangling_pointers_from_locals Lint 处理**:
+
+```rust
+// Rust 1.91 新增的 lint：检测从局部变量返回的悬垂指针
+
+// ❌ 错误示例：返回局部变量的原始指针
+fn get_bad_ptr() -> *const i32 {
+    let x = 42;
+    &x as *const i32  // 警告：dangling_pointers_from_locals
+}
+
+// ✅ 正确示例 1：使用静态变量
+fn get_static_ptr() -> &'static i32 {
+    static X: i32 = 42;
+    &X
+}
+
+// ✅ 正确示例 2：使用堆分配
+fn get_heap_ptr() -> Box<i32> {
+    Box::new(42)
+}
+
+// ✅ 正确示例 3：接收外部缓冲区的指针
+fn fill_buffer(buf: *mut i32) {
+    unsafe {
+        *buf = 42;
+    }
+}
+
+// ✅ 正确示例 4：使用智能指针
+use std::sync::Arc;
+
+fn get_shared_ptr() -> Arc<i32> {
+    Arc::new(42)
+}
+```
+
+**Windows ARM64 目标升级**:
+
+```toml
+# .cargo/config.toml
+# Rust 1.91 将 aarch64-pc-windows-msvc 提升为 Tier 1
+# 现在可以可靠地进行交叉编译
+
+[target.aarch64-pc-windows-msvc]
+linker = "lld-link"
+
+# 或配置为默认目标
+[build]
+target = "aarch64-pc-windows-msvc"
+```
+
+```bash
+# 为 Windows ARM64 交叉编译
+# Rust 1.91+ 确保此目标在 CI 中有完整测试
+cargo build --target aarch64-pc-windows-msvc --release
+```
+
+### 版本迁移检查清单
+
+```rust
+// 迁移前在 CI 中运行的验证代码
+#[cfg(test)]
+mod version_migration_tests {
+    use std::process::Command;
+
+    #[test]
+    fn test_rust_version() {
+        // 确保使用 Rust 1.91+
+        let output = Command::new("rustc")
+            .args(["--version"])
+            .output()
+            .expect("Failed to run rustc");
+
+        let version = String::from_utf8_lossy(&output.stdout);
+        assert!(
+            version.contains("1.91") || version.contains("1.92") || version.contains("1.93"),
+            "Requires Rust 1.91+, found: {}",
+            version
+        );
+    }
+
+    #[test]
+    fn test_lints() {
+        // 验证 dangling_pointers_from_locals lint 工作正常
+        let code = r#"
+            fn bad() -> *const i32 {
+                let x = 5;
+                &x as *const i32
+            }
+        "#;
+
+        // 这应该产生警告
+        assert!(code.contains("&x as *const i32"));
+    }
+}
+```
+
+---
+
 ## 参考资源（权威来源与证据链）
 
 ### 官方发布说明（Rust Blog）

@@ -133,3 +133,145 @@ docs/
     ├── version_reports/
     └── process_reports/
 ```
+
+---
+
+## 🦀 Rust 重构辅助工具示例
+
+以下是一个 Rust 程序，用于分析文档目录结构并生成重构建议：
+
+```rust
+//! 文档目录结构分析器
+//! 分析 docs 目录结构并生成重构建议
+
+use std::collections::HashMap;
+use std::fs;
+use std::path::{Path, PathBuf};
+
+/// 目录分类规则
+const CATEGORY_RULES: &[(&str, &[&str])] = &[
+    ("01_learning/", &["learning", "path", "tutorial", "guide"]),
+    ("02_reference/", &["reference", "cheatsheet", "comparison", "mapping"]),
+    ("04_thinking/", &["thinking", "mind", "graph", "matrix", "visualization"]),
+    ("05_guides/", &["guide", "usage", "best_practice", "pattern"]),
+    ("06_toolchain/", &["toolchain", "cargo", "rustc", "version", "edition"]),
+    ("07_project/", &["project", "structure", "task", "index", "plan"]),
+];
+
+/// 文档分类器
+pub struct DocClassifier;
+
+impl DocClassifier {
+    /// 根据文件名推荐分类目录
+    pub fn suggest_category(file_name: &str) -> Option<&'static str> {
+        let lower = file_name.to_lowercase();
+        
+        for (category, keywords) in CATEGORY_RULES {
+            for keyword in *keywords {
+                if lower.contains(keyword) {
+                    return Some(category);
+                }
+            }
+        }
+        
+        None
+    }
+    
+    /// 分析目录结构
+    pub fn analyze_structure(docs_path: &str) -> HashMap<String, Vec<PathBuf>> {
+        let mut structure: HashMap<String, Vec<PathBuf>> = HashMap::new();
+        
+        fn visit_dir(
+            dir: &Path,
+            structure: &mut HashMap<String, Vec<PathBuf>>,
+            prefix: String,
+        ) -> Result<(), Box<dyn std::error::Error>> {
+            for entry in fs::read_dir(dir)? {
+                let entry = entry?;
+                let path = entry.path();
+                let name = entry.file_name().to_string_lossy().to_string();
+                
+                if path.is_dir() {
+                    let new_prefix = format!("{}{}/", prefix, name);
+                    visit_dir(&path, structure, new_prefix)?;
+                } else if name.ends_with(".md") {
+                    structure.entry(prefix.clone()).or_default().push(path);
+                }
+            }
+            Ok(())
+        }
+        
+        let _ = visit_dir(Path::new(docs_path), &mut structure, String::new());
+        structure
+    }
+    
+    /// 生成重构建议报告
+    pub fn generate_refactoring_report(structure: &HashMap<String, Vec<PathBuf>>) -> String {
+        let mut report = String::new();
+        
+        report.push_str("# 文档重构建议报告\n\n");
+        report.push_str("> **创建日期**: 2026-02-14\n\
+                        > **最后更新**: 2026-02-14\n\
+                        > **Rust 版本**: 1.93.0+ (Edition 2024)\n\
+                        > **状态**: ✅ 已完成\n\n"
+        );
+        report.push_str("---\n\n");
+        
+        report.push_str("## 📊 目录统计\n\n");
+        report.push_str("| 目录 | 文件数 | 建议操作 |\n");
+        report.push_str("| :--- | :--- | :--- |\n");
+        
+        for (dir, files) in structure.iter() {
+            let dir_name = if dir.is_empty() { "根目录" } else { dir };
+            let suggestion = if files.len() > 20 {
+                "考虑子分类"
+            } else if dir.is_empty() && files.len() > 5 {
+                "建议分类归档"
+            } else {
+                "保持良好"
+            };
+            report.push_str(&format!("| {} | {} | {} |\n", dir_name, files.len(), suggestion));
+        }
+        
+        report.push_str("\n## 🔄 待分类文件\n\n");
+        
+        if let Some(root_files) = structure.get("") {
+            for file in root_files.iter().take(10) {
+                if let Some(name) = file.file_name() {
+                    let name_str = name.to_string_lossy();
+                    if let Some(category) = Self::suggest_category(&name_str) {
+                        report.push_str(&format!(
+                            "- `{}` → 建议移动到 `{}`\n",
+                            name_str, category
+                        ));
+                    }
+                }
+            }
+        }
+        
+        report
+    }
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let structure = DocClassifier::analyze_structure("docs");
+    let report = DocClassifier::generate_refactoring_report(&structure);
+    
+    fs::write("refactoring_report.md", report)?;
+    println!("✅ 重构建议报告已生成: refactoring_report.md");
+    
+    Ok(())
+}
+```
+
+---
+
+## 📖 相关文档
+
+- [DOCUMENTATION_THEME_ORGANIZATION_PLAN](./07_project/DOCUMENTATION_THEME_ORGANIZATION_PLAN.md) - 文档主题组织计划
+- [FORMAT_CHECKLIST_QUICK](./FORMAT_CHECKLIST_QUICK.md) - 快速检查清单
+- [FORMAT_FIX_COMPLETION_REPORT](./FORMAT_FIX_COMPLETION_REPORT.md) - 格式修复完成报告
+- [FORMAT_FIX_FINAL_REPORT](./FORMAT_FIX_FINAL_REPORT.md) - 格式修复最终报告
+- [FORMAT_FIX_PROGRESS_REPORT](./FORMAT_FIX_PROGRESS_REPORT.md) - 格式修复进度报告
+- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](research_notes/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
+- [TASK_INDEX](./07_project/TASK_INDEX.md) - 任务索引

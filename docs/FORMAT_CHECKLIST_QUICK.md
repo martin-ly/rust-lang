@@ -109,8 +109,109 @@ Get-ChildItem -Path docs -Recurse -Filter "*.md" | ForEach-Object {
 
 ---
 
+## 🦀 Rust 配置检查示例
+
+以下是一个简单的 Rust 程序，用于检查文档元信息格式合规性：
+
+```rust
+//! 文档元信息格式检查工具
+//! 用法: cargo run --bin doc_format_checker -- <docs_path>
+
+use std::fs;
+use std::path::Path;
+
+/// 文档元信息结构
+#[derive(Debug)]
+struct DocMeta {
+    created_date: Option<String>,
+    last_updated: Option<String>,
+    rust_version: Option<String>,
+    status: Option<String>,
+}
+
+impl DocMeta {
+    fn parse_from_content(content: &str) -> Self {
+        let mut meta = DocMeta {
+            created_date: None,
+            last_updated: None,
+            rust_version: None,
+            status: None,
+        };
+        
+        for line in content.lines() {
+            if line.contains("**创建日期**:") {
+                meta.created_date = extract_value(line);
+            } else if line.contains("**最后更新**:") {
+                meta.last_updated = extract_value(line);
+            } else if line.contains("**Rust 版本**:") {
+                meta.rust_version = extract_value(line);
+            } else if line.contains("**状态**:") {
+                meta.status = extract_value(line);
+            }
+        }
+        
+        meta
+    }
+    
+    fn is_complete(&self) -> bool {
+        self.created_date.is_some() 
+            && self.last_updated.is_some()
+            && self.rust_version.is_some() 
+            && self.status.is_some()
+    }
+}
+
+fn extract_value(line: &str) -> Option<String> {
+    line.split(':').nth(1).map(|s| s.trim().to_string())
+}
+
+fn check_docs_format(docs_path: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let mut total = 0;
+    let mut incomplete = 0;
+    
+    for entry in fs::read_dir(docs_path)? {
+        let entry = entry?;
+        let path = entry.path();
+        
+        if path.extension().map_or(false, |e| e == "md") {
+            total += 1;
+            let content = fs::read_to_string(&path)?;
+            let meta = DocMeta::parse_from_content(&content);
+            
+            if !meta.is_complete() {
+                incomplete += 1;
+                println!("⚠️  {} 格式不完整", path.display());
+            }
+        }
+    }
+    
+    println!("\n========== 检查完成 ==========");
+    println!("总文件数: {}", total);
+    println!("格式完整: {}", total - incomplete);
+    println!("格式不完整: {}", incomplete);
+    
+    Ok(())
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let docs_path = std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| "docs".to_string());
+    
+    println!("📋 检查文档格式: {}", docs_path);
+    check_docs_format(&docs_path)
+}
+```
+
+---
+
 ## 📖 相关文档
 
 - [DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT](./DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md) - 完整审计报告
 - [QUALITY_CHECKLIST](research_notes/QUALITY_CHECKLIST.md) - 质量检查清单
-- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](research_notes/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一计划
+- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](research_notes/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
+- [FORMAT_FIX_COMPLETION_REPORT](./FORMAT_FIX_COMPLETION_REPORT.md) - 格式修复完成报告
+- [FORMAT_FIX_FINAL_REPORT](./FORMAT_FIX_FINAL_REPORT.md) - 格式修复最终报告
+- [FORMAT_FIX_PROGRESS_REPORT](./FORMAT_FIX_PROGRESS_REPORT.md) - 格式修复进度报告
+- [REFACTORING_COMPLETION_2026_02](./REFACTORING_COMPLETION_2026_02.md) - 重构完成报告
+- [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](research_notes/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) - 研究笔记批判分析与改进计划

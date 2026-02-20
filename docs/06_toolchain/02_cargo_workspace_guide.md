@@ -50,8 +50,8 @@
     - [10.1 配置文件层级](#101-配置文件层级)
     - [10.2 常用配置](#102-常用配置)
   - [11. 实战案例](#11-实战案例)
-    - [11.1 大型多 crate 项目](#111-大型多-crate-项目)
-    - [11.2 微服务架构](#112-微服务架构)
+    - [11.1 大型多 crate 项目 - 完整配置](#111-大型多-crate-项目---完整配置)
+    - [11.2 微服务架构 - 完整示例](#112-微服务架构---完整示例)
   - [12. 最佳实践](#12-最佳实践)
     - [✅ 推荐做法](#-推荐做法)
     - [⚠️ 常见陷阱](#️-常见陷阱)
@@ -788,87 +788,782 @@ verbose = false
 
 ## 11. 实战案例
 
-### 11.1 大型多 crate 项目
+### 11.1 大型多 crate 项目 - 完整配置
 
 **项目结构**:
 
 ```text
 my-app/
-├── Cargo.toml               # Workspace 配置
+├── Cargo.toml               # Workspace 根配置
 ├── Cargo.lock
+├── .cargo/
+│   └── config.toml          # Cargo 配置
 ├── crates/
-│   ├── core/                # 核心库
-│   ├── api/                 # API 层
-│   ├── db/                  # 数据库层
-│   ├── web/                 # Web 服务
-│   └── cli/                 # CLI 工具
+│   ├── core/                # 核心库（无外部依赖）
+│   │   ├── Cargo.toml
+│   │   └── src/
+│   │       └── lib.rs
+│   ├── api/                 # API 层（依赖 core）
+│   │   ├── Cargo.toml
+│   │   └── src/
+│   │       └── lib.rs
+│   ├── db/                  # 数据库层（依赖 core）
+│   │   ├── Cargo.toml
+│   │   └── src/
+│   │       └── lib.rs
+│   ├── web/                 # Web 服务（依赖 api, db）
+│   │   ├── Cargo.toml
+│   │   └── src/
+│   │       └── main.rs
+│   └── cli/                 # CLI 工具（依赖 api）
+│       ├── Cargo.toml
+│       └── src/
+│           └── main.rs
 ├── tests/                   # 集成测试
+│   └── integration_test.rs
 └── benches/                 # 基准测试
+    └── my_bench.rs
 ```
 
-**Cargo.toml**:
+**根目录 Cargo.toml（完整配置）**:
 
 ```toml
 [workspace]
 members = [
     "crates/*",
 ]
-resolver = "2"
+resolver = "2"  # Rust 1.51+，Edition 2024 使用 resolver = "3"
 
+# 排除不需要作为 workspace 成员的目录
+exclude = [
+    "tools/scripts",
+    "docs",
+]
+
+# Workspace 元数据
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["Team <team@example.com>"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/example/my-app"
+rust-version = "1.93"
+
+# Workspace 依赖 - 所有成员共享这些版本
 [workspace.dependencies]
-# 共享依赖
-tokio = { version = "1.0", features = ["full"] }
-serde = { version = "1.0", features = ["derive"] }
-anyhow = "1.0"
+# 异步运行时
+tokio = { version = "1.35", features = ["rt-multi-thread", "macros", "sync"] }
+tokio-util = { version = "0.7", features = ["codec"] }
 
-# 内部依赖
+# 序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# 错误处理
+anyhow = "1.0"
+thiserror = "1.0"
+
+# 日志
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# HTTP
+axum = "0.7"
+hyper = { version = "1.0", features = ["full"] }
+
+# 数据库
+sqlx = { version = "0.7", features = ["runtime-tokio", "postgres"] }
+
+# 内部依赖（使用 path，版本由 workspace.package 管理）
 my-core = { path = "crates/core" }
 my-api = { path = "crates/api" }
 my-db = { path = "crates/db" }
 
+# 开发依赖
+[workspace.dependencies.async-trait]
+version = "0.1"
+
+# 构建依赖
+[workspace.dependencies.anyhow]
+version = "1.0"
+default-features = false
+
+# 共享的编译配置
+[profile.dev]
+opt-level = 1          # 轻度优化，加快编译
+incremental = true     # 增量编译
+debug = 2              # 完整调试信息
+
+[profile.dev.package."*"]
+opt-level = 2          # 依赖包使用更高优化级别
+
 [profile.release]
-lto = "thin"
-codegen-units = 16
+opt-level = 3          # 最大优化
+lto = "thin"           # 轻量链接时优化
+codegen-units = 16     # 并行代码生成单元
+panic = "unwind"       # 允许捕获 panic
+strip = "symbols"      # 移除符号表
+
+[profile.release.package.my-core]
+opt-level = 3          # 核心库特别优化
+
+# 测试专用配置
+[profile.test]
+opt-level = 1
+debug = 2
+
+# 基准测试配置
+[profile.bench]
 opt-level = 3
+lto = "thin"
+```
+
+**crates/core/Cargo.toml**:
+
+```toml
+[package]
+name = "my-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Core domain types and utilities"
+
+[dependencies]
+# 无外部依赖，只使用标准库
+
+[dev-dependencies]
+anyhow = { workspace = true }
+tokio = { workspace = true }
+```
+
+**crates/core/src/lib.rs**:
+
+```rust
+//! Core domain types and utilities
+//!
+//! This crate provides fundamental types used throughout the application.
+
+#![warn(missing_docs)]
+
+use std::fmt;
+use std::str::FromStr;
+
+/// Unique identifier for entities
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub struct Id(u64);
+
+impl Id {
+    /// Create a new ID from a raw value
+    pub const fn new(value: u64) -> Self {
+        Self(value)
+    }
+
+    /// Get the raw value
+    pub const fn value(&self) -> u64 {
+        self.0
+    }
+}
+
+impl fmt::Display for Id {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
+impl FromStr for Id {
+    type Err = std::num::ParseIntError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        s.parse().map(Self::new)
+    }
+}
+
+/// Result type alias for core operations
+pub type CoreResult<T> = std::result::Result<T, CoreError>;
+
+/// Core error type
+#[derive(Debug, Clone, PartialEq)]
+pub enum CoreError {
+    /// Invalid input
+    InvalidInput(String),
+    /// Not found
+    NotFound(Id),
+    /// Internal error
+    Internal(String),
+}
+
+impl fmt::Display for CoreError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            CoreError::InvalidInput(msg) => write!(f, "Invalid input: {}", msg),
+            CoreError::NotFound(id) => write!(f, "Not found: {}", id),
+            CoreError::Internal(msg) => write!(f, "Internal error: {}", msg),
+        }
+    }
+}
+
+impl std::error::Error for CoreError {}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_id_creation() {
+        let id = Id::new(42);
+        assert_eq!(id.value(), 42);
+    }
+
+    #[test]
+    fn test_id_parsing() {
+        let id: Id = "123".parse().unwrap();
+        assert_eq!(id.value(), 123);
+    }
+}
+```
+
+**crates/api/Cargo.toml**:
+
+```toml
+[package]
+name = "my-api"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "API definitions and clients"
+
+[dependencies]
+# 内部依赖
+my-core = { workspace = true }
+
+# 外部依赖
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
+anyhow = { workspace = true }
+```
+
+**crates/api/src/lib.rs**:
+
+```rust
+//! API layer for the application
+//!
+//! Provides HTTP client and request/response types.
+
+use my_core::{CoreError, CoreResult, Id};
+use serde::{Deserialize, Serialize};
+
+/// API request for creating an entity
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CreateRequest {
+    /// Entity name
+    pub name: String,
+    /// Entity data
+    pub data: serde_json::Value,
+}
+
+/// API response with entity ID
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CreateResponse {
+    /// Created entity ID
+    pub id: Id,
+    /// Creation timestamp
+    pub created_at: String,
+}
+
+/// API client trait
+#[async_trait::async_trait]
+pub trait ApiClient {
+    /// Create a new entity
+    async fn create(&self, req: CreateRequest) -> CoreResult<CreateResponse>;
+
+    /// Get entity by ID
+    async fn get(&self, id: Id) -> CoreResult<serde_json::Value>;
+
+    /// Delete entity
+    async fn delete(&self, id: Id) -> CoreResult<()>;
+}
+
+/// API error type
+#[derive(Debug, thiserror::Error)]
+pub enum ApiError {
+    /// HTTP error
+    #[error("HTTP error: {0}")]
+    Http(String),
+    /// Serialization error
+    #[error("Serialization error: {0}")]
+    Serialization(#[from] serde_json::Error),
+    /// Core error
+    #[error(transparent)]
+    Core(#[from] CoreError),
+}
+
+impl From<ApiError> for CoreError {
+    fn from(err: ApiError) -> Self {
+        match err {
+            ApiError::Http(msg) => CoreError::Internal(msg),
+            ApiError::Serialization(e) => CoreError::InvalidInput(e.to_string()),
+            ApiError::Core(e) => e,
+        }
+    }
+}
+```
+
+**crates/db/Cargo.toml**:
+
+```toml
+[package]
+name = "my-db"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Database layer"
+
+[dependencies]
+# 内部依赖
+my-core = { workspace = true }
+
+# 外部依赖
+sqlx = { workspace = true }
+anyhow = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+# 测试使用内存数据库
+sqlx = { workspace = true, features = ["sqlite"] }
+```
+
+**crates/web/Cargo.toml**:
+
+```toml
+[package]
+name = "my-web"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Web service binary"
+
+[[bin]]
+name = "my-web-server"
+path = "src/main.rs"
+
+[dependencies]
+# 内部依赖
+my-core = { workspace = true }
+my-api = { workspace = true }
+my-db = { workspace = true }
+
+# 外部依赖
+axum = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+anyhow = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+```
+
+**crates/web/src/main.rs**:
+
+```rust
+//! Web service entry point
+
+use axum::{
+    routing::{get, post},
+    Router,
+};
+use std::net::SocketAddr;
+use tracing::{info, Level};
+use tracing_subscriber::FmtSubscriber;
+
+#[tokio::main]
+async fn main() -> anyhow::Result<()> {
+    // Initialize logging
+    let subscriber = FmtSubscriber::builder()
+        .with_max_level(Level::INFO)
+        .finish();
+    tracing::subscriber::set_global_default(subscriber)?;
+
+    info!("Starting web server...");
+
+    // Build router
+    let app = Router::new()
+        .route("/health", get(health_check))
+        .route("/api/v1/items", post(create_item));
+
+    // Run server
+    let addr: SocketAddr = "0.0.0.0:3000".parse()?;
+    info!("Listening on {}", addr);
+
+    let listener = tokio::net::TcpListener::bind(addr).await?;
+    axum::serve(listener, app).await?;
+
+    Ok(())
+}
+
+async fn health_check() -> &'static str {
+    "OK"
+}
+
+async fn create_item(
+    axum::Json(req): axum::Json<my_api::CreateRequest>,
+) -> Result<axum::Json<my_api::CreateResponse>, axum::http::StatusCode> {
+    // Implementation here
+    todo!()
+}
 ```
 
 ---
 
-### 11.2 微服务架构
+### 11.2 微服务架构 - 完整示例
 
 **项目结构**:
 
 ```text
 microservices/
-├── Cargo.toml
+├── Cargo.toml                    # Workspace 配置
+├── Cargo.lock
+├── .cargo/
+│   └── config.toml
 ├── services/
-│   ├── auth-service/
-│   ├── user-service/
-│   ├── order-service/
-│   └── payment-service/
-├── shared/
-│   ├── common/              # 共享代码
-│   ├── proto/               # gRPC 定义
-│   └── models/              # 数据模型
-└── deploy/
+│   ├── auth-service/             # 认证服务
+│   │   ├── Cargo.toml
+│   │   └── src/
+│   │       ├── main.rs
+│   │       └── handlers.rs
+│   ├── user-service/             # 用户服务
+│   │   ├── Cargo.toml
+│   │   └── src/
+│   │       └── main.rs
+│   ├── order-service/            # 订单服务
+│   │   ├── Cargo.toml
+│   │   └── src/
+│   │       └── main.rs
+│   └── payment-service/          # 支付服务
+│       ├── Cargo.toml
+│       └── src/
+│           └── main.rs
+├── shared/                       # 共享代码
+│   ├── common/                   # 通用工具
+│   │   ├── Cargo.toml
+│   │   └── src/
+│   │       └── lib.rs
+│   ├── proto/                    # gRPC 定义
+│   │   ├── Cargo.toml
+│   │   └── src/
+│   │       └── lib.rs
+│   └── models/                   # 共享数据模型
+│       ├── Cargo.toml
+│       └── src/
+│           └── lib.rs
+├── gateway/                      # API 网关
+│   ├── Cargo.toml
+│   └── src/
+│       └── main.rs
+└── deploy/                       # 部署配置
+    ├── docker-compose.yml
+    └── kubernetes/
 ```
 
-**Cargo.toml**:
+**根目录 Cargo.toml**:
 
 ```toml
 [workspace]
 members = [
     "services/*",
     "shared/*",
+    "gateway",
 ]
-resolver = "2"
+resolver = "3"  # Edition 2024
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["Microservices Team <team@example.com>"]
+license = "MIT"
+rust-version = "1.93"
 
 [workspace.dependencies]
-tonic = "0.10"
-tokio = { version = "1.0", features = ["full"] }
+# gRPC
+tonic = "0.12"
+tonic-health = "0.12"
+prost = "0.13"
+
+# HTTP/REST
+axum = "0.7"
+tower = "0.5"
+tower-http = { version = "0.6", features = ["trace", "cors"] }
+hyper = { version = "1.0", features = ["full"] }
+
+# Async
+tokio = { version = "1.35", features = ["rt-multi-thread", "macros", "signal"] }
+tokio-util = "0.7"
+async-trait = "0.1"
+futures = "0.3"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+prost-types = "0.13"
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Observability
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+tracing-opentelemetry = "0.25"
+opentelemetry = "0.26"
+
+# Configuration
+config = "0.14"
+dotenvy = "0.15"
+
+# Shared crates
 shared-common = { path = "shared/common" }
 shared-proto = { path = "shared/proto" }
 shared-models = { path = "shared/models" }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 4  # 每个服务并行构建
+strip = "symbols"
+```
+
+**services/auth-service/Cargo.toml**:
+
+```toml
+[package]
+name = "auth-service"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Authentication service"
+
+[[bin]]
+name = "auth-service"
+path = "src/main.rs"
+
+[dependencies]
+# Shared
+shared-common = { workspace = true }
+shared-proto = { workspace = true }
+shared-models = { workspace = true }
+
+# gRPC
+tonic = { workspace = true }
+tonic-health = { workspace = true }
+prost = { workspace = true }
+
+# Async
+tokio = { workspace = true }
+async-trait = { workspace = true }
+
+# HTTP
+axum = { workspace = true }
+tower = { workspace = true }
+tower-http = { workspace = true }
+
+# Observability
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+# Security
+jsonwebtoken = "9"
+bcrypt = "0.15"
+
+[dev-dependencies]
+tokio-test = "0.4"
+```
+
+**shared/models/Cargo.toml**:
+
+```toml
+[package]
+name = "shared-models"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Shared data models across services"
+
+[dependencies]
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Validation
+validator = { version = "0.19", features = ["derive"] }
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# ID generation
+uuid = { version = "1.0", features = ["v4", "serde"] }
+```
+
+**shared/models/src/lib.rs**:
+
+```rust
+//! Shared data models across microservices
+
+use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
+use uuid::Uuid;
+use validator::Validate;
+
+/// User ID type
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct UserId(pub Uuid);
+
+impl UserId {
+    pub fn new() -> Self {
+        Self(Uuid::new_v4())
+    }
+}
+
+impl Default for UserId {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+/// User model
+#[derive(Debug, Clone, Serialize, Deserialize, Validate)]
+pub struct User {
+    pub id: UserId,
+    #[validate(email)]
+    pub email: String,
+    #[validate(length(min = 1, max = 100))]
+    pub name: String,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
+}
+
+/// Order ID type
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct OrderId(pub Uuid);
+
+impl OrderId {
+    pub fn new() -> Self {
+        Self(Uuid::new_v4())
+    }
+}
+
+/// Order model
+#[derive(Debug, Clone, Serialize, Deserialize, Validate)]
+pub struct Order {
+    pub id: OrderId,
+    pub user_id: UserId,
+    pub items: Vec<OrderItem>,
+    #[validate(range(min = 0.0))]
+    pub total_amount: f64,
+    pub status: OrderStatus,
+    pub created_at: DateTime<Utc>,
+}
+
+/// Order item
+#[derive(Debug, Clone, Serialize, Deserialize, Validate)]
+pub struct OrderItem {
+    pub product_id: String,
+    #[validate(range(min = 1))]
+    pub quantity: i32,
+    #[validate(range(min = 0.0))]
+    pub unit_price: f64,
+}
+
+/// Order status
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum OrderStatus {
+    Pending,
+    Confirmed,
+    Shipped,
+    Delivered,
+    Cancelled,
+}
+
+/// Payment ID type
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PaymentId(pub Uuid);
+
+impl PaymentId {
+    pub fn new() -> Self {
+        Self(Uuid::new_v4())
+    }
+}
+
+/// Payment model
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Payment {
+    pub id: PaymentId,
+    pub order_id: OrderId,
+    pub amount: f64,
+    pub currency: String,
+    pub status: PaymentStatus,
+    pub created_at: DateTime<Utc>,
+}
+
+/// Payment status
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum PaymentStatus {
+    Pending,
+    Completed,
+    Failed,
+    Refunded,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_user_creation() {
+        let user = User {
+            id: UserId::new(),
+            email: "test@example.com".to_string(),
+            name: "Test User".to_string(),
+            created_at: Utc::now(),
+            updated_at: Utc::now(),
+        };
+
+        assert!(user.validate().is_ok());
+    }
+
+    #[test]
+    fn test_invalid_email() {
+        let user = User {
+            id: UserId::new(),
+            email: "invalid-email".to_string(),
+            name: "Test".to_string(),
+            created_at: Utc::now(),
+            updated_at: Utc::now(),
+        };
+
+        assert!(user.validate().is_err());
+    }
+}
 ```
 
 ---

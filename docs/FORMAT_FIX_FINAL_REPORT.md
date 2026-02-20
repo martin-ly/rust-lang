@@ -187,6 +187,115 @@
 
 ---
 
+## 🦀 Rust 格式验证示例
+
+以下是一个 Rust 程序，用于验证 Markdown 文档的格式规范：
+
+```rust
+//! Markdown 文档格式验证器
+//! 验证文档是否符合项目元信息规范
+
+use regex::Regex;
+use std::fs;
+use std::path::Path;
+
+/// 格式验证结果
+#[derive(Debug)]
+struct ValidationResult {
+    file_path: String,
+    errors: Vec<String>,
+}
+
+/// 文档格式验证器
+pub struct FormatValidator {
+    date_pattern: Regex,
+    version_pattern: Regex,
+    status_pattern: Regex,
+}
+
+impl FormatValidator {
+    pub fn new() -> Self {
+        Self {
+            date_pattern: Regex::new(r"\*\*创建日期\*\*:\s*(\d{4}-\d{2}-\d{2})").unwrap(),
+            version_pattern: Regex::new(r"\*\*Rust 版本\*\*:\s*1\.93\.0\+.*Edition 2024").unwrap(),
+            status_pattern: Regex::new(r"\*\*状态\*\*:\s*[✅🔄📋]").unwrap(),
+        }
+    }
+    
+    /// 验证单个文档
+    pub fn validate(&self, content: &str) -> Vec<String> {
+        let mut errors = Vec::new();
+        
+        // 检查创建日期
+        if !self.date_pattern.is_match(content) {
+            errors.push("缺少创建日期或格式不正确 (应为 YYYY-MM-DD)".to_string());
+        }
+        
+        // 检查 Rust 版本
+        if !self.version_pattern.is_match(content) {
+            errors.push("缺少 Rust 版本或格式不正确 (应为 1.93.0+ (Edition 2024))".to_string());
+        }
+        
+        // 检查状态
+        if !self.status_pattern.is_match(content) {
+            errors.push("缺少状态或格式不正确 (应为 ✅/🔄/📋)".to_string());
+        }
+        
+        errors
+    }
+    
+    /// 批量验证目录
+    pub fn validate_directory(&self, dir_path: &str) -> Vec<ValidationResult> {
+        let mut results = Vec::new();
+        
+        if let Ok(entries) = fs::read_dir(dir_path) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.extension().map_or(false, |e| e == "md") {
+                    if let Ok(content) = fs::read_to_string(&path) {
+                        let errors = self.validate(&content);
+                        results.push(ValidationResult {
+                            file_path: path.display().to_string(),
+                            errors,
+                        });
+                    }
+                }
+            }
+        }
+        
+        results
+    }
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let validator = FormatValidator::new();
+    let results = validator.validate_directory("docs");
+    
+    let mut total_errors = 0;
+    for result in &results {
+        if !result.errors.is_empty() {
+            println!("❌ {}:", result.file_path);
+            for error in &result.errors {
+                println!("   - {}", error);
+                total_errors += 1;
+            }
+        }
+    }
+    
+    println!("\n========== 验证完成 ==========");
+    println!("检查文件数: {}", results.len());
+    println!("错误总数: {}", total_errors);
+    
+    if total_errors == 0 {
+        println!("✅ 所有文档格式检查通过！");
+    }
+    
+    Ok(())
+}
+```
+
+---
+
 ## 🎉 总结
 
 本次格式修复工作已完成 **~256 个文件**的元信息标准化，涵盖 docs 目录下所有活跃使用的主要文档。剩余 122 个文件主要为 archive/ 目录的历史归档文件，可选择性修复。
@@ -197,6 +306,15 @@
 - ✅ 统一格式规范建立
 - ✅ 检查工具和文档创建
 - ✅ 修复进度 67%（活跃文档 100%）
+
+---
+
+## 📖 相关文档
+
+- [FORMAT_CHECKLIST_QUICK](./FORMAT_CHECKLIST_QUICK.md) - 快速检查清单
+- [FORMAT_FIX_COMPLETION_REPORT](./FORMAT_FIX_COMPLETION_REPORT.md) - 完成报告
+- [FORMAT_FIX_PROGRESS_REPORT](./FORMAT_FIX_PROGRESS_REPORT.md) - 进度报告
+- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](research_notes/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
 
 ---
 

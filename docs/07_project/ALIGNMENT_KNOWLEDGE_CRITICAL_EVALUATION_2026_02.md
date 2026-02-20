@@ -8,6 +8,138 @@
 
 ---
 
+## 代码示例
+
+### 内存对齐检测代码
+
+```rust
+/// 检测类型的对齐要求
+use std::mem::{align_of, size_of};
+
+fn analyze_alignment<T>() {
+    println!("类型: {}", std::any::type_name::<T>());
+    println!("  对齐要求: {} 字节", align_of::<T>());
+    println!("  大小: {} 字节", size_of::<T>());
+}
+
+fn main() {
+    analyze_alignment::<u8>();
+    analyze_alignment::<u32>();
+    analyze_alignment::<u64>();
+    analyze_alignment::<f64>();
+    
+    // 结构体对齐示例
+    #[repr(C)]
+    struct Data {
+        a: u8,
+        b: u32,
+        c: u16,
+    }
+    analyze_alignment::<Data>();
+}
+```
+
+### Layout API 使用示例
+
+```rust
+use std::alloc::{alloc, dealloc, Layout};
+
+fn align_up(size: usize, alignment: usize) -> usize {
+    (size + alignment - 1) & !(alignment - 1)
+}
+
+fn main() {
+    // 创建对齐布局
+    let layout = Layout::from_size_align(1024, 64).unwrap();
+    
+    // 计算填充需求
+    let size_with_padding = layout.pad_to_align().size();
+    println!("原始大小: 1024, 对齐后: {}", size_with_padding);
+    
+    // 对齐到更高对齐要求
+    let extended_layout = layout.align_to(128).unwrap();
+    println!("扩展到 128 字节对齐");
+    
+    // 分配内存
+    unsafe {
+        let ptr = alloc(layout);
+        assert!(!ptr.is_null());
+        // 确保对齐
+        assert!(ptr as usize % 64 == 0);
+        dealloc(ptr, layout);
+    }
+}
+```
+
+### 未对齐访问检测
+
+```rust
+use std::mem::MaybeUninit;
+
+fn safe_unaligned_read() {
+    let bytes: [u8; 8] = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08];
+    
+    // 安全地读取可能未对齐的数据
+    let value = unsafe {
+        std::ptr::read_unaligned(bytes.as_ptr().add(1) as *const u32)
+    };
+    println!("未对齐读取: 0x{:08x}", value);
+    
+    // 缓存行对齐（用于并发优化）
+    #[repr(align(64))]
+    struct CacheLineAligned<T> {
+        value: T,
+    }
+    
+    let aligned = CacheLineAligned { value: 42u64 };
+    assert!(std::ptr::addr_of!(aligned.value) as usize % 64 == 0);
+}
+```
+
+### 缓存行检测工具
+
+```rust
+/// 检测 CPU 缓存行大小
+fn detect_cache_line_size() -> Option<usize> {
+    // x86/x86_64 通常为 64 字节
+    // ARM 可能为 64 或 128 字节
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    {
+        Some(64)
+    }
+    #[cfg(target_arch = "aarch64")]
+    {
+        Some(64) // Apple M1/M2 为 128，但通常 64 也安全
+    }
+    #[cfg(not(any(
+        target_arch = "x86", 
+        target_arch = "x86_64",
+        target_arch = "aarch64"
+    )))]
+    {
+        None
+    }
+}
+```
+
+---
+
+## 形式化链接
+
+### 研究笔记关联
+
+- **形式化证明**: [PROOF_INDEX.md](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 对齐相关的形式化证明结构
+- **内存模型**: [ownership_model.md](../research_notes/formal_methods/ownership_model.md) - 所有权与内存布局的形式化定义
+- **类型理论**: [type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) - 类型布局的理论基础
+
+### 权威来源
+
+- [Rust Reference - Type layout](https://doc.rust-lang.org/reference/type-layout.html)
+- [std::alloc::Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
+- [Rustonomicon - Data Layout](https://doc.rust-lang.org/nomicon/data.html)
+
+---
+
 ## 一、批判性评估
 
 ### 1.1 当前状态概览

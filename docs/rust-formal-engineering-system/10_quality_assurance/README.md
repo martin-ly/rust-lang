@@ -16,6 +16,9 @@
   - [📚 核心文档](#-核心文档)
   - [🔬 形式化验证衔接](#-形式化验证衔接)
   - [✅ 质量检查清单](#-质量检查清单)
+  - [代码质量示例](#代码质量示例)
+    - [测试最佳实践](#测试最佳实践)
+    - [MIRI 检测示例](#miri-检测示例)
   - [🔗 与 research\_notes 衔接](#-与-research_notes-衔接)
 
 ---
@@ -70,14 +73,102 @@
 
 ---
 
+## 代码质量示例
+
+### 测试最佳实践
+
+```rust
+// 单元测试
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_add() {
+        assert_eq!(add(2, 3), 5);
+    }
+
+    #[test]
+    #[should_panic(expected = "overflow")]
+    fn test_add_overflow() {
+        let _ = i32::MAX + 1;  // 会 panic
+    }
+
+    #[test]
+    fn test_result() -> Result<(), String> {
+        let result = some_operation()?;
+        assert_eq!(result, 42);
+        Ok(())
+    }
+}
+
+// 属性测试（使用 proptest）
+#[cfg(test)]
+mod property_tests {
+    use proptest::prelude::*;
+
+    proptest! {
+        #[test]
+        fn test_add_commutative(a: i32, b: i32) {
+            prop_assert_eq!(add(a, b), add(b, a));
+        }
+    }
+}
+```
+
+### MIRI 检测示例
+
+```rust
+// 此代码在 MIRI 中会检测到未定义行为
+#[cfg(test)]
+mod miri_tests {
+    #[test]
+    fn test_pointer_validity() {
+        let ptr = std::ptr::null::<i32>();
+        // MIRI 会阻止以下操作
+        // unsafe { let _ = *ptr; }
+    }
+
+    #[test]
+    fn test_data_race() {
+        use std::sync::Arc;
+        use std::thread;
+
+        // Arc 保证线程安全
+        let data = Arc::new(std::sync::Mutex::new(0));
+
+        let handles: Vec<_> = (0..10)
+            .map(|_| {
+                let data = Arc::clone(&data);
+                thread::spawn(move || {
+                    let mut guard = data.lock().unwrap();
+                    *guard += 1;
+                })
+            })
+            .collect();
+
+        for h in handles {
+            h.join().unwrap();
+        }
+
+        assert_eq!(*data.lock().unwrap(), 10);
+    }
+}
+```
+
+---
+
 ## 🔗 与 research_notes 衔接
 
-| 文档 | 用途 |
-| :--- | :--- |
-| [QUALITY_CHECKLIST](../../research_notes/QUALITY_CHECKLIST.md) | 研究笔记质量检查 |
-| [experiments/performance_benchmarks](../../research_notes/experiments/performance_benchmarks.md) | 性能基准方法论 |
-| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全边界与 UB |
-| [type_theory/00_completeness_gaps](../../research_notes/type_theory/00_completeness_gaps.md) | 类型理论完备性缺口（形式化论证不充分声明） |
+| 文档 | 用途 | 路径 |
+| :--- | :--- | :--- |
+| **QUALITY_CHECKLIST** | 研究笔记质量检查 | [../../research_notes/QUALITY_CHECKLIST.md](../../research_notes/QUALITY_CHECKLIST.md) |
+| **experiments/performance_benchmarks** | 性能基准方法论 | [../../research_notes/experiments/performance_benchmarks.md](../../research_notes/experiments/performance_benchmarks.md) |
+| **SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS** | 安全边界与 UB | [../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+| **type_theory/00_completeness_gaps** | 类型理论完备性缺口 | [../../research_notes/type_theory/00_completeness_gaps.md](../../research_notes/type_theory/00_completeness_gaps.md) |
+| **TOOLS_GUIDE** | 形式化验证工具指南 | [../../research_notes/TOOLS_GUIDE.md](../../research_notes/TOOLS_GUIDE.md) |
+| **FORMAL_VERIFICATION_GUIDE** | 形式化验证入门 | [../../research_notes/FORMAL_VERIFICATION_GUIDE.md](../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
+| **PROOF_INDEX** | 形式化证明索引 | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
 
 ---
 

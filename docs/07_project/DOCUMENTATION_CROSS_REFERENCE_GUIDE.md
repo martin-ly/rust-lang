@@ -43,6 +43,192 @@
 
 ---
 
+## 代码示例
+
+### 自动生成交叉引用链接
+
+```rust
+//! 文档交叉引用链接生成器
+use std::collections::HashMap;
+use std::fs;
+use std::path::Path;
+
+/// 模块到文档路径的映射
+fn build_cross_reference_map() -> HashMap<String, Vec<String>> {
+    let mut map = HashMap::new();
+    
+    // C01 模块引用
+    map.insert("ownership".to_string(), vec![
+        "crates/c01_ownership_borrow_scope/README.md".to_string(),
+        "docs/02_reference/quick_reference/ownership_cheatsheet.md".to_string(),
+        "docs/research_notes/formal_methods/ownership_model.md".to_string(),
+    ]);
+    
+    // C02 模块引用
+    map.insert("type_system".to_string(), vec![
+        "crates/c02_type_system/README.md".to_string(),
+        "docs/02_reference/quick_reference/type_system.md".to_string(),
+        "docs/research_notes/type_theory/type_system_foundations.md".to_string(),
+    ]);
+    
+    // C06 异步模块
+    map.insert("async".to_string(), vec![
+        "crates/c06_async/README.md".to_string(),
+        "docs/05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md".to_string(),
+        "docs/research_notes/formal_methods/async_state_machine.md".to_string(),
+    ]);
+    
+    map
+}
+
+/// 生成 Markdown 链接
+fn generate_markdown_links(module: &str, map: &HashMap<String, Vec<String>>) -> String {
+    let mut output = format!("## {} 相关文档\n\n", module);
+    
+    if let Some(paths) = map.get(module) {
+        for path in paths {
+            let name = Path::new(path)
+                .file_stem()
+                .unwrap()
+                .to_string_lossy();
+            output.push_str(&format!("- [{}]({})\n", name, path));
+        }
+    }
+    
+    output
+}
+
+fn main() {
+    let map = build_cross_reference_map();
+    println!("{}", generate_markdown_links("ownership", &map));
+}
+```
+
+### 链接有效性检查脚本
+
+```rust
+//! 检查 Markdown 文档中的内部链接有效性
+use std::fs;
+use std::path::Path;
+use regex::Regex;
+
+struct LinkChecker {
+    broken_links: Vec<(String, String, String)>, // (文件, 链接, 原因)
+}
+
+impl LinkChecker {
+    fn new() -> Self {
+        Self {
+            broken_links: Vec::new(),
+        }
+    }
+    
+    fn check_file(&mut self, file_path: &str) {
+        let content = match fs::read_to_string(file_path) {
+            Ok(c) => c,
+            Err(_) => return,
+        };
+        
+        // 匹配 Markdown 链接 [text](path)
+        let link_regex = Regex::new(r"\[([^\]]+)\]\(([^)]+)\)").unwrap();
+        
+        for cap in link_regex.captures_iter(&content) {
+            let link_text = &cap[1];
+            let link_path = &cap[2];
+            
+            // 跳过外部链接
+            if link_path.starts_with("http") || link_path.starts_with("#") {
+                continue;
+            }
+            
+            // 检查相对链接
+            let base_path = Path::new(file_path).parent().unwrap_or(Path::new("."));
+            let target_path = base_path.join(link_path);
+            
+            if !target_path.exists() {
+                self.broken_links.push((
+                    file_path.to_string(),
+                    link_text.to_string(),
+                    format!("路径不存在: {:?}", target_path),
+                ));
+            }
+        }
+    }
+    
+    fn report(&self) {
+        if self.broken_links.is_empty() {
+            println!("✅ 所有内部链接有效");
+        } else {
+            println!("❌ 发现 {} 个断链:\n", self.broken_links.len());
+            for (file, link, reason) in &self.broken_links {
+                println!("文件: {}", file);
+                println!("  链接: [{}]", link);
+                println!("  原因: {}", reason);
+                println!();
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut checker = LinkChecker::new();
+    checker.check_file("docs/07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md");
+    checker.report();
+}
+```
+
+### 文档关系图生成
+
+```rust
+use std::collections::HashMap;
+
+/// 生成模块间关系的 Mermaid 图
+fn generate_module_dependency_graph() -> String {
+    let mut graph = String::from("```mermaid\ngraph TD\n");
+    
+    let dependencies: HashMap<&str, Vec<&str>> = [
+        ("C01", vec!["C02", "C05", "C07"]),
+        ("C02", vec!["C04"]),
+        ("C04", vec!["C05", "C06", "C08", "C11"]),
+        ("C05", vec!["C06"]),
+        ("C06", vec!["C07", "C08", "C09", "C10", "C12"]),
+    ].into_iter().collect();
+    
+    for (module, deps) in &dependencies {
+        for dep in deps {
+            graph.push_str(&format!("    {} --> {}\n", module, dep));
+        }
+    }
+    
+    graph.push_str("```\n");
+    graph
+}
+
+fn main() {
+    println!("{}", generate_module_dependency_graph());
+}
+```
+
+---
+
+## 形式化链接
+
+### 研究笔记关联
+
+- **知识图谱**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识结构框架与关联网络
+- **思维表征**: [THINKING_REPRESENTATION_METHODS.md](../04_thinking/THINKING_REPRESENTATION_METHODS.md) - 思维导图与概念矩阵
+- **决策网络**: [DECISION_GRAPH_NETWORK.md](../04_thinking/DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
+
+### 实施场景
+
+| 场景 | 操作步骤 | 代码参考 |
+| :--- | :--- | :--- |
+| **新增模块** | 1. 在交叉引用映射中添加新模块<br>2. 更新相关文档链接<br>3. 运行链接检查脚本 | `build_cross_reference_map()` |
+| **重构文档** | 1. 使用链接检查工具扫描断链<br>2. 批量更新相对路径<br>3. 验证修复结果 | `LinkChecker::check_file()` |
+| **生成导航** | 1. 使用模块依赖图生成器<br>2. 更新 00_MASTER_INDEX | `generate_module_dependency_graph()` |
+
+---
+
 ## 概述
 
 本文档提供项目中所有文档的交叉引用指南，帮助开发者快速找到相关文档。

@@ -217,6 +217,105 @@
 
 ---
 
+## 🦀 Rust 文档生成示例
+
+以下是一个简单的 Rust 程序，用于自动生成带标准元信息的 Markdown 文档模板：
+
+```rust
+//! 文档模板生成器
+//! 自动生成符合格式规范的 Markdown 文档模板
+
+use std::fs;
+use std::io::Write;
+use chrono::Local;
+
+/// 文档模板结构
+pub struct DocTemplate {
+    pub title: String,
+    pub purpose: String,
+    pub category: String,
+}
+
+impl DocTemplate {
+    /// 生成标准元信息头
+    fn generate_meta_header(&self) -> String {
+        let today = Local::now().format("%Y-%m-%d");
+        format!(
+            r#"# {}
+
+> **创建日期**: {}
+> **最后更新**: {}
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **用途**: {}
+
+---
+
+"#,
+            self.title, today, today, self.purpose
+        )
+    }
+    
+    /// 生成目录块
+    fn generate_toc(&self) -> String {
+        r##"## 📊 目录
+
+- [概述](#概述)
+- [详细内容](#详细内容)
+- [相关文档](#相关文档)
+
+---
+
+"##
+        .to_string()
+    }
+    
+    /// 生成文末元信息
+    fn generate_footer(&self) -> String {
+        let today = Local::now().format("%Y-%m-%d");
+        format!(
+            r#"
+---
+
+**维护者**: Rust Formal Methods Research Team
+**最后更新**: {}
+**状态**: ✅ 已完成
+"#,
+            today
+        )
+    }
+    
+    /// 生成完整文档
+    pub fn generate(&self) -> String {
+        let mut doc = String::new();
+        doc.push_str(&self.generate_meta_header());
+        doc.push_str(&self.generate_toc());
+        doc.push_str("## 概述\n\nTODO: 添加概述内容\n\n");
+        doc.push_str("## 详细内容\n\nTODO: 添加详细内容\n\n");
+        doc.push_str("## 相关文档\n\n- [相关文档](./README.md)\n");
+        doc.push_str(&self.generate_footer());
+        doc
+    }
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let template = DocTemplate {
+        title: "新建文档".to_string(),
+        purpose: "文档用途说明".to_string(),
+        category: "reference".to_string(),
+    };
+    
+    let output_path = "new_document.md";
+    let mut file = fs::File::create(output_path)?;
+    file.write_all(template.generate().as_bytes())?;
+    
+    println!("✅ 文档模板已生成: {}", output_path);
+    Ok(())
+}
+```
+
+---
+
 ## 🏆 总结
 
 本次文档格式修复工作已 **100% 完成**：
@@ -228,6 +327,15 @@
 - ✅ **拼写配置**更新
 
 **docs 目录下的所有 Markdown 文件现在拥有统一、规范的元信息格式！**
+
+---
+
+## 📖 相关文档
+
+- [FORMAT_CHECKLIST_QUICK](./FORMAT_CHECKLIST_QUICK.md) - 快速检查清单
+- [FORMAT_FIX_FINAL_REPORT](./FORMAT_FIX_FINAL_REPORT.md) - 最终修复报告
+- [FORMAT_FIX_PROGRESS_REPORT](./FORMAT_FIX_PROGRESS_REPORT.md) - 进度报告
+- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](research_notes/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
 
 ---
 

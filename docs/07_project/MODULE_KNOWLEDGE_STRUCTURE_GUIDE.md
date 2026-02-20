@@ -64,6 +64,297 @@
 
 ---
 
+## 代码示例
+
+### 概念定义生成器
+
+```rust
+//! 自动生成概念定义的 Markdown 文档
+use std::fmt::Write;
+
+struct ConceptDefinition {
+    name: String,
+    definition: String,
+    concept_type: String,
+    category: String,
+    rust_version: String,
+    related_concepts: Vec<String>,
+    properties: Vec<(String, String)>,
+}
+
+impl ConceptDefinition {
+    fn new(name: &str, definition: &str) -> Self {
+        Self {
+            name: name.to_string(),
+            definition: definition.to_string(),
+            concept_type: "基础概念".to_string(),
+            category: "未分类".to_string(),
+            rust_version: "1.0.0".to_string(),
+            related_concepts: Vec::new(),
+            properties: Vec::new(),
+        }
+    }
+    
+    fn with_type(mut self, t: &str) -> Self {
+        self.concept_type = t.to_string();
+        self
+    }
+    
+    fn in_category(mut self, c: &str) -> Self {
+        self.category = c.to_string();
+        self
+    }
+    
+    fn with_property(mut self, name: &str, value: &str) -> Self {
+        self.properties.push((name.to_string(), value.to_string()));
+        self
+    }
+    
+    fn generate_markdown(&self) -> String {
+        let mut output = String::new();
+        
+        writeln!(output, "### 概念定义\n").unwrap();
+        writeln!(output, "**概念名称**: {}\n", self.name).unwrap();
+        writeln!(output, "**定义**: {}\n", self.definition).unwrap();
+        writeln!(output, "**类型**: {}\n", self.concept_type).unwrap();
+        writeln!(output, "**范畴**: {}\n", self.category).unwrap();
+        writeln!(output, "**版本**: Rust {}+\n", self.rust_version).unwrap();
+        
+        if !self.related_concepts.is_empty() {
+            writeln!(output, "**相关概念**:").unwrap();
+            for c in &self.related_concepts {
+                writeln!(output, "- {}", c).unwrap();
+            }
+            writeln!(output).unwrap();
+        }
+        
+        if !self.properties.is_empty() {
+            writeln!(output, "**属性特征**:\n").unwrap();
+            for (name, value) in &self.properties {
+                writeln!(output, "- **{}**: {}", name, value).unwrap();
+            }
+        }
+        
+        output
+    }
+}
+
+fn main() {
+    let async_programming = ConceptDefinition::new(
+        "异步编程 (Async Programming)",
+        "一种编程范式，允许程序在等待 I/O 操作完成时执行其他任务，而不是阻塞等待"
+    )
+    .with_type("复合概念")
+    .in_category("并发编程")
+    .with_property("核心抽象", "Future Trait")
+    .with_property("语法支持", "async/await")
+    .with_property("执行模型", "协作式调度");
+    
+    println!("{}", async_programming.generate_markdown());
+}
+```
+
+### 知识结构批量生成器
+
+```rust
+//! 为多个模块批量生成知识结构
+use std::collections::HashMap;
+use std::fs;
+use std::io::Write;
+
+struct ModuleKnowledgeGenerator {
+    modules: HashMap<String, Vec<ConceptDefinition>>,
+}
+
+#[derive(Clone)]
+struct ConceptDefinition {
+    name: String,
+    definition: String,
+    properties: Vec<String>,
+}
+
+impl ModuleKnowledgeGenerator {
+    fn new() -> Self {
+        let mut modules = HashMap::new();
+        
+        // C01 模块
+        modules.insert("c01_ownership_borrow_scope".to_string(), vec![
+            ConceptDefinition {
+                name: "所有权 (Ownership)".to_string(),
+                definition: "每个值都有一个所有者，值在所有者离开作用域时被释放".to_string(),
+                properties: vec!["唯一性".to_string(), "自动释放".to_string(), "移动语义".to_string()],
+            },
+            ConceptDefinition {
+                name: "借用 (Borrowing)".to_string(),
+                definition: "通过引用访问值而不获取所有权".to_string(),
+                properties: vec!["不可变借用".to_string(), "可变借用".to_string()],
+            },
+        ]);
+        
+        // C05 线程模块
+        modules.insert("c05_threads".to_string(), vec![
+            ConceptDefinition {
+                name: "线程 (Thread)".to_string(),
+                definition: "并发执行单元".to_string(),
+                properties: vec!["线程安全".to_string(), "作用域线程".to_string()],
+            },
+            ConceptDefinition {
+                name: "消息传递 (Message Passing)".to_string(),
+                definition: "线程间通过消息通信".to_string(),
+                properties: vec!["通道".to_string(), "发送者".to_string(), "接收者".to_string()],
+            },
+        ]);
+        
+        Self { modules }
+    }
+    
+    fn generate_module_docs(&self, module: &str) -> Option<String> {
+        let concepts = self.modules.get(module)?;
+        
+        let mut output = format!("# {} 知识结构\n\n", module);
+        
+        for concept in concepts {
+            output.push_str(&format!("## {}\n\n", concept.name));
+            output.push_str(&format!("**定义**: {}\n\n", concept.definition));
+            output.push_str("**属性**:\n");
+            for prop in &concept.properties {
+                output.push_str(&format!("- {}\n", prop));
+            }
+            output.push_str("\n");
+        }
+        
+        Some(output)
+    }
+    
+    fn generate_all(&self) {
+        for module in self.modules.keys() {
+            if let Some(content) = self.generate_module_docs(module) {
+                let path = format!("crates/{}/docs/knowledge_structure.md", module);
+                if let Some(parent) = std::path::Path::new(&path).parent() {
+                    let _ = fs::create_dir_all(parent);
+                }
+                let _ = fs::write(&path, content);
+                println!("已生成: {}", path);
+            }
+        }
+    }
+}
+
+fn main() {
+    let generator = ModuleKnowledgeGenerator::new();
+    generator.generate_all();
+}
+```
+
+### 思维表征模板生成器
+
+```rust
+//! 生成思维导图、矩阵等思维表征模板
+use std::fmt::Write;
+
+struct ThinkingRepresentationTemplates;
+
+impl ThinkingRepresentationTemplates {
+    fn mind_map_template(title: &str) -> String {
+        format!(r#"### 思维导图
+
+```text
+{}
+│
+├── [子主题1]
+│   ├── [子子主题1]
+│   └── [子子主题2]
+├── [子主题2]
+│   └── [子子主题3]
+└── [子主题3]
+```
+"#, title)
+    }
+    
+    fn concept_matrix_template(dimensions: &[&str]) -> String {
+        let mut output = String::from("### 概念矩阵\n\n|");
+        
+        for dim in dimensions {
+            write!(output, " {} |", dim).unwrap();
+        }
+        output.push_str("\n|");
+        
+        for _ in dimensions {
+            output.push_str(" :--- |");
+        }
+        output.push_str("\n|");
+        
+        for _ in dimensions {
+            output.push_str(" ... |");
+        }
+        output.push_str("\n");
+        
+        output
+    }
+    
+    fn decision_tree_template(decision: &str) -> String {
+        format!(r#"### 决策图网
+
+```text
+需要{}？
+├── 是
+│   ├── [条件1]满足？ → [方案1]
+│   └── [条件2]满足？ → [方案2]
+└── 否 → [默认方案]
+```
+"#, decision)
+    }
+    
+    fn proof_tree_template(goal: &str) -> String {
+        format!(r#"### 证明图网
+
+```text
+目标: {}
+├── 前提1: [基础条件1]
+├── 前提2: [基础条件2]
+├── 步骤1: [实现步骤1]
+│   └── 依据: [定理/公理]
+├── 步骤2: [实现步骤2]
+└── 结论: [最终结果]
+    ├── 功能正确性: [保证]
+    ├── 类型安全: [保证]
+    └── 内存安全: [保证]
+```
+"#, goal)
+    }
+}
+
+fn main() {
+    println!("{}", ThinkingRepresentationTemplates::mind_map_template("Rust 核心概念"));
+    println!("{}", ThinkingRepresentationTemplates::concept_matrix_template(
+        &["概念", "线程安全", "性能", "使用场景"]
+    ));
+    println!("{}", ThinkingRepresentationTemplates::decision_tree_template("使用异步"));
+    println!("{}", ThinkingRepresentationTemplates::proof_tree_template("实现线程安全"));
+}
+```
+
+---
+
+## 形式化链接
+
+### 研究笔记关联
+
+- **知识结构框架**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 完整知识结构体系定义
+- **证明图网**: [PROOF_GRAPH_NETWORK.md](../04_thinking/PROOF_GRAPH_NETWORK.md) - 形式化证明结构模板
+- **决策图网**: [DECISION_GRAPH_NETWORK.md](../04_thinking/DECISION_GRAPH_NETWORK.md) - 技术选型决策模板
+- **思维导图**: [MIND_MAP_COLLECTION.md](../04_thinking/MIND_MAP_COLLECTION.md) - 思维导图集合
+
+### 实施场景
+
+| 场景 | 实施步骤 | 参考代码 |
+| :--- | :--- | :--- |
+| **新模块知识结构** | 1. 使用 ConceptDefinition 定义核心概念<br>2. 使用批量生成器创建文档<br>3. 补充思维表征模板 | `ConceptDefinition::generate_markdown()` |
+| **已有模块补充** | 1. 使用模板生成器创建框架<br>2. 填充具体内容<br>3. 验证结构完整性 | `ModuleKnowledgeGenerator::generate_all()` |
+| **思维表征扩展** | 1. 选择合适的表征模板<br>2. 填充具体内容<br>3. 关联到知识图谱 | `ThinkingRepresentationTemplates` |
+
+---
+
 ## 📐 知识结构补充模板
 
 ### 1. 概念定义补充

@@ -8,6 +8,261 @@
 
 ---
 
+## 代码示例
+
+### 文档分类自动化脚本
+
+```rust
+//! 自动分类 docs/ 目录下的文档
+use std::collections::HashMap;
+use std::fs;
+use std::path::Path;
+
+#[derive(Debug)]
+enum DocCategory {
+    Learning,    // 学习路径
+    Reference,   // 速查参考
+    Theory,      // 形式化理论
+    Guides,      // 专题指南
+    Toolchain,   // 工具链
+    Project,     // 项目元文档
+}
+
+struct DocClassifier;
+
+impl DocClassifier {
+    fn classify_by_name(filename: &str) -> Option<DocCategory> {
+        let name = filename.to_lowercase();
+        
+        if name.contains("learning") || name.contains("path") {
+            Some(DocCategory::Learning)
+        } else if name.contains("cheatsheet") || name.contains("reference") {
+            Some(DocCategory::Reference)
+        } else if name.contains("formal") || name.contains("proof") || name.contains("theory") {
+            Some(DocCategory::Theory)
+        } else if name.contains("guide") || name.contains("usage") {
+            Some(DocCategory::Guides)
+        } else if name.contains("toolchain") || name.contains("rust_1.") {
+            Some(DocCategory::Toolchain)
+        } else if name.contains("project") || name.contains("structure") {
+            Some(DocCategory::Project)
+        } else {
+            None
+        }
+    }
+    
+    fn scan_directory(dir: &str) -> HashMap<DocCategory, Vec<String>> {
+        let mut categories: HashMap<DocCategory, Vec<String>> = HashMap::new();
+        
+        if let Ok(entries) = fs::read_dir(dir) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.extension().map_or(false, |e| e == "md") {
+                    let filename = path.file_stem()
+                        .unwrap()
+                        .to_string_lossy()
+                        .to_string();
+                    
+                    if let Some(category) = Self::classify_by_name(&filename) {
+                        categories.entry(category)
+                            .or_default()
+                            .push(filename);
+                    }
+                }
+            }
+        }
+        
+        categories
+    }
+}
+
+fn main() {
+    let categories = DocClassifier::scan_directory("docs");
+    
+    for (category, files) in &categories {
+        println!("{:?}: {} 个文档", category, files.len());
+        for file in files.iter().take(5) {
+            println!("  - {}", file);
+        }
+        if files.len() > 5 {
+            println!("  ... 等共 {} 个", files.len());
+        }
+        println!();
+    }
+}
+```
+
+### 目录重组辅助工具
+
+```rust
+//! 文档主题重组规划辅助工具
+use std::fs;
+use std::io;
+use std::path::Path;
+
+struct ReorganizationPlan {
+    /// 目标目录结构
+    target_structure: Vec<(String, Vec<String>)>,
+}
+
+impl ReorganizationPlan {
+    fn new() -> Self {
+        let structure = vec![
+            ("01_learning".to_string(), vec![
+                "LEARNING_PATH_PLANNING.md".to_string(),
+                "OFFICIAL_RESOURCES_MAPPING.md".to_string(),
+            ]),
+            ("02_reference".to_string(), vec![
+                "quick_reference/".to_string(),
+                "EDGE_CASES_AND_SPECIAL_CASES.md".to_string(),
+            ]),
+            ("03_theory".to_string(), vec![
+                "research_notes/".to_string(),
+            ]),
+            ("04_thinking".to_string(), vec![
+                "THINKING_REPRESENTATION_METHODS.md".to_string(),
+                "DECISION_GRAPH_NETWORK.md".to_string(),
+                "PROOF_GRAPH_NETWORK.md".to_string(),
+            ]),
+            ("05_guides".to_string(), vec![
+                "ASYNC_PROGRAMMING_USAGE_GUIDE.md".to_string(),
+                "THREADS_CONCURRENCY_USAGE_GUIDE.md".to_string(),
+            ]),
+            ("06_toolchain".to_string(), vec![
+                "rust_1.93_*.md".to_string(),
+            ]),
+            ("07_project".to_string(), vec![
+                "KNOWLEDGE_STRUCTURE_FRAMEWORK.md".to_string(),
+                "RUST_RELEASE_TRACKING_CHECKLIST.md".to_string(),
+            ]),
+        ];
+        
+        Self {
+            target_structure: structure,
+        }
+    }
+    
+    fn generate_plan(&self) -> String {
+        let mut output = String::from("# 文档重组执行计划\n\n");
+        
+        for (idx, (dir, files)) in self.target_structure.iter().enumerate() {
+            output.push_str(&format!("## 阶段 {}: {}\n\n", idx + 1, dir));
+            output.push_str(&format!("目标目录: `docs/{}`\n\n", dir));
+            output.push_str("包含文档:\n");
+            for file in files {
+                output.push_str(&format!("- {}\n", file));
+            }
+            output.push_str("\n");
+        }
+        
+        output
+    }
+}
+
+fn main() -> io::Result<()> {
+    let plan = ReorganizationPlan::new();
+    fs::write("docs/reorganization_plan.md", plan.generate_plan())?;
+    println!("重组计划已生成: docs/reorganization_plan.md");
+    Ok(())
+}
+```
+
+### 文件名规范化检查
+
+```rust
+//! 检查文档命名规范
+use std::fs;
+use regex::Regex;
+
+struct NamingConventionChecker {
+    issues: Vec<(String, String)>,
+}
+
+impl NamingConventionChecker {
+    fn new() -> Self {
+        Self { issues: Vec::new() }
+    }
+    
+    fn check_file(&mut self, filename: &str) {
+        // 检查混合命名
+        if filename.contains('_') && filename.contains('-') {
+            self.issues.push((
+                filename.to_string(),
+                "同时使用下划线和连字符".to_string()
+            ));
+        }
+        
+        // 检查版本号格式
+        let version_regex = Regex::new(r"RUST_1\.\d{2}").unwrap();
+        if filename.to_uppercase().contains("RUST_") 
+            && !version_regex.is_match(filename) {
+            self.issues.push((
+                filename.to_string(),
+                "版本号格式不规范，应使用 RUST_1.XX".to_string()
+            ));
+        }
+        
+        // 检查中英文混合
+        if filename.chars().any(|c| c as u32 > 127) {
+            self.issues.push((
+                filename.to_string(),
+                "文件名包含中文字符".to_string()
+            ));
+        }
+    }
+    
+    fn check_directory(&mut self, dir: &str) {
+        if let Ok(entries) = fs::read_dir(dir) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.extension().map_or(false, |e| e == "md") {
+                    if let Some(name) = path.file_stem() {
+                        self.check_file(&name.to_string_lossy());
+                    }
+                }
+            }
+        }
+    }
+    
+    fn report(&self) {
+        if self.issues.is_empty() {
+            println!("✅ 所有文档命名符合规范");
+        } else {
+            println!("⚠️ 发现 {} 个命名问题:\n", self.issues.len());
+            for (file, issue) in &self.issues {
+                println!("- {}: {}", file, issue);
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut checker = NamingConventionChecker::new();
+    checker.check_directory("docs");
+    checker.report();
+}
+```
+
+---
+
+## 形式化链接
+
+### 研究笔记关联
+
+- **知识结构**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识结构框架定义
+- **项目架构**: [PROJECT_ARCHITECTURE_GUIDE.md](./PROJECT_ARCHITECTURE_GUIDE.md) - 项目整体架构设计
+- **交叉引用**: [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) - 文档交叉引用指南
+
+### 实施场景
+
+| 阶段 | 实施步骤 | 工具/脚本 |
+| :--- | :--- | :--- |
+| **阶段 1: 索引构建** | 1. 使用分类脚本扫描现有文档<br>2. 建立主题 → 文档映射<br>3. 更新 00_MASTER_INDEX | `DocClassifier::scan_directory()` |
+| **阶段 2: 合并归档** | 1. 使用重组规划工具<br>2. 移动文件到归档目录<br>3. 更新相对链接 | `ReorganizationPlan::generate_plan()` |
+| **阶段 3: 目录重组** | 1. 检查命名规范<br>2. 创建新目录结构<br>3. 批量移动文件 | `NamingConventionChecker` |
+
+---
+
 ## 一、现状问题诊断
 
 ### 1.1 根目录扁平化 overload

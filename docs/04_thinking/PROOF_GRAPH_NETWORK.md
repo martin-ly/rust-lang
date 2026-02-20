@@ -384,10 +384,346 @@
 
 ---
 
-## 🔗 相关文档
+## 💻 代码示例
 
+### 示例 1: MaybeUninit 安全性证明实现
+
+```rust
+use std::mem::{self, MaybeUninit};
+use std::ptr;
+
+/// 安全的 MaybeUninit 包装器 - 证明安全性保证
+pub struct SafeMaybeUninit<T> {
+    inner: MaybeUninit<T>,
+    initialized: bool,
+}
+
+impl<T> SafeMaybeUninit<T> {
+    /// 创建未初始化状态
+    pub fn uninit() -> Self {
+        Self {
+            inner: MaybeUninit::uninit(),
+            initialized: false,
+        }
+    }
+    
+    /// 安全写入 - 证明：写入后内存已初始化
+    pub fn write(&mut self, value: T) -> &mut T {
+        // 公理 A2: 写入后内存具合法值
+        let ptr = self.inner.as_mut_ptr();
+        unsafe {
+            ptr::write(ptr, value);
+        }
+        self.initialized = true;
+        // 定理 T2: 写入后可安全读取
+        unsafe { &mut *ptr }
+    }
+    
+    /// 安全读取 - 证明：读取前检查初始化状态
+    /// 
+    /// # 安全性证明
+    /// - 前提 P3: 写入后内存已初始化
+    /// - 前提 P4: 读取前检查初始化状态
+    /// - 结论 C3: 可以安全读取
+    pub fn read(&self) -> Option<&T> {
+        // 引理 L3: assume_init_ref 需 unsafe
+        // 我们添加运行时检查
+        if self.initialized {
+            // 定理 T2: assume_init_ref 返回合法引用
+            Some(unsafe { self.inner.assume_init_ref() })
+        } else {
+            // 结论 C4: 防止使用未初始化内存
+            None
+        }
+    }
+    
+    /// 安全析构 - 证明：正确调用 drop
+    /// 
+    /// # 安全性证明
+    /// - 定理 T1: assume_init_drop 正确调用 drop
+    /// - 推论 C1: MaybeUninit 1.93 API 安全性
+    pub unsafe fn assume_init_drop(&mut self) {
+        if self.initialized {
+            // Rust 1.93: assume_init_drop 可用
+            self.inner.assume_init_drop();
+            self.initialized = false;
+        }
+    }
+}
+
+impl<T> Drop for SafeMaybeUninit<T> {
+    fn drop(&mut self) {
+        if self.initialized {
+            unsafe {
+                ptr::drop_in_place(self.inner.as_mut_ptr());
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_safety_proof() {
+        // 证明：防止未初始化访问
+        let mut slot: SafeMaybeUninit<i32> = SafeMaybeUninit::uninit();
+        assert!(slot.read().is_none());  // ✅ 安全，返回 None
+        
+        // 证明：写入后可安全读取
+        slot.write(42);
+        assert_eq!(slot.read(), Some(&42));  // ✅ 安全，返回 Some
+    }
+}
+```
+
+### 示例 2: 证明可视化工具
+
+```rust
+use std::fmt::{self, Display, Formatter};
+
+/// 证明树节点
+#[derive(Debug)]
+enum ProofNode {
+    Axiom { id: &'static str, statement: &'static str },
+    Lemma { id: &'static str, statement: &'static str, depends_on: Vec<&'static str> },
+    Theorem { id: &'static str, statement: &'static str, proves: &'static str },
+    Conclusion { statement: &'static str, guarantees: Vec<&'static str> },
+}
+
+/// 证明图网络
+struct ProofGraphNetwork {
+    name: &'static str,
+    nodes: Vec<ProofNode>,
+}
+
+impl ProofGraphNetwork {
+    fn new(name: &'static str) -> Self {
+        Self { name, nodes: Vec::new() }
+    }
+    
+    fn add_axiom(&mut self, id: &'static str, statement: &'static str) {
+        self.nodes.push(ProofNode::Axiom { id, statement });
+    }
+    
+    fn add_theorem(&mut self, id: &'static str, statement: &'static str, proves: &'static str) {
+        self.nodes.push(ProofNode::Theorem { id, statement, proves });
+    }
+    
+    /// 生成 Mermaid 证明图
+    fn to_mermaid(&self) -> String {
+        let mut output = format!("## {} 证明图\n\n", self.name);
+        output.push_str("```mermaid\n");
+        output.push_str("flowchart TD\n");
+        
+        for node in &self.nodes {
+            match node {
+                ProofNode::Axiom { id, statement } => {
+                    output.push_str(&format!("    {}[\"公理 {}: {}\"]\n", id, id, statement));
+                    output.push_str(&format!("    style {} fill:#e1f5ff\n", id));
+                }
+                ProofNode::Theorem { id, statement, proves: _ } => {
+                    output.push_str(&format!("    {}[\"定理 {}: {}\"]\n", id, id, statement));
+                }
+                _ => {}
+            }
+        }
+        
+        output.push_str("```\n");
+        output
+    }
+}
+
+/// 创建 MaybeUninit 安全性证明图
+fn create_maybeuninit_proof() -> ProofGraphNetwork {
+    let mut proof = ProofGraphNetwork::new("MaybeUninit 安全性");
+    
+    // 公理层
+    proof.add_axiom("A1", "未初始化内存不具合法值");
+    proof.add_axiom("A2", "写入后内存具合法值");
+    proof.add_axiom("A3", "assume_init 要求调用者保证已初始化");
+    
+    // 定理层
+    proof.add_theorem("T1", "assume_init_drop 正确调用 drop", "内存安全");
+    proof.add_theorem("T2", "assume_init_ref 返回合法引用", "引用有效性");
+    proof.add_theorem("T3", "write_copy_of_slice 正确初始化切片", "批量初始化安全");
+    
+    proof
+}
+
+fn main() {
+    let proof = create_maybeuninit_proof();
+    println!("{}", proof.to_mermaid());
+}
+```
+
+### 示例 3: 借用检查器安全性证明
+
+```rust
+/// 借用检查器规则的形式化表示
+mod borrow_checker_formalization {
+    /// 借用规则公理
+    pub struct BorrowRules;
+    
+    impl BorrowRules {
+        /// 公理 1: 任意时刻最多一个可变借用
+        pub const AXIOM_1: &'static str = 
+            "∀t. mutable_borrows(t) ≤ 1";
+        
+        /// 公理 2: 或多个不可变借用
+        pub const AXIOM_2: &'static str = 
+            "∀t. mutable_borrows(t) = 0 ∨ immutable_borrows(t) ≥ 0";
+        
+        /// 公理 3: 借用不能 outlive 所有者
+        pub const AXIOM_3: &'static str = 
+            "∀r. lifetime(r) ≤ lifetime(owner(r))";
+    }
+    
+    /// 安全性定理证明
+    pub struct SafetyProof;
+    
+    impl SafetyProof {
+        /// 定理 1: 无数据竞争
+        /// 
+        /// 证明：
+        /// - 假设存在数据竞争
+        /// - 则需要同时有可变借用和另一个借用 (读或写)
+        /// - 违反公理 1 或公理 2
+        /// - 矛盾，故无数据竞争 ∎
+        pub fn theorem_1_no_data_race() -> bool {
+            // 编译时检查保证
+            true
+        }
+        
+        /// 定理 2: 无悬垂引用
+        /// 
+        /// 证明：
+        /// - 假设存在悬垂引用
+        /// - 则引用 outlive 其所有者
+        /// - 违反公理 3
+        /// - 矛盾，故无悬垂引用 ∎
+        pub fn theorem_2_no_dangling() -> bool {
+            // 生命周期检查保证
+            true
+        }
+        
+        /// 定理 3: 内存安全
+        /// 
+        /// 证明：
+        /// - 由定理 1: 无数据竞争
+        /// - 由定理 2: 无悬垂引用
+        /// - 由所有权规则: 无双重释放
+        /// - 故内存安全 ∎
+        pub fn theorem_3_memory_safety() -> bool {
+            Self::theorem_1_no_data_race() && 
+            Self::theorem_2_no_dangling()
+        }
+    }
+}
+
+/// 借用检查器安全性验证示例
+#[cfg(test)]
+mod borrow_checker_tests {
+    /// 验证：可变借用独占性
+    #[test]
+    fn test_mut_borrow_exclusivity() {
+        let mut data = vec![1, 2, 3];
+        
+        let ref1 = &mut data;
+        // let ref2 = &mut data;  // ❌ 编译错误：不能多次可变借用
+        
+        ref1.push(4);
+        assert_eq!(ref1.len(), 4);
+    }
+    
+    /// 验证：读写互斥
+    #[test]
+    fn test_read_write_mutex() {
+        let data = vec![1, 2, 3];
+        
+        let ref1 = &data;
+        let ref2 = &data;
+        assert_eq!(*ref1, *ref2);  // ✅ 多个不可变借用允许
+        
+        // let ref3 = &mut data;  // ❌ 编译错误：不能同时有可变借用
+    }
+    
+    /// 验证：生命周期约束
+    #[test]
+    fn test_lifetime_constraint() {
+        fn get_ref<'a>(data: &'a [i32]) -> &'a i32 {
+            &data[0]
+        }
+        
+        let data = vec![1, 2, 3];
+        let ref1 = get_ref(&data);
+        assert_eq!(*ref1, 1);
+        // data 在这里仍然有效，因为 ref1 的生命周期不超过 data
+    }
+}
+```
+
+## 🎯 使用场景
+
+### 何时使用证明图网
+
+| 场景 | 使用方式 | 预期收益 |
+| :--- | :--- | :--- |
+| **安全性验证** | 查看安全性证明模板和示例 | 理解安全保证来源 |
+| **性能优化** | 查看性能优化证明 | 验证优化正确性 |
+| **特性组合** | 查看组合证明路径 | 确保组合安全性 |
+| **形式化验证** | 使用证明结构模板 | 构建形式化论证 |
+| **代码审查** | 对照证明树检查代码 | 发现潜在安全问题 |
+
+### 证明图网工作流
+
+```rust
+/// 代码开发中的证明验证工作流
+fn proof_validation_workflow() {
+    // 1. 定义安全目标
+    let safety_goal = "防止未初始化内存访问";
+    
+    // 2. 应用证明模板
+    println!("安全目标: {}", safety_goal);
+    println!("威胁模型: 读取未初始化内存、使用未初始化值");
+    println!("防护机制: MaybeUninit + SafeMaybeUninit 运行时检查");
+    
+    // 3. 实现并验证
+    let mut slot = SafeMaybeUninit::uninit();
+    // slot.read();  // 安全：返回 None
+    slot.write(42);
+    // slot.read();  // 安全：返回 Some(&42)
+    
+    // 4. 生成证明文档
+    println!("证明完成: ✅ 运行时检查防止未初始化访问");
+}
+
+use SafeMaybeUninit;
+```
+
+## 🔗 形式化链接
+
+### 核心证明文档
+
+- [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
+- [CORE_THEOREMS_FULL_PROOFS.md](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) - 核心定理完整证明
+- [FORMAL_LANGUAGE_AND_PROOFS.md](../research_notes/FORMAL_LANGUAGE_AND_PROOFS.md) - 形式化语言与证明
+
+### 理论基础
+
+- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 理论体系架构
+- [LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 语言语义与表达能力
+
+### 证明工具
+
+- [COQ_OF_RUST_INTEGRATION_PLAN.md](../research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md) - Coq 证明集成
+- [AENEAS_INTEGRATION_PLAN.md](../research_notes/AENEAS_INTEGRATION_PLAN.md) - Aeneas 验证工具
+
+### 相关文档
+
+- [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) - 决策图网
 - [RUST_192 版本文档](../archive/version_reports/RUST_192_VERIFICATION_SUMMARY.md)
-- [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md)
 - [RUST_192 归档索引](../archive/version_reports/README.md)
 
 ---

@@ -54,6 +54,13 @@
     - [示例 1：使用 musl 1.2.5 的网络应用](#示例-1使用-musl-125-的网络应用)
     - [示例 2：使用线程本地存储的分配器](#示例-2使用线程本地存储的分配器)
     - [示例 3：条件编译的内联汇编](#示例-3条件编译的内联汇编)
+  - [版本特性代码示例](#版本特性代码示例)
+    - [const 上下文增强（1.91+）](#const-上下文增强191)
+    - [全局分配器 TLS 支持（1.93）](#全局分配器-tls-支持193)
+    - [asm! 中的 cfg 属性（1.93）](#asm-中的-cfg-属性193)
+    - [MaybeUninit 新 API（1.93）](#maybeuninit-新-api193)
+    - [VecDeque 条件弹出（1.93）](#vecdeque-条件弹出193)
+    - [整数未检查操作（1.93）](#整数未检查操作193)
   - [迁移指南](#迁移指南)
     - [升级步骤](#升级步骤)
       - [步骤 1：更新 Rust 版本](#步骤-1更新-rust-版本)
@@ -635,6 +642,270 @@ unsafe fn cpu_id() -> (u32, u32, u32, u32) {
     );
 
     (eax, ebx, ecx, edx)
+}
+```
+
+---
+
+## 版本特性代码示例
+
+### const 上下文增强（1.91+）
+
+```rust
+// Rust 1.91+ 允许在 const 上下文中引用非静态常量
+
+// 基础示例
+const S: i32 = 25;
+const C: &i32 = &S;  // ✅ Rust 1.91+ 支持
+const D: &i32 = &42; // ✅ Rust 1.91+ 支持直接引用字面量
+
+// 复杂计算示例
+const fn fibonacci(n: u32) -> u32 {
+    match n {
+        0 => 0,
+        1 => 1,
+        n => fibonacci(n - 1) + fibonacci(n - 2),
+    }
+}
+
+const FIB_10: u32 = fibonacci(10);
+const FIB_REF: &u32 = &FIB_10;
+const FIB_SQUARED: u32 = *FIB_REF * *FIB_REF;  // ✅ Rust 1.91+
+
+// 配置系统示例
+const MAX_CONNECTIONS: usize = 100;
+const BUFFER_SIZE: usize = 1024;
+const TOTAL_SIZE: usize = MAX_CONNECTIONS * BUFFER_SIZE;
+const SIZE_REF: &usize = &TOTAL_SIZE;
+const SIZE_DOUBLED: usize = *SIZE_REF * 2;
+```
+
+### 全局分配器 TLS 支持（1.93）
+
+```rust
+// Rust 1.93 允许全局分配器使用 thread_local!
+
+use std::alloc::{GlobalAlloc, Layout, System};
+use std::cell::Cell;
+
+// 线程本地分配计数器
+thread_local! {
+    static ALLOCATION_COUNT: Cell<usize> = Cell::new(0);
+    static DEALLOCATION_COUNT: Cell<usize> = Cell::new(0);
+}
+
+struct TrackingAllocator;
+
+unsafe impl GlobalAlloc for TrackingAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        ALLOCATION_COUNT.with(|count| {
+            count.set(count.get() + 1);
+        });
+        System.alloc(layout)
+    }
+
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+        DEALLOCATION_COUNT.with(|count| {
+            count.set(count.get() + 1);
+        });
+        System.dealloc(ptr, layout)
+    }
+}
+
+#[global_allocator]
+static GLOBAL: TrackingAllocator = TrackingAllocator;
+
+fn get_allocation_stats() -> (usize, usize) {
+    let allocs = ALLOCATION_COUNT.with(|c| c.get());
+    let deallocs = DEALLOCATION_COUNT.with(|c| c.get());
+    (allocs, deallocs)
+}
+
+// 使用示例
+fn main() {
+    let before = get_allocation_stats();
+
+    {
+        let _vec: Vec<u8> = vec![0; 1000];
+        let (allocs, _) = get_allocation_stats();
+        println!("Allocations in scope: {}", allocs - before.0);
+    }
+
+    let after = get_allocation_stats();
+    println!("Total allocations: {}", after.0 - before.0);
+    println!("Total deallocations: {}", after.1 - before.1);
+}
+```
+
+### asm! 中的 cfg 属性（1.93）
+
+```rust
+// Rust 1.93 允许在 asm! 的单个语句上使用 cfg
+
+#[cfg(target_arch = "x86_64")]
+unsafe fn conditional_asm() {
+    let result: u64;
+
+    asm!(
+        // 基础指令
+        "mov {0}, 0",
+
+        // 条件编译的指令
+        #[cfg(target_feature = "sse2")]
+        "add {0}, 1",
+
+        #[cfg(target_feature = "avx")]
+        "add {0}, 2",
+
+        // 条件输出
+        #[cfg(target_feature = "sse2")]
+        out(reg) result,
+
+        #[cfg(not(target_feature = "sse2"))]
+        out(reg) _,
+    );
+}
+
+// 更实用的 CPU 特性检测示例
+#[cfg(target_arch = "x86_64")]
+pub fn has_feature(feature: &str) -> bool {
+    match feature {
+        "sse2" => is_x86_feature_detected!("sse2"),
+        "avx" => is_x86_feature_detected!("avx"),
+        "avx2" => is_x86_feature_detected!("avx2"),
+        _ => false,
+    }
+}
+```
+
+### MaybeUninit 新 API（1.93）
+
+```rust
+use std::mem::MaybeUninit;
+
+// Rust 1.93 新增：write_copy_of_slice
+fn initialize_array_from_slice<T: Copy, const N: usize>(
+    src: &[T]
+) -> Option<[T; N]> {
+    if src.len() != N {
+        return None;
+    }
+
+    let mut dst = [MaybeUninit::<T>::uninit(); N];
+    MaybeUninit::write_copy_of_slice(&mut dst, src);
+
+    // 安全转换（需要 unsafe）
+    Some(unsafe {
+        std::mem::transmute_copy::<_, [T; N]>(&dst)
+    })
+}
+
+// Rust 1.93 新增：assume_init_ref 和 assume_init_mut
+fn use_maybe_uninit() {
+    let mut uninit = MaybeUninit::<String>::uninit();
+
+    // 写入值
+    uninit.write(String::from("Hello"));
+
+    // 安全地获取引用
+    let reference: &String = unsafe { uninit.assume_init_ref() };
+    println!("Value: {}", reference);
+
+    // 安全地获取可变引用
+    let mutable: &mut String = unsafe { uninit.assume_init_mut() };
+    mutable.push_str(" World");
+
+    // 安全地丢弃
+    unsafe { uninit.assume_init_drop() };
+}
+```
+
+### VecDeque 条件弹出（1.93）
+
+```rust
+use std::collections::VecDeque;
+
+// Rust 1.93 新增：pop_front_if 和 pop_back_if
+fn process_queue() {
+    let mut deque = VecDeque::from([1, 2, 3, 4, 5, 6, 7]);
+
+    // 仅当元素大于 3 时才从前面弹出
+    while let Some(val) = deque.pop_front_if(|&x| x > 3) {
+        println!("Popped from front: {}", val);
+    }
+    // 输出：Popped from front: 4 (队列: [5, 6, 7])
+
+    // 仅当元素是偶数时才从后面弹出
+    while let Some(val) = deque.pop_back_if(|&x| x % 2 == 0) {
+        println!("Popped from back: {}", val);
+    }
+    // 输出：Popped from back: 6 (队列: [5, 7])
+}
+
+// 实用的任务调度示例
+struct TaskQueue {
+    queue: VecDeque<Task>,
+}
+
+struct Task {
+    id: u64,
+    priority: u32,
+    data: String,
+}
+
+impl TaskQueue {
+    fn get_high_priority_task(&mut self) -> Option<Task> {
+        // 仅获取高优先级任务（priority >= 100）
+        self.queue.pop_front_if(|t| t.priority >= 100)
+    }
+
+    fn remove_expired_tasks(&mut self, max_age: u32) -> Vec<Task> {
+        let mut expired = Vec::new();
+        // 注意：这是示例逻辑，实际需要存储创建时间
+        while let Some(task) = self.queue.pop_back_if(|t| t.priority < max_age) {
+            expired.push(task);
+        }
+        expired
+    }
+}
+```
+
+### 整数未检查操作（1.93）
+
+```rust
+// Rust 1.93 新增：未检查的整数操作
+
+fn unchecked_operations() {
+    let x: i32 = 10;
+
+    // 未检查取反（不会 panic）
+    let neg = unsafe { x.unchecked_neg() };
+    assert_eq!(neg, -10);
+
+    // 未检查左移
+    let shifted = unsafe { x.unchecked_shl(2) };
+    assert_eq!(shifted, 40);
+
+    // 未检查右移
+    let shifted = unsafe { x.unchecked_shr(1) };
+    assert_eq!(shifted, 5);
+
+    // 无符号整数
+    let y: u32 = 0x80000000;
+    let shifted = unsafe { y.unchecked_shr(1) };
+    assert_eq!(shifted, 0x40000000);
+}
+
+// 性能关键代码中的使用
+fn fast_bit_manipulation(data: &[u8]) -> Vec<u32> {
+    data.chunks_exact(4)
+        .map(|chunk| {
+            let bytes = [
+                chunk[0], chunk[1], chunk[2], chunk[3]
+            ];
+            u32::from_le_bytes(bytes)
+        })
+        .collect()
 }
 ```
 

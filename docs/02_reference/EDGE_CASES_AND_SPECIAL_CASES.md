@@ -47,7 +47,34 @@
     - [BTreeMap::append 行为变更](#btreemapappend-行为变更)
     - [Copy specialization 移除](#copy-specialization-移除)
     - [vec::IntoIter 与 RefUnwindSafe](#vecintoiter-与-refunwindsafe)
+  - [更多边界情况代码示例](#更多边界情况代码示例)
+    - [所有权边界](#所有权边界)
+      - [部分移动后使用](#部分移动后使用)
+      - [Copy 类型的隐式复制](#copy-类型的隐式复制)
+    - [生命周期边界](#生命周期边界)
+      - [生命周期省略规则边界](#生命周期省略规则边界)
+      - [NLL (Non-Lexical Lifetimes) 边界](#nll-non-lexical-lifetimes-边界)
+    - [泛型边界](#泛型边界)
+      - [递归类型大小边界](#递归类型大小边界)
+      - [零大小类型 (ZST)](#零大小类型-zst)
+    - [模式匹配边界](#模式匹配边界)
+      - [穷尽性检查边界](#穷尽性检查边界)
+    - [并发边界](#并发边界)
+      - [死锁边界](#死锁边界)
+      - [Send/Sync 自动派生边界](#sendsync-自动派生边界)
+    - [unsafe 边界](#unsafe-边界)
+      - [裸指针解引用边界](#裸指针解引用边界)
+      - [未对齐指针边界](#未对齐指针边界)
+    - [迭代器边界](#迭代器边界)
+      - [迭代器失效边界](#迭代器失效边界)
+  - [🔗 形式化边界分析](#-形式化边界分析)
+    - [所有权与借用边界](#所有权与借用边界)
+    - [类型系统边界](#类型系统边界)
+    - [并发边界](#并发边界-1)
+    - [unsafe 边界](#unsafe-边界-1)
   - [相关文档](#相关文档)
+    - [速查卡](#速查卡)
+    - [形式化文档](#形式化文档)
 
 ---
 
@@ -362,8 +389,312 @@ assert_unwind_safe::<IntoIter<*mut i32>>();  // 1.93 可行
 
 ---
 
+## 更多边界情况代码示例
+
+### 所有权边界
+
+#### 部分移动后使用
+
+```rust
+struct Person {
+    name: String,
+    age: u32,
+}
+
+fn partial_move() {
+    let person = Person {
+        name: String::from("Alice"),
+        age: 30,
+    };
+
+    // 部分移动
+    let name = person.name;
+
+    // ❌ 编译错误：person 部分移动，不能整体使用
+    // println!("{:?}", person);
+
+    // ✅ 可以使用未移动的字段
+    println!("年龄: {}", person.age);
+
+    // ✅ 但不能再次移动已移动的字段
+    // let name2 = person.name;  // 错误
+}
+```
+
+#### Copy 类型的隐式复制
+
+```rust
+fn copy_behavior() {
+    let x = 42i32;
+    let y = x;  // 复制，不是移动
+    let z = x;  // 仍然可用
+
+    // 所有变量都有效
+    println!("{} {} {}", x, y, z);
+}
+```
+
+### 生命周期边界
+
+#### 生命周期省略规则边界
+
+```rust
+// 省略规则适用的情况
+fn first_word(s: &str) -> &str {  // 输入生命周期 = 输出生命周期
+    &s[0..1]
+}
+
+// 省略规则不适用的情况（需要显式标注）
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+
+// 不同的生命周期参数
+fn mix_lifetimes<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
+    x  // 只能返回 x，因为 y 的生命周期可能更短
+}
+```
+
+#### NLL (Non-Lexical Lifetimes) 边界
+
+```rust
+fn nll_example() {
+    let mut x = String::from("hello");
+    let y = &x;  // 不可变借用开始
+    println!("{}", y);  // 最后一次使用 y
+    // y 的借用在这里结束（NLL），不是作用域结束
+
+    let z = &mut x;  // ✅ 现在可以可变借用
+    z.push_str(" world");
+}
+```
+
+### 泛型边界
+
+#### 递归类型大小边界
+
+```rust
+// ❌ 编译错误：递归类型大小无限
+// enum List {
+//     Cons(i32, List),
+//     Nil,
+// }
+
+// ✅ 使用 Box 解决
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
+}
+
+fn recursive_type() {
+    let list = List::Cons(1, Box::new(List::Cons(2, Box::new(List::Nil))));
+}
+```
+
+#### 零大小类型 (ZST)
+
+```rust
+use std::mem::size_of;
+
+struct ZeroSized;
+enum Void {}
+
+fn zero_sized_types() {
+    assert_eq!(size_of::<ZeroSized>(), 0);
+    assert_eq!(size_of::<()>(), 0);  // 单元类型
+    assert_eq!(size_of::<[(); 1000]>(), 0);  // 1000 个 ZST 数组仍是 ZST
+}
+```
+
+### 模式匹配边界
+
+#### 穷尽性检查边界
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+fn exhaustive_match(x: Option<i32>) -> i32 {
+    match x {
+        Some(v) => v,
+        None => 0,
+    }  // ✅ 穷尽
+}
+
+// 使用 _ 通配符
+fn wildcard_match(x: Option<i32>) -> i32 {
+    match x {
+        Some(v) => v,
+        _ => 0,  // 匹配所有其他情况
+    }
+}
+
+// @ 绑定
+fn at_binding(x: Option<i32>) -> i32 {
+    match x {
+        v @ Some(_) => {
+            println!("有值: {:?}", v);
+            v.unwrap()
+        }
+        None => 0,
+    }
+}
+```
+
+### 并发边界
+
+#### 死锁边界
+
+```rust
+use std::sync::{Mutex, MutexGuard};
+
+fn deadlock_risk() {
+    let m1 = Mutex::new(0);
+    let m2 = Mutex::new(0);
+
+    // 线程 1
+    let _guard1 = m1.lock().unwrap();
+    // ... 某些操作
+    // let _guard2 = m2.lock().unwrap();  // 潜在死锁风险
+
+    // 线程 2 如果以相反顺序获取锁，会导致死锁
+}
+
+// ✅ 解决方案：一致的加锁顺序或使用 std::sync::LockGuard
+```
+
+#### Send/Sync 自动派生边界
+
+```rust
+use std::rc::Rc;
+use std::sync::Arc;
+
+fn auto_trait_bounds() {
+    // Rc 不是 Send
+    let rc = Rc::new(42);
+    // std::thread::spawn(move || {
+    //     println!("{}", rc);  // 编译错误：Rc 不是 Send
+    // });
+
+    // Arc 是 Send
+    let arc = Arc::new(42);
+    std::thread::spawn(move || {
+        println!("{}", arc);  // ✅ 正确
+    });
+}
+```
+
+### unsafe 边界
+
+#### 裸指针解引用边界
+
+```rust
+fn raw_pointer_edges() {
+    let mut x = 42;
+    let r = &mut x as *mut i32;
+
+    // ✅ 安全的裸指针创建
+    unsafe {
+        *r = 100;  // 解引用
+    }
+
+    // 空指针检查（Rust 1.93 deref_nullptr lint）
+    let null_ptr: *const i32 = std::ptr::null();
+    unsafe {
+        // *null_ptr;  // ❌ UB！Rust 1.93 默认 deny
+    }
+}
+```
+
+#### 未对齐指针边界
+
+```rust
+fn unaligned_pointer() {
+    let bytes: [u8; 8] = [0; 8];
+
+    // ❌ 可能未对齐
+    // let ptr = bytes.as_ptr() as *const u64;
+    // unsafe { *ptr; }  // UB 如果未对齐
+
+    // ✅ 使用 read_unaligned
+    let ptr = bytes.as_ptr() as *const u64;
+    unsafe {
+        let val = ptr.read_unaligned();  // 安全地读取未对齐数据
+    }
+}
+```
+
+### 迭代器边界
+
+#### 迭代器失效边界
+
+```rust
+fn iterator_invalidation() {
+    let mut v = vec![1, 2, 3];
+
+    // ❌ 编译错误：不能在使用迭代器时修改集合
+    // for x in &v {
+    //     v.push(*x);  // 错误！
+    // }
+
+    // ✅ 解决方案：收集后再修改
+    let to_add: Vec<_> = v.iter().copied().collect();
+    v.extend(to_add);
+}
+```
+
+---
+
+## 🔗 形式化边界分析
+
+### 所有权与借用边界
+
+| 边界情况 | 形式化规则 | 相关文档 |
+| :--- | :--- | :--- |
+| 部分移动 | $\Omega(\text{field}) = \text{Moved}$，结构体不能整体使用 | [ownership_model](../research_notes/formal_methods/ownership_model.md#示例-8-复杂所有权场景---结构体字段移动) |
+| 复制语义 | $\Gamma(y) = \text{copy}(\Gamma(x))$，原变量仍有效 | [ownership_model](../research_notes/formal_methods/ownership_model.md#规则-4-复制语义) |
+| NLL | $\text{Scope}(r) = [t_1, t_{\text{last\_use}}]$ | [lifetime_formalization](../research_notes/formal_methods/lifetime_formalization.md) |
+
+### 类型系统边界
+
+| 边界情况 | 形式化规则 | 相关文档 |
+| :--- | :--- | :--- |
+| 递归类型 | 需满足 $\text{size\_of}(T) < \infty$ | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
+| ZST | $\text{size\_of}(T) = 0$ | [Rust Reference](https://doc.rust-lang.org/reference/dynamically-sized-types.html) |
+| 生命周期子类型 | $\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$ | [lifetime_formalization](../research_notes/formal_methods/lifetime_formalization.md#定义-14-生命周期子类型) |
+
+### 并发边界
+
+| 边界情况 | 形式化规则 | 相关文档 |
+| :--- | :--- | :--- |
+| Send 边界 | $T: \text{Send} \rightarrow \text{可以跨线程转移}$ | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md#defs-send1send-sync1sendsync-形式化) |
+| Sync 边界 | $T: \text{Sync} \leftrightarrow \&T: \text{Send}$ | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md#sendsync-关系) |
+| 数据竞争 | $\text{DataRaceFree}(P)$ 编译期保证 | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由) |
+
+### unsafe 边界
+
+| 边界情况 | 形式化规则 | 相关文档 |
+| :--- | :--- | :--- |
+| 裸指针 | $\text{deref}(p)$ 合法仅当 $\text{nonnull}(p)$ | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md#def-raw1-裸指针与-deref_nullptr) |
+| 未对齐访问 | 需使用 `read_unaligned` | [Rust Reference](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) |
+| FFI 边界 | `extern` 函数类型布局一致 | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md#def-extern1-extern-abi-边界) |
+
+---
+
 ## 相关文档
+
+### 速查卡
 
 - [集合与迭代器速查卡](./quick_reference/collections_iterators_cheatsheet.md)
 - [算法速查卡](./quick_reference/algorithms_cheatsheet.md)
 - [线程与并发速查卡](./quick_reference/threads_concurrency_cheatsheet.md)
+- [所有权速查卡](./quick_reference/ownership_cheatsheet.md)
+
+### 形式化文档
+
+- [所有权模型形式化](../research_notes/formal_methods/ownership_model.md)
+- [借用检查器证明](../research_notes/formal_methods/borrow_checker_proof.md)
+- [生命周期形式化](../research_notes/formal_methods/lifetime_formalization.md)
+- [Send/Sync 形式化](../research_notes/formal_methods/send_sync_formalization.md)
