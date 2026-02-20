@@ -9,6 +9,14 @@
 
 ---
 
+## Aeneas 介绍
+
+- **开发**: EPFL (École Polytechnique Fédérale de Lausanne)
+- **网址**: https://github.com/AeneasVerif/aeneas
+- **论文**: ICFP 2022 - "Aeneas: Rust Verification by Functional Translation"
+
+---
+
 ## 一、Aeneas 概述
 
 | 维度 | 说明 |
@@ -104,6 +112,178 @@ fn main() {
 - [ ] 至少 1 个示例程序经 Aeneas 翻译并验证通过
 - [ ] 本项目至少 1 个定理（如 ownership T2）在证明助手中对应命题成立
 - [x] 映射文档更新至 FORMAL_VERIFICATION_GUIDE（✅ 已添加入口与工具链扩展任务）
+
+---
+
+## Aeneas 理论基础
+
+### Characteristic Prophecy Variables (CPV)
+
+Aeneas使用**预言变量(Prophecy Variables)**来模拟Rust的可变引用(`&mut T`)。在函数式翻译中，可变引用难以直接表示，因为函数式语言通常不支持可变性。
+
+**核心思想**:
+- 预言变量用于**预测未来的值**(predict future values)
+- 当创建可变借用 `&mut x` 时，引入一个预言变量 `π` 代表 `x` 在借用结束后的最终值
+- 这允许在纯函数式设置中模拟可变的副作用
+
+**形式化表示**:
+```
+let r = &mut x;  // 创建预言变量 π，r 指向 (current, π)
+*r = new_val;    // 更新当前值，π 保持不变
+// 借用结束: x 的值变为 π
+```
+
+**与所有权模型的联系**:
+- 预言变量保持了借用规则的形式化语义
+- 与 [ownership_model](./formal_methods/ownership_model.md) 中的规则 6-8 兼容
+
+### borrow_generated_from 关系
+
+**borrow_generated_from** 是Aeneas中用于追踪借用来源的形式化关系。
+
+**定义**:
+- `borrow_generated_from(b, x)` 表示借用 `b` 是从变量 `x` 生成的
+- 这是一个**形式化借用依赖**关系，用于验证借用的有效性
+
+**性质**:
+1. **传递性**: 若 `borrow_generated_from(b1, b2)` 且 `borrow_generated_from(b2, x)`，则 `borrow_generated_from(b1, x)`
+2. **有效性**: `borrow_generated_from(b, x)` 蕴含 `x` 在借用创建点存活
+3. **唯一性**: 每个借用有唯一的生成源
+
+**形式化与本文档的对应**:
+- 与 [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 中的 Def 1.3（借用有效性）对应
+- 与 Axiom 3（借用有效性保持）兼容
+
+### 函数式翻译
+
+Aeneas的核心贡献是将Rust代码**翻译到纯函数式语言**：
+
+**翻译过程**:
+```
+Rust MIR/THIR → Aeneas IL → Coq/HOL4/Lean
+```
+
+**关键转换**:
+| Rust 特性 | 函数式表示 | 说明 |
+|:---|:---|:---|
+| `let x = v;` | `let x = v in ...` | 标准 let-binding |
+| `let y = x;` (移动) | `let y = x in (x = ⊥; ...)` | 原变量标记为未定义 |
+| `&mut x` | `(x, π)` 对 | 当前值 + 预言变量 |
+| `*r = v` | 返回更新后的状态 | 函数式状态传递 |
+| 函数调用 | 显式状态传递 | 输入状态 → 输出状态 |
+
+**类型保持**:
+- 翻译保持Rust的类型结构
+- 所有权信息编码在类型中
+- 借用规则通过类型系统强制执行
+
+### 支持的验证后端
+
+Aeneas支持多个定理证明器后端：
+
+| 后端 | 特点 | 适用场景 |
+|:---|:---|:---|
+| **Coq** | 成熟的生态系统，Iris框架 | 与RustBelt集成 |
+| **HOL4** | 经典高阶逻辑 | 教育、研究 |
+| **Lean** | 现代证明助手，元编程强 | 新兴项目 |
+| **F\*** | 依赖类型，SMT自动化 | 自动化验证 |
+
+**推荐选择**:
+- 对于与 [RustBelt](./formal_methods/ownership_model.md#rustbelt) 对比研究：选择 **Coq**
+- 对于自动化验证：选择 **F\***
+- 对于现代证明开发：选择 **Lean**
+
+### 与RustBelt的对比
+
+| 特性 | RustBelt | Aeneas |
+|:---|:---|:---|
+| **方法** | 分离逻辑 (Iris) | 函数式翻译 |
+| **工具** | Coq (Iris) | Coq/HOL4/Lean/F\* |
+| **范围** | Unsafe安全验证 | Safe Rust功能正确性 |
+| **重点** | 内存安全 | 功能正确性 |
+| **证明负担** | 较高（手动分离逻辑） | 较低（自动化翻译） |
+| **处理借用** | 复杂分离逻辑推理 | 预言变量简化 |
+| **处理Unsafe** | 支持 | 不支持（Safe Rust子集） |
+| **适用场景** | 标准库验证 | 应用代码验证 |
+
+**互补性**:
+- RustBelt 验证 Unsafe 代码的**安全抽象**
+- Aeneas 验证 Safe Rust 代码的**功能正确性**
+- 两者结合覆盖 Rust 全生态
+
+---
+
+## 与项目文档的整合
+
+### 形式化方法整合
+
+#### 与 ownership_model.md 的整合
+
+需要在 [ownership_model.md](./formal_methods/ownership_model.md) 中添加Aeneas引用：
+
+1. **理论基础章节**: 添加"Aeneas 函数式翻译方法"
+2. **所有权规则**: 对比 CPV 与所有权环境 Ω
+3. **移动语义**: 与函数式状态传递对应
+4. **参考文献**: 添加 ICFP 2022 论文
+
+具体添加内容见 [ownership_model.md](./formal_methods/ownership_model.md) §Aeneas 函数式翻译方法。
+
+#### 与 borrow_checker_proof.md 的整合
+
+需要在 [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) 中添加：
+
+1. **对比分析**: Aeneas 借用处理 vs 传统借用检查
+2. **borrow_generated_from**: 与 Def 1.3（借用有效性）的关系
+3. **预言变量**: 与 Axiom 3（借用有效性保持）的对应
+4. **数据竞争自由**: 两种方法的路径对比
+
+具体添加内容见 [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) §与Aeneas对比。
+
+### 类型理论整合
+
+**函数式翻译与类型保持**:
+
+Aeneas的翻译保持类型结构，与 [type_system_foundations](./type_theory/type_system_foundations.md) 的形式化对应：
+
+| 类型理论概念 | Rust 形式 | Aeneas 翻译 |
+|:---|:---|:---|
+| 线性类型 | `String`, `Vec<T>` | 单射函数参数 |
+| 仿射类型 | 大多数 Owned 类型 | 消耗性参数 |
+| 相关类型 | `Copy` trait 类型 | 普通函数参数 |
+| 引用类型 | `&T`, `&mut T` | 值对 + 预言变量 |
+| 生命周期 | `'a` | 隐式在借用关系中 |
+
+**整合建议**:
+- 在 [type_system_foundations](./type_theory/type_system_foundations.md) 添加"函数式视角"小节
+- 对比 Rust 类型系统与函数式翻译的对应
+- 参考 Aeneas ICFP 2022 论文的类型系统章节
+
+### 验证工具链整合
+
+**与现有工具链的关系**:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Rust 验证工具链                           │
+├─────────────┬─────────────┬─────────────┬───────────────────┤
+│   Miri      │   Kani      │  Prusti     │     Aeneas        │
+│  (运行时)    │  (模型检查)  │ (演绎验证)   │  (函数式翻译)      │
+├─────────────┼─────────────┼─────────────┼───────────────────┤
+│ UB检测      │  属性验证   │  契约验证   │  定理证明器验证   │
+│ 借用检查    │  内存安全   │  预/后置条件 │  功能正确性       │
+├─────────────┴─────────────┴─────────────┴───────────────────┤
+│ 与本文档整合:                                               │
+│ • ownership_model.md: 所有权语义 → Miri/Kani/Prusti/Aeneas │
+│ • borrow_checker_proof.md: 借用规则 → 所有工具             │
+│ • type_system_foundations.md: 类型系统 → 所有工具          │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**推荐工作流**:
+1. 使用 **Miri** 检测 UB 和借用违规
+2. 使用 **Kani** 验证关键属性（如边界检查）
+3. 使用 **Prusti** 验证函数契约
+4. 使用 **Aeneas** 验证功能正确性（高保证需求）
 
 ---
 

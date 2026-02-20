@@ -53,6 +53,7 @@
   - [unsafe 契约与 borrow/ownership 衔接（Phase 3）](#unsafe-契约与-borrowownership-衔接phase-3)
   - [控制流与借用衔接（Phase 5）](#控制流与借用衔接phase-5)
   - [FFI、extern、C variadic、? 操作符（Phase 6）](#ffiexternc-variadic-操作符phase-6)
+  - [与 Aeneas 对比](#与-aeneas-对比)
   - [📖 参考文献](#-参考文献)
     - [学术论文（国际权威）](#学术论文国际权威)
     - [官方文档](#官方文档)
@@ -1108,6 +1109,187 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 **Def QUERY1（? 操作符）**：`e?` 为错误传播语法糖；`e: Result<T, E>` 或 `Option<T>`；`Ok(v)/Some(v)` 提取值，`Err(e)/None` 早期返回。形式化：$\text{query}(e) \equiv \text{match } e \text{ with Ok/Some} \rightarrow v \mid \text{Err/None} \rightarrow \text{return}$。
 
 **定理 QUERY-T1**：`?` 与借用：`e` 在 `?` 前求值完成，借用可结束；`?` 所在函数返回类型与 `e` 的 `E` 相容；不影响 [borrow_checker_proof](borrow_checker_proof.md) Axiom 1、2。
+
+---
+
+## 与 Aeneas 对比
+
+[Aeneas](https://github.com/AeneasVerif/aeneas) 是 EPFL 开发的 Safe Rust 验证工具，采用**函数式翻译**方法。本节对比 Aeneas 与本文的借用检查器形式化。
+
+### 方法对比
+
+| 特性 | 本文形式化 (分离逻辑) | Aeneas (函数式翻译) |
+|:---|:---|:---|
+| **基础理论** | 分离逻辑 (Separation Logic) | 函数式语义 + 预言变量 |
+| **借用表示** | 借用状态 $\mathcal{S} = (I, M, T)$ | 预言变量对 `(value, prophecy)` |
+| **可变引用** | Axiom 1-2 (互斥约束) | Characteristic Prophecy Variables |
+| **有效性检查** | Def 1.3 (借用有效性) | `borrow_generated_from` 关系 |
+| **后端工具** | 分离逻辑推理 | Coq/HOL4/Lean/F\* |
+
+### 可变借用的两种视角
+
+#### 本文视角：分离逻辑
+
+可变借用的唯一性通过分离逻辑的互斥约束表达：
+
+```
+Axiom 1: 同一时间只能有一个可变借用指向同一内存
+Axiom 2: 可变借用与不可变借用互斥
+```
+
+**形式化**:
+$$
+\forall p, m: |\{b \mid \text{Active}(b, p) \land T(b) = \text{Mutable} \land \text{Target}(b) = m\}| \leq 1
+$$
+
+#### Aeneas 视角：预言变量
+
+可变借用通过**预言变量**模拟：
+
+```rust
+// Rust
+let r = &mut x;
+*r = new_val;
+```
+
+```coq
+(* Aeneas 翻译 *)
+let (cur, prophecy) := mk_mut_borrow x in
+let cur' := write cur new_val in
+let x' := finalize_borrow (cur', prophecy) in
+...
+```
+
+**核心洞察**:
+- 可变借用的"副作用"被翻译为**显式状态传递**
+- 预言变量 `prophecy` 代表借用结束后 `x` 的值
+- 纯函数式语义保持 Rust 的借用规则
+
+### borrow_generated_from 与借用有效性
+
+#### Aeneas: borrow_generated_from
+
+```
+borrow_generated_from(b, x) ≡ 借用 b 从变量 x 生成
+```
+
+**性质**:
+- 追踪借用的来源
+- 保证借用的目标在创建点存活
+- 形式化借用依赖
+
+#### 本文: Def 1.3 (借用有效性)
+
+$$
+\text{Valid}(b, p) \leftrightarrow \text{Lifetime}(b) \subseteq \text{Scope}(b) \land \text{Alive}(\text{Target}(b), p)
+$$
+
+**对应关系**:
+
+| Aeneas | 本文 | 关系 |
+|:---|:---|:---|
+| `borrow_generated_from(b, x)` | $\text{Target}(b) = x$ | 直接对应 |
+| 创建点存活检查 | $\text{Alive}(\text{Target}(b), p)$ | 等价条件 |
+| 借用有效性保持 | Axiom 3 | 语义等价 |
+
+### 数据竞争自由的两种证明
+
+#### 本文证明 (Theorem 1)
+
+基于**互斥公理**:
+
+```
+Theorem 1: Check(P) = Pass → DataRaceFree(P)
+
+证明思路:
+- Axiom 1: 可变借用唯一性 → 防止写写竞争
+- Axiom 2: 可变-不可变互斥 → 防止读写竞争
+- 两者结合 → 数据竞争自由
+```
+
+#### Aeneas 保证
+
+基于**类型保持**:
+
+```
+翻译保持类型 → 翻译后程序无数据竞争
+      ↓
+原始 Rust 程序无数据竞争
+```
+
+**关键观察**:
+- Aeneas 只接受 Safe Rust 子集
+- 翻译过程保持借用规则的语义
+- 目标语言（函数式）本身无数据竞争
+- 因此源语言也无数据竞争
+
+### 证明负担对比
+
+| 方面 | 本文 (分离逻辑) | Aeneas (函数式) |
+|:---|:---|:---|
+| **手动证明** | 高（需分离逻辑推理） | 低（自动化翻译） |
+| **工具支持** | Iris/Coq 手动 | Aeneas 自动生成 |
+| **可扩展性** | 需手动处理新特性 | 扩展翻译规则 |
+| **证明强度** | 强（底层内存模型） | 中等（抽象函数式） |
+| **学习曲线** | 陡峭 | 较平缓 |
+
+### 互补使用场景
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Rust 借用验证工具选择                      │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Safe Rust 应用代码                    Unsafe 核心代码       │
+│       │                                     │               │
+│       ▼                                     ▼               │
+│  ┌─────────┐                          ┌──────────┐          │
+│  │ Aeneas  │                          │RustBelt  │          │
+│  │(函数式) │                          │(分离逻辑)│          │
+│  └────┬────┘                          └────┬─────┘          │
+│       │                                     │               │
+│       ▼                                     ▼               │
+│  功能正确性                            内存安全 +            │
+│  (预言变量)                            (Iris 框架)           │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │ 本文形式化: 为两者提供理论基础和验证目标定义          │   │
+│  │ • Def 1.1-1.5: 概念定义层                          │   │
+│  │ • Axiom 1-4: 属性关系层                            │   │
+│  │ • Theorem 1-3: 验证目标                            │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 与本文形式化的整合
+
+**定义对应**:
+
+| 本文 | Aeneas | 整合方式 |
+|:---|:---|:---|
+| Def 1.1 (借用类型) | `BorrowKind` 枚举 | 直接对应 |
+| Def 1.2 (借用状态) | 函数式状态传递 | 状态 = 环境+预言 |
+| Def 1.3 (借用有效性) | `borrow_generated_from` | 等价定义 |
+| Def 1.4 (借用冲突) | 翻译时类型错误 | 编译期检测 |
+| Def 1.5 (程序状态) | 显式状态元组 | 显式化本文状态 |
+
+**定理对应**:
+
+| 本文 | Aeneas | 关系 |
+|:---|:---|:---|
+| Theorem 1 (数据竞争自由) | 类型保持定理 | Aeneas 证明本文定理 |
+| Theorem 2 (借用规则正确性) | 翻译正确性 | 对应 |
+| Theorem 3 (引用有效性) | 预言变量有效性 | 扩展 |
+
+### 参考文献
+
+1. **Aeneas: Rust Verification by Functional Translation** (ICFP 2022)
+   - 作者: Son Ho, Jonathan Protzenko (EPFL)
+   - 链接: <https://github.com/AeneasVerif/aeneas>
+   - 论文: <https://arxiv.org/abs/2206.07185>
+   - 摘要: 函数式翻译，Characteristic Prophecy Variables，Safe Rust验证
+   - 与本文: 借用规则的形式化翻译，与 Def 1.3、Axiom 1-2 对应
 
 ---
 
