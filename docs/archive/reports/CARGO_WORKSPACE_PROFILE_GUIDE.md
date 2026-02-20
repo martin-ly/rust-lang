@@ -1,4 +1,11 @@
-# Cargo Workspace Profile 配置指南
+﻿# Cargo Workspace Profile 配置指南
+
+> **创建日期**: 2026-01-26
+> **最后更新**: 2026-02-20
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已归档
+
+---
 
 ## 📋 问题说明
 

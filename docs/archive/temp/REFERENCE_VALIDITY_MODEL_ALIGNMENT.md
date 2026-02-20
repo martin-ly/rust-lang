@@ -1,8 +1,11 @@
-# 引用一致性模型对齐报告
+﻿# 引用一致性模型对齐报告
 
 > ⚠️ **历史文档** - 本文档为历史参考文档，部分链接可能已失效
 >
-> **实际文档位置**:
+> **创建日期**: 2026-01-26
+> **最后更新**: 2026-02-20
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已归档
 >
 > - 形式化所有权系统: `docs/research_notes/formal_methods/ownership_model.md`
 > - 类型系统基础: `docs/research_notes/type_theory/type_system_foundations.md`

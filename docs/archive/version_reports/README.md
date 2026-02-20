@@ -1,14 +1,9 @@
-# 版本文档归档
+﻿# 版本文档归档
 
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已归档
-> **归档日期**: 2026-02-13
-> **用途**: Rust 1.92 相关版本文档；历史版本可查
-> **判定目标**: 历史版本可查
-> **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../../DOCS_STRUCTURE_OVERVIEW.md) § 2.8
-
 ## 文件列表
 
 - RUST_192_COMPREHENSIVE_MIND_REPRESENTATIONS.md
