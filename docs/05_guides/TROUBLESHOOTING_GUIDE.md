@@ -440,6 +440,50 @@ A: 使用 `cargo tree` 查看依赖关系
 
 ---
 
+## 使用场景
+
+### 场景1: 编译错误排查
+遇到编译错误时快速定位解决：
+1. 查看错误码，参考 [错误码快速查找](#错误码快速查找)
+2. 根据错误类型查阅 [编译错误](#-编译错误) 章节
+3. 使用 [调试技巧](#-调试技巧) 辅助定位
+
+### 场景2: 运行时问题诊断
+程序运行异常时的排查流程：
+- 使用 `RUST_BACKTRACE=1` 获取堆栈信息
+- 查阅 [运行时错误](#-运行时错误) 常见场景
+- 应用 [调试技巧](#-调试技巧) 逐步定位
+
+### 场景3: 性能问题优化
+程序性能不达标的排查：
+1. 使用 [perf 或 flamegraph](#2-运行时性能问题) 定位热点
+2. 参考 [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) 优化
+3. 检查是否存在 [编译时间过长](#1-编译时间过长) 问题
+
+### 场景4: 生产环境问题
+生产环境故障应急处理：
+- 使用日志系统（[使用日志](#4-使用日志)）收集信息
+- 检查 [网络问题](#-网络问题) 连接状态
+- 应用 [常见问题 FAQ](#-常见问题-faq) 快速解决方案
+
+---
+
+## 形式化链接
+
+| 链接类型 | 目标文档 |
+| :--- | :--- |
+| **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| | [C05 线程](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
+| | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
+| | [C10 网络](../../crates/c10_networks/docs/00_MASTER_INDEX.md) |
+| **错误参考** | [ERROR_CODE_MAPPING.md](../02_reference/ERROR_CODE_MAPPING.md) |
+| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| | [TESTING_COVERAGE_GUIDE.md](./TESTING_COVERAGE_GUIDE.md) |
+| | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
+| **外部资源** | [Rust错误索引](https://doc.rust-lang.org/error-index.html) |
+
+---
+
 ## 📚 相关资源
 
 - [Rust 错误索引](https://doc.rust-lang.org/error-index.html)

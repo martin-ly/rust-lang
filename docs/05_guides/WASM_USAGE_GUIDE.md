@@ -317,6 +317,53 @@ pub fn process(data: &str) -> String {
 
 ---
 
+## 使用场景
+
+### 场景1: Web 前端开发
+在浏览器中使用 Rust 替代 JavaScript：
+```rust
+// 使用 wasm-bindgen 导出函数给 JS 调用
+// 使用 web-sys 操作 DOM
+// 适用于：计算密集型任务、游戏引擎、图像处理
+```
+
+### 场景2: 跨平台桌面应用
+使用 WASM 构建跨平台应用：
+- 使用 Tauri 或 Electron 包装 WASM 模块
+- 共享 Rust 核心逻辑
+- 参考 [C12 WASM 完整文档](../../crates/c12_wasm/README.md)
+
+### 场景3: 服务端 WASM (Edge Computing)
+在边缘节点运行 WASM：
+- 轻量级、快速启动
+- 安全的沙箱环境
+- 结合 [EMBEDDED_RUST_GUIDE.md](./EMBEDDED_RUST_GUIDE.md) 进行边缘部署
+
+### 场景4: 插件系统
+构建支持 WASM 插件的应用：
+- 宿主程序使用 Rust/C++/其他语言
+- 插件使用 Rust 编译为 WASM
+- 安全的插件隔离机制
+
+---
+
+## 形式化链接
+
+| 链接类型 | 目标文档 |
+| :--- | :--- |
+| **核心模块** | [C12 WASM](../../crates/c12_wasm/docs/00_MASTER_INDEX.md) |
+| | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
+| **C12 详细文档** | [WASM 基础指南](../../crates/c12_wasm/docs/tier_02_guides/01_wasm_基础指南.md) |
+| | [JavaScript 互操作](../../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md) |
+| **相关指南** | [EMBEDDED_RUST_GUIDE.md](./EMBEDDED_RUST_GUIDE.md) |
+| | [CROSS_MODULE_INTEGRATION_EXAMPLES.md](./CROSS_MODULE_INTEGRATION_EXAMPLES.md) |
+| | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| **外部资源** | [wasm-bindgen 文档](https://rustwasm.github.io/wasm-bindgen/) |
+| | [web-sys 文档](https://rustwasm.github.io/wasm-bindgen/api/web_sys/) |
+
+---
+
 ## 📚 相关文档
 
 - [完整文档](../../crates/c12_wasm/README.md)
