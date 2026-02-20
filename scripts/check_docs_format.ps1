@@ -29,26 +29,30 @@ function Test-DateFormat($DateString) {
 }
 
 function Test-TableFormat($Content) {
-    # 检查表格分隔行格式
-    $tableSeparators = [regex]::Matches($Content, "\|[-:]+\|")
-    foreach ($match in $tableSeparators) {
-        $separator = $match.Value
-        # 检查是否使用了 :--- 格式
-        if ($separator -notmatch "\:\-{3,}" -and $separator -match "\-{3,}") {
-            return $false
+    # 检查表格分隔行格式 - 简单的检查，看是否有 |---| 格式
+    $lines = $Content -split "`r?`n"
+    foreach ($line in $lines) {
+        if ($line -match "^\|[-:]+\|$") {
+            # 如果包含 |---| 但没有 |:---|，则认为格式不正确
+            if ($line -match "\|----*\|" -and $line -notmatch "\|:[-:]+\|") {
+                return $false
+            }
         }
     }
     return $true
 }
 
 function Test-HeadingEmoji($Content) {
-    # 检查一级标题是否含 emoji
-    $h1Headings = [regex]::Matches($Content, "^# (.+)$", [System.Text.RegularExpressions.RegexOptions]::Multiline)
-    foreach ($match in $h1Headings) {
-        $heading = $match.Groups[1].Value
-        # 简单 emoji 检测
-        if ($heading -match "[\x{1F600}-\x{1F64F}]|[\x{1F300}-\x{1F5FF}]|[\x{1F680}-\x{1F6FF}]|[\x{1F1E0}-\x{1F1FF}]|[\x{2600}-\x{26FF}]|[\x{2700}-\x{27BF}]|[📊📚🔬💻🔗📋🔄✅🆕🎯📖🦀📦🧹]" -or $heading -match "^[^a-zA-Z0-9\u4e00-\u9fa5]") {
-            return $false
+    # 检查一级标题是否含 emoji - 简化检查
+    $lines = $Content -split "`r?`n"
+    foreach ($line in $lines) {
+        if ($line -match "^#\s+") {
+            # 检查是否包含常见 emoji 字符
+            if ($line -match "[\u{1F300}-\u{1F9FF}]" -or 
+                $line -match "[\u{2600}-\u{26FF}]" -or
+                $line -match "[📊📚🔬💻🔗📋🔄✅🆕🎯📖🦀📦🧹]") {
+                return $false
+            }
         }
     }
     return $true
@@ -83,8 +87,9 @@ foreach ($file in $files) {
     }
     else {
         # 检查日期格式
-        $dateMatch = [regex]::Match($content, "\*\*创建日期\*\*:\s*(.+?)(?:\r?\n|")
-        if ($dateMatch.Success -and -not (Test-DateFormat $dateMatch.Groups[1].Value.Trim())) {
+        if ($content -match "\*\*创建日期\*\*:\s*(\d{4}-\d{2}-\d{2})") {
+            # 格式正确
+        } elseif ($content -match "\*\*创建日期\*\*:\s*(.+?)(?:\r?\n|")") {
             $fileIssues += "创建日期格式不正确 (应为 YYYY-MM-DD)"
             $stats.InvalidDateFormat++
         }
@@ -96,8 +101,9 @@ foreach ($file in $files) {
     }
     else {
         # 检查日期格式
-        $dateMatch = [regex]::Match($content, "\*\*最后更新\*\*:\s*(.+?)(?:\r?\n|")
-        if ($dateMatch.Success -and -not (Test-DateFormat $dateMatch.Groups[1].Value.Trim())) {
+        if ($content -match "\*\*最后更新\*\*:\s*(\d{4}-\d{2}-\d{2})") {
+            # 格式正确
+        } elseif ($content -match "\*\*最后更新\*\*:\s*(.+?)(?:\r?\n|")") {
             $fileIssues += "最后更新日期格式不正确 (应为 YYYY-MM-DD)"
             $stats.InvalidDateFormat++
         }

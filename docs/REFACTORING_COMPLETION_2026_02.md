@@ -1,7 +1,9 @@
 # docs 重构完成报告
 
-> **完成日期**: 2026-02-14
-> **状态**: 100% 完成
+> **创建日期**: 2026-02-14
+> **最后更新**: 2026-02-14
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已完成
 
 ---
 
@@ -83,7 +85,7 @@
 | 验证项 | 状态 |
 | :--- | :--- || scripts/check_links.ps1 | ✅ 无 tier3_advanced、tier1_foundation 等旧路径 |
 | theory_enhanced 断链 | ✅ C04/C06/C07/C09 已修复 |
-| 01_theory/02_core/03_advanced | ✅ C01/C02/C11 已映射至 tier_* |
+| 01_theory/02_core/03_advanced | ✅ C01/C02/C11 已映射至 tier_*|
 | analysis/appendices 断链 | ✅ C02–C07 已映射至 tier_*、04_thinking、research_notes |
 | C03/C04/C07/C09 PENDING_ITEMS | ✅ 全部完成 |
 

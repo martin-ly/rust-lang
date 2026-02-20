@@ -1,8 +1,9 @@
 # CLI 应用开发指南
 
 > **创建日期**: 2026-02-13
-> **权威源**: [Command Line Applications in Rust](https://rust-cli.github.io/book/)
-> **用途**: 对标官方 CLI Book，提供本项目内导航与补充
+> **最后更新**: 2026-02-15
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已完成
 
 ---
 

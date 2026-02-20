@@ -1,9 +1,9 @@
 # Rust 1.93 兼容性深度解析
 
-> **文档版本**: 1.0
 > **创建日期**: 2026-02-12
-> **权威来源**: [releases.rs/docs/1.93.0](https://releases.rs/docs/1.93.0/)
-> **用途**: 专项说明 pin_v2、Emscripten、#[test]、offset_of!、deref_nullptr、可变参数、repr(C) 等兼容性变更
+> **最后更新**: 2026-02-15
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已完成
 
 ---
 
