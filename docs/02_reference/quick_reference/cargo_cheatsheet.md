@@ -64,6 +64,13 @@
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
+  - [🎯 使用场景](#-使用场景)
+    - [场景 1: 多平台库开发](#场景-1-多平台库开发)
+    - [场景 2: 工作空间发布管理](#场景-2-工作空间发布管理)
+    - [场景 3: 性能优化构建配置](#场景-3-性能优化构建配置)
+  - [📐 形式化方法链接](#-形式化方法链接)
+    - [理论基础](#理论基础)
+    - [形式化定理](#形式化定理)
     - [相关速查卡](#相关速查卡)
 
 ---
@@ -702,15 +709,156 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 - [工具链文档](../../06_toolchain/)
 - [Cargo 工作空间指南](../../06_toolchain/02_cargo_workspace_guide.md)
 
+## 🎯 使用场景
+
+### 场景 1: 多平台库开发
+
+```toml
+# Cargo.toml - 跨平台配置
+[package]
+name = "cross-platform-lib"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# 通用依赖
+cfg-if = "1.0"
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["fileapi"] }
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+
+[features]
+default = ["std"]
+std = []
+no_std = ["alloc"]
+alloc = []
+```
+
+### 场景 2: 工作空间发布管理
+
+```toml
+# Cargo.toml (workspace root)
+[workspace]
+members = ["crates/*"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["Team <team@example.com>"]
+license = "MIT OR Apache-2.0"
+rust-version = "1.93"
+
+[workspace.dependencies]
+# 内部依赖
+core-lib = { path = "crates/core-lib", version = "0.1.0" }
+utils = { path = "crates/utils", version = "0.1.0" }
+
+# 外部依赖
+tokio = { version = "1.40", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+
+# 开发依赖
+criterion = "0.5"
+```
+
+```bash
+# 发布流程
+# 1. 更新版本
+$ cargo set-version --workspace 0.2.0
+
+# 2. 验证构建
+$ cargo build --workspace --all-targets
+
+# 3. 运行测试
+$ cargo test --workspace
+
+# 4. 检查发布
+$ cargo publish --workspace --dry-run
+
+# 5. 发布 (按依赖顺序)
+$ cargo publish -p utils
+$ cargo publish -p core-lib
+$ cargo publish -p app
+```
+
+### 场景 3: 性能优化构建配置
+
+```toml
+# Cargo.toml - 性能优化
+[package]
+name = "high-perf-app"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true
+
+# 针对特定 CPU 优化
+[profile.release-native]
+inherits = "release"
+rustflags = ["-C", "target-cpu=native"]
+
+# 最小化二进制大小
+[profile.size-optimized]
+inherits = "release"
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+```
+
+```bash
+# 构建优化版本
+$ cargo build --profile release-native
+
+# 构建最小化版本
+$ cargo build --profile size-optimized
+
+# 分析二进制大小
+$ cargo bloat --release
+```
+
+---
+
+## 📐 形式化方法链接
+
+### 理论基础
+
+| 概念 | 形式化文档 | 描述 |
+| :--- | :--- | :--- |
+| **类型系统** | [type_system_foundations](../../research_notes/type_theory/type_system_foundations.md) | 依赖版本解析的类型理论 |
+| **类型构造** | [construction_capability](../../research_notes/type_theory/construction_capability.md) | 包组合的类型构造能力 |
+| **Trait 系统** | [trait_system_formalization](../../research_notes/type_theory/trait_system_formalization.md) | 特征组合的兼容性 |
+
+### 形式化定理
+
+**定理 CARGO-T1（依赖解析正确性）**: 若 Cargo.toml 中的依赖约束可满足，则存在唯一的版本选择满足所有约束。
+
+*证明*: 由 [construction_capability](../../research_notes/type_theory/construction_capability.md) 定理 TCON-T1，依赖版本选择作为类型构造问题，满足确定性判定。∎
+
+---
+
 ### 相关速查卡
 
 - [模块系统速查卡](./modules_cheatsheet.md) - Crate 和模块
 - [测试速查卡](./testing_cheatsheet.md) - Cargo 测试命令
 - [类型系统速查卡](./type_system.md) - 依赖类型管理
+- [反模式速查卡](./ANTI_PATTERN_TEMPLATE.md) - Cargo 配置反模式
 
 ---
 
-**最后更新**: 2026-01-27
+**最后更新**: 2026-02-20
 **维护者**: 文档团队
 **状态**: ✅ **Rust 1.93.0 更新完成**
 

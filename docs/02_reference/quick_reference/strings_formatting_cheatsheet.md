@@ -46,14 +46,26 @@
     - [错误消息格式化](#错误消息格式化)
     - [表格格式化](#表格格式化)
     - [进度条格式化](#进度条格式化)
+  - [💡 代码示例](#-代码示例)
+    - [示例 1: 实现 Display trait](#示例-1-实现-display-trait)
+    - [示例 2: 自定义格式化参数](#示例-2-自定义格式化参数)
+    - [示例 3: 安全的字符串切片](#示例-3-安全的字符串切片)
+    - [示例 4: 字符串模板引擎](#示例-4-字符串模板引擎)
+    - [示例 5: CSV 解析器](#示例-5-csv-解析器)
+  - [🎯 使用场景](#-使用场景)
+    - [场景: 日志格式化系统](#场景-日志格式化系统)
   - [🚫 反例速查](#-反例速查)
     - [反例 1: 在循环中拼接字符串](#反例-1-在循环中拼接字符串)
     - [反例 2: 按字节索引切片 UTF-8](#反例-2-按字节索引切片-utf-8)
+    - [反例 3: 错误处理从字节到字符串的转换](#反例-3-错误处理从字节到字符串的转换)
+    - [反例 4: format!  panic 导致的拒绝服务](#反例-4-format--panic-导致的拒绝服务)
+    - [反例 5: 在热路径上频繁分配字符串](#反例-5-在热路径上频繁分配字符串)
   - [📚 相关文档](#-相关文档)
   - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
+    - [形式化理论与类型系统](#形式化理论与类型系统)
     - [相关速查卡](#相关速查卡)
 
 ---
@@ -572,6 +584,256 @@ print!("\r[{}{}] {:.1}%",
 
 ---
 
+## 💡 代码示例
+
+### 示例 1: 实现 Display trait
+
+```rust
+use std::fmt;
+
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+impl fmt::Display for Point {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "({}, {})", self.x, self.y)
+    }
+}
+
+impl fmt::Debug for Point {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Point")
+            .field("x", &self.x)
+            .field("y", &self.y)
+            .finish()
+    }
+}
+
+// 使用
+let p = Point { x: 1.0, y: 2.0 };
+println!("Display: {}", p);      // Display: (1, 2)
+println!("Debug: {:?}", p);       // Debug: Point { x: 1.0, y: 2.0 }
+println!("Pretty: {:#?}", p);      // Pretty: 格式化多行输出
+```
+
+### 示例 2: 自定义格式化参数
+
+```rust
+use std::fmt;
+
+struct HexBytes<'a>(&'a [u8]);
+
+impl<'a> fmt::Display for HexBytes<'a> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        for (i, byte) in self.0.iter().enumerate() {
+            if i > 0 {
+                write!(f, " ")?;
+            }
+            write!(f, "{:02x}", byte)?;
+        }
+        Ok(())
+    }
+}
+
+impl<'a> fmt::LowerHex for HexBytes<'a> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        for byte in self.0 {
+            write!(f, "{:02x}", byte)?;
+        }
+        Ok(())
+    }
+}
+
+// 使用
+let data = HexBytes(&[0x48, 0x65, 0x6c, 0x6c, 0x6f]);
+println!("{}", data);        // 48 65 6c 6c 6f
+println!("{:x}", data);      // 48656c6c6f
+```
+
+### 示例 3: 安全的字符串切片
+
+```rust
+fn safe_slice(s: &str, start: usize, end: usize) -> Option<&str> {
+    // 获取所有字符边界位置
+    let char_indices: Vec<usize> = s.char_indices().map(|(i, _)| i).collect();
+
+    if start >= char_indices.len() || end > char_indices.len() {
+        return None;
+    }
+
+    let start_byte = char_indices[start];
+    let end_byte = if end < char_indices.len() {
+        char_indices[end]
+    } else {
+        s.len()
+    };
+
+    Some(&s[start_byte..end_byte])
+}
+
+// 使用
+let s = "Hello 世界";
+println!("{:?}", safe_slice(s, 0, 5));  // Some("Hello")
+println!("{:?}", safe_slice(s, 6, 8));  // Some("世界")
+```
+
+### 示例 4: 字符串模板引擎
+
+```rust
+use std::collections::HashMap;
+
+struct Template {
+    template: String,
+}
+
+impl Template {
+    fn new(template: &str) -> Self {
+        Self {
+            template: template.to_string(),
+        }
+    }
+
+    fn render(&self, vars: &HashMap<&str, &str>) -> String {
+        let mut result = self.template.clone();
+        for (key, value) in vars {
+            result = result.replace(&format!("{{{{{}}}}}", key), value);
+        }
+        result
+    }
+}
+
+// 使用
+let template = Template::new("Hello, {{name}}! You have {{count}} new messages.");
+let mut vars = HashMap::new();
+vars.insert("name", "Alice");
+vars.insert("count", "5");
+println!("{}", template.render(&vars));
+// Hello, Alice! You have 5 new messages.
+```
+
+### 示例 5: CSV 解析器
+
+```rust
+struct CsvRow {
+    fields: Vec<String>,
+}
+
+impl CsvRow {
+    fn from_line(line: &str) -> Self {
+        let fields: Vec<String> = line
+            .split(',')
+            .map(|s| s.trim().trim_matches('"').to_string())
+            .collect();
+        Self { fields }
+    }
+
+    fn to_line(&self) -> String {
+        self.fields
+            .iter()
+            .map(|f| {
+                if f.contains(',') || f.contains('"') {
+                    format!("\"{}\"", f.replace('"', "\"\""))
+                } else {
+                    f.clone()
+                }
+            })
+            .collect::<Vec<_>>()
+            .join(",")
+    }
+}
+
+// 使用
+let row = CsvRow::from_line(r#"John Doe, 30, "New York, NY""#);
+println!("{:?}", row.fields);
+// ["John Doe", "30", "New York, NY"]
+```
+
+---
+
+## 🎯 使用场景
+
+### 场景: 日志格式化系统
+
+在实际项目中，字符串格式化常用于日志记录和报告生成。以下是一个完整的日志格式化系统：
+
+```rust
+use std::fmt;
+use std::time::SystemTime;
+
+enum LogLevel {
+    Debug,
+    Info,
+    Warn,
+    Error,
+}
+
+impl fmt::Display for LogLevel {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let level_str = match self {
+            LogLevel::Debug => "DEBUG",
+            LogLevel::Info => "INFO ",
+            LogLevel::Warn => "WARN ",
+            LogLevel::Error => "ERROR",
+        };
+        write!(f, "{}", level_str)
+    }
+}
+
+struct LogEntry {
+    timestamp: SystemTime,
+    level: LogLevel,
+    message: String,
+    source: String,
+}
+
+impl LogEntry {
+    fn format_colored(&self) -> String {
+        let color = match self.level {
+            LogLevel::Debug => "\x1b[36m",  // Cyan
+            LogLevel::Info => "\x1b[32m",   // Green
+            LogLevel::Warn => "\x1b[33m",   // Yellow
+            LogLevel::Error => "\x1b[31m",  // Red
+        };
+        let reset = "\x1b[0m";
+
+        format!(
+            "{}[{}]{} [{}] {} - {}",
+            color,
+            self.format_timestamp(),
+            reset,
+            self.level,
+            self.source,
+            self.message
+        )
+    }
+
+    fn format_timestamp(&self) -> String {
+        let duration = self.timestamp
+            .duration_since(SystemTime::UNIX_EPOCH)
+            .unwrap();
+        format!(
+            "{:02}:{:02}:{:02}",
+            (duration.as_secs() / 3600) % 24,
+            (duration.as_secs() / 60) % 60,
+            duration.as_secs() % 60
+        )
+    }
+}
+
+// 使用
+let entry = LogEntry {
+    timestamp: SystemTime::now(),
+    level: LogLevel::Error,
+    message: "Connection failed".to_string(),
+    source: "network::client".to_string(),
+};
+println!("{}", entry.format_colored());
+```
+
+---
+
 ## 🚫 反例速查
 
 ### 反例 1: 在循环中拼接字符串
@@ -612,6 +874,96 @@ let c = &s[1..3];  // ❌ 可能 panic：非字符边界
 
 ---
 
+### 反例 3: 错误处理从字节到字符串的转换
+
+**错误示例**:
+
+```rust
+let bytes = vec![0x80, 0x81, 0x82];
+let s = String::from_utf8(bytes).unwrap();  // ❌ panic: 无效的 UTF-8
+```
+
+**原因**: 不是所有字节序列都是有效的 UTF-8。
+
+**修正**:
+
+```rust
+let bytes = vec![0x80, 0x81, 0x82];
+match String::from_utf8(bytes) {
+    Ok(s) => println!("Valid: {}", s),
+    Err(e) => {
+        let bytes = e.into_bytes();
+        println!("Invalid UTF-8 sequence: {:?}", bytes);
+    }
+}
+
+// 或使用 lossy 转换
+let s = String::from_utf8_lossy(&[0x80, 0x81, 0x82]);
+```
+
+---
+
+### 反例 4: format!  panic 导致的拒绝服务
+
+**错误示例**:
+
+```rust
+fn log_user_input(input: &str) {
+    // ❌ 如果 input 包含 { 会导致 panic
+    println!(input);
+}
+
+log_user_input("Hello {world}");  // panic!
+```
+
+**原因**: `format!` 族宏会将字符串解释为格式字符串。
+
+**修正**:
+
+```rust
+fn log_user_input(input: &str) {
+    // ✅ 使用显式参数
+    println!("{}", input);
+    // 或
+    println!("{input}");
+}
+```
+
+---
+
+### 反例 5: 在热路径上频繁分配字符串
+
+**错误示例**:
+
+```rust
+fn process_logs(logs: &[LogEntry]) -> String {
+    let mut result = String::new();
+    for log in logs {
+        // ❌ 每次循环都分配新字符串
+        result += &format!("[{}] {}\n", log.level, log.message);
+    }
+    result
+}
+```
+
+**原因**: 频繁的字符串分配和复制会严重影响性能。
+
+**修正**:
+
+```rust
+fn process_logs(logs: &[LogEntry]) -> String {
+    let mut result = String::with_capacity(logs.len() * 50);  // 预分配
+    for log in logs {
+        // ✅ 直接写入，避免中间分配
+        use std::fmt::Write;
+        writeln!(result, "[{}] {}", log.level, log.message).unwrap();
+    }
+    result
+}
+```
+
+---
+
 ## 📚 相关文档
 
 - [类型系统模块（String/&str 相关）](../../../crates/c02_type_system/README.md)
@@ -637,6 +989,13 @@ let c = &s[1..3];  // ❌ 可能 panic：非字符边界
 
 - [完整类型系统文档](../../../crates/c02_type_system/docs/)
 - [字符串研究笔记](../../research_notes/)
+
+### 形式化理论与类型系统
+
+- [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 字符串类型与类型理论
+- [所有权模型](../../research_notes/formal_methods/ownership_model.md) — 字符串所有权转移形式化
+- [生命周期形式化](../../research_notes/formal_methods/lifetime_formalization.md) — 字符串生命周期
+- [构造能力理论](../../research_notes/type_theory/construction_capability.md) — 字符串操作表达能力
 
 ### 相关速查卡
 

@@ -47,6 +47,14 @@
     - [Arc\<Mutex\> - 多线程共享可变数据](#arcmutex---多线程共享可变数据)
     - [Arc\<RwLock\> - 多线程读写锁](#arcrwlock---多线程读写锁)
     - [Rc\<RefCell\<Vec\>\> - 共享可变向量](#rcrefcellvec---共享可变向量)
+  - [💡 代码示例](#-代码示例)
+    - [示例 1: 实现链表](#示例-1-实现链表)
+    - [示例 2: 带父指针的树结构（避免循环引用）](#示例-2-带父指针的树结构避免循环引用)
+    - [示例 3: 自定义智能指针](#示例-3-自定义智能指针)
+    - [示例 4: OnceCell 和 LazyLock（Rust 1.80+）](#示例-4-oncecell-和-lazylockrust-180)
+    - [示例 5: 使用 Pin 的自引用结构](#示例-5-使用-pin-的自引用结构)
+  - [🎯 使用场景](#-使用场景)
+    - [场景: 图结构实现](#场景-图结构实现)
   - [🎯 选择指南](#-选择指南)
     - [决策树](#决策树)
     - [性能对比](#性能对比)
@@ -54,11 +62,15 @@
   - [🚫 反例速查](#-反例速查)
     - [反例 1: Rc 用于多线程](#反例-1-rc-用于多线程)
     - [反例 2: RefCell 在已借出时再次借用](#反例-2-refcell-在已借出时再次借用)
+    - [反例 3: 循环引用导致内存泄漏](#反例-3-循环引用导致内存泄漏)
+    - [反例 4: 错误地使用 Mutex 守卫](#反例-4-错误地使用-mutex-守卫)
+    - [反例 5: Pin 误用导致未定义行为](#反例-5-pin-误用导致未定义行为)
   - [📚 相关文档](#-相关文档)
   - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
+    - [形式化理论与类型系统](#形式化理论与类型系统)
     - [相关速查卡](#相关速查卡)
 
 ---
@@ -641,6 +653,272 @@ println!("{:?}", vec.borrow()); // [1, 2, 3, 4, 5]
 
 ---
 
+## 💡 代码示例
+
+### 示例 1: 实现链表
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+struct Node<T> {
+    value: T,
+    next: Option<Rc<RefCell<Node<T>>>>,
+}
+
+struct LinkedList<T> {
+    head: Option<Rc<RefCell<Node<T>>>>,
+}
+
+impl<T> LinkedList<T> {
+    fn new() -> Self {
+        Self { head: None }
+    }
+
+    fn push_front(&mut self, value: T) {
+        let new_node = Rc::new(RefCell::new(Node {
+            value,
+            next: self.head.clone(),
+        }));
+        self.head = Some(new_node);
+    }
+
+    fn pop_front(&mut self) -> Option<T> {
+        self.head.take().map(|old_head| {
+            if let Some(next) = old_head.borrow_mut().next.take() {
+                self.head = Some(next);
+            }
+            // 这里简化处理，实际中需要 Rc::try_unwrap
+            Rc::try_unwrap(old_head).ok().unwrap().into_inner().value
+        })
+    }
+}
+
+// 使用
+let mut list = LinkedList::new();
+list.push_front(1);
+list.push_front(2);
+list.push_front(3);
+assert_eq!(list.pop_front(), Some(3));
+```
+
+### 示例 2: 带父指针的树结构（避免循环引用）
+
+```rust
+use std::rc::{Rc, Weak};
+use std::cell::RefCell;
+
+struct TreeNode {
+    value: i32,
+    parent: RefCell<Weak<TreeNode>>,
+    children: RefCell<Vec<Rc<TreeNode>>>,
+}
+
+impl TreeNode {
+    fn new(value: i32) -> Rc<Self> {
+        Rc::new(Self {
+            value,
+            parent: RefCell::new(Weak::new()),
+            children: RefCell::new(vec![]),
+        })
+    }
+
+    fn add_child(parent: &Rc<Self>, child: &Rc<Self>) {
+        parent.children.borrow_mut().push(Rc::clone(child));
+        *child.parent.borrow_mut() = Rc::downgrade(parent);
+    }
+
+    fn get_parent(&self) -> Option<Rc<Self>> {
+        self.parent.borrow().upgrade()
+    }
+}
+
+// 使用
+let root = TreeNode::new(1);
+let child = TreeNode::new(2);
+TreeNode::add_child(&root, &child);
+
+if let Some(parent) = child.get_parent() {
+    println!("Parent value: {}", parent.value); // 1
+}
+
+// 当 root 被 drop 后，child 的 parent 自动变为 None
+```
+
+### 示例 3: 自定义智能指针
+
+```rust
+use std::ops::{Deref, Drop};
+
+struct MyBox<T>(T);
+
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
+
+impl<T> Drop for MyBox<T> {
+    fn drop(&mut self) {
+        println!("MyBox is being dropped!");
+    }
+}
+
+// 使用
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+let m = MyBox::new(String::from("Rust"));
+hello(&m);  // 自动解引用 &MyBox<String> -> &String -> &str
+```
+
+### 示例 4: OnceCell 和 LazyLock（Rust 1.80+）
+
+```rust
+use std::sync::LazyLock;
+
+// 延迟初始化全局数据
+static CONFIG: LazyLock<Config> = LazyLock::new(|| {
+    println!("Initializing CONFIG...");
+    Config {
+        db_url: "postgres://localhost".to_string(),
+        max_connections: 10,
+    }
+});
+
+struct Config {
+    db_url: String,
+    max_connections: usize,
+}
+
+fn main() {
+    println!("Before accessing CONFIG");
+    println!("DB URL: {}", CONFIG.db_url);  // 此时才初始化
+    println!("Max connections: {}", CONFIG.max_connections);
+}
+```
+
+### 示例 5: 使用 Pin 的自引用结构
+
+```rust
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SelfReferential {
+    data: String,
+    // 指向 data 的指针
+    ptr_to_data: *const String,
+    _pin: PhantomPinned,  // 禁止移动
+}
+
+impl SelfReferential {
+    fn new(data: String) -> Pin<Box<Self>> {
+        let mut boxed = Box::pin(Self {
+            data,
+            ptr_to_data: std::ptr::null(),
+            _pin: PhantomPinned,
+        });
+
+        let ptr = &boxed.data;
+        unsafe {
+            let mut_ref: Pin<&mut Self> = Pin::as_mut(&mut boxed);
+            Pin::get_unchecked_mut(mut_ref).ptr_to_data = ptr;
+        }
+
+        boxed
+    }
+
+    fn get_data(&self) -> &str {
+        &self.data
+    }
+}
+
+// 使用
+let data = SelfReferential::new("Hello".to_string());
+println!("{}", data.get_data());
+```
+
+---
+
+## 🎯 使用场景
+
+### 场景: 图结构实现
+
+在实际项目中，智能指针常用于实现复杂的数据结构。以下是一个有向图的实现：
+
+```rust
+use std::rc::{Rc, Weak};
+use std::cell::RefCell;
+use std::collections::HashMap;
+
+type NodeId = usize;
+
+struct GraphNode<T> {
+    id: NodeId,
+    value: T,
+    edges: RefCell<Vec<Weak<GraphNode<T>>>>,
+}
+
+struct Graph<T> {
+    nodes: RefCell<HashMap<NodeId, Rc<GraphNode<T>>>>,
+    next_id: RefCell<NodeId>,
+}
+
+impl<T> Graph<T> {
+    fn new() -> Self {
+        Self {
+            nodes: RefCell::new(HashMap::new()),
+            next_id: RefCell::new(0),
+        }
+    }
+
+    fn add_node(&self, value: T) -> NodeId {
+        let id = *self.next_id.borrow();
+        *self.next_id.borrow_mut() += 1;
+
+        let node = Rc::new(GraphNode {
+            id,
+            value,
+            edges: RefCell::new(vec![]),
+        });
+
+        self.nodes.borrow_mut().insert(id, node);
+        id
+    }
+
+    fn add_edge(&self, from: NodeId, to: NodeId) {
+        if let (Some(from_node), Some(to_node)) =
+            (self.nodes.borrow().get(&from).cloned(),
+             self.nodes.borrow().get(&to).cloned()) {
+            from_node.edges.borrow_mut().push(Rc::downgrade(&to_node));
+        }
+    }
+
+    fn get_neighbors(&self, node_id: NodeId) -> Vec<NodeId> {
+        self.nodes.borrow()
+            .get(&node_id)
+            .map(|node| {
+                node.edges.borrow()
+                    .iter()
+                    .filter_map(|weak| weak.upgrade().map(|n| n.id))
+                    .collect()
+            })
+            .unwrap_or_default()
+    }
+}
+```
+
+---
+
 ## 🎯 选择指南
 
 ### 决策树
@@ -727,6 +1005,120 @@ let g2 = r.borrow();
 
 ---
 
+### 反例 3: 循环引用导致内存泄漏
+
+**错误示例**:
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+struct Node {
+    value: i32,
+    next: RefCell<Option<Rc<Node>>>,  // ❌ 强引用循环
+}
+
+let a = Rc::new(Node { value: 1, next: RefCell::new(None) });
+let b = Rc::new(Node { value: 2, next: RefCell::new(None) });
+
+*a.next.borrow_mut() = Some(Rc::clone(&b));
+*b.next.borrow_mut() = Some(Rc::clone(&a));
+// a 和 b 形成循环引用，永远不会被释放
+```
+
+**原因**: `Rc` 使用强引用，循环引用会导致引用计数永不为零。
+
+**修正**: 使用 `Weak` 打破循环：
+
+```rust
+use std::rc::{Rc, Weak};
+use std::cell::RefCell;
+
+struct Node {
+    value: i32,
+    parent: RefCell<Option<Weak<Node>>>,  // ✅ 弱引用
+    children: RefCell<Vec<Rc<Node>>>,
+}
+```
+
+---
+
+### 反例 4: 错误地使用 Mutex 守卫
+
+**错误示例**:
+
+```rust
+use std::sync::{Arc, Mutex};
+
+let data = Arc::new(Mutex::new(vec![1, 2, 3]));
+
+let lock = data.lock().unwrap();
+let first = &lock[0];  // 持有对锁内数据的引用
+// lock 守卫在此之后被 drop，但 first 引用仍然"有效"
+// 实际上这是未定义行为（编译器通常会阻止）
+```
+
+**原因**: MutexGuard 被释放后，锁内数据的引用会变为悬空指针。
+
+**修正**:
+
+```rust
+let first = {
+    let lock = data.lock().unwrap();
+    lock[0]  // 复制值，而不是返回引用
+}; // lock 在此处释放
+```
+
+---
+
+### 反例 5: Pin 误用导致未定义行为
+
+**错误示例**:
+
+```rust
+use std::pin::Pin;
+
+struct Unmovable {
+    data: String,
+    self_ptr: *const String,
+}
+
+impl Unmovable {
+    fn new(data: String) -> Pin<Box<Self>> {
+        let mut boxed = Box::pin(Unmovable {
+            data,
+            self_ptr: std::ptr::null(),
+        });
+        // ❌ 不安全：直接修改 pin 后的数据
+        boxed.self_ptr = &boxed.data;
+        boxed
+    }
+}
+```
+
+**原因**: 直接修改 `Pin<Box<T>>` 可能破坏自引用不变量。
+
+**修正**: 使用 `Pin::get_unchecked_mut` 在 unsafe 块中修改：
+
+```rust
+impl Unmovable {
+    fn new(data: String) -> Pin<Box<Self>> {
+        let mut boxed = Box::pin(Unmovable {
+            data,
+            self_ptr: std::ptr::null(),
+        });
+
+        let ptr = &boxed.data;
+        unsafe {
+            Pin::get_unchecked_mut(boxed.as_mut()).self_ptr = ptr;
+        }
+        boxed
+    }
+}
+```
+
+---
+
 ## 📚 相关文档
 
 - [所有权与智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/)
@@ -754,6 +1146,14 @@ let g2 = r.borrow();
 - [完整智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
 - [智能指针示例](../../../crates/c01_ownership_borrow_scope/examples/)
 - [所有权系统研究](../../research_notes/formal_methods/ownership_model.md)
+
+### 形式化理论与类型系统
+
+- [所有权模型形式化](../../research_notes/formal_methods/ownership_model.md) — 所有权系统形式化基础
+- [生命周期形式化](../../research_notes/formal_methods/lifetime_formalization.md) — 智能指针生命周期
+- [Pin 形式化](../../research_notes/formal_methods/pin_self_referential.md) — 自引用结构形式化
+- [Send/Sync 形式化](../../research_notes/formal_methods/send_sync_formalization.md) — 线程安全 trait 形式化
+- [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 智能指针类型理论
 
 ### 相关速查卡
 

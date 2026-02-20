@@ -63,6 +63,15 @@
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
+  - [💡 使用场景](#-使用场景)
+    - [场景 1: 分层架构组织](#场景-1-分层架构组织)
+    - [场景 2: 特性门控模块](#场景-2-特性门控模块)
+    - [场景 3: 私有实现细节](#场景-3-私有实现细节)
+  - [⚠️ 边界情况](#️-边界情况)
+    - [边界 1: 模块可见性陷阱](#边界-1-模块可见性陷阱)
+    - [边界 2: 重导出与命名空间](#边界-2-重导出与命名空间)
+    - [边界 3: 循环依赖解决](#边界-3-循环依赖解决)
+    - [形式化理论](#形式化理论)
 
 ---
 
@@ -687,6 +696,292 @@ mod inner {
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 模块中的所有权规则
 - [错误处理速查卡](./error_handling_cheatsheet.md) - 模块中的错误处理
 - [测试速查卡](./testing_cheatsheet.md) - 模块测试
+
+---
+
+## 💡 使用场景
+
+### 场景 1: 分层架构组织
+
+```rust
+// src/lib.rs
+//! Web 服务器库
+
+pub mod handlers;    // HTTP 请求处理
+pub mod models;      // 数据模型
+pub mod db;          // 数据库访问层
+pub mod middleware;  // 中间件
+
+// 重导出公共 API
+pub use handlers::user_handler;
+pub use models::User;
+```
+
+```rust
+// src/handlers/mod.rs
+//! HTTP 请求处理器
+
+pub mod user_handler;
+pub mod post_handler;
+
+// 公共错误类型
+use std::fmt;
+
+#[derive(Debug)]
+pub struct HandlerError {
+    message: String,
+}
+
+impl fmt::Display for HandlerError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.message)
+    }
+}
+```
+
+```rust
+// src/handlers/user_handler.rs
+//! 用户相关请求处理
+
+use crate::models::User;  // 跨模块引用
+use crate::db::Connection;
+
+pub fn get_user(id: u64) -> Option<User> {
+    // 实现...
+    Some(User { id, name: "Alice".to_string() })
+}
+
+pub fn create_user(name: &str) -> User {
+    User { id: 1, name: name.to_string() }
+}
+```
+
+```rust
+// src/models/mod.rs
+//! 数据模型
+
+pub struct User {
+    pub id: u64,
+    pub name: String,
+}
+
+pub struct Post {
+    pub id: u64,
+    pub title: String,
+    pub content: String,
+}
+```
+
+### 场景 2: 特性门控模块
+
+```rust
+// Cargo.toml
+// [features]
+// default = ["std"]
+// std = []
+// async = ["tokio"]
+// wasm = ["wasm-bindgen"]
+
+// src/lib.rs
+#![cfg_attr(not(feature = "std"), no_std)]
+
+pub mod core;  // 核心功能，始终可用
+
+#[cfg(feature = "std")]
+pub mod io;    // 标准 IO，需要 std 特性
+
+#[cfg(feature = "async")]
+pub mod async_support;  // 异步支持
+
+#[cfg(feature = "wasm")]
+pub mod wasm_bindings;  // WASM 绑定
+```
+
+```rust
+// src/core/mod.rs
+//! 核心功能（无标准库依赖）
+
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_add() {
+        assert_eq!(add(2, 3), 5);
+    }
+}
+```
+
+```rust
+// src/io/mod.rs
+//! 标准 IO 支持
+
+use std::fs;
+
+pub fn read_file(path: &str) -> Result<String, std::io::Error> {
+    fs::read_to_string(path)
+}
+```
+
+### 场景 3: 私有实现细节
+
+```rust
+// src/calculator/mod.rs
+//! 计算器模块
+
+// 公开 API
+pub struct Calculator;
+
+impl Calculator {
+    pub fn new() -> Self {
+        Calculator
+    }
+
+    pub fn add(&self, a: f64, b: f64) -> f64 {
+        internal::precise_add(a, b)
+    }
+
+    pub fn divide(&self, a: f64, b: f64) -> Result<f64, &'static str> {
+        internal::safe_divide(a, b)
+    }
+}
+
+// 私有实现模块
+mod internal {
+    //! 内部实现细节，不对外暴露
+
+    pub fn precise_add(a: f64, b: f64) -> f64 {
+        // 使用更高精度算法
+        a + b
+    }
+
+    pub fn safe_divide(a: f64, b: f64) -> Result<f64, &'static str> {
+        if b.abs() < f64::EPSILON {
+            return Err("除数不能为零");
+        }
+        Ok(a / b)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_calculator() {
+        let calc = Calculator::new();
+        assert_eq!(calc.add(1.0, 2.0), 3.0);
+        assert!(calc.divide(10.0, 0.0).is_err());
+    }
+
+    // 可以访问内部模块进行测试
+    #[test]
+    fn test_internal() {
+        assert_eq!(internal::precise_add(1.0, 2.0), 3.0);
+    }
+}
+```
+
+---
+
+## ⚠️ 边界情况
+
+### 边界 1: 模块可见性陷阱
+
+```rust
+mod outer {
+    // 模块默认私有
+    mod inner {
+        pub fn public_in_inner() {}
+        fn private_in_inner() {}
+    }
+
+    // 即使在同一文件，inner 的 pub 项也无法从 outer 外部访问
+    pub fn use_inner() {
+        inner::public_in_inner(); // OK
+    }
+}
+
+fn main() {
+    outer::use_inner(); // OK
+    // outer::inner::public_in_inner(); // ❌ 编译错误：inner 是私有的
+}
+```
+
+### 边界 2: 重导出与命名空间
+
+```rust
+// 使用 pub use 创建清晰的 API 边界
+
+mod internal {
+    pub struct ConfigBuilder { /* ... */ }
+    pub struct Config { /* ... */ }
+
+    impl ConfigBuilder {
+        pub fn new() -> Self { ConfigBuilder {} }
+        pub fn build(self) -> Config { Config {} }
+    }
+}
+
+// 公开 API 只暴露 Config，隐藏 ConfigBuilder
+pub use internal::Config;
+
+// 同时提供构建函数
+pub fn configure() -> internal::ConfigBuilder {
+    internal::ConfigBuilder::new()
+}
+
+fn main() {
+    // 用户只能看到简洁的 API
+    let config = configure().build();
+}
+```
+
+### 边界 3: 循环依赖解决
+
+```rust
+// ❌ 避免这种循环依赖：
+// mod a { use crate::b::B; }
+// mod b { use crate::a::A; }
+
+// ✅ 解决：提取公共类型到单独模块
+
+// src/types.rs
+pub struct UserId(pub u64);
+pub struct PostId(pub u64);
+
+// src/user/mod.rs
+use crate::types::UserId;
+use crate::types::PostId;  // 只使用类型，不依赖 post 模块
+
+pub struct User {
+    pub id: UserId,
+    pub name: String,
+}
+
+// src/post/mod.rs
+use crate::types::{UserId, PostId};
+// 不直接依赖 user 模块
+
+pub struct Post {
+    pub id: PostId,
+    pub author_id: UserId,
+    pub title: String,
+}
+
+fn main() {
+    println!("通过类型模块解耦循环依赖");
+}
+```
+
+### 形式化理论
+
+- [类型系统完备性缺口](../../research_notes/type_theory/00_completeness_gaps.md) — 模块系统与类型可见性的形式化保证
+- [所有权模型形式化](../../research_notes/formal_methods/ownership_model.md) — 跨模块边界的所有权规则
 
 ---
 

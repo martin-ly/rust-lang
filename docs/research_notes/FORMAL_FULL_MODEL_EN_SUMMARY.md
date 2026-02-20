@@ -1,8 +1,10 @@
 # Rust Formal Full Model — English Summary
 
+> **创建日期**: 2026-02-14
+> **最后更新**: 2026-02-20
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已完成
 > **Source**: [FORMAL_FULL_MODEL_OVERVIEW.md](./FORMAL_FULL_MODEL_OVERVIEW.md) (Chinese)
-> **Rust version**: 1.93.0+ (Edition 2024)
-> **Last updated**: 2026-02-20
 
 ---
 

@@ -25,6 +25,14 @@
     - [树结构](#树结构)
     - [哈希表](#哈希表)
     - [BTreeMap/BTreeSet 与 append（Rust 1.93）](#btreemapbtreeset-与-appendrust-193)
+  - [💡 代码示例](#-代码示例)
+    - [示例 1: 快速排序实现](#示例-1-快速排序实现)
+    - [示例 2: 二分搜索实现](#示例-2-二分搜索实现)
+    - [示例 3: 动态规划 - 最长公共子序列](#示例-3-动态规划---最长公共子序列)
+    - [示例 4: 图的 BFS 和 DFS](#示例-4-图的-bfs-和-dfs)
+    - [示例 5: 滑动窗口最大值](#示例-5-滑动窗口最大值)
+  - [🎯 使用场景](#-使用场景)
+    - [场景: 日志分析系统](#场景-日志分析系统)
   - [⚡ 并行算法](#-并行算法)
     - [并行排序](#并行排序)
     - [并行搜索](#并行搜索)
@@ -40,11 +48,15 @@
   - [🚫 反例速查](#-反例速查)
     - [反例 1: 对未排序切片 binary\_search](#反例-1-对未排序切片-binary_search)
     - [反例 2: sort 与 sort\_by 混用导致不稳定](#反例-2-sort-与-sort_by-混用导致不稳定)
+    - [反例 3: 递归深度过大导致栈溢出](#反例-3-递归深度过大导致栈溢出)
+    - [反例 4: 整数溢出](#反例-4-整数溢出)
+    - [反例 5: 不当使用递归导致重复计算](#反例-5-不当使用递归导致重复计算)
   - [📚 相关文档](#-相关文档)
   - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
+    - [形式化理论与类型系统](#形式化理论与类型系统)
     - [相关速查卡](#相关速查卡)
 
 ---
@@ -206,30 +218,309 @@ if let Some(value) = map.get("key1") {
 
 ---
 
+## 💡 代码示例
+
+### 示例 1: 快速排序实现
+
+```rust
+fn quicksort<T: Ord>(arr: &mut [T]) {
+    if arr.len() <= 1 {
+        return;
+    }
+    let pivot = partition(arr);
+    let (left, right) = arr.split_at_mut(pivot);
+    quicksort(left);
+    quicksort(&mut right[1..]);
+}
+
+fn partition<T: Ord>(arr: &mut [T]) -> usize {
+    let len = arr.len();
+    let pivot_index = len / 2;
+    arr.swap(pivot_index, len - 1);
+
+    let mut store_index = 0;
+    for i in 0..len - 1 {
+        if arr[i] < arr[len - 1] {
+            arr.swap(i, store_index);
+            store_index += 1;
+        }
+    }
+    arr.swap(store_index, len - 1);
+    store_index
+}
+
+// 使用
+let mut data = vec![64, 34, 25, 12, 22, 11, 90];
+quicksort(&mut data);
+assert_eq!(data, vec![11, 12, 22, 25, 34, 64, 90]);
+```
+
+### 示例 2: 二分搜索实现
+
+```rust
+fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
+    let mut left = 0;
+    let mut right = arr.len();
+
+    while left < right {
+        let mid = left + (right - left) / 2;
+        match arr[mid].cmp(target) {
+            std::cmp::Ordering::Equal => return Some(mid),
+            std::cmp::Ordering::Less => left = mid + 1,
+            std::cmp::Ordering::Greater => right = mid,
+        }
+    }
+    None
+}
+
+// 使用
+let arr = vec![1, 3, 5, 7, 9, 11, 13];
+assert_eq!(binary_search(&arr, &7), Some(3));
+assert_eq!(binary_search(&arr, &4), None);
+```
+
+### 示例 3: 动态规划 - 最长公共子序列
+
+```rust
+fn lcs(s1: &str, s2: &str) -> String {
+    let chars1: Vec<char> = s1.chars().collect();
+    let chars2: Vec<char> = s2.chars().collect();
+    let m = chars1.len();
+    let n = chars2.len();
+
+    // dp[i][j] 表示 s1[0..i] 和 s2[0..j] 的 LCS 长度
+    let mut dp = vec![vec![0; n + 1]; m + 1];
+
+    for i in 1..=m {
+        for j in 1..=n {
+            if chars1[i - 1] == chars2[j - 1] {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+            } else {
+                dp[i][j] = dp[i - 1][j].max(dp[i][j - 1]);
+            }
+        }
+    }
+
+    // 回溯构建结果
+    let mut result = String::new();
+    let (mut i, mut j) = (m, n);
+    while i > 0 && j > 0 {
+        if chars1[i - 1] == chars2[j - 1] {
+            result.push(chars1[i - 1]);
+            i -= 1;
+            j -= 1;
+        } else if dp[i - 1][j] > dp[i][j - 1] {
+            i -= 1;
+        } else {
+            j -= 1;
+        }
+    }
+    result.chars().rev().collect()
+}
+
+// 使用
+assert_eq!(lcs("ABCDGH", "AEDFHR"), "ADH");
+```
+
+### 示例 4: 图的 BFS 和 DFS
+
+```rust
+use std::collections::{HashMap, HashSet, VecDeque};
+
+struct Graph {
+    adj: HashMap<i32, Vec<i32>>,
+}
+
+impl Graph {
+    fn new() -> Self {
+        Self { adj: HashMap::new() }
+    }
+
+    fn add_edge(&mut self, u: i32, v: i32) {
+        self.adj.entry(u).or_insert_with(Vec::new).push(v);
+    }
+
+    fn bfs(&self, start: i32) -> Vec<i32> {
+        let mut visited = HashSet::new();
+        let mut queue = VecDeque::new();
+        let mut result = vec![];
+
+        queue.push_back(start);
+        visited.insert(start);
+
+        while let Some(node) = queue.pop_front() {
+            result.push(node);
+            if let Some(neighbors) = self.adj.get(&node) {
+                for &neighbor in neighbors {
+                    if visited.insert(neighbor) {
+                        queue.push_back(neighbor);
+                    }
+                }
+            }
+        }
+        result
+    }
+
+    fn dfs(&self, start: i32) -> Vec<i32> {
+        let mut visited = HashSet::new();
+        let mut result = vec![];
+        self.dfs_helper(start, &mut visited, &mut result);
+        result
+    }
+
+    fn dfs_helper(&self, node: i32, visited: &mut HashSet<i32>, result: &mut Vec<i32>) {
+        visited.insert(node);
+        result.push(node);
+        if let Some(neighbors) = self.adj.get(&node) {
+            for &neighbor in neighbors {
+                if !visited.contains(&neighbor) {
+                    self.dfs_helper(neighbor, visited, result);
+                }
+            }
+        }
+    }
+}
+
+// 使用
+let mut g = Graph::new();
+g.add_edge(0, 1);
+g.add_edge(0, 2);
+g.add_edge(1, 2);
+println!("BFS: {:?}", g.bfs(0));
+println!("DFS: {:?}", g.dfs(0));
+```
+
+### 示例 5: 滑动窗口最大值
+
+```rust
+use std::collections::VecDeque;
+
+fn max_sliding_window(nums: &[i32], k: usize) -> Vec<i32> {
+    let mut result = vec![];
+    let mut deque: VecDeque<usize> = VecDeque::new();
+
+    for i in 0..nums.len() {
+        // 移除窗口外的元素
+        while let Some(&front) = deque.front() {
+            if front + k <= i {
+                deque.pop_front();
+            } else {
+                break;
+            }
+        }
+
+        // 移除较小的元素
+        while let Some(&back) = deque.back() {
+            if nums[back] < nums[i] {
+                deque.pop_back();
+            } else {
+                break;
+            }
+        }
+
+        deque.push_back(i);
+
+        // 记录窗口最大值
+        if i >= k - 1 {
+            result.push(nums[deque.front().unwrap()]);
+        }
+    }
+
+    result
+}
+
+// 使用
+let nums = vec![1, 3, -1, -3, 5, 3, 6, 7];
+assert_eq!(max_sliding_window(&nums, 3), vec![3, 3, 5, 5, 6, 7]);
+```
+
+---
+
+## 🎯 使用场景
+
+### 场景: 日志分析系统
+
+在实际项目中，算法常用于数据处理和分析。以下是一个简化的日志分析系统：
+
+```rust
+use std::collections::HashMap;
+
+struct LogAnalyzer;
+
+impl LogAnalyzer {
+    // 统计 IP 出现频率（哈希表）
+    fn ip_frequency(logs: &[&str]) -> HashMap<&str, usize> {
+        let mut freq = HashMap::new();
+        for log in logs {
+            let ip = log.split_whitespace().next().unwrap_or("");
+            *freq.entry(ip).or_insert(0) += 1;
+        }
+        freq
+    }
+
+    // 查找最频繁的 IP（堆/优先级队列）
+    fn top_k_ips(logs: &[&str], k: usize) -> Vec<(&str, usize)> {
+        let freq = Self::ip_frequency(logs);
+        let mut pairs: Vec<_> = freq.into_iter().collect();
+
+        // 按频率排序（快速选择可用于 O(n) 复杂度）
+        pairs.sort_by(|a, b| b.1.cmp(&a.1));
+        pairs.into_iter().take(k).collect()
+    }
+
+    // 检测异常访问模式（滑动窗口）
+    fn detect_burst(logs: &[(u64, &str)], window_secs: u64, threshold: usize) -> Vec<(u64, usize)> {
+        let mut result = vec![];
+        let mut window = std::collections::VecDeque::new();
+
+        for &(timestamp, _) in logs {
+            window.push_back(timestamp);
+
+            // 移除窗口外的记录
+            while let Some(&front) = window.front() {
+                if front + window_secs < timestamp {
+                    window.pop_front();
+                } else {
+                    break;
+                }
+            }
+
+            if window.len() >= threshold {
+                result.push((timestamp, window.len()));
+            }
+        }
+        result
+    }
+}
+```
+
+---
+
 ## ⚡ 并行算法
 
 ### 并行排序
 
 ```rust
-use c08_algorithms::algorithms::execution_modes::parallel::*;
+use rayon::prelude::*;
 
 let mut data = vec![64, 34, 25, 12, 22, 11, 90];
 
-// 并行快速排序
-parallel_quicksort(&mut data);
+// 使用 rayon 进行并行排序
+data.par_sort();
 println!("Sorted: {:?}", data);
 ```
 
 ### 并行搜索
 
 ```rust
-use c08_algorithms::algorithms::execution_modes::parallel::*;
+use rayon::prelude::*;
 
 let data = vec![1, 3, 5, 7, 9, 11, 13, 15];
 
-// 并行线性搜索
-if let Some(index) = parallel_linear_search(&data, 7) {
-    println!("Found at index: {}", index);
+// 并行查找
+let found = data.par_iter().find_any(|&&x| x == 7);
+if let Some(&value) = found {
+    println!("Found: {}", value);
 }
 ```
 
@@ -346,6 +637,84 @@ v.sort_by(|a, b| a.1.cmp(&b.1));  // 可能破坏第一键顺序
 
 ---
 
+### 反例 3: 递归深度过大导致栈溢出
+
+**错误示例**:
+
+```rust
+fn factorial(n: u64) -> u64 {
+    if n == 0 { 1 } else { n * factorial(n - 1) }  // ❌ 大数会栈溢出
+}
+
+factorial(100_000);  // thread 'main' has overflowed its stack
+```
+
+**原因**: 递归调用会消耗栈空间，深度过大时溢出。
+
+**修正**: 使用迭代或尾递归优化：
+
+```rust
+fn factorial(n: u64) -> u64 {
+    let mut result = 1;
+    for i in 1..=n {
+        result = result.checked_mul(i).expect("overflow");
+    }
+    result
+}
+```
+
+---
+
+### 反例 4: 整数溢出
+
+**错误示例**:
+
+```rust
+let a: i32 = 2_000_000_000;
+let b: i32 = 2_000_000_000;
+let sum = a + b;  // ❌ 溢出：结果为 -294967296
+```
+
+**原因**: Rust 中整数溢出在 release 模式下是未定义行为（debug 模式会 panic）。
+
+**修正**: 使用检查溢出方法：
+
+```rust
+let sum = a.checked_add(b).expect("overflow");
+// 或使用 wrapping_add、saturating_add
+```
+
+---
+
+### 反例 5: 不当使用递归导致重复计算
+
+**错误示例**:
+
+```rust
+fn fib(n: u32) -> u32 {
+    if n <= 1 { n } else { fib(n - 1) + fib(n - 2) }  // ❌ 指数级复杂度
+}
+
+fib(50);  // 极慢！
+```
+
+**原因**: 朴素递归存在大量重复计算。
+
+**修正**: 使用记忆化或迭代：
+
+```rust
+fn fib(n: usize) -> usize {
+    let mut dp = vec![0; n + 1];
+    dp[1] = 1;
+    for i in 2..=n {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+    dp[n]
+}
+```
+
+---
+
 ## 📚 相关文档
 
 - [完整文档](../../../crates/c08_algorithms/README.md)
@@ -373,6 +742,13 @@ v.sort_by(|a, b| a.1.cmp(&b.1));  // 可能破坏第一键顺序
 - [算法指南](../../../crates/c08_algorithms/docs/tier_02_guides/01_算法快速入门.md)
 - [数据结构指南](../../../crates/c08_algorithms/docs/tier_02_guides/02_数据结构实践.md)
 - [性能优化](../../../crates/c08_algorithms/docs/tier_02_guides/04_性能优化实践.md)
+
+### 形式化理论与类型系统
+
+- [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 算法与类型的关系
+- [构造能力理论](../../research_notes/type_theory/construction_capability.md) — 算法表达能力边界
+- [执行模型边界分析](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) — 算法复杂度与执行模型
+- [工作流安全完整模型](../../research_notes/software_design_theory/02_workflow_safe_complete_models/) — 算法正确性验证
 
 ### 相关速查卡
 

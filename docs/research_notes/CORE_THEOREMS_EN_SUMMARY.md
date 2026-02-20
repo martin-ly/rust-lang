@@ -1,8 +1,11 @@
 # Core Theorems — English Summary
 
+> **创建日期**: 2026-02-14
+> **最后更新**: 2026-02-20
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **状态**: ✅ 已完成
 > **Source**: [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) (Chinese)
 > **Proof depth**: L2 (full proofs; L3 machine-checkable scaffolding in progress)
-> **Last updated**: 2026-02-20
 
 ---
 

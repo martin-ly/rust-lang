@@ -58,6 +58,14 @@
     - [深入学习](#深入学习)
     - [代码示例](#代码示例)
     - [形式化理论](#形式化理论)
+  - [💡 使用场景](#-使用场景)
+    - [场景 1: 状态机类型系统](#场景-1-状态机类型系统)
+    - [场景 2: 类型安全的配置构建](#场景-2-类型安全的配置构建)
+    - [场景 3: 零成本抽象的数据库查询](#场景-3-零成本抽象的数据库查询)
+  - [⚠️ 边界情况](#️-边界情况)
+    - [边界 1: 动态大小类型 (DST)](#边界-1-动态大小类型-dst)
+    - [边界 2: 递归类型与间接](#边界-2-递归类型与间接)
+    - [边界 3: 生命周期子类型](#边界-3-生命周期子类型)
   - [🆕 Rust 1.93.0 新特性](#-rust-1930-新特性)
     - [MaybeUninit API 增强](#maybeuninit-api-增强)
     - [切片到数组转换](#切片到数组转换)
@@ -707,6 +715,272 @@ fn take_slice<T>(t: &[T]) {}
 - [类型构造能力](../../research_notes/type_theory/construction_capability.md) — Def TCON1、TCON 矩阵、类型构造决策树、Rust 1.93 新特性
 - [类型构造决策树（直达）](../../research_notes/type_theory/construction_capability.md#类型构造决策树) — 目标类型→构造路径选择、确定性判定
 - [类型理论完备性缺口](../../research_notes/type_theory/00_completeness_gaps.md) — 缺口与对构造能力的影响
+- [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 类型系统的数学基础
+- [型变理论](../../research_notes/type_theory/variance_theory.md) — 型变的形式化定义
+- [Trait 系统形式化](../../research_notes/type_theory/trait_system_formalization.md) — Trait 系统的类型理论
+
+---
+
+## 💡 使用场景
+
+### 场景 1: 状态机类型系统
+
+```rust
+// 使用类型系统实现编译时状态检查
+struct Idle;
+struct Running;
+struct Paused;
+
+struct StateMachine<State> {
+    data: i32,
+    _state: std::marker::PhantomData<State>,
+}
+
+impl StateMachine<Idle> {
+    fn new(data: i32) -> Self {
+        StateMachine {
+            data,
+            _state: std::marker::PhantomData,
+        }
+    }
+
+    fn start(self) -> StateMachine<Running> {
+        println!("开始运行，数据: {}", self.data);
+        StateMachine {
+            data: self.data,
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+impl StateMachine<Running> {
+    fn pause(self) -> StateMachine<Paused> {
+        println!("暂停");
+        StateMachine {
+            data: self.data,
+            _state: std::marker::PhantomData,
+        }
+    }
+
+    fn stop(self) -> StateMachine<Idle> {
+        println!("停止");
+        StateMachine {
+            data: self.data,
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+impl StateMachine<Paused> {
+    fn resume(self) -> StateMachine<Running> {
+        println!("恢复运行");
+        StateMachine {
+            data: self.data,
+            _state: std::marker::PhantomData,
+        }
+    }
+}
+
+fn main() {
+    let machine = StateMachine::<Idle>::new(42)
+        .start()
+        .pause()
+        .resume()
+        .stop();
+
+    // machine.start(); // ❌ 编译错误：Idle 状态没有 start 方法
+}
+```
+
+### 场景 2: 类型安全的配置构建
+
+```rust
+use std::marker::PhantomData;
+
+// 标记类型
+struct Unvalidated;
+struct Validated;
+
+struct Config<State = Unvalidated> {
+    host: String,
+    port: u16,
+    _state: PhantomData<State>,
+}
+
+impl Config<Unvalidated> {
+    fn new(host: &str, port: u16) -> Self {
+        Config {
+            host: host.to_string(),
+            port,
+            _state: PhantomData,
+        }
+    }
+
+    fn validate(self) -> Result<Config<Validated>, String> {
+        if self.host.is_empty() {
+            return Err("主机名不能为空".to_string());
+        }
+        if self.port == 0 {
+            return Err("端口号不能为 0".to_string());
+        }
+        Ok(Config {
+            host: self.host,
+            port: self.port,
+            _state: PhantomData,
+        })
+    }
+}
+
+impl Config<Validated> {
+    fn connect(&self) {
+        println!("连接到 {}:{}", self.host, self.port);
+    }
+}
+
+fn main() {
+    let config = Config::new("localhost", 8080);
+    // config.connect(); // ❌ 编译错误：未验证的配置不能连接
+
+    match config.validate() {
+        Ok(valid) => valid.connect(),
+        Err(e) => println!("验证失败: {}", e),
+    }
+}
+```
+
+### 场景 3: 零成本抽象的数据库查询
+
+```rust
+trait Table {
+    const NAME: &'static str;
+    type Id: Clone;
+}
+
+struct UserTable;
+impl Table for UserTable {
+    const NAME: &'static str = "users";
+    type Id = u64;
+}
+
+struct Query<T: Table> {
+    _phantom: std::marker::PhantomData<T>,
+    conditions: Vec<String>,
+}
+
+impl<T: Table> Query<T> {
+    fn new() -> Self {
+        Query {
+            _phantom: std::marker::PhantomData,
+            conditions: vec![],
+        }
+    }
+
+    fn filter(mut self, condition: &str) -> Self {
+        self.conditions.push(condition.to_string());
+        self
+    }
+
+    fn build(self) -> String {
+        let where_clause = if self.conditions.is_empty() {
+            String::new()
+        } else {
+            format!(" WHERE {}", self.conditions.join(" AND "))
+        };
+        format!("SELECT * FROM {}{}", T::NAME, where_clause)
+    }
+}
+
+fn main() {
+    let query = Query::<UserTable>::new()
+        .filter("age > 18")
+        .filter("active = true")
+        .build();
+
+    println!("SQL: {}", query);
+    // 输出: SELECT * FROM users WHERE age > 18 AND active = true
+}
+```
+
+---
+
+## ⚠️ 边界情况
+
+### 边界 1: 动态大小类型 (DST)
+
+```rust
+fn process_slice(data: &[i32]) {
+    println!("切片长度: {}", data.len());
+}
+
+// 胖指针的内存布局
+fn main() {
+    let arr = [1, 2, 3, 4, 5];
+    let slice: &[i32] = &arr;
+
+    // slice 是胖指针：包含数据指针和长度
+    println!("胖指针示例");
+    process_slice(slice);
+
+    // 动态 trait 对象
+    let s: &dyn std::fmt::Display = &42;
+    println!("动态分派: {}", s);
+}
+```
+
+### 边界 2: 递归类型与间接
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+// ❌ 编译错误：递归类型会导致无限大小
+// enum List<T> {
+//     Cons(T, List<T>),
+//     Nil,
+// }
+
+// ✅ 解决：使用 Box 提供间接层
+enum List<T> {
+    Cons(T, Box<List<T>>),
+    Nil,
+}
+
+// ✅ 或用于共享所有权场景
+#[derive(Debug)]
+enum SharedList<T> {
+    Cons(T, Rc<RefCell<SharedList<T>>>),
+    Nil,
+}
+
+fn main() {
+    let list = List::Cons(1, Box::new(List::Cons(2, Box::new(List::Nil))));
+
+    let shared = Rc::new(RefCell::new(SharedList::Nil));
+    let list2 = SharedList::Cons(1, Rc::clone(&shared));
+
+    println!("递归类型示例完成");
+}
+```
+
+### 边界 3: 生命周期子类型
+
+```rust
+fn longer_lifetime<'a: 'b, 'b>(x: &'a str, _y: &'b str) -> &'b str {
+    x  // 'a 比 'b 活得长，所以可以返回 &'b str
+}
+
+fn main() {
+    let long = String::from("长生命周期");
+    let result;
+    {
+        let short = String::from("短生命周期");
+        result = longer_lifetime(&long, &short);
+        println!("在作用域内: {}", result);
+    }
+    // 这里 result 指向的 long 仍然有效
+    println!("在作用域外: {}", result);
+}
+```
 
 ---
 

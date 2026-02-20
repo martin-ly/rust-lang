@@ -52,6 +52,14 @@
     - [深入学习](#深入学习)
     - [代码示例](#代码示例)
     - [形式化理论](#形式化理论)
+  - [💡 使用场景](#-使用场景)
+    - [场景 1: Web 服务器并发处理](#场景-1-web-服务器并发处理)
+    - [场景 2: 批量数据获取](#场景-2-批量数据获取)
+    - [场景 3: 生产者-消费者模式](#场景-3-生产者-消费者模式)
+  - [⚠️ 边界情况](#️-边界情况)
+    - [边界 1: 异步递归](#边界-1-异步递归)
+    - [边界 2: 异步 Drop](#边界-2-异步-drop)
+    - [边界 3: 限流与背压](#边界-3-限流与背压)
   - [🆕 Rust 1.93.0 异步改进](#-rust-1930-异步改进)
     - [musl 1.2.5 DNS 解析改进](#musl-125-dns-解析改进)
   - [Rust 1.92.0 异步改进（历史）](#rust-1920-异步改进历史)
@@ -637,6 +645,212 @@ tokio = { version = "1", features = [
 - [CSP vs Actor](../../../crates/c06_async/src/csp_model_comparison.rs)
 - [异步状态机形式化](../../research_notes/formal_methods/async_state_machine.md) — Def 4.1–5.2、定理 T6.1–T6.3
 - [Pin 和自引用类型形式化](../../research_notes/formal_methods/pin_self_referential.md) — Def 1.1–2.2、定理 T1–T3
+
+---
+
+## 💡 使用场景
+
+### 场景 1: Web 服务器并发处理
+
+```rust
+use tokio::net::TcpListener;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
+    let listener = TcpListener::bind("127.0.0.1:8080").await?;
+    println!("服务器启动在 127.0.0.1:8080");
+
+    loop {
+        let (mut socket, addr) = listener.accept().await?;
+        println!("新连接: {:?}", addr);
+
+        // 每个连接在独立任务中处理
+        tokio::spawn(async move {
+            let mut buf = [0u8; 1024];
+
+            match socket.read(&mut buf).await {
+                Ok(n) if n > 0 => {
+                    let response = format!(
+                        "HTTP/1.1 200 OK\r\nContent-Length: {}\r\n\r\nHello!",
+                        n
+                    );
+                    let _ = socket.write_all(response.as_bytes()).await;
+                }
+                _ => {}
+            }
+        });
+    }
+}
+```
+
+### 场景 2: 批量数据获取
+
+```rust
+use tokio::time::{sleep, Duration};
+
+async fn fetch_user(id: u32) -> Result<String, &'static str> {
+    // 模拟网络请求
+    sleep(Duration::from_millis(100)).await;
+    Ok(format!("User-{}", id))
+}
+
+#[tokio::main]
+async fn main() {
+    let ids = vec![1, 2, 3, 4, 5];
+
+    // 串行获取（慢）
+    let start = std::time::Instant::now();
+    for id in &ids {
+        let _ = fetch_user(*id).await;
+    }
+    println!("串行耗时: {:?}", start.elapsed());
+
+    // 并发获取（快）
+    let start = std::time::Instant::now();
+    let futures: Vec<_> = ids.iter()
+        .map(|id| fetch_user(*id))
+        .collect();
+
+    let results = futures::future::join_all(futures).await;
+    for (i, result) in results.iter().enumerate() {
+        match result {
+            Ok(user) => println!("用户 {}: {}", ids[i], user),
+            Err(e) => println!("获取失败: {}", e),
+        }
+    }
+    println!("并发耗时: {:?}", start.elapsed());
+}
+```
+
+### 场景 3: 生产者-消费者模式
+
+```rust
+use tokio::sync::mpsc;
+use tokio::time::{sleep, Duration};
+
+#[tokio::main]
+async fn main() {
+    let (tx, mut rx) = mpsc::channel(100);
+
+    // 生产者任务
+    let producer = tokio::spawn(async move {
+        for i in 0..10 {
+            tx.send(format!("消息 {}", i)).await.unwrap();
+            sleep(Duration::from_millis(50)).await;
+        }
+    });
+
+    // 消费者任务
+    let consumer = tokio::spawn(async move {
+        while let Some(msg) = rx.recv().await {
+            println!("收到: {}", msg);
+            sleep(Duration::from_millis(100)).await; // 模拟处理
+        }
+        println!("通道关闭");
+    });
+
+    let _ = tokio::join!(producer, consumer);
+}
+```
+
+---
+
+## ⚠️ 边界情况
+
+### 边界 1: 异步递归
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+
+// 异步递归需要 Box::pin
+type BoxFuture<'a, T> = Pin<Box<dyn Future<Output = T> + Send + 'a>>;
+
+async fn factorial(n: u64) -> u64 {
+    if n <= 1 {
+        1
+    } else {
+        n * async_factorial(n - 1).await
+    }
+}
+
+fn async_factorial(n: u64) -> BoxFuture<'static, u64> {
+    Box::pin(factorial(n))
+}
+
+#[tokio::main]
+async fn main() {
+    println!("10! = {}", async_factorial(10).await);
+}
+```
+
+### 边界 2: 异步 Drop
+
+```rust
+use std::sync::Arc;
+use tokio::sync::Mutex;
+
+struct AsyncResource {
+    data: Arc<Mutex<Vec<i32>>>,
+}
+
+impl AsyncResource {
+    async fn cleanup(&self) {
+        let mut data = self.data.lock().await;
+        data.clear();
+        println!("资源已清理");
+    }
+}
+
+impl Drop for AsyncResource {
+    fn drop(&mut self) {
+        // ⚠️ 注意：Drop 不能是 async
+        // 如果需要异步清理，使用显式的 async cleanup 方法
+        println!("同步 Drop（不能 await）");
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let resource = AsyncResource {
+        data: Arc::new(Mutex::new(vec![1, 2, 3])),
+    };
+
+    // 显式异步清理
+    resource.cleanup().await;
+    drop(resource);  // 同步 Drop
+}
+```
+
+### 边界 3: 限流与背压
+
+```rust
+use tokio::sync::Semaphore;
+use std::sync::Arc;
+
+#[tokio::main]
+async fn main() {
+    // 最多同时执行 3 个任务
+    let semaphore = Arc::new(Semaphore::new(3));
+    let mut handles = vec![];
+
+    for i in 0..10 {
+        let sem = Arc::clone(&semaphore);
+        let handle = tokio::spawn(async move {
+            let _permit = sem.acquire().await.unwrap();
+            println!("任务 {} 开始执行", i);
+            tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
+            println!("任务 {} 完成", i);
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.await.unwrap();
+    }
+}
+```
 
 ---
 

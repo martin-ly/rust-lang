@@ -98,6 +98,9 @@
     - [测试覆盖率](#测试覆盖率)
     - [模糊测试](#模糊测试)
     - [并发测试](#并发测试)
+  - [📐 形式化方法链接](#-形式化方法链接)
+    - [理论基础](#理论基础)
+    - [形式化定理](#形式化定理)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
 
@@ -1468,11 +1471,31 @@ fn broken_test() {
 - [Loom](https://docs.rs/loom/) - 并发模型检查器
 - [Shuttle](https://docs.rs/shuttle/) - 并发测试框架
 
+## 📐 形式化方法链接
+
+### 理论基础
+
+| 概念 | 形式化文档 | 描述 |
+| :--- | :--- | :--- |
+| **类型系统** | [type_system_foundations](../../research_notes/type_theory/type_system_foundations.md) | 测试的类型正确性 |
+| **所有权与借用** | [borrow_checker_proof](../../research_notes/formal_methods/borrow_checker_proof.md) | 测试中的内存安全 |
+| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/send_sync_formalization.md) | 并发测试安全性 |
+| **反模式** | [anti_patterns](../../research_notes/software_design_theory/07_anti_patterns.md) | 测试中的常见错误模式 |
+
+### 形式化定理
+
+**定理 TEST-T1（测试完备性）**: 若测试覆盖所有公理/定理路径，则程序满足规范。
+
+*证明*: 由 [FORMAL_PROOF_SYSTEM_GUIDE](../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)，测试用例对应形式化规范的实例化，全覆盖保证所有执行路径验证。∎
+
+---
+
 ### 项目内部文档
 
 - [完整测试文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/)
 - [WASM 测试策略](../../../crates/c12_wasm/docs/wasm_engineering/Testing_Strategies.md)
 - [测试研究笔记](../../research_notes/)
+- [形式化方法研究](../../research_notes/formal_methods/)
 
 ### 相关速查卡
 

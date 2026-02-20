@@ -57,14 +57,26 @@
     - [分组](#分组)
     - [去重](#去重)
     - [窗口操作](#窗口操作)
+  - [💡 代码示例](#-代码示例)
+    - [示例 1: 自定义迭代器](#示例-1-自定义迭代器)
+    - [示例 2: 实现 IntoIterator](#示例-2-实现-intoiterator)
+    - [示例 3: 迭代器适配器链](#示例-3-迭代器适配器链)
+    - [示例 4: 使用 Entry API 高效更新 HashMap](#示例-4-使用-entry-api-高效更新-hashmap)
+    - [示例 5: LRU Cache 实现](#示例-5-lru-cache-实现)
+  - [🎯 使用场景](#-使用场景)
+    - [场景: 数据处理管道](#场景-数据处理管道)
   - [🚫 反例速查](#-反例速查)
     - [反例 1: 迭代时修改集合](#反例-1-迭代时修改集合)
     - [反例 2: 索引越界](#反例-2-索引越界)
+    - [反例 3: 在迭代时修改集合（安全版本）](#反例-3-在迭代时修改集合安全版本)
+    - [反例 4: 错误使用 drain](#反例-4-错误使用-drain)
+    - [反例 5: HashMap 遍历顺序依赖](#反例-5-hashmap-遍历顺序依赖)
   - [📚 相关文档](#-相关文档)
   - [🧩 相关示例代码](#-相关示例代码)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
+    - [形式化理论与类型系统](#形式化理论与类型系统)
     - [相关速查卡](#相关速查卡)
 
 ---
@@ -720,6 +732,239 @@ let vec = vec![1, 2, 3, 4, 5];
 // 滑动窗口（需要 itertools）
 // use itertools::Itertools;
 // let windows: Vec<_> = vec.iter().tuple_windows().collect();
+
+// 原生滑动窗口实现
+fn sliding_windows<T: Clone>(slice: &[T], size: usize) -> Vec<Vec<T>> {
+    slice.windows(size).map(|w| w.to_vec()).collect()
+}
+
+let windows = sliding_windows(&vec, 3);
+// [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+```
+
+---
+
+## 💡 代码示例
+
+### 示例 1: 自定义迭代器
+
+```rust
+struct Fibonacci {
+    curr: u64,
+    next: u64,
+}
+
+impl Fibonacci {
+    fn new() -> Self {
+        Self { curr: 0, next: 1 }
+    }
+}
+
+impl Iterator for Fibonacci {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let current = self.curr;
+        self.curr = self.next;
+        self.next = current + self.next;
+        Some(current)
+    }
+}
+
+// 使用
+let fib = Fibonacci::new();
+let first_10: Vec<u64> = fib.take(10).collect();
+// [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+```
+
+### 示例 2: 实现 IntoIterator
+
+```rust
+struct BookCollection {
+    books: Vec<String>,
+}
+
+impl IntoIterator for BookCollection {
+    type Item = String;
+    type IntoIter = std::vec::IntoIter<Self::Item>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.books.into_iter()
+    }
+}
+
+impl<'a> IntoIterator for &'a BookCollection {
+    type Item = &'a String;
+    type IntoIter = std::slice::Iter<'a, String>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.books.iter()
+    }
+}
+
+// 使用
+let collection = BookCollection {
+    books: vec!["Rust Book".to_string(), "Programming".to_string()],
+};
+
+for book in &collection {
+    println!("{}", book);
+}
+```
+
+### 示例 3: 迭代器适配器链
+
+```rust
+let data = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// 复杂数据处理管道
+let result: Vec<i32> = data
+    .iter()
+    .filter(|&&x| x % 2 == 0)      // 筛选偶数
+    .map(|&x| x * x)                // 平方
+    .filter(|&x| x > 10)            // 筛选大于10的
+    .take(3)                        // 取前3个
+    .collect();
+
+assert_eq!(result, vec![16, 36, 64]);
+```
+
+### 示例 4: 使用 Entry API 高效更新 HashMap
+
+```rust
+use std::collections::HashMap;
+
+fn word_frequency(text: &str) -> HashMap<String, usize> {
+    let mut freq = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let word = word.to_lowercase();
+        // Entry API 避免两次哈希计算
+        *freq.entry(word).or_insert(0) += 1;
+    }
+
+    freq
+}
+
+// 使用
+let text = "the quick brown fox jumps over the lazy dog";
+let freq = word_frequency(text);
+assert_eq!(freq.get("the"), Some(&2));
+```
+
+### 示例 5: LRU Cache 实现
+
+```rust
+use std::collections::VecDeque;
+use std::collections::HashMap;
+
+struct LRUCache<K, V> {
+    capacity: usize,
+    map: HashMap<K, V>,
+    order: VecDeque<K>,
+}
+
+impl<K: Clone + Eq + std::hash::Hash, V> LRUCache<K, V> {
+    fn new(capacity: usize) -> Self {
+        Self {
+            capacity,
+            map: HashMap::with_capacity(capacity),
+            order: VecDeque::with_capacity(capacity),
+        }
+    }
+
+    fn get(&mut self, key: &K) -> Option<&V> {
+        if self.map.contains_key(key) {
+            // 更新访问顺序
+            self.order.retain(|k| k != key);
+            self.order.push_back(key.clone());
+            self.map.get(key)
+        } else {
+            None
+        }
+    }
+
+    fn put(&mut self, key: K, value: V) {
+        if self.map.contains_key(&key) {
+            self.order.retain(|k| k != &key);
+        } else if self.map.len() >= self.capacity {
+            // 淘汰最久未使用的
+            if let Some(lru_key) = self.order.pop_front() {
+                self.map.remove(&lru_key);
+            }
+        }
+
+        self.order.push_back(key.clone());
+        self.map.insert(key, value);
+    }
+}
+
+// 使用
+let mut cache = LRUCache::new(2);
+cache.put(1, "a");
+cache.put(2, "b");
+cache.put(3, "c");  // 淘汰 1
+assert_eq!(cache.get(&1), None);
+assert_eq!(cache.get(&2), Some(&"b"));
+```
+
+---
+
+## 🎯 使用场景
+
+### 场景: 数据处理管道
+
+在实际项目中，迭代器常用于构建高效的数据处理管道。以下是一个日志分析管道的示例：
+
+```rust
+use std::collections::HashMap;
+
+struct LogEntry {
+    timestamp: u64,
+    level: String,
+    message: String,
+}
+
+fn analyze_logs(logs: Vec<LogEntry>) -> HashMap<String, usize> {
+    logs.into_iter()
+        .filter(|log| log.level == "ERROR" || log.level == "WARN")
+        .map(|log| {
+            // 提取错误类型
+            log.message.split(':').next().unwrap_or("Unknown").to_string()
+        })
+        .fold(HashMap::new(), |mut acc, error_type| {
+            *acc.entry(error_type).or_insert(0) += 1;
+            acc
+        })
+}
+
+// 更复杂的管道：时间窗口聚合
+fn time_window_aggregation(
+    logs: Vec<LogEntry>,
+    window_secs: u64,
+) -> Vec<(u64, usize)> {
+    let mut result = vec![];
+    let mut current_window = 0u64;
+    let mut count = 0usize;
+
+    for log in logs {
+        let window = log.timestamp / window_secs;
+        if window != current_window {
+            if count > 0 {
+                result.push((current_window, count));
+            }
+            current_window = window;
+            count = 0;
+        }
+        count += 1;
+    }
+
+    if count > 0 {
+        result.push((current_window, count));
+    }
+
+    result
+}
 ```
 
 ---
@@ -768,6 +1013,77 @@ let x = v.get(10);  // ✅ 返回 Option
 
 ---
 
+### 反例 3: 在迭代时修改集合（安全版本）
+
+**错误示例**:
+
+```rust
+let mut v = vec![1, 2, 3];
+for i in 0..v.len() {
+    if v[i] % 2 == 0 {
+        v.remove(i);  // ❌ 索引错位，可能 panic
+    }
+}
+```
+
+**原因**: 删除元素后，后续元素的索引会变化，可能导致越界或跳过元素。
+
+**修正**: 使用 `retain`：
+
+```rust
+let mut v = vec![1, 2, 3, 4, 5];
+v.retain(|&x| x % 2 != 0);  // ✅ 保留奇数
+// v = [1, 3, 5]
+```
+
+---
+
+### 反例 4: 错误使用 drain
+
+**错误示例**:
+
+```rust
+let mut v = vec![1, 2, 3, 4, 5];
+let drained: Vec<_> = v.drain(2..).collect();
+// 以为 v 是 [1, 2]，但 drain 返回的迭代器必须被消耗
+```
+
+**原因**: `drain` 返回的迭代器必须被完全消耗，否则未移除的元素可能处于未定义状态。
+
+**修正**:
+
+```rust
+let mut v = vec![1, 2, 3, 4, 5];
+{
+    let drained: Vec<_> = v.drain(2..).collect();
+    // 处理 drained
+} // drain 迭代器被 drop，v 变为 [1, 2]
+```
+
+---
+
+### 反例 5: HashMap 遍历顺序依赖
+
+**错误示例**:
+
+```rust
+let map: HashMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
+let keys: Vec<_> = map.keys().collect();
+// 假设 keys 总是 [1, 2]，但实际上顺序不确定
+```
+
+**原因**: `HashMap` 的遍历顺序是不确定的，依赖于哈希函数和插入顺序。
+
+**修正**: 如果需要有序，使用 `BTreeMap`：
+
+```rust
+use std::collections::BTreeMap;
+let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
+// 遍历时保证按键排序
+```
+
+---
+
 ## 📚 相关文档
 
 - [迭代器参考](../../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md)
@@ -795,6 +1111,14 @@ let x = v.get(10);  // ✅ 返回 Option
 
 - [完整迭代器参考](../../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md)
 - [集合研究笔记](../../research_notes/)
+
+### 形式化理论与类型系统
+
+- [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 集合类型与类型理论
+- [构造能力理论](../../research_notes/type_theory/construction_capability.md) — 迭代器的表达能力
+- [泛型编程形式化](../../research_notes/type_theory/trait_system_formalization.md) — Iterator trait 形式化
+- [所有权模型](../../research_notes/formal_methods/ownership_model.md) — 集合所有权转移形式化
+- [变型理论](../../research_notes/type_theory/variance_theory.md) — 集合协变/逆变
 
 ### 相关速查卡
 

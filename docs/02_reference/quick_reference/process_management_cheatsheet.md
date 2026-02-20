@@ -30,6 +30,13 @@
     - [反例 2: 在 Unix 信号处理中调用非 async-signal-safe 函数](#反例-2-在-unix-信号处理中调用非-async-signal-safe-函数)
   - [📚 相关文档](#-相关文档)
   - [🧩 相关示例代码](#-相关示例代码)
+  - [🎯 使用场景](#-使用场景)
+    - [场景 1: 构建任务调度器](#场景-1-构建任务调度器)
+    - [场景 2: 安全沙箱执行](#场景-2-安全沙箱执行)
+    - [场景 3: 进程监控与自动重启](#场景-3-进程监控与自动重启)
+  - [📐 形式化方法链接](#-形式化方法链接)
+    - [理论基础](#理论基础)
+    - [形式化定理](#形式化定理)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -262,6 +269,178 @@ fn handler(_: i32) {
 
 ---
 
+## 🎯 使用场景
+
+### 场景 1: 构建任务调度器
+
+```rust
+use std::process::{Command, Stdio};
+use std::collections::VecDeque;
+
+struct TaskScheduler {
+    max_concurrent: usize,
+    running: Vec<std::process::Child>,
+    pending: VecDeque<Task>,
+}
+
+struct Task {
+    command: String,
+    args: Vec<String>,
+}
+
+impl TaskScheduler {
+    fn new(max_concurrent: usize) -> Self {
+        Self {
+            max_concurrent,
+            running: Vec::new(),
+            pending: VecDeque::new(),
+        }
+    }
+
+    fn submit(&mut self, task: Task) {
+        if self.running.len() < self.max_concurrent {
+            self.spawn(task);
+        } else {
+            self.pending.push_back(task);
+        }
+    }
+
+    fn spawn(&mut self, task: Task) {
+        let child = Command::new(&task.command)
+            .args(&task.args)
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped())
+            .spawn()
+            .expect("Failed to spawn process");
+
+        self.running.push(child);
+    }
+
+    fn poll(&mut self) -> Vec<std::process::Output> {
+        let mut completed = Vec::new();
+        let mut still_running = Vec::new();
+
+        for mut child in self.running.drain(..) {
+            match child.try_wait() {
+                Ok(Some(_)) => {
+                    if let Ok(output) = child.wait_with_output() {
+                        completed.push(output);
+                    }
+                }
+                _ => still_running.push(child),
+            }
+        }
+
+        self.running = still_running;
+
+        // 启动等待中的任务
+        while self.running.len() < self.max_concurrent && !self.pending.is_empty() {
+            if let Some(task) = self.pending.pop_front() {
+                self.spawn(task);
+            }
+        }
+
+        completed
+    }
+}
+```
+
+### 场景 2: 安全沙箱执行
+
+```rust
+#[cfg(unix)]
+use std::process::Command;
+
+#[cfg(unix)]
+fn sandboxed_execute(program: &str, args: &[&str]) -> std::io::Result<std::process::Output> {
+    use std::time::Duration;
+
+    let output = Command::new(program)
+        .args(args)
+        // 限制资源使用
+        .env_clear()  // 清空环境变量
+        .env("PATH", "/usr/bin:/bin")  // 只允许基本路径
+        .current_dir("/tmp")  // 限制工作目录
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()?
+        .wait_with_output()?;
+
+    Ok(output)
+}
+```
+
+### 场景 3: 进程监控与自动重启
+
+```rust
+use tokio::process::{Command, Child};
+use tokio::time::{sleep, Duration};
+
+struct ProcessMonitor {
+    command: String,
+    args: Vec<String>,
+    restart_policy: RestartPolicy,
+}
+
+enum RestartPolicy {
+    Always,
+    OnFailure,
+    Never,
+}
+
+impl ProcessMonitor {
+    async fn run(&self) -> anyhow::Result<()> {
+        let mut restart_count = 0;
+        let max_restarts = 5;
+
+        loop {
+            println!("Starting process: {} {:?}", self.command, self.args);
+
+            let mut child = Command::new(&self.command)
+                .args(&self.args)
+                .spawn()?;
+
+            let status = child.wait().await?;
+
+            match self.restart_policy {
+                RestartPolicy::Never => break,
+                RestartPolicy::Always if restart_count < max_restarts => {
+                    restart_count += 1;
+                    sleep(Duration::from_secs(1)).await;
+                }
+                RestartPolicy::OnFailure if !status.success() && restart_count < max_restarts => {
+                    restart_count += 1;
+                    sleep(Duration::from_secs(1)).await;
+                }
+                _ => break,
+            }
+        }
+
+        Ok(())
+    }
+}
+```
+
+---
+
+## 📐 形式化方法链接
+
+### 理论基础
+
+| 概念 | 形式化文档 | 描述 |
+| :--- | :--- | :--- |
+| **所有权模型** | [ownership_model](../../research_notes/formal_methods/ownership_model.md) | 进程资源生命周期管理 |
+| **异步状态机** | [async_state_machine](../../research_notes/formal_methods/async_state_machine.md) | 异步进程管理语义 |
+| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/send_sync_formalization.md) | 跨线程进程句柄安全 |
+
+### 形式化定理
+
+**定理 PROC-T1（进程资源安全）**: 若进程句柄正确实现 Drop trait，则进程资源不会泄漏。
+
+*证明*: 由 [ownership_model](../../research_notes/formal_methods/ownership_model.md) 定理 T3（RAII），Child 类型实现 Drop 在离开作用域时自动 wait 或 kill，保证资源释放。∎
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -274,6 +453,7 @@ fn handler(_: i32) {
 - [完整文档](../../../crates/c07_process/README.md)
 - [异步IO指南](../../../crates/c07_process/docs/async_stdio_guide.md)
 - [性能优化指南](../../../crates/c07_process/docs/performance_optimization_usage_guide.md)
+- [形式化方法研究](../../research_notes/formal_methods/)
 
 ### 相关速查卡
 
@@ -283,6 +463,6 @@ fn handler(_: i32) {
 
 ---
 
-**最后更新**: 2026-01-27
+**最后更新**: 2026-02-20
 **Rust 版本**: 1.93.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档

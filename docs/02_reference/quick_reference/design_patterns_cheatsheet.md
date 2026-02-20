@@ -23,7 +23,17 @@
     - [Newtype 模式](#newtype-模式)
     - [RAII 模式](#raii-模式)
     - [类型状态模式](#类型状态模式)
+  - [💡 代码示例](#-代码示例)
+    - [示例 1: 建造者模式（完整实现）](#示例-1-建造者模式完整实现)
+    - [示例 2: 策略模式](#示例-2-策略模式)
+    - [示例 3: 观察者模式](#示例-3-观察者模式)
+    - [示例 4: 装饰器模式](#示例-4-装饰器模式)
+    - [示例 5: 适配器模式](#示例-5-适配器模式)
+  - [🎯 使用场景](#-使用场景)
+    - [场景: Web 服务器配置系统](#场景-web-服务器配置系统)
   - [🚫 反例速查](#-反例速查)
+    - [反例 3: 单例模式在多线程中的误用](#反例-3-单例模式在多线程中的误用)
+    - [反例 4: 模式匹配不完整](#反例-4-模式匹配不完整)
     - [反例 1: 过度使用设计模式](#反例-1-过度使用设计模式)
     - [反例 2: Builder 缺少必填字段校验](#反例-2-builder-缺少必填字段校验)
   - [📚 相关文档](#-相关文档)
@@ -32,6 +42,7 @@
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [形式化理论与决策树](#形式化理论与决策树)
+    - [形式化理论与类型系统](#形式化理论与类型系统)
     - [相关速查卡](#相关速查卡)
 
 ---
@@ -142,11 +153,359 @@ impl Door<Closed> {
         Door { state: Open }
     }
 }
+
+// 使用示例：编译期状态检查
+let door = Door { state: Closed };
+let door = door.open();  // ✅ 可以打开
+// door.open();          // ❌ 编译错误：Open 状态没有 open 方法
+```
+
+---
+
+## 💡 代码示例
+
+### 示例 1: 建造者模式（完整实现）
+
+```rust
+#[derive(Debug)]
+struct Config {
+    host: String,
+    port: u16,
+    timeout: Duration,
+}
+
+struct ConfigBuilder {
+    host: Option<String>,
+    port: Option<u16>,
+    timeout: Option<Duration>,
+}
+
+impl ConfigBuilder {
+    fn new() -> Self {
+        Self {
+            host: None,
+            port: Some(8080),  // 默认值
+            timeout: Some(Duration::from_secs(30)),
+        }
+    }
+
+    fn host(mut self, host: impl Into<String>) -> Self {
+        self.host = Some(host.into());
+        self
+    }
+
+    fn port(mut self, port: u16) -> Self {
+        self.port = Some(port);
+        self
+    }
+
+    fn build(self) -> Result<Config, String> {
+        Ok(Config {
+            host: self.host.ok_or("host is required")?,
+            port: self.port.unwrap(),
+            timeout: self.timeout.unwrap(),
+        })
+    }
+}
+
+// 使用
+let config = ConfigBuilder::new()
+    .host("localhost")
+    .port(3000)
+    .build()?;
+```
+
+### 示例 2: 策略模式
+
+```rust
+trait PaymentStrategy {
+    fn pay(&self, amount: f64) -> Result<(), String>;
+}
+
+struct CreditCard {
+    number: String,
+}
+
+impl PaymentStrategy for CreditCard {
+    fn pay(&self, amount: f64) -> Result<(), String> {
+        println!("Paying {:.2} with credit card {}", amount, self.number);
+        Ok(())
+    }
+}
+
+struct PayPal {
+    email: String,
+}
+
+impl PaymentStrategy for PayPal {
+    fn pay(&self, amount: f64) -> Result<(), String> {
+        println!("Paying {:.2} via PayPal account {}", amount, self.email);
+        Ok(())
+    }
+}
+
+struct ShoppingCart {
+    strategy: Box<dyn PaymentStrategy>,
+}
+
+impl ShoppingCart {
+    fn checkout(&self, amount: f64) -> Result<(), String> {
+        self.strategy.pay(amount)
+    }
+}
+
+// 使用
+let cart = ShoppingCart {
+    strategy: Box::new(CreditCard { number: "1234".to_string() }),
+};
+cart.checkout(100.0)?;
+```
+
+### 示例 3: 观察者模式
+
+```rust
+use std::cell::RefCell;
+use std::rc::Rc;
+
+trait Observer {
+    fn update(&self, event: &str);
+}
+
+struct Subject {
+    observers: RefCell<Vec<Rc<dyn Observer>>>,
+}
+
+impl Subject {
+    fn new() -> Self {
+        Self { observers: RefCell::new(vec![]) }
+    }
+
+    fn attach(&self, observer: Rc<dyn Observer>) {
+        self.observers.borrow_mut().push(observer);
+    }
+
+    fn notify(&self, event: &str) {
+        for observer in self.observers.borrow().iter() {
+            observer.update(event);
+        }
+    }
+}
+
+struct EmailNotifier;
+
+impl Observer for EmailNotifier {
+    fn update(&self, event: &str) {
+        println!("Email: Event '{}' occurred", event);
+    }
+}
+
+// 使用
+let subject = Subject::new();
+let notifier = Rc::new(EmailNotifier);
+subject.attach(notifier);
+subject.notify("UserRegistered");
+```
+
+### 示例 4: 装饰器模式
+
+```rust
+trait Component {
+    fn operation(&self) -> String;
+}
+
+struct ConcreteComponent;
+
+impl Component for ConcreteComponent {
+    fn operation(&self) -> String {
+        "ConcreteComponent".to_string()
+    }
+}
+
+struct Decorator<C: Component> {
+    component: C,
+}
+
+impl<C: Component> Component for Decorator<C> {
+    fn operation(&self) -> String {
+        format!("Decorator({})", self.component.operation())
+    }
+}
+
+// 使用
+let component = ConcreteComponent;
+let decorated = Decorator { component };
+assert_eq!(decorated.operation(), "Decorator(ConcreteComponent)");
+```
+
+### 示例 5: 适配器模式
+
+```rust
+// 目标接口
+trait Target {
+    fn request(&self) -> String;
+}
+
+// 被适配者
+struct Adaptee;
+
+impl Adaptee {
+    fn specific_request(&self) -> String {
+        "Specific request".to_string()
+    }
+}
+
+// 适配器
+struct Adapter {
+    adaptee: Adaptee,
+}
+
+impl Target for Adapter {
+    fn request(&self) -> String {
+        self.adaptee.specific_request()
+    }
+}
+
+// 使用
+let adapter = Adapter { adaptee: Adaptee };
+assert_eq!(adapter.request(), "Specific request");
+```
+
+---
+
+## 🎯 使用场景
+
+### 场景: Web 服务器配置系统
+
+在实际项目中，设计模式组合使用能解决复杂问题。以下是一个配置系统的完整示例：
+
+```rust
+// 使用单例管理全局配置
+use std::sync::{Arc, Mutex, OnceLock};
+
+static CONFIG: OnceLock<Arc<Mutex<AppConfig>>> = OnceLock::new();
+
+struct AppConfig {
+    db_url: String,
+    port: u16,
+}
+
+impl AppConfig {
+    fn global() -> Arc<Mutex<Self>> {
+        CONFIG.get_or_init(|| {
+            Arc::new(Mutex::new(Self {
+                db_url: "postgres://localhost".to_string(),
+                port: 8080,
+            }))
+        }).clone()
+    }
+}
+
+// 使用建造者创建数据库连接
+struct DbConnectionBuilder {
+    url: String,
+    timeout: Duration,
+}
+
+impl DbConnectionBuilder {
+    fn new(url: impl Into<String>) -> Self {
+        Self {
+            url: url.into(),
+            timeout: Duration::from_secs(5),
+        }
+    }
+
+    fn timeout(mut self, secs: u64) -> Self {
+        self.timeout = Duration::from_secs(secs);
+        self
+    }
+
+    fn build(self) -> Result<DbConnection, String> {
+        Ok(DbConnection {
+            url: self.url,
+            timeout: self.timeout,
+        })
+    }
+}
+
+struct DbConnection {
+    url: String,
+    timeout: Duration,
+}
 ```
 
 ---
 
 ## 🚫 反例速查
+
+### 反例 3: 单例模式在多线程中的误用
+
+**错误示例**:
+
+```rust
+use std::cell::RefCell;
+
+thread_local! {
+    static COUNTER: RefCell<i32> = RefCell::new(0);
+}
+
+// ❌ 每个线程有自己的计数器，不是真正的全局单例
+fn increment() {
+    COUNTER.with(|c| *c.borrow_mut() += 1);
+}
+```
+
+**原因**: `thread_local!` 创建的是线程本地存储，不是全局单例。
+
+**修正**:
+
+```rust
+use std::sync::atomic::{AtomicI32, Ordering};
+
+static GLOBAL_COUNTER: AtomicI32 = AtomicI32::new(0);
+
+fn increment() {
+    GLOBAL_COUNTER.fetch_add(1, Ordering::SeqCst);
+}
+```
+
+---
+
+### 反例 4: 模式匹配不完整
+
+**错误示例**:
+
+```rust
+trait Shape {
+    fn area(&self) -> f64;
+}
+
+fn print_area(shape: &dyn Shape) {
+    // ❌ 无法知道具体类型，无法进行特定优化
+    println!("Area: {}", shape.area());
+}
+```
+
+**原因**: 过度抽象导致无法针对具体类型优化。
+
+**修正**: 使用枚举代数数据类型（ADT）替代 trait 对象：
+
+```rust
+enum Shape {
+    Circle { radius: f64 },
+    Rectangle { width: f64, height: f64 },
+}
+
+impl Shape {
+    fn area(&self) -> f64 {
+        match self {
+            Shape::Circle { radius } => std::f64::consts::PI * radius * radius,
+            Shape::Rectangle { width, height } => width * height,
+        }
+    }
+}
+```
+
+---
 
 ### 反例 1: 过度使用设计模式
 
@@ -219,6 +578,16 @@ let c = Config::builder().build();  // ❌ 必填 host 未设置
 - [表达边界（等价/近似/不可表达）](../../research_notes/software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md)
 - [组件成熟度判定树](../../research_notes/software_design_theory/04_compositional_engineering/README.md#构建能力确定性判定树) — L1–L4 成熟度、CE-T1–T3
 - [组件构建能力形式化树图](../../research_notes/software_design_theory/04_compositional_engineering/README.md#组件构建能力形式化树图与-43-模式联合) — 模块→crate→进程→网络、与 43 模式联合
+
+### 形式化理论与类型系统
+
+- [设计模式边界矩阵](../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) — 23 模式 × 三维边界（安全/支持/表达）
+- [设计模式表征能力形式化树图](../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md#设计模式表征能力形式化树图) — 模式→实现路径→定理
+- [创建型模式形式化](../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/) — Singleton、Factory、Builder 等形式化定义
+- [结构型模式形式化](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/) — Adapter、Decorator、Facade 等形式化定义
+- [行为型模式形式化](../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/) — Observer、Strategy、Command 等形式化定义
+- [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 类型理论与设计模式的关系
+- [构造能力理论](../../research_notes/type_theory/construction_capability.md) — 类型系统表达能力边界
 
 ### 相关速查卡
 

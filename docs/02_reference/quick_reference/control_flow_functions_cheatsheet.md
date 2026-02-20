@@ -52,6 +52,15 @@
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
+  - [💡 使用场景](#-使用场景)
+    - [场景 1: 命令行参数解析](#场景-1-命令行参数解析)
+    - [场景 2: 递归下降解析器](#场景-2-递归下降解析器)
+    - [场景 3: 自定义迭代器](#场景-3-自定义迭代器)
+  - [⚠️ 边界情况](#️-边界情况)
+    - [边界 1: 闭包捕获陷阱](#边界-1-闭包捕获陷阱)
+    - [边界 2: 递归深度限制](#边界-2-递归深度限制)
+    - [边界 3: 模式匹配穷尽性](#边界-3-模式匹配穷尽性)
+    - [形式化理论](#形式化理论)
 
 ---
 
@@ -698,6 +707,256 @@ let _ = &v;
 - [类型系统速查卡](./type_system.md) - 类型与函数
 - [集合与迭代器速查卡](./collections_iterators_cheatsheet.md) - 迭代器与循环
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与闭包
+
+---
+
+## 💡 使用场景
+
+### 场景 1: 命令行参数解析
+
+```rust
+fn parse_args(args: &[String]) -> Result<Config, &'static str> {
+    // 使用 let-else 进行早期返回
+    let Some(command) = args.get(1) else {
+        return Err("缺少命令参数");
+    };
+
+    match command.as_str() {
+        "add" => {
+            let Some(name) = args.get(2) else {
+                return Err("add 命令需要名称参数");
+            };
+            Ok(Config::Add(name.clone()))
+        }
+        "remove" => {
+            let Some(id_str) = args.get(2) else {
+                return Err("remove 命令需要 ID 参数");
+            };
+            let Ok(id) = id_str.parse::<u32>() else {
+                return Err("ID 必须是数字");
+            };
+            Ok(Config::Remove(id))
+        }
+        _ => Err("未知命令"),
+    }
+}
+
+#[derive(Debug)]
+enum Config {
+    Add(String),
+    Remove(u32),
+}
+
+fn main() {
+    let args: Vec<String> = vec![
+        "program".to_string(),
+        "add".to_string(),
+        "task1".to_string(),
+    ];
+
+    match parse_args(&args) {
+        Ok(config) => println!("配置: {:?}", config),
+        Err(e) => println!("错误: {}", e),
+    }
+}
+```
+
+### 场景 2: 递归下降解析器
+
+```rust
+#[derive(Debug)]
+enum Expr {
+    Number(i32),
+    Add(Box<Expr>, Box<Expr>),
+    Sub(Box<Expr>, Box<Expr>),
+}
+
+fn parse_number(input: &str) -> Option<(Expr, &str)> {
+    let end = input.find(|c: char| !c.is_ascii_digit()).unwrap_or(input.len());
+    if end == 0 {
+        return None;
+    }
+    let (num_str, rest) = input.split_at(end);
+    let num = num_str.parse().ok()?;
+    Some((Expr::Number(num), rest.trim_start()))
+}
+
+fn parse_expr(input: &str) -> Option<Expr> {
+    let (mut left, mut rest) = parse_number(input)?;
+
+    loop {
+        rest = rest.trim_start();
+        if rest.is_empty() {
+            break;
+        }
+
+        let op = rest.chars().next()?;
+        rest = &rest[1..];
+
+        let (right, new_rest) = parse_number(rest.trim_start())?;
+
+        left = match op {
+            '+' => Expr::Add(Box::new(left), Box::new(right)),
+            '-' => Expr::Sub(Box::new(left), Box::new(right)),
+            _ => break,
+        };
+        rest = new_rest;
+    }
+
+    Some(left)
+}
+
+fn eval(expr: &Expr) -> i32 {
+    match expr {
+        Expr::Number(n) => *n,
+        Expr::Add(a, b) => eval(a) + eval(b),
+        Expr::Sub(a, b) => eval(a) - eval(b),
+    }
+}
+
+fn main() {
+    let input = "10 + 20 - 5";
+    if let Some(expr) = parse_expr(input) {
+        println!("表达式: {:?}", expr);
+        println!("结果: {}", eval(&expr));
+    }
+}
+```
+
+### 场景 3: 自定义迭代器
+
+```rust
+struct Fibonacci {
+    curr: u64,
+    next: u64,
+    max: u64,
+}
+
+impl Fibonacci {
+    fn new(max: u64) -> Self {
+        Fibonacci { curr: 0, next: 1, max }
+    }
+}
+
+impl Iterator for Fibonacci {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.curr > self.max {
+            return None;
+        }
+
+        let current = self.curr;
+        self.curr = self.next;
+        self.next = current + self.next;
+
+        Some(current)
+    }
+}
+
+fn main() {
+    let fib = Fibonacci::new(100);
+
+    println!("斐波那契数列 (< 100):");
+    for num in fib {
+        print!("{} ", num);
+    }
+    println!();
+}
+```
+
+---
+
+## ⚠️ 边界情况
+
+### 边界 1: 闭包捕获陷阱
+
+```rust
+fn main() {
+    let mut count = 0;
+
+    // 闭包捕获可变引用
+    let mut increment = || {
+        count += 1;
+        count
+    };
+
+    // ❌ 编译错误：不能同时使用 count 和 increment
+    // println!("{}", count);
+
+    println!("{}", increment()); // 1
+    println!("{}", increment()); // 2
+
+    // 闭包不再使用，count 恢复可用
+    drop(increment);
+    println!("最终计数: {}", count); // 2
+}
+```
+
+### 边界 2: 递归深度限制
+
+```rust
+fn recursive_sum(n: u64) -> u64 {
+    if n == 0 {
+        0
+    } else {
+        n + recursive_sum(n - 1) // 可能栈溢出
+    }
+}
+
+// 尾递归优化（Rust 不保证）
+fn tail_recursive_sum(n: u64, acc: u64) -> u64 {
+    if n == 0 {
+        acc
+    } else {
+        tail_recursive_sum(n - 1, acc + n)
+    }
+}
+
+fn main() {
+    // 小数字 OK
+    println!("递归求和 100: {}", recursive_sum(100));
+
+    // 大数字使用迭代
+    let sum: u64 = (1..=100000).sum();
+    println!("迭代求和 100000: {}", sum);
+}
+```
+
+### 边界 3: 模式匹配穷尽性
+
+```rust
+enum Shape {
+    Circle { radius: f64 },
+    Rectangle { width: f64, height: f64 },
+    Triangle { base: f64, height: f64 },
+}
+
+fn area(shape: &Shape) -> f64 {
+    match shape {
+        Shape::Circle { radius } => std::f64::consts::PI * radius * radius,
+        Shape::Rectangle { width, height } => width * height,
+        Shape::Triangle { base, height } => 0.5 * base * height,
+    }  // 编译器确保穷尽所有变体
+}
+
+fn main() {
+    let shapes = vec![
+        Shape::Circle { radius: 5.0 },
+        Shape::Rectangle { width: 4.0, height: 6.0 },
+        Shape::Triangle { base: 3.0, height: 4.0 },
+    ];
+
+    for shape in &shapes {
+        println!("面积: {:.2}", area(shape));
+    }
+}
+```
+
+### 形式化理论
+
+- [借用检查器证明](../../research_notes/formal_methods/borrow_checker_proof.md) — 控制流相关的借用规则证明
+- [Send/Sync 形式化](../../research_notes/formal_methods/send_sync_formalization.md) — 闭包在多线程环境下的安全性
 
 ---
 

@@ -44,6 +44,14 @@
     - [深入学习](#深入学习)
     - [代码示例](#代码示例)
     - [形式化理论](#形式化理论)
+  - [💡 使用场景](#-使用场景)
+    - [场景 1: 配置解析器](#场景-1-配置解析器)
+    - [场景 2: 缓存实现](#场景-2-缓存实现)
+    - [场景 3: 读取文件并处理](#场景-3-读取文件并处理)
+  - [⚠️ 边界情况](#️-边界情况)
+    - [边界 1: 自引用结构](#边界-1-自引用结构)
+    - [边界 2: 跨线程所有权](#边界-2-跨线程所有权)
+    - [边界 3: 循环引用与内存泄漏](#边界-3-循环引用与内存泄漏)
   - [🆕 Rust 1.92.0 内存优化](#-rust-1920-内存优化)
     - [内存分配优化](#内存分配优化)
   - [📚 相关文档](#-相关文档)
@@ -456,6 +464,191 @@ fn no_dangle() -> String {
 
 - [类型系统理论](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/06_类型系统理论.md)
 - [形式化验证](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/07_形式化验证.md)
+- [所有权模型形式化](../../research_notes/formal_methods/ownership_model.md) — Def 2.1–2.3、定理 T2.1–T2.5
+- [借用检查器证明](../../research_notes/formal_methods/borrow_checker_proof.md) — 定理 3.1–3.3、引理 L3.1–L3.4
+- [生命周期形式化](../../research_notes/formal_methods/lifetime_formalization.md) — Def 1.1–1.4、定理 T1.1–T1.3
+
+---
+
+## 💡 使用场景
+
+### 场景 1: 配置解析器
+
+```rust
+#[derive(Debug)]
+struct Config {
+    host: String,
+    port: u16,
+}
+
+impl Config {
+    fn new(args: &[String]) -> Result<Config, &'static str> {
+        if args.len() < 3 {
+            return Err("参数不足");
+        }
+
+        let host = args[1].clone();  // 所有权转移
+        let port = args[2].parse().map_err(|_| "无效端口")?;
+
+        Ok(Config { host, port })
+    }
+}
+
+fn main() {
+    let args: Vec<String> = vec![
+        "program".to_string(),
+        "localhost".to_string(),
+        "8080".to_string(),
+    ];
+
+    let config = Config::new(&args).unwrap();
+    println!("服务器: {}:{}", config.host, config.port);
+    // args 仍然可用，config.host 拥有独立所有权
+}
+```
+
+### 场景 2: 缓存实现
+
+```rust
+use std::collections::HashMap;
+
+struct Cache<K, V> {
+    data: HashMap<K, V>,
+}
+
+impl<K: std::hash::Hash + Eq, V> Cache<K, V> {
+    fn new() -> Self {
+        Cache { data: HashMap::new() }
+    }
+
+    fn get(&self, key: &K) -> Option<&V> {
+        self.data.get(key)  // 返回借用，不转移所有权
+    }
+
+    fn put(&mut self, key: K, value: V) {
+        self.data.insert(key, value);
+    }
+}
+
+fn main() {
+    let mut cache = Cache::new();
+    let key = "user:123".to_string();
+
+    cache.put(key.clone(), vec![1, 2, 3]);
+
+    // key 仍然可用（因为我们 clone 了）
+    println!("查询: {}", key);
+
+    if let Some(data) = cache.get(&key) {
+        println!("找到: {:?}", data);
+    }
+}
+```
+
+### 场景 3: 读取文件并处理
+
+```rust
+use std::fs;
+
+fn process_file(path: &str) -> Result<Vec<String>, std::io::Error> {
+    let content = fs::read_to_string(path)?;  // 所有权转移给 content
+    let lines: Vec<String> = content.lines()
+        .map(|s| s.to_string())
+        .collect();
+    Ok(lines)  // 所有权转移给调用者
+}
+
+fn main() {
+    match process_file("test.txt") {
+        Ok(lines) => {
+            for line in &lines {  // 借用 lines
+                println!("{}", line);
+            }
+            // lines 仍然可用
+            println!("总共 {} 行", lines.len());
+        }
+        Err(e) => eprintln!("错误: {}", e),
+    }
+}
+```
+
+---
+
+## ⚠️ 边界情况
+
+### 边界 1: 自引用结构
+
+```rust,compile_fail
+// ❌ 错误：自引用结构需要特殊处理
+struct SelfReferential {
+    data: String,
+    // pointer: &str,  // 指向 data 的引用
+}
+
+// ✅ 解决：使用 Pin<Box<T>> 或特殊库
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SafeSelfReferential {
+    data: String,
+    _pin: PhantomPinned,
+}
+```
+
+### 边界 2: 跨线程所有权
+
+```rust
+use std::thread;
+
+fn main() {
+    let data = vec![1, 2, 3];
+
+    // ❌ 错误：不能直接将借用传给线程
+    // let handle = thread::spawn(|| {
+    //     println!("{:?}", data);
+    // });
+
+    // ✅ 解决：使用 move 转移所有权
+    let handle = thread::spawn(move || {
+        println!("{:?}", data);
+    });
+
+    handle.join().unwrap();
+    // data 不再可用
+}
+```
+
+### 边界 3: 循环引用与内存泄漏
+
+```rust
+use std::rc::{Rc, Weak};
+use std::cell::RefCell;
+
+#[derive(Debug)]
+struct Node {
+    value: i32,
+    parent: RefCell<Weak<Node>>,    // 使用 Weak 避免循环引用
+    children: RefCell<Vec<Rc<Node>>>,
+}
+
+fn main() {
+    let leaf = Rc::new(Node {
+        value: 3,
+        parent: RefCell::new(Weak::new()),
+        children: RefCell::new(vec![]),
+    });
+
+    let branch = Rc::new(Node {
+        value: 5,
+        parent: RefCell::new(Weak::new()),
+        children: RefCell::new(vec![Rc::clone(&leaf)]),
+    });
+
+    *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+}
+```
 
 ---
 

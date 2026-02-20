@@ -82,15 +82,124 @@
 
 ---
 
-## 形式化证明体系（2026-02-14）
+## 📋 官方资源使用场景指南
 
-| 资源 | 说明 |
-| :--- | :--- || [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) | 批判性分析与推进计划 |
-| [CORE_THEOREMS_FULL_PROOFS](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明（L2） |
-| [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | 国际对标 |
+### 学习场景对照表
+
+| 你的情况 | 推荐资源 | 使用方式 |
+| :--- | :--- | :--- |
+| 完全零基础 | The Rust Book | 按章节顺序阅读，完成每章练习 |
+| 有其他编程经验 | Rust by Example + Book | 先看 RBE 快速上手，再深入 Book |
+| 需要快速查阅语法 | Standard Library 文档 | 使用搜索功能查找具体 API |
+| 准备面试/考试 | Brown 交互版 Book | 完成所有测验，查看可视化解释 |
+| 喜欢动手练习 | Rustlings | 按提示修复代码，循序渐进 |
+| 遇到编译错误 | Compiler Error Index | 搜索错误码，阅读详细解释 |
+| 开发 CLI 应用 | Command Line Book | 参考项目结构和最佳实践 |
+| 嵌入式开发 | Embedded Rust Book | 学习 no_std 和硬件交互 |
+
+---
+
+## 🌳 资源选择决策树
+
+```
+开始选择学习资源
+    │
+    ├── 你是 Rust 新手？
+    │       │
+    │       ├── 是 → 有编程基础？
+    │       │           │
+    │       │           ├── 是 → 想快速上手？
+    │       │           │           │
+    │       │           │           ├── 是 → Rust by Example
+    │       │           │           │
+    │       │           │           └── 否 → The Rust Book
+    │       │           │
+    │       │           └── 否 → The Rust Book（仔细阅读）
+    │       │
+    │       └── 否 → 需要解决具体问题？
+    │                   │
+    │                   ├── 是 → 编译错误？
+    │                   │           │
+    │                   │           ├── 是 → Compiler Error Index
+    │                   │           │
+    │                   │           └── 否 → Standard Library 文档
+    │                   │
+    │                   └── 否 → 深入学习？
+    │                               │
+    │                               ├── 是 → Rust Reference
+    │                               │
+    │                               └── 否 → releases.rs 了解新特性
+    │
+    └── 需要练习？
+            │
+            ├── 是 → 喜欢命令行交互？
+            │           │
+            │           ├── 是 → Rustlings
+            │           │
+            │           └── 否 → Brown 交互版 Book
+            │
+            └── 否 → 查看场景对照表选择
+```
+
+---
+
+## 🎯 按目标选择资源
+
+### 目标: 通过 Rust 面试
+
+**推荐路径**:
+1. [Brown 交互版 Book](https://rust-book.cs.brown.edu/) - 完成所有测验
+2. [Rustlings](https://github.com/rust-lang/rustlings) - 完成 80% 以上练习
+3. [Compiler Error Index](https://doc.rust-lang.org/error-index.html) - 熟悉常见错误
+
+### 目标: 开发生产项目
+
+**推荐路径**:
+1. [The Rust Book](https://doc.rust-lang.org/book/) - 完整阅读
+2. [Rust Reference](https://doc.rust-lang.org/reference/) - 查阅语言规范
+3. [Command Line Book](https://rust-cli.github.io/book/) - CLI 项目
+4. [Rustonomicon](https://doc.rust-lang.org/nomicon/) - unsafe 代码
+
+### 目标: 贡献 Rust 编译器
+
+**推荐路径**:
+1. [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) - 编译器开发指南
+2. [Rust Reference](https://doc.rust-lang.org/reference/) - 理解语言规范
+3. [Ferrocene FLS](https://spec.ferrocene.dev/) - 形式化规范
+
+### 目标: 学术研究（形式化验证）
+
+**推荐路径**:
+1. [RustBelt 论文](https://plv.mpi-sws.org/rustbelt/popl18/) - 理论基础
+2. [Ferrocene FLS](https://spec.ferrocene.dev/) - 形式化规范
+3. 本项目 [formal_methods](../research_notes/formal_methods/) - 中文形式化论证
+
+---
+
+## 🔗 形式化文档链接
+
+### 形式化证明体系（2026-02-14）
+
+| 资源 | 说明 | 形式化链接 |
+| :--- | :--- | :--- |
+| [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) | 批判性分析与推进计划 | [formal_methods/README](../research_notes/formal_methods/README.md) |
+| [CORE_THEOREMS_FULL_PROOFS](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明（L2） | [ownership_model](../research_notes/formal_methods/ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
+| [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | 国际对标 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)、[Ferrocene FLS](https://spec.ferrocene.dev/) |
+
+### 官方形式化资源映射
+
+| 官方资源 | 本项目形式化文档 |
+| :--- | :--- |
+| [Ferrocene FLS - Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
+| [Ferrocene FLS - Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
+| [Ferrocene FLS - Concurrency](https://spec.ferrocene.dev/concurrency.html) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md)、[async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
+| [Rust Reference - Undefined Behavior](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | [EDGE_CASES_AND_SPECIAL_CASES](./EDGE_CASES_AND_SPECIAL_CASES.md) |
+
+---
 
 ## 相关文档
 
 - [文档中心](../README.md)
 - [学习路径规划](./LEARNING_PATH_PLANNING.md)
 - [Rustlings 映射](../../exercises/RUSTLINGS_MAPPING.md)
+- [形式化方法研究](../research_notes/formal_methods/README.md)

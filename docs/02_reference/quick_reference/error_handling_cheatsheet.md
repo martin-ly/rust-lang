@@ -40,6 +40,14 @@
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
+  - [💡 使用场景](#-使用场景)
+    - [场景 1: 配置文件解析](#场景-1-配置文件解析)
+    - [场景 2: 用户输入验证](#场景-2-用户输入验证)
+    - [场景 3: 链式操作处理](#场景-3-链式操作处理)
+  - [⚠️ 边界情况](#️-边界情况)
+    - [边界 1: 错误类型转换](#边界-1-错误类型转换)
+    - [边界 2:  panic 恢复](#边界-2--panic-恢复)
+    - [形式化理论](#形式化理论)
 
 ---
 
@@ -339,6 +347,219 @@ fn validate(value: i32) -> ControlFlow<String, i32> {
 - [控制流与函数速查卡](./control_flow_functions_cheatsheet.md) - 错误处理模式
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与错误处理
 - [异步编程速查卡](./async_patterns.md) - 异步错误处理
+
+---
+
+## 💡 使用场景
+
+### 场景 1: 配置文件解析
+
+```rust
+use std::fs;
+use std::path::Path;
+
+#[derive(Debug)]
+struct DatabaseConfig {
+    host: String,
+    port: u16,
+    username: String,
+    password: String,
+}
+
+fn parse_config(path: &str) -> Result<DatabaseConfig, Box<dyn std::error::Error>> {
+    let content = fs::read_to_string(path)
+        .map_err(|e| format!("无法读取配置文件 '{}': {}", path, e))?;
+
+    let lines: Vec<&str> = content.lines().collect();
+    if lines.len() < 4 {
+        return Err("配置文件格式不完整".into());
+    }
+
+    Ok(DatabaseConfig {
+        host: lines[0].to_string(),
+        port: lines[1].parse().map_err(|_| "无效端口")?,
+        username: lines[2].to_string(),
+        password: lines[3].to_string(),
+    })
+}
+
+fn main() {
+    match parse_config("db.conf") {
+        Ok(config) => println!("配置加载成功: {:?}", config),
+        Err(e) => eprintln!("配置加载失败: {}", e),
+    }
+}
+```
+
+### 场景 2: 用户输入验证
+
+```rust
+#[derive(Debug)]
+struct User {
+    name: String,
+    age: u8,
+    email: String,
+}
+
+#[derive(Debug)]
+enum ValidationError {
+    NameTooShort,
+    InvalidAge,
+    InvalidEmail,
+}
+
+impl std::fmt::Display for ValidationError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            ValidationError::NameTooShort => write!(f, "姓名至少需要2个字符"),
+            ValidationError::InvalidAge => write!(f, "年龄必须在1-150之间"),
+            ValidationError::InvalidEmail => write!(f, "邮箱格式不正确"),
+        }
+    }
+}
+
+impl std::error::Error for ValidationError {}
+
+fn validate_user(name: &str, age: u8, email: &str) -> Result<User, ValidationError> {
+    if name.len() < 2 {
+        return Err(ValidationError::NameTooShort);
+    }
+    if age == 0 || age > 150 {
+        return Err(ValidationError::InvalidAge);
+    }
+    if !email.contains('@') {
+        return Err(ValidationError::InvalidEmail);
+    }
+
+    Ok(User {
+        name: name.to_string(),
+        age,
+        email: email.to_string(),
+    })
+}
+
+fn main() {
+    match validate_user("张三", 25, "zhangsan@example.com") {
+        Ok(user) => println!("用户验证通过: {:?}", user),
+        Err(e) => println!("验证失败: {}", e),
+    }
+}
+```
+
+### 场景 3: 链式操作处理
+
+```rust
+fn divide(a: f64, b: f64) -> Result<f64, &'static str> {
+    if b == 0.0 {
+        return Err("除数不能为零");
+    }
+    Ok(a / b)
+}
+
+fn sqrt(x: f64) -> Result<f64, &'static str> {
+    if x < 0.0 {
+        return Err("负数不能开平方");
+    }
+    Ok(x.sqrt())
+}
+
+fn calculate(a: f64, b: f64) -> Result<f64, &'static str> {
+    divide(a, b)?
+        .abs()
+        .pipe(|x| sqrt(x))
+}
+
+// 管道辅助函数
+trait Pipe: Sized {
+    fn pipe<R, E, F: FnOnce(Self) -> Result<R, E>>(self, f: F) -> Result<R, E> {
+        f(self)
+    }
+}
+
+impl<T: Sized> Pipe for T {}
+
+fn main() {
+    match calculate(10.0, 2.0) {
+        Ok(result) => println!("结果: {}", result),
+        Err(e) => println!("错误: {}", e),
+    }
+}
+```
+
+---
+
+## ⚠️ 边界情况
+
+### 边界 1: 错误类型转换
+
+```rust
+use std::num::ParseIntError;
+use std::str::Utf8Error;
+
+#[derive(Debug)]
+enum AppError {
+    Parse(ParseIntError),
+    Encoding(Utf8Error),
+    Custom(String),
+}
+
+impl From<ParseIntError> for AppError {
+    fn from(e: ParseIntError) -> Self {
+        AppError::Parse(e)
+    }
+}
+
+impl From<Utf8Error> for AppError {
+    fn from(e: Utf8Error) -> Self {
+        AppError::Encoding(e)
+    }
+}
+
+fn parse_and_validate(input: &str) -> Result<i32, AppError> {
+    let num: i32 = input.parse()?;  // 自动转换为 AppError
+    if num < 0 {
+        return Err(AppError::Custom("负数不允许".to_string()));
+    }
+    Ok(num)
+}
+
+fn main() {
+    match parse_and_validate("42") {
+        Ok(n) => println!("解析成功: {}", n),
+        Err(e) => println!("错误: {:?}", e),
+    }
+}
+```
+
+### 边界 2:  panic 恢复
+
+```rust
+use std::panic;
+
+fn may_panic(x: i32) -> i32 {
+    if x == 0 {
+        panic!("不能为零!");
+    }
+    100 / x
+}
+
+fn main() {
+    // 捕获 panic
+    let result = panic::catch_unwind(|| {
+        may_panic(0)
+    });
+
+    match result {
+        Ok(value) => println!("结果: {}", value),
+        Err(_) => println!("发生 panic，但已恢复"),
+    }
+}
+```
+
+### 形式化理论
+
+- [类型系统完备性缺口](../../research_notes/formal_methods/00_completeness_gaps.md) — 错误处理相关的形式化保证
+- [Send/Sync 形式化](../../research_notes/formal_methods/send_sync_formalization.md) — 错误在多线程间的传递
 
 ---
 

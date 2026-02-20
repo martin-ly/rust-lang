@@ -52,7 +52,7 @@
 
 ### 1.1 顶层结构（9 大模块）
 
-```
+```text
 docs/
 ├── 00_MASTER_INDEX.md          # 文档中心主索引
 ├── DOCS_STRUCTURE_OVERVIEW.md  # 完整结构总览（本格式）

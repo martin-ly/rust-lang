@@ -38,6 +38,13 @@
     - [反例 2: 未设置超时导致无限阻塞](#反例-2-未设置超时导致无限阻塞)
   - [📚 相关文档](#-相关文档)
   - [🧩 相关示例代码](#-相关示例代码)
+  - [🎯 使用场景](#-使用场景)
+    - [场景 1: REST API 客户端](#场景-1-rest-api-客户端)
+    - [场景 2: 实时聊天服务器](#场景-2-实时聊天服务器)
+    - [场景 3: 高性能代理服务器](#场景-3-高性能代理服务器)
+  - [📐 形式化方法链接](#-形式化方法链接)
+    - [理论基础](#理论基础)
+    - [形式化定理](#形式化定理)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -346,6 +353,136 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 
 ---
 
+## 🎯 使用场景
+
+### 场景 1: REST API 客户端
+
+```rust
+use reqwest::Client;
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize)]
+struct CreateUserRequest {
+    name: String,
+    email: String,
+}
+
+#[derive(Deserialize)]
+struct UserResponse {
+    id: u64,
+    name: String,
+}
+
+async fn create_user(client: &Client, name: &str, email: &str) -> Result<UserResponse, reqwest::Error> {
+    let user = CreateUserRequest {
+        name: name.to_string(),
+        email: email.to_string(),
+    };
+
+    let response = client
+        .post("https://api.example.com/users")
+        .json(&user)
+        .send()
+        .await?
+        .json::<UserResponse>()
+        .await?;
+
+    Ok(response)
+}
+```
+
+### 场景 2: 实时聊天服务器
+
+```rust
+use tokio::net::{TcpListener, TcpStream};
+use tokio::sync::broadcast;
+use futures::{SinkExt, StreamExt};
+use tokio_tungstenite::{accept_async, tungstenite::Message};
+
+async fn chat_server() -> anyhow::Result<()> {
+    let listener = TcpListener::bind("127.0.0.1:8080").await?;
+    let (tx, _rx) = broadcast::channel::<String>(100);
+
+    println!("Chat server running on ws://127.0.0.1:8080");
+
+    while let Ok((stream, _)) = listener.accept().await {
+        let tx = tx.clone();
+        let mut rx = tx.subscribe();
+
+        tokio::spawn(async move {
+            let ws_stream = accept_async(stream).await.expect("Failed to accept");
+            let (mut write, mut read) = ws_stream.split();
+
+            // 接收消息并广播
+            tokio::spawn(async move {
+                while let Some(Ok(Message::Text(text))) = read.next().await {
+                    let _ = tx.send(text);
+                }
+            });
+
+            // 发送广播消息给客户端
+            while let Ok(msg) = rx.recv().await {
+                if write.send(Message::Text(msg)).await.is_err() {
+                    break;
+                }
+            }
+        });
+    }
+
+    Ok(())
+}
+```
+
+### 场景 3: 高性能代理服务器
+
+```rust
+use tokio::io::{self, AsyncReadExt, AsyncWriteExt};
+use tokio::net::{TcpListener, TcpStream};
+
+async fn proxy_server() -> io::Result<()> {
+    let listener = TcpListener::bind("127.0.0.1:8888").await?;
+
+    while let Ok((mut client, _)) = listener.accept().await {
+        tokio::spawn(async move {
+            let mut server = TcpStream::connect("backend:8080").await?;
+
+            // 双向复制
+            let (mut client_read, mut client_write) = client.split();
+            let (mut server_read, mut server_write) = server.split();
+
+            let client_to_server = io::copy(&mut client_read, &mut server_write);
+            let server_to_client = io::copy(&mut server_read, &mut client_write);
+
+            tokio::try_join!(client_to_server, server_to_client)?;
+            Ok::<_, io::Error>(())
+        });
+    }
+
+    Ok(())
+}
+```
+
+---
+
+## 📐 形式化方法链接
+
+### 理论基础
+
+| 概念 | 形式化文档 | 描述 |
+| :--- | :--- | :--- |
+| **异步状态机** | [async_state_machine](../../research_notes/formal_methods/async_state_machine.md) | 异步网络操作的语义 |
+| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/send_sync_formalization.md) | 跨线程数据传递安全 |
+| **生命周期** | [lifetime_formalization](../../research_notes/formal_methods/lifetime_formalization.md) | 连接引用有效性 |
+| **并发安全** | [borrow_checker_proof](../../research_notes/formal_methods/borrow_checker_proof.md) | 并发访问数据竞争自由 |
+
+### 形式化定理
+
+**定理 NET-T1（并发连接安全）**: 若异步网络操作满足 Send/Sync 约束，则跨任务连接操作数据竞争自由。
+
+*证明*: 由 [send_sync_formalization](../../research_notes/formal_methods/send_sync_formalization.md) 定理 SEND-T1/SYNC-T1，连接句柄满足 Send 时可跨 await 点，满足 Sync 时可多任务共享引用。∎
+
+---
+
 ## 📚 相关资源
 
 ### 官方文档
@@ -359,6 +496,7 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 - [HTTP 指南](../../../crates/c10_networks/docs/tier_02_guides/02_HTTP客户端开发.md)
 - [TCP/UDP 指南](../../../crates/c10_networks/docs/tier_02_guides/04_TCP_UDP编程.md)
 - [WebSocket 指南](../../../crates/c10_networks/docs/tier_02_guides/03_WebSocket实时通信.md)
+- [形式化方法研究](../../research_notes/formal_methods/)
 
 ### 相关速查卡
 
@@ -368,6 +506,6 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 
 ---
 
-**最后更新**: 2026-01-27
+**最后更新**: 2026-02-20
 **Rust 版本**: 1.93.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档
