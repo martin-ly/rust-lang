@@ -126,6 +126,109 @@
 
 **证明论 (Proof Theory)**: 类型系统与逻辑系统对应（Curry-Howard 对应），类型对应命题，程序对应证明。
 
+---
+
+### Curry-Howard 对应 (Stanford CS242 Lecture 16-20)
+
+> **课程**: [Stanford CS242: Programming Languages](https://cs242.stanford.edu/)
+> **关键 Lecture**: Lecture 16-20 详细讲解 Curry-Howard 对应
+
+**核心思想**: Curry-Howard 对应（同构）揭示了类型理论和数理逻辑之间的深层联系：
+- **类型对应命题 (Types as Propositions)**
+- **程序对应证明 (Programs as Proofs)**
+- **求值对应证明归约 (Evaluation as Proof Normalization)**
+
+#### 完整的 Curry-Howard 对应表
+
+| 逻辑 (Logic) | 类型理论 (Type Theory) | Rust 示例 |
+|:---|:---|:---|
+| 命题 (Proposition) | 类型 (Type) | `T` |
+| 证明 (Proof) | 程序/值 (Program/Value) | `v: T` |
+| 蕴含 (A → B) | 函数类型 (Function) | `fn(A) -> B` |
+| 合取 (A ∧ B) | 积类型 (Product) | `(A, B)` |
+| 析取 (A ∨ B) | 和类型 (Sum) | `enum { A, B }` |
+| 真 (True) | 单位类型 (Unit) | `()` |
+| 假 (False) | 空类型 (Never) | `!` |
+| 全称量词 (∀) | 泛型 (Generic) | `fn<T>(x: T)` |
+| 存在量词 (∃) | 存在类型 (Existential) | `dyn Trait` |
+
+#### Rust 代码示例
+
+```rust
+// 1. 蕴含 (A → B): 函数类型
+fn implication<A, B>(f: impl Fn(A) -> B, a: A) -> B {
+    f(a)  // 应用函数，构造 B 的证明
+}
+
+// 2. 合取 (A ∧ B): 积类型 (元组)
+fn conjunction<A, B>(a: A, b: B) -> (A, B) {
+    (a, b)  // 构造 A ∧ B 的证明
+}
+
+fn and_elim_left<A, B>(pair: (A, B)) -> A {
+    pair.0  // 从 A ∧ B 推导 A
+}
+
+fn and_elim_right<A, B>(pair: (A, B)) -> B {
+    pair.1  // 从 A ∧ B 推导 B
+}
+
+// 3. 析取 (A ∨ B): 和类型 (枚举)
+enum Disjunction<A, B> {
+    Left(A),   // A 的证明
+    Right(B),  // B 的证明
+}
+
+fn or_intro_left<A, B>(a: A) -> Disjunction<A, B> {
+    Disjunction::Left(a)  // 从 A 构造 A ∨ B
+}
+
+fn or_elim<A, B, C>(
+    disj: Disjunction<A, B>,
+    f: impl Fn(A) -> C,
+    g: impl Fn(B) -> C,
+) -> C {
+    match disj {
+        Disjunction::Left(a) => f(a),   // 情况分析
+        Disjunction::Right(b) => g(b),
+    }
+}
+
+// 4. 真 (True): 单位类型
+fn truth() -> () {
+    ()  // 总是可构造的证明
+}
+
+// 5. 假 (False): 空类型 (Never type)
+fn false_elim<T>(never: !) -> T {
+    never  // 从假可推导任何命题 (ex falso quodlibet)
+}
+
+// 6. 全称量词 (∀): 泛型
+fn universal<T>(x: T) -> T {
+    x  // 对所有类型 T 成立的证明
+}
+
+// 7. 存在量词 (∃): 存在类型 (trait object)
+trait Existential {
+    type Output;
+    fn get(&self) -> &Self::Output;
+}
+
+fn existential() -> Box<dyn Existential<Output = i32>> {
+    // 隐藏具体类型，只暴露接口
+    Box::new(42)
+}
+```
+
+#### 对应关系的理论意义
+
+1. **类型安全即逻辑一致性**: 类型系统保证程序没有类型错误，对应逻辑系统保证没有矛盾证明
+2. **程序抽取**: 从逻辑证明可以抽取正确的程序
+3. **依赖类型**: 当类型可以依赖于值时，命题和证明完全统一（如 Coq、Agda、Idris）
+
+---
+
 ### 类型理论的基础知识
 
 **简单类型 Lambda 演算 (STLC)**:
@@ -167,6 +270,34 @@
 - 类型分配保证类型安全
 
 ### 类型安全的理论基础
+
+#### Stanford CS242 形式化定义 (Lecture 6-10)
+
+**进展定理 (Progress Theorem)**:
+
+> **定理**: 如果 $\Gamma \vdash e : \tau$ 且 $\Gamma$ 是良形的，则 $e$ 是一个值，或者存在 $e'$ 使得 $e \to e'$。
+> 
+> **形式化**: $\vdash e : \tau \rightarrow (e \in \text{Value}) \lor (\exists e'.\, e \to e')$
+> 
+> **意义**: 良型程序不会"卡住"（不会遇到没有定义的操作），保证程序要么已完成计算（是值），要么可以继续执行。
+
+**保持定理 (Preservation Theorem / Subject Reduction)**:
+
+> **定理**: 如果 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$。
+> 
+> **形式化**: $\Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash e' : \tau$
+> 
+> **意义**: 求值过程中类型保持不变，保证运行时值的类型与静态推导的类型一致。
+
+**类型安全 (Type Safety)**:
+
+进展性和保持性共同构成类型安全的理论基础：
+$$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
+
+- **进展性**: 保证程序不会卡住
+- **保持性**: 保证类型在运行时保持
+
+#### 原有形式化定义
 
 **进展性 (Progress)**:
 
@@ -684,6 +815,21 @@ fn main() {
 ---
 
 ## 📖 参考文献
+
+### Stanford CS242 课程参考
+
+| Stanford 内容 | 本文档位置 | 对齐状态 |
+|:---|:---|:---:|
+| Lecture 6-10: Type Systems | §类型系统基础 | ✅ |
+| Lecture 11-15: Polymorphism | §泛型 | ✅ |
+| Lecture 16-20: Curry-Howard | §Curry-Howard 对应 | ✅ 已深化 |
+| Progress Theorem | §类型安全 | ✅ |
+| Preservation Theorem | §类型安全 | ✅ |
+
+**课程链接**:
+- [Stanford CS242: Programming Languages](https://cs242.stanford.edu/)
+- [CS242 Lecture Notes - Type Systems](https://cs242.stanford.edu/lectures/)
+- [CS242 Lecture Notes - Curry-Howard](https://cs242.stanford.edu/lectures/)
 
 ### 学术论文
 

@@ -2,6 +2,7 @@
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-20
+> **更新内容**: 添加 Stanford CS110L 课程内容对齐
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 1 行（所有权）
@@ -25,6 +26,8 @@
     - [相关学术论文的详细分析](#相关学术论文的详细分析)
       - [1. RustBelt: Logical Foundations for the Future of Safe Systems Programming](#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming)
       - [2. The RustBelt Project: Formalizing Rust's Type System](#2-the-rustbelt-project-formalizing-rusts-type-system)
+    - [MIT 课程对齐：计算机系统安全与内存安全](#mit-课程对齐计算机系统安全与内存安全)
+    - [Stanford CS110L (Safety in Systems Programming)](#stanford-cs110l-safety-in-systems-programming)
   - [🔬 形式化定义](#-形式化定义)
     - [1. 值与环境](#1-值与环境)
     - [2. 所有权规则](#2-所有权规则)
@@ -287,6 +290,33 @@ $$\text{TemporalSafe}(P) \leftrightarrow \forall p \in P: \text{Access}(p, addr)
 | 6.858 | Lab 2 | Privilege separation → 所有权隔离 | ✅ |
 | 6.858 | Lab 3 | Symbolic execution → 借用检查静态分析 | ✅ |
 | 6.858 | Lecture | Memory safety, type safety → Rust类型系统 | ✅ |
+
+### Stanford CS110L (Safety in Systems Programming)
+
+**课程链接**: https://web.stanford.edu/class/cs110l/
+
+Stanford CS110L专注于使用Rust进行安全的系统编程。
+
+#### 对齐内容
+
+| CS110L主题 | Rust概念 | 本文档对应 |
+|:---|:---|:---|
+| Ownership as type feature | 所有权系统 | §所有权规则 |
+| Safety without GC | RAII、借用检查 | §内存安全 |
+| Lifetimes | 生命周期标注 | §借用规则 |
+
+#### Safety without GC: Rust vs Traditional Approaches
+
+对比分析：
+- C/C++: 手动管理，易出错
+- Java/Go: GC，运行时开销
+- Rust: 所有权，编译时保证
+
+#### 实验资源
+CS110L提供的实验可以作为练习：
+- Lab 1: Ownership basics
+- Lab 2: Structs and ownership
+- Lab 3: Lifetimes
 
 #### 差异分析：Rust 如何解决 MIT 课程中的问题
 
