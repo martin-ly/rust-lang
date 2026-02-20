@@ -95,8 +95,8 @@ codegen-units = 1
 [profile.bench.build-override]
 opt-level = 2
 
-# 工作区级别的依赖版本统一 - 2026年2月13日最新稳定版本
-# 更新时间: 2026-02-13 (cargo update 锁定 11 包至 Rust 1.93 兼容版本)
+# 工作区级别的依赖版本统一 - 2026年2月19日最新稳定版本
+# 更新时间: 2026-02-19 (cargo update 锁定 23 包至 Rust 1.93 兼容版本)
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
 # rust-version: 1.93.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
@@ -139,8 +139,8 @@ tower-http = { version = "0.6.8", features = [
     "compression-gzip", # Gzip压缩支持
 ] }
 # actix-web: 高性能的Web框架，基于Actor模型 - 2025年12月11日最新版本
-# 2025-12-11: 更新至 4.12.1
-actix-web = "4.12.1"
+# 2026-02-19: 更新至 4.13.0 (cargo update)
+actix-web = "4.13.0"
 # actix: Actor系统框架
 actix = "0.13.5"
 # actix-rt: actix的运行时支持
@@ -261,9 +261,10 @@ tokio-stream = "0.1.18"
 # tokio-tungstenite: tokio与tungstenite的集成，提供WebSocket支持 - 2025年10月最新版本
 tokio-tungstenite = "0.28.0"
 # futures: 异步编程的基础库 - 版本 0.3+ (字母索引)
-futures = "0.3.31"
+# 2026-02-19: 0.3.31 -> 0.3.32 (cargo update)
+futures = "0.3.32"
 # futures-util: futures的实用工具库
-futures-util = "0.3.31"
+futures-util = "0.3.32"
 
 # 日志和追踪 - 2025年12月11日最新稳定版本
 # tracing: 应用程序级别的追踪库，用于结构化日志记录 - 版本 0.1+ (字母索引)
@@ -348,7 +349,7 @@ sqlx = { version = "0.8.6", features = [  # 更新至最新稳定版本
     "uuid",                # UUID类型支持
 ], default-features = false }
 # redis: Redis客户端库，支持异步操作 - 版本 1.0+ (稳定版！)
-redis = "1.0.3"  # 2025年12月11日：从RC升级到稳定版
+redis = "1.0.4"  # 2026-02-19: 1.0.3 -> 1.0.4 (cargo update)
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.38.0", default-features = false }
 # mysql_async: MySQL异步客户端 - 2025年10月20日更新
@@ -378,8 +379,8 @@ rayon = "1.11.0"
 dashmap = "6.1.0"  # 更新至最新候选版本
 # parking_lot: 更紧凑高效的同步原语实现 - 版本 0.12+ (字母索引)
 parking_lot = "0.12.5"
-# syn: 语法解析库 - 2026年2月12日 cargo update
-syn = "2.0.115"
+# syn: 语法解析库 - 2026年2月19日 cargo update
+syn = "2.0.116"
 
 # 测试相关 - 2025年12月11日最新稳定版本
 # mockall: 强大的模拟对象库，用于单元测试 - 版本 0.13+ (字母索引)
@@ -1235,4 +1236,25 @@ nix = "0.30.1"
 # - syn 已在工作区依赖中更新
 # - trybuild 已在 c11_macro_system 中更新
 # - jiff、zmij、toml 为传递依赖，由 Cargo 自动管理
+# ============================================================
+#
+# 依赖更新日志 - 2026年2月19日 cargo update（Rust 1.93 兼容版本）
+# ============================================================
+# Locking 23 packages to latest Rust 1.93 compatible versions
+# 更新时间: 2026-02-19
+#
+# 工作区依赖更新（已更新 Cargo.toml）：
+# - actix-web: 4.12.1 -> 4.13.0
+# - futures: 0.3.31 -> 0.3.32
+# - futures-util: 0.3.31 -> 0.3.32
+# - redis: 1.0.3 -> 1.0.4
+# - syn: 2.0.115 -> 2.0.116
+#
+# 传递依赖更新（自动更新，Cargo.lock 已锁定）：
+# - actix-http, actix-router, async-executor, aws-lc-rs, bumpalo
+# - clap, clap_builder, futures-*, memmap2, toml, toml_parser, unicode-ident
+#
+# 重要说明：
+# - 所有工作区依赖已同步至 Cargo.toml
+# - 传递依赖由 Cargo 自动管理
 # ============================================================

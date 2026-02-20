@@ -128,8 +128,7 @@ let f = fmt::from_fn(|f| write!(f, "WASM[{}]", 42));
 ## 实现模块
 
 | 特性 | 模块路径 | 文件 |
-|------|----------|------|
-| WasmBuffer193 | `c12_wasm::rust_193_features` | rust_193_features.rs |
+| :--- | :--- | :--- || WasmBuffer193 | `c12_wasm::rust_193_features` | rust_193_features.rs |
 | 各类 1.93 API 演示 | `c12_wasm::rust_193_features` | rust_193_features.rs |
 
 ---

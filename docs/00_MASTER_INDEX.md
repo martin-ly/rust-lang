@@ -12,8 +12,7 @@
 ## 按主题快速导航
 
 | 主题 | 入口 | 说明 |
-|------|------|------|
-| **📋 完整结构总览** | [DOCS_STRUCTURE_OVERVIEW](./DOCS_STRUCTURE_OVERVIEW.md) | 按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖 docs |
+| :--- | :--- | :--- || **📋 完整结构总览** | [DOCS_STRUCTURE_OVERVIEW](./DOCS_STRUCTURE_OVERVIEW.md) | 按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖 docs |
 | **一页纸总结** | [ONE_PAGE_SUMMARY_TEMPLATE](./07_project/ONE_PAGE_SUMMARY_TEMPLATE.md) | C01–C12 模块速览（12/12 完成） |
 | **学习路径** | [01_learning](#01-学习路径与导航) | 学习规划、官方资源映射 |
 | **速查参考** | [02_reference](#02-参考与速查) | 20 个速查卡、边界特例、标准库 |
@@ -37,8 +36,7 @@
 ## 01 学习路径与导航
 
 | 文档 | 说明 |
-|------|------|
-| [LEARNING_PATH_PLANNING.md](./01_learning/LEARNING_PATH_PLANNING.md) | 学习路径规划 |
+| :--- | :--- || [LEARNING_PATH_PLANNING.md](./01_learning/LEARNING_PATH_PLANNING.md) | 学习路径规划 |
 | [OFFICIAL_RESOURCES_MAPPING.md](./01_learning/OFFICIAL_RESOURCES_MAPPING.md) | 本项目 ↔ The Rust Book / Reference / RBE |
 
 ---
@@ -46,8 +44,7 @@
 ## 02 参考与速查
 
 | 文档/目录 | 说明 |
-|-----------|------|
-| [quick_reference/](./02_reference/quick_reference/) | 20 个速查卡（含 AI/ML、类型、所有权、异步等） |
+| :--- | :--- || [quick_reference/](./02_reference/quick_reference/) | 20 个速查卡（含 AI/ML、类型、所有权、异步等） |
 | [ALIGNMENT_GUIDE.md](./02_reference/ALIGNMENT_GUIDE.md) | 对齐知识综合（内存/格式化/unsafe/缓存行） |
 | [ERROR_CODE_MAPPING.md](./02_reference/ERROR_CODE_MAPPING.md) | 编译器错误码 → 本项目文档映射 |
 | [EDGE_CASES_AND_SPECIAL_CASES.md](./02_reference/EDGE_CASES_AND_SPECIAL_CASES.md) | 空集、零长度、溢出等边界特例 |
@@ -59,8 +56,7 @@
 ## 03 理论与形式化
 
 | 文档/目录 | 说明 |
-|-----------|------|
-| [research_notes/](./research_notes/) | 形式化方法、类型理论、软件设计理论（主内容） |
+| :--- | :--- || [research_notes/](./research_notes/) | 形式化方法、类型理论、软件设计理论（主内容） |
 | [00_ORGANIZATION_AND_NAVIGATION](./research_notes/00_ORGANIZATION_AND_NAVIGATION.md) | 研究笔记组织架构与按目标导航（首次使用入口） |
 | [00_COMPREHENSIVE_SUMMARY](./research_notes/00_COMPREHENSIVE_SUMMARY.md) | 完整总结综合（项目全貌、知识地图、论证总览） |
 | [ARGUMENTATION_CHAIN_AND_FLOW](./research_notes/ARGUMENTATION_CHAIN_AND_FLOW.md) | 论证脉络关系与论证思路（DAG、文档依赖、推导链） |
@@ -81,8 +77,7 @@
 ## 04 思维表征
 
 | 文档 | 说明 |
-|------|------|
-| [THINKING_REPRESENTATION_METHODS.md](./04_thinking/THINKING_REPRESENTATION_METHODS.md) | 思维导图、决策树、转换树、证明树 |
+| :--- | :--- || [THINKING_REPRESENTATION_METHODS.md](./04_thinking/THINKING_REPRESENTATION_METHODS.md) | 思维导图、决策树、转换树、证明树 |
 | [DECISION_GRAPH_NETWORK.md](./04_thinking/DECISION_GRAPH_NETWORK.md) | 决策图网络 |
 | [PROOF_GRAPH_NETWORK.md](./04_thinking/PROOF_GRAPH_NETWORK.md) | 证明图网络 |
 | [MIND_MAP_COLLECTION.md](./04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合 |
@@ -94,8 +89,7 @@
 ## 05 专题指南
 
 | 文档 | 说明 |
-|------|------|
-| [ASYNC_PROGRAMMING_USAGE_GUIDE.md](./05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 异步编程使用指南 |
+| :--- | :--- || [ASYNC_PROGRAMMING_USAGE_GUIDE.md](./05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 异步编程使用指南 |
 | [THREADS_CONCURRENCY_USAGE_GUIDE.md](./05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) | 线程与并发使用指南 |
 | [DESIGN_PATTERNS_USAGE_GUIDE.md](./05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | 设计模式使用指南 |
 | [MACRO_SYSTEM_USAGE_GUIDE.md](./05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | 宏系统使用指南 |
@@ -119,23 +113,20 @@
 ## 06 工具链与版本
 
 | 文档/目录 | 说明 |
-|-----------|------|
-| [06_toolchain/](./06_toolchain/) | 编译器、Cargo、rustdoc、Rust 1.89–1.93 版本演进 |
+| :--- | :--- || [06_toolchain/](./06_toolchain/) | 编译器、Cargo、rustdoc、Rust 1.89–1.93 版本演进 |
 | [00_rust_2024_edition_learning_impact.md](./06_toolchain/00_rust_2024_edition_learning_impact.md) | Rust 2024 Edition 对学习路径的影响 |
 
 **Rust 1.92 版本文档**（已归档）:
 
 | 文档 | 说明 |
-|------|------|
-| [archive/version_reports/](./archive/version_reports/) | RUST_192_* 6 个文件 |
+| :--- | :--- || [archive/version_reports/](./archive/version_reports/) | RUST_192_* 6 个文件 |
 
 ---
 
 ## 07 项目元文档
 
 | 文档 | 说明 |
-|------|------|
-| [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构框架 |
+| :--- | :--- || [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构框架 |
 | [MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md](./07_project/MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md) | 模块知识结构指南 |
 | [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) | 文档交叉引用指南 |
 | [PROJECT_ARCHITECTURE_GUIDE.md](./07_project/PROJECT_ARCHITECTURE_GUIDE.md) | 项目架构指南 |
@@ -153,8 +144,7 @@
 ## 其他
 
 | 文档/目录 | 说明 |
-|-----------|------|
-| [archive/](./archive/) | 归档文件 |
+| :--- | :--- || [archive/](./archive/) | 归档文件 |
 | [backup/](./backup/) | 备份文件（.rar/.zip，非日常查阅） |
 
 ---

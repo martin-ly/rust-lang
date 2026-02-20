@@ -8,8 +8,7 @@
 ## 核心概念（4 条）
 
 | 概念 | 说明 |
-|------|------|
-| **创建型** | Builder、Factory、Singleton；Rust 用 `Default`、`new` 惯用 |
+| :--- | :--- || **创建型** | Builder、Factory、Singleton；Rust 用 `Default`、`new` 惯用 |
 | **结构型** | Adapter、Decorator、Facade；组合优于继承 |
 | **行为型** | Strategy、Observer、State；trait 对象或枚举 |
 | **Rust 特有** | Newtype、RAII、类型状态机；零成本抽象 |
@@ -19,8 +18,7 @@
 ## 常见坑与解决
 
 | 坑 | 解决 |
-|----|------|
-| 过度设计 | 先满足需求；模式按需引入 |
+| :--- | :--- || 过度设计 | 先满足需求；模式按需引入 |
 | OOP 思维照搬 | Rust 用 trait + enum；避免继承层次 |
 | 全局可变状态 | 用 `Arc<Mutex<T>>` 或依赖注入 |
 | 模式组合复杂 | 参考 [模式组合参考](tier_03_references/04_模式性能评估参考.md) |
@@ -30,8 +28,7 @@
 ## 模式速选
 
 | 场景 | 选型 |
-|------|------|
-| 多步骤构建 | Builder |
+| :--- | :--- || 多步骤构建 | Builder |
 | 运行时多态 | `dyn Trait` 或 `enum` |
 | 可选扩展 | Decorator / Newtype |
 | 状态转换 | 类型状态机 / enum |

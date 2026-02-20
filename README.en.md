@@ -50,8 +50,7 @@ We have successfully completed all **24 core tasks**, achieving **100% completio
 ### 🚀 New Core Resources
 
 | Resource                              | Description                                               | Quick Link                                                                        |
-| ------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **🎓 International Alignment Report** | Alignment with top universities, Rust 1.90, formal theory | [View Report](./COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md) ⭐⭐⭐         |
+| :--- | :--- | :--- || **🎓 International Alignment Report** | Alignment with top universities, Rust 1.90, formal theory | [View Report](./COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md) ⭐⭐⭐         |
 | **📊 Alignment Executive Summary**    | Quick understanding of international level comparison     | [View Summary](./UNIVERSITY_ALIGNMENT_EXECUTIVE_SUMMARY.md) ⭐⭐⭐                |
 | **⚡ Quick Start**                    | Get started with guides                                  | [Start Now](./guides/README.md) ⭐                                                 |
 | **🔍 Smart Document Search**          | Full-text search tool                                     | [Use Search](./tools/doc_search/README.md) ⭐                                     |
@@ -75,8 +74,7 @@ For core modules (C01-C12), each module now contains:
 ### 🎯 By Learning Stage
 
 | Stage               | Time Investment | Core Modules | Learning Goals                               |
-| ------------------- | --------------- | ------------ | -------------------------------------------- |
-| **🌱 Beginner**     | 2-4 weeks       | C01-C03      | Master basic syntax and core concepts        |
+| :--- | :--- | :--- | :--- || **🌱 Beginner**     | 2-4 weeks       | C01-C03      | Master basic syntax and core concepts        |
 | **🚀 Intermediate** | 4-8 weeks       | C04-C06      | Understand advanced features and concurrency |
 | **⚡ Advanced**     | 8-12 weeks      | C07-C10      | System programming and network applications  |
 | **🏆 Expert**       | Continuous      | C11-C12      | Macro system, WASM, advanced practices      |
@@ -86,24 +84,21 @@ For core modules (C01-C12), each module now contains:
 #### Phase 1: Rust Fundamentals (C01-C03)
 
 | Module  | Name                                                          | Core Content                    | Documentation                                                                  |
-| ------- | ------------------------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------------ |
-| **C01** | [Ownership & Borrowing](./crates/c01_ownership_borrow_scope/) | Ownership, borrowing, lifetimes | [📖 Master Index](./crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| :--- | :--- | :--- | :--- || **C01** | [Ownership & Borrowing](./crates/c01_ownership_borrow_scope/) | Ownership, borrowing, lifetimes | [📖 Master Index](./crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
 | **C02** | [Type System](./crates/c02_type_system/)                      | Generics, Traits, type safety   | [📖 Master Index](./crates/c02_type_system/docs/00_MASTER_INDEX.md)            |
 | **C03** | [Control Flow & Functions](./crates/c03_control_fn/)          | if/match/loop, closures         | [📖 Master Index](./crates/c03_control_fn/docs/00_MASTER_INDEX.md)             |
 
 #### Phase 2: Concurrency & Async (C04-C06)
 
 | Module  | Name                                           | Core Content                              | Documentation                                                   |
-| ------- | ---------------------------------------------- | ----------------------------------------- | --------------------------------------------------------------- |
-| **C04** | [Generic Programming](./crates/c04_generic/)   | Advanced generics, associated types, GATs | [📖 Master Index](./crates/c04_generic/docs/00_MASTER_INDEX.md) |
+| :--- | :--- | :--- | :--- || **C04** | [Generic Programming](./crates/c04_generic/)   | Advanced generics, associated types, GATs | [📖 Master Index](./crates/c04_generic/docs/00_MASTER_INDEX.md) |
 | **C05** | [Threads & Concurrency](./crates/c05_threads/) | Threads, locks, atomic operations         | [📖 Master Index](./crates/c05_threads/docs/00_MASTER_INDEX.md) |
 | **C06** | [Async Programming](./crates/c06_async/)       | async/await, Future, Runtime              | [📖 Master Index](./crates/c06_async/docs/00_MASTER_INDEX.md)   |
 
 #### Phase 3: Systems & Applications (C07-C10)
 
 | Module  | Name                                                     | Core Content                         | Documentation                                                          |
-| ------- | -------------------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------- |
-| **C07** | [Process Management](./crates/c07_process/)              | Processes, IPC, signal handling      | [📖 Master Index](./crates/c07_process/docs/00_MASTER_INDEX.md)        |
+| :--- | :--- | :--- | :--- || **C07** | [Process Management](./crates/c07_process/)              | Processes, IPC, signal handling      | [📖 Master Index](./crates/c07_process/docs/00_MASTER_INDEX.md)        |
 | **C08** | [Algorithms & Data Structures](./crates/c08_algorithms/) | Classic algorithms, data structures  | [📖 Master Index](./crates/c08_algorithms/docs/00_MASTER_INDEX.md)     |
 | **C09** | [Design Patterns](./crates/c09_design_pattern/)          | GoF patterns, Rust-specific patterns | [📖 Master Index](./crates/c09_design_pattern/docs/00_MASTER_INDEX.md) |
 | **C10** | [Network Programming](./crates/c10_networks/)            | TCP/UDP, HTTP, WebSocket             | [📖 Master Index](./crates/c10_networks/docs/00_MASTER_INDEX.md)       |
@@ -111,8 +106,7 @@ For core modules (C01-C12), each module now contains:
 #### Phase 4: Advanced Practices (C11-C12)
 
 | Module  | Name                                               | Core Content                                    | Documentation                                                       |
-| ------- | -------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------- |
-| **C11** | [Macro System](./crates/c11_macro_system/)         | Declarative macros, procedural macros, DSL      | [📖 Master Index](./crates/c11_macro_system/docs/00_MASTER_INDEX.md) |
+| :--- | :--- | :--- | :--- || **C11** | [Macro System](./crates/c11_macro_system/)         | Declarative macros, procedural macros, DSL      | [📖 Master Index](./crates/c11_macro_system/docs/00_MASTER_INDEX.md) |
 | **C12** | [WebAssembly](./crates/c12_wasm/)                  | WASM, wasm-bindgen, WASI                        | [📖 Master Index](./crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md) |
 
 ---
@@ -258,8 +252,7 @@ Week 5-12: Practice Project 3 - Distributed System
 ## 📊 Project Statistics
 
 | Metric                     | Value                   |
-| -------------------------- | ----------------------- |
-| **Total Documentation**    | 37,000+ lines           |
+| :--- | :--- || **Total Documentation**    | 37,000+ lines           |
 | **Runnable Code**          | 15,050+ lines           |
 | **Visualization Diagrams** | 103+                    |
 | **Comparison Matrices**    | 255+                    |

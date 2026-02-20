@@ -5,8 +5,7 @@
 ## 📚 基准测试列表
 
 | 基准测试文件                                               | 描述               | 测试项数 |
-| ---------------------------------------------------------- | ------------------ | -------- |
-| [array_processing_bench.rs](./array_processing_bench.rs)   | 数组操作性能测试   | 5+       |
+| :--- | :--- | :--- || [array_processing_bench.rs](./array_processing_bench.rs)   | 数组操作性能测试   | 5+       |
 | [string_operations_bench.rs](./string_operations_bench.rs) | 字符串操作性能测试 | 4+       |
 | [design_patterns_bench.rs](./design_patterns_bench.rs)     | 设计模式性能测试   | 4+       |
 
@@ -244,8 +243,7 @@ fn sum_simd(data: &[f32]) -> f32 {
 ### WASM 环境性能目标
 
 | 操作类型   | 目标性能   | 备注              |
-| ---------- | ---------- | ----------------- |
-| 简单算术   | < 10ns     | 如加法、比较      |
+| :--- | :--- | :--- || 简单算术   | < 10ns     | 如加法、比较      |
 | 数组遍历   | < 1ns/元素 | 线性时间          |
 | 字符串操作 | < 2ns/字符 | 取决于操作复杂度  |
 | 对象创建   | < 100ns    | 工厂/建造者模式   |

@@ -8,8 +8,7 @@
 ## Official Resources
 
 | Resource | Link |
-|----------|------|
-| **The Rust Book** | [Ch. 3 Common Programming Concepts](https://doc.rust-lang.org/book/ch03-00-comments.html), [Ch. 6 Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) |
+| :--- | :--- || **The Rust Book** | [Ch. 3 Common Programming Concepts](https://doc.rust-lang.org/book/ch03-00-comments.html), [Ch. 6 Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) |
 | **RBE Practice** | [Flow Control](https://doc.rust-lang.org/rust-by-example/flow_control.html) · [Option](https://doc.rust-lang.org/rust-by-example/std/option.html) · [Error](https://doc.rust-lang.org/rust-by-example/error.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html) · [Closures](https://doc.rust-lang.org/rust-by-example/fn/closures.html) |
 | **Rust Reference** | [Expressions](https://doc.rust-lang.org/reference/expressions.html) |
 
@@ -28,8 +27,7 @@
 ### Tier Structure
 
 | Tier | Name | Entry |
-|------|------|-------|
-| **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/) |
+| :--- | :--- | :--- || **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/) |
 | **Tier 2** | Core Guides | [tier_02_guides/](tier_02_guides/) |
 | **Tier 3** | References | [tier_03_references/](tier_03_references/) |
 | **Tier 4** | Advanced | [tier_04_advanced/](tier_04_advanced/) |

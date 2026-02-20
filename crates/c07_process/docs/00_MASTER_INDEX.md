@@ -5,8 +5,7 @@
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
-|----------|------|--------------|
-| **The Rust Book** | [Ch. 20 (Advanced)](https://doc.rust-lang.org/book/) | 系统编程 |
+| :--- | :--- | :--- || **The Rust Book** | [Ch. 20 (Advanced)](https://doc.rust-lang.org/book/) | 系统编程 |
 | **RBE 练习** | [Process](https://doc.rust-lang.org/rust-by-example/std_misc/process.html) | 进程创建与管理实践 |
 | **Rust Reference** | [std::process](https://doc.rust-lang.org/std/process/), [std::os](https://doc.rust-lang.org/std/os/) | 进程、OS API |
 | **Command Line Book** | [CLI Book](https://rust-cli.github.io/book/) | CLI 工具开发 |
@@ -233,8 +232,7 @@
 ### 文档数量
 
 | 类别         | 数量 | 说明       |
-| ------------ | ---- | ---------- |
-| **核心概念** | 10   | 01-10系列  |
+| :--- | :--- | :--- || **核心概念** | 10   | 01-10系列  |
 | **实践示例** | 8    | 11-18系列  |
 | **进阶指南** | 3    | 12-14指南  |
 | **概览规划** | 3    | 概览和计划 |

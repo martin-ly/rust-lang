@@ -32,8 +32,7 @@
 ### 1. 需要整合的目录
 
 | 目录                             | 文件数 | 状态        | 处理方式                       |
-| -------------------------------- | ------ | ----------- | ------------------------------ |
-| **knowledge_system/**            | 29     | 📦 待整合   | → analysis/knowledge_enhanced/ |
+| :--- | :--- | :--- | :--- || **knowledge_system/**            | 29     | 📦 待整合   | → analysis/knowledge_enhanced/ |
 | **theory_enhanced/**             | 5      | 📦 待整合   | → analysis/rust_theory/        |
 | **01_theory/**                   | 4      | 📦 待整合   | → analysis/rust_theory/        |
 | **02_core/**                     | 8      | ⚠️ 部分重复 | 审查后整合/归档                |
@@ -208,8 +207,7 @@ c02_type_system/docs/
 ## ⏱️ 时间估算
 
 | 任务                         | 预计时间   |
-| ---------------------------- | ---------- |
-| Step 1: analysis/README      | 5分钟      |
+| :--- | :--- || Step 1: analysis/README      | 5分钟      |
 | Step 2: 移动knowledge_system | 10分钟     |
 | Step 3: 移动theory_enhanced  | 5分钟      |
 | Step 4: 创建appendices       | 15分钟     |

@@ -9,8 +9,7 @@
 ## 📚 核心指南
 
 | 主题         | 文档                                                                                | 状态       |
-| ------------ | ----------------------------------------------------------------------------------- | ---------- |
-| **综合指南** | [COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | ⭐⭐⭐⭐⭐ |
+| :--- | :--- | :--- || **综合指南** | [COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md](../COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | ⭐⭐⭐⭐⭐ |
 | **实战示例** | [RUST_190_EXAMPLES_COLLECTION.md](../RUST_190_EXAMPLES_COLLECTION.md)               | ⭐⭐⭐⭐   |
 | **可观测性** | [observability.md](../observability.md)                                             | ⭐⭐⭐     |
 | **基准测试** | [benchmarking.md](../benchmarking.md)                                               | ⭐⭐⭐     |

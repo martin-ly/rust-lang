@@ -22,8 +22,7 @@
 ## 后续规划
 
 | 优先级 | 任务 | 说明 | 状态 |
-|--------|------|------|------|
-| P2 | 交互式练习深化 | Rustlings 对接、Playground 集成 | ✅ Rustlings 映射完成 |
+| :--- | :--- | :--- | :--- || P2 | 交互式练习深化 | Rustlings 对接、Playground 集成 | ✅ Rustlings 映射完成 |
 | P2 | CLI 专题 | 对标 Command Line Book | ✅ CLI_APPLICATIONS_GUIDE 完成 |
 | P3 | unsafe 专题深化 | Rustonomicon 系统讲解 | ✅ UNSAFE_RUST_GUIDE 对标完成 |
 | P3 | 嵌入式可选模块 | Embedded Book 对应内容 | ✅ EMBEDDED_RUST_GUIDE 完成 |
@@ -34,8 +33,7 @@
 ## AI+Rust 扩展计划（2026-02 新增）
 
 | 优先级 | 任务 | 说明 |
-|--------|------|------|
-| P2 | AI+Rust 生态指南 | ✅ [AI_RUST_ECOSYSTEM_GUIDE](docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) 完成 |
+| :--- | :--- | :--- || P2 | AI+Rust 生态指南 | ✅ [AI_RUST_ECOSYSTEM_GUIDE](docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) 完成 |
 | P2 | AI 辅助工作流 | ✅ 已纳入 AI_ASSISTED 指南 |
 | P3 | Candle/Burn 入门示例 | 在 examples/ 或新 crate 中增加 | ✅ 文档内代码示例完成 |
 | P3 | AI/ML 速查卡 | ai_ml_cheatsheet.md | ✅ 完成 |

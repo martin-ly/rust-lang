@@ -284,8 +284,7 @@ cargo test --test test_runner
 ### 环境变量
 
 | 环境变量                   | 描述               | 默认值               |
-| -------------------------- | ------------------ | -------------------- |
-| `C10_SKIP_NETWORK_TESTS`   | 跳过网络相关测试   | `0`                  |
+| :--- | :--- | :--- || `C10_SKIP_NETWORK_TESTS`   | 跳过网络相关测试   | `0`                  |
 | `C10_DNS_TESTS`            | 启用DNS测试        | `0`                  |
 | `C10_TCP_ADDRESS`          | TCP测试地址        | `127.0.0.1:8080`     |
 | `C10_TCP_TIMEOUT`          | TCP超时时间        | `30秒`               |
@@ -302,8 +301,7 @@ cargo test --test test_runner
 ### 测试特性
 
 | 特性        | 描述         | 测试文件               |
-| ----------- | ------------ | ---------------------- |
-| `sniff`     | 抓包功能测试 | `integration_tests.rs` |
+| :--- | :--- | :--- || `sniff`     | 抓包功能测试 | `integration_tests.rs` |
 | `offline`   | 离线分析测试 | `integration_tests.rs` |
 | `pcap_live` | 实时抓包测试 | `integration_tests.rs` |
 | `tls`       | TLS功能测试  | `security_tests.rs`    |

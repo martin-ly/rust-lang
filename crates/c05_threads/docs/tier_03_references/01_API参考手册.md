@@ -119,8 +119,7 @@ pub struct Thread { /* fields omitted */ }
 **方法**:
 
 | 方法     | 签名                             | 说明               |
-| -------- | -------------------------------- | ------------------ |
-| `id`     | `fn id(&self) -> ThreadId`       | 获取线程 ID        |
+| :--- | :--- | :--- || `id`     | `fn id(&self) -> ThreadId`       | 获取线程 ID        |
 | `name`   | `fn name(&self) -> Option<&str>` | 获取线程名称       |
 | `unpark` | `fn unpark(&self)`               | 唤醒被 park 的线程 |
 
@@ -151,8 +150,7 @@ pub struct JoinHandle<T> { /* fields omitted */ }
 **方法**:
 
 | 方法          | 签名                            | 说明                      |
-| ------------- | ------------------------------- | ------------------------- |
-| `join`        | `fn join(self) -> Result<T>`    | 等待线程完成              |
+| :--- | :--- | :--- || `join`        | `fn join(self) -> Result<T>`    | 等待线程完成              |
 | `thread`      | `fn thread(&self) -> &Thread`   | 获取 Thread 句柄          |
 | `is_finished` | `fn is_finished(&self) -> bool` | 检查线程是否完成（1.61+） |
 
@@ -190,8 +188,7 @@ pub struct Builder { /* fields omitted */ }
 **方法**:
 
 | 方法           | 签名                                                      | 说明                |
-| -------------- | --------------------------------------------------------- | ------------------- |
-| `new`          | `fn new() -> Builder`                                     | 创建构建器          |
+| :--- | :--- | :--- || `new`          | `fn new() -> Builder`                                     | 创建构建器          |
 | `name`         | `fn name(self, name: String) -> Builder`                  | 设置线程名称        |
 | `stack_size`   | `fn stack_size(self, size: usize) -> Builder`             | 设置栈大小          |
 | `spawn`        | `fn spawn<F, T>(self, f: F) -> io::Result<JoinHandle<T>>` | 启动线程            |
@@ -245,8 +242,7 @@ map.insert(id, "Main thread".to_string());
 ### 1.2 核心函数
 
 | 函数                    | 签名                                                     | 说明                    |
-| ----------------------- | -------------------------------------------------------- | ----------------------- |
-| `spawn`                 | `fn spawn<F, T>(f: F) -> JoinHandle<T>`                  | 创建新线程              |
+| :--- | :--- | :--- || `spawn`                 | `fn spawn<F, T>(f: F) -> JoinHandle<T>`                  | 创建新线程              |
 | `current`               | `fn current() -> Thread`                                 | 获取当前线程句柄        |
 | `sleep`                 | `fn sleep(dur: Duration)`                                | 休眠指定时间            |
 | `yield_now`             | `fn yield_now()`                                         | 让出 CPU 时间片         |
@@ -329,8 +325,7 @@ pub struct Mutex<T: ?Sized> { /* fields omitted */ }
 **方法**:
 
 | 方法          | 签名                                                 | 说明                  |
-| ------------- | ---------------------------------------------------- | --------------------- |
-| `new`         | `fn new(t: T) -> Mutex<T>`                           | 创建新的 Mutex        |
+| :--- | :--- | :--- || `new`         | `fn new(t: T) -> Mutex<T>`                           | 创建新的 Mutex        |
 | `lock`        | `fn lock(&self) -> LockResult<MutexGuard<T>>`        | 获取锁（阻塞）        |
 | `try_lock`    | `fn try_lock(&self) -> TryLockResult<MutexGuard<T>>` | 尝试获取锁（非阻塞）  |
 | `is_poisoned` | `fn is_poisoned(&self) -> bool`                      | 检查是否中毒          |
@@ -384,8 +379,7 @@ pub struct RwLock<T: ?Sized> { /* fields omitted */ }
 **方法**:
 
 | 方法          | 签名                                                        | 说明            |
-| ------------- | ----------------------------------------------------------- | --------------- |
-| `new`         | `fn new(t: T) -> RwLock<T>`                                 | 创建新的 RwLock |
+| :--- | :--- | :--- || `new`         | `fn new(t: T) -> RwLock<T>`                                 | 创建新的 RwLock |
 | `read`        | `fn read(&self) -> LockResult<RwLockReadGuard<T>>`          | 获取读锁        |
 | `try_read`    | `fn try_read(&self) -> TryLockResult<RwLockReadGuard<T>>`   | 尝试获取读锁    |
 | `write`       | `fn write(&self) -> LockResult<RwLockWriteGuard<T>>`        | 获取写锁        |
@@ -428,8 +422,7 @@ pub struct Condvar { /* fields omitted */ }
 **方法**:
 
 | 方法           | 签名                                                                                                                           | 说明              |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
-| `new`          | `fn new() -> Condvar`                                                                                                          | 创建条件变量      |
+| :--- | :--- | :--- || `new`          | `fn new() -> Condvar`                                                                                                          | 创建条件变量      |
 | `wait`         | `fn wait<'a, T>(&self, guard: MutexGuard<'a, T>) -> LockResult<MutexGuard<'a, T>>`                                             | 等待通知          |
 | `wait_while`   | `fn wait_while<'a, T, F>(&self, guard: MutexGuard<'a, T>, condition: F) -> LockResult<MutexGuard<'a, T>>`                      | 条件等待（1.42+） |
 | `wait_timeout` | `fn wait_timeout<'a, T>(&self, guard: MutexGuard<'a, T>, dur: Duration) -> LockResult<(MutexGuard<'a, T>, WaitTimeoutResult)>` | 超时等待          |
@@ -472,8 +465,7 @@ pub struct Barrier { /* fields omitted */ }
 **方法**:
 
 | 方法   | 签名                                  | 说明             |
-| ------ | ------------------------------------- | ---------------- |
-| `new`  | `fn new(n: usize) -> Barrier`         | 创建屏障         |
+| :--- | :--- | :--- || `new`  | `fn new(n: usize) -> Barrier`         | 创建屏障         |
 | `wait` | `fn wait(&self) -> BarrierWaitResult` | 等待所有线程到达 |
 
 **BarrierWaitResult**:
@@ -564,8 +556,7 @@ fn main() {
 **创建函数**:
 
 | 函数           | 签名                                                               | 说明             |
-| -------------- | ------------------------------------------------------------------ | ---------------- |
-| `channel`      | `fn channel<T>() -> (Sender<T>, Receiver<T>)`                      | 异步无界 channel |
+| :--- | :--- | :--- || `channel`      | `fn channel<T>() -> (Sender<T>, Receiver<T>)`                      | 异步无界 channel |
 | `sync_channel` | `fn sync_channel<T>(bound: usize) -> (SyncSender<T>, Receiver<T>)` | 同步有界 channel |
 
 ---
@@ -575,15 +566,13 @@ fn main() {
 **`Sender<T>`** (异步):
 
 | 方法    | 签名                                               | 说明       |
-| ------- | -------------------------------------------------- | ---------- |
-| `send`  | `fn send(&self, t: T) -> Result<(), SendError<T>>` | 发送消息   |
+| :--- | :--- | :--- || `send`  | `fn send(&self, t: T) -> Result<(), SendError<T>>` | 发送消息   |
 | `clone` | `fn clone(&self) -> Sender<T>`                     | 克隆发送端 |
 
 **`SyncSender<T>`** (同步):
 
 | 方法       | 签名                                                      | 说明             |
-| ---------- | --------------------------------------------------------- | ---------------- |
-| `send`     | `fn send(&self, t: T) -> Result<(), SendError<T>>`        | 发送（可能阻塞） |
+| :--- | :--- | :--- || `send`     | `fn send(&self, t: T) -> Result<(), SendError<T>>`        | 发送（可能阻塞） |
 | `try_send` | `fn try_send(&self, t: T) -> Result<(), TrySendError<T>>` | 非阻塞发送       |
 
 ---
@@ -593,8 +582,7 @@ fn main() {
 **`Receiver<T>`**:
 
 | 方法           | 签名                                                                       | 说明             |
-| -------------- | -------------------------------------------------------------------------- | ---------------- |
-| `recv`         | `fn recv(&self) -> Result<T, RecvError>`                                   | 接收消息（阻塞） |
+| :--- | :--- | :--- || `recv`         | `fn recv(&self) -> Result<T, RecvError>`                                   | 接收消息（阻塞） |
 | `try_recv`     | `fn try_recv(&self) -> Result<T, TryRecvError>`                            | 非阻塞接收       |
 | `recv_timeout` | `fn recv_timeout(&self, timeout: Duration) -> Result<T, RecvTimeoutError>` | 超时接收         |
 | `iter`         | `fn iter(&self) -> Iter<T>`                                                | 迭代器           |
@@ -622,8 +610,7 @@ assert_eq!(rx.recv().unwrap(), 10);
 ### 4.1 原子类型
 
 | 类型                                                             | 说明           |
-| ---------------------------------------------------------------- | -------------- |
-| `AtomicBool`                                                     | 原子布尔值     |
+| :--- | :--- || `AtomicBool`                                                     | 原子布尔值     |
 | `AtomicI8`, `AtomicI16`, `AtomicI32`, `AtomicI64`, `AtomicIsize` | 有符号原子整数 |
 | `AtomicU8`, `AtomicU16`, `AtomicU32`, `AtomicU64`, `AtomicUsize` | 无符号原子整数 |
 | `AtomicPtr<T>`                                                   | 原子指针       |
@@ -649,8 +636,7 @@ pub enum Ordering {
 **AtomicUsize 示例**（其他类型类似）:
 
 | 方法               | 签名                                                                                                                   | 说明     |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------- |
-| `new`              | `fn new(v: usize) -> AtomicUsize`                                                                                      | 创建     |
+| :--- | :--- | :--- || `new`              | `fn new(v: usize) -> AtomicUsize`                                                                                      | 创建     |
 | `load`             | `fn load(&self, order: Ordering) -> usize`                                                                             | 读取     |
 | `store`            | `fn store(&self, val: usize, order: Ordering)`                                                                         | 存储     |
 | `swap`             | `fn swap(&self, val: usize, order: Ordering) -> usize`                                                                 | 交换     |

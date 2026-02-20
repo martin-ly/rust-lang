@@ -11,8 +11,7 @@
 ## 一、已完成项（本次迭代）
 
 | 序号 | 任务 | 状态 |
-|------|------|------|
-| 0 | **100% 推进**：Rustlings 映射、Unsafe 对标、错误码映射、Brown/RBE 入口、权威源元数据 | ✅ |
+| :--- | :--- | :--- || 0 | **100% 推进**：Rustlings 映射、Unsafe 对标、错误码映射、Brown/RBE 入口、权威源元数据 | ✅ |
 | 1 | RUST_RELEASE_TRACKING_CHECKLIST DECISION/PROOF_GRAPH 链接修复 | ✅ |
 | 2 | MULTI_DIMENSIONAL_CONCEPT_MATRIX 内部链接修复 | ✅ |
 | 3 | DECISION_GRAPH_NETWORK / PROOF_GRAPH_NETWORK RUST_192 断链修复 | ✅ |
@@ -47,31 +46,27 @@
 ### C03 控制流与函数
 
 | 项目 | 说明 | 优先级 | 状态 |
-|------|------|--------|------|
-| 错误处理边界案例 | From/Into 错误映射、anyhow vs thiserror、早返回与 RAII | 中 | ✅ |
+| :--- | :--- | :--- | :--- || 错误处理边界案例 | From/Into 错误映射、anyhow vs thiserror、早返回与 RAII | 中 | ✅ |
 | 迭代器与闭包协同 | 迭代器与闭包在控制流中的协同示例 | 中 | ✅ |
 | async/await 互链 | 与 c06_async 的 async/await 场景互链 | 低 | ✅ |
 
 ### C04 泛型编程
 
 | 项目 | 说明 | 优先级 | 状态 |
-|------|------|--------|------|
-| Tier 2 指南补全 | 完善 tier_02_guides 各主题深度 | 中 | ✅ 链接修复完成 |
+| :--- | :--- | :--- | :--- || Tier 2 指南补全 | 完善 tier_02_guides 各主题深度 | 中 | ✅ 链接修复完成 |
 | Tier 3 参考补全 | 完善 tier_03_references 技术参考 | 中 | ✅ 链接修复完成 |
 | Tier 4 高级补全 | 完善 tier_04_advanced 理论深入 | 低 | ✅ 链接修复完成 |
 
 ### C07 进程管理
 
 | 项目 | 说明 | 优先级 | 状态 |
-|------|------|--------|------|
-| async_stdio_demo | 异步标准 IO（需 --features async） | 低 | ✅ 已实现 |
+| :--- | :--- | :--- | :--- || async_stdio_demo | 异步标准 IO（需 --features async） | 低 | ✅ 已实现 |
 | 文档深度 | 部分实践示例文档可进一步扩展 | 低 | ✅ 11_practical_examples 已补全 |
 
 ### C09 设计模式
 
 | 项目 | 说明 | 优先级 | 状态 |
-|------|------|--------|------|
-| 组合模式工程案例 | 增补「组合多个模式」的工程案例与评测 | 中 | ✅ 已有案例 A/B |
+| :--- | :--- | :--- | :--- || 组合模式工程案例 | 增补「组合多个模式」的工程案例与评测 | 中 | ✅ 已有案例 A/B |
 | 框架性模式互链 | 与 c11 的框架性模式互链 | 低 | 已添加互链入口 |
 
 ---
@@ -81,8 +76,7 @@
 **触发条件**: Rust 新版本发布（如 1.94、1.95）
 
 | 任务 | 入口 | 说明 |
-|------|------|------|
-| 版本发布检查清单 | [RUST_RELEASE_TRACKING_CHECKLIST.md](./RUST_RELEASE_TRACKING_CHECKLIST.md) | 新版本发布后执行 |
+| :--- | :--- | :--- || 版本发布检查清单 | [RUST_RELEASE_TRACKING_CHECKLIST.md](./RUST_RELEASE_TRACKING_CHECKLIST.md) | 新版本发布后执行 |
 | 增量更新流程 | [INCREMENTAL_UPDATE_FLOW.md](../research_notes/INCREMENTAL_UPDATE_FLOW.md) | 研究笔记增量更新 |
 
 ---
@@ -90,8 +84,7 @@
 ## 四、可选 / 待完善项
 
 | 项目 | 入口 | 说明 |
-|------|------|------|
-| Aeneas 对接 | [AENEAS_INTEGRATION_PLAN.md](../research_notes/AENEAS_INTEGRATION_PLAN.md) | Safe Rust → Coq/F*/HOL4/Lean；环境搭建、示例选取、翻译验证 |
+| :--- | :--- | :--- || Aeneas 对接 | [AENEAS_INTEGRATION_PLAN.md](../research_notes/AENEAS_INTEGRATION_PLAN.md) | Safe Rust → Coq/F*/HOL4/Lean；环境搭建、示例选取、翻译验证 |
 | coq-of-rust 对接 | [COQ_OF_RUST_INTEGRATION_PLAN.md](../research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md) | THIR → Rocq；与 FORMAL_VERIFICATION_GUIDE 衔接 |
 | 文档完善最终指南 | [FINAL_DOCUMENTATION_COMPLETION_GUIDE.md](../05_guides/FINAL_DOCUMENTATION_COMPLETION_GUIDE.md) | 更多实战示例、文档通读 |
 | 学习路径规划 | [LEARNING_PATH_PLANNING.md](../01_learning/LEARNING_PATH_PLANNING.md) | 学习检查清单（用户自填） |
@@ -116,8 +109,7 @@
 ## 七、完成度汇总
 
 | 模块 | 可完成项 | 已完成 | 完成率 |
-|------|----------|--------|--------|
-| C01 | 6+ | 6+ | 100% |
+| :--- | :--- | :--- | :--- || C01 | 6+ | 6+ | 100% |
 | C02 | 4+ | 4+ | 100% |
 | C03 | 3 | 3 | 100% |
 | C04 | 3 | 3 | 100% |
@@ -141,8 +133,7 @@
 ## 八、100% 推进完成项（2026-02-13）
 
 | 任务 | 交付物 |
-|------|--------|
-| Rustlings 模块映射表 | [exercises/RUSTLINGS_MAPPING.md](../../exercises/RUSTLINGS_MAPPING.md) |
+| :--- | :--- || Rustlings 模块映射表 | [exercises/RUSTLINGS_MAPPING.md](../../exercises/RUSTLINGS_MAPPING.md) |
 | UNSAFE_RUST_GUIDE 对标 Nomicon | 各章节直接链接 + 权威源元数据 |
 | 错误码映射初版 | [docs/02_reference/ERROR_CODE_MAPPING.md](../02_reference/ERROR_CODE_MAPPING.md) |
 | Brown 交互版 + RBE 入口 | RESOURCES、OFFICIAL_RESOURCES_MAPPING、exercises/README 更新 |
@@ -162,8 +153,7 @@
 ## 九、2026-02-14 持续推进完成项
 
 | 任务 | 交付物 |
-|------|--------|
-| 学习路径链接修复 | LEARNING_PATH_PLANNING、OFFICIAL_RESOURCES_MAPPING 路径修正（05_guides、07_project、04_thinking、02_reference） |
+| :--- | :--- || 学习路径链接修复 | LEARNING_PATH_PLANNING、OFFICIAL_RESOURCES_MAPPING 路径修正（05_guides、07_project、04_thinking、02_reference） |
 | 01_learning 研究者路径 | README 增加形式化证明体系入口；LEARNING_PATH_PLANNING 路径 4 增加形式化与验证小节 |
 | C09 PENDING_ITEMS | 组合模式工程案例、c11 互链标记为 ✅ |
 | PROJECT_CRITICAL_EVALUATION | toolchain→06_toolchain 路径修正；DECISION/PROOF_GRAPH 1.93 状态更新 |
@@ -200,8 +190,7 @@
 ## 十、2026-02-14 100% 持续推进完成项（权威对标）
 
 | 任务 | 交付物 |
-|------|--------|
-| 反例 compile_fail | ownership_cheatsheet、error_handling_cheatsheet 增加 `rust,compile_fail` 标注（4 处） |
+| :--- | :--- || 反例 compile_fail | ownership_cheatsheet、error_handling_cheatsheet 增加 `rust,compile_fail` 标注（4 处） |
 | 权威源元数据 | 12 个 toolchain 文档末尾统一加「最后对照 releases.rs: 2026-02-14」 |
 | Rust 2024 Edition 学习影响 | [00_rust_2024_edition_learning_impact.md](../06_toolchain/00_rust_2024_edition_learning_impact.md) |
 | Rustlings 深化 | RUSTLINGS_MAPPING 增加可点击 GitHub 习题链接（模块映射表 + 完整主题列表） |

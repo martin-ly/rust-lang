@@ -13,8 +13,7 @@
 `docs/` 根目录有 **40+ 个 .md 文件**，未按主题分类，查找困难：
 
 | 类别 | 文件示例 | 问题 |
-|------|----------|------|
-| **专题指南** | ASYNC_PROGRAMMING_USAGE_GUIDE, DESIGN_PATTERNS_USAGE_GUIDE, MACRO_SYSTEM_USAGE_GUIDE, THREADS_CONCURRENCY_USAGE_GUIDE, WASM_USAGE_GUIDE, UNSAFE_RUST_GUIDE, TROUBLESHOOTING_GUIDE | 分散，无统一入口 |
+| :--- | :--- | :--- || **专题指南** | ASYNC_PROGRAMMING_USAGE_GUIDE, DESIGN_PATTERNS_USAGE_GUIDE, MACRO_SYSTEM_USAGE_GUIDE, THREADS_CONCURRENCY_USAGE_GUIDE, WASM_USAGE_GUIDE, UNSAFE_RUST_GUIDE, TROUBLESHOOTING_GUIDE | 分散，无统一入口 |
 | **思维表征** | THINKING_REPRESENTATION_METHODS, DECISION_GRAPH_NETWORK, PROOF_GRAPH_NETWORK, MIND_MAP_COLLECTION, MULTI_DIMENSIONAL_CONCEPT_MATRIX, APPLICATIONS_ANALYSIS_VIEW | 6 个文件，概念重叠 |
 | **知识结构** | KNOWLEDGE_STRUCTURE_FRAMEWORK, MODULE_KNOWLEDGE_STRUCTURE_GUIDE, DOCUMENTATION_CROSS_REFERENCE_GUIDE, FINAL_DOCUMENTATION_COMPLETION_GUIDE | 层次不清 |
 | **版本相关** | RUST_192_* (6 个), MODULE_1.93_ADAPTATION_STATUS, RUST_RELEASE_TRACKING_CHECKLIST | 与 toolchain 重复 |
@@ -27,8 +26,7 @@
 ### 1.2 结构性问题
 
 | 问题 | 说明 |
-|------|------|
-| **嵌套 docs/docs** | `docs/docs/language/applications/14_workflow/` 仅 2 个文件，层级过深且孤立 |
+| :--- | :--- || **嵌套 docs/docs** | `docs/docs/language/applications/14_workflow/` 仅 2 个文件，层级过深且孤立 |
 | **rust-formal-engineering-system 空心化** | 多数子目录为 README 占位， real 内容在 research_notes，形成「映射层」而非「内容层」 |
 | **双重入口** | 形式化理论：rust-formal-engineering-system 与 research_notes 两套入口，易混淆 |
 | **命名不一致** | 中英文混用、RUST_192 vs 1.92、GUIDE vs 指南、COMPREHENSIVE vs 全面 |
@@ -37,8 +35,7 @@
 ### 1.3 主题重叠与冗余
 
 | 重叠域 | 涉及文档 | 建议 |
-|--------|----------|------|
-| 形式化理论 | rust-formal-engineering-system, research_notes, PROOF_INDEX, PROOF_GRAPH_NETWORK, THINKING_REPRESENTATION_METHODS 证明树 | 统一入口，减少跳转 |
+| :--- | :--- | :--- || 形式化理论 | rust-formal-engineering-system, research_notes, PROOF_INDEX, PROOF_GRAPH_NETWORK, THINKING_REPRESENTATION_METHODS 证明树 | 统一入口，减少跳转 |
 | 最佳实践 | BEST_PRACTICES_GUIDE, COMPREHENSIVE_BEST_PRACTICES | 合并 |
 | 思维表征 | 6 个独立文件 | 归入单一「思维表征」主题 |
 | 版本信息 | RUST_192_*, toolchain/*, MODULE_1.93_* | 版本相关统一归 toolchain |
@@ -124,8 +121,7 @@ docs/
 ### 2.3 主题与文档映射表
 
 | 主题 | 现文档 | 建议位置 |
-|------|--------|----------|
-| 学习路径 | LEARNING_PATH_PLANNING, OFFICIAL_RESOURCES_MAPPING | 01_learning |
+| :--- | :--- | :--- || 学习路径 | LEARNING_PATH_PLANNING, OFFICIAL_RESOURCES_MAPPING | 01_learning |
 | 速查 | quick_reference 目录 | 02_reference/quick_reference |
 | 边界特例 | EDGE_CASES_AND_SPECIAL_CASES | 02_reference |
 | 标准库分析 | STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS | 02_reference |
@@ -180,8 +176,7 @@ docs/
 ## 四、命名规范建议
 
 | 维度 | 规范 | 示例 |
-|------|------|------|
-| 主题目录 | 数字前缀 + 英文小写 | 01_learning, 02_reference |
+| :--- | :--- | :--- || 主题目录 | 数字前缀 + 英文小写 | 01_learning, 02_reference |
 | 文档文件名 | 英文大写 + 描述性 | THINKING_REPRESENTATION_METHODS.md |
 | 版本文档 | 统一 `toolchain/` 或 `version/` 前缀 | toolchain/07_rust_1.93_full_changelog.md |
 | 速查卡 | 保持现有 `*_cheatsheet.md` | ownership_cheatsheet.md |
@@ -199,8 +194,7 @@ docs/
 ## 按主题快速导航
 
 | 主题 | 入口 | 说明 |
-|------|------|------|
-| 学习路径 | 01_learning/ | 学习规划、官方资源映射 |
+| :--- | :--- | :--- || 学习路径 | 01_learning/ | 学习规划、官方资源映射 |
 | 速查参考 | 02_reference/quick_reference/ | 20 个速查卡 |
 | 形式化理论 | 03_theory/ | 研究笔记、证明索引 |
 | 思维表征 | 04_thinking/ | 思维导图、决策树、证明树、矩阵 |
@@ -221,8 +215,7 @@ docs/
 ## 六、与 crates 的映射关系
 
 | 主题 | 对应 crates | 说明 |
-|------|-------------|------|
-| 所有权 | c01_ownership_borrow_scope | 根 docs 与 c01/docs 互补 |
+| :--- | :--- | :--- || 所有权 | c01_ownership_borrow_scope | 根 docs 与 c01/docs 互补 |
 | 类型系统 | c02_type_system | |
 | 控制流 | c03_control_fn | |
 | 泛型 | c04_generic | |
@@ -242,8 +235,7 @@ docs/
 ## 七、总结
 
 | 问题 | 规划方向 |
-|------|----------|
-| 根目录扁平、杂乱 | 按主题分层（01–07） |
+| :--- | :--- || 根目录扁平、杂乱 | 按主题分层（01–07） |
 | 思维表征分散 | 归入 04_thinking |
 | 指南分散 | 归入 05_guides |
 | 形式化理论双入口 | 统一为 03_theory |

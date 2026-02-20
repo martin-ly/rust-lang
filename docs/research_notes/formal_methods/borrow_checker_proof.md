@@ -58,6 +58,7 @@
     - [学术论文（国际权威）](#学术论文国际权威)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
+    - [相关思维表征](#相关思维表征)
 
 ---
 
@@ -542,7 +543,9 @@ $$\text{Scope}(r) = [t_1, t_2] \land t_2 < t_3 \rightarrow \text{Valid}(r_2, t_3
 
 ### 与所有权系统的集成
 
-借用成立条件 $\text{borrow}(x,r)$ 蕴含 $\Omega(x)=\text{Owned}$；移动后 $x$ 失效，所有指向 $x$ 的借用离开作用域。数据竞争自由与所有权唯一性共同保证内存安全，形式化见 [ownership_model](./ownership_model.md)。
+借用成立条件 $\text{borrow}(x,r)$ 蕴含 $\Omega(x)=\text{Owned}$；
+移动后 $x$ 失效，所有指向 $x$ 的借用离开作用域。
+数据竞争自由与所有权唯一性共同保证内存安全，形式化见 [ownership_model](./ownership_model.md)。
 
 ### 与生命周期的集成
 

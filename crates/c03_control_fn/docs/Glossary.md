@@ -398,8 +398,7 @@ fn read_file(path: &str) -> Result<String, std::io::Error> {
 **三种 trait**:
 
 | Trait    | 捕获方式    | 可调用次数 |
-| -------- | ----------- | ---------- |
-| `Fn`     | `&self`     | 多次       |
+| :--- | :--- | :--- || `Fn`     | `&self`     | 多次       |
 | `FnMut`  | `&mut self` | 多次       |
 | `FnOnce` | `self`      | 一次       |
 

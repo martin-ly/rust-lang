@@ -17,8 +17,7 @@
 ### ✅ 功能模块
 
 | 模块              | 状态    | 说明                                            |
-| ----------------- | ------- | ----------------------------------------------- |
-| **异步通信**      | ✅ 完成 | `asynchronous_communication/`                   |
+| :--- | :--- | :--- || **异步通信**      | ✅ 完成 | `asynchronous_communication/`                   |
 | **诊断工具**      | ✅ 完成 | `diagnostics.rs`                                |
 | **epoll支持**     | ✅ 完成 | `epoll/`                                        |
 | **错误处理**      | ✅ 完成 | `error.rs`                                      |
@@ -51,8 +50,7 @@
 ### ✅ 示例代码
 
 | 示例              | 文件                              | 状态 |
-| ----------------- | --------------------------------- | ---- |
-| TCP Echo服务器    | `tcp_echo_server.rs`              | ✅   |
+| :--- | :--- | :--- || TCP Echo服务器    | `tcp_echo_server.rs`              | ✅   |
 | TCP客户端         | `tcp_client.rs`                   | ✅   |
 | HTTP客户端        | `http_client.rs`                  | ✅   |
 | WebSocket演示     | `websocket_demo.rs`               | ✅   |

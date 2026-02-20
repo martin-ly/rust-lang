@@ -15,8 +15,7 @@
 ## 文件说明
 
 | 文件 | 内容 |
-|------|------|
-| `advanced_usage_examples.rs` | 高级所有权、并发、错误处理示例 |
+| :--- | :--- || `advanced_usage_examples.rs` | 高级所有权、并发、错误处理示例 |
 | `comprehensive_integration_example.rs` | 综合多模块集成示例 |
 | `module_complete_examples.rs` | 各模块完整用法示例 |
 | `real_world_applications.rs` | 实际应用场景示例 |

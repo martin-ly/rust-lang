@@ -107,8 +107,7 @@
 > 以下历史文档结构已整合至 [tier_01_foundations](tier_01_foundations/)、[tier_02_guides](tier_02_guides/)、[tier_03_references](tier_03_references/)、[tier_04_advanced](tier_04_advanced/)。
 
 | 原主题 | 对应文档 |
-|--------|----------|
-| 所有权核心 | [tier_02_guides/01_所有权快速入门](tier_02_guides/01_所有权快速入门.md) |
+| :--- | :--- || 所有权核心 | [tier_02_guides/01_所有权快速入门](tier_02_guides/01_所有权快速入门.md) |
 | 移动语义 | [tier_02_guides/01_所有权快速入门](tier_02_guides/01_所有权快速入门.md)、[tier_03_references/01_所有权规则参考](tier_03_references/01_所有权规则参考.md) |
 | 可变性/内部可变 | [tier_02_guides/05_智能指针实践](tier_02_guides/05_智能指针实践.md)、[tier_03_references/05_智能指针API参考](tier_03_references/05_智能指针API参考.md) |
 | 作用域管理 | [tier_02_guides/04_作用域管理实践](tier_02_guides/04_作用域管理实践.md) |

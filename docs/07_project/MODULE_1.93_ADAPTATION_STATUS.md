@@ -9,8 +9,7 @@
 ## 适配状态总览
 
 | 模块 | 1.93 兼容性链接 | 1.93 示例/文档 | 1.93 API 覆盖 | 备注 |
-|------|-----------------|----------------|---------------|------|
-| **C01** 所有权 | ✅ README | rust_193_features_demo.rs | ✅ 完整 | MaybeUninit、into_raw_parts、as_array |
+| :--- | :--- | :--- | :--- | :--- || **C01** 所有权 | ✅ README | rust_193_features_demo.rs | ✅ 完整 | MaybeUninit、into_raw_parts、as_array |
 | **C02** 类型系统 | ✅ README | rust_193_features_demo.rs | ✅ 完整 | slice::as_array、into_raw_parts、MaybeUninit |
 | **C03** 控制流 | ✅ README | rust_193_features_demo.rs | ✅ 完整 | Duration、char、fmt::from_fn、as_array |
 | **C04** 泛型 | ✅ README | rust_193_features_demo.rs | ✅ 完整 | slice::as_array、into_raw_parts、Duration |
@@ -28,8 +27,7 @@
 ## 文档级 1.93 渗透
 
 | 文档 | 1.93 内容 |
-|------|-----------|
-| [05_rust_1.93_vs_1.92_comparison](../06_toolchain/05_rust_1.93_vs_1.92_comparison.md) | 版本对比 |
+| :--- | :--- || [05_rust_1.93_vs_1.92_comparison](../06_toolchain/05_rust_1.93_vs_1.92_comparison.md) | 版本对比 |
 | [07_rust_1.93_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) | 完整变更 |
 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) | 兼容性深度 |
 | [10_rust_1.89_to_1.93_cumulative_features_overview](../06_toolchain/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 累积特性总览 |

@@ -63,6 +63,7 @@
   - [Rust 1.93 与智能指针扩展（形式化占位）](#rust-193-与智能指针扩展形式化占位)
   - [MaybeUninit、原子操作、union、transmute（Phase 4）](#maybeuninit原子操作uniontransmutephase-4)
   - [Deref/Drop、repr、const \&mut static（Phase 6）](#derefdropreprconst-mut-staticphase-6)
+    - [相关思维表征](#相关思维表征)
 
 ---
 
@@ -104,9 +105,11 @@
 
 ### 理论背景
 
-**线性类型系统 (Linear Type System)**: 用于建模所有权转移的类型系统。在线性类型系统中，每个值只能使用一次，这与 Rust 的所有权系统非常相似。
+**线性类型系统 (Linear Type System)**: 用于建模所有权转移的类型系统。
+在线性类型系统中，每个值只能使用一次，这与 Rust 的所有权系统非常相似。
 
-**分离逻辑 (Separation Logic)**: 用于表达借用规则的逻辑系统。分离逻辑可以表达内存的分离和共享，这与 Rust 的借用规则对应。
+**分离逻辑 (Separation Logic)**: 用于表达借用规则的逻辑系统。
+分离逻辑可以表达内存的分离和共享，这与 Rust 的借用规则对应。
 
 **资源管理理论**: 所有权系统可以视为一种资源管理机制，确保资源在使用后正确释放。
 

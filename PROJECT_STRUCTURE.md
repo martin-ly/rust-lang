@@ -144,8 +144,7 @@ rust-lang/
 #### 📄 核心文档
 
 | 文件                    | 用途           | 何时查看        |
-| ----------------------- | -------------- | --------------- |
-| `README.md`             | 项目总览和入口 | 首次了解项目 ⭐ |
+| :--- | :--- | :--- || `README.md`             | 项目总览和入口 | 首次了解项目 ⭐ |
 | `CONTRIBUTING.md`       | 贡献指南       | 想要贡献代码时  |
 | `CHANGELOG.md`          | 更新日志       | 查看版本变更    |
 | `BEST_PRACTICES.md`     | 最佳实践       | 提升代码质量    |
@@ -159,8 +158,7 @@ rust-lang/
 #### 📦 配置文件
 
 | 文件             | 用途          | 说明                 |
-| ---------------- | ------------- | -------------------- |
-| `Cargo.toml`     | Workspace配置 | Cargo工作空间定义    |
+| :--- | :--- | :--- || `Cargo.toml`     | Workspace配置 | Cargo工作空间定义    |
 | `Cargo.lock`     | 依赖锁定      | 自动生成，勿手动编辑 |
 | `rustfmt.toml`   | 格式化配置    | `cargo fmt` 使用     |
 | `clippy.toml`    | Lint配置      | `cargo clippy` 使用  |
@@ -176,8 +174,7 @@ rust-lang/
 #### 📚 模块列表
 
 | 模块    | 名称           | 难度       | 主题                   |
-| ------- | -------------- | ---------- | ---------------------- |
-| **C01** | 所有权与借用   | ⭐         | 所有权、借用、生命周期 |
+| :--- | :--- | :--- | :--- || **C01** | 所有权与借用   | ⭐         | 所有权、借用、生命周期 |
 | **C02** | 类型系统       | ⭐⭐       | 类型、泛型、Trait      |
 | **C03** | 控制流与函数   | ⭐⭐       | 条件、循环、闭包       |
 | **C04** | 泛型编程       | ⭐⭐⭐     | 高级泛型、GATs         |
@@ -244,8 +241,7 @@ c##_module_name/
 #### 📊 报告位置
 
 | 类型 | 路径 |
-| ------------ | ---- |
-| 阶段/模块报告 | [archive/reports/](./archive/reports/) |
+| :--- | :--- || 阶段/模块报告 | [archive/reports/](./archive/reports/) |
 | 归档报告 | [docs/archive/reports/](./docs/archive/reports/) |
 | 根完成报告 | [docs/archive/root_completion_reports/](./docs/archive/root_completion_reports/) |
 | 计划实施完成 | [docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md](./docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md) |

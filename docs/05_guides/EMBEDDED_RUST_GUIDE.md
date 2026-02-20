@@ -15,8 +15,7 @@
 ## 官方 Embedded 资源入口
 
 | 资源 | URL | 说明 |
-|------|-----|------|
-| **Embedded Rust Book** | <https://doc.rust-lang.org/embedded-book/> | 官方嵌入式 Rust 教程 |
+| :--- | :--- | :--- || **Embedded Rust Book** | <https://doc.rust-lang.org/embedded-book/> | 官方嵌入式 Rust 教程 |
 | **Discovery Book** | <https://docs.rust-embedded.org/discovery/> | 零基础嵌入式入门 |
 | **Embedonomicon** | <https://docs.rust-embedded.org/embedonomicon/> | 嵌入式 Rust 底层细节 |
 | **Embedded FAQ** | <https://docs.rust-embedded.org/faq.html> | 常见问题 |
@@ -27,8 +26,7 @@
 ## 本项目对应模块
 
 | 嵌入式主题 | 官方 Embedded Book | 本项目对应 |
-|------------|-------------------|------------|
-| 所有权与内存安全 | 内存管理、无堆 | [C01 所有权](../../crates/c01_ownership_borrow_scope/) |
+| :--- | :--- | :--- || 所有权与内存安全 | 内存管理、无堆 | [C01 所有权](../../crates/c01_ownership_borrow_scope/) |
 | 类型系统与 no_std | 最小运行时 | [C02 类型系统](../../crates/c02_type_system/) |
 | 并发与中断 | 临界区、原子操作 | [C05 线程与并发](../../crates/c05_threads/) |
 | 进程与系统调用 | - | [C07 进程管理](../../crates/c07_process/) |

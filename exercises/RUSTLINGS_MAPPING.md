@@ -19,8 +19,7 @@ rustlings watch
 ## 模块 ↔ Rustlings 主题映射
 
 | 本项目模块 | Rustlings 主题 | 习题链接（可点击） | 学习顺序建议 |
-|------------|----------------|-------------------|--------------|
-| **C01 所有权与借用** | 06_move_semantics, 16_lifetimes, 19_smart_pointers | [06_move_semantics](https://github.com/rust-lang/rustlings/tree/main/exercises/06_move_semantics) · [16_lifetimes](https://github.com/rust-lang/rustlings/tree/main/exercises/16_lifetimes) · [19_smart_pointers](https://github.com/rust-lang/rustlings/tree/main/exercises/19_smart_pointers) | 先 06 → 16 → 19 |
+| :--- | :--- | :--- | :--- || **C01 所有权与借用** | 06_move_semantics, 16_lifetimes, 19_smart_pointers | [06_move_semantics](https://github.com/rust-lang/rustlings/tree/main/exercises/06_move_semantics) · [16_lifetimes](https://github.com/rust-lang/rustlings/tree/main/exercises/16_lifetimes) · [19_smart_pointers](https://github.com/rust-lang/rustlings/tree/main/exercises/19_smart_pointers) | 先 06 → 16 → 19 |
 | **C02 类型系统** | 04_primitive_types, 07_structs, 08_enums, 15_traits | [04_primitive_types](https://github.com/rust-lang/rustlings/tree/main/exercises/04_primitive_types) · [07_structs](https://github.com/rust-lang/rustlings/tree/main/exercises/07_structs) · [08_enums](https://github.com/rust-lang/rustlings/tree/main/exercises/08_enums) · [15_traits](https://github.com/rust-lang/rustlings/tree/main/exercises/15_traits) | 04 → 07 → 08 → 15 |
 | **C03 控制流与函数** | 01_variables, 02_functions, 03_if, 12_options, 13_error_handling, 18_iterators | [01_variables](https://github.com/rust-lang/rustlings/tree/main/exercises/01_variables) · [02_functions](https://github.com/rust-lang/rustlings/tree/main/exercises/02_functions) · [03_if](https://github.com/rust-lang/rustlings/tree/main/exercises/03_if) · [12_options](https://github.com/rust-lang/rustlings/tree/main/exercises/12_options) · [13_error_handling](https://github.com/rust-lang/rustlings/tree/main/exercises/13_error_handling) · [18_iterators](https://github.com/rust-lang/rustlings/tree/main/exercises/18_iterators) | 01 → 02 → 03 → 12 → 13 → 18 |
 | **C04 泛型编程** | 14_generics | [14_generics](https://github.com/rust-lang/rustlings/tree/main/exercises/14_generics) | 学完 C02/C03 后 |
@@ -38,8 +37,7 @@ rustlings watch
 ## Rustlings 完整主题列表（按顺序）
 
 | 序号 | 主题 | 本项目对应 | 习题链接 | RBE 对应 |
-|------|------|------------|----------|----------|
-| 00 | intro | 入门 | [intro](https://github.com/rust-lang/rustlings/tree/main/exercises/intro) | - |
+| :--- | :--- | :--- | :--- | :--- || 00 | intro | 入门 | [intro](https://github.com/rust-lang/rustlings/tree/main/exercises/intro) | - |
 | 01 | variables | C03 变量 | [01_variables](https://github.com/rust-lang/rustlings/tree/main/exercises/01_variables) | [Variables](https://doc.rust-lang.org/rust-by-example/variable_bindings.html) |
 | 02 | functions | C03 函数 | [02_functions](https://github.com/rust-lang/rustlings/tree/main/exercises/02_functions) | [Functions](https://doc.rust-lang.org/rust-by-example/fn.html) |
 | 03 | if | C03 控制流 | [03_if](https://github.com/rust-lang/rustlings/tree/main/exercises/03_if) | [If/Else](https://doc.rust-lang.org/rust-by-example/flow_control/if_else.html) |

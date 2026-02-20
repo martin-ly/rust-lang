@@ -52,8 +52,7 @@
 ## CLI 工具
 
 | 应用场景 | 技术选型 | 论证依据 |
-|----------|----------|----------|
-| 参数解析 | clap | 生态成熟、derive 支持、子命令、补全 |
+| :--- | :--- | :--- || 参数解析 | clap | 生态成熟、derive 支持、子命令、补全 |
 | I/O 模式 | 同步 (std::io) | CLI 通常非高并发、简单直接 |
 | 错误处理 | anyhow (应用) / thiserror (库) | 快速原型用 anyhow、库用 thiserror |
 | 相关模块 | C03 控制流、C07 进程、C08 算法 | 控制流、子进程、数据处理 |
@@ -67,8 +66,7 @@
 ## Web 服务
 
 | 应用场景 | 技术选型 | 论证依据 |
-|----------|----------|----------|
-| 异步运行时 | Tokio | 生态最全、生产验证、async-std 备选 |
+| :--- | :--- | :--- || 异步运行时 | Tokio | 生态最全、生产验证、async-std 备选 |
 | Web 框架 | axum / actix-web | axum 与 Tokio 同源、actix 高性能 |
 | 相关模块 | C06 异步、C10 网络 | 异步 I/O、TCP/HTTP |
 
@@ -83,8 +81,7 @@
 ## 系统编程
 
 | 应用场景 | 技术选型 | 论证依据 |
-|----------|----------|----------|
-| 进程与 IPC | std::process、nix/libc | 标准库足矣、底层用 nix |
+| :--- | :--- | :--- || 进程与 IPC | std::process、nix/libc | 标准库足矣、底层用 nix |
 | 可能 unsafe | 谨慎使用 | 参考 UNSAFE_RUST_GUIDE |
 | 相关模块 | C07 进程、C05 线程 | 进程管理、并发 |
 
@@ -97,8 +94,7 @@
 ## 嵌入式
 
 | 应用场景 | 技术选型 | 论证依据 |
-|----------|----------|----------|
-| 标准库 | no_std 可选 | 参考 Embedded Book |
+| :--- | :--- | :--- || 标准库 | no_std 可选 | 参考 Embedded Book |
 | 并发 | 裸金属/RTOS | 无 OS 时受限 |
 | 相关模块 | C01 所有权、C02 类型、C05 线程 | 内存、类型、并发基础 |
 
@@ -111,8 +107,7 @@
 ## 分布式系统
 
 | 应用场景 | 技术选型 | 论证依据 |
-|----------|----------|----------|
-| 消息传递 | 消息队列、分布式锁 | 跨节点通信 |
+| :--- | :--- | :--- || 消息传递 | 消息队列、分布式锁 | 跨节点通信 |
 | 异步+网络 | Tokio + 网络 crate | 高并发 I/O |
 | 相关模块 | C06 异步、C10 网络、C11 宏 | 异步、网络、元编程 |
 
@@ -125,8 +120,7 @@
 ## 数据科学
 
 | 应用场景 | 技术选型 | 论证依据 |
-|----------|----------|----------|
-| 数值计算 | ndarray / nalgebra | 零成本抽象、SIMD 友好 |
+| :--- | :--- | :--- || 数值计算 | ndarray / nalgebra | 零成本抽象、SIMD 友好 |
 | 并行运算 | rayon | 数据并行、CPU 密集型 |
 | 数据管道 | polars / rust-dataframe | 列式存储、内存布局优化 |
 | 相关模块 | C02 类型、C05 线程、C08 算法 | 泛型、并行、排序/搜索 |
@@ -140,8 +134,7 @@
 ## 游戏引擎
 
 | 应用场景 | 技术选型 | 论证依据 |
-|----------|----------|----------|
-| 实体组件 | ECS (bevy / hecs) | 面向数据、缓存友好 |
+| :--- | :--- | :--- || 实体组件 | ECS (bevy / hecs) | 面向数据、缓存友好 |
 | 渲染 | wgpu / Vulkan | 跨平台、GPU 抽象 |
 | 物理 | Rapier / Parry | 确定性、无 GC |
 | 相关模块 | C01 所有权、C05 线程、C08 算法 | 内存、并行走图、空间分割 |
@@ -155,8 +148,7 @@
 ## 区块链与智能合约
 
 | 应用场景 | 技术选型 | 论证依据 |
-|----------|----------|----------|
-| 智能合约 | Solana (Rust) / NEAR | Rust 确定性、Gas 可控 |
+| :--- | :--- | :--- || 智能合约 | Solana (Rust) / NEAR | Rust 确定性、Gas 可控 |
 | 密码学 | ring / rust-crypto | 安全、可审计 |
 | 序列化 | borsh / scale | 确定性编码、无歧义 |
 | 相关模块 | C01 所有权、C02 类型、C11 宏 | 内存安全、类型安全、代码生成 |
@@ -170,8 +162,7 @@
 ## WASM 与跨平台
 
 | 应用场景 | 技术选型 | 论证依据 |
-|----------|----------|----------|
-| 前端编译 | wasm-pack、wasm-bindgen | 与 JS 互操作、类型安全 |
+| :--- | :--- | :--- || 前端编译 | wasm-pack、wasm-bindgen | 与 JS 互操作、类型安全 |
 | 目标 | wasm32-unknown-unknown | 无 std、可选 alloc |
 | 运行时 | wasm-bindgen-futures | 异步与 JS Promise 互操作 |
 | 相关模块 | C01 所有权、C02 类型、C11 宏 | 内存、类型、serde |
@@ -185,8 +176,7 @@
 ## DevOps 与 CI
 
 | 应用场景 | 技术选型 | 论证依据 |
-|----------|----------|----------|
-| 构建工具 | cargo、build.rs | 标准构建、依赖管理 |
+| :--- | :--- | :--- || 构建工具 | cargo、build.rs | 标准构建、依赖管理 |
 | 测试 | cargo test、criterion | 单元/集成/基准 |
 | 格式化 | rustfmt | 风格一致 |
 | Lint | clippy | 静态检查 |
@@ -237,8 +227,7 @@ flowchart LR
 ## 跨场景选型矩阵（表格式）
 
 | 场景 | 执行模型 | 运行时 | 网络 | 数据 | 形式化引用 |
-|------|----------|--------|------|------|------------|
-| CLI | 同步 | std | 无 | 可选 | [01_synchronous](../research_notes/software_design_theory/03_execution_models/01_synchronous.md) |
+| :--- | :--- | :--- | :--- | :--- | :--- || CLI | 同步 | std | 无 | 可选 | [01_synchronous](../research_notes/software_design_theory/03_execution_models/01_synchronous.md) |
 | Web | 异步 | tokio | HTTP/gRPC | 可选 | [02_async](../research_notes/software_design_theory/03_execution_models/02_async.md) |
 | 系统 | 同步/并发 | std | std::net | 无 | [03_concurrent](../research_notes/software_design_theory/03_execution_models/03_concurrent.md) |
 | 嵌入式 | 同步 | no_std | 无 | 无 | [supported_unsupported](../research_notes/software_design_theory/05_boundary_system/supported_unsupported_matrix.md#no_std) |
@@ -252,8 +241,7 @@ flowchart LR
 ## 选型冲突与化解
 
 | 冲突 | 化解 |
-|------|------|
-| 需 async 与 需 no_std | 选 smol/embassy；或 wasm-bindgen-futures |
+| :--- | :--- || 需 async 与 需 no_std | 选 smol/embassy；或 wasm-bindgen-futures |
 | 需高并发与 需确定性 | 异步可并发；区块链需确定性时避免异步随机 |
 | 需 FFI 与 需纯 Safe | 将 unsafe 封装在最小模块；对外 Safe API |
 | 需跨平台与 需特定平台 API | 用 cfg 条件编译；trait 抽象平台差异 |
@@ -263,8 +251,7 @@ flowchart LR
 ## 与形式化体系衔接
 
 | 应用场景 | 形式化定理 | 文档 |
-|----------|------------|------|
-| 内存安全 | ownership T2/T3、borrow T1 | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
+| :--- | :--- | :--- || 内存安全 | ownership T2/T3、borrow T1 | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
 | 并发安全 | async T6.2、Send/Sync | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
 | 类型安全 | type_system T1–T3 | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
 | 设计模式 | CE-T1–T3 | [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) |

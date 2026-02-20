@@ -15,8 +15,7 @@
 ## 官方 CLI Book 入口
 
 | 资源 | URL | 说明 |
-|------|-----|------|
-| **Command Line Book** | <https://rust-cli.github.io/book/> | 官方 CLI 应用开发教程 |
+| :--- | :--- | :--- || **Command Line Book** | <https://rust-cli.github.io/book/> | 官方 CLI 应用开发教程 |
 | **CLI Book 源码** | <https://github.com/rust-cli/book> | 贡献与反馈 |
 
 ---
@@ -24,8 +23,7 @@
 ## 本项目对应模块
 
 | CLI 开发主题 | 官方 CLI Book | 本项目对应 |
-|--------------|---------------|------------|
-| 参数解析 | clap、structopt | C03 控制流、[cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
+| :--- | :--- | :--- || 参数解析 | clap、structopt | C03 控制流、[cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
 | 标准输入输出 | std::io | [C07 进程管理](../../crates/c07_process/) |
 | 子进程与管道 | std::process | C07 [进程管理](../../crates/c07_process/docs/) |
 | 文件系统 | std::fs | C03、C08 算法 |
@@ -46,8 +44,7 @@
 ## 常用 crate 推荐
 
 | 用途 | crate | 说明 |
-|------|-------|------|
-| 参数解析 | clap | 最流行的 CLI 参数解析库 |
+| :--- | :--- | :--- || 参数解析 | clap | 最流行的 CLI 参数解析库 |
 | 错误处理 | anyhow、thiserror | 生产级错误传播 |
 | 终端交互 | crossterm、ratatui | TUI 应用 |
 | 进度条 | indicatif | 进度显示 |

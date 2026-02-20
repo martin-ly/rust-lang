@@ -172,8 +172,7 @@
 ### 按模块分类
 
 | 模块 | 修复数量 | 主要类型 |
-|------|---------|---------|
-| C01 Ownership | 32+ | doc comment 格式 |
+| :--- | :--- | :--- || C01 Ownership | 32+ | doc comment 格式 |
 | C02 Type System | 4 | Default、is_empty、模式匹配 |
 | C05 Threads | 2 | is_empty、Safety 文档 |
 | C09 Design Pattern | 1 | doc comment 格式 |
@@ -183,8 +182,7 @@
 ### 按警告类型分类
 
 | 警告类型 | 修复数量 | 占比 |
-|---------|---------|------|
-| empty line after doc comment | 33 | 73% |
+| :--- | :--- | :--- || empty line after doc comment | 33 | 73% |
 | missing Default implementation | 1 | 2% |
 | missing is_empty method | 2 | 4% |
 | missing Safety section | 1 | 2% |

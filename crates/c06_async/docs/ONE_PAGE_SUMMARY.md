@@ -8,8 +8,7 @@
 ## 核心概念（4 条）
 
 | 概念 | 说明 |
-|------|------|
-| **async/await** | `async fn` 返回 `Future`；`.await` 挂起与恢复 |
+| :--- | :--- || **async/await** | `async fn` 返回 `Future`；`.await` 挂起与恢复 |
 | **Future** | 惰性执行；需 executor 轮询；`Pin` 自引用 |
 | **运行时** | Tokio、async-std；`#[tokio::main]`；任务调度 |
 | **并发模型** | 多任务单线程（协作式）；与 OS 线程互补 |
@@ -19,8 +18,7 @@
 ## 常见坑与解决
 
 | 坑 | 解决 |
-|----|------|
-| 持锁跨 `await` | 缩短锁作用域；用 `tokio::sync::Mutex` |
+| :--- | :--- || 持锁跨 `await` | 缩短锁作用域；用 `tokio::sync::Mutex` |
 | 空 Future 不执行 | 必须 `.await` 或 `spawn` 才会执行 |
 | `!Send` 跨 await 点 | 确保 `Future: Send`；避免 `Rc`/`RefCell` 跨 await |
 | 阻塞运行时 | 用 `spawn_blocking` 或 `tokio::task::block_in_place` |
@@ -30,8 +28,7 @@
 ## 异步速选
 
 | 场景 | 选型 |
-|------|------|
-| 异步运行时 | Tokio（主流）或 async-std |
+| :--- | :--- || 异步运行时 | Tokio（主流）或 async-std |
 | 异步锁 | `tokio::sync::Mutex` |
 | 异步通道 | `tokio::sync::mpsc` |
 | 超时/取消 | `tokio::time::timeout`；`CancellationToken` |

@@ -89,16 +89,14 @@
 ### 入门文档 | Getting Started
 
 | 文档                                                                            | 描述         | 字数   | 难度 |
-| ------------------------------------------------------------------------------- | ------------ | ------ | ---- |
-| [README.md](README.md)                                                          | 项目主文档   | 5,000+ | ⭐   |
+| :--- | :--- | :--- | :--- || [README.md](README.md)                                                          | 项目主文档   | 5,000+ | ⭐   |
 | [异步编程全面梳理\_README_2025_10_06.md](异步编程全面梳理_README_2025_10_06.md) | 快速入门指南 | 2,000+ | ⭐   |
 | [src/lib.rs](src/lib.rs)                                                        | 库 API 文档  | -      | ⭐⭐ |
 
 ### 理论文档 | Theoretical Documentation
 
 | 文档                                                                      | 描述         | 字数    | 难度   |
-| ------------------------------------------------------------------------- | ------------ | ------- | ------ |
-| [知识分类体系](docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md) | 完整知识分类 | 15,000+ | ⭐⭐⭐ |
+| :--- | :--- | :--- | :--- || [知识分类体系](docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md) | 完整知识分类 | 15,000+ | ⭐⭐⭐ |
 | [最终报告](docs/异步编程全面梳理最终报告_2025_10_06.md)                   | 中文详细报告 | 3,000+  | ⭐⭐⭐ |
 | [实现总结](docs/COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md)       | 英文技术总结 | 3,000+  | ⭐⭐   |
 | [模式对比](docs/ASYNC_PATTERNS_COMPARISON_2025.md)                        | 三大模式对比 | 6,000+  | ⭐⭐⭐ |
@@ -106,8 +104,7 @@
 ### 进展报告 | Progress Reports
 
 | 文档                                                  | 描述         | 字数   | 日期       |
-| ----------------------------------------------------- | ------------ | ------ | ---------- |
-| [进展更新](PROGRESS_UPDATE_2025_10_06.md)             | 第一阶段进展 | 2,000+ | 2025-10-06 |
+| :--- | :--- | :--- | :--- || [进展更新](PROGRESS_UPDATE_2025_10_06.md)             | 第一阶段进展 | 2,000+ | 2025-10-06 |
 | [会话进展](SESSION_PROGRESS_2025_10_06_PART2.md)      | 第二阶段进展 | 3,000+ | 2025-10-06 |
 | [最终总结](FINAL_COMPREHENSIVE_SUMMARY_2025_10_06.md) | 完整总结     | 1,000+ | 2025-10-06 |
 
@@ -198,8 +195,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ### 综合示例 | Comprehensive Examples
 
 | 示例                                                                                      | 描述                  | 行数   | 难度   |
-| ----------------------------------------------------------------------------------------- | --------------------- | ------ | ------ |
-| [ultimate_async_theory_practice_2025.rs](examples/ultimate_async_theory_practice_2025.rs) | 终极理论与实践        | 1,500+ | ⭐⭐⭐ |
+| :--- | :--- | :--- | :--- || [ultimate_async_theory_practice_2025.rs](examples/ultimate_async_theory_practice_2025.rs) | 终极理论与实践        | 1,500+ | ⭐⭐⭐ |
 | [tokio_smol_latest_features_2025.rs](examples/tokio_smol_latest_features_2025.rs)         | Tokio & Smol 最新特性 | 800+   | ⭐⭐   |
 | [async_performance_optimization_2025.rs](examples/async_performance_optimization_2025.rs) | 性能优化指南          | 600+   | ⭐⭐⭐ |
 | [async_debugging_monitoring_2025.rs](examples/async_debugging_monitoring_2025.rs)         | 调试与监控            | 500+   | ⭐⭐   |
@@ -208,8 +204,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ### 基础示例 | Basic Examples
 
 | 示例                                                        | 描述         | 难度 |
-| ----------------------------------------------------------- | ------------ | ---- |
-| [tokio_smoke.rs](examples/tokio_smoke.rs)                   | Tokio 基础   | ⭐   |
+| :--- | :--- | :--- || [tokio_smoke.rs](examples/tokio_smoke.rs)                   | Tokio 基础   | ⭐   |
 | [futures_smoke.rs](examples/futures_smoke.rs)               | Futures 基础 | ⭐   |
 | [streams_smoke.rs](examples/streams_smoke.rs)               | Streams 基础 | ⭐   |
 | [actix_basic.rs](examples/actix_basic.rs)                   | Actix 基础   | ⭐⭐ |
@@ -218,8 +213,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ### 高级示例 | Advanced Examples
 
 | 示例                                                                        | 描述           | 难度     |
-| --------------------------------------------------------------------------- | -------------- | -------- |
-| [actor_csp_hybrid_minimal.rs](examples/actor_csp_hybrid_minimal.rs)         | Actor×CSP 混合 | ⭐⭐⭐   |
+| :--- | :--- | :--- || [actor_csp_hybrid_minimal.rs](examples/actor_csp_hybrid_minimal.rs)         | Actor×CSP 混合 | ⭐⭐⭐   |
 | [actor_csp_hybrid_advanced.rs](examples/actor_csp_hybrid_advanced.rs)       | 高级混合模式   | ⭐⭐⭐⭐ |
 | [async_api_gateway_2025.rs](examples/async_api_gateway_2025.rs)             | API 网关       | ⭐⭐⭐⭐ |
 | [utils_observed_limit_breaker.rs](examples/utils_observed_limit_breaker.rs) | 限速+熔断+观测 | ⭐⭐⭐   |
@@ -427,8 +421,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ### 代码统计
 
 | 类别         | 数量    | 总行数      |
-| ------------ | ------- | ----------- |
-| 核心架构模式 | 3       | 5,000+      |
+| :--- | :--- | :--- || 核心架构模式 | 3       | 5,000+      |
 | 综合示例     | 5       | 4,500+      |
 | 基础示例     | 10+     | 1,000+      |
 | 高级示例     | 10+     | 2,000+      |
@@ -437,8 +430,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ### 文档统计
 
 | 类别     | 数量    | 总字数      |
-| -------- | ------- | ----------- |
-| 核心文档 | 7       | 31,000+     |
+| :--- | :--- | :--- || 核心文档 | 7       | 31,000+     |
 | 进展报告 | 3       | 6,000+      |
 | API 文档 | 1       | -           |
 | **总计** | **11+** | **37,000+** |
@@ -446,8 +438,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ### 知识点统计
 
 | 类别     | 数量     |
-| -------- | -------- |
-| 语言特性 | 20+      |
+| :--- | :--- || 语言特性 | 20+      |
 | 框架特性 | 40+      |
 | 库特性   | 15+      |
 | 设计模式 | 15+      |

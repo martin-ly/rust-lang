@@ -134,8 +134,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Project Statistics
 
 | Category            | Count  |
-| ------------------- | ------ |
-| Source Files        | 6      |
+| :--- | :--- || Source Files        | 6      |
 | Example Files       | 7      |
 | Test Files          | 4      |
 | Benchmark Files     | 3      |

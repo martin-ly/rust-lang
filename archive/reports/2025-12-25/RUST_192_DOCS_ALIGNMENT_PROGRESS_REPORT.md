@@ -24,8 +24,7 @@
 ### 1. 创建缺失的 Rust 1.92.0 改进文档
 
 | Crate | 文档文件 | 状态 | 创建日期 |
-|-------|---------|------|----------|
-| c02_type_system | `RUST_192_TYPE_SYSTEM_IMPROVEMENTS.md` | ✅ 完成 | 2025-12-11 |
+| :--- | :--- | :--- | :--- || c02_type_system | `RUST_192_TYPE_SYSTEM_IMPROVEMENTS.md` | ✅ 完成 | 2025-12-11 |
 | c04_generic | `RUST_192_GENERIC_IMPROVEMENTS.md` | ✅ 完成 | 2025-12-11 |
 | c05_threads | `RUST_192_THREADS_IMPROVEMENTS.md` | ✅ 完成 | 2025-12-11 |
 | c07_process | `RUST_192_PROCESS_IMPROVEMENTS.md` | ✅ 完成 | 2025-12-11 |
@@ -40,8 +39,7 @@
 #### 已更新的文件列表
 
 | 文件路径 | 更新内容 | 状态 |
-|---------|---------|------|
-| `c02_type_system/docs/cargo_package_management/10_实战案例集.md` | `rust-version = "1.90"` → `"1.92"` (2处) | ✅ 完成 |
+| :--- | :--- | :--- || `c02_type_system/docs/cargo_package_management/10_实战案例集.md` | `rust-version = "1.90"` → `"1.92"` (2处) | ✅ 完成 |
 | `c02_type_system/docs/cargo_package_management/11_FAQ常见问题.md` | `rust-version = "1.90"` → `"1.92"` (3处) | ✅ 完成 |
 | `c02_type_system/docs/cargo_package_management/07_包发布流程.md` | `rust-version = "1.90"` → `"1.92"` (2处) | ✅ 完成 |
 | `c02_type_system/docs/cargo_package_management/05_工作空间管理.md` | `rust-version = "1.90"` → `"1.92"` (1处) | ✅ 完成 |
@@ -65,8 +63,7 @@
 ### 按 Crate 分类的完成度
 
 | Crate | Rust 1.92 文档 | 源代码实现 | 示例代码 | 版本引用 | 总体完成度 |
-|-------|---------------|-----------|---------|---------|-----------|
-| c01_ownership_borrow_scope | ✅ | ✅ | ✅ | ✅ | 100% |
+| :--- | :--- | :--- | :--- | :--- | :--- || c01_ownership_borrow_scope | ✅ | ✅ | ✅ | ✅ | 100% |
 | c02_type_system | ✅ 新建 | ✅ | ✅ | ✅ 已更新 | 95% |
 | c03_control_fn | ✅ | ✅ | ✅ | ✅ | 100% |
 | c04_generic | ✅ 新建 | ✅ | ✅ | ✅ | 95% |

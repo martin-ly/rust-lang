@@ -319,8 +319,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 本节只列出**官方 release post 明确强调**的差异（避免把“推测/通用经验”写成版本事实）。其余细节请以官方详细 release notes 为准。
 
 | 变化                                               | 首次出现  | 权威来源                                                                                                                                                         |
-| -------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Linux `x86_64-unknown-linux-gnu` 默认 LLD 链接器   | Rust 1.90 | [Rust 1.90.0](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)；[rust-lld-on-1.90.0-stable](https://blog.rust-lang.org/2025/09/01/rust-lld-on-1.90.0-stable/) |
+| :--- | :--- | :--- || Linux `x86_64-unknown-linux-gnu` 默认 LLD 链接器   | Rust 1.90 | [Rust 1.90.0](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)；[rust-lld-on-1.90.0-stable](https://blog.rust-lang.org/2025/09/01/rust-lld-on-1.90.0-stable/) |
 | `cargo publish --workspace`                        | Rust 1.90 | [Rust 1.90.0](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)                                                                                                |
 | `aarch64-pc-windows-msvc` → Tier 1                 | Rust 1.91 | [Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)；[PR #145682](https://github.com/rust-lang/rust/pull/145682)                                   |
 | `dangling_pointers_from_locals`（warn-by-default） | Rust 1.91 | [Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)；[warn-by-default lints](https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html)   |
@@ -440,8 +439,7 @@ tokio = { version = "1.0", features = ["full"] }
 ### 编译时间对比
 
 | 配置           | 清洁构建 | 增量构建 | 说明     |
-| -------------- | -------- | -------- | -------- |
-| Dev (默认)     | 5s       | 1s       | 快速迭代 |
+| :--- | :--- | :--- | :--- || Dev (默认)     | 5s       | 1s       | 快速迭代 |
 | Release (基础) | 30s      | 15s      | 标准优化 |
 | Release + LTO  | 60s      | 30s      | 最大优化 |
 | Release + PGO  | 80s      | -        | 极致性能 |

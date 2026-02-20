@@ -17,8 +17,7 @@
 > **权威源**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) | 最后对照: 2026-02-14
 
 | 主题 | 对应 Nomicon 章节 | 直接链接 | 本项目对应 |
-|------|------------------|----------|------------|
-| 安全与 unsafe 分离 | Meet Safe and Unsafe | [nomicon/meet-safe-and-unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) | 本文档、C01 |
+| :--- | :--- | :--- | :--- || 安全与 unsafe 分离 | Meet Safe and Unsafe | [nomicon/meet-safe-and-unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) | 本文档、C01 |
 | Safe/Unsafe 交互 | How Safe and Unsafe Interact | [nomicon/safe-unsafe-meaning](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) | 本文档 |
 | Unsafe 可做之事 | What Unsafe Rust Can Do | [nomicon/what-unsafe-does](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | 本文档 |
 | 实践 unsafe | Working with Unsafe | [nomicon/working-with-unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html) | C01 高级所有权 |

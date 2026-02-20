@@ -9,8 +9,7 @@
 ## 官方资源入口
 
 | 资源 | URL | 说明 |
-|------|-----|------|
-| **The Rust Book** | <https://doc.rust-lang.org/book/> | 官方入门与进阶教程 |
+| :--- | :--- | :--- || **The Rust Book** | <https://doc.rust-lang.org/book/> | 官方入门与进阶教程 |
 | **Rust Reference** | <https://doc.rust-lang.org/reference/> | 语言规范 |
 | **Rust by Example** | <https://doc.rust-lang.org/rust-by-example/> | 示例驱动学习 |
 | **Standard Library** | <https://doc.rust-lang.org/std/> | 标准库 API |
@@ -26,8 +25,7 @@
 ## 模块 → 官方章节映射
 
 | 项目模块 | 本项目路径 | The Rust Book | RBE 练习（可点击） | Reference |
-|----------|------------|---------------|-------------------|-----------|
-| **C01 所有权** | crates/c01_ownership_borrow_scope | Ch 4 Understanding Ownership | [Scope](https://doc.rust-lang.org/rust-by-example/scope.html) · [Move](https://doc.rust-lang.org/rust-by-example/scope/move.html) · [Borrow](https://doc.rust-lang.org/rust-by-example/scope/borrow.html) · [Lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html) | [Ownership](https://doc.rust-lang.org/reference/ownership.html) |
+| :--- | :--- | :--- | :--- | :--- || **C01 所有权** | crates/c01_ownership_borrow_scope | Ch 4 Understanding Ownership | [Scope](https://doc.rust-lang.org/rust-by-example/scope.html) · [Move](https://doc.rust-lang.org/rust-by-example/scope/move.html) · [Borrow](https://doc.rust-lang.org/rust-by-example/scope/borrow.html) · [Lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html) | [Ownership](https://doc.rust-lang.org/reference/ownership.html) |
 | **C02 类型系统** | crates/c02_type_system | Ch 3 Types, Ch 10 Traits | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) · [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) · [Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html) | [Types](https://doc.rust-lang.org/reference/types.html) |
 | **C03 控制流** | crates/c03_control_fn | Ch 3 Control Flow, Ch 6 Enums | [Flow Control](https://doc.rust-lang.org/rust-by-example/flow_control.html) · [Option](https://doc.rust-lang.org/rust-by-example/std/option.html) · [Error](https://doc.rust-lang.org/rust-by-example/error.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html) | [Statements](https://doc.rust-lang.org/reference/statements.html) |
 | **C04 泛型** | crates/c04_generic | Ch 10 Generic Types, Traits | [Generics](https://doc.rust-lang.org/rust-by-example/generics.html) | [Items](https://doc.rust-lang.org/reference/items/generics.html) |
@@ -45,8 +43,7 @@
 ## 小节级映射与「本项目补充」
 
 | 官方章节 | 小节 | 本项目补充内容 |
-|----------|------|----------------|
-| **Book Ch 4** | 4.1-4.3 Ownership, Borrowing, Slices | 思维导图、决策树、证明树（[THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md)）；边界特例（[EDGE_CASES](../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md)） |
+| :--- | :--- | :--- || **Book Ch 4** | 4.1-4.3 Ownership, Borrowing, Slices | 思维导图、决策树、证明树（[THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md)）；边界特例（[EDGE_CASES](../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md)） |
 | **Book Ch 10** | 10.1-10.3 Traits, Lifetimes | 型变理论、生命周期形式化（[research_notes](../research_notes/)）；转换树 |
 | **Reference** | Types, Ownership, Special Types | 形式化工程系统（[rust-formal-engineering-system](../rust-formal-engineering-system/)）；variance 专项 |
 | **Reference** | Macros by Example, Procedural Macros | 宏系统决策树、反例（[macros_cheatsheet](../02_reference/quick_reference/macros_cheatsheet.md)） |
@@ -65,8 +62,7 @@
 ## 核心概念映射
 
 | 概念 | 本项目速查卡 | Book 章节 | RBE |
-|------|---------------|-----------|-----|
-| 所有权 | ownership_cheatsheet | Ch 4.1 | [Move](https://doc.rust-lang.org/rust-by-example/scope/move.html) |
+| :--- | :--- | :--- | :--- || 所有权 | ownership_cheatsheet | Ch 4.1 | [Move](https://doc.rust-lang.org/rust-by-example/scope/move.html) |
 | 借用 | ownership_cheatsheet | Ch 4.2 | [Borrow](https://doc.rust-lang.org/rust-by-example/scope/borrow.html) |
 | 生命周期 | type_system | Ch 10.3 | [Lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html) |
 | Trait | type_system | Ch 10 | [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) |
@@ -87,8 +83,7 @@
 ## 形式化证明体系（2026-02-14）
 
 | 资源 | 说明 |
-|------|------|
-| [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) | 批判性分析与推进计划 |
+| :--- | :--- || [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) | 批判性分析与推进计划 |
 | [CORE_THEOREMS_FULL_PROOFS](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明（L2） |
 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | 国际对标 |
 

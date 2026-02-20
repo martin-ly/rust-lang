@@ -9,6 +9,7 @@
 ## 📊 目录
 
 - [与 ownership/borrow/trait 的衔接](#与-ownershipborrowtrait-的衔接)
+  - [📊 目录](#-目录)
   - [形式化定义与定理](#形式化定义与定理)
   - [衔接关系图](#衔接关系图)
   - [组合与所有权](#组合与所有权)
@@ -20,6 +21,10 @@
   - [跨模块 Send/Sync 传递](#跨模块-sendsync-传递)
   - [组合反例](#组合反例)
   - [多层次组合链条（实质内容）](#多层次组合链条实质内容)
+    - [链条 1：Builder + Factory + Repository](#链条-1builder--factory--repository)
+    - [链条 2：Decorator + Strategy + Observer（完整实现）](#链条-2decorator--strategy--observer完整实现)
+    - [链条 3：Composite + Visitor + Iterator（完整实现）](#链条-3composite--visitor--iterator完整实现)
+    - [链条 4：Chain of Responsibility + Command + Observer](#链条-4chain-of-responsibility--command--observer)
   - [跨模块边界最佳实践](#跨模块边界最佳实践)
   - [引用](#引用)
 

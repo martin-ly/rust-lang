@@ -634,8 +634,7 @@ cargo test rust_192_features
 以下模块为教学化占位实现，用于保持编译通过和演示概念， planned 后续补全：
 
 | 模块 | 路径 | 说明 |
-|------|------|------|
-| 并行迭代器 | `src/concurrency/parallel_iterators.rs` | 占位注释，待实现 |
+| :--- | :--- | :--- || 并行迭代器 | `src/concurrency/parallel_iterators.rs` | 占位注释，待实现 |
 | 缓存优化 | `src/concurrency/cache_optimization.rs` | 占位注释，待实现 |
 | 无锁跳表 | `src/lockfree/lockfree_skip_list.rs` | 占位实现，待完整实现 |
 

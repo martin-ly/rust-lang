@@ -272,8 +272,7 @@
 ### 核心文档 📖
 
 | 文档                                                                                    | 内容                                             | 难度       |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------ | ---------- |
-| [`COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md`](docs/COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | 🌟**综合指南**：所有模式的理论、实践、形式化验证 | ⭐⭐⭐⭐⭐ |
+| :--- | :--- | :--- || [`COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md`](docs/COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) | 🌟**综合指南**：所有模式的理论、实践、形式化验证 | ⭐⭐⭐⭐⭐ |
 | [`09_design_patterns.md`](09_design_patterns.md)                                        | 设计模式定义、数学表示、伪代码索引               | ⭐⭐⭐     |
 | [`IMPLEMENTATION_ROADMAP.md`](IMPLEMENTATION_ROADMAP.md)                                | Rust 1.93.0对齐路线图与实施计划                  | ⭐⭐⭐⭐   |
 | [`PROJECT_COMPLETION_REPORT.md`](PROJECT_COMPLETION_REPORT.md)                          | 项目完成状态与1.90特性集成报告                   | ⭐⭐⭐     |
@@ -283,8 +282,7 @@
 #### 本模块形式化文档
 
 | 文档                                                                             | 主题                   | 核心内容                                       |
-| -------------------------------------------------------------------------------- | ---------------------- | ---------------------------------------------- |
-| [`docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md`](docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md) | **异步vs同步等价性**   | CPS变换、Monad语义、控制流分析、性能对比       |
+| :--- | :--- | :--- || [`docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md`](docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md) | **异步vs同步等价性**   | CPS变换、Monad语义、控制流分析、性能对比       |
 | [`docs/ACTOR_REACTOR_PATTERNS.md`](docs/ACTOR_REACTOR_PATTERNS.md)               | **Actor与Reactor模式** | 消息传递、事件驱动、调度机制、形式化证明       |
 | [`docs/CSP_VS_ASYNC_ANALYSIS.md`](docs/CSP_VS_ASYNC_ANALYSIS.md)                 | **CSP vs Rust Async**  | Golang对比、Channel语义、调度模型、性能分析    |
 | [`docs/ASYNC_RECURSION_ANALYSIS.md`](docs/ASYNC_RECURSION_ANALYSIS.md)           | **异步递归**           | Box::pin原理、尾递归优化、性能分析、形式化证明 |

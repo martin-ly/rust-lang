@@ -3,8 +3,7 @@
 > 内容已整合至研究笔记，请参见：
 
 | 主题 | 链接 |
-|------|------|
-| 类型系统 | [type_theory/](../../research_notes/type_theory/) |
+| :--- | :--- || 类型系统 | [type_theory/](../../research_notes/type_theory/) |
 | 所有权与借用 | [formal_methods/](../../research_notes/formal_methods/) |
 | 所有权模型 | [ownership_model.md](../../research_notes/formal_methods/ownership_model.md) |
 | 借用检查器 | [borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md) |

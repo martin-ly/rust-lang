@@ -94,8 +94,7 @@ tier_04_advanced/
 以下文档应该移动到 `docs/reports/` 或 `docs/archive/` 目录：
 
 | 文档 | 建议位置 | 状态 |
-|------|---------|------|
-| `C08_ENHANCEMENT_COMPLETION_REPORT_2025_10_19.md` | `docs/reports/` | 待移动 |
+| :--- | :--- | :--- || `C08_ENHANCEMENT_COMPLETION_REPORT_2025_10_19.md` | `docs/reports/` | 待移动 |
 | `LEETCODE_FINAL_SUMMARY_2025_11_01.md` | `docs/reports/` | 待移动 |
 | `LEETCODE_INTEGRATION_SUMMARY_2025_11_01.md` | `docs/reports/` | 待移动 |
 | `PROGRESS_UPDATE_2025_11_01.md` | `docs/reports/` | 待移动 |
@@ -103,8 +102,7 @@ tier_04_advanced/
 #### 零散文档
 
 | 文档 | 建议处理 | 状态 |
-|------|---------|------|
-| `leetcode_with_rust191.md` | 整合到 Tier 3 或移动到 `docs/archive/` | 待处理 |
+| :--- | :--- | :--- || `leetcode_with_rust191.md` | 整合到 Tier 3 或移动到 `docs/archive/` | 待处理 |
 | `swap.rar` | 删除（压缩文件） | 待删除 |
 | `00_MASTER_INDEX.md` | 保留，但更新链接 | 待更新 |
 
@@ -113,8 +111,7 @@ tier_04_advanced/
 以下文档是重要的增强内容，建议保留在根目录或移动到 `docs/analysis/`：
 
 | 文档 | 建议位置 | 状态 |
-|------|---------|------|
-| `KNOWLEDGE_GRAPH.md` | `docs/analysis/` 或保留 | 保留 |
+| :--- | :--- | :--- || `KNOWLEDGE_GRAPH.md` | `docs/analysis/` 或保留 | 保留 |
 | `MIND_MAP.md` | `docs/analysis/` 或保留 | 保留 |
 | `MULTIDIMENSIONAL_MATRIX_COMPARISON.md` | `docs/analysis/` 或保留 | 保留 |
 | `INTERACTIVE_LEARNING_GUIDE.md` | 保留或移动到 `tier_02_guides/` | 保留 |

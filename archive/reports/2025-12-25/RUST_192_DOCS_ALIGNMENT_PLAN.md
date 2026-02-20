@@ -93,8 +93,7 @@
 ### 1. 已完成 Rust 1.92.0 对齐的 Crates
 
 | Crate | 状态 | Rust 1.92 文档 | 源代码实现 | 示例代码 | 测试覆盖 |
-|-------|------|---------------|-----------|---------|---------|
-| **c01_ownership_borrow_scope** | ✅ 已完成 | ✅ RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md | ✅ rust_192_features.rs | ✅ rust_192_features_demo.rs | ✅ 部分 |
+| :--- | :--- | :--- | :--- | :--- | :--- || **c01_ownership_borrow_scope** | ✅ 已完成 | ✅ RUST_192_OWNERSHIP_BORROWING_LIFETIME_IMPROVEMENTS.md | ✅ rust_192_features.rs | ✅ rust_192_features_demo.rs | ✅ 部分 |
 | **c02_type_system** | ✅ 已完成 | ⚠️ 需补充 | ✅ rust_192_features.rs | ✅ rust_192_features_demo.rs | ✅ 部分 |
 | **c03_control_fn** | ✅ 已完成 | ✅ RUST_192_CONTROL_FLOW_IMPROVEMENTS.md | ✅ rust_192_features.rs | ✅ rust_192_features_demo.rs | ✅ 部分 |
 | **c04_generic** | ✅ 已完成 | ⚠️ 需补充 | ✅ rust_192_features.rs | ✅ rust_192_features_demo.rs | ✅ 部分 |
@@ -112,8 +111,7 @@
 #### 2.1 Cargo.toml 版本状态
 
 | Crate | rust-version | 状态 |
-|-------|-------------|------|
-| c01_ownership_borrow_scope | 1.92 | ✅ 已更新 |
+| :--- | :--- | :--- || c01_ownership_borrow_scope | 1.92 | ✅ 已更新 |
 | c02_type_system | 1.92 | ✅ 已更新 |
 | c03_control_fn | 1.92 | ✅ 已更新 |
 | c04_generic | 1.92 | ✅ 已更新 |
@@ -150,8 +148,7 @@
 #### 1. 核心语言改进
 
 | 特性 | 状态 | 文档覆盖 | 代码示例 | 测试 |
-|------|------|---------|---------|------|
-| **MaybeUninit 表示和有效性文档化** | ✅ 稳定 | ✅ c01 | ✅ c01 | ✅ |
+| :--- | :--- | :--- | :--- | :--- || **MaybeUninit 表示和有效性文档化** | ✅ 稳定 | ✅ c01 | ✅ c01 | ✅ |
 | **联合体字段的原始引用安全访问** | ✅ 稳定 | ✅ c01 | ✅ c01 | ✅ |
 | **改进的自动特征和 Sized 边界处理** | ✅ 稳定 | ✅ c01, c02 | ✅ c01, c02 | ✅ |
 | **零大小数组的优化处理** | ✅ 稳定 | ✅ c01 | ✅ c01 | ✅ |
@@ -164,24 +161,21 @@
 #### 2. 编译器特性
 
 | 特性 | 状态 | 文档覆盖 | 说明 |
-|------|------|---------|------|
-| **展开表默认启用** | ✅ 稳定 | ❌ 缺失 | panic 回溯更详细 |
+| :--- | :--- | :--- | :--- || **展开表默认启用** | ✅ 稳定 | ❌ 缺失 | panic 回溯更详细 |
 | **属性检查增强** | ✅ 稳定 | ❌ 缺失 | 无效属性检测更严格 |
 | **Never 类型 lint 默认 deny** | ✅ 稳定 | ⚠️ 部分 | `never_type_fallback_flowing_into_unsafe`, `dependency_on_unit_never_type_fallback` |
 
 ### 标准库 API (Standard Library)
 
 | API | 状态 | 文档覆盖 | 代码示例 | 测试 |
-|-----|------|---------|---------|------|
-| **NonZero<u{N}>::div_ceil** | ✅ 稳定 | ✅ c01, c02 | ✅ c01, c02 | ✅ |
+| :--- | :--- | :--- | :--- | :--- || **NonZero<u{N}>::div_ceil** | ✅ 稳定 | ✅ c01, c02 | ✅ c01, c02 | ✅ |
 | **Location::file_as_c_str** | ✅ 稳定 | ⚠️ 部分 | ✅ c01 | ⚠️ 部分 |
 | **<[_]>::rotate_right** | ✅ 稳定 | ✅ c01, c02 | ✅ c01, c02 | ✅ |
 
 ### 性能优化 (Performance Improvements)
 
 | 优化 | 状态 | 文档覆盖 | 代码示例 | 测试 |
-|------|------|---------|---------|------|
-| **Iterator::eq 和 Iterator::eq_by 特化** | ✅ 稳定 | ✅ c01, c02 | ✅ c01, c02 | ✅ |
+| :--- | :--- | :--- | :--- | :--- || **Iterator::eq 和 Iterator::eq_by 特化** | ✅ 稳定 | ✅ c01, c02 | ✅ c01, c02 | ✅ |
 | **简化的元组扩展** | ✅ 稳定 | ✅ c01 | ✅ c01 | ✅ |
 | **增强的 EncodeWide Debug 信息** | ✅ 稳定 | ⚠️ 部分 | ✅ c01 | ⚠️ 部分 |
 | **iter::Repeat 无限循环 panic** | ✅ 稳定 | ⚠️ 部分 | ✅ c01 | ⚠️ 部分 |

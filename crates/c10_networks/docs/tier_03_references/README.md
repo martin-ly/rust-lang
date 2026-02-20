@@ -70,8 +70,7 @@
 ## 🗺️ 思维导图与图谱
 
 | 资源                                                                            | 说明         |
-| ------------------------------------------------------------------------------- | ------------ |
-| [RUST_190_COMPREHENSIVE_MINDMAP.md](../RUST_190_COMPREHENSIVE_MINDMAP.md)       | 综合思维导图 |
+| :--- | :--- || [RUST_190_COMPREHENSIVE_MINDMAP.md](../RUST_190_COMPREHENSIVE_MINDMAP.md)       | 综合思维导图 |
 | [COMPREHENSIVE_DOCUMENTATION_INDEX.md](../COMPREHENSIVE_DOCUMENTATION_INDEX.md) | 文档总索引   |
 
 ---

@@ -15,8 +15,7 @@
 ### 核心入口
 
 | 模块 | 入口路径 | 说明 |
-|------|----------|------|
-| **形式化方法** | [research_notes/formal_methods/](../research_notes/formal_methods/) | 所有权模型、借用检查器、生命周期、Pin、异步状态机 |
+| :--- | :--- | :--- || **形式化方法** | [research_notes/formal_methods/](../research_notes/formal_methods/) | 所有权模型、借用检查器、生命周期、Pin、异步状态机 |
 | **类型理论** | [research_notes/type_theory/](../research_notes/type_theory/) | 类型系统基础、Trait 形式化、型变理论、生命周期 |
 | **主索引** | [00_master_index.md](./00_master_index.md) | 完整模块映射与导航 |
 

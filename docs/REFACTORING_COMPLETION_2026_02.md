@@ -81,8 +81,7 @@
 ## 100% 完成确认（2026-02-14）
 
 | 验证项 | 状态 |
-|--------|------|
-| scripts/check_links.ps1 | ✅ 无 tier3_advanced、tier1_foundation 等旧路径 |
+| :--- | :--- || scripts/check_links.ps1 | ✅ 无 tier3_advanced、tier1_foundation 等旧路径 |
 | theory_enhanced 断链 | ✅ C04/C06/C07/C09 已修复 |
 | 01_theory/02_core/03_advanced | ✅ C01/C02/C11 已映射至 tier_* |
 | analysis/appendices 断链 | ✅ C02–C07 已映射至 tier_*、04_thinking、research_notes |
@@ -95,8 +94,7 @@
 ## 100% 推进完成项（2026-02-13）
 
 | 任务 | 交付物 |
-|------|--------|
-| Rustlings 模块映射表 | exercises/RUSTLINGS_MAPPING.md |
+| :--- | :--- || Rustlings 模块映射表 | exercises/RUSTLINGS_MAPPING.md |
 | UNSAFE_RUST_GUIDE 对标 Nomicon | 05_guides/UNSAFE_RUST_GUIDE.md 各章节直接链接 |
 | 错误码映射初版 | 02_reference/ERROR_CODE_MAPPING.md |
 | Brown 交互版 + RBE 入口 | RESOURCES、OFFICIAL_RESOURCES_MAPPING、exercises/README |

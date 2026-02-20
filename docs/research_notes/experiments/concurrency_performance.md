@@ -400,7 +400,7 @@ async fn async_task_benchmark() {
 
 将 `cargo bench`（Mutex/RwLock/Atomic、mpsc/crossbeam、async 任务）的产出填入下表：
 
-| 类别 | 指标 | 实测值 | 单位 | 备注          |
+| 类别 | 指标 | 实测值 | 单位 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
 | 同步 | Mutex 操作时间        | **\_** | ms   | 1M 次/4 线程  |
 | 同步 | RwLock 写 操作时间    | **\_** | ms   | 同上          |
@@ -411,7 +411,7 @@ async fn async_task_benchmark() {
 
 **示例填写**（典型 x86_64、Rust 1.93、4 核）：
 
-| 类别 | 指标                  | 示例值 | 单位 | 备注          |
+| 类别 | 指标 | 示例值 | 单位 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
 | 同步 | Mutex 操作时间        | 85    | ms   | 1M 次/4 线程  |
 | 同步 | RwLock 写 操作时间    | 120   | ms   | 同上          |

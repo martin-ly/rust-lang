@@ -26,8 +26,7 @@
 ## 框架选型
 
 | 框架 | 适用场景 | 依赖 |
-|------|----------|------|
-| **Burn** | 动态图、多后端、训练+推理 | burn, burn-ndarray |
+| :--- | :--- | :--- || **Burn** | 动态图、多后端、训练+推理 | burn, burn-ndarray |
 | **Candle** | 简洁 API、Hugging Face、推理 | candle-core, candle-nn |
 | **llm** | 本地 LLM、CPU 推理 | llm |
 | **tch-rs** | PyTorch 生态、LibTorch | tch |
@@ -75,8 +74,7 @@ candle-nn = "0.8"
 ## LLM 推理
 
 | 库 | 用途 |
-|----|------|
-| **llm** | 多架构、InferenceSession |
+| :--- | :--- || **llm** | 多架构、InferenceSession |
 | **mistral.rs** | 高性能、量化、Vision |
 | **lm.rs** | 轻量、CPU 优化 |
 
@@ -85,8 +83,7 @@ candle-nn = "0.8"
 ## 与 C01–C12 关联
 
 | 模块 | AI/ML 中的关联 |
-|------|----------------|
-| C01 所有权 | 张量生命周期、零拷贝 |
+| :--- | :--- || C01 所有权 | 张量生命周期、零拷贝 |
 | C02 类型系统 | 泛型张量、Trait 抽象 |
 | C05 线程 | 多线程训练、数据并行 |
 | C06 异步 | 流式推理 |

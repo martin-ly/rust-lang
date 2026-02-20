@@ -8,8 +8,7 @@
 ## 完成总览
 
 | 阶段 | 任务 | 状态 |
-|------|------|------|
-| **阶段 1** | 1.1 修正 PROJECT_STRUCTURE | ✅ |
+| :--- | :--- | :--- || **阶段 1** | 1.1 修正 PROJECT_STRUCTURE | ✅ |
 | | 1.2 统一 C02 入口 (00_MASTER_INDEX.md) | ✅ |
 | | 1.3 修正错误链接 | ✅ |
 | | 1.4 明确 examples 定位 | ✅ |
@@ -63,8 +62,7 @@
 ## 最终收尾 (2026-02-12)
 
 | 任务 | 状态 |
-|------|------|
-| C09 OVERVIEW 待完善首项 → 已完成（组合案例 A/B 与评测） | ✅ |
+| :--- | :--- || C09 OVERVIEW 待完善首项 → 已完成（组合案例 A/B 与评测） | ✅ |
 | link_validation_report.json 添加 DeprecationNote | ✅ |
 | 链接检查脚本通过（无 tier3_advanced 等旧路径） | ✅ |
 | cargo check --workspace | ✅ |

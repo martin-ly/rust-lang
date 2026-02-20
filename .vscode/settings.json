@@ -35,5 +35,9 @@
   
   // 文件末尾新行
   "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true
+  "files.trimFinalNewlines": true,
+      // Markdown文件以文本编辑器方式打开（禁用可视化编辑器）
+  "workbench.editorAssociations": {
+    "*.md": "default"
+  }
 }

@@ -8,8 +8,7 @@
 ## Official Resources
 
 | Resource | Link |
-|----------|------|
-| **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) |
+| :--- | :--- || **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) |
 | **Rust By Example** | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) |
 | **Rust Reference** | [Type system](https://doc.rust-lang.org/reference/types.html) |
 | **Rustonomicon** | [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html) |
@@ -29,8 +28,7 @@
 ### Tier Structure
 
 | Tier | Name | Entry |
-|------|------|-------|
-| **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/README.md) |
+| :--- | :--- | :--- || **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/README.md) |
 | **Tier 2** | Core Guides | [tier_02_guides/](tier_02_guides/) |
 | **Tier 3** | References | [tier_03_references/](tier_03_references/) |
 | **Tier 4** | Advanced | [tier_04_advanced/](tier_04_advanced/) |

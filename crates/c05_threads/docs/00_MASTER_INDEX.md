@@ -48,8 +48,7 @@
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
-|----------|------|--------------|
-| **The Rust Book** | [Ch. 16 Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 线程、消息传递、共享状态 |
+| :--- | :--- | :--- || **The Rust Book** | [Ch. 16 Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 线程、消息传递、共享状态 |
 | **RBE 练习** | [Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | 线程创建、通道实践 |
 | **Rust Reference** | [std::thread](https://doc.rust-lang.org/std/thread/), [std::sync](https://doc.rust-lang.org/std/sync/) | 标准库 API 规范 |
 
@@ -220,8 +219,7 @@
 ### 文档数量
 
 | 类别         | 数量 | 总行数  |
-| ------------ | ---- | ------- |
-| **基础文档** | 6    | ~2,000+ |
+| :--- | :--- | :--- || **基础文档** | 6    | ~2,000+ |
 | **进阶文档** | 7    | ~3,000+ |
 | **参考文档** | 3    | ~500+   |
 | **总计**     | 16   | ~5,500+ |

@@ -184,8 +184,7 @@ This update upgrades the entire project from Rust 1.91.1 to Rust 1.92.0, includi
 ### 语言特性 / Language Features
 
 | 特性 | 状态 | 实现文件 | 示例文件 |
-|------|------|---------|---------|
-| `MaybeUninit` 文档化 | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
+| :--- | :--- | :--- | :--- || `MaybeUninit` 文档化 | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
 | 联合体原始引用 | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
 | 自动特征改进 | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
 | 零大小数组优化 | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
@@ -198,16 +197,14 @@ This update upgrades the entire project from Rust 1.91.1 to Rust 1.92.0, includi
 ### 标准库 API / Standard Library APIs
 
 | API | 状态 | 实现文件 | 示例文件 |
-|-----|------|---------|---------|
-| `NonZero::div_ceil` | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
+| :--- | :--- | :--- | :--- || `NonZero::div_ceil` | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
 | `Location::file_as_c_str` | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
 | `<[_]>::rotate_right` | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
 
 ### 性能优化 / Performance Improvements
 
 | 优化 | 状态 | 实现文件 | 示例文件 |
-|------|------|---------|---------|
-| 迭代器方法特化 | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
+| :--- | :--- | :--- | :--- || 迭代器方法特化 | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
 | 元组扩展简化 | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
 | `EncodeWide` Debug | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |
 | `iter::Repeat` panic | ✅ | `rust_192_features.rs` | `rust_192_features_demo.rs` |

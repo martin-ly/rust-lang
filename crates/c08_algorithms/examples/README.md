@@ -23,8 +23,7 @@ cargo run --example algorithm_comprehensive_demo
 ### 示例列表
 
 | 示例文件                                | 说明             | 主要功能                                   |
-| --------------------------------------- | ---------------- | ------------------------------------------ |
-| **algorithm_comprehensive_demo.rs**     | 综合算法演示     | 展示排序、搜索、图算法、动态规划的综合使用 |
+| :--- | :--- | :--- || **algorithm_comprehensive_demo.rs**     | 综合算法演示     | 展示排序、搜索、图算法、动态规划的综合使用 |
 | **algorithm_comparison_demo.rs**        | 算法对比演示     | 对比不同算法的性能和复杂度                 |
 | **algorithm_complexity_demo.rs**        | 复杂度分析演示   | 展示算法复杂度分析和性能测量               |
 | **algorithm_optimization_demo.rs**      | 算法优化演示     | 展示算法优化技巧和性能提升                 |

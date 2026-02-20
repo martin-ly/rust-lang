@@ -8,8 +8,7 @@
 ## 核心概念（4 条）
 
 | 概念 | 说明 |
-|------|------|
-| **线程创建** | `thread::spawn`；`JoinHandle`；`move` 闭包转移所有权 |
+| :--- | :--- || **线程创建** | `thread::spawn`；`JoinHandle`；`move` 闭包转移所有权 |
 | **Send 与 Sync** | `Send` 可跨线程转移；`Sync` 可多线程共享引用 |
 | **同步原语** | `Mutex`、`RwLock`、`Condvar`；`Arc` 共享所有权 |
 | **原子操作** | `AtomicUsize`、`Ordering`；无锁并发 |
@@ -19,8 +18,7 @@
 ## 常见坑与解决
 
 | 坑 | 解决 |
-|----|------|
-| 数据竞争 | 用 `Mutex`/`RwLock` 保护；确保 `Sync` |
+| :--- | :--- || 数据竞争 | 用 `Mutex`/`RwLock` 保护；确保 `Sync` |
 | 死锁 | 避免嵌套加锁；统一加锁顺序；缩短持锁时间 |
 | 假共享（False Sharing） | 缓存行对齐；`#[repr(align(64))]`；参考 [ALIGNMENT_GUIDE](../../../docs/02_reference/ALIGNMENT_GUIDE.md) |
 | `Rc` 跨线程 | 改用 `Arc`；`Rc` 非 `Send` |
@@ -30,8 +28,7 @@
 ## 并发速选
 
 | 场景 | 选型 |
-|------|------|
-| 共享可变状态 | `Arc<Mutex<T>>` 或 `Arc<RwLock<T>>` |
+| :--- | :--- || 共享可变状态 | `Arc<Mutex<T>>` 或 `Arc<RwLock<T>>` |
 | 消息传递 | `mpsc::channel`；`crossbeam` |
 | 无锁计数/标志 | `AtomicUsize`、`AtomicBool` |
 | 多生产者 | `crossbeam` 或 `flume` |

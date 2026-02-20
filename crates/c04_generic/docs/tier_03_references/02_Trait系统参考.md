@@ -239,8 +239,7 @@ impl Iterator for Counter {
 ### 3.1 常用 Trait 参考
 
 | Trait        | 用途                | 方法                               | 示例             |
-| ------------ | ------------------- | ---------------------------------- | ---------------- |
-| `Clone`      | 值复制              | `clone(&self) -> Self`             | `x.clone()`      |
+| :--- | :--- | :--- | :--- || `Clone`      | 值复制              | `clone(&self) -> Self`             | `x.clone()`      |
 | `Copy`       | 位复制 (标记 trait) | 无                                 | 自动复制         |
 | `Debug`      | 调试输出            | `fmt(&self, f: &mut Formatter)`    | `{:?}`           |
 | `Display`    | 用户输出            | `fmt(&self, f: &mut Formatter)`    | `{}`             |
@@ -669,8 +668,7 @@ impl Deref for MyVec {
 ### 7.1 派生宏速查
 
 | Derive       | 要求                     | 用途     |
-| ------------ | ------------------------ | -------- |
-| `Clone`      | 所有字段实现 `Clone`     | 值复制   |
+| :--- | :--- | :--- || `Clone`      | 所有字段实现 `Clone`     | 值复制   |
 | `Copy`       | 所有字段实现 `Copy`      | 位复制   |
 | `Debug`      | 所有字段实现 `Debug`     | 调试输出 |
 | `Default`    | 所有字段实现 `Default`   | 默认值   |

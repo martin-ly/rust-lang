@@ -19,8 +19,7 @@ This update upgraded 45 dependency packages to the latest Rust 1.92.0 compatible
 ### 工作区依赖更新 (14个) ✅
 
 | 包名 | 旧版本 | 新版本 | 更新类型 |
-|------|--------|--------|---------|
-| `actix-web` | 4.12.0 | 4.12.1 | 补丁更新 |
+| :--- | :--- | :--- | :--- || `actix-web` | 4.12.0 | 4.12.1 | 补丁更新 |
 | `http` | 1.3.1 | 1.4.0 | **重大版本更新** |
 | `hyper-util` | 0.1.18 | 0.1.19 | 补丁更新 |
 | `reqwest` | 0.12.24 | 0.12.25 | 补丁更新 |
@@ -38,8 +37,7 @@ This update upgraded 45 dependency packages to the latest Rust 1.92.0 compatible
 ### Crate 特定依赖更新 (1个) ✅
 
 | 包名 | 位置 | 旧版本 | 新版本 | 更新类型 |
-|------|------|--------|--------|---------|
-| `pcap` | c10_networks | 2.3.0 | 2.4.0 | 小版本更新 |
+| :--- | :--- | :--- | :--- | :--- || `pcap` | c10_networks | 2.3.0 | 2.4.0 | 小版本更新 |
 
 ---
 

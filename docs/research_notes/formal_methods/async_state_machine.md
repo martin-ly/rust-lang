@@ -66,6 +66,7 @@
     - [asm! 块中的 cfg 属性](#asm-块中的-cfg-属性)
     - [状态机代码生成改进（2025年目标）](#状态机代码生成改进2025年目标)
   - [thread::spawn 与 JoinHandle（Phase 6）](#threadspawn-与-joinhandlephase-6)
+    - [相关思维表征](#相关思维表征)
 
 ---
 

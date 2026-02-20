@@ -63,8 +63,7 @@
 ## 📊 修复统计
 
 | 警告类型 | 修复数量 | 状态 |
-|---------|---------|------|
-| unused variable | 3 | ✅ |
+| :--- | :--- | :--- || unused variable | 3 | ✅ |
 | unused import | 4 | ✅ |
 | variable does not need to be mutable | 2 | ✅ |
 | dead code | 3 | ✅ |
@@ -73,8 +72,7 @@
 ### 按文件分类
 
 | 文件 | 修复数量 | 状态 |
-|------|---------|------|
-| `crates/c08_algorithms/examples/algorithm_complexity_demo.rs` | 1 | ✅ |
+| :--- | :--- | :--- || `crates/c08_algorithms/examples/algorithm_complexity_demo.rs` | 1 | ✅ |
 | `crates/c07_process/examples/process_monitoring_demo.rs` | 3 | ✅ |
 | `crates/c07_process/examples/signal_handling_demo.rs` | 3 | ✅ |
 | `crates/c07_process/examples/ipc_communication_demo.rs` | 2 | ✅ |

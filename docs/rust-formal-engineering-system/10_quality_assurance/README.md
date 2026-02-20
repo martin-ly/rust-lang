@@ -34,8 +34,7 @@
 ## 📐 质量保障维度
 
 | 维度 | 内容 | 文档 |
-|------|------|------|
-| **测试覆盖** | 单元/集成/基准、覆盖率报告 | [TESTING_COVERAGE_GUIDE](../TESTING_COVERAGE_GUIDE.md) |
+| :--- | :--- | :--- || **测试覆盖** | 单元/集成/基准、覆盖率报告 | [TESTING_COVERAGE_GUIDE](../TESTING_COVERAGE_GUIDE.md) |
 | **性能测试** | 基准测试、性能回归、分析工具 | [PERFORMANCE_TESTING_REPORT](../../05_guides/PERFORMANCE_TESTING_REPORT.md) |
 | **内存安全** | MIRI、Valgrind、无 UB 验证 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 | **形式化验证** | Prusti、Kani、Creusot | [TOOLS_GUIDE](../../research_notes/TOOLS_GUIDE.md)、[FORMAL_VERIFICATION_GUIDE](../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
@@ -53,8 +52,7 @@
 ## 🔬 形式化验证衔接
 
 | 验证目标 | 形式化定理 | 工具 |
-|----------|------------|------|
-| 内存安全 | ownership T2/T3、borrow T1 | MIRI、Valgrind |
+| :--- | :--- | :--- || 内存安全 | ownership T2/T3、borrow T1 | MIRI、Valgrind |
 | 数据竞争自由 | async T6.2 | MIRI、ThreadSanitizer |
 | 类型安全 | type_system T1–T3 | cargo check |
 | 契约满足 | unsafe 前置/后置条件 | Prusti、Kani |

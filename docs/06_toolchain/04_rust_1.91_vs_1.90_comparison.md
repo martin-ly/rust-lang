@@ -34,8 +34,7 @@
 ## 已确认差异一览（对齐权威来源）
 
 | 主题             | Rust 1.90（已确认）                                                                 | Rust 1.91（已确认）                                | 为什么重要                       |
-| ---------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------- | -------------------------------- |
-| Linux 默认链接器 | `x86_64-unknown-linux-gnu` 默认改为 **LLD**                                         | 继续沿用                                           | 大型项目链接更快；可选择 opt-out |
+| :--- | :--- | :--- | :--- || Linux 默认链接器 | `x86_64-unknown-linux-gnu` 默认改为 **LLD**                                         | 继续沿用                                           | 大型项目链接更快；可选择 opt-out |
 | Cargo 工作区发布 | **`cargo publish --workspace`**                                                     | 继续沿用                                           | 工作区发布更可靠、自动排序依赖   |
 | 平台支持         | `x86_64-apple-darwin` 降级为 Tier 2 with host tools（与 GitHub/Apple 生态变化相关） | `aarch64-pc-windows-msvc` 升级为 Tier 1            | 影响平台支持承诺与 CI 覆盖       |
 | 新 lint          | -                                                                                   | `dangling_pointers_from_locals`（warn-by-default） | 提前发现 raw pointer 悬垂风险    |

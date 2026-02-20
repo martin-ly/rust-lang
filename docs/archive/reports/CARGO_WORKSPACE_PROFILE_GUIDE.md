@@ -91,8 +91,7 @@ cargo build --profile release-wasm --target wasm32-unknown-unknown
 ### ✅ 允许的配置位置
 
 | 配置项 | 根目录 Cargo.toml | 子 crate Cargo.toml |
-|--------|-------------------|---------------------|
-| `[profile.*]` | ✅ 有效 | ❌ 被忽略 |
+| :--- | :--- | :--- || `[profile.*]` | ✅ 有效 | ❌ 被忽略 |
 | `[workspace.dependencies]` | ✅ 有效 | ❌ 不允许 |
 | `[dependencies]` | ❌ 不适用 | ✅ 有效 |
 | `[features]` | ❌ 不适用 | ✅ 有效 |

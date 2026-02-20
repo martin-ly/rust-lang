@@ -43,8 +43,7 @@
 Rust 项目中「对齐」一词在不同语境下有不同含义：
 
 | 类型 | 含义 | 典型场景 |
-|------|------|----------|
-| **内存对齐** | 数据在内存中的地址需满足 N 字节边界 | `align_of`、`#[repr(align(N))]`、`Layout` |
+| :--- | :--- | :--- || **内存对齐** | 数据在内存中的地址需满足 N 字节边界 | `align_of`、`#[repr(align(N))]`、`Layout` |
 | **格式化对齐** | 输出文本的左右/居中排版 | `{:>10}`、`{:<10}`、`{:^10}` |
 | **权威来源对齐** | 项目文档与官方发布说明一致 | releases.rs、Rust Blog、版本追踪 |
 | **类型对齐** | transmute/FFI 时类型大小与对齐兼容 | `mem::transmute`、`#[repr(C)]` |
@@ -94,8 +93,7 @@ assert_eq!(size_of::<Example>(), 24);
 ### 2.2 常用 API
 
 | API | 用途 |
-|-----|------|
-| `mem::align_of::<T>()` | 类型 T 的对齐要求 |
+| :--- | :--- || `mem::align_of::<T>()` | 类型 T 的对齐要求 |
 | `mem::size_of::<T>()` | 类型 T 的大小（含填充） |
 | `mem::align_of_val(v)` | 值的实际对齐 |
 | `ptr::read_unaligned` | 读取未对齐内存（较慢） |
@@ -182,8 +180,7 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 ### 2.7 平台差异
 
 | 平台 | 未对齐访问 | 缓存行 | 备注 |
-|------|------------|--------|------|
-| x86/x64 | 通常可执行，较慢 | 64 B | SSE/AVX 需 16 字节对齐 |
+| :--- | :--- | :--- | :--- || x86/x64 | 通常可执行，较慢 | 64 B | SSE/AVX 需 16 字节对齐 |
 | ARM (AArch64) | 可能 fault | 64 B | 取决于 MMU 配置 |
 | WASM | 有对齐要求 | N/A | 见 [wasm 内存模型](https://webassembly.org/docs/semantics/) |
 
@@ -211,8 +208,7 @@ println!("{:*>10}", x);  // 右对齐，* 填充
 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 与 [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) 要求：
 
 | 操作 | 未对齐时 | 说明 |
-|------|----------|------|
-| `*ptr` | **UB** | 解引用未对齐指针为未定义行为 |
+| :--- | :--- | :--- || `*ptr` | **UB** | 解引用未对齐指针为未定义行为 |
 | `ptr::read(ptr)` | **UB** | 同上 |
 | `ptr::write(ptr, v)` | **UB** | 同上 |
 | `ptr::read_unaligned(ptr)` | ✅ 允许 | 显式未对齐读取，较慢 |
@@ -275,8 +271,7 @@ struct CacheLinePadded {
 与对齐相关：连续访问同类型数据时，缓存行利用率更高。
 
 | 模式 | 说明 | 适用 |
-|------|------|------|
-| **AoS** (Array of Structures) | `Vec<Particle>`，每元素含 position、velocity 等 | 需同时访问多字段 |
+| :--- | :--- | :--- || **AoS** (Array of Structures) | `Vec<Particle>`，每元素含 position、velocity 等 | 需同时访问多字段 |
 | **SoA** (Structure of Arrays) | `positions_x: Vec<f32>`, `velocities_x: Vec<f32>` 等 | 批量处理单字段，通常快 2–4x |
 
 *详见* [c01 09_性能优化参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_性能优化参考.md#32-缓存友好设计)
@@ -317,8 +312,7 @@ struct CacheLinePadded {
 ```
 
 | 场景 | 推荐 |
-|------|------|
-| 普通 Rust 结构体 | 默认，编译器优化 |
+| :--- | :--- || 普通 Rust 结构体 | 默认，编译器优化 |
 | C 互操作、FFI | `#[repr(C)]` |
 | 网络/二进制协议 | `#[repr(C)]` 或 `packed`，注意未对齐用 `read_unaligned` |
 | 多线程原子计数器 | `#[repr(align(64))]` 每计数器独占缓存行 |
@@ -331,8 +325,7 @@ struct CacheLinePadded {
 ### 项目内文档
 
 | 主题 | 路径 |
-|------|------|
-| 内存布局优化 | [c01/tier_04/04_内存布局优化](../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_内存布局优化.md) |
+| :--- | :--- || 内存布局优化 | [c01/tier_04/04_内存布局优化](../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_内存布局优化.md) |
 | 性能优化参考 | [c01/tier_03/09_性能优化参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_性能优化参考.md) |
 | 内存安全参考 | [c01/tier_03/08_内存安全参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/08_内存安全参考.md) |
 | 缓存行对齐 | [c05/02_系统编程优化](../../crates/c05_threads/docs/tier_04_advanced/02_系统编程优化.md#51-缓存行对齐) |
@@ -342,8 +335,7 @@ struct CacheLinePadded {
 ### 代码示例
 
 | 模块 | 示例 |
-|------|------|
-| c01 | `rust_190_comprehensive_examples` 内存对齐优化 |
+| :--- | :--- || c01 | `rust_190_comprehensive_examples` 内存对齐优化 |
 | c02 | `memory_safety_advanced`、`rust_192_features_demo` 对齐计算 |
 | c04 | `rust_192_features_demo` 泛型对齐大小 |
 | c05 | 并行算法中的缓存行对齐；`benches/false_sharing_bench` 伪共享基准 |

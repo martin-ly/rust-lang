@@ -694,6 +694,7 @@ mod tests {
 
     #[tokio::test]
     #[ignore] // 需 start_processing 运行才有 processing_speed，默认跳过
+    #[allow(unused_comparisons)] // StreamMetrics 字段为 usize，不做与 0 的比较
     async fn test_async_stream() {
         let stream = Arc::new(AdvancedAsyncStream190::new(10, 0.8));
         
@@ -707,8 +708,8 @@ mod tests {
         stream.add_item(item).await;
         
         let metrics = stream.get_metrics().await;
-        assert!(metrics.processing_speed >= 0);
-        assert!(metrics.error_count >= 0);
+        // processing_speed、error_count 为 usize，恒非负；测试已校验 add_item + get_metrics 不 panic
+        let _ = metrics;
     }
 
     #[tokio::test]

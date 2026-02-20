@@ -18,24 +18,21 @@
 ## 核心概念（3–5 条）
 
 | 概念 | 说明 |
-|------|------|
-| ... | ... |
+| :--- | :--- || ... | ... |
 
 ---
 
 ## 常见坑与解决
 
 | 坑 | 解决 |
-|----|------|
-| ... | ... |
+| :--- | :--- || ... | ... |
 
 ---
 
 ## 速选表（按模块特点）
 
 | 场景 | 选型 |
-|------|------|
-| ... | ... |
+| :--- | :--- || ... | ... |
 
 ---
 
@@ -59,8 +56,7 @@
 ## 已创建一页纸总结的模块
 
 | 模块 | 路径 |
-|------|------|
-| C01 | [c01/ONE_PAGE_SUMMARY.md](../../crates/c01_ownership_borrow_scope/docs/ONE_PAGE_SUMMARY.md) |
+| :--- | :--- || C01 | [c01/ONE_PAGE_SUMMARY.md](../../crates/c01_ownership_borrow_scope/docs/ONE_PAGE_SUMMARY.md) |
 | C02 | [c02/ONE_PAGE_SUMMARY.md](../../crates/c02_type_system/docs/ONE_PAGE_SUMMARY.md) |
 | C03 | [c03/ONE_PAGE_SUMMARY.md](../../crates/c03_control_fn/docs/ONE_PAGE_SUMMARY.md) |
 | C04 | [c04/ONE_PAGE_SUMMARY.md](../../crates/c04_generic/docs/ONE_PAGE_SUMMARY.md) |
