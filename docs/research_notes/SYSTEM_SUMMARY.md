@@ -300,6 +300,140 @@ research_notes/
 
 ---
 
+## 💻 代码示例
+
+### 示例 1: 研究笔记系统导航代码
+
+```rust
+// 研究场景：使用类型系统导航研究笔记
+use std::collections::HashMap;
+
+enum ResearchCategory {
+    FormalMethods,
+    TypeTheory,
+    Experiments,
+    Synthesis,
+}
+
+struct ResearchNote {
+    title: String,
+    category: ResearchCategory,
+    completion: f64,
+    related_theorems: Vec<String>,
+}
+
+fn find_related_notes(notes: &[ResearchNote], theorem: &str) -> Vec<&ResearchNote> {
+    notes.iter()
+        .filter(|note| note.related_theorems.contains(&theorem.to_string()))
+        .collect()
+}
+
+fn main() {
+    let notes = vec![
+        ResearchNote {
+            title: "所有权模型形式化".to_string(),
+            category: ResearchCategory::FormalMethods,
+            completion: 100.0,
+            related_theorems: vec!["T-OW1".to_string(), "T-OW2".to_string()],
+        },
+        ResearchNote {
+            title: "类型系统基础".to_string(),
+            category: ResearchCategory::TypeTheory,
+            completion: 100.0,
+            related_theorems: vec!["T-TY1".to_string(), "T-TY2".to_string(), "T-TY3".to_string()],
+        },
+    ];
+    
+    let related = find_related_notes(&notes, "T-OW2");
+    for note in related {
+        println!("相关笔记: {} (完成度: {}%)", note.title, note.completion);
+    }
+}
+```
+
+### 示例 2: 研究进度跟踪代码
+
+```rust
+// 研究场景：跟踪研究笔记完成度
+use std::collections::HashMap;
+
+struct ProgressTracker {
+    formal_methods: f64,
+    type_theory: f64,
+    experiments: f64,
+    synthesis: f64,
+}
+
+impl ProgressTracker {
+    fn overall_progress(&self) -> f64 {
+        (self.formal_methods + self.type_theory + 
+         self.experiments + self.synthesis) / 4.0
+    }
+    
+    fn generate_report(&self) -> String {
+        format!(
+            "研究笔记系统进度报告\n\
+             ====================\n\
+             形式化方法: {}%\n\
+             类型理论: {}%\n\
+             实验研究: {}%\n\
+             综合研究: {}%\n\
+             总体进度: {}%",
+            self.formal_methods,
+            self.type_theory,
+            self.experiments,
+            self.synthesis,
+            self.overall_progress()
+        )
+    }
+}
+
+fn main() {
+    let tracker = ProgressTracker {
+        formal_methods: 100.0,
+        type_theory: 100.0,
+        experiments: 100.0,
+        synthesis: 100.0,
+    };
+    
+    println!("{}", tracker.generate_report());
+}
+```
+
+---
+
+## 🔗 形式化链接
+
+### 核心定理索引
+
+| 定理 | 文档 | 研究笔记 |
+| :--- | :--- | :--- |
+| T-OW1, T-OW2, T-OW3 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | ownership_model.md |
+| T-BR1 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | borrow_checker_proof.md |
+| T-TY1, T-TY2, T-TY3 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | type_system_foundations.md |
+| T-LT1, T-LT2 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | lifetime_formalization.md |
+| T6.1, T6.2, T6.3 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | async_state_machine.md |
+| T-PN1, T-PN2, T-PN3 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | pin_self_referential.md |
+
+### Coq 证明骨架
+
+| 定理 | Coq 文件 | 状态 |
+| :--- | :--- | :--- |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+
+### 系统集成文档
+
+| 文档 | 内容 | 链接 |
+| :--- | :--- | :--- |
+| 完整总结 | 项目全貌与知识地图 | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) |
+| 理论体系 | 四层理论体系结构 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) |
+| 安全分析 | 安全与非安全边界 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+| 证明索引 | 26个证明索引 | [PROOF_INDEX](./PROOF_INDEX.md) |
+
+---
+
 ## 📊 系统评估
 
 ### 完成度
