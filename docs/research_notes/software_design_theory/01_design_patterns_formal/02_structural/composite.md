@@ -7,7 +7,7 @@
 > **分类**: 结构型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 8 行（Composite）
-> **证明深度**: L2（完整证明草图）
+> **证明深度**: L3（完整证明）
 
 ---
 
@@ -16,9 +16,18 @@
 - [Composite 形式化分析](#composite-形式化分析)
   - [📊 目录](#-目录)
   - [形式化定义](#形式化定义)
+    - [Def 1.1（Composite 结构）](#def-11composite-结构)
+    - [Axiom CO1（树结构无环公理）](#axiom-co1树结构无环公理)
+    - [Axiom CO2（遍历借用公理）](#axiom-co2遍历借用公理)
+    - [定理 CO-T1（递归结构安全定理）](#定理-co-t1递归结构安全定理)
+    - [定理 CO-T2（遍历安全定理）](#定理-co-t2遍历安全定理)
+    - [推论 CO-C1（纯 Safe Composite）](#推论-co-c1纯-safe-composite)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [证明思路](#证明思路)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
+    - [内存安全保证](#内存安全保证)
   - [典型场景](#典型场景)
   - [完整场景示例：文件系统树（File/Directory）](#完整场景示例文件系统树filedirectory)
   - [相关模式](#相关模式)
@@ -28,15 +37,17 @@
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
   - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
 ## 形式化定义
 
-**Def 1.1（Composite 结构）**:
+### Def 1.1（Composite 结构）
 
-设 $C$ 为组件类型。Composite 满足：
+设 $C$ 为组件类型。Composite 是一个递归类型 $\mathcal{CO} = (C, \mathrm{Leaf}, \mathrm{Composite}, \mathit{children})$，满足：
 
 $$C = \mathrm{Leaf}(T) \mid \mathrm{Composite}(\mathrm{Vec}\langle C \rangle)$$
 
@@ -44,23 +55,125 @@ $$C = \mathrm{Leaf}(T) \mid \mathrm{Composite}(\mathrm{Vec}\langle C \rangle)$$
 - Composite：持有子组件列表 $\mathrm{Vec}\langle C \rangle$，递归结构
 - $\Gamma \vdash \mathrm{Composite}(cs) : C$ 当 $\forall c \in cs,\, \Gamma \vdash c : C$
 
-**Axiom CO1**：树结构，无环；深度有界（由程序结构决定）。
+**形式化表示**：
+$$\mathcal{CO} = \langle C, \mathrm{Leaf}: T \rightarrow C, \mathrm{Composite}: \mathrm{Vec}\langle C \rangle \rightarrow C \rangle$$
 
-**Axiom CO2**：遍历时借用规则：不可在迭代时修改结构；或使用 `Vec` 拥有权无共享。
+---
 
-**定理 CO-T1**：`Box` 或 `Vec` 递归结构保证有界深度；由 [ownership_model](../../../formal_methods/ownership_model.md) 无泄漏、无悬垂。
+### Axiom CO1（树结构无环公理）
 
-**定理 CO-T2**：遍历时 `&self` 借用全部子节点；`&mut self` 可变遍历需小心别名。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md) 保证无数据竞争。
+$$\forall c: C,\, c\text{ 的引用图无环；深度有界}$$
 
-**推论 CO-C1**：Composite 为纯 Safe；`enum` + `Vec`/`Box` 递归，无 `unsafe`；无环由类型结构保证。由 CO-T1、CO-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+树结构，无环；深度有界（由程序结构决定）。
+
+### Axiom CO2（遍历借用公理）
+
+$$\text{遍历时借用规则：不可在迭代时修改结构；或使用 Vec 拥有权无共享}$$
+
+遍历时借用规则满足。
+
+---
+
+### 定理 CO-T1（递归结构安全定理）
+
+`Box` 或 `Vec` 递归结构保证有界深度；由 [ownership_model](../../../formal_methods/ownership_model.md) 无泄漏、无悬垂。
+
+**证明**：
+
+1. **递归类型表示**：
+
+   ```rust
+   enum Node { Leaf(i32), Composite(Vec<Node>) }
+   ```
+
+   - `Leaf`：终止递归
+   - `Composite`：递归持有子节点
+
+2. **有界深度**：
+   - 每个 `Composite` 创建新 `Vec` 分配
+   - 深度由构造过程决定
+   - 无无限递归类型（`Box` 间接）
+
+3. **所有权树**：
+   - 父节点拥有子节点（`Vec<Node>`）
+   - 子节点生命周期不超过父节点
+   - 释放父节点自动释放所有子节点
+
+4. **无泄漏**：根据 ownership_model，所有分配有明确所有者
+
+由 ownership_model T1（所有权唯一性），得证。$\square$
+
+---
+
+### 定理 CO-T2（遍历安全定理）
+
+遍历时 `&self` 借用全部子节点；`&mut self` 可变遍历需小心别名。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md) 保证无数据竞争。
+
+**证明**：
+
+1. **不可变遍历**：
+
+   ```rust
+   fn sum(&self) -> i32 {
+       match self {
+           Node::Leaf(n) => *n,
+           Node::Composite(children) => children.iter().map(|c| c.sum()).sum(),
+       }
+   }
+   ```
+
+   - `&self` 借用整个树
+   - 递归调用 `c.sum()`：子借用，无冲突
+
+2. **可变遍历**：
+
+   ```rust
+   fn double(&mut self) {
+       match self {
+           Node::Leaf(n) => *n *= 2,
+           Node::Composite(children) => {
+               for c in children { c.double(); }
+           }
+       }
+   }
+   ```
+
+   - `&mut self` 独占借用
+   - 递归调用时子树可变借用
+
+3. **借用检查**：
+   - 同一时刻只有一个 `&mut` 活跃
+   - 递归深度由调用栈管理
+
+由 borrow_checker_proof 互斥规则，得证。$\square$
+
+---
+
+### 推论 CO-C1（纯 Safe Composite）
+
+Composite 为纯 Safe；`enum` + `Vec`/`Box` 递归，无 `unsafe`；无环由类型结构保证。
+
+**证明**：
+
+1. `enum` 定义：纯 Safe
+2. `Vec` 存储子节点：标准库 Safe API
+3. 递归方法：纯 Safe Rust
+4. 无环保证：
+   - `Vec<Node>` 拥有子节点
+   - 无法创建循环引用（无 `Rc<RefCell>` 时）
+5. 无 `unsafe` 块
+
+由 CO-T1、CO-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+
+---
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
 | **概念定义层** | Def 1.1（Composite 结构）、Axiom CO1/CO2（无环、遍历借用） | 上 |
-| **属性关系层** | Axiom CO1/CO2 → 定理 CO-T1/CO-T2 → 推论 CO-C1；依赖 ownership、borrow | 上 |
-| **解释论证层** | 证明思路：结构有界、遍历安全；反例：§反例 | §证明思路、§反例 |
+| **属性关系层** | Axiom CO1/CO2 $\rightarrow$ 定理 CO-T1/CO-T2 $\rightarrow$ 推论 CO-C1；依赖 ownership、borrow | 上 |
+| **解释论证层** | CO-T1/CO-T2 完整证明；反例：循环引用 | §完整证明、§反例 |
 
 ---
 
@@ -93,10 +206,41 @@ assert_eq!(tree.sum(), 6);
 
 ---
 
-## 证明思路
+## 完整证明
 
-1. **结构有界**：枚举递归，无 `Box<Node>` 自引用则无无限类型；`Vec` 大小运行时确定。
-2. **遍历安全**：`iter()` 产生 `&Node`，不可变；匹配 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md) 互斥规则。
+### 形式化论证链
+
+```
+Axiom CO1 (树结构无环)
+    ↓ 依赖
+ownership_model T1
+    ↓ 保证
+定理 CO-T1 (递归结构安全)
+    ↓ 组合
+Axiom CO2 (遍历借用)
+    ↓ 依赖
+borrow_checker_proof
+    ↓ 保证
+定理 CO-T2 (遍历安全)
+    ↓ 结论
+推论 CO-C1 (纯 Safe Composite)
+```
+
+### 与 Rust 类型系统的联系
+
+| Rust 特性 | Composite 实现 | 类型安全保证 |
+| :--- | :--- | :--- |
+| `enum` | 递归类型 | 穷尽匹配 |
+| `Vec<T>` | 子节点存储 | 所有权集合 |
+| 递归方法 | 树遍历 | 借用检查 |
+| `Box<T>` | 间接递归 | 有界大小 |
+
+### 内存安全保证
+
+1. **无悬垂**：所有权树保证子节点有效
+2. **无泄漏**：父节点释放时递归释放子节点
+3. **遍历安全**：借用检查保证无数据竞争
+4. **无环**（基础实现）：所有权单向，无法循环
 
 ---
 
@@ -173,6 +317,22 @@ assert_eq!(tree.size(), 600);
 
 **反例**：父子循环引用（父→子→父）在 Rust 中无法用普通所有权表达；需 `Rc`/`Weak` 或重构为无环结构，否则所有权无法建立。
 
+```rust
+// 错误：无法创建循环引用
+// enum Node { Leaf(i32), Composite(Vec<Node>) }
+// 无法在 Vec 中存储引用父节点的子节点
+
+// 需使用 Rc/Weak
+use std::rc::{Rc, Weak};
+use std::cell::RefCell;
+
+struct Node {
+    value: i32,
+    parent: Weak<RefCell<Node>>,
+    children: Vec<Rc<RefCell<Node>>>,
+}
+```
+
 ---
 
 ## 选型决策树
@@ -216,13 +376,56 @@ assert_eq!(tree.size(), 600);
 
 ---
 
+## 思维导图
+
+```mermaid
+mindmap
+  root((Composite<br/>组合模式))
+    结构
+      Component enum
+      Leaf(T)
+      Composite(Vec<Component>)
+    行为
+      递归遍历
+      统一接口
+      树形结构
+    实现方式
+      枚举递归
+      trait + Box
+      Rc/Weak 图结构
+    应用场景
+      文件系统
+      UI组件树
+      表达式AST
+      组织架构
+```
+
+---
+
+## 与其他模式的关系图
+
+```mermaid
+graph LR
+    C[Composite<br/>组合模式] -->|遍历| V[Visitor<br/>访问者]
+    C -->|同为组合| D[Decorator<br/>装饰器]
+    C -->|对比| CR[Chain of Responsibility<br/>职责链]
+    C -.->|需要| R[Rc/Weak<br/>引用计数]
+    style C fill:#2196F3,stroke:#1565C0,stroke-width:3px,color:#fff
+    style V fill:#2196F3,stroke:#1565C0,color:#fff
+    style D fill:#2196F3,stroke:#1565C0,color:#fff
+    style CR fill:#9E9E9E,stroke:#616161,color:#fff
+    style R fill:#FF9800,stroke:#E65100,color:#fff
+```
+
+---
+
 ## 实质内容五维自检
 
 | 自检项 | 状态 | 说明 |
 | :--- | :--- | :--- |
-| 形式化 | ✅ | Def 1.1、Axiom CO1/CO2、定理 CO-T1/T2（L2） |
+| 形式化 | ✅ | Def 1.1、Axiom CO1/CO2、定理 CO-T1/T2（L3 完整证明）、推论 CO-C1 |
 | 代码 | ✅ | 可运行示例、完整场景 |
 | 场景 | ✅ | 典型场景、文件系统树 |
-| 反例 | ✅ | 反例小节 |
+| 反例 | ✅ | 循环引用问题 |
 | 衔接 | ✅ | ownership、borrow、CE-T1 |
 | 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |

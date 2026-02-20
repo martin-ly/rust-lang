@@ -31,6 +31,7 @@
 - [并发性能研究](./experiments/concurrency_performance.md)
 
 **代码示例**:
+
 ```rust
 // 研究场景：验证异步迭代器性能改进
 use std::pin::Pin;
@@ -40,7 +41,7 @@ use std::task::{Context, Poll};
 async fn async_iterator_benchmark() {
     // Rust 1.91.1 优化了异步状态机的代码生成
     // 研究任务：形式化分析优化后的状态转换规则
-    
+
     let mut stream = futures::stream::iter(0..1000);
     while let Some(item) = stream.next().await {
         // 性能提升 15-20%
@@ -70,6 +71,7 @@ fn process(n: i32) -> impl Future<Output = ()> {
 - [高级类型特性](./type_theory/advanced_types.md)
 
 **代码示例**:
+
 ```rust
 // 研究场景：const 上下文中的引用语义
 // 形式化问题：&mut static 在 const 中的类型规则
@@ -108,6 +110,7 @@ const fn with_static_ref() -> &'static mut i32 {
 - [性能基准测试](./experiments/performance_benchmarks.md)
 
 **代码示例**:
+
 ```rust
 // 研究场景：JIT 优化对异步代码的影响
 // 形式化问题：运行时优化与静态分析的关系
@@ -143,6 +146,7 @@ async fn jit_optimized_async() -> i32 {
 - [性能基准测试](./experiments/performance_benchmarks.md)
 
 **代码示例**:
+
 ```rust
 // 研究场景：小对象分配性能优化
 // 形式化问题：分配策略与内存安全的关系
@@ -153,7 +157,7 @@ fn small_object_allocation() {
     for i in 0..10000 {
         vec.push(Box::new(i));  // 小堆分配
     }
-    
+
     // 形式化分析：
     // - 分配器优化不改变所有权语义
     // - 内存安全保证不变
@@ -236,6 +240,33 @@ fn small_object_allocation() {
 | 异步迭代器 | [async_state_machine.md](./formal_methods/async_state_machine.md) | T6.1-T6.3 |
 | const 上下文 | [advanced_types.md](./type_theory/advanced_types.md) | Def CONST-MUT1 |
 | 内存分配 | [ownership_model.md](./formal_methods/ownership_model.md) | Axiom A1-A8 |
+
+### 核心定理
+
+| 定理 | 文档 | 说明 |
+| :--- | :--- | :--- |
+| T-OW2 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 所有权唯一性 |
+| T-BR1 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 数据竞争自由 |
+| T-TY3 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 类型安全 |
+
+### Coq 证明骨架
+
+| 定理 | Coq 文件 | 状态 |
+| :--- | :--- | :--- |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+
+### 相关研究笔记
+
+| 类别 | 文档 | 链接 |
+| :--- | :--- | :--- |
+| 形式化方法 | 所有权模型 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) |
+| 形式化方法 | 借用检查器 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
+| 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
+| 类型理论 | 高级类型特性 | [type_theory/advanced_types.md](./type_theory/advanced_types.md) |
+| 实验研究 | 性能基准测试 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) |
+| 实验研究 | 内存分析 | [experiments/memory_analysis.md](./experiments/memory_analysis.md) |
 
 ---
 

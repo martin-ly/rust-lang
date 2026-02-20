@@ -221,33 +221,33 @@ impl FormatValidator {
             status_pattern: Regex::new(r"\*\*状态\*\*:\s*[✅🔄📋]").unwrap(),
         }
     }
-    
+
     /// 验证单个文档
     pub fn validate(&self, content: &str) -> Vec<String> {
         let mut errors = Vec::new();
-        
+
         // 检查创建日期
         if !self.date_pattern.is_match(content) {
             errors.push("缺少创建日期或格式不正确 (应为 YYYY-MM-DD)".to_string());
         }
-        
+
         // 检查 Rust 版本
         if !self.version_pattern.is_match(content) {
             errors.push("缺少 Rust 版本或格式不正确 (应为 1.93.0+ (Edition 2024))".to_string());
         }
-        
+
         // 检查状态
         if !self.status_pattern.is_match(content) {
             errors.push("缺少状态或格式不正确 (应为 ✅/🔄/📋)".to_string());
         }
-        
+
         errors
     }
-    
+
     /// 批量验证目录
     pub fn validate_directory(&self, dir_path: &str) -> Vec<ValidationResult> {
         let mut results = Vec::new();
-        
+
         if let Ok(entries) = fs::read_dir(dir_path) {
             for entry in entries.flatten() {
                 let path = entry.path();
@@ -262,7 +262,7 @@ impl FormatValidator {
                 }
             }
         }
-        
+
         results
     }
 }
@@ -270,7 +270,7 @@ impl FormatValidator {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let validator = FormatValidator::new();
     let results = validator.validate_directory("docs");
-    
+
     let mut total_errors = 0;
     for result in &results {
         if !result.errors.is_empty() {
@@ -281,15 +281,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-    
+
     println!("\n========== 验证完成 ==========");
     println!("检查文件数: {}", results.len());
     println!("错误总数: {}", total_errors);
-    
+
     if total_errors == 0 {
         println!("✅ 所有文档格式检查通过！");
     }
-    
+
     Ok(())
 }
 ```

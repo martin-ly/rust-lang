@@ -70,6 +70,11 @@
     - [asm! 块中的 cfg 属性](#asm-块中的-cfg-属性)
     - [状态机代码生成改进（2025年目标）](#状态机代码生成改进2025年目标)
     - [musl 1.2.5 更新](#musl-125-更新)
+  - [🔗 形式化链接](#-形式化链接)
+    - [实验与定理对应关系](#实验与定理对应关系)
+    - [相关研究笔记](#相关研究笔记)
+    - [形式化证明](#形式化证明)
+    - [理论体系](#理论体系)
 
 ---
 
@@ -1238,3 +1243,45 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 - [x] 更新网络性能基准测试（c10_networks 等 benches 与数据收集指南已覆盖）
 - [x] 评估 DNS 解析性能改进（流程已文档化，按指南在对应 target 下运行即可）
 - [x] 测试静态链接二进制文件的网络性能（通过 `--target xxx-linux-musl` 与结果分析模板完成）
+
+---
+
+## 🔗 形式化链接
+
+### 实验与定理对应关系
+
+| 实验类型 | 验证的形式化定理 | 验证目标 |
+| :--- | :--- | :--- |
+| 内存分配 | ownership T2/T3 | 无泄漏、无双重释放 |
+| 并发性能 | borrow T1、async T6.2 | 无数据竞争 |
+| 序列化 | type_system 保持性 | 类型正确、无 UB |
+
+### 相关研究笔记
+
+| 文档 | 链接 | 内容 |
+| :--- | :--- | :--- |
+| 内存分析 | [memory_analysis.md](./memory_analysis.md) | 内存分配与使用分析 |
+| 并发性能 | [concurrency_performance.md](./concurrency_performance.md) | 并发性能研究 |
+| 编译器优化 | [compiler_optimizations.md](./compiler_optimizations.md) | 编译器优化研究 |
+| 宏展开性能 | [macro_expansion_performance.md](./macro_expansion_performance.md) | 宏展开性能分析 |
+
+### 形式化证明
+
+| 文档 | 链接 | 定理 |
+| :--- | :--- | :--- |
+| CORE_THEOREMS_FULL_PROOFS | [../CORE_THEOREMS_FULL_PROOFS.md](../CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明 |
+| 性能实验形式化 | [../experiments/README.md](../experiments/README.md) | 实验形式化论证 (EX-T1, EX-T2) |
+
+### 理论体系
+
+| 文档 | 链接 | 内容 |
+| :--- | :--- | :--- |
+| 理论体系架构 | [../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 四层理论体系 |
+| 证明索引 | [../PROOF_INDEX.md](../PROOF_INDEX.md) | 形式化证明索引 |
+| 系统总结 | [../SYSTEM_SUMMARY.md](../SYSTEM_SUMMARY.md) | 研究笔记系统总结 |
+
+---
+
+**维护者**: Rust Performance Research Team
+**最后更新**: 2026-02-20
+**状态**: ✅ **已完成** (100%)

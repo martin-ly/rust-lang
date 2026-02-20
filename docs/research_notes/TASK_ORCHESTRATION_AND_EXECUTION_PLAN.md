@@ -75,6 +75,9 @@
     - [形式化方法研究笔记](#形式化方法研究笔记)
     - [类型理论研究笔记](#类型理论研究笔记)
     - [实验研究笔记](#实验研究笔记)
+    - [Coq 证明骨架](#coq-证明骨架)
+    - [理论体系文档](#理论体系文档)
+    - [可视化文档](#可视化文档)
 
 ---
 
@@ -870,6 +873,34 @@ criterion_main!(benches);
 | performance_benchmarks | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) | 性能基准测试 |
 | memory_analysis | [experiments/memory_analysis.md](./experiments/memory_analysis.md) | 内存分析 |
 | compiler_optimizations | [experiments/compiler_optimizations.md](./experiments/compiler_optimizations.md) | 编译器优化 |
+| concurrency_performance | [experiments/concurrency_performance.md](./experiments/concurrency_performance.md) | 并发性能 |
+| macro_expansion_performance | [experiments/macro_expansion_performance.md](./experiments/macro_expansion_performance.md) | 宏展开性能 |
+
+### Coq 证明骨架
+
+| 定理 | Coq 文件 | 文档 |
+| :--- | :--- | :--- |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v) | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+
+### 理论体系文档
+
+| 文档 | 内容 | 链接 |
+| :--- | :--- | :--- |
+| 理论体系架构 | 四层理论体系结构 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) |
+| 完整总结 | 项目全貌与知识地图 | [00_COMPREHENSIVE_SUMMARY.md](./00_COMPREHENSIVE_SUMMARY.md) |
+| 论证脉络 | 论证五步法和概念→定理 DAG | [ARGUMENTATION_CHAIN_AND_FLOW.md](./ARGUMENTATION_CHAIN_AND_FLOW.md) |
+| 安全分析 | 安全与非安全边界 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+| 证明索引 | 26个证明索引 | [PROOF_INDEX.md](./PROOF_INDEX.md) |
+
+### 可视化文档
+
+| 文档 | 内容 | 链接 |
+| :--- | :--- | :--- |
+| 可视化索引 | 思维导图、矩阵、决策树索引 | [VISUALIZATION_INDEX.md](./VISUALIZATION_INDEX.md) |
+| 任务关系图 | 任务依赖网络 | [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#思维导图任务关系网络](./TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#思维导图任务关系网络) |
+| 概念对比矩阵 | 任务类型对比矩阵 | [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵](./TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵) |
 
 ---
 

@@ -1,7 +1,7 @@
 # Rust 1.93.0 决策图网 / Decision Graph Network
 
 > **创建日期**: 2025-12-11
-> **最后更新**: 2026-02-15
+> **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
@@ -12,37 +12,41 @@
 - [Rust 1.93.0 决策图网 / Decision Graph Network](#rust-1930-决策图网--decision-graph-network)
   - [📋 目录](#-目录)
   - [🎯 决策图网概述](#-决策图网概述)
-    - [概念定义](#概念定义)
-    - [核心属性](#核心属性)
-    - [关系连接](#关系连接)
-    - [应用场景](#应用场景)
   - [🚀 核心决策流程](#-核心决策流程)
-    - [决策流程总览](#决策流程总览)
   - [📦 模块化决策树](#-模块化决策树)
     - [1. 所有权与借用决策树](#1-所有权与借用决策树)
     - [2. 类型系统决策树](#2-类型系统决策树)
     - [3. 控制流决策树](#3-控制流决策树)
     - [4. 异步编程决策树](#4-异步编程决策树)
-    - [5. Pin 使用场景决策树 🆕](#5-pin-使用场景决策树-)
+    - [5. Pin 使用场景决策树](#5-pin-使用场景决策树)
     - [6. 表达能力边界决策树](#6-表达能力边界决策树)
-  - [⚡ 特性选择决策](#-特性选择决策)
-    - [Rust 1.93.0 特性选择矩阵](#rust-1930-特性选择矩阵)
-    - [特性组合决策](#特性组合决策)
-  - [🚀 性能优化决策](#-性能优化决策)
-    - [性能优化决策树](#性能优化决策树)
-    - [性能 vs 安全性权衡](#性能-vs-安全性权衡)
-  - [🛡️ 安全保证决策](#️-安全保证决策)
-    - [安全保证决策树](#安全保证决策树)
-    - [Rust 1.93.0 安全改进](#rust-1930-安全改进)
+  - [🔧 技术选型决策树](#-技术选型决策树)
+    - [集合类型选择](#集合类型选择)
+    - [错误处理策略选择](#错误处理策略选择)
+    - [并发模型选择](#并发模型选择)
+    - [序列化库选择](#序列化库选择)
+    - [Web框架选择](#web框架选择)
+    - [数据库访问选择](#数据库访问选择)
+  - [🐛 调试决策树](#-调试决策树)
+    - [编译错误调试](#编译错误调试)
+    - [运行时错误调试](#运行时错误调试)
+    - [性能问题调试](#性能问题调试)
+    - [内存问题调试](#内存问题调试)
+  - [⚡ 优化决策树](#-优化决策树)
+    - [CPU优化决策树](#cpu优化决策树)
+    - [内存优化决策树](#内存优化决策树)
+    - [I/O优化决策树](#io优化决策树)
+    - [编译优化决策树](#编译优化决策树)
+  - [📚 学习路径决策树](#-学习路径决策树)
+    - [新手学习路径](#新手学习路径)
+    - [有经验开发者路径](#有经验开发者路径)
+    - [专项技能提升路径](#专项技能提升路径)
   - [📊 决策矩阵总结](#-决策矩阵总结)
-    - [快速决策参考](#快速决策参考)
   - [🔗 相关文档](#-相关文档)
 
 ---
 
 ## 🎯 决策图网概述
-
-### 概念定义
 
 **决策图网 (Decision Graph Network)** 是一种结构化的决策支持工具，通过树状结构和图网络展示不同场景下的技术选择路径。
 
@@ -53,48 +57,45 @@
 3. **可追溯** - 决策路径清晰可追溯
 4. **可扩展** - 支持添加新的决策节点
 
-### 关系连接
-
-- **继承关系**: 决策图网 → 决策树 → 决策节点
-- **组合关系**: 决策图网 = 多个决策树 + 决策矩阵
-- **依赖关系**: 决策图网依赖技术知识库
-
 ### 应用场景
 
-决策图网是一种结构化的决策支持工具，通过树状结构展示不同场景下的技术选择路径，帮助开发者：
-
-1. **快速定位** - 根据需求快速找到合适的技术方案
-2. **避免错误** - 减少技术选型错误
-3. **优化性能** - 选择最优的性能方案
-4. **确保安全** - 选择最安全的内存管理方式
+- 快速定位合适的技术方案
+- 避免技术选型错误
+- 优化性能和安全性
+- 规划学习路径
 
 ---
 
 ## 🚀 核心决策流程
-
-### 决策流程总览
 
 ```mermaid
 graph TD
     Start[开始: 确定需求] --> Q1{需要处理未初始化内存?}
     Q1 -->|是| D1[使用 MaybeUninit]
     Q1 -->|否| Q2{需要访问联合体字段?}
-    Q2 -->|是| D2[使用原始引用]
-    Q2 -->|否| Q3{需要高性能迭代?}
-    Q3 -->|是| D3[使用特化迭代器]
-    Q3 -->|否| End[使用标准方案]
 
     D1 --> Check1{需要安全保证?}
     Check1 -->|是| Safe[SafeMaybeUninit 包装器]
     Check1 -->|否| Direct[直接使用 MaybeUninit]
 
+    Q2 -->|是| D2[使用原始引用]
+    Q2 -->|否| Q3{需要高性能迭代?}
+
     D2 --> Check2{需要可变访问?}
     Check2 -->|是| Mut[&raw mut]
     Check2 -->|否| Const[&raw const]
 
+    Q3 -->|是| D3[使用特化迭代器]
+    Q3 -->|否| End[使用标准方案]
+
     D3 --> Check3{需要相等比较?}
     Check3 -->|是| Eq[Iterator::eq]
     Check3 -->|否| Other[其他迭代器方法]
+
+    style Start fill:#e1f5ff
+    style D1 fill:#ffe1e1
+    style D2 fill:#ffe1e1
+    style D3 fill:#ffe1e1
 ```
 
 ---
@@ -103,125 +104,795 @@ graph TD
 
 ### 1. 所有权与借用决策树
 
-```text
-需要管理资源所有权？
-├── 是
-│   ├── 需要共享所有权？
-│   │   ├── 是 → 使用 Rc<T> (单线程) 或 Arc<T> (多线程)
-│   │   └── 否 → 使用 Box<T> 或直接所有权
-│   ├── 需要内部可变性？
-│   │   ├── 是 → 使用 Cell<T> 或 RefCell<T>
-│   │   └── 否 → 使用常规借用
-│   └── 需要处理未初始化内存？
-│       ├── 是 → 使用 MaybeUninit<T> (Rust 1.92)
-│       │   ├── 需要安全保证？ → SafeMaybeUninit 包装器
-│       │   └── 需要性能？ → 直接使用 MaybeUninit
-│       └── 否 → 使用常规初始化
-└── 否 → 使用借用 (&T 或 &mut T)
+```mermaid
+graph TD
+    Start[需要管理资源所有权？] -->|是| Q1{需要共享所有权？}
+    Start -->|否| Borrow[使用借用 &T/&mut T]
+    
+    Q1 -->|是| Q2{线程安全？}
+    Q1 -->|否| Q3{需要内部可变性？}
+    
+    Q2 -->|是| ArcType[Arc<T>]
+    Q2 -->|否| RcType[Rc<T>]
+    
+    ArcType --> Q4{需要可变？}
+    RcType --> Q5{需要可变？}
+    
+    Q4 -->|是| ArcMutex[Arc<Mutex<T>>]
+    Q4 -->|否| ArcOnly[Arc<T>]
+    
+    Q5 -->|是| RcRefCell[Rc<RefCell<T>>]
+    Q5 -->|否| RcOnly[Rc<T>]
+    
+    Q3 -->|是| Q6{单线程？}
+    Q3 -->|否| BoxType[Box<T>]
+    
+    Q6 -->|是| CellType{Copy类型？}
+    Q6 -->|否| MutexType[Mutex<T>]
+    
+    CellType -->|是| CellT[Cell<T>]
+    CellType -->|否| RefCellT[RefCell<T>]
+    
+    style Start fill:#e1f5ff
+    style ArcMutex fill:#e1ffe1
+    style RcRefCell fill:#e1ffe1
 ```
 
 ### 2. 类型系统决策树
 
-```text
-需要泛型编程？
-├── 是
-│   ├── 需要关联类型？
-│   │   ├── 是 → 使用关联类型 (Rust 1.92: 支持多边界)
-│   │   └── 否 → 使用泛型参数
-│   ├── 需要自动特征？
-│   │   ├── 是 → 利用 Rust 1.92 改进的自动特征处理
-│   │   └── 否 → 手动实现特征
-│   └── 需要零大小类型？
-│       ├── 是 → 利用 Rust 1.92 优化的零大小数组处理
-│       └── 否 → 使用常规类型
-└── 否 → 使用具体类型
+```mermaid
+graph TD
+    Start[需要泛型编程？] -->|是| Q1{需要关联类型？}
+    Start -->|否| Concrete[使用具体类型]
+    
+    Q1 -->|是| AssocType[使用关联类型]
+    Q1 -->|否| Q2{需要自动特征？}
+    
+    AssocType --> MultiBound[多边界: type Item: A + B + C]
+    
+    Q2 -->|是| AutoTrait[利用自动特征处理]
+    Q2 -->|否| Q3{需要零大小类型？}
+    
+    AutoTrait --> Infer[类型推断优化]
+    
+    Q3 -->|是| ZstOpt[零大小数组优化]
+    Q3 -->|否| GenericParam[泛型参数]
+    
+    style Start fill:#e1f5ff
+    style AssocType fill:#e1ffe1
 ```
 
 ### 3. 控制流决策树
 
-```text
-需要错误处理？
-├── 是
-│   ├── 错误可恢复？
-│   │   ├── 是 → 使用 Result<T, E>
-│   │   │   ├── Rust 1.92: Result<(), !> 不再警告
-│   │   │   └── 常规 Result<T, E>
-│   │   └── 否 → 使用 panic! 或 abort
-│   ├── 需要控制流？
-│   │   ├── 是 → 使用 ControlFlow<T, E>
-│   │   └── 否 → 使用 Result
-│   └── 需要 Never 类型？
-│       ├── 是 → 使用 ! (Rust 1.92: 更严格的 Lint)
-│       └── 否 → 使用常规类型
-└── 否 → 使用常规控制流
+```mermaid
+graph TD
+    Start[需要错误处理？] -->|是| Q1{错误可恢复？}
+    Start -->|否| Normal[常规控制流]
+    
+    Q1 -->|是| ResultType[Result<T, E>]
+    Q1 -->|否| PanicType{严重错误？}
+    
+    PanicType -->|是| Panic[panic!]
+    PanicType -->|否| Abort[process::abort]
+    
+    ResultType --> Q2{需要传播？}
+    ResultType --> Q3{需要控制流？}
+    
+    Q2 -->|是| Propagate[? 操作符]
+    Q2 -->|否| Handle[本地处理]
+    
+    Q3 -->|是| ControlFlow[ControlFlow<T, E>]
+    Q3 -->|否| Match[match处理]
+    
+    Propagate --> Chain[链式传播]
+    Handle --> MapErr[map_err转换]
+    
+    style Start fill:#e1f5ff
+    style ResultType fill:#e1ffe1
 ```
 
 ### 4. 异步编程决策树
 
-```text
-需要异步编程？
-├── 是
-│   ├── 需要并发执行？
-│   │   ├── 是 → 使用 tokio::spawn 或 async_std::task::spawn
-│   │   └── 否 → 使用单任务异步
-│   ├── 需要错误追踪？
-│   │   ├── 是 → 使用 #[track_caller] (Rust 1.92: 可与 #[no_mangle] 组合)
-│   │   └── 否 → 常规错误处理
-│   └── 需要性能优化？
-│       ├── 是 → 使用特化迭代器 (Rust 1.92)
-│       └── 否 → 使用标准迭代器
-└── 否 → 使用同步编程
+```mermaid
+graph TD
+    Start[需要异步编程？] -->|是| Q1{需要并发执行？}
+    Start -->|否| Sync[同步编程]
+    
+    Q1 -->|是| Concurrent[并发执行]
+    Q1 -->|否| Sequential[顺序执行]
+    
+    Concurrent --> Q2{CPU密集型？}
+    
+    Q2 -->|是| Blocking[spawn_blocking]
+    Q2 -->|否| AsyncSpawn[tokio::spawn]
+    
+    Sequential --> Q3{需要错误追踪？}
+    
+    Q3 -->|是| TrackCaller[#[track_caller]]
+    Q3 -->|否| NormalAsync[常规异步]
+    
+    TrackCaller --> Location[Location::caller]
+    
+    Concurrent --> Q4{需要性能优化？}
+    
+    Q4 -->|是| Specialization[特化迭代器]
+    Q4 -->|否| Standard[标准异步]
+    
+    style Start fill:#e1f5ff
+    style Concurrent fill:#e1ffe1
 ```
 
-### 5. Pin 使用场景决策树 🆕
+### 5. Pin 使用场景决策树
 
-> 用于判断何时用栈固定 vs 堆固定。详见 [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md#-pin堆栈区分使用场景的完整论证)。
-
-```text
-需要固定 T？
-├── T : Unpin？
-│   ├── 是 → 栈固定：Pin::new(&mut t)（零开销）
-│   └── 否 → 必须堆固定：Box::pin(t)（自引用，移动导致悬垂）
-├── 存储位置？
-│   ├── 栈上局部变量 → Pin::new（仅 Unpin）
-│   ├── 堆上分配 → Box::pin（任意 T）
-│   └── 集合/容器内 → Box::pin 或 Pin<Box<T>>
-└── 性能考量？
-    ├── 零开销优先 → 栈 + Unpin
-    └── 必须有自引用 → 堆固定（必要开销）
+```mermaid
+graph TD
+    Start[需要固定 T？] --> Q1{T : Unpin？}
+    
+    Q1 -->|是| StackPin[栈固定]
+    Q1 -->|否| HeapPin[堆固定]
+    
+    StackPin --> StackMethod[Pin::new(&mut t)]
+    StackPin --> ZeroCost[零开销]
+    
+    HeapPin --> BoxPin[Box::pin(t)]
+    HeapPin --> SelfRef[自引用结构]
+    
+    Start --> Q2{存储位置？}
+    
+    Q2 -->|栈上| StackOnly[仅 Unpin]
+    Q2 -->|堆上| HeapAny[任意 T]
+    Q2 -->|集合内| PinBox[Pin<Box<T>>]
+    
+    Start --> Q3{性能考量？}
+    
+    Q3 -->|零开销| StackPrefer[优先栈固定]
+    Q3 -->|必须自引用| AcceptHeap[接受堆分配]
+    
+    style Start fill:#e1f5ff
+    style StackPin fill:#e1ffe1
+    style HeapPin fill:#fff5e1
 ```
 
 ### 6. 表达能力边界决策树
 
-> 用于判断「何者可表达、何者不可表达」。详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
-
-```text
-需要表达 X？
-├── 内存管理
-│   ├── 单所有者 → ✅ 所有权
-│   ├── 共享只读 → ✅ 多不可变借用
-│   ├── 共享可变 → ❌ 安全子集不可（需 Mutex/Cell）
-│   └── 手动控制 → ⚠️ unsafe
-├── 类型多态
-│   ├── 编译时 → ✅ 泛型 + Trait
-│   ├── 运行时 → ✅ dyn Trait
-│   └── 依赖类型 → ⚠️ 受限 GAT
-├── 并发
-│   ├── 数据竞争自由 → ✅ Send/Sync + 借用
-│   └── 共享可变无锁 → ❌ 需 unsafe
-└── 异步
-    ├── 终将完成 → ✅ 有限 Future
-    └── 可能永久挂起 → ⚠️ 需超时/取消
+```mermaid
+graph TD
+    Start[需要表达 X？] --> Q1{内存管理}
+    Start --> Q2{类型多态}
+    Start --> Q3{并发}
+    Start --> Q4{异步}
+    
+    Q1 -->|单所有者| OwnOk[✅ 所有权]
+    Q1 -->|共享只读| SharedOk[✅ 多不可变借用]
+    Q1 -->|共享可变| SharedMut{安全子集？}
+    Q1 -->|手动控制| Manual[⚠️ unsafe]
+    
+    SharedMut -->|是| SyncMut[Mutex/RwLock]
+    SharedMut -->|否| UnsafeMut[❌ 需unsafe]
+    
+    Q2 -->|编译时| StaticPoly[✅ 泛型+Trait]
+    Q2 -->|运行时| DynamicPoly[✅ dyn Trait]
+    Q2 -->|依赖类型| DepType[⚠️ 受限GAT]
+    
+    Q3 -->|数据竞争自由| RaceFree[✅ Send/Sync+借用]
+    Q3 -->|无锁共享| LockFree{允许unsafe？}
+    
+    LockFree -->|是| Atomic[Atomic类型]
+    LockFree -->|否| NoLockFree[❌ 需unsafe]
+    
+    Q4 -->|终将完成| FiniteFuture[✅ 有限Future]
+    Q4 -->|可能永久挂起| Infinite[⚠️ 需超时/取消]
+    
+    style Start fill:#e1f5ff
+    style OwnOk fill:#e1ffe1
+    style UnsafeMut fill:#ffe1e1
 ```
 
 ---
 
-## ⚡ 特性选择决策
+## 🔧 技术选型决策树
 
-### Rust 1.93.0 特性选择矩阵
+### 集合类型选择
 
-| 需求场景 | 推荐特性 | 替代方案 | 性能影响 | 安全影响 |
-| :--- | :--- | :--- | :--- | :--- || 未初始化内存管理 | MaybeUninit<T> | unsafe 指针 | 零成本 | ✅ 类型安全 |
+```mermaid
+graph TD
+    Start[选择集合类型] --> Q1{有序性要求？}
+    
+    Q1 -->|需要排序| Sorted{唯一键？}
+    Q1 -->|无序| Unsorted{唯一键？}
+    
+    Sorted -->|是| BTreeSet[BTreeSet<T>]
+    Sorted -->|否| BTreeMap[BTreeMap<K, V>]
+    
+    Unsorted -->|是| HashSet[HashSet<T>]
+    Unsorted -->|否| HashMap[HashMap<K, V>]
+    
+    Start --> Q2{序列类型？}
+    
+    Q2 -->|固定大小| Array[数组 [T; N]]
+    Q2 -->|动态增长| VecType{双端操作？}
+    
+    VecType -->|频繁| VecDeque[VecDeque<T>]
+    VecType -->|偶尔| Vec[Vec<T>]
+    
+    Start --> Q3{优先级队列？}
+    Q3 -->|是| BinaryHeap[BinaryHeap<T>]
+    
+    Start --> Q4{链表？}
+    Q4 -->|频繁插入删除| LinkedList[LinkedList<T>]
+    
+    style Start fill:#e1f5ff
+    style Vec fill:#e1ffe1
+    style HashMap fill:#e1ffe1
+```
+
+### 错误处理策略选择
+
+```mermaid
+graph TD
+    Start[错误处理策略] --> Q1{错误类型？}
+    
+    Q1 -->|多种错误| Q2{转换成本？}
+    Q1 -->|单一错误| SingleErr[自定义Error类型]
+    
+    Q2 -->|低| ThisError[thiserror派生]
+    Q2 -->|高| Anyhow[anyhow动态错误]
+    
+    SingleErr --> EnumErr[枚举错误类型]
+    
+    Start --> Q3{传播层级？}
+    
+    Q3 -->|深层传播| Propagate[?操作符]
+    Q3 -->|本地处理| LocalHandle[match处理]
+    
+    Start --> Q4{应用类型？}
+    
+    Q4 -->|库| LibErr[标准Error trait]
+    Q4 -->|应用| AppErr[anyhow简化]
+    
+    Start --> Q5{需要上下文？}
+    Q5 -->|是| WithContext[.context方法]
+    
+    style Start fill:#e1f5ff
+    style Anyhow fill:#e1ffe1
+    style ThisError fill:#e1ffe1
+```
+
+### 并发模型选择
+
+```mermaid
+graph TD
+    Start[并发模型选择] --> Q1{共享状态？}
+    
+    Q1 -->|否| MessagePassing[消息传递]
+    Q1 -->|是| SharedState[共享状态]
+    
+    MessagePassing --> Q2{异步？}
+    
+    Q2 -->|是| AsyncChannel[异步通道]
+    Q2 -->|否| SyncChannel[同步通道]
+    
+    AsyncChannel --> TokioMpsc[tokio::sync::mpsc]
+    SyncChannel --> StdMpsc[std::sync::mpsc]
+    
+    SharedState --> Q3{读写比例？}
+    
+    Q3 -->|读多写少| RwLockType[RwLock<T>]
+    Q3 -->|读写均衡| MutexType[Mutex<T>]
+    
+    SharedState --> Q4{原子操作？}
+    Q4 -->|是| AtomicType[AtomicUsize等]
+    
+    Start --> Q5{任务并行？}
+    Q5 -->|是| Rayon[rayon并行迭代器]
+    
+    style Start fill:#e1f5ff
+    style TokioMpsc fill:#e1ffe1
+    style Rayon fill:#e1ffe1
+```
+
+### 序列化库选择
+
+```mermaid
+graph TD
+    Start[序列化库选择] --> Q1{数据格式？}
+    
+    Q1 -->|JSON| JsonLib{性能要求？}
+    Q1 -->|Binary| BinaryLib{紧凑性？}
+    Q1 -->|TOML| TomlLib[toml crate]
+    Q1 -->|YAML| YamlLib[serde_yaml]
+    
+    JsonLib -->|一般| SerdeJson[serde_json]
+    JsonLib -->|高性能| SimdJson[simd-json]
+    
+    BinaryLib -->|紧凑| Bincode[bincode]
+    BinaryLib -->|标准| Postcard[postcard]
+    BinaryLib -->|跨语言| Protobuf[prost/protobuf]
+    
+    Start --> Q2{派生宏？}
+    Q2 -->|是| SerdeDerive[#[derive(Serialize, Deserialize)]]
+    
+    Start --> Q3{自定义格式？}
+    Q3 -->|是| CustomSer[实现Serializer/Deserializer]
+    
+    style Start fill:#e1f5ff
+    style SerdeJson fill:#e1ffe1
+```
+
+### Web框架选择
+
+```mermaid
+graph TD
+    Start[Web框架选择] --> Q1{应用规模？}
+    
+    Q1 -->|小型/微服务| Lightweight[轻量级]
+    Q1 -->|中大型| FullFeatured[全功能]
+    
+    Lightweight --> Axum[axum]
+    Lightweight --> Actix[actix-web]
+    
+    FullFeatured --> Rocket[rocket]
+    FullFeatured --> ActixFull[actix-web]
+    
+    Start --> Q2{中间件需求？}
+    Q2 -->|复杂| TowerMiddleware[tower中间件]
+    
+    Start --> Q3{实时通信？}
+    Q3 -->|WebSocket| WsSupport{框架内置？}
+    
+    WsSupport -->|是| BuiltInWs[使用框架WebSocket]
+    WsSupport -->|否| Tungstenite[tokio-tungstenite]
+    
+    Start --> Q4{GraphQL？}
+    Q4 -->|是| AsyncGraphql[async-graphql]
+    
+    Start --> Q5{gRPC？}
+    Q5 -->|是| Tonic[tonic]
+    
+    style Start fill:#e1f5ff
+    style Axum fill:#e1ffe1
+    style Tonic fill:#e1ffe1
+```
+
+### 数据库访问选择
+
+```mermaid
+graph TD
+    Start[数据库访问选择] --> Q1{数据库类型？}
+    
+    Q1 -->|PostgreSQL| PgLib{异步？}
+    Q1 -->|MySQL| MySqlLib{异步？}
+    Q1 -->|SQLite| SqliteLib{异步？}
+    Q1 -->|NoSQL| NoSqlLib{类型？}
+    
+    PgLib -->|是| SqlxPg[sqlx]
+    PgLib -->|否| DieselPg[diesel]
+    
+    MySqlLib -->|是| SqlxMysql[sqlx]
+    MySqlLib -->|否| DieselMysql[diesel]
+    
+    SqliteLib -->|是| SqlxSqlite[sqlx]
+    SqliteLib -->|否| Rusqlite[rusqlite]
+    
+    NoSqlLib -->|Redis| RedisLib[redis crate]
+    NoSqlLib -->|MongoDB| MongoLib[mongodb crate]
+    
+    Start --> Q2{ORM需求？}
+    Q2 -->|强类型ORM| DieselOrm[diesel]
+    Q2 -->|查询构建器| SeaQuery[sea-query]
+    Q2 -->|轻量| SqlxQuery[sqlx]
+    
+    Start --> Q3{连接池？}
+    Q3 -->|是| Deadpool[deadpool]
+    
+    style Start fill:#e1f5ff
+    style SqlxPg fill:#e1ffe1
+    style DieselPg fill:#e1ffe1
+```
+
+---
+
+## 🐛 调试决策树
+
+### 编译错误调试
+
+```mermaid
+graph TD
+    Start[编译错误] --> Q1{错误类型？}
+    
+    Q1 -->|借用检查| BorrowErr[借用错误]
+    Q1 -->|生命周期| LifetimeErr[生命周期错误]
+    Q1 -->|类型不匹配| TypeErr[类型错误]
+    Q1 -->|未解析| UnresolvedErr[未解析错误]
+    
+    BorrowErr --> B1[检查借用规则]
+    BorrowErr --> B2{多重借用？}
+    B2 -->|是| SplitBorrow[拆分借用范围]
+    B2 -->|否| CloneOrRc[使用clone或Rc/Arc]
+    
+    LifetimeErr --> L1[显式生命周期标注]
+    LifetimeErr --> L2[检查引用有效性]
+    LifetimeErr --> L3{自引用？}
+    L3 -->|是| PinUse[使用Pin]
+    
+    TypeErr --> T1[检查trait实现]
+    TypeErr --> T2[使用类型注解]
+    TypeErr --> T3[检查泛型约束]
+    
+    UnresolvedErr --> U1[检查模块导入]
+    UnresolvedErr --> U2[检查Cargo.toml依赖]
+    UnresolvedErr --> U3[检查feature flag]
+    
+    style Start fill:#ffe1e1
+    style BorrowErr fill:#fff5e1
+```
+
+### 运行时错误调试
+
+```mermaid
+graph TD
+    Start[运行时错误] --> Q1{错误类型？}
+    
+    Q1 -->|panic| PanicErr[panic处理]
+    Q1 -->|unwrap失败| UnwrapErr[unwrap错误]
+    Q1 -->|越界| OobErr[越界访问]
+    Q1 -->|逻辑错误| LogicErr[逻辑错误]
+    
+    PanicErr --> P1[查看panic信息]
+    PanicErr --> P2[设置panic hook]
+    PanicErr --> P3[使用RUST_BACKTRACE=1]
+    
+    UnwrapErr --> U1[替换为match处理]
+    UnwrapErr --> U2[使用expect带消息]
+    UnwrapErr --> U3{可选值？}
+    U3 -->|是| OkOr[ok_or转换]
+    
+    OobErr --> O1[添加边界检查]
+    OobErr --> O2[使用get方法]
+    OobErr --> O3[检查索引计算]
+    
+    LogicErr --> L1[添加单元测试]
+    LogicErr --> L2[使用调试器]
+    LogicErr --> L3[添加日志追踪]
+    
+    style Start fill:#ffe1e1
+```
+
+### 性能问题调试
+
+```mermaid
+graph TD
+    Start[性能问题] --> Q1{问题类型？}
+    
+    Q1 -->|CPU占用高| CpuHigh[CPU优化]
+    Q1 -->|内存占用高| MemHigh[内存优化]
+    Q1 -->|响应慢| Slow[响应优化]
+    
+    CpuHigh --> C1[使用cargo flamegraph]
+    CpuHigh --> C2[检查算法复杂度]
+    CpuHigh --> C3[使用perf分析]
+    
+    MemHigh --> M1[使用heaptrack]
+    MemHigh --> M2[检查内存泄漏]
+    MemHigh --> M3[优化数据结构]
+    
+    Slow --> S1[使用tracing分析]
+    Slow --> S2[检查I/O阻塞]
+    Slow --> S3[检查锁竞争]
+    
+    Start --> Q2{并发问题？}
+    Q2 -->|是| ConcurrentIssue[并发分析]
+    ConcurrentIssue --> Con1[检查死锁]
+    ConcurrentIssue --> Con2[检查活锁]
+    ConcurrentIssue --> Con3[减少锁粒度]
+    
+    style Start fill:#fff5e1
+```
+
+### 内存问题调试
+
+```mermaid
+graph TD
+    Start[内存问题] --> Q1{问题类型？}
+    
+    Q1 -->|内存泄漏| Leak[内存泄漏]
+    Q1 -->|双重释放| DoubleFree[双重释放]
+    Q1 -->|使用已释放| UseAfterFree[使用已释放]
+    Q1 -->|越界访问| OobAccess[越界访问]
+    
+    Leak --> L1[使用valgrind]
+    Leak --> L2[检查Rc/Arc循环引用]
+    Leak --> L3[检查Box::leak]
+    
+    DoubleFree --> D1[检查Drop实现]
+    DoubleFree --> D2[使用MIRI检测]
+    
+    UseAfterFree --> U1[检查生命周期]
+    UseAfterFree --> U2[避免unsafe代码]
+    UseAfterFree --> U3[使用MIRI]
+    
+    OobAccess --> O1[使用边界检查方法]
+    OobAccess --> O2[检查slice索引]
+    
+    Start --> Q2{unsafe代码？}
+    Q2 -->|是| UnsafeCheck[unsafe检查]
+    UnsafeCheck --> Un1[审查unsafe块]
+    UnsafeCheck --> Un2[使用MIRI验证]
+    
+    style Start fill:#ffe1e1
+```
+
+---
+
+## ⚡ 优化决策树
+
+### CPU优化决策树
+
+```mermaid
+graph TD
+    Start[CPU优化] --> Q1{瓶颈类型？}
+    
+    Q1 -->|算法| Algorithm[算法优化]
+    Q1 -->|并行| Parallel[并行优化]
+    Q1 -->|数据布局| Layout[数据布局优化]
+    
+    Algorithm --> A1[选择更好算法]
+    Algorithm --> A2[减少复杂度]
+    Algorithm --> A3[使用标准库优化]
+    
+    Parallel --> P1[使用rayon]
+    Parallel --> P2[多线程spawn]
+    Parallel --> P3{CPU密集型？}
+    P3 -->|是| SpawnBlocking[spawn_blocking]
+    
+    Layout --> L1[结构体字段重排]
+    Layout --> L2[缓存行对齐]
+    Layout --> L3[避免false sharing]
+    
+    Start --> Q2{向量化？}
+    Q2 -->|是| Simd[使用SIMD]
+    Simd --> Simd1[std::simd]
+    Simd --> Simd2[packed_simd]
+    
+    Start --> Q3{热点函数？}
+    Q3 -->|是| Inline[#[inline]]
+    
+    style Start fill:#e1f5ff
+    style Algorithm fill:#e1ffe1
+```
+
+### 内存优化决策树
+
+```mermaid
+graph TD
+    Start[内存优化] --> Q1{优化目标？}
+    
+    Q1 -->|减少分配| ReduceAlloc[减少分配]
+    Q1 -->|减少占用| ReduceSize[减少占用]
+    Q1 -->|提高局部性| Locality[缓存局部性]
+    
+    ReduceAlloc --> RA1[对象池]
+    ReduceAlloc --> RA2[arena分配器]
+    ReduceAlloc --> RA3[重用缓冲区]
+    ReduceAlloc --> RA4[避免clone]
+    
+    ReduceSize --> RS1[使用&str代替String]
+    ReduceSize --> RS2[使用&[T]代替Vec]
+    ReduceSize --> RS3[压缩枚举]
+    
+    Locality --> L1[连续内存布局]
+    Locality --> L2[AoS vs SoA]
+    Locality --> L3[预取数据]
+    
+    Start --> Q2{栈vs堆？}
+    Q2 -->|尽量栈| StackAlloc[栈分配]
+    
+    Start --> Q3{大数组？}
+    Q3 -->|是| BoxSlice[Box<[T]>]
+    
+    style Start fill:#e1f5ff
+    style ReduceAlloc fill:#e1ffe1
+```
+
+### I/O优化决策树
+
+```mermaid
+graph TD
+    Start[I/O优化] --> Q1{I/O类型？}
+    
+    Q1 -->|文件| FileIO[文件I/O优化]
+    Q1 -->|网络| NetIO[网络I/O优化]
+    
+    FileIO --> F1[使用 BufReader/BufWriter]
+    FileIO --> F2[异步文件I/O]
+    FileIO --> F3[内存映射 mmap]
+    
+    NetIO --> N1[使用异步运行时]
+    NetIO --> N2[连接池化]
+    NetIO --> N3[批量操作]
+    NetIO --> N4[零拷贝 sendfile]
+    
+    Start --> Q2{序列化？}
+    Q2 -->|是| SerOpt[序列化优化]
+    SerOpt --> Ser1[使用二进制格式]
+    SerOpt --> Ser2[零拷贝反序列化]
+    
+    Start --> Q3{压缩？}
+    Q3 -->|是| Compress[压缩优化]
+    Compress --> Comp1[zstd压缩]
+    Compress --> Comp2[lz4快速压缩]
+    
+    style Start fill:#e1f5ff
+    style FileIO fill:#e1ffe1
+```
+
+### 编译优化决策树
+
+```mermaid
+graph TD
+    Start[编译优化] --> Q1{优化目标？}
+    
+    Q1 -->|发布优化| Release[Release模式]
+    Q1 -->|二进制大小| BinarySize[大小优化]
+    Q1 -->|编译速度| CompileSpeed[编译速度]
+    
+    Release --> R1[--release]
+    Release --> R2[LTO]
+    Release --> R3[codegen-units=1]
+    Release --> R4[target-cpu=native]
+    
+    BinarySize --> B1[opt-level=z]
+    BinarySize --> B2[strip symbols]
+    BinarySize --> B3[panic=abort]
+    BinarySize --> B4[min-sized-rust]
+    
+    CompileSpeed --> C1[增量编译]
+    CompileSpeed --> C2[并行编译]
+    CompileSpeed --> C3[sccache]
+    
+    Start --> Q2{链接优化？}
+    Q2 -->|是| LinkOpt[链接优化]
+    LinkOpt --> L1[LLD链接器]
+    LinkOpt --> L2[mold链接器]
+    
+    style Start fill:#e1f5ff
+    style Release fill:#e1ffe1
+```
+
+---
+
+## 📚 学习路径决策树
+
+### 新手学习路径
+
+```mermaid
+graph TD
+    Start[新手学习Rust] --> Q1{编程基础？}
+    
+    Q1 -->|完全新手| AbsoluteBeginner[零基础路径]
+    Q1 -->|有编程经验| SomeExp[有经验路径]
+    
+    AbsoluteBeginner --> AB1[学习基础概念]
+    AB1 --> AB2[变量和数据类型]
+    AB2 --> AB3[控制流]
+    AB3 --> AB4[函数]
+    AB4 --> AB5[模块系统]
+    
+    SomeExp --> SE1[所有权和借用]
+    SE1 --> SE2[生命周期]
+    SE2 --> SE3[结构体和枚举]
+    SE3 --> SE4[模式匹配]
+    
+    AB5 --> CoreConcepts[核心概念]
+    SE4 --> CoreConcepts
+    
+    CoreConcepts --> CC1[深入所有权]
+    CoreConcepts --> CC2[泛型]
+    CoreConcepts --> CC3[Trait系统]
+    
+    CC3 --> Advanced[高级主题]
+    Advanced --> A1[并发编程]
+    Advanced --> A2[异步编程]
+    Advanced --> A3[宏和元编程]
+    Advanced --> A4[unsafe Rust]
+    
+    style Start fill:#e1f5ff
+    style CoreConcepts fill:#e1ffe1
+    style Advanced fill:#fff5e1
+```
+
+### 有经验开发者路径
+
+```mermaid
+graph TD
+    Start[有经验开发者] --> Q1{来自哪种语言？}
+    
+    Q1 -->|C/C++| FromCpp[C++迁移路径]
+    Q1 -->|Java/Go| FromGc[GC语言迁移]
+    Q1 -->|Python/JS| FromDynamic[动态语言迁移]
+    Q1 -->|Haskell/Scala| FromFp[函数式迁移]
+    
+    FromCpp --> Cpp1[所有权vs指针]
+    FromCpp --> Cpp2[借用vs引用]
+    FromCpp --> Cpp3[生命周期vsRAII]
+    FromCpp --> Cpp4[无NULL指针]
+    
+    FromGc --> Gc1[所有权和借用]
+    Gc1 --> Gc2[编译时错误处理]
+    Gc2 --> Gc3[无GC内存管理]
+    
+    FromDynamic --> Dyn1[静态类型系统]
+    Dyn1 --> Dyn2[所有权和借用]
+    Dyn2 --> Dyn3[错误处理差异]
+    
+    FromFp --> Fp1[模式匹配]
+    Fp1 --> Fp2[代数数据类型]
+    Fp2 --> Fp3[迭代器和闭包]
+    
+    Cpp4 --> CommonCore[共同核心]
+    Gc3 --> CommonCore
+    Dyn3 --> CommonCore
+    Fp3 --> CommonCore
+    
+    CommonCore --> Core1[深入Trait系统]
+    CommonCore --> Core2[生命周期高级主题]
+    CommonCore --> Core3[并发和异步]
+    
+    style Start fill:#e1f5ff
+    style CommonCore fill:#e1ffe1
+```
+
+### 专项技能提升路径
+
+```mermaid
+graph TD
+    Start[专项技能提升] --> Q1{提升方向？}
+    
+    Q1 -->|系统编程| Systems[系统编程路径]
+    Q1 -->|Web开发| WebDev[Web开发路径]
+    Q1 -->|嵌入式| Embedded[嵌入式路径]
+    Q1 -->|性能优化| Perf[性能优化路径]
+    Q1 -->|形式化方法| Formal[形式化方法路径]
+    
+    Systems --> Sys1[unsafe Rust]
+    Systems --> Sys2[FFI和C互操作]
+    Systems --> Sys3[内存布局控制]
+    Systems --> Sys4[系统调用]
+    
+    WebDev --> Web1[Tokio异步运行时]
+    WebDev --> Web2[Web框架axum/actix]
+    WebDev --> Web3[数据库访问]
+    WebDev --> Web4[部署和运维]
+    
+    Embedded --> Emb1[no_std开发]
+    Embedded --> Emb2[嵌入式HAL]
+    Embedded --> Emb3[RTIC框架]
+    Embedded --> Emb4[裸机编程]
+    
+    Perf --> Perf1[分析和测量]
+    Perf --> Perf2[算法优化]
+    Perf --> Perf3[内存布局优化]
+    Perf --> Perf4[并发优化]
+    
+    Formal --> For1[类型系统理论]
+    Formal --> For2[分离逻辑]
+    Formal --> For3[MIRI验证]
+    Formal --> For4[证明工具Coq/Aeneas]
+    
+    style Start fill:#e1f5ff
+    style Systems fill:#e1ffe1
+    style WebDev fill:#e1ffe1
+```
+
+---
+
+## 📊 决策矩阵总结
+
+### 快速决策参考
+
+| 需求场景 | Rust 1.93 推荐方案 | 替代方案 | 性能影响 | 安全影响 |
+| :--- | :--- | :--- | :--- | :--- |
+| 未初始化内存管理 | MaybeUninit<T> | unsafe 指针 | 零成本 | ✅ 类型安全 |
 | 联合体字段访问 | &raw const/mut | unsafe 转换 | 零成本 | ✅ 安全访问 |
 | 关联类型多边界 | type Item: A + B + C | where 子句 | 零成本 | ✅ 类型安全 |
 | 零大小数组 | [T; 0] 优化 | PhantomData | 零成本 | ✅ 类型安全 |
@@ -230,355 +901,9 @@ graph TD
 | 迭代器比较 | Iterator::eq | 手动循环 | 性能提升 | ✅ 安全 |
 | 切片旋转 | rotate_right | 手动实现 | 性能提升 | ✅ 安全 |
 
-### 特性组合决策
-
-```text
-需要多个特性组合？
-├── 是
-│   ├── 未初始化内存 + 调用追踪
-│   │   └── → MaybeUninit + #[track_caller]
-│   ├── 联合体访问 + 零大小优化
-│   │   └── → &raw const + [T; 0]
-│   └── 关联类型 + 自动特征
-│       └── → type Item: A + B + C (Rust 1.92)
-└── 否 → 使用单一特性
-```
-
 ---
 
-## 🚀 性能优化决策
-
-### 性能优化决策树
-
-```text
-需要性能优化？
-├── 是
-│   ├── 迭代器性能？
-│   │   ├── 是 → 使用 TrustedLen 迭代器 + Iterator::eq (Rust 1.92)
-│   │   └── 否 → 使用标准迭代器
-│   ├── 内存布局优化？
-│   │   ├── 是 → 使用零大小数组优化 (Rust 1.92)
-│   │   └── 否 → 使用常规布局
-│   ├── 元组操作性能？
-│   │   ├── 是 → 使用简化的元组扩展 (Rust 1.92)
-│   │   └── 否 → 使用常规元组
-│   └── 字符串编码性能？
-│       ├── 是 → 使用增强的 EncodeWide Debug (Rust 1.92)
-│       └── 否 → 使用标准编码
-└── 否 → 使用标准实现
-```
-
-### 性能 vs 安全性权衡
-
-| 场景 | 高性能方案 | 高安全方案 | 推荐方案 (Rust 1.92) |
-| :--- | :--- | :--- | :--- || 未初始化内存 | unsafe 指针 | SafeMaybeUninit | ✅ MaybeUninit (零成本抽象) |
-| 联合体访问 | unsafe 转换 | &raw const/mut | ✅ &raw const/mut (安全且零成本) |
-| 迭代器比较 | 手动循环 | Iterator::eq | ✅ Iterator::eq (特化优化) |
-| 切片旋转 | 手动实现 | rotate_right | ✅ rotate_right (标准库优化) |
-
----
-
-## 🛡️ 安全保证决策
-
-### 安全保证决策树
-
-```text
-需要内存安全保证？
-├── 是
-│   ├── 需要防止悬垂指针？
-│   │   ├── 是 → 使用生命周期标注 + Rust 1.92 增强的高阶生命周期
-│   │   └── 否 → 使用常规引用
-│   ├── 需要防止双重释放？
-│   │   ├── 是 → 使用所有权系统 + Drop trait
-│   │   └── 否 → 使用借用系统
-│   ├── 需要防止未初始化访问？
-│   │   ├── 是 → 使用 MaybeUninit + 有效性检查 (Rust 1.92)
-│   │   └── 否 → 使用常规初始化
-│   └── 需要防止数据竞争？
-│       ├── 是 → 使用 Send + Sync + Arc/Mutex
-│       └── 否 → 使用单线程方案
-└── 否 → 使用 unsafe 代码 (需谨慎)
-```
-
-### Rust 1.93.0 安全改进
-
-| 安全特性 | Rust 1.90 | Rust 1.91 | Rust 1.92 | 改进说明 |
-| :--- | :--- | :--- | :--- | :--- || MaybeUninit 文档化 | ⚠️ 部分 | ⚠️ 部分 | ✅ 完整 | 明确有效性约束 |
-| 联合体原始引用 | ❌ | ❌ | ✅ 新增 | 安全访问联合体字段 |
-| Never 类型 Lint | ⚠️ 警告 | ⚠️ 警告 | ✅ 拒绝 | 更严格的类型检查 |
-| 高阶生命周期 | ⚠️ 基础 | ⚠️ 基础 | ✅ 增强 | 更强的一致性规则 |
-
----
-
-## 📊 决策矩阵总结
-
-### 快速决策参考
-
-| 需求 | Rust 1.92 推荐方案 | 模块 | 优先级 |
-| :--- | :--- | :--- | :--- || 未初始化内存 | MaybeUninit<T> | c01, c02, c07 | ⭐⭐⭐⭐⭐ |
-| 联合体访问 | &raw const/mut | c01, c02 | ⭐⭐⭐⭐ |
-| 关联类型多边界 | type Item: A + B + C | c02, c04 | ⭐⭐⭐⭐ |
-| 零大小数组 | [T; 0] 优化 | c01, c02, c08 | ⭐⭐⭐ |
-| 调用追踪 | #[track_caller] | c01, c03, c11 | ⭐⭐⭐ |
-| 迭代器优化 | Iterator::eq 特化 | c03, c08 | ⭐⭐⭐⭐ |
-| 切片旋转 | rotate_right | c02, c08 | ⭐⭐⭐ |
-| Never 类型 | ! 类型 + 严格 Lint | c01, c03 | ⭐⭐⭐ |
-
----
-
-## 💻 代码示例
-
-### 示例 1: 决策树枚举实现
-
-```rust
-/// 所有权决策树节点
-#[derive(Debug, Clone)]
-enum OwnershipDecision {
-    // 是否需要共享所有权？
-    NeedSharedOwnership {
-        thread_safe: bool,
-    },
-    // 是否需要内部可变性？
-    NeedInteriorMutability {
-        use_cell: bool,  // true: Cell, false: RefCell
-    },
-    // 是否处理未初始化内存？
-    NeedUninitialized {
-        need_safety: bool,
-    },
-    // 最终决策
-    Decision(String),
-}
-
-/// 决策引擎
-struct DecisionEngine;
-
-impl DecisionEngine {
-    /// 所有权与借用决策树
-    fn ownership_decision(need_shared: bool, thread_safe: bool, need_mut: bool) -> String {
-        if need_shared {
-            if thread_safe {
-                if need_mut {
-                    "Arc<Mutex<T>> - 跨线程共享可变".to_string()
-                } else {
-                    "Arc<T> - 跨线程共享只读".to_string()
-                }
-            } else {
-                if need_mut {
-                    "Rc<RefCell<T>> - 单线程共享可变".to_string()
-                } else {
-                    "Rc<T> - 单线程共享只读".to_string()
-                }
-            }
-        } else {
-            if need_mut {
-                "Box<T> + 可变引用 - 独占可变".to_string()
-            } else {
-                "Box<T> - 独占所有权".to_string()
-            }
-        }
-    }
-    
-    /// Pin 使用决策树
-    fn pin_decision<T>(is_unpin: bool, storage: PinStorage) -> String {
-        match (is_unpin, storage) {
-            (true, PinStorage::Stack) => {
-                "Pin::new(&mut t) - 栈固定，零开销".to_string()
-            }
-            (false, PinStorage::Stack) => {
-                "❌ 编译错误：非 Unpin 类型不能栈固定".to_string()
-            }
-            (_, PinStorage::Heap) => {
-                "Box::pin(t) - 堆固定，适用于自引用".to_string()
-            }
-            (_, PinStorage::Collection) => {
-                "Pin<Box<T>> - 集合内固定".to_string()
-            }
-        }
-    }
-}
-
-#[derive(Debug, Clone, Copy)]
-enum PinStorage {
-    Stack,
-    Heap,
-    Collection,
-}
-
-fn main() {
-    // 示例 1: 选择智能指针
-    let decision1 = DecisionEngine::ownership_decision(true, true, true);
-    println!("智能指针选择: {}", decision1);
-    // 输出: Arc<Mutex<T>> - 跨线程共享可变
-    
-    // 示例 2: Pin 决策
-    let decision2 = DecisionEngine::pin_decision::<i32>(true, PinStorage::Stack);
-    println!("Pin 选择: {}", decision2);
-    // 输出: Pin::new(&mut t) - 栈固定，零开销
-}
-```
-
-### 示例 2: 异步编程决策实现
-
-```rust
-use std::future::Future;
-use std::pin::Pin;
-use std::task::{Context, Poll};
-
-/// 异步运行时选择决策
-#[derive(Debug)]
-enum AsyncRuntime {
-    Tokio,      // 多线程，功能丰富
-    AsyncStd,   // 标准库风格
-    Smol,       // 轻量级
-}
-
-/// 异步决策引擎
-struct AsyncDecisionEngine;
-
-impl AsyncDecisionEngine {
-    /// 根据需求选择异步运行时
-    fn choose_runtime(
-        need_concurrency: bool,
-        need_error_tracking: bool,
-        performance_critical: bool,
-    ) -> AsyncRuntime {
-        match (need_concurrency, need_error_tracking, performance_critical) {
-            (true, _, false) => AsyncRuntime::Tokio,
-            (false, true, _) => AsyncRuntime::Tokio,  // track_caller 支持
-            (_, _, true) => AsyncRuntime::Smol,
-            _ => AsyncRuntime::AsyncStd,
-        }
-    }
-    
-    /// 并发模式决策
-    fn concurrency_pattern(cpu_bound: bool, need_shared_state: bool) -> &'static str {
-        match (cpu_bound, need_shared_state) {
-            (true, false) => "使用 tokio::task::spawn_blocking 运行 CPU 密集型任务",
-            (true, true) => "使用 rayon 进行并行计算",
-            (false, true) => "使用 tokio::sync::Mutex/RwLock",
-            (false, false) => "使用消息通道 tokio::sync::mpsc",
-        }
-    }
-}
-
-/// 特化迭代器使用决策
-fn iterator_optimization_decision<T: Iterator>(
-    iter: T,
-    compare_with: Option<T>,
-) -> impl Iterator<Item = T::Item> {
-    // 决策：如果需要比较，使用特化的 eq 方法
-    if let Some(other) = compare_with {
-        // Rust 1.93+ 使用 Iterator::eq 特化实现
-        // iter.eq(other)  // 返回 bool
-    }
-    iter
-}
-```
-
-### 示例 3: 性能 vs 安全性权衡决策
-
-```rust
-/// 性能与安全性决策矩阵
-#[derive(Debug)]
-struct TradeOffDecision {
-    scenario: &'static str,
-    high_perf_option: &'static str,
-    high_safety_option: &'static str,
-    recommended: &'static str,
-}
-
-fn get_rust193_tradeoffs() -> Vec<TradeOffDecision> {
-    vec![
-        TradeOffDecision {
-            scenario: "未初始化内存",
-            high_perf_option: "unsafe 指针",
-            high_safety_option: "SafeMaybeUninit 包装器",
-            recommended: "MaybeUninit (零成本抽象)",
-        },
-        TradeOffDecision {
-            scenario: "联合体访问",
-            high_perf_option: "unsafe 转换",
-            high_safety_option: "边界检查包装",
-            recommended: "&raw const/mut (安全且零成本)",
-        },
-        TradeOffDecision {
-            scenario: "迭代器比较",
-            high_perf_option: "手动 SIMD 循环",
-            high_safety_option: "逐元素比较",
-            recommended: "Iterator::eq (特化优化)",
-        },
-    ]
-}
-
-/// 决策验证器 - 确保决策符合 Rust 安全原则
-fn verify_decision_safety(decision: &TradeOffDecision) -> bool {
-    // 检查：推荐方案不应是纯 unsafe
-    let is_safe = !decision.recommended.contains("unsafe");
-    
-    // 检查：推荐方案应平衡性能和安全
-    let is_balanced = decision.recommended.contains("零成本") 
-        || decision.recommended.contains("特化")
-        || decision.recommended.contains("安全");
-    
-    is_safe && is_balanced
-}
-
-fn print_tradeoff_analysis() {
-    let tradeoffs = get_rust193_tradeoffs();
-    
-    println!("## Rust 1.93.0 性能 vs 安全性决策矩阵\n");
-    
-    for decision in tradeoffs {
-        let safe = verify_decision_safety(&decision);
-        println!("### {}", decision.scenario);
-        println!("- 高性能方案: {}", decision.high_perf_option);
-        println!("- 高安全方案: {}", decision.high_safety_option);
-        println!("- ✅ 推荐: {}", decision.recommended);
-        println!("- 安全验证: {}\n", if safe { "通过 ✓" } else { "需审查 ⚠" });
-    }
-}
-```
-
-## 🎯 使用场景
-
-### 何时使用决策图网
-
-| 场景 | 决策节点 | 输出 |
-| :--- | :--- | :--- |
-| **智能指针选择** | 所有权与借用决策树 | 最优指针类型 |
-| **Pin 使用** | Pin 使用场景决策树 | 栈固定 vs 堆固定 |
-| **异步运行时** | 异步编程决策树 | Tokio/async-std/Smol |
-| **性能优化** | 性能优化决策树 | 特化/优化方案 |
-| **安全保证** | 安全保证决策树 | 防护机制组合 |
-| **技术选型** | 表达能力边界决策树 | 可行/不可行/需 unsafe |
-
-### 决策流程集成
-
-```rust
-/// 在项目中的决策集成示例
-fn project_decision_workflow() {
-    // 1. 分析需求
-    let need_thread_safe = true;
-    let need_shared = true;
-    
-    // 2. 应用决策树
-    let smart_ptr = DecisionEngine::ownership_decision(
-        need_shared, 
-        need_thread_safe, 
-        true
-    );
-    
-    // 3. 验证安全性
-    println!("选定方案: {}", smart_ptr);
-    println!("安全验证: 通过借用检查器 ✓");
-    
-    // 4. 生成文档
-    println!("文档: 使用 Arc<Mutex<T>> 实现跨线程共享状态");
-}
-```
-
-## 🔗 形式化链接
+## 🔗 相关文档
 
 ### 设计机制论证
 
@@ -595,11 +920,14 @@ fn project_decision_workflow() {
 - [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网详细文档
 - [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
 
-### 版本文档
+### 相关文档
 
-- [RUST_192 版本文档](../archive/version_reports/RUST_192_VERIFICATION_SUMMARY.md)
+- [THINKING_REPRESENTATION_METHODS.md](./THINKING_REPRESENTATION_METHODS.md) - 思维表征方式
+- [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) - 思维导图集合
 
 ---
 
-**最后更新**: 2026-02-15
+**最后更新**: 2026-02-20
 **状态**: ✅ 已完成
+**决策树总数**: 20个
+**覆盖领域**: 技术选型、调试、优化、学习路径、模块化决策

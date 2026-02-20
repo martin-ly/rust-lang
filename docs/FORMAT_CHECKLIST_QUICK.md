@@ -137,7 +137,7 @@ impl DocMeta {
             rust_version: None,
             status: None,
         };
-        
+
         for line in content.lines() {
             if line.contains("**创建日期**:") {
                 meta.created_date = extract_value(line);
@@ -149,14 +149,14 @@ impl DocMeta {
                 meta.status = extract_value(line);
             }
         }
-        
+
         meta
     }
-    
+
     fn is_complete(&self) -> bool {
-        self.created_date.is_some() 
+        self.created_date.is_some()
             && self.last_updated.is_some()
-            && self.rust_version.is_some() 
+            && self.rust_version.is_some()
             && self.status.is_some()
     }
 }
@@ -168,28 +168,28 @@ fn extract_value(line: &str) -> Option<String> {
 fn check_docs_format(docs_path: &str) -> Result<(), Box<dyn std::error::Error>> {
     let mut total = 0;
     let mut incomplete = 0;
-    
+
     for entry in fs::read_dir(docs_path)? {
         let entry = entry?;
         let path = entry.path();
-        
+
         if path.extension().map_or(false, |e| e == "md") {
             total += 1;
             let content = fs::read_to_string(&path)?;
             let meta = DocMeta::parse_from_content(&content);
-            
+
             if !meta.is_complete() {
                 incomplete += 1;
                 println!("⚠️  {} 格式不完整", path.display());
             }
         }
     }
-    
+
     println!("\n========== 检查完成 ==========");
     println!("总文件数: {}", total);
     println!("格式完整: {}", total - incomplete);
     println!("格式不完整: {}", incomplete);
-    
+
     Ok(())
 }
 
@@ -197,7 +197,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let docs_path = std::env::args()
         .nth(1)
         .unwrap_or_else(|| "docs".to_string());
-    
+
     println!("📋 检查文档格式: {}", docs_path);
     check_docs_format(&docs_path)
 }

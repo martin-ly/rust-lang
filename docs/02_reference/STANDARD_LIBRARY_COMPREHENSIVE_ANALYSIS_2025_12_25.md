@@ -84,6 +84,13 @@
       - [实践 1: 优先使用标准库](#实践-1-优先使用标准库)
       - [实践 2: 充分利用标准库特性](#实践-2-充分利用标准库特性)
       - [实践 3: 理解标准库的实现](#实践-3-理解标准库的实现)
+  - [💻 代码示例](#-代码示例)
+    - [示例: 标准库类型安全验证](#示例-标准库类型安全验证)
+    - [示例: 标准库内存安全验证](#示例-标准库内存安全验证)
+  - [🔗 形式化链接](#-形式化链接)
+    - [标准库与形式化定理](#标准库与形式化定理)
+    - [研究笔记链接](#研究笔记链接)
+    - [项目文档](#项目文档)
   - [📚 相关文档](#-相关文档)
 
 ---
@@ -1201,6 +1208,108 @@ let mut map = HashMap::with_capacity(100);  // 预分配容量
 
 ---
 
+## 💻 代码示例
+
+### 示例: 标准库类型安全验证
+
+```rust
+// 研究场景：验证标准库的类型安全保证
+// 对应：类型系统定理 T-TY3
+
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
+
+fn verify_type_safety() {
+    // 类型安全保证：HashMap 的键和值类型在编译时确定
+    let mut map: HashMap<String, i32> = HashMap::new();
+    map.insert("key".to_string(), 42);
+
+    // 以下代码编译错误：类型不匹配
+    // map.insert(123, "value");  // 编译错误
+
+    // 类型安全保证：Mutex 保护的数据类型在编译时确定
+    let data: Arc<Mutex<Vec<i32>>> = Arc::new(Mutex::new(vec![1, 2, 3]));
+
+    // 类型系统确保线程间共享数据的安全性
+    let data_clone = Arc::clone(&data);
+    std::thread::spawn(move || {
+        let mut vec = data_clone.lock().unwrap();
+        vec.push(4);
+    });
+
+    println!("类型安全验证通过");
+}
+
+fn main() {
+    verify_type_safety();
+}
+```
+
+### 示例: 标准库内存安全验证
+
+```rust
+// 研究场景：验证标准库的内存安全保证
+// 对应：所有权定理 T-OW2、借用定理 T-BR1
+
+use std::mem::MaybeUninit;
+
+fn verify_memory_safety() {
+    // Vec 自动管理内存，无需手动释放
+    {
+        let vec = vec![1, 2, 3];
+        // vec 离开作用域时自动释放内存
+    } // 内存自动释放
+
+    // 借用检查器确保不会出现数据竞争
+    let vec = vec![1, 2, 3];
+    let slice = &vec[..];  // 不可变借用
+    // vec.push(4);  // 编译错误：不能在借用时修改
+
+    // MaybeUninit 的安全抽象
+    let mut uninit: MaybeUninit<String> = MaybeUninit::uninit();
+    uninit.write("hello".to_string());
+    let value = unsafe { uninit.assume_init() };
+    println!("内存安全验证通过: {}", value);
+}
+
+fn main() {
+    verify_memory_safety();
+}
+```
+
+---
+
+## 🔗 形式化链接
+
+### 标准库与形式化定理
+
+| 标准库组件 | 形式化定理 | 安全保证 |
+| :--- | :--- | :--- |
+| `Vec<T>` | T-OW2, T-OW3 | 所有权唯一性、内存安全 |
+| `HashMap<K, V>` | T-TY1, T-TY3 | 类型安全 |
+| `Mutex<T>` | T-BR1 | 数据竞争自由 |
+| `Arc<T>` | T-OW1 | 共享所有权安全 |
+| `String` | T-TY3 | 类型安全、UTF-8 有效性 |
+
+### 研究笔记链接
+
+| 文档 | 链接 | 内容 |
+| :--- | :--- | :--- |
+| 形式化方法 | [../docs/research_notes/formal_methods/ownership_model.md](../docs/research_notes/formal_methods/ownership_model.md) | 所有权模型 |
+| 借用检查器 | [../docs/research_notes/formal_methods/borrow_checker_proof.md](../docs/research_notes/formal_methods/borrow_checker_proof.md) | 借用检查器证明 |
+| 类型系统 | [../docs/research_notes/type_theory/type_system_foundations.md](../docs/research_notes/type_theory/type_system_foundations.md) | 类型系统基础 |
+| 核心定理 | [../docs/research_notes/CORE_THEOREMS_FULL_PROOFS.md](../docs/research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 完整定理证明 |
+
+### 项目文档
+
+| 文档 | 链接 | 内容 |
+| :--- | :--- | :--- |
+| 研究笔记系统 | [../docs/research_notes/SYSTEM_SUMMARY.md](../docs/research_notes/SYSTEM_SUMMARY.md) | 系统总结 |
+| 增量更新流程 | [../docs/research_notes/INCREMENTAL_UPDATE_FLOW.md](../docs/research_notes/INCREMENTAL_UPDATE_FLOW.md) | 版本更新流程 |
+| 理论体系 | [../docs/research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../docs/research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 理论体系架构 |
+
+---
+
 ## 📚 相关文档
 
 - [Rust 标准库文档](https://doc.rust-lang.org/std/)
@@ -1212,5 +1321,5 @@ let mut map = HashMap::with_capacity(100);  // 预分配容量
 ---
 
 **创建日期**: 2025-12-25
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-20
 **状态**: ✅ **Rust 1.93.0 更新完成**（历史快照文档）

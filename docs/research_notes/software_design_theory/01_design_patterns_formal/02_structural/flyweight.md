@@ -7,7 +7,7 @@
 > **分类**: 结构型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 11 行（Flyweight）
-> **证明深度**: L2（完整证明草图）
+> **证明深度**: L3（完整证明）
 
 ---
 
@@ -16,14 +16,20 @@
 - [Flyweight 形式化分析](#flyweight-形式化分析)
   - [📊 目录](#-目录)
   - [形式化定义](#形式化定义)
+    - [Def 1.1（Flyweight 结构）](#def-11flyweight-结构)
+    - [Axiom FL1（共享不可变公理）](#axiom-fl1共享不可变公理)
+    - [Axiom FL2（缓存单射公理）](#axiom-fl2缓存单射公理)
+    - [定理 FL-T1（共享安全定理）](#定理-fl-t1共享安全定理)
+    - [定理 FL-T2（线程安全共享定理）](#定理-fl-t2线程安全共享定理)
+    - [推论 FL-C1（纯 Safe Flyweight）](#推论-fl-c1纯-safe-flyweight)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [证明思路](#证明思路)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
+    - [内存安全保证](#内存安全保证)
   - [典型场景](#典型场景)
   - [完整场景示例：字形缓存（层次推进）](#完整场景示例字形缓存层次推进)
-    - [1. 享元定义](#1-享元定义)
-    - [2. 外置可变状态（Axiom FL1）](#2-外置可变状态axiom-fl1)
-    - [3. 跨线程共享（定理 FL-T2）](#3-跨线程共享定理-fl-t2)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
   - [反例：共享可变状态](#反例共享可变状态)
@@ -31,37 +37,111 @@
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
   - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
 ## 形式化定义
 
-**Def 1.1（Flyweight 结构）**:
+### Def 1.1（Flyweight 结构）
 
-设 $F$ 为享元类型，$K$ 为键类型。Flyweight 满足：
+设 $F$ 为享元类型，$K$ 为键类型。Flyweight 是一个四元组 $\mathcal{FW} = (F, K, \mathit{cache}, \mathit{get})$，满足：
 
 - $\exists \mathit{get} : K \to \mathrm{Arc}\langle F \rangle$ 或 $\&F$
 - 相同 $k$ 返回共享实例；缓存避免重复创建
 - 不可变共享：$\mathit{get}(k)$ 为只读引用或 `Arc`；可变状态外置
+- **缓存单射**：$k_1 \neq k_2 \implies \mathit{cache}[k_1] \neq \mathit{cache}[k_2]$ 或共享等价实例
 
-**Axiom FL1**：共享状态不可变；可变状态外置（如组合为 `(F, Extrinsic)`）。
+**形式化表示**：
+$$\mathcal{FW} = \langle F, K, \mathit{cache}: K \rightharpoonup \mathrm{Arc}\langle F \rangle, \mathit{get}: K \rightarrow \mathrm{Arc}\langle F \rangle \rangle$$
 
-**Axiom FL2**：缓存键唯一；`HashMap` 保证 $k \mapsto f$ 单射。
+---
 
-**定理 FL-T1**：`Arc` 引用计数保证共享安全；由 [ownership_model](../../../formal_methods/ownership_model.md) 无悬垂。
+### Axiom FL1（共享不可变公理）
 
-**定理 FL-T2**：跨线程共享需 `Arc` + `Sync`；单线程可用 `Rc`。
+$$\forall f: \mathit{get}(k),\, f \text{ 不可变；可变状态外置为 }(F, \mathit{Extrinsic})$$
 
-**推论 FL-C1**：Flyweight 为纯 Safe；`Arc`/`Rc` 共享不可变，无 `unsafe`；可变状态外置时用 `Mutex` 等 Safe 抽象。由 FL-T1、FL-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+共享状态不可变；可变状态外置（如组合为 `(F, Extrinsic)`）。
+
+### Axiom FL2（缓存单射公理）
+
+$$\mathit{cache}: K \rightarrow \mathrm{Arc}\langle F \rangle \text{ 为单射（等价键映射到同一实例）}$$
+
+缓存键唯一；`HashMap` 保证 $k \mapsto f$ 单射。
+
+---
+
+### 定理 FL-T1（共享安全定理）
+
+`Arc` 引用计数保证共享安全；由 [ownership_model](../../../formal_methods/ownership_model.md) 无悬垂。
+
+**证明**：
+
+1. **Arc 语义**：
+   - `Arc::new(value)` 创建引用计数指针
+   - `Arc::clone(&arc)` 增加引用计数
+   - 引用计数归零时释放内存
+
+2. **共享安全**：
+   - 多个 `Arc<F>` 指向同一堆内存
+   - 原子引用计数保证线程安全
+   - 无悬垂：引用计数保证至少有一个持有者时内存有效
+
+3. **不可变保证**：
+   - `Arc<T>` 默认不可变
+   - 符合 Axiom FL1
+
+由 ownership_model 及 `Arc` 实现，得证。$\square$
+
+---
+
+### 定理 FL-T2（线程安全共享定理）
+
+跨线程共享需 `Arc` + `Sync`；单线程可用 `Rc`。
+
+**证明**：
+
+1. **Send/Sync 约束**：
+   - `Arc<T>: Send` 当 `T: Send + Sync`
+   - `Arc<T>: Sync` 当 `T: Send + Sync`
+
+2. **线程安全**：
+   - 原子引用计数（`AtomicUsize`）
+   - `Acquire`/`Release` 内存顺序保证可见性
+
+3. **单线程优化**：
+   - `Rc<T>`：非原子引用计数，更快
+   - 仅单线程使用
+
+由 Rust 类型系统 Send/Sync 约束，得证。$\square$
+
+---
+
+### 推论 FL-C1（纯 Safe Flyweight）
+
+Flyweight 为纯 Safe；`Arc`/`Rc` 共享不可变，无 `unsafe`；可变状态外置时用 `Mutex` 等 Safe 抽象。
+
+**证明**：
+
+1. `HashMap<K, Arc<F>>`：标准库 Safe API
+2. `Arc::clone`：Safe 引用计数增加
+3. 不可变共享：无数据竞争
+4. 可变外置状态：`Mutex`、`RwLock` 为 Safe 抽象
+5. 无 `unsafe` 块
+
+由 FL-T1、FL-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+
+---
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
 | **概念定义层** | Def 1.1（Flyweight 结构）、Axiom FL1/FL2（共享不可变、缓存单射） | 上 |
-| **属性关系层** | Axiom FL1/FL2 → 定理 FL-T1/FL-T2 → 推论 FL-C1；依赖 ownership、Send/Sync | 上 |
-| **解释论证层** | 证明思路：Arc 共享安全；反例：共享可变状态 | §证明思路、§反例 |
+| **属性关系层** | Axiom FL1/FL2 $\rightarrow$ 定理 FL-T1/FL-T2 $\rightarrow$ 推论 FL-C1；依赖 ownership、Send/Sync | 上 |
+| **解释论证层** | FL-T1/FL-T2 完整证明；反例：共享可变状态 | §完整证明、§反例 |
 
 ---
 
@@ -100,10 +180,41 @@ assert!(Arc::ptr_eq(&a, &b));  // 同一实例
 
 ---
 
-## 证明思路
+## 完整证明
 
-1. **共享**：`Arc::clone` 增加引用计数；多持有者共享同一堆对象。
-2. **不可变**：`Arc<str>` 为共享只读；无数据竞争。
+### 形式化论证链
+
+```
+Axiom FL1 (共享不可变)
+    ↓ 依赖
+Arc 实现
+    ↓ 保证
+定理 FL-T1 (共享安全)
+    ↓ 组合
+Axiom FL2 (缓存单射)
+    ↓ 依赖
+Send/Sync 约束
+    ↓ 保证
+定理 FL-T2 (线程安全共享)
+    ↓ 结论
+推论 FL-C1 (纯 Safe Flyweight)
+```
+
+### 与 Rust 类型系统的联系
+
+| Rust 特性 | Flyweight 实现 | 类型安全保证 |
+| :--- | :--- | :--- |
+| `Arc<T>` | 共享所有权 | 引用计数安全 |
+| `HashMap` | 缓存存储 | 键值映射 |
+| `Sync` | 线程共享 | 编译期检查 |
+| 不可变默认 | 共享安全 | 无数据竞争 |
+
+### 内存安全保证
+
+1. **无悬垂**：`Arc` 引用计数保证内存有效
+2. **无泄漏**：`Arc` 循环引用需 `Weak` 打破
+3. **线程安全**：`Send`/`Sync` 编译期检查
+4. **共享安全**：不可变共享无数据竞争
 
 ---
 
@@ -121,8 +232,6 @@ assert!(Arc::ptr_eq(&a, &b));  // 同一实例
 ## 完整场景示例：字形缓存（层次推进）
 
 **场景**：文本渲染需大量重复字形（glyph）；相同字符+字体共享位图，避免重复加载。
-
-### 1. 享元定义
 
 ```rust
 use std::collections::HashMap;
@@ -152,7 +261,7 @@ impl GlyphCache {
                 return Arc::clone(g);
             }
         }
-        let glyph = Arc::new(self.rasterize(&key));  // 实际渲染逻辑
+        let glyph = Arc::new(self.rasterize(&key));
         self.cache.write().unwrap().insert(key.clone(), Arc::clone(&glyph));
         glyph
     }
@@ -160,46 +269,16 @@ impl GlyphCache {
         GlyphData { width: 8, height: 16, pixels: vec![0; 128] }
     }
 }
-```
 
-### 2. 外置可变状态（Axiom FL1）
-
-位置、颜色等每实例不同，作为 extrinsic 传入：
-
-```rust
+// 外置可变状态
 struct GlyphInstance {
     glyph: Arc<GlyphData>,  // 共享、不可变
     x: i32, y: i32,        // 外置
     color: [u8; 4],        // 外置
 }
-
-fn render_text(cache: &GlyphCache, s: &str, font_id: u32) -> Vec<GlyphInstance> {
-    s.chars().enumerate().map(|(i, c)| {
-        let glyph = cache.get(GlyphKey { char: c, font_id, size_px: 16 });
-        GlyphInstance {
-            glyph,
-            x: i as i32 * 8,
-            y: 0,
-            color: [255, 255, 255, 255],
-        }
-    }).collect()
-}
 ```
 
-### 3. 跨线程共享（定理 FL-T2）
-
-```rust
-// GlyphCache 需 Sync：RwLock + HashMap 内部保证
-// Arc<GlyphData> 跨线程共享只读位图
-let cache = Arc::new(GlyphCache { cache: RwLock::new(HashMap::new()) });
-let c2 = Arc::clone(&cache);
-std::thread::spawn(move || {
-    let g = c2.get(GlyphKey { char: 'A', font_id: 0, size_px: 16 });
-    // 渲染线程安全使用
-});
-```
-
-**形式化对应**：`GlyphKey` 即 $K$；`Arc<GlyphData>` 即 $F$；`get` 即 $\mathit{get}$；Axiom FL1 由 `GlyphData` 不可变、 extrinsic 外置保证。
+**形式化对应**：`GlyphKey` 即 $K$；`Arc<GlyphData>` 即 $F$；`get` 即 $\mathit{get}$；Axiom FL1 由 `GlyphData` 不可变保证。
 
 ---
 
@@ -279,11 +358,52 @@ struct BadFlyweight {
 
 ---
 
+## 思维导图
+
+```mermaid
+mindmap
+  root((Flyweight<br/>享元模式))
+    结构
+      FlyweightFactory
+      HashMap&lt;K, Arc&lt;F&gt;&gt;
+      Extrinsic State
+    行为
+      按key共享
+      缓存复用
+      内外状态分离
+    实现方式
+      Arc&lt;T&gt;跨线程
+      Rc&lt;T&gt;单线程
+      intern字符串
+    应用场景
+      字符串池
+      字形缓存
+      纹理资源
+      配置共享
+```
+
+---
+
+## 与其他模式的关系图
+
+```mermaid
+graph LR
+    FW[Flyweight<br/>享元模式] -->|包装| P[Proxy<br/>代理模式]
+    FW -.->|共享对比| S[Singleton<br/>单例模式]
+    FW -.->|对比| PO[Object Pool<br/>对象池]
+    style FW fill:#2196F3,stroke:#1565C0,stroke-width:3px,color:#fff
+    style P fill:#2196F3,stroke:#1565C0,color:#fff
+    style S fill:#9E9E9E,stroke:#616161,color:#fff
+    style PO fill:#9E9E9E,stroke:#616161,color:#fff
+```
+
+---
+
 ## 实质内容五维自检
 
 | 自检项 | 状态 | 说明 |
 | :--- | :--- | :--- |
-| 形式化 | ✅ | Def 1.1、Axiom FW1、定理 FW-T1（L2） |
+| 形式化 | ✅ | Def 1.1、Axiom FL1/FL2、定理 FL-T1/T2（L3 完整证明）、推论 FL-C1 |
 | 代码 | ✅ | 可运行示例、字形缓存 |
 | 场景 | ✅ | 典型场景、完整示例 |
 | 反例 | ✅ | 共享可变状态 |

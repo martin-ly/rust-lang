@@ -255,7 +255,7 @@ impl DocTemplate {
             self.title, today, today, self.purpose
         )
     }
-    
+
     /// 生成目录块
     fn generate_toc(&self) -> String {
         r##"## 📊 目录
@@ -269,7 +269,7 @@ impl DocTemplate {
 "##
         .to_string()
     }
-    
+
     /// 生成文末元信息
     fn generate_footer(&self) -> String {
         let today = Local::now().format("%Y-%m-%d");
@@ -284,7 +284,7 @@ impl DocTemplate {
             today
         )
     }
-    
+
     /// 生成完整文档
     pub fn generate(&self) -> String {
         let mut doc = String::new();
@@ -304,11 +304,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         purpose: "文档用途说明".to_string(),
         category: "reference".to_string(),
     };
-    
+
     let output_path = "new_document.md";
     let mut file = fs::File::create(output_path)?;
     file.write_all(template.generate().as_bytes())?;
-    
+
     println!("✅ 文档模板已生成: {}", output_path);
     Ok(())
 }

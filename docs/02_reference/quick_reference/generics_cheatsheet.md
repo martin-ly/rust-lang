@@ -55,6 +55,71 @@
 
 ---
 
+## 🧠 泛型系统思维导图
+
+```mermaid
+mindmap
+  root((泛型系统<br/>Generic System))
+    类型参数
+      函数泛型 fn foo<T>
+      结构体泛型 struct<T>
+      枚举泛型 enum<T>
+    Trait 约束
+      基本约束 T: Trait
+      多重约束 T: A + B
+      Where 子句
+    关联类型
+      type Item
+      GATs 泛型关联类型
+    Const 泛型
+      数组长度 [T; N]
+      编译时常量
+    单态化
+      零成本抽象
+      编译期展开
+    类型推断
+      上下文推导
+      Turbofish 语法
+```
+
+---
+
+## 📊 概念定义-属性关系-解释论证
+
+| 层次 | 概念定义 | 属性关系 | 解释论证 |
+|:---|:---|:---|:---|
+| **L1 基础** | 类型参数 T：占位符类型 | 公理：∀T, T 是具体类型的抽象 | 定理 G1：泛型保证类型安全 |
+| **L2 约束** | Trait Bound：能力要求 | 规则：T: Trait ⟹ T 实现 Trait | 定理 G2：约束满足则调用安全 |
+| **L3 关联** | Associated Type：输出类型 | 规则：impl 中确定具体类型 | 定理 G3：关联类型唯一性 |
+| **L4 单态化** | Monomorphization：代码生成 | 规则：每个 T 生成独立实例 | 定理 G4：零运行时开销 |
+| **L5 高阶** | HRTB：高阶 Trait Bound | 规则：∀'a, T: Trait<'a> | 定理 G5：生命周期泛化 |
+
+> 形式化理论详见：[类型构造能力](../../research_notes/type_theory/construction_capability.md) | [Trait 系统形式化](../../research_notes/type_theory/trait_system_formalization.md)
+
+---
+
+## 🔬 泛型系统证明树
+
+```mermaid
+graph TD
+    A[类型系统一致性] --> B[泛型参数合法]
+    A --> C[Trait 约束满足]
+    B --> D[单态化正确]
+    C --> D
+    D --> E[零成本抽象]
+    E --> F[类型安全保证]
+    
+    G[类型推断] --> H[上下文推导]
+    H --> I[显式标注]
+    I --> F
+    
+    J[生命周期] --> K[参数生命周期]
+    K --> L[返回值生命周期]
+    L --> F
+```
+
+---
+
 ## 🎯 核心概念
 
 ### 泛型函数

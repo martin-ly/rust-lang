@@ -74,6 +74,100 @@
 
 ---
 
+## 🧠 异步状态机思维导图
+
+```mermaid
+mindmap
+  root((异步编程<br/>Async/Await))
+    Future Trait
+      poll 方法
+      Pin 固定
+      Context 上下文
+    状态机
+      编译期转换
+      状态枚举
+      自动实现
+    执行器
+      Tokio Runtime
+      任务调度
+      工作窃取
+    唤醒机制
+      Waker
+      事件循环
+      非阻塞 IO
+    并发模式
+      join! 并发等待
+      select! 竞争选择
+      spawn 新建任务
+    Pin/Unpin
+      自引用结构
+      内存安全
+      不可移动类型
+```
+
+---
+
+## 📊 概念定义-属性关系-解释论证
+
+| 层次 | 概念定义 | 属性关系 | 解释论证 |
+|:---|:---|:---|:---|
+| **L1 基础** | Future：异步计算抽象 | 公理：Future 可轮询至完成 | 定理 A1：poll 契约保证进度 |
+| **L2 状态** | 状态机：async fn 编译结果 | 规则：每个 await 点为一个状态 | 定理 A2：状态机正确模拟控制流 |
+| **L3 固定** | Pin：内存位置固定 | 公理：Pin<&mut T> ⟹ T 不移动 | 定理 A3：Pin 保证自引用安全 |
+| **L4 执行** | Executor：Future 驱动者 | 规则：轮询 Ready/Pending | 定理 A4：执行器公平性保证 |
+| **L5 唤醒** | Waker：异步通知机制 | 规则：事件→Waker→poll | 定理 A5：无虚假唤醒 |
+
+> 形式化理论详见：[异步状态机形式化](../../research_notes/formal_methods/async_state_machine.md) | [Pin 和自引用类型形式化](../../research_notes/formal_methods/pin_self_referential.md)
+
+---
+
+## 🔬 异步状态机证明树
+
+```mermaid
+graph TD
+    A[Async Fn] -->|编译| B[状态机枚举]
+    B --> C[状态 1: 开始]
+    B --> D[状态 2: 等待点 1]
+    B --> E[状态 N: 完成]
+    
+    C -->|poll| F[执行到 await]
+    F --> G[注册 Waker]
+    G --> H[返回 Pending]
+    
+    I[事件发生] --> J[Waker.wake]
+    J --> K[重新调度]
+    K -->|poll| D
+    
+    D -->|完成| E
+    E --> L[返回 Ready<T>]
+    
+    M[Pin 保证] --> N[内存位置固定]
+    N --> O[自引用字段有效]
+    O --> P[状态转换安全]
+    P --> L
+```
+
+### 异步执行决策树
+
+```mermaid
+graph TD
+    Q{需要并发?} -->|是| R{任务关系?}
+    Q -->|否| S[顺序 await]
+    
+    R -->|独立任务| T[spawn 创建新任务]
+    R -->|等待全部| U[join! 并发执行]
+    R -->|首个完成| V[select! 竞争选择]
+    
+    T --> W[任务句柄 JoinHandle]
+    U --> X[结果元组]
+    V --> Y[首个 Ready 结果]
+    
+    Z{需要超时?} -->|是| AA[timeout 包装]
+    Z -->|否| AB[直接 await]
+```
+
+---
+
 ## 🎯 核心概念
 
 ### Future Trait（核心抽象）

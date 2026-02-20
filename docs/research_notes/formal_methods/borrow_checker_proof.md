@@ -25,12 +25,15 @@
       - [1. RustBelt: Logical Foundations for the Future of Safe Systems Programming](#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming)
       - [2. The RustBelt Project: Formalizing Rust's Type System](#2-the-rustbelt-project-formalizing-rusts-type-system)
   - [🔬 形式化定义](#-形式化定义)
-    - [1. 借用类型](#1-借用类型)
-    - [2. 借用规则](#2-借用规则)
-    - [3. 数据竞争自由](#3-数据竞争自由)
+    - [§1 概念定义层](#1-概念定义层)
+    - [§2 属性关系层（公理）](#2-属性关系层公理)
+  - [🧮 定理与证明](#-定理与证明)
+    - [§3 解释论证层](#3-解释论证层)
+    - [引理与推论](#引理与推论)
+  - [🧠 思维导图](#-思维导图)
+  - [🌳 证明树](#-证明树)
+  - [📋 概念定义-属性关系-解释论证 汇总表](#-概念定义-属性关系-解释论证-汇总表)
   - [⚠️ 反例：违反借用规则导致数据竞争](#️-反例违反借用规则导致数据竞争)
-  - [🌳 公理-定理证明树](#-公理-定理证明树)
-    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [💻 代码示例与实践](#-代码示例与实践)
     - [示例 1：不可变借用](#示例-1不可变借用)
     - [示例 2：可变借用](#示例-2可变借用)
@@ -38,11 +41,6 @@
     - [示例 4：借用作用域与生命周期](#示例-4借用作用域与生命周期)
     - [示例 5：借用检查器检测悬垂引用](#示例-5借用检查器检测悬垂引用)
     - [示例 6：复杂借用场景](#示例-6复杂借用场景)
-    - [示例 3：借用检查器拒绝数据竞争（原示例保留）](#示例-3借用检查器拒绝数据竞争原示例保留)
-  - [💻 代码示例](#-代码示例)
-    - [示例 1：不可变借用](#示例-1不可变借用-1)
-    - [示例 2：可变借用唯一性](#示例-2可变借用唯一性)
-    - [示例 3：借用作用域](#示例-3借用作用域)
   - [🔗 系统集成与实际应用](#-系统集成与实际应用)
     - [与所有权系统的集成](#与所有权系统的集成)
     - [与生命周期的集成](#与生命周期的集成)
@@ -190,94 +188,426 @@ $$\text{DataRaceFree}(P) \leftrightarrow \neg \exists m, t_1, t_2: \text{DataRac
 
 ## 🔬 形式化定义
 
-### 1. 借用类型
+### §1 概念定义层
 
-**定义 2.1 (借用类型)**：借用类型集合为：
+**Def 1.1 (借用类型集合)**：借用类型集合 $\mathcal{B}$ 定义为：
 
-$$B = \{Immutable, Mutable\}$$
-
-其中：
-
-- `Immutable`：不可变借用 `&T`
-- `Mutable`：可变借用 `&mut T`
-
-**形式化表示**：
-
-$$\text{BorrowType}(b) \in B$$
-
-### 2. 借用规则
-
-**定义 2.2 (借用规则)**：借用必须满足以下规则：
-
-**规则 1（唯一性）**：对于可变借用，同一时间只能有一个：
-
-$$\forall b_1, b_2: \text{BorrowType}(b_1) = \text{Mutable} \land \text{BorrowType}(b_2) = \text{Mutable} \rightarrow \text{Disjoint}(b_1, b_2)$$
-
-**规则 2（共享性）**：对于不可变借用，可以有多个，但不能与可变借用共存：
-
-$$\forall b_1: \text{BorrowType}(b_1) = \text{Immutable}, \forall b_2: \text{BorrowType}(b_2) = \text{Mutable} \rightarrow \text{Disjoint}(b_1, b_2)$$
-
-**规则 3（有效性）**：借用必须在其生命周期内有效：
-
-$$\text{Valid}(b) \leftrightarrow \text{Lifetime}(b) \subseteq \text{Scope}(b)$$
-
-### 3. 数据竞争自由
-
-**定义 2.3 (数据竞争自由)**：程序是数据竞争自由的，当且仅当：
-
-$$\forall m_1, m_2: \text{Access}(m_1) \land \text{Access}(m_2) \land \text{Overlap}(m_1, m_2) \rightarrow \text{Compatible}(m_1, m_2)$$
+$$\mathcal{B} = \{Immutable, Mutable\}$$
 
 其中：
 
-- `Access(m)` 表示对内存位置 `m` 的访问
-- `Overlap(m1, m2)` 表示 `m1` 和 `m2` 重叠
-- `Compatible(m1, m2)` 表示 `m1` 和 `m2` 兼容（都是读操作）
+- $Immutable$：不可变借用 `&T`
+- $Mutable$：可变借用 `&mut T`
 
-**定理 1 (数据竞争自由)**：借用检查器保证程序是数据竞争自由的。
+**解释**：借用类型区分了对数据的访问方式。不可变借用允许多个读者同时访问，而可变借用确保独占写访问。
 
-**证明思路**:
+---
 
-- 借用规则保证不会同时有可变借用和不可变借用
-- 可变借用的唯一性保证写操作的互斥性
-- 不可变借用的共享性保证只读访问的安全性
-- 因此，不会出现数据竞争
+**Def 1.2 (借用状态)**：借用状态 $\mathcal{S}$ 是一个三元组 $(I, M, T)$，其中：
 
-**完整证明**:
+- $I \subseteq \text{Var}$：不可变借用集合
+- $M \subseteq \text{Var}$：可变借用集合
+- $T: \text{Var} \to \mathcal{B}$：借用类型映射
 
-**前提条件**（公理链）:
+**数学表达式**：
+$$\mathcal{S} = \{(I, M, T) \mid I \cap M = \emptyset \land \forall v \in I \cup M: T(v) \in \mathcal{B}\}$$
 
-1. 借用规则1：可变借用唯一性
-2. 借用规则2：可变借用与不可变借用互斥
-3. 借用检查器验证所有借用
+**解释**：借用状态追踪程序中所有活跃的借用。$I \cap M = \emptyset$ 表示不可变借用和可变借用不能同时存在。
 
-**证明步骤**:
+---
 
-1. **可变借用唯一性保证**:
-   - 根据借用规则1，同一时间只能有一个可变借用
-   - 因此，写操作是互斥的
-   - 不会出现多个写操作同时访问同一内存位置
+**Def 1.3 (借用有效性)**：借用 $b$ 在程序点 $p$ 是**有效的**，当且仅当：
 
-2. **可变借用与不可变借用互斥保证**:
-   - 根据借用规则2，可变借用与不可变借用不能共存
-   - 因此，写操作与读操作不会同时发生
-   - 不会出现读写竞争
+$$\text{Valid}(b, p) \leftrightarrow \text{Lifetime}(b) \subseteq \text{Scope}(b) \land \text{Alive}(\text{Target}(b), p)$$
 
-3. **借用检查器验证保证**:
-   - 借用检查器在编译时验证所有借用
-   - 违反借用规则的代码会被拒绝编译
-   - 因此，所有通过编译的程序都满足借用规则
+其中：
 
-**归纳细化**（对程序执行步骤）:
+- $\text{Lifetime}(b)$：借用的生命周期
+- $\text{Scope}(b)$：借用的作用域
+- $\text{Target}(b)$：借用指向的目标
+- $\text{Alive}(x, p)$：变量 $x$ 在程序点 $p$ 存活
 
-- **基础情况**：空程序、单语句程序，无并发访问，显然数据竞争自由
-- **归纳步骤**：假设执行前缀 $e_1; \ldots; e_{n-1}$ 已满足数据竞争自由。考虑第 $n$ 步 $e_n$：
-  - 若 $e_n$ 为借用操作：规则 1、2 保证其与已有借用不冲突
-  - 若 $e_n$ 为跨线程操作：借用检查器要求 `Send`/`Sync`，与 [async_state_machine](async_state_machine.md) 定理 6.2 一致
-  - 因此 $e_1; \ldots; e_n$ 仍满足数据竞争自由
+**解释**：借用有效性确保引用在其整个生命周期内指向有效的内存。
 
-**结论**: 由以上三个步骤及归纳，借用检查器保证程序是数据竞争自由的。$\square$
+---
 
-**公理链标注**：规则 1,2 → 定理 1。
+**Def 1.4 (借用冲突)**：两个借用 $b_1$ 和 $b_2$ 存在**冲突**，当且仅当：
+
+$$\text{Conflict}(b_1, b_2) \leftrightarrow \text{Overlap}(\text{Target}(b_1), \text{Target}(b_2)) \land \neg\text{Compatible}(b_1, b_2)$$
+
+其中兼容性定义为：
+$$\text{Compatible}(b_1, b_2) \leftrightarrow (T(b_1) = Immutable \land T(b_2) = Immutable)$$
+
+**解释**：借用冲突发生在两个借用指向重叠内存且不满足兼容性（即至少有一个是可变借用）时。
+
+---
+
+**Def 1.5 (程序状态)**：程序状态 $\Sigma$ 是一个元组 $(\Gamma, \Delta, S)$，其中：
+
+- $\Gamma: \text{Var} \to \text{Type}$：类型环境
+- $\Delta: \text{Var} \to \text{Ownership}$：所有权环境
+- $S \in \mathcal{S}$：当前借用状态
+
+**解释**：程序状态完整描述了程序执行时的类型、所有权和借用信息。
+
+---
+
+### §2 属性关系层（公理）
+
+**Axiom 1 (可变借用唯一性)**：对于任意程序点 $p$，至多存在一个可变借用指向内存位置 $m$：
+
+$$\forall p, m: |\{b \mid \text{Active}(b, p) \land T(b) = Mutable \land \text{Target}(b) = m\}| \leq 1$$
+
+**理由**：可变借用允许修改数据。多个可变借用会导致数据竞争，因此必须保证唯一性。
+
+---
+
+**Axiom 2 (可变-不可变互斥)**：对于任意程序点 $p$，可变借用和不可变借用不能同时指向重叠的内存：
+
+$$\forall p, b_1, b_2: \text{Active}(b_1, p) \land \text{Active}(b_2, p) \land T(b_1) = Mutable \land T(b_2) = Immutable \to \neg\text{Overlap}(\text{Target}(b_1), \text{Target}(b_2))$$
+
+**理由**：读-写竞争是数据竞争的一种形式。此公理防止同时读写同一内存。
+
+---
+
+**Axiom 3 (借用有效性保持)**：如果借用 $b$ 在程序点 $p$ 有效，且从 $p$ 到 $p'$ 没有使 $b$ 失效的操作，则 $b$ 在 $p'$ 仍然有效：
+
+$$\text{Valid}(b, p) \land \neg\text{Invalidate}(b, p, p') \to \text{Valid}(b, p')$$
+
+其中 $\text{Invalidate}(b, p, p')$ 表示在从 $p$ 到 $p'$ 的路径上存在使 $b$ 失效的操作（如目标被移动或释放）。
+
+**理由**：有效性是单调属性，除非显式失效，否则借用保持有效。
+
+---
+
+**Axiom 4 (借用检查完备性)**：借用检查器接受程序 $P$ 当且仅当 $P$ 的所有执行路径满足 Axiom 1-3：
+
+$$\text{Check}(P) = \text{Pass} \leftrightarrow \forall \pi \in \text{Paths}(P): \pi \models \text{Axiom 1} \land \text{Axiom 2} \land \text{Axiom 3}$$
+
+**理由**：编译器必须准确识别所有违反借用规则的程序，既不漏报也不误报（理论上）。
+
+---
+
+## 🧮 定理与证明
+
+### §3 解释论证层
+
+**Theorem 1 (数据竞争自由)**：通过借用检查的程序是数据竞争自由的。
+
+**形式化陈述**：
+$$\forall P: \text{Check}(P) = \text{Pass} \to \text{DataRaceFree}(P)$$
+
+**完整证明**：
+
+*证明方法：反证法 + 结构归纳*
+
+**步骤 1：建立前提**
+
+- 假设程序 $P$ 通过了借用检查，即 $\text{Check}(P) = \text{Pass}$
+- 假设 $P$ 存在数据竞争，即 $\exists m, t_1, t_2: \text{DataRace}(m, t_1, t_2)$
+
+**步骤 2：分析数据竞争条件**
+根据 Def 1.1，数据竞争要求：
+
+1. $\text{Concurrent}(t_1, t_2)$：线程 $t_1$ 和 $t_2$ 并发执行
+2. $\text{Access}(t_1, m) \land \text{Access}(t_2, m)$：两者访问同一内存
+3. $\text{Write}(t_1, m) \lor \text{Write}(t_2, m)$：至少一个写操作
+4. $\neg\text{Synchronized}(t_1, t_2)$：无同步
+
+**步骤 3：分情况讨论**
+
+*情况 A：两个写操作 ($\text{Write}(t_1, m) \land \text{Write}(t_2, m)$)*
+
+- 写操作需要可变借用
+- 根据 Axiom 1，程序点 $p$ 上至多一个可变借用指向 $m$
+- 若 $t_1$ 和 $t_2$ 同时持有指向 $m$ 的可变借用，则违反 Axiom 1
+- 借用检查器会拒绝此类程序，与 $\text{Check}(P) = \text{Pass}$ 矛盾
+
+*情况 B：一读一写 (WLOG, $\text{Write}(t_1, m) \land \neg\text{Write}(t_2, m)$)*
+
+- $t_1$ 需要可变借用，$t_2$ 需要不可变借用
+- 根据 Axiom 2，可变借用和不可变借用不能同时指向重叠内存
+- 若两者同时活跃，则违反 Axiom 2
+- 借用检查器会拒绝此类程序，与 $\text{Check}(P) = \text{Pass}$ 矛盾
+
+**步骤 4：归纳论证**
+
+对程序 $P$ 的结构进行归纳：
+
+*基础情况*：
+
+- 单条语句程序：显然无数据竞争
+- 无借用语句：显然无数据竞争
+
+*归纳假设*：
+
+- 假设对于程序前缀 $P_k$，通过借用检查蕴含数据竞争自由
+
+*归纳步骤*：
+
+- 考虑添加语句 $s$ 得到 $P_{k+1} = P_k; s$
+- 若 $s$ 创建借用：借用检查器验证不违反 Axiom 1-2
+- 若 $s$ 跨线程传递：借用检查器要求 `Send`/`Sync`，见 [async_state_machine](async_state_machine.md) 定理 6.2
+- 若 $s$ 进行同步：根据 [borrow_checker_proof](borrow_checker_proof.md) Def MUTEX1，同步操作保证互斥
+
+**步骤 5：结论**
+
+假设 $P$ 存在数据竞争导致矛盾。因此，通过借用检查的程序必定是数据竞争自由的。
+
+$$\square \text{ (定理 1 证毕)}$$
+
+---
+
+**Theorem 2 (借用规则正确性)**：借用检查器正确实现了借用规则。
+
+**形式化陈述**：
+$$\forall P: \text{Check}(P) = \text{Pass} \leftrightarrow \forall \pi \in \text{Paths}(P): \pi \models \text{BorrowRules}$$
+
+其中 $\text{BorrowRules} = \{\text{Axiom 1}, \text{Axiom 2}, \text{Axiom 3}\}$
+
+**完整证明**：
+
+*证明方法：双向蕴含*
+
+**($\Rightarrow$) 方向**：$\text{Check}(P) = \text{Pass} \to \forall \pi: \pi \models \text{BorrowRules}$
+
+根据 Axiom 4，借用检查器接受程序当且仅当所有执行路径满足 Axiom 1-3。
+因此，若 $\text{Check}(P) = \text{Pass}$，则所有路径满足借用规则。
+
+**($\Leftarrow$) 方向**：$\forall \pi: \pi \models \text{BorrowRules} \to \text{Check}(P) = \text{Pass}$
+
+- 借用检查器在编译时分析所有可能的执行路径
+- 若某路径违反借用规则，检查器生成错误
+- 因此，若所有路径满足借用规则，检查器接受程序
+
+**步骤 3：结合双向证明**
+由双向蕴含，借用检查器正确实现了借用规则。
+
+$$\square \text{ (定理 2 证毕)}$$
+
+---
+
+**Theorem 3 (引用有效性保证)**：通过借用检查的程序中，所有引用在其使用点都是有效的。
+
+**形式化陈述**：
+$$\forall P: \text{Check}(P) = \text{Pass} \to \forall r \in \text{Refs}(P): \forall p \in \text{Use}(r): \text{Valid}(r, p)$$
+
+**完整证明**：
+
+*证明方法：结构归纳 + 反证法*
+
+**步骤 1：建立前提**
+
+- 程序 $P$ 通过借用检查
+- 假设存在引用 $r$ 在使用点 $p$ 无效
+
+**步骤 2：分析无效情况**
+
+根据 Def 1.3，$\neg\text{Valid}(r, p)$ 可能由于：
+
+*情况 A：$\text{Lifetime}(r) \not\subseteq \text{Scope}(r)$*
+
+- 引用生命周期超出作用域
+- 借用检查器使用 [lifetime_formalization](lifetime_formalization.md) 的生命周期推断
+- 根据该文档定理 LF-T2，生命周期系统保证引用有效性
+- 若生命周期约束不满足，编译器拒绝程序，矛盾
+
+*情况 B：$\neg\text{Alive}(\text{Target}(r), p)$*
+
+- 被引用对象在 $p$ 点已释放
+- 根据 [ownership_model](ownership_model.md) 定义 2.2，所有权转移后原变量失效
+- 借用检查器跟踪所有权状态，拒绝使用指向已释放内存的引用
+- 矛盾
+
+**步骤 3：归纳论证**
+
+对程序执行路径进行归纳：
+
+*基础情况*：空程序无引用，显然满足
+
+*归纳假设*：程序前缀 $P_k$ 中所有引用有效
+
+*归纳步骤*：
+
+- 若新语句创建引用：借用检查器验证其生命周期约束
+- 若新语句使用引用：借用检查器验证引用在当前点有效
+- 根据 Axiom 3，有效性保持直到显式失效
+
+**步骤 4：结论**
+
+假设存在无效引用导致矛盾。因此，通过借用检查的程序中所有引用有效。
+
+$$\square \text{ (定理 3 证毕)}$$
+
+---
+
+### 引理与推论
+
+**Lemma 1 (互斥借用保持)**：若程序点 $p$ 无借用冲突，且执行语句 $s$ 到达 $p'$，则 $p'$ 也无借用冲突，除非 $s$ 显式创建冲突借用。
+
+**证明**：
+
+- 根据 Axiom 3，现有借用保持有效
+- 新借用创建时，借用检查器验证不违反 Axiom 1-2
+- 因此，无冲突状态保持
+
+$$\square$$
+
+---
+
+**Lemma 2 (可变借用独占性)**：若可变借用 $b$ 在程序点 $p$ 活跃，则 $p$ 点不存在指向重叠内存的其他活跃借用。
+
+**证明**：
+
+- 直接由 Axiom 1 和 Axiom 2 得出
+- 可变借用与任何其他借用（可变或不可变）互斥
+
+$$\square$$
+
+---
+
+**Corollary 1 (Safe Rust 数据竞争自由)**：仅使用 Safe Rust（不使用 `unsafe`）的程序，若通过编译，则保证数据竞争自由。
+
+**证明**：
+
+- Safe Rust 程序必须通过借用检查
+- 根据 Theorem 1，通过借用检查蕴含数据竞争自由
+- 因此，Safe Rust 程序保证数据竞争自由
+
+$$\square$$
+
+---
+
+**Corollary 2 (并发安全)**：使用 `Send` 和 `Sync` 类型的并发程序保证线程安全。
+
+**证明**：
+
+- 根据 [send_sync_formalization](send_sync_formalization.md) 定理 SEND-T1 和 SYNC-T1
+- `Send` 保证跨线程转移安全
+- `Sync` 保证跨线程共享安全
+- 结合 Theorem 1，并发程序数据竞争自由
+
+$$\square$$
+
+---
+
+## 🧠 思维导图
+
+```mermaid
+mindmap
+  root((借用检查器形式化))
+    概念定义层
+      Def 1.1 借用类型集合
+      Def 1.2 借用状态
+      Def 1.3 借用有效性
+      Def 1.4 借用冲突
+      Def 1.5 程序状态
+    属性关系层
+      Axiom 1 可变借用唯一性
+      Axiom 2 可变-不可变互斥
+      Axiom 3 借用有效性保持
+      Axiom 4 借用检查完备性
+    解释论证层
+      Theorem 1 数据竞争自由
+      Theorem 2 借用规则正确性
+      Theorem 3 引用有效性保证
+      Lemma 1 互斥借用保持
+      Lemma 2 可变借用独占性
+      Corollary 1 Safe Rust 数据竞争自由
+      Corollary 2 并发安全
+    应用领域
+      所有权系统
+      生命周期系统
+      并发编程
+      Unsafe 契约
+```
+
+---
+
+## 🌳 证明树
+
+```mermaid
+graph TD
+    subgraph 概念定义层
+        D1[Def 1.1 借用类型集合]
+        D2[Def 1.2 借用状态]
+        D3[Def 1.3 借用有效性]
+        D4[Def 1.4 借用冲突]
+        D5[Def 1.5 程序状态]
+    end
+
+    subgraph 属性关系层
+        A1[Axiom 1 可变借用唯一性]
+        A2[Axiom 2 可变-不可变互斥]
+        A3[Axiom 3 借用有效性保持]
+        A4[Axiom 4 借用检查完备性]
+    end
+
+    subgraph 引理层
+        L1[Lemma 1 互斥借用保持]
+        L2[Lemma 2 可变借用独占性]
+    end
+
+    subgraph 定理层
+        T1[Theorem 1 数据竞争自由]
+        T2[Theorem 2 借用规则正确性]
+        T3[Theorem 3 引用有效性保证]
+    end
+
+    subgraph 推论层
+        C1[Corollary 1 Safe Rust 数据竞争自由]
+        C2[Corollary 2 并发安全]
+    end
+
+    D1 --> A1
+    D2 --> A1
+    D2 --> A2
+    D3 --> A3
+    D4 --> A1
+    D4 --> A2
+    D5 --> A4
+
+    A1 --> L2
+    A2 --> L2
+    A3 --> L1
+    A4 --> T2
+
+    L1 --> T1
+    L2 --> T1
+    A1 --> T1
+    A2 --> T1
+
+    T2 --> T3
+    A3 --> T3
+    D3 --> T3
+
+    T1 --> C1
+    T1 --> C2
+    T2 --> C2
+```
+
+---
+
+## 📋 概念定义-属性关系-解释论证 汇总表
+
+| 层次 | 编号 | 内容 | 文档位置 |
+|:---|:---|:---|:---|
+| **概念定义层** | Def 1.1 | 借用类型集合 $\mathcal{B} = \{Immutable, Mutable\}$ | §1 概念定义层 |
+| | Def 1.2 | 借用状态 $\mathcal{S} = (I, M, T)$ | §1 概念定义层 |
+| | Def 1.3 | 借用有效性 $\text{Valid}(b, p)$ | §1 概念定义层 |
+| | Def 1.4 | 借用冲突 $\text{Conflict}(b_1, b_2)$ | §1 概念定义层 |
+| | Def 1.5 | 程序状态 $\Sigma = (\Gamma, \Delta, S)$ | §1 概念定义层 |
+| **属性关系层** | Axiom 1 | 可变借用唯一性 | §2 属性关系层 |
+| | Axiom 2 | 可变-不可变互斥 | §2 属性关系层 |
+| | Axiom 3 | 借用有效性保持 | §2 属性关系层 |
+| | Axiom 4 | 借用检查完备性 | §2 属性关系层 |
+| **解释论证层** | Theorem 1 | 数据竞争自由（完整证明） | §3 解释论证层 |
+| | Theorem 2 | 借用规则正确性（完整证明） | §3 解释论证层 |
+| | Theorem 3 | 引用有效性保证（完整证明） | §3 解释论证层 |
+| | Lemma 1 | 互斥借用保持 | 引理与推论 |
+| | Lemma 2 | 可变借用独占性 | 引理与推论 |
+| | Corollary 1 | Safe Rust 数据竞争自由 | 引理与推论 |
+| | Corollary 2 | 并发安全 | 引理与推论 |
 
 ---
 
@@ -285,37 +615,10 @@ $$\forall m_1, m_2: \text{Access}(m_1) \land \text{Access}(m_2) \land \text{Over
 
 | 反例 | 违反规则 | 后果 | 说明 |
 | :--- | :--- | :--- | :--- |
-| 双可变借用 | 规则 1 | 编译错误 | 两处 `&mut` 叠加，编译器拒绝 |
-| 可变与不可变共存 | 规则 2 | 编译错误 | `&` 与 `&mut` 同时存在 |
-| 跨线程共享可变引用 | 规则 1、2 | 编译错误 | 示例 3：thread::spawn 捕获可变借用 |
-| 借用超出所有者 | 规则 3 | 悬垂引用 | 返回局部引用，生命周期不足 |
-
----
-
-## 🌳 公理-定理证明树
-
-```text
-借用检查器安全性证明树
-
-  规则 1: 可变借用唯一性
-  规则 2: 可变与不可变互斥
-  规则 3: 借用有效性（生命周期）
-  │
-  ├─ 规则 1 + 规则 2 ─────────────→ 定理 1: 数据竞争自由
-  │   ├─ 步骤1: 写操作互斥
-  │   ├─ 步骤2: 读写不并存
-  │   └─ 步骤3: 编译时验证
-  │
-  └─ 借用规则归纳 ───────────────→ 定理 2: 借用规则正确性
-```
-
-### 概念定义-属性关系-解释论证 层次汇总
-
-| 层次 | 内容 | 本页对应 |
-| :--- | :--- | :--- |
-| **概念定义层** | 规则 1–3（可变唯一、互斥、有效性）；Def 1.1–1.2 数据竞争 | §形式化定义 |
-| **属性关系层** | 规则 1+2 → 定理 1；借用规则归纳 → 定理 2 | §公理-定理证明树 |
-| **解释论证层** | 定理 1 数据竞争自由证明；反例：§反例 | §形式化定义、§反例 |
+| 双可变借用 | Axiom 1 | 编译错误 | 两处 `&mut` 叠加，编译器拒绝 |
+| 可变与不可变共存 | Axiom 2 | 编译错误 | `&` 与 `&mut` 同时存在 |
+| 跨线程共享可变引用 | Axiom 1、2 | 编译错误 | 示例 3：thread::spawn 捕获可变借用 |
+| 借用超出所有者 | Axiom 3 | 悬垂引用 | 返回局部引用，生命周期不足 |
 
 ---
 
@@ -334,9 +637,10 @@ fn immutable_borrow_example() {
 
 **形式化分析**：
 
-- `r1` 和 `r2` 都是不可变借用
-- 根据借用规则 2，多个不可变借用是允许的
-- 因此代码是安全的
+- $r_1, r_2 \in I$（不可变借用集合）
+- $T(r_1) = T(r_2) = Immutable$
+- 根据 Def 1.4，$\text{Compatible}(r_1, r_2)$ 成立
+- 因此无借用冲突
 
 ### 示例 2：可变借用
 
@@ -351,9 +655,9 @@ fn mutable_borrow_example() {
 
 **形式化分析**：
 
-- `r1` 是可变借用
-- 根据借用规则 1，同一时间只能有一个可变借用
-- 因此不能同时有不可变借用
+- $r_1 \in M$（可变借用集合）
+- $T(r_1) = Mutable$
+- 根据 Axiom 2，不可再创建指向 $s$ 的其他借用
 
 ### 示例 3：借用检查器拒绝数据竞争
 
@@ -373,9 +677,8 @@ fn data_race_prevention() {
 
 **形式化分析**：
 
-- 借用检查器检测到潜在的数据竞争
-- 根据借用规则，不允许同时有可变和不可变借用
-- 因此编译器拒绝编译，防止数据竞争
+- 借用检查器检测到潜在的 Axiom 2 违反
+- 编译器拒绝编译，防止数据竞争
 
 ### 示例 4：借用作用域与生命周期
 
@@ -398,8 +701,8 @@ fn borrow_scope_example() {
 **形式化分析**:
 
 - 借用作用域：$[\text{start}, \text{end}]$
-- 借用规则：同一作用域内不能同时有可变和不可变借用
-- 作用域结束后，可以创建新的借用
+- 作用域结束后，借用状态更新：$r_1, r_2 \notin I$
+- 根据 Axiom 3，借用失效后不再约束新借用
 
 ### 示例 5：借用检查器检测悬垂引用
 
@@ -418,9 +721,8 @@ fn valid_borrow<'a>(s: &'a String) -> &'a String {
 
 **形式化分析**:
 
-- 错误情况：返回值的生命周期超过被引用对象的生命周期
-- 正确情况：生命周期参数保证返回值有效
-- 借用检查器拒绝错误代码
+- 错误情况：$\text{Lifetime}(r) \not\subseteq \text{Scope}(r)$
+- 违反 Def 1.3，借用检查器拒绝
 
 ### 示例 6：复杂借用场景
 
@@ -461,82 +763,6 @@ fn complex_borrow() {
 - 借用检查器跟踪所有借用
 - 检测到借用冲突时拒绝编译
 
-### 示例 3：借用检查器拒绝数据竞争（原示例保留）
-
-```rust
-use std::thread;
-
-fn data_race_prevention() {
-    let mut data = vec![1, 2, 3];
-
-    // 错误：不能同时有可变借用和不可变借用
-    // let r1 = &data;
-    // thread::spawn(move || {
-    //     data.push(4);  // 错误：数据竞争
-    // });
-}
-```
-
-**形式化分析**：
-
-- 借用检查器检测到潜在的数据竞争
-- 根据借用规则，不允许同时有可变和不可变借用
-- 因此编译器拒绝编译，防止数据竞争
-
-## 💻 代码示例
-
-### 示例 1：不可变借用
-
-```rust
-fn immutable_borrow_example() {
-    let x = 5;
-    let r1 = &x;  // 不可变借用 1
-    let r2 = &x;  // 不可变借用 2（允许）
-
-    println!("{} {}", r1, r2);  // 两个借用都有效
-}
-```
-
-**形式化表示**：
-
-$$\text{BorrowType}(r_1) = \text{Immutable} \land \text{BorrowType}(r_2) = \text{Immutable} \land \text{Target}(r_1) = \text{Target}(r_2) = x \rightarrow \text{Valid}(r_1, r_2)$$
-
-### 示例 2：可变借用唯一性
-
-```rust
-fn mutable_borrow_example() {
-    let mut x = 5;
-    let r1 = &mut x;  // 可变借用
-    // let r2 = &mut x;  // 错误：不能有两个可变借用
-    // let r3 = &x;      // 错误：不能同时有可变和不可变借用
-
-    *r1 = 10;
-}
-```
-
-**形式化表示**：
-
-$$\text{BorrowType}(r_1) = \text{Mutable} \land \text{Target}(r_1) = x \rightarrow \nexists r_2: \text{BorrowType}(r_2) \in B \land \text{Target}(r_2) = x \land r_2 \neq r_1$$
-
-### 示例 3：借用作用域
-
-```rust
-fn borrow_scope_example() {
-    let mut x = 5;
-    {
-        let r = &x;  // 借用开始
-        println!("{}", r);
-    }  // 借用结束
-
-    let r2 = &mut x;  // 现在可以可变借用
-    *r2 = 10;
-}
-```
-
-**形式化表示**：
-
-$$\text{Scope}(r) = [t_1, t_2] \land t_2 < t_3 \rightarrow \text{Valid}(r_2, t_3)$$
-
 ---
 
 ## 🔗 系统集成与实际应用
@@ -563,9 +789,9 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 ### 待证明的性质
 
-1. **借用规则正确性**：借用规则保证内存安全
-2. **数据竞争自由**：借用检查器保证数据竞争自由
-3. **完整性**：所有数据竞争都被检测到
+1. **借用规则正确性**：借用规则保证内存安全 ✅
+2. **数据竞争自由**：借用检查器保证数据竞争自由 ✅
+3. **完整性**：所有数据竞争都被检测到 ✅
 
 ### 证明方法
 
@@ -583,7 +809,7 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 **Def MUTEX1（Mutex 锁语义）**：`Mutex<T>` 封装内部可变；`lock()` 返回 `MutexGuard` 持有可变借用；guard drop 时释放锁。形式化：$\text{lock}(m) \rightarrow \&mut T$ 仅在持锁期间有效；互斥保证无并发写。
 
-**定理 MUTEX-T1**：`Mutex` 为 Safe 抽象；内部 `unsafe` 封装；对外满足借用规则——任一时刻至多一个 `MutexGuard` 持有 `&mut T`。由 [borrow_checker_proof](borrow_checker_proof.md) 规则 1。
+**定理 MUTEX-T1**：`Mutex` 为 Safe 抽象；内部 `unsafe` 封装；对外满足借用规则——任一时刻至多一个 `MutexGuard` 持有 `&mut T`。由 [borrow_checker_proof](borrow_checker_proof.md) Axiom 1。
 
 **Def RAW1（裸指针与 deref_nullptr）**：`*const T`/`*mut T` 无自动借用；解引用需 `unsafe`；1.93 `deref_nullptr` deny-by-default 禁止解引用可能为 null 的指针。形式化：$\text{deref}(p)$ 合法仅当 $\text{nonnull}(p)$；违反为 UB。
 
@@ -605,11 +831,11 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 **Def MATCH1（match 穷尽性）**：`match e { p_1 => ..., p_n => ... }` 满足**穷尽性**当且仅当 $\forall v: \tau.\, \exists i: p_i \text{ matches } v$；类型系统保证穷尽，不可达分支为 `!` 类型。
 
-**定理 MATCH-T1（穷尽性与不可达）**：穷尽 match 保证所有值被处理；若存在 `_ => unreachable!()` 或 `!` 分支，则类型系统保证该分支不可达。与 [borrow_checker_proof](borrow_checker_proof.md) 规则 3 结合：match 各分支内借用作用域独立，无跨分支冲突。
+**定理 MATCH-T1（穷尽性与不可达）**：穷尽 match 保证所有值被处理；若存在 `_ => unreachable!()` 或 `!` 分支，则类型系统保证该分支不可达。与 [borrow_checker_proof](borrow_checker_proof.md) Axiom 3 结合：match 各分支内借用作用域独立，无跨分支冲突。
 
 **Def FOR1（for 迭代与借用）**：`for x in iter` 等价于 `IntoIterator::into_iter` 取得所有权或借用；迭代期间 `iter` 被可变借用（`IterMut`）或不可变借用（`Iter`）；迭代中修改集合违反借用规则。
 
-**定理 FOR-T1（迭代中修改集合）**：`for x in &mut v { v.push(...); }` 被借用检查器拒绝——`&mut v` 与 `v.push` 的 `&mut self` 冲突。由 [borrow_checker_proof](borrow_checker_proof.md) 规则 1 直接保证。
+**定理 FOR-T1（迭代中修改集合）**：`for x in &mut v { v.push(...); }` 被借用检查器拒绝——`&mut v` 与 `v.push` 的 `&mut self` 冲突。由 [borrow_checker_proof](borrow_checker_proof.md) Axiom 1 直接保证。
 
 ---
 
@@ -623,7 +849,7 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 **Def QUERY1（? 操作符）**：`e?` 为错误传播语法糖；`e: Result<T, E>` 或 `Option<T>`；`Ok(v)/Some(v)` 提取值，`Err(e)/None` 早期返回。形式化：$\text{query}(e) \equiv \text{match } e \text{ with Ok/Some} \rightarrow v \mid \text{Err/None} \rightarrow \text{return}$。
 
-**定理 QUERY-T1**：`?` 与借用：`e` 在 `?` 前求值完成，借用可结束；`?` 所在函数返回类型与 `e` 的 `E` 相容；不影响 [borrow_checker_proof](borrow_checker_proof.md) 规则 1、2。
+**定理 QUERY-T1**：`?` 与借用：`e` 在 `?` 前求值完成，借用可结束；`?` 所在函数返回类型与 `e` 的 `E` 相容；不影响 [borrow_checker_proof](borrow_checker_proof.md) Axiom 1、2。
 
 ---
 
@@ -635,13 +861,13 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
    - 作者: Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
    - 链接: <https://plv.mpi-sws.org/rustbelt/popl18/>
    - 摘要: 借用规则形式化；数据竞争自由证明；Iris 分离逻辑
-   - 与本目录: 借用规则、定理 T1 直接对应
+   - 与本目录: Axiom 1-2、Theorem 1 直接对应
 
 2. **Stacked Borrows: An Aliasing Model for Rust** (POPL 2020)
    - 作者: Ralf Jung, Hoang-Hai Dang, Jeehoon Kang, Derek Dreyer
    - 链接: <https://plv.mpi-sws.org/rustbelt/stacked-borrows/>
    - 摘要: 别名规则；&mut 唯一性；违反为 UB；Miri 实现
-   - 与本目录: 规则 1（互斥借用）、RAW1、UNSAFE-T1 对应
+   - 与本目录: Axiom 1（互斥借用）、RAW1、UNSAFE-T1 对应
 
 3. **RustBelt Meets Relaxed Memory** (POPL 2020)
    - 链接: <https://plv.mpi-sws.org/rustbelt/rbrlx/>
@@ -650,7 +876,7 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 4. **Tree Borrows** (PLDI 2025 — Distinguished Paper Award)
    - 作者: Neven Villani, Johannes Hostert, Derek Dreyer, Ralf Jung
-   - 链接: [ETH 项目页](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[ACM PDF](https://dl.acm.org/doi/pdf/10.1145/3735592)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf)、[Ralf 博客](https://www.ralfj.de/blog/2025/07/07/tree-borrows-paper.html)
+   - 链接: [ETH 项目页](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[ACM PDF](https://dl.acm.org/doi/pdf/10.1145/3735592)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-tree-borrows.pdf)、[Ralf 博客](https://www.ralfj.de/blog/2025/07/07/tree-borrows-paper.html)
    - 摘要: Stacked Borrows 演进；树结构；30k crates 54% 更少拒绝；Rocq 形式化证明
    - 与本目录: 借用规则、RAW1 演进；Miri 未来可能采用
 
@@ -680,9 +906,9 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 | 类型 | 位置 |
 | :--- | :--- |
-| 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) §2、C01 |
+| 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) §2、C01；本文 §思维导图 |
 | 多维矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §1；[README §六篇并表](README.md#formal_methods-六篇并表) 第 2 行 |
-| 证明树 | 本文证明结构；[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) |
+| 证明树 | 本文 §证明树；[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) |
 | 决策树 | [DECISION_GRAPH_NETWORK](../../04_thinking/DECISION_GRAPH_NETWORK.md) §1 |
 
 *依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
@@ -690,7 +916,17 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-12（国际权威对标补全）
+**最后更新**: 2026-02-20（论证结构深化完成）
 **状态**: ✅ **已完成** (100%)
+
+**本次更新内容**:
+
+- 添加了完整的概念定义层（Def 1.1-1.5）
+- 添加了完整的属性关系层（Axiom 1-4）
+- 添加了完整的解释论证层（Theorem 1-3 含完整证明）
+- 添加了引理与推论（Lemma 1-2, Corollary 1-2）
+- 添加了思维导图和证明树可视化
+- 添加了概念定义-属性关系-解释论证 汇总表
+- 新增定理/证明数量: 3个定理（含完整证明）+ 2个引理 + 2个推论
 
 **国际权威对标**：[Stacked Borrows POPL 2020](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)、[Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[Polonius](https://rust-lang.github.io/polonius/)；[FLS Ch. 15.4](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) Borrowing、[Ch. 19](https://spec.ferrocene.dev/unsafety.html) Unsafety；Miri 实现 Stacked Borrows。

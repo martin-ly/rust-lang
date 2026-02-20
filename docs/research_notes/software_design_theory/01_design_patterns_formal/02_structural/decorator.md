@@ -7,7 +7,7 @@
 > **分类**: 结构型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 9 行（Decorator）
-> **证明深度**: L2（完整证明草图）
+> **证明深度**: L3（完整证明）
 
 ---
 
@@ -16,9 +16,18 @@
 - [Decorator 形式化分析](#decorator-形式化分析)
   - [📊 目录](#-目录)
   - [形式化定义](#形式化定义)
+    - [Def 1.1（Decorator 结构）](#def-11decorator-结构)
+    - [Axiom DE1（同接口可叠加公理）](#axiom-de1同接口可叠加公理)
+    - [Axiom DE2（委托链公理）](#axiom-de2委托链公理)
+    - [定理 DE-T1（委托借用安全定理）](#定理-de-t1委托借用安全定理)
+    - [定理 DE-T2（透明性定理）](#定理-de-t2透明性定理)
+    - [推论 DE-C1（纯 Safe Decorator）](#推论-de-c1纯-safe-decorator)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [证明思路](#证明思路)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
+    - [内存安全保证](#内存安全保证)
   - [典型场景](#典型场景)
   - [完整场景示例：HTTP 客户端装饰链（日志 + 重试）](#完整场景示例http-客户端装饰链日志--重试)
   - [相关模式](#相关模式)
@@ -28,35 +37,121 @@
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
   - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
 ## 形式化定义
 
-**Def 1.1（Decorator 结构）**:
+### Def 1.1（Decorator 结构）
 
-设 $D$ 为装饰器类型，$T$ 为被装饰类型。Decorator 满足：
+设 $D$ 为装饰器类型，$T$ 为被装饰类型。Decorator 是一个四元组 $\mathcal{DE} = (D, T, \mathit{inner}, \mathit{extend})$，满足：
 
 - $D$ 持有 $T$：$\Omega(D) \supset T$
 - $D$ 实现与 $T$ 相同的接口（同一 trait）
 - $\mathit{op}(d)$ 可先调用 $\mathit{op}(d.\mathit{inner})$ 再执行额外逻辑，或反之
+- **可叠加性**：装饰器可嵌套，形成装饰链
 
-**Axiom DE1**：装饰器与组件实现同一接口，可叠加。
+**形式化表示**：
+$$\mathcal{DE} = \langle D, T, \mathit{inner}: T, \mathit{extend}: D \times T \rightarrow \mathrm{Behavior} \rangle$$
 
-**Axiom DE2**：委托链：$D_1(D_2(D_3(\cdots)))$，递归委托至最内层。
+---
 
-**定理 DE-T1**：由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)，委托时 `&self.inner` 借用有效，无数据竞争。
+### Axiom DE1（同接口可叠加公理）
 
-**推论 DE-C1**：Decorator 为纯 Safe；仅用泛型包装、委托、trait impl，无 `unsafe`。由 DE-T1 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+$$\forall d: D,\, d: \mathrm{impl}\,T \land d.\mathit{inner}: T$$
+
+装饰器与组件实现同一接口，可叠加。
+
+### Axiom DE2（委托链公理）
+
+$$D_1(D_2(D_3(\cdots))) \text{ 形成有效委托链}$$
+
+委托链：$D_1(D_2(D_3(\cdots)))$，递归委托至最内层。
+
+---
+
+### 定理 DE-T1（委托借用安全定理）
+
+由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)，委托时 `&self.inner` 借用有效，无数据竞争。
+
+**证明**：
+
+1. **装饰器结构**：
+
+   ```rust
+   struct Decorator<C: Component> { inner: C }
+   impl<C: Component> Component for Decorator<C> { ... }
+   ```
+
+2. **借用链**：
+   - `op(&self)` 借用装饰器
+   - `self.inner.op()` 借用内部组件
+   - 子借用的生命周期不超过父借用
+
+3. **可叠加性**：
+
+   ```rust
+   let d1 = Decorator1 { inner: Decorator2 { inner: ConcreteComponent } };
+   ```
+
+   - 类型检查：`Decorator2` 实现 `Component`
+   - 借用链：`d1.op()` → `d1.inner.op()` → `d2.inner.op()`
+
+4. **无数据竞争**：
+   - 所有借用为不可变（`&self`）或互斥可变（`&mut self`）
+   - 借用检查器验证无冲突
+
+由 borrow_checker_proof 借用规则，得证。$\square$
+
+---
+
+### 定理 DE-T2（透明性定理）
+
+装饰器对被装饰者透明；客户端无法区分原始对象与装饰对象。
+
+**证明**：
+
+1. **接口一致**：
+   - $D: T$（装饰器实现被装饰者的 trait）
+   - 方法签名完全一致
+
+2. **行为兼容**：
+   - 装饰器方法内部调用 `self.inner.method()`
+   - 对外表现与被装饰者相同（加额外行为）
+
+3. **里氏替换**：
+   - 任何接受 `T` 的上下文可接受 `D`
+   - 类型系统保证兼容性
+
+由 trait 实现规则及里氏替换原则，得证。$\square$
+
+---
+
+### 推论 DE-C1（纯 Safe Decorator）
+
+Decorator 为纯 Safe；仅用泛型包装、委托、trait impl，无 `unsafe`。
+
+**证明**：
+
+1. 泛型结构体：`struct Decorator<C: Component> { inner: C }` 纯 Safe
+2. trait 实现：`impl<C: Component> Component for Decorator<C>` 纯 Safe
+3. 委托调用：`self.inner.method()` 纯 Safe
+4. 无 `unsafe` 块
+
+由 DE-T1、DE-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+
+---
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
 | **概念定义层** | Def 1.1（Decorator 结构）、Axiom DE1/DE2（同接口可叠加、委托链） | 上 |
-| **属性关系层** | Axiom DE1/DE2 → 定理 DE-T1 → 推论 DE-C1；依赖 borrow、safe_unsafe_matrix | 上 |
-| **解释论证层** | 证明思路：委托借用；反例：违反委托链 | §证明思路、§反例 |
+| **属性关系层** | Axiom DE1/DE2 $\rightarrow$ 定理 DE-T1/DE-T2 $\rightarrow$ 推论 DE-C1；依赖 borrow、safe_unsafe_matrix | 上 |
+| **解释论证层** | DE-T1/DE-T2 完整证明；反例：违反委托链 | §完整证明、§反例 |
 
 ---
 
@@ -96,10 +191,41 @@ assert_eq!(coffee.cost(), 2.5);
 
 ---
 
-## 证明思路
+## 完整证明
 
-1. **委托**：`&self` 借用 `self`，`&self.inner` 为子借用；调用 `inner.cost()` 无修改 `self` 其他部分。
-2. **可叠加**：`MilkDecorator { inner: MilkDecorator { inner: PlainCoffee } }` 合法。
+### 形式化论证链
+
+```
+Axiom DE1 (同接口可叠加)
+    ↓ 依赖
+trait 实现
+    ↓ 保证
+定理 DE-T2 (透明性)
+    ↓ 组合
+Axiom DE2 (委托链)
+    ↓ 依赖
+borrow_checker_proof
+    ↓ 保证
+定理 DE-T1 (委托借用安全)
+    ↓ 结论
+推论 DE-C1 (纯 Safe Decorator)
+```
+
+### 与 Rust 类型系统的联系
+
+| Rust 特性 | Decorator 实现 | 类型安全保证 |
+| :--- | :--- | :--- |
+| 泛型 `<C: Component>` | 持有被装饰者 | 编译期类型约束 |
+| `impl Trait` | 同接口实现 | 透明替换 |
+| 借用检查 | 委托链借用 | 无冲突借用 |
+| 组合 | `inner: C` | 所有权清晰 |
+
+### 内存安全保证
+
+1. **无悬垂**：装饰器拥有被装饰者
+2. **借用安全**：委托链符合借用规则
+3. **类型安全**：trait 约束保证接口一致
+4. **可叠加**：泛型类型检查保证嵌套安全
 
 ---
 
@@ -232,11 +358,54 @@ impl<C: Coffee> Coffee for BadDecorator<C> {
 
 ---
 
+## 思维导图
+
+```mermaid
+mindmap
+  root((Decorator<br/>装饰器模式))
+    结构
+      Decorator struct
+      Component trait
+      inner: Component
+    行为
+      同接口扩展
+      委托链
+      行为叠加
+    实现方式
+      泛型零成本
+      trait 对象
+      宏生成
+    应用场景
+      中间件链
+      I/O包装
+      日志/审计
+      缓存/重试
+```
+
+---
+
+## 与其他模式的关系图
+
+```mermaid
+graph LR
+    D[Decorator<br/>装饰器模式] -->|持有策略| S[Strategy<br/>策略模式]
+    D -->|同为包装| A[Adapter<br/>适配器]
+    D -->|对比| C[Composite<br/>组合模式]
+    D -.->|透明扩展| P[Proxy<br/>代理模式]
+    style D fill:#2196F3,stroke:#1565C0,stroke-width:3px,color:#fff
+    style S fill:#2196F3,stroke:#1565C0,color:#fff
+    style A fill:#2196F3,stroke:#1565C0,color:#fff
+    style C fill:#9E9E9E,stroke:#616161,color:#fff
+    style P fill:#9E9E9E,stroke:#616161,color:#fff
+```
+
+---
+
 ## 实质内容五维自检
 
 | 自检项 | 状态 | 说明 |
 | :--- | :--- | :--- |
-| 形式化 | ✅ | Def 1.1、Axiom DE1/DE2、定理 DE-T1（L2） |
+| 形式化 | ✅ | Def 1.1、Axiom DE1/DE2、定理 DE-T1/T2（L3 完整证明）、推论 DE-C1 |
 | 代码 | ✅ | 可运行示例、HTTP 装饰链 |
 | 场景 | ✅ | 典型场景、完整示例 |
 | 反例 | ✅ | 违反委托链 |

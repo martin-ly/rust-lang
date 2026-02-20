@@ -165,7 +165,7 @@ impl DocClassifier {
     /// 根据文件名推荐分类目录
     pub fn suggest_category(file_name: &str) -> Option<&'static str> {
         let lower = file_name.to_lowercase();
-        
+
         for (category, keywords) in CATEGORY_RULES {
             for keyword in *keywords {
                 if lower.contains(keyword) {
@@ -173,14 +173,14 @@ impl DocClassifier {
                 }
             }
         }
-        
+
         None
     }
-    
+
     /// 分析目录结构
     pub fn analyze_structure(docs_path: &str) -> HashMap<String, Vec<PathBuf>> {
         let mut structure: HashMap<String, Vec<PathBuf>> = HashMap::new();
-        
+
         fn visit_dir(
             dir: &Path,
             structure: &mut HashMap<String, Vec<PathBuf>>,
@@ -190,7 +190,7 @@ impl DocClassifier {
                 let entry = entry?;
                 let path = entry.path();
                 let name = entry.file_name().to_string_lossy().to_string();
-                
+
                 if path.is_dir() {
                     let new_prefix = format!("{}{}/", prefix, name);
                     visit_dir(&path, structure, new_prefix)?;
@@ -200,15 +200,15 @@ impl DocClassifier {
             }
             Ok(())
         }
-        
+
         let _ = visit_dir(Path::new(docs_path), &mut structure, String::new());
         structure
     }
-    
+
     /// 生成重构建议报告
     pub fn generate_refactoring_report(structure: &HashMap<String, Vec<PathBuf>>) -> String {
         let mut report = String::new();
-        
+
         report.push_str("# 文档重构建议报告\n\n");
         report.push_str("> **创建日期**: 2026-02-14\n\
                         > **最后更新**: 2026-02-14\n\
@@ -216,11 +216,11 @@ impl DocClassifier {
                         > **状态**: ✅ 已完成\n\n"
         );
         report.push_str("---\n\n");
-        
+
         report.push_str("## 📊 目录统计\n\n");
         report.push_str("| 目录 | 文件数 | 建议操作 |\n");
         report.push_str("| :--- | :--- | :--- |\n");
-        
+
         for (dir, files) in structure.iter() {
             let dir_name = if dir.is_empty() { "根目录" } else { dir };
             let suggestion = if files.len() > 20 {
@@ -232,9 +232,9 @@ impl DocClassifier {
             };
             report.push_str(&format!("| {} | {} | {} |\n", dir_name, files.len(), suggestion));
         }
-        
+
         report.push_str("\n## 🔄 待分类文件\n\n");
-        
+
         if let Some(root_files) = structure.get("") {
             for file in root_files.iter().take(10) {
                 if let Some(name) = file.file_name() {
@@ -248,7 +248,7 @@ impl DocClassifier {
                 }
             }
         }
-        
+
         report
     }
 }
@@ -256,10 +256,10 @@ impl DocClassifier {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let structure = DocClassifier::analyze_structure("docs");
     let report = DocClassifier::generate_refactoring_report(&structure);
-    
+
     fs::write("refactoring_report.md", report)?;
     println!("✅ 重构建议报告已生成: refactoring_report.md");
-    
+
     Ok(())
 }
 ```

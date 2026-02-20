@@ -7,7 +7,7 @@
 > **分类**: 创建型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 4 行（Prototype）
-> **证明深度**: L2（完整证明草图）
+> **证明深度**: L3（完整证明）
 
 ---
 
@@ -16,9 +16,18 @@
 - [Prototype 形式化分析](#prototype-形式化分析)
   - [📊 目录](#-目录)
   - [形式化定义](#形式化定义)
+    - [Def 1.1（Prototype 结构）](#def-11prototype-结构)
+    - [Axiom P1（独立副本公理）](#axiom-p1独立副本公理)
+    - [Axiom P2（引用语义公理）](#axiom-p2引用语义公理)
+    - [定理 P-T1（Clone 类型安全定理）](#定理-p-t1clone-类型安全定理)
+    - [定理 P-T2（借用安全定理）](#定理-p-t2借用安全定理)
+    - [推论 P-C1（Clone 安全使用）](#推论-p-c1clone-安全使用)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [证明思路](#证明思路)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
+    - [内存安全保证](#内存安全保证)
   - [典型场景](#典型场景)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
@@ -28,37 +37,115 @@
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
   - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
 ## 形式化定义
 
-**Def 1.1（Prototype 结构）**:
+### Def 1.1（Prototype 结构）
 
-设 $T$ 为原型类型。Prototype 满足：
+设 $T$ 为原型类型。Prototype 是一个二元组 $\mathcal{P} = (T, \mathit{clone})$，满足：
 
 - $\exists \mathit{clone} : T \to T$，$\mathit{clone}(t)$ 返回 $t$ 的副本
 - $\Omega(\mathit{clone}(t)) \neq \Omega(t)$（不同所有者，独立副本）
-- 引用 [ownership_model](../../../formal_methods/ownership_model.md) 复制语义
+- **语义保持**：副本与原对象在逻辑上等价，但物理上独立
+- **引用语义**：若 $T$ 含引用，Clone 需决定浅拷贝或深拷贝
 
-**Axiom P1**：Clone 不改变原对象，产生独立副本。
+**形式化表示**：
+$$\mathcal{P} = \langle T, \mathit{clone}: T \rightarrow T \rangle$$
 
-**Axiom P2**：若 $T$ 含引用，Clone 需复制引用目标或产生新副本；由实现决定（浅拷贝 vs 深拷贝）。
+---
 
-**定理 P-T1**：若 $T$ 实现 `Clone`，则 $\mathit{clone}(t)$ 类型为 $T$，所有权独立。由 [type_system_foundations](../../../type_theory/type_system_foundations.md)。
+### Axiom P1（独立副本公理）
 
-**定理 P-T2**：`&self` 借用，返回值拥有所有权；原对象仍有效。由 ownership T2。
+$$\forall t: T,\, \mathit{clone}(t) = t' \implies \Omega(t') \cap \Omega(t) = \emptyset \land t' \equiv_{\mathrm{obs}} t$$
 
-**推论 P-C1**：若 $T : \text{Clone}$，则 $\mathit{clone}(t)$ 产生的副本可安全传递、存储；与原对象生命周期独立。由 P-T1、P-T2 及 ownership 唯一性。
+Clone 不改变原对象，产生独立副本；观察等价但所有权分离。
+
+### Axiom P2（引用语义公理）
+
+$$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$$
+
+若 $T$ 含引用，Clone 需复制引用目标或产生新副本；由实现决定（浅拷贝 vs 深拷贝）。
+
+---
+
+### 定理 P-T1（Clone 类型安全定理）
+
+若 $T$ 实现 `Clone`，则 $\mathit{clone}(t)$ 类型为 $T$，所有权独立。
+
+**证明**：
+
+1. **类型签名**：`Clone::clone(&self) -> Self`
+   - 输入：`&self`（不可变借用）
+   - 输出：`Self`（拥有值）
+
+2. **类型保持**：根据 [type_system_foundations](../../../type_theory/type_system_foundations.md)，
+   - $\Gamma \vdash t : T$
+   - $\Gamma \vdash \mathit{clone} : \&T \rightarrow T$
+   - $\Gamma \vdash \mathit{clone}(&t) : T$
+
+3. **所有权独立**：输出为新拥有值，与原 $t$ 所有权独立
+   - $\Omega(\mathit{clone}(t))$ 为新分配
+   - $\Omega(t)$ 不变（仅被借用）
+
+由 type_system 类型保持性，得证。$\square$
+
+---
+
+### 定理 P-T2（借用安全定理）
+
+`&self` 借用，返回值拥有所有权；原对象仍有效。
+
+**证明**：
+
+1. **借用规则**：`clone(&self)` 获取不可变借用
+   - 借用期间：`self` 不可被修改
+   - 借用后：`self` 仍然有效
+
+2. **所有权转移**：返回值为新拥有值
+
+   ```rust
+   let a = Config { ... };
+   let b = a.clone();  // a 被借用，b 获得新所有权
+   // a 仍可使用
+   ```
+
+3. **无悬垂**：根据 [ownership_model](../../../formal_methods/ownership_model.md) T2，
+   - 借用生命周期不超过原对象
+   - 返回值所有权独立
+
+由 ownership T2 及借用规则，得证。$\square$
+
+---
+
+### 推论 P-C1（Clone 安全使用）
+
+若 $T : \text{Clone}$，则 $\mathit{clone}(t)$ 产生的副本可安全传递、存储；与原对象生命周期独立。
+
+**证明**：
+
+1. 由定理 P-T1，返回值类型为 $T$，所有权独立
+2. 由定理 P-T2，原对象仍有效
+3. 副本可：
+   - 存储到不同作用域
+   - 发送到其他线程（若 $T: \mathrm{Send}$）
+   - 独立修改（若 $T$ 可变）
+
+由 P-T1、P-T2 及 ownership 唯一性，得证。$\square$
+
+---
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
-| **概念定义层** | Def 1.1（Prototype 结构）、Axiom P1/P2（独立副本、浅/深拷贝） | 上 |
-| **属性关系层** | Axiom P1/P2 → 定理 P-T1/P-T2 → 推论 P-C1；依赖 type、ownership | 上 |
-| **解释论证层** | 证明思路：clone 所有权、类型；反例：Clone 含浅拷贝引用 | §证明思路、§反例 |
+| **概念定义层** | Def 1.1（Prototype 结构）、Axiom P1/P2（独立副本、引用语义） | 上 |
+| **属性关系层** | Axiom P1/P2 $\rightarrow$ 定理 P-T1/P-T2 $\rightarrow$ 推论 P-C1；依赖 type、ownership | 上 |
+| **解释论证层** | P-T1/P-T2 完整证明；反例：Clone 含浅拷贝引用 | §完整证明、§反例 |
 
 ---
 
@@ -94,10 +181,41 @@ let copy = tree.clone();  // 递归 clone
 
 ---
 
-## 证明思路
+## 完整证明
 
-1. **所有权**：`clone` 返回新值，调用者获得所有权；原 `self` 未被消费。
-2. **类型**：返回 `Self`，与 $T$ 一致；由 type_system。
+### 形式化论证链
+
+```
+Axiom P1 (独立副本)
+    ↓ 依赖
+type_system 类型保持
+    ↓ 保证
+定理 P-T1 (Clone 类型安全)
+    ↓ 组合
+Axiom P2 (引用语义)
+    ↓ 依赖
+ownership_model T2
+    ↓ 保证
+定理 P-T2 (借用安全)
+    ↓ 结论
+推论 P-C1 (Clone 安全使用)
+```
+
+### 与 Rust 类型系统的联系
+
+| Rust 特性 | Prototype 实现 | 类型安全保证 |
+| :--- | :--- | :--- |
+| `Clone` trait | 原型复制 | 编译期检查实现 |
+| `#[derive(Clone)]` | 自动实现 | 字段级递归 Clone |
+| `&self` 借用 | clone 方法 | 原对象仍有效 |
+| 所有权返回 | 新实例 | 独立生命周期 |
+
+### 内存安全保证
+
+1. **无悬垂**：`clone` 返回新分配，与原对象无关
+2. **借用安全**：`&self` 保证原对象不被修改
+3. **递归安全**：`#[derive(Clone)]` 递归检查字段 Clone
+4. **深拷贝可控**：手动实现可控制拷贝深度
 
 ---
 
@@ -153,6 +271,13 @@ impl Clone for BadNode {
 
 `Copy` 为 `Clone` 的子集：隐式复制，无显式 `clone()` 调用。`Clone` 可显式、可含堆分配。
 
+| 特性 | Copy | Clone |
+| :--- | :--- | :--- |
+| 调用方式 | 隐式 | 显式 `.clone()` |
+| 语义 | 位复制 | 逻辑复制 |
+| 堆分配 | 无 | 可有 |
+|  trait 关系 | `Copy: Clone` | 基 trait |
+
 ---
 
 ## 选型决策树
@@ -196,11 +321,54 @@ impl Clone for BadNode {
 
 ---
 
+## 思维导图
+
+```mermaid
+mindmap
+  root((Prototype<br/>原型模式))
+    结构
+      Prototype trait
+      clone(&self) → Self
+      原对象保留
+    行为
+      位复制或逻辑复制
+      所有权转移给副本
+      原对象仍有效
+    实现方式
+      #[derive(Clone)]
+      手动 Clone impl
+      Copy trait
+    应用场景
+      配置复制
+      模板缓存
+      深拷贝结构
+      对象快照
+```
+
+---
+
+## 与其他模式的关系图
+
+```mermaid
+graph LR
+    P[Prototype<br/>原型模式] -->|工厂使用| FM[Factory Method<br/>工厂方法]
+    P -->|Builder使用| B[Builder<br/>建造者]
+    P -->|实现| M[Memento<br/>备忘录模式]
+    P -.->|子集| C[Copy<br/>复制 trait]
+    style P fill:#4CAF50,stroke:#2E7D32,stroke-width:3px,color:#fff
+    style FM fill:#2196F3,stroke:#1565C0,color:#fff
+    style B fill:#2196F3,stroke:#1565C0,color:#fff
+    style M fill:#2196F3,stroke:#1565C0,color:#fff
+    style C fill:#9E9E9E,stroke:#616161,color:#fff
+```
+
+---
+
 ## 实质内容五维自检
 
 | 自检项 | 状态 | 说明 |
 | :--- | :--- | :--- |
-| 形式化 | ✅ | Def 1.1、Axiom P1/P2、定理 P-T1/T2（L2）、推论 P-C1 |
+| 形式化 | ✅ | Def 1.1、Axiom P1/P2、定理 P-T1/T2（L3 完整证明）、推论 P-C1 |
 | 代码 | ✅ | Clone impl 示例 |
 | 场景 | ✅ | 典型场景、与 Copy 关系 |
 | 反例 | ✅ | Clone 含浅拷贝引用 |

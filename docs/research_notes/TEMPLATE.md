@@ -30,6 +30,7 @@
     - [示例 1: 基础示例](#示例-1-基础示例)
     - [示例 2: 进阶示例](#示例-2-进阶示例)
     - [示例 3: 研究场景示例](#示例-3-研究场景示例)
+    - [示例 4: Coq 形式化示例](#示例-4-coq-形式化示例)
   - [📖 参考文献](#-参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
@@ -39,6 +40,7 @@
     - [前置依赖](#前置依赖)
     - [后续引用](#后续引用)
     - [相关研究笔记](#相关研究笔记)
+    - [Coq 证明骨架](#coq-证明骨架)
   - [🔄 研究进展](#-研究进展)
     - [已完成 ✅](#已完成-)
     - [进行中 🔄](#进行中-)
@@ -91,12 +93,28 @@ $$[数学公式或形式化表示]$$
 // 与研究主题相关的 Rust 代码示例
 fn example_definition() {
     // 实现与研究目标相关的代码
+    let x = 42;
+    println!("示例定义: {}", x);
 }
 ```
 
 ### 2. 定义/设计要点二
 
 **定义 X.X (名称)**: [形式化定义或实验设计描述]
+
+**形式化表示**:
+
+```
+[形式化规则或伪代码]
+```
+
+**Rust 代码对应**:
+
+```rust
+fn example_two() {
+    // 实现与研究目标相关的代码
+}
+```
 
 ### 3. 定义/设计要点三
 
@@ -157,6 +175,10 @@ fn basic_example() {
     let x = 42;
     println!("基础示例: {}", x);
 }
+
+fn main() {
+    basic_example();
+}
 ```
 
 **说明**: [示例说明和要点]
@@ -171,6 +193,10 @@ fn advanced_example() {
     let sum: i32 = data.iter().sum();
     println!("进阶示例: 总和 = {}", sum);
 }
+
+fn main() {
+    advanced_example();
+}
 ```
 
 **说明**: [示例说明和要点]
@@ -181,15 +207,55 @@ fn advanced_example() {
 // 研究场景：验证 [研究目标] 的实际应用
 fn research_scenario_example() {
     // 实现研究场景代码
+    let data = vec![1, 2, 3, 4, 5];
 
     // 形式化目标：
     // - 验证 [定理/性质]
     // - 测试 [假设]
     // - 收集 [数据]
+
+    let result: i32 = data.iter().map(|x| x * 2).sum();
+    println!("研究场景结果: {}", result);
+}
+
+fn main() {
+    research_scenario_example();
 }
 ```
 
 **说明**: [研究场景说明和形式化目标]
+
+### 示例 4: Coq 形式化示例
+
+```coq
+(* Coq 形式化代码示例 *)
+Require Import Coq.Arith.Arith.
+Require Import Coq.Lists.List.
+
+(* 定义类型 *)
+Inductive MyType : Type :=
+  | MT_Value : nat -> MyType
+  | MT_Pair : MyType -> MyType -> MyType.
+
+(* 定义函数 *)
+Fixpoint size (t: MyType) : nat :=
+  match t with
+  | MT_Value _ => 1
+  | MT_Pair t1 t2 => size t1 + size t2
+  end.
+
+(* 定理陈述 *)
+Theorem size_positive :
+  forall t: MyType, size t > 0.
+Proof.
+  intros t.
+  induction t.
+  - simpl. apply gt_Sn_O.
+  - simpl. apply plus_gt_compat; assumption.
+Qed.
+```
+
+**说明**: [Coq 代码说明和与 Rust 的对应关系]
 
 ---
 
@@ -201,6 +267,11 @@ fn research_scenario_example() {
    - 作者: [作者姓名]
    - 年份: [年份]
    - 摘要: [摘要或链接]
+
+2. **RustBelt: Securing the Foundations of the Rust Programming Language**
+   - 作者: Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
+   - 年份: 2017
+   - 链接: <https://plv.mpi-sws.org/rustbelt/>
 
 ### 官方文档
 
@@ -218,6 +289,8 @@ fn research_scenario_example() {
 - [Rust Analyzer](https://rust-analyzer.github.io/)
 - [Clippy](https://github.com/rust-lang/rust-clippy)
 - [Miri](https://github.com/rust-lang/miri)
+- [Coq](https://coq.inria.fr/)
+- [Isabelle](https://isabelle.in.tum.de/)
 
 ---
 
@@ -229,6 +302,8 @@ fn research_scenario_example() {
 | :--- | :--- | :--- |
 | [前置概念1] | [文档链接] | [用途说明] |
 | [前置概念2] | [文档链接] | [用途说明] |
+| 所有权规则 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) | 内存安全基础 |
+| 借用规则 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) | 数据竞争自由 |
 
 ### 后续引用
 
@@ -236,14 +311,30 @@ fn research_scenario_example() {
 | :--- | :--- | :--- |
 | [后续文档1] | [链接] | [说明] |
 | [后续文档2] | [链接] | [说明] |
+| CORE_THEOREMS_FULL_PROOFS | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 完整定理证明 |
 
 ### 相关研究笔记
 
 | 类别 | 文档 | 链接 |
 | :--- | :--- | :--- |
-| 形式化方法 | [相关文档] | [链接] |
-| 类型理论 | [相关文档] | [链接] |
-| 实验研究 | [相关文档] | [链接] |
+| 形式化方法 | 所有权模型形式化 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) |
+| 形式化方法 | 借用检查器证明 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
+| 形式化方法 | 异步状态机 | [formal_methods/async_state_machine.md](./formal_methods/async_state_machine.md) |
+| 形式化方法 | 生命周期形式化 | [formal_methods/lifetime_formalization.md](./formal_methods/lifetime_formalization.md) |
+| 形式化方法 | Pin 和自引用类型 | [formal_methods/pin_self_referential.md](./formal_methods/pin_self_referential.md) |
+| 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
+| 类型理论 | Trait 系统形式化 | [type_theory/trait_system_formalization.md](./type_theory/trait_system_formalization.md) |
+| 类型理论 | 高级类型特性 | [type_theory/advanced_types.md](./type_theory/advanced_types.md) |
+| 实验研究 | 性能基准测试 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) |
+| 实验研究 | 内存分析 | [experiments/memory_analysis.md](./experiments/memory_analysis.md) |
+
+### Coq 证明骨架
+
+| 定理 | Coq 文件 | 说明 |
+| :--- | :--- | :--- |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 所有权唯一性 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v) | 数据竞争自由 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) | 类型安全 |
 
 ---
 
@@ -266,6 +357,6 @@ fn research_scenario_example() {
 
 ---
 
-**维护者**: [研究小组名称]
+**维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-20
 **状态**: ✅ **已完成**

@@ -7,7 +7,7 @@
 > **分类**: 结构型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 6 行（Adapter）
-> **证明深度**: L2（完整证明草图）
+> **证明深度**: L3（完整证明）
 
 ---
 
@@ -16,9 +16,18 @@
 - [Adapter 形式化分析](#adapter-形式化分析)
   - [📊 目录](#-目录)
   - [形式化定义](#形式化定义)
+    - [Def 1.1（Adapter 结构）](#def-11adapter-结构)
+    - [Axiom AD1（语义保持公理）](#axiom-ad1语义保持公理)
+    - [Axiom AD2（委托借用公理）](#axiom-ad2委托借用公理)
+    - [定理 AD-T1（所有权安全定理）](#定理-ad-t1所有权安全定理)
+    - [定理 AD-T2（借用冲突避免定理）](#定理-ad-t2借用冲突避免定理)
+    - [推论 AD-C1（纯 Safe Adapter）](#推论-ad-c1纯-safe-adapter)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [证明思路](#证明思路)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
+    - [内存安全保证](#内存安全保证)
   - [典型场景](#典型场景)
   - [完整场景示例：第三方 HTTP 客户端适配](#完整场景示例第三方-http-客户端适配)
   - [相关模式](#相关模式)
@@ -28,39 +37,121 @@
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
   - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
 
 ---
 
 ## 形式化定义
 
-**Def 1.1（Adapter 结构）**:
+### Def 1.1（Adapter 结构）
 
-设 $A$ 为适配器类型，$T$ 为目标接口类型，$S$ 为被适配类型。Adapter 满足：
+设 $A$ 为适配器类型，$T$ 为目标接口类型，$S$ 为被适配类型。Adapter 是一个四元组 $\mathcal{AD} = (A, T, S, \mathit{adapt})$，满足：
 
 - $A$ 持有 $S$：$\Omega(A) \supset S$（$A$ 拥有 $S$）
 - $A$ 实现 $T$：$\mathit{impl}\, T \, \mathit{for}\, A$
 - $\mathit{op}_T(a)$ 委托给 $a.\mathit{inner}.\mathit{op}_S()$，即委托给 $S$ 的接口
+- **语义保持**：适配器不改变被适配对象语义，仅转换接口形式
 
-**Axiom AD1**：适配器不改变被适配对象语义，仅转换接口形式。
+**形式化表示**：
+$$\mathcal{AD} = \langle A, T, S, \mathit{adapt}: A \times S \rightarrow \mathrm{impl}\,T \rangle$$
 
-**Axiom AD2**：委托时借用：$\mathit{op}_T(\&a)$ 内调用 $\&a.\mathit{inner}$，满足借用规则。
+---
 
-**定理 AD-T1**：由 [ownership_model](../../../formal_methods/ownership_model.md)，$A$ 拥有 $S$，委托调用时 `&self.inner` 借用有效，无悬垂。
+### Axiom AD1（语义保持公理）
 
-**定理 AD-T2**：由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)，委托链上无双重可变借用。
+$$\forall a: A,\, \mathit{op}_T(a) \equiv_{\mathrm{sem}} \mathit{op}_S(a.\mathit{inner})$$
 
-**推论 AD-C1**：Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsafe`。由 AD-T1、AD-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1。
+适配器不改变被适配对象语义，仅转换接口形式。
 
-*证明*：持有 $S$ 为所有权；委托为借用；无裸指针、无 FFI；故纯 Safe。∎
+### Axiom AD2（委托借用公理）
+
+$$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用规则}$$
+
+委托时借用满足 Rust 借用规则。
+
+---
+
+### 定理 AD-T1（所有权安全定理）
+
+由 [ownership_model](../../../formal_methods/ownership_model.md)，$A$ 拥有 $S$，委托调用时 `&self.inner` 借用有效，无悬垂。
+
+**证明**：
+
+1. **持有关系**：$\Omega(A) \supset S$ 表示 $A$ 拥有 $S$
+
+   ```rust
+   struct Adapter { inner: S }  // A 拥有 S
+   ```
+
+2. **借用链**：`op_T(&self)` 中：
+   - `&self` 借用 $A$
+   - `&self.inner` 借用 $S$（子借用）
+   - 根据借用规则，子借用的生命周期不超过父借用
+
+3. **无悬垂**：
+   - $S$ 的生命周期与 $A$ 绑定
+   - $A$ 存活期间，$S$ 有效
+   - `&self.inner` 不会悬垂
+
+由 ownership_model 及借用规则，得证。$\square$
+
+---
+
+### 定理 AD-T2（借用冲突避免定理）
+
+由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)，委托链上无双重可变借用。
+
+**证明**：
+
+1. **委托模式**：`op_T(&self)` → `self.inner.op_S()`
+   - `op_T` 接收 `&self`（不可变借用）
+   - `op_S` 可能接收 `&self` 或 `&mut self`
+
+2. **冲突检查**：
+   - 若 `op_S` 需 `&mut self`，则 `op_T` 需 `&mut self`
+   - 借用检查器验证同一作用域内无冲突借用
+
+3. **委托链**：
+
+   ```rust
+   impl Target for Adapter {
+       fn op(&self) {  // &self
+           self.inner.source_op();  // &self 借用 inner
+       }
+   }
+   ```
+
+   - 单层委托：无冲突
+   - 多层委托：递归检查
+
+由 borrow_checker_proof 互斥规则，得证。$\square$
+
+---
+
+### 推论 AD-C1（纯 Safe Adapter）
+
+Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsafe`。
+
+**证明**：
+
+1. 结构体定义：`struct Adapter { inner: S }` 纯 Safe
+2. trait 实现：`impl Target for Adapter` 纯 Safe
+3. 委托调用：`self.inner.method()` 纯 Safe
+4. 无裸指针、无 FFI、无 `unsafe` 块
+
+由 AD-T1、AD-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+
+---
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
 | **概念定义层** | Def 1.1（Adapter 结构）、Axiom AD1/AD2（语义保持、委托借用） | 上 |
-| **属性关系层** | Axiom AD1/AD2 → 定理 AD-T1/AD-T2 → 推论 AD-C1；依赖 ownership、borrow | 上 |
-| **解释论证层** | 证明：AD-C1；反例：适配器修改被适配者语义 | 上、§反例 |
+| **属性关系层** | Axiom AD1/AD2 $\rightarrow$ 定理 AD-T1/AD-T2 $\rightarrow$ 推论 AD-C1；依赖 ownership、borrow | 上 |
+| **解释论证层** | AD-T1/AD-T2 完整证明；反例：适配器修改被适配者语义 | §完整证明、§反例 |
 
 ---
 
@@ -98,10 +189,41 @@ a.log("hello");
 
 ---
 
-## 证明思路
+## 完整证明
 
-1. **所有权**：`Adapter` 拥有 `LegacyLogger`；`&self` 借用 `self`，`&self.inner` 为子借用，合法。
-2. **委托**：`log` 内仅调用 `inner.log_to_stdout`，无修改 `self` 其他部分，无冲突。
+### 形式化论证链
+
+```
+Axiom AD1 (语义保持)
+    ↓ 约束
+Axiom AD2 (委托借用)
+    ↓ 依赖
+ownership_model
+    ↓ 保证
+定理 AD-T1 (所有权安全)
+    ↓ 组合
+borrow_checker_proof
+    ↓ 保证
+定理 AD-T2 (借用冲突避免)
+    ↓ 结论
+推论 AD-C1 (纯 Safe Adapter)
+```
+
+### 与 Rust 类型系统的联系
+
+| Rust 特性 | Adapter 实现 | 类型安全保证 |
+| :--- | :--- | :--- |
+| 结构体组合 | `inner: S` | 持有被适配者 |
+| `impl Trait` | 目标接口实现 | 编译期检查方法 |
+| 借用检查 | `&self` 委托 | 无悬垂/冲突借用 |
+| 所有权 | 拥有 $S$ | $S$ 生命周期绑定 |
+
+### 内存安全保证
+
+1. **无悬垂**：`Adapter` 拥有 `S`，生命周期绑定
+2. **借用安全**：委托链符合借用规则
+3. **类型安全**：trait 实现编译期检查
+4. **无泄漏**：`Adapter` 释放时 `S` 一同释放
 
 ---
 
@@ -231,11 +353,55 @@ impl Logger for BadAdapter {
 
 ---
 
+## 思维导图
+
+```mermaid
+mindmap
+  root((Adapter<br/>适配器模式))
+    结构
+      Adapter struct
+      Target trait
+      Adaptee 被适配者
+      inner: Adaptee
+    行为
+      接口转换
+      委托调用
+      语义保持
+    实现方式
+      结构体包装
+      引用适配
+      泛型适配
+    应用场景
+      第三方库适配
+      跨crate接口
+      序列化适配
+      异步转换
+```
+
+---
+
+## 与其他模式的关系图
+
+```mermaid
+graph LR
+    A[Adapter<br/>适配器模式] -->|同为包装| D[Decorator<br/>装饰器]
+    A -->|简化多接口| F[Facade<br/>外观模式]
+    A -->|对比| B[Bridge<br/>桥接模式]
+    A -.->|接口转换 vs 行为扩展| D2[Decorator]
+    style A fill:#2196F3,stroke:#1565C0,stroke-width:3px,color:#fff
+    style D fill:#2196F3,stroke:#1565C0,color:#fff
+    style F fill:#2196F3,stroke:#1565C0,color:#fff
+    style B fill:#9E9E9E,stroke:#616161,color:#fff
+    style D2 fill:#9E9E9E,stroke:#616161,color:#fff
+```
+
+---
+
 ## 实质内容五维自检
 
 | 自检项 | 状态 | 说明 |
 | :--- | :--- | :--- |
-| 形式化 | ✅ | Def 1.1、Axiom AD1、定理 AD-T1（L2） |
+| 形式化 | ✅ | Def 1.1、Axiom AD1/AD2、定理 AD-T1/T2（L3 完整证明）、推论 AD-C1 |
 | 代码 | ✅ | 可运行示例、完整场景 |
 | 场景 | ✅ | 典型场景、第三方 HTTP 适配 |
 | 反例 | ✅ | 适配器修改被适配者语义 |

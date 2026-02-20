@@ -26,6 +26,11 @@
     - [场景 2：性能改进验证](#场景-2性能改进验证)
     - [场景 3：API 稳定化跟踪](#场景-3api-稳定化跟踪)
   - [相关文档](#相关文档)
+    - [核心流程文档](#核心流程文档)
+    - [形式化方法文档](#形式化方法文档)
+    - [更新记录文档](#更新记录文档)
+    - [形式化证明文档](#形式化证明文档)
+    - [研究笔记索引](#研究笔记索引)
 
 ---
 
@@ -104,13 +109,13 @@
 fn lub_coercion_example() {
     // 1.93 前：某些函数项类型推断不正确
     // 1.93 后：LUB (Least Upper Bound) 计算修正
-    
+
     let f = if true {
         |x: i32| x as i64  // fn(i32) -> i64
     } else {
         |x: i32| (x * 2) as i64  // fn(i32) -> i64
     };
-    
+
     // 研究任务：
     // 1. 形式化描述 LUB 计算规则
     // 2. 验证修正后的推断正确性
@@ -128,9 +133,9 @@ use std::mem::MaybeUninit;
 
 fn performance_improvement_example() {
     // Rust 1.93 新增的 MaybeUninit API
-    let mut buffer: [MaybeUninit<u8>; 1024] = 
+    let mut buffer: [MaybeUninit<u8>; 1024] =
         unsafe { MaybeUninit::uninit().assume_init() };
-    
+
     // 新 API：write_copy_of_slice
     unsafe {
         MaybeUninit::write_copy_of_slice(
@@ -138,7 +143,7 @@ fn performance_improvement_example() {
             b"hello world"
         );
     }
-    
+
     // 研究任务：
     // 1. 设计基准测试验证性能改进
     // 2. 形式化证明新 API 的安全性
@@ -157,11 +162,11 @@ use std::num::NonZeroU32;
 fn api_stabilization_example() {
     // Rust 1.93 新增的 API 示例
     // 假设新增了 NonZeroU32::div_ceil
-    
+
     let a = NonZeroU32::new(10).unwrap();
     let b = NonZeroU32::new(3).unwrap();
     let result = a.get().div_ceil(b.get());  // 4
-    
+
     // 研究任务：
     // 1. 验证新 API 的前置/后置条件
     // 2. 更新 trait_system_formalization.md 中的实现解析
@@ -195,6 +200,24 @@ fn api_stabilization_example() {
 | RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [RUST_191_RESEARCH_UPDATE_2025_11_15.md](./RUST_191_RESEARCH_UPDATE_2025_11_15.md) |
 | RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [RUST_192_RESEARCH_UPDATE_2025_12_11.md](./RUST_192_RESEARCH_UPDATE_2025_12_11.md) |
 | CHANGELOG | 更新日志 | [CHANGELOG.md](./CHANGELOG.md) |
+
+### 形式化证明文档
+
+| 文档 | 用途 | 链接 |
+| :--- | :--- | :--- |
+| CORE_THEOREMS_FULL_PROOFS | 核心定理完整证明 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) |
+| COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| PROOF_INDEX | 证明索引 | [PROOF_INDEX.md](./PROOF_INDEX.md) |
+| SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+
+### 研究笔记索引
+
+| 类别 | 文档 | 链接 |
+| :--- | :--- | :--- |
+| 形式化方法 | 所有权模型 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) |
+| 形式化方法 | 借用检查器 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
+| 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
+| 实验研究 | 性能基准测试 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) |
 
 ---
 

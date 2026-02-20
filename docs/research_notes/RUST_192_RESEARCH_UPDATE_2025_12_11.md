@@ -68,9 +68,9 @@ use std::mem::MaybeUninit;
 
 fn maybe_uninit_safety_research() {
     // Rust 1.92.0 文档化的 MaybeUninit 语义
-    let mut buffer: [MaybeUninit<u8>; 1024] = 
+    let mut buffer: [MaybeUninit<u8>; 1024] =
         unsafe { MaybeUninit::uninit().assume_init() };
-    
+
     // 安全使用模式：
     // 1. 写入后 assume_init
     unsafe {
@@ -78,7 +78,7 @@ fn maybe_uninit_safety_research() {
         let initialized = buffer[0].assume_init_ref();
         assert_eq!(*initialized, 42);
     }
-    
+
     // 形式化保证：
     // - write 后置条件：内存已初始化
     // - assume_init_ref 前置条件：内存已初始化
@@ -104,15 +104,15 @@ union MyUnion {
 
 fn union_raw_pointer_research() {
     let mut u = MyUnion { int: 42 };
-    
+
     // Rust 1.92.0: 允许使用 &raw mut 访问联合体字段
     let int_ptr = &raw mut u.int;
     let float_ptr = &raw mut u.float;
-    
+
     // 安全保证：
     // - &raw 不创建借用，不触发 UB
     // - 通过原始指针的访问仍需要 unsafe
-    
+
     unsafe {
         *int_ptr = 100;
         // 注意：此时 u.float 也是 100（位模式解释不同）
@@ -132,14 +132,14 @@ fn union_raw_pointer_research() {
 
 trait Container {
     type Item: Sized;
-    
+
     fn get(&self) -> Option<Self::Item>;
 }
 
 // Rust 1.92.0: 编译器优先使用关联类型的项边界
 impl Container for Vec<i32> {
     type Item = i32;  // 自动满足 Sized 边界
-    
+
     fn get(&self) -> Option<i32> {
         self.first().copied()
     }
@@ -164,10 +164,10 @@ where
     // Rust 1.92.0 增强了高阶生命周期的一致性规则
     let s1 = String::from("hello");
     let r1 = f(&s1);
-    
+
     let s2 = String::from("world");
     let r2 = f(&s2);
-    
+
     // 形式化保证：
     // - f 的返回生命周期与输入生命周期相同
     // - r1 和 r2 的生命周期分别受 s1 和 s2 约束
@@ -210,6 +210,7 @@ impl MultiBound for MyStruct {
 3. **`<[_]>::rotate_right`** - 切片右旋转
 
 **代码示例**:
+
 ```rust
 use std::num::NonZeroU32;
 
@@ -218,7 +219,7 @@ fn api_stabilization_examples() {
     let a = NonZeroU32::new(10).unwrap();
     let b = NonZeroU32::new(3).unwrap();
     let result = a.get().div_ceil(b.get());  // 4
-    
+
     // 形式化保证：
     // - 非零整数保证除数不为零
     // - 向上取整的数学定义
@@ -284,6 +285,41 @@ fn api_stabilization_examples() {
 | 联合体 | [FORMAL_PROOF_SYSTEM_GUIDE.md](./FORMAL_PROOF_SYSTEM_GUIDE.md) | UB 分类 |
 | 自动特征 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md) | Trait 解析 |
 | 高阶生命周期 | [lifetime_formalization.md](./type_theory/lifetime_formalization.md) | 生命周期形式化 |
+
+### 核心定理
+
+| 定理 | 文档 | 说明 |
+| :--- | :--- | :--- |
+| T-OW2 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 所有权唯一性 |
+| T-BR1 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 数据竞争自由 |
+| T-TY3 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 类型安全 |
+
+### Coq 证明骨架
+
+| 定理 | Coq 文件 | 状态 |
+| :--- | :--- | :--- |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+
+### 相关研究笔记
+
+| 类别 | 文档 | 链接 |
+| :--- | :--- | :--- |
+| 形式化方法 | 所有权模型 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) |
+| 形式化方法 | 借用检查器 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
+| 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
+| 类型理论 | Trait 系统 | [type_theory/trait_system_formalization.md](./type_theory/trait_system_formalization.md) |
+| 类型理论 | 生命周期形式化 | [type_theory/lifetime_formalization.md](./type_theory/lifetime_formalization.md) |
+| 实验研究 | 性能基准测试 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) |
+
+### 项目文档
+
+| 文档 | 链接 | 内容 |
+| :--- | :--- | :--- |
+| 系统总结 | [SYSTEM_SUMMARY.md](./SYSTEM_SUMMARY.md) | 研究笔记系统总结 |
+| 理论体系 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 理论体系架构 |
+| 证明索引 | [PROOF_INDEX.md](./PROOF_INDEX.md) | 形式化证明索引 |
 
 ---
 

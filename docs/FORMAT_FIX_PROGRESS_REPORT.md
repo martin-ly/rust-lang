@@ -249,7 +249,7 @@ impl FixStats {
     fn new() -> Self {
         Self::default()
     }
-    
+
     fn add_category(&mut self, name: &str, total: usize, fixed: usize) {
         self.category_stats.insert(
             name.to_string(),
@@ -258,17 +258,17 @@ impl FixStats {
         self.total_files += total;
         self.fixed_files += fixed;
     }
-    
+
     fn calculate_progress(&self) -> f64 {
         if self.total_files == 0 {
             return 0.0;
         }
         (self.fixed_files as f64 / self.total_files as f64) * 100.0
     }
-    
+
     fn generate_report(&self) -> String {
         let mut report = String::new();
-        
+
         report.push_str("# 文档格式修复进度报告\n\n");
         report.push_str(&format!(
             "> **创建日期**: 2026-02-20\n\
@@ -276,7 +276,7 @@ impl FixStats {
              > **Rust 版本**: 1.93.0+ (Edition 2024)\n\
              > **状态**: 🔄 进行中\n\n"
         ));
-        
+
         report.push_str("---\n\n");
         report.push_str("## 📊 总体进度\n\n");
         report.push_str(&format!(
@@ -289,11 +289,11 @@ impl FixStats {
             self.total_files - self.fixed_files,
             self.calculate_progress()
         ));
-        
+
         report.push_str("## 📁 分类统计\n\n");
         report.push_str("| 目录 | 总数 | 已修复 | 进度 |\n");
         report.push_str("| :--- | :--- | :--- | :--- |\n");
-        
+
         for (name, stat) in &self.category_stats {
             let progress = if stat.total > 0 {
                 (stat.fixed as f64 / stat.total as f64) * 100.0
@@ -312,14 +312,14 @@ impl FixStats {
                 name, stat.total, stat.fixed, status, progress
             ));
         }
-        
+
         report
     }
 }
 
 fn main() {
     let mut stats = FixStats::new();
-    
+
     // 添加各目录统计
     stats.add_category("docs/ 根目录", 4, 4);
     stats.add_category("01_learning/", 3, 3);
@@ -330,7 +330,7 @@ fn main() {
     stats.add_category("07_project/", 14, 14);
     stats.add_category("research_notes/", 68, 0);
     stats.add_category("archive/", 122, 0);
-    
+
     println!("{}", stats.generate_report());
     println!("\n========== 进度汇总 ==========");
     println!("总体进度: {:.1}%", stats.calculate_progress());

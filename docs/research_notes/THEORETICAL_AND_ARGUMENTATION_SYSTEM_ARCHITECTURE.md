@@ -29,6 +29,10 @@
     - [3.5 UB 分类与反例](#35-ub-分类与反例)
     - [3.6 安全 vs 非安全决策树](#36-安全-vs-非安全决策树)
   - [📖 如何阅读本体系](#-如何阅读本体系)
+  - [💻 代码示例](#-代码示例)
+    - [示例 1: 理论体系层验证代码](#示例-1-理论体系层验证代码)
+    - [示例 2: 安全边界验证代码](#示例-2-安全边界验证代码)
+    - [示例 3: Coq 形式化对应代码](#示例-3-coq-形式化对应代码)
   - [📚 相关文档](#-相关文档)
 
 ---
@@ -333,6 +337,196 @@
 9. **特性**：[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 92 项语言特性
 
 **按需求选读**：缺论证结构 → §§ 二、[ARGUMENTATION_CHAIN_AND_FLOW](ARGUMENTATION_CHAIN_AND_FLOW.md)；缺安全边界 → §§ 三、SAFE_UNSAFE；缺具体定理 → PROOF_INDEX；缺设计理由 → DESIGN_MECHANISM_RATIONALE；缺全貌 → [00_COMPREHENSIVE_SUMMARY](00_COMPREHENSIVE_SUMMARY.md)。
+
+---
+
+## 💻 代码示例
+
+### 示例 1: 理论体系层验证代码
+
+```rust
+// 研究场景：验证理论体系的层次结构
+// 对应：理论体系四层架构（基础公理层 → 语义模型层 → 性质定理层 → 应用边界层）
+
+enum TheoryLayer {
+    Axioms,      // 基础公理层
+    Semantics,   // 语义与模型层
+    Theorems,    // 性质定理层
+    Application, // 应用与边界层
+}
+
+struct TheoryElement {
+    layer: TheoryLayer,
+    name: String,
+    dependencies: Vec<String>,
+}
+
+// 验证理论层次结构
+fn verify_theory_hierarchy(elements: &[TheoryElement]) -> bool {
+    for elem in elements {
+        match elem.layer {
+            TheoryLayer::Axioms => {
+                // 公理层不应依赖其他层
+                assert!(elem.dependencies.is_empty());
+            }
+            TheoryLayer::Semantics => {
+                // 语义层只依赖公理层
+                assert!(elem.dependencies.iter().all(|d| {
+                    elements.iter().any(|e| e.name == *d &&
+                        matches!(e.layer, TheoryLayer::Axioms))
+                }));
+            }
+            TheoryLayer::Theorems => {
+                // 定理层依赖公理和语义层
+                assert!(elem.dependencies.iter().all(|d| {
+                    elements.iter().any(|e| e.name == *d &&
+                        (matches!(e.layer, TheoryLayer::Axioms) ||
+                         matches!(e.layer, TheoryLayer::Semantics)))
+                }));
+            }
+            TheoryLayer::Application => {
+                // 应用层可以依赖所有下层
+                assert!(elem.dependencies.iter().all(|d| {
+                    elements.iter().any(|e| e.name == *d)
+                }));
+            }
+        }
+    }
+    true
+}
+
+fn main() {
+    let elements = vec![
+        TheoryElement {
+            layer: TheoryLayer::Axioms,
+            name: "A1-A8".to_string(),
+            dependencies: vec![],
+        },
+        TheoryElement {
+            layer: TheoryLayer::Semantics,
+            name: "OperationalSemantics".to_string(),
+            dependencies: vec!["A1-A8".to_string()],
+        },
+        TheoryElement {
+            layer: TheoryLayer::Theorems,
+            name: "T-OW2".to_string(),
+            dependencies: vec!["A1-A8".to_string(), "OperationalSemantics".to_string()],
+        },
+    ];
+
+    assert!(verify_theory_hierarchy(&elements));
+    println!("理论层次结构验证通过");
+}
+```
+
+### 示例 2: 安全边界验证代码
+
+```rust
+// 研究场景：验证安全与非安全边界
+// 对应：§3 安全与非安全边界
+
+use std::mem::MaybeUninit;
+
+// 安全 API：内部使用 unsafe，对外暴露安全接口
+struct SafeBuffer {
+    data: Vec<u8>,
+}
+
+impl SafeBuffer {
+    // 安全构造函数
+    fn new(size: usize) -> Self {
+        Self {
+            data: vec![0; size],
+        }
+    }
+
+    // 安全写入方法
+    fn write(&mut self, offset: usize, value: u8) -> Result<(), &'static str> {
+        if offset >= self.data.len() {
+            return Err("Offset out of bounds");
+        }
+        self.data[offset] = value;
+        Ok(())
+    }
+
+    // 安全读取方法
+    fn read(&self, offset: usize) -> Result<u8, &'static str> {
+        self.data.get(offset).copied().ok_or("Offset out of bounds")
+    }
+}
+
+// 验证安全抽象的不变式
+fn verify_safe_abstraction_invariant() {
+    let mut buffer = SafeBuffer::new(1024);
+
+    // 不变式 1: len ≤ capacity
+    assert!(buffer.data.len() <= buffer.data.capacity());
+
+    // 不变式 2: 越界访问返回错误而非 UB
+    assert!(buffer.write(1024, 42).is_err());
+    assert!(buffer.read(1024).is_err());
+
+    println!("安全抽象不变式验证通过");
+}
+
+fn main() {
+    verify_safe_abstraction_invariant();
+}
+```
+
+### 示例 3: Coq 形式化对应代码
+
+```coq
+(* Coq 代码：理论体系的形式化表示 *)
+Require Import Coq.Lists.List.
+Require Import Coq.Classes.RelationClasses.
+
+(* 理论层定义 *)
+Inductive TheoryLayer : Type :=
+  | AxiomLayer : TheoryLayer
+  | SemanticsLayer : TheoryLayer
+  | TheoremLayer : TheoryLayer
+  | ApplicationLayer : TheoryLayer.
+
+(* 理论元素 *)
+Record TheoryElement := {
+  name : string;
+  layer : TheoryLayer;
+  dependencies : list string;
+}.
+
+(* 依赖关系有效性 *)
+Definition valid_dependency (elem: TheoryElement)
+                           (all_elements: list TheoryElement) : Prop :=
+  forall dep_name,
+    In dep_name elem.(dependencies) ->
+    exists dep_elem,
+      In dep_elem all_elements /\
+      dep_elem.(name) = dep_name /\
+      layer_precedence dep_elem.(layer) elem.(layer).
+
+(* 层之间的优先关系 *)
+Inductive layer_precedence : TheoryLayer -> TheoryLayer -> Prop :=
+  | LP_Axiom_Semantics : layer_precedence AxiomLayer SemanticsLayer
+  | LP_Axiom_Theorem : layer_precedence AxiomLayer TheoremLayer
+  | LP_Semantics_Theorem : layer_precedence SemanticsLayer TheoremLayer
+  | LP_Axiom_Application : layer_precedence AxiomLayer ApplicationLayer
+  | LP_Semantics_Application : layer_precedence SemanticsLayer ApplicationLayer
+  | LP_Theorem_Application : layer_precedence TheoremLayer ApplicationLayer
+  | LP_Transitive : forall l1 l2 l3,
+      layer_precedence l1 l2 ->
+      layer_precedence l2 l3 ->
+      layer_precedence l1 l3.
+
+(* 定理：理论体系的一致性 *)
+Theorem theory_consistency :
+  forall (elements: list TheoryElement),
+    (forall elem, In elem elements -> valid_dependency elem elements) ->
+    ~ exists cycle, dependency_cycle elements cycle.
+Proof.
+  (* 证明：有效依赖保证无环 *)
+Admitted.
+```
 
 ---
 
