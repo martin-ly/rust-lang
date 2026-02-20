@@ -356,40 +356,789 @@ where
 
 ---
 
-## 🐛 常见问题
+## 🏗️ 异步编程模式（5+ 完整示例）
 
-### 阻塞运行时
+### 模式 1: 取消与超时处理
 
 ```rust
-// ❌ 在异步上下文中阻塞
-async fn bad_example() {
-    std::thread::sleep(Duration::from_secs(1)); // 阻塞！
+use tokio::time::{timeout, Duration};
+use tokio::sync::CancellationToken;
+
+async fn cancellable_task(token: CancellationToken) -> Result<String, &'static str> {
+    tokio::select! {
+        result = perform_work() => Ok(result),
+        _ = token.cancelled() => Err("任务被取消"),
+    }
 }
 
-// ✅ 使用异步睡眠
-async fn good_example() {
-    tokio::time::sleep(Duration::from_secs(1)).await;
+async fn with_timeout() -> Result<String, &'static str> {
+    match timeout(Duration::from_secs(5), fetch_data()).await {
+        Ok(result) => result.map_err(|_| "获取数据失败"),
+        Err(_) => Err("操作超时"),
+    }
 }
 ```
 
-### Future 必须 Send
+### 模式 2: 限流与速率控制
 
 ```rust
-// ❌ 非 Send 类型
+use tokio::time::{interval, Instant};
+use std::sync::Arc;
+use tokio::sync::Semaphore;
+
+struct RateLimiter {
+    semaphore: Arc<Semaphore>,
+}
+
+impl RateLimiter {
+    fn new(max_concurrent: usize) -> Self {
+        Self {
+            semaphore: Arc::new(Semaphore::new(max_concurrent)),
+        }
+    }
+
+    async fn execute<F, Fut, T>(&self, f: F) -> T
+    where
+        F: FnOnce() -> Fut,
+        Fut: std::future::Future<Output = T>,
+    {
+        let permit = self.semaphore.acquire().await.unwrap();
+        let result = f().await;
+        drop(permit);
+        result
+    }
+}
+
+// Token Bucket 限流器
+struct TokenBucket {
+    tokens: std::sync::atomic::AtomicU32,
+    rate: u32,
+}
+
+impl TokenBucket {
+    async fn acquire(&self) {
+        loop {
+            let current = self.tokens.load(std::sync::atomic::Ordering::Relaxed);
+            if current > 0 {
+                if self.tokens.compare_exchange(
+                    current,
+                    current - 1,
+                    std::sync::atomic::Ordering::Relaxed,
+                    std::sync::atomic::Ordering::Relaxed,
+                ).is_ok() {
+                    break;
+                }
+            }
+            tokio::task::yield_now().await;
+        }
+    }
+}
+```
+
+### 模式 3: 重试与退避策略
+
+```rust
+use tokio::time::{sleep, Duration};
+use rand::Rng;
+
+enum BackoffStrategy {
+    Fixed(Duration),
+    Exponential { initial: Duration, max: Duration, factor: u32 },
+    Jitter { base: Duration, max_jitter: Duration },
+}
+
+async fn retry_with_backoff<F, Fut, T, E>(
+    mut operation: F,
+    max_attempts: u32,
+    strategy: BackoffStrategy,
+) -> Result<T, E>
+where
+    F: FnMut() -> Fut,
+    Fut: std::future::Future<Output = Result<T, E>>,
+{
+    let mut attempt = 1;
+    
+    loop {
+        match operation().await {
+            Ok(result) => return Ok(result),
+            Err(e) if attempt >= max_attempts => return Err(e),
+            Err(_) => {
+                let delay = match &strategy {
+                    BackoffStrategy::Fixed(d) => *d,
+                    BackoffStrategy::Exponential { initial, max, factor } => {
+                        let exp = initial.saturating_mul(factor.saturating_pow(attempt - 1));
+                        std::cmp::min(exp, *max)
+                    }
+                    BackoffStrategy::Jitter { base, max_jitter } => {
+                        let jitter = rand::thread_rng().gen_range(Duration::ZERO..=*max_jitter);
+                        *base + jitter
+                    }
+                };
+                sleep(delay).await;
+                attempt += 1;
+            }
+        }
+    }
+}
+```
+
+### 模式 4: 批处理与缓冲
+
+```rust
+use tokio::sync::mpsc;
+use tokio::time::{interval, Duration};
+
+struct BatchProcessor<T> {
+    sender: mpsc::Sender<T>,
+}
+
+impl<T: Send + 'static> BatchProcessor<T> {
+    fn new<F, Fut>(
+        batch_size: usize,
+        timeout: Duration,
+        mut processor: F,
+    ) -> Self
+    where
+        F: FnMut(Vec<T>) -> Fut + Send + 'static,
+        Fut: std::future::Future<Output = ()> + Send,
+    {
+        let (sender, mut receiver) = mpsc::channel::<T>(1000);
+        
+        tokio::spawn(async move {
+            let mut batch = Vec::with_capacity(batch_size);
+            let mut tick = interval(timeout);
+            
+            loop {
+                tokio::select! {
+                    Some(item) = receiver.recv() => {
+                        batch.push(item);
+                        if batch.len() >= batch_size {
+                            processor(std::mem::take(&mut batch)).await;
+                            batch.reserve(batch_size);
+                        }
+                    }
+                    _ = tick.tick() => {
+                        if !batch.is_empty() {
+                            processor(std::mem::take(&mut batch)).await;
+                            batch.reserve(batch_size);
+                        }
+                    }
+                    else => break,
+                }
+            }
+        });
+        
+        Self { sender }
+    }
+    
+    async fn send(&self, item: T) -> Result<(), mpsc::error::SendError<T>> {
+        self.sender.send(item).await
+    }
+}
+```
+
+### 模式 5: 断路器模式
+
+```rust
+use std::sync::Arc;
+use tokio::sync::RwLock;
+use tokio::time::{Duration, Instant};
+
+enum CircuitState {
+    Closed,      // 正常状态
+    Open { until: Instant },  // 熔断状态
+    HalfOpen,    // 半开状态，测试恢复
+}
+
+struct CircuitBreaker {
+    state: Arc<RwLock<CircuitState>>,
+    failure_threshold: u32,
+    success_threshold: u32,
+    timeout: Duration,
+    consecutive_failures: Arc<RwLock<u32>>,
+    consecutive_successes: Arc<RwLock<u32>>,
+}
+
+impl CircuitBreaker {
+    async fn call<F, Fut, T>(&self, operation: F) -> Result<T, &'static str>
+    where
+        F: FnOnce() -> Fut,
+        Fut: std::future::Future<Output = Result<T, Box<dyn std::error::Error>>>,
+    {
+        // 检查当前状态
+        {
+            let state = self.state.read().await;
+            match &*state {
+                CircuitState::Open { until } if Instant::now() < *until => {
+                    return Err("电路已熔断");
+                }
+                CircuitState::Open { .. } => {
+                    drop(state);
+                    let mut state = self.state.write().await;
+                    *state = CircuitState::HalfOpen;
+                }
+                _ => {}
+            }
+        }
+        
+        // 执行操作
+        match operation().await {
+            Ok(result) => {
+                self.on_success().await;
+                Ok(result)
+            }
+            Err(_) => {
+                self.on_failure().await;
+                Err("操作失败")
+            }
+        }
+    }
+    
+    async fn on_success(&self) {
+        let mut successes = self.consecutive_successes.write().await;
+        *successes += 1;
+        
+        if *successes >= self.success_threshold {
+            let mut state = self.state.write().await;
+            *state = CircuitState::Closed;
+            *self.consecutive_failures.write().await = 0;
+            *successes = 0;
+        }
+    }
+    
+    async fn on_failure(&self) {
+        let mut failures = self.consecutive_failures.write().await;
+        *failures += 1;
+        
+        if *failures >= self.failure_threshold {
+            let mut state = self.state.write().await;
+            *state = CircuitState::Open { 
+                until: Instant::now() + self.timeout 
+            };
+        }
+    }
+}
+```
+
+---
+
+## 🌍 真实应用场景
+
+### 场景 1: Web 服务器实现
+
+```rust
+use axum::{
+    routing::{get, post},
+    Router,
+    extract::State,
+    http::StatusCode,
+    Json,
+};
+use std::sync::Arc;
+use tokio::sync::RwLock;
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone)]
+struct AppState {
+    db_pool: sqlx::PgPool,
+    cache: Arc<RwLock<lru::LruCache<String, String>>>,
+}
+
+async fn create_server() -> Result<(), Box<dyn std::error::Error>> {
+    let state = AppState {
+        db_pool: sqlx::PgPool::connect("postgres://localhost/db").await?,
+        cache: Arc::new(RwLock::new(lru::LruCache::new(1000))),
+    };
+    
+    let app = Router::new()
+        .route("/users/:id", get(get_user))
+        .route("/users", post(create_user))
+        .route("/health", get(health_check))
+        .with_state(state);
+    
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
+    axum::serve(listener, app).await?;
+    
+    Ok(())
+}
+
+async fn get_user(
+    State(state): State<AppState>,
+    axum::extract::Path(id): axum::extract::Path<String>,
+) -> Result<Json<User>, StatusCode> {
+    // 先检查缓存
+    {
+        let cache = state.cache.read().await;
+        if let Some(user_json) = cache.get(&id) {
+            if let Ok(user) = serde_json::from_str(user_json) {
+                return Ok(Json(user));
+            }
+        }
+    }
+    
+    // 查询数据库
+    let user: User = sqlx::query_as("SELECT * FROM users WHERE id = $1")
+        .bind(&id)
+        .fetch_one(&state.db_pool)
+        .await
+        .map_err(|_| StatusCode::NOT_FOUND)?;
+    
+    // 更新缓存
+    {
+        let mut cache = state.cache.write().await;
+        if let Ok(json) = serde_json::to_string(&user) {
+            cache.put(id, json);
+        }
+    }
+    
+    Ok(Json(user))
+}
+
+#[derive(Debug, Serialize, Deserialize, sqlx::FromRow)]
+struct User {
+    id: String,
+    name: String,
+    email: String,
+}
+
+async fn health_check() -> &'static str {
+    "OK"
+}
+
+async fn create_user(
+    State(state): State<AppState>,
+    Json(payload): Json<CreateUserRequest>,
+) -> Result<Json<User>, StatusCode> {
+    let user: User = sqlx::query_as(
+        "INSERT INTO users (id, name, email) VALUES ($1, $2, $3) RETURNING *"
+    )
+    .bind(&payload.id)
+    .bind(&payload.name)
+    .bind(&payload.email)
+    .fetch_one(&state.db_pool)
+    .await
+    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    
+    Ok(Json(user))
+}
+
+#[derive(Deserialize)]
+struct CreateUserRequest {
+    id: String,
+    name: String,
+    email: String,
+}
+```
+
+### 场景 2: 数据处理管道
+
+```rust
+use tokio::sync::mpsc;
+use serde::Deserialize;
+
+// ETL 管道：提取 -> 转换 -> 加载
+async fn etl_pipeline() -> Result<(), Box<dyn std::error::Error>> {
+    let (extract_tx, mut extract_rx) = mpsc::channel::<RawData>(1000);
+    let (transform_tx, mut transform_rx) = mpsc::channel::<ProcessedData>(1000);
+    let (load_tx, mut load_rx) = mpsc::channel::<StoredData>(100);
+    
+    // 提取阶段
+    let extract_handle = tokio::spawn(async move {
+        let sources = vec![
+            DataSource::Api("https://api1.example.com/data".to_string()),
+            DataSource::File("/data/input.csv".to_string()),
+            DataSource::Database("connection_string".to_string()),
+        ];
+        
+        for source in sources {
+            match fetch_data(source).await {
+                Ok(data) => {
+                    if extract_tx.send(data).await.is_err() {
+                        break;
+                    }
+                }
+                Err(e) => eprintln!("提取失败: {:?}", e),
+            }
+        }
+    });
+    
+    // 转换阶段
+    let transform_handle = tokio::spawn(async move {
+        while let Some(raw) = extract_rx.recv().await {
+            let processed = transform_data(raw).await;
+            if transform_tx.send(processed).await.is_err() {
+                break;
+            }
+        }
+    });
+    
+    // 加载阶段
+    let load_handle = tokio::spawn(async move {
+        let mut batch = Vec::with_capacity(100);
+        
+        while let Some(data) = transform_rx.recv().await {
+            batch.push(data);
+            
+            if batch.len() >= 100 {
+                if let Err(e) = store_batch(&batch).await {
+                    eprintln!("批量存储失败: {:?}", e);
+                }
+                batch.clear();
+            }
+        }
+        
+        // 处理剩余数据
+        if !batch.is_empty() {
+            if let Err(e) = store_batch(&batch).await {
+                eprintln!("最终批量存储失败: {:?}", e);
+            }
+        }
+    });
+    
+    // 等待所有阶段完成
+    let _ = tokio::join!(extract_handle, transform_handle, load_handle);
+    
+    Ok(())
+}
+
+enum DataSource {
+    Api(String),
+    File(String),
+    Database(String),
+}
+
+#[derive(Deserialize)]
+struct RawData {
+    id: u64,
+    payload: String,
+}
+
+struct ProcessedData {
+    id: u64,
+    normalized: String,
+    checksum: u64,
+}
+
+struct StoredData {
+    id: u64,
+    data: ProcessedData,
+    timestamp: u64,
+}
+
+async fn fetch_data(source: DataSource) -> Result<RawData, Box<dyn std::error::Error>> {
+    match source {
+        DataSource::Api(url) => {
+            let response = reqwest::get(&url).await?;
+            let data = response.json().await?;
+            Ok(data)
+        }
+        DataSource::File(path) => {
+            let content = tokio::fs::read_to_string(&path).await?;
+            let data: RawData = serde_json::from_str(&content)?;
+            Ok(data)
+        }
+        DataSource::Database(conn) => {
+            // 数据库查询实现
+            todo!()
+        }
+    }
+}
+
+async fn transform_data(raw: RawData) -> ProcessedData {
+    ProcessedData {
+        id: raw.id,
+        normalized: raw.payload.to_lowercase().trim().to_string(),
+        checksum: crc32fast::hash(raw.payload.as_bytes()),
+    }
+}
+
+async fn store_batch(batch: &[ProcessedData]) -> Result<(), Box<dyn std::error::Error>> {
+    // 批量存储实现
+    println!("存储 {} 条记录", batch.len());
+    Ok(())
+}
+```
+
+### 场景 3: 实时消息系统
+
+```rust
+use tokio::net::{TcpListener, TcpStream};
+use tokio::sync::{broadcast, mpsc};
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use std::sync::Arc;
+
+struct ChatServer {
+    clients: Arc<RwLock<HashMap<u64, mpsc::Sender<Message>>>>,
+    broadcast_tx: broadcast::Sender<Message>,
+}
+
+impl ChatServer {
+    fn new() -> Self {
+        let (broadcast_tx, _) = broadcast::channel(1000);
+        Self {
+            clients: Arc::new(RwLock::new(HashMap::new())),
+            broadcast_tx,
+        }
+    }
+    
+    async fn run(&self, addr: &str) -> Result<(), Box<dyn std::error::Error>> {
+        let listener = TcpListener::bind(addr).await?;
+        println!("聊天服务器运行在 {}", addr);
+        
+        let mut client_id = 0u64;
+        
+        loop {
+            let (socket, addr) = listener.accept().await?;
+            client_id += 1;
+            let id = client_id;
+            
+            let (tx, rx) = mpsc::channel(100);
+            {
+                let mut clients = self.clients.write().await;
+                clients.insert(id, tx);
+            }
+            
+            let broadcast_tx = self.broadcast_tx.clone();
+            let mut broadcast_rx = self.broadcast_tx.subscribe();
+            let clients = Arc::clone(&self.clients);
+            
+            tokio::spawn(async move {
+                handle_client(socket, id, addr, rx, broadcast_tx, broadcast_rx, clients).await;
+            });
+        }
+    }
+}
+
+async fn handle_client(
+    mut socket: TcpStream,
+    id: u64,
+    addr: std::net::SocketAddr,
+    mut msg_rx: mpsc::Receiver<Message>,
+    broadcast_tx: broadcast::Sender<Message>,
+    mut broadcast_rx: broadcast::Receiver<Message>,
+    clients: Arc<RwLock<HashMap<u64, mpsc::Sender<Message>>>>,
+) {
+    let (mut reader, mut writer) = socket.split();
+    let mut buf = [0u8; 1024];
+    
+    // 欢迎消息
+    let welcome = Message::System(format!("欢迎用户 {} 加入聊天室！", id));
+    let _ = broadcast_tx.send(welcome);
+    
+    loop {
+        tokio::select! {
+            // 从客户端读取消息
+            result = reader.read(&mut buf) => {
+                match result {
+                    Ok(0) => {
+                        // 连接关闭
+                        let _ = broadcast_tx.send(Message::System(format!("用户 {} 离开了", id)));
+                        break;
+                    }
+                    Ok(n) => {
+                        let text = String::from_utf8_lossy(&buf[..n]);
+                        let msg = Message::Chat { 
+                            from: id, 
+                            content: text.to_string() 
+                        };
+                        let _ = broadcast_tx.send(msg);
+                    }
+                    Err(e) => {
+                        eprintln!("读取错误: {:?}", e);
+                        break;
+                    }
+                }
+            }
+            
+            // 接收广播消息
+            Ok(msg) = broadcast_rx.recv() => {
+                let text = format!("{}\n", msg);
+                if writer.write_all(text.as_bytes()).await.is_err() {
+                    break;
+                }
+            }
+            
+            // 接收私信
+            Some(msg) = msg_rx.recv() => {
+                let text = format!("[私信] {}\n", msg);
+                if writer.write_all(text.as_bytes()).await.is_err() {
+                    break;
+                }
+            }
+        }
+    }
+    
+    // 清理
+    let mut clients = clients.write().await;
+    clients.remove(&id);
+}
+
+enum Message {
+    System(String),
+    Chat { from: u64, content: String },
+    Private { from: u64, to: u64, content: String },
+}
+
+impl std::fmt::Display for Message {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Message::System(text) => write!(f, "[系统] {}", text),
+            Message::Chat { from, content } => write!(f, "[用户{}] {}", from, content),
+            Message::Private { from, content, .. } => write!(f, "[来自用户{}的私信] {}", from, content),
+        }
+    }
+}
+
+use std::collections::HashMap;
+use tokio::sync::RwLock;
+```
+
+---
+
+## 🐛 常见问题与解决方案
+
+### 问题 1: 阻塞运行时
+
+```rust
+// ❌ 在异步上下文中阻塞 - 会导致整个线程阻塞
+async fn bad_example() {
+    std::thread::sleep(Duration::from_secs(1)); // 阻塞！
+    let data = std::fs::read_to_string("file.txt").unwrap(); // 阻塞 I/O！
+}
+
+// ✅ 使用异步等价操作
+async fn good_example() {
+    tokio::time::sleep(Duration::from_secs(1)).await;
+    let data = tokio::fs::read_to_string("file.txt").await.unwrap();
+}
+
+// ✅ 如果必须使用阻塞操作，使用 spawn_blocking
+async fn blocking_operation() -> String {
+    tokio::task::spawn_blocking(|| {
+        std::thread::sleep(Duration::from_secs(1));
+        "结果".to_string()
+    })
+    .await
+    .unwrap()
+}
+```
+
+### 问题 2: Future 必须 Send
+
+```rust
+// ❌ 非 Send 类型跨线程使用
 use std::rc::Rc;
 
 async fn bad_example() {
     let rc = Rc::new(42);
-    // Rc 不是 Send，不能跨线程
+    // 如果在多线程运行时中使用，会编译错误
 }
 
-// ✅ 使用 Arc
+// ✅ 使用 Arc 代替 Rc
 use std::sync::Arc;
 
 async fn good_example() {
     let arc = Arc::new(42);
-    // Arc 是 Send，可以跨线程
+    let arc2 = Arc::clone(&arc);
+    
+    tokio::spawn(async move {
+        println!("{}", arc2); // Arc 是 Send
+    });
 }
+```
+
+### 问题 3: 持有锁跨越 await 点
+
+```rust
+use tokio::sync::Mutex;
+
+// ❌ 危险：持有 std::sync::MutexGuard 跨越 await
+async fn bad_example(mutex: &std::sync::Mutex<String>) {
+    let guard = mutex.lock().unwrap();
+    some_async_operation().await; // 可能阻塞其他线程！
+    // guard 在这里释放
+}
+
+// ✅ 使用 tokio::sync::Mutex
+async fn good_example(mutex: &tokio::sync::Mutex<String>) {
+    {
+        let guard = mutex.lock().await;
+        // 使用 guard
+    } // 锁在这里释放
+    
+    some_async_operation().await; // 不影响其他任务
+}
+
+// ✅ 或者缩小锁的作用域
+async fn better_example(mutex: &std::sync::Mutex<String>) {
+    let data = {
+        let guard = mutex.lock().unwrap();
+        guard.clone() // 复制数据后释放锁
+    };
+    
+    some_async_operation().await;
+}
+```
+
+### 问题 4: 忘记处理 Cancel Safety
+
+```rust
+// ❌ 非 cancel-safe: select! 取消分支可能导致数据丢失
+async fn not_cancel_safe() {
+    let (tx, rx) = tokio::sync::mpsc::channel::<i32>(10);
+    
+    tokio::select! {
+        _ = tx.send(1) => {},  // 如果取消，消息可能已部分发送
+        _ = tokio::time::sleep(Duration::from_secs(1)) => {},
+    }
+}
+
+// ✅ cancel-safe 模式
+async fn cancel_safe() {
+    let (tx, mut rx) = tokio::sync::mpsc::channel::<i32>(10);
+    
+    tokio::select! {
+        biased; // 按顺序检查
+        result = rx.recv() => {
+            // recv 是 cancel-safe 的
+            println!("收到: {:?}", result);
+        }
+        _ = tokio::time::sleep(Duration::from_secs(1)) => {
+            println!("超时");
+        }
+    }
+}
+```
+
+### 问题 5: 递归 async 函数
+
+```rust
+// ❌ 编译错误：递归 async 函数
+async fn recursive_bad(n: i32) -> i32 {
+    if n <= 0 {
+        0
+    } else {
+        n + recursive_bad(n - 1).await // 编译错误！
+    }
+}
+
+// ✅ 使用 Box::pin 包装递归调用
+use std::pin::Pin;
+use std::future::Future;
+
+fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
+    Box::pin(async move {
+        if n <= 0 {
+            0
+        } else {
+            n + recursive_good(n - 1).await
+        }
+    })
+}
+
+// ✅ 或者使用 async_recursion crate
+// #[async_recursion]
+// async fn recursive_with_crate(n: i32) -> i32 { ... }
 ```
 
 ---
@@ -400,9 +1149,10 @@ async fn good_example() {
 - [异步编程指南](../../crates/c06_async/docs/tier_02_guides/01_异步编程快速入门.md)
 - [Reactor 模式](../../crates/c06_async/docs/tier_03_references/02_Reactor模式参考.md)
 - [Actor 模式](../../crates/c06_async/docs/tier_03_references/03_Actor模式参考.md)
+- [异步状态机形式化](../research_notes/formal_methods/async_state_machine.md) - Future/Poll 状态机形式化定义与证明
 
 ---
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 完整实现
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-20
