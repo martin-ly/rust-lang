@@ -97,10 +97,28 @@ fn identity<T>(x: T) -> T {
     x
 }
 
-// 约束多态：T 必须实现 Drawablen render<T: Drawable>(item: T) {
+// 约束多态：T 必须实现 Drawable
+fn render<T: Drawable>(item: T) {
     item.draw();
 }
 ```
+
+---
+
+## 形式化文档链接
+
+### 核心研究笔记
+
+| 主题 | 文档路径 | 内容概述 |
+| :--- | :--- | :--- |
+| **所有权模型** | [../research_notes/formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) | 所有权系统的形式化定义与证明 |
+| **借用检查器** | [../research_notes/formal_methods/borrow_checker_proof.md](../research_notes/formal_methods/borrow_checker_proof.md) | 借用检查的形式化正确性证明 |
+| **生命周期** | [../research_notes/formal_methods/lifetime_formalization.md](../research_notes/formal_methods/lifetime_formalization.md) | 生命周期的形式化模型 |
+| **类型系统** | [../research_notes/type_theory/type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) | 类型理论基础 |
+| **Trait 系统** | [../research_notes/type_theory/trait_system_formalization.md](../research_notes/type_theory/trait_system_formalization.md) | Trait 系统的形式化 |
+| **型变理论** | [../research_notes/type_theory/variance_theory.md](../research_notes/type_theory/variance_theory.md) | 型变规则与证明 |
+| **证明索引** | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) | 87+ 个形式化证明的完整索引 |
+| **工具指南** | [../research_notes/TOOLS_GUIDE.md](../research_notes/TOOLS_GUIDE.md) | Prusti/Kani/Creusot 使用指南 |
 
 ---
 

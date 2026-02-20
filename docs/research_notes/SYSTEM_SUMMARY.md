@@ -1,7 +1,7 @@
 # 研究笔记系统总结
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
+> **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 研究笔记 17/17 已 100% 完成（Rust 1.93.0 更新完成）
 
@@ -119,32 +119,40 @@ research_notes/
 
 #### 形式化方法研究 (5个)
 
-- ownership_model.md - 所有权模型形式化
-- borrow_checker_proof.md - 借用检查器证明
-- async_state_machine.md - 异步状态机形式化
-- lifetime_formalization.md - 生命周期形式化
-- pin_self_referential.md - Pin 和自引用类型形式化
+| 文档 | 链接 | 关键定理 |
+| :--- | :--- | :--- |
+| ownership_model.md | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) | T-OW1, T-OW2, T-OW3 |
+| borrow_checker_proof.md | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) | T-BR1 |
+| async_state_machine.md | [formal_methods/async_state_machine.md](./formal_methods/async_state_machine.md) | T6.1, T6.2, T6.3 |
+| lifetime_formalization.md | [formal_methods/lifetime_formalization.md](./formal_methods/lifetime_formalization.md) | T-LT1, T-LT2 |
+| pin_self_referential.md | [formal_methods/pin_self_referential.md](./formal_methods/pin_self_referential.md) | T-PN1, T-PN2, T-PN3 |
 
 #### 类型理论研究 (5个)
 
-- type_system_foundations.md - 类型系统基础
-- trait_system_formalization.md - Trait 系统形式化
-- lifetime_formalization.md - 生命周期形式化
-- advanced_types.md - 高级类型特性
-- variance_theory.md - 型变理论
+| 文档 | 链接 | 关键定义 |
+| :--- | :--- | :--- |
+| type_system_foundations.md | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) | Def 1.1-3.3, T-TY1, T-TY2, T-TY3 |
+| trait_system_formalization.md | [type_theory/trait_system_formalization.md](./type_theory/trait_system_formalization.md) | Def TR1-TR5 |
+| lifetime_formalization.md | [type_theory/lifetime_formalization.md](./type_theory/lifetime_formalization.md) | Def L1-L3 |
+| advanced_types.md | [type_theory/advanced_types.md](./type_theory/advanced_types.md) | Def 1.1-3.2, AT-T1, AT-T2, AT-T3 |
+| variance_theory.md | [type_theory/variance_theory.md](./type_theory/variance_theory.md) | Def 1.1-3.1, T1-T4 |
 
 #### 实验研究 (5个)
 
-- performance_benchmarks.md - 性能基准测试
-- memory_analysis.md - 内存分析
-- compiler_optimizations.md - 编译器优化
-- concurrency_performance.md - 并发性能
-- macro_expansion_performance.md - 宏展开性能
+| 文档 | 链接 | 实验类型 |
+| :--- | :--- | :--- |
+| performance_benchmarks.md | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) | 性能基准测试 |
+| memory_analysis.md | [experiments/memory_analysis.md](./experiments/memory_analysis.md) | 内存分析 |
+| compiler_optimizations.md | [experiments/compiler_optimizations.md](./experiments/compiler_optimizations.md) | 编译器优化 |
+| concurrency_performance.md | [experiments/concurrency_performance.md](./experiments/concurrency_performance.md) | 并发性能 |
+| macro_expansion_performance.md | [experiments/macro_expansion_performance.md](./experiments/macro_expansion_performance.md) | 宏展开性能 |
 
 #### 综合研究 (2个)
 
-- practical_applications.md - 实际应用案例研究
-- research_methodology.md - 研究方法论
+| 文档 | 链接 | 内容 |
+| :--- | :--- | :--- |
+| practical_applications.md | [practical_applications.md](./practical_applications.md) | 实际应用案例研究 |
+| research_methodology.md | [research_methodology.md](./research_methodology.md) | 研究方法论 |
 
 ---
 
@@ -262,26 +270,33 @@ research_notes/
 
 ### 核心文档
 
-- [主索引](./README.md)
-- [完整索引](./INDEX.md)
-- [快速参考](./QUICK_REFERENCE.md)
-- [研究路线图](./RESEARCH_ROADMAP.md)
-- [工具使用指南](./TOOLS_GUIDE.md)
-- [更新日志](./CHANGELOG.md)
-- [快速入门指南](./GETTING_STARTED.md)
-- [常见问题解答](./FAQ.md)
+| 文档 | 链接 | 用途 |
+| :--- | :--- | :--- |
+| 主索引 | [README.md](./README.md) | 系统入口 |
+| 完整索引 | [INDEX.md](./INDEX.md) | 所有文档索引 |
+| 快速参考 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | 快速查找 |
+| 研究路线图 | [RESEARCH_ROADMAP.md](./RESEARCH_ROADMAP.md) | 研究计划 |
+| 工具使用指南 | [TOOLS_GUIDE.md](./TOOLS_GUIDE.md) | 工具指南 |
+| 更新日志 | [CHANGELOG.md](./CHANGELOG.md) | 版本历史 |
+| 快速入门指南 | [GETTING_STARTED.md](./GETTING_STARTED.md) | 入门指南 |
+| 常见问题解答 | [FAQ.md](./FAQ.md) | FAQ |
 
 ### 贡献和质量
 
-- [贡献指南](./CONTRIBUTING.md)
-- [质量检查清单](./QUALITY_CHECKLIST.md)
-- [研究笔记模板](./TEMPLATE.md)
+| 文档 | 链接 | 用途 |
+| :--- | :--- | :--- |
+| 贡献指南 | [CONTRIBUTING.md](./CONTRIBUTING.md) | 贡献流程 |
+| 质量检查清单 | [QUALITY_CHECKLIST.md](./QUALITY_CHECKLIST.md) | 质量标准 |
+| 研究笔记模板 | [TEMPLATE.md](./TEMPLATE.md) | 创建模板 |
 
 ### 外部资源
 
-- [形式化工程系统](../../rust-formal-engineering-system/README.md)
-- [Rust Book](https://doc.rust-lang.org/book/)
-- [Rust Reference](https://doc.rust-lang.org/reference/)
+| 资源 | 链接 | 说明 |
+| :--- | :--- | :--- |
+| 形式化工程系统 | [../../rust-formal-engineering-system/README.md](../../rust-formal-engineering-system/README.md) | 形式化工程 |
+| Rust Book | [https://doc.rust-lang.org/book/](https://doc.rust-lang.org/book/) | 官方教程 |
+| Rust Reference | [https://doc.rust-lang.org/reference/](https://doc.rust-lang.org/reference/) | 语言参考 |
+| releases.rs | [https://releases.rs/](https://releases.rs/) | 版本追踪 |
 
 ---
 
@@ -333,7 +348,7 @@ research_notes/
 ---
 
 **维护团队**: Rust Research Community
-**最后更新**: 2026-01-26
+**最后更新**: 2026-02-20
 **状态**: ✅ **研究笔记 17/17 已 100% 完成**
 
 ---

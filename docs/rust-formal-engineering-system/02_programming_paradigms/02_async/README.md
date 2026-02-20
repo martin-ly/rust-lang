@@ -158,7 +158,8 @@ fn pin_demo() {
 ```rust
 use futures::stream::{self, Stream, StreamExt};
 
-// Stream 是异步的迭代器n stream_example() -> impl Stream<Item = i32> {
+// Stream 是异步的迭代器
+fn stream_example() -> impl Stream<Item = i32> {
     stream::iter(vec![1, 2, 3, 4, 5])
 }
 
@@ -237,3 +238,160 @@ async fn async_channels() {
     println!("{}", msg);
 }
 ```
+
+### 取消与超时
+
+```rust
+use tokio::time::{timeout, Duration};
+use tokio::select;
+
+// 超时处理
+async fn with_timeout() -> Result<String, &'static str> {
+    let result = timeout(
+        Duration::from_secs(5),
+        fetch_data("https://slow.example.com")
+    ).await;
+
+    match result {
+        Ok(Ok(data)) => Ok(data),
+        Ok(Err(_)) => Err("Request failed"),
+        Err(_) => Err("Timeout"),
+    }
+}
+
+// 取消令牌
+use tokio_util::sync::CancellationToken;
+
+async fn cancellable_task(token: CancellationToken) {
+    loop {
+        select! {
+            _ = token.cancelled() => {
+                println!("Task cancelled, cleaning up...");
+                break;
+            }
+            _ = tokio::time::sleep(Duration::from_secs(1)) => {
+                println!("Working...");
+            }
+        }
+    }
+}
+
+fn cancellation_demo() {
+    let token = CancellationToken::new();
+    let child_token = token.child_token();
+
+    tokio::spawn(cancellable_task(child_token));
+
+    // 稍后取消
+    tokio::spawn(async move {
+        tokio::time::sleep(Duration::from_secs(3)).await;
+        token.cancel();
+    });
+}
+```
+
+### 并发控制
+
+```rust
+use tokio::sync::Semaphore;
+
+// 限制并发数
+async fn limited_concurrency(urls: Vec<String>, max_concurrent: usize) {
+    let semaphore = Arc::new(Semaphore::new(max_concurrent));
+
+    let futures: Vec<_> = urls.into_iter().map(|url| {
+        let sem = semaphore.clone();
+        tokio::spawn(async move {
+            let _permit = sem.acquire().await.unwrap();
+            fetch_data(&url).await
+        })
+    }).collect();
+
+    let results = futures::future::join_all(futures).await;
+    for result in results {
+        match result {
+            Ok(Ok(data)) => println!("Fetched: {} bytes", data.len()),
+            Ok(Err(e)) => eprintln!("Error: {}", e),
+            Err(e) => eprintln!("Task panicked: {}", e),
+        }
+    }
+}
+
+// 批量处理
+async fn batch_process<T, F, Fut>(
+    items: Vec<T>,
+    batch_size: usize,
+    f: F,
+) -> Vec<Fut::Output>
+where
+    F: Fn(T) -> Fut + Send + Sync + 'static,
+    Fut: Future + Send + 'static,
+    Fut::Output: Send,
+    T: Send + 'static,
+{
+    let mut results = Vec::with_capacity(items.len());
+
+    for chunk in items.chunks(batch_size) {
+        let batch_futures: Vec<_> = chunk
+            .iter()
+            .cloned()
+            .map(|item| tokio::spawn(f(item)))
+            .collect();
+
+        for handle in batch_futures {
+            results.push(handle.await.unwrap());
+        }
+    }
+
+    results
+}
+```
+
+---
+
+## 使用场景
+
+| 场景 | 异步模式 | 关键技术 |
+| :--- | :--- | :--- |
+| 高并发网络服务 | 多线程运行时 | `tokio::main(multi_thread)` |
+| 大量并发连接 | 限制并发数 | `Semaphore` |
+| 长连接处理 | 取消与清理 | `CancellationToken` |
+| 实时数据流 | 流处理 | `Stream`, `StreamExt` |
+| 批量任务处理 | 批量并发 | `chunks` + `join_all` |
+| 外部 API 调用 | 超时处理 | `timeout` |
+| 背压控制 | 有界通道 | `mpsc::channel(n)` |
+| 单次请求响应 | 一次性通信 | `oneshot` |
+
+---
+
+## 相关研究笔记
+
+### 软件设计理论
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 异步执行模型 | 异步模型理论 | [../../../../research_notes/software_design_theory/03_execution_models/02_async.md](../../../../research_notes/software_design_theory/03_execution_models/02_async.md) |
+| 并发执行模型 | 并发模型理论 | [../../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md) |
+
+### 形式化方法
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 异步状态机 | 异步状态机形式化 | [../../../../research_notes/formal_methods/async_state_machine.md](../../../../research_notes/formal_methods/async_state_machine.md) |
+| Pin 与自引用 | 自引用类型形式化 | [../../../../research_notes/formal_methods/pin_self_referential.md](../../../../research_notes/formal_methods/pin_self_referential.md) |
+| Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../../research_notes/formal_methods/send_sync_formalization.md](../../../../research_notes/formal_methods/send_sync_formalization.md) |
+
+### 实验分析
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 并发性能 | 并发性能测试 | [../../../../research_notes/experiments/concurrency_performance.md](../../../../research_notes/experiments/concurrency_performance.md) |
+
+---
+
+## 相关 crates
+
+| crate | 描述 | 路径 |
+| :--- | :--- | :--- |
+| c06_async | 异步并发实现 | [../../../../crates/c06_async/](../../../../crates/c06_async/) |
+| c09_design_pattern | 异步设计模式 | [../../../../crates/c09_design_pattern/](../../../../crates/c09_design_pattern/) |

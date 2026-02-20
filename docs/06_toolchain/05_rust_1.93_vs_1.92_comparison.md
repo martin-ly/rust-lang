@@ -1020,6 +1020,7 @@ unsafe impl GlobalAlloc for MyAllocator {
 
 ## 参考资源
 
+### 官方文档
 - [Rust 1.93.0 Release Notes](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)
 - [Rust 1.93.0 详细发布说明](https://doc.rust-lang.org/stable/releases.html#version-1930-2026-01-22)
 - [Rust 1.92.0 Release Notes](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/)
@@ -1027,9 +1028,301 @@ unsafe impl GlobalAlloc for MyAllocator {
 - [musl 1.2.5 发布说明](https://musl.libc.org/releases.html)
 - [libc 兼容性修复](https://github.com/rust-lang/libc/pull/2935)
 
+### 形式化文档链接
+- [Ferrocene Language Specification](https://spec.ferrocene.dev/) - Rust 工业级形式化规范
+- [Rust Reference - Type System](https://doc.rust-lang.org/reference/type-system.html)
+- [Rust Reference - Memory Model](https://doc.rust-lang.org/reference/memory-model.html)
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/) - 不安全 Rust 指南
+
+---
+
+## 完整新 API 代码示例
+
+```rust
+//! Rust 1.93 新 API 完整使用指南
+
+use std::mem::MaybeUninit;
+use std::collections::VecDeque;
+use std::time::Duration;
+use std::fmt;
+
+/// MaybeUninit 新 API 完整示例
+pub mod maybe_uninit_examples {
+    use super::*;
+    
+    /// 使用 write_copy_of_slice 初始化数组
+    pub fn initialize_from_slice<T: Copy, const N: usize>(src: &[T]) -> Option<[T; N]> {
+        if src.len() != N {
+            return None;
+        }
+        
+        let mut dst = [MaybeUninit::<T>::uninit(); N];
+        MaybeUninit::write_copy_of_slice(&mut dst, src);
+        
+        // 安全：所有元素已初始化
+        Some(unsafe { std::mem::transmute_copy::<_, [T; N]>(&dst) })
+    }
+    
+    /// 安全地使用 assume_init_ref
+    pub fn safe_assume_init_ref() {
+        let mut uninit = MaybeUninit::<String>::uninit();
+        uninit.write(String::from("Hello, Rust 1.93!"));
+        
+        // ✅ Rust 1.93 新增：安全地获取引用
+        let reference: &String = unsafe { uninit.assume_init_ref() };
+        assert_eq!(reference, "Hello, Rust 1.93!");
+        
+        // ✅ Rust 1.93 新增：安全地获取可变引用
+        let mutable: &mut String = unsafe { uninit.assume_init_mut() };
+        mutable.push_str(" 🎉");
+        
+        // ✅ Rust 1.93 新增：安全地丢弃
+        unsafe { uninit.assume_init_drop() };
+    }
+}
+
+/// String 和 Vec 原始部分 API
+pub mod raw_parts_examples {
+    /// String 原始部分操作
+    pub fn string_raw_parts() {
+        let s = String::from("Hello, Rust 1.93!");
+        let len = s.len();
+        let capacity = s.capacity();
+        
+        // ✅ Rust 1.93 新增：into_raw_parts
+        let (ptr, len, cap) = s.into_raw_parts();
+        
+        // 可以在这里进行 FFI 操作或其他处理
+        println!("Pointer: {:?}, Len: {}, Capacity: {}", ptr, len, cap);
+        
+        // ✅ Rust 1.93 新增：from_raw_parts 重新组装
+        let s = unsafe { String::from_raw_parts(ptr, len, cap) };
+        assert_eq!(s, "Hello, Rust 1.93!");
+    }
+    
+    /// Vec 原始部分操作
+    pub fn vec_raw_parts() {
+        let v = vec![1, 2, 3, 4, 5];
+        let len = v.len();
+        let capacity = v.capacity();
+        
+        // ✅ Rust 1.93 新增：into_raw_parts
+        let (ptr, len, cap) = v.into_raw_parts();
+        
+        // FFI 操作...
+        
+        // ✅ Rust 1.93 新增：from_raw_parts 重新组装
+        let v = unsafe { Vec::from_raw_parts(ptr, len, cap) };
+        assert_eq!(v, vec![1, 2, 3, 4, 5]);
+    }
+}
+
+/// VecDeque 条件弹出示例
+pub mod vec_deque_examples {
+    use std::collections::VecDeque;
+    
+    /// 任务调度器示例
+    pub struct TaskScheduler {
+        tasks: VecDeque<Task>,
+    }
+    
+    #[derive(Debug)]
+    pub struct Task {
+        id: u64,
+        priority: u32,
+        name: String,
+    }
+    
+    impl TaskScheduler {
+        pub fn new() -> Self {
+            Self { tasks: VecDeque::new() }
+        }
+        
+        pub fn add_task(&mut self, task: Task) {
+            self.tasks.push_back(task);
+        }
+        
+        /// ✅ Rust 1.93 新增：pop_front_if
+        pub fn get_high_priority_task(&mut self) -> Option<Task> {
+            // 仅当优先级 >= 100 时才获取任务
+            self.tasks.pop_front_if(|t| t.priority >= 100)
+        }
+        
+        /// ✅ Rust 1.93 新增：pop_back_if
+        pub fn remove_low_priority_task(&mut self, threshold: u32) -> Option<Task> {
+            // 从尾部移除低优先级任务
+            self.tasks.pop_back_if(|t| t.priority < threshold)
+        }
+    }
+    
+    #[test]
+    fn test_scheduler() {
+        let mut scheduler = TaskScheduler::new();
+        scheduler.add_task(Task { id: 1, priority: 50, name: "Low".to_string() });
+        scheduler.add_task(Task { id: 2, priority: 150, name: "High".to_string() });
+        scheduler.add_task(Task { id: 3, priority: 200, name: "Critical".to_string() });
+        
+        // 获取高优先级任务
+        let task = scheduler.get_high_priority_task();
+        assert!(task.is_some());
+        assert_eq!(task.unwrap().name, "High");
+        
+        // 移除低优先级任务
+        let removed = scheduler.remove_low_priority_task(100);
+        assert!(removed.is_some());
+        assert_eq!(removed.unwrap().name, "Low");
+    }
+}
+
+/// 整数未检查操作示例
+pub mod integer_unchecked {
+    /// 高性能位操作（已知不会溢出）
+    pub fn fast_bit_operations(data: &mut [i32]) {
+        for x in data.iter_mut() {
+            // ✅ Rust 1.93 新增：未检查操作
+            *x = unsafe { x.unchecked_neg() };
+            *x = unsafe { x.unchecked_shl(1) };
+        }
+    }
+    
+    /// 无符号整数移位
+    pub fn fast_hash_combination(h1: u64, h2: u64) -> u64 {
+        // 已知不会溢出，使用未检查操作提高性能
+        let part1 = unsafe { h1.unchecked_shl(32) };
+        let part2 = unsafe { h2.unchecked_shr(32) };
+        part1 | part2
+    }
+}
+
+/// Duration 扩展示例
+pub mod duration_examples {
+    use std::time::Duration;
+    
+    /// 高精度时间计算
+    pub fn high_precision_duration() {
+        // ✅ Rust 1.93 新增：从 u128 纳秒创建 Duration
+        let nanos: u128 = 1_000_000_000_000; // 1秒 = 10^12 纳秒
+        let duration = Duration::from_nanos_u128(nanos);
+        
+        assert_eq!(duration.as_secs(), 1_000);
+        assert_eq!(duration.subsec_nanos(), 0);
+    }
+}
+
+/// fmt::from_fn 示例
+pub mod fmt_from_fn {
+    use std::fmt;
+    
+    /// 自定义格式化器
+    pub fn custom_formatter() {
+        // ✅ Rust 1.93 新增：从函数创建格式化器
+        let formatter = fmt::from_fn(|f: &mut fmt::Formatter<'_>| {
+            write!(f, "[Custom: {}]", 42)
+        });
+        
+        let output = format!("{}", formatter);
+        assert_eq!(output, "[Custom: 42]");
+    }
+    
+    /// 条件格式化
+    pub struct ConditionalDisplay<T> {
+        value: T,
+        show_debug: bool,
+    }
+    
+    impl<T: fmt::Display + fmt::Debug> fmt::Display for ConditionalDisplay<T> {
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            if self.show_debug {
+                // ✅ 使用 fmt::from_fn 创建动态格式化器
+                let debug_fmt = fmt::from_fn(|f| write!(f, "{:?}", self.value));
+                write!(f, "{}", debug_fmt)
+            } else {
+                write!(f, "{}", self.value)
+            }
+        }
+    }
+}
+
+/// char 常量示例
+pub mod char_constants {
+    /// UTF-8 编码计算
+    pub fn calculate_utf8_size(c: char) -> usize {
+        // ✅ Rust 1.93 新增：char 常量
+        if c.len_utf8() == char::MAX_LEN_UTF8 {
+            println!("This char uses maximum UTF-8 length (4 bytes)");
+        }
+        c.len_utf8()
+    }
+    
+    /// UTF-16 编码计算
+    pub fn calculate_utf16_size(c: char) -> usize {
+        // ✅ Rust 1.93 新增：char 常量
+        if c.len_utf16() == char::MAX_LEN_UTF16 {
+            println!("This char uses maximum UTF-16 length (2 units)");
+        }
+        c.len_utf16()
+    }
+}
+
+/// 切片到数组转换示例
+pub mod slice_array_conversion {
+    /// 安全地将切片转换为数组引用
+    pub fn slice_to_array(slice: &[i32]) -> Option<&[i32; 4]> {
+        // ✅ Rust 1.93 新增：as_array
+        slice.as_array()
+    }
+    
+    /// 可变切片转换
+    pub fn mut_slice_to_array(slice: &mut [i32]) -> Option<&mut [i32; 4]> {
+        // ✅ Rust 1.93 新增：as_mut_array
+        slice.as_mut_array()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_maybe_uninit() {
+        maybe_uninit_examples::safe_assume_init_ref();
+    }
+    
+    #[test]
+    fn test_raw_parts() {
+        raw_parts_examples::string_raw_parts();
+        raw_parts_examples::vec_raw_parts();
+    }
+    
+    #[test]
+    fn test_duration() {
+        duration_examples::high_precision_duration();
+    }
+    
+    #[test]
+    fn test_fmt_from_fn() {
+        fmt_from_fn::custom_formatter();
+    }
+    
+    #[test]
+    fn test_char_constants() {
+        assert_eq!(char::MAX_LEN_UTF8, 4);
+        assert_eq!(char::MAX_LEN_UTF16, 2);
+    }
+    
+    #[test]
+    fn test_slice_array() {
+        let slice = &[1, 2, 3, 4];
+        let array = slice_array_conversion::slice_to_array(slice);
+        assert!(array.is_some());
+        assert_eq!(array.unwrap(), &[1, 2, 3, 4]);
+    }
+}
+```
+
 ---
 
 **文档维护**: Documentation Team
-**最后更新**: 2026-02-12
+**最后更新**: 2026-02-20
 **最后对照 releases.rs**: 2026-02-14
 **下次更新**：Rust 1.94 发布时

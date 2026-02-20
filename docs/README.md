@@ -8,12 +8,58 @@
 > **主索引**: [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) - 按主题分类的完整文档导航
 > **完整结构**: [DOCS_STRUCTURE_OVERVIEW.md](./DOCS_STRUCTURE_OVERVIEW.md) - 按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖 docs
 
+> **概念说明**: 本文档中心是 Rust 形式化工程系统的知识库入口，按学习路径、速查参考、思维表征、专题指南、工具链和项目元文档六大主题组织。所有文档相互链接，形成完整的知识图谱。
+
+---
+
+## 🎯 快速示例
+
+```rust
+// Rust 1.93.0 Edition 2024 示例
+fn main() {
+    // 模式匹配
+    let value = Some(42);
+    if let Some(n) = value {
+        println!("Value: {}", n);
+    }
+
+    // 迭代器
+    let sum: i32 = (1..=10)
+        .filter(|x| x % 2 == 0)
+        .sum();
+    println!("Sum of even numbers: {}", sum);
+
+    // 异步（需要 tokio 运行时）
+    // let result = async_function().await;
+}
+
+// 所有权示例
+fn ownership_demo() {
+    let s1 = String::from("hello");
+    let s2 = s1;  // 所有权转移
+    // println!("{}", s1);  // 错误：s1 不再有效
+    println!("{}", s2);     // 正确
+}
+
+// 泛型与 trait
+fn largest<T: PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+    largest
+}
+```
+
 ---
 
 ## 🎯 按主题快速导航
 
 | 主题 | 入口 | 说明 |
-| :--- | :--- | :--- || **学习路径** | [00_MASTER_INDEX § 01_learning](./00_MASTER_INDEX.md#01-学习路径与导航) | 学习规划、官方资源映射 |
+| :--- | :--- | :--- |
+| **学习路径** | [00_MASTER_INDEX § 01_learning](./00_MASTER_INDEX.md#01-学习路径与导航) | 学习规划、官方资源映射 |
 | **速查参考** | [02_reference](#-核心文档系统) | 20 个速查卡、边界特例 |
 | **形式化理论** | [03_theory](#-核心文档系统) | 研究笔记、证明索引 |
 | **思维表征** | [04_thinking](./00_MASTER_INDEX.md#04-思维表征) | 思维导图、决策树、矩阵 |
@@ -25,10 +71,12 @@
 
 ## 🎯 按角色导航
 
-- **初学者** → 学习路径 → 速查卡 → C01 模块
-- **开发者** → 专题指南 → 速查卡 → 边界特例
-- **研究者** → 形式化理论 → 思维表征 → 证明索引
-- **维护者** → 项目元文档 → 版本追踪
+| 角色 | 推荐路径 | 核心文档 |
+| :--- | :--- | :--- |
+| **初学者** | 学习路径 → 速查卡 → C01 模块 | [01_learning/README.md](./01_learning/README.md) |
+| **开发者** | 专题指南 → 速查卡 → 边界特例 | [05_guides/README.md](./05_guides/README.md) |
+| **研究者** | 形式化理论 → 思维表征 → 证明索引 | [research_notes/README.md](./research_notes/README.md) |
+| **维护者** | 项目元文档 → 版本追踪 | [07_project/](./07_project/) |
 
 ---
 
@@ -44,6 +92,18 @@
 
 **特色**: 所有 20 个速查卡已完成交叉引用、反例速查，版本 Rust 1.93.0+
 
+```rust
+// 速查表示例：所有权规则
+let s = String::from("hello");  // s 进入作用域
+let t = s;                       // s 的值移动到 t
+// println!("{}", s);            // 错误！s 不再有效
+
+// 借用规则
+let u = &t;      // 不可变借用
+let v = &t;      // 多个不可变借用 OK
+// let w = &mut t;  // 错误！不能同时有可变和不可变借用
+```
+
 ---
 
 ### 2. 研究笔记（research_notes/）
@@ -54,6 +114,18 @@
 
 **说明**: 形式化理论以 **research_notes** 为主内容，**rust-formal-engineering-system** 为索引映射层。
 
+```rust
+// 形式化验证示例（Kani）
+#[kani::proof]
+fn verify_overflow_safety() {
+    let a: u32 = kani::any();
+    let b: u32 = kani::any();
+    kani::assume(a < 1000 && b < 1000);
+    let result = a + b;
+    assert!(result < 2000);  // Kani 验证此断言对所有输入成立
+}
+```
+
 ---
 
 ### 3. 工具链文档（06_toolchain/）
@@ -61,6 +133,24 @@
 **用途**: 编译器、Cargo、rustdoc、Rust 1.89–1.93 版本演进
 
 **入口**: [06_toolchain/README.md](./06_toolchain/README.md)
+
+```toml
+# Cargo.toml 示例
+[package]
+name = "my-project"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.93"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.35", features = ["full"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+```
 
 ---
 
@@ -74,22 +164,15 @@
 
 ### 文档系统统计
 
-- **快速参考**: 20 个速查卡 ⭐ (含 AI/ML、进程管理、网络编程、算法、设计模式、WASM)
-- **研究笔记**: 45+ 个研究文档（研究笔记系统100%完成）
-- **形式化系统**: 500+ 个理论文档
-- **工具链文档**: 5 个工具指南（包含 Rust 1.93 vs 1.92 对比）
-- **归档文件**: 100 个文件已归档
-- **文档完善度**: 100% ✅（20/20 速查卡已统一添加「📚 相关文档 + 🧩 相关示例代码」）
-- **交叉引用**: 100% ✅ (所有19个速查卡已完成交叉引用增强)
-- **高级主题文档**: 100% ✅ (8个高级主题深度文档)
-- **综合最佳实践**: 100% ✅ (10个最佳实践主题)
-
-### rust-formal-engineering-system/ - 形式化系统
-
-- **总数**: 500+ 个文件
-- **模块**: 10 个主要模块
-- **深度**: 理论 + 实践完整覆盖
-- **状态**: ✅ 持续更新
+| 类别 | 数量 | 状态 |
+| :--- | :--- | :--- |
+| 快速参考 | 20 个速查卡 | ⭐ (含 AI/ML、进程管理、网络编程、算法、设计模式、WASM) |
+| 研究笔记 | 45+ 个研究文档 | 研究笔记系统100%完成 |
+| 形式化系统 | 500+ 个理论文档 | 10个主要模块 |
+| 工具链文档 | 5 个工具指南 | 包含 Rust 1.93 vs 1.92 对比 |
+| 归档文件 | 100 个文件 | 已归档 |
+| 文档完善度 | 100% | ✅（20/20 速查卡已完成） |
+| 交叉引用 | 100% | ✅ (所有19个速查卡已完成) |
 
 ---
 
@@ -151,7 +234,32 @@ cargo run -p rust-doc-search -- search --fuzzy "borrowing"
 
 ---
 
+## 📚 相关文档链接
+
+### 形式化方法
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 形式化方法概述 | 形式化验证基础理论 | [./research_notes/formal_methods/README.md](./research_notes/formal_methods/README.md) |
+| 证明索引 | 形式化证明集合 | [./research_notes/PROOF_INDEX.md](./research_notes/PROOF_INDEX.md) |
+| 形式化工程系统 | 形式化系统索引 | [./rust-formal-engineering-system/00_master_index.md](./rust-formal-engineering-system/00_master_index.md) |
+
+### 核心指南
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 测试覆盖指南 | 测试策略与覆盖率 | [./TESTING_COVERAGE_GUIDE.md](./TESTING_COVERAGE_GUIDE.md) |
+| 最佳实践 | 工程最佳实践 | [./research_notes/BEST_PRACTICES.md](./research_notes/BEST_PRACTICES.md) |
+| 工具指南 | 验证工具使用 | [./research_notes/TOOLS_GUIDE.md](./research_notes/TOOLS_GUIDE.md) |
+| 质量检查清单 | 代码质量检查 | [./research_notes/QUALITY_CHECKLIST.md](./research_notes/QUALITY_CHECKLIST.md) |
+
+---
+
 ## 🎉 最新更新
+
+### 2026-02-20 🆕
+
+- ✅ **README 增强**：为所有索引层 README 添加代码示例和形式化链接
 
 ### 2026-02-13 🆕
 
@@ -170,36 +278,10 @@ cargo run -p rust-doc-search -- search --fuzzy "borrowing"
 - ✅ **性能测试报告**：性能测试报告已创建（46个基准测试文件汇总）
 - ✅ **文档完善**：文档完善度达到 95%，整体项目完成度达到 90-95%
 
-### 2026-01-26 🆕
-
-- ✅ **交叉引用增强**：为所有19个速查卡统一添加/增强"相关资源"部分
-- ✅ **版本一致性**：所有速查卡已更新到 Rust 1.93.0+
-- ✅ **断链修复**：修复所有发现的文档断链
-- ✅ **工具链文档**：Rust 1.93 vs 1.92 对比文档已整合
-- ✅ **文档索引增强**：文档索引已增强，添加所有12个核心模块的文档和示例链接
-- ✅ **文档完善**：文档完善度达到 87%，整体项目完成度达到 83%
-- ✅ **高级主题文档**：高级主题深度指南已创建
-- ✅ **综合最佳实践**：综合最佳实践指南已创建
-
-### 2025-11-15
-
-- ✅ 完成文件归档工作（101 个文件）
-- ✅ 修复核心文档中的断开链接
-- ✅ 更新文档结构说明
-- ✅ 完善快速参考索引
-- ✅ 优化文档导航
-
-### 2025-10-30
-
-- ✅ 创建文档导航中心
-- ✅ 完成文档结构分析
-- ✅ 提供归档自动化脚本
-- ✅ mdBook 在线平台上线
-
 ---
 
 **维护团队**: Rust Learning Community
-**最后更新**: 2026-02-13
+**最后更新**: 2026-02-20
 **状态**: ✅ **Rust 1.93.0 更新完成**
 
 ---

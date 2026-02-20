@@ -21,6 +21,10 @@
   - [检查清单](#检查清单)
     - [版本发布后](#版本发布后)
     - [季度复核](#季度复核)
+  - [研究场景与代码示例](#研究场景与代码示例)
+    - [场景 1：新语言特性研究](#场景-1新语言特性研究)
+    - [场景 2：性能改进验证](#场景-2性能改进验证)
+    - [场景 3：API 稳定化跟踪](#场景-3api-稳定化跟踪)
   - [相关文档](#相关文档)
 
 ---
@@ -89,17 +93,110 @@
 
 ---
 
+## 研究场景与代码示例
+
+### 场景 1：新语言特性研究
+
+```rust
+// 研究场景：分析 Rust 1.93 新增的 LUB coercion 修正
+// 形式化问题：类型推断算法的正确性
+
+fn lub_coercion_example() {
+    // 1.93 前：某些函数项类型推断不正确
+    // 1.93 后：LUB (Least Upper Bound) 计算修正
+    
+    let f = if true {
+        |x: i32| x as i64  // fn(i32) -> i64
+    } else {
+        |x: i32| (x * 2) as i64  // fn(i32) -> i64
+    };
+    
+    // 研究任务：
+    // 1. 形式化描述 LUB 计算规则
+    // 2. 验证修正后的推断正确性
+    // 3. 更新 type_system_foundations.md 中的类型推导规则
+}
+```
+
+### 场景 2：性能改进验证
+
+```rust
+// 研究场景：验证 Rust 1.93 的性能改进
+// 形式化问题：新实现是否保持语义等价
+
+use std::mem::MaybeUninit;
+
+fn performance_improvement_example() {
+    // Rust 1.93 新增的 MaybeUninit API
+    let mut buffer: [MaybeUninit<u8>; 1024] = 
+        unsafe { MaybeUninit::uninit().assume_init() };
+    
+    // 新 API：write_copy_of_slice
+    unsafe {
+        MaybeUninit::write_copy_of_slice(
+            &mut buffer,
+            b"hello world"
+        );
+    }
+    
+    // 研究任务：
+    // 1. 设计基准测试验证性能改进
+    // 2. 形式化证明新 API 的安全性
+    // 3. 更新 performance_benchmarks.md
+}
+```
+
+### 场景 3：API 稳定化跟踪
+
+```rust
+// 研究场景：跟踪新稳定的 API
+// 形式化问题：新 API 的类型安全保证
+
+use std::num::NonZeroU32;
+
+fn api_stabilization_example() {
+    // Rust 1.93 新增的 API 示例
+    // 假设新增了 NonZeroU32::div_ceil
+    
+    let a = NonZeroU32::new(10).unwrap();
+    let b = NonZeroU32::new(3).unwrap();
+    let result = a.get().div_ceil(b.get());  // 4
+    
+    // 研究任务：
+    // 1. 验证新 API 的前置/后置条件
+    // 2. 更新 trait_system_formalization.md 中的实现解析
+    // 3. 检查是否需要新的形式化定义
+}
+```
+
+---
+
 ## 相关文档
 
-| 文档 | 用途 |
-| :--- | :--- |
-| [MAINTENANCE_GUIDE](MAINTENANCE_GUIDE.md) | 维护计划、质量检查 |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 特性分析主文档 |
-| [FEATURE_TEMPLATE](FEATURE_TEMPLATE.md) | 新特性精简模板 |
-| [formal_methods/00_completeness_gaps](formal_methods/00_completeness_gaps.md) | 形式化缺口 |
-| [type_theory/00_completeness_gaps](type_theory/00_completeness_gaps.md) | 类型理论缺口 |
+### 核心流程文档
+
+| 文档 | 用途 | 链接 |
+| :--- | :--- | :--- |
+| MAINTENANCE_GUIDE | 维护计划、质量检查 | [MAINTENANCE_GUIDE.md](./MAINTENANCE_GUIDE.md) |
+| RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | 特性分析主文档 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) |
+| FEATURE_TEMPLATE | 新特性精简模板 | [FEATURE_TEMPLATE.md](./FEATURE_TEMPLATE.md) |
+
+### 形式化方法文档
+
+| 文档 | 用途 | 链接 |
+| :--- | :--- | :--- |
+| formal_methods/00_completeness_gaps | 形式化缺口 | [formal_methods/00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md) |
+| type_theory/00_completeness_gaps | 类型理论缺口 | [type_theory/00_completeness_gaps.md](./type_theory/00_completeness_gaps.md) |
+
+### 更新记录文档
+
+| 文档 | 用途 | 链接 |
+| :--- | :--- | :--- |
+| RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [RUST_191_RESEARCH_UPDATE_2025_11_15.md](./RUST_191_RESEARCH_UPDATE_2025_11_15.md) |
+| RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [RUST_192_RESEARCH_UPDATE_2025_12_11.md](./RUST_192_RESEARCH_UPDATE_2025_12_11.md) |
+| CHANGELOG | 更新日志 | [CHANGELOG.md](./CHANGELOG.md) |
 
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-12
+**最后更新**: 2026-02-20

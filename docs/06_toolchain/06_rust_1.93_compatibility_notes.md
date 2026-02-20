@@ -195,10 +195,347 @@ libc = "0.2.146"  # 或更新版本
 
 ## 参考资源
 
+### 官方文档
 - [Rust 1.93.0 Release Notes](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)
 - [Rust 1.93.0 详细 Changelog](https://releases.rs/docs/1.93.0/)
 - [Rust 1.93 vs 1.92 对比](./05_rust_1.93_vs_1.92_comparison.md)
 - [Rust 平台支持](https://doc.rust-lang.org/rustc/platform-support.html)
+
+### 形式化规范
+- [Ferrocene Language Specification](https://spec.ferrocene.dev/)
+- [Rust Reference - Memory Safety](https://doc.rust-lang.org/reference/unsafe-keyword.html)
+- [Rust Reference - FFI](https://doc.rust-lang.org/reference/items/external-blocks.html)
+
+---
+
+## 兼容性检查代码示例
+
+### 版本检测宏
+
+```rust
+//! Rust 1.93 兼容性检查工具
+
+/// 编译时 Rust 版本检查
+#[macro_export]
+macro_rules! rust_version_check {
+    (>= $major:literal.$minor:literal) => {
+        const _: () = assert!(
+            rust_version_check::VERSION.0 > $major || 
+            (rust_version_check::VERSION.0 == $major && rust_version_check::VERSION.1 >= $minor),
+            concat!("Requires Rust ", stringify!($major), ".", stringify!($minor), " or later")
+        );
+    };
+}
+
+pub const VERSION: (u32, u32) = {
+    let version = env!("RUSTC_VERSION");
+    // 简化版本解析
+    (1, 93)
+};
+
+/// 检查关键兼容性特性
+pub mod compatibility_checks {
+    /// 检查 deref_nullptr lint 级别
+    pub fn check_deref_nullptr_lint() {
+        // 在 Rust 1.93 中，deref_nullptr 是 deny-by-default
+        // 代码应确保不触发此 lint
+        let ptr: *const i32 = std::ptr::null();
+        
+        // ✅ 正确：检查后再解引用
+        if !ptr.is_null() {
+            unsafe { let _ = *ptr; }
+        }
+        
+        // 或使用 as_ref
+        if let Some(val) = unsafe { ptr.as_ref() } {
+            println!("Value: {}", val);
+        }
+    }
+    
+    /// 检查 #[test] 属性使用
+    pub mod test_attribute_check {
+        // ✅ 正确：#[test] 仅在裸函数上使用
+        #[test]
+        fn valid_test() {
+            assert_eq!(2 + 2, 4);
+        }
+        
+        // ❌ 错误：在 trait 方法上使用 #[test]
+        // trait MyTrait {
+        //     #[test]
+        //     fn test_method() {}
+        // }
+        
+        // ❌ 错误：在结构体上使用 #[test]
+        // #[test]
+        // struct TestStruct;
+    }
+    
+    /// 检查 offset_of! 类型约束
+    pub mod offset_of_check {
+        use std::mem::offset_of;
+        
+        struct WellFormed<T: Sized> {
+            field: T,
+        }
+        
+        // ✅ 正确：类型满足 well-formed 约束
+        const _: usize = offset_of!(WellFormed<i32>, field);
+        
+        // 在 Rust 1.93 中，以下会产生编译错误：
+        // struct NotWellFormed<T: ?Sized>(T);
+        // const _: usize = offset_of!(NotWellFormed<dyn Send>, 0);
+    }
+    
+    /// 检查 repr(C) 枚举判别值
+    pub mod repr_c_enum_check {
+        // ✅ 正确：判别值在 c_int 范围内
+        #[repr(C)]
+        enum ValidEnum {
+            A = 0,
+            B = i32::MAX as isize,
+        }
+        
+        // ⚠️ 警告：判别值可能超出 c_int 范围
+        // #[repr(C)]
+        // enum InvalidEnum {
+        //     A = 0,
+        //     B = i32::MAX as isize + 1,
+        // }
+    }
+    
+    /// 检查 FFI 可变参数使用
+    pub mod ffi_variadic_check {
+        // ✅ 正确：在 extern 块中使用可变参数
+        extern "system" {
+            fn printf(format: *const u8, ...);
+        }
+        
+        // ❌ 未来不兼容：在 extern 块外使用可变参数
+        // fn my_print(fmt: *const u8, ...) {
+        //     // ...
+        // }
+    }
+}
+
+/// CI/CD 兼容性检查脚本
+pub mod ci_checks {
+    use std::process::Command;
+    
+    /// 运行完整的兼容性检查
+    pub fn run_compatibility_check() -> Result<(), Vec<String>> {
+        let mut errors = Vec::new();
+        
+        // 检查 1：编译测试
+        if let Err(e) = run_cargo_check() {
+            errors.push(format!("cargo check failed: {}", e));
+        }
+        
+        // 检查 2：deny lints
+        if let Err(e) = run_deny_lints_check() {
+            errors.push(format!("deny lints check failed: {}", e));
+        }
+        
+        // 检查 3：测试运行
+        if let Err(e) = run_tests() {
+            errors.push(format!("tests failed: {}", e));
+        }
+        
+        // 检查 4：文档生成
+        if let Err(e) = run_doc_check() {
+            errors.push(format!("doc check failed: {}", e));
+        }
+        
+        if errors.is_empty() {
+            Ok(())
+        } else {
+            Err(errors)
+        }
+    }
+    
+    fn run_cargo_check() -> Result<(), String> {
+        let output = Command::new("cargo")
+            .args(["check", "--all-targets", "--all-features"])
+            .output()
+            .map_err(|e| e.to_string())?;
+        
+        if output.status.success() {
+            Ok(())
+        } else {
+            Err(String::from_utf8_lossy(&output.stderr).to_string())
+        }
+    }
+    
+    fn run_deny_lints_check() -> Result<(), String> {
+        // 使用 RUSTFLAGS 确保 deny lints 被触发
+        let output = Command::new("cargo")
+            .args(["check"])
+            .env("RUSTFLAGS", "-D warnings")
+            .output()
+            .map_err(|e| e.to_string())?;
+        
+        if output.status.success() {
+            Ok(())
+        } else {
+            Err(String::from_utf8_lossy(&output.stderr).to_string())
+        }
+    }
+    
+    fn run_tests() -> Result<(), String> {
+        let output = Command::new("cargo")
+            .args(["test", "--all"])
+            .output()
+            .map_err(|e| e.to_string())?;
+        
+        if output.status.success() {
+            Ok(())
+        } else {
+            Err(String::from_utf8_lossy(&output.stderr).to_string())
+        }
+    }
+    
+    fn run_doc_check() -> Result<(), String> {
+        let output = Command::new("cargo")
+            .args(["doc", "--no-deps"])
+            .env("RUSTDOCFLAGS", "-D warnings")
+            .output()
+            .map_err(|e| e.to_string())?;
+        
+        if output.status.success() {
+            Ok(())
+        } else {
+            Err(String::from_utf8_lossy(&output.stderr).to_string())
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_deref_nullptr_check() {
+        compatibility_checks::check_deref_nullptr_lint();
+    }
+    
+    #[test]
+    fn test_repr_c_enum() {
+        // 验证 repr(C) 枚举编译成功
+        use compatibility_checks::repr_c_enum_check::*;
+        let _ = ValidEnum::A;
+    }
+}
+```
+
+### 迁移辅助工具
+
+```rust
+//! Rust 1.93 迁移辅助脚本
+
+use std::fs;
+use std::path::Path;
+
+/// 检查项目中的潜在兼容性问题
+pub fn scan_for_compatibility_issues(project_path: &Path) -> Vec<String> {
+    let mut issues = Vec::new();
+    
+    // 检查 Cargo.toml 中的依赖版本
+    if let Ok(content) = fs::read_to_string(project_path.join("Cargo.toml")) {
+        if content.contains("libc = \"0.2.14") && !content.contains("0.2.146") {
+            issues.push("警告：libc 版本可能需要升级到 0.2.146+".to_string());
+        }
+        
+        if content.contains("static-init = \"1.0.1\"") || 
+           content.contains("static-init = \"1.0.2\"") ||
+           content.contains("static-init = \"1.0.3\"") {
+            issues.push("警告：static-init 1.0.1-1.0.3 可能与 Rust 1.93 不兼容".to_string());
+        }
+    }
+    
+    // 检查 .cargo/config.toml
+    if let Ok(content) = fs::read_to_string(project_path.join(".cargo/config.toml")) {
+        if content.contains("document_private_items") {
+            issues.push("错误：document_private_items 属性在 Rust 1.93 中已移除".to_string());
+        }
+    }
+    
+    // 检查源码中的问题模式
+    issues.extend(scan_source_files(project_path));
+    
+    issues
+}
+
+fn scan_source_files(project_path: &Path) -> Vec<String> {
+    let mut issues = Vec::new();
+    let src_path = project_path.join("src");
+    
+    if let Ok(entries) = fs::read_dir(&src_path) {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.extension().map_or(false, |e| e == "rs") {
+                if let Ok(content) = fs::read_to_string(&path) {
+                    // 检查 #[test] 在 trait 中的使用
+                    if content.contains("trait") && content.contains("#\[test\]") {
+                        issues.push(format!(
+                            "警告：{} 中可能在 trait 中使用了 #[test]，这在 Rust 1.93 中会报错",
+                            path.display()
+                        ));
+                    }
+                    
+                    // 检查 deref_nullptr 模式
+                    if content.contains("*ptr") && content.contains("null()") {
+                        issues.push(format!(
+                            "警告：{} 中可能有无保护的指针解引用，在 Rust 1.93 中会报错",
+                            path.display()
+                        ));
+                    }
+                }
+            }
+        }
+    }
+    
+    issues
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::io::Write;
+    use tempfile::TempDir;
+    
+    #[test]
+    fn test_scan_compatibility() {
+        let temp_dir = TempDir::new().unwrap();
+        let project_path = temp_dir.path();
+        
+        // 创建测试 Cargo.toml
+        let mut cargo_toml = fs::File::create(project_path.join("Cargo.toml")).unwrap();
+        writeln!(cargo_toml, r#"
+[package]
+name = "test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+libc = "0.2.100"
+"#).unwrap();
+        
+        // 创建 src 目录和文件
+        fs::create_dir(project_path.join("src")).unwrap();
+        let mut main_rs = fs::File::create(project_path.join("src/main.rs")).unwrap();
+        writeln!(main_rs, r#"
+trait MyTrait {{
+    #[test]
+    fn test_method() {{}}
+}}
+"#).unwrap();
+        
+        let issues = scan_for_compatibility_issues(project_path);
+        assert!(!issues.is_empty());
+        assert!(issues.iter().any(|i| i.contains("libc")));
+    }
+}
+```
 
 ---
 

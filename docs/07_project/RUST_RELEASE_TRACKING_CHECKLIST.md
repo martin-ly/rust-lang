@@ -16,6 +16,363 @@
 
 ---
 
+## 代码示例
+
+### 版本发布检查自动化脚本
+
+```rust
+//! Rust 新版本发布检查清单自动化
+use std::collections::HashMap;
+use std::fs;
+use std::process::Command;
+
+struct ReleaseChecklist {
+    version: String,
+    checks: Vec<CheckItem>,
+}
+
+struct CheckItem {
+    category: String,
+    description: String,
+    command: Option<String>,
+    manual: bool,
+}
+
+impl ReleaseChecklist {
+    fn new(version: &str) -> Self {
+        let checks = vec![
+            // 1. 获取权威信息
+            CheckItem {
+                category: "权威信息".to_string(),
+                description: "阅读 Rust Blog 发布公告".to_string(),
+                command: Some("curl -s https://blog.rust-lang.org/releases/".to_string()),
+                manual: true,
+            },
+            CheckItem {
+                category: "权威信息".to_string(),
+                description: "阅读 releases.rs 详细 changelog".to_string(),
+                command: Some("curl -s https://releases.rs/".to_string()),
+                manual: true,
+            },
+
+            // 2. 更新 toolchain 文档
+            CheckItem {
+                category: "Toolchain 文档".to_string(),
+                description: format!("创建 rust_{}_vs_对比文档", version),
+                command: None,
+                manual: true,
+            },
+
+            // 3. 更新版本声明
+            CheckItem {
+                category: "版本声明".to_string(),
+                description: "更新根 Cargo.toml rust-version".to_string(),
+                command: Some("cargo check".to_string()),
+                manual: false,
+            },
+
+            // 8. 验证
+            CheckItem {
+                category: "验证".to_string(),
+                description: "cargo build 通过".to_string(),
+                command: Some("cargo build --workspace".to_string()),
+                manual: false,
+            },
+            CheckItem {
+                category: "验证".to_string(),
+                description: "cargo test 通过".to_string(),
+                command: Some("cargo test --workspace".to_string()),
+                manual: false,
+            },
+            CheckItem {
+                category: "验证".to_string(),
+                description: "doc-test 通过（含 compile_fail）".to_string(),
+                command: Some("cargo test -p c01_ownership_borrow_scope --doc".to_string()),
+                manual: false,
+            },
+        ];
+
+        Self {
+            version: version.to_string(),
+            checks,
+        }
+    }
+
+    fn execute_check(&self, check: &CheckItem) -> Result<(), String> {
+        if check.manual {
+            println!("⚠️  手动检查: {}", check.description);
+            return Ok(());
+        }
+
+        if let Some(cmd) = &check.command {
+            println!("执行: {}", cmd);
+            let output = Command::new("sh")
+                .args(["-c", cmd])
+                .output()
+                .map_err(|e| format!("执行失败: {}", e))?;
+
+            if !output.status.success() {
+                return Err(format!(
+                    "命令失败: {}",
+                    String::from_utf8_lossy(&output.stderr)
+                ));
+            }
+        }
+
+        Ok(())
+    }
+
+    fn run_all(&self) {
+        println!("=== Rust {} 发布检查清单 ===\n", self.version);
+
+        let mut passed = 0;
+        let mut failed = 0;
+
+        for check in &self.checks {
+            print!("[{}] {}... ", check.category, check.description);
+
+            match self.execute_check(check) {
+                Ok(_) => {
+                    println!("✅");
+                    passed += 1;
+                }
+                Err(e) => {
+                    println!("❌ - {}", e);
+                    failed += 1;
+                }
+            }
+        }
+
+        println!("\n=== 结果 ===");
+        println!("通过: {}, 失败: {}", passed, failed);
+    }
+
+    fn generate_markdown(&self) -> String {
+        let mut output = format!(
+            "# Rust {} 发布追踪 Checklist\n\n",
+            self.version
+        );
+
+        let mut current_category = String::new();
+
+        for check in &self.checks {
+            if check.category != current_category {
+                output.push_str(&format!("\n### {}\n\n", check.category));
+                current_category = check.category.clone();
+            }
+
+            output.push_str(&format!("- [ ] {}\n", check.description));
+        }
+
+        output
+    }
+}
+
+fn main() {
+    let checklist = ReleaseChecklist::new("1.93");
+    checklist.run_all();
+
+    // 生成 Markdown 版本
+    fs::write("RELEASE_CHECKLIST_1.93.md", checklist.generate_markdown()).unwrap();
+    println!("\n检查清单已保存: RELEASE_CHECKLIST_1.93.md");
+}
+```
+
+### 批量更新版本元数据
+
+```rust
+//! 批量更新文档中的版本元数据
+use std::fs;
+use regex::Regex;
+
+struct VersionMetadataUpdater {
+    old_version: String,
+    new_version: String,
+    updated_files: Vec<String>,
+}
+
+impl VersionMetadataUpdater {
+    fn new(old_version: &str, new_version: &str) -> Self {
+        Self {
+            old_version: old_version.to_string(),
+            new_version: new_version.to_string(),
+            updated_files: Vec::new(),
+        }
+    }
+
+    fn update_file(&mut self, path: &str) -> Result<(), String> {
+        let content = fs::read_to_string(path)
+            .map_err(|e| format!("读取失败: {}", e))?;
+
+        let mut new_content = content.clone();
+
+        // 更新版本声明
+        let version_pattern = Regex::new(&format!(
+            r"(Rust 版本.*?: *)({})",
+            regex::escape(&self.old_version)
+        )).unwrap();
+        new_content = version_pattern.replace_all(&new_content,
+            format!("${{1}}{}", self.new_version)
+        ).to_string();
+
+        // 更新最后更新日期
+        let today = chrono::Local::now().format("%Y-%m-%d").to_string();
+        let date_pattern = Regex::new(r"> \*\*最后更新\*\*: .*").unwrap();
+        new_content = date_pattern.replace_all(&new_content,
+            format!("> **最后更新**: {}"), today
+        ).to_string();
+
+        if content != new_content {
+            fs::write(path, new_content)
+                .map_err(|e| format!("写入失败: {}", e))?;
+            self.updated_files.push(path.to_string());
+        }
+
+        Ok(())
+    }
+
+    fn update_directory(&mut self, dir: &str) {
+        if let Ok(entries) = fs::read_dir(dir) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.extension().map_or(false, |e| e == "md") {
+                    let _ = self.update_file(&path.to_string_lossy());
+                }
+            }
+        }
+    }
+
+    fn report(&self) {
+        if self.updated_files.is_empty() {
+            println!("没有文件需要更新");
+        } else {
+            println!("已更新 {} 个文件:", self.updated_files.len());
+            for file in &self.updated_files {
+                println!("  - {}", file);
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut updater = VersionMetadataUpdater::new("1.92.0", "1.93.0");
+
+    // 更新关键目录
+    updater.update_directory("docs/02_reference/quick_reference");
+    updater.update_directory("docs/06_toolchain");
+    updater.update_directory("docs/07_project");
+
+    updater.report();
+}
+```
+
+### 权威源日期同步检查
+
+```rust
+//! 检查并更新权威源同步日期
+use std::fs;
+use regex::Regex;
+use chrono::Local;
+
+struct AuthoritativeSourceSyncChecker;
+
+impl AuthoritativeSourceSyncChecker {
+    fn check_file(path: &str) -> Option<String> {
+        let content = fs::read_to_string(path).ok()?;
+
+        // 检查是否包含权威源日期标记
+        let date_pattern = Regex::new(r"最后对照 releases\.rs: (\d{4}-\d{2}-\d{2})").unwrap();
+
+        if let Some(captures) = date_pattern.captures(&content) {
+            let last_date = captures.get(1)?.as_str();
+            let today = Local::now().format("%Y-%m-%d").to_string();
+
+            // 如果超过 30 天未更新，提示需要更新
+            let days_diff = Self::days_between(last_date, &today);
+
+            if days_diff > 30 {
+                return Some(format!(
+                    "⚠️  超过 30 天未更新 ({}天前)",
+                    days_diff
+                ));
+            } else {
+                return Some(format!(
+                    "✅ {} 天内已更新",
+                    days_diff
+                ));
+            }
+        }
+
+        Some("❌ 缺少权威源日期标记".to_string())
+    }
+
+    fn days_between(date1: &str, date2: &str) -> i64 {
+        // 简化计算，实际应使用 chrono::NaiveDate
+        0
+    }
+
+    fn update_date(path: &str) -> Result<(), String> {
+        let content = fs::read_to_string(path)
+            .map_err(|e| format!("读取失败: {}", e))?;
+
+        let today = Local::now().format("%Y-%m-%d").to_string();
+
+        // 更新日期
+        let date_pattern = Regex::new(r"(最后对照 releases\.rs: )\d{4}-\d{2}-\d{2}").unwrap();
+        let new_content = date_pattern.replace_all(&content,
+            format!("${{1}}{}", today)
+        );
+
+        fs::write(path, new_content.as_ref())
+            .map_err(|e| format!("写入失败: {}", e))?;
+
+        Ok(())
+    }
+
+    fn check_toolchain_docs() {
+        let toolchain_dir = "docs/06_toolchain";
+
+        println!("=== 权威源日期同步检查 ===\n");
+
+        if let Ok(entries) = fs::read_dir(toolchain_dir) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.extension().map_or(false, |e| e == "md") {
+                    let path_str = path.to_string_lossy();
+                    if let Some(status) = Self::check_file(&path_str) {
+                        println!("{}: {}", path.file_name().unwrap().to_string_lossy(), status);
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn main() {
+    AuthoritativeSourceSyncChecker::check_toolchain_docs();
+}
+```
+
+---
+
+## 形式化链接
+
+### 研究笔记关联
+
+- **版本演进**: [08_rust_version_evolution_1.89_to_1.93.md](../06_toolchain/08_rust_version_evolution_1.89_to_1.93.md) - 版本演进链
+- **兼容性分析**: [09_rust_1.93_compatibility_deep_dive.md](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) - 兼容性深度分析
+- **模块适配**: [MODULE_1.93_ADAPTATION_STATUS.md](./MODULE_1.93_ADAPTATION_STATUS.md) - 各模块适配状态
+
+### 实施场景
+
+| 场景 | 实施步骤 | 参考代码 |
+| :--- | :--- | :--- |
+| **新版本发布** | 1. 运行检查清单自动化脚本<br>2. 逐一验证手动检查项<br>3. 生成进度报告 | `ReleaseChecklist::run_all()` |
+| **批量版本更新** | 1. 使用元数据更新器<br>2. 批量更新文档版本声明<br>3. 验证更新结果 | `VersionMetadataUpdater` |
+| **季度审查** | 1. 检查权威源日期<br>2. 更新过期日期标记<br>3. 生成审查报告 | `AuthoritativeSourceSyncChecker` |
+
+---
+
 ## Checklist
 
 ### 1. 获取权威信息

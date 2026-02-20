@@ -941,7 +941,234 @@ cargo +nightly rustdoc -- -Z unstable-options --output-format json
 
 ---
 
+## 16. 代码示例与形式化链接
+
+### 16.1 完整文档测试示例
+
+```rust
+//! # 数学运算库
+//!
+//! 提供高性能的数学运算功能。
+//!
+//! ## 示例
+//!
+//! ```
+//! use math_lib::{add, multiply};
+//!
+//! let sum = add(2, 3);
+//! assert_eq!(sum, 5);
+//!
+//! let product = multiply(4, 5);
+//! assert_eq!(product, 20);
+//! ```
+//!
+//! ## 安全性
+//!
+//! 所有操作都是安全的，不涉及 unsafe 代码。
+//!
+//! ## 性能
+//!
+//! - 时间复杂度: O(1)
+//! - 空间复杂度: O(1)
+
+/// 加法函数
+///
+/// # 形式化规范
+///
+/// 对于任意整数 `a` 和 `b`，返回满足以下条件的整数 `c`：
+/// - `c = a + b`
+/// - `c` 在 `i32` 范围内（否则 panic）
+///
+/// # 示例
+///
+/// ```
+/// use math_lib::add;
+///
+/// assert_eq!(add(2, 3), 5);
+/// assert_eq!(add(-1, 1), 0);
+/// ```
+///
+/// # 类型签名
+///
+/// ```ignore
+/// add :: i32 -> i32 -> i32
+/// ```
+pub fn add(a: i32, b: i32) -> i32 {
+    a.checked_add(b).expect("Integer overflow")
+}
+
+/// 乘法函数
+///
+/// # 形式化规范
+///
+/// 对于任意整数 `a` 和 `b`，返回满足以下条件的整数 `c`：
+/// - `c = a * b`
+/// - `c` 在 `i32` 范围内（否则 panic）
+///
+/// # 示例
+///
+/// ```
+/// use math_lib::multiply;
+///
+/// assert_eq!(multiply(3, 4), 12);
+/// assert_eq!(multiply(-2, 5), -10);
+/// ```
+///
+/// # Panics
+///
+/// 当乘法结果超出 `i32` 范围时 panic。
+pub fn multiply(a: i32, b: i32) -> i32 {
+    a.checked_mul(b).expect("Integer overflow")
+}
+```
+
+### 16.2 文档测试高级用法
+
+```rust
+/// 处理可能失败的操作
+///
+/// # Examples
+///
+/// 成功的情况：
+/// ```
+/// use my_lib::process;
+///
+/// let result = process("valid_input");
+/// assert!(result.is_ok());
+/// ```
+///
+/// 失败的情况（使用 `should_panic`）：
+/// ```should_panic
+/// use my_lib::process;
+///
+/// // 这段代码会 panic
+/// process("invalid_input").unwrap();
+/// ```
+///
+/// 编译失败示例（使用 `compile_fail`）：
+/// ```compile_fail
+/// use my_lib::process;
+///
+/// // 错误：类型不匹配
+/// let x: i32 = process("test");
+/// ```
+///
+/// 不运行但编译（使用 `no_run`）：
+/// ```no_run
+/// use my_lib::start_server;
+///
+/// // 这会启动服务器，但不会实际运行
+/// start_server("localhost:8080");
+/// ```
+pub fn process(input: &str) -> Result<String, Error> {
+    // 实现
+}
+```
+
+### 16.3 形式化文档链接
+
+```rust
+/// 实现了 [`Clone`] 和 [`Default`] 的类型
+///
+/// # 类型系统
+///
+/// 该类型满足以下 trait 约束：
+/// - [`Clone`] - 支持值复制
+/// - [`Default`] - 支持默认值构造
+/// - [`Send`] + [`Sync`] - 支持线程安全共享
+///
+/// # 生命周期
+///
+/// 该类型拥有所有数据，没有外部引用，因此具有 `'static` 生命周期。
+///
+/// # 形式化性质
+///
+/// - **自反性**: `T == T`
+/// - **对称性**: 如果 `T == U`，则 `U == T`
+/// - **传递性**: 如果 `T == U` 且 `U == V`，则 `T == V`
+pub struct MyType<T: Clone + Default> {
+    data: T,
+}
+
+impl<T: Clone + Default> MyType<T> {
+    /// 创建新实例
+    ///
+    /// # 前置条件
+    ///
+    /// - `T` 必须实现 [`Default`]
+    ///
+    /// # 后置条件
+    ///
+    /// - 返回的实例满足 `instance.data == T::default()`
+    ///
+    /// # 形式化规范
+    ///
+    /// ```ignore
+    /// new :: Default T => MyType T
+    /// new = MyType { data: default }
+    /// ```
+    pub fn new() -> Self {
+        Self { data: T::default() }
+    }
+}
+```
+
+### 16.4 条件文档示例
+
+```rust
+#![cfg_attr(docsrs, feature(doc_cfg))]
+
+/// 异步处理函数（仅在启用 async 特性时可用）
+///
+/// # 特性要求
+///
+/// 需要启用 `async` 特性。
+#[cfg(feature = "async")]
+#[cfg_attr(docsrs, doc(cfg(feature = "async")))]
+pub async fn async_process(data: &str) -> Result<String, Error> {
+    // 异步实现
+}
+
+/// 平台特定的优化实现
+///
+/// # 平台支持
+///
+/// 仅在 x86_64 平台上可用。
+#[cfg(target_arch = "x86_64")]
+#[cfg_attr(docsrs, doc(cfg(target_arch = "x86_64")))]
+pub fn x86_64_optimized() -> i32 {
+    // x86_64 特定实现
+}
+```
+
+### 16.5 形式化规范链接
+
+| 概念 | 形式化文档链接 |
+| :--- | :--- |
+| 类型系统 | [Rust Reference - Type System](https://doc.rust-lang.org/reference/type-system.html) |
+| 所有权 | [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html) |
+| 生命周期 | [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) |
+| Trait 系统 | [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html) |
+| 类型布局 | [Rust Reference - Type Layout](https://doc.rust-lang.org/reference/type-layout.html) |
+| 不安全代码 | [The Rustonomicon](https://doc.rust-lang.org/nomicon/) |
+| Ferrocene 规范 | [Ferrocene Language Specification](https://spec.ferrocene.dev/) |
+
+---
+
+## 17. 形式化文档资源
+
+### Rust 形式化规范
+- [Ferrocene Language Specification](https://spec.ferrocene.dev/) - Rust 语言的工业级形式化规范
+- [Rust Reference](https://doc.rust-lang.org/reference/) - Rust 语言参考手册
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/) - 不安全 Rust 的黑暗艺术
+
+### 类型理论与形式化方法
+- [Rust Belt](https://plv.mpi-sws.org/rustbelt/) - Rust 形式化验证研究项目
+- [Rust 类型系统形式化论文](https://arxiv.org/abs/2211.13898) - 学术级形式化描述
+
+---
+
 **文档维护**: Documentation Team
-**最后更新**: 2026-01-26
-**下次审查**: 2026-01-22
+**最后更新**: 2026-02-20
+**下次审查**: 2026-03-20
 **最后对照 releases.rs**: 2026-02-14

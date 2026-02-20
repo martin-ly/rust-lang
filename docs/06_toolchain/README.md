@@ -1,9 +1,55 @@
 # Rust 工具链文档
 
 > **创建日期**: 2025-12-11
-> **最后更新**: 2026-02-15
+> **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
+
+> **概念说明**: Rust 工具链是编译器（rustc）、包管理器（Cargo）、文档生成器（rustdoc）和相关工具（Clippy、rustfmt、MIRI）的集合。它们协同工作，提供从代码编写、编译、测试到部署的完整开发体验。
+
+---
+
+## 快速开始
+
+```bash
+# 创建新项目
+cargo new my_project
+cd my_project
+
+# 构建项目
+cargo build
+cargo build --release
+
+# 运行测试
+cargo test
+
+# 检查代码
+cargo check
+cargo clippy
+
+# 格式化代码
+cargo fmt
+
+# 生成文档
+cargo doc --open
+```
+
+```toml
+# Cargo.toml 配置示例
+[package]
+name = "my-project"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.93"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.35", features = ["full"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+```
 
 ---
 

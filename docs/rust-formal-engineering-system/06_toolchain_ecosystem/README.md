@@ -5,11 +5,9 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
-> 内容已整合至： [06_toolchain/](../../06_toolchain/)
+> **概念说明**: Rust 工具链生态系统由编译器（rustc）、包管理器（Cargo）、文档生成器（rustdoc）和质量工具（Clippy、rustfmt、MIRI）组成。这些工具协同工作，提供从代码编写、编译、测试到部署的完整开发体验。
 
-- [编译器特性](../../06_toolchain/01_compiler_features.md)
-- [Cargo 工作空间](../../06_toolchain/02_cargo_workspace_guide.md)
-- [rustdoc 高级用法](../../06_toolchain/03_rustdoc_advanced.md)
+> 内容已整合至： [06_toolchain/](../../06_toolchain/)
 
 [返回主索引](../00_master_index.md)
 
@@ -56,6 +54,9 @@ fn never_inline() {}
 // 优化提示
 #[cold]  // 此分支很少执行
 fn error_path() {}
+
+#[must_use]  // 返回值必须使用
+fn important_result() -> i32 { 42 }
 ```
 
 ### Cargo：构建系统与包管理器
@@ -198,13 +199,82 @@ unsafe fn undefined_behavior_demo() {
 // }
 ```
 
+### 工作空间示例
+
+```toml
+# 根 Cargo.toml - 工作空间配置
+[workspace]
+members = ["crate-a", "crate-b", "crate-c"]
+resolver = "2"
+
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.35", features = ["full"] }
+anyhow = "1.0"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["Team <team@example.com>"]
+license = "MIT OR Apache-2.0"
+```
+
+### 构建脚本 (build.rs)
+
+```rust
+// build.rs - 自定义构建脚本
+use std::env;
+use std::path::Path;
+
+fn main() {
+    // 告诉 Cargo 当这些文件变化时重新运行构建
+    println!("cargo:rerun-if-changed=build.rs");
+    println!("cargo:rerun-if-changed=src/some_file.rs");
+
+    // 设置编译时环境变量
+    let version = env::var("CARGO_PKG_VERSION").unwrap();
+    println!("cargo:rustc-env=MY_APP_VERSION={}", version);
+
+    // 条件编译标志
+    let target = env::var("TARGET").unwrap();
+    if target.contains("windows") {
+        println!("cargo:rustc-cfg=windows");
+    }
+
+    // 链接外部库
+    println!("cargo:rustc-link-lib=static=mylib");
+    println!("cargo:rustc-link-search=native=/usr/local/lib");
+}
+```
+
 ---
 
-## 与 research_notes 的链接
+## 形式化方法
 
-| 研究笔记 | 路径 |
-| :--- | :--- |
-| 编译器优化 | [../../research_notes/experiments/compiler_optimizations.md](../../research_notes/experiments/compiler_optimizations.md) |
-| 性能基准 | [../../research_notes/experiments/performance_benchmarks.md](../../research_notes/experiments/performance_benchmarks.md) |
-| 形式化验证工具 | [../../research_notes/TOOLS_GUIDE.md](../../research_notes/TOOLS_GUIDE.md) |
-| 质量检查清单 | [../../research_notes/QUALITY_CHECKLIST.md](../../research_notes/QUALITY_CHECKLIST.md) |
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 形式化方法概述 | 形式化验证基础理论 | [../../research_notes/formal_methods/README.md](../../research_notes/formal_methods/README.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../../research_notes/formal_methods/type_system_formalization.md](../../research_notes/formal_methods/type_system_formalization.md) |
+| 所有权模型形式化 | 所有权系统数学定义 | [../../research_notes/formal_methods/ownership_model.md](../../research_notes/formal_methods/ownership_model.md) |
+| 借用检查器证明 | 借用检查器形式化证明 | [../../research_notes/formal_methods/borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md) |
+| Send/Sync 形式化 | 线程安全形式化定义 | [../../research_notes/formal_methods/send_sync_formalization.md](../../research_notes/formal_methods/send_sync_formalization.md) |
+| 证明索引 | 形式化证明集合 | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
+
+## 相关研究笔记
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 工具链文档 | 完整工具链指南 | [../../06_toolchain/](../../06_toolchain/) |
+| 编译器特性 | 完整编译器指南 | [../../06_toolchain/01_compiler_features.md](../../06_toolchain/01_compiler_features.md) |
+| Cargo 工作空间 | 工作空间配置 | [../../06_toolchain/02_cargo_workspace_guide.md](../../06_toolchain/02_cargo_workspace_guide.md) |
+| Rustdoc 高级 | 文档生成高级用法 | [../../06_toolchain/03_rustdoc_advanced.md](../../06_toolchain/03_rustdoc_advanced.md) |
+| 编译器优化实验 | 优化分析 | [../../research_notes/experiments/compiler_optimizations.md](../../research_notes/experiments/compiler_optimizations.md) |
+| 性能基准 | 性能测试方法论 | [../../research_notes/experiments/performance_benchmarks.md](../../research_notes/experiments/performance_benchmarks.md) |
+| 研究方法论 | 研究方法指南 | [../../research_notes/research_methodology.md](../../research_notes/research_methodology.md) |
+| 工具指南 | 验证工具使用 | [../../research_notes/TOOLS_GUIDE.md](../../research_notes/TOOLS_GUIDE.md) |
+| 质量检查清单 | 代码质量检查 | [../../research_notes/QUALITY_CHECKLIST.md](../../research_notes/QUALITY_CHECKLIST.md) |
+| 最佳实践 | 工程最佳实践 | [../../research_notes/BEST_PRACTICES.md](../../research_notes/BEST_PRACTICES.md) |
+
+---
+
+[返回主索引](../00_master_index.md) | [编译器理论](./01_compiler/README.md) | [包管理器理论](./02_package_manager/README.md) | [构建工具理论](./03_build_tools/README.md)

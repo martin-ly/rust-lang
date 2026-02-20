@@ -93,3 +93,26 @@ impl<'input> Parser<'input> {
 ```
 
 [返回主索引](../00_master_index.md)
+
+---
+
+## 形式化链接
+
+### 理论基础文档
+
+| 主题 | 文档路径 | 关键概念 |
+| :--- | :--- | :--- |
+| **类型系统基础** | [../../research_notes/type_theory/type_system_foundations.md](../../research_notes/type_theory/type_system_foundations.md) | Curry-Howard 对应、类型推导 |
+| **所有权模型** | [../../research_notes/formal_methods/ownership_model.md](../../research_notes/formal_methods/ownership_model.md) | 线性类型、资源管理代数 |
+| **借用检查器** | [../../research_notes/formal_methods/borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md) | 借用规则、不变式证明 |
+| **生命周期形式化** | [../../research_notes/formal_methods/lifetime_formalization.md](../../research_notes/formal_methods/lifetime_formalization.md) | 区域理论、生命周期约束 |
+| **Trait 形式化** | [../../research_notes/type_theory/trait_system_formalization.md](../../research_notes/type_theory/trait_system_formalization.md) | 类型类、关联类型 |
+| **型变理论** | [../../research_notes/type_theory/variance_theory.md](../../research_notes/type_theory/variance_theory.md) | 协变/逆变/不变规则 |
+
+### 证明与工具
+
+| 资源 | 路径 |
+| :--- | :--- |
+| 形式化证明索引 | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
+| 验证工具指南 | [../../research_notes/TOOLS_GUIDE.md](../../research_notes/TOOLS_GUIDE.md) |
+| 安全/非安全分析 | [../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |

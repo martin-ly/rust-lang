@@ -104,9 +104,166 @@ fn demo() {
 }
 ```
 
+## 更多代码示例
+
+### 泛型约束与边界
+
+```rust
+// Trait 边界：对泛型参数的约束
+fn process<T: Clone + Debug>(item: T) -> T
+where
+    T: Send + Sync,  // 多行约束
+{
+    println!("Processing: {:?}", item);
+    item.clone()
+}
+
+use std::fmt::Debug;
+
+// impl Trait 语法：简化返回类型
+fn make_cloneable() -> impl Clone {
+    vec![1, 2, 3]
+}
+
+// 条件实现（Conditional Implementation）
+struct Wrapper<T>(T);
+
+// 只有当 T 实现 Display 时，Wrapper<T> 才实现 Display
+impl<T: std::fmt::Display> std::fmt::Display for Wrapper<T> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Wrapper({})", self.0)
+    }
+}
+
+// 多个 trait 的交集约束
+fn complex_constraint<T>(item: T)
+where
+    T: Iterator + Clone + Send + 'static,
+    T::Item: Debug,
+{
+    for x in item.clone() {
+        println!("{:?}", x);
+    }
+}
+```
+
+### 高级 Trait 模式
+
+```rust
+// Supertrait：trait 继承
+trait Animal {
+    fn name(&self) -> &str;
+}
+
+trait Dog: Animal {
+    fn bark(&self);
+}
+
+struct Beagle {
+    name: String,
+}
+
+impl Animal for Beagle {
+    fn name(&self) -> &str { &self.name }
+}
+
+impl Dog for Beagle {
+    fn bark(&self) {
+        println!("{} says: Woof!", self.name());
+    }
+}
+
+// Blanket Implementation：为所有实现某 trait 的类型实现另一 trait
+trait Loggable {
+    fn log(&self);
+}
+
+// 为所有实现 Display 的类型自动实现 Loggable
+impl<T: std::fmt::Display> Loggable for T {
+    fn log(&self) {
+        println!("[LOG] {}", self);
+    }
+}
+
+// 使用 blanket implementation
+fn blanket_demo() {
+    42.log();  // i32 自动获得 log 方法
+    "hello".log();  // &str 自动获得 log 方法
+}
+
+// Newtype 模式与 trait 实现
+struct Meters(u32);
+struct Kilometers(u32);
+
+// 为不同类型实现相同语义但不同行为
+trait Distance {
+    fn as_meters(&self) -> u32;
+}
+
+impl Distance for Meters {
+    fn as_meters(&self) -> u32 { self.0 }
+}
+
+impl Distance for Kilometers {
+    fn as_meters(&self) -> u32 { self.0 * 1000 }
+}
+```
+
+### Trait 对象与对象安全
+
+```rust
+// 对象安全的 trait
+trait Drawable {
+    fn draw(&self);
+    fn bounds(&self) -> (i32, i32, i32, i32);
+}
+
+// 非对象安全的 trait（返回 Self 或使用泛型）
+trait Cloneable {
+    fn clone(&self) -> Self;  // 返回 Self，非对象安全
+}
+
+trait GenericTrait<T> {
+    fn process(&self, item: T);  // 泛型参数，非对象安全
+}
+
+// 使用 trait 对象的限制
+fn use_drawable(items: &[Box<dyn Drawable>]) {
+    for item in items {
+        item.draw();
+    }
+}
+
+// 解决非对象安全：关联类型和泛型的替代方案
+trait Processor {
+    type Input;
+    type Output;
+    fn process(&self, input: Self::Input) -> Self::Output;
+}
+
+// 使用 Box<dyn Any> 处理异构集合
+use std::any::Any;
+
+fn heterogeneous_collection() {
+    let mut items: Vec<Box<dyn Any>> = vec![];
+    items.push(Box::new(42i32));
+    items.push(Box::new("hello".to_string()));
+
+    // 向下转型
+    if let Some(num) = items[0].downcast_ref::<i32>() {
+        println!("Found i32: {}", num);
+    }
+}
+```
+
+---
+
 ## 相关研究笔记
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | Trait 系统形式化 | Trait 系统的完整形式化 | [../../../research_notes/type_theory/trait_system_formalization.md](../../../research_notes/type_theory/trait_system_formalization.md) |
 | 类型系统基础 | 类型理论基础 | [../../../research_notes/type_theory/type_system_foundations.md](../../../research_notes/type_theory/type_system_foundations.md) |
+| 型变理论 | 型变与子类型关系 | [../../../research_notes/type_theory/variance_theory.md](../../../research_notes/type_theory/variance_theory.md) |
+| 证明索引 | Trait 相关证明 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
+| 工具指南 | Trait 验证工具 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |

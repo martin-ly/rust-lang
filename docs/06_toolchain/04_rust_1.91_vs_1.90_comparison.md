@@ -280,6 +280,309 @@ mod version_migration_tests {
 - rustc lints 列表：`https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html`
 - Cargo 配置：`https://doc.rust-lang.org/cargo/reference/config.html`
 
+---
+
+## 形式化链接与类型系统参考
+
+### 类型系统形式化文档
+
+| 概念 | 文档链接 | 说明 |
+| :--- | :--- | :--- |
+| 生命周期推导 | [Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) | 自动生命周期规则 |
+| 借用检查 | [Borrow Checker](https://doc.rust-lang.org/reference/expressions.html?highlight=borrow#mutable-borrows) | 所有权系统形式化 |
+| Trait 解析 | [Trait Resolution](https://doc.rust-lang.org/reference/items/traits.html) | Trait 系统形式化 |
+| 类型强制转换 | [Coercion](https://doc.rust-lang.org/reference/type-coercions.html) | 类型转换规则 |
+| 子类型关系 | [Subtyping](https://doc.rust-lang.org/reference/subtyping.html) | 子类型形式化 |
+
+### 形式化验证资源
+
+- [Ferrocene Language Specification](https://spec.ferrocene.dev/) - Rust 工业级形式化规范
+- [Rust Belt](https://plv.mpi-sws.org/rustbelt/) - Rust 形式化验证研究
+- [Rust Formal Semantics](https://arxiv.org/abs/2211.13898) - 学术形式化语义
+
+---
+
+## 完整 API 示例代码
+
+### 1.90-1.91 新增 API 完整示例
+
+```rust
+// Rust 1.90+ 新增 API 使用示例
+
+use std::io::{BufRead, BufReader, Cursor};
+use std::ops::ControlFlow;
+
+/// 使用 1.90+ BufRead 改进的配置解析器
+pub fn parse_config_v190(config_data: &str) -> Result<Vec<(String, String)>, Box<dyn std::error::Error>> {
+    let cursor = Cursor::new(config_data);
+    let reader = BufReader::new(cursor);
+    let mut config = Vec::new();
+    
+    for line in reader.lines() {
+        let line = line?;
+        // 使用 skip_while 跳过空白
+        let trimmed: String = line
+            .bytes()
+            .skip_while(|&b| b.is_ascii_whitespace())
+            .take_while(|&b| b != b'#')  // 跳过注释
+            .map(|b| b as char)
+            .collect();
+        
+        if let Some((key, value)) = trimmed.split_once('=') {
+            config.push((key.trim().to_string(), value.trim().to_string()));
+        }
+    }
+    
+    Ok(config)
+}
+
+/// 使用 1.91+ ControlFlow 改进的错误处理
+pub fn validate_data_v191(data: &[i32]) -> ControlFlow<String, Vec<i32>> {
+    data.iter()
+        .try_fold(Vec::new(), |mut acc, &n| {
+            if n < 0 {
+                ControlFlow::Break(format!("Negative value found: {}", n))
+            } else if n > 1000 {
+                ControlFlow::Break(format!("Value too large: {}", n))
+            } else {
+                acc.push(n * 2);
+                ControlFlow::Continue(acc)
+            }
+        })
+}
+
+/// 1.91+ 常量上下文增强示例
+pub mod const_context {
+    // 在 const 上下文中引用非静态常量
+    pub const CONFIG: Config = Config {
+        max_items: 100,
+        timeout_ms: 5000,
+    };
+    
+    pub const CONFIG_REF: &Config = &CONFIG;  // ✅ Rust 1.91+
+    pub const MAX_ITEMS_REF: &usize = &CONFIG.max_items;  // ✅ Rust 1.91+
+    pub const EFFECTIVE_TIMEOUT: usize = *CONFIG_REF.timeout_ms_ref();  // ✅ Rust 1.91+
+    
+    #[derive(Debug, Clone, Copy)]
+    pub struct Config {
+        pub max_items: usize,
+        pub timeout_ms: usize,
+    }
+    
+    impl Config {
+        pub const fn timeout_ms_ref(&self) -> &usize {
+            &self.timeout_ms
+        }
+    }
+}
+
+/// dangling_pointers_from_locals lint 示例
+pub mod lint_examples {
+    /// ❌ 触发 dangling_pointers_from_locals lint
+    #[allow(dead_code)]
+    fn bad_example() -> *const i32 {
+        let x = 42;
+        &x as *const i32  // 警告：返回局部变量的指针
+    }
+    
+    /// ✅ 正确处理：使用 Box
+    fn good_example_box() -> Box<i32> {
+        Box::new(42)
+    }
+    
+    /// ✅ 正确处理：使用静态变量
+    fn good_example_static() -> &'static i32 {
+        static VALUE: i32 = 42;
+        &VALUE
+    }
+    
+    /// ✅ 正确处理：使用引用而非原始指针
+    fn good_example_reference() -> i32 {
+        let x = 42;
+        x  // 返回值而非指针
+    }
+}
+
+/// 1.90+ LLD 链接器配置示例
+pub mod linker_config {
+    /// .cargo/config.toml 配置示例
+    pub const CARGO_CONFIG: &str = r#"
+# Rust 1.90+ 默认使用 LLD
+# 如需回退到系统链接器：
+
+[target.x86_64-unknown-linux-gnu]
+linker = "cc"
+rustflags = ["-C", "link-arg=-fuse-ld=gold"]
+
+# 或使用 mold 链接器（更快）
+[target.x86_64-unknown-linux-gnu.mold]
+linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"]
+"#;
+}
+
+/// 1.90+ Cargo Workspace 发布示例
+pub mod workspace_publish {
+    /// Cargo.toml 工作区配置
+    pub const WORKSPACE_CARGO_TOML: &str = r#"
+[workspace]
+members = ["crate-a", "crate-b", "crate-c"]
+resolver = "2"
+
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+authors = ["Team <team@example.com>"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/example/workspace"
+
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tokio = "1.0"
+"#;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_config_parsing() {
+        let config = r#"
+            # 服务器配置
+            host = localhost
+            port = 8080
+            
+            # 数据库配置
+            db_host = db.example.com
+            db_port = 5432
+        "#;
+        
+        let result = parse_config_v190(config).unwrap();
+        assert_eq!(result.len(), 4);
+        assert!(result.contains(&("host".to_string(), "localhost".to_string())));
+    }
+    
+    #[test]
+    fn test_validate_data() {
+        let valid = vec![1, 2, 3, 4, 5];
+        match validate_data_v191(&valid) {
+            ControlFlow::Continue(result) => {
+                assert_eq!(result, vec![2, 4, 6, 8, 10]);
+            }
+            ControlFlow::Break(_) => panic!("Should not fail"),
+        }
+        
+        let invalid = vec![1, -2, 3];
+        match validate_data_v191(&invalid) {
+            ControlFlow::Break(msg) => {
+                assert!(msg.contains("Negative"));
+            }
+            ControlFlow::Continue(_) => panic!("Should fail"),
+        }
+    }
+    
+    #[test]
+    fn test_const_context() {
+        use const_context::*;
+        
+        assert_eq!(CONFIG.max_items, 100);
+        assert_eq!(*CONFIG_REF.max_items_ref(), 100);
+        assert_eq!(*MAX_ITEMS_REF, 100);
+        assert_eq!(EFFECTIVE_TIMEOUT, 5000);
+    }
+}
+```
+
+---
+
+## 迁移检查工具代码
+
+```rust
+//! Rust 版本迁移检查工具
+
+use std::process::Command;
+
+/// 检查 Rust 版本是否符合要求
+pub fn check_rust_version(min_version: &str) -> Result<(), String> {
+    let output = Command::new("rustc")
+        .args(["--version"])
+        .output()
+        .map_err(|e| format!("Failed to run rustc: {}", e))?;
+    
+    let version = String::from_utf8_lossy(&output.stdout);
+    println!("Detected Rust version: {}", version.trim());
+    
+    // 简单版本检查（实际应用中应使用语义化版本比较）
+    if !version.contains("1.90") && !version.contains("1.91") && !version.contains("1.92") && !version.contains("1.93") {
+        return Err(format!("Requires Rust {}, found: {}", min_version, version.trim()));
+    }
+    
+    Ok(())
+}
+
+/// 运行 cargo check 并报告结果
+pub fn run_cargo_check() -> Result<(), String> {
+    let output = Command::new("cargo")
+        .args(["check", "--all-targets", "--all-features"])
+        .output()
+        .map_err(|e| format!("Failed to run cargo check: {}", e))?;
+    
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        return Err(format!("cargo check failed:\n{}", stderr));
+    }
+    
+    println!("✅ cargo check passed");
+    Ok(())
+}
+
+/// 运行测试套件
+pub fn run_tests() -> Result<(), String> {
+    let output = Command::new("cargo")
+        .args(["test", "--all"])
+        .output()
+        .map_err(|e| format!("Failed to run cargo test: {}", e))?;
+    
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        return Err(format!("cargo test failed:\n{}", stderr));
+    }
+    
+    println!("✅ cargo test passed");
+    Ok(())
+}
+
+/// 主迁移检查流程
+pub fn migration_checklist() {
+    println!("=== Rust 1.90/1.91 迁移检查清单 ===\n");
+    
+    let checks = [
+        ("检查 Rust 版本", check_rust_version("1.90.0")),
+        ("运行 cargo check", run_cargo_check()),
+        ("运行测试套件", run_tests()),
+    ];
+    
+    for (name, result) in &checks {
+        match result {
+            Ok(_) => println!("✅ {}", name),
+            Err(e) => println!("❌ {}: {}", name, e),
+        }
+    }
+}
+
+#[cfg(test)]
+mod migration_tests {
+    use super::*;
+    
+    #[test]
+    fn test_version_check() {
+        // 这会在当前环境中运行
+        assert!(check_rust_version("1.80.0").is_ok());
+    }
+}
+```
+
 <!--
 ARCHIVED_DRAFT: 以下内容为历史草稿（曾包含不准确/占位信息），已被上方“对齐官方发布说明”的版本替代；保留仅供追溯，不参与文档发布口径。
 

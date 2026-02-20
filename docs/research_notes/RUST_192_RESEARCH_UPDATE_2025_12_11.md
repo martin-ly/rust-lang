@@ -12,6 +12,8 @@
 
 本文档记录 Rust 1.92.0 版本对研究笔记系统的影响和需要更新的内容。
 
+---
+
 ## 🎯 Rust 1.92.0 主要改进
 
 ### 语言特性改进
@@ -52,18 +54,187 @@
    - 不再对 `Result<(), Uninhabited>` 或 `ControlFlow<Uninhabited, ()>` 发出警告
    - 减少不必要的警告
 
-### 标准库 API 稳定化
+---
+
+## 💻 代码示例与研究场景
+
+### 场景 1：`MaybeUninit` 安全使用模式
+
+```rust
+use std::mem::MaybeUninit;
+
+// 研究场景：验证 MaybeUninit 的正确使用模式
+// 形式化问题：未初始化内存的安全抽象
+
+fn maybe_uninit_safety_research() {
+    // Rust 1.92.0 文档化的 MaybeUninit 语义
+    let mut buffer: [MaybeUninit<u8>; 1024] = 
+        unsafe { MaybeUninit::uninit().assume_init() };
+    
+    // 安全使用模式：
+    // 1. 写入后 assume_init
+    unsafe {
+        buffer[0].write(42);
+        let initialized = buffer[0].assume_init_ref();
+        assert_eq!(*initialized, 42);
+    }
+    
+    // 形式化保证：
+    // - write 后置条件：内存已初始化
+    // - assume_init_ref 前置条件：内存已初始化
+    // 违反契约 = UB
+}
+
+// 研究任务：
+// 1. 形式化描述 MaybeUninit 的状态机（Uninit → Init）
+// 2. 证明正确使用模式的安全性
+// 3. 识别常见误用模式（反例）
+```
+
+### 场景 2：联合体原始引用访问
+
+```rust
+// 研究场景：联合体字段的安全原始引用访问
+// 形式化问题：union 与 &raw 的交互
+
+union MyUnion {
+    int: i32,
+    float: f32,
+}
+
+fn union_raw_pointer_research() {
+    let mut u = MyUnion { int: 42 };
+    
+    // Rust 1.92.0: 允许使用 &raw mut 访问联合体字段
+    let int_ptr = &raw mut u.int;
+    let float_ptr = &raw mut u.float;
+    
+    // 安全保证：
+    // - &raw 不创建借用，不触发 UB
+    // - 通过原始指针的访问仍需要 unsafe
+    
+    unsafe {
+        *int_ptr = 100;
+        // 注意：此时 u.float 也是 100（位模式解释不同）
+    }
+}
+
+// 形式化定义：
+// Def UNION-RAW1: &raw mut union.field 创建不引发借用的原始指针
+// Axiom UNION-A1: 联合体字段共享存储，写一字段影响其他字段
+```
+
+### 场景 3：自动特征与 Sized 边界
+
+```rust
+// 研究场景：分析改进后的自动特征推导
+// 形式化问题：impl Trait 的边界解析规则
+
+trait Container {
+    type Item: Sized;
+    
+    fn get(&self) -> Option<Self::Item>;
+}
+
+// Rust 1.92.0: 编译器优先使用关联类型的项边界
+impl Container for Vec<i32> {
+    type Item = i32;  // 自动满足 Sized 边界
+    
+    fn get(&self) -> Option<i32> {
+        self.first().copied()
+    }
+}
+
+// 研究任务：
+// 1. 形式化描述改进后的 trait 解析算法
+// 2. 验证向后兼容性
+// 3. 更新 trait_system_formalization.md
+```
+
+### 场景 4：高阶生命周期处理
+
+```rust
+// 研究场景：验证高阶生命周期的正确性
+// 形式化问题：for<'a> 的语义与实现
+
+fn higher_rank_lifetime_research<F>(f: F)
+where
+    F: for<'a> Fn(&'a str) -> &'a str,
+{
+    // Rust 1.92.0 增强了高阶生命周期的一致性规则
+    let s1 = String::from("hello");
+    let r1 = f(&s1);
+    
+    let s2 = String::from("world");
+    let r2 = f(&s2);
+    
+    // 形式化保证：
+    // - f 的返回生命周期与输入生命周期相同
+    // - r1 和 r2 的生命周期分别受 s1 和 s2 约束
+}
+
+// 形式化定义：
+// Def HR1: for<'a> T<'a> 表示对所有生命周期 'a 的实现
+// Theorem HR-T1: 高阶生命周期的子类型关系保证类型安全
+```
+
+### 场景 5：关联项多边界
+
+```rust
+// 研究场景：关联项的多个边界
+// 形式化问题：类型约束的组合
+
+trait MultiBound {
+    type Item: Clone + Default + Send;
+}
+
+struct MyStruct;
+
+impl MultiBound for MyStruct {
+    // Rust 1.92.0: 允许关联类型有多个边界
+    type Item = String;  // String: Clone + Default + Send
+}
+
+// 形式化分析：
+// - 关联类型 Item 必须同时满足 Clone、Default、Send
+// - 这是交集类型约束的一种形式
+// - coherence 检查确保 impl 满足所有边界
+```
+
+---
+
+## 📊 标准库 API 稳定化
 
 1. **`NonZero<u{N}>::div_ceil`** - 非零整数的向上除法
 2. **`Location::file_as_c_str`** - 获取位置的文件路径作为 C 字符串
 3. **`<[_]>::rotate_right`** - 切片右旋转
 
-### 性能优化
+**代码示例**:
+```rust
+use std::num::NonZeroU32;
+
+fn api_stabilization_examples() {
+    // NonZeroU32::div_ceil
+    let a = NonZeroU32::new(10).unwrap();
+    let b = NonZeroU32::new(3).unwrap();
+    let result = a.get().div_ceil(b.get());  // 4
+    
+    // 形式化保证：
+    // - 非零整数保证除数不为零
+    // - 向上取整的数学定义
+}
+```
+
+---
+
+## 📊 性能优化
 
 1. **迭代器方法特化** - `Iterator::eq` 和 `Iterator::eq_by` 方法为 `TrustedLen` 迭代器特化
 2. **简化的元组扩展** - 简化了 `Extend` trait 对元组的实现
 3. **增强的 `EncodeWide` Debug 信息** - `Debug` 实现包含更多详细信息
 4. **`iter::Repeat` 中的无限循环 panic** - `last` 和 `count` 方法现在会在无限循环时 panic
+
+---
 
 ## 📝 研究笔记系统更新
 
@@ -90,14 +261,32 @@
    - 边界处理优化
    - 高阶生命周期增强
 
+---
+
 ## 🔗 相关资源
 
+### 外部链接
+
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
-- [Rust 1.92.0 特性实现](../../crates/c01_ownership_borrow_scope/src/rust_192_features.rs)
-- [Rust 1.92.0 示例代码](../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs)
+
+### 内部代码
+
+| 资源 | 链接 | 说明 |
+| :--- | :--- | :--- |
+| Rust 1.92.0 特性实现 | [../../crates/c01_ownership_borrow_scope/src/rust_192_features.rs](../../crates/c01_ownership_borrow_scope/src/rust_192_features.rs) | 代码实现 |
+| Rust 1.92.0 示例代码 | [../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs](../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs) | 示例代码 |
+
+### 形式化文档
+
+| 特性 | 形式化文档 | 相关定义 |
+| :--- | :--- | :--- |
+| MaybeUninit | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | unsafe 契约矩阵 |
+| 联合体 | [FORMAL_PROOF_SYSTEM_GUIDE.md](./FORMAL_PROOF_SYSTEM_GUIDE.md) | UB 分类 |
+| 自动特征 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md) | Trait 解析 |
+| 高阶生命周期 | [lifetime_formalization.md](./type_theory/lifetime_formalization.md) | 生命周期形式化 |
 
 ---
 
-**最后更新**: 2026-01-26（历史记录文档）
+**最后更新**: 2026-02-20（历史记录文档）
 **维护者**: Rust 学习项目团队
 **状态**: ✅ **已完成** / Completed

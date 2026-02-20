@@ -5,6 +5,8 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
+> **概念说明**: 质量保障（Quality Assurance）是通过系统化的测试、分析和验证活动确保软件满足需求的过程。Rust 的质量保障结合编译时检查（类型系统、借用检查）、运行时测试（单元测试、集成测试、基准测试）和形式化验证（模型检查、定理证明）来提供多层次的质量保证。
+
 ---
 
 ## 📋 目录
@@ -19,7 +21,11 @@
   - [代码质量示例](#代码质量示例)
     - [测试最佳实践](#测试最佳实践)
     - [MIRI 检测示例](#miri-检测示例)
+    - [基准测试示例](#基准测试示例)
+    - [代码覆盖率示例](#代码覆盖率示例)
+    - [形式化验证示例](#形式化验证示例)
   - [🔗 与 research\_notes 衔接](#-与-research_notes-衔接)
+  - [形式化方法](#形式化方法)
 
 ---
 
@@ -37,7 +43,8 @@
 ## 📐 质量保障维度
 
 | 维度 | 内容 | 文档 |
-| :--- | :--- | :--- || **测试覆盖** | 单元/集成/基准、覆盖率报告 | [TESTING_COVERAGE_GUIDE](../TESTING_COVERAGE_GUIDE.md) |
+| :--- | :--- | :--- |
+| **测试覆盖** | 单元/集成/基准、覆盖率报告 | [TESTING_COVERAGE_GUIDE](../TESTING_COVERAGE_GUIDE.md) |
 | **性能测试** | 基准测试、性能回归、分析工具 | [PERFORMANCE_TESTING_REPORT](../../05_guides/PERFORMANCE_TESTING_REPORT.md) |
 | **内存安全** | MIRI、Valgrind、无 UB 验证 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 | **形式化验证** | Prusti、Kani、Creusot | [TOOLS_GUIDE](../../research_notes/TOOLS_GUIDE.md)、[FORMAL_VERIFICATION_GUIDE](../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
@@ -55,7 +62,8 @@
 ## 🔬 形式化验证衔接
 
 | 验证目标 | 形式化定理 | 工具 |
-| :--- | :--- | :--- || 内存安全 | ownership T2/T3、borrow T1 | MIRI、Valgrind |
+| :--- | :--- | :--- |
+| 内存安全 | ownership T2/T3、borrow T1 | MIRI、Valgrind |
 | 数据竞争自由 | async T6.2 | MIRI、ThreadSanitizer |
 | 类型安全 | type_system T1–T3 | cargo check |
 | 契约满足 | unsafe 前置/后置条件 | Prusti、Kani |
@@ -114,6 +122,16 @@ mod property_tests {
         }
     }
 }
+
+// 模糊测试（使用 cargo-fuzz）
+#![no_main]
+use libfuzzer_sys::fuzz_target;
+
+fuzz_target!(|data: &[u8]| {
+    if let Ok(s) = std::str::from_utf8(data) {
+        let _ = parse_input(s);
+    }
+});
 ```
 
 ### MIRI 检测示例
@@ -156,6 +174,84 @@ mod miri_tests {
 }
 ```
 
+### 基准测试示例
+
+```rust
+// 使用 criterion 进行基准测试
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+
+fn fibonacci(n: u64) -> u64 {
+    match n {
+        0 => 1,
+        1 => 1,
+        n => fibonacci(n - 1) + fibonacci(n - 2),
+    }
+}
+
+fn criterion_benchmark(c: &mut Criterion) {
+    c.bench_function("fib 20", |b| b.iter(|| fibonacci(black_box(20))));
+}
+
+criterion_group!(benches, criterion_benchmark);
+criterion_main!(benches);
+```
+
+### 代码覆盖率示例
+
+```bash
+# 使用 tarpaulin 生成覆盖率报告
+cargo install cargo-tarpaulin
+cargo tarpaulin --out Html
+
+# 使用 llvm-cov
+cargo install cargo-llvm-cov
+cargo llvm-cov --html
+
+# CI 中的覆盖率检查
+cargo tarpaulin --fail-under 80  # 覆盖率必须 >= 80%
+```
+
+### 形式化验证示例
+
+```rust
+// 使用 Kani 验证关键函数
+#[cfg(kani)]
+mod verification {
+    // 验证无溢出
+    #[kani::proof]
+    fn verify_add_no_overflow() {
+        let a: u32 = kani::any();
+        let b: u32 = kani::any();
+        kani::assume(a < 1000 && b < 1000);
+        let result = a + b;
+        assert!(result < 2000);
+    }
+
+    // 验证内存安全
+    #[kani::proof]
+    fn verify_vec_push() {
+        let mut v = Vec::new();
+        v.push(1);
+        v.push(2);
+        assert!(v.len() == 2);
+        assert!(v[0] == 1);
+        assert!(v[1] == 2);
+    }
+}
+
+// 使用 Prusti 验证契约
+#[cfg(prusti)]
+mod contracts {
+    /// 前置条件：除数不能为零
+    /// 后置条件：结果乘以除数等于被除数
+    #[requires(b != 0)]
+    #[ensures(result * b == a)]
+    fn divide(a: i32, b: i32) -> i32 {
+        a / b
+    }
+}
+```
+
 ---
 
 ## 🔗 与 research_notes 衔接
@@ -169,6 +265,21 @@ mod miri_tests {
 | **TOOLS_GUIDE** | 形式化验证工具指南 | [../../research_notes/TOOLS_GUIDE.md](../../research_notes/TOOLS_GUIDE.md) |
 | **FORMAL_VERIFICATION_GUIDE** | 形式化验证入门 | [../../research_notes/FORMAL_VERIFICATION_GUIDE.md](../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
 | **PROOF_INDEX** | 形式化证明索引 | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
+| **CORE_THEOREMS_FULL_PROOFS** | 核心定理完整证明 | [../../research_notes/CORE_THEOREMS_FULL_PROOFS.md](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
+| **BEST_PRACTICES** | 工程最佳实践 | [../../research_notes/BEST_PRACTICES.md](../../research_notes/BEST_PRACTICES.md) |
+| **TESTING_COVERAGE_GUIDE** | 测试覆盖指南 | [../TESTING_COVERAGE_GUIDE.md](../TESTING_COVERAGE_GUIDE.md) |
+
+---
+
+## 形式化方法
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 形式化方法概述 | 形式化验证基础理论 | [../../research_notes/formal_methods/README.md](../../research_notes/formal_methods/README.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../../research_notes/formal_methods/type_system_formalization.md](../../research_notes/formal_methods/type_system_formalization.md) |
+| 所有权模型形式化 | 所有权系统数学定义 | [../../research_notes/formal_methods/ownership_model.md](../../research_notes/formal_methods/ownership_model.md) |
+| 借用检查器证明 | 借用检查器形式化 | [../../research_notes/formal_methods/borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md) |
+| 证明索引 | 形式化证明集合 | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
 
 ---
 
