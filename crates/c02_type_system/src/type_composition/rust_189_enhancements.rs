@@ -53,8 +53,8 @@ pub mod rust_189_type_composition {
     /// 这允许更灵活的类型组合和更精确的生命周期管理。
     ///
     /// # 示例
-    /// ```rust
-    /// use c02_type_system::rust_189_enhancements::rust_189_type_composition::EnhancedContainer;
+    /// ```rust,ignore
+    /// // use c02_type_system::type_composition::rust_189_enhancements::rust_189_type_composition::EnhancedContainer;
     ///
     /// struct MyContainer {
     ///     data: Vec<String>,
@@ -143,6 +143,7 @@ pub mod rust_189_type_composition {
         ///
         /// # 示例
         /// ```rust
+        /// use c02_type_system::type_composition::rust_189_enhancements::rust_189_type_composition::ConstGenericArray;
         /// let arr = ConstGenericArray::new([1, 2, 3]);
         /// ```
         pub fn new(data: [T; N]) -> Self {

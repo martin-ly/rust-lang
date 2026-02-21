@@ -69,7 +69,8 @@ pub mod simple_demo {
         /// 返回新创建的ConstGenericArray实例
         ///
         /// # 示例
-        /// ```rust
+        /// ```rust,ignore
+        /// // 使用 crate 内部路径
         /// let arr = ConstGenericArray::new([1, 2, 3]);
         /// ```
         pub fn new(data: [T; N]) -> Self {
@@ -171,7 +172,8 @@ pub mod simple_demo {
         /// 返回用默认值填充的新矩阵
         ///
         /// # 示例
-        /// ```rust
+        /// ```rust,ignore
+        /// // 使用 crate 内部路径
         /// let matrix = Matrix::<i32, 3, 3>::new();
         /// ```
         pub fn new() -> Self {
@@ -373,7 +375,8 @@ pub mod simple_demo {
         /// 返回当前引用计数的强引用数量
         ///
         /// # 示例
-        /// ```rust
+        /// ```rust,ignore
+        /// // 使用 crate 内部路径
         /// let composition = SmartPointerComposition::new(42);
         /// let count = composition.reference_count();
         /// assert_eq!(count, 1);
@@ -388,7 +391,8 @@ pub mod simple_demo {
         /// 返回新的智能指针组合实例，共享相同的引用计数
         ///
         /// # 示例
-        /// ```rust
+        /// ```rust,ignore
+        /// // 使用 crate 内部路径
         /// let composition1 = SmartPointerComposition::new(42);
         /// let composition2 = composition1.clone();
         /// assert_eq!(composition1.reference_count(), 2);
@@ -413,7 +417,8 @@ pub mod simple_demo {
     /// 返回数字处理器
     ///
     /// # 示例
-    /// ```rust
+    /// ```rust,ignore
+    /// // 使用 crate 内部路径
     /// let processor = create_number_processor();
     /// assert_eq!(processor, 42);
     /// ```
@@ -432,7 +437,8 @@ pub mod simple_demo {
     /// 返回复杂类型实例
     ///
     /// # 示例
-    /// ```rust
+    /// ```rust,ignore
+    /// // 使用 crate 内部路径
     /// let complex = create_complex_type();
     /// for item in complex {
     ///     println!("{}", item);

@@ -62,7 +62,7 @@ fn verify_memory_safety() -> bool {
     let ref1 = &data;
     let ref2 = &data;  // ✅ 多个不可变借用允许
     // let ref3 = &mut data;  // ❌ 编译错误：不能同时有可变借用
-    
+
     println!("引用1: {:?}, 引用2: {:?}", ref1, ref2);
     true  // 通过借用检查器验证
 }

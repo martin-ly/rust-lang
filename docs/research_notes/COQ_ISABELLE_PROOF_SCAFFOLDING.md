@@ -28,6 +28,7 @@
 **Coq 骨架**：见 [OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)
 
 **研究场景示例**：
+
 ```coq
 (* 场景：验证 Vec<T> 的所有权唯一性 *)
 (* 在 Rust 中，Vec 拥有其堆分配内存的唯一所有权 *)
@@ -54,6 +55,7 @@ Proof.
 **Coq 骨架**：见 [BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v)；`Parameter` 占位 `Program`、`BorrowCheck`、`DataRaceFree`；L-BR1/L-BR2 引理占位。
 
 **研究场景示例**：
+
 ```coq
 (* 场景：验证多线程 Arc<Mutex<T>> 的数据竞争自由 *)
 
@@ -87,6 +89,7 @@ Proof.
 **Coq 骨架**：见 [TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v)；`Parameter` 占位 `Expr`、`has_type`、`step`、`type_error`；可参考 TAPL 形式化补全。
 
 **研究场景示例**：
+
 ```coq
 (* 场景：验证 Rust 表达式求值的类型安全 *)
 
@@ -168,7 +171,7 @@ fn ownership_scenario() {
     let v1 = vec![1, 2, 3];  // v1 拥有 Vec
     let v2 = v1;              // 所有权移动到 v2
     // v1 不再有效；编译器通过借用检查确保这一点
-    
+
     // 形式化验证目标：
     // 在任意程序点，每个值只有一个活跃的所有者
 }
@@ -184,7 +187,7 @@ use std::thread;
 fn concurrent_borrow_scenario() {
     let data = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let data = Arc::clone(&data);
         let handle = thread::spawn(move || {
@@ -193,11 +196,11 @@ fn concurrent_borrow_scenario() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     // 形式化验证目标：
     // 借用检查通过 ⇒ 程序无数据竞争
 }
@@ -210,10 +213,10 @@ fn concurrent_borrow_scenario() {
 fn type_safety_scenario() {
     let x: i32 = 42;
     let y = x + 1;  // 类型检查确保操作合法
-    
+
     // 以下代码无法编译（类型错误）
     // let z: bool = x + y;  // 编译错误：期望 bool，得到 i32
-    
+
     // 形式化验证目标：
     // 良类型程序不会 stuck（不会遇到类型错误）
 }

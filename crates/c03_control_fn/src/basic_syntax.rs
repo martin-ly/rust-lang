@@ -108,7 +108,7 @@ where
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
     /// let demo = BasicSyntaxDemo::new(42);
-    /// assert_eq!(demo.to_string(), "42");
+    /// assert_eq!(demo.to_string_impl(), "42");
     /// ```
     pub fn to_string_impl(&self) -> String {
         format!("{}", self.data)

@@ -21,6 +21,7 @@
 //!
 //! ```rust
 //! use c02_type_system::rust_192_features::*;
+//! use std::num::NonZeroUsize;
 //!
 //! // 1. 关联项的多个边界
 //! let converter = StringConverter;

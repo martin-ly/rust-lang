@@ -37,7 +37,7 @@ pub mod float_types {
     ///
     /// # 示例
     /// ```rust
-    /// let value: f32 = std::f64::consts::PI;
+    /// let value: f32 = std::f32::consts::PI;
     /// let max: f32 = f32::MAX;
     /// let min: f32 = f32::MIN;
     /// ```

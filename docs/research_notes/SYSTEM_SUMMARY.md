@@ -44,6 +44,13 @@
     - [核心文档](#核心文档)
     - [贡献和质量](#贡献和质量)
     - [外部资源](#外部资源)
+  - [💻 代码示例](#-代码示例)
+    - [示例 1: 研究笔记系统导航代码](#示例-1-研究笔记系统导航代码)
+    - [示例 2: 研究进度跟踪代码](#示例-2-研究进度跟踪代码)
+  - [🔗 形式化链接](#-形式化链接)
+    - [核心定理索引](#核心定理索引)
+    - [Coq 证明骨架](#coq-证明骨架)
+    - [系统集成文档](#系统集成文档)
   - [📊 系统评估](#-系统评估)
     - [完成度](#完成度)
     - [质量评级](#质量评级)
@@ -343,7 +350,7 @@ fn main() {
             related_theorems: vec!["T-TY1".to_string(), "T-TY2".to_string(), "T-TY3".to_string()],
         },
     ];
-    
+
     let related = find_related_notes(&notes, "T-OW2");
     for note in related {
         println!("相关笔记: {} (完成度: {}%)", note.title, note.completion);
@@ -366,10 +373,10 @@ struct ProgressTracker {
 
 impl ProgressTracker {
     fn overall_progress(&self) -> f64 {
-        (self.formal_methods + self.type_theory + 
+        (self.formal_methods + self.type_theory +
          self.experiments + self.synthesis) / 4.0
     }
-    
+
     fn generate_report(&self) -> String {
         format!(
             "研究笔记系统进度报告\n\
@@ -395,7 +402,7 @@ fn main() {
         experiments: 100.0,
         synthesis: 100.0,
     };
-    
+
     println!("{}", tracker.generate_report());
 }
 ```

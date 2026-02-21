@@ -19,12 +19,23 @@
     - [相关概念](#相关概念)
     - [相关理论](#相关理论)
     - [理论背景](#理论背景)
+    - [Curry-Howard 对应 (Stanford CS242 Lecture 16-20)](#curry-howard-对应-stanford-cs242-lecture-16-20)
+      - [完整的 Curry-Howard 对应表](#完整的-curry-howard-对应表)
+      - [Rust 代码示例](#rust-代码示例)
+      - [对应关系的理论意义](#对应关系的理论意义)
     - [类型理论的基础知识](#类型理论的基础知识)
     - [类型推导的理论基础](#类型推导的理论基础)
     - [类型安全的理论基础](#类型安全的理论基础)
+      - [Stanford CS242 形式化定义 (Lecture 6-10)](#stanford-cs242-形式化定义-lecture-6-10)
+      - [原有形式化定义](#原有形式化定义)
     - [相关学术论文的详细分析](#相关学术论文的详细分析)
       - [1. Types and Programming Languages (TAPL)](#1-types-and-programming-languages-tapl)
       - [2. The RustBelt Project: Formalizing Rust's Type System](#2-the-rustbelt-project-formalizing-rusts-type-system)
+  - [欧洲大学课程对齐](#欧洲大学课程对齐)
+    - [ETH Zurich (瑞士联邦理工学院)](#eth-zurich-瑞士联邦理工学院)
+    - [University of Cambridge (剑桥大学)](#university-of-cambridge-剑桥大学)
+    - [EPFL (瑞士洛桑联邦理工学院)](#epfl-瑞士洛桑联邦理工学院)
+    - [欧洲大学课程对比总结](#欧洲大学课程对比总结)
   - [🔬 形式化定义](#-形式化定义)
     - [1. 类型环境与类型判断](#1-类型环境与类型判断)
     - [2. 基本类型规则](#2-基本类型规则)
@@ -45,6 +56,7 @@
     - [示例 8: 类型错误检测](#示例-8-类型错误检测)
     - [示例 5: 类型推导与推断（原示例保留）](#示例-5-类型推导与推断原示例保留)
   - [📖 参考文献](#-参考文献)
+    - [Stanford CS242 课程参考](#stanford-cs242-课程参考)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
@@ -134,6 +146,7 @@
 > **关键 Lecture**: Lecture 16-20 详细讲解 Curry-Howard 对应
 
 **核心思想**: Curry-Howard 对应（同构）揭示了类型理论和数理逻辑之间的深层联系：
+
 - **类型对应命题 (Types as Propositions)**
 - **程序对应证明 (Programs as Proofs)**
 - **求值对应证明归约 (Evaluation as Proof Normalization)**
@@ -276,17 +289,17 @@ fn existential() -> Box<dyn Existential<Output = i32>> {
 **进展定理 (Progress Theorem)**:
 
 > **定理**: 如果 $\Gamma \vdash e : \tau$ 且 $\Gamma$ 是良形的，则 $e$ 是一个值，或者存在 $e'$ 使得 $e \to e'$。
-> 
+>
 > **形式化**: $\vdash e : \tau \rightarrow (e \in \text{Value}) \lor (\exists e'.\, e \to e')$
-> 
+>
 > **意义**: 良型程序不会"卡住"（不会遇到没有定义的操作），保证程序要么已完成计算（是值），要么可以继续执行。
 
 **保持定理 (Preservation Theorem / Subject Reduction)**:
 
 > **定理**: 如果 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$。
-> 
+>
 > **形式化**: $\Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash e' : \tau$
-> 
+>
 > **意义**: 求值过程中类型保持不变，保证运行时值的类型与静态推导的类型一致。
 
 **类型安全 (Type Safety)**:
@@ -365,8 +378,8 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ### ETH Zurich (瑞士联邦理工学院)
 
-**课程**: Rust Programming  
-**讲师**: David Evangelista  
+**课程**: Rust Programming
+**讲师**: David Evangelista
 **课程链接**: <https://inf.ethz.ch/courses>
 
 **内容对齐**:
@@ -385,7 +398,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ### University of Cambridge (剑桥大学)
 
-**课程**: Computer Science Tripos (Rust部分)  
+**课程**: Computer Science Tripos (Rust部分)
 **课程链接**: <https://www.cl.cam.ac.uk/teaching/>
 
 **内容对齐**:
@@ -407,7 +420,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ### EPFL (瑞士洛桑联邦理工学院)
 
-**课程**: Concurrent and Parallel Programming  
+**课程**: Concurrent and Parallel Programming
 **课程链接**: <https://www.epfl.ch/schools/ic/>
 
 **内容对齐**:
@@ -899,6 +912,7 @@ fn main() {
 | Preservation Theorem | §类型安全 | ✅ |
 
 **课程链接**:
+
 - [Stanford CS242: Programming Languages](https://cs242.stanford.edu/)
 - [CS242 Lecture Notes - Type Systems](https://cs242.stanford.edu/lectures/)
 - [CS242 Lecture Notes - Curry-Howard](https://cs242.stanford.edu/lectures/)
