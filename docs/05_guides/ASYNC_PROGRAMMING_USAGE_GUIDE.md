@@ -33,9 +33,22 @@
   - [🔧 错误处理](#-错误处理)
     - [异步错误传播](#异步错误传播)
     - [错误恢复](#错误恢复)
-  - [🐛 常见问题](#-常见问题)
-    - [阻塞运行时](#阻塞运行时)
-    - [Future 必须 Send](#future-必须-send)
+  - [🏗️ 异步编程模式（5+ 完整示例）](#️-异步编程模式5-完整示例)
+    - [模式 1: 取消与超时处理](#模式-1-取消与超时处理)
+    - [模式 2: 限流与速率控制](#模式-2-限流与速率控制)
+    - [模式 3: 重试与退避策略](#模式-3-重试与退避策略)
+    - [模式 4: 批处理与缓冲](#模式-4-批处理与缓冲)
+    - [模式 5: 断路器模式](#模式-5-断路器模式)
+  - [🌍 真实应用场景](#-真实应用场景)
+    - [场景 1: Web 服务器实现](#场景-1-web-服务器实现)
+    - [场景 2: 数据处理管道](#场景-2-数据处理管道)
+    - [场景 3: 实时消息系统](#场景-3-实时消息系统)
+  - [🐛 常见问题与解决方案](#-常见问题与解决方案)
+    - [问题 1: 阻塞运行时](#问题-1-阻塞运行时)
+    - [问题 2: Future 必须 Send](#问题-2-future-必须-send)
+    - [问题 3: 持有锁跨越 await 点](#问题-3-持有锁跨越-await-点)
+    - [问题 4: 忘记处理 Cancel Safety](#问题-4-忘记处理-cancel-safety)
+    - [问题 5: 递归 async 函数](#问题-5-递归-async-函数)
   - [📚 相关文档](#-相关文档)
 
 ---
@@ -457,7 +470,7 @@ where
     Fut: std::future::Future<Output = Result<T, E>>,
 {
     let mut attempt = 1;
-    
+
     loop {
         match operation().await {
             Ok(result) => return Ok(result),
@@ -503,11 +516,11 @@ impl<T: Send + 'static> BatchProcessor<T> {
         Fut: std::future::Future<Output = ()> + Send,
     {
         let (sender, mut receiver) = mpsc::channel::<T>(1000);
-        
+
         tokio::spawn(async move {
             let mut batch = Vec::with_capacity(batch_size);
             let mut tick = interval(timeout);
-            
+
             loop {
                 tokio::select! {
                     Some(item) = receiver.recv() => {
@@ -527,10 +540,10 @@ impl<T: Send + 'static> BatchProcessor<T> {
                 }
             }
         });
-        
+
         Self { sender }
     }
-    
+
     async fn send(&self, item: T) -> Result<(), mpsc::error::SendError<T>> {
         self.sender.send(item).await
     }
@@ -580,7 +593,7 @@ impl CircuitBreaker {
                 _ => {}
             }
         }
-        
+
         // 执行操作
         match operation().await {
             Ok(result) => {
@@ -593,11 +606,11 @@ impl CircuitBreaker {
             }
         }
     }
-    
+
     async fn on_success(&self) {
         let mut successes = self.consecutive_successes.write().await;
         *successes += 1;
-        
+
         if *successes >= self.success_threshold {
             let mut state = self.state.write().await;
             *state = CircuitState::Closed;
@@ -605,15 +618,15 @@ impl CircuitBreaker {
             *successes = 0;
         }
     }
-    
+
     async fn on_failure(&self) {
         let mut failures = self.consecutive_failures.write().await;
         *failures += 1;
-        
+
         if *failures >= self.failure_threshold {
             let mut state = self.state.write().await;
-            *state = CircuitState::Open { 
-                until: Instant::now() + self.timeout 
+            *state = CircuitState::Open {
+                until: Instant::now() + self.timeout
             };
         }
     }
@@ -649,16 +662,16 @@ async fn create_server() -> Result<(), Box<dyn std::error::Error>> {
         db_pool: sqlx::PgPool::connect("postgres://localhost/db").await?,
         cache: Arc::new(RwLock::new(lru::LruCache::new(1000))),
     };
-    
+
     let app = Router::new()
         .route("/users/:id", get(get_user))
         .route("/users", post(create_user))
         .route("/health", get(health_check))
         .with_state(state);
-    
+
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
     axum::serve(listener, app).await?;
-    
+
     Ok(())
 }
 
@@ -675,14 +688,14 @@ async fn get_user(
             }
         }
     }
-    
+
     // 查询数据库
     let user: User = sqlx::query_as("SELECT * FROM users WHERE id = $1")
         .bind(&id)
         .fetch_one(&state.db_pool)
         .await
         .map_err(|_| StatusCode::NOT_FOUND)?;
-    
+
     // 更新缓存
     {
         let mut cache = state.cache.write().await;
@@ -690,7 +703,7 @@ async fn get_user(
             cache.put(id, json);
         }
     }
-    
+
     Ok(Json(user))
 }
 
@@ -718,7 +731,7 @@ async fn create_user(
     .fetch_one(&state.db_pool)
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
-    
+
     Ok(Json(user))
 }
 
@@ -741,7 +754,7 @@ async fn etl_pipeline() -> Result<(), Box<dyn std::error::Error>> {
     let (extract_tx, mut extract_rx) = mpsc::channel::<RawData>(1000);
     let (transform_tx, mut transform_rx) = mpsc::channel::<ProcessedData>(1000);
     let (load_tx, mut load_rx) = mpsc::channel::<StoredData>(100);
-    
+
     // 提取阶段
     let extract_handle = tokio::spawn(async move {
         let sources = vec![
@@ -749,7 +762,7 @@ async fn etl_pipeline() -> Result<(), Box<dyn std::error::Error>> {
             DataSource::File("/data/input.csv".to_string()),
             DataSource::Database("connection_string".to_string()),
         ];
-        
+
         for source in sources {
             match fetch_data(source).await {
                 Ok(data) => {
@@ -761,7 +774,7 @@ async fn etl_pipeline() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     });
-    
+
     // 转换阶段
     let transform_handle = tokio::spawn(async move {
         while let Some(raw) = extract_rx.recv().await {
@@ -771,14 +784,14 @@ async fn etl_pipeline() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     });
-    
+
     // 加载阶段
     let load_handle = tokio::spawn(async move {
         let mut batch = Vec::with_capacity(100);
-        
+
         while let Some(data) = transform_rx.recv().await {
             batch.push(data);
-            
+
             if batch.len() >= 100 {
                 if let Err(e) = store_batch(&batch).await {
                     eprintln!("批量存储失败: {:?}", e);
@@ -786,7 +799,7 @@ async fn etl_pipeline() -> Result<(), Box<dyn std::error::Error>> {
                 batch.clear();
             }
         }
-        
+
         // 处理剩余数据
         if !batch.is_empty() {
             if let Err(e) = store_batch(&batch).await {
@@ -794,10 +807,10 @@ async fn etl_pipeline() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     });
-    
+
     // 等待所有阶段完成
     let _ = tokio::join!(extract_handle, transform_handle, load_handle);
-    
+
     Ok(())
 }
 
@@ -880,28 +893,28 @@ impl ChatServer {
             broadcast_tx,
         }
     }
-    
+
     async fn run(&self, addr: &str) -> Result<(), Box<dyn std::error::Error>> {
         let listener = TcpListener::bind(addr).await?;
         println!("聊天服务器运行在 {}", addr);
-        
+
         let mut client_id = 0u64;
-        
+
         loop {
             let (socket, addr) = listener.accept().await?;
             client_id += 1;
             let id = client_id;
-            
+
             let (tx, rx) = mpsc::channel(100);
             {
                 let mut clients = self.clients.write().await;
                 clients.insert(id, tx);
             }
-            
+
             let broadcast_tx = self.broadcast_tx.clone();
             let mut broadcast_rx = self.broadcast_tx.subscribe();
             let clients = Arc::clone(&self.clients);
-            
+
             tokio::spawn(async move {
                 handle_client(socket, id, addr, rx, broadcast_tx, broadcast_rx, clients).await;
             });
@@ -920,11 +933,11 @@ async fn handle_client(
 ) {
     let (mut reader, mut writer) = socket.split();
     let mut buf = [0u8; 1024];
-    
+
     // 欢迎消息
     let welcome = Message::System(format!("欢迎用户 {} 加入聊天室！", id));
     let _ = broadcast_tx.send(welcome);
-    
+
     loop {
         tokio::select! {
             // 从客户端读取消息
@@ -937,9 +950,9 @@ async fn handle_client(
                     }
                     Ok(n) => {
                         let text = String::from_utf8_lossy(&buf[..n]);
-                        let msg = Message::Chat { 
-                            from: id, 
-                            content: text.to_string() 
+                        let msg = Message::Chat {
+                            from: id,
+                            content: text.to_string()
                         };
                         let _ = broadcast_tx.send(msg);
                     }
@@ -949,7 +962,7 @@ async fn handle_client(
                     }
                 }
             }
-            
+
             // 接收广播消息
             Ok(msg) = broadcast_rx.recv() => {
                 let text = format!("{}\n", msg);
@@ -957,7 +970,7 @@ async fn handle_client(
                     break;
                 }
             }
-            
+
             // 接收私信
             Some(msg) = msg_rx.recv() => {
                 let text = format!("[私信] {}\n", msg);
@@ -967,7 +980,7 @@ async fn handle_client(
             }
         }
     }
-    
+
     // 清理
     let mut clients = clients.write().await;
     clients.remove(&id);
@@ -1040,7 +1053,7 @@ use std::sync::Arc;
 async fn good_example() {
     let arc = Arc::new(42);
     let arc2 = Arc::clone(&arc);
-    
+
     tokio::spawn(async move {
         println!("{}", arc2); // Arc 是 Send
     });
@@ -1065,7 +1078,7 @@ async fn good_example(mutex: &tokio::sync::Mutex<String>) {
         let guard = mutex.lock().await;
         // 使用 guard
     } // 锁在这里释放
-    
+
     some_async_operation().await; // 不影响其他任务
 }
 
@@ -1075,7 +1088,7 @@ async fn better_example(mutex: &std::sync::Mutex<String>) {
         let guard = mutex.lock().unwrap();
         guard.clone() // 复制数据后释放锁
     };
-    
+
     some_async_operation().await;
 }
 ```
@@ -1086,7 +1099,7 @@ async fn better_example(mutex: &std::sync::Mutex<String>) {
 // ❌ 非 cancel-safe: select! 取消分支可能导致数据丢失
 async fn not_cancel_safe() {
     let (tx, rx) = tokio::sync::mpsc::channel::<i32>(10);
-    
+
     tokio::select! {
         _ = tx.send(1) => {},  // 如果取消，消息可能已部分发送
         _ = tokio::time::sleep(Duration::from_secs(1)) => {},
@@ -1096,7 +1109,7 @@ async fn not_cancel_safe() {
 // ✅ cancel-safe 模式
 async fn cancel_safe() {
     let (tx, mut rx) = tokio::sync::mpsc::channel::<i32>(10);
-    
+
     tokio::select! {
         biased; // 按顺序检查
         result = rx.recv() => {

@@ -189,7 +189,7 @@ impl GuiFactory for WinFactory {
 
 ### 形式化论证链
 
-```
+```text
 Axiom AF1 (产品族一致性)
     ↓ 依赖
 trait_system 关联类型
