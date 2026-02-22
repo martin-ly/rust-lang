@@ -9,7 +9,7 @@
 
 ## 决策树全景
 
-```
+```text
 构建分布式系统?
 ├── 需要事务一致性?
 │   ├── 强一致性要求 (ACID)?
@@ -98,7 +98,7 @@
 ### 按场景推荐
 
 | 场景 | 推荐架构 | 关键模式 | 技术栈 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | 电商订单 | Saga + CQRS | 编排式Saga, 异步CQRS | Temporal, Kafka, PostgreSQL |
 | 金融支付 | 强一致性优先 | 2PC + 补偿 | Atomikos, PostgreSQL |
 | 社交网络 | 最终一致性 | CQRS + Event Sourcing | Kafka, Cassandra, ES |
@@ -185,7 +185,7 @@ impl OrderQueryHandler {
 
 ### 示例 1: 电商订单系统
 
-```
+```text
 需要事务一致性? 是 (订单创建涉及库存、支付、物流)
   └─> 强一致性? 否 (允许短暂不一致)
       └─> 长事务? 是 (支付可能耗时数分钟)
@@ -194,6 +194,7 @@ impl OrderQueryHandler {
 ```
 
 **架构**:
+
 - Saga协调器: Temporal
 - 命令端: Actix-web + PostgreSQL
 - 查询端: Read model in Redis
@@ -201,13 +202,14 @@ impl OrderQueryHandler {
 
 ### 示例 2: 实时数据分析
 
-```
+```text
 需要事务一致性? 否 (纯分析场景)
   └─> 容错要求高? 是 (99.9%可用性)
       └─> 推荐: 熔断器 + 舱壁 + 异步处理
 ```
 
 **架构**:
+
 - 数据摄取: Kafka
 - 处理: 自研Rust stream processor
 - 熔断: 自定义实现
@@ -218,7 +220,7 @@ impl OrderQueryHandler {
 ## 相关模式
 
 | 模式 | 解决的问题 | 组合建议 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Saga | 长事务一致性 | + Outbox (防丢消息) + Idempotent Consumer |
 | CQRS | 读写负载分离 | + Event Sourcing (审计) + 物化视图缓存 |
 | Circuit Breaker | 级联故障防护 | + 重试 + 降级 (Fallback) |
@@ -235,5 +237,5 @@ impl OrderQueryHandler {
 
 ---
 
-**维护者**: Rust Formal Methods Research Team  
+**维护者**: Rust Formal Methods Research Team
 **对应任务**: P1-T11, DT-3 - 分布式架构选型决策树

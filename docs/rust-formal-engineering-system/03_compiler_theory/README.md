@@ -40,7 +40,7 @@ mindmap
 ## 与核心文档的关联
 
 | 本文档 | 核心文档 | 关系 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 本README | research_notes/experiments/compiler_optimizations.md | 索引/重定向 |
 | 本README | 06_toolchain/01_compiler_features.md | 索引/重定向 |
 

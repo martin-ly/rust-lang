@@ -498,7 +498,7 @@ graph TB
 
 #### 路径1: 从代码问题到形式化理论
 
-```
+```text
 代码问题
     │
     ▼
@@ -516,7 +516,7 @@ M4 内存安全 ← 形式化定理证明
 
 **文档路径**:
 
-```
+```text
 ownership_cheatsheet.md (L3)
     ↓
 borrow_checker_proof.md (L4)
@@ -526,7 +526,7 @@ ownership_model.md (L2-L1)
 
 #### 路径2: 从并发需求到实现机制
 
-```
+```text
 并发需求
     │
     ▼
@@ -544,7 +544,7 @@ M3 并发安全 ← 形式化证明
 
 **文档路径**:
 
-```
+```text
 threads_concurrency_usage_guide.md (L3-L5)
     ↓
 send_sync_formalization.md (L2-L4)
@@ -554,7 +554,7 @@ async_state_machine.md (L4)
 
 #### 路径3: 从泛型到类型安全
 
-```
+```text
 泛型代码
     │
     ▼
@@ -572,7 +572,7 @@ M2 类型安全 ← 形式化证明
 
 **文档路径**:
 
-```
+```text
 type_system_foundations.md (L2)
     ↓
 trait_system_formalization.md (L2-L3)
@@ -582,7 +582,7 @@ lifetime_formalization.md (L2-L4)
 
 #### 路径4: 互斥关系处理路径
 
-```
+```text
 C6 共享借用 ⊥ C7 可变借用
     │
     ├──→ 同一代码块: 错误!

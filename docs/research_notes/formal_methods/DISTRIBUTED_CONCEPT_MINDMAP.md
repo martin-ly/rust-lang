@@ -9,7 +9,7 @@
 
 ## 全局思维导图
 
-```
+```text
                         分布式模式概念族
                                │
         ┌──────────────────────┼──────────────────────┐
@@ -40,7 +40,7 @@
 
 ### 1. Saga 模式族
 
-```
+```text
                             Saga模式
                                │
             ┌──────────────────┼──────────────────┐
@@ -54,12 +54,14 @@
 ```
 
 **核心概念**:
+
 - **Saga**: 由多个本地事务组成的长事务，每个本地事务有对应的补偿操作
 - **补偿 (Compensation)**: 当 Saga 中某个步骤失败时，用于撤销之前步骤效果的操作
 - **编排 (Orchestration)**: 由中央协调器控制 Saga 的执行流程
 - **编制 (Choreography)**: 各服务通过事件交换自发协调 Saga 流程
 
 **形式化定义** (Coq):
+
 ```coq
 Record SagaStep := mkSagaStep {
   step_id : TxId;
@@ -72,7 +74,7 @@ Record SagaStep := mkSagaStep {
 
 ### 2. CQRS 模式族
 
-```
+```text
                             CQRS模式
                                │
             ┌──────────────────┼──────────────────┐
@@ -89,12 +91,14 @@ Record SagaStep := mkSagaStep {
 ```
 
 **核心概念**:
+
 - **命令 (Command)**: 改变系统状态的意图，如 "创建订单"
 - **查询 (Query)**: 读取系统状态的请求，不引起副作用
 - **事件溯源 (Event Sourcing)**: 将状态变化存储为事件序列
 - **物化视图 (Materialized View)**: 为查询优化的预计算视图
 
 **形式化定义** (Coq):
+
 ```coq
 Record CQRSSystem := mkCQRSSystem {
   cqrs_event_store : EventStore;
@@ -107,7 +111,7 @@ Record CQRSSystem := mkCQRSSystem {
 
 ### 3. 熔断器模式族
 
-```
+```text
                          熔断器模式
                                │
             ┌──────────────────┼──────────────────┐
@@ -123,6 +127,7 @@ Record CQRSSystem := mkCQRSSystem {
 ```
 
 **核心概念**:
+
 - **熔断 (Circuit Breaker)**: 防止故障扩散的代理模式
 - **失败阈值 (Failure Threshold)**: 触发熔断的失败次数
 - **超时 (Timeout)**: 熔断后尝试恢复的等待时间
@@ -133,7 +138,7 @@ Record CQRSSystem := mkCQRSSystem {
 ## 概念关系矩阵
 
 | 概念A | 关系 | 概念B | 说明 |
-|:---|:---:|:---|:---|
+| :--- | :---: | :--- | :--- |
 | Saga | 使用 | 补偿 | Saga 通过补偿实现原子性 |
 | Saga | 结合 | 熔断器 | 防止 Saga 参与者级联故障 |
 | CQRS | 使用 | 事件溯源 | 命令端生成事件，查询端消费 |
@@ -146,7 +151,7 @@ Record CQRSSystem := mkCQRSSystem {
 
 ## 与其他概念族的关系
 
-```
+```text
                     分布式模式概念族
                            │
         ┌──────────────────┼──────────────────┐
@@ -170,7 +175,7 @@ Record CQRSSystem := mkCQRSSystem {
 ## Rust 实现映射
 
 | 模式 | Rust 实现 | Crate |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Saga | Result + 闭包补偿 | 原生 |
 | CQRS | 事件流 + 物化视图 | eventstore |
 | 熔断器 | 状态机 + 计数器 | resilience4j-rust |
@@ -188,5 +193,5 @@ Record CQRSSystem := mkCQRSSystem {
 
 ---
 
-**维护者**: Rust Formal Methods Research Team  
+**维护者**: Rust Formal Methods Research Team
 **对应任务**: P1-T11 - 分布式模式概念族谱新建

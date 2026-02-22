@@ -241,7 +241,7 @@ CMU 15-799 的区域类型理论（Region Type Theory）与 Rust 生命周期系
 区域类型（Regional Types）是 CMU 15-799 中用于内存管理形式化的核心概念，与 Rust 生命周期完全对应。
 
 | CMU 15-799 区域类型 | Rust 生命周期 | 本文档对应 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Region ($\rho$) | Lifetime (`'a`) | Def 1.1 |
 | Region Annotation | Lifetime Annotation | §生命周期标注 |
 | Region Subtyping ($<:$) | Lifetime Subtyping | Def 1.4 |
@@ -257,7 +257,7 @@ $$\text{Type} \tau ::= \ldots \mid \&^\rho \tau \mid \forall \rho. \tau$$
 **Rust 对应**:
 
 | 区域类型构造 | 数学表示 | Rust 语法 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 引用类型 | $\&^\rho \tau$ | `&'a T` |
 | 区域抽象 | $\forall \rho. \tau$ | `for<'a> Fn(&'a T)` (HRTB) |
 | 区域约束 | $\rho_1 <: \rho_2$ | `'a: 'b` (outlives) |
@@ -275,7 +275,7 @@ $$\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$$
 #### 区域推断算法对比
 
 | CMU 15-799 算法步骤 | Rust 生命周期推断 | 本文档对应 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 1. 约束生成 | 根据函数签名/体生成约束 | Def 3.1 步骤 1 |
 | 2. 约束求解 | 求解生命周期约束系统 | Def 3.1 步骤 2 |
 | 3. 区域分配 | 为生命周期变量分配具体作用域 | Def 3.1 步骤 3 |
@@ -284,7 +284,7 @@ $$\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$$
 #### CMU 15-799 区域类型对齐表
 
 | CMU 15-799 主题 | 本文档对应 | 状态 |
-|:---|:---|:---:|
+| :--- | :--- | :---: |
 | Region Types | Def 1.1–1.4 (生命周期语义) | ✅ |
 | Region Subtyping | Def 1.4 (生命周期子类型) | ✅ |
 | Region Inference | Def 3.1 (生命周期推断算法) | ✅ |
@@ -304,7 +304,7 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 ## 权威来源对齐
 
 | 来源 | 内容 | 本文档对应 | 对齐状态 |
-|:---|:---|:---|:---:|
+| :--- | :--- | :--- | :---: |
 | Tofte & Talpin 1997 | Regional Memory Management | §生命周期形式化 | ✅ |
 | RustBelt | Lifetime formalization | §形式化定义 | ✅ |
 | Polonius | NLL, loan analysis | §生命周期推断 | ✅ |
@@ -325,7 +325,7 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 **内容对齐**:
 
 | ETH内容 | Rust概念 | 本文档对应 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Borrowing & Lifetimes | 借用与生命周期 | §生命周期语义 |
 | Lifetime Elision | 生命周期省略 | §生命周期推断算法 |
 | Lifetime Annotations | 生命周期标注 | §定义1.2 (生命周期类型) |
@@ -344,7 +344,7 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 **内容对齐**:
 
 | Cambridge内容 | Rust概念 | 本文档对应 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Region-Based Memory | 区域类型 | §区域类型的理论基础 |
 | Region Inference | 区域推断 | §生命周期推断算法 |
 | Subtyping | 子类型理论 | §定义1.4 (生命周期子类型) |
@@ -363,7 +363,7 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 **内容对齐**:
 
 | EPFL内容 | Rust概念 | 本文档对应 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Lifetime & Concurrency | 生命周期与并发安全 | §系统集成与实际应用 |
 | Scoped Threads | 作用域线程 | §定义1.1 (生命周期作用域) |
 | Data Race Prevention | 数据竞争防护 | §定理LF-T2 (引用有效性) |
@@ -376,7 +376,7 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 ### 欧洲大学课程对比总结
 
 | 大学 | 核心侧重点 | 与本文档关联度 | 特色内容 |
-|:---|:---|:---:|:---|
+| :--- | :--- | :---: | :--- |
 | **ETH Zurich** | 借用、生命周期、NLL | ⭐⭐⭐⭐⭐ | 实践导向，借用检查 |
 | **Cambridge** | 区域类型、子类型理论 | ⭐⭐⭐⭐⭐ | 理论基础，约束求解 |
 | **EPFL** | 生命周期与并发安全 | ⭐⭐⭐⭐ | 并发理论，线程安全 |

@@ -264,7 +264,7 @@ $$\text{Sync}(\tau) \leftrightarrow \forall t: \text{SafeShare}(\& \tau, t)$$
 ## 权威来源对齐
 
 | 来源 | 内容 | 本文档对应 | 对齐状态 |
-|:---|:---|:---|:---:|
+| :--- | :--- | :--- | :---: |
 | RFC 2394 | Async/await | §状态机 | ✅ |
 | RustBelt Meets Relaxed Memory | Async concurrency | §并发安全 | ✅ |
 | Ferrocene FLS Ch.17 | Asynchronous computation | §异步 | ✅ |

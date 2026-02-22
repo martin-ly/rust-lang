@@ -57,7 +57,7 @@
 **状态转换规则**:
 
 | 当前状态 | 事件 | 下一状态 | 条件 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Created | Start | Running | - |
 | Running(act) | ActivityComplete(act, Success) | Running(next) | next = transition(act) |
 | Running(act) | ActivityComplete(act, Failure) | Compensating(act) | has_compensation |
@@ -103,7 +103,7 @@ Inductive WorkflowState :=
 **活动属性**:
 
 | 属性 | 类型 | 说明 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | id | string | 活动唯一标识 |
 | input | Value -> Value | 输入转换函数 |
 | execute | Value -> ActivityResult | 执行逻辑 |
@@ -199,7 +199,7 @@ Fixpoint execute_compensation (stack : CompensationStack) : CompensationResult :
 **引擎能力矩阵**:
 
 | 特性 | Temporal | Cadence | 自建Rust |
-|:---|:---:|:---:|:---:|
+| :--- | :---: | :---: | :---: |
 | 持久化 | ✅ 内置 | ✅ 内置 | ⚠️ 需实现 |
 | 可见性UI | ✅ | ✅ | ❌ |
 | 多语言 | ✅ Go/Java/TS/... | ✅ Go/Java | ⚠️ 仅Rust |
@@ -213,7 +213,7 @@ Fixpoint execute_compensation (stack : CompensationStack) : CompensationResult :
 ## 概念关系矩阵
 
 | 概念A | 关系 | 概念B | 说明 |
-|:---|:---:|:---|:---|
+| :--- | :---: | :--- | :--- |
 | 工作流 | 使用 | 活动 | 工作流由活动组成 |
 | 活动 | 有 | 补偿 | 活动可选定义补偿 |
 | 补偿链 | 组成 | 补偿 | 按逆序执行活动补偿 |
@@ -250,7 +250,7 @@ Fixpoint execute_compensation (stack : CompensationStack) : CompensationResult :
 ## 形式化验证目标
 
 | 定理 | 描述 | 优先级 |
-|:---|:---|:---:|
+| :--- | :--- | :---: |
 | WF-1 | 工作流终止性 | P0 |
 | WF-2 | 补偿最终一致性 | P0 |
 | WF-3 | 状态机确定性 | P1 |

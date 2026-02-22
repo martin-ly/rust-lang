@@ -12,7 +12,7 @@
 ### 核心形式化文档
 
 | 文档 | 类型 | 描述 | 状态 |
-|:---|:---:|:---|:---:|
+| :--- | :---: | :--- | :---: |
 | [OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) | Coq | 所有权唯一性定理 T-OW2 | ✅ L3骨架 |
 | [BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v) | Coq | 数据竞争自由定理 T-BR1 | ✅ L3骨架 |
 | [TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) | Coq | 类型安全定理 T-TY3 | ✅ L3骨架 |
@@ -22,7 +22,7 @@
 ### 思维表征文档
 
 | 文档 | 类型 | 描述 | 状态 |
-|:---|:---:|:---|:---:|
+| :--- | :---: | :--- | :---: |
 | [PROOF_TECHNIQUES_MINDMAP](./formal_methods/PROOF_TECHNIQUES_MINDMAP.md) | 导图 | 证明技术概念族 | 🆕 完整 |
 | [DISTRIBUTED_CONCEPT_MINDMAP](./formal_methods/DISTRIBUTED_CONCEPT_MINDMAP.md) | 导图 | 分布式模式概念族 | 🆕 完整 |
 | [WORKFLOW_CONCEPT_MINDMAP](./formal_methods/WORKFLOW_CONCEPT_MINDMAP.md) | 导图 | 工作流概念族 | 🆕 完整 |
@@ -33,7 +33,7 @@
 ### 决策树文档
 
 | 文档 | 描述 | 状态 |
-|:---|:---|:---:|
+| :--- | :--- | :---: |
 | [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](./formal_methods/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md) | 分布式架构选型 | 🆕 完整 |
 | [ASYNC_RUNTIME_DECISION_TREE](./formal_methods/ASYNC_RUNTIME_DECISION_TREE.md) | 异步运行时选型 | 🆕 完整 |
 | [ERROR_HANDLING_DECISION_TREE](./formal_methods/ERROR_HANDLING_DECISION_TREE.md) | 错误处理策略 | 🆕 完整 |
@@ -42,7 +42,7 @@
 ### 应用树文档
 
 | 文档 | 描述 | 状态 |
-|:---|:---|:---:|
+| :--- | :--- | :---: |
 | [APPLICATION_TREES](./formal_methods/APPLICATION_TREES.md) | 8大应用场景映射树 | 🆕 完整 |
 
 ---
@@ -51,7 +51,7 @@
 
 ### 按类型统计
 
-```
+```text
 形式化方法文档统计:
 ├─ Coq证明文件:      5个  (~1,410行)
 ├─ 思维导图:         3个  (~77KB)
@@ -64,7 +64,7 @@
 ### 完成度统计
 
 | 维度 | 目标 | 当前 | 完成度 |
-|:---|:---:|:---:|:---:|
+| :--- | :---: | :---: | :---: |
 | Coq形式化定义 | 100% | 100% | ✅ |
 | 思维导图 | 15个 | 11个 | 73% → 目标100% |
 | 多维矩阵 | 12个 | 9个 | 75% → 目标100% |
@@ -78,7 +78,7 @@
 
 ### 理论基础层
 
-```
+```text
 理论基础
 ├── 所有权系统 [OWNERSHIP_UNIQUENESS.v]
 │   ├── 唯一性定理 T-OW2
@@ -105,7 +105,7 @@
 
 ### 工程应用层
 
-```
+```text
 工程应用
 ├── 工作流系统 [WORKFLOW_FORMALIZATION.v]
 │   ├── 状态机形式化
@@ -137,7 +137,7 @@
 ### L3机器证明 (Coq)
 
 | 定理 | 文件 | 状态 | 优先级 |
-|:---|:---|:---:|:---:|
+| :--- | :--- | :---: | :---: |
 | T-OW2 所有权唯一性 | OWNERSHIP_UNIQUENESS.v | 🟡 骨架 | P0 |
 | T-BR1 数据竞争自由 | BORROW_DATARACE_FREE.v | 🟡 骨架 | P0 |
 | T-TY3 类型安全 | TYPE_SAFETY.v | 🟡 骨架 | P0 |
@@ -148,7 +148,7 @@
 ### L2完整证明 (Markdown)
 
 | 定理 | 位置 | 状态 |
-|:---|:---|:---:|
+| :--- | :--- | :---: |
 | 所有权唯一性 | ownership_model.md | ✅ 完整 |
 | 数据竞争自由 | borrow_checker_proof.md | ✅ 完整 |
 | 类型安全 | type_system_foundations.md | ✅ 完整 |
@@ -163,7 +163,7 @@
 ### 思维导图 (11/15)
 
 | # | 导图名称 | 位置 | 状态 |
-|:---:|:---|:---|:---:|
+| :---: | :--- | :--- | :---: |
 | 1 | 所有权概念族 | ownership_model.md | ✅ |
 | 2 | 类型系统概念族 | type_system_foundations.md | ✅ |
 | 3 | 型变概念族 | variance_theory.md | ✅ |
@@ -186,7 +186,7 @@
 ### 矩阵系统 (9/12)
 
 | # | 矩阵名称 | 位置 | 状态 |
-|:---:|:---|:---|:---:|
+| :---: | :--- | :--- | :---: |
 | 1 | 概念-公理-定理-证明-反例五维 | CONCEPT_AXIOM_THEOREM_MATRIX.md | 🆕 |
 | 2 | 语义范式vs概念族 | UNIFIED_SYSTEMATIC_FRAMEWORK.md | ✅ |
 | 3 | 证明完成度矩阵 | CONCEPT_AXIOM_THEOREM_MATRIX.md | 🆕 |
@@ -206,7 +206,7 @@
 ### 决策树 (9/10)
 
 | # | 决策树 | 位置 | 状态 |
-|:---:|:---|:---|:---:|
+| :---: | :--- | :--- | :---: |
 | 1 | 论证缺口处理 | UNIFIED_SYSTEMATIC_FRAMEWORK.md | ✅ |
 | 2 | 表达能力边界 | UNIFIED_SYSTEMATIC_FRAMEWORK.md | ✅ |
 | 3 | 并发模型选型 | DECISION_GRAPH_NETWORK.md | ✅ |
@@ -224,7 +224,7 @@
 ### 应用树 (8/8) ✅ 完成
 
 | # | 应用树 | 位置 | 状态 |
-|:---:|:---|:---|:---:|
+| :---: | :--- | :--- | :---: |
 | 1 | 系统编程 | APPLICATION_TREES.md | 🆕 |
 | 2 | 网络服务 | APPLICATION_TREES.md | 🆕 |
 | 3 | 数据系统 | APPLICATION_TREES.md | 🆕 |
@@ -240,7 +240,7 @@
 
 ### 研究者路径
 
-```
+```text
 入门 → 理论基础 → 形式化证明 → 工具实践 → 贡献研究
   │        │           │           │           │
   ▼        ▼           ▼           ▼           ▼
@@ -250,7 +250,7 @@ README  核心定理     简单引理     验证代码     扩展理论
 
 ### 工程师路径
 
-```
+```text
 需求 → 决策树 → 应用树 → 代码示例 → 形式化验证
   │       │        │         │           │
   ▼       ▼        ▼         ▼           ▼
@@ -294,7 +294,7 @@ README  核心定理     简单引理     验证代码     扩展理论
 
 ### 贡献流程
 
-```
+```text
 选择任务 → 阅读相关文档 → 实施 → 测试 → PR
     │            │          │       │      │
     ▼            ▼          ▼       ▼      ▼
@@ -307,7 +307,7 @@ TODO    和相关定义    命名规范  Rust测试  填写描述
 ## 变更日志
 
 | 日期 | 版本 | 变更 |
-|:---|:---:|:---|
+| :--- | :---: | :--- |
 | 2026-02-21 | v1.0 | 初始版本，整合所有形式化方法文档 |
 
 ---
@@ -320,7 +320,7 @@ TODO    和相关定义    命名规范  Rust测试  填写描述
 
 ## 附录：思维导图全貌
 
-```
+```text
                         形式化方法知识体系
                                │
         ┌──────────────────────┼──────────────────────┐

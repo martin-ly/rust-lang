@@ -138,7 +138,7 @@
 ## 权威来源对齐
 
 | 来源 | 内容 | 本文档对应 | 对齐状态 |
-|:---|:---|:---|:---:|
+| :--- | :--- | :--- | :---: |
 | RFC 2349 | Pin API | §形式化定义 | ✅ |
 | RustBelt | unsafe abstractions | §安全保证 | ✅ |
 | Ferrocene FLS Ch.17 | Async computation | §自引用 | ✅ |

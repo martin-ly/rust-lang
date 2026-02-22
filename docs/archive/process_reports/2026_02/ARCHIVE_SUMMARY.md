@@ -15,7 +15,7 @@
 ### docs根目录归档文件 (18个)
 
 | 文件名 | 类型 | 说明 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | CONTENT_IMPROVEMENT_COMPLETION_REPORT.md | 完成报告 | 内容改进完成报告 |
 | CONTENT_IMPROVEMENT_PLAN.md | 计划 | 内容改进计划 |
 | DEEP_CONTENT_ENRICHMENT_FINAL_REPORT.md | 完成报告 | 深度内容强化完成报告 |
@@ -38,7 +38,7 @@
 ### 07_project目录归档文件 (9个)
 
 | 文件名 | 类型 | 说明 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md | 评估报告 | 知识对齐评估 |
 | AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md | 评估报告 | 权威对齐评估 |
 | INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md | 评估报告 | 国际基准评估 |
@@ -52,7 +52,7 @@
 ### research_notes目录归档文件 (7个)
 
 | 文件名 | 类型 | 说明 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | COMPREHENSIVE_REVIEW_REPORT_2026_02.md | 审查报告 | 综合审查报告 |
 | FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md | 分析计划 | 形式化证明分析计划 |
 | FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md | 计划 | 格式内容对齐计划 |
@@ -66,7 +66,7 @@
 ## 归档统计
 
 | 目录 | 归档文件数 |
-|:---|:---:|
+| :--- | :---: |
 | docs根目录 | 18 |
 | 07_project | 9 |
 | research_notes | 7 |

@@ -32,7 +32,7 @@ mindmap
 ## 与核心文档的关联
 
 | 本文档 | 核心文档 | 关系 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 本README | research_notes/experiments/memory_analysis.md | 索引/重定向 |
 | 本README | research_notes/formal_methods/ownership_model.md | 索引/重定向 |
 

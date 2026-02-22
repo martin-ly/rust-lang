@@ -20,7 +20,7 @@
 #### 🔬 形式化方法研究
 
 | 主题             | 文件                                                                               | 状态             |
-|:-----------------|:-----------------------------------------------------------------------------------|:-----------------|
+| :--- | :--- | :--- |
 | 完备性缺口       | [00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md)                | ✅ Phase 1–6 100% |
 | 所有权模型形式化 | [ownership_model.md](./formal_methods/ownership_model.md)                          | ✅ 100%           |
 | 借用检查器证明   | [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)                | ✅ 100%           |
@@ -31,7 +31,7 @@
 #### 🔷 类型理论研究
 
 | 主题             | 文件                                                                           | 状态                 |
-|:-----------------|:-------------------------------------------------------------------------------|:---------------------|
+| :--- | :--- | :--- |
 | 完备性缺口       | [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)               | ✅ 阶段 1–7 Def 占位 |
 | 类型构造能力     | [construction_capability.md](./type_theory/construction_capability.md)         | ✅ Def TCON1、矩阵、决策树 |
 | 类型系统基础     | [type_system_foundations.md](./type_theory/type_system_foundations.md)         | ✅ 100%               |
@@ -43,7 +43,7 @@
 #### 🌐 软件设计理论
 
 | 主题             | 文件                                                                                         | 状态        |
-|:-----------------|:---------------------------------------------------------------------------------------------|:------------|
+| :--- | :--- | :--- |
 | 设计模式形式化   | [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/)             | ✅ 23 模式  |
 | 23/43 模型 | [02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/) | ✅ 100% |
 | 执行模型 | [03_execution_models](./software_design_theory/03_execution_models/) | ✅ 五模型 |
@@ -55,7 +55,7 @@
 #### ⚡ 实验研究
 
 | 主题           | 文件                                                                               | 状态    |
-|:---------------|:-----------------------------------------------------------------------------------|:--------|
+| :--- | :--- | :--- |
 | 性能基准测试   | [performance_benchmarks.md](./experiments/performance_benchmarks.md)               | ✅ 100% |
 | 内存分析       | [memory_analysis.md](./experiments/memory_analysis.md)                             | ✅ 100% |
 | 编译器优化     | [compiler_optimizations.md](./experiments/compiler_optimizations.md)               | ✅ 100% |
@@ -64,10 +64,10 @@
 
 #### 🌐 综合研究
 
-| 主题           | 文件                                                       | 状态    |
-|:---------------|:-----------------------------------------------------------|:--------|
-| 实际应用案例   | [practical_applications.md](./practical_applications.md)   | ✅ 100% |
-| 研究方法论     | [research_methodology.md](./research_methodology.md)       | ✅ 100% |
+| 主题 | 文件 | 状态 |
+| :--- | :--- | :--- |
+| 实际应用案例 | [practical_applications.md](./practical_applications.md) | ✅ 100% |
+| 研究方法论 | [research_methodology.md](./research_methodology.md) | ✅ 100% |
 
 ---
 

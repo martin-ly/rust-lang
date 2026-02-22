@@ -316,7 +316,7 @@ mindmap
 ## 与核心文档的关联
 
 | 本文档 | 核心文档 | 关系 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 本README | research_notes/QUALITY_CHECKLIST.md | 索引/重定向 |
 | 本README | research_notes/TOOLS_GUIDE.md | 索引/重定向 |
 | 本README | TESTING_COVERAGE_GUIDE.md | 索引/重定向 |

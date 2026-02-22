@@ -58,7 +58,7 @@
 ## 权威来源对齐
 
 | 来源 | 内容 | 本文档对应 | 对齐状态 |
-|:---|:---|:---|:---:|
+| :--- | :--- | :--- | :---: |
 | RustBelt Meets Relaxed Memory POPL 2020 | Arc, Send/Sync | §Def SEND1/SYNC1 | ✅ |
 | Ferrocene FLS Ch.17 | Send and Sync | §形式化定义 | ✅ |
 | Rust Reference | Send/Sync trait | §定义 | ✅ |

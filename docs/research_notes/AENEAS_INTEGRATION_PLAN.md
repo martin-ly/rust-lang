@@ -173,7 +173,7 @@ Rust MIR/THIR → Aeneas IL → Coq/HOL4/Lean
 **关键转换**:
 
 | Rust 特性 | 函数式表示 | 说明 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | `let x = v;` | `let x = v in ...` | 标准 let-binding |
 | `let y = x;` (移动) | `let y = x in (x = ⊥; ...)` | 原变量标记为未定义 |
 | `&mut x` | `(x, π)` 对 | 当前值 + 预言变量 |
@@ -191,7 +191,7 @@ Rust MIR/THIR → Aeneas IL → Coq/HOL4/Lean
 Aeneas支持多个定理证明器后端：
 
 | 后端 | 特点 | 适用场景 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **Coq** | 成熟的生态系统，Iris框架 | 与RustBelt集成 |
 | **HOL4** | 经典高阶逻辑 | 教育、研究 |
 | **Lean** | 现代证明助手，元编程强 | 新兴项目 |
@@ -206,7 +206,7 @@ Aeneas支持多个定理证明器后端：
 ### 与RustBelt的对比
 
 | 特性 | RustBelt | Aeneas |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **方法** | 分离逻辑 (Iris) | 函数式翻译 |
 | **工具** | Coq (Iris) | Coq/HOL4/Lean/F\* |
 | **范围** | Unsafe安全验证 | Safe Rust功能正确性 |
@@ -257,7 +257,7 @@ Aeneas支持多个定理证明器后端：
 Aeneas的翻译保持类型结构，与 [type_system_foundations](./type_theory/type_system_foundations.md) 的形式化对应：
 
 | 类型理论概念 | Rust 形式 | Aeneas 翻译 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 线性类型 | `String`, `Vec<T>` | 单射函数参数 |
 | 仿射类型 | 大多数 Owned 类型 | 消耗性参数 |
 | 相关类型 | `Copy` trait 类型 | 普通函数参数 |

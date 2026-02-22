@@ -31,7 +31,7 @@ mindmap
 ## 与核心文档的关联
 
 | 本文档 | 核心文档 | 关系 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 本README | research_notes/formal_methods/borrow_checker_proof.md | 索引/重定向 |
 | 本README | research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md | 索引/重定向 |
 

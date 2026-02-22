@@ -36,14 +36,14 @@
 ### 2. docs/02_reference/README.md
 
 | 问题 | 修复前 | 修复后 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 文件名错误 | `ownership_borrowing_cheatsheet.md` | `ownership_cheatsheet.md` |
 | 文件名错误 | `type_system_cheatsheet.md` | `type_system.md` |
 
 ### 3. docs/07_project/README.md
 
 | 问题 | 修复前 | 修复后 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 链接指向已归档文件 | `RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md` | `AUTHORITATIVE_ALIGNMENT_GUIDE.md` |
 | 链接指向已归档文件 | `FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md` | `FORMAL_PROOF_SYSTEM_GUIDE.md` |
 | 链接指向已归档文件 | `RUST_RELEASE_TRACKING_CHECKLIST.md` | 添加归档路径注释 |
@@ -52,37 +52,37 @@
 ### 4. docs/research_notes/README.md
 
 | 问题 | 修复前 | 修复后 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 链接指向已归档文件 | `RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md` | `AUTHORITATIVE_ALIGNMENT_GUIDE.md` + 归档注释 |
 
 ### 5. docs/research_notes/00_ORGANIZATION_AND_NAVIGATION.md
 
 | 问题 | 修复前 | 修复后 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 链接指向已归档文件 | `RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN` | 添加删除线 + 归档路径 + 新文档链接 |
 
 ### 6. docs/research_notes/00_COMPREHENSIVE_SUMMARY.md
 
 | 问题 | 修复前 | 修复后 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 链接指向已归档文件 | `RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN` | 添加删除线 + 替换为 `AUTHORITATIVE_ALIGNMENT_GUIDE` |
 
 ### 7. docs/research_notes/INDEX.md
 
 | 问题 | 修复前 | 修复后 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 链接指向已归档文件 | `RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md` | 添加归档注释 + 替换为新条目 |
 
 ### 8. docs/research_notes/QUICK_FIND.md
 
 | 问题 | 修复前 | 修复后 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 链接指向已归档文件 | `RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN` | `AUTHORITATIVE_ALIGNMENT_GUIDE` + 归档注释 |
 
 ### 9. docs/research_notes/software_design_theory/04_compositional_engineering/README.md
 
 | 问题 | 修复前 | 修复后 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 链接指向已归档文件 | `RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN` | 添加删除线 + 归档注释 |
 
 ---

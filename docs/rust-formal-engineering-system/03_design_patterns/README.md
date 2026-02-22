@@ -32,7 +32,7 @@ mindmap
 ## 与核心文档的关联
 
 | 本文档 | 核心文档 | 关系 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 本README | crates/c09_design_pattern/ | 索引/重定向 |
 | 本README | research_notes/software_design_theory/ | 索引/重定向 |
 

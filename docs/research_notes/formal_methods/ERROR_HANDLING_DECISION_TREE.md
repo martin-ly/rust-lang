@@ -6,18 +6,73 @@
 
 ## 目录
 
-1. [决策树总览](#决策树总览)
-2. [决策维度详解](#决策维度详解)
-3. [对比分析](#对比分析)
-4. [最佳实践](#最佳实践)
-5. [反模式警示](#反模式警示)
-6. [代码示例](#代码示例)
+- [Rust 错误处理决策树](#rust-错误处理决策树)
+  - [目录](#目录)
+  - [决策树总览](#决策树总览)
+  - [决策维度详解](#决策维度详解)
+    - [维度 1: 错误类型 - 可恢复 vs 不可恢复](#维度-1-错误类型---可恢复-vs-不可恢复)
+    - [维度 2: 错误传播范围](#维度-2-错误传播范围)
+      - [2.1 本地处理场景](#21-本地处理场景)
+      - [2.2 错误传播场景](#22-错误传播场景)
+    - [维度 3: 错误处理策略](#维度-3-错误处理策略)
+      - [策略选择矩阵](#策略选择矩阵)
+      - [3.1 重试策略决策](#31-重试策略决策)
+      - [3.2 降级策略](#32-降级策略)
+    - [维度 4: 库 vs 应用](#维度-4-库-vs-应用)
+      - [对比表](#对比表)
+  - [对比分析](#对比分析)
+    - [Result vs Option vs panic](#result-vs-option-vs-panic)
+      - [详细对比](#详细对比)
+      - [转换关系](#转换关系)
+    - [thiserror vs anyhow](#thiserror-vs-anyhow)
+      - [详细对比](#详细对比-1)
+      - [混合使用模式](#混合使用模式)
+    - [自定义错误类型设计](#自定义错误类型设计)
+      - [设计原则](#设计原则)
+      - [推荐模式](#推荐模式)
+    - [错误链和上下文](#错误链和上下文)
+      - [anyhow 上下文链](#anyhow-上下文链)
+      - [thiserror 错误源](#thiserror-错误源)
+  - [最佳实践](#最佳实践)
+    - [1. 错误类型设计模式](#1-错误类型设计模式)
+      - [模式 A: 分层错误架构](#模式-a-分层错误架构)
+      - [模式 B: 错误状态码映射](#模式-b-错误状态码映射)
+      - [模式 C: 错误 Builder](#模式-c-错误-builder)
+    - [2. 错误转换和映射](#2-错误转换和映射)
+      - [2.1 自动转换 (`From` trait)](#21-自动转换-from-trait)
+      - [2.2 映射错误 (`map_err`)](#22-映射错误-map_err)
+      - [2.3 错误类型转换矩阵](#23-错误类型转换矩阵)
+    - [3. 错误报告和日志](#3-错误报告和日志)
+      - [3.1 结构化日志集成](#31-结构化日志集成)
+      - [3.2 用户友好的错误报告](#32-用户友好的错误报告)
+      - [3.3 错误聚合和监控](#33-错误聚合和监控)
+    - [4. 测试错误处理](#4-测试错误处理)
+      - [4.1 测试错误类型](#41-测试错误类型)
+      - [4.2 测试错误传播](#42-测试错误传播)
+      - [4.3 测试错误处理逻辑](#43-测试错误处理逻辑)
+  - [反模式警示](#反模式警示)
+    - [❌ 反模式 1: 滥用 `unwrap()`](#-反模式-1-滥用-unwrap)
+    - [❌ 反模式 2: 过度使用 `String` 作为错误](#-反模式-2-过度使用-string-作为错误)
+    - [❌ 反模式 3: 错误的 `?` 使用导致信息丢失](#-反模式-3-错误的--使用导致信息丢失)
+    - [❌ 反模式 4: 混淆 `Option` 和 `Result`](#-反模式-4-混淆-option-和-result)
+    - [❌ 反模式 5: 忽略错误](#-反模式-5-忽略错误)
+    - [❌ 反模式 6: 过度详细的错误类型](#-反模式-6-过度详细的错误类型)
+    - [❌ 反模式 7: 跨线程边界传递非 Send 错误](#-反模式-7-跨线程边界传递非-send-错误)
+    - [❌ 反模式 8: 在热路径中创建错误字符串](#-反模式-8-在热路径中创建错误字符串)
+  - [代码示例](#代码示例)
+    - [完整示例 1: 分层错误处理架构](#完整示例-1-分层错误处理架构)
+    - [完整示例 2: 带重试和断路器的错误处理](#完整示例-2-带重试和断路器的错误处理)
+    - [完整示例 3: anyhow + thiserror 混合使用](#完整示例-3-anyhow--thiserror-混合使用)
+  - [附录](#附录)
+    - [A. 快速决策参考表](#a-快速决策参考表)
+    - [B. 常用 crate 对比](#b-常用-crate-对比)
+    - [C. 进一步阅读](#c-进一步阅读)
 
 ---
 
 ## 决策树总览
 
-```
+```text
                     ┌─────────────────────────────────────┐
                     │        开始错误处理决策              │
                     └───────────────┬─────────────────────┘
@@ -73,7 +128,7 @@
 
 ### 维度 2: 错误传播范围
 
-```
+```text
 传播范围决策流程:
 
 ┌──────────────────────────────────────────────────────────────┐
@@ -125,7 +180,7 @@
 
 ### 维度 3: 错误处理策略
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────┐
 │                    选择处理策略                              │
 └───────┬──────────────┬──────────────┬──────────────┬─────────┘
@@ -163,11 +218,11 @@ fn should_retry(error: &Error) -> RetryDecision {
         ErrorKind::ConnectionReset |
         ErrorKind::ConnectionAborted |
         ErrorKind::TimedOut => RetryDecision::RetryWithBackoff,
-        
+
         // 配置错误 → 不重试
         ErrorKind::InvalidInput |
         ErrorKind::NotFound => RetryDecision::FailFast,
-        
+
         // 服务器错误 → 可能重试
         ErrorKind::Other => {
             if is_temporary(error) {
@@ -193,7 +248,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 ### 维度 4: 库 vs 应用
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                   库代码 (Library)                          │
 ├─────────────────────────────────────────────────────────────┤
@@ -245,7 +300,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 ### Result vs Option vs panic
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Result<T, E>                                  │
 ├─────────────────────────────────────────────────────────────────┤
@@ -301,7 +356,7 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 ### thiserror vs anyhow
 
-```
+```text
 ┌────────────────────────────────────────────────────────────────┐
 │                      thiserror                                 │
 │                      (库代码)                                   │
@@ -350,10 +405,10 @@ use thiserror::Error;
 pub enum DataError {
     #[error("io error: {0}")]
     Io(#[from] std::io::Error),
-    
+
     #[error("parse error: {0}")]
     Parse(String),
-    
+
     #[error("not found: {0}")]
     NotFound(String),
 }
@@ -369,7 +424,7 @@ fn main() -> Result<()> {
     let data = my_lib::load_data("config.json")
         .context("failed to load application config")?;
     // 转换为 anyhow::Error，添加上下文
-    
+
     Ok(())
 }
 ```
@@ -378,7 +433,7 @@ fn main() -> Result<()> {
 
 ### 自定义错误类型设计
 
-```
+```text
 ┌────────────────────────────────────────────────────────────────┐
 │                   错误类型设计层次                              │
 └───────────────┬────────────────────────────────────────────────┘
@@ -439,10 +494,10 @@ use serde::Serialize;
 pub enum ErrorCode {
     #[error("not_found")]
     NotFound = 404,
-    
+
     #[error("invalid_input")]
     InvalidInput = 400,
-    
+
     #[error("internal_error")]
     InternalError = 500,
 }
@@ -463,13 +518,13 @@ pub struct ApiError {
 pub enum AppError {
     #[error("configuration error: {0}")]
     Config(#[from] config::ConfigError),
-    
+
     #[error("database error: {0}")]
     Database(#[from] db::DbError),
-    
+
     #[error("external service error: {0}")]
     External(#[from] external::ServiceError),
-    
+
     #[error("internal error: {0}")]
     Internal(String),
 }
@@ -479,7 +534,7 @@ pub enum AppError {
 
 ### 错误链和上下文
 
-```
+```text
 错误链结构:
 
 ┌────────────────────────────────────────────────────────────────┐
@@ -505,22 +560,22 @@ use anyhow::{Context, Result};
 fn process_user(user_id: Uuid) -> Result<()> {
     let user = db::find_user(user_id)
         .with_context(|| format!("failed to find user {}", user_id))?;
-    
+
     let config = fs::read_to_string(&user.config_path)
         .with_context(|| format!("failed to read config at {}", user.config_path))?;
-    
+
     let settings: Settings = serde_yaml::from_str(&config)
         .context("failed to parse config as YAML")?;
-    
+
     apply_settings(user_id, settings)
         .context("failed to apply settings")?;
-    
+
     Ok(())
 }
 
 // 输出:
 // Error: failed to apply settings
-// 
+//
 // Caused by:
 //   0: failed to parse config as YAML
 //   1: invalid YAML syntax at line 42, column 10
@@ -541,7 +596,7 @@ pub enum ConfigError {
         #[source]
         source: std::io::Error,
     },
-    
+
     #[error("failed to parse config: {message}")]
     Parse {
         message: String,
@@ -557,7 +612,7 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
             path: path.to_string(),
             source: e,
         })?;
-    
+
     serde_yaml::from_str(&content)
         .map_err(|e| ConfigError::Parse {
             message: format!("invalid YAML in {}", path),
@@ -580,7 +635,7 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
 pub enum DomainError {
     #[error("validation failed: {0}")]
     Validation(String),
-    
+
     #[error("business rule violated: {0}")]
     BusinessRule(String),
 }
@@ -590,7 +645,7 @@ pub enum DomainError {
 pub enum ApplicationError {
     #[error("domain error: {0}")]
     Domain(#[from] DomainError),
-    
+
     #[error("infrastructure error: {0}")]
     Infrastructure(#[source] InfrastructureError),
 }
@@ -602,10 +657,10 @@ pub enum ApplicationError {
 pub enum ApiError {
     #[error("bad_request")]
     BadRequest { message: String },
-    
+
     #[error("not_found")]
     NotFound { resource: String },
-    
+
     #[error("internal_error")]
     InternalError { request_id: Uuid },
 }
@@ -665,22 +720,22 @@ impl ErrorBuilder {
             context: HashMap::new(),
         }
     }
-    
+
     pub fn message(mut self, msg: impl Into<String>) -> Self {
         self.message = Some(msg.into());
         self
     }
-    
+
     pub fn source(mut self, err: impl Into<Box<dyn std::error::Error + Send + Sync>>) -> Self {
         self.source = Some(err.into());
         self
     }
-    
+
     pub fn context(mut self, key: &str, value: impl Into<String>) -> Self {
         self.context.insert(key.to_string(), value.into());
         self
     }
-    
+
     pub fn build(self) -> AppError {
         AppError {
             code: self.code,
@@ -712,10 +767,10 @@ use std::io;
 pub enum AppError {
     #[error("io error: {0}")]
     Io(#[from] io::Error),
-    
+
     #[error("parse error: {0}")]
     Parse(#[from] serde_json::Error),
-    
+
     #[error("database error: {0}")]
     Database(#[from] sqlx::Error),
 }
@@ -773,7 +828,7 @@ async fn authenticate_user(
     token: &str,
 ) -> Result<User, AuthError> {
     info!("attempting authentication");
-    
+
     let user = db.find_user(user_id)
         .await
         .map_err(|e| {
@@ -783,7 +838,7 @@ async fn authenticate_user(
             );
             AuthError::Database(e)
         })?;
-    
+
     if !verify_token(&user, token) {
         warn!(
             token_prefix = %&token[..4],
@@ -791,7 +846,7 @@ async fn authenticate_user(
         );
         return Err(AuthError::InvalidToken);
     }
-    
+
     info!("authentication successful");
     Ok(user)
 }
@@ -802,28 +857,28 @@ async fn authenticate_user(
 ```rust
 pub fn format_error_report(err: &anyhow::Error) -> String {
     let mut report = String::new();
-    
+
     // 用户友好的顶层消息
     report.push_str("操作失败: ");
     report.push_str(&err.to_string());
     report.push('\n');
-    
+
     // 建议的解决步骤
     report.push_str("\n建议:\n");
     report.push_str(&suggest_fixes(err));
-    
+
     // 技术细节（用于调试）
     report.push_str("\n\n技术详情:\n");
     for (i, cause) in err.chain().enumerate() {
         report.push_str(&format!("  {}: {}\n", i, cause));
     }
-    
+
     // 回溯（如果有）
     if let Some(backtrace) = err.backtrace() {
         report.push_str("\n回溯:\n");
         report.push_str(&format!("{:?}", backtrace));
     }
-    
+
     report
 }
 
@@ -846,12 +901,12 @@ use metrics::{counter, gauge, histogram};
 pub fn report_error(err: &AppError) {
     // 按错误类型计数
     counter!("app.errors.total", 1, "type" => error_type_name(err));
-    
+
     // 按错误码计数
     if let Some(code) = error_code(err) {
         counter!("app.errors.by_code", 1, "code" => code.to_string());
     }
-    
+
     // 严重错误告警
     if is_critical(err) {
         counter!("app.errors.critical", 1);
@@ -870,29 +925,29 @@ pub fn report_error(err: &AppError) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_error_conversion() {
         let io_err = std::io::Error::new(
             std::io::ErrorKind::NotFound,
             "file not found"
         );
-        
+
         let app_err: AppError = io_err.into();
-        
+
         assert!(matches!(app_err, AppError::Io(_)));
         assert!(app_err.to_string().contains("file not found"));
     }
-    
+
     #[test]
     fn test_error_downcast() {
         let err: anyhow::Error = ConfigError::NotFound {
             path: "/etc/config".into(),
         }.into();
-        
+
         // 可以 downcast 回具体类型
         assert!(err.downcast_ref::<ConfigError>().is_some());
-        
+
         // 检查具体变体
         if let Some(ConfigError::NotFound { path }) = err.downcast_ref() {
             assert_eq!(path, "/etc/config");
@@ -908,7 +963,7 @@ mod tests {
 fn test_error_propagation() {
     // 使用 assert_matches! (需要 nightly) 或自定义宏
     let result = load_config("nonexistent.json");
-    
+
     match result {
         Err(AppError::Config(ConfigError::Read { path, .. })) => {
             assert_eq!(path, "nonexistent.json");
@@ -936,7 +991,7 @@ async fn test_retry_logic() {
         },
         RetryPolicy::default(),
     ).await;
-    
+
     assert!(result.is_ok());
     assert_eq!(attempts, 3);
 }
@@ -944,15 +999,15 @@ async fn test_retry_logic() {
 #[tokio::test]
 async fn test_circuit_breaker() {
     let mut cb = CircuitBreaker::new(3, Duration::from_secs(60));
-    
+
     // 触发断路器
     for _ in 0..3 {
         cb.call(|| async { Err::<(), _>(io::Error::new(io::ErrorKind::Other, "fail")) }).await.ok();
     }
-    
+
     // 断路器应打开
     assert!(cb.is_open());
-    
+
     // 后续请求应快速失败
     let result = cb.call(|| async { Ok(()) }).await;
     assert!(matches!(result, Err(CircuitBreakerError::Open)));
@@ -1119,10 +1174,10 @@ enum DatabaseError {
 enum DatabaseError {
     #[error("connection timeout after {duration}s")]
     ConnectionTimeout { duration: u64 },
-    
+
     #[error("connection failed: {backend}")]
     ConnectionFailed { backend: BackendType },
-    
+
     #[error("query failed: {message}")]
     QueryFailed { message: String },
 }
@@ -1200,38 +1255,38 @@ use uuid::Uuid;
 
 pub mod domain {
     use super::*;
-    
+
     #[derive(Error, Debug, Clone, PartialEq)]
     pub enum ValidationError {
         #[error("field '{field}' is required")]
         Required { field: String },
-        
+
         #[error("field '{field}' must be at least {min} characters")]
         TooShort { field: String, min: usize },
-        
+
         #[error("invalid email format: {email}")]
         InvalidEmail { email: String },
     }
-    
+
     #[derive(Error, Debug, Clone, PartialEq)]
     pub enum BusinessError {
         #[error("user already exists: {email}")]
         DuplicateUser { email: String },
-        
+
         #[error("insufficient balance: required {required}, available {available}")]
         InsufficientBalance { required: f64, available: f64 },
-        
+
         #[error("operation not permitted for user status: {status}")]
         InvalidStatus { status: String },
     }
-    
+
     pub type DomainResult<T> = Result<T, DomainError>;
-    
+
     #[derive(Error, Debug, Clone, PartialEq)]
     pub enum DomainError {
         #[error("validation failed: {0}")]
         Validation(#[from] ValidationError),
-        
+
         #[error("business rule violated: {0}")]
         Business(#[from] BusinessError),
     }
@@ -1242,34 +1297,34 @@ pub mod domain {
 pub mod application {
     use super::*;
     use super::domain::*;
-    
+
     #[derive(Error, Debug)]
     pub enum InfrastructureError {
         #[error("database error: {0}")]
         Database(String),
-        
+
         #[error("cache error: {0}")]
         Cache(String),
-        
+
         #[error("external service error: {code} - {message}")]
         ExternalService { code: u16, message: String },
     }
-    
+
     #[derive(Error, Debug)]
     pub enum ApplicationError {
         #[error(transparent)]
         Domain(#[from] DomainError),
-        
+
         #[error(transparent)]
         Infrastructure(#[from] InfrastructureError),
-        
+
         #[error("concurrent modification detected")]
         ConcurrentModification,
-        
+
         #[error("operation timeout after {0:?}")]
         Timeout(std::time::Duration),
     }
-    
+
     pub type AppResult<T> = Result<T, ApplicationError>;
 }
 
@@ -1279,7 +1334,7 @@ pub mod interface {
     use super::*;
     use super::application::*;
     use super::domain::*;
-    
+
     #[derive(Debug, Serialize, Deserialize)]
     #[serde(rename_all = "snake_case")]
     pub enum ErrorCode {
@@ -1292,7 +1347,7 @@ pub mod interface {
         InternalError = 500,
         ServiceUnavailable = 503,
     }
-    
+
     #[derive(Debug, Serialize)]
     pub struct ApiErrorResponse {
         pub code: ErrorCode,
@@ -1303,13 +1358,13 @@ pub mod interface {
         #[serde(skip_serializing_if = "Option::is_none")]
         pub help_url: Option<String>,
     }
-    
+
     #[derive(Error, Debug)]
     #[error("API error: {response:?}")]
     pub struct ApiError {
         response: ApiErrorResponse,
     }
-    
+
     impl ApiError {
         pub fn from_app_error(err: ApplicationError, request_id: Uuid) -> Self {
             let (code, message, details) = match &err {
@@ -1365,7 +1420,7 @@ pub mod interface {
                     None,
                 ),
             };
-            
+
             Self {
                 response: ApiErrorResponse {
                     code,
@@ -1376,7 +1431,7 @@ pub mod interface {
                 },
             }
         }
-        
+
         pub fn into_response(self) -> ApiErrorResponse {
             self.response
         }
@@ -1395,38 +1450,38 @@ fn validate_user_input(email: &str, name: &str) -> DomainResult<()> {
             field: "email".to_string(),
         }.into());
     }
-    
+
     if !email.contains('@') {
         return Err(ValidationError::InvalidEmail {
             email: email.to_string(),
         }.into());
     }
-    
+
     if name.len() < 2 {
         return Err(ValidationError::TooShort {
             field: "name".to_string(),
             min: 2,
         }.into());
     }
-    
+
     Ok(())
 }
 
 fn create_user(email: String, name: String) -> AppResult<User> {
     validate_user_input(&email, &name)?;
-    
+
     // 模拟检查重复用户
     if email == "exists@example.com" {
         return Err(BusinessError::DuplicateUser { email }.into());
     }
-    
+
     // 模拟数据库操作
     if email == "db_error@example.com" {
         return Err(InfrastructureError::Database(
             "connection refused".to_string()
         ).into());
     }
-    
+
     Ok(User { email, name })
 }
 
@@ -1439,7 +1494,7 @@ struct User {
 // HTTP 处理函数
 fn handle_create_user(email: String, name: String) -> Result<ApiErrorResponse, ApiErrorResponse> {
     let request_id = Uuid::new_v4();
-    
+
     match create_user(email, name) {
         Ok(user) => {
             println!("Created user: {:?}", user);
@@ -1460,21 +1515,21 @@ fn main() {
         Ok(_) => println!("Success"),
         Err(e) => println!("Error: {:?}", e),
     }
-    
+
     // 验证错误
     println!("\n=== Test 2: Invalid email ===");
     match handle_create_user("invalid-email".to_string(), "John".to_string()) {
         Ok(_) => println!("Success"),
         Err(e) => println!("Error: {:?}", e),
     }
-    
+
     // 业务错误
     println!("\n=== Test 3: Duplicate user ===");
     match handle_create_user("exists@example.com".to_string(), "John".to_string()) {
         Ok(_) => println!("Success"),
         Err(e) => println!("Error: {:?}", e),
     }
-    
+
     // 基础设施错误
     println!("\n=== Test 4: Database error ===");
     match handle_create_user("db_error@example.com".to_string(), "John".to_string()) {
@@ -1503,7 +1558,7 @@ use thiserror::Error;
 pub enum RetryError<E> {
     #[error("max retries exceeded after {attempts} attempts")]
     MaxRetriesExceeded { attempts: u32, last_error: E },
-    
+
     #[error("non-retryable error: {0}")]
     NonRetryable(E),
 }
@@ -1512,7 +1567,7 @@ pub enum RetryError<E> {
 pub enum CircuitBreakerError {
     #[error("circuit breaker is open")]
     Open,
-    
+
     #[error("half-open state rejected request")]
     HalfOpenRejected,
 }
@@ -1545,7 +1600,7 @@ impl RetryPolicy {
         let delay = delay.min(self.max_delay.as_millis() as f64);
         Duration::from_millis(delay as u64)
     }
-    
+
     pub fn with_jitter(&self, delay: Duration) -> Duration {
         use rand::Rng;
         let jitter = rand::thread_rng().gen_range(0.0..0.1);
@@ -1571,7 +1626,7 @@ where
     E: Retryable + Clone + std::fmt::Debug,
 {
     let mut last_error = None;
-    
+
     for attempt in 0..policy.max_attempts {
         match operation().await {
             Ok(result) => return Ok(result),
@@ -1579,9 +1634,9 @@ where
                 if !err.is_retryable() {
                     return Err(RetryError::NonRetryable(err));
                 }
-                
+
                 last_error = Some(err);
-                
+
                 if attempt < policy.max_attempts - 1 {
                     let delay = policy.exponential_backoff(attempt);
                     let delay = policy.with_jitter(delay);
@@ -1595,7 +1650,7 @@ where
             }
         }
     }
-    
+
     Err(RetryError::MaxRetriesExceeded {
         attempts: policy.max_attempts,
         last_error: last_error.unwrap(),
@@ -1640,7 +1695,7 @@ impl CircuitBreaker {
             timeout,
         }
     }
-    
+
     pub async fn call<F, Fut, T, E>(&self, operation: F) -> Result<T, CircuitBreakerError>
     where
         F: FnOnce() -> Fut,
@@ -1676,10 +1731,10 @@ impl CircuitBreaker {
                 CircuitState::Closed => {}
             }
         }
-        
+
         // 执行操作
         let result = operation().await;
-        
+
         // 更新状态
         let mut inner = self.inner.write().await;
         match result {
@@ -1705,7 +1760,7 @@ impl CircuitBreaker {
             Err(_) => {
                 inner.failure_count += 1;
                 inner.last_failure_time = Some(Instant::now());
-                
+
                 if inner.failure_count >= self.failure_threshold {
                     inner.state = CircuitState::Open;
                     tracing::warn!(
@@ -1717,11 +1772,11 @@ impl CircuitBreaker {
             }
         }
     }
-    
+
     pub async fn state(&self) -> CircuitState {
         self.inner.read().await.state
     }
-    
+
     pub async fn is_open(&self) -> bool {
         matches!(self.inner.read().await.state, CircuitState::Open)
     }
@@ -1756,7 +1811,7 @@ impl ResilientClient {
             timeout: Duration::from_secs(30),
         }
     }
-    
+
     pub async fn call<F, Fut, T, E>(&self, operation: F) -> Result<T, ClientError<E>>
     where
         F: Fn() -> Fut + Clone,
@@ -1767,10 +1822,10 @@ impl ResilientClient {
         if self.circuit_breaker.is_open().await {
             return Err(ClientError::CircuitBreakerOpen);
         }
-        
+
         // 2. 执行带重试的操作
         let result = retry(operation.clone(), self.retry_policy.clone()).await;
-        
+
         match result {
             Ok(value) => {
                 // 记录成功
@@ -1793,13 +1848,13 @@ impl ResilientClient {
 pub enum ClientError<E> {
     #[error("circuit breaker is open")]
     CircuitBreakerOpen,
-    
+
     #[error("max retries exceeded after {attempts} attempts")]
     MaxRetriesExceeded { attempts: u32 },
-    
+
     #[error("non-retryable error: {0:?}")]
     NonRetryable(E),
-    
+
     #[error("timeout")]
     Timeout,
 }
@@ -1809,30 +1864,30 @@ pub enum ClientError<E> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[derive(Debug, Clone)]
     struct TestError {
         retryable: bool,
     }
-    
+
     impl Retryable for TestError {
         fn is_retryable(&self) -> bool {
             self.retryable
         }
     }
-    
+
     impl std::fmt::Display for TestError {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             write!(f, "test error")
         }
     }
-    
+
     impl std::error::Error for TestError {}
-    
+
     #[tokio::test]
     async fn test_retry_success_on_second_attempt() {
         let mut attempts = 0;
-        
+
         let result = retry(
             || {
                 attempts += 1;
@@ -1846,11 +1901,11 @@ mod tests {
             },
             RetryPolicy::default(),
         ).await;
-        
+
         assert!(result.is_ok());
         assert_eq!(attempts, 2);
     }
-    
+
     #[tokio::test]
     async fn test_non_retryable_error() {
         let result: Result<(), RetryError<TestError>> = retry(
@@ -1859,24 +1914,24 @@ mod tests {
             },
             RetryPolicy::default(),
         ).await;
-        
+
         assert!(matches!(result, Err(RetryError::NonRetryable(_))));
     }
-    
+
     #[tokio::test]
     async fn test_circuit_breaker_opens_after_failures() {
         let cb = CircuitBreaker::new(3, Duration::from_secs(60));
-        
+
         // 触发 3 次失败
         for _ in 0..3 {
             let _: Result<(), _> = cb.call(|| async {
                 Err::<(), ()>(())
             }).await;
         }
-        
+
         // 断路器应该打开
         assert!(cb.is_open().await);
-        
+
         // 后续请求应快速失败
         let result = cb.call(|| async { Ok::<(), ()>(()) }).await;
         assert!(matches!(result, Err(CircuitBreakerError::Open)));
@@ -1896,42 +1951,42 @@ use std::path::PathBuf;
 
 pub mod core {
     use super::*;
-    
+
     #[derive(Error, Debug)]
     #[non_exhaustive]
     pub enum ConfigError {
         #[error("configuration file not found: {path}")]
         NotFound { path: PathBuf },
-        
+
         #[error("invalid configuration format: {message}")]
         InvalidFormat { message: String },
-        
+
         #[error("missing required field: {field}")]
         MissingField { field: String },
-        
+
         #[error("io error while reading config: {0}")]
         Io(#[from] std::io::Error),
-        
+
         #[error("parse error: {0}")]
         Parse(#[from] serde_json::Error),
     }
-    
+
     #[derive(Error, Debug)]
     #[non_exhaustive]
     pub enum NetworkError {
         #[error("connection refused to {address}")]
         ConnectionRefused { address: String },
-        
+
         #[error("connection timed out after {duration:?}")]
         Timeout { duration: std::time::Duration },
-        
+
         #[error("dns resolution failed for {hostname}")]
         DnsFailed { hostname: String },
-        
+
         #[error("tls handshake failed: {reason}")]
         TlsFailed { reason: String },
     }
-    
+
     impl Retryable for NetworkError {
         fn is_retryable(&self) -> bool {
             matches!(self,
@@ -1941,26 +1996,26 @@ pub mod core {
             )
         }
     }
-    
+
     #[derive(Error, Debug)]
     #[non_exhaustive]
     pub enum CoreError {
         #[error("configuration error: {0}")]
         Config(#[from] ConfigError),
-        
+
         #[error("network error: {0}")]
         Network(#[from] NetworkError),
-        
+
         #[error("internal error: {message}")]
         Internal { message: String },
     }
-    
+
     pub type CoreResult<T> = Result<T, CoreError>;
-    
+
     pub trait Retryable {
         fn is_retryable(&self) -> bool;
     }
-    
+
     impl Retryable for CoreError {
         fn is_retryable(&self) -> bool {
             matches!(self,
@@ -1968,11 +2023,11 @@ pub mod core {
             )
         }
     }
-    
+
     // 库函数返回结构化错误
     pub fn load_config(path: &str) -> CoreResult<Config> {
         use std::fs;
-        
+
         let content = fs::read_to_string(path)
             .map_err(|e| {
                 if e.kind() == std::io::ErrorKind::NotFound {
@@ -1981,23 +2036,23 @@ pub mod core {
                     e.into()
                 }
             })?;
-        
+
         let config: Config = serde_json::from_str(&content)
             .map_err(|e| ConfigError::InvalidFormat {
                 message: format!("JSON parse error: {}", e),
             })?;
-        
+
         config.validate()?;
-        
+
         Ok(config)
     }
-    
+
     #[derive(Debug, serde::Deserialize)]
     pub struct Config {
         pub server: ServerConfig,
         pub database: DatabaseConfig,
     }
-    
+
     impl Config {
         fn validate(&self) -> CoreResult<()> {
             if self.server.port == 0 {
@@ -2008,13 +2063,13 @@ pub mod core {
             Ok(())
         }
     }
-    
+
     #[derive(Debug, serde::Deserialize)]
     pub struct ServerConfig {
         pub host: String,
         pub port: u16,
     }
-    
+
     #[derive(Debug, serde::Deserialize)]
     pub struct DatabaseConfig {
         pub url: String,
@@ -2030,25 +2085,25 @@ use core::*;
 fn main() -> AnyhowResult<()> {
     // 初始化日志
     tracing_subscriber::fmt::init();
-    
+
     // 加载配置
     let config = core::load_config("config.json")
         .context("failed to load application configuration")?;
-    
+
     tracing::info!(
         host = %config.server.host,
         port = %config.server.port,
         "configuration loaded"
     );
-    
+
     // 初始化应用
     let app = Application::new(config)
         .context("failed to initialize application")?;
-    
+
     // 运行应用
     app.run()
         .context("application runtime error")?;
-    
+
     Ok(())
 }
 
@@ -2062,15 +2117,15 @@ impl Application {
             config.database.pool_size > 0,
             "database pool size must be greater than 0"
         );
-        
+
         Ok(Self { config })
     }
-    
+
     fn run(&self) -> AnyhowResult<()> {
         tracing::info!("starting application");
-        
+
         // 业务逻辑...
-        
+
         Ok(())
     }
 }
@@ -2091,7 +2146,7 @@ impl ErrorContext for anyhow::Error {
         // 这里简化处理
         self.context(format!("Suggestion: {}", suggestion.into()))
     }
-    
+
     fn with_help_url(self, url: impl Into<String>) -> Self {
         self.context(format!("Help: {}", url.into()))
     }
@@ -2100,11 +2155,11 @@ impl ErrorContext for anyhow::Error {
 /// 格式化错误报告给用户
 pub fn format_user_facing_error(err: &anyhow::Error) -> String {
     let mut output = String::new();
-    
+
     output.push_str("Error: ");
     output.push_str(&err.to_string());
     output.push('\n');
-    
+
     // 收集上下文链
     let causes: Vec<_> = err.chain().skip(1).collect();
     if !causes.is_empty() {
@@ -2113,19 +2168,19 @@ pub fn format_user_facing_error(err: &anyhow::Error) -> String {
             output.push_str(&format!("  {}: {}\n", i, cause));
         }
     }
-    
+
     output
 }
 
 /// 格式化错误报告给开发者
 pub fn format_debug_error(err: &anyhow::Error) -> String {
     let mut output = format_user_facing_error(err);
-    
+
     if let Some(backtrace) = err.backtrace() {
         output.push_str("\nBacktrace:\n");
         output.push_str(&format!("{:?}", backtrace));
     }
-    
+
     output
 }
 
@@ -2134,19 +2189,19 @@ pub fn format_debug_error(err: &anyhow::Error) -> String {
 #[cfg(test)]
 mod examples {
     use super::*;
-    
+
     /// 示例 1: 简单错误传播
     fn example_simple_propagation() -> AnyhowResult<()> {
         let data = std::fs::read_to_string("data.txt")
             .context("failed to read data file")?;
-        
+
         let parsed: serde_json::Value = serde_json::from_str(&data)
             .context("failed to parse JSON data")?;
-        
+
         println!("{:?}", parsed);
         Ok(())
     }
-    
+
     /// 示例 2: 选择性处理特定错误
     fn example_selective_handling() -> AnyhowResult<()> {
         match core::load_config("config.json") {
@@ -2165,41 +2220,41 @@ mod examples {
             }
         }
     }
-    
+
     /// 示例 3: 批量操作收集错误
     fn example_collect_errors(paths: &[&str]) -> AnyhowResult<Vec<Config>> {
         use anyhow::anyhow;
-        
+
         let mut configs = Vec::new();
         let mut errors = Vec::new();
-        
+
         for path in paths {
             match core::load_config(path) {
                 Ok(config) => configs.push(config),
                 Err(e) => errors.push((path, e)),
             }
         }
-        
+
         if !errors.is_empty() {
             let error_details: Vec<_> = errors
                 .iter()
                 .map(|(p, e)| format!("  - {}: {}", p, e))
                 .collect();
-            
+
             bail!(
                 "failed to load {} config files:\n{}",
                 errors.len(),
                 error_details.join("\n")
             );
         }
-        
+
         Ok(configs)
     }
-    
+
     /// 示例 4: 错误转换和适配
     fn example_error_adaptation() -> AnyhowResult<()> {
         let result: Result<(), core::CoreError> = core::load_config("test.json").map(|_| ());
-        
+
         // 转换为 anyhow 并添加上下文
         result
             .map_err(|e| {
@@ -2213,7 +2268,7 @@ mod examples {
                     _ => e.into(),
                 }
             })?;
-        
+
         Ok(())
     }
 }

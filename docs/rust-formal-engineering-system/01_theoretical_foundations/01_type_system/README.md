@@ -37,7 +37,7 @@ mindmap
 ## 与核心文档的关联
 
 | 本文档 | 核心文档 | 关系 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 本README | research_notes/type_theory/ | 索引/重定向 |
 
 [返回主索引](../../00_master_index.md)

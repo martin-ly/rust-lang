@@ -34,7 +34,7 @@
 ### Sprint完成情况
 
 | Sprint | 目标 | 状态 | 完成度 |
-|:---|:---|:---:|:---:|
+| :--- | :--- | :---: | :---: |
 | Sprint 1 | MIT + Stanford | ✅ | 100% |
 | Sprint 2 | CMU + 欧洲大学 | ✅ | 100% |
 | Sprint 3 | Ferrocene + Aeneas | ✅ | 100% |
@@ -44,7 +44,7 @@
 ### 对齐率变化
 
 | 来源级别 | 初始 | 当前 | 提升 |
-|:---|:---:|:---:|:---:|
+| :--- | :---: | :---: | :---: |
 | **P0 大学课程** | 85% | 98% | +13% |
 | **P1 权威机构** | 95% | 98% | +3% |
 | **P2 顶级会议** | 80% | 95% | +15% |
@@ -70,7 +70,7 @@
 **添加内容**:
 
 | 内容 | 数量 | 说明 |
-|:---|:---:|:---|
+| :--- | :---: | :--- |
 | MIT课程链接 | 2 | 6.826/6.858官网 |
 | 对齐表格 | 15+ 行 | Lab/Lecture对应 |
 | Spatial Safety定义 | 1 | 形式化定义 |
@@ -102,7 +102,7 @@
 **添加内容**:
 
 | 内容 | 数量 | 说明 |
-|:---|:---:|:---|
+| :--- | :---: | :--- |
 | CS242链接 | 1 | 官网链接 |
 | CS110L链接 | 1 | 官网链接 |
 | Curry-Howard对应表 | 9 行 | 完整对应 |
@@ -137,7 +137,7 @@
 **添加内容**:
 
 | 内容 | 数量 | 说明 |
-|:---|:---:|:---|
+| :--- | :---: | :--- |
 | Separation Logic对应 | 1 | 与Rust所有权 |
 | Hoare Triple对应 | 1 | `{P}C{Q}`形式化 |
 | Concurrent Separation Logic | 1 | 与Send/Sync |
@@ -168,7 +168,7 @@
 **添加内容**:
 
 | 大学 | 课程 | 对齐内容 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | ETH Zurich | Rust Programming (David Evangelista) | Ownership/Borrowing/Lifetimes |
 | Cambridge | Computer Science Tripos | Type Systems/Memory Management |
 | EPFL | Concurrent Programming | Send/Sync理论 |
@@ -191,7 +191,7 @@
 **对齐章节**:
 
 | FLS章节 | 内容 | 本文档对应 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Ch.15 Ownership | 所有权系统 | §所有权规则 |
 | Ch.15.4 Borrowing | 借用规则 | §借用规则 |
 | Ch.16 State Memory | 内存模型 | §内存安全 |
@@ -216,7 +216,7 @@
 **添加内容**:
 
 | 内容 | 数量 | 说明 |
-|:---|:---:|:---|
+| :--- | :---: | :--- |
 | CPV详解 | 1 | Characteristic Prophecy Variables |
 | borrow_generated_from | 1 | 借用来源关系 |
 | 函数式翻译 | 1 | Rust→纯函数式 |
@@ -238,7 +238,7 @@
 **对齐论文**:
 
 | 论文/工具 | 会议/机构 | 内容 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Patina | Microsoft Research | Rust形式化基础 |
 | Verus | POPL 2023 | Linear Ghost Types验证 |
 | Prusti | Viper Framework | 分离逻辑验证 |
@@ -260,7 +260,7 @@
 ### 按类别统计
 
 | 类别 | 数量 | 说明 |
-|:---|:---:|:---|
+| :--- | :---: | :--- |
 | **大学课程** | 6 | MIT/Stanford/CMU/ETH/Cambridge/EPFL |
 | **权威机构** | 4 | Ferrocene/Aeneas/RustBelt/MIRI |
 | **顶级会议论文** | 6+ | POPL/PLDI论文 |
@@ -271,7 +271,7 @@
 ### 文档更新统计
 
 | 文档路径 | 更新次数 | 新增内容 |
-|:---|:---:|:---|
+| :--- | :---: | :--- |
 | `formal_methods/ownership_model.md` | 5 | MIT/Stanford/CMU/Ferrocene/Aeneas/POPL |
 | `formal_methods/borrow_checker_proof.md` | 3 | MIT/CMU/Aeneas |
 | `formal_methods/lifetime_formalization.md` | 1 | CMU Regional Types |
@@ -285,7 +285,7 @@
 ### 每个对齐文档包含
 
 | 元素 | 要求 | 状态 |
-|:---|:---|:---:|
+| :--- | :--- | :---: |
 | 官方链接 | 课程/论文/工具官网 | ✅ 100% |
 | 对齐表格 | 结构化对应表 | ✅ 100% |
 | 形式化定义 | 数学公式/定理 | ✅ 95% |

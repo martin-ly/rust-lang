@@ -16,7 +16,7 @@
 ### 损坏链接统计
 
 | 问题类型 | 数量 | 占比 |
-|:---|:---:|:---:|
+| :--- | :---: | :---: |
 | **文件不存在** | 825 | 33.8% |
 | **锚点不存在** | 1,613 | 66.2% |
 | **总计** | **2,438** | **100%** |
@@ -145,7 +145,7 @@
 #### 07_project/ 缺失文件 (已归档)
 
 | 文件名 | 归档位置 | 修复方法 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | ONE_PAGE_SUMMARY_TEMPLATE.md | archive/process_reports/2026_02/project/ | 更新链接 |
 | RUST_RELEASE_TRACKING_CHECKLIST.md | archive/process_reports/2026_02/project/ | 更新链接 |
 | TASK_INDEX.md | archive/process_reports/2026_02/project/ | 更新链接 |
@@ -155,7 +155,7 @@
 #### research_notes/ 缺失文件 (已归档)
 
 | 文件名 | 归档位置 | 修复方法 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md | archive/process_reports/2026_02/ | 替换为FORMAL_PROOF_SYSTEM_GUIDE.md |
 | FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md | archive/process_reports/2026_02/ | 更新链接 |
 | RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md | archive/process_reports/2026_02/ | 替换为AUTHORITATIVE_ALIGNMENT_GUIDE.md |
@@ -164,7 +164,7 @@
 #### 路径错误
 
 | 错误路径 | 正确路径 | 修复文件 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | formal_methods/type_system_formalization.md | type_theory/type_system_foundations.md | 多个README |
 | formal_methods/async_formalization.md | formal_methods/async_state_machine.md | 05_guides/README |
 | PROJECT_STRUCTURE.md | PROJECT_ARCHITECTURE_GUIDE.md | 多个文件 |
@@ -172,7 +172,7 @@
 #### crates/ 示例链接
 
 | 错误路径 | 问题 | 修复方法 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | ../../../crates/c06_async/examples/00_async_basics.rs | 文件不存在 | 移除链接或创建示例 |
 
 ---
@@ -214,7 +214,7 @@
 ## 预期结果
 
 | 阶段 | 目标 | 预计修复链接数 |
-|:---|:---:|:---:|
+| :--- | :---: | :---: |
 | Phase 1 | 核心导航100%有效 | 50+ |
 | Phase 2 | 主题README 100%有效 | 100+ |
 | Phase 3 | 速查卡 100%有效 | 200+ |

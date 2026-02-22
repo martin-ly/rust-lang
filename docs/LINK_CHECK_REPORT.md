@@ -8,7 +8,7 @@
 ## 统计
 
 | 类别 | 数量 |
-|:---|:---:|
+| :--- | :---: |
 | 总链接数 | 13878 |
 | 有效链接 | 10513 |
 | 损坏链接 | 2438 |
@@ -20,7 +20,7 @@
 ### 锚点不存在 (1613个)
 
 | 源文件 | 链接文本 | 链接路径 | 问题 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | docs\README.md | 02_reference | `#-核心文档系统` | 同文件锚点不存在: #-核心文档系统 |
 | docs\README.md | 03_theory | `#-核心文档系统` | 同文件锚点不存在: #-核心文档系统 |
 | docs\README.md | 06_toolchain | `#-核心文档系统` | 同文件锚点不存在: #-核心文档系统 |
@@ -1638,7 +1638,7 @@
 ### 文件不存在 (825个)
 
 | 源文件 | 链接文本 | 链接路径 | 问题 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | docs\00_MASTER_INDEX.md | ONE_PAGE_SUMMARY_TEMPLATE | `./07_project/ONE_PAGE_SUMMARY_TEMPLATE.md` | 文件不存在: docs\07_project\ONE_PAGE_SUMMARY_TEMPLATE.md |
 | docs\00_MASTER_INDEX.md | FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02 | `./research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md` | 文件不存在: docs\research_notes\FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md |
 | docs\00_MASTER_INDEX.md | TOC_AND_CONTENT_DEEPENING_PLAN | `./research_notes/TOC_AND_CONTENT_DEEPENING_PLAN.md` | 文件不存在: docs\research_notes\TOC_AND_CONTENT_DEEPENING_PLAN.md |
@@ -2487,7 +2487,7 @@
 ## 源文件问题统计
 
 | 源文件 | 损坏链接数 |
-|:---|:---:|
+| :--- | :---: |
 | docs\research_notes\PROOF_INDEX.md | 68 |
 | docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 60 |
 | docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md | 53 |

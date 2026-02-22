@@ -32,7 +32,7 @@
 ### 1. docs/00_MASTER_INDEX.md (6个链接)
 
 | 原链接 | 修复后 |
-|:---|:---|
+| :--- | :--- |
 | FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md | FORMAL_PROOF_SYSTEM_GUIDE.md |
 | TOC_AND_CONTENT_DEEPENING_PLAN.md | 00_COMPREHENSIVE_SUMMARY.md |
 | 07_project/ONE_PAGE_SUMMARY_TEMPLATE.md | archive/process_reports/2026_02/project/ |
@@ -43,7 +43,7 @@
 ### 2. docs/DOCS_STRUCTURE_OVERVIEW.md (4个链接)
 
 | 原链接 | 修复后 |
-|:---|:---|
+| :--- | :--- |
 | RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md | AUTHORITATIVE_ALIGNMENT_GUIDE.md |
 | 07_project/TASK_INDEX.md | archive/process_reports/2026_02/project/ |
 | 07_project/MODULE_1.93_ADAPTATION_STATUS.md | archive/process_reports/2026_02/project/ |
@@ -52,13 +52,13 @@
 ### 3. docs/07_project/README.md (1个链接)
 
 | 原链接 | 修复后 |
-|:---|:---|
+| :--- | :--- |
 | DOCUMENTATION_THEME_ORGANIZATION_PLAN.md | archive/process_reports/2026_02/project/ |
 
 ### 4. docs/research_notes/README.md (3个链接)
 
 | 原链接 | 修复后 |
-|:---|:---|
+| :--- | :--- |
 | FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md | FORMAL_PROOF_SYSTEM_GUIDE.md |
 | RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md | AUTHORITATIVE_ALIGNMENT_GUIDE.md |
 | TOC_AND_CONTENT_DEEPENING_PLAN.md | 00_COMPREHENSIVE_SUMMARY.md |
@@ -150,7 +150,7 @@
 
 ### 编译验证
 
-```
+```text
 Finished dev profile [unoptimized + debuginfo] target(s) in 0.59s
 ```
 

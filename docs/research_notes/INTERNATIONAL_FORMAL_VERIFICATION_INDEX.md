@@ -13,7 +13,7 @@
 
 | 成果 | 机构/作者 | 年份 | 形式化范围 | 证明助手/工具 | 与本项目对应 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权、借用、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](./coq_skeleton/)（T-OW2/BR1/TY3 骨架）|
+| **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权、借用、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](./coq_skeleton/)（T-OW2/BR1/TY3 骨架） |
 | **Tree Borrows** | ETH (PLDI 2025) | 2025 | 借用模型、树结构、54% 更少拒绝 | Iris (Coq)、Rocq | borrow_checker_proof 演进；Distinguished Paper |
 | **RustBelt Meets Relaxed Memory** | MPI-SWS | 2020 | 松弛内存、Arc、原子操作 | Iris (Coq) | formal_methods Phase 4（部分） |
 | **Rust Distilled** | DBLP | - | 高层所有权、无生命周期 | - | ownership_model（高层部分） |

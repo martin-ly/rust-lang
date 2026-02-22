@@ -154,7 +154,7 @@
 #### 完整的 Curry-Howard 对应表
 
 | 逻辑 (Logic) | 类型理论 (Type Theory) | Rust 示例 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 命题 (Proposition) | 类型 (Type) | `T` |
 | 证明 (Proof) | 程序/值 (Program/Value) | `v: T` |
 | 蕴含 (A → B) | 函数类型 (Function) | `fn(A) -> B` |
@@ -385,7 +385,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 **内容对齐**:
 
 | ETH内容 | Rust概念 | 本文档对应 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Type System Basics | 类型系统基础 | §类型系统核心概念 |
 | Generics & Traits | 泛型与Trait | §示例3 (泛型类型) |
 | Type Inference | 类型推断 | §示例5 (类型推导与推断) |
@@ -404,7 +404,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 **内容对齐**:
 
 | Cambridge内容 | Rust概念 | 本文档对应 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Type Systems | 类型系统理论 | §理论基础 |
 | Simply Typed Lambda | 简单类型Lambda演算 | §类型理论的基础知识 |
 | System F | 系统F (多态) | §系统F (Polymorphic Lambda Calculus) |
@@ -426,7 +426,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 **内容对齐**:
 
 | EPFL内容 | Rust概念 | 本文档对应 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Type-Based Concurrency | 基于类型的并发 | §系统集成与实际应用 |
 | Send/Sync Traits | 线程安全trait | §与Trait系统的集成 |
 | Type Safety & Parallelism | 类型安全与并行 | §定理3 (类型安全) |
@@ -439,7 +439,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 ### 欧洲大学课程对比总结
 
 | 大学 | 核心侧重点 | 与本文档关联度 | 特色内容 |
-|:---|:---|:---:|:---|
+| :--- | :--- | :---: | :--- |
 | **ETH Zurich** | 类型基础、泛型、类型安全 | ⭐⭐⭐⭐⭐ | 实践导向，Curry-Howard |
 | **Cambridge** | 类型理论、形式化证明 | ⭐⭐⭐⭐⭐ | 理论基础，λ演算到系统F |
 | **EPFL** | 类型与并发安全 | ⭐⭐⭐⭐ | 并发理论，线程安全trait |
@@ -904,7 +904,7 @@ fn main() {
 ### Stanford CS242 课程参考
 
 | Stanford 内容 | 本文档位置 | 对齐状态 |
-|:---|:---|:---:|
+| :--- | :--- | :---: |
 | Lecture 6-10: Type Systems | §类型系统基础 | ✅ |
 | Lecture 11-15: Polymorphism | §泛型 | ✅ |
 | Lecture 16-20: Curry-Howard | §Curry-Howard 对应 | ✅ 已深化 |
