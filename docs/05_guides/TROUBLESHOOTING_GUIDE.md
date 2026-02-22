@@ -122,7 +122,7 @@ fn get_ref<'a>(s: &'a str) -> &'a str {
 
 **错误信息**:
 
-```
+```text
 error[E0308]: mismatched types
 ```
 
@@ -148,7 +148,7 @@ let x = "42".parse::<i32>().unwrap();
 
 **错误信息**:
 
-```
+```text
 thread 'main' panicked at 'index out of bounds'
 ```
 
@@ -263,7 +263,7 @@ cargo flamegraph --bin my_app
 
 **错误信息**:
 
-```
+```text
 error: timeout while waiting for connection
 ```
 
@@ -286,7 +286,7 @@ match timeout(Duration::from_secs(5), connect()).await {
 
 **错误信息**:
 
-```
+```text
 error: failed to resolve hostname
 ```
 
@@ -366,7 +366,7 @@ while retries > 0 {
 
 **错误信息**:
 
-```
+```text
 error: future cannot be sent between threads safely
 ```
 

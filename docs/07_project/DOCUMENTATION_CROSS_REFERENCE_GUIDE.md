@@ -172,7 +172,7 @@ docs/
 
 **关键交叉引用链**:
 
-```
+```text
 ownership_cheatsheet → ownership_model ↔ borrow_checker_proof ↔ lifetime_formalization
      ↓                      ↓                    ↓                      ↓
 UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
@@ -410,7 +410,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 #### 初学者路径
 
-```
+```text
 01_learning/LEARNING_PATH_PLANNING.md
     ↓
 02_reference/quick_reference/ownership_cheatsheet.md
@@ -428,7 +428,7 @@ crates/c01_ownership_borrow_scope/docs/
 
 #### 开发者路径
 
-```
+```text
 02_reference/quick_reference/ (按需选择速查卡)
     ↓
 05_guides/ (对应专题指南)
@@ -442,7 +442,7 @@ crates/*/examples/ (代码示例)
 
 #### 研究者路径
 
-```
+```text
 research_notes/00_COMPREHENSIVE_SUMMARY.md
     ↓
 research_notes/ARGUMENTATION_CHAIN_AND_FLOW.md
@@ -458,7 +458,7 @@ research_notes/CORE_THEOREMS_FULL_PROOFS.md
 
 #### 维护者路径
 
-```
+```text
 07_project/PROJECT_ARCHITECTURE_GUIDE.md
     ↓
 07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md
@@ -474,7 +474,7 @@ research_notes/CROSS_REFERENCE_INDEX.md
 
 #### 内存安全主题
 
-```
+```text
 ownership_cheatsheet → ownership_model → borrow_checker_proof → lifetime_formalization
        ↓                      ↓                    ↓                      ↓
 UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
@@ -482,7 +482,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 #### 并发编程主题
 
-```
+```text
 threads_concurrency_cheatsheet → async_patterns
        ↓                              ↓
 send_sync_formalization ←────→ async_state_machine
@@ -494,7 +494,7 @@ THREADS_CONCURRENCY_USAGE_GUIDE / ASYNC_PROGRAMMING_USAGE_GUIDE
 
 #### 类型系统主题
 
-```
+```text
 type_system → generics_cheatsheet
     ↓              ↓
 type_system_foundations → trait_system_formalization
@@ -506,7 +506,7 @@ ADVANCED_TOPICS_DEEP_DIVE
 
 #### 设计模式主题
 
-```
+```text
 design_patterns_cheatsheet
     ↓
 01_design_patterns_formal/ (23模式)

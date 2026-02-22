@@ -66,7 +66,7 @@
 
 ### 证明结构层次
 
-```
+```text
 公理 (Axiom) → 引理 (Lemma) → 定理 (Theorem) → 推论 (Corollary)
 ```
 
