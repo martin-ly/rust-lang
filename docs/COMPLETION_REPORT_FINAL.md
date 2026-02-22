@@ -131,7 +131,7 @@
 
 ### 编译验证
 
-```
+```text
 Finished dev profile [unoptimized + debuginfo] target(s) in 0.56s
 ```
 
@@ -148,7 +148,7 @@ Finished dev profile [unoptimized + debuginfo] target(s) in 0.56s
 
 ## 项目结构
 
-```
+```text
 docs/
 ├── 00_MASTER_INDEX.md              (主索引)
 ├── README.md                       (文档中心)

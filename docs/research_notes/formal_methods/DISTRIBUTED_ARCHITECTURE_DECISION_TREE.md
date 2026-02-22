@@ -1,241 +1,353 @@
 # 分布式架构选型决策树
 
-> **创建日期**: 2026-02-21
-> **最后更新**: 2026-02-21
-> **状态**: 🆕 新建
-> **对应任务**: P1-T11 / DT-3
+> **创建日期**: 2026-02-23
+> **最后更新**: 2026-02-23
+> **状态**: ✅ 新建 (Phase 1 Week 8)
+> **任务ID**: P1-W8-T1
 
 ---
 
-## 决策树全景
+## 决策树概览
 
-```text
-构建分布式系统?
-├── 需要事务一致性?
-│   ├── 强一致性要求 (ACID)?
-│   │   ├── 是 → 2PC/3PC (需外部协调器如Atomikos)
-│   │   │   ├── 短事务 (<1s) → 2PC
-│   │   │   └── 长事务或跨地域 → 3PC (避免协调器单点)
+```
+构建分布式系统？
+│
+├── 需要事务一致性？
+│   ├── 是 → 强一致性？
+│   │   ├── 是 → 2PC/3PC + 外部协调器
 │   │   └── 否 → 最终一致性
-│   │       ├── 长事务 (>30s)?
+│   │       ├── 长事务？
 │   │       │   ├── 是 → Saga模式
-│   │       │   │   ├── 需要中央协调? → 编排式Saga (Orchestration)
-│   │       │   │   │   ├── 推荐: Temporal/Cadence
-│   │       │   │   │   └── 流程复杂 → 状态机工作流
-│   │       │   │   └── 事件驱动自治? → 编制式Saga (Choreography)
-│   │       │   │       ├── 已有消息队列 → Kafka/RabbitMQ + 事件处理器
-│   │       │   │       └── 推荐: 事件溯源 + Saga
-│   │       │   └── 补偿策略选择
-│   │       │       ├── 向后补偿 → 标准Saga (推荐)
-│   │       │       └── 向前补偿 → 可交换更新 (幂等设计)
-│   │       └── 短事务?
+│   │       │   │   ├── 编排 → 协调器驱动 (Temporal/Cadence)
+│   │       │   │   └── 编制 → 事件驱动 (Kafka + 消费者)
+│   │       │   └── 补偿策略
+│   │       │       ├── 向后补偿 → 标准Saga
+│   │       │       └── 向前补偿 → 可交换更新
+│   │       └── 短事务？
 │   │           └── Outbox模式 + 消息代理
-│   │               ├── 高吞吐 → Kafka
-│   │               └── 可靠传递 → RabbitMQ/ActiveMQ
-│   └── 读写负载分离?
-│       ├── 是 → CQRS模式
-│       │   ├── 读模型延迟容忍?
-│       │   │   ├── 即时 (<100ms) → 同步CQRS + 2PC
-│       │   │   └── 可延迟 (>1s) → 异步CQRS + 事件溯源
-│       │   ├── 写操作复杂? → Event Sourcing (事件溯源)
-│   │       │   ├── 审计要求严格 → 必选Event Sourcing
-│   │       │   └── 状态重建性能敏感 → 快照优化
-│   │       └── 读模型多样性?
-│   │           ├── 多查询模式 → 多物化视图
-│   │           └── 搜索需求 → CQRS + Elasticsearch
-│       └── 否 → 统一模型 (传统CRUD)
-│           └── 考虑: 简单性优先，避免过度设计
-├── 容错要求高 (99.99%)?
-│   ├── 是 → 熔断器 + 舱壁 + 重试策略组合
-│   │   ├── 快速失败 → Circuit Breaker
-│   │   │   ├── 失败率阈值 → 50% (默认) 或自定义
-│   │   │   ├── 恢复探测 → Half-Open状态
-│   │   │   └── 实现: resilience4j / 自定义状态机
-│   │   ├── 资源隔离 → Bulkhead模式
-│   │   │   ├── 线程池隔离 → Hystrix风格
-│   │   │   └── 信号量隔离 → 轻量级
-│   │   └── 重试策略
-│   │       ├── 立即重试 (网络抖动) → 最多1次
-│   │       ├── 固定间隔 → 固定延迟 (如5s)
-│   │       ├── 线性退避 → 初始1s, 每次+1s
-│   │       └── 指数退避 → 初始1s, 每次×2, 上限60s
-│   └── 否 → 简单超时控制
-│       └── 固定超时 → 基于P99延迟
-├── 服务间通信模式?
-│   ├── 同步请求/响应?
-│   │   ├── 低延迟 (<10ms) → gRPC/HTTP2
-│   │   │   └── 需要流式? → gRPC Streaming
-│   │   └── 标准REST → HTTP/1.1 + JSON
-│   │       └── 缓存友好 → 配合Cache-Control
-│   └── 异步消息?
-│       ├── 点对点队列 → 任务分发
-│       │   └──  competing consumers → 工作队列
-│       ├── 发布订阅 → 事件广播
-│       │   └── 多订阅者 → Kafka分区
-│       └── 请求/回复异步 → 回调队列 + Correlation ID
-├── 数据存储策略?
-│   ├── 单一数据库?
-│   │   ├── 关系型 → PostgreSQL (推荐)
-│   │   └── NoSQL → MongoDB/DynamoDB
-│   └── 多存储 (Polyglot Persistence)?
-│       ├── 事务数据 → PostgreSQL
-│       ├── 缓存 → Redis
-│       ├── 搜索 → Elasticsearch
-│       └── 时序数据 → InfluxDB/TimescaleDB
-└── 服务发现?
-    ├── 集中式注册中心
-    │   ├── Consul → 健康检查 + KV存储
-    │   ├── Eureka → Netflix生态
-    │   └── etcd → Kubernetes原生
-    └── 去中心化
-        └──  gossip协议 → Serf/Hashicorp
+│   └── 否 → 无需事务
+│
+├── 读写负载分离？
+│   ├── 是 → CQRS模式
+│   │   ├── 同步更新 → 2PC
+│   │   └── 异步更新 → 事件溯源
+│   └── 否 → 统一模型
+│
+├── 容错要求高？
+│   ├── 是 → 熔断器 (Circuit Breaker)
+│   │   ├── 失败率阈值？
+│   │   │   ├── >50% → 激进熔断
+│   │   │   └── <50% → 保守熔断
+│   │   └── 恢复策略
+│   │       ├── 自动恢复 → 半开状态探测
+│   │       └── 手动恢复 → 管理API
+│   ├── 资源隔离 → Bulkhead模式
+│   └── 重试策略
+│       ├── 立即重试 → 简单循环
+│       ├── 固定间隔 → tokio::time::interval
+│       └── 指数退避 → backoff crate
+│
+└── 服务发现？
+    ├── 集中式 → Consul/etcd
+    │   ├── 健康检查
+    │   │   ├── HTTP检查
+    │   │   ├── TCP检查
+    │   │   └── 自定义脚本
+    │   └── 一致性要求
+    │       ├── CP → Consul RAFT
+    │       └── AP → etcd
+    └── 去中心化 → gossip协议
+        ├── 种子节点配置
+        └── 传播策略
+            ├── 反熵 → 周期性全同步
+            └── 谣言传播 → 事件驱动
 ```
 
 ---
 
-## 快速决策表
+## 详细决策路径
 
-### 按场景推荐
+### 路径1: Saga事务模式
 
-| 场景 | 推荐架构 | 关键模式 | 技术栈 |
-| :--- | :--- | :--- | :--- |
-| 电商订单 | Saga + CQRS | 编排式Saga, 异步CQRS | Temporal, Kafka, PostgreSQL |
-| 金融支付 | 强一致性优先 | 2PC + 补偿 | Atomikos, PostgreSQL |
-| 社交网络 | 最终一致性 | CQRS + Event Sourcing | Kafka, Cassandra, ES |
-| IoT数据 ingest | 高吞吐异步 | 编制式Saga | Kafka, TimescaleDB |
-| 微服务API网关 | 容错优先 | 熔断器 + 舱壁 | resilience4j, Redis |
+```rust
+// 决策条件: 长事务 + 最终一致性
+// Rust实现示例
+
+use std::future::Future;
+use std::pin::Pin;
+
+// Saga定义
+trait Saga<T, E> {
+    fn execute(&self) -> Pin<Box<dyn Future<Output = Result<T, E>> + '_>>;
+    fn compensate(&self) -> Pin<Box<dyn Future<Output = Result<(), E>> + '_>>;
+}
+
+// 编排式Saga (Orchestration)
+struct OrchestratedSaga {
+    steps: Vec<Box<dyn Saga<(), SagaError>>>,
+    compensations: Vec<Box<dyn Saga<(), SagaError>>>,
+}
+
+impl OrchestratedSaga {
+    async fn run(&self) -> Result<(), SagaError> {
+        let mut completed = 0;
+        for (i, step) in self.steps.iter().enumerate() {
+            match step.execute().await {
+                Ok(_) => completed += 1,
+                Err(e) => {
+                    // 补偿已完成的步骤
+                    for j in (0..completed).rev() {
+                        self.compensations[j].compensate().await?;
+                    }
+                    return Err(e);
+                }
+            }
+        }
+        Ok(())
+    }
+}
+
+// 编制式Saga (Choreography) - 事件驱动
+struct ChoreographedSaga {
+    event_bus: EventBus,
+}
+
+impl ChoreographedSaga {
+    async fn handle_event(&self, event: DomainEvent) {
+        match event {
+            DomainEvent::OrderCreated(order) => {
+                // 发布ReserveInventory事件
+                self.event_bus.publish(Event::ReserveInventory(order)).await;
+            }
+            DomainEvent::InventoryReserved(order) => {
+                // 发布ProcessPayment事件
+                self.event_bus.publish(Event::ProcessPayment(order)).await;
+            }
+            DomainEvent::PaymentFailed(order) => {
+                // 发布ReleaseInventory事件 (补偿)
+                self.event_bus.publish(Event::ReleaseInventory(order)).await;
+            }
+            // ...
+        }
+    }
+}
+```
+
+**适用场景**:
+- 电商订单处理
+- 金融转账
+- 库存扣减+支付
+
+**Rust crates**:
+- `saga` - Saga模式实现
+- `temporal-sdk` - Temporal工作流
+- `kafka` - 事件驱动编制
 
 ---
 
-## Rust 实现映射
-
-### Saga 实现
+### 路径2: CQRS模式
 
 ```rust
-// 编排式 Saga 示例
-#[derive(Clone)]
-struct OrderSaga {
-    steps: Vec<Box<dyn SagaStep>>,
-    compensations: Vec<Box<dyn CompensationAction>>,
-}
+// 决策条件: 读写负载分离 + 复杂查询
 
-#[async_trait]
-trait SagaStep {
-    async fn execute(&self, ctx: &SagaContext) -> Result<(), SagaError>;
-}
-
-#[async_trait]
-trait CompensationAction {
-    async fn compensate(&self, ctx: &SagaContext) -> Result<(), CompensateError>;
-}
-```
-
-### Circuit Breaker 实现
-
-```rust
-use std::sync::atomic::{AtomicU32, Ordering};
-use std::time::{Duration, Instant};
-
-enum CircuitState {
-    Closed,           // 正常
-    Open(Instant),    // 熔断，记录恢复时间
-    HalfOpen,         // 探测
-}
-
-struct CircuitBreaker {
-    state: std::sync::Mutex<CircuitState>,
-    failure_count: AtomicU32,
-    failure_threshold: u32,
-    timeout: Duration,
-}
-```
-
-### CQRS 实现
-
-```rust
-// Command Side
+// 命令端 (写模型)
 struct OrderCommandHandler {
-    event_store: Box<dyn EventStore>,
+    event_store: EventStore,
 }
 
 impl OrderCommandHandler {
-    async fn handle_create_order(&self, cmd: CreateOrder) -> Result<Vec<Event>, Error> {
-        let order = Order::create(cmd)?;
-        let events = order.uncommitted_events();
-        self.event_store.append(events.clone()).await?;
-        Ok(events)
+    async fn create_order(&self, cmd: CreateOrder) -> Result<OrderId, Error> {
+        let order = Order::new(cmd)?;
+        let events = order.into_events();
+        self.event_store.append(events).await?;
+        Ok(order.id())
     }
 }
 
-// Query Side
+// 查询端 (读模型)
 struct OrderQueryHandler {
-    read_model: Box<dyn ReadModel>,
+    read_db: ReadDatabase,
 }
 
 impl OrderQueryHandler {
-    async fn get_order(&self, id: OrderId) -> Option<OrderView> {
-        self.read_model.get(id).await
+    async fn get_order_summary(&self, id: OrderId) -> Result<OrderSummary, Error> {
+        // 优化的读模型，直接查询物化视图
+        self.read_db.query("SELECT * FROM order_summary WHERE id = ?", id).await
+    }
+}
+
+// 投影器 - 同步读写模型
+struct OrderProjector;
+
+impl Projector for OrderProjector {
+    fn project(&self, event: &Event) -> Vec<SqlQuery> {
+        match event {
+            Event::OrderCreated(e) => vec![
+                sql!("INSERT INTO order_summary (id, status, total) VALUES (?, ?, ?)",
+                     e.id, "pending", e.total)
+            ],
+            Event::OrderPaid(e) => vec![
+                sql!("UPDATE order_summary SET status = ? WHERE id = ?",
+                     "paid", e.id)
+            ],
+            // ...
+        }
     }
 }
 ```
 
+**适用场景**:
+- 高并发读场景
+- 复杂报表查询
+- 事件溯源系统
+
+**Rust crates**:
+- `cqrs` - CQRS框架
+- `eventstore` - EventStoreDB客户端
+- `sqlx` - 异步SQL
+
 ---
 
-## 决策路径示例
+### 路径3: 熔断器模式
 
-### 示例 1: 电商订单系统
+```rust
+// 决策条件: 容错要求高 + 防止级联故障
 
-```text
-需要事务一致性? 是 (订单创建涉及库存、支付、物流)
-  └─> 强一致性? 否 (允许短暂不一致)
-      └─> 长事务? 是 (支付可能耗时数分钟)
-          └─> 需要中央协调? 是 (流程复杂)
-              └─> 推荐: 编排式 Saga + Temporal
+use std::sync::atomic::{AtomicU8, Ordering};
+use std::time::{Duration, Instant};
+
+enum CircuitState {
+    Closed,      // 正常，请求通过
+    Open,        // 熔断，快速失败
+    HalfOpen,    // 半开，试探性请求
+}
+
+struct CircuitBreaker {
+    state: AtomicU8,
+    failure_count: AtomicUsize,
+    success_count: AtomicUsize,
+    last_failure_time: Mutex<Option<Instant>>,
+    config: CircuitConfig,
+}
+
+struct CircuitConfig {
+    failure_threshold: usize,      // 熔断阈值
+    success_threshold: usize,      // 恢复阈值
+    timeout_duration: Duration,    // 熔断持续时间
+}
+
+impl CircuitBreaker {
+    async fn call<F, T, E>(&self, f: F) -> Result<T, CircuitError<E>>
+    where
+        F: Future<Output = Result<T, E>>,
+    {
+        match self.state() {
+            CircuitState::Open => {
+                // 检查是否应该进入半开状态
+                if self.should_attempt_reset() {
+                    self.set_state(CircuitState::HalfOpen);
+                } else {
+                    return Err(CircuitError::Open);
+                }
+            }
+            CircuitState::HalfOpen => {
+                // 限制并发试探请求
+                if !self.acquire_half_open_slot() {
+                    return Err(CircuitError::Open);
+                }
+            }
+            CircuitState::Closed => {}
+        }
+
+        // 执行实际请求
+        match f.await {
+            Ok(result) => {
+                self.on_success();
+                Ok(result)
+            }
+            Err(e) => {
+                self.on_failure();
+                Err(CircuitError::Inner(e))
+            }
+        }
+    }
+
+    fn on_success(&self) {
+        match self.state() {
+            CircuitState::HalfOpen => {
+                let success = self.success_count.fetch_add(1, Ordering::SeqCst);
+                if success + 1 >= self.config.success_threshold {
+                    self.set_state(CircuitState::Closed);
+                    self.failure_count.store(0, Ordering::SeqCst);
+                }
+            }
+            CircuitState::Closed => {
+                self.failure_count.store(0, Ordering::SeqCst);
+            }
+            _ => {}
+        }
+    }
+
+    fn on_failure(&self) {
+        let failures = self.failure_count.fetch_add(1, Ordering::SeqCst);
+        *self.last_failure_time.lock().unwrap() = Some(Instant::now());
+        
+        if failures + 1 >= self.config.failure_threshold {
+            self.set_state(CircuitState::Open);
+        }
+    }
+}
 ```
 
-**架构**:
+**适用场景**:
+- 微服务调用
+- 外部API调用
+- 数据库访问
 
-- Saga协调器: Temporal
-- 命令端: Actix-web + PostgreSQL
-- 查询端: Read model in Redis
-- 事件总线: Kafka
+**Rust crates**:
+- `resilience4j` - 熔断器实现
+- `tokio-circuit-breaker` - Tokio集成
+- `backoff` - 重试策略
 
-### 示例 2: 实时数据分析
+---
 
-```text
-需要事务一致性? 否 (纯分析场景)
-  └─> 容错要求高? 是 (99.9%可用性)
-      └─> 推荐: 熔断器 + 舱壁 + 异步处理
+## 决策矩阵
+
+| 需求特征 | 推荐模式 | 一致性 | 复杂度 | 延迟 |
+| :--- | :--- | :--- | :--- | :--- |
+| 强一致性 + 短事务 | 2PC | 强 | 高 | 高 |
+| 最终一致 + 长事务 | Saga | 最终 | 中 | 低 |
+| 读写分离 + 复杂查询 | CQRS | 最终 | 高 | 低(读) |
+| 高可用 + 容错 | 熔断器 | - | 低 | 低 |
+| 资源隔离 | Bulkhead | - | 中 | 低 |
+| 服务发现(CP) | Consul | - | 中 | 中 |
+| 服务发现(AP) | Gossip | - | 中 | 低 |
+
+---
+
+## 组合模式
+
 ```
+复杂分布式系统通常组合多个模式:
 
-**架构**:
-
-- 数据摄取: Kafka
-- 处理: 自研Rust stream processor
-- 熔断: 自定义实现
-- 存储: TimescaleDB
-
----
-
-## 相关模式
-
-| 模式 | 解决的问题 | 组合建议 |
-| :--- | :--- | :--- |
-| Saga | 长事务一致性 | + Outbox (防丢消息) + Idempotent Consumer |
-| CQRS | 读写负载分离 | + Event Sourcing (审计) + 物化视图缓存 |
-| Circuit Breaker | 级联故障防护 | + 重试 + 降级 (Fallback) |
-| Bulkhead | 资源隔离 | + 线程池隔离 + 队列限流 |
-
----
-
-## 相关文档
-
-- [分布式模式形式化](../../coq_skeleton/DISTRIBUTED_PATTERNS.v)
-- [Saga详解](../../software_design_theory/04_compositional_engineering/)
-- [工作流概念族](./WORKFLOW_CONCEPT_MINDMAP.md)
-- [验证工具对比](./VERIFICATION_TOOLS_MATRIX.md)
+示例: 电商订单系统
+├── 订单服务
+│   ├── Saga (订单流程)
+│   ├── 熔断器 (调用支付服务)
+│   └── 重试 (网络超时)
+├── 商品服务
+│   ├── CQRS (商品搜索)
+│   └── 缓存 (Redis)
+├── 支付服务
+│   ├── 2PC (银行接口)
+│   └── 幂等性 (防重)
+└── 基础设施
+    ├── Consul (服务发现)
+    └── Bulkhead (资源隔离)
+```
 
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**对应任务**: P1-T11, DT-3 - 分布式架构选型决策树
+**最后更新**: 2026-02-23
+**状态**: ✅ 已完成 - 分布式架构选型决策树

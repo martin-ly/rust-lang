@@ -368,9 +368,9 @@
 
 | 资料 | 链接 | 用途 |
 | :--- | :--- | :--- |
-| RustBelt | https://plv.mpi-sws.org/rustbelt/ | 对标参考 |
-| Aeneas | https://github.com/AeneasVerif/aeneas | 工具对接 |
-| Iris | https://iris-project.org/ | 分离逻辑 |
+| RustBelt | <https://plv.mpi-sws.org/rustbelt/> | 对标参考 |
+| Aeneas | <https://github.com/AeneasVerif/aeneas> | 工具对接 |
+| Iris | <https://iris-project.org/> | 分离逻辑 |
 | Tree Borrows | PLDI 2025 | 借用模型更新 |
 
 ---

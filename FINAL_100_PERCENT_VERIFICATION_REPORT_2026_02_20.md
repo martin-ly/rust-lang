@@ -29,7 +29,7 @@
 
 ### 1. 编译验证 ✅
 
-```
+```text
 Finished `dev` profile [unoptimized + debuginfo] target(s) in 37.50s
 ```
 

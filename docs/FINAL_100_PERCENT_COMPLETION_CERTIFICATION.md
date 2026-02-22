@@ -207,7 +207,7 @@
 
 ### 编译验证
 
-```
+```text
 Finished `dev` profile [unoptimized + debuginfo] target(s) in 12.56s
 ```
 
