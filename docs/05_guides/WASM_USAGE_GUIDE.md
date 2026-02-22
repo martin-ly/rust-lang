@@ -34,6 +34,12 @@
     - [1. 减小二进制大小](#1-减小二进制大小)
     - [2. 使用 wasm-opt](#2-使用-wasm-opt)
     - [3. 避免不必要的分配](#3-避免不必要的分配)
+  - [使用场景](#使用场景)
+    - [场景1: Web 前端开发](#场景1-web-前端开发)
+    - [场景2: 跨平台桌面应用](#场景2-跨平台桌面应用)
+    - [场景3: 服务端 WASM (Edge Computing)](#场景3-服务端-wasm-edge-computing)
+    - [场景4: 插件系统](#场景4-插件系统)
+  - [形式化链接](#形式化链接)
   - [📚 相关文档](#-相关文档)
 
 ---
@@ -320,7 +326,9 @@ pub fn process(data: &str) -> String {
 ## 使用场景
 
 ### 场景1: Web 前端开发
+
 在浏览器中使用 Rust 替代 JavaScript：
+
 ```rust
 // 使用 wasm-bindgen 导出函数给 JS 调用
 // 使用 web-sys 操作 DOM
@@ -328,19 +336,25 @@ pub fn process(data: &str) -> String {
 ```
 
 ### 场景2: 跨平台桌面应用
+
 使用 WASM 构建跨平台应用：
+
 - 使用 Tauri 或 Electron 包装 WASM 模块
 - 共享 Rust 核心逻辑
 - 参考 [C12 WASM 完整文档](../../crates/c12_wasm/README.md)
 
 ### 场景3: 服务端 WASM (Edge Computing)
+
 在边缘节点运行 WASM：
+
 - 轻量级、快速启动
 - 安全的沙箱环境
 - 结合 [EMBEDDED_RUST_GUIDE.md](./EMBEDDED_RUST_GUIDE.md) 进行边缘部署
 
 ### 场景4: 插件系统
+
 构建支持 WASM 插件的应用：
+
 - 宿主程序使用 Rust/C++/其他语言
 - 插件使用 Rust 编译为 WASM
 - 安全的插件隔离机制

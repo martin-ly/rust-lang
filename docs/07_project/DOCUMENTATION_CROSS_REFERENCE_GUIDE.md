@@ -39,7 +39,15 @@
     - [速查卡 ↔ 研究笔记映射](#速查卡--研究笔记映射)
   - [🧭 导航指南](#-导航指南)
     - [按角色导航](#按角色导航)
+      - [初学者路径](#初学者路径)
+      - [开发者路径](#开发者路径)
+      - [研究者路径](#研究者路径)
+      - [维护者路径](#维护者路径)
     - [按主题导航](#按主题导航)
+      - [内存安全主题](#内存安全主题)
+      - [并发编程主题](#并发编程主题)
+      - [类型系统主题](#类型系统主题)
+      - [设计模式主题](#设计模式主题)
     - [快速查找路径](#快速查找路径)
   - [🌐 文档依赖图](#-文档依赖图)
     - [层次依赖](#层次依赖)
@@ -48,7 +56,14 @@
     - [验证清单](#验证清单)
     - [链接完整性检查](#链接完整性检查)
   - [最佳实践](#最佳实践)
+    - [1. 使用相对路径](#1-使用相对路径)
+    - [2. 提供描述性链接文本](#2-提供描述性链接文本)
+    - [3. 维护链接完整性](#3-维护链接完整性)
+    - [4. 添加交叉引用到速查卡](#4-添加交叉引用到速查卡)
+    - [5. 添加交叉引用到指南](#5-添加交叉引用到指南)
   - [📚 相关资源](#-相关资源)
+    - [核心交叉引用文档](#核心交叉引用文档)
+    - [快速入口](#快速入口)
 
 ---
 
@@ -156,6 +171,7 @@ docs/
 | **思维表征** | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) §2 | ←→ [ownership_model](../research_notes/formal_methods/ownership_model.md) ←→ [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) §1 |
 
 **关键交叉引用链**:
+
 ```
 ownership_cheatsheet → ownership_model ↔ borrow_checker_proof ↔ lifetime_formalization
      ↓                      ↓                    ↓                      ↓
@@ -393,6 +409,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 ### 按角色导航
 
 #### 初学者路径
+
 ```
 01_learning/LEARNING_PATH_PLANNING.md
     ↓
@@ -410,6 +427,7 @@ crates/c01_ownership_borrow_scope/docs/
 ```
 
 #### 开发者路径
+
 ```
 02_reference/quick_reference/ (按需选择速查卡)
     ↓
@@ -423,6 +441,7 @@ crates/*/examples/ (代码示例)
 ```
 
 #### 研究者路径
+
 ```
 research_notes/00_COMPREHENSIVE_SUMMARY.md
     ↓
@@ -438,6 +457,7 @@ research_notes/CORE_THEOREMS_FULL_PROOFS.md
 ```
 
 #### 维护者路径
+
 ```
 07_project/PROJECT_ARCHITECTURE_GUIDE.md
     ↓
@@ -453,6 +473,7 @@ research_notes/CROSS_REFERENCE_INDEX.md
 ### 按主题导航
 
 #### 内存安全主题
+
 ```
 ownership_cheatsheet → ownership_model → borrow_checker_proof → lifetime_formalization
        ↓                      ↓                    ↓                      ↓
@@ -460,6 +481,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 ```
 
 #### 并发编程主题
+
 ```
 threads_concurrency_cheatsheet → async_patterns
        ↓                              ↓
@@ -471,6 +493,7 @@ THREADS_CONCURRENCY_USAGE_GUIDE / ASYNC_PROGRAMMING_USAGE_GUIDE
 ```
 
 #### 类型系统主题
+
 ```
 type_system → generics_cheatsheet
     ↓              ↓
@@ -482,6 +505,7 @@ ADVANCED_TOPICS_DEEP_DIVE
 ```
 
 #### 设计模式主题
+
 ```
 design_patterns_cheatsheet
     ↓
@@ -518,7 +542,7 @@ graph TB
         TT[type_theory/]
         SDT[software_design_theory/]
     end
-    
+
     subgraph 交叉层[交叉层: 论证框架]
         SUM[00_COMPREHENSIVE_SUMMARY]
         ARG[ARGUMENTATION_CHAIN_AND_FLOW]
@@ -526,42 +550,42 @@ graph TB
         PROOF[PROOF_INDEX]
         HIER[HIERARCHICAL_MAPPING_AND_SUMMARY]
     end
-    
+
     subgraph 应用层[应用层: 速查与指南]
         CHEATS[02_reference/quick_reference/]
         GUIDES[05_guides/]
         THINK[04_thinking/]
     end
-    
+
     subgraph 项目层[项目层: 元文档]
         PROJ[07_project/]
         MASTER[00_MASTER_INDEX]
     end
-    
+
     %% 依赖关系
     FM --> TT
     FM --> SDT
     TT --> SDT
-    
+
     FM --> CROSS
     TT --> CROSS
     SDT --> CROSS
-    
+
     CROSS --> SUM
     CROSS --> ARG
     CROSS --> PROOF
     CROSS --> HIER
-    
+
     SUM --> CHEATS
     SUM --> GUIDES
     ARG --> THINK
-    
+
     CHEATS --> GUIDES
     GUIDES --> PROJ
     THINK --> PROJ
-    
+
     PROJ --> MASTER
-    
+
     style CROSS fill:#f9f,stroke:#333,stroke-width:4px
     style MASTER fill:#bbf,stroke:#333,stroke-width:4px
 ```
@@ -645,23 +669,23 @@ struct LinkValidator {
             ("lifetime_formalization", "borrow_checker_proof"),
             ("async_state_machine", "pin_self_referential"),
             ("async_state_machine", "send_sync_formalization"),
-            
+
             // formal_methods ↔ type_theory 双向链接
             ("formal_methods/lifetime", "type_theory/lifetime"),
             ("ownership_model", "type_system_foundations"),
-            
+
             // 速查卡 ↔ 研究笔记 双向链接
             ("ownership_cheatsheet", "ownership_model"),
             ("type_system", "type_system_foundations"),
             ("async_patterns", "async_state_machine"),
             ("threads_concurrency", "send_sync_formalization"),
-            
+
             // 指南 ↔ 研究笔记 双向链接
             ("ASYNC_PROGRAMMING_USAGE_GUIDE", "async_state_machine"),
             ("THREADS_CONCURRENCY_USAGE_GUIDE", "send_sync_formalization"),
             ("DESIGN_PATTERNS_USAGE_GUIDE", "01_design_patterns_formal"),
         ];
-        
+
         ValidationReport {
             total: checks.len(),
             passed: checks.len(), // 全部通过
@@ -715,6 +739,7 @@ struct LinkValidator {
 ### 4. 添加交叉引用到速查卡
 
 每个速查卡应包含"相关资源"部分，链接到：
+
 - 对应指南
 - 对应研究笔记
 - 相关速查卡
@@ -723,6 +748,7 @@ struct LinkValidator {
 ### 5. 添加交叉引用到指南
 
 每个指南应包含"形式化方法"部分，链接到：
+
 - 对应形式化文档
 - 证明索引
 - 思维表征
@@ -752,6 +778,6 @@ struct LinkValidator {
 
 ---
 
-**报告日期**: 2026-02-20  
-**维护者**: Rust 项目推进团队  
+**报告日期**: 2026-02-20
+**维护者**: Rust 项目推进团队
 **状态**: ✅ **已完成** - 含完整跨文档映射网络 (555+ 链接、29 概念等价定义、144 定理引用)

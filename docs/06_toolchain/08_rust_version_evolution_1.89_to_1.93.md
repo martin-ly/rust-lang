@@ -96,7 +96,7 @@
 pub mod linker_evolution {
     /// Rust 1.90 之前：使用系统默认链接器
     /// Rust 1.90+：默认使用 LLD（Linux x86_64）
-    /// 
+    ///
     /// .cargo/config.toml 配置演进：
     pub const CARGO_CONFIG_1_90: &str = r#"
 # Rust 1.90+ 默认使用 LLD
@@ -110,14 +110,14 @@ rustflags = ["-C", "link-arg=-fuse-ld=gold"]
 /// 1.91 悬垂指针 lint 演进
 pub mod dangling_pointer_lint_evolution {
     /// Rust 1.91 新增 dangling_pointers_from_locals lint (warn-by-default)
-    /// 
+    ///
     /// ❌ 会触发 lint 警告：
     #[allow(dead_code)]
     fn bad_pointer_return() -> *const i32 {
         let x = 42;
         &x as *const i32  // 警告：返回局部变量的指针
     }
-    
+
     /// ✅ 正确做法：
     fn good_pointer_return() -> Box<i32> {
         Box::new(42)
@@ -129,7 +129,7 @@ pub mod never_type_lint_evolution {
     /// Rust 1.92 将以下 lint 从 warn 提升为 deny：
     /// - never_type_fallback_flowing_into_unsafe
     /// - dependency_on_unit_never_type_fallback
-    
+
     /// 示例：正确处理 Never 类型
     pub fn handle_never_type(result: Result<i32, !>) -> i32 {
         // 由于 Err 类型是 !，匹配是全面的
@@ -143,7 +143,7 @@ pub mod never_type_lint_evolution {
 /// 1.93 API 演进示例
 pub mod api_evolution {
     use std::collections::VecDeque;
-    
+
     /// 1.93 前：手动实现条件弹出
     pub fn old_pop_front_if<T>(deque: &mut VecDeque<T>, pred: impl Fn(&T) -> bool) -> Option<T> {
         if deque.front().map_or(false, |v| pred(v)) {
@@ -152,7 +152,7 @@ pub mod api_evolution {
             None
         }
     }
-    
+
     /// 1.93+：使用原生 pop_front_if
     pub fn new_pop_front_if<T>(deque: &mut VecDeque<T>) {
         // ✅ 直接使用方法
@@ -163,29 +163,29 @@ pub mod api_evolution {
 /// 1.89→1.93 累积变更代码对比
 pub mod cumulative_changes {
     use std::mem::MaybeUninit;
-    
+
     /// 1.89：基础 MaybeUninit 使用
     pub fn init_array_1_89() -> [i32; 5] {
         let mut arr: [MaybeUninit<i32>; 5] = unsafe {
             MaybeUninit::uninit().assume_init()
         };
-        
+
         for i in 0..5 {
             arr[i] = MaybeUninit::new(i as i32);
         }
-        
+
         // 需要手动 transmute
         unsafe { std::mem::transmute(arr) }
     }
-    
+
     /// 1.93+：使用新 API 简化
     pub fn init_array_1_93() -> [i32; 5] {
         let src = [0, 1, 2, 3, 4];
         let mut dst = [MaybeUninit::<i32>::uninit(); 5];
-        
+
         // ✅ 使用 write_copy_of_slice
         MaybeUninit::write_copy_of_slice(&mut dst, &src);
-        
+
         unsafe { std::mem::transmute_copy::<_, [i32; 5]>(&dst) }
     }
 }
@@ -203,16 +203,16 @@ macro_rules! version_aware {
         {
             #[cfg(rustc_1_90)]
             { $e190 }
-            
+
             #[cfg(rustc_1_91)]
             { $e191 }
-            
+
             #[cfg(rustc_1_92)]
             { $e192 }
-            
+
             #[cfg(rustc_1_93)]
             { $e193 }
-            
+
             #[cfg(not(any(rustc_1_90, rustc_1_91, rustc_1_92, rustc_1_93)))]
             { compile_error!("Unsupported Rust version") }
         }
@@ -232,29 +232,29 @@ impl MigrationChecker {
             to_version: to,
         }
     }
-    
+
     /// 获取迁移步骤
     pub fn migration_steps(&self) -> Vec<&'static str> {
         let mut steps = Vec::new();
-        
+
         // 1.89 → 1.90
         if self.from_version < (1, 90) && self.to_version >= (1, 90) {
             steps.push("检查 LLD 链接器兼容性");
             steps.push("更新 Cargo.toml 使用 workspace 发布");
         }
-        
+
         // 1.90 → 1.91
         if self.from_version < (1, 91) && self.to_version >= (1, 91) {
             steps.push("修复 dangling_pointers_from_locals 警告");
             steps.push("检查 Windows ARM64 目标支持");
         }
-        
+
         // 1.91 → 1.92
         if self.from_version < (1, 92) && self.to_version >= (1, 92) {
             steps.push("处理 Never 类型 lint 提升");
             steps.push("准备 musl 1.2.5 升级");
         }
-        
+
         // 1.92 → 1.93
         if self.from_version < (1, 93) && self.to_version >= (1, 93) {
             steps.push("修复 deref_nullptr deny lint");
@@ -263,7 +263,7 @@ impl MigrationChecker {
             steps.push("检查 offset_of! 类型约束");
             steps.push("迁移到新 API（MaybeUninit, VecDeque 等）");
         }
-        
+
         steps
     }
 }
@@ -271,12 +271,12 @@ impl MigrationChecker {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_migration_steps() {
         let checker = MigrationChecker::new((1, 89), (1, 93));
         let steps = checker.migration_steps();
-        
+
         assert!(steps.len() >= 8);
         assert!(steps.iter().any(|s| s.contains("LLD")));
         assert!(steps.iter().any(|s| s.contains("dangling")));

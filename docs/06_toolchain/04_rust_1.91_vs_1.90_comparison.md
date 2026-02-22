@@ -317,7 +317,7 @@ pub fn parse_config_v190(config_data: &str) -> Result<Vec<(String, String)>, Box
     let cursor = Cursor::new(config_data);
     let reader = BufReader::new(cursor);
     let mut config = Vec::new();
-    
+
     for line in reader.lines() {
         let line = line?;
         // 使用 skip_while 跳过空白
@@ -327,12 +327,12 @@ pub fn parse_config_v190(config_data: &str) -> Result<Vec<(String, String)>, Box
             .take_while(|&b| b != b'#')  // 跳过注释
             .map(|b| b as char)
             .collect();
-        
+
         if let Some((key, value)) = trimmed.split_once('=') {
             config.push((key.trim().to_string(), value.trim().to_string()));
         }
     }
-    
+
     Ok(config)
 }
 
@@ -358,17 +358,17 @@ pub mod const_context {
         max_items: 100,
         timeout_ms: 5000,
     };
-    
+
     pub const CONFIG_REF: &Config = &CONFIG;  // ✅ Rust 1.91+
     pub const MAX_ITEMS_REF: &usize = &CONFIG.max_items;  // ✅ Rust 1.91+
     pub const EFFECTIVE_TIMEOUT: usize = *CONFIG_REF.timeout_ms_ref();  // ✅ Rust 1.91+
-    
+
     #[derive(Debug, Clone, Copy)]
     pub struct Config {
         pub max_items: usize,
         pub timeout_ms: usize,
     }
-    
+
     impl Config {
         pub const fn timeout_ms_ref(&self) -> &usize {
             &self.timeout_ms
@@ -384,18 +384,18 @@ pub mod lint_examples {
         let x = 42;
         &x as *const i32  // 警告：返回局部变量的指针
     }
-    
+
     /// ✅ 正确处理：使用 Box
     fn good_example_box() -> Box<i32> {
         Box::new(42)
     }
-    
+
     /// ✅ 正确处理：使用静态变量
     fn good_example_static() -> &'static i32 {
         static VALUE: i32 = 42;
         &VALUE
     }
-    
+
     /// ✅ 正确处理：使用引用而非原始指针
     fn good_example_reference() -> i32 {
         let x = 42;
@@ -445,24 +445,24 @@ tokio = "1.0"
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_config_parsing() {
         let config = r#"
             # 服务器配置
             host = localhost
             port = 8080
-            
+
             # 数据库配置
             db_host = db.example.com
             db_port = 5432
         "#;
-        
+
         let result = parse_config_v190(config).unwrap();
         assert_eq!(result.len(), 4);
         assert!(result.contains(&("host".to_string(), "localhost".to_string())));
     }
-    
+
     #[test]
     fn test_validate_data() {
         let valid = vec![1, 2, 3, 4, 5];
@@ -472,7 +472,7 @@ mod tests {
             }
             ControlFlow::Break(_) => panic!("Should not fail"),
         }
-        
+
         let invalid = vec![1, -2, 3];
         match validate_data_v191(&invalid) {
             ControlFlow::Break(msg) => {
@@ -481,11 +481,11 @@ mod tests {
             ControlFlow::Continue(_) => panic!("Should fail"),
         }
     }
-    
+
     #[test]
     fn test_const_context() {
         use const_context::*;
-        
+
         assert_eq!(CONFIG.max_items, 100);
         assert_eq!(*CONFIG_REF.max_items_ref(), 100);
         assert_eq!(*MAX_ITEMS_REF, 100);
@@ -509,15 +509,15 @@ pub fn check_rust_version(min_version: &str) -> Result<(), String> {
         .args(["--version"])
         .output()
         .map_err(|e| format!("Failed to run rustc: {}", e))?;
-    
+
     let version = String::from_utf8_lossy(&output.stdout);
     println!("Detected Rust version: {}", version.trim());
-    
+
     // 简单版本检查（实际应用中应使用语义化版本比较）
     if !version.contains("1.90") && !version.contains("1.91") && !version.contains("1.92") && !version.contains("1.93") {
         return Err(format!("Requires Rust {}, found: {}", min_version, version.trim()));
     }
-    
+
     Ok(())
 }
 
@@ -527,12 +527,12 @@ pub fn run_cargo_check() -> Result<(), String> {
         .args(["check", "--all-targets", "--all-features"])
         .output()
         .map_err(|e| format!("Failed to run cargo check: {}", e))?;
-    
+
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
         return Err(format!("cargo check failed:\n{}", stderr));
     }
-    
+
     println!("✅ cargo check passed");
     Ok(())
 }
@@ -543,12 +543,12 @@ pub fn run_tests() -> Result<(), String> {
         .args(["test", "--all"])
         .output()
         .map_err(|e| format!("Failed to run cargo test: {}", e))?;
-    
+
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
         return Err(format!("cargo test failed:\n{}", stderr));
     }
-    
+
     println!("✅ cargo test passed");
     Ok(())
 }
@@ -556,13 +556,13 @@ pub fn run_tests() -> Result<(), String> {
 /// 主迁移检查流程
 pub fn migration_checklist() {
     println!("=== Rust 1.90/1.91 迁移检查清单 ===\n");
-    
+
     let checks = [
         ("检查 Rust 版本", check_rust_version("1.90.0")),
         ("运行 cargo check", run_cargo_check()),
         ("运行测试套件", run_tests()),
     ];
-    
+
     for (name, result) in &checks {
         match result {
             Ok(_) => println!("✅ {}", name),
@@ -574,7 +574,7 @@ pub fn migration_checklist() {
 #[cfg(test)]
 mod migration_tests {
     use super::*;
-    
+
     #[test]
     fn test_version_check() {
         // 这会在当前环境中运行

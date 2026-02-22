@@ -12,6 +12,13 @@
 - [模块知识结构补充指南](#模块知识结构补充指南)
   - [📋 目录](#-目录)
   - [🎯 文档概述](#-文档概述)
+  - [代码示例](#代码示例)
+    - [概念定义生成器](#概念定义生成器)
+    - [知识结构批量生成器](#知识结构批量生成器)
+    - [思维表征模板生成器](#思维表征模板生成器)
+  - [形式化链接](#形式化链接)
+    - [研究笔记关联](#研究笔记关联)
+    - [实施场景](#实施场景)
   - [📐 知识结构补充模板](#-知识结构补充模板)
     - [1. 概念定义补充](#1-概念定义补充)
       - [模板](#模板)
@@ -94,32 +101,32 @@ impl ConceptDefinition {
             properties: Vec::new(),
         }
     }
-    
+
     fn with_type(mut self, t: &str) -> Self {
         self.concept_type = t.to_string();
         self
     }
-    
+
     fn in_category(mut self, c: &str) -> Self {
         self.category = c.to_string();
         self
     }
-    
+
     fn with_property(mut self, name: &str, value: &str) -> Self {
         self.properties.push((name.to_string(), value.to_string()));
         self
     }
-    
+
     fn generate_markdown(&self) -> String {
         let mut output = String::new();
-        
+
         writeln!(output, "### 概念定义\n").unwrap();
         writeln!(output, "**概念名称**: {}\n", self.name).unwrap();
         writeln!(output, "**定义**: {}\n", self.definition).unwrap();
         writeln!(output, "**类型**: {}\n", self.concept_type).unwrap();
         writeln!(output, "**范畴**: {}\n", self.category).unwrap();
         writeln!(output, "**版本**: Rust {}+\n", self.rust_version).unwrap();
-        
+
         if !self.related_concepts.is_empty() {
             writeln!(output, "**相关概念**:").unwrap();
             for c in &self.related_concepts {
@@ -127,14 +134,14 @@ impl ConceptDefinition {
             }
             writeln!(output).unwrap();
         }
-        
+
         if !self.properties.is_empty() {
             writeln!(output, "**属性特征**:\n").unwrap();
             for (name, value) in &self.properties {
                 writeln!(output, "- **{}**: {}", name, value).unwrap();
             }
         }
-        
+
         output
     }
 }
@@ -149,7 +156,7 @@ fn main() {
     .with_property("核心抽象", "Future Trait")
     .with_property("语法支持", "async/await")
     .with_property("执行模型", "协作式调度");
-    
+
     println!("{}", async_programming.generate_markdown());
 }
 ```
@@ -176,7 +183,7 @@ struct ConceptDefinition {
 impl ModuleKnowledgeGenerator {
     fn new() -> Self {
         let mut modules = HashMap::new();
-        
+
         // C01 模块
         modules.insert("c01_ownership_borrow_scope".to_string(), vec![
             ConceptDefinition {
@@ -190,7 +197,7 @@ impl ModuleKnowledgeGenerator {
                 properties: vec!["不可变借用".to_string(), "可变借用".to_string()],
             },
         ]);
-        
+
         // C05 线程模块
         modules.insert("c05_threads".to_string(), vec![
             ConceptDefinition {
@@ -204,15 +211,15 @@ impl ModuleKnowledgeGenerator {
                 properties: vec!["通道".to_string(), "发送者".to_string(), "接收者".to_string()],
             },
         ]);
-        
+
         Self { modules }
     }
-    
+
     fn generate_module_docs(&self, module: &str) -> Option<String> {
         let concepts = self.modules.get(module)?;
-        
+
         let mut output = format!("# {} 知识结构\n\n", module);
-        
+
         for concept in concepts {
             output.push_str(&format!("## {}\n\n", concept.name));
             output.push_str(&format!("**定义**: {}\n\n", concept.definition));
@@ -222,10 +229,10 @@ impl ModuleKnowledgeGenerator {
             }
             output.push_str("\n");
         }
-        
+
         Some(output)
     }
-    
+
     fn generate_all(&self) {
         for module in self.modules.keys() {
             if let Some(content) = self.generate_module_docs(module) {
@@ -257,72 +264,70 @@ struct ThinkingRepresentationTemplates;
 impl ThinkingRepresentationTemplates {
     fn mind_map_template(title: &str) -> String {
         format!(r#"### 思维导图
-
-```text
-{}
-│
-├── [子主题1]
-│   ├── [子子主题1]
-│   └── [子子主题2]
-├── [子主题2]
-│   └── [子子主题3]
-└── [子主题3]
-```
-"#, title)
+                    ```text
+                    {}
+                    │
+                    ├── [子主题1]
+                    │   ├── [子子主题1]
+                    │   └── [子子主题2]
+                    ├── [子主题2]
+                    │   └── [子子主题3]
+                    └── [子主题3]
+                    ```
+            "#, title)
     }
-    
+
     fn concept_matrix_template(dimensions: &[&str]) -> String {
         let mut output = String::from("### 概念矩阵\n\n|");
-        
+
         for dim in dimensions {
             write!(output, " {} |", dim).unwrap();
         }
         output.push_str("\n|");
-        
+
         for _ in dimensions {
             output.push_str(" :--- |");
         }
         output.push_str("\n|");
-        
+
         for _ in dimensions {
             output.push_str(" ... |");
         }
         output.push_str("\n");
-        
+
         output
     }
-    
+
     fn decision_tree_template(decision: &str) -> String {
         format!(r#"### 决策图网
-
-```text
-需要{}？
-├── 是
-│   ├── [条件1]满足？ → [方案1]
-│   └── [条件2]满足？ → [方案2]
-└── 否 → [默认方案]
-```
-"#, decision)
+            ```text
+            需要{}？
+            ├── 是
+            │   ├── [条件1]满足？ → [方案1]
+            │   └── [条件2]满足？ → [方案2]
+            └── 否 → [默认方案]
+            ```
+            "#, decision)
     }
-    
+
     fn proof_tree_template(goal: &str) -> String {
         format!(r#"### 证明图网
+                ```text
+                目标: {}
+                ├── 前提1: [基础条件1]
+                ├── 前提2: [基础条件2]
+                ├── 步骤1: [实现步骤1]
+                │   └── 依据: [定理/公理]
+                ├── 步骤2: [实现步骤2]
+                └── 结论: [最终结果]
+                    ├── 功能正确性: [保证]
+                    ├── 类型安全: [保证]
+                    └── 内存安全: [保证]
+                ```
 
-```text
-目标: {}
-├── 前提1: [基础条件1]
-├── 前提2: [基础条件2]
-├── 步骤1: [实现步骤1]
-│   └── 依据: [定理/公理]
-├── 步骤2: [实现步骤2]
-└── 结论: [最终结果]
-    ├── 功能正确性: [保证]
-    ├── 类型安全: [保证]
-    └── 内存安全: [保证]
-```
-"#, goal)
+                "#, goal)
+        }
     }
-}
 
 fn main() {
     println!("{}", ThinkingRepresentationTemplates::mind_map_template("Rust 核心概念"));
@@ -332,6 +337,7 @@ fn main() {
     println!("{}", ThinkingRepresentationTemplates::decision_tree_template("使用异步"));
     println!("{}", ThinkingRepresentationTemplates::proof_tree_template("实现线程安全"));
 }
+
 ```
 
 ---

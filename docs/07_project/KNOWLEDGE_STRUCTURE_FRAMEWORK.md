@@ -13,6 +13,13 @@
 - [Rust 知识结构框架文档](#rust-知识结构框架文档)
   - [📋 目录](#-目录)
   - [🎯 文档概述](#-文档概述)
+  - [代码示例](#代码示例)
+    - [知识结构建模工具](#知识结构建模工具)
+    - [多维矩阵生成器](#多维矩阵生成器)
+    - [思维导图文本生成器](#思维导图文本生成器)
+  - [形式化链接](#形式化链接)
+    - [研究笔记关联](#研究笔记关联)
+    - [实施场景](#实施场景)
   - [📐 知识结构体系](#-知识结构体系)
     - [1. 概念定义层](#1-概念定义层)
       - [定义结构模板](#定义结构模板)
@@ -118,12 +125,12 @@ impl Concept {
             related_concepts: Vec::new(),
         }
     }
-    
+
     fn with_version(mut self, version: &str) -> Self {
         self.rust_version = version.to_string();
         self
     }
-    
+
     fn relates_to(mut self, concept: &str) -> Self {
         self.related_concepts.push(concept.to_string());
         self
@@ -152,15 +159,15 @@ impl KnowledgeGraph {
             relations: Vec::new(),
         }
     }
-    
+
     fn add_concept(&mut self, concept: Concept) {
         self.concepts.insert(concept.name.clone(), concept);
     }
-    
+
     fn add_relation(&mut self, from: &str, relation: RelationType, to: &str) {
         self.relations.push((from.to_string(), relation, to.to_string()));
     }
-    
+
     fn get_related(&self, concept_name: &str) -> Vec<&String> {
         self.relations.iter()
             .filter(|(from, _, to)| from == concept_name || to == concept_name)
@@ -171,7 +178,7 @@ impl KnowledgeGraph {
 
 fn main() {
     let mut graph = KnowledgeGraph::new();
-    
+
     // 添加所有权相关概念
     let ownership = Concept::new(
         "Ownership",
@@ -180,18 +187,18 @@ fn main() {
     ).with_version("1.0.0")
      .relates_to("Borrowing")
      .relates_to("Lifetime");
-    
+
     let borrowing = Concept::new(
         "Borrowing",
         "通过引用访问值而不获取所有权",
         "内存管理"
     ).relates_to("Ownership");
-    
+
     graph.add_concept(ownership);
     graph.add_concept(borrowing);
-    
+
     graph.add_relation("Borrowing", RelationType::Dependency, "Ownership");
-    
+
     println!("知识图谱构建完成，包含 {} 个概念", graph.concepts.len());
 }
 ```
@@ -214,28 +221,28 @@ impl ConceptMatrix {
             rows: Vec::new(),
         }
     }
-    
+
     fn add_row(&mut self, row: Vec<&str>) {
         self.rows.push(row.iter().map(|c| c.to_string()).collect());
     }
-    
+
     fn to_markdown(&self) -> String {
         let mut output = String::new();
-        
+
         // 表头
         output.push_str("| ");
         for h in &self.headers {
             output.push_str(&format!("{} | ", h));
         }
         output.push_str("\n");
-        
+
         // 分隔符
         output.push_str("|");
         for _ in &self.headers {
             output.push_str(" :--- |");
         }
         output.push_str("\n");
-        
+
         // 数据行
         for row in &self.rows {
             output.push_str("| ");
@@ -244,7 +251,7 @@ impl ConceptMatrix {
             }
             output.push_str("\n");
         }
-        
+
         output
     }
 }
@@ -253,11 +260,11 @@ fn main() {
     let mut matrix = ConceptMatrix::new(
         vec!["同步原语", "线程安全", "性能", "使用场景", "推荐度"]
     );
-    
+
     matrix.add_row(vec!["Mutex", "✅", "中等", "互斥访问", "⭐⭐⭐⭐"]);
     matrix.add_row(vec!["RwLock", "✅", "高（读多）", "读写分离", "⭐⭐⭐⭐⭐"]);
     matrix.add_row(vec!["原子操作", "✅", "很高", "简单操作", "⭐⭐⭐⭐⭐"]);
-    
+
     println!("{}", matrix.to_markdown());
 }
 ```
@@ -280,24 +287,24 @@ impl TextMindMap {
             branches: Vec::new(),
         }
     }
-    
+
     fn add_branch(&mut self, name: &str, sub_branches: Vec<&str>) {
         self.branches.push((
             name.to_string(),
             sub_branches.iter().map(|s| s.to_string()).collect()
         ));
     }
-    
+
     fn render(&self) -> String {
         let mut output = String::new();
         writeln!(output, "{}", self.root).unwrap();
-        
+
         let branch_count = self.branches.len();
         for (idx, (branch, subs)) in self.branches.iter().enumerate() {
             let is_last = idx == branch_count - 1;
             let branch_prefix = if is_last { "└── " } else { "├── " };
             writeln!(output, "{}{}", branch_prefix, branch).unwrap();
-            
+
             let sub_count = subs.len();
             for (sidx, sub) in subs.iter().enumerate() {
                 let sub_is_last = sidx == sub_count - 1;
@@ -306,7 +313,7 @@ impl TextMindMap {
                 writeln!(output, "{}{}{}", sub_prefix, sub_branch_prefix, sub).unwrap();
             }
         }
-        
+
         output
     }
 }
@@ -316,7 +323,7 @@ fn main() {
     map.add_branch("所有权系统", vec!["移动语义", "借用规则", "生命周期"]);
     map.add_branch("类型系统", vec!["泛型", "Trait", "类型推断"]);
     map.add_branch("并发编程", vec!["线程", "异步", "消息传递"]);
-    
+
     println!("{}", map.render());
 }
 ```

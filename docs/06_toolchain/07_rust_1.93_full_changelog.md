@@ -42,6 +42,11 @@
     - [import 搜索过滤](#import-搜索过滤)
     - [文档属性校验](#文档属性校验)
   - [相关文档](#相关文档)
+  - [形式化规范与参考](#形式化规范与参考)
+    - [类型系统形式化](#类型系统形式化)
+    - [内存模型形式化](#内存模型形式化)
+    - [Ferrocene 规范引用](#ferrocene-规范引用)
+  - [完整特性代码示例](#完整特性代码示例)
 
 ---
 
@@ -338,7 +343,7 @@ pub mod variadic_examples {
         pub fn fprintf(stream: *mut libc::FILE, format: *const u8, ...);
         pub fn sprintf(buf: *mut u8, format: *const u8, ...) -> i32;
     }
-    
+
     /// 安全包装函数
     pub unsafe fn print_format(fmt: &str, args: &[&str]) {
         // 实际使用时需要正确处理可变参数
@@ -356,35 +361,35 @@ pub mod asm_cfg_examples {
     #[cfg(target_arch = "x86_64")]
     pub unsafe fn conditional_asm() {
         let result: u64;
-        
+
         asm!(
             "mov {0}, 0",
-            
+
             // 条件指令
             #[cfg(target_feature = "sse2")]
             "add {0}, 1",
-            
+
             #[cfg(target_feature = "avx")]
             "add {0}, 2",
-            
+
             #[cfg(target_feature = "avx2")]
             "add {0}, 4",
-            
+
             out(reg) result,
         );
-        
+
         println!("Result: {}", result);
     }
-    
+
     /// 多平台汇编
     #[cfg(any(target_arch = "x86_64", target_arch = "x86"))]
     pub unsafe fn multi_platform_asm() {
         asm!(
             "nop",
-            
+
             #[cfg(target_arch = "x86_64")]
             "mov rax, 0",
-            
+
             #[cfg(target_arch = "x86")]
             "mov eax, 0",
         );
@@ -401,7 +406,7 @@ pub mod const_eval_examples {
         // Rust 1.93 支持在常量求值期间按字节复制指针
         // 这对低级内存操作很有用
     }
-    
+
     /// 使用常量的复杂初始化
     pub const COMPLEX_INIT: [u8; 16] = {
         let mut arr = [0u8; 16];
@@ -420,17 +425,17 @@ pub mod lub_coercion_examples {
     pub fn function_coercion() {
         fn foo() -> i32 { 42 }
         fn bar() -> i32 { 0 }
-        
+
         // Rust 1.93 改进了 LUB (Least Upper Bound) coercion
         let f: fn() -> i32 = if true { foo } else { bar };
         assert_eq!(f(), 42);
     }
-    
+
     /// 不同安全性函数的 coercion
     pub fn safety_coercion() {
         unsafe fn unsafe_fn() -> i32 { 42 }
         fn safe_fn() -> i32 { 0 }
-        
+
         // 更准确的 coercion 处理
         let f: fn() -> i32 = safe_fn;
         assert_eq!(f(), 0);
@@ -443,13 +448,13 @@ pub mod lub_coercion_examples {
 
 pub mod const_static_ref_examples {
     use std::sync::atomic::AtomicU32;
-    
+
     static COUNTER: AtomicU32 = AtomicU32::new(0);
-    
+
     /// Rust 1.93 允许 const 项包含对 static 的可变引用
     /// （非常 unsafe，但不总是 UB）
     pub const COUNTER_REF: &AtomicU32 = &COUNTER;
-    
+
     /// 使用示例
     pub fn use_static_ref() {
         COUNTER_REF.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
@@ -462,19 +467,19 @@ pub mod const_static_ref_examples {
 
 pub mod interior_mutations_examples {
     use std::cell::Cell;
-    
+
     /// 具有内部可变性的 const 项
     pub const CONST_CELL: Cell<i32> = Cell::new(0);
-    
+
     /// ⚠️ 这会触发 const_item_interior_mutations lint
     pub fn modify_const() {
         // Rust 1.93 会对这会改动内部可变 const 项的调用发出警告
         // CONST_CELL.set(42); // 警告：修改 const 项的内部状态
     }
-    
+
     /// ✅ 正确做法：使用 static
     pub static STATIC_CELL: Cell<i32> = Cell::new(0);
-    
+
     pub fn modify_static() {
         STATIC_CELL.set(42); // 这是允许的
     }
@@ -488,15 +493,15 @@ pub mod function_cast_examples {
     /// ⚠️ 这会触发 function_casts_as_integer lint
     pub fn bad_cast() {
         fn my_function() -> i32 { 42 }
-        
+
         // Rust 1.93 会对函数强制转换为整数的操作发出警告
         // let ptr = my_function as usize; // 警告：函数转整数
     }
-    
+
     /// ✅ 正确做法：使用函数指针
     pub fn good_cast() {
         fn my_function() -> i32 { 42 }
-        
+
         let ptr: fn() -> i32 = my_function; // 这是推荐的
         assert_eq!(ptr(), 42);
     }
@@ -508,12 +513,12 @@ pub mod function_cast_examples {
 
 pub mod jump_tables_examples {
     /// 编译选项示例
-    /// 
+    ///
     /// 使用 -C jump-tables=false 禁用跳转表：
     /// ```bash
     /// rustc -C jump-tables=false main.rs
     /// ```
-    /// 
+    ///
     /// 这在某些嵌入式或安全敏感场景中有用
     pub fn example_match(x: u8) -> u32 {
         match x {
@@ -536,14 +541,14 @@ pub mod copy_specialization_examples {
     pub struct MyCopyType {
         value: i32,
     }
-    
+
     /// Rust 1.93 移除了 Copy trait 的内部 specialization
     /// 这可能导致某些场景下的性能回归，但提高了安全性
     pub fn use_copy_type() {
         let a = MyCopyType { value: 42 };
         let b = a; // Copy
         let c = a; // 仍然可用，因为是 Copy
-        
+
         assert_eq!(a.value, 42);
         assert_eq!(b.value, 42);
         assert_eq!(c.value, 42);
@@ -556,20 +561,20 @@ pub mod copy_specialization_examples {
 
 pub mod btree_append_examples {
     use std::collections::BTreeMap;
-    
+
     /// Rust 1.93 修改了 BTreeMap::append 的行为
     /// 当追加的条目已存在时，不再更新现有键
     pub fn append_behavior() {
         let mut map1: BTreeMap<i32, &str> = BTreeMap::new();
         map1.insert(1, "a");
         map1.insert(2, "b");
-        
+
         let mut map2: BTreeMap<i32, &str> = BTreeMap::new();
         map2.insert(2, "B"); // 注意：key 2 已存在
         map2.insert(3, "c");
-        
+
         map1.append(&mut map2);
-        
+
         // Rust 1.93: key 2 保持原值 "b"，不覆盖
         assert_eq!(map1.get(&2), Some(&"b"));
         assert_eq!(map1.get(&3), Some(&"c"));
@@ -579,17 +584,17 @@ pub mod btree_append_examples {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_lub_coercion() {
         lub_coercion_examples::function_coercion();
     }
-    
+
     #[test]
     fn test_btree_append() {
         btree_append_examples::append_behavior();
     }
-    
+
     #[test]
     fn test_copy_type() {
         copy_specialization_examples::use_copy_type();
