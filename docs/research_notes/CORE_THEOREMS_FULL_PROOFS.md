@@ -8,14 +8,14 @@
 > **证明深度**: L2（完整证明，非机器可检查）
 > **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)、[PROOF_INDEX](./PROOF_INDEX.md)
 
-**形式语言与形式证明**：本文档的定理同时以**形式语言**（推理规则、操作语义、判定形式）表达，见 [FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md)。形式语言为数学规范层，Coq 骨架为机器可检查实现层。
+**形式语言与形式证明**：本文档的定理同时以**形式语言**（推理规则、操作语义、判定形式）表达，见 [FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md)。形式语言为数学规范层。Rust 示例衔接见 [THEOREM_RUST_EXAMPLE_MAPPING](./THEOREM_RUST_EXAMPLE_MAPPING.md)。
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [核心定理完整证明（L2 级）](#核心定理完整证明l2-级)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [一、证明依赖 DAG](#一证明依赖-dag)
   - [二、所有权定理 T-OW2（所有权唯一性）](#二所有权定理-t-ow2所有权唯一性)
     - [2.1 辅助引理](#21-辅助引理)
@@ -32,8 +32,23 @@
   - [五、引理与定理编号汇总](#五引理与定理编号汇总)
   - [六、与子文档的对应](#六与子文档的对应)
   - [七、形式语言与英文摘要](#七形式语言与英文摘要)
-  - [八、L3 机器可检查衔接](#八l3-机器可检查衔接)
+  - [八、Rust 示例衔接](#八rust-示例衔接)
   - [四、Send/Sync 定理（形式化专篇）](#四sendsync-定理形式化专篇)
+
+---
+
+## 〇、证明结构规范（A→L→T→C 链）
+
+形式化文档应遵循 **Axiom → Lemma → Theorem → Corollary** 可追溯链：
+
+| 层级 | 符号 | 说明 | 示例 |
+| :--- | :--- | :--- | :--- |
+| **Axiom** | A-OW1, A-BR1 | 不证自明的前提 | 规则 1 唯一所有者 |
+| **Lemma** | L-OW1, L-BR1 | 由 Axiom 推导的中间结论 | L-OW1 初始唯一性 |
+| **Theorem** | T-OW2, T-BR1 | 主要结论 | T-OW2 所有权唯一性 |
+| **Corollary** | C-OW1 | 由 Theorem 直接推论 | 推论 |
+
+**引用规范**：每个 Theorem 应显式列出依赖的 Axiom/Lemma；Lemma 引用 Axiom；Corollary 引用 Theorem。详见 [formal_methods/README](formal_methods/README.md)、[PROOF_INDEX](PROOF_INDEX.md)。
 
 ---
 
@@ -210,13 +225,15 @@
 
 ---
 
-## 八、L3 机器可检查衔接
+## 八、Rust 示例衔接
 
-| 定理 | L3 骨架 | 状态 |
+| 定理 | crates 示例 | 说明 |
 | :--- | :--- | :--- |
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 定理陈述已定义；证明 Admitted |
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v) | 定理陈述 + L-BR1/L-BR2 占位；证明 Admitted |
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) | 定理陈述 + L-TY1 占位；证明 Admitted |
+| T-OW2 | c01_ownership_borrow_scope/examples/ | 所有权唯一性、移动语义 |
+| T-BR1 | c01_ownership_borrow_scope/examples/ | 借用规则、数据竞争自由 |
+| T-TY3 | c02_type_system/examples/ | 类型安全、进展性、保持性 |
+
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](./THEOREM_RUST_EXAMPLE_MAPPING.md)。
 
 ---
 
@@ -234,10 +251,10 @@
 
 ---
 
-**扩展路径**：Aeneas、coq-of-rust 对接完成后可自动生成 Coq；见 [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](./COQ_OF_RUST_INTEGRATION_PLAN.md)。
+**扩展路径**：国际对标见 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)。Prusti/Kani 验证见 [TOOLS_GUIDE](./TOOLS_GUIDE.md)。
 
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-14
-**证明深度**: L2（完整证明；L3 机器可检查见 [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](./COQ_OF_RUST_INTEGRATION_PLAN.md)）
+**最后更新**: 2026-02-26
+**证明深度**: L2（数学风格完整证明；Rust 示例见 [THEOREM_RUST_EXAMPLE_MAPPING](./THEOREM_RUST_EXAMPLE_MAPPING.md)）

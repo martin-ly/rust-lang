@@ -17,7 +17,7 @@
 
 ### 1.1 形式化定义
 
-**Def AP1（反模式）**：违反设计模式不变式或 Rust 安全规则的实现；$\mathit{SafeB}(P) = \mathrm{Inexpr}$ 或违反 [ownership_model](../../formal_methods/ownership_model.md)、[borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 规则。
+**Def AP1（反模式）**：违反设计模式不变式或 Rust 安全规则的实现；$\mathit{SafeB}(P) = \mathrm{Inexpr}$ 或违反 [ownership_model](../formal_methods/ownership_model.md)、[borrow_checker_proof](../formal_methods/borrow_checker_proof.md) 规则。
 
 **Axiom AP1**：反模式导致 UB、数据竞争、或逻辑错误；与 [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md) SBM-T2、SBM-L2 衔接。
 
@@ -48,7 +48,7 @@
 | Chain | 链成环 | 无限循环 | 无环约束 |
 | 其他 | 见 FORMAL_PROOF_SYSTEM_GUIDE | - | - |
 
-**完整反例**：见 [FORMAL_PROOF_SYSTEM_GUIDE](../../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)。
+**完整反例**：见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)。
 
 ---
 
@@ -184,7 +184,7 @@ where
 
 ## 七、引用
 
-- [FORMAL_PROOF_SYSTEM_GUIDE](../../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)
+- [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)
 - [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/) Anti-patterns
 - [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)
 

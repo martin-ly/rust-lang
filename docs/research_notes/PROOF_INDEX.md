@@ -1,20 +1,20 @@
-# 📚 形式化证明文档索引
+# 📚 形式化证明文档索引 {#-形式化证明文档索引}
 
 > **创建日期**: 2025-12-25
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024) ✅
+> **Rust 版本**: 1.93.1+ (Edition 2024) ✅
 > **状态**: ✅ **证明索引 100% 完成**（105+ 证明已收录，formal_methods Phase 1–6 全部补全）
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
-- [📚 形式化证明文档索引](#-形式化证明文档索引)
-  - [📊 目录](#-目录)
-  - [🔢 公理编号规范 (Axiom Numbering Convention)](#-公理编号规范-axiom-numbering-convention)
-  - [📐 证明深度层次 (Proof Depth)](#-证明深度层次-proof-depth)
-  - [🎯 索引说明](#-索引说明)
-  - [📚 按研究领域分类](#-按研究领域分类)
+- [📚 形式化证明文档索引 {#-形式化证明文档索引}](#-形式化证明文档索引--形式化证明文档索引)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [🔢 公理编号规范 (Axiom Numbering Convention) {#-公理编号规范-axiom-numbering-convention}](#-公理编号规范-axiom-numbering-convention--公理编号规范-axiom-numbering-convention)
+  - [📐 证明深度层次 (Proof Depth) {#-证明深度层次-proof-depth}](#-证明深度层次-proof-depth--证明深度层次-proof-depth)
+  - [🎯 索引说明 {#-索引说明}](#-索引说明--索引说明)
+  - [📚 按研究领域分类 {#-按研究领域分类}](#-按研究领域分类--按研究领域分类)
     - [所有权与借用](#所有权与借用)
       - [所有权模型形式化](#所有权模型形式化)
       - [借用检查器证明](#借用检查器证明)
@@ -42,27 +42,27 @@
       - [形式化验证指南](#形式化验证指南)
       - [质量检查清单](#质量检查清单)
       - [执行模型扩展（引理/推论）](#执行模型扩展引理推论)
-  - [📐 按证明深度导航](#-按证明深度导航)
-  - [🔬 按证明类型分类](#-按证明类型分类)
+  - [📐 按证明深度导航 {#-按证明深度导航}](#-按证明深度导航--按证明深度导航)
+  - [🔬 按证明类型分类 {#-按证明类型分类}](#-按证明类型分类--按证明类型分类)
     - [唯一性证明](#唯一性证明)
     - [安全性证明](#安全性证明)
     - [正确性证明](#正确性证明)
-  - [📈 证明完成度统计](#-证明完成度统计)
+  - [📈 证明完成度统计 {#-证明完成度统计}](#-证明完成度统计--证明完成度统计)
     - [按研究领域统计](#按研究领域统计)
     - [按证明类型统计](#按证明类型统计)
     - [按证明深度统计](#按证明深度统计)
     - [按证明方法统计](#按证明方法统计)
-  - [🔗 相关资源](#-相关资源)
+  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
     - [核心文档](#核心文档)
     - [形式化方法研究](#形式化方法研究)
     - [类型理论研究](#类型理论研究)
-    - [软件设计理论](#软件设计理论-1)
+    - [软件设计理论 {#软件设计理论-1}](#软件设计理论-软件设计理论-1)
     - [工具资源](#工具资源)
     - [思维表征文档中的证明树](#思维表征文档中的证明树)
 
 ---
 
-## 🔢 公理编号规范 (Axiom Numbering Convention)
+## 🔢 公理编号规范 (Axiom Numbering Convention) {#-公理编号规范-axiom-numbering-convention}
 
 **用途**: 统一证明树、证明图网中的形式化引用，便于交叉引用与追溯。
 
@@ -81,7 +81,7 @@
 
 ---
 
-## 📐 证明深度层次 (Proof Depth)
+## 📐 证明深度层次 (Proof Depth) {#-证明深度层次-proof-depth}
 
 **用途**: 区分证明充分性，便于对标国际机器可检查证明。见 [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)。
 
@@ -95,7 +95,7 @@
 
 ---
 
-## 🎯 索引说明
+## 🎯 索引说明 {#-索引说明}
 
 本文档索引了所有已完成的形式化证明，帮助研究者快速查找和参考相关证明工作。
 
@@ -114,7 +114,7 @@
 
 ---
 
-## 📚 按研究领域分类
+## 📚 按研究领域分类 {#-按研究领域分类}
 
 ### 所有权与借用
 
@@ -476,19 +476,19 @@
 
 #### 边界系统
 
-**文档**: [05_boundary_system](../software_design_theory/05_boundary_system/)、[04_boundary_matrix](../software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)、[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md)
+**文档**: [05_boundary_system](./software_design_theory/05_boundary_system/)、[04_boundary_matrix](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)、[06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md)
 
 **已完成的证明**:
 
-1. **定理 SBM-T1/T2、SUM-T1/T2、EIM-T1/T2** ✅ — [safe_unsafe_matrix](../software_design_theory/05_boundary_system/safe_unsafe_matrix.md)、[supported_unsupported_matrix](../software_design_theory/05_boundary_system/supported_unsupported_matrix.md)、[expressive_inexpressive_matrix](../software_design_theory/05_boundary_system/expressive_inexpressive_matrix.md)
-2. **定理 BMP-T1/T2 (设计模式边界)** ✅ — 边界唯一性、23 模式与 05 矩阵一致；[证明位置](../software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
-3. **引理 BMP-L1 (近似表达模式)** ✅ — Singleton、Interpreter 等 6 种为 Approx；[证明位置](../software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
-4. **推论 BMP-C1** ✅ — 等价表达模式满足零成本抽象；[证明位置](../software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
-5. **定理 EB-T1/T2、引理 EB-EX-L1/L2、推论 EB-EX-C1/C2** ✅ — 执行模型边界；[证明位置](../software_design_theory/03_execution_models/06_boundary_analysis.md)
-6. **Def EB-DET1 (执行确定性)** ✅ — Sequential/Interleaved/Parallel/Distributed；[证明位置](../software_design_theory/03_execution_models/06_boundary_analysis.md)
-7. **定理 EB-DET-T1 (确定性蕴涵数据竞争自由)** ✅ — 满足 borrow T1、Send/Sync 则无数据竞争；[证明位置](../software_design_theory/03_execution_models/06_boundary_analysis.md)
-8. **推论 EB-DET-C1 (控制确定性判定)** ✅ — 需求→模型选型；[证明位置](../software_design_theory/03_execution_models/06_boundary_analysis.md)
-9. **Def SB1、定理 SB1–SB3、推论 SB-C1、引理 SB-L1 (边界冲突可化解)** ✅ — 语义边界图；[证明位置](../software_design_theory/02_workflow_safe_complete_models/03_semantic_boundary_map.md)
+1. **定理 SBM-T1/T2、SUM-T1/T2、EIM-T1/T2** ✅ — [safe_unsafe_matrix](./software_design_theory/05_boundary_system/safe_unsafe_matrix.md)、[supported_unsupported_matrix](./software_design_theory/05_boundary_system/supported_unsupported_matrix.md)、[expressive_inexpressive_matrix](./software_design_theory/05_boundary_system/expressive_inexpressive_matrix.md)
+2. **定理 BMP-T1/T2 (设计模式边界)** ✅ — 边界唯一性、23 模式与 05 矩阵一致；[证明位置](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
+3. **引理 BMP-L1 (近似表达模式)** ✅ — Singleton、Interpreter 等 6 种为 Approx；[证明位置](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
+4. **推论 BMP-C1** ✅ — 等价表达模式满足零成本抽象；[证明位置](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
+5. **定理 EB-T1/T2、引理 EB-EX-L1/L2、推论 EB-EX-C1/C2** ✅ — 执行模型边界；[证明位置](./software_design_theory/03_execution_models/06_boundary_analysis.md)
+6. **Def EB-DET1 (执行确定性)** ✅ — Sequential/Interleaved/Parallel/Distributed；[证明位置](./software_design_theory/03_execution_models/06_boundary_analysis.md)
+7. **定理 EB-DET-T1 (确定性蕴涵数据竞争自由)** ✅ — 满足 borrow T1、Send/Sync 则无数据竞争；[证明位置](./software_design_theory/03_execution_models/06_boundary_analysis.md)
+8. **推论 EB-DET-C1 (控制确定性判定)** ✅ — 需求→模型选型；[证明位置](./software_design_theory/03_execution_models/06_boundary_analysis.md)
+9. **Def SB1、定理 SB1–SB3、推论 SB-C1、引理 SB-L1 (边界冲突可化解)** ✅ — 语义边界图；[证明位置](./software_design_theory/02_workflow_safe_complete_models/03_semantic_boundary_map.md)
 
 #### 语义与表达能力
 
@@ -548,28 +548,28 @@
 
 #### 实验与形式化衔接
 
-**文档**: [experiments/README](../experiments/README.md)、[compiler_optimizations](../experiments/compiler_optimizations.md)、[memory_analysis](../experiments/memory_analysis.md)、[performance_benchmarks](../experiments/performance_benchmarks.md)、[concurrency_performance](../experiments/concurrency_performance.md)、[macro_expansion_performance](../experiments/macro_expansion_performance.md)
+**文档**: [experiments/README](./experiments/README.md)、[compiler_optimizations](./experiments/compiler_optimizations.md)、[memory_analysis](./experiments/memory_analysis.md)、[performance_benchmarks](./experiments/performance_benchmarks.md)、[concurrency_performance](./experiments/concurrency_performance.md)、[macro_expansion_performance](./experiments/macro_expansion_performance.md)
 
 **已完成的证明**:
 
 1. **定理 EX-T1 (验证蕴涵)** ✅ — 实验反例可否定矛盾假设
 2. **定理 EX-T2 (可重复性蕴涵)** ✅ — 固定环境则观测可比较
 3. **推论 EX-C1** ✅ — 实验与形式化证明互补
-4. **定理 CO-T1 (编译器优化与类型安全)** ✅ — 优化保持类型；[证明位置](../experiments/compiler_optimizations.md)
-5. **定理 MA-T1 (内存观测蕴涵)** ✅ — Valgrind/Miri 无报告与 ownership T2/T3 一致；[证明位置](../experiments/memory_analysis.md)
-6. **引理 MA-L1 (工具与定理对应)** ✅ — Valgrind/Miri/ASan 与 ownership T3 三性质对应；[证明位置](../experiments/memory_analysis.md)
-7. **定理 PB-T1 (性能实验蕴涵)** ✅ — 验证+可重复性⇒经验支持；[证明位置](../experiments/performance_benchmarks.md)
-8. **引理 PB-L1 (统计与形式化互补)** ✅ — Criterion 置信区间、统计显著性；[证明位置](../experiments/performance_benchmarks.md)
-9. **定理 CP-T1 (并发观测蕴涵)** ✅ — TSan 无报告与 borrow T1、async T6.2 一致；[证明位置](../experiments/concurrency_performance.md)
-10. **引理 CP-L1 (Send/Sync 与 borrow T1 衔接)** ✅ — 跨线程 Send/Sync 与无数据竞争；[证明位置](../experiments/concurrency_performance.md)
-11. **定理 MP-T1 (宏展开与类型保持)** ✅ — cargo check 通过即良型；[证明位置](../experiments/macro_expansion_performance.md)
-12. **引理 MP-L1 (宏展开阶段)** ✅ — 宏展开在类型检查之前；[证明位置](../experiments/macro_expansion_performance.md)
-13. **引理 CO-L1 (优化阶段顺序)** ✅ — MIR 优化在类型检查之后；[证明位置](../experiments/compiler_optimizations.md)
-14. **推论 MA-C1** ✅ — 循环引用逻辑泄漏不在 ownership T3 范围；[证明位置](../experiments/memory_analysis.md)
-15. **推论 PB-C1** ✅ — 性能实验与形式化证明互补；[证明位置](../experiments/performance_benchmarks.md)
-16. **推论 CP-C1** ✅ — 并发原语性能开销可实验测量；[证明位置](../experiments/concurrency_performance.md)
-17. **推论 MP-C1** ✅ — 宏展开耗时可实验测量；[证明位置](../experiments/macro_expansion_performance.md)
-18. **推论 CO-C1** ✅ — 优化级别比较为性能实验；[证明位置](../experiments/compiler_optimizations.md)
+4. **定理 CO-T1 (编译器优化与类型安全)** ✅ — 优化保持类型；[证明位置](./experiments/compiler_optimizations.md)
+5. **定理 MA-T1 (内存观测蕴涵)** ✅ — Valgrind/Miri 无报告与 ownership T2/T3 一致；[证明位置](./experiments/memory_analysis.md)
+6. **引理 MA-L1 (工具与定理对应)** ✅ — Valgrind/Miri/ASan 与 ownership T3 三性质对应；[证明位置](./experiments/memory_analysis.md)
+7. **定理 PB-T1 (性能实验蕴涵)** ✅ — 验证+可重复性⇒经验支持；[证明位置](./experiments/performance_benchmarks.md)
+8. **引理 PB-L1 (统计与形式化互补)** ✅ — Criterion 置信区间、统计显著性；[证明位置](./experiments/performance_benchmarks.md)
+9. **定理 CP-T1 (并发观测蕴涵)** ✅ — TSan 无报告与 borrow T1、async T6.2 一致；[证明位置](./experiments/concurrency_performance.md)
+10. **引理 CP-L1 (Send/Sync 与 borrow T1 衔接)** ✅ — 跨线程 Send/Sync 与无数据竞争；[证明位置](./experiments/concurrency_performance.md)
+11. **定理 MP-T1 (宏展开与类型保持)** ✅ — cargo check 通过即良型；[证明位置](./experiments/macro_expansion_performance.md)
+12. **引理 MP-L1 (宏展开阶段)** ✅ — 宏展开在类型检查之前；[证明位置](./experiments/macro_expansion_performance.md)
+13. **引理 CO-L1 (优化阶段顺序)** ✅ — MIR 优化在类型检查之后；[证明位置](./experiments/compiler_optimizations.md)
+14. **推论 MA-C1** ✅ — 循环引用逻辑泄漏不在 ownership T3 范围；[证明位置](./experiments/memory_analysis.md)
+15. **推论 PB-C1** ✅ — 性能实验与形式化证明互补；[证明位置](./experiments/performance_benchmarks.md)
+16. **推论 CP-C1** ✅ — 并发原语性能开销可实验测量；[证明位置](./experiments/concurrency_performance.md)
+17. **推论 MP-C1** ✅ — 宏展开耗时可实验测量；[证明位置](./experiments/macro_expansion_performance.md)
+18. **推论 CO-C1** ✅ — 优化级别比较为性能实验；[证明位置](./experiments/compiler_optimizations.md)
 
 #### 形式化验证指南
 
@@ -609,7 +609,7 @@
 
 ---
 
-## 📐 按证明深度导航
+## 📐 按证明深度导航 {#-按证明深度导航}
 
 | 深度 | 证明列表（示例） |
 | :--- | :--- |
@@ -619,7 +619,7 @@
 
 ---
 
-## 🔬 按证明类型分类
+## 🔬 按证明类型分类 {#-按证明类型分类}
 
 ### 唯一性证明
 
@@ -660,7 +660,7 @@
 
 ---
 
-## 📈 证明完成度统计
+## 📈 证明完成度统计 {#-证明完成度统计}
 
 ### 按研究领域统计
 
@@ -717,7 +717,7 @@
 
 ---
 
-## 🔗 相关资源
+## 🔗 相关资源 {#-相关资源}
 
 ### 核心文档
 
@@ -754,7 +754,7 @@
 - [高级类型特性](./type_theory/advanced_types.md)
 - [类型理论完备性缺口](./type_theory/00_completeness_gaps.md) — 形式化论证不充分声明
 
-### 软件设计理论
+### 软件设计理论 {#软件设计理论-1}
 
 - [软件设计理论体系](./software_design_theory/README.md)
 - [设计模式形式化](./software_design_theory/01_design_patterns_formal/README.md)

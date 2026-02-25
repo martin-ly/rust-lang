@@ -122,7 +122,7 @@ cargo clean --workspace
 
 - [Rust 1.93 完整变更清单](./07_rust_1.93_full_changelog.md)
 - [Rust 1.93 兼容性注意事项](./06_rust_1.93_compatibility_notes.md)
-- [Cargo 速查卡](../quick_reference/cargo_cheatsheet.md)
+- [Cargo 速查卡](../02_reference/quick_reference/cargo_cheatsheet.md)
 - [rustdoc 高级用法](./03_rustdoc_advanced.md)
 
 ---

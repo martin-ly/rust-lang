@@ -26,7 +26,7 @@ say_hello!("World");   // Hello, World!
 ## 常用宏
 
 | 宏 | 用途 | 示例 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | `println!` | 打印 | `println!("{}", x)` |
 | `format!` | 格式化字符串 | `format!("{}", x)` |
 | `vec!` | 创建Vec | `vec![1, 2, 3]` |

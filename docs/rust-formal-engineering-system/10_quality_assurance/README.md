@@ -1,4 +1,4 @@
-# 质量保障
+# 质量保障 {#-质量保障维度}
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-20
@@ -9,7 +9,7 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#-目录}
 
 - [质量保障](#质量保障)
   - [📋 目录](#-目录)
@@ -29,7 +29,7 @@
 
 ---
 
-## 🎯 宗旨
+## 🎯 宗旨 {#-宗旨}
 
 本模块提供 Rust 形式化工程系统的质量保障体系，涵盖：
 
@@ -44,7 +44,7 @@
 
 | 维度 | 内容 | 文档 |
 | :--- | :--- | :--- |
-| **测试覆盖** | 单元/集成/基准、覆盖率报告 | [TESTING_COVERAGE_GUIDE](../TESTING_COVERAGE_GUIDE.md) |
+| **测试覆盖** | 单元/集成/基准、覆盖率报告 | [TESTING_COVERAGE_GUIDE](../../05_guides/TESTING_COVERAGE_GUIDE.md) |
 | **性能测试** | 基准测试、性能回归、分析工具 | [PERFORMANCE_TESTING_REPORT](../../05_guides/PERFORMANCE_TESTING_REPORT.md) |
 | **内存安全** | MIRI、Valgrind、无 UB 验证 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 | **形式化验证** | Prusti、Kani、Creusot | [TOOLS_GUIDE](../../research_notes/TOOLS_GUIDE.md)、[FORMAL_VERIFICATION_GUIDE](../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
@@ -52,14 +52,14 @@
 
 ---
 
-## 📚 核心文档
+## 📚 核心文档 {#-核心文档}
 
-- [**TESTING_COVERAGE_GUIDE.md**](../TESTING_COVERAGE_GUIDE.md) — 测试策略、覆盖率、MIRI 集成
+- [**TESTING_COVERAGE_GUIDE.md**](../../05_guides/TESTING_COVERAGE_GUIDE.md) — 测试策略、覆盖率、MIRI 集成
 - [**PERFORMANCE_TESTING_REPORT.md**](../../05_guides/PERFORMANCE_TESTING_REPORT.md) — 性能基准、报告、回归
 
 ---
 
-## 🔬 形式化验证衔接
+## 🔬 形式化验证衔接 {#-形式化验证衔接}
 
 | 验证目标 | 形式化定理 | 工具 |
 | :--- | :--- | :--- |
@@ -70,7 +70,7 @@
 
 ---
 
-## ✅ 质量检查清单
+## ✅ 质量检查清单 {#-质量检查清单}
 
 1. **构建**：`cargo build` 通过
 2. **测试**：`cargo test` 通过
@@ -267,7 +267,7 @@ mod contracts {
 | **PROOF_INDEX** | 形式化证明索引 | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
 | **CORE_THEOREMS_FULL_PROOFS** | 核心定理完整证明 | [../../research_notes/CORE_THEOREMS_FULL_PROOFS.md](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
 | **BEST_PRACTICES** | 工程最佳实践 | [../../research_notes/BEST_PRACTICES.md](../../research_notes/BEST_PRACTICES.md) |
-| **TESTING_COVERAGE_GUIDE** | 测试覆盖指南 | [../TESTING_COVERAGE_GUIDE.md](../TESTING_COVERAGE_GUIDE.md) |
+| **TESTING_COVERAGE_GUIDE** | 测试覆盖指南 | [../../05_guides/TESTING_COVERAGE_GUIDE.md](../../05_guides/TESTING_COVERAGE_GUIDE.md) |
 
 ---
 
@@ -276,7 +276,7 @@ mod contracts {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../../research_notes/formal_methods/README.md](../../research_notes/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../research_notes/formal_methods/type_system_formalization.md](../../research_notes/formal_methods/type_system_formalization.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../../research_notes/type_theory/type_system_foundations.md](../../research_notes/type_theory/type_system_foundations.md) |
 | 所有权模型形式化 | 所有权系统数学定义 | [../../research_notes/formal_methods/ownership_model.md](../../research_notes/formal_methods/ownership_model.md) |
 | 借用检查器证明 | 借用检查器形式化 | [../../research_notes/formal_methods/borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md) |
 | 证明索引 | 形式化证明集合 | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |

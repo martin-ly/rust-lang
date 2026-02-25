@@ -7,10 +7,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [43 种完全模型索引](#43-种完全模型索引)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [定义](#定义)
   - [构成方案](#构成方案)
     - [扩展模式（20）](#扩展模式20)
@@ -622,24 +622,24 @@ pub fn update_optimistic(
 | 模式 | 形式化对应 | 与 23 安全组合 |
 | :--- | :--- | :--- |
 | Domain Model | 结构体 + 方法；无贫血；见 [ownership_model](../../formal_methods/ownership_model.md) 规则 1–3 | 与 State、Strategy 组合 |
-| Service Layer | 模块依赖、trait 组合；见 [03_integration_theory](../../04_compositional_engineering/03_integration_theory.md) IT-T1 | 编排 Repository、Factory |
-| Repository | 见 [02_effectiveness_proofs](../../04_compositional_engineering/02_effectiveness_proofs.md) CE-T1；trait 泛型约束 | 可与 Factory Method、Builder 组合 |
+| Service Layer | 模块依赖、trait 组合；见 [03_integration_theory](../04_compositional_engineering/03_integration_theory.md) IT-T1 | 编排 Repository、Factory |
+| Repository | 见 [02_effectiveness_proofs](../04_compositional_engineering/02_effectiveness_proofs.md) CE-T1；trait 泛型约束 | 可与 Factory Method、Builder 组合 |
 | Unit of Work | 批量提交；所有权收集；见 ownership 规则 3 drop 顺序 | 与 Repository、Data Mapper 组合 |
 | Data Mapper | `From`/`Into` 转换；所有权转移；见 [ownership_model](../../formal_methods/ownership_model.md) | 与 Repository 组合 |
 | Table Data Gateway | 表级 API；`async fn`；见 [async_state_machine](../../formal_methods/async_state_machine.md) | 与 Repository 二选一 |
 | Active Record | 对象持 Connection；`save`/`load`；见 ownership 规则 2 | 简单 CRUD；与 DTO 区别：有行为 |
 | Gateway | trait + FFI/HTTP；见 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) Def EXTERN1 | 外部集成；FFI 时可能 unsafe |
-| MVC | 模块分层；见 [05_boundary_system](../../05_boundary_system/README.md) | 与 Front Controller 组合 |
+| MVC | 模块分层；见 [05_boundary_system](../05_boundary_system/README.md) | 与 Front Controller 组合 |
 | Front Controller | `Router`、`match` 路径；见 [03_semantic_boundary_map](03_semantic_boundary_map.md) | 与 MVC 组合 |
 | DTO | 结构体 + serde；无行为；所有权转移 | 与 Remote Facade、Gateway 组合 |
 | Remote Facade | 粗粒度接口；batch 减少 RPC；见 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) CHAN1 | 与 DTO 组合 |
-| Value Object | `Clone`、`PartialEq`；不可变；见 [06_rust_idioms](../../06_rust_idioms.md) Def NW1 | 与 Newtype、DTO 衔接 |
-| Registry | `OnceLock<HashMap>`；见 [singleton](../../01_design_patterns_formal/01_creational/singleton.md) | 服务定位；与 Plugin 二选一 |
+| Value Object | `Clone`、`PartialEq`；不可变；见 [06_rust_idioms](../06_rust_idioms.md) Def NW1 | 与 Newtype、DTO 衔接 |
+| Registry | `OnceLock<HashMap>`；见 [singleton](../01_design_patterns_formal/01_creational/singleton.md) | 服务定位；与 Plugin 二选一 |
 | Identity Map | `HashMap<Id, Arc<T>>`；见 [ownership_model](../../formal_methods/ownership_model.md) Def ARC1 | 会话内去重 |
-| Lazy Load | `OnceLock`、`Option`；见 [proxy](../../01_design_patterns_formal/02_structural/proxy.md) | 延迟加载 |
-| Plugin | `trait` + `Box<dyn Trait>`；依赖注入；见 [strategy](../../01_design_patterns_formal/03_behavioral/strategy.md) | 可替换实现 |
+| Lazy Load | `OnceLock`、`Option`；见 [proxy](../01_design_patterns_formal/02_structural/proxy.md) | 延迟加载 |
+| Plugin | `trait` + `Box<dyn Trait>`；依赖注入；见 [strategy](../01_design_patterns_formal/03_behavioral/strategy.md) | 可替换实现 |
 | Optimistic Offline Lock | `version: u64`、CAS；见 [ownership_model](../../formal_methods/ownership_model.md) Def ATOMIC1 | 乐观并发 |
-| Specification | `trait Spec` + `and`/`or`；组合模式；见 [composite](../../01_design_patterns_formal/02_structural/composite.md) | 业务规则组合 |
+| Specification | `trait Spec` + `and`/`or`；组合模式；见 [composite](../01_design_patterns_formal/02_structural/composite.md) | 业务规则组合 |
 | Event Sourcing | `Vec<Event>` + `fold`；无共享可变；见 [ownership_model](../../formal_methods/ownership_model.md) | 与 Command、Memento 概念衔接 |
 
 ---

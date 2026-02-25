@@ -5,14 +5,14 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 >
-> **研究笔记写作最佳实践** → [research_notes/BEST_PRACTICES.md](./research_notes/BEST_PRACTICES.md)
+> **研究笔记写作最佳实践** → [research_notes/BEST_PRACTICES.md](../research_notes/BEST_PRACTICES.md)
 
 ---
 
-## 📋 目录
+## 📋 目录 {#-目录}
 
 - [Rust 项目最佳实践指南](#rust-项目最佳实践指南)
-  - [📋 目录](#-目录)
+  - [📋 目录 {#-目录}](#-目录--目录)
   - [概述](#概述)
   - [1. 代码质量最佳实践](#1-代码质量最佳实践)
     - [1.1 所有权和借用](#11-所有权和借用)
@@ -32,7 +32,8 @@
   - [5. 文档最佳实践](#5-文档最佳实践)
     - [5.1 代码文档](#51-代码文档)
     - [5.2 README 文档](#52-readme-文档)
-  - [文档](#文档)
+  - [6. 安全性最佳实践](#6-安全性最佳实践)
+    - [6.1 输入验证](#61-输入验证)
     - [6.2 资源管理](#62-资源管理)
   - [7. 并发编程最佳实践](#7-并发编程最佳实践)
     - [7.1 线程安全](#71-线程安全)
@@ -73,6 +74,8 @@
 ## 概述
 
 本文档提供 Rust 项目开发的综合最佳实践，涵盖从代码编写到项目组织的各个方面，合并了项目级代码质量、性能、测试、文档、工具使用等主题。
+
+**形式化引用**：T-OW2、T-BR1、T-TY3、SEND-T1、SYNC-T1。综合见 [formal_methods](../research_notes/formal_methods/README.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md)。
 
 ---
 
@@ -461,36 +464,36 @@ pub fn process(input: &str, options: &Options) -> Result<ProcessResult, ProcessE
 **✅ 最佳实践**: 项目概述、快速开始、特性列表、贡献指南
 
 ```markdown
-# 项目名称
+        # 项目名称
 
-[![Crates.io](https://img.shields.io/crates/v/my_crate)](https://crates.io/crates/my_crate)
-[![Documentation](https://docs.rs/my_crate/badge.svg)](https://docs.rs/my_crate)
+        [![Crates.io](https://img.shields.io/crates/v/my_crate)](https://crates.io/crates/my_crate)
+        [![Documentation](https://docs.rs/my_crate/badge.svg)](https://docs.rs/my_crate)
 
-> 项目一句话描述
+        > 项目一句话描述
 
-## 特性
+        ## 特性
 
-- 特性 1
-- 特性 2
-- 特性 3
+        - 特性 1
+        - 特性 2
+        - 特性 3
 
-## 快速开始
+        ## 快速开始
 
-```bash
-cargo add my_crate
-```
+        ```bash
+        cargo add my_crate
+        ```
 
-```rust
-use my_crate::Client;
+        ```rust
+        use my_crate::Client;
 
-let client = Client::new();
-let result = client.do_something().await?;
-```
+        let client = Client::new();
+        let result = client.do_something().await?;
+        ```
 
-## 文档
+        ## 文档
 
-- [API 文档](https://docs.rs/my_crate)
-- [用户指南](https://my_crate.github.io/guide)
+        - [API 文档](https://docs.rs/my_crate)
+        - [用户指南](https://my_crate.github.io/guide)
 
 ```
 
@@ -744,7 +747,7 @@ mod inner {
 
 **✅ 最佳实践**: src/、tests/、benches/、examples/
 
-```
+```text
 my_project/
 ├── Cargo.toml
 ├── README.md
@@ -1107,15 +1110,15 @@ println!("运行时长: {:?}", stopped.duration());
 | 链接类型 | 目标文档 |
 | :--- | :--- |
 | **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
-| | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
-| | [C03 控制流](../../crates/c03_control_fn/docs/00_MASTER_INDEX.md) |
-| | [C04 泛型](../../crates/c04_generic/docs/00_MASTER_INDEX.md) |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
 | **高级主题** | [C05 线程](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
-| | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
+| :--- | :--- |
 | **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
-| | [TESTING_COVERAGE_GUIDE.md](./TESTING_COVERAGE_GUIDE.md) |
-| | [TROUBLESHOOTING_GUIDE.md](./TROUBLESHOOTING_GUIDE.md) |
-| | [CLI_APPLICATIONS_GUIDE.md](./CLI_APPLICATIONS_GUIDE.md) |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
 
 ---
 
@@ -1126,7 +1129,7 @@ println!("运行时长: {:?}", stopped.duration());
 - [Rust 官方文档](https://doc.rust-lang.org/)
 - [Rust API 指南](https://rust-lang.github.io/api-guidelines/)
 - [Rust 性能书](https://nnethercote.github.io/perf-book/)
-- [研究笔记最佳实践](./research_notes/BEST_PRACTICES.md) - 研究笔记写作规范
+- [研究笔记最佳实践](../research_notes/BEST_PRACTICES.md) - 研究笔记写作规范
 
 ### 在线课程 (Coursera)
 

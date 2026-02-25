@@ -8,7 +8,7 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#-目录}
 
 - [Rust 研究笔记：全局统一系统化框架](#rust-研究笔记全局统一系统化框架)
   - [📋 目录](#-目录)
@@ -43,7 +43,7 @@
 
 ---
 
-## 🎯 框架宗旨
+## 🎯 框架宗旨 {#-框架宗旨}
 
 **上位文档**：[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) —— 理论体系四层架构、论证体系五层结构、安全与非安全全面论证（顶层框架）。
 
@@ -76,7 +76,7 @@
 
 ---
 
-## 🕸️ 全局思维导图：Rust 形式化知识全景
+## 🕸️ 全局思维导图：Rust 形式化知识全景 {#️-全局思维导图rust-形式化知识全景}
 
 ```text
                     Rust 形式化知识全景
@@ -141,7 +141,7 @@
 
 ---
 
-## 📐 多维概念对比矩阵总览
+## 📐 多维概念对比矩阵总览 {#-多维概念对比矩阵总览}
 
 ### 1. 概念-公理-定理-证明方法-反例 五维矩阵
 
@@ -184,7 +184,7 @@
 
 ---
 
-## 🌳 公理-定理-证明全链路逻辑推进图
+## 🌳 公理-定理-证明全链路逻辑推进图 {#-公理-定理-证明全链路逻辑推进图}
 
 ```text
 公理/定义层
@@ -246,7 +246,7 @@
 
 ---
 
-## 🌲 决策树总览：论证与选型
+## 🌲 决策树总览：论证与选型 {#-决策树总览论证与选型}
 
 ### 1. 论证缺口决策树
 
@@ -295,7 +295,7 @@
 
 ---
 
-## ⚠️ 反例总索引
+## ⚠️ 反例总索引 {#️-反例总索引}
 
 | 领域 | 反例 | 违反的边界 | 文档 |
 | :--- | :--- | :--- | :--- |
@@ -319,7 +319,7 @@
 
 ---
 
-## 🧬 语义归纳与概念族谱统一
+## 🧬 语义归纳与概念族谱统一 {#-语义归纳与概念族谱统一}
 
 ### 语义归纳表（一句话总结）
 
@@ -358,7 +358,7 @@ Pin ──→ 自引用安全
 
 ---
 
-## 🔗 全局一致性校验矩阵
+## 🔗 全局一致性校验矩阵 {#-全局一致性校验矩阵}
 
 ### 术语一致性
 
@@ -383,7 +383,7 @@ Pin ──→ 自引用安全
 
 ---
 
-## 📑 按特性族/类型族/执行模型子索引
+## 📑 按特性族/类型族/执行模型子索引 {#-按特性族类型族执行模型子索引}
 
 ### 按特性族
 
@@ -424,7 +424,7 @@ Pin ──→ 自引用安全
 
 ---
 
-## 📚 文档交叉引用总索引
+## 📚 文档交叉引用总索引 {#-文档交叉引用总索引}
 
 | 文档 | 用途 |
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | **顶层框架**：理论体系、论证体系、安全与非安全 |
@@ -434,11 +434,11 @@ Pin ──→ 自引用安全
 | [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射、反例索引 |
 | [PROOF_INDEX](PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
 | [INDEX](INDEX.md) | 研究笔记完整索引 |
-| [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵 |
-| [MIND_MAP_COLLECTION](../MIND_MAP_COLLECTION.md) | 思维导图集合 |
+| [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵 |
+| [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合 |
 | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策树 |
 | [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | 证明图网 |
-| [KNOWLEDGE_STRUCTURE_FRAMEWORK](../KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构、概念定义、思维表征 |
+| [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构、概念定义、思维表征 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
 | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |
 | [FEATURE_TEMPLATE](FEATURE_TEMPLATE.md) | 79 项特性精简模板 |

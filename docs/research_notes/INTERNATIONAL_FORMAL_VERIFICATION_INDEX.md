@@ -82,7 +82,21 @@
 
 ---
 
-## 三、与本项目 PROOF_INDEX 的映射
+## 三、POPL/PLDI/ICFP 论文对齐
+
+| 会议 | 论文 | 年份 | 链接 | 本项目对应 |
+| :--- | :--- | :--- | :--- | :--- |
+| **POPL** | RustBelt: Logical Foundations for the Future of Safe Systems Programming | 2018 | [plv.mpi-sws.org/rustbelt](https://plv.mpi-sws.org/rustbelt/popl18/) | ownership_model、borrow_checker_proof |
+| **POPL** | RustBelt Meets Relaxed Memory | 2020 | [rbrlx](https://plv.mpi-sws.org/rustbelt/rbrlx/) | send_sync_formalization、async_state_machine |
+| **PLDI** | Tree Borrows: A New Aliasing Model for Rust (Distinguished Paper) | 2025 | [ETH PLDI25](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | borrow_checker_proof、BORROW_DATARACE_FREE.v |
+| **ICFP** | Oxide: The Essence of Rust | 2023 | [Oxide](https://arxiv.org/abs/2303.00924) | ownership_model（高层语义） |
+| **PLDI** | Stacked Borrows (Miri 实现基础) | 2019 | [Ralf Jung 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | borrow_checker_proof、Miri 检测 |
+
+> **说明**：RustBelt 系列为 Rust 形式化验证奠基性工作；Tree Borrows 为 PLDI 2025 杰出论文；Oxide 为 ICFP 高层语义抽象。
+
+---
+
+## 四、与本项目 PROOF_INDEX 的映射
 
 | PROOF_INDEX 领域 | 国际对标 | 覆盖度 |
 | :--- | :--- | :--- |
@@ -94,7 +108,7 @@
 
 ---
 
-## 四、季度更新记录
+## 五、季度更新记录
 
 | 日期 | 更新内容 |
 | :--- | :--- |

@@ -1,10 +1,11 @@
 # Rust 学习系统 - 文档中心
 
 > **创建日期**: 2026-02-13
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **最后更新**: 2026-02-26
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 100% 完成（修订后验收标准）
 > **项目主页**: [返回主 README](../README.md)
+> **100% 推进**: [DOCS_100_PERCENT_PROGRESS](./DOCS_100_PERCENT_PROGRESS.md)
 > **主索引**: [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) - 按主题分类的完整文档导航
 > **完整结构**: [DOCS_STRUCTURE_OVERVIEW.md](./DOCS_STRUCTURE_OVERVIEW.md) - 按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖 docs
 > **概念说明**: 本文档中心是 Rust 形式化工程系统的知识库入口，按学习路径、速查参考、思维表征、专题指南、工具链和项目元文档六大主题组织。所有文档相互链接，形成完整的知识图谱。
@@ -14,7 +15,7 @@
 ## 🎯 快速示例
 
 ```rust
-// Rust 1.93.0 Edition 2024 示例
+// Rust 1.93.1 Edition 2024 示例
 fn main() {
     // 模式匹配
     let value = Some(42);
@@ -79,7 +80,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 
 ---
 
-## 🚀 核心文档系统
+## 🚀 核心文档系统 {#-核心文档系统}
 
 ### 1. 快速参考（quick_reference/）
 
@@ -182,8 +183,8 @@ codegen-units = 1
 与主题不相关的文件已归档，保持主目录简洁：
 
 - [归档说明](./archive/README.md) - 归档文件分类说明
-- [归档总结报告](./archive/ARCHIVE_SUMMARY_2025_11_15.md) - 归档详情统计
-- [归档完成报告](./archive/FINAL_ARCHIVE_COMPLETION_2025_11_15.md) - 归档工作总结
+- [归档总结报告](./archive/root_completion_reports/ARCHIVE_SUMMARY.md) - 归档详情统计
+- [归档完成报告](./archive/process_reports/2026_02/ARCHIVE_SUMMARY.md) - 归档工作总结
 
 ### 🧹 执行归档
 
@@ -247,7 +248,7 @@ cargo run -p rust-doc-search -- search --fuzzy "borrowing"
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 测试覆盖指南 | 测试策略与覆盖率 | [./TESTING_COVERAGE_GUIDE.md](./TESTING_COVERAGE_GUIDE.md) |
+| 测试覆盖指南 | 测试策略与覆盖率 | [./05_guides/TESTING_COVERAGE_GUIDE.md](./05_guides/TESTING_COVERAGE_GUIDE.md) |
 | 最佳实践 | 工程最佳实践 | [./research_notes/BEST_PRACTICES.md](./research_notes/BEST_PRACTICES.md) |
 | 工具指南 | 验证工具使用 | [./research_notes/TOOLS_GUIDE.md](./research_notes/TOOLS_GUIDE.md) |
 | 质量检查清单 | 代码质量检查 | [./research_notes/QUALITY_CHECKLIST.md](./research_notes/QUALITY_CHECKLIST.md) |

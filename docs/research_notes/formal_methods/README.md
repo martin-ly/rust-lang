@@ -1,4 +1,4 @@
-# 🔬 形式化方法研究
+# 🔬 形式化方法研究 {#-形式化方法研究}
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-20
@@ -8,7 +8,7 @@
 
 ---
 
-## ✅ 完备性声明
+## ✅ 完备性声明 {#-完备性声明}
 
 **本目录形式化论证已 100% 完成**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
 
@@ -32,14 +32,14 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
-- [🔬 形式化方法研究](#-形式化方法研究)
-  - [✅ 完备性声明](#-完备性声明)
+- [🔬 形式化方法研究 {#-形式化方法研究}](#-形式化方法研究--形式化方法研究)
+  - [✅ 完备性声明 {#-完备性声明}](#-完备性声明--完备性声明)
   - [控制流形式化](#控制流形式化)
-  - [📊 目录](#-目录)
-  - [🎯 研究目标](#-研究目标)
-  - [📚 研究主题](#-研究主题)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📚 研究主题 {#-研究主题}](#-研究主题--研究主题)
     - [1. 所有权模型形式化](#1-所有权模型形式化)
     - [2. 借用检查器证明](#2-借用检查器证明)
     - [3. 异步状态机形式化](#3-异步状态机形式化)
@@ -49,9 +49,9 @@
   - [formal\_methods 六篇并表](#formal_methods-六篇并表)
   - [形式化论证汇总](#形式化论证汇总)
   - [公理-定理形式化索引](#公理-定理形式化索引)
-  - [📝 研究笔记](#-研究笔记)
-    - [已完成 ✅](#已完成-)
-  - [🔗 相关资源](#-相关资源)
+  - [📝 研究笔记 {#-研究笔记}](#-研究笔记--研究笔记)
+    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
+  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
     - [核心文档](#核心文档)
     - [代码实现](#代码实现)
     - [学术资源](#学术资源)
@@ -62,17 +62,17 @@
     - [权威来源快速链接](#权威来源快速链接)
     - [Ferrocene FLS 章节与本目录对应](#ferrocene-fls-章节与本目录对应)
     - [国际权威奖项与认可](#国际权威奖项与认可)
-  - [📖 研究方法](#-研究方法)
+  - [📖 研究方法 {#-研究方法}](#-研究方法--研究方法)
     - [形式化工具](#形式化工具)
     - [形式化方法](#形式化方法)
     - [证明策略](#证明策略)
-  - [🚀 快速开始](#-快速开始)
+  - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
     - [创建新的研究笔记](#创建新的研究笔记)
     - [研究流程](#研究流程)
 
 ---
 
-## 🎯 研究目标
+## 🎯 研究目标 {#-研究目标}
 
 本目录专注于 Rust 核心机制的形式化建模与证明，包括：
 
@@ -83,7 +83,7 @@
 
 ---
 
-## 📚 研究主题
+## 📚 研究主题 {#-研究主题}
 
 ### 1. 所有权模型形式化
 
@@ -222,9 +222,9 @@
 
 ---
 
-## 📝 研究笔记
+## 📝 研究笔记 {#-研究笔记}
 
-### 已完成 ✅
+### 已完成 ✅ {#已完成-}
 
 - [x] [完备性缺口](./00_completeness_gaps.md) - 缺口声明与路线图
 - [x] [所有权模型形式化](./ownership_model.md) - 100%；含 RC/ARC/CELL/REFCELL/BOX 扩展
@@ -236,20 +236,20 @@
 
 ---
 
-## 🔗 相关资源
+## 🔗 相关资源 {#-相关资源}
 
 ### 核心文档
 
 - [形式化论证系统梳理指南](../FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、反例索引、公理-定理证明树
 - [形式化工程系统 - 理论基础](../../rust-formal-engineering-system/01_theoretical_foundations/)
-- [所有权与借用文档](../../crates/c01_ownership_borrow_scope/docs/)
-- [异步语义理论](../../crates/c06_async/src/async_semantics_theory.rs)
+- [所有权与借用文档](../../../crates/c01_ownership_borrow_scope/docs/)
+- [异步语义理论](../../../../crates/c06_async/src/async_semantics_theory.rs)
 
 ### 代码实现
 
-- [所有权实现](../../crates/c01_ownership_borrow_scope/src/)
-- [借用检查器实现](../../crates/c01_ownership_borrow_scope/src/)
-- [异步系统实现](../../crates/c06_async/src/)
+- [所有权实现](../../../crates/c01_ownership_borrow_scope/src/)
+- [借用检查器实现](../../../crates/c01_ownership_borrow_scope/src/)
+- [异步系统实现](../../../crates/c06_async/src/)
 
 ### 学术资源
 
@@ -316,7 +316,9 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 
 | FLS 章节 | 直接链接 | 本目录对应 |
 | :--- | :--- | :--- |
+| [Ch. 5 Patterns](https://spec.ferrocene.dev/patterns.html) | 5.1 [Refutability](https://spec.ferrocene.dev/patterns.html#refutability)、5.13 [Pattern Matching](https://spec.ferrocene.dev/patterns.html#pattern-matching) | [02_reference/quick_reference/control_flow_functions_cheatsheet.md](../../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
 | [Ch. 15 Ownership and Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | 15.1 [Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html#ownership)、15.4 [Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing)、15.6–15.9 [Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html#destruction) | [ownership_model](ownership_model.md)、[borrow_checker_proof](borrow_checker_proof.md) Def OW1、规则 1–8、DROP1 |
+| [Ch. 16 Exceptions and Errors](https://spec.ferrocene.dev/exceptions-and-errors.html) | 16.1 [Panic](https://spec.ferrocene.dev/exceptions-and-errors.html#panic)、16.2 [Abort](https://spec.ferrocene.dev/exceptions-and-errors.html#abort) | [02_reference/quick_reference/error_handling_cheatsheet.md](../../02_reference/quick_reference/error_handling_cheatsheet.md)、[EDGE_CASES_AND_SPECIAL_CASES](../../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md) |
 | [Ch. 17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | 17.1 [Send/Sync](https://spec.ferrocene.dev/concurrency.html#send-and-sync)、17.2 [Atomics](https://spec.ferrocene.dev/concurrency.html#atomics)、17.3 [Async](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation) | CHAN-T1、MUTEX-T1、ATOMIC1、SPAWN-T1 |
 | [Ch. 19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | 完整章节 | UNSAFE1、RAW1、EXTERN1 |
 | [Ch. 21 FFI](https://spec.ferrocene.dev/ffi.html) | 21.2–21.4 External blocks/functions/statics | EXTERN1、CVARIADIC1 |
@@ -329,7 +331,7 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 
 ---
 
-## 📖 研究方法
+## 📖 研究方法 {#-研究方法}
 
 ### 形式化工具
 
@@ -354,7 +356,7 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#-快速开始}
 
 ### 创建新的研究笔记
 

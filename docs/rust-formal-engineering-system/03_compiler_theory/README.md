@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [compiler_optimizations.md](../../research_notes/experiments/compiler_optimizations.md)、[01_compiler_features.md](../06_toolchain/01_compiler_features.md)
+> 内容已整合至： [compiler_optimizations.md](../../research_notes/experiments/compiler_optimizations.md)、[01_compiler_features.md](../../06_toolchain/01_compiler_features.md)
 
 ## 知识结构思维导图
 
@@ -293,7 +293,7 @@ unsafe fn very_dangerous() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 编译器特性 | 编译器配置与优化选项 | [../06_toolchain/01_compiler_features.md](../06_toolchain/01_compiler_features.md) |
+| 编译器特性 | 编译器配置与优化选项 | [../../06_toolchain/01_compiler_features.md](../../06_toolchain/01_compiler_features.md) |
 
 ---
 

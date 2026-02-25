@@ -1,4 +1,4 @@
-﻿# 🎉 向100%完成度推进最终总结 - 2026-01-27
+# 🎉 向100%完成度推进最终总结 - 2026-01-27
 
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-02-20
@@ -9,7 +9,7 @@
 ## 📊 完成度总览
 
 | 类别         | 完成率      | 状态                                                                 |
-| :--- | :--- | :--- || **文档完善** | **100%**    | ✅ 已完成（19/19 速查卡已补齐「相关文档 + 相关示例代码」）           |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **测试增强** | **82%**     | 🔄 进行中（需本地跑通全量测试）                                      |
 | **模块功能** | **100%**    | ✅ 待办已核查、示例已对应，可选项已补齐                              |
 | **研究任务** | **100%**    | ✅ 已完成（研究编排 TASK_ORCHESTRATION / TASK_CHECKLIST 已全部勾选） |
@@ -60,7 +60,7 @@
 - **测试增强**: 82% → 100%（剩余18%，需在无 target 锁定的环境下跑 `cargo test --workspace --tests`）
 - **文档完善**: ✅ **100% 已完成**（19/19 速查卡已补齐「相关文档 + 相关示例代码」，深度文档已入 docs 索引）
 - **模块功能**: ✅ **100% 已完成**（待办已核查、示例已对应，可选项已补齐）
-- **研究任务**: ✅ **100% 已完成**（[TASK_ORCHESTRATION](../../research_notes/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md)、[TASK_CHECKLIST](../../research_notes/TASK_CHECKLIST.md) 已全部完成）
+- **研究任务**: ✅ **100% 已完成**（[TASK_ORCHESTRATION](../../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md)、[TASK_CHECKLIST](../../research_notes/TASK_CHECKLIST.md) 已全部完成）
 
 **测试运行说明**: 若出现「拒绝访问」写入 target，可**直接执行** [scripts/run_workspace_tests.ps1](../../../scripts/run_workspace_tests.ps1)（默认优先使用 `%TEMP%\rust-lang-test\<timestamp>` 作为 `CARGO_TARGET_DIR`，降低 IDE/杀软/权限策略导致的锁冲突）；或手动执行 `$env:CARGO_TARGET_DIR="目标路径"; cargo test --workspace --tests`。
 
@@ -79,7 +79,7 @@
 - [x] 泛型、控制流与函数、线程与并发速查卡已补齐「相关文档 + 相关示例代码」（2026-01-27）
 - [x] 集合与迭代器、错误处理、智能指针速查卡已补齐「相关文档 + 相关示例代码」（2026-01-27）
 - [x] 其余速查卡（testing、cargo、modules、strings_formatting）已补齐「相关文档 + 相关示例代码」（2026-01-27）
-- [x] **19/19 速查卡**已统一添加「📚 相关文档 + 🧩 相关示例代码」块，详见 [quick_reference/README.md](../../quick_reference/README.md)
+- [x] **19/19 速查卡**已统一添加「📚 相关文档 + 🧩 相关示例代码」块，详见 [quick_reference/README.md](../../02_reference/quick_reference/README.md)
 - [x] 文档最终通读与格式统一（可选项已完成）
 
 ### 测试增强 82% → 100%
@@ -98,7 +98,7 @@
 
 ### 研究任务 ✅ 100% 已完成
 
-- [x] 按研究笔记/TASK_ORCHESTRATION 中的条目逐项完成或归档（[TASK_ORCHESTRATION](../../research_notes/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md)、[TASK_CHECKLIST](../../research_notes/TASK_CHECKLIST.md) 已标为 100%）
+- [x] 按研究笔记/TASK_ORCHESTRATION 中的条目逐项完成或归档（[TASK_ORCHESTRATION](../../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md)、[TASK_CHECKLIST](../../research_notes/TASK_CHECKLIST.md) 已标为 100%）
 
 ---
 

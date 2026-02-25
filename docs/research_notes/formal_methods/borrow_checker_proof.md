@@ -9,14 +9,14 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [借用检查器证明](#借用检查器证明)
-  - [📊 目录](#-目录)
-  - [🎯 研究目标](#-研究目标)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础](#-理论基础)
+  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
     - [相关概念](#相关概念)
     - [理论背景](#理论背景)
     - [数据竞争的形式化定义](#数据竞争的形式化定义)
@@ -38,28 +38,29 @@
       - [Ghost State 与 Unsafe 契约](#ghost-state-与-unsafe-契约)
       - [CMU 15-799 并发验证对齐表](#cmu-15-799-并发验证对齐表)
       - [差异分析：Rust 如何解决 MIT 课程中的并发安全问题](#差异分析rust-如何解决-mit-课程中的并发安全问题)
-  - [🔬 形式化定义](#-形式化定义)
+  - [🔬 形式化定义 {#-形式化定义}](#-形式化定义--形式化定义)
     - [§1 概念定义层](#1-概念定义层)
     - [§2 属性关系层（公理）](#2-属性关系层公理)
-  - [🧮 定理与证明](#-定理与证明)
+  - [🧮 定理与证明 {#-定理与证明}](#-定理与证明--定理与证明)
     - [§3 解释论证层](#3-解释论证层)
     - [引理与推论](#引理与推论)
-  - [🧠 思维导图](#-思维导图)
-  - [🌳 证明树](#-证明树)
-  - [📋 概念定义-属性关系-解释论证 汇总表](#-概念定义-属性关系-解释论证-汇总表)
-  - [⚠️ 反例：违反借用规则导致数据竞争](#️-反例违反借用规则导致数据竞争)
-  - [💻 代码示例与实践](#-代码示例与实践)
+  - [🧠 思维导图 {#-思维导图}](#-思维导图--思维导图)
+  - [🌳 证明树 {#-证明树}](#-证明树--证明树)
+  - [📋 概念定义-属性关系-解释论证 汇总表 {#-概念定义-属性关系-解释论证-汇总表}](#-概念定义-属性关系-解释论证-汇总表--概念定义-属性关系-解释论证-汇总表)
+    - [Rust 对应](#rust-对应)
+  - [⚠️ 反例：违反借用规则导致数据竞争 {#️-反例违反借用规则导致数据竞争}](#️-反例违反借用规则导致数据竞争-️-反例违反借用规则导致数据竞争)
+  - [💻 代码示例与实践 {#-代码示例与实践}](#-代码示例与实践--代码示例与实践)
     - [示例 1：不可变借用](#示例-1不可变借用)
     - [示例 2：可变借用](#示例-2可变借用)
     - [示例 3：借用检查器拒绝数据竞争](#示例-3借用检查器拒绝数据竞争)
     - [示例 4：借用作用域与生命周期](#示例-4借用作用域与生命周期)
     - [示例 5：借用检查器检测悬垂引用](#示例-5借用检查器检测悬垂引用)
     - [示例 6：复杂借用场景](#示例-6复杂借用场景)
-  - [🔗 系统集成与实际应用](#-系统集成与实际应用)
+  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
     - [与所有权系统的集成](#与所有权系统的集成)
     - [与生命周期的集成](#与生命周期的集成)
     - [实际应用案例](#实际应用案例)
-  - [✅ 证明目标](#-证明目标)
+  - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
   - [Rust 1.93 与并发/裸指针扩展（形式化占位）](#rust-193-与并发裸指针扩展形式化占位)
@@ -80,7 +81,7 @@
     - [证明负担对比](#证明负担对比)
     - [互补使用场景](#互补使用场景)
     - [与本文形式化的整合](#与本文形式化的整合)
-    - [参考文献](#参考文献)
+    - [参考文献 {#-参考文献}](#参考文献--参考文献)
   - [📖 参考文献](#-参考文献)
     - [学术论文（国际权威）](#学术论文国际权威)
     - [官方文档](#官方文档)
@@ -89,7 +90,7 @@
 
 ---
 
-## 🎯 研究目标
+## 🎯 研究目标 {#-研究目标}
 
 本研究旨在形式化定义 Rust 的借用检查器，并证明其保证数据竞争自由。
 
@@ -107,7 +108,7 @@
 
 ---
 
-## 📚 理论基础
+## 📚 理论基础 {#-理论基础}
 
 ### 相关概念
 
@@ -221,7 +222,7 @@ $$\text{DataRaceFree}(P) \leftrightarrow \neg \exists m, t_1, t_2: \text{DataRac
 
 MIT 6.826 研究的内存安全漏洞与 Rust 借用检查器的保证形成直接对比：
 
-**MIT 6.826 Memory Safety 形式化对比**
+**MIT 6.826 Memory Safety 形式化对比**:
 
 | MIT 6.826 概念 | MIT 形式化描述 | Rust 借用检查器对应 | 本文定义/定理 |
 | :--- | :--- | :--- | :--- |
@@ -231,7 +232,7 @@ MIT 6.826 研究的内存安全漏洞与 Rust 借用检查器的保证形成直�
 | **Use-after-free** | $\exists t_1 < t_2: \text{Free}(addr, t_1) \land \text{Access}(addr, t_2)$ | 编译期拒绝：借用检查器检测悬垂引用 | 示例 5, Theorem 3 |
 | **Double-free** | $\exists t_1 < t_2: \text{Free}(addr, t_1) \land \text{Free}(addr, t_2)$ | 所有权唯一性保证单次释放 | [ownership_model](./ownership_model.md) 定理 2 |
 
-**MIT 6.826 Lab 1 与 Rust 借用检查的对比**
+**MIT 6.826 Lab 1 与 Rust 借用检查的对比**:
 
 6.826 Lab 1 通过构造缓冲区溢出漏洞学习内存安全：
 
@@ -266,7 +267,7 @@ fn safe_buffer() {
 
 **课程链接**: <https://css.csail.mit.edu/6.858/>
 
-**Symbolic Execution (符号执行) 与 Borrow Checker 的关系**
+**Symbolic Execution (符号执行) 与 Borrow Checker 的关系**:
 
 MIT 6.858 Lab 3 使用符号执行发现程序漏洞：
 
@@ -300,7 +301,7 @@ $$\forall \pi \in \text{Paths}(P): \pi \models \text{BorrowRules}$$
 - **符号执行**: 运行时分析，可能遗漏路径（路径爆炸问题）
 - **借用检查器**: 编译期分析，保证所有路径满足借用规则（Axiom 4）
 
-**MIT 6.858 攻击与 Rust 防护**
+**MIT 6.858 攻击与 Rust 防护**:
 
 | 6.858 攻击类型 | 攻击原理 | Rust 借用检查防护 |
 | :--- | :--- | :--- |
@@ -310,14 +311,14 @@ $$\forall \pi \in \text{Paths}(P): \pi \models \text{BorrowRules}$$
 
 #### 数据竞争自由与 MIT 课程的联系
 
-**MIT 6.826/6.858 中的并发安全问题**
+**MIT 6.826/6.858 中的并发安全问题**:
 
 MIT 6.826 和 6.858 都涵盖并发安全：
 
 - **6.826**: 从 capability 角度研究并发访问控制
 - **6.858**: 从 race condition 角度研究并发漏洞
 
-**Rust 数据竞争自由的形式化保证**
+**Rust 数据竞争自由的形式化保证**:
 
 本文定理 1（数据竞争自由）直接对应 MIT 课程中的并发安全目标：
 
@@ -331,7 +332,7 @@ $$\forall P: \text{Check}(P) = \text{Pass} \rightarrow \text{DataRaceFree}(P)$$
 | 6.858 并发安全 | 锁、信号量（运行时） | `Mutex`、`RwLock` + 借用检查（编译期） |
 | 6.858 Race Condition | 动态检测工具 (如 ThreadSanitizer) | 编译期检测（Axiom 1-2） |
 
-**MIT 6.826 Capability 与 Rust 所有权的对应**
+**MIT 6.826 Capability 与 Rust 所有权的对应**:
 
 MIT 6.826 Lab 2 研究基于权能的安全模型：
 
@@ -359,7 +360,7 @@ MIT 6.826 Lab 2 研究基于权能的安全模型：
 #### MIT 课程对齐表
 
 | MIT 课程 | 章节 | 对齐内容 | 状态 |
-| :--- | :--- | :--- | :---: |
+| :--- | :--- | :--- | :--- |
 | 6.826 | Lab 1 | Buffer overflows → 借用检查检测 | ✅ |
 | 6.826 | Lecture | Memory safety → 定理 1 数据竞争自由 | ✅ |
 | 6.826 | Lab 2 | Capabilities → 所有权权能模型 | ✅ |
@@ -441,7 +442,7 @@ CMU 15-799 使用 Ghost State 进行并发验证的辅助推理。在 Rust 中�
 #### CMU 15-799 并发验证对齐表
 
 | CMU 15-799 主题 | 本文档对应 | 状态 |
-| :--- | :--- | :---: |
+| :--- | :--- | :--- |
 | Concurrent Separation Logic | Theorem 1 (数据竞争自由) | ✅ |
 | Resource Invariants | Def MUTEX1, Def RWLOCK1 | ✅ |
 | Ghost State | §unsafe 契约与 borrow/ownership | ✅ |
@@ -450,7 +451,7 @@ CMU 15-799 使用 Ghost State 进行并发验证的辅助推理。在 Rust 中�
 
 #### 差异分析：Rust 如何解决 MIT 课程中的并发安全问题
 
-**1. MIT 6.858 Race Condition → Rust 编译期预防**
+**1. MIT 6.858 Race Condition → Rust 编译期预防**:
 
 - **MIT 6.858 问题**: Race condition 难以检测，需要动态工具（如 ThreadSanitizer）
 - **Rust 解决方案**:
@@ -459,7 +460,7 @@ CMU 15-799 使用 Ghost State 进行并发验证的辅助推理。在 Rust 中�
   - 定理 1: 通过借用检查的程序保证数据竞争自由
 - **优势**: 运行时无开销，编译期保证正确性
 
-**2. MIT 6.826 Capability Delegation → Rust 所有权转移**
+**2. MIT 6.826 Capability Delegation → Rust 所有权转移**:
 
 - **MIT 6.826 问题**: 权能委托需要运行时检查
 - **Rust 解决方案**:
@@ -468,7 +469,7 @@ CMU 15-799 使用 Ghost State 进行并发验证的辅助推理。在 Rust 中�
   - 借用机制允许临时权能委托（`&T`、`&mut T`）
 - **形式化**: 权能委托 = 所有权转移 + 借用
 
-**3. MIT 6.858 TOCTOU → Rust 可变借用唯一性**
+**3. MIT 6.858 TOCTOU → Rust 可变借用唯一性**:
 
 - **MIT 6.858 问题**: Time-of-check to time-of-use 攻击利用检查与使用之间的时间窗口
 - **Rust 解决方案**:
@@ -477,7 +478,7 @@ CMU 15-799 使用 Ghost State 进行并发验证的辅助推理。在 Rust 中�
   - Axiom 1 保证可变借用的独占性
 - **形式化**: $\forall p, m: |\{b \mid \text{Active}(b, p) \land T(b) = \text{Mutable} \land \text{Target}(b) = m\}| \leq 1$
 
-**4. MIT 6.858 Concurrency Bugs → Rust Safe Rust 保证**
+**4. MIT 6.858 Concurrency Bugs → Rust Safe Rust 保证**:
 
 - **MIT 6.858 问题**: 并发 bug 是最难检测的漏洞类型之一
 - **Rust 解决方案**:
@@ -488,7 +489,7 @@ CMU 15-799 使用 Ghost State 进行并发验证的辅助推理。在 Rust 中�
 
 ---
 
-## 🔬 形式化定义
+## 🔬 形式化定义 {#-形式化定义}
 
 ### §1 概念定义层
 
@@ -556,7 +557,7 @@ $$\text{Compatible}(b_1, b_2) \leftrightarrow (T(b_1) = Immutable \land T(b_2) =
 
 ### §2 属性关系层（公理）
 
-**Axiom 1 (可变借用唯一性)**：对于任意程序点 $p$，至多存在一个可变借用指向内存位置 $m$：
+<a id="规则-1唯一性"></a>**Axiom 1 (可变借用唯一性)**：对于任意程序点 $p$，至多存在一个可变借用指向内存位置 $m$：
 
 $$\forall p, m: |\{b \mid \text{Active}(b, p) \land T(b) = Mutable \land \text{Target}(b) = m\}| \leq 1$$
 
@@ -564,7 +565,7 @@ $$\forall p, m: |\{b \mid \text{Active}(b, p) \land T(b) = Mutable \land \text{T
 
 ---
 
-**Axiom 2 (可变-不可变互斥)**：对于任意程序点 $p$，可变借用和不可变借用不能同时指向重叠的内存：
+<a id="规则-2共享性"></a>**Axiom 2 (可变-不可变互斥)**：对于任意程序点 $p$，可变借用和不可变借用不能同时指向重叠的内存：
 
 $$\forall p, b_1, b_2: \text{Active}(b_1, p) \land \text{Active}(b_2, p) \land T(b_1) = Mutable \land T(b_2) = Immutable \to \neg\text{Overlap}(\text{Target}(b_1), \text{Target}(b_2))$$
 
@@ -572,7 +573,7 @@ $$\forall p, b_1, b_2: \text{Active}(b_1, p) \land \text{Active}(b_2, p) \land T
 
 ---
 
-**Axiom 3 (借用有效性保持)**：如果借用 $b$ 在程序点 $p$ 有效，且从 $p$ 到 $p'$ 没有使 $b$ 失效的操作，则 $b$ 在 $p'$ 仍然有效：
+<a id="规则-3有效性"></a>**Axiom 3 (借用有效性保持)**：如果借用 $b$ 在程序点 $p$ 有效，且从 $p$ 到 $p'$ 没有使 $b$ 失效的操作，则 $b$ 在 $p'$ 仍然有效：
 
 $$\text{Valid}(b, p) \land \neg\text{Invalidate}(b, p, p') \to \text{Valid}(b, p')$$
 
@@ -590,20 +591,20 @@ $$\text{Check}(P) = \text{Pass} \leftrightarrow \forall \pi \in \text{Paths}(P):
 
 ---
 
-## 🧮 定理与证明
+## 🧮 定理与证明 {#-定理与证明}
 
 ### §3 解释论证层
 
-**Theorem 1 (数据竞争自由)**：通过借用检查的程序是数据竞争自由的。
+<a id="定理-1-数据竞争自由"></a>**Theorem 1 (数据竞争自由)**：通过借用检查的程序是数据竞争自由的。
 
 **形式化陈述**：
 $$\forall P: \text{Check}(P) = \text{Pass} \to \text{DataRaceFree}(P)$$
 
 **完整证明**：
 
-*证明方法：反证法 + 结构归纳*
+*证明方法：反证法 + 结构归纳*:
 
-**步骤 1：建立前提**
+**步骤 1：建立前提**:
 
 - 假设程序 $P$ 通过了借用检查，即 $\text{Check}(P) = \text{Pass}$
 - 假设 $P$ 存在数据竞争，即 $\exists m, t_1, t_2: \text{DataRace}(m, t_1, t_2)$
@@ -616,7 +617,7 @@ $$\forall P: \text{Check}(P) = \text{Pass} \to \text{DataRaceFree}(P)$$
 3. $\text{Write}(t_1, m) \lor \text{Write}(t_2, m)$：至少一个写操作
 4. $\neg\text{Synchronized}(t_1, t_2)$：无同步
 
-**步骤 3：分情况讨论**
+**步骤 3：分情况讨论**:
 
 *情况 A：两个写操作 ($\text{Write}(t_1, m) \land \text{Write}(t_2, m)$)*
 
@@ -632,7 +633,7 @@ $$\forall P: \text{Check}(P) = \text{Pass} \to \text{DataRaceFree}(P)$$
 - 若两者同时活跃，则违反 Axiom 2
 - 借用检查器会拒绝此类程序，与 $\text{Check}(P) = \text{Pass}$ 矛盾
 
-**步骤 4：归纳论证**
+**步骤 4：归纳论证**:
 
 对程序 $P$ 的结构进行归纳：
 
@@ -652,7 +653,7 @@ $$\forall P: \text{Check}(P) = \text{Pass} \to \text{DataRaceFree}(P)$$
 - 若 $s$ 跨线程传递：借用检查器要求 `Send`/`Sync`，见 [async_state_machine](async_state_machine.md) 定理 6.2
 - 若 $s$ 进行同步：根据 [borrow_checker_proof](borrow_checker_proof.md) Def MUTEX1，同步操作保证互斥
 
-**步骤 5：结论**
+**步骤 5：结论**:
 
 假设 $P$ 存在数据竞争导致矛盾。因此，通过借用检查的程序必定是数据竞争自由的。
 
@@ -669,7 +670,7 @@ $$\forall P: \text{Check}(P) = \text{Pass} \leftrightarrow \forall \pi \in \text
 
 **完整证明**：
 
-*证明方法：双向蕴含*
+*证明方法：双向蕴含*:
 
 **($\Rightarrow$) 方向**：$\text{Check}(P) = \text{Pass} \to \forall \pi: \pi \models \text{BorrowRules}$
 
@@ -696,14 +697,14 @@ $$\forall P: \text{Check}(P) = \text{Pass} \to \forall r \in \text{Refs}(P): \fo
 
 **完整证明**：
 
-*证明方法：结构归纳 + 反证法*
+*证明方法：结构归纳 + 反证法*:
 
-**步骤 1：建立前提**
+**步骤 1：建立前提**:
 
 - 程序 $P$ 通过借用检查
 - 假设存在引用 $r$ 在使用点 $p$ 无效
 
-**步骤 2：分析无效情况**
+**步骤 2：分析无效情况**:
 
 根据 Def 1.3，$\neg\text{Valid}(r, p)$ 可能由于：
 
@@ -721,7 +722,7 @@ $$\forall P: \text{Check}(P) = \text{Pass} \to \forall r \in \text{Refs}(P): \fo
 - 借用检查器跟踪所有权状态，拒绝使用指向已释放内存的引用
 - 矛盾
 
-**步骤 3：归纳论证**
+**步骤 3：归纳论证**:
 
 对程序执行路径进行归纳：
 
@@ -735,7 +736,7 @@ $$\forall P: \text{Check}(P) = \text{Pass} \to \forall r \in \text{Refs}(P): \fo
 - 若新语句使用引用：借用检查器验证引用在当前点有效
 - 根据 Axiom 3，有效性保持直到显式失效
 
-**步骤 4：结论**
+**步骤 4：结论**:
 
 假设存在无效引用导致矛盾。因此，通过借用检查的程序中所有引用有效。
 
@@ -793,7 +794,7 @@ $$\square$$
 
 ---
 
-## 🧠 思维导图
+## 🧠 思维导图 {#-思维导图}
 
 ```mermaid
 mindmap
@@ -826,7 +827,7 @@ mindmap
 
 ---
 
-## 🌳 证明树
+## 🌳 证明树 {#-证明树}
 
 ```mermaid
 graph TD
@@ -890,30 +891,40 @@ graph TD
 
 ---
 
-## 📋 概念定义-属性关系-解释论证 汇总表
+## 📋 概念定义-属性关系-解释论证 汇总表 {#-概念定义-属性关系-解释论证-汇总表}
 
 | 层次 | 编号 | 内容 | 文档位置 |
 | :--- | :--- | :--- | :--- |
 | **概念定义层** | Def 1.1 | 借用类型集合 $\mathcal{B} = \{Immutable, Mutable\}$ | §1 概念定义层 |
-| | Def 1.2 | 借用状态 $\mathcal{S} = (I, M, T)$ | §1 概念定义层 |
-| | Def 1.3 | 借用有效性 $\text{Valid}(b, p)$ | §1 概念定义层 |
-| | Def 1.4 | 借用冲突 $\text{Conflict}(b_1, b_2)$ | §1 概念定义层 |
-| | Def 1.5 | 程序状态 $\Sigma = (\Gamma, \Delta, S)$ | §1 概念定义层 |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | **属性关系层** | Axiom 1 | 可变借用唯一性 | §2 属性关系层 |
-| | Axiom 2 | 可变-不可变互斥 | §2 属性关系层 |
-| | Axiom 3 | 借用有效性保持 | §2 属性关系层 |
-| | Axiom 4 | 借用检查完备性 | §2 属性关系层 |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | **解释论证层** | Theorem 1 | 数据竞争自由（完整证明） | §3 解释论证层 |
-| | Theorem 2 | 借用规则正确性（完整证明） | §3 解释论证层 |
-| | Theorem 3 | 引用有效性保证（完整证明） | §3 解释论证层 |
-| | Lemma 1 | 互斥借用保持 | 引理与推论 |
-| | Lemma 2 | 可变借用独占性 | 引理与推论 |
-| | Corollary 1 | Safe Rust 数据竞争自由 | 引理与推论 |
-| | Corollary 2 | 并发安全 | 引理与推论 |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 
 ---
 
-## ⚠️ 反例：违反借用规则导致数据竞争
+### Rust 对应
+
+| 定理 | crates 示例 | 说明 |
+| :--- | :--- | :--- |
+| Theorem 1 (T-BR1 数据竞争自由) | [c01 借用示例](../../../crates/c01_ownership_borrow_scope/examples/)、[c05 Arc/Mutex](../../../crates/c05_threads/examples/) | 借用规则、无数据竞争 |
+
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
+
+---
+
+## ⚠️ 反例：违反借用规则导致数据竞争 {#️-反例违反借用规则导致数据竞争}
 
 | 反例 | 违反规则 | 后果 | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -924,7 +935,7 @@ graph TD
 
 ---
 
-## 💻 代码示例与实践
+## 💻 代码示例与实践 {#-代码示例与实践}
 
 ### 示例 1：不可变借用
 
@@ -1067,7 +1078,7 @@ fn complex_borrow() {
 
 ---
 
-## 🔗 系统集成与实际应用
+## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
 
 ### 与所有权系统的集成
 
@@ -1087,7 +1098,7 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 ---
 
-## ✅ 证明目标
+## ✅ 证明目标 {#-证明目标}
 
 ### 待证明的性质
 
@@ -1113,7 +1124,7 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 **定理 MUTEX-T1**：`Mutex` 为 Safe 抽象；内部 `unsafe` 封装；对外满足借用规则——任一时刻至多一个 `MutexGuard` 持有 `&mut T`。由 [borrow_checker_proof](borrow_checker_proof.md) Axiom 1。
 
-**Def RAW1（裸指针与 deref_nullptr）**：`*const T`/`*mut T` 无自动借用；解引用需 `unsafe`；1.93 `deref_nullptr` deny-by-default 禁止解引用可能为 null 的指针。形式化：$\text{deref}(p)$ 合法仅当 $\text{nonnull}(p)$；违反为 UB。
+<a id="def-raw1-裸指针与-deref_nullptr"></a>**Def RAW1（裸指针与 deref_nullptr）**：`*const T`/`*mut T` 无自动借用；解引用需 `unsafe`；1.93 `deref_nullptr` deny-by-default 禁止解引用可能为 null 的指针。形式化：$\text{deref}(p)$ 合法仅当 $\text{nonnull}(p)$；违反为 UB。
 
 **定理 RAW-T1**：裸指针解引用不与借用检查器冲突；借用检查器不检查裸指针；`deref_nullptr` lint 减少 null 解引用 UB。与 [type_system_foundations](../type_theory/type_system_foundations.md) Def DEREF-NULL1 衔接。
 
@@ -1143,15 +1154,15 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 ## FFI、extern、C variadic、? 操作符（Phase 6）
 
-**Def EXTERN1（extern ABI 边界）**：`extern "C"` 或 `extern "system"` 声明函数采用**外部 ABI**；调用时 Rust 不验证实参；调用者须保证类型与布局与目标 ABI 一致；违反为 UB。
+<a id="def-extern1-extern-abi-边界"></a>**Def EXTERN1（extern ABI 边界）**：`extern "C"` 或 `extern "system"` 声明函数采用**外部 ABI**；调用时 Rust 不验证实参；调用者须保证类型与布局与目标 ABI 一致；违反为 UB。
 
 **定理 EXTERN-T1**：extern 函数与借用检查器边界：Rust 仅检查 Rust 侧；调用 extern 时传入的引用若在 extern 调用期间被外部代码修改，则需 `unsafe` 契约保证。与 [borrow_checker_proof](borrow_checker_proof.md) 定理 1 相容——extern 不引入 Rust 借用冲突。
 
 **Def CVARIADIC1（C variadic 1.93）**：`extern "system" fn(..., ...)` 为 1.93 稳定的 C 风格可变参数；调用者须按 C 约定传递参数；`va_list` 等需 FFI 正确使用。
 
-**Def QUERY1（? 操作符）**：`e?` 为错误传播语法糖；`e: Result<T, E>` 或 `Option<T>`；`Ok(v)/Some(v)` 提取值，`Err(e)/None` 早期返回。形式化：$\text{query}(e) \equiv \text{match } e \text{ with Ok/Some} \rightarrow v \mid \text{Err/None} \rightarrow \text{return}$。
+<a id="def-query1-操作符"></a>**Def QUERY1（? 操作符）**：`e?` 为错误传播语法糖；`e: Result<T, E>` 或 `Option<T>`；`Ok(v)/Some(v)` 提取值，`Err(e)/None` 早期返回。形式化：$\text{query}(e) \equiv \text{match } e \text{ with Ok/Some} \rightarrow v \mid \text{Err/None} \rightarrow \text{return}$。
 
-**定理 QUERY-T1**：`?` 与借用：`e` 在 `?` 前求值完成，借用可结束；`?` 所在函数返回类型与 `e` 的 `E` 相容；不影响 [borrow_checker_proof](borrow_checker_proof.md) Axiom 1、2。
+<a id="定理-query-t1"></a>**定理 QUERY-T1**：`?` 与借用：`e` 在 `?` 前求值完成，借用可结束；`?` 所在函数返回类型与 `e` 的 `E` 相容；不影响 [borrow_checker_proof](borrow_checker_proof.md) Axiom 1、2。
 
 ---
 
@@ -1175,7 +1186,7 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 可变借用的唯一性通过分离逻辑的互斥约束表达：
 
-```
+```text
 Axiom 1: 同一时间只能有一个可变借用指向同一内存
 Axiom 2: 可变借用与不可变借用互斥
 ```
@@ -1213,7 +1224,7 @@ let x' := finalize_borrow (cur', prophecy) in
 
 #### Aeneas: borrow_generated_from
 
-```
+```text
 borrow_generated_from(b, x) ≡ 借用 b 从变量 x 生成
 ```
 
@@ -1243,7 +1254,7 @@ $$
 
 基于**互斥公理**:
 
-```
+```text
 Theorem 1: Check(P) = Pass → DataRaceFree(P)
 
 证明思路:
@@ -1256,7 +1267,7 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 
 基于**类型保持**:
 
-```
+```text
 翻译保持类型 → 翻译后程序无数据竞争
       ↓
 原始 Rust 程序无数据竞争
@@ -1281,7 +1292,7 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 
 ### 互补使用场景
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    Rust 借用验证工具选择                      │
 ├─────────────────────────────────────────────────────────────┤
@@ -1291,19 +1302,19 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 │       ▼                                     ▼               │
 │  ┌─────────┐                          ┌──────────┐          │
 │  │ Aeneas  │                          │RustBelt  │          │
-│  │(函数式) │                          │(分离逻辑)│          │
+│  │(函数式)  │                          │(分离逻辑)│          │
 │  └────┬────┘                          └────┬─────┘          │
 │       │                                     │               │
 │       ▼                                     ▼               │
-│  功能正确性                            内存安全 +            │
+│  功能正确性                            内存安全 +             │
 │  (预言变量)                            (Iris 框架)           │
 │                                                             │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │ 本文形式化: 为两者提供理论基础和验证目标定义          │   │
-│  │ • Def 1.1-1.5: 概念定义层                          │   │
-│  │ • Axiom 1-4: 属性关系层                            │   │
-│  │ • Theorem 1-3: 验证目标                            │   │
-│  └─────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │ 本文形式化: 为两者提供理论基础和验证目标定义            │    │
+│  │ • Def 1.1-1.5: 概念定义层                            │    │
+│  │ • Axiom 1-4: 属性关系层                              │    │
+│  │ • Theorem 1-3: 验证目标                              │    │
+│  └─────────────────────────────────────────────────────┘    │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -1328,7 +1339,7 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 | Theorem 2 (借用规则正确性) | 翻译正确性 | 对应 |
 | Theorem 3 (引用有效性) | 预言变量有效性 | 扩展 |
 
-### 参考文献
+### 参考文献 {#-参考文献}
 
 1. **Aeneas: Rust Verification by Functional Translation** (ICFP 2022)
    - 作者: Son Ho, Jonathan Protzenko (EPFL)

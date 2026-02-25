@@ -18,8 +18,8 @@
 | 选设计模式/并发模型 | [software_design_theory/00_MASTER_INDEX](./software_design_theory/00_MASTER_INDEX.md) |
 | 理解三大支柱 | [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） |
 | 完整总结与论证脉络 | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) → [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md) |
-| 批判性意见与改进计划 | [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](./RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) |
-| 格式统一与内容/Rust 1.93 对齐计划 | [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) |
+| 批判性意见与改进计划 | [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) |
+| 格式统一与内容/Rust 1.93 对齐计划 | [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) |
 | 层次化映射（文档树/概念↔定理/文档↔思维表征） | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) |
 | **docs 全结构梳理**（100% 覆盖） | [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) |
 | **目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) 或 [TOC_AND_CONTENT_DEEPENING_PLAN](../archive/process_reports/2026_02/TOC_AND_CONTENT_DEEPENING_PLAN.md) (归档) |
@@ -91,11 +91,12 @@ research_notes/
 ├── FORMAL_FULL_MODEL_OVERVIEW.md  # 形式化全模型入口（统一形式系统）🆕
 ├── RUSTBELT_ALIGNMENT.md  # RustBelt 逐章对标 🆕
 ├── EXECUTABLE_SEMANTICS_ROADMAP.md  # 可执行语义路线图 🆕
-├── AENEAS_INTEGRATION_PLAN.md  # Aeneas 对接计划 🆕
-├── COQ_OF_RUST_INTEGRATION_PLAN.md  # coq-of-rust 对接计划 🆕
-├── CORE_THEOREMS_FULL_PROOFS.md  # 核心定理完整证明（L2 级）🆕
-├── COQ_ISABELLE_PROOF_SCAFFOLDING.md  # Coq/Isabelle 证明骨架与 L3 实施指南 🆕
-├── coq_skeleton/  # Coq 证明骨架（T-OW2）🆕
+├── CORE_THEOREMS_FULL_PROOFS.md  # 核心定理完整证明（L2 级，数学风格）🆕
+├── THEOREM_RUST_EXAMPLE_MAPPING.md  # 定理↔Rust 示例映射 🆕
+├── AENEAS_INTEGRATION_PLAN.md  # 已归档 → [archive/deprecated/](../archive/deprecated/)
+├── COQ_OF_RUST_INTEGRATION_PLAN.md  # 已归档 → [archive/deprecated/](../archive/deprecated/)
+├── COQ_ISABELLE_PROOF_SCAFFOLDING.md  # 已归档 → [archive/deprecated/](../archive/deprecated/)
+├── coq_skeleton/  # 已归档 → [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/)
 ├── CONTENT_ENHANCEMENT.md      # 内容完善指南（含层次推进、实质内容自检表）🆕
 ├── CLASSIFICATION.md           # 文档分类体系（按角色/层次/主题域）🆕
 ├── WRITING_GUIDE.md            # 研究笔记写作指南
@@ -182,7 +183,7 @@ research_notes/
 
 **相关文档**:
 
-- [形式化工程系统](../../rust-formal-engineering-system/01_theoretical_foundations/)
+- [形式化工程系统](../rust-formal-engineering-system/01_theoretical_foundations/)
 - [所有权与借用](../../crates/c01_ownership_borrow_scope/docs/)
 - [异步语义理论](../../crates/c06_async/src/async_semantics_theory.rs)
 
@@ -208,7 +209,7 @@ research_notes/
 
 - [类型系统基础](../../crates/c02_type_system/docs/tier_04_advanced/)
 - [类型型变参考](../../crates/c02_type_system/docs/tier_03_references/) - 类型系统参考文档
-- [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)
+- [形式化工程系统 - 类型系统](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)
 
 ---
 
@@ -240,9 +241,9 @@ research_notes/
 
 ### 核心文档
 
-- [形式化工程系统](../../rust-formal-engineering-system/README.md)
-- [研究议程](../../rust-formal-engineering-system/09_research_agenda/00_index.md) - 形式化工程系统研究议程
-- [个人索引](../archive/temp/MY_PERSONAL_INDEX.md) - 已归档（如需要请查看归档目录）
+- [形式化工程系统](../rust-formal-engineering-system/README.md)
+- [研究议程](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md) - 形式化工程系统研究方法
+- [个人索引](../archive/temp/) - 归档目录（历史文档）
 
 ### 代码实现
 
@@ -252,13 +253,13 @@ research_notes/
 
 ### 学习资源
 
-- [类型系统速查卡](../../quick_reference/type_system.md)
-- [所有权速查卡](../../quick_reference/ownership_cheatsheet.md)
-- [异步模式速查卡](../../quick_reference/async_patterns.md)
+- [类型系统速查卡](../02_reference/quick_reference/type_system.md)
+- [所有权速查卡](../02_reference/quick_reference/ownership_cheatsheet.md)
+- [异步模式速查卡](../02_reference/quick_reference/async_patterns.md)
 
 ---
 
-## 📝 研究笔记规范
+## 📝 研究笔记规范 {#-研究笔记规范}
 
 ### 文档格式
 

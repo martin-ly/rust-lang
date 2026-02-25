@@ -1,4 +1,5 @@
 # 文档主题梳理与重组规划
+
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-20
 > **归档日期**: 2026-02-20
@@ -41,7 +42,7 @@ struct DocClassifier;
 impl DocClassifier {
     fn classify_by_name(filename: &str) -> Option<DocCategory> {
         let name = filename.to_lowercase();
-        
+
         if name.contains("learning") || name.contains("path") {
             Some(DocCategory::Learning)
         } else if name.contains("cheatsheet") || name.contains("reference") {
@@ -58,10 +59,10 @@ impl DocClassifier {
             None
         }
     }
-    
+
     fn scan_directory(dir: &str) -> HashMap<DocCategory, Vec<String>> {
         let mut categories: HashMap<DocCategory, Vec<String>> = HashMap::new();
-        
+
         if let Ok(entries) = fs::read_dir(dir) {
             for entry in entries.flatten() {
                 let path = entry.path();
@@ -70,7 +71,7 @@ impl DocClassifier {
                         .unwrap()
                         .to_string_lossy()
                         .to_string();
-                    
+
                     if let Some(category) = Self::classify_by_name(&filename) {
                         categories.entry(category)
                             .or_default()
@@ -79,14 +80,14 @@ impl DocClassifier {
                 }
             }
         }
-        
+
         categories
     }
 }
 
 fn main() {
     let categories = DocClassifier::scan_directory("docs");
-    
+
     for (category, files) in &categories {
         println!("{:?}: {} 个文档", category, files.len());
         for file in files.iter().take(5) {
@@ -144,15 +145,15 @@ impl ReorganizationPlan {
                 "RUST_RELEASE_TRACKING_CHECKLIST.md".to_string(),
             ]),
         ];
-        
+
         Self {
             target_structure: structure,
         }
     }
-    
+
     fn generate_plan(&self) -> String {
         let mut output = String::from("# 文档重组执行计划\n\n");
-        
+
         for (idx, (dir, files)) in self.target_structure.iter().enumerate() {
             output.push_str(&format!("## 阶段 {}: {}\n\n", idx + 1, dir));
             output.push_str(&format!("目标目录: `docs/{}`\n\n", dir));
@@ -162,7 +163,7 @@ impl ReorganizationPlan {
             }
             output.push_str("\n");
         }
-        
+
         output
     }
 }
@@ -190,7 +191,7 @@ impl NamingConventionChecker {
     fn new() -> Self {
         Self { issues: Vec::new() }
     }
-    
+
     fn check_file(&mut self, filename: &str) {
         // 检查混合命名
         if filename.contains('_') && filename.contains('-') {
@@ -199,17 +200,17 @@ impl NamingConventionChecker {
                 "同时使用下划线和连字符".to_string()
             ));
         }
-        
+
         // 检查版本号格式
         let version_regex = Regex::new(r"RUST_1\.\d{2}").unwrap();
-        if filename.to_uppercase().contains("RUST_") 
+        if filename.to_uppercase().contains("RUST_")
             && !version_regex.is_match(filename) {
             self.issues.push((
                 filename.to_string(),
                 "版本号格式不规范，应使用 RUST_1.XX".to_string()
             ));
         }
-        
+
         // 检查中英文混合
         if filename.chars().any(|c| c as u32 > 127) {
             self.issues.push((
@@ -218,7 +219,7 @@ impl NamingConventionChecker {
             ));
         }
     }
-    
+
     fn check_directory(&mut self, dir: &str) {
         if let Ok(entries) = fs::read_dir(dir) {
             for entry in entries.flatten() {
@@ -231,7 +232,7 @@ impl NamingConventionChecker {
             }
         }
     }
-    
+
     fn report(&self) {
         if self.issues.is_empty() {
             println!("✅ 所有文档命名符合规范");
@@ -257,9 +258,9 @@ fn main() {
 
 ### 研究笔记关联
 
-- **知识结构**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识结构框架定义
-- **项目架构**: [PROJECT_ARCHITECTURE_GUIDE.md](./PROJECT_ARCHITECTURE_GUIDE.md) - 项目整体架构设计
-- **交叉引用**: [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) - 文档交叉引用指南
+- **知识结构**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](../../../../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识结构框架定义
+- **项目架构**: [PROJECT_ARCHITECTURE_GUIDE.md](../../../../07_project/PROJECT_ARCHITECTURE_GUIDE.md) - 项目整体架构设计
+- **交叉引用**: [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](../../../../07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) - 文档交叉引用指南
 
 ### 实施场景
 
@@ -278,7 +279,7 @@ fn main() {
 `docs/` 根目录有 **40+ 个 .md 文件**，未按主题分类，查找困难：
 
 | 类别 | 文件示例 | 问题 |
-| :--- | :--- | :--- || **专题指南** | ASYNC_PROGRAMMING_USAGE_GUIDE, DESIGN_PATTERNS_USAGE_GUIDE, MACRO_SYSTEM_USAGE_GUIDE, THREADS_CONCURRENCY_USAGE_GUIDE, WASM_USAGE_GUIDE, UNSAFE_RUST_GUIDE, TROUBLESHOOTING_GUIDE | 分散，无统一入口 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **思维表征** | THINKING_REPRESENTATION_METHODS, DECISION_GRAPH_NETWORK, PROOF_GRAPH_NETWORK, MIND_MAP_COLLECTION, MULTI_DIMENSIONAL_CONCEPT_MATRIX, APPLICATIONS_ANALYSIS_VIEW | 6 个文件，概念重叠 |
 | **知识结构** | KNOWLEDGE_STRUCTURE_FRAMEWORK, MODULE_KNOWLEDGE_STRUCTURE_GUIDE, DOCUMENTATION_CROSS_REFERENCE_GUIDE, FINAL_DOCUMENTATION_COMPLETION_GUIDE | 层次不清 |
 | **版本相关** | RUST_192_* (6 个), MODULE_1.93_ADAPTATION_STATUS, RUST_RELEASE_TRACKING_CHECKLIST | 与 toolchain 重复 |
@@ -291,7 +292,7 @@ fn main() {
 ### 1.2 结构性问题
 
 | 问题 | 说明 |
-| :--- | :--- || **嵌套 docs/docs** | `docs/docs/language/applications/14_workflow/` 仅 2 个文件，层级过深且孤立 |
+| :--- | :--- | :--- | :--- | :--- |
 | **rust-formal-engineering-system 空心化** | 多数子目录为 README 占位， real 内容在 research_notes，形成「映射层」而非「内容层」 |
 | **双重入口** | 形式化理论：rust-formal-engineering-system 与 research_notes 两套入口，易混淆 |
 | **命名不一致** | 中英文混用、RUST_192 vs 1.92、GUIDE vs 指南、COMPREHENSIVE vs 全面 |
@@ -300,7 +301,7 @@ fn main() {
 ### 1.3 主题重叠与冗余
 
 | 重叠域 | 涉及文档 | 建议 |
-| :--- | :--- | :--- || 形式化理论 | rust-formal-engineering-system, research_notes, PROOF_INDEX, PROOF_GRAPH_NETWORK, THINKING_REPRESENTATION_METHODS 证明树 | 统一入口，减少跳转 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 最佳实践 | BEST_PRACTICES_GUIDE, COMPREHENSIVE_BEST_PRACTICES | 合并 |
 | 思维表征 | 6 个独立文件 | 归入单一「思维表征」主题 |
 | 版本信息 | RUST_192_*, toolchain/*, MODULE_1.93_* | 版本相关统一归 toolchain |
@@ -311,7 +312,7 @@ fn main() {
 
 ### 2.1 顶层分类原则
 
-```
+```text
 按「用户意图」分类，而非按「文档类型」：
 ├── 我要学习 → 学习路径、模块、速查
 ├── 我要参考 → 速查卡、API、标准库
@@ -386,7 +387,7 @@ docs/
 ### 2.3 主题与文档映射表
 
 | 主题 | 现文档 | 建议位置 |
-| :--- | :--- | :--- || 学习路径 | LEARNING_PATH_PLANNING, OFFICIAL_RESOURCES_MAPPING | 01_learning |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 速查 | quick_reference 目录 | 02_reference/quick_reference |
 | 边界特例 | EDGE_CASES_AND_SPECIAL_CASES | 02_reference |
 | 标准库分析 | STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS | 02_reference |
@@ -394,10 +395,10 @@ docs/
 | 形式化理论 | research_notes, rust-formal-engineering-system | 03_theory |
 | 证明索引 | PROOF_INDEX | 03_theory（或 research_notes） |
 | 思维表征 | 6 个文件 | 04_thinking |
-| 专题指南 | 7+ 个 *_USAGE_GUIDE | 05_guides |
+| 专题指南 | 7+ 个 **USAGE_GUIDE | 05_guides |
 | 最佳实践 | BEST_PRACTICES_GUIDE, COMPREHENSIVE_BEST_PRACTICES | 05_guides/best_practices（合并） |
 | 工具链 | toolchain 目录 | 06_toolchain |
-| 版本 | RUST_192_*, MODULE_1.93_* | 06_toolchain 或 07_project |
+| 版本 | RUST_192**, MODULE_1.93_* | 06_toolchain 或 07_project |
 | 知识结构 | KNOWLEDGE_STRUCTURE_FRAMEWORK, MODULE_KNOWLEDGE_STRUCTURE_GUIDE | 07_project |
 | 报告/评估 | PLAN_IMPLEMENTATION, CRITICAL_EVALUATION, IMPROVEMENT_SUMMARY, LINK_FIX_PLAN | 07_project 或 archive |
 
@@ -441,7 +442,7 @@ docs/
 ## 四、命名规范建议
 
 | 维度 | 规范 | 示例 |
-| :--- | :--- | :--- || 主题目录 | 数字前缀 + 英文小写 | 01_learning, 02_reference |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 文档文件名 | 英文大写 + 描述性 | THINKING_REPRESENTATION_METHODS.md |
 | 版本文档 | 统一 `toolchain/` 或 `version/` 前缀 | toolchain/07_rust_1.93_full_changelog.md |
 | 速查卡 | 保持现有 `*_cheatsheet.md` | ownership_cheatsheet.md |
@@ -459,7 +460,7 @@ docs/
 ## 按主题快速导航
 
 | 主题 | 入口 | 说明 |
-| :--- | :--- | :--- || 学习路径 | 01_learning/ | 学习规划、官方资源映射 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 速查参考 | 02_reference/quick_reference/ | 20 个速查卡 |
 | 形式化理论 | 03_theory/ | 研究笔记、证明索引 |
 | 思维表征 | 04_thinking/ | 思维导图、决策树、证明树、矩阵 |
@@ -480,7 +481,7 @@ docs/
 ## 六、与 crates 的映射关系
 
 | 主题 | 对应 crates | 说明 |
-| :--- | :--- | :--- || 所有权 | c01_ownership_borrow_scope | 根 docs 与 c01/docs 互补 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 类型系统 | c02_type_system | |
 | 控制流 | c03_control_fn | |
 | 泛型 | c04_generic | |
@@ -500,7 +501,7 @@ docs/
 ## 七、总结
 
 | 问题 | 规划方向 |
-| :--- | :--- || 根目录扁平、杂乱 | 按主题分层（01–07） |
+| :--- | :--- | :--- | :--- | :--- |
 | 思维表征分散 | 归入 04_thinking |
 | 指南分散 | 归入 05_guides |
 | 形式化理论双入口 | 统一为 03_theory |

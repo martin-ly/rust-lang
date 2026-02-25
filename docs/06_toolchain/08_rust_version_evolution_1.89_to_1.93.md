@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-15
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -10,11 +10,12 @@
 ## 演进概览
 
 | 版本 | 发布日期 | 主要变更摘要 |
-| :--- | :--- | :--- || 1.89 | 2025-08 | 稳定化、性能、错误诊断 |
+| :--- | :--- | :--- |
 | 1.90 | 2025-09 | LLD 默认链接器、cargo publish --workspace、平台变更 |
 | 1.91 | 2025-10 | aarch64-pc-windows-msvc Tier 1、dangling_pointers_from_locals lint |
 | 1.92 | 2025-12 | Never 类型 Lint 严格化、musl 预告、标准库 API |
-| 1.93 | 2026-01 | musl 1.2.5、全局分配器 TLS、asm_cfg、大量 API 稳定化、兼容性变更 |
+| 1.93.0 | 2026-01 | musl 1.2.5、全局分配器 TLS、asm_cfg、大量 API 稳定化、兼容性变更 |
+| **1.93.1** | **2026-02** | **补丁**：ICE 修复、Clippy panicking_unwrap 误报、wasm32-wasip2 FD 泄漏；见 [12_rust_1.93.1_vs_1.93.0](./12_rust_1.93.1_vs_1.93.0_comparison.md) |
 
 ---
 
@@ -67,13 +68,26 @@
 
 ---
 
+## 1.93.0 → 1.93.1（补丁）
+
+**关键变更**：
+
+- **ICE 修复**：关键词恢复逻辑修正，解决 rustfmt 崩溃
+- **Clippy**：`panicking_unwrap` 在隐式 Deref 场景下的误报修复
+- **wasm32-wasip2**：回退 wasm 依赖，修复文件描述符泄漏
+
+**参考**：[12_rust_1.93.1_vs_1.93.0_comparison.md](./12_rust_1.93.1_vs_1.93.0_comparison.md)、[Rust 1.93.1 官方公告](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/)
+
+---
+
 ## 迁移路径建议
 
-| 当前版本 | 目标 1.93 | 建议 |
-| :--- | :--- | :--- || 1.89 | 1.93 | 检查 Never 类型 Lint、deref_nullptr、#[test] |
-| 1.90 | 1.93 | 检查 LLD、cargo 变更 |
-| 1.91 | 1.93 | 检查平台、dangling_pointers |
-| 1.92 | 1.93 | 少量变更，关注兼容性文档 |
+| 当前版本 | 目标 1.93.1 | 建议 |
+| :--- | :--- | :--- |
+| 1.90 | 1.93.1 | 检查 LLD、cargo 变更 |
+| 1.91 | 1.93.1 | 检查平台、dangling_pointers |
+| 1.92 | 1.93.1 | 少量变更，关注兼容性文档 |
+| 1.93.0 | 1.93.1 | 直接 `rustup update stable`，无迁移风险 |
 
 ---
 

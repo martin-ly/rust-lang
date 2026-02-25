@@ -60,15 +60,11 @@
 - **编排 (Orchestration)**: 由中央协调器控制 Saga 的执行流程
 - **编制 (Choreography)**: 各服务通过事件交换自发协调 Saga 流程
 
-**形式化定义** (Coq):
+**形式化定义**（数学风格）:
 
-```coq
-Record SagaStep := mkSagaStep {
-  step_id : TxId;
-  step_action : Value -> OpResult;
-  step_compensation : Value -> OpResult
-}.
-```
+**Def SG1（Saga 步骤）**：设 $\mathit{step\_id}$ 为事务标识，$\mathit{step\_action}: V \to \mathit{Result}$ 为执行动作，$\mathit{step\_compensation}: V \to \mathit{Result}$ 为补偿动作。Saga 步骤三元组 $(\mathit{id}, \mathit{action}, \mathit{comp})$ 满足：若 $\mathit{action}(v) = \mathrm{Err}(e)$，则执行 $\mathit{comp}(v)$ 撤销效果。
+
+**Rust 对应**：`Result` + `Vec<Box<dyn Fn() -> Result<(), E>>>` 补偿闭包；见 [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md)。
 
 ---
 
@@ -97,15 +93,9 @@ Record SagaStep := mkSagaStep {
 - **事件溯源 (Event Sourcing)**: 将状态变化存储为事件序列
 - **物化视图 (Materialized View)**: 为查询优化的预计算视图
 
-**形式化定义** (Coq):
+**形式化定义**（数学风格）:
 
-```coq
-Record CQRSSystem := mkCQRSSystem {
-  cqrs_event_store : EventStore;
-  cqrs_read_model : ReadModel;
-  cqrs_projection : EventStore -> ReadModel
-}.
-```
+**Def CQ1（CQRS 系统）**：设 $\mathit{Write\ Model} \neq \mathit{Read\ Model}$；事件存储 $\mathit{EventStore}$ 追加-only；投影 $\mathit{projection}: \mathit{EventStore} \to \mathit{ReadModel}$ 同步读模型。见 [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md) Def DI-CQ1。
 
 ---
 
@@ -138,7 +128,7 @@ Record CQRSSystem := mkCQRSSystem {
 ## 概念关系矩阵
 
 | 概念A | 关系 | 概念B | 说明 |
-| :--- | :---: | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | Saga | 使用 | 补偿 | Saga 通过补偿实现原子性 |
 | Saga | 结合 | 熔断器 | 防止 Saga 参与者级联故障 |
 | CQRS | 使用 | 事件溯源 | 命令端生成事件，查询端消费 |
@@ -187,9 +177,8 @@ Record CQRSSystem := mkCQRSSystem {
 
 ## 相关文档
 
-- [Coq 形式化定义](../coq_skeleton/DISTRIBUTED_PATTERNS.v)
-- [Saga 详细说明](../../software_design_theory/04_compositional_engineering/README.md)
-- [CQRS 实现指南](../../../docs/05_guides/DISTRIBUTED_SYSTEMS_GUIDE.md)
+- [05_distributed 分布式形式化](../../software_design_theory/03_execution_models/05_distributed.md) - Saga/CQRS/Circuit Breaker Def
+- [DISTRIBUTED_PATTERNS_MATRIX](./DISTRIBUTED_PATTERNS_MATRIX.md) - 模式对比矩阵
 
 ---
 

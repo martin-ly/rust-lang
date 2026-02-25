@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: Rust 工具链是编译器（rustc）、包管理器（Cargo）、文档生成器（rustdoc）和相关工具（Clippy、rustfmt、MIRI）的集合。它们协同工作，提供从代码编写、编译、测试到部署的完整开发体验。
 
@@ -203,7 +203,7 @@ lto = true
 
 ### Rust 1.93 主要改进 🆕
 
-**版本**: Rust 1.93.0 (2026-01-22)
+**版本**: Rust 1.93.1 (2026-02-12，补丁版；功能版 1.93.0 于 2026-01-22 发布)
 
 **主要改进**:
 
@@ -362,12 +362,13 @@ pub fn function(a: i32, b: i32) -> i32 {
 本节只列出**官方 release post 明确强调**的差异（避免把“推测/通用经验”写成版本事实）。其余细节请以官方详细 release notes 为准。
 
 | 变化                                               | 首次出现  | 权威来源                                                                                                                                                         |
-| :--- | :--- | :--- || Linux `x86_64-unknown-linux-gnu` 默认 LLD 链接器   | Rust 1.90 | [Rust 1.90.0](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)；[rust-lld-on-1.90.0-stable](https://blog.rust-lang.org/2025/09/01/rust-lld-on-1.90.0-stable/) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `cargo publish --workspace`                        | Rust 1.90 | [Rust 1.90.0](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)                                                                                                |
 | `aarch64-pc-windows-msvc` → Tier 1                 | Rust 1.91 | [Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)；[PR #145682](https://github.com/rust-lang/rust/pull/145682)                                   |
 | `dangling_pointers_from_locals`（warn-by-default） | Rust 1.91 | [Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)；[warn-by-default lints](https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html)   |
 | musl 1.2.5                                         | Rust 1.93 | [Rust 1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)                                                                                                |
 | `cfg` 属性可用于单个 `asm!` 语句                   | Rust 1.93 | [Rust 1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)                                                                                                |
+| 1.93.1 补丁（ICE/Clippy/WASM 回归修复）           | Rust 1.93.1 | [Rust 1.93.1](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/)                                                                                                |
 
 ---
 
@@ -387,6 +388,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.93 兼容性深度解析](./09_rust_1.93_compatibility_deep_dive.md) 🆕
 - [Rust 1.89→1.93 累积特性总览](./10_rust_1.89_to_1.93_cumulative_features_overview.md) 🆕
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](./11_rust_1.93_cargo_rustdoc_changes.md) 🆕
+- [Rust 1.93.1 vs 1.93.0 补丁版本对比](./12_rust_1.93.1_vs_1.93.0_comparison.md) 🆕
 - [Rust 1.93 语言特性全面分析（92 项设计论证）](../research_notes/RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 🆕
 
 ### 官方资源
@@ -482,7 +484,7 @@ tokio = { version = "1.0", features = ["full"] }
 ### 编译时间对比
 
 | 配置           | 清洁构建 | 增量构建 | 说明     |
-| :--- | :--- | :--- | :--- || Dev (默认)     | 5s       | 1s       | 快速迭代 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Release (基础) | 30s      | 15s      | 标准优化 |
 | Release + LTO  | 60s      | 30s      | 最大优化 |
 | Release + PGO  | 80s      | -        | 极致性能 |

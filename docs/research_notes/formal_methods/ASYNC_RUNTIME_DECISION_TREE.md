@@ -8,7 +8,7 @@
 
 ## 决策树概览
 
-```
+```text
 需要异步运行时？
 │
 ├── IO密集型任务？
@@ -50,7 +50,7 @@
 ## 主流运行时对比
 
 | 运行时 | 适用场景 | 特点 | 生态 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | **Tokio** | 通用服务端 | 成熟、功能全、生态好 | ⭐⭐⭐⭐⭐ |
 | **async-std** | 标准库兼容 | 类似std API | ⭐⭐⭐ |
 | **smol** | 轻量级 | 简单、可组合 | ⭐⭐ |
@@ -61,7 +61,7 @@
 
 ## Tokio配置决策
 
-```
+```text
 使用Tokio
 │
 ├── 选择运行时类型
@@ -104,7 +104,7 @@
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 启动TCP服务器
     let listener = tokio::net::TcpListener::bind("127.0.0.1:8080").await?;
-    
+
     loop {
         let (socket, _) = listener.accept().await?;
         // 为每个连接spawn任务
@@ -129,7 +129,7 @@ async fn main() {
     let result = tokio::task::spawn_blocking(|| {
         heavy_computation()
     }).await.unwrap();
-    
+
     // IO操作使用async
     let data = tokio::fs::read_to_string("file.txt").await.unwrap();
 }

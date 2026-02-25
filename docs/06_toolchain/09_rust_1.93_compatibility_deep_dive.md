@@ -1,9 +1,21 @@
 # Rust 1.93 兼容性深度解析
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-15
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-26
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
+
+---
+
+## 1.93.1 补丁版本说明
+
+**Rust 1.93.1**（2026-02-12）为补丁版本，修复 1.93.0 引入的三处回归，**无语言/库/兼容性变更**：
+
+- **编译器 ICE**：关键词恢复逻辑导致 rustfmt 等崩溃 → 已修复
+- **Clippy 误报**：`panicking_unwrap` 在 Deref 链上误报 → 已修复
+- **wasm32-wasip2**：文件描述符泄漏 → 已修复
+
+详见 [12_rust_1.93.1_vs_1.93.0_comparison](./12_rust_1.93.1_vs_1.93.0_comparison.md)。
 
 ---
 
@@ -16,7 +28,7 @@
   - [#\[test\] 属性严格化](#test-属性严格化)
   - [offset\_of! 类型检查](#offset_of-类型检查)
   - [deref\_nullptr deny-by-default](#deref_nullptr-deny-by-default)
-  - [... 可变参数 future-incompat](#-可变参数-future-incompat)
+  - [... 可变参数 future-incompat {#-可变参数-future-incompat}](#-可变参数-future-incompat--可变参数-future-incompat)
   - [repr(C) enum 判别值警告](#reprc-enum-判别值警告)
   - [repr(transparent) 忽略 repr(C) 警告](#reprtransparent-忽略-reprc-警告)
   - [相关文档](#相关文档)
@@ -172,7 +184,7 @@ fn legacy_code() { ... }
 
 ---
 
-## ... 可变参数 future-incompat
+## ... 可变参数 future-incompat {#-可变参数-future-incompat}
 
 **变更**：在 `extern` 块外使用 `...` 作为函数参数且无模式，将产生 **future-incompatibility** 警告。
 

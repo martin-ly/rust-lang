@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 针对「很多文档无目录、内容有待深入分析论证」输出批判性意见与建议、可持续推进计划
-> **上位文档**: [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md)、[CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md)、[FORMAT_AND_CONTENT_ALIGNMENT_PLAN](FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md)
+> **上位文档**: [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md)、[CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md)、[FORMAT_AND_CONTENT_ALIGNMENT_PLAN](FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md)
 
 ---
 
@@ -49,15 +49,15 @@
 | 建议 | 说明 |
 | :--- | :--- |
 | **统一 TOC 规范** | 凡 ≥3 个二级标题的文档，在元信息后、正文前增加「## 📊 目录」；至少到三级（`##`、`###`）；锚点与标题一致 |
-| **模板化** | 在 [TEMPLATE](TEMPLATE.md) 或 [WRITING_GUIDE](WRITING_GUIDE.md) 中增加 TOC 模板；新文档门禁要求 |
+| **模板化** | 在 [TEMPLATE](../../../research_notes/TEMPLATE.md) 或 [WRITING_GUIDE](../../../research_notes/WRITING_GUIDE.md) 中增加 TOC 模板；新文档门禁要求 |
 | **批量补全优先级** | 先补核心研究笔记（formal_methods、type_theory、design_patterns 23）、框架文档（ARGUMENTATION_CHAIN、HIERARCHICAL_MAPPING、FORMAL_FULL_MODEL）；再补索引/概览类 |
 | **自动化辅助** | 可考虑脚本从 `^##` 标题生成 TOC 骨架；人工校验链接 |
 
 ### 2.2 内容深化
 
 | 建议 | 说明 |
-| **层次化落地** | 核心文档补「概念定义」「属性关系」「解释论证」显式小节或表格；见 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § 概念定义-属性关系-解释论证 |
-| **五维自检逐篇** | 用 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) § 实质内容自检表 对 23 模式、执行模型、type_theory、实验逐篇打分；未达标列入待补清单 |
+| **层次化落地** | 核心文档补「概念定义」「属性关系」「解释论证」显式小节或表格；见 [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) § 概念定义-属性关系-解释论证 |
+| **五维自检逐篇** | 用 [CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md) § 实质内容自检表 对 23 模式、执行模型、type_theory、实验逐篇打分；未达标列入待补清单 |
 | **证明深度标注** | 延续 L1/L2/L3 分级；对关键定理（ownership T2/T3、borrow T1、CE-PAT1 等）优先补 L2 |
 | **1.93 对应小节** | 核心文档文末或「相关文档」处增加「与 Rust 1.93 的对应」段；链到 RUST_193、06_toolchain |
 | **权威对标集中** | 在 FORMAL_METHODS_COMPLETENESS_CHECKLIST、INTERNATIONAL_FORMAL_VERIFICATION_INDEX 等已有基础上，各篇增加「权威对应」行 |
@@ -176,11 +176,11 @@ T3.* 在 T1、T2 有成果后接入
 
 | 文档 | 与本计划的关系 |
 | :--- | :--- |
-| [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) | 目录结构、概念定义-属性关系-解释论证检查项已存在；本计划要求全库落地 |
-| [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) | 五维自检表、层次化规范已存在；本计划要求逐篇执行 |
+| [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) | 目录结构、概念定义-属性关系-解释论证检查项已存在；本计划要求全库落地 |
+| [CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md) | 五维自检表、层次化规范已存在；本计划要求逐篇执行 |
 | [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) | 目录块统一、格式规范已提出；本计划细化执行 |
-| [MAINTENANCE_GUIDE](MAINTENANCE_GUIDE.md) | 季度维护已存在；本计划增加 TOC、内容抽查项 |
-| [TEMPLATE](TEMPLATE.md)、[WRITING_GUIDE](WRITING_GUIDE.md) | 新增 TOC 模板与门禁 |
+| [MAINTENANCE_GUIDE](../../../research_notes/MAINTENANCE_GUIDE.md) | 季度维护已存在；本计划增加 TOC、内容抽查项 |
+| [TEMPLATE](../../../research_notes/TEMPLATE.md)、[WRITING_GUIDE](../../../research_notes/WRITING_GUIDE.md) | 新增 TOC 模板与门禁 |
 
 ---
 

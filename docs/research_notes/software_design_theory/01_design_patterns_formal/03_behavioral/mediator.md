@@ -11,10 +11,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [Mediator 形式化分析](#mediator-形式化分析)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Mediator 结构）](#def-11mediator-结构)
     - [Axiom ME1（无直接耦合公理）](#axiom-me1无直接耦合公理)
@@ -179,7 +179,7 @@ m.broadcast("hello");
 
 ### 形式化论证链
 
-```
+```text
 Axiom ME1 (无直接耦合)
     ↓ 实现
 channel / Weak

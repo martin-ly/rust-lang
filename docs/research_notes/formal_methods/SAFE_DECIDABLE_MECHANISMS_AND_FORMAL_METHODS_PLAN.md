@@ -111,10 +111,10 @@
 
 | 类型 | 当前入口 | 与 formal_methods 的绑定建议 |
 | :--- | :--- | :--- |
-| **思维导图** | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 增加「安全可判定机制」节点：ownership → borrow → lifetime → Send/Sync → Pin → async；每节点链到对应 formal_methods 文档。 |
+| **思维导图** | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) | 增加「安全可判定机制」节点：ownership → borrow → lifetime → Send/Sync → Pin → async；每节点链到对应 formal_methods 文档。 |
 | **概念多维矩阵** | [README §六篇并表](README.md#formal_methods-六篇并表)、[执行模型矩阵](../software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵)、[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) §6 | 安全可判定机制 × 可判定性 × 安全边界 × 形式化文档（§3.1）；六篇并表含 Send/Sync 专篇。 |
 | **决策树** | [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md)、[DESIGN_MECHANISM_RATIONALE §Send/Sync](../DESIGN_MECHANISM_RATIONALE.md) | 需跨线程 → Send/Sync；需 async → Send 跨 await、Pin；与 formal_methods Def/定理编号并排引用。 |
-| **推理证明树** | [PROOF_INDEX](../PROOF_INDEX.md)、[PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | Send/Sync → [send_sync_formalization](send_sync_formalization.md)、async T6.2、SPAWN-T1、CHAN-T1；ownership/borrow/lifetime 保持现有。 |
+| **推理证明树** | [PROOF_INDEX](../PROOF_INDEX.md)、[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) | Send/Sync → [send_sync_formalization](send_sync_formalization.md)、async T6.2、SPAWN-T1、CHAN-T1；ownership/borrow/lifetime 保持现有。 |
 
 ### 4.2 各篇形式化文档内「相关思维表征」块
 

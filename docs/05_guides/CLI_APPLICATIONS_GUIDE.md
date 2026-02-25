@@ -11,6 +11,8 @@
 
 本指南为官方 **Command Line Book** 的补充与项目内导航，帮助在开发 Rust 命令行应用时快速定位到本项目的相关模块和示例。
 
+**形式化引用**：T-OW2、T-BR1（进程间资源）、[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)（子进程安全边界）。
+
 ---
 
 ## 官方 CLI Book 入口
@@ -168,7 +170,7 @@ fn main() {
 }
 ```
 
-### 5. 错误处理最佳实践
+### 5. 错误处理最佳实践 {#错误处理最佳实践}
 
 ```rust
 use thiserror::Error;
@@ -315,13 +317,13 @@ fn main() -> ExitCode {
 | 链接类型 | 目标文档 |
 | :--- | :--- |
 | **前置知识** | [C03 控制流](../../crates/c03_control_fn/docs/00_MASTER_INDEX.md) |
-| | [C07 进程管理](../../crates/c07_process/docs/00_MASTER_INDEX.md) |
+| :--- | :--- |
 | **错误处理** | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
 | **异步编程** | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
-| | [async_patterns](../02_reference/quick_reference/async_patterns.md) |
+| :--- | :--- |
 | **Cargo 工具** | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
 | **相关指南** | [TROUBLESHOOTING_GUIDE.md](./TROUBLESHOOTING_GUIDE.md) |
-| | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
+| :--- | :--- |
 
 ---
 

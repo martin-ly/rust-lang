@@ -7,10 +7,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [充分表达 vs 非充分表达论证](#充分表达-vs-非充分表达论证)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [定义](#定义)
   - [等价/近似/不可表达判定规则](#等价近似不可表达判定规则)
   - [等价表达的模式](#等价表达的模式)
@@ -165,7 +165,7 @@
 
 - **Saga**：Rust 无分布式 2PC；补偿需显式实现；`Result` + 闭包可表达补偿链，但无 Saga 编排器内置支持；与 Temporal/Cadence 等引擎对接时为近似（需外部编排）。
 
-**引用**：[06_boundary_analysis 并发选型](../../03_execution_models/06_boundary_analysis.md)、[04_compositional_engineering](../../04_compositional_engineering/README.md)
+**引用**：[06_boundary_analysis 并发选型](../03_execution_models/06_boundary_analysis.md)、[04_compositional_engineering](../04_compositional_engineering/README.md)
 
 ---
 
@@ -175,9 +175,13 @@
 
 **Def WF2（状态机）**：有限状态集 $S$，转换 $\delta: S \times E \to S$；Rust 等价：`enum State` + `match`。
 
-**Def WF3（补偿链）**：同 [05_distributed](../../03_execution_models/05_distributed.md) Saga Def DI-SG1；$\mathit{Comp}_1 \circ \mathit{Comp}_2 \circ \cdots$。
+**Def WF3（补偿链）**：同 [05_distributed](../03_execution_models/05_distributed.md) Saga Def DI-SG1；$\mathit{Comp}_1 \circ \mathit{Comp}_2 \circ \cdots$。
 
 **Def WF4（长事务）**：跨步骤、可补偿的原子语义；Rust 近似：`async` 块 + `Result` + 补偿闭包。
+
+**定理 WF-T1（工作流终止性）**：设工作流 $W$ 有穷状态集 $S$、有穷活动序列 $A_1, \ldots, A_n$，且无无限循环（良基转换）。则 $W$ 的执行在有限步内到达终止状态（Completed/Failed/Cancelled）。
+
+*证明*：由 Def WF1、WF2；有穷状态 + 良基转换 ⇒ 无无限路径；归纳于步数，每步或终止或进入下一活动；有穷 $n$ 故有穷步终止。∎
 
 | 工作流能力 | 表达 | Rust 实现 | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -187,7 +191,7 @@
 | **人工任务** | 近似 | 状态等待、channel 阻塞 | 需外部任务队列 |
 | **超时/重试** | 等价 | `tokio::time::timeout`、指数退避 | 与 async 自然衔接 |
 
-**引用**：[02_workflow README 23/43 与工作流关系](README.md#2343-与工作流关系d34)、[05_distributed](../../03_execution_models/05_distributed.md)。
+**引用**：[02_workflow README 23/43 与工作流关系](README.md#2343-与工作流关系d34)、[05_distributed](../03_execution_models/05_distributed.md)。
 
 ---
 
@@ -352,4 +356,4 @@ impl Originator {
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)：边界定理 EB1–EB6
 - [DESIGN_MECHANISM_RATIONALE](../../DESIGN_MECHANISM_RATIONALE.md)：设计机制理由
-- [04_compositional_engineering 表达力×组合联合判定树](../../04_compositional_engineering/README.md#表达力组合联合判定树支柱-23)：表达力与组合层级 L1–L4 联合选型
+- [04_compositional_engineering 表达力×组合联合判定树](../04_compositional_engineering/README.md#表达力组合联合判定树支柱-23)：表达力与组合层级 L1–L4 联合选型

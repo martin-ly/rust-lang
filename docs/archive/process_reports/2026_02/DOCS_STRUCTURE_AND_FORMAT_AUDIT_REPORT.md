@@ -13,7 +13,7 @@
 > **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **用途**: 全面梳理 docs 所有文件的结构和格式，识别拼写和结构格式问题
-> **上位文档**: [DOCS_STRUCTURE_OVERVIEW](./DOCS_STRUCTURE_OVERVIEW.md)
+> **上位文档**: [DOCS_STRUCTURE_OVERVIEW](../../../DOCS_STRUCTURE_OVERVIEW.md)
 
 ---
 
@@ -430,7 +430,7 @@ docs/
 
 ### 6.3 质量门禁建议
 
-在 [CONTRIBUTING.md](research_notes/CONTRIBUTING.md) 中明确：
+在 [CONTRIBUTING.md](../../../research_notes/CONTRIBUTING.md) 中明确：
 
 1. 新文档必须包含完整元信息
 2. 表格必须使用 `:---` 左对齐格式
@@ -440,7 +440,7 @@ docs/
 
 ### 6.4 季度复核建议
 
-在 [MAINTENANCE_GUIDE.md](research_notes/MAINTENANCE_GUIDE.md) 中增加：
+在 [MAINTENANCE_GUIDE.md](../../../research_notes/MAINTENANCE_GUIDE.md) 中增加：
 
 1. 格式统一抽查
 2. 链接有效性检查
@@ -453,12 +453,12 @@ docs/
 
 | 文档 | 说明 |
 | :--- | :--- |
-| [DOCS_STRUCTURE_OVERVIEW](./DOCS_STRUCTURE_OVERVIEW.md) | 完整结构总览 |
-| [00_MASTER_INDEX](./00_MASTER_INDEX.md) | 文档中心主索引 |
-| [QUALITY_CHECKLIST](research_notes/QUALITY_CHECKLIST.md) | 质量检查清单 |
-| [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](research_notes/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) | 格式统一计划 |
-| [CONTRIBUTING](research_notes/CONTRIBUTING.md) | 贡献指南 |
-| [MAINTENANCE_GUIDE](research_notes/MAINTENANCE_GUIDE.md) | 维护指南 |
+| [DOCS_STRUCTURE_OVERVIEW](../../../DOCS_STRUCTURE_OVERVIEW.md) | 完整结构总览 |
+| [00_MASTER_INDEX](../../../00_MASTER_INDEX.md) | 文档中心主索引 |
+| [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) | 质量检查清单 |
+| [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) | 格式统一计划 |
+| [CONTRIBUTING](../../../research_notes/CONTRIBUTING.md) | 贡献指南 |
+| [MAINTENANCE_GUIDE](../../../research_notes/MAINTENANCE_GUIDE.md) | 维护指南 |
 
 ---
 

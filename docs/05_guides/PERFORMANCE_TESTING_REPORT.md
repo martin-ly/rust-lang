@@ -1,4 +1,4 @@
-# ⚡ 性能测试报告
+# ⚡ 性能测试报告 {#-性能测试报告}
 
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-02-15
@@ -7,10 +7,10 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#-目录}
 
-- [⚡ 性能测试报告](#-性能测试报告)
-  - [📋 目录](#-目录)
+- [⚡ 性能测试报告 {#-性能测试报告}](#-性能测试报告--性能测试报告)
+  - [📋 目录 {#-目录}](#-目录--目录)
   - [概述](#概述)
   - [性能基准测试文件统计](#性能基准测试文件统计)
     - [核心模块性能测试](#核心模块性能测试)
@@ -48,7 +48,7 @@
 ### 核心模块性能测试
 
 | 模块                       | 基准测试文件数 | 文件列表                                                                                                                                                                                                                       |
-| :--- | :--- | :--- || c01_ownership_borrow_scope | 2              | performance_benchmarks.rs, rust_192_benchmarks.rs                                                                                                                                                                              |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | c02_type_system            | 3              | performance_benchmarks.rs, rust_190_simple_benchmarks.rs, rust_192_benchmarks.rs                                                                                                                                               |
 | c03_control_fn             | 2              | performance_benchmarks.rs, rust_192_benchmarks.rs                                                                                                                                                                              |
 | c04_generic                | 2              | performance_benchmarks.rs, rust_192_benchmarks.rs                                                                                                                                                                              |
@@ -153,7 +153,7 @@ cargo bench --package c02_type_system --bench performance_benchmarks
 ### 性能优化资源
 
 - [Rust性能手册](https://nnethercote.github.io/perf-book/)
-- [Rust性能优化指南](../ADVANCED_TOPICS_DEEP_DIVE.md#6-性能优化深度指南)
+- [Rust性能优化指南](./ADVANCED_TOPICS_DEEP_DIVE.md#6-性能优化深度指南)
 
 ---
 
@@ -173,7 +173,7 @@ cargo bench --workspace
 
 比较不同实现的性能：
 
-- 使用 [Criterion](../PERFORMANCE_TUNING_GUIDE.md#1-使用-criterion-基准测试) 进行精确测量
+- 使用 [Criterion](./PERFORMANCE_TUNING_GUIDE.md#1-使用-criterion-基准测试) 进行精确测量
 - 运行特定模块的基准测试（[运行特定模块](#运行特定模块的性能测试)）
 - 生成性能报告进行对比分析
 
@@ -200,15 +200,15 @@ cargo bench --workspace
 | 链接类型 | 目标文档 |
 | :--- | :--- |
 | **核心模块** | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
-| | [C05 线程](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
-| | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
-| | [C08 算法](../../crates/c08_algorithms/docs/00_MASTER_INDEX.md) |
-| | [C09 设计模式](../../crates/c09_design_pattern/docs/00_MASTER_INDEX.md) |
-| | [C10 网络](../../crates/c10_networks/docs/00_MASTER_INDEX.md) |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
 | **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
-| | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
+| :--- | :--- |
 | **外部工具** | [Criterion.rs](https://github.com/bheisler/criterion.rs) |
-| | [Rust性能手册](https://nnethercote.github.io/perf-book/) |
+| :--- | :--- |
 
 ---
 

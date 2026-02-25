@@ -11,10 +11,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [Composite 形式化分析](#composite-形式化分析)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Composite 结构）](#def-11composite-结构)
     - [Axiom CO1（树结构无环公理）](#axiom-co1树结构无环公理)
@@ -210,7 +210,7 @@ assert_eq!(tree.sum(), 6);
 
 ### 形式化论证链
 
-```
+```text
 Axiom CO1 (树结构无环)
     ↓ 依赖
 ownership_model T1

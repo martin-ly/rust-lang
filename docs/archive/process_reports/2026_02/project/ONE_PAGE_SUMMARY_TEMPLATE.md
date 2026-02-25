@@ -1,4 +1,5 @@
 # 一页纸总结模板
+
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-20
 > **归档日期**: 2026-02-20
@@ -13,7 +14,7 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 各模块可复制此模板创建 `ONE_PAGE_SUMMARY.md`
-> **参考示例**: [C01 ONE_PAGE_SUMMARY](../../crates/c01_ownership_borrow_scope/docs/ONE_PAGE_SUMMARY.md) | [C02 ONE_PAGE_SUMMARY](../../crates/c02_type_system/docs/ONE_PAGE_SUMMARY.md)
+> **参考示例**: [C01 ONE_PAGE_SUMMARY](../../../../../crates/c01_ownership_borrow_scope/docs/ONE_PAGE_SUMMARY.md) | [C02 ONE_PAGE_SUMMARY](../../../../../crates/c02_type_system/docs/ONE_PAGE_SUMMARY.md)
 
 ---
 
@@ -51,40 +52,40 @@ impl OnePageSummary {
             rustlings_link: "../exercises/RUSTLINGS_MAPPING.md".to_string(),
         }
     }
-    
+
     fn add_concept(mut self, name: &str, description: &str) -> Self {
         self.core_concepts.push((name.to_string(), description.to_string()));
         self
     }
-    
+
     fn add_pitfall(mut self, pitfall: &str, solution: &str) -> Self {
         self.common_pitfalls.push((pitfall.to_string(), solution.to_string()));
         self
     }
-    
+
     fn add_decision(mut self, scenario: &str, choice: &str) -> Self {
         self.decision_table.push((scenario.to_string(), choice.to_string()));
         self
     }
-    
+
     fn add_learning_stage(mut self, stage: &str, duration: &str, content: &str) -> Self {
         self.learning_path.push((stage.to_string(), duration.to_string(), content.to_string()));
         self
     }
-    
+
     fn generate(&self) -> String {
         let mut output = String::new();
-        
+
         // 标题
         writeln!(output, "# {} - 一页纸总结", self.module_name).unwrap();
         writeln!(output).unwrap();
         writeln!(output, "> **用途**: 快速回顾核心概念、常见坑、学习路径").unwrap();
-        writeln!(output, "> **完整文档**: [00_MASTER_INDEX](./00_MASTER_INDEX.md)").unwrap();
+        writeln!(output, "> **完整文档**: [00_MASTER_INDEX](../../../../00_MASTER_INDEX.md)").unwrap();
         writeln!(output).unwrap();
-        
+
         // 核心概念
-        writeln!(output, "## 核心概念（{}–{} 条）", 
-            self.core_concepts.len().min(3), 
+        writeln!(output, "## 核心概念（{}–{} 条）",
+            self.core_concepts.len().min(3),
             self.core_concepts.len().min(5)
         ).unwrap();
         writeln!(output).unwrap();
@@ -94,7 +95,7 @@ impl OnePageSummary {
             writeln!(output, "| {} | {} |", concept, desc).unwrap();
         }
         writeln!(output).unwrap();
-        
+
         // 常见坑
         if !self.common_pitfalls.is_empty() {
             writeln!(output, "## 常见坑与解决").unwrap();
@@ -106,7 +107,7 @@ impl OnePageSummary {
             }
             writeln!(output).unwrap();
         }
-        
+
         // 速选表
         if !self.decision_table.is_empty() {
             writeln!(output, "## 速选表").unwrap();
@@ -118,7 +119,7 @@ impl OnePageSummary {
             }
             writeln!(output).unwrap();
         }
-        
+
         // 学习路径
         if !self.learning_path.is_empty() {
             writeln!(output, "## 学习路径").unwrap();
@@ -128,14 +129,14 @@ impl OnePageSummary {
             }
             writeln!(output).unwrap();
         }
-        
+
         // 速查与练习
         writeln!(output, "## 速查与练习").unwrap();
         writeln!(output).unwrap();
         writeln!(output, "- **速查卡**: [{}]({})", self.module_code, self.cheatsheet_link).unwrap();
         writeln!(output, "- **RBE 练习**: [Rust by Example]({})", self.rbe_link).unwrap();
         writeln!(output, "- **Rustlings**: [{}]({})", self.module_code, self.rustlings_link).unwrap();
-        
+
         output
     }
 }
@@ -152,7 +153,7 @@ fn main() {
         .add_learning_stage("入门", "1-2 天", "理解所有权规则 → 移动语义")
         .add_learning_stage("进阶", "2-3 天", "生命周期标注 → 复杂借用场景")
         .add_learning_stage("高级", "持续", "自引用类型 → Pin");
-    
+
     println!("{}", c01_summary.generate());
 }
 ```
@@ -201,20 +202,20 @@ fn generate_all_summaries() -> HashMap<String, String> {
         },
         // ... 更多模块
     ];
-    
+
     let mut outputs = HashMap::new();
-    
+
     for m in modules {
         let content = generate_summary_content(&m);
         outputs.insert(
-            format!("crates/c{}_{}/docs/ONE_PAGE_SUMMARY.md", 
+            format!("crates/c{}_{}/docs/ONE_PAGE_SUMMARY.md",
                 m.code.to_lowercase(),
                 module_dir_name(m.code)
             ),
             content
         );
     }
-    
+
     outputs
 }
 
@@ -222,7 +223,7 @@ fn generate_summary_content(m: &ModuleInfo) -> String {
     format!(r#"# {} {} - 一页纸总结
 
 > **用途**: 快速回顾核心概念、常见坑、学习路径
-> **完整文档**: [00_MASTER_INDEX](./00_MASTER_INDEX.md)
+> **完整文档**: [00_MASTER_INDEX](../../../../00_MASTER_INDEX.md)
 
 ## 核心概念
 
@@ -238,9 +239,9 @@ fn generate_summary_content(m: &ModuleInfo) -> String {
 
 ## 速查与练习
 
-- **速查卡**: [{}_cheatsheet](../../docs/02_reference/quick_reference/{}_cheatsheet.md)
+- **速查卡**: [{}_cheatsheet](../../../../02_reference/quick_reference/{}_cheatsheet.md)
 - **RBE 练习**: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
-- **Rustlings**: [映射表](../../exercises/RUSTLINGS_MAPPING.md)
+- **Rustlings**: [映射表](../../../../../exercises/RUSTLINGS_MAPPING.md)
 "#,
         m.code,
         m.name,
@@ -277,7 +278,7 @@ fn module_dir_name(code: &str) -> String {
 
 fn main() {
     let summaries = generate_all_summaries();
-    
+
     for (path, content) in summaries {
         if let Some(parent) = std::path::Path::new(&path).parent() {
             let _ = fs::create_dir_all(parent);
@@ -296,8 +297,8 @@ fn main() {
 
 ### 研究笔记关联
 
-- **知识结构**: [MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md](./MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md) - 模块知识结构指南
-- **学习路径**: [LEARNING_PATH_PLANNING.md](./LEARNING_PATH_PLANNING.md) - 系统化学习路径规划
+- **知识结构**: [MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md](../../../../07_project/MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md) - 模块知识结构指南
+- **学习路径**: [LEARNING_PATH_PLANNING.md](../../../../01_learning/LEARNING_PATH_PLANNING.md) - 系统化学习路径规划
 - **权威对标**: [AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md](./AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md) - 与业界学习路径共识对标
 
 ### 实施场景
@@ -316,28 +317,28 @@ fn main() {
 # C## 模块名 - 一页纸总结
 
 > **用途**: 快速回顾核心概念、常见坑、学习路径
-> **完整文档**: [00_MASTER_INDEX](./00_MASTER_INDEX.md)
+> **完整文档**: [00_MASTER_INDEX](../../../../00_MASTER_INDEX.md)
 
 ---
 
 ## 核心概念（3–5 条）
 
 | 概念 | 说明 |
-| :--- | :--- || ... | ... |
+| :--- | :--- | :--- | :--- | :--- |
 
 ---
 
 ## 常见坑与解决
 
 | 坑 | 解决 |
-| :--- | :--- || ... | ... |
+| :--- | :--- | :--- | :--- | :--- |
 
 ---
 
 ## 速选表（按模块特点）
 
 | 场景 | 选型 |
-| :--- | :--- || ... | ... |
+| :--- | :--- | :--- | :--- | :--- |
 
 ---
 
@@ -361,15 +362,15 @@ fn main() {
 ## 已创建一页纸总结的模块
 
 | 模块 | 路径 |
-| :--- | :--- || C01 | [c01/ONE_PAGE_SUMMARY.md](../../crates/c01_ownership_borrow_scope/docs/ONE_PAGE_SUMMARY.md) |
-| C02 | [c02/ONE_PAGE_SUMMARY.md](../../crates/c02_type_system/docs/ONE_PAGE_SUMMARY.md) |
-| C03 | [c03/ONE_PAGE_SUMMARY.md](../../crates/c03_control_fn/docs/ONE_PAGE_SUMMARY.md) |
-| C04 | [c04/ONE_PAGE_SUMMARY.md](../../crates/c04_generic/docs/ONE_PAGE_SUMMARY.md) |
-| C05 | [c05/ONE_PAGE_SUMMARY.md](../../crates/c05_threads/docs/ONE_PAGE_SUMMARY.md) |
-| C06 | [c06/ONE_PAGE_SUMMARY.md](../../crates/c06_async/docs/ONE_PAGE_SUMMARY.md) |
-| C07 | [c07/ONE_PAGE_SUMMARY.md](../../crates/c07_process/docs/ONE_PAGE_SUMMARY.md) |
-| C08 | [c08/ONE_PAGE_SUMMARY.md](../../crates/c08_algorithms/docs/ONE_PAGE_SUMMARY.md) |
-| C09 | [c09/ONE_PAGE_SUMMARY.md](../../crates/c09_design_pattern/docs/ONE_PAGE_SUMMARY.md) |
-| C10 | [c10/ONE_PAGE_SUMMARY.md](../../crates/c10_networks/docs/ONE_PAGE_SUMMARY.md) |
-| C11 | [c11/ONE_PAGE_SUMMARY.md](../../crates/c11_macro_system/docs/ONE_PAGE_SUMMARY.md) |
-| C12 | [c12/ONE_PAGE_SUMMARY.md](../../crates/c12_wasm/docs/ONE_PAGE_SUMMARY.md) |
+| :--- | :--- | :--- | :--- | :--- |
+| C02 | [c02/ONE_PAGE_SUMMARY.md](../../../../../crates/c02_type_system/docs/ONE_PAGE_SUMMARY.md) |
+| C03 | [c03/ONE_PAGE_SUMMARY.md](../../../../../crates/c03_control_fn/docs/ONE_PAGE_SUMMARY.md) |
+| C04 | [c04/ONE_PAGE_SUMMARY.md](../../../../../crates/c04_generic/docs/ONE_PAGE_SUMMARY.md) |
+| C05 | [c05/ONE_PAGE_SUMMARY.md](../../../../../crates/c05_threads/docs/ONE_PAGE_SUMMARY.md) |
+| C06 | [c06/ONE_PAGE_SUMMARY.md](../../../../../crates/c06_async/docs/ONE_PAGE_SUMMARY.md) |
+| C07 | [c07/ONE_PAGE_SUMMARY.md](../../../../../crates/c07_process/docs/ONE_PAGE_SUMMARY.md) |
+| C08 | [c08/ONE_PAGE_SUMMARY.md](../../../../../crates/c08_algorithms/docs/ONE_PAGE_SUMMARY.md) |
+| C09 | [c09/ONE_PAGE_SUMMARY.md](../../../../../crates/c09_design_pattern/docs/ONE_PAGE_SUMMARY.md) |
+| C10 | [c10/ONE_PAGE_SUMMARY.md](../../../../../crates/c10_networks/docs/ONE_PAGE_SUMMARY.md) |
+| C11 | [c11/ONE_PAGE_SUMMARY.md](../../../../../crates/c11_macro_system/docs/ONE_PAGE_SUMMARY.md) |
+| C12 | [c12/ONE_PAGE_SUMMARY.md](../../../../../crates/c12_wasm/docs/ONE_PAGE_SUMMARY.md) |

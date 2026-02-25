@@ -254,7 +254,7 @@ fn main() {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../../research_notes/formal_methods/README.md](../../research_notes/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../research_notes/formal_methods/type_system_formalization.md](../../research_notes/formal_methods/type_system_formalization.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../../research_notes/type_theory/type_system_foundations.md](../../research_notes/type_theory/type_system_foundations.md) |
 | 所有权模型形式化 | 所有权系统数学定义 | [../../research_notes/formal_methods/ownership_model.md](../../research_notes/formal_methods/ownership_model.md) |
 | 借用检查器证明 | 借用检查器形式化证明 | [../../research_notes/formal_methods/borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md) |
 | Send/Sync 形式化 | 线程安全形式化定义 | [../../research_notes/formal_methods/send_sync_formalization.md](../../research_notes/formal_methods/send_sync_formalization.md) |

@@ -9,10 +9,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [分布式执行模型形式化](#分布式执行模型形式化)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
     - [gRPC (tonic)](#grpc-tonic)
@@ -228,6 +228,16 @@ where
 
 ---
 
+## 分布式+并发组合（R1-02 最小交付）
+
+**定理 DI-CONC-T1（Saga + Send/Sync 组合）**：Saga 编排式实现中，各步骤闭包若跨线程传递，须满足 `Send + Sync`；补偿闭包 `Box<dyn Fn() -> Result<(), E> + Send>` 保证跨线程安全。由 [send_sync_formalization](../../formal_methods/send_sync_formalization.md) SEND-T1、SYNC-T1 与 Saga 补偿语义组合。
+
+**定理 DI-CONC-T2（CQRS + 通道组合）**：CQRS 读写分离时，命令端与查询端通过 channel 通信；`Sender<Event>: Send`、`Receiver<Event>: Send` 保证跨线程事件传递无数据竞争。由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1 与 channel 语义。
+
+**Rust 对应**：`OrchestratedSaga` 的 `steps`/`compensations` 若为 `Vec<Box<dyn Saga<(), E> + Send>>`，则 `run()` 可安全跨线程调度；CQRS 使用 `tokio::sync::mpsc` 传递事件。
+
+---
+
 ## 与形式化基础衔接
 
 | 模型 | 引用 |
@@ -288,17 +298,29 @@ where
 
 **定理 DI-SG-T1**：Rust 用 `Result` + 补偿闭包 `Vec<Box<dyn Fn() -> Result<(), E>>>` 可近似表达 Saga；无内置编排器，与 Temporal 对接时为近似。见 [04_expressiveness_boundary](../../02_workflow_safe_complete_models/04_expressiveness_boundary.md)。
 
+**定理 S-T1（Saga 补偿完整性）**：设 $S_1, \ldots, S_k$ 已成功执行，$S_{k+1}$ 失败。若补偿链 $\mathit{Comp}_k \circ \cdots \circ \mathit{Comp}_1$ 按逆序执行且各 $\mathit{Comp}_i$ 幂等，则系统回退至 $S_0$ 前状态（语义等价）。
+
+*证明*：由 Def DI-SG1、Axiom DI-SG1；逆序补偿撤销顺序与执行顺序对称；幂等保证重复执行无副作用。∎
+
 ### CQRS
 
 **Def DI-CQ1（CQRS）**：读写分离；$\mathit{Write\ Model} \neq \mathit{Read\ Model}$；事件驱动同步读模型。
 
 **定理 DI-CQ-T1**：trait 分离 Command/Query、channel 或 Event Sourcing 同步，与 CQRS 语义等价。
 
+**定理 CQ-T1（CQRS 一致性）**：设写模型 $W$、读模型 $R$，投影 $\pi: W \to R$。若 (1) 写操作仅更新 $W$；(2) 读操作仅查询 $R$；(3) 事件驱动 $\pi$ 异步同步。则读写分离成立，$R$ 最终与 $W$ 一致（有界陈旧性）。
+
+*证明*：由 Def DI-CQ1；写不直接改 $R$；事件序列确定 $R$ 更新顺序；异步延迟有界则一致性有界。∎
+
 ### Circuit Breaker（熔断器）
 
 **Def DI-CB1（熔断器）**：状态机 Closed → Open（失败超阈值）→ HalfOpen（探测）→ Closed。Open 时快速失败。
 
 **Axiom DI-CB1**：失败计数、超时、半开探测为可配置参数。
+
+**定理 DI-CB-T1（熔断器正确性）**：设 $S \in \{\mathrm{Closed}, \mathrm{Open}, \mathrm{HalfOpen}\}$。若实现满足：(1) Closed 时正常调用；(2) 连续失败 $\geq N$ 则转入 Open；(3) Open 持续 $T$ 后转入 HalfOpen；(4) HalfOpen 成功则 Closed、失败则 Open。则级联故障被隔离，调用方在 Open 时获快速失败。
+
+*证明*：由 Def DI-CB1 与 Axiom DI-CB1；状态转换有界；Open 时无下游调用，故故障不传播。∎
 
 **Rust 实现**：`tokio-util::sync::CircuitBreaker` 或自定义状态机。
 

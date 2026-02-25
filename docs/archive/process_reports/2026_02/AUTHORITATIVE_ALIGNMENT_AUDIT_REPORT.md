@@ -19,7 +19,7 @@
 ## 总体统计
 
 | 来源级别 | 来源数量 | 已对齐文档 | 对齐率 |
-| :--- | :---: | :---: | :---: |
+| :--- | :--- | :--- | :--- |
 | P0 大学课程 | 6+ | 6 | 85% |
 | P1 权威机构 | 8 | 8 | 95% |
 | P2 顶级会议 | 15+ | 12 | 80% |
@@ -34,7 +34,7 @@
 ### 文档: docs/research_notes/formal_methods/ownership_model.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **MIT 6.826** | ⚠️ 部分 | 有内存安全形式化框架，无MIT课程直接引用 |
 | **Stanford CS242** | ⚠️ 部分 | 有类型系统基础，无Curry-Howard对应 |
 | **RustBelt POPL 2018** | ✅ 对齐 | 完整引用，所有权规则1-8、定理T2/T3对应 |
@@ -51,7 +51,7 @@
 ### 文档: docs/research_notes/formal_methods/borrow_checker_proof.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **MIT 6.826** | ❌ 未对齐 | 缺少内存安全形式化课程引用 |
 | **Stanford CS110L** | ⚠️ 部分 | 有Safety in Systems Programming概念，无直接引用 |
 | **CMU 15-799** | ⚠️ 部分 | 有Formal Methods框架，无课程直接引用 |
@@ -68,7 +68,7 @@
 ### 文档: docs/research_notes/formal_methods/lifetime_formalization.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **Tofte & Talpin 1997** | ✅ 对齐 | Region-Based Memory Management 理论基础 |
 | **RustBelt** | ✅ 对齐 | 区域类型、outlives、引用有效性 |
 | **Polonius** | ✅ 对齐 | NLL、loan分析、origin与subset关系 |
@@ -83,7 +83,7 @@
 ### 文档: docs/research_notes/formal_methods/async_state_machine.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **RustBelt Meets Relaxed Memory POPL 2020** | ✅ 对齐 | relaxed memory、Arc数据竞争 |
 | **RFC 2394 (Async/await)** | ✅ 对齐 | Future/Poll状态机、Pin语义 |
 | **Ferrocene FLS** | ✅ 对齐 | Ch. 17.3 Asynchronous Computation |
@@ -97,7 +97,7 @@
 ### 文档: docs/research_notes/formal_methods/pin_self_referential.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **RFC 2349 (Pin API)** | ✅ 对齐 | 自引用与Future安全 |
 | **RustBelt** | ✅ 对齐 | unsafe安全抽象、Pin保证 |
 | **Ferrocene FLS** | ✅ 对齐 | Ch. 17.3 Asynchronous Computation |
@@ -110,7 +110,7 @@
 ### 文档: docs/research_notes/formal_methods/send_sync_formalization.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **RustBelt Meets Relaxed Memory POPL 2020** | ✅ 对齐 | Arc、Send/Sync与松弛内存 |
 | **Ferrocene FLS** | ✅ 对齐 | Ch. 17.1 Send and Sync |
 | **Rust Reference** | ✅ 对齐 | Send/Sync trait定义 |
@@ -122,7 +122,7 @@
 ### 文档: docs/research_notes/type_theory/type_system_foundations.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **TAPL (Pierce)** | ✅ 对齐 | 类型系统经典教科书引用 |
 | **System F** | ✅ 对齐 | 多态类型系统理论基础 |
 | **Hindley-Milner** | ✅ 对齐 | 类型推导算法基础 |
@@ -137,7 +137,7 @@
 ### 文档: docs/research_notes/type_theory/trait_system_formalization.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **Type Classes论文** | ✅ 对齐 | Haskell类型类设计空间 |
 | **Existential Types论文** | ✅ 对齐 | Trait对象存在类型理论 |
 | **RustBelt** | ✅ 对齐 | Trait系统形式化 |
@@ -151,7 +151,7 @@
 ### 文档: docs/research_notes/type_theory/lifetime_formalization.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **Tofte & Talpin 1997** | ✅ 对齐 | Region-Based Memory Management |
 | **RustBelt** | ✅ 对齐 | 生命周期形式化 |
 | **Polonius** | ✅ 对齐 | 生命周期推断 |
@@ -163,7 +163,7 @@
 ### 文档: docs/research_notes/type_theory/variance_theory.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **TAPL** | ✅ 对齐 | 型变理论 |
 | **Rust Reference** | ✅ 对齐 | Subtyping and Variance |
 | **RustBelt** | ⚠️ 部分 | 型变与内存安全 |
@@ -175,7 +175,7 @@
 ### 文档: docs/research_notes/type_theory/advanced_types.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **GATs RFC** | ✅ 对齐 | Generic Associated Types |
 | **const泛型RFC** | ✅ 对齐 | Const Generics |
 | **依赖类型理论** | ✅ 对齐 | 受限依赖类型 |
@@ -188,7 +188,7 @@
 ### 文档: docs/02_reference/quick_reference/type_system.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **Rust Book** | ✅ 对齐 | 类型系统章节 |
 | **Rust Reference** | ✅ 对齐 | Types章节 |
 | **TAPL** | ⚠️ 部分 | 形式化理论链接 |
@@ -200,7 +200,7 @@
 ### 文档: docs/02_reference/quick_reference/ownership_cheatsheet.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **Rust Book Ch.4** | ✅ 对齐 | 所有权章节 |
 | **Rust Reference** | ✅ 对齐 | Ownership章节 |
 | **RustBelt** | ⚠️ 部分 | 形式化理论链接 |
@@ -212,7 +212,7 @@
 ### 文档: docs/05_guides/BEST_PRACTICES.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **Rust Book** | ✅ 对齐 | 最佳实践 |
 | **Rust API Guidelines** | ⚠️ 部分 | 有API规范，未明确引用 |
 | **Clippy** | ⚠️ 部分 | lint规则 |
@@ -224,7 +224,7 @@
 ### 文档: docs/05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md
 
 | 检查项 | 状态 | 说明 |
-| :--- | :---: | :--- |
+| :--- | :--- | :--- |
 | **Rust Book Ch.17** | ✅ 对齐 | 异步章节 |
 | **Async Book** | ⚠️ 部分 | 官方异步文档 |
 | **Tokio文档** | ⚠️ 部分 | 运行时指南 |
@@ -351,7 +351,7 @@
 ## 国际权威来源对照表
 
 | 权威来源 | 类型 | 本项目中对应文档 | 对齐状态 |
-| :--- | :--- | :--- | :---: |
+| :--- | :--- | :--- | :--- |
 | **Rust Book** | P1 官方 | quick_reference/*.md, guides/*.md | ✅ |
 | **Rust Reference** | P1 官方 | formal_methods/*.md, type_theory/*.md | ✅ |
 | **Ferrocene FLS** | P1 官方 | formal_methods/*.md | ✅ |
@@ -378,7 +378,7 @@
 ### formal_methods/ 目录
 
 | 文档 | 权威来源引用数 | 主要来源 | 完整性 |
-| :--- | :---: | :--- | :---: |
+| :--- | :--- | :--- | :--- |
 | ownership_model.md | 8 | RustBelt, FLS, Stacked/Tree Borrows | 95% |
 | borrow_checker_proof.md | 7 | RustBelt, Polonius, FLS | 95% |
 | lifetime_formalization.md | 5 | RustBelt, Polonius, Tofte & Talpin | 90% |
@@ -389,7 +389,7 @@
 ### type_theory/ 目录
 
 | 文档 | 权威来源引用数 | 主要来源 | 完整性 |
-| :--- | :---: | :--- | :---: |
+| :--- | :--- | :--- | :--- |
 | type_system_foundations.md | 4 | TAPL, System F, RustBelt | 85% |
 | trait_system_formalization.md | 4 | Type Classes, Existential Types, RustBelt | 85% |
 | lifetime_formalization.md | 3 | Tofte & Talpin, RustBelt | 80% |
@@ -400,7 +400,7 @@
 ### quick_reference/ 目录
 
 | 文档 | 权威来源引用数 | 主要来源 | 完整性 |
-| :--- | :---: | :--- | :---: |
+| :--- | :--- | :--- | :--- |
 | type_system.md | 3 | Rust Book, TAPL | 80% |
 | ownership_cheatsheet.md | 2 | Rust Book, RustBelt | 75% |
 | async_patterns.md | 2 | Rust Book, Async Book | 75% |
@@ -409,7 +409,7 @@
 ### 05_guides/ 目录
 
 | 文档 | 权威来源引用数 | 主要来源 | 完整性 |
-| :--- | :---: | :--- | :---: |
+| :--- | :--- | :--- | :--- |
 | BEST_PRACTICES.md | 2 | Rust Book, API Guidelines | 75% |
 | ASYNC_PROGRAMMING_USAGE_GUIDE.md | 2 | Rust Book, Tokio | 75% |
 | (其他16个) | 1-2 | Rust Book, Reference | 70% |
@@ -424,7 +424,7 @@
 
 ## 参考文件
 
-- [AUTHORITATIVE_ALIGNMENT_GUIDE.md](./research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md) - 权威对齐指南
-- [RUSTBELT_ALIGNMENT.md](./research_notes/RUSTBELT_ALIGNMENT.md) - RustBelt逐章对标
-- [INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md](./research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) - 国际形式化验证索引
-- [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](./research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 形式化证明批判分析
+- [AUTHORITATIVE_ALIGNMENT_GUIDE.md](../../../research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md) - 权威对齐指南
+- [RUSTBELT_ALIGNMENT.md](../../../research_notes/RUSTBELT_ALIGNMENT.md) - RustBelt逐章对标
+- [INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md](../../../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) - 国际形式化验证索引
+- [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../../../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 形式化证明批判分析

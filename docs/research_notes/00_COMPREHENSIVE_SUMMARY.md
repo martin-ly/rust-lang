@@ -12,7 +12,7 @@
 
 ## 一、项目全貌（一句话）
 
-**本 research_notes 体系**：围绕 Rust 的**公理判定系统**、**语言表达力**、**组件组合法则**三大支柱，建立形式化定义→公理→定理→推论的**可追溯论证链**，覆盖所有权/借用/类型/异步/Pin/**Send/Sync**（formal_methods 六篇并表）、**安全可判定机制总览**、设计模式 23/43、并发选型、组合工程 CE-T1–T3，并与 RustBelt/Aeneas 等国际权威对标。
+**本 research_notes 体系**：围绕 Rust 的**公理判定系统**、**语言表达力**、**组件组合法则**三大支柱，建立形式化定义→公理→定理→推论的**可追溯论证链**，覆盖所有权/借用/类型/异步/Pin/**Send/Sync**（formal_methods 六篇并表）、**安全可判定机制总览**、设计模式 23/43、并发选型、组合工程 CE-T1–T3，并与 RustBelt 等国际权威对标。聚焦**数学风格形式化论证 + Rust 示例**（L3/Coq/Lean 已归档）。
 
 ---
 
@@ -136,12 +136,12 @@
 | 形式化论证（Def/Axiom/定理） | ✅ 100% |
 | 论证脉络关系 | ✅ 已建立（ARGUMENTATION_CHAIN_AND_FLOW） |
 | 完整总结综合 | ✅ 本文件 |
-| **层次化/矩阵/思维表征** | ✅ 阶段 1–4 全部完成：层次化规范、HIERARCHICAL_MAPPING、23 模式/执行模型/**六篇并表**、矩阵双向链接规范、思维表征-文档块、选型决策树交叉链接、文档依赖与维护机制；见 [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](./RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) |
-| **格式统一与 Rust 1.93 对齐** | ✅ 100%：元信息全库补全、92 项→落点文档、[RUST_193_COUNTEREXAMPLES_INDEX](RUST_193_COUNTEREXAMPLES_INDEX.md)、权威来源约定、CONTRIBUTING/MAINTENANCE_GUIDE 门禁与季度复核；见 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) |
+| **层次化/矩阵/思维表征** | ✅ 阶段 1–4 全部完成：层次化规范、HIERARCHICAL_MAPPING、23 模式/执行模型/**六篇并表**、矩阵双向链接规范、思维表征-文档块、选型决策树交叉链接、文档依赖与维护机制；见 [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) |
+| **格式统一与 Rust 1.93 对齐** | ✅ 100%：元信息全库补全、92 项→落点文档、[RUST_193_COUNTEREXAMPLES_INDEX](RUST_193_COUNTEREXAMPLES_INDEX.md)、权威来源约定、CONTRIBUTING/MAINTENANCE_GUIDE 门禁与季度复核；见 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) |
 | **docs 全结构梳理** | ✅ 100%：[DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) 按本格式 100% 覆盖 docs；各子目录 README 元信息、双向链接、验证清单完整 |
 | **设计模式/分布式/工作流全面论证** | ✅ 100%：[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](software_design_theory/COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md) D1–D3 全部交付；CE-PAT1、EB-DET1、反例映射、模式 DAG、分布式模式形式化、工作流形式化 |
-| L3 机器证明 | 📋 Coq 骨架就绪，Admitted 待补全 |
-| Aeneas 对接 | 📋 计划与示例就绪 |
+| L3 机器证明 | 📦 已归档（[archive/deprecated/](../archive/deprecated/)）；聚焦 L2 数学风格 + Rust 示例 |
+| Aeneas/coq-of-rust 对接 | 📦 已归档；保留为国际对标参考 |
 
 ---
 

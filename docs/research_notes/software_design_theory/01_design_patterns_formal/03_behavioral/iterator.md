@@ -11,10 +11,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [Iterator 形式化分析](#iterator-形式化分析)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Iterator 结构）](#def-11iterator-结构)
     - [Axiom IT1（单次访问公理）](#axiom-it1单次访问公理)
@@ -174,7 +174,7 @@ for n in Counter { count: 0 } {
 
 ### 形式化论证链
 
-```
+```text
 Axiom IT1 (单次访问)
     ↓ 依赖
 type_system

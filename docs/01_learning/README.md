@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 学习规划与官方资源映射；解决「如何规划学习、与官方资源如何映射」
 > **判定目标**: 学习路径可执行、官方资源可追溯
@@ -116,7 +116,7 @@ fn ownership_theorem() {
 - **与本文档对齐**:
 
   | Coursera内容 | 本文档对应 |
-  | :--- | :--- |
+| :--- | :--- |
   | Rust Basics | 01_learning/ |
   | Data Structures | 02_reference/quick_reference/collections_iterators_cheatsheet.md |
   | Concurrency | 05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md |
@@ -168,10 +168,10 @@ fn ownership_theorem() {
 - **对比内容**:
 
   | C++概念 | Rust对应 | 本文档 |
-  | :--- | :--- | :--- |
+| :--- | :--- | :--- |
   | 手动内存管理 | 所有权系统 | [formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) |
-  | 智能指针 | Box/Rc/Arc | [02_reference/smart_pointers_cheatsheet.md](../02_reference/smart_pointers_cheatsheet.md) |
-  | 模板 | 泛型 | [02_reference/generics_cheatsheet.md](../02_reference/generics_cheatsheet.md) |
+  | 智能指针 | Box/Rc/Arc | [02_reference/quick_reference/smart_pointers_cheatsheet.md](../02_reference/quick_reference/smart_pointers_cheatsheet.md) |
+  | 模板 | 泛型 | [02_reference/quick_reference/generics_cheatsheet.md](../02_reference/quick_reference/generics_cheatsheet.md) |
 
 ##### Memory Management
 
@@ -187,7 +187,7 @@ fn ownership_theorem() {
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../research_notes/formal_methods/README.md](../research_notes/formal_methods/README.md) |
 | 所有权模型形式化 | 所有权系统数学定义 | [../research_notes/formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../research_notes/formal_methods/type_system_formalization.md](../research_notes/formal_methods/type_system_formalization.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../research_notes/type_theory/type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) |
 | 证明索引 | 形式化证明集合 | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) |
 
 ---

@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [performance_benchmarks.md](../../../../research_notes/experiments/performance_benchmarks.md)、[PERFORMANCE_TUNING_GUIDE.md](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+> 内容已整合至： [performance_benchmarks.md](../../../research_notes/experiments/performance_benchmarks.md)、[PERFORMANCE_TUNING_GUIDE.md](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
 ## 知识结构思维导图
 
@@ -286,9 +286,9 @@ criterion_main!(benches);
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 性能基准实验 | 性能测试方法论 | [../../../../research_notes/experiments/performance_benchmarks.md](../../../../research_notes/experiments/performance_benchmarks.md) |
-| 编译器优化 | 编译器优化分析 | [../../../../research_notes/experiments/compiler_optimizations.md](../../../../research_notes/experiments/compiler_optimizations.md) |
-| 并发性能 | 并发性能测试 | [../../../../research_notes/experiments/concurrency_performance.md](../../../../research_notes/experiments/concurrency_performance.md) |
+| 性能基准实验 | 性能测试方法论 | [../../../research_notes/experiments/performance_benchmarks.md](../../../research_notes/experiments/performance_benchmarks.md) |
+| 编译器优化 | 编译器优化分析 | [../../../research_notes/experiments/compiler_optimizations.md](../../../research_notes/experiments/compiler_optimizations.md) |
+| 并发性能 | 并发性能测试 | [../../../research_notes/experiments/concurrency_performance.md](../../../research_notes/experiments/concurrency_performance.md) |
 
 ### 工具链
 
@@ -301,7 +301,7 @@ criterion_main!(benches);
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Send/Sync 形式化 | 并发安全形式化 | [../../../../research_notes/formal_methods/send_sync_formalization.md](../../../../research_notes/formal_methods/send_sync_formalization.md) |
+| Send/Sync 形式化 | 并发安全形式化 | [../../../research_notes/formal_methods/send_sync_formalization.md](../../../research_notes/formal_methods/send_sync_formalization.md) |
 
 ---
 

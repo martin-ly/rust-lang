@@ -383,7 +383,7 @@ fn main() {
 
 ### 研究笔记关联
 
-- **证明体系**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 形式化证明批判性分析与计划
+- **证明体系**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../../../../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 形式化证明批判性分析与计划
 - **知识对齐**: [ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md](./ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md) - 对齐知识批判性评估
 - **权威对标**: [AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md](./AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md) - 权威信息对标评估
 
@@ -417,7 +417,7 @@ fn main() {
 ### 1.2 差距与不足
 
 | 维度 | 不足 | 对标权威源 |
-| :--- | :--- | :--- || **Cargo 变更** | 文档中 `cargo tree --format` 长格式、`cargo clean --workspace` 未在各速查卡/指南中体现 | [releases.rs 1.93 Cargo](https://releases.rs/docs/1.93.0/) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Rustdoc 变更** | `#![doc(document_private_items)]` 移除、宏搜索过滤、import 搜索过滤、文档属性校验 未在 rustdoc 相关文档中系统化说明 | 同上 |
 | **pin_v2** | `pin_v2` 引入 builtin 属性命名空间 未在高级所有权/异步文档中提及 | Compatibility Notes |
 | **s390x / riscv64a23** | 平台特定内容仅在 toolchain 提及，无跨模块（如 C08 算法、C12 WASM）示例 | Platform Support |
@@ -446,7 +446,7 @@ fn main() {
 ### 2.2 差距与不足
 
 | 表征方式 | 不足 | 建议 |
-| :--- | :--- | :--- || **思维导图** | 模块级思维导图索引中部分路径为占位（如 C01 的 tier3_advanced 已不存在），与实际目录不一致 | 统一为 tier_0X_* 命名，修正索引 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **多维矩阵** | 2.1 特性对比矩阵中部分特性为 1.92 及更早，与 1.93 官方特性有重叠/遗漏；缺少「1.93 新增 API vs 旧 API」迁移矩阵 | 以 releases.rs 1.93 为准重排，新增迁移矩阵 |
 | **公理→定理→推论** | 证明树多为「前提→结论」模式，缺少严格的形式化公理编号、引理编号、定理编号链 | 参考 PROOF_INDEX、formal_rust 体系，建立公理编号规范 |
 | **决策树** | DECISION_GRAPH_NETWORK、PROOF_GRAPH_NETWORK 已同步至 1.93.0 | ✅ 已更新 |
@@ -476,7 +476,7 @@ fn main() {
 ### 3.2 差距与不足
 
 | 维度 | 不足 | 建议 |
-| :--- | :--- | :--- || **反例** | 速查卡反例多为「错误示例+修正」，缺少 compile_fail doc-test 或 trybuild 验证 | 在 ownership_cheatsheet、error_handling_cheatsheet 等核心速查卡中增加 `/// ```rust,compile_fail` 示例 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **特例** | EDGE_CASES 未覆盖：迭代器特化边界、BTreeMap::append 行为变更（相同 key 保留目标）、vec::IntoIter RefUnwindSafe | 在 EDGE_CASES 中新增「1.93 行为变更特例」小节 |
 | **概念定义** | MODULE_KNOWLEDGE_STRUCTURE_GUIDE 提供模板，但各模块 Glossary 与概念定义深度不均，C02/C06 较完整，C07/C11 较简略 | 按模板补齐各模块概念定义、属性特征、关系连接 |
 | **关系转换论证** | 概念间「继承/组合/依赖」在部分模块仅为列表，缺少形式化「前提→推理→结论」论证 | 在 KNOWLEDGE_STRUCTURE_FRAMEWORK 中增加论证模板，并在 C01/C02 先行试点 |
@@ -506,7 +506,7 @@ fn main() {
 ### 4.2 差距与不足
 
 | 维度 | 不足 | 建议 |
-| :--- | :--- | :--- || **跨版本对比** | 1.89→1.93 累积文档有，但缺少「1.93 vs 1.90/1.91」的逐版迁移路径 | 在 08_rust_version_evolution 中增加逐版迁移决策树 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **权威对标** | 部分文档引用 releases.rs 但未在文末标注「最后对照日期」；官方 RFC/Reference 链接不完整 | 统一在 toolchain 文档末尾加「最后对照 releases.rs: YYYY-MM-DD」 |
 | **总结粒度** | 模块级总结（如 00_MASTER_INDEX）质量不一，部分模块缺少「核心概念→学习路径→常见坑」一页纸总结 | 为各模块补充「一页纸总结」模板 |
 | **对比论证** | CROSS_LANGUAGE_COMPARISON 等对比文档深度有限，缺少「为何 Rust 在此场景优于/劣于 X」的论证结构 | 增加「论证模板」：前提→论据→结论 |
@@ -524,7 +524,7 @@ fn main() {
 ### 5.1 已发现的链接错误（需立即修复）
 
 | 文档 | 错误链接 | 正确路径 |
-| :--- | :--- | :--- || `docs/UNSAFE_RUST_GUIDE.md` | `tier3_advanced/` | C01 无此目录，应为 `tier_03_references/06_高级所有权模式参考.md` 或 `tier_04_advanced/` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` | `tier3_advanced/3.1_高级所有权模式.md` 等 | 应为 `tier_03_references/06_高级所有权模式参考.md`，或 `tier_04_advanced/` 下对应文件 |
 | `docs/WASM_USAGE_GUIDE.md` | `01_WASM快速入门.md` | `01_wasm_基础指南.md` |
 | `docs/THREADS_CONCURRENCY_USAGE_GUIDE.md` | `01_线程管理指南.md` | `01_线程基础与生命周期.md` |
@@ -543,7 +543,7 @@ fn main() {
 ### 5.2 结构不一致
 
 | 问题 | 说明 |
-| :--- | :--- || **tier 命名** | C01 00_MASTER_INDEX 使用 `tier3_advanced`（旧），实际为 `tier_03_references` / `tier_04_advanced` |
+| :--- | :--- | :--- | :--- | :--- |
 | **文件名大小写** | C12 为 `01_wasm_基础指南.md`（小写 wasm），部分链接写 `01_WASM快速入门.md` |
 | **相对路径** | 从 docs/ 到 crates/ 的链接有的用 `../crates/`，有的用 `../../crates/`（取决于文档位置），需统一规范 |
 
@@ -560,14 +560,14 @@ fn main() {
 ### 6.1 优先级 P0（2 周内）
 
 | 任务 | 负责 | 交付物 |
-| :--- | :--- | :--- || 修复所有已发现的链接错误 | - | 链接修正 PR |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 更新 DECISION_GRAPH_NETWORK、PROOF_GRAPH_NETWORK 版本至 1.93 | - | 文档更新 |
 | 修正 C01 00_MASTER_INDEX 中 tier3_advanced 引用 | - | 00_MASTER_INDEX 修正 |
 
 ### 6.2 优先级 P1（1 个月内）
 
 | 任务 | 负责 | 交付物 |
-| :--- | :--- | :--- || EDGE_CASES 增加 1.93 行为变更特例 | - | EDGE_CASES 更新 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | C01/C03 增加 1.93 专项示例（MaybeUninit、into_raw_parts、Duration、char、fmt） | - | 示例代码 + 文档 |
 | 06_toolchain/11_rust_1.93_cargo_rustdoc_changes.md | - | ✅ 已存在 |
 | 建立链接规范并写入 CONTRIBUTING | - | 规范文档 |
@@ -575,7 +575,7 @@ fn main() {
 ### 6.3 优先级 P2（季度内）
 
 | 任务 | 负责 | 交付物 |
-| :--- | :--- | :--- || 公理编号规范（A1/L1/T1）与 PROOF_INDEX 整合 | - | 形式化规范 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 各模块概念定义补充（C07、C11 等） | - | Glossary/概念结构 |
 | 速查卡反例 compile_fail 验证 | - | doc-test 或 trybuild |
 | APPLICATIONS_ANALYSIS_VIEW 扩展场景（数据科学、游戏等） | - | 应用视图扩展 |
@@ -583,7 +583,7 @@ fn main() {
 ### 6.4 持续机制
 
 | 机制 | 说明 |
-| :--- | :--- || **版本发布追踪** | 每 Rust 稳定版发布后执行 RUST_RELEASE_TRACKING_CHECKLIST |
+| :--- | :--- | :--- | :--- | :--- |
 | **季度审查** | 每季度执行 Checklist 中的「季度审查」项 |
 | **链接检查** | CI 中集成 deadlinks 或 link checker |
 | **模块适配表** | 每版本更新 MODULE_1.XX_ADAPTATION_STATUS |
@@ -606,7 +606,7 @@ fn main() {
 
 **报告编写**: 2026-02-12
 **推进完成**: 2026-02-12 - P0/P1/P2 任务 100% 已完成
-**形式化证明体系**（2026-02-14）: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 阶段 1–3 完成；CORE_THEOREMS_FULL_PROOFS、coq_skeleton、国际对标已纳入
+**形式化证明体系**（2026-02-14）: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../../../../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 阶段 1–3 完成；CORE_THEOREMS_FULL_PROOFS、coq_skeleton、国际对标已纳入
 **下次评估建议**: 2026-05-12（季度审查后）
 
 ---
@@ -614,7 +614,7 @@ fn main() {
 ## 推进完成摘要 (2026-02-12)
 
 | 任务 | 状态 |
-| :--- | :--- || 链接修复 (15+ 处) | ✅ |
+| :--- | :--- | :--- | :--- | :--- |
 | DECISION/PROOF_GRAPH 更新至 1.93 | ✅ |
 | EDGE_CASES 1.93 行为变更特例 | ✅ |
 | Cargo/Rustdoc 变更文档 (11_rust_1.93_cargo_rustdoc_changes.md) | ✅ |

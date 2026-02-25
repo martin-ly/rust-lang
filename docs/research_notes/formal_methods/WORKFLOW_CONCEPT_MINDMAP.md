@@ -9,7 +9,7 @@
 
 ## 全局思维导图
 
-```
+```text
                           工作流概念族
                                │
         ┌──────────────────────┼──────────────────────┐
@@ -39,7 +39,7 @@
 
 ### 1. 工作流状态机
 
-```
+```text
                           工作流状态
                                │
             ┌──────────────────┼──────────────────┐
@@ -66,23 +66,15 @@
 | Running(act) | ExternalEvent(e) | Running(next) | e triggers transition |
 | Running(act) | Timeout | Compensating(act) | timeout_policy = compensate |
 
-**形式化定义** (Coq):
-```coq
-Inductive WorkflowState :=
-  | WS_Created
-  | WS_Running (current : string)
-  | WS_Waiting (event : string)
-  | WS_Compensating (failed : string)
-  | WS_Completed (result : Value)
-  | WS_Failed (error : string)
-  | WS_Cancelled.
-```
+**形式化定义**（数学风格）:
+
+**Def WF1（工作流状态）**：$\mathit{WorkflowState} \in \{\mathrm{Created}, \mathrm{Running}(s), \mathrm{Waiting}(e), \mathrm{Compensating}(f), \mathrm{Completed}(r), \mathrm{Failed}(e), \mathrm{Cancelled}\}$。状态转换由事件驱动；见 [04_expressiveness_boundary](../../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md)。
 
 ---
 
 ### 2. 活动(Activity)类型族
 
-```
+```text
                             活动类型
                                │
             ┌──────────────────┼──────────────────┐
@@ -111,22 +103,15 @@ Inductive WorkflowState :=
 | timeout | option nat | 超时时间(秒) |
 | retry_policy | option RetryPolicy | 重试策略 |
 
-**形式化定义** (Coq):
-```coq
-Record Activity := mkActivity {
-  act_id : string;
-  act_execute : Value -> ActivityResult;
-  act_compensate : option (Value -> ActivityResult);
-  act_timeout : option nat;
-  act_retry_policy : option RetryPolicy
-}.
-```
+**形式化定义**（数学风格）:
+
+**Def WF2（活动）**：活动 $A = (\mathit{id}, \mathit{execute}, \mathit{compensate}, \mathit{timeout}, \mathit{retry})$。$\mathit{execute}: V \to \mathit{Result}$；$\mathit{compensate}: V \to \mathit{Result}$ 可选；超时与重试策略可选。Rust 对应：`async fn` + `Result` + `?`。
 
 ---
 
 ### 3. 补偿链模式
 
-```
+```text
                           补偿链
                                │
             ┌──────────────────┼──────────────────┐
@@ -144,7 +129,7 @@ Record Activity := mkActivity {
 
 **补偿链执行流程**:
 
-```
+```text
 Activity1 -> Activity2 -> Activity3 [FAILS]
     ↓           ↓           ↓
 Comp3(undo) <- Comp2(undo) <- Comp1(undo)
@@ -154,28 +139,15 @@ Comp3(undo) <- Comp2(undo) <- Comp1(undo)
            [FAILED]
 ```
 
-**形式化定义** (Coq):
-```coq
-Fixpoint execute_compensation (stack : CompensationStack) : CompensationResult :=
-  match stack with
-  | nil => CR_Success nil
-  | cr :: rest =>
-      match cr_activity cr with
-      | mkActivity _ _ None _ _ => execute_compensation rest
-      | mkActivity _ _ (Some comp) _ _ =>
-          match comp (cr_output cr) with
-          | AR_Success _ => execute_compensation rest
-          | _ => CR_Failed "Compensation failed"
-          end
-      end
-  end.
-```
+**形式化定义**（数学风格）:
+
+**Def WF3（补偿链）**：设栈 $\mathit{stack} = [c_n, \ldots, c_1]$（LIFO）。补偿执行 $\mathit{execute\_compensation}(\mathit{stack})$：若 $\mathit{stack} = []$ 则成功；否则对 $c_1$ 执行 $\mathit{comp}(c_1.\mathit{output})$，成功则递归 $\mathit{rest}$，失败则整体失败。与 [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md) Saga 补偿语义一致。
 
 ---
 
 ### 4. 工作流引擎对比
 
-```
+```text
                         工作流引擎
                                │
         ┌──────────────────────┼──────────────────────┐
@@ -199,7 +171,7 @@ Fixpoint execute_compensation (stack : CompensationStack) : CompensationResult :
 **引擎能力矩阵**:
 
 | 特性 | Temporal | Cadence | 自建Rust |
-| :--- | :---: | :---: | :---: |
+| :--- | :--- | :--- | :--- |
 | 持久化 | ✅ 内置 | ✅ 内置 | ⚠️ 需实现 |
 | 可见性UI | ✅ | ✅ | ❌ |
 | 多语言 | ✅ Go/Java/TS/... | ✅ Go/Java | ⚠️ 仅Rust |
@@ -213,7 +185,7 @@ Fixpoint execute_compensation (stack : CompensationStack) : CompensationResult :
 ## 概念关系矩阵
 
 | 概念A | 关系 | 概念B | 说明 |
-| :--- | :---: | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | 工作流 | 使用 | 活动 | 工作流由活动组成 |
 | 活动 | 有 | 补偿 | 活动可选定义补偿 |
 | 补偿链 | 组成 | 补偿 | 按逆序执行活动补偿 |
@@ -250,7 +222,7 @@ Fixpoint execute_compensation (stack : CompensationStack) : CompensationResult :
 ## 形式化验证目标
 
 | 定理 | 描述 | 优先级 |
-| :--- | :--- | :---: |
+| :--- | :--- | :--- |
 | WF-1 | 工作流终止性 | P0 |
 | WF-2 | 补偿最终一致性 | P0 |
 | WF-3 | 状态机确定性 | P1 |
@@ -260,11 +232,11 @@ Fixpoint execute_compensation (stack : CompensationStack) : CompensationResult :
 
 ## 相关文档
 
-- [Coq 形式化定义](../coq_skeleton/WORKFLOW_FORMALIZATION.v)
-- [Saga 与补偿链](../coq_skeleton/DISTRIBUTED_PATTERNS.v)
-- [工作流引擎指南](../../../docs/05_guides/WORKFLOW_ENGINE_GUIDE.md)
+- [04_expressiveness_boundary](../../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md) - 工作流表达力边界
+- [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md) - Saga 补偿链
+- [06_boundary_analysis](../../software_design_theory/03_execution_models/06_boundary_analysis.md) - 执行模型选型
 
 ---
 
-**维护者**: Rust Formal Methods Research Team  
+**维护者**: Rust Formal Methods Research Team
 **对应任务**: P1-T12 - 工作流概念族谱新建

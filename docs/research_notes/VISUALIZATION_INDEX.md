@@ -7,7 +7,7 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [可视化文档索引](#可视化文档索引)
   - [📊 目录](#-目录)
@@ -38,7 +38,7 @@
 
 ---
 
-## 🎯 概述
+## 🎯 概述 {#-概述}
 
 本文档索引了所有使用多种思维表征方式（思维导图、概念对比矩阵、决策树等）创建的可视化文档。
 
@@ -51,11 +51,11 @@
 
 ---
 
-## 🧠 思维导图
+## 🧠 思维导图 {#-思维导图}
 
 ### 1. 任务关系网络图
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](./TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#思维导图任务关系网络)
+**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#思维导图任务关系网络)
 
 **内容**：
 
@@ -74,11 +74,11 @@
 
 ---
 
-## 📊 概念对比矩阵
+## 📊 概念对比矩阵 {#-概念对比矩阵}
 
 ### 1. 任务类型对比矩阵
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](./TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
+**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
 
 **对比维度**：
 
@@ -93,7 +93,7 @@
 
 ### 2. 任务完成策略对比矩阵
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](./TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
+**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
 
 **对比策略**：
 
@@ -108,7 +108,7 @@
 
 ### 3. 工具选择对比矩阵
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](./TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
+**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
 
 **对比工具**：
 
@@ -123,11 +123,11 @@
 
 ---
 
-## 🌳 决策树
+## 🌳 决策树 {#-决策树}
 
 ### 1. 任务优先级决策树
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](./TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#决策树任务优先级决策)
+**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#决策树任务优先级决策)
 
 **决策流程**：
 
@@ -152,11 +152,11 @@
 
 ---
 
-## 📈 进度可视化
+## 📈 进度可视化 {#-进度可视化}
 
 ### 1. 周进度跟踪表
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](./TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#进度跟踪矩阵)
+**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#进度跟踪矩阵)
 
 **内容**：
 
@@ -166,7 +166,7 @@
 
 ### 2. 任务完成度热力图
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](./TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#进度跟踪矩阵)
+**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#进度跟踪矩阵)
 
 **可视化**：
 
@@ -183,11 +183,11 @@
 
 ---
 
-## 🔗 相关文档
+## 🔗 相关文档 {#-相关文档}
 
 ### 核心文档
 
-- [任务编排与执行计划](./TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md) - 包含所有可视化内容
+- [任务编排与执行计划](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md) - 包含所有可视化内容
 - [任务清单](./TASK_CHECKLIST.md) - 详细任务列表
 - [进度跟踪](./PROGRESS_TRACKING.md) - 详细进度跟踪
 
@@ -302,9 +302,9 @@ fn main() {
 
 | 可视化类型 | 文档 | 内容 |
 | :--- | :--- | :--- |
-| 思维导图 | [MIND_MAP_COLLECTION](./MIND_MAP_COLLECTION.md) | 知识结构化思维导图 |
-| 概念矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念对比矩阵 |
-| 决策树 | [DECISION_GRAPH_NETWORK](./DECISION_GRAPH_NETWORK.md) | 决策图网络 |
+| 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 知识结构化思维导图 |
+| 概念矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念对比矩阵 |
+| 决策树 | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策图网络 |
 | 证明树 | [PROOF_INDEX](./PROOF_INDEX.md) | 证明树结构 |
 
 ### 研究笔记链接

@@ -247,7 +247,7 @@ Observer ──→ Command
 | Rc + 跨线程 | 编译拒绝；Rc 非 Send |
 | Observer 回调持有 `&mut` 跨线程 | 数据竞争；用 channel 替代 |
 
-**引用**：[04_compositional_engineering](04_compositional_engineering/README.md)、[CE-PAT1](../../04_compositional_engineering/02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持)。
+**引用**：[04_compositional_engineering](../04_compositional_engineering/README.md)、[CE-PAT1](../../04_compositional_engineering/02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持)。
 
 ---
 

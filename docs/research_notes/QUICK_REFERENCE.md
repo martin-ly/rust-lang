@@ -11,7 +11,7 @@
 
 > 💡 **提示**: 需要更详细的查找功能？请查看 [快速查找工具](./QUICK_FIND.md)！
 > 📐 **分类体系**: 按文档角色、知识层次、主题域查找 → [CLASSIFICATION.md](./CLASSIFICATION.md)
-> 📋 **速查卡**: 按主题的语法速查、代码示例、反例 → [docs/quick_reference](../quick_reference/README.md)
+> 📋 **速查卡**: 按主题的语法速查、代码示例、反例 → [docs/quick_reference](../02_reference/quick_reference/README.md)
 
 ---
 
@@ -19,10 +19,10 @@
 
 #### 🔬 形式化方法研究
 
-| 主题             | 文件                                                                               | 状态             |
+| 主题  | 文件 | 状态  |
 | :--- | :--- | :--- |
-| 完备性缺口       | [00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md)                | ✅ Phase 1–6 100% |
-| 所有权模型形式化 | [ownership_model.md](./formal_methods/ownership_model.md)                          | ✅ 100%           |
+| 完备性缺口  | [00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md)                | ✅ Phase 1–6 100% |
+| 所有权模型形式化 | [ownership_model.md](./formal_methods/ownership_model.md)                          | ✅ 100%
 | 借用检查器证明   | [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)                | ✅ 100%           |
 | 异步状态机形式化 | [async_state_machine.md](./formal_methods/async_state_machine.md)                  | ✅ 100%           |
 | 生命周期形式化   | [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)            | ✅ 100%           |
@@ -30,7 +30,7 @@
 
 #### 🔷 类型理论研究
 
-| 主题             | 文件                                                                           | 状态                 |
+| 主题 | 文件 | 状态 |
 | :--- | :--- | :--- |
 | 完备性缺口       | [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)               | ✅ 阶段 1–7 Def 占位 |
 | 类型构造能力     | [construction_capability.md](./type_theory/construction_capability.md)         | ✅ Def TCON1、矩阵、决策树 |
@@ -42,7 +42,7 @@
 
 #### 🌐 软件设计理论
 
-| 主题             | 文件                                                                                         | 状态        |
+| 主题  | 文件 | 状态 |
 | :--- | :--- | :--- |
 | 设计模式形式化   | [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/)             | ✅ 23 模式  |
 | 23/43 模型 | [02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/) | ✅ 100% |
@@ -54,7 +54,7 @@
 
 #### ⚡ 实验研究
 
-| 主题           | 文件                                                                               | 状态    |
+| 主题 | 文件 | 状态 |
 | :--- | :--- | :--- |
 | 性能基准测试   | [performance_benchmarks.md](./experiments/performance_benchmarks.md)               | ✅ 100% |
 | 内存分析       | [memory_analysis.md](./experiments/memory_analysis.md)                             | ✅ 100% |
@@ -226,7 +226,7 @@
 
 ### 外部资源
 
-- [形式化工程系统](../../rust-formal-engineering-system/README.md)
+- [形式化工程系统](../rust-formal-engineering-system/README.md)
 - [Rust Book](https://doc.rust-lang.org/book/)
 - [Rust Reference](https://doc.rust-lang.org/reference/)
 

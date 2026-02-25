@@ -5,14 +5,14 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 映射完成
 > **用途**: 按三大支柱的文档树、概念族↔文档↔Def/Axiom/定理映射、文档↔思维表征映射；支撑层次化检索与双向追溯
-> **上位文档**: [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)、[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](./RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)
+> **上位文档**: [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)、[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [research\_notes 层次化梳理与映射总结](#research_notes-层次化梳理与映射总结)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [一、按三大支柱的文档树](#一按三大支柱的文档树)
   - [二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表](#二概念族--文档--defaxiom定理-映射表)
     - [2.1 支柱 1（公理判定）](#21-支柱-1公理判定)
@@ -179,7 +179,7 @@ research_notes/
 - **从文档查思维表征**：用 § 3.1；**从思维表征反查文档**：用 § 3.2。
 - **改文档时查影响**：用 § 四 与 ARGUMENTATION_CHAIN_AND_FLOW。
 
-本文件为 [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) 阶段 1 交付物；阶段 2–3 将补全 23 模式矩阵、执行模型矩阵、思维表征-文档双向标注等。
+本文件为 [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) 阶段 1 交付物；阶段 2–3 将补全 23 模式矩阵、执行模型矩阵、思维表征-文档双向标注等。
 
 ---
 

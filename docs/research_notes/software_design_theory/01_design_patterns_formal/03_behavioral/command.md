@@ -11,10 +11,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [Command 形式化分析](#command-形式化分析)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Command 结构）](#def-11command-结构)
     - [Axiom CM1（可存储公理）](#axiom-cm1可存储公理)
@@ -185,7 +185,7 @@ impl ReversibleCommand for IncrementCommand {
 
 ### 形式化论证链
 
-```
+```text
 Axiom CM1 (可存储)
     ↓ 实现
 Box<dyn Fn()>

@@ -1,4 +1,4 @@
-# 🔗 跨文档映射网络 - 核心索引
+# 🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引}
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-20
@@ -10,38 +10,38 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
-- [🔗 跨文档映射网络 - 核心索引](#-跨文档映射网络---核心索引)
-  - [📊 目录](#-目录)
-  - [🗺️ 文档网络概览](#️-文档网络概览)
+- [🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引}](#-跨文档映射网络---核心索引--跨文档映射网络---核心索引)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [🗺️ 文档网络概览 {#️-文档网络概览}](#️-文档网络概览-️-文档网络概览)
     - [三大支柱文档网络](#三大支柱文档网络)
     - [文档类型分布](#文档类型分布)
-  - [🔄 双向链接表](#-双向链接表)
+  - [🔄 双向链接表 {#-双向链接表}](#-双向链接表--双向链接表)
     - [formal\_methods ↔ 其他文档](#formal_methods--其他文档)
     - [type\_theory ↔ 其他文档](#type_theory--其他文档)
     - [software\_design\_theory ↔ 其他文档](#software_design_theory--其他文档)
     - [速查卡 ↔ 指南/研究笔记](#速查卡--指南研究笔记)
-  - [📐 概念跨文档定义映射](#-概念跨文档定义映射)
+  - [📐 概念跨文档定义映射 {#-概念跨文档定义映射}](#-概念跨文档定义映射--概念跨文档定义映射)
     - [核心概念定义分布](#核心概念定义分布)
     - [概念等价关系](#概念等价关系)
-  - [📜 定理跨文档引用网络](#-定理跨文档引用网络)
+  - [📜 定理跨文档引用网络 {#-定理跨文档引用网络}](#-定理跨文档引用网络--定理跨文档引用网络)
     - [定理依赖图](#定理依赖图)
     - [跨文档定理引用矩阵](#跨文档定理引用矩阵)
-  - [🌐 文档依赖关系图](#-文档依赖关系图)
+  - [🌐 文档依赖关系图 {#-文档依赖关系图}](#-文档依赖关系图--文档依赖关系图)
     - [层次依赖](#层次依赖)
     - [横向关联](#横向关联)
-  - [🧭 导航指南](#-导航指南)
+  - [🧭 导航指南 {#-导航指南}](#-导航指南--导航指南)
     - [按目标快速导航](#按目标快速导航)
     - [交叉验证清单](#交叉验证清单)
-  - [📈 映射统计](#-映射统计)
+  - [📈 映射统计 {#-映射统计}](#-映射统计--映射统计)
     - [跨文档链接统计](#跨文档链接统计)
     - [概念映射统计](#概念映射统计)
     - [定理引用统计](#定理引用统计)
 
 ---
 
-## 🗺️ 文档网络概览
+## 🗺️ 文档网络概览 {#️-文档网络概览}
 
 ### 三大支柱文档网络
 
@@ -103,7 +103,7 @@
 
 ---
 
-## 🔄 双向链接表
+## 🔄 双向链接表 {#-双向链接表}
 
 ### formal_methods ↔ 其他文档
 
@@ -147,7 +147,7 @@
 
 ---
 
-## 📐 概念跨文档定义映射
+## 📐 概念跨文档定义映射 {#-概念跨文档定义映射}
 
 ### 核心概念定义分布
 
@@ -204,7 +204,7 @@
 
 ---
 
-## 📜 定理跨文档引用网络
+## 📜 定理跨文档引用网络 {#-定理跨文档引用网络}
 
 ### 定理依赖图
 
@@ -251,27 +251,27 @@
 | 定理 (源文档) | 被引用位置 | 引用用途 |
 | :--- | :--- | :--- |
 | **ownership_model:T3** (内存安全) | [04_compositional_engineering:CE-T1](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md) | 组合有效性证明 |
-| | [01_design_patterns_formal:各模式](./software_design_theory/01_design_patterns_formal/) | 模式安全性论证 |
-| | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | 完整证明引用 |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | **borrow_checker:T1** (数据竞争自由) | [04_compositional_engineering:CE-T2](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md) | 组合有效性证明 |
-| | [send_sync_formalization:SEND-T1](./formal_methods/send_sync_formalization.md) | 并发安全基础 |
-| | [async_state_machine:T6.2](./formal_methods/async_state_machine.md) | 异步并发安全 |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | **type_system:T3** (类型安全) | [04_compositional_engineering:CE-T2/CE-T3](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md) | 组合有效性证明 |
-| | [variance_theory:T1~T4](./type_theory/variance_theory.md) | 型变安全基础 |
-| | [trait_system_formalization:COH-T1](./type_theory/trait_system_formalization.md) | 一致性证明 |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | **async:T6.1~T6.3** | [pin_self_referential:T1~T3](./formal_methods/pin_self_referential.md) | Pin状态一致性 |
-| | [03_execution_models/02_async](./software_design_theory/03_execution_models/02_async.md) | 执行模型安全 |
-| | [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 实践安全性 |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | **send_sync:SEND-T1/SYNC-T1** | [async_state_machine:跨线程spawn](./formal_methods/async_state_machine.md) | 执行器安全 |
-| | [06_boundary_analysis:并发选型](./software_design_theory/03_execution_models/06_boundary_analysis.md) | 并发模式安全 |
-| | [borrow_checker_proof:CHAN/MUTEX](./formal_methods/borrow_checker_proof.md) | 通道/锁安全 |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | **lifetime:LF-T2** (引用有效性) | [variance_theory:型变组合](./type_theory/variance_theory.md) | 生命周期型变 |
-| | [trait_system_formalization:生命周期约束](./type_theory/trait_system_formalization.md) | Trait约束安全 |
-| | [02_reference/quick_reference/type_system.md](../02_reference/quick_reference/type_system.md) | 速查引用 |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
 
 ---
 
-## 🌐 文档依赖关系图
+## 🌐 文档依赖关系图 {#-文档依赖关系图}
 
 ### 层次依赖
 
@@ -343,7 +343,7 @@ graph TD
 
 ---
 
-## 🧭 导航指南
+## 🧭 导航指南 {#-导航指南}
 
 ### 按目标快速导航
 
@@ -371,7 +371,7 @@ graph TD
 
 ---
 
-## 📈 映射统计
+## 📈 映射统计 {#-映射统计}
 
 ### 跨文档链接统计
 

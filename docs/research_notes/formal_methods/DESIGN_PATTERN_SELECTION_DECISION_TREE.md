@@ -1,14 +1,27 @@
 # 设计模式选择决策树
 
 > **创建日期**: 2026-02-24
+> **最后更新**: 2026-02-26
+> **Rust 版本**: 1.93.0+ (Edition 2024)
 > **级别**: L1/L2
 > **类型**: 决策树
+> **状态**: ✅ 已完成
+
+---
+
+## 相关文档
+
+| 文档 | 说明 |
+| :--- | :--- |
+| [04_boundary_matrix](../software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) | 23 模式 × 三维边界（安全/支持/表达）|
+| [01_design_patterns_formal](../software_design_theory/01_design_patterns_formal/README.md) | 设计模式形式化框架 |
+| [DECISION_GRAPH_NETWORK](../../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策图网总索引 |
 
 ---
 
 ## 决策流程
 
-```
+```text
 需要解决什么问题？
 │
 ├── 对象创建
@@ -58,12 +71,24 @@
 | State | 状态机 | 枚举+方法实现 |
 | Strategy | 算法替换 | trait对象 |
 | Observer | 事件通知 | 通道或回调 |
+| Singleton | 全局唯一实例 | OnceLock/const |
+| Factory Method | 子类决定创建 | trait + impl |
+| Abstract Factory | 产品族创建 | trait 组合 |
+| Prototype | 克隆创建 | Clone trait |
+| Bridge | 抽象与实现分离 | trait 组合 |
+| Composite | 树形结构 | enum + Box |
+| Chain of Responsibility | 责任链 | Option/Result 链 |
+| Iterator | 遍历集合 | Iterator trait |
+| Mediator | 中介协调 | 中心化调度 |
+| Memento | 状态快照 | 序列化/Clone |
+| Template Method | 算法骨架 | trait 默认实现 |
+| Visitor | 双分派 | 模式匹配 |
 
 ---
 
 ## Rust特定考虑
 
-```
+```text
 所有权影响
 │
 ├── 消费型vs借用型
@@ -80,5 +105,5 @@
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-24
-**状态**: ✅ 已完成 - 决策树 8/10
+**最后更新**: 2026-02-26
+**状态**: ✅ 已完成 - 23 模式全覆盖

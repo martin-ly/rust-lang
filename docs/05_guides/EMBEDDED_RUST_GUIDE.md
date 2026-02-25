@@ -11,6 +11,8 @@
 
 本指南为官方 **Embedded Rust Book** 的入口与项目内导航，帮助在开发嵌入式 Rust 应用时快速定位到本项目的相关模块和官方资源。
 
+**形式化引用**：T-OW3 (内存安全)、T-BR1、[UNSAFE_RUST_GUIDE](./UNSAFE_RUST_GUIDE.md)（no_std、裸机 unsafe 契约）。
+
 ---
 
 ## 官方 Embedded 资源入口
@@ -351,14 +353,14 @@ fn update_data(value: u32) {
 | 链接类型 | 目标文档 |
 | :--- | :--- |
 | **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
-| | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
-| | [C05 线程与并发](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
+| :--- | :--- |
+| :--- | :--- |
 | **外部资源** | [Embedded Rust Book](https://doc.rust-lang.org/embedded-book/) |
-| | [Discovery Book](https://docs.rust-embedded.org/discovery/) |
-| | [Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) |
+| :--- | :--- |
+| :--- | :--- |
 | **相关指南** | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
-| | [CROSS_MODULE_INTEGRATION_EXAMPLES.md](./CROSS_MODULE_INTEGRATION_EXAMPLES.md) |
-| | [AI_RUST_ECOSYSTEM_GUIDE.md](./AI_RUST_ECOSYSTEM_GUIDE.md) |
+| :--- | :--- |
+| :--- | :--- |
 
 ---
 

@@ -229,20 +229,20 @@ utils = { path = "crates/utils" }
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 形式化方法概述 | 形式化验证基础理论 | [../../../../research_notes/formal_methods/README.md](../../../../research_notes/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../../../research_notes/formal_methods/type_system_formalization.md](../../../../research_notes/formal_methods/type_system_formalization.md) |
-| Send/Sync 形式化 | 线程安全形式化定义 | [../../../../research_notes/formal_methods/send_sync_formalization.md](../../../../research_notes/formal_methods/send_sync_formalization.md) |
-| 证明索引 | 形式化证明集合 | [../../../../research_notes/PROOF_INDEX.md](../../../../research_notes/PROOF_INDEX.md) |
+| 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../research_notes/formal_methods/README.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/type_system_foundations.md](../../../research_notes/type_theory/type_system_foundations.md) |
+| Send/Sync 形式化 | 线程安全形式化定义 | [../../../research_notes/formal_methods/send_sync_formalization.md](../../../research_notes/formal_methods/send_sync_formalization.md) |
+| 证明索引 | 形式化证明集合 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
 
 ## 相关研究笔记
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | Cargo 工作空间指南 | 完整工作空间配置 | [../../../06_toolchain/02_cargo_workspace_guide.md](../../../06_toolchain/02_cargo_workspace_guide.md) |
-| 研究方法论 | 研究方法指南 | [../../../../research_notes/research_methodology.md](../../../../research_notes/research_methodology.md) |
-| 最佳实践 | 工程最佳实践 | [../../../../research_notes/BEST_PRACTICES.md](../../../../research_notes/BEST_PRACTICES.md) |
-| 工具指南 | 验证工具使用 | [../../../../research_notes/TOOLS_GUIDE.md](../../../../research_notes/TOOLS_GUIDE.md) |
-| 质量检查清单 | 代码质量检查 | [../../../../research_notes/QUALITY_CHECKLIST.md](../../../../research_notes/QUALITY_CHECKLIST.md) |
+| 研究方法论 | 研究方法指南 | [../../../research_notes/research_methodology.md](../../../research_notes/research_methodology.md) |
+| 最佳实践 | 工程最佳实践 | [../../../research_notes/BEST_PRACTICES.md](../../../research_notes/BEST_PRACTICES.md) |
+| 工具指南 | 验证工具使用 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |
+| 质量检查清单 | 代码质量检查 | [../../../research_notes/QUALITY_CHECKLIST.md](../../../research_notes/QUALITY_CHECKLIST.md) |
 
 ---
 

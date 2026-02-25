@@ -7,10 +7,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [组合软件工程有效性形式论证](#组合软件工程有效性形式论证)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [宗旨](#宗旨)
   - [设计模式组合示例（实质内容）](#设计模式组合示例实质内容)
   - [组合完整代码示例（层次推进）](#组合完整代码示例层次推进)
@@ -117,6 +117,16 @@ impl<R: OrderRepository> OrderService<R> {
 // 模块依赖：Service 依赖 Repository；所有权沿调用链传递；CE-T1/T2/T3
 ```
 
+### 实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付）
+
+**Decorator + Strategy 组合有效性推导**：
+
+1. **CE-T1（内存安全）**：`Decorator` 持 `Box<dyn Strategy>`，所有权唯一；`execute()` 消费 `&self`，无双重释放。由 ownership T2、T3 传递。
+2. **CE-T2（数据竞争自由）**：`Strategy` 为 `dyn Trait`，无共享可变；装饰器内部 `RefCell` 若存在，限于单线程或 `Mutex` 封装。由 borrow T1、Send/Sync 约束。
+3. **CE-T3（类型安全）**：`impl Strategy for X` 满足 trait 约束；`Decorator<X>` 泛型良型。由 type T1–T3 传递。
+
+**结论**：Decorator∘Strategy 满足 CE-T1、CE-T2、CE-T3，组合有效。*证明*：各子模式 Safe 且良型；组合接口无泄漏；由 CE-C1。∎
+
 ---
 
 ## 文档索引
@@ -146,6 +156,34 @@ impl<R: OrderRepository> OrderService<R> {
 **定理 CE-T1–T3**：见 [01_formal_composition](01_formal_composition.md)、[02_effectiveness_proofs](02_effectiveness_proofs.md)；组合保持内存安全、数据竞争自由、类型安全。
 
 **推论 CE-C1**：若各 $M_i$ 为 Safe 且良型，则有效组合 $C$ 为 Safe 且良型。*证明*：由 CE-T1、CE-T2、CE-T3 直接。∎
+
+### 组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）
+
+```text
+Def CE1 (组合有效性)     Def 1.1 (模块组合)
+        │                      │
+        └──────────┬───────────┘
+                   ▼
+            Axiom CE0, CE1
+                   │
+    ┌──────────────┼──────────────┐
+    ▼              ▼              ▼
+ownership T2,T3  borrow T1    type T1,T2,T3
+    │              │              │
+    └──────────────┼──────────────┘
+                   ▼
+        CE-T1 ──► CE-T2 ──► CE-T3
+        (内存)    (数据竞争)  (类型)
+                   │
+                   ▼
+             推论 CE-C1
+```
+
+| 定理 | 依赖 | 来源 |
+| :--- | :--- | :--- |
+| CE-T1 | ownership T2、T3 | [ownership_model](../../formal_methods/ownership_model.md) |
+| CE-T2 | borrow T1、Send/Sync | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)、[send_sync_formalization](../../formal_methods/send_sync_formalization.md) |
+| CE-T3 | type T1、T2、T3 | [type_system_foundations](../../type_theory/type_system_foundations.md) |
 
 ---
 
@@ -177,14 +215,14 @@ impl<R: OrderRepository> OrderService<R> {
 | 层级 | 验证手段 | 说明 |
 | :--- | :--- | :--- |
 | **L3 多 crate** | cargo check + 集成测试 | 跨 crate 类型兼容、语义版本约束 |
-| | cargo test、cargo build | 构建与单元测试通过 |
-| | clippy、cargo udeps | 未使用依赖、lint 一致性 |
-| | 语义版本兼容性检查 | 主版本、minor 兼容 |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | **L4 跨进程/分布式** | 集成测试 | 端到端、跨进程调用 |
-| | 契约验证 | API 契约、协议一致性 |
-| | Miri | 未定义行为检测（若涉及 unsafe） |
-| | 模糊测试（cargo-fuzz） | 边界输入、崩溃发现 |
-| | 分布式事务测试 | 一致性、超时、重试 |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
+| :--- | :--- | :--- |
 
 ### L3/L4 验证工具索引
 
@@ -403,14 +441,14 @@ L4 跨进程/跨网络（分布式、微服务）
 | 违反定理 | 典型错误码 | 典型信息 | 修复方向 |
 | :--- | :--- | :--- | :--- |
 | **CE-T1**（内存安全） | E0382 | borrow of moved value | 避免使用已移动值；检查所有权 |
-| | E0503 | cannot use (value was moved) | 同上 |
-| | E0505 | cannot move out of (value is borrowed) | 缩短借用作用域；先 drop 借用 |
-| | E0507 | cannot move out of borrowed content | 用 `clone` 或重构所有权 |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | **CE-T2**（数据竞争自由） | E0499 | cannot borrow as mutable more than once | 避免并发可变借用；用 channel |
-| | E0502 | cannot borrow as immutable (already borrowed as mutable) | 缩短可变借用作用域 |
-| | E0378 | Send/Sync 相关 | 跨线程用 `Arc`；确保 `T: Send + Sync` |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | **CE-T3**（类型安全） | E0308 | mismatched types | 统一类型；检查 `From`/`Into` |
-| | E0277 | trait bound not satisfied | 满足泛型约束；`T: Trait` |
-| | E0433 | unresolved import | 检查 `pub`、模块路径 |
+| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 
 **引用**：[ERROR_CODE_MAPPING](../../../02_reference/ERROR_CODE_MAPPING.md)

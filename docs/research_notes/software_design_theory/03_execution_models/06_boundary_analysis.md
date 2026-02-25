@@ -7,10 +7,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [执行模型边界分析](#执行模型边界分析)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [五模型 × 三维边界](#五模型--三维边界)
   - [形式化定义](#形式化定义)
   - [执行确定性形式化](#执行确定性形式化)
@@ -270,4 +270,4 @@
 | 多维矩阵 | [README §执行模型多维对比矩阵](README.md#执行模型多维对比矩阵) |
 | 决策树 | 本文 § 并发选型决策树、§ 决策树：选择执行模型；[DECISION_GRAPH_NETWORK](../../../04_thinking/DECISION_GRAPH_NETWORK.md) |
 
-*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../../../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。

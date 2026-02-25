@@ -18,7 +18,7 @@
 
 - [ ] 包含 `> **创建日期**: YYYY-MM-DD`
 - [ ] 包含 `> **最后更新**: YYYY-MM-DD`
-- [ ] 包含 `> **Rust 版本**: 1.93.0+ (Edition 2024)`
+- [ ] 包含 `> **Rust 版本**: 1.93.1+ (Edition 2024)`
 - [ ] 包含 `> **状态**: ✅ 已完成 / 🔄 进行中 / 📋 规划中`
 - [ ] 日期格式为 `YYYY-MM-DD`（非 `YYYY/MM/DD` 或其他）
 - [ ] key 与冒号间无空格 (`**创建日期**:` 非 `**创建日期** :`)
@@ -54,7 +54,7 @@
 
 ```markdown
 | 列 A | 列 B | 列 C |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | 内容 | 内容 |
 ```
 
@@ -217,10 +217,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ## 📖 相关文档
 
 - [DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT](./DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md) - 完整审计报告
-- [QUALITY_CHECKLIST](research_notes/QUALITY_CHECKLIST.md) - 质量检查清单
-- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](research_notes/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
+- [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) - 质量检查清单
+- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
 - [FORMAT_FIX_COMPLETION_REPORT](./FORMAT_FIX_COMPLETION_REPORT.md) - 格式修复完成报告
 - [FORMAT_FIX_FINAL_REPORT](./FORMAT_FIX_FINAL_REPORT.md) - 格式修复最终报告
 - [FORMAT_FIX_PROGRESS_REPORT](./FORMAT_FIX_PROGRESS_REPORT.md) - 格式修复进度报告
 - [REFACTORING_COMPLETION_2026_02](./REFACTORING_COMPLETION_2026_02.md) - 重构完成报告
-- [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](research_notes/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) - 研究笔记批判分析与改进计划
+- [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](./RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) - 研究笔记批判分析与改进计划

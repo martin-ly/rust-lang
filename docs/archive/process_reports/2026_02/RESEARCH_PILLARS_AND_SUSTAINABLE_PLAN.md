@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 按用户表述重新梳理任务体系，围绕「公理判定系统」「语言表达力」「组件组合」三大支柱，结合国际权威对标，输出批判性意见与层次推进方案
-> **上位文档**: [INDEX](./INDEX.md)、[AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02](../07_project/AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md)
+> **上位文档**: [INDEX](../../../research_notes/INDEX.md)、[AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02](./project/AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md)
 
 ---
 
@@ -48,8 +48,8 @@
 | 维度 | 现状 | 建议 |
 | :--- | :--- | :--- |
 | **公理编号** | PROOF_INDEX 有 A/L/T/C 规范；FORMAL_FULL_MODEL_OVERVIEW 有统一编号；A-CF1、A-BIND1、A-SHADOW1 已补全 | 持续同步 |
-| **机器可检查** | T-OW2/T-BR1/T-TY3 骨架已创建（证明 Admitted 待补全） | Aeneas/coq-of-rust 对接；见 [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md) |
-| **国际对标** | RustBelt、Aeneas、RustSEM 已索引 | 季度更新 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
+| **机器可检查** | T-OW2/T-BR1/T-TY3 骨架已创建（证明 Admitted 待补全） | Aeneas/coq-of-rust 对接；见 [AENEAS_INTEGRATION_PLAN](../../../research_notes/AENEAS_INTEGRATION_PLAN.md) |
+| **国际对标** | RustBelt、Aeneas、RustSEM 已索引 | 季度更新 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
 
 ---
 
@@ -193,16 +193,16 @@
 
 ## 七、与现有文档的衔接
 
-**组织架构**：研究笔记按三大支柱组织；首次使用见 [00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md)。**完整总结与论证脉络**见 [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)、[ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md)。
+**组织架构**：研究笔记按三大支柱组织；首次使用见 [00_ORGANIZATION_AND_NAVIGATION](../../../research_notes/00_ORGANIZATION_AND_NAVIGATION.md)。**完整总结与论证脉络**见 [00_COMPREHENSIVE_SUMMARY](../../../research_notes/00_COMPREHENSIVE_SUMMARY.md)、[ARGUMENTATION_CHAIN_AND_FLOW](../../../research_notes/ARGUMENTATION_CHAIN_AND_FLOW.md)。
 
 | 本文档 | 现有文档 |
 | :--- | :--- |
-| 完整总结/论证脉络 | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)、[ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md) |
+| 完整总结/论证脉络 | [00_COMPREHENSIVE_SUMMARY](../../../research_notes/00_COMPREHENSIVE_SUMMARY.md)、[ARGUMENTATION_CHAIN_AND_FLOW](../../../research_notes/ARGUMENTATION_CHAIN_AND_FLOW.md) |
 | 批判性分析与改进计划 | [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](./RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)（概念/属性/论证/矩阵/层次化/思维表征缺口与四阶段推进） |
-| 支柱 1 | [FORMAL_FULL_MODEL_OVERVIEW](./FORMAL_FULL_MODEL_OVERVIEW.md)、[FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md)、[CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)、[PROOF_INDEX](./PROOF_INDEX.md)、[formal_methods](./formal_methods/README.md)、[type_theory](./type_theory/README.md) |
-| 支柱 2 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)、[software_design_theory](./software_design_theory/README.md)、[02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/README.md)、[04_expressiveness_boundary](./software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md)、[06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md) |
-| 支柱 3 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md)（含 CE-T1–T3、组合反例→错误码映射）、[03_integration_theory](./software_design_theory/04_compositional_engineering/03_integration_theory.md) |
-| 国际对标 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02](../07_project/AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md) |
+| 支柱 1 | [FORMAL_FULL_MODEL_OVERVIEW](../../../research_notes/FORMAL_FULL_MODEL_OVERVIEW.md)、[FORMAL_LANGUAGE_AND_PROOFS](../../../research_notes/FORMAL_LANGUAGE_AND_PROOFS.md)、[CORE_THEOREMS_FULL_PROOFS](../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md)、[PROOF_INDEX](../../../research_notes/PROOF_INDEX.md)、[formal_methods](../../../research_notes/formal_methods/README.md)、[type_theory](../../../research_notes/type_theory/README.md) |
+| 支柱 2 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)、[software_design_theory](../../../research_notes/software_design_theory/README.md)、[02_workflow_safe_complete_models](../../../research_notes/software_design_theory/02_workflow_safe_complete_models/README.md)、[04_expressiveness_boundary](../../../research_notes/software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md)、[06_boundary_analysis](../../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) |
+| 支柱 3 | [04_compositional_engineering](../../../research_notes/software_design_theory/04_compositional_engineering/README.md)（含 CE-T1–T3、组合反例→错误码映射）、[03_integration_theory](../../../research_notes/software_design_theory/04_compositional_engineering/03_integration_theory.md) |
+| 国际对标 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02](./project/AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md) |
 
 ---
 

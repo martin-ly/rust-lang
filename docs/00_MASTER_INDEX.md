@@ -99,7 +99,8 @@
 | [research_notes/PROOF_INDEX.md](./research_notes/PROOF_INDEX.md) | 公理-定理-证明索引 | → [CORE_THEOREMS_FULL_PROOFS](./research_notes/CORE_THEOREMS_FULL_PROOFS.md) → [formal_methods/*](./research_notes/formal_methods/) |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) | 形式化证明系统指南 | → [formal_methods/](./research_notes/formal_methods/) → [type_theory/](./research_notes/type_theory/) |
 | [00_COMPREHENSIVE_SUMMARY](./research_notes/00_COMPREHENSIVE_SUMMARY.md) | 综合总览、全局一致性 | → [formal_methods/](./research_notes/formal_methods/) → [type_theory/](./research_notes/type_theory/) |
-| [CORE_THEOREMS_FULL_PROOFS](./research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明（L2 级） | → [ownership_model](./research_notes/formal_methods/ownership_model.md) → [borrow_checker_proof](./research_notes/formal_methods/borrow_checker_proof.md) → [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
+| [CORE_THEOREMS_FULL_PROOFS](./research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明（L2 级，数学风格） | → [ownership_model](./research_notes/formal_methods/ownership_model.md) → [borrow_checker_proof](./research_notes/formal_methods/borrow_checker_proof.md) → [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
+| [THEOREM_RUST_EXAMPLE_MAPPING](./research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md) | 定理↔Rust 示例映射 | → [CORE_THEOREMS_FULL_PROOFS](./research_notes/CORE_THEOREMS_FULL_PROOFS.md) → crates/*/examples/ |
 | [FORMAL_LANGUAGE_AND_PROOFS](./research_notes/FORMAL_LANGUAGE_AND_PROOFS.md) | 形式语言与形式证明（推理规则、操作语义、判定形式） | → [PROOF_INDEX](./research_notes/PROOF_INDEX.md) → [04_thinking/PROOF_GRAPH_NETWORK](./04_thinking/PROOF_GRAPH_NETWORK.md) |
 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | 国际形式化验证对标 | → [formal_methods/README](./research_notes/formal_methods/README.md) §国际权威对标 |
 
@@ -109,7 +110,7 @@
 | :--- | :--- | :--- |
 | [formal_methods/README](./research_notes/formal_methods/README.md) | 形式化方法总览、六篇并表 | → [ownership_model](./research_notes/formal_methods/ownership_model.md) → [send_sync_formalization](./research_notes/formal_methods/send_sync_formalization.md) |
 | [00_completeness_gaps](./research_notes/formal_methods/00_completeness_gaps.md) | 完备性缺口声明与路线图 | → [README](./research_notes/formal_methods/README.md) |
-| [ownership_model](./research_notes/formal_methods/ownership_model.md) | 所有权规则 1-8、T2/T3 | ←→ [borrow_checker_proof](./research_notes/formal_methods/borrow_checker_proof.md) ←→ [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
+| [ownership_model](./research_notes/formal_methods/ownership_model.md) | 所有权规则 1-8、T2/T3 | ←→ [borrow_checker_proof](./research_notes/formal_methods/borrow_checker_proof.md) ←→ [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
 | [borrow_checker_proof](./research_notes/formal_methods/borrow_checker_proof.md) | 借用规则、T1 | ←→ [ownership_model](./research_notes/formal_methods/ownership_model.md) ←→ [lifetime_formalization](./research_notes/formal_methods/lifetime_formalization.md) |
 | [lifetime_formalization](./research_notes/formal_methods/lifetime_formalization.md) | outlives、T2 | ←→ [borrow_checker_proof](./research_notes/formal_methods/borrow_checker_proof.md) ←→ [type_theory/lifetime_formalization](./research_notes/type_theory/lifetime_formalization.md) |
 | [async_state_machine](./research_notes/formal_methods/async_state_machine.md) | T6.1-T6.3 | ←→ [pin_self_referential](./research_notes/formal_methods/pin_self_referential.md) ←→ [send_sync_formalization](./research_notes/formal_methods/send_sync_formalization.md) |
@@ -203,10 +204,11 @@
 | [PROJECT_ARCHITECTURE_GUIDE.md](./07_project/PROJECT_ARCHITECTURE_GUIDE.md) | 项目架构指南 | ←→ [crates/](../crates/) ←→ [software_design_theory/04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/) |
 | [RUST_RELEASE_TRACKING_CHECKLIST.md](./archive/process_reports/2026_02/project/RUST_RELEASE_TRACKING_CHECKLIST.md) | 新版本发布后的更新流程 | ←→ [06_toolchain/](./06_toolchain/) ←→ [research_notes/](./research_notes/) |
 | [TASK_INDEX.md](./archive/process_reports/2026_02/project/TASK_INDEX.md) | 未完成任务与计划总索引 | ←→ 所有主要文档 |
+| [DOCS_100_PERCENT_PROGRESS.md](./DOCS_100_PERCENT_PROGRESS.md) | 100% 推进进度与验收标准 | ←→ [TASK_ORCHESTRATION_MASTER_PLAN](../TASK_ORCHESTRATION_MASTER_PLAN.md) |
 | [MODULE_1.93_ADAPTATION_STATUS.md](./archive/process_reports/2026_02/project/MODULE_1.93_ADAPTATION_STATUS.md) | C01–C12 模块 1.93 适配状态 | ←→ [crates/](../crates/) ←→ [06_toolchain/](./06_toolchain/) |
 | [PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md](./archive/process_reports/2026_02/project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md) | 项目批判性评估报告 | ←→ 所有主要文档 |
-| [INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md](./07_project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md) | 国际化对标与全面批判性评估 | ←→ [formal_methods/](./research_notes/formal_methods/) |
-| [ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md](./07_project/ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md) | 对齐知识批判性评估与推进方案 | ←→ [ALIGNMENT_GUIDE](./02_reference/ALIGNMENT_GUIDE.md) |
+| [INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md](./archive/process_reports/2026_02/project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md) | 国际化对标与全面批判性评估 | ←→ [formal_methods/](./research_notes/formal_methods/) |
+| [ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md](./archive/process_reports/2026_02/project/ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md) | 对齐知识批判性评估与推进方案 | ←→ [ALIGNMENT_GUIDE](./02_reference/ALIGNMENT_GUIDE.md) |
 | [DOCUMENTATION_THEME_ORGANIZATION_PLAN.md](./archive/process_reports/2026_02/project/DOCUMENTATION_THEME_ORGANIZATION_PLAN.md) | 文档主题梳理与重组规划 | ←→ [DOCS_STRUCTURE_OVERVIEW](./DOCS_STRUCTURE_OVERVIEW.md) |
 | [archive/process_reports/](./archive/process_reports/) | 改进总结、计划实施、链接修复、Crates 计划等过程性文档 | ←→ 所有主要文档 |
 
@@ -258,7 +260,7 @@
 
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [archive/](./archive/) | 归档文件 | ←→ [07_project/archive/process_reports/](./07_project/archive/process_reports/) |
+| [archive/](./archive/) | 归档文件 | ←→ [archive/process_reports/](./archive/process_reports/) |
 | [backup/](./backup/) | 备份文件（.rar/.zip，非日常查阅） | - |
 
 ---

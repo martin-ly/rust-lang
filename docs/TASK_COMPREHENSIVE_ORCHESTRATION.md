@@ -14,7 +14,7 @@
 ### 当前完成度总览
 
 | 维度 | 当前 | 目标 | 缺口 | 优先级 |
-| :--- | :---: | :---: | :---: | :---: |
+| :--- | :--- | :--- | :--- | :--- |
 | **形式化定义 (Def)** | 85% | 100% | 15% | P0 |
 | **公理/定理 (A/T)** | 80% | 100% | 20% | P0 |
 | **L2 完整证明** | 70% | 100% | 30% | P1 |
@@ -56,7 +56,7 @@
 ### Week 1: Coq L3 骨架细化 - 所有权唯一性
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P1-W1-T1 | State定义完善 | 完整状态空间定义 | 4h | ⏳ | OWNERSHIP_UNIQUENESS.v |
 | P1-W1-T2 | 转移规则细化 | move/copy/drop规则 | 4h | ⏳ | OWNERSHIP_UNIQUENESS.v |
 | P1-W1-T3 | 辅助引理显式化 | L-OW1, L-OW2, L-OW3 | 4h | ⏳ | OWNERSHIP_UNIQUENESS.v |
@@ -70,7 +70,7 @@
 ### Week 2: Coq L3 骨架细化 - 借用检查与类型安全
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P1-W2-T1 | BorrowCheck定义完善 | 完整借用检查定义 | 6h | ⏳ | BORROW_DATARACE_FREE.v |
 | P1-W2-T2 | 数据竞争形式化 | data_race定义 | 4h | ⏳ | BORROW_DATARACE_FREE.v |
 | P1-W2-T3 | L-BR1引理显式化 | 写互斥引理 | 4h | ⏳ | BORROW_DATARACE_FREE.v |
@@ -84,7 +84,7 @@
 ### Week 3: 形式化定义补全 - 分布式模式
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P1-W3-T1 | Saga模式Def | Def S1-S3 | 4h | ⏳ | DISTRIBUTED_PATTERNS.v |
 | P1-W3-T2 | CQRS模式Def | Def CQ1-CQ3 | 4h | ⏳ | DISTRIBUTED_PATTERNS.v |
 | P1-W3-T3 | Circuit Breaker Def | Def CB1-CB3 | 3h | ⏳ | DISTRIBUTED_PATTERNS.v |
@@ -99,7 +99,7 @@
 ### Week 4: 形式化定义补全 - 工作流与故障模式
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P1-W4-T1 | 工作流状态机Def | Def WF1-WF3 | 4h | ⏳ | WORKFLOW_FORMALIZATION.v |
 | P1-W4-T2 | 补偿链Def | Def CC1-CC3 | 4h | ⏳ | WORKFLOW_FORMALIZATION.v |
 | P1-W4-T3 | 长事务Def | Def LT1-LT3 | 3h | ⏳ | WORKFLOW_FORMALIZATION.v |
@@ -115,7 +115,7 @@
 ### Week 5: 思维导图完善 - 理论基础层
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P1-W5-T1 | 所有权概念族谱更新 | 更新后导图 | 4h | ⏳ | ownership_model.md |
 | P1-W5-T2 | 添加Send/Sync节点 | 更新节点 | 2h | ⏳ | ownership_model.md |
 | P1-W5-T3 | 添加Pin节点 | 更新节点 | 2h | ⏳ | ownership_model.md |
@@ -130,7 +130,7 @@
 ### Week 6: 思维导图新建 - 分布式与工作流
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P1-W6-T1 | 分布式概念族谱新建 | 新建导图 | 6h | ⏳ | DISTRIBUTED_CONCEPT_MINDMAP.md |
 | P1-W6-T2 | Saga/CQRS节点 | 15+模式节点 | 3h | ⏳ | DISTRIBUTED_CONCEPT_MINDMAP.md |
 | P1-W6-T3 | 一致性级别分类 | CAP节点 | 2h | ⏳ | DISTRIBUTED_CONCEPT_MINDMAP.md |
@@ -144,7 +144,7 @@
 ### Week 7: 多维矩阵扩展
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P1-W7-T1 | 五维矩阵更新 | 更新后矩阵 | 4h | ⏳ | CONCEPT_AXIOM_THEOREM_MATRIX.md |
 | P1-W7-T2 | 补全分布式条目 | Saga/CQRS行 | 2h | ⏳ | CONCEPT_AXIOM_THEOREM_MATRIX.md |
 | P1-W7-T3 | 补全工作流条目 | 工作流行 | 2h | ⏳ | CONCEPT_AXIOM_THEOREM_MATRIX.md |
@@ -159,7 +159,7 @@
 ### Week 8: Phase 1 收尾与决策树新建
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P1-W8-T1 | 分布式架构选型决策树 | 新建决策树 | 6h | ⏳ | DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md |
 | P1-W8-T2 | Saga/CQRS选型分支 | 事务选型分支 | 3h | ⏳ | DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md |
 | P1-W8-T3 | 容错策略选型分支 | 熔断/重试分支 | 3h | ⏳ | DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md |
@@ -175,7 +175,7 @@
 ### Week 9-10: Iris分离逻辑学习
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P2-W9-T1 | Iris基础概念学习 | 学习笔记 | 8h | ⏳ | L3_MACHINE_PROOF_GUIDE.md |
 | P2-W9-T2 | 分离逻辑核心概念 | 笔记+示例 | 8h | ⏳ | L3_MACHINE_PROOF_GUIDE.md |
 | P2-W9-T3 | Iris在Rust中的应用 | Rust案例 | 8h | ⏳ | L3_MACHINE_PROOF_GUIDE.md |
@@ -190,7 +190,7 @@
 ### Week 11-12: T-OW2 L3机器证明完成
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P2-W11-T1 | move_preserves_uniqueness完整证明 | 证明+Qed | 8h | ⏳ | OWNERSHIP_UNIQUENESS.v |
 | P2-W11-T2 | copy_preserves_uniqueness完整证明 | 证明+Qed | 8h | ⏳ | OWNERSHIP_UNIQUENESS.v |
 | P2-W11-T3 | drop_preserves_uniqueness完整证明 | 证明+Qed | 8h | ⏳ | OWNERSHIP_UNIQUENESS.v |
@@ -206,7 +206,7 @@
 ### Week 13-14: T-BR1 L3机器证明完成
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P2-W13-T1 | L-BR1引理完整证明 | 证明+Qed | 10h | ⏳ | BORROW_DATARACE_FREE.v |
 | P2-W13-T2 | L-BR2引理完整证明 | 证明+Qed | 10h | ⏳ | BORROW_DATARACE_FREE.v |
 | P2-W13-T3 | 资源排他性证明 | 证明+Qed | 8h | ⏳ | BORROW_DATARACE_FREE.v |
@@ -221,7 +221,7 @@
 ### Week 15-16: T-TY3 + 设计模式证明
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P2-W15-T1 | T-TY1进展性完整证明 | 证明+Qed | 10h | ⏳ | TYPE_SAFETY.v |
 | P2-W15-T2 | T-TY2保持性完整证明 | 证明+Qed | 10h | ⏳ | TYPE_SAFETY.v |
 | P2-W15-T3 | Factory模式L2证明 | 完整证明 | 5h | ⏳ | 01_creational/factory_method.md |
@@ -239,7 +239,7 @@
 ### Week 17-18: Aeneas工具链对接
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P3-W17-T1 | Aeneas安装与配置 | 可运行环境 | 8h | ⏳ | AENEAS_INTEGRATION_PLAN.md |
 | P3-W17-T2 | Charon配置 | MIR提取 | 8h | ⏳ | AENEAS_INTEGRATION_PLAN.md |
 | P3-W17-T3 | 基础示例翻译 | Lean/Coq代码 | 8h | ⏳ | AENEAS_INTEGRATION_PLAN.md |
@@ -254,7 +254,7 @@
 ### Week 19-20: RustBelt国际权威对标
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P3-W19-T1 | RustBelt论文逐章研读 | 章节笔记 | 10h | ⏳ | RUSTBELT_ALIGNMENT.md |
 | P3-W19-T2 | 定理映射表建立 | 映射表 | 10h | ⏳ | RUSTBELT_ALIGNMENT.md |
 | P3-W19-T3 | T-OW2对标验证 | 对标分析 | 6h | ⏳ | RUSTBELT_ALIGNMENT.md |
@@ -269,7 +269,7 @@
 ### Week 21-22: 证明树与思维表征完善
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P3-W21-T1 | 所有权证明树可视化 | 图表 | 6h | ⏳ | CORE_THEOREMS_FULL_PROOFS.md |
 | P3-W21-T2 | 借用证明树可视化 | 图表 | 6h | ⏳ | CORE_THEOREMS_FULL_PROOFS.md |
 | P3-W21-T3 | 类型安全证明树可视化 | 图表 | 6h | ⏳ | CORE_THEOREMS_FULL_PROOFS.md |
@@ -284,7 +284,7 @@
 ### Week 23-24: 应用树与CI集成
 
 | 任务ID | 任务描述 | 交付物 | 工时 | 状态 | 所属文件 |
-| :--- | :--- | :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | P3-W23-T1 | 系统编程应用树新建 | 应用树 | 8h | ⏳ | APPLICATION_TREES.md |
 | P3-W23-T2 | 网络服务应用树新建 | 应用树 | 8h | ⏳ | APPLICATION_TREES.md |
 | P3-W23-T3 | 数据系统应用树新建 | 应用树 | 8h | ⏳ | APPLICATION_TREES.md |
@@ -302,7 +302,7 @@
 ### 5.1 六篇核心文档完善
 
 | 文档 | 当前状态 | 待完成任务 | 预计工时 |
-| :--- | :--- | :--- | :---: |
+| :--- | :--- | :--- | :--- |
 | ownership_model.md | 85% | L3证明引用、导图更新 | 8h |
 | borrow_checker_proof.md | 85% | L3证明引用、证明树 | 8h |
 | lifetime_formalization.md | 80% | 证明树新建、L3引用 | 10h |
@@ -343,7 +343,7 @@
 ### 里程碑检查清单
 
 | 里程碑 | 日期 | 验收标准 | 状态 |
-| :--- | :--- | :--- | :---: |
+| :--- | :--- | :--- | :--- |
 | M1 | Week 4 | T-OW2骨架细化完成，Coq编译通过 | ⏳ |
 | M2 | Week 8 | Phase 1基础补全完成，综合≥75% | ⏳ |
 | M3 | Week 12 | T-OW2 L3证明完成，全部Qed | ⏳ |
@@ -358,7 +358,7 @@
 ### 7.1 工具链
 
 | 工具 | 版本 | 用途 | 安装状态 |
-| :--- | :--- | :--- | :---: |
+| :--- | :--- | :--- | :--- |
 | Coq | 8.18+ | L3证明 | ⏳ 待安装 |
 | Iris | 最新 | 分离逻辑 | ⏳ 待安装 |
 | Aeneas | 最新 | Rust翻译 | ⏳ 待安装 |
@@ -378,7 +378,7 @@
 ## 八、风险与缓解措施
 
 | 风险 | 影响 | 概率 | 缓解措施 |
-| :--- | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- |
 | Coq证明复杂度高 | 高 | 中 | 分阶段完成，先L2后L3 |
 | Iris学习曲线陡 | 中 | 高 | 提前开始，每周固定学习时间 |
 | Aeneas工具链不稳定 | 中 | 中 | 准备替代方案(直接使用Coq) |
@@ -438,7 +438,7 @@
 
 ---
 
-```
+```text
                     任务编排完成
                         │
         ┌───────────────┼───────────────┐

@@ -184,7 +184,7 @@ let v = vec_mac![1, 2, 3];
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../research_notes/formal_methods/README.md](../research_notes/formal_methods/README.md) |
-| 异步形式化 | 异步运行时形式化 | [../research_notes/formal_methods/async_formalization.md](../research_notes/formal_methods/async_formalization.md) |
+| 异步形式化 | 异步运行时形式化 | [../research_notes/formal_methods/async_state_machine.md](../research_notes/formal_methods/async_state_machine.md) |
 | Send/Sync 形式化 | 线程安全形式化定义 | [../research_notes/formal_methods/send_sync_formalization.md](../research_notes/formal_methods/send_sync_formalization.md) |
 | 证明索引 | 形式化证明集合 | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) |
 

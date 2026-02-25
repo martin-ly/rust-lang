@@ -11,6 +11,8 @@
 
 本指南涵盖「AI 辅助 Rust 开发」与「用 Rust 构建 AI/ML 应用」两类场景，帮助开发者选择合适工具并规划学习路径。
 
+**形式化引用**：T-OW2、T-TY3、[type_system_foundations](../research_notes/type_theory/type_system_foundations.md)（张量泛型、Trait 抽象）。
+
 ---
 
 ## 一、AI 辅助 Rust 开发
@@ -434,14 +436,14 @@ type Result<T> = std::result::Result<T, AIError>;
 | 链接类型 | 目标文档 |
 | :--- | :--- |
 | **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
-| | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
-| | [C05 线程与并发](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
+| :--- | :--- |
+| :--- | :--- |
 | **进阶主题** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
-| | [WASM_USAGE_GUIDE.md](./WASM_USAGE_GUIDE.md) |
+| :--- | :--- |
 | **相关指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md) |
-| | [EMBEDDED_RUST_GUIDE.md](./EMBEDDED_RUST_GUIDE.md) |
+| :--- | :--- |
 | **参考文档** | [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) |
-| | [ERROR_CODE_MAPPING](../02_reference/ERROR_CODE_MAPPING.md) |
+| :--- | :--- |
 
 ---
 

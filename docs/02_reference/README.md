@@ -114,7 +114,7 @@ enum List {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../research_notes/formal_methods/README.md](../research_notes/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../research_notes/formal_methods/type_system_formalization.md](../research_notes/formal_methods/type_system_formalization.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../research_notes/type_theory/type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) |
 | 证明索引 | 形式化证明集合 | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) |
 
 ---

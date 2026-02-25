@@ -1,18 +1,18 @@
-# Rust 1.93.0 思维表征方式文档 / Thinking Representation Methods Documentation
+# Rust 1.93.1 思维表征方式文档 / Thinking Representation Methods Documentation
 
 > **创建日期**: 2025-12-11
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-26
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
 
-## 📋 目录
+## 📋 目录 {#-目录}
 
-- [Rust 1.93.0 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-1930-思维表征方式文档--thinking-representation-methods-documentation)
-  - [📋 目录](#-目录)
-  - [🎯 文档概述](#-文档概述)
-  - [🗺️ 1. 思维导图 (Mind Map)](#️-1-思维导图-mind-map)
+- [Rust 1.93.1 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-1931-思维表征方式文档--thinking-representation-methods-documentation)
+  - [📋 目录 {#-目录}](#-目录--目录)
+  - [🎯 文档概述 {#-文档概述}](#-文档概述--文档概述)
+  - [🗺️ 1. 思维导图 (Mind Map) {#️-1-思维导图-mind-map}](#️-1-思维导图-mind-map-️-1-思维导图-mind-map)
     - [1.1 Rust 1.93.0 核心特性思维导图](#11-rust-1930-核心特性思维导图)
     - [1.2 所有权系统完整思维导图](#12-所有权系统完整思维导图)
     - [1.3 借用系统完整思维导图](#13-借用系统完整思维导图)
@@ -25,12 +25,12 @@
     - [1.10 跨模块概念依赖思维导图](#110-跨模块概念依赖思维导图)
     - [1.11 模块级思维导图索引](#111-模块级思维导图索引)
     - [1.12 学习路径思维导图](#112-学习路径思维导图)
-  - [📊 2. 多维矩阵 (Multidimensional Matrix)](#-2-多维矩阵-multidimensional-matrix)
+  - [📊 2. 多维矩阵 (Multidimensional Matrix) {#-2-多维矩阵-multidimensional-matrix}](#-2-多维矩阵-multidimensional-matrix--2-多维矩阵-multidimensional-matrix)
     - [2.1 Rust 1.93.0 特性对比矩阵](#21-rust-1930-特性对比矩阵)
     - [2.2 版本迁移对比矩阵](#22-版本迁移对比矩阵)
     - [2.3 特性依赖关系矩阵](#23-特性依赖关系矩阵)
     - [2.4 性能影响矩阵](#24-性能影响矩阵)
-  - [🌳 3. 决策树图 (Decision Tree)](#-3-决策树图-decision-tree)
+  - [🌳 3. 决策树图 (Decision Tree) {#-3-决策树图-decision-tree}](#-3-决策树图-decision-tree--3-决策树图-decision-tree)
     - [3.1 Rust 1.93.0 特性使用决策树](#31-rust-1930-特性使用决策树)
     - [3.2 技术选型决策树](#32-技术选型决策树)
     - [3.3 调试决策树](#33-调试决策树)
@@ -46,13 +46,13 @@
       - [3.9.4 泛型约束转换树](#394-泛型约束转换树)
       - [3.9.5 生命周期转换树](#395-生命周期转换树)
       - [3.9.6 错误传播转换树](#396-错误传播转换树)
-  - [🔬 4. 证明树图 (Proof Tree)](#-4-证明树图-proof-tree)
+  - [🔬 4. 证明树图 (Proof Tree) {#-4-证明树图-proof-tree}](#-4-证明树图-proof-tree--4-证明树图-proof-tree)
     - [4.1 定理证明树结构](#41-定理证明树结构)
     - [4.2 内存安全证明树](#42-内存安全证明树)
     - [4.3 类型安全证明树](#43-类型安全证明树)
     - [4.4 并发安全证明树](#44-并发安全证明树)
-  - [📈 5. 概念关系网络图 (Concept Relationship Network)](#-5-概念关系网络图-concept-relationship-network)
-  - [🎯 6. 使用指南](#-6-使用指南)
+  - [📈 5. 概念关系网络图 (Concept Relationship Network) {#-5-概念关系网络图-concept-relationship-network}](#-5-概念关系网络图-concept-relationship-network--5-概念关系网络图-concept-relationship-network)
+  - [🎯 6. 使用指南 {#-6-使用指南}](#-6-使用指南--6-使用指南)
     - [6.1 何时使用思维导图](#61-何时使用思维导图)
     - [6.2 何时使用多维矩阵](#62-何时使用多维矩阵)
     - [6.3 何时使用决策树](#63-何时使用决策树)
@@ -61,16 +61,16 @@
   - [💻 代码示例](#-代码示例)
     - [示例 1: 思维导图生成器](#示例-1-思维导图生成器)
     - [示例 2: 决策树枚举实现](#示例-2-决策树枚举实现)
-  - [📚 7. 参考资源](#-7-参考资源)
+  - [📚 7. 参考资源 {#-7-参考资源}](#-7-参考资源--7-参考资源)
     - [7.1 官方资源](#71-官方资源)
     - [7.2 项目资源](#72-项目资源)
     - [7.3 相关文档](#73-相关文档)
 
 ---
 
-## 🎯 文档概述
+## 🎯 文档概述 {#-文档概述}
 
-本文档提供四种主要的思维表征方式，帮助开发者从不同角度理解和应用 Rust 1.93.0 的特性：
+本文档提供四种主要的思维表征方式，帮助开发者从不同角度理解和应用 Rust 1.93.1 的特性：
 
 1. **思维导图** - 可视化知识结构和学习路径
 2. **多维矩阵** - 多维度对比分析和决策支持
@@ -80,7 +80,7 @@
 
 ---
 
-## 🗺️ 1. 思维导图 (Mind Map)
+## 🗺️ 1. 思维导图 (Mind Map) {#️-1-思维导图-mind-map}
 
 ### 1.1 Rust 1.93.0 核心特性思维导图
 
@@ -542,7 +542,7 @@ mindmap
 各模块的思维导图与知识可视化资源：
 
 | 模块 | 思维导图/知识图谱 | 路径 |
-| :--- | :--- | :--- || C01 | 所有权知识图谱 | crates/c01_ownership_borrow_scope/docs/ |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | C02 | 类型系统多维矩阵 | crates/c02_type_system/docs/ |
 | C03 | 控制流 MIND_MAP | crates/c03_control_fn/docs/MIND_MAP.md |
 | C04 | 泛型概念关系 | crates/c04_generic/docs/ |
@@ -598,12 +598,12 @@ mindmap
 
 ---
 
-## 📊 2. 多维矩阵 (Multidimensional Matrix)
+## 📊 2. 多维矩阵 (Multidimensional Matrix) {#-2-多维矩阵-multidimensional-matrix}
 
 ### 2.1 Rust 1.93.0 特性对比矩阵
 
 | 特性类别     | 特性名称                | 重要性     | 影响范围 | 迁移难度 | 性能影响 | 安全影响       | 应用场景       |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- || **语言特性** | MaybeUninit 文档化      | ⭐⭐⭐⭐⭐ | 全局     | 低       | 无       | ✅ 类型安全    | 系统编程、FFI  |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **语言特性** | 联合体原始引用          | ⭐⭐⭐⭐   | 中等     | 中       | 正       | ✅ 安全访问    | 底层编程       |
 | **语言特性** | 自动特征改进            | ⭐⭐⭐     | 全局     | 低       | 正       | ✅ 类型安全    | 泛型编程       |
 | **语言特性** | 零大小数组优化          | ⭐⭐       | 局部     | 低       | 正       | ✅ 类型安全    | 类型系统       |
@@ -635,7 +635,7 @@ mindmap
 ### 2.2 版本迁移对比矩阵
 
 | 从版本 | 到版本 | 主要变更                   | 破坏性变更 | 迁移工作量 | 建议优先级 | 关键注意事项                     |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- || 1.89   | 1.93.0 | 多项新特性                 | 低         | 中         | P1         | Never 类型 Lint 可能影响现有代码 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1.90   | 1.93.0 | 特性增强                   | 低         | 低         | P1         | 检查 Lint 警告                   |
 | 1.91   | 1.93.0 | 特性完善                   | 低         | 低         | P0         | 快速迁移，收益高                 |
 | 1.92.0 | 1.93.0 | musl 1.2.5、全局分配器增强 | 低         | 低         | P0         | 直接迁移，DNS 解析改进           |
@@ -643,7 +643,7 @@ mindmap
 ### 2.3 特性依赖关系矩阵
 
 | 特性               | 依赖特性    | 影响特性        | 冲突特性 | 协同特性       | 组合示例               |
-| :--- | :--- | :--- | :--- | :--- | :--- || MaybeUninit 文档化 | 无          | 联合体原始引用  | 无       | 零大小数组优化 | SafeMaybeUninit 包装器 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 联合体原始引用     | MaybeUninit | 无              | 无       | track_caller   | &raw const/mut 访问    |
 | Never 类型 Lint    | 无          | unused_must_use | 无       | 类型系统改进   | 错误处理改进           |
 | 迭代器特化         | TrustedLen  | 性能优化        | 无       | 元组扩展简化   | Iterator::eq 特化      |
@@ -653,7 +653,7 @@ mindmap
 ### 2.4 性能影响矩阵
 
 | 特性               | 编译时性能 | 运行时性能 | 内存使用 | 代码大小 | 优化潜力 |
-| :--- | :--- | :--- | :--- | :--- | :--- || MaybeUninit 文档化 | 无影响     | 零成本     | 无影响   | 无影响   | 低       |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 联合体原始引用     | 无影响     | 零成本     | 无影响   | 无影响   | 低       |
 | 迭代器特化         | 轻微提升   | 显著提升   | 无影响   | 可能增加 | 高       |
 | 零大小数组优化     | 轻微提升   | 无影响     | 无影响   | 可能减少 | 中       |
@@ -662,7 +662,7 @@ mindmap
 
 ---
 
-## 🌳 3. 决策树图 (Decision Tree)
+## 🌳 3. 决策树图 (Decision Tree) {#-3-决策树图-decision-tree}
 
 ### 3.1 Rust 1.93.0 特性使用决策树
 
@@ -1145,7 +1145,7 @@ flowchart TD
 
 ---
 
-## 🔬 4. 证明树图 (Proof Tree)
+## 🔬 4. 证明树图 (Proof Tree) {#-4-证明树图-proof-tree}
 
 ### 4.1 定理证明树结构
 
@@ -1329,7 +1329,7 @@ graph TD
 
 ---
 
-## 📈 5. 概念关系网络图 (Concept Relationship Network)
+## 📈 5. 概念关系网络图 (Concept Relationship Network) {#-5-概念关系网络图-concept-relationship-network}
 
 ```mermaid
 graph LR
@@ -1376,7 +1376,7 @@ graph LR
 
 ---
 
-## 🎯 6. 使用指南
+## 🎯 6. 使用指南 {#-6-使用指南}
 
 ### 6.1 何时使用思维导图
 
@@ -1539,12 +1539,12 @@ impl DecisionEngine {
 
 ---
 
-## 📚 7. 参考资源
+## 📚 7. 参考资源 {#-7-参考资源}
 
 ### 7.1 官方资源
 
 - [Rust 官方文档](https://doc.rust-lang.org/)
-- [Rust 1.93.0 Release Notes](https://releases.rs/docs/1.93.0/)
+- [Rust 1.93.1 Release Notes](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/)、[releases.rs 1.93.0](https://releases.rs/docs/1.93.0/)
 - [Rust Book](https://doc.rust-lang.org/book/)
 - [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -1557,7 +1557,7 @@ impl DecisionEngine {
 ### 7.3 相关文档
 
 - [MULTI_DIMENSIONAL_CONCEPT_MATRIX.md](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
-- [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识结构框架
+- [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识结构框架
 
 ---
 

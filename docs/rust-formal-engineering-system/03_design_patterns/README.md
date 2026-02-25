@@ -400,33 +400,33 @@ fn newtype_demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 设计模式形式化 | 设计模式理论 | [../../../research_notes/software_design_theory/01_design_patterns_formal/README.md](../../../research_notes/software_design_theory/01_design_patterns_formal/README.md) |
-| Rust 惯用法 | Rust 特定模式 | [../../../research_notes/software_design_theory/06_rust_idioms.md](../../../research_notes/software_design_theory/06_rust_idioms.md) |
-| 反模式 | 常见陷阱 | [../../../research_notes/software_design_theory/07_anti_patterns.md](../../../research_notes/software_design_theory/07_anti_patterns.md) |
+| 设计模式形式化 | 设计模式理论 | [../../research_notes/software_design_theory/01_design_patterns_formal/README.md](../../research_notes/software_design_theory/01_design_patterns_formal/README.md) |
+| Rust 惯用法 | Rust 特定模式 | [../../research_notes/software_design_theory/06_rust_idioms.md](../../research_notes/software_design_theory/06_rust_idioms.md) |
+| 反模式 | 常见陷阱 | [../../research_notes/software_design_theory/07_anti_patterns.md](../../research_notes/software_design_theory/07_anti_patterns.md) |
 
 ### 创建型模式
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 抽象工厂 | 抽象工厂模式 | [../../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/abstract_factory.md](../../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/abstract_factory.md) |
-| 构造器 | 构造器模式 | [../../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/builder.md](../../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/builder.md) |
-| 工厂方法 | 工厂方法模式 | [../../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/factory_method.md](../../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/factory_method.md) |
+| 抽象工厂 | 抽象工厂模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/abstract_factory.md](../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/abstract_factory.md) |
+| 构造器 | 构造器模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/builder.md](../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/builder.md) |
+| 工厂方法 | 工厂方法模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/factory_method.md](../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/factory_method.md) |
 
 ### 结构型模式
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 适配器 | 适配器模式 | [../../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/adapter.md](../../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/adapter.md) |
-| 装饰器 | 装饰器模式 | [../../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/decorator.md](../../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/decorator.md) |
-| 外观 | 外观模式 | [../../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/facade.md](../../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/facade.md) |
+| 适配器 | 适配器模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/adapter.md](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/adapter.md) |
+| 装饰器 | 装饰器模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/decorator.md](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/decorator.md) |
+| 外观 | 外观模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/facade.md](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/facade.md) |
 
 ### 行为型模式
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 观察者 | 观察者模式 | [../../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/observer.md](../../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/observer.md) |
-| 策略 | 策略模式 | [../../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/strategy.md](../../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/strategy.md) |
-| 状态 | 状态模式 | [../../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/state.md](../../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/state.md) |
+| 观察者 | 观察者模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/observer.md](../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/observer.md) |
+| 策略 | 策略模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/strategy.md](../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/strategy.md) |
+| 状态 | 状态模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/state.md](../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/state.md) |
 
 ---
 

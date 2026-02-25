@@ -9,7 +9,7 @@
 
 ## 决策树概览
 
-```
+```text
 构建分布式系统？
 │
 ├── 需要事务一致性？
@@ -134,11 +134,13 @@ impl ChoreographedSaga {
 ```
 
 **适用场景**:
+
 - 电商订单处理
 - 金融转账
 - 库存扣减+支付
 
 **Rust crates**:
+
 - `saga` - Saga模式实现
 - `temporal-sdk` - Temporal工作流
 - `kafka` - 事件驱动编制
@@ -197,11 +199,13 @@ impl Projector for OrderProjector {
 ```
 
 **适用场景**:
+
 - 高并发读场景
 - 复杂报表查询
 - 事件溯源系统
 
 **Rust crates**:
+
 - `cqrs` - CQRS框架
 - `eventstore` - EventStoreDB客户端
 - `sqlx` - 异步SQL
@@ -291,7 +295,7 @@ impl CircuitBreaker {
     fn on_failure(&self) {
         let failures = self.failure_count.fetch_add(1, Ordering::SeqCst);
         *self.last_failure_time.lock().unwrap() = Some(Instant::now());
-        
+
         if failures + 1 >= self.config.failure_threshold {
             self.set_state(CircuitState::Open);
         }
@@ -300,11 +304,13 @@ impl CircuitBreaker {
 ```
 
 **适用场景**:
+
 - 微服务调用
 - 外部API调用
 - 数据库访问
 
 **Rust crates**:
+
 - `resilience4j` - 熔断器实现
 - `tokio-circuit-breaker` - Tokio集成
 - `backoff` - 重试策略
@@ -327,7 +333,7 @@ impl CircuitBreaker {
 
 ## 组合模式
 
-```
+```text
 复杂分布式系统通常组合多个模式:
 
 示例: 电商订单系统

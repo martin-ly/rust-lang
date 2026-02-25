@@ -1,4 +1,5 @@
 # 文档格式修复最终报告
+>
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-20
 > **归档日期**: 2026-02-20
@@ -322,7 +323,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 - [FORMAT_CHECKLIST_QUICK](./FORMAT_CHECKLIST_QUICK.md) - 快速检查清单
 - [FORMAT_FIX_COMPLETION_REPORT](./FORMAT_FIX_COMPLETION_REPORT.md) - 完成报告
 - [FORMAT_FIX_PROGRESS_REPORT](./FORMAT_FIX_PROGRESS_REPORT.md) - 进度报告
-- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](research_notes/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
+- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
 
 ---
 

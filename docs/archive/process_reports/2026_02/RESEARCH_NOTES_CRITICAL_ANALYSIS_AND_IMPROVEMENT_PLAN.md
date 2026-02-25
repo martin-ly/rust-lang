@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 针对「概念定义/属性关系/解释论证/多维对比矩阵/层次化梳理/思维表征」缺口，系统梳理批判性意见与建议，并给出可持续推进任务与计划
-> **上位文档**: [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)、[RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](./RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md)、[ARGUMENTATION_GAP_INDEX](./ARGUMENTATION_GAP_INDEX.md)
+> **上位文档**: [00_COMPREHENSIVE_SUMMARY](../../../research_notes/00_COMPREHENSIVE_SUMMARY.md)、[RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](./RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md)、[ARGUMENTATION_GAP_INDEX](../../../research_notes/ARGUMENTATION_GAP_INDEX.md)
 
 ---
 
@@ -91,7 +91,7 @@
   - **概念定义层**：本页涉及的 Def/Axiom 列表（可表格）；
   - **属性关系层**：本页涉及的引理/定理/推论及与公理的依赖关系（可表格或 DAG 片段）；
   - **解释论证层**：关键定理的「陈述 → 依赖 → 证明步骤/思路 → 反例」块，并注明引用链。
-  并在 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) 或 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) 中增加对应检查项。
+  并在 [CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md) 或 [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) 中增加对应检查项。
 
 - **建议 2**：新增 **「research_notes 层次化梳理与映射总结」** 单文档（可命名为 HIERARCHICAL_MAPPING_AND_SUMMARY.md），内容至少包括：
   - 按三大支柱的文档树（带层级）；
@@ -131,18 +131,18 @@
 
 | 序号 | 任务 | 交付物 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- | :--- |
-| 1.1 | 制定「概念定义-属性关系-解释论证」层次化小节规范 | [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) § 层次化小节规范；[QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) 增项 | P0 | ✅ 2026-02-14 |
-| 1.2 | 编写 research_notes 层次化梳理与映射总结 | [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md)：文档树、概念族↔文档↔Def/Axiom/T、文档↔思维表征、文档依赖简表 | P0 | ✅ 2026-02-14 |
+| 1.1 | 制定「概念定义-属性关系-解释论证」层次化小节规范 | [CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md) § 层次化小节规范；[QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) 增项 | P0 | ✅ 2026-02-14 |
+| 1.2 | 编写 research_notes 层次化梳理与映射总结 | [HIERARCHICAL_MAPPING_AND_SUMMARY](../../../research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md)：文档树、概念族↔文档↔Def/Axiom/T、文档↔思维表征、文档依赖简表 | P0 | ✅ 2026-02-14 |
 | 1.3 | 00_ORGANIZATION、00_COMPREHENSIVE_SUMMARY、INDEX 增加「层次化映射总结」入口 | 已添加入口与目录 | P1 | ✅ 2026-02-14 |
 
 ### 4.2 阶段 2：多维矩阵与双向链接（约 4–8 周）✅ 已完成
 
 | 序号 | 任务 | 交付物 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- | :--- |
-| 2.1 | 设计模式 23 种多维对比矩阵 | 矩阵表（模式×所有权/借用/安全/场景/衔接）；与各模式文档双向链接 | P1 | ✅ 矩阵已建 [01_design_patterns_formal/README §23 模式多维对比矩阵](software_design_theory/01_design_patterns_formal/README.md#23-模式多维对比矩阵)；各模式文档可逐步加「本模式在 README §23 模式多维对比矩阵 第 x 行」 |
-| 2.2 | 执行模型多维对比矩阵 | 矩阵表（同步/异步/并发/并行/分布式×确定性/选型等）；与 01～06 文档双向链接 | P1 | ✅ [03_execution_models/README §执行模型多维对比矩阵](software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵) |
-| 2.3 | formal_methods 六篇并表 | README 或框架文档中的并表；六篇文档内「在并表位置」说明 | P1 | ✅ [formal_methods/README §formal_methods 六篇并表](formal_methods/README.md#formal_methods-六篇并表) |
-| 2.4 | 矩阵与文档双向链接规范 | 各子文档「相关矩阵」小节模板；矩阵文档「详见 xx.md」标注规范 | P2 | ✅ 见 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) § 矩阵与文档双向链接规范、[MAINTENANCE_GUIDE](MAINTENANCE_GUIDE.md) |
+| 2.1 | 设计模式 23 种多维对比矩阵 | 矩阵表（模式×所有权/借用/安全/场景/衔接）；与各模式文档双向链接 | P1 | ✅ 矩阵已建 [01_design_patterns_formal/README §23 模式多维对比矩阵](../../../research_notes/software_design_theory/01_design_patterns_formal/README.md#23-模式多维对比矩阵)；各模式文档可逐步加「本模式在 README §23 模式多维对比矩阵 第 x 行」 |
+| 2.2 | 执行模型多维对比矩阵 | 矩阵表（同步/异步/并发/并行/分布式×确定性/选型等）；与 01～06 文档双向链接 | P1 | ✅ [03_execution_models/README §执行模型多维对比矩阵](../../../research_notes/software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵) |
+| 2.3 | formal_methods 六篇并表 | README 或框架文档中的并表；六篇文档内「在并表位置」说明 | P1 | ✅ [formal_methods/README §formal_methods 六篇并表](../../../research_notes/formal_methods/README.md#formal_methods-六篇并表) |
+| 2.4 | 矩阵与文档双向链接规范 | 各子文档「相关矩阵」小节模板；矩阵文档「详见 xx.md」标注规范 | P2 | ✅ 见 [CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md) § 矩阵与文档双向链接规范、[MAINTENANCE_GUIDE](../../../research_notes/MAINTENANCE_GUIDE.md) |
 
 ### 4.3 阶段 3：思维表征与文档深度结合（约 4–6 周）✅ 已完成
 

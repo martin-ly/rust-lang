@@ -92,10 +92,10 @@
 
 ```markdown
 # 修复前
-[形式化分析](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+[形式化分析](./research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
 
 # 修复后
-[形式化分析](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
+[形式化分析](./research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
 ```
 
 ### 方法3: 移除过时链接 (2个)

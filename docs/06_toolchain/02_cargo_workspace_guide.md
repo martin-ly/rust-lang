@@ -7,11 +7,11 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [Cargo 工作空间与依赖管理](#cargo-工作空间与依赖管理)
-  - [📊 目录](#-目录)
-  - [🎯 文档说明](#-文档说明)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [🎯 文档说明 {#-文档说明}](#-文档说明--文档说明)
   - [1. Cargo 工作空间概览](#1-cargo-工作空间概览)
     - [1.1 什么是 Workspace](#11-什么是-workspace)
     - [1.2 Workspace 优势](#12-workspace-优势)
@@ -54,15 +54,15 @@
     - [11.2 微服务架构 - 完整示例](#112-微服务架构---完整示例)
   - [12. 最佳实践](#12-最佳实践)
     - [✅ 推荐做法](#-推荐做法)
-    - [⚠️ 常见陷阱](#️-常见陷阱)
+    - [⚠️ 常见陷阱 {#️-常见陷阱}](#️-常见陷阱-️-常见陷阱)
   - [13. 故障排查](#13-故障排查)
     - [常见问题](#常见问题)
   - [14. 相关资源](#14-相关资源)
-    - [📚 官方文档](#-官方文档)
-    - [🔗 相关文档](#-相关文档)
+    - [📚 官方文档 {#-官方文档}](#-官方文档--官方文档)
+    - [🔗 相关文档 {#-相关文档}](#-相关文档--相关文档)
     - [📦 推荐工具](#-推荐工具)
 
-## 🎯 文档说明
+## 🎯 文档说明 {#-文档说明}
 
 本文档全面介绍 Cargo 工作空间 (Workspace)、依赖管理、以及 Cargo 的最新增强功能，帮助开发者高效管理多 crate 项目。
 
@@ -271,7 +271,7 @@ serde = "1.0.180"  # 版本不一致！
 **解决方案**: 使用 Workspace 依赖
 
 ```toml
-# ✅ 推荐
+# ✅ 推荐 {#-推荐做法}
 # 根 Cargo.toml
 [workspace.dependencies]
 serde = "1.0.180"
@@ -1578,7 +1578,7 @@ mod tests {
 4. **文档化**: 在 README 说明 workspace 结构
 5. **CI/CD 集成**: 测试所有 workspace 成员
 
-### ⚠️ 常见陷阱
+### ⚠️ 常见陷阱 {#️-常见陷阱}
 
 1. **循环依赖**: 避免 crate 之间的循环依赖
 2. **过度拆分**: 不要为了拆分而拆分
@@ -1624,13 +1624,13 @@ cargo tree -f "{p} {f}"
 
 ## 14. 相关资源
 
-### 📚 官方文档
+### 📚 官方文档 {#-官方文档}
 
 - [Cargo Book - Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)
 - [Cargo Book - Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)
 - [Cargo Book - Features](https://doc.rust-lang.org/cargo/reference/features.html)
 
-### 🔗 相关文档
+### 🔗 相关文档 {#-相关文档}
 
 - [01_compiler_features.md](./01_compiler_features.md)
 - [03_rustdoc_advanced.md](./03_rustdoc_advanced.md)

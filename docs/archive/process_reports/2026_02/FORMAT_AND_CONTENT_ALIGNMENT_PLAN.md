@@ -13,7 +13,7 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 针对「格式不统一、内容不充分、与 Rust 1.93 完全对齐」输出意见与建议，以及后续可持续推进的计划和任务
-> **上位**: [00_ORGANIZATION_AND_NAVIGATION](00_ORGANIZATION_AND_NAVIGATION.md)、[QUALITY_CHECKLIST](QUALITY_CHECKLIST.md)、[CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md)
+> **上位**: [00_ORGANIZATION_AND_NAVIGATION](../../../research_notes/00_ORGANIZATION_AND_NAVIGATION.md)、[QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md)、[CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md)
 
 ---
 
@@ -31,7 +31,7 @@
 
 **建议**：
 
-- **采纳统一元信息规范**：所有 research_notes 下的 .md 至少包含：`创建日期`、`最后更新`、`Rust 版本`: 1.93.0+ (Edition 2024)、`状态`；核心研究笔记（formal_methods、type_theory、software_design_theory 子文档）可增加「用途」或「并表/矩阵位置」。以 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § 元信息检查 为基准，在 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) 中增补「research_notes 元信息统一模板」。
+- **采纳统一元信息规范**：所有 research_notes 下的 .md 至少包含：`创建日期`、`最后更新`、`Rust 版本`: 1.93.0+ (Edition 2024)、`状态`；核心研究笔记（formal_methods、type_theory、software_design_theory 子文档）可增加「用途」或「并表/矩阵位置」。以 [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) § 元信息检查 为基准，在 [CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md) 中增补「research_notes 元信息统一模板」。
 - **标题与目录规范**：约定「一级标题（#）不含 emoji；二级（##）可选 emoji，但同一文档/同一类文档统一」；目录块统一为「## 📊 目录」+ 至少到三级。在 MAINTENANCE_GUIDE 中增加「格式统一检查清单」。
 - **文末块**：约定核心研究笔记（含设计模式 23、formal_methods、type_theory、实验）文末含「维护者」「最后更新」「状态」；索引/概览类可仅保留「最后更新」。
 
@@ -48,10 +48,10 @@
 
 **建议**：
 
-- **层次化落地**：对 formal_methods、type_theory、software_design_theory 核心文档，按 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) 与 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) 的「概念定义-属性关系-解释论证」规范逐篇核对；缺的小节补「概念定义」「属性关系」「解释论证」表或段落。
-- **实质内容自检**：用 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) § 实质内容自检表 对 23 模式、43 完全、执行模型、实验、type_theory 子篇逐篇打分；未达五项 ✅ 的列入「内容充分性待补」清单并优先补「衔接」与「反例」。
-- **1.93 显式对齐**：在每篇核心研究笔记的「相关文档」或文末增加可选小节「与 Rust 1.93 的对应」：列出 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 中与本主题相关的特性编号或名称，并链到 92 项表或 06_toolchain 变更文档。
-- **1.93 反例索引**：在 [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 或新建「RUST_193_COUNTEREXAMPLES_INDEX」中集中列出与 1.93 变更相关的反例（deref_nullptr、C variadic、const 变更、Copy 移除、offset_of! 等），并链回各形式化/设计文档。
+- **层次化落地**：对 formal_methods、type_theory、software_design_theory 核心文档，按 [CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md) 与 [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) 的「概念定义-属性关系-解释论证」规范逐篇核对；缺的小节补「概念定义」「属性关系」「解释论证」表或段落。
+- **实质内容自检**：用 [CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md) § 实质内容自检表 对 23 模式、43 完全、执行模型、实验、type_theory 子篇逐篇打分；未达五项 ✅ 的列入「内容充分性待补」清单并优先补「衔接」与「反例」。
+- **1.93 显式对齐**：在每篇核心研究笔记的「相关文档」或文末增加可选小节「与 Rust 1.93 的对应」：列出 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../../research_notes/RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 中与本主题相关的特性编号或名称，并链到 92 项表或 06_toolchain 变更文档。
+- **1.93 反例索引**：在 [FORMAL_PROOF_SYSTEM_GUIDE](../../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) 或新建「RUST_193_COUNTEREXAMPLES_INDEX」中集中列出与 1.93 变更相关的反例（deref_nullptr、C variadic、const 变更、Copy 移除、offset_of! 等），并链回各形式化/设计文档。
 
 ---
 
@@ -59,7 +59,7 @@
 
 | 缺口 | 说明 | 建议 |
 | :--- | :--- | :--- |
-| **版本与 Edition 标注不完整** | 部分文档无「Rust 版本」或「Edition 2024」；[FORMAL_VERIFICATION_GUIDE](FORMAL_VERIFICATION_GUIDE.md) 等缺 Rust 版本行 | 全库扫描：凡有「创建日期」的 .md 均补「Rust 版本**: 1.93.0+ (Edition 2024)」 |
+| **版本与 Edition 标注不完整** | 部分文档无「Rust 版本」或「Edition 2024」；[FORMAL_VERIFICATION_GUIDE](../../../research_notes/FORMAL_VERIFICATION_GUIDE.md) 等缺 Rust 版本行 | 全库扫描：凡有「创建日期」的 .md 均补「Rust 版本**: 1.93.0+ (Edition 2024)」 |
 | **92 项特性未逐项落点到文档** | RUST_193 已有 92 项×动机/形式化/反例；但「每项特性→应出现在哪些 research_notes 文档」的映射未系统化（仅部分在 RUST_193 表中有「形式化」列） | 建立「92 项 → 推荐落点文档」表；对「推荐落点」中尚未提及该特性的文档做小幅补充（至少 1 句或 1 链接） |
 | **1.93 新增/变更在子文档中的体现不足** | 如 C variadic、asm_cfg、deref_nullptr、const &mut static、Copy specialization 移除、offset_of!、全局分配器 thread_local 等，在 formal_methods/type_theory/borrow 等子文档中多为「在 00_completeness_gaps 或 RUST_193 中已列」，正文未展开 | 在 borrow_checker_proof、ownership_model、type_theory 相关篇中为上述每项增 1 段「1.93 与本篇」或链到 06_toolchain/09_compatibility |
 | **权威来源版本** | 引用 [releases.rs](https://releases.rs/docs/1.93.0/)、[Ferrocene FLS](https://spec.ferrocene.dev/) 时未统一注明「FLS 当前覆盖 Rust 2021 + rustc 1.93」「本项目采用 Edition 2024」 | 在 README 或 00_ORGANIZATION 中单列「权威来源与版本约定」；各文档引用 FLS/releases 时可复用该约定句 |
@@ -67,9 +67,9 @@
 **建议**：
 
 - **全库元信息补全**：脚本或人工：为所有含「创建日期」的 .md 补「Rust 版本」行；缺失「最后更新」的补为当前日期或「2026-02-14」。
-- **92 项落点表**：在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 或 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md) 中增加「特性 → 推荐落点文档」列（或单独附表）；每项至少 1 个落点文档，落点文档中至少 1 处提及或链接。
+- **92 项落点表**：在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../../research_notes/RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 或 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../../research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md) 中增加「特性 → 推荐落点文档」列（或单独附表）；每项至少 1 个落点文档，落点文档中至少 1 处提及或链接。
 - **1.93 重点变更在子文档的体现**：对 C variadic、deref_nullptr、const 变更、Copy 移除、offset_of!、asm_cfg、全局分配器 等，在 formal_methods/borrow、ownership、type_theory/advanced_types、06_toolchain 中已有分散提及；整理成「1.93 重点变更 → 已覆盖文档」表，未覆盖的补 1 段或 1 句+链接。
-- **权威来源与版本约定**：在 [README](README.md) 或 [00_ORGANIZATION_AND_NAVIGATION](00_ORGANIZATION_AND_NAVIGATION.md) 增加「权威来源与版本」小节：releases.rs 1.93.0、FLS（Rust 2021 + rustc 1.93）、本项目 Edition 2024；新文档引用时引用该小节。
+- **权威来源与版本约定**：在 [README](../../../research_notes/README.md) 或 [00_ORGANIZATION_AND_NAVIGATION](../../../research_notes/00_ORGANIZATION_AND_NAVIGATION.md) 增加「权威来源与版本」小节：releases.rs 1.93.0、FLS（Rust 2021 + rustc 1.93）、本项目 Edition 2024；新文档引用时引用该小节。
 
 ---
 
@@ -108,7 +108,7 @@
 | :--- | :--- | :--- | :--- |
 | F4.1 | 新文档格式检查门禁 | MAINTENANCE_GUIDE 或 CONTRIBUTING 中明确：新文档必须符合元信息模板与标题/目录规范，否则 PR 说明中需解释例外 | ✅ CONTRIBUTING § 步骤 4、§ 创建新研究笔记前 |
 | F4.2 | 季度「格式+内容+1.93 对齐」复核 | MAINTENANCE_GUIDE 季度维护清单增加：格式统一抽查、内容充分性抽查、1.93 落点与反例索引更新 | ✅ MAINTENANCE_GUIDE § 季度维护、§ 格式统一检查清单 |
-| F4.3 | 本计划与 TASK_INDEX/CHANGELOG 联动 | 本计划任务完成时更新 [TASK_INDEX](../07_project/TASK_INDEX.md)、[CHANGELOG](CHANGELOG.md)；阶段 F1–F3 完成时在 00_COMPREHENSIVE_SUMMARY 完成度表中增加一行 | ✅ 本计划已 100% 交付；CHANGELOG 见下 |
+| F4.3 | 本计划与 TASK_INDEX/CHANGELOG 联动 | 本计划任务完成时更新 [TASK_INDEX](../../../07_project/TASK_INDEX.md)、[CHANGELOG](../../../research_notes/CHANGELOG.md)；阶段 F1–F3 完成时在 00_COMPREHENSIVE_SUMMARY 完成度表中增加一行 | ✅ 本计划已 100% 交付；CHANGELOG 见下 |
 
 ---
 
@@ -127,12 +127,12 @@
 
 | 文档 | 与本计划的关系 |
 | :--- | :--- |
-| [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) | 元信息、概念定义-属性关系-解释论证检查项已存在；本计划要求全库落地并增加「格式统一检查清单」 |
-| [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) | 层次化规范、实质内容自检表已存在；本计划要求补充「元信息统一模板」、与 F2/F3 任务联动 |
-| [MAINTENANCE_GUIDE](MAINTENANCE_GUIDE.md) | 更新流程与季度维护已存在；本计划要求增加格式统一、内容充分性、1.93 对齐的复核项 |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 92 项已全覆盖；本计划要求增加「92 项 → 推荐落点文档」或与 HIERARCHICAL_MAPPING 联动 |
+| [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) | 元信息、概念定义-属性关系-解释论证检查项已存在；本计划要求全库落地并增加「格式统一检查清单」 |
+| [CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md) | 层次化规范、实质内容自检表已存在；本计划要求补充「元信息统一模板」、与 F2/F3 任务联动 |
+| [MAINTENANCE_GUIDE](../../../research_notes/MAINTENANCE_GUIDE.md) | 更新流程与季度维护已存在；本计划要求增加格式统一、内容充分性、1.93 对齐的复核项 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../../research_notes/RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 92 项已全覆盖；本计划要求增加「92 项 → 推荐落点文档」或与 HIERARCHICAL_MAPPING 联动 |
 | [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) | 阶段 1–4 已完成；本计划作为「格式与内容与 1.93 对齐」的延续阶段 F1–F4 |
-| [INCREMENTAL_UPDATE_FLOW](INCREMENTAL_UPDATE_FLOW.md) | Rust 版本增量更新流程；本计划 F3.4 与 F4.2 与该流程衔接 |
+| [INCREMENTAL_UPDATE_FLOW](../../../research_notes/INCREMENTAL_UPDATE_FLOW.md) | Rust 版本增量更新流程；本计划 F3.4 与 F4.2 与该流程衔接 |
 
 ---
 
@@ -143,7 +143,7 @@
 - [x] 核心研究笔记含「概念定义」「属性关系」「解释论证」或等效结构
 - [x] 实质内容五维（形式化/代码/场景/反例/衔接）在 23 模式、执行模型、实验、type_theory 子篇中逐篇自检并补缺（机制在 CONTENT_ENHANCEMENT；逐篇为持续维护）
 - [x] 每篇核心研究笔记有「与 Rust 1.93 的对应」或链到 RUST_193/06_toolchain（RUST_193 与反例索引已可链；逐篇补充为持续维护）
-- [x] 1.93 相关反例有集中索引（[RUST_193_COUNTEREXAMPLES_INDEX](RUST_193_COUNTEREXAMPLES_INDEX.md)）
+- [x] 1.93 相关反例有集中索引（[RUST_193_COUNTEREXAMPLES_INDEX](../../../research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md)）
 - [x] 92 项特性有「推荐落点文档」表（RUST_193 § 特性→映射表）；落点文档中至少 1 处提及或链接
 - [x] README 或 00_ORGANIZATION 有「权威来源与版本」约定（00_ORGANIZATION § 六）
 - [x] MAINTENANCE_GUIDE 含格式统一与 1.93 对齐的季度复核项

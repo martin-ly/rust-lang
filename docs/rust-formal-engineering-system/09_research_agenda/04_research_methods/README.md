@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: 研究方法是指在 Rust 形式化工程中进行系统探索的科学方法论，包括问题定义、形式化建模、定理陈述与证明、验证工具应用等步骤。形式化方法通过数学手段验证程序的正确性，确保代码行为符合规范。
-> 内容已整合至： [research_methodology.md](../../../../research_notes/research_methodology.md)
+> 内容已整合至： [research_methodology.md](../../../research_notes/research_methodology.md)
 
 [返回主索引](../../00_master_index.md)
 
@@ -266,27 +266,27 @@ mod property_tests {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 形式化方法概述 | 形式化验证基础理论 | [../../../../../research_notes/formal_methods/README.md](../../../../../research_notes/formal_methods/README.md) |
-| 形式化验证指南 | 完整验证流程 | [../../../../../research_notes/FORMAL_VERIFICATION_GUIDE.md](../../../../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
-| 证明系统指南 | 形式化证明方法 | [../../../../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md](../../../../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) |
-| 所有权模型形式化 | 所有权系统数学定义 | [../../../../../research_notes/formal_methods/ownership_model.md](../../../../../research_notes/formal_methods/ownership_model.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../../../../research_notes/formal_methods/type_system_formalization.md](../../../../../research_notes/formal_methods/type_system_formalization.md) |
-| 生命周期形式化 | 生命周期理论证明 | [../../../../../research_notes/formal_methods/lifetime_formalization.md](../../../../../research_notes/formal_methods/lifetime_formalization.md) |
-| 借用检查器证明 | 借用检查器形式化 | [../../../../../research_notes/formal_methods/borrow_checker_proof.md](../../../../../research_notes/formal_methods/borrow_checker_proof.md) |
-| 证明索引 | 形式化证明集合 | [../../../../../research_notes/PROOF_INDEX.md](../../../../../research_notes/PROOF_INDEX.md) |
+| 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../research_notes/formal_methods/README.md) |
+| 形式化验证指南 | 完整验证流程 | [../../../research_notes/FORMAL_VERIFICATION_GUIDE.md](../../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
+| 证明系统指南 | 形式化证明方法 | [../../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md](../../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) |
+| 所有权模型形式化 | 所有权系统数学定义 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/type_system_foundations.md](../../../research_notes/type_theory/type_system_foundations.md) |
+| 生命周期形式化 | 生命周期理论证明 | [../../../research_notes/formal_methods/lifetime_formalization.md](../../../research_notes/formal_methods/lifetime_formalization.md) |
+| 借用检查器证明 | 借用检查器形式化 | [../../../research_notes/formal_methods/borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md) |
+| 证明索引 | 形式化证明集合 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
 
 ## 相关研究笔记
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 研究方法论 | 研究方法指南 | [../../../../../research_notes/research_methodology.md](../../../../../research_notes/research_methodology.md) |
-| 形式化验证工具 | 工具使用指南 | [../../../../../research_notes/TOOLS_GUIDE.md](../../../../../research_notes/TOOLS_GUIDE.md) |
-| 证明索引 | 形式化证明集合 | [../../../../../research_notes/PROOF_INDEX.md](../../../../../research_notes/PROOF_INDEX.md) |
-| 研究路线图 | 长期研究规划 | [../../../../../research_notes/RESEARCH_ROADMAP.md](../../../../../research_notes/RESEARCH_ROADMAP.md) |
-| 核心定理证明 | 完整证明文档 | [../../../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md](../../../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
-| 形式化证明分析 | 证明分析与计划 | [../../../../../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../../../../../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) |
-| 最佳实践 | 工程最佳实践 | [../../../../../research_notes/BEST_PRACTICES.md](../../../../../research_notes/BEST_PRACTICES.md) |
-| 质量检查清单 | 研究笔记质量检查 | [../../../../../research_notes/QUALITY_CHECKLIST.md](../../../../../research_notes/QUALITY_CHECKLIST.md) |
+| 研究方法论 | 研究方法指南 | [../../../research_notes/research_methodology.md](../../../research_notes/research_methodology.md) |
+| 形式化验证工具 | 工具使用指南 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |
+| 证明索引 | 形式化证明集合 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
+| 研究路线图 | 长期研究规划 | [../../../research_notes/RESEARCH_ROADMAP.md](../../../research_notes/RESEARCH_ROADMAP.md) |
+| 核心定理证明 | 完整证明文档 | [../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md](../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
+| 形式化证明分析 | 证明分析与计划 | [../../../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../../../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) |
+| 最佳实践 | 工程最佳实践 | [../../../research_notes/BEST_PRACTICES.md](../../../research_notes/BEST_PRACTICES.md) |
+| 质量检查清单 | 研究笔记质量检查 | [../../../research_notes/QUALITY_CHECKLIST.md](../../../research_notes/QUALITY_CHECKLIST.md) |
 
 ---
 

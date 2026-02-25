@@ -1,4 +1,5 @@
 # 项目权威对标批判性评估与可持续推进方案
+
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-20
 > **归档日期**: 2026-02-20
@@ -78,7 +79,7 @@ use regex::Regex;
 /// 检查文档中的权威源日期标记
 fn check_authoritative_source_dates(dir: &str) -> Vec<(String, bool)> {
     let mut results = Vec::new();
-    
+
     if let Ok(entries) = fs::read_dir(dir) {
         for entry in entries.flatten() {
             let path = entry.path();
@@ -99,12 +100,12 @@ fn check_authoritative_source_dates(dir: &str) -> Vec<(String, bool)> {
 fn main() -> io::Result<()> {
     println!("检查 toolchain 文档的权威源日期标记...");
     let results = check_authoritative_source_dates("docs/06_toolchain");
-    
+
     for (file, has_date) in results {
         let status = if has_date { "✅" } else { "❌" };
         println!("{} {} - 日期标记: {}", status, file, has_date);
     }
-    
+
     Ok(())
 }
 ```
@@ -115,9 +116,9 @@ fn main() -> io::Result<()> {
 
 ### 研究笔记关联
 
-- **形式化验证**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 与国际形式化验证社区对标
-- **公理系统**: [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 证明索引与公理编号规范
-- **三大支柱**: [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md](../research_notes/RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md) - 研究笔记的三大支柱与可持续推进计划
+- **形式化验证**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../../../../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 与国际形式化验证社区对标
+- **公理系统**: [PROOF_INDEX.md](../../../../research_notes/PROOF_INDEX.md) - 证明索引与公理编号规范
+- **三大支柱**: [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md](../RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md) - 研究笔记的三大支柱与可持续推进计划
 
 ### 实施场景
 
@@ -125,7 +126,7 @@ fn main() -> io::Result<()> {
 | :--- | :--- | :--- |
 | **Rust 新版本发布** | 1. 执行 RUST_RELEASE_TRACKING_CHECKLIST<br>2. 更新权威源日期标记<br>3. 执行反例 compile_fail 验证 | [RUST_RELEASE_TRACKING_CHECKLIST](./RUST_RELEASE_TRACKING_CHECKLIST.md) |
 | **季度审查** | 1. 检查 DECISION_GRAPH_NETWORK 引用<br>2. 核对版本声明<br>3. 更新累积文档 | [PROJECT_CRITICAL_EVALUATION_REPORT_2026_02](./PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md) |
-| **Unsafe 深度对齐** | 1. 按 Nomicon 目录逐章标注<br>2. 增加「对应 Nomicon 第 X 章」 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
+| **Unsafe 深度对齐** | 1. 按 Nomicon 目录逐章标注<br>2. 增加「对应 Nomicon 第 X 章」 | [UNSAFE_RUST_GUIDE](../../../../05_guides/UNSAFE_RUST_GUIDE.md) |
 
 ---
 
@@ -134,7 +135,7 @@ fn main() -> io::Result<()> {
 ### 1.1 官方学习资源现状（2025–2026）
 
 | 权威源 | 定位 | 本项目对应 | 对标结论 |
-| :--- | :--- | :--- | :--- || **The Rust Book** | 2025 版假定 Rust 1.90+、Rust 2024 Edition | C01–C06 核心模块、Tier 分层 | ✅ 覆盖 Book 核心；✅ 根及 12 个 crate 均已 `edition = "2024"` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Rust 2024 Edition** | 2025-02 随 1.85.0 稳定发布；RPIT、`if let` 临时作用域、`unsafe_op_in_unsafe_fn` 等 | 06_toolchain 版本演进 | ⚠️ 需在文档中明确 2024 Edition 变更对学习路径的影响 |
 | **Rust by Example** | 代码驱动、最小化文字 | 300+ examples、速查卡 | ✅ 覆盖充分；⚠️ 缺少 RBE 式「练习→验证」环节 |
 | **Rustlings** | 官方推荐命令行交互式学习 | exercises/RUSTLINGS_MAPPING.md | ✅ 映射已完成；可深化「按模块习题列表」 |
@@ -146,7 +147,7 @@ fn main() -> io::Result<()> {
 ### 1.2 业界学习路径共识（roadmap.sh、Exercism、Rust-skill.com）
 
 | 阶段 | 业界共识 | 本项目对应 |
-| :--- | :--- | :--- || **Beginner** | 4–6 周所有权、借用、生命周期；避免死记语法 | C01–C03；✅ 强调所有权优先 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Intermediate** | 真实项目、Tokio 异步、CLI/Web 服务 | C04–C10；✅ 覆盖 |
 | **Advanced** | 并发、内存、性能优化、Criterion、WASM | C05/C06/C08/C12；✅ 覆盖 |
 | **Expert** | 导师、维护 crate、贡献开源 | 无专门模块；可补充「贡献路径」指南 |
@@ -160,7 +161,7 @@ fn main() -> io::Result<()> {
 ### 2.1 优势（保持与强化）
 
 | 维度 | 表现 | 建议 |
-| :--- | :--- | :--- || **中文系统化** | 12 模块、Tier 分层、主索引、FAQ、术语表 | 保持；可考虑「一页纸总结」模板推广至所有模块 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **思维表征** | 思维导图、决策树、证明树、多维矩阵 | **独特价值**；持续与 1.93+ 特性同步 |
 | **形式化研究** | ownership_model、lifetime_formalization、borrow_checker_proof | 超越 Reference；可增加「国际形式化验证」对标索引 |
 | **版本追踪** | 1.89→1.93 累积、兼容性 | 每稳定版发布后执行 RUST_RELEASE_TRACKING_CHECKLIST |
@@ -170,7 +171,7 @@ fn main() -> io::Result<()> {
 ### 2.2 不足与改进建议
 
 | 维度 | 不足 | 对标依据 | 建议 |
-| :--- | :--- | :--- | :--- || **Edition 2024 显式化** | README 标注 Edition 2024，但未在文档中系统说明 2024 变更 | Rust Blog 2025-02 | 在 06_toolchain 增加「Rust 2024 Edition 学习影响」小节；Cargo.toml 确认 `edition = "2024"` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **交互式学习** | exercises/ 仅入口，无内置测验 | Brown 交互版、Rustlings | 深化 Rustlings 按模块习题列表；在 RESOURCES 中突出 Brown 链接 |
 | **Unsafe 深度** | UNSAFE_RUST_GUIDE 不及 Rustonomicon | rust-lang.org/learn | 按 Nomicon 目录拆分，逐章标注「对应 Nomicon 第 X 章」 |
 | **练习验证** | 缺少 RBE 式「做练习→即时反馈」 | Rust by Example、Exercism | 在 00_MASTER_INDEX 或 OFFICIAL_RESOURCES_MAPPING 标注「对应 RBE 练习」链接 |
@@ -182,7 +183,7 @@ fn main() -> io::Result<()> {
 ### 2.3 结构层面建议
 
 | 层面 | 现状 | 建议 |
-| :--- | :--- | :--- || **Cargo 布局** | 符合 Cargo Book 标准（src、examples、tests、benches） | ✅ 保持 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **模块组织** | 12 个 crate，按主题划分 | 可考虑「可选模块」标注（如 C13 嵌入式）以降低初学者认知负担 |
 | **文档层级** | docs/ 多级目录、00_MASTER_INDEX | 确保「按角色导航」在 README 和 00_MASTER_INDEX 显眼 |
 | **归档策略** | archive/、process_reports/ | 保持；可增加「归档年限」说明（如 2 年前报告仅作参考） |
@@ -194,7 +195,7 @@ fn main() -> io::Result<()> {
 ### 3.1 短期（2–4 周）
 
 | 任务 | 交付物 | 优先级 | 状态 |
-| :--- | :--- | :--- | :--- || Edition 2024 文档化 | 06_toolchain 新增「Rust 2024 Edition 学习影响」小节（Cargo.toml 已为 2024） | P2 | ✅ 2026-02-14 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 反例 compile_fail | ownership_cheatsheet、error_handling_cheatsheet 增加 2–3 个 compile_fail 示例 | P1 | ✅ 2026-02-14 |
 | 权威源元数据 | toolchain 文档末尾统一加「最后对照 releases.rs: YYYY-MM-DD」 | P1 | ✅ 2026-02-14 |
 | Rustlings 深化 | exercises/RUSTLINGS_MAPPING 增加「按模块习题列表」可点击链接 | P2 | ✅ 2026-02-14 |
@@ -202,7 +203,7 @@ fn main() -> io::Result<()> {
 ### 3.2 中期（1–3 个月）
 
 | 任务 | 交付物 | 优先级 | 状态 |
-| :--- | :--- | :--- | :--- || Unsafe 对标 Rustonomicon | UNSAFE_RUST_GUIDE 各章节增加「对应 Nomicon」标注 | P2 | ✅ 2026-02-14 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | RBE 练习标注 | 各模块 00_MASTER_INDEX、OFFICIAL_RESOURCES_MAPPING 标注「RBE 练习」可点击链接 | P2 | ✅ 2026-02-14 |
 | 贡献路径指南 | CONTRIBUTING 或 guides 增加「从学习者到贡献者」 | P2 | ✅ 2026-02-14 |
 | 一页纸总结 | 各模块补充「X 模块一页纸总结」模板 | P3 | ✅ 2026-02-14（**12/12 模块 100%**） |
@@ -211,7 +212,7 @@ fn main() -> io::Result<()> {
 ### 3.3 长期（季度–年度）
 
 | 任务 | 交付物 | 优先级 |
-| :--- | :--- | :--- || 新版本追踪 | 每 Rust 稳定版发布后执行 RUST_RELEASE_TRACKING_CHECKLIST | 持续 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 季度审查 | 链接检查、断链修复、权威源同步 | 持续 |
 | 嵌入式可选模块 | C13 或 guides/embedded 深化 | P3 |
 | 国际推广 | 英文 README 完善、Reddit/r/rust、Discord 等 | P3 |
@@ -220,7 +221,7 @@ fn main() -> io::Result<()> {
 ### 3.4 持续机制
 
 | 机制 | 触发条件 | 执行内容 |
-| :--- | :--- | :--- || **版本发布追踪** | Rust 稳定版发布 | 执行 RUST_RELEASE_TRACKING_CHECKLIST |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **季度审查** | 每季度 | 链接检查、权威源同步、文档日期核对 |
 | **链接检查** | CI 或定期 | scripts/check_links.ps1 |
 | **依赖更新** | 季度或 cargo update 后 | 更新 Cargo.toml 工作区依赖、记录变更日志 |
@@ -237,7 +238,7 @@ fn main() -> io::Result<()> {
 
 **建议**：将本报告中的「短期/中期/长期」任务同步至 TASK_INDEX，并按优先级推进。
 
-**三大支柱视角**：研究笔记的「公理判定系统」「语言表达力」「组件组合法则」三大支柱与可持续推进计划，见 [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](../research_notes/RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md)。
+**三大支柱视角**：研究笔记的「公理判定系统」「语言表达力」「组件组合法则」三大支柱与可持续推进计划，见 [RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN](../RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md)。
 
 ---
 

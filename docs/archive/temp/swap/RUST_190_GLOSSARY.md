@@ -458,7 +458,7 @@ trait Summary {
 ### 缩写对照表
 
 | 缩写   | 全称                                 | 中文                      |
-| :--- | :--- | :--- || API    | Application Programming Interface    | 应用程序编程接口          |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | GAT    | Generic Associated Types             | 泛型关联类型              |
 | LLD    | LLVM Linker                          | LLVM 链接器               |
 | RPITIT | Return Position Impl Trait In Traits | Trait 返回位置 impl Trait |
@@ -469,7 +469,7 @@ trait Summary {
 ### 版本对照
 
 | 特性                         | Rust 1.89 | Rust 1.90         |
-| :--- | :--- | :--- || LLD 链接器                   | 可选      | Linux x86_64 默认 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | checked_sub_signed()         | ❌ 不支持 | ✅ 新增           |
 | const reverse()              | ❌ 不支持 | ✅ 支持           |
 | mismatched_lifetime_syntaxes | ❌ 未启用 | ✅ 默认启用       |

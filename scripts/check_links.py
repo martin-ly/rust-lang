@@ -51,6 +51,21 @@ def is_external_link(url):
     parsed = urlparse(url)
     return bool(parsed.scheme and parsed.netloc)
 
+def is_placeholder_link(url):
+    """判断是否为文档中的占位符/示例链接（非真实链接），仅用于含路径的链接"""
+    if not url:
+        return False  # 空路径不在此处理（锚点链接走其他分支）
+    u = url.strip()
+    if u in ('{}', 'path', 'url', '链接', '相对路径', '路径', '.*', './path', '/docs/path'):
+        return True
+    if re.match(r'^[a-z],\s*b\s+T$', u, re.I):  # "a, b T" 代码示例
+        return True
+    if u.endswith('/...') or u.endswith('...'):  # research_notes/... 等
+        return True
+    if re.match(r'^\./\{[^}]*\}', u) or u == '{}':  # ./{}.md 模板占位
+        return True
+    return False
+
 def resolve_link(url, source_file, docs_base):
     """
     解析链接路径，返回绝对路径
@@ -84,27 +99,61 @@ def check_anchor(content, anchor):
     # 将锚点转换为标题格式
     anchor_lower = anchor.lower()
     
-    # 检查各种标题格式
-    # 1. Markdown 标题
-    header_pattern = r'^#{1,6}\s+(.+)$'
-    headers = re.findall(header_pattern, content, re.MULTILINE)
-    for h in headers:
-        # 生成锚点ID (GitHub 风格)
-        header_anchor = re.sub(r'[^\w\s-]', '', h).strip().lower().replace(' ', '-')
-        if header_anchor == anchor_lower:
+    # 兼容 "id--title" 格式（目录生成器可能产生）：优先用 id 部分匹配
+    if '--' in anchor_lower:
+        anchor_lower = anchor_lower.split('--')[0]
+    
+    # 生成待尝试的锚点变体（提高匹配率）
+    anchors_to_try = [anchor_lower]
+    if anchor_lower.startswith('-'):
+        anchors_to_try.append(anchor_lower[1:])  # "-目录" -> "目录"
+    # 递归移除 -N 后缀（GitHub 对重复标题加 -1,-2）
+    a = anchor_lower
+    while re.search(r'-\d+$', a):
+        a = re.sub(r'-\d+$', '', a)
+        anchors_to_try.append(a)
+    # "xxx-xxx" 重复格式尝试前半
+    if '-' in anchor_lower:
+        parts = anchor_lower.split('-')
+        if len(parts) >= 2 and parts[0] == parts[1]:
+            anchors_to_try.append(parts[0])  # "创建-创建-2" -> "创建"
+    
+    # 检查各种标题格式（对每个锚点变体尝试）
+    for a in anchors_to_try:
+        if not a:
+            continue
+        # 1. Markdown 标题（含显式 {#id}）
+        header_pattern = r'^#{1,6}\s+(.+)$'
+        headers = re.findall(header_pattern, content, re.MULTILINE)
+        for h in headers:
+            # 显式 {#id} 锚点（Pandoc/GitHub 扩展）
+            explicit_match = re.search(r'\{\#([^}]+)\}\s*$', h)
+            if explicit_match:
+                if explicit_match.group(1).lower() == a:
+                    return True
+            # 生成锚点ID (GitHub 风格)
+            h_clean = re.sub(r'\s*\{#[^}]+\}\s*$', '', h)  # 移除 {#id} 再计算
+            header_anchor = re.sub(r'[^\w\s-]', '', h_clean).strip().lower().replace(' ', '-')
+            if header_anchor == a:
+                return True
+        
+        # 2. HTML 锚点 <a id="...">
+        anchor_pattern = r'<a[^>]*id=["\']([^"\']+)["\']'
+        anchors = re.findall(anchor_pattern, content)
+        if a in [x.lower() for x in anchors]:
             return True
-    
-    # 2. HTML 锚点
-    anchor_pattern = r'<a[^>]*id=["\']([^"\']+)["\']'
-    anchors = re.findall(anchor_pattern, content)
-    if anchor_lower in [a.lower() for a in anchors]:
-        return True
-    
-    # 3. name 属性
-    name_pattern = r'<a[^>]*name=["\']([^"\']+)["\']'
-    names = re.findall(name_pattern, content)
-    if anchor_lower in [n.lower() for n in names]:
-        return True
+        
+        # 3. 独立 HTML 锚点 <a id="..."></a>
+        standalone_pattern = r'<a\s+id=["\']([^"\']+)["\']\s*></a>'
+        standalone = re.findall(standalone_pattern, content, re.IGNORECASE)
+        if a in [s.lower() for s in standalone]:
+            return True
+        
+        # 4. name 属性
+        name_pattern = r'<a[^>]*name=["\']([^"\']+)["\']'
+        names = re.findall(name_pattern, content)
+        if a in [n.lower() for n in names]:
+            return True
     
     return False
 
@@ -146,6 +195,12 @@ def main():
             # 外部链接
             if is_external_link(url):
                 stats['external'] += 1
+                continue
+            
+            # 占位符/示例链接（文档中的说明性文本，非真实链接）- 仅对有路径的链接检查
+            url_path_for_placeholder = (url.split('#')[0] if '#' in url else url).strip()
+            if url_path_for_placeholder and is_placeholder_link(url_path_for_placeholder):
+                stats['valid'] += 1
                 continue
             
             # 分离路径和锚点

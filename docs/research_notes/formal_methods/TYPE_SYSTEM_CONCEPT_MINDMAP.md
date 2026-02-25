@@ -159,8 +159,12 @@ enum
 ├── 约束
 │   └── fn largest<T: PartialOrd>(list: &[T]) -> T
 │
-└── 边界
-    └── T: Display + Clone, U: Clone + Debug
+├── 边界
+│   └── T: Display + Clone, U: Clone + Debug
+├── GAT（泛型关联类型）
+│   └── trait Iter { type Item<'a>; }
+└── const 泛型
+    └── [T; N]、fn foo<const N: usize>()
 ```
 
 ### 3.2 Trait
@@ -234,7 +238,7 @@ impl Trait vs dyn Trait
 **型变表**:
 
 | 类型构造器 | 对T的型变 |
-| :--- | :---: |
+| :--- | :--- |
 | `Box<T>` | + |
 | `Vec<T>` | + |
 | `Option<T>` | + |

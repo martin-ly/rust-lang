@@ -7,12 +7,12 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#-目录}
 
 - [Rust 标准库全面分析与论证文档](#rust-标准库全面分析与论证文档)
-  - [📋 目录](#-目录)
-  - [🎯 文档目标](#-文档目标)
-  - [📚 1. 标准库概述](#-1-标准库概述)
+  - [📋 目录 {#-目录}](#-目录--目录)
+  - [🎯 文档目标 {#-文档目标}](#-文档目标--文档目标)
+  - [📚 1. 标准库概述 {#-1-标准库概述}](#-1-标准库概述--1-标准库概述)
     - [1.1 标准库的定义和定位](#11-标准库的定义和定位)
       - [定义](#定义)
       - [定位](#定位)
@@ -24,7 +24,7 @@
       - [1.3.1 Box::new\_zeroed 和 Box::new\_zeroed\_slice](#131-boxnew_zeroed-和-boxnew_zeroed_slice)
       - [1.3.2 Rc::new\_zeroed 和 Arc::new\_zeroed](#132-rcnew_zeroed-和-arcnew_zeroed)
       - [1.3.3 迭代器方法特化](#133-迭代器方法特化)
-    - [1.4 Rust 1.93.0 标准库新特性 🆕](#14-rust-1930-标准库新特性-)
+    - [1.4 Rust 1.93.0 标准库新特性 🆕 {#14-rust-1930-标准库新特性-}](#14-rust-1930-标准库新特性--14-rust-1930-标准库新特性-)
       - [1.4.1 MaybeUninit API 增强](#141-maybeuninit-api-增强)
       - [1.4.2 String 和 Vec 原始部分访问](#142-string-和-vec-原始部分访问)
       - [1.4.3 VecDeque 条件弹出](#143-vecdeque-条件弹出)
@@ -33,25 +33,25 @@
       - [1.4.6 Duration 扩展](#146-duration-扩展)
       - [1.4.7 char 常量](#147-char-常量)
       - [1.4.8 fmt::from\_fn](#148-fmtfrom_fn)
-    - [1.5 Rust 1.93.0 标准库行为变更 ⚠️](#15-rust-1930-标准库行为变更-️)
+    - [1.5 Rust 1.93.0 标准库行为变更 ⚠️ {#15-rust-1930-标准库行为变更-️}](#15-rust-1930-标准库行为变更-️-15-rust-1930-标准库行为变更-️)
       - [1.5.1 Copy 特化移除](#151-copy-特化移除)
       - [1.5.2 BTree::append 行为变更](#152-btreeappend-行为变更)
       - [1.5.3 vec::IntoIter RefUnwindSafe 放宽](#153-vecintoiter-refunwindsafe-放宽)
-  - [📊 2. 核心标准库模块分析](#-2-核心标准库模块分析)
+  - [📊 2. 核心标准库模块分析 {#-2-核心标准库模块分析}](#-2-核心标准库模块分析--2-核心标准库模块分析)
     - [2.1 集合类型 (std::collections)](#21-集合类型-stdcollections)
       - [2.1.1 HashMap\<K, V\>](#211-hashmapk-v)
-      - [2.1.2 Vec](#212-vec)
-      - [2.1.3 VecDeque](#213-vecdeque)
+      - [2.1.2 Vec {#212-vec}](#212-vec-212-vec)
+      - [2.1.3 VecDeque {#213-vecdeque}](#213-vecdeque-213-vecdeque)
     - [2.2 并发类型 (std::sync)](#22-并发类型-stdsync)
-      - [2.2.1 Arc](#221-arc)
-      - [2.2.2 Mutex](#222-mutex)
-      - [2.2.3 RwLock](#223-rwlock)
+      - [2.2.1 Arc {#221-arc}](#221-arc-221-arc)
+      - [2.2.2 Mutex {#222-mutex}](#222-mutex-222-mutex)
+      - [2.2.3 RwLock {#223-rwlock}](#223-rwlock-223-rwlock)
     - [2.3 I/O 类型 (std::io)](#23-io-类型-stdio)
       - [2.3.1 Read 和 Write Traits](#231-read-和-write-traits)
       - [2.3.2 BufRead Trait](#232-bufread-trait)
     - [2.4 线程类型 (std::thread)](#24-线程类型-stdthread)
       - [2.4.1 Thread](#241-thread)
-      - [2.4.2 JoinHandle](#242-joinhandle)
+      - [2.4.2 JoinHandle {#242-joinhandle}](#242-joinhandle-242-joinhandle)
     - [2.5 进程类型 (std::process)](#25-进程类型-stdprocess)
       - [2.5.1 Command](#251-command)
     - [2.6 时间类型 (std::time)](#26-时间类型-stdtime)
@@ -59,17 +59,17 @@
       - [2.6.2 Duration](#262-duration)
     - [2.7 错误处理 (std::error, std::result)](#27-错误处理-stderror-stdresult)
       - [2.7.1 Result\<T, E\>](#271-resultt-e)
-      - [2.7.2 Option](#272-option)
-  - [🔍 3. 标准库设计论证](#-3-标准库设计论证)
+      - [2.7.2 Option {#272-option}](#272-option-272-option)
+  - [🔍 3. 标准库设计论证 {#-3-标准库设计论证}](#-3-标准库设计论证--3-标准库设计论证)
     - [3.1 零成本抽象](#31-零成本抽象)
     - [3.2 所有权系统](#32-所有权系统)
     - [3.3 内存安全](#33-内存安全)
     - [3.4 性能优化](#34-性能优化)
-  - [📝 4. 标准库使用最佳实践](#-4-标准库使用最佳实践)
+  - [📝 4. 标准库使用最佳实践 {#-4-标准库使用最佳实践}](#-4-标准库使用最佳实践--4-标准库使用最佳实践)
     - [4.1 何时使用标准库](#41-何时使用标准库)
     - [4.2 何时使用第三方库](#42-何时使用第三方库)
     - [4.3 标准库与第三方库的权衡](#43-标准库与第三方库的权衡)
-  - [🎓 5. 项目中的标准库使用](#-5-项目中的标准库使用)
+  - [🎓 5. 项目中的标准库使用 {#-5-项目中的标准库使用}](#-5-项目中的标准库使用--5-项目中的标准库使用)
     - [5.1 各模块的标准库使用情况](#51-各模块的标准库使用情况)
       - [C01 所有权与借用](#c01-所有权与借用)
       - [C04 泛型编程](#c04-泛型编程)
@@ -84,18 +84,18 @@
       - [实践 1: 优先使用标准库](#实践-1-优先使用标准库)
       - [实践 2: 充分利用标准库特性](#实践-2-充分利用标准库特性)
       - [实践 3: 理解标准库的实现](#实践-3-理解标准库的实现)
-  - [💻 代码示例](#-代码示例)
+  - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
     - [示例: 标准库类型安全验证](#示例-标准库类型安全验证)
     - [示例: 标准库内存安全验证](#示例-标准库内存安全验证)
-  - [🔗 形式化链接](#-形式化链接)
+  - [🔗 形式化链接 {#-形式化链接}](#-形式化链接--形式化链接)
     - [标准库与形式化定理](#标准库与形式化定理)
     - [研究笔记链接](#研究笔记链接)
     - [项目文档](#项目文档)
-  - [📚 相关文档](#-相关文档)
+  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
 
 ---
 
-## 🎯 文档目标
+## 🎯 文档目标 {#-文档目标}
 
 本文档旨在：
 
@@ -107,7 +107,7 @@
 
 ---
 
-## 📚 1. 标准库概述
+## 📚 1. 标准库概述 {#-1-标准库概述}
 
 ### 1.1 标准库的定义和定位
 
@@ -269,7 +269,7 @@ let equal = vec1.iter().eq(vec2.iter());
 
 ---
 
-### 1.4 Rust 1.93.0 标准库新特性 🆕
+### 1.4 Rust 1.93.0 标准库新特性 🆕 {#14-rust-1930-标准库新特性-}
 
 Rust 1.93.0 标准库引入了以下新特性：
 
@@ -397,7 +397,7 @@ println!("{}", formatter);  // 输出: Custom: 42
 
 ---
 
-### 1.5 Rust 1.93.0 标准库行为变更 ⚠️
+### 1.5 Rust 1.93.0 标准库行为变更 ⚠️ {#15-rust-1930-标准库行为变更-️}
 
 Rust 1.93.0 对标准库内部实现进行了若干修正，可能影响现有代码或性能：
 
@@ -445,7 +445,7 @@ target.append(&mut source);
 
 ---
 
-## 📊 2. 核心标准库模块分析
+## 📊 2. 核心标准库模块分析 {#-2-核心标准库模块分析}
 
 ### 2.1 集合类型 (std::collections)
 
@@ -485,7 +485,7 @@ for (key, value) in &map {
 - **最坏时间复杂度**: O(n) 插入、查找、删除（哈希冲突）
 - **空间复杂度**: O(n)
 
-#### 2.1.2 Vec<T>
+#### 2.1.2 Vec<T> {#212-vec}
 
 **定义**: 动态数组，自动扩容。
 
@@ -519,7 +519,7 @@ for item in &vec {
 - **最坏时间复杂度**: O(n) 插入（扩容时）
 - **空间复杂度**: O(n)
 
-#### 2.1.3 VecDeque<T>
+#### 2.1.3 VecDeque<T> {#213-vecdeque}
 
 **定义**: 双端队列，支持两端操作。
 
@@ -551,7 +551,7 @@ let back = deque.pop_back();
 
 ### 2.2 并发类型 (std::sync)
 
-#### 2.2.1 Arc<T>
+#### 2.2.1 Arc<T> {#221-arc}
 
 **定义**: 原子引用计数智能指针，线程安全。
 
@@ -587,7 +587,7 @@ for handle in handles {
 - **克隆开销**: `Arc::clone` 只是增加引用计数，开销小
 - **内存开销**: 每个 `Arc` 增加 16 字节（64位系统）
 
-#### 2.2.2 Mutex<T>
+#### 2.2.2 Mutex<T> {#222-mutex}
 
 **定义**: 互斥锁，保护共享数据。
 
@@ -626,7 +626,7 @@ println!("Result: {}", *data.lock().unwrap());
 - **阻塞**: 获取锁失败时线程阻塞
 - **内存开销**: 每个 `Mutex` 增加 24 字节（64位系统）
 
-#### 2.2.3 RwLock<T>
+#### 2.2.3 RwLock<T> {#223-rwlock}
 
 **定义**: 读写锁，支持多个读者或一个写者。
 
@@ -751,7 +751,7 @@ let handle = thread::spawn(|| {
 handle.join().unwrap();
 ```
 
-#### 2.4.2 JoinHandle<T>
+#### 2.4.2 JoinHandle<T> {#242-joinhandle}
 
 **定义**: 线程句柄，用于等待线程完成。
 
@@ -867,7 +867,7 @@ fn read_file(path: &str) -> std::io::Result<String> {
 }
 ```
 
-#### 2.7.2 Option<T>
+#### 2.7.2 Option<T> {#272-option}
 
 **定义**: 表示可能为空的值。
 
@@ -895,7 +895,7 @@ let result = value
 
 ---
 
-## 🔍 3. 标准库设计论证
+## 🔍 3. 标准库设计论证 {#-3-标准库设计论证}
 
 ### 3.1 零成本抽象
 
@@ -996,7 +996,7 @@ map.insert("key", "value");  // O(1) 平均
 
 ---
 
-## 📝 4. 标准库使用最佳实践
+## 📝 4. 标准库使用最佳实践 {#-4-标准库使用最佳实践}
 
 ### 4.1 何时使用标准库
 
@@ -1066,7 +1066,7 @@ use serde::{Serialize, Deserialize};
 
 ---
 
-## 🎓 5. 项目中的标准库使用
+## 🎓 5. 项目中的标准库使用 {#-5-项目中的标准库使用}
 
 ### 5.1 各模块的标准库使用情况
 
@@ -1208,7 +1208,7 @@ let mut map = HashMap::with_capacity(100);  // 预分配容量
 
 ---
 
-## 💻 代码示例
+## 💻 代码示例 {#-代码示例}
 
 ### 示例: 标准库类型安全验证
 
@@ -1279,7 +1279,7 @@ fn main() {
 
 ---
 
-## 🔗 形式化链接
+## 🔗 形式化链接 {#-形式化链接}
 
 ### 标准库与形式化定理
 
@@ -1295,27 +1295,27 @@ fn main() {
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
-| 形式化方法 | [../docs/research_notes/formal_methods/ownership_model.md](../docs/research_notes/formal_methods/ownership_model.md) | 所有权模型 |
-| 借用检查器 | [../docs/research_notes/formal_methods/borrow_checker_proof.md](../docs/research_notes/formal_methods/borrow_checker_proof.md) | 借用检查器证明 |
-| 类型系统 | [../docs/research_notes/type_theory/type_system_foundations.md](../docs/research_notes/type_theory/type_system_foundations.md) | 类型系统基础 |
-| 核心定理 | [../docs/research_notes/CORE_THEOREMS_FULL_PROOFS.md](../docs/research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 完整定理证明 |
+| 形式化方法 | [../research_notes/formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) | 所有权模型 |
+| 借用检查器 | [../research_notes/formal_methods/borrow_checker_proof.md](../research_notes/formal_methods/borrow_checker_proof.md) | 借用检查器证明 |
+| 类型系统 | [../research_notes/type_theory/type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) | 类型系统基础 |
+| 核心定理 | [../research_notes/CORE_THEOREMS_FULL_PROOFS.md](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 完整定理证明 |
 
 ### 项目文档
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
-| 研究笔记系统 | [../docs/research_notes/SYSTEM_SUMMARY.md](../docs/research_notes/SYSTEM_SUMMARY.md) | 系统总结 |
-| 增量更新流程 | [../docs/research_notes/INCREMENTAL_UPDATE_FLOW.md](../docs/research_notes/INCREMENTAL_UPDATE_FLOW.md) | 版本更新流程 |
-| 理论体系 | [../docs/research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../docs/research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 理论体系架构 |
+| 研究笔记系统 | [../research_notes/SYSTEM_SUMMARY.md](../research_notes/SYSTEM_SUMMARY.md) | 系统总结 |
+| 增量更新流程 | [../research_notes/INCREMENTAL_UPDATE_FLOW.md](../research_notes/INCREMENTAL_UPDATE_FLOW.md) | 版本更新流程 |
+| 理论体系 | [../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 理论体系架构 |
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#-相关文档}
 
 - [Rust 标准库文档](https://doc.rust-lang.org/std/)
 - [Rust 1.93.0 发布说明](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0) 🆕
 - [Rust 1.92.0 发布说明](https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html)
-- [项目标准库算法参考](./crates/c08_algorithms/docs/tier_03_references/05_标准库算法参考.md)
+- [项目标准库算法参考](../../crates/c08_algorithms/docs/tier_03_references/05_标准库算法参考.md)
 - [Rust 1.92.0 特性对齐文档](../archive/version_reports/RUST_192_FEATURES_ALIGNMENT.md)
 
 ---

@@ -9,7 +9,7 @@
 ## 创建型模式 (Creational)
 
 | 模式 | Rust表达 | 难度 | 惯用法 | 说明 |
-|:---|:---:|:---:|:---|:---|
+| :--- | :--- | :--- | :--- | :--- |
 | **Singleton** | ⚠️ 受限 | 中 | `lazy_static` / `OnceLock` | Rust不鼓励全局状态 |
 | **Factory Method** | ✅ 直接 | 低 | 泛型 + Trait | Rust天然支持 |
 | **Abstract Factory** | ✅ 直接 | 低 | Trait组合 | 类型系统直接支持 |
@@ -36,7 +36,7 @@ fn get_config() -> &'static Config {
 ## 结构型模式 (Structural)
 
 | 模式 | Rust表达 | 难度 | 惯用法 | 说明 |
-|:---|:---:|:---:|:---|:---|
+| :--- | :--- | :--- | :--- | :--- |
 | **Adapter** | ✅ 直接 | 低 | Trait实现 + 包装 | 类型系统支持 |
 | **Bridge** | ✅ 直接 | 低 | Trait组合 | 分离抽象与实现 |
 | **Composite** | ⚠️ 受限 | 中 | `Rc<RefCell>` | 所有权限制递归结构 |
@@ -72,7 +72,7 @@ impl Node {
 ## 行为型模式 (Behavioral)
 
 | 模式 | Rust表达 | 难度 | 惯用法 | 说明 |
-|:---|:---:|:---:|:---|:---|
+| :--- | :--- | :--- | :--- | :--- |
 | **Chain of Responsibility** | ✅ 直接 | 低 | 链表/迭代器 | 所有权清晰 |
 | **Command** | ✅ 直接 | 低 | 闭包 / Trait对象 | 闭包即命令 |
 | **Interpreter** | ✅ 直接 | 中 | 枚举 + 递归 | 模式匹配优势 |
@@ -117,7 +117,7 @@ impl Document {
 ### 表达力评估
 
 | 类别 | 直接表达 | 受限表达 | 总计 |
-|:---|:---:|:---:|:---:|
+| :--- | :--- | :--- | :--- |
 | 创建型 | 3 | 2 | 5 |
 | 结构型 | 6 | 1 | 7 |
 | 行为型 | 9 | 2 | 11 |
@@ -128,7 +128,7 @@ impl Document {
 ### 受限模式分析
 
 | 模式 | 限制原因 | Rust解决方案 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | Singleton | 不鼓励全局状态 | OnceLock / 依赖注入 |
 | Composite | 所有权限制循环引用 | `Rc<RefCell>` / Arena分配器 |
 | Prototype | 缺少反射 / 默认深拷贝 | 显式Clone实现 |
@@ -186,7 +186,7 @@ fn process<T: Strategy>(data: Data, strategy: T) -> Result {
 
 ## 选择决策
 
-```
+```text
 需要设计模式？
 ├── 创建对象？
 │   ├── 单一类型 → Factory Method

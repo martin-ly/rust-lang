@@ -125,8 +125,8 @@ fn render<T: Drawable>(item: T) {
 ## 相关文档
 
 - [研究笔记主入口](../research_notes/README.md)
-- [思维表征方式](../THINKING_REPRESENTATION_METHODS.md)
-- [多维概念矩阵](../MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)
+- [思维表征方式](../04_thinking/THINKING_REPRESENTATION_METHODS.md)
+- [多维概念矩阵](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)
 
 ---
 

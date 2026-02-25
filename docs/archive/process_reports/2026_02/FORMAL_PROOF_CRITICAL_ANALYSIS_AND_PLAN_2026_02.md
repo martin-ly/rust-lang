@@ -43,7 +43,7 @@
    - **可执行**的小步操作语义（如 K-Framework、PLT Redex）
    - 指称语义与类型论的**范畴论对应**（如 Fω、System F 的 Rust 片段）
 
-3. **机器可检查性**：FORMAL_VERIFICATION_GUIDE 有六类验证任务清单；**Coq 骨架已创建**（[coq_skeleton](coq_skeleton/) T-OW2，证明 Admitted）；Aeneas/coq-of-rust 对接方案已制定（[AENEAS_INTEGRATION_PLAN](AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](COQ_OF_RUST_INTEGRATION_PLAN.md)）
+3. **机器可检查性**：FORMAL_VERIFICATION_GUIDE 有六类验证任务清单；**Coq 骨架已创建**（[coq_skeleton](../../../research_notes/coq_skeleton/) T-OW2，证明 Admitted）；Aeneas/coq-of-rust 对接方案已制定（[AENEAS_INTEGRATION_PLAN](../../../research_notes/AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../../../research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md)）
 
 ### 1.4 整体性与层次性缺口
 
@@ -102,7 +102,7 @@
 
 | 任务 | 交付物 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- |
-| 核心定理完整证明 | ownership T2、borrow T1、type T3 的完整证明文档 | 高 | ✅ 已创建 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) |
+| 核心定理完整证明 | ownership T2、borrow T1、type T3 的完整证明文档 | 高 | ✅ 已创建 [CORE_THEOREMS_FULL_PROOFS](../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
 | RustBelt 逐章对标 | `RUSTBELT_ALIGNMENT.md` | 中 | ✅ 已创建 |
 | 可执行语义路线图 | `EXECUTABLE_SEMANTICS_ROADMAP.md` | 低 | ✅ 已创建 |
 
@@ -112,7 +112,7 @@
 | :--- | :--- | :--- | :--- |
 | Aeneas 对接调研 | `AENEAS_INTEGRATION_PLAN.md` | 中 | ✅ 已创建 |
 | coq-of-rust 对接调研 | `COQ_OF_RUST_INTEGRATION_PLAN.md` | 中 | ✅ 已创建 |
-| 1–2 定理 Coq/Isabelle 证明 | 实际证明代码 + 文档 | 高（若资源允许） | ✅ 骨架已创建 [coq_skeleton](./coq_skeleton/)、[COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| 1–2 定理 Coq/Isabelle 证明 | 实际证明代码 + 文档 | 高（若资源允许） | ✅ 骨架已创建 [coq_skeleton](../../../research_notes/coq_skeleton/)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
 
 ### 3.4 持续机制
 
@@ -136,33 +136,33 @@
 
 | 交付物 | 路径 |
 | :--- | :--- |
-| 国际对标索引 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
-| 证明深度标注 | [PROOF_INDEX.md](./PROOF_INDEX.md) § 证明深度层次、按证明深度导航 |
-| 形式化全模型入口 | [FORMAL_FULL_MODEL_OVERVIEW.md](./FORMAL_FULL_MODEL_OVERVIEW.md) |
-| 层次化导航 | [README.md](./README.md)、[INDEX.md](./INDEX.md) |
-| RustBelt 逐章对标 | [RUSTBELT_ALIGNMENT.md](./RUSTBELT_ALIGNMENT.md) |
-| 可执行语义路线图 | [EXECUTABLE_SEMANTICS_ROADMAP.md](./EXECUTABLE_SEMANTICS_ROADMAP.md) |
-| 核心定理完整证明 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) |
-| Aeneas 对接计划 | [AENEAS_INTEGRATION_PLAN.md](./AENEAS_INTEGRATION_PLAN.md) |
-| coq-of-rust 对接计划 | [COQ_OF_RUST_INTEGRATION_PLAN.md](./COQ_OF_RUST_INTEGRATION_PLAN.md) |
-| 国际对标缺口 | [formal_methods/00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md) §10、[type_theory/00_completeness_gaps.md](./type_theory/00_completeness_gaps.md) §8 |
+| 国际对标索引 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md](../../../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
+| 证明深度标注 | [PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) § 证明深度层次、按证明深度导航 |
+| 形式化全模型入口 | [FORMAL_FULL_MODEL_OVERVIEW.md](../../../research_notes/FORMAL_FULL_MODEL_OVERVIEW.md) |
+| 层次化导航 | [README.md](../../../research_notes/README.md)、[INDEX.md](../../../research_notes/INDEX.md) |
+| RustBelt 逐章对标 | [RUSTBELT_ALIGNMENT.md](../../../research_notes/RUSTBELT_ALIGNMENT.md) |
+| 可执行语义路线图 | [EXECUTABLE_SEMANTICS_ROADMAP.md](../../../research_notes/EXECUTABLE_SEMANTICS_ROADMAP.md) |
+| 核心定理完整证明 | [CORE_THEOREMS_FULL_PROOFS.md](../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
+| Aeneas 对接计划 | [AENEAS_INTEGRATION_PLAN.md](../../../research_notes/AENEAS_INTEGRATION_PLAN.md) |
+| coq-of-rust 对接计划 | [COQ_OF_RUST_INTEGRATION_PLAN.md](../../../research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md) |
+| 国际对标缺口 | [formal_methods/00_completeness_gaps.md](../../../research_notes/formal_methods/00_completeness_gaps.md) §10、[type_theory/00_completeness_gaps.md](../../../research_notes/type_theory/00_completeness_gaps.md) §8 |
 
 ### 阶段 2 交付物
 
 | 交付物 | 路径 |
 | :--- | :--- |
-| 核心定理完整证明 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) |
-| RustBelt 逐章对标 | [RUSTBELT_ALIGNMENT.md](./RUSTBELT_ALIGNMENT.md) |
-| 可执行语义路线图 | [EXECUTABLE_SEMANTICS_ROADMAP.md](./EXECUTABLE_SEMANTICS_ROADMAP.md) |
+| 核心定理完整证明 | [CORE_THEOREMS_FULL_PROOFS.md](../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
+| RustBelt 逐章对标 | [RUSTBELT_ALIGNMENT.md](../../../research_notes/RUSTBELT_ALIGNMENT.md) |
+| 可执行语义路线图 | [EXECUTABLE_SEMANTICS_ROADMAP.md](../../../research_notes/EXECUTABLE_SEMANTICS_ROADMAP.md) |
 
 ### 阶段 3 交付物
 
 | 交付物 | 路径 |
 | :--- | :--- |
-| Coq 证明骨架 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) |
-| L3 实施指南 | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| Coq 证明骨架 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../../research_notes/coq_skeleton/OWNERSHIP_UNIQUENESS.v) |
+| L3 实施指南 | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
 
-**后续**：补全 Admitted 证明、扩展 T-BR1/T-TY3 骨架；见 [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](./COQ_OF_RUST_INTEGRATION_PLAN.md)
+**后续**：补全 Admitted 证明、扩展 T-BR1/T-TY3 骨架；见 [AENEAS_INTEGRATION_PLAN](../../../research_notes/AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../../../research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md)
 
 ---
 

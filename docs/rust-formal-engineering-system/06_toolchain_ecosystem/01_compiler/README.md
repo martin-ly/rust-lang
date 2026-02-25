@@ -172,22 +172,22 @@ impl<T, const N: usize> Array<T, N> {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 形式化方法概述 | 形式化验证基础理论 | [../../../../research_notes/formal_methods/README.md](../../../../research_notes/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../../../research_notes/formal_methods/type_system_formalization.md](../../../../research_notes/formal_methods/type_system_formalization.md) |
-| 所有权模型形式化 | 所有权系统数学定义 | [../../../../research_notes/formal_methods/ownership_model.md](../../../../research_notes/formal_methods/ownership_model.md) |
-| 生命周期形式化 | 生命周期理论证明 | [../../../../research_notes/formal_methods/lifetime_formalization.md](../../../../research_notes/formal_methods/lifetime_formalization.md) |
-| 借用检查器证明 | 借用检查器形式化 | [../../../../research_notes/formal_methods/borrow_checker_proof.md](../../../../research_notes/formal_methods/borrow_checker_proof.md) |
-| 证明索引 | 形式化证明集合 | [../../../../research_notes/PROOF_INDEX.md](../../../../research_notes/PROOF_INDEX.md) |
+| 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../research_notes/formal_methods/README.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/type_system_foundations.md](../../../research_notes/type_theory/type_system_foundations.md) |
+| 所有权模型形式化 | 所有权系统数学定义 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
+| 生命周期形式化 | 生命周期理论证明 | [../../../research_notes/formal_methods/lifetime_formalization.md](../../../research_notes/formal_methods/lifetime_formalization.md) |
+| 借用检查器证明 | 借用检查器形式化 | [../../../research_notes/formal_methods/borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md) |
+| 证明索引 | 形式化证明集合 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
 
 ## 相关研究笔记
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 编译器特性 | 完整编译器指南 | [../../../06_toolchain/01_compiler_features.md](../../../06_toolchain/01_compiler_features.md) |
-| 编译器优化实验 | 优化分析 | [../../../../research_notes/experiments/compiler_optimizations.md](../../../../research_notes/experiments/compiler_optimizations.md) |
-| 研究方法论 | 研究方法指南 | [../../../../research_notes/research_methodology.md](../../../../research_notes/research_methodology.md) |
-| 工具指南 | 验证工具使用 | [../../../../research_notes/TOOLS_GUIDE.md](../../../../research_notes/TOOLS_GUIDE.md) |
-| 最佳实践 | 工程最佳实践 | [../../../../research_notes/BEST_PRACTICES.md](../../../../research_notes/BEST_PRACTICES.md) |
+| 编译器优化实验 | 优化分析 | [../../../research_notes/experiments/compiler_optimizations.md](../../../research_notes/experiments/compiler_optimizations.md) |
+| 研究方法论 | 研究方法指南 | [../../../research_notes/research_methodology.md](../../../research_notes/research_methodology.md) |
+| 工具指南 | 验证工具使用 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |
+| 最佳实践 | 工程最佳实践 | [../../../research_notes/BEST_PRACTICES.md](../../../research_notes/BEST_PRACTICES.md) |
 
 ---
 

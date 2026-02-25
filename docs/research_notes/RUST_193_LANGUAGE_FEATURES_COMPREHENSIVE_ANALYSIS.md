@@ -2,26 +2,27 @@
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ **100% 完成**（92 项特性全覆盖；每项含动机、形式化引用、与 formal_methods/type_theory 衔接）
 > **目标**: 全面、完整、充分地分析 Rust 1.93 所有语言特性，补全设计论证与形式化
 
 ---
 
-## 📚 权威来源对齐<a id="权威来源对齐"></a>
+## 📚 权威来源对齐<a id="权威来源对齐"></a> {#-权威来源对齐}
 
 | 来源 | 链接 | 用途 |
 | :--- | :--- | :--- |
 | **Rust 1.93 发布说明** | [blog.rust-lang.org/2026/01/22/Rust-1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/) | 语言特性权威公告 |
+| **Rust 1.93.1 补丁** | [blog.rust-lang.org/2026/02/12/Rust-1.93.1](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/) | ICE/Clippy/WASM 回归修复 |
 | **releases.rs 1.93.0** | [releases.rs/docs/1.93.0](https://releases.rs/docs/1.93.0/) | 完整变更清单 |
 | **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范（Rust 2021 Edition） |
 | **RustBelt / Stacked Borrows / Tree Borrows** | [plv.mpi-sws.org/rustbelt](https://plv.mpi-sws.org/rustbelt/) | 所有权/借用形式化 |
 
-**版本说明**：Ferrocene FLS 当前覆盖 **Rust 2021 Edition** 与 rustc 1.93.0。本项目文档使用 **Edition 2024**；Edition 2024 新增语法与语义尚未纳入 FLS 正式章节，形式化引用以 FLS 当前覆盖范围为准。
+**版本说明**：Ferrocene FLS 当前覆盖 **Rust 2021 Edition** 与 rustc 1.93.0。本项目文档使用 **Edition 2024** 与 **Rust 1.93.1**（补丁版，修复 ICE/Clippy/WASM 回归）；Edition 2024 新增语法与语义尚未纳入 FLS 正式章节，形式化引用以 FLS 当前覆盖范围为准。
 
 ---
 
-## 📋 目录<a id="目录"></a>
+## 📋 目录<a id="目录"></a> {#-目录}
 
 <!-- markdownlint-disable MD051 -->
 - [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
@@ -45,7 +46,7 @@
 
 ---
 
-## 🎯 文档宗旨<a id="文档宗旨"></a>
+## 🎯 文档宗旨<a id="文档宗旨"></a> {#-文档宗旨}
 
 本文档针对「论证未全面分析 Rust 1.93 所有语言特性」的缺口，系统化补全：
 
@@ -55,7 +56,7 @@
 
 ---
 
-## 📐 特性覆盖矩阵总览<a id="特性覆盖矩阵总览"></a>
+## 📐 特性覆盖矩阵总览<a id="特性覆盖矩阵总览"></a> {#-特性覆盖矩阵总览}
 
 | 类别 | 特性数 | 已论证 | 形式化文档 | 完成度 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -75,46 +76,46 @@
 
 ## 特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）
 
-本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，**最后一列「文档」即该特性的推荐落点文档**；与 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) F3.1 对齐。详见 [PROOF_INDEX](PROOF_INDEX.md)。
+本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，**最后一列「文档」即该特性的推荐落点文档**；与 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) F3.1 对齐。详见 [PROOF_INDEX](PROOF_INDEX.md)。
 
 | 特性族 | 特性 | Def | Axiom | Theorem | 文档 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **内存与所有权** | 所有权 | 1.1–1.3 | 规则 1–3 | T2 唯一性、T3 内存安全 | ownership_model |
-| | 借用 | - | 规则 5–8 | T1 数据竞争自由 | borrow_checker_proof |
-| | 生命周期 | $\ell \subseteq \text{lft}$ | - | T2 引用有效性 | lifetime_formalization |
-| | Pin | 1.1–2.2 | - | T1–T3 | pin_self_referential |
-| | Box | BOX1 | - | BOX-T1 | ownership_model |
-| | Rc/Arc | RC1/ARC1 | - | RC-T1 | ownership_model |
-| | Cell/RefCell | CELL1/REFCELL1 | - | REFCELL-T1 | ownership_model |
-| | MaybeUninit | MAYBEUNINIT1 | - | MAYBEUNINIT-T1 | ownership_model |
-| | 智能指针 | DROP1/DEREF1 | - | DROP-T1/DEREF-T1 | ownership_model |
-| | 裸指针 | RAW1 | - | RAW-T1 | borrow_checker_proof |
-| | 内存布局 | REPR1 | - | REPR-T1 | ownership_model |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **类型系统** | 基本类型 | - | - | 进展性 T1、保持性 T2 | type_system_foundations |
-| | Never (!) | BOT1 | - | BOT-T1 | type_system_foundations |
-| | 型变 | Def 1.1–3.1 | - | T1–T4 | variance_theory |
-| | 类型构造 | TCON1 | TCON1–TCON2 | TCON-T1 | construction_capability |
-| | impl Trait | - | - | DYN-T1 | trait_system_formalization |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **Trait** | Trait | - | COH1/COH2 | COH-T1 | trait_system_formalization |
-| | GATs | - | - | AT-L1 | advanced_types |
-| | Send/Sync | SEND1/SYNC1 | SYNC-L1 | SEND-T1/SYNC-T1、SEND-SYNC-T1 | [send_sync_formalization](formal_methods/send_sync_formalization.md)；async T6.2 |
-| | Unpin | Def 2.2 | - | T1–T3 | pin_self_referential |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **控制流** | match | MATCH1 | - | MATCH-T1 | borrow_checker_proof |
-| | for | FOR1 | - | FOR-T1 | borrow_checker_proof |
-| | ? 操作符 | QUERY1 | - | QUERY-T1 | borrow_checker_proof |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **并发** | 线程 | SPAWN1 | - | SPAWN-T1 | async_state_machine |
-| | Future | Def 4.1–5.2 | - | T6.1–T6.3 | async_state_machine |
-| | 通道 | CHAN1 | - | CHAN-T1 | borrow_checker_proof |
-| | Mutex | MUTEX1 | - | MUTEX-T1 | borrow_checker_proof |
-| | 原子操作 | ATOMIC1 | - | ATOMIC-T1 | ownership_model |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **FFI** | unsafe | UNSAFE1 | - | UNSAFE-T1/T2 | borrow_checker_proof |
-| | extern | EXTERN1 | - | EXTERN-T1 | borrow_checker_proof |
-| | C variadic | CVARIADIC1 | - | - | borrow_checker_proof |
-| | union | UNION1 | - | - | ownership_model |
-| | transmute | TRANSMUTE1 | - | TRANSMUTE-T1 | ownership_model |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **执行模型** | 确定性 | EB-DET1 | EB-DET1 | EB-DET-T1 | 06_boundary_analysis |
 | **组合工程** | 组件成熟度 | CE-MAT1 | CE-MAT1 | CE-MAT-T1 | 04_compositional_engineering |
-| | 组合有效性 | CE1 | CE1 | CE-T1–T3 | 04_compositional_engineering |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 
 **说明**：表中仅列出已形式化的特性；未列出的特性（如 if/else、mod、cfg 等）无对应 Def/Axiom/Theorem，但均在特性覆盖矩阵中列明设计决策与反例。
 
@@ -284,7 +285,7 @@
 
 ---
 
-## 📚 相关文档<a id="相关文档"></a>
+## 📚 相关文档<a id="相关文档"></a> {#-相关文档}
 
 | 文档 | 用途 |
 | :--- | :--- |

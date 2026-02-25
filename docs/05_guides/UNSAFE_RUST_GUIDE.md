@@ -1,27 +1,27 @@
 # Unsafe Rust 专题指南
 
 > **创建日期**: 2026-02-15
-> **最后更新**: 2026-02-20
+> **最后更新**: 2026-02-26
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
 
-## 📋 目录
+## 📋 目录 {#-目录}
 
 - [Unsafe Rust 专题指南](#unsafe-rust-专题指南)
-  - [📋 目录](#-目录)
+  - [📋 目录 {#-目录}](#-目录--目录)
   - [文档定位](#文档定位)
-  - [🎯 何时使用 Unsafe](#-何时使用-unsafe)
-  - [📚 核心 Unsafe 操作](#-核心-unsafe-操作)
-  - [💻 完整代码示例](#-完整代码示例)
+  - [🎯 何时使用 Unsafe {#-何时使用-unsafe}](#-何时使用-unsafe--何时使用-unsafe)
+  - [📚 核心 Unsafe 操作 {#-核心-unsafe-操作}](#-核心-unsafe-操作--核心-unsafe-操作)
+  - [💻 完整代码示例 {#-完整代码示例}](#-完整代码示例--完整代码示例)
     - [1. 原始指针操作](#1-原始指针操作)
     - [2. 调用外部函数 (FFI)](#2-调用外部函数-ffi)
     - [3. 实现 Send/Sync](#3-实现-sendsync)
     - [4. Union 访问](#4-union-访问)
     - [5. 内联汇编](#5-内联汇编)
     - [6. 自定义智能指针](#6-自定义智能指针)
-  - [⚠️ 未定义行为 (UB) 案例](#️-未定义行为-ub-案例)
+  - [⚠️ 未定义行为 (UB) 案例 {#️-未定义行为-ub-案例}](#️-未定义行为-ub-案例-️-未定义行为-ub-案例)
     - [案例 1: 空指针解引用](#案例-1-空指针解引用)
     - [案例 2: 悬垂指针](#案例-2-悬垂指针)
     - [案例 3: 数据竞争](#案例-3-数据竞争)
@@ -30,12 +30,13 @@
     - [案例 6: 越界访问](#案例-6-越界访问)
     - [案例 7: 违反借用规则](#案例-7-违反借用规则)
     - [案例 8: 不恰当的 Drop 实现](#案例-8-不恰当的-drop-实现)
-  - [🛡️ 安全抽象原则](#️-安全抽象原则)
-  - [🔬 Miri 检测工具](#-miri-检测工具)
-  - [📖 形式化安全边界](#-形式化安全边界)
+  - [🛡️ 安全抽象原则 {#️-安全抽象原则}](#️-安全抽象原则-️-安全抽象原则)
+  - [🔬 Miri 检测工具 {#-miri-检测工具}](#-miri-检测工具--miri-检测工具)
+  - [📖 形式化安全边界 {#-形式化安全边界}](#-形式化安全边界--形式化安全边界)
     - [安全/非安全边界分析](#安全非安全边界分析)
     - [形式化资源](#形式化资源)
-  - [🔗 推荐学习路径](#-推荐学习路径)
+  - [🔗 推荐学习路径 {#-推荐学习路径}](#-推荐学习路径--推荐学习路径)
+  - [📖 Rustonomicon 逐章对标表 {#-rustonomicon-逐章对标表}](#-rustonomicon-逐章对标表--rustonomicon-逐章对标表)
 
 ---
 
@@ -43,9 +44,11 @@
 
 本指南为 **Rustonomicon** 的补充与项目内导航，帮助在系统学习 unsafe Rust 时快速定位到本项目的相关模块和示例。
 
+**形式化引用**：T-OW3 (内存安全框架)、T-BR1 (数据竞争自由)。详见 [ownership_model](../research_notes/formal_methods/ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md)。
+
 ---
 
-## 🎯 何时使用 Unsafe
+## 🎯 何时使用 Unsafe {#-何时使用-unsafe}
 
 Rust 的 `unsafe` 关键字允许你执行以下五种操作：
 
@@ -75,7 +78,7 @@ unsafe impl MyUnsafeTrait for MyType {
 
 ---
 
-## 📚 核心 Unsafe 操作
+## 📚 核心 Unsafe 操作 {#-核心-unsafe-操作}
 
 | 操作 | 说明 | 风险 |
 | :--- | :--- | :--- |
@@ -87,7 +90,7 @@ unsafe impl MyUnsafeTrait for MyType {
 
 ---
 
-## 💻 完整代码示例
+## 💻 完整代码示例 {#-完整代码示例}
 
 ### 1. 原始指针操作
 
@@ -491,7 +494,7 @@ unsafe impl<T: Sync> Sync for MyBox<T> {}
 
 ---
 
-## ⚠️ 未定义行为 (UB) 案例
+## ⚠️ 未定义行为 (UB) 案例 {#️-未定义行为-ub-案例}
 
 ### 案例 1: 空指针解引用
 
@@ -734,7 +737,7 @@ impl Drop for SafeDrop {
 
 ---
 
-## 🛡️ 安全抽象原则
+## 🛡️ 安全抽象原则 {#️-安全抽象原则}
 
 > **对应 Nomicon**: [Working with Unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html)
 
@@ -784,7 +787,7 @@ impl Drop for SafeDrop {
 
 ---
 
-## 🔬 Miri 检测工具
+## 🔬 Miri 检测工具 {#-miri-检测工具}
 
 Miri 是 Rust 的内存安全检测工具，可以检测大多数 UB。
 
@@ -813,7 +816,7 @@ Miri 可以检测：
 
 ---
 
-## 📖 形式化安全边界
+## 📖 形式化安全边界 {#-形式化安全边界}
 
 ### 安全/非安全边界分析
 
@@ -834,7 +837,7 @@ Miri 可以检测：
 
 ---
 
-## 🔗 推荐学习路径
+## 🔗 推荐学习路径 {#-推荐学习路径}
 
 > **对应 Nomicon 阅读顺序**: [Meet Safe and Unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) → [How Safe and Unsafe Interact](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) → [What Unsafe Rust Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) → [Working with Unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html)
 
@@ -842,6 +845,30 @@ Miri 可以检测：
 2. 学习 C01 的零成本抽象与高级所有权
 3. 研究本项目 `formal_methods` 中的形式化证明
 4. 实践：为现有安全 API 编写 `unsafe` 实现（如自定义集合）
+
+---
+
+## 📖 Rustonomicon 逐章对标表 {#-rustonomicon-逐章对标表}
+
+| Nomicon 章节 | 官方链接 | 本指南对应小节 |
+| :--- | :--- | :--- |
+| **Meet Safe and Unsafe** | [meet-safe-and-unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) | § 文档定位、§ 何时使用 Unsafe |
+| **How Safe and Unsafe Interact** | [safe-unsafe-meaning](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) | § 安全抽象原则 |
+| **What Unsafe Can Do** | [what-unsafe-does](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | § 核心 Unsafe 操作、§ UB 案例 |
+| **Working with Unsafe** | [working-with-unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html) | § 安全抽象原则、§ 推荐学习路径 |
+| **Data Layout** | [data](https://doc.rust-lang.org/nomicon/data.html) | 本项目 [type_system](../02_reference/quick_reference/type_system.md) |
+| **Ownership** | [ownership](https://doc.rust-lang.org/nomicon/ownership.html) | [ownership_model](../research_notes/formal_methods/ownership_model.md)、[ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) |
+| **Subtyping and Variance** | [subtyping](https://doc.rust-lang.org/nomicon/subtyping.html) | [VARIANCE_CONCEPT_MINDMAP](../research_notes/formal_methods/VARIANCE_CONCEPT_MINDMAP.md) |
+| **Type Conversions / Transmutes** | [transmutes](https://doc.rust-lang.org/nomicon/transmutes.html) | § UB 案例 4 类型混淆 |
+| **Uninitialized Memory** | [uninitialized](https://doc.rust-lang.org/nomicon/uninitialized.html) | § UB 案例 6 越界、§ Miri |
+| **Destructors / Drop** | [destructors](https://doc.rust-lang.org/nomicon/destructors.html) | § UB 案例 8 不恰当的 Drop |
+| **Exception Safety** | [exception-safety](https://doc.rust-lang.org/nomicon/exception-safety.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md) |
+| **Concurrency / Send and Sync** | [send-and-sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | § 示例 3 实现 Send/Sync、[threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) |
+| **Implementing Vec** | [vec](https://doc.rust-lang.org/nomicon/vec/vec.html) | § 示例 1 原始指针、§ 示例 6 自定义智能指针 |
+| **Implementing Arc** | [arc](https://doc.rust-lang.org/nomicon/arc-mutex/arc.html) | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) |
+| **FFI** | [ffi](https://doc.rust-lang.org/nomicon/ffi.html) | § 示例 2 调用外部函数 |
+
+> **官方入口**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · 与 Rust 1.93 对应见 [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 
 ---
 

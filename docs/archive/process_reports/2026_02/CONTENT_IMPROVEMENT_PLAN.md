@@ -38,7 +38,7 @@
 
 ## 🎯 实质内容五维标准
 
-根据 [QUALITY_CHECKLIST](research_notes/QUALITY_CHECKLIST.md) 和 [CONTENT_ENHANCEMENT](research_notes/CONTENT_ENHANCEMENT.md)，每个文档应包含：
+根据 [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) 和 [CONTENT_ENHANCEMENT](../../../research_notes/CONTENT_ENHANCEMENT.md)，每个文档应包含：
 
 | 维度 | 要求 | 检查方法 |
 | :--- | :--- | :--- |
@@ -46,7 +46,7 @@
 | **代码** | 至少 1 段可运行 Rust 代码 | ```rust ...``` |
 | **场景** | 至少 1 个具体使用场景（非泛泛描述） | 「HTTP 请求解析→Builder 模式→axum」 |
 | **反例** | 至少 1 个反例或边界说明 | 双重可变借用、unwrap 空 Option |
-| **衔接** | 至少 1 处链接至 formal_methods/type_theory | `[ownership_model](formal_methods/ownership_model.md)` |
+| **衔接** | 至少 1 处链接至 formal_methods/type_theory | `[ownership_model](../../../research_notes/formal_methods/ownership_model.md)` |
 
 ---
 
@@ -209,7 +209,7 @@ let r2 = &mut s; // 编译错误！
 ```markdown
 ### 形式化背景
 
-本主题的形式化定义见 [ownership_model](../formal_methods/ownership_model.md)。
+本主题的形式化定义见 [ownership_model](../../../research_notes/formal_methods/ownership_model.md)。
 核心定理包括：
 - **T2 (唯一性)**: 保证资源唯一所有权
 - **T3 (内存安全)**: 无悬垂指针、无双重释放

@@ -1,8 +1,8 @@
 # 本项目概念与官方资源映射表
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-26
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 本项目概念/模块 ↔ The Rust Book / Reference / Rust by Example
 
@@ -11,7 +11,7 @@
 ## 官方资源入口
 
 | 资源 | URL | 说明 |
-| :--- | :--- | :--- || **The Rust Book** | <https://doc.rust-lang.org/book/> | 官方入门与进阶教程 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Rust Reference** | <https://doc.rust-lang.org/reference/> | 语言规范 |
 | **Rust by Example** | <https://doc.rust-lang.org/rust-by-example/> | 示例驱动学习 |
 | **Standard Library** | <https://doc.rust-lang.org/std/> | 标准库 API |
@@ -27,7 +27,7 @@
 ## 模块 → 官方章节映射
 
 | 项目模块 | 本项目路径 | The Rust Book | RBE 练习（可点击） | Reference |
-| :--- | :--- | :--- | :--- | :--- || **C01 所有权** | crates/c01_ownership_borrow_scope | Ch 4 Understanding Ownership | [Scope](https://doc.rust-lang.org/rust-by-example/scope.html) · [Move](https://doc.rust-lang.org/rust-by-example/scope/move.html) · [Borrow](https://doc.rust-lang.org/rust-by-example/scope/borrow.html) · [Lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html) | [Ownership](https://doc.rust-lang.org/reference/ownership.html) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **C02 类型系统** | crates/c02_type_system | Ch 3 Types, Ch 10 Traits | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) · [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) · [Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html) | [Types](https://doc.rust-lang.org/reference/types.html) |
 | **C03 控制流** | crates/c03_control_fn | Ch 3 Control Flow, Ch 6 Enums | [Flow Control](https://doc.rust-lang.org/rust-by-example/flow_control.html) · [Option](https://doc.rust-lang.org/rust-by-example/std/option.html) · [Error](https://doc.rust-lang.org/rust-by-example/error.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html) | [Statements](https://doc.rust-lang.org/reference/statements.html) |
 | **C04 泛型** | crates/c04_generic | Ch 10 Generic Types, Traits | [Generics](https://doc.rust-lang.org/rust-by-example/generics.html) | [Items](https://doc.rust-lang.org/reference/items/generics.html) |
@@ -45,7 +45,7 @@
 ## 小节级映射与「本项目补充」
 
 | 官方章节 | 小节 | 本项目补充内容 |
-| :--- | :--- | :--- || **Book Ch 4** | 4.1-4.3 Ownership, Borrowing, Slices | 思维导图、决策树、证明树（[THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md)）；边界特例（[EDGE_CASES](../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md)） |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Book Ch 10** | 10.1-10.3 Traits, Lifetimes | 型变理论、生命周期形式化（[research_notes](../research_notes/)）；转换树 |
 | **Reference** | Types, Ownership, Special Types | 形式化工程系统（[rust-formal-engineering-system](../rust-formal-engineering-system/)）；variance 专项 |
 | **Reference** | Macros by Example, Procedural Macros | 宏系统决策树、反例（[macros_cheatsheet](../02_reference/quick_reference/macros_cheatsheet.md)） |
@@ -64,7 +64,7 @@
 ## 核心概念映射
 
 | 概念 | 本项目速查卡 | Book 章节 | RBE |
-| :--- | :--- | :--- | :--- || 所有权 | ownership_cheatsheet | Ch 4.1 | [Move](https://doc.rust-lang.org/rust-by-example/scope/move.html) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 借用 | ownership_cheatsheet | Ch 4.2 | [Borrow](https://doc.rust-lang.org/rust-by-example/scope/borrow.html) |
 | 生命周期 | type_system | Ch 10.3 | [Lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html) |
 | Trait | type_system | Ch 10 | [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) |
@@ -180,6 +180,31 @@
 
 ---
 
+## 🎓 高校课程资源映射（权威对齐）
+
+### Stanford
+
+| 课程 | 链接 | 主要内容 | 本项目对应 |
+| :--- | :--- | :--- | :--- |
+| **CS340R: Rusty Systems** | <https://web.stanford.edu/class/cs340r/> | Rust 系统编程、3 周基础 + 7 周系统重实现项目 | [05_guides/](../05_guides/)、[C05 线程](../02_reference/quick_reference/threads_concurrency_cheatsheet.md)、[C10 网络](../02_reference/quick_reference/network_programming_cheatsheet.md) |
+
+### CMU
+
+| 课程 | 链接 | 主要内容 | 本项目对应 |
+| :--- | :--- | :--- | :--- |
+| **17-363/17-663: Programming Language Pragmatics** | <https://www.cs.cmu.edu/~aldrich/courses/17-363/> | 编程语言基础、约 4/8 作业用 Rust 实现编译器 | [C11 宏](../02_reference/quick_reference/macros_cheatsheet.md)、[C02 类型系统](../02_reference/quick_reference/type_system.md) |
+| **17-770: WebAssembly** | <https://www.cs.cmu.edu/~wasm/cs17-770/> | WebAssembly 引擎，支持 Rust 实现 | [C12 WASM](../02_reference/quick_reference/wasm_cheatsheet.md) |
+
+### 其他高校（参考）
+
+| 课程 | 机构 | 链接 | 说明 |
+| :--- | :--- | :--- | :--- |
+| **CIS 1905: Rust Programming** | UPenn | <https://www.cis.upenn.edu/~cis1905/> | 所有权、内存安全、数据竞争自由、并行与异步 |
+
+> **说明**：MIT 暂无公开的 Rust 专项课程；上述课程为 2024–2025 学年可查资源，具体开课情况以各校官网为准。
+
+---
+
 ## 🔗 形式化文档链接
 
 ### 形式化证明体系（2026-02-14）
@@ -194,22 +219,36 @@
 
 | 官方资源 | 本项目形式化文档 |
 | :--- | :--- |
-| [Ferrocene FLS - Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
-| [Ferrocene FLS - Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
-| [Ferrocene FLS - Concurrency](https://spec.ferrocene.dev/concurrency.html) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md)、[async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
-| [Rust Reference - Undefined Behavior](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | [EDGE_CASES_AND_SPECIAL_CASES](./EDGE_CASES_AND_SPECIAL_CASES.md) |
+| [Ferrocene FLS - Ch.5 Patterns](https://spec.ferrocene.dev/patterns.html) | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
+| [Ferrocene FLS - Ch.15 Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
+| [Ferrocene FLS - Ch.15 Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
+| [Ferrocene FLS - Ch.16 Exceptions](https://spec.ferrocene.dev/exceptions-and-errors.html) | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
+| [Ferrocene FLS - Ch.17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md)、[async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
+| [Ferrocene FLS - Ch.19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
+| [Ferrocene FLS - Ch.21 FFI](https://spec.ferrocene.dev/ffi.html) | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) § FFI |
+| [Ferrocene FLS - Appendix C UB](https://spec.ferrocene.dev/undefined-behavior.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md) |
+| [Rust Reference - Undefined Behavior](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md) |
 
 ---
 
-## edX 课程资源映射
+## 在线课程资源映射（edX + Coursera）
 
-### 课程与项目内容对齐
+### edX 课程与项目内容对齐
 
 | 课程 | 机构 | 链接 | 主要内容 | 本项目对应路径 |
 | :--- | :--- | :--- | :--- | :--- |
 | Introduction to Rust Programming | Microsoft | <https://www.edx.org/learn/rust/microsoft-introduction-to-rust-programming> | Rust语法基础、所有权、类型系统 | [01_learning/](./) - C01-C04 基础阶段 |
 | Rust for Developers | Linux Foundation | <https://www.edx.org/learn/rust/the-linux-foundation-rust-for-developers> | 实战开发、项目构建、最佳实践 | [05_guides/](../05_guides/) - 开发指南 |
 | Programming with Rust | W3C | <https://www.edx.org/learn/rust/w3cx-programming-with-rust> | 语法速查、模式匹配、标准库 | [02_reference/quick_reference/](../02_reference/quick_reference/) - 速查卡 |
+
+### Coursera 课程与项目内容对齐
+
+| 课程 | 机构 | 链接 | 主要内容 | 本项目对应路径 |
+| :--- | :--- | :--- | :--- | :--- |
+| Rust Fundamentals | Duke | <https://www.coursera.org/learn/rust-fundamentals> | 所有权、借用、生命周期、enum、struct、trait、泛型 | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md)、[type_system](../02_reference/quick_reference/type_system.md) |
+| Rust Programming Essentials | Edureka | <https://www.coursera.org/learn/rust-programming-essentials> | 模式匹配、所有权、类型系统、Cargo | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md)、[cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
+| Advanced Rust Programming | Edureka | <https://www.coursera.org/learn/advanced-rust-programming> | 并发、多线程、内存管理、集合、trait、泛型 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md)、[collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) |
+| Rust Programming Specialization | Duke | <https://www.coursera.org/specializations/rust-programming> | 系统编程、数据工程、Linux、DevOps、LLM、云、MLOps | [05_guides/](../05_guides/)、[CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) |
 
 ### 学习路径建议
 

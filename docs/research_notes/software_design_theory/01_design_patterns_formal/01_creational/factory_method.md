@@ -11,10 +11,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [Factory Method 形式化分析](#factory-method-形式化分析)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Factory Method 结构）](#def-11factory-method-结构)
     - [Axiom FM1（返回类型一致性公理）](#axiom-fm1返回类型一致性公理)
@@ -179,7 +179,7 @@ assert_eq!(product.operation(), "Product A");
 
 ### 形式化论证链
 
-```
+```text
 Axiom FM1 (返回一致性)
     ↓ 依赖
 type_system 保持性定理

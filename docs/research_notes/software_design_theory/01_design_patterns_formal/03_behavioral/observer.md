@@ -11,10 +11,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [Observer 形式化分析](#observer-形式化分析)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Observer 结构）](#def-11observer-结构)
     - [Axiom OB1（通知顺序公理）](#axiom-ob1通知顺序公理)
@@ -187,7 +187,7 @@ impl Subject2 {
 
 ### 形式化论证链
 
-```
+```text
 Axiom OB1 (通知顺序)
     ↓ 实现
 channel / callback

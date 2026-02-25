@@ -8,7 +8,7 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#-目录}
 
 - [Rust 安全与非安全全面论证与分析](#rust-安全与非安全全面论证与分析)
   - [📋 目录](#-目录)
@@ -40,7 +40,7 @@
 
 ---
 
-## 🎯 文档宗旨
+## 🎯 文档宗旨 {#-文档宗旨}
 
 本文档针对「安全与非安全缺乏全面论证和分析」的缺口，系统化补全：
 
@@ -275,13 +275,13 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#-相关文档}
 
 | 文档 | 用途 |
 | :--- | :--- |
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 理论体系、论证体系、安全边界总览 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 公理语义、unsafe 契约 |
-| [UNSAFE_RUST_GUIDE](../UNSAFE_RUST_GUIDE.md) | Unsafe Rust 专题指南 |
+| [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) | Unsafe Rust 专题指南 |
 | [ownership_model](formal_methods/ownership_model.md) | 内存安全定理 |
 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) | 数据竞争自由定理 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 官方 unsafe 权威 |

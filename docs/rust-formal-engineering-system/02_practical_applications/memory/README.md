@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [memory_analysis.md](../../../../research_notes/experiments/memory_analysis.md)
+> 内容已整合至： [memory_analysis.md](../../../research_notes/experiments/memory_analysis.md)
 
 ## 知识结构思维导图
 
@@ -220,29 +220,29 @@ fn object_pool_demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 内存分析 | 内存使用分析实验 | [../../../../research_notes/experiments/memory_analysis.md](../../../../research_notes/experiments/memory_analysis.md) |
-| 编译器优化 | 内存相关编译器优化 | [../../../../research_notes/experiments/compiler_optimizations.md](../../../../research_notes/experiments/compiler_optimizations.md) |
+| 内存分析 | 内存使用分析实验 | [../../../research_notes/experiments/memory_analysis.md](../../../research_notes/experiments/memory_analysis.md) |
+| 编译器优化 | 内存相关编译器优化 | [../../../research_notes/experiments/compiler_optimizations.md](../../../research_notes/experiments/compiler_optimizations.md) |
 
 ### 形式化方法
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 所有权模型 | 所有权系统形式化 | [../../../../research_notes/formal_methods/ownership_model.md](../../../../research_notes/formal_methods/ownership_model.md) |
-| 生命周期形式化 | 生命周期系统理论 | [../../../../research_notes/formal_methods/lifetime_formalization.md](../../../../research_notes/formal_methods/lifetime_formalization.md) |
+| 所有权模型 | 所有权系统形式化 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
+| 生命周期形式化 | 生命周期系统理论 | [../../../research_notes/formal_methods/lifetime_formalization.md](../../../research_notes/formal_methods/lifetime_formalization.md) |
 
 ### 类型理论
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 类型系统基础 | 类型系统理论 | [../../../../research_notes/type_theory/type_system_foundations.md](../../../../research_notes/type_theory/type_system_foundations.md) |
-| 生命周期形式化 | 生命周期类型理论 | [../../../../research_notes/type_theory/lifetime_formalization.md](../../../../research_notes/type_theory/lifetime_formalization.md) |
-| 方差理论 | 类型方差与内存安全 | [../../../../research_notes/type_theory/variance_theory.md](../../../../research_notes/type_theory/variance_theory.md) |
+| 类型系统基础 | 类型系统理论 | [../../../research_notes/type_theory/type_system_foundations.md](../../../research_notes/type_theory/type_system_foundations.md) |
+| 生命周期形式化 | 生命周期类型理论 | [../../../research_notes/type_theory/lifetime_formalization.md](../../../research_notes/type_theory/lifetime_formalization.md) |
+| 方差理论 | 类型方差与内存安全 | [../../../research_notes/type_theory/variance_theory.md](../../../research_notes/type_theory/variance_theory.md) |
 
 ### 安全分析
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 安全/非安全分析 | unsafe 内存操作分析 | [../../../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../../../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+| 安全/非安全分析 | unsafe 内存操作分析 | [../../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 
 ---
 

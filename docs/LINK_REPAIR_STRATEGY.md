@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 >
 > **发现日期**: 2026-02-20
@@ -16,7 +16,7 @@
 ### 损坏链接统计
 
 | 问题类型 | 数量 | 占比 |
-| :--- | :---: | :---: |
+| :--- | :--- | :--- |
 | **文件不存在** | 825 | 33.8% |
 | **锚点不存在** | 1,613 | 66.2% |
 | **总计** | **2,438** | **100%** |
@@ -97,7 +97,7 @@
 [文档](./07_project/ONE_PAGE_SUMMARY_TEMPLATE.md)
 
 # 修复后
-[文档](../archive/process_reports/2026_02/project/ONE_PAGE_SUMMARY_TEMPLATE.md) (归档)
+[文档](archive/process_reports/2026_02/project/ONE_PAGE_SUMMARY_TEMPLATE.md) (归档)
 ```
 
 ### 方法2: 替换为等效文档
@@ -106,10 +106,10 @@
 
 ```markdown
 # 修复前
-[形式化分析](../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+[形式化分析](./research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
 
 # 修复后
-[形式化分析](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
+[形式化分析](./research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
 ```
 
 ### 方法3: 修正路径错误
@@ -118,10 +118,10 @@
 
 ```markdown
 # 修复前
-[类型系统](../research_notes/formal_methods/type_system_formalization.md)
+[类型系统](./research_notes/type_theory/type_system_foundations.md)
 
 # 修复后
-[类型系统](../research_notes/type_theory/type_system_foundations.md)
+[类型系统](./research_notes/type_theory/type_system_foundations.md)
 ```
 
 ### 方法4: 修复锚点链接
@@ -214,7 +214,7 @@
 ## 预期结果
 
 | 阶段 | 目标 | 预计修复链接数 |
-| :--- | :---: | :---: |
+| :--- | :--- | :--- |
 | Phase 1 | 核心导航100%有效 | 50+ |
 | Phase 2 | 主题README 100%有效 | 100+ |
 | Phase 3 | 速查卡 100%有效 | 200+ |

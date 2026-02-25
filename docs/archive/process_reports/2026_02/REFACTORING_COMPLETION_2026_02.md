@@ -1,4 +1,5 @@
 # docs 重构完成报告
+>
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-20
 > **归档日期**: 2026-02-20
@@ -17,7 +18,7 @@
 
 ## 执行摘要
 
-按 [DOCUMENTATION_THEME_ORGANIZATION_PLAN](07_project/DOCUMENTATION_THEME_ORGANIZATION_PLAN.md) 完成 docs 四阶段重构及链接修复。
+按 [DOCUMENTATION_THEME_ORGANIZATION_PLAN](../../../07_project/DOCUMENTATION_THEME_ORGANIZATION_PLAN.md) 完成 docs 四阶段重构及链接修复。
 
 ---
 
@@ -62,7 +63,7 @@
 - [x] PROJECT_STRUCTURE、CONTRIBUTING、guides/README：UNSAFE_RUST_GUIDE、PROJECT_CRITICAL_EVALUATION 路径
 - [x] RUST_RELEASE_TRACKING_CHECKLIST：quick_reference、MULTI_DIMENSIONAL、Cargo 路径
 - [x] rust-formal-engineering-system、research_notes：toolchain → 06_toolchain
-- [x] **2026-02-13 迭代**：RUST_RELEASE_TRACKING、MULTI_DIMENSIONAL、DECISION/PROOF_GRAPH、THINKING_REPRESENTATION 断链修复；c03/c09 断链与互链；全项目 toolchain→06_toolchain（c01–c12、MIGRATION_GUIDE）；新建 [TASK_INDEX.md](07_project/TASK_INDEX.md)
+- [x] **2026-02-13 迭代**：RUST_RELEASE_TRACKING、MULTI_DIMENSIONAL、DECISION/PROOF_GRAPH、THINKING_REPRESENTATION 断链修复；c03/c09 断链与互链；全项目 toolchain→06_toolchain（c01–c12、MIGRATION_GUIDE）；新建 [TASK_INDEX.md](../../../07_project/TASK_INDEX.md)
 - [x] **2026-02-13 持续推进**：C03 错误处理边界案例（From/Into、anyhow vs thiserror、早返回与 RAII）、迭代器与闭包协同示例；C07 async_stdio_demo 确认已实现；PENDING_ITEMS 与 TASK_INDEX 完成度更新
 - [x] **2026-02-13 持续推进（续）**：guides/README 路径修复（docs/→docs/05_guides/）；C07 11_practical_examples 断链修复（导航与重定向文件）；C07 文档深度完成；C04 类型推断指南链接修复
 - [x] **2026-02-13 迭代完成**：C04 全模块断链修复（思维表征→04_thinking、RUST_192→RUST_192_GENERIC_IMPROVEMENTS、tier*→tier_）；C04 PENDING_ITEMS 完成；TASK_INDEX 100% 完成度
@@ -91,7 +92,7 @@
 ## 100% 完成确认（2026-02-14）
 
 | 验证项 | 状态 |
-| :--- | :--- || scripts/check_links.ps1 | ✅ 无 tier3_advanced、tier1_foundation 等旧路径 |
+| :--- | :--- | :--- | :--- | :--- |
 | theory_enhanced 断链 | ✅ C04/C06/C07/C09 已修复 |
 | 01_theory/02_core/03_advanced | ✅ C01/C02/C11 已映射至 tier_*|
 | analysis/appendices 断链 | ✅ C02–C07 已映射至 tier_*、04_thinking、research_notes |
@@ -104,7 +105,7 @@
 ## 100% 推进完成项（2026-02-13）
 
 | 任务 | 交付物 |
-| :--- | :--- || Rustlings 模块映射表 | exercises/RUSTLINGS_MAPPING.md |
+| :--- | :--- | :--- | :--- | :--- |
 | UNSAFE_RUST_GUIDE 对标 Nomicon | 05_guides/UNSAFE_RUST_GUIDE.md 各章节直接链接 |
 | 错误码映射初版 | 02_reference/ERROR_CODE_MAPPING.md |
 | Brown 交互版 + RBE 入口 | RESOURCES、OFFICIAL_RESOURCES_MAPPING、exercises/README |
@@ -276,10 +277,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 📖 相关文档
 
-- [DOCUMENTATION_THEME_ORGANIZATION_PLAN](./07_project/DOCUMENTATION_THEME_ORGANIZATION_PLAN.md) - 文档主题组织计划
+- [DOCUMENTATION_THEME_ORGANIZATION_PLAN](../../../07_project/DOCUMENTATION_THEME_ORGANIZATION_PLAN.md) - 文档主题组织计划
 - [FORMAT_CHECKLIST_QUICK](./FORMAT_CHECKLIST_QUICK.md) - 快速检查清单
 - [FORMAT_FIX_COMPLETION_REPORT](./FORMAT_FIX_COMPLETION_REPORT.md) - 格式修复完成报告
 - [FORMAT_FIX_FINAL_REPORT](./FORMAT_FIX_FINAL_REPORT.md) - 格式修复最终报告
 - [FORMAT_FIX_PROGRESS_REPORT](./FORMAT_FIX_PROGRESS_REPORT.md) - 格式修复进度报告
-- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](research_notes/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
-- [TASK_INDEX](./07_project/TASK_INDEX.md) - 任务索引
+- [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
+- [TASK_INDEX](../../../07_project/TASK_INDEX.md) - 任务索引

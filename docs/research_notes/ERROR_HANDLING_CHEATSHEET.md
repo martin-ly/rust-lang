@@ -7,7 +7,7 @@
 ## Result与Option
 
 | 类型 | 用途 | 方法 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | `Option<T>` | 可能有值 | `Some(T)` / `None` |
 | `Result<T, E>` | 可能成功 | `Ok(T)` / `Err(E)` |
 
@@ -65,7 +65,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 ## panic vs Result
 
 | 情况 | 使用 |
-|:---|:---|
+| :--- | :--- |
 | 不可恢复错误 | `panic!` |
 | 可恢复错误 | `Result` |
 | 可选值 | `Option` |

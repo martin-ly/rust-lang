@@ -67,11 +67,11 @@
       - [未对齐指针边界](#未对齐指针边界)
     - [迭代器边界](#迭代器边界)
       - [迭代器失效边界](#迭代器失效边界)
-  - [🔗 形式化边界分析](#-形式化边界分析)
+  - [🔗 形式化边界分析 {#-形式化边界分析}](#-形式化边界分析--形式化边界分析)
     - [所有权与借用边界](#所有权与借用边界)
     - [类型系统边界](#类型系统边界)
-    - [并发边界](#并发边界-1)
-    - [unsafe 边界](#unsafe-边界-1)
+    - [并发边界 {#并发边界-1}](#并发边界-并发边界-1)
+    - [unsafe 边界 {#unsafe-边界-1}](#unsafe-边界-unsafe-边界-1)
   - [相关文档](#相关文档)
     - [速查卡](#速查卡)
     - [形式化文档](#形式化文档)
@@ -647,7 +647,7 @@ fn iterator_invalidation() {
 
 ---
 
-## 🔗 形式化边界分析
+## 🔗 形式化边界分析 {#-形式化边界分析}
 
 ### 所有权与借用边界
 
@@ -665,7 +665,7 @@ fn iterator_invalidation() {
 | ZST | $\text{size\_of}(T) = 0$ | [Rust Reference](https://doc.rust-lang.org/reference/dynamically-sized-types.html) |
 | 生命周期子类型 | $\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$ | [lifetime_formalization](../research_notes/formal_methods/lifetime_formalization.md#定义-14-生命周期子类型) |
 
-### 并发边界
+### 并发边界 {#并发边界-1}
 
 | 边界情况 | 形式化规则 | 相关文档 |
 | :--- | :--- | :--- |
@@ -673,7 +673,7 @@ fn iterator_invalidation() {
 | Sync 边界 | $T: \text{Sync} \leftrightarrow \&T: \text{Send}$ | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md#sendsync-关系) |
 | 数据竞争 | $\text{DataRaceFree}(P)$ 编译期保证 | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由) |
 
-### unsafe 边界
+### unsafe 边界 {#unsafe-边界-1}
 
 | 边界情况 | 形式化规则 | 相关文档 |
 | :--- | :--- | :--- |

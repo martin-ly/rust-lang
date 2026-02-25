@@ -1,4 +1,4 @@
-# 🔗 跨模块集成示例指南
+# 🔗 跨模块集成示例指南 {#-跨模块集成示例指南}
 
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-02-15
@@ -7,10 +7,10 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#-目录}
 
-- [🔗 跨模块集成示例指南](#-跨模块集成示例指南)
-  - [📋 目录](#-目录)
+- [🔗 跨模块集成示例指南 {#-跨模块集成示例指南}](#-跨模块集成示例指南--跨模块集成示例指南)
+  - [📋 目录 {#-目录}](#-目录--目录)
   - [概述](#概述)
   - [示例1: 所有权与类型系统集成](#示例1-所有权与类型系统集成)
     - [场景：类型安全的资源管理](#场景类型安全的资源管理)
@@ -41,6 +41,8 @@
 ## 概述
 
 本文档提供跨模块集成的实际示例，展示如何将不同的Rust模块组合使用，构建完整的应用程序。
+
+**形式化引用**：CE-T1、CE-T2、CE-T3（组合工程定理）、[04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md)。
 
 ---
 
@@ -362,7 +364,7 @@ fn test_wasm_integration() {
 
 - [C11 宏](#示例4-宏系统与设计模式集成) 定义 DSL
 - [C09 设计模式](#示例4-宏系统与设计模式集成) 实现插件接口
-- [C04 泛型](../CROSS_MODULE_INTEGRATION_EXAMPLES.md) 保证类型安全
+- [C04 泛型](./CROSS_MODULE_INTEGRATION_EXAMPLES.md) 保证类型安全
 
 ---
 
@@ -371,18 +373,18 @@ fn test_wasm_integration() {
 | 链接类型 | 目标文档 |
 | :--- | :--- |
 | **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
-| | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
-| | [C04 泛型](../../crates/c04_generic/docs/00_MASTER_INDEX.md) |
-| | [C05 线程](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
-| | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
-| | [C07 进程](../../crates/c07_process/docs/00_MASTER_INDEX.md) |
-| | [C08 算法](../../crates/c08_algorithms/docs/00_MASTER_INDEX.md) |
-| | [C09 设计模式](../../crates/c09_design_pattern/docs/00_MASTER_INDEX.md) |
-| | [C10 网络](../../crates/c10_networks/docs/00_MASTER_INDEX.md) |
-| | [C11 宏系统](../../crates/c11_macro_system/docs/00_MASTER_INDEX.md) |
-| | [C12 WASM](../../crates/c12_wasm/docs/00_MASTER_INDEX.md) |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
+| :--- | :--- |
 | **相关指南** | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
-| | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| :--- | :--- |
 
 ---
 

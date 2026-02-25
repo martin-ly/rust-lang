@@ -9,7 +9,7 @@
 
 ## 决策树概览
 
-```
+```text
 需要工作流引擎？
 │
 ├── 持久化要求？
@@ -76,7 +76,7 @@
 ## 引擎对比矩阵
 
 | 引擎 | 持久化 | 复杂度 | Rust支持 | 云原生 | 适用场景 |
-| :--- | :---: | :---: | :---: | :---: | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **Temporal** | ✅ 强 | 高 | 🔄 SDK开发中 | ✅ | 复杂业务流程 |
 | **Cadence** | ✅ 强 | 中 | ❌ | ✅ | Uber生态 |
 | **Camunda** | ✅ 强 | 高 | ❌ | ⚠️ | BPMN流程 |
@@ -124,7 +124,7 @@ impl Workflow {
     async fn execute(&self, input: WorkflowContext) -> Result<WorkflowContext, WorkflowError> {
         let mut ctx = input;
         let mut completed = 0;
-        
+
         for (i, activity) in self.activities.iter().enumerate() {
             match self.execute_with_retry(activity, &ctx).await {
                 Ok(result) => {
@@ -150,17 +150,17 @@ impl Workflow {
                 }
             }
         }
-        
+
         Ok(ctx)
     }
-    
+
     async fn execute_with_retry(
         &self,
         activity: &dyn Activity,
         ctx: &WorkflowContext,
     ) -> Result<WorkflowContext, ActivityError> {
         let mut interval = self.retry_policy.initial_interval;
-        
+
         for attempt in 1..=self.retry_policy.max_attempts {
             match timeout(Duration::from_secs(30), activity.execute(ctx)).await {
                 Ok(Ok(result)) => return Ok(result),
@@ -177,7 +177,7 @@ impl Workflow {
                 Err(_) => return Err(ActivityError::Timeout),
             }
         }
-        
+
         unreachable!()
     }
 }
@@ -188,21 +188,21 @@ struct ProcessPaymentActivity;
 #[async_trait]
 impl Activity for ProcessPaymentActivity {
     fn name(&self) -> &'static str { "process_payment" }
-    
+
     async fn execute(&self, ctx: &WorkflowContext) -> Result<WorkflowContext, ActivityError> {
         // 调用支付网关
         let payment_id = ctx["order_id"].as_str().unwrap();
         let amount = ctx["amount"].as_f64().unwrap();
-        
+
         // 实际支付逻辑...
-        
+
         let mut result = ctx.clone();
         result["payment_id"] = json!(format!("pay_{}", uuid::Uuid::new_v4()));
         result["status"] = json!("paid");
-        
+
         Ok(result)
     }
-    
+
     async fn compensate(&self, ctx: &WorkflowContext) -> Result<(), ActivityError> {
         // 退款逻辑
         let payment_id = ctx["payment_id"].as_str().unwrap();
@@ -280,7 +280,7 @@ impl OrderWorkflow {
         }
         Ok(())
     }
-    
+
     fn is_terminal(&self) -> bool {
         matches!(self.state, OrderWorkflowState::Completed { .. } | OrderWorkflowState::Cancelled { .. })
     }
@@ -302,33 +302,33 @@ async fn order_workflow(ctx: WorkflowContext, order: Order) -> Result<OrderResul
             max_attempts: 3,
             ..Default::default()
         });
-    
+
     // 执行活动
     let reservation = ctx.execute_activity(
         "reserve_inventory",
         opts.clone(),
         &order.items,
     ).await?;
-    
+
     // 设置补偿
     ctx.on_compensate("release_inventory", &reservation.id);
-    
+
     // 继续执行
     let payment = ctx.execute_activity(
         "process_payment",
         opts,
         &order.payment_info,
     ).await?;
-    
+
     ctx.on_compensate("refund_payment", &payment.id);
-    
+
     // 发货
     let shipment = ctx.execute_activity(
         "create_shipment",
         opts,
         &order.shipping_address,
     ).await?;
-    
+
     Ok(OrderResult {
         order_id: order.id,
         reservation_id: reservation.id,

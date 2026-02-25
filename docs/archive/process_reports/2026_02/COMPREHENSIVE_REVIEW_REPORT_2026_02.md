@@ -51,9 +51,9 @@
 
 | 原缺口 | 补全产出 |
 | :--- | :--- |
-| **多维概念矩阵** | ✅ [RUST_193_FEATURE_MATRIX](RUST_193_FEATURE_MATRIX.md) — 10 特性族 × 五维矩阵 |
-| **设计模式表征能力形式化树图** | ✅ [04_boundary_matrix](software_design_theory/01_design_patterns_formal/04_boundary_matrix.md#设计模式表征能力形式化树图) — Mermaid + ASCII 树图 |
-| **组件构建能力形式化树图** | ✅ [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md#组件构建能力形式化树图与-43-模式联合) — 与 02_complete_43_catalog 联合 |
+| **多维概念矩阵** | ✅ [RUST_193_FEATURE_MATRIX](../../../research_notes/RUST_193_FEATURE_MATRIX.md) — 10 特性族 × 五维矩阵 |
+| **设计模式表征能力形式化树图** | ✅ [04_boundary_matrix](../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md#设计模式表征能力形式化树图) — Mermaid + ASCII 树图 |
+| **组件构建能力形式化树图** | ✅ [04_compositional_engineering](../../../research_notes/software_design_theory/04_compositional_engineering/README.md#组件构建能力形式化树图与-43-模式联合) — 与 02_complete_43_catalog 联合 |
 
 ### 2.2 类型系统构造能力
 
@@ -212,7 +212,7 @@
 | **组件架构成熟构建** | 100% | 联合树图、L3/L4 工具索引 |
 | **quick_reference** | 20/20 已补全 | 形式化决策树深度链接 |
 
-**总体评价**：research_notes 与 quick_reference 体系完整、形式化论证充分、与权威来源对齐良好。**六阶段分步方案已全部实施完毕，达成 100% 完成。** 完整总结与论证脉络已补全：[00_COMPREHENSIVE_SUMMARY](00_COMPREHENSIVE_SUMMARY.md)（项目全貌、知识地图）、[ARGUMENTATION_CHAIN_AND_FLOW](ARGUMENTATION_CHAIN_AND_FLOW.md)（论证五步法、概念→定理 DAG、文档依赖）。
+**总体评价**：research_notes 与 quick_reference 体系完整、形式化论证充分、与权威来源对齐良好。**六阶段分步方案已全部实施完毕，达成 100% 完成。** 完整总结与论证脉络已补全：[00_COMPREHENSIVE_SUMMARY](../../../research_notes/00_COMPREHENSIVE_SUMMARY.md)（项目全貌、知识地图）、[ARGUMENTATION_CHAIN_AND_FLOW](../../../research_notes/ARGUMENTATION_CHAIN_AND_FLOW.md)（论证五步法、概念→定理 DAG、文档依赖）。
 
 ---
 

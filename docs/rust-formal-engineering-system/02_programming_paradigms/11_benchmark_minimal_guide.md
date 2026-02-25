@@ -16,7 +16,7 @@
 | :--- | :--- | :--- |
 | **性能基准实验** | [../../research_notes/experiments/performance_benchmarks.md](../../research_notes/experiments/performance_benchmarks.md) | 基准测试方法论、统计分析 |
 | **编译器优化** | [../../research_notes/experiments/compiler_optimizations.md](../../research_notes/experiments/compiler_optimizations.md) | 编译器优化分析 |
-| **性能调优指南** | [../05_guides/PERFORMANCE_TUNING_GUIDE.md](../05_guides/PERFORMANCE_TUNING_GUIDE.md) | 实用优化技巧 |
+| **性能调优指南** | [../../05_guides/PERFORMANCE_TUNING_GUIDE.md](../../05_guides/PERFORMANCE_TUNING_GUIDE.md) | 实用优化技巧 |
 | **证明索引** | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) | 性能相关证明 |
 | **工具指南** | [../../research_notes/TOOLS_GUIDE.md](../../research_notes/TOOLS_GUIDE.md) | 基准测试工具使用 |
 
@@ -477,7 +477,7 @@ criterion_main!(benches);
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 性能调优指南 | 实用优化技巧 | [../05_guides/PERFORMANCE_TUNING_GUIDE.md](../05_guides/PERFORMANCE_TUNING_GUIDE.md) |
+| 性能调优指南 | 实用优化技巧 | [../../05_guides/PERFORMANCE_TUNING_GUIDE.md](../../05_guides/PERFORMANCE_TUNING_GUIDE.md) |
 
 ---
 

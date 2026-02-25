@@ -6,7 +6,7 @@
 
 ## 快速决策索引
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                          Rust 测试策略决策入口                                │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -32,7 +32,7 @@
 
 ### 1.1 单元测试 (Unit Tests)
 
-```
+```text
 何时选择单元测试?
 │
 ├─► 测试单个函数或方法的独立行为
@@ -62,7 +62,7 @@ impl Calculator {
     pub fn add(a: i32, b: i32) -> i32 {
         a.saturating_add(b)
     }
-    
+
     pub fn divide(a: f64, b: f64) -> Result<f64, String> {
         if b == 0.0 {
             Err("除数不能为零".to_string())
@@ -108,7 +108,7 @@ mod tests {
             (i32::MAX, 0, i32::MAX),
             (i32::MIN, 0, i32::MIN),
         ];
-        
+
         let calc = Calculator;
         for (a, b, expected) in test_cases {
             assert_eq!(calc.add(a, b), expected, "测试失败: {} + {}", a, b);
@@ -121,7 +121,7 @@ mod tests {
 
 ### 1.2 集成测试 (Integration Tests)
 
-```
+```text
 何时选择集成测试?
 │
 ├─► 验证多个模块的协作行为
@@ -157,18 +157,18 @@ async fn test_user_registration_flow() {
     // Arrange: 设置测试环境
     let db = setup_test_db().await;
     let user_service = UserService::new(Arc::new(db));
-    
+
     // Act: 执行被测操作
     let result = user_service
         .register_user("alice@example.com", "password123")
         .await;
-    
+
     // Assert: 验证结果
     assert!(result.is_ok());
     let user = result.unwrap();
     assert_eq!(user.email, "alice@example.com");
     assert!(user.id > 0);
-    
+
     // 验证数据库状态
     let stored_user = user_service.find_by_email("alice@example.com").await;
     assert!(stored_user.is_some());
@@ -178,17 +178,17 @@ async fn test_user_registration_flow() {
 async fn test_duplicate_email_registration() {
     let db = setup_test_db().await;
     let user_service = UserService::new(Arc::new(db));
-    
+
     // 第一次注册
     let _ = user_service
         .register_user("bob@example.com", "password123")
         .await;
-    
+
     // 重复注册应失败
     let result = user_service
         .register_user("bob@example.com", "different_password")
         .await;
-    
+
     assert!(result.is_err());
     assert!(result.unwrap_err().to_string().contains("已存在"));
 }
@@ -197,20 +197,20 @@ async fn test_duplicate_email_registration() {
 pub async fn setup_test_db() -> Database {
     use std::env;
     use uuid::Uuid;
-    
+
     // 使用唯一的测试数据库名称
     let test_db_name = format!("test_db_{}", Uuid::new_v4());
     let database_url = env::var("DATABASE_URL")
         .unwrap_or_else(|_| "postgres://localhost/test".to_string());
-    
+
     let config = AppConfig {
         database_url: format!("{}/{}", database_url, test_db_name),
         ..Default::default()
     };
-    
+
     let db = Database::connect(&config.database_url).await.unwrap();
     db.run_migrations().await.unwrap();
-    
+
     db
 }
 ```
@@ -219,7 +219,7 @@ pub async fn setup_test_db() -> Database {
 
 ### 1.3 文档测试 (Doc Tests)
 
-```
+```text
 何时选择文档测试?
 │
 ├─► 公共 API 的代码示例
@@ -243,36 +243,36 @@ pub async fn setup_test_db() -> Database {
 
 ```rust
 //! # 数据处理库
-//! 
+//!
 //! 提供高效的数据转换和验证功能。
-//! 
+//!
 //! ## 快速开始
-//! 
+//!
 //! ```
 //! use data_utils::{Validator, DataTransformer};
-//! 
+//!
 //! let validator = Validator::new();
 //! assert!(validator.is_valid_email("user@example.com"));
 //! ```
 
 /// 验证器结构体，用于数据格式验证。
-/// 
+///
 /// # 示例
-/// 
+///
 /// 基本用法：
-/// 
+///
 /// ```
 /// use data_utils::Validator;
-/// 
+///
 /// let validator = Validator::new();
-/// 
+///
 /// // 验证邮箱格式
 /// assert!(validator.is_valid_email("test@example.com"));
 /// assert!(!validator.is_valid_email("invalid-email"));
 /// ```
-/// 
+///
 /// 验证 URL：
-/// 
+///
 /// ```
 /// # use data_utils::Validator;
 /// # let validator = Validator::new();
@@ -283,39 +283,39 @@ pub struct Validator;
 
 impl Validator {
     /// 创建新的验证器实例。
-    /// 
+    ///
     /// # 示例
-    /// 
+    ///
     /// ```
     /// use data_utils::Validator;
-    /// 
+    ///
     /// let validator = Validator::new();
     /// ```
     pub fn new() -> Self {
         Self
     }
-    
+
     /// 验证邮箱地址格式。
-    /// 
+    ///
     /// # 参数
-    /// 
+    ///
     /// * `email` - 待验证的邮箱字符串
-    /// 
+    ///
     /// # 返回
-    /// 
+    ///
     /// 如果格式有效返回 `true`，否则返回 `false`
-    /// 
+    ///
     /// # 示例
-    /// 
+    ///
     /// ```
     /// use data_utils::Validator;
-    /// 
+    ///
     /// let v = Validator::new();
-    /// 
+    ///
     /// // 有效邮箱
     /// assert!(v.is_valid_email("simple@example.com"));
     /// assert!(v.is_valid_email("very.common@example.com"));
-    /// 
+    ///
     /// // 无效邮箱
     /// assert!(!v.is_valid_email(""));
     /// assert!(!v.is_valid_email("@example.com"));
@@ -335,7 +335,7 @@ impl Validator {
 
 ### 1.4 基准测试 (Benchmarks)
 
-```
+```text
 何时选择基准测试?
 │
 ├─► 识别性能瓶颈
@@ -364,44 +364,44 @@ use my_algorithm::{bubble_sort, quick_sort, merge_sort};
 
 fn sorting_benchmark(c: &mut Criterion) {
     let mut group = c.benchmark_group("sorting_algorithms");
-    
+
     // 不同数据规模的测试
     for size in [100, 1_000, 10_000].iter() {
         // 生成随机数据
         let data: Vec<i32> = (0..*size).rev().collect();
-        
+
         group.bench_with_input(
-            BenchmarkId::new("bubble_sort", size), 
-            size, 
+            BenchmarkId::new("bubble_sort", size),
+            size,
             |b, _| {
                 b.iter(|| bubble_sort(black_box(&data)));
             }
         );
-        
+
         group.bench_with_input(
-            BenchmarkId::new("quick_sort", size), 
-            size, 
+            BenchmarkId::new("quick_sort", size),
+            size,
             |b, _| {
                 b.iter(|| quick_sort(black_box(&data)));
             }
         );
-        
+
         group.bench_with_input(
-            BenchmarkId::new("merge_sort", size), 
-            size, 
+            BenchmarkId::new("merge_sort", size),
+            size,
             |b, _| {
                 b.iter(|| merge_sort(black_box(&data)));
             }
         );
     }
-    
+
     group.finish();
 }
 
 // 异步基准测试
 fn async_benchmark(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
-    
+
     c.bench_function("async_database_query", |b| {
         b.to_async(&rt).iter(|| async {
             let db = setup_db().await;
@@ -429,7 +429,7 @@ criterion = { version = "0.5", features = ["async_tokio"] }
 
 ### 1.5 模糊测试 (Fuzz Testing)
 
-```
+```text
 何时选择模糊测试?
 │
 ├─► 解析器和安全关键代码
@@ -501,7 +501,7 @@ cargo fuzz run parser crash-abc123
 
 ### 1.6 属性测试 (Property Testing)
 
-```
+```text
 何时选择属性测试?
 │
 ├─► 数学性质验证
@@ -533,7 +533,7 @@ proptest! {
     fn test_addition_is_commutative(a in -1000i32..=1000, b in -1000i32..=1000) {
         prop_assert_eq!(a + b, b + a);
     }
-    
+
     #[test]
     fn test_serialization_roundtrip(
         user in user_strategy()
@@ -567,11 +567,11 @@ enum Transition {
 impl ReferenceStateMachine for MyStateMachine {
     type State = Self;
     type Transition = Transition;
-    
+
     fn init_state() -> BoxedStrategy<Self::State> {
         Just(Self { items: vec![] }).boxed()
     }
-    
+
     fn transitions(_state: &Self::State) -> BoxedStrategy<Self::Transition> {
         prop_oneof![
             any::<u32>().prop_map(Transition::Push),
@@ -580,7 +580,7 @@ impl ReferenceStateMachine for MyStateMachine {
         ]
         .boxed()
     }
-    
+
     fn apply(state: &Self::State, transition: &Self::Transition) -> Self::State {
         let mut new_state = state.clone();
         match transition {
@@ -600,7 +600,7 @@ impl ReferenceStateMachine for MyStateMachine {
 ### 2.1 工具对比表
 
 | 工具/库 | 用途 | 适用场景 | 学习曲线 | 维护状态 |
-|---------|------|----------|----------|----------|
+| :--- | :--- | :--- | :--- | :--- |
 | **内置 test** | 基础单元/集成测试 | 所有项目 | ⭐ 低 | Rust 内置 |
 | **tokio-test** | 异步运行时测试 | async/await 代码 | ⭐⭐ 中 | 活跃 |
 | **mockall** | 模拟对象生成 | 依赖隔离 | ⭐⭐ 中 | 活跃 |
@@ -628,7 +628,7 @@ async fn test_concurrent_operations() {
     let handles: Vec<_> = (0..10)
         .map(|i| tokio::spawn(async move { process(i).await }))
         .collect();
-    
+
     for handle in handles {
         assert!(handle.await.is_ok());
     }
@@ -641,7 +641,7 @@ async fn test_with_timeout() {
         Duration::from_secs(1),
         slow_operation()
     ).await;
-    
+
     assert!(result.is_ok(), "操作超时");
 }
 
@@ -649,16 +649,16 @@ async fn test_with_timeout() {
 #[tokio::test]
 async fn test_timer_behavior() {
     tokio::time::pause();
-    
+
     let start = tokio::time::Instant::now();
     let timeout = tokio::time::timeout(
         Duration::from_secs(60),
         tokio::time::sleep(Duration::from_secs(30))
     );
-    
+
     // 手动推进时间
     tokio::time::advance(Duration::from_secs(30)).await;
-    
+
     assert!(timeout.await.is_ok());
     assert_eq!(start.elapsed(), Duration::from_secs(30));
 }
@@ -682,53 +682,53 @@ pub trait Database {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_user_service_with_mock() {
         let mut mock_db = MockDatabase::new();
-        
+
         // 设置预期行为
         mock_db
             .expect_get_user()
             .with(eq(42))
             .times(1)
             .returning(|_| Some(User { id: 42, name: "Alice".to_string() }));
-        
+
         mock_db
             .expect_save_user()
             .withf(|user| user.name.len() > 0)
             .times(1)
             .returning(|_| Ok(()));
-        
+
         let service = UserService::new(mock_db);
         let user = service.find_user(42).unwrap();
         assert_eq!(user.name, "Alice");
     }
-    
+
     // 异步模拟
     #[tokio::test]
     async fn test_async_mock() {
         let mut mock_db = MockDatabase::new();
-        
+
         mock_db
             .expect_async_query()
             .with(eq("SELECT * FROM users"))
             .returning(|_| vec![]);
-        
+
         let result = mock_db.async_query("SELECT * FROM users").await;
         assert!(result.is_empty());
     }
-    
+
     // 序列模拟
     #[test]
     fn test_sequential_calls() {
         let mut mock_db = MockDatabase::new();
-        
+
         mock_db
             .expect_get_user()
             .times(3)
             .returning(|id| Some(User { id, name: format!("User{}", id) }));
-        
+
         // 连续调用返回不同值
         assert_eq!(mock_db.get_user(1).unwrap().name, "User1");
         assert_eq!(mock_db.get_user(2).unwrap().name, "User2");
@@ -768,7 +768,7 @@ fn test_api_response_format() {
         total: 2,
         page: 1,
     };
-    
+
     // 自动创建和管理快照文件
     assert_snapshot!(serde_json::to_string_pretty(&response).unwrap());
 }
@@ -837,12 +837,12 @@ fn configure_benchmark(group: &mut BenchmarkGroup<WallTime>) {
 fn bench_database_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("db_operations");
     configure_benchmark(&mut group);
-    
+
     group.bench_function("insert", |b| {
         let db = setup_test_database();
         b.iter(|| db.insert(generate_random_user()));
     });
-    
+
     group.bench_function("query_by_id", |b| {
         let db = setup_test_database_with_data(1000);
         let mut i = 0;
@@ -851,7 +851,7 @@ fn bench_database_operations(c: &mut Criterion) {
             db.query_by_id(i)
         });
     });
-    
+
     group.finish();
 }
 
@@ -880,17 +880,17 @@ criterion_main!(benches);
 
 ### 3.1 测试金字塔
 
-```
+```text
                     ▲
                    /│\
                   / │ \         E2E 测试 (5%)
                  /  │  \        - 完整用户场景
                 /   │   \       - 慢，但覆盖关键路径
-               /────┼────\      
+               /────┼────\
               /     │     \     集成测试 (15%)
              /      │      \    - 模块间协作
             /       │       \   - 数据库/外部服务
-           /────────┼────────\  
+           /────────┼────────\
           /         │         \ 单元测试 (80%)
          /          │          \- 快速反馈
         /           │           \- 高覆盖率
@@ -899,7 +899,7 @@ criterion_main!(benches);
 
 **Rust 项目金字塔实现：**
 
-```
+```text
 my_project/
 ├── src/
 │   └── *.rs          # 单元测试 (#[cfg(test)])
@@ -916,7 +916,7 @@ my_project/
 ### 3.2 覆盖率目标
 
 | 层级 | 目标 | 工具 | 备注 |
-|------|------|------|------|
+| :--- | :--- | :--- | :--- |
 | **行覆盖率** | ≥80% | cargo-tarpaulin | 核心业务逻辑 ≥90% |
 | **分支覆盖率** | ≥70% | cargo-tarpaulin | 关键决策路径 |
 | **函数覆盖率** | ≥90% | llvm-cov | 公共 API 100% |
@@ -951,13 +951,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install tarpaulin
         run: cargo install cargo-tarpaulin
-      
+
       - name: Generate coverage
         run: cargo tarpaulin --out Xml --out Html
-      
+
       - name: Upload to Codecov
         uses: codecov/codecov-action@v3
         with:
@@ -989,13 +989,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-      
+
       - name: Format check
         run: cargo fmt --check
-      
+
       - name: Clippy lint
         run: cargo clippy --all-targets --all-features -- -D warnings
-      
+
       - name: Unit tests
         run: cargo test --lib -- --test-threads=$(nproc)
 
@@ -1012,13 +1012,13 @@ jobs:
         with:
           toolchain: ${{ matrix.rust }}
       - uses: Swatinem/rust-cache@v2
-      
+
       - name: Run all tests
         run: cargo test --all-features
-      
+
       - name: Documentation tests
         run: cargo test --doc
-      
+
       - name: Build documentation
         run: cargo doc --no-deps
 
@@ -1051,16 +1051,16 @@ use criterion::{criterion_group, criterion_main, Criterion};
 
 fn critical_path_benchmark(c: &mut Criterion) {
     let mut group = c.benchmark_group("critical_path");
-    
+
     // 设置严格的性能阈值
     group.significance_level(0.05)
          .sample_size(500);
-    
+
     group.bench_function("parse_large_file", |b| {
         let data = generate_test_data(10_000);
         b.iter(|| parser::parse(&data));
     });
-    
+
     // 对比基线性能
     group.bench_function("current_impl", |b| {
         b.iter_batched(
@@ -1069,7 +1069,7 @@ fn critical_path_benchmark(c: &mut Criterion) {
             criterion::BatchSize::SmallInput
         );
     });
-    
+
     group.finish();
 }
 
@@ -1089,7 +1089,7 @@ criterion_main!(benches);
 
 ### 4.1 测试组织结构
 
-```
+```text
 crates/
 ├── core/
 │   ├── src/
@@ -1166,7 +1166,7 @@ impl UserFactory {
             role: Role::Admin,
         }
     }
-    
+
     pub fn user() -> User {
         User {
             id: rand::random(),
@@ -1174,7 +1174,7 @@ impl UserFactory {
             role: Role::User,
         }
     }
-    
+
     pub fn with_email(email: &str) -> User {
         User {
             id: rand::random(),
@@ -1216,7 +1216,7 @@ async fn concurrent_test() {
     let handles: Vec<_> = (0..10)
         .map(|i| tokio::spawn(async move { process(i).await }))
         .collect();
-    
+
     let results = futures::future::join_all(handles).await;
     assert!(results.iter().all(|r| r.is_ok()));
 }
@@ -1228,7 +1228,7 @@ async fn test_with_timeout() {
         Duration::from_secs(5),
         potentially_slow_operation()
     ).await;
-    
+
     assert!(result.is_ok(), "操作超时");
 }
 
@@ -1236,18 +1236,18 @@ async fn test_with_timeout() {
 #[tokio::test]
 async fn test_time_based_logic() {
     tokio::time::pause();
-    
+
     let start = Instant::now();
     let handle = tokio::spawn(async {
         tokio::time::sleep(Duration::from_secs(60)).await;
     });
-    
+
     tokio::time::advance(Duration::from_secs(30)).await;
     assert!(!handle.is_finished());
-    
+
     tokio::time::advance(Duration::from_secs(30)).await;
     assert!(handle.is_finished());
-    
+
     assert_eq!(start.elapsed(), Duration::from_secs(60));
 }
 
@@ -1258,7 +1258,7 @@ use tokio::sync::RwLock;
 #[tokio::test]
 async fn test_shared_state() {
     let state = Arc::new(RwLock::new(Vec::new()));
-    
+
     let mut handles = vec![];
     for i in 0..100 {
         let state = Arc::clone(&state);
@@ -1267,11 +1267,11 @@ async fn test_shared_state() {
             guard.push(i);
         }));
     }
-    
+
     for handle in handles {
         handle.await.unwrap();
     }
-    
+
     let final_state = state.read().await;
     assert_eq!(final_state.len(), 100);
 }
@@ -1281,37 +1281,37 @@ async fn test_shared_state() {
 
 ```rust
 /// # 测试说明
-/// 
+///
 /// ## 正常场景
 /// ```
 /// use my_crate::Parser;
-/// 
+///
 /// let parser = Parser::new();
 /// let result = parser.parse("valid input");
 /// assert!(result.is_ok());
 /// ```
-/// 
+///
 /// ## 边界条件
 /// ```
 /// use my_crate::Parser;
-/// 
+///
 /// let parser = Parser::new();
-/// 
+///
 /// // 空输入
 /// assert!(parser.parse("").is_err());
-/// 
+///
 /// // 超长输入
 /// let long_input = "x".repeat(10000);
 /// assert!(parser.parse(&long_input).is_err());
 /// ```
-/// 
+///
 /// ## 错误处理
 /// ```
 /// use my_crate::Parser;
-/// 
+///
 /// let parser = Parser::new();
 /// let err = parser.parse("invalid").unwrap_err();
-/// 
+///
 /// assert!(matches!(err, ParseError::InvalidFormat));
 /// ```
 pub struct Parser;
@@ -1320,9 +1320,9 @@ pub struct Parser;
 #[cfg(test)]
 mod test_documentation {
     //! ## 测试覆盖矩阵
-    //! 
+    //!
     //! | 功能 | 单元测试 | 集成测试 | 文档测试 |
-    //! |------|---------|---------|---------|
+    //! | :--- | :--- | :--- | :--- |
     //! | 解析 | ✅ | ✅ | ✅ |
     //! | 验证 | ✅ | ✅ | ❌ |
     //! | 序列化 | ✅ | ❌ | ✅ |
@@ -1337,7 +1337,7 @@ mod test_documentation {
 
 ## 五、决策流程图
 
-```
+```text
 开始测试规划
       │
       ▼
@@ -1414,7 +1414,7 @@ cargo flamegraph
 ### 6.2 常用属性
 
 | 属性 | 用途 |
-|------|------|
+| :--- | :--- |
 | `#[test]` | 标记测试函数 |
 | `#[ignore]` | 跳过测试 |
 | `#[should_panic]` | 预期 panic |
@@ -1480,9 +1480,9 @@ harness = false
 #[cfg(test)]
 pub mod test_config {
     use std::sync::Once;
-    
+
     static INIT: Once = Once::new();
-    
+
     pub fn setup() {
         INIT.call_once(|| {
             // 初始化日志
@@ -1490,10 +1490,10 @@ pub mod test_config {
                 .is_test(true)
                 .filter_level(log::LevelFilter::Debug)
                 .try_init();
-            
+
             // 设置测试环境变量
             std::env::set_var("TEST_MODE", "true");
-            
+
             // 初始化资源
         });
     }
@@ -1513,5 +1513,5 @@ pub mod test_config {
 
 ---
 
-*文档版本: 1.0*  
+*文档版本: 1.0*
 *最后更新: 2026-02-21*

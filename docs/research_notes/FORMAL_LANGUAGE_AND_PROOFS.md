@@ -21,7 +21,7 @@
 | **操作语义** | $e \to e'$、$S \xrightarrow{op} S'$ | 小步归约、状态转换 |
 | **形式证明** | 归纳、反证、推导树 | 定理的数学证明 |
 
-**与 Coq 的关系**：形式语言为**规范层**；Coq 骨架为**实现层**；两者陈述一致。
+**与 Rust 的衔接**：形式语言为**数学规范层**；Rust 示例为**实现层**；见 [THEOREM_RUST_EXAMPLE_MAPPING](./THEOREM_RUST_EXAMPLE_MAPPING.md)。
 
 ---
 

@@ -11,10 +11,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [Abstract Factory 形式化分析](#abstract-factory-形式化分析)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Abstract Factory 结构）](#def-11abstract-factory-结构)
     - [Axiom AF1（产品族一致性公理）](#axiom-af1产品族一致性公理)

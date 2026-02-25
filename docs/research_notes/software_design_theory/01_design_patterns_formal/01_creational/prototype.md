@@ -11,10 +11,10 @@
 
 ---
 
-## 📊 目录
+## 📊 目录 {#-目录}
 
 - [Prototype 形式化分析](#prototype-形式化分析)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Prototype 结构）](#def-11prototype-结构)
     - [Axiom P1（独立副本公理）](#axiom-p1独立副本公理)
@@ -185,7 +185,7 @@ let copy = tree.clone();  // 递归 clone
 
 ### 形式化论证链
 
-```
+```text
 Axiom P1 (独立副本)
     ↓ 依赖
 type_system 类型保持
@@ -276,7 +276,7 @@ impl Clone for BadNode {
 | 调用方式 | 隐式 | 显式 `.clone()` |
 | 语义 | 位复制 | 逻辑复制 |
 | 堆分配 | 无 | 可有 |
-|  trait 关系 | `Copy: Clone` | 基 trait |
+| trait 关系 | `Copy: Clone` | 基 trait |
 
 ---
 
