@@ -68,7 +68,12 @@
 
 **形式化定义**（数学风格）:
 
-**Def WF1（工作流状态）**：$\mathit{WorkflowState} \in \{\mathrm{Created}, \mathrm{Running}(s), \mathrm{Waiting}(e), \mathrm{Compensating}(f), \mathrm{Completed}(r), \mathrm{Failed}(e), \mathrm{Cancelled}\}$。状态转换由事件驱动；见 [04_expressiveness_boundary](../../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md)。
+**Def WF1（工作流状态）**：
+$
+\mathit{WorkflowState} \in \{\mathrm{Created}, \mathrm{Running}(s), \mathrm{Waiting}(e), \mathrm{Compensating}(f), \mathrm{Completed}(r), \mathrm{Failed}(e), \mathrm{Cancelled}\}
+$。
+状态转换由事件驱动；
+见 [04_expressiveness_boundary](../../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md)。
 
 ---
 
@@ -198,7 +203,7 @@ Comp3(undo) <- Comp2(undo) <- Comp1(undo)
 
 ## 与其他概念族的关系
 
-```
+```text
                     工作流概念族
                            │
         ┌──────────────────┼──────────────────┐

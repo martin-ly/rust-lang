@@ -6,7 +6,7 @@
 
 ## Send与Sync
 
-```
+```text
 Send: 可跨线程转移所有权
 Sync: 可安全跨线程共享(&T: Send)
 

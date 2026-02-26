@@ -22,7 +22,6 @@
     - [2. MaybeUninit 安全性证明树](#2-maybeuninit-安全性证明树)
     - [3. 借用检查器安全性证明树](#3-借用检查器安全性证明树)
     - [4. 生命周期安全性证明树](#4-生命周期安全性证明树)
-  - [5. 异步证明树](#-异步证明树-异步证明树)
   - [🛡️ 内存安全证明树 {#️-内存安全证明树}](#️-内存安全证明树-️-内存安全证明树)
     - [内存安全定理](#内存安全定理)
     - [无数据竞争证明](#无数据竞争证明)
@@ -32,6 +31,8 @@
     - [类型安全定理](#类型安全定理)
     - [类型一致性证明](#类型一致性证明)
     - [泛型单态化正确性证明](#泛型单态化正确性证明)
+  - [⚡ 异步证明树 {#-异步证明树}](#-异步证明树--异步证明树)
+    - [异步 Future 安全性证明树](#异步-future-安全性证明树)
   - [🧵 并发安全证明树 {#-并发安全证明树}](#-并发安全证明树--并发安全证明树)
     - [Send/Sync 安全性证明](#sendsync-安全性证明)
     - [互斥访问保证证明](#互斥访问保证证明)
@@ -323,6 +324,7 @@ graph TD
 ## 🛡️ 内存安全证明树 {#️-内存安全证明树}
 
 **形式化对应**:
+
 - 所有权: [ownership_model](../research_notes/formal_methods/ownership_model.md) 定理 T2（唯一性）、T3（内存安全）
 - 借用: [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) 定理 T1
 - 类型: [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) 定理 T1–T3
