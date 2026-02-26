@@ -214,7 +214,8 @@ if let Some(value) = map.get("key1") {
 
 ### BTreeMap/BTreeSet 与 append（Rust 1.93）
 
-**Rust 1.93 行为变更**：`BTreeMap::append` 和 `BTreeSet` 相关 append 操作不再更新目标中已存在的 key。若源与目标有相同 key，保留目标原有条目。需覆盖时使用 `insert` 或 `entry` API。
+**Rust 1.93 行为变更**：`BTreeMap::append` 和 `BTreeSet` 相关 append 操作不再更新目标中已存在的 key。
+若源与目标有相同 key，保留目标原有条目。需覆盖时使用 `insert` 或 `entry` API。
 
 ---
 

@@ -1,9 +1,10 @@
 # Send/Sync 形式化
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-20
+> **最后更新**: 2026-02-27
+> **更新内容**: 添加 Send/Sync 自动实现规则定义
 > **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **状态**: ✅ 已完成 (Week 2 任务 P1-W2-T3)
 > **并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 6 行（Send/Sync）
 
 ---
@@ -82,7 +83,45 @@ $$\text{Sync}(\tau) \leftrightarrow \forall t.\ \text{SafeShare}(\& \tau, t)$$
 
 其中 $\text{SafeShare}(\& \tau, t)$ 表示：在任意线程 $t$ 上持有 $\& \tau$ 时，与其他线程对同一 $\tau$ 的访问不构成数据竞争（无并发写或未同步的读写）。
 
-<a id="sendsync-关系"></a>**等价形式（Rust 标准）**：
+**Def 2.2（Send 自动实现规则）**：对于类型 $\tau$，若其所有字段类型均满足 `Send`，则编译器自动为 $\tau$ 实现 `Send` trait。形式化表述：
+
+$$\text{AutoSend}(\tau) \leftrightarrow \forall f \in \text{Fields}(\tau).\ \text{Send}(\text{type}(f))$$
+
+其中 $\text{Fields}(\tau)$ 表示类型 $\tau$ 的所有字段集合，$\text{type}(f)$ 表示字段 $f$ 的类型。特殊情形：
+
+- 原始类型（`i32`、`bool`、指针等）自动实现 `Send`
+- `PhantomData<T>` 自动实现 `Send` 当且仅当 $T : \text{Send}$
+- 手动实现 `!Send`（负实现）可阻止自动派生
+
+**Def 2.3（Sync 自动实现规则）**：对于类型 $\tau$，若其所有字段类型均满足 `Sync`，则编译器自动为 $\tau$ 实现 `Sync` trait。形式化表述：
+
+$$\text{AutoSync}(\tau) \leftrightarrow \forall f \in \text{Fields}(\tau).\ \text{Sync}(\text{type}(f))$$
+
+特殊情形：
+
+- 原始类型自动实现 `Sync`
+- `PhantomData<T>` 自动实现 `Sync` 当且仅当 $T : \text{Sync}$
+- 包含内部可变性（如 `Cell<T>`、`RefCell<T>`）的类型默认不实现 `Sync`
+- 手动实现 `!Sync` 可阻止自动派生
+
+**Def 2.4（组合类型的 Send/Sync 推导）**：对于组合类型（结构体、枚举、联合体），其 `Send` 和 `Sync` 实现遵循以下推导规则：
+
+| 组合类型 | Send 条件 | Sync 条件 |
+|:---------|:----------|:----------|
+| `struct S { f1: T1, ..., fn: Tn }` | $\forall i.\ T_i : \text{Send}$ | $\forall i.\ T_i : \text{Sync}$ |
+| `enum E { V1(T1), ..., Vn(Tn) }` | $\forall i.\ T_i : \text{Send}$ | $\forall i.\ T_i : \text{Sync}$ |
+| `union U { f1: T1, ..., fn: Tn }` | $\forall i.\ T_i : \text{Send}$ | $\forall i.\ T_i : \text{Sync}$ |
+| `&T` | $T : \text{Sync}$ | $T : \text{Sync}$ |
+| `&mut T` | $T : \text{Send}$ | $T : \text{Sync}$ |
+| `Box<T>` | $T : \text{Send}$ | $T : \text{Sync}$ |
+| `Option<T>` | $T : \text{Send}$ | $T : \text{Sync}$ |
+| `Result<T, E>` | $T : \text{Send} \land E : \text{Send}$ | $T : \text{Sync} \land E : \text{Sync}$ |
+| `Vec<T>` | $T : \text{Send}$ | $T : \text{Sync}$ |
+| `Arc<T>` | $T : \text{Send} + \text{Sync}$ | $T : \text{Send} + \text{Sync}$ |
+
+*推导原理*：组合类型的线程安全性由其组成部分的线程安全性决定。若所有组成部分均可安全跨线程转移/共享，则组合类型亦然。
+
+<a id="sendsync-关系"></a>**等价形式（Rust 标准）**:
 
 $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
@@ -183,5 +222,6 @@ Def SEND1, SYNC1
 ---
 
 **维护者**: Rust Formal Methods Research Group
-**最后更新**: 2026-02-14
-**状态**: ✅ 已完成 (100%)
+**最后更新**: 2026-02-27
+**更新内容**: 添加 Send/Sync 自动实现规则定义
+**状态**: ✅ 已完成 (Week 2 任务 P1-W2-T3)

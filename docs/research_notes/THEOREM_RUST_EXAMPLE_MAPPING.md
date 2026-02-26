@@ -1,9 +1,10 @@
 # 定理与 Rust 示例映射表
 
 > **创建日期**: 2026-02-26
-> **最后更新**: 2026-02-26
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-27
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **用途**: 形式化定理 ↔ crates 示例双向映射，支撑「数学风格论证 + Rust 示例」衔接
+> **状态**: ✅ 已完成 (Week 1 任务 P1-W1-T4) - 新增 Send/Sync/Pin/数据竞争/同步原语/生命周期映射
 > **上位文档**: [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)、[PROOF_INDEX](./PROOF_INDEX.md)
 
 ---
@@ -14,12 +15,19 @@
 | :--- | :--- | :--- | :--- | :--- |
 | T-OW2 | 所有权唯一性 | c01_ownership_borrow_scope | moving02.rs, rust_192_features_demo.rs | 移动语义、唯一所有者 |
 | T-OW3 | 内存安全框架 | c01_ownership_borrow_scope | 各 moving/borrow 示例 | 无悬垂、无双重释放 |
+| T-OW6 | Send 安全 | c05_threads | thread_spawn_examples.rs | 跨线程转移所有权 |
+| T-OW7 | Sync 安全 | c05_threads | arc_mutex_examples.rs | 多线程共享安全 |
+| T-OW8 | Pin 不动性 | c06_async | pin_examples.rs | 自引用结构 |
 | T-BR1 | 数据竞争自由 | c01_ownership_borrow_scope, c05_threads | borrow 示例、send_sync 示例 | 借用规则、Arc/Mutex |
+| T-BR6 | 数据竞争定义 | c05_threads | data_race_examples.rs | 并发访问冲突 |
+| T-BR7 | 同步原语 | c05_threads | mutex_rwlock_examples.rs | Mutex/RwLock/Atomic |
 | T-TY1 | 进展性 | c02_type_system | type_equivalence_newtype_examples.rs | 良类型可求值 |
 | T-TY2 | 保持性 | c02_type_system | 各类型示例 | 求值保持类型 |
 | T-TY3 | 类型安全 | c02_type_system | never_type_control_flow.rs | 进展+保持 |
 | T-LF1 | 生命周期包含 | c01, c02 | lifetimes_examples | outlives 关系 |
 | T-LF2 | 引用有效性 | c01_ownership_borrow_scope | borrow 相关示例 | 无悬垂引用 |
+| T-LF4 | 生命周期边界 | c01_ownership_borrow_scope | nll_examples.rs | NLL 非词法生命周期 |
+| T-LF5 | 生命周期参数 | c02_type_system | generic_lifetimes_examples.rs | 泛型生命周期约束 |
 | SEND-T1 | Send 安全 | c05_threads | 各 thread::spawn 示例 | 跨线程转移 |
 | SYNC-T1 | Sync 安全 | c05_threads | Arc/Mutex 示例 | 多线程共享 |
 | T-ASYNC1 | Future 安全性 | c06_async | futures_smoke.rs, async 示例 | 异步状态机 |

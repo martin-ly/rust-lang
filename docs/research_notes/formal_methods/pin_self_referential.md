@@ -1,9 +1,10 @@
 # Pin 和自引用类型形式化
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
+> **最后更新**: 2026-02-27
+> **更新内容**: 添加 Unpin/Drop/投影规则定义
 > **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **状态**: ✅ 已完成 (Week 2 任务 P1-W2-T4)
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 5 行（Pin）
 
 ---
@@ -27,6 +28,9 @@
     - [1. Pin 类型形式化](#1-pin-类型形式化)
     - [2. 自引用类型形式化](#2-自引用类型形式化)
     - [3. Pin 保证](#3-pin-保证)
+    - [3.1 Unpin Trait 定义](#31-unpin-trait-定义)
+    - [3.2 Drop 与 Pin 的交互](#32-drop-与-pin-的交互)
+    - [3.3 Pin 投影规则](#33-pin-投影规则)
     - [Rust 对应](#rust-对应)
   - [⚠️ 反例：违反 Pin 规则 {#️-反例违反-pin-规则}](#️-反例违反-pin-规则-️-反例违反-pin-规则)
   - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
@@ -192,6 +196,92 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 - Pin 投影需要满足特定的安全条件
 - 这些条件保证投影后的字段仍然满足 Pin 保证
 - 自引用类型的安全性依赖于 Pin 保证
+
+### 3.1 Unpin Trait 定义
+
+**定义 3.1 (Unpin Trait)**: `Unpin` 是一个 marker trait，表示类型可以安全移动。
+
+$$
+\text{Unpin}(T) \triangleq \forall t: T.\ \text{move}(t) \text{ 不会破坏内存安全性}
+$$
+
+**Unpin 语义**:
+
+- 大多数 Rust 类型自动实现 `Unpin`（auto trait）
+- `!Unpin` 类型需显式标记（如使用 `PhantomPinned`）
+- 实现 `Unpin` 不需要 unsafe，但撤销 `Unpin` 需要 unsafe
+
+**形式化规则**:
+
+$$
+\frac{T : \text{Unpin}}{\text{Pin}[\&mut T] \Rightarrow \text{允许移动}} \quad \text{(Unpin-允许移动)}
+$$
+
+$$
+\frac{T \not: \text{Unpin}}{\text{Pin}[\&mut T] \Rightarrow \neg \text{move}(T)} \quad \text{(!Unpin-禁止移动)}
+$$
+
+### 3.2 Drop 与 Pin 的交互
+
+**定义 3.2 (Drop 与 Pin 的交互)**: 对于被 Pin 的类型，Drop 的实现必须遵守特定的安全契约。
+
+**Drop 保证**:
+
+- 如果 $T \not: \text{Unpin}$，则 `Drop::drop` 接收 `Pin<&mut T>`
+- 在 Drop 执行期间，被 Pin 的值仍然保证内存位置稳定
+- Drop 实现不能移动被 Pin 的值
+
+**形式化**:
+
+$$
+\text{PinDrop}(T) \triangleq \begin{cases}
+\text{drop}(\text{Pin}[\&mut T]) & \text{if } T \not: \text{Unpin} \\
+\text{drop}(\&mut T) & \text{if } T : \text{Unpin}
+\end{cases}
+$$
+
+**安全条件**:
+
+$$
+\forall t: T \text{ where } T \not: \text{Unpin},\ \text{Pin}[\Box[T]] \Rightarrow \text{drop}(t) \text{ 期间 } \neg \text{move}(t)
+$$
+
+### 3.3 Pin 投影规则
+
+**定义 3.3 (Pin 投影规则)**: Pin 投影是指从被 Pin 的结构体中获取被 Pin 的字段的安全转换。
+
+**投影不变式**:
+给定结构体 $S = \{\text{field}_1: T_1, \ldots, \text{field}_n: T_n\}$ 和 $\text{Pin}[\&mut S]$：
+
+$$
+\text{Project}(\text{Pin}[\&mut S], \text{field}_i) \rightarrow \text{Pin}[\&mut T_i]
+$$
+
+**投影安全条件**:
+
+1. **结构稳定性**: 投影的字段在结构体中的偏移量固定
+2. **生命周期约束**: 投影后字段的生命周期不超过原 Pin
+3. **Pin 保持**: 若 $T_i \not: \text{Unpin}$，投影结果仍为 `Pin<&mut T_i>`
+
+**形式化规则**:
+
+$$
+\frac{
+  \text{Pin}[\&mut S] \quad S.\text{field}_i : T_i \quad T_i \text{ 位置稳定}
+}{
+  \text{unsafe } \text{map_unchecked_mut}(|s| \&mut s.\text{field}_i) : \text{Pin}[\&mut T_i]
+} \quad \text{(Pin-投影)}
+$$
+
+**投影方法**:
+
+- `map_unchecked_mut`: 不安全投影，需调用者保证安全性
+- `pin_project!` 宏: 安全投影，自动生成安全的投影代码
+
+**投影与结构pinning**:
+
+- 若结构体 $S \not: \text{Unpin}$，则其字段也视为受 Pin 保护
+- 投影操作不改变值的内存位置，仅改变访问路径
 
 ---
 
@@ -562,7 +652,8 @@ async fn use_future() {
 ---
 
 **维护者**: Rust Formal Methods Research Group
-**最后更新**: 2026-02-14
-**状态**: ✅ **已完成** (100%)
+**最后更新**: 2026-02-27
+**更新内容**: 添加 Unpin/Drop/投影规则定义
+**状态**: ✅ **已完成** (Week 2 任务 P1-W2-T4)
 
 **国际权威对标**：[Rust RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)、[std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)；[FLS Ch. 17.3](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation) Asynchronous Computation。

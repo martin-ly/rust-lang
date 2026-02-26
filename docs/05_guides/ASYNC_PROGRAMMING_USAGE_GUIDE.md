@@ -50,6 +50,7 @@
     - [问题 4: 忘记处理 Cancel Safety](#问题-4-忘记处理-cancel-safety)
     - [问题 5: 递归 async 函数](#问题-5-递归-async-函数)
   - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
+  - [🔗 形式化引用](#-形式化引用)
 
 ---
 
@@ -1168,6 +1169,23 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 
 ---
 
+## 🔗 形式化引用
+
+本指南中的概念与以下形式化定理/定义对应：
+
+| 概念 | 形式化定义/定理 | 文档 |
+| :--- | :--- | :--- |
+| Future Trait | Def 5.1 (Future Trait) | [async_state_machine.md](../research_notes/formal_methods/async_state_machine.md) |
+| Poll 类型 | Def 5.2 (Poll) | [async_state_machine.md](../research_notes/formal_methods/async_state_machine.md) |
+| Waker 机制 | Def 5.3 (Waker) | [async_state_machine.md](../research_notes/formal_methods/async_state_machine.md) |
+| Pin 不动性 | T-PIN1 (Pin 不动性) | [pin_self_referential.md](../research_notes/formal_methods/pin_self_referential.md) |
+| Send/Sync 安全 | SEND-T1/SYNC-T1 | [send_sync_formalization.md](../research_notes/formal_methods/send_sync_formalization.md) |
+| 异步状态机 | T6.1-T6.3 | [async_state_machine.md](../research_notes/formal_methods/async_state_machine.md) |
+
+**定理引用说明**: 本指南中的异步模式实现基于上述形式化定理保证。例如，`Future` 必须实现 `Send` 才能跨线程传递 (SEND-T1)；`Pin` 保证自引用结构安全 (T-PIN1)。
+
+---
+
 **维护者**: Rust 学习项目团队
-**状态**: ✅ 完整实现
-**最后更新**: 2026-02-20
+**状态**: ✅ 完整实现 (Week 15 形式化引用补全)
+**最后更新**: 2026-02-27

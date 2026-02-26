@@ -1,10 +1,10 @@
 # 借用检查器证明
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
-> **更新内容**: 添加 CMU 15-799 并发验证课程内容对齐
-> **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **最后更新**: 2026-02-27
+> **更新内容**: 添加数据竞争完整定义 (Def 1.6)；添加同步原语定义 (Def 1.7)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成 (Week 1 任务 P1-W1-T2)
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 2 行（借用）
 
 ---
@@ -552,6 +552,35 @@ $$\text{Compatible}(b_1, b_2) \leftrightarrow (T(b_1) = Immutable \land T(b_2) =
 - $S \in \mathcal{S}$：当前借用状态
 
 **解释**：程序状态完整描述了程序执行时的类型、所有权和借用信息。
+
+---
+
+**Def 1.6 (数据竞争)**：数据竞争发生在两个线程 $t_1$ 和 $t_2$ 同时访问同一内存位置 $m$，且至少有一个是写操作，且没有同步：
+
+$$\text{DataRace}(m, t_1, t_2) \leftrightarrow \text{Concurrent}(t_1, t_2) \land \text{Access}(t_1, m) \land \text{Access}(t_2, m) \land (\text{Write}(t_1, m) \lor \text{Write}(t_2, m)) \land \neg\text{Synchronized}(t_1, t_2)$$
+
+其中：
+
+- $\text{Concurrent}(t_1, t_2)$：线程并发执行
+- $\text{Access}(t, m)$：线程 $t$ 访问内存 $m$
+- $\text{Write}(t, m)$：线程 $t$ 写入内存 $m$
+- $\text{Synchronized}(t_1, t_2)$：线程间有同步
+
+**解释**：数据竞争是并发程序中的未定义行为源。Rust 借用检查器通过所有权和借用规则在编译时防止数据竞争。
+
+---
+
+**Def 1.7 (同步原语)**：同步原语 $\mathcal{Sync}$ 包括：
+
+- $\text{Mutex}(m)$：互斥锁保护内存 $m$
+- $\text{RwLock}(m)$：读写锁保护内存 $m$
+- $\text{Atomic}(m)$：原子操作访问内存 $m$
+- $\text{Barrier}(T)$：线程屏障同步线程集合 $T$
+
+**同步语义**：
+$$\text{Synchronized}(t_1, t_2) \leftrightarrow \exists s \in \mathcal{Sync}: \text{Uses}(t_1, s) \land \text{Uses}(t_2, s)$$
+
+**解释**：同步原语确保线程间有序访问共享内存，防止数据竞争。
 
 ---
 

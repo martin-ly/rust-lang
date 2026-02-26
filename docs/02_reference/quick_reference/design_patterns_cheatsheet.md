@@ -547,7 +547,8 @@ let c = Config::builder().build();  // ❌ 必填 host 未设置
 
 ## 🧩 相关示例代码 {#-相关示例代码}
 
-以下示例位于 `crates/c09_design_pattern/examples/`，可直接运行（例如：`cargo run -p c09_design_pattern --example oncelock_singleton_comprehensive`）。
+以下示例位于 `crates/c09_design_pattern/examples/`，
+可直接运行（例如：`cargo run -p c09_design_pattern --example oncelock_singleton_comprehensive`）。
 
 - [单例与 OnceLock](../../../crates/c09_design_pattern/examples/oncelock_singleton_comprehensive.rs)
 - [事件总线](../../../crates/c09_design_pattern/examples/event_bus_demo.rs)

@@ -1,10 +1,10 @@
 # 所有权模型形式化
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
-> **更新内容**: 添加 Stanford CS110L、CMU 15-799 课程内容对齐；添加 POPL 论文对齐 (Patina、Verus、Prusti)；添加 ICFP 和 OOPSLA 论文对齐
-> **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **最后更新**: 2026-02-27
+> **更新内容**: 添加 Send/Sync/Pin 形式化定义 (Def 3.1–3.3)；添加智能指针所有权定义 (Def 4.1–4.4)；定理编号更新
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成 (Week 1 任务 P1-W1-T1)
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 1 行（所有权）
 
 ---
@@ -76,7 +76,9 @@
   - [🔬 形式化定义](#-形式化定义)
     - [1. 值与环境](#1-值与环境)
     - [2. 所有权规则](#2-所有权规则)
-    - [3. 内存安全](#3-内存安全)
+    - [3. 线程安全与并发所有权](#3-线程安全与并发所有权)
+    - [4. 智能指针所有权](#4-智能指针所有权)
+    - [5. 内存安全](#5-内存安全)
     - [Rust 对应](#rust-对应)
   - [⚠️ 反例：违反所有权规则 {#️-反例违反所有权规则}](#️-反例违反所有权规则-️-反例违反所有权规则)
   - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
@@ -404,7 +406,7 @@ $$
 
 - 与 Def 1.3（所有权环境）兼容
 - 与规则 8（借用作用域）一致
-- 强化定理 3（无悬垂指针）的保证
+- 强化定理 7（无悬垂指针）的保证
 
 #### 3. 函数式翻译与所有权
 
@@ -458,8 +460,8 @@ $$
 
 | 本文档定理 | Aeneas 保证 | 说明 |
 | :--- | :--- | :--- |
-| 定理 2 (所有权唯一性) | 翻译后单射参数 | 函数式单射性 |
-| 定理 3 (内存安全) | 类型保持 + 无UB | 翻译保持安全 |
+| 定理 6 (所有权唯一性) | 翻译后单射参数 | 函数式单射性 |
+| 定理 7 (内存安全) | 类型保持 + 无UB | 翻译保持安全 |
 | 规则 6-8 (借用规则) | 预言变量约束 | CPV 编码借用 |
 
 **定义对应**:
@@ -533,7 +535,7 @@ MIT 6.826 是一门专注于系统安全的课程，其核心内容与本研究�
 
 - 6.826 Lab 1 通过缓冲区溢出实验展示了传统 C/C++ 代码中的内存安全漏洞
 - **Rust 所有权解决方案**: 所有权唯一性（规则 1）保证每个值只有一个所有者，编译时阻止 use-after-free 和 double-free
-- **形式化对应**: 6.826 中的内存安全漏洞对应本文定理 3 中的"无悬垂指针"、"无双重释放"保证
+- **形式化对应**: 6.826 中的内存安全漏洞对应本文定理 7 中的"无悬垂指针"、"无双重释放"保证
 
 **Lab 2: Privilege Separation & Capabilities**
 
@@ -545,7 +547,7 @@ MIT 6.826 是一门专注于系统安全的课程，其核心内容与本研究�
 
 - 6.826 讲座涵盖的内存安全漏洞类型：
   - **Use-after-free** → Rust 所有权规则 2（移动后原变量失效）+ 规则 3（作用域结束释放）防止
-  - **Double-free** → Rust 所有权唯一性（定理 2）保证
+  - **Double-free** → Rust 所有权唯一性（定理 6）保证
   - **Buffer overflow** → Rust 借用规则（规则 6-8）+ 边界检查防止
 
 #### MIT 6.858: Computer Systems
@@ -593,7 +595,7 @@ $$\text{SpatialSafe}(P) \leftrightarrow \forall p \in P: \text{Access}(p, addr) 
 
 - 借用规则 8: $\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$
 - 切片和 `Vec` 等容器在运行时进行边界检查
-- 引用总是指向有效内存（定理 3: 无悬垂指针）
+- 引用总是指向有效内存（定理 7: 无悬垂指针）
 
 **Temporal Safety (时间安全)**
 
@@ -605,7 +607,7 @@ $$\text{TemporalSafe}(P) \leftrightarrow \forall p \in P: \text{Access}(p, addr)
 
 - 所有权规则 2（移动语义）: 移动后原变量标记为 $\text{Moved}$，不能再访问
 - 所有权规则 3（作用域结束）: 值在作用域结束时释放，无法后续访问
-- 定理 2（所有权唯一性）: 每个值只有一个所有者，防止多重释放
+- 定理 6（所有权唯一性）: 每个值只有一个所有者，防止多重释放
 
 #### MIT 课程对齐表
 
@@ -755,7 +757,7 @@ Ferrocene Language Specification是Rust的正式规范，于2025年3月被Rust�
   - 所有权规则 1：每个值有唯一所有者，编译器跟踪值的生命周期
   - 借用规则 8：借用必须在所有者作用域内，防止越界访问
   - `Vec` 和切片在运行时进行边界检查（`Index` trait）
-- **形式化保证**: 定理 3 保证无悬垂指针，空间安全由作用域规则保证
+- **形式化保证**: 定理 7 保证无悬垂指针，空间安全由作用域规则保证
 
 **2. Use-after-Free (释放后使用)**
 
@@ -764,13 +766,13 @@ Ferrocene Language Specification是Rust的正式规范，于2025年3月被Rust�
   - 所有权规则 2（移动语义）: 移动后原变量标记为 $\text{Moved}$
   - 编译器拒绝访问已移动的值（示例 9）
   - 所有权规则 3（RAII）: 作用域结束自动释放，无需手动管理
-- **形式化保证**: 定理 2 所有权唯一性 + 定理 3 无悬垂指针
+- **形式化保证**: 定理 6 所有权唯一性 + 定理 7 无悬垂指针
 
 **3. Double-Free (双重释放)**
 
 - **MIT 6.826 问题**: 多个指针指向同一内存，多次调用 `free`
 - **Rust 解决方案**:
-  - 所有权唯一性（定理 2）：每个值最多有一个所有者
+  - 所有权唯一性（定理 6）：每个值最多有一个所有者
   - 只有所有者负责释放值
   - `Rc`/`Arc` 使用引用计数，保证只有一个释放点
 - **形式化保证**: 定理 RC-T1 保证多所有者情况下的正确释放
@@ -851,9 +853,65 @@ $$\text{borrow}(x, b) \rightarrow \Omega(x) = \text{Owned} \land \text{valid}(b)
 
 $$\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$$
 
-### 3. 内存安全
+### 3. 线程安全与并发所有权
 
-**定理 1 (内存安全)**:
+**定义 3.1 (Send)**: 类型 $T$ 满足 **Send** 当且仅当将 $T$ 的值从线程 $t_1$ 转移到线程 $t_2$ 后，$t_1$ 不再持有或访问该值，且 $t_2$ 上的使用满足单线程内存安全。
+
+$$
+\text{Send}(T) \iff \forall t_1, t_2, v: T, \text{transfer}(v, t_1, t_2) \rightarrow \neg \text{holds}(t_1, v) \land \text{safe}(t_2, v)
+$$
+
+*详见*: [send_sync_formalization.md](send_sync_formalization.md) Def SEND1
+
+**定义 3.2 (Sync)**: 类型 $T$ 满足 **Sync** 当且仅当多线程共享不可变引用 $\&T$ 时，无数据竞争。
+
+$$
+\text{Sync}(T) \iff \forall t_1, t_2, r: \&T, \text{share}(r, t_1, t_2) \rightarrow \neg \text{data\_race}(t_1, t_2, r)
+$$
+
+*详见*: [send_sync_formalization.md](send_sync_formalization.md) Def SYNC1
+
+**定义 3.3 (Pin)**: 类型 $\text{Pin}<P>$ 保证指针 $P$ 指向的值不会被移动，即内存地址固定。
+
+$$
+\text{Pin}(p) \rightarrow \forall t: \text{time}, \text{addr}(p, t) = \text{addr}(p, t_0)
+$$
+
+*详见*: [pin_self_referential.md](pin_self_referential.md) Def 1.1–1.3
+
+**定理 4 (Send/Sync 关系)**:
+
+$$
+\text{Sync}(T) \iff \text{Send}(\&T)
+$$
+
+*证明*: 见 [send_sync_formalization.md](send_sync_formalization.md) 定理 SYNC-L1
+
+### 4. 智能指针所有权
+
+**定义 4.1 (Box)**: `Box<T>` 拥有堆上分配的 $T$ 值，所有权语义与常规变量相同。
+
+**定义 4.2 (Rc)**: `Rc<T>` 提供引用计数的共享所有权，**非线程安全**（`!Send + !Sync`）。
+
+$$
+\text{Rc}(v) \rightarrow \text{count}(v) > 0 \land \forall t: \neg \text{Send}(\text{Rc}<T>)
+$$
+
+**定义 4.3 (Arc)**: `Arc<T>` 提供原子引用计数的共享所有权，线程安全当 $T: \text{Send} + \text{Sync}$。
+
+$$
+\text{Arc}(v) \land T: \text{Send} + \text{Sync} \rightarrow \text{Send}(\text{Arc}<T>) \land \text{Sync}(\text{Arc}<T>)
+$$
+
+**定义 4.4 (Cell/RefCell)**: 提供内部可变性，`Cell` 为 `!Sync`。
+
+$$
+\neg \text{Sync}(\text{Cell}<T>)
+$$
+
+### 5. 内存安全
+
+**定理 5 (内存安全)**:
 在所有权系统下，程序执行过程中：
 
 - 不会出现悬垂指针（dangling pointer）
@@ -866,7 +924,7 @@ $$\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$$
 - 作用域规则保证值在使用后正确释放
 - 移动语义保证值不会被意外复制
 
-<a id="定理-2-所有权唯一性"></a>**定理 2 (所有权唯一性)**:
+<a id="定理-6-所有权唯一性"></a>**定理 6 (所有权唯一性)**:
 对于任何值 $v$，在任意时刻，最多存在一个变量 $x$ 使得 $\Omega(x) = \text{Owned}$ 且 $\Gamma(x) = v$。
 
 **证明**: 由规则 1 和规则 2 直接得出。
@@ -897,7 +955,7 @@ $$\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$$
 
 **结论**: 由结构归纳法，所有权唯一性在所有状态下都成立。$\square$
 
-<a id="定理-3-内存安全框架"></a>**定理 3 (内存安全框架)**:
+<a id="定理-7-内存安全框架"></a>**定理 7 (内存安全框架)**:
 在所有权系统下，以下性质成立：
 
 1. **无悬垂指针**: $\forall x: \text{valid}(x) \rightarrow \text{owner}(x) \neq \emptyset$
@@ -915,7 +973,7 @@ $$\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$$
 **性质1（无悬垂指针）**:
 
 - 假设存在悬垂指针 $x$，即 $\text{valid}(x)$ 但 $\text{owner}(x) = \emptyset$
-- 根据所有权唯一性（定理2），每个值都有唯一所有者
+- 根据所有权唯一性（定理6），每个值都有唯一所有者
 - 如果 $\text{owner}(x) = \emptyset$，则值已被释放
 - 但根据作用域规则，值释放后引用失效
 - 矛盾，因此不存在悬垂指针
@@ -923,7 +981,7 @@ $$\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$$
 **性质2（无双重释放）**:
 
 - 假设存在双重释放，即 $x \neq y$ 且 $\text{owner}(x) = \text{owner}(y)$
-- 根据所有权唯一性（定理2），每个值最多有一个所有者
+- 根据所有权唯一性（定理6），每个值最多有一个所有者
 - 如果 $x$ 和 $y$ 都拥有同一值，违反唯一性
 - 矛盾，因此不存在双重释放
 
@@ -935,13 +993,13 @@ $$\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$$
     1. 其内层（深度 $< d$）已按归纳假设释放
     2. 其自身拥有的变量根据规则 3 被释放
   - 故所有拥有的值在作用域结束时都会被释放
-- **引用链**：规则 3 → 性质 3；定理 2 保证每值至多一个所有者，避免重复释放
+- **引用链**：规则 3 → 性质 3；定理 6 保证每值至多一个所有者，避免重复释放
 
 **结论**: 由以上三个性质的证明（性质 1、2 反证法，性质 3 作用域归纳），所有权系统保证内存安全。$\square$
 
-**公理链标注**：规则 1,2 → 定理 2；定理 2 + 规则 3 → 定理 3。
+**公理链标注**：规则 1,2 → 定理 6；定理 6 + 规则 3 → 定理 7。
 
-**定理 4 (所有权转移语义)**:
+**定理 8 (所有权转移语义)**:
 所有权转移操作满足以下性质：
 
 1. **唯一性保持**: $\text{move}(x, y) \rightarrow \Omega(x) = \text{Moved} \land \Omega(y) = \text{Owned}$
@@ -956,7 +1014,7 @@ $$\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$$
 
 | 定理/规则 | crates 示例 | 说明 |
 | :--- | :--- | :--- |
-| 规则 1-2、定理 2 (T-OW2) | [c01/moving02.rs](../../../crates/c01_ownership_borrow_scope/examples/moving02.rs)、[rust_192_features_demo.rs](../../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs) | 所有权转移、唯一性 |
+| 规则 1-2、定理 6 (T-OW2) | [c01/moving02.rs](../../../crates/c01_ownership_borrow_scope/examples/moving02.rs)、[rust_192_features_demo.rs](../../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs) | 所有权转移、唯一性 |
 | 定理 1 (T-OW3) | c01 各 moving/borrow 示例 | 无悬垂、无双重释放 |
 
 详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
@@ -1000,8 +1058,8 @@ $$\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$$
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
 | **概念定义层** | 规则 1–8（所有权、移动、作用域、复制、借用）；Def 1.1–1.5 | §形式化定义 |
-| **属性关系层** | 规则 1+2 → 定理 2 → 定理 3；规则 2 → 定理 4 | §公理-定理证明树 |
-| **解释论证层** | 定理 2/3/4 证明；反例：§反例 | §证明目标、§反例 |
+| **属性关系层** | 规则 1+2 → 定理 6 → 定理 7；规则 2 → 定理 8 | §公理-定理证明树 |
+| **解释论证层** | 定理 6/7/8 证明；反例：§反例 | §证明目标、§反例 |
 
 ---
 

@@ -1,9 +1,10 @@
 # 异步状态机形式化
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
+> **最后更新**: 2026-02-27
 > **Rust 版本**: 1.93.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **状态**: ✅ 已完成 (Week 2 任务 P1-W2-T2)
+> **更新内容**: 添加 Future/Poll/Waker/Context 形式化定义
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 4 行（异步）
 
 ---
@@ -31,7 +32,8 @@
     - [2. Poll 操作](#2-poll-操作)
     - [3. 状态转换](#3-状态转换)
     - [4. async/await 语义形式化](#4-asyncawait-语义形式化)
-    - [5. 并发安全的形式化证明框架](#5-并发安全的形式化证明框架)
+    - [5. Future/Poll/Waker/Context 形式化定义](#5-futurepollwakercontext-形式化定义)
+    - [6. 并发安全的形式化证明框架](#6-并发安全的形式化证明框架)
   - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
     - [示例 1：基本 Future](#示例-1基本-future)
     - [示例 2：异步函数](#示例-2异步函数)
@@ -376,17 +378,155 @@ $$\text{async } \{s_1; \text{await } f_1(); s_2; \text{await } f_2(); s_3\} \equ
 - $s_2$：等待 $f_2$ 完成
 - $s_3$：最终状态
 
-### 5. 并发安全的形式化证明框架
+### 5. Future/Poll/Waker/Context 形式化定义
 
-**定义 5.1 (Future 并发执行)**：多个 Future 的并发执行：
+**定义 5.1 (Future Trait 形式化定义)**：Future Trait 是 Rust 异步编程的核心抽象，其形式化定义为：
+
+$$\text{Future}[\tau] = \langle \text{Output} = \tau, \text{poll}: \text{Pin}[\&mut \text{Self}] \times \text{Context} \to \text{Poll}[\tau] \rangle$$
+
+其中：
+
+- $\text{Output}$ 是关联类型，表示 Future 完成时返回的类型 $\tau$
+- $\text{poll}$ 是核心方法，接受一个 Pin 包装的可变引用和执行上下文，返回 Poll 类型
+- $\text{Pin}[\&mut \text{Self}]$ 保证自引用 Future 在内存中不可移动
+
+**语义约束**：
+
+1. **线性调用**：每次调用 `poll` 后，Future 可能改变内部状态
+2. **幂等性**：当 Future 返回 `Ready(v)` 后，后续调用应返回相同的值
+3. **契约遵守**：实现者必须遵守 Poll 契约（见 Def 5.2）
+
+$$
+\text{Future}[\tau] \models \square(\text{poll}(F, ctx) = \text{Ready}(v) \to \bigcirc\text{poll}(F, ctx') = \text{Ready}(v))
+$$
+
+---
+
+**定义 5.2 (Poll 类型定义)**：Poll 类型表示 Future 的当前执行状态，定义为：
+
+$$\text{Poll}[\tau] = \text{Pending} \mid \text{Ready}(v : \tau)$$
+
+**语义解释**：
+
+| 变体 | 含义 | 形式化 |
+| :--- | :--- | :--- |
+| `Pending` | Future 尚未完成，需要等待 | $\text{State}(F) = \text{Pending}$ |
+| `Ready(v)` | Future 已完成，返回值为 $v$ | $\text{State}(F) = \text{Ready}(v)$ |
+
+**Poll 操作语义**：
+
+$$
+\text{Poll}(F, ctx) = \begin{cases}
+\text{Poll::Ready}(v) & \text{if } \text{State}(F) = \text{Ready}(v) \\
+\text{Poll::Pending} & \text{if } \text{State}(F) = \text{Pending} \land \neg \text{CanProgress}(F) \\
+\text{Poll::Ready}(v') & \text{if } \text{State}(F) = \text{Pending} \land \text{CanProgress}(F) \land \text{Progress}(F) = v'
+\end{cases}
+$$
+
+**Poll 不变式**：
+
+1. **非阻塞性**：`poll` 调用立即返回，不阻塞线程
+   $$\forall F, ctx: \exists r: \text{Poll}(F, ctx) = r \land \text{Time}(\text{Poll}) < \infty$$
+
+2. **幂等性**：状态未改变时，多次 Poll 返回相同结果
+   $$\text{State}(F) = \text{Ready}(v) \to \forall ctx: \text{Poll}(F, ctx) = \text{Ready}(v)$$
+
+3. **进度性**：如果 Future 可以继续，Poll 会推进状态
+   $$\text{CanProgress}(F) \to \exists v: \text{Poll}(F, ctx) = \text{Ready}(v) \lor \text{State}(F') = \text{Ready}(v)$$
+
+---
+
+**定义 5.3 (Waker 机制定义)**：Waker 是异步执行的通知机制，用于在 Future 准备好继续执行时唤醒执行器：
+
+$$\text{Waker} = \langle \text{wake}: \text{Unit} \to \text{Unit}, \text{wake_by_ref}: \&\text{Self} \to \text{Unit}, \text{clone}: \text{Unit} \to \text{Waker} \rangle$$
+
+**核心操作**：
+
+| 方法 | 签名 | 语义 |
+| :--- | :--- | :--- |
+| `wake` | `self` | 消耗自身唤醒任务 |
+| `wake_by_ref` | `&self` | 通过引用唤醒任务（需 Clone） |
+| `clone` | `&self` -> `Waker` | 创建 Waker 副本（引用计数） |
+
+**Waker 契约**：
+
+$$
+\text{WakerContract}(W) \triangleq \forall F: \text{Register}(F, W) \land \text{StateChange}(F) \to \lozenge \text{Wake}(W)
+$$
+
+其中：
+
+- $\text{Register}(F, W)$：Future $F$ 在返回 `Pending` 前注册 Waker $W$
+- $\text{StateChange}(F)$：Future $F$ 的状态从 `Pending` 变为可推进
+- $\lozenge \text{Wake}(W)$：最终会调用 $W$.wake() 通知执行器
+
+**形式化保证**：
+
+$$
+\frac{\text{Poll}(F, ctx) = \text{Pending} \quad \text{Register}(F, ctx.\text{waker()}) \quad \text{CanProgress}(F')}{\exists W \in \text{ctx}: \lozenge W.\text{wake}()}
+$$
+
+**内存安全**：Waker 是 `Send + Sync`，可以安全地跨线程传递和共享：
+
+$$\text{Waker}: \text{Send} \land \text{Sync} \quad \text{(原子引用计数实现)}$$
+
+---
+
+**定义 5.4 (Context 传递定义)**：Context 是 poll 操作的执行上下文，携带 Waker 和其他元数据：
+
+$$\text{Context} = \langle \text{waker}: \text{Waker}, \text{local}: \text{LocalMap} \rangle$$
+
+**组件说明**：
+
+| 字段 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| `waker` | `&Waker` | 用于唤醒当前 Future 的 Waker |
+| `local` | `LocalMap` | 任务本地存储（可选扩展） |
+
+**Context 传递规则**：
+
+$$
+\text{ContextFlow} \triangleq \frac{F_1 \xrightarrow{\text{poll}(ctx)} F_2}{ctx.\text{waker} \text{ 可用于唤醒 } F_1 \text{ 的执行器}}
+$$
+
+**嵌套 Future 的 Context 传播**：
+
+当 Future $F$ 内部 Poll 子 Future $F'$ 时，Context 必须传递：
+
+$$
+\text{Poll}(F, ctx) \to \text{Poll}(F', ctx') \implies ctx'.\text{waker} = ctx.\text{waker} \lor ctx'.\text{waker} \text{ 包装了 } ctx.\text{waker}
+$$
+
+**Waker 克隆策略**：
+
+$$
+\text{WakerStrategy} = \begin{cases}
+\text{CloneOnPending} & \text{if } \text{State}(F) = \text{Pending} \land \text{NeedNotify} \\
+\text{NoClone} & \text{if } \text{State}(F) = \text{Ready}(v)
+\end{cases}
+$$
+
+**形式化性质**：
+
+1. **不可空性**：Context 总是包含有效的 Waker
+   $$\forall ctx: \text{Context}(ctx) \to ctx.\text{waker} \neq \bot$$
+
+2. **传递性**：Context 在 Future 链中保持传递
+   $$F_1 \to F_2 \to \ldots \to F_n \implies \text{SameRootWaker}(ctx_1, ctx_n)$$
+
+---
+
+### 6. 并发安全的形式化证明框架
+
+**定义 6.1 (Future 并发执行)**：多个 Future 的并发执行：
 
 $$\text{ConcurrentExec}[\{F_1, F_2, \ldots, F_n\}] = \text{Par}[\text{Poll}(F_1, ctx_1), \text{Poll}(F_2, ctx_2), \ldots, \text{Poll}(F_n, ctx_n)]$$
 
-**定义 5.2 (数据竞争自由)**：Future 并发执行是数据竞争自由的：
+**定义 6.2 (数据竞争自由)**：Future 并发执行是数据竞争自由的：
 
 $$\text{DataRaceFree}(\text{ConcurrentExec}[\{F_1, \ldots, F_n\}]) \leftrightarrow \neg \exists i, j, m: \text{DataRace}(F_i, F_j, m)$$
 
-**定理 5.1 (Future 并发安全)**：如果所有 Future 都满足 Send/Sync 约束，则并发执行是安全的：
+**定理 6.1 (Future 并发安全)**：如果所有 Future 都满足 Send/Sync 约束，则并发执行是安全的：
 
 $$\forall i: \text{Send}(F_i) \land \text{Sync}(F_i) \rightarrow \text{DataRaceFree}(\text{ConcurrentExec}[\{F_1, \ldots, F_n\}])$$
 
@@ -396,6 +536,14 @@ $$\forall i: \text{Send}(F_i) \land \text{Sync}(F_i) \rightarrow \text{DataRaceF
 2. Sync 约束保证共享引用可以安全地跨线程访问
 3. 状态隔离保证不同 Future 的状态不会相互干扰
 4. 同步原语保证共享数据的安全访问
+
+---
+
+**公理链标注**：
+
+- Def 5.1–5.4: Future/Poll/Waker/Context 基础定义
+- Def 6.1–6.2: 并发执行、数据竞争自由
+- 定理 6.1: Future 并发安全（基于 Send/Sync + 状态隔离）
 
 ---
 
@@ -1031,8 +1179,8 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-12（国际权威对标补全）
-**状态**: ✅ **已完成** (100%)
+**最后更新**: 2026-02-27（添加 Future/Poll/Waker/Context 形式化定义）
+**状态**: ✅ **已完成** (Week 2 任务 P1-W2-T2)
 
 **完成情况**:
 
@@ -1119,7 +1267,7 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 ---
 
 **维护者**: Rust Formal Methods Research Group
-**最后更新**: 2026-02-14
-**状态**: ✅ **已完成** (100%)
+**最后更新**: 2026-02-27
+**状态**: ✅ **已完成** (Week 2 任务 P1-W2-T2)
 
 **国际权威对标**：[RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/)；[FLS Ch. 17](https://spec.ferrocene.dev/concurrency.html) Concurrency（17.1 Send/Sync、17.2 Atomics、17.3 Asynchronous Computation）；[std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)。
