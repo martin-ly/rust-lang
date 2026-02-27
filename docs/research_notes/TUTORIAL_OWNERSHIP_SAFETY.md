@@ -1,11 +1,408 @@
-# 教程：理解所有权为什么安全
+# 教程：所有权与内存安全
 
 > **创建日期**: 2026-02-24
-> **目标受众**: 初学者
-> **预计阅读时间**: 15分钟
-> **级别**: L1 (给人看的)
+> **最后更新**: 2026-02-28
+> **目标受众**: 初学者-进阶
+> **预计阅读时间**: 35分钟
+> **级别**: L1/L2
 
 ---
+
+## 引言
+
+所有权是Rust最独特的特性，它使Rust能够在没有垃圾回收器的情况下保证内存安全。本教程将深入讲解所有权系统的工作原理、规则以及如何利用它编写安全的代码。
+
+---
+
+## 第一部分：为什么需要所有权
+
+### 内存管理的困境
+
+传统语言面临的三难问题：
+
+```
+         内存安全
+            /\
+           /  \
+          /    \
+         /      \
+        /        \
+   性能 <--------> 易用性
+```
+
+| 语言 | 策略 | 优点 | 缺点 |
+| :--- | :--- | :--- | :--- |
+| C/C++ | 手动管理 | 最高性能 | 容易出错(悬垂指针、双重释放等) |
+| Java/Python | 垃圾回收 | 安全易用 | 运行时开销、停顿 |
+| Rust | 所有权系统 | 零成本抽象 | 学习曲线陡峭 |
+
+### Rust的解决方案
+
+所有权系统在编译时检查内存安全，无需运行时开销：
+
+```rust
+fn main() {
+    let s = String::from("hello");  // s拥有字符串
+    takes_ownership(s);              // s的所有权转移到函数
+    // println!("{}", s);            // 错误! s不再有效
+
+    let x = 5;                       // x是基本类型
+    makes_copy(x);                   // 复制值
+    println!("{}", x);               // OK! x仍然有效
+}
+
+fn takes_ownership(s: String) {
+    println!("{}", s);
+} // s在这里drop，内存释放
+
+fn makes_copy(i: i32) {
+    println!("{}", i);
+}
+```
+
+---
+
+## 第二部分：所有权规则
+
+### 三大规则
+
+1. **每个值都有一个所有者**
+2. **同一时间只能有一个所有者**
+3. **当所有者离开作用域，值被丢弃**
+
+### 作用域与生命周期
+
+```rust
+{
+    let s = String::from("hello"); // s进入作用域
+
+    // 使用s
+    println!("{}", s);
+
+} // s离开作用域，内存自动释放
+
+// println!("{}", s); // 错误! s已失效
+```
+
+### 内存表示
+
+```
+栈                    堆
+┌──────────┐         ┌──────────────┐
+│ name: s  │───────>│ "hello"      │
+│ ptr      │         │ 容量: 5      │
+│ len: 5   │         │ 长度: 5      │
+│ cap: 5   │         └──────────────┘
+└──────────┘
+
+s离开作用域时:
+1. 调用drop(s)
+2. 释放堆内存
+3. 清理栈空间
+```
+
+---
+
+## 第三部分：移动语义
+
+### 什么是移动
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1;  // s1的所有权移动到s2
+
+// println!("{}", s1); // 错误! s1已失效
+println!("{}", s2);    // OK
+```
+
+**为什么移动而不是复制?**
+
+- 性能: 避免深拷贝
+- 安全: 避免双重释放
+
+### 浅复制的问题(Copy vs Move)
+
+```rust
+// C++中的问题(如果只有浅拷贝)
+let s1 = String::from("hello");
+let s2 = s1;                    // 浅拷贝: 两个指针指向同一内存
+// s1和s2都离开作用域
+// 双重释放! 未定义行为!
+
+// Rust的解决方案: 移动
+let s1 = String::from("hello");
+let s2 = s1;                    // 移动: s1失效，只有s2释放
+// 安全!
+```
+
+---
+
+## 第四部分：Copy trait
+
+### 哪些类型实现Copy
+
+```rust
+// 实现Copy的类型(栈上简单复制)
+let x: i32 = 5;
+let y = x;        // 复制值
+println!("{}", x); // OK! x仍然有效
+
+// 同样适用于:
+// - 所有整数类型(u32, i64等)
+// - 布尔类型
+// - 浮点数
+// - 字符类型
+// - 只包含Copy类型的元组
+```
+
+### 自定义类型的Copy
+
+```rust
+#[derive(Copy, Clone)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+let p1 = Point { x: 1, y: 2 };
+let p2 = p1;           // 复制
+println!("{}", p1.x);  // OK!
+
+// 注意: 包含非Copy类型的结构体不能实现Copy
+#[derive(Clone)]
+struct Container {
+    data: String,  // String不是Copy
+}
+// 不能derive(Copy)!
+```
+
+---
+
+## 第五部分：借用
+
+### 为什么需要借用
+
+```rust
+// 不使用借用: 需要返回值来继续使用
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len();
+    (s, length)  // 必须返回所有权
+}
+
+let s1 = String::from("hello");
+let (s2, len) = calculate_length(s1);  // 繁琐!
+```
+
+```rust
+// 使用借用: 简洁安全
+fn calculate_length(s: &String) -> usize {
+    s.len()  // 借用，不获取所有权
+}
+
+let s1 = String::from("hello");
+let len = calculate_length(&s1);  // 借用s1
+println!("{} 长度是 {}", s1, len);  // s1仍然可用!
+```
+
+### 借用规则
+
+```rust
+// 规则1: 可同时有多个不可变借用
+let r1 = &s;
+let r2 = &s;
+println!("{} {}", r1, r2);  // OK
+
+// 规则2: 只能有一个可变借用
+let r1 = &mut s;
+// let r2 = &mut s;  // 错误! 不能同时有两个可变借用
+
+// 规则3: 不能同时有可变和不可变借用
+let r1 = &s;
+// let r2 = &mut s;  // 错误!
+println!("{}", r1);  // r1最后使用在这里
+```
+
+### 借用与作用域
+
+```rust
+let mut s = String::from("hello");
+
+{
+    let r1 = &mut s;
+    r1.push_str(" world");
+} // r1在这里结束
+
+// 现在可以创建新的借用
+let r2 = &mut s;  // OK!
+r2.push_str("!");
+```
+
+---
+
+## 第六部分：悬垂引用
+
+### 编译器如何防止
+
+```rust
+fn dangle() -> &String {  // 错误! 返回悬垂引用
+    let s = String::from("hello");
+    &s  // s在函数结束时释放
+}     // 返回的引用指向无效内存!
+
+// 编译错误:
+// error[E0106]: 缺少生命周期说明符
+```
+
+### 正确的做法
+
+```rust
+// 方案1: 返回所有权
+fn no_dangle() -> String {
+    let s = String::from("hello");
+    s  // 转移所有权
+}
+
+// 方案2: 返回切片(如果输入是引用)
+fn first_word(s: &str) -> &str {
+    &s[0..1]  // 返回与输入相同生命周期的引用
+}
+```
+
+---
+
+## 第七部分：字符串切片
+
+### String vs &str
+
+```rust
+// String: 拥有所有权的可变字符串(堆分配)
+let s = String::from("hello world");
+
+// &str: 字符串切片(借用)
+let hello = &s[0..5];    // "hello"
+let world = &s[6..11];   // "world"
+
+// 内存布局
+// s: String --指向--> 堆内存: "hello world"
+// hello: &str --指向--> s的[0..5]
+// world: &str --指向--> s的[6..11]
+```
+
+### 字符串字面量
+
+```rust
+let s: &'static str = "hello";  // 'static生命周期
+// 字符串字面量存储在二进制文件中
+// 'static表示整个程序运行期间有效
+```
+
+---
+
+## 第八部分：实践模式
+
+### 模式1: 所有权转移
+
+```rust
+fn process(data: Vec<u8>) -> Vec<u8> {
+    // 处理数据，返回所有权
+    data.into_iter().map(|b| b * 2).collect()
+}
+
+let data = vec![1, 2, 3];
+let processed = process(data);  // 转移所有权
+// data不再可用
+```
+
+### 模式2: 借用检查
+
+```rust
+fn analyze(data: &[u8]) -> Analysis {
+    // 只读分析，不修改
+    Analysis {
+        sum: data.iter().sum(),
+        len: data.len(),
+    }
+}
+
+let data = vec![1, 2, 3];
+let a1 = analyze(&data);  // 借用
+let a2 = analyze(&data);  // 可以同时多次借用
+```
+
+### 模式3: 可变借用
+
+```rust
+fn normalize(data: &mut Vec<f64>) {
+    let max = data.iter().copied().fold(0.0, f64::max);
+    for v in data.iter_mut() {
+        *v /= max;
+    }
+}
+
+let mut data = vec![1.0, 2.0, 3.0];
+normalize(&mut data);  // 可变借用修改数据
+```
+
+---
+
+## 第九部分：常见错误
+
+| 错误 | 代码 | 修复 |
+| :--- | :--- | :--- |
+| 使用已移动值 | `let y = x; use x` | 克隆或重新设计 |
+| 悬垂引用 | 返回局部引用 | 返回所有权或使用String |
+| 多重可变借用 | `&mut x` 和 `&mut x` | 限制作用域或使用内部可变性 |
+| 借用冲突 | `&x` 和 `&mut x` | 分离使用范围 |
+
+---
+
+## 第十部分：形式化视角
+
+### 所有权定理
+
+**定理 (所有权唯一性)**: 在任意程序点，每个值最多只有一个有效的所有者。
+
+**定理 (内存安全)**: 良类型的Rust程序不会出现以下错误:
+
+- 使用已释放内存
+- 双重释放
+- 空指针解引用
+- 数据竞争
+
+### 与形式化文档的关联
+
+| 概念 | 形式化定义 | 文档位置 |
+| :--- | :--- | :--- |
+| 所有权转移 | `move: T -> T` | ownership_model.md |
+| 借用 | `&'a T`, `&'a mut T` | borrow_checker_proof.md |
+| 生命周期 | `'a: 'b` | lifetime_formalization.md |
+| Drop | `drop: T -> ()` | ownership_model.md |
+
+---
+
+## 总结
+
+```
+所有权系统
+    │
+    ├── 所有权规则
+    │   ├── 每个值有唯一所有者
+    │   ├── 同一时间只有一个所有者
+    │   └── 离开作用域自动释放
+    │
+    ├── 移动语义
+    │   ├── 转移所有权
+    │   └── 禁止双重释放
+    │
+    ├── Copy trait
+    │   ├── 简单类型复制
+    │   └── 栈上值语义
+    │
+    └── 借用
+        ├── 不可变借用 &T
+        ├── 可变借用 &mut T
+        └── 编译时检查安全
+```
 
 ## 引言
 
@@ -328,5 +725,5 @@ fn main() {
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-24
-**状态**: ✅ 已完成 - 教程：理解所有权为什么安全
+**最后更新**: 2026-02-28
+**状态**: ✅ 已扩展 - 所有权与内存安全教程完整版

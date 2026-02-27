@@ -19,11 +19,18 @@
 
 ## 形式化定义（完备性缺口）
 
-**Def FMG1（形式化方法完备性缺口）**：设 $\mathcal{F}$ 为形式化方法文档集。若存在 Rust 特性 $C$ 或机制 $M$ 在语言规范中存在，但 $\mathcal{F}$ 中无对应 Def/Axiom/Theorem 或证明，则称 $\mathcal{F}$ 对 $C/M$ 存在**完备性缺口**。
+**Def FMG1（形式化方法完备性缺口）**：设 $\mathcal{F}$ 为形式化方法文档集。
+若存在 Rust 特性 $C$ 或机制 $M$ 在语言规范中存在，
+但 $\mathcal{F}$ 中无对应 Def/Axiom/Theorem 或证明，
+则称 $\mathcal{F}$ 对 $C/M$ 存在**完备性缺口**。
 
 **Axiom FMG1**：Rust 内存模型与并发语义处于持续演进；形式化文档滞后于语言实现；本目录不声称覆盖全部。
 
-**定理 FMG-T1（完备性）**：$\mathcal{M} = \{\text{ownership},\, \text{borrow},\, \text{lifetime},\, \text{async},\, \text{pin}\}$ 对 Rust 1.93 语言特性**已完备**；Phase 1–6 全部补全，无剩余缺口。
+**定理 FMG-T1（完备性）**：
+$
+\mathcal{M} = \{\text{ownership},\, \text{borrow},\, \text{lifetime},\, \text{async},\, \text{pin}\}
+$
+对 Rust 1.93 语言特性**已完备**；Phase 1–6 全部补全，无剩余缺口。
 
 *证明*：由 [8. 补全路线图](#8-补全路线图) 阶段 1–6 状态；每项均有 Def/定理。∎
 

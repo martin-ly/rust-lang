@@ -149,7 +149,7 @@ fn ownership_theorem() {
 | 工具链 | [../06_toolchain/](../06_toolchain/) | 编译器、Cargo |
 | 形式化理论 | [../research_notes/](../research_notes/) | 类型理论、证明 |
 
-### 在线学习资源
+### 在线学习资源1
 
 #### edX
 

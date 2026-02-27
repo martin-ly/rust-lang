@@ -1,8 +1,253 @@
 # 生命周期速查卡
 
-> **一页纸速查** - 生命周期规则、省略、常见模式
+> **一页纸速查** - 生命周期语法、规则、常见模式
 
 ---
+
+## 生命周期语法
+
+```rust
+// 显式标注
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
+
+// 多个独立生命周期
+fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a Token
+
+// 生命周期约束
+fn process<'a, 'b>(x: &'a Data, y: &'b Data) -> &'a Data
+where
+    'a: 'b,  // 'a 至少和 'b 一样长
+```
+
+---
+
+## 生命周期省略规则
+
+编译器自动应用以下规则：
+
+1. **每个引用参数有独立生命周期**
+
+   ```rust
+   fn foo(x: &i32, y: &i32)  // 隐式: fn foo<'a, 'b>(x: &'a i32, y: &'b i32)
+   ```
+
+2. **单一输入生命周期应用到输出**
+
+   ```rust
+   fn foo(x: &i32) -> &i32   // 隐式: fn foo<'a>(x: &'a i32) -> &'a i32
+   ```
+
+3. **`&self`的生命周期应用到输出**
+
+   ```rust
+   fn foo(&self) -> &T       // 隐式: fn foo<'a>(&'a self) -> &'a T
+   fn foo(&self, x: &T) -> &T  // 规则1+3: fn foo<'a, 'b>(&'a self, x: &'b T) -> &'a T
+   ```
+
+---
+
+## 结构体生命周期
+
+```rust
+// 持有引用需要生命周期参数
+struct Parser<'a> {
+    input: &'a str,
+    position: usize,
+}
+
+impl<'a> Parser<'a> {
+    fn new(input: &'a str) -> Self {
+        Self { input, position: 0 }
+    }
+
+    fn peek(&self) -> Option<&'a str> {
+        // 返回与输入相同生命周期的引用
+        self.input.get(self.position..self.position+1)
+    }
+}
+```
+
+---
+
+## 'static 生命周期
+
+```rust
+// 字符串字面量是'static
+let s: &'static str = "I live forever";
+
+// 与泛型结合
+fn spawn_thread<F>(f: F)
+where
+    F: FnOnce() + 'static,  // 闭包不捕获非'static引用
+{}
+
+// 全局常量
+static GLOBAL: i32 = 42;
+```
+
+---
+
+## 高阶Trait Bound (HRTB)
+
+```rust
+// 对所有生命周期都成立
+fn call_with_ref<F>(f: F)
+where
+    F: for<'a> Fn(&'a str),
+{
+    f("hello");
+}
+
+// 与闭包一起使用
+let closure = |s: &str| println!("{}", s);
+call_with_ref(closure);
+```
+
+---
+
+## 常见模式
+
+### 输入输出相同生命周期
+
+```rust
+fn identity<'a>(x: &'a str) -> &'a str {
+    x
+}
+```
+
+### 返回与特定输入关联
+
+```rust
+fn get_name<'a>(person: &'a Person) -> &'a str {
+    &person.name
+}
+```
+
+### 多个输入，返回其中一个
+
+```rust
+fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
+    if use_first { first } else { second }
+}
+```
+
+---
+
+## 生命周期错误与修复
+
+| 错误 | 代码 | 修复 |
+| :--- | :--- | :--- |
+| 悬垂引用 | `fn bad() -> &str { let s = ""; &s }` | 返回 `String` 或 `'static` |
+| 生命周期不匹配 | `let r; { let x = 5; r = &x; }` | 扩大值的作用域 |
+| 借用冲突 | `&mut` 同时有 `&` | 分离使用范围 |
+
+---
+
+## Trait对象生命周期
+
+```rust
+// 默认'static
+trait Trait {}
+Box<dyn Trait>           // Box<dyn Trait + 'static>
+
+// 显式生命周期
+trait Parser<'a> {}
+Box<dyn Parser<'a> + 'a>
+
+// 省略形式
+trait Read {}
+&dyn Read                // &'_ dyn Read (匿名生命周期)
+```
+
+---
+
+## 型变与生命周期
+
+```rust
+// &'a T 对 'a 协变
+// &'a T <: &'b T  当 'a: 'b (a比b长)
+
+fn example() {
+    let s: &'static str = "static";
+    let r: &str = s;  // OK: 'static <: any lifetime
+}
+
+// &'a mut T 对 'a 不变
+// &'a mut T 对 T 不变
+```
+
+---
+
+## 与泛型结合
+
+```rust
+// 泛型函数带生命周期
+fn process<'a, T>(data: &'a [T]) -> impl Iterator<Item = &'a T> {
+    data.iter()
+}
+
+// 泛型结构体
+struct Wrapper<'a, T: 'a> {
+    data: &'a T,
+}
+
+// Trait Bound
+fn use_display<'a, T>(x: &'a T) -> &'a T
+where
+    T: Display + 'a,
+{ x }
+```
+
+---
+
+## 自我引用结构
+
+```rust
+// 需要Pin
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SelfReferential {
+    data: String,
+    ptr_to_data: *const String,
+    _pin: PhantomPinned,
+}
+
+impl SelfReferential {
+    fn new(data: String) -> Pin<Box<Self>> {
+        let mut boxed = Box::pin(Self {
+            data,
+            ptr_to_data: std::ptr::null(),
+            _pin: PhantomPinned,
+        });
+
+        let ptr = &boxed.data as *const String;
+        unsafe {
+            boxed.as_mut().get_unchecked_mut().ptr_to_data = ptr;
+        }
+
+        boxed
+    }
+}
+```
+
+---
+
+## 快速诊断
+
+```
+错误: "borrowed value does not live long enough"
+原因: 引用的值比引用先死
+解决: 扩大值作用域或改变所有权
+
+错误: "lifetime mismatch"
+原因: 输入输出生命周期不匹配
+解决: 添加生命周期标注或调整返回类型
+
+错误: "cannot return reference to local variable"
+原因: 返回局部变量的引用
+解决: 返回值所有权或'static
+```
 
 ## 生命周期基础
 
@@ -191,7 +436,7 @@ let r = &x;  // 编译器自动推断
 
 ## 快速决策
 
-```
+```text
 需要显式生命周期？
 ├── 返回引用？
 │   ├── 来自参数 → 标注与参数相同
@@ -205,5 +450,5 @@ let r = &x;  // 编译器自动推断
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-24
-**状态**: ✅ 已完成 - 生命周期速查卡
+**最后更新**: 2026-02-28
+**状态**: ✅ 已扩展 - 生命周期速查卡完整版

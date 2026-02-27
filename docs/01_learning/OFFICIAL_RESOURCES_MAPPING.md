@@ -11,7 +11,7 @@
 ## 官方资源入口
 
 | 资源 | URL | 说明 |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | **Rust Reference** | <https://doc.rust-lang.org/reference/> | 语言规范 |
 | **Rust by Example** | <https://doc.rust-lang.org/rust-by-example/> | 示例驱动学习 |
 | **Standard Library** | <https://doc.rust-lang.org/std/> | 标准库 API |
@@ -27,7 +27,7 @@
 ## 模块 → 官方章节映射
 
 | 项目模块 | 本项目路径 | The Rust Book | RBE 练习（可点击） | Reference |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- |
 | **C02 类型系统** | crates/c02_type_system | Ch 3 Types, Ch 10 Traits | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) · [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) · [Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html) | [Types](https://doc.rust-lang.org/reference/types.html) |
 | **C03 控制流** | crates/c03_control_fn | Ch 3 Control Flow, Ch 6 Enums | [Flow Control](https://doc.rust-lang.org/rust-by-example/flow_control.html) · [Option](https://doc.rust-lang.org/rust-by-example/std/option.html) · [Error](https://doc.rust-lang.org/rust-by-example/error.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html) | [Statements](https://doc.rust-lang.org/reference/statements.html) |
 | **C04 泛型** | crates/c04_generic | Ch 10 Generic Types, Traits | [Generics](https://doc.rust-lang.org/rust-by-example/generics.html) | [Items](https://doc.rust-lang.org/reference/items/generics.html) |
@@ -45,7 +45,7 @@
 ## 小节级映射与「本项目补充」
 
 | 官方章节 | 小节 | 本项目补充内容 |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | **Book Ch 10** | 10.1-10.3 Traits, Lifetimes | 型变理论、生命周期形式化（[research_notes](../research_notes/)）；转换树 |
 | **Reference** | Types, Ownership, Special Types | 形式化工程系统（[rust-formal-engineering-system](../rust-formal-engineering-system/)）；variance 专项 |
 | **Reference** | Macros by Example, Procedural Macros | 宏系统决策树、反例（[macros_cheatsheet](../02_reference/quick_reference/macros_cheatsheet.md)） |
@@ -64,7 +64,7 @@
 ## 核心概念映射
 
 | 概念 | 本项目速查卡 | Book 章节 | RBE |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | 借用 | ownership_cheatsheet | Ch 4.2 | [Borrow](https://doc.rust-lang.org/rust-by-example/scope/borrow.html) |
 | 生命周期 | type_system | Ch 10.3 | [Lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html) |
 | Trait | type_system | Ch 10 | [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) |

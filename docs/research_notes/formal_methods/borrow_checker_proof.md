@@ -136,11 +136,16 @@
 3. **无同步**: 访问之间没有同步机制
 
 **形式化表示**:
-$$\text{DataRace}(m, t_1, t_2) \leftrightarrow \text{Concurrent}(t_1, t_2) \land \text{Access}(t_1, m) \land \text{Access}(t_2, m) \land (\text{Write}(t_1, m) \lor \text{Write}(t_2, m)) \land \neg \text{Synchronized}(t_1, t_2)$$
+
+$$
+\text{DataRace}(m, t_1, t_2) \leftrightarrow \text{Concurrent}(t_1, t_2) \land \text{Access}(t_1, m) \land \text{Access}(t_2, m) \land (\text{Write}(t_1, m) \lor \text{Write}(t_2, m)) \land \neg \text{Synchronized}(t_1, t_2)
+$$
 
 **定义 1.2 (数据竞争自由)**：程序是数据竞争自由的，当且仅当不存在任何数据竞争：
 
-$$\text{DataRaceFree}(P) \leftrightarrow \neg \exists m, t_1, t_2: \text{DataRace}(m, t_1, t_2)$$
+$$
+\text{DataRaceFree}(P) \leftrightarrow \neg \exists m, t_1, t_2: \text{DataRace}(m, t_1, t_2)
+$$
 
 ### 借用检查算法的理论基础
 
@@ -513,7 +518,10 @@ $$\mathcal{B} = \{Immutable, Mutable\}$$
 - $T: \text{Var} \to \mathcal{B}$：借用类型映射
 
 **数学表达式**：
-$$\mathcal{S} = \{(I, M, T) \mid I \cap M = \emptyset \land \forall v \in I \cup M: T(v) \in \mathcal{B}\}$$
+
+$$
+\mathcal{S} = \{(I, M, T) \mid I \cap M = \emptyset \land \forall v \in I \cup M: T(v) \in \mathcal{B}\}
+$$
 
 **解释**：借用状态追踪程序中所有活跃的借用。$I \cap M = \emptyset$ 表示不可变借用和可变借用不能同时存在。
 
@@ -521,7 +529,9 @@ $$\mathcal{S} = \{(I, M, T) \mid I \cap M = \emptyset \land \forall v \in I \cup
 
 **Def 1.3 (借用有效性)**：借用 $b$ 在程序点 $p$ 是**有效的**，当且仅当：
 
-$$\text{Valid}(b, p) \leftrightarrow \text{Lifetime}(b) \subseteq \text{Scope}(b) \land \text{Alive}(\text{Target}(b), p)$$
+$$
+\text{Valid}(b, p) \leftrightarrow \text{Lifetime}(b) \subseteq \text{Scope}(b) \land \text{Alive}(\text{Target}(b), p)
+$$
 
 其中：
 
@@ -536,7 +546,9 @@ $$\text{Valid}(b, p) \leftrightarrow \text{Lifetime}(b) \subseteq \text{Scope}(b
 
 **Def 1.4 (借用冲突)**：两个借用 $b_1$ 和 $b_2$ 存在**冲突**，当且仅当：
 
-$$\text{Conflict}(b_1, b_2) \leftrightarrow \text{Overlap}(\text{Target}(b_1), \text{Target}(b_2)) \land \neg\text{Compatible}(b_1, b_2)$$
+$$
+\text{Conflict}(b_1, b_2) \leftrightarrow \text{Overlap}(\text{Target}(b_1), \text{Target}(b_2)) \land \neg\text{Compatible}(b_1, b_2)
+$$
 
 其中兼容性定义为：
 $$\text{Compatible}(b_1, b_2) \leftrightarrow (T(b_1) = Immutable \land T(b_2) = Immutable)$$
@@ -557,7 +569,9 @@ $$\text{Compatible}(b_1, b_2) \leftrightarrow (T(b_1) = Immutable \land T(b_2) =
 
 **Def 1.6 (数据竞争)**：数据竞争发生在两个线程 $t_1$ 和 $t_2$ 同时访问同一内存位置 $m$，且至少有一个是写操作，且没有同步：
 
-$$\text{DataRace}(m, t_1, t_2) \leftrightarrow \text{Concurrent}(t_1, t_2) \land \text{Access}(t_1, m) \land \text{Access}(t_2, m) \land (\text{Write}(t_1, m) \lor \text{Write}(t_2, m)) \land \neg\text{Synchronized}(t_1, t_2)$$
+$$
+\text{DataRace}(m, t_1, t_2) \leftrightarrow \text{Concurrent}(t_1, t_2) \land \text{Access}(t_1, m) \land \text{Access}(t_2, m) \land (\text{Write}(t_1, m) \lor \text{Write}(t_2, m)) \land \neg\text{Synchronized}(t_1, t_2)
+$$
 
 其中：
 
@@ -578,7 +592,9 @@ $$\text{DataRace}(m, t_1, t_2) \leftrightarrow \text{Concurrent}(t_1, t_2) \land
 - $\text{Barrier}(T)$：线程屏障同步线程集合 $T$
 
 **同步语义**：
-$$\text{Synchronized}(t_1, t_2) \leftrightarrow \exists s \in \mathcal{Sync}: \text{Uses}(t_1, s) \land \text{Uses}(t_2, s)$$
+$$
+\text{Synchronized}(t_1, t_2) \leftrightarrow \exists s \in \mathcal{Sync}: \text{Uses}(t_1, s) \land \text{Uses}(t_2, s)
+$$
 
 **解释**：同步原语确保线程间有序访问共享内存，防止数据竞争。
 
@@ -588,7 +604,9 @@ $$\text{Synchronized}(t_1, t_2) \leftrightarrow \exists s \in \mathcal{Sync}: \t
 
 <a id="规则-1唯一性"></a>**Axiom 1 (可变借用唯一性)**：对于任意程序点 $p$，至多存在一个可变借用指向内存位置 $m$：
 
-$$\forall p, m: |\{b \mid \text{Active}(b, p) \land T(b) = Mutable \land \text{Target}(b) = m\}| \leq 1$$
+$$
+\forall p, m: |\{b \mid \text{Active}(b, p) \land T(b) = Mutable \land \text{Target}(b) = m\}| \leq 1
+$$
 
 **理由**：可变借用允许修改数据。多个可变借用会导致数据竞争，因此必须保证唯一性。
 
@@ -596,7 +614,9 @@ $$\forall p, m: |\{b \mid \text{Active}(b, p) \land T(b) = Mutable \land \text{T
 
 <a id="规则-2共享性"></a>**Axiom 2 (可变-不可变互斥)**：对于任意程序点 $p$，可变借用和不可变借用不能同时指向重叠的内存：
 
-$$\forall p, b_1, b_2: \text{Active}(b_1, p) \land \text{Active}(b_2, p) \land T(b_1) = Mutable \land T(b_2) = Immutable \to \neg\text{Overlap}(\text{Target}(b_1), \text{Target}(b_2))$$
+$$
+\forall p, b_1, b_2: \text{Active}(b_1, p) \land \text{Active}(b_2, p) \land T(b_1) = Mutable \land T(b_2) = Immutable \to \neg\text{Overlap}(\text{Target}(b_1), \text{Target}(b_2))
+$$
 
 **理由**：读-写竞争是数据竞争的一种形式。此公理防止同时读写同一内存。
 
@@ -604,7 +624,9 @@ $$\forall p, b_1, b_2: \text{Active}(b_1, p) \land \text{Active}(b_2, p) \land T
 
 <a id="规则-3有效性"></a>**Axiom 3 (借用有效性保持)**：如果借用 $b$ 在程序点 $p$ 有效，且从 $p$ 到 $p'$ 没有使 $b$ 失效的操作，则 $b$ 在 $p'$ 仍然有效：
 
-$$\text{Valid}(b, p) \land \neg\text{Invalidate}(b, p, p') \to \text{Valid}(b, p')$$
+$$
+\text{Valid}(b, p) \land \neg\text{Invalidate}(b, p, p') \to \text{Valid}(b, p')
+$$
 
 其中 $\text{Invalidate}(b, p, p')$ 表示在从 $p$ 到 $p'$ 的路径上存在使 $b$ 失效的操作（如目标被移动或释放）。
 
@@ -693,7 +715,10 @@ $$\square \text{ (定理 1 证毕)}$$
 **Theorem 2 (借用规则正确性)**：借用检查器正确实现了借用规则。
 
 **形式化陈述**：
-$$\forall P: \text{Check}(P) = \text{Pass} \leftrightarrow \forall \pi \in \text{Paths}(P): \pi \models \text{BorrowRules}$$
+
+$$
+\forall P: \text{Check}(P) = \text{Pass} \leftrightarrow \forall \pi \in \text{Paths}(P): \pi \models \text{BorrowRules}
+$$
 
 其中 $\text{BorrowRules} = \{\text{Axiom 1}, \text{Axiom 2}, \text{Axiom 3}\}$
 
@@ -706,7 +731,11 @@ $$\forall P: \text{Check}(P) = \text{Pass} \leftrightarrow \forall \pi \in \text
 根据 Axiom 4，借用检查器接受程序当且仅当所有执行路径满足 Axiom 1-3。
 因此，若 $\text{Check}(P) = \text{Pass}$，则所有路径满足借用规则。
 
-**($\Leftarrow$) 方向**：$\forall \pi: \pi \models \text{BorrowRules} \to \text{Check}(P) = \text{Pass}$
+**($\Leftarrow$) 方向**：
+
+$
+\forall \pi: \pi \models \text{BorrowRules} \to \text{Check}(P) = \text{Pass}
+$
 
 - 借用检查器在编译时分析所有可能的执行路径
 - 若某路径违反借用规则，检查器生成错误
@@ -722,7 +751,9 @@ $$\square \text{ (定理 2 证毕)}$$
 **Theorem 3 (引用有效性保证)**：通过借用检查的程序中，所有引用在其使用点都是有效的。
 
 **形式化陈述**：
-$$\forall P: \text{Check}(P) = \text{Pass} \to \forall r \in \text{Refs}(P): \forall p \in \text{Use}(r): \text{Valid}(r, p)$$
+$$
+\forall P: \text{Check}(P) = \text{Pass} \to \forall r \in \text{Refs}(P): \forall p \in \text{Use}(r): \text{Valid}(r, p)
+$$
 
 **完整证明**：
 
@@ -1117,7 +1148,9 @@ fn complex_borrow() {
 
 ### 与生命周期的集成
 
-$\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命周期与 outlives 表达。Polonius 与 [lifetime_formalization](./lifetime_formalization.md) 中的推断、约束求解一致。
+$\text{Scope}(r) \subseteq \text{lft}(r)$；
+NLL 与 reborrow 的约束由生命周期与 outlives 表达。
+Polonius 与 [lifetime_formalization](./lifetime_formalization.md) 中的推断、约束求解一致。
 
 ### 实际应用案例
 
@@ -1145,25 +1178,47 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$；NLL 与 reborrow 的约束由生命�
 
 ## Rust 1.93 与并发/裸指针扩展（形式化占位）
 
-**Def CHAN1（通道消息传递）**：`mpsc::channel` 或 `broadcast` 实现**消息传递**语义；发送者与接收者间无共享内存；所有权随消息转移。形式化：$\text{send}(tx, v) \rightarrow \Omega(v) \mapsto \text{Receiver}$；无 $\&mut$ 共享，故无数据竞争。
+**Def CHAN1（通道消息传递）**：`mpsc::channel` 或 `broadcast` 实现**消息传递**语义；
+发送者与接收者间无共享内存；
+所有权随消息转移。
+形式化：$\text{send}(tx, v) \rightarrow \Omega(v) \mapsto \text{Receiver}$；
+无 $\&mut$ 共享，故无数据竞争。
 
-**定理 CHAN-T1**：通道实现为纯 Safe；消息传递无共享可变；满足 [borrow_checker_proof](borrow_checker_proof.md) 定理 1 数据竞争自由。由 Send 约束与所有权转移。
+**定理 CHAN-T1**：通道实现为纯 Safe；
+消息传递无共享可变；
+满足 [borrow_checker_proof](borrow_checker_proof.md) 定理 1 数据竞争自由。
+由 Send 约束与所有权转移。
 
-**Def MUTEX1（Mutex 锁语义）**：`Mutex<T>` 封装内部可变；`lock()` 返回 `MutexGuard` 持有可变借用；guard drop 时释放锁。形式化：$\text{lock}(m) \rightarrow \&mut T$ 仅在持锁期间有效；互斥保证无并发写。
+**Def MUTEX1（Mutex 锁语义）**：`Mutex<T>` 封装内部可变；`lock()` 返回 `MutexGuard` 持有可变借用；
+guard drop 时释放锁。形式化：$\text{lock}(m) \rightarrow \&mut T$ 仅在持锁期间有效；互斥保证无并发写。
 
-**定理 MUTEX-T1**：`Mutex` 为 Safe 抽象；内部 `unsafe` 封装；对外满足借用规则——任一时刻至多一个 `MutexGuard` 持有 `&mut T`。由 [borrow_checker_proof](borrow_checker_proof.md) Axiom 1。
+**定理 MUTEX-T1**：`Mutex` 为 Safe 抽象；
+内部 `unsafe` 封装；
+对外满足借用规则——任一时刻至多一个 `MutexGuard` 持有 `&mut T`。
+由 [borrow_checker_proof](borrow_checker_proof.md) Axiom 1。
 
-<a id="def-raw1-裸指针与-deref_nullptr"></a>**Def RAW1（裸指针与 deref_nullptr）**：`*const T`/`*mut T` 无自动借用；解引用需 `unsafe`；1.93 `deref_nullptr` deny-by-default 禁止解引用可能为 null 的指针。形式化：$\text{deref}(p)$ 合法仅当 $\text{nonnull}(p)$；违反为 UB。
+<a id="def-raw1-裸指针与-deref_nullptr"></a>**Def RAW1（裸指针与 deref_nullptr）**：`*const T`/`*mut T` 无自动借用；
+解引用需 `unsafe`；1.93 `deref_nullptr` deny-by-default 禁止解引用可能为 null 的指针。
+形式化：$\text{deref}(p)$ 合法仅当 $\text{nonnull}(p)$；违反为 UB。
 
-**定理 RAW-T1**：裸指针解引用不与借用检查器冲突；借用检查器不检查裸指针；`deref_nullptr` lint 减少 null 解引用 UB。与 [type_system_foundations](../type_theory/type_system_foundations.md) Def DEREF-NULL1 衔接。
+**定理 RAW-T1**：裸指针解引用不与借用检查器冲突；
+借用检查器不检查裸指针；
+`deref_nullptr` lint 减少 null 解引用 UB。
+与 [type_system_foundations](../type_theory/type_system_foundations.md) Def DEREF-NULL1 衔接。
 
 ---
 
 ## unsafe 契约与 borrow/ownership 衔接（Phase 3）
 
-**Def UNSAFE1（unsafe 契约）**：`unsafe` 块承诺满足编译器无法验证的**前置条件**；调用者或实现者须保证：$\text{pre}(C) \rightarrow \text{safe}(C)$，其中 $C$ 为 unsafe 契约、$\text{pre}$ 为前置、$\text{safe}$ 为安全语义。违反前置为 UB。
+**Def UNSAFE1（unsafe 契约）**：`unsafe` 块承诺满足编译器无法验证的**前置条件**；
+调用者或实现者须保证：$\text{pre}(C) \rightarrow \text{safe}(C)$，
+其中 $C$ 为 unsafe 契约、$\text{pre}$ 为前置、$\text{safe}$ 为安全语义。
+违反前置为 UB。
 
-**定理 UNSAFE-T1（unsafe 与 borrow 衔接）**：若 unsafe 块内产生的引用或裸指针满足借用规则的前置（非悬垂、非别名冲突），则其与 [borrow_checker_proof](borrow_checker_proof.md) 定理 1 数据竞争自由相容。形式化：$\text{pre}(C) \land \text{borrow\_compliant}(r) \rightarrow \text{DataRaceFree}(P)$。由 unsafe 契约与借用规则无冲突。
+**定理 UNSAFE-T1（unsafe 与 borrow 衔接）**：若 unsafe 块内产生的引用或裸指针满足借用规则的前置（非悬垂、非别名冲突），
+则其与 [borrow_checker_proof](borrow_checker_proof.md) 定理 1 数据竞争自由相容。
+形式化：$\text{pre}(C) \land \text{borrow\_compliant}(r) \rightarrow \text{DataRaceFree}(P)$。
+由 unsafe 契约与借用规则无冲突。
 
 **定理 UNSAFE-T2（unsafe 与所有权衔接）**：`unsafe` 中对 `Box::from_raw`、`ManuallyDrop` 等使用若保持 [ownership_model](ownership_model.md) 规则 2、3（唯一所有者、作用域释放），则与定理 3 内存安全相容。
 
