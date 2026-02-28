@@ -12,7 +12,11 @@
 
 ## 一、项目全貌（一句话）
 
-**本 research_notes 体系**：围绕 Rust 的**公理判定系统**、**语言表达力**、**组件组合法则**三大支柱，建立形式化定义→公理→定理→推论的**可追溯论证链**，覆盖所有权/借用/类型/异步/Pin/**Send/Sync**（formal_methods 六篇并表）、**安全可判定机制总览**、设计模式 23/43、并发选型、组合工程 CE-T1–T3，并与 RustBelt 等国际权威对标。聚焦**数学风格形式化论证 + Rust 示例**（L3/Coq/Lean 已归档）。
+**本 research_notes 体系**：围绕 Rust 的**公理判定系统**、**语言表达力**、**组件组合法则**三大支柱，
+建立形式化定义→公理→定理→推论的**可追溯论证链**，
+覆盖所有权/借用/类型/异步/Pin/**Send/Sync**（formal_methods 六篇并表）、**安全可判定机制总览**、设计模式 23/43、并发选型、组合工程 CE-T1–T3，
+并与 RustBelt 等国际权威对标。
+聚焦**数学风格形式化论证 + Rust 示例**（L3/Coq/Lean 已归档）。
 
 ---
 
@@ -78,7 +82,9 @@
 
 ## 四、论证脉络关系总览
 
-**论证思路**：定义先行 → 公理链闭环 → 论证可追溯 → 证明结构化 → 边界有反例。**完备性自检**：formal_methods 六篇 × 六维（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）见 [FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
+**论证思路**：定义先行 → 公理链闭环 → 论证可追溯 → 证明结构化 → 边界有反例。
+**完备性自检**：formal_methods 六篇 × 六维（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）
+见 [FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
 
 **论证流向**（详见 [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md)）：
 

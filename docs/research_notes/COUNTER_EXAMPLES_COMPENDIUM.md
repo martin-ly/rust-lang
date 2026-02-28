@@ -36,7 +36,7 @@ fn main() {
 
 **编译器错误**:
 
-```
+```text
 error[E0382]: borrow of moved value: `x`
  --> src/main.rs:4:20
   |

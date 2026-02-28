@@ -16,21 +16,21 @@
         │                      │                      │
    【核心概念】              【模式】                【引擎】
         │                      │                      │
-    ├─状态机               ├─顺序流               ├─Temporal
-    │  ├─状态               │  └─串行执行           ├─Cadence
-    │  ├─转换               ├─并行流               ├─自建Rust
-    │  └─事件               │  ├─Fork/Join          └─LiteFlow
-    ├─活动                  ├─条件分支
-    │  ├─自动活动           │  ├─If/Else
-    │  ├─人工任务           │  └─Switch
-    │  └─子流程             ├─循环
-    ├─补偿                  │  ├─While
-    │  ├─补偿链             │  └─ForEach
-    │  └─Saga集成           └─异常处理
-    └─超时/重试                ├─Try/Catch
-       ├─活动超时              └─补偿
-       ├─工作流超时
-       └─重试策略
+     ├─状态机               ├─顺序流               ├─Temporal
+     │  ├─状态               │  └─串行执行           ├─Cadence
+     │  ├─转换               ├─并行流               ├─自建Rust
+     │  └─事件               │  ├─Fork/Join          └─LiteFlow
+     ├─活动                  ├─条件分支
+     │  ├─自动活动           │  ├─If/Else
+     │  ├─人工任务           │  └─Switch
+     │  └─子流程             ├─循环
+     ├─补偿                  │  ├─While
+     │  ├─补偿链             │  └─ForEach
+     │  └─Saga集成           └─异常处理
+     └─超时/重试                ├─Try/Catch
+          ├─活动超时              └─补偿
+          ├─工作流超时
+          └─重试策略
 ```
 
 ---
@@ -46,12 +46,12 @@
             │                  │                  │
        【初始状态】          【执行状态】        【终止状态】
             │                  │                  │
-        ├─Created           ├─Running          ├─Completed
-        │                   │  ├─ActivityX     │  └─成功完成
-        └─Initialized       │  ├─Waiting       ├─Failed
-                            │  └─Compensating  │  └─失败补偿
-                            │                  └─Cancelled
-                            └─Suspended           └─被取消
+            ├─Created           ├─Running          ├─Completed
+            │                   │  ├─ActivityX     │  └─成功完成
+            └─Initialized       │  ├─Waiting       ├─Failed
+                                │  └─Compensating  │  └─失败补偿
+                                │                  └─Cancelled
+                                └─Suspended           └─被取消
 ```
 
 **状态转换规则**:
@@ -86,15 +86,15 @@ $。
             │                  │                  │
        【自动活动】          【人工活动】        【控制活动】
             │                  │                  │
-        ├─Service调用        ├─用户任务         ├─开始/结束
-        │  ├─同步调用          │  ├─审批          ├─分支/合并
-        │  └─异步调用          │  └─填写          ├─条件
-        ├─脚本执行            ├─会签             └─子流程
-        │  ├─表达式            │  └─多人审批
-        │  └─函数              └─接收任务
-        └─规则执行               └─消息等待
-           ├─DMN决策
-           └─规则引擎
+            ├─Service调用      ├─用户任务          ├─开始/结束
+            │  ├─同步调用       │  ├─审批          ├─分支/合并
+            │  └─异步调用       │  └─填写          ├─条件
+            ├─脚本执行          ├─会签             └─子流程
+            │  ├─表达式         │  └─多人审批
+            │  └─函数           └─接收任务
+            └─规则执行               └─消息等待
+               ├─DMN决策
+               └─规则引擎
 ```
 
 **活动属性**:
@@ -117,19 +117,19 @@ $。
 ### 3. 补偿链模式
 
 ```text
-                          补偿链
+                            补偿链
                                │
             ┌──────────────────┼──────────────────┐
             │                  │                  │
        【补偿策略】          【补偿顺序】        【补偿结果】
             │                  │                  │
-        ├─向后补偿          ├─逆序补偿         ├─完全补偿
-        │  └─撤销已执行        │  └─LIFO          ├─部分补偿
-        ├─向前补偿          ├─选择性补偿        └─补偿失败
-        │  └─继续执行          │  └─跳过可选
-        └─混合补偿          └─并行补偿
-           ├─向后为主
-           └─向前为辅
+            ├─向后补偿          ├─逆序补偿         ├─完全补偿
+            │  └─撤销已执行     │  └─LIFO          ├─部分补偿
+            ├─向前补偿          ├─选择性补偿        └─补偿失败
+            │  └─继续执行       │  └─跳过可选
+            └─混合补偿          └─并行补偿
+               ├─向后为主
+               └─向前为辅
 ```
 
 **补偿链执行流程**:
@@ -146,7 +146,10 @@ Comp3(undo) <- Comp2(undo) <- Comp1(undo)
 
 **形式化定义**（数学风格）:
 
-**Def WF3（补偿链）**：设栈 $\mathit{stack} = [c_n, \ldots, c_1]$（LIFO）。补偿执行 $\mathit{execute\_compensation}(\mathit{stack})$：若 $\mathit{stack} = []$ 则成功；否则对 $c_1$ 执行 $\mathit{comp}(c_1.\mathit{output})$，成功则递归 $\mathit{rest}$，失败则整体失败。与 [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md) Saga 补偿语义一致。
+**Def WF3（补偿链）**：设栈 $\mathit{stack} = [c_n, \ldots, c_1]$（LIFO）。
+补偿执行 $\mathit{execute\_compensation}(\mathit{stack})$：若 $\mathit{stack} = []$ 则成功；
+否则对 $c_1$ 执行 $\mathit{comp}(c_1.\mathit{output})$，成功则递归 $\mathit{rest}$，失败则整体失败。
+与 [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md) Saga 补偿语义一致。
 
 ---
 
@@ -159,18 +162,18 @@ Comp3(undo) <- Comp2(undo) <- Comp1(undo)
         │                      │                      │
    【Temporal】             【Cadence】            【自建Rust】
         │                      │                      │
-    ├─持久化优先           ├─Uber开源            ├─轻量级
-    ├─多语言SDK            ├─兼容Temporal        ├─无外部依赖
-    ├─可见性UI             ├─性能优化            ├─完全控制
-    └─云原生               └─内部部署            └─学习成本
+     ├─持久化优先           ├─Uber开源            ├─轻量级
+     ├─多语言SDK            ├─兼容Temporal        ├─无外部依赖
+     ├─可见性UI             ├─性能优化            ├─完全控制
+     └─云原生               └─内部部署            └─学习成本
         │                      │                      │
         └──────────────────────┼──────────────────────┘
-                                 │
-                         【选型维度】
-                         ├─持久化需求
-                         ├─吞吐量要求
-                         ├─可见性需求
-                         └─运维复杂度
+                               │
+                              【选型维度】
+                              ├─持久化需求
+                              ├─吞吐量要求
+                              ├─可见性需求
+                              └─运维复杂度
 ```
 
 **引擎能力矩阵**:
@@ -210,9 +213,9 @@ Comp3(undo) <- Comp2(undo) <- Comp1(undo)
         │                  │                  │
    【分布式模式】        【类型系统】        【异步编程】
         │                  │                  │
-    ├─Saga            ├─Result类型        ├─Future
-    ├─CQRS            ├─泛型活动           ├─async/await
-    └─事务            └─类型安全补偿       └─超时控制
+     ├─Saga            ├─Result类型        ├─Future
+     ├─CQRS            ├─泛型活动           ├─async/await
+     └─事务            └─类型安全补偿       └─超时控制
         │                      │
         └──────────────────────┘
                   │

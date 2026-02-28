@@ -15,7 +15,10 @@
 
 **Def 1.2（三维边界一致性）**:
 
-若 $B_s(P)$、$B_p(P)$、$B_e(P)$ 与 [safe_unsafe_matrix](../05_boundary_system/safe_unsafe_matrix.md)、[supported_unsupported_matrix](../05_boundary_system/supported_unsupported_matrix.md)、[expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md) 三矩阵对应一致，则称模式 $P$ 的边界**与体系一致**。
+若 $B_s(P)$、$B_p(P)$、$B_e(P)$ 与 [safe_unsafe_matrix](../05_boundary_system/safe_unsafe_matrix.md)、
+[supported_unsupported_matrix](../05_boundary_system/supported_unsupported_matrix.md)、
+[expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md) 三矩阵对应一致，
+则称模式 $P$ 的边界**与体系一致**。
 
 **Axiom BMP1**：设计模式边界由实现路径唯一确定；同一模式不同实现（如 Singleton 用 OnceLock vs static mut）可能对应不同 $B_s$。
 

@@ -17,9 +17,9 @@
             │                    │                    │
     ┌───────┴───────┐    ┌───────┴───────┐    ┌───────┴───────┐
     │               │    │               │    │               │
- unsafe fn    unsafe block *const T     *mut T  extern        #[no_mangle]
+unsafe fn    unsafe block *const T     *mut T  extern        #[no_mangle]
     │               │      │               │      │               │
- unsafe trait  unsafe impl  不可变原始指针 可变原始指针 C接口         符号导出
+unsafe trait  unsafe impl  不可变原始指针 可变原始指针 C接口         符号导出
 ```
 
 ---

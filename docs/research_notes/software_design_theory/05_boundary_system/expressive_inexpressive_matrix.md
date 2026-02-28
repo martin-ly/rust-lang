@@ -27,7 +27,10 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$ 当且仅当：对任意输入 $x$�
 
 **定理 EIM-T1**：若模式 $P$ 仅依赖接口、多态、组合、委托，则 $\mathit{ExprB}(P) = \mathrm{Same}$。
 
-*证明*：trait 即接口；`impl Trait for T` 即多态；结构体包装即组合；委托即方法转发。由 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) EB1–EB3。对任意输入 $x$，$P_{\mathrm{Rust}}(x)$ 与 $P_{\mathrm{OOP}}(x)$ 行为等价；依 Def 1.2 得 $\mathit{ExprB}(P) = \mathrm{Same}$。∎
+*证明*：trait 即接口；`impl Trait for T` 即多态；结构体包装即组合；委托即方法转发。
+由 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) EB1–EB3。
+对任意输入 $x$，$P_{\mathrm{Rust}}(x)$ 与 $P_{\mathrm{OOP}}(x)$ 行为等价；
+依 Def 1.2 得 $\mathit{ExprB}(P) = \mathrm{Same}$。∎
 
 **定理 EIM-T2**：若模式 $P$ 依赖全局可变、继承、反射，则 $\mathit{ExprB}(P) \in \{\mathrm{Approx},\, \mathrm{NoExpr}\}$。
 
