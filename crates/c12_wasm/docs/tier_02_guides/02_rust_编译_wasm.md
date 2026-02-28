@@ -296,7 +296,8 @@ impl Counter {
 ### 类型映射
 
 | Rust 类型      | JavaScript 类型  |
-| :--- | :--- || `i32`, `u32`   | `number`         |
+| :--- | :--- |
+| `i32`, `u32`   | `number`         |
 | `i64`, `u64`   | `BigInt`         |
 | `f32`, `f64`   | `number`         |
 | `bool`         | `boolean`        |

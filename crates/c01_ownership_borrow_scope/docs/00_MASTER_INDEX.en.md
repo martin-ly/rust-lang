@@ -8,7 +8,8 @@
 ## Official Resources
 
 | Resource | Link |
-| :--- | :--- || **The Rust Book** | [Ch. 4 Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) |
+| :--- | :--- |
+| **The Rust Book** | [Ch. 4 Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) |
 | **Rust By Example** | [Scope and lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html) |
 | **Rust Reference** | [References and Borrowing](https://doc.rust-lang.org/reference/types/pointer.html) |
 | **Rustonomicon** | [Unsafe code](https://doc.rust-lang.org/nomicon/) |
@@ -26,7 +27,8 @@
 ### Tier Structure
 
 | Tier | Name | Entry |
-| :--- | :--- | :--- || **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/README.md) |
+| :--- | :--- | :--- |
+| **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/README.md) |
 | **Tier 2** | Core Concepts | [tier_02_guides/](tier_02_guides/README.md) |
 | **Tier 3** | Advanced | [tier_03_references/](tier_03_references/README.md) |
 | **Tier 4** | Theoretical | [tier_04_advanced/](tier_04_advanced/README.md) |

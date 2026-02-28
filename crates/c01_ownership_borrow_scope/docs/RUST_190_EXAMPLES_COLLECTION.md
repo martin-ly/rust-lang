@@ -1385,7 +1385,8 @@ fn arc_multithreading() {
 
     for i in 0..3 {
         let data_clone = Arc::clone(&data);
-        let handle = thread::spawn(move || {
+        let handle = thread::spawn(move |
+| {
             println!("Thread {}: {:?}", i, data_clone);
         });
         handles.push(handle);
@@ -1407,7 +1408,8 @@ fn arc_with_mutex() {
 
     for _ in 0..10 {
         let counter_clone = Arc::clone(&counter);
-        let handle = thread::spawn(move || {
+        let handle = thread::spawn(move |
+| {
             let mut num = counter_clone.lock().unwrap();
             *num += 1;
         });
@@ -1431,7 +1433,8 @@ fn arc_with_rwlock() {
     // 多个读线程
     for i in 0..3 {
         let data_clone = Arc::clone(&data);
-        let handle = thread::spawn(move || {
+        let handle = thread::spawn(move |
+| {
             let reader = data_clone.read().unwrap();
             println!("Reader {}: {:?}", i, *reader);
         });
@@ -1440,7 +1443,8 @@ fn arc_with_rwlock() {
 
     // 一个写线程
     let data_clone = Arc::clone(&data);
-    let write_handle = thread::spawn(move || {
+    let write_handle = thread::spawn(move |
+| {
         let mut writer = data_clone.write().unwrap();
         writer.push(4);
         println!("Writer: added 4");

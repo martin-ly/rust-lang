@@ -363,7 +363,8 @@ impl SelfReferential {
 **A**: 根据需求选择智能指针：
 
 | 场景                   | 推荐方案         | 说明         |
-| :--- | :--- | :--- || 单线程共享             | `Rc<T>`          | 引用计数     |
+| :--- | :--- | :--- |
+| 单线程共享             | `Rc<T>`          | 引用计数     |
 | 多线程共享（只读）     | `Arc<T>`         | 原子引用计数 |
 | 多线程共享（可写）     | `Arc<Mutex<T>>`  | 互斥锁       |
 | 多线程共享（读多写少） | `Arc<RwLock<T>>` | 读写锁       |
@@ -385,7 +386,8 @@ use std::thread;
 let data = Arc::new(Mutex::new(vec![1, 2, 3]));
 let data2 = Arc::clone(&data);
 
-thread::spawn(move || {
+thread::spawn(move |
+| {
     data2.lock().unwrap().push(4);
 });
 ```

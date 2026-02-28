@@ -1,4 +1,4 @@
-﻿# WasmEdge 插件系统开发指南
+# WasmEdge 插件系统开发指南
 
 > **文档状态**: ✅ 完成
 > **更新日期**: 2025-10-30
@@ -143,7 +143,8 @@ WasmEdge 插件系统开发指南
 ### 多维概念对比矩阵
 
 | 插件技术                    | 功能 | 性能 | 复杂度 | 适用场景 | Rust 1.92.0 |
-| :--- | :--- | :--- | :--- | :--- | :--- || **WASI-NN Plugin**          | 高   | 高   | 中     | AI 推理  | ✅          |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **WASI-NN Plugin**          | 高   | 高   | 中     | AI 推理  | ✅          |
 | **WASI-Crypto Plugin**      | 高   | 高   | 中     | 密码学   | ✅          |
 | **WasmEdge-Process Plugin** | 高   | 高   | 中     | 进程管理 | ✅          |
 | **自定义插件**              | 最高 | 高   | 高     | 扩展功能 | ✅          |
@@ -187,7 +188,8 @@ WasmEdge 插件系统允许扩展 WasmEdge 运行时的功能，无需修改核�
 ### WasmEdge 0.14+ 新特性
 
 | 特性             | 说明               | 状态      |
-| :--- | :--- | :--- || **统一插件 API** | 简化的插件开发接口 | ✅ 稳定   |
+| :--- | :--- | :--- |
+| **统一插件 API** | 简化的插件开发接口 | ✅ 稳定   |
 | **插件管理器**   | 自动发现和加载插件 | ✅ 稳定   |
 | **WASI-NN 2.0**  | 增强的神经网络推理 | ✅ 稳定   |
 | **WASI-Crypto**  | 标准化加密接口     | 🔄 预览   |
@@ -275,7 +277,8 @@ WasmEdge 插件系统允许扩展 WasmEdge 运行时的功能，无需修改核�
 #### 支持的后端
 
 | 后端                | 框架      | 状态    | 性能       |
-| :--- | :--- | :--- | :--- || **OpenVINO**        | Intel     | ✅ 稳定 | ⭐⭐⭐⭐⭐ |
+| :--- | :--- | :--- | :--- |
+| **OpenVINO**        | Intel     | ✅ 稳定 | ⭐⭐⭐⭐⭐ |
 | **TensorFlow Lite** | Google    | ✅ 稳定 | ⭐⭐⭐⭐   |
 | **PyTorch**         | Meta      | ✅ 稳定 | ⭐⭐⭐⭐⭐ |
 | **GGML**            | llama.cpp | ✅ 稳定 | ⭐⭐⭐⭐   |
@@ -972,7 +975,8 @@ WasmEdge_Result redis_set(
 // ✅ 好的实践：详细的错误处理
 WasmEdge_Result my_function(...) {
     // 检查参数
-    if (ptr == 0 || len == 0) {
+    if (ptr == 0 |
+| len == 0) {
         return WasmEdge_Result_Gen(
             WasmEdge_ErrCategory_UserLevelError,
             MY_PLUGIN_ERROR_INVALID_PARAM

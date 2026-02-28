@@ -8,7 +8,8 @@
 ## 核心概念（4 条）
 
 | 概念 | 说明 |
-| :--- | :--- || **WASM 基础** | 二进制格式、栈机、线性内存；跨平台 |
+| :--- | :--- |
+| **WASM 基础** | 二进制格式、栈机、线性内存；跨平台 |
 | **wasm-bindgen** | Rust↔JS 绑定；`#[wasm_bindgen]`；类型映射 |
 | **WASI** | 系统接口；文件、网络；服务端 WASM |
 | **构建工具** | `wasm-pack`；`trunk`；target `wasm32-unknown-unknown` |
@@ -18,7 +19,8 @@
 ## 常见坑与解决
 
 | 坑 | 解决 |
-| :--- | :--- || 包体积过大 | `opt-level = "z"`；`wasm-opt`；避免拉入 std 全量 |
+| :--- | :--- |
+| 包体积过大 | `opt-level = "z"`；`wasm-opt`；避免拉入 std 全量 |
 | JS 互操作类型 | 用 `JsValue`、`serde_wasm_bindgen`；注意 ABI |
 | 异步 bridge | `wasm_bindgen_futures`；`Promise` 转换 |
 | 调试困难 | `console_error_panic_hook`；source map |
@@ -28,7 +30,8 @@
 ## WASM 速选
 
 | 场景 | 选型 |
-| :--- | :--- || 前端集成 | wasm-bindgen + wasm-pack |
+| :--- | :--- |
+| 前端集成 | wasm-bindgen + wasm-pack |
 | 服务端/边缘 | WASI；wasmtime、WasmEdge |
 | 纯计算模块 | 最小化导出；无 JS 依赖 |
 | 游戏/图形 | wgpu；raw WebGL |

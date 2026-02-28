@@ -1,4 +1,4 @@
-﻿# 实际项目案例 (Real-World Case Studies)
+# 实际项目案例 (Real-World Case Studies)
 
 ## 📋 目录
 
@@ -142,7 +142,8 @@ document.addEventListener("mousemove", e => {
 **对比**：
 
 | 指标         | 纯 JavaScript | Wasm 版本 | 改进     |
-| :--- | :--- | :--- | :--- || 渲染 1万图层 | 850ms         | 120ms     | **7.1×** |
+| :--- | :--- | :--- | :--- |
+| 渲染 1万图层 | 850ms         | 120ms     | **7.1×** |
 | 内存占用     | 1.2 GB        | 450 MB    | **2.7×** |
 | 首次加载     | 3.5s          | 1.8s      | **1.9×** |
 
@@ -357,7 +358,8 @@ autocad-web/
 **运行性能**：
 
 | 操作     | 桌面版 | Web 版 | 比率 |
-| :--- | :--- | :--- | :--- || 打开文件 | 5s     | 8s     | 0.63 |
+| :--- | :--- | :--- | :--- |
+| 打开文件 | 5s     | 8s     | 0.63 |
 | 渲染场景 | 16ms   | 22ms   | 0.73 |
 | 几何运算 | 100%   | 92%    | 0.92 |
 
@@ -638,7 +640,8 @@ document.getElementById("upload").addEventListener("change", async e => {
 **对比分析**：
 
 | 方案        | 带宽成本 | 存储成本 | 总成本/月    |
-| :--- | :--- | :--- | :--- || 原始方案    | $80,000  | $50,000  | **$130,000** |
+| :--- | :--- | :--- | :--- |
+| 原始方案    | $80,000  | $50,000  | **$130,000** |
 | 服务端压缩  | $50,000  | $15,000  | **$65,000**  |
 | 客户端 Wasm | $15,000  | $15,000  | **$30,000**  |
 
@@ -662,10 +665,13 @@ document.getElementById("upload").addEventListener("change", async e => {
 ```javascript
 // 设备自适应
 function getCompressionQuality() {
-  const memory = navigator.deviceMemory || 4
-  const cores = navigator.hardwareConcurrency || 2
+  const memory = navigator.deviceMemory |
+| 4
+  const cores = navigator.hardwareConcurrency |
+| 2
 
-  if (memory < 2 || cores < 2) {
+  if (memory < 2 |
+| cores < 2) {
     return 70 // 低端设备：快速压缩
   } else if (memory < 4) {
     return 80 // 中端设备：平衡

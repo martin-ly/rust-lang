@@ -69,7 +69,8 @@
 **核心原则**:
 
 | 原则     | 说明                 | 价值         |
-| :--- | :--- | :--- || 早测试   | 开发过程中持续测试   | 及早发现问题 |
+| :--- | :--- | :--- |
+| 早测试   | 开发过程中持续测试   | 及早发现问题 |
 | 自动化   | 尽可能自动化测试流程 | 提高效率     |
 | 快速反馈 | 单元测试应秒级完成   | 快速迭代     |
 | 真实环境 | 测试接近生产环境     | 发现实际问题 |
@@ -1182,7 +1183,8 @@ test("Mock WASM 导入", async () => {
       // Mock 数据获取
       fetch_data: (url_ptr, url_len) => {
         const url = readWasmString(url_ptr, url_len)
-        const response = fetchResponses.get(url) || "default response"
+        const response = fetchResponses.get(url) |
+| "default response"
         return writeWasmString(response)
       },
 
@@ -1523,7 +1525,8 @@ if __name__ == '__main__':
 **比例分配**:
 
 | 测试类型 | 比例 | 数量示例 | 运行时间 |
-| :--- | :--- | :--- | :--- || 单元测试 | 70%  | 700+     | 秒级     |
+| :--- | :--- | :--- | :--- |
+| 单元测试 | 70%  | 700+     | 秒级     |
 | 集成测试 | 20%  | 200+     | 分钟级   |
 | E2E 测试 | 10%  | 100+     | 小时级   |
 

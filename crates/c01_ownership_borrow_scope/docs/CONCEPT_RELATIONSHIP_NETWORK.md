@@ -740,7 +740,8 @@ graph TB
     Move --> M2[线程间传递]
     Move --> M3[延长生命周期]
 
-    M1 -->|语法| MoveClosure[move || {}]
+    M1 -->|语法| MoveClosure[move |
+| {}]
     M1 -->|效果| TakeAll[捕获所有值]
 
     M2 -->|用于| ThreadSpawn[thread::spawn]

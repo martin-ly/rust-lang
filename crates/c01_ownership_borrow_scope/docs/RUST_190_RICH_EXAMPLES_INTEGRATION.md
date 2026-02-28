@@ -1049,7 +1049,8 @@ fn arc_examples() {
     // 跨线程共享数据
     for i in 0..3 {
         let data_clone = Arc::clone(&data);
-        let handle = thread::spawn(move || {
+        let handle = thread::spawn(move |
+| {
             println!("线程 {} 看到的数据: {:?}", i, data_clone);
             data_clone.iter().sum::<i32>()
         });
@@ -1228,7 +1229,8 @@ fn concurrent_ownership_examples() {
 
     // 1. 移动所有权到线程
     let data = vec![1, 2, 3, 4, 5];
-    let handle = thread::spawn(move || {
+    let handle = thread::spawn(move |
+| {
         println!("子线程数据: {:?}", data);
         data.iter().sum::<i32>()
     });
@@ -1243,7 +1245,8 @@ fn concurrent_ownership_examples() {
 
     for i in 0..3 {
         let data_clone = Arc::clone(&shared_data);
-        let handle = thread::spawn(move || {
+        let handle = thread::spawn(move |
+| {
             println!("线程 {} - 数据: {:?}", i, data_clone);
             thread::sleep(Duration::from_millis(100));
         });
@@ -1271,7 +1274,8 @@ fn demonstrate_mutex() {
 
     for i in 0..10 {
         let counter_clone = Arc::clone(&counter);
-        let handle = thread::spawn(move || {
+        let handle = thread::spawn(move |
+| {
             let mut num = counter_clone.lock().unwrap();
             *num += 1;
             println!("线程 {} 增加计数", i);
@@ -1295,7 +1299,8 @@ fn demonstrate_rwlock() {
     // 多个读线程
     for i in 0..3 {
         let data_clone = Arc::clone(&data);
-        let handle = thread::spawn(move || {
+        let handle = thread::spawn(move |
+| {
             let read_guard = data_clone.read().unwrap();
             println!("读线程 {}: {:?}", i, *read_guard);
             thread::sleep(Duration::from_millis(100));
@@ -1305,7 +1310,8 @@ fn demonstrate_rwlock() {
 
     // 一个写线程
     let data_clone = Arc::clone(&data);
-    let write_handle = thread::spawn(move || {
+    let write_handle = thread::spawn(move |
+| {
         thread::sleep(Duration::from_millis(150));
         let mut write_guard = data_clone.write().unwrap();
         write_guard.push(4);
@@ -1343,7 +1349,8 @@ fn message_passing_examples() {
     // 1. 基础channel
     let (tx, rx) = mpsc::channel();
 
-    thread::spawn(move || {
+    thread::spawn(move |
+| {
         let messages = vec![
             String::from("消息1"),
             String::from("消息2"),
@@ -1375,7 +1382,8 @@ fn demonstrate_multiple_producers() {
 
     for i in 0..3 {
         let tx_clone = tx.clone();
-        let handle = thread::spawn(move || {
+        let handle = thread::spawn(move |
+| {
             for j in 0..3 {
                 let msg = format!("生产者 {} - 消息 {}", i, j);
                 tx_clone.send(msg).unwrap();
@@ -1409,7 +1417,8 @@ fn demonstrate_task_queue() {
     let (tx, rx) = mpsc::channel();
 
     // 工作线程
-    let worker = thread::spawn(move || {
+    let worker = thread::spawn(move |
+| {
         loop {
             match rx.recv() {
                 Ok(Task::Process(value)) => {
@@ -1659,7 +1668,8 @@ where
 
     for i in 0..3 {
         let cache_clone = Arc::clone(&cache_arc);
-        let handle = thread::spawn(move || {
+        let handle = thread::spawn(move |
+| {
             println!("线程 {} 访问缓存", i);
             println!("线程 {} 看到缓存大小: {}", i, cache_clone.size());
         });
