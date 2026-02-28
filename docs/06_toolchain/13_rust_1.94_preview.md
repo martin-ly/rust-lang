@@ -262,7 +262,7 @@ include = [
 
 - [ ] 更新 [FORMAL_CONCEPTS_ENCYCLOPEDIA](../research_notes/FORMAL_CONCEPTS_ENCYCLOPEDIA.md) 添加新类型
 - [ ] 更新 [COUNTER_EXAMPLES_COMPENDIUM](../research_notes/COUNTER_EXAMPLES_COMPENDIUM.md) 添加边界案例
-- [ ] 更新 [RUST_193_FEATURE_MATRIX](./research_notes/RUST_193_FEATURE_MATRIX.md) 至 1.94
+- [ ] 更新 [RUST_193_FEATURE_MATRIX](../research_notes/RUST_193_FEATURE_MATRIX.md) 至 1.94
 
 ---
 

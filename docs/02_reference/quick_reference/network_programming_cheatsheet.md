@@ -1,6 +1,6 @@
 # 网络编程快速参考卡片
 
-> **快速参考** | [完整文档](../../../crates/c10_network_programming/docs/) | [代码示例](../../../crates/c10_network_programming/examples/)
+> **快速参考** | [完整文档](../../../crates/c10_networks/docs/) | [代码示例](../../../crates/c10_networks/examples/)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-01-27
 > **Rust 版本**: 1.93.1+ (Edition 2024)

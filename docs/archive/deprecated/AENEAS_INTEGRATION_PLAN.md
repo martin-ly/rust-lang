@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-20
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **用途**: 调研 Aeneas（Safe Rust → Coq/F*/HOL4/Lean）的输入要求，给出「本项目文档 → 工具输入」的映射方案
-> **参考**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
+> **参考**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
 > **状态**: 📋 规划中；步骤 1–4 可执行
 
 ---
@@ -34,8 +34,8 @@
 
 | Aeneas 需求 | 本项目对应 | 映射方式 |
 | :--- | :--- | :--- |
-| Rust 源码 | 无直接对应；需编写示例程序 | 从 [practical_applications](./practical_applications.md)、各文档代码示例提取 |
-| Safe 子集 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 选无 unsafe 的示例 |
+| Rust 源码 | 无直接对应；需编写示例程序 | 从 [practical_applications](../../research_notes/practical_applications.md)、各文档代码示例提取 |
+| Safe 子集 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 选无 unsafe 的示例 |
 | 类型注解 | type_system、trait 形式化 | 确保示例满足本项目定理（如 ownership T2、borrow T1） |
 
 ### 2.2 验证目标对应

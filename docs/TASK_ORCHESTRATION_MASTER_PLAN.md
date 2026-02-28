@@ -205,8 +205,8 @@
 | :--- | :---: | :--- | :---: | :--- |
 | 并发模型选型决策树 | ✅ | 06_boundary_analysis 已有 | P1 | P1-T15 |
 | 设计模式选型决策树 | ✅ | 已完善 | P1 | P1-T10 |
-| 分布式架构选型决策树 | ✅ | [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](docs/research_notes/formal_methods/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md) | P1 | P1-T11 |
-| 工作流引擎选型决策树 | ✅ | [WORKFLOW_ENGINE_DECISION_TREE](docs/research_notes/formal_methods/WORKFLOW_ENGINE_DECISION_TREE.md) | P1 | P1-T12 |
+| 分布式架构选型决策树 | ✅ | [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](./research_notes/formal_methods/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md) | P1 | P1-T11 |
+| 工作流引擎选型决策树 | ✅ | [WORKFLOW_ENGINE_DECISION_TREE](./research_notes/formal_methods/WORKFLOW_ENGINE_DECISION_TREE.md) | P1 | P1-T12 |
 
 ---
 
@@ -279,7 +279,7 @@
 
 | 目标 | 入口文档 |
 | :--- | :--- |
-| 详细 100% 完成计划 | [COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN](./docs/research_notes/COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN.md) |
-| 思维表征完善计划 | [MIND_REPRESENTATION_COMPLETION_PLAN](./docs/research_notes/MIND_REPRESENTATION_COMPLETION_PLAN.md) |
-| 核心定理 L2 证明 | [CORE_THEOREMS_FULL_PROOFS](./docs/research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
-| 研究笔记总览 | [README_100_PERCENT_COMPLETION](./docs/research_notes/README_100_PERCENT_COMPLETION.md) |
+| 详细 100% 完成计划 | [COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN](./research_notes/COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN.md) |
+| 思维表征完善计划 | [MIND_REPRESENTATION_COMPLETION_PLAN](./research_notes/MIND_REPRESENTATION_COMPLETION_PLAN.md) |
+| 核心定理 L2 证明 | [CORE_THEOREMS_FULL_PROOFS](./research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
+| 研究笔记总览 | [README_100_PERCENT_COMPLETION](./research_notes/README_100_PERCENT_COMPLETION.md) |

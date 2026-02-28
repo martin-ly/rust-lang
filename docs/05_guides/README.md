@@ -90,7 +90,7 @@ impl ConfigBuilder {
 | [UNSAFE_RUST_GUIDE.md](./UNSAFE_RUST_GUIDE.md) | Unsafe Rust | ⭐⭐⭐⭐ |
 | [TROUBLESHOOTING_GUIDE.md](./TROUBLESHOOTING_GUIDE.md) | 故障排查 | ⭐⭐ |
 | [BEST_PRACTICES.md](./BEST_PRACTICES.md) | 最佳实践 | ⭐⭐⭐ |
-| [workflow/](./workflow/) | 工作流理论与模型 | ⭐⭐⭐ |
+| [workflow/](./workflow/README.md) | 工作流理论与模型 | ⭐⭐⭐ |
 
 ---
 
