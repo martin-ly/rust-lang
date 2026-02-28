@@ -133,7 +133,10 @@ $
 
 **状态**：✅ **100% 完成**，无剩余缺口。
 
-**后续可持续推进**：✅ 阶段 A–D 已完成：Send/Sync 独立形式化 [send_sync_formalization](send_sync_formalization.md)、安全可判定机制总览 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)、并发+Trait 族四维表、思维表征四类绑定（HIERARCHICAL_MAPPING、六篇并表）。详见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)。
+**后续可持续推进**：✅ 阶段 A–D 已完成：Send/Sync 独立形式化 [send_sync_formalization](send_sync_formalization.md)、
+安全可判定机制总览 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)、
+并发+Trait 族四维表、思维表征四类绑定（HIERARCHICAL_MAPPING、六篇并表）。
+详见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)。
 
 ---
 

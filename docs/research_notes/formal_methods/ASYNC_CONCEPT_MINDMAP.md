@@ -151,7 +151,7 @@ impl Future for MyAsyncFn {
 
 ### 执行流程
 
-```
+```text
 ┌──────────┐     ┌──────────┐     ┌──────────┐
 │  创建    │────>│  Poll    │────>│ Pending  │
 │  Future  │     │  首次    │     │ 注册Waker│
@@ -353,7 +353,7 @@ async fn cancellation_safe() {
 
 ---
 
-## 核心概念详解
+## 核心概念详解1
 
 ### Future trait
 
