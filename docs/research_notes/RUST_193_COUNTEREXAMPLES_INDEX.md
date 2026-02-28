@@ -1,8 +1,8 @@
-# Rust 1.93 相关反例与边界集中索引
+﻿# Rust 1.93 相关反例与边界集中索引
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 集中列出与 Rust 1.93 变更相关的反例与边界情况，便于迁移与形式化文档交叉引用
 > **上位**: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)、[FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md)
@@ -12,7 +12,7 @@
 ## 📊 目录 {#-目录}
 
 - [Rust 1.93 相关反例与边界集中索引](#rust-193-相关反例与边界集中索引)
-  - [📊 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [1.93 新增/变更相关反例](#193-新增变更相关反例)
   - [与形式化/设计文档的衔接](#与形式化设计文档的衔接)
 

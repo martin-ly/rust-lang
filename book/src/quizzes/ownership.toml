@@ -1,0 +1,143 @@
+[[questions]]
+type = "SingleChoice"
+id = "ownership_basic_1"
+prompt = "以下代码的输出是什么？\n\n```rust\nfn main() {\n    let s1 = String::from(\"hello\");\n    let s2 = s1;\n    println!(\"{}\", s1);\n}\n```"
+answer = 2
+options = [
+  "编译通过，输出: hello",
+  "运行时 panic",
+  "编译错误",
+  "编译通过，无输出"
+]
+explanation = "String 类型没有实现 Copy trait，因此 `let s2 = s1` 会转移所有权（Move），之后 s1 不再有效。尝试使用 s1 会导致编译错误 E0382: borrow of moved value。"
+difficulty = "基础"
+
+[[questions]]
+type = "TrueFalse"
+id = "ownership_basic_2"
+prompt = "所有类型默认都实现了 Copy trait。"
+answer = false
+explanation = "错误。Rust 中只有简单的标量类型（如整数、浮点数、布尔值、字符）和只包含 Copy 类型的元组/数组默认实现 Copy。String、Vec、Box 等拥有堆内存的类型默认不实现 Copy，需要显式实现 Clone trait 才能复制。"
+difficulty = "基础"
+
+[[questions]]
+type = "SingleChoice"
+id = "ownership_basic_3"
+prompt = "以下哪些类型实现了 Copy trait？"
+answer = 0
+options = [
+  "i32, bool, char",
+  "String, Vec<i32>",
+  "Box<i32>, Rc<i32>",
+  "所有 Rust 类型"
+]
+explanation = "i32、bool、char 等基本标量类型实现了 Copy trait。String、Vec、Box、Rc 等涉及堆内存分配或引用计数的类型不实现 Copy，因为它们需要管理资源的所有权。"
+difficulty = "基础"
+
+[[questions]]
+type = "MultipleChoice"
+id = "ownership_basic_4"
+prompt = "关于所有权规则，以下哪些是正确的？（多选）"
+answer = [0, 1, 3]
+options = [
+  "Rust 中每个值都有一个所有者",
+  "同一时间只能有一个所有者",
+  "多个变量可以同时拥有一个值的所有权",
+  "当所有者离开作用域，值会被丢弃"
+]
+explanation = "Rust 所有权的三条基本规则：1) 每个值都有一个所有者；2) 同一时间只能有一个所有者；3) 当所有者离开作用域，值会被丢弃。选项 C 错误，所有权是独占的。"
+difficulty = "基础"
+
+[[questions]]
+type = "FillInBlank"
+id = "ownership_basic_5"
+prompt = "补全以下代码，使 `s` 在调用 `takes_ownership` 后仍然可用：\n\n```rust\nfn main() {\n    let s = String::from(\"hello\");\n    takes_ownership(_____);\n    println!(\"{}\", s);\n}\n\nfn takes_ownership(s: String) {\n    println!(\"{}\", s);\n}\n```"
+answer = ["s.clone()", "(&s).to_string()"]
+explanation = "答案可以是 `s.clone()` 或 `(&s).to_string()`。前者克隆整个 String，后者通过引用创建新的 String。两种方法都能在保持 s 所有权的同时传递一个副本给函数。"
+difficulty = "基础"
+
+[[questions]]
+type = "SingleChoice"
+id = "ownership_adv_1"
+prompt = "以下代码的输出是什么？\n\n```rust\nfn main() {\n    let x = 5;\n    let y = x;\n    println!(\"x = {}, y = {}\", x, y);\n}\n```"
+answer = 0
+options = [
+  "x = 5, y = 5",
+  "编译错误",
+  "x = 5, y = 随机值",
+  "运行时 panic"
+]
+explanation = "i32 实现了 Copy trait，因此 `let y = x` 是复制而不是移动。x 在赋值后仍然有效，程序输出 x = 5, y = 5。这是标量类型和复合类型的关键区别。"
+difficulty = "进阶"
+
+[[questions]]
+type = "SingleChoice"
+id = "ownership_adv_2"
+prompt = "以下代码有什么问题？\n\n```rust\nfn main() {\n    let s = String::from(\"hello\");\n    let r = &s;\n    let s2 = s;\n    println!(\"{}\", r);\n}\n```"
+answer = 1
+options = [
+  "没有问题，可以编译通过",
+  "编译错误：不能在拥有不可变引用的同时移动值",
+  "运行时 panic",
+  "编译警告但能通过"
+]
+explanation = "编译错误。当存在对 s 的引用 r 时，不能将 s 的所有权转移给 s2。这会违反引用有效性，因为 r 仍然指向 s 的内存。编译器会报错：cannot move out of `s` because it is borrowed。"
+difficulty = "进阶"
+
+[[questions]]
+type = "MultipleChoice"
+id = "ownership_adv_3"
+prompt = "以下哪些场景会触发所有权转移（Move）？（多选）"
+answer = [0, 2, 3]
+options = [
+  "将 String 赋值给另一个变量",
+  "将 i32 赋值给另一个变量",
+  "将值传递给非引用参数的函数",
+  "从函数返回非 Copy 类型的值"
+]
+explanation = "i32 实现了 Copy trait，赋值时是复制不是移动。String 等未实现 Copy 的类型在赋值、传参给非引用参数、作为返回值时都会触发 Move。"
+difficulty = "进阶"
+
+[[questions]]
+type = "FillInBlank"
+id = "ownership_adv_4"
+prompt = "补全代码，实现自定义类型的 Copy trait：\n\n```rust\n#[derive(_____)]\nstruct Point {\n    x: i32,\n    y: i32,\n}\n```"
+answer = ["Clone, Copy", "Copy, Clone"]
+explanation = "Copy trait 依赖于 Clone trait，因此必须同时派生 Clone 和 Copy。顺序不重要，`#[derive(Clone, Copy)]` 和 `#[derive(Copy, Clone)]` 都可以。注意：只有所有字段都实现了 Copy 的类型才能派生 Copy。"
+difficulty = "进阶"
+
+[[questions]]
+type = "SingleChoice"
+id = "ownership_challenge_1"
+prompt = "以下代码的输出是什么？\n\n```rust\nfn main() {\n    let mut s = String::from(\"hello\");\n    let r1 = &s;\n    let r2 = &s;\n    println!(\"{} {}\", r1, r2);\n    let r3 = &mut s;\n    r3.push_str(\" world\");\n    println!(\"{}\", r3);\n}\n```"
+answer = 0
+options = [
+  "hello hello / hello world",
+  "编译错误",
+  "运行时 panic",
+  "不确定"
+]
+explanation = "代码可以编译通过。r1 和 r2 是不可变引用，它们的生命周期在第一个 println! 后结束。之后创建的 r3 是唯一的可变引用，此时没有活跃的不可变引用，因此符合借用规则。"
+difficulty = "挑战"
+
+[[questions]]
+type = "TrueFalse"
+id = "ownership_challenge_2"
+prompt = "以下代码可以编译通过：\n\n```rust\nfn main() {\n    let s = String::from(\"hello\");\n    let r = &s;\n    drop(s);\n    println!(\"{}\", r);\n}\n```"
+answer = false
+explanation = "不能编译。drop(s) 会消耗 s 的所有权，但 r 仍然是对 s 的引用。这会导致悬垂引用，编译器会报错：cannot move out of `s` because it is borrowed。这是 Rust 防止悬垂指针的核心机制。"
+difficulty = "挑战"
+
+[[questions]]
+type = "SingleChoice"
+id = "ownership_challenge_3"
+prompt = "以下代码为什么无法编译？\n\n```rust\nfn get_string() -> &String {\n    let s = String::from(\"hello\");\n    &s\n}\n```"
+answer = 2
+options = [
+  "String 不能作为返回值",
+  "需要添加 mut 关键字",
+  "返回了悬垂引用：s 在函数结束时被释放",
+  "缺少 return 关键字"
+]
+explanation = "正确答案是 C。函数返回时 s 被 drop，但函数试图返回对 s 的引用。这会创建悬垂引用（dangling reference），指向已释放的内存。Rust 编译器在编译时就能检测并阻止这种错误。"
+difficulty = "挑战"

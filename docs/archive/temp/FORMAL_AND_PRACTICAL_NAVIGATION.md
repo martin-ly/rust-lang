@@ -1,8 +1,8 @@
-# 🗺️ 形式化理论与实践统一导航
+﻿# 🗺️ 形式化理论与实践统一导航
 
 > **创建日期**: 2025-10-30
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已归档
 ---
 
@@ -34,7 +34,7 @@
   - [代码示例](../../../crates/c01_ownership_borrow_scope/examples/) - 150+ 个所有权示例
   - [综合示例](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs) - 完整的所有权应用
   - [测试用例](../../../crates/c01_ownership_borrow_scope/tests/) - 完整的测试套件
-  - [Tier 文档](../../../crates/c01_ownership_borrow_scope/docs/) - 4-Tier 分层学习文档
+  - [Tier 文档](../../../crates/c01_ownership_borrow_scope/docs/README.md) - 4-Tier 分层学习文档
 
 **学习路径**:
 

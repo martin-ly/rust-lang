@@ -1,8 +1,8 @@
-# 执行模型边界分析
+﻿# 执行模型边界分析
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -56,7 +56,9 @@
 
 **定理 EB-T1（五模型安全边界）**：同步、异步、并发、并行均为纯 Safe；分布式在 FFI 场景需 unsafe，可封装为 Safe。
 
-*证明*：由 [01_synchronous](01_synchronous.md) SY-T2、[02_async](02_async.md) AS-T1、[03_concurrent](03_concurrent.md) CC-T1、[04_parallel](04_parallel.md) PL-T1、[05_distributed](05_distributed.md) DI-T1；各模型形式化文档已给出与 ownership/borrow/type_system 的衔接。
+*证明*：由 [01_synchronous](01_synchronous.md) SY-T2、[02_async](02_async.md) AS-T1、[03_concurrent](03_concurrent.md) CC-T1、
+[04_parallel](04_parallel.md) PL-T1、[05_distributed](05_distributed.md) DI-T1；
+各模型形式化文档已给出与 ownership/borrow/type_system 的衔接。
 
 **定理 EB-T2（边界一致性）**：$B_s$、$B_p$、$B_e$ 与 [05_boundary_system](../05_boundary_system/) 三维矩阵一致。
 
@@ -87,19 +89,28 @@
 - **Parallel**：多核同时执行；任务间可能同时运行；并行（rayon、join）
 - **Distributed**：跨节点；网络延迟与故障非确定；分布式
 
-**Axiom EB-DET1**：$\mathit{Det}(\mathrm{Sync}) = \mathrm{Sequential}$；$\mathit{Det}(\mathrm{Async}) = \mathit{Det}(\mathrm{Concurrent}) = \mathrm{Interleaved}$；$\mathit{Det}(\mathrm{Parallel}) = \mathrm{Parallel}$；$\mathit{Det}(\mathrm{Distributed}) = \mathrm{Distributed}$。
+**Axiom EB-DET1**：
+$\mathit{Det}(\mathrm{Sync}) = \mathrm{Sequential}$；
+$\mathit{Det}(\mathrm{Async}) = \mathit{Det}(\mathrm{Concurrent}) = \mathrm{Interleaved}$；
+$\mathit{Det}(\mathrm{Parallel}) = \mathrm{Parallel}$；
+$\mathit{Det}(\mathrm{Distributed}) = \mathrm{Distributed}$。
 
 **定理 EB-DET-T1（确定性蕴涵数据竞争自由）**：若 $M$ 为 Sync、Async、Concurrent 或 Parallel，且程序满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 定理 T1（数据竞争自由）及 Send/Sync 约束，则执行无数据竞争；执行顺序的非确定性不导致 UB。
 
 *证明*：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1；Send/Sync 保证跨线程传递安全；ownership/borrow 保证无别名违规；Interleaved/Parallel 的调度非确定性仅影响执行顺序，不影响内存安全。∎
 
-**推论 EB-DET-C1（控制确定性判定）**：对于「需保证执行顺序」的需求，选 Sync；对于「可接受非确定调度」的 I/O 并发，选 Async；对于「需 CPU 并行」的需求，选 Parallel；由 Def EB-DET1 与决策树。
+**推论 EB-DET-C1（控制确定性判定）**：对于「需保证执行顺序」的需求，选 Sync；
+对于「可接受非确定调度」的 I/O 并发，选 Async；
+对于「需 CPU 并行」的需求，选 Parallel；
+由 Def EB-DET1 与决策树。
 
 ---
 
 ## Rust 1.93 执行模型相关变更
 
-以下 Rust 1.93 变更影响执行模型与并发/并行设计；详见 [07_rust_1.93_full_changelog](../../../06_toolchain/07_rust_1.93_full_changelog.md)、[05_rust_1.93_vs_1.92_comparison](../../../06_toolchain/05_rust_1.93_vs_1.92_comparison.md)。
+以下 Rust 1.93 变更影响执行模型与并发/并行设计；
+详见 [07_rust_1.93_full_changelog](../../../06_toolchain/07_rust_1.93_full_changelog.md)、
+[05_rust_1.93_vs_1.92_comparison](../../../06_toolchain/05_rust_1.93_vs_1.92_comparison.md)。
 
 | 变更 | 影响 | 说明 |
 | :--- | :--- | :--- |
@@ -111,7 +122,9 @@
 
 ## 静态判定 vs 运行时验证
 
-**Def EB-VER1（确定性判定可验证性）**：设 $M$ 为执行模型。**静态判定**：编译期可完全确定（`cargo check`、clippy）；**运行时验证**：需实际执行或额外工具（Miri、集成测试、模糊测试）才能判定。
+**Def EB-VER1（确定性判定可验证性）**：设 $M$ 为执行模型。
+**静态判定**：编译期可完全确定（`cargo check`、clippy）；
+**运行时验证**：需实际执行或额外工具（Miri、集成测试、模糊测试）才能判定。
 
 | 情形 | 判定方式 | 说明 |
 | :--- | :--- | :--- |
@@ -122,7 +135,8 @@
 | **死锁** | 运行时 | 锁顺序、循环等待无法静态判定；需 Miri、测试 |
 | **分布式、网络故障** | 运行时 | 超时、重试、一致性需集成测试、契约验证 |
 
-**决策分支**：需确定性保证？→ 静态可判定（Sync/Async/Concurrent/Parallel 满足 Send/Sync）→ 选上述模型；需死锁自由？→ 运行时验证；需分布式一致性？→ 契约 + 集成测试。
+**决策分支**：需确定性保证？→ 静态可判定（Sync/Async/Concurrent/Parallel 满足 Send/Sync）→ 选上述模型；
+需死锁自由？→ 运行时验证；需分布式一致性？→ 契约 + 集成测试。
 
 ---
 
@@ -259,7 +273,7 @@
 | 并行 | 同上 + rayon 不变式、EB-DET-T1、SPAWN-T1 | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)、[async_state_machine](../../formal_methods/async_state_machine.md) |
 | 分布式 | 序列化类型安全、FFI 契约 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 
-**确定性形式化**：Def EB-DET1、定理 EB-DET-T1 与 [FORMAL_PROOF_SYSTEM_GUIDE](../../FORMAL_PROOF_SYSTEM_GUIDE.md) Send/Sync、borrow T1 衔接；静态 vs 运行时验证见 § [静态判定 vs 运行时验证](#静态判定-vs-运行时验证)；确定性判定决策树见上文。
+**确定性形式化**：Def EB-DET1、定理 EB-DET-T1 与 [FORMAL_PROOF_SYSTEM_GUIDE](../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) Send/Sync、borrow T1 衔接；静态 vs 运行时验证见 § [静态判定 vs 运行时验证](#静态判定-vs-运行时验证)；确定性判定决策树见上文。
 
 ---
 
@@ -270,4 +284,4 @@
 | 多维矩阵 | [README §执行模型多维对比矩阵](README.md#执行模型多维对比矩阵) |
 | 决策树 | 本文 § 并发选型决策树、§ 决策树：选择执行模型；[DECISION_GRAPH_NETWORK](../../../04_thinking/DECISION_GRAPH_NETWORK.md) |
 
-*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../../research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。

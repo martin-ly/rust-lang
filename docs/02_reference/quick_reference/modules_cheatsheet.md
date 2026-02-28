@@ -1,8 +1,8 @@
-# 📦 Rust 模块系统速查卡 {#-rust-模块系统速查卡}
+﻿# 📦 Rust 模块系统速查卡 {#-rust-模块系统速查卡}
 
 > **快速参考** | [Cargo/包索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md) | [Rust 官方模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [代码示例](../../../crates/)
 > **创建日期**: 2026-01-27
-> **最后更新**: 2026-01-27
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 

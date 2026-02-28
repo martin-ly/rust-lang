@@ -1,8 +1,8 @@
-# 研究方法论
+﻿# 研究方法论
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024) ✅
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024) ✅
 > **状态**: ✅ 已完成 (100%)
 
 ---
@@ -342,7 +342,7 @@ Qed.
 - **逻辑一致**：形式化研究中的定义、定理、证明与代码示例一致；类型/借用规则与实现对应。
 - **可验证**：形式化可用 Coq/Lean/Prusti 等验证；实验可用 `cargo bench`/`cargo test`/Valgrind 等复现。
 - **交叉引用**：与 [formal_methods](./formal_methods/)、[type_theory](./type_theory/)、[experiments](./experiments/)、[practical_applications](./practical_applications.md) 的关联明确。
-- **时效性**：注明 Rust 版本（如 1.93.0+）；若依赖未稳定特性，需标出。
+- **时效性**：注明 Rust 版本（如 1.93.1+）；若依赖未稳定特性，需标出。
 
 ### 研究模板
 
@@ -359,7 +359,12 @@ Qed.
 ### 工具集成
 
 - **与 [TOOLS_GUIDE.md](./TOOLS_GUIDE.md)**：本「研究工具」中的 Clippy、Miri、Criterion、Valgrind、perf 等，安装、常用参数与样例见 TOOLS_GUIDE。
-- **与各实验**： [performance_benchmarks](./experiments/performance_benchmarks.md)、[memory_analysis](./experiments/memory_analysis.md)、[compiler_optimizations](./experiments/compiler_optimizations.md)、[concurrency_performance](./experiments/concurrency_performance.md)、[macro_expansion_performance](./experiments/macro_expansion_performance.md) 的「数据收集执行指南」即工具在具体研究中的集成方式；可统一用 `cargo bench`、`cargo bloat`、`cargo expand`、`time cargo build`、Valgrind/Miri 等。
+- **与各实验**： [performance_benchmarks](./experiments/performance_benchmarks.md)、
+- [memory_analysis](./experiments/memory_analysis.md)、
+- [compiler_optimizations](./experiments/compiler_optimizations.md)、
+- [concurrency_performance](./experiments/concurrency_performance.md)、
+- [macro_expansion_performance](./experiments/macro_expansion_performance.md) 的「数据收集执行指南」即工具在具体研究中的集成方式；
+- 可统一用 `cargo bench`、`cargo bloat`、`cargo expand`、`time cargo build`、Valgrind/Miri 等。
 - **与形式化**：Prusti、Creusot、Kani 的用法见各形式化文档的「工具验证」；Coq/Lean 示例见「1.1 形式化研究方法详解」。
 
 ### 工具使用要点

@@ -1,0 +1,34 @@
+[book]
+title = "Rust 交互式学习测验"
+description = "基于 mdbook-quiz 的 Rust 概念测验系统"
+authors = ["Rust Learning Team"]
+language = "zh-CN"
+multilingual = false
+src = "src"
+
+[build]
+build-dir = "build"
+
+[preprocessor.quiz]
+command = "mdbook-quiz"
+
+[output.html]
+default-theme = "rust"
+preferred-dark-theme = "ayu"
+additional-css = ["custom.css"]
+git-repository-url = "https://github.com/rust-lang/rust"
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.search]
+enable = true
+limit-results = 30
+teaser-word-count = 30
+
+[output.html.print]
+enable = true
+
+[rust]
+edition = "2024"

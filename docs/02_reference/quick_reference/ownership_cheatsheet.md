@@ -1,8 +1,8 @@
-# 🦀 所有权系统速查卡 {#-所有权系统速查卡}
+﻿# 🦀 所有权系统速查卡 {#-所有权系统速查卡}
 
-> **快速参考** | [完整文档](../../../crates/c01_ownership_borrow_scope/docs/) | [代码示例](../../../crates/c01_ownership_borrow_scope/examples/)
+> **快速参考** | [完整文档](../../../crates/c01_ownership_borrow_scope/docs/README.md) | [代码示例](../../../crates/c01_ownership_borrow_scope/examples/)
 > **创建日期**: 2026-01-27
-> **最后更新**: 2026-01-27
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
@@ -753,7 +753,7 @@ for i in 0..1000 {
 
 ## 📚 相关文档 {#-相关文档}
 
-- [所有权系统完整文档](../../../crates/c01_ownership_borrow_scope/docs/)
+- [所有权系统完整文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [所有权系统 README](../../../crates/c01_ownership_borrow_scope/README.md)
 
 ## 🧩 相关示例代码 {#-相关示例代码}
@@ -775,7 +775,7 @@ for i in 0..1000 {
 
 ### 项目内部文档
 
-- [所有权系统完整文档](../../../crates/c01_ownership_borrow_scope/docs/)
+- [所有权系统完整文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [所有权形式化研究](../../research_notes/formal_methods/ownership_model.md)
 - [生命周期形式化](../../research_notes/formal_methods/lifetime_formalization.md)
 
@@ -790,7 +790,7 @@ for i in 0..1000 {
 ---
 
 **最后更新**: 2026-01-27
-**Rust 版本**: 1.93.0+ (Edition 2024)
+**Rust 版本**: 1.93.1+ (Edition 2024)
 **打印友好**: 可直接打印为桌面参考
 
 🦀 **Rust 所有权，安全与性能的完美平衡！**

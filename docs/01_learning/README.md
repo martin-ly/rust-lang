@@ -1,7 +1,7 @@
-# 学习路径与导航
+﻿# 学习路径与导航
 
 > **创建日期**: 2025-12-11
-> **最后更新**: 2026-02-20
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 学习规划与官方资源映射；解决「如何规划学习、与官方资源如何映射」
@@ -144,10 +144,10 @@ fn ownership_theorem() {
 
 | 资源 | 路径 | 描述 |
 | :--- | :--- | :--- |
-| 速查卡 | [../02_reference/quick_reference/](../02_reference/quick_reference/) | 20个主题速查 |
-| 专题指南 | [../05_guides/](../05_guides/) | 异步、线程、Unsafe 等 |
-| 工具链 | [../06_toolchain/](../06_toolchain/) | 编译器、Cargo |
-| 形式化理论 | [../research_notes/](../research_notes/) | 类型理论、证明 |
+| 速查卡 | [../02_reference/quick_reference/](../02_reference/quick_reference/README.md) | 20个主题速查 |
+| 专题指南 | [../05_guides/](../05_guides/README.md) | 异步、线程、Unsafe 等 |
+| 工具链 | [../06_toolchain/](../06_toolchain/README.md) | 编译器、Cargo |
+| 形式化理论 | [../research_notes/](../research_notes/README.md) | 类型理论、证明 |
 
 ### 在线学习资源1
 

@@ -1,8 +1,8 @@
-# 实际应用案例研究
+﻿# 实际应用案例研究
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -81,13 +81,17 @@
 
 ## 形式化论证与案例衔接
 
-**Def PA1（案例验证）**：设 $C$ 为实际应用案例，$T$ 为形式化定理。若 $C$ 的实现满足 $T$ 的结论（如无数据竞争、无内存泄漏），则称 $C$ **与 $T$ 一致**。
+**Def PA1（案例验证）**：设 $C$ 为实际应用案例，$T$ 为形式化定理。
+若 $C$ 的实现满足 $T$ 的结论（如无数据竞争、无内存泄漏），则称 $C$ **与 $T$ 一致**。
 
 **Axiom PA1**：实际案例为经验证据；与形式化定理一致可增强论证可信度；不一致则需分析差异（unsafe 使用、库契约等）。
 
-**定理 PA-T1（案例与定理衔接）**：若案例 $C$ 与 [ownership_model](formal_methods/ownership_model.md) T2/T3、[borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1、[async_state_machine](formal_methods/async_state_machine.md) T6.2 一致，则 $C$ 为 Safe 且满足形式化保证。
+**定理 PA-T1（案例与定理衔接）**：若案例 $C$ 与 [ownership_model](formal_methods/ownership_model.md) T2/T3、
+[borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1、
+[async_state_machine](formal_methods/async_state_machine.md) T6.2 一致，则 $C$ 为 Safe 且满足形式化保证。
 
-*证明*：由各定理陈述；案例实现满足定理结论即一致；组合见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) CSO-T1。∎
+*证明*：由各定理陈述；案例实现满足定理结论即一致；
+组合见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) CSO-T1。∎
 
 **引理 PA-L1（unsafe 案例边界）**：若案例 $C$ 含 `unsafe` 块，则 $C$ 与定理一致 ⟺ $C$ 的 unsafe 使用满足 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 契约；安全抽象对外 API 为 Safe。
 

@@ -1,10 +1,10 @@
-# Rust 形式化工程系统
+﻿# Rust 形式化工程系统
 
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **说明**: 本目录为**单一索引层**，形式化理论内容已整合至 [研究笔记](../research_notes/) 及各 crates。子目录 README 仅为占位重定向，请以 [00_master_index.md](./00_master_index.md) 为完整导航入口。
+> **说明**: 本目录为**单一索引层**，形式化理论内容已整合至 [研究笔记](../research_notes/README.md) 及各 crates。子目录 README 仅为占位重定向，请以 [00_master_index.md](./00_master_index.md) 为完整导航入口。
 > **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) § 2.9
 
 ---
@@ -17,8 +17,8 @@
 
 | 模块 | 入口路径 | 说明 |
 | :--- | :--- | :--- |
-| **形式化方法** | [research_notes/formal_methods/](../research_notes/formal_methods/) | 所有权模型、借用检查器、生命周期、Pin、异步状态机 |
-| **类型理论** | [research_notes/type_theory/](../research_notes/type_theory/) | 类型系统基础、Trait 形式化、型变理论、生命周期 |
+| **形式化方法** | [research_notes/formal_methods/](../research_notes/formal_methods/README.md) | 所有权模型、借用检查器、生命周期、Pin、异步状态机 |
+| **类型理论** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统基础、Trait 形式化、型变理论、生命周期 |
 | **主索引** | [00_master_index.md](./00_master_index.md) | 完整模块映射与导航 |
 
 ### 快速跳转
@@ -134,9 +134,9 @@ fn render<T: Drawable>(item: T) {
 
 | 研究笔记目录 | 路径 | 内容概述 |
 | :--- | :--- | :--- |
-| **formal_methods/** | [../research_notes/formal_methods/](../research_notes/formal_methods/) | 所有权模型、借用检查器、生命周期、异步状态机、Pin |
-| **type_theory/** | [../research_notes/type_theory/](../research_notes/type_theory/) | 类型系统、Trait 系统、型变理论、类型推导 |
-| **experiments/** | [../research_notes/experiments/](../research_notes/experiments/) | 性能实验、内存分析、编译器优化 |
+| **formal_methods/** | [../research_notes/formal_methods/](../research_notes/formal_methods/README.md) | 所有权模型、借用检查器、生命周期、异步状态机、Pin |
+| **type_theory/** | [../research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统、Trait 系统、型变理论、类型推导 |
+| **experiments/** | [../research_notes/experiments/](../research_notes/experiments/README.md) | 性能实验、内存分析、编译器优化 |
 | **PROOF_INDEX.md** | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) | 形式化证明索引（87+ 个证明） |
 | **TOOLS_GUIDE.md** | [../research_notes/TOOLS_GUIDE.md](../research_notes/TOOLS_GUIDE.md) | 形式化验证工具（Prusti、Kani、Creusot） |
 | **SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md** | [../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全/非安全边界分析 |

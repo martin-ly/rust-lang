@@ -1,11 +1,11 @@
-# Rust 工具链文档
+﻿# Rust 工具链文档
 
 ← [返回主索引](../README.md)
 
 ---
 
 > **创建日期**: 2025-12-11
-> **最后更新**: 2026-02-20
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 100% 完成
 > **概念说明**: Rust 工具链是编译器（rustc）、包管理器（Cargo）、文档生成器（rustdoc）和相关工具（Clippy、rustfmt、MIRI）的集合。它们协同工作，提供从代码编写、编译、测试到部署的完整开发体验。
@@ -60,10 +60,10 @@ lto = true
 
 深入学习工具链生态系统的形式化理论基础：
 
-- 🔧 **[工具链生态形式化理论](../rust-formal-engineering-system/06_toolchain_ecosystem/)** - 工具链生态系统的形式化描述
-- ⚙️ **[编译器形式化理论](../rust-formal-engineering-system/06_toolchain_ecosystem/01_compiler/)** - 编译器架构的形式化模型
-- 📦 **[包管理器理论](../rust-formal-engineering-system/06_toolchain_ecosystem/02_package_manager/)** - 包管理的形式化定义
-- 🏗️ **[构建工具理论](../rust-formal-engineering-system/06_toolchain_ecosystem/03_build_tools/)** - 构建系统的形式化模型
+- 🔧 **[工具链生态形式化理论](../rust-formal-engineering-system/06_toolchain_ecosystem/README.md)** - 工具链生态系统的形式化描述
+- ⚙️ **[编译器形式化理论](../rust-formal-engineering-system/06_toolchain_ecosystem/01_compiler/README.md)** - 编译器架构的形式化模型
+- 📦 **[包管理器理论](../rust-formal-engineering-system/06_toolchain_ecosystem/02_package_manager/README.md)** - 包管理的形式化定义
+- 🏗️ **[构建工具理论](../rust-formal-engineering-system/06_toolchain_ecosystem/03_build_tools/README.md)** - 构建系统的形式化模型
 
 **学习路径**: 实践文档 → 形式化理论 → 深入理解
 

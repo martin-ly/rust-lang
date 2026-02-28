@@ -1271,7 +1271,7 @@ fn main() {
 ### 相关代码
 
 - [所有权实现](../../../crates/c01_ownership_borrow_scope/src/)
-- [所有权文档](../../../crates/c01_ownership_borrow_scope/docs/)
+- [所有权文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 
 ### 工具资源
 

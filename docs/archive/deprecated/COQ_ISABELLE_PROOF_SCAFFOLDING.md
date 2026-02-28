@@ -1,8 +1,8 @@
-# Coq/Isabelle 证明骨架与 L3 实施指南
+﻿# Coq/Isabelle 证明骨架与 L3 实施指南
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 阶段 3「1–2 定理 Coq/Isabelle 证明」的骨架交付物与实施指南
 > **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)

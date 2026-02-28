@@ -1,8 +1,8 @@
-# 型变理论
+﻿# 型变理论
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -568,15 +568,20 @@ fn use_contravariant_callback() {
 
 ### 与类型系统的集成
 
-型变参与子类型推导与类型检查；$\&'a T$ 协变、$\&'a \text{mut} T$ 不变、`fn(T) -> U` 逆变等与 [type_system_foundations](./type_system_foundations.md) 的 subtyping 及 [lifetime_formalization](./lifetime_formalization.md) 的 $\ell <:$ 一致。
+型变参与子类型推导与类型检查；$\&'a T$ 协变、$\&'a \text{mut} T$ 不变、
+`fn(T) -> U` 逆变等与 [type_system_foundations](./type_system_foundations.md)
+的 subtyping 及 [lifetime_formalization](./lifetime_formalization.md) 的 $\ell <:$ 一致。
 
 ### 组合法则：类型 + 生命周期 + 型变
 
-**定理 VAR-COM-T1（三元组合传递）**：设 $\tau_1 <: \tau_2$（生命周期子类型）、$F$ 为协变类型构造子，则 $F[\tau_1] <: F[\tau_2]$；同理逆变、不变由 [variance_theory](variance_theory.md) T1–T4 保证。组合时：$\&'a T$ 中 `'a` 与 `T` 的型变分别由构造子决定；`&'a` 对 `'a` 协变、`&'a T` 对 `T` 协变。
+**定理 VAR-COM-T1（三元组合传递）**：设 $\tau_1 <: \tau_2$（生命周期子类型）、$F$ 为协变类型构造子，则 $F[\tau_1] <: F[\tau_2]$；
+同理逆变、不变由 [variance_theory](variance_theory.md) T1–T4 保证。
+组合时：$\&'a T$ 中 `'a` 与 `T` 的型变分别由构造子决定；`&'a` 对 `'a` 协变、`&'a T` 对 `T` 协变。
 
 *证明思路*：由 Def 1.1–3.1、定理 T1–T4；`&'a T` 的型变为 `'a` 协变 × `T` 协变；组合时各参数独立应用型变规则。∎
 
-**推论 VAR-COM-C1**：泛型类型 $F[\tau_1, \ell_1]$ 的型变由 $F$ 对各参数位置的型变决定；多参数组合时取各参数型变的乘积（协变×协变=协变等）。
+**推论 VAR-COM-C1**：泛型类型 $F[\tau_1, \ell_1]$ 的型变由 $F$ 对各参数位置的型变决定；
+多参数组合时取各参数型变的乘积（协变×协变=协变等）。
 
 ### 实际应用案例
 

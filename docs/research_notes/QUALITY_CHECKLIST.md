@@ -1,8 +1,8 @@
-# 研究笔记质量检查清单
+﻿# 研究笔记质量检查清单
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -77,7 +77,7 @@
 
 - [ ] 创建日期格式正确（YYYY-MM-DD）
 - [ ] 最后更新日期格式正确（YYYY-MM-DD）
-- [ ] Rust 版本信息准确（当前为 1.93.0+）
+- [ ] Rust 版本信息准确（当前为 1.93.1+）
 - [ ] Edition 信息准确（当前为 2024）
 - [ ] 状态标记正确（📋 规划中 / 🔄 进行中 / ✅ 已完成）
 - [ ] 维护者信息完整
@@ -89,7 +89,7 @@
 ```markdown
 > **创建日期**: YYYY-MM-DD
 > **最后更新**: YYYY-MM-DD
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: 📋 规划中 / 🔄 进行中 / ✅ 已完成
 > **用途**: （可选）文档定位、推荐读者
 ```
@@ -285,7 +285,10 @@
 - [ ] **解释论证层**：关键定理含「陈述→依赖→证明/思路→反例」块或证明思路
 - [ ] （可选）**相关思维表征**：注明对应思维导图/矩阵/证明树/决策树，见 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md)
 
-*适用*：formal_methods、type_theory、software_design_theory 核心文档；索引/概览类可放宽。依据：[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)。**formal_methods 六篇完备性**（六篇×六维自检）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
+*适用*：formal_methods、type_theory、software_design_theory 核心文档；
+索引/概览类可放宽。
+依据：[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)。
+**formal_methods 六篇完备性**（六篇×六维自检）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
 
 ---
 

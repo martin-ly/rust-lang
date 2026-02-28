@@ -2119,7 +2119,7 @@ let req2 = builder.build()?; // 可以重用
 - [完整文档](../../crates/c09_design_pattern/README.md)
 - [GoF 模式](../../crates/c09_design_pattern/docs/tier_02_guides/01_创建型模式指南.md)
 - [Rust 特有模式](../../crates/c09_design_pattern/docs/tier_02_guides/05_最佳实践与反模式.md)
-- [设计模式形式化文档](../research_notes/software_design_theory/01_design_patterns_formal/) - 23种设计模式的形式化定义与分析
+- [设计模式形式化文档](../research_notes/software_design_theory/01_design_patterns_formal/README.md) - 23种设计模式的形式化定义与分析
 
 ---
 

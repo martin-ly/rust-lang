@@ -1,15 +1,15 @@
-# 反模式与边界
+﻿# 反模式与边界
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
 
 ## 宗旨
 
-将设计模式反例、反模式与形式化边界衔接，提供**实质内容**：形式化对应、与安全边界关系、规避策略、与 FORMAL_PROOF_SYSTEM_GUIDE 反例索引的衔接。
+将设计模式反例、反模式与形式化边界衔接，提供**实质内容**：形式化对应、与安全边界关系、规避策略、与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引的衔接。
 
 ---
 
@@ -32,7 +32,7 @@
 
 ---
 
-## 二、13 反例索引（与 FORMAL_PROOF_SYSTEM_GUIDE 衔接）
+## 二、13 反例索引（与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 衔接）
 
 | 模式 | 反例 | 后果 | 规避 |
 | :--- | :--- | :--- | :--- |
@@ -46,7 +46,7 @@
 | Flyweight | 跨线程用 Rc | 编译错误 | Arc |
 | Mediator | 循环引用 | 泄漏 | Weak 打破环 |
 | Chain | 链成环 | 无限循环 | 无环约束 |
-| 其他 | 见 FORMAL_PROOF_SYSTEM_GUIDE | - | - |
+| 其他 | 见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) | - | - |
 
 **完整反例**：见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)。
 

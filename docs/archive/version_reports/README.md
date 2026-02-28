@@ -1,8 +1,8 @@
 ﻿# 版本文档归档
 
 > **创建日期**: 2026-02-13
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已归档
 ## 文件列表
 
@@ -13,4 +13,4 @@
 - RUST_192_THINKING_REPRESENTATION_COMPREHENSIVE.md
 - RUST_192_VERIFICATION_SUMMARY.md
 
-当前主版本文档见 [06_toolchain/](../../06_toolchain/)。
+当前主版本文档见 [06_toolchain/](../../06_toolchain/README.md)。

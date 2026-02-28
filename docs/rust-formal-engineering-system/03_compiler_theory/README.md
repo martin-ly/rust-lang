@@ -1,8 +1,8 @@
-# 编译器理论
+﻿# 编译器理论
 
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [compiler_optimizations.md](../../research_notes/experiments/compiler_optimizations.md)、[01_compiler_features.md](../../06_toolchain/01_compiler_features.md)
 
@@ -301,5 +301,5 @@ unsafe fn very_dangerous() {
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
-| c11_advanced | 高级特性实现 | [../../crates/c11_advanced/](../../crates/c11_advanced/) |
-| c12_macros | 宏系统实现 | [../../crates/c12_macros/](../../crates/c12_macros/) |
+| c11_advanced | 高级特性实现 | [../../crates/c11_advanced/](../../crates/c11_advanced/README.md) |
+| c12_macros | 宏系统实现 | [../../crates/c12_macros/](../../crates/c12_macros/README.md) |

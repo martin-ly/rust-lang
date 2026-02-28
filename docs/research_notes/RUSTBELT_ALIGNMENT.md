@@ -1,8 +1,8 @@
-# RustBelt 逐章对标
+﻿# RustBelt 逐章对标
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 将 ownership_model、borrow_checker_proof 与 RustBelt 论文逐章对标，标注「已覆盖」「部分覆盖」「未覆盖」
 > **参考**: [RustBelt: Logical Foundations for the Future of Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/) (POPL 2018)

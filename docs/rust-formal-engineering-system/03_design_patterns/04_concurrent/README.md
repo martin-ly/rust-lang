@@ -1,10 +1,10 @@
-# 并发设计模式
+﻿# 并发设计模式
 
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [c09_design_pattern/docs/](../../../../crates/c09_design_pattern/docs/)
+> 内容已整合至： [c09_design_pattern/docs/](../../../../crates/c09_design_pattern/docs/README.md)
 
 [返回主索引](../../00_master_index.md)
 
@@ -448,6 +448,6 @@ async fn weighted_semaphore() {
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
-| c09_design_pattern | 并发设计模式实现 | [../../../../crates/c09_design_pattern/docs/](../../../../crates/c09_design_pattern/docs/) |
-| c05_threads | 线程并发 | [../../../../crates/c05_threads/](../../../../crates/c05_threads/) |
-| c06_async | 异步并发 | [../../../../crates/c06_async/](../../../../crates/c06_async/) |
+| c09_design_pattern | 并发设计模式实现 | [../../../../crates/c09_design_pattern/docs/](../../../../crates/c09_design_pattern/docs/README.md) |
+| c05_threads | 线程并发 | [../../../../crates/c05_threads/](../../../../crates/c05_threads/README.md) |
+| c06_async | 异步并发 | [../../../../crates/c06_async/](../../../../crates/c06_async/README.md) |

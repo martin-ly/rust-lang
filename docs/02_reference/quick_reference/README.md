@@ -1,7 +1,7 @@
-# Rust 快速参考指南 {#-rust-快速参考指南}
+﻿# Rust 快速参考指南 {#-rust-快速参考指南}
 
 > **创建日期**: 2025-12-11
-> **最后更新**: 2026-02-20
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 20 个主题速查；语法/模式可速查
@@ -471,7 +471,7 @@
 **核心模块文档**:
 
 - [类型系统完整文档](../../../crates/c02_type_system/docs/)
-- [所有权系统完整文档](../../../crates/c01_ownership_borrow_scope/docs/)
+- [所有权系统完整文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [异步编程完整文档](../../../crates/c06_async/docs/)
 - [控制流与函数文档](../../../crates/c03_control_fn/docs/)
 - [泛型编程文档](../../../crates/c04_generic/docs/)

@@ -1,0 +1,143 @@
+[[questions]]
+type = "SingleChoice"
+id = "lifetime_basic_1"
+prompt = "Rust 中生命周期的主要作用是什么？"
+answer = 1
+options = [
+  "优化程序性能",
+  "确保引用始终指向有效的数据",
+  "管理堆内存分配",
+  "实现垃圾回收"
+]
+explanation = "生命周期的主要作用是确保引用始终指向有效的数据，防止悬垂引用（dangling references）。编译器通过生命周期分析在编译时验证引用有效性，这是 Rust 内存安全保证的核心机制。"
+difficulty = "基础"
+
+[[questions]]
+type = "TrueFalse"
+id = "lifetime_basic_2"
+prompt = "Rust 中所有引用都必须显式标注生命周期。"
+answer = false
+explanation = "错误。Rust 有生命周期省略规则（Lifetime Elision），在常见模式下编译器可以自动推断生命周期，无需显式标注。例如 `&str` 和 `fn foo(x: &i32) -> &i32` 都可以省略生命周期标注。"
+difficulty = "基础"
+
+[[questions]]
+type = "SingleChoice"
+id = "lifetime_basic_3"
+prompt = "`'static` 生命周期表示什么？"
+answer = 0
+options = [
+  "生命周期贯穿整个程序运行期间",
+  "静态变量的生命周期",
+  "引用只能存在一秒钟",
+  "编译时确定的生命周期"
+]
+explanation = "`'static` 表示生命周期贯穿整个程序运行期间。字符串字面量（如 \"hello\"）就是 &'static str，因为它们被编译进可执行文件，始终可用。但 'static 不意味着必须是常量或永不被释放，只是表示数据活得足够久。"
+difficulty = "基础"
+
+[[questions]]
+type = "MultipleChoice"
+id = "lifetime_basic_4"
+prompt = "以下哪些情况需要显式标注生命周期？（多选）"
+answer = [0, 2]
+options = [
+  "函数返回引用，且参数中有多个引用",
+  "函数只有一个引用参数",
+  "结构体包含引用类型的字段",
+  "函数不返回引用"
+]
+explanation = "需要显式标注的情况：1) 函数有多个引用参数且返回引用时，编译器无法确定返回值与哪个参数关联；2) 结构体包含引用字段时，必须标注生命周期以说明字段引用的数据存活多久。单参数函数通常可以省略。"
+difficulty = "基础"
+
+[[questions]]
+type = "FillInBlank"
+id = "lifetime_basic_5"
+prompt = "补全函数签名，返回两个字符串切片中较长的一个：\n\n```rust\nfn longest<'a>(x: &'a str, y: &'a str) -> _____ {\n    if x.len() > y.len() { x } else { y }\n}\n```"
+answer = ["&'a str"]
+explanation = "返回值生命周期必须明确与参数关联。`&'a str` 表示返回的引用与参数 x 和 y 有相同的生命周期 'a。这确保了返回值不会比任何一个输入参数活得更久。"
+difficulty = "基础"
+
+[[questions]]
+type = "SingleChoice"
+id = "lifetime_adv_1"
+prompt = "以下代码为什么无法编译？\n\n```rust\nfn longest(x: &str, y: &str) -> &str {\n    if x.len() > y.len() { x } else { y }\n}\n```"
+answer = 2
+options = [
+  "缺少返回语句",
+  "不能比较字符串长度",
+  "编译器无法确定返回值的生命周期",
+  "字符串切片不支持 len 方法"
+]
+explanation = "当函数有多个引用参数并返回引用时，编译器无法确定返回值与哪个参数关联。需要显式标注生命周期如 `fn longest<'a>(x: &'a str, y: &'a str) -> &'a str` 来建立关系。"
+difficulty = "进阶"
+
+[[questions]]
+type = "SingleChoice"
+id = "lifetime_adv_2"
+prompt = "关于生命周期省略规则，以下哪个描述是正确的？"
+answer = 1
+options = [
+  "所有函数都可以省略生命周期标注",
+  "单参数函数返回引用时，返回值自动获得与参数相同的生命周期",
+  "多参数函数总是可以省略生命周期",
+  "生命周期省略是编译器的 bug"
+]
+explanation = "生命周期省略的第一条规则：每个引用参数都有自己的生命周期参数。第二条规则：如果只有一个输入生命周期，它被赋给所有输出生命周期。因此单参数函数如 `fn foo(x: &i32) -> &i32` 可以省略。"
+difficulty = "进阶"
+
+[[questions]]
+type = "MultipleChoice"
+id = "lifetime_adv_3"
+prompt = "以下哪些关于生命周期的说法是正确的？（多选）"
+answer = [0, 2, 3]
+options = [
+  "生命周期在编译时验证，无运行时开销",
+  "生命周期越长越好",
+  "结构体包含引用时必须标注生命周期",
+  "生命周期是泛型的一种"
+]
+explanation = "正确的说法：1) 生命周期检查在编译时完成，零运行时开销；2) 结构体含引用必须标注生命周期；3) 生命周期是泛型（泛型参数的一种）。生命周期并非越长越好，应该尽量精确以提供最大的灵活性。"
+difficulty = "进阶"
+
+[[questions]]
+type = "FillInBlank"
+id = "lifetime_adv_4"
+prompt = "补全结构体定义，使其包含对字符串切片的引用：\n\n```rust\nstruct Excerpt _____ {\n    part: &str,\n}\n```"
+answer = ["<'a>", "<'a>"]
+explanation = "结构体包含引用时必须声明生命周期参数。`struct Excerpt<'a>` 声明了一个生命周期参数 'a，然后 `part: &'a str` 表示 part 引用的字符串必须至少与结构体实例活得一样久。"
+difficulty = "进阶"
+
+[[questions]]
+type = "SingleChoice"
+id = "lifetime_challenge_1"
+prompt = "以下代码的输出是什么？\n\n```rust\nfn main() {\n    let string1 = String::from(\"long string is long\");\n    let result;\n    {\n        let string2 = String::from(\"xyz\");\n        result = longest(string1.as_str(), string2.as_str());\n    }\n    println!(\"The longest string is {}\", result);\n}\n\nfn longest<'a>(x: &'a str, y: &'a str) -> &'a str {\n    if x.len() > y.len() { x } else { y }\n}\n```"
+answer = 1
+options = [
+  "The longest string is long string is long",
+  "编译错误",
+  "运行时 panic",
+  "The longest string is xyz"
+]
+explanation = "编译错误。result 的生命周期与 string2 绑定（`'a` 是两个参数中较短的那个），但 result 在 string2 被释放后仍然被使用。这违反了生命周期约束，编译器会报错：string2 存活时间不够长。"
+difficulty = "挑战"
+
+[[questions]]
+type = "TrueFalse"
+id = "lifetime_challenge_2"
+prompt = "`'static` 生命周期的引用必须指向永不释放的内存。"
+answer = false
+explanation = "错误。`'static` 只表示数据可以存活整个程序生命周期，但不要求必须这么做。例如拥有 'static 生命周期的 String（如 String::from(\"hello\").leak()）仍然可以被 drop。'static 是能力不是义务。"
+difficulty = "挑战"
+
+[[questions]]
+type = "SingleChoice"
+id = "lifetime_challenge_3"
+prompt = "关于生命周期边界（Lifetime Bounds），以下哪个描述是正确的？"
+answer = 2
+options = [
+  "生命周期边界只能在结构体上使用",
+  "`'a: 'b` 表示 'a 比 'b 短",
+  "`'a: 'b` 表示 'a 至少和 'b 一样长",
+  "生命周期边界用于限制变量作用域"
+]
+explanation = "`'a: 'b` 读作 \"'a outlives 'b\"，表示 'a 至少和 'b 一样长（即 'a 的生命周期包含 'b 的整个生命周期）。这常用于确保某个引用活得比另一个引用更久。例如 `T: 'static` 表示 T 可以存活整个程序期间。"
+difficulty = "挑战"

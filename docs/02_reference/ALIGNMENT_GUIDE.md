@@ -1,8 +1,8 @@
-# Rust 对齐知识综合指南
+﻿# Rust 对齐知识综合指南
 
 > **创建日期**: 2026-02-13
-> **最后更新**: 2026-02-13
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **文档定位**: 全面覆盖 Rust 中「对齐」相关的各类知识
 > **关联**: [type_system.md](./quick_reference/type_system.md) | [strings_formatting_cheatsheet.md](./quick_reference/strings_formatting_cheatsheet.md)

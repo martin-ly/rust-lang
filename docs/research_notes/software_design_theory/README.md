@@ -1,8 +1,8 @@
-# Rust 软件设计理论体系
+﻿# Rust 软件设计理论体系
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **目标**: 面向 Rust 语言机制的软件设计形式分析、边界论证与组合工程有效性
 > **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../../DOCS_STRUCTURE_OVERVIEW.md) § 2.7 software_design_theory
@@ -101,7 +101,7 @@
 | 查某模式是否纯 Safe | [01_safe_23_catalog](02_workflow_safe_complete_models/01_safe_23_catalog.md) |
 | 查某模式 Rust 实现 | [01_design_patterns_formal](01_design_patterns_formal/) 对应模式文档 |
 | 选执行模型（同步/异步/并发/并行/分布式） | [06_boundary_analysis](03_execution_models/06_boundary_analysis.md) |
-| 查模式反例 | [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例) |
+| 查模式反例 | [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例) |
 
 ---
 
@@ -137,7 +137,7 @@
 | 设计模式 | 23 | 创建型 5、结构型 7、行为型 11 |
 | 扩展模式 | 20 | 43 完全 = 23 + 20 |
 | 执行模型 | 5 | 同步、异步、并发、并行、分布式 |
-| 反例 | 13 | 见 FORMAL_PROOF_SYSTEM_GUIDE |
+| 反例 | 13 | 见 [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) |
 | 定理 | 3 | CE-T1、CE-T2、CE-T3 |
 
 ---

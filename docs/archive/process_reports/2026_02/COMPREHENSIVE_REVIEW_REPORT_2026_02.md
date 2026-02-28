@@ -1,8 +1,8 @@
-# research_notes 与 quick_reference 全面检查报告
+﻿# research_notes 与 quick_reference 全面检查报告
 
 > **创建日期**: 2026-02-13
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **检查范围**: docs/research_notes、docs/quick_reference
 > **对齐来源**: [Rust 1.93.0 发布说明](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)、[releases.rs 1.93.0](https://releases.rs/docs/1.93.0/)、[Ferrocene FLS](https://spec.ferrocene.dev/)
 > **报告类型**: 全面检查、缺口分析、建议与分步推进方案

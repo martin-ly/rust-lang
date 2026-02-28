@@ -1,8 +1,8 @@
-# 研究笔记最佳实践
+﻿# 研究笔记最佳实践
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -84,7 +84,7 @@
 - ✅ 边界条件：重要断言补充反例
 - ✅ 交叉引用：与 [PROOF_INDEX](PROOF_INDEX.md)、[FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 衔接
 
-**证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](PROOF_INDEX.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md) L2 示例、[coq_skeleton](coq_skeleton/) L3 骨架。
+**证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](PROOF_INDEX.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md) L2 示例、[coq_skeleton](coq_skeleton/README.md) L3 骨架。
 
 **引用**：[FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 论证要素规范、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) 论证体系五层、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 批判性分析。
 

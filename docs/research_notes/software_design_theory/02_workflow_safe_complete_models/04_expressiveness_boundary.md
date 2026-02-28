@@ -1,8 +1,8 @@
-# 充分表达 vs 非充分表达论证
+﻿# 充分表达 vs 非充分表达论证
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -137,12 +137,12 @@
 | Remote Facade | 等价 | 批量接口、gRPC |
 | Value Object | 等价 | 结构体 + Eq、Clone |
 | Registry | 等价 | OnceLock、HashMap |
-| Identity Map | 等价 | HashMap<Id, Arc<T>> |
+| Identity Map | 等价 | `HashMap<Id, Arc<T>>` |
 | Lazy Load | 等价 | OnceLock、Option |
-| Plugin | 等价 | trait + Box<dyn Trait> |
+| Plugin | 等价 | trait + `Box<dyn Trait>` |
 | Optimistic Offline Lock | 等价 | version + CAS |
 | Specification | 等价 | trait Spec + and/or |
-| Event Sourcing | 等价 | Vec<Event> + fold |
+| Event Sourcing | 等价 | `Vec<Event>` + fold |
 
 **论证**：扩展 20 绝大部分与 Fowler EAA 语义等价；Rust 的 trait、枚举、所有权可自然表达；Gateway 在 FFI 场景为近似（需 unsafe 封装）。
 

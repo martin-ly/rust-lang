@@ -1,8 +1,8 @@
-# 🎯 Rust 智能指针速查卡 {#-rust-智能指针速查卡}
+﻿# 🎯 Rust 智能指针速查卡 {#-rust-智能指针速查卡}
 
-> **快速参考** | [完整文档](../../../crates/c01_ownership_borrow_scope/docs/) | [代码示例](../../../crates/c01_ownership_borrow_scope/examples/)
+> **快速参考** | [完整文档](../../../crates/c01_ownership_borrow_scope/docs/README.md) | [代码示例](../../../crates/c01_ownership_borrow_scope/examples/)
 > **创建日期**: 2026-01-27
-> **最后更新**: 2026-01-27
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
@@ -1121,7 +1121,7 @@ impl Unmovable {
 
 ## 📚 相关文档 {#-相关文档}
 
-- [所有权与智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/)
+- [所有权与智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [智能指针 API 参考](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
 
 ## 🧩 相关示例代码 {#-相关示例代码}

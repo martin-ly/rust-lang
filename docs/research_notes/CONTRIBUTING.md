@@ -1,8 +1,8 @@
-# 研究笔记贡献指南
+﻿# 研究笔记贡献指南
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-01-26
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: 持续更新中 📝
 
 ---
@@ -106,7 +106,7 @@
 - [研究笔记规范](./README.md#-研究笔记规范)
 - [质量标准](#-质量标准)
 - [检查清单](#-检查清单)
-- **格式门禁**：新文档须符合 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § research_notes 元信息统一模板（创建日期、最后更新、**Rust 版本**: 1.93.0+ (Edition 2024)、状态）；不符合时请在 PR 中说明例外理由。详见 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md)、[MAINTENANCE_GUIDE](MAINTENANCE_GUIDE.md) § 格式统一检查清单。
+- **格式门禁**：新文档须符合 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § research_notes 元信息统一模板（创建日期、最后更新、**Rust 版本**: 1.93.1+ (Edition 2024)、状态）；不符合时请在 PR 中说明例外理由。详见 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md)、[MAINTENANCE_GUIDE](MAINTENANCE_GUIDE.md) § 格式统一检查清单。
 
 ### 步骤 5: 更新索引
 
@@ -155,7 +155,7 @@
 - [ ] 查看 [研究路线图](./RESEARCH_ROADMAP.md) 了解优先级
 - [ ] 使用 [模板](./TEMPLATE.md) 创建文件
 - [ ] 选择合适的目录（formal_methods/、type_theory/、experiments/）
-- [ ] **元信息**：文首 blockquote 含 创建日期、最后更新、Rust 版本 1.93.0+ (Edition 2024)、状态（见 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md)）
+- [ ] **元信息**：文首 blockquote 含 创建日期、最后更新、Rust 版本 1.93.1+ (Edition 2024)、状态（见 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md)）
 
 ### 编写研究笔记时
 

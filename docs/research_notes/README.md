@@ -190,7 +190,7 @@ research_notes/
 **相关文档**:
 
 - [形式化工程系统](../rust-formal-engineering-system/01_theoretical_foundations/)
-- [所有权与借用](../../crates/c01_ownership_borrow_scope/docs/)
+- [所有权与借用](../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [异步语义理论](../../crates/c06_async/src/async_semantics_theory.rs)
 
 ---

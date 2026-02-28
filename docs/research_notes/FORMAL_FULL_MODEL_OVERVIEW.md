@@ -1,8 +1,8 @@
-# Rust 形式化全模型：统一形式系统入口
+﻿# Rust 形式化全模型：统一形式系统入口
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 单一文档勾勒 ownership + borrow + lifetime + type + trait + async + pin 的**统一形式系统**，含公理列表、定理依赖 DAG、与各子文档的映射
 > **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md)

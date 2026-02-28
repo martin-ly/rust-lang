@@ -1,8 +1,8 @@
-# 🧪 Rust 测试速查卡 {#-rust-测试速查卡}
+﻿# 🧪 Rust 测试速查卡 {#-rust-测试速查卡}
 
-> **快速参考** | [完整文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/) | [代码示例](../../../crates/)
+> **快速参考** | [完整文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/README.md) | [代码示例](../../../crates/)
 > **创建日期**: 2026-01-27
-> **最后更新**: 2026-01-27
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
@@ -1423,7 +1423,7 @@ fn broken_test() {
 
 ## 📚 相关文档 {#-相关文档}
 
-- [完整测试文档（项目内）](../../rust-formal-engineering-system/05_software_engineering/07_testing/)
+- [完整测试文档（项目内）](../../rust-formal-engineering-system/05_software_engineering/07_testing/README.md)
 - [测试覆盖率指南](../../05_guides/TESTING_COVERAGE_GUIDE.md)
 - [tarpaulin 配置](../../../tarpaulin.toml)
 
@@ -1492,10 +1492,10 @@ fn broken_test() {
 
 ### 项目内部文档
 
-- [完整测试文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/)
+- [完整测试文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/README.md)
 - [WASM 测试策略](../../../crates/c12_wasm/docs/wasm_engineering/Testing_Strategies.md)
-- [测试研究笔记](../../research_notes/)
-- [形式化方法研究](../../research_notes/formal_methods/)
+- [测试研究笔记](../../research_notes/README.md)
+- [形式化方法研究](../../research_notes/formal_methods/README.md)
 
 ### 相关速查卡
 

@@ -180,7 +180,7 @@ Week 1 所有任务已按计划完成，共新增 **11 个形式化定义** 和 
 | :--- | :--- |
 | **进度跟踪** | [PROGRESS_EXECUTION_TRACKING.md](./PROGRESS_EXECUTION_TRACKING.md) |
 | **修订任务计划** | [TASK_COMPREHENSIVE_ORCHESTRATION_REVISED.md](./TASK_COMPREHENSIVE_ORCHESTRATION_REVISED.md) |
-| **形式化文档** | [research_notes/formal_methods/](./research_notes/formal_methods/) |
+| **形式化文档** | [research_notes/formal_methods/](./research_notes/formal_methods/README.md) |
 
 ---
 

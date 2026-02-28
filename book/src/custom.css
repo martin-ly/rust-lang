@@ -1,0 +1,155 @@
+/* 自定义样式 - mdbook-quiz 测验系统 */
+
+/* 测验区域样式 */
+.quiz {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #fafafa;
+}
+
+/* 难度标签 */
+.difficulty-basic {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.difficulty-intermediate {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.difficulty-challenge {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* 选项样式 */
+.quiz-option {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quiz-option:hover {
+    background-color: #e9ecef;
+}
+
+.quiz-option.correct {
+    background-color: #d4edda;
+    border-color: #28a745;
+}
+
+.quiz-option.incorrect {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+}
+
+/* 解释框样式 */
+.explanation {
+    margin-top: 15px;
+    padding: 15px;
+    border-left: 4px solid #007bff;
+    background-color: #e7f3ff;
+    border-radius: 0 4px 4px 0;
+}
+
+/* 代码块样式优化 */
+.quiz pre {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    overflow-x: auto;
+}
+
+.quiz code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* 提交按钮 */
+.quiz-submit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.quiz-submit:hover {
+    background-color: #0056b3;
+}
+
+/* 进度指示器 */
+.quiz-progress {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+}
+
+/* 测验索引页样式 */
+.quiz-index-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.quiz-index-table th,
+.quiz-index-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.quiz-index-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.quiz-index-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* 暗黑模式适配 */
+@media (prefers-color-scheme: dark) {
+    .quiz {
+        background-color: #2d2d2d;
+        border-color: #555;
+    }
+    
+    .quiz-option {
+        background-color: #3d3d3d;
+        border-color: #555;
+        color: #e0e0e0;
+    }
+    
+    .quiz-option:hover {
+        background-color: #4d4d4d;
+    }
+    
+    .explanation {
+        background-color: #1a365d;
+        border-color: #4299e1;
+    }
+    
+    .quiz pre {
+        background-color: #2d2d2d;
+        border-color: #555;
+    }
+    
+    .quiz-index-table th {
+        background-color: #3d3d3d;
+    }
+    
+    .quiz-index-table tr:hover {
+        background-color: #3d3d3d;
+    }
+}

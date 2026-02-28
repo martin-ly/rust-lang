@@ -1,7 +1,7 @@
-# 🔗 文档交叉引用指南 {#-文档交叉引用指南}
+﻿# 🔗 文档交叉引用指南 {#-文档交叉引用指南}
 
 > **创建日期**: 2026-02-15
-> **最后更新**: 2026-02-20
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成 (含完整跨文档映射网络)
 > **文档类型**: 文档管理指南
@@ -247,10 +247,10 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
 | **主索引** | `crates/c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md` | ←→ [design_patterns_cheatsheet](../02_reference/quick_reference/design_patterns_cheatsheet.md) |
-| **速查卡** | [design_patterns_cheatsheet.md](../02_reference/quick_reference/design_patterns_cheatsheet.md) | → [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/) → [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/) |
-| **形式化** | [01_design_patterns_formal/](../research_notes/software_design_theory/01_design_patterns_formal/) | ←→ [ownership_model](../research_notes/formal_methods/ownership_model.md) ←→ [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/) |
-| **指南** | [DESIGN_PATTERNS_USAGE_GUIDE.md](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | ← [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/) ← [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/) |
-| **思维表征** | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) §设计模式 | ←→ [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/) |
+| **速查卡** | [design_patterns_cheatsheet.md](../02_reference/quick_reference/design_patterns_cheatsheet.md) | → [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) → [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) |
+| **形式化** | [01_design_patterns_formal/](../research_notes/software_design_theory/01_design_patterns_formal/README.md) | ←→ [ownership_model](../research_notes/formal_methods/ownership_model.md) ←→ [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) |
+| **指南** | [DESIGN_PATTERNS_USAGE_GUIDE.md](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | ← [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) ← [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) |
+| **思维表征** | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) §设计模式 | ←→ [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) |
 
 ### C10 - 网络编程
 
@@ -305,11 +305,11 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 子目录 | 交叉引用 | 被引用来源 |
 | :--- | :--- | :--- |
-| [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/) | → ownership_model → borrow_checker_proof → 04_compositional_engineering | ← 04_compositional_engineering ← 05_guides/DESIGN_PATTERNS ← 04_thinking/MIND_MAP |
-| [02_workflow_safe_complete](../research_notes/software_design_theory/02_workflow_safe_complete_models/) | → 01_design_patterns → 04_expressiveness_boundary → 06_boundary_analysis | ← 04_compositional_engineering ← 05_guides/workflow |
-| [03_execution_models](../research_notes/software_design_theory/03_execution_models/) | → async_state_machine → send_sync_formalization → 06_boundary_analysis | ← 05_guides/ASYNC_PROGRAMMING ← 05_guides/THREADS_CONCURRENCY ← 04_thinking/DECISION_GRAPH |
-| [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/) | → ownership_model → borrow_checker_proof → type_system_foundations | ← 01_design_patterns ← 03_execution_models ← 05_guides/CROSS_MODULE_INTEGRATION |
-| [05_boundary_system](../research_notes/software_design_theory/05_boundary_system/) | → 01_design_patterns → safe_unsafe_matrix → 06_boundary_analysis | ← 01_design_patterns ← SAFE_UNSAFE_ANALYSIS |
+| [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) | → ownership_model → borrow_checker_proof → 04_compositional_engineering | ← 04_compositional_engineering ← 05_guides/DESIGN_PATTERNS ← 04_thinking/MIND_MAP |
+| [02_workflow_safe_complete](../research_notes/software_design_theory/02_workflow_safe_complete_models/README.md) | → 01_design_patterns → 04_expressiveness_boundary → 06_boundary_analysis | ← 04_compositional_engineering ← 05_guides/workflow |
+| [03_execution_models](../research_notes/software_design_theory/03_execution_models/README.md) | → async_state_machine → send_sync_formalization → 06_boundary_analysis | ← 05_guides/ASYNC_PROGRAMMING ← 05_guides/THREADS_CONCURRENCY ← 04_thinking/DECISION_GRAPH |
+| [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) | → ownership_model → borrow_checker_proof → type_system_foundations | ← 01_design_patterns ← 03_execution_models ← 05_guides/CROSS_MODULE_INTEGRATION |
+| [05_boundary_system](../research_notes/software_design_theory/05_boundary_system/README.md) | → 01_design_patterns → safe_unsafe_matrix → 06_boundary_analysis | ← 01_design_patterns ← SAFE_UNSAFE_ANALYSIS |
 
 ### 三大支柱交叉映射
 
@@ -397,7 +397,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [async_patterns](../02_reference/quick_reference/async_patterns.md) | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) | 语法 ↔ 状态机形式化 |
 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) | 语法 ↔ 并发安全 |
 | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) | [trait_system_formalization](../research_notes/type_theory/trait_system_formalization.md) | 泛型 ↔ Trait系统 |
-| [design_patterns_cheatsheet](../02_reference/quick_reference/design_patterns_cheatsheet.md) | [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/) | 模式 ↔ 形式化模式 |
+| [design_patterns_cheatsheet](../02_reference/quick_reference/design_patterns_cheatsheet.md) | [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) | 模式 ↔ 形式化模式 |
 | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) | [ownership_model](../research_notes/formal_methods/ownership_model.md) §智能指针 | 指针 ↔ 所有权模型 |
 | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) §Result类型 | 错误处理 ↔ 类型系统 |
 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | [formal_methods/README](../research_notes/formal_methods/README.md) §控制流形式化 | 控制流 ↔ A-CF1公理 |

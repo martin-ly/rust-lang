@@ -1,8 +1,8 @@
-# 性能优化理论
+﻿# 性能优化理论
 
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [performance_benchmarks.md](../../../research_notes/experiments/performance_benchmarks.md)、[PERFORMANCE_TUNING_GUIDE.md](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
@@ -309,4 +309,4 @@ criterion_main!(benches);
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
-| c11_advanced | 高级特性实现 | [../../../../crates/c11_advanced/](../../../../crates/c11_advanced/) |
+| c11_advanced | 高级特性实现 | [../../../../crates/c11_advanced/](../../../../crates/c11_advanced/README.md) |

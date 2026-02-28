@@ -1,8 +1,8 @@
-# formal_methods 意见与建议、安全可判定机制梳理与可持续推进计划
+﻿# formal_methods 意见与建议、安全可判定机制梳理与可持续推进计划
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 针对 formal_methods 目录的批判性意见、Sync/Send/async 等机制缺口、安全可判定机制全面梳理建议、完备 Rust 特性对比表、思维表征结合建议及后续可持续推进计划
 > **上位**: [formal_methods README](README.md)、[00_completeness_gaps](00_completeness_gaps.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md)

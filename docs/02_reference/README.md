@@ -1,8 +1,8 @@
-# 参考与速查
+﻿# 参考与速查
 
 > **创建日期**: 2025-12-11
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 100% 完成
 > **用途**: 语法/模式/边界/错误码速查；20 速查卡 + 边界特例 + 错误码映射
 > **判定目标**: 速查完整、边界可查、错误码可落点
@@ -44,7 +44,7 @@ let atomic = Arc::new(5);                // 多线程原子引用计数
 
 | 文档 | 描述 | 适用场景 |
 | :--- | :--- | :--- |
-| [quick_reference/](./quick_reference/) | 20 个速查卡（含 AI/ML） | 快速查找语法和模式 |
+| [quick_reference/](./quick_reference/README.md) | 20 个速查卡（含 AI/ML） | 快速查找语法和模式 |
 | [ALIGNMENT_GUIDE.md](./ALIGNMENT_GUIDE.md) | 对齐知识综合（内存/格式化/unsafe/缓存行） | 内存布局优化 |
 | [EDGE_CASES_AND_SPECIAL_CASES.md](./EDGE_CASES_AND_SPECIAL_CASES.md) | 边界特例 | 处理特殊情况 |
 | [STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md](./STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md) | 标准库分析 | 标准库深入理解 |

@@ -169,7 +169,7 @@
 | :--- | :--- |
 | **修订任务计划** | [TASK_COMPREHENSIVE_ORCHESTRATION_REVISED.md](./TASK_COMPREHENSIVE_ORCHESTRATION_REVISED.md) |
 | **进度跟踪** | [PROGRESS_EXECUTION_TRACKING.md](./PROGRESS_EXECUTION_TRACKING.md) |
-| **形式化文档** | [research_notes/formal_methods/](./research_notes/formal_methods/) |
+| **形式化文档** | [research_notes/formal_methods/](./research_notes/formal_methods/README.md) |
 | **主索引** | [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) |
 
 ---

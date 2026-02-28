@@ -1,8 +1,8 @@
-# 内存管理理论
+﻿# 内存管理理论
 
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [memory_analysis.md](../../../research_notes/experiments/memory_analysis.md)
 
@@ -250,4 +250,4 @@ fn object_pool_demo() {
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
-| c04_memory | 内存管理实现 | [../../../../crates/c04_memory/](../../../../crates/c04_memory/) |
+| c04_memory | 内存管理实现 | [../../../../crates/c04_memory/](../../../../crates/c04_memory/README.md) |

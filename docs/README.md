@@ -1,7 +1,7 @@
-# Rust 学习系统 - 文档中心
+﻿# Rust 学习系统 - 文档中心
 
 > **创建日期**: 2026-02-13
-> **最后更新**: 2026-02-26
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 100% 完成（修订后验收标准）
 > **项目主页**: [返回主 README](../README.md)
@@ -76,7 +76,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 | **初学者** | 学习路径 → 速查卡 → C01 模块 | [01_learning/README.md](./01_learning/README.md) |
 | **开发者** | 专题指南 → 速查卡 → 边界特例 | [05_guides/README.md](./05_guides/README.md) |
 | **研究者** | 形式化理论 → 思维表征 → 证明索引 | [research_notes/README.md](./research_notes/README.md) |
-| **维护者** | 项目元文档 → 版本追踪 | [07_project/](./07_project/) |
+| **维护者** | 项目元文档 → 版本追踪 | [07_project/](./07_project/README.md) |
 
 ---
 
@@ -257,7 +257,7 @@ cargo run -p rust-doc-search -- search --fuzzy "borrowing"
 
 ## 📁 归档文件
 
-过程性文档（完成报告、进度报告、审计报告、计划文档等）已归档至 [archive/process_reports/2026_02/](./archive/process_reports/2026_02/) 以保持核心内容的清晰。
+过程性文档（完成报告、进度报告、审计报告、计划文档等）已归档至 [archive/process_reports/2026_02/](./archive/process_reports/2026_02/README.md) 以保持核心内容的清晰。
 
 **归档文件包括**:
 

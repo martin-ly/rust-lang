@@ -1,0 +1,143 @@
+[[questions]]
+type = "SingleChoice"
+id = "async_basic_1"
+prompt = "在 Rust 中，`async` 关键字的作用是什么？"
+answer = 1
+options = [
+  "创建一个新线程",
+  "将代码块或函数转换为异步状态机",
+  "立即执行异步操作",
+  "阻塞当前线程直到操作完成"
+]
+explanation = "`async` 将代码块或函数转换为一个返回 Future 的状态机。它不会立即执行代码，而是返回一个表示异步计算的 Future，需要 await 或执行器（executor）来驱动完成。"
+difficulty = "基础"
+
+[[questions]]
+type = "TrueFalse"
+id = "async_basic_2"
+prompt = "`await` 会阻塞当前线程直到 Future 完成。"
+answer = false
+explanation = "错误。`await` 不会阻塞线程，它会将控制权交还给异步运行时，让出当前任务执行权。当 Future 可以推进时，运行时会在适当时候恢复该任务。这是异步编程非阻塞特性的核心。"
+difficulty = "基础"
+
+[[questions]]
+type = "SingleChoice"
+id = "async_basic_3"
+prompt = "以下代码的输出是什么？\n\n```rust\nasync fn say_hello() {\n    println!(\"Hello\");\n}\n\nfn main() {\n    say_hello();\n}\n```"
+answer = 2
+options = [
+  "Hello",
+  "编译错误",
+  "无输出",
+  "运行时 panic"
+]
+explanation = "无输出。`say_hello()` 返回一个 Future，但没有 await 它或使用执行器执行。就像调用构造函数但不使用对象一样，异步函数返回的 Future 被丢弃，内部代码不会执行。"
+difficulty = "基础"
+
+[[questions]]
+type = "MultipleChoice"
+id = "async_basic_4"
+prompt = "以下哪些是 Rust 异步编程的特点？（多选）"
+answer = [0, 2, 3]
+options = [
+  "零成本抽象，异步代码性能接近手动状态机",
+  "强制使用特定运行时",
+  "编译时检查确保异步代码安全",
+  "Future 是惰性求值的"
+]
+explanation = "Rust 异步编程特点：1) 零成本抽象，编译后的代码高效；2) 编译时安全检查；3) Future 惰性求值（创建时不执行）。Rust 不强制特定运行时，可以选择 Tokio、async-std、smol 等。"
+difficulty = "基础"
+
+[[questions]]
+type = "FillInBlank"
+id = "async_basic_5"
+prompt = "补全代码，使用 Tokio 运行时执行异步函数：\n\n```rust\n#[tokio::main]\nasync fn main() {\n    let result = _____ fetch_data().await;\n    println!(\"{}\", result);\n}\n\nasync fn fetch_data() -> String {\n    \"data\".to_string()\n}\n```"
+answer = ["", "let data = ", "let result = "]
+explanation = "需要 await 来执行异步函数。答案可以是直接 `fetch_data().await`（如果不需要保存中间结果），或 `let data = fetch_data().await` 等。关键是必须使用 `.await` 来驱动 Future 执行。"
+difficulty = "基础"
+
+[[questions]]
+type = "SingleChoice"
+id = "async_adv_1"
+prompt = "关于 `Pin`，以下哪个描述是正确的？"
+answer = 1
+options = [
+  "Pin 用于优化异步代码性能",
+  "Pin 保证对象在内存中的位置不会被移动",
+  "Pin 自动实现 Send trait",
+  "Pin 只能在栈上使用"
+]
+explanation = "`Pin<P>` 保证指向的对象在内存中位置不会被移动（除非实现了 Unpin）。这对于自引用结构（如异步生成状态机）很重要，因为移动会导致自引用指针悬垂。"
+difficulty = "进阶"
+
+[[questions]]
+type = "SingleChoice"
+id = "async_adv_2"
+prompt = "以下代码有什么问题？\n\n```rust\ntrait DataFetcher {\n    async fn fetch(&self) -> String;\n}\n```"
+answer = 2
+options = [
+  "没有语法错误",
+  "async 不能在 trait 中使用",
+  "Rust 稳定版不支持 trait 中的 async fn（需要 async-trait 宏或 Rust 1.75+）",
+  "返回类型应该是 &str"
+]
+explanation = "Rust 1.75 之前，trait 中不能直接写 async fn，需要使用 `async-trait` 宏。1.75+ 支持原生 trait async fn，但有一些限制。trait 中的 async fn 会被展开为返回 impl Future 的关联类型。"
+difficulty = "进阶"
+
+[[questions]]
+type = "MultipleChoice"
+id = "async_adv_3"
+prompt = "以下哪些是合法的并发执行多个 Future 的方式？（多选）"
+answer = [0, 2, 3]
+options = [
+  "tokio::join!(fut1, fut2)",
+  "fut1.await && fut2.await",
+  "tokio::select! { ... }",
+  "futures::future::join_all(vec)"
+]
+explanation = "合法方式：1) `join!` 宏等待所有 Future 完成；2) `select!` 等待任一 Future 完成；3) `join_all` 等待迭代器中所有 Future。`fut1.await && fut2.await` 是顺序执行不是并发，且逻辑与操作不适用于 Future。"
+difficulty = "进阶"
+
+[[questions]]
+type = "FillInBlank"
+id = "async_adv_4"
+prompt = "补全代码，并发执行两个异步操作并获取结果：\n\n```rust\nasync fn main() {\n    let (result1, result2) = tokio::_____!(\n        fetch_from_api1(),\n        fetch_from_api2()\n    );\n}\n```"
+answer = ["join"]
+explanation = "`tokio::join!` 宏并发执行多个 Future，等待全部完成后返回结果元组。与顺序 await 不同，join! 会同时启动所有 Future，总时间等于最慢的那个。还有 `try_join!` 用于在任一失败时立即返回。"
+difficulty = "进阶"
+
+[[questions]]
+type = "SingleChoice"
+id = "async_challenge_1"
+prompt = "以下代码的输出顺序是什么？\n\n```rust\nasync fn task(n: u32) {\n    println!(\"Start {}\", n);\n    tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;\n    println!(\"End {}\", n);\n}\n\n#[tokio::main]\nasync fn main() {\n    let t1 = task(1);\n    let t2 = task(2);\n    t1.await;\n    t2.await;\n}\n```"
+answer = 1
+options = [
+  "Start 1 / End 1 / Start 2 / End 2",
+  "Start 1 / Start 2 / End 1 / End 2",
+  "不确定",
+  "编译错误"
+]
+explanation = "输出顺序是：Start 1 / Start 2 / End 1 / End 2。创建 Future 时（let t1 = task(1)）并不执行，但 await t1 时任务开始，遇到 sleep 时让出，然后 await t2 时任务2开始（此时两个任务都在运行）。注意：实际执行顺序可能因运行时调度而异，但两个任务会并发执行。"
+difficulty = "挑战"
+
+[[questions]]
+type = "TrueFalse"
+id = "async_challenge_2"
+prompt = "`Send` 和 `Sync` trait 在异步编程中很重要，因为 Future 可能在不同线程间传递和共享。"
+answer = true
+explanation = "正确。异步任务可能在不同线程间调度执行，因此 Future 和其产出值通常需要实现 Send。如果数据在多个任务间共享，还需要 Sync。编译器会检查这些约束，跨线程发送非 Send 数据会导致编译错误。"
+difficulty = "挑战"
+
+[[questions]]
+type = "SingleChoice"
+id = "async_challenge_3"
+prompt = "关于 `tokio::select!`，以下哪个描述是正确的？"
+answer = 2
+options = [
+  "等待所有分支完成",
+  "按顺序执行分支",
+  "等待任一分支完成，取消其他分支",
+  "只在编译时选择分支"
+]
+explanation = "`select!` 宏等待多个 Future 中的任意一个完成，当某个分支就绪时，执行对应代码块并取消（drop）其他未完成的 Future。这在实现超时、竞争条件处理等场景非常有用。注意被取消的 Future 的清理代码仍会执行。"
+difficulty = "挑战"

@@ -1,0 +1,143 @@
+[[questions]]
+type = "SingleChoice"
+id = "borrow_basic_1"
+prompt = "Rust 借用规则的核心原则是什么？"
+answer = 2
+options = [
+  "允许多个可变引用同时存在",
+  "不允许任何引用",
+  "在任意给定时刻，只能有一个可变引用或任意数量的不可变引用",
+  "引用可以超过被引用值的生命周期"
+]
+explanation = "Rust 借用规则的核心是：在任意给定时刻，要么只能有一个可变引用，要么可以有任意数量的不可变引用。这个规则在编译时强制执行，确保内存安全。"
+difficulty = "基础"
+
+[[questions]]
+type = "TrueFalse"
+id = "borrow_basic_2"
+prompt = "不可变引用（&T）允许修改被引用的值。"
+answer = false
+explanation = "错误。不可变引用 `&T` 只允许读取，不允许修改。要修改被引用的值，必须使用可变引用 `&mut T`。这是 Rust 读写分离原则的体现。"
+difficulty = "基础"
+
+[[questions]]
+type = "SingleChoice"
+id = "borrow_basic_3"
+prompt = "以下代码的输出是什么？\n\n```rust\nfn main() {\n    let mut s = String::from(\"hello\");\n    change(&mut s);\n    println!(\"{}\", s);\n}\n\nfn change(s: &mut String) {\n    s.push_str(\" world\");\n}\n```"
+answer = 0
+options = [
+  "hello world",
+  "hello",
+  "编译错误",
+  "运行时 panic"
+]
+explanation = "代码输出 'hello world'。change 函数接收一个可变引用 `&mut String`，可以通过它修改原字符串。可变引用允许修改被引用的值，这是 Rust 显式可变性设计的一部分。"
+difficulty = "基础"
+
+[[questions]]
+type = "MultipleChoice"
+id = "borrow_basic_4"
+prompt = "以下哪些情况会违反借用规则？（多选）"
+answer = [0, 2]
+options = [
+  "同时拥有两个活跃的可变引用指向同一数据",
+  "同时拥有两个活跃的不可变引用指向同一数据",
+  "同时拥有可变引用和不可变引用指向同一数据",
+  "拥有一个可变引用指向数据"
+]
+explanation = "借用规则禁止：1) 同时拥有多个活跃的可变引用；2) 同时拥有可变引用和不可变引用。允许多个不可变引用同时存在（数据竞争安全的只读访问），也允许单个可变引用存在。"
+difficulty = "基础"
+
+[[questions]]
+type = "FillInBlank"
+id = "borrow_basic_5"
+prompt = "补全以下函数签名，使其接受一个字符串引用但不修改它：\n\n```rust\nfn print_string(_____ s: &String) {\n    println!(\"{}\", s);\n}\n```"
+answer = [""]
+explanation = "不需要填写任何关键字。`&String` 已经是不可变引用。如果希望明确表达不修改的意图，可以添加 `&` 之前的 `&`（但这已经是默认行为）。实际上这个函数签名已经正确，参数 s 是不可变引用，只能读取不能修改。"
+difficulty = "基础"
+
+[[questions]]
+type = "SingleChoice"
+id = "borrow_adv_1"
+prompt = "以下代码的输出是什么？\n\n```rust\nfn main() {\n    let mut s = String::from(\"hello\");\n    let r1 = &s;\n    let r2 = &s;\n    println!(\"{} and {}\", r1, r2);\n}\n```"
+answer = 0
+options = [
+  "编译通过，输出: hello and hello",
+  "编译错误：不能有两个引用",
+  "运行时 panic",
+  "编译警告但能通过"
+]
+explanation = "编译通过。Rust 允许同时拥有多个不可变引用。r1 和 r2 都是不可变引用，可以同时存在。这是安全的，因为它们都只做只读访问，不会造成数据竞争。"
+difficulty = "进阶"
+
+[[questions]]
+type = "SingleChoice"
+id = "borrow_adv_2"
+prompt = "以下代码为什么无法编译？\n\n```rust\nfn main() {\n    let mut s = String::from(\"hello\");\n    let r1 = &mut s;\n    let r2 = &mut s;\n    println!(\"{}\", r1);\n}\n```"
+answer = 1
+options = [
+  "语法错误",
+  "不能在同一作用域内有两个可变引用",
+  "r1 和 r2 类型不匹配",
+  "println! 宏不支持可变引用"
+]
+explanation = "Rust 不允许在同一作用域内同时拥有多个可变引用。r1 和 r2 同时活跃时，r2 的创建违反了借用规则。编译器报错：cannot borrow `s` as mutable more than once at a time。这是防止数据竞争的核心机制。"
+difficulty = "进阶"
+
+[[questions]]
+type = "MultipleChoice"
+id = "borrow_adv_3"
+prompt = "以下哪些是解决借用冲突的有效方法？（多选）"
+answer = [0, 1, 3]
+options = [
+  "缩小引用的作用域，使其不重叠",
+  "将可变引用改为不可变引用（如果不需要修改）",
+  "使用 unsafe 代码绕过检查",
+  "使用智能指针如 RefCell（运行时检查）"
+]
+explanation = "解决借用冲突的方法：1) 缩小引用作用域，使引用生命周期不重叠；2) 如果不需要修改，使用不可变引用；3) 使用 RefCell 等提供运行时借用检查的智能指针。不推荐直接使用 unsafe 绕过检查，这会失去 Rust 的安全保证。"
+difficulty = "进阶"
+
+[[questions]]
+type = "FillInBlank"
+id = "borrow_adv_4"
+prompt = "补全代码，使其能够编译通过：\n\n```rust\nfn main() {\n    let mut s = String::from(\"hello\");\n    {\n        let r1 = &mut s;\n        r1.push_str(\" world\");\n        _____  // r1 在这里结束\n    }\n    let r2 = &mut s;\n    println!(\"{}\", r2);\n}\n```"
+answer = ["}", "// nothing needed"]
+explanation = "通过添加额外的花括号创建嵌套作用域，r1 的作用域在右花括号 `}` 处结束。之后 r2 可以安全地借用 s，因为此时没有其他活跃引用。这是处理借用冲突的常见技巧。"
+difficulty = "进阶"
+
+[[questions]]
+type = "SingleChoice"
+id = "borrow_challenge_1"
+prompt = "以下代码的输出是什么？\n\n```rust\nfn main() {\n    let mut v = vec![1, 2, 3];\n    for i in &v {\n        v.push(*i);\n    }\n}\n```"
+answer = 1
+options = [
+  "成功运行，向量变为 [1,2,3,1,2,3]",
+  "编译错误",
+  "运行时 panic",
+  "无限循环"
+]
+explanation = "编译错误。`for i in &v` 创建了对 v 的不可变引用，循环体内尝试 `v.push(*i)` 需要可变引用。同时持有不可变引用和可变引用违反了借用规则。此外，push 操作可能导致向量重新分配内存，使迭代器失效。"
+difficulty = "挑战"
+
+[[questions]]
+type = "TrueFalse"
+id = "borrow_challenge_2"
+prompt = "以下代码可以编译通过：\n\n```rust\nfn main() {\n    let mut s = String::from(\"hello\");\n    let r = &mut s;\n    let r2 = &mut *r;\n}\n```"
+answer = true
+explanation = "可以编译通过。`&mut *r` 是对 r 解引用后再取可变引用，即对 s 的重新借用（reborrow）。r2 的生命周期被限制在 r 的生命周期内，不违反借用规则。这是 Rust 中处理嵌套可变引用的合法方式。"
+difficulty = "挑战"
+
+[[questions]]
+type = "SingleChoice"
+id = "borrow_challenge_3"
+prompt = "关于内部可变性（Interior Mutability），以下哪个描述是正确的？"
+answer = 2
+options = [
+  "Cell<T> 允许多个可变引用同时存在",
+  "RefCell<T> 在编译时检查借用规则",
+  "内部可变性允许在拥有不可变引用的情况下修改数据",
+  "Rc<T> 本身允许修改其包含的值"
+]
+explanation = "内部可变性的核心概念是：允许在拥有不可变引用的情况下修改数据。Cell<T> 适用于 Copy 类型，RefCell<T> 在运行时检查借用规则（不是编译时）。Rc<T> 本身只提供共享所有权，要修改内容需要配合 RefCell 或 Cell。"
+difficulty = "挑战"

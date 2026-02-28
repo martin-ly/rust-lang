@@ -1,8 +1,8 @@
-# 并发性能研究
+﻿# 并发性能研究
 
 > **创建日期**: 2025-11-15
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -362,7 +362,7 @@ async fn async_task_benchmark() {
 **测试环境**：
 
 - CPU: 8 核
-- Rust 版本: 1.93.0+
+- Rust 版本: 1.93.1+
 - 优化级别: `-O2`
 
 **结果**：
@@ -428,7 +428,7 @@ async fn async_task_benchmark() {
 
 ### 环境要求
 
-- **Rust**: 1.93.0+；**Tokio**：`tokio = { version = "1", features = ["full"] }`；**Criterion**：工作区已配置
+- **Rust**: 1.93.1+；**Tokio**：`tokio = { version = "1", features = ["full"] }`；**Criterion**：工作区已配置
 - 建议固定 CPU 频率、关闭节能；多线程 bench 需注意核心数与负载隔离
 
 ### 执行步骤

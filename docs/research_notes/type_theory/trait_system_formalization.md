@@ -1,8 +1,8 @@
-# Trait 系统形式化
+﻿# Trait 系统形式化
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -425,7 +425,8 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 
 ### 孤儿规则与 Negative Impls
 
-**Def ORPH1（孤儿规则）**：impl 为**孤儿**当且仅当：self 类型 $\tau$ 与 Trait $T$ **均**为外部 crate 定义。形式化：$\text{Orphan}(\text{impl } T \text{ for } \tau) \leftrightarrow \neg \text{Local}(\tau) \land \neg \text{Local}(T)$。Axiom COH1 等价于：孤儿 impl 被拒绝。
+**Def ORPH1（孤儿规则）**：impl 为**孤儿**当且仅当：self 类型 $\tau$ 与 Trait $T$ **均**为外部 crate 定义。形式化：$\text{Orphan}(\text{impl } T \text{ for } \tau) \leftrightarrow \neg \text{Local}(\tau) \land \neg \text{Local}(T)$。
+Axiom COH1 等价于：孤儿 impl 被拒绝。
 
 **Def ORPH-RELAX1（孤儿规则放宽倡议）**：2024 放宽倡议提议在满足「覆盖集」约束下允许部分原孤儿 impl；实验性；尚未稳定。形式化：$\text{OrphanRelax}(\text{impl}) \rightarrow \text{CoverageSet}(\text{impl})$ 且当前实现未采纳。
 
@@ -437,31 +438,41 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 
 *证明思路*：由 Axiom NEG1，negative impl 使 Resolve 返回 None；与 positive impl 互斥；由 COH-T1 对 positive 的唯一性，系统一致。∎
 
-**Def FUND1（fundamental 类型）**：`#[fundamental]` 对类型 $\tau$ 标记，使孤儿规则对 $\tau$ 的泛型实例有例外；RFC 1023。形式化：$\text{Fundamental}(\tau) \rightarrow \text{OrphanRule}(\tau[\alpha])$ 有例外；用于 `Box`、`Fn` 等标准库类型，允许为 `impl<T> Trait for Box<T>` 等 blanket impl 时放宽孤儿规则。
+**Def FUND1（fundamental 类型）**：`#[fundamental]` 对类型 $\tau$ 标记，使孤儿规则对 $\tau$ 的泛型实例有例外；
+RFC 1023。形式化：$\text{Fundamental}(\tau) \rightarrow \text{OrphanRule}(\tau[\alpha])$ 有例外；
+用于 `Box`、`Fn` 等标准库类型，允许为 `impl<T> Trait for Box<T>` 等 blanket impl 时放宽孤儿规则。
 
 ---
 
 ### RPITIT 与 async fn in trait（Rust 1.93 稳定化）
 
-**Def RPIT1（RPITIT 语义）**：Return Position Impl Trait In Trait：Trait 方法签名中使用 `impl Trait` 作为返回类型。形式化：方法 $m$ 的签名为 $m : \tau_{\text{self}} \to \exists \alpha. \tau(\alpha)$，其中 $\exists \alpha. \tau(\alpha)$ 为存在类型，由 impl 具体化；每个 impl 提供具体返回类型 $\tau_{\text{impl}}$ 满足 $\tau_{\text{impl}} : \tau(\alpha)$。
+**Def RPIT1（RPITIT 语义）**：Return Position Impl Trait In Trait：Trait 方法签名中使用 `impl Trait` 作为返回类型。
+形式化：方法 $m$ 的签名为 $m : \tau_{\text{self}} \to \exists \alpha. \tau(\alpha)$，其中 $\exists \alpha. \tau(\alpha)$ 为存在类型，由 impl 具体化；
+每个 impl 提供具体返回类型 $\tau_{\text{impl}}$ 满足 $\tau_{\text{impl}} : \tau(\alpha)$。
 
-**Def ASYNC1（async fn in trait 类型）**：Trait 中 `async fn m(...) -> R` 等价于 `fn m(...) -> impl Future<Output = R>`；类型为 $\tau_{\text{self}} \to \text{Future}[\tau_R]$，其中 $\text{Future}[\tau_R]$ 为由 impl 决定的具体 future 类型。
+**Def ASYNC1（async fn in trait 类型）**：Trait 中 `async fn m(...) -> R` 等价于 `fn m(...) -> impl Future<Output = R>`；
+类型为 $\tau_{\text{self}} \to \text{Future}[\tau_R]$，其中 $\text{Future}[\tau_R]$ 为由 impl 决定的具体 future 类型。
 
-**定理 RPIT-T1（RPITIT 与 impl 解析）**：若 Trait $T$ 含 RPITIT 方法 $m$，则对 $\tau : T$，$\text{Resolve}(\tau, T)$ 返回的 impl 决定 $m$ 的返回类型；该类型在编译时单态化，与 [COH-T1](#trait-coherence一致性形式化) 一致，至多一个 impl 故返回类型唯一。
+**定理 RPIT-T1（RPITIT 与 impl 解析）**：若 Trait $T$ 含 RPITIT 方法 $m$，则对 $\tau : T$，$\text{Resolve}(\tau, T)$ 返回的 impl 决定 $m$ 的返回类型；
+该类型在编译时单态化，与 [COH-T1](#trait-coherence一致性形式化) 一致，至多一个 impl 故返回类型唯一。
 
 *证明思路*：RPITIT 的返回类型由 impl 绑定；由 COH-T1，$(\tau, T)$ 至多一个 impl，故返回类型唯一。∎
 
-**定理 ASYNC-T1（async fn Send 边界）**：若 `async fn m(...) -> R` 用于跨线程（如 `Send` 边界），则其生成的 Future 类型须满足 `Future: Send`；等价于 $\tau_R$ 及相关借用的生命周期、自引用约束满足 Send。见 [async_state_machine](../formal_methods/async_state_machine.md) 定理 6.2。
+**定理 ASYNC-T1（async fn Send 边界）**：若 `async fn m(...) -> R` 用于跨线程（如 `Send` 边界），则其生成的 Future 类型须满足 `Future: Send`；
+等价于 $\tau_R$ 及相关借用的生命周期、自引用约束满足 Send。见 [async_state_machine](../formal_methods/async_state_machine.md) 定理 6.2。
 
 *证明思路*：async fn 脱糖为 `impl Future`；Send 由 Future 的 poll 状态与捕获的 `&self`/`&mut self` 决定；类型系统在 Trait 约束传播时检查。∎
 
-**推论 RPIT-C1**：RPITIT 与 dyn Trait 的交互：若 Trait 含 RPITIT 方法，则 `dyn T` 的对象安全需额外条件——返回的 `impl Trait` 在 vtable 中需可擦除；1.93 中 RPITIT 稳定化后，对象安全规则见 [00_completeness_gaps](00_completeness_gaps.md) 对象安全缺口。
+**推论 RPIT-C1**：RPITIT 与 dyn Trait 的交互：若 Trait 含 RPITIT 方法，则 `dyn T` 的对象安全需额外条件——返回的 `impl Trait` 在 vtable 中需可擦除；
+1.93 中 RPITIT 稳定化后，对象安全规则见 [00_completeness_gaps](00_completeness_gaps.md) 对象安全缺口。
 
 ---
 
 ### impl Trait 与 dyn Trait 可替换边界
 
-**Def DYN-IMPL1（impl Trait 与 dyn 可替换边界）**：设 Trait $T$ 满足**对象安全**（无泛型方法、无 Self 除接收者外、无 RPITIT 返回非同名类型等）。则 `impl T` 与 `dyn T` 在以下边界可互换：（1）**参数位置**：`fn f(x: impl T)` 与 `fn f(x: &dyn T)` 均可接受实现了 $T$ 的类型；（2）**替换方向**：`impl T` 可传给 `&dyn T`（coerce）；反向（`dyn T` → `impl T`）不可，因存在类型擦除。
+**Def DYN-IMPL1（impl Trait 与 dyn 可替换边界）**：设 Trait $T$ 满足**对象安全**（无泛型方法、无 Self 除接收者外、无 RPITIT 返回非同名类型等）。
+则 `impl T` 与 `dyn T` 在以下边界可互换：（1）**参数位置**：`fn f(x: impl T)` 与 `fn f(x: &dyn T)` 均可接受实现了 $T$ 的类型；
+（2）**替换方向**：`impl T` 可传给 `&dyn T`（coerce）；反向（`dyn T` → `impl T`）不可，因存在类型擦除。
 
 **定理 DYN-T1（可替换条件）**：`impl T` 可安全替换为 `dyn T` 当且仅当 $T$ 对象安全且无返回 `impl Trait` 的方法（或满足 RPIT-C1 的 vtable 可擦除条件）。
 
@@ -473,11 +484,16 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 
 ### Trait + 泛型 + GAT 组合与 Specialization
 
-**Def TRAIT-GAT1（Trait + 泛型 + GAT 组合）**：`impl<T> Trait for Vec<T>` 与 GAT 组合时，解析优先级：具体 impl 优先于泛型 impl；GAT 约束在单态化时检查。形式化：$\text{Resolve}(\tau[\vec{\alpha}], T)$ 中优先匹配最具体 impl；GAT 约束 $A[P] : B[P]$ 在 [advanced_types](../advanced_types.md) AT-L1 衔接。
+**Def TRAIT-GAT1（Trait + 泛型 + GAT 组合）**：`impl<T> Trait for Vec<T>` 与 GAT 组合时，解析优先级：具体 impl 优先于泛型 impl；GAT 约束在单态化时检查。
+形式化：$\text{Resolve}(\tau[\vec{\alpha}], T)$ 中优先匹配最具体 impl；
+GAT 约束 $A[P] : B[P]$ 在 [advanced_types](../advanced_types.md) AT-L1 衔接。
 
-**Def SPEC1（specialization）**： overlapping impl 时（不稳定），更具体的 impl 优先；`default` 方法可被更具体 impl 覆盖；与 COH2 冲突——specialization 需放宽重叠规则，当前仅 nightly。
+**Def SPEC1（specialization）**： overlapping impl 时（不稳定），更具体的 impl 优先；
+`default` 方法可被更具体 impl 覆盖；
+与 COH2 冲突——specialization 需放宽重叠规则，当前仅 nightly。
 
-**定理 SPEC-T1**：若 specialization 稳定化，则 overlapping impl 需满足「一个更具体」条件；与 COH-T1 的至多一个 impl 在非 overlapping 情况下一致。
+**定理 SPEC-T1**：若 specialization 稳定化，则 overlapping impl 需满足「一个更具体」条件；
+与 COH-T1 的至多一个 impl 在非 overlapping 情况下一致。
 
 ---
 

@@ -1,10 +1,10 @@
-# 设计模式
+﻿# 设计模式
 
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [c09_design_pattern/](../../../crates/c09_design_pattern/)
+> 内容已整合至： [c09_design_pattern/](../../../crates/c09_design_pattern/README.md)
 
 ## 知识结构思维导图
 
@@ -434,4 +434,4 @@ fn newtype_demo() {
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
-| c09_design_pattern | 设计模式实现集合 | [../../../crates/c09_design_pattern/](../../../crates/c09_design_pattern/) |
+| c09_design_pattern | 设计模式实现集合 | [../../../crates/c09_design_pattern/](../../../crates/c09_design_pattern/README.md) |

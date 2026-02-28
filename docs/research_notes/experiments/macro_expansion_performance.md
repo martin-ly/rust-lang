@@ -1,8 +1,8 @@
-# 宏展开性能研究
+﻿# 宏展开性能研究
 
 > **创建日期**: 2025-11-15
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -256,7 +256,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 **测试环境**：
 
-- Rust 版本: 1.93.0+
+- Rust 版本: 1.93.1+
 - 项目大小: 中等规模
 
 **结果**：
@@ -322,7 +322,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 环境要求
 
-- **Rust**: 1.93.0+；**cargo-expand**：`cargo install cargo-expand`；**cargo-bloat**：`cargo install cargo-bloat`
+- **Rust**: 1.93.1+；**cargo-expand**：`cargo install cargo-expand`；**cargo-bloat**：`cargo install cargo-bloat`
 - 建议 `cargo clean` 后测量冷编译；增量编译需固定 `touch` 策略
 
 ### 执行步骤

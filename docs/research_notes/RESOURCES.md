@@ -1,8 +1,8 @@
-# 研究资源汇总
+﻿# 研究资源汇总
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -307,7 +307,10 @@
 | Prusti、Kani | [formal_methods](formal_methods/README.md) | 所有权、借用、unsafe 契约 |
 | Criterion、Miri | [experiments/README](experiments/README.md) | EX-T1、EX-T2；内存安全验证 |
 
-详见 [PROOF_INDEX](PROOF_INDEX.md) 全证明索引、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) 国际对标、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 批判性分析与推进计划、[practical_applications](practical_applications.md) 案例与定理对应。
+详见 [PROOF_INDEX](PROOF_INDEX.md) 全证明索引、
+[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) 国际对标、
+[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 批判性分析与推进计划、
+[practical_applications](practical_applications.md) 案例与定理对应。
 
 ---
 

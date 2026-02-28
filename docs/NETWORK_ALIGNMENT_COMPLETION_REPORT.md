@@ -69,7 +69,7 @@
 | 异步编程改进 | 旗舰 | [async_state_machine](./research_notes/formal_methods/async_state_machine.md) |
 | Pin 人体工学 | 高 | [pin_self_referential](./research_notes/formal_methods/pin_self_referential.md) |
 | 就地初始化 | 高 | [ownership_model](./research_notes/formal_methods/ownership_model.md) |
-| build-std | 中 | [06_toolchain](./06_toolchain/) |
+| build-std | 中 | [06_toolchain](./06_toolchain/README.md) |
 | 下一代 trait 求解器 | 高 | [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
 
 ---

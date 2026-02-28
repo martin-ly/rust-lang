@@ -1,8 +1,8 @@
-# 研究笔记内容完善指南
+﻿# 研究笔记内容完善指南
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024) ✅
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024) ✅
 > **状态**: ✅ **100% 完成**；三阶段全部推进完毕
 
 ---
@@ -426,7 +426,7 @@ error[E0382]: borrow of moved value: `s1`
   - 关键文件: `ownership.rs` - 所有权规则实现
   - 关键文件: `borrow_checker.rs` - 借用检查器实现
 
-- [所有权文档](../../../crates/c01_ownership_borrow_scope/docs/)
+- [所有权文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
   - 文档: `ownership_model.md` - 所有权模型文档
 ```
 

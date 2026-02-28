@@ -1,11 +1,11 @@
-# 构建工具理论
+﻿# 构建工具理论
 
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: 构建工具负责将源代码转换为可执行程序，包括编译、链接、打包等步骤。Rust 通过 build.rs 构建脚本支持自定义构建逻辑，用于代码生成、外部库链接和条件编译配置。
-> 内容已整合至： [toolchain/](../../../06_toolchain/)
+> 内容已整合至： [toolchain/](../../../06_toolchain/README.md)
 
 [返回主索引](../../00_master_index.md) | [返回工具链索引](../README.md)
 
@@ -248,7 +248,7 @@ mod sync_impl {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 工具链文档 | 完整工具链指南 | [../../../06_toolchain/](../../../06_toolchain/) |
+| 工具链文档 | 完整工具链指南 | [../../../06_toolchain/](../../../06_toolchain/README.md) |
 | Cargo 工作空间 | 工作空间配置 | [../../../06_toolchain/02_cargo_workspace_guide.md](../../../06_toolchain/02_cargo_workspace_guide.md) |
 | 编译器特性 | 编译器优化指南 | [../../../06_toolchain/01_compiler_features.md](../../../06_toolchain/01_compiler_features.md) |
 | 研究方法论 | 研究方法指南 | [../../../research_notes/research_methodology.md](../../../research_notes/research_methodology.md) |

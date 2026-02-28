@@ -1,8 +1,8 @@
-# 🤖 Rust AI/ML 速查卡 {#-rust-aiml-速查卡}
+﻿# 🤖 Rust AI/ML 速查卡 {#-rust-aiml-速查卡}
 
 > **快速参考** | [AI+Rust 生态指南](../../05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) | [AI 辅助编程](../../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md)
 > **创建日期**: 2026-02-13
-> **最后更新**: 2026-02-13
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 

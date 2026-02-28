@@ -1,9 +1,9 @@
-# Send/Sync 形式化
+﻿# Send/Sync 形式化
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-27
+> **最后更新**: 2026-02-28
 > **更新内容**: 添加 Send/Sync 自动实现规则定义
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成 (Week 2 任务 P1-W2-T3)
 > **并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 6 行（Send/Sync）
 

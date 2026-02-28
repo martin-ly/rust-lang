@@ -1,8 +1,8 @@
-# 设计模式形式分析框架
+﻿# 设计模式形式分析框架
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -192,7 +192,7 @@
 
 ## 23 模式多维对比矩阵
 
-下表为 23 种设计模式的**概念定义/属性关系/表达力**多维对比；每行链接到对应模式文档。用于选型与「文档↔矩阵」双向追溯（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../HIERARCHICAL_MAPPING_AND_SUMMARY.md)）。
+下表为 23 种设计模式的**概念定义/属性关系/表达力**多维对比；每行链接到对应模式文档。用于选型与「文档↔矩阵」双向追溯（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md)）。
 
 | 模式 | 所有权特征 | 借用特征 | 安全边界 | 典型场景 | Rust 机制衔接 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -286,7 +286,7 @@
 
 ## 反例索引
 
-设计模式违反边界时的反例见 [FORMAL_PROOF_SYSTEM_GUIDE](../../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)：
+设计模式违反边界时的反例见 [FORMAL_PROOF_SYSTEM_GUIDE](../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)：
 
 | 模式 | 反例 |
 | :--- | :--- |

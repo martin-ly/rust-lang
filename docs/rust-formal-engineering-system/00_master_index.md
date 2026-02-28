@@ -1,8 +1,8 @@
-# Rust 形式化工程系统 - 主索引
+﻿# Rust 形式化工程系统 - 主索引
 
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **阅读说明**: 本目录为**单一索引层**，各子目录 README 仅为占位重定向（内容已整合至研究笔记及 crates）。**实质内容请直接访问下方表格中的链接**，勿依赖子目录 README 获取正文。
 
@@ -21,13 +21,13 @@
 | 子模块 | 映射目标 | 说明 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **02 所有权系统** | [research_notes/formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) | 所有权形式化模型 |
-| **03 所有权与借用** | [research_notes/formal_methods/](../research_notes/formal_methods/) | 借用检查器、所有权、生命周期 |
+| **03 所有权与借用** | [research_notes/formal_methods/](../research_notes/formal_methods/README.md) | 借用检查器、所有权、生命周期 |
 | **02 内存安全** | [research_notes/formal_methods/borrow_checker_proof.md](../research_notes/formal_methods/borrow_checker_proof.md) | 借用检查器与内存安全 |
 | **05 Trait 系统** | [research_notes/type_theory/trait_system_formalization.md](../research_notes/type_theory/trait_system_formalization.md) | Trait 形式化 |
 | **06 生命周期管理** | [research_notes/formal_methods/lifetime_formalization.md](../research_notes/formal_methods/lifetime_formalization.md) | 生命周期形式化 |
-| **08 宏系统** | [crates/c11_macro_system/docs/](../../crates/c11_macro_system/docs/) | 宏系统文档 |
+| **08 宏系统** | [crates/c11_macro_system/docs/](../../crates/c11_macro_system/docs/README.md) | 宏系统文档 |
 | **09 形式化验证** | [research_notes/TOOLS_GUIDE.md](../research_notes/TOOLS_GUIDE.md) | Prusti、Kani、Creusot |
-| **10 数学基础** | [research_notes/type_theory/](../research_notes/type_theory/) | 类型理论与数学基础 |
+| **10 数学基础** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型理论与数学基础 |
 
 ### 类型系统子路径
 
@@ -41,8 +41,8 @@
 
 | 子模块 | 映射目标 | 说明 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **02 异步编程** | [crates/c06_async/](../../crates/c06_async/) | 异步、Future、async/await |
-| **09 Actor 模型** | [crates/c05_threads/docs/](../../crates/c05_threads/docs/)、[crates/c06_async/docs/](../../crates/c06_async/docs/) | 消息传递与 Actor |
+| **02 异步编程** | [crates/c06_async/](../../crates/c06_async/README.md) | 异步、Future、async/await |
+| **09 Actor 模型** | [crates/c05_threads/docs/](../../crates/c05_threads/docs/README.md)、[crates/c06_async/docs/](../../crates/c06_async/docs/README.md) | 消息传递与 Actor |
 | **11 基准指南** | [research_notes/experiments/performance_benchmarks.md](../research_notes/experiments/performance_benchmarks.md) | 性能基准 |
 
 ---
@@ -51,7 +51,7 @@
 
 | 子模块 | 映射目标 |
 | :--- | :--- | :--- | :--- | :--- |
-| 04 并发模式 | [crates/c09_design_pattern/docs/](../../crates/c09_design_pattern/docs/) |
+| 04 并发模式 | [crates/c09_design_pattern/docs/](../../crates/c09_design_pattern/docs/README.md) |
 
 ---
 
@@ -61,7 +61,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | 01 编译器 | [06_toolchain/01_compiler_features.md](../06_toolchain/01_compiler_features.md) |
 | 02 包管理器 | [06_toolchain/02_cargo_workspace_guide.md](../06_toolchain/02_cargo_workspace_guide.md) |
-| 03 构建工具 | [06_toolchain/](../06_toolchain/) |
+| 03 构建工具 | [06_toolchain/](../06_toolchain/README.md) |
 
 ---
 

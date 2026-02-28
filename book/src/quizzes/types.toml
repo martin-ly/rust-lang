@@ -1,0 +1,143 @@
+[[questions]]
+type = "SingleChoice"
+id = "types_basic_1"
+prompt = "Rust 的类型推导是什么意思？"
+answer = 1
+options = [
+  "Rust 不需要类型声明",
+  "编译器可以根据上下文自动推断变量类型",
+  "所有类型都是动态的",
+  "类型在运行时才确定"
+]
+explanation = "Rust 有强大的类型推导能力，编译器可以根据赋值、函数返回值等上下文自动推断变量类型。但 Rust 是静态类型语言，类型在编译时就已确定，只是可以省略显式声明。"
+difficulty = "基础"
+
+[[questions]]
+type = "TrueFalse"
+id = "types_basic_2"
+prompt = "Rust 中可以使用 `let x = 5;` 而不指定类型，因为 Rust 是动态类型语言。"
+answer = false
+explanation = "错误。Rust 是静态类型语言，类型在编译时确定。`let x = 5;` 能工作是因为编译器通过类型推导知道 x 是 i32 类型。如果上下文不足以推断类型（如 `let x = Vec::new()`），就必须显式标注类型。"
+difficulty = "基础"
+
+[[questions]]
+type = "SingleChoice"
+id = "types_basic_3"
+prompt = "以下代码中 `x` 的类型是什么？\n\n```rust\nlet x = vec![1, 2, 3];\n```"
+answer = 0
+options = [
+  "Vec<i32>",
+  "Vec",
+  "[i32; 3]",
+  "动态类型"
+]
+explanation = "`vec!` 宏创建的是 Vec<i32>。整数字面量默认被推导为 i32 类型，因此这是一个包含 i32 的动态数组。注意 Vec 必须指定元素类型，不能单独使用。"
+difficulty = "基础"
+
+[[questions]]
+type = "MultipleChoice"
+id = "types_basic_4"
+prompt = "以下哪些是 Rust 的标量类型？（多选）"
+answer = [0, 1, 2, 3]
+options = [
+  "i32",
+  "bool",
+  "char",
+  "f64"
+]
+explanation = "Rust 有四种标量类型：整数类型（如 i32、u64）、浮点类型（f32、f64）、布尔类型（bool）、字符类型（char）。这些都是基本类型，存储单个值。"
+difficulty = "基础"
+
+[[questions]]
+type = "FillInBlank"
+id = "types_basic_5"
+prompt = "补全代码，为变量显式标注类型：\n\n```rust\nlet x: _____ = 42;\n```"
+answer = ["i32", "u32", "i64", "u64", "isize", "usize"]
+explanation = "整数字面量可以匹配多种整数类型。最常见的是 i32（有符号 32 位整数），但也可以是 u32、i64 等其他整数类型。如果不显式标注，编译器默认推导为 i32。"
+difficulty = "基础"
+
+[[questions]]
+type = "SingleChoice"
+id = "types_adv_1"
+prompt = "以下代码为什么无法编译？\n\n```rust\nfn main() {\n    let v = Vec::new();\n    v.push(1);\n}\n```"
+answer = 2
+options = [
+  "Vec::new() 是私有函数",
+  "push 方法不存在",
+  "无法推断 Vec 的元素类型",
+  "v 不是可变的"
+]
+explanation = "编译器无法推断 Vec 的元素类型。`Vec::new()` 返回 `Vec<T>`，但从后续代码无法确定 T 是什么类型。修复方法：`let v: Vec<i32> = Vec::new();` 或 `let v = vec![];` 或 `Vec::<i32>::new()`。"
+difficulty = "进阶"
+
+[[questions]]
+type = "SingleChoice"
+id = "types_adv_2"
+prompt = "关于泛型，以下哪个描述是正确的？"
+answer = 1
+options = [
+  "泛型会增加运行时开销",
+  "泛型通过单态化生成具体代码，无运行时开销",
+  "泛型只能用于函数",
+  "泛型在 Rust 中不被推荐"
+]
+explanation = "Rust 使用单态化（Monomorphization）实现泛型，编译时会为每种具体类型生成专用代码。这意味着零运行时开销，与手写具体类型代码性能相同。泛型可用于函数、结构体、枚举、Trait 等。"
+difficulty = "进阶"
+
+[[questions]]
+type = "MultipleChoice"
+id = "types_adv_3"
+prompt = "Trait Bound 的作用包括哪些？（多选）"
+answer = [0, 1, 3]
+options = [
+  "限制泛型类型必须实现特定 Trait",
+  "在泛型代码中使用 Trait 的方法",
+  "自动为类型实现 Trait",
+  "提供编译时多态"
+]
+explanation = "Trait Bound（如 `T: Display`）用于：1) 限制泛型参数必须实现特定 Trait；2) 允许在泛型代码中调用 Trait 的方法；3) 实现编译时多态。它不会自动实现 Trait，需要手动 impl。"
+difficulty = "进阶"
+
+[[questions]]
+type = "FillInBlank"
+id = "types_adv_4"
+prompt = "补全函数签名，要求类型 T 必须实现 Display 和 Debug Trait：\n\n```rust\nfn print<T: _____>(item: T) {\n    println!(\"{:?}\", item);\n}\n```"
+answer = ["Display + Debug", "Debug + Display"]
+explanation = "使用 `+` 组合多个 Trait Bound。`T: Display + Debug` 表示 T 必须同时实现 Display 和 Debug 两个 Trait。顺序不重要，也可以写成 `Debug + Display`。"
+difficulty = "进阶"
+
+[[questions]]
+type = "SingleChoice"
+id = "types_challenge_1"
+prompt = "以下代码的输出是什么？\n\n```rust\ntrait Animal {\n    fn speak(&self);\n}\n\nstruct Dog;\nimpl Animal for Dog {\n    fn speak(&self) {\n        println!(\"Woof!\");\n    }\n}\n\nfn make_speak<T: Animal>(animal: T) {\n    animal.speak();\n}\n\nfn main() {\n    let dog = Dog;\n    make_speak(dog);\n}\n```"
+answer = 0
+options = [
+  "Woof!",
+  "编译错误",
+  "运行时 panic",
+  "无输出"
+]
+explanation = "输出 'Woof!'。`make_speak` 是泛型函数，要求参数实现 Animal Trait。Dog 实现了 Animal，因此可以传入。编译器通过单态化生成专门处理 Dog 的代码，调用 Dog::speak 方法。"
+difficulty = "挑战"
+
+[[questions]]
+type = "TrueFalse"
+id = "types_challenge_2"
+prompt = "以下代码可以编译通过：\n\n```rust\ntrait Drawable {\n    fn draw(&self);\n}\n\nfn draw_twice<T>(item: T)\nwhere\n    T: Drawable,\n{\n    item.draw();\n    item.draw();\n}\n```"
+answer = true
+explanation = "可以编译通过。这是 Trait Bound 的 where 子句写法，功能与 `T: Drawable` 相同，但更清晰，特别适合复杂的 bound 条件。`draw_twice` 要求 T 实现 Drawable，然后可以调用 draw 方法两次。"
+difficulty = "挑战"
+
+[[questions]]
+type = "SingleChoice"
+id = "types_challenge_3"
+prompt = "关于关联类型（Associated Types），以下哪个描述是正确的？"
+answer = 2
+options = [
+  "关联类型与泛型完全相同",
+  "一个 Trait 可以有多个关联类型实现",
+  "关联类型在一个实现中只能有一个具体类型",
+  "关联类型不能有默认值"
+]
+explanation = "关联类型在一个具体实现中只能对应一个类型。例如 `trait Iterator { type Item; }`，`impl Iterator for Vec<i32>` 中 Item 必须是唯一的（如 i32）。这与泛型不同，泛型可以有多个实现如 Iterator<A>、Iterator<B>。Rust 也支持关联类型默认值。"
+difficulty = "挑战"

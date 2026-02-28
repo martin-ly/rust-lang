@@ -1,8 +1,8 @@
-# 论证缺口与设计理由综合索引
+﻿# 论证缺口与设计理由综合索引
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ formal_methods 100% 完成；整体框架已就绪
 > **目标**: 系统性追踪论证缺口、设计理由缺位、证明不足，并提供全局一致性索引
 
@@ -123,7 +123,7 @@
 - **CONTENT_ENHANCEMENT**：✅ Def CE1、Axiom CE1、定理 CE-T1
 - **形式化证明批判性分析与推进计划（2026-02-14）**：✅ [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 阶段 1–3 100%；
 [CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md) L2 完整证明；
-[coq_skeleton](coq_skeleton/) T-OW2 Coq 骨架；
+[coq_skeleton](coq_skeleton/README.md) T-OW2 Coq 骨架；
 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) 国际对标；
 证明深度 L1/L2/L3 标注
 

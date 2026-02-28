@@ -1,7 +1,7 @@
-# Rust 思维导图集合
+﻿# Rust 思维导图集合
 
 > **创建日期**: 2025-12-11
-> **最后更新**: 2026-02-20
+> **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
@@ -985,7 +985,7 @@ mindmap
 
 ### 相关文档
 
-- [formal_methods 独立思维导图](../research_notes/formal_methods/)：OWNERSHIP、TYPE_SYSTEM、VARIANCE、LIFETIME、ASYNC、DISTRIBUTED、WORKFLOW、DESIGN_PATTERN、PROOF_TECHNIQUES 等
+- [formal_methods 独立思维导图](../research_notes/formal_methods/README.md)：OWNERSHIP、TYPE_SYSTEM、VARIANCE、LIFETIME、ASYNC、DISTRIBUTED、WORKFLOW、DESIGN_PATTERN、PROOF_TECHNIQUES 等
 - [THINKING_REPRESENTATION_METHODS.md](./THINKING_REPRESENTATION_METHODS.md) - 思维表征方式
 - [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) - 决策图网
 - [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网
