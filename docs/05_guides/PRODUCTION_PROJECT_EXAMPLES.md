@@ -1,8 +1,8 @@
 # Rust 生产级项目示例
 
-> **文档版本**: 1.0  
-> **最后更新**: 2026-02-28  
-> **适用对象**: 中级到高级 Rust 开发者  
+> **文档版本**: 1.0
+> **最后更新**: 2026-02-28
+> **适用对象**: 中级到高级 Rust 开发者
 > **目标**: 提供端到端的可运行生产级项目模板
 
 ---
@@ -12,41 +12,98 @@
 - [Rust 生产级项目示例](#rust-生产级项目示例)
   - [目录](#目录)
   - [简介](#简介)
+    - [学习目标](#学习目标)
+    - [前置知识](#前置知识)
   - [技术选型对比总览](#技术选型对比总览)
   - [项目 1: CLI 日志分析器](#项目-1-cli-日志分析器)
     - [1.1 项目概述](#11-项目概述)
+      - [功能需求](#功能需求)
+      - [非功能需求](#非功能需求)
     - [1.2 技术选型理由](#12-技术选型理由)
     - [1.3 完整项目配置](#13-完整项目配置)
+      - [`Cargo.toml`](#cargotoml)
+      - [`clippy.toml`](#clippytoml)
+      - [`.cargo/config.toml`](#cargoconfigtoml)
     - [1.4 核心代码实现](#14-核心代码实现)
+      - [目录结构](#目录结构)
+      - [`src/cli.rs` - 命令行参数](#srcclirs---命令行参数)
+      - [`src/parser/mod.rs` - 解析器 trait](#srcparsermodrs---解析器-trait)
+      - [`src/parser/apache.rs` - Apache 日志解析](#srcparserapachers---apache-日志解析)
+      - [`src/analyzer/stats.rs` - 统计分析](#srcanalyzerstatsrs---统计分析)
+      - [`src/main.rs` - 主程序](#srcmainrs---主程序)
     - [1.5 项目结构](#15-项目结构)
     - [1.6 构建和运行](#16-构建和运行)
+      - [开发构建](#开发构建)
+      - [生产构建](#生产构建)
+      - [运行示例](#运行示例)
     - [1.7 测试策略](#17-测试策略)
+      - [单元测试](#单元测试)
+      - [集成测试](#集成测试)
+      - [基准测试](#基准测试)
     - [1.8 部署方案](#18-部署方案)
+      - [二进制分发](#二进制分发)
+      - [包管理器发布](#包管理器发布)
     - [1.9 性能优化](#19-性能优化)
+      - [基准测试结果](#基准测试结果)
+      - [优化技巧](#优化技巧)
   - [项目 2: REST API 任务管理系统](#项目-2-rest-api-任务管理系统)
     - [2.1 项目概述](#21-项目概述)
+      - [功能需求](#功能需求-1)
+      - [技术栈](#技术栈)
     - [2.2 技术选型理由](#22-技术选型理由)
     - [2.3 完整项目配置](#23-完整项目配置)
+      - [Workspace `Cargo.toml`](#workspace-cargotoml)
+      - [`api/Cargo.toml`](#apicargotoml)
+      - [`core/Cargo.toml`](#corecargotoml)
     - [2.4 核心代码实现](#24-核心代码实现)
+      - [`api/src/main.rs`](#apisrcmainrs)
+      - [`api/src/config.rs`](#apisrcconfigrs)
+      - [`api/src/handlers/tasks.rs`](#apisrchandlerstasksrs)
+      - [`api/src/auth.rs` - JWT 认证](#apisrcauthrs---jwt-认证)
     - [2.5 项目结构](#25-项目结构)
     - [2.6 构建和运行](#26-构建和运行)
+      - [本地开发](#本地开发)
+      - [Docker 构建](#docker-构建)
     - [2.7 测试策略](#27-测试策略)
+      - [单元测试](#单元测试-1)
+      - [API 集成测试](#api-集成测试)
     - [2.8 部署方案](#28-部署方案)
+      - [Kubernetes 部署](#kubernetes-部署)
     - [2.9 性能优化](#29-性能优化)
+      - [数据库优化](#数据库优化)
+      - [缓存策略](#缓存策略)
   - [项目 3: 嵌入式 IoT 传感器读取器](#项目-3-嵌入式-iot-传感器读取器)
     - [3.1 项目概述](#31-项目概述)
+      - [功能需求](#功能需求-2)
+      - [硬件规格](#硬件规格)
     - [3.2 技术选型理由](#32-技术选型理由)
     - [3.3 完整项目配置](#33-完整项目配置)
+      - [`Cargo.toml`](#cargotoml-1)
+      - [`.cargo/config.toml`](#cargoconfigtoml-1)
+      - [`sdkconfig.defaults`](#sdkconfigdefaults)
     - [3.4 核心代码实现](#34-核心代码实现)
+      - [`src/main.rs`](#srcmainrs)
+      - [`src/sensors.rs`](#srcsensorsrs)
+      - [`src/config.rs`](#srcconfigrs)
     - [3.5 项目结构](#35-项目结构)
     - [3.6 构建和运行](#36-构建和运行)
+      - [开发环境搭建](#开发环境搭建)
+      - [构建和烧录](#构建和烧录)
+      - [使用 Wokwi 模拟器测试](#使用-wokwi-模拟器测试)
     - [3.7 测试策略](#37-测试策略)
+      - [主机模拟测试](#主机模拟测试)
+      - [硬件测试](#硬件测试)
     - [3.8 部署方案](#38-部署方案)
+      - [OTA 更新](#ota-更新)
+      - [生产烧录](#生产烧录)
     - [3.9 性能优化](#39-性能优化)
+      - [功耗优化](#功耗优化)
+      - [内存使用监控](#内存使用监控)
   - [附录](#附录)
     - [A. 通用 CI/CD 配置](#a-通用-cicd-配置)
     - [B. 代码质量工具配置](#b-代码质量工具配置)
     - [C. 监控和日志最佳实践](#c-监控和日志最佳实践)
+  - [总结](#总结)
 
 ---
 
@@ -87,8 +144,8 @@
 
 ### 1.1 项目概述
 
-**项目名称**: `log-analyzer`  
-**版本**: 0.1.0  
+**项目名称**: `log-analyzer`
+**版本**: 0.1.0
 **许可证**: MIT OR Apache-2.0
 
 #### 功能需求
@@ -246,7 +303,7 @@ strip = true
 
 #### 目录结构
 
-```
+```text
 log-analyzer/
 ├── src/
 │   ├── main.rs          # 入口点
@@ -382,7 +439,7 @@ pub struct LogEntry {
 pub trait LogParser: Send + Sync {
     /// 解析单行日志
     fn parse_line(&self, line: &str) -> anyhow::Result<LogEntry>;
-    
+
     /// 解析器名称
     fn name(&self) -> &'static str;
 }
@@ -413,9 +470,9 @@ use regex::Regex;
 use std::net::IpAddr;
 
 /// Apache Combined Log Format 解析器
-/// 
+///
 /// 格式: %h %l %u %t "%r" %>s %b "%{Referer}i" "%{User-agent}i"
-/// 
+///
 /// 示例: 127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.0" 200 2326 "http://www.example.com/start.html" "Mozilla/4.08 [en] (Win98; I)"
 pub struct ApacheParser {
     regex: Regex,
@@ -424,7 +481,7 @@ pub struct ApacheParser {
 impl ApacheParser {
     pub fn new() -> Result<Self> {
         let pattern = r#"^(?P<ip>\S+)\s+\S+\s+\S+\s+\[(?P<time>[^\]]+)\]\s+"(?P<method>\S+)\s+(?P<path>\S+)\s+(?P<proto>\S+)"\s+(?P<status>\d+)\s+(?P<bytes>\d+)\s+"(?P<referrer>[^"]*)"\s+"(?P<ua>[^"]*)""#;
-        
+
         Ok(Self {
             regex: Regex::new(pattern)
                 .context("Failed to compile Apache log regex")?,
@@ -468,7 +525,7 @@ mod tests {
     fn test_parse_valid_line() {
         let parser = ApacheParser::new().unwrap();
         let line = r#"127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.0" 200 2326 "http://www.example.com/start.html" "Mozilla/4.08 [en] (Win98; I)""#;
-        
+
         let entry = parser.parse_line(line).unwrap();
         assert_eq!(entry.ip.to_string(), "127.0.0.1");
         assert_eq!(entry.method, "GET");
@@ -655,7 +712,7 @@ fn main() -> Result<()> {
     // 打开并内存映射文件
     let file = File::open(&cli.input)
         .with_context(|| format!("Failed to open file: {:?}", cli.input))?;
-    
+
     let metadata = file.metadata()?;
     let file_size = metadata.len();
     info!("File size: {} bytes", file_size);
@@ -781,7 +838,7 @@ mod atty {
 
 ### 1.5 项目结构
 
-```
+```text
 log-analyzer/
 ├── Cargo.toml              # 项目配置
 ├── Cargo.lock              # 依赖锁定
@@ -966,13 +1023,13 @@ fn test_end_to_end_analysis() {
 #[test]
 fn test_all_output_formats() {
     let formats = vec!["json", "csv", "html"];
-    
+
     for format in formats {
         let output = Command::new("cargo")
             .args(&["run", "--", "-i", "fixtures/apache.log", "-f", format])
             .output()
             .expect("Failed to run");
-        
+
         assert!(output.status.success(), "Format {} failed", format);
     }
 }
@@ -990,7 +1047,7 @@ fn bench_apache_parser(c: &mut Criterion) {
 
     let mut group = c.benchmark_group("parser");
     group.throughput(Throughput::Bytes(line.len() as u64));
-    
+
     group.bench_function("apache_single", |b| {
         b.iter(|| parser.parse_line(black_box(line)))
     });
@@ -1028,12 +1085,12 @@ TARGETS=("x86_64-unknown-linux-gnu" "x86_64-pc-windows-msvc" "x86_64-apple-darwi
 for target in "${TARGETS[@]}"; do
     echo "Building for $target..."
     cargo build --release --target $target
-    
+
     # 打包
     mkdir -p "releases/$target"
     cp "target/$target/release/log-analyzer" "releases/$target/"
     cp README.md LICENSE "releases/$target/"
-    
+
     tar -czf "releases/log-analyzer-$VERSION-$target.tar.gz" -C "releases/$target" .
 done
 ```
@@ -1110,8 +1167,8 @@ for chunk in data.chunks(1024) {
 
 ### 2.1 项目概述
 
-**项目名称**: `task-manager`  
-**版本**: 0.1.0  
+**项目名称**: `task-manager`
+**版本**: 0.1.0
 **架构**: Workspace 多 crate 设计
 
 #### 功能需求
@@ -1327,12 +1384,12 @@ async fn main() -> anyhow::Result<()> {
         .acquire_timeout(std::time::Duration::from_secs(30))
         .connect(&config.database.url)
         .await?;
-    
+
     // 运行迁移
     sqlx::migrate!("../migrations")
         .run(&pool)
         .await?;
-    
+
     info!("Database connected and migrated");
 
     // 创建应用状态
@@ -1774,7 +1831,7 @@ impl JwtManager {
     pub fn verify_token(&self, token: &str, expected_type: TokenType) -> Result<Claims, ApiError> {
         let mut validation = Validation::default();
         validation.validate_exp = true;
-        
+
         let token_data = decode::<Claims>(token, &self.decoding_key, &validation)
             .map_err(|e| match e.kind() {
                 jsonwebtoken::errors::ErrorKind::ExpiredSignature => {
@@ -1815,7 +1872,7 @@ impl PasswordHasher {
             .map_err(|e| ApiError::Internal(format!("Invalid hash: {}", e)))?;
 
         let argon2 = argon2::Argon2::default();
-        
+
         Ok(argon2.verify_password(password.as_bytes(), &parsed_hash).is_ok())
     }
 }
@@ -1825,7 +1882,7 @@ impl PasswordHasher {
 
 ### 2.5 项目结构
 
-```
+```text
 task-manager/
 ├── Cargo.toml                    # Workspace 配置
 ├── Cargo.lock
@@ -1998,7 +2055,7 @@ mod tests {
 
         let token = manager.generate_access_token(uuid::Uuid::new_v4()).unwrap();
         let result = manager.verify_token(&token, TokenType::Access);
-        
+
         assert!(matches!(result, Err(ApiError::Unauthorized(_))));
     }
 }
@@ -2020,7 +2077,7 @@ struct TestApp {
 async fn spawn_app() -> TestApp {
     // 启动测试服务器...
     let address = "http://localhost:3000".to_string();
-    
+
     TestApp {
         address,
         client: Client::new(),
@@ -2031,7 +2088,7 @@ async fn spawn_app() -> TestApp {
 #[tokio::test]
 async fn test_task_crud() {
     let app = spawn_app().await;
-    
+
     // 1. 登录
     let login_resp = app.client
         .post(format!("{}/auth/login", app.address))
@@ -2042,7 +2099,7 @@ async fn test_task_crud() {
         .send()
         .await
         .unwrap();
-    
+
     assert_eq!(login_resp.status(), StatusCode::OK);
     let token: serde_json::Value = login_resp.json().await.unwrap();
     let access_token = token["access_token"].as_str().unwrap();
@@ -2059,7 +2116,7 @@ async fn test_task_crud() {
         .send()
         .await
         .unwrap();
-    
+
     assert_eq!(create_resp.status(), StatusCode::CREATED);
     let task: serde_json::Value = create_resp.json().await.unwrap();
     let task_id = task["id"].as_str().unwrap();
@@ -2071,7 +2128,7 @@ async fn test_task_crud() {
         .send()
         .await
         .unwrap();
-    
+
     assert_eq!(get_resp.status(), StatusCode::OK);
 
     // 4. 更新任务
@@ -2085,7 +2142,7 @@ async fn test_task_crud() {
         .send()
         .await
         .unwrap();
-    
+
     assert_eq!(update_resp.status(), StatusCode::OK);
 
     // 5. 删除任务
@@ -2095,7 +2152,7 @@ async fn test_task_crud() {
         .send()
         .await
         .unwrap();
-    
+
     assert_eq!(delete_resp.status(), StatusCode::NO_CONTENT);
 }
 ```
@@ -2243,8 +2300,8 @@ pub async fn get_cached_task(
 
 ### 3.1 项目概述
 
-**项目名称**: `iot-sensor-reader`  
-**目标平台**: ESP32-C3/C6 (RISC-V) / ESP32 (Xtensa)  
+**项目名称**: `iot-sensor-reader`
+**目标平台**: ESP32-C3/C6 (RISC-V) / ESP32 (Xtensa)
 **运行时**: ESP-IDF
 
 #### 功能需求
@@ -2371,7 +2428,7 @@ RUST_ESP32_STD_ULTRA_CPU = { value = "160" }
 
 #### `sdkconfig.defaults`
 
-```
+```text
 # WiFi
 CONFIG_ESP_WIFI_STATIC_RX_BUFFER_NUM=10
 CONFIG_ESP_WIFI_DYNAMIC_RX_BUFFER_NUM=32
@@ -2487,10 +2544,10 @@ fn main() {
     // 状态机主循环
     loop {
         let current_state = unsafe { APP_STATE };
-        
+
         let next_state = match current_state {
             AppState::Init => AppState::ConnectWifi,
-            
+
             AppState::ConnectWifi => {
                 match wifi::connect(&mut wifi, &config.wifi) {
                     Ok(_) => {
@@ -2503,11 +2560,11 @@ fn main() {
                     }
                 }
             }
-            
+
             AppState::ReadSensors => {
                 // 读取传感器数据
                 let mut sensor_data = SensorData::default();
-                
+
                 match bme280.read() {
                     Ok(data) => {
                         sensor_data.temperature = data.temperature;
@@ -2535,7 +2592,7 @@ fn main() {
                     AppState::Error(2)
                 }
             }
-            
+
             AppState::PublishData => {
                 match publish_sensor_data(&config.mqtt, &sensor_data) {
                     Ok(_) => {
@@ -2548,24 +2605,24 @@ fn main() {
                     }
                 }
             }
-            
+
             AppState::DeepSleep(duration_us) => {
                 log::info!("Entering deep sleep for {} seconds", duration_us / 1_000_000);
-                
+
                 // 断开 WiFi 节省电量
                 wifi.disconnect().ok();
-                
+
                 unsafe {
                     esp_idf_sys::esp_deep_sleep(duration_us);
                 }
-                
+
                 // 不会执行到这里
                 AppState::Init
             }
-            
+
             AppState::Error(code) => {
                 log::error!("Error state: {}", code);
-                
+
                 // 错误时快速重试
                 AppState::DeepSleep(10_000_000)  // 10 秒
             }
@@ -2598,10 +2655,10 @@ fn publish_sensor_data(
 
     // 序列化数据为 JSON
     let payload = data.to_json()?;
-    
+
     // 发布到指定 topic
     let topic = format!("{}/sensors/data", config.topic_prefix);
-    
+
     client.publish(
         &topic,
         esp_idf_svc::mqtt::client::QoS::AtLeastOnce,
@@ -2648,12 +2705,12 @@ impl SensorData {
     pub fn is_valid(&self) -> bool {
         // 温度范围: -40 到 80 摄氏度
         let temp_valid = self.temperature >= -40.0 && self.temperature <= 80.0;
-        
+
         // 湿度范围: 0 到 100%
         let humidity_valid = self.humidity >= 0.0 && self.humidity <= 100.0;
-        
+
         // 气压范围: 300 到 1100 hPa
-        let pressure_valid = self.pressure == 0.0 || 
+        let pressure_valid = self.pressure == 0.0 ||
                             (self.pressure >= 300.0 && self.pressure <= 1100.0);
 
         temp_valid && humidity_valid && pressure_valid
@@ -2661,27 +2718,27 @@ impl SensorData {
 
     pub fn to_json(&self) -> anyhow::Result<String<256>> {
         let mut buffer: String<256> = String::new();
-        
+
         // 手动构建 JSON 字符串 (避免堆分配)
         buffer.push_str(r#"{"#)?;
-        
+
         buffer.push_str(r#""temperature":"#)?;
         buffer.push_str(&format_float(self.temperature, 2))?;
         buffer.push(',')?;
-        
+
         buffer.push_str(r#""humidity":"#)?;
         buffer.push_str(&format_float(self.humidity, 2))?;
         buffer.push(',')?;
-        
+
         buffer.push_str(r#""pressure":"#)?;
         buffer.push_str(&format_float(self.pressure, 2))?;
         buffer.push(',')?;
-        
+
         buffer.push_str(r#""timestamp":"#)?;
         buffer.push_str(&self.timestamp.to_string())?;
-        
+
         buffer.push('}')?;
-        
+
         Ok(buffer)
     }
 }
@@ -2698,7 +2755,7 @@ where
     pub fn new(i2c: I2C) -> Result<Self, E> {
         let mut sensor = bmp280::BMP280::new(i2c)?;
         sensor.init()?;
-        
+
         Ok(Self { sensor })
     }
 
@@ -2742,15 +2799,15 @@ impl<'a> Dht22Sensor<'a> {
 
 fn format_float(value: f32, decimals: u8) -> heapless::String<16> {
     let mut result = heapless::String::<16>::new();
-    
+
     // 整数部分
     let int_part = value as i32;
     result.push_str(&int_part.to_string()).ok();
-    
+
     // 小数部分
     if decimals > 0 {
         result.push('.').ok();
-        
+
         let mut frac = (value.abs().fract() * 10f32.powi(decimals as i32)) as u32;
         for _ in 0..decimals {
             let digit = (frac / 10u32.pow((decimals - 1) as u32)) as u8;
@@ -2758,7 +2815,7 @@ fn format_float(value: f32, decimals: u8) -> heapless::String<16> {
             frac %= 10u32.pow((decimals - 1) as u32);
         }
     }
-    
+
     result
 }
 
@@ -2812,7 +2869,7 @@ impl DeviceConfig {
         // 从 NVS 读取配置
         let mut wifi_ssid = String::<32>::new();
         let mut wifi_pass = String::<64>::new();
-        
+
         if let Ok(Some(ssid)) = nvs.get_str("wifi_ssid") {
             wifi_ssid.push_str(ssid).ok();
         }
@@ -2869,7 +2926,7 @@ impl Default for DeviceConfig {
 
 ### 3.5 项目结构
 
-```
+```text
 iot-sensor-reader/
 ├── Cargo.toml              # 项目配置
 ├── Cargo.lock
@@ -2981,7 +3038,7 @@ espflash monitor
 #[cfg(test)]
 mod sensor_tests {
     use embedded_hal_mock::i2c::{Mock as I2cMock, Transaction as I2cTransaction};
-    
+
     #[test]
     fn test_bme280_read() {
         // 模拟 I2C 事务
@@ -2990,11 +3047,11 @@ mod sensor_tests {
             I2cTransaction::write(0x76, vec![0xF4, 0x27]),              // 配置
             I2cTransaction::write_read(0x76, vec![0xF7], vec![0x52, 0xC7, 0x80]),  // 数据
         ];
-        
+
         let i2c = I2cMock::new(&expectations);
-        
+
         // 测试传感器读取...
-        
+
         i2c.done();
     }
 }
@@ -3026,12 +3083,12 @@ use esp_idf_svc::ota::EspOta;
 fn perform_ota_update(firmware_url: &str) -> anyhow::Result<()> {
     let client = reqwest::blocking::Client::new();
     let firmware = client.get(firmware_url).send()?.bytes()?;
-    
+
     let mut ota = EspOta::new()?;
     ota.begin()?;
     ota.write(&firmware)?;
     ota.complete()?;
-    
+
     // 重启设备
     unsafe { esp_idf_sys::esp_restart() };
 }
@@ -3071,12 +3128,12 @@ fn enter_deep_sleep(duration_us: u64) {
         esp_idf_sys::esp_bluedroid_disable();
         esp_idf_sys::esp_bt_controller_disable();
     }
-    
+
     // 配置唤醒源
     unsafe {
         esp_idf_sys::esp_sleep_enable_timer_wakeup(duration_us);
     }
-    
+
     // 进入深度睡眠
     unsafe {
         esp_idf_sys::esp_deep_sleep_start();
@@ -3098,7 +3155,7 @@ fn log_heap_info() {
     unsafe {
         let free = esp_idf_sys::esp_get_free_heap_size();
         let min_free = esp_idf_sys::esp_get_minimum_free_heap_size();
-        
+
         log::info!("Heap: free={}, min_free={}", free, min_free);
     }
 }
@@ -3121,22 +3178,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Rust
         uses: dtolnay/rust-action@stable
-      
+
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
-      
+
       - name: Run tests
         run: cargo test --all-features
-      
+
       - name: Run clippy
         run: cargo clippy --all-targets --all-features -- -D warnings
-      
+
       - name: Check formatting
         run: cargo fmt -- --check
-      
+
       - name: Run cargo-deny
         uses: EmbarkStudios/cargo-deny-action@v1
 ```
@@ -3171,7 +3228,7 @@ use tracing::{info, warn, error, instrument};
 #[instrument(skip(db), fields(user_id = %user_id))]
 async fn process_user_request(user_id: Uuid, db: &PgPool) -> Result<(), Error> {
     info!("Processing request");
-    
+
     match fetch_data(db, user_id).await {
         Ok(data) => {
             info!(data.len = data.len(), "Data fetched successfully");

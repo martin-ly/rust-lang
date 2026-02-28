@@ -1,4 +1,4 @@
-﻿# 可视化代码示例库 (Visual Code Examples Library)
+# 可视化代码示例库 (Visual Code Examples Library)
 
 ## 📊 目录
 
@@ -122,7 +122,8 @@ pub fn bubble_sort_visual<T: Ord + std::fmt::Display + Clone>(arr: &mut [T]) {
 fn print_comparison<T: std::fmt::Display>(arr: &[T], i: usize, j: usize) {
     print!("[");
     for (idx, item) in arr.iter().enumerate() {
-        if idx == i || idx == j {
+        if idx == i |
+| idx == j {
             print!(">{}<", item);
         } else {
             print!("{}", item);

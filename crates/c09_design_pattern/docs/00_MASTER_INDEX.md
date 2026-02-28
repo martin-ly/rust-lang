@@ -7,7 +7,8 @@
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
-| :--- | :--- | :--- || **The Rust Book** | [Ch. 13 Functional Language Features](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | 迭代器、闭包模式 |
+| :--- | :--- | :--- |
+| **The Rust Book** | [Ch. 13 Functional Language Features](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | 迭代器、闭包模式 |
 | **RBE 练习** | [Functional](https://doc.rust-lang.org/rust-by-example/fn.html) · [Structs](https://doc.rust-lang.org/rust-by-example/custom_types/structs.html) · [Enums](https://doc.rust-lang.org/rust-by-example/custom_types/enum.html) | 惯用模式实践 |
 | **Rust API Guidelines** | [API Guidelines](https://rust-lang.github.io/api-guidelines/) | Rust 惯用设计 |
 

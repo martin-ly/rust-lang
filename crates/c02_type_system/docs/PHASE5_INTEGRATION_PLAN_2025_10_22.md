@@ -32,7 +32,8 @@
 ### 1. 需要整合的目录
 
 | 目录                             | 文件数 | 状态        | 处理方式                       |
-| :--- | :--- | :--- | :--- || **knowledge_system/**            | 29     | 📦 待整合   | → analysis/knowledge_enhanced/ |
+| :--- | :--- | :--- | :--- |
+| **knowledge_system/**            | 29     | 📦 待整合   | → analysis/knowledge_enhanced/ |
 | **theory_enhanced/**             | 5      | 📦 待整合   | → analysis/rust_theory/        |
 | **01_theory/**                   | 4      | 📦 待整合   | → analysis/rust_theory/        |
 | **02_core/**                     | 8      | ⚠️ 部分重复 | 审查后整合/归档                |

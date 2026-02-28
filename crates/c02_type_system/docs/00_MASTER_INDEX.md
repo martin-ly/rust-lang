@@ -24,7 +24,8 @@
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
-| :--- | :--- | :--- || **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、Trait、生命周期 |
+| :--- | :--- | :--- |
+| **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、Trait、生命周期 |
 | **RBE 练习** | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) · [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) · [Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html) | 结构体、枚举、Trait、类型转换实践 |
 | **Rust Reference** | [Type system](https://doc.rust-lang.org/reference/types.html) | 类型系统规范 |
 | **Rustonomicon** | [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html) | 型变、高级类型 |

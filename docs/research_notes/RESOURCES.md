@@ -1,4 +1,4 @@
-﻿# 研究资源汇总
+# 研究资源汇总
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
@@ -335,10 +335,10 @@
 - [形式化全模型入口](./FORMAL_FULL_MODEL_OVERVIEW.md) - 统一形式系统
 - [核心定理完整证明](./CORE_THEOREMS_FULL_PROOFS.md) - L2 级 ownership T2、borrow T1、type T3
 - [Coq 证明骨架](./coq_skeleton/) - T-OW2 所有权唯一性
-- [L3 实施指南](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) - Coq/Isabelle 补全路线
+- [L3 实施指南](../archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md) - Coq/Isabelle 补全路线（已归档）
 
 ---
 
 **维护团队**: Rust Research Community
-**最后更新**: 2026-02-14
-**状态**: ✅ **Rust 1.93.0 更新完成**
+**最后更新**: 2026-02-28
+**状态**: ✅ **Rust 1.93.1+ 更新完成**

@@ -8,7 +8,8 @@
 ## 核心概念（4 条）
 
 | 概念 | 说明 |
-| :--- | :--- || **条件与循环** | `if`/`else`、`loop`/`while`/`for`；`break`/`continue` 带标签 |
+| :--- | :--- |
+| **条件与循环** | `if`/`else`、`loop`/`while`/`for`；`break`/`continue` 带标签 |
 | **模式匹配** | `match` 穷尽性；`if let`/`while let` 简化 |
 | **Option 与 Result** | `Some`/`None`；`Ok`/`Err`；`?` 错误传播 |
 | **闭包与迭代器** | `|x| x + 1`；`iter()`/`into_iter()`；链式适配器 |
@@ -18,7 +19,8 @@
 ## 常见坑与解决
 
 | 坑 | 解决 |
-| :--- | :--- || `?` 在非 Result 函数中使用 | 函数签名改为 `-> Result<T, E>` 或 `-> Option<T>` |
+| :--- | :--- |
+| `?` 在非 Result 函数中使用 | 函数签名改为 `-> Result<T, E>` 或 `-> Option<T>` |
 | 生产代码滥用 `unwrap` | 用 `?` 传播或 `match`/`map_err` 处理 |
 | 混淆 Option 与 Result 语义 | 「未找到」用 Option；「可恢复错误」用 Result |
 | 持锁跨 `await` | 缩短锁作用域，或使用异步友好原语 |
@@ -28,7 +30,8 @@
 ## 控制流速选
 
 | 场景 | 选型 |
-| :--- | :--- || 多分支穷尽匹配 | `match` |
+| :--- | :--- |
+| 多分支穷尽匹配 | `match` |
 | 单分支可选匹配 | `if let` |
 | 错误传播 | `?` + `Result` |
 | 可选值链式处理 | `map`/`and_then`/`unwrap_or` |

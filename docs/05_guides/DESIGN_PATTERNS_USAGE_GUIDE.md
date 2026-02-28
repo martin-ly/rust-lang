@@ -65,7 +65,9 @@
 
 本指南介绍如何在 Rust 中使用常见的设计模式，包括 GoF 模式和 Rust 特有的模式。
 
-**形式化引用**：CE-T1、CE-T2、CE-T3（组合工程定理）。详见 [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md)、[01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md)。
+**形式化引用**：CE-T1、CE-T2、CE-T3（组合工程定理）。
+详见 [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md)、
+[01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md)。
 
 ---
 

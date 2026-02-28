@@ -1,26 +1,86 @@
 # Unsafe Rust 模式指南
 
-> **危险等级**: 🔴 高级主题 - 使用不当将导致未定义行为 (UB)   
-> **目标读者**: 已掌握 Safe Rust，需要编写/审计 unsafe 代码的开发者  
+> **危险等级**: 🔴 高级主题 - 使用不当将导致未定义行为 (UB)
+> **目标读者**: 已掌握 Safe Rust，需要编写/审计 unsafe 代码的开发者
 > **参考标准**: [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Reference](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 
 ---
 
 ## 📋 目录
 
-1. [概述与 Miri 验证](#1-概述与-miri-验证)
-2. [原始指针操作模式](#2-原始指针操作模式)
-3. [自引用结构体](#3-自引用结构体)
-4. [自定义 Drop 和内存管理](#4-自定义-drop-和内存管理)
-5. [Union 访问](#5-union-访问)
-6. [FFI 边界处理](#6-ffi-边界处理)
-7. [SIMD 和矢量化](#7-simd-和矢量化)
-8. [并发原语实现](#8-并发原语实现)
-9. [未初始化内存](#9-未初始化内存)
-10. [静态可变状态](#10-静态可变状态)
-11. [契约和不变式](#11-契约和不变式)
-12. [UB 分类速查表](#12-ub-分类速查表)
-13. [Rustonomicon 章节映射](#13-rustonomicon-章节映射)
+- [Unsafe Rust 模式指南](#unsafe-rust-模式指南)
+  - [📋 目录](#-目录)
+  - [1. 概述与 Miri 验证](#1-概述与-miri-验证)
+    - [1.1 什么是 Miri](#11-什么是-miri)
+    - [1.2 安装 Miri](#12-安装-miri)
+    - [1.3 常用 Miri 命令](#13-常用-miri-命令)
+    - [1.4 Miri 输出解读](#14-miri-输出解读)
+    - [1.5 Stacked Borrows vs Tree Borrows](#15-stacked-borrows-vs-tree-borrows)
+  - [2. 原始指针操作模式](#2-原始指针操作模式)
+    - [2.1 问题场景](#21-问题场景)
+    - [2.2 代码示例：堆分配和裸指针解引用](#22-代码示例堆分配和裸指针解引用)
+    - [2.3 安全契约](#23-安全契约)
+    - [2.4 Miri 验证](#24-miri-验证)
+    - [2.5 常见错误：UB 示例和修复](#25-常见错误ub-示例和修复)
+    - [2.6 替代方案](#26-替代方案)
+    - [2.7 生产案例](#27-生产案例)
+  - [3. 自引用结构体](#3-自引用结构体)
+    - [3.1 问题场景](#31-问题场景)
+    - [3.2 代码示例：Pin 和堆分配自引用](#32-代码示例pin-和堆分配自引用)
+    - [3.3 栈上自引用（危险模式）](#33-栈上自引用危险模式)
+    - [3.4 安全契约](#34-安全契约)
+    - [3.5 替代方案](#35-替代方案)
+    - [3.6 生产案例](#36-生产案例)
+  - [4. 自定义 Drop 和内存管理](#4-自定义-drop-和内存管理)
+    - [4.1 问题场景](#41-问题场景)
+    - [4.2 代码示例：与 C 内存交互](#42-代码示例与-c-内存交互)
+    - [4.3 Drop 检查绕过](#43-drop-检查绕过)
+    - [4.4 生产案例](#44-生产案例)
+  - [5. Union 访问](#5-union-访问)
+    - [5.1 问题场景](#51-问题场景)
+    - [5.2 代码示例：Union 安全访问](#52-代码示例union-安全访问)
+    - [5.3 常见错误](#53-常见错误)
+    - [5.4 生产案例](#54-生产案例)
+  - [6. FFI 边界处理](#6-ffi-边界处理)
+    - [6.1 问题场景](#61-问题场景)
+    - [6.2 代码示例：完整 FFI 边界](#62-代码示例完整-ffi-边界)
+    - [6.3 FFI 安全契约](#63-ffi-安全契约)
+    - [6.4 生产案例](#64-生产案例)
+  - [7. SIMD 和矢量化](#7-simd-和矢量化)
+    - [7.1 问题场景](#71-问题场景)
+    - [7.2 代码示例：SIMD 安全包装](#72-代码示例simd-安全包装)
+    - [7.3 常见错误](#73-常见错误)
+    - [7.4 生产案例](#74-生产案例)
+  - [8. 并发原语实现](#8-并发原语实现)
+    - [8.1 问题场景](#81-问题场景)
+    - [8.2 代码示例：自定义自旋锁](#82-代码示例自定义自旋锁)
+    - [8.3 内存序选择指南](#83-内存序选择指南)
+    - [8.4 生产案例](#84-生产案例)
+  - [9. 未初始化内存](#9-未初始化内存)
+    - [9.1 问题场景](#91-问题场景)
+    - [9.2 代码示例：MaybeUninit 模式](#92-代码示例maybeuninit-模式)
+    - [9.3 MaybeUninit 方法选择指南](#93-maybeuninit-方法选择指南)
+    - [9.4 生产案例](#94-生产案例)
+  - [10. 静态可变状态](#10-静态可变状态)
+    - [10.1 问题场景](#101-问题场景)
+    - [10.2 代码示例：安全初始化模式](#102-代码示例安全初始化模式)
+    - [10.3 初始化模式对比](#103-初始化模式对比)
+    - [10.4 生产案例](#104-生产案例)
+  - [11. 契约和不变式](#11-契约和不变式)
+    - [11.1 问题场景](#111-问题场景)
+    - [11.2 代码示例：契约验证模式](#112-代码示例契约验证模式)
+    - [11.3 契约文档模板](#113-契约文档模板)
+    - [11.4 生产案例](#114-生产案例)
+  - [12. UB 分类速查表](#12-ub-分类速查表)
+    - [12.1 未定义行为分类](#121-未定义行为分类)
+    - [12.2 Miri 错误解读](#122-miri-错误解读)
+    - [12.3 调试技巧](#123-调试技巧)
+  - [13. Rustonomicon 章节映射](#13-rustonomicon-章节映射)
+  - [附录：Miri 完整配置](#附录miri-完整配置)
+    - [`.cargo/config.toml` 示例](#cargoconfigtoml-示例)
+    - [GitHub Actions 配置](#github-actions-配置)
+  - [总结](#总结)
+    - [危险等级总结](#危险等级总结)
 
 ---
 
@@ -84,6 +144,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 ```
 
 **差异示例**:
+
 - Stacked Borrows 对指针别名要求更严格
 - Tree Borrows 允许更多合法的指针别名模式
 - 两个模型都通过 = 代码是正确的
@@ -96,6 +157,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 ### 2.1 问题场景
 
 当需要：
+
 - 与 C 代码交互
 - 实现自定义数据结构（如 Vec, HashMap）
 - 进行性能关键的字节操作
@@ -110,7 +172,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 use std::alloc::{alloc, dealloc, handle_alloc_error, Layout};
 
 /// 危险等级: ⚠️ 中等
-/// 
+///
 /// 动态分配数组并管理其生命周期
 pub struct RawBuffer<T> {
     ptr: *mut T,
@@ -120,7 +182,7 @@ pub struct RawBuffer<T> {
 
 impl<T> RawBuffer<T> {
     /// 创建指定容量的原始缓冲区
-    /// 
+    ///
     /// # Safety
     /// - 容量必须大于 0
     /// - T 必须是非零大小类型
@@ -150,7 +212,7 @@ impl<T> RawBuffer<T> {
     }
 
     /// 获取指定索引的元素引用
-    /// 
+    ///
     /// # Safety
     /// - index < self.len
     /// - 引用的生命周期必须有效
@@ -161,7 +223,7 @@ impl<T> RawBuffer<T> {
     }
 
     /// 设置指定索引的元素
-    /// 
+    ///
     /// # Safety
     /// - index < self.capacity
     /// - 不会导致内存泄漏（旧值未 drop）
@@ -217,12 +279,12 @@ mod tests {
     #[test]
     fn test_raw_buffer_basic() {
         let mut buf = RawBuffer::<i32>::new(10).unwrap();
-        
+
         unsafe {
             buf.set_unchecked(0, 42);
             buf.set_unchecked(5, 100);
         }
-        
+
         assert_eq!(unsafe { *buf.get_unchecked(0) }, 42);
         assert_eq!(buf.len(), 6);
     }
@@ -309,6 +371,7 @@ fn fixed_unaligned_access() {
 ### 3.1 问题场景
 
 当结构体需要引用自身的其他字段时：
+
 - 解析器需要引用输入缓冲区的切片
 - 异步状态机保存对其自身的引用
 - 复杂的树结构需要父子引用
@@ -323,17 +386,17 @@ use std::pin::Pin;
 use std::marker::PhantomPinned;
 
 /// 危险等级: 🔴 高
-/// 
+///
 /// 自引用结构体的安全实现
 /// 使用 Pin + PhantomPinned 防止移动
 pub struct SelfReferential {
     // 实际数据
     data: String,
-    
+
     // 指向 data 的指针
     // 注意：这是危险的，因为 data 移动时 ptr 会悬垂
     data_ptr: *const String,
-    
+
     // 标记此类型不应被移动（除非在 Pin 后）
     _pin: PhantomPinned,
 }
@@ -345,34 +408,34 @@ impl SelfReferential {
             data_ptr: std::ptr::null(),
             _pin: PhantomPinned,
         });
-        
+
         // 设置自引用指针
         let ptr = &boxed.data as *const String;
         boxed.data_ptr = ptr;
-        
+
         // 返回 Pin<Box<_>>，防止移动
         Box::into_pin(boxed)
     }
-    
+
     /// 通过原始指针安全访问 data
     pub fn data_ref(self: Pin<&Self>) -> &String {
-        // SAFETY: 
+        // SAFETY:
         // 1. 我们被 Pin 保护，不会移动
         // 2. data_ptr 指向有效的 data 字段
         unsafe { &*self.data_ptr }
     }
-    
+
     /// 安全地更新数据
-    /// 
+    ///
     /// # Safety
     /// 必须保持 Pin 契约
     pub fn set_data(self: Pin<&mut Self>, new_data: String) {
         // SAFETY: 我们不会移动 self
         let this = unsafe { self.get_unchecked_mut() };
-        
+
         // 更新数据
         this.data = new_data;
-        
+
         // 更新自引用指针
         this.data_ptr = &this.data as *const String;
     }
@@ -393,7 +456,7 @@ pub struct ParserResult<'a> {
 }
 
 /// 危险等级: 🔴 极高
-/// 
+///
 /// 使用 Pin 和 unsafe 实现安全的自引用解析器
 pub struct OwningParser {
     input: String,
@@ -408,7 +471,7 @@ impl OwningParser {
             tokens: Vec::new(),
             _pin: PhantomPinned,
         });
-        
+
         // 解析并存储指针
         let input_ptr = boxed.input.as_str() as *const str;
         let tokens: Vec<*const str> = boxed.input
@@ -416,10 +479,10 @@ impl OwningParser {
             .map(|s| s as *const str)
             .collect();
         boxed.tokens = tokens;
-        
+
         Box::into_pin(boxed)
     }
-    
+
     pub fn tokens(self: Pin<&Self>) -> Vec<&str> {
         // SAFETY: Pin 保证我们不会被移动，所有指针都有效
         self.tokens
@@ -456,10 +519,10 @@ mod tests {
 fn stack_self_reference_bug() {
     let mut x = String::from("hello");
     let ptr: *const String = &x;
-    
+
     // 任何移动都会导致 UB
     let y = x;  // 移动！ptr 现在悬垂
-    
+
     // UB: 使用悬垂指针
     unsafe { println!("{}", (*ptr).len()); }
 }
@@ -496,6 +559,7 @@ fn stack_self_reference_bug() {
 ### 4.1 问题场景
 
 当需要：
+
 - 与 C 库分配的内存交互
 - 实现自定义的智能指针
 - 管理非 Rust 资源（文件句柄、网络连接）
@@ -513,14 +577,14 @@ use std::ptr::NonNull;
 /// 模拟 C 库接口
 mod c_lib {
     use std::ffi::c_void;
-    
+
     #[repr(C)]
     pub struct CBuffer {
         pub data: *mut u8,
         pub len: usize,
         pub capacity: usize,
     }
-    
+
     extern "C" {
         pub fn c_buffer_new(capacity: usize) -> *mut CBuffer;
         pub fn c_buffer_free(buf: *mut CBuffer);
@@ -529,7 +593,7 @@ mod c_lib {
 }
 
 /// 危险等级: 🔴 高
-/// 
+///
 /// 安全包装 C 分配的资源
 pub struct CBufferWrapper {
     inner: NonNull<c_lib::CBuffer>,
@@ -541,7 +605,7 @@ impl CBufferWrapper {
         let ptr = unsafe { c_lib::c_buffer_new(capacity) };
         NonNull::new(ptr).map(|inner| Self { inner })
     }
-    
+
     pub fn append(&mut self, data: &[u8]) -> Result<(), ()> {
         // SAFETY: inner 是有效的，data 是有效的字节切片
         let result = unsafe {
@@ -551,14 +615,14 @@ impl CBufferWrapper {
                 data.len(),
             )
         };
-        
+
         if result == 0 {
             Ok(())
         } else {
             Err(())
         }
     }
-    
+
     pub fn as_slice(&self) -> &[u8] {
         // SAFETY: inner 是有效的
         let buf = unsafe { self.inner.as_ref() };
@@ -594,9 +658,9 @@ impl<T> RawBox<T> {
         let ptr = NonNull::new(Box::into_raw(boxed)).unwrap();
         Self { ptr }
     }
-    
+
     /// 转换为原始指针，调用者负责释放
-    /// 
+    ///
     /// # Safety
     /// 调用者必须使用对应的方法释放内存
     pub unsafe fn into_raw(self) -> *mut T {
@@ -604,9 +668,9 @@ impl<T> RawBox<T> {
         std::mem::forget(self);  // 防止正常 drop
         ptr
     }
-    
+
     /// 从原始指针创建，假设它是有效的
-    /// 
+    ///
     /// # Safety
     /// - ptr 必须是通过 into_raw 创建的
     /// - ptr 必须只被使用一次
@@ -619,7 +683,7 @@ impl<T> RawBox<T> {
 
 impl<T> std::ops::Deref for RawBox<T> {
     type Target = T;
-    
+
     fn deref(&self) -> &T {
         // SAFETY: ptr 是有效的 Box 指针
         unsafe { self.ptr.as_ref() }
@@ -658,7 +722,7 @@ impl<T, U> FlexibleUnion<T, U> {
             ),
         }
     }
-    
+
     pub fn as_t(&self) -> Option<&T> {
         if self.tag == 0 {
             // SAFETY: tag 表示这是 T 变体
@@ -741,7 +805,7 @@ impl<T> Drop for SafeDrop<T> {
 
 - **`Box<T>`**: 标准库的智能指针实现
 - **`Rc<T>`/`Arc<T>`**: 引用计数实现
-- **` CString`**: C 字符串的内存管理
+- **`CString`**: C 字符串的内存管理
 
 ---
 
@@ -750,6 +814,7 @@ impl<T> Drop for SafeDrop<T> {
 ### 5.1 问题场景
 
 当需要：
+
 - 与 C 联合体互操作
 - 类型双关（如网络协议解析）
 - 手动内存布局控制
@@ -761,7 +826,7 @@ impl<T> Drop for SafeDrop<T> {
 //! 运行: cargo +nightly miri test -- union_access
 
 /// 危险等级: 🔴 高
-/// 
+///
 /// 带标签的联合体实现
 #[repr(C)]
 pub enum TaggedValue {
@@ -771,7 +836,7 @@ pub enum TaggedValue {
 }
 
 /// 危险等级: 🔴 极高
-/// 
+///
 /// 与 C 互操作的联合体
 #[repr(C)]
 pub union RawValue {
@@ -802,14 +867,14 @@ impl SafeUnion {
             value: RawValue { int: v },
         }
     }
-    
+
     pub fn new_float(v: f64) -> Self {
         Self {
             tag: UnionTag::Float,
             value: RawValue { float: v },
         }
     }
-    
+
     /// 安全获取整数
     pub fn as_integer(&self) -> Option<i64> {
         if self.tag == UnionTag::Integer {
@@ -819,7 +884,7 @@ impl SafeUnion {
             None
         }
     }
-    
+
     /// 安全获取浮点数
     pub fn as_float(&self) -> Option<f64> {
         if self.tag == UnionTag::Float {
@@ -829,9 +894,9 @@ impl SafeUnion {
             None
         }
     }
-    
+
     /// 危险：类型双关读取
-    /// 
+    ///
     /// # Safety
     /// 调用者必须知道这种解释是有效的
     pub unsafe fn reinterpret_as_bytes(&self) -> [u8; 8] {
@@ -882,7 +947,7 @@ pub fn parse_ipv4_header(bytes: &[u8]) -> Option<Ipv4Header> {
     if bytes.len() < 20 {
         return None;
     }
-    
+
     // SAFETY: 我们检查了长度，使用 ManuallyDrop 避免 double drop
     Some(unsafe {
         let mut header = PacketHeader { bytes: [0; 20] };
@@ -947,6 +1012,7 @@ fn fixed_invalid_bool() {
 ### 6.1 问题场景
 
 当需要：
+
 - 调用 C/C++ 库
 - 暴露 Rust 函数给 C
 - 处理不同 ABI 的交互
@@ -983,7 +1049,7 @@ extern "C" {
 // ============================================================================
 
 /// 危险等级: 🔴 高
-/// 
+///
 /// C 上下文的安全包装器
 pub struct Context {
     ptr: *mut CContext,
@@ -1007,7 +1073,7 @@ impl Context {
             })
         }
     }
-    
+
     /// 处理字符串数据
     pub fn process(&mut self, data: &str) -> Result<(), ()> {
         // 转换 Rust 字符串为 C 字符串
@@ -1015,23 +1081,23 @@ impl Context {
             Ok(s) => s,
             Err(_) => return Err(()),  // 数据包含 null 字节
         };
-        
+
         // SAFETY:
         // 1. ptr 是有效的
         // 2. c_string.as_ptr() 在调用期间有效
         let result = unsafe {
             ctx_process(self.ptr, c_string.as_ptr(), c_string.as_bytes().len() as c_int)
         };
-        
+
         if result == 0 {
             Ok(())
         } else {
             Err(())
         }
     }
-    
+
     /// 设置回调函数
-    /// 
+    ///
     /// # Safety
     /// 回调必须在 Context 生命周期内有效
     pub unsafe fn set_callback<F>(&mut self, callback: F)
@@ -1039,7 +1105,7 @@ impl Context {
         F: Fn(&str) + Send + 'static,
     {
         self.callback = Some(Box::new(callback));
-        
+
         // SAFETY: 回调是 'static 的，我们保存了 Box
         unsafe {
             ctx_set_callback(self.ptr, global_callback_trampoline);
@@ -1051,7 +1117,7 @@ impl Drop for Context {
     fn drop(&mut self) {
         // 先清除回调，防止在销毁期间被调用
         self.callback = None;
-        
+
         // SAFETY: ptr 是有效的，且只销毁一次
         unsafe {
             ctx_destroy(self.ptr);
@@ -1063,7 +1129,7 @@ impl Drop for Context {
 extern "C" fn global_callback_trampoline(data: *const c_char) {
     // SAFETY: C 库保证 data 是有效的 C 字符串
     let c_str = unsafe { CStr::from_ptr(data) };
-    
+
     if let Ok(s) = c_str.to_str() {
         // 这里需要通过某种方式获取注册的回调
         // 简化示例：直接打印
@@ -1079,7 +1145,7 @@ extern "C" fn global_callback_trampoline(data: *const c_char) {
 static COUNTER: Mutex<i64> = Mutex::new(0);
 
 /// C 可调用的函数
-/// 
+///
 /// # Safety
 /// 必须确保是单线程或通过其他方式同步
 #[no_mangle]
@@ -1090,7 +1156,7 @@ pub extern "C" fn rust_increment_counter() -> i64 {
 }
 
 /// 处理 C 字符串并返回结果
-/// 
+///
 /// # Safety
 /// - input 必须是有效的 C 字符串指针
 /// - output_len 必须指向可写的内存
@@ -1104,24 +1170,24 @@ pub unsafe extern "C" fn rust_process_string(
     if input.is_null() || output.is_null() || output_len.is_null() {
         return -1;
     }
-    
+
     // SAFETY: 调用者保证指针有效
     let input_str = match unsafe { CStr::from_ptr(input).to_str() } {
         Ok(s) => s,
         Err(_) => return -2,  // 无效的 UTF-8
     };
-    
+
     // 处理字符串
     let result = input_str.to_uppercase();
-    
+
     // SAFETY: 调用者保证 output_len 有效
     let max_len = unsafe { *output_len };
-    
+
     if result.len() >= max_len {
         // 输出缓冲区太小
         return -3;
     }
-    
+
     // 复制结果到输出缓冲区
     // SAFETY: 我们已检查缓冲区大小
     unsafe {
@@ -1133,7 +1199,7 @@ pub unsafe extern "C" fn rust_process_string(
         *output.add(result.len()) = 0;  // null 终止
         *output_len = result.len();
     }
-    
+
     0  // 成功
 }
 
@@ -1142,7 +1208,7 @@ pub unsafe extern "C" fn rust_process_string(
 // ============================================================================
 
 /// ❌ 错误：跨越 FFI 边界的裸指针使用
-/// 
+///
 /// 不要将引用作为指针传递，除非确保生命周期
 fn ffi_pointer_bug() {
     let x = 42;
@@ -1215,6 +1281,7 @@ mod tests {
 ### 7.1 问题场景
 
 当需要：
+
 - 高性能数值计算
 - 批量数据处理
 - 图形/图像处理
@@ -1230,16 +1297,16 @@ mod tests {
 use std::arch::x86_64::*;
 
 /// 危险等级: ⚠️ 中等
-/// 
+///
 /// 安全的 SIMD 向量加法包装器
 #[cfg(target_arch = "x86_64")]
 pub fn simd_add_f32(a: &[f32], b: &[f32], result: &mut [f32]) {
     assert_eq!(a.len(), b.len());
     assert_eq!(a.len(), result.len());
-    
+
     let len = a.len();
     let mut i = 0;
-    
+
     // SAFETY: 我们已检查长度
     unsafe {
         // 使用 AVX (256-bit = 8 f32)
@@ -1250,7 +1317,7 @@ pub fn simd_add_f32(a: &[f32], b: &[f32], result: &mut [f32]) {
             _mm256_storeu_ps(result.as_mut_ptr().add(i), vr);
             i += 8;
         }
-        
+
         // 使用 SSE (128-bit = 4 f32)
         while i + 4 <= len {
             let va = _mm_loadu_ps(a.as_ptr().add(i));
@@ -1260,7 +1327,7 @@ pub fn simd_add_f32(a: &[f32], b: &[f32], result: &mut [f32]) {
             i += 4;
         }
     }
-    
+
     // 处理剩余元素
     for j in i..len {
         result[j] = a[j] + b[j];
@@ -1276,34 +1343,34 @@ pub fn safe_sum(arr: &[f32]) -> f32 {
 #[cfg(target_arch = "x86_64")]
 pub fn simd_dot_product(a: &[f32], b: &[f32]) -> f32 {
     assert_eq!(a.len(), b.len());
-    
+
     let len = a.len();
     let mut sum = 0.0f32;
     let mut i = 0;
-    
+
     // SAFETY: 我们已检查长度和对齐
     unsafe {
         // AVX 累加
         let mut acc = _mm256_setzero_ps();
-        
+
         while i + 8 <= len {
             let va = _mm256_loadu_ps(a.as_ptr().add(i));
             let vb = _mm256_loadu_ps(b.as_ptr().add(i));
             acc = _mm256_fmadd_ps(va, vb, acc);  // a * b + acc
             i += 8;
         }
-        
+
         // 水平累加
         let mut temp = [0.0f32; 8];
         _mm256_storeu_ps(temp.as_mut_ptr(), acc);
         sum = temp.iter().sum();
     }
-    
+
     // 处理剩余
     for j in i..len {
         sum += a[j] * b[j];
     }
-    
+
     sum
 }
 
@@ -1312,7 +1379,7 @@ pub fn simd_dot_product(a: &[f32], b: &[f32]) -> f32 {
 pub unsafe fn read_tsc() -> u64 {
     let low: u32;
     let high: u32;
-    
+
     // SAFETY: rdtsc 在所有 x86_64 上都可用
     unsafe {
         core::arch::asm!(
@@ -1322,7 +1389,7 @@ pub unsafe fn read_tsc() -> u64 {
             options(nomem, nostack)
         );
     }
-    
+
     ((high as u64) << 32) | (low as u64)
 }
 
@@ -1386,6 +1453,7 @@ unsafe fn fixed_unaligned_simd() {
 ### 8.1 问题场景
 
 当需要：
+
 - 实现自定义同步原语
 - 无锁数据结构
 - 性能关键的并发代码
@@ -1405,7 +1473,7 @@ use std::thread;
 use std::time::Duration;
 
 /// 危险等级: 🔴 极高
-/// 
+///
 /// 简单的自旋锁实现
 pub struct SpinLock<T> {
     locked: AtomicBool,
@@ -1429,7 +1497,7 @@ impl<T> SpinLock<T> {
             data: UnsafeCell::new(data),
         }
     }
-    
+
     pub fn lock(&self) -> SpinLockGuard<T> {
         // 自旋直到获取锁
         while self.locked.compare_exchange(
@@ -1441,13 +1509,13 @@ impl<T> SpinLock<T> {
             // 提示处理器我们在自旋
             std::hint::spin_loop();
         }
-        
+
         // 内存屏障：确保锁获取后的读写不会重排序到前面
         fence(Ordering::Acquire);
-        
+
         SpinLockGuard { lock: self }
     }
-    
+
     /// 尝试获取锁
     pub fn try_lock(&self) -> Option<SpinLockGuard<T>> {
         if self.locked.compare_exchange(
@@ -1466,7 +1534,7 @@ impl<T> SpinLock<T> {
 
 impl<T> Deref for SpinLockGuard<'_, T> {
     type Target = T;
-    
+
     fn deref(&self) -> &T {
         // SAFETY: 我们持有锁，且锁保证独占访问
         unsafe { &*self.lock.data.get() }
@@ -1484,7 +1552,7 @@ impl<T> Drop for SpinLockGuard<'_, T> {
     fn drop(&mut self) {
         // 内存屏障：确保锁释放前的读写不会重排序到后面
         fence(Ordering::Release);
-        
+
         // 释放锁
         self.lock.locked.store(false, Ordering::Release);
     }
@@ -1501,12 +1569,12 @@ impl AtomicCounter {
             count: std::sync::atomic::AtomicUsize::new(0),
         }
     }
-    
+
     /// 递增并返回新值
     pub fn increment(&self) -> usize {
         self.count.fetch_add(1, Ordering::Relaxed)
     }
-    
+
     /// 获取当前值
     pub fn get(&self) -> usize {
         self.count.load(Ordering::SeqCst)
@@ -1524,19 +1592,19 @@ impl<T> UnsafeContainer<T> {
             inner: UnsafeCell::new(value),
         }
     }
-    
+
     /// 获取不可变引用
     pub fn get(&self) -> &T {
         // SAFETY: 调用者必须确保没有其他可变引用
         unsafe { &*self.inner.get() }
     }
-    
+
     /// 获取可变引用
     pub fn get_mut(&mut self) -> &mut T {
         // SAFETY: &mut self 保证独占访问
         unsafe { &mut *self.inner.get() }
     }
-    
+
     /// 不安全地获取原始指针
     pub fn as_ptr(&self) -> *mut T {
         self.inner.get()
@@ -1557,12 +1625,12 @@ mod tests {
     #[test]
     fn test_spin_lock() {
         let lock = SpinLock::new(0);
-        
+
         {
             let mut guard = lock.lock();
             *guard += 1;
         }
-        
+
         {
             let guard = lock.lock();
             assert_eq!(*guard, 1);
@@ -1572,7 +1640,7 @@ mod tests {
     #[test]
     fn test_counter() {
         let counter = AtomicCounter::new();
-        
+
         let handles: Vec<_> = (0..10)
             .map(|_| {
                 thread::spawn(move || {
@@ -1582,11 +1650,11 @@ mod tests {
                 })
             })
             .collect();
-        
+
         for h in handles {
             h.join().unwrap();
         }
-        
+
         assert_eq!(counter.get(), 1000);
     }
 }
@@ -1614,6 +1682,7 @@ mod tests {
 ### 9.1 问题场景
 
 当需要：
+
 - 避免不必要的初始化开销
 - 实现自定义容器
 - 处理 C 库分配的未初始化内存
@@ -1628,7 +1697,7 @@ mod tests {
 use std::mem::{self, MaybeUninit};
 
 /// 危险等级: 🔴 高
-/// 
+///
 /// 使用 MaybeUninit 实现固定大小的栈数组
 pub struct ArrayVec<T, const N: usize> {
     // 未初始化的存储
@@ -1644,30 +1713,30 @@ impl<T, const N: usize> ArrayVec<T, N> {
             len: 0,
         }
     }
-    
+
     pub fn push(&mut self, value: T) -> Result<(), T> {
         if self.len >= N {
             return Err(value);
         }
-        
+
         // 在未初始化位置写入
         self.storage[self.len].write(value);
         self.len += 1;
-        
+
         Ok(())
     }
-    
+
     pub fn pop(&mut self) -> Option<T> {
         if self.len == 0 {
             return None;
         }
-        
+
         self.len -= 1;
-        
+
         // SAFETY: 该位置的值已初始化
         Some(unsafe { self.storage[self.len].assume_init_read() })
     }
-    
+
     pub fn as_slice(&self) -> &[T] {
         // SAFETY: 0..len 范围内的元素都已初始化
         unsafe {
@@ -1677,7 +1746,7 @@ impl<T, const N: usize> ArrayVec<T, N> {
             )
         }
     }
-    
+
     pub fn len(&self) -> usize {
         self.len
     }
@@ -1703,13 +1772,13 @@ unsafe impl<T: Sync, const N: usize> Sync for ArrayVec<T, N> {}
 pub fn conditional_init(condition: bool) -> i32 {
     // SAFETY: MaybeUninit 创建未初始化值是安全的
     let mut value = MaybeUninit::<i32>::uninit();
-    
+
     if condition {
         value.write(42);
     } else {
         value.write(0);
     }
-    
+
     // SAFETY: 我们确保在所有分支都写入了值
     unsafe { value.assume_init() }
 }
@@ -1717,22 +1786,22 @@ pub fn conditional_init(condition: bool) -> i32 {
 /// 批量初始化模式
 pub fn batch_init<const N: usize>() -> [String; N] {
     // 创建未初始化数组
-    let mut arr: [MaybeUninit<String>; N] = 
+    let mut arr: [MaybeUninit<String>; N] =
         unsafe { MaybeUninit::uninit().assume_init() };
-    
+
     // 初始化计数器，用于出错时清理
     let mut initialized = 0;
-    
+
     for i in 0..N {
         // 可能 panic 的初始化
         let value = format!("element {}", i);
         arr[i].write(value);
         initialized += 1;
     }
-    
+
     // 使用 ManuallyDrop 防止在转换期间 drop
     let mut arr = mem::ManuallyDrop::new(arr);
-    
+
     // SAFETY: 所有元素都已初始化
     unsafe {
         mem::transmute_copy::<_, [String; N]>(&*arr)
@@ -1743,7 +1812,7 @@ pub fn batch_init<const N: usize>() -> [String; N] {
 fn read_uninit_bug() {
     let x: i32;
     // let y = x;  // 编译错误：使用未初始化变量
-    
+
     let mut mu = MaybeUninit::<i32>::uninit();
     let ptr = mu.as_mut_ptr();
     // UB: 读取未初始化值
@@ -1764,13 +1833,13 @@ mod tests {
     #[test]
     fn test_array_vec() {
         let mut vec = ArrayVec::<i32, 5>::new();
-        
+
         assert!(vec.push(1).is_ok());
         assert!(vec.push(2).is_ok());
         assert!(vec.push(3).is_ok());
-        
+
         assert_eq!(vec.as_slice(), &[1, 2, 3]);
-        
+
         assert_eq!(vec.pop(), Some(3));
         assert_eq!(vec.pop(), Some(2));
     }
@@ -1808,6 +1877,7 @@ mod tests {
 ### 10.1 问题场景
 
 当需要：
+
 - 全局配置
 - 单例模式
 - 缓存
@@ -1864,7 +1934,7 @@ pub fn increment_global() -> u64 {
 // ============================================================================
 
 /// 危险等级: 🔴 高
-/// 
+///
 /// 自定义线程安全的一次性初始化
 pub struct StaticInit<T> {
     initialized: AtomicBool,
@@ -1882,22 +1952,22 @@ impl<T> StaticInit<T> {
             value: UnsafeCell::new(MaybeUninit::uninit()),
         }
     }
-    
+
     /// 初始化值
-    /// 
+    ///
     /// # Safety
     /// 只能调用一次，且必须在任何 get 之前
     pub unsafe fn init(&self, value: T) {
         if self.initialized.swap(true, Ordering::SeqCst) {
             panic!("StaticInit already initialized");
         }
-        
+
         // SAFETY: 我们是第一个初始化者
         unsafe {
             (*self.value.get()).write(value);
         }
     }
-    
+
     /// 获取已初始化的值
     pub fn get(&self) -> Option<&T> {
         if self.initialized.load(Ordering::Acquire) {
@@ -2012,6 +2082,7 @@ mod tests {
 ### 11.1 问题场景
 
 所有 unsafe 代码都需要：
+
 - 明确的安全契约
 - 不变式的文档化
 - 前置/后置条件的验证
@@ -2025,31 +2096,31 @@ mod tests {
 use std::ptr::NonNull;
 
 /// 危险等级: 🔴 极高
-/// 
+///
 /// 带完整契约注释的 unsafe 函数
-/// 
+///
 /// # Safety
-/// 
+///
 /// ## 前置条件
 /// - `ptr` 必须指向有效的、已分配的内存块
 /// - `ptr` 必须正确对齐到 `T`
 /// - `len` 不能超过分配的内存大小
 /// - 在返回切片生命周期内，内存必须保持有效
-/// 
+///
 /// ## 后置条件
 /// - 返回的切片长度等于 `len`
 /// - 返回的切片包含 `len` 个有效初始化的 `T` 值
-/// 
+///
 /// ## 不变式
 /// - 切片内的所有元素都是有效的 `T` 实例
-/// 
+///
 /// # 示例
 /// ```
 /// let vec = vec![1, 2, 3];
 /// let ptr = vec.as_ptr();
 /// let len = vec.len();
 /// std::mem::forget(vec);  // 防止 double free
-/// 
+///
 /// unsafe {
 ///     let slice = slice_from_raw_parts_verified(ptr, len);
 ///     assert_eq!(slice, &[1, 2, 3]);
@@ -2060,14 +2131,14 @@ unsafe fn slice_from_raw_parts_verified<T>(ptr: *const T, len: usize) -> &'stati
     assert!(!ptr.is_null(), "ptr must not be null");
     assert!(ptr.is_aligned(), "ptr must be aligned");
     assert!(len < isize::MAX as usize, "len must be less than isize::MAX");
-    
+
     // 可选：在 debug 模式下额外检查
     #[cfg(debug_assertions)]
     {
         // 检查可读性（平台相关）
         // std::ptr::read_volatile(ptr);
     }
-    
+
     // SAFETY: 所有前置条件已验证
     unsafe { std::slice::from_raw_parts(ptr, len) }
 }
@@ -2080,7 +2151,7 @@ pub struct InvariantChecked<T> {
 
 impl<T> InvariantChecked<T> {
     /// 创建带不变式检查的值
-    /// 
+    ///
     /// # Panics
     /// 如果初始值违反不变式则 panic
     pub fn new(value: T, validator: fn(&T) -> bool) -> Self {
@@ -2090,26 +2161,26 @@ impl<T> InvariantChecked<T> {
         );
         Self { value, validator }
     }
-    
+
     pub fn get(&self) -> &T {
         &self.value
     }
-    
+
     /// 修改值，保持不变式
-    /// 
+    ///
     /// # Panics
     /// 如果新值违反不变式则 panic，原值保持不变
-    pub fn modify<F>(&mut self, f: F) 
+    pub fn modify<F>(&mut self, f: F)
     where
         F: FnOnce(&mut T),
     {
-        let mut new_value = unsafe { 
+        let mut new_value = unsafe {
             // SAFETY: 我们即将验证并可能丢弃
-            std::ptr::read(&self.value) 
+            std::ptr::read(&self.value)
         };
-        
+
         f(&mut new_value);
-        
+
         if (self.validator)(&new_value) {
             // 验证通过，提交更改
             std::mem::drop(std::mem::replace(&mut self.value, new_value));
@@ -2163,21 +2234,21 @@ impl SafeBuffer {
         unsafe_assert!(len <= capacity, "len must be <= capacity");
         unsafe_assert!(capacity > 0, "capacity must be > 0");
         unsafe_assert!(ptr.as_ptr().is_aligned(), "ptr must be aligned");
-        
+
         Self { ptr, len, capacity }
     }
-    
+
     pub fn len(&self) -> usize {
         self.len
     }
-    
+
     pub fn capacity(&self) -> usize {
         self.capacity
     }
 }
 
 /// 文档化 UB 边界
-/// 
+///
 /// 以下操作会导致 UB：
 /// 1. 使用 null 指针创建
 /// 2. len > capacity
@@ -2192,7 +2263,7 @@ mod tests {
     fn test_invariant_checked() {
         let mut val = InvariantChecked::new(10, |v| *v > 0);
         assert_eq!(*val.get(), 10);
-        
+
         val.modify(|v| *v = 20);
         assert_eq!(*val.get(), 20);
     }
@@ -2210,17 +2281,17 @@ mod tests {
 
 ```rust
 /// # Safety
-/// 
+///
 /// ## 前置条件
 /// 1. 条件 1
 /// 2. 条件 2
-/// 
+///
 /// ## 后置条件
 /// 1. 结果保证
-/// 
+///
 /// ## 不变式
 /// - 调用前后保持的属性
-/// 
+///
 /// ## 违反后果
 /// - 违反条件 1: 未定义行为（空指针解引用）
 /// - 违反条件 2: 数据竞争
@@ -2249,23 +2320,23 @@ mod tests {
 
 ### 12.2 Miri 错误解读
 
-```
-error: Undefined Behavior: attempting a write access using <TAG> at <ADDR>, 
+```text
+error: Undefined Behavior: attempting a write access using <TAG> at <ADDR>,
        but that tag only grants SharedReadOnly permission
 
 解释：违反了 Stacked Borrows 规则，试图写入只读引用
 修复：检查指针别名，确保可变引用是独占的
 ```
 
-```
+```text
 error: Undefined Behavior: using uninitialized data
 
 解释：读取了未初始化的内存
 修复：使用 MaybeUninit 或确保完全初始化
 ```
 
-```
-error: Undefined Behavior: trying to reborrow for SharedReadOnly, 
+```text
+error: Undefined Behavior: trying to reborrow for SharedReadOnly,
        but parent tag <TAG> does not have an appropriate item in the borrow stack
 
 解释：父引用已失效
@@ -2358,6 +2429,6 @@ jobs:
 
 ---
 
-*最后更新: 2026-02-28*  
-*维护者: Rust 学习项目*  
+*最后更新: 2026-02-28*
+*维护者: Rust 学习项目*
 *许可证: MIT OR Apache-2.0*

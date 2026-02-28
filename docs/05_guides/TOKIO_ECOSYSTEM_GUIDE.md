@@ -1,24 +1,67 @@
 # Tokio 生态系统深度指南
 
-> **创建日期**: 2026-02-28  
-> **Rust 版本**: 1.92.0-nightly  
-> **Tokio 版本**: 1.43+  
-> **文档状态**: 🟢 已完成  
+> **创建日期**: 2026-02-28
+> **Rust 版本**: 1.92.0-nightly
+> **Tokio 版本**: 1.43+
+> **文档状态**: 🟢 已完成
 > **维护者**: Rust 学习项目团队
 
 ---
 
 ## 📋 目录导航
 
-1. [Tokio 运行时架构](#1-tokio-运行时架构)
-2. [Axum Web 框架](#2-axum-web-框架)
-3. [Tonic gRPC](#3-tonic-grpc)
-4. [Tower 服务抽象](#4-tower-服务抽象)
-5. [Tracing 可观测性](#5-tracing-可观测性)
-6. [生产级模式](#6-生产级模式)
-7. [性能优化](#7-性能优化)
-8. [实战案例](#8-实战案例)
-9. [附录](#9-附录)
+- [Tokio 生态系统深度指南](#tokio-生态系统深度指南)
+  - [📋 目录导航](#-目录导航)
+  - [1. Tokio 运行时架构](#1-tokio-运行时架构)
+    - [1.1 架构概览](#11-架构概览)
+    - [1.2 调度器对比](#12-调度器对比)
+    - [1.3 多线程调度器详解](#13-多线程调度器详解)
+    - [1.4 工作窃取机制](#14-工作窃取机制)
+    - [1.5 当前线程调度器](#15-当前线程调度器)
+    - [1.6 任务队列和调度策略](#16-任务队列和调度策略)
+    - [常见陷阱](#常见陷阱)
+  - [2. Axum Web 框架](#2-axum-web-框架)
+    - [2.1 核心架构](#21-核心架构)
+    - [2.2 路由系统](#22-路由系统)
+    - [2.3 提取器 (Extractors)](#23-提取器-extractors)
+    - [2.4 中间件系统](#24-中间件系统)
+    - [2.5 错误处理](#25-错误处理)
+  - [3. Tonic gRPC](#3-tonic-grpc)
+    - [3.1 服务定义 (Protobuf)](#31-服务定义-protobuf)
+    - [3.2 服务端实现](#32-服务端实现)
+    - [3.3 客户端实现](#33-客户端实现)
+    - [3.4 拦截器](#34-拦截器)
+  - [4. Tower 服务抽象](#4-tower-服务抽象)
+    - [4.1 Service Trait 核心概念](#41-service-trait-核心概念)
+    - [4.2 Layer 和中间件链](#42-layer-和中间件链)
+    - [4.3 Rate Limiting、Timeout 和 Retry](#43-rate-limitingtimeout-和-retry)
+  - [5. Tracing 可观测性](#5-tracing-可观测性)
+    - [5.1 Span 和 Event 基础](#51-span-和-event-基础)
+    - [5.2 与 OpenTelemetry 集成](#52-与-opentelemetry-集成)
+    - [5.3 分布式追踪](#53-分布式追踪)
+  - [6. 生产级模式](#6-生产级模式)
+    - [6.1 Graceful Shutdown](#61-graceful-shutdown)
+    - [6.2 Backpressure 处理](#62-backpressure-处理)
+    - [6.3 Connection Pooling](#63-connection-pooling)
+    - [6.4 Health Checks](#64-health-checks)
+  - [7. 性能优化](#7-性能优化)
+    - [7.1 任务 Spawn 策略](#71-任务-spawn-策略)
+    - [7.2 Buffer 和 Channel 调优](#72-buffer-和-channel-调优)
+    - [7.3 内存分配优化](#73-内存分配优化)
+  - [8. 实战案例](#8-实战案例)
+    - [8.1 REST API 服务器完整示例](#81-rest-api-服务器完整示例)
+    - [8.2 WebSocket 实时应用](#82-websocket-实时应用)
+    - [8.3 并发数据处理器](#83-并发数据处理器)
+  - [9. 附录](#9-附录)
+    - [9.1 官方文档交叉引用](#91-官方文档交叉引用)
+    - [9.2 推荐依赖版本 (Cargo.toml)](#92-推荐依赖版本-cargotoml)
+    - [9.3 项目结构最佳实践](#93-项目结构最佳实践)
+    - [9.4 性能调优检查清单](#94-性能调优检查清单)
+    - [9.5 生产环境部署检查清单](#95-生产环境部署检查清单)
+    - [9.6 常见问题 FAQ](#96-常见问题-faq)
+    - [9.7 相关学习资源](#97-相关学习资源)
+    - [9.8 版本更新日志](#98-版本更新日志)
+  - [参考代码仓库](#参考代码仓库)
 
 ---
 
@@ -33,21 +76,21 @@ graph TB
         RT --> CS[Current-Thread Scheduler]
         RT --> TB[Timer Backend]
         RT --> IO[IO Driver]
-        
+
         MS --> WQ1[Worker Queue 1]
         MS --> WQ2[Worker Queue 2]
         MS --> WQ3[Worker Queue N]
-        
+
         WQ1 <-->|work-stealing| WQ2
         WQ2 <-->|work-stealing| WQ3
     end
-    
+
     subgraph "Tasks"
         T1[Task 1]
         T2[Task 2]
         T3[Task N]
     end
-    
+
     WQ1 --> T1
     WQ2 --> T2
     WQ3 --> T3
@@ -88,7 +131,7 @@ fn create_production_runtime() -> Runtime {
 /// 使用示例
 fn main() {
     let rt = create_production_runtime();
-    
+
     rt.block_on(async {
         // 启动多个并发任务
         let handles: Vec<_> = (0..100)
@@ -100,7 +143,7 @@ fn main() {
                 })
             })
             .collect();
-        
+
         let results: Vec<_> = futures::future::join_all(handles).await;
         println!("Completed {} tasks", results.len());
     });
@@ -113,11 +156,11 @@ fn main() {
 use tokio::task::JoinHandle;
 
 /// 工作窃取调度器优化示例
-/// 
+///
 /// Tokio 使用两级队列系统：
 /// 1. 全局队列：所有线程可访问，需要锁
 /// 2. 本地队列：每个工作线程独有，无锁操作
-/// 
+///
 /// 当本地队列为空时，工作线程会尝试从其他线程"窃取"任务
 async fn work_stealing_demo() {
     // 大量小任务最能体现 work-stealing 的优势
@@ -130,13 +173,13 @@ async fn work_stealing_demo() {
             })
         })
         .collect();
-    
+
     let total: u64 = futures::future::join_all(handles)
         .await
         .into_iter()
         .filter_map(Result::ok)
         .sum();
-    
+
     println!("Total: {}", total);
 }
 
@@ -163,7 +206,7 @@ fn create_current_thread_runtime() {
         .enable_all()
         .build()
         .unwrap();
-    
+
     rt.block_on(async {
         // 在当前线程调度器中，spawn_blocking 会阻塞整个运行时！
         // 以下代码会导致死锁，不要这样做：
@@ -171,7 +214,7 @@ fn create_current_thread_runtime() {
         //     std::thread::sleep(Duration::from_secs(1));
         //     42
         // }).await;
-        
+
         // 正确的做法：使用 spawn_local 或避免阻塞操作
         let result = async { 42 }.await;
         println!("Result: {}", result);
@@ -188,14 +231,14 @@ use tokio::task::{self, JoinSet};
 async fn task_scheduling_best_practices() {
     // 1. 使用 JoinSet 管理动态任务集合
     let mut set = JoinSet::new();
-    
+
     for i in 0..100 {
         set.spawn(async move {
             tokio::time::sleep(Duration::from_millis(i as u64 * 10)).await;
             format!("Task {} complete", i)
         });
     }
-    
+
     // 按完成顺序处理结果
     while let Some(result) = set.join_next().await {
         match result {
@@ -203,14 +246,14 @@ async fn task_scheduling_best_practices() {
             Err(e) => eprintln!("Task panicked: {}", e),
         }
     }
-    
+
     // 2. 优先级任务调度（使用不同 spawn 策略）
     // 高优先级：直接 spawn
     let high_priority = task::spawn(high_priority_work());
-    
+
     // 低优先级：使用 spawn_blocking 的线程池
     let low_priority = task::spawn_blocking(low_priority_work);
-    
+
     let (h, l) = tokio::join!(high_priority, low_priority);
     let _ = (h, l);
 }
@@ -247,14 +290,14 @@ graph LR
     C -->|/users| D[GET Handler]
     C -->|/users/:id| E[GET Handler]
     C -->|/users| F[POST Handler]
-    
+
     D --> G[Extractors]
     E --> G
     F --> G
-    
+
     G --> H[Middleware Chain]
     H --> I[Response]
-    
+
     subgraph "Middleware Stack"
         H --> M1[Tracing]
         M1 --> M2[CORS]
@@ -287,7 +330,7 @@ fn create_router(state: Arc<AppState>) -> Router {
         // 基础路由
         .route("/", get(root))
         .route("/health", get(health_check))
-        
+
         // RESTful API 路由组
         .route("/api/v1/users", get(list_users).post(create_user))
         .route(
@@ -296,19 +339,19 @@ fn create_router(state: Arc<AppState>) -> Router {
                 .put(update_user)
                 .delete(delete_user),
         )
-        
+
         // 嵌套路由（模块化组织）
         .nest("/api/v1/posts", posts_routes())
-        
+
         // 合并子路由
         .merge(admin_routes())
-        
+
         // 静态文件服务
         .nest_service("/static", tower_http::services::ServeDir::new("static"))
-        
+
         // 全局状态
         .with_state(state)
-        
+
         // 全局中间件
         .layer(tower_http::trace::TraceLayer::new_for_http())
         .layer(tower_http::cors::CorsLayer::permissive())
@@ -453,7 +496,7 @@ impl Pagination {
     fn offset(&self) -> i64 {
         ((self.page - 1) * self.per_page) as i64
     }
-    
+
     fn limit(&self) -> i64 {
         self.per_page as i64
     }
@@ -473,7 +516,7 @@ where
     S: Send + Sync,
 {
     type Rejection = (StatusCode, &'static str);
-    
+
     async fn from_request_parts(parts: &mut Parts, _state: &S) -> Result<Self, Self::Rejection> {
         // 从 Authorization header 提取 JWT 并解析
         let auth_header = parts
@@ -481,11 +524,11 @@ where
             .get("authorization")
             .and_then(|h| h.to_str().ok())
             .ok_or((StatusCode::UNAUTHORIZED, "Missing authorization header"))?;
-        
+
         // 解析 JWT token（简化示例）
         let token = auth_header.strip_prefix("Bearer ")
             .ok_or((StatusCode::UNAUTHORIZED, "Invalid authorization format"))?;
-        
+
         Ok(CurrentUser {
             id: 1,
             username: "user".to_string(),
@@ -535,7 +578,6 @@ struct AppConfig {
 }
 ```
 
-
 ### 2.4 中间件系统
 
 ```rust
@@ -561,22 +603,22 @@ async fn logging_middleware(
     let method = req.method().clone();
     let uri = req.uri().clone();
     let request_id = uuid::Uuid::new_v4().to_string();
-    
+
     println!(
         "[{}] {} {} - Started",
         request_id, method, uri
     );
-    
+
     let response = next.run(req).await;
-    
+
     let duration = start.elapsed();
     let status = response.status();
-    
+
     println!(
         "[{}] {} {} - {} ({:?})",
         request_id, method, uri, status, duration
     );
-    
+
     response
 }
 
@@ -590,7 +632,7 @@ async fn auth_middleware<B>(
     if !validate_token(token).await {
         return Err(StatusCode::UNAUTHORIZED);
     }
-    
+
     Ok(next.run(req).await)
 }
 
@@ -618,7 +660,7 @@ struct RequestTimingLayer;
 
 impl<S> Layer<S> for RequestTimingLayer {
     type Service = RequestTimingService<S>;
-    
+
     fn layer(&self, inner: S) -> Self::Service {
         RequestTimingService { inner }
     }
@@ -637,17 +679,17 @@ where
     type Response = S::Response;
     type Error = S::Error;
     type Future = Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>> + Send>>;
-    
+
     fn poll_ready(&mut self, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
         self.inner.poll_ready(cx)
     }
-    
+
     fn call(&mut self, req: Request<Body>) -> Self::Future {
         let start = Instant::now();
         let method = req.method().clone();
         let uri = req.uri().clone();
         let mut inner = self.inner.clone();
-        
+
         Box::pin(async move {
             let response = inner.call(req).await?;
             let duration = start.elapsed();
@@ -674,19 +716,19 @@ use thiserror::Error;
 pub enum AppError {
     #[error("数据库错误: {0}")]
     Database(#[from] sqlx::Error),
-    
+
     #[error("验证错误: {0}")]
     Validation(String),
-    
+
     #[error("未找到资源")]
     NotFound,
-    
+
     #[error("未授权")]
     Unauthorized,
-    
+
     #[error("禁止访问")]
     Forbidden,
-    
+
     #[error("内部服务器错误")]
     Internal,
 }
@@ -737,14 +779,14 @@ impl IntoResponse for AppError {
                 "服务器内部错误".to_string(),
             ),
         };
-        
+
         let body = Json(ErrorResponse {
             error: ErrorDetail {
                 code: error_code.to_string(),
                 message,
             },
         });
-        
+
         (status, body).into_response()
     }
 }
@@ -757,9 +799,9 @@ async fn user_handler(id: i64) -> Result<Json<User>> {
     if id <= 0 {
         return Err(AppError::Validation("无效的用户ID".to_string()));
     }
-    
+
     let user = fetch_user(id).await?;
-    
+
     match user {
         Some(u) => Ok(Json(u)),
         None => Err(AppError::NotFound),
@@ -866,16 +908,16 @@ impl Greeter for GreeterService {
         };
         Ok(Response::new(reply))
     }
-    
+
     type SayHelloStreamStream = ReceiverStream<Result<HelloReply, Status>>;
-    
+
     async fn say_hello_stream(
         &self,
         request: Request<tonic::Streaming<HelloRequest>>,
     ) -> Result<Response<Self::SayHelloStreamStream>, Status> {
         let mut stream = request.into_inner();
         let (tx, rx) = mpsc::channel(128);
-        
+
         tokio::spawn(async move {
             while let Some(req) = stream.message().await.unwrap_or(None) {
                 let reply = HelloReply {
@@ -886,7 +928,7 @@ impl Greeter for GreeterService {
                 }
             }
         });
-        
+
         Ok(Response::new(ReceiverStream::new(rx)))
     }
 }
@@ -908,7 +950,7 @@ impl UserService for UserServiceImpl {
         };
         Ok(Response::new(user))
     }
-    
+
     async fn list_users(
         &self,
         _request: Request<ListUsersRequest>,
@@ -918,7 +960,7 @@ impl UserService for UserServiceImpl {
             total: 0,
         }))
     }
-    
+
     async fn create_user(
         &self,
         request: Request<CreateUserRequest>,
@@ -932,15 +974,15 @@ impl UserService for UserServiceImpl {
         };
         Ok(Response::new(user))
     }
-    
+
     type StreamUsersStream = ReceiverStream<Result<User, Status>>;
-    
+
     async fn stream_users(
         &self,
         _request: Request<StreamUsersRequest>,
     ) -> Result<Response<Self::StreamUsersStream>, Status> {
         let (tx, rx) = mpsc::channel(128);
-        
+
         tokio::spawn(async move {
             for i in 0..10 {
                 let user = User {
@@ -955,19 +997,19 @@ impl UserService for UserServiceImpl {
                 tokio::time::sleep(Duration::from_millis(100)).await;
             }
         });
-        
+
         Ok(Response::new(ReceiverStream::new(rx)))
     }
-    
+
     type ChatStream = ReceiverStream<Result<ChatMessage, Status>>;
-    
+
     async fn chat(
         &self,
         request: Request<tonic::Streaming<ChatMessage>>,
     ) -> Result<Response<Self::ChatStream>, Status> {
         let mut inbound = request.into_inner();
         let (tx, rx) = mpsc::channel(128);
-        
+
         tokio::spawn(async move {
             while let Some(msg) = inbound.message().await.unwrap_or(None) {
                 let reply = ChatMessage {
@@ -980,23 +1022,23 @@ impl UserService for UserServiceImpl {
                 }
             }
         });
-        
+
         Ok(Response::new(ReceiverStream::new(rx)))
     }
 }
 
 pub async fn start_server(addr: &str) -> Result<(), Box<dyn std::error::Error>> {
     let addr = addr.parse()?;
-    
+
     let greeter = GreeterService::default();
     let user_service = UserServiceImpl;
-    
+
     Server::builder()
         .add_service(GreeterServer::new(greeter))
         .add_service(UserServiceServer::new(user_service))
         .serve(addr)
         .await?;
-    
+
     Ok(())
 }
 ```
@@ -1025,33 +1067,33 @@ impl AppClient {
             .timeout(Duration::from_secs(30))
             .connect_timeout(Duration::from_secs(10))
             .keep_alive_while_idle(true);
-        
+
         let channel = endpoint.connect().await?;
-        
+
         Ok(Self {
             greeter: GreeterClient::new(channel.clone()),
             user: UserServiceClient::new(channel),
         })
     }
-    
+
     pub async fn say_hello(&mut self, name: &str) -> Result<String, tonic::Status> {
         let request = Request::new(HelloRequest {
             name: name.to_string(),
         });
-        
+
         let response = self.greeter.say_hello(request).await?;
         Ok(response.into_inner().message)
     }
-    
+
     pub async fn get_user(&mut self, id: i64) -> Result<User, tonic::Status> {
         let request = Request::new(GetUserRequest { id });
         let response = self.user.get_user(request).await?;
         Ok(response.into_inner())
     }
-    
+
     pub async fn chat_stream(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         let (mut tx, rx) = tokio::sync::mpsc::channel(128);
-        
+
         tokio::spawn(async move {
             for i in 0..5 {
                 tx.send(ChatMessage {
@@ -1062,16 +1104,16 @@ impl AppClient {
                 tokio::time::sleep(Duration::from_secs(1)).await;
             }
         });
-        
+
         let stream = tokio_stream::wrappers::ReceiverStream::new(rx);
         let request = Request::new(stream);
-        
+
         let mut response = self.user.chat(request).await?.into_inner();
-        
+
         while let Some(msg) = response.message().await? {
             println!("Received: {:?}", msg);
         }
-        
+
         Ok(())
     }
 }
@@ -1120,12 +1162,12 @@ impl Interceptor for AuthInterceptor {
 pub fn create_interceptor_stack(token: String) -> impl Fn(Request<()>) -> Result<Request<()>, Status> + Clone {
     move |mut req| {
         println!("[Interceptor] Request: {}", req.uri());
-        
+
         req.metadata_mut().insert(
             "authorization",
             format!("Bearer {}", token).parse().unwrap(),
         );
-        
+
         Ok(req)
     }
 }
@@ -1142,12 +1184,12 @@ graph TB
     A[Request] --> B[Service::call]
     B --> C[Future<Response>]
     C --> D[Response]
-    
+
     subgraph "Service Trait"
         B
         E[poll_ready]
     end
-    
+
     subgraph "Tower Layer"
         F[Layer::layer]
         F --> G[Service transform]
@@ -1180,11 +1222,11 @@ impl Service<()> for CounterService {
     type Response = u64;
     type Error = std::convert::Infallible;
     type Future = Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>> + Send>>;
-    
+
     fn poll_ready(&mut self, _cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
         Poll::Ready(Ok(()))
     }
-    
+
     fn call(&mut self, _req: ()) -> Self::Future {
         let count = self.count.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
         Box::pin(async move { Ok(count) })
@@ -1240,7 +1282,7 @@ impl AddHeaderLayer {
 
 impl<S> Layer<S> for AddHeaderLayer {
     type Service = AddHeaderService<S>;
-    
+
     fn layer(&self, inner: S) -> Self::Service {
         AddHeaderService {
             inner,
@@ -1286,18 +1328,18 @@ where
     Req: Clone,
 {
     type Future = Pin<Box<dyn Future<Output = Self> + Send>>;
-    
+
     fn retry(&self, _req: &Req, result: Result<&Res, &E>) -> Option<Self::Future> {
         if self.current_attempt >= self.max_retries {
             return None;
         }
-        
+
         match result {
             Ok(_) => None,
             Err(_) => {
                 let mut new_policy = self.clone();
                 new_policy.current_attempt += 1;
-                
+
                 let delay = Duration::from_millis(100 * (1 << self.current_attempt));
                 Some(Box::pin(async move {
                     tokio::time::sleep(delay).await;
@@ -1306,7 +1348,7 @@ where
             }
         }
     }
-    
+
     fn clone_request(&self, req: &Req) -> Option<Req> {
         Some(req.clone())
     }
@@ -1341,7 +1383,7 @@ impl CircuitBreaker {
             last_failure: None,
         }
     }
-    
+
     pub fn can_execute(&mut self) -> bool {
         match self.state {
             CircuitState::Closed => true,
@@ -1361,7 +1403,7 @@ impl CircuitBreaker {
             CircuitState::HalfOpen => true,
         }
     }
-    
+
     pub fn record_success(&mut self) {
         match self.state {
             CircuitState::HalfOpen => {
@@ -1376,11 +1418,11 @@ impl CircuitBreaker {
             }
         }
     }
-    
+
     pub fn record_failure(&mut self) {
         self.failure_count += 1;
         self.last_failure = Some(Instant::now());
-        
+
         if self.state == CircuitState::HalfOpen || self.failure_count >= self.threshold {
             self.state = CircuitState::Open;
         }
@@ -1433,7 +1475,7 @@ pub fn init_tracing() {
 pub async fn process_order(order: Order, db: &Database) -> Result<Receipt, Error> {
     debug!("Validating order");
     validate_order(&order)?;
-    
+
     // 创建嵌套 span
     let payment_span = span!(Level::DEBUG, "process_payment", method = "credit_card");
     let result = async {
@@ -1442,9 +1484,9 @@ pub async fn process_order(order: Order, db: &Database) -> Result<Receipt, Error
     }
     .instrument(payment_span)
     .await?;
-    
+
     info!(payment_id = %result.id, "Payment processed successfully");
-    
+
     Ok(Receipt {
         order_id: order.id,
         payment_id: result.id,
@@ -1487,16 +1529,16 @@ use tracing_subscriber::layer::SubscriberExt;
 /// 初始化 OpenTelemetry
 pub fn init_otel(service_name: &str, otlp_endpoint: &str) -> TracerProvider {
     global::set_text_map_propagator(TraceContextPropagator::new());
-    
+
     let resource = Resource::new(vec![
         KeyValue::new("service.name", service_name.to_string()),
         KeyValue::new("service.version", env!("CARGO_PKG_VERSION")),
     ]);
-    
+
     let otlp_exporter = opentelemetry_otlp::new_exporter()
         .tonic()
         .with_endpoint(otlp_endpoint);
-    
+
     let tracer_provider = opentelemetry_otlp::new_pipeline()
         .tracing()
         .with_exporter(otlp_exporter)
@@ -1506,14 +1548,14 @@ pub fn init_otel(service_name: &str, otlp_endpoint: &str) -> TracerProvider {
         )
         .install_batch(opentelemetry_sdk::runtime::Tokio)
         .expect("Failed to install OpenTelemetry pipeline");
-    
+
     let tracer = tracer_provider.tracer(service_name);
-    
+
     tracing_subscriber::registry()
         .with(tracing_subscriber::fmt::layer())
         .with(OpenTelemetryLayer::new(tracer))
         .init();
-    
+
     tracer_provider
 }
 
@@ -1527,14 +1569,14 @@ pub async fn otel_middleware(
         http.method = %request.method(),
         http.route = request.uri().path(),
     );
-    
+
     let response = next.run(request).instrument(span).await;
-    
+
     tracing::info!(
         http.status_code = response.status().as_u16(),
         "Request completed"
     );
-    
+
     response
 }
 ```
@@ -1551,27 +1593,25 @@ pub async fn traced_http_request(
     method: &str,
     url: &str,
 ) -> Result<String, reqwest::Error> {
-    let span = info_span!("http_request", 
+    let span = info_span!("http_request",
         http.method = method,
         http.url = url,
     );
-    
+
     async {
         let response = client
             .request(method.parse().unwrap(), url)
             .send()
             .await?;
-        
+
         tracing::info!(http.status_code = response.status().as_u16(), "Response received");
-        
+
         response.text().await
     }
     .instrument(span)
     .await
 }
 ```
-
-
 
 ---
 
@@ -1598,16 +1638,16 @@ impl GracefulShutdown {
             shutdown_rx,
         }
     }
-    
+
     pub async fn listen_for_signals(&self) {
         let shutdown_tx = self.shutdown_tx.clone();
-        
+
         tokio::spawn(async move {
             let mut sigterm = signal::unix::signal(signal::unix::SignalKind::terminate())
                 .expect("Failed to create SIGTERM handler");
             let mut sigint = signal::unix::signal(signal::unix::SignalKind::interrupt())
                 .expect("Failed to create SIGINT handler");
-            
+
             tokio::select! {
                 _ = sigterm.recv() => {
                     tracing::info!("Received SIGTERM, starting graceful shutdown");
@@ -1616,11 +1656,11 @@ impl GracefulShutdown {
                     tracing::info!("Received SIGINT, starting graceful shutdown");
                 }
             }
-            
+
             let _ = shutdown_tx.send(()).await;
         });
     }
-    
+
     pub async fn wait_for_shutdown(&mut self) {
         let _ = self.shutdown_rx.recv().await;
     }
@@ -1632,21 +1672,21 @@ pub async fn run_server_with_graceful_shutdown(
     router: axum::Router,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let listener = tokio::net::TcpListener::bind(addr).await?;
-    
+
     let mut shutdown = GracefulShutdown::new();
     shutdown.listen_for_signals().await;
-    
+
     tracing::info!("Server starting on {}", addr);
-    
+
     axum::serve(listener, router)
         .with_graceful_shutdown(async move {
             shutdown.wait_for_shutdown().await;
         })
         .await?;
-    
+
     tracing::info!("Server stopped, performing cleanup...");
     cleanup_resources().await;
-    
+
     Ok(())
 }
 
@@ -1672,14 +1712,14 @@ impl BackpressureHandler {
             semaphore: Arc::new(Semaphore::new(max_concurrent)),
         }
     }
-    
+
     pub async fn execute<F, Fut, R>(&self, f: F) -> Result<R, BackpressureError>
     where
         F: FnOnce() -> Fut,
         Fut: Future<Output = R>,
     {
         let permit = self.semaphore.try_acquire();
-        
+
         match permit {
             Ok(_permit) => {
                 let result = f().await;
@@ -1713,10 +1753,10 @@ impl AdaptiveLimiter {
             max_limit,
         }
     }
-    
+
     pub fn adjust(&self, error_rate: f64, latency_ms: f64) {
         let current = self.current_limit.load(std::sync::atomic::Ordering::Relaxed);
-        
+
         let new_limit = if error_rate > 0.1 {
             (current as f64 * 0.9) as usize
         } else if latency_ms < 100.0 {
@@ -1724,7 +1764,7 @@ impl AdaptiveLimiter {
         } else {
             current
         };
-        
+
         let clamped = new_limit.clamp(self.min_limit, self.max_limit);
         self.current_limit.store(clamped, std::sync::atomic::Ordering::Relaxed);
     }
@@ -1744,7 +1784,7 @@ pub fn create_db_pool(database_url: &str) -> Result<sqlx::PgPool, sqlx::Error> {
         .max_lifetime(Duration::from_secs(1800))
         .test_before_acquire(true)
         .connect(database_url)?;
-    
+
     Ok(pool)
 }
 
@@ -1815,7 +1855,7 @@ impl HealthChecker for DatabaseHealthCheck {
     fn name(&self) -> &str {
         "database"
     }
-    
+
     async fn check(&self) -> HealthCheck {
         match sqlx::query("SELECT 1").fetch_one(&self.pool).await {
             Ok(_) => HealthCheck {
@@ -1835,7 +1875,7 @@ impl HealthChecker for DatabaseHealthCheck {
 /// 健康检查路由
 pub fn health_routes() -> Router {
     Router::new()
-        .route("/health", get(|| async { 
+        .route("/health", get(|| async {
             Json(HealthResponse {
                 status: HealthStatus::Healthy,
                 version: env!("CARGO_PKG_VERSION").to_string(),
@@ -1872,18 +1912,18 @@ pub async fn cpu_intensive_work(data: Vec<u8>) -> Result<Vec<u8>, Box<dyn std::e
 /// 2. IO 密集型任务 - 使用普通 spawn
 pub async fn io_intensive_work(urls: Vec<String>) -> Vec<Result<String, reqwest::Error>> {
     let mut set = JoinSet::new();
-    
+
     for url in urls {
         set.spawn(async move {
             reqwest::get(&url).await?.text().await
         });
     }
-    
+
     let mut results = Vec::new();
     while let Some(result) = set.join_next().await {
         results.push(result.unwrap_or_else(|e| Err(reqwest::Error::from(e))));
     }
-    
+
     results
 }
 
@@ -1902,30 +1942,30 @@ where
 {
     let semaphore = Arc::new(tokio::sync::Semaphore::new(concurrency));
     let processor = Arc::new(processor);
-    
+
     let mut results = Vec::new();
-    
+
     for chunk in items.chunks(batch_size) {
         let mut batch_futures = Vec::new();
-        
+
         for item in chunk {
             let permit = semaphore.clone().acquire_owned().await.unwrap();
             let processor = processor.clone();
             let item = unsafe { std::ptr::read(item) };
-            
+
             batch_futures.push(task::spawn(async move {
                 let _permit = permit;
                 processor(item).await
             }));
         }
-        
+
         for future in batch_futures {
             if let Ok(result) = future.await {
                 results.push(result);
             }
         }
     }
-    
+
     results
 }
 ```
@@ -1936,7 +1976,7 @@ where
 use tokio::sync::mpsc;
 
 /// Channel 配置指南
-/// 
+///
 /// | 场景 | Channel 类型 | Buffer 大小 |
 /// |------|--------------|-------------|
 /// | 高吞吐生产者 | bounded | 10K-100K |
@@ -1947,14 +1987,14 @@ use tokio::sync::mpsc;
 pub fn create_optimized_channels() {
     // 1. bounded channel
     let (tx, _rx) = mpsc::channel::<Message>(10_000);
-    
+
     // 2. unbounded channel - 仅在特殊场景使用
     let (_unbounded_tx, _unbounded_rx) = mpsc::unbounded_channel::<Message>();
-    
+
     // 3. broadcast channel
     let (broadcast_tx, _broadcast_rx1) = tokio::sync::broadcast::channel::<Event>(100);
     let _broadcast_rx2 = broadcast_tx.subscribe();
-    
+
     // 4. watch channel
     let (_watch_tx, _watch_rx) = tokio::sync::watch::channel::<State>(State::default());
 }
@@ -1984,26 +2024,26 @@ impl<T> ObjectPool<T> {
         creator: impl Fn() -> T + Send + Sync + 'static,
     ) -> Self {
         let pool = crossbeam::queue::SegQueue::new();
-        
+
         for _ in 0..capacity {
             pool.push(creator());
         }
-        
+
         Self {
             pool,
             creator: Box::new(creator),
         }
     }
-    
+
     pub fn acquire(&self) -> PooledObject<T> {
         let obj = self.pool.pop().unwrap_or_else(|| (self.creator)());
-        
+
         PooledObject {
             pool: self,
             obj: Some(obj),
         }
     }
-    
+
     fn release(&self, obj: T) {
         self.pool.push(obj);
     }
@@ -2016,7 +2056,7 @@ pub struct PooledObject<'a, T> {
 
 impl<'a, T> std::ops::Deref for PooledObject<'a, T> {
     type Target = T;
-    
+
     fn deref(&self) -> &Self::Target {
         self.obj.as_ref().unwrap()
     }
@@ -2033,10 +2073,10 @@ impl<'a, T> Drop for PooledObject<'a, T> {
 /// 零拷贝序列化
 pub fn zero_copy_serialization() {
     use bytes::{Bytes, BytesMut, BufMut};
-    
+
     let mut buf = BytesMut::with_capacity(1024);
     buf.put_slice(b"Hello, World!");
-    
+
     // split_off 和 freeze 实现零拷贝
     let bytes: Bytes = buf.freeze();
 }
@@ -2073,21 +2113,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with(tracing_subscriber::EnvFilter::new("info"))
         .with(tracing_subscriber::fmt::layer())
         .init();
-    
+
     let db = sqlx::PgPool::connect("postgres://localhost/db").await?;
     let state = Arc::new(AppState { db });
-    
+
     let app = create_app(state);
-    
+
     let addr = "0.0.0.0:3000";
     let listener = tokio::net::TcpListener::bind(addr).await?;
-    
+
     tracing::info!("Server starting on {}", addr);
-    
+
     axum::serve(listener, app)
         .with_graceful_shutdown(shutdown_signal())
         .await?;
-    
+
     Ok(())
 }
 
@@ -2140,7 +2180,7 @@ async fn list_users(
     .fetch_all(&state.db)
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
-    
+
     Ok(Json(users))
 }
 
@@ -2156,7 +2196,7 @@ async fn create_user(
     .fetch_one(&state.db)
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
-    
+
     Ok((StatusCode::CREATED, Json(user)))
 }
 
@@ -2171,7 +2211,7 @@ async fn get_user(
     .fetch_optional(&state.db)
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
-    
+
     match user {
         Some(u) => Ok(Json(u)),
         None => Err(StatusCode::NOT_FOUND),
@@ -2254,27 +2294,27 @@ pub async fn ws_handler(
 
 async fn handle_socket(socket: WebSocket, state: Arc<WsState>) {
     let (mut sender, mut receiver) = socket.split();
-    
+
     // 获取用户名
     let username = match receiver.next().await {
         Some(Ok(Message::Text(name))) => {
             let name = name.trim().to_string();
             state.users.write().await.push(name.clone());
-            
+
             let join_msg = ChatMessage {
                 user: "System".to_string(),
                 content: format!("{} joined the chat", name),
                 timestamp: chrono::Utc::now().timestamp(),
             };
             let _ = state.tx.send(join_msg);
-            
+
             name
         }
         _ => return,
     };
-    
+
     let mut rx = state.tx.subscribe();
-    
+
     // 发送任务
     let send_task = tokio::spawn({
         let username = username.clone();
@@ -2288,7 +2328,7 @@ async fn handle_socket(socket: WebSocket, state: Arc<WsState>) {
             }
         }
     });
-    
+
     // 接收任务
     let recv_task = tokio::spawn({
         let username = username.clone();
@@ -2310,15 +2350,15 @@ async fn handle_socket(socket: WebSocket, state: Arc<WsState>) {
             }
         }
     });
-    
+
     tokio::select! {
         _ = send_task => {},
         _ = recv_task => {},
     }
-    
+
     // 清理
     state.users.write().await.retain(|u| u != &username);
-    
+
     let leave_msg = ChatMessage {
         user: "System".to_string(),
         content: format!("{} left the chat", username),
@@ -2329,7 +2369,7 @@ async fn handle_socket(socket: WebSocket, state: Arc<WsState>) {
 
 pub fn create_ws_app() -> Router {
     let state = Arc::new(WsState::new());
-    
+
     Router::new()
         .route("/ws", get(ws_handler))
         .with_state(state)
@@ -2366,17 +2406,17 @@ where
         let (output_tx, output_rx) = mpsc::channel::<R>(buffer_size);
         let semaphore = Arc::new(Semaphore::new(concurrency));
         let processor = Arc::new(processor);
-        
+
         for _ in 0..concurrency {
             let permit = semaphore.clone();
             let input = input_rx.clone();
             let output = output_tx.clone();
             let proc = processor.clone();
-            
+
             tokio::spawn(async move {
                 loop {
                     let _permit = permit.acquire().await.unwrap();
-                    
+
                     if let Some(item) = input.recv().await {
                         let result = proc(item).await;
                         if output.send(result).await.is_err() {
@@ -2388,17 +2428,17 @@ where
                 }
             });
         }
-        
+
         Self {
             input_tx,
             output_rx,
         }
     }
-    
+
     pub async fn send(&self, item: T) -> Result<(), mpsc::error::SendError<T>> {
         self.input_tx.send(item).await
     }
-    
+
     pub async fn recv(&mut self) -> Option<R> {
         self.output_rx.recv().await
     }
@@ -2422,21 +2462,19 @@ async fn process_image_batch(images: Vec<ImageTask>) -> Vec<ProcessedImage> {
             }
         },
     );
-    
+
     for image in images {
         let _ = processor.send(image).await;
     }
-    
+
     let mut results = Vec::new();
     while let Some(result) = processor.recv().await {
         results.push(result);
     }
-    
+
     results
 }
 ```
-
-
 
 ---
 
@@ -2446,14 +2484,14 @@ async fn process_image_batch(images: Vec<ImageTask>) -> Vec<ProcessedImage> {
 
 | 组件 | 官方文档 | crates.io |
 |------|----------|-----------|
-| Tokio | https://tokio.rs/tokio/tutorial | https://crates.io/crates/tokio |
-| Axum | https://docs.rs/axum/ | https://crates.io/crates/axum |
-| Tonic | https://docs.rs/tonic/ | https://crates.io/crates/tonic |
-| Tower | https://docs.rs/tower/ | https://crates.io/crates/tower |
-| Tracing | https://docs.rs/tracing/ | https://crates.io/crates/tracing |
-| Hyper | https://hyper.rs/ | https://crates.io/crates/hyper |
-| Serde | https://serde.rs/ | https://crates.io/crates/serde |
-| SQLx | https://docs.rs/sqlx/ | https://crates.io/crates/sqlx |
+| Tokio | <https://tokio.rs/tokio/tutorial> | <https://crates.io/crates/tokio> |
+| Axum | <https://docs.rs/axum/> | <https://crates.io/crates/axum> |
+| Tonic | <https://docs.rs/tonic/> | <https://crates.io/crates/tonic> |
+| Tower | <https://docs.rs/tower/> | <https://crates.io/crates/tower> |
+| Tracing | <https://docs.rs/tracing/> | <https://crates.io/crates/tracing> |
+| Hyper | <https://hyper.rs/> | <https://crates.io/crates/hyper> |
+| Serde | <https://serde.rs/> | <https://crates.io/crates/serde> |
+| SQLx | <https://docs.rs/sqlx/> | <https://crates.io/crates/sqlx> |
 
 ### 9.2 推荐依赖版本 (Cargo.toml)
 
@@ -2675,13 +2713,13 @@ let cache = Arc::new(RwLock::new(LruCache::new(1000)));
 
 | 资源 | 链接 | 类型 |
 |------|------|------|
-| Tokio 官方教程 | https://tokio.rs/tokio/tutorial | 教程 |
-| Rust Async Book | https://rust-lang.github.io/async-book/ | 书籍 |
-| Tower 文档 | https://docs.rs/tower/ | 文档 |
-| Tracing 文档 | https://docs.rs/tracing/ | 文档 |
-| Rust 性能手册 | https://nnethercote.github.io/perf-book/ | 书籍 |
-| This Week in Rust | https://this-week-in-rust.org/ | 周刊 |
-| Rust 中文社区 | https://rustcc.cn/ | 社区 |
+| Tokio 官方教程 | <https://tokio.rs/tokio/tutorial> | 教程 |
+| Rust Async Book | <https://rust-lang.github.io/async-book/> | 书籍 |
+| Tower 文档 | <https://docs.rs/tower/> | 文档 |
+| Tracing 文档 | <https://docs.rs/tracing/> | 文档 |
+| Rust 性能手册 | <https://nnethercote.github.io/perf-book/> | 书籍 |
+| This Week in Rust | <https://this-week-in-rust.org/> | 周刊 |
+| Rust 中文社区 | <https://rustcc.cn/> | 社区 |
 
 ### 9.8 版本更新日志
 
@@ -2696,24 +2734,24 @@ let cache = Arc::new(RwLock::new(LruCache::new(1000)));
 以下开源项目提供了优秀的 Tokio 生态实践参考：
 
 1. **tokio-rs/axum** - Axum 官方示例
-   https://github.com/tokio-rs/axum/tree/main/examples
+   <https://github.com/tokio-rs/axum/tree/main/examples>
 
 2. **tokio-rs/tracing** - Tracing 官方示例
-   https://github.com/tokio-rs/tracing/tree/master/examples
+   <https://github.com/tokio-rs/tracing/tree/master/examples>
 
 3. **hyperium/tonic** - Tonic 官方示例
-   https://github.com/hyperium/tonic/tree/master/examples
+   <https://github.com/hyperium/tonic/tree/master/examples>
 
 4. **tokio-rs/mini-redis** - Tokio 官方教程项目
-   https://github.com/tokio-rs/mini-redis
+   <https://github.com/tokio-rs/mini-redis>
 
 5. **tokio-rs/tokio** - Tokio 官方示例
-   https://github.com/tokio-rs/tokio/tree/master/examples
+   <https://github.com/tokio-rs/tokio/tree/master/examples>
 
 ---
 
 > **文档结束**
-> 
+>
 > 本指南由 Rust 学习项目团队维护，如有问题或建议，欢迎提交 Issue。
-> 
+>
 > 最后更新: 2026-02-28

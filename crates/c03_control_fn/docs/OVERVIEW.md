@@ -34,6 +34,7 @@
 ### 待完善
 
 详见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)。主要项：
+
 - 增补错误处理与 `Result`/`?` 的边界案例与最佳实践
 - 增补迭代器与闭包在控制流中的协同示例
 - 与 `c06_async` 的 async/await 场景互链

@@ -1,4 +1,4 @@
-﻿# 算法知识图谱系统 (Algorithm Knowledge Graph)
+# 算法知识图谱系统 (Algorithm Knowledge Graph)
 
 ## 📊 目录
 
@@ -244,8 +244,10 @@ pub fn quick_sort_parallel<T: Ord + Send>(arr: &mut [T]) {
     let (left, right) = arr.split_at_mut(pivot_idx);
 
     rayon::join(
-        || quick_sort_parallel(left),
-        || quick_sort_parallel(&mut right[1..])
+        |
+| quick_sort_parallel(left),
+        |
+| quick_sort_parallel(&mut right[1..])
     );
 }
 
@@ -766,7 +768,8 @@ pub fn lcs_optimized(text1: &str, text2: &str) -> usize {
 pub fn lcs_parallel(text1: &str, text2: &str) -> usize {
     use rayon::prelude::*;
 
-    if text1.len() < 1000 || text2.len() < 1000 {
+    if text1.len() < 1000 |
+| text2.len() < 1000 {
         return lcs(text1, text2);
     }
 
@@ -775,8 +778,10 @@ pub fn lcs_parallel(text1: &str, text2: &str) -> usize {
 
     // 并行计算两部分
     let (lcs_left, lcs_right) = rayon::join(
-        || lcs(left, text2),
-        || lcs(right, text2)
+        |
+| lcs(left, text2),
+        |
+| lcs(right, text2)
     );
 
     lcs_left.max(lcs_right)
@@ -842,7 +847,8 @@ pub async fn knapsack_01_async(
     // 模拟异步数据加载
     tokio::time::sleep(tokio::time::Duration::from_micros(1)).await;
 
-    let result = tokio::task::spawn_blocking(move || {
+    let result = tokio::task::spawn_blocking(move |
+| {
         knapsack_01_optimized(&weights, &values, capacity)
     }).await?;
 
@@ -1013,7 +1019,8 @@ graph LR
 ## 📊 算法应用场景映射
 
 | 算法类别     | 核心算法       | 应用场景           | Rust 1.92.0 特性      | 时间复杂度     |
-| :--- | :--- | :--- | :--- | :--- || **排序**     | 快速排序       | 通用排序、Top-K    | 并行化 `rayon::join`  | O(n log n)     |
+| :--- | :--- | :--- | :--- | :--- |
+| **排序**     | 快速排序       | 通用排序、Top-K    | 并行化 `rayon::join`  | O(n log n)     |
 |              | 归并排序       | 稳定排序、外部排序 | `async fn in trait`   | O(n log n)     |
 |              | 堆排序         | 优先级队列         | `const generics`      | O(n log n)     |
 | **搜索**     | 二分搜索       | 有序数据查找       | `Option::is_some_and` | O(log n)       |

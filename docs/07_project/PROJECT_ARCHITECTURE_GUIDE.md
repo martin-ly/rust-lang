@@ -450,9 +450,9 @@ fn main() {
 
 | 场景 | 实施步骤 | 参考代码 |
 | :--- | :--- | :--- |
-| **新模块接入** | 1. 使用验证脚本检查结构<br>2. 确保依赖方向正确<br>3. 更新依赖图 | `ProjectStructureValidator` |
-| **依赖分析** | 1. 运行依赖分析器<br>2. 检查循环依赖<br>3. 生成可视化 | `DependencyAnalyzer` |
-| **质量监控** | 1. 运行覆盖率检查<br>2. 对比目标值<br>3. 生成报告 | `CoverageReporter` |
+| **新模块接入** | 1. 使用验证脚本检查结构 2. 确保依赖方向正确 3. 更新依赖图 | `ProjectStructureValidator` |
+| **依赖分析** | 1. 运行依赖分析器 2. 检查循环依赖 3. 生成可视化 | `DependencyAnalyzer` |
+| **质量监控** | 1. 运行覆盖率检查 2. 对比目标值 3. 生成报告 | `CoverageReporter` |
 
 ---
 

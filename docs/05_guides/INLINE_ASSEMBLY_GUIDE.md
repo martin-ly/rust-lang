@@ -1,21 +1,43 @@
 # Rust 内联汇编完整指南
 
-> **文档状态**: ✅ 完整  
-> **Rust 版本**: 1.93.0+ (Edition 2024)  
-> **适用范围**: x86/x86_64, ARM/AArch64, RISC-V  
+> **文档状态**: ✅ 完整
+> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **适用范围**: x86/x86_64, ARM/AArch64, RISC-V
 
 ---
 
 ## 目录
 
-1. [快速开始](#快速开始)
-2. [基础语法](#基础语法)
-3. [操作数详解](#操作数详解)
-4. [汇编选项](#汇编选项)
-5. [平台特定指南](#平台特定指南)
-6. [实战示例](#实战示例)
-7. [与 naked 函数配合](#与-naked-函数配合)
-8. [常见陷阱](#常见陷阱)
+- [Rust 内联汇编完整指南](#rust-内联汇编完整指南)
+  - [目录](#目录)
+  - [快速开始](#快速开始)
+  - [基础语法](#基础语法)
+    - [asm! 宏基本结构](#asm-宏基本结构)
+    - [global\_asm! 全局汇编](#global_asm-全局汇编)
+  - [操作数详解](#操作数详解)
+    - [1. 输入操作数 (in)](#1-输入操作数-in)
+    - [2. 输出操作数 (out)](#2-输出操作数-out)
+    - [3. 输入输出操作数 (inout)](#3-输入输出操作数-inout)
+    - [4. 延迟输出 (lateout)](#4-延迟输出-lateout)
+    - [5. 内存操作数 (mem)](#5-内存操作数-mem)
+    - [6. 标签和跳转](#6-标签和跳转)
+  - [汇编选项](#汇编选项)
+    - [选项组合示例](#选项组合示例)
+  - [平台特定指南](#平台特定指南)
+    - [x86/x86\_64](#x86x86_64)
+    - [ARM/AArch64](#armaarch64)
+    - [RISC-V](#risc-v)
+  - [实战示例](#实战示例)
+    - [1. 系统调用封装](#1-系统调用封装)
+    - [2. SIMD 操作 (x86\_64 AVX)](#2-simd-操作-x86_64-avx)
+    - [3. 原子操作（自定义实现）](#3-原子操作自定义实现)
+  - [与 naked 函数配合](#与-naked-函数配合)
+  - [常见陷阱](#常见陷阱)
+    - [陷阱 1: 忘记标记 clobbered 寄存器](#陷阱-1-忘记标记-clobbered-寄存器)
+    - [陷阱 2: 输入输出操作数混淆](#陷阱-2-输入输出操作数混淆)
+    - [陷阱 3: 忘记内存屏障](#陷阱-3-忘记内存屏障)
+    - [陷阱 4: 平台假设](#陷阱-4-平台假设)
+  - [总结](#总结)
 
 ---
 
@@ -213,7 +235,7 @@ unsafe fn exit_process(code: i32) -> ! {
 #[cfg(target_arch = "x86_64")]
 mod x86_64_examples {
     use std::arch::asm;
-    
+
     /// 读取时间戳计数器 (RDTSC)
     pub unsafe fn rdtsc() -> u64 {
         let low: u32;
@@ -226,7 +248,7 @@ mod x86_64_examples {
         );
         ((high as u64) << 32) | (low as u64)
     }
-    
+
     /// 内存屏障
     pub unsafe fn memory_fence() {
         asm!(
@@ -234,7 +256,7 @@ mod x86_64_examples {
             options(nomem, nostack, preserves_flags),
         );
     }
-    
+
     /// CPUID 指令
     pub unsafe fn cpuid(leaf: u32) -> (u32, u32, u32, u32) {
         let eax: u32;
@@ -259,7 +281,7 @@ mod x86_64_examples {
 #[cfg(target_arch = "aarch64")]
 mod aarch64_examples {
     use std::arch::asm;
-    
+
     /// 读取系统计数器
     pub unsafe fn read_cntvct() -> u64 {
         let cnt: u64;
@@ -270,7 +292,7 @@ mod aarch64_examples {
         );
         cnt
     }
-    
+
     /// 数据同步屏障
     pub unsafe fn dsb() {
         asm!(
@@ -278,7 +300,7 @@ mod aarch64_examples {
             options(nomem, nostack),
         );
     }
-    
+
     /// 指令同步屏障
     pub unsafe fn isb() {
         asm!(
@@ -295,7 +317,7 @@ mod aarch64_examples {
 #[cfg(target_arch = "riscv64")]
 mod riscv_examples {
     use std::arch::asm;
-    
+
     /// 读取 cycle 计数器
     pub unsafe fn read_cycle() -> u64 {
         let cycle: u64;
@@ -306,7 +328,7 @@ mod riscv_examples {
         );
         cycle
     }
-    
+
     ///  fence 指令
     pub unsafe fn fence() {
         asm!(
@@ -370,7 +392,7 @@ pub unsafe fn add_vectors_avx(a: &[f32; 8], b: &[f32; 8]) -> [f32; 8] {
         "vmovups {3}, (%rdx)",      // 加载 b
         "vaddps {2}, {2}, {3}",     // a + b
         "vmovups (%rcx), {2}",      // 存储结果
-        
+
         inout("ymm0") a => _,
         inout("ymm1") b => _,
         in("rsi") a.as_ptr(),
@@ -400,7 +422,7 @@ impl AtomicU64 {
             value: std::cell::UnsafeCell::new(val),
         }
     }
-    
+
     /// 原子加载（使用内联汇编实现）
     #[cfg(target_arch = "x86_64")]
     pub unsafe fn load(&self, _order: Ordering) -> u64 {
@@ -413,7 +435,7 @@ impl AtomicU64 {
         );
         result
     }
-    
+
     /// 原子比较交换
     #[cfg(target_arch = "x86_64")]
     pub unsafe fn compare_exchange(
@@ -620,5 +642,5 @@ pub fn get_cycle_count() -> u64 {
 
 ---
 
-**最后更新**: 2026-02-28  
+**最后更新**: 2026-02-28
 **参考**: [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)

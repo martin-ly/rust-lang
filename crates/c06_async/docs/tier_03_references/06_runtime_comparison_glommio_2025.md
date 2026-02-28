@@ -111,8 +111,9 @@
 
 ### 1.1 运行时特性对比
 
-| 特性             | Glommio         | Tokio           | Smol           | async-std       |
-| :--- | :--- | :--- | :--- | :--- || **架构模型**     | Thread-per-core | Work-stealing   | 单线程/多线程  | Work-stealing   |
+| 特性 | Glommio | Tokio  | Smol | async-std |
+| :--- | :--- | :--- | :--- | :--- |
+| **架构模型**     | Thread-per-core | Work-stealing   | 单线程/多线程  | Work-stealing   |
 | **平台支持**     | Linux only      | 跨平台          | 跨平台         | 跨平台          |
 | **内核版本要求** | Linux 5.1+      | 无              | 无             | 无              |
 | **I/O 接口**     | io_uring        | epoll/kqueue    | epoll/kqueue   | epoll/kqueue    |

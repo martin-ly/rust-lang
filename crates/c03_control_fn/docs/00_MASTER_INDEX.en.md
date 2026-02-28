@@ -28,7 +28,8 @@
 ### Tier Structure
 
 | Tier | Name | Entry |
-| :--- | :--- | :--- || **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/) |
+| :--- | :--- | :--- |
+| **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/) |
 | **Tier 2** | Core Guides | [tier_02_guides/](tier_02_guides/) |
 | **Tier 3** | References | [tier_03_references/](tier_03_references/) |
 | **Tier 4** | Advanced | [tier_04_advanced/](tier_04_advanced/) |

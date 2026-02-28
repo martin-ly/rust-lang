@@ -51,11 +51,11 @@ fn main() {
     // 告诉 Cargo 链接 C 库
     println!("cargo:rustc-link-lib=mylib");
     println!("cargo:rustc-link-search=native=/usr/local/lib");
-    
+
     // 重新构建触发条件
     println!("cargo:rerun-if-changed=wrapper.h");
     println!("cargo:rerun-if-changed=/usr/local/lib/libmylib.a");
-    
+
     // 生成绑定
     let bindings = bindgen::Builder::default()
         .header("wrapper.h")
@@ -80,7 +80,7 @@ fn main() {
         .enable_cxx_namespaces()
         .generate()
         .expect("无法生成绑定");
-    
+
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
     bindings
         .write_to_file(out_path.join("bindings.rs"))
@@ -116,7 +116,7 @@ pub mod safe {
     use super::*;
     use std::ffi::{CStr, CString};
     use std::os::raw::c_char;
-    
+
     /// 安全的字符串处理包装
     pub fn get_version() -> String {
         unsafe {
@@ -126,35 +126,35 @@ pub mod safe {
                 .into_owned()
         }
     }
-    
+
     /// 带错误处理的数据库连接
     pub struct Database {
         ptr: *mut mylib_db_t,
     }
-    
+
     impl Database {
         pub fn open(path: &str) -> Result<Self, String> {
             let c_path = CString::new(path)
                 .map_err(|_| "无效路径".to_string())?;
-            
+
             let mut ptr = std::ptr::null_mut();
             let result = unsafe {
                 mylib_db_open(c_path.as_ptr(), &mut ptr)
             };
-            
+
             if result == 0 {
                 Ok(Self { ptr })
             } else {
                 Err(format!("打开数据库失败: {}", result))
             }
         }
-        
+
         pub fn query(&self, sql: &str) -> Result<Vec<Row>, String> {
             // 安全封装...
             todo!()
         }
     }
-    
+
     impl Drop for Database {
         fn drop(&mut self) {
             unsafe {
@@ -162,7 +162,7 @@ pub mod safe {
             }
         }
     }
-    
+
     unsafe impl Send for Database {}
     unsafe impl Sync for Database {}
 }
@@ -247,12 +247,12 @@ where
             }
         })
         .collect();
-    
+
     // 准备回调
     let mut callback_data = CallbackData {
         callback: Box::new(progress),
     };
-    
+
     let result = unsafe {
         bindings::process_persons(
             c_persons.as_ptr(),
@@ -261,14 +261,14 @@ where
             &mut callback_data as *mut _ as *mut c_void,
         )
     };
-    
+
     // 清理 CString 内存
     for p in c_persons {
         unsafe {
             let _ = CString::from_raw(p.name as *mut c_char);
         }
     }
-    
+
     if result == 0 {
         Ok(())
     } else {
@@ -291,7 +291,7 @@ impl<T: IoCallbacks> IoWrapper<T> {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
-    
+
     /// 生成 C 兼容的回调结构体
     pub fn as_c_callbacks(&mut self) -> bindings::io_callbacks_t {
         bindings::io_callbacks_t {
@@ -300,7 +300,7 @@ impl<T: IoCallbacks> IoWrapper<T> {
             user_data: self as *mut _ as *mut c_void,
         }
     }
-    
+
     unsafe extern "C" fn read_trampoline(
         buf: *mut c_void,
         len: usize,
@@ -308,13 +308,13 @@ impl<T: IoCallbacks> IoWrapper<T> {
     ) -> c_int {
         let wrapper = &mut *(user_data as *mut Self);
         let slice = std::slice::from_raw_parts_mut(buf as *mut u8, len);
-        
+
         match wrapper.inner.read(slice) {
             Ok(n) => n as c_int,
             Err(()) => -1,
         }
     }
-    
+
     unsafe extern "C" fn write_trampoline(
         buf: *const c_void,
         len: usize,
@@ -322,7 +322,7 @@ impl<T: IoCallbacks> IoWrapper<T> {
     ) -> c_int {
         let wrapper = &mut *(user_data as *mut Self);
         let slice = std::slice::from_raw_parts(buf as *const u8, len);
-        
+
         match wrapper.inner.write(slice) {
             Ok(n) => n as c_int,
             Err(()) => -1,
@@ -335,7 +335,7 @@ impl<T: IoCallbacks> IoWrapper<T> {
 
 **项目结构：**
 
-```
+```text
 sqlite-rs/
 ├── Cargo.toml
 ├── build.rs
@@ -377,7 +377,7 @@ use std::path::PathBuf;
 fn main() {
     let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
     let sqlite_dir = PathBuf::from("sqlite3");
-    
+
     // 编译 SQLite
     cc::Build::new()
         .file(sqlite_dir.join("sqlite3.c"))
@@ -386,7 +386,7 @@ fn main() {
         .flag("-DSQLITE_ENABLE_JSON1")
         .flag("-DSQLITE_THREADSAFE=1")
         .compile("sqlite3");
-    
+
     // 生成绑定
     let bindings = bindgen::Builder::default()
         .header("wrapper.h")
@@ -400,11 +400,11 @@ fn main() {
         .translate_enum_integer_types(true)
         .generate()
         .expect("生成绑定失败");
-    
+
     bindings
         .write_to_file(out_dir.join("bindings.rs"))
         .expect("写入绑定失败");
-    
+
     println!("cargo:rustc-link-lib=static=sqlite3");
     println!("cargo:rustc-link-search=native={}", out_dir.display());
 }
@@ -437,10 +437,10 @@ include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 pub enum SqliteError {
     #[error("数据库错误 {code}: {message}")]
     DatabaseError { code: i32, message: String },
-    
+
     #[error("无效 UTF-8")]
     InvalidUtf8,
-    
+
     #[error("空指针")]
     NullPointer,
 }
@@ -456,9 +456,9 @@ impl Connection {
     pub fn open(path: &str) -> Result<Self> {
         let c_path = CString::new(path).map_err(|_| SqliteError::InvalidUtf8)?;
         let mut ptr = ptr::null_mut();
-        
+
         let rc = unsafe { sqlite3_open(c_path.as_ptr(), &mut ptr) };
-        
+
         if rc != SQLITE_OK {
             let msg = unsafe {
                 CStr::from_ptr(sqlite3_errmsg(ptr))
@@ -471,14 +471,14 @@ impl Connection {
                 message: msg,
             });
         }
-        
+
         Ok(Self { ptr })
     }
-    
+
     pub fn execute(&self, sql: &str) -> Result<()> {
         let c_sql = CString::new(sql).map_err(|_| SqliteError::InvalidUtf8)?;
         let mut err_msg = ptr::null_mut();
-        
+
         let rc = unsafe {
             sqlite3_exec(
                 self.ptr,
@@ -488,7 +488,7 @@ impl Connection {
                 &mut err_msg,
             )
         };
-        
+
         if rc != SQLITE_OK {
             let msg = unsafe {
                 CStr::from_ptr(err_msg)
@@ -501,14 +501,14 @@ impl Connection {
                 message: msg,
             });
         }
-        
+
         Ok(())
     }
-    
+
     pub fn prepare(&self, sql: &str) -> Result<Statement> {
         let c_sql = CString::new(sql).map_err(|_| SqliteError::InvalidUtf8)?;
         let mut stmt = ptr::null_mut();
-        
+
         let rc = unsafe {
             sqlite3_prepare_v2(
                 self.ptr,
@@ -518,14 +518,14 @@ impl Connection {
                 ptr::null_mut(),
             )
         };
-        
+
         if rc != SQLITE_OK {
             return Err(self.last_error());
         }
-        
+
         Ok(Statement { ptr: stmt })
     }
-    
+
     fn last_error(&self) -> SqliteError {
         let code = unsafe { sqlite3_errcode(self.ptr) };
         let msg = unsafe {
@@ -565,17 +565,17 @@ impl Statement {
                 Some(sqlite3_transient_destructor),
             )
         };
-        
+
         if rc != SQLITE_OK {
             return Err(SqliteError::DatabaseError {
                 code: rc,
                 message: "绑定失败".to_string(),
             });
         }
-        
+
         Ok(())
     }
-    
+
     pub fn bind_int(&self, index: i32, value: i32) -> Result<()> {
         let rc = unsafe { sqlite3_bind_int(self.ptr, index, value) };
         if rc != SQLITE_OK {
@@ -586,7 +586,7 @@ impl Statement {
         }
         Ok(())
     }
-    
+
     pub fn step(&self) -> Result<bool> {
         let rc = unsafe { sqlite3_step(self.ptr) };
         match rc {
@@ -598,7 +598,7 @@ impl Statement {
             }),
         }
     }
-    
+
     pub fn column_text(&self, col: i32) -> Option<String> {
         let ptr = unsafe { sqlite3_column_text(self.ptr, col) };
         if ptr.is_null() {
@@ -611,11 +611,11 @@ impl Statement {
             })
         }
     }
-    
+
     pub fn column_int(&self, col: i32) -> i32 {
         unsafe { sqlite3_column_int(self.ptr, col) }
     }
-    
+
     pub fn reset(&self) -> Result<()> {
         let rc = unsafe { sqlite3_reset(self.ptr) };
         if rc != SQLITE_OK {
@@ -643,26 +643,26 @@ unsafe impl Sync for Statement {}
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_basic_operations() {
         let conn = Connection::open(":memory:").unwrap();
-        
+
         conn.execute(r#"
             CREATE TABLE users (
                 id INTEGER PRIMARY KEY,
                 name TEXT NOT NULL
             )
         "#).unwrap();
-        
+
         let stmt = conn.prepare("INSERT INTO users (name) VALUES (?)").unwrap();
         stmt.bind_text(1, "Alice").unwrap();
         stmt.step().unwrap();
         stmt.reset().unwrap();
-        
+
         stmt.bind_text(1, "Bob").unwrap();
         stmt.step().unwrap();
-        
+
         let query = conn.prepare("SELECT id, name FROM users").unwrap();
         let mut count = 0;
         while query.step().unwrap() {
@@ -671,7 +671,7 @@ mod tests {
             println!("User {}: {}", id, name);
             count += 1;
         }
-        
+
         assert_eq!(count, 2);
     }
 }
@@ -717,7 +717,7 @@ fn main() {
     let output_file = PathBuf::from(&crate_dir)
         .join("include")
         .join("mylib.h");
-    
+
     cbindgen::Builder::new()
         .with_crate(crate_dir)
         .with_config(cbindgen::Config::from_file("cbindgen.toml").unwrap())
@@ -756,7 +756,7 @@ prefix = "mylib_"
 include = ["MyStruct", "my_function"]
 exclude = ["PrivateStruct"]
 prefix = "MyLib"
-item_types = ["globals", "enums", "structs", "unions", "typedefs", 
+item_types = ["globals", "enums", "structs", "unions", "typedefs",
               "opaque", "functions", "constants"]
 
 [export.rename]
@@ -855,28 +855,28 @@ pub extern "C" fn mylib_process_string(
     if input.is_null() || output.is_null() {
         return MyLibError::NullPointer;
     }
-    
+
     let input_str = unsafe {
         match CStr::from_ptr(input).to_str() {
             Ok(s) => s,
             Err(_) => return MyLibError::InvalidUtf8,
         }
     };
-    
+
     let processed = format!("处理结果: {}", input_str.to_uppercase());
-    
+
     let output_slice = unsafe {
         std::slice::from_raw_parts_mut(output as *mut u8, output_len)
     };
-    
+
     let bytes = processed.as_bytes();
     if bytes.len() >= output_len {
         return MyLibError::AllocationFailed;
     }
-    
+
     output_slice[..bytes.len()].copy_from_slice(bytes);
     output_slice[bytes.len()] = 0; // null 终止
-    
+
     MyLibError::Ok
 }
 
@@ -899,19 +899,19 @@ pub extern "C" fn mylib_processor_new(
     if name.is_null() {
         return ptr::null_mut();
     }
-    
+
     let name_str = unsafe {
         match CStr::from_ptr(name).to_str() {
             Ok(s) => s.to_string(),
             Err(_) => return ptr::null_mut(),
         }
     };
-    
+
     let processor = Box::new(DataProcessor {
         data: Vec::new(),
         name: name_str,
     });
-    
+
     Box::into_raw(processor) as *mut MyLibProcessor
 }
 
@@ -935,10 +935,10 @@ pub extern "C" fn mylib_processor_append(
     if ptr.is_null() || data.is_null() {
         return MyLibError::NullPointer;
     }
-    
+
     let processor = unsafe { &mut *(ptr as *mut DataProcessor) };
     let slice = unsafe { std::slice::from_raw_parts(data, len) };
-    
+
     processor.data.extend_from_slice(slice);
     MyLibError::Ok
 }
@@ -949,7 +949,7 @@ pub extern "C" fn mylib_processor_len(ptr: *const MyLibProcessor) -> usize {
     if ptr.is_null() {
         return 0;
     }
-    
+
     let processor = unsafe { &*(ptr as *const DataProcessor) };
     processor.data.len()
 }
@@ -962,9 +962,9 @@ pub extern "C" fn mylib_processor_get_name(
     if ptr.is_null() {
         return ptr::null();
     }
-    
+
     let processor = unsafe { &*(ptr as *const DataProcessor) };
-    
+
     // 注意：这里返回的指针只在 processor 存在时有效
     // 更好的做法是让调用者提供缓冲区
     match CString::new(processor.name.clone()) {
@@ -998,19 +998,19 @@ pub extern "C" fn mylib_processor_foreach(
     if ptr.is_null() {
         return MyLibError::NullPointer;
     }
-    
+
     let callback = match callback {
         Some(cb) => cb,
         None => return MyLibError::NullPointer,
     };
-    
+
     let processor = unsafe { &*(ptr as *const DataProcessor) };
-    
+
     // 分块回调
     for chunk in processor.data.chunks(1024) {
         callback(chunk.as_ptr(), chunk.len(), user_data);
     }
-    
+
     MyLibError::Ok
 }
 
@@ -1046,7 +1046,7 @@ pub extern "C" fn mylib_counter_increment(ptr: *mut MyLibCounter) -> i64 {
     if ptr.is_null() {
         return -1;
     }
-    
+
     let counter = unsafe { &*(ptr as *mut SharedCounter) };
     let mut guard = counter.count.lock().unwrap();
     *guard += 1;
@@ -1058,7 +1058,7 @@ pub extern "C" fn mylib_counter_get(ptr: *const MyLibCounter) -> i64 {
     if ptr.is_null() {
         return -1;
     }
-    
+
     let counter = unsafe { &*(ptr as *const SharedCounter) };
     *counter.count.lock().unwrap()
 }
@@ -1218,39 +1218,39 @@ void on_data_chunk(const uint8_t *data, size_t len, void *user_data) {
 int main() {
     // 初始化
     mylib_init();
-    
+
     // 简单函数
     int result = mylib_add(5, 3);
     printf("5 + 3 = %d\n", result);
-    
+
     // 字符串处理
     char output[256];
     MyLibError err = mylib_process_string("hello", output, sizeof(output));
     if (err == MYLIB_OK) {
         printf("结果: %s\n", output);
     }
-    
+
     // 使用处理器（不透明指针）
     MyLibProcessor *proc = mylib_processor_new("test_processor");
     if (proc) {
         uint8_t data[] = {1, 2, 3, 4, 5};
         mylib_processor_append(proc, data, sizeof(data));
-        
+
         printf("数据大小: %zu\n", mylib_processor_len(proc));
-        
+
         // 使用回调
         int total = 0;
         mylib_processor_foreach(proc, on_data_chunk, &total);
         printf("总数据量: %d\n", total);
-        
+
         // 获取名称
         const char *name = mylib_processor_get_name(proc);
         printf("处理器名称: %s\n", name);
         mylib_string_free((char*)name);  // 释放字符串
-        
+
         mylib_processor_free(proc);
     }
-    
+
     // 线程安全计数器
     MyLibCounter *counter = mylib_counter_new();
     for (int i = 0; i < 10; i++) {
@@ -1258,7 +1258,7 @@ int main() {
     }
     printf("计数器: %lld\n", (long long)mylib_counter_get(counter));
     mylib_counter_free(counter);
-    
+
     return 0;
 }
 ```
@@ -1296,7 +1296,7 @@ rustup target add wasm32-unknown-unknown
 
 **项目结构：**
 
-```
+```text
 wasm-project/
 ├── Cargo.toml
 ├── src/lib.rs
@@ -1390,29 +1390,29 @@ impl Point {
     pub fn new(x: f64, y: f64) -> Self {
         Self { x, y }
     }
-    
+
     /// Getter
     #[wasm_bindgen(getter)]
     pub fn x(&self) -> f64 {
         self.x
     }
-    
+
     #[wasm_bindgen(getter)]
     pub fn y(&self) -> f64 {
         self.y
     }
-    
+
     /// Setter
     #[wasm_bindgen(setter)]
     pub fn set_x(&mut self, x: f64) {
         self.x = x;
     }
-    
+
     /// 方法
     pub fn distance(&self, other: &Point) -> f64 {
         ((self.x - other.x).powi(2) + (self.y - other.y).powi(2)).sqrt()
     }
-    
+
     /// 静态方法
     pub fn origin() -> Point {
         Self { x: 0.0, y: 0.0 }
@@ -1433,7 +1433,7 @@ pub struct User {
 pub fn parse_user(json: &str) -> Result<JsValue, JsValue> {
     let user: User = serde_json::from_str(json)
         .map_err(|e| JsValue::from_str(&e.to_string()))?;
-    
+
     serde_wasm_bindgen::to_value(&user)
         .map_err(|e| JsValue::from_str(&e.to_string()))
 }
@@ -1446,7 +1446,7 @@ pub fn create_user(name: &str) -> JsValue {
         email: Some("user@example.com".to_string()),
         roles: vec!["user".to_string()],
     };
-    
+
     serde_wasm_bindgen::to_value(&user).unwrap()
 }
 
@@ -1494,10 +1494,10 @@ use web_sys::Response;
 pub async fn fetch_data(url: String) -> Result<String, JsValue> {
     let window = web_sys::window().unwrap();
     let resp_value = JsFuture::from(window.fetch_with_str(&url)).await?;
-    
+
     let resp: Response = resp_value.dyn_into()?;
     let json = JsFuture::from(resp.json()?).await?;
-    
+
     // 转换为字符串
     Ok(JSON::stringify(&json)?.as_string().unwrap_or_default())
 }
@@ -1514,10 +1514,10 @@ use web_sys::{console, Document, Element, HtmlElement, Window, MouseEvent};
 extern "C" {
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
-    
+
     #[wasm_bindgen(js_namespace = console, js_name = log)]
     fn log_u32(a: u32);
-    
+
     #[wasm_bindgen(js_namespace = console, js_name = log)]
     fn log_many(a: &str, b: &str);
 }
@@ -1539,46 +1539,46 @@ impl DomManipulator {
     pub fn new() -> Result<DomManipulator, JsValue> {
         let window = web_sys::window().ok_or("no window")?;
         let document = window.document().ok_or("no document")?;
-        
+
         Ok(Self { document })
     }
-    
+
     /// 创建元素
     pub fn create_element(&self, tag: &str, content: &str) -> Result<(), JsValue> {
         let elem = self.document.create_element(tag)?;
         elem.set_text_content(Some(content));
-        
+
         let body = self.document.body().ok_or("no body")?;
         body.append_child(&elem)?;
-        
+
         Ok(())
     }
-    
+
     /// 修改样式
     pub fn set_style(&self, id: &str, property: &str, value: &str) -> Result<(), JsValue> {
         let elem = self.document
             .get_element_by_id(id)
             .ok_or("element not found")?;
-        
+
         let html_elem: HtmlElement = elem.dyn_into()?;
         html_elem.style().set_property(property, value)?;
-        
+
         Ok(())
     }
-    
+
     /// 添加事件监听
     pub fn add_click_listener(&self, id: &str) -> Result<(), JsValue> {
         let elem = self.document
             .get_element_by_id(id)
             .ok_or("element not found")?;
-        
+
         let closure = Closure::wrap(Box::new(move |event: MouseEvent| {
             console::log_1(&format!("点击位置: ({}, {})", event.client_x(), event.client_y()).into());
         }) as Box<dyn FnMut(_)>);
-        
+
         elem.add_event_listener_with_callback("click", closure.as_ref().unchecked_ref())?;
         closure.forget(); // 避免闭包被释放
-        
+
         Ok(())
     }
 }
@@ -1598,29 +1598,29 @@ impl CanvasRenderer {
         let canvas = document
             .get_element_by_id(canvas_id)
             .ok_or("Canvas not found")?;
-        
+
         let canvas: web_sys::HtmlCanvasElement = canvas.dyn_into()?;
         let context = canvas
             .get_context("2d")?
             .ok_or("Could not get 2d context")?
             .dyn_into()?;
-        
+
         Ok(Self { context })
     }
-    
+
     pub fn draw_rect(&self, x: f64, y: f64, width: f64, height: f64) {
         self.context.fill_rect(x, y, width, height);
     }
-    
+
     pub fn set_fill_color(&self, color: &str) {
         self.context.set_fill_style(&color.into());
     }
-    
+
     pub fn clear(&self) {
         let canvas = self.context.canvas().unwrap();
         self.context.clear_rect(
-            0.0, 0.0, 
-            canvas.width() as f64, 
+            0.0, 0.0,
+            canvas.width() as f64,
             canvas.height() as f64
         );
     }
@@ -1641,10 +1641,10 @@ impl AnimationLoop {
         let closure = Closure::wrap(Box::new(move || {
             f();
         }) as Box<dyn FnMut()>);
-        
+
         AnimationLoop { callback: closure }
     }
-    
+
     pub fn start(&self) {
         let window = web_sys::window().unwrap();
         window
@@ -1675,12 +1675,12 @@ impl CryptoUtils {
         let result = hasher.finalize();
         format!("{:x}", result)
     }
-    
+
     /// Base64 编码
     pub fn base64_encode(input: &[u8]) -> String {
         general_purpose::STANDARD.encode(input)
     }
-    
+
     /// Base64 解码
     pub fn base64_decode(input: &str) -> Result<Vec<u8>, JsValue> {
         general_purpose::STANDARD.decode(input)
@@ -1697,21 +1697,21 @@ impl ImageProcessor {
     /// 灰度化
     pub fn grayscale(data: &[u8]) -> Vec<u8> {
         let mut result = data.to_vec();
-        
+
         // 假设 RGBA 格式
         for chunk in result.chunks_exact_mut(4) {
-            let gray = ((chunk[0] as u16 * 299 + 
-                        chunk[1] as u16 * 587 + 
+            let gray = ((chunk[0] as u16 * 299 +
+                        chunk[1] as u16 * 587 +
                         chunk[2] as u16 * 114) / 1000) as u8;
             chunk[0] = gray;
             chunk[1] = gray;
             chunk[2] = gray;
             // chunk[3] 保持 alpha 不变
         }
-        
+
         result
     }
-    
+
     /// 调整亮度
     pub fn adjust_brightness(data: &[u8], factor: f32) -> Vec<u8> {
         data.iter()
@@ -1729,11 +1729,11 @@ pub fn compress_data(data: &[u8]) -> Result<Vec<u8>, JsValue> {
     use flate2::write::GzEncoder;
     use flate2::Compression;
     use std::io::Write;
-    
+
     let mut encoder = GzEncoder::new(Vec::new(), Compression::default());
     encoder.write_all(data)
         .map_err(|e| JsValue::from_str(&e.to_string()))?;
-    
+
     encoder.finish()
         .map_err(|e| JsValue::from_str(&e.to_string()))
 }
@@ -1754,28 +1754,28 @@ pub fn compress_data(data: &[u8]) -> Result<Vec<u8>, JsValue> {
     <input type="text" id="input" placeholder="输入文本">
     <button id="hash-btn">计算 SHA256</button>
     <p id="result"></p>
-    
+
     <canvas id="canvas" width="400" height="300"></canvas>
-    
+
     <script type="module">
         import init, { CryptoUtils, CanvasRenderer } from './pkg/wasm_project.js';
-        
+
         async function run() {
             await init();
-            
+
             // 加密功能
             document.getElementById('hash-btn').addEventListener('click', () => {
                 const input = document.getElementById('input').value;
                 const hash = CryptoUtils.sha256(input);
                 document.getElementById('result').textContent = hash;
             });
-            
+
             // Canvas 绘图
             const renderer = new CanvasRenderer('canvas');
             renderer.set_fill_color('#FF5733');
             renderer.draw_rect(50, 50, 100, 100);
         }
-        
+
         run();
     </script>
 </body>
@@ -1820,7 +1820,7 @@ impl CStrWrap {
             }
         })
     }
-    
+
     pub fn as_ptr(&self) -> *const c_char {
         self.ptr.as_ptr()
     }
@@ -1850,20 +1850,20 @@ impl<'a> CBuffer<'a> {
             _marker: PhantomData,
         }
     }
-    
+
     /// 安全地访问缓冲区
     pub fn as_mut_slice(&mut self) -> &mut [u8] {
         unsafe { std::slice::from_raw_parts_mut(self.ptr, self.len) }
     }
-    
+
     pub fn as_slice(&self) -> &[u8] {
         unsafe { std::slice::from_raw_parts(self.ptr, self.len) }
     }
-    
+
     pub fn len(&self) -> usize {
         self.len
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.len == 0
     }
@@ -1912,11 +1912,11 @@ impl FfiAllocator for CAllocator {
     unsafe fn allocate(&self, size: usize) -> *mut c_void {
         libc::malloc(size)
     }
-    
+
     unsafe fn deallocate(&self, ptr: *mut c_void) {
         libc::free(ptr);
     }
-    
+
     unsafe fn reallocate(&self, ptr: *mut c_void, _old_size: usize, new_size: usize) -> *mut c_void {
         libc::realloc(ptr, new_size)
     }
@@ -1938,15 +1938,15 @@ impl<T> FfiBox<T> {
             allocator,
         })
     }
-    
+
     pub fn as_ptr(&self) -> *mut T {
         self.ptr.as_ptr()
     }
-    
+
     pub fn as_ref(&self) -> &T {
         unsafe { self.ptr.as_ref() }
     }
-    
+
     pub fn as_mut(&mut self) -> &mut T {
         unsafe { self.ptr.as_mut() }
     }
@@ -1971,7 +1971,7 @@ pub struct StringTransfer {
     pub fn rust_to_c_temp(s: &str) -> Option<CString> {
         CString::new(s).ok()
     }
-    
+
     /// C 字符串转 Rust（复制）
     pub unsafe fn c_to_rust_copy(ptr: *const c_char) -> Option<String> {
         if ptr.is_null() {
@@ -1999,7 +1999,7 @@ impl<'a> CStrView<'a> {
             })
         }
     }
-    
+
     pub fn to_str(&self) -> Option<&str> {
         unsafe {
             CStr::from_ptr(self.ptr).to_str().ok()
@@ -2042,18 +2042,18 @@ impl FfiError {
             message: cmsg.into_raw(),
         }
     }
-    
+
     pub fn success() -> Self {
         Self {
             code: FfiErrorCode::Success,
             message: ptr::null(),
         }
     }
-    
+
     pub fn code(&self) -> FfiErrorCode {
         self.code
     }
-    
+
     pub unsafe fn message(&self) -> Option<&str> {
         if self.message.is_null() {
             None
@@ -2111,14 +2111,14 @@ pub extern "C" fn safe_operation(
 ) -> FfiError {
     ffi_check_null!(input);
     ffi_check_null!(output);
-    
+
     if output_len == 0 {
         return FfiError::new(
             FfiErrorCode::BufferTooSmall,
             "output buffer size is 0"
         );
     }
-    
+
     let input_str = unsafe {
         match CStr::from_ptr(input).to_str() {
             Ok(s) => s,
@@ -2130,23 +2130,23 @@ pub extern "C" fn safe_operation(
             }
         }
     };
-    
+
     let result = format!("处理结果: {}", input_str);
-    
+
     if result.len() >= output_len {
         return FfiError::new(
             FfiErrorCode::BufferTooSmall,
             "output buffer too small"
         );
     }
-    
+
     let output_slice = unsafe {
         std::slice::from_raw_parts_mut(output as *mut u8, output_len)
     };
-    
+
     output_slice[..result.len()].copy_from_slice(result.as_bytes());
     output_slice[result.len()] = 0;
-    
+
     FfiError::success()
 }
 
@@ -2201,7 +2201,7 @@ impl<T: Clone> PanicGuard<T> {
             default,
         }
     }
-    
+
     pub fn run<F>(&mut self, f: F) -> T
     where
         F: FnOnce() -> T + panic::UnwindSafe,
@@ -2245,10 +2245,10 @@ pub extern "C" fn process_data_safe(
         if data.is_null() {
             return;
         }
-        
+
         let slice = unsafe { std::slice::from_raw_parts(data, len) };
         let processed = expensive_operation(slice);
-        
+
         // 确保回调也受保护
         let _ = panic::catch_unwind(|| {
             callback(processed.as_ptr(), processed.len());
@@ -2311,7 +2311,7 @@ pub unsafe fn out_of_bounds() -> u8 {
 // ✅ 正确：使用 MaybeUninit
 pub fn good_uninit() -> i32 {
     use std::mem::MaybeUninit;
-    
+
     let mut x = MaybeUninit::<i32>::uninit();
     unsafe {
         x.as_mut_ptr().write(42);
@@ -2336,7 +2336,7 @@ pub fn safe_increment() {
 #[cfg(miri)]
 mod miri_tests {
     use super::*;
-    
+
     #[test]
     fn test_ffi_safety() {
         // Miri 会检查：
@@ -2344,16 +2344,16 @@ mod miri_tests {
         // 2. 内存对齐
         // 3. 生命周期
         // 4. 数据竞争
-        
+
         let mut buf = vec![0u8; 100];
-        
+
         // 模拟 FFI 调用
         unsafe {
             // 假设这是 C 函数
             simulate_c_write(buf.as_mut_ptr(), buf.len());
         }
     }
-    
+
     // Miri 提供的 FFI 辅助函数
     extern "C" fn simulate_c_write(ptr: *mut u8, len: usize) {
         unsafe {
@@ -2423,7 +2423,7 @@ pub extern "C" fn mylib_string_free(s: *mut c_char) {
 
 **Valgrind 抑制文件：**
 
-```
+```text
 # valgrind.supp
 # 抑制已知的非问题警告
 {
@@ -2527,27 +2527,27 @@ cargo test --target x86_64-unknown-linux-gnu
 mod debug {
     use std::alloc::{GlobalAlloc, Layout, System};
     use std::sync::atomic::{AtomicUsize, Ordering};
-    
+
     pub struct DebugAllocator;
-    
+
     static ALLOCATED: AtomicUsize = AtomicUsize::new(0);
     static FREED: AtomicUsize = AtomicUsize::new(0);
-    
+
     unsafe impl GlobalAlloc for DebugAllocator {
         unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
             ALLOCATED.fetch_add(layout.size(), Ordering::SeqCst);
             System.alloc(layout)
         }
-        
+
         unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
             FREED.fetch_add(layout.size(), Ordering::SeqCst);
             System.dealloc(ptr, layout);
         }
     }
-    
+
     #[global_allocator]
     static ALLOCATOR: DebugAllocator = DebugAllocator;
-    
+
     pub fn print_stats() {
         println!(
             "Allocated: {}, Freed: {}, Leaked: {}",

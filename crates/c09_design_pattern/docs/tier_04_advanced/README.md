@@ -8,8 +8,9 @@
 
 ## 📚 核心高级主题 (NEW)
 
-| 序号 | 文档                                                        | 内容                                | 行数 | 难度       | 状态 |
-| :--- | :--- | :--- | :--- | :--- | :--- || 1    | [01\_形式化设计模式理论.md](./01_形式化设计模式理论.md)     | 类型理论、范畴论、Curry-Howard 同构 | 1116 | ⭐⭐⭐⭐⭐ | ✅   |
+| 序号 | 文档 | 内容 | 行数 | 难度 | 状态 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1    | [01\_形式化设计模式理论.md](./01_形式化设计模式理论.md)     | 类型理论、范畴论、Curry-Howard 同构 | 1116 | ⭐⭐⭐⭐⭐ | ✅   |
 | 2    | [02\_架构模式演进.md](./02_架构模式演进.md)                 | 分层、微服务、事件驱动、CQRS        | 958  | ⭐⭐⭐⭐   | ✅   |
 | 3    | [03\_元编程与生成式模式.md](./03_元编程与生成式模式.md)     | 宏、过程宏、代码生成                | 652  | ⭐⭐⭐⭐   | ✅   |
 | 4    | [04\_工程实践与生产级模式.md](./04_工程实践与生产级模式.md) | 可观测性、弹性、性能、安全          | 1227 | ⭐⭐⭐⭐⭐ | ✅   |
@@ -21,8 +22,9 @@
 
 ## 🔬 现有形式化理论资源
 
-| 文档                                                                    | 主题             | 难度       |
-| :--- | :--- | :--- || [ASYNC_SYNC_EQUIVALENCE_THEORY.md](../ASYNC_SYNC_EQUIVALENCE_THEORY.md) | 异步vs同步等价性 | ⭐⭐⭐⭐⭐ |
+| 文档  | 主题 | 难度 |
+| :--- | :--- | :--- |
+| [ASYNC_SYNC_EQUIVALENCE_THEORY.md](../ASYNC_SYNC_EQUIVALENCE_THEORY.md) | 异步vs同步等价性 | ⭐⭐⭐⭐⭐ |
 | [ACTOR_REACTOR_PATTERNS.md](../ACTOR_REACTOR_PATTERNS.md)               | Actor与Reactor   | ⭐⭐⭐⭐⭐ |
 | [CSP_VS_ASYNC_ANALYSIS.md](../CSP_VS_ASYNC_ANALYSIS.md)                 | CSP vs Async     | ⭐⭐⭐⭐⭐ |
 | [ASYNC_RECURSION_ANALYSIS.md](../ASYNC_RECURSION_ANALYSIS.md)           | 异步递归         | ⭐⭐⭐⭐   |

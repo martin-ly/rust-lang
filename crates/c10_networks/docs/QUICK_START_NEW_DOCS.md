@@ -40,7 +40,8 @@
 ### 🎯 30秒速览
 
 | 想要...      | 推荐文档                                                                               | 耗时   |
-| :--- | :--- | :--- || **了解全局** | [思维导图](RUST_190_COMPREHENSIVE_EXAMPLES.md)                                         | 5分钟  |
+| :--- | :--- | :--- |
+| **了解全局** | [思维导图](RUST_190_COMPREHENSIVE_EXAMPLES.md)                                         | 5分钟  |
 | **理解概念** | [知识图谱](theory/KNOWLEDGE_GRAPH_AND_CONCEPT_RELATIONS.md)                            | 15分钟 |
 | **技术选型** | [多维矩阵](theory/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)                              | 20分钟 |
 | **动手实践** | [实战示例1](RUST_190_EXAMPLES_COLLECTION.md) + [实战示例2](RUST_190_EXAMPLES_PART2.md) | 60分钟 |

@@ -11,7 +11,8 @@
 
 本指南为官方 **Embedded Rust Book** 的入口与项目内导航，帮助在开发嵌入式 Rust 应用时快速定位到本项目的相关模块和官方资源。
 
-**形式化引用**：T-OW3 (内存安全)、T-BR1、[UNSAFE_RUST_GUIDE](./UNSAFE_RUST_GUIDE.md)（no_std、裸机 unsafe 契约）。
+**形式化引用**：T-OW3 (内存安全)、
+T-BR1、[UNSAFE_RUST_GUIDE](./UNSAFE_RUST_GUIDE.md)（no_std、裸机 unsafe 契约）。
 
 ---
 

@@ -58,7 +58,10 @@
 
 本指南介绍如何使用 C06 异步编程模块的功能，包括 async/await、Future、异步运行时、Reactor 模式、Actor 模式等。
 
-**形式化引用**：T-ASYNC1 (Future 安全性)、[async_state_machine](../research_notes/formal_methods/async_state_machine.md) T6.1-T6.3、[pin_self_referential](../research_notes/formal_methods/pin_self_referential.md) T-PIN1。详见 [THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md)。
+**形式化引用**：T-ASYNC1 (Future 安全性)、
+[async_state_machine](../research_notes/formal_methods/async_state_machine.md) T6.1-T6.3、
+[pin_self_referential](../research_notes/formal_methods/pin_self_referential.md) T-PIN1。
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md)。
 
 ---
 

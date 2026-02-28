@@ -671,7 +671,7 @@ async fn cpu_intensive_task(data: Vec<u8>) -> Vec<u8> {
 
 ### 8.2 错误处理
 
-**✅ 最佳实践**: Result 传播、Box<dyn Error>
+**✅ 最佳实践**: Result 传播、`Box<dyn Error>`
 
 ```rust
 use std::error::Error;

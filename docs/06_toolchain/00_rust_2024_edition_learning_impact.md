@@ -39,7 +39,8 @@
 
 ## 一、Rust 2024 Edition 概览
 
-Rust 2024 Edition 是 Rust 迄今为止**最大的 Edition 更新**，于 2025 年 2 月 20 日随 Rust 1.85.0 稳定发布。本项目已全面采用 `edition = "2024"`（根 Cargo.toml 及 12 个 crate）。
+Rust 2024 Edition 是 Rust 迄今为止**最大的 Edition 更新**，于 2025 年 2 月 20 日随 Rust 1.85.0 稳定发布。
+本项目已全面采用 `edition = "2024"`（根 Cargo.toml 及 12 个 crate）。
 
 ---
 

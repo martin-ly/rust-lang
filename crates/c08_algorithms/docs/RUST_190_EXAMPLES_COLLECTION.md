@@ -1,4 +1,4 @@
-﻿# 💻 Rust 1.90 算法与数据结构 - 实战示例集
+# 💻 Rust 1.90 算法与数据结构 - 实战示例集
 
 > **版本**: Rust 1.90 Edition 2024
 > **创建日期**: 2025-10-20
@@ -730,8 +730,10 @@ fn parallel_quick_sort<T: Ord + Send>(arr: &mut [T]) {
     let (left, right) = arr.split_at_mut(pivot_index);
 
     rayon::join(
-        || parallel_quick_sort(left),
-        || parallel_quick_sort(&mut right[1..])
+        |
+| parallel_quick_sort(left),
+        |
+| parallel_quick_sort(&mut right[1..])
     );
 }
 
@@ -784,14 +786,16 @@ fn word_count(text: &str) -> std::collections::HashMap<String, usize> {
     text.par_split_whitespace()
         .map(|word| (word.to_lowercase(), 1))
         .fold(
-            || std::collections::HashMap::new(),
+            |
+| std::collections::HashMap::new(),
             |mut map, (word, count)| {
                 *map.entry(word).or_insert(0) += count;
                 map
             }
         )
         .reduce(
-            || std::collections::HashMap::new(),
+            |
+| std::collections::HashMap::new(),
             |mut map1, map2| {
                 for (word, count) in map2 {
                     *map1.entry(word).or_insert(0) += count;
@@ -900,7 +904,8 @@ fn evaluate(expr: &str) -> Result<f64, String> {
             Token::Number(n) => operands.push(n),
             Token::Operator(op) => {
                 while let Some(&top_op) = operators.last() {
-                    if top_op == '(' || precedence(top_op) < precedence(op) {
+                    if top_op == '(' |
+| precedence(top_op) < precedence(op) {
                         break;
                     }
                     let op = operators.pop().unwrap();

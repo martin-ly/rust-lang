@@ -5,7 +5,8 @@
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
-| :--- | :--- | :--- || **The Rust Book** | [Ch. 16 (async)](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 并发与异步概念 |
+| :--- | :--- | :--- |
+| **The Rust Book** | [Ch. 16 (async)](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 并发与异步概念 |
 | **RBE 练习** | [Async](https://doc.rust-lang.org/rust-by-example/async.html) | async/await 语法实践 |
 | **Rust Reference** | [Async blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) | async 规范 |
 | **Tokio** | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 主流异步运行时 |
@@ -19,7 +20,8 @@
 **特点**: 实践导向，循序渐进
 
 | 文档               | 难度     | 时长  | 说明     |
-| :--- | :--- | :--- | :--- || 01_quick_start     | ⭐       | 30min | 快速入门 |
+| :--- | :--- | :--- | :--- |
+| 01_quick_start     | ⭐       | 30min | 快速入门 |
 | 02_basics          | ⭐⭐     | 2-3h  | 基础指南 |
 | 03_advanced_topics | ⭐⭐⭐   | 4-6h  | 高级主题 |
 | 04_best_practices  | ⭐⭐⭐⭐ | 参考  | 最佳实践 |
@@ -35,7 +37,8 @@
 **特点**: 理论系统，深度解析
 
 | 文档                                     | 难度       | 重要性     | 说明      |
-| :--- | :--- | :--- | :--- || 01_introduction_and_philosophy           | ⭐⭐       | ⭐⭐⭐⭐⭐ | 设计哲学  |
+| :--- | :--- | :--- | :--- |
+| 01_introduction_and_philosophy           | ⭐⭐       | ⭐⭐⭐⭐⭐ | 设计哲学  |
 | 02_runtime_and_execution_model           | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | 执行模型  |
 | 03_pinning_and_unsafe_foundations        | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | Pin机制   |
 | 04_streams_and_sinks                     | ⭐⭐⭐     | ⭐⭐⭐⭐   | 流处理    |

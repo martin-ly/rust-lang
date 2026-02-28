@@ -8,7 +8,8 @@
 ## 核心概念（4 条）
 
 | 概念 | 说明 |
-| :--- | :--- || **集合类型** | `Vec`、`HashMap`、`BTreeMap`、`HashSet`；选型看访问模式 |
+| :--- | :--- |
+| **集合类型** | `Vec`、`HashMap`、`BTreeMap`、`HashSet`；选型看访问模式 |
 | **迭代器** | `iter()`/`into_iter()`/`iter_mut()`；适配器 `map`/`filter`/`fold` |
 | **算法复杂度** | O(1)、O(log n)、O(n)；排序、搜索、图算法 |
 | **Rust 特色** | 零成本抽象；迭代器惰性求值；`sort_unstable` 等 |
@@ -18,7 +19,8 @@
 ## 常见坑与解决
 
 | 坑 | 解决 |
-| :--- | :--- || 迭代器消费后复用 | 用 `by_ref()` 或 `iter()` 多次；或 `collect` 再 `iter` |
+| :--- | :--- |
+| 迭代器消费后复用 | 用 `by_ref()` 或 `iter()` 多次；或 `collect` 再 `iter` |
 | HashMap key 无 `Hash` | 用 `BTreeMap` 或为 key 实现 `Hash` |
 | 排序稳定性 | 稳定用 `sort`；性能用 `sort_unstable` |
 | 浮点作 key | 用 `ordered_float` 或整数编码 |
@@ -28,7 +30,8 @@
 ## 集合速选
 
 | 场景 | 选型 |
-| :--- | :--- || 顺序、索引访问 | `Vec` |
+| :--- | :--- |
+| 顺序、索引访问 | `Vec` |
 | 键值查找、无序 | `HashMap` |
 | 键值有序 | `BTreeMap` |
 | 去重、成员检测 | `HashSet`/`BTreeSet` |

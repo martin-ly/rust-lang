@@ -1,4 +1,4 @@
-﻿# Rust 1.90 算法丰富示例集 (Rich Algorithm Examples)
+# Rust 1.90 算法丰富示例集 (Rich Algorithm Examples)
 
 ## 📚 目录
 
@@ -107,8 +107,10 @@ pub fn merge_sort_parallel<T: Ord + Clone + Send>(arr: &mut [T]) {
     let (left, right) = arr.split_at_mut(mid);
 
     rayon::join(
-        || merge_sort_parallel(left),
-        || merge_sort_parallel(right),
+        |
+| merge_sort_parallel(left),
+        |
+| merge_sort_parallel(right),
     );
 
     // 合并需要临时空间
@@ -129,7 +131,8 @@ pub async fn merge_sort_async<T: Ord + Clone + Send + 'static>(
 
     if len <= 10_000 {
         // 小数组用 spawn_blocking
-        return Ok(tokio::task::spawn_blocking(move || {
+        return Ok(tokio::task::spawn_blocking(move |
+| {
             arr.sort();
             arr
         }).await?);
@@ -329,8 +332,10 @@ pub fn quick_sort_parallel<T: Ord + Send>(arr: &mut [T]) {
     let (left, right) = arr.split_at_mut(pivot_idx);
 
     rayon::join(
-        || quick_sort_parallel(left),
-        || quick_sort_parallel(&mut right[1..]),
+        |
+| quick_sort_parallel(left),
+        |
+| quick_sort_parallel(&mut right[1..]),
     );
 }
 
@@ -737,7 +742,8 @@ where
     V: Eq + Hash + Clone + Send + Sync + 'static,
     W: Ord + Clone + Default + std::ops::Add<Output = W> + Send + Sync + 'static,
 {
-    tokio::task::spawn_blocking(move || dijkstra(&graph, start))
+    tokio::task::spawn_blocking(move |
+| dijkstra(&graph, start))
         .await
         .map_err(|e| e.into())
 }

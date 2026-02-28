@@ -119,7 +119,8 @@ pub struct Thread { /* fields omitted */ }
 **方法**:
 
 | 方法     | 签名                             | 说明               |
-| :--- | :--- | :--- || `id`     | `fn id(&self) -> ThreadId`       | 获取线程 ID        |
+| :--- | :--- | :--- |
+| `id`     | `fn id(&self) -> ThreadId`       | 获取线程 ID        |
 | `name`   | `fn name(&self) -> Option<&str>` | 获取线程名称       |
 | `unpark` | `fn unpark(&self)`               | 唤醒被 park 的线程 |
 
@@ -150,7 +151,8 @@ pub struct JoinHandle<T> { /* fields omitted */ }
 **方法**:
 
 | 方法          | 签名                            | 说明                      |
-| :--- | :--- | :--- || `join`        | `fn join(self) -> Result<T>`    | 等待线程完成              |
+| :--- | :--- | :--- |
+| `join`        | `fn join(self) -> Result<T>`    | 等待线程完成              |
 | `thread`      | `fn thread(&self) -> &Thread`   | 获取 Thread 句柄          |
 | `is_finished` | `fn is_finished(&self) -> bool` | 检查线程是否完成（1.61+） |
 

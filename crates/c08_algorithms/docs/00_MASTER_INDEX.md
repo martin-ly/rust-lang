@@ -5,7 +5,8 @@
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
-| :--- | :--- | :--- || **RBE 练习** | [Vectors](https://doc.rust-lang.org/rust-by-example/std/vec.html) · [HashMap](https://doc.rust-lang.org/rust-by-example/std/hash.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html) | 集合与迭代器实践 |
+| :--- | :--- | :--- |
+| **RBE 练习** | [Vectors](https://doc.rust-lang.org/rust-by-example/std/vec.html) · [HashMap](https://doc.rust-lang.org/rust-by-example/std/hash.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html) | 集合与迭代器实践 |
 | **Rust std** | [std::collections](https://doc.rust-lang.org/std/collections/), [std::iter](https://doc.rust-lang.org/std/iter/) | 标准库数据结构 |
 | **Algorithm courses** | MIT 6.006, CLRS | 算法复杂度理论 |
 
@@ -24,7 +25,7 @@ docs/
 ├── 🆕 KNOWLEDGE_GRAPH.md                      # 📊 算法知识图谱
 ├── 🆕 MULTIDIMENSIONAL_MATRIX_COMPARISON.md   # 🎯 多维矩阵对比
 ├── 🆕 MIND_MAP.md                             # 🧠 思维导图
-├── 🆕 RUST_192_RICH_EXAMPLES.md               # 💻 Rust 1.92.0 丰富示例
+├── 🆕 RUST_192_RICH_EXAMPLES.md               # 💻 Rust 1.93 丰富示例
 ├── 🆕 INTERACTIVE_LEARNING_GUIDE.md           # 🎓 交互式学习指南
 ├── 🆕 VISUAL_CODE_EXAMPLES.md                 # 🎨 可视化示例库
 │
@@ -54,8 +55,9 @@ docs/
 
 适合日常开发和学习使用的实用文档。
 
-| 文档                                                                | 主要内容                                 | 适合人群         |
-| :--- | :--- | :--- || [03_算法复杂度分析](./tier_02_guides/03_算法复杂度分析.md)         | 时间/空间复杂度、Big-O、主定理、摊还分析 | 初学者、面试准备 |
+| 文档  | 主要内容 | 适合人群 |
+| :--- | :--- | :--- |
+| [03_算法复杂度分析](./tier_02_guides/03_算法复杂度分析.md)         | 时间/空间复杂度、Big-O、主定理、摊还分析 | 初学者、面试准备 |
 | [02_数据结构实践](./tier_02_guides/02_数据结构实践.md)             | 线性表、树、图、高级数据结构             | 所有开发者       |
 | [05_并行与异步算法](./tier_02_guides/05_并行与异步算法.md)         | 异步算法设计、Tokio、Futures             | 异步编程学习者   |
 | [04_性能优化实践](./tier_02_guides/04_性能优化实践.md)             | 编译期优化、运行时优化、SIMD             | 性能优化工程师   |
@@ -67,8 +69,9 @@ docs/
 
 深入的形式化理论、数学模型和证明方法。
 
-| 文档                                                                  | 主要内容                     | 难度   |
-| :--- | :--- | :--- || [01_形式化算法理论](./tier_04_advanced/01_形式化算法理论.md)           | 算法分类、形式化定义、计算模型 | ⭐⭐⭐ |
+| 文档  | 主要内容 | 难度   |
+| :--- | :--- | :--- |
+| [01_形式化算法理论](./tier_04_advanced/01_形式化算法理论.md)           | 算法分类、形式化定义、计算模型 | ⭐⭐⭐ |
 | [02_并发算法模式](./tier_04_advanced/02_并发算法模式.md)               | Actor、Reactor、CSP          | ⭐⭐⭐ |
 | [03_分布式算法](./tier_04_advanced/03_分布式算法.md)                  | 分布式系统算法               | ⭐⭐⭐ |
 | [04_算法工程实践](./tier_04_advanced/04_算法工程实践.md)              | 工程应用最佳实践             | ⭐⭐⭐ |
@@ -89,14 +92,16 @@ docs/
 
 ### 4. Rust 特性 (tier_03_references/)
 
-| 文档                                                         | 版本 | 主要内容     |
-| :--- | :--- | :--- || [03_Rust190特性参考](./tier_03_references/03_Rust190特性参考.md) | 1.90 | 特性应用     |
+| 文档  | 版本 | 主要内容 |
+| :--- | :--- | :--- |
+| [03_Rust190特性参考](./tier_03_references/03_Rust190特性参考.md) | 1.90 | 特性应用     |
 | [RUST_192_ALGORITHMS_IMPROVEMENTS](./RUST_192_ALGORITHMS_IMPROVEMENTS.md) | 1.93 | 算法特性 ⭐  |
 
 ### 5. 参考资料 (tier_03_references/)
 
-| 文档                                                              | 用途          | 适合场景     |
-| :--- | :--- | :--- || [01_算法分类参考](./tier_03_references/01_算法分类参考.md)       | 算法索引      | 快速查找算法 |
+| 文档  | 用途  | 适合场景  |
+| :--- | :--- | :--- |
+| [01_算法分类参考](./tier_03_references/01_算法分类参考.md)       | 算法索引      | 快速查找算法 |
 | [02_数据结构参考](./tier_03_references/02_数据结构参考.md)        | 数据结构 API  | 技术参考     |
 | [04_算法性能参考](./tier_03_references/04_算法性能参考.md)       | 性能基准      | 性能调优     |
 
@@ -213,7 +218,7 @@ Week 4: 实战项目
 ### 按 Rust 版本查找
 
 - **Rust 1.90**: tier_03_references/03_Rust190特性参考.md
-- **Rust 1.93.0**: RUST_192_ALGORITHMS_IMPROVEMENTS.md
+- **Rust 1.93.1**: RUST_192_ALGORITHMS_IMPROVEMENTS.md
 
 ---
 
@@ -312,7 +317,8 @@ Week 4: 实战项目
 ## 📊 文档统计
 
 | 类别     | 文档数 | 状态   |
-| :--- | :--- | :--- || 实用指南 | 5      | ✅     |
+| :--- | :--- | :--- |
+| 实用指南 | 5      | ✅     |
 | 理论文档 | 7      | ✅     |
 | 高级专题 | 14     | ✅     |
 | Rust特性 | 4      | ✅     |

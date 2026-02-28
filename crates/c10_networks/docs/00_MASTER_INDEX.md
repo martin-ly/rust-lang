@@ -9,7 +9,8 @@
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
-| :--- | :--- | :--- || **RBE 练习** | [TCP](https://doc.rust-lang.org/rust-by-example/std_misc/net.html) | 网络基础实践 |
+| :--- | :--- | :--- |
+| **RBE 练习** | [TCP](https://doc.rust-lang.org/rust-by-example/std_misc/net.html) | 网络基础实践 |
 | **Tokio** | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 异步网络 |
 | **Hyper** | [Hyper Guide](https://hyper.rs/guides/) | HTTP 实现 |
 | **Rust std** | [std::net](https://doc.rust-lang.org/std/net/) | TCP/UDP 基础 API |
@@ -140,16 +141,18 @@
 
 ### 🎯 按角色导航
 
-| 角色           | 推荐路径                                                                                               | 关键文档           |
-| :--- | :--- | :--- || **初学者**     | [快速开始](tutorials/QUICK_START.md) → [基础概念](theory/CONCEPT_DEFINITIONS_ENHANCED.md) → Socket编程 | TCP/UDP基础        |
+| 角色 | 推荐路径 | 关键文档 |
+| :--- | :--- | :--- |
+| **初学者**     | [快速开始](tutorials/QUICK_START.md) → [基础概念](theory/CONCEPT_DEFINITIONS_ENHANCED.md) → Socket编程 | TCP/UDP基础        |
 | **中级开发者** | HTTP客户端 → WebSocket → 异步IO                                                                        | 协议实现、性能优化 |
 | **架构师**     | [网络理论](theory/NETWORK_THEORY_FOUNDATION.md) → [性能分析](guides/PERFORMANCE_ANALYSIS_GUIDE.md)     | 架构设计、扩展性   |
 | **研究者**     | [形式化验证](theory/FORMAL_VERIFICATION_FRAMEWORK.md) → [语义模型](theory/SEMANTIC_MODEL_ANALYSIS.md)  | 理论证明、模型分析 |
 
 ### 📚 按主题导航
 
-| 主题         | 文档入口                                                                      | 说明                   |
-| :--- | :--- | :--- || **入门教程** | [QUICK_START.md](tutorials/QUICK_START.md)                                    | 5分钟快速上手          |
+| 主题  | 文档入口  | 说明  |
+| :--- | :--- | :--- |
+| **入门教程** | [QUICK_START.md](tutorials/QUICK_START.md)                                    | 5分钟快速上手          |
 | **核心概念** | [CONCEPT_DEFINITIONS_ENHANCED.md](theory/CONCEPT_DEFINITIONS_ENHANCED.md)     | 网络通信概念详解       |
 | **协议实现** | [PROTOCOL_IMPLEMENTATION_GUIDE.md](guides/PROTOCOL_IMPLEMENTATION_GUIDE.md)   | TCP/UDP/HTTP/WebSocket |
 | **性能优化** | [PERFORMANCE_OPTIMIZATION_GUIDE.md](guides/PERFORMANCE_OPTIMIZATION_GUIDE.md) | 性能调优指南           |

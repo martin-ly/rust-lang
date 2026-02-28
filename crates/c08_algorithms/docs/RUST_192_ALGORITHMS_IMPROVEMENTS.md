@@ -2,7 +2,7 @@
 
 > **文档版本**: 1.0
 > **创建日期**: 2025-12-11
-> **适用版本**: Rust 1.92.0+
+> **适用版本**: Rust 1.93.1+
 > **相关模块**: `c08_algorithms`
 
 ---
@@ -56,7 +56,8 @@ Rust 1.92.0 稳定化了 `<[_]>::rotate_right` 方法，在实现循环移位和
 ```rust
 // 循环移位算法
 pub fn rotate_array_right<T>(arr: &mut [T], k: usize) {
-    if arr.is_empty() || k == 0 {
+    if arr.is_empty() |
+| k == 0 {
         return;
     }
     let len = arr.len();
