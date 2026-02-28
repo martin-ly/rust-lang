@@ -18,36 +18,36 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `research_notes/formal_methods`
   - **链接目标:** `./research_notes/formal_methods/`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `quick_reference/`
   - **链接目标:** `./02_reference/quick_reference/`
   - **解析路径:** `E:\_src\rust-lang\docs\02_reference\quick_reference`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/QUICK_REFERENCE.md`
-    -   - `archive/temp/QUICK_REFERENCE.md`
-    -   - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
+  - - `research_notes/QUICK_REFERENCE.md`
+  - - `archive/temp/QUICK_REFERENCE.md`
+  - - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
 
 - **链接文本:** `research_notes/formal_methods`
   - **链接目标:** `./research_notes/formal_methods/`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `type_theory`
   - **链接目标:** `./research_notes/type_theory/`
@@ -60,7 +60,7 @@
   - **解析路径:** `E:\_src\rust-lang\crates`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
+  - - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
 
 - **链接文本:** `01_design_patterns_formal`
   - **链接目标:** `./research_notes/software_design_theory/01_design_patterns_formal/`
@@ -73,9 +73,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `06_toolchain`
   - **链接目标:** `./06_toolchain/`
@@ -94,9 +94,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `research_notes/type_theory`
   - **链接目标:** `./research_notes/type_theory/`
@@ -109,18 +109,18 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `formal_methods/`
   - **链接目标:** `./research_notes/formal_methods/`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `type_theory/`
   - **链接目标:** `./research_notes/type_theory/`
@@ -133,9 +133,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `type_theory/`
   - **链接目标:** `./research_notes/type_theory/`
@@ -148,9 +148,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `01_design_patterns`
   - **链接目标:** `./research_notes/software_design_theory/01_design_patterns_formal/`
@@ -235,9 +235,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `05_guides/`
   - **链接目标:** `./05_guides/`
@@ -262,9 +262,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `04_compositional_engineering`
   - **链接目标:** `./research_notes/software_design_theory/04_compositional_engineering/`
@@ -277,9 +277,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\05_guides\workflow`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/WORKFLOW_CONCEPT_MINDMAP.md`
-    -   - `research_notes/formal_methods/WORKFLOW_ENGINES_MATRIX.md`
-    -   - `research_notes/formal_methods/WORKFLOW_ENGINE_DECISION_TREE.md`
+  - - `research_notes/formal_methods/WORKFLOW_CONCEPT_MINDMAP.md`
+  - - `research_notes/formal_methods/WORKFLOW_ENGINES_MATRIX.md`
+  - - `research_notes/formal_methods/WORKFLOW_ENGINE_DECISION_TREE.md`
 
 - **链接文本:** `02_workflow_safe_complete`
   - **链接目标:** `./research_notes/software_design_theory/02_workflow_safe_complete_models/`
@@ -310,14 +310,14 @@
   - **解析路径:** `E:\_src\rust-lang\crates`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
+  - - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
 
 - **链接文本:** `crates/`
   - **链接目标:** `../crates/`
   - **解析路径:** `E:\_src\rust-lang\crates`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
+  - - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
 
 - **链接文本:** `software_design_theory/04_compositional_engineering`
   - **链接目标:** `./research_notes/software_design_theory/04_compositional_engineering/`
@@ -336,7 +336,7 @@
   - **解析路径:** `E:\_src\rust-lang\crates`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
+  - - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
 
 - **链接文本:** `06_toolchain/`
   - **链接目标:** `./06_toolchain/`
@@ -349,9 +349,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `archive/process_reports/`
   - **链接目标:** `./archive/process_reports/`
@@ -364,9 +364,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `ARCHIVE_COMPLETION_REPORT.md`
-    -   - `archive/root_completion_reports/ARCHIVE_SUMMARY.md`
-    -   - `archive/root_completion_reports/ARCHIVE_SUMMARY_2025_12_25.md`
+  - - `ARCHIVE_COMPLETION_REPORT.md`
+  - - `archive/root_completion_reports/ARCHIVE_SUMMARY.md`
+  - - `archive/root_completion_reports/ARCHIVE_SUMMARY_2025_12_25.md`
 
 - **链接文本:** `archive/process_reports/`
   - **链接目标:** `./archive/process_reports/`
@@ -401,18 +401,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `formal_methods`
   - **链接目标:** `../research_notes/formal_methods/`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `05_guides/`
   - **链接目标:** `../05_guides/`
@@ -425,9 +425,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\01_learning`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `00_MASTER_INDEX.md`
-    -   - `100_PERCENT_COMPLETION_FINAL_REPORT.md`
-    -   - `100_PERCENT_COMPLETION_REPORT_2026_02_24.md`
+  - - `00_MASTER_INDEX.md`
+  - - `100_PERCENT_COMPLETION_FINAL_REPORT.md`
+  - - `100_PERCENT_COMPLETION_REPORT_2026_02_24.md`
 
 - **链接文本:** `05_guides/`
   - **链接目标:** `../05_guides/`
@@ -440,9 +440,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\02_reference\quick_reference`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/QUICK_REFERENCE.md`
-    -   - `archive/temp/QUICK_REFERENCE.md`
-    -   - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
+  - - `research_notes/QUICK_REFERENCE.md`
+  - - `archive/temp/QUICK_REFERENCE.md`
+  - - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
 
 - **链接文本:** `05_guides/`
   - **链接目标:** `../05_guides/`
@@ -463,9 +463,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\02_reference\quick_reference`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/QUICK_REFERENCE.md`
-    -   - `archive/temp/QUICK_REFERENCE.md`
-    -   - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
+  - - `research_notes/QUICK_REFERENCE.md`
+  - - `archive/temp/QUICK_REFERENCE.md`
+  - - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
 
 - **链接文本:** `../05_guides/`
   - **链接目标:** `../05_guides/`
@@ -494,9 +494,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\02_reference\quick_reference`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/QUICK_REFERENCE.md`
-    -   - `archive/temp/QUICK_REFERENCE.md`
-    -   - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
+  - - `research_notes/QUICK_REFERENCE.md`
+  - - `archive/temp/QUICK_REFERENCE.md`
+  - - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
 
 ### `02_reference/quick_reference/ANTI_PATTERN_TEMPLATE.md`
 
@@ -513,180 +513,180 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `所有权系统完整文档`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `异步编程完整文档`
   - **链接目标:** `../../../crates/c06_async/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c06_async\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `控制流与函数文档`
   - **链接目标:** `../../../crates/c03_control_fn/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `泛型编程文档`
   - **链接目标:** `../../../crates/c04_generic/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c04_generic\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `线程与并发文档`
   - **链接目标:** `../../../crates/c05_threads/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `进程管理文档`
   - **链接目标:** `../../../crates/c07_process/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c07_process\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `算法与数据结构文档`
   - **链接目标:** `../../../crates/c08_algorithms/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c08_algorithms\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `设计模式文档`
   - **链接目标:** `../../../crates/c09_design_pattern/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c09_design_pattern\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `网络编程文档`
   - **链接目标:** `../../../crates/c10_networks/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c10_networks\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `宏系统文档`
   - **链接目标:** `../../../crates/c11_macro_system/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c11_macro_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `WASM 文档`
   - **链接目标:** `../../../crates/c12_wasm/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c12_wasm\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `类型系统示例`
   - **链接目标:** `../../../crates/c02_type_system/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `所有权系统示例`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `异步编程示例`
   - **链接目标:** `../../../crates/c06_async/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c06_async\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `控制流与函数示例`
   - **链接目标:** `../../../crates/c03_control_fn/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `算法示例`
   - **链接目标:** `../../../crates/c08_algorithms/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c08_algorithms\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `网络编程示例`
   - **链接目标:** `../../../crates/c10_networks/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c10_networks\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `WASM 示例`
   - **链接目标:** `../../../crates/c12_wasm/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c12_wasm\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `形式化方法研究`
   - **链接目标:** `../../research_notes/formal_methods/`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `类型理论研究`
   - **链接目标:** `../../research_notes/type_theory/`
@@ -707,18 +707,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c08_algorithms\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c08_algorithms/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c08_algorithms\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `工作流安全完整模型`
   - **链接目标:** `../../research_notes/software_design_theory/02_workflow_safe_complete_models/`
@@ -733,18 +733,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c06_async\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c06_async/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c06_async\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `Actor 模式`
   - **链接目标:** `../../../crates/c06_async/src/actix/`
@@ -757,18 +757,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c06_async\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `异步编程完整文档`
   - **链接目标:** `../../../crates/c06_async/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c06_async\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `02_reference/quick_reference/cargo_cheatsheet.md`
 
@@ -777,7 +777,7 @@
   - **解析路径:** `E:\_src\rust-lang\crates`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
+  - - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
 
 - **链接文本:** `Cargo 包管理完整文档`
   - **链接目标:** `../../../crates/c02_type_system/docs/cargo_package_management/`
@@ -798,7 +798,7 @@
   - **解析路径:** `E:\_src\rust-lang\crates`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
+  - - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
 
 ### `02_reference/quick_reference/control_flow_functions_cheatsheet.md`
 
@@ -807,36 +807,36 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c03_control_fn/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `控制流与函数完整文档`
   - **链接目标:** `../../../crates/c03_control_fn/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `完整控制流文档`
   - **链接目标:** `../../../crates/c03_control_fn/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `02_reference/quick_reference/design_patterns_cheatsheet.md`
 
@@ -845,27 +845,27 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c09_design_pattern\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c09_design_pattern/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c09_design_pattern\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `设计模式完整文档`
   - **链接目标:** `../../../crates/c09_design_pattern/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c09_design_pattern\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `创建型模式形式化`
   - **链接目标:** `../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/`
@@ -892,27 +892,27 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c03_control_fn/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `控制流与错误处理文档`
   - **链接目标:** `../../../crates/c03_control_fn/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `02_reference/quick_reference/generics_cheatsheet.md`
 
@@ -921,36 +921,36 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c04_generic\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c04_generic/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c04_generic\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `泛型编程完整文档`
   - **链接目标:** `../../../crates/c04_generic/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c04_generic\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `泛型完整文档`
   - **链接目标:** `../../../crates/c04_generic/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c04_generic\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `类型系统研究笔记`
   - **链接目标:** `../../research_notes/type_theory/`
@@ -965,36 +965,36 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c11_macro_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c11_macro_system/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c11_macro_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `宏系统完整文档`
   - **链接目标:** `../../../crates/c11_macro_system/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c11_macro_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `宏系统完整文档`
   - **链接目标:** `../../../crates/c11_macro_system/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c11_macro_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `02_reference/quick_reference/modules_cheatsheet.md`
 
@@ -1003,7 +1003,7 @@
   - **解析路径:** `E:\_src\rust-lang\crates`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
+  - - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
 
 ### `02_reference/quick_reference/network_programming_cheatsheet.md`
 
@@ -1012,36 +1012,36 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c10_networks\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c10_networks/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c10_networks\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `网络模块完整文档`
   - **链接目标:** `../../../crates/c10_networks/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c10_networks\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `形式化方法研究`
   - **链接目标:** `../../research_notes/formal_methods/`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 ### `02_reference/quick_reference/ownership_cheatsheet.md`
 
@@ -1050,36 +1050,36 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `所有权系统完整文档`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `所有权系统完整文档`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `02_reference/quick_reference/process_management_cheatsheet.md`
 
@@ -1088,36 +1088,36 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c07_process\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c07_process/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c07_process\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `进程管理完整文档`
   - **链接目标:** `../../../crates/c07_process/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c07_process\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `形式化方法研究`
   - **链接目标:** `../../research_notes/formal_methods/`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 ### `02_reference/quick_reference/smart_pointers_cheatsheet.md`
 
@@ -1126,36 +1126,36 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `所有权与智能指针文档`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `智能指针示例`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 ### `02_reference/quick_reference/strings_formatting_cheatsheet.md`
 
@@ -1164,27 +1164,27 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c02_type_system/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `完整类型系统文档`
   - **链接目标:** `../../../crates/c02_type_system/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `02_reference/quick_reference/testing_cheatsheet.md`
 
@@ -1199,7 +1199,7 @@
   - **解析路径:** `E:\_src\rust-lang\crates`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
+  - - `archive/process_reports/CRATES_PLAN_100_PERCENT_COMPLETION_2026_02.md`
 
 - **链接文本:** `完整测试文档（项目内）`
   - **链接目标:** `../../rust-formal-engineering-system/05_software_engineering/07_testing/`
@@ -1218,9 +1218,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 ### `02_reference/quick_reference/threads_concurrency_cheatsheet.md`
 
@@ -1229,36 +1229,36 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c05_threads/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `线程与并发完整文档`
   - **链接目标:** `../../../crates/c05_threads/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `线程与并发完整文档`
   - **链接目标:** `../../../crates/c05_threads/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `02_reference/quick_reference/type_system.md`
 
@@ -1267,18 +1267,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c02_type_system/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `类型系统理论`
   - **链接目标:** `../../../crates/c02_type_system/docs/tier_04_advanced/`
@@ -1291,9 +1291,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `类型转换`
   - **链接目标:** `../../../crates/c02_type_system/src/`
@@ -1306,18 +1306,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `类型系统完整文档`
   - **链接目标:** `../../../crates/c02_type_system/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `类型系统研究笔记`
   - **链接目标:** `../../research_notes/type_theory/`
@@ -1332,27 +1332,27 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c12_wasm\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c12_wasm/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c12_wasm\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `WASM 完整文档`
   - **链接目标:** `../../../crates/c12_wasm/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c12_wasm\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `04_thinking/MIND_MAP_COLLECTION.md`
 
@@ -1361,9 +1361,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 ### `05_guides/CLI_APPLICATIONS_GUIDE.md`
 
@@ -1378,9 +1378,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c07_process\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `C07 进程管理`
   - **链接目标:** `../../crates/c07_process/`
@@ -1433,27 +1433,27 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `C05 线程与并发`
   - **链接目标:** `../../crates/c05_threads/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `C12 WASM`
   - **链接目标:** `../../crates/c12_wasm/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c12_wasm\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `06_toolchain/README.md`
 
@@ -1468,7 +1468,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `06_toolchain/01_compiler_features.md`
+  - - `06_toolchain/01_compiler_features.md`
 
 - **链接文本:** `包管理器理论`
   - **链接目标:** `../rust-formal-engineering-system/06_toolchain_ecosystem/02_package_manager/`
@@ -1487,9 +1487,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c08_algorithms\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md`
 
@@ -1594,9 +1594,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 ### `DOCS_STRUCTURE_OVERVIEW.md`
 
@@ -1625,27 +1625,27 @@
   - **解析路径:** `E:\crates\xxx\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/xxx/examples/`
   - **解析路径:** `E:\crates\xxx\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `02_reference/quick_reference/`
   - **链接目标:** `./02_reference/quick_reference/`
   - **解析路径:** `E:\_src\rust-lang\docs\02_reference\quick_reference`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/QUICK_REFERENCE.md`
-    -   - `archive/temp/QUICK_REFERENCE.md`
-    -   - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
+  - - `research_notes/QUICK_REFERENCE.md`
+  - - `archive/temp/QUICK_REFERENCE.md`
+  - - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
 
 - **链接文本:** `rust-formal-engineering-system/`
   - **链接目标:** `./rust-formal-engineering-system/`
@@ -1660,9 +1660,9 @@
   - **解析路径:** `E:\_src\rust-lang\archive\process_reports\2026_02`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `100_PERCENT_COMPLETION_REPORT_2026_02_24.md`
-    -   - `COMPLETION_STATUS_2026_02_23.md`
-    -   - `COMPREHENSIVE_COMPLETION_STATUS_2026_02_23.md`
+  - - `100_PERCENT_COMPLETION_REPORT_2026_02_24.md`
+  - - `COMPLETION_STATUS_2026_02_23.md`
+  - - `COMPREHENSIVE_COMPLETION_STATUS_2026_02_23.md`
 
 ### `NETWORK_ALIGNMENT_COMPLETION_REPORT.md`
 
@@ -1685,9 +1685,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\process_reports\2026_02`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `100_PERCENT_COMPLETION_REPORT_2026_02_24.md`
-    -   - `COMPLETION_STATUS_2026_02_23.md`
-    -   - `COMPREHENSIVE_COMPLETION_STATUS_2026_02_23.md`
+  - - `100_PERCENT_COMPLETION_REPORT_2026_02_24.md`
+  - - `COMPLETION_STATUS_2026_02_23.md`
+  - - `COMPREHENSIVE_COMPLETION_STATUS_2026_02_23.md`
 
 ### `WEEK1_COMPLETION_REPORT.md`
 
@@ -1696,9 +1696,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 ### `archive/deprecated/AENEAS_INTEGRATION_PLAN.md`
 
@@ -1713,77 +1713,77 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `borrow_checker_proof`
   - **链接目标:** `./formal_methods/borrow_checker_proof.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\borrow_checker_proof.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/borrow_checker_proof.md`
+  - - `research_notes/formal_methods/borrow_checker_proof.md`
 
 - **链接文本:** `RustBelt`
   - **链接目标:** `./formal_methods/ownership_model.md#rustbelt`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `ownership_model.md`
   - **链接目标:** `./formal_methods/ownership_model.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `ownership_model.md`
   - **链接目标:** `./formal_methods/ownership_model.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `borrow_checker_proof.md`
   - **链接目标:** `./formal_methods/borrow_checker_proof.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\borrow_checker_proof.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/borrow_checker_proof.md`
+  - - `research_notes/formal_methods/borrow_checker_proof.md`
 
 - **链接文本:** `borrow_checker_proof.md`
   - **链接目标:** `./formal_methods/borrow_checker_proof.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\borrow_checker_proof.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/borrow_checker_proof.md`
+  - - `research_notes/formal_methods/borrow_checker_proof.md`
 
 - **链接文本:** `type_system_foundations`
   - **链接目标:** `./type_theory/type_system_foundations.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\type_theory\type_system_foundations.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/type_theory/type_system_foundations.md`
+  - - `research_notes/type_theory/type_system_foundations.md`
 
 - **链接文本:** `type_system_foundations`
   - **链接目标:** `./type_theory/type_system_foundations.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\type_theory\type_system_foundations.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/type_theory/type_system_foundations.md`
+  - - `research_notes/type_theory/type_system_foundations.md`
 
 - **链接文本:** `00_ORGANIZATION § 六 权威来源与版本约定`
   - **链接目标:** `./00_ORGANIZATION_AND_NAVIGATION.md#六权威来源与版本约定`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\00_ORGANIZATION_AND_NAVIGATION.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/00_ORGANIZATION_AND_NAVIGATION.md`
+  - - `research_notes/00_ORGANIZATION_AND_NAVIGATION.md`
 
 - **链接文本:** `RUST_193_COUNTEREXAMPLES_INDEX`
   - **链接目标:** `./RUST_193_COUNTEREXAMPLES_INDEX.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\RUST_193_COUNTEREXAMPLES_INDEX.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 ### `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
@@ -1792,92 +1792,92 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md`
-    -   - `archive/process_reports/2026_02/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md`
+  - - `research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md`
+  - - `archive/process_reports/2026_02/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `./CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `FORMAL_VERIFICATION_GUIDE`
   - **链接目标:** `./FORMAL_VERIFICATION_GUIDE.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\FORMAL_VERIFICATION_GUIDE.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_VERIFICATION_GUIDE.md`
+  - - `research_notes/FORMAL_VERIFICATION_GUIDE.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `./CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `./CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `./CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `./CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `./CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `./CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `./CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `ownership_model.md`
   - **链接目标:** `./formal_methods/ownership_model.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `borrow_checker_proof.md`
   - **链接目标:** `./formal_methods/borrow_checker_proof.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\borrow_checker_proof.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/borrow_checker_proof.md`
+  - - `research_notes/formal_methods/borrow_checker_proof.md`
 
 - **链接文本:** `type_system_foundations.md`
   - **链接目标:** `./type_theory/type_system_foundations.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\type_theory\type_system_foundations.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/type_theory/type_system_foundations.md`
+  - - `research_notes/type_theory/type_system_foundations.md`
 
 ### `archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md`
 
@@ -1886,7 +1886,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md`
+  - - `research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md`
 
 ### `archive/deprecated/README.md`
 
@@ -1903,49 +1903,49 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `../CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `../CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `CORE_THEOREMS_FULL_PROOFS`
   - **链接目标:** `../CORE_THEOREMS_FULL_PROOFS.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\CORE_THEOREMS_FULL_PROOFS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
+  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
 
 - **链接文本:** `formal_methods/ownership_model.md`
   - **链接目标:** `../formal_methods/ownership_model.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `formal_methods/borrow_checker_proof.md`
   - **链接目标:** `../formal_methods/borrow_checker_proof.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\formal_methods\borrow_checker_proof.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/borrow_checker_proof.md`
+  - - `research_notes/formal_methods/borrow_checker_proof.md`
 
 - **链接文本:** `type_theory/type_system_foundations.md`
   - **链接目标:** `../type_theory/type_system_foundations.md`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\deprecated\type_theory\type_system_foundations.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/type_theory/type_system_foundations.md`
+  - - `research_notes/type_theory/type_system_foundations.md`
 
 ### `archive/process_reports/2026_02/DEEP_CONTENT_IMPROVEMENT_PLAN.md`
 
@@ -1974,16 +1974,16 @@
   - **解析路径:** `E:\_src\rust-lang\docs\docs\path`
   - **修复建议:**
     - 相似文件:
-    -   - `01_learning/LEARNING_PATH_PLANNING.md`
-    -   - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
+  - - `01_learning/LEARNING_PATH_PLANNING.md`
+  - - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
 
 - **链接文本:** `文本`
   - **链接目标:** `./path`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\process_reports\2026_02\path`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `01_learning/LEARNING_PATH_PLANNING.md`
-    -   - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
+  - - `01_learning/LEARNING_PATH_PLANNING.md`
+  - - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
 
 ### `archive/process_reports/2026_02/DOCUMENTATION_CONTENT_AUDIT_REPORT.md`
 
@@ -2012,14 +2012,14 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 - **链接文本:** `COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **链接目标:** `../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 ### `archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md`
 
@@ -2028,16 +2028,16 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\process_reports\2026_02\path`
   - **修复建议:**
     - 相似文件:
-    -   - `01_learning/LEARNING_PATH_PLANNING.md`
-    -   - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
+  - - `01_learning/LEARNING_PATH_PLANNING.md`
+  - - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
 
 - **链接文本:** `文本`
   - **链接目标:** `path`
   - **解析路径:** `E:\_src\rust-lang\docs\archive\process_reports\2026_02\path`
   - **修复建议:**
     - 相似文件:
-    -   - `01_learning/LEARNING_PATH_PLANNING.md`
-    -   - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
+  - - `01_learning/LEARNING_PATH_PLANNING.md`
+  - - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
 
 ### `archive/process_reports/2026_02/FORMAT_CHECKLIST_QUICK.md`
 
@@ -2054,28 +2054,28 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 - **链接文本:** `COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **链接目标:** `../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 - **链接文本:** `COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **链接目标:** `../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 - **链接文本:** `COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **链接目标:** `../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 ### `archive/process_reports/2026_02/project/ONE_PAGE_SUMMARY_TEMPLATE.md`
 
@@ -2110,7 +2110,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\process_reports\PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/process_reports/2026_02/project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md`
+  - - `archive/process_reports/2026_02/project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md`
 
 ### `archive/reports/RUST_1.91_FEATURES_COMPREHENSIVE.md`
 
@@ -2119,7 +2119,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\reports\toolchain\04_rust_1.91_vs_1.90_comparison.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `06_toolchain/04_rust_1.91_vs_1.90_comparison.md`
+  - - `06_toolchain/04_rust_1.91_vs_1.90_comparison.md`
 
 ### `archive/reports/formal_system_reports/DOCUMENTATION_ENHANCEMENT_REPORT_2025_09_27.md`
 
@@ -2128,9 +2128,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\reports\formal_system_reports\README.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `README.md`
-    -   - `01_learning/README.md`
-    -   - `02_reference/README.md`
+  - - `README.md`
+  - - `01_learning/README.md`
+  - - `02_reference/README.md`
 
 ### `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
 
@@ -2189,7 +2189,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\root_completion_reports\PROGRESS_TRACKING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/PROGRESS_TRACKING.md`
+  - - `research_notes/PROGRESS_TRACKING.md`
 
 ### `archive/root_completion_reports/COMPREHENSIVE_PROGRESS_REPORT_2025_12_25.md`
 
@@ -2198,7 +2198,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\root_completion_reports\PROGRESS_TRACKING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/PROGRESS_TRACKING.md`
+  - - `research_notes/PROGRESS_TRACKING.md`
 
 ### `archive/root_completion_reports/FINAL_100_PERCENT_COMPLETION_REPORT_2026_01_27.md`
 
@@ -2215,7 +2215,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\root_completion_reports\PROGRESS_TRACKING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/PROGRESS_TRACKING.md`
+  - - `research_notes/PROGRESS_TRACKING.md`
 
 ### `archive/root_completion_reports/ULTIMATE_COMPLETION_REPORT_2025_12_25.md`
 
@@ -2224,7 +2224,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\root_completion_reports\PROGRESS_TRACKING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/PROGRESS_TRACKING.md`
+  - - `research_notes/PROGRESS_TRACKING.md`
 
 ### `archive/spell_check/SPELL_CHECK_FINAL_COMPLETION.md`
 
@@ -2239,7 +2239,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\spell_check\QUICK_START_SPELL_CHECK.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/temp/QUICK_START_SPELL_CHECK.md`
+  - - `archive/temp/QUICK_START_SPELL_CHECK.md`
 
 ### `archive/spell_check/SPELL_CHECK_SETUP_SUMMARY.md`
 
@@ -2254,7 +2254,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\spell_check\QUICK_START_SPELL_CHECK.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/temp/QUICK_START_SPELL_CHECK.md`
+  - - `archive/temp/QUICK_START_SPELL_CHECK.md`
 
 - **链接文本:** `VS Code 配置`
   - **链接目标:** `./.vscode/settings.json`
@@ -2279,7 +2279,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\spell_check\QUICK_START_SPELL_CHECK.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/temp/QUICK_START_SPELL_CHECK.md`
+  - - `archive/temp/QUICK_START_SPELL_CHECK.md`
 
 ### `archive/spell_check/SPELL_CHECK_SUPPLEMENT_REPORT.md`
 
@@ -2288,7 +2288,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\spell_check\QUICK_START_SPELL_CHECK.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/temp/QUICK_START_SPELL_CHECK.md`
+  - - `archive/temp/QUICK_START_SPELL_CHECK.md`
 
 ### `archive/temp/FORMAL_AND_PRACTICAL_NAVIGATION.md`
 
@@ -2309,9 +2309,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `测试用例`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/tests/`
@@ -2324,9 +2324,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `类型系统形式化理论`
   - **链接目标:** `../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/`
@@ -2345,18 +2345,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `Tier 文档`
   - **链接目标:** `../../../crates/c02_type_system/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `测试用例`
   - **链接目标:** `../../../crates/c02_type_system/tests/`
@@ -2381,18 +2381,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `并发控制实现`
   - **链接目标:** `../../../crates/c05_threads/src/concurrency/`
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\src\concurrency`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md`
-    -   - `research_notes/CONCURRENCY_CHEATSHEET.md`
-    -   - `research_notes/TUTORIAL_CONCURRENCY_MODELS.md`
+  - - `05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md`
+  - - `research_notes/CONCURRENCY_CHEATSHEET.md`
+  - - `research_notes/TUTORIAL_CONCURRENCY_MODELS.md`
 
 - **链接文本:** `无锁数据结构实现`
   - **链接目标:** `../../../crates/c05_threads/src/lockfree/`
@@ -2423,25 +2423,25 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `异步编程范式理论`
   - **链接目标:** `../../rust-formal-engineering-system/02_programming_paradigms/02_async/`
   - **解析路径:** `E:\_src\rust-lang\docs\rust-formal-engineering-system\02_programming_paradigms\02_async`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/03_execution_models/02_async.md`
+  - - `research_notes/software_design_theory/03_execution_models/02_async.md`
 
 - **链接文本:** `代码示例`
   - **链接目标:** `../../../crates/c06_async/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c06_async\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `Reactor 模式实现`
   - **链接目标:** `../../../../crates/c06_async/src/reactor/`
@@ -2478,9 +2478,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c09_design_pattern\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `创建型模式实现`
   - **链接目标:** `../../../crates/c09_design_pattern/src/creational/`
@@ -2505,9 +2505,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c09_design_pattern\src\concurrency`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md`
-    -   - `research_notes/CONCURRENCY_CHEATSHEET.md`
-    -   - `research_notes/TUTORIAL_CONCURRENCY_MODELS.md`
+  - - `05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md`
+  - - `research_notes/CONCURRENCY_CHEATSHEET.md`
+  - - `research_notes/TUTORIAL_CONCURRENCY_MODELS.md`
 
 - **链接文本:** `测试用例`
   - **链接目标:** `../../../crates/c09_design_pattern/tests/`
@@ -2532,18 +2532,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c11_macro_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `声明宏示例`
   - **链接目标:** `../../../crates/c11_macro_system/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c11_macro_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `过程宏示例`
   - **链接目标:** `../../../crates/c11_macro_system/src/`
@@ -2562,7 +2562,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\rust-formal-engineering-system\02_programming_paradigms\01_synchronous`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/03_execution_models/01_synchronous.md`
+  - - `research_notes/software_design_theory/03_execution_models/01_synchronous.md`
 
 - **链接文本:** `C03 控制流与函数模块`
   - **链接目标:** `../../../crates/c03_control_fn/`
@@ -2575,18 +2575,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `Tier 文档`
   - **链接目标:** `../../../crates/c03_control_fn/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c03_control_fn\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `测试用例`
   - **链接目标:** `../../../crates/c03_control_fn/tests/`
@@ -2611,8 +2611,8 @@
   - **解析路径:** `E:\_src\rust-lang\docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\generics`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/GENERICS_TRAITS_MINDMAP.md`
-    -   - `02_reference/quick_reference/generics_cheatsheet.md`
+  - - `research_notes/formal_methods/GENERICS_TRAITS_MINDMAP.md`
+  - - `02_reference/quick_reference/generics_cheatsheet.md`
 
 - **链接文本:** `C04 泛型编程模块`
   - **链接目标:** `../../../crates/c04_generic/`
@@ -2625,18 +2625,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c04_generic\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `Tier 文档`
   - **链接目标:** `../../../crates/c04_generic/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c04_generic\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `测试用例`
   - **链接目标:** `../../../crates/c04_generic/tests/`
@@ -2663,7 +2663,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\temp\CONTRIBUTING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/CONTRIBUTING.md`
+  - - `research_notes/CONTRIBUTING.md`
 
 ### `archive/temp/QUICK_START_SPELL_CHECK.md`
 
@@ -2672,7 +2672,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\temp\SPELL_CHECK_CONFIGURATION.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/spell_check/SPELL_CHECK_CONFIGURATION.md`
+  - - `archive/spell_check/SPELL_CHECK_CONFIGURATION.md`
 
 ### `archive/temp/README.md`
 
@@ -2681,9 +2681,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\02_reference\quick_reference`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/QUICK_REFERENCE.md`
-    -   - `archive/temp/QUICK_REFERENCE.md`
-    -   - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
+  - - `research_notes/QUICK_REFERENCE.md`
+  - - `archive/temp/QUICK_REFERENCE.md`
+  - - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`
 
 - **链接文本:** `docs/06_toolchain/`
   - **链接目标:** `../06_toolchain/`
@@ -2696,8 +2696,8 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\research_notes`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/RESEARCH_NOTES_ORGANIZATION.md`
-    -   - `archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md`
+  - - `research_notes/RESEARCH_NOTES_ORGANIZATION.md`
+  - - `archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md`
 
 ### `archive/temp/REFERENCE_VALIDITY_MODEL_ALIGNMENT.md`
 
@@ -2810,15 +2810,15 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\path`
   - **修复建议:**
     - 相似文件:
-    -   - `01_learning/LEARNING_PATH_PLANNING.md`
-    -   - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
+  - - `01_learning/LEARNING_PATH_PLANNING.md`
+  - - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
 
 - **链接文本:** `研究路线图`
   - **链接目标:** `wrong/absolute/path/RESEARCH_ROADMAP.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\wrong\absolute\path\RESEARCH_ROADMAP.md`
   - **修复建议:**
     - 相似文件:
-    -   - `research_notes/RESEARCH_ROADMAP.md`
+  - - `research_notes/RESEARCH_ROADMAP.md`
 
 - **链接文本:** `.*\`
   - **链接目标:** `.*`
@@ -2833,17 +2833,17 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\path\to\doc.md`
   - **修复建议:**
     - 相似文件:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `矩阵文档 §节名`
   - **链接目标:** `path`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\path`
   - **修复建议:**
     - 相似文件:
-    -   - `01_learning/LEARNING_PATH_PLANNING.md`
-    -   - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
+  - - `01_learning/LEARNING_PATH_PLANNING.md`
+  - - `research_notes/LEARNING_PATH_COMPREHENSIVE.md`
 
 - **链接文本:** `所有权实现`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/src/`
@@ -2856,9 +2856,9 @@
   - **解析路径:** `E:\_src\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `research_notes/CROSS_REFERENCE_INDEX.md`
 
@@ -2953,7 +2953,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 ### `research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md`
 
@@ -3000,9 +3000,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 相似文件:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `type_theory`
   - **链接目标:** `type_theory/`
@@ -3015,7 +3015,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 ### `research_notes/INDEX.md`
 
@@ -3036,9 +3036,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `type_theory/`
   - **链接目标:** `./type_theory/`
@@ -3111,7 +3111,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 - **链接文本:** `证明位置`
   - **链接目标:** `./software_design_theory/01_design_patterns_formal/02_structural/`
@@ -3142,14 +3142,14 @@
   - **解析路径:** `E:\_src\rust-lang\LANGUAGE_SEMANTICS_EXPRESSIVENESS.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md`
+  - - `research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md`
 
 - **链接文本:** `COQ_ISABELLE_PROOF_SCAFFOLDING`
   - **链接目标:** `./COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 ### `research_notes/QUICK_FIND.md`
 
@@ -3294,9 +3294,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `类型系统基础`
   - **链接目标:** `../../crates/c02_type_system/docs/tier_04_advanced/`
@@ -3339,9 +3339,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\archive\temp`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `07_project/ONE_PAGE_SUMMARY_TEMPLATE.md`
-    -   - `research_notes/FEATURE_TEMPLATE.md`
-    -   - `research_notes/TEMPLATE.md`
+  - - `07_project/ONE_PAGE_SUMMARY_TEMPLATE.md`
+  - - `research_notes/FEATURE_TEMPLATE.md`
+  - - `research_notes/TEMPLATE.md`
 
 - **链接文本:** `所有权与借用实现`
   - **链接目标:** `../../crates/c01_ownership_borrow_scope/src/`
@@ -3394,7 +3394,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 ### `research_notes/RUSTBELT_ALIGNMENT.md`
 
@@ -3415,7 +3415,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 相似文件:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 - **链接文本:** `coq_skeleton`
   - **链接目标:** `coq_skeleton/`
@@ -3428,7 +3428,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 ### `research_notes/RUST_194_195_FEATURE_MATRIX.md`
 
@@ -3437,119 +3437,119 @@
   - **解析路径:** `E:\_src\rust-lang\docs\type_theory\type_system_foundations.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/type_theory/type_system_foundations.md`
+  - - `research_notes/type_theory/type_system_foundations.md`
 
 - **链接文本:** `type_system`
   - **链接目标:** `../type_theory/type_system_foundations.md`
   - **解析路径:** `E:\_src\rust-lang\docs\type_theory\type_system_foundations.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/type_theory/type_system_foundations.md`
+  - - `research_notes/type_theory/type_system_foundations.md`
 
 - **链接文本:** `type_system`
   - **链接目标:** `../type_theory/type_system_foundations.md`
   - **解析路径:** `E:\_src\rust-lang\docs\type_theory\type_system_foundations.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/type_theory/type_system_foundations.md`
+  - - `research_notes/type_theory/type_system_foundations.md`
 
 - **链接文本:** `async`
   - **链接目标:** `../formal_methods/async_state_machine.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\async_state_machine.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/async_state_machine.md`
+  - - `research_notes/formal_methods/async_state_machine.md`
 
 - **链接文本:** `async`
   - **链接目标:** `../formal_methods/async_state_machine.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\async_state_machine.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/async_state_machine.md`
+  - - `research_notes/formal_methods/async_state_machine.md`
 
 - **链接文本:** `pin`
   - **链接目标:** `../formal_methods/pin_self_referential.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\pin_self_referential.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/pin_self_referential.md`
+  - - `research_notes/formal_methods/pin_self_referential.md`
 
 - **链接文本:** `ownership`
   - **链接目标:** `../formal_methods/ownership_model.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `ownership`
   - **链接目标:** `../formal_methods/ownership_model.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `ownership`
   - **链接目标:** `../formal_methods/ownership_model.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `ownership`
   - **链接目标:** `../formal_methods/ownership_model.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `type_system_foundations`
   - **链接目标:** `../type_theory/type_system_foundations.md`
   - **解析路径:** `E:\_src\rust-lang\docs\type_theory\type_system_foundations.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/type_theory/type_system_foundations.md`
+  - - `research_notes/type_theory/type_system_foundations.md`
 
 - **链接文本:** `ownership_model`
   - **链接目标:** `../formal_methods/ownership_model.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `async_state_machine`
   - **链接目标:** `../formal_methods/async_state_machine.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\async_state_machine.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/async_state_machine.md`
+  - - `research_notes/formal_methods/async_state_machine.md`
 
 - **链接文本:** `pin_self_referential`
   - **链接目标:** `../formal_methods/pin_self_referential.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\pin_self_referential.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/pin_self_referential.md`
+  - - `research_notes/formal_methods/pin_self_referential.md`
 
 - **链接文本:** `FORMAL_CONCEPTS_ENCYCLOPEDIA`
   - **链接目标:** `../FORMAL_CONCEPTS_ENCYCLOPEDIA.md`
   - **解析路径:** `E:\_src\rust-lang\docs\FORMAL_CONCEPTS_ENCYCLOPEDIA.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_CONCEPTS_ENCYCLOPEDIA.md`
+  - - `research_notes/FORMAL_CONCEPTS_ENCYCLOPEDIA.md`
 
 - **链接文本:** `COUNTER_EXAMPLES_COMPENDIUM`
   - **链接目标:** `../COUNTER_EXAMPLES_COMPENDIUM.md`
   - **解析路径:** `E:\_src\rust-lang\docs\COUNTER_EXAMPLES_COMPENDIUM.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
 
 - **链接文本:** `THEOREM_RUST_EXAMPLE_MAPPING`
   - **链接目标:** `../THEOREM_RUST_EXAMPLE_MAPPING.md`
   - **解析路径:** `E:\_src\rust-lang\docs\THEOREM_RUST_EXAMPLE_MAPPING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md`
+  - - `research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md`
 
 ### `research_notes/SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md`
 
@@ -3602,17 +3602,17 @@
   - **解析路径:** `E:\_src\rust-lang\docs\rust-formal-engineering-system\02_practical_applications\performance`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/PERFORMANCE_TESTING_REPORT.md`
-    -   - `05_guides/PERFORMANCE_TUNING_GUIDE.md`
-    -   - `research_notes/experiments/concurrency_performance.md`
+  - - `05_guides/PERFORMANCE_TESTING_REPORT.md`
+  - - `05_guides/PERFORMANCE_TUNING_GUIDE.md`
+  - - `research_notes/experiments/concurrency_performance.md`
 
 - **链接文本:** `内存管理理论`
   - **链接目标:** `../rust-formal-engineering-system/02_practical_applications/memory/`
   - **解析路径:** `E:\_src\rust-lang\docs\rust-formal-engineering-system\02_practical_applications\memory`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/experiments/memory_analysis.md`
-    -   - `research_notes/formal_methods/MEMORY_MODEL_MINDMAP.md`
+  - - `research_notes/experiments/memory_analysis.md`
+  - - `research_notes/formal_methods/MEMORY_MODEL_MINDMAP.md`
 
 - **链接文本:** `编译器理论`
   - **链接目标:** `../rust-formal-engineering-system/03_compiler_theory/`
@@ -3649,18 +3649,18 @@
   - **解析路径:** `E:\_src\rust-lang\docs\rust-formal-engineering-system\02_practical_applications\performance`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/PERFORMANCE_TESTING_REPORT.md`
-    -   - `05_guides/PERFORMANCE_TUNING_GUIDE.md`
-    -   - `research_notes/experiments/concurrency_performance.md`
+  - - `05_guides/PERFORMANCE_TESTING_REPORT.md`
+  - - `05_guides/PERFORMANCE_TUNING_GUIDE.md`
+  - - `research_notes/experiments/concurrency_performance.md`
 
 - **链接文本:** `性能优化理论`
   - **链接目标:** `../rust-formal-engineering-system/02_practical_applications/performance/`
   - **解析路径:** `E:\_src\rust-lang\docs\rust-formal-engineering-system\02_practical_applications\performance`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/PERFORMANCE_TESTING_REPORT.md`
-    -   - `05_guides/PERFORMANCE_TUNING_GUIDE.md`
-    -   - `research_notes/experiments/concurrency_performance.md`
+  - - `05_guides/PERFORMANCE_TESTING_REPORT.md`
+  - - `05_guides/PERFORMANCE_TUNING_GUIDE.md`
+  - - `research_notes/experiments/concurrency_performance.md`
 
 - **链接文本:** `理论基础`
   - **链接目标:** `../rust-formal-engineering-system/01_theoretical_foundations/`
@@ -3687,9 +3687,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\xxx\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 ### `research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md`
 
@@ -3720,21 +3720,21 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 - **链接文本:** `COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **链接目标:** `./COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 - **链接文本:** `COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **链接目标:** `./COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
+  - - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`
 
 ### `research_notes/WRITING_GUIDE.md`
 
@@ -3749,9 +3749,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `research_notes/coq_skeleton/README.md`
 
@@ -3834,16 +3834,16 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\archive\deprecated\AENEAS_INTEGRATION_PLAN.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/AENEAS_INTEGRATION_PLAN.md`
-    -   - `archive/deprecated/AENEAS_INTEGRATION_PLAN.md`
+  - - `research_notes/AENEAS_INTEGRATION_PLAN.md`
+  - - `archive/deprecated/AENEAS_INTEGRATION_PLAN.md`
 
 - **链接文本:** `COQ_OF_RUST_INTEGRATION_PLAN`
   - **链接目标:** `../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\archive\deprecated\COQ_OF_RUST_INTEGRATION_PLAN.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md`
-    -   - `archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md`
+  - - `research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md`
+  - - `archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md`
 
 ### `research_notes/formal_methods/CONCEPT_AXIOM_THEOREM_MATRIX.md`
 
@@ -3860,21 +3860,21 @@
   - **解析路径:** `E:\_src\rust-lang\docs\software_design_theory\03_execution_models\05_distributed.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/03_execution_models/05_distributed.md`
+  - - `research_notes/software_design_theory/03_execution_models/05_distributed.md`
 
 - **链接文本:** `05_distributed`
   - **链接目标:** `../../software_design_theory/03_execution_models/05_distributed.md`
   - **解析路径:** `E:\_src\rust-lang\docs\software_design_theory\03_execution_models\05_distributed.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/03_execution_models/05_distributed.md`
+  - - `research_notes/software_design_theory/03_execution_models/05_distributed.md`
 
 - **链接文本:** `05_distributed 分布式形式化`
   - **链接目标:** `../../software_design_theory/03_execution_models/05_distributed.md`
   - **解析路径:** `E:\_src\rust-lang\docs\software_design_theory\03_execution_models\05_distributed.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/03_execution_models/05_distributed.md`
+  - - `research_notes/software_design_theory/03_execution_models/05_distributed.md`
 
 ### `research_notes/formal_methods/PROOF_COMPLETION_MATRIX.md`
 
@@ -3897,9 +3897,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `异步语义理论`
   - **链接目标:** `../../../../crates/c06_async/src/async_semantics_theory.rs`
@@ -3932,7 +3932,7 @@
   - **解析路径:** `E:\_src\rust-lang\04_thinking\MIND_MAP_COLLECTION.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `04_thinking/MIND_MAP_COLLECTION.md`
+  - - `04_thinking/MIND_MAP_COLLECTION.md`
 
 ### `research_notes/formal_methods/VERIFICATION_TOOLS_MATRIX.md`
 
@@ -3949,35 +3949,35 @@
   - **解析路径:** `E:\_src\rust-lang\docs\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md`
+  - - `research_notes/software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md`
 
 - **链接文本:** `05_distributed`
   - **链接目标:** `../../software_design_theory/03_execution_models/05_distributed.md`
   - **解析路径:** `E:\_src\rust-lang\docs\software_design_theory\03_execution_models\05_distributed.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/03_execution_models/05_distributed.md`
+  - - `research_notes/software_design_theory/03_execution_models/05_distributed.md`
 
 - **链接文本:** `04_expressiveness_boundary`
   - **链接目标:** `../../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md`
   - **解析路径:** `E:\_src\rust-lang\docs\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md`
+  - - `research_notes/software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md`
 
 - **链接文本:** `05_distributed`
   - **链接目标:** `../../software_design_theory/03_execution_models/05_distributed.md`
   - **解析路径:** `E:\_src\rust-lang\docs\software_design_theory\03_execution_models\05_distributed.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/03_execution_models/05_distributed.md`
+  - - `research_notes/software_design_theory/03_execution_models/05_distributed.md`
 
 - **链接文本:** `06_boundary_analysis`
   - **链接目标:** `../../software_design_theory/03_execution_models/06_boundary_analysis.md`
   - **解析路径:** `E:\_src\rust-lang\docs\software_design_theory\03_execution_models\06_boundary_analysis.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md`
+  - - `research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md`
 
 ### `research_notes/formal_methods/async_state_machine.md`
 
@@ -3986,9 +3986,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c06_async\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 ### `research_notes/formal_methods/borrow_checker_proof.md`
 
@@ -3997,18 +3997,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `c05 Arc/Mutex`
   - **链接目标:** `../../../crates/c05_threads/examples/`
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 ### `research_notes/formal_methods/lifetime_formalization.md`
 
@@ -4017,9 +4017,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `生命周期实现`
   - **链接目标:** `../../../crates/c02_type_system/src/`
@@ -4032,9 +4032,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `形式化工程系统 - 生命周期`
   - **链接目标:** `../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/`
@@ -4055,9 +4055,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c01_ownership_borrow_scope\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 ### `research_notes/formal_methods/pin_self_referential.md`
 
@@ -4066,9 +4066,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c06_async\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `自引用结构实现`
   - **链接目标:** `../../../crates/c01_ownership_borrow_scope/src/`
@@ -4089,9 +4089,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 ### `research_notes/research_methodology.md`
 
@@ -4100,9 +4100,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `type_theory`
   - **链接目标:** `./type_theory/`
@@ -4135,21 +4135,21 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\04_compositional_engineering\02_effectiveness_proofs.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md`
+  - - `research_notes/software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md`
 
 - **链接文本:** `03_integration_theory`
   - **链接目标:** `../../04_compositional_engineering/03_integration_theory.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\04_compositional_engineering\03_integration_theory.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/04_compositional_engineering/03_integration_theory.md`
+  - - `research_notes/software_design_theory/04_compositional_engineering/03_integration_theory.md`
 
 - **链接文本:** `CE-PAT1`
   - **链接目标:** `../../04_compositional_engineering/02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\04_compositional_engineering\02_effectiveness_proofs.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md`
+  - - `research_notes/software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md`
 
 ### `research_notes/software_design_theory/01_design_patterns_formal/DESIGN_PATTERNS_BOUNDARY_MATRIX.md`
 
@@ -4176,35 +4176,35 @@
   - **解析路径:** `E:\_src\rust-lang\02_reference\quick_reference\ANTI_PATTERN_TEMPLATE.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `02_reference/quick_reference/ANTI_PATTERN_TEMPLATE.md`
+  - - `02_reference/quick_reference/ANTI_PATTERN_TEMPLATE.md`
 
 - **链接文本:** `Rust 设计模式实践指南`
   - **链接目标:** `../../../../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md`
   - **解析路径:** `E:\_src\rust-lang\05_guides\DESIGN_PATTERNS_USAGE_GUIDE.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md`
+  - - `05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md`
 
 - **链接文本:** `所有权系统详解`
   - **链接目标:** `../../../formal_methods/ownership_model.md`
   - **解析路径:** `E:\_src\rust-lang\docs\formal_methods\ownership_model.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/formal_methods/ownership_model.md`
+  - - `research_notes/formal_methods/ownership_model.md`
 
 - **链接文本:** `类型状态模式指南`
   - **链接目标:** `../../06_rust_idioms.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\06_rust_idioms.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/06_rust_idioms.md`
+  - - `research_notes/software_design_theory/06_rust_idioms.md`
 
 - **链接文本:** `零成本抽象实践`
   - **链接目标:** `../../../../02_reference/quick_reference/generics_cheatsheet.md`
   - **解析路径:** `E:\_src\rust-lang\02_reference\quick_reference\generics_cheatsheet.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `02_reference/quick_reference/generics_cheatsheet.md`
+  - - `02_reference/quick_reference/generics_cheatsheet.md`
 
 ### `research_notes/software_design_theory/01_design_patterns_formal/README.md`
 
@@ -4213,9 +4213,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\04_compositional_engineering\README.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `README.md`
-    -   - `01_learning/README.md`
-    -   - `02_reference/README.md`
+  - - `README.md`
+  - - `01_learning/README.md`
+  - - `02_reference/README.md`
 
 ### `research_notes/software_design_theory/02_workflow_safe_complete_models/01_safe_23_catalog.md`
 
@@ -4244,14 +4244,14 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\01_design_patterns_formal\03_behavioral\observer.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/observer.md`
+  - - `research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/observer.md`
 
 - **链接文本:** `flyweight`
   - **链接目标:** `../../01_design_patterns_formal/02_structural/flyweight.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\01_design_patterns_formal\02_structural\flyweight.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/01_design_patterns_formal/02_structural/flyweight.md`
+  - - `research_notes/software_design_theory/01_design_patterns_formal/02_structural/flyweight.md`
 
 ### `research_notes/software_design_theory/03_execution_models/04_parallel.md`
 
@@ -4260,15 +4260,15 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\01_design_patterns_formal\03_behavioral\iterator.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/iterator.md`
-    -   - `02_reference/quick_reference/collections_iterators_cheatsheet.md`
+  - - `research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/iterator.md`
+  - - `02_reference/quick_reference/collections_iterators_cheatsheet.md`
 
 - **链接文本:** `flyweight`
   - **链接目标:** `../../01_design_patterns_formal/02_structural/flyweight.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\01_design_patterns_formal\02_structural\flyweight.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/01_design_patterns_formal/02_structural/flyweight.md`
+  - - `research_notes/software_design_theory/01_design_patterns_formal/02_structural/flyweight.md`
 
 ### `research_notes/software_design_theory/03_execution_models/05_distributed.md`
 
@@ -4277,35 +4277,35 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\02_workflow_safe_complete_models\02_complete_43_catalog.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/02_workflow_safe_complete_models/02_complete_43_catalog.md`
+  - - `research_notes/software_design_theory/02_workflow_safe_complete_models/02_complete_43_catalog.md`
 
 - **链接文本:** `02_complete_43_catalog`
   - **链接目标:** `../../02_workflow_safe_complete_models/02_complete_43_catalog.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\02_workflow_safe_complete_models\02_complete_43_catalog.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/02_workflow_safe_complete_models/02_complete_43_catalog.md`
+  - - `research_notes/software_design_theory/02_workflow_safe_complete_models/02_complete_43_catalog.md`
 
 - **链接文本:** `observer`
   - **链接目标:** `../../01_design_patterns_formal/03_behavioral/observer.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\01_design_patterns_formal\03_behavioral\observer.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/observer.md`
+  - - `research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/observer.md`
 
 - **链接文本:** `02_effectiveness_proofs`
   - **链接目标:** `../../04_compositional_engineering/02_effectiveness_proofs.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\04_compositional_engineering\02_effectiveness_proofs.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md`
+  - - `research_notes/software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md`
 
 - **链接文本:** `04_expressiveness_boundary`
   - **链接目标:** `../../02_workflow_safe_complete_models/04_expressiveness_boundary.md`
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\02_workflow_safe_complete_models\04_expressiveness_boundary.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md`
+  - - `research_notes/software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md`
 
 ### `research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md`
 
@@ -4348,7 +4348,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\software_design_theory\05_boundary_system\borrow_checker_proof.md`
   - **修复建议:**
     - 相似文件:
-    -   - `research_notes/formal_methods/borrow_checker_proof.md`
+  - - `research_notes/formal_methods/borrow_checker_proof.md`
 
 ### `research_notes/software_design_theory/README.md`
 
@@ -4409,9 +4409,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `类型系统实现`
   - **链接目标:** `../../../crates/c02_type_system/src/`
@@ -4424,9 +4424,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `coq_skeleton`
   - **链接目标:** `../coq_skeleton/`
@@ -4447,9 +4447,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 ### `research_notes/type_theory/lifetime_formalization.md`
 
@@ -4464,9 +4464,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `形式化工程系统 - 生命周期`
   - **链接目标:** `../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/`
@@ -4487,7 +4487,7 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\advanced_types.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/type_theory/advanced_types.md`
+  - - `research_notes/type_theory/advanced_types.md`
 
 - **链接文本:** `Trait 系统实现`
   - **链接目标:** `../../../crates/c02_type_system/src/`
@@ -4500,9 +4500,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `形式化工程系统 - Trait`
   - **链接目标:** `../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/`
@@ -4517,9 +4517,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `类型系统实现`
   - **链接目标:** `../../../crates/c02_type_system/src/`
@@ -4532,9 +4532,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 - **链接文本:** `形式化工程系统 - 类型系统`
   - **链接目标:** `../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/`
@@ -4555,9 +4555,9 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c02_type_system\examples`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
-    -   - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
-    -   - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
+  - - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`
+  - - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`
+  - - `research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md`
 
 ### `rust-formal-engineering-system/00_master_index.md`
 
@@ -4566,18 +4566,18 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `crates/c11_macro_system/docs/`
   - **链接目标:** `../../crates/c11_macro_system/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c11_macro_system\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `research_notes/type_theory/`
   - **链接目标:** `../research_notes/type_theory/`
@@ -4590,27 +4590,27 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c05_threads\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `crates/c06_async/docs/`
   - **链接目标:** `../../crates/c06_async/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c06_async\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `crates/c09_design_pattern/docs/`
   - **链接目标:** `../../crates/c09_design_pattern/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c09_design_pattern\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `06_toolchain/`
   - **链接目标:** `../06_toolchain/`
@@ -4633,9 +4633,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 ### `rust-formal-engineering-system/01_theoretical_foundations/README.md`
 
@@ -4650,9 +4650,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 ### `rust-formal-engineering-system/02_practical_applications/memory/README.md`
 
@@ -4733,18 +4733,18 @@
   - **解析路径:** `E:\_src\rust-lang\crates\c09_design_pattern\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `../../../../crates/c09_design_pattern/docs/`
   - **链接目标:** `../../../../crates/c09_design_pattern/docs/`
   - **解析路径:** `E:\_src\rust-lang\crates\c09_design_pattern\docs`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
-    -   - `DOCS_100_PERCENT_PROGRESS.md`
-    -   - `DOCS_CLEANUP_REPORT_2026_02_27.md`
+  - - `DOCS_100_PERCENT_EXECUTION_STATUS.md`
+  - - `DOCS_100_PERCENT_PROGRESS.md`
+  - - `DOCS_CLEANUP_REPORT_2026_02_27.md`
 
 - **链接文本:** `../../../../crates/c05_threads/`
   - **链接目标:** `../../../../crates/c05_threads/`
@@ -4801,9 +4801,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\rust-formal-engineering-system\09_research_agenda\README.md`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `README.md`
-    -   - `01_learning/README.md`
-    -   - `02_reference/README.md`
+  - - `README.md`
+  - - `01_learning/README.md`
+  - - `02_reference/README.md`
 
 ### `rust-formal-engineering-system/README.md`
 
@@ -4812,9 +4812,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `research_notes/type_theory/`
   - **链接目标:** `../research_notes/type_theory/`
@@ -4827,9 +4827,9 @@
   - **解析路径:** `E:\_src\rust-lang\docs\research_notes\formal_methods`
   - **修复建议:**
     - 可能的正确路径:
-    -   - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
-    -   - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
-    -   - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
+  - - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`
+  - - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`
+  - - `research_notes/formal_methods/FORMAL_METHODS_COMPARISON.md`
 
 - **链接文本:** `../research_notes/type_theory/`
   - **链接目标:** `../research_notes/type_theory/`

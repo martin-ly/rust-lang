@@ -1,9 +1,9 @@
 # Rust 术语标准化文档
 
-> **创建日期**: 2026-02-28  
-> **最后更新**: 2026-02-28  
-> **Rust 版本**: 1.93.1+ (Edition 2024)  
-> **状态**: ✅ 已完成  
+> **创建日期**: 2026-02-28
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
 > **对齐标准**: [Ferrocene FLS (Formal Language Specification)](https://spec.ferrocene.dev/)
 
 ---
@@ -13,6 +13,8 @@
 - [Rust 术语标准化文档](#rust-术语标准化文档)
   - [📋 目录 {#-目录}](#-目录--目录)
   - [🎯 概述 {#-概述}](#-概述--概述)
+    - [本文档的目标](#本文档的目标)
+    - [Ferrocene FLS 简介](#ferrocene-fls-简介)
   - [📊 核心术语对照表 {#-核心术语对照表}](#-核心术语对照表--核心术语对照表)
     - [所有权与内存安全](#所有权与内存安全)
     - [类型系统](#类型系统)
@@ -23,6 +25,16 @@
     - [编译器与工具链](#编译器与工具链)
     - [Unsafe 与 FFI](#unsafe-与-ffi)
   - [🔗 Ferrocene FLS 引用索引 {#-ferrocene-fls-引用索引}](#-ferrocene-fls-引用索引--ferrocene-fls-引用索引)
+    - [第 4 章：类型与 Trait](#第-4-章类型与-trait)
+    - [第 5 章：模式](#第-5-章模式)
+    - [第 6 章：表达式](#第-6-章表达式)
+    - [第 7 章：作用域与命名空间](#第-7-章作用域与命名空间)
+    - [第 12 章：泛型](#第-12-章泛型)
+    - [第 13 章：Trait](#第-13-章trait)
+    - [第 15 章：所有权与析构](#第-15-章所有权与析构)
+    - [第 16 章：生命周期分析](#第-16-章生命周期分析)
+    - [第 17 章：宏](#第-17-章宏)
+    - [第 18 章：FFI](#第-18-章ffi)
   - [📝 术语使用规范 {#-术语使用规范}](#-术语使用规范--术语使用规范)
     - [中英文使用规则](#中英文使用规则)
     - [大小写规范](#大小写规范)
@@ -32,7 +44,11 @@
     - [不一致的翻译](#不一致的翻译)
     - [过时的术语](#过时的术语)
     - [非标准缩写](#非标准缩写)
+    - [模糊或不准确的术语](#模糊或不准确的术语)
   - [📚 参考资料 {#-参考资料}](#-参考资料--参考资料)
+    - [官方规范](#官方规范)
+    - [本项目参考文档](#本项目参考文档)
+    - [社区资源](#社区资源)
   - [🔄 更新日志 {#-更新日志}](#-更新日志--更新日志)
 
 ---
@@ -53,8 +69,8 @@
 | 属性 | 说明 |
 | :--- | :--- |
 | **全称** | Ferrocene Formal Language Specification |
-| **官网** | https://spec.ferrocene.dev/ |
-| **GitHub** | https://github.com/ferrocene/specification |
+| **官网** | <https://spec.ferrocene.dev/> |
+| **GitHub** | <https://github.com/ferrocene/specification> |
 | **采用时间** | 2024年（成为 Rust 官方语言规范） |
 | **维护方** | Ferrous Systems, AdaCore |
 | **许可证** | MIT / Apache 2.0 |
@@ -68,7 +84,7 @@
 | 中文术语 | 英文原文 | FLS 章节 | 简要说明 |
 | :--- | :--- | :--- | :--- |
 | 所有权 | **Ownership** | [Chapter 15](https://spec.ferrocene.dev/ownership-and-destruction.html) | 值有且仅有一个所有者的机制 |
-| 借用 | **Borrowing** | [§15.4](https://spec.ferrocene.dev/ownership-and-destruction.html# borrowing) | 临时获取值的引用而不转移所有权 |
+| 借用 | **Borrowing** | [§15.4](<https://spec.ferrocene.dev/ownership-and-destruction.html#> borrowing) | 临时获取值的引用而不转移所有权 |
 | 不可变借用 | **Immutable Borrow** / **Shared Borrow** | [§15.4.2](https://spec.ferrocene.dev/ownership-and-destruction.html#immutable-borrows) | 允许多个读者同时访问的借用 |
 | 可变借用 | **Mutable Borrow** / **Unique Borrow** | [§15.4.3](https://spec.ferrocene.dev/ownership-and-destruction.html#mutable-borrows) | 仅允许一个写者访问的独占借用 |
 | 生命周期 | **Lifetime** | [Chapter 16](https://spec.ferrocene.dev/lifetime-analysis.html) | 引用有效的程序点集合 |
@@ -123,7 +139,7 @@
 | Trait 对象 | **Trait Object** (`dyn Trait`) | [§4.13](https://spec.ferrocene.dev/types-and-traits.html#trait-objects) | 运行时多态的动态分发 |
 | 自动 Trait | **Auto Trait** | [§13.10](https://spec.ferrocene.dev/traits.html#auto-traits) | 编译器自动实现的 Trait（如 `Send`, `Sync`） |
 | 标记 Trait | **Marker Trait** | [§13.10](https://spec.ferrocene.dev/traits.html#auto-traits) | 无方法的 Trait，仅用于标记类型属性 |
-| 派生 | **Derive** | [§3.6](https://spec.ferrocene.dev/items.html#derive-macro- invocations) | 自动实现 Trait 的宏 |
+| 派生 | **Derive** | [§3.6](<https://spec.ferrocene.dev/items.html#derive-macro-> invocations) | 自动实现 Trait 的宏 |
 | 实现 | **Implementation** / **Impl** | [§3.11](https://spec.ferrocene.dev/items.html#implementations) | 为类型提供 Trait 或方法定义 |
 | 孤儿规则 | **Orphan Rule** | [§13.1.4](https://spec.ferrocene.dev/traits.html#orphan-rules) | 限制跨 crate 实现 Trait 的规则 |
 | 特化 | **Specialization** | [ nightly 特性 ] | 为特定类型提供优化的实现 |
@@ -232,7 +248,7 @@
 | 外部函数接口 | **Foreign Function Interface (FFI)** | [Chapter 18](https://spec.ferrocene.dev/ffi.html) | 与其他语言交互的接口 |
 | 外部块 | **Extern Block** (`extern {}`) | [§18](https://spec.ferrocene.dev/ffi.html) | 声明外部函数的块 |
 | 链接属性 | **Link Attribute** | [§18](https://spec.ferrocene.dev/ffi.html) | 指定链接的库 |
-| ABI | **Application Binary Interface** | [§9.1](https://spec.ferrocene.dev/functions.html#extern-function- qualifier) | 函数调用约定 |
+| ABI | **Application Binary Interface** | [§9.1](<https://spec.ferrocene.dev/functions.html#extern-function-> qualifier) | 函数调用约定 |
 | C ABI | **C ABI** (`extern "C"`) | [§9.1](https://spec.fer-lang.org/stable/std/keyword.extern.html) | C 语言的调用约定 |
 
 ---
@@ -242,42 +258,52 @@
 以下按 FLS 章节组织核心术语，便于查阅官方规范：
 
 ### 第 4 章：类型与 Trait
+
 - [Chapter 4: Types and Traits](https://spec.ferrocene.dev/types-and-traits.html)
 - 核心术语：Type, Trait, Struct, Enum, Reference, Slice, Trait Object, Function Pointer
 
 ### 第 5 章：模式
+
 - [Chapter 5: Patterns](https://spec.ferrocene.dev/patterns.html)
 - 核心术语：Pattern, Binding, Destructuring, Refutable, Irrefutable
 
 ### 第 6 章：表达式
+
 - [Chapter 6: Expressions](https://spec.ferrocene.dev/expressions.html)
 - 核心术语：Expression, Block, Closure, Async, Await, Unsafe
 
 ### 第 7 章：作用域与命名空间
+
 - [Chapter 7: Scopes and Namespaces](https://spec.ferrocene.dev/scopes.html)
 - 核心术语：Scope, Namespace, Shadowing
 
 ### 第 12 章：泛型
+
 - [Chapter 12: Generics](https://spec.ferrocene.dev/generics.html)
 - 核心术语：Generic Parameter, Type Parameter, Lifetime Parameter, Const Generic, Where Clause, Trait Bound
 
 ### 第 13 章：Trait
+
 - [Chapter 13: Traits](https://spec.ferrocene.dev/traits.html)
 - 核心术语：Trait, Implementation, Associated Type, Auto Trait, Orphan Rule
 
 ### 第 15 章：所有权与析构
+
 - [Chapter 15: Ownership and Destruction](https://spec.ferrocene.dev/ownership-and-destruction.html)
 - 核心术语：Ownership, Move, Copy, Clone, Drop, Borrowing, Immutable Borrow, Mutable Borrow
 
 ### 第 16 章：生命周期分析
+
 - [Chapter 16: Lifetime Analysis](https://spec.ferrocene.dev/lifetime-analysis.html)
 - 核心术语：Lifetime, Lifetime Parameter, Lifetime Elision, Non-Lexical Lifetime (NLL)
 
 ### 第 17 章：宏
+
 - [Chapter 17: Macros](https://spec.ferrocene.dev/macros.html)
 - 核心术语：Macro, Declarative Macro, Procedural Macro, Derive Macro, Attribute Macro
 
 ### 第 18 章：FFI
+
 - [Chapter 18: Foreign Function Interface](https://spec.ferrocene.dev/ffi.html)
 - 核心术语：FFI, Extern Block, ABI, Link Attribute
 
@@ -396,10 +422,10 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 | 资源 | 链接 | 说明 |
 | :--- | :--- | :--- |
-| Ferrocene FLS | https://spec.ferrocene.dev/ | Rust 官方形式化语言规范 |
-| The Rust Reference | https://doc.rust-lang.org/reference/ | Rust 官方参考文档 |
-| The Rust Programming Language | https://doc.rust-lang.org/book/ | Rust 官方教程 |
-| Rust RFCs | https://rust-lang.github.io/rfcs/ | Rust 设计文档 |
+| Ferrocene FLS | <https://spec.ferrocene.dev/> | Rust 官方形式化语言规范 |
+| The Rust Reference | <https://doc.rust-lang.org/reference/> | Rust 官方参考文档 |
+| The Rust Programming Language | <https://doc.rust-lang.org/book/> | Rust 官方教程 |
+| Rust RFCs | <https://rust-lang.github.io/rfcs/> | Rust 设计文档 |
 
 ### 本项目参考文档
 
@@ -414,9 +440,9 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 | 资源 | 链接 | 说明 |
 | :--- | :--- | :--- |
-| Rust 术语对照表 (中文) | https://github.com/rust-lang-cn/ | 中文社区术语对照 |
-| Rust By Example | https://doc.rust-lang.org/rust-by-example/ | 示例驱动的学习 |
-| Rustlings | https://github.com/rust-lang/rustlings | 交互式练习 |
+| Rust 术语对照表 (中文) | <https://github.com/rust-lang-cn/> | 中文社区术语对照 |
+| Rust By Example | <https://doc.rust-lang.org/rust-by-example/> | 示例驱动的学习 |
+| Rustlings | <https://github.com/rust-lang/rustlings> | 交互式练习 |
 
 ---
 
@@ -428,8 +454,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-**维护团队**: Rust Learning Community  
-**最后更新**: 2026-02-28  
+**维护团队**: Rust Learning Community
+**最后更新**: 2026-02-28
 **状态**: ✅ **与 Ferrocene FLS 对齐完成**
 
 ---
