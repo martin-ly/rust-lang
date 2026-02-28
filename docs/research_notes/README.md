@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -19,6 +19,7 @@
 | 理解三大支柱 | [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） |
 | 完整总结与论证脉络 | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) → [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md) |
 | 批判性意见与改进计划 | [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) |
+| **结构梳理与归档约定** | **[RESEARCH_NOTES_ORGANIZATION](./RESEARCH_NOTES_ORGANIZATION.md)** — 实际目录、归档说明、入口与索引 |
 | 格式统一与内容/Rust 1.93 对齐计划 | [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) |
 | 层次化映射（文档树/概念↔定理/文档↔思维表征） | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) |
 | **docs 全结构梳理**（100% 覆盖） | [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) |
@@ -28,18 +29,23 @@
 
 ## 📊 目录结构
 
+**详细梳理**（实际文件清单、归档约定、formal_methods 概览）：见 **[RESEARCH_NOTES_ORGANIZATION.md](./RESEARCH_NOTES_ORGANIZATION.md)**。
+
 ```text
 research_notes/
 ├── 00_ORGANIZATION_AND_NAVIGATION.md  # 组织架构与按目标导航（首次使用入口）
 ├── README.md                    # 本索引文件
-├── formal_methods/              # 形式化方法研究
+├── RESEARCH_NOTES_ORGANIZATION.md  # 全面梳理（结构、归档、版本、维护）
+├── formal_methods/              # 形式化方法研究（六篇核心 + 思维导图/矩阵/决策树，见该目录 README）
 │   ├── README.md
 │   ├── 00_completeness_gaps.md  # 完备性缺口（Phase 1–6 100% 完成）
 │   ├── ownership_model.md       # 所有权模型形式化
 │   ├── borrow_checker_proof.md  # 借用检查器证明
 │   ├── async_state_machine.md   # 异步状态机形式化
 │   ├── lifetime_formalization.md # 生命周期形式化
-│   └── pin_self_referential.md  # Pin 和自引用类型形式化
+│   ├── pin_self_referential.md  # Pin 和自引用类型形式化
+│   ├── send_sync_formalization.md
+│   └── …（思维导图、矩阵、决策树等见 [formal_methods/README](./formal_methods/README.md)）
 ├── type_theory/                 # 类型理论研究
 │   ├── README.md
 │   ├── 00_completeness_gaps.md  # 完备性缺口（形式化论证不充分声明）
@@ -131,8 +137,8 @@ research_notes/
 - ✅ 异步 Future/Poll 状态机的形式化描述
 - ✅ 生命周期系统的形式化语义
 - ✅ 并发安全的形式化保证
-- ✅ Rust 1.93.0 新特性的形式化分析（已完成）🆕
-- ✅ Rust 1.92.0 新特性的形式化分析（已完成）
+- ✅ Rust 1.93.1 新特性的形式化分析（已完成）🆕
+- ✅ Rust 1.93.0 新特性的形式化分析（已完成）
 - ✅ Rust 1.91.1 新特性的形式化分析（已完成）
 
 **已完成的证明**:
@@ -366,11 +372,11 @@ research_notes/
 
 ---
 
-## 🆕 Rust 1.93.0 研究更新 🆕
+## 🆕 Rust 1.93.1 研究更新 🆕
 
 ### 最新研究内容
 
-**更新日期**: 2026-01-26
+**更新日期**: 2026-02-26
 
 **主要研究方向**:
 
@@ -511,10 +517,8 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 ---
 
 **维护团队**: Rust Research Community
-**最后更新**: 2026-01-26
-**Rust 版本**: 1.93.0+
+**最后更新**: 2026-02-26
+**Rust 版本**: 1.93.1+
 **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记全部完成）
 
----
-
-🦀 **探索 Rust 的深层奥秘！** 🦀
+**全面梳理**：[RESEARCH_NOTES_ORGANIZATION](./RESEARCH_NOTES_ORGANIZATION.md) — 实际结构、归档约定、入口与索引关系

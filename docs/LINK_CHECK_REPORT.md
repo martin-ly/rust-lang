@@ -74,7 +74,7 @@
 
 | 文件 | 修复内容 | 状态 |
 | :--- | :--- | :--- |
-| research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md | 差异标记模板占位符 (链接) → https://doc.rust-lang.org/book/ | ✅ |
+| research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md | 差异标记模板占位符 (链接) → <https://doc.rust-lang.org/book/> | ✅ |
 
 ### 第八批（2026-02-26 路径规范化）
 

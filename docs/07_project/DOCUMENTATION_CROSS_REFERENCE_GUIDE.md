@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成 (含完整跨文档映射网络)
 > **文档类型**: 文档管理指南
 > **关联文档**: [CROSS_REFERENCE_INDEX](../research_notes/CROSS_REFERENCE_INDEX.md) - 详细映射网络

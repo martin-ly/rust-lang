@@ -13,7 +13,12 @@
 
 ### 1.1 现状简述
 
-- **已有**：所有权、借用、生命周期、Pin、异步（Future/Poll 状态机）、**Send/Sync** 六篇独立形式化文档；控制流、通道、Mutex、thread::spawn、裸指针、unsafe 等以 Def/定理形式分散在 ownership_model、borrow_checker_proof、async_state_machine 中；[六篇并表](README.md#formal_methods-六篇并表) 与 [00_completeness_gaps](00_completeness_gaps.md) 声明 Phase 1–6 已完备。**Send/Sync 已独立成篇**：[send_sync_formalization](send_sync_formalization.md)。
+- **已有**：所有权、借用、生命周期、Pin、异步（Future/Poll 状态机）、**Send/Sync** 六篇独立形式化文档；
+- 控制流、通道、Mutex、thread::spawn、裸指针、unsafe 等
+- 以 Def/定理形式分散在 ownership_model、borrow_checker_proof、async_state_machine 中；
+- [六篇并表](README.md#formal_methods-六篇并表) 与
+- [00_completeness_gaps](00_completeness_gaps.md) 声明 Phase 1–6 已完备。
+- **Send/Sync 已独立成篇**：[send_sync_formalization](send_sync_formalization.md)。
 - **缺口与观感（已通过阶段 A–D 补全）**：
   1. ~~Sync、Send、async 未作为“机制”独立成篇~~ → **已补**：Send/Sync 专篇 [send_sync_formalization](send_sync_formalization.md)；async 仍由 async_state_machine 覆盖。
   2. ~~“安全的可判定的机制”未做统一梳理~~ → **已补**：[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) 每机制一节 + 并发/Trait 族四维表。

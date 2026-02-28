@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 统一组织架构说明、按目标导航、三大支柱映射；解决「文档多、入口杂、难定位」问题
 > **原则**: 单入口、按目标、支柱映射、层次清晰
@@ -25,6 +25,7 @@
 | **我想看格式统一与 Rust 1.93 对齐计划** | [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) (归档) | 10min |
 | **我想看目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) | 10min |
 | **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 5min |
+| **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](./RESEARCH_NOTES_ORGANIZATION.md) | 5min |
 | **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](./formal_methods/send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) | 5min |
 | **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md) | 2min |
 | **我想贡献/维护** | [CONTRIBUTING](./CONTRIBUTING.md) → [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md) | 5min |
@@ -134,7 +135,7 @@ research_notes/
 | **releases.rs** | [1.93.0](https://releases.rs/docs/1.93.0/) | 语言/库变更完整清单 |
 | **Rust 发布说明** | [Rust 1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/) | 官方特性公告 |
 | **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/)；当前覆盖 **Rust 2021 + rustc 1.93** | 形式化规范引用 |
-| **本项目** | **Rust 1.93.0+ (Edition 2024)** | 所有 research_notes 元信息与示例默认版本 |
+| **本项目** | **Rust 1.93.1+ (Edition 2024)** | 所有 research_notes 元信息与示例默认版本 |
 
 新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) § 权威来源对齐。
 
@@ -151,4 +152,4 @@ research_notes/
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-14
+**最后更新**: 2026-02-26

@@ -110,13 +110,18 @@
 
 **栈固定 (Stack Pinning)**: 使用 `Pin::new` 在栈上固定值。这要求值实现 `Unpin`。
 
-- **设计理由**：栈上变量可能被编译器优化重排；若类型非 `Unpin`，调用者可能移动该值，破坏 Pin 保证。故仅当 $T : \text{Unpin}$ 时，`Pin::new(&mut t)` 才安全。
+- **设计理由**：栈上变量可能被编译器优化重排；若类型非 `Unpin`，调用者可能移动该值，破坏 Pin 保证。
+故仅当 $T : \text{Unpin}$ 时，`Pin::new(&mut t)` 才安全。
 - **形式化**：$\text{StackPin}(T) \equiv \text{Pin}[\&mut T] \land T : \text{Unpin}$。
 
 **堆固定 (Heap Pinning)**: 使用 `Box::pin` 在堆上固定值。这允许固定非 `Unpin` 类型。
 
 - **设计理由**：堆分配地址在 `Box` 存活期间不变；移动的是 `Box` 本身，其指向的堆块地址不变。故可固定任意类型（含自引用）。
-- **形式化**：$\text{HeapPin}(T) \equiv \text{Pin}[\Box[T]]$，且 $\forall T.\, \text{HeapPin}(T) \Rightarrow \neg \text{move}(\ast \text{Box::pin}(t))$。
+- **形式化**：
+$
+\text{HeapPin}(T) \equiv \text{Pin}[\Box[T]]$，
+且 $\forall T.\, \text{HeapPin}(T) \Rightarrow \neg \text{move}(\ast \text{Box::pin}(t))
+$。
 
 **Pin 投影 (Pin Projection)**: 从被 Pin 的结构体中获取被 Pin 的字段。Pin 投影需要特殊处理，确保安全性。
 
@@ -243,7 +248,8 @@ $$
 **安全条件**:
 
 $$
-\forall t: T \text{ where } T \not: \text{Unpin},\ \text{Pin}[\Box[T]] \Rightarrow \text{drop}(t) \text{ 期间 } \neg \text{move}(t)
+\forall t: T \text{ where } T \not: \text{Unpin},
+\ \text{Pin}[\Box[T]] \Rightarrow \text{drop}(t) \text{ 期间 } \neg \text{move}(t)
 $$
 
 ### 3.3 Pin 投影规则
@@ -254,7 +260,8 @@ $$
 给定结构体 $S = \{\text{field}_1: T_1, \ldots, \text{field}_n: T_n\}$ 和 $\text{Pin}[\&mut S]$：
 
 $$
-\text{Project}(\text{Pin}[\&mut S], \text{field}_i) \rightarrow \text{Pin}[\&mut T_i]
+\text{Project}(\text{Pin}[\&mut S],
+\text{field}_i) \rightarrow \text{Pin}[\&mut T_i]
 $$
 
 **投影安全条件**:

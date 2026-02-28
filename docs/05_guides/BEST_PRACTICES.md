@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-02-15
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 >
 > **研究笔记写作最佳实践** → [research_notes/BEST_PRACTICES.md](../research_notes/BEST_PRACTICES.md)

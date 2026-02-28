@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记、23 种设计模式、formal_methods Phase 1–6、形式语言与形式证明、T-OW2/T-BR1/T-TY3 Coq 骨架、英文摘要）
 
 ---
@@ -151,8 +151,8 @@
 
 7d. **[RUSTBELT_ALIGNMENT.md](./RUSTBELT_ALIGNMENT.md)** - RustBelt 逐章对标 🆕
 7e. **[EXECUTABLE_SEMANTICS_ROADMAP.md](./EXECUTABLE_SEMANTICS_ROADMAP.md)** - 可执行语义路线图（K-Framework、PLT Redex）🆕
-7f. **[AENEAS_INTEGRATION_PLAN.md](./AENEAS_INTEGRATION_PLAN.md)** - Aeneas 对接调研与集成计划 🆕
-7g. **[COQ_OF_RUST_INTEGRATION_PLAN.md](./COQ_OF_RUST_INTEGRATION_PLAN.md)** - coq-of-rust 对接调研与集成计划 🆕
+7f. **[AENEAS_INTEGRATION_PLAN](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)** - Aeneas 对接调研与集成计划（已归档）
+7g. **[COQ_OF_RUST_INTEGRATION_PLAN](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md)** - coq-of-rust 对接调研与集成计划（已归档）
 7h. **[CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md)** - 核心定理完整证明（L2 级）🆕
 7i. **[CORE_THEOREMS_EN_SUMMARY.md](./CORE_THEOREMS_EN_SUMMARY.md)** - 核心定理英文摘要
 7j. **[FORMAL_FULL_MODEL_EN_SUMMARY.md](./FORMAL_FULL_MODEL_EN_SUMMARY.md)** - 形式化全模型英文摘要
@@ -161,8 +161,8 @@
 - ownership T2、borrow T1、type T3 完整证明
 - 辅助引理显式编号、证明依赖 DAG、反例形式化否定
 
-7l. **[COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)** - Coq/Isabelle 证明骨架与 L3 实施指南 🆕
-7m. **[coq_skeleton/](./coq_skeleton/)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）🆕
+7l. **[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/)** - Coq/Isabelle 证明骨架与 L3 实施指南（已归档）
+7m. **[coq_skeleton](../archive/deprecated/coq_skeleton/)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）；本目录仅保留 [coq_skeleton/README.md](./coq_skeleton/README.md) 重定向（已归档）
 
 1. **[COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md)** - 全面系统化梳理总览
    - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）

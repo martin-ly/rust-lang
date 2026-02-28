@@ -44,7 +44,9 @@
 
 - Send/Sync 的 Def 与定理（SEND1、SYNC1、SEND-T1、SYNC-T1、SYNC-L1）
 - 反例索引（Rc !Send、Cell !Sync、非 Send 闭包 spawn）
-- 与 [async_state_machine](async_state_machine.md)、[borrow_checker_proof](borrow_checker_proof.md)、[ownership_model](ownership_model.md) 的双向链接
+- 与 [async_state_machine](async_state_machine.md)、
+- [borrow_checker_proof](borrow_checker_proof.md)、
+- [ownership_model](ownership_model.md) 的双向链接
 
 ---
 

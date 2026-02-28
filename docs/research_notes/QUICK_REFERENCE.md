@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.0+ (Edition 2024)
+> **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成（全面检查推进计划 Phase 1–8 完成）
 
 ---
@@ -79,7 +79,7 @@
 
 - 批判性分析与推进计划 → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
 - 核心定理完整证明 → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)（L2）
-- Coq 证明骨架 → [coq_skeleton](./coq_skeleton/)、[COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)
+- Coq 证明骨架 → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/)（已归档）
 
 **形式化方法研究**:
 
