@@ -1,113 +1,110 @@
-# ABI 速查卡
+# Rust ABI 速查卡
 
-> **文档类型**: 快速参考
-> **难度**: ⭐⭐⭐ 中级
-> **最后更新**: 2026-02-28
+> 快速参考 Rust 中所有可用的调用约定 (Calling Conventions)
 
 ---
 
-## 📋 目录
+## 完整 ABI 列表
 
-- [ABI 速查卡](#abi-速查卡)
-  - [📋 目录](#-目录)
-  - [什么是 ABI](#什么是-abi)
-  - [Rust 中的 ABI 字符串](#rust-中的-abi-字符串)
-  - [平台默认 ABI](#平台默认-abi)
-  - [常见 ABI 对比](#常见-abi-对比)
-    - [x86\_64 平台](#x86_64-平台)
-    - [x86 (32-bit) 平台](#x86-32-bit-平台)
-  - [使用示例](#使用示例)
-  - [ABI 与类型布局](#abi-与类型布局)
-
-## 什么是 ABI
-
-ABI (Application Binary Interface) 定义了函数调用约定、数据布局和系统调用接口。
-
----
-
-## Rust 中的 ABI 字符串
-
-| ABI 字符串 | 描述 | 使用场景 |
-|-----------|------|---------|
-| `"C"` | C 调用约定 | 默认的 FFI 选择 |
-| `"system"` | 系统默认 | Windows API |
-| `"stdcall"` | 标准调用 | Win32 API |
-| `"fastcall"` | 快速调用 | 某些优化场景 |
-| `"vectorcall"` | 向量调用 | Windows SIMD |
-| `"win64"` | Windows x64 | Windows 64位 |
-| `"sysv64"` | System V AMD64 | Linux/macOS 64位 |
-| `"aapcs"` | ARM 过程调用 | ARM 架构 |
-| `"C-unwind"` | C + 栈展开 | 跨语言异常 |
+| ABI | 平台 | 用途 | 典型场景 |
+|-----|------|------|----------|
+| `"Rust"` | 所有 | 默认 ABI | 普通 Rust 函数 |
+| `"C"` | 所有 | C 调用约定 | FFI, 大多数 C 库 |
+| `"system"` | 依平台 | 系统调用约定 | Windows API |
+| `"stdcall"` | Windows x86 | Pascal 风格 | Win32 API (32位) |
+| `"fastcall"` | Windows | 寄存器传参 | 性能敏感代码 |
+| `"vectorcall"` | Windows | SIMD 优化 | DirectX Math |
+| `"cdecl"` | x86 | C 风格 (调用者清栈) | C/C++ 库 |
+| `"thiscall"` | MSVC x86 | C++ 成员函数 | C++ 互操作 |
+| `"aapcs"` | ARM | ARM 过程调用标准 | ARM 嵌入式 |
+| `"win64"` | Windows x64 | Windows x64 约定 | Windows 64位 FFI |
+| `"sysv64"` | Linux/macOS x64 | System V AMD64 ABI | Unix 64位 FFI |
+| `"wasm"` | WebAssembly | WASM C ABI | WebAssembly |
 
 ---
 
-## 平台默认 ABI
+## 平台特定推荐
+
+### Windows
 
 ```rust
-// 跨平台写法
-#[cfg(target_os = "windows")]
-type PlatformAbi = extern "system";
-
-#[cfg(not(target_os = "windows"))]
-type PlatformAbi = extern "C";
-
-PlatformAbi fn platform_function() {}
-```
-
----
-
-## 常见 ABI 对比
-
-### x86_64 平台
-
-| ABI | 寄存器传递 | 栈清理 | 平台 |
-|-----|-----------|-------|------|
-| `sysv64` | RDI, RSI, RDX, RCX, R8, R9 | 调用者 | Linux/macOS |
-| `win64` | RCX, RDX, R8, R9 | 调用者 | Windows |
-
-### x86 (32-bit) 平台
-
-| ABI | 参数传递 | 栈清理 |
-|-----|---------|-------|
-| `cdecl` | 栈 | 调用者 |
-| `stdcall` | 栈 | 被调用者 |
-| `fastcall` | ECX, EDX + 栈 | 被调用者 |
-
----
-
-## 使用示例
-
-```rust
-// 标准 C ABI
-extern "C" fn c_abi_function(x: i32) -> i32 {
-    x * 2
+// Windows API (自动选择 32/64位)
+extern "system" {
+    fn GetLastError() -> u32;
 }
 
-// Windows API 使用 system
-extern "system" fn windows_callback() {}
-
-// 自定义 ABI
-extern "stdcall" fn stdcall_fn() {}
-
-// 可变参数必须使用 C ABI
-extern "C" fn varargs(fmt: *const c_char, ...) {}
-```
-
----
-
-## ABI 与类型布局
-
-```rust
-#[repr(C)]  // C 兼容布局
-struct CCompatible {
-    a: u32,
-    b: u16,
+// Windows x86 (遗留)
+extern "stdcall" {
+    fn MessageBoxA(hwnd: *const c_void, text: *const c_char, 
+                   caption: *const c_char, type_: u32) -> i32;
 }
 
-#[repr(transparent)]  // 与内部类型相同 ABI
-struct Wrapper(u64);
+// Windows x64
+extern "win64" {
+    fn custom_dll_function(x: i64) -> i64;
+}
+```
+
+### Linux / macOS
+
+```rust
+// Unix 系统标准
+extern "C" {
+    fn printf(format: *const c_char, ...) -> i32;
+}
+
+// x86_64 优化
+extern "sysv64" {
+    fn optimized_function(x: f64, y: f64) -> f64;
+}
+```
+
+### ARM
+
+```rust
+// ARM 32位
+extern "aapcs" {
+    fn arm_specific_func(x: i32) -> i32;
+}
+
+// AArch64 使用 "C" (与 AAPCS64 相同)
+extern "C" {
+    fn aarch64_func(x: i64) -> i64;
+}
 ```
 
 ---
 
-**快速提示**: 不确定时用 `"C"`，Windows API 用 `"system"`。
+## ABI 对比
+
+### x86_64 对比
+
+| 特性 | sysv64 (Linux/macOS) | win64 (Windows) |
+|------|---------------------|-----------------|
+| 整数寄存器 | RDI, RSI, RDX, RCX, R8, R9 | RCX, RDX, R8, R9 |
+| 浮点寄存器 | XMM0-XMM7 | XMM0-XMM3 |
+| 栈清理 | 调用者 | 调用者 |
+| 可变参数 | AL 寄存器计数 | 不适用 |
+
+### 32位对比
+
+| ABI | 传参方式 | 栈清理 | 使用场景 |
+|-----|----------|--------|----------|
+| cdecl | 栈 | 调用者 | 通用 C |
+| stdcall | 栈 | 被调用者 | Win32 API |
+| fastcall | ECX, EDX + 栈 | 被调用者 | 性能优化 |
+
+---
+
+## 陷阱与注意
+
+| 陷阱 | 说明 |
+|------|------|
+| `extern "C"` vs `extern "system"` | Windows 上 `"system"` = `"stdcall"` (x86) 或 `"win64"` (x64) |
+| `#[no_mangle]` | FFI 函数通常需要避免名称修饰 |
+| `repr(C)` | 结构体跨 FFI 时需要 C 内存布局 |
+| `panic=abort` | FFI 边界建议禁用 panic 展开 |
+
+---
+
+**最后更新**: 2026-02-28
