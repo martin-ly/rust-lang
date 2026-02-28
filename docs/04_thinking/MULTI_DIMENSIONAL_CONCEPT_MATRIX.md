@@ -161,7 +161,7 @@
 
 | 场景       | 推荐方案     | 备选方案      | 理由         |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 可选值     | Option<T>    | Result<T, ()> | 语义更清晰   |
+| 可选值     | `Option<T>`    | `Result<T, ()>` | 语义更清晰   |
 | 错误传播   | ? 操作符     | match         | 简洁         |
 | 错误链     | thiserror    | anyhow        | 结构化错误   |
 | 快速原型   | anyhow       | thiserror     | 简单易用     |
@@ -177,7 +177,7 @@
 
 ### 5. 错误处理对比矩阵（扩展）
 
-| 方案          | 可恢复 | 错误链 | 上下文 | 性能   | 适用场景       |
+| 方案  | 可恢复 | 错误链 | 上下文 | 性能   | 适用场景 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Option**    | -      | -      | -      | 零成本 | 可选值         |
 | **thiserror** | ✅     | ✅     | Source | 零成本 | 库、结构化错误 |
@@ -253,11 +253,13 @@
 
 ## 📐 形式化理论概念对比矩阵 {#-形式化理论概念对比矩阵}
 
-> 用于梳理概念定义、公理、定理、证明方法与反例的对应关系。详见 [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)。
+> 用于梳理概念定义、公理、定理、证明方法与反例的对应关系。
+> 详见 [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)。
 
 ### 表达能力边界矩阵（新增）
 
-> 用于论证「何者可表达、何者不可表达、边界在哪里」。详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
+> 用于论证「何者可表达、何者不可表达、边界在哪里」。
+> 详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
 
 | 维度 | 可表达 | 边界 | 不可表达 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
