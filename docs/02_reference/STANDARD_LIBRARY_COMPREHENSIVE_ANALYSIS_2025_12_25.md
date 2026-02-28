@@ -40,18 +40,18 @@
   - [📊 2. 核心标准库模块分析 {#-2-核心标准库模块分析}](#-2-核心标准库模块分析--2-核心标准库模块分析)
     - [2.1 集合类型 (std::collections)](#21-集合类型-stdcollections)
       - [2.1.1 HashMap\<K, V\>](#211-hashmapk-v)
-      - [2.1.2 Vec {#212-vec}](#212-vec-212-vec)
-      - [2.1.3 VecDeque {#213-vecdeque}](#213-vecdeque-213-vecdeque)
+      - [2.1.2 `Vec<T>` {#212-vec}](#212-vect-212-vec)
+      - [2.1.3 `VecDeque<T>` {#213-vecdeque}](#213-vecdequet-213-vecdeque)
     - [2.2 并发类型 (std::sync)](#22-并发类型-stdsync)
-      - [2.2.1 Arc {#221-arc}](#221-arc-221-arc)
-      - [2.2.2 Mutex {#222-mutex}](#222-mutex-222-mutex)
-      - [2.2.3 RwLock {#223-rwlock}](#223-rwlock-223-rwlock)
+      - [2.2.1 `Arc<T>` {#221-arc}](#221-arct-221-arc)
+      - [2.2.2 `Mutex<T>` {#222-mutex}](#222-mutext-222-mutex)
+      - [2.2.3 `RwLock<T>` {#223-rwlock}](#223-rwlockt-223-rwlock)
     - [2.3 I/O 类型 (std::io)](#23-io-类型-stdio)
       - [2.3.1 Read 和 Write Traits](#231-read-和-write-traits)
       - [2.3.2 BufRead Trait](#232-bufread-trait)
     - [2.4 线程类型 (std::thread)](#24-线程类型-stdthread)
       - [2.4.1 Thread](#241-thread)
-      - [2.4.2 JoinHandle {#242-joinhandle}](#242-joinhandle-242-joinhandle)
+      - [2.4.2 `JoinHandle<T>` {#242-joinhandle}](#242-joinhandlet-242-joinhandle)
     - [2.5 进程类型 (std::process)](#25-进程类型-stdprocess)
       - [2.5.1 Command](#251-command)
     - [2.6 时间类型 (std::time)](#26-时间类型-stdtime)
@@ -59,7 +59,7 @@
       - [2.6.2 Duration](#262-duration)
     - [2.7 错误处理 (std::error, std::result)](#27-错误处理-stderror-stdresult)
       - [2.7.1 Result\<T, E\>](#271-resultt-e)
-      - [2.7.2 Option {#272-option}](#272-option-272-option)
+      - [2.7.2 `Option<T>` {#272-option}](#272-optiont-272-option)
   - [🔍 3. 标准库设计论证 {#-3-标准库设计论证}](#-3-标准库设计论证--3-标准库设计论证)
     - [3.1 零成本抽象](#31-零成本抽象)
     - [3.2 所有权系统](#32-所有权系统)
@@ -485,7 +485,7 @@ for (key, value) in &map {
 - **最坏时间复杂度**: O(n) 插入、查找、删除（哈希冲突）
 - **空间复杂度**: O(n)
 
-#### 2.1.2 Vec<T> {#212-vec}
+#### 2.1.2 `Vec<T>` {#212-vec}
 
 **定义**: 动态数组，自动扩容。
 
@@ -519,7 +519,7 @@ for item in &vec {
 - **最坏时间复杂度**: O(n) 插入（扩容时）
 - **空间复杂度**: O(n)
 
-#### 2.1.3 VecDeque<T> {#213-vecdeque}
+#### 2.1.3 `VecDeque<T>` {#213-vecdeque}
 
 **定义**: 双端队列，支持两端操作。
 
@@ -551,7 +551,7 @@ let back = deque.pop_back();
 
 ### 2.2 并发类型 (std::sync)
 
-#### 2.2.1 Arc<T> {#221-arc}
+#### 2.2.1 `Arc<T>` {#221-arc}
 
 **定义**: 原子引用计数智能指针，线程安全。
 
@@ -587,7 +587,7 @@ for handle in handles {
 - **克隆开销**: `Arc::clone` 只是增加引用计数，开销小
 - **内存开销**: 每个 `Arc` 增加 16 字节（64位系统）
 
-#### 2.2.2 Mutex<T> {#222-mutex}
+#### 2.2.2 `Mutex<T>` {#222-mutex}
 
 **定义**: 互斥锁，保护共享数据。
 
@@ -626,7 +626,7 @@ println!("Result: {}", *data.lock().unwrap());
 - **阻塞**: 获取锁失败时线程阻塞
 - **内存开销**: 每个 `Mutex` 增加 24 字节（64位系统）
 
-#### 2.2.3 RwLock<T> {#223-rwlock}
+#### 2.2.3 `RwLock<T>` {#223-rwlock}
 
 **定义**: 读写锁，支持多个读者或一个写者。
 
@@ -751,7 +751,7 @@ let handle = thread::spawn(|| {
 handle.join().unwrap();
 ```
 
-#### 2.4.2 JoinHandle<T> {#242-joinhandle}
+#### 2.4.2 `JoinHandle<T>` {#242-joinhandle}
 
 **定义**: 线程句柄，用于等待线程完成。
 
@@ -867,7 +867,7 @@ fn read_file(path: &str) -> std::io::Result<String> {
 }
 ```
 
-#### 2.7.2 Option<T> {#272-option}
+#### 2.7.2 `Option<T>` {#272-option}
 
 **定义**: 表示可能为空的值。
 

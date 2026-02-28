@@ -41,7 +41,7 @@
 
 **错误信息**:
 
-```
+```text
 error[E0432]: unresolved import `c12_wasm::rust_192_features`
 ```
 
@@ -75,7 +75,7 @@ cargo build
 
 **错误信息**:
 
-```
+```text
 error[E0283]: type annotations needed for `WasmCircularBuffer<_>`
 ```
 
@@ -95,7 +95,7 @@ let mut buffer: WasmCircularBuffer<i32> = WasmCircularBuffer::new(10);
 
 **错误信息**:
 
-```
+```text
 error[E0432]: unresolved import `std::num::NonZeroUsize`
 ```
 
@@ -199,7 +199,7 @@ some-crate = { version = "1.0", default-features = false }
 
 **警告信息**:
 
-```
+```text
 warning: unnecessary unsafe block
 ```
 
@@ -248,7 +248,7 @@ unsafe {
 
 **错误信息**:
 
-```
+```text
 TypeError: wasm function is not a function
 ```
 
@@ -282,7 +282,7 @@ wasm-bindgen = "0.2"  # 确保使用最新版本
 
 **错误信息**:
 
-```
+```text
 TypeError: Cannot convert undefined to number
 ```
 

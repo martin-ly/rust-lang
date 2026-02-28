@@ -47,7 +47,7 @@
 
 ### 核心模块性能测试
 
-| 模块                       | 基准测试文件数 | 文件列表                                                                                                                                                                                                                       |
+| 模块 | 基准测试文件数 | 文件列表 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | c02_type_system            | 3              | performance_benchmarks.rs, rust_190_simple_benchmarks.rs, rust_192_benchmarks.rs                                                                                                                                               |
 | c03_control_fn             | 2              | performance_benchmarks.rs, rust_192_benchmarks.rs                                                                                                                                                                              |

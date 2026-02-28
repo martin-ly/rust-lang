@@ -1,10 +1,10 @@
+# 算法与数据结构快速参考卡片
+
 > **快速参考** | [完整文档](../../../crates/c08_collections_algorithms/docs/) | [代码示例](../../../crates/c08_collections_algorithms/examples/)
 > **创建日期**: 2026-01-26
 > **最后更新**: 2026-01-27
 > **Rust 版本**: 1.93.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-
-# 算法与数据结构快速参考卡片
 
 ---
 
