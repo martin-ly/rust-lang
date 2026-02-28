@@ -124,8 +124,9 @@ C10 Networks文档体系按照以下结构组织：
 
 ### 2. 理论文档
 
-| 文档名称                                       | 描述                                               | 状态    | 链接                                                                                             |
-| :--- | :--- | :--- | :--- || NETWORK_COMMUNICATION_THEORY_ENHANCED.md       | 网络通信理论增强版，包含深入的数学建模和形式化证明 | ✅ 完成 | [NETWORK_COMMUNICATION_THEORY_ENHANCED.md](NETWORK_COMMUNICATION_THEORY_ENHANCED.md)             |
+| 文档名称  | 描述  | 状态    | 链接 |
+| :--- | :--- | :--- | :--- |
+| NETWORK_COMMUNICATION_THEORY_ENHANCED.md       | 网络通信理论增强版，包含深入的数学建模和形式化证明 | ✅ 完成 | [NETWORK_COMMUNICATION_THEORY_ENHANCED.md](NETWORK_COMMUNICATION_THEORY_ENHANCED.md)             |
 | CONCEPT_DEFINITIONS_ENHANCED.md                | 概念定义增强版，包含形式化定义和关系分析           | ✅ 完成 | [CONCEPT_DEFINITIONS_ENHANCED.md](CONCEPT_DEFINITIONS_ENHANCED.md)                               |
 | MATHEMATICAL_FOUNDATIONS.md                    | 数学基础理论，包含概率论、图论、线性代数等         | ✅ 完成 | [MATHEMATICAL_FOUNDATIONS.md](MATHEMATICAL_FOUNDATIONS.md)                                       |
 | FORMAL_PROOFS_AND_MATHEMATICAL_ARGUMENTS.md    | 形式化证明和数学论证                               | ✅ 完成 | [FORMAL_PROOFS_AND_MATHEMATICAL_ARGUMENTS.md](FORMAL_PROOFS_AND_MATHEMATICAL_ARGUMENTS.md)       |
@@ -182,8 +183,9 @@ C10 Networks文档体系按照以下结构组织：
 
 ### 1. 性能分析
 
-| 文档名称                                          | 描述                                               | 状态      | 链接                                                                                                   |
-| :--- | :--- | :--- | :--- || PERFORMANCE_ANALYSIS_AND_OPTIMIZATION_ENHANCED.md | 性能分析与优化增强版，包含深入的理论基础和优化技术 | ✅ 完成   | [PERFORMANCE_ANALYSIS_AND_OPTIMIZATION_ENHANCED.md](PERFORMANCE_ANALYSIS_AND_OPTIMIZATION_ENHANCED.md) |
+| 文档名称 | 描述  | 状态 | 链接  |
+| :--- | :--- | :--- | :--- |
+| PERFORMANCE_ANALYSIS_AND_OPTIMIZATION_ENHANCED.md | 性能分析与优化增强版，包含深入的理论基础和优化技术 | ✅ 完成   | [PERFORMANCE_ANALYSIS_AND_OPTIMIZATION_ENHANCED.md](PERFORMANCE_ANALYSIS_AND_OPTIMIZATION_ENHANCED.md) |
 | PERFORMANCE_ANALYSIS_GUIDE.md                     | 性能分析指南                                       | ✅ 完成   | [PERFORMANCE_ANALYSIS_GUIDE.md](PERFORMANCE_ANALYSIS_GUIDE.md)                                         |
 | NETWORK_PERFORMANCE_MODELS.md                     | 网络性能模型                                       | ✅ 完成   | [NETWORK_PERFORMANCE_MODELS.md](NETWORK_PERFORMANCE_MODELS.md)                                         |
 | PERFORMANCE_MONITORING.md                         | 性能监控指南                                       | 🚧 进行中 | [PERFORMANCE_MONITORING.md](PERFORMANCE_MONITORING.md)                                                 |
@@ -352,8 +354,8 @@ C10 Networks文档体系按照以下结构组织：
 
 ### 3. 学术论文
 
-| 论文名称                                                      | 作者             | 年份 | 链接                                                                                     |
-| :--- | :--- | :--- | :--- || A Mathematical Theory of Communication                        | Claude Shannon   | 1948 | [PDF](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf) |
+| 论文名称  | 作者 | 年份 | 链接 |
+| :--- | :--- | :--- | :--- || A Mathematical Theory of Communication | Claude Shannon   | 1948 | [PDF](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf) |
 | Congestion Avoidance and Control                              | Van Jacobson     | 1988 | [PDF](https://ee.lbl.gov/papers/congavoid.pdf)                                           |
 | The Design and Implementation of a Log-Structured File System | Mendel Rosenblum | 1992 | [PDF](https://people.eecs.berkeley.edu/~brewer/cs262/LFS.pdf)                            |
 | End-to-End Arguments in System Design                         | J.H. Saltzer     | 1984 | [PDF](https://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf)                |
