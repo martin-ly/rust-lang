@@ -355,9 +355,9 @@ fn main() {
 
 | 场景 | 实施步骤 | 参考代码 |
 | :--- | :--- | :--- |
-| **新模块知识结构** | 1. 使用 ConceptDefinition 定义核心概念<br>2. 使用批量生成器创建文档<br>3. 补充思维表征模板 | `ConceptDefinition::generate_markdown()` |
-| **已有模块补充** | 1. 使用模板生成器创建框架<br>2. 填充具体内容<br>3. 验证结构完整性 | `ModuleKnowledgeGenerator::generate_all()` |
-| **思维表征扩展** | 1. 选择合适的表征模板<br>2. 填充具体内容<br>3. 关联到知识图谱 | `ThinkingRepresentationTemplates` |
+| **新模块知识结构** | 1. 使用 ConceptDefinition 定义核心概念 2. 使用批量生成器创建文档 3. 补充思维表征模板 | `ConceptDefinition::generate_markdown()` |
+| **已有模块补充** | 1. 使用模板生成器创建框架 2. 填充具体内容 3. 验证结构完整性 | `ModuleKnowledgeGenerator::generate_all()` |
+| **思维表征扩展** | 1. 选择合适的表征模板 2. 填充具体内容 3. 关联到知识图谱 | `ThinkingRepresentationTemplates` |
 
 ---
 

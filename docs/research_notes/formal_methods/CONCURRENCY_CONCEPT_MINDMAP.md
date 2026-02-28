@@ -15,32 +15,32 @@
         │                      │                      │
    【线程】                【同步原语】            【异步】
         │                      │                      │
-    ├─OS线程              ├─互斥锁              ├─Future
-    │  ├─spawn            │  ├─Mutex            │  ├─状态机
-    │  ├─join             │  └─RwLock           │  ├─轮询
-    │  └─park             │                      │  └─唤醒
-    │                     ├─信号量              │
-    ├─线程池              │  ├─Semaphore        ├─async/await
-    │  └─rayon            │  └─Atomic           │  ├─语法糖
-    │                     │                      │  └─状态机转换
-    └─线程本地            ├─屏障                │
-       └─ThreadLocal      │  └─Barrier          ├─Pin
-                          │                      │  └─固定位置
-                          ├─条件变量            │
-                          │  └─Condvar          └─Executor
-                          │                      ├─调度器
-                          └─原子操作            └─Reactor
-                             ├─AtomicUsize
-                             ├─AtomicBool
-                             └─内存排序
-                                      │
-   【Send/Sync】           【内存模型】
-        │                      │
-    ├─Send                ├─Happens-Before
-    │  └─跨线程转移       ├─Acquire-Release
-    │                      ├─Sequential
-    └─Sync                └─Consistency
-       └─跨线程共享
+        ├─OS线程              ├─互斥锁              ├─Future
+        │  ├─spawn            │  ├─Mutex           │  ├─状态机
+        │  ├─join             │  └─RwLock          │  ├─轮询
+        │  └─park             │                    │  └─唤醒
+        │                     ├─信号量              │
+        ├─线程池              │  ├─Semaphore        ├─async/await
+        │  └─rayon            │  └─Atomic           │  ├─语法糖
+        │                     │                     │  └─状态机转换
+        └─线程本地             ├─屏障                │
+           └─ThreadLocal      │  └─Barrier          ├─Pin
+                              │                     │  └─固定位置
+                              ├─条件变量             │
+                              │  └─Condvar          └─Executor
+                              │                      ├─调度器
+                              └─原子操作              └─Reactor
+                                ├─AtomicUsize
+                                ├─AtomicBool
+                                └─内存排序
+                                        │
+            【Send/Sync】           【内存模型】
+                │                      │
+                ├─Send                 ├─Happens-Before
+                │  └─跨线程转移         ├─Acquire-Release
+                │                      ├─Sequential
+                └─Sync                 └─Consistency
+                └─跨线程共享
 ```
 
 ---
