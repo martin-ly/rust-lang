@@ -32,23 +32,23 @@
 
 ### 文档更新任务 (7个)
 
-4. ✅ **主索引文档更新** - `00_MASTER_INDEX.md`
-5. ✅ **docs/README.md 更新**
-6. ✅ **Tier 2 README 更新**
-7. ✅ **Tier 3 README 更新**
-8. ✅ **Tier 4 README 更新**
-9. ✅ **FAQ.md 延伸阅读更新**
-10. ✅ **Glossary.md 延伸阅读更新**
+1. ✅ **主索引文档更新** - `00_MASTER_INDEX.md`
+2. ✅ **docs/README.md 更新**
+3. ✅ **Tier 2 README 更新**
+4. ✅ **Tier 3 README 更新**
+5. ✅ **Tier 4 README 更新**
+6. ✅ **FAQ.md 延伸阅读更新**
+7. ✅ **Glossary.md 延伸阅读更新**
 
 ### 状态更新任务 (2个)
 
-11. ✅ **C09 README.md 更新**
-12. ✅ **C04 README.md 状态更新**
+1. ✅ **C09 README.md 更新**
+2. ✅ **C04 README.md 状态更新**
 
 ### 质量保证任务 (2个)
 
-13. ✅ **C09 文档链接验证**
-14. ✅ **全面任务扫描**
+1. ✅ **C09 文档链接验证**
+2. ✅ **全面任务扫描**
 
 ---
 

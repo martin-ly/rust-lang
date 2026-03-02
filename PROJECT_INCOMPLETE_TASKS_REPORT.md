@@ -189,7 +189,8 @@
 | `../../../crates/xxx/docs/` | xxx占位符 | 替换为具体crate名称 |
 | `../../crates/xxx/src/` | xxx占位符 | 替换为具体crate名称 |
 
-**建议修复方式**: 
+**建议修复方式**:
+
 1. 运行 `python check_links.py` 生成完整报告
 2. 修复占位符 `xxx` 链接
 3. 将目录链接改为具体文件链接
@@ -222,7 +223,8 @@
 | `docs/archive/deprecated/coq_skeleton/` | 已归档 | L3机器证明不再纳入100%目标 |
 | `docs/archive/deprecated/coq_skeleton/WORKFLOW_FORMALIZATION.v` | Placeholder | 第228行有 `wf1. (* Placeholder *)` |
 
-**建议修复方式**: 
+**建议修复方式**:
+
 - 文档示例中的 `todo!()` 可保留作为教学用途
 - 实际代码中的 `placeholder_mode` 需要评估是否需要实现
 - xxx占位链接需要逐步替换
