@@ -388,4 +388,6 @@ Special thanks to:
 
 ---
 
-**Note**: This is an English translation of the Chinese original. Some documentation may still be in Chinese. We are actively working on translating all materials. Contributions to English documentation are especially welcome!
+**Note**: This is an English translation of the Chinese original. Some documentation may still be in Chinese.
+We are actively working on translating all materials.
+Contributions to English documentation are especially welcome!

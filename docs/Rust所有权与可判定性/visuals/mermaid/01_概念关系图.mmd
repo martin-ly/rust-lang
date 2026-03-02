@@ -1,0 +1,114 @@
+---
+title: Rust所有权系统概念关系图
+---
+
+graph TB
+    subgraph Core["核心概念层"]
+        Ownership["所有权<br/>Ownership"]
+        Borrowing["借用<br/>Borrowing"]
+        Lifetime["生命周期<br/>Lifetime"]
+    end
+    
+    subgraph OwnershipDetails["所有权详细"]
+        Uniqueness["唯一性<br/>Uniqueness"]
+        MoveSemantics["转移语义<br/>Move Semantics"]
+        DropTrait["Drop Trait"]
+        CopyTrait["Copy Trait"]
+    end
+    
+    subgraph BorrowingDetails["借用详细"]
+        SharedBorrow["共享借用 &T<br/>Shared Borrow"]
+        MutBorrow["可变借用 &mut T<br/>Mutable Borrow"]
+        Reborrowing["重新借用<br/>Reborrowing"]
+        BorrowRules["借用规则<br/>Borrow Rules"]
+    end
+    
+    subgraph LifetimeDetails["生命周期详细"]
+        LexicalScope["词法作用域<br/>Lexical Scope"]
+        NLL["非词法生命周期<br/>NLL"]
+        LifetimeElision["生命周期省略<br/>Lifetime Elision"]
+        Outlives["'a: 'b 关系<br/>Outlives"]
+    end
+    
+    subgraph TypeSystem["类型系统层"]
+        AffineTypes["仿射类型<br/>Affine Types"]
+        LinearTypes["线性类型<br/>Linear Types"]
+        RegionTypes["区域类型<br/>Region Types"]
+    end
+    
+    subgraph Verification["验证层次层"]
+        StaticCheck["静态检查<br/>Static Analysis"]
+        RuntimeCheck["运行时检查<br/>Runtime Checking"]
+        FormalVerification["形式化验证<br/>Formal Verification"]
+    end
+    
+    subgraph StaticDetails["静态检查详细"]
+        BorrowChecker["借用检查器<br/>Borrow Checker"]
+        TypeInference["类型推断<br/>Type Inference"]
+        NLLAnalysis["NLL分析<br/>NLL Analysis"]
+    end
+    
+    subgraph RuntimeDetails["运行时检查详细"]
+        RefCell["RefCell状态机"]
+        ReferenceCounting["Rc/Arc引用计数"]
+        Miri["Miri解释器"]
+    end
+    
+    %% 核心层关系
+    Ownership --> Borrowing
+    Ownership --> Lifetime
+    Borrowing --> Lifetime
+    
+    %% 所有权详细
+    Ownership --> Uniqueness
+    Ownership --> MoveSemantics
+    MoveSemantics --> DropTrait
+    MoveSemantics --> CopyTrait
+    
+    %% 借用详细
+    Borrowing --> SharedBorrow
+    Borrowing --> MutBorrow
+    Borrowing --> Reborrowing
+    SharedBorrow --> BorrowRules
+    MutBorrow --> BorrowRules
+    
+    %% 生命周期详细
+    Lifetime --> LexicalScope
+    Lifetime --> NLL
+    Lifetime --> LifetimeElision
+    Lifetime --> Outlives
+    LexicalScope -.-> NLL
+    
+    %% 类型系统
+    Ownership --> AffineTypes
+    Borrowing --> RegionTypes
+    AffineTypes -.-> LinearTypes
+    
+    %% 验证层次
+    TypeSystem --> StaticCheck
+    TypeSystem --> RuntimeCheck
+    StaticCheck --> FormalVerification
+    RuntimeCheck --> FormalVerification
+    
+    %% 静态检查详细
+    StaticCheck --> BorrowChecker
+    StaticCheck --> TypeInference
+    BorrowChecker --> NLLAnalysis
+    
+    %% 运行时检查详细
+    RuntimeCheck --> RefCell
+    RuntimeCheck --> ReferenceCounting
+    RuntimeCheck --> Miri
+    
+    %% 交叉关系
+    BorrowChecker -.-> RefCell
+    NLLAnalysis -.-> Miri
+    AffineTypes -.-> DropTrait
+    RegionTypes -.-> Outlives
+    
+    style Ownership fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    style Borrowing fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    style Lifetime fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    style StaticCheck fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    style RuntimeCheck fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    style FormalVerification fill:#f3e5f5,stroke:#4a148c,stroke-width:2px

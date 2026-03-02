@@ -1,0 +1,42 @@
+---
+title: Rust所有权转移流程
+---
+
+sequenceDiagram
+    participant Main as main()
+    participant S as s: String
+    participant T as t: String
+    participant Heap as 堆内存
+    participant Drop as Drop Trait
+    
+    Main->>Heap: 分配内存
+    Heap-->>S: 创建String::from("hello")
+    Note over S: s拥有堆内存所有权<br/>s = ptr + len + capacity
+    
+    Main->>S: let t = s
+    Note over S: 所有权转移发生<br/>Move语义
+    
+    S->>T: 转移所有权<br/>ptr, len, capacity
+    Note over S: s变为未初始化状态<br/>s不可用
+    Note over T: t获得所有权<br/>t可用
+    
+    Main->>T: println!("{}", t)
+    Note over T: t正常使用
+    
+    alt 尝试使用s
+        Main->>S: println!("{}", s)
+        Note over S: ❌ 编译错误<br/>value borrowed here after move
+    end
+    
+    Main->>T: drop(t) / 作用域结束
+    T->>Drop: 调用Drop trait
+    Drop->>Heap: 释放堆内存
+    Note over Heap: 内存安全释放<br/>无内存泄漏
+    
+    %% Copy类型对比
+    Note right of Main: Copy类型对比
+    Main->>Main: let x = 5i32
+    Main->>Main: let y = x
+    Note over Main: x被复制(Copy)<br/>x和y都可用
+    Main->>Main: println!("x={}, y={}", x, y)
+    Note over Main: ✅ 编译通过

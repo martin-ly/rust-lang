@@ -40,6 +40,8 @@
   "files.trimFinalNewlines": true,
       // Markdown文件以文本编辑器方式打开（禁用可视化编辑器）
   "workbench.editorAssociations": {
-    "*.md": "default"
+    "*.md": "default",
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.svg": "imagePreview.previewEditor"
   }
 }

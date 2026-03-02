@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="1000" height="700">
+  <defs>
+    <linearGradient id="l1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c8e6c9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a5d6a7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="l2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff9c4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fff176;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="l3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffccbc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffab91;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="l4Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffcdd2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ef9a9a;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1000" height="700" fill="#fafafa"/>
+  
+  <!-- Title -->
+  <text x="500" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1565c0">Rust程序属性可判定性层次结构</text>
+  
+  <!-- Level 1: Fully Decidable -->
+  <rect x="50" y="80" width="900" height="130" rx="10" fill="url(#l1Grad)" stroke="#2e7d32" stroke-width="2"/>
+  <text x="500" y="105" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b5e20">层级 1: 完全可判定 (Decidable)</text>
+  <text x="500" y="125" text-anchor="middle" font-size="12" fill="#388e3c">编译期精确判定，无近似</text>
+  
+  <!-- L1 Items -->
+  <rect x="80" y="140" width="170" height="50" rx="8" fill="white" stroke="#4caf50" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="165" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">词法属性</text>
+  <text x="165" y="178" text-anchor="middle" font-size="11" fill="#555">DFA / 正则表达式</text>
+  
+  <rect x="280" y="140" width="170" height="50" rx="8" fill="white" stroke="#4caf50" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="365" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">语法分析</text>
+  <text x="365" y="178" text-anchor="middle" font-size="11" fill="#555">LR解析器 / CFG</text>
+  
+  <rect x="480" y="140" width="170" height="50" rx="8" fill="white" stroke="#4caf50" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="565" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">类型检查</text>
+  <text x="565" y="178" text-anchor="middle" font-size="11" fill="#555">Hindley-Milner / O(n²)</text>
+  
+  <rect x="680" y="140" width="170" height="50" rx="8" fill="white" stroke="#4caf50" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="765" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">所有权跟踪</text>
+  <text x="765" y="178" text-anchor="middle" font-size="11" fill="#555">线性分析 / O(n)</text>
+  
+  <!-- Level 2: Approximately Decidable -->
+  <rect x="50" y="230" width="900" height="130" rx="10" fill="url(#l2Grad)" stroke="#f57f17" stroke-width="2"/>
+  <text x="500" y="255" text-anchor="middle" font-size="18" font-weight="bold" fill="#e65100">层级 2: 近似可判定 (Approximately Decidable)</text>
+  <text x="500" y="275" text-anchor="middle" font-size="12" fill="#ef6c00">编译期近似，可能保守拒绝</text>
+  
+  <!-- L2 Items -->
+  <rect x="80" y="290" width="170" height="50" rx="8" fill="white" stroke="#ffa000" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="165" y="310" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">NLL借用检查</text>
+  <text x="165" y="328" text-anchor="middle" font-size="11" fill="#555">数据流分析 / O(n³)</text>
+  
+  <rect x="280" y="290" width="170" height="50" rx="8" fill="white" stroke="#ffa000" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="365" y="310" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">Polonius</text>
+  <text x="365" y="328" text-anchor="middle" font-size="11" fill="#555">Datalog求解 / 更精确</text>
+  
+  <rect x="480" y="290" width="170" height="50" rx="8" fill="white" stroke="#ffa000" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="565" y="310" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">常量传播</text>
+  <text x="565" y="328" text-anchor="middle" font-size="11" fill="#555">抽象解释 / O(n²)</text>
+  
+  <rect x="680" y="290" width="170" height="50" rx="8" fill="white" stroke="#ffa000" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="765" y="310" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">符号执行</text>
+  <text x="765" y="328" text-anchor="middle" font-size="11" fill="#555">路径敏感 / 指数级</text>
+  
+  <!-- Level 3: Runtime Decidable -->
+  <rect x="50" y="380" width="900" height="130" rx="10" fill="url(#l3Grad)" stroke="#d84315" stroke-width="2"/>
+  <text x="500" y="405" text-anchor="middle" font-size="18" font-weight="bold" fill="#bf360c">层级 3: 运行时判定 (Runtime Decidable)</text>
+  <text x="500" y="425" text-anchor="middle" font-size="12" fill="#d84315">运行时检查，精确但可能有开销</text>
+  
+  <!-- L3 Items -->
+  <rect x="80" y="440" width="170" height="50" rx="8" fill="white" stroke="#ff5722" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="165" y="460" text-anchor="middle" font-size="13" font-weight="bold" fill="#bf360c">RefCell</text>
+  <text x="165" y="478" text-anchor="middle" font-size="11" fill="#555">状态机检查 / O(1)</text>
+  
+  <rect x="280" y="440" width="170" height="50" rx="8" fill="white" stroke="#ff5722" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="365" y="460" text-anchor="middle" font-size="13" font-weight="bold" fill="#bf360c">Rc/Arc</text>
+  <text x="365" y="478" text-anchor="middle" font-size="11" fill="#555">引用计数 / O(1)</text>
+  
+  <rect x="480" y="440" width="170" height="50" rx="8" fill="white" stroke="#ff5722" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="565" y="460" text-anchor="middle" font-size="13" font-weight="bold" fill="#bf360c">Miri检测</text>
+  <text x="565" y="478" text-anchor="middle" font-size="11" fill="#555">Tree Borrows / 高</text>
+  
+  <rect x="680" y="440" width="170" height="50" rx="8" fill="white" stroke="#ff5722" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="765" y="460" text-anchor="middle" font-size="13" font-weight="bold" fill="#bf360c">锁检查</text>
+  <text x="765" y="478" text-anchor="middle" font-size="11" fill="#555">Mutex/RwLock / O(1)</text>
+  
+  <!-- Level 4: Theoretically Undecidable -->
+  <rect x="50" y="530" width="900" height="130" rx="10" fill="url(#l4Grad)" stroke="#c62828" stroke-width="2"/>
+  <text x="500" y="555" text-anchor="middle" font-size="18" font-weight="bold" fill="#b71c1c">层级 4: 理论不可判定 (Theoretically Undecidable)</text>
+  <text x="500" y="575" text-anchor="middle" font-size="12" fill="#c62828">不存在通用判定算法</text>
+  
+  <!-- L4 Items -->
+  <rect x="80" y="590" width="250" height="50" rx="8" fill="white" stroke="#e53935" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="205" y="610" text-anchor="middle" font-size="13" font-weight="bold" fill="#b71c1c">Halting Problem</text>
+  <text x="205" y="628" text-anchor="middle" font-size="11" fill="#555">程序终止性 / Turing 1936</text>
+  
+  <rect x="370" y="590" width="250" height="50" rx="8" fill="white" stroke="#e53935" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="495" y="610" text-anchor="middle" font-size="13" font-weight="bold" fill="#b71c1c">Rice's Theorem</text>
+  <text x="495" y="628" text-anchor="middle" font-size="11" fill="#555">语义属性 / Rice 1953</text>
+  
+  <rect x="660" y="590" width="250" height="50" rx="8" fill="white" stroke="#e53935" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="785" y="610" text-anchor="middle" font-size="13" font-weight="bold" fill="#b71c1c">精确别名分析</text>
+  <text x="785" y="628" text-anchor="middle" font-size="11" fill="#555">Landi-Ryder / PSPACE-hard</text>
+  
+  <!-- Legend -->
+  <rect x="50" y="670" width="900" height="20" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1"/>
+  <text x="500" y="685" text-anchor="middle" font-size="11" fill="#1565c0">
+    从绿到红：可判定性递减 | 绿色=编译期保证 | 黄色=近似保证 | 橙色=运行时检查 | 红色=理论限制
+  </text>
+</svg>

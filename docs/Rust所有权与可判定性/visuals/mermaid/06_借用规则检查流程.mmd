@@ -1,0 +1,66 @@
+---
+title: Rust借用规则编译期检查流程
+---
+
+flowchart TD
+    Start([开始借用检查])
+    
+    %% 输入
+    Input["输入: 表达式 &expr 或 &mut expr"]
+    
+    %% 检查步骤
+    CheckMut{"是可变借用<br/>&mut expr?"}
+    
+    %% 可变借用路径
+    MutActive{"存在活跃借用?"}
+    MutError["❌ 编译错误<br/>cannot borrow as mutable"]
+    MutSuccess["✅ 允许可变借用<br/>标记expr为'已冻结'"]
+    
+    %% 共享借用路径
+    CheckMutBorrow{"存在活跃可变借用?"}
+    SharedError["❌ 编译错误<br/>cannot borrow as immutable"]
+    SharedSuccess["✅ 允许共享借用<br/>增加共享借用计数"]
+    
+    %% 生命周期检查
+    LifetimeCheck{"引用超出<br/>被引用值生命周期?"}
+    LifetimeError["❌ 编译错误<br/>does not live long enough"]
+    
+    %% NLL分析
+    NLL["NLL分析:<br/>确定实际最后使用点"]
+    NLLSuccess["✅ 非词法生命周期允许"]
+    
+    %% 成功
+    Success([借用检查通过])
+    
+    %% 连接
+    Start --> Input
+    Input --> CheckMut
+    
+    CheckMut -->|YES| MutActive
+    CheckMut -->|NO| CheckMutBorrow
+    
+    MutActive -->|YES| MutError
+    MutActive -->|NO| MutSuccess
+    MutSuccess --> LifetimeCheck
+    
+    CheckMutBorrow -->|YES| SharedError
+    CheckMutBorrow -->|NO| SharedSuccess
+    SharedSuccess --> LifetimeCheck
+    
+    LifetimeCheck -->|YES| LifetimeError
+    LifetimeCheck -->|NO| NLL
+    
+    NLL -->|需要精确分析| NLLSuccess
+    NLL -->|保守拒绝| LifetimeError
+    NLLSuccess --> Success
+    
+    %% 样式
+    classDef error fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+    classDef success fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    classDef process fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef decision fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    
+    class Start,Success process
+    class MutError,SharedError,LifetimeError error
+    class MutSuccess,SharedSuccess,NLLSuccess success
+    class CheckMut,MutActive,CheckMutBorrow,LifetimeCheck decision

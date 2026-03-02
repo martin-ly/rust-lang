@@ -79,7 +79,7 @@
 
 ## 📁 项目结构
 
-```
+```text
 rust-lang/
 ├── crates/
 │   ├── c01_ownership/              ✅ 导航已修复

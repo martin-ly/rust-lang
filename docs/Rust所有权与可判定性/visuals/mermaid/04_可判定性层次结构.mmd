@@ -1,0 +1,73 @@
+---
+title: Rust程序属性可判定性层次结构
+---
+
+graph TB
+    subgraph L1["层级1: 完全可判定 Decidable"]
+        L1_Syntax["语法属性<br/>Regular/Context-Free"]
+        L1_Type["类型检查<br/>Polynomial Time"]
+        L1_Ownership["所有权跟踪<br/>Linear Analysis"]
+        
+        L1_Syntax_Detail["DFA/LR Parser<br/>O(n)"]
+        L1_Type_Detail["Hindley-Milner<br/>O(n²)"]
+        L1_Ownership_Detail["线性分析<br/>O(n)"]
+    end
+    
+    subgraph L2["层级2: 近似可判定 Approximately Decidable"]
+        L2_DataFlow["数据流分析"]
+        L2_Path["路径敏感分析"]
+        
+        L2_NLL["NLL分析<br/>迭代数据流<br/>O(n³)"]
+        L2_Polonius["Polonius<br/>Datalog求解"]
+        L2_Symbolic["符号执行<br/>指数级"]
+        L2_Abstract["抽象解释<br/>固定点"]
+    end
+    
+    subgraph L3["层级3: 运行时判定 Runtime Decidable"]
+        L3_Interior["内部可变性"]
+        L3_RC["引用计数"]
+        L3_Alias["动态别名分析"]
+        
+        L3_RefCell["RefCell状态机<br/>O(1)"]
+        L3_RcArc["Rc/Arc原子操作<br/>O(1)"]
+        L3_Miri["Miri解释器<br/>Stacked/Tree Borrows"]
+    end
+    
+    subgraph L4["层级4: 理论不可判定 Theoretically Undecidable"]
+        L4_Halting["程序终止性<br/>Halting Problem"]
+        L4_Rice["语义属性<br/>Rice's Theorem"]
+        L4_Alias["精确别名分析<br/>Landi-Ryder定理"]
+        
+        L4_Halting_Detail["Turing, 1936<br/>不存在通用算法"]
+        L4_Rice_Detail["Rice, 1953<br/>非平凡语义属性"]
+        L4_Alias_Detail["Landi-Ryder, 1992<br/>PSPACE-hard"]
+    end
+    
+    %% 层级内部连接
+    L1_Syntax --> L1_Syntax_Detail
+    L1_Type --> L1_Type_Detail
+    L1_Ownership --> L1_Ownership_Detail
+    
+    L2_DataFlow --> L2_NLL
+    L2_DataFlow --> L2_Polonius
+    L2_Path --> L2_Symbolic
+    L2_Path --> L2_Abstract
+    
+    L3_Interior --> L3_RefCell
+    L3_RC --> L3_RcArc
+    L3_Alias --> L3_Miri
+    
+    L4_Halting --> L4_Halting_Detail
+    L4_Rice --> L4_Rice_Detail
+    L4_Alias --> L4_Alias_Detail
+    
+    %% 样式
+    classDef l1 fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    classDef l2 fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    classDef l3 fill:#ffccbc,stroke:#d84315,stroke-width:2px
+    classDef l4 fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+    
+    class L1,L1_Syntax,L1_Type,L1_Ownership,L1_Syntax_Detail,L1_Type_Detail,L1_Ownership_Detail l1
+    class L2,L2_DataFlow,L2_Path,L2_NLL,L2_Polonius,L2_Symbolic,L2_Abstract l2
+    class L3,L3_Interior,L3_RC,L3_Alias,L3_RefCell,L3_RcArc,L3_Miri l3
+    class L4,L4_Halting,L4_Rice,L4_Alias,L4_Halting_Detail,L4_Rice_Detail,L4_Alias_Detail l4

@@ -1,0 +1,59 @@
+---
+title: RefCell运行时借用状态机
+---
+
+stateDiagram-v2
+    [*] --> Unused: 创建RefCell
+    
+    Unused --> Shared1: borrow()
+    Unused --> Exclusive: borrow_mut()
+    
+    Shared1 --> Shared2: borrow()
+    Shared2 --> Shared3: borrow()
+    Shared3 --> SharedN: borrow()
+    SharedN --> SharedN: borrow() [n+1]
+    
+    Shared1 --> Unused: drop(Ref)
+    Shared2 --> Shared1: drop(Ref)
+    Shared3 --> Shared2: drop(Ref)
+    SharedN --> SharedNMinus1: drop(Ref) [n-1]
+    
+    Exclusive --> Unused: drop(RefMut)
+    
+    Shared1 --> Panic: borrow_mut()
+    Shared2 --> Panic: borrow_mut()
+    SharedN --> Panic: borrow_mut()
+    Exclusive --> Panic: borrow()
+    Exclusive --> Panic: borrow_mut()
+    
+    Panic --> [*]: 程序终止
+    Unused --> [*]: RefCell离开作用域
+    
+    note right of Unused
+        计数 = 0
+        允许: borrow(), borrow_mut()
+    end note
+    
+    note right of Shared1
+        计数 = 1
+        允许: borrow()
+        禁止: borrow_mut() → panic
+    end note
+    
+    note right of SharedN
+        计数 = n
+        多个共享借用共存
+        所有都是不可变的
+    end note
+    
+    note right of Exclusive
+        计数 = -1
+        独占可变访问
+        禁止任何其他借用
+    end note
+    
+    note right of Panic
+        运行时panic
+        "already mutably borrowed"
+        或 "already immutably borrowed"
+    end note
