@@ -1,5 +1,40 @@
 # Rust所有权与可判定性 - 常见问题
 
+## 目录
+
+- [Rust所有权与可判定性 - 常见问题](#rust所有权与可判定性---常见问题)
+  - [目录](#目录)
+  - [所有权基础](#所有权基础)
+    - [Q1: 为什么Rust需要所有权系统？](#q1-为什么rust需要所有权系统)
+    - [Q2: `Copy` trait和`Clone` trait的区别？](#q2-copy-trait和clone-trait的区别)
+    - [Q3: 什么是NLL (Non-Lexical Lifetimes)？](#q3-什么是nll-non-lexical-lifetimes)
+  - [生命周期](#生命周期)
+    - [Q4: `'static`生命周期意味着什么？](#q4-static生命周期意味着什么)
+    - [Q5: 如何理解生命周期省略规则？](#q5-如何理解生命周期省略规则)
+    - [Q6: 为什么需要显式生命周期标注？](#q6-为什么需要显式生命周期标注)
+  - [智能指针](#智能指针)
+    - [Q7: `Box<T>` vs `Rc<T>` vs `Arc<T>`？](#q7-boxt-vs-rct-vs-arct)
+    - [Q8: `RefCell<T>`的内部可变性如何工作？](#q8-refcellt的内部可变性如何工作)
+  - [Unsafe Rust](#unsafe-rust)
+    - [Q9: `unsafe`块安全吗？](#q9-unsafe块安全吗)
+    - [Q10: 什么时候需要使用`Pin`？](#q10-什么时候需要使用pin)
+  - [并发](#并发)
+    - [Q11: Send和Sync是自动实现吗？](#q11-send和sync是自动实现吗)
+    - [Q12: 如何避免死锁？](#q12-如何避免死锁)
+  - [可判定性](#可判定性)
+    - [Q13: Rust借用检查是可判定的吗？](#q13-rust借用检查是可判定的吗)
+    - [Q14: 什么是Stacked Borrows/Tree Borrows？](#q14-什么是stacked-borrowstree-borrows)
+  - [性能](#性能)
+    - [Q15: 零成本抽象真的零成本吗？](#q15-零成本抽象真的零成本吗)
+    - [Q16: 为什么Rc/Arc有性能开销？](#q16-为什么rcarc有性能开销)
+  - [工具](#工具)
+    - [Q17: Miri能检测什么？](#q17-miri能检测什么)
+    - [Q18: 什么时候使用Prusti？](#q18-什么时候使用prusti)
+  - [进阶](#进阶)
+    - [Q19: 什么是幽灵类型(Phantom Types)？](#q19-什么是幽灵类型phantom-types)
+    - [Q20: Rust的类型系统图灵完备吗？](#q20-rust的类型系统图灵完备吗)
+  - [更多资源](#更多资源)
+
 ## 所有权基础
 
 ### Q1: 为什么Rust需要所有权系统？
