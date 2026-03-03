@@ -1,221 +1,455 @@
-# Aeneas: 功能翻译视角的Rust验证
+# Aeneas：Rust到函数式语言的翻译
 
-> Aeneas: Rust Verification by Functional Translation (Ho & Protzenko, ICFP 2022/2024)
+## 目录
+
+- [Aeneas：Rust到函数式语言的翻译](#aeneasrust到函数式语言的翻译)
+  - [目录](#目录)
+  - [概述](#概述)
+  - [1. 项目目标](#1-项目目标)
+    - [1.1 核心挑战](#11-核心挑战)
+    - [1.2 翻译策略](#12-翻译策略)
+  - [2. LLBC核心概念](#2-llbc核心概念)
+    - [2.1 LLBC语法](#21-llbc语法)
+    - [2.2 所有权翻译示例](#22-所有权翻译示例)
+    - [2.3 借用翻译](#23-借用翻译)
+  - [3. 复杂模式翻译](#3-复杂模式翻译)
+    - [3.1 结构体借用](#31-结构体借用)
+    - [3.2 循环和迭代器](#32-循环和迭代器)
+    - [3.3 条件借用](#33-条件借用)
+  - [4. 形式化属性](#4-形式化属性)
+    - [4.1 类型安全定理](#41-类型安全定理)
+    - [4.2 语义保持](#42-语义保持)
+    - [4.3 所有权正确性](#43-所有权正确性)
+  - [5. 处理局限性](#5-处理局限性)
+    - [5.1 不支持的模式](#51-不支持的模式)
+    - [5.2 当前限制示例](#52-当前限制示例)
+  - [6. 验证工作流](#6-验证工作流)
+    - [6.1 典型验证流程](#61-典型验证流程)
+    - [6.2 支持的后端](#62-支持的后端)
+  - [7. 与RustBelt的关系](#7-与rustbelt的关系)
+    - [7.1 互补使用](#71-互补使用)
+  - [8. 实际应用案例](#8-实际应用案例)
+    - [8.1 验证数据结构](#81-验证数据结构)
+    - [8.2 验证算法](#82-验证算法)
+  - [9. 使用Aeneas](#9-使用aeneas)
+    - [9.1 安装](#91-安装)
+    - [9.2 命令行使用](#92-命令行使用)
+  - [10. 总结](#10-总结)
+  - [参考](#参考)
+
+## 概述
+
+Aeneas是一个将Rust的MIR（中级中间表示）翻译为函数式语言（如Lean、Coq、F*）的工具。它基于**LLBC（Low-Level Borrow Calculus）**形式化，处理Rust的所有权和借用语义。
 
 ---
 
-## 1. 概述
+## 1. 项目目标
 
-### 核心思想
+### 1.1 核心挑战
 
-Aeneas将**Rust翻译成纯函数式语言**，利用所有权信息消除指针和内存，实现**零开销的形式化验证**。
+Rust的所有权和借用系统使得传统的程序验证工具难以直接应用：
+
+```rust
+fn swap<T>(x: &mut T, y: &mut T) {
+    std::mem::swap(x, y);
+}
+```
+
+传统的命令式程序验证需要复杂的分离逻辑来处理这种代码。Aeneas通过**将所有权和借用转化为函数式风格**来解决这个问题。
+
+### 1.2 翻译策略
+
+| Rust概念 | LLBC翻译 | 目标语言 |
+|---------|----------|---------|
+| 所有权转移 | 线性类型 | 线性函数 |
+| 借用 | 索引/投影 | 纯函数 |
+| 可变引用 | 状态传递 | 状态单子 |
+| 生命周期 | 类型推导 | 隐式处理 |
+
+---
+
+## 2. LLBC核心概念
+
+### 2.1 LLBC语法
 
 ```text
-Rust程序
-    ↓
-LLBC (Low-Level Borrow Calculus) 中间表示
-    ↓
-功能翻译
-    ↓
-纯函数式程序 (F*, Coq, HOL4, Lean)
-    ↓
-定理证明器验证
+Type:
+  | T                    // 基础类型
+  | &mut T               // 可变引用（被翻译）
+  | Box<T>               // 堆分配
+
+Expr:
+  | let x = e1 in e2     // 绑定
+  | x <- e               // 赋值（状态更新）
+  | borrow x as y in e   // 借用翻译
+  | *x                   // 解引用（投影）
 ```
 
----
-
-## 2. LLBC: 低级借用演算
-
-### 2.1 设计哲学
-
-LLBC是**基于值的语义**，没有内存/地址概念：
+### 2.2 所有权翻译示例
 
 ```rust
-// Rust
-let mut x = 5;
-let r = &mut x;
-*r = 6;
+// Rust源代码
+fn take_ownership(s: String) -> usize {
+    s.len()
+}
 
-// LLBC（概念性）
-let x = 5;
-let (x, r) = borrow_mut(x);  // x被"借用"，返回新x和借用标记
-let x = write(r, 6);          // 通过借用写入，返回新x
+fn caller() {
+    let s = String::from("hello");
+    let len = take_ownership(s);
+    // s 不再可用
+}
 ```
 
-### 2.2 关键特性
+```lean
+-- LLBC翻译到Lean
+structure String where
+  data : List Char
 
-| 特性 | 说明 |
-|------|------|
-| 无内存 | 只有值，没有堆/栈概念 |
-| 无指针 | 借用通过标记表示 |
-| 可变状态 | 通过状态传递实现 |
-| 贷款跟踪 | 编译期跟踪借用关系 |
+def take_ownership (s : String) : Nat × Unit :=
+  (s.data.length, ())  -- 返回长度和单位
 
----
+def caller : Nat :=
+  let s := { data := ['h','e','l','l','o'] }
+  let (len, _) := take_ownership s
+  len  -- s 被消费，无法再次使用
+```
 
-## 3. 功能翻译
-
-### 3.1 翻译示例
+### 2.3 借用翻译
 
 ```rust
-// Rust
-fn increment(x: &mut u32) {
+// 可变借用
+fn increment(x: &mut i32) {
     *x += 1;
 }
 
 fn main() {
     let mut n = 5;
     increment(&mut n);
-    assert!(n == 6);
+    println!("{}", n); // 6
 }
 ```
 
-```ocaml
-(* 翻译到F* *)
-let increment (x: u32) : u32 =
-    x + 1
+```lean
+-- LLBC：借用变为状态传递
+def increment (x : Int) : Int :=
+  x + 1
 
-let main () : unit =
-    let n = 5 in
-    let n = increment n in
-    assert (n = 6)
+def main : Int :=
+  let n := 5
+  let n' := increment n  -- 借用变为函数调用
+  n'  -- 更新后的值
 ```
-
-### 3.2 翻译规则
-
-| Rust | 翻译后 |
-|------|--------|
-| `&x` | 值传递（Copy） |
-| `&mut x` | 状态传递（新值） |
-| `*r = v` | 函数返回新值 |
-| `Box<T>` | 直接展开为T |
 
 ---
 
-## 4. 借用检查实现
+## 3. 复杂模式翻译
 
-### 4.1 符号执行
-
-Aeneas使用**符号执行**实现借用检查：
-
-```text
-符号状态：变量 → 符号值
-
-执行步骤：
-1. 跟踪每个变量的所有权状态
-2. 验证借用规则
-3. 检测冲突使用
-```
-
-### 4.2 与rustc的关系
-
-```text
-Rust源码
-    ↓
-rustc前端（HIR/MIR）
-    ↓
-Aeneas解析MIR
-    ↓
-LLBC表示
-    ↓
-符号执行验证
-```
-
-**关键发现：**
-
-- Aeneas的符号执行与rustc借用检查等价
-- 证明了借用检查的正确性
-
----
-
-## 5. 后端支持
-
-### 5.1 多后端输出
-
-Aeneas支持翻译成：
-
-- **F***: 主要目标，支持SMT自动化
-- **Coq**: 交互式证明
-- **HOL4**: 高阶逻辑
-- **Lean**: 新兴证明助手
-
-### 5.2 验证能力
+### 3.1 结构体借用
 
 ```rust
-// Rust函数
-#[requires(n >= 0)]
-#[ensures(result == n * (n + 1) / 2)]
-fn sum(n: u32) -> u32 {
-    if n == 0 { 0 } else { n + sum(n - 1) }
+struct Point { x: i32, y: i32 }
+
+fn swap_x(p1: &mut Point, p2: &mut Point) {
+    std::mem::swap(&mut p1.x, &mut p2.x);
 }
 ```
 
-```fstar
-(* F*翻译 *)
-let rec sum (n: u32) : u32 =
-    if n = 0 then 0 else n + sum (n - 1)
+```lean
+-- LLBC：结构体投影
+structure Point where
+  x : Int
+  y : Int
 
-// 自动证明前置/后置条件
+def swap_x (p1 : Point) (p2 : Point) : Point × Point :=
+  -- 借用翻译为返回更新后的结构
+  let p1' := { p1 with x := p2.x }
+  let p2' := { p2 with x := p1.x }
+  (p1', p2')
+```
+
+### 3.2 循环和迭代器
+
+```rust
+fn sum(vec: &Vec<i32>) -> i32 {
+    let mut total = 0;
+    for x in vec {
+        total += x;
+    }
+    total
+}
+```
+
+```lean
+-- LLBC：循环翻译为递归
+def sum (vec : List Int) : Int :=
+  let rec loop (remaining : List Int) (acc : Int) : Int :=
+    match remaining with
+    | [] => acc
+    | x :: xs => loop xs (acc + x)
+  loop vec 0
+```
+
+### 3.3 条件借用
+
+```rust
+fn get_or_default(v: &mut Vec<i32>, idx: usize) -> &mut i32 {
+    if idx < v.len() {
+        &mut v[idx]
+    } else {
+        v.push(0);
+        &mut v[v.len() - 1]
+    }
+}
+```
+
+```lean
+-- LLBC：条件表达式需要统一返回类型
+def get_or_default (v : List Int) (idx : Nat) : Int × List Int :=
+  if idx < v.length then
+    (v.get! idx, v)  -- 借用元素并返回整个结构
+  else
+    (0, v ++ [0])    -- 添加默认值
 ```
 
 ---
 
-## 6. 理论基础
+## 4. 形式化属性
 
-### 6.1 模拟关系
+### 4.1 类型安全定理
 
-Aeneas证明了：
+**定理（类型保持）**：如果Rust程序e在Rust类型系统中类型良好，则其LLBC翻译[e]也在LLBC类型系统中类型良好。
 
 ```text
-LLBC#（符号执行） ≈ LLBC（实际语义）
-
-即：符号执行正确实现了借用检查
+Γ ⊢_Rust e : T  =>  [Γ] ⊢_LLBC [e] : [T]
 ```
 
-### 6.2 功能翻译正确性
+### 4.2 语义保持
+
+**定理（语义等价）**：Rust程序和其LLBC翻译在观察等价意义下具有相同的行为。
 
 ```text
-Rust程序  →  功能程序
-   ↓              ↓
-安全        等价的安全
+e ↓_Rust v  <=>  [e] ↓_LLBC [v]
+```
+
+### 4.3 所有权正确性
+
+**定理（线性性）**：翻译后的LLBC程序满足线性类型规则，没有资源泄漏或双重释放。
+
+---
+
+## 5. 处理局限性
+
+### 5.1 不支持的模式
+
+| 模式 | 原因 | 替代方案 |
+|------|------|---------|
+| 原始指针算术 | 无法跟踪别名 | 使用安全抽象 |
+| 联合体(union) | 类型不安全 | 使用enum |
+| 外部函数(FFI) | 未知行为 | 建模为假设 |
+| 自引用结构 | 复杂生命周期 | Pin抽象 |
+
+### 5.2 当前限制示例
+
+```rust
+// Aeneas目前不支持
+unsafe fn raw_pointer_arithmetic() {
+    let mut x = [1, 2, 3];
+    let ptr = x.as_mut_ptr();
+    *ptr.add(1) = 5;  // 算术太复杂
+}
+
+// 替代方案：使用安全索引
+fn safe_alternative(arr: &mut [i32]) {
+    arr[1] = 5;  // Aeneas支持
+}
 ```
 
 ---
 
-## 7. 实际应用
+## 6. 验证工作流
 
-### 7.1 验证案例
+### 6.1 典型验证流程
 
-Aeneas已验证：
+```rust
+// 1. 编写Rust代码
+fn binary_search(arr: &[u32], target: u32) -> Option<usize> {
+    let mut left = 0;
+    let mut right = arr.len();
 
-- 基础数据结构（List, Tree）
-- 查找算法（二分查找）
-- 排序算法（归并排序）
-- 加密原语
+    while left < right {
+        let mid = left + (right - left) / 2;
+        match arr[mid].cmp(&target) {
+            std::cmp::Ordering::Equal => return Some(mid),
+            std::cmp::Ordering::Less => left = mid + 1,
+            std::cmp::Ordering::Greater => right = mid,
+        }
+    }
+    None
+}
+```
 
-### 7.2 与Prusti比较
+```lean
+-- 2. Aeneas翻译到Lean
+-- 3. 添加规范
+def binary_search_spec (arr : List Nat) (target : Nat) : Option Nat :=
+  -- 功能规范
+  arr.index_of? target
 
-| 特性 | Aeneas | Prusti |
-|------|--------|--------|
-| 方法 | 功能翻译 | 分离逻辑 |
-| 后端 | F*/Coq/HOL4/Lean | Viper |
-| 自动化 | 高（F*+SMT） | 中等 |
-| 覆盖 | 安全Rust | 安全Rust |
-| 独特优势 | 无内存模型 | 工业级验证器 |
+-- 4. 证明等价性
+theorem binary_search_correct :
+  ∀ arr target, binary_search arr target = binary_search_spec arr target :=
+by
+  -- 归纳证明
+  sorry
+```
+
+### 6.2 支持的后端
+
+| 后端 | 用途 | 状态 |
+|------|------|------|
+| Lean 4 | 交互式证明 | ✅ 完整 |
+| Coq | 形式验证 | ✅ 完整 |
+| F* | 自动化验证 | ✅ 完整 |
+| HOL4 | 定理证明 | 🔄 开发中 |
 
 ---
 
-## 8. 总结
+## 7. 与RustBelt的关系
 
-Aeneas的贡献：
+| 特性 | RustBelt | Aeneas |
+|------|----------|--------|
+| 目标 | 验证unsafe代码 | 验证safe代码 |
+| 方法 | 分离逻辑 | 函数式翻译 |
+| 范围 | 全语言 | safe子集 |
+| 工具 | Coq | Lean/Coq/F* |
+| 使用难度 | 高 | 中 |
 
-1. **LLBC**: 无内存的中间表示
-2. **功能翻译**: 消除指针，简化验证
-3. **借用检查证明**: 符号执行实现验证
-4. **多后端**: 支持多种证明助手
+### 7.1 互补使用
 
-**意义**：为Rust验证提供了新的技术路径，特别适合函数式编程背景的验证者。
+```text
+Rust程序
+    │
+    ├─ Safe部分 ──> Aeneas ──> 功能验证
+    │
+    └─ Unsafe部分 ──> RustBelt ──> 内存安全验证
+```
 
 ---
 
-*Aeneas代表了Rust形式化验证的新方向：通过所有权信息，将命令式程序翻译成纯函数式程序，利用成熟的函数式验证技术。*
+## 8. 实际应用案例
+
+### 8.1 验证数据结构
+
+```rust
+// 已验证：链表
+pub struct List<T> {
+    head: Link<T>,
+}
+
+type Link<T> = Option<Box<Node<T>>>;
+
+struct Node<T> {
+    elem: T,
+    next: Link<T>,
+}
+
+impl<T> List<T> {
+    pub fn push(&mut self, elem: T) {
+        let new_node = Box::new(Node {
+            elem,
+            next: self.head.take(),
+        });
+        self.head = Some(new_node);
+    }
+}
+```
+
+Aeneas可以证明：
+
+- 无内存泄漏
+- push后长度+1
+- 元素保持顺序
+
+### 8.2 验证算法
+
+```rust
+// 已验证：快速排序分区
+fn partition<T: Ord>(arr: &mut [T]) -> usize {
+    let len = arr.len();
+    let pivot_index = len / 2;
+    arr.swap(pivot_index, len - 1);
+
+    let mut store_index = 0;
+    for i in 0..len-1 {
+        if arr[i] <= arr[len-1] {
+            arr.swap(i, store_index);
+            store_index += 1;
+        }
+    }
+    arr.swap(store_index, len - 1);
+    store_index
+}
+```
+
+可证明：
+
+- 分区后枢轴在正确位置
+- 左侧都≤枢轴，右侧都≥枢轴
+- 排列是原元素的重新排列
+
+---
+
+## 9. 使用Aeneas
+
+### 9.1 安装
+
+```bash
+# 克隆仓库
+git clone https://github.com/AeneasVerif/aeneas.git
+cd aeneas
+
+# 构建
+make build
+
+# 验证示例
+aeneas lean tests/test_array.rs
+```
+
+### 9.2 命令行使用
+
+```bash
+# 翻译到Lean
+aeneas lean input.rs -o output.lean
+
+# 翻译到Coq
+aeneas coq input.rs -o output.v
+
+# 翻译到F*
+aeneas fstar input.rs -o output.fst
+```
+
+---
+
+## 10. 总结
+
+Aeneas为Rust safe代码的形式验证提供了实用路径：
+
+1. **自动化**：自动处理所有权和借用
+2. **可读性**：生成的代码接近原始Rust
+3. **实用性**：支持真实Rust代码的子集
+4. **集成**：与主流证明助手集成
+
+局限性：
+
+- 不支持unsafe代码（使用RustBelt）
+- 某些模式需要重写
+- 复杂循环可能需要手动不变量
+
+---
+
+## 参考
+
+1. [Aeneas GitHub](https://github.com/AeneasVerif/aeneas)
+2. [Aeneas Paper: ICFP 2022](https://arxiv.org/abs/2206.07185)
+3. [LLBC Formalization](https://github.com/AeneasVerif/aeneas/blob/main/doc/llbc.md)
+4. [Companion Tutorial](https://github.com/AeneasVerif/aeneas-tutorial)

@@ -1,7 +1,7 @@
 # 常量求值规则形式化
 
-> **文档状态**: ✅ 完整  
-> **理论级别**: L2 - 形式化数学  
+> **文档状态**: ✅ 完整
+> **理论级别**: L2 - 形式化数学
 > **适用范围**: Rust const 语义
 
 ---
@@ -42,20 +42,20 @@ const fn allowed_operations(x: i32) -> i32 {
     // 算术运算
     let a = x + 1;
     let b = x * 2;
-    
+
     // 控制流
     if a > 0 {
         a
     } else {
         b
     }
-    
+
     // 匹配
     match x {
         0 => 1,
         n => n + 1,
     }
-    
+
     // 不可变借用
     let r = &x;
     *r
@@ -73,14 +73,14 @@ $$
 const fn forbidden_operations() {
     // I/O
     println!("hello");      // ❌ 不允许
-    
+
     // 堆分配
     let v = vec![1, 2, 3];  // ❌ 不允许
-    
+
     // 可变静态
     static mut X: i32 = 0;
     X = 1;                  // ❌ 不允许
-    
+
     // 非 const 调用
     std::time::now();       // ❌ 不允许
 }
@@ -99,10 +99,10 @@ MIR 常量求值是编译期解释器，执行以下步骤：
 3. **限制**: 检测无限循环/过大内存使用
 4. **结果**: 产生常量值或编译错误
 
-```
+```text
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│  Rust 代码   │ --> │    MIR      │ --> │  常量值      │
-│  (const ctx) │     │  (中间表示)  │     │  或错误      │
+│ Rust 代码   │ --> │    MIR      │ --> │  常量值      │
+│ (const ctx) │     │  (中间表示)  │     │  或错误     │
 └─────────────┘     └─────────────┘     └─────────────┘
                               │
                               v
@@ -176,7 +176,7 @@ let b: Array<i32, -1> = ...;
 `const_eval_select` 允许在 const fn 中根据求值上下文选择不同实现：
 
 $$
-\text{const\_eval\_select}(\text{at\_const}, \text{at\_runtime}) = 
+\text{const\_eval\_select}(\text{at\_const}, \text{at\_runtime}) =
 \begin{cases}
 \text{at\_const} & \text{if 在常量上下文} \\
 \text{at\_runtime} & \text{否则}
@@ -219,7 +219,7 @@ fn main() {
 ### 常量求值判定
 
 $$
-\text{ConstEval}(e) = 
+\text{ConstEval}(e) =
 \begin{cases}
 v & \text{if } e \xrightarrow{\text{MIR}}^{*} v \text{ (终止)} \\
 \bot & \text{if } e \text{ 违反限制或发散}

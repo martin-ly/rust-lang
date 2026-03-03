@@ -65,7 +65,9 @@
 - **相关模式**：如 Interpreter 与 Visitor、Composite、Strategy 的关系
 - **选型决策树**：按需求反向查模式
 
-**完整场景示例**：创建型 Builder（HTTP 请求）；结构型 Flyweight（字形缓存）、Adapter（HTTP 客户端）、Decorator（日志+重试）、Composite（文件系统树）；行为型 Interpreter（过滤 DSL）、Chain（HTTP 中间件）、Mediator（聊天室）、Observer（订单事件）、Strategy（压缩格式）、Command（可撤销编辑器）、State（订单状态机）、Visitor（AST 美化）；Facade（日志系统）、Template Method（数据导入）等均有完整可运行示例。
+**完整场景示例**：创建型 Builder（HTTP 请求）；结构型 Flyweight（字形缓存）、Adapter（HTTP 客户端）、Decorator（日志+重试）、Composite（文件系统树）；
+行为型 Interpreter（过滤 DSL）、Chain（HTTP 中间件）、Mediator（聊天室）、Observer（订单事件）、Strategy（压缩格式）、Command（可撤销编辑器）、
+State（订单状态机）、Visitor（AST 美化）；Facade（日志系统）、Template Method（数据导入）等均有完整可运行示例。
 
 ---
 
@@ -192,7 +194,8 @@
 
 ## 23 模式多维对比矩阵
 
-下表为 23 种设计模式的**概念定义/属性关系/表达力**多维对比；每行链接到对应模式文档。用于选型与「文档↔矩阵」双向追溯（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md)）。
+下表为 23 种设计模式的**概念定义/属性关系/表达力**多维对比；每行链接到对应模式文档。
+用于选型与「文档↔矩阵」双向追溯（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md)）。
 
 | 模式 | 所有权特征 | 借用特征 | 安全边界 | 典型场景 | Rust 机制衔接 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -220,7 +223,8 @@
 | [Template Method](03_behavioral/template_method.md) | 骨架拥有 | 钩子 `&self` | 纯 Safe | 算法骨架 | trait 默认方法 |
 | [Visitor](03_behavioral/visitor.md) | 访问者拥有 | 遍历只读/可变 | 纯 Safe | 树遍历 | match + trait |
 
-*安全边界*：当前 23 模式均为纯 Safe；若某模式扩展使用 `unsafe`，见 [04_boundary_matrix](04_boundary_matrix.md)、[05_boundary_system](../05_boundary_system/README.md)。
+*安全边界*：当前 23 模式均为纯 Safe；
+若某模式扩展使用 `unsafe`，见 [04_boundary_matrix](04_boundary_matrix.md)、[05_boundary_system](../05_boundary_system/README.md)。
 
 **选型决策树（按需求选模式）**：见 [03_semantic_boundary_map §按需求反向查模式](../02_workflow_safe_complete_models/03_semantic_boundary_map.md#按需求反向查模式)（快速查找表 + 决策树精简）；本矩阵与彼处一一对应。
 
@@ -314,4 +318,5 @@
 | Flyweight：Rc 跨线程 | E0378 | `Rc` cannot be sent | 跨线程用 `Arc` |
 | Mediator：跨线程传 Rc | E0378 | `Rc` cannot be sent | 用 `Arc<Mutex<T>>` 或 channel |
 
-**引用**：[ERROR_CODE_MAPPING](../../../02_reference/ERROR_CODE_MAPPING.md)、[04_compositional_engineering 组合反例→错误映射](../../04_compositional_engineering/README.md#组合反例编译错误映射ce-t1t2t3)。
+**引用**：[ERROR_CODE_MAPPING](../../../02_reference/ERROR_CODE_MAPPING.md)、
+[04_compositional_engineering 组合反例→错误映射](../../04_compositional_engineering/README.md#组合反例编译错误映射ce-t1t2t3)。

@@ -273,7 +273,10 @@ ownership T2,T3  borrow T1    type T1,T2,T3
     └── L4；架构模式（Repository、Gateway、DTO）+ 契约/集成测试/Miri/模糊测试（见 § L3/L4 验证手段）
 ```
 
-**衔接**：与 [02_workflow_safe_complete_models](../02_workflow_safe_complete_models/)、[02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md)、[05_boundary_system](../05_boundary_system/) 三维矩阵一致；选型决策树见 [03_semantic_boundary_map](../02_workflow_safe_complete_models/03_semantic_boundary_map.md)。
+**衔接**：与 [02_workflow_safe_complete_models](../02_workflow_safe_complete_models/)、
+[02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md)、
+[05_boundary_system](../05_boundary_system/) 三维矩阵一致；
+选型决策树见 [03_semantic_boundary_map](../02_workflow_safe_complete_models/03_semantic_boundary_map.md)。
 
 ---
 
@@ -299,13 +302,16 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 | **近似** | 选 Rust 惯用替代；cargo check | 替代 + 跨边界验证 |
 | **不可表达** | 规避；重构为等价/近似 | 同上 |
 
-**引用**：[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) 等价/近似/不可表达表；~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN~~（已归档至 [../../../archive/process_reports/2026_02/](../../../archive/process_reports/2026_02/)）支柱 2+3；现参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](../../research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md)。
+**引用**：[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) 等价/近似/不可表达表；
+~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN~~（已归档至 [../../../archive/process_reports/2026_02/](../../../archive/process_reports/2026_02/)）支柱 2+3；
+现参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](../../research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md)。
 
 ---
 
 ## 组件构建能力形式化树图（与 43 模式联合）
 
-**Def CE-TREE1（模块→crate→进程→网络）**：设 $G$ 为依赖图，$\mathit{Level}(G) \in \{\mathrm{L1}, \mathrm{L2}, \mathrm{L3}, \mathrm{L4}\}$ 由 $G$ 的粒度确定。架构模式 $P$ 映射到 $\mathit{Level}(P)$ 由 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md) 与 CE-MAT1 联合定义。
+**Def CE-TREE1（模块→crate→进程→网络）**：设 $G$ 为依赖图，$\mathit{Level}(G) \in \{\mathrm{L1}, \mathrm{L2}, \mathrm{L3}, \mathrm{L4}\}$ 由 $G$ 的粒度确定。
+架构模式 $P$ 映射到 $\mathit{Level}(P)$ 由 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md) 与 CE-MAT1 联合定义。
 
 ### Mermaid 形式化树图
 

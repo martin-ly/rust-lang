@@ -334,7 +334,7 @@ struct BadFlyweight {
 | GoF | Rust 对应 | 差异 |
 | :--- | :--- | :--- |
 | 享元工厂 | struct + HashMap | 等价 |
-| 共享状态 | Arc<T> | 引用计数 |
+| 共享状态 | `Arc<T>` | 引用计数 |
 | extrinsic | 方法参数 | 等价 |
 
 ---

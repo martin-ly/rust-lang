@@ -251,7 +251,7 @@ Axiom MO2 (兼容性)
 | :--- | :--- | :--- |
 | Memento 私有 | 无；Clone/serde 公开 | 近似 |
 | Originator 封装 | 快照类型或 Clone | 等价 |
-| Caretaker 存储 | Vec<Snapshot> 等 | 等价 |
+| Caretaker 存储 | `Vec<Snapshot>` 等 | 等价 |
 
 ---
 

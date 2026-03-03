@@ -856,7 +856,7 @@ pub struct History {
 | **近似实现方式** | `Iterator` 链式处理 |
 | **不可表达的方面** | 无 |
 | **限制原因** | 无 |
-| **推荐实现方式** | Trait + Option<Box<dyn Handler>> 链接 |
+| **推荐实现方式** | Trait + `Option<Box<dyn Handler>>` 链接 |
 | **代码示例链接** | [chain_of_responsibility.md](03_behavioral/chain_of_responsibility.md) |
 
 ```rust

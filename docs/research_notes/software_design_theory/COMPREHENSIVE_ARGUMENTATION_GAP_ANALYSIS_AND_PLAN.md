@@ -28,7 +28,7 @@
 | **分布式专用模式未单独成篇** | Event Sourcing、Saga、CQRS、Circuit Breaker、Bulkhead、Outbox 等仅在 04_expressiveness_boundary、02_complete_43 中简短提及；缺 Def/Axiom/定理级形式化 | 分布式架构选型时无形式化依据 |
 | **Saga 补偿链形式化不足** | 仅有「近似」结论与 `Result` + 闭包示例；缺补偿顺序、幂等性、补偿失败处理的形式化定义与定理 | Saga 实现时无法判定正确性 |
 | **CAP/BASE 与 Rust 类型系统衔接缺失** | 05_distributed 有 Axiom DI3（CAP），但缺「Rust 类型系统如何保证最终一致性表达」「BASE 与 Result/Option 的对应」 | 分布式一致性设计无类型级指导 |
-| **故障模式与错误处理形式化薄弱** | 有失败模式表，但缺「超时→Result<Timeout>」「部分失败→? 传播」与形式化基础的显式衔接 | 错误处理设计依赖经验 |
+| **故障模式与错误处理形式化薄弱** | 有失败模式表，但缺「超时→`Result<Timeout>`」「部分失败→? 传播」与形式化基础的显式衔接 | 错误处理设计依赖经验 |
 | **分布式模式与执行模型层次关系未论证** | 分布式 vs 并发 vs 异步的边界、组合约束（如「分布式 + 并发」的 Send/Sync 要求）未系统化 | 跨模型组合选型易出错 |
 
 ### 1.3 工作流设计模式论证缺口

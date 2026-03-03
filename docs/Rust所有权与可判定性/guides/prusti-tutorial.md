@@ -455,7 +455,7 @@ impl BankAccount {
 
 ### 常见问题
 
-**问题1：验证超时**
+**问题1：验证超时**:
 
 ```rust
 // ❌ 复杂循环可能导致超时
@@ -463,7 +463,7 @@ impl BankAccount {
 fn complex_loop(n: i32) { ... }
 ```
 
-**问题2：量化器实例化失败**
+**问题2：量化器实例化失败**:
 
 ```rust
 // ❌ forall可能导致问题
@@ -474,7 +474,7 @@ fn complex_loop(n: i32) { ... }
 #[ensures(forall(|i: usize| i < arr.len() ==> ...))]
 ```
 
-**问题3：递归终止**
+**问题3：递归终止**:
 
 ```rust
 #[requires(n >= 0)]

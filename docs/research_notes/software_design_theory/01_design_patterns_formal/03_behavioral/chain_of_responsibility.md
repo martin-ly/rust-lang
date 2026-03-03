@@ -331,7 +331,7 @@ let chain = LogHandler {
 
 | GoF | Rust 对应 | 差异 |
 | :--- | :--- | :--- |
-| Handler 链 | Option<Box<Handler>> | 等价 |
+| Handler 链 | `Option<Box<Handler>>` | 等价 |
 | 委托 next | as_deref().and_then(\|n\| n.handle(req)) | 等价 |
 | 无环 | Box 单向所有权 | 天然无环 |
 

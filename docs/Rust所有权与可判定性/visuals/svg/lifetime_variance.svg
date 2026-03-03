@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; text-anchor: middle; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .text { font-family: Arial, sans-serif; font-size: 12px; }
+      .code { font-family: monospace; font-size: 11px; fill: #d32f2f; }
+      .box { rx: 5; stroke-width: 2; }
+      .covariant { fill: #e8f5e9; stroke: #2e7d32; }
+      .contravariant { fill: #e3f2fd; stroke: #1565c0; }
+      .invariant { fill: #fff3e0; stroke: #ef6c00; }
+    </style>
+  </defs>
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <text x="400" y="25" class="title">Rust生命周期变型(Variance)</text>
+
+  <!-- Explanation -->
+  <g transform="translate(50, 50)">
+    <text x="0" y="0" class="subtitle">基本关系</text>
+    <text x="0" y="20" class="text">'static : 'a 表示 'static比'a长（'static是'a的子类型）</text>
+    
+    <rect x="0" y="35" width="300" height="60" fill="#f5f5f5" stroke="#999" rx="5"/>
+    <text x="10" y="55" class="code">&amp;'static str 可以转换为 &amp;'a str</text>
+    <text x="10" y="75" class="text">长生命周期可以缩短，反之不可</text>
+  </g>
+
+  <!-- Covariant -->
+  <g transform="translate(50, 140)">
+    <rect x="0" y="0" width="350" height="110" class="box covariant"/>
+    <text x="175" y="20" text-anchor="middle" class="subtitle">协变 (Covariant)</text>
+    <text x="175" y="35" text-anchor="middle" class="text" font-size="11">T&lt;'a&gt;随'a同向变化</text>
+    
+    <text x="10" y="55" class="code">&amp;'a T, Box&lt;T&gt;, Vec&lt;T&gt;, *const T</text>
+    <text x="10" y="75" class="text">'a: 'b → &amp;'a T &lt;: &amp;'b T</text>
+    
+    <g transform="translate(10, 85)">
+      <rect x="0" y="0" width="100" height="20" fill="white" stroke="#2e7d32"/>
+      <text x="50" y="14" text-anchor="middle" class="text" font-size="10">&amp;'static str</text>
+    </g>
+    <line x1="110" y1="95" x2="160" y2="95" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="135" y="90" text-anchor="middle" class="text" font-size="10">✓</text>
+    
+    <g transform="translate(165, 85)">
+      <rect x="0" y="0" width="100" height="20" fill="white" stroke="#2e7d32"/>
+      <text x="50" y="14" text-anchor="middle" class="text" font-size="10">&amp;'a str</text>
+    </g>
+  </g>
+
+  <!-- Contravariant -->
+  <g transform="translate(420, 140)">
+    <rect x="0" y="0" width="330" height="110" class="box contravariant"/>
+    <text x="165" y="20" text-anchor="middle" class="subtitle">逆变 (Contravariant)</text>
+    <text x="165" y="35" text-anchor="middle" class="text" font-size="11">T&lt;'a&gt;随'a反向变化</text>
+    
+    <text x="10" y="55" class="code">fn(&amp;'a T) → U</text>
+    <text x="10" y="75" class="text">'a: 'b → fn(&amp;'b T) &lt;: fn(&amp;'a T)</text>
+    
+    <g transform="translate(10, 85)">
+      <rect x="0" y="0" width="100" height="20" fill="white" stroke="#1565c0"/>
+      <text x="50" y="14" text-anchor="middle" class="text" font-size="10">fn(&amp;'a T)</text>
+    </g>
+    <line x1="110" y1="95" x2="160" y2="95" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="135" y="90" text-anchor="middle" class="text" font-size="10">✓</text>
+    
+    <g transform="translate(165, 85)">
+      <rect x="0" y="0" width="100" height="20" fill="white" stroke="#1565c0"/>
+      <text x="50" y="14" text-anchor="middle" class="text" font-size="10">fn(&amp;'static T)</text>
+    </g>
+  </g>
+
+  <!-- Invariant -->
+  <g transform="translate(50, 270)">
+    <rect x="0" y="0" width="700" height="100" class="box invariant"/>
+    <text x="350" y="20" text-anchor="middle" class="subtitle">不变 (Invariant)</text>
+    <text x="350" y="35" text-anchor="middle" class="text" font-size="11">T&lt;'a&gt;不随'a变化，必须完全匹配</text>
+    
+    <text x="10" y="55" class="code">&amp;mut T, Cell&lt;T&gt;, Mutex&lt;T&gt;, *mut T</text>
+    <text x="10" y="75" class="text">'a ≠ 'b → &amp;mut T&lt;'a&gt; 与 &amp;mut T&lt;'b&gt; 无子类型关系</text>
+    
+    <g transform="translate(400, 65)">
+      <rect x="0" y="0" width="120" height="25" fill="white" stroke="#ef6c00"/>
+      <text x="60" y="17" text-anchor="middle" class="text" font-size="10">&amp;mut T&lt;'static&gt;</text>
+    </g>
+    <text x="535" y="82" class="text" font-size="20">✗</text>
+    <g transform="translate(560, 65)">
+      <rect x="0" y="0" width="120" height="25" fill="white" stroke="#ef6c00"/>
+      <text x="60" y="17" text-anchor="middle" class="text" font-size="10">&amp;mut T&lt;'a&gt;</text>
+    </g>
+  </g>
+
+  <!-- Rules -->
+  <g transform="translate(50, 390)">
+    <text x="0" y="0" class="subtitle">变型推导规则</text>
+    <rect x="0" y="10" width="700" height="90" fill="#fafafa" stroke="#ddd" rx="5"/>
+    
+    <text x="10" y="35" class="text">• T是协变的：当T只用于输出位置（返回值）</text>
+    <text x="10" y="55" class="text">• T是逆变的：当T只用于输入位置（参数）</text>
+    <text x="10" y="75" class="text">• T是不变的：当T同时用于输入和输出位置</text>
+  </g>
+</svg>

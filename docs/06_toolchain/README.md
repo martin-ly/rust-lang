@@ -365,14 +365,14 @@ pub fn function(a: i32, b: i32) -> i32 {
 
 本节只列出**官方 release post 明确强调**的差异（避免把“推测/通用经验”写成版本事实）。其余细节请以官方详细 release notes 为准。
 
-| 变化                                               | 首次出现  | 权威来源                                                                                                                                                         |
+| 变化  | 首次出现  | 权威来源 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `cargo publish --workspace`                        | Rust 1.90 | [Rust 1.90.0](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)                                                                                                |
-| `aarch64-pc-windows-msvc` → Tier 1                 | Rust 1.91 | [Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)；[PR #145682](https://github.com/rust-lang/rust/pull/145682)                                   |
-| `dangling_pointers_from_locals`（warn-by-default） | Rust 1.91 | [Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)；[warn-by-default lints](https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html)   |
-| musl 1.2.5                                         | Rust 1.93 | [Rust 1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)                                                                                                |
-| `cfg` 属性可用于单个 `asm!` 语句                   | Rust 1.93 | [Rust 1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)                                                                                                |
-| 1.93.1 补丁（ICE/Clippy/WASM 回归修复）           | Rust 1.93.1 | [Rust 1.93.1](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/)                                                                                                |
+| `cargo publish --workspace`  | Rust 1.90 | [Rust 1.90.0](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/) |
+| `aarch64-pc-windows-msvc` → Tier 1  | Rust 1.91 | [Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)；[PR #145682](https://github.com/rust-lang/rust/pull/145682) |
+| `dangling_pointers_from_locals`（warn-by-default） | Rust 1.91 | [Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)；[warn-by-default lints](https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html) |
+| musl 1.2.5                                         | Rust 1.93 | [Rust 1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/) |
+| `cfg` 属性可用于单个 `asm!` 语句                   | Rust 1.93 | [Rust 1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)  |
+| 1.93.1 补丁（ICE/Clippy/WASM 回归修复）           | Rust 1.93.1 | [Rust 1.93.1](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/) |
 
 ---
 

@@ -392,7 +392,7 @@ fn main() {
 
 **1. 编译错误：**
 
-```
+```text
 error[E0382]: use of moved value: `data`
 ```
 
@@ -462,7 +462,7 @@ fn main() {
 
 **2. 运行时panic：**
 
-```
+```text
 thread 'main' panicked at 'already borrowed: BorrowMutError'
 ```
 

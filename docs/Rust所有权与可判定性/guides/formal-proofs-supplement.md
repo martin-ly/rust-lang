@@ -55,7 +55,7 @@
 
 ### 1.2 小步操作语义（部分规则）
 
-```
+```text
 [E-Var]
 ────────────────────────
 ⟨x, σ⟩ → ⟨σ(x), σ⟩
@@ -87,7 +87,7 @@ B: Loc ⇀ {shared(n) | n > 0} ∪ {exclusive}
 
 ### 1.4 借用规则（运行时检查）
 
-```
+```text
 [BORROW-SHARED]
 B(ℓ) ∈ {shared(n), undefined}
 ───────────────────────────────
@@ -152,7 +152,7 @@ borrow_ok(failed, B) = false
 
 ### 证明大纲
 
-```
+```text
 证明 Borrow Safety Theorem:
 │
 ├── 引理 1: 单步保持性 (Single Step Preservation)

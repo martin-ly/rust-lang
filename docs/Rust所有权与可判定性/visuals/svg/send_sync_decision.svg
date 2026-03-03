@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+    </marker>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; text-anchor: middle; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .text { font-family: Arial, sans-serif; font-size: 12px; }
+      .code { font-family: monospace; font-size: 11px; }
+      .yes { fill: #c8e6c9; stroke: #2e7d32; }
+      .no { fill: #ffcdd2; stroke: #c62828; }
+      .decision { fill: #fff9c4; stroke: #f57f17; }
+      .result { fill: #e3f2fd; stroke: #1976d2; }
+    </style>
+  </defs>
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <text x="400" y="25" class="title">Send / Sync 实现决策流程</text>
+
+  <!-- Start -->
+  <g transform="translate(350, 50)">
+    <ellipse cx="50" cy="20" rx="60" ry="25" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+    <text x="50" y="25" text-anchor="middle" class="text">定义类型 T</text>
+  </g>
+
+  <line x1="400" y1="75" x2="400" y2="100" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Send Decision -->
+  <g transform="translate(50, 100)">
+    <text x="0" y="0" class="subtitle">实现 Send?</text>
+    
+    <g transform="translate(0, 15)">
+      <rect x="0" y="0" width="350" height="220" class="yes" rx="8" stroke-width="2"/>
+      
+      <!-- Q1 -->
+      <rect x="20" y="20" width="310" height="50" class="decision" rx="5"/>
+      <text x="175" y="40" text-anchor="middle" class="text">所有字段都实现 Send？</text>
+      <text x="175" y="55" text-anchor="middle" class="code">(自动推导条件)</text>
+      
+      <line x1="100" y1="70" x2="50" y2="100" stroke="#333" marker-end="url(#arrow)"/>
+      <text x="70" y="90" class="text">是</text>
+      
+      <line x1="250" y1="70" x2="300" y2="100" stroke="#333" marker-end="url(#arrow)"/>
+      <text x="280" y="90" class="text">否</text>
+      
+      <!-- Yes -->
+      <g transform="translate(20, 105)">
+        <rect x="0" y="0" width="100" height="80" class="result" rx="5"/>
+        <text x="50" y="30" text-anchor="middle" class="text">自动实现</text>
+        <text x="50" y="50" text-anchor="middle" class="code">unsafe impl</text>
+        <text x="50" y="65" text-anchor="middle" class="code">Send for T {}</text>
+      </g>
+      
+      <!-- No -->
+      <g transform="translate(210, 105)">
+        <rect x="0" y="0" width="120" height="80" class="no" rx="5"/>
+        <text x="60" y="30" text-anchor="middle" class="text">不实现 Send</text>
+        <text x="60" y="50" text-anchor="middle" class="code">或手动实现</text>
+        <text x="60" y="65" text-anchor="middle" class="code">(unsafe)</text>
+      </g>
+    </g>
+  </g>
+
+  <line x1="400" y1="210" x2="400" y2="340" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Sync Decision -->
+  <g transform="translate(400, 100)">
+    <text x="0" y="0" class="subtitle">实现 Sync?</text>
+    
+    <g transform="translate(0, 15)">
+      <rect x="0" y="0" width="350" height="220" class="yes" rx="8" stroke-width="2"/>
+      
+      <!-- Q1 -->
+      <rect x="20" y="20" width="310" height="50" class="decision" rx="5"/>
+      <text x="155" y="40" text-anchor="middle" class="text">&amp;T 实现 Send？</text>
+      <text x="155" y="55" text-anchor="middle" class="code">(等价条件: T: Sync &lt;=&gt; &amp;T: Send)</text>
+      
+      <line x1="100" y1="70" x2="50" y2="100" stroke="#333" marker-end="url(#arrow)"/>
+      <text x="70" y="90" class="text">是</text>
+      
+      <line x1="210" y1="70" x2="260" y2="100" stroke="#333" marker-end="url(#arrow)"/>
+      <text x="240" y="90" class="text">否</text>
+      
+      <!-- Yes -->
+      <g transform="translate(20, 105)">
+        <rect x="0" y="0" width="100" height="80" class="result" rx="5"/>
+        <text x="50" y="30" text-anchor="middle" class="text">自动实现</text>
+        <text x="50" y="50" text-anchor="middle" class="code">unsafe impl</text>
+        <text x="50" y="65" text-anchor="middle" class="code">Sync for T {}</text>
+      </g>
+      
+      <!-- No -->
+      <g transform="translate(170, 105)">
+        <rect x="0" y="0" width="160" height="80" class="no" rx="5"/>
+        <text x="80" y="25" text-anchor="middle" class="text">不实现 Sync</text>
+        <text x="80" y="45" text-anchor="middle" class="code">原因: 包含</text>
+        <text x="80" y="60" text-anchor="middle" class="code">Cell/RefCell/Rc</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Common Types -->
+  <g transform="translate(50, 340)">
+    <text x="0" y="0" class="subtitle">常见类型的 Send/Sync 状态</text>
+    
+    <g transform="translate(0, 15)">
+      <rect x="0" y="0" width="700" height="180" fill="#fafafa" stroke="#999" rx="5"/>
+      
+      <!-- Table headers -->
+      <rect x="10" y="10" width="200" height="25" fill="#e3f2fd" stroke="#1976d2"/>
+      <text x="110" y="27" text-anchor="middle" class="text" font-weight="bold">类型</text>
+      
+      <rect x="210" y="10" width="150" height="25" fill="#e8f5e9" stroke="#2e7d32"/>
+      <text x="285" y="27" text-anchor="middle" class="text" font-weight="bold">Send</text>
+      
+      <rect x="360" y="10" width="150" height="25" fill="#e8f5e9" stroke="#2e7d32"/>
+      <text x="435" y="27" text-anchor="middle" class="text" font-weight="bold">Sync</text>
+      
+      <rect x="510" y="10" width="180" height="25" fill="#fff3e0" stroke="#ef6c00"/>
+      <text x="600" y="27" text-anchor="middle" class="text" font-weight="bold">原因</text>
+      
+      <!-- Row 1: i32 -->
+      <rect x="10" y="35" width="200" height="25" fill="white" stroke="#ddd"/>
+      <text x="110" y="52" text-anchor="middle" class="code">i32, bool, char</text>
+      
+      <rect x="210" y="35" width="150" height="25" fill="#c8e6c9" stroke="#2e7d32"/>
+      <text x="285" y="52" text-anchor="middle" class="text">✓</text>
+      
+      <rect x="360" y="35" width="150" height="25" fill="#c8e6c9" stroke="#2e7d32"/>
+      <text x="435" y="52" text-anchor="middle" class="text">✓</text>
+      
+      <rect x="510" y="35" width="180" height="25" fill="white" stroke="#ddd"/>
+      <text x="600" y="52" text-anchor="middle" class="text">原始类型</text>
+      
+      <!-- Row 2: String -->
+      <rect x="10" y="60" width="200" height="25" fill="white" stroke="#ddd"/>
+      <text x="110" y="77" text-anchor="middle" class="code">String, Vec&lt;T&gt;</text>
+      
+      <rect x="210" y="60" width="150" height="25" fill="#c8e6c9" stroke="#2e7d32"/>
+      <text x="285" y="77" text-anchor="middle" class="text">✓</text>
+      
+      <rect x="360" y="60" width="150" height="25" fill="#c8e6c9" stroke="#2e7d32"/>
+      <text x="435" y="77" text-anchor="middle" class="text">✓</text>
+      
+      <rect x="510" y="60" width="180" height="25" fill="white" stroke="#ddd"/>
+      <text x="600" y="77" text-anchor="middle" class="text">拥有所有权</text>
+      
+      <!-- Row 3: Rc -->
+      <rect x="10" y="85" width="200" height="25" fill="white" stroke="#ddd"/>
+      <text x="110" y="102" text-anchor="middle" class="code">Rc&lt;T&gt;</text>
+      
+      <rect x="210" y="85" width="150" height="25" fill="#ffcdd2" stroke="#c62828"/>
+      <text x="285" y="102" text-anchor="middle" class="text">✗</text>
+      
+      <rect x="360" y="85" width="150" height="25" fill="#ffcdd2" stroke="#c62828"/>
+      <text x="435" y="102" text-anchor="middle" class="text">✗</text>
+      
+      <rect x="510" y="85" width="180" height="25" fill="white" stroke="#ddd"/>
+      <text x="600" y="102" text-anchor="middle" class="text">非原子计数</text>
+      
+      <!-- Row 4: Arc -->
+      <rect x="10" y="110" width="200" height="25" fill="white" stroke="#ddd"/>
+      <text x="110" y="127" text-anchor="middle" class="code">Arc&lt;T&gt;</text>
+      
+      <rect x="210" y="110" width="150" height="25" fill="#c8e6c9" stroke="#2e7d32"/>
+      <text x="285" y="127" text-anchor="middle" class="text">✓</text>
+      
+      <rect x="360" y="110" width="150" height="25" fill="#c8e6c9" stroke="#2e7d32"/>
+      <text x="435" y="127" text-anchor="middle" class="text">✓ (if T: Send+Sync)</text>
+      
+      <rect x="510" y="110" width="180" height="25" fill="white" stroke="#ddd"/>
+      <text x="600" y="127" text-anchor="middle" class="text">原子计数</text>
+      
+      <!-- Row 5: Cell -->
+      <rect x="10" y="135" width="200" height="25" fill="white" stroke="#ddd"/>
+      <text x="110" y="152" text-anchor="middle" class="code">Cell&lt;T&gt;, RefCell&lt;T&gt;</text>
+      
+      <rect x="210" y="135" width="150" height="25" fill="#c8e6c9" stroke="#2e7d32"/>
+      <text x="285" y="152" text-anchor="middle" class="text">✓ (if T: Send)</text>
+      
+      <rect x="360" y="135" width="150" height="25" fill="#ffcdd2" stroke="#c62828"/>
+      <text x="435" y="152" text-anchor="middle" class="text">✗</text>
+      
+      <rect x="510" y="135" width="180" height="25" fill="white" stroke="#ddd"/>
+      <text x="600" y="152" text-anchor="middle" class="text">内部可变性</text>
+    </g>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(50, 530)">
+    <rect x="0" y="0" width="700" height="60" fill="#f5f5f5" stroke="#999" rx="5"/>
+    <text x="10" y="20" class="subtitle">关键规则</text>
+    <text x="10" y="40" class="code">T: Send  -&gt;  所有权可跨线程转移</text>
+    <text x="350" y="40" class="code">T: Sync  -&gt;  &amp;T: Send  -&gt;  可安全多线程共享</text>
+  </g>
+</svg>

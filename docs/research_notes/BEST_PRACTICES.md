@@ -86,13 +86,19 @@
 
 **证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](PROOF_INDEX.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md) L2 示例、[coq_skeleton](coq_skeleton/README.md) L3 骨架。
 
-**引用**：[FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 论证要素规范、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) 论证体系五层、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 批判性分析。
+**引用**：[FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 论证要素规范、
+[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) 论证体系五层、
+[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 批判性分析。
 
 ---
 
 ## 研究笔记与形式化体系衔接
 
-**Def BP2（实质内容完备）**：研究笔记 $N$ 满足**实质内容完备**，当且仅当 $N$ 含：形式化（Def/定理）、可运行代码、典型场景、反例或边界、与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md)、[PROOF_INDEX](PROOF_INDEX.md) 的交叉引用。
+**Def BP2（实质内容完备）**：研究笔记 $N$ 满足**实质内容完备**，当且仅当 $N$ 含：
+形式化（Def/定理）、可运行代码、典型场景、反例或边界、
+与 [formal_methods](formal_methods/README.md)、
+[type_theory](type_theory/README.md)、
+[PROOF_INDEX](PROOF_INDEX.md) 的交叉引用。
 
 **实践对照表**：
 
@@ -138,7 +144,9 @@ fn example_anti_pattern() {
 
 ## 实质内容不足判断与修复
 
-**Def BP3（实质内容不足）**：研究笔记 $N$ 存在**实质内容不足**，当且仅当 $N$ 存在以下至少一项：无 Def/定理或仅占位、无可运行代码或代码与论点无关、无典型场景或仅泛泛描述、无反例或边界说明、无与 [formal_methods](formal_methods/README.md)/[type_theory](type_theory/README.md)/[PROOF_INDEX](PROOF_INDEX.md) 的交叉引用。
+**Def BP3（实质内容不足）**：研究笔记 $N$ 存在**实质内容不足**，当且仅当 $N$ 存在以下至少一项：无 Def/定理或仅占位、
+无可运行代码或代码与论点无关、无典型场景或仅泛泛描述、无反例或边界说明、
+无与 [formal_methods](formal_methods/README.md)/[type_theory](type_theory/README.md)/[PROOF_INDEX](PROOF_INDEX.md) 的交叉引用。
 
 **常见无实质内容表现**：
 
@@ -157,7 +165,8 @@ fn example_anti_pattern() {
 3. **补场景与反例**：添加 1–3 个典型使用场景；添加 1–2 个反例及规避策略。
 4. **补衔接**：在相关段落增加 `[文档名](path)` 链接至 formal_methods、type_theory、practical_applications。
 
-**逐文档自检**：按 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) 实质内容检查清单逐项核对；若任一项为空或仅占位，则需修复。见 [FAQ Q2.5](FAQ.md#q25-如何判断研究笔记是否有实质内容) 快速判断指引。
+**逐文档自检**：按 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) 实质内容检查清单逐项核对；若任一项为空或仅占位，则需修复。
+见 [FAQ Q2.5](FAQ.md#q25-如何判断研究笔记是否有实质内容) 快速判断指引。
 
 ---
 

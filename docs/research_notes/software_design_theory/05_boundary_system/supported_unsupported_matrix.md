@@ -11,7 +11,8 @@
 
 **Def 1.1（支持边界）**:
 
-设 $F$ 为待实现的功能或模式。定义支持边界函数 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib},\, \mathrm{FFI}\}$：
+设 $F$ 为待实现的功能或模式。
+定义支持边界函数 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib},\, \mathrm{FFI}\}$：
 
 - **原生支持**：$\mathit{SuppB}(F) = \mathrm{Native}$ 当且仅当 $F$ 可仅用 `std`/`core` 实现，无需 `extern crate`
 - **库支持**：$\mathit{SuppB}(F) = \mathrm{Lib}$ 当且仅当 $F$ 需第三方 crate（如 tokio、rayon）
@@ -19,19 +20,25 @@
 
 **Def 1.2（依赖闭包）**:
 
-设 $\mathit{deps}(C)$ 为 crate $C$ 的传递依赖集。若 $\mathit{std} \in \mathit{deps}(C)$ 或 $\mathit{core} \in \mathit{deps}(C)$ 且无其他 crate，则 $\mathit{SuppB}(C) = \mathrm{Native}$。
+设 $\mathit{deps}(C)$ 为 crate $C$ 的传递依赖集。
+若 $\mathit{std} \in \mathit{deps}(C)$ 或 $\mathit{core} \in \mathit{deps}(C)$ 且无其他 crate，
+则 $\mathit{SuppB}(C) = \mathrm{Native}$。
 
 **Axiom SUM1**：`core` 为 `no_std` 最小子集；`std` 为 `core` 之上扩展（分配、I/O、线程）。
 
 **Axiom SUM2**：`std` 为语言标准库，随编译器分发；第三方 crate 需单独声明。
 
-**定理 SUM-T1**：若模式 $X$ 仅用 `trait`、`impl`、`struct`、`enum`、`Box`、`Vec`、`Option`、`Result` 等，则 $\mathit{SuppB}(X) = \mathrm{Native}$。
+**定理 SUM-T1**：若模式 $X$ 仅用 `trait`、`impl`、`struct`、`enum`、`Box`、`Vec`、`Option`、`Result` 等，
+则 $\mathit{SuppB}(X) = \mathrm{Native}$。
 
-*证明*：由 Axiom SUM1、SUM2。上述类型均为 `std`/`core` 提供；无需 `extern crate`。依 Def 1.1，$\mathit{SuppB}(X) = \mathrm{Native}$。∎
+*证明*：由 Axiom SUM1、SUM2。上述类型均为 `std`/`core` 提供；无需 `extern crate`。
+依 Def 1.1，$\mathit{SuppB}(X) = \mathrm{Native}$。∎
 
-**定理 SUM-T2**：若 $F$ 涉及异步运行时、线程池或通信，则 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib}\}$；`std` 提供 `thread`、`mpsc`，但 `tokio`/`rayon` 为 Lib。
+**定理 SUM-T2**：若 $F$ 涉及异步运行时、线程池或通信，则 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib}\}$；
+`std` 提供 `thread`、`mpsc`，但 `tokio`/`rayon` 为 Lib。
 
-*证明*：由 Def 1.1。异步运行时（Waker、Executor）不由 `std` 提供，需 tokio/async-std；线程与 mpsc 由 `std` 提供；故为 Native 或 Lib。∎
+*证明*：由 Def 1.1。异步运行时（Waker、Executor）不由 `std` 提供，需 tokio/async-std；
+线程与 mpsc 由 `std` 提供；故为 Native 或 Lib。∎
 
 **引理 SUM-L1**：若 $C$ 为 `no_std` crate 且 $\mathit{deps}(C) \subseteq \{\mathrm{core},\, \mathrm{alloc}\}$，则 $\mathit{SuppB}(C) \in \{\mathrm{Native},\, \mathrm{Lib}\}$。
 
@@ -39,11 +46,14 @@
 
 **推论 SUM-C1**：GoF 23 种设计模式中，除需网络/异步/并行的 Observer、分布式扩展外，其余均为 Native。
 
-**引理 SUM-L2（no_std 边界）**：若 $F$ 需 `Vec`、`String`、`Box`，则 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib}\}$；`std` 或 `alloc` 提供。
+**引理 SUM-L2（no_std 边界）**：若 $F$ 需 `Vec`、`String`、`Box`，则 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib}\}$；
+`std` 或 `alloc` 提供。
 
-*证明*：`core` 为 `no_std` 最小子集；`std` 扩展 `alloc`；由 Axiom SUM1。∎
+*证明*：`core` 为 `no_std` 最小子集；`std` 扩展 `alloc`；
+由 Axiom SUM1。∎
 
-**推论 SUM-C2**：组合模式 $C = M_1 \oplus \cdots \oplus M_n$ 的 $\mathit{SuppB}(C) = \max_i \mathit{SuppB}(M_i)$；取依赖最重者。
+**推论 SUM-C2**：组合模式 $C = M_1 \oplus \cdots \oplus M_n$ 的 $\mathit{SuppB}(C) = \max_i \mathit{SuppB}(M_i)$；
+取依赖最重者。
 
 ---
 

@@ -4,6 +4,36 @@
 
 ---
 
+## 目录
+
+- [扩展主题：Const泛型与编译期计算](#扩展主题const泛型与编译期计算)
+  - [目录](#目录)
+  - [1. Const泛型概述](#1-const泛型概述)
+    - [1.1 什么是Const泛型](#11-什么是const泛型)
+    - [1.2 与普通泛型的区别](#12-与普通泛型的区别)
+  - [2. Const泛型的所有权语义](#2-const泛型的所有权语义)
+    - [2.1 所有权在编译期确定](#21-所有权在编译期确定)
+    - [2.2 编译期内存布局](#22-编译期内存布局)
+  - [3. Const函数](#3-const函数)
+    - [3.1 Const函数的限制](#31-const函数的限制)
+    - [3.2 Const函数与所有权](#32-const函数与所有权)
+  - [4. 编译期计算能力](#4-编译期计算能力)
+    - [4.1 类型级别计算](#41-类型级别计算)
+    - [4.2 编译期断言](#42-编译期断言)
+  - [5. 高级应用](#5-高级应用)
+    - [5.1 编译期状态机](#51-编译期状态机)
+    - [5.2 零成本抽象](#52-零成本抽象)
+  - [6. 形式化视角](#6-形式化视角)
+    - [6.1 编译期计算的语义](#61-编译期计算的语义)
+    - [6.2 可判定性](#62-可判定性)
+    - [6.3 与C++模板的比较](#63-与c模板的比较)
+  - [7. 实践模式](#7-实践模式)
+    - [7.1 固定大小缓冲区](#71-固定大小缓冲区)
+    - [7.2 编译期配置](#72-编译期配置)
+  - [8. 总结](#8-总结)
+    - [核心概念](#核心概念)
+    - [最佳实践](#最佳实践)
+
 ## 1. Const泛型概述
 
 ### 1.1 什么是Const泛型
@@ -46,7 +76,7 @@ impl<T, const N: usize> FixedVec<T, N> {
     const fn capacity() -> usize {
         N
     }
-    
+
     // 所有权语义与普通Vec相同
     fn push(&mut self, value: T) -> Result<(), T> {
         if self.len < N {
@@ -91,6 +121,7 @@ const FIB_10: u32 = fibonacci(10); // 编译期计算
 ```
 
 **限制：**
+
 - 不能分配堆内存
 - 不能调用非const函数
 - 不能涉及运行时IO
@@ -108,6 +139,7 @@ const ARR: [i32; 10] = create_array(42);
 ```
 
 **关键点：**
+
 - const函数内所有权规则相同
 - 但只能操作编译期已知值
 
@@ -123,7 +155,7 @@ struct TypeLevel<const N: usize>;
 
 impl<const N: usize> TypeLevel<N> {
     const VALUE: usize = N;
-    
+
     // 编译期算术
     type Double = TypeLevel<{ N * 2 }>;
     type Increment = TypeLevel<{ N + 1 }>;
@@ -195,7 +227,7 @@ impl<T: Default + Copy, const R: usize, const C: usize> Matrix<T, R, C> {
             data: [[T::default(); C]; R],
         }
     }
-    
+
     // 编译期检查矩阵乘法维度
     fn multiply<const C2: usize>(
         &self,
@@ -268,7 +300,7 @@ impl<const SIZE: usize> Buffer<SIZE> {
             pos: 0,
         }
     }
-    
+
     fn write(&mut self, data: &[u8]) -> usize {
         let len = data.len().min(SIZE - self.pos);
         self.data[self.pos..self.pos + len].copy_from_slice(&data[..len]);

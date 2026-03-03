@@ -171,7 +171,9 @@ $$\text{Cov}[F] \Leftrightarrow \forall S, T. S <: T \Rightarrow F[S] <: F[T]$$
 **定义 2.1 (逆变)**: 对于参数化类型构造器 $F[T]$，如果 $S <: T \Rightarrow F[T] <: F[S]$，则 $F$ 对参数 $T$ 是**逆变的**。
 
 **形式化表示**:
-$$\text{Contra}[F] \Leftrightarrow \forall S, T. S <: T \Rightarrow F[T] <: F[S]$$
+$$
+\text{Contra}[F] \Leftrightarrow \forall S, T. S <: T \Rightarrow F[T] <: F[S]
+$$
 
 **Rust 示例**:
 
@@ -249,7 +251,7 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 1. **输出位置**（返回类型）是协变的
 2. **输入位置**（参数类型）是逆变的
 3. **输入和输出位置都存在**时，类型是不变的
-4. **PhantomData<T>** 在 $T$ 上是协变的
+4. **`PhantomData<T>`** 在 $T$ 上是协变的
 
 **证明思路**:
 

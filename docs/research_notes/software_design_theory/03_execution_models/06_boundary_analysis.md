@@ -56,13 +56,15 @@
 
 **定理 EB-T1（五模型安全边界）**：同步、异步、并发、并行均为纯 Safe；分布式在 FFI 场景需 unsafe，可封装为 Safe。
 
-*证明*：由 [01_synchronous](01_synchronous.md) SY-T2、[02_async](02_async.md) AS-T1、[03_concurrent](03_concurrent.md) CC-T1、
+*证明*：由 [01_synchronous](01_synchronous.md) SY-T2、[02_async](02_async.md) AS-T1、
+[03_concurrent](03_concurrent.md) CC-T1、
 [04_parallel](04_parallel.md) PL-T1、[05_distributed](05_distributed.md) DI-T1；
 各模型形式化文档已给出与 ownership/borrow/type_system 的衔接。
 
 **定理 EB-T2（边界一致性）**：$B_s$、$B_p$、$B_e$ 与 [05_boundary_system](../05_boundary_system/) 三维矩阵一致。
 
-*证明*：Def 1.1 中 $B_s$、$B_p$、$B_e$ 取值与 safe_unsafe_matrix、supported_unsupported_matrix、expressive_inexpressive_matrix 定义一致。
+*证明*：Def 1.1 中 $B_s$、$B_p$、$B_e$ 取值与 safe_unsafe_matrix、
+supported_unsupported_matrix、expressive_inexpressive_matrix 定义一致。
 
 **引理 EB-EX-L1**：五模型互斥覆盖常见执行需求；对任意需求「单机/多机 × I/O/CPU × 并发/顺序」，存在唯一或组合模型。
 
@@ -95,9 +97,13 @@ $\mathit{Det}(\mathrm{Async}) = \mathit{Det}(\mathrm{Concurrent}) = \mathrm{Inte
 $\mathit{Det}(\mathrm{Parallel}) = \mathrm{Parallel}$；
 $\mathit{Det}(\mathrm{Distributed}) = \mathrm{Distributed}$。
 
-**定理 EB-DET-T1（确定性蕴涵数据竞争自由）**：若 $M$ 为 Sync、Async、Concurrent 或 Parallel，且程序满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 定理 T1（数据竞争自由）及 Send/Sync 约束，则执行无数据竞争；执行顺序的非确定性不导致 UB。
+**定理 EB-DET-T1（确定性蕴涵数据竞争自由）**：若 $M$ 为 Sync、Async、Concurrent 或 Parallel，
+且程序满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 定理 T1（数据竞争自由）及 Send/Sync 约束，则执行无数据竞争；
+执行顺序的非确定性不导致 UB。
 
-*证明*：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1；Send/Sync 保证跨线程传递安全；ownership/borrow 保证无别名违规；Interleaved/Parallel 的调度非确定性仅影响执行顺序，不影响内存安全。∎
+*证明*：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1；
+Send/Sync 保证跨线程传递安全；ownership/borrow 保证无别名违规；
+Interleaved/Parallel 的调度非确定性仅影响执行顺序，不影响内存安全。∎
 
 **推论 EB-DET-C1（控制确定性判定）**：对于「需保证执行顺序」的需求，选 Sync；
 对于「可接受非确定调度」的 I/O 并发，选 Async；
@@ -179,7 +185,8 @@ $\mathit{Det}(\mathrm{Distributed}) = \mathrm{Distributed}$。
 
 ## 并发选型决策树（Actor、channel、async、Mutex）
 
-**用途**：在已选定「并发」模型后，进一步选择 Actor、channel、async、Mutex 等具体机制；与 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) CHAN-T1、MUTEX-T1 形式化衔接。
+**用途**：在已选定「并发」模型后，进一步选择 Actor、channel、async、Mutex 等具体机制；
+与 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) CHAN-T1、MUTEX-T1 形式化衔接。
 
 ```text
 并发场景细分

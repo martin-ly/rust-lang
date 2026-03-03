@@ -354,7 +354,7 @@ cargo miri run  # 默认会报告泄漏
 
 ### 常见问题
 
-**问题1：Miri 太慢**
+**问题1：Miri 太慢**:
 
 ```bash
 # 解决方案：只测试关键代码
@@ -365,7 +365,7 @@ mod miri_tests {
 }
 ```
 
-**问题2：某些代码 Miri 无法运行**
+**问题2：某些代码 Miri 无法运行**:
 
 ```bash
 # 跳过 Miri 测试
@@ -376,7 +376,7 @@ fn test_native_only() {
 }
 ```
 
-**问题3：Tree Borrows vs Stacked Borrows 差异**
+**问题3：Tree Borrows vs Stacked Borrows 差异**:
 
 ```rust
 // 某些代码在 Stacked Borrows 下报错但在 Tree Borrows 下通过

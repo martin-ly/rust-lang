@@ -1,0 +1,28 @@
+[package]
+name = "rust-ownership-exercises"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+
+[dependencies]
+# 自引用结构支持
+ouroboros = { version = "0.18", optional = true }
+# 并发支持  
+crossbeam = "0.8"
+parking_lot = "0.12"
+# 异步支持
+tokio = { version = "1.35", features = ["full", "test-util"] }
+futures = "0.3"
+
+[features]
+default = ["ouroboros"]
+
+# 独立workspace，不继承父项目
+[workspace]
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "ownership_patterns"
+harness = false

@@ -231,11 +231,16 @@ where
 
 ## 分布式+并发组合（R1-02 最小交付）
 
-**定理 DI-CONC-T1（Saga + Send/Sync 组合）**：Saga 编排式实现中，各步骤闭包若跨线程传递，须满足 `Send + Sync`；补偿闭包 `Box<dyn Fn() -> Result<(), E> + Send>` 保证跨线程安全。由 [send_sync_formalization](../../formal_methods/send_sync_formalization.md) SEND-T1、SYNC-T1 与 Saga 补偿语义组合。
+**定理 DI-CONC-T1（Saga + Send/Sync 组合）**：Saga 编排式实现中，各步骤闭包若跨线程传递，须满足 `Send + Sync`；
+补偿闭包 `Box<dyn Fn() -> Result<(), E> + Send>` 保证跨线程安全。
+由 [send_sync_formalization](../../formal_methods/send_sync_formalization.md) SEND-T1、SYNC-T1 与 Saga 补偿语义组合。
 
-**定理 DI-CONC-T2（CQRS + 通道组合）**：CQRS 读写分离时，命令端与查询端通过 channel 通信；`Sender<Event>: Send`、`Receiver<Event>: Send` 保证跨线程事件传递无数据竞争。由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1 与 channel 语义。
+**定理 DI-CONC-T2（CQRS + 通道组合）**：CQRS 读写分离时，命令端与查询端通过 channel 通信；
+`Sender<Event>: Send`、`Receiver<Event>: Send` 保证跨线程事件传递无数据竞争。
+由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1 与 channel 语义。
 
-**Rust 对应**：`OrchestratedSaga` 的 `steps`/`compensations` 若为 `Vec<Box<dyn Saga<(), E> + Send>>`，则 `run()` 可安全跨线程调度；CQRS 使用 `tokio::sync::mpsc` 传递事件。
+**Rust 对应**：`OrchestratedSaga` 的 `steps`/`compensations` 若为 `Vec<Box<dyn Saga<(), E> + Send>>`，则 `run()` 可安全跨线程调度；
+CQRS 使用 `tokio::sync::mpsc` 传递事件。
 
 ---
 

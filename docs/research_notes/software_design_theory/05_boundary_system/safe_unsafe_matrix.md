@@ -19,7 +19,8 @@
 
 **Def 1.2（安全抽象）**:
 
-设 $A$ 为封装 unsafe 的 Rust 模块。若 $A$ 对外 API 满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 与 [ownership_model](../../formal_methods/ownership_model.md) 的 Safe 规则，则称 $A$ 为**安全抽象**。
+设 $A$ 为封装 unsafe 的 Rust 模块。
+若 $A$ 对外 API 满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 与 [ownership_model](../../formal_methods/ownership_model.md) 的 Safe 规则，则称 $A$ 为**安全抽象**。
 
 **Axiom SBM1**：Safe 代码不触发 UB；违反借用/所有权规则导致编译错误。
 
@@ -27,11 +28,14 @@
 
 **定理 SBM-T1**：若模式 $X$ 仅用 `OnceLock`、`Mutex`、`Channel`、`Arc` 等 Safe 抽象，则 $\mathit{SafeB}(X) = \mathrm{Safe}$。
 
-*证明*：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1、[ownership_model](../../formal_methods/ownership_model.md) T2/T3，Safe API 保证内存安全与无数据竞争。依 Axiom SBM1，Safe 代码不触发 UB；故 $\mathit{SafeB}(X) = \mathrm{Safe}$。∎
+*证明*：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1、[ownership_model](../../formal_methods/ownership_model.md) T2/T3，Safe API 保证内存安全与无数据竞争。
+依 Axiom SBM1，Safe 代码不触发 UB；故 $\mathit{SafeB}(X) = \mathrm{Safe}$。∎
 
-**定理 SBM-T2**：若模式 $X$ 需 FFI 或裸指针，则 $\mathit{SafeB}(X) = \mathrm{Unsafe}$；封装为安全抽象后，调用方仍视为 Safe。
+**定理 SBM-T2**：若模式 $X$ 需 FFI 或裸指针，则 $\mathit{SafeB}(X) = \mathrm{Unsafe}$；
+封装为安全抽象后，调用方仍视为 Safe。
 
-*证明*：由 Def 1.1，需 `unsafe` 块则 $\mathit{SafeB}(X) = \mathrm{Unsafe}$。由 Def 1.2、Axiom SBM2，安全抽象对外 API 满足 Safe 规则，调用方无需写 `unsafe`。∎
+*证明*：由 Def 1.1，需 `unsafe` 块则 $\mathit{SafeB}(X) = \mathrm{Unsafe}$。
+由 Def 1.2、Axiom SBM2，安全抽象对外 API 满足 Safe 规则，调用方无需写 `unsafe`。∎
 
 **引理 SBM-L1**：若 $A$ 为安全抽象，则 $A$ 的 `unsafe` 块需满足其 UB 契约（如 dereference 合法指针、FFI 调用约定）。
 
@@ -109,7 +113,7 @@
 | Iterator | 纯 Safe | `Iterator` trait |
 | Mediator | 纯 Safe | 结构体持有多方引用 |
 | Memento | 纯 Safe | Clone 或 serde 序列化 |
-| Observer | 纯 Safe | mpsc/broadcast channel；或 RefCell<Vec<Callback>> |
+| Observer | 纯 Safe | mpsc/broadcast channel；或 `RefCell<Vec<Callback>>` |
 | State | 纯 Safe | 枚举或类型状态泛型 |
 | Strategy | 纯 Safe | trait + impl |
 | Template Method | 纯 Safe | trait 默认方法 |
