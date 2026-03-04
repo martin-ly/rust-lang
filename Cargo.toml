@@ -95,10 +95,12 @@ codegen-units = 1
 [profile.bench.build-override]
 opt-level = 2
 
-# 工作区级别的依赖版本统一 - 2026年2月19日最新稳定版本
-# 更新时间: 2026-02-19 (cargo update 锁定 23 包至 Rust 1.93 兼容版本)
+# 工作区级别的依赖版本统一 - 2026年3月4日最新稳定版本
+# 更新时间: 2026-03-04 (cargo update 锁定 17 包至 Rust 1.93.1 兼容版本)
+# 更新包: aws-lc-rs, aws-lc-sys, const_fn, getrandom, if-addrs, if-watch, ipnet, jiff,
+#         netlink-packet-core, netlink-packet-route, netlink-proto, nix, quote, rtnetlink, tokio
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
-# rust-version: 1.93.0
+# rust-version: 1.93.1
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 2025年12月11日最新稳定版本
