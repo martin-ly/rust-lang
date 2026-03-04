@@ -303,13 +303,14 @@
 7. ✅ papers/stacked-tree-borrows-analysis.md（8KB）
 8. ✅ papers/stacked-tree-borrows-formal-semantics.md（11KB）★新增★
 
-### 工具教程（5个）
+### 工具教程（6个）
 
 1. ✅ guides/miri-tutorial.md（9.8KB）
 2. ✅ guides/prusti-tutorial.md（10KB）
 3. ✅ guides/pin-unpin-deep-dive.md（9.7KB）
 4. ✅ guides/drop-check-analysis.md
 5. ✅ guides/zero-cost-abstraction-proof.md（12KB）
+6. ✅ guides/creusot-tutorial.md（12KB）★新增★
 
 ### 扩展主题（5个）
 

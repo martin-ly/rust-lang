@@ -71,10 +71,10 @@ fn test_explicit_lifetime() {
         if x.len() > y.len() { x } else { y }
     }
     
-    let s1 = String::from("long");
+    let s1 = String::from("longer string");
     let s2 = "short";
     let result = longest(&s1, s2);
-    assert_eq!(result, "long");
+    assert_eq!(result, "longer string");
 }
 
 // ============================================

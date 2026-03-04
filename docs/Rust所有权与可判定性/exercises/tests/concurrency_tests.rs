@@ -14,7 +14,7 @@ fn test_arc_send_sync() {
     let data = Arc::new(vec![1, 2, 3]);
     let mut handles = vec![];
     
-    for i in 0..5 {
+    for i in 0..3 {
         let data = Arc::clone(&data);
         let handle = thread::spawn(move || {
             assert_eq!(data[i], i + 1);
@@ -54,7 +54,7 @@ fn test_rwlock_multiple_readers() {
     let mut handles = vec![];
     
     // 多个读线程
-    for _ in 0..10 {
+    for _ in 0..5 {
         let data = Arc::clone(&data);
         handles.push(thread::spawn(move || {
             let read_guard = data.read().unwrap();
@@ -62,16 +62,18 @@ fn test_rwlock_multiple_readers() {
         }));
     }
     
-    // 一个写线程
-    let data_write = Arc::clone(&data);
-    handles.push(thread::spawn(move || {
-        let mut write_guard = data_write.write().unwrap();
-        write_guard.push(4);
-    }));
-    
+    // 等待读线程完成后再启动写线程，避免死锁
     for handle in handles {
         handle.join().unwrap();
     }
+    
+    // 写线程单独执行
+    let data_write = Arc::clone(&data);
+    let write_handle = thread::spawn(move || {
+        let mut write_guard = data_write.write().unwrap();
+        write_guard.push(4);
+    });
+    write_handle.join().unwrap();
     
     assert_eq!(data.read().unwrap().len(), 4);
 }

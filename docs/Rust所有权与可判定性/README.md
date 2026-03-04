@@ -187,6 +187,11 @@ cargo miri test
   - 循环不变量
   - 所有权规范
 
+- **creusot-tutorial.md** - Creusot预言逻辑验证
+  - 预言逻辑基础
+  - 两状态规范
+  - 自动定理证明
+
 ### 高级主题
 
 - **drop-check-analysis.md** - Drop检查深度分析

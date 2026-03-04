@@ -43,7 +43,7 @@
 
 ### 4. 概念卡片 (concepts/)
 
-```
+```text
 概念卡片系统 (Concept Cards)
 ├── ownership-concept-card.md    - 所有权形式化定义
 ├── borrowing-concept-card.md    - 借用规则与约束
@@ -94,7 +94,7 @@
 
 ## 思维导图
 
-```
+```text
                         Rust所有权系统
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -120,7 +120,7 @@
 
 ### 决策路径
 
-```
+```text
 设计决策?
 ├── 所有权选择 → visualizations/decision-tree.md
 ├── 架构设计 → 13-architecture-patterns/
@@ -130,7 +130,7 @@
 
 ## 目录结构
 
-```
+```text
 docs/rust-ownership-decidability/
 ├── 00-foundations/
 │   ├── linear-logic-foundations.md
@@ -199,4 +199,4 @@ docs/rust-ownership-decidability/
 
 ---
 
-*最后更新: 2026-03-04 | Rust版本: 1.93.1*
+*最后更新: 2026-03-04 | Rust版本: 1.93.1*:
