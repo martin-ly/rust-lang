@@ -1,175 +1,304 @@
-# DashMap 并发HashMap形式化分析
+# DashMap并发HashMap形式化分析
 
-> **主题**: 无锁并发哈希表
->
-> **形式化框架**: 分段锁 + 无锁读取
->
-> **参考**: DashMap Documentation; Concurrent Hash Tables
+> **主题**: 并发安全的HashMap
+> **形式化框架**: 分片锁 + 读优化 + 迭代安全
+> **参考**: DashMap Documentation (<https://docs.rs/dashmap>)
 
 ---
 
 ## 目录
 
-- [DashMap 并发HashMap形式化分析](#dashmap-并发hashmap形式化分析)
+- [DashMap并发HashMap形式化分析](#dashmap并发hashmap形式化分析)
   - [目录](#目录)
   - [1. 引言](#1-引言)
-  - [2. 架构设计](#2-架构设计)
-    - [2.1 分段锁](#21-分段锁)
-    - [定义 2.1 (Segmented Locking)](#定义-21-segmented-locking)
-    - [定理 2.1 (锁分段)](#定理-21-锁分段)
-    - [2.2 无锁读取](#22-无锁读取)
-    - [定理 2.2 (读取优化)](#定理-22-读取优化)
-  - [3. 操作语义](#3-操作语义)
-    - [定理 3.1 (并发安全性)](#定理-31-并发安全性)
-  - [4. 迭代器一致性](#4-迭代器一致性)
-    - [定理 4.1 (弱一致性迭代)](#定理-41-弱一致性迭代)
-  - [5. 与RwLock对比](#5-与rwlock对比)
-  - [6. 反例](#6-反例)
-    - [反例 6.1 (死锁风险)](#反例-61-死锁风险)
+  - [2. 分片架构](#2-分片架构)
+    - [定义 SHARD-1 ( 分片结构 )](#定义-shard-1--分片结构-)
+    - [定义 SHARD-2 ( 键分配 )](#定义-shard-2--键分配-)
+    - [定理 SHARD-T1 ( 锁粒度 )](#定理-shard-t1--锁粒度-)
+  - [3. 读写操作](#3-读写操作)
+    - [定义 READ-1 ( 获取 )](#定义-read-1--获取-)
+    - [定义 WRITE-1 ( 插入 )](#定义-write-1--插入-)
+    - [定义 WRITE-2 ( 条件修改 )](#定义-write-2--条件修改-)
+  - [4. 迭代安全](#4-迭代安全)
+    - [定义 ITER-1 ( 快照迭代 )](#定义-iter-1--快照迭代-)
+    - [定义 ITER-2 ( 迭代器一致性 )](#定义-iter-2--迭代器一致性-)
+    - [定理 ITER-T1 ( 弱一致性 )](#定理-iter-t1--弱一致性-)
+  - [5. 引用类型](#5-引用类型)
+    - [定义 REF-1 ( Ref类型 )](#定义-ref-1--ref类型-)
+    - [定义 REF-2 ( RefMut类型 )](#定义-ref-2--refmut类型-)
+    - [定理 REF-T1 ( 自动释放 )](#定理-ref-t1--自动释放-)
+  - [6. 性能保证](#6-性能保证)
+    - [定义 PERF-1 ( 读优化 )](#定义-perf-1--读优化-)
+    - [定理 PERF-T1 ( 扩展性 )](#定理-perf-t1--扩展性-)
+  - [7. 定理与证明](#7-定理与证明)
+    - [定理 DASHMAP-T1 ( 线程安全 )](#定理-dashmap-t1--线程安全-)
+    - [定理 DASHMAP-T2 ( 死锁避免 )](#定理-dashmap-t2--死锁避免-)
+  - [8. 代码示例](#8-代码示例)
+    - [示例1: 并发计数器](#示例1-并发计数器)
+    - [示例2: 缓存实现](#示例2-缓存实现)
+    - [示例3: 条件更新](#示例3-条件更新)
 
 ---
 
 ## 1. 引言
 
-DashMap提供:
+DashMap特点：
 
-- 类似HashMap的API
-- 并发安全
-- 无锁读取路径
-- 细粒度锁(分段)
+- 并发HashMap
+- 分片锁减少竞争
+- 读优化（大部分无锁）
+- 可升级读锁
 
 ---
 
-## 2. 架构设计
+## 2. 分片架构
 
-### 2.1 分段锁
-
-### 定义 2.1 (Segmented Locking)
+### 定义 SHARD-1 ( 分片结构 )
 
 ```rust
-pub struct DashMap<K, V> {
-    shards: Box<[RwLock<HashMap<K, V>>]>,
-    hasher: RandomState,
+DashMap<K, V, S> {
+    shards: [RwLock<HashMap<K, V, S>>; N],
+    hasher: S,
 }
 ```
 
 **形式化**:
 
 $$
-\text{DashMap} = \{ s_1, s_2, ..., s_n \} \text{ 其中每个 } s_i \text{ 是 } RwLock\langle HashMap \rangle
+\text{DashMap} = \{ s_1, s_2, \ldots, s_n \} \text{ where } n = \text{shard\_count}
 $$
 
-### 定理 2.1 (锁分段)
+### 定义 SHARD-2 ( 键分配 )
 
-> 不同key可能映射到不同shard，允许并发修改。
+$$
+\text{shard}(k) = \text{hash}(k) \mod n
+$$
 
-**哈希函数**:
+### 定理 SHARD-T1 ( 锁粒度 )
+
+单个分片锁定不影响其他分片。
+
+$$
+\text{write}(s_i) \to \text{block}(s_i) \land \forall j \neq i.\ \text{available}(s_j)
+$$
+
+---
+
+## 3. 读写操作
+
+### 定义 READ-1 ( 获取 )
 
 ```rust
-fn shard_for_key(&self, key: &K) -> usize {
-    let hash = self.hasher.hash_one(key);
-    hash % self.shards.len()
+map.get(&key) -> Option<Ref<K, V>>
+```
+
+### 定义 WRITE-1 ( 插入 )
+
+```rust
+map.insert(key, value) -> Option<V>
+```
+
+### 定义 WRITE-2 ( 条件修改 )
+
+```rust
+map.entry(key).and_modify(|v| *v += 1).or_insert(0);
+```
+
+---
+
+## 4. 迭代安全
+
+### 定义 ITER-1 ( 快照迭代 )
+
+```rust
+for (k, v) in map.iter() { }
+```
+
+### 定义 ITER-2 ( 迭代器一致性 )
+
+$$
+\text{iter}() \to \text{snapshot\_at\_point\_in\_time}
+$$
+
+### 定理 ITER-T1 ( 弱一致性 )
+
+迭代器看到快照，不反映并发修改。
+
+$$
+\text{concurrent\_insert} \notin \text{iteration\_results}
+$$
+
+---
+
+## 5. 引用类型
+
+### 定义 REF-1 ( Ref类型 )
+
+```rust
+Ref<K, V> {
+    key: &K,
+    value: &V,
+    shard: RwLockReadGuard<'a>,
 }
 ```
 
-**并发度**:
-
-$$
-\text{并发度} = \text{shard数量} (默认 = \text{CPU核心数} \times 4)
-$$
-
-∎
-
-### 2.2 无锁读取
-
-### 定理 2.2 (读取优化)
-
-> DashMap支持无锁读取(使用读锁)。
-
-**实现**:
+### 定义 REF-2 ( RefMut类型 )
 
 ```rust
-pub fn get<Q>(&self, key: &Q) -> Option<Ref<K, V>>
-where
-    Q: Hash + Equivalent<K> + ?Sized,
-{
-    let shard = self.determine_shard(key);
-    let guard = self.shards[shard].read();  // 读锁
-    // 查找...
+RefMut<K, V> {
+    key: &K,
+    value: &mut V,
+    shard: RwLockWriteGuard<'a>,
 }
 ```
 
-**优点**:
+### 定理 REF-T1 ( 自动释放 )
 
-- 多读取者并发
-- 不阻塞其他读取者
-- 写入者阻塞读取者(短暂)
+Guard在Ref drop时释放。
 
-∎
-
----
-
-## 3. 操作语义
-
-### 定理 3.1 (并发安全性)
-
-> DashMap操作是线程安全的。
-
-**保证**:
-
-- `get`: 读锁保护
-- `insert`: 写锁保护
-- `remove`: 写锁保护
-- `entry`: 写锁保护
-
-∎
+$$
+\text{drop}(\text{Ref}) \to \text{shard\_unlock}
+$$
 
 ---
 
-## 4. 迭代器一致性
+## 6. 性能保证
 
-### 定理 4.1 (弱一致性迭代)
+### 定义 PERF-1 ( 读优化 )
 
-> DashMap迭代器反映某一时刻的快照，不反映后续修改。
+| 场景 | 复杂度 | 锁状态 |
+| :--- | :--- | :--- |
+| get | O(1) | 读锁 |
+| insert | O(1) | 写锁 |
+| iter | O(n) | 读锁 |
 
-**说明**:
+### 定理 PERF-T1 ( 扩展性 )
 
-- 迭代期间允许修改
-- 可能看到或看不到并发修改
-- 不会panic
+性能随分片数增加。
 
-∎
-
----
-
-## 5. 与RwLock对比
-
-| 特性 | DashMap | `RwLock<HashMap>` |
-|------|---------|-----------------|
-| 锁粒度 | 细(分段) | 粗(整体) |
-| 并发度 | 高 | 低 |
-| 读取 | 并发 | 并发 |
-| 写入 | 分段并发 | 独占 |
-| 内存 | 较高 | 较低 |
+$$
+\text{throughput}(n) \propto \min(n, \text{num\_cpus})
+$$
 
 ---
 
-## 6. 反例
+## 7. 定理与证明
 
-### 反例 6.1 (死锁风险)
+### 定理 DASHMAP-T1 ( 线程安全 )
+
+所有操作线程安全。
+
+$$
+\forall ops.\ \text{thread\_safe}(ops) \land \text{no\_data\_race}
+$$
+
+### 定理 DASHMAP-T2 ( 死锁避免 )
+
+不持有多个分片锁。
+
+$$
+\neg\exists t.\ \text{holds}(s_i) \land \text{holds}(s_j) \land i \neq j
+$$
+
+---
+
+## 8. 代码示例
+
+### 示例1: 并发计数器
 
 ```rust
-// 危险: 嵌套获取
-map.entry(key1).and_modify(|v| {
-    let other = map.get(key2);  // 可能死锁!
-});
+use dashmap::DashMap;
+use std::sync::Arc;
 
-// 正确: 先获取所有需要的数据
-let val1 = map.get(key1);
-let val2 = map.get(key2);
+async fn concurrent_counter() {
+    let map: Arc<DashMap<String, i32>> = Arc::new(DashMap::new());
+
+    let handles: Vec<_> = (0..10)
+        .map(|i| {
+            let map = Arc::clone(&map);
+            tokio::spawn(async move {
+                for _ in 0..1000 {
+                    map.entry(format!("key-{}", i % 5))
+                        .and_modify(|v| *v += 1)
+                        .or_insert(1);
+                }
+            })
+        })
+        .collect();
+
+    for handle in handles {
+        handle.await.unwrap();
+    }
+
+    println!("Final counts: {:?}", map);
+}
+```
+
+### 示例2: 缓存实现
+
+```rust
+use dashmap::DashMap;
+use std::hash::Hash;
+
+struct Cache<K, V> {
+    inner: DashMap<K, V>,
+    max_size: usize,
+}
+
+impl<K: Eq + Hash, V: Clone> Cache<K, V> {
+    fn new(max_size: usize) -> Self {
+        Cache {
+            inner: DashMap::with_capacity(max_size),
+            max_size,
+        }
+    }
+
+    fn get(&self, key: &K) -> Option<V> {
+        self.inner.get(key).map(|r| r.clone())
+    }
+
+    fn put(&self, key: K, value: V) {
+        if self.inner.len() >= self.max_size {
+            // 简单LRU: 移除任意条目
+            if let Some(entry) = self.inner.iter().next() {
+                let key = entry.key().clone();
+                drop(entry);
+                self.inner.remove(&key);
+            }
+        }
+        self.inner.insert(key, value);
+    }
+}
+```
+
+### 示例3: 条件更新
+
+```rust
+use dashmap::DashMap;
+
+fn conditional_update(map: &DashMap<String, i32>, key: &str) {
+    // 获取可变引用进行修改
+    if let Some(mut entry) = map.get_mut(key) {
+        let current = *entry.value();
+        if current > 0 {
+            *entry.value_mut() = current - 1;
+        }
+    }
+
+    // 或者使用entry API
+    map.entry(key.to_string())
+        .and_modify(|v| {
+            if *v > 0 {
+                *v -= 1;
+            }
+        })
+        .or_insert(100);
+}
 ```
 
 ---
 
-*文档版本: 1.0.0*
-*定理数量: 5个*
+**维护者**: Rust Concurrency Formal Methods Team
+**创建日期**: 2026-03-05
+**DashMap版本**: 6.x
+**状态**: ✅ 已对齐

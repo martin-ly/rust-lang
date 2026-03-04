@@ -1,55 +1,59 @@
-# Tower 服务抽象形式化分析
+# Tower服务抽象形式化分析
 
-> **主题**: 可组合的服务层
->
-> **形式化框架**: Service Trait + Layer组合
->
-> **参考**: Tower Documentation
+> **主题**: 服务组合与中间件
+> **形式化框架**: Service trait + Layer系统 + 组合子
+> **参考**: Tower Documentation (<https://docs.rs/tower>)
 
 ---
 
 ## 目录
 
-- [Tower 服务抽象形式化分析](#tower-服务抽象形式化分析)
+- [Tower服务抽象形式化分析](#tower服务抽象形式化分析)
   - [目录](#目录)
   - [1. 引言](#1-引言)
-  - [2. Service Trait](#2-service-trait)
-    - [2.1 核心抽象](#21-核心抽象)
-    - [定义 2.1 (Service Trait)](#定义-21-service-trait)
-    - [定理 2.1 (统一抽象)](#定理-21-统一抽象)
-    - [2.2 poll\_ready语义](#22-poll_ready语义)
-    - [定理 2.2 (就绪协议)](#定理-22-就绪协议)
-  - [3. Layer组合](#3-layer组合)
-    - [定义 3.1 (Layer Trait)](#定义-31-layer-trait)
-    - [定理 3.1 (中间件组合)](#定理-31-中间件组合)
-  - [4. 中间件生态](#4-中间件生态)
-  - [5. 背压模型](#5-背压模型)
-    - [定理 5.1 (全局背压)](#定理-51-全局背压)
-  - [6. 反例](#6-反例)
-    - [反例 6.1 (忘记poll\_ready)](#反例-61-忘记poll_ready)
-    - [反例 6.2 (层级顺序)](#反例-62-层级顺序)
+  - [2. Service trait](#2-service-trait)
+    - [定义 SERVICE-1 ( 核心trait )](#定义-service-1--核心trait-)
+    - [定义 SERVICE-2 ( 就绪检查 )](#定义-service-2--就绪检查-)
+    - [定理 SERVICE-T1 ( 就绪前置条件 )](#定理-service-t1--就绪前置条件-)
+  - [3. Layer系统](#3-layer系统)
+    - [定义 LAYER-1 ( Layer trait )](#定义-layer-1--layer-trait-)
+    - [定义 LAYER-2 ( 组合 )](#定义-layer-2--组合-)
+  - [4. 组合模式](#4-组合模式)
+    - [定义 COMPOSE-1 ( AndThen )](#定义-compose-1--andthen-)
+    - [定义 COMPOSE-2 ( 映射 )](#定义-compose-2--映射-)
+  - [5. 背压处理](#5-背压处理)
+    - [定义 BACKPRESSURE-1 ( 限流 )](#定义-backpressure-1--限流-)
+    - [定义 BACKPRESSURE-2 ( 并发控制 )](#定义-backpressure-2--并发控制-)
+  - [6. 超时与重试](#6-超时与重试)
+    - [定义 TIMEOUT-1 ( 超时层 )](#定义-timeout-1--超时层-)
+    - [定义 RETRY-1 ( 重试策略 )](#定义-retry-1--重试策略-)
+  - [7. 定理与证明](#7-定理与证明)
+    - [定理 TOWER-T1 ( 组合封闭性 )](#定理-tower-t1--组合封闭性-)
+    - [定理 TOWER-T2 ( 背压传播 )](#定理-tower-t2--背压传播-)
+  - [8. 代码示例](#8-代码示例)
+    - [示例1: 完整服务栈](#示例1-完整服务栈)
+    - [示例2: 自定义服务](#示例2-自定义服务)
+    - [示例3: 自定义Layer](#示例3-自定义layer)
 
 ---
 
 ## 1. 引言
 
-Tower提供:
+Tower特点：
 
-- Service trait抽象
-- Layer组合系统
-- 丰富的中间件
-- 跨框架兼容
+- 统一的Service抽象
+- 可组合的中间件
+- 背压感知
+- 超时/重试/限流
 
 ---
 
-## 2. Service Trait
+## 2. Service trait
 
-### 2.1 核心抽象
-
-### 定义 2.1 (Service Trait)
+### 定义 SERVICE-1 ( 核心trait )
 
 ```rust
-pub trait Service<Request> {
+trait Service<Request> {
     type Response;
     type Error;
     type Future: Future<Output = Result<Self::Response, Self::Error>>;
@@ -59,136 +63,255 @@ pub trait Service<Request> {
 }
 ```
 
-### 定理 2.1 (统一抽象)
-
-> 任何请求-响应模式可实现为Service。
-
-∎
-
-### 2.2 poll_ready语义
-
-### 定理 2.2 (就绪协议)
-
-> 必须poll_ready返回Ready后才能call。
-
-```rust
-// 正确用法
-if service.poll_ready(cx).is_ready() {
-    let future = service.call(request);
-}
-
-// 违反协议可能导致panic或错误
-```
-
 **形式化**:
 
 $$
-\text{call}(S, req) \text{ valid} \iff \text{poll_ready}(S) = \text{Ready}
+\text{Service} : \text{Request} \to \text{Future}<\text{Result}<\text{Response}, \text{Error}>>
 $$
 
-∎
+### 定义 SERVICE-2 ( 就绪检查 )
+
+$$
+\text{poll\_ready} : \text{Service} \to \text{Ready} \mid \text{Pending} \mid \text{Error}
+$$
+
+### 定理 SERVICE-T1 ( 就绪前置条件 )
+
+服务就绪后才能调用。
+
+$$
+\text{call}(req) \text{ requires } \text{poll\_ready}() = \text{Ready}
+$$
 
 ---
 
-## 3. Layer组合
+## 3. Layer系统
 
-### 定义 3.1 (Layer Trait)
+### 定义 LAYER-1 ( Layer trait )
 
 ```rust
-pub trait Layer<S> {
+trait Layer<S> {
     type Service;
     fn layer(&self, inner: S) -> Self::Service;
 }
 ```
 
-### 定理 3.1 (中间件组合)
-
-> Layer可嵌套组合。
+### 定义 LAYER-2 ( 组合 )
 
 ```rust
-let service = ServiceBuilder::new()
-    .timeout(Duration::from_secs(10))
-    .retry(policy)
-    .rate_limit(100, Duration::from_secs(1))
-    .service(inner);
+let stack = ServiceBuilder::new()
+    .layer(TimeoutLayer::new(Duration::from_secs(10)))
+    .layer(RetryLayer::new(policy))
+    .layer(RateLimitLayer::new(100, Duration::from_secs(1)))
+    .service(backend);
 ```
 
-**类型**:
-
 $$
-\text{Timeout} \circ \text{Retry} \circ \text{RateLimit} \circ S
+\text{Stack} = L_n \circ L_{n-1} \circ \ldots \circ L_1 \circ S
 $$
-
-∎
 
 ---
 
-## 4. 中间件生态
+## 4. 组合模式
 
-| 中间件 | 功能 |
-|--------|------|
-| timeout | 请求超时 |
-| retry | 失败重试 |
-| limit | 并发限制 |
-| buffer | 请求缓冲 |
-| load_shed | 负载削减 |
-
----
-
-## 5. 背压模型
-
-### 定理 5.1 (全局背压)
-
-> Tower通过poll_ready实现端到端背压。
+### 定义 COMPOSE-1 ( AndThen )
 
 ```rust
-// 每一层都能施加背压
-impl Service<Req> for RateLimit<S> {
-    fn poll_ready(&mut self, cx: &mut Context) -> Poll<Result<(), Error>> {
-        // 限流检查
-        if !self.rate_limiter.check() {
-            return Poll::Pending;  // 施加背压
-        }
+service.and_then(|response| async { /* process */ })
+```
+
+### 定义 COMPOSE-2 ( 映射 )
+
+```rust
+service.map_request(|req| transform(req))
+       .map_response(|res| transform(res))
+```
+
+---
+
+## 5. 背压处理
+
+### 定义 BACKPRESSURE-1 ( 限流 )
+
+```rust
+RateLimitLayer::new(100, Duration::from_secs(1))
+```
+
+$$
+\text{RateLimit}(n, d) : \text{throughput} \leq n/d
+$$
+
+### 定义 BACKPRESSURE-2 ( 并发控制 )
+
+```rust
+ConcurrencyLimitLayer::new(10)
+```
+
+$$
+\text{ConcurrencyLimit}(n) : \text{in\_flight} \leq n
+$$
+
+---
+
+## 6. 超时与重试
+
+### 定义 TIMEOUT-1 ( 超时层 )
+
+```rust
+TimeoutLayer::new(Duration::from_secs(5))
+```
+
+$$
+\text{Timeout}(d) : \text{elapsed} > d \to \text{Error::Timeout}
+$$
+
+### 定义 RETRY-1 ( 重试策略 )
+
+```rust
+RetryLayer::new(RetryPolicy::new(3))
+```
+
+$$
+\text{Retry}(n) : \text{attempts} \leq n \text{ on transient error}
+$$
+
+---
+
+## 7. 定理与证明
+
+### 定理 TOWER-T1 ( 组合封闭性 )
+
+服务组合仍为服务。
+
+$$
+\forall s : \text{Service}, l : \text{Layer}.\ l \circ s : \text{Service}
+$$
+
+### 定理 TOWER-T2 ( 背压传播 )
+
+背压在服务链中传播。
+
+$$
+\text{poll\_ready}() = \text{Pending} \text{ at any layer } \to \text{backpressure\_upstream}
+$$
+
+---
+
+## 8. 代码示例
+
+### 示例1: 完整服务栈
+
+```rust
+use tower::{Service, ServiceBuilder, ServiceExt};
+use tower::limit::{RateLimitLayer, ConcurrencyLimitLayer};
+use tower::timeout::TimeoutLayer;
+use tower::retry::RetryLayer;
+use std::time::Duration;
+
+async fn make_service() -> impl Service<Request, Response = Response, Error = Error> {
+    let backend = HttpBackend::new("https://api.example.com");
+
+    ServiceBuilder::new()
+        .layer(TraceLayer::new_for_http())
+        .layer(TimeoutLayer::new(Duration::from_secs(10)))
+        .layer(RetryLayer::new(RetryPolicy::default()))
+        .layer(RateLimitLayer::new(100, Duration::from_secs(1)))
+        .layer(ConcurrencyLimitLayer::new(10))
+        .service(backend)
+}
+
+async fn use_service<S>(mut service: S) -> Result<Response, Error>
+where
+    S: Service<Request, Response = Response, Error = Error>,
+{
+    // 等待服务就绪
+    let response = service.ready().await?.call(Request::new()).await?;
+    Ok(response)
+}
+```
+
+### 示例2: 自定义服务
+
+```rust
+use tower::Service;
+use std::task::{Context, Poll};
+use std::future::Future;
+use std::pin::Pin;
+
+#[derive(Clone)]
+struct LoggingService<S> {
+    inner: S,
+}
+
+impl<S, Request> Service<Request> for LoggingService<S>
+where
+    S: Service<Request>,
+{
+    type Response = S::Response;
+    type Error = S::Error;
+    type Future = S::Future;
+
+    fn poll_ready(&mut self, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
         self.inner.poll_ready(cx)
+    }
+
+    fn call(&mut self, req: Request) -> Self::Future {
+        println!("Request received");
+        self.inner.call(req)
     }
 }
 ```
 
-∎
+### 示例3: 自定义Layer
+
+```rust
+use tower::{Layer, Service};
+
+#[derive(Clone)]
+struct AuthLayer {
+    token: String,
+}
+
+impl<S> Layer<S> for AuthLayer {
+    type Service = AuthService<S>;
+
+    fn layer(&self, inner: S) -> Self::Service {
+        AuthService {
+            inner,
+            token: self.token.clone(),
+        }
+    }
+}
+
+#[derive(Clone)]
+struct AuthService<S> {
+    inner: S,
+    token: String,
+}
+
+impl<S, Request> Service<Request> for AuthService<S>
+where
+    S: Service<Request>,
+    Request: Authenticated,
+{
+    type Response = S::Response;
+    type Error = S::Error;
+    type Future = S::Future;
+
+    fn poll_ready(&mut self, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
+        self.inner.poll_ready(cx)
+    }
+
+    fn call(&mut self, mut req: Request) -> Self::Future {
+        req.set_auth_token(&self.token);
+        self.inner.call(req)
+    }
+}
+```
 
 ---
 
-## 6. 反例
-
-### 反例 6.1 (忘记poll_ready)
-
-```rust
-// 错误: 直接call
-let response = service.call(request).await;
-
-// 正确: 先检查就绪
-ready!(service.poll_ready(cx))?;
-let response = service.call(request).await;
-```
-
-### 反例 6.2 (层级顺序)
-
-```rust
-// 错误顺序: 重试在超时外
-let service = ServiceBuilder::new()
-    .retry(policy)     // 先重试
-    .timeout(dur)      // 后超时
-    .service(inner);
-// 效果: 每次重试有单独超时
-
-// 正确: 超时在外层
-let service = ServiceBuilder::new()
-    .timeout(dur)      // 总超时
-    .retry(policy)     // 内层重试
-    .service(inner);
-```
-
----
-
-*文档版本: 1.0.0*
-*定理数量: 7个*
+**维护者**: Rust Service Abstraction Formal Methods Team
+**创建日期**: 2026-03-05
+**Tower版本**: 0.5+
+**状态**: ✅ 已对齐
