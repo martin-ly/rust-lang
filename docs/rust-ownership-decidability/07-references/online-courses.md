@@ -250,7 +250,7 @@
 
 ### 路径一：Rust 全栈工程师（6-12 个月）
 
-```
+```text
 第 1-2 月：基础阶段
 ├── The Rust Programming Language (官方书)
 ├── Rustlings 练习
@@ -278,7 +278,7 @@
 
 ### 路径二：PL 理论研究者（12-24 个月）
 
-```
+```text
 第 1-3 月：基础理论
 ├── Types and Programming Languages (TAPL)
 ├── Lambda-Calculus and Combinators
@@ -303,7 +303,7 @@
 
 ### 路径三：形式化验证工程师（12-18 个月）
 
-```
+```text
 第 1-3 月：逻辑基础
 ├── Logic in Computer Science
 ├── Software Foundations (Vol. 1)
@@ -327,7 +327,7 @@
 
 ### 路径四：系统安全研究员（18-24 个月）
 
-```
+```text
 第 1-3 月：安全基础
 ├── 计算机系统安全
 ├── Rust 安全编程
@@ -393,7 +393,7 @@
 
 ### 快速入门（3 个月）
 
-```
+```text
 优先级 1：Rust 基础
 ├── The Rust Programming Language
 ├── Rustlings
@@ -411,7 +411,7 @@
 
 ### 系统学习（12 个月）
 
-```
+```text
 阶段 1：基础（月 1-3）
 ├── Rust 基础
 ├── PL 理论入门

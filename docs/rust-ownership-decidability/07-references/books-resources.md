@@ -337,7 +337,7 @@
 
 **目标**: 掌握生产级 Rust 开发
 
-```
+```text
 第 1 阶段 (1-2 个月):
 ├── The Rust Programming Language (官方书)
 ├── Rustlings 练习
@@ -359,7 +359,7 @@
 
 **目标**: 深入理解类型理论和形式化语义
 
-```
+```text
 第 1 阶段 (3 个月):
 ├── Types and Programming Languages (TAPL)
 ├── Lambda-Calculus and Combinators
@@ -382,7 +382,7 @@
 
 **目标**: 掌握程序验证技术
 
-```
+```text
 第 1 阶段 (2-3 个月):
 ├── Software Foundations (Vol. 1)
 ├── Logic in Computer Science
