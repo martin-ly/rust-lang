@@ -39,7 +39,8 @@
 
 ## 概述
 
-Aeneas是一个将Rust的MIR（中级中间表示）翻译为函数式语言（如Lean、Coq、F*）的工具。它基于**LLBC（Low-Level Borrow Calculus）**形式化，处理Rust的所有权和借用语义。
+Aeneas是一个将Rust的MIR（中级中间表示）翻译为函数式语言（如Lean、Coq、F*）的工具。
+它基于**LLBC（Low-Level Borrow Calculus）**形式化，处理Rust的所有权和借用语义。
 
 ---
 
@@ -55,7 +56,8 @@ fn swap<T>(x: &mut T, y: &mut T) {
 }
 ```
 
-传统的命令式程序验证需要复杂的分离逻辑来处理这种代码。Aeneas通过**将所有权和借用转化为函数式风格**来解决这个问题。
+传统的命令式程序验证需要复杂的分离逻辑来处理这种代码。
+Aeneas通过**将所有权和借用转化为函数式风格**来解决这个问题。
 
 ### 1.2 翻译策略
 

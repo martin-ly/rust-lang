@@ -75,7 +75,6 @@ fn demo() {
 | 所有权模型 | 所有权系统的完整形式化模型 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
 | 借用检查器 | 借用检查的形式化证明 | [../../../research_notes/formal_methods/borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md) |
 
-
 ## 更多代码示例
 
 ### Copy 与 Clone 语义

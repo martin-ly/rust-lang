@@ -236,13 +236,15 @@ $$
 **二元运算**：
 
 $$
-\llbracket \text{Rvalue::BinaryOp}(\text{op}, \text{op}_1, \text{op}_2) \rrbracket_{\text{rv}} = \text{BinaryOp}(\llbracket \text{op} \rrbracket_{\text{bin}}, \llbracket \text{op}_1 \rrbracket_{\text{op}}, \llbracket \text{op}_2 \rrbracket_{\text{op}})
+\llbracket \text{Rvalue::BinaryOp}(\text{op}, \text{op}_1, \text{op}_2) \rrbracket_{\text{rv}} = \text{BinaryOp}(\llbracket \text{op} \rrbracket_{\text{bin}},
+\llbracket \text{op}_1 \rrbracket_{\text{op}}, \llbracket \text{op}_2 \rrbracket_{\text{op}})
 $$
 
 **函数调用**：
 
 $$
-\llbracket \text{Call}(f, \text{args}, p, \text{target}) \rrbracket_{\text{term}} = \text{Call}(\llbracket f \rrbracket_{\text{fn}}, \llbracket \text{args} \rrbracket_{\text{args}}, \llbracket p \rrbracket_{\text{place}}, \llbracket \text{target} \rrbracket_{\text{bb}})
+\llbracket \text{Call}(f, \text{args}, p, \text{target}) \rrbracket_{\text{term}} = \text{Call}(\llbracket f \rrbracket_{\text{fn}}, \llbracket \text{args}
+\rrbracket_{\text{args}}, \llbracket p \rrbracket_{\text{place}}, \llbracket \text{target} \rrbracket_{\text{bb}})
 $$
 
 ### 2.6 语句翻译
@@ -270,7 +272,8 @@ $$
 ### 3.1 基本块翻译
 
 $$
-\llbracket \text{BasicBlock} \{ \text{stmts}, \text{term} \} \rrbracket_{\text{bb}} = \text{Block} \{ \llbracket \text{stmts} \rrbracket_{\text{stmts}}, \llbracket \text{term} \rrbracket_{\text{term}} \}
+\llbracket \text{BasicBlock} \{ \text{stmts}, \text{term} \} \rrbracket_{\text{bb}} = \text{Block} \{ \llbracket \text{stmts} \rrbracket_{\text{stmts}},
+\llbracket \text{term} \rrbracket_{\text{term}} \}
 $$
 
 ### 3.2 终结符翻译
@@ -284,7 +287,8 @@ $$
 **条件分支**：
 
 $$
-\llbracket \text{Terminator::SwitchInt} \{ \text{discr}, \text{targets} \} \rrbracket_{\text{term}} = \text{SwitchInt}(\llbracket \text{discr} \rrbracket_{\text{op}}, \llbracket \text{targets} \rrbracket_{\text{targets}})
+\llbracket \text{Terminator::SwitchInt} \{ \text{discr}, \text{targets} \} \rrbracket_{\text{term}} =
+\text{SwitchInt}(\llbracket \text{discr} \rrbracket_{\text{op}}, \llbracket \text{targets} \rrbracket_{\text{targets}})
 $$
 
 **返回**：
@@ -296,7 +300,8 @@ $$
 ### 3.3 函数体翻译
 
 $$
-\llbracket \text{Body} \{ \text{locals}, \text{basic\_blocks} \} \rrbracket_{\text{body}} = \text{Body} \{ \llbracket \text{locals} \rrbracket_{\text{locals}}, \llbracket \text{basic\_blocks} \rrbracket_{\text{bbs}} \}
+\llbracket \text{Body} \{ \text{locals}, \text{basic\_blocks} \} \rrbracket_{\text{body}} =
+\text{Body} \{ \llbracket \text{locals} \rrbracket_{\text{locals}}, \llbracket \text{basic\_blocks} \rrbracket_{\text{bbs}} \}
 $$
 
 ---

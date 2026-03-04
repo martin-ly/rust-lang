@@ -113,11 +113,13 @@ impl Future for FooStateMachine {
 **状态转换规则**：
 
 $$
-\frac{\text{state}(s) = \text{await}(e, s_{\text{next}}) \quad \text{poll}(e) = \text{Pending}}{\langle s, \sigma, \kappa \rangle \to \langle s_{\text{suspend}}, \sigma, \kappa \rangle} \quad \text{[ASYNC-AWAIT-PENDING]}
+\frac{\text{state}(s) = \text{await}(e, s_{\text{next}}) \quad \text{poll}(e) =
+\text{Pending}}{\langle s, \sigma, \kappa \rangle \to \langle s_{\text{suspend}}, \sigma, \kappa \rangle} \quad \text{[ASYNC-AWAIT-PENDING]}
 $$
 
 $$
-\frac{\text{state}(s) = \text{await}(e, s_{\text{next}}) \quad \text{poll}(e) = \text{Ready}(v)}{\langle s, \sigma, \kappa \rangle \to \langle s_{\text{next}}, \sigma[x \mapsto v], \kappa \rangle} \quad \text{[ASYNC-AWAIT-READY]}
+\frac{\text{state}(s) = \text{await}(e, s_{\text{next}}) \quad \text{poll}(e) =
+\text{Ready}(v)}{\langle s, \sigma, \kappa \rangle \to \langle s_{\text{next}}, \sigma[x \mapsto v], \kappa \rangle} \quad \text{[ASYNC-AWAIT-READY]}
 $$
 
 ---
@@ -270,7 +272,7 @@ async fn hold_across_await() {
 
 **生成器状态转换**：
 
-```
+```text
 状态 0: 初始
   └─► 执行到第一个await
   └─► 状态 1: 保存变量，挂起
@@ -376,7 +378,7 @@ async fn conflict_example() {
 
 **形式化模型**：
 
-```
+```text
 单线程执行器:
   Future轮询在一个线程上顺序执行
   无数据竞争（单线程）
@@ -420,4 +422,4 @@ impl<T> Mutex<T> {
 
 ---
 
-*本文档为《Rust所有权与可判定性》项目的异步形式语义补充*
+*本文档为《Rust所有权与可判定性》项目的异步形式语义补充*:

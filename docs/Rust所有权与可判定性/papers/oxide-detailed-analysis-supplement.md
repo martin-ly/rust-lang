@@ -232,13 +232,16 @@ $$
 **共享借用**：
 
 $$
-\frac{\Sigma; \Delta; \Gamma; \Theta \vdash e : \tau \dashv \Theta_1 \quad \rho \in \text{prov}(\Gamma, e)}{\Sigma; \Delta; \Gamma; \Theta \vdash \&\rho \text{ shrd } e : \&\rho \text{ shrd } \tau \dashv \Theta_1} \quad \text{[T-BORROW-SHRD]}
+\frac{\Sigma; \Delta; \Gamma; \Theta \vdash e : \tau \dashv \Theta_1 \quad \rho \in \text{prov}(\Gamma, e)}{\Sigma;
+\Delta; \Gamma;
+\Theta \vdash \&\rho \text{ shrd } e : \&\rho \text{ shrd } \tau \dashv \Theta_1} \quad \text{[T-BORROW-SHRD]}
 $$
 
 **可变借用**：
 
 $$
-\frac{\Sigma; \Delta; \Gamma; \Theta \vdash e : \tau \dashv \Theta_1 \quad \rho \in \text{prov}(\Gamma, e) \quad \neg\text{borrowed}(\Theta_1, e)}{\Sigma; \Delta; \Gamma; \Theta \vdash \&\rho \text{ uniq } e : \&\rho \text{ uniq } \tau \dashv \Theta_1 \cup \{\text{loan}(\rho, \text{uniq}, \text{loc}(e))\}} \quad \text{[T-BORROW-UNIQ]}
+\frac{\Sigma; \Delta; \Gamma;
+\Theta \vdash e : \tau \dashv \Theta_1 \quad \rho \in \text{prov}(\Gamma, e) \quad \neg\text{borrowed}(\Theta_1, e)}{\Sigma; \Delta; \Gamma; \Theta \vdash \&\rho \text{ uniq } e : \&\rho \text{ uniq } \tau \dashv \Theta_1 \cup \{\text{loan}(\rho, \text{uniq}, \text{loc}(e))\}} \quad \text{[T-BORROW-UNIQ]}
 $$
 
 ### 4.4 解引用规则
