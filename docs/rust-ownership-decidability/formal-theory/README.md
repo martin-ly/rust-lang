@@ -10,20 +10,20 @@
     - [数学基础](#数学基础)
     - [Rust 对应关系](#rust-对应关系)
   - [2. 内存模型语义 (memory-model-semantics.md)](#2-内存模型语义-memory-model-semanticsmd)
-    - [核心内容](#核心内容-1)
-    - [数学定义](#数学定义)
-    - [Rust 对应关系](#rust-对应关系-1)
+    - [2.1 核心内容](#21-核心内容)
+    - [2.2 数学定义](#22-数学定义)
+    - [2.3 Rust 对应关系](#23-rust-对应关系)
   - [3. 操作语义 (operational-semantics.md)](#3-操作语义-operational-semanticsmd)
-    - [核心内容](#核心内容-2)
-    - [形式化规则](#形式化规则)
-    - [Rust 对应关系](#rust-对应关系-2)
+    - [3.1 核心内容](#31-核心内容)
+    - [3.2 形式化规则](#32-形式化规则)
+    - [3.3 Rust 对应关系](#33-rust-对应关系)
   - [4. 逻辑关系 (logical-relations.md)](#4-逻辑关系-logical-relationsmd)
-    - [核心内容](#核心内容-3)
-    - [数学框架](#数学框架)
-    - [Rust 对应关系](#rust-对应关系-3)
+    - [4.1 核心内容](#41-核心内容)
+    - [4.2 数学框架](#42-数学框架)
+    - [4.3 Rust 对应关系](#43-rust-对应关系)
   - [5. 机器化证明 (mechanized-proofs.md)](#5-机器化证明-mechanized-proofsmd)
-    - [核心内容](#核心内容-4)
-    - [形式化项目](#形式化项目)
+    - [5.1 核心内容](#51-核心内容)
+    - [5.2 形式化项目](#52-形式化项目)
   - [理论基础总览](#理论基础总览)
     - [形式化方法层次](#形式化方法层次)
   - [关键数学符号速查](#关键数学符号速查)
@@ -71,23 +71,23 @@
 
 ## 2. 内存模型语义 ([memory-model-semantics.md](./memory-model-semantics.md))
 
-### 核心内容
+### 2.1 核心内容
 
 - **栈语义**：栈帧结构、局部变量生命周期、栈展开
 - **堆语义**：分配/释放、所有权转移、借用检查
 - **内存布局**：对齐、填充、ZST（零大小类型）
 - **内存安全**：有效性不变式、未初始化内存
 
-### 数学定义
+### 2.2 数学定义
 
-```
+```text
 Memory ::= Location → Value
 Location ::= StackFrame × Offset | HeapAddress
 Value ::= Primitive | Reference(Location, Permission)
 Permission ::= Own | Shared | MutableBorrow | ImmutableBorrow
 ```
 
-### Rust 对应关系
+### 2.3 Rust 对应关系
 
 | 理论概念 | Rust 实现 |
 |---------|----------|
@@ -100,22 +100,22 @@ Permission ::= Own | Shared | MutableBorrow | ImmutableBorrow
 
 ## 3. 操作语义 ([operational-semantics.md](./operational-semantics.md))
 
-### 核心内容
+### 3.1 核心内容
 
 - **小步操作语义 (SOS)**：结构化操作语义
 - **大步操作语义**：自然语义、求值关系
 - **求值规则**：表达式求值、语句执行
 - **配置状态**：程序状态转换系统
 
-### 形式化规则
+### 3.2 形式化规则
 
-```
+```text
 〈e₁, σ〉→ 〈e₁', σ'〉
 ────────────────────────
 〈e₁ op e₂, σ〉→ 〈e₁' op e₂, σ'〉
 ```
 
-### Rust 对应关系
+### 3.3 Rust 对应关系
 
 | 理论概念 | Rust 实现 |
 |---------|----------|
@@ -128,20 +128,20 @@ Permission ::= Own | Shared | MutableBorrow | ImmutableBorrow
 
 ## 4. 逻辑关系 ([logical-relations.md](./logical-relations.md))
 
-### 核心内容
+### 4.1 核心内容
 
 - **表达能力**：类型系统的表达能力层级
 - **完备性证明**：类型安全性（Type Safety）
 - **进展性 (Progress)**：良类型程序不会卡住
 - **保持性 (Preservation)**：求值保持类型
 
-### 数学框架
+### 4.2 数学框架
 
 - 逻辑关系法（Logical Relations）
 - 步进索引逻辑关系（Step-Indexed Logical Relations）
 - Kripke 可能世界语义
 
-### Rust 对应关系
+### 4.3 Rust 对应关系
 
 | 理论概念 | Rust 实现 |
 |---------|----------|
@@ -153,14 +153,14 @@ Permission ::= Own | Shared | MutableBorrow | ImmutableBorrow
 
 ## 5. 机器化证明 ([mechanized-proofs.md](./mechanized-proofs.md))
 
-### 核心内容
+### 5.1 核心内容
 
 - **Coq 形式化**：Gallina 语言、证明脚本
 - **Lean 形式化**：依赖类型、证明自动化
 - **验证工具**：MIRI、Kani、Prusti
 - **证明工程**：证明可维护性、自动化策略
 
-### 形式化项目
+### 5.2 形式化项目
 
 | 项目 | 工具 | 范围 |
 |-----|------|-----|
@@ -176,7 +176,7 @@ Permission ::= Own | Shared | MutableBorrow | ImmutableBorrow
 
 ### 形式化方法层次
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    形式化规范层                              │
 │  类型规则、操作语义、逻辑公理、霍尔逻辑                        │
@@ -231,19 +231,19 @@ Permission ::= Own | Shared | MutableBorrow | ImmutableBorrow
 
 1. **初学者路径**：
 
-   ```
+   ```text
    README → 内存模型语义 → 操作语义 → 类型系统形式化
    ```
 
 2. **研究者路径**：
 
-   ```
+   ```text
    README → 类型系统形式化 → 逻辑关系 → 机器化证明
    ```
 
 3. **实践者路径**：
 
-   ```
+   ```text
    README → 内存模型语义 → 机器化证明 → 操作语义
    ```
 
