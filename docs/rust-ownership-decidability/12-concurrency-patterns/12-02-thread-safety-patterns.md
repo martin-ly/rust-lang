@@ -12,7 +12,7 @@
   - [目录](#目录)
   - [1. 理论基础](#1-理论基础)
     - [1.1 并发安全的形式化定义](#11-并发安全的形式化定义)
-    - [1.2 Send 和 Sync  trait 理论](#12-send-和-sync-trait-理论)
+    - [1.2 Send 和 Sync trait 理论](#12-send-和-sync-trait-理论)
     - [1.3 数据竞争与竞态条件](#13-数据竞争与竞态条件)
   - [2. Send 和 Sync 深入解析](#2-send-和-sync-深入解析)
     - [2.1 Send trait](#21-send-trait)
@@ -27,29 +27,6 @@
     - [3.5 性能对比与选择](#35-性能对比与选择)
   - [4. 锁的类型与实现](#4-锁的类型与实现)
     - [4.1 操作系统互斥锁](#41-操作系统互斥锁)
-    - [4.2 自旋锁](#42-自旋锁)
-    - [4.3 读写锁](#43-读写锁)
-    - [4.4 顺序锁](#44-顺序锁)
-    - [4.5 递归锁](#45-递归锁)
-  - [5. 死锁预防策略](#5-死锁预防策略)
-    - [5.1 死锁四条件](#51-死锁四条件)
-    - [5.2 锁排序](#52-锁排序)
-    - [5.3 超时机制](#53-超时机制)
-    - [5.4 死锁检测](#54-死锁检测)
-  - [6. 高级模式](#6-高级模式)
-    - [6.1 线程局部存储](#61-线程局部存储)
-    - [6.2 条件变量](#62-条件变量)
-    - [6.3 屏障](#63-屏障)
-    - [6.4 信号量](#64-信号量)
-  - [7. 实际应用案例](#7-实际应用案例)
-    - [7.1 高性能缓存](#71-高性能缓存)
-    - [7.2 连接池](#72-连接池)
-    - [7.3 工作队列](#73-工作队列)
-  - [8. 性能分析与优化](#8-性能分析与优化)
-    - [8.1 锁粒度](#81-锁粒度)
-    - [8.2 无锁化策略](#82-无锁化策略)
-    - [8.3 伪共享避免](#83-伪共享避免)
-  - [参考文献](#参考文献)
 
 ---
 
@@ -89,7 +66,7 @@ fn toctou_race(shared: Arc<Mutex<i32>>) {
             }
         })
     };
-    
+
     // 线程 2
     let t2 = {
         let s = shared.clone();
@@ -98,7 +75,7 @@ fn toctou_race(shared: Arc<Mutex<i32>>) {
             *guard = -1; // 修改值
         })
     };
-    
+
     t1.join().unwrap();
     t2.join().unwrap();
 }
@@ -113,6 +90,7 @@ fn toctou_race(shared: Arc<Mutex<i32>>) {
 如果类型 T: Sync，则可以安全地从多个线程同时引用 T 的值（&T）。
 
 **定理 1.2.3 (组合规则)**
+
 ```text
 T: Send + Sync     ⇔ &T: Send
 T: Send            ⇔ &mut T: Send
@@ -124,6 +102,7 @@ T: Send + Sync     ⇔ Rc<T>: !Send ∧ !Sync (因为引用计数非原子)
 ### 1.3 数据竞争与竞态条件
 
 **数据竞争三要素**:
+
 1. 两个或更多线程访问同一内存位置
 2. 至少一个是写操作
 3. 没有同步
@@ -140,7 +119,7 @@ fn data_race_prevention() {
     // thread::spawn(move || {
     //     println!("{}", *data);
     // });
-    
+
     // ✅ 正确：Arc 是 Send + Sync
     let data = Arc::new(Mutex::new(42));
     let data2 = data.clone();
@@ -164,6 +143,7 @@ pub unsafe auto trait Send {
 ```
 
 **自动实现规则**:
+
 - 所有原始类型（i32, f64, bool, char 等）都是 Send
 - 如果 T: Send，则 Box<T>, Vec<T>, Option<T>, Result<T, E> 都是 Send
 - 如果 T: Send + Sync，则 Arc<T> 是 Send
@@ -188,7 +168,7 @@ impl<T> SendPtr<T> {
     pub fn new(ptr: *mut T) -> Self {
         Self(ptr)
     }
-    
+
     /// # Safety
     /// 调用者必须确保：
     /// 1. 没有其他线程正在写入该位置
@@ -218,6 +198,7 @@ pub unsafe auto trait Sync {
 ```
 
 **核心性质**:
+
 ```text
 T: Sync ⇔ &T: Send
 ```
@@ -225,11 +206,13 @@ T: Sync ⇔ &T: Send
 这意味着如果 T 是 Sync，可以在多个线程之间安全地共享对 T 的引用。
 
 **典型 Sync 类型**:
+
 - 所有原始类型
 - 原子类型：AtomicUsize, AtomicBool 等
 - 只读数据结构：&str, &[T], String（因为 &String 是 Send）
 
 **典型 !Sync 类型**:
+
 - Cell<T>（内部可变性，非线程安全）
 - RefCell<T>（运行时借用检查，非线程安全）
 
@@ -241,7 +224,7 @@ use std::thread;
 fn sync_demonstration() {
     // Cell 是 !Sync
     let cell = Arc::new(Cell::new(42));
-    
+
     // ❌ 编译错误
     // for i in 0..10 {
     //     let c = cell.clone();
@@ -249,11 +232,11 @@ fn sync_demonstration() {
     //         c.set(i); // Cell 不是 Sync
     //     });
     // }
-    
+
     // ✅ 使用 AtomicUsize（Sync）
     use std::sync::atomic::AtomicUsize;
     let atomic = Arc::new(AtomicUsize::new(0));
-    
+
     let mut handles = vec![];
     for i in 0..10 {
         let a = atomic.clone();
@@ -261,11 +244,11 @@ fn sync_demonstration() {
             a.fetch_add(1, Ordering::Relaxed);
         }));
     }
-    
+
     for h in handles {
         h.join().unwrap();
     }
-    
+
     assert_eq!(atomic.load(Ordering::Relaxed), 10);
 }
 ```
@@ -333,19 +316,19 @@ impl<T> LockFreeStack<T> {
             _marker: PhantomData,
         }
     }
-    
+
     pub fn push(&self, data: T) {
         let new_node = Box::into_raw(Box::new(Node {
             data,
             next: AtomicPtr::new(std::ptr::null_mut()),
         }));
-        
+
         loop {
             let head = self.head.load(Ordering::Acquire);
             unsafe {
                 (*new_node).next.store(head, Ordering::Relaxed);
             }
-            
+
             match self.head.compare_exchange(
                 head,
                 new_node,
@@ -357,16 +340,16 @@ impl<T> LockFreeStack<T> {
             }
         }
     }
-    
+
     pub fn pop(&self) -> Option<T> {
         loop {
             let head = self.head.load(Ordering::Acquire);
             if head.is_null() {
                 return None;
             }
-            
+
             let next = unsafe { (*head).next.load(Ordering::Acquire) };
-            
+
             match self.head.compare_exchange(
                 head,
                 next,
@@ -399,7 +382,7 @@ mod tests {
     fn test_concurrent_push_pop() {
         let stack = Arc::new(LockFreeStack::new());
         let mut handles = vec![];
-        
+
         // 多个线程 push
         for i in 0..100 {
             let s = stack.clone();
@@ -407,11 +390,11 @@ mod tests {
                 s.push(i);
             }));
         }
-        
+
         for h in handles {
             h.join().unwrap();
         }
-        
+
         // 验证所有元素都存在
         let mut count = 0;
         while stack.pop().is_some() {
@@ -436,17 +419,17 @@ use std::rc::Rc;
 
 fn refcell_single_thread() {
     let data = Rc::new(RefCell::new(vec![1, 2, 3]));
-    
+
     {
         let mut mut_ref = data.borrow_mut();
         mut_ref.push(4);
     } // 可变借用在这里释放
-    
+
     {
         let immut_ref = data.borrow();
         println!("{:?}", *immut_ref);
     }
-    
+
     // 运行时 panic（不是数据竞争）
     // let _ref1 = data.borrow_mut();
     // let _ref2 = data.borrow(); // panic!
@@ -470,17 +453,17 @@ impl ThreadSafeCounter {
     pub fn new() -> Self {
         Self { value: Mutex::new(0) }
     }
-    
+
     pub fn increment(&self) -> i64 {
         let mut guard = self.value.lock().unwrap();
         *guard += 1;
         *guard
     }
-    
+
     pub fn get(&self) -> i64 {
         *self.value.lock().unwrap()
     }
-    
+
     /// 尝试获取锁，带超时
     pub fn try_increment(&self, timeout: Duration) -> Option<i64> {
         match self.value.try_lock_for(timeout) {
@@ -504,7 +487,7 @@ impl FastCounter {
     pub fn new() -> Self {
         Self { value: PLMutex::new(0) }
     }
-    
+
     pub fn increment(&self) -> i64 {
         let mut guard = self.value.lock();
         *guard += 1;
@@ -521,11 +504,11 @@ impl<T> ThreadSafeVec<T> {
     pub fn new() -> Self {
         Self { inner: Mutex::new(Vec::new()) }
     }
-    
+
     pub fn push(&self, item: T) {
         self.inner.lock().unwrap().push(item);
     }
-    
+
     /// 返回一个保护的范围，在闭包执行期间持有锁
     pub fn with<F, R>(&self, f: F) -> R
     where
@@ -534,7 +517,7 @@ impl<T> ThreadSafeVec<T> {
         let mut guard = self.inner.lock().unwrap();
         f(&mut *guard)
     }
-    
+
     /// 尝试操作，如果锁不可用则立即返回
     pub fn try_with<F, R>(&self, f: F) -> Option<R>
     where
@@ -559,17 +542,17 @@ impl ConfigManager {
             version: AtomicU64::new(0),
         }
     }
-    
+
     pub fn set(&self, key: String, value: String) {
         let mut configs = self.configs.lock().unwrap();
         configs.insert(key, value);
         self.version.fetch_add(1, Ordering::Release);
     }
-    
+
     pub fn get(&self, key: &str) -> Option<String> {
         self.configs.lock().unwrap().get(key).cloned()
     }
-    
+
     pub fn version(&self) -> u64 {
         self.version.load(Ordering::Acquire)
     }
@@ -602,14 +585,14 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> ConcurrentCache<K, V> {
             stats: RwLock::new(CacheStats::default()),
         }
     }
-    
+
     /// 获取值 - 使用读锁
     pub fn get(&self, key: &K) -> Option<V> {
         // 获取读锁（多个读者可以并发）
         let data = self.data.read().unwrap();
         let result = data.get(key).cloned();
         drop(data); // 显式释放读锁
-        
+
         // 更新统计信息 - 使用写锁
         let mut stats = self.stats.write().unwrap();
         if result.is_some() {
@@ -617,28 +600,28 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> ConcurrentCache<K, V> {
         } else {
             stats.misses += 1;
         }
-        
+
         result
     }
-    
+
     /// 插入值 - 使用写锁
     pub fn insert(&self, key: K, value: V) {
         let mut data = self.data.write().unwrap();
         data.insert(key, value);
     }
-    
+
     /// 批量读取 - 使用单个读锁
     pub fn get_batch(&self, keys: &[K]) -> Vec<Option<V>> {
         let data = self.data.read().unwrap();
         keys.iter().map(|k| data.get(k).cloned()).collect()
     }
-    
+
     /// 获取统计信息
     pub fn stats(&self) -> (u64, u64, u64) {
         let stats = self.stats.read().unwrap();
         (stats.hits, stats.misses, stats.evictions)
     }
-    
+
     /// 升级读锁到写锁（读-修改-写模式）
     pub fn compute_if_absent<F>(&self, key: K, f: F) -> V
     where
@@ -651,14 +634,14 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> ConcurrentCache<K, V> {
                 return value.clone();
             }
         }
-        
+
         // 需要写入
         let mut data = self.data.write().unwrap();
         // 双重检查（可能其他线程已经插入）
         if let Some(value) = data.get(&key) {
             return value.clone();
         }
-        
+
         let value = f();
         data.insert(key, value.clone());
         value
@@ -676,7 +659,7 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> FastConcurrentCache<K, V> {
     pub fn get(&self, key: &K) -> Option<V> {
         self.data.read().get(key).cloned()
     }
-    
+
     pub fn insert(&self, key: K, value: V) {
         self.data.write().insert(key, value);
     }
@@ -687,7 +670,7 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> FastConcurrentCache<K, V> {
 
 ```rust
 use std::sync::atomic::{
-    AtomicUsize, AtomicU64, AtomicBool, AtomicPtr, 
+    AtomicUsize, AtomicU64, AtomicBool, AtomicPtr,
     Ordering, fence
 };
 use std::ptr::null_mut;
@@ -701,17 +684,17 @@ impl AtomicCounter {
     pub fn new() -> Self {
         Self { count: AtomicU64::new(0) }
     }
-    
+
     /// 增加并获取新值
     pub fn increment(&self) -> u64 {
         self.count.fetch_add(1, Ordering::Relaxed) + 1
     }
-    
+
     /// 获取当前值
     pub fn get(&self) -> u64 {
         self.count.load(Ordering::Acquire)
     }
-    
+
     /// 条件增加
     pub fn fetch_max(&self, value: u64) -> u64 {
         loop {
@@ -742,19 +725,19 @@ impl AtomicFlag {
     pub fn new() -> Self {
         Self { flag: AtomicBool::new(false) }
     }
-    
+
     /// 尝试设置标志，如果已设置则返回 false
     pub fn try_set(&self) -> bool {
         self.flag.compare_exchange(
             false, true, Ordering::Acquire, Ordering::Relaxed
         ).is_ok()
     }
-    
+
     /// 清除标志
     pub fn clear(&self) {
         self.flag.store(false, Ordering::Release);
     }
-    
+
     /// 检查标志
     pub fn is_set(&self) -> bool {
         self.flag.load(Ordering::Relaxed)
@@ -775,17 +758,17 @@ impl<T> AtomicStack<T> {
     pub fn new() -> Self {
         Self { head: AtomicPtr::new(null_mut()) }
     }
-    
+
     pub fn push(&self, data: T) {
         let new_node = Box::into_raw(Box::new(Node {
             data,
             next: null_mut(),
         }));
-        
+
         loop {
             let head = self.head.load(Ordering::Acquire);
             unsafe { (*new_node).next = head; }
-            
+
             if self.head.compare_exchange(
                 head, new_node, Ordering::Release, Ordering::Relaxed
             ).is_ok() {
@@ -793,16 +776,16 @@ impl<T> AtomicStack<T> {
             }
         }
     }
-    
+
     pub fn pop(&self) -> Option<T> {
         loop {
             let head = self.head.load(Ordering::Acquire);
             if head.is_null() {
                 return None;
             }
-            
+
             let next = unsafe { (*head).next };
-            
+
             if self.head.compare_exchange(
                 head, next, Ordering::Release, Ordering::Relaxed
             ).is_ok() {
@@ -829,7 +812,7 @@ impl<T> SynchronizedData<T> {
             ready: AtomicBool::new(false),
         }
     }
-    
+
     /// 写入数据并设置就绪标志
     pub fn store(&self, data: T) {
         unsafe {
@@ -838,7 +821,7 @@ impl<T> SynchronizedData<T> {
         // 使用 Release 序确保之前的写入对其他线程可见
         self.ready.store(true, Ordering::Release);
     }
-    
+
     /// 等待并读取数据
     pub fn load(&self) -> Option<&T> {
         // 使用 Acquire 序确保看到完整的写入
@@ -862,11 +845,11 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 pub fn benchmark_locks() {
     const ITERATIONS: usize = 1_000_000;
     const THREADS: usize = 8;
-    
+
     // Mutex 基准
     let mutex_data = Arc::new(Mutex::new(0usize));
     let start = Instant::now();
-    
+
     let handles: Vec<_> = (0..THREADS).map(|_| {
         let data = mutex_data.clone();
         std::thread::spawn(move || {
@@ -876,14 +859,14 @@ pub fn benchmark_locks() {
             }
         })
     }).collect();
-    
+
     for h in handles { h.join().unwrap(); }
     let mutex_time = start.elapsed();
-    
+
     // Atomic 基准
     let atomic_data = Arc::new(AtomicUsize::new(0));
     let start = Instant::now();
-    
+
     let handles: Vec<_> = (0..THREADS).map(|_| {
         let data = atomic_data.clone();
         std::thread::spawn(move || {
@@ -892,10 +875,10 @@ pub fn benchmark_locks() {
             }
         })
     }).collect();
-    
+
     for h in handles { h.join().unwrap(); }
     let atomic_time = start.elapsed();
-    
+
     println!("Mutex: {:?}", mutex_time);
     println!("Atomic: {:?}", atomic_time);
     println!("Speedup: {:.2}x", mutex_time.as_secs_f64() / atomic_time.as_secs_f64());

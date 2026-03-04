@@ -9,6 +9,7 @@
 ### [10-01. 未来方向](./10-01-future-directions.md)
 
 全面概述 Rust 所有权研究的前沿领域，包括：
+
 - Rust 形式化验证的未来愿景
 - 新兴研究方向（GhostCell、细粒度并发、ML 验证）
 - 理论研究方向（类型系统扩展、可判定性前沿）
@@ -23,6 +24,7 @@
 ### [10-02. 类型系统扩展](./10-02-type-system-extensions.md)
 
 深入探讨 Rust 类型系统可能的扩展方向：
+
 - 泛型关联类型（GAT）的完整形式化
 - 特殊化（Specialization）的类型系统基础
 - 效应系统（Effect Systems）与 Rust
@@ -37,6 +39,7 @@
 ### [10-03. 验证技术进展](./10-03-verification-advancements.md)
 
 详细介绍验证工具的最新进展：
+
 - MIRI 的改进与内存模型验证
 - Prusti 的最新功能与路线图
 - Kani 的模型检查能力
@@ -51,6 +54,7 @@
 ### [10-04. 所有权变体](./10-04-ownership-variations.md)
 
 探索所有权系统的各种变体和改进：
+
 - 区域类型系统（Region-based Typing）
 - 借用检查器的改进提案
 - 所有权与借用的新模式
@@ -65,6 +69,7 @@
 ### [10-05. AI 集成](./10-05-ai-integration.md)
 
 探讨人工智能与 Rust 验证的结合：
+
 - 机器学习用于 Rust 代码分析
 - 基于 LLM 的代码生成与验证
 - 形式化证明的 AI 辅助
@@ -380,7 +385,7 @@ pub mod safe_math {
 ### 社区论坛
 
 - **讨论区**：[GitHub Discussions](https://github.com/rust-lang/rust/discussions)
-- **邮件列表**：rust-dev@rust-lang.org
+- **邮件列表**：<rust-dev@rust-lang.org>
 - **Zulip**：[rust-lang.zulipchat.com](https://rust-lang.zulipchat.com)
 
 ### 报告问题
@@ -393,14 +398,15 @@ pub mod safe_math {
 
 ---
 
-**维护者**: Rust 所有权研究社区  
-**最后更新**: 2026-03-04  
-**状态**: 活跃维护  
+**维护者**: Rust 所有权研究社区
+**最后更新**: 2026-03-04
+**状态**: 活跃维护
 **预计下次更新**: 2026-06-01
 
 ---
 
 > 💡 **提示**：本章内容会定期更新以反映最新的研究进展。建议读者：
+>
 > - 关注相关会议的论文发布
 > - 订阅验证工具的更新通知
 > - 参与社区讨论和贡献
