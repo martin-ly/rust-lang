@@ -1,14 +1,14 @@
 # Rust Async 全面专题
 
 > **Rust的核心优势：Zero-Cost Async Programming**
-> 
+>
 > 整合权威来源 | 惯用法 | 设计模式 | 网络 | 嵌入式 | 最佳实践
 
 ---
 
 ## 专题概览
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Rust Async 全面专题                           │
 ├─────────────────────────────────────────────────────────────────┤
@@ -58,7 +58,7 @@
 
 ## 目录结构
 
-```
+```text
 async-specialty/
 ├── README.md                    # 本文件 - 专题导航
 ├── authoritative/               # 权威来源整合
@@ -104,7 +104,7 @@ async-specialty/
 
 ### 关键数据
 
-```
+```text
 任务创建:
   Rust Async: ~200ns  █
   Go:          ~2μs   ████
@@ -191,12 +191,14 @@ async fn with_timeout() -> Result<Data, TimeoutError> {
 ### 1. 权威来源整合
 
 **[Tokio深度解读](./authoritative/tokio-deep-dive.md)**
+
 - Runtime架构详解
 - Scheduler实现
 - IO Driver (epoll/kqueue/IOCP)
 - 与标准库的集成
 
 **[Embassy运行时](./authoritative/embassy-runtime.md)**
+
 - 无堆设计
 - 中断集成
 - 时间驱动编程
@@ -205,6 +207,7 @@ async fn with_timeout() -> Result<Data, TimeoutError> {
 ### 2. 设计模式
 
 **[Tower Service Pattern](./patterns/service-pattern.md)**
+
 ```rust
 // 可组合的服务抽象
 trait Service<Request> {
@@ -215,6 +218,7 @@ trait Service<Request> {
 ```
 
 **[Actor模式](./patterns/actor-pattern.md)**
+
 - 消息传递
 - 状态隔离
 - 监督策略
@@ -222,12 +226,14 @@ trait Service<Request> {
 ### 3. 网络编程
 
 **[HTTP服务器模式](./network/http-server-patterns.md)**
+
 - Axum: 函数式风格
 - Actix-web: Actor风格
 - 中间件链
 - 错误处理策略
 
 **[协议解析状态机](./network/protocol-state-machines.md)**
+
 ```rust
 enum ProtocolState {
     ReadingHeader { buf: BytesMut },
@@ -239,11 +245,12 @@ enum ProtocolState {
 ### 4. 嵌入式
 
 **[Embassy指南](./embedded/embassy-guide.md)**
+
 ```rust
 #[embassy_executor::main]
 async fn main(spawner: Spawner) {
     let p = embassy_stm32::init(Default::default());
-    
+
     // 并发任务
     spawner.spawn(blink_task(p.PB0)).unwrap();
     spawner.spawn(uart_task(p.USART1)).unwrap();
@@ -263,11 +270,13 @@ async fn blink_task(pin: PB0) {
 ### 5. 最佳实践
 
 **[代码组织](./practices/code-organization.md)**
+
 - 模块边界
 - 错误类型设计
 - 配置管理
 
 **[性能优化](./practices/performance-tuning.md)**
+
 - 减少分配
 - 批处理
 - 零拷贝
@@ -277,16 +286,19 @@ async fn blink_task(pin: PB0) {
 ## 学习路径
 
 ### 初学者
+
 1. [权威来源整合](./authoritative/) - 理解基础
 2. [惯用法](./patterns/) - 掌握常用模式
 3. [最佳实践](./practices/) - 写出高质量代码
 
 ### 进阶开发者
+
 1. [设计模式](./patterns/) - 架构设计
 2. [网络编程](./network/) - 服务端开发
 3. [性能优化](./practices/performance-tuning.md)
 
 ### 嵌入式开发者
+
 1. [Embassy指南](./embedded/embassy-guide.md)
 2. [无堆async](./embedded/heapless-async.md)
 3. [实时模式](./embedded/real-time-patterns.md)
@@ -296,17 +308,19 @@ async fn blink_task(pin: PB0) {
 ## 参考资源
 
 ### 官方文档
+
 - [Tokio Documentation](https://docs.rs/tokio)
 - [Rust Async Book](https://rust-lang.github.io/async-book/)
 - [Embassy Docs](https://embassy.dev/)
 
 ### 社区资源
+
 - [Async Working Group](https://github.com/rust-lang/wg-async)
 - [This Week in Rust](https://this-week-in-rust.org/)
 - [Rust异步生态](https://github.com/tokio-rs/awesome-tokio)
 
 ---
 
-**维护者**: Rust Async Specialty Team  
-**创建日期**: 2026-03-05  
+**维护者**: Rust Async Specialty Team
+**创建日期**: 2026-03-05
 **状态**: 🚧 持续推进中
