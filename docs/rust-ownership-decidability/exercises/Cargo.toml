@@ -1,0 +1,17 @@
+[package]
+name = "rust-ownership-decidability-exercises"
+version = "0.1.0"
+edition = "2021"
+authors = ["Rust Ownership Research Team"]
+description = "Code exercises for Rust Ownership and Decidability"
+license = "MIT"
+
+[workspace]
+
+[dependencies]
+
+[dev-dependencies]
+
+[lib]
+name = "rust_ownership_decidability"
+path = "src/lib.rs"

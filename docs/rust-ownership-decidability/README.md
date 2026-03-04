@@ -9,6 +9,19 @@
 - **覆盖范围**: 理论基础 → 并发模式 → 分布式架构
 - **Rust版本**: 1.93.1
 
+### 代码示例
+
+- **代码目录**: `exercises/`
+- **源代码文件**: 5个模块 (ownership, borrowing, lifetimes, smart pointers, concurrency)
+- **测试用例**: 68个测试全部通过 ✅
+- **代码行数**: ~3,000行
+
+运行测试：
+```bash
+cd exercises
+cargo test
+```
+
 ## 核心模块
 
 ### 1. 理论基础 (00-02)

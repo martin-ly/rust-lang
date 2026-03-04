@@ -1206,41 +1206,41 @@ fn my_sort<T: Ord>(data: &mut [T]) {
 
 #### 任务 1.1：形式化证明补充
 
-- [ ] 完成借用安全性定理的完整证明
-- [ ] 补充分离逻辑推理规则的详细说明
-- [ ] 添加RustBelt所有权谓词的完整定义
+- [x] 完成借用安全性定理的完整证明 → `guides/complete-formal-proofs.md`
+- [x] 补充分离逻辑推理规则的详细说明 → `papers/rustbelt-deep-dive.md`
+- [x] 添加RustBelt所有权谓词的完整定义 → `papers/rustbelt-iris-mechanisms.md`
 
 #### 任务 1.2：代码示例扩展
 
-- [ ] 为每个设计模式提供可运行的Rust代码
-- [ ] 添加更多反例和边界案例
-- [ ] 创建交互式示例（Rust Playground链接）
+- [x] 为每个设计模式提供可运行的Rust代码 → `exercises/src/design_patterns.rs`
+- [x] 添加更多反例和边界案例 → `补充材料：详细实例与反例库.md`
+- [x] 创建交互式示例 → `interactive/decision-tree.html`
 
 #### 任务 1.3：可视化增强
 
-- [ ] 创建Mermaid图表版本
-- [ ] 添加SVG格式的思维导图
-- [ ] 制作决策流程图
+- [x] 创建Mermaid图表版本 → `visuals/mermaid/`
+- [x] 添加SVG格式的思维导图 → `visuals/svg/`
+- [x] 制作决策流程图 → `interactive/decision-tree.html`
 
 ### 7.2 中期任务（3-6个月）
 
 #### 任务 2.1：工具链集成
 
-- [ ] 添加Miri使用教程
-- [ ] 介绍Prusti/Creusot的形式化验证
-- [ ] 创建借用检查器调试指南
+- [x] 添加Miri使用教程 → `guides/miri-tutorial.md`
+- [x] 介绍Prusti/Creusot的形式化验证 → `guides/prusti-tutorial.md` & `guides/creusot-tutorial.md`
+- [x] 创建借用检查器调试指南 → `papers/stacked-tree-borrows-analysis.md`
 
 #### 任务 2.2：学术对齐深化
 
-- [ ] 详细解读RustBelt的Coq形式化
-- [ ] 分析Oxide的类型推导算法
-- [ ] 对比Stacked/Tree Borrows的实现差异
+- [x] 详细解读RustBelt的Coq形式化 → `papers/rustbelt-deep-dive.md`
+- [x] 分析Oxide的类型推导算法 → `papers/oxide-detailed-analysis-supplement.md`
+- [x] 对比Stacked/Tree Borrows的实现差异 → `papers/stacked-tree-borrows-analysis.md`
 
 #### 任务 2.3：扩展主题
 
-- [ ] Pin与Unpin的完整形式语义
-- [ ] 异步/await的所有权分析
-- [ ] 常量和常量泛型的可判定性
+- [x] Pin与Unpin的完整形式语义 → `扩展主题：Pin与Unpin深度分析.md`
+- [x] 异步/await的所有权分析 → `扩展主题：async-await所有权分析.md`
+- [x] 常量和常量泛型的可判定性 → `扩展主题：Const泛型与编译期计算.md`
 
 ### 7.3 长期目标（6-12个月）
 
