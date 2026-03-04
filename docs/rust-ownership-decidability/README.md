@@ -95,7 +95,7 @@ cargo test
 
 #### 应用领域详解 (case-studies/*)
 
-```
+```text
 应用领域全景:
 ├── wasm/              - WebAssembly开发 (浏览器/边缘计算)
 ├── embedded/          - 嵌入式/物联网 (no_std/实时系统)

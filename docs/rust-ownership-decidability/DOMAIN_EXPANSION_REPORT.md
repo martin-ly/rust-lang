@@ -208,7 +208,7 @@
 
 ### 领域覆盖
 
-```
+```text
 Rust应用领域覆盖图:
 
 基础设施层:
@@ -300,7 +300,7 @@ unsafe fn process_avx2(...) { ... }
 
 ## 新增目录结构
 
-```
+```text
 docs/rust-ownership-decidability/
 ├── case-studies/
 │   ├── wasm/              # WebAssembly开发

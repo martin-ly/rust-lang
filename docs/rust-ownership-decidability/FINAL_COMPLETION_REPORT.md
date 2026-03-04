@@ -39,7 +39,7 @@
 
 ## 完整文档结构 (V3)
 
-```
+```text
 docs/rust-ownership-decidability/
 ├── 📖 README.md (9.3KB)
 ├── 📊 FINAL_SUMMARY.md (7.7KB)
@@ -124,7 +124,7 @@ docs/rust-ownership-decidability/
 
 **00-04-theory-connections.md** 包含：
 
-```
+```text
 1. 理论谱系总览
 2. 线性逻辑 ↔ 分离逻辑
    - 语法映射表
@@ -192,7 +192,7 @@ docs/rust-ownership-decidability/
 
 ### 理论联系图谱
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                    理论联系完整性                                │
 ├─────────────────────────────────────────────────────────────────┤
