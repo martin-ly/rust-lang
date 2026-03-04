@@ -4,10 +4,21 @@
 
 ## 文档统计
 
-- **总文件数**: 50+
-- **总字数**: 约150,000+ 字
-- **覆盖范围**: 理论基础 → 并发模式 → 分布式架构
+- **总文件数**: 60+
+- **总字数**: 约200,000+ 字
+- **覆盖范围**: 理论基础 → 并发模式 → 分布式架构 → 10+应用领域
 - **Rust版本**: 1.93.1
+
+### 内容构成
+
+| 类别 | 数量 | 大小 |
+|------|------|------|
+| 理论文档 | 30+ | ~300KB |
+| 形式化证明 | 5 | ~50KB |
+| 案例研究 | 15 | ~800KB |
+| 代码示例 | 5模块 | ~3,000行 |
+| 可视化 | 15 | ~200KB |
+| **总计** | **60+** | **~1.3MB** |
 
 ### 代码示例
 
@@ -17,6 +28,7 @@
 - **代码行数**: ~3,000行
 
 运行测试：
+
 ```bash
 cd exercises
 cargo test
@@ -78,6 +90,26 @@ cargo test
 | `tokio-runtime-analysis.md` | 异步运行时 | 任务所有权、工作窃取 |
 | `diesel-orm-type-safety.md` | ORM | 编译时SQL验证 |
 | `rayon-parallelism.md` | 并行计算 | 数据并行、Fork-Join |
+| `web-server-architecture.md` | Web服务器 | 高并发架构、连接池 |
+| `microservices-rust.md` | 微服务 | 断路器、Saga模式 |
+
+#### 应用领域详解 (case-studies/*)
+
+```
+应用领域全景:
+├── wasm/              - WebAssembly开发 (浏览器/边缘计算)
+├── embedded/          - 嵌入式/物联网 (no_std/实时系统)
+├── blockchain/        - 区块链/Web3 (智能合约/共识算法)
+├── gamedev/           - 游戏开发 (Bevy/ECS/渲染)
+├── ml-ai/             - 机器学习/AI (Candle/Burn/推理)
+├── database/          - 数据库系统 (存储引擎/MVCC)
+├── security/          - 网络安全 (密码学/IDS)
+├── cloud/             - 云计算/容器 (K8s/服务网格)
+├── cli/               - CLI工具 (clap/终端UI)
+└── media/             - 音视频处理 (编解码/流媒体)
+```
+
+**总计**: 10个主要应用领域，676KB+专业内容
 
 ### 6. 可视化图表 (visualizations/)
 
