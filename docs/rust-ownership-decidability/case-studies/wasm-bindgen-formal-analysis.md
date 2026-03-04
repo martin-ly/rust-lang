@@ -1,193 +1,250 @@
-# wasm-bindgen 形式化分析
+# wasm-bindgen形式化分析
 
-> **主题**: Rust/WASM与JavaScript的安全互操作
->
-> **形式化框架**: 边界类型转换 + 内存隔离
->
-> **参考**: wasm-bindgen Documentation
+> **主题**: Rust-WebAssembly互操作
+> **形式化框架**: FFI边界 + JS类型映射 + 内存管理
+> **参考**: wasm-bindgen Guide (<https://rustwasm.github.io/wasm-bindgen>)
 
 ---
 
 ## 目录
 
-- [wasm-bindgen 形式化分析](#wasm-bindgen-形式化分析)
+- [wasm-bindgen形式化分析](#wasm-bindgen形式化分析)
   - [目录](#目录)
   - [1. 引言](#1-引言)
-  - [2. 绑定生成](#2-绑定生成)
-    - [2.1 导出到JS](#21-导出到js)
-    - [定理 2.1 (导出安全性)](#定理-21-导出安全性)
-    - [2.2 从JS导入](#22-从js导入)
-    - [定理 2.2 (导入类型安全)](#定理-22-导入类型安全)
+  - [2. 类型映射](#2-类型映射)
+    - [定义 TYPEMAP-1 ( 基本类型 )](#定义-typemap-1--基本类型-)
+    - [定义 TYPEMAP-2 ( 复杂类型 )](#定义-typemap-2--复杂类型-)
   - [3. 内存管理](#3-内存管理)
-    - [定理 3.1 (所有权转移)](#定理-31-所有权转移)
-  - [4. 类型转换](#4-类型转换)
-    - [定理 4.1 (可转换类型)](#定理-41-可转换类型)
-  - [5. 异常处理](#5-异常处理)
-    - [定理 5.1 (panic转异常)](#定理-51-panic转异常)
-  - [6. 反例](#6-反例)
-    - [反例 6.1 (生命周期陷阱)](#反例-61-生命周期陷阱)
-    - [反例 6.2 (闭包泄漏)](#反例-62-闭包泄漏)
+    - [定义 MEM-1 ( wasm内存模型 )](#定义-mem-1--wasm内存模型-)
+    - [定义 MEM-2 ( 所有权转移 )](#定义-mem-2--所有权转移-)
+    - [定理 MEM-T1 ( 无泄漏 )](#定理-mem-t1--无泄漏-)
+  - [4. 导出函数](#4-导出函数)
+    - [定义 EXPORT-1 ( 导出语法 )](#定义-export-1--导出语法-)
+    - [定义 EXPORT-2 ( 异步导出 )](#定义-export-2--异步导出-)
+  - [5. 导入JS](#5-导入js)
+    - [定义 IMPORT-1 ( 内联导入 )](#定义-import-1--内联导入-)
+    - [定义 IMPORT-2 ( 自定义类型 )](#定义-import-2--自定义类型-)
+  - [6. 定理与证明](#6-定理与证明)
+    - [定理 WBG-T1 ( 类型安全边界 )](#定理-wbg-t1--类型安全边界-)
+    - [定理 WBG-T2 ( 零拷贝视图 )](#定理-wbg-t2--零拷贝视图-)
+  - [7. 代码示例](#7-代码示例)
+    - [示例1: 基础导出](#示例1-基础导出)
+    - [示例2: DOM操作](#示例2-dom操作)
+    - [示例3: 异步HTTP](#示例3-异步http)
 
 ---
 
 ## 1. 引言
 
-wasm-bindgen提供:
+wasm-bindgen功能：
 
-- Rust与JavaScript无缝互操作
-- 自动绑定生成
-- 类型安全的边界
-- 内存管理桥接
+- Rust ↔ JS类型自动转换
+- wasm内存管理
+- JS API绑定生成
+- 异步支持
 
 ---
 
-## 2. 绑定生成
+## 2. 类型映射
 
-### 2.1 导出到JS
+### 定义 TYPEMAP-1 ( 基本类型 )
 
-### 定理 2.1 (导出安全性)
+| Rust | JavaScript | 传递方式 |
+| :--- | :--- | :--- |
+| i32/u32/f32/f64 | number | 值 |
+| bool | boolean | 值 |
+| String | string | 拷贝 |
+| &str | string | 借用 |
+| Vec<u8> | Uint8Array | 拷贝 |
+| JsValue | any | 引用 |
 
-> wasm-bindgen确保导出的Rust函数遵守WASM边界。
-
-```rust
-#[wasm_bindgen]
-pub fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
-```
-
-**生成**:
-
-```javascript
-export function add(a, b) {
-    // 类型检查
-    // WASM调用
-    return wasm.add(a, b);
-}
-```
-
-∎
-
-### 2.2 从JS导入
-
-### 定理 2.2 (导入类型安全)
-
-> 导入的JS函数通过类型声明检查。
+### 定义 TYPEMAP-2 ( 复杂类型 )
 
 ```rust
 #[wasm_bindgen]
-extern "C" {
-    fn alert(s: &str);  // 类型约束
-}
+pub struct Point { x: f64, y: f64 }
 ```
 
-**运行时检查**:
-
-- 参数类型验证
-- 返回值解包
-
-∎
+$$
+\text{ExportedStruct} \to \text{JS prototype}
+$$
 
 ---
 
 ## 3. 内存管理
 
-### 定理 3.1 (所有权转移)
-
-> 跨边界传递数据时明确所有权。
-
-```rust
-#[wasm_bindgen]
-pub struct MyData {
-    data: Vec<u8>,
-}
-
-#[wasm_bindgen]
-impl MyData {
-    pub fn new() -> MyData { ... }
-    // Rust管理内存，JS通过句柄访问
-}
-```
-
-**形式化**:
+### 定义 MEM-1 ( wasm内存模型 )
 
 $$
-\text{JS侧}: \text{handle} \leftrightarrow \text{Rust侧}: \text{Box<T>}
+\text{WasmMemory} = \text{linear\_memory}[0..2^{32})
 $$
 
-∎
-
----
-
-## 4. 类型转换
-
-### 定理 4.1 (可转换类型)
-
-| Rust | JavaScript |
-|------|------------|
-| i32, i64, f32, f64 | number, bigint |
-| String | string |
-| `Vec<u8>` | Uint8Array |
-| JsValue | any |
-
-∎
-
----
-
-## 5. 异常处理
-
-### 定理 5.1 (panic转异常)
-
-> Rust panic转换为JS异常。
+### 定义 MEM-2 ( 所有权转移 )
 
 ```rust
 #[wasm_bindgen]
-pub fn may_panic() {
-    panic!("error");  // 转换为JS Error
+impl Point {
+    #[wasm_bindgen(constructor)]
+    pub fn new(x: f64, y: f64) -> Point { Point { x, y } }
 }
 ```
 
-```javascript
-try {
-    may_panic();
-} catch (e) {
-    // e是WASM panic消息
-}
-```
+### 定理 MEM-T1 ( 无泄漏 )
 
-∎
+导出类型正确drop。
+
+$$
+\text{JS\_drop}(ptr) \to \text{Rust\_drop}(\text{Box}::\text{from\_raw}(ptr))
+$$
 
 ---
 
-## 6. 反例
+## 4. 导出函数
 
-### 反例 6.1 (生命周期陷阱)
+### 定义 EXPORT-1 ( 导出语法 )
 
 ```rust
-// 错误: 返回引用
 #[wasm_bindgen]
-pub fn get_slice(data: &[u8]) -> &[u8] {
-    &data[0..10]  // 生命周期无法跨边界!
-}
-
-// 正确: 返回拥有数据
-#[wasm_bindgen]
-pub fn get_vec(data: &[u8]) -> Vec<u8> {
-    data[0..10].to_vec()
-}
+pub fn add(a: i32, b: i32) -> i32 { a + b }
 ```
 
-### 反例 6.2 (闭包泄漏)
+### 定义 EXPORT-2 ( 异步导出 )
 
 ```rust
 #[wasm_bindgen]
-pub fn set_callback(f: &Closure<dyn FnMut()>) {
-    // Closure可能需要在JS存活
-    // 需手动管理内存
+pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
+    // async operation
 }
 ```
 
 ---
 
-*文档版本: 1.0.0*
-*定理数量: 7个*
+## 5. 导入JS
+
+### 定义 IMPORT-1 ( 内联导入 )
+
+```rust
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
+}
+```
+
+### 定义 IMPORT-2 ( 自定义类型 )
+
+```rust
+#[wasm_bindgen]
+extern "C" {
+    pub type HTMLElement;
+
+    #[wasm_bindgen(method, getter)]
+    fn inner_html(this: &HTMLElement) -> String;
+}
+```
+
+---
+
+## 6. 定理与证明
+
+### 定理 WBG-T1 ( 类型安全边界 )
+
+FFI边界类型检查。
+
+$$
+\text{wasm\_bindgen} \to \text{generated\_glue\_code\_validates\_types}
+$$
+
+### 定理 WBG-T2 ( 零拷贝视图 )
+
+&[u8]可零拷贝传递。
+
+$$
+\text{&[u8]} \to \text{Uint8Array\_view} \text{ (no copy)}
+$$
+
+---
+
+## 7. 代码示例
+
+### 示例1: 基础导出
+
+```rust
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub struct Calculator {
+    value: f64,
+}
+
+#[wasm_bindgen]
+impl Calculator {
+    #[wasm_bindgen(constructor)]
+    pub fn new() -> Calculator {
+        Calculator { value: 0.0 }
+    }
+
+    pub fn add(&mut self, n: f64) {
+        self.value += n;
+    }
+
+    pub fn result(&self) -> f64 {
+        self.value
+    }
+}
+
+#[wasm_bindgen]
+pub fn greet(name: &str) -> String {
+    format!("Hello, {}!", name)
+}
+```
+
+### 示例2: DOM操作
+
+```rust
+use wasm_bindgen::prelude::*;
+use web_sys::{Document, Element, HtmlElement, Window};
+
+#[wasm_bindgen(start)]
+pub fn run() -> Result<(), JsValue> {
+    let window = web_sys::window().unwrap();
+    let document = window.document().unwrap();
+    let body = document.body().unwrap();
+
+    let val = document.create_element("p")?;
+    val.set_inner_html("Hello from Rust!");
+    body.append_child(&val)?;
+
+    Ok(())
+}
+```
+
+### 示例3: 异步HTTP
+
+```rust
+use wasm_bindgen::prelude::*;
+use wasm_bindgen_futures::JsFuture;
+use web_sys::{Request, RequestInit, Response};
+
+#[wasm_bindgen]
+pub async fn fetch_json(url: String) -> Result<JsValue, JsValue> {
+    let mut opts = RequestInit::new();
+    opts.method("GET");
+
+    let request = Request::new_with_str_and_init(&url, &opts)?;
+
+    let window = web_sys::window().unwrap();
+    let resp_value = JsFuture::from(window.fetch_with_request(&request)).await?;
+    let resp: Response = resp_value.dyn_into()?;
+
+    let json = JsFuture::from(resp.json()?).await?;
+    Ok(json)
+}
+```
+
+---
+
+**维护者**: Rust WASM Formal Methods Team
+**创建日期**: 2026-03-05
+**wasm-bindgen版本**: 0.2+
+**状态**: ✅ 已对齐

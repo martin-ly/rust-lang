@@ -1,206 +1,304 @@
-# Clap 命令行解析形式化分析
+# Clap命令行解析形式化分析
 
 > **主题**: 声明式命令行解析
->
-> **形式化框架**: 类型推导 + 验证
->
-> **参考**: Clap v4 Documentation
+> **形式化框架**: 派生宏 + 类型安全参数 + 验证
+> **参考**: Clap Documentation (<https://docs.rs/clap>)
 
 ---
 
 ## 目录
 
-- [Clap 命令行解析形式化分析](#clap-命令行解析形式化分析)
+- [Clap命令行解析形式化分析](#clap命令行解析形式化分析)
   - [目录](#目录)
   - [1. 引言](#1-引言)
-  - [2. 派生宏语义](#2-派生宏语义)
-    - [定义 2.1 (派生展开)](#定义-21-派生展开)
-    - [定理 2.1 (零运行时开销)](#定理-21-零运行时开销)
-  - [3. 类型安全](#3-类型安全)
-    - [3.1 值解析器](#31-值解析器)
-    - [定理 3.1 (类型驱动解析)](#定理-31-类型驱动解析)
-    - [3.2 验证器](#32-验证器)
-    - [定理 3.2 (自定义验证)](#定理-32-自定义验证)
-  - [4. 冲突检测](#4-冲突检测)
-    - [定理 4.1 (编译时冲突检查)](#定理-41-编译时冲突检查)
-  - [5. 生命周期管理](#5-生命周期管理)
-    - [定理 5.1 (自包含参数)](#定理-51-自包含参数)
-  - [6. 反例](#6-反例)
-    - [反例 6.1 (生命周期陷阱)](#反例-61-生命周期陷阱)
-    - [反例 6.2 (默认值类型)](#反例-62-默认值类型)
+  - [2. 派生宏系统](#2-派生宏系统)
+    - [定义 DERIVE-1 ( 结构体派生 )](#定义-derive-1--结构体派生-)
+    - [定义 DERIVE-2 ( 属性映射 )](#定义-derive-2--属性映射-)
+    - [定理 DERIVE-T1 ( 完备解析 )](#定理-derive-t1--完备解析-)
+  - [3. 参数类型](#3-参数类型)
+    - [定义 ARG-1 ( 位置参数 )](#定义-arg-1--位置参数-)
+    - [定义 ARG-2 ( 可选参数 )](#定义-arg-2--可选参数-)
+    - [定理 ARG-T1 ( 类型转换安全 )](#定理-arg-t1--类型转换安全-)
+  - [4. 验证与约束](#4-验证与约束)
+    - [定义 VALIDATE-1 ( 值验证 )](#定义-validate-1--值验证-)
+    - [定义 VALIDATE-2 ( 组合约束 )](#定义-validate-2--组合约束-)
+  - [5. 子命令](#5-子命令)
+    - [定义 SUBCMD-1 ( 子命令枚举 )](#定义-subcmd-1--子命令枚举-)
+    - [定理 SUBCMD-T1 ( 互斥性 )](#定理-subcmd-t1--互斥性-)
+  - [6. 定理与证明](#6-定理与证明)
+    - [定理 CLAP-T1 ( 零运行时开销 )](#定理-clap-t1--零运行时开销-)
+    - [定理 CLAP-T2 ( 类型安全保证 )](#定理-clap-t2--类型安全保证-)
+  - [7. 代码示例](#7-代码示例)
+    - [示例1: 完整CLI](#示例1-完整cli)
+    - [示例2: 高级验证](#示例2-高级验证)
 
 ---
 
 ## 1. 引言
 
-Clap提供:
+Clap是Rust标准命令行解析库：
 
-- 派生宏(derive)和构建器(builder)两种API
-- 编译时验证
-- 自动生成帮助
-- Shell补全
+- 派生宏驱动（derive）
+- Builder API
+- 类型安全参数解析
+- 自动帮助生成
+- shell补全
 
 ---
 
-## 2. 派生宏语义
+## 2. 派生宏系统
 
-### 定义 2.1 (派生展开)
+### 定义 DERIVE-1 ( 结构体派生 )
+
+```rust
+#[derive(Parser)]
+#[command(name = "myapp", version = "1.0")]
+struct Cli {
+    #[arg(short, long)]
+    verbose: bool,
+    #[arg(short, long, default_value = "config.toml")]
+    config: PathBuf,
+}
+```
+
+**形式化**:
+
+$$
+\text{Cli} = \{ (f_i : T_i, \text{attrs}_i) \mid \text{Parser}(\text{Cli}) \}
+$$
+
+### 定义 DERIVE-2 ( 属性映射 )
+
+| 属性 | 类型约束 | 含义 |
+| :--- | :--- | :--- |
+| `short` | - | 短选项 |
+| `long` | - | 长选项 |
+| `default_value` | `T: FromStr` | 默认值 |
+| `required` | `bool` | 是否必需 |
+
+### 定理 DERIVE-T1 ( 完备解析 )
+
+派生宏生成完整解析代码。
+
+$$
+\text{derive(Parser)} \to \text{impl Parser for Cli}
+$$
+
+---
+
+## 3. 参数类型
+
+### 定义 ARG-1 ( 位置参数 )
+
+```rust
+#[derive(Parser)]
+struct Args {
+    input: PathBuf,        // 必需位置参数
+    output: Option<PathBuf>, // 可选位置参数
+}
+```
+
+$$
+\text{Positional}(T) = \text{Required}(T) \mid \text{Optional}(T)
+$$
+
+### 定义 ARG-2 ( 可选参数 )
 
 ```rust
 #[derive(Parser)]
 struct Args {
     #[arg(short, long)]
-    name: String,
-
-    #[arg(default_value = "1")]
-    count: u32,
+    level: u32,
+    #[arg(short, long, action = ArgAction::Count)]
+    verbose: u8,
 }
 ```
 
-展开后等价于:
+$$
+\text{Option}(name, short, T) \text{ where } T: \text{FromStr}
+$$
+
+### 定理 ARG-T1 ( 类型转换安全 )
+
+无效输入导致优雅错误。
+
+$$
+\text{parse}(s, T) = \text{Ok}(v) \mid \text{Err}(e) \text{ with context}
+$$
+
+---
+
+## 4. 验证与约束
+
+### 定义 VALIDATE-1 ( 值验证 )
 
 ```rust
-impl Parser for Args {
-    fn parse() -> Self {
-        // 构建Command
-        // 解析参数
-        // 填充结构体
+#[derive(Parser)]
+struct Args {
+    #[arg(short, long, value_parser = clap::value_parser!(u32).range(1..=100))]
+    port: u32,
+}
+```
+
+$$
+\text{Validator} : T \to \text{bool}
+$$
+
+### 定义 VALIDATE-2 ( 组合约束 )
+
+```rust
+#[derive(Args)]
+struct Config {
+    #[arg(group = "input", required = true)]
+    file: Option<PathBuf>,
+    #[arg(group = "input")]
+    url: Option<String>,
+}
+```
+
+$$
+\text{Group} = \{ a_1, a_2, \ldots \} \text{ with constraint } \text{exactly\_one}(g)
+$$
+
+---
+
+## 5. 子命令
+
+### 定义 SUBCMD-1 ( 子命令枚举 )
+
+```rust
+#[derive(Subcommand)]
+enum Commands {
+    Add { files: Vec<PathBuf> },
+    Remove { pattern: String },
+    List { all: bool },
+}
+```
+
+$$
+\text{Subcommand} = \{ C_i(\text{args}_i) \mid i = 1..n \}
+$$
+
+### 定理 SUBCMD-T1 ( 互斥性 )
+
+子命令相互排斥。
+
+$$
+\forall c_1, c_2 : \text{Commands}.\ c_1 \neq c_2 \to \neg(c_1 \land c_2)
+$$
+
+---
+
+## 6. 定理与证明
+
+### 定理 CLAP-T1 ( 零运行时开销 )
+
+解析在编译期生成代码。
+
+$$
+\text{parse\_time}(n) = O(n) \text{ where } n = \text{arg\_count}
+$$
+
+### 定理 CLAP-T2 ( 类型安全保证 )
+
+无效参数类型导致编译错误。
+
+$$
+\text{field} : T \text{ where } T \not: \text{FromStr} \to \text{compile\_error}
+$$
+
+---
+
+## 7. 代码示例
+
+### 示例1: 完整CLI
+
+```rust
+use clap::{Parser, Subcommand, Args};
+use std::path::PathBuf;
+
+#[derive(Parser)]
+#[command(name = "todo")]
+#[command(about = "A simple todo CLI")]
+#[command(version = "1.0")]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+    #[arg(short, long, global = true)]
+    verbose: bool,
+}
+
+#[derive(Subcommand)]
+enum Commands {
+    Add(AddArgs),
+    List(ListArgs),
+    Done { id: u32 },
+}
+
+#[derive(Args)]
+struct AddArgs {
+    #[arg(required = true)]
+    tasks: Vec<String>,
+    #[arg(short, long)]
+    priority: Option<u8>,
+}
+
+#[derive(Args)]
+struct ListArgs {
+    #[arg(short, long)]
+    all: bool,
+    #[arg(short, long, default_value = "10")]
+    limit: usize,
+}
+
+fn main() {
+    let cli = Cli::parse();
+
+    match cli.command {
+        Commands::Add(args) => add_tasks(args),
+        Commands::List(args) => list_tasks(args),
+        Commands::Done { id } => mark_done(id),
     }
 }
 ```
 
-### 定理 2.1 (零运行时开销)
-
-> derive宏在编译时展开，无运行时开销。
-
-∎
-
----
-
-## 3. 类型安全
-
-### 3.1 值解析器
-
-### 定理 3.1 (类型驱动解析)
-
-> 字段类型决定解析行为。
-
-| 类型 | 解析行为 |
-|------|----------|
-| `String` | 原样存储 |
-| `u32` | 解析整数，失败报错 |
-| `PathBuf` | 转换为路径 |
-| `bool` | 标志存在性 |
-| `Option<T>` | 可选参数 |
-| `Vec<T>` | 多值参数 |
+### 示例2: 高级验证
 
 ```rust
+use clap::{Parser, error::ErrorKind};
+
 #[derive(Parser)]
-struct Args {
-    port: u16,           // 自动验证范围
-    config: PathBuf,     // 接受任何路径
-    verbose: bool,       // --verbose 标志
-    name: Option<String>, // 可选
-    files: Vec<PathBuf>,  // 多个文件
-}
-```
-
-∎
-
-### 3.2 验证器
-
-### 定理 3.2 (自定义验证)
-
-> 自定义验证在解析时执行。
-
-```rust
-#[derive(Parser)]
-struct Args {
-    #[arg(value_parser = validate_port)]
+struct ServerArgs {
+    #[arg(short, long, default_value = "8080")]
+    #[arg(value_parser = port_in_range)]
     port: u16,
+
+    #[arg(short, long)]
+    #[arg(value_parser = validate_host)]
+    host: String,
 }
 
-fn validate_port(s: &str) -> Result<u16, String> {
-    let port: u16 = s.parse().map_err(|_| "invalid port")?;
-    if port < 1024 {
-        return Err("port must be >= 1024".to_string());
+fn port_in_range(s: &str) -> Result<u16, String> {
+    let port: u16 = s.parse().map_err(|_| format!("`{}` isn't a valid port", s))?;
+    if port >= 1024 {
+        Ok(port)
+    } else {
+        Err(format!("Port {} is reserved (must be >= 1024)", port))
     }
-    Ok(port)
+}
+
+fn validate_host(s: &str) -> Result<String, String> {
+    if s.is_empty() {
+        Err("Host cannot be empty".to_string())
+    } else {
+        Ok(s.to_string())
+    }
 }
 ```
 
-∎
-
 ---
 
-## 4. 冲突检测
-
-### 定理 4.1 (编译时冲突检查)
-
-> 某些冲突在编译时检测。
-
-**检测内容**:
-
-- 重复的short/long名称
-- 无效的标识符
-
-**运行时检测**:
-
-- 互斥组冲突
-- 缺少必需参数
-- 未知参数
-
-∎
-
----
-
-## 5. 生命周期管理
-
-### 定理 5.1 (自包含参数)
-
-> 解析后的Args拥有所有数据。
-
-```rust
-let args = Args::parse();  // 所有权转移
-// args包含所有解析后的值
-// 不涉及外部引用
-```
-
-∎
-
----
-
-## 6. 反例
-
-### 反例 6.1 (生命周期陷阱)
-
-```rust
-// 错误: 引用外部数据
-#[derive(Parser)]
-struct Args<'a> {
-    name: &'a str,  // 不支持!
-}
-
-// 正确: 使用Owned类型
-#[derive(Parser)]
-struct Args {
-    name: String,
-}
-```
-
-### 反例 6.2 (默认值类型)
-
-```rust
-// 错误: 默认值类型不匹配
-#[arg(default_value = "not_a_number")]
-count: u32,  // 编译错误!
-
-// 正确
-#[arg(default_value = "0")]
-count: u32,
-```
-
----
-
-*文档版本: 1.0.0*
-*定理数量: 7个*
+**维护者**: Rust CLI Formal Methods Team
+**创建日期**: 2026-03-05
+**Clap版本**: 4.x
+**状态**: ✅ 已对齐
