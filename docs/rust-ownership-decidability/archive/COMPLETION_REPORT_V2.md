@@ -63,7 +63,7 @@
 
 ## 完整文件清单
 
-```
+```text
 docs/rust-ownership-decidability/
 ├── README.md                                    9,282 bytes
 ├── COMPLETION_REPORT.md                         6,571 bytes
@@ -166,25 +166,25 @@ docs/rust-ownership-decidability/
 
 **初学者**:
 
-```
+```text
 README → 01-core-concepts/ → 09-exercises/ → 06-visualizations/
 ```
 
 **进阶开发者**:
 
-```
+```text
 01-core-concepts/ → 04-decidability-analysis/ → 03-verification-tools/
 ```
 
 **研究人员**:
 
-```
+```text
 00-foundations/ → 02-formal-models/ → 10-research-frontiers/
 ```
 
 **工程师**:
 
-```
+```text
 01-core-concepts/ → 03-verification-tools/ → 08-advanced-topics/
 ```
 

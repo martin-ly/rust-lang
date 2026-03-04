@@ -94,7 +94,7 @@
 
 ### 2. 思维表征创新
 
-```
+```text
 多维矩阵 (10+):
 ├── 子结构类型系统四维对比
 ├── 可判定性谱系矩阵
@@ -174,28 +174,28 @@
 
 ### 学术研究
 
-```
+```text
 路径: 00-foundations → 02-formal-models → 10-research-frontiers
 用途: 论文写作, 理论研究, 前沿探索
 ```
 
 ### 工程实践
 
-```
+```text
 路径: 01-core-concepts → 03-verification-tools → 09-exercises
 用途: 编写安全代码, 形式化验证, 工具选型
 ```
 
 ### 教学培训
 
-```
+```text
 路径: 01-core-concepts → 06-visualizations → 09-exercises
 用途: Rust 教学, PL 课程, 验证入门
 ```
 
 ### 编译器开发
 
-```
+```text
 路径: 01-core-concepts → 04-decidability-analysis
 用途: 理解借用检查, 实现类型系统
 ```

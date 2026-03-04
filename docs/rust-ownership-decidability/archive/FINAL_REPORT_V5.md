@@ -60,7 +60,7 @@
 
 ## 完整文档结构 (V5)
 
-```
+```text
 docs/rust-ownership-decidability/
 ├── 📖 README.md (10.7KB)
 ├── 📊 FINAL_REPORT_V5.md (本文件)
@@ -185,7 +185,7 @@ docs/rust-ownership-decidability/
 
 ### Rust架构设计核心原则
 
-```
+```text
 1. 编译时保证 > 运行时检查
    - 类型系统编码业务规则
    - 非法状态不可表示
@@ -275,7 +275,7 @@ docs/rust-ownership-decidability/
 
 ### 1. Rust资源管理双重性
 
-```
+```text
 编译时为主：所有权、借用、生命周期（零成本）
 运行时补充：Rc/Arc、RefCell、Mutex（灵活性）
 理论原因：停机问题限制
@@ -283,7 +283,7 @@ docs/rust-ownership-decidability/
 
 ### 2. Rust设计模式特色
 
-```
+```text
 Type State模式：编译时状态机
 零成本抽象：设计模式无运行时开销
 所有权驱动：Move语义影响模式实现
@@ -291,7 +291,7 @@ Type State模式：编译时状态机
 
 ### 3. 并发架构优势
 
-```
+```text
 fearless concurrency：编译时数据竞争防护
 零成本：async/await无运行时开销
 Actor模式：消息传递天然符合所有权
@@ -299,7 +299,7 @@ Actor模式：消息传递天然符合所有权
 
 ### 4. 分布式系统设计
 
-```
+```text
 类型安全：gRPC/消息序列化编译时检查
 零成本序列化：serde无运行时开销
 内存安全：网络协议实现无段错误

@@ -6,7 +6,7 @@
 
 ## 📚 文档体系结构
 
-```
+```text
 rust-ownership-decidability/
 │
 ├── 📊 思维表征文档 (本索引)
@@ -50,19 +50,23 @@ rust-ownership-decidability/
 ## 🧠 思维表征方式总览
 
 ### 1. 思维导图 (Mind Map)
+
 **文档**: [OVERVIEW_MINDMAP.md](./OVERVIEW_MINDMAP.md)
 
 展示整体知识结构，从理论基础到工程应用的分层组织：
+
 - 理论基础层 (线性逻辑/仿射类型/分离逻辑)
 - 核心机制层 (所有权/借用/生命周期)
 - 形式化验证层 (RustBelt/分离逻辑/协议验证)
 - 工程应用层 (39个库案例/模式/最佳实践)
 
 ### 2. 论证推理树 (Argumentation Tree)
+
 **文档**: [ARGUMENTATION_FRAMEWORK.md](./ARGUMENTATION_FRAMEWORK.md)
 
 逻辑推导结构：
-```
+
+```text
 内存安全保证
     ├── 所有权系统 (独占访问)
     │       ├── RAII/drop保证
@@ -76,34 +80,42 @@ rust-ownership-decidability/
 ```
 
 ### 3. 多维概念矩阵 (Concept Matrix)
+
 **文档**: [ARGUMENTATION_FRAMEWORK.md](./ARGUMENTATION_FRAMEWORK.md)
 
 对比分析不同概念维度：
+
 - 类型系统维度矩阵 (所有权 vs 借用 vs 生命周期)
 - 形式化方法对比矩阵 (RustBelt vs Creusot vs Prusti)
 - 库案例形式化深度矩阵
 
 ### 4. 应用场景决策树 (Decision Tree)
+
 **文档**: [ARGUMENTATION_FRAMEWORK.md](./ARGUMENTATION_FRAMEWORK.md)
 
 实际选择指南：
+
 - 类型选择决策树 (何时使用 Cell/RefCell/Mutex)
 - 并发模型选择决策树 (rayon vs tokio vs actix)
 - 验证工具选择决策树
 
 ### 5. 流程与状态图 (Flow & State Diagrams)
+
 **文档**: [VISUALIZATION_GUIDE.md](./VISUALIZATION_GUIDE.md)
 
 动态过程可视化：
+
 - 借用检查流程图
 - 类型状态转换图 (Owned → Borrowed → Moved → Dropped)
 - 生命周期包含关系图
 
 ### 6. 层次金字塔 (Hierarchy Pyramid)
+
 **文档**: [VISUALIZATION_GUIDE.md](./VISUALIZATION_GUIDE.md)
 
 安全保证层次：
-```
+
+```text
 Level 4: 形式化验证 (定理证明)
 Level 3: 工具验证 (模型检测)
 Level 2: 类型系统 (编译检查)
@@ -112,9 +124,11 @@ Level 0: 硬件保护 (MMU)
 ```
 
 ### 7. 时间线与演化 (Timeline)
+
 **文档**: [VISUALIZATION_GUIDE.md](./VISUALIZATION_GUIDE.md)
 
 历史发展脉络：
+
 - 1970s: 线性逻辑诞生
 - 1990s: 分离逻辑发展
 - 2010s: RustBelt项目
@@ -135,7 +149,7 @@ graph LR
     C --> D[借用检查器<br/>引用安全]
     D --> E[Rust编译器<br/>类型检查]
     E --> F[39个库案例<br/>工程验证]
-    
+
     style A fill:#f9f
     style C fill:#bbf
     style F fill:#bfb
@@ -164,7 +178,8 @@ graph LR
 ## 🎯 快速开始指南
 
 ### 路径1: 理论学习 (适合研究者)
-```
+
+```text
 00-foundations/ (线性逻辑/仿射类型)
     ↓
 02-formal-models/ (RustBelt/类型系统)
@@ -173,7 +188,8 @@ ARGUMENTATION_FRAMEWORK.md (论证推理树)
 ```
 
 ### 路径2: 工程实践 (适合开发者)
-```
+
+```text
 01-core-concepts/ (所有权/借用/生命周期)
     ↓
 case-studies/ (39个库分析)
@@ -182,7 +198,8 @@ ARGUMENTATION_FRAMEWORK.md (决策树)
 ```
 
 ### 路径3: 快速概览 (适合管理者)
-```
+
+```text
 OVERVIEW_MINDMAP.md (思维导图)
     ↓
 VISUALIZATION_GUIDE.md (图表汇总)
@@ -210,13 +227,13 @@ FINAL_COMPLETION_REPORT.md (完成报告)
 
 ## 🔗 相关资源
 
-- **Rust官方**: https://www.rust-lang.org/
-- **RustBelt项目**: https://plv.mpi-sws.org/rustbelt/
-- **Creusot**: https://github.com/creusot-rs/creusot
-- **The Rust Book**: https://doc.rust-lang.org/book/
+- **Rust官方**: <https://www.rust-lang.org/>
+- **RustBelt项目**: <https://plv.mpi-sws.org/rustbelt/>
+- **Creusot**: <https://github.com/creusot-rs/creusot>
+- **The Rust Book**: <https://doc.rust-lang.org/book/>
 
 ---
 
-**维护者**: Rust Formal Methods Team  
-**更新日期**: 2026-03-05  
+**维护者**: Rust Formal Methods Team
+**更新日期**: 2026-03-05
 **状态**: ✅ 100% 完成

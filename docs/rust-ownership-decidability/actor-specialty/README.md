@@ -1,6 +1,6 @@
 # Actor模型专题
 
-> **从理论到实践：完整的Actor模型指南**
+> **从理论到实践：完整的Actor模型指南 - 100% 完成**
 
 ---
 
@@ -11,190 +11,137 @@
 │                    Actor模型专题                                 │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  📚 理论基础                                                      │
-│  ├── Actor模型定义与历史                                          │
-│  ├── 形式化语义 (操作语义、Actor演算)                             │
-│  ├── 与CSP/共享内存/Async对比                                     │
-│  └── 现代理论扩展 (Typed Actors, 流式Actor)                       │
+│  📚 理论基础 (formal-proofs/)                                    │
+│  ├── Actor模型定义与历史                                         │
+│  ├── 形式化语义 (操作语义、Actor演算)                            │
+│  ├── 11个核心定理与完整证明                                      │
+│  ├── 与CSP/共享内存/Async对比                                    │
+│  └── 现代理论扩展 (Typed Actors, 流式Actor)                      │
 │                                                                  │
-│  🔧 Rust实现                                                      │
-│  ├── Actix (最流行, Web集成)                                      │
-│  ├── Bastion (容错, 监督树)                                       │
-│  ├── coerce (分布式, 集群)                                        │
-│  └── Xtra (轻量级)                                                │
+│  🔧 Rust实现 (implementations/)                                  │
+│  ├── Actix (最流行, Web集成)                                     │
+│  ├── Bastion (容错, 监督树)                                      │
+│  ├── coerce (分布式, 集群)                                       │
+│  └── Xtra (轻量级)                                               │
 │                                                                  │
-│  🎨 设计模式                                                      │
-│  ├── Ask vs Tell, 前摄模式                                        │
-│  ├── 监督者模式, Circuit Breaker                                  │
-│  ├── 路由模式 (负载均衡、一致性哈希)                              │
-│  ├── 状态管理 (FSM, Event Sourcing)                               │
-│  └── 通信模式 (Pub-Sub, 请求管道)                                 │
+│  🎨 设计模式 (patterns/)                                         │
+│  ├── Ask vs Tell, 前摄模式                                       │
+│  ├── 监督者模式, Circuit Breaker (形式化证明)                    │
+│  ├── 路由模式 (负载均衡、一致性哈希)                             │
+│  ├── 状态管理 (FSM, Event Sourcing)                              │
+│  └── 通信模式 (Pub-Sub, Saga)                                    │
 │                                                                  │
-│  🌐 分布式Actor                                                   │
-│  ├── 集群架构 (发现、分片、单例)                                  │
-│  ├── 分布式通信 (gRPC, 序列化)                                    │
-│  ├── 容错与一致性 (CAP, Saga, CRDT)                               │
-│  └── 网络分区处理                                                 │
+│  🌐 分布式Actor (distributed/)                                   │
+│  ├── 集群架构 (发现、分片、单例)                                 │
+│  ├── 分布式通信 (gRPC, 序列化)                                   │
+│  ├── 容错与一致性 (CAP, Saga, CRDT)                              │
+│  └── 网络分区处理                                                │
 │                                                                  │
-│  💡 实战示例                                                      │
-│  └── 分布式聊天系统 (完整实现)                                    │
+│  💡 实战示例 (examples/, case-studies/)                          │
+│  ├── 分布式聊天系统                                              │
+│  ├── Actix-web生产案例分析                                       │
+│  └── Embassy嵌入式集成                                           │
+│                                                                  │
+│  📊 可视化资源                                                   │
+│  ├── mindmaps/ - Actor模型全景                                   │
+│  ├── matrices/ - 框架对比矩阵                                    │
+│  ├── decision-trees/ - 框架选择                                │
+│  └── scenario-trees/ - 应用场景                                  │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 目录结构
+## 文档导航
+
+### 理论基础
+
+| 文档 | 行数 | 核心内容 |
+|:---|:---:|:---|
+| [theory/actor-model-foundation.md](theory/actor-model-foundation.md) | 439 | Hewitt理论、形式化语义 |
+| [formal-proofs/actor-safety-theorems.md](formal-proofs/actor-safety-theorems.md) | 387 | 11个定理完整证明 |
+
+### 可视化资源
+
+| 类型 | 文档 | 内容 |
+|:---|:---|:---|
+| 思维导图 | [mindmaps/actor-model-mindmap.md](mindmaps/actor-model-mindmap.md) | Actor模型全景图 |
+| 对比矩阵 | [matrices/actor-framework-matrix.md](matrices/actor-framework-matrix.md) | 6大框架对比 |
+| 决策树 | [decision-trees/actor-framework-selection.md](decision-trees/actor-framework-selection.md) | 框架选择指南 |
+| 场景树 | [scenario-trees/actor-application-domains.md](scenario-trees/actor-application-domains.md) | 6大应用领域 |
+
+### Rust实现
+
+| 文档 | 行数 | 框架 |
+|:---|:---:|:---|
+| [implementations/rust-actor-frameworks.md](implementations/rust-actor-frameworks.md) | 212 | 4大框架对比 |
+
+### 设计模式
+
+| 文档 | 行数 | 模式数量 |
+|:---|:---:|:---:|
+| [patterns/actor-design-patterns.md](patterns/actor-design-patterns.md) | 398 | 15+模式 |
+| [patterns/actor-design-patterns-expanded.md](patterns/actor-design-patterns-expanded.md) | 498 | 形式化定义+定理 |
+
+### 案例研究
+
+| 文档 | 内容 |
+|:---|:---|
+| [case-studies/actix-web-production.md](case-studies/actix-web-production.md) | Actix-web生产分析 |
+| [case-studies/tokio-runtime-analysis.md](../comprehensive-analysis/case-studies/tokio-runtime-analysis.md) | Tokio分析 |
+| [case-studies/embassy-embedded-analysis.md](../comprehensive-analysis/case-studies/embassy-embedded-analysis.md) | Embassy分析 |
+
+---
+
+## 核心定理
 
 ```text
-actor-specialty/
-├── README.md                    # 本文件 - 专题导航
-├── theory/
-│   └── actor-model-foundation.md  # Actor理论基础
-├── implementations/
-│   └── rust-actor-frameworks.md   # Rust框架对比
-├── patterns/
-│   └── actor-design-patterns.md   # 设计模式
-├── distributed/
-│   └── distributed-actors.md      # 分布式Actor
-└── examples/
-    └── chat-system-example.md     # 聊天系统示例
+Thm ACTOR-NO-DATA-RACE: Actor系统无数据竞争
+∀Actor系统Σ. ∀a₁, a₂ ∈ A, a₁ ≠ a₂ ⇒
+    accessible_state(a₁) ∩ accessible_state(a₂) = ∅
+
+Thm ACTOR-NO-LOCKS: Actor系统不需要显式锁
+∀Σ = (A, M, σ, μ). ∀a ∈ A.
+    sequential_processing(a) ⇒ no_locks_needed(a)
+
+Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
+∀监督树T. ∀节点n ∈ T.
+    failure(n) ⇒ impact(n) ⊆ subtree(parent(n))
+
+Thm RUST-ACTOR-MEMORY-SAFETY: Rust + Actor内存安全
+∀Rust Actor程序P.
+    P通过借用检查 ⇒ P无内存错误
 ```
 
 ---
 
-## 核心概念
-
-### 什么是Actor模型?
-
-> An Actor is an autonomous concurrent object that communicates asynchronously with other Actors.
-> — Carl Hewitt, 1973
+## 框架快速选择
 
 ```text
-Actor = 状态 + 行为 + 邮箱
-
-┌─────────────────────────┐
-│        Actor            │
-│  ┌─────────────────┐    │
-│  │   Mailbox       │    │
-│  │   [msg, msg]    │    │
-│  └────────┬────────┘    │
-│           │ 顺序处理     │
-│           ▼              │
-│  ┌─────────────────┐    │
-│  │   Behavior      │    │
-│  │   fn(msg,state) │    │
-│  │        ↓        │    │
-│  │   New State     │    │
-│  │   Send Msgs     │    │
-│  └─────────────────┘    │
-│                         │
-│  ┌─────────────────┐    │
-│  │   Private State │    │
-│  │   (封装)        │    │
-│  └─────────────────┘    │
-└─────────────────────────┘
-
-特点:
-- 状态封装: 只能通过消息访问
-- 异步通信: 发送不阻塞
-- 顺序处理: 无并发竞争
-- 位置透明: 本地/远程无区别
+需要分布式/集群?
+├── 是 → coerce
+└── 否 → 需要容错/监督树?
+         ├── 是 → Bastion
+         └── 否 → 需要Web集成?
+                  ├── 是 → Actix
+                  └── 否 → Xtra (轻量)
 ```
 
-### Actor公理
-
-1. **封装**: 状态仅由Actor访问
-2. **异步通信**: 消息通过邮箱传递
-3. **顺序执行**: 消息按序处理
-4. **位置透明**: 本地和远程Actor使用相同API
-
 ---
 
-## 与其他并发模型对比
+## 统计信息
 
-| 特性 | Actor | CSP | 共享内存 | Async/Future |
-|:-----|:------|:----|:---------|:-------------|
-| 通信方式 | 异步消息 | 同步通道 | 共享变量 | Future组合 |
-| 耦合度 | 松散 | 中等 | 紧密 | 中等 |
-| 容错 | 内置 | 需实现 | 需实现 | 需实现 |
-| 位置透明 | ✅ | ❌ | ❌ | ⚠️ |
-| 死锁 | 不可能 | 可能 | 可能 | 可能 |
-| 数据竞争 | 不可能 | 不可能 | 可能 | 不可能(Rust) |
-
----
-
-## Rust Actor框架对比
-
-| 框架 | 监督树 | 分布式 | Web集成 | 适用场景 |
-|:-----|:------:|:------:|:-------:|:---------|
-| **Actix** | ⚠️ | ❌ | ✅ | Web后端 |
-| **Bastion** | ✅ | ⚠️ | ⚠️ | 高可用系统 |
-| **coerce** | ✅ | ✅ | ⚠️ | 微服务/分布式 |
-| **Xtra** | ⚠️ | ❌ | ❌ | 学习/轻量 |
-
----
-
-## 快速开始
-
-### Actix示例
-
-```rust
-use actix::prelude::*;
-
-// 定义消息
-#[derive(Message)]
-#[rtype(result = "i32")]
-struct Add(i32, i32);
-
-// 定义Actor
-struct Calculator;
-
-impl Actor for Calculator {
-    type Context = Context<Self>;
-}
-
-// 实现消息处理
-impl Handler<Add> for Calculator {
-    type Result = i32;
-
-    fn handle(&mut self, msg: Add, _: &mut Context<Self>) -> Self::Result {
-        msg.0 + msg.1
-    }
-}
-
-#[actix::main]
-async fn main() {
-    let addr = Calculator.start();
-    let result = addr.send(Add(10, 20)).await.unwrap();
-    println!("10 + 20 = {}", result);
-}
-```
-
-### Bastion示例
-
-```rust
-use bastion::prelude::*;
-
-fn main() {
-    Bastion::init();
-
-    Bastion::children(|ch| {
-        ch.with_exec(|ctx: BastionContext| async move {
-            msg! { ctx.recv().await?,
-                msg: i32 => {
-                    println!("Received: {}", msg);
-                    ctx.answer(msg * 2).await?;
-                }
-                _: _ => {}
-            }
-            Ok(())
-        })
-    });
-
-    Bastion::start();
-    Bastion::block_until_stopped();
-}
+```text
+📚 理论基础文档: 2篇 (800+行)
+📐 定理与证明: 11个核心定理
+🔬 思维导图: 1个
+📊 多维矩阵: 1个 (6+框架对比)
+🌲 决策树: 1个
+🗺️ 应用场景树: 1个 (6大领域)
+🎨 设计模式: 2篇 (15+模式，形式化)
+📦 案例研究: 3篇
+💡 实战示例: 1篇 (聊天系统)
 ```
 
 ---
@@ -203,37 +150,21 @@ fn main() {
 
 ### 初学者
 
-1. [理论基础](./theory/actor-model-foundation.md) - 理解核心概念
-2. [Actix快速开始](#快速开始) - 动手实践
-3. [设计模式](./patterns/actor-design-patterns.md) - 掌握常用模式
+1. [mindmaps/actor-model-mindmap.md](mindmaps/actor-model-mindmap.md) - 概念建立
+2. [theory/actor-model-foundation.md](theory/actor-model-foundation.md) - 理论基础
+3. [decision-trees/actor-framework-selection.md](decision-trees/actor-framework-selection.md) - 选择框架
 
 ### 进阶开发者
 
-1. [框架对比](./implementations/rust-actor-frameworks.md) - 选择合适的框架
-2. [分布式Actor](./distributed/distributed-actors.md) - 构建分布式系统
-3. [聊天系统示例](./examples/chat-system-example.md) - 完整实战
+1. [patterns/actor-design-patterns-expanded.md](patterns/actor-design-patterns-expanded.md) - 掌握模式
+2. [formal-proofs/actor-safety-theorems.md](formal-proofs/actor-safety-theorems.md) - 理解安全保证
+3. [case-studies/actix-web-production.md](case-studies/actix-web-production.md) - 生产实践
 
 ### 架构师
 
-1. 全部文档 - 系统掌握
-2. 关注分布式、容错、性能优化部分
-
----
-
-## 核心洞见
-
-### Actor模型的优势
-
-1. **无锁并发**: 顺序消息处理，无需显式锁
-2. **容错性**: 监督树自动处理失败
-3. **位置透明**: 本地和远程Actor统一API
-4. **可扩展性**: 天然支持分布式部署
-
-### Actor模型的限制
-
-1. **回调地狱风险**: 需要良好的抽象
-2. **逻辑死锁**: 循环请求可能导致死锁
-3. **消息排序**: 网络可能导致乱序
+1. [matrices/actor-framework-matrix.md](matrices/actor-framework-matrix.md) - 技术选型
+2. [scenario-trees/actor-application-domains.md](scenario-trees/actor-application-domains.md) - 领域映射
+3. [distributed/distributed-actors.md](distributed/distributed-actors.md) - 分布式系统
 
 ---
 
@@ -255,4 +186,4 @@ fn main() {
 
 **维护者**: Rust Actor Specialty Team
 **创建日期**: 2026-03-05
-**状态**: ✅ 100% 完成
+**状态**: ✅ **100% 完成** - 包含形式化定义、定理证明、可视化资源

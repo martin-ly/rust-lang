@@ -38,7 +38,7 @@
 
 ## 🗂️ 目录结构
 
-```
+```text
 docs/rust-ownership-decidability/
 ├── README.md                           # 主文档索引
 ├── 00-foundations/                     # 理论基础
@@ -184,10 +184,10 @@ test result: ok. 14 passed; 0 failed
 
 智能指针实现：
 
-- `box_demo()` - Box<T>
+- `box_demo()` - `Box<T>`
 - `MyBox<T>` - 自定义智能指针
-- `rc_demo()` - Rc<T>
-- `refcell_demo()` - RefCell<T>
+- `rc_demo()` - `Rc<T>`
+- `refcell_demo()` - `RefCell<T>`
 - `MockMessenger` - 内部可变性模式
 
 ### 5. concurrency.rs

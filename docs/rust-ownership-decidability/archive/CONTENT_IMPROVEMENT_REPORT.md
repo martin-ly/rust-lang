@@ -58,7 +58,7 @@
 
 ### 文件大小变化
 
-```
+```text
 改进前总大小: ~11.21 KB
 改进后总大小: ~108.08 KB
 增长倍数: ~9.6x
@@ -151,7 +151,7 @@
 
 ### 已完善的8个文件
 
-```
+```text
 docs/rust-ownership-decidability/
 ├── formal-proofs/
 │   ├── affine-logic-decidability.md     ✅ 已完善 (14.03 KB)

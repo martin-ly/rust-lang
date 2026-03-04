@@ -22,7 +22,7 @@
 
 ### 测试结果
 
-```
+```text
 单元测试:        30 passed ✅
 并发测试:        11 passed ✅
 集成测试:        18 passed ✅
@@ -46,7 +46,7 @@
 
 ### 测试结果
 
-```
+```text
 单元测试:        23 passed ✅
 集成测试:        31 passed ✅
 文档测试:        14 passed ✅
@@ -68,7 +68,7 @@
 
 ### 中文版 (`docs/Rust所有权与可判定性/`)
 
-```
+```text
 核心文档:
 ├── README.md
 ├── Rust所有权与可判定性：全面形式语义分析与论证.md (64KB)
@@ -117,7 +117,7 @@
 
 ### 英文版 (`docs/rust-ownership-decidability/`)
 
-```
+```text
 理论文档:
 ├── 00-foundations/ (4文件)
 ├── 01-core-concepts/ (3文件)
