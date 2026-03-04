@@ -1,9 +1,9 @@
 ﻿# Trait 系统形式化
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **最后更新**: 2026-03-05
+> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **状态**: ✅ 已完成 | Deref Trait形式化已添加
 
 ---
 
@@ -72,6 +72,20 @@
   - [🆕 Rust 1.93.0 相关更新 {#-rust-1930-相关更新}](#-rust-1930-相关更新--rust-1930-相关更新)
     - [全局分配器与 Trait 对象](#全局分配器与-trait-对象)
     - [MaybeUninit 新方法与 Trait 对象](#maybeuninit-新方法与-trait-对象)
+  - [🆕 Rust Book Ch 15.2 对齐: Deref Trait形式化 {#-rust-book-ch-152-对齐-deref-trait形式化}](#-rust-book-ch-152-对齐-deref-trait形式化--rust-book-ch-152-对齐-deref-trait形式化)
+    - [定义 DEREF-1 (Deref Trait)](#定义-deref-1-deref-trait)
+    - [定义 DEREF-2 (DerefMut Trait)](#定义-deref-2-derefmut-trait)
+    - [定义 DEREF-3 (解引用强制转换 Deref Coercion)](#定义-deref-3-解引用强制转换-deref-coercion)
+    - [定理 DEREF-T1 (Deref一致性)](#定理-deref-t1-deref一致性)
+    - [定理 DEREF-T2 (Deref传递性)](#定理-deref-t2-deref传递性)
+    - [定理 DEREF-T3 (DerefMut排他性)](#定理-deref-t3-derefmut排他性)
+    - [代码示例](#代码示例)
+      - [示例1: Box解引用](#示例1-box解引用)
+      - [示例2: 自定义智能指针](#示例2-自定义智能指针)
+      - [示例3: 函数参数中的Deref强制转换](#示例3-函数参数中的deref强制转换)
+      - [示例4: DerefMut](#示例4-derefmut)
+    - [与智能指针的集成](#与智能指针的集成)
+    - [形式化语义总结](#形式化语义总结)
 
 ---
 
@@ -1174,3 +1188,215 @@ objects.assume_init_drop(); // Rust 1.93.0 新方法
 **形式化表示**：
 
 $$\text{TraitObjectInit}[\tau] \equiv \text{MaybeUninit}[\text{dyn Trait}] \rightarrow \text{SafeInit}[\text{dyn Trait}]$$
+
+---
+
+## 🆕 Rust Book Ch 15.2 对齐: Deref Trait形式化 {#-rust-book-ch-152-对齐-deref-trait形式化}
+
+> **新增日期**: 2026-03-05
+> **对应**: Rust Book Ch 15.2 Treating Smart Pointers Like Regular References
+> **修复**: GAP-DEREF-01
+
+### 定义 DEREF-1 (Deref Trait)
+
+`Deref` trait允许类型像引用一样被解引用，实现自定义解引用行为。
+
+```rust
+trait Deref {
+    type Target;
+    fn deref(&self) -> &Self::Target;
+}
+```
+
+**形式化定义**:
+
+$$
+\text{Deref}[T] = \{ \text{deref} : \&T \to \&\text{Target} \}
+$$
+
+**类型规则**:
+
+```text
+Γ ⊢ x : T
+T : Deref
+─────────────────────────────── (DEREF-1)
+Γ ⊢ *x : T::Target
+
+Γ ⊢ x : T
+T : Deref<Target = U>
+─────────────────────────────── (DEREF-2)
+Γ ⊢ &*x : &U
+```
+
+### 定义 DEREF-2 (DerefMut Trait)
+
+`DerefMut` trait允许可变解引用。
+
+```rust
+trait DerefMut: Deref {
+    fn deref_mut(&mut self) -> &mut Self::Target;
+}
+```
+
+**形式化定义**:
+
+$$
+\text{DerefMut}[T] = \{ \text{deref\_mut} : \&mut\, T \to \&mut\, \text{Target} \}
+$$
+
+**约束**:
+$$
+T : \text{DerefMut} \rightarrow T : \text{Deref}
+$$
+
+### 定义 DEREF-3 (解引用强制转换 Deref Coercion)
+
+解引用强制转换是编译器自动应用`Deref::deref`的隐式转换。
+
+$$
+\text{DerefCoerce}(x : T, U) = \begin{cases}
+\text{Some}(\&x\text{.deref()}) & \text{if } T : \text{Deref<Target = U>} \\
+\text{None} & \text{otherwise}
+\end{cases}
+$$
+
+**类型转换规则**:
+
+```text
+Γ ⊢ x : T
+T : Deref<Target = U>
+─────────────────────────────── (DEREF-COERCE)
+Γ ⊢ x : T  ~>  &U  (自动解引用)
+```
+
+### 定理 DEREF-T1 (Deref一致性)
+
+对于实现`Deref<Target = U>`的类型`T`，`*x`的行为与`&U`一致。
+
+$$
+\forall x : T, T : \text{Deref<Target = U>}.\ \text{semantics}(*x) = \text{semantics}(\&x.\text{deref}())
+$$
+
+### 定理 DEREF-T2 (Deref传递性)
+
+解引用强制转换可以链式应用。
+
+$$
+\frac{T_1 : \text{Deref<Target = } T_2> \quad T_2 : \text{Deref<Target = } T_3>}{T_1 \rightsquigarrow T_3}
+$$
+
+**示例**: `&&&&String` → `&&&str` → `&&str` → `&str`
+
+### 定理 DEREF-T3 (DerefMut排他性)
+
+可变解引用要求独占访问。
+
+$$
+\forall x : T, T : \text{DerefMut}.\ \text{borrow\_mut}(*x) \rightarrow \neg\exists y.\ \text{borrow}(y, \text{data}(x))
+$$
+
+### 代码示例
+
+#### 示例1: Box解引用
+
+```rust
+fn box_deref() {
+    let x = Box::new(5);
+    assert_eq!(*x, 5);  // 解引用Box<i32>得到i32
+
+    // 形式化: Box<i32> : Deref<Target = i32>
+    // *x 等价于 *(x.deref())
+}
+```
+
+#### 示例2: 自定义智能指针
+
+```rust
+struct MyBox<T>(T);
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
+
+fn custom_smart_pointer() {
+    let my_box = MyBox(String::from("hello"));
+
+    // Deref强制转换: &MyBox<String> → &String → &str
+    let slice: &str = &my_box[..];
+
+    assert_eq!(slice, "hello");
+}
+```
+
+#### 示例3: 函数参数中的Deref强制转换
+
+```rust
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+fn deref_coercion_in_args() {
+    let m = MyBox::new(String::from("Rust"));
+    hello(&m);  // &MyBox<String> → &String → &str
+}
+```
+
+**形式化分析**:
+
+1. `&m`类型: `&MyBox<String>`
+2. `MyBox<String>`: `Deref<Target = String>`
+3. `String`: `Deref<Target = str>`
+4. 最终类型: `&str` (与函数参数匹配)
+
+#### 示例4: DerefMut
+
+```rust
+impl<T> DerefMut for MyBox<T> {
+    fn deref_mut(&mut self) -> &mut T {
+        &mut self.0
+    }
+}
+
+fn deref_mut_example() {
+    let mut my_box = MyBox::new(5);
+    *my_box = 10;  // 可变解引用
+    assert_eq!(*my_box, 10);
+}
+```
+
+### 与智能指针的集成
+
+| 智能指针 | Deref实现 | Target | 用途 |
+| :--- | :--- | :--- | :--- |
+| `Box<T>` | ✅ | `T` | 堆分配 |
+| `Rc<T>` | ✅ | `T` | 共享所有权 |
+| `RefCell<T>` | ✅ | `T` | 内部可变性 |
+| `Arc<T>` | ✅ | `T` | 线程安全共享 |
+| `MutexGuard<T>` | ✅ | `T` | 互斥锁保护 |
+
+### 形式化语义总结
+
+$$
+\begin{align}
+&\text{Deref}[T, U] : \&T \to \&U \\
+&\text{DerefMut}[T, U] : \&mut\, T \to \&mut\, U \\
+&\text{Coerce}(T, U) : T \rightsquigarrow U \quad \text{(自动转换)}
+\end{align}
+$$
+
+**与所有权系统的关系**:
+
+- `Deref`返回共享引用，不转移所有权
+- `DerefMut`返回可变引用，受借用规则约束
+- 解引用强制转换不改变所有权，只改变访问方式
+
+---
+
+**维护者**: Rust Type Theory Research Group
+**新增日期**: 2026-03-05
+**对应Book章节**: Ch 15.2 Treating Smart Pointers Like Regular References
+**状态**: ✅ 已对齐
