@@ -1,9 +1,10 @@
 # Rust所有权系统与并发安全性 —— 形式化分析文档集
 
-> **版本**: 4.0.0  
-> **文档总数**: 300+ 篇  
-> **定理总数**: 500+ 条  
+> **版本**: 4.1.0
+> **文档总数**: 300+ 篇
+> **定理总数**: 1000+ 条
 > **最后更新**: 2026-03-05
+> **对齐版本**: Rust 1.93.1
 
 ---
 
@@ -20,6 +21,7 @@
 | **完整覆盖** | 从理论基础到实际库实现 |
 | **实用导向** | 反例分析、最佳实践、常见陷阱 |
 | **可视化** | 思维导图、对比矩阵、决策树 |
+| **版本对齐** | 对齐Rust 1.93.1最新特性 |
 | **持续更新** | 覆盖Rust生态最新发展 |
 
 ---
@@ -40,40 +42,27 @@
 | 目录 | 内容 |
 |:---|:---|
 | [00-foundations/](00-foundations/) | 线性逻辑、仿射类型、分离逻辑 |
-| [01-core-concepts/](01-core-concepts/) | 所有权、借用、生命周期 |
+| [01-core-concepts/](01-core-concepts/) | 所有权、借用、生命周期、反例分析 |
 | [02-formal-models/](02-formal-models/) | RustBelt、形式化语义 |
 | [formal-theory/](formal-theory/) | 形式化理论 |
 | [formal-proofs/](formal-proofs/) | 定理证明 |
 
-### 工具与实践
+### 可视化资源
 
-| 目录 | 内容 |
+| 目录 | 类型 | 内容 |
+|:---|:---:|:---|
+| [visualizations/](visualizations/) | 思维导图 | 所有权系统全景图 |
+| [matrices/](matrices/) | 对比矩阵 | 安全机制、性能对比 |
+| [decision-trees/](decision-trees/) | 决策树 | 类型选择、并发模型 |
+| [comprehensive-analysis/mindmaps/](comprehensive-analysis/mindmaps/) | 思维导图 | 综合概念图 |
+| [comprehensive-analysis/matrices/](comprehensive-analysis/matrices/) | 矩阵 | 10维度对比 |
+| [comprehensive-analysis/decision-trees/](comprehensive-analysis/decision-trees/) | 决策树 | 模式选择 |
+
+### 最新特性 (Rust 1.93)
+
+| 文档 | 内容 |
 |:---|:---|
-| [03-verification-tools/](03-verification-tools/) | Miri、Kani、Creusot |
-| [04-decidability-analysis/](04-decidability-analysis/) | 类型推断、借用检查复杂度 |
-| [07-references/](07-references/) | 参考文献 |
-| [exercises/](exercises/) | 练习题 |
-
-### 高级主题
-
-| 目录 | 内容 |
-|:---|:---|
-| [08-advanced-topics/](08-advanced-topics/) | 高级所有权技巧 |
-| [11-design-patterns/](11-design-patterns/) | 设计模式 |
-| [12-concurrency-patterns/](12-concurrency-patterns/) | 并发模式 |
-| [13-architecture-patterns/](13-architecture-patterns/) | 架构模式 |
-| [15-application-domains/](15-application-domains/) | 应用领域 |
-
-### 其他资源
-
-| 目录 | 内容 |
-|:---|:---|
-| [archive/](archive/) | 历史报告和中间文档 |
-| [audit_reports/](audit_reports/) | 安全审计报告 |
-| [comparative-analysis/](comparative-analysis/) | 对比分析 |
-| [core-concepts/](core-concepts/) | 核心概念 |
-| [extensions/](extensions/) | 扩展内容 |
-| [visualizations/](visualizations/) | 可视化资源 |
+| [Rust 1.93特性分析](10-research-frontiers/rust-1.93-features-analysis.md) | musl 1.2.5、MaybeUninit新API、unsafe改进 |
 
 ---
 
@@ -85,6 +74,7 @@
 |:---|:---:|:---:|
 | 核心理论证明 | 11 | 50+ |
 | 理论基础 | 20 | 100+ |
+| 可视化资源 | 10 | - |
 | 标准库核心 | 12 | 70+ |
 | 异步运行时 | 20 | 100+ |
 | Web框架/协议 | 14 | 85+ |
@@ -105,29 +95,33 @@
 
 ### 初学者路径
 
-```
+```text
 1. 00-foundations/       → 理论基础
-2. 01-core-concepts/     → 核心概念
-3. comprehensive-analysis/ → 综合分析
-4. exercises/            → 练习题
+2. 01-core-concepts/     → 核心概念 + 反例分析
+3. visualizations/       → 思维导图建立直观认识
+4. decision-trees/       → 学习如何选择类型
+5. comprehensive-analysis/ → 综合分析
+6. exercises/            → 练习题
 ```
 
 ### 进阶开发者路径
 
-```
+```text
 1. 02-formal-models/     → 形式化模型
 2. formal-proofs/        → 定理证明
-3. case-studies/         → 案例分析
-4. async-specialty/      → 异步专题
+3. matrices/             → 对比分析
+4. case-studies/         → 案例分析
+5. async-specialty/      → 异步专题
 ```
 
 ### 架构师路径
 
-```
+```text
 1. 13-architecture-patterns/  → 架构模式
 2. actor-specialty/          → Actor模型
-3. 15-application-domains/   → 应用领域
-4. comparative-analysis/     → 对比分析
+3. 10-research-frontiers/    → 研究前沿
+4. 15-application-domains/   → 应用领域
+5. comparative-analysis/     → 对比分析
 ```
 
 ---
@@ -136,7 +130,7 @@
 
 ```rust
 // 内存安全
-Thm MEMORY-SAFETY: 
+Thm MEMORY-SAFETY:
     ∀程序P. P通过Rust编译器 → P满足内存安全
 
 // 无数据竞争
@@ -154,31 +148,15 @@ Thm ASYNC-SAFETY:
 
 ---
 
-## 可视化资源
+## Rust 1.93.1 新特性
 
-### 思维导图
-
-| 导图 | 位置 |
-|:---|:---|
-| 所有权系统全景 | [comprehensive-analysis/mindmaps/ownership-system-mindmap.md](comprehensive-analysis/mindmaps/ownership-system-mindmap.md) |
-| 借用系统 | [comprehensive-analysis/mindmaps/borrowing-system-mindmap.md](comprehensive-analysis/mindmaps/borrowing-system-mindmap.md) |
-| Actor模型 | [actor-specialty/mindmaps/actor-model-mindmap.md](actor-specialty/mindmaps/actor-model-mindmap.md) |
-
-### 对比矩阵
-
-| 矩阵 | 位置 |
-|:---|:---|
-| 综合概念对比 | [comprehensive-analysis/matrices/comprehensive-comparison-matrix.md](comprehensive-analysis/matrices/comprehensive-comparison-matrix.md) |
-| 安全性分析 | [comprehensive-analysis/matrices/safety-analysis-matrix.md](comprehensive-analysis/matrices/safety-analysis-matrix.md) |
-| Actor框架对比 | [actor-specialty/matrices/actor-framework-matrix.md](actor-specialty/matrices/actor-framework-matrix.md) |
-
-### 决策树
-
-| 决策树 | 位置 |
-|:---|:---|
-| 设计模式选择 | [comprehensive-analysis/decision-trees/pattern-selection.md](comprehensive-analysis/decision-trees/pattern-selection.md) |
-| 并发模型选择 | [comprehensive-analysis/decision-trees/concurrency-model-selection.md](comprehensive-analysis/decision-trees/concurrency-model-selection.md) |
-| Actor框架选择 | [actor-specialty/decision-trees/actor-framework-selection.md](actor-specialty/decision-trees/actor-framework-selection.md) |
+| 特性 | 说明 | 文档 |
+|:---|:---|:---|
+| musl 1.2.5 | DNS解析器改进 | [特性分析](10-research-frontiers/rust-1.93-features-analysis.md) |
+| 全局分配器TLS支持 | 安全使用thread_local | [特性分析](10-research-frontiers/rust-1.93-features-analysis.md) |
+| asm! cfg属性 | 条件汇编 | [特性分析](10-research-frontiers/rust-1.93-features-analysis.md) |
+| MaybeUninit新API | assume_init_drop等 | [特性分析](10-research-frontiers/rust-1.93-features-analysis.md) |
+| deref_nullptr deny | 编译时阻止null解引用 | [特性分析](10-research-frontiers/rust-1.93-features-analysis.md) |
 
 ---
 
@@ -234,7 +212,7 @@ Thm ASYNC-SAFETY:
 
 *本文档集致力于成为Rust所有权系统形式化分析的最全面中文资源。*
 
-*最后更新: 2026-03-05*  
-*版本: 4.0.0*  
-*文档总数: 300+*  
+*最后更新: 2026-03-05*
+*版本: 4.1.0*
+*文档总数: 300+*
 *定理总数: 1000+*
