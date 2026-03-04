@@ -28,6 +28,7 @@
     - [判断题 (TrueFalse)](#判断题-truefalse)
     - [填空题 (FillInBlank)](#填空题-fillinblank)
     - [代码块格式](#代码块格式)
+  - [测验文件结构示例](#测验文件结构示例)
   - [常见问题](#常见问题)
     - [Q: mdbook-quiz 和 mdbook 版本不兼容怎么办？](#q-mdbook-quiz-和-mdbook-版本不兼容怎么办)
     - [Q: 测验不显示怎么办？](#q-测验不显示怎么办)
@@ -221,15 +222,15 @@ difficulty = "进阶"
 在 prompt 中使用代码块：
 
 ```toml
-prompt = '''以下代码的输出是什么？
+    prompt = '''以下代码的输出是什么？
 
-```rust
-fn main() {
-    println!("Hello");
-}
-```
+    ```rust
+    fn main() {
+        println!("Hello");
+    }
+    ```
 
-选择正确答案：'''
+    选择正确答案：'''
 
 ```
 

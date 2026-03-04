@@ -50,7 +50,7 @@
 
 ✅ **完整编译管道**
 
-```
+```text
 源代码 → HIR → 状态机生成 → Pin适配 → MIR → LLVM IR → 机器码
 ```
 
@@ -74,7 +74,7 @@
 
 ✅ **组件全图**
 
-```
+```text
 应用代码 → Future抽象 → {任务系统, 调度系统, IO系统} → 线程池 → OS
 ```
 
@@ -86,7 +86,7 @@
 
 ✅ **执行器状态转换**
 
-```
+```text
 Created → Scheduled → Running ↔ Blocked → Completed
 ```
 
@@ -119,7 +119,7 @@ async { e1; e2 } ⟺ λk. desugar(e1)(λ_. desugar(e2)k)
 
 ✅ **状态机 ↔ 协程**
 
-```
+```text
 poll() ↔ resume()
 Pending ↔ Yield
 Ready(T) ↔ Return(T)
@@ -159,7 +159,7 @@ Pin<&mut Self> ⟹ 状态机不移动 ⟹ 自引用指针有效
 
 ✅ **单次poll微观流程**
 
-```
+```text
 T0: 调用poll
 T1: Pin投影
 T2: 状态匹配
@@ -171,13 +171,13 @@ T6: 返回Poll<T>
 
 ✅ **唤醒到再执行**
 
-```
+```text
 IO就绪 → Reactor检测 → 查找Waker → wake() → 任务入队 → 线程唤醒 → 重建Context → 重新poll
 ```
 
 ✅ **任务生命周期**
 
-```
+```text
 Created → Scheduled → Running ↔ Blocked → Completed
 ```
 
@@ -236,7 +236,7 @@ Created → Scheduled → Running ↔ Blocked → Completed
 
 ### 内存安全 (5个)
 
-```
+```text
 ASYNC-SAFETY-1:      ∀f: async fn. safe(f) ∧ no_data_race(f)
 PIN-SOUNDNESS-1:     Pin<&mut T> ∧ self_ref(T) ⟹ ¬dangling_ptr(T)
 PIN-DROP-1:          drop(Pin<Box<T>>) ⟹ T::drop在Pin上下文中调用
@@ -246,7 +246,7 @@ LIFETIME-PRESERVATION-1: ∀f<'a>. state_machine(f): Future<'a>
 
 ### 执行正确性 (5个)
 
-```
+```text
 ASYNC-COMPLETENESS-1: ready(t) ⟹ eventually executed(t)
 POLL-CONTRACT-1:      幂等性 ∧ 不阻塞 ∧ 唤醒契约
 REACTOR-DISPATCH-1:   IO就绪(fd) ⟹ waker.wake()有限时间内调用
@@ -255,7 +255,7 @@ EXECUTION-COMPLETENESS-1: spawn(task) ⟹ eventually execute(task)
 
 ### 调度算法 (5个)
 
-```
+```text
 FAIRNESS-1:           ∀t. P(被窃取)>0 ⟹ 无饥饿
 BALANCE-1:            |Q_i - Q_j| ≤ k·log(n)
 WORKSTEAL-FAIRNESS-1: 工作窃取调度器保证无饥饿
@@ -263,7 +263,7 @@ WORKSTEAL-FAIRNESS-1: 工作窃取调度器保证无饥饿
 
 ### 等价性 (5个)
 
-```
+```text
 CPS-EQUIVALENCE-1:    async/await(e) ⟺ CPS ⟺ callback(e)
 CPS-EQUIV-1:          async_await(e) ⟺ desugar(e)
 COROUTINE-EQUIV-1:    Future ≅ Coroutine<(), T>
@@ -272,7 +272,7 @@ MONAD-LAW-1:          Future满足单子三定律
 
 ### 并发模型 (5个)
 
-```
+```text
 TYPE-SAFETY-1:        Rust async ⟹ compile_time ⊢ data_race_free
 THROUGHPUT-1:         max_concurrency(async) ≈ 100 × max_concurrency(threads)
 LAZY-EAGER-1:         Promise: eager, Future: lazy
@@ -282,7 +282,7 @@ ISOLATION-1:          Actor: strong_isolation, Async: shared_memory
 
 ### 取消安全 (3个)
 
-```
+```text
 CANCEL-SAFE-1:        检查取消标志 ⟹ 可以安全取消
 CANCELPOINT-1:        取消只应在状态一致点发生
 ```
@@ -358,7 +358,7 @@ CANCELPOINT-1:        取消只应在状态一致点发生
 
 ## 📈 统计信息
 
-```
+```text
 文档数量:     5篇核心文档
 总页数:       102+ 页
 代码示例:     100+ 个

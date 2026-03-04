@@ -44,7 +44,7 @@
 
 ✅ **完整编译管道**
 
-```
+```text
 源代码 → HIR → 状态机生成 → Pin适配 → MIR → LLVM IR → 机器码
 ```
 
@@ -61,7 +61,7 @@
 
 ✅ **组件全图**
 
-```
+```text
 应用代码 → Future抽象 → {任务系统, 调度系统, IO系统} → 线程池 → OS
 ```
 
@@ -87,7 +87,7 @@ async { e1; e2 } ⟺ λk. desugar(e1)(λ_. desugar(e2)k)
 
 ✅ **状态机 ↔ 协程**
 
-```
+```text
 poll() ↔ resume(), Pending ↔ Yield, Ready(T) ↔ Return(T)
 ```
 
@@ -114,14 +114,14 @@ Pin<&mut Self> ⟹ 状态机不移动 ⟹ 自引用指针有效
 
 ✅ **单次poll流程**
 
-```
+```text
 T0: poll调用 → T1: Pin投影 → T2: 状态匹配 → T3: poll子Future
 → T4: 处理结果 → T5: 注册唤醒 → T6: 返回Poll<T>
 ```
 
 ✅ **唤醒到再执行**
 
-```
+```text
 IO就绪 → Reactor检测 → 查找Waker → wake() → 任务入队
 → 线程唤醒 → 重建Context → 重新poll
 ```
@@ -149,28 +149,28 @@ IO就绪 → Reactor检测 → 查找Waker → wake() → 任务入队
 
 ### 内存安全
 
-```
+```text
 ASYNC-SAFETY-1:      ∀f: async fn. safe(f) ∧ no_data_race(f)
 PIN-SOUNDNESS-1:     Pin<&mut T> ∧ self_ref(T) ⟹ ¬dangling_ptr(T)
 ```
 
 ### 执行正确性
 
-```
+```text
 ASYNC-COMPLETENESS-1: ready(t) ⟹ eventually executed(t)
 POLL-CONTRACT-1:      幂等性 ∧ 不阻塞 ∧ 唤醒契约
 ```
 
 ### 调度算法
 
-```
+```text
 FAIRNESS-1:           ∀t. 无饥饿保证
 BALANCE-1:            负载均衡边界
 ```
 
 ### 等价性
 
-```
+```text
 CPS-EQUIVALENCE-1:    async/await ⟺ CPS ⟺ callback
 MONAD-LAW-1:          Future满足单子三定律
 ```
@@ -218,7 +218,7 @@ MONAD-LAW-1:          Future满足单子三定律
 
 ## 📊 统计
 
-```
+```text
 总页数:       102+
 代码示例:     100+
 定理:         95+
