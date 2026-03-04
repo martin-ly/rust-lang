@@ -1,18 +1,39 @@
 # Rust 系统编程
 
-系统编程是 Rust 的核心应用领域之一。Rust 的设计目标就是成为 C/C++ 的现代替代品，在保证同等性能的同时提供内存安全和线程安全保证。本文档将深入探讨 Rust 在系统编程领域的应用。
+系统编程是 Rust 的核心应用领域之一。Rust 的设计目标就是成为 C/C++ 的现代替代品，在保证同等性能的同时提供内存安全和线程安全保证。
+本文档将深入探讨 Rust 在系统编程领域的应用。
 
 ## 目录
 
-1. [系统编程概述](#系统编程概述)
-2. [内存管理](#内存管理)
-3. [操作系统开发](#操作系统开发)
-4. [设备驱动](#设备驱动)
-5. [文件系统](#文件系统)
-6. [网络协议栈](#网络协议栈)
-7. [虚拟化与容器](#虚拟化与容器)
-8. [性能优化](#性能优化)
-9. [最佳实践](#最佳实践)
+- [Rust 系统编程](#rust-系统编程)
+  - [目录](#目录)
+  - [系统编程概述](#系统编程概述)
+    - [什么是系统编程](#什么是系统编程)
+    - [Rust 在系统编程中的优势](#rust-在系统编程中的优势)
+    - [系统编程核心概念](#系统编程核心概念)
+  - [内存管理](#内存管理)
+    - [物理内存管理](#物理内存管理)
+    - [虚拟内存管理](#虚拟内存管理)
+  - [操作系统开发](#操作系统开发)
+    - [引导加载程序](#引导加载程序)
+  - [设备驱动](#设备驱动)
+    - [字符设备驱动](#字符设备驱动)
+    - [块设备驱动](#块设备驱动)
+  - [文件系统](#文件系统)
+    - [简单文件系统实现](#简单文件系统实现)
+  - [网络协议栈](#网络协议栈)
+    - [TCP/IP 实现](#tcpip-实现)
+  - [虚拟化与容器](#虚拟化与容器)
+    - [OCI 容器运行时](#oci-容器运行时)
+  - [性能优化](#性能优化)
+    - [零拷贝技术](#零拷贝技术)
+    - [SIMD 优化](#simd-优化)
+  - [最佳实践](#最佳实践)
+    - [1. 错误处理](#1-错误处理)
+    - [2. 内存安全模式](#2-内存安全模式)
+    - [3. 并发安全](#3-并发安全)
+  - [总结](#总结)
+  - [参考资源](#参考资源)
 
 ---
 
@@ -20,7 +41,8 @@
 
 ### 什么是系统编程
 
-系统编程是指开发直接与计算机硬件交互或与操作系统内核紧密集成的软件。典型的系统编程任务包括：
+系统编程是指开发直接与计算机硬件交互或与操作系统内核紧密集成的软件。
+典型的系统编程任务包括：
 
 - 操作系统内核开发
 - 设备驱动程序
@@ -59,13 +81,13 @@ impl SystemBuffer {
     /// 分配指定大小的内存
     pub fn new(size: usize) -> Option<Self> {
         let layout = Layout::array::<u8>(size).ok()?;
-        
+
         unsafe {
             let ptr = alloc(layout);
             if ptr.is_null() {
                 return None;
             }
-            
+
             Some(Self {
                 ptr: NonNull::new_unchecked(ptr),
                 layout,
@@ -73,26 +95,26 @@ impl SystemBuffer {
             })
         }
     }
-    
+
     /// 获取原始指针
     pub fn as_ptr(&self) -> *mut u8 {
         self.ptr.as_ptr()
     }
-    
+
     /// 获取切片视图
     pub fn as_slice(&self) -> &[u8] {
         unsafe {
             std::slice::from_raw_parts(self.ptr.as_ptr(), self.size)
         }
     }
-    
+
     /// 获取可变切片视图
     pub fn as_mut_slice(&mut self) -> &mut [u8] {
         unsafe {
             std::slice::from_raw_parts_mut(self.ptr.as_ptr(), self.size)
         }
     }
-    
+
     /// 清零内存
     pub fn zero(&mut self) {
         unsafe {
@@ -134,11 +156,11 @@ pub struct PhysFrame {
 
 impl PhysFrame {
     pub const SIZE: usize = 4096; // 4KB 页
-    
+
     pub fn new(number: usize) -> Self {
         Self { number }
     }
-    
+
     pub fn start_address(&self) -> usize {
         self.number * Self::SIZE
     }
@@ -155,25 +177,25 @@ impl FrameAllocator {
     pub fn new(total_memory: usize) -> Self {
         let total_frames = total_memory / PhysFrame::SIZE;
         let mut free_frames = Vec::with_capacity(total_frames);
-        
+
         for i in 0..total_frames {
             free_frames.push(PhysFrame::new(i));
         }
-        
+
         Self {
             free_frames,
             used_frames: BTreeMap::new(),
             total_frames,
         }
     }
-    
+
     /// 分配一个物理帧
     pub fn allocate(&mut self) -> Option<PhysFrame> {
         let frame = self.free_frames.pop()?;
         self.used_frames.insert(frame.number, frame);
         Some(frame)
     }
-    
+
     /// 分配连续的多个帧
     pub fn allocate_contiguous(&mut self, count: usize) -> Option<Vec<PhysFrame>> {
         // 查找连续的可用帧
@@ -182,7 +204,7 @@ impl FrameAllocator {
             if window.iter().enumerate().all(|(i, f)| f.number == first + i) {
                 let start_idx = self.free_frames.iter()
                     .position(|f| f.number == first)?;
-                
+
                 let mut frames = Vec::with_capacity(count);
                 for _ in 0..count {
                     let frame = self.free_frames.remove(start_idx);
@@ -194,14 +216,14 @@ impl FrameAllocator {
         }
         None
     }
-    
+
     /// 释放物理帧
     pub fn deallocate(&mut self, frame: PhysFrame) {
         if self.used_frames.remove(&frame.number).is_some() {
             self.free_frames.push(frame);
         }
     }
-    
+
     /// 获取使用统计
     pub fn stats(&self) -> FrameStats {
         FrameStats {
@@ -230,11 +252,11 @@ impl ThreadSafeFrameAllocator {
             inner: Mutex::new(FrameAllocator::new(total_memory)),
         }
     }
-    
+
     pub fn allocate(&self) -> Option<PhysFrame> {
         self.inner.lock().ok()?.allocate()
     }
-    
+
     pub fn deallocate(&self, frame: PhysFrame) {
         if let Ok(mut inner) = self.inner.lock() {
             inner.deallocate(frame);
@@ -258,15 +280,15 @@ impl VirtAddr {
     pub fn new(addr: usize) -> Self {
         Self(addr)
     }
-    
+
     pub fn as_usize(&self) -> usize {
         self.0
     }
-    
+
     pub fn page_number(&self) -> usize {
         self.0 / PageTableEntry::PAGE_SIZE
     }
-    
+
     pub fn page_offset(&self) -> usize {
         self.0 % PageTableEntry::PAGE_SIZE
     }
@@ -294,7 +316,7 @@ impl PageFlags {
             ..Default::default()
         }
     }
-    
+
     pub fn read_write() -> Self {
         Self {
             present: true,
@@ -302,7 +324,7 @@ impl PageFlags {
             ..Default::default()
         }
     }
-    
+
     pub fn user() -> Self {
         Self {
             present: true,
@@ -322,11 +344,11 @@ pub struct PageTableEntry {
 
 impl PageTableEntry {
     pub const PAGE_SIZE: usize = 4096;
-    
+
     pub fn new(frame: PhysFrame, flags: PageFlags) -> Self {
         Self { frame, flags }
     }
-    
+
     pub fn is_present(&self) -> bool {
         self.flags.present
     }
@@ -343,22 +365,22 @@ impl PageTable {
             entries: HashMap::new(),
         }
     }
-    
+
     /// 映射虚拟页到物理帧
     pub fn map(&mut self, virt_page: usize, frame: PhysFrame, flags: PageFlags) {
         self.entries.insert(virt_page, PageTableEntry::new(frame, flags));
     }
-    
+
     /// 取消映射
     pub fn unmap(&mut self, virt_page: usize) -> Option<PageTableEntry> {
         self.entries.remove(&virt_page)
     }
-    
+
     /// 查找页表项
     pub fn lookup(&self, virt_page: usize) -> Option<&PageTableEntry> {
         self.entries.get(&virt_page)
     }
-    
+
     /// 虚拟地址转物理地址
     pub fn translate(&self, virt_addr: VirtAddr) -> Option<usize> {
         let entry = self.lookup(virt_addr.page_number())?;
@@ -367,7 +389,7 @@ impl PageTable {
         }
         Some(entry.frame.start_address() + virt_addr.page_offset())
     }
-    
+
     /// 获取所有映射
     pub fn mappings(&self) -> &HashMap<usize, PageTableEntry> {
         &self.entries
@@ -389,27 +411,27 @@ impl AddressSpace {
             heap_end: VirtAddr::new(0x1000),
         }
     }
-    
+
     /// 分配虚拟内存区域
     pub fn allocate(&mut self, size: usize, allocator: &mut FrameAllocator) -> Option<VirtAddr> {
         let pages_needed = (size + PageTableEntry::PAGE_SIZE - 1) / PageTableEntry::PAGE_SIZE;
         let start_addr = self.heap_end;
-        
+
         for i in 0..pages_needed {
             let frame = allocator.allocate()?;
             let virt_page = (self.heap_end.as_usize() / PageTableEntry::PAGE_SIZE) + i;
             self.page_table.map(virt_page, frame, PageFlags::read_write());
         }
-        
+
         self.heap_end = VirtAddr::new(self.heap_end.as_usize() + pages_needed * PageTableEntry::PAGE_SIZE);
         Some(start_addr)
     }
-    
+
     /// 释放虚拟内存区域
     pub fn deallocate(&mut self, addr: VirtAddr, size: usize, allocator: &mut FrameAllocator) {
         let pages = (size + PageTableEntry::PAGE_SIZE - 1) / PageTableEntry::PAGE_SIZE;
         let start_page = addr.page_number();
-        
+
         for i in 0..pages {
             if let Some(entry) = self.page_table.unmap(start_page + i) {
                 allocator.deallocate(entry.frame);
@@ -438,14 +460,14 @@ use core::panic::PanicInfo;
 pub extern "C" fn _start() -> ! {
     init_vga_buffer();
     println!("Kernel booting...");
-    
+
     unsafe { init_memory(); }
     init_interrupts();
     init_scheduler();
-    
+
     println!("Kernel initialized successfully!");
     start_init_process();
-    
+
     loop { hlt(); }
 }
 
@@ -564,7 +586,7 @@ pub struct SerialPort {
 impl SerialPort {
     pub const COM1: usize = 0x3F8;
     pub const BAUD_115200: u16 = 1;
-    
+
     pub fn init(base: usize) -> Option<Self> {
         let port = Self { base };
         unsafe {
@@ -582,27 +604,27 @@ impl SerialPort {
         }
         Some(port)
     }
-    
+
     pub fn is_transmit_empty(&self) -> bool {
         unsafe { self.read_register(UartRegister::LineStatus) & 0x20 != 0 }
     }
-    
+
     pub fn send(&self, data: u8) {
         unsafe { while !self.is_transmit_empty() {} self.write_register(UartRegister::Data, data); }
     }
-    
+
     pub fn is_data_available(&self) -> bool {
         unsafe { self.read_register(UartRegister::LineStatus) & 0x01 != 0 }
     }
-    
+
     pub fn receive(&self) -> Option<u8> {
         unsafe { if self.is_data_available() { Some(self.read_register(UartRegister::Data)) } else { None } }
     }
-    
+
     unsafe fn read_register(&self, reg: UartRegister) -> u8 {
         core::ptr::read_volatile((self.base + reg as usize) as *const u8)
     }
-    
+
     unsafe fn write_register(&self, reg: UartRegister, value: u8) {
         core::ptr::write_volatile((self.base + reg as usize) as *mut u8, value);
     }
@@ -676,21 +698,21 @@ impl AhciController {
         let registers = &mut *(mmio_base as *mut AhciRegisters);
         let ports_implemented = registers.ports_implemented;
         let port_count = ports_implemented.count_ones() as usize;
-        
+
         registers.global_host_control |= 0x80000000;
         registers.global_host_control |= 0x00000001;
         while registers.global_host_control & 0x00000001 != 0 {}
-        
+
         let mut ports = Vec::with_capacity(port_count);
         for i in 0..32 {
             if ports_implemented & (1 << i) != 0 {
                 ports.push(AhciPort { index: i, registers: &mut registers.ports[i] });
             }
         }
-        
+
         Ok(Self { registers, ports })
     }
-    
+
     pub fn read_block(&mut self, port_idx: usize, lba: u64, buffer: &mut [u8]) -> Result<(), AhciError> {
         let _port = self.ports.get_mut(port_idx).ok_or(AhciError::InvalidPort)?;
         Ok(())
@@ -728,7 +750,7 @@ pub struct SuperBlock {
 
 impl SuperBlock {
     pub const MAGIC: u32 = 0x52555354;
-    
+
     pub fn new(block_size: u32, block_count: u64) -> Self {
         Self {
             magic: Self::MAGIC,
@@ -785,14 +807,14 @@ impl FileSystem {
     pub fn new(block_size: u32, block_count: u64) -> Self {
         Self { superblock: SuperBlock::new(block_size, block_count), inode_cache: BTreeMap::new() }
     }
-    
+
     pub fn create_file(&mut self, parent: u64, name: &str) -> Result<Inode, FsError> {
         let inode_num = self.allocate_inode()?;
         let inode = Inode::new(inode_num, InodeType::File);
         self.inode_cache.insert(inode_num, inode.clone());
         Ok(inode)
     }
-    
+
     pub fn create_directory(&mut self, parent: u64, name: &str) -> Result<Inode, FsError> {
         let inode_num = self.allocate_inode()?;
         let mut inode = Inode::new(inode_num, InodeType::Directory);
@@ -800,7 +822,7 @@ impl FileSystem {
         self.inode_cache.insert(inode_num, inode.clone());
         Ok(inode)
     }
-    
+
     fn allocate_inode(&mut self) -> Result<u64, FsError> {
         static mut NEXT_INODE: u64 = 2;
         unsafe { let inode = NEXT_INODE; NEXT_INODE += 1; Ok(inode) }
@@ -892,7 +914,7 @@ impl TcpConnection {
         Self { state: TcpState::Closed, snd_una: 0, snd_nxt: 0, snd_wnd: 65535,
                rcv_nxt: 0, rcv_wnd: 65535, send_buffer: VecDeque::new(), recv_buffer: VecDeque::new() }
     }
-    
+
     pub fn handle_packet(&mut self, header: &TcpHeader, data: &[u8]) -> Option<TcpPacket> {
         match self.state {
             TcpState::Listen => {
@@ -910,7 +932,7 @@ impl TcpConnection {
             _ => None,
         }
     }
-    
+
     fn build_packet(&mut self, flags: u8, data: &[u8]) -> TcpPacket {
         let header = TcpHeader {
             src_port: 0, dst_port: 0,
@@ -996,12 +1018,12 @@ impl Container {
         let config_data = fs::read_to_string(config_path)?;
         let config: RuntimeConfig = serde_json::from_str(&config_data)?;
         let rootfs = Path::new(bundle).join(&config.root.path);
-        
+
         Ok(Self { id: id.to_string(), bundle: bundle.to_string(),
                   rootfs: rootfs.to_string_lossy().to_string(),
                   state: ContainerState::Creating, config })
     }
-    
+
     pub fn start(&mut self) -> Result<(), ContainerError> {
         let mut cmd = Command::new(&self.config.process.args[0]);
         cmd.args(&self.config.process.args[1..])
@@ -1009,18 +1031,18 @@ impl Container {
             .stdin(Stdio::inherit())
             .stdout(Stdio::inherit())
             .stderr(Stdio::inherit());
-        
+
         let mut child = cmd.spawn()?;
         child.wait()?;
         self.state = ContainerState::Running;
         Ok(())
     }
-    
+
     pub fn stop(&mut self) -> Result<(), ContainerError> {
         self.state = ContainerState::Stopped;
         Ok(())
     }
-    
+
     pub fn delete(&self) -> Result<(), ContainerError> {
         Ok(())
     }
@@ -1055,11 +1077,11 @@ use std::os::unix::io::AsRawFd;
 pub fn sendfile(out_fd: &File, in_fd: &File, offset: Option<&mut i64>, count: usize) -> io::Result<usize> {
     let mut off = offset.map(|o| *o).unwrap_or(0);
     let off_ptr = offset.map(|_| &mut off as *mut _).unwrap_or(std::ptr::null_mut());
-    
+
     let result = unsafe {
         libc::sendfile(out_fd.as_raw_fd(), in_fd.as_raw_fd(), off_ptr, count)
     };
-    
+
     if result < 0 { return Err(io::Error::last_os_error()); }
     if let Some(o) = offset { *o = off; }
     Ok(result as usize)
@@ -1078,10 +1100,10 @@ impl ZeroCopyReader {
         let mmap = unsafe { Mmap::map(file)? };
         Ok(Self { mmap, position: 0 })
     }
-    
+
     pub fn as_slice(&self) -> &[u8] { &self.mmap[self.position..] }
     pub fn entire_file(&self) -> &[u8] { &self.mmap[..] }
-    
+
     pub fn find(&self, pattern: &[u8]) -> Option<usize> {
         self.mmap.windows(pattern.len()).position(|w| w == pattern)
     }
@@ -1102,23 +1124,23 @@ pub fn simd_find(haystack: &[u8], needle: u8) -> Option<usize> {
     if haystack.len() < 32 {
         return haystack.iter().position(|&b| b == needle);
     }
-    
+
     unsafe {
         let needle_vec = _mm256_set1_epi8(needle as i8);
         let chunks = haystack.chunks_exact(32);
         let remainder = chunks.remainder();
-        
+
         for (i, chunk) in chunks.enumerate() {
             let chunk_vec = _mm256_loadu_si256(chunk.as_ptr() as *const __m256i);
             let cmp = _mm256_cmpeq_epi8(chunk_vec, needle_vec);
             let mask = _mm256_movemask_epi8(cmp);
-            
+
             if mask != 0 {
                 let bit_index = mask.trailing_zeros() as usize;
                 return Some(i * 32 + bit_index);
             }
         }
-        
+
         haystack.len() - remainder.len() + remainder.iter().position(|&b| b == needle)?
     }
 }
@@ -1128,7 +1150,7 @@ pub fn simd_find(haystack: &[u8], needle: u8) -> Option<usize> {
 pub fn simd_add(a: &[f32], b: &[f32], result: &mut [f32]) {
     assert_eq!(a.len(), b.len());
     assert_eq!(a.len(), result.len());
-    
+
     unsafe {
         let chunks = a.len() / 8;
         for i in 0..chunks {
@@ -1137,7 +1159,7 @@ pub fn simd_add(a: &[f32], b: &[f32], result: &mut [f32]) {
             let sum = _mm256_add_ps(a_vec, b_vec);
             _mm256_storeu_ps(result.as_mut_ptr().add(i * 8), sum);
         }
-        
+
         for i in (chunks * 8)..a.len() {
             result[i] = a[i] + b[i];
         }
@@ -1199,18 +1221,18 @@ impl MappedRegion {
             libc::mmap(std::ptr::null_mut(), size, libc::PROT_READ | libc::PROT_WRITE,
                        libc::MAP_PRIVATE | libc::MAP_ANONYMOUS, -1, 0)
         };
-        
+
         if addr == libc::MAP_FAILED {
             return None;
         }
-        
+
         Some(Self { addr: addr as *mut u8, size })
     }
-    
+
     pub fn as_slice(&self) -> &[u8] {
         unsafe { std::slice::from_raw_parts(self.addr, self.size) }
     }
-    
+
     pub fn as_mut_slice(&mut self) -> &mut [u8] {
         unsafe { std::slice::from_raw_parts_mut(self.addr, self.size) }
     }
@@ -1251,7 +1273,7 @@ impl<T> SpinLock<T> {
     pub const fn new(data: T) -> Self {
         Self { locked: AtomicBool::new(false), data: UnsafeCell::new(data) }
     }
-    
+
     pub fn lock(&self) -> SpinLockGuard<T> {
         while self.locked.compare_exchange_weak(false, true, Ordering::Acquire, Ordering::Relaxed).is_err() {
             while self.locked.load(Ordering::Relaxed) {
