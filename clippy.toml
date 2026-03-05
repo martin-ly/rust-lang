@@ -117,7 +117,7 @@ absolute-paths-max-segments = 5
 third-party = true
 
 # 避免破坏导出API
-avoid-breaking-exported-api = true
+avoid-breaking-exported-api = false
 
 # 检查私有项目
 check-private-items = false
@@ -138,7 +138,10 @@ enforce-iter-loop-reborrow = true
 enforced-import-renames = []
 
 # 最小Rust版本
-msrv = "1.92.0"
+msrv = "1.94.0"
+
+# 允许近似值常量（用于教学目的）
+allow-approx-constant = true
 
 # 公共下划线字段行为
 pub-underscore-fields-behavior = "PubliclyExported"

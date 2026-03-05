@@ -82,8 +82,8 @@ use std::cmp::Ordering;
 /// use c08_algorithms::algorithms::formal_verification_examples::binary_search_verified;
 ///
 /// let arr = vec![1, 3, 5, 7, 9];
-/// assert_eq!(binary_search_verified(&arr, 5), Some(2));
-/// assert_eq!(binary_search_verified(&arr, 4), None);
+/// assert_eq!(binary_search_verified(&arr, &5), Some(2));
+/// assert_eq!(binary_search_verified(&arr, &4), None);
 /// ```
 ///
 /// ## 形式化验证工具

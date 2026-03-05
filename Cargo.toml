@@ -19,7 +19,7 @@ members = [
 
 [workspace.package]
 edition = "2024"
-rust-version = "1.93.1" # 使用最新稳定版本 (Rust 1.93.1)
+rust-version = "1.94.0" # 使用最新稳定版本 (Rust 1.94.0)
 
 
 [profile.release]
@@ -96,11 +96,11 @@ codegen-units = 1
 opt-level = 2
 
 # 工作区级别的依赖版本统一 - 2026年3月4日最新稳定版本
-# 更新时间: 2026-03-04 (cargo update 锁定 17 包至 Rust 1.93.1 兼容版本)
+# 更新时间: 2026-03-06 (cargo update 锁定至 Rust 1.94.0 兼容版本)
 # 更新包: aws-lc-rs, aws-lc-sys, const_fn, getrandom, if-addrs, if-watch, ipnet, jiff,
 #         netlink-packet-core, netlink-packet-route, netlink-proto, nix, quote, rtnetlink, tokio
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
-# rust-version: 1.93.1
+# rust-version: 1.94.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
 # 网络和 HTTP 相关 - 2025年12月11日最新稳定版本
@@ -385,7 +385,7 @@ dashmap = "6.1.0"  # 更新至最新候选版本
 # parking_lot: 更紧凑高效的同步原语实现 - 版本 0.12+ (字母索引)
 parking_lot = "0.12.5"
 # syn: 语法解析库 - 2026年2月19日 cargo update
-syn = "2.0.116"
+syn = "2.0.117"
 
 # 测试相关 - 2025年12月11日最新稳定版本
 # mockall: 强大的模拟对象库，用于单元测试 - 版本 0.13+ (字母索引)
