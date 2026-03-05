@@ -51,7 +51,7 @@
 
 ### 1.1 核心概念
 
-```
+```text
 内部可变性 (Interior Mutability):
 
 定义: 允许在拥有不可变引用(&T)的情况下修改数据
@@ -141,7 +141,7 @@ fn cell_limitations() {
 
 **为什么？**
 
-```
+```text
 Cell<T> 的工作原理：
 
 set 方法实际上是这样实现的：
@@ -158,7 +158,7 @@ fn set(&self, val: T) {
 
 ### 2.3 形式化语义
 
-```
+```text
 Cell<T> 的分离逻辑表示 (简化):
 
 Cell(x) ≡ x ↦ v  其中 v: T, T: Copy
@@ -200,7 +200,7 @@ fn refcell_basics() {
 
 ### 3.2 运行时借用规则
 
-```
+```text
 RefCell 的借用规则（运行时强制执行）：
 
 1. 任意数量的不可变借用 (&T)
@@ -266,7 +266,7 @@ fn safe_refcell_usage() {
 
 ### 3.5 形式化语义
 
-```
+```text
 RefCell<T> 的分离逻辑表示：
 
 RefCell(x) ≡ x ↦ (state, value)
@@ -358,7 +358,7 @@ fn rwlock_example() {
 
 ### 5.1 类型系统视角
 
-```
+```text
 内部可变性的类型系统编码：
 
 &T           →  编译时不可变保证
@@ -492,7 +492,7 @@ fn potential_issue() {
 
 ### 7.1 成本分析
 
-```
+```text
 Cell<T> 成本：
 - get/set: 内存访问（与直接访问相同）
 - 没有借用检查开销
@@ -542,7 +542,7 @@ let lock: RwLock<Vec<i32>> = RwLock::new(vec![]);
 
 ### 8.1 与所有权的关系
 
-```
+```text
 内部可变性是所有权系统的补充：
 
 编译时借用检查：

@@ -62,7 +62,7 @@ fn move_semantics() {
 
 **形式化直觉**:
 
-```
+```text
 移动前:  s1 ──owns──► String("hello")
 
 移动后:  s1 ──X       String("hello") ◄──owns── s2

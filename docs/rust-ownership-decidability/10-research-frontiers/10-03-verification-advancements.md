@@ -90,7 +90,7 @@ MIRI 的核心能力：
 
 Tree Borrows 是 MIRI 中引入的新内存模型，作为 Stacked Borrows 的改进版本。
 
-```
+```text
 Tree Borrows 与 Stacked Borrows 对比
 
 Stacked Borrows:
@@ -190,7 +190,7 @@ MIRI 2024 年的诊断改进：
 
 Prusti 是基于 Viper 验证框架的 Rust 验证工具，使用分离逻辑进行验证。
 
-```
+```text
 Prusti 架构（2024）
 
 Rust 源码
@@ -332,7 +332,7 @@ unsafe fn slice_from_raw_parts<'a, T>(
 
 Prusti 2024 年的性能改进：
 
-```
+```text
 性能基准测试（相对于 2023 年）
 
 小型项目（<1K行）: 验证时间减少 40%
@@ -492,7 +492,7 @@ Kani 验证的最佳实践：
 
 Verus 是由微软研究院开发的 Rust 验证工具，专注于系统级软件的验证。
 
-```
+```text
 Verus 架构
 
 Rust 源码 + Verus 注解
@@ -664,7 +664,7 @@ impl<T> Permission<T> {
 
 Creusot 是基于 Why3 验证平台的 Rust 验证工具，使用 Coma 中间语言。
 
-```
+```text
 Creusot 工作流程
 
 Rust 源码 + 规范注解
@@ -929,7 +929,7 @@ fn lock_order_inconsistent(
 
 ### 工具选择指南
 
-```
+```text
 根据需求选择工具
 
 ┌─────────────────────────────────────────────────────────────┐
@@ -958,7 +958,7 @@ fn lock_order_inconsistent(
 
 未来的验证工具将更加整合：
 
-```
+```text
 统一验证平台愿景（2027+）
 
 Rust 源码

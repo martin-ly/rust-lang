@@ -94,7 +94,7 @@ fn process(input: Option<String>) -> String {
 
 | 概念 | 其他语言 | Rust惯用方式 |
 |------|---------|-------------|
-| 空值 | null | Option<T> |
+| 空值 | null | `Option<T>` |
 | 异常 | try-catch | Result<T, E> + ? |
 | 继承 | class extends | Trait + 组合 |
 | 泛型约束 | where T extends X | where T: X |
@@ -104,7 +104,8 @@ fn process(input: Option<String>) -> String {
 
 ## 2. Option组合子模式
 
-Option是Rust处理可能缺失值的惯用方式。组合子（combinators）提供了声明式的操作方式。
+Option是Rust处理可能缺失值的惯用方式。
+组合子（combinators）提供了声明式的操作方式。
 
 ### 2.1 map
 

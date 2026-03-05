@@ -82,7 +82,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### 1.2 借用规则
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    借用规则 (Borrowing Rules)                        │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -119,7 +119,7 @@ fn main() {
 
 ### 2.2 形式化：共享借用
 
-```
+```text
 在分离逻辑中的表示:
 
 [&T].share(t, v) ≡ ∃ℓ. v = [ℓ] * readonly(ℓ, T)
@@ -170,7 +170,7 @@ fn main() {
 
 ### 3.2 形式化：可变借用
 
-```
+```text
 基于RustBelt的生命周期逻辑:
 
 [&mut T].own(t, [ℓ]) ≡ ∃α. &^α(∃v. ℓ ↦ v * ▷[[T]].own(t, v))
@@ -205,7 +205,7 @@ fn multiple_mut_borrows() {
 
 ### 4.1 别名互斥规则
 
-```
+```text
 读写互斥规则的形式化:
 
 Γ ⊢ e: &mut T    Γ, x: T ⊢ e': T'
@@ -219,7 +219,7 @@ fn multiple_mut_borrows() {
 
 ### 4.2 借用检查器的判断
 
-```
+```text
 借用检查器维护的上下文:
 
 Loan Context L ::= · | L, loan(ℓ, kind, region)
@@ -249,7 +249,7 @@ fn dangle() -> &String {  // 错误!
 
 错误信息：
 
-```
+```text
 error[E0106]: missing lifetime specifier
  --> src/main.rs:1:16
   |
@@ -304,7 +304,7 @@ fn main() {
 
 ### 6.2 形式化
 
-```
+```text
 重新借用的类型规则:
 
 Γ ⊢ r: &mut^{α} T    α' ⊆ α
@@ -474,7 +474,7 @@ fn concurrent_reads() {
 
 ## 11. 与其他理论的联系
 
-```
+```text
 借用系统 ←→ 其他理论
 
 分离逻辑:

@@ -22,7 +22,7 @@
 
 适合已有 Rust 基础，想深入理解所有权系统的开发者：
 
-```
+```text
 1. 阅读 The Rust Programming Language (TRPL) → books-resources.md
 2. 学习 Programming Rust (Blandy & Orendorff) → books-resources.md
 3. 了解 Rust for Rustaceans → books-resources.md
@@ -37,7 +37,7 @@
 
 适合对类型理论和形式化语义感兴趣的学术研究者：
 
-```
+```text
 1. 精读 Types and Programming Languages (TAPL) → books-resources.md
 2. 学习 Advanced Topics in Types and Programming Languages → books-resources.md
 3. 阅读线性逻辑经典论文 (Girard 1987) → academic-papers.md
@@ -52,7 +52,7 @@
 
 适合从事形式化验证和静态分析的专业人员：
 
-```
+```text
 1. 学习 Software Foundations / Concrete Semantics → books-resources.md
 2. 了解 Why3 / Dafny 工具 → tools-libraries.md
 3. 研究 Creusot、Prusti、Aeneas 等 Rust 验证器 → tools-libraries.md
@@ -67,7 +67,7 @@
 
 适合关注内存安全和系统级验证的研究人员：
 
-```
+```text
 1. 学习 The Formal Semantics of Programming Languages → books-resources.md
 2. 了解 CompCert 和 VST → tools-libraries.md
 3. 研究 RustBelt 和 RefinedRust → academic-papers.md

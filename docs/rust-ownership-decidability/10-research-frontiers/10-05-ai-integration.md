@@ -401,7 +401,7 @@ fn verify_function() {
 
 使用 AI 进行自动证明搜索：
 
-```
+```text
 证明搜索流程
 
 目标: ⊢ ∀x, P(x) → Q(x)
@@ -769,7 +769,7 @@ fn parse_number_v4(s: &str) -> i32 {
 
 交互式错误诊断会话：
 
-```
+```text
 用户: 编译器报错说这里不能借用
 代码:
     fn process(&mut self, data: &Data) {
@@ -816,7 +816,7 @@ AI: 好的，这是修复后的代码：
 
 AI 优化的验证工作流程：
 
-```
+```text
 传统验证流程：
 开发 → 编写规范 → 运行验证工具 → 分析失败 → 修复 → 重复
 
@@ -1009,7 +1009,7 @@ pub fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 
 ### 8.2 安全考虑
 
-```
+```text
 AI 辅助验证的安全风险
 
 1. 过度依赖

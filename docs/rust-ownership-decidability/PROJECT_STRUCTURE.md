@@ -15,7 +15,7 @@
 
 ## 一级目录结构
 
-```
+```text
 rust-ownership-decidability/
 │
 ├── README.md                          # 主入口
@@ -193,7 +193,7 @@ rust-ownership-decidability/
 
 ## 统计信息
 
-```
+```text
 总目录数: 35+
 总文件数: 300+
 总行数: 130,000+

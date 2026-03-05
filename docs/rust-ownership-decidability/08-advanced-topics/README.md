@@ -6,7 +6,7 @@
 
 ## 目录结构
 
-```
+```text
 08-advanced-topics/
 ├── README.md                      # 本文件 - 导航与概览
 ├── 08-01-const-generics.md        # 常量泛型

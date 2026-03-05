@@ -50,7 +50,7 @@
 
 **问题示例**:
 
-```
+```text
 传统Hoare三元组:
 {x = 5} x := x + 1 {x = 6}
 
@@ -65,7 +65,7 @@
 
 分离逻辑通过**分离合取**（Separating Conjunction）解决帧问题：
 
-```
+```text
 关键创新: * (分离合取)
 
 P * Q  表示: P和Q分别在不同的、不相交的内存区域成立
@@ -80,7 +80,7 @@ P * Q  表示: P和Q分别在不同的、不相交的内存区域成立
 
 **对比示例**:
 
-```
+```text
 传统Hoare逻辑:
 {x ↦ 5 * y ↦ 10} x := 6 {x ↦ 6 * y ↦ 10}
 需要显式保留 y ↦ 10
@@ -107,7 +107,7 @@ P * Q  表示: P和Q分别在不同的、不相交的内存区域成立
 
 ### 2.2 Points-To 断言详解
 
-```
+```text
 ℓ ↦ v 的精确语义:
 
 - ℓ是内存位置（地址）
@@ -141,7 +141,7 @@ drop(b);
 
 ### 2.3 分离合取的性质
 
-```
+```text
 P * Q 的性质:
 
 交换律:   P * Q ≡ Q * P
@@ -163,7 +163,7 @@ P * Q 的性质:
 
 ### 3.1 基本命令的规范
 
-```
+```text
 分配命令:
 {emp} x := alloc() {x ↦ _}
 
@@ -191,7 +191,7 @@ drop(b);
 
 ### 3.2 帧规则
 
-```
+```text
 帧规则 (Frame Rule):
 
 {P} C {Q}
@@ -227,7 +227,7 @@ fn frame_example() {
 
 ### 4.1 所有权作为分离逻辑
 
-```
+```text
 Rust所有权的分离逻辑解释:
 
 所有权转移:
@@ -270,7 +270,7 @@ fn ownership_chain() {
 
 ### 4.2 借用与权限
 
-```
+```text
 共享借用 (&T):
 &T 对应于只读权限
 
@@ -324,7 +324,7 @@ fn permission_flow() {
 
 Iris是RustBelt的基础逻辑框架：
 
-```
+```text
 Iris的关键特性:
 
 1. 高阶幽灵状态 (Higher-Order Ghost State)
@@ -346,7 +346,7 @@ Iris的关键特性:
 
 ### 5.2 资源代数详解
 
-```
+```text
 资源代数 (Resource Algebra, RA):
 
 结构: (M, ⋅, ε, ✓)
@@ -394,7 +394,7 @@ proof fn increment(counter: &mut Counter)
 
 ### 5.3 Iris中的所有权谓词
 
-```
+```text
 RustBelt在Iris中的类型解释:
 
 [[own_n τ]].own(t, [ℓ]) ≡
@@ -420,7 +420,7 @@ RustBelt在Iris中的类型解释:
 
 ### 6.1 Prusti的Viper后端
 
-```
+```text
 Viper (Verification Infrastructure for Permission-based Reasoning):
 
 基于隐式动态帧 (Implicit Dynamic Frames, IDF):
@@ -579,7 +579,7 @@ impl<T: Ord> TreeNode<T> {
 
 ### 8.1 与线性逻辑的关系
 
-```
+```text
 分离逻辑 ←→ 线性逻辑
 
 共同点:
@@ -606,7 +606,7 @@ Iris 框架将两者结合用于 Rust 验证
 
 ### 8.2 与Hoare逻辑的关系
 
-```
+```text
 Hoare逻辑 ←→ 分离逻辑
 
 Hoare三元组: {P} C {Q}
@@ -626,7 +626,7 @@ Hoare三元组: {P} C {Q}
 
 ### 9.1 分数权限
 
-```
+```text
 分数权限 (Fractional Permissions):
 
 Boyland (2003) 提出:

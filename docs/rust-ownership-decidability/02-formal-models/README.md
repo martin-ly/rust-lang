@@ -8,7 +8,7 @@
 
 ## 目录结构
 
-```
+```text
 02-formal-models/
 ├── README.md                    # 本文件: 总览和导航
 ├── 02-01-rustbelt.md           # RustBelt: Rust的形式化基础
@@ -71,7 +71,7 @@
 
 **关键数学对象**:
 
-```
+```text
 [[τ]].own : ThreadId → list Val → iProp
 ```
 
@@ -91,7 +91,7 @@
 
 **形式化规则**:
 
-```
+```text
 Γ ⊢ e : τ    Γ, x:τ ⊢ e' : τ'        (Move)
 ────────────────────────────────────────
 Γ ⊢ let x = e in e' : τ'
@@ -109,14 +109,14 @@
 
 **形式化语义**:
 
-```
+```text
 共享借用:  [&τ].share(t, [ℓ]) ≡ ∀t'. &^α(∃v. ℓ ↦ v * [[τ]].share(t', v))
 可变借用:  [&mut τ].own(t, [ℓ]) ≡ &^α(∃v. ℓ ↦ v * ▷[[τ]].own(t, v))
 ```
 
 **借用关系代数**:
 
-```
+```text
 Borrow(ℓ, kind, region) where kind ∈ {Shared, Mut}
 
 冲突检测:
@@ -132,7 +132,7 @@ loan(ℓ, Mut, r) ∧ loan(ℓ', _, r') ⊢ conflict
 
 **核心形式化**:
 
-```
+```text
 区域包含:     α ⊆ β  (生命周期α包含于β)
 区域连接:     α ⊔ β  (区域的最小上界)
 区域交汇:     α ⊓ β  (区域的最大下界)
@@ -143,7 +143,7 @@ loan(ℓ, Mut, r) ∧ loan(ℓ', _, r') ⊢ conflict
 
 **约束求解**:
 
-```
+```text
 生命周期约束:   'a: 'b  ↔  region(a) ⊇ region(b)
 
 子类型关系:     &'^a T <: &'^b T  if 'a: 'b
@@ -157,7 +157,7 @@ loan(ℓ, Mut, r) ∧ loan(ℓ', _, r') ⊢ conflict
 
 **移动语义形式化**:
 
-```
+```text
 移动操作:    move(x) : τ → τ
 
 资源状态:
@@ -169,7 +169,7 @@ loan(ℓ, Mut, r) ∧ loan(ℓ', _, r') ⊢ conflict
 
 **Drop检查**:
 
-```
+```text
 Drop标志分析:
   Init(ℓ)  - 位置ℓ已初始化
   Drop(ℓ)  - 位置ℓ需要drop
@@ -219,7 +219,7 @@ Drop标志分析:
 
 ### 1. 操作语义 (Operational Semantics)
 
-```
+```text
 小步语义:  (e, h) ↦ (e', h')
 
 表达式求值与堆更新的关系
@@ -227,7 +227,7 @@ Drop标志分析:
 
 ### 2. 逻辑关系 (Logical Relations)
 
-```
+```text
 类型安全性:  Γ ⊢ e : τ  ⟹  e 表现良好
 
 上下文等价:  Γ ⊢ e₁ ≈ e₂ : τ
@@ -235,7 +235,7 @@ Drop标志分析:
 
 ### 3. 分离逻辑 (Separation Logic)
 
-```
+```text
 Hoare三元组:  {P} e {v. Q(v)}
 
 P, Q 是断言，* 是分离合取
@@ -296,7 +296,7 @@ P, Q 是断言，* 是分离合取
 
 ### 基础路径
 
-```
+```text
 00-foundations/00-01-linear-logic.md
         ↓
 00-foundations/00-02-affine-types.md
@@ -308,7 +308,7 @@ P, Q 是断言，* 是分离合取
 
 ### 高级路径
 
-```
+```text
 02-formal-models/02-01-rustbelt.md
         ↓
 02-formal-models/02-03-borrow-semantics.md

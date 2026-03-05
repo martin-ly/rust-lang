@@ -46,7 +46,7 @@
 
 ### 1.1 为什么需要生命周期
 
-**问题：悬挂引用**
+**问题：悬挂引用**:
 
 ```rust
 fn dangling_reference() -> &String {  // 错误!
@@ -65,7 +65,7 @@ error[E0106]: missing lifetime specifier
   |                ^ expected named lifetime parameter
 ```
 
-**解决方案：显式生命周期**
+**解决方案：显式生命周期**:
 
 ```rust
 // 正确：生命周期保证引用有效
@@ -306,12 +306,12 @@ end_lifetime(α) =
 |-----------|------------|---------|
 | &T | 协变 | 协变 |
 | &mut T | 协变 | 不变 |
-| Box<T> | - | 协变 |
-| Vec<T> | - | 协变 |
-| fn(T) -> U | - | T逆变, U协变 |
+| `Box<T>` | - | 协变 |
+| `Vec<T>` | - | 协变 |
+| `fn(T) -> U` | - | T逆变, U协变 |
 | *const T | - | 协变 |
 | *mut T | - | 不变 |
-| Cell<T> | - | 不变 |
+| `Cell<T>` | - | 不变 |
 
 ### 4.2 子类型规则
 

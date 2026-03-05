@@ -200,8 +200,8 @@
 
 | | Sync: Yes | Sync: No |
 |---|-----------|----------|
-| **Send: Yes** | i32, String, Arc<Mutex<T>> | MutexGuard<T> |
-| **Send: No** | ! (不可能) | Rc<T>, RefCell<T> |
+| **Send: Yes** | i32, String, `Arc<Mutex<T>>` | `MutexGuard<T>` |
+| **Send: No** | ! (不可能) | `Rc<T>`, `RefCell<T>` |
 
 ### 5.2 线程安全与所有权
 
