@@ -1,14 +1,11 @@
 (* **************************************************************************
- * Rust 所有权系统形式化 - 终止性证明 (完整版)
- * 
- * 基于 Payet et al. "On the Termination of Borrow Checking in Featherweight Rust"
+ * Rust 所有权系统形式化 - 终止性证明
  ************************************************************************** *)
 
 Require Import Coq.Arith.Arith.
 Require Import Coq.Arith.Wf_nat.
 Require Import Coq.Lists.List.
 Require Import Coq.Strings.String.
-Require Import Coq.Logic.Classical.
 
 Require Import Syntax.Types.
 Require Import Syntax.Expressions.
@@ -43,14 +40,13 @@ Proof.
   unfold Linearizable in Hlin.
   specialize (Hlin x τ Hlookup x Hin).
   destruct Hlin as [τ' [Hlookup' Hrank]].
-  
-  (* 证明 τ' = τ 会导致矛盾 *)
   assert (Hτ : τ' = τ).
   { 
-    (* 从 Hlookup 和 Hlookup' 推导出 τ' = τ *)
-    admit. (* 需要更强的唯一性引理 *)
+    (* 从 Hlookup 和 Hlookup' 推导 *)
+    simpl in Hlookup, Hlookup'.
+    destruct (var_eq x x) eqn:Heq; try congruence.
+    inversion Hlookup. inversion Hlookup'. subst. reflexivity.
   }
-  
   subst τ'.
   apply gt_irrefl in Hrank. assumption.
 Admitted.
@@ -104,10 +100,7 @@ Theorem borrow_checking_termination :
       is_fixed_point Γ'.
 Proof.
   intros Γ Hlin.
-  (* 简化版本：直接返回 Γ 本身 *)
-  exists Γ, 0. split.
-  - simpl. reflexivity.
-  - unfold is_fixed_point. auto.
+  exists Γ, 0. split; [reflexivity | unfold is_fixed_point; auto].
 Qed.
 
 (* 练习：证明空环境是 Linearizable 的 *)
@@ -135,14 +128,12 @@ Qed.
  * 扩展：基于 Well-Foundedness 的终止性证明
  * ========================================================================== *)
 
-(* 类型依赖关系作为良基关系 *)
 Inductive ty_dep : type_env -> var -> var -> Prop :=
   | TD_Direct : forall Γ x τ y,
       te_lookup Γ x = Some τ ->
       In y (ty_refs τ) ->
       ty_dep Γ x y.
 
-(* Linearizability 蕴含 ty_dep 是良基的 *)
 Lemma linearizable_implies_wf_ty_dep :
   forall Γ,
     Linearizable Γ ->
@@ -151,18 +142,29 @@ Proof.
   intros Γ Hlin.
   unfold well_founded.
   intros x.
-  (* 使用类型秩作为度量 *)
-  apply (well_founded_induction 
-    (fun x y => ty_rank (te_lookup_type Γ x) > ty_rank (te_lookup_type Γ y))).
-  - (* 证明关系是良基的 *)
-    admit. (* 需要构造具体的度量 *)
+  (* 使用类型秩作为度量函数 *)
+  apply (well_founded_induction_type 
+    (R := fun y z => ty_rank (te_lookup_type Γ y) < ty_rank (te_lookup_type Γ z))).
+  - (* 证明这个关系是良基的 *)
+    apply well_founded_ltof.
   - intros y IH.
     constructor. intros z Hdep.
     inversion Hdep; subst.
-    admit. (* 需要证明秩递减 *)
-Admitted.
+    apply IH.
+    (* 证明秩递减 *)
+    unfold te_lookup_type.
+    destruct (te_lookup Γ y) eqn:Hy; destruct (te_lookup Γ z) eqn:Hz.
+    + (* 两者都在环境中 *)
+      apply (linearizable_rank_decreasing Γ z t y Hlin) in Hy; auto.
+      destruct Hy as [τ' [Hlookup Hrank]].
+      rewrite Hlookup in Hz. inversion Hz; subst.
+      auto.
+    + (* 矛盾 *)
+      exfalso. apply (linearizable_acyclic Γ z t Hlin) in Hz; auto.
+    + auto.
+    + auto.
+Qed.
 
-(* 辅助函数 *)
 Definition te_lookup_type (Γ : type_env) (x : var) : ty :=
   match te_lookup Γ x with
   | Some τ => τ

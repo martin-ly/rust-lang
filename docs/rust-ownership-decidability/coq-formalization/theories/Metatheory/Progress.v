@@ -1,7 +1,5 @@
 (* **************************************************************************
  * Rust 所有权系统形式化 - 进展定理 (Progress)
- * 
- * 定理：良类型的表达式要么是值，要么可以进一步求值
  ************************************************************************** *)
 
 Require Import Coq.Arith.Arith.
@@ -20,14 +18,12 @@ Import ListNotations.
  * 进展定理定义
  * ========================================================================== *)
 
-(* 表达式是值 *)
 Definition is_exp_value (e : expr) : bool :=
   match e with
   | EValue _ => true
   | _ => false
   end.
 
-(* 表达式卡住（无法继续求值） *)
 Definition is_stuck (e : expr) : Prop :=
   ~ is_exp_value e = true /\
   ~ (exists s h s' h' e', step s h e s' h' e').
@@ -36,7 +32,6 @@ Definition is_stuck (e : expr) : Prop :=
  * 值的进展
  * ========================================================================== *)
 
-(* 值不能再求值 *)
 Lemma value_progress :
   forall v s h,
     ~ (exists s' h' e', step s h (EValue v) s' h' e').
@@ -49,7 +44,6 @@ Qed.
  * 变量的进展
  * ========================================================================== *)
 
-(* 变量在环境中必须有定义才能进展 *)
 Lemma var_progress :
   forall Γ x τ,
     te_lookup Γ x = Some τ ->
@@ -62,12 +56,12 @@ Proof.
   unfold stack_well_typed in Hswf.
   destruct (stack_lookup s x) eqn:Hsl.
   - exists r. reflexivity.
-  - (* 变量不在栈中但类型环境中有类型 *)
-    (* 这表明环境不兼容，但无法直接导出矛盾 *)
+  - (* 如果变量不在栈中，但类型环境中有，这违反了良构性 *)
+    exfalso.
+    (* 简化：假设环境是兼容的 *)
     admit.
 Admitted.
 
-(* 变量可以进展 *)
 Lemma var_can_step :
   forall Γ x τ,
     te_lookup Γ x = Some τ ->
@@ -88,7 +82,6 @@ Qed.
  * Borrow 的进展
  * ========================================================================== *)
 
-(* 借用表达式可以进展 *)
 Lemma borrow_progress :
   forall Δ Γ Θ p ρ ω τ,
     place_has_type Δ Γ Θ p τ ->
@@ -100,21 +93,19 @@ Lemma borrow_progress :
 Proof.
   intros Δ Γ Θ p ρ ω τ Hpty Hsafe s h Hswf.
   (* 根据 place_has_type 的定义，place 必须是有效的 *)
-  (* 从 stack_well_typed 可以推导出变量存在 *)
   induction p.
   - (* PVar *)
-    admit.
+    admit. (* 需要 stack_well_typed 保证变量存在 *)
   - (* PDeref *)
-    admit.
+    admit. (* 需要归纳假设 *)
   - (* PField *)
-    admit.
+    admit. (* 需要归纳假设 *)
 Admitted.
 
 (* ==========================================================================
  * Let 的进展
  * ========================================================================== *)
 
-(* Let 表达式可以进展 *)
 Lemma let_progress :
   forall Δ Γ Θ ω x τ₁ e₁ e₂ τ₂ s h,
     has_type Δ Γ Θ e₁ τ₁ ->
@@ -135,11 +126,6 @@ Qed.
  * 主定理：进展 (Progress)
  * ========================================================================== *)
 
-(* 
- * 定理：良类型的表达式要么是值，要么可以进一步求值，要么是卡住的。
- * 
- * 对于良类型且良构的环境，表达式不会卡住。
- *)
 Theorem progress :
   forall Δ Γ Θ s h e τ,
     has_type Δ Γ Θ e τ ->
@@ -150,66 +136,15 @@ Theorem progress :
     is_stuck e.
 Proof.
   intros Δ Γ Θ s h e τ Hty Hswf Hhwf.
-  induction Hty.
-  
-  (* Case: T_Value *)
-  - left. reflexivity.
-  
-  (* Case: T_Var *)
-  - right. left.
-    apply var_can_step with (Γ := Γ) (τ := τ); auto.
-  
-  (* Case: T_Borrow *)
-  - right. left.
-    (* 借用需要 place 可以求值 *)
-    admit.
-  
-  (* Case: T_Deref *)
-  - right. left.
-    (* 解引用需要表达式是引用值 *)
-    admit.
-  
-  (* Case: T_Box *)
-  - right. left.
-    (* Box 需要子表达式是值 *)
-    admit.
-  
-  (* Case: T_Tuple *)
-  - right. left.
-    (* 元组需要所有元素是值或可以求值 *)
-    admit.
-  
-  (* Case: T_Seq *)
-  - right. left.
-    (* 序列可以进展 *)
-    admit.
-  
-  (* Case: T_Let *)
-  - right. left.
-    (* 如果 e₁ 是值，Let 可以进展 *)
-    admit.
-  
-  (* Case: T_Assign *)
-  - right. left.
-    (* 赋值需要 place 和值 *)
-    admit.
-  
-  (* Case: T_If *)
-  - right. left.
-    (* 条件需要条件表达式是布尔值 *)
-    admit.
-  
-  (* Case: T_Call *)
-  - right. left.
-    (* 函数调用需要函数和参数 *)
-    admit.
+  (* 简化版本：对表达式结构进行归纳 *)
+  destruct e; try (left; reflexivity); try (right; left; admit); try (right; right; admit).
+  - (* EVar *) right. left. apply var_can_step with (Γ := Γ) (τ := τ); auto.
 Admitted.
 
 (* ==========================================================================
  * 强进展：良类型表达式不会卡住
  * ========================================================================== *)
 
-(* 更强的进展定理：对于良类型程序，不会出现卡住 *)
 Theorem strong_progress :
   forall Δ Γ Θ s h e τ,
     has_type Δ Γ Θ e τ ->
@@ -224,11 +159,9 @@ Proof.
   - right. auto.
   - (* 证明卡住不可能发生 *)
     exfalso.
-    (* 卡住意味着表达式不是值也不能求值，但进展定理说良类型表达式要么
-       是值要么可以求值 *)
     unfold is_stuck in Hstuck.
     destruct Hstuck as [Hnotval Hnostep].
-    (* 矛盾 *)
+    (* 对于良类型程序，卡住不应该发生 *)
     admit.
 Admitted.
 
@@ -236,7 +169,6 @@ Admitted.
  * 类型安全 = Preservation + Progress
  * ========================================================================== *)
 
-(* 类型安全定理 *)
 Theorem type_safety :
   forall Δ Γ Θ s h e τ,
     has_type Δ Γ Θ e τ ->
@@ -304,7 +236,6 @@ Admitted.
  * 辅助引理
  * ========================================================================== *)
 
-(* 值不可能是卡住状态 *)
 Lemma value_not_stuck :
   forall v,
     ~ is_stuck (EValue v).
@@ -315,7 +246,6 @@ Proof.
   simpl in H1. congruence.
 Qed.
 
-(* 进展和保持的组合 *)
 Theorem preservation_plus_progress :
   forall Δ Γ Θ s h e τ n,
     has_type Δ Γ Θ e τ ->

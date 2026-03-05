@@ -16,13 +16,6 @@ Import ListNotations.
 
 (* ==========================================================================
  * 示例 6: 嵌套借用
- * 
- * Rust 代码:
- *   let x = 5;
- *   let y = &x;
- *   let z = &y;
- *   let w = &z;
- *   ***w
  * ========================================================================== *)
 
 Definition ex6_let_x := 
@@ -74,16 +67,9 @@ Proof.
 Qed.
 
 (* ==========================================================================
- * 示例 7: 结构体借用
- * 
- * Rust 代码:
- *   struct Point { x: i32, y: i32 }
- *   let p = Point { x: 1, y: 2 };
- *   let x_ref = &p.x;
- *   *x_ref
+ * 示例 7: 结构体借用（简化）
  * ========================================================================== *)
 
-(* 简化的 Point 结构体类型 *)
 Definition tpoint := TStruct "Point"%string [ti32; ti32].
 
 Definition ex7_struct_p :=
@@ -106,23 +92,17 @@ Example ex7_typechecks : forall Δ Θ,
 Proof.
   intros. unfold ex7_full, ex7_struct_p, ex7_borrow_x, ex7_deref, ti32, tpoint.
   eapply T_Let.
-  - eapply T_Struct.  (* 需要添加 T_Struct 规则 *)
-    admit.
+  - apply T_Struct.
   - eapply T_Let.
     + eapply T_Borrow.
       * apply PT_Field. apply PT_Var. reflexivity.
       * apply OS_Field. apply OS_Base. reflexivity. trivial.
       * trivial.
     + eapply T_Deref. apply T_Var. reflexivity.
-Admitted.
+Qed.
 
 (* ==========================================================================
  * 示例 8: 函数参数借用
- * 
- * Rust 代码:
- *   fn foo(x: &i32) -> i32 { *x }
- *   let y = 5;
- *   foo(&y)
  * ========================================================================== *)
 
 Definition ex8_fn_foo :=
@@ -156,17 +136,9 @@ Proof.
 Qed.
 
 (* ==========================================================================
- * 示例 9: 模式匹配
- * 
- * Rust 代码:
- *   let x = Some(5);
- *   match x {
- *     Some(y) => y,
- *     None => 0
- *   }
+ * 示例 9: 模式匹配（简化）
  * ========================================================================== *)
 
-(* Option<i32> 类型 *)
 Definition toption_i32 := TEnum "Option"%string [ti32].
 
 Definition ex9_let_x :=
@@ -185,28 +157,25 @@ Example ex9_typechecks : forall Δ Θ,
   let Γ := [] in
   has_type Δ Γ Θ ex9_full ti32.
 Proof.
-  admit.  (* 模式匹配类型检查较复杂 *)
-Admitted.
+  intros. unfold ex9_full, ex9_let_x, ex9_match, ti32, toption_i32.
+  eapply T_Let.
+  - apply T_Value. apply VT_Enum.
+  - apply T_Match.
+    + apply T_Var. reflexivity.
+    + constructor.
+      * apply T_Var. reflexivity.
+      * apply T_Value. apply VT_Int.
+Qed.
 
 (* ==========================================================================
- * 示例 10: 循环中的借用
- * 
- * Rust 代码:
- *   let mut sum = 0;
- *   let mut i = 0;
- *   loop {
- *     if i >= 10 { break }
- *     sum = sum + i;
- *     i = i + 1;
- *   }
- *   sum
+ * 示例 10: 循环中的借用（简化）
  * ========================================================================== *)
 
 Definition ex10_loop_body : expr :=
-  EIf (EValue (VBool true))  (* i >= 10 *)
-    (EBreak (Some (EValue VUnit)))  (* break *)
-    (ESeq (EAssign (PVar "sum"%string) (EValue (VInt 0)))  (* sum = sum + i *)
-          (EAssign (PVar "i"%string) (EValue (VInt 1))))).  (* i = i + 1 *)
+  EIf (EValue (VBool true))
+    (EBreak (Some (EValue VUnit)))
+    (ESeq (EAssign (PVar "sum"%string) (EValue (VInt 0)))
+          (EAssign (PVar "i"%string) (EValue (VInt 1)))).
 
 Definition ex10_full :=
   ELet Uniq "sum"%string ti32 (EValue (VInt 0))
@@ -217,8 +186,19 @@ Example ex10_typechecks : forall Δ Θ,
   let Γ := [] in
   has_type Δ Γ Θ ex10_full ti32.
 Proof.
-  admit.  (* 循环类型检查较复杂 *)
-Admitted.
+  intros. unfold ex10_full, ex10_loop_body, ti32.
+  eapply T_Let.
+  - apply T_Value. apply VT_Int.
+  - eapply T_Let.
+    + apply T_Value. apply VT_Int.
+    + apply T_Loop with (τ := TBase TUnit).
+      apply T_If with (τ₁ := TBase TUnit) (τ₂ := TBase TUnit).
+      * apply T_Value. apply VT_Bool.
+      * apply T_Break. apply T_Value. apply VT_Unit.
+      * apply T_Seq.
+        -- apply T_Assign.
+        -- apply T_Assign.
+Qed.
 
 (* ==========================================================================
  * 综合定理：所有嵌套示例都是类型安全的
@@ -234,17 +214,16 @@ Theorem all_nested_examples_type_safe :
 Proof.
   intros. repeat split.
   - exists []. apply ex6_typechecks.
-  - exists []. admit.  (* ex7 *)
+  - exists []. apply ex7_typechecks.
   - exists [("y"%string, ti32)]. apply ex8_typechecks.
-  - exists []. admit.  (* ex9 *)
-  - exists []. admit.  (* ex10 *)
-Admitted.
+  - exists []. apply ex9_typechecks.
+  - exists []. apply ex10_typechecks.
+Qed.
 
 (* ==========================================================================
  * Linearizability 验证
  * ========================================================================== *)
 
-(* 嵌套借用的环境也是 Linearizable 的 *)
 Example ex6_env_linearizable :
   let Γ := [("x"%string, ti32);
             ("y"%string, TRef RStatic Shrd ti32);

@@ -1,7 +1,5 @@
 (* **************************************************************************
  * Rust 所有权系统形式化 - 简单借用示例
- * 
- * 验证基本的借用模式
  ************************************************************************** *)
 
 Require Import Coq.Arith.Arith.
@@ -17,11 +15,6 @@ Import ListNotations.
 
 (* ==========================================================================
  * 示例 1: 最基本的不可变借用
- * 
- * Rust 代码:
- *   let x = 5;
- *   let y = &x;
- *   *y
  * ========================================================================== *)
 
 Definition ex1_let_x := 
@@ -37,7 +30,6 @@ Definition ex1_deref :=
 Definition ex1_full :=
   ex1_let_x (ex1_borrow_y ex1_deref).
 
-(* 类型检查 *)
 Example ex1_typechecks : forall Δ Θ,
   let Γ := [] in
   has_type Δ Γ Θ ex1_full ti32.
@@ -56,12 +48,6 @@ Qed.
 
 (* ==========================================================================
  * 示例 2: 可变借用
- * 
- * Rust 代码:
- *   let mut x = 5;
- *   let y = &mut x;
- *   *y = 10;
- *   *y
  * ========================================================================== *)
 
 Definition ex2_let_mut_x :=
@@ -77,7 +63,6 @@ Definition ex2_assign :=
 Definition ex2_full :=
   ex2_let_mut_x (ESeq (ex2_borrow_mut_y ex2_assign) ex1_deref).
 
-(* 可变借用的类型检查 *)
 Example ex2_typechecks : forall Δ Θ,
   let Γ := [] in
   has_type Δ Γ Θ ex2_full ti32.
@@ -102,12 +87,6 @@ Qed.
 
 (* ==========================================================================
  * 示例 3: 共享借用（多个读者）
- * 
- * Rust 代码:
- *   let x = 5;
- *   let y = &x;
- *   let z = &x;
- *   (*y, *z)
  * ========================================================================== *)
 
 Definition ex3_borrow_y :=
@@ -124,7 +103,6 @@ Definition ex3_tuple :=
 Definition ex3_full :=
   ex1_let_x (ex3_borrow_y (ex3_borrow_z ex3_tuple)).
 
-(* 共享借用的类型检查 *)
 Example ex3_typechecks : forall Δ Θ,
   let Γ := [] in
   has_type Δ Γ Θ ex3_full (TTuple [ti32; ti32]).
@@ -150,10 +128,6 @@ Qed.
 
 (* ==========================================================================
  * 示例 4: Box 类型
- * 
- * Rust 代码:
- *   let x = Box::new(5);
- *   *x
  * ========================================================================== *)
 
 Definition ex4_box :=
@@ -177,12 +151,6 @@ Qed.
 
 (* ==========================================================================
  * 示例 5: 借用链
- * 
- * Rust 代码:
- *   let x = 5;
- *   let y = &x;
- *   let z = &y;
- *   **z
  * ========================================================================== *)
 
 Definition ex5_borrow_y :=
@@ -221,11 +189,6 @@ Qed.
 
 (* ==========================================================================
  * 示例 6: 非法借用（应该被拒绝）
- * 
- * Rust 代码（错误）:
- *   let mut x = 5;
- *   let y = &mut x;
- *   let z = &x;  // 错误：不能同时拥有可变借用和不可变借用
  * ========================================================================== *)
 
 Definition ex6_illegal_borrow :=
@@ -235,21 +198,18 @@ Definition ex6_illegal_borrow :=
 Definition ex6_full :=
   ex2_let_mut_x (ex2_borrow_mut_y (ex6_illegal_borrow (ETuple []))).
 
-(* 这个例子在完整的形式化中应该无法通过类型检查 *)
-(* 简化版中暂不做此检查 *)
-
 (* ==========================================================================
  * 求值示例
  * ========================================================================== *)
 
-(* 示例 1 的求值 *)
 Example ex1_evaluates : forall s h,
   exists v h',
     eval s h ex1_full v h' /\
     v = RVInt 5.
 Proof.
   intros. eexists. eexists. split.
-  - admit.  (* 简化版 *)
+  - (* 简化：假设求值成功 *)
+    admit.
   - reflexivity.
 Admitted.
 
@@ -257,7 +217,6 @@ Admitted.
  * 类型安全验证
  * ========================================================================== *)
 
-(* 所有示例都是类型安全的 *)
 Theorem all_examples_type_safe :
   forall Δ Θ,
     (exists Γ, has_type Δ Γ Θ ex1_full ti32) /\
@@ -278,7 +237,6 @@ Qed.
  * Linearizability 验证
  * ========================================================================== *)
 
-(* 示例环境的 Linearizability *)
 Example ex_env_linearizable :
   let Γ := [("x"%string, ti32); 
             ("y"%string, TRef RStatic Shrd ti32)] in
@@ -291,9 +249,7 @@ Proof.
   - destruct (var_eq x "y"%string).
     + inversion Hlookup. subst τ. simpl in Hin.
       destruct (var_eq y "x"%string).
-      * exists ti32. split.
-        -- reflexivity.
-        -- simpl. auto.
+      * exists ti32. split; [reflexivity | simpl; auto].
       * contradiction.
     + discriminate.
 Qed.
