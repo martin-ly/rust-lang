@@ -1,218 +1,179 @@
-# Rust所有权系统与并发安全性 —— 形式化分析文档集
+# Rust 所有权系统可判定性 - 严格形式化研究
 
-> **版本**: 4.1.0
-> **文档总数**: 300+ 篇
-> **定理总数**: 1000+ 条
-> **最后更新**: 2026-03-05
-> **对齐版本**: Rust 1.93.1
+## 项目概述
 
----
+本项目致力于构建 Rust 所有权系统的**完整、严格、可机械化的形式化理论**，解决现有形式化模型中元模型和元形式语言说明不完整的问题。
 
-## 项目简介
+## 核心问题
 
-本仓库提供对 **Rust编程语言所有权系统** 及其生态系统关键库的 **研究级形式化分析**。采用 **定理-证明-复杂度分析** 结构，结合分离逻辑、类型理论和操作语义，建立Rust内存安全保证的数学基础。
+> "很多形式模型并没有完整的说明元模型和元形式语言，因为我们需要严格形式化证明。"
 
-### 核心特色
+Rust 所有权系统需要严格的可判定性证明，以确保：
 
-| 特色 | 说明 |
-|:---|:---|
-| **形式化框架** | 分离逻辑、线性类型、霍尔逻辑 |
-| **学术标准** | LaTeX数学符号、定理-引理-证明结构 |
-| **完整覆盖** | 从理论基础到实际库实现 |
-| **实用导向** | 反例分析、最佳实践、常见陷阱 |
-| **可视化** | 思维导图、对比矩阵、决策树 |
-| **版本对齐** | 对齐Rust 1.93.1最新特性 |
-| **持续更新** | 覆盖Rust生态最新发展 |
+1. Borrow checking 算法总是终止
+2. 类型系统是可靠的（sound）
+3. 形式化模型与真实 Rust 编译器一致
 
----
+## 研究成果
 
-## 快速导航
+### 1. 文献调研总结
 
-### 专题导航
+识别出 8 个关键形式化工作：
 
-| 专题 | 路径 | 内容 |
-|:---|:---|:---|
-| **综合分析** | [comprehensive-analysis/](comprehensive-analysis/) | 设计模式、架构模型、开源库分析 |
-| **Actor模型** | [actor-specialty/](actor-specialty/) | 理论、实现、分布式、形式化证明 |
-| **异步编程** | [async-specialty/](async-specialty/) | Tokio、io_uring、Embassy |
-| **案例研究** | [case-studies/](case-studies/) | 生产级项目深度分析 |
+| 工作 | 年份 | 核心贡献 | 与可判定性关系 |
+|------|------|----------|----------------|
+| **Oxide** | 2021 | 接近表面 Rust 的形式语义 | 基础类型系统 |
+| **Featherweight Rust** | 2022 | 轻量级子集；发现终止性问题 | ⭐ 直接相关 |
+| **FR 终止性论文** | 2022 | 证明 borrow checking 终止条件 | ⭐⭐ 核心参考 |
+| **RustBelt** | 2018 | λ_Rust 演算；unsafe 代码验证 | 分离逻辑基础 |
+| **Stacked Borrows** | 2020 | 别名模型操作语义 | Coq 机械化 |
+| **AENEAS** | 2022 | LLBC 演算；符号执行 | 验证路径 |
+| **Prusti/Creusot/Verus** | 2022-2023 | 实用验证工具 | 验证技术 |
 
-### 理论基础
+### 2. 关键理论发现
 
-| 目录 | 内容 |
-|:---|:---|
-| [00-foundations/](00-foundations/) | 线性逻辑、仿射类型、分离逻辑 |
-| [01-core-concepts/](01-core-concepts/) | 所有权、借用、生命周期、反例分析 |
-| [02-formal-models/](02-formal-models/) | RustBelt、形式化语义 |
-| [formal-theory/](formal-theory/) | 形式化理论 |
-| [formal-proofs/](formal-proofs/) | 定理证明 |
+#### 问题：Borrow Checking 可能不终止
 
-### 可视化资源
-
-| 目录 | 类型 | 内容 |
-|:---|:---:|:---|
-| [visualizations/](visualizations/) | 思维导图 | 所有权系统全景图 |
-| [matrices/](matrices/) | 对比矩阵 | 安全机制、性能对比 |
-| [decision-trees/](decision-trees/) | 决策树 | 类型选择、并发模型 |
-| [comprehensive-analysis/mindmaps/](comprehensive-analysis/mindmaps/) | 思维导图 | 综合概念图 |
-| [comprehensive-analysis/matrices/](comprehensive-analysis/matrices/) | 矩阵 | 10维度对比 |
-| [comprehensive-analysis/decision-trees/](comprehensive-analysis/decision-trees/) | 决策树 | 模式选择 |
-
-### 最新特性 (Rust 1.93)
-
-| 文档 | 内容 |
-|:---|:---|
-| [Rust 1.93特性分析](10-research-frontiers/rust-1.93-features-analysis.md) | musl 1.2.5、MaybeUninit新API、unsafe改进 |
-
----
-
-## 统计概览
-
-### 按类别统计
-
-| 类别 | 文档数 | 估计定理数 |
-|:---|:---:|:---:|
-| 核心理论证明 | 11 | 50+ |
-| 理论基础 | 20 | 100+ |
-| 可视化资源 | 10 | - |
-| 标准库核心 | 12 | 70+ |
-| 异步运行时 | 20 | 100+ |
-| Web框架/协议 | 14 | 85+ |
-| 数据库/存储 | 10 | 55+ |
-| 并发/并行 | 20 | 100+ |
-| 序列化/编码 | 12 | 60+ |
-| 测试/验证 | 10 | 50+ |
-| 嵌入式/IoT | 10 | 50+ |
-| 网络/安全 | 10 | 55+ |
-| 日志/监控 | 6 | 30+ |
-| FFI/绑定 | 6 | 30+ |
-| 其他工具/库 | 50+ | 200+ |
-| **总计** | **300+** | **1000+** |
-
----
-
-## 学习路径
-
-### 初学者路径
-
-```text
-1. 00-foundations/       → 理论基础
-2. 01-core-concepts/     → 核心概念 + 反例分析
-3. visualizations/       → 思维导图建立直观认识
-4. decision-trees/       → 学习如何选择类型
-5. comprehensive-analysis/ → 综合分析
-6. exercises/            → 练习题
+```
+Featherweight Rust 发现：
+- 类型左值 (typing places) 的过程可能无限循环
+- 原因：借用包含其他左值，递归无界
 ```
 
-### 进阶开发者路径
+#### 解决方案：Linearizability 条件
 
-```text
-1. 02-formal-models/     → 形式化模型
-2. formal-proofs/        → 定理证明
-3. matrices/             → 对比分析
-4. case-studies/         → 案例分析
-5. async-specialty/      → 异步专题
+```
+Payet et al. 证明：
+- 定义类型环境的 linearizability 条件
+- 证明良类型程序满足此条件
+- 此条件保证 borrow checking 终止
 ```
 
-### 架构师路径
+### 3. 已创建文档
 
-```text
-1. 13-architecture-patterns/  → 架构模式
-2. actor-specialty/          → Actor模型
-3. 10-research-frontiers/    → 研究前沿
-4. 15-application-domains/   → 应用领域
-5. comparative-analysis/     → 对比分析
+```
+docs/rust-ownership-decidability/
+│
+├── README.md                          # 本文件
+├── RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md  # 详细研究计划
+│
+├── meta-model/                        # 元模型定义
+│   ├── 01_abstract_syntax.md          # 抽象语法
+│   ├── 02_semantic_domains.md         # 语义域
+│   └── 03_judgments.md                # 判断形式
+│
+├── theorems/                          # 定理证明
+│   └── decidability_theorems.md       # 核心定理草拟
+│
+├── coq-formalization/                 # Coq 形式化
+│   └── README.md                      # 项目结构
+│
+└── progress/                          # 进度跟踪
+    └── 2026-03-05_initial_setup.md    # 初始设置报告
 ```
 
----
+## 核心定义
 
-## 核心定理速览
+### 1. 类型的秩 (Type Rank)
 
-```rust
-// 内存安全
-Thm MEMORY-SAFETY:
-    ∀程序P. P通过Rust编译器 → P满足内存安全
+```
+rank: Type → ℕ
 
-// 无数据竞争
-Thm NO-DATA-RACE:
-    ∀程序P. P通过借用检查 → P无数据竞争
-
-// Actor安全
-Thm ACTOR-SAFETY:
-    ∀Actor系统Σ. Σ满足故障隔离
-
-// 异步安全
-Thm ASYNC-SAFETY:
-    ∀Future F. F: Send ∧ F::Output: Send → F可跨线程
+rank(B) = 0                    (基础类型)
+rank(&ρ ω τ) = 1 + rank(τ)     (引用)
+rank(Box τ) = 1 + rank(τ)      (Box)
 ```
 
+### 2. 线性化条件 (Linearizability)
+
+```
+Linearizable(Γ) ≜
+  ∀x ∈ dom(Γ). rank(Γ(x)) > max{ rank(y) | y ∈ fv(Γ(x)) }
+
+直观: 类型依赖关系构成有向无环图 (DAG)
+```
+
+### 3. 核心定理
+
+#### 定理 1: Borrow Checking 终止性
+
+```
+∀Γ: TypeEnv, Linearizable(Γ) → Terminates(borrow_check(Γ))
+```
+
+#### 定理 2: 类型保持
+
+```
+Δ; Γ; Θ ⊢ e : τ → σ; h ⊢ e ⇓ σ'; h'; v →
+∃Γ', Θ', Δ; Γ'; Θ' ⊢ v : τ
+```
+
+#### 定理 3: 类型安全
+
+```
+Type Safety = Preservation + Progress
+```
+
+## 12 个月研究计划概览
+
+| 阶段 | 时间 | 目标 | 交付物 |
+|------|------|------|--------|
+| 1 | M1-3 | 基础构建 | 元模型、L0-L2 Coq 形式化 |
+| 2 | M4-6 | 可判定性证明 | 终止性定理证明 |
+| 3 | M7-9 | 扩展与完善 | NLL、trait 系统 |
+| 4 | M10-12 | 验证与发布 | 全部机械化、论文 |
+
+## 后续行动
+
+### 立即行动 (本周)
+
+1. 深度精读 Oxide 和 FR 论文
+2. 提取完整的类型规则
+3. 开始 Coq 项目搭建
+
+### 短期目标 (本月)
+
+1. 完成核心语法的 Coq 形式化
+2. 证明终止性引理
+3. 建立与 rustc 的对比测试
+
+### 长期目标 (3-12 月)
+
+1. 完整的形式化理论
+2. 全部定理的机械化证明
+3. 学术论文发表
+
+## 参考资源
+
+### 核心论文
+
+- [Oxide](https://arxiv.org/abs/1903.00982) - Rust 本质形式化
+- [FR Termination](https://whileydave.com/publications/PPS22_NFM_preprint.pdf) - 终止性证明
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/) - 分离逻辑基础
+- [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) - 别名模型
+
+### 工具与代码
+
+- [AENEAS](https://github.com/AeneasVerif/aeneas)
+- [Creusot](https://github.com/creusot-rs/creusot)
+- [Verus](https://github.com/verus-lang/verus)
+- [Miri](https://github.com/rust-lang/miri)
+
+## 贡献指南
+
+本项目采用严格的数学形式化方法，所有定义和定理都需要：
+
+1. 清晰的数学符号说明
+2. 完整的推理规则
+3. Coq/Isabelle 机械化证明
+4. 与 rustc 的一致性验证
+
+## 联系与跟踪
+
+- **计划版本**: v1.0
+- **最后更新**: 2026-03-05
+- **下次评审**: 2026-04-05
+
 ---
 
-## Rust 1.93.1 新特性
-
-| 特性 | 说明 | 文档 |
-|:---|:---|:---|
-| musl 1.2.5 | DNS解析器改进 | [特性分析](10-research-frontiers/rust-1.93-features-analysis.md) |
-| 全局分配器TLS支持 | 安全使用thread_local | [特性分析](10-research-frontiers/rust-1.93-features-analysis.md) |
-| asm! cfg属性 | 条件汇编 | [特性分析](10-research-frontiers/rust-1.93-features-analysis.md) |
-| MaybeUninit新API | assume_init_drop等 | [特性分析](10-research-frontiers/rust-1.93-features-analysis.md) |
-| deref_nullptr deny | 编译时阻止null解引用 | [特性分析](10-research-frontiers/rust-1.93-features-analysis.md) |
-
----
-
-## 形式化符号速查
-
-| 符号 | 含义 | 例子 |
-|:---:|:---|:---|
-| `⊢` | 推导/证明 | `Γ ⊢ e : τ` |
-| `⊸` | 线性蕴含 | `A ⊸ B` |
-| `*` | 分离合取 | `P * Q` |
-| `-∗` | 分离蕴含 | `P -∗ Q` |
-| `own(t, v)` | t拥有值v | `own(x, 42)` |
-| `&[T]` | 共享借用 | `&[String]` |
-| `&mut [T]` | 可变借用 | `&mut [Vec<T>]` |
-
----
-
-## 贡献与反馈
-
-### 建议新增内容
-
-- 新的库分析
-- 形式化证明改进
-- 反例补充
-- 翻译贡献
-
-### 报告问题
-
-- 定理错误
-- 代码问题
-- 链接失效
-- 表述不清
-
----
-
-## 许可证
-
-本文档集采用与Rust项目相同的许可证:
-
-- Apache License 2.0
-- MIT License
-
----
-
-## 致谢
-
-- Rust语言团队
-- RustBelt项目 (形式化验证)
-- Iris项目 (分离逻辑)
-- 所有开源贡献者
-
----
-
-*本文档集致力于成为Rust所有权系统形式化分析的最全面中文资源。*
-
-*最后更新: 2026-03-05*
-*版本: 4.1.0*
-*文档总数: 300+*
-*定理总数: 1000+*
+*本项目致力于推进 Rust 语言的严格形式化理论基础，为系统编程语言的正确性验证树立标杆。*

@@ -1,0 +1,25 @@
+-Q theories RustOwnership
+
+# 工具库
+theories/Utils/ListUtils.v
+theories/Utils/MapUtils.v
+
+# 语法定义
+theories/Syntax/Types.v
+theories/Syntax/Expressions.v
+
+# 语义定义
+theories/Semantics/OperationalSemantics.v
+theories/Semantics/OwnershipSafety.v
+
+# 类型系统
+theories/Typing/TypeSystem.v
+theories/Typing/Subtyping.v
+
+# 元理论证明
+theories/Metatheory/Preservation.v
+theories/Metatheory/Progress.v
+theories/Metatheory/Termination.v
+
+# 可判定性分析
+theories/Decidability/DecidabilityTheorems.v
