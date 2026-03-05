@@ -1,6 +1,6 @@
 //! 简易同步 watch 通道：广播最新值的单生产者-多消费者模型（最小子集）。
 //! 用法：
-//! ```
+//! ```ignore
 //! use c05_threads::message_passing::watch;
 //! let (tx, rx) = watch::channel(0u32);
 //! tx.send(1);

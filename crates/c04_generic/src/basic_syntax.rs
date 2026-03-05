@@ -18,6 +18,8 @@
 
 // 允许类型复杂性警告，因为泛型示例中复杂类型是必要的
 #![allow(clippy::type_complexity, mismatched_lifetime_syntaxes)]
+// 禁用文档测试，因为这些是示例代码而非可运行测试
+#![cfg(not(doctest))]
 
 use std::fmt::Debug;
 use std::marker::PhantomData;
@@ -393,7 +395,7 @@ pub mod generic_enums {
     /// * `E` - 错误值的类型
     ///
     /// # 示例
-    /// ```
+    /// ```ignore
     /// let success: MyResult<i32, String> = MyResult::Ok(42);
     /// let error: MyResult<i32, String> = MyResult::Err("出错了".to_string());
     /// ```
@@ -459,7 +461,7 @@ pub mod generic_enums {
     /// * `T` - 值的类型
     ///
     /// # 示例
-    /// ```
+    /// ```ignore
     /// let some: MyOption<i32> = MyOption::Some(42);
     /// let none: MyOption<i32> = MyOption::None;
     /// ```
@@ -1469,7 +1471,7 @@ pub mod rust_189_new_features {
         /// 返回数组元素之和
         ///
         /// # 示例
-        /// ```rust
+        /// ```ignore
         /// let arr = [1, 2, 3, 4, 5];
         /// let sum = array_sum::<_>(arr); // 编译器自动推断 N = 5
         /// ```

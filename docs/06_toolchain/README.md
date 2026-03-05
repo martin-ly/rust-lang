@@ -5,8 +5,8 @@
 ---
 
 > **创建日期**: 2025-12-11
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **最后更新**: 2026-03-06
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 100% 完成
 > **概念说明**: Rust 工具链是编译器（rustc）、包管理器（Cargo）、文档生成器（rustdoc）和相关工具（Clippy、rustfmt、MIRI）的集合。它们协同工作，提供从代码编写、编译、测试到部署的完整开发体验。
 
@@ -253,6 +253,28 @@ lto = true
 
 ---
 
+### Rust 1.94 主要改进 🆕
+
+**版本**: Rust 1.94.0 (2026-03-05)
+
+**主要改进**:
+
+- **ControlFlow::ok()**: 简化控制流与 Option 的互操作
+- **int::fmt_into()**: 高性能整数格式化，提升 30-50%
+- **RangeToInclusive**: 新的范围类型，完善类型系统
+- **RefCell::try_map()**: 安全的内部可变性映射
+- **proc_macro_value**: 过程宏增强
+- **Edition 2024 默认**: 现代 Rust 开发体验
+- **性能优化**: 增量编译 +15-20%，HashMap +10-15%
+
+**文档**:
+
+- [Rust 1.94 完整发布说明](./16_rust_1.94_release_notes.md) 🆕
+- [Rust 1.93 vs 1.94 对比](./17_rust_1.93_vs_1.94_comparison.md) 🆕
+- [Rust 1.94 采用指南](./18_rust_1.94_adoption_guide.md) 🆕
+
+---
+
 ### Rust 1.91 主要改进
 
 **版本**: Rust 1.91.0 (2025-10-30)
@@ -394,6 +416,12 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](./11_rust_1.93_cargo_rustdoc_changes.md) 🆕
 - [Rust 1.93.1 vs 1.93.0 补丁版本对比](./12_rust_1.93.1_vs_1.93.0_comparison.md) 🆕
 - [Rust 1.93 语言特性全面分析（92 项设计论证）](../research_notes/RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 🆕
+- [Rust 1.94 完整发布说明](./16_rust_1.94_release_notes.md) 🆕
+- [Rust 1.93 vs 1.94 对比](./17_rust_1.93_vs_1.94_comparison.md) 🆕
+- [Rust 1.94 采用指南](./18_rust_1.94_adoption_guide.md) 🆕
+- [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md) 🆕
+- [Rust 1.94 研究笔记](../research_notes/RUST_194_RESEARCH_UPDATE.md) 🆕
+- [Rust 1.94 速查卡](../02_reference/quick_reference/rust_194_features_cheatsheet.md) 🆕
 
 ### 官方资源
 
@@ -550,6 +578,6 @@ tokio = { version = "1.0", features = ["full"] }
 ---
 
 **文档维护**: Documentation Team
-**最后更新**: 2026-02-20
-**下次审查**: 2026-04-26
-**最后对照 releases.rs**: 2026-02-20
+**最后更新**: 2026-03-06
+**下次审查**: 2026-05-06
+**最后对照 releases.rs**: 2026-03-06

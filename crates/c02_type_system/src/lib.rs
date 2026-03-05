@@ -36,6 +36,7 @@ pub mod rust_191_features;
 
 // 导出 Rust 1.92 特性模块
 pub mod rust_192_features;
+pub mod rust_194_features;
 
 // 导出 WebAssembly 支持模块
 pub mod wasm_support;

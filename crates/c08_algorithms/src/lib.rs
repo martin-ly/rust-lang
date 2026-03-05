@@ -85,6 +85,7 @@ pub mod rust_191_features;
 
 // Rust 1.92.0 新特性模块
 pub mod rust_192_features;
+pub mod rust_194_features;
 
 // LeetCode 分类算法模块（结合 Rust 1.91 特性）
 pub mod leetcode;

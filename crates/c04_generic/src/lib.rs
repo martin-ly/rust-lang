@@ -120,6 +120,7 @@ pub mod rust_191_features;
 
 /// Rust 1.92.0 泛型特性实现
 pub mod rust_192_features;
+pub mod rust_194_features;
 
 /// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式
 pub mod advanced_patterns;

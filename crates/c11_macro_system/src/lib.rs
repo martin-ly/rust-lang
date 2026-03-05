@@ -40,6 +40,7 @@ pub mod rust_191_features;
 
 // Rust 1.92 新特性模块
 pub mod rust_192_features;
+pub mod rust_194_features;
 
 // 重新导出常用项
 pub use declarative::*;

@@ -345,6 +345,7 @@ pub mod rust_190_features;
 pub mod rust_190_latest_features;
 pub mod rust_191_features;
 pub mod rust_192_features;
+pub mod rust_194_features;
 
 // 重新导出主要类型 / Re-export main types
 // 使用具体的导出而不是通配符导出以避免名称冲突 / Use specific exports instead of wildcard exports to avoid name conflicts
