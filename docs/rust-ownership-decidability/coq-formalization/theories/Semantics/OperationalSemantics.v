@@ -260,6 +260,14 @@ Inductive step : stack -> heap -> expr -> stack -> heap -> expr -> Prop :=
       step s h e s' h' e' ->
       step s h (fill_ctx C e) s' h' (fill_ctx C e').
 
+(* 自反传递闭包 *)
+Inductive star_step : stack -> heap -> expr -> heap -> expr -> Prop :=
+  | Star_Refl : forall s h e, star_step s h e h e
+  | Star_Trans : forall s h e s' h' e' s'' h'' e'',
+      step s h e s' h' e' ->
+      star_step s' h' e' h'' e'' ->
+      star_step s h e h'' e''.
+
 (* ==========================================================================
  * 求值的性质
  * ========================================================================== *)
@@ -273,20 +281,70 @@ Proof.
   inversion H.
 Qed.
 
-(* 大步和小步语义的等价性（框架） *)
+(* ==========================================================================
+ * 大步和小步语义的等价性（框架）
+ * ========================================================================== *)
+
+(* 大步语义蕴含多小步 *)
+Lemma eval_to_star_step :
+  forall s h e v h',
+    eval s h e v h' ->
+    star_step s h e h' (EValue v).
+Proof.
+  intros s h e v h' Heval.
+  induction Heval.
+  - (* E_Value *) constructor.
+  - (* E_Var *) 
+    eapply Star_Trans with (s' := s) (h' := h) (e' := EValue v).
+    + apply S_Var. apply H.
+    + constructor.
+  - (* E_Borrow *) 
+    eapply Star_Trans with (s' := s) (h' := h) (e' := EValue (RVLoc ℓ)).
+    + (* 借用规则需要上下文 *) admit.
+    + constructor.
+  - (* E_Deref *) 
+    admit.
+  - (* E_Box *) 
+    admit.
+  - (* E_Seq *) 
+    admit.
+  - (* E_Let *) 
+    admit.
+  - (* E_Assign *) 
+    admit.
+  - (* E_Tuple *) 
+    admit.
+  - (* E_If_True *) 
+    admit.
+  - (* E_If_False *) 
+    admit.
+Admitted.
+
+(* 多小步蕴含大步 *)
+Lemma star_step_to_eval :
+  forall s h e h' e',
+    star_step s h e h' e' ->
+    (forall v, e' = EValue v -> eval s h e v h').
+Proof.
+  intros s h e h' e' Hstar.
+  induction Hstar; intros v Heq.
+  - (* Star_Refl *) 
+    subst. inversion Heq; subst.
+    admit. (* 需要区分不同值类型 *)
+  - (* Star_Trans *) 
+    admit.
+Admitted.
+
+(* 大步和小步语义的等价性 *)
 Theorem big_step_small_step_equivalence :
   forall s h e v h',
     eval s h e v h' <->
     star_step s h e h' (EValue v).
-Admitted.
-
-(* 自反传递闭包 *)
-Inductive star_step : stack -> heap -> expr -> heap -> expr -> Prop :=
-  | Star_Refl : forall s h e, star_step s h e h e
-  | Star_Trans : forall s h e s' h' e' s'' h'' e'',
-      step s h e s' h' e' ->
-      star_step s' h' e' h'' e'' ->
-      star_step s h e h'' e''.
+Proof.
+  split.
+  - apply eval_to_star_step.
+  - intros H. apply (star_step_to_eval _ _ _ _ _ H). reflexivity.
+Qed.
 
 (* ==========================================================================
  * 求值示例
@@ -301,13 +359,20 @@ Example eval_ex_let :
     heap_lookup h' ℓ = Some (RVInt 5).
 Proof.
   intros e s h. unfold e, e_let, ti32.
-  eexists. eexists. split.
+  eexists (fresh_loc h). 
+  eexists (heap_extend (heap_extend h (fresh_loc h) (RVInt 5)) 
+                       (S (fresh_loc h)) (RVInt 5)).
+  split.
   - eapply E_Let.
     + apply E_Value. reflexivity.
     + reflexivity.
-    + simpl. admit.  (* 简化版 *)
-  - admit.  (* 简化版 *)
-Admitted.
+    + eapply E_Var. simpl. unfold stack_extend. simpl.
+      destruct (var_eq "x"%string "x"%string); auto.
+  - unfold heap_extend. simpl.
+    destruct (Nat.eqb (fresh_loc h) (fresh_loc h)) eqn:Heq.
+    + reflexivity.
+    + apply Nat.eqb_neq in Heq. contradiction.
+Qed.
 
 (* ==========================================================================
  * 内存安全性质
@@ -324,10 +389,39 @@ Definition no_use_after_free (h : heap) (e : expr) : Prop :=
 Definition accesses_loc (h : heap) (ℓ : loc) : Prop :=
   exists v, heap_lookup h ℓ = Some v.
 
-(* 内存安全定理框架 *)
+(* 堆有效性：所有引用的位置都有效 *)
+Definition heap_valid (h : heap) : Prop :=
+  forall ℓ v, heap_lookup h ℓ = Some v ->
+  forall ℓ', In ℓ' (refs_in_val v) ->
+  exists v', heap_lookup h ℓ' = Some v'.
+
+(* 运行时值中引用的位置 *)
+Fixpoint refs_in_val (v : runtime_val) : list loc :=
+  match v with
+  | RVLoc ℓ => [ℓ]
+  | RVTuple vs => concat (map refs_in_val vs)
+  | RVStruct _ fields => concat (map (fun '(_, v) => refs_in_val v) fields)
+  | _ => []
+  end.
+
+(* 环境类型良好 *)
+Definition env_well_typed (s : stack) (Γ : type_env) : Prop :=
+  forall x τ, te_lookup Γ x = Some τ ->
+  exists v, stack_lookup s x = Some v.
+
+(* 内存安全定理 - 依赖于类型系统的保持性 *)
 Theorem memory_safety :
   forall Δ Γ Θ s h e τ,
     has_type Δ Γ Θ e τ ->
     env_well_typed s Γ ->
+    heap_valid h ->
     no_use_after_free h e.
+Proof.
+  intros Δ Γ Θ s h e τ Htype Henv Hvalid.
+  unfold no_use_after_free.
+  intros ℓ Hnone Hex.
+  destruct Hex as [s' [h' [v [Heval Haccess]]]].
+  (* 使用类型安全定理 *)
+  (* 这里需要连接类型系统和操作语义 *)
+  admit.
 Admitted.

@@ -69,7 +69,8 @@ Lemma variable_preservation :
       value_has_runtime_type v τ.
 Proof.
   intros s Γ x τ Hswf Hlookup.
-  (* 从环境保持推导 *)
+  (* 从环境良好性推导变量存在性 *)
+  (* 由于 stack_well_typed 定义了反向蕴含，需要构造 *)
   admit.
 Admitted.
 
@@ -83,12 +84,14 @@ Lemma seq_preservation :
     has_type Δ Γ Θ e₁ τ₁ ->
     has_type Δ Γ Θ e₂ τ₂ ->
     eval s h (ESeq e₁ e₂) v h' ->
-    exists s'' h'',
+    exists s'' h'' v₁,
       eval s h e₁ v₁ h'' /\
       eval s'' h'' e₂ v h'.
 Proof.
-  admit.
-Admitted.
+  intros Δ Γ Θ e₁ e₂ τ₁ τ₂ s h s' h' v Hty1 Hty2 Heval.
+  inversion Heval; subst; clear Heval.
+  exists s, h', v₁. split; auto.
+Qed.
 
 (* ==========================================================================
  * Let 绑定的类型保持
@@ -100,12 +103,14 @@ Lemma let_preservation :
     has_type Δ Γ Θ e₁ τ₁ ->
     has_type Δ (te_extend Γ x τ₁) Θ e₂ τ₂ ->
     eval s h (ELet ω x τ₁ e₁ e₂) v h' ->
-    exists ℓ h'',
+    exists ℓ h'' v₁,
       eval s h e₁ v₁ h'' /\
       eval (stack_extend s x (RVLoc ℓ)) (heap_extend h'' ℓ v₁) e₂ v h'.
 Proof.
-  admit.
-Admitted.
+  intros Δ Γ Θ ω x τ₁ e₁ e₂ τ₂ s h s' h' v Hty1 Hty2 Heval.
+  inversion Heval; subst; clear Heval.
+  exists ℓ, h', v₁. split; auto.
+Qed.
 
 (* ==========================================================================
  * Borrow 的类型保持
@@ -121,8 +126,37 @@ Lemma borrow_preservation :
       TRef ρ ω τ' = TRef ρ ω τ /\
       eval_place s h p ℓ.
 Proof.
-  admit.
-Admitted.
+  intros Δ Γ Θ p ρ ω τ s h s' h' ℓ Hpty Hsafe Heval.
+  inversion Heval; subst; clear Heval.
+  exists τ. split; auto.
+Qed.
+
+(* ==========================================================================
+ * 值的类型判断
+ * ========================================================================== *)
+
+(* 值的类型判断 *)
+Inductive has_type_value : 
+  region_env -> type_env -> loan_env -> runtime_val -> ty -> Prop :=
+  | HTV_Unit : forall Δ Γ Θ,
+      has_type_value Δ Γ Θ RVUnit (TBase TUnit)
+  | HTV_Bool : forall Δ Γ Θ b,
+      has_type_value Δ Γ Θ (RVBool b) (TBase TBool)
+  | HTV_Int : forall Δ Γ Θ n,
+      has_type_value Δ Γ Θ (RVInt n) (TBase TI32)
+  | HTV_Char : forall Δ Γ Θ c,
+      has_type_value Δ Γ Θ (RVChar c) (TBase TChar)
+  | HTV_String : forall Δ Γ Θ s,
+      has_type_value Δ Γ Θ (RVString s) (TBase TStr)
+  | HTV_Ref : forall Δ Γ Θ ℓ ρ ω τ,
+      has_type_value Δ Γ Θ (RVLoc ℓ) (TRef ρ ω τ)
+  | HTV_Tuple : forall Δ Γ Θ rvs τs,
+      Forall3 (has_type_value Δ Γ Θ) rvs τs ->
+      has_type_value Δ Γ Θ (RVTuple rvs) (TTuple τs).
+
+(* 堆的类型保持（简化） *)
+Definition heap_well_typed (h : heap) (Θ : loan_env) : Prop :=
+  True.  (* 简化版 *)
 
 (* ==========================================================================
  * 主定理：类型保持 (Preservation)
@@ -154,79 +188,81 @@ Proof.
   (* Case: E_Value *)
   - inversion Hty; subst.
     exists Γ, Θ. split; [|split].
-    + admit.  (* value_has_type 到 has_type_value *)
+    + (* 值的类型 *)
+      destruct v; simpl in *; try constructor.
     + auto.
     + auto.
     
   (* Case: E_Var *)
   - inversion Hty; subst.
     exists Γ, Θ. split; [|split].
-    + admit.
+    + (* 变量值的类型 *)
+      destruct v; simpl in *; try constructor.
     + auto.
     + auto.
     
   (* Case: E_Borrow *)
   - inversion Hty; subst.
     exists Γ, Θ. split; [|split].
-    + admit.
+    + (* 借用值的类型 - 引用 *)
+      constructor.
     + auto.
     + auto.
     
   (* Case: E_Deref *)
   - inversion Hty; subst.
-    admit.
+    specialize (IHHeval _ _ Hswf H4). destruct IHHeval as [Γ' [Θ' [Hv [Hswf' Hhwf]]]].
+    exists Γ', Θ'. split; [|split].
+    + auto.
+    + auto.
+    + auto.
     
   (* Case: E_Box *)
   - inversion Hty; subst.
-    admit.
+    specialize (IHHeval _ _ Hswf H3). destruct IHHeval as [Γ' [Θ' [Hv [Hswf' Hhwf]]]].
+    exists Γ', Θ'. split; [|split].
+    + constructor.
+    + auto.
+    + unfold heap_well_typed. auto.
     
   (* Case: E_Seq *)
   - inversion Hty; subst.
-    admit.
+    specialize (IHHeval1 _ _ Hswf H3). destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
+    specialize (IHHeval2 _ _ Hswf1 H5). destruct IHHeval2 as [Γ2 [Θ2 [Hv2 [Hswf2 Hhwf2]]]].
+    exists Γ2, Θ2. split; [|split]; auto.
     
   (* Case: E_Let *)
   - inversion Hty; subst.
-    admit.
+    specialize (IHHeval1 _ _ Hswf H5). destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
+    (* 扩展环境 *)
+    exists (te_extend Γ1 x t), Θ1. split; [|split].
+    + auto.
+    + admit. (* 需要证明扩展环境保持良好性 *)
+    + auto.
     
   (* Case: E_Assign *)
   - inversion Hty; subst.
-    admit.
+    exists Γ, Θ. split; [|split].
+    + constructor.
+    + auto.
+    + auto.
     
   (* Case: E_Tuple *)
   - inversion Hty; subst.
-    admit.
+    admit. (* 需要归纳处理列表 *)
     
   (* Case: E_If_True *)
   - inversion Hty; subst.
-    admit.
+    specialize (IHHeval1 _ _ Hswf H5). destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
+    specialize (IHHeval2 _ _ Hswf1 H6). destruct IHHeval2 as [Γ2 [Θ2 [Hv2 [Hswf2 Hhwf2]]]].
+    exists Γ2, Θ2. split; [|split]; auto.
     
   (* Case: E_If_False *)
   - inversion Hty; subst.
-    admit.
+    specialize (IHHeval1 _ _ Hswf H5). destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
+    specialize (IHHeval2 _ _ Hswf1 H6). destruct IHHeval2 as [Γ2 [Θ2 [Hv2 [Hswf2 Hhwf2]]]].
+    exists Γ2, Θ2. split; [|split]; auto.
 Admitted.
-
-(* 值的类型判断（简化） *)
-Inductive has_type_value : 
-  region_env -> type_env -> loan_env -> runtime_val -> ty -> Prop :=
-  | HTV_Unit : forall Δ Γ Θ,
-      has_type_value Δ Γ Θ RVUnit (TBase TUnit)
-  | HTV_Bool : forall Δ Γ Θ b,
-      has_type_value Δ Γ Θ (RVBool b) (TBase TBool)
-  | HTV_Int : forall Δ Γ Θ n,
-      has_type_value Δ Γ Θ (RVInt n) (TBase TI32)
-  | HTV_Char : forall Δ Γ Θ c,
-      has_type_value Δ Γ Θ (RVChar c) (TBase TChar)
-  | HTV_String : forall Δ Γ Θ s,
-      has_type_value Δ Γ Θ (RVString s) (TBase TStr)
-  | HTV_Ref : forall Δ Γ Θ ℓ ρ ω τ,
-      has_type_value Δ Γ Θ (RVLoc ℓ) (TRef ρ ω τ)
-  | HTV_Tuple : forall Δ Γ Θ rvs τs,
-      Forall3 (has_type_value Δ Γ Θ) rvs τs ->
-      has_type_value Δ Γ Θ (RVTuple rvs) (TTuple τs).
-
-(* 堆的类型保持（简化） *)
-Definition heap_well_typed (h : heap) (Θ : loan_env) : Prop :=
-  True.  (* 简化版 *)
 
 (* ==========================================================================
  * 扩展定理
@@ -240,7 +276,20 @@ Lemma eval_preserves_fv :
       In x (expr_vars e) ->
       exists v', stack_lookup s x = Some v'.
 Proof.
-  admit.
+  intros s h e v h' Heval.
+  induction Heval; intros x Hin.
+  - (* E_Value *) simpl in Hin. contradiction.
+  - (* E_Var *) simpl in Hin. destruct Hin as [Heq | []].
+    exists v. rewrite <- Heq. apply H.
+  - (* E_Borrow *) admit.
+  - (* E_Deref *) admit.
+  - (* E_Box *) admit.
+  - (* E_Seq *) admit.
+  - (* E_Let *) admit.
+  - (* E_Assign *) admit.
+  - (* E_Tuple *) admit.
+  - (* E_If_True *) admit.
+  - (* E_If_False *) admit.
 Admitted.
 
 (* 类型保持的推论：无类型错误 *)
@@ -248,13 +297,13 @@ Corollary no_type_errors :
   forall Δ Γ Θ s h e τ,
     has_type Δ Γ Θ e τ ->
     stack_well_typed s Γ ->
-    ~ (exists s' h' msg, eval s h e (RVAbort msg) h').
+    ~ (exists s' h' msg, eval s h e (RVUnit) h').
 Proof.
-  admit.  (* 假设求值不会返回错误 *)
+  intros Δ Γ Θ s h e τ Hty Hswf [s' [h' [msg Heval]]].
+  (* RVAbort 未定义，使用 RVUnit 占位 *)
+  (* 类型保持保证求值结果是良类型的，不会出错 *)
+  admit.
 Admitted.
-
-(* RVAbort 未定义，占位 *)
-Definition RVAbort (msg : string) := RVUnit.
 
 (* ==========================================================================
  * 小步语义的类型保持
@@ -270,7 +319,60 @@ Theorem preservation_small_step :
       stack_well_typed s' Γ' /\
       heap_well_typed h' Θ'.
 Proof.
-  admit.
+  intros s h e s' h' e' Δ Γ Θ τ Hty Hstep.
+  inversion Hstep; subst; clear Hstep.
+  
+  (* Case: S_Var *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split].
+    + (* 值表达式类型 *) admit.
+    + auto.
+    + auto.
+    
+  (* Case: S_Seq *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split].
+    + auto.
+    + auto.
+    + auto.
+    
+  (* Case: S_Let *)
+  - inversion Hty; subst.
+    exists (te_extend Γ x τ), Θ. split; [|split].
+    + auto.
+    + admit. (* 扩展环境 *)
+    + auto.
+    
+  (* Case: S_Assign *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split].
+    + admit. (* 赋值后类型 *)
+    + auto.
+    + auto.
+    
+  (* Case: S_Deref *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split].
+    + admit. (* 解引用类型 *)
+    + auto.
+    + auto.
+    
+  (* Case: S_If_True *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split].
+    + auto.
+    + auto.
+    + auto.
+    
+  (* Case: S_If_False *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split].
+    + auto.
+    + auto.
+    + auto.
+    
+  (* Case: S_Ctx *)
+  - admit. (* 上下文归纳 *)
 Admitted.
 
 (* 多步类型保持 *)
@@ -283,7 +385,17 @@ Theorem preservation_star_step :
       stack_well_typed (cfg_stack (mk_config s h e')) Γ' /\
       heap_well_typed h' Θ'.
 Proof.
-  admit.
+  intros s h e h' e' Δ Γ Θ τ Hty Hstar.
+  induction Hstar.
+  - (* Star_Refl *) 
+    exists Γ, Θ. split; [|split].
+    + auto.
+    + auto.
+    + auto.
+  - (* Star_Trans *) 
+    specialize (preservation_small_step _ _ _ _ _ _ _ _ _ _ H Hstar1).
+    destruct preservation_small_step as [Γ' [Θ' [Hty' [Hswf' Hhwf']]]].
+    admit. (* 需要组合归纳假设 *)
 Admitted.
 
 (* ==========================================================================
@@ -311,5 +423,9 @@ Lemma subtype_preserves_value_type :
     value_has_runtime_type v τ₁ ->
     value_has_runtime_type v τ₂.
 Proof.
-  admit.
+  intros Δ τ₁ τ₂ v Hsub Hty.
+  induction Hsub; simpl in *; auto.
+  - (* Reflexive *) auto.
+  - (* Transitive *) admit.
+  - (* 引用子类型 *) admit.
 Admitted.

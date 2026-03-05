@@ -62,8 +62,8 @@ Proof.
   unfold stack_well_typed in Hswf.
   destruct (stack_lookup s x) eqn:Hsl.
   - exists r. reflexivity.
-  - (* 如果变量不在栈中，但类型环境中有，这违反了良构性 *)
-    exfalso.
+  - (* 变量不在栈中但类型环境中有类型 *)
+    (* 这表明环境不兼容，但无法直接导出矛盾 *)
     admit.
 Admitted.
 
@@ -98,7 +98,16 @@ Lemma borrow_progress :
       exists ℓ,
         eval_place s h p ℓ.
 Proof.
-  admit.
+  intros Δ Γ Θ p ρ ω τ Hpty Hsafe s h Hswf.
+  (* 根据 place_has_type 的定义，place 必须是有效的 *)
+  (* 从 stack_well_typed 可以推导出变量存在 *)
+  induction p.
+  - (* PVar *)
+    admit.
+  - (* PDeref *)
+    admit.
+  - (* PField *)
+    admit.
 Admitted.
 
 (* ==========================================================================
@@ -152,40 +161,48 @@ Proof.
   
   (* Case: T_Borrow *)
   - right. left.
-    admit.  (* 借用可以进展 *)
+    (* 借用需要 place 可以求值 *)
+    admit.
   
   (* Case: T_Deref *)
   - right. left.
-    admit.  (* 解引用可以进展 *)
+    (* 解引用需要表达式是引用值 *)
+    admit.
   
   (* Case: T_Box *)
   - right. left.
-    admit.  (* Box 可以进展 *)
+    (* Box 需要子表达式是值 *)
+    admit.
   
   (* Case: T_Tuple *)
   - right. left.
-    admit.  (* 元组可以进展 *)
+    (* 元组需要所有元素是值或可以求值 *)
+    admit.
   
   (* Case: T_Seq *)
   - right. left.
-    admit.  (* 序列可以进展 *)
+    (* 序列可以进展 *)
+    admit.
   
   (* Case: T_Let *)
   - right. left.
-    apply let_progress with (τ₁ := τ₁); auto.
-    apply IHHty1; auto.
+    (* 如果 e₁ 是值，Let 可以进展 *)
+    admit.
   
   (* Case: T_Assign *)
   - right. left.
-    admit.  (* 赋值可以进展 *)
+    (* 赋值需要 place 和值 *)
+    admit.
   
   (* Case: T_If *)
   - right. left.
-    admit.  (* 条件可以进展 *)
+    (* 条件需要条件表达式是布尔值 *)
+    admit.
   
   (* Case: T_Call *)
   - right. left.
-    admit.  (* 函数调用可以进展 *)
+    (* 函数调用需要函数和参数 *)
+    admit.
 Admitted.
 
 (* ==========================================================================
@@ -207,7 +224,12 @@ Proof.
   - right. auto.
   - (* 证明卡住不可能发生 *)
     exfalso.
-    admit.  (* 需要证明良类型表达式不会卡住 *)
+    (* 卡住意味着表达式不是值也不能求值，但进展定理说良类型表达式要么
+       是值要么可以求值 *)
+    unfold is_stuck in Hstuck.
+    destruct Hstuck as [Hnotval Hnostep].
+    (* 矛盾 *)
+    admit.
 Admitted.
 
 (* ==========================================================================
@@ -238,7 +260,44 @@ Theorem eval_deterministic :
     eval s h e v₂ h₂ ->
     v₁ = v₂ /\ h₁ = h₂.
 Proof.
-  admit.  (* 求值是确定性的 *)
+  intros s h e v₁ h₁ v₂ h₂ Heval1 Heval2.
+  generalize dependent v₂.
+  generalize dependent h₂.
+  induction Heval1; intros h₂ v₂ Heval2;
+    inversion Heval2; subst; clear Heval2;
+    try (split; auto; fail).
+  - (* E_Var *) 
+    assert (v = v0) by congruence. subst. auto.
+  - (* E_Borrow *)
+    admit. (* 需要 eval_place 确定性 *)
+  - (* E_Deref *)
+    specialize (IHHeval1 _ _ H3). destruct IHHeval1 as [Hv Hh].
+    subst. split; auto.
+    admit. (* 需要 heap_lookup 确定性 *)
+  - (* E_Box *)
+    specialize (IHHeval1 _ _ H2). destruct IHHeval1 as [Hv Hh].
+    subst. split; auto.
+    admit. (* 需要 fresh_loc 确定性 *)
+  - (* E_Seq *)
+    specialize (IHHeval1_1 _ _ H3). destruct IHHeval1_1 as [Hv1 Hh1].
+    specialize (IHHeval1_2 _ _ H5). destruct IHHeval1_2 as [Hv2 Hh2].
+    subst. auto.
+  - (* E_Let *)
+    specialize (IHHeval1_1 _ _ H3). destruct IHHeval1_1 as [Hv1 Hh1].
+    specialize (IHHeval1_2 _ _ H5). destruct IHHeval1_2 as [Hv2 Hh2].
+    subst. auto.
+  - (* E_Assign *)
+    admit. (* 需要 eval_place 确定性 *)
+  - (* E_Tuple *)
+    admit. (* 需要列表归纳 *)
+  - (* E_If_True *)
+    specialize (IHHeval1_1 _ _ H3). destruct IHHeval1_1 as [Hv1 Hh1].
+    specialize (IHHeval1_2 _ _ H5). destruct IHHeval1_2 as [Hv2 Hh2].
+    subst. auto.
+  - (* E_If_False *)
+    specialize (IHHeval1_1 _ _ H3). destruct IHHeval1_1 as [Hv1 Hh1].
+    specialize (IHHeval1_2 _ _ H5). destruct IHHeval1_2 as [Hv2 Hh2].
+    subst. auto.
 Admitted.
 
 (* ==========================================================================
@@ -266,5 +325,13 @@ Theorem preservation_plus_progress :
       star_step s h e h' e' /\
       (is_exp_value e' = true \/ is_stuck e').
 Proof.
-  admit.
+  intros Δ Γ Θ s h e τ n Hty Hswf Hhwf.
+  destruct (progress Δ Γ Θ s h e τ Hty Hswf Hhwf) as [Hval | [Hstep | Hstuck]].
+  - (* 已经是值 *)
+    exists s, h, e. split; [constructor | left; auto].
+  - (* 可以求值一步 *)
+    destruct Hstep as [s' [h' [e' Hstep]]].
+    admit. (* 需要归纳到多步 *)
+  - (* 卡住 *)
+    exists s, h, e. split; [constructor | right; auto].
 Admitted.
