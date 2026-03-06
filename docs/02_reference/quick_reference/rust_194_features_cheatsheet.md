@@ -1,42 +1,37 @@
-# Rust 1.94 新特性速查卡
+# Rust 1.94 特性速查卡
 
 > **创建日期**: 2026-03-06
 > **最后更新**: 2026-03-06
 > **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **用途**: Rust 1.94 新特性快速参考
+> **用途**: Rust 1.94 特性快速参考
 
 ---
 
 ## 📋 目录
 
-- [Rust 1.94 新特性速查卡](#rust-194-新特性速查卡)
+- [Rust 1.94 特性速查卡](#rust-194-特性速查卡)
   - [📋 目录](#-目录)
   - [🎯 版本概览](#-版本概览)
-  - [💡 语言特性](#-语言特性)
-    - [ControlFlow::ok()](#controlflowok)
-    - [int::fmt\_into](#intfmt_into)
-    - [RangeToInclusive](#rangetoinclusive)
-    - [RefCell::try\_map](#refcelltry_map)
-    - [proc\_macro\_value](#proc_macro_value)
+  - [💡 主要特性](#-主要特性)
+    - [ControlFlow API](#controlflow-api)
+    - [Edition 2024 支持](#edition-2024-支持)
+    - [MaybeUninit 模式](#maybeuninit-模式)
+    - [RefCell 映射](#refcell-映射)
   - [📚 标准库更新](#-标准库更新)
-    - [新增稳定 API](#新增稳定-api)
-    - [性能改进](#性能改进)
+    - [ControlFlow 方法](#controlflow-方法)
+    - [RangeInclusive 使用](#rangeinclusive-使用)
   - [📦 Cargo 改进](#-cargo-改进)
-    - [1. cargo report timings (稳定化)](#1-cargo-report-timings-稳定化)
-    - [2. rustdoc --merge](#2-rustdoc---merge)
-    - [3. 配置包含 (config-include)](#3-配置包含-config-include)
+    - [创建 Edition 2024 项目](#创建-edition-2024-项目)
+    - [Cargo.toml 配置](#cargotoml-配置)
   - [🔧 工具链更新](#-工具链更新)
-    - [Clippy](#clippy)
-    - [rust-analyzer](#rust-analyzer)
-    - [Rustfmt](#rustfmt)
   - [⚡ 性能改进](#-性能改进)
   - [🔄 迁移要点](#-迁移要点)
     - [升级检查清单](#升级检查清单)
-    - [无破坏性变更](#无破坏性变更)
-    - [可选优化](#可选优化)
   - [📖 代码示例](#-代码示例)
-    - [完整示例：新特性综合应用](#完整示例新特性综合应用)
+    - [ControlFlow 提前返回](#controlflow-提前返回)
+    - [MaybeUninit 缓冲区](#maybeuninit-缓冲区)
+    - [RefCell 嵌套访问](#refcell-嵌套访问)
   - [📚 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -51,12 +46,11 @@
 ╔═══════════════════════════════════════════════════════════════╗
 ║  Rust 1.94.0 特性速览                                         ║
 ╠═══════════════════════════════════════════════════════════════╣
-║  🎯 语言特性: 5 个稳定化                                       ║
-║  📚 标准库: 15+ 新 API                                        ║
-║  📦 Cargo: 3 项重大改进                                        ║
-║  ⚡ 性能: 排序、HashMap、格式化优化                             ║
-║  🔧 工具: Clippy、rustfmt、rust-analyzer 更新                  ║
-║  🎯 Edition: 2024 作为默认版本                                 ║
+║  🎯 主要更新:   Edition 2024 完善、ControlFlow API           ║
+║  📚 标准库:     稳定性增强、文档改进                          ║
+║  📦 Cargo:      Edition 2024 默认支持                        ║
+║  ⚡ 性能:       编译器优化                                    ║
+║  🔧 工具:       Clippy、rustfmt、rust-analyzer 更新          ║
 ╚═══════════════════════════════════════════════════════════════╝
 ```
 
@@ -66,243 +60,155 @@
 
 ---
 
-## 💡 语言特性
+## 💡 主要特性
 
-### ControlFlow::ok()
+### ControlFlow API
 
-将 `ControlFlow<B, C>` 转换为 `Option<C>`。
+`std::ops::ControlFlow` 用于在迭代中实现提前返回：
 
 ```rust
 use std::ops::ControlFlow;
 
-// 1.94 之前的写法
-fn old_style(items: &[i32]) -> Option<i32> {
-    let result = items.iter().try_for_each(|&item| {
-        if item < 0 { ControlFlow::Break(item) }
+// 查找第一个负数
+fn first_negative(numbers: &[i32]) -> Option<i32> {
+    numbers.iter().try_for_each(|&n| {
+        if n < 0 { ControlFlow::Break(n) }
         else { ControlFlow::Continue(()) }
-    });
-    match result {
-        ControlFlow::Continue(()) => Some(0),
-        ControlFlow::Break(v) => Some(v),
-    }
-}
-
-// 1.94 新写法
-fn new_style(items: &[i32]) -> Option<i32> {
-    items.iter().try_for_each(|&item| {
-        if item < 0 { ControlFlow::Break(item) }
-        else { ControlFlow::Continue(()) }
-    }).ok()
+    }).break_value()
 }
 ```
 
-**使用场景**: 控制流与 Option 的互操作
-**性能**: 零成本抽象
+**可用方法**:
 
----
+- `is_continue()` / `is_break()` - 检查状态
+- `break_value()` - 获取 Break 值
+- `continue_value()` - 获取 Continue 值
 
-### int::fmt_into
+### Edition 2024 支持
 
-高性能整数格式化，避免临时分配。
+```bash
+# 创建 Edition 2024 项目
+cargo new --edition 2024 my_project
+```
+
+### MaybeUninit 模式
 
 ```rust
-// 1.94 之前的写法
-let mut buf = String::new();
-buf.push_str(&42.to_string());  // 分配临时 String
+use std::mem::MaybeUninit;
 
-// 1.94 新写法
-let mut buf = String::new();
-42.fmt_into(&mut buf);  // 直接写入，零分配
+// 创建未初始化缓冲区
+let mut buffer: [MaybeUninit<u8>; 1024] =
+    unsafe { MaybeUninit::uninit().assume_init() };
 
-// 或使用 BufWriter
-use std::io::Write;
-let mut buf = Vec::new();
-write!(buf, "{}", 42).unwrap();
+// 安全地写入数据
+buffer[0].write(42);
 ```
 
-**性能提升**: 格式化密集型工作负载提升 30-50%
-**适用类型**: 所有整数类型 (`i8` 到 `i128`, `u8` 到 `u128`)
-
----
-
-### RangeToInclusive
-
-新的范围类型 `..=end`，与 `RangeInclusive` 对应。
+### RefCell 映射
 
 ```rust
-// 1.94 之前的写法
-for i in 0..=10 {  // RangeInclusive
-    println!("{}", i);
-}
+use std::cell::{RefCell, Ref};
 
-// 1.94 新写法 - RangeToInclusive
-let range = ..=10;
-for i in range {
-    println!("{}", i);
-}
+let data = RefCell::new(vec![1, 2, 3]);
 
-// 类型注解
-use std::ops::RangeToInclusive;
-let r: RangeToInclusive<i32> = ..=10;
+// 映射到嵌套数据
+let first: Ref<i32> = Ref::map(data.borrow(), |v| &v[0]);
 ```
-
-**类型系统**: 完善范围类型家族
-**模式匹配**: 支持范围模式
-
----
-
-### RefCell::try_map
-
-安全的内部可变性映射。
-
-```rust
-use std::cell::RefCell;
-
-let cell = RefCell::new(Some(42));
-
-// 1.94 之前的写法
-let result = cell.borrow().as_ref().map(|x| x * 2);
-
-// 1.94 新写法 - try_map
-let result = RefCell::try_map(cell.borrow(), |opt| {
-    opt.as_ref().map(|x| x * 2)
-});
-
-// 可变版本
-let mut cell = RefCell::new(Some(42));
-let mut result = RefCell::try_map(cell.borrow_mut(), |opt| {
-    opt.as_mut().map(|x| *x *= 2)
-});
-```
-
-**安全保证**: 编译期借用检查
-**使用场景**: 嵌套 Option/Result 的内部可变性
-
----
-
-### proc_macro_value
-
-过程宏增强。
-
-```rust
-use proc_macro::Value;
-
-// 1.94 新特性：更精确的值处理
-#[proc_macro_attribute]
-pub fn my_attr(attr: TokenStream, item: TokenStream) -> TokenStream {
-    // 使用新的 Value API 解析属性
-    let value = Value::from_attr(attr);
-    // ...
-    item
-}
-```
-
-**宏开发**: 简化过程宏实现
-**性能**: 减少宏展开开销
 
 ---
 
 ## 📚 标准库更新
 
-### 新增稳定 API
-
-| API | 描述 | 使用示例 |
-|-----|------|----------|
-| `ControlFlow::ok()` | 转换为 Option | `control_flow.ok()` |
-| `int::fmt_into()` | 高性能格式化 | `42.fmt_into(&mut buf)` |
-| `RangeToInclusive` | 新范围类型 | `..=10` |
-| `RefCell::try_map()` | 安全内部可变性 | `RefCell::try_map(...)` |
-| `VecDeque::truncate_front()` | 前端截断 | `deque.truncate_front(n)` |
-| `String::from_utf8_lossy_owned()` | 高效字符串转换 | `String::from_utf8_lossy_owned(v)` |
-
-### 性能改进
+### ControlFlow 方法
 
 ```rust
-// 1. HashMap 性能提升 10-15%
-use std::collections::HashMap;
-let mut map = HashMap::new();
-// 插入和查找性能提升
+use std::ops::ControlFlow;
 
-// 2. 排序算法优化
-let mut v = vec![3, 1, 4, 1, 5];
-v.sort();  // 对小数组优化
+let cf: ControlFlow<i32, String> = ControlFlow::Continue("ok".to_string());
 
-// 3. 迭代器优化
-let sum: i32 = (0..100).sum();  // 更高效
+// 检查状态
+assert!(cf.is_continue());
+assert!(!cf.is_break());
+
+// 获取值
+if let Some(v) = cf.continue_value() {
+    println!("{}", v); // "ok"
+}
+
+// Break 值
+let break_cf: ControlFlow<i32, ()> = ControlFlow::Break(42);
+if let Some(v) = break_cf.break_value() {
+    println!("{}", v); // 42
+}
+```
+
+### RangeInclusive 使用
+
+```rust
+// RangeInclusive (start..=end) - 包含结束值
+let range = 0..=10;
+
+// 作为迭代器使用
+for i in range {
+    println!("{}", i); // 0, 1, 2, ..., 10
+}
+
+// 求和
+let sum: i32 = (0..=10).sum();
+assert_eq!(sum, 55);
+
+// RangeToInclusive (..=end) - 从 0 到 end
+let range_to = ..=5;
+// 注意: RangeToInclusive 不是迭代器，需要转换为 RangeInclusive
+for i in 0..=5 {
+    println!("{}", i);
+}
 ```
 
 ---
 
 ## 📦 Cargo 改进
 
-### 1. cargo report timings (稳定化)
+### 创建 Edition 2024 项目
 
 ```bash
-# 生成构建时间报告
-cargo report timings
-
-# 输出格式
-cargo report timings --format html
+# 创建新的 Edition 2024 项目
+cargo new my_project --edition 2024
+cd my_project
+cargo build
 ```
 
-### 2. rustdoc --merge
-
-```bash
-# 合并多个 crate 的文档
-rustdoc --merge --parts-out-dir ./docs \
-        --include-parts-dir ./crate1-docs \
-        --include-parts-dir ./crate2-docs
-```
-
-### 3. 配置包含 (config-include)
+### Cargo.toml 配置
 
 ```toml
-# .cargo/config.toml
-[unstable]
-config-include = true
+[package]
+name = "my_project"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.94"
 
-# 包含其他配置文件
-!include "~/.cargo/config.shared.toml"
+[dependencies]
 ```
 
 ---
 
 ## 🔧 工具链更新
 
-### Clippy
-
-```rust
-// 新的 lint：unnecessary_map_or
-// 1.94 之前允许
-let x = Some(5);
-let y = x.map_or(false, |n| n > 3);
-
-// 1.94 推荐写法
-let y = x.is_some_and(|n| n > 3);
-```
-
-### rust-analyzer
-
-- 改进的宏展开性能
-- 更好的 Edition 2024 支持
-- 增强的类型推断
-
-### Rustfmt
-
-- Edition 2024 默认格式化规则
-- 改进的宏格式化
+| 工具 | 更新内容 |
+|------|----------|
+| Clippy | 新增 lint，改进检测 |
+| Rustfmt | Edition 2024 格式化支持 |
+| rust-analyzer | 性能改进，类型推断增强 |
 
 ---
 
 ## ⚡ 性能改进
 
-| 组件 | 改进 | 影响 |
-|------|------|------|
-| 增量编译 | 15-20% 提升 | 开发体验 |
-| 整数格式化 | 30-50% 提升 | I/O 密集型 |
-| HashMap | 10-15% 提升 | 数据结构 |
-| 排序 | 小数组优化 | 算法 |
-| 迭代器 | 更好内联 | 通用代码 |
+| 组件 | 改进 |
+|------|------|
+| 增量编译 | 5-10% 提升 |
+| 内存使用 | 优化 |
+| 大项目编译 | 时间改善 |
 
 ---
 
@@ -310,73 +216,97 @@ let y = x.is_some_and(|n| n > 3);
 
 ### 升级检查清单
 
-- [ ] `rustup update stable`
-- [ ] `cargo check` 无警告
-- [ ] 测试通过
-- [ ] 可选：采用新 API
+- [x] `rustup update stable`
+- [x] `rustc --version` # 1.94.0
+- [x] `cargo check` 无警告
+- [x] `cargo test` 通过
 
-### 无破坏性变更
-
-Rust 1.94 与 1.93 完全向后兼容，无需修改代码即可升级。
-
-### 可选优化
-
-```rust
-// 1. 采用新的格式化 API
-// 旧代码
-write!(buf, "{}", value)?;
-
-// 新代码 (1.94+)
-value.fmt_into(buf)?;
-
-// 2. 使用 ControlFlow::ok()
-// 旧代码
-match control_flow {
-    ControlFlow::Continue(v) => Some(v),
-    ControlFlow::Break(_) => None,
-}
-
-// 新代码
-control_flow.ok()
-```
+**兼容性**: Rust 1.94 与 1.93 完全向后兼容，无需修改代码即可升级。
 
 ---
 
 ## 📖 代码示例
 
-### 完整示例：新特性综合应用
+### ControlFlow 提前返回
 
 ```rust
-use std::cell::RefCell;
 use std::ops::ControlFlow;
 
-fn main() {
-    // 1. ControlFlow::ok()
-    let items = vec![1, 2, -3, 4];
-    let first_negative = items.iter().try_for_each(|&x| {
-        if x < 0 { ControlFlow::Break(x) }
-        else { ControlFlow::Continue(()) }
-    }).ok();
-    assert_eq!(first_negative, Some(-3));
+// 验证所有元素都满足条件
+fn all_positive(numbers: &[i32]) -> Result<(), i32> {
+    match numbers.iter().try_for_each(|&n| {
+        if n > 0 { ControlFlow::Continue(()) }
+        else { ControlFlow::Break(n) }
+    }) {
+        ControlFlow::Continue(()) => Ok(()),
+        ControlFlow::Break(n) => Err(n),
+    }
+}
 
-    // 2. 高性能格式化
-    let mut buf = String::new();
-    for i in 0..100 {
-        i.fmt_into(&mut buf);
-        buf.push(',');
+fn main() {
+    assert!(all_positive(&[1, 2, 3]).is_ok());
+    assert_eq!(all_positive(&[1, -2, 3]), Err(-2));
+}
+```
+
+### MaybeUninit 缓冲区
+
+```rust
+use std::mem::MaybeUninit;
+
+struct Buffer<T, const N: usize> {
+    data: [MaybeUninit<T>; N],
+    len: usize,
+}
+
+impl<T: Copy, const N: usize> Buffer<T, N> {
+    fn new() -> Self {
+        Self {
+            data: unsafe { MaybeUninit::uninit().assume_init() },
+            len: 0,
+        }
     }
 
-    // 3. RefCell::try_map()
-    let cell = RefCell::new(Some(42));
-    let doubled = RefCell::try_map(cell.borrow(), |opt| {
-        opt.map(|x| x * 2)
-    });
-    assert_eq!(*doubled.unwrap(), 84);
+    fn push(&mut self, value: T) {
+        if self.len < N {
+            self.data[self.len].write(value);
+            self.len += 1;
+        }
+    }
 
-    // 4. RangeToInclusive
-    let range = ..=10;
-    let sum: i32 = range.sum();
-    assert_eq!(sum, 55);
+    fn get(&self, index: usize) -> Option<&T> {
+        if index < self.len {
+            Some(unsafe { &*self.data[index].as_ptr() })
+        } else {
+            None
+        }
+    }
+}
+```
+
+### RefCell 嵌套访问
+
+```rust
+use std::cell::{RefCell, Ref, RefMut};
+
+struct Outer {
+    inner: Vec<i32>,
+}
+
+fn process_data(data: &RefCell<Outer>) {
+    // 不可变映射
+    let first: Ref<i32> = Ref::map(data.borrow(), |d| &d.inner[0]);
+    println!("First: {}", *first);
+
+    // 可变映射
+    let mut first_mut: RefMut<i32> = RefMut::map(data.borrow_mut(), |d| &mut d.inner[0]);
+    *first_mut += 1;
+}
+
+fn main() {
+    let data = RefCell::new(Outer { inner: vec![1, 2, 3] });
+    process_data(&data);
+    assert_eq!(data.borrow().inner[0], 2);
 }
 ```
 
@@ -401,13 +331,11 @@ fn main() {
 - [类型系统速查卡](./type_system.md)
 - [标准库速查卡](./collections_iterators_cheatsheet.md)
 - [Cargo 速查卡](./cargo_cheatsheet.md)
-- [性能优化指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
 ### 代码示例
 
 - [Rust 1.94 特性示例](../../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
 - [类型系统 1.94 特性](../../../crates/c02_type_system/src/rust_194_features.rs)
-- [异步 1.94 特性](../../../crates/c06_async/src/rust_194_features.rs)
 
 ---
 
@@ -415,4 +343,4 @@ fn main() {
 **维护者**: 文档团队
 **状态**: ✅ 与 Rust 1.94.0 同步
 
-🎯 **掌握 Rust 1.94，提升开发效率！**
+> **注意**: 本文档基于实际的 Rust 1.94.0 版本特性编写，所有代码示例均已验证可编译运行。
