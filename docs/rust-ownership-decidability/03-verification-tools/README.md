@@ -31,3 +31,17 @@
 ---
 
 **维护者**: Rust Verification Tools Team
+
+---
+
+## Rust 1.94 兼容性
+
+| 工具 | Rust 1.94 支持状态 |
+|:---:|:---|
+| Miri | ✅ 官方支持 |
+| Kani | ✅ 官方支持 |
+| Creusot | ⚠️ 需验证最新版本 |
+| Prusti | ⚠️ 维护模式 |
+| Verus | ✅ 推荐用于新项目 |
+
+> **注意**: 有关 Rust 1.94 的详细兼容性信息，请参阅 [验证概述](03-01-verification-overview.md#7-rust-194-版本兼容性)

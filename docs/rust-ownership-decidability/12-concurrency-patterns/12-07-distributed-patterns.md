@@ -1,6 +1,6 @@
 # Rust 分布式模式
 
-> **Rust版本**: 1.93.1
+> **Rust版本**: 1.94
 > **覆盖范围**: 一致性模型、共识算法、分布式事务、容错设计
 > **权威参考**: Designing Data-Intensive Applications (Martin Kleppmann), Raft Paper
 
@@ -17,6 +17,7 @@
   - [2. 共识算法](#2-共识算法)
     - [2.1 Raft协议](#21-raft协议)
     - [2.2 领导者选举](#22-领导者选举)
+    - [Rust 1.94 延迟初始化在分布式系统中的应用](#rust-194-延迟初始化在分布式系统中的应用)
 
 ---
 
@@ -645,6 +646,131 @@ impl RaftNode {
 ```
 
 ### 2.2 领导者选举
+
+### Rust 1.94 延迟初始化在分布式系统中的应用
+
+```rust
+use std::sync::LazyLock;
+use std::sync::atomic::{AtomicU64, Ordering};
+
+/// 延迟初始化的全局节点标识
+static NODE_ID: LazyLock<String> = LazyLock::new(|| {
+    // 生成或加载唯一的节点标识
+    std::env::var("NODE_ID")
+        .unwrap_or_else(|_| uuid::Uuid::new_v4().to_string())
+});
+
+/// 延迟初始化的集群配置
+static CLUSTER_CONFIG: LazyLock<ClusterConfig> = LazyLock::new(|| {
+    ClusterConfig::from_env()
+});
+
+pub struct ClusterConfig {
+    pub node_id: String,
+    pub peers: Vec<String>,
+    pub heartbeat_interval_ms: u64,
+    pub election_timeout_min_ms: u64,
+    pub election_timeout_max_ms: u64,
+}
+
+impl ClusterConfig {
+    fn from_env() -> Self {
+        Self {
+            node_id: NODE_ID.clone(),
+            peers: std::env::var("CLUSTER_PEERS")
+                .unwrap_or_default()
+                .split(',')
+                .map(|s| s.to_string())
+                .collect(),
+            heartbeat_interval_ms: std::env::var("HEARTBEAT_INTERVAL_MS")
+                .ok()
+                .and_then(|s| s.parse().ok())
+                .unwrap_or(50),
+            election_timeout_min_ms: std::env::var("ELECTION_TIMEOUT_MIN_MS")
+                .ok()
+                .and_then(|s| s.parse().ok())
+                .unwrap_or(150),
+            election_timeout_max_ms: std::env::var("ELECTION_TIMEOUT_MAX_MS")
+                .ok()
+                .and_then(|s| s.parse().ok())
+                .unwrap_or(300),
+        }
+    }
+}
+
+/// 获取节点 ID（Rust 1.94）
+pub fn get_node_id() -> &'static str {
+    NODE_ID.get().as_str()
+}
+
+/// 获取集群配置（Rust 1.94）
+pub fn get_cluster_config() -> &'static ClusterConfig {
+    CLUSTER_CONFIG.get()
+}
+
+/// 分布式系统中的延迟初始化状态
+pub struct DistributedNode {
+    config: &'static ClusterConfig,
+    term: AtomicU64,
+    // 其他状态...
+}
+
+impl DistributedNode {
+    pub fn new() -> Self {
+        Self {
+            config: CLUSTER_CONFIG.get(),
+            term: AtomicU64::new(0),
+        }
+    }
+
+    pub fn node_id(&self) -> &str {
+        &self.config.node_id
+    }
+
+    pub fn peers(&self) -> &[String] {
+        &self.config.peers
+    }
+}
+
+/// 使用 LazyLock 的分布式服务注册表
+static SERVICE_REGISTRY: LazyLock<ServiceRegistry> = LazyLock::new(|| {
+    ServiceRegistry::new()
+});
+
+pub struct ServiceRegistry {
+    services: std::sync::RwLock<std::collections::HashMap<String, ServiceInfo>>,
+}
+
+#[derive(Clone)]
+pub struct ServiceInfo {
+    pub address: String,
+    pub port: u16,
+    pub last_seen: std::time::Instant,
+}
+
+impl ServiceRegistry {
+    fn new() -> Self {
+        Self {
+            services: std::sync::RwLock::new(std::collections::HashMap::new()),
+        }
+    }
+
+    pub fn register(&self, name: String, info: ServiceInfo) {
+        let mut services = self.services.write().unwrap();
+        services.insert(name, info);
+    }
+
+    pub fn discover(&self, name: &str) -> Option<ServiceInfo> {
+        let services = self.services.read().unwrap();
+        services.get(name).cloned()
+    }
+}
+
+/// 获取服务注册表（Rust 1.94）
+pub fn get_service_registry() -> &'static ServiceRegistry {
+    SERVICE_REGISTRY.get()
+}
+```
 
 ```rust
 use rand::Rng;

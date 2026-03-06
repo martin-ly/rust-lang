@@ -1,6 +1,6 @@
 # Rust 无锁编程模式
 
-> **Rust版本**: 1.93.1
+> **Rust版本**: 1.94
 > **覆盖范围**: CAS操作、原子内存序、无锁数据结构、内存回收
 > **权威参考**: Rust Atomics and Locks by Mara Bos, C++ Concurrency in Action
 
@@ -23,6 +23,9 @@
     - [3.1 基本 CAS 循环](#31-基本-cas-循环)
     - [3.2 ABA 问题与解决](#32-aba-问题与解决)
     - [3.3 帮助机制](#33-帮助机制)
+  - [4. 无锁延迟初始化 (Rust 1.94)](#4-无锁延迟初始化-rust-194)
+    - [LazyLock 的无锁语义](#lazylock-的无锁语义)
+    - [LazyLock 与无锁数据结构组合](#lazylock-与无锁数据结构组合)
   - [4. 无锁数据结构](#4-无锁数据结构)
     - [4.1 无锁栈](#41-无锁栈)
     - [4.2 无锁队列](#42-无锁队列)
@@ -886,6 +889,139 @@ impl<T> HelpingStack<T> {
 ```
 
 ---
+
+## 4. 无锁延迟初始化 (Rust 1.94)
+
+### LazyLock 的无锁语义
+
+Rust 1.94 引入的 `LazyLock::get()` 和相关方法提供了一种无锁的延迟初始化模式，与传统的 `std::sync::Once` 相比具有更好的可组合性：
+
+```rust
+use std::sync::LazyLock;
+use std::sync::atomic::{AtomicPtr, Ordering};
+
+/// 比较：传统 Once vs LazyLock (Rust 1.94)
+
+// 传统方式 - 使用 Once
+static mut TRADITIONAL_DATA: Option<ExpensiveResource> = None;
+static INIT: std::sync::Once = std::sync::Once::new();
+
+fn get_traditional() -> &'static ExpensiveResource {
+    unsafe {
+        INIT.call_once(|| {
+            TRADITIONAL_DATA = Some(ExpensiveResource::new());
+        });
+        TRADITIONAL_DATA.as_ref().unwrap()
+    }
+}
+
+// Rust 1.94 方式 - 使用 LazyLock
+static LAZY_DATA: LazyLock<ExpensiveResource> = LazyLock::new(|| {
+    ExpensiveResource::new()
+});
+
+fn get_lazy() -> &'static ExpensiveResource {
+    // 更安全、更简洁的 API
+    LAZY_DATA.get()
+}
+
+pub struct ExpensiveResource {
+    data: Vec<u8>,
+    ptr: AtomicPtr<u8>,
+}
+
+impl ExpensiveResource {
+    fn new() -> Self {
+        let data = vec![0u8; 1024 * 1024]; // 1MB
+        let ptr = AtomicPtr::new(data.as_ptr() as *mut u8);
+        Self { data, ptr }
+    }
+
+    /// 无锁获取数据指针
+    pub fn get_ptr(&self) -> *mut u8 {
+        self.ptr.load(Ordering::Acquire)
+    }
+}
+
+/// 在高并发场景中使用 LazyLock
+fn concurrent_access() {
+    use std::thread;
+
+    let handles: Vec<_> = (0..100)
+        .map(|_| {
+            thread::spawn(|| {
+                // 所有线程都能安全地并发访问
+                // 初始化只发生一次
+                let resource = LAZY_DATA.get();
+                let _ptr = resource.get_ptr();
+            })
+        })
+        .collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+}
+```
+
+### LazyLock 与无锁数据结构组合
+
+```rust
+use std::sync::LazyLock;
+use crossbeam::epoch::{self, Atomic, Owned, Shared};
+use std::sync::atomic::Ordering;
+
+/// 延迟初始化的无锁栈
+static LAZY_STACK: LazyLock<LockFreeStack<i32>> = LazyLock::new(|| {
+    LockFreeStack::new()
+});
+
+pub struct LockFreeStack<T> {
+    head: Atomic<Node<T>>,
+}
+
+struct Node<T> {
+    data: T,
+    next: Atomic<Node<T>>,
+}
+
+impl<T> LockFreeStack<T> {
+    fn new() -> Self {
+        Self {
+            head: Atomic::null(),
+        }
+    }
+
+    pub fn push(&self, data: T) {
+        let guard = &epoch::pin();
+        let new_node = Owned::new(Node {
+            data,
+            next: Atomic::null(),
+        }).into_shared(guard);
+
+        loop {
+            let head = self.head.load(Ordering::Acquire, guard);
+            unsafe { new_node.deref().next.store(head, Ordering::Relaxed) }
+
+            match self.head.compare_exchange(
+                head,
+                new_node,
+                Ordering::Release,
+                Ordering::Acquire,
+                guard,
+            ) {
+                Ok(_) => break,
+                Err(_) => continue,
+            }
+        }
+    }
+}
+
+/// 获取全局无锁栈（Rust 1.94）
+pub fn get_lazy_stack() -> &'static LockFreeStack<i32> {
+    LAZY_STACK.get()
+}
+```
 
 ## 4. 无锁数据结构
 

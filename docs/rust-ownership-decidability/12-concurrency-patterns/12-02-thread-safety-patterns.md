@@ -1,6 +1,6 @@
 # Rust 线程安全模式
 
-> **Rust版本**: 1.93.1
+> **Rust版本**: 1.94
 > **覆盖范围**: Send/Sync trait、内部可变性、锁类型、死锁预防
 > **权威参考**: The Rust Programming Language (第16章), Rust Atomics and Locks
 
@@ -23,7 +23,9 @@
     - [3.1 RefCell 与线程安全](#31-refcell-与线程安全)
     - [3.2 Mutex 详解](#32-mutex-详解)
     - [3.3 RwLock 详解](#33-rwlock-详解)
-    - [3.4 原子类型](#34-原子类型)
+    - [3.4 延迟初始化模式 (Rust 1.94)](#34-延迟初始化模式-rust-194)
+    - [线程局部存储中的 LazyCell](#线程局部存储中的-lazycell)
+    - [3.5 原子类型](#35-原子类型)
     - [3.5 性能对比与选择](#35-性能对比与选择)
   - [4. 锁的类型与实现](#4-锁的类型与实现)
     - [4.1 操作系统互斥锁](#41-操作系统互斥锁)
@@ -666,7 +668,92 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> FastConcurrentCache<K, V> {
 }
 ```
 
-### 3.4 原子类型
+### 3.4 延迟初始化模式 (Rust 1.94)
+
+Rust 1.94 为 `LazyLock` 和 `LazyCell` 引入了新的访问方法，简化了线程安全延迟初始化：
+
+```rust
+use std::sync::LazyLock;
+use std::sync::atomic::{AtomicU64, Ordering};
+
+/// 延迟初始化的全局状态
+static GLOBAL_STATE: LazyLock<GlobalState> = LazyLock::new(|| {
+    println!("Initializing global state...");
+    GlobalState::new()
+});
+
+pub struct GlobalState {
+    counter: AtomicU64,
+    name: String,
+}
+
+impl GlobalState {
+    fn new() -> Self {
+        Self {
+            counter: AtomicU64::new(0),
+            name: "Global".to_string(),
+        }
+    }
+
+    pub fn increment(&self) -> u64 {
+        self.counter.fetch_add(1, Ordering::Relaxed)
+    }
+
+    pub fn get_count(&self) -> u64 {
+        // Rust 1.94: 使用 get() 获取引用
+        self.counter.load(Ordering::Relaxed)
+    }
+}
+
+/// 使用 LazyLock 的线程安全单例模式
+pub fn get_global_state() -> &'static GlobalState {
+    // Rust 1.94 新 API：显式 get() 方法
+    GLOBAL_STATE.get()
+}
+
+/// 在 Scoped 线程中使用 LazyLock
+fn scoped_with_lazy() {
+    use std::thread;
+
+    thread::scope(|s| {
+        for i in 0..5 {
+            s.spawn(move || {
+                // 所有线程共享同一个延迟初始化的状态
+                let state = GLOBAL_STATE.get();
+                let count = state.increment();
+                println!("Thread {}: count = {}", i, count);
+            });
+        }
+    });
+}
+```
+
+### 线程局部存储中的 LazyCell
+
+```rust
+use std::cell::LazyCell;
+use std::thread;
+
+/// 线程局部的延迟初始化
+fn thread_local_lazy() {
+    thread::spawn(|| {
+        // 每个线程有自己的延迟初始化数据
+        let thread_data = LazyCell::new(|| {
+            println!("Initializing thread-local data");
+            vec![1, 2, 3, 4, 5]
+        });
+
+        // Rust 1.94: 使用 get() 访问
+        let data = thread_data.get();
+        println!("Thread data: {:?}", data);
+
+        // 注意：在闭包内使用 LazyCell 需要可变引用才能修改
+        // 如果要修改，需要将 LazyCell 包装在 RefCell 中
+    }).join().unwrap();
+}
+```
+
+### 3.5 原子类型
 
 ```rust
 use std::sync::atomic::{

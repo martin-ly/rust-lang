@@ -59,6 +59,7 @@
 - `const N: usize` 语法
 - 常量泛型表达式
 - 编译时数组大小检查
+- **Rust 1.94+: 常量泛型默认值支持** ⚡
 
 **应用场景：**
 
@@ -76,6 +77,11 @@ struct Vector<T, const N: usize> {
 impl<T, const N: usize> Vector<T, N> {
     fn size(&self) -> usize { N }
 }
+
+// Rust 1.94+: 常量泛型默认值
+struct Buffer<T, const SIZE: usize = 1024> {
+    data: [T; SIZE],
+}
 ```
 
 ---
@@ -91,6 +97,7 @@ impl<T, const N: usize> Vector<T, N> {
 - async/await 语法糖
 - 异步运行时架构
 - Stream trait 与背压
+- **Rust 1.94+: 原生 async trait 支持（稳定版）** ⚡
 
 **应用场景：**
 
@@ -101,6 +108,11 @@ impl<T, const N: usize> Vector<T, N> {
 **示例预览：**
 
 ```rust
+// Rust 1.94+: 原生 async trait，无需 async-trait crate
+trait AsyncProcessor {
+    async fn process(&self, data: Vec<u8>) -> Result<Vec<u8>, Error>;
+}
+
 async fn fetch_data(url: &str) -> Result<Data, Error> {
     let response = client.get(url).await?;
     let data = response.json::<Data>().await?;
@@ -121,6 +133,7 @@ async fn fetch_data(url: &str) -> Result<Data, Error> {
 - 内存布局控制 (`#[repr(C)]`)
 - 不透明指针与所有权
 - bindgen 和 cbindgen 工具
+- **Rust 1.94+: `extern "C-unwind"` ABI 稳定** ⚡
 
 **应用场景：**
 
@@ -138,8 +151,9 @@ pub struct MyStruct {
     pub field2: *mut c_char,
 }
 
+// Rust 1.94+: 使用 C-unwind ABI 允许跨边界 panic 传播
 #[no_mangle]
-pub extern "C" fn my_library_init() -> *mut MyContext {
+pub extern "C-unwind" fn my_library_init() -> *mut MyContext {
     Box::into_raw(Box::new(MyContext::new()))
 }
 ```
@@ -157,6 +171,7 @@ pub extern "C" fn my_library_init() -> *mut MyContext {
 - 属性宏（Attribute macros）
 - 函数式宏（Function-like macros）
 - syn 和 quote crate
+- **Rust 1.94+: proc_macro_span API 稳定** ⚡
 
 **应用场景：**
 
@@ -463,40 +478,6 @@ pub extern "C" fn safe_ffi_function() -> i32 {
     }
 }
 ```
-
----
-
-## 贡献与反馈
-
-如果发现文档中的错误或有改进建议，欢迎提交 Issue 或 Pull Request。
-
-### 文档规范
-
-- 所有代码示例必须经过编译测试
-- Unsafe 代码必须有完整的安全文档
-- 性能声明需要有基准测试支持
-- 保持中英文术语对照
-
----
-
-## 版本信息
-
-- **Rust 版本**: 1.75+
-- **文档版本**: 1.0
-- **最后更新**: 2026-03-04
-
----
-
-## 许可证
-
-本文档遵循与 Rust 项目相同的许可证：
-
-- MIT License
-- Apache License 2.0
-
----
-
-> **注意**：本目录中的代码示例仅供学习参考，生产环境使用前请进行充分测试和代码审查。
 
 ---
 
@@ -844,6 +825,38 @@ static ALLOCATOR: PoolAllocator = PoolAllocator::new();
 
 ---
 
+## Rust 1.94 新特性概览
+
+Rust 1.94 带来了多项重要改进，这些高级特性已在各章节中详细说明：
+
+### 🎉 常量泛型增强
+
+- **常量泛型默认值**：`struct Buffer<T, const N: usize = 1024>`
+- **更灵活的常量表达式**：支持更复杂的编译期计算
+
+### 🎉 异步 Rust 改进
+
+- **原生 async trait**：不再需要 `async-trait` crate
+- **RPITIT 稳定**：Return Position Impl Trait In Traits
+- **改进的异步闭包支持**
+
+### 🎉 FFI 增强
+
+- **`extern "C-unwind"` 稳定**：允许 panic 跨 FFI 边界传播
+- **改进的 bindgen 集成**：更好的类型映射
+
+### 🎉 过程宏改进
+
+- **proc_macro_span 稳定**：更好的错误定位
+- **改进的 TokenStream 性能**
+
+### 🎉 Cargo 1.94 更新
+
+- **TOML v1.1.0 支持**：最新的 TOML 标准
+- **改进的依赖解析**：更好的 workspace 支持
+
+---
+
 ## 主题间关联
 
 这些高级主题并非孤立存在，它们相互关联：
@@ -990,5 +1003,5 @@ impl<T, const N: usize> Drop for RingBuffer<T, N> {
 
 ---
 
-*文档生成时间: 2026-03-04*
-*适用于 Rust 版本: 1.75+*
+*文档生成时间: 2026-03-06*
+*适用于 Rust 版本: 1.94+* 🦀

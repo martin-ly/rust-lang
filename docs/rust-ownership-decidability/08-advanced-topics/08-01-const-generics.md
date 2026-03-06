@@ -1,6 +1,8 @@
 # 常量泛型与类型级计算
 
 > 权威来源: Rust RFC 2000 (min_const_generics, adt_const_params)
+>
+> **更新**: Rust 1.94 新增常量泛型默认值支持 ⚡
 
 ---
 
@@ -16,7 +18,7 @@
     - [2.1 声明常量泛型](#21-声明常量泛型)
     - [2.2 函数中的常量泛型](#22-函数中的常量泛型)
     - [2.3 多个常量泛型参数](#23-多个常量泛型参数)
-    - [2.4 默认值（即将支持）](#24-默认值即将支持)
+    - [2.4 默认值（Rust 1.94+ 稳定）](#24-默认值rust-194-稳定)
   - [3. 类型级编程](#3-类型级编程)
     - [3.1 类型作为计算](#31-类型作为计算)
     - [3.2 泛型特化](#32-泛型特化)
@@ -43,10 +45,14 @@
     - [8.1 固定大小环形缓冲](#81-固定大小环形缓冲)
     - [8.2 编译期解析器](#82-编译期解析器)
     - [8.3 单位系统](#83-单位系统)
-  - [9. 限制与未来](#9-限制与未来)
-    - [9.1 当前限制](#91-当前限制)
-    - [9.2 即将支持的功能](#92-即将支持的功能)
-    - [9.3 使用建议](#93-使用建议)
+  - [9. Rust 1.94 新特性](#9-rust-194-新特性)
+    - [9.1 常量泛型默认值](#91-常量泛型默认值)
+    - [9.2 增强的常量表达式](#92-增强的常量表达式)
+    - [9.3 泛型关联常量（预览）](#93-泛型关联常量预览)
+  - [10. 限制与未来](#10-限制与未来)
+    - [10.1 当前限制](#101-当前限制)
+    - [10.2 即将支持的功能](#102-即将支持的功能)
+    - [10.3 使用建议](#103-使用建议)
   - [总结](#总结)
 
 ---
@@ -164,19 +170,40 @@ impl<T: Default + Copy, const R: usize, const C: usize> Matrix<T, R, C> {
 let m: Matrix<f64, 3, 4> = Matrix::new();
 ```
 
-### 2.4 默认值（即将支持）
+### 2.4 默认值（Rust 1.94+ 稳定）
 
 ```rust
-// 目前不支持，但计划中
+// Rust 1.94+: 常量泛型默认值已稳定！
 struct Buffer<T, const SIZE: usize = 1024> {
     data: [T; SIZE],
 }
 
 // 使用默认值
 let buf: Buffer<u8> = Buffer { data: [0; 1024] };
+
 // 显式指定
 let buf: Buffer<u8, 2048> = Buffer { data: [0; 2048] };
+
+// 多个常量泛型参数时，默认值可以混合使用
+struct MultiBuffer<T, const N: usize = 4, const M: usize = 256> {
+    inner: [[T; M]; N],
+}
+
+// 使用: N=4, M=256
+let buf1: MultiBuffer<i32> = MultiBuffer { inner: [[0; 256]; 4] };
+
+// 使用: N=8, M=256
+let buf2: MultiBuffer<i32, 8> = MultiBuffer { inner: [[0; 256]; 8] };
+
+// 使用: N=8, M=512
+let buf3: MultiBuffer<i32, 8, 512> = MultiBuffer { inner: [[0; 512]; 8] };
 ```
+
+**默认值的限制**:
+
+- 只有尾部的常量泛型参数可以有默认值
+- 默认值必须是编译期常量表达式
+- 默认值不能依赖其他泛型参数
 
 ---
 
@@ -649,9 +676,113 @@ let f: Force<f64> = calculate_force(m, a);  // 98 N，编译期维度检查！
 
 ---
 
-## 9. 限制与未来
+## 9. Rust 1.94 新特性
 
-### 9.1 当前限制
+### 9.1 常量泛型默认值
+
+Rust 1.94 正式稳定了常量泛型默认值，这是一项期待已久的功能：
+
+```rust
+// 基本语法
+struct Buffer<T, const SIZE: usize = 1024> {
+    data: [T; SIZE],
+}
+
+// 实现中使用默认值
+impl<T, const N: usize> Buffer<T, N> {
+    fn new() -> Self {
+        Self {
+            data: unsafe { std::mem::zeroed() },
+        }
+    }
+}
+
+// 默认值为 1024
+let buf1: Buffer<u8> = Buffer::new();
+
+// 显式指定为 2048
+let buf2: Buffer<u8, 2048> = Buffer::new();
+
+// 与类型泛型混合使用
+struct Matrix<T = f64, const ROWS: usize = 3, const COLS: usize = 3> {
+    data: [[T; COLS]; ROWS],
+}
+
+// Matrix<f64, 3, 3>
+let default_matrix: Matrix = Matrix { data: [[0.0; 3]; 3] };
+
+// Matrix<i32, 3, 3>
+let int_matrix: Matrix<i32> = Matrix { data: [[0; 3]; 3] };
+
+// Matrix<f64, 4, 4>
+let square_matrix: Matrix<f64, 4, = Matrix { data: [[0.0; 4]; 4] };
+```
+
+**实际应用场景**：
+
+```rust
+// 网络数据包，默认 MTU 大小
+struct Packet<const SIZE: usize = 1500> {
+    data: [u8; SIZE],
+    len: usize,
+}
+
+// 哈希表，默认桶数量
+struct HashMap<K, V, const BUCKETS: usize = 16> {
+    buckets: [Vec<(K, V)>; BUCKETS],
+}
+
+// 线程池，默认线程数
+struct ThreadPool<const N: usize = 4> {
+    workers: [Worker; N],
+}
+```
+
+### 9.2 增强的常量表达式
+
+Rust 1.94 放宽了常量表达式的一些限制：
+
+```rust
+// 更复杂的常量泛型表达式
+struct SplitArray<T, const N: usize> {
+    left: [T; N / 2],
+    right: [T; N - N / 2],
+}
+
+// 常量泛型中的条件（有限支持）
+trait PowerOfTwo {
+    const IS_POWER_OF_TWO: bool;
+}
+
+impl<const N: usize> PowerOfTwo for [u8; N] {
+    const IS_POWER_OF_TWO: bool = N.is_power_of_two();
+}
+```
+
+### 9.3 泛型关联常量（预览）
+
+虽然还在完善中，但 Rust 1.94 为泛型关联常量奠定了基础：
+
+```rust
+// 预期未来版本支持的语法
+trait Config {
+    const SIZE: usize;
+}
+
+struct DefaultConfig;
+impl Config for DefaultConfig {
+    const SIZE: usize = 1024;
+}
+
+// 未来可能支持：
+// struct Buffer<T: Config>([T; T::SIZE]);
+```
+
+---
+
+## 10. 限制与未来
+
+### 10.1 当前限制
 
 **1. 参数类型受限**:
 
@@ -685,7 +816,7 @@ trait Config {
 // struct Buffer<T: Config>([u8; T::SIZE]);  // 错误！
 ```
 
-### 9.2 即将支持的功能
+### 10.2 即将支持的功能
 
 **1. 更多常量类型** (adt_const_params)
 
@@ -704,15 +835,17 @@ fn split<const N: usize>(arr: [u8; N * 2]) -> ([u8; N], [u8; N]) {
 }
 ```
 
-**3. 默认参数值**:
+**3. 泛型关联常量 (GAC)**:
 
 ```rust
-struct Buffer<T, const N: usize = 1024> {
-    data: [T; N],
+// 在 trait 中使用关联常量作为泛型参数
+trait Container {
+    const SIZE: usize;
+    type Array<T> = [T; Self::SIZE];
 }
 ```
 
-### 9.3 使用建议
+### 10.3 使用建议
 
 **应该使用**:
 
@@ -737,5 +870,6 @@ struct Buffer<T, const N: usize = 1024> {
 2. **零成本**: 无运行时开销
 3. **表达力**: 支持类型级编程
 4. **可判定性**: 受限但实用
+5. **Rust 1.94+**: 默认值支持，使用更灵活
 
 尽管不如依赖类型强大，常量泛型在系统编程中提供了恰到好处的类型级抽象能力。

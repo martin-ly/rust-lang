@@ -1,6 +1,6 @@
 # Rust并发架构设计模式
 
-> **Rust版本**: 1.93.1
+> **Rust版本**: 1.94
 > **覆盖范围**: 并行、同步、异步架构模式
 > **权威参考**: Rust Async Book, Tokio文档, Rayon文档
 
@@ -32,6 +32,9 @@
   - [7. 无锁编程模式](#7-无锁编程模式)
     - [原子操作模式](#原子操作模式)
     - [CAS循环模式](#cas循环模式)
+  - [8. Rust 1.94 延迟初始化模式](#8-rust-194-延迟初始化模式)
+    - [LazyLock 并发延迟初始化](#lazylock-并发延迟初始化)
+    - [单线程延迟初始化 - LazyCell](#单线程延迟初始化---lazycell)
   - [8. 架构最佳实践](#8-架构最佳实践)
     - [选择合适的并发模型](#选择合适的并发模型)
     - [避免常见陷阱](#避免常见陷阱)
@@ -549,6 +552,147 @@ impl<T> LockFreeStack<T> {
             }
         }
     }
+}
+```
+
+---
+
+## 8. Rust 1.94 延迟初始化模式
+
+### LazyLock 并发延迟初始化
+
+Rust 1.94 引入了 `LazyLock::get()`、`get_mut()` 和 `force_mut()` 方法，为线程安全的延迟初始化提供了更灵活的访问方式：
+
+```rust
+use std::sync::LazyLock;
+use std::collections::HashMap;
+
+/// 全局配置 - 线程安全延迟初始化
+static GLOBAL_CONFIG: LazyLock<HashMap<String, String>> = LazyLock::new(|| {
+    println!("Initializing global config...");
+    let mut config = HashMap::new();
+    config.insert("db_url".to_string(), "postgres://localhost".to_string());
+    config.insert("port".to_string(), "8080".to_string());
+    config
+});
+
+/// 连接池管理器 - 使用 LazyLock 实现线程安全的单例
+pub struct ConnectionPool {
+    config: &'static HashMap<String, String>,
+}
+
+impl ConnectionPool {
+    pub fn new() -> Self {
+        // Rust 1.94: 使用 get() 获取引用
+        let config = GLOBAL_CONFIG.get();
+
+        println!("Using config: {:?}", config.get("db_url"));
+
+        Self { config }
+    }
+
+    pub fn get_config(&self) -> &'static HashMap<String, String> {
+        // 使用 1.94 新 API
+        GLOBAL_CONFIG.get()
+    }
+}
+
+/// 并发访问示例
+fn concurrent_lazy_access() {
+    use std::thread;
+
+    let handles: Vec<_> = (0..10)
+        .map(|i| {
+            thread::spawn(move || {
+                // 所有线程共享同一个延迟初始化的实例
+                let config = GLOBAL_CONFIG.get();
+                println!("Thread {} got config with {} entries", i, config.len());
+            })
+        })
+        .collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+}
+```
+
+### 单线程延迟初始化 - LazyCell
+
+```rust
+use std::cell::LazyCell;
+
+/// 单线程环境下的延迟计算
+pub struct ComputationCache<T, F> {
+    cell: LazyCell<T, F>,
+}
+
+impl<T, F> ComputationCache<T, F>
+where
+    F: FnOnce() -> T,
+{
+    pub fn new(f: F) -> Self {
+        Self {
+            cell: LazyCell::new(f),
+        }
+    }
+
+    /// 获取缓存值（自动初始化）
+    pub fn get(&self) -> &T {
+        // Rust 1.94: 显式 get() 方法
+        self.cell.get()
+    }
+
+    /// 获取可变引用（如果尚未初始化）
+    pub fn get_mut(&mut self) -> &mut T {
+        // Rust 1.94: get_mut() 方法
+        self.cell.get_mut()
+    }
+
+    /// 强制初始化并获取可变引用
+    pub fn force_mut(&mut self) -> &mut T {
+        // Rust 1.94: force_mut() 方法
+        self.cell.force_mut()
+    }
+}
+
+/// 在 Actor 中使用 LazyCell
+pub struct DataActor {
+    // 延迟加载的大数据集
+    dataset: LazyCell<Vec<u8>>,
+    // 延迟计算的统计信息
+    stats: LazyCell<Stats>,
+}
+
+struct Stats {
+    mean: f64,
+    std_dev: f64,
+}
+
+impl DataActor {
+    pub fn new(data_loader: impl FnOnce() -> Vec<u8> + 'static) -> Self {
+        Self {
+            dataset: LazyCell::new(data_loader),
+            stats: LazyCell::new(|| Stats { mean: 0.0, std_dev: 0.0 }),
+        }
+    }
+
+    pub fn process(&mut self) {
+        // 第一次访问时自动加载数据
+        let data = self.dataset.get();
+        println!("Processing {} bytes", data.len());
+
+        // 修改统计信息
+        let stats = self.stats.force_mut();
+        stats.mean = calculate_mean(data);
+    }
+}
+
+fn calculate_mean(data: &[u8]) -> f64 {
+    if data.is_empty() {
+        return 0.0;
+    }
+    data.iter().map(|&x| x as f64).sum::<f64>() / data.len() as f64
 }
 ```
 

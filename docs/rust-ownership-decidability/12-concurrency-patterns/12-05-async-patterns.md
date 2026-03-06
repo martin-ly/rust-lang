@@ -1,6 +1,6 @@
 # Rust 异步并发模式
 
-> **Rust版本**: 1.93.1
+> **Rust版本**: 1.94
 > **覆盖范围**: async/await原理、任务调度、背压控制、超时处理
 > **权威参考**: The Rust Async Book, Tokio Documentation
 
@@ -22,6 +22,8 @@
   - [3. 并发原语](#3-并发原语)
     - [3.1 异步 Mutex](#31-异步-mutex)
     - [3.2 异步 Channel](#32-异步-channel)
+    - [Rust 1.94 Peekable::next\_if\_map 在异步流中的应用](#rust-194-peekablenext_if_map-在异步流中的应用)
+    - [异步延迟初始化 (Rust 1.94)](#异步延迟初始化-rust-194)
 
 ---
 
@@ -690,6 +692,192 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> Cache<K, V> {
 ```
 
 ### 3.2 异步 Channel
+
+### Rust 1.94 Peekable::next_if_map 在异步流中的应用
+
+Rust 1.94 引入了 `Peekable::next_if_map` 方法，在处理异步流时特别有用，可以实现条件消费和转换：
+
+```rust
+use std::iter::Peekable;
+
+/// 条件消费异步消息流
+pub struct ConditionalConsumer<I: Iterator> {
+    inner: Peekable<I>,
+}
+
+impl<I: Iterator> ConditionalConsumer<I> {
+    pub fn new(iter: I) -> Self {
+        Self {
+            inner: iter.peekable(),
+        }
+    }
+
+    /// 消费并转换符合条件的下一个元素（Rust 1.94）
+    pub fn next_if_valid<F, T>(&mut self, transformer: F) -> Option<T>
+    where
+        F: FnOnce(I::Item) -> Option<T>,
+    {
+        // Rust 1.94: next_if_map 允许条件映射消费
+        self.inner.next_if_map(transformer)
+    }
+
+    /// 异步流处理中的条件消费模式
+    pub async fn process_conditional<F, Fut, T>(
+        &mut self,
+        predicate: impl Fn(&I::Item) -> bool,
+        processor: F,
+    ) -> Option<T>
+    where
+        F: FnOnce(I::Item) -> Fut,
+        Fut: std::future::Future<Output = T>,
+    {
+        // 检查下一个元素
+        if let Some(item) = self.inner.peek() {
+            if predicate(item) {
+                // 符合条件，消费并处理
+                let item = self.inner.next()?;
+                Some(processor(item).await)
+            } else {
+                None
+            }
+        } else {
+            None
+        }
+    }
+}
+
+/// 异步消息处理器 - 使用条件消费
+pub struct MessageProcessor {
+    // 在实际应用中，这可能是 tokio::sync::mpsc::Receiver 的包装
+    buffer: Peekable<std::vec::IntoIter<Message>>,
+}
+
+#[derive(Debug, Clone)]
+pub enum Message {
+    HighPriority(String),
+    NormalPriority(String),
+    LowPriority(String),
+}
+
+impl MessageProcessor {
+    pub fn new(messages: Vec<Message>) -> Self {
+        Self {
+            buffer: messages.into_iter().peekable(),
+        }
+    }
+
+    /// 仅处理高优先级消息（Rust 1.94 风格）
+    pub fn process_high_priority(&mut self) -> Option<String> {
+        // Rust 1.94: 使用 next_if_map 进行条件消费和转换
+        self.buffer.next_if_map(|msg| match msg {
+            Message::HighPriority(content) => Some(content),
+            _ => None,
+        })
+    }
+
+    /// 优先级调度处理
+    pub async fn priority_scheduled_process(&mut self) -> Vec<String> {
+        let mut results = vec![];
+
+        // 先处理所有高优先级消息
+        while let Some(content) = self.process_high_priority() {
+            results.push(format!("[HIGH] {}", content));
+        }
+
+        // 然后处理普通优先级
+        while let Some(msg) = self.buffer.next() {
+            match msg {
+                Message::NormalPriority(content) => {
+                    results.push(format!("[NORMAL] {}", content));
+                }
+                Message::LowPriority(content) => {
+                    // 低优先级可以延迟处理
+                    tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
+                    results.push(format!("[LOW] {}", content));
+                }
+                _ => {}
+            }
+        }
+
+        results
+    }
+}
+
+/// 与 Tokio Stream 结合使用
+#[cfg(feature = "tokio-stream")]
+pub mod stream_extensions {
+    use tokio_stream::Stream;
+    use std::pin::Pin;
+    use std::task::{Context, Poll};
+
+    /// 条件消费 Stream 包装器
+    pub struct ConditionalStream<S> {
+        inner: S,
+    }
+
+    impl<S: Stream + Unpin> Stream for ConditionalStream<S> {
+        type Item = S::Item;
+
+        fn poll_next(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
+            self.inner.poll_next_unpin(cx)
+        }
+    }
+}
+```
+
+### 异步延迟初始化 (Rust 1.94)
+
+```rust
+use std::sync::LazyLock;
+use tokio::sync::RwLock;
+
+/// 异步上下文中的延迟初始化
+static ASYNC_CONFIG: LazyLock<AsyncConfig> = LazyLock::new(|| {
+    // 注意：LazyLock 的初始化是同步的
+    // 对于真正的异步初始化，需要使用其他模式
+    AsyncConfig::blocking_load()
+});
+
+pub struct AsyncConfig {
+    database_url: String,
+    api_keys: RwLock<std::collections::HashMap<String, String>>,
+}
+
+impl AsyncConfig {
+    fn blocking_load() -> Self {
+        Self {
+            database_url: std::env::var("DATABASE_URL").unwrap_or_default(),
+            api_keys: RwLock::new(std::collections::HashMap::new()),
+        }
+    }
+
+    pub async fn add_api_key(&self, service: String, key: String) {
+        let mut keys = self.api_keys.write().await;
+        keys.insert(service, key);
+    }
+
+    pub async fn get_api_key(&self, service: &str) -> Option<String> {
+        let keys = self.api_keys.read().await;
+        keys.get(service).cloned()
+    }
+}
+
+/// 获取配置（Rust 1.94）
+pub fn get_async_config() -> &'static AsyncConfig {
+    ASYNC_CONFIG.get()
+}
+
+/// 在异步任务中使用延迟初始化
+async fn use_lazy_config() {
+    // 安全地在异步上下文中访问延迟初始化的配置
+    let config = ASYNC_CONFIG.get();
+
+    // 异步操作
+    if let Some(key) = config.get_api_key("stripe").await {
+        println!("Using Stripe API key: {}...", &key[..8]);
+    }
+}
+```
 
 ```rust
 use tokio::sync::{mpsc, oneshot};

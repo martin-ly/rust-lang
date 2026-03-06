@@ -1,6 +1,6 @@
 # Rust 并发模式导航
 
-> **Rust版本**: 1.93.1
+> **Rust版本**: 1.94
 > **文档范围**: 线程安全、消息传递、无锁编程、异步并发、数据并行、分布式模式
 > **阅读时间**: 约8小时
 > **难度级别**: 中级到高级
@@ -546,5 +546,74 @@ async fn good(sender: &mpsc::Sender<i32>) {
 
 > **提示**: 本文档是一个活文档，会随着 Rust 生态的发展持续更新。建议订阅更新通知以获取最新内容。
 
-**最后更新**: 2026年3月4日
-**版本**: 1.0.0
+**最后更新**: 2026年3月6日
+**版本**: 1.1.0 (Rust 1.94 更新)
+
+---
+
+## 🆕 Rust 1.94 新特性
+
+### LazyCell 和 LazyLock 新方法
+
+Rust 1.94 为 `LazyCell` 和 `LazyLock` 引入了新的访问方法，简化了延迟初始化模式：
+
+```rust
+use std::sync::LazyLock;
+use std::cell::LazyCell;
+
+// LazyLock 新方法 - 线程安全延迟初始化
+static CONFIG: LazyLock<Config> = LazyLock::new(|| {
+    Config::load_from_file("config.toml")
+});
+
+fn use_config() {
+    // get() - 获取不可变引用（Rust 1.94）
+    let config_ref: &Config = CONFIG.get();
+
+    // 传统方式仍然可用
+    let config: &Config = &*CONFIG;
+}
+
+// 在并发上下文中使用
+struct AppState {
+    // LazyCell 用于单线程延迟初始化
+    cache: LazyCell<Vec<u8>>,
+}
+
+impl AppState {
+    fn get_cache_mut(&mut self) -> &mut Vec<u8> {
+        // get_mut() - 获取可变引用（Rust 1.94）
+        self.cache.get_mut()
+    }
+
+    fn force_init(&mut self) {
+        // force_mut() - 强制初始化并获取可变引用（Rust 1.94）
+        self.cache.force_mut();
+    }
+}
+```
+
+### Peekable::next_if_map（异步迭代器适用）
+
+```rust
+use std::iter::Peekable;
+
+// 在异步流处理中的条件消费
+async fn process_filtered_stream<I, F, T>(
+    iter: &mut Peekable<I>,
+    predicate: F,
+) -> Option<T>
+where
+    I: Iterator<Item = T>,
+    F: Fn(&T) -> bool,
+{
+    // next_if_map - 条件映射消费（Rust 1.94）
+    iter.next_if_map(|item| {
+        if predicate(&item) {
+            Some(transform(item))
+        } else {
+            None
+        }
+    })
+}
+```

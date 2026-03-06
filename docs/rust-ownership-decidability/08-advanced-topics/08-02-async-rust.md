@@ -1,6 +1,8 @@
 # 异步Rust与所有权深度解析
 
 > **权威来源**: Rust Async Book, Pin API RFC, Tokio Documentation, async-std Documentation
+>
+> **更新**: Rust 1.94 原生 async trait 稳定 ⚡
 
 ## 目录
 
@@ -22,7 +24,7 @@
   - [4. async/await原理](#4-asyncawait原理)
     - [4.1 语法糖展开](#41-语法糖展开)
     - [4.2 生命周期与捕获](#42-生命周期与捕获)
-    - [4.3 async trait的挑战](#43-async-trait的挑战)
+    - [4.3 async trait（Rust 1.94+ 原生支持）](#43-async-traitrust-194-原生支持)
   - [5. 异步运行时比较](#5-异步运行时比较)
     - [5.1 Tokio运行时架构](#51-tokio运行时架构)
     - [5.2 async-std运行时](#52-async-std运行时)
@@ -40,10 +42,14 @@
     - [8.1 任务调度优化](#81-任务调度优化)
     - [8.2 内存优化](#82-内存优化)
     - [8.3 性能分析工具](#83-性能分析工具)
-  - [9. 实际应用案例](#9-实际应用案例)
-    - [9.1 高性能Web服务器](#91-高性能web服务器)
-    - [9.2 数据库连接池](#92-数据库连接池)
-    - [9.3 消息队列消费者](#93-消息队列消费者)
+  - [9. Rust 1.94 异步新特性](#9-rust-194-异步新特性)
+    - [9.1 原生 async trait](#91-原生-async-trait)
+    - [9.2 RPITIT 完全稳定](#92-rpitit-完全稳定)
+    - [9.3 改进的异步闭包](#93-改进的异步闭包)
+  - [10. 实际应用案例](#10-实际应用案例)
+    - [10.1 高性能Web服务器](#101-高性能web服务器)
+    - [10.2 数据库连接池](#102-数据库连接池)
+    - [10.3 消息队列消费者](#103-消息队列消费者)
   - [总结](#总结)
   - [参考资源](#参考资源)
 
@@ -557,57 +563,54 @@ fn mixed_capture() {
 }
 ```
 
-### 4.3 async trait的挑战
+### 4.3 async trait（Rust 1.94+ 原生支持）
 
 ```rust
-// 问题：async fn在trait中的问题
-trait AsyncProcessor {
-    async fn process(&self, data: Vec<u8>) -> Result<Vec<u8>, Error>;
-    // 错误：trait中的async fn返回impl Future，但trait不能包含impl Trait
-}
+// 🎉 Rust 1.94+: async fn 在 trait 中原生支持！
+// 不再需要 async-trait crate
 
-// 解决方案1：使用async-trait宏
-use async_trait::async_trait;
-
-#[async_trait]
 trait AsyncProcessor {
     async fn process(&self, data: Vec<u8>) -> Result<Vec<u8>, Error>;
 }
 
-#[async_trait]
+struct MyProcessor;
+
 impl AsyncProcessor for MyProcessor {
     async fn process(&self, data: Vec<u8>) -> Result<Vec<u8>, Error> {
-        // 实现
+        // 直接实现，无需额外宏
+        tokio::time::sleep(Duration::from_millis(100)).await;
         Ok(data)
     }
 }
 
-// 解决方案2：手动返回Pin<Box<dyn Future>>
-trait AsyncProcessorManual {
-    fn process(&self, data: Vec<u8>) -> Pin<Box<dyn Future<Output = Result<Vec<u8>, Error>> + Send + '_>>;
-}
+// 对比：旧的方式（Rust 1.75 之前）
+// use async_trait::async_trait;
+//
+// #[async_trait]
+// trait AsyncProcessorOld {
+//     async fn process(&self, data: Vec<u8>) -> Result<Vec<u8>, Error>;
+// }
 
-impl AsyncProcessorManual for MyProcessor {
-    fn process(&self, data: Vec<u8>) -> Pin<Box<dyn Future<Output = Result<Vec<u8>, Error>> + Send + '_>> {
-        Box::pin(async move {
-            // 实现
-            Ok(data)
-        })
-    }
-}
-
-// 解决方案3：使用关联类型（Rust 1.75+）
-trait AsyncProcessorAssoc {
-    type Future<'a>: Future<Output = Result<Vec<u8>, Error>> + Send
+// 带有 Send 约束的 async trait
+trait SendableAsyncProcessor: Send + Sync {
+    async fn process(&self, data: Vec<u8>) -> Result<Vec<u8>, Error>
     where
-        Self: 'a;
-
-    fn process(&self, data: Vec<u8>) -> Self::Future<'_>;
+        Self: Send + Sync;
 }
 
-// 解决方案4：RPITIT (Return Position Impl Trait In Traits) - Rust 1.75+
-trait AsyncProcessorRPITIT {
-    fn process(&self, data: Vec<u8>) -> impl Future<Output = Result<Vec<u8>, Error>> + Send;
+// 关联类型的 async trait
+trait DataFetcher {
+    type Item;
+
+    async fn fetch(&self) -> Result<Self::Item, Error>;
+}
+
+impl DataFetcher for UserService {
+    type Item = User;
+
+    async fn fetch(&self) -> Result<Self::Item, Error> {
+        // 实现
+    }
 }
 ```
 
@@ -1234,9 +1237,146 @@ async fn main() {
 
 ---
 
-## 9. 实际应用案例
+## 9. Rust 1.94 异步新特性
 
-### 9.1 高性能Web服务器
+### 9.1 原生 async trait
+
+Rust 1.94 最重要的异步特性是原生支持 `async fn` 在 trait 中：
+
+```rust
+// 🎉 Rust 1.94: 原生 async trait，无需额外 crate！
+
+// 基础 async trait
+trait AsyncService {
+    async fn call(&self, request: Request) -> Result<Response, Error>;
+}
+
+struct HttpService;
+
+impl AsyncService for HttpService {
+    async fn call(&self, request: Request) -> Result<Response, Error> {
+        // 直接实现，无需 Box::pin
+        process_request(request).await
+    }
+}
+
+// 带关联类型的 async trait
+trait DataSource {
+    type Item;
+    type Error;
+
+    async fn fetch(&self) -> Result<Self::Item, Self::Error>;
+    async fn save(&mut self, item: Self::Item) -> Result<(), Self::Error>;
+}
+
+// 泛型 async trait
+trait AsyncProcessor<T, R> {
+    async fn process(&self, input: T) -> Result<R, Error>;
+}
+
+// 组合多个 async 方法
+trait Repository<T> {
+    async fn find_by_id(&self, id: u64) -> Option<T>;
+    async fn find_all(&self) -> Vec<T>;
+    async fn save(&mut self, entity: T) -> Result<T, Error>;
+    async fn delete(&mut self, id: u64) -> Result<(), Error>;
+}
+```
+
+**对比：新旧方式**
+
+```rust
+// ❌ Rust 1.75 之前：需要 async-trait crate
+use async_trait::async_trait;
+
+#[async_trait]
+trait OldStyle {
+    async fn method(&self);
+}
+
+// ✅ Rust 1.94+: 原生支持
+trait NewStyle {
+    async fn method(&self);
+}
+
+// ✅ Rust 1.94+: 原生支持 + Send 约束（自动推导）
+trait SendableStyle: Send + Sync {
+    async fn method(&self) where Self: Send + Sync;
+}
+```
+
+### 9.2 RPITIT 完全稳定
+
+Return Position Impl Trait In Traits (RPITIT) 在 Rust 1.94 中完全稳定：
+
+```rust
+// 在 trait 中使用 impl Trait 作为返回类型
+trait Factory {
+    fn create(&self) -> impl Product;
+}
+
+// async fn 是 RPITIT 的特例
+trait AsyncFactory {
+    async fn create_async(&self) -> impl Product;
+}
+
+// 更灵活的返回类型
+trait StreamProducer {
+    fn produce(&self) -> impl Stream<Item = Event>;
+}
+
+// 组合使用
+trait ApiClient {
+    async fn fetch<T: Deserialize>(&self, url: &str) -> Result<T, Error>;
+    fn events(&self) -> impl Stream<Item = Event>;
+}
+```
+
+### 9.3 改进的异步闭包
+
+Rust 1.94 改进了异步闭包的支持：
+
+```rust
+// 异步闭包（实验性功能，在部分上下文中可用）
+async fn with_async_closure() {
+    let data = vec![1, 2, 3];
+
+    // 使用 async move 闭包
+    let process = async move |x: i32| -> i32 {
+        tokio::time::sleep(Duration::from_millis(10)).await;
+        x * 2
+    };
+
+    let result = process(5).await;
+}
+
+// 在迭代器中使用异步闭包
+async fn async_iterators() {
+    let items = vec![1, 2, 3, 4, 5];
+
+    // 使用 futures  crate 的 stream
+    let results: Vec<i32> = futures::stream::iter(items)
+        .then(async |x| {  // 异步闭包
+            fetch_data(x).await
+        })
+        .collect()
+        .await;
+}
+
+// 改进的 AsyncFn  trait 支持（预览）
+fn call_async<F>(f: F, arg: i32) -> impl Future<Output = i32>
+where
+    F: AsyncFn(i32) -> i32,
+{
+    f(arg)
+}
+```
+
+---
+
+## 10. 实际应用案例
+
+### 10.1 高性能Web服务器
 
 ```rust
 use tokio::net::{TcpListener, TcpStream};
@@ -1285,17 +1425,17 @@ async fn handle_connection(mut socket: TcpStream) -> Result<(), Box<dyn std::err
 }
 ```
 
-### 9.2 数据库连接池
+### 10.2 数据库连接池
 
 ```rust
 use deadpool::managed::{Manager, Pool, RecycleResult};
 use tokio_postgres::{Client, Config, NoTls};
 
+// 🎉 Rust 1.94+: 原生 async trait 让 Manager 实现更简洁
 struct PostgresManager {
     config: Config,
 }
 
-#[async_trait]
 impl Manager for PostgresManager {
     type Type = Client;
     type Error = tokio_postgres::Error;
@@ -1345,7 +1485,7 @@ async fn use_connection_pool() {
 }
 ```
 
-### 9.3 消息队列消费者
+### 10.3 消息队列消费者
 
 ```rust
 use lapin::{Connection, ConnectionProperties, Consumer, options::*};
@@ -1419,6 +1559,10 @@ async fn process_message(data: &[u8]) -> Result<(), Box<dyn std::error::Error>> 
 5. **取消安全**：确保任务被取消时不会留下不一致状态
 6. **流处理**：使用Stream trait处理异步序列数据
 7. **性能优化**：合理使用阻塞线程池、批量处理、减少内存分配
+8. **🎉 Rust 1.94 新特性**：
+   - 原生 async trait，无需 `async-trait` crate
+   - RPITIT 完全稳定
+   - 改进的异步闭包支持
 
 ---
 
@@ -1429,3 +1573,4 @@ async fn process_message(data: &[u8]) -> Result<(), Box<dyn std::error::Error>> 
 - [Pin API RFC](https://rust-lang.github.io/rfcs/2349-pin.html)
 - [async-std Documentation](https://docs.rs/async-std/)
 - [futures crate Documentation](https://docs.rs/futures/)
+- [Rust 1.94 Release Notes](https://blog.rust-lang.org/)

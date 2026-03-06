@@ -470,5 +470,5 @@ fn prefer_compile_time() {
 ---
 
 **维护er**: Rust Counterexamples Team
-**更新日期**: 2026-03-05
-**对齐版本**: Rust 1.93.1
+**更新日期**: 2026-03-06
+**对齐版本**: Rust 1.94.0

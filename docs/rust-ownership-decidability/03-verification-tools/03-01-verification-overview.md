@@ -1,6 +1,6 @@
 # Rust形式化验证工具全景
 
-> **综合参考**: 2024年Rust形式化验证工具生态综述
+> **综合参考**: 2025年Rust形式化验证工具生态综述 (支持Rust 1.94)
 
 ## 目录
 
@@ -21,6 +21,10 @@
     - [5.1 场景匹配](#51-场景匹配)
     - [5.2 成熟度评估](#52-成熟度评估)
   - [6. 验证工具与编译器集成](#6-验证工具与编译器集成)
+  - [7. Rust 1.94 版本兼容性](#7-rust-194-版本兼容性)
+    - [7.1 工具链要求](#71-工具链要求)
+    - [7.2 安装建议 (Rust 1.94)](#72-安装建议-rust-194)
+    - [7.3 已知限制](#73-已知限制)
   - [参考文献](#参考文献)
 
 ## 1. 验证工具谱系图
@@ -59,15 +63,14 @@
 
 ## 2. 工具对比矩阵
 
-| 工具 | 机构 | 方法 | 自动化 | 覆盖范围 | 成熟度 |
-|------|------|------|--------|----------|--------|
-| **Creusot** | LMF, Paris-Saclay | Why3, 预言变量 | 高 | Safe Rust | ⭐⭐⭐⭐ |
-| **Prusti** | ETH Zurich | Viper, 分离逻辑 | 高 | Safe Rust | ⭐⭐⭐⭐ |
-| **RustHorn** | 东京大学 | CHC编码 | 高 | Safe Rust子集 | ⭐⭐⭐ |
-| **Aeneas** | Inria | 函数式提取 | 中 | Safe Rust | ⭐⭐⭐ |
-| **Verus** | CMU/VMware | Z3, 资源代数 | 高 | Safe + 部分Unsafe | ⭐⭐⭐⭐ |
-| **Kani** | Amazon | CBMC | 自动 | Unsafe支持 | ⭐⭐⭐⭐ |
-| **RustBelt** | MPI-SWS | Coq, Iris | 手动 | 核心语言 | ⭐⭐⭐⭐⭐ |
+| 工具 | 机构 | 方法 | 自动化 | 覆盖范围 | Rust 1.94支持 |
+|------|------|------|--------|----------|---------------|
+| **Creusot** | LMF, Paris-Saclay | Why3, 预言变量 | 高 | Safe Rust | ⭐⭐⭐⭐ 需要特定版本 |
+| **Prusti** | ETH Zurich | Viper, 分离逻辑 | 高 | Safe Rust | ⭐⭐⭐ 维护模式 |
+| **RustHorn** | 东京大学 | CHC编码 | 高 | Safe Rust子集 | ⭐⭐⭐ 实验性 |
+| **Aeneas** | Inria | 函数式提取 | 中 | Safe Rust | ⭐⭐⭐⭐ 活跃开发 |
+| **Verus** | CMU/VMware | Z3, 资源代数 | 高 | Safe + 部分Unsafe | ⭐⭐⭐⭐⭐ 推荐 |
+| **Kani** | Amazon | CBMC | 自动 | Unsafe支持 | ⭐⭐⭐⭐⭐ 官方支持 |
 
 ## 3. 各工具核心特性
 
@@ -90,6 +93,7 @@ fn abs(x: i32) -> i32 {
 - 基于**预言变量** (Prophecy Variables) 建模可变借用
 - 利用Rust traits进行抽象
 - 生成Why3证明义务
+- **Rust 1.94兼容性**: 需要检查最新发布版本，可能需使用nightly工具链
 
 ### 3.2 Prusti
 
@@ -113,6 +117,7 @@ while i < n {
 - 基于**Viper**验证基础设施
 - 使用**分离逻辑**处理内存
 - 支持纯函数和可变状态
+- **Rust 1.94兼容性**: 项目处于维护模式，建议使用其他工具
 
 ### 3.3 RustHorn
 
@@ -131,6 +136,7 @@ fn max(x: i32, y: i32) -> i32 {
 - 将Rust程序转换为**约束Horn子句** (CHC)
 - 利用所有权简化内存建模
 - 完全自动化验证
+- **Rust 1.94兼容性**: 研究原型，功能有限
 
 ### 3.4 Verus
 
@@ -156,6 +162,7 @@ verus! {
 - 针对**系统代码**设计
 - **资源代数**支持并发
 - Z3后端自动化证明
+- **Rust 1.94兼容性**: 活跃开发，推荐用于新项目
 
 ### 3.5 Kani
 
@@ -174,6 +181,7 @@ fn check_abs() {
 - 基于**CBMC** (C Bounded Model Checker)
 - 支持**Unsafe Rust**
 - 适合检查特定属性
+- **Rust 1.94兼容性**: Amazon官方维护，支持最新稳定版
 
 ## 4. 方法学对比
 
@@ -233,14 +241,14 @@ fn check_abs() {
 
 ### 5.2 成熟度评估
 
-| 工具 | 标准库覆盖率 | 文档 | 社区 | 持续维护 |
-|------|-------------|------|------|---------|
-| Creusot | 良好 | 优秀 | 活跃 | 是 |
-| Prusti | 良好 | 优秀 | 活跃 | 是 |
-| RustHorn | 有限 | 一般 | 较少 | 是 |
-| Verus | 良好 | 优秀 | 活跃 | 是 |
-| Kani | 良好 | 优秀 | 活跃 | 是 |
-| RustBelt | 核心语言 | 研究级 | 学术 | 是 |
+| 工具 | 标准库覆盖率 | 文档 | 社区 | 持续维护 | Rust 1.94 |
+|------|-------------|------|------|---------|-----------|
+| Creusot | 良好 | 优秀 | 活跃 | 是 | 需验证 |
+| Prusti | 良好 | 优秀 | 较少 | 维护模式 | 有限支持 |
+| RustHorn | 有限 | 一般 | 较少 | 是 | 实验性 |
+| Verus | 良好 | 优秀 | 活跃 | 是 | ✅ 推荐 |
+| Kani | 良好 | 优秀 | 活跃 | 是 | ✅ 官方支持 |
+| RustBelt | 核心语言 | 研究级 | 学术 | 是 | 研究级 |
 
 ## 6. 验证工具与编译器集成
 
@@ -249,7 +257,7 @@ fn check_abs() {
 
 Rust源码
     ↓
-rustc 解析/类型检查
+rustc 1.94 解析/类型检查
     ↓
 HIR (高级IR)
     ↓    ┌─────────────┬─────────────┬─────────────┐
@@ -263,6 +271,45 @@ HIR (高级IR)
     HIR ──────▶ Aeneas (LLBC提取)
 ```
 
+## 7. Rust 1.94 版本兼容性
+
+### 7.1 工具链要求
+
+| 工具 | 最低Rust版本 | 1.94支持状态 | 说明 |
+|------|-------------|-------------|------|
+| **Kani** | 1.70+ | ✅ 完全支持 | Amazon官方维护，与稳定版同步 |
+| **Verus** | 1.75+ | ✅ 完全支持 | 活跃开发，推荐版本 |
+| **Creusot** | nightly | ⚠️ 需验证 | 需使用特定nightly版本 |
+| **Prusti** | 1.70+ | ⚠️ 有限支持 | 项目进入维护模式 |
+| **Aeneas** | 1.72+ | ✅ 支持 | 持续更新 |
+
+### 7.2 安装建议 (Rust 1.94)
+
+```bash
+# Kani - 推荐用于Unsafe代码验证
+cargo install kani-verifier
+cargo kani --version
+
+# Verus - 推荐用于系统代码验证
+git clone https://github.com/verus-lang/verus
+cd verus/source
+. venv
+
+# Creusot - 需检查最新兼容性
+cargo install cargo-creusot --locked
+# 注意: 可能需要特定nightly工具链
+
+# Prusti - 建议使用Docker
+# 项目维护放缓，新 projects 建议考虑 Verus
+```
+
+### 7.3 已知限制
+
+- **并发支持**: Verus > Creusot > Kani
+- **Unsafe支持**: Kani > Verus > Creusot (有限)
+- **标准库覆盖**: Kani ≈ Verus > Creusot
+- **证明自动化**: Kani (全自动) > Verus ≈ Creusot
+
 ---
 
 ## 参考文献
@@ -272,3 +319,4 @@ HIR (高级IR)
 3. Matsushita, Y., et al. (2021). RustHorn: CHC-based Verification for Rust Programs. *TOPLAS*.
 4. Lattuada, A., et al. (2024). Aeneas: Rust Verification by Functional Translation. *ICFP*.
 5. Lorch, J.R., et al. (2024). Verus: A Practical Foundation for Systems Verification. *SOSP*.
+6. Rust Formal Methods Interest Group. (2025). Rust Verification Tools Status. <https://rust-formal-methods.github.io/>

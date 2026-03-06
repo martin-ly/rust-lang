@@ -1,6 +1,6 @@
 # Rust 消息传递模式
 
-> **Rust版本**: 1.93.1
+> **Rust版本**: 1.94
 > **覆盖范围**: Channel、Actor模型、CSP理论、消息协议设计
 > **权威参考**: The Go Programming Language (并发章节), Akka Documentation
 
@@ -22,6 +22,7 @@
   - [3. Actor 模式实现](#3-actor-模式实现)
     - [3.1 Actor 基础](#31-actor-基础)
     - [3.2 消息协议设计](#32-消息协议设计)
+      - [Rust 1.94 延迟初始化在 Actor 中的应用](#rust-194-延迟初始化在-actor-中的应用)
 
 ---
 
@@ -767,6 +768,89 @@ pub fn start<A: Actor>(actor: A) -> ActorHandle<A> {
 ```
 
 ### 3.2 消息协议设计
+
+#### Rust 1.94 延迟初始化在 Actor 中的应用
+
+```rust
+use std::sync::LazyLock;
+use std::cell::LazyCell;
+use tokio::sync::{mpsc, oneshot};
+
+/// 全局消息路由表 - 延迟初始化
+static MESSAGE_ROUTER: LazyLock<MessageRouter> = LazyLock::new(|| {
+    MessageRouter::new()
+});
+
+pub struct MessageRouter {
+    routes: std::collections::HashMap<String, mpsc::Sender<Vec<u8>>>,
+}
+
+impl MessageRouter {
+    fn new() -> Self {
+        Self {
+            routes: std::collections::HashMap::new(),
+        }
+    }
+
+    pub fn register(&mut self, topic: String, sender: mpsc::Sender<Vec<u8>>) {
+        self.routes.insert(topic, sender);
+    }
+
+    pub fn get_sender(&self, topic: &str) -> Option<&mpsc::Sender<Vec<u8>>> {
+        self.routes.get(topic)
+    }
+}
+
+/// 获取全局路由器（Rust 1.94 API）
+pub fn get_router() -> &'static MessageRouter {
+    MESSAGE_ROUTER.get()
+}
+
+/// 带延迟初始化的 Actor
+pub struct LazyActor {
+    state: LazyCell<ActorState>,
+    inbox: mpsc::Receiver<Message>,
+}
+
+struct ActorState {
+    message_count: usize,
+    last_message: Option<String>,
+}
+
+impl LazyActor {
+    pub fn new(inbox: mpsc::Receiver<Message>) -> Self {
+        Self {
+            state: LazyCell::new(|| ActorState {
+                message_count: 0,
+                last_message: None,
+            }),
+            inbox,
+        }
+    }
+
+    pub fn handle_message(&mut self, msg: Message) {
+        // Rust 1.94: 使用 force_mut() 确保初始化并获取可变访问
+        let state = self.state.force_mut();
+        state.message_count += 1;
+        state.last_message = Some(format!("{:?}", msg));
+
+        match msg {
+            Message::Process(data) => {
+                println!("Processing {} bytes (message #{})", data.len(), state.message_count);
+            }
+            Message::Shutdown => {
+                println!("Actor shutting down after {} messages", state.message_count);
+            }
+        }
+    }
+}
+
+#[derive(Debug)]
+pub enum Message {
+    Process(Vec<u8>),
+    Shutdown,
+}
+```
 
 ```rust
 /// CQRS 风格的消息协议

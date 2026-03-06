@@ -1,6 +1,6 @@
 # Rust 数据并行模式
 
-> **Rust版本**: 1.93.1
+> **Rust版本**: 1.94
 > **覆盖范围**: Rayon并行计算、SIMD向量化、GPU加速、矩阵运算
 > **权威参考**: Rayon Documentation, packed_simd crate, Rust-GPU
 
@@ -16,6 +16,8 @@
     - [1.3 缓存局部性](#13-缓存局部性)
   - [2. Rayon并行计算](#2-rayon并行计算)
     - [2.1 并行迭代器](#21-并行迭代器)
+      - [Rust 1.94 Peekable 在并行处理中的应用](#rust-194-peekable-在并行处理中的应用)
+      - [延迟初始化与数据并行 (Rust 1.94)](#延迟初始化与数据并行-rust-194)
     - [2.2 Fork-Join模式](#22-fork-join模式)
     - [2.3 并行排序](#23-并行排序)
     - [2.4 自定义分区策略](#24-自定义分区策略)
@@ -209,6 +211,174 @@ pub struct CachePaddedCounter {
 ## 2. Rayon并行计算
 
 ### 2.1 并行迭代器
+
+#### Rust 1.94 Peekable 在并行处理中的应用
+
+```rust
+use rayon::prelude::*;
+use std::iter::Peekable;
+
+/// 使用条件消费优化并行数据分区
+pub struct PartitionedIterator<I: Iterator> {
+    inner: Peekable<I>,
+    threshold: usize,
+}
+
+impl<I: Iterator> PartitionedIterator<I> {
+    pub fn new(iter: I, threshold: usize) -> Self {
+        Self {
+            inner: iter.peekable(),
+            threshold,
+        }
+    }
+
+    /// 收集符合条件的元素直到阈值（Rust 1.94 风格）
+    pub fn collect_batch<F, T>(&mut self, transformer: F) -> Vec<T>
+    where
+        F: Fn(I::Item) -> Option<T>,
+    {
+        let mut batch = Vec::with_capacity(self.threshold);
+
+        // Rust 1.94: 使用 next_if_map 进行条件收集
+        while batch.len() < self.threshold {
+            if let Some(item) = self.inner.next_if_map(&transformer) {
+                batch.push(item);
+            } else {
+                break;
+            }
+        }
+
+        batch
+    }
+}
+
+/// 并行处理大数据集 - 使用 Rust 1.94 特性优化
+pub fn parallel_batch_processing<T, F>(
+    data: Vec<T>,
+    batch_size: usize,
+    processor: F,
+) -> Vec<T::Output>
+where
+    T: Send,
+    F: Fn(T) -> T::Output + Send + Sync,
+    T::Output: Send,
+{
+    data.into_par_iter()
+        .chunks(batch_size)
+        .map(|chunk| {
+            // 并行处理每个批次
+            chunk.into_iter().map(&processor).collect::<Vec<_>>()
+        })
+        .flatten()
+        .collect()
+}
+```
+
+#### 延迟初始化与数据并行 (Rust 1.94)
+
+```rust
+use std::sync::LazyLock;
+use rayon::prelude::*;
+
+/// 延迟初始化的并行计算资源
+static PARALLEL_ENGINE: LazyLock<ParallelEngine> = LazyLock::new(|| {
+    println!("Initializing parallel engine...");
+    ParallelEngine::new()
+});
+
+pub struct ParallelEngine {
+    thread_pool: rayon::ThreadPool,
+    buffer_pool: Vec<Vec<u8>>,
+}
+
+impl ParallelEngine {
+    fn new() -> Self {
+        let thread_pool = rayon::ThreadPoolBuilder::new()
+            .num_threads(num_cpus::get())
+            .build()
+            .unwrap();
+
+        Self {
+            thread_pool,
+            buffer_pool: Vec::new(),
+        }
+    }
+
+    pub fn parallel_sum(&self, data: &[f64]) -> f64 {
+        self.thread_pool.install(|| {
+            data.par_iter().sum()
+        })
+    }
+}
+
+/// 获取并行引擎（Rust 1.94）
+pub fn get_parallel_engine() -> &'static ParallelEngine {
+    PARALLEL_ENGINE.get()
+}
+
+/// 使用延迟初始化的引擎进行并行计算
+pub fn lazy_parallel_compute(data: &[f64]) -> f64 {
+    let engine = PARALLEL_ENGINE.get();
+    engine.parallel_sum(data)
+}
+
+/// SIMD + 延迟初始化
+static SIMD_CONFIG: LazyLock<SimdConfig> = LazyLock::new(|| {
+    SimdConfig::detect_capabilities()
+});
+
+pub struct SimdConfig {
+    pub avx512: bool,
+    pub avx2: bool,
+    pub sse4_2: bool,
+    pub optimal_width: usize,
+}
+
+impl SimdConfig {
+    fn detect_capabilities() -> Self {
+        Self {
+            avx512: is_x86_feature_detected!("avx512f"),
+            avx2: is_x86_feature_detected!("avx2"),
+            sse4_2: is_x86_feature_detected!("sse4.2"),
+            optimal_width: if is_x86_feature_detected!("avx512f") {
+                16
+            } else if is_x86_feature_detected!("avx") {
+                8
+            } else {
+                4
+            }
+        }
+    }
+}
+
+/// 根据检测到的能力选择 SIMD 宽度
+pub fn adaptive_simd_add(a: &[f32], b: &[f32], c: &mut [f32]) {
+    let config = SIMD_CONFIG.get();
+
+    match config.optimal_width {
+        16 => simd_add::<16>(a, b, c),
+        8 => simd_add::<8>(a, b, c),
+        _ => simd_add::<4>(a, b, c),
+    }
+}
+
+fn simd_add<const N: usize>(a: &[f32], b: &[f32], c: &mut [f32]) {
+    use std::simd::Simd;
+
+    let chunks = a.len() / N;
+    for i in 0..chunks {
+        let va = Simd::<f32, N>::from_slice(&a[i * N..]);
+        let vb = Simd::<f32, N>::from_slice(&b[i * N..]);
+        let vc = va + vb;
+        vc.copy_to_slice(&mut c[i * N..]);
+    }
+
+    // 处理剩余元素
+    for i in (chunks * N)..a.len() {
+        c[i] = a[i] + b[i];
+    }
+}
+```
 
 ```rust
 use rayon::prelude::*;
