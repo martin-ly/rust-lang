@@ -111,6 +111,7 @@
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
 | [formal_methods/README](./research_notes/formal_methods/README.md) | 形式化方法总览、六篇并表 | → [ownership_model](./research_notes/formal_methods/ownership_model.md) → [send_sync_formalization](./research_notes/formal_methods/send_sync_formalization.md) |
+| [ACTOR_MODEL_DEEP_DIVE](./rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md) | **Actor模型深度解析** - 形式语义、10+定理、15+代码、反例分析 | → [actor-specialty/README](./rust-ownership-decidability/actor-specialty/README.md) → [formal-proofs](./rust-ownership-decidability/actor-specialty/formal-proofs/actor-safety-theorems.md) |
 | [00_completeness_gaps](./research_notes/formal_methods/00_completeness_gaps.md) | 完备性缺口声明与路线图 | → [README](./research_notes/formal_methods/README.md) |
 | [ownership_model](./research_notes/formal_methods/ownership_model.md) | 所有权规则 1-8、T2/T3 | ←→ [borrow_checker_proof](./research_notes/formal_methods/borrow_checker_proof.md) ←→ [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
 | [borrow_checker_proof](./research_notes/formal_methods/borrow_checker_proof.md) | 借用规则、T1 | ←→ [ownership_model](./research_notes/formal_methods/ownership_model.md) ←→ [lifetime_formalization](./research_notes/formal_methods/lifetime_formalization.md) |

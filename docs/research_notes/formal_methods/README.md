@@ -46,6 +46,7 @@
     - [4. 生命周期形式化](#4-生命周期形式化)
     - [5. Pin 和自引用类型形式化](#5-pin-和自引用类型形式化)
     - [6. Send/Sync 形式化](#6-sendsync-形式化)
+    - [7. Actor 模型形式化 ⭐ 新增](#7-actor-模型形式化--新增)
   - [formal\_methods 六篇并表](#formal_methods-六篇并表)
   - [形式化论证汇总](#形式化论证汇总)
   - [公理-定理形式化索引](#公理-定理形式化索引)
@@ -169,6 +170,31 @@
 
 ---
 
+### 7. Actor 模型形式化 ⭐ 新增
+
+**研究问题**:
+
+- Actor 模型的形式化语义如何定义？
+- 如何证明 Actor 系统的数据竞争自由？
+- Ask/Tell 模式的形式化规范是什么？
+- 监督树如何保证故障隔离？
+
+**相关笔记**: [ACTOR_MODEL_DEEP_DIVE](../../rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md)
+
+**包含内容**:
+
+- Actor 形式化定义: `Actor := (State, Behavior, Mailbox)`
+- 操作语义与转换规则
+- **定理 ACTOR-ISOLATION**: 无共享状态 ⇒ 无数据竞争
+- **定理 ACTOR-DEADLOCK-FREEDOM**: 条件下死锁自由
+- **定理 ACTOR-FAULT-ISOLATION**: 故障隔离保证
+- 5+ 反例分析: 循环Ask、共享状态、Actor泄漏等
+- 完整聊天系统案例研究
+
+**状态**: ✅ 已完成 (1400+ 行，10+ 定理，15+ 代码)
+
+---
+
 ## formal_methods 六篇并表
 
 下表为本目录六篇核心文档的**概念×公理×定理×证明方法×反例**并表；用于跨篇对比与 [HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) 衔接。各子文档内可注明「本概念在 README §formal_methods 六篇并表 第 x 行」。
@@ -181,6 +207,7 @@
 | **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | T6.1 状态一致, T6.2 并发安全, T6.3 进度 | 归纳+案例分析 | [async_state_machine](async_state_machine.md) 非 Send 跨线程、移动未 Pin |
 | **Pin** | Def 1.1–2.2（位置稳定、自引用） | T1–T3 Pin 保证/自引用/投影 | 类型系统、位置稳定 | [pin_self_referential](pin_self_referential.md) 移动未 Pin 自引用 |
 | **Send/Sync** | Def SEND1, SYNC1；SYNC-L1 $T:\text{Sync} \Leftrightarrow \&T:\text{Send}$ | SEND-T1, SYNC-T1, SEND-SYNC-T1 | 与 borrow/async 衔接 | [send_sync_formalization](send_sync_formalization.md) Rc !Send、Cell !Sync、非 Send spawn |
+| **Actor模型** | Actor := (State, Behavior, Mailbox) | ACTOR-ISOLATION, ACTOR-NO-DATA-RACE, ACTOR-FAULT-ISOLATION | 结构归纳、Actor演算 | [ACTOR_MODEL_DEEP_DIVE](../../rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md) 循环Ask、共享状态、Actor泄漏 |
 
 *控制流*：A-CF1 见本 README「控制流形式化」；变量 Def 1.4/1.5 见 ownership_model。
 
@@ -217,6 +244,7 @@
 | [async_state_machine](./async_state_machine.md) | T6.1–T6.3 状态一致性、并发安全、进度 | Future 状态机、Pin |
 | [pin_self_referential](./pin_self_referential.md) | Pin 不变式、T1–T3 自引用安全 | 堆/栈区分、!Unpin |
 | [send_sync_formalization](./send_sync_formalization.md) | Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1 | 跨线程转移/共享、与 spawn/Future/Arc 衔接 |
+| [ACTOR_MODEL_DEEP_DIVE](../../rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md) | Actor形式语义、10+定理、15+代码示例 | Actor隔离定理、死锁自由、故障隔离、反例分析 |
 
 本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 衔接。
 

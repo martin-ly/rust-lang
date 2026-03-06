@@ -206,7 +206,7 @@ async fn with_timeout() -> Result<Data, TimeoutError> {
 
 ### 2. 设计模式
 
-**Tower Service Pattern**
+**Tower Service Pattern**:
 > 详见 [Tower Service官方文档](https://docs.rs/tower-service/)
 
 ```rust
@@ -218,7 +218,7 @@ trait Service<Request> {
 }
 ```
 
-**Actor模式**
+**Actor模式**:
 > 详见 [actor-specialty/README.md](../actor-specialty/README.md)
 
 - 消息传递
@@ -234,7 +234,7 @@ trait Service<Request> {
 - 中间件链
 - 错误处理策略
 
-**协议解析状态机**
+**协议解析状态机**:
 > 使用枚举和模式匹配实现
 
 ```rust
@@ -272,14 +272,14 @@ async fn blink_task(pin: PB0) {
 
 ### 5. 最佳实践
 
-**代码组织**
+**代码组织**:
 > 推荐参考 [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 - 模块边界
 - 错误类型设计
 - 配置管理
 
-**性能优化**
+**性能优化**:
 > 推荐参考 [Tokio性能优化指南](https://docs.rs/tokio/)
 
 - 减少分配

@@ -98,28 +98,28 @@
 ### 3.1 语法定义模板
 
 ```markdown
-### 定义 X.X (语法)
+      ### 定义 X.X (语法)
 
-**表达式**:
-$$
-e \in \text{Expr} ::= x \mid c \mid \lambda x.e \mid e_1\, e_2 \mid \text{let } x = e_1 \text{ in } e_2
-$$
+      **表达式**:
+      $$
+      e \in \text{Expr} ::= x \mid c \mid \lambda x.e \mid e_1\, e_2 \mid \text{let } x = e_1 \text{ in } e_2
+      $$
 
-其中:
-- $x \in \text{Var}$: 变量
-- $c \in \text{Const}$: 常量
-- $\lambda x.e$: 函数抽象
-- $e_1\, e_2$: 函数应用
-- $\text{let } x = e_1 \text{ in } e_2$: let绑定
+      其中:
+      - $x \in \text{Var}$: 变量
+      - $c \in \text{Const}$: 常量
+      - $\lambda x.e$: 函数抽象
+      - $e_1\, e_2$: 函数应用
+      - $\text{let } x = e_1 \text{ in } e_2$: let绑定
 
-**上下文无关语法**:
-```bnf
-expr ::= var
-      |  const
-      |  "λ" var "." expr
-      |  expr expr
-      |  "let" var "=" expr "in" expr
-```
+      **上下文无关语法**:
+      ```bnf
+      expr ::= var
+            |  const
+            |  "λ" var "." expr
+            |  expr expr
+            |  "let" var "=" expr "in" expr
+      ```
 
 ```
 
@@ -149,27 +149,27 @@ $$
 ### 3.3 类型规则模板
 
 ```markdown
-### 定义 X.X (类型系统)
+      ### 定义 X.X (类型系统)
 
-**类型环境**:
-$$
-\Gamma ::= \emptyset \mid \Gamma, x: \tau \mid \Gamma, \alpha \text{ type}
-$$
+      **类型环境**:
+      $$
+      \Gamma ::= \emptyset \mid \Gamma, x: \tau \mid \Gamma, \alpha \text{ type}
+      $$
 
-**类型推导** $\Gamma \vdash e : \tau$:
+      **类型推导** $\Gamma \vdash e : \tau$:
 
-```
+      ```
 
-─────────────── T-Var    (x:τ) ∈ Γ
-Γ ⊢ x : τ
+      ─────────────── T-Var    (x:τ) ∈ Γ
+      Γ ⊢ x : τ
 
-Γ, x:τ₁ ⊢ e : τ₂
-─────────────────── T-Abs
-Γ ⊢ λx.e : τ₁ → τ₂
+      Γ, x:τ₁ ⊢ e : τ₂
+      ─────────────────── T-Abs
+      Γ ⊢ λx.e : τ₁ → τ₂
 
-Γ ⊢ e₁ : τ₁ → τ₂    Γ ⊢ e₂ : τ₁
-────────────────────────────────── T-App
-Γ ⊢ e₁ e₂ : τ₂
+      Γ ⊢ e₁ : τ₁ → τ₂    Γ ⊢ e₂ : τ₁
+      ────────────────────────────────── T-App
+      Γ ⊢ e₁ e₂ : τ₂
 
 ```
 
@@ -177,7 +177,8 @@ $$
 > 如果 $\vdash e : \tau$ 且 $(e, \emptyset) \rightarrow^* (e', \Sigma')$，则要么 $e'$ 是值，要么存在 $e''$ 使得 $(e', \Sigma') \rightarrow (e'', \Sigma'')$。
 
 **证明**: 见附录 A。∎
-```
+
+```text
 
 ### 3.4 定理证明模板
 
@@ -311,7 +312,7 @@ $$
 
 ### 6.1 推导树
 
-```
+```text
 Γ ⊢ e₁ : τ₁ → τ₂    Γ ⊢ e₂ : τ₁
 ────────────────────────────────── T-App
 Γ ⊢ e₁ e₂ : τ₂
@@ -319,7 +320,7 @@ $$
 
 ### 6.2 状态转换图
 
-```
+```text
         new v
 (∅) ───────────→ (ℓ, {ℓ ↦ v})
 
@@ -332,7 +333,7 @@ $$
 
 ### 6.3 层次架构图
 
-```
+```text
 ┌─────────────────────────────────┐
 │         Rust 源代码              │
 ├─────────────────────────────────┤

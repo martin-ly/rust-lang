@@ -46,33 +46,33 @@ Coq 形式化代码:    3,000+ 行
 
 #### ✅ 定理 1: Borrow Checking 终止性
 
-```
+```text
 forall Γ, Linearizable Γ →
   exists Γ' n, borrow_check_iter Γ n = Some Γ' /\ is_fixed_point Γ'
 ```
 
 #### ✅ 定理 2: 类型保持 (Preservation)
 
-```
+```text
 Δ;Γ;Θ ⊢ e:τ → σ;h ⊢ e⇓v;h' →
   exists Γ'Θ', value_has_type Δ Γ' Θ' v τ
 ```
 
 #### ✅ 定理 3: 进展 (Progress)
 
-```
+```text
 Δ;Γ;Θ ⊢ e:τ → is_value(e) ∨ step(e) ∨ stuck(e)
 ```
 
 #### ✅ 定理 4: 类型安全
 
-```
+```text
 Type Safety = Preservation + Progress
 ```
 
 #### ✅ 定理 5: 可判定性
 
-```
+```text
 forall p, Linearizable(Γ_p) →
   {well_typed(p)} + {¬well_typed(p)}
 ```
@@ -252,7 +252,7 @@ make
 
 ## 🎉 项目完成
 
-**Rust 所有权系统可判定性严格形式化研究**
+**Rust 所有权系统可判定性严格形式化研究**:
 
 ✅ **100% 完成**
 
@@ -272,6 +272,6 @@ make
 
 ---
 
-*"严格形式化是可信软件的基石。"*
+*"严格形式化是可信软件的基石。"*:
 
-**🎉 项目圆满完成！🎉**
+**🎉 项目圆满完成！🎉**:

@@ -59,7 +59,7 @@
 
 #### 核心定理 (按文档)
 
-```
+```text
 formal-proofs/memory-safety-proof.md
 ├── 定理 3.1 (进展性) ✅ 完整证明
 ├── 定理 3.2 (保持性) ✅ 完整证明
@@ -145,7 +145,7 @@ case-studies/diesel-orm-type-safety.md
 
 已建立完整的符号体系:
 
-```
+```text
 类型变量:        α, β, γ
 区域/生命周期:    ρ, ρ₁, ρ₂
 类型环境:        Γ, Δ
@@ -290,4 +290,4 @@ case-studies/diesel-orm-type-safety.md
 
 ---
 
-*"从代码堆砌到形式化严谨，这是质的蜕变。"*
+*"从代码堆砌到形式化严谨，这是质的蜕变。"*:

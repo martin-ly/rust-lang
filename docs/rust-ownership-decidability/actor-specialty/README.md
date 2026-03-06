@@ -55,6 +55,12 @@
 
 ## 文档导航
 
+### 深度专题
+
+| 文档 | 行数 | 核心内容 | 难度 |
+|:---|:---:|:---|:---:|
+| **[ACTOR_MODEL_DEEP_DIVE.md](ACTOR_MODEL_DEEP_DIVE.md)** | 1400+ | **Actor模型深度解析：形式语义、证明、反例** | 🔴 高级 |
+
 ### 理论基础
 
 | 文档 | 行数 | 核心内容 |
@@ -134,6 +140,7 @@ Thm RUST-ACTOR-MEMORY-SAFETY: Rust + Actor内存安全
 
 ```text
 📚 理论基础文档: 2篇 (800+行)
+🔬 深度专题: 1篇 (1400+行，形式语义、10+定理、15+代码)
 📐 定理与证明: 11个核心定理
 🔬 思维导图: 1个
 📊 多维矩阵: 1个 (6+框架对比)
@@ -141,7 +148,7 @@ Thm RUST-ACTOR-MEMORY-SAFETY: Rust + Actor内存安全
 🗺️ 应用场景树: 1个 (6大领域)
 🎨 设计模式: 2篇 (15+模式，形式化)
 📦 案例研究: 3篇
-💡 实战示例: 1篇 (聊天系统)
+💡 实战示例: 2篇 (聊天系统完整实现)
 ```
 
 ---
@@ -164,7 +171,8 @@ Thm RUST-ACTOR-MEMORY-SAFETY: Rust + Actor内存安全
 
 1. [matrices/actor-framework-matrix.md](matrices/actor-framework-matrix.md) - 技术选型
 2. [scenario-trees/actor-application-domains.md](scenario-trees/actor-application-domains.md) - 领域映射
-3. [distributed/distributed-actors.md](distributed/distributed-actors.md) - 分布式系统
+3. [ACTOR_MODEL_DEEP_DIVE.md](ACTOR_MODEL_DEEP_DIVE.md) - 形式化深度分析
+4. [distributed/distributed-actors.md](distributed/distributed-actors.md) - 分布式系统
 
 ---
 

@@ -13,14 +13,15 @@
 
 ```text
 12-concurrency-patterns/
-├── README.md                          # 本文档 - 导航和概览
-├── 12-01-concurrency-architecture.md  # 并发架构设计模式
-├── 12-02-thread-safety-patterns.md    # 线程安全模式 (Send/Sync)
-├── 12-03-message-passing.md           # 消息传递模式 (Channel/Actor)
-├── 12-04-lock-free-patterns.md        # 无锁编程 (CAS/原子操作)
-├── 12-05-async-patterns.md            # 异步并发模式
-├── 12-06-data-parallelism.md          # 数据并行 (Rayon/SIMD)
-└── 12-07-distributed-patterns.md      # 分布式模式
+├── README.md                               # 本文档 - 导航和概览
+├── 12-01-concurrency-architecture.md       # 并发架构设计模式
+├── 12-01-concurrency-architecture-deep.md  # 🔬 并发架构形式化深度解析
+├── 12-02-thread-safety-patterns.md         # 线程安全模式 (Send/Sync)
+├── 12-03-message-passing.md                # 消息传递模式 (Channel/Actor)
+├── 12-04-lock-free-patterns.md             # 无锁编程 (CAS/原子操作)
+├── 12-05-async-patterns.md                 # 异步并发模式
+├── 12-06-data-parallelism.md               # 数据并行 (Rayon/SIMD)
+└── 12-07-distributed-patterns.md           # 分布式模式
 ```
 
 ---
@@ -50,12 +51,26 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 | 如何最大化 CPU 利用率？ | 12-06, 12-04 |
 | 如何构建容错系统？ | 12-07, 12-03 |
 | 如何选择并发模型？ | 12-01, 12-05 |
+| 需要形式化证明并发正确性？ | 12-01-deep |
+| 实现自定义无锁数据结构？ | 12-01-deep, 12-04 |
 
 ### 路径三：性能优先
 
 ```text
 12-06 → 12-04 → 12-05 → 12-02 → 12-03
 ```
+
+### 路径四：形式化方法（研究员/高级开发者）
+
+```text
+12-02 → 12-01 → 12-01-deep → 12-04 → 12-05
+```
+
+1. **线程安全基础** (12-02) - 建立直觉理解
+2. **并发架构** (12-01) - 掌握实际模式
+3. **形式化深度解析** (12-01-deep) - 理解形式化保证
+4. **无锁编程** (12-04) - 极致性能与形式化安全
+5. **异步并发** (12-05) - 综合应用
 
 ---
 
@@ -73,6 +88,57 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 - 管道模式和 Future 组合
 
 **适合读者**: 需要设计整体并发架构的系统架构师
+
+---
+
+### 12-01-deep: 并发架构形式化深度解析
+
+**核心主题** (🔬 高级形式化内容):
+
+- **并发模型形式化比较**: Shared Memory vs Message Passing 的数学定义
+- **线程安全定理**: 5+ 形式化定理及证明
+  - Theorem SEND-SYNC-SAFETY
+  - Theorem SYNC-DEREF-SAFETY
+  - Theorem SEND-COMPOSITIONALITY
+  - Theorem SYNC-COMPOSITIONALITY
+  - Theorem CHANNEL-ISOLATION
+- **Mutex 所有权分析**: 形式化所有权协议与常见错误
+- **RwLock 语义**: 形式化状态机与饥饿分析
+- **无锁编程形式化**: CAS 循环、ABA 问题、内存回收
+- **内存序深度解析**: happens-before 关系、5 种 Ordering 选项
+- **高性能队列案例**: 完整的无锁队列实现与安全论证
+
+**关键代码示例**:
+
+```rust
+// 形式化定理演示: Send + Sync = Safe Shared State
+fn demonstrate_send_sync_safety<T: Send + Sync>() {
+    let shared: Arc<Mutex<T>> = Arc::new(Mutex::new(initial));
+    // Safe concurrent access guaranteed by type system
+}
+
+// CAS 循环模式
+fn cas_loop(counter: &AtomicUsize) {
+    loop {
+        let current = counter.load(Ordering::Relaxed);
+        match counter.compare_exchange(
+            current, current + 1,
+            Ordering::Release, Ordering::Relaxed
+        ) {
+            Ok(_) => break,
+            Err(_) => continue,
+        }
+    }
+}
+```
+
+**适合读者**:
+
+- 需要深入理解 Rust 并发形式化保证的研究者
+- 实现自定义并发原语的库作者
+- 需要证明并发代码正确性的系统开发者
+
+**阅读建议**: 建议先阅读 12-01 和 12-02 后再阅读本文档
 
 ---
 
