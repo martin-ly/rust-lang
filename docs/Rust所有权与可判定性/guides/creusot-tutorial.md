@@ -6,16 +6,50 @@
 
 ## 目录
 
-1. [Creusot 简介](#1-creusot-简介)
-2. [安装与配置](#2-安装与配置)
-3. [预言逻辑基础](#3-预言逻辑基础)
-4. [规范注解](#4-规范注解)
-5. [核心验证模式](#5-核心验证模式)
-6. [高级主题](#6-高级主题)
-7. [完整示例](#7-完整示例)
-8. [与 Prusti 对比](#8-与-prusti-对比)
-9. [常见问题](#9-常见问题)
-10. [参考资源](#10-参考资源)
+- [Creusot 形式化验证教程](#creusot-形式化验证教程)
+  - [目录](#目录)
+  - [1. Creusot 简介](#1-creusot-简介)
+    - [1.1 什么是 Creusot](#11-什么是-creusot)
+    - [1.2 核心特点](#12-核心特点)
+    - [1.3 验证流程](#13-验证流程)
+  - [2. 安装与配置](#2-安装与配置)
+    - [2.1 系统要求](#21-系统要求)
+    - [2.2 安装步骤](#22-安装步骤)
+    - [2.3 项目配置](#23-项目配置)
+  - [3. 预言逻辑基础](#3-预言逻辑基础)
+    - [3.1 核心概念](#31-核心概念)
+      - [3.1.1 最终值 (Final Value)](#311-最终值-final-value)
+      - [3.1.2 两状态规范 (Two-state Specifications)](#312-两状态规范-two-state-specifications)
+    - [3.2 快照 (Snapshot)](#32-快照-snapshot)
+  - [4. 规范注解](#4-规范注解)
+    - [4.1 基本注解](#41-基本注解)
+    - [4.2 前置与后置条件](#42-前置与后置条件)
+    - [4.3 循环规范](#43-循环规范)
+    - [4.4 变体与终止性](#44-变体与终止性)
+  - [5. 核心验证模式](#5-核心验证模式)
+    - [5.1 所有权转移验证](#51-所有权转移验证)
+    - [5.2 不变量维护](#52-不变量维护)
+    - [5.3 数组与切片操作](#53-数组与切片操作)
+    - [5.4 递归数据结构](#54-递归数据结构)
+  - [6. 高级主题](#6-高级主题)
+    - [6.1 幽灵状态 (Ghost State)](#61-幽灵状态-ghost-state)
+    - [6.2  traits 规范](#62--traits-规范)
+    - [6.3 外部函数契约](#63-外部函数契约)
+  - [7. 完整示例](#7-完整示例)
+    - [7.1 验证二分查找](#71-验证二分查找)
+    - [7.2 验证栈实现](#72-验证栈实现)
+  - [8. 与 Prusti 对比](#8-与-prusti-对比)
+    - [选择建议](#选择建议)
+  - [9. 常见问题](#9-常见问题)
+    - [Q1: 验证超时怎么办？](#q1-验证超时怎么办)
+    - [Q2: 如何调试失败的验证？](#q2-如何调试失败的验证)
+    - [Q3: 支持哪些 Rust 特性？](#q3-支持哪些-rust-特性)
+    - [Q4: 如何处理循环引用？](#q4-如何处理循环引用)
+  - [10. 参考资源](#10-参考资源)
+    - [10.1 官方资源](#101-官方资源)
+    - [10.2 相关工具](#102-相关工具)
+    - [10.3 学术论文](#103-学术论文)
+  - [总结](#总结)
 
 ---
 
@@ -118,6 +152,7 @@ fn take_and_return<'a>(x: &mut &'a mut i32) -> &'a mut i32 {
 ```
 
 符号说明：
+
 - `*x` - x 的最终值
 - `^x` - x 的旧值（pre-state）
 - `**x` - 双重解引用
@@ -171,7 +206,7 @@ pub fn safe_div(dividend: i32, divisor: i32) -> i32 {
 pub fn sum(n: i32) -> i32 {
     let mut i = 0;
     let mut sum = 0;
-    
+
     #[invariant(i >= 0)]
     #[invariant(i <= n)]
     #[invariant(sum == i * (i - 1) / 2)]  // 不变量：sum 是 0 到 i-1 的和
@@ -179,7 +214,7 @@ pub fn sum(n: i32) -> i32 {
         sum += i;
         i += 1;
     }
-    
+
     sum
 }
 ```
@@ -216,13 +251,13 @@ impl Account {
     pub fn new() -> Self {
         Account { balance: 0 }
     }
-    
+
     #[requires(amount >= 0)]
     #[ensures(self.balance == old(self.balance) + amount)]
     pub fn deposit(&mut self, amount: i32) {
         self.balance += amount;
     }
-    
+
     #[requires(amount >= 0)]
     #[requires(self.balance >= amount)]  // 账户余额充足
     #[ensures(self.balance == old(self.balance) - amount)]
@@ -241,18 +276,18 @@ pub struct Vector<T> {
 
 impl<T> Vector<T> {
     // 类型不变量：len >= 0（自动满足）
-    
+
     #[ensures(self.len() == 0)]
     pub fn new() -> Self {
         Vector { data: Vec::new() }
     }
-    
+
     #[pure]  // 纯函数，无副作用
     #[ensures(result == self.data.len())]
     pub fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     #[ensures(self.len() == old(self.len()) + 1)]
     pub fn push(&mut self, value: T) {
         self.data.push(value);
@@ -270,7 +305,7 @@ impl<T> Vector<T> {
 pub fn find_max(arr: &[i32]) -> i32 {
     let mut max = arr[0];
     let mut i = 1;
-    
+
     #[invariant(i >= 1)]
     #[invariant(i <= arr.len())]
     #[invariant(forall<j: Int> 0 <= j && j < i ==> @arr[j] <= max)]
@@ -280,7 +315,7 @@ pub fn find_max(arr: &[i32]) -> i32 {
         }
         i += 1;
     }
-    
+
     max
 }
 ```
@@ -303,7 +338,7 @@ impl<T> List<T> {
             List::Cons(_, tail) => 1 + tail.len(),
         }
     }
-    
+
     #[pure]
     #[variant(self)]
     #[ensures(result ==> self.len() == 0)]
@@ -333,7 +368,7 @@ pub fn compute_with_ghost(x: i32, y: i32) -> (i32, i32) {
         let product = x * y;
         // 可以用于复杂的中间断言
     };
-    
+
     (x + y, x * y)
 }
 ```
@@ -385,14 +420,14 @@ use creusot_contracts::*;
 pub fn binary_search(arr: &[i32], target: i32) -> bool {
     let mut low = 0;
     let mut high = arr.len();
-    
+
     #[invariant(low <= high)]
     #[invariant(high <= arr.len())]
     #[invariant(forall<i: Int> 0 <= i && i < low ==> @arr[i] < target)]
     #[invariant(forall<i: Int> high <= i && i < @arr ==> @arr[i] > target)]
     while low < high {
         let mid = low + (high - low) / 2;
-        
+
         if arr[mid] == target {
             return true;
         } else if arr[mid] < target {
@@ -401,7 +436,7 @@ pub fn binary_search(arr: &[i32], target: i32) -> bool {
             high = mid;
         }
     }
-    
+
     false
 }
 
@@ -424,17 +459,17 @@ impl<T> Stack<T> {
     pub fn new() -> Self {
         Stack { data: Vec::new() }
     }
-    
+
     #[pure]
     pub fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
-    
+
     #[pure]
     pub fn len(&self) -> usize {
         self.data.len()
     }
-    
+
     #[ensures(!result.is_empty())]
     #[ensures(result.len() == old(self.len()) + 1)]
     #[ensures(result.peek() == Some(item))]
@@ -442,7 +477,7 @@ impl<T> Stack<T> {
         self.data.push(item);
         self
     }
-    
+
     #[requires(!self.is_empty())]
     #[ensures(result.0 == old(self.peek().unwrap()))]
     #[ensures(result.1.len() == old(self.len()) - 1)]
@@ -450,7 +485,7 @@ impl<T> Stack<T> {
         let item = self.data.pop().unwrap();
         (item, self)
     }
-    
+
     #[pure]
     pub fn peek(&self) -> Option<&T> {
         self.data.last()
@@ -498,12 +533,14 @@ let mid = arr[i];
 ### Q3: 支持哪些 Rust 特性？
 
 当前支持：
+
 - 基本类型、结构体、枚举
 - 泛型、trait
 - 模式匹配
 - 基础生命周期
 
 限制：
+
 - 异步/await
 - 部分 unsafe 代码
 - 复杂闭包
@@ -537,7 +574,7 @@ pub fn create_cyclic() -> Node { ... }
 ### 10.3 学术论文
 
 1. **Denes & Pichardie (2022)** - Creusot 原始论文
-2. ** prophecy variables ( prophecy 变量)** - 理论基础
+2. **prophecy variables ( prophecy 变量)** - 理论基础
 3. **RustBelt** - Rust 形式化基础
 
 ---

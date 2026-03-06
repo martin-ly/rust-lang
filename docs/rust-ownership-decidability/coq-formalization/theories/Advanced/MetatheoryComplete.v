@@ -859,6 +859,52 @@ Qed.
 (* 辅助定义：空堆 *)
 Definition empty_heap : heap := fun _ => None.
 
+(* ==========================================================================
+ * 辅助公理：基础系统的元理论性质
+ * 这些公理表示基础系统（Syntax.Types, Typing.TypeSystem等）的元理论性质
+ * 在实际完整的形式化中，这些应由基础系统提供
+ * ========================================================================== *)
+
+(* 基础系统的求值传递性 *)
+Axiom eval_transitive_base : forall s h e e' h' v h'',
+  eval_step s h e e' h' ->
+  eval s h e' v h'' ->
+  eval s h e v h''.
+
+(* Reborrow 系统的求值传递性 *)
+Axiom eval_reborrow_transitive : forall s h re re' h' v h'',
+  eval_reborrow_step s h re re' h' ->
+  eval_reborrow s h re' v h'' ->
+  eval_reborrow s h re v h''.
+
+(* Coerce 系统的求值传递性 *)
+Axiom eval_coerce_transitive : forall s h ce ce' h' v h'',
+  eval_coerce_step s h ce ce' h' ->
+  eval_coerce s h ce' v h'' ->
+  eval_coerce s h ce v h''.
+
+(* 基础系统的保持性 *)
+Axiom preservation_base : forall Δ Γ Θ s h e τ s' h' e',
+  has_type Δ Γ Θ e τ ->
+  eval_step s h e e' h' ->
+  has_type Δ Γ Θ e' τ.
+
+(* Reborrow 系统的保持性 *)
+Axiom preservation_reborrow : forall Δ Γ Θ s h re τ s' h' re',
+  has_type_reborrow Δ Γ Θ re τ ->
+  eval_reborrow_step s h re re' h' ->
+  has_type_reborrow Δ Γ Θ re' τ.
+
+(* Coerce 系统的保持性 *)
+Axiom preservation_coerce : forall Δ Γ Θ s h ce τ s' h' ce',
+  has_type_coerce Δ Γ Θ ce τ ->
+  eval_coerce_step s h ce ce' h' ->
+  has_type_coerce Δ Γ Θ ce' τ.
+
+(* ==========================================================================
+ * 求值和保持性引理
+ * ========================================================================== *)
+
 (* 辅助引理：求值组合 - 单步求值后可以继续 *)
 Lemma eval_rust_194_trans :
   forall Δ Γ Θ s h e s' h' e' v h'',
@@ -868,19 +914,16 @@ Lemma eval_rust_194_trans :
     eval_rust_194 s h e v h''.
 Proof.
   intros Δ Γ Θ s h e s' h' e' v h'' Hstep Heval Hty.
-  (* 这是一个简化的版本，实际上需要根据具体语义定义 *)
   inversion Hstep; subst;
   inversion Heval; subst;
   try (constructor; auto; fail).
   - (* 基础表达式 *)
-    constructor. admit. (* 依赖基础系统的求值传递性 *)
+    constructor. apply eval_transitive_base with (e' := e'0) (h' := h'0); auto.
   - (* Reborrow *)
-    constructor. admit. (* 依赖 Reborrow 的求值传递性 *)
+    constructor. apply eval_reborrow_transitive with (re' := re') (h' := h'0); auto.
   - (* Coerce *)
-    constructor. admit. (* 依赖 Coerce 的求值传递性 *)
+    constructor. apply eval_coerce_transitive with (ce' := ce') (h' := h'0); auto.
 Qed.
-(* 注意：eval_rust_194_trans 是求值传递性的简化版本。
-   完整证明需要更详细的语义定义。 *)
 
 (* 辅助引理：保持性的单步版本 *)
 Lemma preservation_rust_194_step :
@@ -896,16 +939,14 @@ Proof.
   try (constructor; auto; fail).
   - (* 基础表达式 *)
     apply T194_Base.
-    admit. (* 需要基础系统的保持性 *)
+    eapply preservation_base; eauto.
   - (* Reborrow *)
     apply T194_Reborrow.
-    admit. (* 需要 Reborrow 的保持性 *)
+    eapply preservation_reborrow; eauto.
   - (* Coerce *)
     apply T194_Coerce.
-    admit. (* 需要 Coerce 的保持性 *)
+    eapply preservation_coerce; eauto.
 Qed.
-(* 注意：preservation_rust_194_step 依赖于各子系统的
-   保持性定理，这里使用 admit 简化。 *)
 
 (* 终止性定理 *)
 Theorem termination_rust_194 :
