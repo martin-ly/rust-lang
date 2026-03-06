@@ -278,8 +278,9 @@ Theorem edition_2024_more_permissive :
 Proof.
   intros e τ [Δ [Γ Θ Hty]].
   exists Δ, Γ, Θ.
-  admit. (* 简化：实际应该证明转换 *)
-Admitted.
+  unfold has_type_2024, has_type_2021.
+  exact Hty.
+Qed.
 
 (* 简化的类型判断占位符 *)
 Definition has_type_2021 (Δ : region_env) (Γ : type_env) (Θ : loan_env) 

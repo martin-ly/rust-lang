@@ -198,14 +198,20 @@ Proof.
   intros Δ Γ Θ e ρ₁ ρ₂ ρ₃ τ Hty H12 H23.
   
   (* 构造两个 reborrow 表达式 *)
-  exists (ERImplicit e), (ERImplicit (EBorrow ρ₂ Shrd "temp")).
+  (* re1: 从可变引用 e reborrow 到共享引用 *)
+  exists (ERImplicit e).
+  
+  (* re2: 由于不能直接 reborrow 共享引用，
+     我们从原始可变引用 e 直接 reborrow 到更短的生命周期 *)
+  exists (ERExplicit e ρ₃).
   
   split.
-  - (* 第一个 reborrow：&mut T -> &T (ρ₂) *)
-    apply TR_Implicit; auto.
-  - (* 第二个 reborrow：&T -> &T (ρ₃) *)
-    admit.  (* 简化：实际上不能 reborrow 不可变引用 *)
-Admitted.
+  - (* 证明 re1 的类型 *)
+    apply TR_Implicit with (ρ₁ := ρ₁) (τ := τ); auto.
+  - (* 证明 re2 的类型 *)
+    apply TR_Explicit with (ρ₁ := ρ₁) (τ := τ); auto.
+    apply lifetime_outlives_trans with (ρ₂ := ρ₂); assumption.
+Qed.
 
 (* ==========================================================================
  * Reborrow 安全条件定理

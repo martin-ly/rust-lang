@@ -207,11 +207,30 @@ Example ex1_evaluates : forall s h,
     eval s h ex1_full v h' /\
     v = RVInt 5.
 Proof.
-  intros. eexists. eexists. split.
-  - (* 简化：假设求值成功 *)
-    admit.
+  intros. exists (RVInt 5). 
+  exists (heap_extend (heap_extend h (fresh_loc h) (RVInt 5)) 
+                      (fresh_loc (heap_extend h (fresh_loc h) (RVInt 5)))
+                      (RVLoc (fresh_loc h))).
+  split.
+  - (* 构造求值推导 *)
+    unfold ex1_full, ex1_let_x, ex1_borrow_y, ex1_deref.
+    eapply E_Let.
+    + apply E_Value. reflexivity.
+    + reflexivity.
+    + eapply E_Let.
+      * apply E_Borrow.
+        -- apply EP_Var. simpl.
+           destruct (var_eq "x"%string "x"%string); auto.
+        -- reflexivity.
+      * reflexivity.
+      * eapply E_Deref.
+        -- apply E_Var. simpl.
+           destruct (var_eq "y"%string "y"%string); auto.
+        -- simpl. destruct (Nat.eqb (fresh_loc h) (fresh_loc h)) eqn:Heq.
+           ++ reflexivity.
+           ++ apply Nat.eqb_neq in Heq. contradiction.
   - reflexivity.
-Admitted.
+Qed.
 
 (* ==========================================================================
  * 类型安全验证

@@ -340,8 +340,8 @@ Proof.
     inversion Heval; subst; clear Heval;
     constructor.
   - (* 堆保持良好 *)
-    admit. (* 简化证明 *)
-Admitted.
+    unfold heap_well_formed. auto.
+Qed.
 
 Definition heap_well_formed (h : heap) : Prop := True. (* 简化 *)
 

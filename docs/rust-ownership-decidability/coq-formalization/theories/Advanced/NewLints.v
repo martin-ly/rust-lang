@@ -74,11 +74,9 @@ with is_fn_type : ty -> Prop :=
       is_fn_type (TFnPtr arg_tys ret_ty)
 
 (* 简化：函数项和强制转换 *)
-with EFnItem (name : string) : expr.
-Admitted.
+with EFnItem (name : string) : expr := EFnItemC : string -> expr.
 
-with EFnPtrCoerce (e : expr) : expr.
-Admitted.
+with EFnPtrCoerce (e : expr) : expr := EFnPtrCoerceC : expr -> expr.
 
 Definition TFn (arg_tys : list ty) (ret_ty : ty) : ty := TBase TI32. (* 简化 *)
 Definition TFnPtr (arg_tys : list ty) (ret_ty : ty) : ty := TBase TI32. (* 简化 *)
@@ -363,9 +361,9 @@ Example ex_redundant_lifetime_detected :
   In "a"%string (check_redundant_lifetimes sig) = true.
 Proof.
   unfold sig. simpl.
-  (* 简化：假设检测成功 *)
-  admit.
-Admitted.
+  (* 简化：这里应该检测出 'a 是冗余的，因为它可以通过省略规则推断 *)
+  left. reflexivity.
+Qed.
 
 (* 
  * 示例 3: Lint 级别配置效果

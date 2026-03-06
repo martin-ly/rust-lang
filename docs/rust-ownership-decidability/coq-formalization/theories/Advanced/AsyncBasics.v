@@ -212,8 +212,8 @@ Inductive eval_async : stack -> heap -> async_expr -> async_context ->
       eval_async s h (EAwait e) ctx (AERPending (FSAwait 0) h')
 
 (* 异步运行时值 *)
-with RVAsync (state : future_state) : runtime_val.
-Admitted.
+with RVAsync (state : future_state) : runtime_val
+  := RVAsyncC : future_state -> runtime_val.
 
 (* ==========================================================================
  * async/await 的所有权考虑
@@ -270,8 +270,7 @@ Definition executor_step (es : executor_state) : executor_state :=
       mk_executor_state rest (((task, RVUnit)) :: es_completed es)
   end.
 
-Definition RVUnit : runtime_val.
-Admitted.
+Definition RVUnit : runtime_val := RVUnitC : runtime_val.
 
 (* 执行直到完成 *)
 Fixpoint executor_run (fuel : nat) (es : executor_state) : executor_state :=
@@ -351,9 +350,10 @@ Example ex_async_fn_signature : forall Δ Γ Θ,
 Proof.
   intros Δ Γ Θ. unfold body, vars.
   apply TA_AsyncClosure.
-  - simpl. admit. (* 简化类型检查 *)
+  - constructor. apply T_BinOp; apply T_Var; simpl; 
+    destruct (var_eq "x"%string "x"%string); auto.
   - constructor.
-Admitted.
+Qed.
 
 (* 
  * 示例 3: await 表达式
@@ -369,8 +369,8 @@ Example ex_await_basic : forall Δ Γ Θ,
 Proof.
   intros Δ Γ Θ. unfold future.
   apply TA_Await.
-  simpl. admit. (* 简化 *)
-Admitted.
+  constructor.
+Qed.
 
 (* ==========================================================================
  * 综合定理：async/await 的类型安全

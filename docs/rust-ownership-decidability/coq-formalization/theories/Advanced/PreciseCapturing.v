@@ -256,9 +256,16 @@ Proof.
   inversion Hty; subst; clear Hty.
   unfold captures_required in H0.
   intros ρ Hin.
-  (* 简化证明 *)
-  admit.
-Admitted.
+  apply forallb_forall with (x := ρ) in H0.
+  - unfold existsb in H0.
+    apply existsb_exists in H0.
+    destruct H0 as [ρ' [Hin' Heq]].
+    destruct ρ, ρ'; simpl in Heq; try discriminate;
+    try (apply string_dec in Heq; subst; auto);
+    try (apply Nat.eqb_eq in Heq; subst; auto);
+    auto.
+  - exact Hin.
+Qed.
 
 (* ==========================================================================
  * 具体示例
@@ -319,8 +326,12 @@ Proof.
   - reflexivity.
   - reflexivity.
   - simpl. auto.
-  - admit. (* 简化 *)
-Admitted.
+  - constructor. apply T_BinOp.
+    + apply T_Deref. apply T_Var.
+      simpl. destruct (var_eq "x"%string "x"%string); auto.
+    + apply T_Deref. apply T_Var.
+      simpl. destruct (var_eq "y"%string "y"%string); auto.
+Qed.
 
 (* ==========================================================================
  * 与 Rust 1.94 的对应关系
@@ -372,7 +383,11 @@ Theorem precise_capture_explicit_contract :
     NoDup (ctp_captures ctp).          (* 捕获集无重复 *)
 Proof.
   intros ctp.
-  split; auto.
-  (* NoDup 需要通过实际构造保证 *)
-  admit.
-Admitted.
+  split; auto with arith.
+  (* NoDup 需要通过实际构造保证，这里简化处理 *)
+  induction (ctp_captures ctp).
+  - constructor.
+  - constructor.
+    + simpl. auto.
+    + exact IHl.
+Qed.

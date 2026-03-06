@@ -71,9 +71,8 @@ Proof.
   intros Delta Gamma Theta ae ft Hty Hsafe s h ctx v h' Heval.
   inversion Hty; subst; clear Hty;
   inversion Heval; subst; clear Heval;
-  try (constructor; fail);
-  admit.  (* 简化 *)
-Admitted.
+  try constructor; auto.
+Qed.
 
 (* ==========================================================================
  * Await 安全性定理
@@ -127,6 +126,44 @@ Qed.
  * 执行器安全性定理
  * ========================================================================== *)
 
+(* 辅助引理：执行器单步不会减少已完成任务 *)
+Lemma executor_step_preserves_completed :
+  forall es,
+    length (es_completed (executor_step es)) >= length (es_completed es).
+Proof.
+  intros es.
+  unfold executor_step.
+  destruct (es_queue es) as [| [task state] rest] eqn:Heq.
+  - (* 空队列，无变化 *)
+    simpl. apply le_refl.
+  - (* 非空队列，任务被移到已完成列表 *)
+    simpl.
+    apply le_trans with (m := length (es_completed es) + 1).
+    + apply le_plus_l.
+    + apply le_n_Sn.
+Qed.
+
+(* 辅助引理：执行器运行过程中已完成任务数量单调不减 *)
+Lemma executor_run_monotone :
+  forall fuel es,
+    length (es_completed (executor_run fuel es)) >= length (es_completed es).
+Proof.
+  intros fuel es.
+  induction fuel as [| fuel' IH].
+  - (* fuel = 0 *)
+    simpl. apply le_refl.
+  - (* fuel = S fuel' *)
+    simpl.
+    destruct (beq_nat (length (es_queue (executor_step es))) 
+                      (length (es_queue es))) eqn:Hbeq.
+    + (* 没有进展，返回当前状态 *)
+      apply le_refl.
+    + (* 有进展，使用归纳假设 *)
+      apply le_trans with (m := length (es_completed (executor_step es))).
+      * apply executor_step_preserves_completed.
+      * apply IH.
+Qed.
+
 (* 定理：执行器不会丢失任务 *)
 Theorem executor_task_preservation :
   forall es es',
@@ -134,8 +171,68 @@ Theorem executor_task_preservation :
     length (es_completed es') >= length (es_completed es).
 Proof.
   intros es es' Hrun.
-  admit.  (* 简化 *)
-Admitted.
+  rewrite <- Hrun.
+  apply executor_run_monotone.
+Qed.
+
+(* 辅助引理：执行器单步减少队列长度（当队列非空时） *)
+Lemma executor_step_reduces_queue :
+  forall es,
+    es_queue es <> [] ->
+    length (es_queue (executor_step es)) = length (es_queue es) - 1.
+Proof.
+  intros es Hneq.
+  unfold executor_step.
+  destruct (es_queue es) as [| [t s] rest] eqn:Heq.
+  - contradiction Hneq. reflexivity.
+  - simpl. auto.
+Qed.
+
+(* 辅助引理：执行器运行最终清空队列 *)
+Lemma executor_run_empties_queue :
+  forall fuel es,
+    fuel >= length (es_queue es) ->
+    exists es',
+      executor_run fuel es = es' /\
+      es_queue es' = [].
+Proof.
+  intros fuel.
+  induction fuel as [| fuel' IH]; intros es Hge.
+  - (* fuel = 0 *)
+    simpl in Hge.
+    assert (Hempty : es_queue es = []) by (apply length_zero_iff_nil; auto).
+    exists es.
+    split; auto.
+    simpl.
+    destruct (es_queue es); auto.
+    discriminate Hge.
+  - (* fuel = S fuel' *)
+    destruct (es_queue es) as [| [t s] rest] eqn:Heq.
+    + (* 队列为空 *)
+      exists es.
+      split; auto.
+      simpl. rewrite Heq. auto.
+    + (* 队列非空 *)
+      simpl.
+      assert (Hprogress : length (es_queue (executor_step es)) <= fuel').
+      {
+        rewrite executor_step_reduces_queue.
+        simpl in Hge. apply le_S_n. auto.
+        rewrite Heq. discriminate.
+      }
+      destruct (beq_nat (length (es_queue (executor_step es)))
+                        (length (es_queue es))) eqn:Hbeq.
+      * (* beq_nat true 意味着长度相等，与减少矛盾 *)
+        apply beq_nat_true in Hbeq.
+        rewrite executor_step_reduces_queue in Hbeq.
+        simpl in Hge. apply le_S_n in Hge.
+        assert (Hlt : length (es_queue es) - 1 < length (es_queue es)).
+        { apply Nat.sub_lt. omega. omega. }
+        rewrite <- Hbeq in Hlt. apply lt_irrefl in Hlt. contradiction.
+        rewrite Heq. discriminate.
+      * (* 继续执行 *)
+        apply IH. auto.
+Qed.
 
 (* 定理：执行器最终完成所有任务 *)
 Theorem executor_eventually_complete :
@@ -145,9 +242,10 @@ Theorem executor_eventually_complete :
       es_queue es' = [].
 Proof.
   intros es.
-  exists (length (es_queue es) * 2).
-  admit.  (* 简化 *)
-Admitted.
+  exists (length (es_queue es)).
+  apply executor_run_empties_queue.
+  apply le_refl.
+Qed.
 
 (* ==========================================================================
  * Async 与借用检查交互

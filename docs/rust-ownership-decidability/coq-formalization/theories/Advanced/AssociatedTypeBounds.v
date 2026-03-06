@@ -341,8 +341,7 @@ Definition mk_trait_ref (name : string) (args : list ty) : trait_ref :=
   (* 简化 *)
   TFoo.
 
-Definition TFoo : trait_ref.
-Admitted.
+Definition TFoo : trait_ref := TFn [] (TBase TI32).
 
 (* 
  * 示例 3: 多重约束 Iterator<Item: Display + Send>
@@ -434,8 +433,25 @@ Theorem assoc_bound_soundness :
 Proof.
   intros env τ atb Hcheck.
   destruct atb; simpl in Hcheck;
-  try (constructor; admit).  (* 简化证明 *)
-Admitted.
+  try constructor; auto.
+  - (* ATBEq 情况 *)
+    destruct (lookup_assoc_ty env (at_trait aty) τ (at_name aty)) eqn:Hlook;
+    try discriminate.
+    constructor. reflexivity.
+  - (* ATBTrait 情况 *)
+    destruct (lookup_assoc_ty env (at_trait aty) τ (at_name aty)) eqn:Hlook;
+    try discriminate.
+    constructor; auto. constructor.
+  - (* ATBMultiple 情况 *)
+    constructor. intros. 
+    destruct (lookup_assoc_ty env (at_trait aty) τ (at_name aty)) eqn:Hlook;
+    try discriminate.
+    eauto. constructor.
+  - (* ATBOutlives 情况 *)
+    destruct (lookup_assoc_ty env (at_trait aty) τ (at_name aty)) eqn:Hlook;
+    try discriminate.
+    constructor; auto. constructor.
+Qed.
 
 (* 
  * 定理：关联类型替换保持类型结构
@@ -448,9 +464,16 @@ Proof.
   intros subst τ.
   induction τ; simpl;
   try reflexivity;
-  try (rewrite IHτ; reflexivity);
-  admit.  (* 简化 *)
-Admitted.
+  try (rewrite IHτ; reflexivity).
+  - (* TAssoc 情况 *)
+    destruct (find_assoc_subst subst aty); auto.
+  - (* TTuple 情况 *)
+    induction l; simpl; auto.
+    rewrite H; auto.
+    apply IHl. intros. apply H. right. auto.
+  - (* TArray 情况 *)
+    rewrite IHτ. reflexivity.
+Qed.
 
 (* 类型结构 - 简化 *)
 Definition ty_structure (τ : ty) : nat :=
