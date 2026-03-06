@@ -35,7 +35,7 @@ extern "system" {
 
 // Windows x86 (遗留)
 extern "stdcall" {
-    fn MessageBoxA(hwnd: *const c_void, text: *const c_char, 
+    fn MessageBoxA(hwnd: *const c_void, text: *const c_char,
                    caption: *const c_char, type_: u32) -> i32;
 }
 

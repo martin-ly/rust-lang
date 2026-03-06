@@ -121,32 +121,38 @@ coq-formalization/
 
 ```
 meta-model/
-├── 01_abstract_syntax.md
-├── 02_semantic_domains.md
-├── 03_judgments.md
-├── rust-194-alignment.md
-└── RUST_194_COMPREHENSIVE_GUIDE.md
+├── README.md                          # 📘 元模型导航
+├── 01_abstract_syntax.md              # 抽象语法
+├── 02_semantic_domains.md             # 语义域
+├── 03_judgments.md                    # 判断形式
+├── rust-194-alignment.md              # Rust 1.94 对齐
+└── RUST_194_COMPREHENSIVE_GUIDE.md    # 完整指南
 ```
 
 ### 6. 其他重要目录
 
-| 目录 | 内容 |
-|------|------|
-| `00-foundations/` | 基础理论 |
-| `03-verification-tools/` | 验证工具 |
-| `04-decidability-analysis/` | 可判定性分析 |
-| `05-comparative-study/` | 比较研究 |
-| `06-visualizations/` | 可视化图表 |
-| `07-references/` | 参考资料 |
-| `08-advanced-topics/` | 高级主题 |
-| `10-research-frontiers/` | 研究前沿 |
-| `11-design-patterns/` | 设计模式 |
-| `12-concurrency-patterns/` | 并发模式 |
-| `13-architecture-patterns/` | 架构模式 |
-| `14-distributed-systems/` | 分布式系统 |
-| `15-application-domains/` | 应用领域 |
-| `case-studies/` | 案例研究 |
-| `exercises/` | 练习题 |
+| 目录 | 内容 | README |
+|------|------|:------:|
+| `00-foundations/` | 基础理论 | ✅ |
+| `03-verification-tools/` | 验证工具 | ✅ |
+| `04-decidability-analysis/` | 可判定性分析 | ✅ |
+| `05-comparative-study/` | 比较研究 | ✅ |
+| `06-visualizations/` | 可视化图表 | ✅ |
+| `07-references/` | 参考资料 | ✅ |
+| `08-advanced-topics/` | 高级主题 | ✅ |
+| `10-research-frontiers/` | 研究前沿 | ✅ |
+| `11-design-patterns/` | 设计模式 | ✅ |
+| `12-concurrency-patterns/` | 并发模式 | ✅ |
+| `13-architecture-patterns/` | 架构模式 | ✅ |
+| `14-distributed-systems/` | 分布式系统 | ✅ |
+| `15-application-domains/` | 应用领域 | ✅ |
+| `16-program-semantics/` | 程序语义分析 | ✅ |
+| `formal-foundations/` | 形式化基础 | ✅ |
+| `meta-model/` | 元模型 | ✅ |
+| `progress/` | 进度报告 | ✅ |
+| `theorems/` | 核心定理 | ✅ |
+| `case-studies/` | 案例研究 | ✅ |
+| `exercises/` | 练习题 | ✅ |
 
 ### 7. 专题研究
 
