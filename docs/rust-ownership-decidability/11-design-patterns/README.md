@@ -13,9 +13,7 @@
 ├── README.md                          # 本文件 - 导航和学习指南
 ├── 11-01-rust-design-patterns.md     # 设计模式全面指南
 ├── 11-02-idiomatic-patterns.md       # 惯用Rust模式
-├── 11-03-type-state-pattern.md       # 类型状态模式详解
-├── 11-04-builder-pattern.md          # 构建者模式详解
-└── 11-05-iterator-patterns.md        # 迭代器模式详解
+└── 11-03-type-state-pattern.md       # 类型状态模式详解
 ```
 
 ---
@@ -81,48 +79,6 @@
 
 ---
 
-### [11-04-builder-pattern.md](./11-04-builder-pattern.md)
-
-**内容概述**: 构建者模式在Rust中的完整实现指南。
-
-**包含内容**:
-
-- 基础构建者模式
-- 消耗式构建者 vs 可变引用构建者
-- 类型状态构建者
-- 派生宏实现构建者
-- 验证与错误处理
-- 嵌套构建者
-- 与Default trait的结合
-- 性能考量
-
-**适合**: 设计复杂API，特别是配置对象创建
-
-**阅读时间**: 约30分钟
-
----
-
-### [11-05-iterator-patterns.md](./11-05-iterator-patterns.md)
-
-**内容概述**: 迭代器模式的深度探索，Rust最核心的抽象之一。
-
-**包含内容**:
-
-- Iterator trait详解
-- IntoIterator与迭代器适配器
-- 自定义迭代器实现
-- 双端迭代器与精确大小迭代器
-- 并行迭代器（Rayon）
-- 惰性求值与流式处理
-- 迭代器性能优化
-- 常见陷阱与最佳实践
-
-**适合**: 掌握Rust迭代器生态，编写高效数据处理代码
-
-**阅读时间**: 约35分钟
-
----
-
 ## 学习路径建议
 
 ### 路径一：系统设计导向
@@ -131,25 +87,22 @@
 
 1. **11-01-rust-design-patterns.md** - 全面了解可用模式
 2. **11-03-type-state-pattern.md** - 掌握Rust最强大的设计模式
-3. **11-04-builder-pattern.md** - 设计优雅API
-4. **11-02-idiomatic-patterns.md** - 编写地道Rust代码
+3. **11-02-idiomatic-patterns.md** - 编写地道Rust代码
 
 ### 路径二：算法与数据处理导向
 
 适合需要处理大量数据的开发者：
 
-1. **11-05-iterator-patterns.md** - 掌握迭代器
-2. **11-02-idiomatic-patterns.md** - 学习错误处理与转换
-3. **11-01-rust-design-patterns.md** - 了解策略与访问者模式
+1. **11-02-idiomatic-patterns.md** - 掌握迭代器和错误处理模式
+2. **11-01-rust-design-patterns.md** - 了解策略与访问者模式
 
 ### 路径三：API设计导向
 
 适合需要设计公开库的开发者：
 
-1. **11-04-builder-pattern.md** - 构建者模式
-2. **11-03-type-state-pattern.md** - 类型安全API
-3. **11-02-idiomatic-patterns.md** - 惯用接口设计
-4. **11-01-rust-design-patterns.md** - 其他模式参考
+1. **11-03-type-state-pattern.md** - 类型安全API
+2. **11-02-idiomatic-patterns.md** - 惯用接口设计
+3. **11-01-rust-design-patterns.md** - 其他模式参考
 
 ---
 
@@ -189,15 +142,7 @@
 - 确保只有完整的查询才能执行
 - 参考：11-04-builder-pattern.md
 
-### 练习3：自定义树迭代器
-
-实现二叉树的多种遍历方式：
-
-- 前序、中序、后序遍历
-- 实现Iterator、DoubleEndedIterator、ExactSizeIterator
-- 参考：11-05-iterator-patterns.md
-
-### 练习4：重构代码使用惯用模式
+### 练习3：重构代码使用惯用模式
 
 找到一段使用unwrap()过多的代码：
 

@@ -24,7 +24,7 @@
 | [defmt](./defmt-formal-analysis.md) | 日志框架 | 延迟格式化 | ✅ |
 | [cortex-m-rt](./cortex-m-rt-formal-analysis.md) | 运行时 | 启动顺序 | ✅ |
 | [embedded-hal](./embedded-hal-formal-analysis.md) | 硬件抽象 | 数字/模拟IO trait | ✅ |
-| [probe-rs](./probe-rs-formal-analysis.md) | 调试工具 | 调试协议 | ✅ |
+| probe-rs | 调试工具 | 调试协议 | 📝 (计划中) |
 
 ---
 
@@ -94,7 +94,7 @@
 
 ## 覆盖统计
 
-```
+```text
 总库数: 39个
 - 嵌入式库: 15个 [██████████] 100% ✅
 - 应用级库: 24个 [██████████] 100% ✅

@@ -72,10 +72,10 @@
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
-| [formal-proofs/async-comprehensive-analysis.md](../formal-proofs/async-comprehensive-analysis.md) | 35 | 全面形式化 |
-| [formal-proofs/async-execution-examples.md](../formal-proofs/async-execution-examples.md) | 21 | 代码示例 |
-| [formal-proofs/async-edge-cases-and-patterns.md](../formal-proofs/async-edge-cases-and-patterns.md) | 11 | 边界情况 |
-| [formal-proofs/async-concurrency-comparison.md](../comparative-analysis/async-concurrency-comparison.md) | 17 | 并发对比 |
+| [async-comprehensive-analysis.md](../formal-foundations/proofs/async-comprehensive-analysis.md) | 35 | 全面形式化 |
+| [async-execution-examples.md](../formal-foundations/proofs/async-execution-examples.md) | 21 | 代码示例 |
+| [async-edge-cases-and-patterns.md](../formal-foundations/proofs/async-edge-cases-and-patterns.md) | 11 | 边界情况 |
+| [async-concurrency-comparison.md](../comparative-analysis/async-concurrency-comparison.md) | 17 | 并发对比 |
 
 **总计**: 235+ 页
 

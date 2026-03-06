@@ -22,9 +22,9 @@
 
 | 位置 | 矩阵 | 内容 |
 |:---|:---|:---|
-| [comprehensive-analysis/matrices/](../comprehensive-analysis/matrices/) | 综合对比矩阵 | 10大维度 |
-| [comprehensive-analysis/matrices/](../comprehensive-analysis/matrices/) | 安全性分析矩阵 | 9大安全领域 |
-| [actor-specialty/matrices/](../actor-specialty/matrices/) | Actor框架矩阵 | 6大框架 |
+| `comprehensive-analysis/matrices/` | 综合对比矩阵 | 10大维度 |
+| `comprehensive-analysis/matrices/` | 安全性分析矩阵 | 9大安全领域 |
+| `actor-specialty/matrices/` | Actor框架矩阵 | 6大框架 |
 
 ---
 

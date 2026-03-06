@@ -45,6 +45,28 @@
 
 ---
 
+## 🔗 交叉引用与导航
+
+### 主索引
+
+| 索引 | 说明 |
+|------|------|
+| [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md) | 主索引 - 完整文档导航 |
+| [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md) | 自动生成的交叉引用索引 |
+| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_VERIFICATION_REPORT.md) | 链接验证报告 |
+
+### 快速链接
+
+| 主题 | 入口 |
+|------|------|
+| 所有权概念 | [所有权深入](01-core-concepts/detailed-concepts/ownership-deep-dive.md) / [速查卡](01-core-concepts/short-concepts/ownership-concept-card.md) |
+| 借用系统 | [借用深入](01-core-concepts/detailed-concepts/borrowing-in-depth.md) / [速查卡](01-core-concepts/short-concepts/borrowing-concept-card.md) |
+| 生命周期 | [生命周期精通](01-core-concepts/detailed-concepts/lifetimes-mastery.md) / [速查卡](01-core-concepts/short-concepts/lifetime-concept-card.md) |
+| 形式化理论 | [形式化基础](formal-foundations/README.md) / [Coq代码](coq-formalization/README.md) |
+| 案例研究 | [案例索引](case-studies/README.md) / [现代crate](case-studies/MODERN_CRATES_INDEX.md) |
+
+---
+
 ## 📁 目录结构
 
 ### 快速导航
@@ -218,7 +240,9 @@ cat coq-formalization/theories/Advanced/ReborrowComplete.v
 - [x] 清晰的目录结构
 - [x] 所有文件有实质内容
 - [x] P0关键证明100%完成
-- [x] 完整的交叉引用
+- [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md))
+- [x] 599+ 内部链接已验证
+- [x] 主索引已更新 ([MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md))
 
 ---
 
@@ -232,4 +256,4 @@ cat coq-formalization/theories/Advanced/ReborrowComplete.v
 
 > *"系统化知识结构 + 严格形式化证明 = 深入理解 Rust 所有权系统"*
 
-**🎉 项目圆满完成！🎉**
+**🎉 项目圆满完成！🎉**:

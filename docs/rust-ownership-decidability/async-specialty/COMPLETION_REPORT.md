@@ -65,9 +65,9 @@
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
-| [async-comprehensive-analysis.md](../formal-proofs/async-comprehensive-analysis.md) | 35页 | 语法、转换、运行时、等价性、机制 |
-| [async-execution-examples.md](../formal-proofs/async-execution-examples.md) | 21页 | 可运行代码、自定义实现、测试 |
-| [async-edge-cases-and-patterns.md](../formal-proofs/async-edge-cases-and-patterns.md) | 11页 | 边界情况、高级模式 |
+| [async-comprehensive-analysis.md](../formal-foundations/proofs/async-comprehensive-analysis.md) | 35页 | 语法、转换、运行时、等价性、机制 |
+| [async-execution-examples.md](../formal-foundations/proofs/async-execution-examples.md) | 21页 | 可运行代码、自定义实现、测试 |
+| [async-edge-cases-and-patterns.md](../formal-foundations/proofs/async-edge-cases-and-patterns.md) | 11页 | 边界情况、高级模式 |
 | [async-concurrency-comparison.md](../comparative-analysis/async-concurrency-comparison.md) | 17页 | 并发模型对比 |
 
 **总页数**: 155+ 页
@@ -199,13 +199,13 @@
 ### 进阶开发者
 
 1. [tokio-deep-dive.md](./authoritative/tokio-deep-dive.md) - Tokio深度
-2. [async-comprehensive-analysis.md](../formal-proofs/async-comprehensive-analysis.md) - 形式化分析
-3. [async-edge-cases-and-patterns.md](../formal-proofs/async-edge-cases-and-patterns.md) - 高级模式
+2. [async-comprehensive-analysis.md](../formal-foundations/proofs/async-comprehensive-analysis.md) - 形式化分析
+3. [async-edge-cases-and-patterns.md](../formal-foundations/proofs/async-edge-cases-and-patterns.md) - 高级模式
 
 ### 嵌入式开发者
 
 1. [embassy-guide.md](./embedded/embassy-guide.md) - Embassy完整指南
-2. [async-comprehensive-analysis.md](../formal-proofs/async-comprehensive-analysis.md) - 理解底层机制
+2. [async-comprehensive-analysis.md](../formal-foundations/proofs/async-comprehensive-analysis.md) - 理解底层机制
 
 ---
 

@@ -22,9 +22,9 @@
 
 | 位置 | 决策树 | 内容 |
 |:---|:---|:---|
-| [comprehensive-analysis/decision-trees/](../comprehensive-analysis/decision-trees/) | 设计模式选择 | 对象创建/并发/错误处理 |
-| [comprehensive-analysis/decision-trees/](../comprehensive-analysis/decision-trees/) | 并发模型选择 | 运行时/同步原语选择 |
-| [actor-specialty/decision-trees/](../actor-specialty/decision-trees/) | Actor框架选择 | 框架选择指南 |
+| `comprehensive-analysis/decision-trees/` | 设计模式选择 | 对象创建/并发/错误处理 |
+| `comprehensive-analysis/decision-trees/` | 并发模型选择 | 运行时/同步原语选择 |
+| `actor-specialty/decision-trees/` | Actor框架选择 | 框架选择指南 |
 
 ---
 

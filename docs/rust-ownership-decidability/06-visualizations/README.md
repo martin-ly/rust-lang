@@ -14,9 +14,9 @@
 
 | # | 文档 | 类型 | 内容 |
 |:---:|:---|:---:|:---|
-| 06-01 | [所有权转移流程图](06-01-ownership-transfer-flow.md) | 流程图 | 所有权转移过程 |
-| 06-02 | [借用检查决策树](06-02-borrow-checker-decision-tree.md) | 决策树 | 借用检查逻辑 |
-| 06-03 | [生命周期关系图](06-03-lifetime-relationships.md) | 关系图 | 生命周期包含关系 |
+| 06-01 | [概念矩阵](06-01-concept-matrix.md) | 矩阵 | 核心概念对比 |
+| 06-02 | [决策树](06-02-decision-trees.md) | 决策树 | 类型选择决策树 |
+| 06-03 | [架构图](06-03-architecture-diagrams.md) | 架构图 | 系统架构可视化 |
 
 ---
 

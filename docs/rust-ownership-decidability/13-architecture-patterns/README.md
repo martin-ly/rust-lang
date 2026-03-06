@@ -14,8 +14,9 @@
 
 | # | 文档 | 模式 | 适用场景 |
 |:---:|:---|:---|:---|
-| 13-01 | [Actor模式](13-01-actor-pattern.md) | Actor模型 | 并发系统 |
-| 13-02 | [类型状态模式](13-02-typestate-pattern.md) | Typestate | 状态机 |
+| 14-01 | [架构模式详解](14-01-architecture-patterns.md) | 多层架构 | 系统设计 |
+| - | [六边形架构](hexagonal-architecture.md) | 端口适配器 | 领域驱动 |
+| - | [微服务架构](microservices-rust.md) | 微服务 | 分布式系统 |
 
 ---
 

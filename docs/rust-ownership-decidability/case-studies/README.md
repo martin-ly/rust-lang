@@ -14,7 +14,7 @@
 
 ### 综合分析专题
 
-位于 [comprehensive-analysis/case-studies/](comprehensive-analysis/case-studies/)
+位于 `comprehensive-analysis/case-studies/`
 
 | 案例 | 内容 |
 |:---|:---|
@@ -23,7 +23,7 @@
 
 ### Actor专题
 
-位于 [actor-specialty/case-studies/](actor-specialty/case-studies/)
+位于 `actor-specialty/case-studies/`
 
 | 案例 | 内容 |
 |:---|:---|

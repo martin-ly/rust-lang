@@ -16,7 +16,7 @@
 | 2 | [async-execution-examples.md](./async-execution-examples.md) | 21 | 可运行代码、自定义实现、属性测试 | 15 |
 | 3 | [async-execution-model-formal.md](./async-execution-model-formal.md) | 18 | Future语义、Poll模型、Pin安全、调度 | 20 |
 | 4 | [async-edge-cases-and-patterns.md](./async-edge-cases-and-patterns.md) | 11 | 边界情况、高级模式、测试技巧 | 10 |
-| 5 | [../comparative-analysis/async-concurrency-comparison.md](../comparative-analysis/async-concurrency-comparison.md) | 17 | 与线程/Actor/CSP/Promise对比 | 15 |
+| 5 | [对比分析](../../comparative-analysis/async-concurrency-comparison.md) | 17 | 与线程/Actor/CSP/Promise对比 | 15 |
 | | **总计** | **102+** | | **95+** |
 
 ---
@@ -332,7 +332,7 @@ CANCELPOINT-1:        取消只应在状态一致点发生
 
 ### 研究者路径
 
-1. [../comparative-analysis/async-concurrency-comparison.md](../comparative-analysis/async-concurrency-comparison.md) - 并发模型对比
+1. [对比分析](../../comparative-analysis/async-concurrency-comparison.md) - 并发模型对比
 2. [async-execution-model-formal.md#10-定理与证明](./async-execution-model-formal.md) - 形式化证明
 
 ---

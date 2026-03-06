@@ -91,7 +91,7 @@ fn toctou_race(shared: Arc<Mutex<i32>>) {
 **定理 1.2.2 (Sync 保证)**
 如果类型 T: Sync，则可以安全地从多个线程同时引用 T 的值（&T）。
 
-**定理 1.2.3 (组合规则)**
+**定理 1.2.3 (组合规则)**:
 
 ```text
 T: Send + Sync     ⇔ &T: Send
@@ -147,8 +147,8 @@ pub unsafe auto trait Send {
 **自动实现规则**:
 
 - 所有原始类型（i32, f64, bool, char 等）都是 Send
-- 如果 T: Send，则 Box<T>, Vec<T>, Option<T>, Result<T, E> 都是 Send
-- 如果 T: Send + Sync，则 Arc<T> 是 Send
+- 如果 T: Send，则 `Box<T>`, `Vec<T>`, `Option<T>`, `Result<T, E>` 都是 Send
+- 如果 T: Send + Sync，则 `Arc<T>` 是 Send
 - 包含原始指针 `*const T` 或 `*mut T` 的类型不是自动 Send
 
 **手动实现示例**:
@@ -215,8 +215,8 @@ T: Sync ⇔ &T: Send
 
 **典型 !Sync 类型**:
 
-- Cell<T>（内部可变性，非线程安全）
-- RefCell<T>（运行时借用检查，非线程安全）
+- `Cell<T>`（内部可变性，非线程安全）
+- `RefCell<T>`（运行时借用检查，非线程安全）
 
 ```rust
 use std::cell::Cell;

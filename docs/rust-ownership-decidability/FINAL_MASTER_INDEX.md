@@ -44,7 +44,7 @@
 |------|------|
 | [RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md](RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md) | 研究计划 |
 | [theorems/decidability_theorems.md](theorems/decidability_theorems.md) | 核心定理 |
-| [coq-formalization/](coq-formalization/) | Coq 代码 |
+| [coq-formalization/README.md](coq-formalization/README.md) | Coq 代码入口 |
 | [FINAL_DOCUMENTATION.md](FINAL_DOCUMENTATION.md) | 完整技术文档 |
 
 ### 🗂️ 元模型
@@ -245,7 +245,7 @@ Rust 示例:      ~2,000 行
 ### 对于进阶学习者
 
 1. 阅读 [MASTER_COMPREHENSIVE_ANALYSIS.md](MASTER_COMPREHENSIVE_ANALYSIS.md) 建立系统框架
-2. 研究 [coq-formalization/](coq-formalization/) 理解严格证明
+2. 研究 [coq-formalization/README.md](coq-formalization/README.md) 理解严格证明
 3. 分析边界案例和反例
 
 ### 对于研究者

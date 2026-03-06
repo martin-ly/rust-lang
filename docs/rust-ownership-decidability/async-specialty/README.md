@@ -197,7 +197,7 @@ async fn with_timeout() -> Result<Data, TimeoutError> {
 - IO Driver (epoll/kqueue/IOCP)
 - 与标准库的集成
 
-**[Embassy运行时](./authoritative/embassy-runtime.md)**
+**[Embassy指南](./embedded/embassy-guide.md)**
 
 - 无堆设计
 - 中断集成
@@ -206,7 +206,8 @@ async fn with_timeout() -> Result<Data, TimeoutError> {
 
 ### 2. 设计模式
 
-**[Tower Service Pattern](./patterns/service-pattern.md)**
+**Tower Service Pattern**
+> 详见 [Tower Service官方文档](https://docs.rs/tower-service/)
 
 ```rust
 // 可组合的服务抽象
@@ -217,7 +218,8 @@ trait Service<Request> {
 }
 ```
 
-**[Actor模式](./patterns/actor-pattern.md)**
+**Actor模式**
+> 详见 [actor-specialty/README.md](../actor-specialty/README.md)
 
 - 消息传递
 - 状态隔离
@@ -232,7 +234,8 @@ trait Service<Request> {
 - 中间件链
 - 错误处理策略
 
-**[协议解析状态机](./network/protocol-state-machines.md)**
+**协议解析状态机**
+> 使用枚举和模式匹配实现
 
 ```rust
 enum ProtocolState {
@@ -269,13 +272,15 @@ async fn blink_task(pin: PB0) {
 
 ### 5. 最佳实践
 
-**[代码组织](./practices/code-organization.md)**
+**代码组织**
+> 推荐参考 [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 - 模块边界
 - 错误类型设计
 - 配置管理
 
-**[性能优化](./practices/performance-tuning.md)**
+**性能优化**
+> 推荐参考 [Tokio性能优化指南](https://docs.rs/tokio/)
 
 - 减少分配
 - 批处理
@@ -287,21 +292,18 @@ async fn blink_task(pin: PB0) {
 
 ### 初学者
 
-1. [权威来源整合](./authoritative/) - 理解基础
-2. [惯用法](./patterns/) - 掌握常用模式
-3. [最佳实践](./practices/) - 写出高质量代码
+1. [Tokio深度解析](./authoritative/tokio-deep-dive.md) - 理解基础
+2. [最佳实践](./practices/best-practices.md) - 写出高质量代码
 
 ### 进阶开发者
 
-1. [设计模式](./patterns/) - 架构设计
-2. [网络编程](./network/) - 服务端开发
-3. [性能优化](./practices/performance-tuning.md)
+1. [HTTP服务器模式](./network/http-server-patterns.md) - 服务端开发
+2. [Tokio深度解析](./authoritative/tokio-deep-dive.md) - 深入理解Runtime
 
 ### 嵌入式开发者
 
 1. [Embassy指南](./embedded/embassy-guide.md)
-2. [无堆async](./embedded/heapless-async.md)
-3. [实时模式](./embedded/real-time-patterns.md)
+2. [Embassy生态系统](./ecosystem/async-ecosystem-landscape.md)
 
 ---
 

@@ -72,7 +72,7 @@
 
 | 矩阵 | 路径 | 维度数 |
 |:---|:---|:---:|
-| 安全机制对比矩阵 | [matrices/rust-safety-mechanisms-matrix.md](matrices/rust-safety-mechanisms-matrix.md) | 9大维度 |
+| 安全机制对比矩阵 | [visualizations/matrices/rust-safety-mechanisms-matrix.md](visualizations/matrices/rust-safety-mechanisms-matrix.md) | 9大维度 |
 
 包含:
 
@@ -89,7 +89,7 @@
 
 | 决策树 | 路径 | 场景数 |
 |:---|:---|:---:|
-| 类型选择决策树 | [decision-trees/type-selection-decision-tree.md](decision-trees/type-selection-decision-tree.md) | 8大场景 |
+| 类型选择决策树 | [visualizations/decision-trees/type-selection-decision-tree.md](visualizations/decision-trees/type-selection-decision-tree.md) | 8大场景 |
 
 包含:
 
