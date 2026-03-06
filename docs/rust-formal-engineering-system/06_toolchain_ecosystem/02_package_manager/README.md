@@ -205,7 +205,7 @@ resolver = "2"
 [workspace.package]
 version = "1.0.0"
 edition = "2024"
-rust-version = "1.93"
+rust-version = "1.94"
 authors = ["Your Name <you@example.com>"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/username/project"

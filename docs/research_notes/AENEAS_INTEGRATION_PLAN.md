@@ -1,7 +1,7 @@
 # Aeneas 集成计划（已归档）
 
 > **归档说明**: 本文档已迁至 [archive/deprecated/AENEAS_INTEGRATION_PLAN.md](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 
 请访问 [archive/deprecated/AENEAS_INTEGRATION_PLAN.md](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md) 查看完整内容。
 

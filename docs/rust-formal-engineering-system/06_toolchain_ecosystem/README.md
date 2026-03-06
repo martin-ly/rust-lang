@@ -69,7 +69,7 @@ authors = ["Name <email@example.com>"]
 license = "MIT OR Apache-2.0"
 description = "A brief description"
 repository = "https://github.com/user/repo"
-rust-version = "1.93"
+rust-version = "1.94"
 
 [dependencies]
 # 依赖版本规范

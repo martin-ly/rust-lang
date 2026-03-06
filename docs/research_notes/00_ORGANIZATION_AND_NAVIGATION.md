@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 统一组织架构说明、按目标导航、三大支柱映射；解决「文档多、入口杂、难定位」问题
 > **原则**: 单入口、按目标、支柱映射、层次清晰
@@ -135,7 +135,7 @@ research_notes/
 | **releases.rs** | [1.93.0](https://releases.rs/docs/1.93.0/) | 语言/库变更完整清单 |
 | **Rust 发布说明** | [Rust 1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/) | 官方特性公告 |
 | **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/)；当前覆盖 **Rust 2021 + rustc 1.93** | 形式化规范引用 |
-| **本项目** | **Rust 1.93.1+ (Edition 2024)** | 所有 research_notes 元信息与示例默认版本 |
+| **本项目** | **Rust 1.94.0+ (Edition 2024)** | 所有 research_notes 元信息与示例默认版本 |
 
 新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) § 权威来源对齐。
 

@@ -3,7 +3,7 @@
 > **创建日期**: 2026-02-26
 > **最后更新**: 2026-02-26
 > **状态**: ✅ 100% 完成（修订后验收标准）
-> **持续推进**: Phase A/B/C 96%+；Rust 1.93.1 版本推进已完成（见 06_toolchain/12_rust_1.93.1_vs_1.93.0_comparison.md）
+> **持续推进**: Phase A/B/C 96%+；Rust 1.94.0 版本推进已完成（见 06_toolchain/12_rust_1.93.1_vs_1.93.0_comparison.md）
 > **验证**: 十一批链接修复已应用；设计模式矩阵、research_notes 核心路径、rust-formal-engineering-system、software_design_theory 内部路径、research_methodology、PROOF_INDEX 已修正；COMPREHENSIVE_SYSTEMATIC_REVIEW 状态已同步
 
 ---
@@ -130,9 +130,9 @@
 
 | 范围 | 版本声明 | 说明 |
 | :--- | :--- | :--- |
-| 根 README、Cargo.toml | 1.93.1+ | 已统一 |
-| docs/、00_MASTER_INDEX、05_guides、02_reference/quick_reference、06_toolchain、07_project | 1.93.1+ | 已统一 |
-| research_notes 核心（README、00_*、formal_methods、CORE_THEOREMS、QUALITY_CHECKLIST 等） | 1.93.1+ | 已统一 |
+| 根 README、Cargo.toml | 1.94.0+ | 已统一 |
+| docs/、00_MASTER_INDEX、05_guides、02_reference/quick_reference、06_toolchain、07_project | 1.94.0+ | 已统一 |
+| research_notes 核心（README、00_*、formal_methods、CORE_THEOREMS、QUALITY_CHECKLIST 等） | 1.94.0+ | 已统一 |
 | archive/、archive/deprecated、archive/temp | 保留 1.93.0+ | 历史快照，不修改 |
 
 ---

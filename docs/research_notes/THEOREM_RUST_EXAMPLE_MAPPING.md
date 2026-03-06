@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-02-26
 > **最后更新**: 2026-02-27
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 > **用途**: 形式化定理 ↔ crates 示例双向映射，支撑「数学风格论证 + Rust 示例」衔接
 > **状态**: ✅ 已完成 (Week 1 任务 P1-W1-T4) - 新增 Send/Sync/Pin/数据竞争/同步原语/生命周期映射
 > **上位文档**: [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)、[PROOF_INDEX](./PROOF_INDEX.md)

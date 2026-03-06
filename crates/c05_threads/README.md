@@ -5,7 +5,10 @@
 > **学习重点**: 线程管理、并发控制、同步原语、无锁数据结构、并行计算
 > **适用对象**: Rust中级到高级开发者、系统程序员
 > **最后更新**: 2025-12-11 | 🔄 维护模式: Rust 1.93.0 特性更新完成 | ✅ 新增测试和基准测试
-> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) · 最小基准指南 [`11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
+> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md)
+> · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md)
+> · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md)
+> · 最小基准指南 [`11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
 
 ---
 

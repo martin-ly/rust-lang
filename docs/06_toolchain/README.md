@@ -43,7 +43,7 @@ cargo doc --open
 name = "my-project"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.93"
+rust-version = "1.94"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }

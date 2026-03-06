@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 全文档双向链接表、概念跨文档定义映射、定理跨文档引用中心
 > **上位文档**: [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)

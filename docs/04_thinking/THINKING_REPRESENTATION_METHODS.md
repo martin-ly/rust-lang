@@ -1,15 +1,15 @@
-﻿# Rust 1.93.1 思维表征方式文档 / Thinking Representation Methods Documentation
+﻿# Rust 1.94.0 思维表征方式文档 / Thinking Representation Methods Documentation
 
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
 
 ## 📋 目录 {#-目录}
 
-- [Rust 1.93.1 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-1931-思维表征方式文档--thinking-representation-methods-documentation)
+- [Rust 1.94.0 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-1940-思维表征方式文档--thinking-representation-methods-documentation)
   - [📋 目录 {#-目录}](#-目录--目录)
   - [🎯 文档概述 {#-文档概述}](#-文档概述--文档概述)
   - [🗺️ 1. 思维导图 (Mind Map) {#️-1-思维导图-mind-map}](#️-1-思维导图-mind-map-️-1-思维导图-mind-map)

@@ -3,7 +3,7 @@
 > **快速参考** | [完整文档](../../../crates/c09_design_pattern/docs/) | [代码示例](../../../crates/c09_design_pattern/examples/)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---

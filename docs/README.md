@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 100% 完成（修订后验收标准）
 > **项目主页**: [返回主 README](../README.md)
 > **100% 推进**: [DOCS_100_PERCENT_PROGRESS](./DOCS_100_PERCENT_PROGRESS.md)
@@ -140,7 +140,7 @@ fn verify_overflow_safety() {
 name = "my-project"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.93"
+rust-version = "1.94"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }

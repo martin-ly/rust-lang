@@ -185,8 +185,8 @@
 | :--- | :--- | :--- | :--- |
 | ownership_model.md | 1.94.0+ | ✅ | 无 |
 | type_system_foundations.md | 1.94.0+ | ✅ | 无 |
-| borrow_checker_proof.md | 1.93.1+ | ⚠️ | 更新至1.94 |
-| lifetime_formalization.md | 1.93.1+ | ⚠️ | 更新至1.94 |
+| borrow_checker_proof.md | 1.94.0+ | ⚠️ | 更新至1.94 |
+| lifetime_formalization.md | 1.94.0+ | ⚠️ | 更新至1.94 |
 
 ---
 

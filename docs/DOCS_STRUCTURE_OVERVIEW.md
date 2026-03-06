@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 > **用途**: 按 00_COMPREHENSIVE_SUMMARY 格式全面梳理 docs 所有相关文件的结构和格式；100% 覆盖
 > **上位文档**: [00_MASTER_INDEX](./00_MASTER_INDEX.md)、[research_notes/00_COMPREHENSIVE_SUMMARY](./research_notes/00_COMPREHENSIVE_SUMMARY.md)
 

@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -847,7 +847,7 @@ edition = "2024"
 authors = ["Team <team@example.com>"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/example/my-app"
-rust-version = "1.93"
+rust-version = "1.94"
 
 # Workspace 依赖 - 所有成员共享这些版本
 [workspace.dependencies]
@@ -1296,7 +1296,7 @@ version = "0.1.0"
 edition = "2024"
 authors = ["Microservices Team <team@example.com>"]
 license = "MIT"
-rust-version = "1.93"
+rust-version = "1.94"
 
 [workspace.dependencies]
 # gRPC

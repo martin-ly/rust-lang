@@ -3,7 +3,7 @@
 > **快速参考** | [Cargo 官方文档](https://doc.rust-lang.org/cargo/) | [代码示例](../../../crates/)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -374,7 +374,7 @@ tokio = { version = "1.0", features = ["full"] }
 name = "my_project"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.93"
+rust-version = "1.94"
 
 [dependencies]
 serde = "1.0"
@@ -754,7 +754,7 @@ version = "0.1.0"
 edition = "2024"
 authors = ["Team <team@example.com>"]
 license = "MIT OR Apache-2.0"
-rust-version = "1.93"
+rust-version = "1.94"
 
 [workspace.dependencies]
 # 内部依赖
@@ -860,6 +860,6 @@ $ cargo bloat --release
 
 **最后更新**: 2026-02-20
 **维护者**: 文档团队
-**状态**: ✅ **Rust 1.93.1 更新完成**
+**状态**: ✅ **Rust 1.94.0 更新完成**
 
 🎯 **掌握 Cargo，高效管理项目！**
