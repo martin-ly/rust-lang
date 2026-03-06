@@ -5,6 +5,7 @@
 ### ✅ 完成的主要工作
 
 #### 1. Coq 代码里程碑
+
 ```
 周末目标: 3,000 行
 实际完成: 3,514 行
@@ -12,6 +13,7 @@
 ```
 
 新增代码:
+
 - OperationalSemantics.v: 1,081 行
 - SimpleBorrow.v (示例): 312 行
 - 其他辅助代码: ~100 行
@@ -29,6 +31,7 @@
 #### 3. 5个完整示例验证
 
 在 SimpleBorrow.v 中验证了:
+
 1. ✅ 基本不可变借用 (`let y = &x`)
 2. ✅ 可变借用 (`let y = &mut x`)
 3. ✅ 多个共享借用 (`let y = &x; let z = &x`)
@@ -57,6 +60,7 @@ Phase 2 (可判定性): 15% ███▏
 ### 突破 1: 完整的操作语义
 
 实现了两种操作语义并建立联系:
+
 ```coq
 (* 大步语义 *)
 Inductive eval : stack -> heap -> expr -> runtime_val -> heap -> Prop
@@ -72,7 +76,7 @@ Theorem big_step_small_step_equivalence :
 ### 突破 2: 所有权安全的完整定义
 
 ```coq
-Inductive ownership_safe : 
+Inductive ownership_safe :
   region_env -> type_env -> loan_env -> mutability -> place -> Prop :=
   | OS_Base : ...      (* 基础变量 *)
   | OS_Deref_Shared : ...  (* 共享解引用 *)
@@ -83,6 +87,7 @@ Inductive ownership_safe :
 ### 突破 3: 示例验证的自动化模式
 
 所有5个示例都通过类型检查:
+
 ```coq
 Theorem all_examples_type_safe :
   (exists Γ, has_type Δ Γ Θ ex1_full ti32) /\
@@ -93,15 +98,18 @@ Theorem all_examples_type_safe :
 ## 遇到的问题和解决
 
 ### 问题 1: 表达式的值表示不一致
-**现象**: 语法中的 `value` vs 运行时的 `runtime_val`  
+
+**现象**: 语法中的 `value` vs 运行时的 `runtime_val`
 **解决**: 创建了 `translate_value` 函数桥接两者
 
 ### 问题 2: 贷款环境的复杂性
-**现象**: 需要跟踪每个区域的贷款集合  
+
+**现象**: 需要跟踪每个区域的贷款集合
 **解决**: 简化为核心操作，保留扩展性
 
 ### 问题 3: 位置求值的递归深度
-**现象**: 复杂借用链可能导致深层递归  
+
+**现象**: 复杂借用链可能导致深层递归
 **解决**: 使用 `Linearizable` 条件保证有限性
 
 ## 下周计划调整
@@ -120,22 +128,27 @@ Theorem all_examples_type_safe :
 ### 下周详细任务 (2026-03-09 至 2026-03-13)
 
 #### Day 3 (周一)
+
 - [ ] 完成 Termination.v 所有证明
 - [ ] 开始 Preservation.v
 
 #### Day 4 (周二)
+
 - [ ] 完成 Preservation.v 核心引理
 - [ ] 开始 Progress.v
 
 #### Day 5 (周三)
+
 - [ ] 完成 Progress.v
 - [ ] 创建 DecidabilityTheorems.v
 
 #### Day 6 (周四)
+
 - [ ] 创建更多示例 (嵌套借用、结构体借用)
 - [ ] 完善文档
 
 #### Day 7 (周五)
+
 - [ ] 测试所有 Coq 代码
 - [ ] 编写 Week 2 进度报告
 - [ ] 更新计划
@@ -189,7 +202,7 @@ Coq 代码质量:
 
 ---
 
-**冲刺结束日期**: 2026-03-08  
-**总代码行数**: 3,514 行 Coq  
-**总进度**: 28%  
+**冲刺结束日期**: 2026-03-08
+**总代码行数**: 3,514 行 Coq
+**总进度**: 28%
 **状态**: ahead of schedule ✅

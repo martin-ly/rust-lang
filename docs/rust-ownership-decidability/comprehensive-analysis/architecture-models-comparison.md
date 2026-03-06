@@ -13,23 +13,23 @@ graph TD
     A --> D[微服务架构]
     A --> E[事件驱动架构]
     A --> F[Actor架构]
-    
+
     B --> B1[过程式单体]
     B --> B2[OO单体]
     B --> B3[模块化单体]
-    
+
     C --> C1[MVC]
     C --> C2[Clean Architecture]
     C --> C3[Hexagonal]
-    
+
     D --> D1[同步微服务]
     D --> D2[异步微服务]
     D --> D3[服务网格]
-    
+
     E --> E1[事件溯源]
     E --> E2[CQRS]
     E --> E3[流处理]
-    
+
     F --> F1[本地Actor]
     F --> F2[分布式Actor]
     F --> F3[虚拟Actor]
@@ -109,7 +109,7 @@ pub struct User {
 impl User {
     pub fn can_access(&self, resource: &Resource) -> bool {
         // 纯业务逻辑，无IO
-        self.status == UserStatus::Active && 
+        self.status == UserStatus::Active &&
         self.has_permission(resource.required_permission())
     }
 }
@@ -125,13 +125,13 @@ impl<R: UserRepository> CreateUserUseCase<R> {
     pub async fn execute(&self, cmd: CreateUserCommand) -> Result<User, DomainError> {
         // 业务逻辑
         let user = User::new(cmd.email)?;
-        
+
         // 持久化
         self.repository.save(&user).await?;
-        
+
         // 发布事件
         self.event_bus.publish(UserCreated::new(&user)).await?;
-        
+
         Ok(user)
     }
 }
@@ -238,23 +238,23 @@ impl BankAccount {
             version: 0,
             uncommitted_events: Vec::new(),
         };
-        
+
         account.apply(BankAccountEvent::AccountOpened { id, owner });
         account
     }
-    
+
     pub fn deposit(&mut self, amount: Money) -> Result<(), DomainError> {
         if amount <= Money::zero() {
             return Err(DomainError::InvalidAmount);
         }
-        
-        self.apply(BankAccountEvent::Deposited { 
-            amount, 
-            at: Utc::now() 
+
+        self.apply(BankAccountEvent::Deposited {
+            amount,
+            at: Utc::now()
         });
         Ok(())
     }
-    
+
     fn apply(&mut self, event: BankAccountEvent) {
         // 状态转换
         match &event {
@@ -266,11 +266,11 @@ impl BankAccount {
             }
             _ => {}
         }
-        
+
         self.uncommitted_events.push(event);
         self.version += 1;
     }
-    
+
     // 从事件历史重建
     pub fn rehydrate(id: AccountId, events: Vec<BankAccountEvent>) -> Self {
         let mut account = Self {
@@ -279,11 +279,11 @@ impl BankAccount {
             version: 0,
             uncommitted_events: Vec::new(),
         };
-        
+
         for event in events {
             account.apply_state_change(&event);
         }
-        
+
         account.uncommitted_events.clear();
         account
     }
@@ -350,27 +350,27 @@ pub struct AddItem {
 
 impl Handler<AddItem> for OrderActor {
     type Result = ResponseActFuture<Self, Result<(), OrderError>>;
-    
+
     fn handle(&mut self, msg: AddItem, ctx: &mut Context<Self>) -> Self::Result {
         // 验证业务规则
         if self.state != OrderState::Draft {
             return Box::pin(async move { Err(OrderError::AlreadySubmitted) }.into_actor(self));
         }
-        
+
         // 修改状态
         self.items.push(OrderItem {
             product_id: msg.product_id,
             quantity: msg.quantity,
             price: msg.price,
         });
-        
+
         // 持久化并发布事件
         let event = ItemAddedToOrder {
             order_id: self.order_id.clone(),
             product_id: msg.product_id,
             quantity: msg.quantity,
         };
-        
+
         Box::pin(
             async move { event }
                 .into_actor(self)
@@ -444,5 +444,5 @@ $$
 
 ---
 
-**维护者**: Rust Architecture Analysis Team  
+**维护者**: Rust Architecture Analysis Team
 **创建日期**: 2026-03-05

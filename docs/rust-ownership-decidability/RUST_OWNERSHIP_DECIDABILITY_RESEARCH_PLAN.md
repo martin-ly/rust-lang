@@ -18,12 +18,14 @@
 ### 1.2 关键理论问题识别
 
 #### 1.2.1 可判定性问题 (Payet et al., NFM 2022)
+
 - **问题**: FR 的 borrow checker 在类型左值时可能无限循环
 - **根因**: 借用包含其他左值，递归过程可能不终止
 - **解决**: 提供充分条件（typing environments 的 linearizability）
 - **状态**: 已证明良类型程序满足该条件
 
 #### 1.2.2 元模型缺失
+
 ```
 当前形式化的问题:
 ├── 语法定义: 相对完整
@@ -35,6 +37,7 @@
 ```
 
 #### 1.2.3 未覆盖的 Rust 特性
+
 - 非词法生命周期 (NLL)
 - Polonius 新 borrow checker
 - 高级 trait 系统（关联类型、GATs）
@@ -47,7 +50,9 @@
 ## 2. 研究目标
 
 ### 2.1 总体目标
+
 构建 Rust 所有权系统的**完整、严格、可机械化的形式化理论**，包括：
+
 1. **完整的元模型定义**（抽象语法、语义域、判断形式）
 2. **元形式语言的严格说明**
 3. **类型安全性证明**
@@ -102,6 +107,7 @@ G6: 机械化证明
 ### 3.1 元模型构建方法
 
 #### 3.1.1 抽象语法 (Abstract Syntax)
+
 ```coq
 (* 示例: Coq 归纳定义 *)
 Inductive ty : Type :=
@@ -125,6 +131,7 @@ Inductive expr : Type :=
 ```
 
 #### 3.1.2 语义域 (Semantic Domains)
+
 ```
 内存模型层次:
 ├── 抽象内存: 位置 (ℓ) → 值
@@ -140,6 +147,7 @@ Inductive expr : Type :=
 ```
 
 #### 3.1.3 判断形式 (Judgment Forms)
+
 ```
 核心判断:
 ├── Δ; Γ; Θ ⊢ e : τ       (类型检查)
@@ -153,34 +161,36 @@ Inductive expr : Type :=
 ### 3.2 形式化策略
 
 #### 3.2.1 分层形式化
+
 ```
 分层结构:
 L0: 核心演算 (Core Calculus)
     └── 变量、借用、基本类型
-    
+
 L1: 结构化数据 (Structured Data)
     └── 元组、结构体、枚举、数组
-    
+
 L2: 控制流 (Control Flow)
     └── 条件、循环、匹配、函数
-    
+
 L3: 高级特性 (Advanced Features)
     └── Trait、泛型、生命周期推导
-    
+
 L4: Unsafe 代码 (Unsafe Code)
     └── 裸指针、union、FFI
-    
+
 L5: 并发 (Concurrency)
     └── Send/Sync、线程、同步原语
 ```
 
 #### 3.2.2 可判定性证明策略
+
 ```
 终止性证明框架:
 1. 定义度量函数 μ: Environment → Nat
    - 基于类型的秩 (rank)
    - 基于借用链深度
-   
+
 2. 证明 μ 在 borrow checking 过程中严格递减
 
 3. 证明良类型程序的 typing environment 满足 linearizability:
@@ -208,24 +218,28 @@ L5: 并发 (Concurrency)
 ### 阶段 1: 基础构建 (Month 1-3)
 
 #### Week 1-2: 文献深度分析
+
 - [ ] 精读 Oxide、Featherweight Rust、RustBelt 论文
 - [ ] 提取核心定义、引理、定理
 - [ ] 识别 gaps 和 inconsistencies
 - [ ] 编写文献综述报告
 
 #### Week 3-4: 元模型设计
+
 - [ ] 定义抽象语法（覆盖 L0-L2）
 - [ ] 定义语义域
 - [ ] 定义核心判断形式
 - [ ] 建立元语言规范
 
 #### Week 5-8: 基础形式化
+
 - [ ] Coq 项目搭建
 - [ ] 语法和语义域的 Coq 定义
 - [ ] 基本辅助定义和引理
 - [ ] 简单示例的验证
 
 #### Week 9-12: 类型系统
+
 - [ ] 流敏感类型系统实现
 - [ ] 所有权安全判断实现
 - [ ] 类型保持性证明框架
@@ -234,18 +248,21 @@ L5: 并发 (Concurrency)
 ### 阶段 2: 可判定性证明 (Month 4-6)
 
 #### Week 13-16: 终止性分析
+
 - [ ] 形式化 typing environment 的 linearizability
 - [ ] 定义度量函数 μ
 - [ ] 证明 μ 的良定义性
 - [ ] 证明 borrow checking 步骤的单调性
 
 #### Week 17-20: 可判定性证明
+
 - [ ] 良类型程序 ⇒ linearizable environment 证明
 - [ ] 线性化 ⇒ 终止性证明
 - [ ] 复杂度上界分析
 - [ ] 反例构造（非良类型程序）
 
 #### Week 21-24: 整合与验证
+
 - [ ] 与 FR 结果对比
 - [ ] 扩展至更完整的语言子集
 - [ ] 机械化证明检查
@@ -254,18 +271,21 @@ L5: 并发 (Concurrency)
 ### 阶段 3: 扩展与完善 (Month 7-9)
 
 #### Week 25-28: 高级特性
+
 - [ ] NLL (非词法生命周期) 建模
 - [ ] Trait 系统基础
 - [ ] 泛型系统
 - [ ] 生命周期推导
 
 #### Week 29-32: 元理论完善
+
 - [ ] 完整类型安全证明
 - [ ] 语义一致性证明
 - [ ] 与 Stacked Borrows 的连接
 - [ ] 精化关系证明
 
 #### Week 33-36: 工具开发
+
 - [ ] 参考实现（解释器）
 - [ ] 与 rustc 的对比测试
 - [ ] 可视化工具
@@ -274,18 +294,21 @@ L5: 并发 (Concurrency)
 ### 阶段 4: 验证与发布 (Month 10-12)
 
 #### Week 37-40: 机械化证明完成
+
 - [ ] 所有定理的 Coq 证明
 - [ ] 关键路径的 Isabelle 验证
 - [ ] 证明重构与优化
 - [ ] 自动化策略开发
 
 #### Week 41-44: 实证验证
+
 - [ ] 大规模测试套件运行
 - [ ] 与真实 Rust 代码对比
 - [ ] 性能基准测试
 - [ ] Bug 发现与分析
 
 #### Week 45-48: 成果发布
+
 - [ ] 学术论文撰写 (POPL/PLDI/ICFP)
 - [ ] 技术报告发布
 - [ ] 开源代码发布
@@ -296,24 +319,28 @@ L5: 并发 (Concurrency)
 ## 5. 关键里程碑与交付物
 
 ### 里程碑 1: 基础框架 (M3 末)
+
 - [x] 完整的元模型定义文档
 - [x] L0-L2 的 Coq 形式化
 - [x] 基础类型系统实现
 - [ ] 技术报告 v1.0
 
 ### 里程碑 2: 可判定性 (M6 末)
+
 - [x] 终止性定理证明
 - [x] 可判定性定理证明
 - [x] 复杂度分析结果
 - [ ] 论文初稿
 
 ### 里程碑 3: 完整理论 (M9 末)
+
 - [x] 扩展类型系统
 - [x] 完整元理论
 - [x] 参考实现
 - [ ] 技术报告 v2.0
 
 ### 里程碑 4: 最终成果 (M12 末)
+
 - [x] 全部机械化证明
 - [x] 实证验证结果
 - [x] 学术论文投稿
@@ -336,6 +363,7 @@ L5: 并发 (Concurrency)
 ## 7. 相关资源
 
 ### 7.1 核心论文
+
 1. **Oxide**: Weiss et al., "Oxide: The Essence of Rust", arXiv:1903.00982
 2. **Featherweight Rust**: Pearce et al., "On the Termination of Borrow Checking in Featherweight Rust", NFM 2022
 3. **RustBelt**: Jung et al., "RustBelt: Securing the Foundations of the Rust Programming Language", POPL 2018
@@ -346,19 +374,21 @@ L5: 并发 (Concurrency)
 8. **Verus**: Lattuada et al., "Verus: Verifying Rust Programs using Linear Ghost Types", OOPSLA 2023
 
 ### 7.2 工具与代码
-- Oxide: https://github.com/aatxe/oxide
-- RustBelt: https://gitlab.mpi-sws.org/FP/rustbelt
-- Stacked Borrows (Miri): https://github.com/rust-lang/miri
-- AENEAS: https://github.com/AeneasVerif/aeneas
-- Prusti: https://github.com/viperproject/prusti-dev
-- Creusot: https://github.com/creusot-rs/creusot
-- Verus: https://github.com/verus-lang/verus
+
+- Oxide: <https://github.com/aatxe/oxide>
+- RustBelt: <https://gitlab.mpi-sws.org/FP/rustbelt>
+- Stacked Borrows (Miri): <https://github.com/rust-lang/miri>
+- AENEAS: <https://github.com/AeneasVerif/aeneas>
+- Prusti: <https://github.com/viperproject/prusti-dev>
+- Creusot: <https://github.com/creusot-rs/creusot>
+- Verus: <https://github.com/verus-lang/verus>
 
 ### 7.3 社区与标准
-- Rust Reference: https://doc.rust-lang.org/reference/
-- Unsafe Code Guidelines: https://rust-lang.github.io/unsafe-code-guidelines/
-- Rust RFCs: https://rust-lang.github.io/rfcs/
-- Polonius: https://github.com/rust-lang/polonius
+
+- Rust Reference: <https://doc.rust-lang.org/reference/>
+- Unsafe Code Guidelines: <https://rust-lang.github.io/unsafe-code-guidelines/>
+- Rust RFCs: <https://rust-lang.github.io/rfcs/>
+- Polonius: <https://github.com/rust-lang/polonius>
 
 ---
 
@@ -381,6 +411,6 @@ L5: 并发 (Concurrency)
 
 ---
 
-**计划制定日期**: 2026-03-05  
-**计划版本**: v1.0  
+**计划制定日期**: 2026-03-05
+**计划版本**: v1.0
 **下次评审日期**: 2026-04-05

@@ -70,13 +70,13 @@
 pub(crate) struct Task {
     /// 任务状态: RUNNING, SCHEDULED, COMPLETED, etc.
     state: AtomicUsize,
-    
+
     /// 任务所属的队列 (用于工作窃取)
     owned_by: UnsafeCell<Option<NonNull<Queue>>>,
-    
+
     /// Future状态机存储
     stage: Stage,
-    
+
     /// 任务ID用于调试
     pub(crate) id: Id,
 }
@@ -98,10 +98,10 @@ pub(crate) enum Stage {
 pub(crate) struct Queue {
     /// 本地队列 (LIFO)
     local: VecDeque<NonNull<Task>>,
-    
+
     /// 窃取端 (FIFO)
     stealer: Stealer<NonNull<Task>>,
-    
+
     /// 队列拥有者线程ID
     owner: ThreadId,
 }
@@ -111,12 +111,12 @@ impl Queue {
     pub(crate) fn push_local(&mut self, task: NonNull<Task>) {
         self.local.push_back(task);
     }
-    
+
     /// 从本地队列弹出 - O(1)
     pub(crate) fn pop_local(&mut self) -> Option<NonNull<Task>> {
         self.local.pop_back()
     }
-    
+
     /// 从其他队列窃取 - 批量窃取
     pub(crate) fn steal_from(&self, other: &Queue) -> Steal<NonNull<Task>> {
         other.stealer.steal_batch(&self.local)
@@ -157,13 +157,13 @@ impl Queue {
 driver: {
     #[cfg(unix)]
     epoll: Epoll,
-    
+
     #[cfg(target_os = "macos")]
     kqueue: Kqueue,
-    
+
     #[cfg(windows)]
     iocp: IoCp,
-    
+
     #[cfg(target_os = "linux")]
     uring: Option<IoUring>,  // io_uring支持(实验性)
 }
@@ -177,19 +177,19 @@ impl Driver {
     pub(crate) fn poll(&mut self, cx: &mut Context<'_>) -> Poll<()> {
         // 1. 收集就绪的IO事件
         let events = self.tick()?;
-        
+
         // 2. 分派事件到对应的Waker
         for event in events {
             let token = event.token();
             let waker = self.wakers.get(token);
             waker.wake_by_ref();
         }
-        
+
         // 3. 继续轮询如果还有更多事件
         if events.has_more() {
             cx.waker().wake_by_ref();
         }
-        
+
         Poll::Pending
     }
 }
@@ -204,7 +204,7 @@ impl Driver {
 pub(crate) struct TimerWheel {
     /// 6层: 256 slots each
     levels: [Level; 6],
-    
+
     /// 当前tick (64位)
     tick: u64,
 }
@@ -303,10 +303,10 @@ pub struct LocalSet {
 // 取消安全: 使用原子操作
 pub async fn atomic_operation(&self) -> Result<()> {
     let state = self.state.load(Ordering::Acquire);
-    
+
     // 如果在此处被取消，状态未改变
     yield_now().await;
-    
+
     self.state.store(new_state, Ordering::Release);
     Ok(())
 }
@@ -315,7 +315,7 @@ pub async fn atomic_operation(&self) -> Result<()> {
 pub async fn unsafe_cancel() {
     let guard = self.lock().await;
     // 如果在此处取消，锁不会释放!
-    
+
     // 修复: 使用scope guard
     let _guard = scopeguard::guard(guard, |g| drop(g));
 }
@@ -504,6 +504,6 @@ impl Task {
 
 ---
 
-**分析者**: Rust Case Study Team  
-**分析日期**: 2026-03-05  
+**分析者**: Rust Case Study Team
+**分析日期**: 2026-03-05
 **Tokio版本**: 1.35+

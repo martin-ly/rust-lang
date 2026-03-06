@@ -20,8 +20,11 @@
 ├── 12-03-message-passing.md                # 消息传递模式 (Channel/Actor)
 ├── 12-04-lock-free-patterns.md             # 无锁编程 (CAS/原子操作)
 ├── 12-05-async-patterns.md                 # 异步并发模式
+├── 12-05-async-patterns-deep.md            # 🔬 异步形式化深度解析 (含定理/证明)
 ├── 12-06-data-parallelism.md               # 数据并行 (Rayon/SIMD)
-└── 12-07-distributed-patterns.md           # 分布式模式
+├── 12-06-data-parallelism-deep.md          # 🔬 数据并行形式化深度解析
+├── 12-07-distributed-patterns.md           # 分布式模式
+└── 12-07-distributed-patterns-deep.md      # 🔬 分布式系统模式深度解析
 ```
 
 ---
@@ -51,8 +54,8 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 | 如何最大化 CPU 利用率？ | 12-06, 12-04 |
 | 如何构建容错系统？ | 12-07, 12-03 |
 | 如何选择并发模型？ | 12-01, 12-05 |
-| 需要形式化证明并发正确性？ | 12-01-deep |
-| 实现自定义无锁数据结构？ | 12-01-deep, 12-04 |
+| 需要形式化证明并发正确性？ | 12-01-deep, 12-04-deep |
+| 实现自定义无锁数据结构？ | 12-01-deep, 12-04, 12-04-deep |
 
 ### 路径三：性能优先
 
@@ -63,14 +66,15 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 ### 路径四：形式化方法（研究员/高级开发者）
 
 ```text
-12-02 → 12-01 → 12-01-deep → 12-04 → 12-05
+12-02 → 12-01 → 12-01-deep → 12-04 → 12-04-deep → 12-05
 ```
 
 1. **线程安全基础** (12-02) - 建立直觉理解
 2. **并发架构** (12-01) - 掌握实际模式
-3. **形式化深度解析** (12-01-deep) - 理解形式化保证
-4. **无锁编程** (12-04) - 极致性能与形式化安全
-5. **异步并发** (12-05) - 综合应用
+3. **并发架构形式化深度解析** (12-01-deep) - 理解形式化保证
+4. **无锁编程** (12-04) - 基础无锁编程
+5. **无锁编程深度解析** (12-04-deep) - 极致性能与形式化安全
+6. **异步并发** (12-05) - 综合应用
 
 ---
 
@@ -209,6 +213,8 @@ async fn send_with_backpressure<T>(
 
 **适合读者**: 设计消息驱动系统的开发者
 
+**📚 深度阅读**: [12-03-message-passing-deep.md](./12-03-message-passing-deep.md) - 形式化消息传递语义、所有权转移定理、8+反模式案例分析、完整聊天服务器案例
+
 ---
 
 ### 12-04: 无锁编程
@@ -255,6 +261,8 @@ pub fn push(&self, value: T) {
 
 **适合读者**: 追求极致性能的底层开发者
 
+**📚 深度阅读**: [12-04-lock-free-patterns-deep.md](./12-04-lock-free-patterns-deep.md) - 形式化无锁语义、所有权分析、9个形式化定理、9个反例、Chase-Lev工作窃取队列完整实现
+
 ---
 
 ### 12-05: 异步并发模式
@@ -296,6 +304,8 @@ impl AdaptiveBackpressure {
 
 **适合读者**: 构建高并发 IO 密集型应用的开发者
 
+**📚 深度阅读**: [12-05-async-patterns-deep.md](./12-05-async-patterns-deep.md) - 形式化异步语义、所有权分析、安全定理与证明、反模式案例分析
+
 ---
 
 ### 12-06: 数据并行
@@ -329,6 +339,60 @@ pub fn parallel_simd_sum(data: &[f64]) -> f64 {
 ```
 
 **适合读者**: 数据科学家、科学计算开发者
+
+**📚 深度阅读**: [12-06-data-parallelism-deep.md](./12-06-data-parallelism-deep.md) - 形式化并行迭代器定理、安全保证、性能优化、图像处理案例研究
+
+---
+
+### 12-06-deep: 数据并行形式化深度解析
+
+**核心主题** (🔬 高级形式化内容):
+
+- **数据并行基础**: SIMD vs MIMD、数据 vs 任务并行、所有权含义
+- **并行迭代器定理**:
+  - Theorem PAR-ITER-SAFETY - 并行迭代保持所有权安全
+  - Theorem PAR-ITER-DETERMINISM - 纯函数确定性保证
+- **并行模式深度分析**:
+  - Parallel Map、Reduce、Filter、Group By 的所有权语义
+  - 反例：非 Send 闭包、非关联操作、非确定性排序
+- **安全考虑**: Send/Sync 要求、集合竞态条件
+- **高级模式**: 并行排序、搜索、图处理
+- **性能优化**: 粒度控制、缓存考虑、伪共享避免
+- **自定义并行算法**: ParallelIterator 实现、Join 上下文
+- **案例研究**: 完整图像处理实现（模糊、边缘检测）
+
+**关键代码示例**:
+
+```rust
+// 形式化定理演示: 并行迭代器安全
+fn demonstrate_par_iter_safety<T: Send + Sync>() {
+    let data = vec![1, 2, 3, 4, 5];
+    // 编译器确保:
+    // 1. 分区不重叠
+    // 2. 每个元素只处理一次
+    // 3. Join 保持安全性
+    let result: Vec<_> = data.par_iter().map(|&x| x * 2).collect();
+}
+
+// 缓存行对齐避免伪共享 (Rust 1.94)
+#[repr(align(64))]
+struct PaddedCounter(AtomicU64);
+
+// 自定义并行算法
+impl ParallelIterator for StepRange {
+    type Item = usize;
+    fn drive_unindexed<C>(self, consumer: C) -> C::Result
+    where C: UnindexedConsumer<Self::Item> { ... }
+}
+```
+
+**适合读者**:
+
+- 需要深入理解数据并行形式化保证的研究者
+- 实现自定义并行迭代器的库作者
+- 需要优化并行算法性能的系统开发者
+
+**阅读建议**: 建议先阅读 12-06 和 12-02 后再阅读本文档
 
 ---
 
@@ -376,6 +440,91 @@ impl RaftNode {
 ```
 
 **适合读者**: 分布式系统开发者、SRE
+
+**📚 深度阅读**: [12-07-distributed-patterns-deep.md](./12-07-distributed-patterns-deep.md) - CAP定理形式化、Raft安全性证明、消息传递保证、熔断器模式、分布式追踪、完整KV存储案例研究
+
+---
+
+### 12-07-deep: 分布式系统模式深度解析
+
+**核心主题** (🔬 高级形式化内容):
+
+- **分布式系统理论**: CAP定理形式化、网络故障模型、拜占庭容错
+- **共识算法深度**:
+  - 两阶段提交协议及协调者故障问题
+  - Raft 算法：领导者选举、日志复制、安全性证明
+  - 形式化定理：Election Safety、Log Matching、Leader Completeness
+- **消息传递语义**:
+  - Serde序列化所有权语义
+  - 至少一次/至多一次/恰好一次传递保证
+  - 幂等性设计与反例分析
+- **服务发现模式**:
+  - 注册表模式及过期条目问题
+  - Gossip协议与最终一致性
+- **容错模式**:
+  - 熔断器状态机模型及形式化证明
+  - 分布式熔断器与脑裂问题
+  - 背压与负载削减策略
+- **分布式追踪**: 上下文传播、W3C标准、Rust任务本地存储
+- **完整案例研究**: 分布式KV存储设计
+  - 分片策略、复制协议、一致性模型
+  - 故障处理、Raft集成
+- **Rust生态系统**: Tonic(gRPC)、Tarpc框架使用
+
+**形式化定理**:
+
+```text
+Theorem CAP-VALIDITY: CP系统不能使用最终一致性
+Theorem ELECTION-SAFETY: 一个任期最多一个领导者
+Theorem LOG-MATCHING: 相同索引和任期的条目存储相同命令
+Theorem LEADER-COMPLETENESS: 已提交条目存在于所有后续领导者日志
+Theorem CIRCUIT-STABILITY: 熔断器在CLOSED/OPEN状态稳定
+```
+
+**Counter-Examples (6+)**:
+
+- CAP配置冲突：CP系统使用最终一致性
+- 协调者故障导致2PC阻塞
+- 自引用类型序列化失败
+- 非幂等重复处理导致错误
+- 过期注册表条目问题
+- 丢失确认导致重复处理
+- 分布式熔断器脑裂问题
+
+**关键代码示例**:
+
+```rust
+// CAP策略验证
+let config = CAPConfig::new(
+    CAPStrategy::ConsistencyPartitionTolerance,
+    ConsistencyLevel::Strong,  // ✅ 正确
+    3,
+)?;
+
+// Raft节点实现
+let raft = RaftNode::new(node_id, peers, ElectionConfig::default());
+
+// 熔断器状态机
+let cb = CircuitBreaker::new(CircuitBreakerConfig::default());
+let result = cb.call(|| async {
+    /* 受保护的操作 */
+}).await;
+
+// 分布式追踪
+let span = Span::new("operation", parent_context);
+span.enter(|| async {
+    /* 被追踪的代码 */
+}).await;
+```
+
+**适合读者**:
+
+- 需要构建生产级分布式系统的架构师
+- 需要理解共识算法实现细节的开发者
+- 需要设计容错系统的SRE/DevOps工程师
+- 需要深入学习Rust分布式生态的开发者
+
+**阅读建议**: 建议先阅读 12-07 基础版后再阅读本文档
 
 ---
 

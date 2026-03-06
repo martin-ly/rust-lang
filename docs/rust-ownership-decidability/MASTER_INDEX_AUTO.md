@@ -4,11 +4,26 @@
 
 ## Table of Contents
 
-1. [Documentation Structure](#documentation-structure)
-2. [Core Concept Links](#core-concept-links)
-3. [Formal Verification Links](#formal-verification-links)
-4. [Case Study Links](#case-study-links)
-5. [Cross-Reference Map](#cross-reference-map)
+- [Documentation Master Index](#documentation-master-index)
+  - [Table of Contents](#table-of-contents)
+  - [Documentation Structure](#documentation-structure)
+    - [Core Documentation](#core-documentation)
+    - [Core Concepts](#core-concepts)
+    - [Formal Foundations](#formal-foundations)
+    - [Case Studies](#case-studies)
+  - [Core Concept Links](#core-concept-links)
+    - [Ownership System](#ownership-system)
+    - [Borrowing System](#borrowing-system)
+    - [Lifetimes](#lifetimes)
+    - [Type System](#type-system)
+  - [Formal Verification Links](#formal-verification-links)
+    - [Key Theorems](#key-theorems)
+    - [Coq File Organization](#coq-file-organization)
+  - [Case Study Links](#case-study-links)
+    - [Standard Library Case Studies](#standard-library-case-studies)
+    - [Async Ecosystem](#async-ecosystem)
+  - [Cross-Reference Map](#cross-reference-map)
+    - [Files Referenced By](#files-referenced-by)
 
 ---
 

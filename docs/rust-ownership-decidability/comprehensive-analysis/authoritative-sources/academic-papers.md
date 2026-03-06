@@ -84,7 +84,7 @@ enum Choice<A, B> {
 ```
 仿射类型系统:
     资源可以使用 0次 或 1次 (但不超过1次)
-    
+
     Γ ⊢ e : τ    (使用e消耗资源Γ)
     ─────────────────────
     资源可以在e中被使用或丢弃
@@ -129,7 +129,7 @@ DOI: 10.1006/inco.1997.2693
     - 将堆内存组织为区域(region)
     - 区域有生命周期，整体分配/释放
     - 静态推断区域生命周期
-    
+
     与Rust对比:
     ┌────────────────────────────────────────────────┐
     │  Tofte-Talpin          Rust                     │
@@ -152,7 +152,7 @@ fn nll_example() {
     let x = &data[0];  // 借用开始
     println!("{}", x); // 最后一次使用
     // x 的借用在这里结束 (NLL)
-    
+
     data.push(4);      // 可以修改，因为借用已结束
 }
 ```
@@ -175,7 +175,7 @@ fn nll_example() {
     - 每个对象有所有者
     - 所有者控制对象生命周期
     - 限制别名以保护不变式
-    
+
     context Owner {
         object: OwnedObject
     }
@@ -195,11 +195,11 @@ impl Owner {
     fn lend(&self) -> &OwnedData {
         &self.data  // 借用，所有者不变
     }
-    
+
     fn lend_mut(&mut self) -> &mut OwnedData {
         &mut self.data  // 可变借用
     }
-    
+
     fn transfer(self) -> OwnedData {
         self.data  // 转移所有权
     }
@@ -228,7 +228,7 @@ DOI: 10.1109/LICS.2002.1029817
     P -* Q  -- 分离蕴含 (给出P可得Q)
     emp     -- 空堆
     x ↦ v   -- 单点堆，x指向v
-    
+
 框架规则:
     {P} C {Q}
     ───────────────────
@@ -240,7 +240,7 @@ DOI: 10.1109/LICS.2002.1029817
 ```rust
 // 分离逻辑在unsafe代码验证中的应用
 
-// {x ↦ _} 
+// {x ↦ _}
 unsafe { *x = 5; }
 // {x ↦ 5}
 
@@ -275,7 +275,7 @@ fn update(a: &mut i32, b: &mut i32) {
     - 资源作为逻辑断言的一部分
     - 分离保证资源不相交
     - 支持并行组合规则
-    
+
     {P₁} C₁ {Q₁}    {P₂} C₂ {Q₂}
     ───────────────────────────── (P₁, P₂分离)
     {P₁ * P₂} C₁ || C₂ {Q₁ * Q₂}
@@ -324,7 +324,7 @@ RustBelt形式化框架:
     - 在Iris框架中形式化Rust
     - 验证标准库unsafe代码安全性
     - 定义Rust的安全抽象契约
-    
+
 关键概念:
     1. 高阶协议 (Higher-Order Protocols)
     2. 幽灵状态 (Ghost State)
@@ -335,7 +335,7 @@ RustBelt形式化框架:
 
 ```
 定理 (RustBelt):
-    ∀库L. L的所有unsafe代码满足其契约 → 
+    ∀库L. L的所有unsafe代码满足其契约 →
     任意Safe Rust程序使用L都是内存安全的
 
 验证的库组件:
@@ -367,14 +367,14 @@ Stacked Borrows:
     - 定义引用的语义
     - 栈结构跟踪借用状态
     - 检测未定义行为
-    
+
     借用栈:
     ┌─────────────┐
     │ SharedRead  │  ← &x
     │ UniqueMut   │  ← &mut x (激活)
     │ UniqueMut   │  ← &mut x (冻结)
     └─────────────┘
-    
+
 Tree Borrows (改进):
     - 树结构更灵活
     - 支持更多合法模式
@@ -421,7 +421,7 @@ fn tree_borrows_ok() {
     - 所有权作为类型修饰符
     - 借用作为受限引用
     - 生命周期作为区域变量
-    
+
     类型层次:
         Owned<T>
             └── Borrowed<'a, T>
@@ -487,7 +487,7 @@ fn abs(x: i32) -> i32 {
 // 谓词
 #[predicate]
 fn sorted(s: &[i32]) -> bool {
-    forall(|i: usize, j: usize| 
+    forall(|i: usize, j: usize|
         (i < j && j < s.len()) ==> s[i] <= s[j])
 }
 ```
@@ -512,7 +512,7 @@ Rust内存模型基于:
     - C++11内存模型
     - 顺序一致性数据竞争自由 (SC-DRF)
     - happens-before关系
-    
+
 内存序:
     - Relaxed: 最弱，仅原子性
     - Acquire/Release: 建立synchronizes-with
@@ -532,7 +532,7 @@ Rust内存模型基于:
     Tofte & Talpin (1997) Region-Based MM
         ↓
     Clarke et al. (1998) Ownership Types
-        
+
 分离逻辑:
     Reynolds (2002) Separation Logic
         ↓
@@ -565,6 +565,6 @@ Rust内存模型基于:
 
 ---
 
-**维护者**: Rust Research Alignment Team  
-**更新日期**: 2026-03-05  
+**维护者**: Rust Research Alignment Team
+**更新日期**: 2026-03-05
 **覆盖论文**: 15+ 篇核心文献

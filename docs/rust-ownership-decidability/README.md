@@ -102,18 +102,28 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
 | `12-04-lock-free-patterns.md` | 无锁编程 | 🔴 | 3小时 | CAS/原子操作 |
 | `12-05-async-patterns.md` | 异步并发模式 | 🟡 | 2.5小时 | Pin, Future |
 | `12-06-data-parallelism.md` | 数据并行 | 🟡 | 1.5小时 | Rayon/SIMD |
+| `12-06-data-parallelism-deep.md` | 🔬 **数据并行形式化深度解析** | 🔴 | 4小时 | 形式定理、图像处理案例 |
 | `12-07-distributed-patterns.md` | 分布式模式 | 🔴 | 3小时 | Raft/共识 |
+| `12-07-distributed-patterns-deep.md` | 🔬 **分布式系统模式深度解析** | 🔴 | 4小时 | CAP/共识定理、完整KV案例 |
 
 **总阅读时间**: 约8-12小时 | **难度级别**: 中级到高级
 
 **形式化深度文档亮点**:
+
 ```text
-📊 5+ 形式化定理及完整证明
-   ├── Theorem SEND-SYNC-SAFETY
-   ├── Theorem SYNC-DEREF-SAFETY
-   ├── Theorem SEND-COMPOSITIONALITY
-   ├── Theorem SYNC-COMPOSITIONALITY
-   └── Theorem CHANNEL-ISOLATION
+📊 12+ 形式化定理及完整证明
+   ├── Theorem SEND-SYNC-SAFETY (并发架构)
+   ├── Theorem SYNC-DEREF-SAFETY (并发架构)
+   ├── Theorem SEND-COMPOSITIONALITY (并发架构)
+   ├── Theorem SYNC-COMPOSITIONALITY (并发架构)
+   ├── Theorem CHANNEL-ISOLATION (并发架构)
+   ├── Theorem PAR-ITER-SAFETY (数据并行)
+   ├── Theorem PAR-ITER-DETERMINISM (数据并行)
+   ├── Theorem CAP-VALIDITY (分布式系统) ✅ NEW
+   ├── Theorem ELECTION-SAFETY (分布式系统) ✅ NEW
+   ├── Theorem LOG-MATCHING (分布式系统) ✅ NEW
+   ├── Theorem LEADER-COMPLETENESS (分布式系统) ✅ NEW
+   └── Theorem CIRCUIT-STABILITY (分布式系统) ✅ NEW
 
 🔬 内存序深度解析
    ├── happens-before 关系形式化
@@ -124,6 +134,19 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
    ├── 2,500+ 行形式化文档
    ├── Lock-free bounded queue 实现
    └── 安全性与性能论证
+
+🖼️ 图像处理并行案例 (数据并行深度)
+   ├── 并行模糊算法实现
+   ├── Sobel 边缘检测
+   ├── 性能分析与内存带宽优化
+   └── 1,000+ 行完整案例代码
+
+🗄️ 分布式键值存储案例 (分布式系统深度) ✅ NEW
+   ├── 完整分布式KV存储设计
+   ├── Raft共识集成
+   ├── 分片策略与一致性模型
+   ├── 熔断器、背压、服务发现集成
+   └── 2,000+ 行完整案例代码
 ```
 
 ---
@@ -322,6 +345,7 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 |:-----|:-----|:----:|:-----|
 | 线程安全基础 | `12-02-thread-safety-patterns.md` | 🟡 | Send/Sync |
 | 消息传递 | `12-03-message-passing.md` | 🟡 | Channel |
+| 消息传递深度 | `12-03-message-passing-deep.md` | 🔴 | 形式化定理、反模式 |
 | Async基础 | `12-05-async-patterns.md` | 🟡 | Pin, Future |
 | 无锁编程 | `12-04-lock-free-patterns.md` | 🔴 | CAS |
 | Actor模型 | `actor-specialty/ACTOR_MODEL_DEEP_DIVE.md` | 🔴 | 形式化语义 |
