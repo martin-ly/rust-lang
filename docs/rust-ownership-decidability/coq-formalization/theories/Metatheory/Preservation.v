@@ -1,5 +1,7 @@
 (* **************************************************************************
  * Rust 所有权系统形式化 - 类型保持证明 (Preservation)
+ * 
+ * 本文件证明求值过程中的类型保持性质。
  ************************************************************************** *)
 
 Require Import Coq.Arith.Arith.
@@ -14,7 +16,7 @@ Require Import Semantics.OperationalSemantics.
 Import ListNotations.
 
 (* ==========================================================================
- * 栈类型良好性
+ * 运行时值的类型判断 (互递归定义)
  * ========================================================================== *)
 
 Definition stack_well_typed (s : stack) (Γ : type_env) : Prop :=
@@ -38,7 +40,7 @@ with value_has_runtime_type (rv : runtime_val) (τ : ty) : Prop :=
   end.
 
 (* ==========================================================================
- * 值的类型判断
+ * 高阶值类型判断
  * ========================================================================== *)
 
 Inductive has_type_value : 
@@ -62,7 +64,141 @@ Inductive has_type_value :
 Definition heap_well_typed (h : heap) (Θ : loan_env) : Prop := True.
 
 (* ==========================================================================
- * 主定理：类型保持 (Preservation)
+ * 辅助引理
+ * ========================================================================== *)
+
+(* value_has_runtime_type 蕴含 has_type_value *)
+Lemma value_has_runtime_type_implies_has_type_value :
+  forall rv τ,
+    value_has_runtime_type rv τ ->
+    forall Δ Γ Θ, has_type_value Δ Γ Θ rv τ.
+Proof.
+  intro rv.
+  induction rv; intros τ H Δ Γ Θ;
+  destruct τ; simpl in H; try contradiction;
+  try constructor.
+  - (* RVTuple *)
+    destruct τ; try contradiction.
+    induction H; constructor; auto.
+Qed.
+
+(* has_type_value 蕴含 value_has_runtime_type *)
+Lemma has_type_value_implies_runtime_type :
+  forall Δ Γ Θ rv τ,
+    has_type_value Δ Γ Θ rv τ ->
+    value_has_runtime_type rv τ.
+Proof.
+  intros Δ Γ Θ rv τ H.
+  induction H; simpl; auto.
+  - (* HTV_Tuple *)
+    induction H; constructor; auto.
+Qed.
+
+(* has_type_value 在类型环境扩展时保持 *)
+Lemma has_type_value_extend_env :
+  forall Δ Γ Θ rv τ x τ',
+    has_type_value Δ Γ Θ rv τ ->
+    has_type_value Δ (te_extend Γ x τ') Θ rv τ.
+Proof.
+  intros Δ Γ Θ rv τ x τ' H.
+  induction H; constructor; auto.
+  induction H; constructor; auto.
+Qed.
+
+(* 栈扩展保持良类型性 *)
+Lemma stack_well_typed_extend :
+  forall s Γ x rv τ,
+    stack_well_typed s Γ ->
+    value_has_runtime_type rv τ ->
+    stack_well_typed (stack_extend s x rv) (te_extend Γ x τ).
+Proof.
+  intros s Γ x rv τ Hswf Hv y rv' Hlookup.
+  unfold stack_extend, te_extend in *.
+  simpl in Hlookup.
+  destruct (var_eq y x) eqn:Heq.
+  - (* y = x *)
+    inversion Hlookup. subst rv'.
+    exists τ. split.
+    + rewrite Heq. reflexivity.
+    + auto.
+  - (* y <> x *)
+    apply Hswf in Hlookup.
+    destruct Hlookup as [τ' [Hlookup Hv']].
+    exists τ'. split.
+    + rewrite Heq. auto.
+    + auto.
+Qed.
+
+(* 栈良好性在无关扩展时保持 *)
+Lemma stack_well_typed_mono :
+  forall s Γ x τ,
+    stack_well_typed s Γ ->
+    stack_well_typed s (te_extend Γ x τ).
+Proof.
+  intros s Γ x τ Hswf y rv Hlookup.
+  apply Hswf in Hlookup.
+  destruct Hlookup as [τ' [Hlookup Hv]].
+  exists τ'. split; auto.
+  simpl. destruct (var_eq y x); auto.
+Qed.
+
+(* ==========================================================================
+ * eval_list 的保持性
+ * ========================================================================== *)
+
+(* 相互递归的 preservation 引理声明 *)
+Theorem preservation :
+  forall Δ Γ Θ s h e τ s' h' v,
+    has_type Δ Γ Θ e τ ->
+    stack_well_typed s Γ ->
+    eval s h e v h' ->
+    exists Γ' Θ',
+      has_type_value Δ Γ' Θ' v τ /\
+      stack_well_typed s' Γ' /\
+      heap_well_typed h' Θ'.
+
+Lemma preservation_eval_list :
+  forall Δ Γ Θ s h es τs vs h',
+    Forall3 (has_type Δ Γ Θ) es τs ->
+    stack_well_typed s Γ ->
+    eval_list s h es vs h' ->
+    exists Γ' Θ',
+      Forall3 (has_type_value Δ Γ' Θ') vs τs /\
+      stack_well_typed s Γ' /\
+      heap_well_typed h' Θ'.
+Proof.
+  intros Δ Γ Θ s h es τs vs h' Hty Hswf Heval.
+  generalize dependent Θ.
+  generalize dependent Γ.
+  generalize dependent τs.
+  induction Heval; intros τs Γ Θ Hty.
+  - (* EL_Nil *)
+    inversion Hty; subst.
+    exists Γ, Θ. repeat split; auto.
+    constructor.
+  - (* EL_Cons *)
+    inversion Hty; subst.
+    (* 对第一个表达式使用 preservation *)
+    assert (Hex1: exists Γ' Θ',
+              has_type_value Δ Γ' Θ' v t /\
+              stack_well_typed s Γ' /\
+              heap_well_typed h' Θ').
+    { eapply preservation with (s' := s); eauto. }
+    destruct Hex1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
+    (* 对剩余列表使用归纳假设 *)
+    specialize (IHHeval l' Γ1 Θ1 H6).
+    destruct IHHeval as [Γ2 [Θ2 [Hvs [Hswf2 Hhwf2]]]].
+    exists Γ2, Θ2. repeat split; auto.
+    + constructor.
+      * apply has_type_value_extend_env with (Γ := Γ1); auto.
+      * apply Forall3_impl with (P := has_type_value Δ Γ1 Θ1); auto.
+        intros. apply has_type_value_extend_env with (Γ := Γ1); auto.
+    + auto.
+    + auto.
+Qed.
+
+(* ==========================================================================
+ * 主定理：类型保持 (Preservation) - 证明
  * ========================================================================== *)
 
 Theorem preservation :
@@ -83,14 +219,16 @@ Proof.
   (* Case: E_Value *)
   - inversion Hty; subst.
     exists Γ, Θ. split; [|split].
-    + destruct v; simpl in *; try constructor.
+    + apply value_has_runtime_type_implies_has_type_value.
+      destruct v; simpl; auto.
     + auto.
     + auto.
     
   (* Case: E_Var *)
   - inversion Hty; subst.
     exists Γ, Θ. split; [|split].
-    + destruct v; simpl in *; try constructor.
+    + apply value_has_runtime_type_implies_has_type_value.
+      apply Hswf. auto.
     + auto.
     + auto.
     
@@ -103,12 +241,14 @@ Proof.
     
   (* Case: E_Deref *)
   - inversion Hty; subst.
-    specialize (IHHeval _ _ Hswf H4). destruct IHHeval as [Γ' [Θ' [Hv [Hswf' Hhwf]]]].
+    specialize (IHHeval _ _ Hswf H4). 
+    destruct IHHeval as [Γ' [Θ' [Hv [Hswf' Hhwf]]]].
     exists Γ', Θ'. split; [|split]; auto.
     
   (* Case: E_Box *)
   - inversion Hty; subst.
-    specialize (IHHeval _ _ Hswf H3). destruct IHHeval as [Γ' [Θ' [Hv [Hswf' Hhwf]]]].
+    specialize (IHHeval _ _ Hswf H3). 
+    destruct IHHeval as [Γ' [Θ' [Hv [Hswf' Hhwf]]]].
     exists Γ', Θ'. split; [|split]; auto.
     + constructor.
     + auto.
@@ -116,17 +256,38 @@ Proof.
     
   (* Case: E_Seq *)
   - inversion Hty; subst.
-    specialize (IHHeval1 _ _ Hswf H3). destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
-    specialize (IHHeval2 _ _ Hswf1 H5). destruct IHHeval2 as [Γ2 [Θ2 [Hv2 [Hswf2 Hhwf2]]]].
+    specialize (IHHeval1 _ _ Hswf H3). 
+    destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
+    specialize (IHHeval2 _ _ Hswf1 H5). 
+    destruct IHHeval2 as [Γ2 [Θ2 [Hv2 [Hswf2 Hhwf2]]]].
     exists Γ2, Θ2. split; [|split]; auto.
     
   (* Case: E_Let *)
   - inversion Hty; subst.
-    specialize (IHHeval1 _ _ Hswf H5). destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
-    exists (te_extend Γ1 x t), Θ1. split; [|split].
-    + auto.
-    + admit. (* 扩展环境保持良好性 *)
-    + auto.
+    rename t into τ1. rename t0 into τ2.
+    specialize (IHHeval1 _ _ Hswf H5). 
+    destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
+    (* 
+     * E_Let 情况分析：
+     * 1. e₁ 在 (s, Γ) 中求值为 v₁，产生新环境 (Γ1, Θ1)
+     * 2. e₂ 在 (s[x↦ℓ], Γ[x↦τ1]) 中求值为 v₂
+     * 3. 需要证明 v₂ 在 (Γ1, Θ1) 中有类型 τ2
+     * 
+     * 关键步骤：
+     * - 从 Hv1 得到 value_has_runtime_type v1 τ1
+     * - 使用 stack_well_typed_extend 得到扩展栈的良好性
+     * - 应用 IHHeval2
+     *)
+    assert (Hv1_rt : value_has_runtime_type v1 τ1).
+    { eapply has_type_value_implies_runtime_type; eauto. }
+    assert (Hswf_ext : stack_well_typed (stack_extend s x (RVLoc ℓ)) 
+                                        (te_extend Γ x τ1)).
+    { apply stack_well_typed_extend; auto. }
+    specialize (IHHeval2 _ _ Hswf_ext H6).
+    destruct IHHeval2 as [Γ2 [Θ2 [Hv2 [Hswf2 Hhwf2]]]].
+    exists Γ2, Θ2. split; [|split]; auto.
+    + apply has_type_value_extend_env with (Γ := Γ1); auto.
+    + apply stack_well_typed_mono with (x := x) (τ := τ1); auto.
     
   (* Case: E_Assign *)
   - inversion Hty; subst.
@@ -135,25 +296,31 @@ Proof.
     + auto.
     + auto.
     
-  (* Case: E_Tuple *)
+  (* Case: E_Tuple - 使用 preservation_eval_list *)
   - inversion Hty; subst.
-    admit. (* 列表归纳 *)
+    edestruct preservation_eval_list as [Γ' [Θ' [Hvs [Hswf' Hhwf']]]]; eauto.
+    exists Γ', Θ'. split; [|split]; auto.
+    constructor. auto.
     
   (* Case: E_If_True *)
   - inversion Hty; subst.
-    specialize (IHHeval1 _ _ Hswf H5). destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
-    specialize (IHHeval2 _ _ Hswf1 H6). destruct IHHeval2 as [Γ2 [Θ2 [Hv2 [Hswf2 Hhwf2]]]].
+    specialize (IHHeval1 _ _ Hswf H5). 
+    destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
+    specialize (IHHeval2 _ _ Hswf1 H6). 
+    destruct IHHeval2 as [Γ2 [Θ2 [Hv2 [Hswf2 Hhwf2]]]].
     exists Γ2, Θ2. split; [|split]; auto.
     
   (* Case: E_If_False *)
   - inversion Hty; subst.
-    specialize (IHHeval1 _ _ Hswf H5). destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
-    specialize (IHHeval2 _ _ Hswf1 H6). destruct IHHeval2 as [Γ2 [Θ2 [Hv2 [Hswf2 Hhwf2]]]].
+    specialize (IHHeval1 _ _ Hswf H5). 
+    destruct IHHeval1 as [Γ1 [Θ1 [Hv1 [Hswf1 Hhwf1]]]].
+    specialize (IHHeval2 _ _ Hswf1 H6). 
+    destruct IHHeval2 as [Γ2 [Θ2 [Hv2 [Hswf2 Hhwf2]]]].
     exists Γ2, Θ2. split; [|split]; auto.
 Admitted.
 
 (* ==========================================================================
- * 扩展定理
+ * 自由变量保持引理
  * ========================================================================== *)
 
 Lemma eval_preserves_fv :
@@ -163,8 +330,31 @@ Lemma eval_preserves_fv :
       In x (expr_vars e) ->
       exists v', stack_lookup s x = Some v'.
 Proof.
-  admit. (* 对 eval 进行归纳 *)
+  intros s h e v h' Heval.
+  induction Heval; intros x Hx; simpl in Hx;
+  try (destruct Hx as [Hx | Hx]; try discriminate; eauto);
+  try eauto.
+  - (* E_Seq *)
+    apply in_app_or in Hx. destruct Hx; auto.
+  - (* E_Let *)
+    apply in_app_or in Hx. destruct Hx; auto.
+    admit. (* filter *)
+  - (* E_Assign *)
+    apply in_app_or in Hx. destruct Hx; auto.
+    admit. (* place_vars *)
+  - (* E_Tuple *)
+    admit. (* flat_map expr_vars *)
+  - (* E_If_True *)
+    apply in_app_or in Hx. destruct Hx; auto.
+    apply in_app_or in H. destruct H; auto.
+  - (* E_If_False *)
+    apply in_app_or in Hx. destruct Hx; auto.
+    apply in_app_or in H. destruct H; auto.
 Admitted.
+
+(* ==========================================================================
+ * 无类型错误推论
+ * ========================================================================== *)
 
 Corollary no_type_errors :
   forall Δ Γ Θ s h e τ,
@@ -172,7 +362,9 @@ Corollary no_type_errors :
     stack_well_typed s Γ ->
     ~ (exists s' h' msg, eval s h e RVUnit h').
 Proof.
-  admit. (* 假设求值不会返回错误 *)
+  intros Δ Γ Θ s h e τ Hty Hswf [s' [h' [msg Heval]]].
+  (* 类型良好的表达式不会求值为错误 *)
+  admit.
 Admitted.
 
 (* ==========================================================================
@@ -188,8 +380,61 @@ Theorem preservation_small_step :
       stack_well_typed s' Γ' /\
       heap_well_typed h' Θ'.
 Proof.
-  admit. (* 对 step 进行归纳 *)
+  intros s h e s' h' e' Δ Γ Θ τ Hty Hstep.
+  generalize dependent Γ.
+  generalize dependent Θ.
+  induction Hstep; intros Θ Γ Hty.
+  
+  (* Case: S_Var *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split]; auto.
+    + apply T_Value. constructor.
+    + auto.
+    + auto.
+    
+  (* Case: S_Seq *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split]; auto.
+    
+  (* Case: S_Let *)
+  - inversion Hty; subst.
+    exists (te_extend Γ x τ), Θ. split; [|split].
+    + auto.
+    + apply stack_well_typed_extend; auto.
+      admit. (* value_has_runtime_type v τ *)
+    + auto.
+    
+  (* Case: S_Assign *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split]; auto.
+    + apply T_Value. constructor.
+    + auto.
+    + auto.
+    
+  (* Case: S_Deref *)
+  - inversion Hty; subst.
+    inversion H3; subst.
+    exists Γ, Θ. split; [|split]; auto.
+    + apply T_Value.
+      admit. (* 从堆类型推导值类型 *)
+    + auto.
+    + auto.
+    
+  (* Case: S_If_True *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split]; auto.
+    
+  (* Case: S_If_False *)
+  - inversion Hty; subst.
+    exists Γ, Θ. split; [|split]; auto.
+    
+  (* Case: S_Ctx *)
+  - admit. (* 求值上下文 *)
 Admitted.
+
+(* ==========================================================================
+ * 多步归约的类型保持
+ * ========================================================================== *)
 
 Theorem preservation_star_step :
   forall s h e h' e' Δ Γ Θ τ,
@@ -200,11 +445,24 @@ Theorem preservation_star_step :
       stack_well_typed (cfg_stack (mk_config s h e')) Γ' /\
       heap_well_typed h' Θ'.
 Proof.
-  admit. (* 对 star_step 进行归纳 *)
-Admitted.
+  intros s h e h' e' Δ Γ Θ τ Hty Hstar.
+  generalize dependent Γ.
+  generalize dependent Θ.
+  induction Hstar; intros Θ Γ Hty.
+  - (* Star_Refl *)
+    exists Γ, Θ. split; [|split]; auto.
+    + simpl. auto.
+    + auto.
+  - (* Star_Trans *)
+    apply preservation_small_step with (Θ := Θ) (Γ := Γ) in H; auto.
+    destruct H as [Γ' [Θ' [Hty' [Hswf' Hhwf']]]].
+    specialize (IHHstar Θ' Γ' Hty').
+    destruct IHHstar as [Γ'' [Θ'' [Hty'' [Hswf'' Hhwf'']]]].
+    exists Γ'', Θ''. split; [|split]; auto.
+Qed.
 
 (* ==========================================================================
- * 辅助引理
+ * 类型环境扩展保持良构性
  * ========================================================================== *)
 
 Lemma te_extend_preserves_wf :
@@ -220,11 +478,26 @@ Proof.
   - apply H. auto.
 Qed.
 
+(* ==========================================================================
+ * 子类型保持值类型
+ * ========================================================================== *)
+
 Lemma subtype_preserves_value_type :
   forall Δ τ₁ τ₂ v,
     τ₁ <: τ₂ ->
     value_has_runtime_type v τ₁ ->
     value_has_runtime_type v τ₂.
 Proof.
-  admit. (* 对子类型关系进行归纳 *)
-Admitted.
+  intros Δ τ₁ τ₂ v Hsub Hv.
+  generalize dependent v.
+  induction Hsub; intros v Hv; simpl in Hv; auto.
+  - (* Sub_Ref *)
+    simpl. auto.
+  - (* Sub_Box *)
+    simpl in Hv. auto.
+  - (* Sub_Tuple *)
+    simpl in Hv. simpl.
+    induction H; simpl in Hv; constructor.
+    + inversion Hv. auto.
+    + inversion Hv. auto.
+Qed.

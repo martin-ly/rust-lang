@@ -322,11 +322,14 @@ preservation (主定理)
 
 ### 高优先级 (关键路径)
 
-- [ ] `linearizable_acyclic` - 无环性证明
-- [ ] `borrow_checking_termination` - 终止性主证明
-- [ ] `preservation` - 类型保持主证明
-- [ ] `progress` - 进展主证明
-- [ ] `type_safety` - 类型安全组合
+- [x] **统一理论框架** - UNIFIED_THEORETICAL_FRAMEWORK.md ✅ (已完成)
+- [x] **语义等价性证明** - semantics-equivalence-proof.md ✅ (已完成)
+- [x] **类型-所有权统一理论** - type-ownership-unified-theory.md ✅ (已完成)
+- [ ] `linearizable_acyclic` - 无环性证明 (Coq admit 待完成)
+- [ ] `borrow_checking_termination` - 终止性主证明 (Coq admit 待完成)
+- [ ] `preservation` - 类型保持主证明 (Coq admit 待完成)
+- [ ] `progress` - 进展主证明 (Coq admit 待完成)
+- [ ] `type_safety` - 类型安全组合 (Coq admit 待完成)
 
 ### 中优先级 (连接引理)
 

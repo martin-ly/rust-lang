@@ -210,6 +210,92 @@ Proof.
   - apply type_implies_no_dangling_pointers. eauto.
 Qed.
 
+(* ==========================================================================
+ * 核心定理：类型安全性蕴含内存安全性
+ * ========================================================================== *)
+
+(* 辅助引理：堆扩展保持原有位置的查找 *)
+Lemma heap_lookup_extend_neq :
+  forall h ℓ1 ℓ2 v, ℓ1 <> ℓ2 -> 
+    heap_lookup (heap_extend h ℓ1 v) ℓ2 = heap_lookup h ℓ2.
+Proof.
+  intros. unfold heap_extend. simpl.
+  destruct (Nat.eqb ℓ2 ℓ1) eqn:Heq.
+  - apply Nat.eqb_eq in Heq. exfalso. auto.
+  - reflexivity.
+Qed.
+
+(* 辅助引理：堆更新不影响其他位置 *)
+Lemma heap_lookup_update_neq :
+  forall h ℓ1 ℓ2 v, ℓ1 <> ℓ2 -> 
+    heap_lookup (heap_update h ℓ1 v) ℓ2 = heap_lookup h ℓ2.
+Proof.
+  intros h. induction h as [|[ℓ' v'] h' IH]; intros ℓ1 ℓ2 v Hneq; simpl.
+  - reflexivity.
+  - destruct (Nat.eqb ℓ1 ℓ') eqn:Heq.
+    + destruct (Nat.eqb ℓ2 ℓ') eqn:Heq2.
+      * apply Nat.eqb_eq in Heq2. apply Nat.eqb_eq in Heq. subst. exfalso. auto.
+      * reflexivity.
+    + destruct (Nat.eqb ℓ2 ℓ') eqn:Heq2.
+      * reflexivity.
+      * apply IH. auto.
+Qed.
+
+(* 辅助引理：fresh_loc 返回的位置大于所有堆中的位置 *)
+Lemma fresh_loc_greater_than_all :
+  forall h ℓ v, In (ℓ, v) h -> ℓ < fresh_loc h.
+Proof.
+  intros h. unfold fresh_loc.
+  induction h as [|[ℓ' v'] h' IH]; intros ℓ v Hin; simpl in *.
+  - contradiction.
+  - destruct Hin as [Heq | Hin].
+    + inversion Heq. subst. simpl. apply le_n_S. apply le_max_l.
+    + apply IH in Hin. simpl. apply le_n_S. apply le_trans with (m := list_max (map fst h')).
+      * apply Hin.
+      * apply le_max_r.
+Qed.
+
+(* 辅助引理：fresh_loc 不在堆中 *)
+Lemma fresh_loc_not_in_heap :
+  forall h, heap_lookup h (fresh_loc h) = None.
+Proof.
+  intros h. induction h as [|[ℓ v] h' IH]; simpl.
+  - reflexivity.
+  - destruct (Nat.eqb (1 + list_max (map fst h')) ℓ) eqn:Heq.
+    + apply Nat.eqb_eq in Heq.
+      exfalso.
+      assert (ℓ < 1 + list_max (map fst h')).
+      { apply fresh_loc_greater_than_all with (v := v). simpl. auto. }
+      omega.
+    + apply IH.
+Qed.
+
+(* 辅助引理：eval_place 保证位置有效性 *)
+Lemma eval_place_validity :
+  forall s h p ℓ,
+    eval_place s h p ℓ ->
+    heap_lookup h ℓ <> None.
+Proof.
+  (* 这是一个基本假设：eval_place 只在有效位置上成功 *)
+  admit. (* 这需要更详细的语义分析 *)
+Admitted.
+
+(* 辅助引理：eval_list 保持无无效访问的性质 *)
+Lemma eval_list_no_invalid_access :
+  forall s h es vs h',
+    eval_list s h es vs h' ->
+    forall ℓ, heap_lookup h ℓ = None -> heap_lookup h' ℓ = None.
+Proof.
+  intros s h es vs h' Helist.
+  induction Helist; intros ℓ Hnone; simpl; auto.
+  - (* EL_Nil *)
+    auto.
+  - (* EL_Cons *)
+    (* 对 e 和 es 分别应用性质 *)
+    admit. (* 这需要 eval 的归纳假设 *)
+Admitted.
+
+(* 核心引理：类型蕴含无 use-after-free *)
 Lemma type_implies_no_use_after_free :
   forall e, 
     (exists Δ Γ Θ τ, has_type Δ Γ Θ e τ) ->
@@ -217,11 +303,74 @@ Lemma type_implies_no_use_after_free :
       heap_lookup h ℓ = None ->
       ~ exists s' h' v, eval s h e v h' /\ accesses_loc h' ℓ).
 Proof.
-  intros e [Δ [Γ [Θ [τ Htype]]]] s h ℓ Hnone [s' [h' [v [Heval Haccess]]]].
+  intros e Htyped s h ℓ Hnone Hex.
+  destruct Hex as [s' [h' [v [Heval Haccess]]]].
   unfold accesses_loc in Haccess.
   destruct Haccess as [v' Hlookup].
-  (* 类型系统保证不会访问无效位置 *)
-  admit. (* 需要更复杂的类型系统连接 *)
+  
+  (* 对求值进行归纳 *)
+  exfalso.
+  generalize dependent ℓ.
+  generalize dependent v'.
+  generalize dependent Hnone.
+  induction Heval; intros Hnone v' Hlookup;
+    try (simpl in Hlookup; discriminate; fail).
+  
+  - (* E_Deref: 解引用 *)
+    apply (IHHeval Hnone v' Hlookup).
+  
+  - (* E_Box: 分配新位置 *)
+    destruct (Nat.eq_dec ℓ (fresh_loc h')) as [Heq | Hneq].
+    + (* ℓ = fresh_loc h' *)
+      subst ℓ.
+      exfalso.
+      apply (IHHeval (fresh_loc_not_in_heap h')).
+      unfold heap_extend. simpl.
+      destruct (Nat.eqb (fresh_loc h') (fresh_loc h')) eqn:Heq2;
+        try congruence.
+    + (* ℓ ≠ fresh_loc h' *)
+      rewrite heap_lookup_extend_neq in Hlookup; auto.
+      apply (IHHeval Hnone v' Hlookup).
+  
+  - (* E_Seq: 序列 *)
+    apply (IHHeval2 Hnone v' Hlookup).
+  
+  - (* E_Let: let 绑定 *)
+    simpl in Hlookup.
+    destruct (Nat.eq_dec ℓ (fresh_loc h')) as [Heq | Hneq].
+    + (* ℓ 是新分配的位置 *)
+      subst ℓ.
+      exfalso.
+      apply (IHHeval2 (fresh_loc_not_in_heap h')).
+      unfold heap_extend. simpl.
+      destruct (Nat.eqb (fresh_loc h') (fresh_loc h')) eqn:Heq2;
+        try congruence.
+    + (* ℓ 不是新位置 *)
+      rewrite heap_lookup_extend_neq in Hlookup; auto.
+      apply (IHHeval2 Hnone v' Hlookup).
+  
+  - (* E_Assign: 赋值 *)
+    simpl in Hlookup.
+    destruct (Nat.eq_dec ℓ ℓ0) as [Heq | Hneq].
+    + (* ℓ = ℓ0 *)
+      subst ℓ.
+      assert (heap_lookup h ℓ0 <> None).
+      { apply eval_place_validity. auto. }
+      congruence.
+    + (* ℓ ≠ ℓ0 *)
+      rewrite heap_lookup_update_neq in Hlookup; auto.
+      apply (IHHeval2 Hnone v' Hlookup).
+  
+  - (* E_Tuple: 元组 *)
+    (* 使用 eval_list 的引理 *)
+    exfalso.
+    apply (IHHeval Hnone v' Hlookup).
+  
+  - (* E_If_True *)
+    apply (IHHeval2 Hnone v' Hlookup).
+  
+  - (* E_If_False *)
+    apply (IHHeval2 Hnone v' Hlookup).
 Admitted.
 
 Lemma type_implies_no_double_free :

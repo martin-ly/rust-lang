@@ -158,11 +158,15 @@
 
 ## 1. Introduction and Overview
 
-The Rust borrowing system represents one of the most significant innovations in programming language design. While ownership establishes the foundation for memory safety without garbage collection, borrowing provides the mechanism by which multiple parts of a program can safely access data without transferring ownership. This chapter provides a comprehensive, formal treatment of Rust's borrowing semantics.
+The Rust borrowing system represents one of the most significant innovations in programming language design.
+While ownership establishes the foundation for memory safety without garbage collection,
+borrowing provides the mechanism by which multiple parts of a program can safely access data without transferring ownership.
+This chapter provides a comprehensive, formal treatment of Rust's borrowing semantics.
 
 ### 1.1 The Fundamental Insight
 
-The core insight of Rust's borrowing system is that memory safety violations arise from **aliasing combined with mutation**. If we can ensure that:
+The core insight of Rust's borrowing system is that memory safety violations arise from **aliasing combined with mutation**.
+If we can ensure that:
 
 1. Data is either aliased OR mutated, but never both simultaneously
 2. All references are always valid (point to live data)
@@ -203,7 +207,7 @@ We begin with a formal operational semantics for Rust's borrowing system. Our pr
 
 #### 2.1.1 Syntax
 
-```
+```text
 Types:
   T, U ::= i32 | bool | () | Box<T> | &amp;'a T | &amp;'a mut T | [T; n] | Vec<T>
          | struct { fields } | enum { variants } | fn(T1, ..., Tn) -> U
@@ -226,7 +230,7 @@ Program Points:
 
 #### 2.1.2 Contexts
 
-```
+```text
 Γ ::= ∅ | Γ, x: T                 (typing context)
 Σ ::= ∅ | Σ, x ↦ v                (value store)
 Λ ::= ∅ | Λ, 'a                   (lifetime context)
@@ -239,13 +243,13 @@ where `kind ∈ {shared, mut}`
 
 The fundamental judgment for borrowing is:
 
-```
+```text
 Γ ⊢ e : T    (e has type T in context Γ)
 ```
 
 #### 2.2.1 Immutable Borrow Rule
 
-```
+```text
       Γ ⊢ x: T
 --------------------------- (borrow-ref)
   Γ ⊢ &x: &'a T
@@ -256,11 +260,12 @@ Conditions:
   3. No conflicting mutable borrows of x are active
 ```
 
-**Explanation**: The immutable borrow rule states that if `x` has type `T` in context Γ, then taking a shared reference to `x` produces a value of type `&'a T`. The lifetime `'a` represents the scope during which this reference is valid.
+**Explanation**: The immutable borrow rule states that if `x` has type `T` in context Γ, then taking a shared reference to `x` produces a value of type `&'a T`.
+The lifetime `'a` represents the scope during which this reference is valid.
 
 #### 2.2.2 Mutable Borrow Rule
 
-```
+```text
         Γ ⊢ x: T
 ----------------------------- (borrow-mut)
   Γ ⊢ &mut x: &'a mut T
@@ -276,7 +281,7 @@ Conditions:
 
 #### 2.2.3 Dereference Rules
 
-```
+```text
       Γ ⊢ e: &'a T
 ------------------------- (deref-shared)
       Γ ⊢ *e: T
@@ -294,7 +299,7 @@ Conditions:
 
 #### 2.3.1 Lifetime Quantification
 
-```
+```text
 ∀'a. 'a: lifetime → &'a T is valid for 'a
 ```
 
@@ -302,7 +307,7 @@ This states that for any lifetime `'a`, a reference `&'a T` is valid throughout 
 
 #### 2.3.2 Lifetime Constraints
 
-```
+```text
 'a: 'b  (read as: 'a outlives 'b)
 
 Meaning: The lifetime 'a encompasses at least all program points in 'b
@@ -311,7 +316,7 @@ Meaning: The lifetime 'a encompasses at least all program points in 'b
 
 #### 2.3.3 Lifetime in Function Signatures
 
-```
+```text
 fn foo<'a, 'b>(x: &'a T, y: &'b U) -> &'a V where 'a: 'b
 
 Γ, 'a: lifetime, 'b: lifetime, 'a: 'b ⊢
@@ -324,7 +329,7 @@ fn foo<'a, 'b>(x: &'a T, y: &'b U) -> &'a V where 'a: 'b
 
 We define the transition relation `⟨Σ, e⟩ → ⟨Σ', e'⟩`:
 
-```
+```text
                       x ↦ v ∈ Σ
 -------------------------------------------------- (var)
            ⟨Σ, x⟩ → ⟨Σ, v⟩
@@ -346,7 +351,7 @@ We define the transition relation `⟨Σ, e⟩ → ⟨Σ', e'⟩`:
 
 The memory model tracks:
 
-```
+```text
 Memory M ::= Loc → Value ∪ ⊥
 Ownership O ::= Path → {owned, borrowed(shared, n), borrowed(mut), moved}
 ```
@@ -355,7 +360,7 @@ Ownership O ::= Path → {owned, borrowed(shared, n), borrowed(mut), moved}
 
 #### 2.5.1 Subtyping with Lifetimes
 
-```
+```text
 'a: 'b
 ------------------------ (sub-ref)
 &'a T <: &'b T
@@ -370,7 +375,7 @@ Ownership O ::= Path → {owned, borrowed(shared, n), borrowed(mut), moved}
 
 #### 2.5.2 Variance Rules
 
-```
+```text
 Type                Variance in 'a        Variance in T
 ---------------------------------------------------------
 &'a T               Covariant             Covariant
@@ -398,7 +403,7 @@ This section formalizes the core theorems that govern Rust's borrowing behavior.
 
 #### 3.1.1 Formal Statement
 
-```
+```text
 ∀p ∈ ProgramPoints. ∀v ∈ Values.
   let B_v = {b ∈ B | b references v} in
   (∀b ∈ B_v. b.kind = shared) ∨
@@ -447,7 +452,7 @@ This theorem ensures:
 
 **Statement**: Borrowing creates a view (reference), not a transfer of ownership:
 
-```
+```text
 owns(x, T) ⊢ &x: &T ⊸ owns(x, T)
 ```
 
@@ -475,7 +480,7 @@ The key insight is that ownership is temporarily restricted, not transferred. Th
 
 #### 3.2.3 Contrast with Move Semantics
 
-```
+```text
 // Move: ownership transfers permanently
 let x = Box::new(5);
 let y = x;          // x is moved, cannot use x again
@@ -489,7 +494,7 @@ let y = &x;         // x is borrowed, can use x after y drops
 
 **Statement**: `&mut T` guarantees unique access:
 
-```
+```text
 &mut x ∧ &mut x ⊢ False
 ```
 
@@ -497,7 +502,7 @@ let y = &x;         // x is borrowed, can use x after y drops
 
 At any program point:
 
-```
+```text
 ¬∃v. ∃r1, r2. r1 ≠ r2 ∧ r1: &mut v ∧ r2: &mut v
 ```
 
@@ -523,7 +528,7 @@ All cases lead to contradiction or require that the borrows are not simultaneous
 
 **Statement**: All borrows are valid for their entire lifetime:
 
-```
+```text
 Γ ⊢ &x: &'a T ⟹ alive(x) throughout 'a
 ```
 
@@ -531,7 +536,7 @@ All cases lead to contradiction or require that the borrows are not simultaneous
 
 For any borrow `r = &x` with lifetime `'a`:
 
-```
+```text
 ∀p ∈ 'a. alive_at(x, p)
 ```
 
@@ -553,7 +558,7 @@ By construction, `x` must outlive `'a`. ∎
 
 #### 3.5.1 Formal Statement
 
-```
+```text
 ⊢ e: T ⟹ ¬∃r ∈ references(e). dangling(r)
 ```
 
@@ -583,13 +588,13 @@ This section formalizes how Rust analyzes and checks lifetimes.
 
 A lifetime `'a` is a set of program points:
 
-```
+```text
 'a = {p₁, p₂, ..., pₙ} where each pᵢ is a program point
 ```
 
 #### 4.1.2 Program Points
 
-```
+```text
 p ::=
   | entry(f)           -- Entry to function f
   | exit(f)            -- Exit from function f
@@ -604,7 +609,7 @@ p ::=
 
 For a variable `x` declared at point `def(x)`:
 
-```
+```text
 lifetime(x) = {p | p is between def(x) and last_use(x)} ∪ {drop(x)}
 ```
 
@@ -612,25 +617,25 @@ lifetime(x) = {p | p is between def(x) and last_use(x)} ∪ {drop(x)}
 
 #### 4.2.1 Definition
 
-```
+```text
 'a ⊆ 'b means 'a outlives 'b (equivalently: 'b lives within 'a)
 ```
 
 #### 4.2.2 Formal Definition
 
-```
+```text
 'a: 'b ⟺ 'b ⊆ 'a
 ```
 
 As sets:
 
-```
+```text
 'a: 'b ⟺ ∀p ∈ 'b. p ∈ 'a
 ```
 
 #### 4.2.3 Visual Representation
 
-```
+```text
 Program execution: →→→→→→→→→→→→→→→→→
 'a:              [===========]
 'b:                  [====]
@@ -644,7 +649,7 @@ Program execution: →→→→→→→→→→→→→→→→→
 
 Given a program, we generate constraints:
 
-```
+```text
 // From borrow creation
 &'a x  ⟹  lifetime(x): 'a
 
@@ -657,7 +662,7 @@ fn foo<'a>() -> &'a T  ⟹  'a: 'output_lifetime
 
 #### 4.3.2 Constraint Graph
 
-```
+```text
 'a: 'b  becomes edge: 'b → 'a
 
 Example:
@@ -708,7 +713,7 @@ Rust allows eliding lifetimes in common patterns. Here is the formal desugaring:
 
 **Rule 1: Single input lifetime**
 
-```
+```text
 // Elided
 fn foo(x: &T) -> &U
 
@@ -718,7 +723,7 @@ fn foo<'a>(x: &'a T) -> &'a U
 
 **Rule 2: Multiple input lifetimes, one is &self or &mut self**
 
-```
+```text
 // Elided
 impl Bar {
     fn foo(&self, x: &T) -> &U
@@ -732,7 +737,7 @@ impl Bar {
 
 **Rule 3: Multiple input lifetimes, no method receiver**
 
-```
+```text
 // Elided - ERROR, cannot elide
 fn foo(x: &T, y: &U) -> &V
 
@@ -742,7 +747,7 @@ fn foo<'a, 'b, 'c>(x: &'a T, y: &'b U) -> &'c V
 
 #### 4.4.2 Formal Elision Function
 
-```
+```text
 elide(fn) = match fn.inputs {
     [] => fn,
     [(&'a T)] => substitute(fn, 'a, fresh())
@@ -758,7 +763,7 @@ elide(fn) = match fn.inputs {
 
 #### 4.5.1 Covariance
 
-```
+```text
 'a: 'b
 ------------------------
 &'a T <: &'b T
@@ -768,7 +773,7 @@ Meaning: A longer-lived reference can be used where a shorter-lived one is expec
 
 #### 4.5.2 Contravariance
 
-```
+```text
 'a: 'b
 ------------------------
 fn(&'b T) <: fn(&'a T)
@@ -778,7 +783,7 @@ Meaning: A function accepting shorter-lived references can accept longer-lived o
 
 #### 4.5.3 Invariance
 
-```
+```text
 T = U
 ------------------------
 &'a mut T = &'a mut U
@@ -812,7 +817,7 @@ fn main() {
 
 **Error Message**:
 
-```
+```text
 error[E0502]: cannot borrow `data` as mutable because it is also borrowed as immutable
  --> src/main.rs:6:13
   |
@@ -862,7 +867,7 @@ fn main() {
 
 **Error Message**:
 
-```
+```text
 error[E0499]: cannot borrow `data` as mutable more than once at a time
  --> src/main.rs:5:13
   |
@@ -908,7 +913,7 @@ fn get_reference() -> &i32 {
 
 **Error Message**:
 
-```
+```text
 error[E0106]: missing lifetime specifier
  --> src/main.rs:1:24
   |
@@ -956,7 +961,7 @@ fn get_config_string() -> &str {
 
 **Error Message**:
 
-```
+```text
 error[E0106]: missing lifetime specifier
  --> src/main.rs:6:28
   |
@@ -1004,7 +1009,7 @@ impl Parser {
 
 **Error Message**:
 
-```
+```text
 error[E0106]: missing lifetime specifier
  --> src/main.rs:3:14
   |
@@ -1064,7 +1069,7 @@ fn misuse() {
 
 **Error Message**:
 
-```
+```text
 error[E0597]: `s` does not live long enough
  --> src/main.rs:12:32
   |
@@ -1151,7 +1156,7 @@ impl<'a> Container for Wrapper<'a> {
 
 **Error Message**:
 
-```
+```text
 error[E0106]: missing lifetime specifier
  --> src/main.rs:10:17
   |
@@ -1252,7 +1257,7 @@ fn use_iter() {
 
 **Error Message**:
 
-```
+```text
 error[E0597]: `data` does not live long enough
  --> src/main.rs:9:28
   |
@@ -1302,7 +1307,7 @@ async fn caller() {
 
 **Error Message**:
 
-```
+```text
 error[E0597]: `local` does not live long enough
  --> src/main.rs:11:32
   |
@@ -1345,7 +1350,7 @@ fn main() {
 
 **Error Message**:
 
-```
+```text
 error[E0502]: cannot borrow `data` as mutable because it is also borrowed as immutable
  --> src/main.rs:6:13
   |
@@ -1397,7 +1402,7 @@ fn main() {
 
 **Error Message**:
 
-```
+```text
 error[E0502]: cannot borrow `data` as mutable because it is also borrowed as immutable
  --> src/main.rs:7:9
   |
@@ -1445,7 +1450,7 @@ fn main() {
 
 **Error Message**:
 
-```
+```text
 error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
  --> src/main.rs:5:5
   |
@@ -1495,7 +1500,7 @@ fn use_closure() {
 
 **Error Message**:
 
-```
+```text
 error[E0597]: `local` does not live long enough
  --> src/main.rs:10:32
   |
@@ -1551,7 +1556,7 @@ NLL uses dataflow analysis to determine when borrows actually end.
 
 #### 6.2.1 Core Algorithm
 
-```
+```text
 1. Build Control Flow Graph (CFG)
 2. Identify all borrow expressions
 3. Compute liveness for each borrow
@@ -1707,7 +1712,7 @@ fn two_phase_example() {
 
 #### 6.4.1 Formalization
 
-```
+```text
 Two-phase borrow phases:
 1. RESERVE: Borrow is created but not yet active
 2. ACTIVE: Borrow is in use
@@ -1746,14 +1751,14 @@ Polonius represents the next generation of Rust's borrow checker, using a fundam
 
 #### 7.1.1 NLL Approach (Scopes)
 
-```
+```text
 NLL: Track where borrows are active (scope-based)
 'a = {p₁, p₂, p₃, ...}  // Set of program points
 ```
 
 #### 7.1.2 Polonius Approach (Origins)
 
-```
+```text
 Polonius: Track where data flows (origin-based)
 origin('a) = {loan₁, loan₂, ...}  // Set of loans
 
@@ -1777,7 +1782,7 @@ let y = x;          // y has same origin as x: {L1}
 
 #### 7.2.2 Dataflow Equations
 
-```
+```text
 // Origin computation
 origin(x) = ⋃ {origin(y) | x is derived from y}
 
@@ -1925,7 +1930,7 @@ fn reborrow_example<T: DerefMut<Target=U>, U>(r: &mut T) -> &mut U {
 
 #### 8.1.2 Formal Semantics
 
-```
+```text
 Γ ⊢ r: &'a mut T    T: DerefMut<Target=U>
 ------------------------------------------- (reborrow-mut)
       Γ ⊢ &mut *r: &'b mut U
@@ -1973,7 +1978,7 @@ fn split_slice(data: &mut [i32]) -> (&mut [i32], &mut [i32]) {
 
 #### 8.2.2 Formalization
 
-```
+```text
 Γ ⊢ data: &'a mut [T; N]    n < N
 ------------------------------------------------
 Γ ⊢ (&data[0..n], &data[n..N]): (&'b mut [T], &'c mut [T])
@@ -2037,7 +2042,7 @@ fn refcell_example(rc: &RefCell<Vec<i32>>) {
 
 #### 8.3.3 Formal Semantics of Interior Mutability
 
-```
+```text
 Interior mutability types are INVARIANT:
 - Cell<T>: invariant in T
 - RefCell<T>: invariant in T
@@ -2154,7 +2159,7 @@ impl SelfRef {
 
 #### 8.5.3 Formal Properties of Pin
 
-```
+```text
 Pin<P<T>> guarantees:
 1. If T: !Unpin, the pointee will not move
 2. P is a pointer type (Box, Rc, Arc, &mut)
@@ -2205,7 +2210,7 @@ impl<'a, K, V> Iterator for IterMut<'a, K, V> {
 
 #### 9.3.1 Lifetime Relationships
 
-```
+```text
 map: &'b mut HashMap<K, V>
   │
   │ iter_mut()

@@ -78,13 +78,13 @@
 
 Rust's ownership system is built on a fundamental principle known as the **aliasing XOR mutation** rule:
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
-│                    Rust's Core Ownership Rule                    │
+│                    Rust's Core Ownership Rule                   │
 ├─────────────────────────────────────────────────────────────────┤
 │  &T  : shared reference, immutable access                       │
 │  &mut T : unique reference, mutable access                      │
-│                                                                  │
+│                                                                 │
 │  Invariant: At any point in time, you can have EITHER:          │
 │  - Any number of shared references (&T)                         │
 │  - Exactly one mutable reference (&mut T)                       │

@@ -40,16 +40,15 @@ Proof.
   unfold Linearizable in Hlin.
   specialize (Hlin x τ Hlookup x Hin).
   destruct Hlin as [τ' [Hlookup' Hrank]].
+  (* te_lookup 是函数，所以 τ' = τ *)
   assert (Hτ : τ' = τ).
   { 
-    (* 从 Hlookup 和 Hlookup' 推导 *)
-    simpl in Hlookup, Hlookup'.
-    destruct (var_eq x x) eqn:Heq; try congruence.
-    inversion Hlookup. inversion Hlookup'. subst. reflexivity.
+    rewrite Hlookup in Hlookup'.
+    inversion Hlookup'. reflexivity.
   }
   subst τ'.
   apply gt_irrefl in Hrank. assumption.
-Admitted.
+Qed.
 
 (* 依赖关系严格递减 *)
 Lemma linearizable_rank_decreasing :
