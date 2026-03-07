@@ -31,6 +31,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 ```
 
 **Use Cases:**
+
 - Custom DSLs (Domain-Specific Languages)
 - Complex code generation
 - Compile-time computation
@@ -42,7 +43,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 #[proc_macro]
 pub fn sql(input: TokenStream) -> TokenStream {
     let query = input.to_string();
-    
+
     // Parse and validate SQL at compile time
     if let Err(e) = validate_sql(&query) {
         return syn::Error::new(
@@ -50,17 +51,18 @@ pub fn sql(input: TokenStream) -> TokenStream {
             format!("Invalid SQL: {}", e)
         ).to_compile_error().into();
     }
-    
+
     // Generate the query execution code
     let expanded = quote! {
         Query { sql: #query }
     };
-    
+
     expanded.into()
 }
 ```
 
 Usage:
+
 ```rust
 let users = sql!(SELECT * FROM users WHERE active = true);
 ```
@@ -83,10 +85,10 @@ use syn::{parse_macro_input, DeriveInput};
 #[proc_macro_derive(MyTrait)]
 pub fn derive_my_trait(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     let name = &input.ident;
     let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
-    
+
     let expanded = quote! {
         impl #impl_generics MyTrait for #name #ty_generics #where_clause {
             fn my_method(&self) {
@@ -94,12 +96,13 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     expanded.into()
 }
 ```
 
 **Use Cases:**
+
 - Serialization/Deserialization (serde)
 - Debug formatting
 - Comparison traits
@@ -124,20 +127,21 @@ use proc_macro::TokenStream;
 pub fn my_attribute(args: TokenStream, input: TokenStream) -> TokenStream {
     // Parse attribute arguments
     let args = parse_macro_input!(args as AttributeArgs);
-    
+
     // Parse the item being decorated
     let input = parse_macro_input!(input as ItemFn);
-    
+
     // Transform and return
     let expanded = quote! {
         // Modified or wrapped version of input
     };
-    
+
     expanded.into()
 }
 ```
 
 **Use Cases:**
+
 - Function instrumentation (logging, timing)
 - Route registration (web frameworks)
 - Test fixtures
@@ -180,6 +184,7 @@ pub fn my_attribute(args: TokenStream, input: TokenStream) -> TokenStream {
 
 **Theorem MACRO-ISOLATION** (Proc Macro Sandboxing):
 > Proc macros execute in a sandboxed environment with restricted capabilities. They cannot:
+>
 > - Access the filesystem arbitrarily
 > - Make network requests
 > - Execute arbitrary code on the host
@@ -290,7 +295,7 @@ fn analyze_stream(stream: TokenStream) {
                 println!("Identifier: {}", i);
             }
             TokenTree::Punct(p) => {
-                println!("Punctuation: {} (spacing: {:?})", 
+                println!("Punctuation: {} (spacing: {:?})",
                     p.as_char(), p.spacing());
             }
             TokenTree::Literal(l) => {
@@ -309,22 +314,22 @@ use std::str::FromStr;
 
 fn build_stream() -> TokenStream {
     let mut tokens = Vec::new();
-    
+
     // Add identifier
     tokens.push(TokenTree::Ident(
         Ident::new("struct", Span::call_site())
     ));
-    
+
     // Add identifier
     tokens.push(TokenTree::Ident(
         Ident::new("Point", Span::call_site())
     ));
-    
+
     // Create from string
     let from_string: TokenStream = "{ x: i32, y: i32 }".parse().unwrap();
-    
+
     tokens.extend(from_string);
-    
+
     tokens.into_iter().collect()
 }
 ```
@@ -343,11 +348,11 @@ use quote::quote;
 pub fn derive_builder(input: TokenStream) -> TokenStream {
     // Parse the input into DeriveInput
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     // Extract struct name
     let struct_name = &input.ident;
     let builder_name = format_ident!("{}Builder", struct_name);
-    
+
     // Analyze the data structure
     let fields = match &input.data {
         Data::Struct(data) => match &data.fields {
@@ -358,7 +363,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
         Data::Enum(_) => panic!("Enums not supported"),
         Data::Union(_) => panic!("Unions not supported"),
     };
-    
+
     // Generate builder methods for each field
     let builder_methods = fields.iter().map(|f| {
         let name = &f.ident;
@@ -370,22 +375,22 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
             }
         }
     });
-    
+
     // Generate the builder struct
     let expanded = quote! {
         pub struct #builder_name {
             #( #fields: Option<#field_types> ),*
         }
-        
+
         impl #builder_name {
             pub fn new() -> Self {
                 Self {
                     #( #field_names: None ),*
                 }
             }
-            
+
             #(#builder_methods)*
-            
+
             pub fn build(self) -> Result<#struct_name, String> {
                 Ok(#struct_name {
                     #( #field_names: self.#field_names.ok_or_else(
@@ -395,7 +400,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     expanded.into()
 }
 ```
@@ -408,14 +413,14 @@ use syn::{Attribute, Meta, NestedMeta, Lit, Expr};
 // Parse helper attributes
 fn parse_attributes(attrs: &[Attribute]) -> Result<Config, syn::Error> {
     let mut config = Config::default();
-    
+
     for attr in attrs {
         if !attr.path.is_ident("my_trait") {
             continue;
         }
-        
+
         let meta = attr.parse_meta()?;
-        
+
         match meta {
             Meta::List(list) => {
                 for nested in list.nested {
@@ -439,7 +444,7 @@ fn parse_attributes(attrs: &[Attribute]) -> Result<Config, syn::Error> {
             _ => {}
         }
     }
-    
+
     Ok(config)
 }
 ```
@@ -456,12 +461,12 @@ use quote::{quote, format_ident};
 fn generate_code() -> TokenStream {
     let name = format_ident!("MyStruct");
     let field_name = Ident::new("field", Span::call_site());
-    
+
     quote! {
         struct #name {
             #field_name: i32,
         }
-        
+
         impl #name {
             fn new() -> Self {
                 Self { #field_name: 0 }
@@ -561,13 +566,13 @@ use proc_macro2::Span;
 pub fn generate_accessor(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::Ident);
     let field_name = input.to_string();
-    
+
     // Generate a method name with hygiene
     let method_name = format_ident!("get_{}", field_name);
-    
+
     // Use call_site for the generated identifier
     let method_ident = Ident::new(&method_name.to_string(), Span::call_site());
-    
+
     quote! {
         pub fn #method_ident(&self) -> &str {
             &self.#input
@@ -588,7 +593,7 @@ use syn::spanned::Spanned;
 #[proc_macro_derive(MyTrait)]
 pub fn derive_my_trait(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::DeriveInput);
-    
+
     // Check for unsupported features
     match &input.data {
         syn::Data::Enum(e) => {
@@ -604,7 +609,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
         }
         _ => {}
     }
-    
+
     // ... rest of implementation
     quote! {}.into()
 }
@@ -635,9 +640,9 @@ pub fn declare_variable(_input: TokenStream) -> TokenStream {
 // User code
 fn main() {
     let temp = "hello";  // User-defined variable
-    
+
     my_macro::declare_variable! {};  // Declares another 'temp'
-    
+
     println!("{}", temp);  // Which 'temp'? Compiler error!
 }
 ```
@@ -665,7 +670,7 @@ pub fn with_logging(input: TokenStream) -> TokenStream {
     let func: syn::ItemFn = syn::parse(input).unwrap();
     let func_name = &func.sig.ident;
     let block = &func.block;
-    
+
     quote! {
         fn #func_name() {
             let start = std::time::Instant::now();  // Shadows user's 'start'
@@ -710,7 +715,7 @@ quote! {
 pub fn derive_default_builder(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::DeriveInput);
     let name = &input.ident;
-    
+
     quote! {
         impl #name {
             pub fn builder() -> Self {
@@ -752,7 +757,7 @@ use quote::quote;
 #[proc_macro]
 pub fn make_range(input: TokenStream) -> TokenStream {
     let expr: syn::Expr = syn::parse(input).unwrap();
-    
+
     // WRONG: Creates `0 .. 10` instead of `0..10`
     quote! {
         (0 .. #expr)  // Space after 0!
@@ -765,14 +770,14 @@ use proc_macro2::{Punct, Spacing};
 fn wrong_spacing() -> TokenStream {
     let mut tokens = Vec::new();
     tokens.push(TokenTree::Literal(Literal::i32_unsuffixed(0)));
-    
+
     // WRONG: Spacing::Alone creates space
     let dot1 = Punct::new('.', Spacing::Alone);
     let dot2 = Punct::new('.', Spacing::Alone);
-    
+
     tokens.push(TokenTree::Punct(dot1));
     tokens.push(TokenTree::Punct(dot2));
-    
+
     // Results in `0 . . 10` - syntax error!
     tokens.into_iter().collect()
 }
@@ -794,7 +799,7 @@ let dot2 = Punct::new('.', Spacing::Joint);
 #[proc_macro_derive(Validate)]
 pub fn derive_validate(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::DeriveInput);
-    
+
     // Wrong: Using call_site for all errors
     if !has_required_attr(&input) {
         return syn::Error::new(
@@ -802,7 +807,7 @@ pub fn derive_validate(input: TokenStream) -> TokenStream {
             "Missing required attribute"
         ).to_compile_error().into();
     }
-    
+
     quote! {}.into()
 }
 
@@ -835,7 +840,7 @@ if !has_required_attr(&input) {
 #[proc_macro]
 pub fn bad_assert(input: TokenStream) -> TokenStream {
     let expr: syn::Expr = syn::parse(input).unwrap();
-    
+
     quote! {
         if !(#expr) {
             panic!("Assertion failed");
@@ -845,7 +850,7 @@ pub fn bad_assert(input: TokenStream) -> TokenStream {
 
 // User code:
 bad_assert!(1 + 1 == 3);
-// Error points inside the macro-generated if block, 
+// Error points inside the macro-generated if block,
 // not to the user's assertion
 ```
 
@@ -875,7 +880,7 @@ quote! {
 #[proc_macro]
 pub fn recursive_macro(input: TokenStream) -> TokenStream {
     let depth: usize = input.to_string().parse().unwrap_or(0);
-    
+
     if depth == 0 {
         quote! { 42 }.into()
     } else {
@@ -883,7 +888,7 @@ pub fn recursive_macro(input: TokenStream) -> TokenStream {
         let inner = recursive_macro(
             (depth - 1).to_string().parse().unwrap()
         );
-        
+
         quote! {
             { #inner }
         }.into()
@@ -904,16 +909,16 @@ pub fn recursive_macro(input: TokenStream) -> TokenStream {
 #[proc_macro]
 pub fn limited_recursive(input: TokenStream) -> TokenStream {
     const MAX_DEPTH: usize = 10;
-    
+
     let depth: usize = input.to_string().parse().unwrap_or(0);
-    
+
     if depth > MAX_DEPTH {
         return syn::Error::new(
             Span::call_site(),
             format!("Recursion depth {} exceeds maximum {}", depth, MAX_DEPTH)
         ).to_compile_error().into();
     }
-    
+
     // ... rest of implementation
 }
 ```
@@ -931,11 +936,11 @@ pub fn infinite_loop(input: TokenStream) -> TokenStream {
         if should_break(&input) {
             break;
         }
-        
+
         // Process tokens...
         // But we forgot to update the state!
     }
-    
+
     input
 }
 ```
@@ -950,24 +955,24 @@ pub fn safe_loop(input: TokenStream) -> TokenStream {
     const MAX_ITERATIONS: usize = 1000;
     let mut iterations = 0;
     let mut current = input;
-    
+
     loop {
         iterations += 1;
-        
+
         if iterations > MAX_ITERATIONS {
             return syn::Error::new(
                 Span::call_site(),
                 "Macro expansion exceeded iteration limit"
             ).to_compile_error().into();
         }
-        
+
         if should_break(&current) {
             break;
         }
-        
+
         current = process_iteration(current);
     }
-    
+
     current
 }
 ```
@@ -981,11 +986,11 @@ pub fn double_use(input: TokenStream) -> TokenStream {
     // First use
     let parsed1: syn::Expr = syn::parse(input.clone())
         .expect("Failed to parse");
-    
+
     // Second use - fails because input was consumed
     let parsed2: syn::Expr = syn::parse(input)  // ERROR!
         .expect("Failed to parse");
-    
+
     quote! { (#parsed1, #parsed2) }.into()
 }
 ```
@@ -1000,11 +1005,11 @@ use proc_macro2::TokenStream as TokenStream2;
 #[proc_macro]
 pub fn double_use_fixed(input: TokenStream) -> TokenStream {
     let input2: TokenStream2 = input.into();
-    
+
     // Can clone now
     let parsed1: syn::Expr = syn::parse2(input2.clone())?;
     let parsed2: syn::Expr = syn::parse2(input2)?;
-    
+
     quote! { (#parsed1, #parsed2) }.into()
 }
 ```
@@ -1017,7 +1022,7 @@ pub fn double_use_fixed(input: TokenStream) -> TokenStream {
 pub fn bad_parse(input: TokenStream) -> TokenStream {
     // Unwrap gives generic error
     let expr: syn::Expr = syn::parse(input).unwrap();
-    
+
     quote! { #expr }.into()
 }
 
@@ -1053,7 +1058,7 @@ pub fn better_parse(input: TokenStream) -> TokenStream {
 pub fn measure_time(args: TokenStream, input: TokenStream) -> TokenStream {
     let func: syn::ItemFn = syn::parse(input).unwrap();
     let body = &func.block;
-    
+
     quote! {
         fn #func_name() {
             let start = std::time::Instant::now();
@@ -1088,7 +1093,7 @@ pub fn derive_serialize(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::DeriveInput);
     let name = &input.ident;
     let generics = &input.generics;
-    
+
     // WRONG: Doesn't preserve generics properly
     quote! {
         impl Serialize for #name {  // Missing generics!
@@ -1130,14 +1135,14 @@ quote! {
 #[proc_macro_derive(GetRef)]
 pub fn derive_get_ref(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::DeriveInput);
-    
+
     if let syn::Data::Struct(s) = &input.data {
         if let syn::Fields::Named(fields) = &s.fields {
             let first_field = fields.named.first().unwrap();
             let field_name = &first_field.ident;
             let field_ty = &first_field.ty;
             let struct_name = &input.ident;
-            
+
             // WRONG: Lifetime not declared
             quote! {
                 impl #struct_name {
@@ -1175,10 +1180,10 @@ pub fn derive_comparable(input: TokenStream) -> TokenStream {
     let name = &input.ident;
     let generics = &input.generics;
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
-    
+
     // WRONG: Using where_clause from generics without modification
     // but the generated code needs additional bounds
-    
+
     quote! {
         impl #impl_generics PartialOrd for #name #ty_generics #where_clause {
             fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
@@ -1222,7 +1227,7 @@ quote! {
 pub fn derive_print_size(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::DeriveInput);
     let name = &input.ident;
-    
+
     // WRONG: Doesn't account for const generics
     quote! {
         impl #name {
@@ -1264,7 +1269,7 @@ quote! {
 #[proc_macro_derive(Config, attributes(config))]
 pub fn derive_config(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::DeriveInput);
-    
+
     for attr in &input.attrs {
         // WRONG: This checks all attributes, not just config
         if let Ok(meta) = attr.parse_meta() {
@@ -1276,7 +1281,7 @@ pub fn derive_config(input: TokenStream) -> TokenStream {
             }
         }
     }
-    
+
     quote! {}.into()
 }
 ```
@@ -1290,7 +1295,7 @@ for attr in &input.attrs {
     if !attr.path.is_ident("config") {
         continue;  // Skip non-config attributes
     }
-    
+
     // Now safe to parse config-specific attributes
     let meta = attr.parse_meta()?;
     // ...
@@ -1304,17 +1309,17 @@ for attr in &input.attrs {
 #[proc_macro_derive(Builder)]
 pub fn derive_builder(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::DeriveInput);
-    
+
     if let syn::Data::Struct(data) = &input.data {
         for field in data.fields.iter() {
             // WRONG: Doesn't check for #[builder(skip)]
             let name = &field.ident;
             let ty = &field.ty;
-            
+
             // Generates builder method even for skipped fields
         }
     }
-    
+
     quote! {}.into()
 }
 ```
@@ -1326,7 +1331,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 ```rust
 for field in data.fields.iter() {
     let mut skip = false;
-    
+
     for attr in &field.attrs {
         if attr.path.is_ident("builder") {
             if let Ok(meta) = attr.parse_meta() {
@@ -1342,11 +1347,11 @@ for field in data.fields.iter() {
             }
         }
     }
-    
+
     if skip {
         continue;
     }
-    
+
     // Generate builder method only for non-skipped fields
 }
 ```
@@ -1358,9 +1363,9 @@ for field in data.fields.iter() {
 #[proc_macro]
 pub fn generate_massive(input: TokenStream) -> TokenStream {
     let count: usize = input.to_string().parse().unwrap_or(1000);
-    
+
     let mut items = Vec::new();
-    
+
     // Generate thousands of functions
     for i in 0..count {
         let func_name = format_ident!("func_{}", i);
@@ -1368,7 +1373,7 @@ pub fn generate_massive(input: TokenStream) -> TokenStream {
             fn #func_name() -> i32 { #i }
         });
     }
-    
+
     // This can exceed compiler limits
     quote! { #(#items)* }.into()
 }
@@ -1384,14 +1389,14 @@ const MAX_FUNCTIONS: usize = 100;
 #[proc_macro]
 pub fn generate_limited(input: TokenStream) -> TokenStream {
     let count: usize = input.to_string().parse().unwrap_or(10);
-    
+
     if count > MAX_FUNCTIONS {
         return syn::Error::new(
             Span::call_site(),
             format!("Cannot generate more than {} functions", MAX_FUNCTIONS)
         ).to_compile_error().into();
     }
-    
+
     // ... generate with limit
 }
 ```
@@ -1403,14 +1408,14 @@ pub fn generate_limited(input: TokenStream) -> TokenStream {
 #[proc_macro_derive(PublicAccessor)]
 pub fn derive_public_accessor(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::DeriveInput);
-    
+
     if let syn::Data::Struct(s) = &input.data {
         if let syn::Fields::Named(fields) = &s.fields {
             let first = fields.named.first().unwrap();
             let name = &first.ident;
             let ty = &first.ty;
             let struct_name = &input.ident;
-            
+
             // WRONG: Always generates public accessor
             quote! {
                 impl #struct_name {
@@ -1448,7 +1453,7 @@ quote! {
 pub fn derive_wrapper(input: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(input as syn::DeriveInput);
     let name = &input.ident;
-    
+
     // WRONG: Assumes Vec is in scope
     quote! {
         struct #name {
@@ -1482,6 +1487,7 @@ quote! {
 
 **Theorem DERIVE-COMPLETENESS**:
 > A complete derive macro implementation must handle:
+>
 > 1. Structs (named, tuple, unit)
 > 2. Enums (with variants and fields)
 > 3. Unions
@@ -1498,10 +1504,10 @@ use syn::{parse_macro_input, DeriveInput, Data, Fields, Generics, GenericParam};
 #[proc_macro_derive(CustomDebug, attributes(debug))]
 pub fn derive_custom_debug(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     let struct_name = &input.ident;
     let generics = &input.generics;
-    
+
     // Handle different data types
     let implementation = match &input.data {
         Data::Struct(data) => {
@@ -1517,7 +1523,7 @@ pub fn derive_custom_debug(input: TokenStream) -> TokenStream {
             ).to_compile_error().into();
         }
     };
-    
+
     implementation
 }
 ```
@@ -1540,7 +1546,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
 struct MyStruct {
     #[my_trait(ignore)]
     internal_field: i32,
-    
+
     #[my_trait(format = "{:?}")]
     display_field: String,
 }
@@ -1561,14 +1567,14 @@ struct FieldConfig {
 
 fn parse_field_attrs(attrs: &[Attribute]) -> Result<FieldConfig, syn::Error> {
     let mut config = FieldConfig::default();
-    
+
     for attr in attrs {
         if !attr.path.is_ident("my_trait") {
             continue;
         }
-        
+
         let meta = attr.parse_meta()?;
-        
+
         match meta {
             Meta::List(list) => {
                 for nested in list.nested {
@@ -1611,7 +1617,7 @@ fn parse_field_attrs(attrs: &[Attribute]) -> Result<FieldConfig, syn::Error> {
             _ => {}
         }
     }
-    
+
     Ok(config)
 }
 ```
@@ -1624,17 +1630,17 @@ Here's a complete, production-ready derive macro for a custom trait:
 use proc_macro::TokenStream;
 use quote::{quote, format_ident};
 use syn::{
-    parse_macro_input, DeriveInput, Data, Fields, GenericParam, 
+    parse_macro_input, DeriveInput, Data, Fields, GenericParam,
     Generics, Index, Ident, Type
 };
 
 #[proc_macro_derive(Reflect, attributes(reflect))]
 pub fn derive_reflect(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     let struct_name = &input.ident;
     let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
-    
+
     let implementation = match &input.data {
         Data::Struct(data) => {
             implement_reflect_struct(struct_name, &data.fields, &input.generics)
@@ -1649,7 +1655,7 @@ pub fn derive_reflect(input: TokenStream) -> TokenStream {
             ).to_compile_error().into();
         }
     };
-    
+
     implementation
 }
 
@@ -1659,14 +1665,14 @@ fn implement_reflect_struct(
     generics: &Generics
 ) -> TokenStream {
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
-    
+
     let field_info = match fields {
         Fields::Named(named) => {
             let infos = named.named.iter().map(|f| {
                 let field_name = f.ident.as_ref().unwrap();
                 let field_type = &f.ty;
                 let field_name_str = field_name.to_string();
-                
+
                 quote! {
                     FieldInfo {
                         name: #field_name_str,
@@ -1678,7 +1684,7 @@ fn implement_reflect_struct(
                     }
                 }
             });
-            
+
             quote! {
                 vec![#(#infos),*]
             }
@@ -1688,7 +1694,7 @@ fn implement_reflect_struct(
                 let field_type = &f.ty;
                 let index = Index::from(i);
                 let field_name_str = format!("{}", i);
-                
+
                 quote! {
                     FieldInfo {
                         name: #field_name_str,
@@ -1700,7 +1706,7 @@ fn implement_reflect_struct(
                     }
                 }
             });
-            
+
             quote! {
                 vec![#(#infos),*]
             }
@@ -1709,20 +1715,20 @@ fn implement_reflect_struct(
             quote! { vec![] }
         }
     };
-    
+
     let expanded = quote! {
         impl #impl_generics Reflect for #name #ty_generics #where_clause {
             fn type_name(&self) -> &'static str {
                 std::any::type_name::<Self>()
             }
-            
+
             fn fields(&self) -> Vec<FieldInfo> {
                 use reflect::FieldInfo;
                 #field_info
             }
         }
     };
-    
+
     expanded.into()
 }
 ```
@@ -1785,7 +1791,7 @@ use quote::{quote, format_ident};
 
 // Conditional quoting
 let debug_impl = if cfg!(feature = "debug") {
-    quote! { 
+    quote! {
         impl std::fmt::Debug for #name {
             fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
                 write!(f, "{}", self.type_name())
@@ -1849,6 +1855,7 @@ quote_spanned! {field_span=>
 
 **Theorem MACRO-TESTING** (Comprehensive Macro Testing):
 > Proc macros require three levels of testing:
+>
 > 1. Unit tests for parsing logic
 > 2. Integration tests for generated code correctness
 > 3. Compile-fail tests for error message validation
@@ -1871,9 +1878,9 @@ mod tests {
                 y: i32,
             }
         };
-        
+
         assert_eq!(input.ident.to_string(), "Point");
-        
+
         if let syn::Data::Struct(data) = input.data {
             assert_eq!(data.fields.len(), 2);
         } else {
@@ -1891,7 +1898,7 @@ mod tests {
                 }
             }
         };
-        
+
         let code = expanded.to_string();
         assert!(code.contains("impl MyStruct"));
         assert!(code.contains("fn new"));
@@ -1918,7 +1925,7 @@ fn test_builder_pattern() {
         .age(30)
         .build()
         .unwrap();
-    
+
     assert_eq!(user.name, "Alice");
     assert_eq!(user.age, 30);
 }
@@ -1928,7 +1935,7 @@ fn test_builder_missing_field() {
     let result = User::builder()
         .name("Bob".to_string())
         .build();
-    
+
     assert!(result.is_err());
 }
 ```
@@ -1948,10 +1955,10 @@ trybuild = { version = "1.0", features = ["diff"] }
 #[test]
 fn test_compile_failures() {
     let t = trybuild::TestCases::new();
-    
+
     // Tests that fail to compile
     t.compile_fail("tests/compile_fail/*.rs");
-    
+
     // Tests that should compile successfully
     t.pass("tests/pass/*.rs");
 }
@@ -2008,6 +2015,7 @@ struct Point {
 ```
 
 Generated snapshot:
+
 ```rust
 // tests/expand/basic.expanded.rs
 struct Point {
@@ -2024,17 +2032,17 @@ impl PointBuilder {
     fn new() -> Self {
         Self { x: None, y: None }
     }
-    
+
     fn x(mut self, value: i32) -> Self {
         self.x = Some(value);
         self
     }
-    
+
     fn y(mut self, value: i32) -> Self {
         self.y = Some(value);
         self
     }
-    
+
     fn build(self) -> Result<Point, String> {
         Ok(Point {
             x: self.x.ok_or("x not set")?,
@@ -2103,13 +2111,13 @@ use generate::generate_to_json;
 #[proc_macro_derive(ToJson, attributes(json))]
 pub fn derive_to_json(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as syn::DeriveInput);
-    
+
     // Parse container-level attributes
     let attrs = match ContainerAttributes::from_derive_input(&input) {
         Ok(attrs) => attrs,
         Err(e) => return e.to_compile_error().into(),
     };
-    
+
     // Generate the implementation
     match generate_to_json(&input, &attrs) {
         Ok(tokens) => tokens.into(),
@@ -2142,14 +2150,14 @@ pub struct FieldAttributes {
 impl ContainerAttributes {
     pub fn from_derive_input(input: &DeriveInput) -> syn::Result<Self> {
         let mut attrs = ContainerAttributes::default();
-        
+
         for attr in &input.attrs {
             if !attr.path.is_ident("json") {
                 continue;
             }
-            
+
             let meta = attr.parse_meta()?;
-            
+
             if let Meta::List(list) = meta {
                 for nested in &list.nested {
                     if let NestedMeta::Meta(Meta::NameValue(nv)) = nested {
@@ -2166,7 +2174,7 @@ impl ContainerAttributes {
                 }
             }
         }
-        
+
         Ok(attrs)
     }
 }
@@ -2174,14 +2182,14 @@ impl ContainerAttributes {
 impl FieldAttributes {
     pub fn from_field(field: &syn::Field) -> syn::Result<Self> {
         let mut attrs = FieldAttributes::default();
-        
+
         for attr in &field.attrs {
             if !attr.path.is_ident("json") {
                 continue;
             }
-            
+
             let meta = attr.parse_meta()?;
-            
+
             if let Meta::List(list) = meta {
                 for nested in &list.nested {
                     match nested {
@@ -2204,7 +2212,7 @@ impl FieldAttributes {
                 }
             }
         }
-        
+
         Ok(attrs)
     }
 }
@@ -2218,10 +2226,10 @@ pub fn get_field_name(
     if let Some(rename) = &attrs.rename {
         return rename.clone();
     }
-    
+
     // Then check container-level rename_all
     let base_name = field.ident.as_ref().unwrap().to_string();
-    
+
     if let Some(rule) = &container_attrs.rename_all {
         match rule.as_str() {
             "snake_case" => to_snake_case(&base_name),
@@ -2273,7 +2281,7 @@ pub fn generate_to_json(
 ) -> syn::Result<proc_macro2::TokenStream> {
     let name = &input.ident;
     let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
-    
+
     let body = match &input.data {
         Data::Struct(data) => {
             generate_struct_body(&data.fields, container_attrs)?
@@ -2288,7 +2296,7 @@ pub fn generate_to_json(
             ));
         }
     };
-    
+
     let expanded = quote! {
         impl #impl_generics ToJson for #name #ty_generics #where_clause {
             fn to_json(&self) -> String {
@@ -2296,7 +2304,7 @@ pub fn generate_to_json(
             }
         }
     };
-    
+
     Ok(expanded)
 }
 
@@ -2311,14 +2319,14 @@ fn generate_struct_body(
                     Ok(a) => a,
                     Err(e) => return Some(Err(e)),
                 };
-                
+
                 if attrs.skip {
                     return None;
                 }
-                
+
                 let field_name = f.ident.as_ref().unwrap();
                 let json_name = get_field_name(f, &attrs, container_attrs);
-                
+
                 Some(Ok(quote! {
                     entries.push(format!(
                         "\"{}\": {}",
@@ -2327,7 +2335,7 @@ fn generate_struct_body(
                     ));
                 }))
             }).collect::<Result<Vec<_>, _>>()?;
-            
+
             Ok(quote! {
                 let mut entries = Vec::new();
                 #(#field_entries)*
@@ -2341,7 +2349,7 @@ fn generate_struct_body(
                     self.#index.to_json()
                 }
             });
-            
+
             Ok(quote! {
                 format!("[{}]", vec![#(#field_entries),*].join(", "))
             })
@@ -2360,7 +2368,7 @@ fn generate_enum_body(
 ) -> syn::Result<proc_macro2::TokenStream> {
     let variant_arms = variants.iter().map(|v| {
         let variant_name = &v.ident;
-        
+
         match &v.fields {
             Fields::Unit => {
                 quote! {
@@ -2371,14 +2379,14 @@ fn generate_enum_body(
                 let field_names: Vec<_> = (0..unnamed.unnamed.len())
                     .map(|i| format_ident!("f{}", i))
                     .collect();
-                
+
                 let conversions = field_names.iter().map(|f| {
                     quote! { #f.to_json() }
                 });
-                
+
                 quote! {
                     Self::#variant_name(#(#field_names),*) => {
-                        format!("{{{{\"{}\": [{}]}}}}", 
+                        format!("{{{{\"{}\": [{}]}}}}",
                             stringify!(#variant_name),
                             vec![#(#conversions),*].join(", ")
                         )
@@ -2389,16 +2397,16 @@ fn generate_enum_body(
                 let field_names: Vec<_> = named.named.iter()
                     .map(|f| f.ident.as_ref().unwrap())
                     .collect();
-                
+
                 let conversions = field_names.iter().map(|f| {
                     quote! {
                         format!("\"{}\": {}", stringify!(#f), #f.to_json())
                     }
                 });
-                
+
                 quote! {
                     Self::#variant_name { #(#field_names),* } => {
-                        format!("{{{{\"{}\": {{{{}}}}}}}}}"", 
+                        format!("{{{{\"{}\": {{{{}}}}}}}}}"",
                             stringify!(#variant_name),
                             vec![#(#conversions),*].join(", ")
                         )
@@ -2407,7 +2415,7 @@ fn generate_enum_body(
             }
         }
     });
-    
+
     Ok(quote! {
         match self {
             #(#variant_arms),*
@@ -2453,7 +2461,7 @@ fn test_struct_with_rename() {
         internal_id: 12345,
         age: 30,
     };
-    
+
     let json = person.to_json();
     assert!(json.contains("\"firstName\": \"Alice\""));
     assert!(json.contains("\"lastName\": \"Smith\""));
@@ -2464,7 +2472,7 @@ fn test_struct_with_rename() {
 fn test_enum_variants() {
     let status = Status::Active;
     assert_eq!(status.to_json(), "\"Active\"");
-    
+
     let pending = Status::Pending("review".to_string());
     assert!(pending.to_json().contains("\"Pending\""));
 }
@@ -2540,14 +2548,14 @@ if !errors.is_empty() {
 // Use syn::Result for error propagation
 fn process_field(field: &syn::Field) -> syn::Result<TokenStream> {
     let attrs = FieldAttributes::from_field(field)?;
-    
+
     if attrs.skip && attrs.rename.is_some() {
         return Err(syn::Error::new(
             field.span(),
             "Cannot use skip with rename"
         ));
     }
-    
+
     // ...
 }
 
@@ -2599,6 +2607,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 **Theorem PROC-MACRO-COMPLETENESS**:
 > A complete understanding of Rust procedural macros encompasses:
+>
 > 1. The three macro types and their appropriate use cases
 > 2. TokenStream manipulation and the syn/quote ecosystem
 > 3. Hygiene and span preservation
@@ -2607,12 +2616,14 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 > 6. Performance optimization techniques
 
 Procedural macros are one of Rust's most powerful metaprogramming features. When used correctly, they can:
+
 - Eliminate boilerplate code
 - Enforce compile-time invariants
 - Create domain-specific languages
 - Extend the language with custom semantics
 
 However, they also come with complexity:
+
 - Steeper learning curve than declarative macros
 - More code to write and maintain
 - Potential for confusing error messages

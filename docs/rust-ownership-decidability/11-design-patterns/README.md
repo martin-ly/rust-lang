@@ -13,7 +13,26 @@
 ├── README.md                          # 本文件 - 导航和学习指南
 ├── 11-01-rust-design-patterns.md     # 设计模式全面指南
 ├── 11-02-idiomatic-patterns.md       # 惯用Rust模式
-└── 11-03-type-state-pattern.md       # 类型状态模式详解
+├── 11-03-type-state-pattern.md       # 类型状态模式详解
+├── creational/                        # 创建型模式
+│   ├── README.md
+│   ├── singleton.md
+│   ├── builder.md
+│   └── factory.md
+├── structural/                        # 结构型模式
+│   ├── README.md
+│   ├── adapter.md
+│   ├── decorator.md
+│   └── proxy.md
+├── behavioral/                        # 行为型模式
+│   ├── README.md
+│   ├── observer.md
+│   ├── strategy.md
+│   └── command.md
+└── rust-specific/                     # Rust特有模式
+    ├── README.md
+    ├── raii-guard.md
+    └── newtype.md
 ```
 
 ---
