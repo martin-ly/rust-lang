@@ -105,7 +105,7 @@
 
 ### Coq File Organization
 
-```
+```text
 coq-formalization/
 ├── Syntax/           # Type and expression definitions
 ├── Typing/           # Type system rules
