@@ -91,6 +91,29 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
 
 ---
 
+### 🔴 17-Unsafe Rust / `17-unsafe-rust/` ⭐ **新增**
+
+**目的**: 深入理解 Rust 的不安全代码和底层编程
+
+| 文件 | 主题 | 难度 | 阅读时间 | 前置知识 |
+|:-----|:-----|:----:|:--------:|:---------|
+| `01-intro.md` | Unsafe Rust 概述 | 🔴 | 2小时 | 所有权、生命周期 |
+| `02-raw-pointers.md` | 原始指针深度解析 | 🔴 | 1.5小时 | Unsafe 基础 |
+| `05-uninitialized-memory.md` | 未初始化内存处理 | 🔴 | 2小时 | Unsafe 基础 |
+| `08-aliasing.md` | 别名规则与优化 | 🔴 | 2小时 | 借用检查器 |
+| `09-atomics.md` | 原子操作与内存序 | 🔴 | 3小时 | 并发基础 |
+| `11-impl-vec.md` | 实现 Vec (实战) | 🔴 | 4小时 | 所有 Unsafe 主题 |
+
+**Unsafe Rust 五大能力**:
+
+- 解引用原始指针
+- 调用 unsafe 函数
+- 实现 unsafe trait
+- 访问 static mut
+- 访问 union 字段
+
+---
+
 ### 🟡 12-并发模式 / `12-concurrency-patterns/`
 
 **目的**: 线程安全、消息传递、无锁编程、异步并发

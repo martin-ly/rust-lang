@@ -15,6 +15,8 @@
 | # | 文档 | 模式 | 适用场景 |
 |:---:|:---|:---|:---|
 | 14-01 | [架构模式详解](14-01-architecture-patterns.md) | 多层架构 | 系统设计 |
+| - | [分层架构](layered-architecture.md) | 分层 | 企业应用 |
+| - | [清洁架构](clean-architecture.md) | 洋葱/清洁 | 复杂业务 |
 | - | [六边形架构](hexagonal-architecture.md) | 端口适配器 | 领域驱动 |
 | - | [微服务架构](microservices-rust.md) | 微服务 | 分布式系统 |
 
