@@ -17,6 +17,8 @@
 | 05-01 | [线性vs仿射](05-01-linear-vs-affine.md) | 线性类型 vs 仿射类型 |
 | 05-02 | [Rust vs C++](05-02-rust-vs-cpp.md) | 内存安全与性能对比 |
 | 05-03 | [Rust vs Go](05-03-rust-vs-go.md) | 并发与工程效率对比 |
+| 05-04 | [Rust vs Java](05-04-rust-vs-java.md) | 内存管理与类型系统 |
+| 05-05 | [Rust vs Swift](05-05-rust-vs-swift.md) | 所有权 vs ARC |
 
 ---
 
