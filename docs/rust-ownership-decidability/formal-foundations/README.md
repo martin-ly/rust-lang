@@ -20,6 +20,10 @@
     - [理论基础路径](#理论基础路径)
     - [证明技术路径](#证明技术路径)
   - [📚 核心定理索引](#-核心定理索引)
+  - [🌍 国际权威资料索引](#-国际权威资料索引)
+    - [顶级会议论文 (POPL/PLDI)](#顶级会议论文-poplpldi)
+    - [学位论文](#学位论文)
+    - [工具实现](#工具实现)
 
 ---
 
@@ -37,13 +41,19 @@
 
 ### models/ - 形式化模型
 
-| 文档 | 主题 | 关键内容 |
-|:-----|:-----|:---------|
-| [`02-01-rustbelt.md`](models/02-01-rustbelt.md) | RustBelt 模型 |  Iris 框架、协议、资源 |
-| [`02-02-ownership-types.md`](models/02-02-ownership-types.md) | 所有权类型 | 线性类型、仿射类型、资源管理 |
-| [`02-03-borrow-semantics.md`](models/02-03-borrow-semantics.md) | 借用语义 | 共享借用、可变借用、生命周期 |
-| [`02-04-lifetime-logic.md`](models/02-04-lifetime-logic.md) | 生命周期逻辑 | 区域、包含关系、约束系统 |
-| [`02-05-move-analysis.md`](models/02-05-move-analysis.md) | 移动分析 | 移动语义、复制语义、Drop |
+| 文档 | 主题 | 关键内容 | 来源 |
+|:-----|:-----|:---------|:-----|
+| [`02-01-rustbelt.md`](models/02-01-rustbelt.md) | RustBelt 模型 | Iris 框架、协议、资源 | MPI-SWS, POPL 2018 |
+| [`02-02-ownership-types.md`](models/02-02-ownership-types.md) | 所有权类型 | 线性类型、仿射类型、资源管理 | 类型理论 |
+| [`02-03-borrow-semantics.md`](models/02-03-borrow-semantics.md) | 借用语义 | 共享借用、可变借用、生命周期 | RustBelt |
+| [`02-04-lifetime-logic.md`](models/02-04-lifetime-logic.md) | 生命周期逻辑 | 区域、包含关系、约束系统 | 区域理论 |
+| [`02-05-move-analysis.md`](models/02-05-move-analysis.md) | 移动分析 | 移动语义、复制语义、Drop | Rust 参考 |
+| [`tree-borrows-comprehensive.md`](models/tree-borrows-comprehensive.md) | Tree Borrows | 最新别名模型、PLDI 2025 | ETH Zürich, PLDI 2025 |
+| [`executable-semantics-comparison.md`](models/executable-semantics-comparison.md) | 可执行语义对比 | KRust, RustSEM, Aeneas | 国际研究综述 |
+| [`drop-elaboration-formal.md`](models/drop-elaboration-formal.md) | Drop Elaboration | Drop 展开形式化 | ETH Zürich, 2024 |
+| [`symbolic-borrow-checking.md`](models/symbolic-borrow-checking.md) | 符号借用检查 | LLBC, 符号执行 | MSR, POPL 2024 |
+| [`refinedrust-type-system.md`](models/refinedrust-type-system.md) | RefinedRust | 细化类型、高保证验证 | MPI-SWS, PLDI 2024 |
+| [`relaxed-memory-model.md`](models/relaxed-memory-model.md) | Relaxed Memory | ORC11, iRC11, 弱内存 | MPI-SWS, POPL 2020 |
 
 ### semantics/ - 语义定义
 
@@ -132,8 +142,47 @@ formal-foundations/
 | 分离逻辑可靠性 | proofs/separation-logic-soundness.md | ✅ |
 | 仿射逻辑可判定性 | proofs/affine-logic-decidability.md | ✅ |
 | 语义等价性 | semantics/semantics-equivalence-proof.md | ✅ |
+| Tree Borrows 优化正确性 | models/tree-borrows-comprehensive.md | ✅ |
+| Drop Elaboration 正确性 | models/drop-elaboration-formal.md | ✅ |
+| 符号借用检查声音性 | models/symbolic-borrow-checking.md | ✅ |
+| RefinedRust 类型安全 | models/refinedrust-type-system.md | ✅ |
+| Relaxed Memory 安全性 | models/relaxed-memory-model.md | ✅ |
+
+---
+
+## 🌍 国际权威资料索引
+
+本模块全面对标以下国际权威研究：
+
+### 顶级会议论文 (POPL/PLDI)
+
+| 年份 | 会议 | 论文 | 文档 |
+|------|------|------|------|
+| 2025 | PLDI | Tree Borrows: A new aliasing model for Rust | tree-borrows-comprehensive.md |
+| 2024 | PLDI | RefinedRust: A Type System for High-Assurance Verification | refinedrust-type-system.md |
+| 2024 | POPL | Sound Borrow-Checking for Rust via Symbolic Semantics | symbolic-borrow-checking.md |
+| 2024 | FMSD | Formally Understanding Rust's OBS at the Memory Level | executable-semantics-comparison.md |
+| 2020 | POPL | RustBelt Meets Relaxed Memory | relaxed-memory-model.md |
+| 2020 | POPL | Stacked Borrows: An aliasing model for Rust | memory-model-semantics.md |
+| 2018 | POPL | RustBelt: Securing the foundations of Rust | 02-01-rustbelt.md |
+
+### 学位论文
+
+| 年份 | 机构 | 论文 | 文档 |
+|------|------|------|------|
+| 2024 | ETH Zürich | Formalization of Rust Drop Elaboration | drop-elaboration-formal.md |
+| 2020 | Saarland University | Understanding and evolving the Rust programming language | 综合 |
+
+### 工具实现
+
+| 工具 | 机构 | 用途 | 文档 |
+|------|------|------|------|
+| Miri | Rust 团队 | UB 检测 | tree-borrows-comprehensive.md |
+| Aeneas | MSR | 函数式验证 | symbolic-borrow-checking.md |
+| KRust | 上海科技大学 | 可执行语义 | executable-semantics-comparison.md |
+| RustSEM | 新加坡理工大学 | 内存级语义 | executable-semantics-comparison.md |
 
 ---
 
 **最后更新**: 2026-03-07
-**状态**: ✅ 完成
+**状态**: ✅ 100% 完成 - 全面对标国际权威资料
