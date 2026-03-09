@@ -1,14 +1,15 @@
 # 类型理论基础 (Type Theory Foundations)
 
-> **难度**: 🔴 高级  
-> **预计阅读时间**: 3-4 小时  
+> **难度**: 🔴 高级
+> **预计阅读时间**: 3-4 小时
 > **前置知识**: λ演算基础
 
 ---
 
 ## 1. 引言
 
-类型理论是编程语言语义的核心支柱。Rust 的类型系统建立在丰富的类型理论基础之上，理解这些理论有助于深入掌握 Rust 的泛型、生命周期和 trait 系统。
+类型理论是编程语言语义的核心支柱。
+Rust 的类型系统建立在丰富的类型理论基础之上，理解这些理论有助于深入掌握 Rust 的泛型、生命周期和 trait 系统。
 
 ---
 
@@ -68,12 +69,14 @@ fn absurd() -> ! {
 ```
 
 **类型抽象 (Λ) 和应用**:
+
 ```
 M ::= ... | Λα.M    (类型抽象)
     | M[τ]        (类型应用)
 ```
 
 **Rust 对应**:
+
 ```rust
 // Λα.λx:α.x  :  ∀α.α → α
 fn identity<T>(x: T) -> T { x }
@@ -95,13 +98,14 @@ HM 类型推断的核心算法：
 4. **泛化规则**: 将自由变量转为全称量词
 
 **Rust 的类型推断**:
+
 ```rust
 // 编译器自动推断类型
 let pair = (1, "hello");  // (i32, &str)
 let f = |x| x + 1;         // impl Fn(i32) -> i32
 
 // 显式标注（复杂情况）
-fn compose<A, B, C>(f: impl Fn(B) -> C, g: impl Fn(A) -> B) 
+fn compose<A, B, C>(f: impl Fn(B) -> C, g: impl Fn(A) -> B)
     -> impl Fn(A) -> C {
     move |x| f(g(x))
 }
@@ -120,6 +124,7 @@ fn compose<A, B, C>(f: impl Fn(B) -> C, g: impl Fn(A) -> B)
 ```
 
 **基本规则**:
+
 ```
 自反性: τ <: τ
 传递性: τ₁ <: τ₂ ∧ τ₂ <: τ₃ → τ₁ <: τ₃
@@ -137,18 +142,19 @@ fn compose<A, B, C>(f: impl Fn(B) -> C, g: impl Fn(A) -> B)
 | 不变 (Invariant) | 无子类型关系 | `&mut T`, `Cell<T>` |
 
 **Rust 变型规则**:
+
 ```rust
 // 协变: &'a T 随着 'a 增大而增大
 fn covariant<'a, 'b: 'a>(x: &'b str) -> &'a str { x }
 
 // 逆变: fn(T) 在 T 上逆变
-fn contravariant<F, G>(f: F) -> G 
-where 
+fn contravariant<F, G>(f: F) -> G
+where
     F: Fn(i32),
     G: Fn(i64),  // i64 <: i32 (不是，所以这里演示的是函数返回)
     // 实际上 fn(T) 在参数位置逆变
-{ 
-    move |x: i64| f(x as i32) 
+{
+    move |x: i64| f(x as i32)
 }
 
 // 不变: &mut T
@@ -178,6 +184,7 @@ fn nested<'a, 'b: 'a>(x: &'b &'a str) -> &'a str { x }
 ```
 
 等价关系:
+
 ```
 μα.τ ≡ τ[(μα.τ)/α]
 ```
@@ -229,6 +236,7 @@ impl<T> List<T> {
 仿射类型允许值**最多使用一次**（可以丢弃）：
 
 **Rust 的所有权系统 = 仿射类型 + 显式复制/克隆**:
+
 ```rust
 // 线性/仿射使用
 let v = vec![1, 2, 3];
@@ -257,6 +265,7 @@ P * Q ≡ {(h₁ ⊎ h₂, s) | (h₁, s) ⊨ P ∧ (h₂, s) ⊨ Q}
 ```
 
 **Rust 对应**:
+
 ```rust
 // 两个 &mut 引用不能同时存在 (分离性)
 let mut data = vec![1, 2, 3];
@@ -286,9 +295,9 @@ Kind 是"类型的类型"：
 | 类型 | Kind | Rust |
 |------|------|------|
 | Int | * | `i32` |
-| List | * → * | `Vec<T>` |
-| Map | * → * → * | `HashMap<K, V>` |
-| Monad | (* → *) → * | `Monad<M<_>>` (不完全支持) |
+| List | *→* | `Vec<T>` |
+| Map | *→* → * | `HashMap<K, V>` |
+| Monad | (*→*) → * | `Monad<M<_>>` (不完全支持) |
 
 ### 7.2 Rust 的限制与 workaround
 
@@ -298,13 +307,13 @@ Kind 是"类型的类型"：
 // 类型构造子: Option<_> 是 * → *
 trait Functor {
     type Wrapped<T>;  // GAT: 通用关联类型
-    
+
     fn fmap<A, B>(self, f: impl Fn(A) -> B) -> Self::Wrapped<B>;
 }
 
 impl Functor for Option<i32> {
     type Wrapped<T> = Option<T>;
-    
+
     fn fmap<A, B>(self, f: impl Fn(A) -> B) -> Self::Wrapped<B> {
         self.map(f)
     }
@@ -330,6 +339,7 @@ impl Functor for Option<i32> {
 ### 8.3 Rust 的类型安全
 
 Rust 的类型系统保证：
+
 - **内存安全**: 无悬空指针、无数据竞争
 - **类型安全**: 进展性 + 保持性
 - **线程安全**: Send/Sync trait 检查
@@ -369,6 +379,6 @@ fn unsafe_attempt() {
 
 ---
 
-**文档大小**: ~30 KB  
-**状态**: ✅ 完整形式化定义  
+**文档大小**: ~30 KB
+**状态**: ✅ 完整形式化定义
 **最后更新**: 2026-03-08

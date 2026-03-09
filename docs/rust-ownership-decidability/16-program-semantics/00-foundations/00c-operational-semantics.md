@@ -1,14 +1,15 @@
 # 操作语义 (Operational Semantics)
 
-> **难度**: 🔴 高级  
-> **预计阅读时间**: 2-3 小时  
+> **难度**: 🔴 高级
+> **预计阅读时间**: 2-3 小时
 > **前置知识**: λ演算、类型理论
 
 ---
 
 ## 1. 引言
 
-操作语义通过描述程序如何**执行**来定义其含义。它是理解 Rust 运行时行为、优化和形式验证的基础。
+操作语义通过描述程序如何**执行**来定义其含义。
+它是理解 Rust 运行时行为、优化和形式验证的基础。
 
 ---
 
@@ -25,11 +26,13 @@
 ### 2.2 算术表达式语义
 
 **语法**:
+
 ```
 e ::= n | e₁ + e₂ | e₁ - e₂
 ```
 
 **语义规则**:
+
 ```
 (NUM)  ────────────
        〈n, σ〉⇓ n
@@ -40,6 +43,7 @@ e ::= n | e₁ + e₂ | e₁ - e₂
 ```
 
 **Rust 对应**:
+
 ```rust
 fn eval(e: Expr, env: &Env) -> Value {
     match e {
@@ -59,6 +63,7 @@ fn eval(e: Expr, env: &Env) -> Value {
 ### 2.3 变量与环境
 
 **语义规则**:
+
 ```
        σ(x) = v
 (VAR)  ─────────
@@ -70,6 +75,7 @@ fn eval(e: Expr, env: &Env) -> Value {
 ```
 
 **Rust 对应**:
+
 ```rust
 // VAR: 从环境读取
 let x = env.get("x");  // σ(x) = v
@@ -105,6 +111,7 @@ E ::= []               (空上下文 - 归约点)
 ```
 
 **Rust 对应**:
+
 ```rust
 // E + e: 先求值左操作数
 let result = { compute_left() } + right;
@@ -133,9 +140,9 @@ let result = if { condition() } { branch1 } else { branch2 };
 // → 5+1          (β 归约)
 // → 6            (+ 规则)
 
-fn step<F>(f: F, arg: i32) -> i32 
-where 
-    F: Fn(i32) -> i32 
+fn step<F>(f: F, arg: i32) -> i32
+where
+    F: Fn(i32) -> i32
 {
     f(arg)  // 一步 β 归约
 }
@@ -148,6 +155,7 @@ where
 ### 4.1 所有权转移语义
 
 **大步语义规则**:
+
 ```
        〈e, σ〉⇓ v    v ≠ moved
 (MOVE) ────────────────────────
@@ -155,6 +163,7 @@ where
 ```
 
 **Rust 实现**:
+
 ```rust
 let x = vec![1, 2, 3];  // σ(x) = [1,2,3]
 let y = x;               // move x → y
@@ -164,6 +173,7 @@ let y = x;               // move x → y
 ### 4.2 借用语义
 
 **小步规则**:
+
 ```
 (BORROW-IMM)  〈&x, σ[x↦v]〉→ 〈&v, σ〉
 
@@ -171,6 +181,7 @@ let y = x;               // move x → y
 ```
 
 **Rust 对应**:
+
 ```rust
 let x = 5;
 let r = &x;      // BORROW-IMM: 创建不可变引用
@@ -183,6 +194,7 @@ let r = &mut y;  // BORROW-MUT: 创建可变引用
 ### 4.3 Drop 语义
 
 **大步规则**:
+
 ```
        σ(x) = v    Drop::drop(v)
 (DROP) ─────────────────────────────
@@ -190,6 +202,7 @@ let r = &mut y;  // BORROW-MUT: 创建可变引用
 ```
 
 **Rust 对应**:
+
 ```rust
 {
     let x = File::open("file.txt")?;
@@ -222,6 +235,7 @@ let t2 = thread::spawn(|| { /* ... */ });
 ### 5.3 内存模型语义
 
 **Release-Acquire**:
+
 ```
 (Release)  〈x.store(v, Release), σ〉→ σ[x↦v, flag=release]
 
@@ -229,6 +243,7 @@ let t2 = thread::spawn(|| { /* ... */ });
 ```
 
 **Rust 实现**:
+
 ```rust
 use std::sync::atomic::{AtomicI32, Ordering};
 
@@ -257,7 +272,7 @@ let v = x.load(Ordering::Acquire);  // 读操作，同步 happens-before
 
 **定理 6.2** (Church-Rosser)
 
-如果 e →* e₁ 且 e →* e₂，则存在 e' 使得 e₁ →* e' 且 e₂ →* e'。
+如果 e →*e₁ 且 e →* e₂，则存在 e' 使得 e₁ →*e' 且 e₂ →* e'。
 
 ### 6.3 类型安全
 
@@ -278,6 +293,6 @@ let v = x.load(Ordering::Acquire);  // 读操作，同步 happens-before
 
 ---
 
-**文档大小**: ~25 KB  
-**状态**: ✅ 完整形式化定义  
+**文档大小**: ~25 KB
+**状态**: ✅ 完整形式化定义
 **最后更新**: 2026-03-08

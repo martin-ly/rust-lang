@@ -1,14 +1,15 @@
 # λ演算基础 (Lambda Calculus Foundations)
 
-> **难度**: 🔴 高级  
-> **预计阅读时间**: 3-4 小时  
+> **难度**: 🔴 高级
+> **预计阅读时间**: 3-4 小时
 > **前置知识**: 基础离散数学
 
 ---
 
 ## 1. 引言
 
-λ演算（Lambda Calculus）由 Alonzo Church 于 1930 年代提出，是计算理论的基础模型。它与图灵机等价，但更加简洁，是函数式编程语言（包括 Rust 的闭包和泛型系统）的理论基础。
+λ演算（Lambda Calculus）由 Alonzo Church 于 1930 年代提出，是计算理论的基础模型。
+它与图灵机等价，但更加简洁，是函数式编程语言（包括 Rust 的闭包和泛型系统）的理论基础。
 
 ---
 
@@ -25,6 +26,7 @@ M, N ::= x         (变量)
 ```
 
 **Rust 对应**:
+
 ```rust
 // 变量
 let x = 42;
@@ -41,10 +43,12 @@ let result = f(5);  // (λx.x+1) 5
 **定义 2.2** (自由变量与绑定变量)
 
 在 λx.M 中：
+
 - `x` 是**绑定变量**（bound variable）
 - M 中除 x 外的变量是**自由变量**（free variables）
 
 形式化定义：
+
 ```
 FV(x) = {x}
 FV(λx.M) = FV(M) \ {x}
@@ -52,6 +56,7 @@ FV(M N) = FV(M) ∪ FV(N)
 ```
 
 **Rust 示例**:
+
 ```rust
 fn example() {
     let y = 10;  // y 是自由变量（相对于内部闭包）
@@ -66,16 +71,19 @@ fn example() {
 **定义 2.3** (α-转换)
 
 绑定变量可以安全地重命名：
+
 ```
 λx.M ≡α λy.M[y/x]   (y ∉ FV(M))
 ```
 
 **示例**:
+
 ```
 λx.x+1 ≡α λy.y+1 ≡α λz.z+1
 ```
 
 **Rust 对应**:
+
 ```rust
 // 以下三个闭包在语义上等价
 let f1 = |x| x + 1;
@@ -88,6 +96,7 @@ let f3 = |z| z + 1;
 **定义 2.4** (β-归约)
 
 函数应用的基本计算规则：
+
 ```
 (λx.M) N →β M[N/x]
 ```
@@ -95,6 +104,7 @@ let f3 = |z| z + 1;
 读作：将 M 中所有 x 替换为 N。
 
 **示例**:
+
 ```
 (λx.x+1) 5 →β 5+1 → 6
 
@@ -102,6 +112,7 @@ let f3 = |z| z + 1;
 ```
 
 **Rust 对应**:
+
 ```rust
 // (λx.x+1) 5
 let f = |x| x + 1;
@@ -125,13 +136,14 @@ let add3 = make_adder(3);  // λy.3+y
 | CBV | Call-by-Need | 代入并记忆结果 (惰性求值) |
 
 **Rust 采用 CBV**:
+
 ```rust
 // CBV: 先求值 2+3=5，再传入
 let f = |x| x * 2;
 f({ println!("evaluated!"); 2 + 3 });  // 立即打印 "evaluated!"
 
 // 对比 CBN (Haskell 风格):
-// f({ println!("evaluated!"); 2 + 3 })  
+// f({ println!("evaluated!"); 2 + 3 })
 // 只有使用 x 时才求值
 ```
 
@@ -149,14 +161,15 @@ f({ println!("evaluated!"); 2 + 3 });  // 立即打印 "evaluated!"
 ```
 
 **Rust 对应**:
+
 ```rust
 // τ₁ → τ₂ 对应 fn(T1) -> T2 或 Fn(T1) -> T2
 fn example(x: i32) -> bool { x > 0 }  // Int → Bool
 
 // 高阶函数: (Int → Bool) → [Int] → [Int]
-fn filter<F>(pred: F, list: Vec<i32>) -> Vec<i32> 
-where 
-    F: Fn(i32) -> bool 
+fn filter<F>(pred: F, list: Vec<i32>) -> Vec<i32>
+where
+    F: Fn(i32) -> bool
 { ... }
 ```
 
@@ -179,6 +192,7 @@ where
 ```
 
 **Rust 类型检查示例**:
+
 ```rust
 // T-Abs: λx:Int.x+1 : Int → Int
 let f = |x: i32| x + 1;  // 类型: impl Fn(i32) -> i32
@@ -205,6 +219,7 @@ let result = f(5);  // 类型: i32
 | 假 | 空类型 ! |
 
 **Rust 对应**:
+
 ```rust
 // A → B: 函数即蕴含的证明
 fn modus_ponens<A, B>(f: impl Fn(A) -> B, a: A) -> B {
@@ -248,7 +263,7 @@ M → M'                               (cong-λ)
 
 **定理 4.2** (Church-Rosser / 合流性)
 
-如果 M →* M₁ 且 M →* M₂，则存在 N 使得 M₁ →* N 且 M₂ →* N。
+如果 M →*M₁ 且 M →* M₂，则存在 N 使得 M₁ →*N 且 M₂ →* N。
 
 ```
     M
@@ -269,6 +284,7 @@ M → M'                               (cong-λ)
 如果不能继续 β-归约，则称项为 **β-范式**。
 
 **示例**:
+
 ```
 (λx.x) y → y        (y 是范式)
 (λx.x x)(λx.x x)    (无限归约，无范式)
@@ -332,6 +348,6 @@ let y = x;  // x 被移动，不能再使用
 
 ---
 
-**文档大小**: ~25 KB  
-**状态**: ✅ 完整形式化定义  
+**文档大小**: ~25 KB
+**状态**: ✅ 完整形式化定义
 **最后更新**: 2026-03-08
