@@ -1,6 +1,6 @@
 # Rust 所有权系统可判定性 - 完整知识库
 
-[![Completion](https://img.shields.io/badge/Completion-100%25-brightgreen)](progress/2026-03-06_TRUE_100_PERCENT_COMPLETION_CERTIFICATION.md)
+[![Completion](https://img.shields.io/badge/Completion-100%25-brightgreen)](FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
 [![Rust Version](https://img.shields.io/badge/Rust-1.94-blue)](meta-model/RUST_194_COMPREHENSIVE_GUIDE.md)
 [![Documentation](https://img.shields.io/badge/Docs-~350%20files%20|%20500K%2B%20words-informational)](FINAL_MASTER_INDEX.md)
 [![Coq](https://img.shields.io/badge/Coq-11%2C980%2B%20lines%20%7C%20300%20Qed-orange)](coq-formalization/README.md)
@@ -14,13 +14,16 @@
 
 ## 🧭 快速导航
 
-> **🆕 新增综合梳理文档**: [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) - 四层知识体系全景
+> **🆕 新增终极综合指南**: [ULTIMATE_COMPREHENSIVE_GUIDE.md](ULTIMATE_COMPREHENSIVE_GUIDE.md) - **总入口，完整梳理，建议从这里开始**
+> **📚 新增文档总索引**: [DOCUMENT_INDEX_MASTER.md](DOCUMENT_INDEX_MASTER.md) - 605 个文件的完整索引
+> **🗺️ 新增学习路线图**: [LEARNING_ROADMAP_DETAILED.md](LEARNING_ROADMAP_DETAILED.md) - 从新手到专家的完整路径
+> **📊 新增知识矩阵**: [COMPLETE_KNOWLEDGE_MATRIX.md](COMPLETE_KNOWLEDGE_MATRIX.md) - 多维度交叉索引
 
 根据您的背景和目标，选择合适的学习路径：
 
 | 受众 | 入门文档 | 核心文档 | 高级文档 | 综合梳理 |
 |:------:|:----------|:----------|:----------|:---------|
-| **初学者** | [概念卡片](#-基础概念速查) | [核心概念](#01-核心概念) | [练习题](#-练习与实践) | [执行摘要](FINAL_EXECUTIVE_SUMMARY_V2.md) |
+| **初学者** | [概念卡片](#-基础概念速查) | [核心概念](#01-核心概念) | [练习题](#-练习与实践) | [终极指南](ULTIMATE_COMPREHENSIVE_GUIDE.md) |
 | **进阶** | [详细概念](#01-核心概念) | [设计模式](#11-设计模式) | [案例研究](#-案例研究) | [知识梳理](COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) |
 | **专家** | [形式化基础](#-形式化理论) | [证明与定理](#-coq形式化) | [Coq代码](#-coq形式化) | [理论框架](UNIFIED_THEORETICAL_FRAMEWORK.md) |
 
@@ -439,10 +442,11 @@ Async专题:    ████████████████████ 100
 
 | 主题 | 入口 |
 |:-----|:-----|
-| 所有权概念 | [所有权深入](01-core-concepts/detailed-concepts/ownership-deep-dive.md) / [速查卡](01-core-concepts/short-concepts/ownership-concept-card.md) |
+| 所有权概念 | [所有权深入](01-core-concepts/detailed-concepts/ownership-deep-dive.md) / [速查卡](01-core-concepts/short-concepts/ownership-concept-card.md) / [理论到实践](FOUNDATIONS_TO_PRACTICE_BRIDGE.md) |
 | 借用系统 | [借用深入](01-core-concepts/detailed-concepts/borrowing-in-depth.md) / [速查卡](01-core-concepts/short-concepts/borrowing-concept-card.md) |
 | 生命周期 | [生命周期精通](01-core-concepts/detailed-concepts/lifetimes-mastery.md) / [速查卡](01-core-concepts/short-concepts/lifetime-concept-card.md) |
-| 形式化理论 | [形式化基础](00-foundations/README.md) / [Coq代码](coq-formalization/README.md) |
+| 形式化理论 | [形式化基础](00-foundations/README.md) / [Coq代码](coq-formalization/README.md) / [定理到编译器](THEOREM_TO_COMPILER_BRIDGE.md) |
+| 设计模式 | [模式指南](11-design-patterns/README.md) / [理论到模式](THEORY_TO_PATTERN_BRIDGE.md) |
 | 案例研究 | [案例索引](case-studies/README.md) / [现代crate](case-studies/MODERN_CRATES_INDEX.md) |
 
 ---

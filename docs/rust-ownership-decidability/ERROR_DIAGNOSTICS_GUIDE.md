@@ -8,7 +8,7 @@
 
 ### 三步诊断法
 
-```
+```text
 1. 理解错误信息
    └── 读取编译器消息，识别关键术语
 
@@ -27,7 +27,7 @@
 
 **错误信息**:
 
-```
+```text
 error[E0382]: borrow of moved value: `s1`
   --> src/main.rs:5:27
    |
@@ -71,7 +71,7 @@ graph TD
 
 **错误信息**:
 
-```
+```text
 error[E0499]: cannot borrow `data` as mutable more than once at a time
   --> src/main.rs:5:14
    |
@@ -134,7 +134,7 @@ data.borrow_mut().push(5);  // 可以
 
 **错误信息**:
 
-```
+```text
 error[E0502]: cannot borrow `data` as mutable because
                it is also borrowed as immutable
 ```
@@ -174,7 +174,7 @@ data.retain(|&x| {
 
 **错误信息**:
 
-```
+```text
 error[E0597]: `s` does not live long enough
   --> src/main.rs:5:13
    |
@@ -237,7 +237,7 @@ fn get_static() -> &'static str {
 
 **错误信息**:
 
-```
+```text
 error[E0621]: explicit lifetime required in the type of `x`
 ```
 
@@ -266,7 +266,7 @@ fn first(x: &str) -> &str {  // 自动推断
 
 **错误信息**:
 
-```
+```text
 error[E0106]: missing lifetime specifier
 ```
 
@@ -297,7 +297,7 @@ struct Parser {
 
 **错误信息**:
 
-```
+```text
 error: cannot borrow `x` as mutable because
        it is also borrowed as immutable
 ```
@@ -324,7 +324,7 @@ let add = || x.borrow_mut().push(4);
 
 **错误信息**:
 
-```
+```text
 error[E0716]: temporary value dropped while borrowed
 ```
 
@@ -353,7 +353,7 @@ let r: &'static str = "hello";
 
 **错误信息**:
 
-```
+```text
 error[E0277]: `Rc<i32>` cannot be sent between threads safely
 ```
 
@@ -383,7 +383,7 @@ thread::spawn(move || {
 
 **错误信息**:
 
-```
+```text
 error[E0596]: cannot borrow data in a `&` reference as mutable
 ```
 
