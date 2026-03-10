@@ -1,50 +1,10 @@
 {
-  "scan_time": "2026-03-08T06:19:03.432105",
-  "total_files": 1226,
-  "total_links": 7933,
-  "valid_links": 7314,
-  "broken_links": 619,
+  "scan_time": "2026-03-10T14:02:11.430055",
+  "total_files": 1267,
+  "total_links": 8118,
+  "valid_links": 7623,
+  "broken_links": 495,
   "broken_by_file": {
-    "00_MASTER_INDEX.md": [
-      {
-        "link_text": "quick_reference/",
-        "link_target": "./02_reference/quick_reference/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\02_reference\\quick_reference",
-        "suggestion": "可能的正确路径:\n  - `research_notes/QUICK_REFERENCE.md`\n  - `archive/temp/QUICK_REFERENCE.md`\n  - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`"
-      },
-      {
-        "link_text": "crates/*/examples/",
-        "link_target": "../crates/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates",
-        "suggestion": "可能的正确路径:\n  - `EMBEDDED_CRATES_COMPLETION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_EXPANSION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_FINAL_REPORT.md`"
-      },
-      {
-        "link_text": "crates/*/docs/",
-        "link_target": "../crates/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates",
-        "suggestion": "可能的正确路径:\n  - `EMBEDDED_CRATES_COMPLETION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_EXPANSION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_FINAL_REPORT.md`"
-      },
-      {
-        "link_text": "crates/",
-        "link_target": "../crates/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates",
-        "suggestion": "可能的正确路径:\n  - `EMBEDDED_CRATES_COMPLETION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_EXPANSION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_FINAL_REPORT.md`"
-      },
-      {
-        "link_text": "crates/",
-        "link_target": "../crates/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates",
-        "suggestion": "可能的正确路径:\n  - `EMBEDDED_CRATES_COMPLETION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_EXPANSION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_FINAL_REPORT.md`"
-      }
-    ],
-    "COMPREHENSIVE_COMPLETION_STATUS_2026_02_23.md": [
-      {
-        "link_text": "archive/deprecated/",
-        "link_target": "archive/deprecated/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\deprecated",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
     "DOCS_STRUCTURE_OVERVIEW.md": [
       {
         "link_text": "archive/process_reports",
@@ -155,250 +115,24 @@
         "suggestion": "相似文件:\n  - `rust-ownership-decidability/17-unsafe-rust/03-unsafe-functions.md`\n  - `02_reference/quick_reference/control_flow_functions_cheatsheet.md`"
       }
     ],
-    "01_learning/LEARNING_PATH_PLANNING.md": [
-      {
-        "link_text": "形式化工程系统",
-        "link_target": "../rust-formal-engineering-system/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-formal-engineering-system",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "01_learning/MDBOOK_QUIZ_GUIDE.md": [
-      {
-        "link_text": "主题测验",
-        "link_target": "./quizzes/your_topic.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\01_learning\\quizzes\\your_topic.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
     "01_learning/OFFICIAL_RESOURCES_MAPPING.md": [
       {
-        "link_text": "ownership_model",
-        "link_target": "../../research_notes/formal_methods/ownership_model.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\ownership_model.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/ownership_model.md`"
-      },
-      {
-        "link_text": "borrow_checker_proof",
-        "link_target": "../../research_notes/formal_methods/borrow_checker_proof.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\borrow_checker_proof.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/borrow_checker_proof.md`"
-      },
-      {
-        "link_text": "variance_theory",
-        "link_target": "../../research_notes/type_theory/variance_theory.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\type_theory\\variance_theory.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/type_theory/variance_theory.md`"
-      },
-      {
-        "link_text": "closures_cheatsheet",
-        "link_target": "../02_reference/quick_reference/closures_cheatsheet.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\02_reference\\quick_reference\\closures_cheatsheet.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "send_sync_formalization",
-        "link_target": "../../research_notes/formal_methods/send_sync_formalization.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\send_sync_formalization.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/send_sync_formalization.md`"
-      },
-      {
-        "link_text": "async_state_machine",
-        "link_target": "../../research_notes/formal_methods/async_state_machine.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\async_state_machine.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/async_state_machine.md`"
-      },
-      {
-        "link_text": "design_patterns",
-        "link_target": "../../crates/c09_design_pattern/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c09_design_pattern\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "closures_cheatsheet",
-        "link_target": "../02_reference/quick_reference/closures_cheatsheet.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\02_reference\\quick_reference\\closures_cheatsheet.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "link_text": "QUICK_REFERENCE",
+        "link_target": "../QUICK_REFERENCE.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\QUICK_REFERENCE.md",
+        "suggestion": "可能的正确路径:\n  - `research_notes/QUICK_REFERENCE.md`\n  - `rust-ownership-decidability/QUICK_REFERENCE_CARD.md`\n  - `archive/temp/QUICK_REFERENCE.md`"
       },
       {
         "link_text": "QUICK_REFERENCE",
         "link_target": "../QUICK_REFERENCE.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\QUICK_REFERENCE.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/QUICK_REFERENCE.md`\n  - `archive/temp/QUICK_REFERENCE.md`\n  - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`"
+        "suggestion": "可能的正确路径:\n  - `research_notes/QUICK_REFERENCE.md`\n  - `rust-ownership-decidability/QUICK_REFERENCE_CARD.md`\n  - `archive/temp/QUICK_REFERENCE.md`"
       },
       {
         "link_text": "QUICK_REFERENCE",
         "link_target": "../QUICK_REFERENCE.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\QUICK_REFERENCE.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/QUICK_REFERENCE.md`\n  - `archive/temp/QUICK_REFERENCE.md`\n  - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`"
-      },
-      {
-        "link_text": "QUICK_REFERENCE",
-        "link_target": "../QUICK_REFERENCE.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\QUICK_REFERENCE.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/QUICK_REFERENCE.md`\n  - `archive/temp/QUICK_REFERENCE.md`\n  - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`"
-      },
-      {
-        "link_text": "variance_theory",
-        "link_target": "../../research_notes/type_theory/variance_theory.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\type_theory\\variance_theory.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/type_theory/variance_theory.md`"
-      },
-      {
-        "link_text": "send_sync_formalization",
-        "link_target": "../../research_notes/formal_methods/send_sync_formalization.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\send_sync_formalization.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/send_sync_formalization.md`"
-      },
-      {
-        "link_text": "ownership_model",
-        "link_target": "../../research_notes/formal_methods/ownership_model.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\ownership_model.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/ownership_model.md`"
-      },
-      {
-        "link_text": "closures_cheatsheet",
-        "link_target": "../02_reference/quick_reference/closures_cheatsheet.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\02_reference\\quick_reference\\closures_cheatsheet.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "ownership_model",
-        "link_target": "../../research_notes/formal_methods/ownership_model.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\ownership_model.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/ownership_model.md`"
-      },
-      {
-        "link_text": "variance_theory",
-        "link_target": "../../research_notes/type_theory/variance_theory.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\type_theory\\variance_theory.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/type_theory/variance_theory.md`"
-      },
-      {
-        "link_text": "send_sync_formalization",
-        "link_target": "../../research_notes/formal_methods/send_sync_formalization.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\send_sync_formalization.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/send_sync_formalization.md`"
-      },
-      {
-        "link_text": "borrow_checker_proof",
-        "link_target": "../../research_notes/formal_methods/borrow_checker_proof.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\borrow_checker_proof.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/borrow_checker_proof.md`"
-      },
-      {
-        "link_text": "async_state_machine",
-        "link_target": "../../research_notes/formal_methods/async_state_machine.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\async_state_machine.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/async_state_machine.md`"
-      },
-      {
-        "link_text": "ownership_model",
-        "link_target": "../../research_notes/formal_methods/ownership_model.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\ownership_model.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/ownership_model.md`"
-      },
-      {
-        "link_text": "design_patterns",
-        "link_target": "../../crates/c09_design_pattern/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c09_design_pattern\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "variance_theory",
-        "link_target": "../../research_notes/type_theory/variance_theory.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\type_theory\\variance_theory.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/type_theory/variance_theory.md`"
-      },
-      {
-        "link_text": "ownership_model",
-        "link_target": "../../research_notes/formal_methods/ownership_model.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\ownership_model.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/ownership_model.md`"
-      },
-      {
-        "link_text": "send_sync_formalization",
-        "link_target": "../../research_notes/formal_methods/send_sync_formalization.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\send_sync_formalization.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/send_sync_formalization.md`"
-      },
-      {
-        "link_text": "async_state_machine",
-        "link_target": "../../research_notes/formal_methods/async_state_machine.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\async_state_machine.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/async_state_machine.md`"
-      },
-      {
-        "link_text": "PROOF_INDEX",
-        "link_target": "../../research_notes/PROOF_INDEX.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\PROOF_INDEX.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/PROOF_INDEX.md`"
-      },
-      {
-        "link_text": "ownership_model",
-        "link_target": "../../research_notes/formal_methods/ownership_model.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\ownership_model.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/ownership_model.md`"
-      },
-      {
-        "link_text": "borrow_checker_proof",
-        "link_target": "../../research_notes/formal_methods/borrow_checker_proof.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\borrow_checker_proof.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/borrow_checker_proof.md`"
-      },
-      {
-        "link_text": "variance_theory",
-        "link_target": "../../research_notes/type_theory/variance_theory.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\type_theory\\variance_theory.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/type_theory/variance_theory.md`"
-      },
-      {
-        "link_text": "PROOF_INDEX",
-        "link_target": "../../research_notes/PROOF_INDEX.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\PROOF_INDEX.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/PROOF_INDEX.md`"
-      },
-      {
-        "link_text": "send_sync_formalization",
-        "link_target": "../../research_notes/formal_methods/send_sync_formalization.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\send_sync_formalization.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/send_sync_formalization.md`"
-      },
-      {
-        "link_text": "async_state_machine",
-        "link_target": "../../research_notes/formal_methods/async_state_machine.md",
-        "resolved_path": "E:\\_src\\rust-lang\\research_notes\\formal_methods\\async_state_machine.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/async_state_machine.md`"
-      },
-      {
-        "link_text": "closures_cheatsheet",
-        "link_target": "../02_reference/quick_reference/closures_cheatsheet.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\02_reference\\quick_reference\\closures_cheatsheet.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "closures_cheatsheet",
-        "link_target": "../02_reference/quick_reference/closures_cheatsheet.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\02_reference\\quick_reference\\closures_cheatsheet.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "closures_cheatsheet",
-        "link_target": "../02_reference/quick_reference/closures_cheatsheet.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\02_reference\\quick_reference\\closures_cheatsheet.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "C03",
-        "link_target": "../../crates/c03_control_fn/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c03_control_fn\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "formal_methods",
-        "link_target": "../research_notes/formal_methods/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\formal_methods",
-        "suggestion": "可能的正确路径:\n  - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`\n  - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`\n  - `research_notes/formal_methods/FORMAL_METHODS_100_PERCENT_COMPLETION_REPORT.md`"
+        "suggestion": "可能的正确路径:\n  - `research_notes/QUICK_REFERENCE.md`\n  - `rust-ownership-decidability/QUICK_REFERENCE_CARD.md`\n  - `archive/temp/QUICK_REFERENCE.md`"
       }
     ],
     "02_reference/CROSS_LANGUAGE_COMPARISON.md": [
@@ -407,76 +141,6 @@
         "link_target": "a, b T",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\02_reference\\a, b T",
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "05_guides/CLI_APPLICATIONS_GUIDE.md": [
-      {
-        "link_text": "C07 进程管理",
-        "link_target": "../../crates/c07_process/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c07_process",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "进程管理",
-        "link_target": "../../crates/c07_process/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c07_process\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "C07 进程管理",
-        "link_target": "../../crates/c07_process/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c07_process",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "05_guides/EMBEDDED_RUST_GUIDE.md": [
-      {
-        "link_text": "C01 所有权",
-        "link_target": "../../crates/c01_ownership_borrow_scope/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c01_ownership_borrow_scope",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "C02 类型系统",
-        "link_target": "../../crates/c02_type_system/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "C05 线程与并发",
-        "link_target": "../../crates/c05_threads/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c05_threads",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "C07 进程管理",
-        "link_target": "../../crates/c07_process/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c07_process",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "C12 WASM",
-        "link_target": "../../crates/c12_wasm/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c12_wasm",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "C02 类型系统",
-        "link_target": "../../crates/c02_type_system/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "C05 线程与并发",
-        "link_target": "../../crates/c05_threads/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c05_threads\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "C12 WASM",
-        "link_target": "../../crates/c12_wasm/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c12_wasm\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
       }
     ],
     "05_guides/RUST_194_MIGRATION_GUIDE.md": [
@@ -499,14 +163,6 @@
         "link_target": "../crates/c02_type_system/src/rust_194_features.rs",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\crates\\c02_type_system\\src\\rust_194_features.rs",
         "suggestion": "可能的正确路径:\n  - `02_reference/quick_reference/rust_194_features_cheatsheet.md`"
-      }
-    ],
-    "06_toolchain/README.md": [
-      {
-        "link_text": "C08 Algorithms - 算法优化",
-        "link_target": "../../crates/c08_algorithms/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c08_algorithms\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
       }
     ],
     "07_project/README.md": [
@@ -550,7 +206,7 @@
         "link_text": "xx",
         "link_target": "path/to/doc.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\path\\to\\doc.md",
-        "suggestion": "相似文件:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
+        "suggestion": "相似文件:\n  - `CRATES_DOCUMENTATION_CONSOLIDATION_SUMMARY_2025_11_15.md`\n  - `CRATES_DOCUMENTATION_FINAL_REPORT_2025_11_15.md`\n  - `CRATES_DOCUMENTATION_REVIEW_2025_11_15.md`"
       },
       {
         "link_text": "矩阵文档 §节名",
@@ -569,6 +225,14 @@
         "link_target": "../../../crates/c01_ownership_borrow_scope/docs/README.md",
         "resolved_path": "E:\\_src\\crates\\c01_ownership_borrow_scope\\docs\\README.md",
         "suggestion": "可能的正确路径:\n  - `README.md`\n  - `01_learning/README.md`\n  - `02_reference/README.md`"
+      }
+    ],
+    "research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md": [
+      {
+        "link_text": "Coq 骨架",
+        "link_target": "./coq_skeleton/",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\coq_skeleton",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
       }
     ],
     "research_notes/CROSS_REFERENCE_INDEX.md": [
@@ -633,18 +297,20 @@
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
       }
     ],
-    "research_notes/DISTRIBUTED_CONCEPT_MINDMAP.md": [
+    "research_notes/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md": [
       {
-        "link_text": "分布式架构决策树",
-        "link_target": "./DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md`"
-      },
+        "link_text": "软件设计理论",
+        "link_target": "../software_design_theory/",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\software_design_theory",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      }
+    ],
+    "research_notes/DISTRIBUTED_PATTERNS_MATRIX.md": [
       {
-        "link_text": "分布式模式矩阵",
-        "link_target": "./DISTRIBUTED_PATTERNS_MATRIX.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\DISTRIBUTED_PATTERNS_MATRIX.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/DISTRIBUTED_PATTERNS_MATRIX.md`"
+        "link_text": "软件设计理论",
+        "link_target": "../software_design_theory/",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\software_design_theory",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
       }
     ],
     "research_notes/EXAMPLE.md": [
@@ -669,14 +335,6 @@
         "link_target": "./coq_skeleton/",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\coq_skeleton",
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "research_notes/FORMAL_VERIFICATION_GUIDE.md": [
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING",
-        "link_target": "./COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
       }
     ],
     "research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md": [
@@ -729,12 +387,6 @@
         "link_target": "type_theory/",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\type_theory",
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "link_target": "./COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
       }
     ],
     "research_notes/INDEX.md": [
@@ -823,12 +475,6 @@
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
       },
       {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING",
-        "link_target": "./COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
-      },
-      {
         "link_text": "证明位置",
         "link_target": "./software_design_theory/01_design_patterns_formal/02_structural/",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\software_design_theory\\01_design_patterns_formal\\02_structural",
@@ -857,12 +503,6 @@
         "link_target": "../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md",
         "resolved_path": "E:\\_src\\rust-lang\\LANGUAGE_SEMANTICS_EXPRESSIVENESS.md",
         "suggestion": "可能的正确路径:\n  - `research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md`"
-      },
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING",
-        "link_target": "./COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
       }
     ],
     "research_notes/PROOF_TREE_TYPE_SAFETY.md": [
@@ -1139,22 +779,10 @@
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
       },
       {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING",
-        "link_target": "COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "相似文件:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
-      },
-      {
         "link_text": "coq_skeleton",
         "link_target": "coq_skeleton/",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\coq_skeleton",
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING",
-        "link_target": "./COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
       }
     ],
     "research_notes/RUST_194_195_FEATURE_MATRIX.md": [
@@ -1409,26 +1037,6 @@
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
       }
     ],
-    "research_notes/VISUALIZATION_INDEX.md": [
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "link_target": "./COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
-      },
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "link_target": "./COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
-      },
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "link_target": "./COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
-      }
-    ],
     "research_notes/WORKFLOW_CONCEPT_MINDMAP.md": [
       {
         "link_text": "工作流引擎决策树",
@@ -1459,6 +1067,20 @@
         "suggestion": "相似文件:\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `PROGRESS_EXECUTION_TRACKING.md`\n  - `PROGRESS_EXECUTION_TRACKING_2026_03_05.md`"
       }
     ],
+    "rust-ownership-decidability/COMPREHENSIVE_FAQ.md": [
+      {
+        "link_text": "案例分析",
+        "link_target": "../case-studies/README.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\case-studies\\README.md",
+        "suggestion": "可能的正确路径:\n  - `README.md`\n  - `01_learning/README.md`\n  - `02_reference/README.md`"
+      },
+      {
+        "link_text": "形式化理论",
+        "link_target": "../formal-foundations/README.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\formal-foundations\\README.md",
+        "suggestion": "可能的正确路径:\n  - `README.md`\n  - `01_learning/README.md`\n  - `02_reference/README.md`"
+      }
+    ],
     "rust-ownership-decidability/CONTENT_TEMPLATE_L2.md": [
       {
         "link_text": "The Rust Book - XXX",
@@ -1482,13 +1104,13 @@
         "link_text": "相关文档 A",
         "link_target": "../path/to/doc.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\path\\to\\doc.md",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
+        "suggestion": "可能的正确路径:\n  - `CRATES_DOCUMENTATION_CONSOLIDATION_SUMMARY_2025_11_15.md`\n  - `CRATES_DOCUMENTATION_FINAL_REPORT_2025_11_15.md`\n  - `CRATES_DOCUMENTATION_REVIEW_2025_11_15.md`"
       },
       {
         "link_text": "相关文档 B",
         "link_target": "../path/to/doc.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\path\\to\\doc.md",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
+        "suggestion": "可能的正确路径:\n  - `CRATES_DOCUMENTATION_CONSOLIDATION_SUMMARY_2025_11_15.md`\n  - `CRATES_DOCUMENTATION_FINAL_REPORT_2025_11_15.md`\n  - `CRATES_DOCUMENTATION_REVIEW_2025_11_15.md`"
       }
     ],
     "rust-ownership-decidability/CROSS_REFERENCE_VERIFICATION_REPORT.md": [
@@ -1503,6 +1125,28 @@
         "link_target": "... |\n| README.md | `CROSS_REFERENCE_VERIFICATION_REPORT.md` | 243 | - [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md... |\n\n## Missing Cross-References\n\nFiles that mention key concepts but don't link to them:\n\n| Source File | Concept | Suggested Link |\n|-------------|---------|----------------|\n| 00-foundations/00-03-separation-logic.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 00-foundations/00-04-theory-connections.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 00-foundations/README.md | formal | formal-foundations/README.md |\n| 01-core-concepts/01-01-ownership-rules.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 01-core-concepts/01-02-borrowing-system.md | borrowing | 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md |\n| 01-core-concepts/01-02-borrowing-system.md | lifetimes | 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md |\n| 01-core-concepts/01-03-lifetimes.md | lifetimes | 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md |\n| 01-core-concepts/01-04-runtime-vs-compile-time.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 01-core-concepts/README.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 01-core-concepts/README.md | borrowing | 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md |\n| 01-core-concepts/README.md | lifetimes | 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md |\n| 01-core-concepts/detailed-concepts/borrowing-in-depth.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 01-core-concepts/ownership-counterexamples.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 01-core-concepts/ownership-counterexamples.md | examples | COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md |\n| 01-core-concepts/short-concepts/borrowing-concept-card.md | lifetimes | 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md |\n| 03-verification-tools/03-01-verification-overview.md | formal | formal-foundations/README.md |\n| 03-verification-tools/03-01-verification-overview.md | coq | coq-formalization/README.md |\n| 03-verification-tools/03-02-creusot-deep-dive.md | formal | formal-foundations/README.md |\n| 04-decidability-analysis/04-01-type-inference.md | lifetimes | 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md |\n| 04-decidability-analysis/04-01-type-inference.md | formal | formal-foundations/README.md |\n| 04-decidability-analysis/04-02-borrow-checking.md | lifetimes | 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md |\n| 04-decidability-analysis/04-02-borrow-checking.md | formal | formal-foundations/README.md |\n| 06-visualizations/06-01-concept-matrix.md | coq | coq-formalization/README.md |\n| 06-visualizations/06-03-architecture-diagrams.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 06-visualizations/06-03-architecture-diagrams.md | borrowing | 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md |\n| 06-visualizations/06-03-architecture-diagrams.md | coq | coq-formalization/README.md |\n| 07-references/README.md | formal | formal-foundations/README.md |\n| 07-references/academic-papers.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 07-references/academic-papers.md | borrowing | 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md |\n| 07-references/academic-papers.md | lifetimes | 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md |\n| 07-references/academic-papers.md | formal | formal-foundations/README.md |\n| 07-references/bibliography.md | borrowing | 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md |\n| 07-references/bibliography.md | lifetimes | 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md |\n| 07-references/bibliography.md | formal | formal-foundations/README.md |\n| 07-references/books-resources.md | formal | formal-foundations/README.md |\n| 07-references/books-resources.md | coq | coq-formalization/README.md |\n| 07-references/online-courses.md | formal | formal-foundations/README.md |\n| 07-references/online-courses.md | coq | coq-formalization/README.md |\n| 07-references/tools-libraries.md | coq | coq-formalization/README.md |\n| 08-advanced-topics/08-04-proc-macros.md | lifetimes | 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md |\n| 08-advanced-topics/RUST_1.94_UPDATE_REPORT.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 10-research-frontiers/10-01-future-directions.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 10-research-frontiers/10-01-future-directions.md | borrowing | 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md |\n| 10-research-frontiers/10-01-future-directions.md | formal | formal-foundations/README.md |\n| 10-research-frontiers/10-01-future-directions.md | coq | coq-formalization/README.md |\n| 10-research-frontiers/10-02-type-system-extensions.md | coq | coq-formalization/README.md |\n| 10-research-frontiers/10-03-verification-advancements.md | coq | coq-formalization/README.md |\n| 10-research-frontiers/10-04-ownership-variations.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n| 10-research-frontiers/10-04-ownership-variations.md | lifetimes | 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md |\n| 10-research-frontiers/10-05-ai-integration.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |\n\n## Recommendations\n\n### For Improving Navigation\n\n1. **Add 'See Also' sections** to key documents linking related concepts\n2. **Create topic hubs** for major themes (ownership, borrowing, lifetimes",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\... |\n| README.md | `CROSS_REFERENCE_VERIFICATION_REPORT.md` | 243 | - [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md... |\n\n",
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      }
+    ],
+    "rust-ownership-decidability/ERROR_DIAGNOSTICS_GUIDE.md": [
+      {
+        "link_text": "案例分析",
+        "link_target": "../case-studies/README.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\case-studies\\README.md",
+        "suggestion": "可能的正确路径:\n  - `README.md`\n  - `01_learning/README.md`\n  - `02_reference/README.md`"
+      }
+    ],
+    "rust-ownership-decidability/INTERACTIVE_LEARNING_GUIDE.md": [
+      {
+        "link_text": "案例分析",
+        "link_target": "../case-studies/README.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\case-studies\\README.md",
+        "suggestion": "可能的正确路径:\n  - `README.md`\n  - `01_learning/README.md`\n  - `02_reference/README.md`"
+      },
+      {
+        "link_text": "Coq形式化",
+        "link_target": "../coq-formalization/README.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\coq-formalization\\README.md",
+        "suggestion": "可能的正确路径:\n  - `README.md`\n  - `01_learning/README.md`\n  - `02_reference/README.md`"
       }
     ],
     "rust-ownership-decidability/MASTER_INDEX_AUTO.md": [
@@ -1695,6 +1339,92 @@
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
       }
     ],
+    "rust-ownership-decidability/case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md": [
+      {
+        "link_text": "Web 开发指南",
+        "link_target": "web-development.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\web-development.md",
+        "suggestion": "相似文件:\n  - `rust-ownership-decidability/15-application-domains/web-development.md`"
+      },
+      {
+        "link_text": "Burn 框架",
+        "link_target": "burn-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\burn-formal-analysis.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "Candle 框架",
+        "link_target": "candle-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\candle-formal-analysis.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "Substrate 分析",
+        "link_target": "substrate-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\substrate-formal-analysis.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "kube 客户端",
+        "link_target": "kube-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\kube-formal-analysis.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "ring 加密库",
+        "link_target": "ring-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\ring-formal-analysis.md",
+        "suggestion": "相似文件:\n  - `rust-ownership-decidability/case-studies/std-string-formal-analysis.md`"
+      },
+      {
+        "link_text": "burn-formal-analysis.md",
+        "link_target": "ml-ai/burn-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\ml-ai\\burn-formal-analysis.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "candle-formal-analysis.md",
+        "link_target": "ml-ai/candle-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\ml-ai\\candle-formal-analysis.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "polars-formal-analysis.md",
+        "link_target": "database/polars-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\database\\polars-formal-analysis.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "substrate-formal-analysis.md",
+        "link_target": "blockchain/substrate-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\blockchain\\substrate-formal-analysis.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "kube-formal-analysis.md",
+        "link_target": "cloud/kube-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\cloud\\kube-formal-analysis.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "linkerd-formal-analysis.md",
+        "link_target": "cloud/linkerd-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\cloud\\linkerd-formal-analysis.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "ring-formal-analysis.md",
+        "link_target": "security/ring-formal-analysis.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\security\\ring-formal-analysis.md",
+        "suggestion": "相似文件:\n  - `rust-ownership-decidability/case-studies/std-string-formal-analysis.md`"
+      },
+      {
+        "link_text": "形式化基础",
+        "link_target": "../../formal-foundations/README.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\formal-foundations\\README.md",
+        "suggestion": "可能的正确路径:\n  - `README.md`\n  - `01_learning/README.md`\n  - `02_reference/README.md`"
+      }
+    ],
     "rust-ownership-decidability/formal-foundations/models/README.md": [
       {
         "link_text": "语义定义",
@@ -1723,11 +1453,17 @@
         "suggestion": "可能的正确路径:\n  - `research_notes/EXECUTABLE_SEMANTICS_ROADMAP.md`\n  - `research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md`\n  - `Rust所有权与可判定性/rust_ownership_semantics_complete_analysis.md`"
       }
     ],
-    "rust-ownership-decidability/16-program-semantics/00-foundations/00a-lambda-calculus.md": [
+    "rust-ownership-decidability/16-program-semantics/04-verification/README.md": [
       {
-        "link_text": "x",
-        "link_target": "e_1\\ e_2",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\16-program-semantics\\00-foundations\\e_1\\ e_2",
+        "link_text": "04b-rustbelt-methodology",
+        "link_target": "./04b-rustbelt-methodology.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\16-program-semantics\\04-verification\\04b-rustbelt-methodology.md",
+        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+      },
+      {
+        "link_text": "04c-concurrent-separation-logic",
+        "link_target": "./04c-concurrent-separation-logic.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\16-program-semantics\\04-verification\\04c-concurrent-separation-logic.md",
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
       }
     ],
@@ -1881,20 +1617,6 @@
         "link_target": "../../../research_notes/formal_methods/",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\formal_methods",
         "suggestion": "可能的正确路径:\n  - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`\n  - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`\n  - `research_notes/formal_methods/FORMAL_METHODS_100_PERCENT_COMPLETION_REPORT.md`"
-      }
-    ],
-    "research_notes/coq_skeleton/README.md": [
-      {
-        "link_text": "archive/deprecated/coq_skeleton",
-        "link_target": "../../archive/deprecated/coq_skeleton/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\deprecated\\coq_skeleton",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "archive/deprecated/coq_skeleton",
-        "link_target": "../../archive/deprecated/coq_skeleton/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\deprecated\\coq_skeleton",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
       }
     ],
     "research_notes/experiments/concurrency_performance.md": [
@@ -2617,22 +2339,6 @@
         "suggestion": "相似文件:\n  - `research_notes/formal_methods/borrow_checker_proof.md`"
       }
     ],
-    "research_notes/software_design_theory/05_distributed/01_saga_pattern.md": [
-      {
-        "link_text": "分布式架构决策树",
-        "link_target": "../../DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md`"
-      }
-    ],
-    "research_notes/software_design_theory/05_distributed/03_circuit_breaker.md": [
-      {
-        "link_text": "分布式架构决策树",
-        "link_target": "../../DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md",
-        "suggestion": "可能的正确路径:\n  - `research_notes/formal_methods/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md`"
-      }
-    ],
     "archive/deprecated/AENEAS_INTEGRATION_PLAN.md": [
       {
         "link_text": "c01/examples/aeneas_first.rs",
@@ -2808,7 +2514,7 @@
         "link_text": "PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md",
         "link_target": "./PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\process_reports\\PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md",
-        "suggestion": "可能的正确路径:\n  - `archive/process_reports/2026_02/project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md`"
+        "suggestion": "可能的正确路径:\n  - `07_project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md`\n  - `archive/process_reports/2026_02/project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md`"
       }
     ],
     "archive/reports/RUST_1.91_FEATURES_COMPREHENSIVE.md": [
@@ -3248,7 +2954,7 @@
         "link_text": "docs/02_reference/quick_reference/",
         "link_target": "../02_reference/quick_reference/",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\02_reference\\quick_reference",
-        "suggestion": "可能的正确路径:\n  - `research_notes/QUICK_REFERENCE.md`\n  - `archive/temp/QUICK_REFERENCE.md`\n  - `archive/reports/formal_system_reports/RUST_1_91_QUICK_REFERENCE.md`"
+        "suggestion": "可能的正确路径:\n  - `research_notes/QUICK_REFERENCE.md`\n  - `rust-ownership-decidability/QUICK_REFERENCE_CARD.md`\n  - `archive/temp/QUICK_REFERENCE.md`"
       },
       {
         "link_text": "docs/06_toolchain/",
@@ -3277,30 +2983,46 @@
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
       }
     ],
+    "archive/temp/RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md": [
+      {
+        "link_text": "Rust 1.94 更新报告",
+        "link_target": "../RUST_194_RESEARCH_UPDATE.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\RUST_194_RESEARCH_UPDATE.md",
+        "suggestion": "可能的正确路径:\n  - `research_notes/RUST_194_RESEARCH_UPDATE.md`"
+      }
+    ],
+    "archive/temp/RUST_190_DOCUMENTATION_INDEX.md": [
+      {
+        "link_text": "Rust 1.94 文档",
+        "link_target": "../RUST_194_RESEARCH_UPDATE.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\RUST_194_RESEARCH_UPDATE.md",
+        "suggestion": "可能的正确路径:\n  - `research_notes/RUST_194_RESEARCH_UPDATE.md`"
+      }
+    ],
     "archive/temp/swap/RUST_190_FAQ.md": [
       {
         "link_text": "主报告",
         "link_target": "RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\temp\\swap\\RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "suggestion": "相似文件:\n  - `archive/temp/RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md`"
       },
       {
         "link_text": "Phase 2 完成报告",
         "link_target": "RUST_190_PHASE2_完成报告_2025_10_26.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\temp\\swap\\RUST_190_PHASE2_完成报告_2025_10_26.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "suggestion": "相似文件:\n  - `archive/temp/RUST_190_PHASE2_完成报告_2025_10_26.md`"
       },
       {
         "link_text": "完整会话总结",
         "link_target": "RUST_190_完整会话总结_2025_10_26.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\temp\\swap\\RUST_190_完整会话总结_2025_10_26.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "suggestion": "相似文件:\n  - `archive/temp/RUST_190_完整会话总结_2025_10_26.md`"
       },
       {
         "link_text": "主报告",
         "link_target": "RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\temp\\swap\\RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "suggestion": "相似文件:\n  - `archive/temp/RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md`"
       }
     ],
     "archive/temp/swap/RUST_190_GLOSSARY.md": [
@@ -3308,13 +3030,13 @@
         "link_text": "主报告",
         "link_target": "RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\temp\\swap\\RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "suggestion": "相似文件:\n  - `archive/temp/RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md`"
       },
       {
         "link_text": "完整会话总结",
         "link_target": "RUST_190_完整会话总结_2025_10_26.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\temp\\swap\\RUST_190_完整会话总结_2025_10_26.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "suggestion": "相似文件:\n  - `archive/temp/RUST_190_完整会话总结_2025_10_26.md`"
       }
     ],
     "archive/temp/swap/RUST_190_QUICK_NAVIGATION.md": [
@@ -3322,19 +3044,19 @@
         "link_text": "RUST*190*完整会话总结\\_2025_10_26.md",
         "link_target": "RUST_190_完整会话总结_2025_10_26.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\temp\\swap\\RUST_190_完整会话总结_2025_10_26.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "suggestion": "相似文件:\n  - `archive/temp/RUST_190_完整会话总结_2025_10_26.md`"
       },
       {
         "link_text": "RUST_190_DOCUMENTATION_INDEX.md",
         "link_target": "RUST_190_DOCUMENTATION_INDEX.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\temp\\swap\\RUST_190_DOCUMENTATION_INDEX.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "suggestion": "相似文件:\n  - `archive/temp/RUST_190_DOCUMENTATION_INDEX.md`"
       },
       {
         "link_text": "完整索引",
         "link_target": "RUST_190_DOCUMENTATION_INDEX.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\temp\\swap\\RUST_190_DOCUMENTATION_INDEX.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "suggestion": "相似文件:\n  - `archive/temp/RUST_190_DOCUMENTATION_INDEX.md`"
       }
     ],
     "archive/reports/formal_system_reports/DOCUMENTATION_ENHANCEMENT_REPORT_2025_09_27.md": [
@@ -3406,9 +3128,9 @@
     "archive/process_reports/2026_02/DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md": [
       {
         "link_text": "链接文本",
-        "link_target": "相对路径",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\process_reports\\2026_02\\相对路径",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
+        "link_target": "./docs/",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\process_reports\\2026_02\\docs",
+        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
       },
       {
         "link_text": "文本",
@@ -3449,18 +3171,6 @@
         "link_target": "../../../research_notes/coq_skeleton/",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\coq_skeleton",
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING",
-        "link_target": "../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
-      },
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "link_target": "../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
       }
     ],
     "archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md": [
@@ -3483,32 +3193,6 @@
         "link_target": "路径",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\process_reports\\2026_02\\路径",
         "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md": [
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "link_target": "../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
-      },
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "link_target": "../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
-      },
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "link_target": "../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
-      },
-      {
-        "link_text": "COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "link_target": "../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\COQ_ISABELLE_PROOF_SCAFFOLDING.md",
-        "suggestion": "可能的正确路径:\n  - `archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md`"
       }
     ],
     "archive/process_reports/2026_02/project/ONE_PAGE_SUMMARY_TEMPLATE.md": [
@@ -3579,486 +3263,6 @@
         "link_target": "../type_theory/type_system_foundations.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\archive\\deprecated\\type_theory\\type_system_foundations.md",
         "suggestion": "可能的正确路径:\n  - `research_notes/type_theory/type_system_foundations.md`"
-      }
-    ],
-    "02_reference/quick_reference/algorithms_cheatsheet.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c08_algorithms/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c08_algorithms\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "工作流安全完整模型",
-        "link_target": "../../research_notes/software_design_theory/02_workflow_safe_complete_models/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\software_design_theory\\02_workflow_safe_complete_models",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "02_reference/quick_reference/ANTI_PATTERN_TEMPLATE.md": [
-      {
-        "link_text": "c11 宏模块 trybuild",
-        "link_target": "../../../crates/c11_macro_system/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c11_macro_system",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "02_reference/quick_reference/async_patterns.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c06_async/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c06_async\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "Actor 模式",
-        "link_target": "../../../crates/c06_async/src/actix/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c06_async\\src\\actix",
-        "suggestion": "可能的正确路径:\n  - `rust-ownership-decidability/case-studies/actix-web-formal-analysis.md`\n  - `rust-ownership-decidability/actor-specialty/case-studies/actix-web-production.md`"
-      }
-    ],
-    "02_reference/quick_reference/cargo_cheatsheet.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates",
-        "suggestion": "可能的正确路径:\n  - `EMBEDDED_CRATES_COMPLETION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_EXPANSION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_FINAL_REPORT.md`"
-      },
-      {
-        "link_text": "Cargo 包管理完整文档",
-        "link_target": "../../../crates/c02_type_system/docs/cargo_package_management/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\docs\\cargo_package_management",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "02_reference/quick_reference/collections_iterators_cheatsheet.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates",
-        "suggestion": "可能的正确路径:\n  - `EMBEDDED_CRATES_COMPLETION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_EXPANSION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_FINAL_REPORT.md`"
-      }
-    ],
-    "02_reference/quick_reference/control_flow_functions_cheatsheet.md": [
-      {
-        "link_text": "完整文档",
-        "link_target": "../../../crates/c03_control_fn/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c03_control_fn\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c03_control_fn/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c03_control_fn\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "控制流与函数完整文档",
-        "link_target": "../../../crates/c03_control_fn/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c03_control_fn\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "完整控制流文档",
-        "link_target": "../../../crates/c03_control_fn/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c03_control_fn\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      }
-    ],
-    "02_reference/quick_reference/design_patterns_cheatsheet.md": [
-      {
-        "link_text": "完整文档",
-        "link_target": "../../../crates/c09_design_pattern/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c09_design_pattern\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c09_design_pattern/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c09_design_pattern\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "设计模式完整文档",
-        "link_target": "../../../crates/c09_design_pattern/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c09_design_pattern\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "创建型模式形式化",
-        "link_target": "../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\software_design_theory\\01_design_patterns_formal\\01_creational",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "结构型模式形式化",
-        "link_target": "../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\software_design_theory\\01_design_patterns_formal\\02_structural",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "行为型模式形式化",
-        "link_target": "../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\software_design_theory\\01_design_patterns_formal\\03_behavioral",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "02_reference/quick_reference/error_handling_cheatsheet.md": [
-      {
-        "link_text": "完整文档",
-        "link_target": "../../../crates/c03_control_fn/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c03_control_fn\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c03_control_fn/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c03_control_fn\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "控制流与错误处理文档",
-        "link_target": "../../../crates/c03_control_fn/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c03_control_fn\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      }
-    ],
-    "02_reference/quick_reference/generics_cheatsheet.md": [
-      {
-        "link_text": "完整文档",
-        "link_target": "../../../crates/c04_generic/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c04_generic\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c04_generic/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c04_generic\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "泛型编程完整文档",
-        "link_target": "../../../crates/c04_generic/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c04_generic\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "泛型完整文档",
-        "link_target": "../../../crates/c04_generic/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c04_generic\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "类型系统研究笔记",
-        "link_target": "../../research_notes/type_theory/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\type_theory",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "02_reference/quick_reference/macros_cheatsheet.md": [
-      {
-        "link_text": "完整文档",
-        "link_target": "../../../crates/c11_macro_system/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c11_macro_system\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c11_macro_system/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c11_macro_system\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "宏系统完整文档",
-        "link_target": "../../../crates/c11_macro_system/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c11_macro_system\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "宏系统完整文档",
-        "link_target": "../../../crates/c11_macro_system/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c11_macro_system\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      }
-    ],
-    "02_reference/quick_reference/modules_cheatsheet.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates",
-        "suggestion": "可能的正确路径:\n  - `EMBEDDED_CRATES_COMPLETION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_EXPANSION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_FINAL_REPORT.md`"
-      }
-    ],
-    "02_reference/quick_reference/network_programming_cheatsheet.md": [
-      {
-        "link_text": "完整文档",
-        "link_target": "../../../crates/c10_networks/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c10_networks\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c10_networks/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c10_networks\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "网络模块完整文档",
-        "link_target": "../../../crates/c10_networks/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c10_networks\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      }
-    ],
-    "02_reference/quick_reference/ownership_cheatsheet.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c01_ownership_borrow_scope/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c01_ownership_borrow_scope\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      }
-    ],
-    "02_reference/quick_reference/process_management_cheatsheet.md": [
-      {
-        "link_text": "完整文档",
-        "link_target": "../../../crates/c07_process/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c07_process\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c07_process/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c07_process\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "进程管理完整文档",
-        "link_target": "../../../crates/c07_process/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c07_process\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "形式化方法研究",
-        "link_target": "../../research_notes/formal_methods/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\formal_methods",
-        "suggestion": "可能的正确路径:\n  - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`\n  - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`\n  - `research_notes/formal_methods/FORMAL_METHODS_100_PERCENT_COMPLETION_REPORT.md`"
-      }
-    ],
-    "02_reference/quick_reference/README.md": [
-      {
-        "link_text": "类型系统完整文档",
-        "link_target": "../../../crates/c02_type_system/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "异步编程完整文档",
-        "link_target": "../../../crates/c06_async/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c06_async\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "控制流与函数文档",
-        "link_target": "../../../crates/c03_control_fn/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c03_control_fn\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "泛型编程文档",
-        "link_target": "../../../crates/c04_generic/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c04_generic\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "线程与并发文档",
-        "link_target": "../../../crates/c05_threads/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c05_threads\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "进程管理文档",
-        "link_target": "../../../crates/c07_process/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c07_process\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "算法与数据结构文档",
-        "link_target": "../../../crates/c08_algorithms/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c08_algorithms\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "设计模式文档",
-        "link_target": "../../../crates/c09_design_pattern/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c09_design_pattern\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "网络编程文档",
-        "link_target": "../../../crates/c10_networks/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c10_networks\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "宏系统文档",
-        "link_target": "../../../crates/c11_macro_system/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c11_macro_system\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "WASM 文档",
-        "link_target": "../../../crates/c12_wasm/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c12_wasm\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "类型系统示例",
-        "link_target": "../../../crates/c02_type_system/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "所有权系统示例",
-        "link_target": "../../../crates/c01_ownership_borrow_scope/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c01_ownership_borrow_scope\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "异步编程示例",
-        "link_target": "../../../crates/c06_async/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c06_async\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "控制流与函数示例",
-        "link_target": "../../../crates/c03_control_fn/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c03_control_fn\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "算法示例",
-        "link_target": "../../../crates/c08_algorithms/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c08_algorithms\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "网络编程示例",
-        "link_target": "../../../crates/c10_networks/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c10_networks\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "WASM 示例",
-        "link_target": "../../../crates/c12_wasm/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c12_wasm\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "形式化方法研究",
-        "link_target": "../../research_notes/formal_methods/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\formal_methods",
-        "suggestion": "可能的正确路径:\n  - `research_notes/FORMAL_METHODS_MASTER_INDEX.md`\n  - `research_notes/RUST_FORMAL_METHODS_CHEATSHEET.md`\n  - `research_notes/formal_methods/FORMAL_METHODS_100_PERCENT_COMPLETION_REPORT.md`"
-      },
-      {
-        "link_text": "类型理论研究",
-        "link_target": "../../research_notes/type_theory/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\type_theory",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "实验研究",
-        "link_target": "../../research_notes/experiments/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\experiments",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "02_reference/quick_reference/smart_pointers_cheatsheet.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c01_ownership_borrow_scope/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c01_ownership_borrow_scope\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "智能指针示例",
-        "link_target": "../../../crates/c01_ownership_borrow_scope/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c01_ownership_borrow_scope\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      }
-    ],
-    "02_reference/quick_reference/strings_formatting_cheatsheet.md": [
-      {
-        "link_text": "完整文档",
-        "link_target": "../../../crates/c02_type_system/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      },
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c02_type_system/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "完整类型系统文档",
-        "link_target": "../../../crates/c02_type_system/docs/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\docs",
-        "suggestion": "可能的正确路径:\n  - `DOCS_100_PERCENT_EXECUTION_STATUS.md`\n  - `DOCS_100_PERCENT_PROGRESS.md`\n  - `DOCS_CLEANUP_REPORT_2026_02_27.md`"
-      }
-    ],
-    "02_reference/quick_reference/testing_cheatsheet.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates",
-        "suggestion": "可能的正确路径:\n  - `EMBEDDED_CRATES_COMPLETION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_EXPANSION_REPORT.md`\n  - `rust-ownership-decidability/case-studies/MODERN_CRATES_FINAL_REPORT.md`"
-      }
-    ],
-    "02_reference/quick_reference/threads_concurrency_cheatsheet.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c05_threads/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c05_threads\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      }
-    ],
-    "02_reference/quick_reference/type_system.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c02_type_system/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "类型系统理论",
-        "link_target": "../../../crates/c02_type_system/docs/tier_04_advanced/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\docs\\tier_04_advanced",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "泛型示例",
-        "link_target": "../../../crates/c02_type_system/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
-      },
-      {
-        "link_text": "类型转换",
-        "link_target": "../../../crates/c02_type_system/src/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c02_type_system\\src",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "类型系统研究笔记",
-        "link_target": "../../research_notes/type_theory/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\research_notes\\type_theory",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      }
-    ],
-    "02_reference/quick_reference/wasm_cheatsheet.md": [
-      {
-        "link_text": "代码示例",
-        "link_target": "../../../crates/c12_wasm/examples/",
-        "resolved_path": "E:\\_src\\rust-lang\\crates\\c12_wasm\\examples",
-        "suggestion": "可能的正确路径:\n  - `05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md`\n  - `05_guides/PRODUCTION_PROJECT_EXAMPLES.md`\n  - `research_notes/COUNTER_EXAMPLES_COMPENDIUM.md`"
       }
     ]
   }

@@ -433,8 +433,8 @@ cargo update
 
 ### 项目文档
 
-- [Rust 1.92.0 更新报告](./RUST_192_FINAL_UPDATE_REPORT.md)
-- [依赖更新报告](./DEPENDENCY_UPDATE_2025_12_11.md)
+- [Rust 1.94 更新报告](./RUST_194_CRATES_UPDATE_REPORT.md)
+- [依赖更新报告](./DEPENDENCY_UPDATE_REPORT_2026_03_04.md)
 
 ---
 

@@ -50,10 +50,10 @@
 
 | Area | Entry Point |
 |------|-------------|
-| Formal Models | [formal-foundations/models/](formal-foundations/models/) |
-| Semantics | [formal-foundations/semantics/](formal-foundations/semantics/) |
-| Proofs | [formal-foundations/proofs/](formal-foundations/proofs/) |
-| Coq Formalization | [coq-formalization/](coq-formalization/) |
+| Formal Models | [formal-foundations/models/README.md](formal-foundations/models/README.md) |
+| Semantics | [formal-foundations/semantics/README.md](formal-foundations/semantics/README.md) |
+| Proofs | [formal-foundations/proofs/README.md](formal-foundations/proofs/README.md) |
+| Coq Formalization | [coq-formalization/README.md](coq-formalization/README.md) |
 
 ### Case Studies
 
@@ -70,19 +70,19 @@
 
 ### Ownership System
 
-- **Theory**: [ownership-types.md](formal-foundations/models/ownership-types.md)
+- **Theory**: [ownership-types.md](formal-foundations/models/02-02-ownership-types.md)
 - **Practice**: [ownership-deep-dive.md](01-core-concepts/detailed-concepts/ownership-deep-dive.md)
 - **Examples**: See examples in [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md)
 
 ### Borrowing System
 
-- **Theory**: [borrow-semantics.md](formal-foundations/models/borrow-semantics.md)
+- **Theory**: [borrow-semantics.md](formal-foundations/models/02-03-borrow-semantics.md)
 - **Practice**: [borrowing-in-depth.md](01-core-concepts/detailed-concepts/borrowing-in-depth.md)
 - **Coq Proof**: [ReborrowComplete.v](coq-formalization/theories/Advanced/ReborrowComplete.v)
 
 ### Lifetimes
 
-- **Theory**: [lifetime-logic.md](formal-foundations/models/lifetime-logic.md)
+- **Theory**: [lifetime-logic.md](formal-foundations/models/02-04-lifetime-logic.md)
 - **Practice**: [lifetimes-mastery.md](01-core-concepts/detailed-concepts/lifetimes-mastery.md)
 - **Coq Proof**: [MetatheoryTermination.v](coq-formalization/theories/Advanced/MetatheoryTermination.v)
 

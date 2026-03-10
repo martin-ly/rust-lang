@@ -130,4 +130,4 @@
 - [README.md](./README.md) - 项目入口
 - [guides/README.md](./guides/README.md) - 学习指南
 - [exercises/README.md](./exercises/README.md) - 交互式练习（Rustlings、Playground）
-- [docs/02_reference/quick_reference/](./docs/02_reference/quick_reference/README.md) - 速查卡
+- [docs/02_reference/quick_reference/README.md](./docs/02_reference/quick_reference/README.md) - 速查卡

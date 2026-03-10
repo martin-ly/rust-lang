@@ -33,7 +33,7 @@
 
 #### 🌐 Web 开发
 
-- [Web 开发指南](web-development.md)
+- [Web 开发指南](../15-application-domains/web-development.md)
 - [Actix-web 分析](actix-web-formal-analysis.md)
 - [Axum 分析](axum-formal-analysis.md)
 - [Serde 深度分析](serde-formal-analysis-deep.md)
@@ -49,8 +49,8 @@
 
 - [AI/ML 开发指南](ml-ai/README.md)
 - [ndarray 分析](ndarray-formal-analysis.md)
-- [Burn 框架](burn-formal-analysis.md) *(待添加)*
-- [Candle 框架](candle-formal-analysis.md) *(待添加)*
+- Burn 框架 *(待添加)*
+- Candle 框架 *(待添加)*
 
 #### 🎮 游戏开发
 
@@ -61,17 +61,17 @@
 #### 🔗 区块链
 
 - [区块链开发指南](blockchain/README.md)
-- [Substrate 分析](substrate-formal-analysis.md) *(待添加)*
+- Substrate 分析 *(待添加)*
 
 #### ☁️ 云原生
 
 - [云原生指南](cloud/README.md)
-- [kube 客户端](kube-formal-analysis.md) *(待添加)*
+- kube 客户端 *(待添加)*
 
 #### 🔒 安全
 
 - [安全工具指南](security/README.md)
-- [ring 加密库](ring-formal-analysis.md) *(待添加)*
+- ring 加密库 *(待添加)*
 
 #### 🎬 音视频
 
@@ -149,13 +149,13 @@
 
 ### 待补充案例
 
-- [ ] [burn-formal-analysis.md](ml-ai/burn-formal-analysis.md) - 深度学习框架
-- [ ] [candle-formal-analysis.md](ml-ai/candle-formal-analysis.md) - LLM推理框架
-- [ ] [polars-formal-analysis.md](database/polars-formal-analysis.md) - DataFrame库
-- [ ] [substrate-formal-analysis.md](blockchain/substrate-formal-analysis.md) - 区块链框架
-- [ ] [kube-formal-analysis.md](cloud/kube-formal-analysis.md) - Kubernetes客户端
-- [ ] [linkerd-formal-analysis.md](cloud/linkerd-formal-analysis.md) - 服务网格
-- [ ] [ring-formal-analysis.md](security/ring-formal-analysis.md) - 加密库
+- [ ] burn-formal-analysis.md - 深度学习框架 *(待添加)*
+- [ ] candle-formal-analysis.md - LLM推理框架 *(待添加)*
+- [ ] polars-formal-analysis.md - DataFrame库 *(待添加)*
+- [ ] substrate-formal-analysis.md - 区块链框架 *(待添加)*
+- [ ] kube-formal-analysis.md - Kubernetes客户端 *(待添加)*
+- [ ] linkerd-formal-analysis.md - 服务网格 *(待添加)*
+- [ ] ring-formal-analysis.md - 加密库 *(待添加)*
 
 ---
 
