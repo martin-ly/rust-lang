@@ -86,7 +86,7 @@ graph LR
 
 - **上层导航**: [主索引](../00_MASTER_INDEX.md)
 - **下一层级**: [Tier 2: 核心概念层](../tier_02_guides/README.md)
-- **代码示例**: [examples/](../../examples/)
+- **代码示例**: [examples/](../../examples/README.md)
 - **可视化资源**: [可视化文档索引](../VISUALIZATION_INDEX.md)
 
 ## 💡 学习建议

@@ -456,7 +456,7 @@ unsafe { &*self.storage.as_ptr() }
 
 - [Rust 1.92.0 Release Notes](https://blog.rust-lang.org/)
 - [类型系统文档](../README.md)
-- [示例代码](../examples/)
+- [示例代码](../examples/README.md)
 - [测试用例](../tests/)
 
 ---

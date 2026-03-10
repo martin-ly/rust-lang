@@ -60,7 +60,7 @@ cargo run --example strategy
 
 ## 🔗 相关文档
 
-- [设计模式指南](../docs/)
+- [设计模式指南](../docs/README.md)
 - [设计模式概念族谱](../../../docs/research_notes/DESIGN_PATTERN_CONCEPT_MINDMAP.md)
 
 ---

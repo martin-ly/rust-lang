@@ -413,14 +413,14 @@ fn no_dangle() -> String {
 - [主索引](./00_MASTER_INDEX.md) - 完整文档导航
 - [FAQ](./FAQ.md) - 常见问题解答
 - [README](./README.md) - 项目概述
-- [理论基础](./tier_04_advanced/) - 深入学习
-- [核心概念](./tier_02_guides/) - 基础知识
-- [高级主题](./tier_03_references/) - 进阶内容
+- [理论基础](./tier_04_advanced/README.md) - 深入学习
+- [核心概念](./tier_02_guides/README.md) - 基础知识
+- [高级主题](./tier_03_references/README.md) - 进阶内容
 
 ---
 
 **需要更多帮助？**
 
-- 查看 [示例代码](../examples/)
+- 查看 [示例代码](../examples/README.md)
 - 运行 [测试用例](../tests/)
 - 阅读 [最佳实践](./tier_01_foundations/04_常见问题.md)

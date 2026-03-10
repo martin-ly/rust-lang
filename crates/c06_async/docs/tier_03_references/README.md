@@ -152,9 +152,9 @@ Tier 3 提供深度技术参考，包括语言特性、API 文档、生态系统
 
 ### 本模块其他层级
 
-- **[Tier 1: 基础概念](../tier_01_foundations/)** - 快速入门
-- **[Tier 2: 实践指南](../tier_02_guides/)** - 系统化指导
-- **[Tier 4: 高级主题](../tier_04_advanced/)** - 前沿探索
+- **[Tier 1: 基础概念](../tier_01_foundations/README.md)** - 快速入门
+- **[Tier 2: 实践指南](../tier_02_guides/README.md)** - 系统化指导
+- **[Tier 4: 高级主题](../tier_04_advanced/README.md)** - 前沿探索
 
 ### 外部资源
 
@@ -202,7 +202,7 @@ Tier 3 提供深度技术参考，包括语言特性、API 文档、生态系统
 - ✅ 100+ 实用代码示例
 - ✅ 覆盖语言、API、生态、机制、性能
 
-**下一步**: 继续学习 [Tier 4: 高级主题](../tier_04_advanced/) 探索前沿技术。
+**下一步**: 继续学习 [Tier 4: 高级主题](../tier_04_advanced/README.md) 探索前沿技术。
 
 ---
 

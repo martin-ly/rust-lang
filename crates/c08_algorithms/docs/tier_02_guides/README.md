@@ -48,7 +48,7 @@
 
 ---
 
-**返回**: [Tier 1](../tier_01_foundations/) | **下一步**: [Tier 3](../tier_03_references/)
+**返回**: [Tier 1](../tier_01_foundations/README.md) | **下一步**: [Tier 3](../tier_03_references/README.md)
 
 ---
 

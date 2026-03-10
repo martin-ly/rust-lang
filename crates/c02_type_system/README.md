@@ -414,10 +414,10 @@ Week 2:
 
 深入学习类型系统的形式化理论基础：
 
-- 🎯 **[类型系统形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 完整的类型系统数学定义和类型规则
-- 🏗️ **[Trait 系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/05_trait_system/)** - Trait 系统的形式化描述
-- 🔄 **[生命周期管理理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/06_lifetime_management/)** - 生命周期的形式化模型
-- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/)** - 内存安全的形式化保证
+- 🎯 **[类型系统形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)** - 完整的类型系统数学定义和类型规则
+- 🏗️ **[Trait 系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/05_trait_system/README.md)** - Trait 系统的形式化描述
+- 🔄 **[生命周期管理理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/06_lifetime_management/README.md)** - 生命周期的形式化模型
+- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/README.md)** - 内存安全的形式化保证
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
 

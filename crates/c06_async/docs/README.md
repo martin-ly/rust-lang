@@ -303,12 +303,12 @@ while let Some(item) = stream.next().await {
 - ❓ **[FAQ](./FAQ.md)** - 常见问题解答
 - 📚 **[Glossary](./Glossary.md)** - 核心术语表
 - 📖 **[核心系列](./core/)** - 01-06系统学习
-- 📚 **[学习指南](./tier_02_guides/)** - 实践导向教程
+- 📚 **[学习指南](./tier_02_guides/README.md)** - 实践导向教程
 - 🚀 **[综合指南](./comprehensive/)** - 2025最新全面分析
 
 ### 代码资源
 
-- 📁 **[../examples/](../examples/)** - 89个完整示例
+- 📁 **[../examples/](../examples/README.md)** - 89个完整示例
 - 🧪 **[../tests/](../tests/)** - 测试用例
 - ⚡ **[../benches/](../benches/)** - 性能基准
 
@@ -322,7 +322,7 @@ while let Some(item) = stream.next().await {
 ### 相关模块
 
 - [C05 Threads](../../c05_threads/docs/README.md) - 线程并发
-- [C10 Networks](../../c10_networks/docs/) - 网络编程
+- [C10 Networks](../../c10_networks/docs/README.md) - 网络编程
 
 ---
 

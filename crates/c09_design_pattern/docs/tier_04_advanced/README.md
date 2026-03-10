@@ -53,7 +53,7 @@
 
 ---
 
-**返回**: [Tier 3](../tier_03_references/) | **首页**: [Tier 1](../tier_01_foundations/)
+**返回**: [Tier 3](../tier_03_references/README.md) | **首页**: [Tier 1](../tier_01_foundations/README.md)
 
 ---
 

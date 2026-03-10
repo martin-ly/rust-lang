@@ -230,7 +230,7 @@
 - [Glossary.md](references/Glossary.md) - 术语表
 - [FAQ.md](references/FAQ.md) - 常见问题解答
 
-### 🎓 [tutorials/](tutorials/) - 教程文档
+### 🎓 [tutorials/](tutorials/README.md) - 教程文档
 
 包含从入门到精通的完整教程和示例。
 
@@ -376,7 +376,7 @@
 
 ### 项目报告
 
-- [项目报告目录](../reports/) - 包含所有项目报告、完成报告、技术分析等
+- [项目报告目录](../reports/README.md) - 包含所有项目报告、完成报告、技术分析等
 - [项目路线图](../reports/ROADMAP.md) - 项目发展规划
 - [Rust 1.92.0特性](../reports/RUST_192_ALIGNMENT_COMPLETION_SUMMARY.md) - Rust 1.92.0对齐总结
 

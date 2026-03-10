@@ -23,10 +23,10 @@
 
 **文档层级结构**:
 
-- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/) - 宏理论
-- 📝 [Tier 2: 实践层](./docs/tier_02_guides/) - 声明宏+过程宏
-- 📖 [Tier 3: 参考层](./docs/tier_03_references/) - 最佳实践
-- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/) - DSL/调试/优化
+- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/README.md) - 宏理论
+- 📝 [Tier 2: 实践层](./docs/tier_02_guides/README.md) - 声明宏+过程宏
+- 📖 [Tier 3: 参考层](./docs/tier_03_references/README.md) - 最佳实践
+- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/README.md) - DSL/调试/优化
 
 **标准化报告**: [C11_STANDARDIZATION_FINAL_2025_10_22.md](./docs/reports/C11_STANDARDIZATION_FINAL_2025_10_22.md)
 
@@ -422,7 +422,7 @@ macro_rules! count {
 深入学习宏系统的形式化理论基础：
 
 - 📐 **[宏系统形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/08_macro_system/)** - 宏系统的形式化定义和展开规则
-- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 宏中的类型操作和约束
+- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)** - 宏中的类型操作和约束
 - 🔬 **[形式化验证理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/09_formal_verification/)** - 宏展开的正确性验证
 - 🧮 **[数学基础](../../docs/rust-formal-engineering-system/01_theoretical_foundations/10_mathematical_foundations/)** - 元编程的数学基础
 

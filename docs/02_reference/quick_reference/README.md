@@ -470,37 +470,37 @@
 
 **核心模块文档**:
 
-- [类型系统完整文档](../../../crates/c02_type_system/docs/)
+- [类型系统完整文档](../../../crates/c02_type_system/docs/README.md)
 - [所有权系统完整文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
-- [异步编程完整文档](../../../crates/c06_async/docs/)
-- [控制流与函数文档](../../../crates/c03_control_fn/docs/)
-- [泛型编程文档](../../../crates/c04_generic/docs/)
-- [线程与并发文档](../../../crates/c05_threads/docs/)
-- [进程管理文档](../../../crates/c07_process/docs/)
-- [算法与数据结构文档](../../../crates/c08_algorithms/docs/)
-- [设计模式文档](../../../crates/c09_design_pattern/docs/)
-- [网络编程文档](../../../crates/c10_networks/docs/)
-- [宏系统文档](../../../crates/c11_macro_system/docs/)
-- [WASM 文档](../../../crates/c12_wasm/docs/)
+- [异步编程完整文档](../../../crates/c06_async/docs/README.md)
+- [控制流与函数文档](../../../crates/c03_control_fn/docs/README.md)
+- [泛型编程文档](../../../crates/c04_generic/docs/README.md)
+- [线程与并发文档](../../../crates/c05_threads/docs/README.md)
+- [进程管理文档](../../../crates/c07_process/docs/README.md)
+- [算法与数据结构文档](../../../crates/c08_algorithms/docs/README.md)
+- [设计模式文档](../../../crates/c09_design_pattern/docs/README.md)
+- [网络编程文档](../../../crates/c10_networks/docs/README.md)
+- [宏系统文档](../../../crates/c11_macro_system/docs/README.md)
+- [WASM 文档](../../../crates/c12_wasm/docs/README.md)
 
 ### 代码示例
 
 **核心模块示例**:
 
-- [类型系统示例](../../../crates/c02_type_system/examples/)
-- [所有权系统示例](../../../crates/c01_ownership_borrow_scope/examples/)
-- [异步编程示例](../../../crates/c06_async/examples/)
-- [控制流与函数示例](../../../crates/c03_control_fn/examples/)
-- [算法示例](../../../crates/c08_algorithms/examples/)
-- [网络编程示例](../../../crates/c10_networks/examples/)
-- [WASM 示例](../../../crates/c12_wasm/examples/)
+- [类型系统示例](../../../crates/c02_type_system/examples/README.md)
+- [所有权系统示例](../../../crates/c01_ownership_borrow_scope/examples/README.md)
+- [异步编程示例](../../../crates/c06_async/examples/README.md)
+- [控制流与函数示例](../../../crates/c03_control_fn/examples/README.md)
+- [算法示例](../../../crates/c08_algorithms/examples/README.md)
+- [网络编程示例](../../../crates/c10_networks/examples/README.md)
+- [WASM 示例](../../../crates/c12_wasm/examples/README.md)
 
 ### 研究笔记
 
 - [研究笔记快速参考](../../research_notes/QUICK_REFERENCE.md) - 形式化方法、类型理论、软件设计理论索引；与速查卡互为补充
-- [形式化方法研究](../../research_notes/formal_methods/)
-- [类型理论研究](../../research_notes/type_theory/)
-- [实验研究](../../research_notes/experiments/)
+- [形式化方法研究](../../research_notes/formal_methods/README.md)
+- [类型理论研究](../../research_notes/type_theory/README.md)
+- [实验研究](../../research_notes/experiments/README.md)
 
 ---
 

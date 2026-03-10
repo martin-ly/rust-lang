@@ -122,8 +122,8 @@
 
 ### 进阶阅读
 
-- [Tier 3: API 参考](../tier_03_references/)
-- [Tier 4: 高级主题](../tier_04_advanced/)
+- [Tier 3: API 参考](../tier_03_references/README.md)
+- [Tier 4: 高级主题](../tier_04_advanced/README.md)
 
 ### 外部资源
 

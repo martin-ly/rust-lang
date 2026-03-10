@@ -23,7 +23,7 @@
 
 - **Beginner**: [README](./README.md) | [Generics Basics Guide](tier_02_guides/01_泛型基础指南.md) | [Trait System Guide](tier_02_guides/02_Trait系统指南.md)
 - **Intermediate**: [Code Examples](tier_02_guides/06_代码示例集合.md) | [Associated Types](tier_02_guides/03_关联类型指南.md) | [Type Erasure](tier_02_guides/04_类型擦除指南.md)
-- **Advanced**: [tier_03_references/](tier_03_references/) | [tier_04_advanced/](tier_04_advanced/)
+- **Advanced**: [tier_03_references/](tier_03_references/README.md) | [tier_04_advanced/](tier_04_advanced/README.md)
 
 ### Tier Structure
 
@@ -31,8 +31,8 @@
 | :--- | :--- | :--- |
 | **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/) |
 | **Tier 2** | Core Guides | [tier_02_guides/](tier_02_guides/) |
-| **Tier 3** | References | [tier_03_references/](tier_03_references/) |
-| **Tier 4** | Advanced | [tier_04_advanced/](tier_04_advanced/) |
+| **Tier 3** | References | [tier_03_references/](tier_03_references/README.md) |
+| **Tier 4** | Advanced | [tier_04_advanced/](tier_04_advanced/README.md) |
 
 ---
 

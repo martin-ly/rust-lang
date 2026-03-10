@@ -34,7 +34,7 @@
     - [5.1 加密通信的理论基础](#51-加密通信的理论基础)
     - [5.2 数字签名与证书](#52-数字签名与证书)
   - [6. 总结](#6-总结)
-  - [7. 版本对齐说明与形式化勘误 {#version-alignment-network}](#7-版本对齐说明与形式化勘误-version-alignment-network)
+  - [7. 版本对齐说明与形式化勘误 ](#7-版本对齐说明与形式化勘误-version-alignment-network)
     - [快速开始（新增：WebSocket/UDP/gRPC）](#快速开始新增websocketudpgrpc)
   - [附录A. P2P 网络（新增）](#附录a-p2p-网络新增)
     - [A.1 定义与目标](#a1-定义与目标)
@@ -1228,7 +1228,7 @@ impl Certificate {
 
 这个框架为Rust语言中的网络编程提供了坚实的理论基础和实践指导。
 
-## 7. 版本对齐说明与形式化勘误 {#version-alignment-network}
+## 7. 版本对齐说明与形式化勘误 
 
 - 异步运行时与网络库：文中示例使用 `tokio` 接口做伪代码展示，属版本无关用法；实际工程请以所选运行时与其版本文档为准（避免绑定到特定小版本）。
 - HTTP/WebSocket 细节：

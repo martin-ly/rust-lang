@@ -160,9 +160,9 @@ Week 2-3: 实践提升
 
 ### 本模块其他层级
 
-- **[Tier 1: 基础概念](../tier_01_foundations/)** - 快速入门必读
-- **[Tier 3: 技术参考](../tier_03_references/)** - 深度技术规范
-- **[Tier 4: 高级主题](../tier_04_advanced/)** - 前沿技术探索
+- **[Tier 1: 基础概念](../tier_01_foundations/README.md)** - 快速入门必读
+- **[Tier 3: 技术参考](../tier_03_references/README.md)** - 深度技术规范
+- **[Tier 4: 高级主题](../tier_04_advanced/README.md)** - 前沿技术探索
 
 ### 外部资源
 
@@ -211,7 +211,7 @@ Week 2-3: 实践提升
 - ✅ 150+ 可运行代码示例
 - ✅ 覆盖从入门到实战的完整路径
 
-**下一步**: 继续学习 [Tier 3: 技术参考](../tier_03_references/) 深入技术细节。
+**下一步**: 继续学习 [Tier 3: 技术参考](../tier_03_references/README.md) 深入技术细节。
 
 ---
 

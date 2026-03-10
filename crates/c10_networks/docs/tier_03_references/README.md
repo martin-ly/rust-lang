@@ -86,4 +86,4 @@
 
 ---
 
-**返回**: [Tier 2](../tier_02_guides/) | **下一步**: [Tier 4](../tier_04_advanced/)
+**返回**: [Tier 2](../tier_02_guides/README.md) | **下一步**: [Tier 4](../tier_04_advanced/README.md)

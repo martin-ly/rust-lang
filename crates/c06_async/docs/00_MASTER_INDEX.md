@@ -291,16 +291,16 @@
 
 ### 本模块资源
 
-- **代码示例**: [../examples/](../examples/) - 89个完整示例
+- **代码示例**: [../examples/](../examples/README.md) - 89个完整示例
 - **测试代码**: [../tests/](../tests/) - 单元和集成测试
 - **性能测试**: [../benches/](../benches/) - 性能基准
 - **项目配置**: [../Cargo.toml](../Cargo.toml) - 依赖配置
 
 ### 相关模块
 
-- [c01_ownership_borrow_scope](../../c01_ownership_borrow_scope/docs/) - 所有权基础
-- [c05_threads](../../c05_threads/docs/) - 线程并发
-- [c10_networks](../../c10_networks/) - 网络编程
+- [c01_ownership_borrow_scope](../../c01_ownership_borrow_scope/docs/README.md) - 所有权基础
+- [c05_threads](../../c05_threads/docs/README.md) - 线程并发
+- [c10_networks](../../c10_networks/README.md) - 网络编程
 
 ### 外部资源
 

@@ -75,7 +75,7 @@
   - [📞 联系信息](#-联系信息)
     - [项目维护](#项目维护)
     - [学习支持](#学习支持)
-  - [🆕 Rust 1.93.0 / Edition 2024 采用情况](#-rust-1920--edition-2024-采用情况)
+  - [🆕 Rust 1.93.0 / Edition 2024 采用情况](#-rust-1930--edition-2024-采用情况)
     - [示例入口与用法](#示例入口与用法)
     - [运行 examples](#运行-examples)
     - [Benchmark（Criterion）](#benchmarkcriterion)
@@ -144,10 +144,10 @@
 
 **文档层级结构**:
 
-- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/) - 快速入门 (2-4小时)
-- 📝 [Tier 2: 实践层](./docs/tier_02_guides/) - 实战指南 (10-20小时)
-- 📖 [Tier 3: 参考层](./docs/tier_03_references/) - 技术参考 (按需查阅)
-- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/) - 形式化理论 (20-30小时)
+- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/README.md) - 快速入门 (2-4小时)
+- 📝 [Tier 2: 实践层](./docs/tier_02_guides/README.md) - 实战指南 (10-20小时)
+- 📖 [Tier 3: 参考层](./docs/tier_03_references/README.md) - 技术参考 (按需查阅)
+- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/README.md) - 形式化理论 (20-30小时)
 
 **标准化报告**: [C09_STANDARDIZATION_FINAL_2025_10_22.md](./docs/reports/C09_STANDARDIZATION_FINAL_2025_10_22.md)
 
@@ -291,10 +291,10 @@
 
 深入学习设计模式的形式化理论基础：
 
-- 📐 **[设计模式形式化理论](../../docs/rust-formal-engineering-system/03_design_patterns/)** - 完整的模式定义和类型规则
+- 📐 **[设计模式形式化理论](../../docs/rust-formal-engineering-system/03_design_patterns/README.md)** - 完整的模式定义和类型规则
 - 🔬 **[形式化验证理论](../../docs/research_notes/TOOLS_GUIDE.md)** - Prusti、Kani、Creusot
-- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 设计模式中的类型系统应用
-- 🧮 **[数学基础](../../docs/research_notes/type_theory/)** - 模式背后的数学理论
+- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)** - 设计模式中的类型系统应用
+- 🧮 **[数学基础](../../docs/research_notes/type_theory/README.md)** - 模式背后的数学理论
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
 

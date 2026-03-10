@@ -1,6 +1,6 @@
 ﻿# WASM 快速参考卡片
 
-> **快速参考** | [完整文档](../../../crates/c12_wasm/docs/README.md) | [代码示例](../../../crates/c12_wasm/examples/)
+> **快速参考** | [完整文档](../../../crates/c12_wasm/docs/README.md) | [代码示例](../../../crates/c12_wasm/examples/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.94.0+ (Edition 2024)

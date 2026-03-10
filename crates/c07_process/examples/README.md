@@ -39,7 +39,7 @@ cargo run --example ipc_pipes
 
 ## 🔗 相关文档
 
-- [进程与 IPC 指南](../docs/)
+- [进程与 IPC 指南](../docs/README.md)
 
 ---
 

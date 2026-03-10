@@ -95,7 +95,7 @@
 | **Rust 1.92.0示例** 🆕 | [RUST_192_EXAMPLES](./RUST_192_EXAMPLES.md)                                     | 最新特性完整示例集（自 Rust 1.90 引入） |
 | **FAQ**                | [FAQ](./FAQ.md)                                                                 | 常见问题解答                            |
 | **术语表**             | [Glossary](./Glossary.md)                                                       | 核心概念快速参考                        |
-| **Tier 1 基础层**      | [tier_01_foundations/](./tier_01_foundations/)                                  | 快速入门和基础参考                      |
+| **Tier 1 基础层**      | [tier_01_foundations/](./tier_01_foundations/README.md)                                  | 快速入门和基础参考                      |
 | **Tier 1 术语表**      | [tier*01_foundations/03*术语表.md](./tier_01_foundations/03_术语表.md)          | 核心术语快速参考                        |
 | **Tier 1 常见问题**    | [tier*01_foundations/04*常见问题.md](./tier_01_foundations/04_常见问题.md)      | 新手常见问题解答                        |
 
@@ -339,12 +339,12 @@ cargo bench -p c09_design_pattern
 
 深入学习设计模式的形式化理论基础：
 
-- 📐 **[设计模式形式化理论](../../../docs/rust-formal-engineering-system/03_design_patterns/)** - 完整的模式定义和类型规则
+- 📐 **[设计模式形式化理论](../../../docs/rust-formal-engineering-system/03_design_patterns/README.md)** - 完整的模式定义和类型规则
 - 🔬 **[形式化验证理论](../../../docs/research_notes/TOOLS_GUIDE.md)** - Prusti、Kani、Creusot
-- 🎯 **[类型系统理论](../../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 设计模式中的类型系统应用
-- 🧮 **[数学基础](../../../docs/research_notes/type_theory/)** - 模式背后的数学理论
-- ⚡ **[并发模型理论](../../../docs/rust-formal-engineering-system/02_practical_applications/)** - 并发与异步实践
-- 🔄 **[异步编程范式](../../../crates/c06_async/)** - 异步模式的理论基础
+- 🎯 **[类型系统理论](../../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)** - 设计模式中的类型系统应用
+- 🧮 **[数学基础](../../../docs/research_notes/type_theory/README.md)** - 模式背后的数学理论
+- ⚡ **[并发模型理论](../../../docs/rust-formal-engineering-system/02_practical_applications/README.md)** - 并发与异步实践
+- 🔄 **[异步编程范式](../../../crates/c06_async/README.md)** - 异步模式的理论基础
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
 

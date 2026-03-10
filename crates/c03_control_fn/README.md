@@ -14,6 +14,9 @@
 - [🦀 Rust控制流与函数学习模块](#-rust控制流与函数学习模块)
   - [目录](#目录)
   - [🎉 2025-12-11 Rust 1.92.0 特性更新 (NEW!)](#-2025-12-11-rust-1920-特性更新-new)
+    - [核心特性 (实现位置: `src/rust_192_features.rs`)](#核心特性-实现位置-srcrust_192_featuresrs)
+    - [高级功能模块 (13个主要模块)](#高级功能模块-13个主要模块)
+    - [测试和文档](#测试和文档)
   - [🎉 2025-10-22 全部文档完成](#-2025-10-22-全部文档完成)
     - [✨ 核心成就](#-核心成就)
   - [🌟 新文档体系亮点](#-新文档体系亮点)
@@ -23,9 +26,9 @@
       - [**Tier 3 - 参考层** (5文档，3,730行) ✅](#tier-3---参考层-5文档3730行-)
       - [**Tier 4 - 高级层** (5文档，4,200行) ✅](#tier-4---高级层-5文档4200行-)
     - [🔬 深度分析专区 (13+文档，8,000+行)](#-深度分析专区-13文档8000行)
-      - [**Analysis 目录** - 研究者和高级开发者的宝库](#analysis-目录---研究者和高级开发者的宝库)
-    - [📚 实用附录 (15+文档)](#-实用附录-15文档)
-      - [**Appendices 目录** - 实战指南和补充资源](#appendices-目录---实战指南和补充资源)
+      - [**深度分析资源** - 研究者和高级开发者的宝库](#深度分析资源---研究者和高级开发者的宝库)
+    - [📚 实用附录](#-实用附录)
+      - [**实战与参考** - 按需查阅](#实战与参考---按需查阅)
     - [📊 项目统计](#-项目统计)
   - [📋 模块概述](#-模块概述)
     - [🎯 学习目标](#-学习目标)
@@ -240,7 +243,7 @@
 #### **深度分析资源** - 研究者和高级开发者的宝库
 
 - **[多维概念矩阵](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** - 知识图谱、对比矩阵
-- **[控制流指南](./docs/tier_02_guides/)** - 模式匹配、错误处理、迭代器
+- **[控制流指南](./docs/tier_02_guides/README.md)** - 模式匹配、错误处理、迭代器
 
 **适合**: 深入理论，可视化学习，建立全局认知
 
@@ -250,8 +253,8 @@
 
 #### **实战与参考** - 按需查阅
 
-- **[Tier 2 指南](./docs/tier_02_guides/)** - 实战案例、最佳实践
-- **[Tier 3 参考](./docs/tier_03_references/)** - 技术参考
+- **[Tier 2 指南](./docs/tier_02_guides/README.md)** - 实战案例、最佳实践
+- **[Tier 3 参考](./docs/tier_03_references/README.md)** - 技术参考
 - **[Rust 1.92 特性](./docs/RUST_192_CONTROL_FLOW_IMPROVEMENTS.md)** - 版本特性（若存在）
 
 **适合**: 按需查阅，实战参考
@@ -320,10 +323,10 @@
 
 深入学习控制流与函数的形式化理论基础：
 
-- 🎯 **[同步编程范式理论](../../docs/rust-formal-engineering-system/02_programming_paradigms/01_synchronous/)** - 同步执行模型的形式化描述
-- 🔄 **[控制流形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/)** - 控制流结构的数学定义
-- 🎭 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 类型系统在控制流中的应用
-- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/)** - 控制流中的内存安全保证
+- 🎯 **[同步编程范式理论](../../docs/rust-formal-engineering-system/02_programming_paradigms/01_synchronous/README.md)** - 同步执行模型的形式化描述
+- 🔄 **[控制流形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/README.md)** - 控制流结构的数学定义
+- 🎭 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)** - 类型系统在控制流中的应用
+- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/README.md)** - 控制流中的内存安全保证
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
 

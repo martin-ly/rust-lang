@@ -1,6 +1,6 @@
 ﻿# 📦 Cargo 速查卡 {#-cargo-速查卡}
 
-> **快速参考** | [Cargo 官方文档](https://doc.rust-lang.org/cargo/) | [代码示例](../../../crates/)
+> **快速参考** | [Cargo 官方文档](https://doc.rust-lang.org/cargo/) | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.94.0+ (Edition 2024)
@@ -705,7 +705,7 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 
 ### 项目内部文档
 
-- [Cargo 包管理完整文档](../../../crates/c02_type_system/docs/cargo_package_management/)
+- [Cargo 包管理完整文档](../../../crates/c02_type_system/docs/cargo_package_management/README.md)
 - [工具链文档](../../06_toolchain/README.md)
 - [Cargo 工作空间指南](../../06_toolchain/02_cargo_workspace_guide.md)
 

@@ -112,7 +112,7 @@ API参考和规范文档：
 - 文档风格指南、代码风格
 - 术语表、常见问题
 
-### 4. 教程示例 ([tutorials/](tutorials/))
+### 4. 教程示例 ([tutorials/](tutorials/README.md))
 
 从入门到精通的完整教程：
 
@@ -415,7 +415,7 @@ API参考和规范文档：
 - [GitHub Issues](https://github.com/your-org/c10_networks/issues) - 问题报告
 - [GitHub Discussions](https://github.com/your-org/c10_networks/discussions) - 社区讨论
 - [文档网站](https://docs.rs/c10_networks) - 在线文档
-- [示例代码](../examples/) - 完整示例
+- [示例代码](../examples/README.md) - 完整示例
 
 ### 2. 贡献指南
 

@@ -357,9 +357,9 @@
 
 ### 学习资源
 
-- [指南层](./tier_02_guides/) - 入门文档
-- [高级主题](./tier_04_advanced/) - 进阶文档
-- [参考资料](./tier_03_references/) - 技术参考
+- [指南层](./tier_02_guides/README.md) - 入门文档
+- [高级主题](./tier_04_advanced/README.md) - 进阶文档
+- [参考资料](./tier_03_references/README.md) - 技术参考
 
 ### 参考资源
 

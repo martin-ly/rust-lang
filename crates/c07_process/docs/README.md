@@ -256,7 +256,7 @@ let output = Command::new("app")
 
 - [C05 Threads](../../c05_threads/docs/README.md) - 线程并发
 - [C06 Async](../../c06_async/docs/README.md) - 异步编程
-- [C10 Networks](../../c10_networks/) - 网络编程
+- [C10 Networks](../../c10_networks/README.md) - 网络编程
 
 ---
 

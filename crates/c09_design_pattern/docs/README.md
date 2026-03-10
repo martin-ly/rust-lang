@@ -75,7 +75,7 @@
 
 ### 🚀 初学者路径
 
-1. **Tier 1 基础层** → [tier_01_foundations/](./tier_01_foundations/)
+1. **Tier 1 基础层** → [tier_01_foundations/](./tier_01_foundations/README.md)
    - [项目概览](./tier_01_foundations/01_项目概览.md)
    - [主索引导航](./tier_01_foundations/02_主索引导航.md)
    - [术语表](./tier_01_foundations/03_术语表.md)

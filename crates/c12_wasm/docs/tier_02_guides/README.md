@@ -27,7 +27,7 @@
 
 ---
 
-**下一步**: [Tier 3 技术参考](../tier_03_references/)
+**下一步**: [Tier 3 技术参考](../tier_03_references/README.md)
 
 ---
 

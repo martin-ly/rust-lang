@@ -13,7 +13,7 @@
 
 - [🦀 Rust 泛型编程 - C04 Generic Programming](#-rust-泛型编程---c04-generic-programming)
   - [目录](#目录)
-  - [🎉 2025-12-11 Rust 1.93.0 特性更新 (NEW!)](#-2025-12-11-rust-1920-特性更新-new)
+  - [🎉 2025-12-11 Rust 1.93.0 特性更新 (NEW!)](#-2025-12-11-rust-1930-特性更新-new)
   - [🎉 重大更新 (2025-10-22)](#-重大更新-2025-10-22)
     - [✅ 文档体系全面完成](#-文档体系全面完成)
       - [📐 4-Tier 文档架构](#-4-tier-文档架构)
@@ -24,16 +24,16 @@
     - [📊 项目统计](#-项目统计)
     - [🎯 完成进度](#-完成进度)
   - [🧪 测试和示例](#-测试和示例)
-    - [运行 Rust 1.93.0 特性测试](#运行-rust-1920-特性测试)
-    - [运行 Rust 1.93.0 特性示例](#运行-rust-1920-特性示例)
+    - [运行 Rust 1.93.0 特性测试](#运行-rust-1930-特性测试)
+    - [运行 Rust 1.93.0 特性示例](#运行-rust-1930-特性示例)
     - [运行基准测试](#运行基准测试)
-    - [Rust 1.93.0 特性基准测试 ⭐ NEW](#rust-1920-特性基准测试--new)
+    - [Rust 1.93.0 特性基准测试 ⭐ NEW](#rust-1930-特性基准测试--new)
   - [🌟 C04 独特价值](#-c04-独特价值)
     - [为什么选择 C04？](#为什么选择-c04)
       - [1. 最完整的知识图谱体系](#1-最完整的知识图谱体系)
       - [2. 最全面的对比矩阵](#2-最全面的对比矩阵)
       - [3. 最深入的理论分析](#3-最深入的理论分析)
-      - [4. 最详细的 Rust 1.93.0 支持](#4-最详细的-rust-1920-支持)
+      - [4. 最详细的 Rust 1.93.0 支持](#4-最详细的-rust-1930-支持)
     - [🔬 形式化理论](#-形式化理论)
   - [📖 学习路径](#-学习路径)
     - [路径 A: 快速入门 (2-3周)](#路径-a-快速入门-2-3周)
@@ -389,8 +389,8 @@ cargo bench --bench rust_192_benchmarks
 深入学习泛型系统的形式化理论基础：
 
 - 📐 **[泛型系统形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/generics/)** - 泛型系统的形式化定义和 System F 理论
-- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - 类型系统在泛型中的应用
-- 🔄 **[Trait 系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/05_trait_system/)** - Trait 约束的形式化描述
+- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)** - 类型系统在泛型中的应用
+- 🔄 **[Trait 系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/05_trait_system/README.md)** - Trait 约束的形式化描述
 - 🔒 **[参数多态理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/generics/01_formal_generics.md)** - System F 和有界量化理论
 - ⚙️ **[单态化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/generics/05_generic_impls.md)** - 编译时泛型特化的形式化模型
 

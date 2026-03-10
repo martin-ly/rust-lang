@@ -30,11 +30,11 @@
 | CLI 开发主题 | 官方 CLI Book | 本项目对应 |
 | :--- | :--- | :--- |
 | 参数解析 | clap、structopt | C03 控制流、[cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
-| 标准输入输出 | std::io | [C07 进程管理](../../crates/c07_process/) |
-| 子进程与管道 | std::process | C07 [进程管理](../../crates/c07_process/docs/) |
+| 标准输入输出 | std::io | [C07 进程管理](../../crates/c07_process/README.md) |
+| 子进程与管道 | std::process | C07 [进程管理](../../crates/c07_process/docs/README.md) |
 | 文件系统 | std::fs | C03、C08 算法 |
 | 错误处理 | anyhow、thiserror | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
-| 异步 CLI | tokio | [C06 异步](../../crates/c06_async/)、[async_patterns](../02_reference/quick_reference/async_patterns.md) |
+| 异步 CLI | tokio | [C06 异步](../../crates/c06_async/README.md)、[async_patterns](../02_reference/quick_reference/async_patterns.md) |
 
 ---
 
@@ -171,7 +171,7 @@ fn main() {
 }
 ```
 
-### 5. 错误处理最佳实践 {#错误处理最佳实践}
+### 5. 错误处理最佳实践 
 
 ```rust
 use thiserror::Error;
@@ -308,7 +308,7 @@ fn main() -> ExitCode {
 构建终端用户界面应用：
 
 - 使用 `ratatui` 创建交互式界面
-- 结合 [C07 进程管理](../../crates/c07_process/) 处理子进程
+- 结合 [C07 进程管理](../../crates/c07_process/README.md) 处理子进程
 - 实现键盘导航和事件处理
 
 ---

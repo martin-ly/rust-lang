@@ -290,9 +290,9 @@ wasmedgec --optimize 3 input.wasm output.so
 
 - 📊 [项目推进报告](./PROJECT_ADVANCEMENT_2025_10_30.md)
 - 📖 [WasmEdge 2025 快速开始](./WASMEDGE_2025_QUICK_START.md)
-- 💻 [完整示例代码](./examples/)
+- 💻 [完整示例代码](./examples/README.md)
 - 🔧 [部署配置](./deployment/)
-- 📚 [完整文档](./docs/)
+- 📚 [完整文档](./docs/README.md)
 
 ---
 

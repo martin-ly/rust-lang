@@ -957,7 +957,7 @@ enum-variant-names-threshold = 3
 - [主索引](./00_MASTER_INDEX.md) - 完整文档导航
 - [README](./README.md) - 项目概述
 - [Glossary](./Glossary.md) - 术语表（完整版）
-- [Tier 1 基础层](./tier_01_foundations/) - 快速入门和基础参考
+- [Tier 1 基础层](./tier_01_foundations/README.md) - 快速入门和基础参考
 - [Tier 1 术语表](./tier_01_foundations/03_术语表.md) - 核心术语快速参考
 - [Tier 1 常见问题](./tier_01_foundations/04_常见问题.md) - 新手常见问题解答
 - [综合指南](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 深度学习
@@ -967,6 +967,6 @@ enum-variant-names-threshold = 3
 
 **需要更多帮助？**
 
-- 查看 [示例代码](../examples/)
+- 查看 [示例代码](../examples/README.md)
 - 运行 [测试用例](../tests/)
 - 阅读 [源码实现](../src/)

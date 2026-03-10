@@ -7,21 +7,21 @@
 
 ---
 
-## 📋 目录 {#-目录}
+## 📋 目录 
 
 - [Unsafe Rust 专题指南](#unsafe-rust-专题指南)
-  - [📋 目录 {#-目录}](#-目录--目录)
+  - [📋 目录 ](#-目录--目录)
   - [文档定位](#文档定位)
-  - [🎯 何时使用 Unsafe {#-何时使用-unsafe}](#-何时使用-unsafe--何时使用-unsafe)
-  - [📚 核心 Unsafe 操作 {#-核心-unsafe-操作}](#-核心-unsafe-操作--核心-unsafe-操作)
-  - [💻 完整代码示例 {#-完整代码示例}](#-完整代码示例--完整代码示例)
+  - [🎯 何时使用 Unsafe ](#-何时使用-unsafe--何时使用-unsafe)
+  - [📚 核心 Unsafe 操作 ](#-核心-unsafe-操作--核心-unsafe-操作)
+  - [💻 完整代码示例 ](#-完整代码示例--完整代码示例)
     - [1. 原始指针操作](#1-原始指针操作)
     - [2. 调用外部函数 (FFI)](#2-调用外部函数-ffi)
     - [3. 实现 Send/Sync](#3-实现-sendsync)
     - [4. Union 访问](#4-union-访问)
     - [5. 内联汇编](#5-内联汇编)
     - [6. 自定义智能指针](#6-自定义智能指针)
-  - [⚠️ 未定义行为 (UB) 案例 {#️-未定义行为-ub-案例}](#️-未定义行为-ub-案例-️-未定义行为-ub-案例)
+  - [⚠️ 未定义行为 (UB) 案例 ](#️-未定义行为-ub-案例-️-未定义行为-ub-案例)
     - [案例 1: 空指针解引用](#案例-1-空指针解引用)
     - [案例 2: 悬垂指针](#案例-2-悬垂指针)
     - [案例 3: 数据竞争](#案例-3-数据竞争)
@@ -30,13 +30,13 @@
     - [案例 6: 越界访问](#案例-6-越界访问)
     - [案例 7: 违反借用规则](#案例-7-违反借用规则)
     - [案例 8: 不恰当的 Drop 实现](#案例-8-不恰当的-drop-实现)
-  - [🛡️ 安全抽象原则 {#️-安全抽象原则}](#️-安全抽象原则-️-安全抽象原则)
-  - [🔬 Miri 检测工具 {#-miri-检测工具}](#-miri-检测工具--miri-检测工具)
-  - [📖 形式化安全边界 {#-形式化安全边界}](#-形式化安全边界--形式化安全边界)
+  - [🛡️ 安全抽象原则 ](#️-安全抽象原则-️-安全抽象原则)
+  - [🔬 Miri 检测工具 ](#-miri-检测工具--miri-检测工具)
+  - [📖 形式化安全边界 ](#-形式化安全边界--形式化安全边界)
     - [安全/非安全边界分析](#安全非安全边界分析)
     - [形式化资源](#形式化资源)
-  - [🔗 推荐学习路径 {#-推荐学习路径}](#-推荐学习路径--推荐学习路径)
-  - [📖 Rustonomicon 逐章对标表 {#-rustonomicon-逐章对标表}](#-rustonomicon-逐章对标表--rustonomicon-逐章对标表)
+  - [🔗 推荐学习路径 ](#-推荐学习路径--推荐学习路径)
+  - [📖 Rustonomicon 逐章对标表 ](#-rustonomicon-逐章对标表--rustonomicon-逐章对标表)
 
 ---
 
@@ -48,7 +48,7 @@
 
 ---
 
-## 🎯 何时使用 Unsafe {#-何时使用-unsafe}
+## 🎯 何时使用 Unsafe 
 
 Rust 的 `unsafe` 关键字允许你执行以下五种操作：
 
@@ -78,7 +78,7 @@ unsafe impl MyUnsafeTrait for MyType {
 
 ---
 
-## 📚 核心 Unsafe 操作 {#-核心-unsafe-操作}
+## 📚 核心 Unsafe 操作 
 
 | 操作 | 说明 | 风险 |
 | :--- | :--- | :--- |
@@ -90,7 +90,7 @@ unsafe impl MyUnsafeTrait for MyType {
 
 ---
 
-## 💻 完整代码示例 {#-完整代码示例}
+## 💻 完整代码示例 
 
 ### 1. 原始指针操作
 
@@ -494,7 +494,7 @@ unsafe impl<T: Sync> Sync for MyBox<T> {}
 
 ---
 
-## ⚠️ 未定义行为 (UB) 案例 {#️-未定义行为-ub-案例}
+## ⚠️ 未定义行为 (UB) 案例 
 
 ### 案例 1: 空指针解引用
 
@@ -737,7 +737,7 @@ impl Drop for SafeDrop {
 
 ---
 
-## 🛡️ 安全抽象原则 {#️-安全抽象原则}
+## 🛡️ 安全抽象原则 
 
 > **对应 Nomicon**: [Working with Unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html)
 
@@ -787,7 +787,7 @@ impl Drop for SafeDrop {
 
 ---
 
-## 🔬 Miri 检测工具 {#-miri-检测工具}
+## 🔬 Miri 检测工具 
 
 Miri 是 Rust 的内存安全检测工具，可以检测大多数 UB。
 
@@ -816,7 +816,7 @@ Miri 可以检测：
 
 ---
 
-## 📖 形式化安全边界 {#-形式化安全边界}
+## 📖 形式化安全边界 
 
 ### 安全/非安全边界分析
 
@@ -837,7 +837,7 @@ Miri 可以检测：
 
 ---
 
-## 🔗 推荐学习路径 {#-推荐学习路径}
+## 🔗 推荐学习路径 
 
 > **对应 Nomicon 阅读顺序**: [Meet Safe and Unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) → [How Safe and Unsafe Interact](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) → [What Unsafe Rust Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) → [Working with Unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html)
 
@@ -848,7 +848,7 @@ Miri 可以检测：
 
 ---
 
-## 📖 Rustonomicon 逐章对标表 {#-rustonomicon-逐章对标表}
+## 📖 Rustonomicon 逐章对标表 
 
 | Nomicon 章节 | 官方链接 | 本指南对应小节 |
 | :--- | :--- | :--- |

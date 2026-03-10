@@ -30,8 +30,8 @@
 ### ⚡ 快速查找
 
 - **找算法** → [01_算法分类参考](./tier_03_references/01_算法分类参考.md)
-- **学基础** → [tier_02_guides/](./tier_02_guides/)
-- **看理论** → [tier_04_advanced/](./tier_04_advanced/)
+- **学基础** → [tier_02_guides/](./tier_02_guides/README.md)
+- **看理论** → [tier_04_advanced/](./tier_04_advanced/README.md)
 - **查特性** → [RUST_192_ALGORITHMS_IMPROVEMENTS](./RUST_192_ALGORITHMS_IMPROVEMENTS.md)
 
 ---
@@ -249,8 +249,8 @@
 ### 项目资源
 
 - **[主 README](../README.md)** - 项目主页
-- **[源代码](../src/)** - 算法实现
-- **[示例](../examples/)** - 完整示例
+- **[源代码](../src/README.md)** - 算法实现
+- **[示例](../examples/README.md)** - 完整示例
 - **[测试](../tests/)** - 测试用例
 - **[基准测试](../benches/)** - 性能测试
 

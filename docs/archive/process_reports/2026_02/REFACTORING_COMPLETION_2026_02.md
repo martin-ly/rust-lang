@@ -49,7 +49,7 @@
 
 ## 阶段 4：docs/docs 迁移
 
-- [x] docs/docs/language/applications/14_workflow/ 2 个文件 → 05_guides/workflow/
+- [x] docs/language/applications/14_workflow/ 2 个文件 → 05_guides/workflow/
 - [x] 删除空 docs/docs 目录
 - [x] 各主题目录添加 README 导航
 

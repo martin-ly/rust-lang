@@ -15,10 +15,10 @@
 本项目现已采用 **Tier 1-4 分层架构**，提供从入门到精通的系统化学习路径：
 
 | Tier                                      | 名称       | 定位     | 适合      | 时间  |
-| :--- | :--- | :--- | :--- | :--- || **[Tier 1](./docs/tier_01_foundations/)** | 基础文档层 | 快速入门 | 🆕 新手   | 2-4h  |
-| **[Tier 2](./docs/tier_02_guides/)** | 核心概念层 | 系统掌握 | 💼 开发者 | 2-3天 |
-| **[Tier 3](./docs/tier_03_references/)**  | 高级应用层 | 深入实践 | 🏗️ 架构师 | 1-2周 |
-| **[Tier 4](./docs/tier_04_advanced/)**   | 理论深化层 | 学术研究 | 🔬 研究者 | 持续  |
+| :--- | :--- | :--- | :--- | :--- || **[Tier 1](./docs/tier_01_foundations/README.md)** | 基础文档层 | 快速入门 | 🆕 新手   | 2-4h  |
+| **[Tier 2](./docs/tier_02_guides/README.md)** | 核心概念层 | 系统掌握 | 💼 开发者 | 2-3天 |
+| **[Tier 3](./docs/tier_03_references/README.md)**  | 高级应用层 | 深入实践 | 🏗️ 架构师 | 1-2周 |
+| **[Tier 4](./docs/tier_04_advanced/README.md)**   | 理论深化层 | 学术研究 | 🔬 研究者 | 持续  |
 
 ### 🎯 快速开始
 
@@ -703,9 +703,9 @@ cargo test --example rust_190_rich_practical_examples
 
 深入学习所有权系统的形式化理论基础：
 
-- 📐 **[所有权形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/03_ownership_borrowing/)** - 完整的数学定义和类型规则
-- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - Rust 类型系统的形式化描述
-- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/)** - 内存安全的形式化保证
+- 📐 **[所有权形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/03_ownership_borrowing/README.md)** - 完整的数学定义和类型规则
+- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)** - Rust 类型系统的形式化描述
+- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/README.md)** - 内存安全的形式化保证
 - ⚡ **[并发模型理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models/)** - 并发安全的形式化模型
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解

@@ -43,7 +43,7 @@ cargo run --example iterator_adapters
 
 ## 🔗 相关文档
 
-- [控制流与函数指南](../docs/)
+- [控制流与函数指南](../docs/README.md)
 
 ---
 

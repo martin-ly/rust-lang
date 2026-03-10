@@ -255,7 +255,7 @@
 
 **代码示例**:
 
-- 查看 [`examples/`](../examples/) 目录中的 23+ 个完整示例
+- 查看 [`examples/`](../examples/README.md) 目录中的 23+ 个完整示例
 - 参考各文档中的内联代码示例
 
 ---
@@ -307,7 +307,7 @@ docs/
 
 3. **第 3 天**: 深入练习
    - [泛型基础指南](./tier_02_guides/01_泛型基础指南.md)
-   - 查看 [`examples/`](../examples/) 中的示例
+   - 查看 [`examples/`](../examples/README.md) 中的示例
    - 运行测试: `cargo test`
 
 ### 路径 2: 系统学习 (1-2 周)
@@ -454,7 +454,7 @@ docs/
 ### 项目资源
 
 - [主 README](../README.md) - 项目主页
-- [示例代码](../examples/) - 23+ 个完整示例
+- [示例代码](../examples/README.md) - 23+ 个完整示例
 - [源代码](../src/) - 模块源代码
 - [测试用例](../tests/) - 测试代码
 

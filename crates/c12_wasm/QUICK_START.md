@@ -351,15 +351,15 @@ du -h pkg/c12_wasm_bg.wasm
 
 ### 文档
 
-- 📖 [完整文档](./docs/)
+- 📖 [完整文档](./docs/README.md)
 - 📝 [API 参考](./docs/tier_03_references/01_api_参考.md)
 - 🎯 [最佳实践](./docs/tier_03_references/03_最佳实践.md)
 
 ### 示例
 
-- 💻 [示例代码](./examples/)
-- 🌐 [演示页面](./demo/)
-- 🧪 [测试代码](./tests/)
+- 💻 [示例代码](./examples/README.md)
+- 🌐 [演示页面](./demo/README.md)
+- 🧪 [测试代码](./tests/README.md)
 
 ### 工具
 
@@ -383,7 +383,7 @@ du -h pkg/c12_wasm_bg.wasm
 选择最适合你的方式开始：
 
 - 🚀 **快速体验**: 直接打开 `demo/index.html`
-- 📖 **系统学习**: 从 [Tier 1 文档](./docs/tier_01_foundations/) 开始
+- 📖 **系统学习**: 从 [Tier 1 文档](./docs/tier_01_foundations/README.md) 开始
 - 💻 **动手实践**: 运行 `examples/` 中的示例
 - 🧪 **深入研究**: 查看 `tests/` 和 `benches/`
 

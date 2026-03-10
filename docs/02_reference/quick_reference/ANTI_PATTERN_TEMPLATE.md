@@ -8,10 +8,10 @@
 
 ---
 
-## 📋 目录 {#-目录}
+## 📋 目录 
 
 - [Rust 反模式速查卡](#rust-反模式速查卡)
-  - [📋 目录 {#-目录}](#-目录--目录)
+  - [📋 目录 ](#-目录--目录)
   - [一、模板结构](#一模板结构)
   - [二、反例数量建议](#二反例数量建议)
   - [示例：所有权反例](#示例所有权反例)
@@ -670,7 +670,7 @@ fn factorial_big(n: u32) -> num_bigint::BigUint {
 /// ```
 ```
 
-**参考**: [testing_cheatsheet](./testing_cheatsheet.md) 编译测试；[c11 宏模块 trybuild](../../../crates/c11_macro_system/) 过程宏编译失败测试。
+**参考**: [testing_cheatsheet](./testing_cheatsheet.md) 编译测试；[c11 宏模块 trybuild](../../../crates/c11_macro_system/README.md) 过程宏编译失败测试。
 
 ---
 

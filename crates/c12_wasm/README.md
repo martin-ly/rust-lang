@@ -9,7 +9,7 @@
     - [📖 新版文档导航](#-新版文档导航)
   - [📚 知识结构文档](#-知识结构文档)
     - [知识结构体系](#知识结构体系)
-    - [Rust 1.92.0 WASM 专用文档 ⭐ NEW](#rust-1920-wasm-专用文档--new)
+    - [Rust 1.92/1.93 WASM 专用文档](#rust-192193-wasm-专用文档)
     - [使用指南](#使用指南)
   - [📋 模块概述](#-模块概述)
     - [🎯 学习目标](#-学习目标)
@@ -84,10 +84,10 @@
 
 **文档层级结构**:
 
-- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/) - 快速入门 (2-4小时)
-- 📝 [Tier 2: 实践层](./docs/tier_02_guides/) - 实战指南 (10-20小时)
-- 📖 [Tier 3: 参考层](./docs/tier_03_references/) - 技术参考 (按需查阅)
-- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/) - 高级主题 (20-30小时)
+- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/README.md) - 快速入门 (2-4小时)
+- 📝 [Tier 2: 实践层](./docs/tier_02_guides/README.md) - 实战指南 (10-20小时)
+- 📖 [Tier 3: 参考层](./docs/tier_03_references/README.md) - 技术参考 (按需查阅)
+- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/README.md) - 高级主题 (20-30小时)
   - 🆕 [容器技术深度集成](./docs/tier_04_advanced/06_容器技术深度集成.md) ⭐ 2025-10-30
   - 🆕 [云原生CI/CD实践](./docs/tier_04_advanced/07_云原生CI_CD实践.md) ⭐ 2025-10-30
   - 🆕 [监控与可观测性实践](./docs/tier_04_advanced/08_监控与可观测性实践.md) ⭐ 2025-10-30

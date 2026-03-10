@@ -437,7 +437,7 @@ let page = html! {
 
 1. 查看[术语表](./Glossary.md)
 2. 阅读[官方文档](https://doc.rust-lang.org/reference/macros.html)
-3. 查看[示例代码](../examples/)
+3. 查看[示例代码](../examples/README.md)
 4. 提交Issue
 
 ---

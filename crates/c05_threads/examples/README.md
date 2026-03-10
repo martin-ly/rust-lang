@@ -59,7 +59,7 @@ cargo run --example shared_state
 
 ## 🔗 相关文档
 
-- [线程与并发指南](../docs/)
+- [线程与并发指南](../docs/README.md)
 - [并发安全概念族谱](../../../docs/research_notes/CONCURRENCY_CONCEPT_MINDMAP.md)
 
 ---

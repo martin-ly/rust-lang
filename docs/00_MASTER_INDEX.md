@@ -53,11 +53,11 @@
 
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [quick_reference/](./02_reference/quick_reference/) | 20 个速查卡（含 AI/ML、类型、所有权、异步等） | → [05_guides](#05-专题指南) → [research_notes](#03-理论与形式化) |
+| [quick_reference/](./02_reference/quick_reference/README.md) | 20 个速查卡（含 AI/ML、类型、所有权、异步等） | → [05_guides](#05-专题指南) → [research_notes](#03-理论与形式化) |
 | [ALIGNMENT_GUIDE.md](./02_reference/ALIGNMENT_GUIDE.md) | 对齐知识综合（内存/格式化/unsafe/缓存行） | → [PERFORMANCE_TUNING_GUIDE](./05_guides/PERFORMANCE_TUNING_GUIDE.md) → [UNSAFE_RUST_GUIDE](./05_guides/UNSAFE_RUST_GUIDE.md) |
 | [ERROR_CODE_MAPPING.md](./02_reference/ERROR_CODE_MAPPING.md) | 编译器错误码 → 本项目文档映射 | → [TROUBLESHOOTING_GUIDE](./05_guides/TROUBLESHOOTING_GUIDE.md) → [research_notes/formal_methods](./research_notes/formal_methods/README.md) |
 | [EDGE_CASES_AND_SPECIAL_CASES.md](./02_reference/EDGE_CASES_AND_SPECIAL_CASES.md) | 空集、零长度、溢出等边界特例 | → [SAFE_DECIDABLE_MECHANISMS](./research_notes/SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) → [SAFE_UNSAFE_ANALYSIS](./research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
-| [STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md](./02_reference/STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md) | 标准库全面分析 | → [type_theory](./research_notes/type_theory/README.md) → [crates/*/examples/](../crates/) |
+| [STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md](./02_reference/STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md) | 标准库全面分析 | → [type_theory](./research_notes/type_theory/README.md) → [crates/*/examples/](../crates/README.md) |
 | [CROSS_LANGUAGE_COMPARISON.md](./02_reference/CROSS_LANGUAGE_COMPARISON.md) | Rust vs C++/Go/Python | → [LEARNING_PATH_PLANNING](./01_learning/LEARNING_PATH_PLANNING.md) |
 
 ### 速查卡详细索引
@@ -202,13 +202,13 @@
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构框架 | ←→ [research_notes/](./research_notes/README.md) ←→ [CROSS_REFERENCE_INDEX](./research_notes/CROSS_REFERENCE_INDEX.md) |
-| [MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md](./07_project/MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md) | 模块知识结构指南 | ←→ [crates/*/docs/](../crates/) ←→ [QUICK_REFERENCE](./research_notes/QUICK_REFERENCE.md) |
+| [MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md](./07_project/MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md) | 模块知识结构指南 | ←→ [crates/*/docs/](../crates/README.md) ←→ [QUICK_REFERENCE](./research_notes/QUICK_REFERENCE.md) |
 | [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) | **文档交叉引用指南** - 全文档映射网络 | ←→ [CROSS_REFERENCE_INDEX](./research_notes/CROSS_REFERENCE_INDEX.md) ←→ 所有主要文档 |
-| [PROJECT_ARCHITECTURE_GUIDE.md](./07_project/PROJECT_ARCHITECTURE_GUIDE.md) | 项目架构指南 | ←→ [crates/](../crates/) ←→ [software_design_theory/04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) |
+| [PROJECT_ARCHITECTURE_GUIDE.md](./07_project/PROJECT_ARCHITECTURE_GUIDE.md) | 项目架构指南 | ←→ [crates/](../crates/README.md) ←→ [software_design_theory/04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) |
 | [RUST_RELEASE_TRACKING_CHECKLIST.md](./archive/process_reports/2026_02/project/RUST_RELEASE_TRACKING_CHECKLIST.md) | 新版本发布后的更新流程 | ←→ [06_toolchain/](./06_toolchain/README.md) ←→ [research_notes/](./research_notes/README.md) |
 | [TASK_INDEX.md](./archive/process_reports/2026_02/project/TASK_INDEX.md) | 未完成任务与计划总索引 | ←→ 所有主要文档 |
 | [DOCS_100_PERCENT_PROGRESS.md](./DOCS_100_PERCENT_PROGRESS.md) | 100% 推进进度与验收标准 | ←→ [TASK_ORCHESTRATION_MASTER_PLAN](../TASK_ORCHESTRATION_MASTER_PLAN.md) |
-| [MODULE_1.93_ADAPTATION_STATUS.md](./archive/process_reports/2026_02/project/MODULE_1.93_ADAPTATION_STATUS.md) | C01–C12 模块 1.93 适配状态 | ←→ [crates/](../crates/) ←→ [06_toolchain/](./06_toolchain/README.md) |
+| [MODULE_1.93_ADAPTATION_STATUS.md](./archive/process_reports/2026_02/project/MODULE_1.93_ADAPTATION_STATUS.md) | C01–C12 模块 1.93 适配状态 | ←→ [crates/](../crates/README.md) ←→ [06_toolchain/](./06_toolchain/README.md) |
 | [PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md](./archive/process_reports/2026_02/project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md) | 项目批判性评估报告 | ←→ 所有主要文档 |
 | [INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md](./archive/process_reports/2026_02/project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md) | 国际化对标与全面批判性评估 | ←→ [formal_methods/](./research_notes/formal_methods/README.md) |
 | [ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md](./archive/process_reports/2026_02/project/ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md) | 对齐知识批判性评估与推进方案 | ←→ [ALIGNMENT_GUIDE](./02_reference/ALIGNMENT_GUIDE.md) |

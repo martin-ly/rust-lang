@@ -46,7 +46,7 @@
 
 ---
 
-**下一步**: 完成 Tier 1 后，进入 [Tier 2 实践指南](../tier_02_guides/)
+**下一步**: 完成 Tier 1 后，进入 [Tier 2 实践指南](../tier_02_guides/README.md)
 
 ---
 

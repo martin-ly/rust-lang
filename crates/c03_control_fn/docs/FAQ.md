@@ -431,14 +431,14 @@ fn apply<F: Fn(i32) -> i32>(f: F, x: i32) -> i32 {
 - [主索引](./00_MASTER_INDEX.md) - 完整文档导航
 - [README](../README.md) - 项目概述
 - [Glossary](./Glossary.md) - 核心术语表
-- [指南层](./tier_02_guides/) - 基础学习路径
-- [高级主题](./tier_04_advanced/) - 进阶内容
-- [参考资料](./tier_03_references/) - 技术参考
+- [指南层](./tier_02_guides/README.md) - 基础学习路径
+- [高级主题](./tier_04_advanced/README.md) - 进阶内容
+- [参考资料](./tier_03_references/README.md) - 技术参考
 
 ---
 
 **需要更多帮助？**
 
-- 查看 [示例代码](../examples/)
+- 查看 [示例代码](../examples/README.md)
 - 运行 [测试用例](../tests/)
 - 阅读 [完整文档索引](./DOCUMENTATION_INDEX.md)

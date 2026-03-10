@@ -636,11 +636,11 @@
    - [思维导图](MIND_MAP.md) - 理解知识结构
 
 2. **第2-3天**: 深入复习
-   - [Tier 2 核心文档](tier_02_guides/) - 全部复习
+   - [Tier 2 核心文档](tier_02_guides/README.md) - 全部复习
    - [常见问题](tier_01_foundations/04_常见问题.md) - 能流利回答
 
 3. **第4天**: 高级主题
-   - [Tier 3 高级文档](tier_03_references/) - 重点复习
+   - [Tier 3 高级文档](tier_03_references/README.md) - 重点复习
    - [多维矩阵](MULTIDIMENSIONAL_MATRIX.md) - 对比分析
 
 4. **第5天**: 实战演练

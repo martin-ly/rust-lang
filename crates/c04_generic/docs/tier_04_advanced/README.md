@@ -234,7 +234,7 @@
 
 - [../tier_01_foundations/](../tier_01_foundations/) - 基础知识
 - [../tier_02_guides/](../tier_02_guides/) - 实践指南
-- [../tier_03_references/](../tier_03_references/) - 完整参考
+- [../tier_03_references/](../tier_03_references/README.md) - 完整参考
 
 **外部资源**:
 

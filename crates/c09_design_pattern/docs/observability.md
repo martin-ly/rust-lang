@@ -408,7 +408,7 @@ criterion_main!(benches);
 
 ## 相关资源
 
-- **Tier 3**: [技术参考](./tier_03_references/)
+- **Tier 3**: [技术参考](./tier_03_references/README.md)
 - **Tier 4**: [工程实践](./tier_04_advanced/04_工程实践与生产级模式.md)
 - **OpenTelemetry**: [官方文档](https://opentelemetry.io/)
 - **Prometheus**: [官方指南](https://prometheus.io/docs/introduction/overview/)

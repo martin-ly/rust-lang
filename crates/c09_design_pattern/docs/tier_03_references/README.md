@@ -27,7 +27,7 @@
 | :--- | :--- || [00_MASTER_INDEX.md](../00_MASTER_INDEX.md)                                       | 完整索引                             |
 | [FAQ.md](../FAQ.md)                                                               | 常见问题（完整版）                   |
 | [Glossary.md](../Glossary.md)                                                     | 术语表（完整版）                     |
-| [Tier 1 基础层](../tier_01_foundations/)                                          | 快速入门和基础参考                   |
+| [Tier 1 基础层](../tier_01_foundations/README.md)                                          | 快速入门和基础参考                   |
 | [Tier 1 术语表](../tier_01_foundations/03_术语表.md)                              | 核心术语快速参考                     |
 | [Tier 1 常见问题](../tier_01_foundations/04_常见问题.md)                          | 新手常见问题解答                     |
 | [OVERVIEW.md](../OVERVIEW.md)                                                     | 概览                                 |
@@ -52,4 +52,4 @@
 
 ---
 
-**返回**: [Tier 2](../tier_02_guides/) | **下一步**: [Tier 4](../tier_04_advanced/)
+**返回**: [Tier 2](../tier_02_guides/README.md) | **下一步**: [Tier 4](../tier_04_advanced/README.md)

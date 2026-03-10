@@ -116,7 +116,7 @@
 ## 🔗 相关链接
 
 - [项目主页](README.md)
-- [API 文档](docs/)
+- [API 文档](docs/README.md)
 - [贡献指南](CONTRIBUTING.md)
 - [问题反馈](https://github.com/your-repo/c04_generic/issues)
 

@@ -46,7 +46,7 @@ cargo expand --package c11_macro_system
 
 ## 🔗 相关文档
 
-- [宏系统指南](../docs/)
+- [宏系统指南](../docs/README.md)
 - [宏系统概念族谱](../../../docs/research_notes/MACRO_SYSTEM_MINDMAP.md)
 
 ---

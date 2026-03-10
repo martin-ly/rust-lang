@@ -322,14 +322,14 @@ kubectl describe pod/wasm-microservice-xxx -n wasm-prod
 
 ### 文档
 
-- 📖 [完整文档](./docs/)
+- 📖 [完整文档](./docs/README.md)
 - 🚀 [快速开始](./QUICK_START.md)
 - 📋 [项目状态](./PROJECT_STATUS.md)
 - 📝 [完成报告](./WASMEDGE_2025_ADVANCEMENT_REPORT.md)
 
 ### 代码示例
 
-- 💻 [示例代码](./examples/)
+- 💻 [示例代码](./examples/README.md)
 - 📦 [部署配置](./deployment/)
 
 ### 社区

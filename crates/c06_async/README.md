@@ -999,10 +999,10 @@ kubectl get pods -n rust-async-190
 
 深入学习异步编程的形式化理论基础：
 
-- ⚡ **[异步编程范式理论](../../docs/rust-formal-engineering-system/02_programming_paradigms/02_async/)** - 完整的异步编程形式化理论
+- ⚡ **[异步编程范式理论](../../docs/rust-formal-engineering-system/02_programming_paradigms/02_async/README.md)** - 完整的异步编程形式化理论
 - 🔄 **[并发模型理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models/)** - 并发模型的形式化描述
-- 🎭 **[Actor 模型理论](../../docs/rust-formal-engineering-system/02_programming_paradigms/09_actor_model/)** - Actor 模式的形式化定义
-- 🔗 **[CSP 模型理论](../../docs/rust-formal-engineering-system/03_design_patterns/04_concurrent/)** - CSP 模式的形式化分析
+- 🎭 **[Actor 模型理论](../../docs/rust-formal-engineering-system/02_programming_paradigms/09_actor_model/README.md)** - Actor 模式的形式化定义
+- 🔗 **[CSP 模型理论](../../docs/rust-formal-engineering-system/03_design_patterns/04_concurrent/README.md)** - CSP 模式的形式化分析
 
 ### 使用指南
 

@@ -90,8 +90,8 @@ docs/
 理论与实践结合：
 
 1. **理论深入**
-   - [基础层](tier_01_foundations/) - 所有基础文档
-   - [参考资料](tier_03_references/) - 技术参考
+   - [基础层](tier_01_foundations/README.md) - 所有基础文档
+   - [参考资料](tier_03_references/README.md) - 技术参考
 
 2. **实践应用**
    - [错误处理指南](tier_02_guides/05_错误处理指南.md)

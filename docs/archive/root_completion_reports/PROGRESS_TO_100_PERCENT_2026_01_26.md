@@ -29,7 +29,7 @@
   - 指向: `crates/c02_type_system/docs/cargo_package_management/00_INDEX.md`
   - 添加: Rust 官方模块系统文档链接
 - ✅ **README.md**: 修复完成报告链接
-  - 从: `docs/docs/C1_ONLINE_DOCS_COMPLETION_2025_10_30.md` (不存在)
+  - 从: `docs/C1_ONLINE_DOCS_COMPLETION_2025_10_30.md` (不存在)
   - 到: `PROJECT_COMPLETION_STATUS_2025_12_25.md`
 
 #### 1.2 研究笔记文档

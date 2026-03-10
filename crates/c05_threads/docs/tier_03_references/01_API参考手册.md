@@ -1187,7 +1187,7 @@ fn rwlock_cache_example() {
 
 ### 内部文档
 
-- [← 返回 Tier 2：实践指南](../tier_02_guides/)
+- [← 返回 Tier 2：实践指南](../tier_02_guides/README.md)
 - [→ 下一篇：无锁编程参考](./02_无锁编程参考.md)
 - [↑ 返回主索引](../tier_01_foundations/02_主索引导航.md)
 

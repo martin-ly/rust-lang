@@ -27,7 +27,7 @@
 
 ---
 
-**下一步**: [Tier 4 高级主题](../tier_04_advanced/)
+**下一步**: [Tier 4 高级主题](../tier_04_advanced/README.md)
 
 ---
 

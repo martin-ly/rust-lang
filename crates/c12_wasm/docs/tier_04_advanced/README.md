@@ -313,7 +313,7 @@ Week 4: 综合实践
 
 - 📖 [WasmEdge 2025 快速开始](../../WASMEDGE_2025_QUICK_START.md)
 - 📊 [WasmEdge 2025 完成报告](../../WASMEDGE_2025_ADVANCEMENT_REPORT.md)
-- 💻 [代码示例](../../examples/)
+- 💻 [代码示例](../../examples/README.md)
 - 🔧 [部署配置](../../deployment/)
 
 ---

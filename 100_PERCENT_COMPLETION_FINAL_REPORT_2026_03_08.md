@@ -229,8 +229,8 @@ docs/research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md (10,880 bytes)
 - [借用检查器证明](./docs/research_notes/formal_methods/borrow_checker_proof.md)
 - [类型系统基础](./docs/research_notes/formal_methods/type_system_foundations.md)
 - [异步状态机](./docs/research_notes/formal_methods/async_state_machine.md)
-- [分布式模式](./docs/research_notes/software_design_theory/05_distributed/)
-- [工作流模式](./docs/research_notes/software_design_theory/02_workflow/)
+- [分布式模式](./docs/research_notes/software_design_theory/05_distributed/README.md)
+- [工作流模式](./docs/research_notes/software_design_theory/02_workflow/README.md)
 
 ### 思维表征
 

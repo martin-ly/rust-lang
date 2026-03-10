@@ -118,7 +118,7 @@ difficulty = "基础"
 在 `book/src/SUMMARY.md` 中添加新章节：
 
 ```markdown
-- [主题测验](./quizzes/your_topic.md)
+- [主题测验](./quizzes/README.md)
 ```
 
 ### 步骤 6：更新测验索引

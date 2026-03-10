@@ -52,7 +52,7 @@ cargo run --example advanced_generics
 
 ## 🔗 相关文档
 
-- [泛型与 Trait 指南](../docs/)
+- [泛型与 Trait 指南](../docs/README.md)
 - [泛型与 Trait 概念族谱](../../../docs/research_notes/GENERICS_TRAITS_MINDMAP.md)
 
 ---

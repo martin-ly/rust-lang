@@ -86,33 +86,33 @@ For core modules (C01-C12), each module now contains:
 
 | Module  | Name                                                          | Core Content                    | Documentation                                                                  |
 | :--- | :--- | :--- | :--- |
-| **C01** | [Ownership & Borrowing](./crates/c01_ownership_borrow_scope/) | Ownership, borrowing, lifetimes | [📖 Master Index](./crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
-| **C02** | [Type System](./crates/c02_type_system/)                      | Generics, Traits, type safety   | [📖 Master Index](./crates/c02_type_system/docs/00_MASTER_INDEX.md)            |
-| **C03** | [Control Flow & Functions](./crates/c03_control_fn/)          | if/match/loop, closures         | [📖 Master Index](./crates/c03_control_fn/docs/00_MASTER_INDEX.md)             |
+| **C01** | [Ownership & Borrowing](./crates/c01_ownership_borrow_scope/README.md) | Ownership, borrowing, lifetimes | [📖 Master Index](./crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| **C02** | [Type System](./crates/c02_type_system/README.md)                      | Generics, Traits, type safety   | [📖 Master Index](./crates/c02_type_system/docs/00_MASTER_INDEX.md)            |
+| **C03** | [Control Flow & Functions](./crates/c03_control_fn/README.md)          | if/match/loop, closures         | [📖 Master Index](./crates/c03_control_fn/docs/00_MASTER_INDEX.md)             |
 
 #### Phase 2: Concurrency & Async (C04-C06)
 
 | Module  | Name                                           | Core Content                              | Documentation                                                   |
 | :--- | :--- | :--- | :--- |
-| **C04** | [Generic Programming](./crates/c04_generic/)   | Advanced generics, associated types, GATs | [📖 Master Index](./crates/c04_generic/docs/00_MASTER_INDEX.md) |
-| **C05** | [Threads & Concurrency](./crates/c05_threads/) | Threads, locks, atomic operations         | [📖 Master Index](./crates/c05_threads/docs/00_MASTER_INDEX.md) |
-| **C06** | [Async Programming](./crates/c06_async/)       | async/await, Future, Runtime              | [📖 Master Index](./crates/c06_async/docs/00_MASTER_INDEX.md)   |
+| **C04** | [Generic Programming](./crates/c04_generic/README.md)   | Advanced generics, associated types, GATs | [📖 Master Index](./crates/c04_generic/docs/00_MASTER_INDEX.md) |
+| **C05** | [Threads & Concurrency](./crates/c05_threads/README.md) | Threads, locks, atomic operations         | [📖 Master Index](./crates/c05_threads/docs/00_MASTER_INDEX.md) |
+| **C06** | [Async Programming](./crates/c06_async/README.md)       | async/await, Future, Runtime              | [📖 Master Index](./crates/c06_async/docs/00_MASTER_INDEX.md)   |
 
 #### Phase 3: Systems & Applications (C07-C10)
 
 | Module  | Name                                                     | Core Content                         | Documentation                                                          |
 | :--- | :--- | :--- | :--- |
-| **C07** | [Process Management](./crates/c07_process/)              | Processes, IPC, signal handling      | [📖 Master Index](./crates/c07_process/docs/00_MASTER_INDEX.md)        |
-| **C08** | [Algorithms & Data Structures](./crates/c08_algorithms/) | Classic algorithms, data structures  | [📖 Master Index](./crates/c08_algorithms/docs/00_MASTER_INDEX.md)     |
-| **C09** | [Design Patterns](./crates/c09_design_pattern/)          | GoF patterns, Rust-specific patterns | [📖 Master Index](./crates/c09_design_pattern/docs/00_MASTER_INDEX.md) |
-| **C10** | [Network Programming](./crates/c10_networks/)            | TCP/UDP, HTTP, WebSocket             | [📖 Master Index](./crates/c10_networks/docs/00_MASTER_INDEX.md)       |
+| **C07** | [Process Management](./crates/c07_process/README.md)              | Processes, IPC, signal handling      | [📖 Master Index](./crates/c07_process/docs/00_MASTER_INDEX.md)        |
+| **C08** | [Algorithms & Data Structures](./crates/c08_algorithms/README.md) | Classic algorithms, data structures  | [📖 Master Index](./crates/c08_algorithms/docs/00_MASTER_INDEX.md)     |
+| **C09** | [Design Patterns](./crates/c09_design_pattern/README.md)          | GoF patterns, Rust-specific patterns | [📖 Master Index](./crates/c09_design_pattern/docs/00_MASTER_INDEX.md) |
+| **C10** | [Network Programming](./crates/c10_networks/README.md)            | TCP/UDP, HTTP, WebSocket             | [📖 Master Index](./crates/c10_networks/docs/00_MASTER_INDEX.md)       |
 
 #### Phase 4: Advanced Practices (C11-C12)
 
 | Module  | Name                                               | Core Content                                    | Documentation                                                       |
 | :--- | :--- | :--- | :--- |
-| **C11** | [Macro System](./crates/c11_macro_system/)         | Declarative macros, procedural macros, DSL      | [📖 Master Index](./crates/c11_macro_system/docs/00_MASTER_INDEX.md) |
-| **C12** | [WebAssembly](./crates/c12_wasm/)                  | WASM, wasm-bindgen, WASI                        | [📖 Master Index](./crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md) |
+| **C11** | [Macro System](./crates/c11_macro_system/README.md)         | Declarative macros, procedural macros, DSL      | [📖 Master Index](./crates/c11_macro_system/docs/00_MASTER_INDEX.md) |
+| **C12** | [WebAssembly](./crates/c12_wasm/README.md)                  | WASM, wasm-bindgen, WASI                        | [📖 Master Index](./crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md) |
 
 ---
 
@@ -161,9 +161,9 @@ cargo test
 
 Jump directly to relevant modules based on needs:
 
-- **Need to understand ownership?** → [C01](./crates/c01_ownership_borrow_scope/)
-- **Want to learn async programming?** → [C06](./crates/c06_async/)
-- **Need network programming?** → [C10](./crates/c10_networks/)
+- **Need to understand ownership?** → [C01](./crates/c01_ownership_borrow_scope/README.md)
+- **Want to learn async programming?** → [C06](./crates/c06_async/README.md)
+- **Need network programming?** → [C10](./crates/c10_networks/README.md)
 - **Focus on formal verification?** → [research_notes/TOOLS_GUIDE](./docs/research_notes/TOOLS_GUIDE.md) (Prusti, Kani, Creusot)
 
 ### Using the Documentation Search Tool

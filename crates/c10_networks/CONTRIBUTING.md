@@ -287,8 +287,8 @@ feat(protocol): 添加HTTP/2支持
 
 - [项目文档](README.md)
 - [API文档](https://docs.rs/c10_networks)
-- [示例代码](examples/)
-- [性能基准](benches/)
+- [示例代码](examples/README.md)
+- [性能基准](benches/README.md)
 
 ## 🤝 社区行为准则
 

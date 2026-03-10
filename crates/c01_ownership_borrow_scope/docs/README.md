@@ -104,7 +104,7 @@
 
 ### 📚 历史文档（已整合至 tier_* 分层）
 
-> 以下历史文档结构已整合至 [tier_01_foundations](tier_01_foundations/)、[tier_02_guides](tier_02_guides/)、[tier_03_references](tier_03_references/)、[tier_04_advanced](tier_04_advanced/)。
+> 以下历史文档结构已整合至 [tier_01_foundations](tier_01_foundations/README.md)、[tier_02_guides](tier_02_guides/README.md)、[tier_03_references](tier_03_references/README.md)、[tier_04_advanced](tier_04_advanced/README.md)。
 
 | 原主题 | 对应文档 |
 | :--- | :--- |

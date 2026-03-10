@@ -1131,7 +1131,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | BROKEN_LINKS_REPORT.md | `guides/libpnet_guide.md` | 6112 | - **行 83**: `[抓包分析](guides/libpnet_guide.md)`... |
 | BROKEN_LINKS_REPORT.md | `guides/PERFORMANCE_OPTIMIZATION_GUIDE.md` | 6117 | - **行 84**: `[性能优化](guides/PERFORMANCE_OPTIMIZATION_GUIDE.md... |
 | BROKEN_LINKS_REPORT.md | `guides/SECURITY_GUIDE.md` | 6122 | - **行 85**: `[安全通信](guides/SECURITY_GUIDE.md)`... |
-| BROKEN_LINKS_REPORT.md | `guides/` | 6127 | - **行 89**: `[guides/](guides/)`... |
+| BROKEN_LINKS_REPORT.md | `guides/` | 6127 | - **行 89**: `[guides/](guides/README.md)`... |
 | BROKEN_LINKS_REPORT.md | `theory/` | 6132 | - **行 98**: `[theory/](theory/)`... |
 | BROKEN_LINKS_REPORT.md | `references/` | 6137 | - **行 107**: `[references/](references/)`... |
 | BROKEN_LINKS_REPORT.md | `references/API_DOCUMENTATION.md` | 6142 | - **行 199**: `[references/API_DOCUMENTATION.md](references/A... |
@@ -1341,7 +1341,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | BROKEN_LINKS_REPORT.md | `../02_reference/quick_reference/closures_cheatsheet.md` | 7243 | - **行 155**: `[closures_cheatsheet](../02_reference/quick_re... |
 | BROKEN_LINKS_REPORT.md | `a, b T` | 7250 | - **行 413**: `[T constraints.Ordered](a, b T)`... |
 | BROKEN_LINKS_REPORT.md | `./{}.md` | 7257 | - **行 88**: `[{}](./{}.md)`... |
-| BROKEN_LINKS_REPORT.md | `相对路径` | 7264 | - **行 156**: `[文本](相对路径)`... |
+| BROKEN_LINKS_REPORT.md | `相对路径` | 7264 | - **行 156**: `[文本](./docs/)`... |
 | BROKEN_LINKS_REPORT.md | `../../../crates/xxx/docs/` | 7271 | - **行 43**: `[完整文档](../../../crates/xxx/docs/)`... |
 | BROKEN_LINKS_REPORT.md | `../../../crates/xxx/examples/` | 7276 | - **行 43**: `[代码示例](../../../crates/xxx/examples/)`... |
 | BROKEN_LINKS_REPORT.md | `../archive/process_reports/2026_02/` | 7283 | - **行 103**: `[归档路径](../archive/process_reports/2026_02/)`... |
@@ -1379,7 +1379,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | BROKEN_LINKS_REPORT.md | `../formal_methods/borrow_checker_proof.md` | 7473 | - **行 422**: `[formal_methods/borrow_checker_proof.md](../fo... |
 | BROKEN_LINKS_REPORT.md | `../type_theory/type_system_foundations.md` | 7478 | - **行 423**: `[type_theory/type_system_foundations.md](../ty... |
 | BROKEN_LINKS_REPORT.md | `链接` | 7485 | - **行 281**: `[The Rust Book - 章节](链接)`... |
-| BROKEN_LINKS_REPORT.md | `相对路径` | 7492 | - **行 288**: `[链接文本](相对路径)`... |
+| BROKEN_LINKS_REPORT.md | `相对路径` | 7492 | - **行 288**: `[链接文本](./docs/)`... |
 | BROKEN_LINKS_REPORT.md | `路径` | 7497 | - **行 294**: `[文本](路径)`... |
 | BROKEN_LINKS_REPORT.md | `/docs/path` | 7502 | - **行 348**: `[文本](/docs/path)`... |
 | BROKEN_LINKS_REPORT.md | `./path` | 7507 | - **行 348**: `[文本](./path)`... |
@@ -1779,7 +1779,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | BROKEN_LINKS_REPORT.md | `../../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` | 9658 | - **行 8**: `[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMEN... |
 | BROKEN_LINKS_REPORT.md | `../../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` | 9662 | - **行 150**: `[FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../../arch... |
 | COMPLETION_SUMMARY_2026_02_21.md | `./docs/research_notes/coq_skeleton/` | 216 | - [核心定理](./docs/research_notes/coq_skeleton/)... |
-| CONTRIBUTING.md | `./docs/research_notes/` | 23 | \| **形式化贡献** \| 在 [research_notes](./docs/research_notes/) 补... |
+| CONTRIBUTING.md | `./docs/research_notes/` | 23 | \| **形式化贡献** \| 在 [research_notes](./docs/research_notes/README.md) 补... |
 | CONTRIBUTING.md | `./docs/07_project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md` | 75 | 详见 [LINK_FIX_PLAN_2026_02.md](./docs/archive/process_reports... |
 | LEARNING_CHECKLIST.md | `./docs/quick_reference/` | 133 | - [docs/quick_reference/](./docs/quick_reference/) - 速查卡... |
 | MIGRATION_GUIDE_1.91.1_TO_1.92.0.md | `./RUST_192_FINAL_UPDATE_REPORT.md` | 436 | - [Rust 1.92.0 更新报告](./RUST_192_FINAL_UPDATE_REPORT.md)... |
@@ -1792,11 +1792,11 @@ This report documents the cross-reference verification for the rust-ownership-de
 | PROJECT_STRUCTURE.md | `./TROUBLESHOOTING.md#运行时错误` | 330 | 2. **运行时错误** → [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#运行时... |
 | PROJECT_STRUCTURE.md | `./TROUBLESHOOTING.md#性能问题` | 331 | 3. **性能问题** → [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#性能问题... |
 | PROJECT_STRUCTURE.md | `./BEST_PRACTICES.md` | 335 | 1. **最佳实践** → [BEST_PRACTICES.md](./BEST_PRACTICES.md)... |
-| PROJECT_STRUCTURE.md | `./crates/c09_design_pattern/` | 337 | 3. **学习模式** → [C09 设计模式](./crates/c09_design_pattern/)... |
+| PROJECT_STRUCTURE.md | `./crates/c09_design_pattern/` | 337 | 3. **学习模式** → [C09 设计模式](./crates/c09_design_pattern/README.md)... |
 | PROJECT_STRUCTURE.md | `./archive/reports/` | 341 | 1. **整体进度** → [archive/reports/](./archive/reports/)... |
 | PROJECT_STRUCTURE.md | `./archive/reports/` | 342 | 2. **模块进度** → [archive/reports/](./archive/reports/)... |
 | PROJECT_STRUCTURE.md | `./CHANGELOG.md` | 343 | 3. **更新历史** → [CHANGELOG.md](./CHANGELOG.md)... |
-| PROJECT_STRUCTURE.md | `./guides/` | 393 | - **学习指南**: [guides/](./guides/) ⭐⭐... |
+| PROJECT_STRUCTURE.md | `./guides/` | 393 | - **学习指南**: [guides/](./guides/README.md) ⭐⭐... |
 | PROJECT_STRUCTURE.md | `./archive/reports/` | 394 | - **项目报告**: [archive/reports/](./archive/reports/)... |
 | QUICK_REFERENCE.md | `./docs/quick_reference/README.md` | 3 | > **说明**: 本文件为速查卡入口。完整速查卡请参阅 [docs/quick_reference/](./docs/... |
 | QUICK_REFERENCE.md | `./docs/quick_reference/ownership_cheatsheet.md` | 11 | \| 所有权       \| [ownership_cheatsheet.md](./docs/quick_refer... |
@@ -1813,14 +1813,14 @@ This report documents the cross-reference verification for the rust-ownership-de
 | README.en.md | `./crates/c02_type_system/` | 90 | \| **C02** \| [Type System](./crates/c02_type_system/)      ... |
 | README.en.md | `./crates/c03_control_fn/` | 91 | \| **C03** \| [Control Flow & Functions](./crates/c03_contro... |
 | README.en.md | `./crates/c04_generic/` | 97 | \| **C04** \| [Generic Programming](./crates/c04_generic/)  ... |
-| README.en.md | `./crates/c05_threads/` | 98 | \| **C05** \| [Threads & Concurrency](./crates/c05_threads/)... |
-| README.en.md | `./crates/c06_async/` | 99 | \| **C06** \| [Async Programming](./crates/c06_async/)      ... |
-| README.en.md | `./crates/c07_process/` | 105 | \| **C07** \| [Process Management](./crates/c07_process/)   ... |
+| README.en.md | `./crates/c05_threads/` | 98 | \| **C05** \| [Threads & Concurrency](./crates/c05_threads/README.md)... |
+| README.en.md | `./crates/c06_async/` | 99 | \| **C06** \| [Async Programming](./crates/c06_async/README.md)      ... |
+| README.en.md | `./crates/c07_process/` | 105 | \| **C07** \| [Process Management](./crates/c07_process/README.md)   ... |
 | README.en.md | `./crates/c08_algorithms/` | 106 | \| **C08** \| [Algorithms & Data Structures](./crates/c08_al... |
 | README.en.md | `./crates/c09_design_pattern/` | 107 | \| **C09** \| [Design Patterns](./crates/c09_design_pattern/... |
 | README.en.md | `./crates/c10_networks/` | 108 | \| **C10** \| [Network Programming](./crates/c10_networks/) ... |
-| README.en.md | `./crates/c11_macro_system/` | 114 | \| **C11** \| [Macro System](./crates/c11_macro_system/)    ... |
-| README.en.md | `./crates/c12_wasm/` | 115 | \| **C12** \| [WebAssembly](./crates/c12_wasm/)             ... |
+| README.en.md | `./crates/c11_macro_system/` | 114 | \| **C11** \| [Macro System](./crates/c11_macro_system/README.md)    ... |
+| README.en.md | `./crates/c12_wasm/` | 115 | \| **C12** \| [WebAssembly](./crates/c12_wasm/README.md)             ... |
 | README.en.md | `./crates/c01_ownership_borrow_scope/` | 164 | - **Need to understand ownership?** → [C01](./crates/c01_own... |
 | README.en.md | `./crates/c06_async/` | 165 | - **Want to learn async programming?** → [C06](./crates/c06_... |
 | README.en.md | `./crates/c10_networks/` | 166 | - **Need network programming?** → [C10](./crates/c10_network... |
@@ -1850,32 +1850,32 @@ This report documents the cross-reference verification for the rust-ownership-de
 | README.md | `./reports/COMPREHENSIVE_ENHANCEMENT_FINAL_REPORT_2025_10_20.md` | 303 | \| **📘 总增强报告**              \| 全模块增强完成总结                    ... |
 | README.md | `./crates/c01_ownership_borrow_scope/` | 333 | \| :--- \| :--- \| :--- \| :--- \|\| **C01** \| [所有权与借用](./c... |
 | README.md | `./crates/c02_type_system/` | 334 | \| **C02** \| [类型系统](./crates/c02_type_system/) 🎉 **100%**  ... |
-| README.md | `./crates/c03_control_fn/` | 335 | \| **C03** \| [控制流与函数](./crates/c03_control_fn/)            ... |
+| README.md | `./crates/c03_control_fn/` | 335 | \| **C03** \| [控制流与函数](./crates/c03_control_fn/README.md)            ... |
 | README.md | `./crates/c04_generic/` | 340 | \| :--- \| :--- \| :--- \| :--- \|\| **C04** \| [泛型编程](./cra... |
 | README.md | `./crates/c05_threads/` | 341 | \| **C05** \| [线程与并发](./crates/c05_threads/) \| 线程、锁、原子操作   ... |
-| README.md | `./crates/c06_async/` | 342 | \| **C06** \| [异步编程](./crates/c06_async/)     \| async/await... |
+| README.md | `./crates/c06_async/` | 342 | \| **C06** \| [异步编程](./crates/c06_async/README.md)     \| async/await... |
 | README.md | `./crates/c07_process/` | 347 | \| :--- \| :--- \| :--- \| :--- \|\| **C07** \| [进程管理](./cra... |
 | README.md | `./crates/c08_algorithms/` | 348 | \| **C08** \| [算法与数据结构](./crates/c08_algorithms/) \| 经典算法、数据... |
-| README.md | `./crates/c09_design_pattern/` | 349 | \| **C09** \| [设计模式](./crates/c09_design_pattern/)   \| GoF ... |
-| README.md | `./crates/c10_networks/` | 350 | \| **C10** \| [网络编程](./crates/c10_networks/)         \| TCP/... |
-| README.md | `./crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md` | 350 | \| **C10** \| [网络编程](./crates/c10_networks/)         \| TCP/... |
+| README.md | `./crates/c09_design_pattern/` | 349 | \| **C09** \| [设计模式](./crates/c09_design_pattern/README.md)   \| GoF ... |
+| README.md | `./crates/c10_networks/` | 350 | \| **C10** \| [网络编程](./crates/c10_networks/README.md)         \| TCP/... |
+| README.md | `./crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md` | 350 | \| **C10** \| [网络编程](./crates/c10_networks/README.md)         \| TCP/... |
 | README.md | `./crates/c11_macro_system/` | 355 | \| :--- \| :--- \| :--- \| :--- \|\| **C11** \| [宏系统](./crat... |
 | README.md | `./crates/c12_wasm/` | 356 | \| **C12** \| [WebAssembly](./crates/c12_wasm/)         \| W... |
-| README.md | `./crates/c01_ownership_borrow_scope/` | 405 | - **需要理解所有权？** → [C01](./crates/c01_ownership_borrow_scope/)... |
-| README.md | `./crates/c06_async/` | 406 | - **想学习异步编程？** → [C06](./crates/c06_async/)... |
-| README.md | `./crates/c10_networks/` | 407 | - **需要网络编程？** → [C10](./crates/c10_networks/)... |
-| README.md | `./crates/c11_macro_system/` | 408 | - **关注宏与元编程？** → [C11](./crates/c11_macro_system/)... |
-| README.md | `./crates/c01_ownership_borrow_scope/` | 459 | 1. [C01 所有权与借用](./crates/c01_ownership_borrow_scope/) - 理解 R... |
-| README.md | `./crates/c02_type_system/` | 460 | 2. [C02 类型系统](./crates/c02_type_system/) - 掌握类型安全... |
-| README.md | `./crates/c03_control_fn/` | 464 | 1. [C03 控制流与函数](./crates/c03_control_fn/) - 完善语法基础... |
-| README.md | `./crates/c04_generic/` | 469 | 1. [C04 泛型编程](./crates/c04_generic/) - 代码复用... |
-| README.md | `./crates/c05_threads/` | 470 | 2. [C05 线程](./crates/c05_threads/) - 并发基础... |
-| README.md | `./crates/c06_async/` | 471 | 3. [C06 异步](./crates/c06_async/) - 异步编程... |
-| README.md | `./crates/c08_algorithms/` | 475 | 1. [C08 算法](./crates/c08_algorithms/) - 巩固基础... |
-| README.md | `./crates/c09_design_pattern/` | 476 | 2. [C09 设计模式](./crates/c09_design_pattern/) - 提升设计... |
+| README.md | `./crates/c01_ownership_borrow_scope/` | 405 | - **需要理解所有权？** → [C01](./crates/c01_ownership_borrow_scope/README.md)... |
+| README.md | `./crates/c06_async/` | 406 | - **想学习异步编程？** → [C06](./crates/c06_async/README.md)... |
+| README.md | `./crates/c10_networks/` | 407 | - **需要网络编程？** → [C10](./crates/c10_networks/README.md)... |
+| README.md | `./crates/c11_macro_system/` | 408 | - **关注宏与元编程？** → [C11](./crates/c11_macro_system/README.md)... |
+| README.md | `./crates/c01_ownership_borrow_scope/` | 459 | 1. [C01 所有权与借用](./crates/c01_ownership_borrow_scope/README.md) - 理解 R... |
+| README.md | `./crates/c02_type_system/` | 460 | 2. [C02 类型系统](./crates/c02_type_system/README.md) - 掌握类型安全... |
+| README.md | `./crates/c03_control_fn/` | 464 | 1. [C03 控制流与函数](./crates/c03_control_fn/README.md) - 完善语法基础... |
+| README.md | `./crates/c04_generic/` | 469 | 1. [C04 泛型编程](./crates/c04_generic/README.md) - 代码复用... |
+| README.md | `./crates/c05_threads/` | 470 | 2. [C05 线程](./crates/c05_threads/README.md) - 并发基础... |
+| README.md | `./crates/c06_async/` | 471 | 3. [C06 异步](./crates/c06_async/README.md) - 异步编程... |
+| README.md | `./crates/c08_algorithms/` | 475 | 1. [C08 算法](./crates/c08_algorithms/README.md) - 巩固基础... |
+| README.md | `./crates/c09_design_pattern/` | 476 | 2. [C09 设计模式](./crates/c09_design_pattern/README.md) - 提升设计... |
 | README.md | `./docs/PERFORMANCE_TUNING_GUIDE.md` | 640 | - [性能调优](./docs/PERFORMANCE_TUNING_GUIDE.md) - 性能优化指南... |
 | README.md | `./docs/TROUBLESHOOTING_GUIDE.md` | 641 | - [故障排查](./docs/TROUBLESHOOTING_GUIDE.md) - 常见问题解决... |
-| README.md | `./crates/c01_ownership_borrow_scope/` | 708 | 从 [C01 所有权与借用](./crates/c01_ownership_borrow_scope/) 开始，或者直接... |
+| README.md | `./crates/c01_ownership_borrow_scope/` | 708 | 从 [C01 所有权与借用](./crates/c01_ownership_borrow_scope/README.md) 开始，或者直接... |
 | ROADMAP.md | `./docs/07_project/AUTHORITATIVE_ALIGNMENT_CRITICAL_EVALUATION_2026_02.md` | 50 | - [权威对标批判性评估与可持续推进方案](./docs/07_project/AUTHORITATIVE_ALIGNM... |
 | archive/reports/2025-12-25/C02_TIER3_VERIFICATION_REPORT_2025_12_11.md | `./crates/c02_type_system/docs/tier_01_foundations/02_主索引导航.md` | 195 | - [主索引导航](./crates/c02_type_system/docs/tier_01_foundations/... |
 | archive/reports/2025-12-25/C02_TIER3_VERIFICATION_REPORT_2025_12_11.md | `./crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md` | 196 | - [项目概览](./crates/c02_type_system/docs/tier_01_foundations/0... |
@@ -2385,7 +2385,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | crates/c03_control_fn/reports/PROJECT_COMPLETION_REPORT.md | `<repository-url>` | 418 | - **项目主页**: [GitHub Repository](<repository-url>)... |
 | crates/c03_control_fn/reports/PROJECT_COMPLETION_REPORT.md | `<issues-url>` | 419 | - **问题反馈**: [Issues](<issues-url>)... |
 | crates/c03_control_fn/reports/PROJECT_COMPLETION_REPORT.md | `<discussions-url>` | 420 | - **讨论区**: [Discussions](<discussions-url>)... |
-| crates/c04_generic/CHANGELOG.md | `docs/` | 119 | - [API 文档](docs/)... |
+| crates/c04_generic/CHANGELOG.md | `docs/` | 119 | - [API 文档](docs/README.md)... |
 | crates/c04_generic/README.md | `./docs/RUST_192_EXAMPLES_COLLECTION.md` | 260 | - **💻 [Rust 1.93.0 实战示例集](./docs/RUST_192_EXAMPLES_COLLECTIO... |
 | crates/c04_generic/README.md | `../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/generics/` | 391 | - 📐 **[泛型系统形式化理论](../../docs/rust-formal-engineering-system/... |
 | crates/c04_generic/README.md | `../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/` | 392 | - 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_... |
@@ -3230,7 +3230,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | crates/c09_design_pattern/examples/README.md | `./03_observer.rs` | 13 | \| [03_observer.rs](./03_observer.rs) \| 观察者模式 \| ⭐⭐⭐ \|... |
 | crates/c09_design_pattern/examples/README.md | `./04_raii.rs` | 19 | \| [04_raii.rs](./04_raii.rs) \| RAII模式 \| ⭐⭐ \|... |
 | crates/c09_design_pattern/examples/README.md | `./05_typestate.rs` | 20 | \| [05_typestate.rs](./05_typestate.rs) \| 类型状态模式 \| ⭐⭐⭐⭐ \|... |
-| crates/c10_networks/CONTRIBUTING.md | `examples/` | 290 | - [示例代码](examples/)... |
+| crates/c10_networks/CONTRIBUTING.md | `examples/` | 290 | - [示例代码](examples/README.md)... |
 | crates/c10_networks/CONTRIBUTING.md | `benches/` | 291 | - [性能基准](benches/)... |
 | crates/c10_networks/DEPLOYMENT_GUIDE.md | `RUST_190_ASYNC_FEATURES_ALIGNMENT_REPORT.md` | 449 | - [特性对标报告](RUST_190_ASYNC_FEATURES_ALIGNMENT_REPORT.md)... |
 | crates/c10_networks/DEPLOYMENT_GUIDE.md | `NETWORK_RUNTIME_COMPARISON_ANALYSIS.md` | 450 | - [性能分析报告](NETWORK_RUNTIME_COMPARISON_ANALYSIS.md)... |
@@ -3466,7 +3466,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | crates/c10_networks/docs/README.md | `guides/libpnet_guide.md` | 83 | - [抓包分析](guides/libpnet_guide.md) - 基于libpnet的流量分析... |
 | crates/c10_networks/docs/README.md | `guides/PERFORMANCE_OPTIMIZATION_GUIDE.md` | 84 | - [性能优化](guides/PERFORMANCE_OPTIMIZATION_GUIDE.md) - 性能调优指南... |
 | crates/c10_networks/docs/README.md | `guides/SECURITY_GUIDE.md` | 85 | - [安全通信](guides/SECURITY_GUIDE.md) - TLS/SSL加密通信... |
-| crates/c10_networks/docs/README.md | `guides/` | 89 | ### 1. 实践指南 ([guides/](guides/))... |
+| crates/c10_networks/docs/README.md | `guides/` | 89 | ### 1. 实践指南 ([guides/](guides/README.md))... |
 | crates/c10_networks/docs/README.md | `theory/` | 98 | ### 2. 理论基础 ([theory/](theory/))... |
 | crates/c10_networks/docs/README.md | `references/` | 107 | ### 3. 参考文档 ([references/](references/))... |
 | crates/c10_networks/docs/README.md | `tutorials/` | 115 | ### 4. 教程示例 ([tutorials/](tutorials/))... |
@@ -3641,15 +3641,15 @@ This report documents the cross-reference verification for the rust-ownership-de
 | crates/c11_macro_system/examples/README.md | `./02_macro_patterns.rs` | 12 | \| [02_macro_patterns.rs](./02_macro_patterns.rs) \| 宏模式匹配 \... |
 | crates/c11_macro_system/examples/README.md | `./03_derive_macro.rs` | 18 | \| [03_derive_macro.rs](./03_derive_macro.rs) \| 派生宏 \| ⭐⭐⭐⭐... |
 | crates/c11_macro_system/examples/README.md | `./04_attribute_macro.rs` | 19 | \| [04_attribute_macro.rs](./04_attribute_macro.rs) \| 属性宏 \... |
-| crates/c12_wasm/PROJECT_STATUS.md | `./examples/` | 285 | - [Examples 目录](./examples/)... |
-| crates/c12_wasm/QUICK_START.md | `./docs/` | 354 | - 📖 [完整文档](./docs/)... |
-| crates/c12_wasm/QUICK_START.md | `./examples/` | 360 | - 💻 [示例代码](./examples/)... |
+| crates/c12_wasm/PROJECT_STATUS.md | `./examples/` | 285 | - [Examples 目录](./examples/README.md)... |
+| crates/c12_wasm/QUICK_START.md | `./docs/` | 354 | - 📖 [完整文档](./docs/README.md)... |
+| crates/c12_wasm/QUICK_START.md | `./examples/` | 360 | - 💻 [示例代码](./examples/README.md)... |
 | crates/c12_wasm/QUICK_START.md | `./demo/` | 361 | - 🌐 [演示页面](./demo/)... |
 | crates/c12_wasm/QUICK_START.md | `./tests/` | 362 | - 🧪 [测试代码](./tests/)... |
 | crates/c12_wasm/QUICK_START.md | `./docs/tier_01_foundations/` | 386 | - 📖 **系统学习**: 从 [Tier 1 文档](./docs/tier_01_foundations/) 开始... |
-| crates/c12_wasm/QUICK_START_2025_LATEST.md | `./examples/` | 293 | - 💻 [完整示例代码](./examples/)... |
+| crates/c12_wasm/QUICK_START_2025_LATEST.md | `./examples/` | 293 | - 💻 [完整示例代码](./examples/README.md)... |
 | crates/c12_wasm/QUICK_START_2025_LATEST.md | `./deployment/` | 294 | - 🔧 [部署配置](./deployment/)... |
-| crates/c12_wasm/QUICK_START_2025_LATEST.md | `./docs/` | 295 | - 📚 [完整文档](./docs/)... |
+| crates/c12_wasm/QUICK_START_2025_LATEST.md | `./docs/` | 295 | - 📚 [完整文档](./docs/README.md)... |
 | crates/c12_wasm/README.md | `./docs/tier_01_foundations/` | 87 | - 📚 [Tier 1: 基础层](./docs/tier_01_foundations/) - 快速入门 (2-4小时... |
 | crates/c12_wasm/README.md | `./docs/tier_02_guides/` | 88 | - 📝 [Tier 2: 实践层](./docs/tier_02_guides/) - 实战指南 (10-20小时)... |
 | crates/c12_wasm/README.md | `./docs/tier_03_references/` | 89 | - 📖 [Tier 3: 参考层](./docs/tier_03_references/) - 技术参考 (按需查阅)... |
@@ -3662,7 +3662,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | crates/c12_wasm/README.md | `./scripts/` | 227 | \| [🛠️ 设置脚本](./scripts/)          \| 自动化设置工具 \|... |
 | crates/c12_wasm/README.md | `./docs/tier_04_advanced/04_rust_190_生态库与设计模式.md` | 258 | \| [Rust 1.90 生态库与设计模式](./docs/tier_04_advanced/04_rust_190_... |
 | crates/c12_wasm/WASMEDGE_2025_QUICK_START.md | `./docs/` | 325 | - 📖 [完整文档](./docs/)... |
-| crates/c12_wasm/WASMEDGE_2025_QUICK_START.md | `./examples/` | 332 | - 💻 [示例代码](./examples/)... |
+| crates/c12_wasm/WASMEDGE_2025_QUICK_START.md | `./examples/` | 332 | - 💻 [示例代码](./examples/README.md)... |
 | crates/c12_wasm/WASMEDGE_2025_QUICK_START.md | `./deployment/` | 333 | - 📦 [部署配置](./deployment/)... |
 | crates/c12_wasm/docs/RUST_192_QUICK_REFERENCE.md | `../../examples/rust_192_features_demo.rs` | 228 | - [示例代码](../../examples/rust_192_features_demo.rs) - 完整示例... |
 | crates/c12_wasm/docs/RUST_192_TROUBLESHOOTING.md | `../tier_01_foundations/04_常见问题.md` | 311 | - [常见问题](../tier_01_foundations/04_常见问题.md) - 通用常见问题... |
@@ -3851,7 +3851,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | docs/COMPREHENSIVE_COMPLETION_STATUS_2026_02_23.md | `archive/deprecated/` | 35 | \| Coq/L3 \| 已归档 \| [archive/deprecated/](archive/deprecated... |
 | docs/DOCS_STRUCTURE_OVERVIEW.md | `archive/process_reports/` | 24 | \| **archive 归档** \| 过程性报告、历史版本文档 \| 历史可查、主目录简洁 \| [archive/... |
 | docs/DOCS_STRUCTURE_OVERVIEW.md | `archive/version_reports/` | 24 | \| **archive 归档** \| 过程性报告、历史版本文档 \| 历史可查、主目录简洁 \| [archive/... |
-| docs/DOCS_STRUCTURE_OVERVIEW.md | `相对路径` | 156 | \| **链接风格** \| `[文本](相对路径)` 相对 docs 根或当前目录 \| 全库 \|... |
+| docs/DOCS_STRUCTURE_OVERVIEW.md | `相对路径` | 156 | \| **链接风格** \| `[文本](./docs/)` 相对 docs 根或当前目录 \| 全库 \|... |
 | docs/FINAL_DOCS_100_PERCENT_COMPLETION_REPORT.md | `../../../crates/xxx/docs/` | 43 | > **快速参考** \| [完整文档](../../../crates/xxx/docs/) \| [代码示例](..... |
 | docs/FINAL_DOCS_100_PERCENT_COMPLETION_REPORT.md | `../../../crates/xxx/examples/` | 43 | > **快速参考** \| [完整文档](../../../crates/xxx/docs/) \| [代码示例](..... |
 | docs/LINK_REPAIR_COMPLETION_REPORT.md | `../archive/process_reports/2026_02/` | 103 | ~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md~~ (已归档: [归档路径](..... |
@@ -3907,7 +3907,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | docs/archive/deprecated/coq_skeleton/README.md | `../formal_methods/borrow_checker_proof.md` | 422 | \| 借用检查器 \| [formal_methods/borrow_checker_proof.md](../form... |
 | docs/archive/deprecated/coq_skeleton/README.md | `../type_theory/type_system_foundations.md` | 423 | \| 类型系统 \| [type_theory/type_system_foundations.md](../type_... |
 | docs/archive/process_reports/2026_02/DEEP_CONTENT_IMPROVEMENT_PLAN.md | `链接` | 281 | > **权威来源**: [The Rust Book - 章节](链接)... |
-| docs/archive/process_reports/2026_02/DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md | `相对路径` | 288 | [链接文本](相对路径)... |
+| docs/archive/process_reports/2026_02/DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md | `相对路径` | 288 | [链接文本](./docs/)... |
 | docs/archive/process_reports/2026_02/DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md | `路径` | 294 | - 格式：`[文本](路径)`... |
 | docs/archive/process_reports/2026_02/DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md | `/docs/path` | 348 | \| 绝对路径 \| `[文本](/docs/path)` \| `[文本](./path)` \|... |
 | docs/archive/process_reports/2026_02/DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md | `./path` | 348 | \| 绝对路径 \| `[文本](/docs/path)` \| `[文本](./path)` \|... |

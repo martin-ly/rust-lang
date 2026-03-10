@@ -226,14 +226,14 @@ Week 4: 实战项目
 
 ### 源代码
 
-- **[src/](../src/)** - 算法实现源码
+- **[src/](../src/README.md)** - 算法实现源码
   - `algorithms/` - 主题化算法实现
   - `data_structure/` - 数据结构实现
   - `sorting/`, `searching/`, `graph/` 等
 
 ### 示例代码
 
-- **[examples/](../examples/)** - 完整示例程序
+- **[examples/](../examples/README.md)** - 完整示例程序
   - `actor_reactor_csp_complete.rs` - Actor/Reactor/CSP 模式
   - `async_recursion_comprehensive.rs` - 异步递归
   - `comprehensive_algorithm_demo.rs` - 算法演示

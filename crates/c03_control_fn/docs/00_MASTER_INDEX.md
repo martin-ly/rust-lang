@@ -71,10 +71,10 @@
 ### 🎯 按角色导航
 
 | 角色           | 推荐路径                           | 关键文档                                     |
-| :--- | :--- | :--- || **初学者**     | 基础控制流 → 条件表达式 → 循环结构 | [tier_02_guides/](./tier_02_guides/)         |
-| **中级开发者** | 模式匹配 → 闭包 → 错误处理         | [tier_04_advanced/](./tier_04_advanced/)     |
-| **架构师**     | 高级控制流 → 性能优化 → 设计模式   | [tier_04_advanced/](./tier_04_advanced/)     |
-| **研究者**     | 理论基础 → 类型系统 → Rust特性     | [tier_03_references/](./tier_03_references/) |
+| :--- | :--- | :--- || **初学者**     | 基础控制流 → 条件表达式 → 循环结构 | [tier_02_guides/](./tier_02_guides/README.md)         |
+| **中级开发者** | 模式匹配 → 闭包 → 错误处理         | [tier_04_advanced/](./tier_04_advanced/README.md)     |
+| **架构师**     | 高级控制流 → 性能优化 → 设计模式   | [tier_04_advanced/](./tier_04_advanced/README.md)     |
+| **研究者**     | 理论基础 → 类型系统 → Rust特性     | [tier_03_references/](./tier_03_references/README.md) |
 
 ### 📚 按主题导航
 
@@ -226,9 +226,9 @@ cargo test --test control_flow_tests
 
 **理论与实践**:
 
-1. [基础层](./tier_01_foundations/) - 所有基础文档
-2. [高级主题](./tier_04_advanced/) - 所有高级文档
-3. [实践指南](./tier_02_guides/) - 所有实践文档
+1. [基础层](./tier_01_foundations/README.md) - 所有基础文档
+2. [高级主题](./tier_04_advanced/README.md) - 所有高级文档
+3. [实践指南](./tier_02_guides/README.md) - 所有实践文档
 4. [性能优化](./tier_04_advanced/05_性能优化.md)
 
 ---

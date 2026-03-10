@@ -3927,7 +3927,7 @@
   - 解析路径: `crates\c06_async\reports\examples\comprehensive_async_patterns_2025.rs`
   - 建议: 检查路径是否正确
 
-- **行 507**: `[其他专题示例](examples/)`
+- **行 507**: `[其他专题示例](examples/README.md)`
   - 类型: sibling
   - 解析路径: `crates\c06_async\reports\examples`
   - 建议: 检查路径是否正确
@@ -5183,7 +5183,7 @@
   - 解析路径: `crates\c10_networks\docs\references\API_DOCUMENTATION.md`
   - 建议: 检查路径是否正确
 
-- **行 163**: `[guides/](guides/)`
+- **行 163**: `[guides/](guides/README.md)`
   - 类型: sibling
   - 解析路径: `crates\c10_networks\docs\guides`
   - 建议: 检查路径是否正确
@@ -6124,7 +6124,7 @@
   - 解析路径: `crates\c10_networks\docs\guides\SECURITY_GUIDE.md`
   - 建议: 检查路径是否正确
 
-- **行 89**: `[guides/](guides/)`
+- **行 89**: `[guides/](guides/README.md)`
   - 类型: sibling
   - 解析路径: `crates\c10_networks\docs\guides`
   - 建议: 检查路径是否正确
@@ -7261,7 +7261,7 @@
 
 ### docs\DOCS_STRUCTURE_OVERVIEW.md
 
-- **行 156**: `[文本](相对路径)`
+- **行 156**: `[文本](./docs/)`
   - 类型: sibling
   - 解析路径: `docs\相对路径`
   - 建议: 检查路径是否正确
@@ -7489,7 +7489,7 @@
 
 ### docs\archive\process_reports\2026_02\DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md
 
-- **行 288**: `[链接文本](相对路径)`
+- **行 288**: `[链接文本](./docs/)`
   - 类型: sibling
   - 解析路径: `docs\archive\process_reports\2026_02\相对路径`
   - 建议: 检查路径是否正确
@@ -8431,7 +8431,7 @@
   - 解析路径: `docs\archive\reports`
   - 建议: 考虑更新链接到非归档位置
 
-- **行 246**: `[docs/archive/root_completion_reports/](./docs/archive/root_completion_reports/)`
+- **行 246**: `[docs/archive/root_completion_reports/](./docs/archive/root_completion_reports/README.md)`
   - 解析路径: `docs\archive\root_completion_reports`
   - 建议: 考虑更新链接到非归档位置
 

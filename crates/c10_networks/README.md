@@ -8,7 +8,7 @@
 
 ## 目录
 
-- [🦀 C10 Networks - Rust 1.92.0 网络编程库](#-c10-networks---rust-1920-网络编程库)
+- [🦀 C10 Networks - Rust 1.93.0+ 网络编程库](#-c10-networks---rust-1930-网络编程库)
   - [目录](#目录)
   - [🎯 最新更新 (2025-11-15) ✨](#-最新更新-2025-11-15-)
     - [📖 新版文档导航](#-新版文档导航)
@@ -72,10 +72,10 @@
 
 **文档层级结构**:
 
-- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/) - 快速入门
-- 📝 [Tier 2: 实践层](./docs/tier_02_guides/) - 14篇实战指南
-- 📖 [Tier 3: 参考层](./docs/tier_03_references/) - 8篇技术参考
-- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/) - 16篇形式化理论
+- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/README.md) - 快速入门
+- 📝 [Tier 2: 实践层](./docs/tier_02_guides/README.md) - 14篇实战指南
+- 📖 [Tier 3: 参考层](./docs/tier_03_references/README.md) - 8篇技术参考
+- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/README.md) - 16篇形式化理论
 
 **标准化报告**: [C10_STANDARDIZATION_FINAL_2025_10_22.md](./docs/reports/C10_STANDARDIZATION_FINAL_2025_10_22.md)
 

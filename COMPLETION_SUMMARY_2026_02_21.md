@@ -213,7 +213,7 @@ Week 17-24  Phase 3: 工具对接 (Aeneas/RustBelt)
 
 ### Coq 形式化
 
-- [核心定理](./docs/research_notes/coq_skeleton/)
+- [核心定理](./docs/research_notes/coq_skeleton/README.md)
 - [分布式模式](./docs/research_notes/coq_skeleton/DISTRIBUTED_PATTERNS.v) 🆕
 - [工作流](./docs/research_notes/coq_skeleton/WORKFLOW_FORMALIZATION.v) 🆕
 

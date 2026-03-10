@@ -330,30 +330,30 @@ mdbook serve --open
 #### 第一阶段：Rust 基础 (C01-C03)
 
 | 模块    | 名称                                                 | 核心内容                      | 文档入口                                                                                   |
-| :--- | :--- | :--- | :--- || **C01** | [所有权与借用](./crates/c01_ownership_borrow_scope/) | 所有权、借用、生命周期        | [📖 主索引](./crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md) |
-| **C02** | [类型系统](./crates/c02_type_system/) 🎉 **100%**    | 泛型、Trait、类型安全、形式化 | [📖 主索引](./crates/c02_type_system/docs/tier_01_foundations/02_主索引导航.md) ⭐⭐⭐⭐⭐ |
-| **C03** | [控制流与函数](./crates/c03_control_fn/)             | if/match/loop、闭包           | [📖 主索引](./crates/c03_control_fn/docs/tier_01_foundations/02_主索引导航.md)             |
+| :--- | :--- | :--- | :--- || **C01** | [所有权与借用](./crates/c01_ownership_borrow_scope/README.md) | 所有权、借用、生命周期        | [📖 主索引](./crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md) |
+| **C02** | [类型系统](./crates/c02_type_system/README.md) 🎉 **100%**    | 泛型、Trait、类型安全、形式化 | [📖 主索引](./crates/c02_type_system/docs/tier_01_foundations/02_主索引导航.md) ⭐⭐⭐⭐⭐ |
+| **C03** | [控制流与函数](./crates/c03_control_fn/README.md)             | if/match/loop、闭包           | [📖 主索引](./crates/c03_control_fn/docs/tier_01_foundations/02_主索引导航.md)             |
 
 #### 第二阶段：并发与异步 (C04-C06)
 
 | 模块    | 名称                                | 核心内容                     | 文档入口                                                                    |
-| :--- | :--- | :--- | :--- || **C04** | [泛型编程](./crates/c04_generic/)   | 高级泛型、关联类型、GATs     | [📖 主索引](./crates/c04_generic/docs/tier_01_foundations/02_主索引导航.md) |
-| **C05** | [线程与并发](./crates/c05_threads/) | 线程、锁、原子操作           | [📖 主索引](./crates/c05_threads/docs/tier_01_foundations/02_主索引导航.md) |
-| **C06** | [异步编程](./crates/c06_async/)     | async/await、Future、Runtime | [📖 主索引](./crates/c06_async/docs/tier_01_foundations/02_主索引导航.md)   |
+| :--- | :--- | :--- | :--- || **C04** | [泛型编程](./crates/c04_generic/README.md)   | 高级泛型、关联类型、GATs     | [📖 主索引](./crates/c04_generic/docs/tier_01_foundations/02_主索引导航.md) |
+| **C05** | [线程与并发](./crates/c05_threads/README.md) | 线程、锁、原子操作           | [📖 主索引](./crates/c05_threads/docs/tier_01_foundations/02_主索引导航.md) |
+| **C06** | [异步编程](./crates/c06_async/README.md)     | async/await、Future、Runtime | [📖 主索引](./crates/c06_async/docs/tier_01_foundations/02_主索引导航.md)   |
 
 #### 第三阶段：系统与应用 (C07-C10)
 
 | 模块    | 名称                                       | 核心内容                 | 文档入口                                                                           |
-| :--- | :--- | :--- | :--- || **C07** | [进程管理](./crates/c07_process/)          | 进程、IPC、信号处理      | [📖 主索引](./crates/c07_process/docs/tier_01_foundations/02_主索引导航.md)        |
-| **C08** | [算法与数据结构](./crates/c08_algorithms/) | 经典算法、数据结构       | [📖 主索引](./crates/c08_algorithms/docs/tier_01_foundations/02_主索引导航.md)     |
-| **C09** | [设计模式](./crates/c09_design_pattern/)   | GoF 模式、Rust 特定模式  | [📖 主索引](./crates/c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md) |
-| **C10** | [网络编程](./crates/c10_networks/)         | TCP/UDP、HTTP、WebSocket | [📖 主索引](./crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md)       |
+| :--- | :--- | :--- | :--- || **C07** | [进程管理](./crates/c07_process/README.md)          | 进程、IPC、信号处理      | [📖 主索引](./crates/c07_process/docs/tier_01_foundations/02_主索引导航.md)        |
+| **C08** | [算法与数据结构](./crates/c08_algorithms/README.md) | 经典算法、数据结构       | [📖 主索引](./crates/c08_algorithms/docs/tier_01_foundations/02_主索引导航.md)     |
+| **C09** | [设计模式](./crates/c09_design_pattern/README.md)   | GoF 模式、Rust 特定模式  | [📖 主索引](./crates/c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md) |
+| **C10** | [网络编程](./crates/c10_networks/README.md)         | TCP/UDP、HTTP、WebSocket | [📖 主索引](./crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md)       |
 
 #### 第四阶段：进阶实践 (C11-C12)
 
 | 模块    | 名称                                      | 核心内容                   | 文档入口                                                                       |
-| :--- | :--- | :--- | :--- || **C11** | [宏系统](./crates/c11_macro_system/)      | 声明宏、过程宏、DSL 构建   | [📖 主索引](./crates/c11_macro_system/docs/tier_01_foundations/02_主索引导航.md) |
-| **C12** | [WebAssembly](./crates/c12_wasm/)         | WASM、wasm-bindgen、WASI   | [📖 主索引](./crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md)       |
+| :--- | :--- | :--- | :--- || **C11** | [宏系统](./crates/c11_macro_system/README.md)      | 声明宏、过程宏、DSL 构建   | [📖 主索引](./crates/c11_macro_system/docs/tier_01_foundations/02_主索引导航.md) |
+| **C12** | [WebAssembly](./crates/c12_wasm/README.md)         | WASM、wasm-bindgen、WASI   | [📖 主索引](./crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md)       |
 
 ---
 
@@ -402,10 +402,10 @@ cargo test
 
 根据需求直接跳转到相关模块：
 
-- **需要理解所有权？** → [C01](./crates/c01_ownership_borrow_scope/)
-- **想学习异步编程？** → [C06](./crates/c06_async/)
-- **需要网络编程？** → [C10](./crates/c10_networks/)
-- **关注宏与元编程？** → [C11](./crates/c11_macro_system/)
+- **需要理解所有权？** → [C01](./crates/c01_ownership_borrow_scope/README.md)
+- **想学习异步编程？** → [C06](./crates/c06_async/README.md)
+- **需要网络编程？** → [C10](./crates/c10_networks/README.md)
+- **关注宏与元编程？** → [C11](./crates/c11_macro_system/README.md)
 
 ---
 
@@ -456,24 +456,24 @@ cargo test
 
 #### Week 1-2: 基础入门
 
-1. [C01 所有权与借用](./crates/c01_ownership_borrow_scope/) - 理解 Rust 核心机制
-2. [C02 类型系统](./crates/c02_type_system/) - 掌握类型安全
+1. [C01 所有权与借用](./crates/c01_ownership_borrow_scope/README.md) - 理解 Rust 核心机制
+2. [C02 类型系统](./crates/c02_type_system/README.md) - 掌握类型安全
 
 #### Week 3-4: 语法完善
 
-1. [C03 控制流与函数](./crates/c03_control_fn/) - 完善语法基础
+1. [C03 控制流与函数](./crates/c03_control_fn/README.md) - 完善语法基础
 2. 完成所有基础模块的示例代码
 
 #### Week 5-8: 进阶学习
 
-1. [C04 泛型编程](./crates/c04_generic/) - 代码复用
-2. [C05 线程](./crates/c05_threads/) - 并发基础
-3. [C06 异步](./crates/c06_async/) - 异步编程
+1. [C04 泛型编程](./crates/c04_generic/README.md) - 代码复用
+2. [C05 线程](./crates/c05_threads/README.md) - 并发基础
+3. [C06 异步](./crates/c06_async/README.md) - 异步编程
 
 #### Week 9-12: 实战项目
 
-1. [C08 算法](./crates/c08_algorithms/) - 巩固基础
-2. [C09 设计模式](./crates/c09_design_pattern/) - 提升设计
+1. [C08 算法](./crates/c08_algorithms/README.md) - 巩固基础
+2. [C09 设计模式](./crates/c09_design_pattern/README.md) - 提升设计
 3. 完成一个完整项目
 
 ### 🚀 路径 2：有编程经验 (4-6 周)
@@ -705,7 +705,7 @@ git push origin feature/your-feature
 
 ## 🚀 开始你的学习之旅
 
-从 [C01 所有权与借用](./crates/c01_ownership_borrow_scope/) 开始，或者直接跳转到你感兴趣的模块！
+从 [C01 所有权与借用](./crates/c01_ownership_borrow_scope/README.md) 开始，或者直接跳转到你感兴趣的模块！
 
 **最后更新**: 2026-02-13
 **维护团队**: Rust 学习社区

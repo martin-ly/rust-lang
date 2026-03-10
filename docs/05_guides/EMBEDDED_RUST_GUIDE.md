@@ -32,11 +32,11 @@ T-BR1、[UNSAFE_RUST_GUIDE](./UNSAFE_RUST_GUIDE.md)（no_std、裸机 unsafe 契
 
 | 嵌入式主题 | 官方 Embedded Book | 本项目对应 |
 | :--- | :--- | :--- |
-| 所有权与内存安全 | 内存管理、无堆 | [C01 所有权](../../crates/c01_ownership_borrow_scope/) |
-| 类型系统与 no_std | 最小运行时 | [C02 类型系统](../../crates/c02_type_system/) |
-| 并发与中断 | 临界区、原子操作 | [C05 线程与并发](../../crates/c05_threads/) |
-| 进程与系统调用 | - | [C07 进程管理](../../crates/c07_process/) |
-| WASM 与边缘计算 | - | [C12 WASM](../../crates/c12_wasm/) |
+| 所有权与内存安全 | 内存管理、无堆 | [C01 所有权](../../crates/c01_ownership_borrow_scope/README.md) |
+| 类型系统与 no_std | 最小运行时 | [C02 类型系统](../../crates/c02_type_system/README.md) |
+| 并发与中断 | 临界区、原子操作 | [C05 线程与并发](../../crates/c05_threads/README.md) |
+| 进程与系统调用 | - | [C07 进程管理](../../crates/c07_process/README.md) |
+| WASM 与边缘计算 | - | [C12 WASM](../../crates/c12_wasm/README.md) |
 
 ---
 
@@ -368,8 +368,8 @@ fn update_data(value: u32) {
 ## 相关文档
 
 - [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md)
-- [C02 类型系统](../../crates/c02_type_system/docs/)
-- [C05 线程与并发](../../crates/c05_threads/docs/)
-- [C12 WASM](../../crates/c12_wasm/docs/)
+- [C02 类型系统](../../crates/c02_type_system/docs/README.md)
+- [C05 线程与并发](../../crates/c05_threads/docs/README.md)
+- [C12 WASM](../../crates/c12_wasm/docs/README.md)
 - [官方 Embedded Book](https://doc.rust-lang.org/embedded-book/)
 - [BEST_PRACTICES.md](./BEST_PRACTICES.md)

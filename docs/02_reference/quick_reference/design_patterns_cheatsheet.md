@@ -1,6 +1,6 @@
 ﻿# 设计模式快速参考卡片
 
-> **快速参考** | [完整文档](../../../crates/c09_design_pattern/docs/) | [代码示例](../../../crates/c09_design_pattern/examples/)
+> **快速参考** | [完整文档](../../../crates/c09_design_pattern/docs/README.md) | [代码示例](../../../crates/c09_design_pattern/examples/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.94.0+ (Edition 2024)
@@ -8,37 +8,37 @@
 
 ---
 
-## 📋 目录 {#-目录}
+## 📋 目录 
 
 - [设计模式快速参考卡片](#设计模式快速参考卡片)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
+  - [📋 目录 ](#-目录--目录)
+  - [🚀 快速开始 ](#-快速开始--快速开始)
     - [单例模式](#单例模式)
     - [工厂模式](#工厂模式)
-  - [📋 常用模式 {#-常用模式}](#-常用模式--常用模式)
+  - [📋 常用模式 ](#-常用模式--常用模式)
     - [创建型模式](#创建型模式)
     - [结构型模式](#结构型模式)
     - [行为型模式](#行为型模式)
-  - [🦀 Rust 特有模式 {#-rust-特有模式}](#-rust-特有模式--rust-特有模式)
+  - [🦀 Rust 特有模式 ](#-rust-特有模式--rust-特有模式)
     - [Newtype 模式](#newtype-模式)
     - [RAII 模式](#raii-模式)
     - [类型状态模式](#类型状态模式)
-  - [💡 代码示例 {#-代码示例}](#-代码示例--代码示例)
+  - [💡 代码示例 ](#-代码示例--代码示例)
     - [示例 1: 建造者模式（完整实现）](#示例-1-建造者模式完整实现)
     - [示例 2: 策略模式](#示例-2-策略模式)
     - [示例 3: 观察者模式](#示例-3-观察者模式)
     - [示例 4: 装饰器模式](#示例-4-装饰器模式)
     - [示例 5: 适配器模式](#示例-5-适配器模式)
-  - [🎯 使用场景 {#-使用场景}](#-使用场景--使用场景)
+  - [🎯 使用场景 ](#-使用场景--使用场景)
     - [场景: Web 服务器配置系统](#场景-web-服务器配置系统)
-  - [🚫 反例速查 {#-反例速查}](#-反例速查--反例速查)
+  - [🚫 反例速查 ](#-反例速查--反例速查)
     - [反例 3: 单例模式在多线程中的误用](#反例-3-单例模式在多线程中的误用)
     - [反例 4: 模式匹配不完整](#反例-4-模式匹配不完整)
     - [反例 1: 过度使用设计模式](#反例-1-过度使用设计模式)
     - [反例 2: Builder 缺少必填字段校验](#反例-2-builder-缺少必填字段校验)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🧩 相关示例代码 {#-相关示例代码}](#-相关示例代码--相关示例代码)
-  - [📚 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [📚 相关文档 ](#-相关文档--相关文档)
+  - [🧩 相关示例代码 ](#-相关示例代码--相关示例代码)
+  - [📚 相关资源 ](#-相关资源--相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [形式化理论与决策树](#形式化理论与决策树)
@@ -47,7 +47,7 @@
 
 ---
 
-## 🚀 快速开始 {#-快速开始}
+## 🚀 快速开始 
 
 ### 单例模式
 
@@ -86,7 +86,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 
 ---
 
-## 📋 常用模式 {#-常用模式}
+## 📋 常用模式 
 
 ### 创建型模式
 
@@ -111,7 +111,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 
 ---
 
-## 🦀 Rust 特有模式 {#-rust-特有模式}
+## 🦀 Rust 特有模式 
 
 ### Newtype 模式
 
@@ -162,7 +162,7 @@ let door = door.open();  // ✅ 可以打开
 
 ---
 
-## 💡 代码示例 {#-代码示例}
+## 💡 代码示例 
 
 ### 示例 1: 建造者模式（完整实现）
 
@@ -372,7 +372,7 @@ assert_eq!(adapter.request(), "Specific request");
 
 ---
 
-## 🎯 使用场景 {#-使用场景}
+## 🎯 使用场景 
 
 ### 场景: Web 服务器配置系统
 
@@ -435,7 +435,7 @@ struct DbConnection {
 
 ---
 
-## 🚫 反例速查 {#-反例速查}
+## 🚫 反例速查 
 
 ### 反例 3: 单例模式在多线程中的误用
 
@@ -540,12 +540,12 @@ let c = Config::builder().build();  // ❌ 必填 host 未设置
 
 ---
 
-## 📚 相关文档 {#-相关文档}
+## 📚 相关文档 
 
-- [设计模式完整文档](../../../crates/c09_design_pattern/docs/)
+- [设计模式完整文档](../../../crates/c09_design_pattern/docs/README.md)
 - [设计模式 README](../../../crates/c09_design_pattern/README.md)
 
-## 🧩 相关示例代码 {#-相关示例代码}
+## 🧩 相关示例代码 
 
 以下示例位于 `crates/c09_design_pattern/examples/`，
 可直接运行（例如：`cargo run -p c09_design_pattern --example oncelock_singleton_comprehensive`）。
@@ -559,7 +559,7 @@ let c = Config::builder().build();  // ❌ 必填 host 未设置
 
 ---
 
-## 📚 相关资源 {#-相关资源}
+## 📚 相关资源 
 
 ### 官方文档
 
@@ -584,9 +584,9 @@ let c = Config::builder().build();  // ❌ 必填 host 未设置
 
 - [设计模式边界矩阵](../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) — 23 模式 × 三维边界（安全/支持/表达）
 - [设计模式表征能力形式化树图](../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md#设计模式表征能力形式化树图) — 模式→实现路径→定理
-- [创建型模式形式化](../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/) — Singleton、Factory、Builder 等形式化定义
-- [结构型模式形式化](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/) — Adapter、Decorator、Facade 等形式化定义
-- [行为型模式形式化](../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/) — Observer、Strategy、Command 等形式化定义
+- [创建型模式形式化](../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/README.md) — Singleton、Factory、Builder 等形式化定义
+- [结构型模式形式化](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/README.md) — Adapter、Decorator、Facade 等形式化定义
+- [行为型模式形式化](../../research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/README.md) — Observer、Strategy、Command 等形式化定义
 - [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 类型理论与设计模式的关系
 - [构造能力理论](../../research_notes/type_theory/construction_capability.md) — 类型系统表达能力边界
 

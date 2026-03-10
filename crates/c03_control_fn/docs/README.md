@@ -195,7 +195,7 @@ docs/
 
 ### 相关模块
 
-- [c06_async 异步编程](../../c06_async/) - async/await 与控制流的协同（详见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)）
+- [c06_async 异步编程](../../c06_async/README.md) - async/await 与控制流的协同（详见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)）
 
 ### 历史文档
 

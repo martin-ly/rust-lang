@@ -34,9 +34,9 @@ cargo run --example ownership_basics
 
 | 阶段 | 时间 | 内容 | 入口 |
 |------|------|------|------|
-| 入门 | 1-2 周 | 所有权、类型、控制流 | [C01](./crates/c01_ownership_borrow_scope/) |
-| 进阶 | 2-4 周 | 泛型、并发、异步 | [C04](./crates/c04_generic/) → [C05](./crates/c05_threads/) → [C06](./crates/c06_async/) |
-| 高级 | 1-2 月 | 系统编程、网络、WASM | [C07](./crates/c07_process/) → [C10](./crates/c10_networks/) → [C12](./crates/c12_wasm/) |
+| 入门 | 1-2 周 | 所有权、类型、控制流 | [C01](./crates/c01_ownership_borrow_scope/README.md) |
+| 进阶 | 2-4 周 | 泛型、并发、异步 | [C04](./crates/c04_generic/README.md) → [C05](./crates/c05_threads/README.md) → [C06](./crates/c06_async/README.md) |
+| 高级 | 1-2 月 | 系统编程、网络、WASM | [C07](./crates/c07_process/README.md) → [C10](./crates/c10_networks/README.md) → [C12](./crates/c12_wasm/README.md) |
 
 ---
 

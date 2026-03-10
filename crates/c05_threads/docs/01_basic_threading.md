@@ -911,7 +911,7 @@ println!("线程耗时: {:?}", duration);
 - 📖 [03_synchronization_primitives](./03_synchronization_primitives.md) - 同步原语
 - 📖 [04_lock_free_programming](./04_lock_free_programming.md) - 无锁编程
 - 📖 [知识图谱](./KNOWLEDGE_GRAPH.md) - 完整概念体系
-- 🔧 [示例代码](../examples/) - 实践示例
+- 🔧 [示例代码](../examples/README.md) - 实践示例
 
 ---
 

@@ -459,6 +459,6 @@ fn append(v: &mut Vec<i32>, value: i32) {
 
 **需要更多帮助？**
 
-- 查看 [示例代码](../examples/)
+- 查看 [示例代码](../examples/README.md)
 - 运行 [测试用例](../tests/)
-- 阅读 [核心文档](./tier_02_guides/)
+- 阅读 [核心文档](./tier_02_guides/README.md)

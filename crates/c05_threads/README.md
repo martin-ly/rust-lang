@@ -111,9 +111,9 @@
 - 🎊 **[最终完成报告](docs/reports/C05_PHASE10_TIER4_FINAL_2025_10_22.md)** - **Phase 10 完成报告 (强烈推荐！)**
 - 📘 **[项目概览](docs/tier_01_foundations/01_项目概览.md)** - 了解模块全貌
 - 📘 **[主索引导航](docs/tier_01_foundations/02_主索引导航.md)** - 完整文档地图（28 份文档）
-- 📖 **[Tier 2: 实践指南](docs/tier_02_guides/)** - 5 篇核心实践指南
-- 📚 **[Tier 3: 参考文档](docs/tier_03_references/)** - 3 篇技术参考
-- 🚀 **[Tier 4: 高级主题](docs/tier_04_advanced/)** - 4 篇前沿技术文档
+- 📖 **[Tier 2: 实践指南](docs/tier_02_guides/README.md)** - 5 篇核心实践指南
+- 📚 **[Tier 3: 参考文档](docs/tier_03_references/README.md)** - 3 篇技术参考
+- 🚀 **[Tier 4: 高级主题](docs/tier_04_advanced/README.md)** - 4 篇前沿技术文档
 - 📘 **[术语表](docs/tier_01_foundations/03_术语表.md)** - 60+ 并发术语
 - 📘 **[常见问题](docs/tier_01_foundations/04_常见问题.md)** - 20+ FAQ
 
@@ -140,7 +140,7 @@
    - 问题诊断树 + 性能优化金字塔
    - 技术选型决策树 + 检查清单
 
-4. **[Rust 1.93.0 实战示例](../../docs/archive/version_reports/)** ⭐⭐⭐⭐⭐
+4. **[Rust 1.93.0 实战示例](../../docs/archive/version_reports/README.md)** ⭐⭐⭐⭐⭐
    - 线程创建与管理 (8个示例) + thread::scope 实战
    - Channel 消息传递 (4个示例) + 同步原语 (7个示例)
    - 综合项目：并发 Web 爬虫 + 任务调度器
@@ -578,10 +578,10 @@ cargo test rust_192_features
 深入学习并发编程的形式化理论基础：
 
 - ⚡ **[并发模型理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models/)** - 并发系统的形式化定义和证明
-- 🔄 **[所有权与借用理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/03_ownership_borrowing/)** - 并发环境下的所有权语义
-- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)** - Send/Sync 特质的形式化描述
-- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/)** - 并发环境下的内存安全保证
-- 🎭 **[同步编程范式](../../docs/rust-formal-engineering-system/02_programming_paradigms/01_synchronous/)** - 同步并发编程的形式化理论
+- 🔄 **[所有权与借用理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/03_ownership_borrowing/README.md)** - 并发环境下的所有权语义
+- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)** - Send/Sync 特质的形式化描述
+- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/README.md)** - 并发环境下的内存安全保证
+- 🎭 **[同步编程范式](../../docs/rust-formal-engineering-system/02_programming_paradigms/01_synchronous/README.md)** - 同步并发编程的形式化理论
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
 

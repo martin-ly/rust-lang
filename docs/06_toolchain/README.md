@@ -431,7 +431,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 
 ### 相关模块
 
-- [C08 Algorithms - 算法优化](../../crates/c08_algorithms/docs/)
+- [C08 Algorithms - 算法优化](../../crates/c08_algorithms/docs/README.md)
 - **注意**: 当前项目包含 c01-c12 共 12 个学习模块
 
 ---

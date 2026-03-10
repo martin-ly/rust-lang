@@ -243,7 +243,7 @@ c##_module_name/
 | 类型 | 路径 |
 | :--- | :--- || 阶段/模块报告 | [archive/reports/](./archive/reports/) |
 | 归档报告 | [docs/archive/reports/](./docs/archive/reports/) |
-| 根完成报告 | [docs/archive/root_completion_reports/](./docs/archive/root_completion_reports/) |
+| 根完成报告 | [docs/archive/root_completion_reports/](./docs/archive/root_completion_reports/README.md) |
 | 计划实施完成 | [docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md](./docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md) |
 
 ---
@@ -312,7 +312,7 @@ scripts/
 
 #### 学习Rust
 
-1. **完全新手** → [README.md](./README.md) → [C01模块](./crates/c01_ownership_borrow_scope/)
+1. **完全新手** → [README.md](./README.md) → [C01模块](./crates/c01_ownership_borrow_scope/README.md)
 2. **选择路径** → [学习路径](./README.md#学习路径推荐)
 3. **快速上手** → [学习指南](./guides/README.md)
 
@@ -334,7 +334,7 @@ scripts/
 
 1. **最佳实践** → [BEST_PRACTICES.md](./BEST_PRACTICES.md)
 2. **代码审查** → 查看模块示例代码
-3. **学习模式** → [C09 设计模式](./crates/c09_design_pattern/)
+3. **学习模式** → [C09 设计模式](./crates/c09_design_pattern/README.md)
 
 #### 了解项目进度
 
@@ -390,7 +390,7 @@ scripts/
 ## 🔗 相关文档
 
 - **项目入口**: [README.md](./README.md) ⭐
-- **学习指南**: [guides/](./guides/) ⭐⭐
+- **学习指南**: [guides/](./guides/README.md) ⭐⭐
 - **项目报告**: [archive/reports/](./archive/reports/)
 - **贡献指南**: [CONTRIBUTING.md](./CONTRIBUTING.md)
 - **项目路线**: [ROADMAP.md](./ROADMAP.md)

@@ -34,7 +34,7 @@
 
 ## 快速开始
 
-1. 从 [Tier 1 基础层](./tier_01_foundations/) 开始学习
+1. 从 [Tier 1 基础层](./tier_01_foundations/README.md) 开始学习
    - [项目概览](./tier_01_foundations/01_项目概览.md) - 快速了解设计模式
    - [主索引导航](./tier_01_foundations/02_主索引导航.md) - 找到适合你的学习路径
    - [术语表](./tier_01_foundations/03_术语表.md) - 核心术语速查
@@ -71,4 +71,4 @@
 
 ### 互链
 
-- 与 [c11_macro_system](../../c11_macro_system/)：宏元编程、DSL 构建、代码生成与设计模式的协同（见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)）
+- 与 [c11_macro_system](../../c11_macro_system/README.md)：宏元编程、DSL 构建、代码生成与设计模式的协同（见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)）

@@ -160,7 +160,7 @@
 
 **Day 4-5**: 实践练习
 
-- 查看 [`examples/`](../examples/) 中的示例
+- 查看 [`examples/`](../examples/README.md) 中的示例
 - 运行测试: `cargo test -p c05_threads`
 
 ### 路径 2: 系统学习 (1-2 周)
@@ -297,7 +297,7 @@
 ### 项目资源
 
 - [主 README](../README.md) - 项目主页
-- [示例代码](../examples/) - 完整示例
+- [示例代码](../examples/README.md) - 完整示例
 - [源代码](../src/) - 模块源代码
 - [测试用例](../tests/) - 测试代码
 - [基准测试](../benches/) - 性能测试
@@ -305,8 +305,8 @@
 ### 相关模块
 
 - [c04_generic](../../c04_generic/docs/00_MASTER_INDEX.md) - 泛型编程
-- [c06_async](../../c06_async/) - 异步编程
-- [c07_process](../../c07_process/) - 进程管理
+- [c06_async](../../c06_async/README.md) - 异步编程
+- [c07_process](../../c07_process/README.md) - 进程管理
 
 ### 外部资源
 

@@ -64,7 +64,7 @@
 | :--- | :--- | :--- | :--- | :--- || **Tier 1** | 基础层 | 4 个 | 初学者 | [tier_01_foundations/](tier_01_foundations/README.md) |
 | **Tier 2** | 核心指南层 | 多篇 | 进阶学习者 | [tier_02_guides/](tier_02_guides/) |
 | **Tier 3** | 参考层 | 多篇 | 高级开发者 | [tier_03_references/](tier_03_references/) |
-| **Tier 4** | 高级层 | 5 篇 | 专家/研究者 | [tier_04_advanced/](tier_04_advanced/) |
+| **Tier 4** | 高级层 | 5 篇 | 专家/研究者 | [tier_04_advanced/](tier_04_advanced/README.md) |
 
 ---
 

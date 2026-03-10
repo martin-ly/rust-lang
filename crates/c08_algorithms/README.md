@@ -8,13 +8,13 @@
 
 ## 目录
 
-- [🦀 Rust 算法与数据结构 - Rust 1.93.0 学习模块](#-rust-算法与数据结构---rust-1920-学习模块)
+- [🦀 Rust 算法与数据结构 - Rust 1.93.0 学习模块](#-rust-算法与数据结构---rust-1930-学习模块)
   - [目录](#目录)
   - [🎯 最新更新 (2025-11-15) ✨](#-最新更新-2025-11-15-)
     - [📖 新版文档导航](#-新版文档导航)
   - [🌟 2025-10-20 核心增强更新](#-2025-10-20-核心增强更新)
   - [🚀 项目概述](#-项目概述)
-  - [✨ Rust 1.93.0 / Edition 2024 特性支持（稳定）](#-rust-1920--edition-2024-特性支持稳定)
+  - [✨ Rust 1.93.0 / Edition 2024 特性支持（稳定）](#-rust-1930--edition-2024-特性支持稳定)
     - [🆕 2025-11-01 LeetCode 分类集成](#-2025-11-01-leetcode-分类集成)
     - [🔄 异步编程特性](#-异步编程特性)
     - [🧬 类型系统特性](#-类型系统特性)
@@ -34,15 +34,16 @@
     - [📍 文档导航 (2025-10-22 更新)](#-文档导航-2025-10-22-更新)
     - [🆕 新增学习资源 (2025-10-19)](#-新增学习资源-2025-10-19)
     - [📚 文档分类](#-文档分类)
-      - [1. 📖 实用指南 (tier_02_guides/) - ⭐~⭐⭐](#1--实用指南-tier_02_guides---)
-      - [2. 🔬 理论文档 (tier_04_advanced/) - ⭐⭐⭐](#2--理论文档-tier_04_advanced---)
-      - [3. 🚀 高级专题 (tier_04_advanced/) - ⭐⭐~⭐⭐⭐](#3--高级专题-tier_04_advanced---)
-      - [4. ✨ Rust 特性 (tier_03_references/) - ⭐⭐](#4--rust-特性-tier_03_references---)
-      - [5. 📚 参考资料 (tier_03_references/) - ⭐~⭐⭐](#5--参考资料-tier_03_references---)
+      - [1. 📖 实用指南 (tier\_02\_guides/) - ⭐~⭐⭐](#1--实用指南-tier_02_guides---)
+      - [2. 🔬 理论文档 (tier\_04\_advanced/) - ⭐⭐⭐](#2--理论文档-tier_04_advanced---)
+      - [3. 🚀 高级专题 (tier\_04\_advanced/) - ⭐⭐~⭐⭐⭐](#3--高级专题-tier_04_advanced---)
+      - [4. ✨ Rust 特性 (tier\_03\_references/) - ⭐⭐](#4--rust-特性-tier_03_references---)
+      - [5. 📚 参考资料 (tier\_03\_references/) - ⭐~⭐⭐](#5--参考资料-tier_03_references---)
     - [🎓 学习路径](#-学习路径)
     - [🔥 推荐文档](#-推荐文档)
     - [测试覆盖率](#测试覆盖率)
   - [🚀 贡献指南](#-贡献指南)
+  - [占位实现说明](#占位实现说明)
     - [贡献类型](#贡献类型)
   - [📚 知识结构文档](#-知识结构文档)
     - [知识结构体系](#知识结构体系)
@@ -73,10 +74,10 @@
 
 **文档层级结构**:
 
-- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/) - 快速入门 (2-4小时)
-- 📝 [Tier 2: 实践层](./docs/tier_02_guides/) - 实战指南 (10-15小时)
-- 📖 [Tier 3: 参考层](./docs/tier_03_references/) - 技术参考 (按需查阅)
-- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/) - 理论深入 (20-30小时)
+- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/README.md) - 快速入门 (2-4小时)
+- 📝 [Tier 2: 实践层](./docs/tier_02_guides/README.md) - 实战指南 (10-15小时)
+- 📖 [Tier 3: 参考层](./docs/tier_03_references/README.md) - 技术参考 (按需查阅)
+- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/README.md) - 理论深入 (20-30小时)
 
 **标准化报告**: [C08_FINAL_COMPLETION_REPORT_2025_10_22.md](./docs/reports/C08_FINAL_COMPLETION_REPORT_2025_10_22.md)
 
@@ -353,10 +354,10 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 
 **🎯 新版4-Tier导航** (推荐):
 
-- [Tier 1: 基础层](./docs/tier_01_foundations/) - 快速入门 ⭐ **推荐起点**
-- [Tier 2: 实践层](./docs/tier_02_guides/) - 实战指南
-- [Tier 3: 参考层](./docs/tier_03_references/) - 技术参考
-- [Tier 4: 高级层](./docs/tier_04_advanced/) - 理论深入
+- [Tier 1: 基础层](./docs/tier_01_foundations/README.md) - 快速入门 ⭐ **推荐起点**
+- [Tier 2: 实践层](./docs/tier_02_guides/README.md) - 实战指南
+- [Tier 3: 参考层](./docs/tier_03_references/README.md) - 技术参考
+- [Tier 4: 高级层](./docs/tier_04_advanced/README.md) - 理论深入
 
 **📚 传统文档索引** (保留):
 

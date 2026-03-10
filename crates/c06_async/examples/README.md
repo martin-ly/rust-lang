@@ -51,7 +51,7 @@ cargo run --example stream_processing
 
 ## 🔗 相关文档
 
-- [异步编程指南](../docs/)
+- [异步编程指南](../docs/README.md)
 - [异步概念族谱](../../../docs/research_notes/ASYNC_CONCEPT_MINDMAP.md)
 - [异步状态机形式化](../../../docs/research_notes/formal_methods/async_state_machine.md)
 

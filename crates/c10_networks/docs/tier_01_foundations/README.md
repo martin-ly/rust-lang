@@ -15,4 +15,4 @@
 
 ---
 
-**下一步**: [Tier 2 实践指南](../tier_02_guides/)
+**下一步**: [Tier 2 实践指南](../tier_02_guides/README.md)

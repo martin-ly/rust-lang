@@ -120,7 +120,7 @@
 2. **仿射类型理论** → [affine_type_theory.md](./affine_type_theory.md)
 3. **Rust 1.89 理论** → [rust_189_type_system_theory.md](./rust_189_type_system_theory.md)
 4. **版本对齐** → [rust_189_alignment_summary.md](./rust_189_alignment_summary.md)
-5. **源码分析** → [../src/](../src/)
+5. **源码分析** → [../src/](../src/README.md)
 
 ## 🛠️ 实用工具
 

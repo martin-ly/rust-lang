@@ -32,7 +32,7 @@
 | :--- | :--- | :--- |
 | L2 完整证明 | 70% | T-OW2、T-BR1、T-TY3 已完成 |
 | Rust 示例衔接 | 60% | [THEOREM_RUST_EXAMPLE_MAPPING](research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md) |
-| Coq/L3 | 已归档 | [archive/deprecated/](archive/deprecated/) |
+| Coq/L3 | 已归档 | [archive/deprecated/](archive/deprecated/README.md) |
 
 **关键定理**: T-OW2、T-BR1、T-TY3 见 [CORE_THEOREMS_FULL_PROOFS](research_notes/CORE_THEOREMS_FULL_PROOFS.md)。
 
