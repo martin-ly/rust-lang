@@ -224,6 +224,7 @@ pub fn harmonic_number_approx(n: u64) -> f64 {
 ///
 /// # 示例
 /// ```
+/// use c02_type_system::rust_194_features::char_to_usize;
 /// let c = 'A';
 /// let value = char_to_usize(c);
 /// assert_eq!(value, 65);
