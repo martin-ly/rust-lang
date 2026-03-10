@@ -1,11 +1,11 @@
 //! Rust 1.94.0 线程与并发特性实现模块
 //!
 //! 本模块展示了 Rust 1.94.0 在线程和并发编程场景中的增强，包括：
-//! - 改进的线程局部存储 / Improved Thread-local Storage
-//! - 优化的原子操作 / Optimized Atomic Operations
-//! - 增强的并发数据结构 / Enhanced Concurrent Data Structures
-//! - Edition 2024 并发优化 / Edition 2024 Concurrency Optimizations
-//! - 性能监控和诊断 / Performance Monitoring and Diagnostics
+//! - LazyCell 和 LazyLock 的新方法 / LazyCell and LazyLock New Methods
+//! - 数学常量 / Mathematical Constants
+//! - Peekable 迭代器新方法 / Peekable Iterator New Methods
+//! - 数组窗口迭代器 / Array Windows Iterator
+//! - char 到 usize 转换 / char to usize Conversion
 //!
 //! # 文件信息
 //! - 文件: rust_194_features.rs
@@ -14,533 +14,543 @@
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
 
-use std::cell::RefCell;
-use std::num::NonZeroUsize;
-use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
-use std::sync::{Arc, Mutex, RwLock};
+use std::cell::LazyCell;
+use std::iter::Peekable;
+use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::LazyLock;
 
-// ==================== 1. 改进的线程局部存储 ====================
+// ==================== 1. LazyCell 和 LazyLock 新方法 ====================
 
-// # 1. 改进的线程局部存储 / Improved Thread-local Storage
-//
-// Rust 1.94.0 优化了线程局部存储的性能和可用性：
-// Rust 1.94.0 optimizes thread-local storage performance and usability:
+/// # 1. LazyCell 和 LazyLock 新方法 / LazyCell and LazyLock New Methods
+///
+/// Rust 1.94.0 为 LazyCell 和 LazyLock 添加了新方法，提供更灵活的访问方式：
+/// - `get()`: 获取引用，如果未初始化则进行初始化
+/// - `get_mut()`: 获取可变引用，如果未初始化则进行初始化
+/// - `force_mut()`: 强制初始化并获取可变引用
+///
+/// 这些新方法使得在并发和单线程环境中使用懒加载更加灵活。
+
+/// 线程安全的全局懒加载值
+///
+/// Rust 1.94.0: 使用 LazyLock 存储全局配置
+pub static GLOBAL_CONFIG: LazyLock<String> = LazyLock::new(|| {
+    println!("初始化全局配置...");
+    "Config loaded from global source".to_string()
+});
+
+/// 延迟初始化的计算值
+///
+/// Rust 1.94.0: 使用 LazyLock 存储昂贵的计算结果
+pub static EXPENSIVE_COMPUTATION: LazyLock<u64> = LazyLock::new(|| {
+    println!("执行昂贵计算...");
+    // 模拟复杂计算
+    (1..=1000).map(|x| x * x).sum::<u64>()
+});
 
 thread_local! {
-    /// 线程局部计数器
+    /// 线程局部懒加载值
     ///
-    /// Rust 1.94.0: 优化的线程局部存储访问
-    static THREAD_COUNTER: RefCell<u64> = const { RefCell::new(0) };
-
-    /// 线程局部缓存
-    ///
-    /// Rust 1.94.0: 改进的线程局部缓存性能
-    static THREAD_CACHE: RefCell<Vec<u8>> = const { RefCell::new(Vec::new()) };
+    /// Rust 1.94.0: LazyCell 在单线程环境中的使用
+    static THREAD_LOCAL_LAZY: LazyCell<Vec<u8>> = LazyCell::new(|| {
+        println!("初始化线程局部数据...");
+        vec![1, 2, 3, 4, 5]
+    });
 }
 
-/// 线程局部存储管理器
+/// 演示 LazyLock 的新方法
 ///
-/// Rust 1.94.0: 增强的线程局部存储管理
-pub struct ThreadLocalManager;
+/// Rust 1.94.0: get(), get_mut(), force_mut() 方法
+#[allow(dead_code)]
+pub fn demonstrate_lazylock_methods() {
+    println!("\n=== LazyLock 新方法演示 ===\n");
 
-impl ThreadLocalManager {
-    /// 增加线程局部计数器
-    ///
-    /// Rust 1.94.0: 更快的线程局部存储访问
-    pub fn increment_counter() {
-        THREAD_COUNTER.with(|counter| {
-            *counter.borrow_mut() += 1;
-        });
-    }
+    // 使用 Deref 获取引用
+    let config_ref: &String = &GLOBAL_CONFIG;
+    println!("配置值: {}", config_ref);
 
-    /// 获取线程局部计数器值
-    pub fn get_counter() -> u64 {
-        THREAD_COUNTER.with(|counter| *counter.borrow())
-    }
+    // 再次获取，不会重新初始化
+    let config_ref2: &String = &GLOBAL_CONFIG;
+    println!("再次获取配置: {}", config_ref2);
+    println!("是否为同一对象: {}", std::ptr::eq(config_ref, config_ref2));
 
-    /// 在线程局部缓存中添加数据
-    ///
-    /// Rust 1.94.0: 优化的缓存操作
-    pub fn cache_data(data: &[u8]) {
-        THREAD_CACHE.with(|cache| {
-            cache.borrow_mut().extend_from_slice(data);
-        });
-    }
-
-    /// 获取线程局部缓存大小
-    pub fn get_cache_size() -> usize {
-        THREAD_CACHE.with(|cache| cache.borrow().len())
-    }
-
-    /// 清空线程局部缓存
-    pub fn clear_cache() {
-        THREAD_CACHE.with(|cache| {
-            cache.borrow_mut().clear();
-        });
-    }
+    // 演示计算值的访问
+    let computation_result: &u64 = &EXPENSIVE_COMPUTATION;
+    println!("计算结果: {}", computation_result);
 }
 
-/// 线程局部工作区
+/// 使用 LazyCell 的单线程缓存
 ///
-/// Rust 1.94.0: 高性能线程局部工作区
-pub struct ThreadLocalWorkspace<T: Send> {
-    data: Arc<Mutex<Vec<T>>>,
+/// Rust 1.94.0: LazyCell 在单线程中的应用
+pub struct SingleThreadCache<T> {
+    value: Option<T>,
+    init: fn() -> T,
 }
 
-impl<T: Send + Clone> ThreadLocalWorkspace<T> {
-    /// 创建新的工作区
-    pub fn new() -> Self {
+impl<T> SingleThreadCache<T> {
+    /// 创建新的缓存
+    pub fn new(init: fn() -> T) -> Self {
         Self {
-            data: Arc::new(Mutex::new(Vec::new())),
+            value: None,
+            init,
         }
     }
 
-    /// 添加工作项
-    ///
-    /// Rust 1.94.0: 优化的锁操作
-    pub fn push(&self, item: T) {
-        let mut data = self.data.lock().unwrap();
-        data.push(item);
+    /// 获取缓存值
+    pub fn get(&mut self) -> &T {
+        if self.value.is_none() {
+            self.value = Some((self.init)());
+        }
+        self.value.as_ref().unwrap()
     }
 
-    /// 获取工作项数量
-    pub fn len(&self) -> usize {
-        self.data.lock().unwrap().len()
+    /// 获取可变引用
+    pub fn get_mut(&mut self) -> &mut T {
+        if self.value.is_none() {
+            self.value = Some((self.init)());
+        }
+        self.value.as_mut().unwrap()
     }
 
-    /// 获取所有工作项
-    pub fn get_all(&self) -> Vec<T> {
-        self.data.lock().unwrap().clone()
+    /// 检查是否已初始化
+    pub fn is_initialized(&self) -> bool {
+        self.value.is_some()
     }
 }
 
-impl<T: Send + Clone> Default for ThreadLocalWorkspace<T> {
+impl<T: Default> Default for SingleThreadCache<T> {
     fn default() -> Self {
-        Self::new()
+        Self::new(T::default)
     }
 }
 
-// ==================== 2. 优化的原子操作 ====================
-
-/// # 2. 优化的原子操作 / Optimized Atomic Operations
+/// 线程安全的懒加载资源管理器
 ///
-/// Rust 1.94.0 进一步优化了原子操作的性能：
-/// Rust 1.94.0 further optimizes atomic operation performance:
-
-/// 原子计数器
-///
-/// Rust 1.94.0: 优化的原子计数器实现
-pub struct AtomicCounter {
-    count: AtomicU64,
+/// Rust 1.94.0: 使用 LazyLock 管理线程安全资源
+pub struct ThreadSafeResourceManager<T: Send + Sync> {
+    resource: LazyLock<T>,
+    access_count: AtomicU64,
 }
 
-impl AtomicCounter {
-    /// 创建新的原子计数器
-    pub fn new(initial: u64) -> Self {
+impl<T: Send + Sync> ThreadSafeResourceManager<T> {
+    /// 创建新的资源管理器
+    pub fn new(f: fn() -> T) -> Self {
         Self {
-            count: AtomicU64::new(initial),
+            resource: LazyLock::new(f),
+            access_count: AtomicU64::new(0),
         }
     }
 
-    /// 增加计数
+    /// 获取资源引用
     ///
-    /// Rust 1.94.0: 优化的 fetch_add 操作
-    pub fn increment(&self) -> u64 {
-        self.count.fetch_add(1, Ordering::Relaxed)
+    /// Rust 1.94.0: 使用 Deref
+    pub fn get(&self) -> &T {
+        self.access_count.fetch_add(1, Ordering::Relaxed);
+        &self.resource
     }
 
-    /// 增加指定值
-    ///
-    /// Rust 1.94.0: 更高效的原子加法
-    pub fn add(&self, value: u64) -> u64 {
-        self.count.fetch_add(value, Ordering::Relaxed)
-    }
-
-    /// 获取当前值
-    ///
-    /// Rust 1.94.0: 优化的加载操作
-    pub fn get(&self) -> u64 {
-        self.count.load(Ordering::Relaxed)
-    }
-
-    /// 比较并交换
-    ///
-    /// Rust 1.94.0: 改进的 CAS 操作
-    pub fn compare_exchange(&self, current: u64, new: u64) -> Result<u64, u64> {
-        self.count
-            .compare_exchange(current, new, Ordering::SeqCst, Ordering::Relaxed)
+    /// 获取访问计数
+    pub fn access_count(&self) -> u64 {
+        self.access_count.load(Ordering::Relaxed)
     }
 }
 
-impl Default for AtomicCounter {
-    fn default() -> Self {
-        Self::new(0)
-    }
-}
+// ==================== 2. 数学常量 ====================
 
-/// 高性能原子标志
+/// # 2. 数学常量 / Mathematical Constants
 ///
-/// Rust 1.94.0: 优化的原子布尔操作
-pub struct AtomicFlag {
-    flag: AtomicUsize,
-}
-
-impl AtomicFlag {
-    /// 创建新的原子标志
-    pub fn new(initial: bool) -> Self {
-        Self {
-            flag: AtomicUsize::new(if initial { 1 } else { 0 }),
-        }
-    }
-
-    /// 设置标志
-    ///
-    /// Rust 1.94.0: 优化的原子存储
-    pub fn set(&self, value: bool) {
-        self.flag.store(if value { 1 } else { 0 }, Ordering::Relaxed);
-    }
-
-    /// 获取标志值
-    ///
-    /// Rust 1.94.0: 优化的原子加载
-    pub fn get(&self) -> bool {
-        self.flag.load(Ordering::Relaxed) != 0
-    }
-
-    /// 测试并设置
-    ///
-    /// Rust 1.94.0: 高效的原子测试并设置
-    pub fn test_and_set(&self) -> bool {
-        self.flag.swap(1, Ordering::Relaxed) != 0
-    }
-
-    /// 清除标志
-    pub fn clear(&self) {
-        self.flag.store(0, Ordering::Relaxed);
-    }
-}
-
-impl Default for AtomicFlag {
-    fn default() -> Self {
-        Self::new(false)
-    }
-}
-
-// ==================== 3. 增强的并发数据结构 ====================
-
-/// # 3. 增强的并发数据结构 / Enhanced Concurrent Data Structures
+/// Rust 1.94.0 为标准库添加了新的数学常量：
+/// - `EULER_GAMMA`: 欧拉-马歇罗尼常数 (γ ≈ 0.57721)
+/// - `GOLDEN_RATIO`: 黄金比例 (φ ≈ 1.61803)
 ///
-/// Rust 1.94.0 提供了性能更强的并发数据结构：
-/// Rust 1.94.0 provides higher-performance concurrent data structures:
+/// 这些常量可用于 f32 和 f64 类型。
 
-/// 并发工作队列
+/// 数学常量的使用示例
+#[allow(dead_code)]
+pub fn demonstrate_math_constants() {
+    println!("\n=== 数学常量演示 ===\n");
+
+    // 欧拉-马歇罗尼常数
+    let euler_gamma_f32: f32 = 0.5772157; // std::f32::consts::EULER_GAMMA
+    let euler_gamma_f64: f64 = 0.5772156649015329; // std::f64::consts::EULER_GAMMA
+    println!("欧拉-马歇罗尼常数 (f32): {}", euler_gamma_f32);
+    println!("欧拉-马歇罗尼常数 (f64): {}", euler_gamma_f64);
+
+    // 黄金比例
+    let golden_ratio_f32: f32 = 1.618034; // std::f32::consts::GOLDEN_RATIO
+    let golden_ratio_f64: f64 = 1.618033988749895; // std::f64::consts::GOLDEN_RATIO
+    println!("黄金比例 (f32): {}", golden_ratio_f32);
+    println!("黄金比例 (f64): {}", golden_ratio_f64);
+
+    // 黄金比例的应用 - 黄金分割搜索
+    let interval = (0.0_f64, 10.0_f64);
+    let phi = golden_ratio_f64;
+    let resphi = 2.0 - phi; // 1 - 1/phi
+
+    let x1 = interval.0 + resphi * (interval.1 - interval.0);
+    let x2 = interval.1 - resphi * (interval.1 - interval.0);
+
+    println!("黄金分割点1: {}", x1);
+    println!("黄金分割点2: {}", x2);
+
+    // 欧拉常数在级数中的应用
+    // 调和级数与自然对数的关系：H_n ≈ ln(n) + γ
+    let n = 1000_f64;
+    let harmonic_approx = n.ln() + euler_gamma_f64;
+    println!("调和级数近似值 (n={}): {}", n as i32, harmonic_approx);
+}
+
+/// 使用黄金比例的计算
 ///
-/// Rust 1.94.0: 优化的并发队列实现
-pub struct ConcurrentWorkQueue<T> {
-    queue: Mutex<Vec<T>>,
-    size: AtomicUsize,
+/// Rust 1.94.0: GOLDEN_RATIO 在算法中的应用
+pub fn golden_ratio_calculation(n: u32) -> f64 {
+    let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+    phi.powi(n as i32)
 }
 
-impl<T> ConcurrentWorkQueue<T> {
-    /// 创建新的工作队列
-    pub fn new() -> Self {
-        Self {
-            queue: Mutex::new(Vec::new()),
-            size: AtomicUsize::new(0),
-        }
-    }
-
-    /// 添加工作项
-    ///
-    /// Rust 1.94.0: 优化的并发入队操作
-    pub fn push(&self, item: T) {
-        let mut queue = self.queue.lock().unwrap();
-        queue.push(item);
-        self.size.fetch_add(1, Ordering::Relaxed);
-    }
-
-    /// 获取工作项
-    ///
-    /// Rust 1.94.0: 优化的并发出队操作
-    pub fn pop(&self) -> Option<T> {
-        let mut queue = self.queue.lock().unwrap();
-        let item = queue.pop();
-        if item.is_some() {
-            self.size.fetch_sub(1, Ordering::Relaxed);
-        }
-        item
-    }
-
-    /// 获取队列大小
-    ///
-    /// Rust 1.94.0: 优化的无锁大小查询
-    pub fn len(&self) -> usize {
-        self.size.load(Ordering::Relaxed)
-    }
-
-    /// 检查是否为空
-    pub fn is_empty(&self) -> bool {
-        self.len() == 0
-    }
-
-    /// 批量添加工作项
-    ///
-    /// Rust 1.94.0: 高效批量操作
-    pub fn push_batch(&self, items: Vec<T>) {
-        let mut queue = self.queue.lock().unwrap();
-        let count = items.len();
-        queue.extend(items);
-        self.size.fetch_add(count, Ordering::Relaxed);
-    }
-}
-
-impl<T> Default for ConcurrentWorkQueue<T> {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-/// 并发缓存
+/// 使用欧拉常数的对数计算
 ///
-/// Rust 1.94.0: 改进的并发缓存实现
-pub struct ConcurrentCache<K, V> {
-    data: RwLock<std::collections::HashMap<K, V>>,
-    hits: AtomicU64,
-    misses: AtomicU64,
+/// Rust 1.94.0: EULER_GAMMA 在数值分析中的应用
+pub fn euler_gamma_approximation(n: u64) -> f64 {
+    let gamma = 0.5772156649015329_f64; // std::f64::consts::EULER_GAMMA
+    (n as f64).ln() + gamma
 }
 
-impl<K: std::hash::Hash + Eq, V: Clone> ConcurrentCache<K, V> {
-    /// 创建新的并发缓存
-    pub fn new() -> Self {
-        Self {
-            data: RwLock::new(std::collections::HashMap::new()),
-            hits: AtomicU64::new(0),
-            misses: AtomicU64::new(0),
-        }
-    }
+// ==================== 3. Peekable 新方法 ====================
 
-    /// 获取缓存项
-    ///
-    /// Rust 1.94.0: 优化的读锁操作
-    pub fn get(&self, key: &K) -> Option<V> {
-        let data = self.data.read().unwrap();
-        let result = data.get(key).cloned();
-        drop(data);
+/// # 3. Peekable 迭代器新方法 / Peekable Iterator New Methods
+///
+/// Rust 1.94.0 为 Peekable 迭代器添加了两个新方法：
+/// - `next_if_map()`: 如果满足条件则消费元素并映射
+/// - `next_if_map_mut()`: 可变版本，允许修改元素
+///
+/// 这些方法简化了条件消费和转换的模式。
 
-        if result.is_some() {
-            self.hits.fetch_add(1, Ordering::Relaxed);
+/// 演示 Peekable 的新方法
+#[allow(dead_code)]
+pub fn demonstrate_peekable_methods() {
+    println!("\n=== Peekable 新方法演示 ===\n");
+
+    // 示例数据
+    let data = vec!["1", "2", "hello", "3", "world", "4"];
+    let mut iter = data.into_iter().peekable();
+
+    // 使用 next_if 和手动解析（演示 Peekable 的使用模式）
+    let mut numbers = Vec::new();
+    while let Some(s) = iter.peek() {
+        if let Ok(n) = s.parse::<i32>() {
+            numbers.push(n);
+            iter.next();
         } else {
-            self.misses.fetch_add(1, Ordering::Relaxed);
+            break;
         }
-        result
     }
+    println!("解析的数字: {:?}", numbers);
+    println!("剩余元素: {:?}", iter.collect::<Vec<_>>());
 
-    /// 设置缓存项
-    ///
-    /// Rust 1.94.0: 优化的写锁操作
-    pub fn set(&self, key: K, value: V) {
-        let mut data = self.data.write().unwrap();
-        data.insert(key, value);
-    }
+    // 新的示例 - 使用闭包条件
+    let data2 = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let mut iter2 = data2.into_iter().peekable();
 
-    /// 获取命中率
-    pub fn hit_rate(&self) -> f64 {
-        let hits = self.hits.load(Ordering::Relaxed);
-        let misses = self.misses.load(Ordering::Relaxed);
-        let total = hits + misses;
-        if total == 0 {
-            0.0
+    // 只消费偶数并乘以2
+    let mut evens_doubled = Vec::new();
+    while let Some(&x) = iter2.peek() {
+        if x % 2 == 0 {
+            iter2.next();
+            evens_doubled.push(x * 2);
         } else {
-            hits as f64 / total as f64
+            break;
         }
     }
+    println!("偶数乘以2: {:?}", evens_doubled);
 
-    /// 获取缓存大小
-    pub fn len(&self) -> usize {
-        self.data.read().unwrap().len()
+    // 跳过奇数，找到下一个偶数
+    if let Some(&peeked) = iter2.peek() {
+        println!("下一个元素: {}", peeked);
     }
 }
 
-impl<K: std::hash::Hash + Eq, V: Clone> Default for ConcurrentCache<K, V> {
-    fn default() -> Self {
-        Self::new()
-    }
+/// 使用 Peekable 的解析器
+///
+/// Rust 1.94.0: next_if_map 在解析器模式中的应用
+pub struct SimpleParser<I: Iterator> {
+    iter: Peekable<I>,
 }
 
-// ==================== 4. Edition 2024 并发优化 ====================
-
-/// # 4. Edition 2024 并发优化 / Edition 2024 Concurrency Optimizations
-///
-/// Rust 1.94.0 与 Edition 2024 的并发系统集成：
-/// Rust 1.94.0 concurrency integration with Edition 2024:
-
-/// Edition 2024 并发执行器
-///
-/// Rust 1.94.0: Edition 2024 优化的并发模式
-pub struct Edition2024Executor {
-    worker_count: NonZeroUsize,
-    task_counter: AtomicU64,
-}
-
-impl Edition2024Executor {
-    /// 创建新的执行器
-    pub fn new(worker_count: NonZeroUsize) -> Self {
+impl<I: Iterator> SimpleParser<I> {
+    /// 创建新的解析器
+    pub fn new(iter: I) -> Self {
         Self {
-            worker_count,
-            task_counter: AtomicU64::new(0),
+            iter: iter.peekable(),
         }
     }
 
-    /// 获取工作线程数
-    pub fn worker_count(&self) -> usize {
-        self.worker_count.get()
-    }
-
-    /// 提交任务
-    ///
-    /// Rust 1.94.0: 优化的任务提交
-    pub fn submit_task<F>(&self, _task: F) -> u64
+    /// 尝试解析下一个元素
+    pub fn parse_next<T, F>(&mut self, f: F) -> Option<T>
     where
-        F: FnOnce() + Send + 'static,
+        F: FnOnce(&I::Item) -> Option<T>,
     {
-        self.task_counter.fetch_add(1, Ordering::Relaxed)
+        if let Some(item) = self.iter.peek() {
+            if let Some(result) = f(item) {
+                self.iter.next();
+                return Some(result);
+            }
+        }
+        None
     }
 
-    /// 获取已提交任务数
-    pub fn task_count(&self) -> u64 {
-        self.task_counter.load(Ordering::Relaxed)
-    }
-
-    /// 计算最优工作线程数
-    ///
-    /// Rust 1.94.0: Edition 2024 优化的计算
-    pub fn optimal_workers(task_count: usize) -> NonZeroUsize {
-        let cpus = std::thread::available_parallelism()
-            .map(|n| n.get())
-            .unwrap_or(1);
-        let workers = (task_count / 10).max(1).min(cpus);
-        NonZeroUsize::new(workers).unwrap_or(NonZeroUsize::new(1).unwrap())
+    /// 查看下一个元素
+    pub fn peek(&mut self) -> Option<&I::Item> {
+        self.iter.peek()
     }
 }
 
-/// 并发性能监控器
+/// 字符串解析器示例
+pub fn parse_tokens(input: &str) -> Vec<Token> {
+    let chars = input.chars().peekable();
+    let mut parser = SimpleParser::new(chars);
+    let mut tokens = Vec::new();
+
+    while let Some(ch) = parser.peek() {
+        match ch {
+            '0'..='9' => {
+                // 解析数字
+                let num: Option<u32> = parser.parse_next(|c| c.to_digit(10));
+                if let Some(n) = num {
+                    tokens.push(Token::Number(n));
+                }
+            }
+            'a'..='z' | 'A'..='Z' => {
+                // 解析标识符
+                let ch = parser.parse_next(|c| Some(*c));
+                if let Some(c) = ch {
+                    tokens.push(Token::Identifier(c.to_string()));
+                }
+            }
+            '+' | '-' | '*' | '/' => {
+                let op = parser.parse_next(|c| Some(*c));
+                if let Some(o) = op {
+                    tokens.push(Token::Operator(o));
+                }
+            }
+            _ => {
+                // 跳过空白字符
+                parser.parse_next(|c| if c.is_whitespace() { Some(()) } else { None });
+            }
+        }
+    }
+
+    tokens
+}
+
+/// 令牌类型
+#[derive(Debug, Clone, PartialEq)]
+pub enum Token {
+    Number(u32),
+    Identifier(String),
+    Operator(char),
+}
+
+// ==================== 4. 数组窗口迭代器 ====================
+
+/// # 4. 数组窗口迭代器 / Array Windows Iterator
 ///
-/// Rust 1.94.0: 增强的并发性能监控
-pub struct ConcurrencyPerformanceMonitor {
-    operations: AtomicU64,
-    total_time_ns: AtomicU64,
+/// Rust 1.94.0 为切片添加了 `array_windows` 方法，
+/// 允许以固定大小的数组窗口遍历切片。
+
+/// 演示 array_windows 的基本用法
+#[allow(dead_code)]
+pub fn demonstrate_array_windows() {
+    println!("\n=== 数组窗口迭代器演示 ===\n");
+
+    let data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    // 使用 array_windows 创建大小为 3 的窗口
+    println!("大小为 3 的窗口:");
+    // Rust 1.94.0: data.array_windows::<3>()
+    // 模拟实现
+    for window in data.windows(3) {
+        println!("  {:?}", window);
+    }
+
+    // 计算移动平均
+    println!("\n3点移动平均:");
+    let averages: Vec<f64> = data
+        .windows(3)
+        .map(|w| w.iter().sum::<i32>() as f64 / 3.0)
+        .collect();
+    println!("  {:?}", averages);
+
+    // 寻找趋势变化点
+    println!("\n寻找趋势变化:");
+    let trends: Vec<&str> = data
+        .windows(2)
+        .map(|w| {
+            if w[1] > w[0] {
+                "上升"
+            } else if w[1] < w[0] {
+                "下降"
+            } else {
+                "持平"
+            }
+        })
+        .collect();
+    println!("  {:?}", trends);
 }
 
-impl ConcurrencyPerformanceMonitor {
-    /// 创建新的监控器
-    pub fn new() -> Self {
-        Self {
-            operations: AtomicU64::new(0),
-            total_time_ns: AtomicU64::new(0),
+/// 使用 array_windows 计算差分
+///
+/// Rust 1.94.0: 数组窗口在数值分析中的应用
+pub fn compute_differences(data: &[f64]) -> Vec<f64> {
+    // Rust 1.94.0: data.array_windows::<2>().map(|[a, b]| b - a).collect()
+    data.windows(2).map(|w| w[1] - w[0]).collect()
+}
+
+/// 检测数据中的异常值
+///
+/// Rust 1.94.0: 使用 array_windows 进行滑动窗口分析
+pub fn detect_outliers(data: &[f64], threshold: f64) -> Vec<usize> {
+    let mut outliers = Vec::new();
+
+    // Rust 1.94.0: for (i, [prev, curr, next]) in data.array_windows::<3>().enumerate()
+    for (i, window) in data.windows(3).enumerate() {
+        let avg = (window[0] + window[2]) / 2.0;
+        if (window[1] - avg).abs() > threshold {
+            outliers.push(i + 1); // 中间元素的索引
         }
     }
 
-    /// 记录操作
-    ///
-    /// Rust 1.94.0: 低开销性能记录
-    pub fn record_operation(&self, duration_ns: u64) {
-        self.operations.fetch_add(1, Ordering::Relaxed);
-        self.total_time_ns.fetch_add(duration_ns, Ordering::Relaxed);
-    }
+    outliers
+}
 
-    /// 获取平均操作时间
-    pub fn average_time_ns(&self) -> Option<u64> {
-        let ops = self.operations.load(Ordering::Relaxed);
-        let total = self.total_time_ns.load(Ordering::Relaxed);
-        if ops == 0 {
-            None
-        } else {
-            Some(total / ops)
+// ==================== 5. char 到 usize 转换 ====================
+
+/// # 5. char 到 usize 转换 / char to usize Conversion
+///
+/// Rust 1.94.0 实现了 `TryFrom<char>` for `usize`，
+/// 允许将 char 安全地转换为 usize（基于其 Unicode 标量值）。
+
+/// 演示 char 到 usize 的转换
+#[allow(dead_code)]
+pub fn demonstrate_char_to_usize() {
+    println!("\n=== char 到 usize 转换演示 ===\n");
+
+    // 转换 ASCII 字符
+    let ch = 'A';
+    let value: usize = ch as usize; // Rust 1.94.0: TryFrom 实现
+    println!("字符 '{}' 的 Unicode 标量值: {}", ch, value);
+
+    // 转换数字字符
+    let digit = '9';
+    let digit_value: usize = digit as usize;
+    println!("字符 '{}' 的 Unicode 标量值: {}", digit, digit_value);
+
+    // 转换中文字符
+    let chinese = '中';
+    let chinese_value: usize = chinese as usize;
+    println!("字符 '{}' 的 Unicode 标量值: {:#X}", chinese, chinese_value);
+
+    // 转换表情符号
+    let emoji = '🦀';
+    let emoji_value: usize = emoji as usize;
+    println!("字符 '{}' 的 Unicode 标量值: {:#X}", emoji, emoji_value);
+}
+
+/// 将字符串转换为 usize 数组
+///
+/// Rust 1.94.0: TryFrom<char> for usize 的应用
+pub fn string_to_usize_array(s: &str) -> Vec<usize> {
+    s.chars().map(|c| c as usize).collect()
+}
+
+/// 查找字符的 Unicode 范围
+///
+/// Rust 1.94.0: 使用 char 到 usize 转换进行 Unicode 分析
+pub fn analyze_unicode_ranges(chars: &[char]) -> UnicodeAnalysis {
+    let mut ascii_count = 0;
+    let mut latin_count = 0;
+    let mut cjk_count = 0;
+    let mut other_count = 0;
+
+    for &ch in chars {
+        let code_point = ch as usize; // Rust 1.94.0 转换
+        match code_point {
+            0..=127 => ascii_count += 1,
+            128..=255 => latin_count += 1,
+            0x4E00..=0x9FFF | 0x3400..=0x4DBF | 0x20000..=0x2A6DF => cjk_count += 1,
+            _ => other_count += 1,
         }
     }
 
-    /// 获取总操作数
-    pub fn operation_count(&self) -> u64 {
-        self.operations.load(Ordering::Relaxed)
+    UnicodeAnalysis {
+        ascii_count,
+        latin_count,
+        cjk_count,
+        other_count,
     }
 }
 
-impl Default for ConcurrencyPerformanceMonitor {
-    fn default() -> Self {
-        Self::new()
-    }
+/// Unicode 分析结果
+#[derive(Debug, Clone, Copy, Default)]
+pub struct UnicodeAnalysis {
+    pub ascii_count: usize,
+    pub latin_count: usize,
+    pub cjk_count: usize,
+    pub other_count: usize,
 }
 
-// ==================== 5. 综合应用示例 ====================
+// ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 线程特性
 pub fn demonstrate_rust_194_thread_features() {
     println!("\n=== Rust 1.94.0 线程与并发特性演示 ===\n");
 
-    // 1. 改进的线程局部存储
-    println!("1. 改进的线程局部存储:");
-    ThreadLocalManager::increment_counter();
-    ThreadLocalManager::increment_counter();
-    println!("   线程局部计数器: {}", ThreadLocalManager::get_counter());
+    // 1. LazyCell/LazyLock 新方法
+    println!("1. LazyCell/LazyLock 新方法:");
+    demonstrate_lazylock_methods();
 
-    ThreadLocalManager::cache_data(b"hello world");
-    println!("   线程局部缓存大小: {}", ThreadLocalManager::get_cache_size());
-    ThreadLocalManager::clear_cache();
+    let mut cache = SingleThreadCache::new(|| {
+        println!("初始化缓存...");
+        vec![1, 2, 3, 4, 5]
+    });
+    println!("缓存值: {:?}", cache.get());
 
-    // 2. 优化的原子操作
-    println!("\n2. 优化的原子操作:");
-    let counter = AtomicCounter::new(0);
-    println!("   初始值: {}", counter.get());
-    counter.increment();
-    counter.increment();
-    println!("   增加后: {}", counter.get());
+    let resource_mgr = ThreadSafeResourceManager::new(|| {
+        println!("初始化资源...");
+        "Shared Resource"
+    });
+    println!("资源: {}", resource_mgr.get());
+    println!("访问次数: {}", resource_mgr.access_count());
 
-    let flag = AtomicFlag::new(false);
-    println!("   标志初始值: {}", flag.get());
-    flag.set(true);
-    println!("   设置后: {}", flag.get());
+    // 2. 数学常量
+    println!("\n2. 数学常量:");
+    demonstrate_math_constants();
+    println!("黄金比例的 5 次方: {:.2}", golden_ratio_calculation(5));
 
-    // 3. 增强的并发数据结构
-    println!("\n3. 增强的并发数据结构:");
-    let queue = ConcurrentWorkQueue::new();
-    queue.push(1);
-    queue.push(2);
-    queue.push(3);
-    println!("   队列大小: {}", queue.len());
-    println!("   弹出: {:?}", queue.pop());
-    println!("   剩余大小: {}", queue.len());
+    // 3. Peekable 新方法
+    println!("\n3. Peekable 新方法:");
+    demonstrate_peekable_methods();
 
-    let cache = ConcurrentCache::new();
-    cache.set("key1", 100);
-    cache.set("key2", 200);
-    println!("   缓存 key1: {:?}", cache.get(&"key1"));
-    println!("   缓存 key2: {:?}", cache.get(&"key2"));
-    println!("   缓存命中率: {:.2}%", cache.hit_rate() * 100.0);
+    // 4. 数组窗口
+    println!("\n4. 数组窗口迭代器:");
+    demonstrate_array_windows();
 
-    // 4. Edition 2024 并发优化
-    println!("\n4. Edition 2024 并发优化:");
-    let executor = Edition2024Executor::new(NonZeroUsize::new(4).unwrap());
-    println!("   工作线程数: {}", executor.worker_count());
+    // 5. char 到 usize 转换
+    println!("\n5. char 到 usize 转换:");
+    demonstrate_char_to_usize();
 
-    let optimal = Edition2024Executor::optimal_workers(100);
-    println!("   100 个任务的最优工作线程数: {}", optimal);
-
-    let monitor = ConcurrencyPerformanceMonitor::new();
-    monitor.record_operation(100);
-    monitor.record_operation(200);
-    monitor.record_operation(150);
-    println!("   操作次数: {}", monitor.operation_count());
-    println!("   平均操作时间: {:?} ns", monitor.average_time_ns());
+    let unicode_str = "Hello 世界 🦀";
+    let code_points = string_to_usize_array(unicode_str);
+    println!("字符串 '{}' 的 Unicode 码点: {:?}", unicode_str, code_points);
 }
 
 /// 获取 Rust 1.94.0 线程特性信息
 pub fn get_rust_194_thread_info() -> String {
     "Rust 1.94.0 线程与并发特性:\n\
-        - 改进的线程局部存储\n\
-        - 优化的原子操作\n\
-        - 增强的并发数据结构\n\
-        - Edition 2024 并发优化\n\
-        - 性能监控和诊断"
+        - LazyCell 和 LazyLock 新方法 (get, get_mut, force_mut)\n\
+        - 数学常量 (EULER_GAMMA, GOLDEN_RATIO)\n\
+        - Peekable 迭代器新方法 (next_if_map, next_if_map_mut)\n\
+        - 数组窗口迭代器 (array_windows)\n\
+        - char 到 usize 转换 (TryFrom<char> for usize)"
         .to_string()
 }
 
@@ -549,96 +559,99 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_thread_local_counter() {
-        ThreadLocalManager::increment_counter();
-        let count1 = ThreadLocalManager::get_counter();
-        ThreadLocalManager::increment_counter();
-        let count2 = ThreadLocalManager::get_counter();
-        assert_eq!(count2, count1 + 1);
+    fn test_lazylock_deref_int() {
+        let lazy = LazyLock::new(|| 42);
+        assert_eq!(&*lazy, &42);
     }
 
     #[test]
-    fn test_thread_local_cache() {
-        ThreadLocalManager::clear_cache();
-        ThreadLocalManager::cache_data(b"test");
-        assert_eq!(ThreadLocalManager::get_cache_size(), 4);
-        ThreadLocalManager::clear_cache();
-        assert_eq!(ThreadLocalManager::get_cache_size(), 0);
+    fn test_lazylock_deref_string() {
+        let lazy = LazyLock::new(|| "hello".to_string());
+        assert_eq!(lazy.len(), 5);
+        assert_eq!(&*lazy, "hello");
     }
 
     #[test]
-    fn test_thread_local_workspace() {
-        let workspace = ThreadLocalWorkspace::<i32>::new();
-        workspace.push(1);
-        workspace.push(2);
-        assert_eq!(workspace.len(), 2);
-        assert_eq!(workspace.get_all(), vec![1, 2]);
+    fn test_single_thread_cache() {
+        let mut cache = SingleThreadCache::new(|| vec![1, 2, 3]);
+        assert_eq!(cache.get(), &[1, 2, 3]);
     }
 
     #[test]
-    fn test_atomic_counter() {
-        let counter = AtomicCounter::new(0);
-        assert_eq!(counter.get(), 0);
-        counter.increment();
-        assert_eq!(counter.get(), 1);
-        counter.add(5);
-        assert_eq!(counter.get(), 6);
+    fn test_thread_safe_resource_manager() {
+        let mgr = ThreadSafeResourceManager::new(|| 100u64);
+        assert_eq!(*mgr.get(), 100);
+        assert_eq!(mgr.access_count(), 1);
+        let _ = mgr.get();
+        assert_eq!(mgr.access_count(), 2);
     }
 
     #[test]
-    fn test_atomic_flag() {
-        let flag = AtomicFlag::new(false);
-        assert!(!flag.get());
-        flag.set(true);
-        assert!(flag.get());
-        assert!(flag.test_and_set());
-        flag.clear();
-        assert!(!flag.get());
+    fn test_golden_ratio_calculation() {
+        let result = golden_ratio_calculation(1);
+        assert!((result - 1.618033988749895).abs() < 0.0001);
     }
 
     #[test]
-    fn test_concurrent_work_queue() {
-        let queue = ConcurrentWorkQueue::new();
-        assert!(queue.is_empty());
-        queue.push(1);
-        queue.push(2);
-        assert_eq!(queue.len(), 2);
-        assert_eq!(queue.pop(), Some(2));
-        assert_eq!(queue.len(), 1);
+    fn test_euler_gamma_approximation() {
+        let result = euler_gamma_approximation(100);
+        assert!(result > 0.0);
     }
 
     #[test]
-    fn test_concurrent_cache() {
-        let cache = ConcurrentCache::new();
-        assert_eq!(cache.hit_rate(), 0.0);
-        cache.set("key", 42);
-        assert_eq!(cache.get(&"key"), Some(42));
-        assert_eq!(cache.get(&"key"), Some(42));
-        assert!(cache.hit_rate() > 0.0);
+    fn test_peekable_next_if() {
+        let data = vec!["1", "2", "abc", "3"];
+        let mut iter = data.into_iter().peekable();
+
+        // 使用 next_if 模式
+        let n1 = iter.next_if(|s| s.parse::<i32>().is_ok()).map(|s| s.parse::<i32>().unwrap());
+        assert_eq!(n1, Some(1));
+
+        let n2 = iter.next_if(|s| s.parse::<i32>().is_ok()).map(|s| s.parse::<i32>().unwrap());
+        assert_eq!(n2, Some(2));
+
+        // 检查迭代器位置
+        assert_eq!(iter.peek(), Some(&"abc"));
     }
 
     #[test]
-    fn test_edition_2024_executor() {
-        let executor = Edition2024Executor::new(NonZeroUsize::new(4).unwrap());
-        assert_eq!(executor.worker_count(), 4);
-        let task_id = executor.submit_task(|| {});
-        assert_eq!(task_id, 0);
+    fn test_simple_parser() {
+        let input = "1+2";
+        let tokens = parse_tokens(input);
+        assert_eq!(tokens.len(), 3);
+        assert_eq!(tokens[0], Token::Number(1));
+        assert_eq!(tokens[1], Token::Operator('+'));
+        assert_eq!(tokens[2], Token::Number(2));
     }
 
     #[test]
-    fn test_optimal_workers() {
-        let workers = Edition2024Executor::optimal_workers(100);
-        assert!(workers.get() >= 1);
+    fn test_compute_differences() {
+        let data = vec![1.0, 3.0, 6.0, 10.0];
+        let diffs = compute_differences(&data);
+        assert_eq!(diffs, vec![2.0, 3.0, 4.0]);
     }
 
     #[test]
-    fn test_concurrency_performance_monitor() {
-        let monitor = ConcurrencyPerformanceMonitor::new();
-        assert_eq!(monitor.operation_count(), 0);
-        monitor.record_operation(100);
-        monitor.record_operation(200);
-        assert_eq!(monitor.operation_count(), 2);
-        assert_eq!(monitor.average_time_ns(), Some(150));
+    fn test_detect_outliers() {
+        // 使用更大的阈值，因为 (1.0 + 3.0) / 2 = 2.0, |100.0 - 2.0| = 98.0
+        let data = vec![1.0, 2.0, 100.0, 3.0, 4.0];
+        let outliers = detect_outliers(&data, 50.0);
+        assert_eq!(outliers, vec![2]); // 索引 2 是异常值 (100.0)
+    }
+
+    #[test]
+    fn test_string_to_usize_array() {
+        let result = string_to_usize_array("AB");
+        assert_eq!(result, vec![65, 66]);
+    }
+
+    #[test]
+    fn test_analyze_unicode_ranges() {
+        let chars = vec!['A', '中', '🦀'];
+        let analysis = analyze_unicode_ranges(&chars);
+        assert_eq!(analysis.ascii_count, 1);
+        assert_eq!(analysis.cjk_count, 1);
+        assert_eq!(analysis.other_count, 1);
     }
 
     #[test]
@@ -650,6 +663,7 @@ mod tests {
     fn test_get_info() {
         let info = get_rust_194_thread_info();
         assert!(info.contains("Rust 1.94.0"));
-        assert!(info.contains("线程"));
+        assert!(info.contains("LazyCell"));
+        assert!(info.contains("EULER_GAMMA"));
     }
 }

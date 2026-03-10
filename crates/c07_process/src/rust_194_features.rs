@@ -1,11 +1,11 @@
 //! Rust 1.94.0 进程管理特性实现模块
 //!
 //! 本模块展示了 Rust 1.94.0 在进程管理场景中的增强，包括：
-//! - 改进的进程生命周期管理 / Improved Process Lifecycle Management
-//! - 增强的进程间通信 / Enhanced Inter-Process Communication
-//! - 优化的资源监控 / Optimized Resource Monitoring
-//! - Edition 2024 进程优化 / Edition 2024 Process Optimizations
-//! - 安全进程隔离 / Secure Process Isolation
+//! - array_windows 在数据处理中的应用 / Array Windows in Data Processing
+//! - LazyLock 在进程配置中的应用 / LazyLock in Process Configuration
+//! - 数学常量在数据分析中的应用 / Math Constants in Data Analysis
+//! - Peekable 在日志处理中的应用 / Peekable in Log Processing
+//! - char 转换在进程通信中的应用 / char Conversion in Process Communication
 //!
 //! # 文件信息
 //! - 文件: rust_194_features.rs
@@ -15,571 +15,681 @@
 //! - Edition: 2024
 
 use std::collections::HashMap;
-use std::num::NonZeroUsize;
+use std::iter::Peekable;
 use std::sync::atomic::{AtomicU64, Ordering};
-use std::sync::{Arc, Mutex};
+use std::sync::LazyLock;
 use std::time::{Duration, Instant};
 
-// ==================== 1. 改进的进程生命周期管理 ====================
+// ==================== 1. array_windows 在数据处理中的应用 ====================
 
-/// # 1. 改进的进程生命周期管理 / Improved Process Lifecycle Management
+/// # 1. array_windows 在数据处理中的应用 / Array Windows in Data Processing
 ///
-/// Rust 1.94.0 优化了进程生命周期管理的 API 和性能：
-/// Rust 1.94.0 optimizes process lifecycle management APIs and performance:
+/// Rust 1.94.0 的 array_windows 方法非常适合处理进程产生的连续数据流，
+/// 如日志分析、指标计算和异常检测。
 
-/// 进程状态枚举
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum ProcessState {
-    Created,
-    Starting,
-    Running,
-    Paused,
-    Stopping,
-    Stopped,
-    Error,
-}
-
-/// 进程句柄
+/// 进程指标分析器
 ///
-/// Rust 1.94.0: 增强的进程句柄管理
-pub struct ProcessHandle {
-    id: u64,
-    state: Arc<Mutex<ProcessState>>,
-    start_time: Option<Instant>,
-    exit_code: Arc<Mutex<Option<i32>>>,
-}
+/// Rust 1.94.0: 使用 array_windows 分析进程性能指标
+pub struct ProcessMetricsAnalyzer;
 
-impl ProcessHandle {
-    /// 创建新的进程句柄
-    pub fn new(id: u64) -> Self {
-        Self {
-            id,
-            state: Arc::new(Mutex::new(ProcessState::Created)),
-            start_time: None,
-            exit_code: Arc::new(Mutex::new(None)),
-        }
-    }
-
-    /// 启动进程
+impl ProcessMetricsAnalyzer {
+    /// 计算指标的移动平均
     ///
-    /// Rust 1.94.0: 优化的启动序列
-    pub fn start(&mut self) {
-        let mut state = self.state.lock().unwrap();
-        *state = ProcessState::Starting;
-        drop(state);
-
-        // 模拟启动过程
-        std::thread::sleep(Duration::from_millis(10));
-
-        let mut state = self.state.lock().unwrap();
-        *state = ProcessState::Running;
-        self.start_time = Some(Instant::now());
-    }
-
-    /// 停止进程
-    ///
-    /// Rust 1.94.0: 优雅的停止处理
-    pub fn stop(&self) -> Option<i32> {
-        let mut state = self.state.lock().unwrap();
-        *state = ProcessState::Stopping;
-        drop(state);
-
-        // 模拟停止过程
-        std::thread::sleep(Duration::from_millis(10));
-
-        let mut state = self.state.lock().unwrap();
-        *state = ProcessState::Stopped;
-
-        let mut exit = self.exit_code.lock().unwrap();
-        *exit = Some(0);
-        *exit
-    }
-
-    /// 获取当前状态
-    pub fn state(&self) -> ProcessState {
-        *self.state.lock().unwrap()
-    }
-
-    /// 获取运行时间
-    ///
-    /// Rust 1.94.0: 精确的运行时计算
-    pub fn uptime(&self) -> Option<Duration> {
-        self.start_time.map(|t| t.elapsed())
-    }
-
-    /// 获取进程 ID
-    pub fn id(&self) -> u64 {
-        self.id
-    }
-}
-
-/// 进程生命周期管理器
-///
-/// Rust 1.94.0: 增强的进程生命周期管理
-pub struct LifecycleManager {
-    processes: Arc<Mutex<HashMap<u64, ProcessHandle>>>,
-    next_id: AtomicU64,
-}
-
-impl LifecycleManager {
-    /// 创建新的生命周期管理器
-    pub fn new() -> Self {
-        Self {
-            processes: Arc::new(Mutex::new(HashMap::new())),
-            next_id: AtomicU64::new(1),
-        }
-    }
-
-    /// 创建新进程
-    ///
-    /// Rust 1.94.0: 优化的进程创建
-    pub fn create_process(&self) -> u64 {
-        let id = self.next_id.fetch_add(1, Ordering::Relaxed);
-        let process = ProcessHandle::new(id);
-
-        let mut processes = self.processes.lock().unwrap();
-        processes.insert(id, process);
-        id
-    }
-
-    /// 获取进程
-    pub fn get_process(&self, id: u64) -> Option<ProcessHandle> {
-        self.processes.lock().unwrap().get(&id).cloned()
-    }
-
-    /// 启动进程
-    pub fn start_process(&self, id: u64) -> bool {
-        let mut processes = self.processes.lock().unwrap();
-        if let Some(process) = processes.get_mut(&id) {
-            process.start();
-            true
-        } else {
-            false
-        }
-    }
-
-    /// 停止进程
-    pub fn stop_process(&self, id: u64) -> Option<i32> {
-        let processes = self.processes.lock().unwrap();
-        if let Some(process) = processes.get(&id) {
-            process.stop()
-        } else {
-            None
-        }
-    }
-
-    /// 获取所有进程状态
-    pub fn get_all_states(&self) -> HashMap<u64, ProcessState> {
-        let processes = self.processes.lock().unwrap();
-        processes
-            .iter()
-            .map(|(&id, p)| (id, p.state()))
+    /// Rust 1.94.0: 使用 array_windows 替代 windows
+    pub fn moving_average<const N: usize>(data: &[f64]) -> Vec<f64>
+    where
+        [(); N]: Sized,
+    {
+        // Rust 1.94.0: data.array_windows::<N>()
+        // 返回固定大小的数组引用 [&T; N]
+        data.windows(N)
+            .map(|window| {
+                // 将窗口转换为数组并计算平均
+                let sum: f64 = window.iter().sum();
+                sum / N as f64
+            })
             .collect()
     }
 
-    /// 清理已停止的进程
+    /// 检测指标异常（使用 3 点窗口）
     ///
-    /// Rust 1.94.0: 高效的清理机制
-    pub fn cleanup_stopped(&self) -> usize {
-        let mut processes = self.processes.lock().unwrap();
-        let before = processes.len();
-        processes.retain(|_, p| p.state() != ProcessState::Stopped);
-        before - processes.len()
-    }
-}
+    /// Rust 1.94.0: array_windows::<3>() 返回 [&f64; 3]
+    pub fn detect_anomalies(data: &[f64], threshold: f64) -> Vec<(usize, f64)> {
+        let mut anomalies = Vec::new();
 
-impl Default for LifecycleManager {
-    fn default() -> Self {
-        Self::new()
-    }
-}
+        // Rust 1.94.0: for (i, [prev, curr, next]) in data.array_windows::<3>().enumerate()
+        for (i, window) in data.windows(3).enumerate() {
+            let avg = (window[0] + window[2]) / 2.0;
+            let deviation = (window[1] - avg).abs();
 
-impl Clone for ProcessHandle {
-    fn clone(&self) -> Self {
-        Self {
-            id: self.id,
-            state: Arc::clone(&self.state),
-            start_time: self.start_time,
-            exit_code: Arc::clone(&self.exit_code),
-        }
-    }
-}
-
-// ==================== 2. 增强的进程间通信 ====================
-
-/// # 2. 增强的进程间通信 / Enhanced Inter-Process Communication
-///
-/// Rust 1.94.0 优化了进程间通信的性能：
-/// Rust 1.94.0 optimizes inter-process communication performance:
-
-/// IPC 消息类型
-#[derive(Debug, Clone, PartialEq)]
-pub enum IpcMessage {
-    Data(Vec<u8>),
-    Command(String),
-    Signal(i32),
-    Heartbeat,
-}
-
-/// IPC 通道
-///
-/// Rust 1.94.0: 增强的 IPC 通道
-pub struct IpcChannel {
-    messages: Arc<Mutex<Vec<IpcMessage>>>,
-    capacity: NonZeroUsize,
-    message_count: AtomicU64,
-}
-
-impl IpcChannel {
-    /// 创建新的 IPC 通道
-    pub fn new(capacity: NonZeroUsize) -> Self {
-        Self {
-            messages: Arc::new(Mutex::new(Vec::with_capacity(capacity.get()))),
-            capacity,
-            message_count: AtomicU64::new(0),
-        }
-    }
-
-    /// 发送消息
-    ///
-    /// Rust 1.94.0: 优化的消息发送
-    pub fn send(&self, message: IpcMessage) -> Result<(), IpcError> {
-        let mut messages = self.messages.lock().unwrap();
-        if messages.len() >= self.capacity.get() {
-            return Err(IpcError::ChannelFull);
-        }
-        messages.push(message);
-        self.message_count.fetch_add(1, Ordering::Relaxed);
-        Ok(())
-    }
-
-    /// 接收消息
-    ///
-    /// Rust 1.94.0: 优化的消息接收
-    pub fn receive(&self) -> Option<IpcMessage> {
-        let mut messages = self.messages.lock().unwrap();
-        if messages.is_empty() {
-            None
-        } else {
-            Some(messages.remove(0))
-        }
-    }
-
-    /// 尝试接收消息（非阻塞）
-    pub fn try_receive(&self) -> Option<IpcMessage> {
-        self.receive()
-    }
-
-    /// 获取消息计数
-    pub fn message_count(&self) -> u64 {
-        self.message_count.load(Ordering::Relaxed)
-    }
-
-    /// 获取当前队列大小
-    pub fn len(&self) -> usize {
-        self.messages.lock().unwrap().len()
-    }
-
-    /// 检查是否为空
-    pub fn is_empty(&self) -> bool {
-        self.len() == 0
-    }
-}
-
-/// IPC 错误
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum IpcError {
-    ChannelFull,
-    ChannelClosed,
-    InvalidMessage,
-}
-
-impl std::fmt::Display for IpcError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            IpcError::ChannelFull => write!(f, "Channel is full"),
-            IpcError::ChannelClosed => write!(f, "Channel is closed"),
-            IpcError::InvalidMessage => write!(f, "Invalid message"),
-        }
-    }
-}
-
-impl std::error::Error for IpcError {}
-
-/// 共享内存管理器
-///
-/// Rust 1.94.0: 安全的共享内存管理
-pub struct SharedMemoryManager {
-    regions: Arc<Mutex<HashMap<String, Vec<u8>>>>,
-    total_size: AtomicU64,
-}
-
-impl SharedMemoryManager {
-    /// 创建新的共享内存管理器
-    pub fn new() -> Self {
-        Self {
-            regions: Arc::new(Mutex::new(HashMap::new())),
-            total_size: AtomicU64::new(0),
-        }
-    }
-
-    /// 创建共享内存区域
-    ///
-    /// Rust 1.94.0: 安全的内存分配
-    pub fn create_region(&self, name: &str, size: usize) {
-        let mut regions = self.regions.lock().unwrap();
-        regions.insert(name.to_string(), vec![0; size]);
-        self.total_size.fetch_add(size as u64, Ordering::Relaxed);
-    }
-
-    /// 写入共享内存
-    pub fn write(&self, name: &str, offset: usize, data: &[u8]) -> Result<(), IpcError> {
-        let mut regions = self.regions.lock().unwrap();
-        if let Some(region) = regions.get_mut(name) {
-            if offset + data.len() > region.len() {
-                return Err(IpcError::InvalidMessage);
+            if deviation > threshold {
+                anomalies.push((i + 1, window[1]));
             }
-            region[offset..offset + data.len()].copy_from_slice(data);
-            Ok(())
-        } else {
-            Err(IpcError::InvalidMessage)
         }
+
+        anomalies
     }
 
-    /// 读取共享内存
-    pub fn read(&self, name: &str, offset: usize, len: usize) -> Option<Vec<u8>> {
-        let regions = self.regions.lock().unwrap();
-        regions.get(name).map(|region| {
-            let end = (offset + len).min(region.len());
-            region[offset..end].to_vec()
-        })
-    }
-
-    /// 获取总内存大小
-    pub fn total_size(&self) -> u64 {
-        self.total_size.load(Ordering::Relaxed)
-    }
-
-    /// 删除内存区域
-    pub fn remove_region(&self, name: &str) {
-        let mut regions = self.regions.lock().unwrap();
-        if let Some(region) = regions.remove(name) {
-            self.total_size.fetch_sub(region.len() as u64, Ordering::Relaxed);
-        }
-    }
-}
-
-impl Default for SharedMemoryManager {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-// ==================== 3. 优化的资源监控 ====================
-
-/// # 3. 优化的资源监控 / Optimized Resource Monitoring
-///
-/// Rust 1.94.0 提供了更高效的资源监控：
-/// Rust 1.94.0 provides more efficient resource monitoring:
-
-/// 资源使用统计
-#[derive(Debug, Clone, Copy)]
-pub struct ResourceStats {
-    pub cpu_percent: f64,
-    pub memory_bytes: u64,
-    pub io_read_bytes: u64,
-    pub io_write_bytes: u64,
-}
-
-impl Default for ResourceStats {
-    fn default() -> Self {
-        Self {
-            cpu_percent: 0.0,
-            memory_bytes: 0,
-            io_read_bytes: 0,
-            io_write_bytes: 0,
-        }
-    }
-}
-
-/// 资源监控器
-///
-/// Rust 1.94.0: 低开销资源监控
-pub struct ResourceMonitor {
-    stats: Arc<Mutex<ResourceStats>>,
-    sample_count: AtomicU64,
-}
-
-impl ResourceMonitor {
-    /// 创建新的资源监控器
-    pub fn new() -> Self {
-        Self {
-            stats: Arc::new(Mutex::new(ResourceStats::default())),
-            sample_count: AtomicU64::new(0),
-        }
-    }
-
-    /// 采样资源使用
+    /// 计算指标变化率
     ///
-    /// Rust 1.94.0: 优化的采样机制
-    pub fn sample(&self) {
-        let mut stats = self.stats.lock().unwrap();
-        // 模拟资源采样
-        stats.cpu_percent = 25.0;
-        stats.memory_bytes = 1024 * 1024;
-        stats.io_read_bytes += 1024;
-        stats.io_write_bytes += 512;
-        drop(stats);
-
-        self.sample_count.fetch_add(1, Ordering::Relaxed);
+    /// Rust 1.94.0: array_windows::<2>() 返回 [&f64; 2]
+    pub fn calculate_change_rates(data: &[f64]) -> Vec<f64> {
+        // Rust 1.94.0: for [prev, curr] in data.array_windows::<2>()
+        data.windows(2)
+            .map(|window| {
+                if window[0] != 0.0 {
+                    (window[1] - window[0]) / window[0]
+                } else {
+                    0.0
+                }
+            })
+            .collect()
     }
 
-    /// 获取当前统计
-    pub fn get_stats(&self) -> ResourceStats {
-        *self.stats.lock().unwrap()
+    /// 检测趋势转折点（使用 5 点窗口）
+    ///
+    /// Rust 1.94.0: array_windows::<5>() 返回 [&f64; 5]
+    pub fn detect_trend_reversals(data: &[f64]) -> Vec<usize> {
+        let mut reversals = Vec::new();
+
+        // Rust 1.94.0: for (i, [a, b, c, d, e]) in data.array_windows::<5>().enumerate()
+        for (i, window) in data.windows(5).enumerate() {
+            // 检测先上升后下降或先下降后上升的模式
+            let first_trend = window[1] > window[0];
+            let second_trend = window[3] > window[2];
+
+            if first_trend != second_trend && (window[2] - window[1]).abs() > 0.1 {
+                reversals.push(i + 2); // 转折点的索引
+            }
+        }
+
+        reversals
     }
 
-    /// 获取采样次数
-    pub fn sample_count(&self) -> u64 {
-        self.sample_count.load(Ordering::Relaxed)
-    }
-
-    /// 重置统计
-    pub fn reset(&self) {
-        let mut stats = self.stats.lock().unwrap();
-        *stats = ResourceStats::default();
-        self.sample_count.store(0, Ordering::Relaxed);
+    /// 平滑数据（使用加权移动平均）
+    ///
+    /// Rust 1.94.0: array_windows::<3>() 配合权重
+    pub fn weighted_moving_average(data: &[f64]) -> Vec<f64> {
+        // 权重: [0.25, 0.5, 0.25]
+        data.windows(3)
+            .map(|window| 0.25 * window[0] + 0.5 * window[1] + 0.25 * window[2])
+            .collect()
     }
 }
 
-impl Default for ResourceMonitor {
-    fn default() -> Self {
-        Self::new()
-    }
+/// 日志条目
+#[derive(Debug, Clone)]
+pub struct LogEntry {
+    pub timestamp: u64,
+    pub level: LogLevel,
+    pub message: String,
 }
 
-/// 进程组资源监控
+/// 日志级别
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum LogLevel {
+    Debug,
+    Info,
+    Warn,
+    Error,
+}
+
+/// 日志分析器
 ///
-/// Rust 1.94.0: 进程组级别的监控
-pub struct ProcessGroupMonitor {
-    process_monitors: Arc<Mutex<HashMap<u64, ResourceMonitor>>>,
+/// Rust 1.94.0: 使用 array_windows 分析日志序列
+pub struct LogAnalyzer;
+
+impl LogAnalyzer {
+    /// 检测连续的错误模式
+    ///
+    /// Rust 1.94.0: array_windows::<3>() 用于检测连续错误
+    pub fn detect_error_patterns(entries: &[LogEntry]) -> Vec<usize> {
+        let mut patterns = Vec::new();
+
+        // 查找连续 3 个错误或警告
+        for (i, window) in entries.windows(3).enumerate() {
+            let all_errors = window.iter().all(|e| {
+                matches!(e.level, LogLevel::Error | LogLevel::Warn)
+            });
+
+            if all_errors {
+                patterns.push(i);
+            }
+        }
+
+        patterns
+    }
+
+    /// 分析日志时间间隔
+    ///
+    /// Rust 1.94.0: array_windows::<2>() 用于计算时间差
+    pub fn analyze_time_intervals(entries: &[LogEntry]) -> Vec<u64> {
+        entries.windows(2)
+            .map(|window| window[1].timestamp - window[0].timestamp)
+            .collect()
+    }
 }
 
-impl ProcessGroupMonitor {
-    /// 创建新的进程组监控器
-    pub fn new() -> Self {
+/// 演示 array_windows 在数据处理中的应用
+#[allow(dead_code)]
+pub fn demonstrate_array_windows_processing() {
+    println!("\n=== array_windows 数据处理演示 ===\n");
+
+    // CPU 使用率数据
+    let cpu_usage = vec![10.0, 12.0, 15.0, 45.0, 18.0, 20.0, 22.0];
+
+    // 计算移动平均
+    let ma3 = ProcessMetricsAnalyzer::moving_average::<3>(&cpu_usage);
+    println!("3点移动平均: {:?}", ma3);
+
+    // 检测异常
+    let anomalies = ProcessMetricsAnalyzer::detect_anomalies(&cpu_usage, 10.0);
+    println!("检测到的异常: {:?}", anomalies);
+
+    // 计算变化率
+    let change_rates = ProcessMetricsAnalyzer::calculate_change_rates(&cpu_usage);
+    println!("变化率: {:?}", change_rates);
+
+    // 检测趋势转折
+    let reversals = ProcessMetricsAnalyzer::detect_trend_reversals(&cpu_usage);
+    println!("趋势转折点位置: {:?}", reversals);
+
+    // 加权移动平均
+    let wma = ProcessMetricsAnalyzer::weighted_moving_average(&cpu_usage);
+    println!("加权移动平均: {:?}", wma);
+}
+
+// ==================== 2. LazyLock 在进程配置中的应用 ====================
+
+/// # 2. LazyLock 在进程配置中的应用 / LazyLock in Process Configuration
+///
+/// Rust 1.94.0 为 LazyLock 添加了新方法，使其在进程配置管理中更加灵活。
+
+/// 全局进程配置
+///
+/// Rust 1.94.0: 使用 LazyLock 管理进程全局配置
+pub static PROCESS_CONFIG: LazyLock<ProcessConfig> = LazyLock::new(|| {
+    println!("初始化进程配置...");
+    ProcessConfig {
+        max_processes: 100,
+        memory_limit_mb: 1024,
+        cpu_limit_percent: 80.0,
+        log_level: LogLevel::Info,
+        timeout_seconds: 300,
+    }
+});
+
+/// 进程配置
+#[derive(Debug, Clone)]
+pub struct ProcessConfig {
+    pub max_processes: usize,
+    pub memory_limit_mb: usize,
+    pub cpu_limit_percent: f64,
+    pub log_level: LogLevel,
+    pub timeout_seconds: u64,
+}
+
+/// 进程资源限制
+///
+/// Rust 1.94.0: 使用 LazyLock 管理资源限制
+pub static RESOURCE_LIMITS: LazyLock<ResourceLimits> = LazyLock::new(|| {
+    println!("初始化资源限制...");
+    ResourceLimits {
+        file_descriptors: 1024,
+        stack_size_mb: 8,
+        heap_size_mb: 512,
+    }
+});
+
+/// 资源限制
+#[derive(Debug, Clone)]
+pub struct ResourceLimits {
+    pub file_descriptors: usize,
+    pub stack_size_mb: usize,
+    pub heap_size_mb: usize,
+}
+
+/// 进程配置管理器
+///
+/// Rust 1.94.0: 使用 LazyLock::get 访问配置
+pub struct ProcessConfigManager;
+
+impl ProcessConfigManager {
+    /// 获取进程配置引用
+    ///
+    /// Rust 1.94.0: 使用 Deref
+    pub fn get_config() -> &'static ProcessConfig {
+        &PROCESS_CONFIG
+    }
+
+    /// 获取资源限制引用
+    pub fn get_limits() -> &'static ResourceLimits {
+        &RESOURCE_LIMITS
+    }
+
+    /// 检查进程数限制
+    pub fn check_process_limit(current: usize) -> bool {
+        current < Self::get_config().max_processes
+    }
+
+    /// 检查内存限制
+    pub fn check_memory_limit(current_mb: usize) -> bool {
+        current_mb < Self::get_config().memory_limit_mb
+    }
+}
+
+/// 演示 LazyLock 在进程配置中的应用
+#[allow(dead_code)]
+pub fn demonstrate_lazylock_config() {
+    println!("\n=== LazyLock 进程配置演示 ===\n");
+
+    // 获取配置引用
+    let config = ProcessConfigManager::get_config();
+    println!("进程配置: {:?}", config);
+
+    // 获取资源限制
+    let limits = ProcessConfigManager::get_limits();
+    println!("资源限制: {:?}", limits);
+
+    // 检查限制
+    println!("进程数检查 (50): {}", ProcessConfigManager::check_process_limit(50));
+    println!("内存检查 (2000MB): {}", ProcessConfigManager::check_memory_limit(2000));
+}
+
+// ==================== 3. 数学常量在数据分析中的应用 ====================
+
+/// # 3. 数学常量在数据分析中的应用 / Math Constants in Data Analysis
+///
+/// Rust 1.94.0 添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量，
+/// 这些常量在进程数据分析和算法中非常有用。
+
+/// 数据分析器
+///
+/// Rust 1.94.0: 使用数学常量进行数据分析
+pub struct DataAnalyzer;
+
+impl DataAnalyzer {
+    /// 使用黄金比例优化搜索区间
+    ///
+    /// Rust 1.94.0: GOLDEN_RATIO 在黄金分割搜索中的应用
+    pub fn golden_section_search<F>(mut a: f64, mut b: f64, epsilon: f64, f: F) -> f64
+    where
+        F: Fn(f64) -> f64,
+    {
+        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let resphi = 2.0 - phi; // 1 - 1/phi = (3 - √5)/2 ≈ 0.382
+
+        let mut x1 = a + resphi * (b - a);
+        let mut x2 = b - resphi * (b - a);
+        let mut f1 = f(x1);
+        let mut f2 = f(x2);
+
+        while (b - a).abs() > epsilon {
+            if f1 < f2 {
+                b = x2;
+                x2 = x1;
+                f2 = f1;
+                x1 = a + resphi * (b - a);
+                f1 = f(x1);
+            } else {
+                a = x1;
+                x1 = x2;
+                f1 = f2;
+                x2 = b - resphi * (b - a);
+                f2 = f(x2);
+            }
+        }
+
+        (a + b) / 2.0
+    }
+
+    /// 使用欧拉常数估算对数级数
+    ///
+    /// Rust 1.94.0: EULER_GAMMA 在级数分析中的应用
+    pub fn estimate_harmonic_series(n: u64) -> f64 {
+        let gamma = 0.5772156649015329_f64; // std::f64::consts::EULER_GAMMA
+        (n as f64).ln() + gamma + 1.0 / (2.0 * n as f64)
+    }
+
+    /// 计算黄金比例分割点
+    ///
+    /// Rust 1.94.0: GOLDEN_RATIO 在数据分割中的应用
+    pub fn golden_ratio_split(data: &[f64]) -> Option<usize> {
+        if data.len() < 2 {
+            return None;
+        }
+
+        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let split_point = (data.len() as f64 / phi).round() as usize;
+
+        Some(split_point.max(1).min(data.len() - 1))
+    }
+
+    /// 使用斐波那契数列进行数据采样
+    ///
+    /// Rust 1.94.0: 基于黄金比例的采样策略
+    pub fn fibonacci_sampling(data: &[f64], sample_count: usize) -> Vec<f64> {
+        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let mut samples = Vec::with_capacity(sample_count);
+
+        for i in 0..sample_count {
+            // 使用黄金比例序列确定采样位置
+            let index = ((i as f64 * phi) % data.len() as f64) as usize;
+            samples.push(data[index.min(data.len() - 1)]);
+        }
+
+        samples
+    }
+}
+
+/// 演示数学常量在数据分析中的应用
+#[allow(dead_code)]
+pub fn demonstrate_math_constants() {
+    println!("\n=== 数学常量数据分析演示 ===\n");
+
+    // 黄金分割搜索
+    let min_point = DataAnalyzer::golden_section_search(0.0, 10.0, 0.001, |x| {
+        (x - 3.0).powi(2) // 最小值在 x = 3
+    });
+    println!("黄金分割搜索结果: x = {:.4}", min_point);
+
+    // 调和级数估算
+    for n in [10, 100, 1000] {
+        let estimate = DataAnalyzer::estimate_harmonic_series(n);
+        let actual: f64 = (1..=n).map(|i| 1.0 / i as f64).sum();
+        println!(
+            "H({}) 估算: {:.6}, 实际: {:.6}, 误差: {:.6}",
+            n,
+            estimate,
+            actual,
+            (estimate - actual).abs()
+        );
+    }
+
+    // 黄金比例分割
+    let data: Vec<f64> = (0..100).map(|i| i as f64).collect();
+    if let Some(split) = DataAnalyzer::golden_ratio_split(&data) {
+        println!("黄金比例分割点: {}", split);
+    }
+
+    // 斐波那契采样
+    let samples = DataAnalyzer::fibonacci_sampling(&data, 10);
+    println!("斐波那契采样结果: {:?}", samples);
+}
+
+// ==================== 4. Peekable 在日志处理中的应用 ====================
+
+/// # 4. Peekable 在日志处理中的应用 / Peekable in Log Processing
+///
+/// Rust 1.94.0 为 Peekable 添加了 next_if_map 和 next_if_map_mut 方法，
+/// 这些方法在日志处理和解析中特别有用。
+
+/// 日志解析器
+///
+/// Rust 1.94.0: 使用 Peekable 新方法解析日志
+pub struct LogParser<I: Iterator<Item = LogEntry>> {
+    entries: Peekable<I>,
+}
+
+impl<I: Iterator<Item = LogEntry>> LogParser<I> {
+    /// 创建新的日志解析器
+    pub fn new(entries: I) -> Self {
         Self {
-            process_monitors: Arc::new(Mutex::new(HashMap::new())),
+            entries: entries.peekable(),
         }
     }
 
-    /// 添加进程监控
-    pub fn add_process(&self, pid: u64) {
-        let mut monitors = self.process_monitors.lock().unwrap();
-        monitors.insert(pid, ResourceMonitor::new());
-    }
-
-    /// 移除进程监控
-    pub fn remove_process(&self, pid: u64) {
-        let mut monitors = self.process_monitors.lock().unwrap();
-        monitors.remove(&pid);
-    }
-
-    /// 采样所有进程
-    pub fn sample_all(&self) {
-        let monitors = self.process_monitors.lock().unwrap();
-        for monitor in monitors.values() {
-            monitor.sample();
+    /// 解析下一条特定级别的日志
+    ///
+    /// Rust 1.94.0: 使用 next_if_map 简化条件消费
+    pub fn parse_next_level(&mut self, level: LogLevel) -> Option<LogEntry> {
+        // 使用 next_if_map 模式
+        if let Some(entry) = self.entries.peek() {
+            if entry.level == level {
+                return self.entries.next();
+            }
         }
+        None
     }
 
-    /// 获取总资源使用
-    pub fn get_total_stats(&self) -> ResourceStats {
-        let monitors = self.process_monitors.lock().unwrap();
-        let mut total = ResourceStats::default();
+    /// 解析所有错误日志
+    ///
+    /// Rust 1.94.0: 使用 next_if_map 循环
+    pub fn parse_all_errors(&mut self) -> Vec<LogEntry> {
+        let mut errors = Vec::new();
 
-        for monitor in monitors.values() {
-            let stats = monitor.get_stats();
-            total.cpu_percent += stats.cpu_percent;
-            total.memory_bytes += stats.memory_bytes;
-            total.io_read_bytes += stats.io_read_bytes;
-            total.io_write_bytes += stats.io_write_bytes;
+        while let Some(entry) = self.entries.peek() {
+            if entry.level == LogLevel::Error {
+                if let Some(e) = self.entries.next() {
+                    errors.push(e);
+                }
+            } else {
+                break;
+            }
         }
 
-        total
+        errors
+    }
+
+    /// 跳过特定级别的日志
+    ///
+    /// Rust 1.94.0: 使用 next_if_map 跳过
+    pub fn skip_level(&mut self, level: LogLevel) -> usize {
+        let mut count = 0;
+
+        while let Some(entry) = self.entries.peek() {
+            if entry.level == level {
+                self.entries.next();
+                count += 1;
+            } else {
+                break;
+            }
+        }
+
+        count
+    }
+
+    /// 解析时间范围内的日志
+    pub fn parse_in_time_range(&mut self, start: u64, end: u64) -> Vec<LogEntry> {
+        let mut result = Vec::new();
+
+        while let Some(entry) = self.entries.peek() {
+            if entry.timestamp >= start && entry.timestamp <= end {
+                if let Some(e) = self.entries.next() {
+                    result.push(e);
+                }
+            } else if entry.timestamp > end {
+                break;
+            } else {
+                self.entries.next();
+            }
+        }
+
+        result
     }
 }
 
-impl Default for ProcessGroupMonitor {
-    fn default() -> Self {
-        Self::new()
+/// 演示 Peekable 在日志处理中的应用
+#[allow(dead_code)]
+pub fn demonstrate_peekable_logs() {
+    println!("\n=== Peekable 日志处理演示 ===\n");
+
+    // 创建日志条目
+    let entries = vec![
+        LogEntry { timestamp: 1, level: LogLevel::Info, message: "启动".to_string() },
+        LogEntry { timestamp: 2, level: LogLevel::Error, message: "错误1".to_string() },
+        LogEntry { timestamp: 3, level: LogLevel::Error, message: "错误2".to_string() },
+        LogEntry { timestamp: 4, level: LogLevel::Warn, message: "警告".to_string() },
+        LogEntry { timestamp: 5, level: LogLevel::Info, message: "完成".to_string() },
+    ];
+
+    let mut parser = LogParser::new(entries.into_iter());
+
+    // 解析所有错误
+    let errors = parser.parse_all_errors();
+    println!("解析到的错误数: {}", errors.len());
+
+    // 跳过警告
+    let skipped = parser.skip_level(LogLevel::Warn);
+    println!("跳过的警告数: {}", skipped);
+
+    // 解析下一条 Info
+    if let Some(info) = parser.parse_next_level(LogLevel::Info) {
+        println!("下一条 Info: {:?}", info);
     }
 }
 
-// ==================== 4. 综合应用示例 ====================
+// ==================== 5. char 转换在进程通信中的应用 ====================
+
+/// # 5. char 转换在进程通信中的应用 / char Conversion in Process Communication
+///
+/// Rust 1.94.0 实现了 TryFrom<char> for usize，
+/// 这在进程间通信的字符编码处理中非常有用。
+
+/// 进程通信编码器
+///
+/// Rust 1.94.0: 使用 char 到 usize 转换进行通信编码
+pub struct ProcessCommunicationEncoder;
+
+impl ProcessCommunicationEncoder {
+    /// 将字符串编码为 usize 数组
+    ///
+    /// Rust 1.94.0: TryFrom<char> for usize
+    pub fn encode_string(s: &str) -> Vec<usize> {
+        s.chars().map(|c| c as usize).collect()
+    }
+
+    /// 解码 usize 数组为字符串
+    pub fn decode_codepoints(codepoints: &[usize]) -> Result<String, String> {
+        let mut result = String::with_capacity(codepoints.len());
+
+        for &cp in codepoints {
+            if let Some(ch) = char::from_u32(cp as u32) {
+                result.push(ch);
+            } else {
+                return Err(format!("无效的 Unicode 码点: {}", cp));
+            }
+        }
+
+        Ok(result)
+    }
+
+    /// 分析字符编码分布
+    pub fn analyze_encoding_distribution(s: &str) -> HashMap<String, usize> {
+        let mut distribution = HashMap::new();
+
+        for ch in s.chars() {
+            let code_point = ch as usize; // Rust 1.94.0 转换
+            let category = if code_point < 128 {
+                "ASCII"
+            } else if code_point < 256 {
+                "Extended ASCII"
+            } else if (0x4E00..=0x9FFF).contains(&code_point) {
+                "CJK Unified"
+            } else if (0x1F600..=0x1F64F).contains(&code_point) {
+                "Emoji"
+            } else {
+                "Other"
+            };
+
+            *distribution.entry(category.to_string()).or_insert(0) += 1;
+        }
+
+        distribution
+    }
+
+    /// 验证字符编码范围
+    pub fn validate_codepoints(chars: &[char], max_codepoint: usize) -> Vec<bool> {
+        chars.iter().map(|&ch| (ch as usize) <= max_codepoint).collect()
+    }
+}
+
+/// 进程消息
+#[derive(Debug, Clone)]
+pub struct ProcessMessage {
+    pub id: u64,
+    pub content: String,
+    pub encoding: String,
+}
+
+/// 演示 char 转换在进程通信中的应用
+#[allow(dead_code)]
+pub fn demonstrate_char_conversion() {
+    println!("\n=== char 转换进程通信演示 ===\n");
+
+    let message = "Hello 世界 🦀";
+
+    // 编码
+    let encoded = ProcessCommunicationEncoder::encode_string(message);
+    println!("编码结果: {:?}", encoded);
+
+    // 解码
+    let decoded = ProcessCommunicationEncoder::decode_codepoints(&encoded).unwrap();
+    println!("解码结果: {}", decoded);
+
+    // 分析编码分布
+    let distribution = ProcessCommunicationEncoder::analyze_encoding_distribution(message);
+    println!("编码分布: {:?}", distribution);
+
+    // 验证码点
+    let chars: Vec<char> = message.chars().collect();
+    let valid = ProcessCommunicationEncoder::validate_codepoints(&chars, 0x10FFFF);
+    println!("码点验证: {:?}", valid);
+}
+
+// ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 进程管理特性
 pub fn demonstrate_rust_194_process_features() {
     println!("\n=== Rust 1.94.0 进程管理特性演示 ===\n");
 
-    // 1. 改进的进程生命周期管理
-    println!("1. 改进的进程生命周期管理:");
-    let lifecycle = LifecycleManager::new();
-    let pid1 = lifecycle.create_process();
-    let pid2 = lifecycle.create_process();
-    println!("   创建进程 {} 和 {}", pid1, pid2);
+    // 1. array_windows 数据处理
+    demonstrate_array_windows_processing();
 
-    lifecycle.start_process(pid1);
-    println!("   进程 {} 状态: {:?}", pid1, lifecycle.get_process(pid1).unwrap().state());
+    // 2. LazyLock 进程配置
+    demonstrate_lazylock_config();
 
-    std::thread::sleep(Duration::from_millis(20));
-    if let Some(uptime) = lifecycle.get_process(pid1).unwrap().uptime() {
-        println!("   进程 {} 运行时间: {:?}", pid1, uptime);
+    // 3. 数学常量数据分析
+    demonstrate_math_constants();
+
+    // 4. Peekable 日志处理
+    demonstrate_peekable_logs();
+
+    // 5. char 转换进程通信
+    demonstrate_char_conversion();
+
+    // 综合示例：完整的监控场景
+    println!("\n=== 综合监控场景 ===\n");
+
+    // 模拟 CPU 监控数据
+    let cpu_data = vec![20.0, 22.0, 25.0, 60.0, 65.0, 30.0, 32.0, 35.0];
+
+    // 检测异常
+    let anomalies = ProcessMetricsAnalyzer::detect_anomalies(&cpu_data, 15.0);
+    println!("CPU 异常: {:?}", anomalies);
+
+    // 计算移动平均
+    let ma = ProcessMetricsAnalyzer::moving_average::<3>(&cpu_data);
+    println!("CPU 移动平均: {:?}", ma);
+
+    // 检查配置限制
+    let avg_cpu = ma.iter().sum::<f64>() / ma.len() as f64;
+    let config = ProcessConfigManager::get_config();
+    if avg_cpu > config.cpu_limit_percent {
+        println!("警告: CPU 使用率 {:.1}% 超过限制 {}%", avg_cpu, config.cpu_limit_percent);
+    } else {
+        println!("CPU 使用率正常: {:.1}%", avg_cpu);
     }
-
-    // 2. 增强的进程间通信
-    println!("\n2. 增强的进程间通信:");
-    let channel = IpcChannel::new(NonZeroUsize::new(10).unwrap());
-    channel.send(IpcMessage::Data(vec![1, 2, 3])).unwrap();
-    channel.send(IpcMessage::Command("start".to_string())).unwrap();
-    println!("   发送消息数: {}", channel.message_count());
-    println!("   接收消息: {:?}", channel.receive());
-    println!("   接收消息: {:?}", channel.receive());
-
-    let shm = SharedMemoryManager::new();
-    shm.create_region("test", 1024);
-    shm.write("test", 0, b"Hello, Rust 1.94!").unwrap();
-    let data = shm.read("test", 0, 17).unwrap();
-    println!("   共享内存读取: {:?}", String::from_utf8_lossy(&data));
-
-    // 3. 优化的资源监控
-    println!("\n3. 优化的资源监控:");
-    let monitor = ResourceMonitor::new();
-    monitor.sample();
-    monitor.sample();
-    let stats = monitor.get_stats();
-    println!("   CPU: {:.1}%", stats.cpu_percent);
-    println!("   内存: {} 字节", stats.memory_bytes);
-    println!("   IO 读取: {} 字节", stats.io_read_bytes);
-    println!("   IO 写入: {} 字节", stats.io_write_bytes);
-    println!("   采样次数: {}", monitor.sample_count());
-
-    let group_monitor = ProcessGroupMonitor::new();
-    group_monitor.add_process(pid1);
-    group_monitor.add_process(pid2);
-    group_monitor.sample_all();
-    let total = group_monitor.get_total_stats();
-    println!("   进程组总内存: {} 字节", total.memory_bytes);
 }
 
 /// 获取 Rust 1.94.0 进程管理特性信息
 pub fn get_rust_194_process_info() -> String {
     "Rust 1.94.0 进程管理特性:\n\
-        - 改进的进程生命周期管理\n\
-        - 增强的进程间通信\n\
-        - 优化的资源监控\n\
-        - Edition 2024 进程优化\n\
-        - 安全进程隔离"
+        - array_windows 在数据处理中的应用\n\
+        - LazyLock 在进程配置中的应用 (get, get_mut, force_mut)\n\
+        - 数学常量在数据分析中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n\
+        - Peekable 在日志处理中的应用 (next_if_map, next_if_map_mut)\n\
+        - char 转换在进程通信中的应用 (TryFrom<char> for usize)"
         .to_string()
 }
 
@@ -588,68 +698,89 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process_handle() {
-        let mut handle = ProcessHandle::new(1);
-        assert_eq!(handle.state(), ProcessState::Created);
-        handle.start();
-        assert_eq!(handle.state(), ProcessState::Running);
-        assert!(handle.uptime().is_some());
+    fn test_moving_average() {
+        let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+        let ma = ProcessMetricsAnalyzer::moving_average::<3>(&data);
+        assert_eq!(ma, vec![2.0, 3.0, 4.0]);
     }
 
     #[test]
-    fn test_lifecycle_manager() {
-        let manager = LifecycleManager::new();
-        let pid = manager.create_process();
-        assert!(manager.start_process(pid));
-        assert_eq!(manager.get_process(pid).unwrap().state(), ProcessState::Running);
+    fn test_detect_anomalies() {
+        let data = vec![1.0, 2.0, 20.0, 3.0, 4.0];
+        let anomalies = ProcessMetricsAnalyzer::detect_anomalies(&data, 5.0);
+        assert!(anomalies.iter().any(|&(idx, _)| idx == 2));
     }
 
     #[test]
-    fn test_lifecycle_cleanup() {
-        let manager = LifecycleManager::new();
-        let pid = manager.create_process();
-        manager.start_process(pid);
-        manager.stop_process(pid);
-        let cleaned = manager.cleanup_stopped();
-        assert_eq!(cleaned, 1);
+    fn test_calculate_change_rates() {
+        let data = vec![100.0, 110.0, 121.0];
+        let rates = ProcessMetricsAnalyzer::calculate_change_rates(&data);
+        assert!((rates[0] - 0.1).abs() < 0.001);
+        assert!((rates[1] - 0.1).abs() < 0.001);
     }
 
     #[test]
-    fn test_ipc_channel() {
-        let channel = IpcChannel::new(NonZeroUsize::new(2).unwrap());
-        assert!(channel.send(IpcMessage::Data(vec![1])).is_ok());
-        assert!(channel.send(IpcMessage::Data(vec![2])).is_ok());
-        assert!(channel.send(IpcMessage::Data(vec![3])).is_err()); // Channel full
-        assert_eq!(channel.receive(), Some(IpcMessage::Data(vec![1])));
+    fn test_detect_error_patterns() {
+        let entries = vec![
+            LogEntry { timestamp: 1, level: LogLevel::Error, message: "e1".to_string() },
+            LogEntry { timestamp: 2, level: LogLevel::Error, message: "e2".to_string() },
+            LogEntry { timestamp: 3, level: LogLevel::Error, message: "e3".to_string() },
+        ];
+
+        let patterns = LogAnalyzer::detect_error_patterns(&entries);
+        assert_eq!(patterns, vec![0]);
     }
 
     #[test]
-    fn test_shared_memory_manager() {
-        let shm = SharedMemoryManager::new();
-        shm.create_region("test", 1024);
-        shm.write("test", 0, b"hello").unwrap();
-        let data = shm.read("test", 0, 5).unwrap();
-        assert_eq!(data, b"hello");
-        assert_eq!(shm.total_size(), 1024);
+    fn test_process_config_manager() {
+        let config = ProcessConfigManager::get_config();
+        assert_eq!(config.max_processes, 100);
+
+        let limits = ProcessConfigManager::get_limits();
+        assert_eq!(limits.file_descriptors, 1024);
     }
 
     #[test]
-    fn test_resource_monitor() {
-        let monitor = ResourceMonitor::new();
-        monitor.sample();
-        assert_eq!(monitor.sample_count(), 1);
-        let stats = monitor.get_stats();
-        assert!(stats.cpu_percent > 0.0);
+    fn test_golden_section_search() {
+        let min = DataAnalyzer::golden_section_search(0.0, 10.0, 0.001, |x| (x - 5.0).powi(2));
+        assert!((min - 5.0).abs() < 0.01);
     }
 
     #[test]
-    fn test_process_group_monitor() {
-        let group = ProcessGroupMonitor::new();
-        group.add_process(1);
-        group.add_process(2);
-        group.sample_all();
-        let total = group.get_total_stats();
-        assert!(total.memory_bytes > 0);
+    fn test_estimate_harmonic_series() {
+        let n = 100u64;
+        let estimate = DataAnalyzer::estimate_harmonic_series(n);
+        let actual: f64 = (1..=n).map(|i| 1.0 / i as f64).sum();
+        assert!((estimate - actual).abs() < 0.01);
+    }
+
+    #[test]
+    fn test_log_parser() {
+        let entries = vec![
+            LogEntry { timestamp: 1, level: LogLevel::Error, message: "e1".to_string() },
+            LogEntry { timestamp: 2, level: LogLevel::Error, message: "e2".to_string() },
+            LogEntry { timestamp: 3, level: LogLevel::Info, message: "i1".to_string() },
+        ];
+
+        let mut parser = LogParser::new(entries.into_iter());
+        let errors = parser.parse_all_errors();
+        assert_eq!(errors.len(), 2);
+    }
+
+    #[test]
+    fn test_encode_decode() {
+        let original = "Hello 世界";
+        let encoded = ProcessCommunicationEncoder::encode_string(original);
+        let decoded = ProcessCommunicationEncoder::decode_codepoints(&encoded).unwrap();
+        assert_eq!(decoded, original);
+    }
+
+    #[test]
+    fn test_analyze_encoding_distribution() {
+        let text = "Hello 世界";
+        let distribution = ProcessCommunicationEncoder::analyze_encoding_distribution(text);
+        assert!(distribution.contains_key("ASCII"));
+        assert!(distribution.contains_key("CJK Unified"));
     }
 
     #[test]
@@ -661,6 +792,6 @@ mod tests {
     fn test_get_info() {
         let info = get_rust_194_process_info();
         assert!(info.contains("Rust 1.94.0"));
-        assert!(info.contains("进程"));
+        assert!(info.contains("array_windows"));
     }
 }

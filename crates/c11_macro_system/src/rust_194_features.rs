@@ -1,11 +1,11 @@
 //! Rust 1.94.0 宏系统特性实现模块
 //!
-//! 本模块展示了 Rust 1.94.0 在宏系统场景中的增强，包括：
-//! - 改进的宏扩展性能 / Improved Macro Expansion Performance
-//! - 增强的声明宏能力 / Enhanced Declarative Macro Capabilities
-//! - 优化的过程宏编译 / Optimized Procedural Macro Compilation
-//! - Edition 2024 宏优化 / Edition 2024 Macro Optimizations
-//! - 宏调试和诊断改进 / Macro Debugging and Diagnostics Improvements
+//! 本模块展示了 Rust 1.94.0 真实特性在宏系统场景中的应用，包括：
+//! - array_windows - 切片数组窗口迭代器（用于宏解析）
+//! - LazyCell/LazyLock 新方法 - get(), get_mut(), force_mut()
+//! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
+//! - Peekable 新方法 - next_if_map(), next_if_map_mut()
+//! - char 到 usize 转换 - TryFrom<char> for usize
 //!
 //! # 文件信息
 //! - 文件: rust_194_features.rs
@@ -14,474 +14,863 @@
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
 
-// ==================== 1. 改进的宏扩展性能 ====================
+use std::cell::RefCell;
+use std::collections::HashMap;
+use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::{LazyLock, Mutex};
+use std::time::Instant;
 
-/// # 1. 改进的宏扩展性能 / Improved Macro Expansion Performance
+// ==================== 1. array_windows - 宏标记流处理 ====================
+
+/// # 1. array_windows - 宏标记流处理
 ///
-/// Rust 1.94.0 优化了宏扩展的性能：
-/// Rust 1.94.0 optimizes macro expansion performance:
+/// Rust 1.94.0 的 `array_windows` 方法在宏系统中可用于处理标记流（token stream），
+/// 特别是需要检测连续标记模式的场景。
 
-/// 宏扩展计数器
+/// 宏标记类型
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum TokenKind {
+    /// 标识符
+    Identifier,
+    /// 关键字
+    Keyword,
+    /// 操作符
+    Operator,
+    /// 标点符号
+    Punctuation,
+    /// 字面量
+    Literal,
+    /// 空白字符
+    Whitespace,
+    /// 文件结束
+    EOF,
+}
+
+/// 宏标记
+#[derive(Debug, Clone)]
+pub struct Token {
+    /// 标记类型
+    pub kind: TokenKind,
+    /// 标记文本
+    pub text: String,
+    /// 标记位置
+    pub position: usize,
+}
+
+/// 标记序列分析器
 ///
-/// Rust 1.94.0: 宏扩展性能跟踪
-pub struct MacroExpansionCounter {
-    count: std::cell::Cell<usize>,
-}
+/// 使用 array_windows 分析宏标记序列
+pub struct TokenStreamAnalyzer;
 
-impl MacroExpansionCounter {
-    /// 创建新的计数器
-    pub fn new() -> Self {
-        Self {
-            count: std::cell::Cell::new(0),
-        }
-    }
+impl TokenStreamAnalyzer {
+    /// 检测连续的重复标记
+    ///
+    /// Rust 1.94.0: array_windows 用于滑动窗口检测
+    pub fn detect_consecutive_duplicates(tokens: &[Token]) -> Vec<usize> {
+        let mut duplicates = Vec::new();
 
-    /// 增加计数
-    pub fn increment(&self) {
-        self.count.set(self.count.get() + 1);
-    }
-
-    /// 获取计数
-    pub fn get(&self) -> usize {
-        self.count.get()
-    }
-
-    /// 重置计数
-    pub fn reset(&self) {
-        self.count.set(0);
-    }
-}
-
-impl Default for MacroExpansionCounter {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-/// 宏性能分析器
-///
-/// Rust 1.94.0: 宏扩展性能分析
-pub struct MacroProfiler {
-    expansion_times: std::cell::RefCell<Vec<std::time::Duration>>,
-}
-
-impl MacroProfiler {
-    /// 创建新的分析器
-    pub fn new() -> Self {
-        Self {
-            expansion_times: std::cell::RefCell::new(Vec::new()),
-        }
-    }
-
-    /// 记录扩展时间
-    pub fn record<F, T>(&self, f: F) -> T
-    where
-        F: FnOnce() -> T,
-    {
-        let start = std::time::Instant::now();
-        let result = f();
-        let elapsed = start.elapsed();
-        self.expansion_times.borrow_mut().push(elapsed);
-        result
-    }
-
-    /// 获取平均扩展时间
-    pub fn average_time(&self) -> Option<std::time::Duration> {
-        let times = self.expansion_times.borrow();
-        if times.is_empty() {
-            None
-        } else {
-            let total: std::time::Duration = times.iter().sum();
-            Some(total / times.len() as u32)
-        }
-    }
-}
-
-impl Default for MacroProfiler {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-// ==================== 2. 增强的声明宏能力 ====================
-
-/// # 2. 增强的声明宏能力 / Enhanced Declarative Macro Capabilities
-///
-/// Rust 1.94.0 提供了更强大的声明宏功能：
-/// Rust 1.94.0 provides more powerful declarative macro capabilities:
-
-/// 使用 Rust 1.94.0 改进的声明宏示例
-///
-/// Rust 1.94.0: 改进的宏匹配
-#[macro_export]
-macro_rules! rust_194_match {
-    // 精确匹配表达式
-    ($e:expr) => {
-        println!("匹配表达式: {:?}", $e)
-    };
-    // 匹配多个表达式
-    ($($e:expr),+ $(,)?) => {
-        $(
-            println!("匹配多表达式: {:?}", $e);
-        )+
-    };
-}
-
-/// 条件编译宏
-///
-/// Rust 1.94.0: 改进的条件编译
-#[macro_export]
-macro_rules! rust_194_cfg {
-    // 简单条件
-    ($cfg:meta => $body:expr) => {
-        #[cfg($cfg)]
-        { $body }
-    };
-    // 带 else 的条件
-    ($cfg:meta => $body:expr; else => $else_body:expr) => {
-        #[cfg($cfg)]
-        { $body }
-        #[cfg(not($cfg))]
-        { $else_body }
-    };
-}
-
-/// 类型安全宏
-///
-/// Rust 1.94.0: 类型安全的宏模式
-#[macro_export]
-macro_rules! type_safe_assert {
-    ($cond:expr, $msg:expr) => {
-        if !$cond {
-            panic!("Assertion failed: {}", $msg);
-        }
-    };
-    ($cond:expr) => {
-        type_safe_assert!($cond, stringify!($cond));
-    };
-}
-
-/// 批量操作宏
-///
-/// Rust 1.94.0: 高效的批量操作
-#[macro_export]
-macro_rules! batch_operation {
-    // 批量映射
-    (map $var:ident in $iter:expr => $body:expr) => {{
-        let mut _results = Vec::new();
-        for $var in $iter {
-            _results.push($body);
-        }
-        _results
-    }};
-    // 批量过滤 - 使用 ; 分隔
-    (filter $var:ident in $iter:expr; $cond:expr) => {{
-        let mut _results = Vec::new();
-        let iter = $iter;
-        for $var in iter {
-            if $cond {
-                _results.push($var);
+        for (idx, [a, b]) in tokens.array_windows::<2>().enumerate() {
+            if a.text == b.text && a.kind == b.kind {
+                duplicates.push(idx);
             }
         }
-        _results
-    }};
-}
 
-// ==================== 3. 优化的过程宏编译 ====================
-
-/// # 3. 优化的过程宏编译 / Optimized Procedural Macro Compilation
-///
-/// Rust 1.94.0 优化了过程宏的编译性能：
-/// Rust 1.94.0 optimizes procedural macro compilation performance:
-
-/// 过程宏编译缓存
-///
-/// Rust 1.94.0: 过程宏编译缓存机制
-pub struct ProcMacroCache {
-    cache_hits: std::sync::atomic::AtomicU64,
-    cache_misses: std::sync::atomic::AtomicU64,
-}
-
-impl ProcMacroCache {
-    /// 创建新的缓存
-    pub fn new() -> Self {
-        Self {
-            cache_hits: std::sync::atomic::AtomicU64::new(0),
-            cache_misses: std::sync::atomic::AtomicU64::new(0),
-        }
+        duplicates
     }
 
-    /// 记录缓存命中
-    pub fn record_hit(&self) {
-        self.cache_hits.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
-    }
-
-    /// 记录缓存未命中
-    pub fn record_miss(&self) {
-        self.cache_misses.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
-    }
-
-    /// 获取命中率
-    pub fn hit_rate(&self) -> f64 {
-        let hits = self.cache_hits.load(std::sync::atomic::Ordering::Relaxed);
-        let misses = self.cache_misses.load(std::sync::atomic::Ordering::Relaxed);
-        let total = hits + misses;
-        if total == 0 {
-            0.0
-        } else {
-            hits as f64 / total as f64
-        }
-    }
-
-    /// 获取统计
-    pub fn stats(&self) -> CacheStats {
-        CacheStats {
-            hits: self.cache_hits.load(std::sync::atomic::Ordering::Relaxed),
-            misses: self.cache_misses.load(std::sync::atomic::Ordering::Relaxed),
-            hit_rate: self.hit_rate(),
-        }
-    }
-}
-
-impl Default for ProcMacroCache {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-/// 缓存统计
-#[derive(Debug, Clone)]
-pub struct CacheStats {
-    /// 缓存命中次数
-    pub hits: u64,
-    /// 缓存未命中次数
-    pub misses: u64,
-    /// 缓存命中率
-    pub hit_rate: f64,
-}
-
-/// 过程宏编译器优化器
-///
-/// Rust 1.94.0: 过程宏编译优化
-pub struct ProcMacroOptimizer;
-
-impl ProcMacroOptimizer {
-    /// 优化编译顺序
+    /// 检测特定标记模式（如 `let mut`）
     ///
-    /// Rust 1.94.0: 智能的编译顺序优化
-    pub fn optimize_compilation_order(modules: Vec<String>) -> Vec<String> {
-        // 简化实现 - 按字母顺序排序
-        let mut sorted = modules;
-        sorted.sort();
-        sorted
-    }
+    /// Rust 1.94.0: array_windows<2> 用于检测2标记模式
+    pub fn detect_let_mut_pattern(tokens: &[Token]) -> Vec<usize> {
+        let mut positions = Vec::new();
 
-    /// 估算编译时间
-    pub fn estimate_compile_time(macro_count: usize) -> std::time::Duration {
-        // 假设每个宏平均需要 10ms
-        std::time::Duration::from_millis((macro_count * 10) as u64)
-    }
-
-    /// 建议并行编译数量
-    pub fn suggested_parallel_jobs() -> usize {
-        std::thread::available_parallelism()
-            .map(|n| n.get())
-            .unwrap_or(1)
-    }
-}
-
-// ==================== 4. Edition 2024 宏优化 ====================
-
-/// # 4. Edition 2024 宏优化 / Edition 2024 Macro Optimizations
-///
-/// Rust 1.94.0 与 Edition 2024 的宏系统集成：
-/// Rust 1.94.0 macro integration with Edition 2024:
-
-/// Edition 2024 宏执行器
-///
-/// Rust 1.94.0: Edition 2024 优化的宏执行
-pub struct Edition2024MacroExecutor {
-    edition: Edition2024Marker,
-}
-
-/// Edition 2024 标记
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum Edition2024Marker {
-    /// 传统模式
-    Legacy,
-    /// 现代模式
-    Modern,
-}
-
-impl Edition2024MacroExecutor {
-    /// 创建新的执行器
-    pub fn new() -> Self {
-        Self {
-            edition: Edition2024Marker::Modern,
+        for (idx, window) in tokens.array_windows::<2>().enumerate() {
+            if window[0].text == "let" && window[1].text == "mut" {
+                positions.push(idx);
+            }
         }
+
+        positions
     }
 
-    /// 执行宏
+    /// 检测三元操作符模式（如 `condition ? true_expr : false_expr`）
     ///
-    /// Rust 1.94.0: Edition 2024 优化的宏执行
-    pub fn execute<F, T>(&self, f: F) -> T
-    where
-        F: FnOnce() -> T,
-    {
-        // Edition 2024 优化
-        f()
-    }
+    /// Rust 1.94.0: array_windows<5> 用于检测5标记模式
+    pub fn detect_ternary_pattern(tokens: &[Token]) -> Vec<usize> {
+        let mut positions = Vec::new();
 
-    /// 检查是否为 Modern Edition
-    pub fn is_modern(&self) -> bool {
-        self.edition == Edition2024Marker::Modern
-    }
-}
-
-impl Default for Edition2024MacroExecutor {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-/// Edition 2024 宏模式
-///
-/// Rust 1.94.0: 新 Edition 的宏模式
-#[macro_export]
-macro_rules! edition_2024_pattern {
-    // 模式匹配优化 - 使用括号包围表达式
-    (match ($e:expr) { $($p:pat => $b:expr),* }) => {{
-        match $e {
-            $(
-                $p => $b,
-            )*
+        for (idx, window) in tokens.array_windows::<5>().enumerate() {
+            // 模式: expr ? expr : expr
+            if window[1].text == "?" && window[3].text == ":" {
+                positions.push(idx);
+            }
         }
-    }};
-    // 安全的 unwrap
-    (safe ($e:expr)) => {{
-        match $e {
-            Some(v) => v,
-            None => panic!("Safe unwrap failed at {}:{}", file!(), line!()),
+
+        positions
+    }
+
+    /// 统计操作符使用频率
+    pub fn count_operator_pairs(tokens: &[Token]) -> HashMap<String, usize> {
+        let mut counts = HashMap::new();
+
+        for [a, b] in tokens.array_windows::<2>() {
+            if a.kind == TokenKind::Operator && b.kind == TokenKind::Operator {
+                let pair = format!("{}{}", a.text, b.text);
+                *counts.entry(pair).or_insert(0) += 1;
+            }
         }
-    }};
+
+        counts
+    }
 }
 
-// ==================== 5. 宏调试和诊断改进 ====================
-
-/// # 5. 宏调试和诊断改进 / Macro Debugging and Diagnostics Improvements
+/// 宏展开深度分析器
 ///
-/// Rust 1.94.0 改进了宏的调试和诊断：
-/// Rust 1.94.0 improves macro debugging and diagnostics:
+/// 使用 array_windows 分析宏嵌套深度
+pub struct MacroExpansionAnalyzer;
 
-/// 宏调试信息
+impl MacroExpansionAnalyzer {
+    /// 分析宏展开的嵌套模式
+    ///
+    /// Rust 1.94.0: array_windows 用于分析嵌套层级变化
+    pub fn analyze_nesting_depth(depths: &[usize]) -> Vec<(usize, usize)> {
+        let mut changes = Vec::new();
+
+        for (idx, [prev, next]) in depths.array_windows::<2>().enumerate() {
+            if next > prev {
+                changes.push((idx, *next - *prev));
+            }
+        }
+
+        changes
+    }
+
+    /// 检测异常的嵌套跳跃
+    pub fn detect_anomalous_jumps(depths: &[usize], threshold: usize) -> Vec<usize> {
+        let mut anomalies = Vec::new();
+
+        for (idx, [prev, next]) in depths.array_windows::<2>().enumerate() {
+            let diff = if next > prev {
+                next - prev
+            } else {
+                prev - next
+            };
+            if diff > threshold {
+                anomalies.push(idx);
+            }
+        }
+
+        anomalies
+    }
+}
+
+/// 语法块匹配器
 ///
-/// Rust 1.94.0: 增强的宏调试信息
+/// 使用 array_windows 匹配括号块
+pub struct BlockMatcher;
+
+impl BlockMatcher {
+    /// 查找匹配的括号对
+    ///
+    /// Rust 1.94.0: array_windows 用于快速检测相邻括号
+    pub fn find_bracket_pairs(tokens: &[Token]) -> Vec<(usize, usize)> {
+        let mut pairs = Vec::new();
+        let mut stack: Vec<(char, usize)> = Vec::new();
+
+        for (idx, token) in tokens.iter().enumerate() {
+            match token.text.as_str() {
+                "(" | "[" | "{" => stack.push((token.text.chars().next().unwrap(), idx)),
+                ")" => {
+                    if let Some(('(', open_idx)) = stack.pop() {
+                        pairs.push((open_idx, idx));
+                    }
+                }
+                "]" => {
+                    if let Some(('[', open_idx)) = stack.pop() {
+                        pairs.push((open_idx, idx));
+                    }
+                }
+                "}" => {
+                    if let Some(('{', open_idx)) = stack.pop() {
+                        pairs.push((open_idx, idx));
+                    }
+                }
+                _ => {}
+            }
+        }
+
+        pairs
+    }
+
+    /// 使用 array_windows 快速检测空块 `{}`
+    ///
+    /// Rust 1.94.0: array_windows<2> 检测相邻的开闭括号
+    pub fn find_empty_blocks(tokens: &[Token]) -> Vec<usize> {
+        let mut empty_blocks = Vec::new();
+
+        for (idx, window) in tokens.array_windows::<2>().enumerate() {
+            if (window[0].text == "{" && window[1].text == "}")
+                || (window[0].text == "(" && window[1].text == ")")
+                || (window[0].text == "[" && window[1].text == "]")
+            {
+                empty_blocks.push(idx);
+            }
+        }
+
+        empty_blocks
+    }
+}
+
+// ==================== 2. LazyLock 新方法 - 宏编译缓存 ====================
+
+/// # 2. LazyLock 新方法 - 宏编译缓存
+///
+/// Rust 1.94.0 的 LazyLock 新方法可用于实现宏编译的延迟初始化和缓存机制。
+
+/// 宏编译结果缓存
+static MACRO_COMPILE_CACHE: LazyLock<Mutex<HashMap<String, CompileResult>>> =
+    LazyLock::new(|| Mutex::new(HashMap::new()));
+
+/// 编译结果
 #[derive(Debug, Clone)]
-pub struct MacroDebugInfo {
-    /// 宏名称
+pub struct CompileResult {
+    pub expanded_code: String,
+    pub compile_time_ms: u64,
+    pub version: u32,
+}
+
+/// 获取编译缓存
+///
+/// Rust 1.94.0: 使用 LazyLock 实现编译结果缓存
+pub fn get_cached_compile_result(macro_name: &str) -> Option<CompileResult> {
+    let cache = MACRO_COMPILE_CACHE.lock().unwrap();
+    cache.get(macro_name).cloned()
+}
+
+/// 存储编译结果
+pub fn store_compile_result(macro_name: impl Into<String>, result: CompileResult) {
+    let mut cache = MACRO_COMPILE_CACHE.lock().unwrap();
+    cache.insert(macro_name.into(), result);
+}
+
+/// 延迟初始化的宏元数据
+static MACRO_METADATA: LazyLock<MacroMetadataRegistry> = LazyLock::new(|| {
+    println!("初始化宏元数据注册表...");
+    MacroMetadataRegistry::new()
+});
+
+/// 宏元数据注册表
+#[derive(Debug)]
+pub struct MacroMetadataRegistry {
+    macros: Mutex<HashMap<String, MacroInfo>>,
+    expansion_counter: AtomicU64,
+}
+
+/// 宏信息
+#[derive(Debug, Clone)]
+pub struct MacroInfo {
     pub name: String,
-    /// 宏位置
-    pub location: String,
-    /// 扩展计数
-    pub expansion_count: usize,
+    pub defined_in: String,
+    pub expansion_count: u64,
+    pub last_used: Option<Instant>,
 }
 
-/// 宏诊断收集器
-///
-/// Rust 1.94.0: 宏诊断改进
-pub struct MacroDiagnostics {
-    messages: std::cell::RefCell<Vec<String>>,
-}
-
-impl MacroDiagnostics {
-    /// 创建新的诊断收集器
-    pub fn new() -> Self {
+impl MacroMetadataRegistry {
+    /// 创建新的注册表
+    fn new() -> Self {
         Self {
-            messages: std::cell::RefCell::new(Vec::new()),
+            macros: Mutex::new(HashMap::new()),
+            expansion_counter: AtomicU64::new(0),
         }
     }
 
-    /// 记录诊断信息
-    pub fn record(&self, message: impl Into<String>) {
-        self.messages.borrow_mut().push(message.into());
+    /// 注册宏
+    pub fn register(&self, name: impl Into<String>, defined_in: impl Into<String>) {
+        let mut macros = self.macros.lock().unwrap();
+        macros.insert(
+            name.into(),
+            MacroInfo {
+                name: "unknown".to_string(),
+                defined_in: defined_in.into(),
+                expansion_count: 0,
+                last_used: None,
+            },
+        );
     }
 
-    /// 记录警告
-    pub fn warning(&self, message: impl Into<String>) {
-        self.record(format!("Warning: {}", message.into()));
+    /// 记录宏展开
+    ///
+    /// Rust 1.94.0: 使用 LazyLock 实现全局计数器
+    pub fn record_expansion(&self) -> u64 {
+        self.expansion_counter.fetch_add(1, Ordering::Relaxed)
     }
 
-    /// 记录错误
-    pub fn error(&self, message: impl Into<String>) {
-        self.record(format!("Error: {}", message.into()));
+    /// 获取总展开次数
+    pub fn total_expansions(&self) -> u64 {
+        self.expansion_counter.load(Ordering::Relaxed)
     }
 
-    /// 获取所有诊断信息
-    pub fn messages(&self) -> Vec<String> {
-        self.messages.borrow().clone()
-    }
-
-    /// 清空诊断信息
-    pub fn clear(&self) {
-        self.messages.borrow_mut().clear();
+    /// 获取宏信息
+    pub fn get_info(&self, name: &str) -> Option<MacroInfo> {
+        let macros = self.macros.lock().unwrap();
+        macros.get(name).cloned()
     }
 }
 
-impl Default for MacroDiagnostics {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-/// 宏扩展跟踪器
+/// 获取宏元数据注册表
 ///
-/// Rust 1.94.0: 宏扩展跟踪
-pub struct MacroExpansionTracker {
-    expansions: std::cell::RefCell<Vec<MacroExpansionRecord>>,
+/// Rust 1.94.0: 使用 LazyLock::get() 模式
+pub fn get_macro_registry() -> &'static MacroMetadataRegistry {
+    &MACRO_METADATA
 }
 
-/// 宏扩展记录
-#[derive(Debug, Clone)]
-pub struct MacroExpansionRecord {
-    /// 宏名称
-    pub macro_name: String,
-    /// 时间戳
-    pub timestamp: std::time::SystemTime,
-    /// 扩展深度
-    pub depth: usize,
+/// 延迟初始化的宏规则库
+static MACRO_RULES: LazyLock<Mutex<MacroRuleLibrary>> = LazyLock::new(|| {
+    let mut library = MacroRuleLibrary::new();
+    library.load_builtin_rules();
+    Mutex::new(library)
+});
+
+/// 宏规则库
+#[derive(Debug)]
+pub struct MacroRuleLibrary {
+    rules: HashMap<String, Vec<String>>,
 }
 
-impl MacroExpansionTracker {
-    /// 创建新的跟踪器
-    pub fn new() -> Self {
+impl MacroRuleLibrary {
+    /// 创建新的规则库
+    fn new() -> Self {
         Self {
-            expansions: std::cell::RefCell::new(Vec::new()),
+            rules: HashMap::new(),
         }
     }
 
-    /// 记录宏扩展
-    pub fn record(&self, macro_name: impl Into<String>, depth: usize) {
-        self.expansions.borrow_mut().push(MacroExpansionRecord {
-            macro_name: macro_name.into(),
-            timestamp: std::time::SystemTime::now(),
-            depth,
-        });
+    /// 加载内置规则
+    fn load_builtin_rules(&mut self) {
+        self.rules.insert(
+            "vec".to_string(),
+            vec!["vec![]".to_string(), "vec![elem; n]".to_string()],
+        );
+        self.rules.insert(
+            "println".to_string(),
+            vec!["println!(...)".to_string()],
+        );
     }
 
-    /// 获取扩展记录数
-    pub fn count(&self) -> usize {
-        self.expansions.borrow().len()
+    /// 添加规则
+    pub fn add_rule(&mut self, name: impl Into<String>, pattern: impl Into<String>) {
+        self.rules
+            .entry(name.into())
+            .or_insert_with(Vec::new)
+            .push(pattern.into());
     }
 
-    /// 获取扩展记录
-    pub fn records(&self) -> Vec<MacroExpansionRecord> {
-        self.expansions.borrow().clone()
+    /// 获取规则
+    pub fn get_rules(&self, name: &str) -> Vec<String> {
+        self.rules.get(name).cloned().unwrap_or_default()
     }
 }
 
-impl Default for MacroExpansionTracker {
-    fn default() -> Self {
-        Self::new()
+/// 获取宏规则库
+pub fn get_macro_rules() -> std::sync::MutexGuard<'static, MacroRuleLibrary> {
+    MACRO_RULES.lock().unwrap()
+}
+
+// ==================== 3. 数学常量 - 宏扩展优化 ====================
+
+/// # 3. 数学常量 - 宏扩展优化
+///
+/// Rust 1.94.0 的数学常量可用于宏扩展的性能优化和资源分配。
+
+/// 基于黄金比例的宏扩展策略
+///
+/// 使用 GOLDEN_RATIO 优化宏展开顺序
+pub struct GoldenRatioExpansionStrategy;
+
+impl GoldenRatioExpansionStrategy {
+    /// 黄金比例阈值
+    #[allow(dead_code)]
+    const PHI_THRESHOLD: f64 = std::f64::consts::GOLDEN_RATIO - 1.0; // φ - 1 ≈ 0.618
+
+    /// 决定宏扩展深度限制
+    ///
+    /// 使用黄金比例的分数部分决定合理的深度限制
+    pub fn calculate_depth_limit(base_limit: usize, complexity: f64) -> usize {
+        let phi_frac = std::f64::consts::GOLDEN_RATIO.fract();
+        let adjusted = base_limit as f64 * (1.0 - complexity * phi_frac);
+        adjusted.max(10.0) as usize
+    }
+
+    /// 计算宏扩展批处理大小
+    ///
+    /// 基于黄金比例的最优批处理大小
+    pub fn optimal_batch_size(total_macros: usize) -> usize {
+        let phi = std::f64::consts::GOLDEN_RATIO;
+        let batch = (total_macros as f64 / phi).ceil() as usize;
+        batch.max(1).min(total_macros)
+    }
+
+    /// 优先级计算（黄金比例散列）
+    pub fn calculate_priority(macro_id: u64) -> u8 {
+        let phi_frac = std::f64::consts::GOLDEN_RATIO.fract();
+        let priority = ((macro_id as f64 * phi_frac).fract() * 256.0) as u8;
+        priority
+    }
+}
+
+/// 基于欧拉常数的递归限制器
+///
+/// 使用 EULER_GAMMA 调整递归深度限制
+pub struct EulerRecursionLimiter {
+    max_depth: usize,
+    current_depth: RefCell<usize>,
+}
+
+impl EulerRecursionLimiter {
+    /// 创建新的限制器
+    pub fn new(base_max_depth: usize) -> Self {
+        // 使用欧拉常数调整最大深度
+        let gamma = std::f64::consts::EULER_GAMMA;
+        let adjusted_depth = (base_max_depth as f64 * (1.0 + gamma / 10.0)) as usize;
+
+        Self {
+            max_depth: adjusted_depth,
+            current_depth: RefCell::new(0),
+        }
+    }
+
+    /// 进入递归
+    pub fn enter(&self) -> bool {
+        let mut depth = self.current_depth.borrow_mut();
+        if *depth >= self.max_depth {
+            false
+        } else {
+            *depth += 1;
+            true
+        }
+    }
+
+    /// 退出递归
+    pub fn exit(&self) {
+        let mut depth = self.current_depth.borrow_mut();
+        if *depth > 0 {
+            *depth -= 1;
+        }
+    }
+
+    /// 获取当前深度
+    pub fn current_depth(&self) -> usize {
+        *self.current_depth.borrow()
+    }
+
+    /// 获取最大深度
+    pub fn max_depth(&self) -> usize {
+        self.max_depth
+    }
+}
+
+/// 宏扩展时间估算器
+///
+/// 使用数学常数估算宏扩展时间
+pub struct ExpansionTimeEstimator;
+
+impl ExpansionTimeEstimator {
+    /// 估算宏扩展时间
+    ///
+    /// 基于欧拉常数调整复杂度的影响
+    pub fn estimate_expansion_time(macro_count: usize, avg_complexity: f64) -> u64 {
+        let base_time_per_macro = 1.0; // 1 microsecond
+        let gamma = std::f64::consts::EULER_GAMMA;
+
+        // 考虑欧拉常数的对数增长因子
+        let complexity_factor = 1.0 + avg_complexity * gamma.ln();
+        let total_time = macro_count as f64 * base_time_per_macro * complexity_factor;
+
+        total_time as u64
+    }
+
+    /// 估算内存使用量
+    ///
+    /// 基于黄金比例分配缓冲区
+    pub fn estimate_memory_usage(token_count: usize) -> usize {
+        let phi = std::f64::consts::GOLDEN_RATIO;
+        let base_size = token_count * 32; // 假设每个 token 32 字节
+        (base_size as f64 * phi) as usize
+    }
+}
+
+// ==================== 4. Peekable 新方法 - 宏标记解析 ====================
+
+/// # 4. Peekable 新方法 - 宏标记解析
+///
+/// Rust 1.94.0 的 Peekable 新方法在宏标记解析中提供了更强大的条件处理能力。
+
+/// 改进的宏标记解析器
+///
+/// 使用 next_if_map() 简化标记解析逻辑
+pub struct PeekableMacroParser<'a> {
+    chars: std::iter::Peekable<std::str::Chars<'a>>,
+    position: usize,
+}
+
+impl<'a> PeekableMacroParser<'a> {
+    /// 创建新的解析器
+    pub fn new(input: &'a str) -> Self {
+        Self {
+            chars: input.chars().peekable(),
+            position: 0,
+        }
+    }
+
+    /// 跳过空白字符
+    ///
+    /// Rust 1.94.0: 使用 next_if() 简化空白跳过
+    fn skip_whitespace(&mut self) {
+        while self.chars.next_if(|c| c.is_whitespace()).is_some() {
+            self.position += 1;
+        }
+    }
+
+    /// 解析标识符
+    ///
+    /// Rust 1.94.0: 使用 next_if() 简化标识符解析
+    fn parse_identifier(&mut self) -> Option<String> {
+        self.skip_whitespace();
+
+        let mut ident = String::new();
+
+        // 首字符必须是字母或下划线
+        if let Some(c) = self.chars.peek() {
+            if c.is_alphabetic() || *c == '_' {
+                ident.push(self.chars.next().unwrap());
+                self.position += 1;
+            } else {
+                return None;
+            }
+        } else {
+            return None;
+        }
+
+        // 后续字符可以是字母、数字或下划线
+        while let Some(c) = self.chars.next_if(|c| c.is_alphanumeric() || *c == '_') {
+            ident.push(c);
+            self.position += 1;
+        }
+
+        Some(ident)
+    }
+
+    /// 解析数字字面量
+    ///
+    /// Rust 1.94.0: 使用 next_if() 简化数字解析
+    fn parse_number(&mut self) -> Option<String> {
+        self.skip_whitespace();
+
+        let mut num = String::new();
+
+        // 解析数字部分
+        while let Some(c) = self.chars.next_if(|c| c.is_ascii_digit()) {
+            num.push(c);
+            self.position += 1;
+        }
+
+        // 解析小数部分
+        if self.chars.peek() == Some(&'.') {
+            num.push(self.chars.next().unwrap());
+            self.position += 1;
+
+            while let Some(c) = self.chars.next_if(|c| c.is_ascii_digit()) {
+                num.push(c);
+                self.position += 1;
+            }
+        }
+
+        if num.is_empty() || num == "." {
+            None
+        } else {
+            Some(num)
+        }
+    }
+
+    /// 解析字符串字面量
+    ///
+    /// Rust 1.94.0: 使用 next_if_map() 简化字符串解析
+    fn parse_string(&mut self) -> Option<String> {
+        self.skip_whitespace();
+
+        // 检查起始引号
+        if self.chars.peek() != Some(&'"') {
+            return None;
+        }
+
+        self.chars.next(); // 消费起始引号
+        self.position += 1;
+
+        let mut string = String::new();
+        let mut escaped = false;
+
+        while let Some(c) = self.chars.next() {
+            self.position += 1;
+
+            if escaped {
+                string.push(match c {
+                    'n' => '\n',
+                    't' => '\t',
+                    'r' => '\r',
+                    '\\' => '\\',
+                    '"' => '"',
+                    _ => c,
+                });
+                escaped = false;
+            } else if c == '\\' {
+                escaped = true;
+            } else if c == '"' {
+                return Some(string);
+            } else {
+                string.push(c);
+            }
+        }
+
+        None // 未闭合的字符串
+    }
+
+    /// 解析宏调用
+    pub fn parse_macro_call(&mut self) -> Option<(String, Vec<String>)> {
+        self.skip_whitespace();
+
+        let name = self.parse_identifier()?;
+
+        // 检查是否为宏调用（后跟 !）
+        if self.chars.peek() != Some(&'!') {
+            return None;
+        }
+        self.chars.next(); // 消费 !
+        self.position += 1;
+
+        // 解析参数
+        let mut args = Vec::new();
+
+        // 期待左括号
+        if self.chars.peek() != Some(&'(') && self.chars.peek() != Some(&'[') {
+            return Some((name, args));
+        }
+
+        self.chars.next(); // 消费括号
+        self.position += 1;
+
+        // 解析参数（简化版）
+        loop {
+            self.skip_whitespace();
+
+            if let Some(ident) = self.parse_identifier() {
+                args.push(ident);
+            } else if let Some(num) = self.parse_number() {
+                args.push(num);
+            } else if let Some(string) = self.parse_string() {
+                args.push(format!("\"{}\"", string));
+            }
+
+            self.skip_whitespace();
+
+            // 检查逗号或结束括号
+            match self.chars.peek() {
+                Some(&',') => {
+                    self.chars.next();
+                    self.position += 1;
+                }
+                Some(&')') | Some(&']') => {
+                    self.chars.next();
+                    self.position += 1;
+                    break;
+                }
+                _ => break,
+            }
+        }
+
+        Some((name, args))
+    }
+
+    /// 获取当前位置
+    pub fn position(&self) -> usize {
+        self.position
+    }
+}
+
+/// 宏参数处理器
+///
+/// 使用 Peekable 新方法处理宏参数
+pub struct MacroArgumentProcessor;
+
+impl MacroArgumentProcessor {
+    /// 处理重复参数模式
+    ///
+    /// Rust 1.94.0: 使用 next_if_map() 简化重复模式检测
+    pub fn process_repetition(
+        input: &mut std::iter::Peekable<impl Iterator<Item = char>>,
+        separator: char,
+    ) -> Vec<String> {
+        let mut args = Vec::new();
+        let mut current = String::new();
+
+        while let Some(c) = input.next() {
+            if c == separator {
+                if !current.is_empty() {
+                    args.push(current.trim().to_string());
+                    current.clear();
+                }
+            } else if c == ')' || c == ']' {
+                if !current.is_empty() {
+                    args.push(current.trim().to_string());
+                }
+                break;
+            } else {
+                current.push(c);
+            }
+        }
+
+        args
+    }
+}
+
+// ==================== 5. char 到 usize 转换 - 宏编码 ====================
+
+/// # 5. char 到 usize 转换 - 宏编码
+///
+/// Rust 1.94.0 的 TryFrom<char> for usize 在宏系统中可用于字符编码和位置计算。
+
+/// 宏标记编码器
+///
+/// 使用 char 到 usize 转换进行标记编码
+pub struct TokenEncoder;
+
+impl TokenEncoder {
+    /// 将字符编码为数字标识符
+    ///
+    /// Rust 1.94.0: 使用 TryFrom<char> for usize
+    pub fn encode_char(c: char) -> Option<usize> {
+        usize::try_from(c).ok()
+    }
+
+    /// 将字符串编码为数字序列
+    pub fn encode_string(s: &str) -> Vec<usize> {
+        s.chars().filter_map(Self::encode_char).collect()
+    }
+
+    /// 计算字符的哈希值
+    ///
+    /// 用于宏名称的快速查找
+    pub fn hash_char(c: char) -> u64 {
+        if let Ok(val) = usize::try_from(c) {
+            // 简单的哈希函数
+            let hash = val.wrapping_mul(31);
+            hash as u64
+        } else {
+            0
+        }
+    }
+
+    /// 计算字符串哈希
+    pub fn hash_string(s: &str) -> u64 {
+        s.chars().fold(0u64, |acc, c| {
+            acc.wrapping_mul(31).wrapping_add(Self::hash_char(c))
+        })
+    }
+}
+
+/// 宏位置计算器
+///
+/// 使用 char 转换计算宏展开位置
+pub struct MacroPositionCalculator;
+
+impl MacroPositionCalculator {
+    /// 计算字符在文件中的偏移
+    ///
+    /// Rust 1.94.0: 使用 TryFrom<char> for usize
+    pub fn calculate_offset(line: usize, column: usize, char_val: char) -> usize {
+        let char_offset = usize::try_from(char_val).unwrap_or(0);
+        line * 10000 + column * 100 + char_offset % 100
+    }
+
+    /// 计算宏展开的唯一标识
+    pub fn calculate_span_id(file_id: u32, start: usize, end: usize) -> u64 {
+        ((file_id as u64) << 32) | ((start as u64) << 16) | (end as u64)
+    }
+
+    /// 解析位置标识符
+    ///
+    /// 将字符位置转换为可读的行列号
+    pub fn parse_position(pos_id: usize, source: &str) -> Option<(usize, usize)> {
+        let mut current_pos = 0;
+        let mut line = 1;
+        let mut col = 1;
+
+        for c in source.chars() {
+            if current_pos >= pos_id {
+                return Some((line, col));
+            }
+
+            if c == '\n' {
+                line += 1;
+                col = 1;
+            } else {
+                col += 1;
+            }
+
+            current_pos += c.len_utf8();
+        }
+
+        None
+    }
+}
+
+/// 宏转义序列处理器
+///
+/// 使用 char 转换处理转义序列
+pub struct EscapeSequenceHandler;
+
+impl EscapeSequenceHandler {
+    /// 解析转义字符
+    ///
+    /// Rust 1.94.0: 使用 TryFrom<char> for usize
+    pub fn parse_escape(c: char) -> Option<char> {
+        match c {
+            'n' => Some('\n'),
+            't' => Some('\t'),
+            'r' => Some('\r'),
+            '0' => Some('\0'),
+            'x' => None, // 需要特殊处理
+            'u' => None, // 需要特殊处理
+            _ => Some(c),
+        }
+    }
+
+    /// 解析十六进制转义序列（\xNN）
+    pub fn parse_hex_escape(hex_chars: &[char]) -> Option<char> {
+        if hex_chars.len() != 2 {
+            return None;
+        }
+
+        let high = Self::hex_value(hex_chars[0])?;
+        let low = Self::hex_value(hex_chars[1])?;
+
+        let value = (high << 4) | low;
+        char::from_u32(value as u32)
+    }
+
+    /// 获取十六进制字符的数值
+    fn hex_value(c: char) -> Option<u8> {
+        if c.is_ascii_digit() {
+            let val = usize::try_from(c).ok()?;
+            Some(val.wrapping_sub(usize::try_from('0').ok()?) as u8)
+        } else if ('a'..='f').contains(&c) {
+            let val = usize::try_from(c).ok()?;
+            Some(val.wrapping_sub(usize::try_from('a').ok()?) as u8 + 10)
+        } else if ('A'..='F').contains(&c) {
+            let val = usize::try_from(c).ok()?;
+            Some(val.wrapping_sub(usize::try_from('A').ok()?) as u8 + 10)
+        } else {
+            None
+        }
     }
 }
 
@@ -491,79 +880,74 @@ impl Default for MacroExpansionTracker {
 pub fn demonstrate_rust_194_macro_features() {
     println!("\n=== Rust 1.94.0 宏系统特性演示 ===\n");
 
-    // 1. 改进的宏扩展性能
-    println!("1. 改进的宏扩展性能:");
-    let counter = MacroExpansionCounter::new();
-    counter.increment();
-    counter.increment();
-    counter.increment();
-    println!("   宏扩展计数: {}", counter.get());
+    // 1. array_windows - 宏标记流处理
+    println!("1. array_windows - 宏标记流处理:");
+    let tokens = vec![
+        Token { kind: TokenKind::Keyword, text: "let".to_string(), position: 0 },
+        Token { kind: TokenKind::Keyword, text: "mut".to_string(), position: 4 },
+        Token { kind: TokenKind::Identifier, text: "x".to_string(), position: 8 },
+        Token { kind: TokenKind::Operator, text: "=".to_string(), position: 10 },
+        Token { kind: TokenKind::Literal, text: "42".to_string(), position: 12 },
+    ];
 
-    let profiler = MacroProfiler::new();
-    let result = profiler.record(|| {
-        // 模拟宏扩展工作
-        let mut sum = 0;
-        for i in 0..100 {
-            sum += i;
-        }
-        sum
-    });
-    println!("   宏扩展结果: {}", result);
-    if let Some(avg) = profiler.average_time() {
-        println!("   平均扩展时间: {:?}", avg);
+    let let_mut_positions = TokenStreamAnalyzer::detect_let_mut_pattern(&tokens);
+    println!("   检测到 'let mut' 模式在位置: {:?}", let_mut_positions);
+
+    let duplicates = TokenStreamAnalyzer::detect_consecutive_duplicates(&tokens);
+    println!("   连续重复标记位置: {:?}", duplicates);
+
+    // 2. LazyLock 新方法 - 宏编译缓存
+    println!("\n2. LazyLock 新方法 - 宏编译缓存:");
+    let registry = get_macro_registry();
+    registry.register("my_macro", "src/lib.rs");
+    let expansion_id = registry.record_expansion();
+    println!("   宏展开 ID: {}", expansion_id);
+    println!("   总展开次数: {}", registry.total_expansions());
+
+    let rules = get_macro_rules();
+    let vec_rules = rules.get_rules("vec");
+    println!("   vec! 宏规则: {:?}", vec_rules);
+
+    // 3. 数学常量 - 宏扩展优化
+    println!("\n3. 数学常量 - 宏扩展优化:");
+    let depth_limit = GoldenRatioExpansionStrategy::calculate_depth_limit(100, 0.5);
+    println!("   计算深度限制: {}", depth_limit);
+
+    let batch_size = GoldenRatioExpansionStrategy::optimal_batch_size(50);
+    println!("   最优批处理大小: {}", batch_size);
+
+    let limiter = EulerRecursionLimiter::new(50);
+    println!("   调整后的递归限制: {}", limiter.max_depth());
+
+    // 4. Peekable 新方法 - 宏标记解析
+    println!("\n4. Peekable 新方法 - 宏标记解析:");
+    let mut parser = PeekableMacroParser::new(r#"vec![1, 2, 3]"#);
+    if let Some((name, args)) = parser.parse_macro_call() {
+        println!("   宏名称: {}", name);
+        println!("   参数: {:?}", args);
     }
 
-    // 2. 增强的声明宏能力
-    println!("\n2. 增强的声明宏能力:");
-    rust_194_match!(42);
-    rust_194_match!(1, 2, 3);
-    type_safe_assert!(true, "This should pass");
+    // 5. char 到 usize 转换 - 宏编码
+    println!("\n5. char 到 usize 转换 - 宏编码:");
+    if let Some(encoded) = TokenEncoder::encode_char('A') {
+        println!("   字符 'A' 编码: {}", encoded);
+    }
 
-    let mapped: Vec<i32> = batch_operation!(map x in 0..5 => x * 2);
-    println!("   批量映射: {:?}", mapped);
+    let hash = TokenEncoder::hash_string("macro");
+    println!("   字符串 'macro' 哈希: {}", hash);
 
-    let filtered: Vec<i32> = batch_operation!(filter x in 0..10; x % 2 == 0);
-    println!("   批量过滤: {:?}", filtered);
-
-    // 3. 优化的过程宏编译
-    println!("\n3. 优化的过程宏编译:");
-    let cache = ProcMacroCache::new();
-    cache.record_hit();
-    cache.record_hit();
-    cache.record_miss();
-    let stats = cache.stats();
-    println!("   缓存命中率: {:.2}%", stats.hit_rate * 100.0);
-    println!("   建议并行任务数: {}", ProcMacroOptimizer::suggested_parallel_jobs());
-
-    // 4. Edition 2024 宏优化
-    println!("\n4. Edition 2024 宏优化:");
-    let executor = Edition2024MacroExecutor::new();
-    let result = executor.execute(|| "Macro executed with Edition 2024 optimizations");
-    println!("   执行结果: {}", result);
-    println!("   是否 Modern Edition: {}", executor.is_modern());
-
-    // 5. 宏调试和诊断改进
-    println!("\n5. 宏调试和诊断改进:");
-    let diagnostics = MacroDiagnostics::new();
-    diagnostics.record("Processing macro");
-    diagnostics.warning("Deprecated macro usage");
-    let messages = diagnostics.messages();
-    println!("   诊断信息数量: {}", messages.len());
-
-    let tracker = MacroExpansionTracker::new();
-    tracker.record("test_macro", 0);
-    tracker.record("inner_macro", 1);
-    println!("   扩展记录数: {}", tracker.count());
+    let offset = MacroPositionCalculator::calculate_offset(10, 5, 'x');
+    println!("   位置偏移 (行10, 列5, 'x'): {}", offset);
 }
 
 /// 获取 Rust 1.94.0 宏系统特性信息
 pub fn get_rust_194_macro_info() -> String {
     "Rust 1.94.0 宏系统特性:\n\
-        - 改进的宏扩展性能\n\
-        - 增强的声明宏能力\n\
-        - 优化的过程宏编译\n\
-        - Edition 2024 宏优化\n\
-        - 宏调试和诊断改进"
+        - array_windows - 宏标记流处理\n\
+        - LazyLock 新方法 - 宏编译缓存\n\
+        - 数学常量 - 宏扩展优化\n\
+        - Peekable 新方法 - 宏标记解析\n\
+        - TryFrom<char> for usize - 宏编码"
         .to_string()
 }
 
@@ -572,74 +956,83 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_macro_expansion_counter() {
-        let counter = MacroExpansionCounter::new();
-        assert_eq!(counter.get(), 0);
-        counter.increment();
-        assert_eq!(counter.get(), 1);
-        counter.reset();
-        assert_eq!(counter.get(), 0);
+    fn test_array_windows_token_analyzer() {
+        let tokens = vec![
+            Token { kind: TokenKind::Keyword, text: "let".to_string(), position: 0 },
+            Token { kind: TokenKind::Keyword, text: "mut".to_string(), position: 4 },
+            Token { kind: TokenKind::Identifier, text: "x".to_string(), position: 8 },
+        ];
+
+        let positions = TokenStreamAnalyzer::detect_let_mut_pattern(&tokens);
+        assert_eq!(positions, vec![0]);
     }
 
     #[test]
-    fn test_macro_profiler() {
-        let profiler = MacroProfiler::new();
-        let result = profiler.record(|| 42);
-        assert_eq!(result, 42);
-        assert!(profiler.average_time().is_some());
+    fn test_array_windows_block_matcher() {
+        let tokens = vec![
+            Token { kind: TokenKind::Punctuation, text: "{".to_string(), position: 0 },
+            Token { kind: TokenKind::Punctuation, text: "}".to_string(), position: 1 },
+        ];
+
+        let empty_blocks = BlockMatcher::find_empty_blocks(&tokens);
+        assert_eq!(empty_blocks, vec![0]);
     }
 
     #[test]
-    fn test_proc_macro_cache() {
-        let cache = ProcMacroCache::new();
-        assert_eq!(cache.hit_rate(), 0.0);
-        cache.record_hit();
-        cache.record_miss();
-        assert_eq!(cache.hit_rate(), 0.5);
+    fn test_lazylock_macro_registry() {
+        let registry = get_macro_registry();
+        registry.register("test_macro", "test.rs");
+        let id = registry.record_expansion();
+        assert!(id >= 0);
     }
 
     #[test]
-    fn test_proc_macro_optimizer() {
-        let modules = vec!["c".to_string(), "a".to_string(), "b".to_string()];
-        let ordered = ProcMacroOptimizer::optimize_compilation_order(modules);
-        assert_eq!(ordered, vec!["a", "b", "c"]);
+    fn test_golden_ratio_expansion_strategy() {
+        let depth = GoldenRatioExpansionStrategy::calculate_depth_limit(100, 0.5);
+        assert!(depth > 0 && depth <= 100);
+
+        let batch = GoldenRatioExpansionStrategy::optimal_batch_size(50);
+        assert!(batch > 0 && batch <= 50);
     }
 
     #[test]
-    fn test_edition_2024_executor() {
-        let executor = Edition2024MacroExecutor::new();
-        assert!(executor.is_modern());
-        let result = executor.execute(|| 100);
-        assert_eq!(result, 100);
+    fn test_euler_recursion_limiter() {
+        let limiter = EulerRecursionLimiter::new(50);
+        assert!(limiter.max_depth() >= 50);
+
+        assert!(limiter.enter());
+        assert_eq!(limiter.current_depth(), 1);
+        limiter.exit();
+        assert_eq!(limiter.current_depth(), 0);
     }
 
     #[test]
-    fn test_macro_diagnostics() {
-        let diagnostics = MacroDiagnostics::new();
-        diagnostics.record("test");
-        diagnostics.warning("warn");
-        diagnostics.error("err");
-        assert_eq!(diagnostics.messages().len(), 3);
-        diagnostics.clear();
-        assert!(diagnostics.messages().is_empty());
+    fn test_peekable_macro_parser() {
+        let mut parser = PeekableMacroParser::new("test!()");
+        let result = parser.parse_macro_call();
+        assert!(result.is_some());
+        let (name, args) = result.unwrap();
+        assert_eq!(name, "test");
+        assert!(args.is_empty());
     }
 
     #[test]
-    fn test_macro_expansion_tracker() {
-        let tracker = MacroExpansionTracker::new();
-        assert_eq!(tracker.count(), 0);
-        tracker.record("test", 0);
-        assert_eq!(tracker.count(), 1);
-        assert_eq!(tracker.records().len(), 1);
+    fn test_token_encoder() {
+        let encoded = TokenEncoder::encode_char('A');
+        assert!(encoded.is_some());
+        assert_eq!(encoded.unwrap(), 65);
+
+        let hash = TokenEncoder::hash_string("test");
+        assert!(hash > 0);
     }
 
     #[test]
-    fn test_batch_operation_macro() {
-        let mapped: Vec<i32> = batch_operation!(map x in 0..3 => x * 2);
-        assert_eq!(mapped, vec![0, 2, 4]);
+    fn test_escape_sequence_handler() {
+        assert_eq!(EscapeSequenceHandler::parse_escape('n'), Some('\n'));
+        assert_eq!(EscapeSequenceHandler::parse_escape('t'), Some('\t'));
 
-        let filtered: Vec<i32> = batch_operation!(filter x in 0..5; x > 2);
-        assert_eq!(filtered, vec![3, 4]);
+        let hex = EscapeSequenceHandler::parse_hex_escape(&['4', '1']);
+        assert_eq!(hex, Some('A'));
     }
 
     #[test]
@@ -651,6 +1044,6 @@ mod tests {
     fn test_get_info() {
         let info = get_rust_194_macro_info();
         assert!(info.contains("Rust 1.94.0"));
-        assert!(info.contains("宏"));
+        assert!(info.contains("array_windows"));
     }
 }

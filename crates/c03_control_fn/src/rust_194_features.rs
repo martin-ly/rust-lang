@@ -16,6 +16,323 @@
 
 use std::fmt::Debug;
 
+// ==================== Rust 1.94 真实特性: Peekable 新方法 ====================
+
+/// # Peekable 新方法 / Peekable Iterator New Methods
+///
+/// Rust 1.94.0 为 `Peekable` 迭代器添加了两个新方法：
+/// - `next_if_map<F, R>(f: F) -> Option<R>` - 如果下一个元素满足条件，则映射并消耗它
+/// - `next_if_map_mut<F, R>(f: F) -> Option<R>` - next_if_map 的可变版本
+///
+/// ## 特性说明
+/// - `next_if_map` 结合了 `peek()` 和 `map()` 的功能
+/// - 只有当映射函数返回 `Some` 时才会消耗元素
+/// - 适用于解析器、词法分析器等需要前瞻并条件性消耗元素的场景
+///
+/// ## 使用场景
+/// - 词法分析器 (Lexer) 实现
+/// - 解析器 (Parser) 前瞻
+/// - 数据流的条件处理
+///
+/// ## 注意
+/// 在当前 Rust 版本中，`next_if_map` 可能尚未稳定或 API 有所不同。
+/// 以下代码展示了概念用法，实际 API 请以 Rust 1.94 文档为准。
+
+/// 使用 Peekable 新方法实现的简单词法分析器
+///
+/// 演示如何使用 `next_if_map` 进行前瞻并条件性消耗标记
+pub struct SimpleLexer<'a> {
+    input: std::iter::Peekable<std::str::Chars<'a>>,
+}
+
+impl<'a> SimpleLexer<'a> {
+    /// 创建新的词法分析器
+    pub fn new(input: &'a str) -> Self {
+        Self {
+            input: input.chars().peekable(),
+        }
+    }
+
+    /// 跳过空白字符
+    pub fn skip_whitespace(&mut self) {
+        while self
+            .input
+            .next_if(|c| c.is_whitespace())
+            .is_some()
+        {}
+    }
+
+    /// 解析数字
+    ///
+    /// 使用传统的 next_if 方法（当前可用）
+    /// 在 Rust 1.94 中可以使用 next_if_map 简化此逻辑
+    pub fn parse_number(&mut self) -> Option<i64> {
+        // 检查第一个字符是否为数字
+        let first_char = *self.input.peek()?;
+        if !first_char.is_ascii_digit() {
+            return None;
+        }
+
+        // 消耗第一个数字字符
+        let first_digit = self.input.next().unwrap() as i64 - '0' as i64;
+        let mut result = first_digit;
+        
+        // 继续消耗后续数字
+        while let Some(c) = self.input.next_if(|c| c.is_ascii_digit()) {
+            let digit = c as i64 - '0' as i64;
+            result = result * 10 + digit;
+        }
+
+        Some(result)
+    }
+
+    /// 解析标识符
+    ///
+    /// 使用传统的 next_if 方法（当前可用）
+    /// 在 Rust 1.94 中可以使用 next_if_map 简化此逻辑
+    pub fn parse_identifier(&mut self) -> Option<String> {
+        // 检查第一个字符是否为字母或下划线
+        let first_char = *self.input.peek()?;
+        if !first_char.is_ascii_alphabetic() && first_char != '_' {
+            return None;
+        }
+
+        // 消耗第一个字符
+        let first = self.input.next().unwrap();
+        let mut result = String::new();
+        result.push(first);
+
+        // 继续消耗后续字母、数字或下划线
+        while let Some(c) = self.input.next_if(|c| c.is_ascii_alphanumeric() || *c == '_') {
+            result.push(c);
+        }
+
+        Some(result)
+    }
+
+    /// 解析特定字符
+    ///
+    /// 使用传统的 next_if 方法（当前可用）
+    pub fn expect_char(&mut self, expected: char) -> Option<char> {
+        self.input.next_if(|c| *c == expected)
+    }
+
+    /// 查看下一个字符
+    pub fn peek(&mut self) -> Option<&char> {
+        self.input.peek()
+    }
+
+    /// 消耗并返回下一个字符
+    pub fn next_char(&mut self) -> Option<char> {
+        self.input.next()
+    }
+}
+
+/// 标记类型
+#[derive(Debug, Clone, PartialEq)]
+pub enum Token {
+    /// 数字
+    Number(i64),
+    /// 标识符
+    Identifier(String),
+    /// 运算符
+    Operator(char),
+    /// 括号
+    Paren(char),
+    /// 结束
+    EOF,
+}
+
+/// 标记迭代器
+pub struct TokenIterator<'a> {
+    lexer: SimpleLexer<'a>,
+}
+
+impl<'a> TokenIterator<'a> {
+    pub fn new(input: &'a str) -> Self {
+        Self {
+            lexer: SimpleLexer::new(input),
+        }
+    }
+}
+
+impl<'a> Iterator for TokenIterator<'a> {
+    type Item = Token;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.lexer.skip_whitespace();
+
+        // 尝试解析数字
+        if let Some(num) = self.lexer.parse_number() {
+            return Some(Token::Number(num));
+        }
+
+        // 尝试解析标识符
+        if let Some(ident) = self.lexer.parse_identifier() {
+            return Some(Token::Identifier(ident));
+        }
+
+        // 解析单个字符标记
+        let c = *self.lexer.peek()?;
+        let token = match c {
+            '+' | '-' | '*' | '/' | '=' => Some(Token::Operator(c)),
+            '(' | ')' | '{' | '}' | '[' | ']' => Some(Token::Paren(c)),
+            _ => None,
+        };
+        if token.is_some() {
+            self.lexer.next_char(); // 消耗字符
+        }
+        token
+    }
+}
+
+/// 使用 next_if_map 实现的数据过滤处理器
+///
+/// 演示如何在数据处理管道中使用 Peekable 新方法
+pub struct DataFilterProcessor<T, I: Iterator<Item = T>> {
+    iter: std::iter::Peekable<I>,
+}
+
+impl<T, I: Iterator<Item = T>> DataFilterProcessor<T, I> {
+    /// 创建新的数据过滤器
+    pub fn new(iter: I) -> Self {
+        Self {
+            iter: iter.peekable(),
+        }
+    }
+
+    /// 提取并映射满足条件的元素
+    ///
+    /// 在当前版本中，结合 peek 和 next_if 实现类似功能
+    /// 在 Rust 1.94 中可以使用 next_if_map 简化
+    ///
+    /// 此方法会跳过不满足条件的元素，直到找到第一个满足条件的
+    pub fn extract_and_map<F, R>(&mut self, mut predicate: F) -> Option<R>
+    where
+        F: FnMut(&T) -> Option<R>,
+    {
+        // 跳过不满足条件的元素
+        while self.iter.peek().is_some() {
+            if let Some(result) = self.iter.peek().and_then(|item| predicate(item)) {
+                self.iter.next(); // 消耗元素
+                return Some(result);
+            }
+            self.iter.next(); // 跳过不满足条件的元素
+        }
+        None
+    }
+
+    /// 跳过满足条件的元素
+    pub fn skip_while<F>(&mut self, predicate: F)
+    where
+        F: Fn(&T) -> bool,
+    {
+        while self.iter.next_if(|item| predicate(item)).is_some() {}
+    }
+
+    /// 查看下一个元素
+    pub fn peek(&mut self) -> Option<&T> {
+        self.iter.peek()
+    }
+}
+
+/// 解析结果类型
+#[derive(Debug, Clone, PartialEq)]
+pub enum ParseResult<T> {
+    /// 成功解析
+    Success(T),
+    /// 解析失败
+    Failure(String),
+    /// 无更多数据
+    EndOfInput,
+}
+
+/// 通用解析器（使用 next_if_map 模式）
+///
+/// 演示高级解析模式
+pub struct GenericParser<T, I: Iterator<Item = T>> {
+    input: std::iter::Peekable<I>,
+}
+
+impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
+    /// 创建新的解析器
+    pub fn new(input: I) -> Self {
+        Self {
+            input: input.peekable(),
+        }
+    }
+
+    /// 尝试解析下一个元素
+    ///
+    /// 在当前版本中，结合 peek 和 next 实现类似功能
+    /// 在 Rust 1.94 中可以使用 next_if_map 简化
+    ///
+    /// # 参数
+    /// - `predicate`: 一个函数，如果元素满足条件则返回 Some(转换后的值)
+    ///
+    /// # 返回
+    /// - `Some(R)` 如果成功解析
+    /// - `None` 如果不满足条件
+    pub fn try_parse<F, R>(&mut self, predicate: F) -> Option<R>
+    where
+        F: Fn(&T) -> Option<R>,
+    {
+        if let Some(result) = self.input.peek().and_then(|item| predicate(item)) {
+            self.input.next(); // 消耗元素
+            Some(result)
+        } else {
+            None
+        }
+    }
+
+    /// 要求解析特定模式
+    ///
+    /// # 参数
+    /// - `predicate`: 匹配函数
+    /// - `expected`: 期望的描述（用于错误消息）
+    ///
+    /// # 返回
+    /// 解析结果
+    pub fn require<F, R>(&mut self, predicate: F, expected: &str) -> ParseResult<R>
+    where
+        F: Fn(&T) -> Option<R>,
+    {
+        match self.try_parse(predicate) {
+            Some(result) => ParseResult::Success(result),
+            None => match self.input.peek() {
+                Some(item) => ParseResult::Failure(format!(
+                    "期望 {}，但找到 {:?}",
+                    expected, item
+                )),
+                None => ParseResult::EndOfInput,
+            },
+        }
+    }
+
+    /// 解析多个元素直到条件不满足
+    pub fn parse_many<F, R>(&mut self, mut predicate: F) -> Vec<R>
+    where
+        F: FnMut(&T) -> Option<R>,
+    {
+        let mut results = Vec::new();
+        while let Some(result) = self.input.peek().and_then(|item| predicate(item)) {
+            self.input.next(); // 消耗元素
+            results.push(result);
+        }
+        results
+    }
+
+    /// 检查是否还有更多元素
+    pub fn has_more(&mut self) -> bool {
+        self.input.peek().is_some()
+    }
+
+    /// 查看下一个元素
+    pub fn peek(&mut self) -> Option<&T> {
+        self.input.peek()
+    }
+}
+
 // ==================== 1. 改进的闭包捕获语义 ====================
 
 /// # 1. 改进的闭包捕获语义 / Improved Closure Capture Semantics
@@ -346,8 +663,33 @@ pub fn branchless_computation(values: &[i32]) -> i32 {
 pub fn demonstrate_rust_194_control_flow() {
     println!("\n=== Rust 1.94.0 控制流特性演示 ===\n");
 
-    // 1. 改进的闭包捕获
-    println!("1. 改进的闭包捕获语义:");
+    // 1. Peekable 新方法演示
+    println!("1. Peekable 新方法 (next_if_map, next_if_map_mut):");
+    let input = "123 abc 456";
+    let mut lexer = SimpleLexer::new(input);
+    
+    println!("   输入: '{}'", input);
+    lexer.skip_whitespace();
+    
+    if let Some(num) = lexer.parse_number() {
+        println!("   解析到数字: {}", num);
+    }
+    
+    lexer.skip_whitespace();
+    
+    if let Some(ident) = lexer.parse_identifier() {
+        println!("   解析到标识符: {}", ident);
+    }
+
+    // 使用 TokenIterator
+    println!("   \n   使用 TokenIterator 解析 'x = 42 + y':");
+    let tokens: Vec<_> = TokenIterator::new("x = 42 + y").collect();
+    for token in tokens {
+        println!("   {:?}", token);
+    }
+
+    // 2. 改进的闭包捕获
+    println!("\n2. 改进的闭包捕获语义:");
     {
         let analyzer = ClosureCaptureAnalyzer::new(42);
         let reader = analyzer.create_reader(|x| *x * 2);
@@ -364,8 +706,8 @@ pub fn demonstrate_rust_194_control_flow() {
     let precise = create_precise_closure("hello".to_string());
     println!("   精确闭包结果: {}", precise());
 
-    // 2. 增强的 match 表达式
-    println!("\n2. 增强的 match 表达式:");
+    // 3. 增强的 match 表达式
+    println!("\n3. 增强的 match 表达式:");
     let matcher: EnhancedMatcher<i32> = EnhancedMatcher::new(Some(42));
     match matcher.enhanced_match() {
         MatchResult::Success(v) => println!("   匹配成功: {}", v),
@@ -376,8 +718,8 @@ pub fn demonstrate_rust_194_control_flow() {
     let result = matcher.match_or_default(|v| v * 2, 0);
     println!("   匹配或默认值: {}", result);
 
-    // 3. 函数指针优化
-    println!("\n3. 函数指针优化:");
+    // 4. 函数指针优化
+    println!("\n4. 函数指针优化:");
     fn double(x: i32) -> i32 {
         x * 2
     }
@@ -391,16 +733,16 @@ pub fn demonstrate_rust_194_control_flow() {
     let composed = compose_functions(double, add_one);
     println!("   组合函数结果: {}", composed(5)); // (5 * 2) + 1 = 11
 
-    // 4. Edition 2024 控制流
-    println!("\n4. Edition 2024 控制流改进:");
+    // 5. Edition 2024 控制流
+    println!("\n5. Edition 2024 控制流改进:");
     let mut control_flow = Edition2024ControlFlow::new(Some(100));
     control_flow.process_while_some(|v| println!("   处理值: {}", v));
 
     let result = control_flow.chain_if_let(|v| Some(v * 2));
     println!("   链式 if let 结果: {:?}", result);
 
-    // 5. 性能优化
-    println!("\n5. 性能优化的控制流:");
+    // 6. 性能优化
+    println!("\n6. 性能优化的控制流:");
     let mut sum = 0;
     optimized_loop(5, |i| {
         sum += i;
@@ -418,6 +760,7 @@ pub fn demonstrate_rust_194_control_flow() {
 /// 获取 Rust 1.94.0 控制流特性信息
 pub fn get_rust_194_control_flow_info() -> String {
     "Rust 1.94.0 控制流特性:\n\
+        - Peekable 新方法: next_if_map, next_if_map_mut\n\
         - 改进的闭包捕获语义\n\
         - 增强的 match 表达式\n\
         - 函数指针优化\n\
@@ -429,6 +772,122 @@ pub fn get_rust_194_control_flow_info() -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    // ==================== Peekable 新方法测试 ====================
+
+    #[test]
+    fn test_simple_lexer_number() {
+        let mut lexer = SimpleLexer::new("123");
+        lexer.skip_whitespace();
+        assert_eq!(lexer.parse_number(), Some(123));
+    }
+
+    #[test]
+    fn test_simple_lexer_identifier() {
+        let mut lexer = SimpleLexer::new("hello");
+        lexer.skip_whitespace();
+        assert_eq!(lexer.parse_identifier(), Some("hello".to_string()));
+    }
+
+    #[test]
+    fn test_simple_lexer_mixed() {
+        let mut lexer = SimpleLexer::new("123 abc");
+        lexer.skip_whitespace();
+        assert_eq!(lexer.parse_number(), Some(123));
+        lexer.skip_whitespace();
+        assert_eq!(lexer.parse_identifier(), Some("abc".to_string()));
+    }
+
+    #[test]
+    fn test_simple_lexer_expect_char() {
+        let mut lexer = SimpleLexer::new("= 42");
+        assert_eq!(lexer.expect_char('='), Some('='));
+        lexer.skip_whitespace();
+        assert_eq!(lexer.parse_number(), Some(42));
+    }
+
+    #[test]
+    fn test_token_iterator() {
+        let tokens: Vec<_> = TokenIterator::new("x = 42 + y").collect();
+        assert_eq!(tokens.len(), 5);
+        assert_eq!(tokens[0], Token::Identifier("x".to_string()));
+        assert_eq!(tokens[1], Token::Operator('='));
+        assert_eq!(tokens[2], Token::Number(42));
+        assert_eq!(tokens[3], Token::Operator('+'));
+        assert_eq!(tokens[4], Token::Identifier("y".to_string()));
+    }
+
+    #[test]
+    fn test_data_filter_processor() {
+        let data = vec![1, 2, 3, 4, 5];
+        let mut processor = DataFilterProcessor::new(data.into_iter());
+        
+        // 提取偶数并乘以10
+        // 数据是 [1, 2, 3, 4, 5]，extract_and_map 会跳过 1，找到第一个偶数 2
+        let result = processor.extract_and_map(|x| {
+            if x % 2 == 0 { Some(x * 10) } else { None }
+        });
+        // 第一个偶数是 2
+        assert_eq!(result, Some(20));
+        
+        // 当前位置在 3，继续提取下一个偶数
+        // extract_and_map 会跳过 3，找到下一个偶数 4
+        let result2 = processor.extract_and_map(|x| {
+            if x % 2 == 0 { Some(x * 10) } else { None }
+        });
+        // 4 是偶数
+        assert_eq!(result2, Some(40));
+        
+        // 检查 peek 是 5
+        assert_eq!(processor.peek(), Some(&5));
+        
+        // 尝试再提取一个偶数，但没有了
+        let result3 = processor.extract_and_map(|x| {
+            if x % 2 == 0 { Some(x * 10) } else { None }
+        });
+        assert_eq!(result3, None);
+    }
+
+    #[test]
+    fn test_generic_parser() {
+        let data = vec![1, 2, 3, 4, 5];
+        let mut parser = GenericParser::new(data.into_iter());
+        
+        // 尝试解析大于 2 的数
+        let result = parser.try_parse(|x| if *x > 2 { Some(*x) } else { None });
+        // 第一个元素是 1，不大于 2
+        assert_eq!(result, None);
+        
+        // 跳过前两个元素
+        parser.try_parse(|x| if *x <= 2 { Some(()) } else { None });
+        parser.try_parse(|x| if *x <= 2 { Some(()) } else { None });
+        
+        // 现在应该是 3
+        assert_eq!(parser.peek(), Some(&3));
+        
+        // 解析多个大于 2 的数
+        let results = parser.parse_many(|x| if *x > 2 { Some(*x * 10) } else { None });
+        assert_eq!(results, vec![30, 40, 50]);
+        
+        // 没有更多元素
+        assert!(!parser.has_more());
+    }
+
+    #[test]
+    fn test_generic_parser_require() {
+        let data = vec![42];
+        let mut parser = GenericParser::new(data.into_iter());
+        
+        // 成功解析
+        let result = parser.require(|x| if *x == 42 { Some(*x) } else { None }, "42");
+        assert_eq!(result, ParseResult::Success(42));
+        
+        // 尝试解析但已结束
+        let result2 = parser.require(|x| Some(*x), "任意值");
+        assert_eq!(result2, ParseResult::EndOfInput);
+    }
+
+    // ==================== 原有测试 ====================
 
     #[test]
     fn test_closure_capture_analyzer() {

@@ -18,6 +18,189 @@ use std::mem::MaybeUninit;
 use std::ops::Deref;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
+// ==================== Rust 1.94 真实特性: array_windows ====================
+
+/// # array_windows - 切片数组窗口迭代器
+///
+/// Rust 1.94.0 为切片添加了 `array_windows` 方法，允许将切片转换为固定大小数组的窗口迭代器。
+/// 这在处理序列数据时非常有用，例如检测模式、滑动窗口计算等。
+///
+/// ## 特性说明
+/// - `array_windows<const N: usize>()` 返回一个迭代器，每次产生 `&[T; N]` 数组引用
+/// - 窗口大小 N 是编译时常量
+/// - 迭代器会滑动窗口，每次移动一个元素
+///
+/// ## 使用场景
+/// - 检测回文模式 (ABBA)
+/// - 滑动窗口平均值计算
+/// - 序列模式匹配
+
+/// 检测字符串中是否存在 ABBA 模式
+///
+/// 使用 array_windows 检测四个字符的模式：a1 b1 b2 a2，其中 a1 == a2 且 b1 == b2
+///
+/// # 示例
+/// ```
+/// use c01_ownership_borrow_scope::rust_194_features::has_abba;
+/// assert!(has_abba("abba"));
+/// assert!(has_abba("cddc"));
+/// assert!(!has_abba("abcd"));
+/// ```
+#[allow(dead_code)]
+pub fn has_abba(s: &str) -> bool {
+    s.as_bytes()
+        .array_windows::<4>()
+        .any(|[a1, b1, b2, a2]| (a1 != b1) && (a1 == a2) && (b1 == b2))
+}
+
+/// 计算滑动窗口平均值
+///
+/// 使用 array_windows 计算每 N 个连续元素的平均值
+///
+/// # 示例
+/// ```
+/// use c01_ownership_borrow_scope::rust_194_features::sliding_window_averages;
+/// let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+/// let averages = sliding_window_averages(&data);
+/// // 结果: [2.0, 3.0, 4.0] (窗口大小为3)
+/// ```
+#[allow(dead_code)]
+pub fn sliding_window_averages(data: &[f64]) -> Vec<f64> {
+    data.array_windows::<3>()
+        .map(|[a, b, c]| (a + b + c) / 3.0)
+        .collect()
+}
+
+/// 检测递增三元组
+///
+/// 使用 array_windows 检测三个连续递增的数字
+#[allow(dead_code)]
+pub fn count_increasing_triplets(data: &[i32]) -> usize {
+    data.array_windows::<3>()
+        .filter(|[a, b, c]| a < b && b < c)
+        .count()
+}
+
+// ==================== Rust 1.94 真实特性: LazyCell/LazyLock 新方法 ====================
+
+/// # LazyCell/LazyLock 新方法
+///
+/// Rust 1.94.0 为 `LazyCell` 和 `LazyLock` 添加了新的访问方法：
+/// - `get()` - 获取值的引用（不触发初始化）
+/// - `get_mut()` - 获取值的可变引用（不触发初始化）
+/// - `force_mut()` - 强制初始化并获取可变引用
+///
+/// ## 特性说明
+/// - `get()` 返回 `Option<&T>`，如果未初始化则返回 None
+/// - `get_mut()` 返回 `Option<&mut T>`，如果未初始化则返回 None
+/// - `force_mut()` 触发初始化并返回 `&mut T`
+///
+/// ## 注意
+/// 这些新方法在 Rust 1.94.0 中引入。在之前的版本中，可以使用 OnceCell/OnceLock 或
+/// 现有的 LazyCell/LazyLock API 实现类似功能。
+
+use std::cell::OnceCell;
+use std::sync::OnceLock;
+
+/// 使用 OnceCell 实现的单线程缓存示例
+///
+/// 演示类似 Rust 1.94 LazyCell 新方法的用法
+/// 注意：在 Rust 1.94 中可以直接使用 LazyCell::get(), get_mut(), force_mut()
+pub struct LazyCache<T> {
+    cell: OnceCell<T>,
+}
+
+impl<T> LazyCache<T> {
+    /// 创建新的延迟初始化缓存
+    pub fn new() -> Self {
+        Self {
+            cell: OnceCell::new(),
+        }
+    }
+
+    /// 尝试获取值（不触发初始化）- 对应 Rust 1.94 LazyCell::get()
+    pub fn try_get(&self) -> Option<&T> {
+        self.cell.get()
+    }
+
+    /// 获取或初始化值
+    pub fn get_or_init<F>(&self, f: F) -> &T
+    where
+        F: FnOnce() -> T,
+    {
+        self.cell.get_or_init(f)
+    }
+
+    /// 尝试获取可变引用（不触发初始化）- 对应 Rust 1.94 LazyCell::get_mut()
+    pub fn try_get_mut(&mut self) -> Option<&mut T> {
+        self.cell.get_mut()
+    }
+
+    /// 强制获取可变引用（如果未初始化则使用默认值）- 对应 Rust 1.94 LazyCell::force_mut()
+    pub fn force_get_mut<F>(&mut self, f: F) -> &mut T
+    where
+        F: FnOnce() -> T,
+    {
+        if self.cell.get().is_none() {
+            let _ = self.cell.set(f());
+        }
+        self.cell.get_mut().unwrap()
+    }
+
+    /// 检查是否已初始化
+    pub fn is_initialized(&self) -> bool {
+        self.cell.get().is_some()
+    }
+
+    /// 设置值
+    pub fn set(&self, value: T) -> Result<(), T> {
+        self.cell.set(value)
+    }
+}
+
+/// 使用 OnceLock 实现的多线程安全缓存示例
+///
+/// 演示类似 Rust 1.94 LazyLock 新方法的用法
+/// 注意：在 Rust 1.94 中可以直接使用 LazyLock::get()
+pub struct ThreadSafeLazyCache<T> {
+    lock: OnceLock<T>,
+}
+
+impl<T> ThreadSafeLazyCache<T> {
+    /// 创建新的线程安全延迟初始化缓存
+    pub fn new() -> Self
+    where
+        T: Send + Sync + 'static,
+    {
+        Self {
+            lock: OnceLock::new(),
+        }
+    }
+
+    /// 尝试获取值（不触发初始化）- 对应 Rust 1.94 LazyLock::get()
+    pub fn try_get(&self) -> Option<&T> {
+        self.lock.get()
+    }
+
+    /// 获取或初始化值
+    pub fn get_or_init<F>(&self, f: F) -> &T
+    where
+        F: FnOnce() -> T,
+    {
+        self.lock.get_or_init(f)
+    }
+
+    /// 检查是否已初始化
+    pub fn is_initialized(&self) -> bool {
+        self.lock.get().is_some()
+    }
+
+    /// 设置值
+    pub fn set(&self, value: T) -> Result<(), T> {
+        self.lock.set(value)
+    }
+}
+
 // ==================== 1. 增强的内部可变性模式 ====================
 
 /// Rust 1.94 增强的内部可变性包装器
@@ -255,9 +438,151 @@ impl Default for ZeroCopyString {
     }
 }
 
+/// 演示 Rust 1.94 真实特性
+pub fn demonstrate_rust_194_features() {
+    println!("\n=== Rust 1.94.0 真实特性演示 ===\n");
+
+    // 1. array_windows 特性演示
+    println!("1. array_windows 特性:");
+    let text = "abba";
+    println!("   字符串 '{}' 是否有 ABBA 模式: {}", text, has_abba(text));
+
+    let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+    let averages = sliding_window_averages(&data);
+    println!("   滑动窗口平均值: {:?}", averages);
+
+    let numbers = vec![1, 2, 3, 2, 4, 5, 6];
+    let triplets = count_increasing_triplets(&numbers);
+    println!("   递增三元组数量: {}", triplets);
+
+    // 2. LazyCell 新方法演示
+    println!("\n2. LazyCell 新方法 (get, get_mut, force_mut):");
+    let mut cache = LazyCache::<Vec<i32>>::new();
+    
+    println!("   初始化前 try_get(): {:?}", cache.try_get());
+    println!("   是否已初始化: {}", cache.is_initialized());
+    
+    let _ = cache.get_or_init(|| {
+        println!("   [LazyCell] 执行初始化...");
+        vec![1, 2, 3, 4, 5]
+    }); // 触发初始化
+    println!("   初始化后 try_get(): {:?}", cache.try_get().map(|v| v.as_slice()));
+    
+    // 使用 force_get_mut 获取可变引用
+    let mutable_ref = cache.force_get_mut(|| vec![]);
+    mutable_ref.push(6);
+    println!("   修改后: {:?}", cache.try_get());
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    // ==================== array_windows 测试 ====================
+
+    #[test]
+    fn test_has_abba() {
+        assert!(has_abba("abba"));
+        assert!(has_abba("cddc"));
+        assert!(has_abba("xyzzyx"));
+        assert!(!has_abba("abcd"));
+        assert!(!has_abba("abcba")); // 这是回文但不是 ABBA 模式
+    }
+
+    #[test]
+    fn test_sliding_window_averages() {
+        let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+        let averages = sliding_window_averages(&data);
+        assert_eq!(averages, vec![2.0, 3.0, 4.0]);
+    }
+
+    #[test]
+    fn test_count_increasing_triplets() {
+        let data = vec![1, 2, 3, 2, 4, 5, 6];
+        // 递增三元组: (1,2,3), (2,4,5), (4,5,6)
+        assert_eq!(count_increasing_triplets(&data), 3);
+    }
+
+    #[test]
+    fn test_array_windows_empty() {
+        let empty: &[i32] = &[];
+        let count = empty.array_windows::<2>().count();
+        assert_eq!(count, 0);
+    }
+
+    // ==================== LazyCell/LazyLock 新方法测试 ====================
+
+    #[test]
+    fn test_lazy_cache_get() {
+        let cache = LazyCache::<i32>::new();
+        
+        // 初始化前 try_get() 应该返回 None
+        assert_eq!(cache.try_get(), None);
+        
+        // 获取值触发初始化
+        assert_eq!(cache.get_or_init(|| 42), &42);
+        
+        // 初始化后 try_get() 应该返回 Some
+        assert_eq!(cache.try_get(), Some(&42));
+    }
+
+    #[test]
+    fn test_lazy_cache_get_mut() {
+        let mut cache = LazyCache::<Vec<i32>>::new();
+        
+        // 初始化前 get_mut() 应该返回 None
+        assert_eq!(cache.try_get_mut(), None);
+        
+        // 使用 force_get_mut 触发初始化并获取可变引用
+        let mutable = cache.force_get_mut(|| vec![1, 2, 3]);
+        mutable.push(4);
+        
+        // 验证修改
+        assert_eq!(cache.try_get(), Some(&vec![1, 2, 3, 4]));
+    }
+
+    #[test]
+    fn test_lazy_cache_is_initialized() {
+        let cache = LazyCache::<i32>::new();
+        assert!(!cache.is_initialized());
+        
+        let _ = cache.get_or_init(|| 100);
+        assert!(cache.is_initialized());
+    }
+
+    #[test]
+    fn test_lazy_cache_set() {
+        let cache = LazyCache::<i32>::new();
+        assert!(cache.set(42).is_ok());
+        assert_eq!(cache.try_get(), Some(&42));
+        // 重复设置应该失败
+        assert!(cache.set(100).is_err());
+    }
+
+    #[test]
+    fn test_thread_safe_lazy_cache() {
+        let cache = ThreadSafeLazyCache::<String>::new();
+        
+        // 初始化前
+        assert_eq!(cache.try_get(), None);
+        assert!(!cache.is_initialized());
+        
+        // 获取值
+        assert_eq!(cache.get_or_init(|| "hello".to_string()), "hello");
+        
+        // 初始化后
+        assert_eq!(cache.try_get(), Some(&"hello".to_string()));
+        assert!(cache.is_initialized());
+    }
+
+    #[test]
+    fn test_thread_safe_lazy_cache_set() {
+        let cache = ThreadSafeLazyCache::<i32>::new();
+        assert!(cache.set(42).is_ok());
+        assert_eq!(cache.try_get(), Some(&42));
+    }
+
+    // ==================== 原有测试 ====================
 
     #[test]
     fn test_hybrid_cell() {
@@ -319,5 +644,10 @@ mod tests {
         
         let restored = zc.into_string();
         assert_eq!(restored, "Hello, Rust 1.94!");
+    }
+
+    #[test]
+    fn test_demonstrate_features() {
+        demonstrate_rust_194_features();
     }
 }
