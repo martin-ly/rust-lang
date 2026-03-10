@@ -1,8 +1,8 @@
 # Rust 形式化验证实战指南
 
-> **版本**: 1.0.0  
-> **更新日期**: 2026-02-28  
-> **目标读者**: Rust 开发者、安全工程师、形式化验证研究者  
+> **版本**: 1.0.0
+> **更新日期**: 2026-02-28
+> **目标读者**: Rust 开发者、安全工程师、形式化验证研究者
 > **前置知识**: 中级 Rust 编程基础、基本逻辑概念
 
 ---
@@ -155,14 +155,14 @@ mod verification {
         // 定义任意输入（符号化变量）
         let a: u32 = kani::any();
         let b: u32 = kani::any();
-        
+
         // 假设条件：确保不会溢出
         kani::assume(a <= u32::MAX / 2);
         kani::assume(b <= u32::MAX / 2);
-        
+
         // 执行操作
         let result = a + b;
-        
+
         // 验证属性
         assert!(result >= a);
         assert!(result >= b);
@@ -225,7 +225,7 @@ mod verification_patterns {
     fn verify_equivalence() {
         let x: u32 = any();
         assume(x < 1000);
-        
+
         // 验证两种实现等价
         let result1 = optimized_function(x);
         let result2 = reference_function(x);
@@ -246,9 +246,9 @@ mod verification_patterns {
     fn verify_state_machine() {
         let mut state = State::new();
         let input: u8 = any();
-        
+
         state.transition(input);
-        
+
         // 验证不变式
         assert!(state.is_valid());
         assert!(!state.is_error() || state.can_recover());
@@ -282,10 +282,10 @@ mod bounds_verification {
         // 创建任意数组（限制大小以提高性能）
         let arr: [i32; 5] = kani::any();
         let index: usize = kani::any();
-        
+
         // 执行函数
         let result = safe_get(&arr, index);
-        
+
         // 验证：如果索引有效，返回 Some；否则返回 None
         if index < arr.len() {
             assert!(result.is_some());
@@ -300,13 +300,13 @@ mod bounds_verification {
     fn verify_with_slice() {
         let len: usize = kani::any();
         kani::assume(len <= 10);  // 限制数组长度
-        
+
         let arr: [i32; 10] = kani::any();
         let slice = &arr[..len];
         let index: usize = kani::any();
-        
+
         let result = safe_get(slice, index);
-        
+
         // 覆盖所有情况
         kani::cover!(result.is_some());
         kani::cover!(result.is_none());
@@ -335,7 +335,7 @@ mod overflow_verification {
     fn verify_checked_add() {
         let a: u32 = any();
         let b: u32 = any();
-        
+
         match safe_add(a, b) {
             Some(sum) => {
                 // 如果返回 Some，和必须正确
@@ -355,9 +355,9 @@ mod overflow_verification {
     fn verify_saturating_add() {
         let a: u32 = any();
         let b: u32 = any();
-        
+
         let result = saturating_add(a, b);
-        
+
         // 验证饱和性质
         if a > u32::MAX - b {
             // 会溢出，结果应为 u32::MAX
@@ -366,7 +366,7 @@ mod overflow_verification {
             // 不会溢出，结果应为精确和
             assert_eq!(result, a + b);
         }
-        
+
         // 通用性质：结果不会溢出
         assert!(result >= a || result == u32::MAX);
         assert!(result >= b || result == u32::MAX);
@@ -378,14 +378,14 @@ mod overflow_verification {
         let a: i32 = any();
         let b: i32 = any();
         let c: i32 = any();
-        
+
         // 限制范围防止溢出
         assume(a.abs() < 1000);
         assume(b.abs() < 1000);
         assume(c.abs() < 1000);
-        
+
         let result = a.wrapping_add(b).wrapping_mul(c);
-        
+
         // 验证一些代数性质（在 wrapping 算术中）
         if c == 0 {
             assert_eq!(result, 0);
@@ -421,7 +421,7 @@ mod conversion_verification {
     #[proof]
     fn verify_u32_to_i32() {
         let val: u32 = any();
-        
+
         match u32_to_i32(val) {
             Some(i) => {
                 assert!(i >= 0);
@@ -437,10 +437,10 @@ mod conversion_verification {
     fn verify_clamped_conversion() {
         let val: i32 = any();
         let result = i32_to_u8_clamped(val);
-        
+
         // 验证结果在有效范围内
         assert!(result <= 255);
-        
+
         // 验证具体值
         if val < 0 {
             assert_eq!(result, 0);
@@ -461,7 +461,7 @@ mod conversion_verification {
 
 ```rust
 /// 安全的原始指针写入
-/// 
+///
 /// # Safety
 /// - ptr 必须有效且对齐
 /// - ptr 必须指向可写的内存
@@ -470,7 +470,7 @@ pub unsafe fn write_value<T>(ptr: *mut T, value: T) {
 }
 
 /// 安全的原始指针读取
-/// 
+///
 /// # Safety
 /// - ptr 必须有效且对齐
 /// - ptr 必须指向可读的内存
@@ -487,7 +487,7 @@ mod pointer_verification {
     fn verify_valid_pointer_ops() {
         let mut value: i32 = any();
         let ptr: *mut i32 = &mut value;
-        
+
         // 验证有效指针操作
         unsafe {
             write_value(ptr, 42);
@@ -501,14 +501,14 @@ mod pointer_verification {
     fn verify_pointer_arithmetic_bounds() {
         let arr: [i32; 5] = [1, 2, 3, 4, 5];
         let offset: isize = any();
-        
+
         // 假设偏移在有效范围内
         assume(offset >= 0 && offset < arr.len() as isize);
-        
+
         unsafe {
             let ptr = arr.as_ptr().offset(offset);
             let value = ptr.read();
-            
+
             // 验证读取的值正确
             assert_eq!(value, arr[offset as usize]);
         }
@@ -544,10 +544,10 @@ mod reference_verification {
     fn verify_byte_conversion() {
         let val: u32 = any();
         let bytes = as_bytes(&val);
-        
+
         // 验证字节数正确
         assert_eq!(bytes.len(), 4);
-        
+
         // 验证可以重建原值（小端序）
         let reconstructed = u32::from_le_bytes([
             bytes[0], bytes[1], bytes[2], bytes[3]
@@ -579,11 +579,11 @@ impl<T> VerifiedBox<T> {
             Self { ptr }
         }
     }
-    
+
     pub fn get(&self) -> &T {
         unsafe { &*self.ptr }
     }
-    
+
     pub fn get_mut(&mut self) -> &mut T {
         unsafe { &mut *self.ptr }
     }
@@ -608,7 +608,7 @@ mod smart_pointer_verification {
     fn verified_box_lifecycle() {
         let value: i32 = any();
         let b = VerifiedBox::new(value);
-        
+
         assert_eq!(*b.get(), value);
     }
 }
@@ -634,24 +634,24 @@ impl AtomicCounter {
             value: AtomicUsize::new(0),
         }
     }
-    
+
     pub fn increment(&self) {
         self.value.fetch_add(1, Ordering::SeqCst);
     }
-    
+
     pub fn get(&self) -> usize {
         self.value.load(Ordering::SeqCst)
     }
-    
+
     /// 使用 CAS 的原子更新
     pub fn add(&self, delta: usize) -> usize {
         let mut current = self.value.load(Ordering::Relaxed);
         loop {
             let new = current + delta;
             match self.value.compare_exchange(
-                current, 
-                new, 
-                Ordering::SeqCst, 
+                current,
+                new,
+                Ordering::SeqCst,
                 Ordering::SeqCst
             ) {
                 Ok(_) => return new,
@@ -669,15 +669,15 @@ mod concurrency_verification {
     use std::thread;
 
     // 注意：Kani 的并发支持有限，以下是单线程属性验证
-    
+
     #[proof]
     fn verify_counter_monotonicity() {
         let counter = AtomicCounter::new();
         let initial = counter.get();
-        
+
         counter.increment();
         let after_inc = counter.get();
-        
+
         assert!(after_inc > initial);
         assert_eq!(after_inc, initial + 1);
     }
@@ -686,9 +686,9 @@ mod concurrency_verification {
     fn verify_add_returns_new_value() {
         let counter = AtomicCounter::new();
         let delta: usize = any();
-        
+
         let result = counter.add(delta);
-        
+
         assert_eq!(result, delta);
         assert_eq!(counter.get(), delta);
     }
@@ -711,15 +711,15 @@ impl ThreadSafeState {
             data: Mutex::new(0),
         }
     }
-    
-    pub fn update<F>(&self, f: F) 
-    where 
-        F: FnOnce(i32) -> i32 
+
+    pub fn update<F>(&self, f: F)
+    where
+        F: FnOnce(i32) -> i32
     {
         let mut guard = self.data.lock().unwrap();
         *guard = f(*guard);
     }
-    
+
     pub fn get(&self) -> i32 {
         *self.data.lock().unwrap()
     }
@@ -734,9 +734,9 @@ mod lock_verification {
     fn verify_state_update() {
         let state = ThreadSafeState::new();
         let input: i32 = any();
-        
+
         state.update(|_| input);
-        
+
         assert_eq!(state.get(), input);
     }
 
@@ -745,12 +745,12 @@ mod lock_verification {
         let state = ThreadSafeState::new();
         let a: i32 = any();
         let b: i32 = any();
-        
+
         assume(a.checked_add(b).is_some());
-        
+
         state.update(|_| a);
         state.update(|v| v + b);
-        
+
         assert_eq!(state.get(), a + b);
     }
 }
@@ -793,10 +793,10 @@ mod loop_verification {
         let arr: [i32; 10] = any();
         let len: usize = any();
         assume(len <= 10);
-        
+
         let slice = &arr[..len];
         let sum = sum_array(slice);
-        
+
         // 验证：和不会溢出
         // 验证：空数组和为0
         if len == 0 {
@@ -811,10 +811,10 @@ mod loop_verification {
         let len: usize = any();
         let target: i32 = any();
         assume(len <= 10);
-        
+
         let slice = &arr[..len];
         let result = find_element(slice, target);
-        
+
         // 如果找到，索引有效且值匹配
         if let Some(idx) = result {
             assert!(idx < len);
@@ -850,7 +850,7 @@ pub fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
     if arr.is_empty() {
         return None;
     }
-    
+
     let mid = arr.len() / 2;
     if arr[mid] == target {
         Some(mid)
@@ -872,9 +872,9 @@ mod recursion_verification {
     fn verify_factorial() {
         let n: u32 = any();
         assume(n <= 5);  // 限制输入范围
-        
+
         let result = safe_factorial(n);
-        
+
         // 验证基本性质
         if n == 0 || n == 1 {
             assert_eq!(result, Some(1));
@@ -895,10 +895,10 @@ mod recursion_verification {
         assume(arr[1] <= arr[2]);
         assume(arr[2] <= arr[3]);
         assume(arr[3] <= arr[4]);
-        
+
         let target: i32 = any();
         let result = binary_search(&arr, target);
-        
+
         // 如果找到，验证索引正确
         if let Some(idx) = result {
             assert!(idx < arr.len());
@@ -986,7 +986,7 @@ pub mod verification;
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_add() {
         assert_eq!(add(2, 3), 5);
@@ -998,7 +998,7 @@ mod tests {
 // src/verification/mod.rs
 
 //! Kani 形式化验证模块
-//! 
+//!
 //! 运行验证: cargo kani
 
 pub mod arithmetic;
@@ -1020,29 +1020,29 @@ pub fn assume_valid_range<T: Ord>(val: &T, min: &T, max: &T) {
 
 # 快速验证（开发时使用）
 verify-quick:
-	cargo kani --profile quick
+ cargo kani --profile quick
 
 # 默认验证
 verify:
-	cargo kani
+ cargo kani
 
 # 完整验证（发布前）
 verify-full:
-	cargo kani --profile release
+ cargo kani --profile release
 
 # 验证单个文件
 verify-file:
-	cargo kani --function $(FUNC)
+ cargo kani --function $(FUNC)
 
 # 生成覆盖率报告
 verify-coverage:
-	cargo kani --coverage --visualize
+ cargo kani --coverage --visualize
 
 # 清理 Kani 临时文件
 clean-kani:
-	rm -rf target/kani
-	rm -rf kani/*.out
-	rm -rf kani/logs
+ rm -rf target/kani
+ rm -rf kani/*.out
+ rm -rf kani/logs
 ```
 
 ---
@@ -1073,16 +1073,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install Kani
         uses: model-checking/kani-github-action@v1
         with:
           version: '0.54'  # 指定版本
-          
+
       - name: Run Quick Verification
         run: |
           cargo kani --profile quick --output-format=terse
-          
+
       - name: Upload Results
         if: failure()
         uses: actions/upload-artifact@v4
@@ -1098,18 +1098,18 @@ jobs:
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install Kani
         uses: model-checking/kani-github-action@v1
-        
+
       - name: Run Full Verification
         run: |
           cargo kani --profile release --output-format=verbose 2>&1 | tee kani-full.log
-          
+
       - name: Generate Coverage Report
         run: |
           cargo kani --coverage --visualize
-          
+
       - name: Upload Coverage
         uses: actions/upload-artifact@v4
         with:
@@ -1125,25 +1125,25 @@ jobs:
     if: always()
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Download Results
         uses: actions/download-artifact@v4
         with:
           name: kani-quick-results
-          
+
       - name: Generate Markdown Report
         run: |
           cat > kani-report.md << 'EOF'
           # Kani Verification Report
-          
+
           ## Summary
           - Run Date: $(date)
           - Commit: ${{ github.sha }}
-          
+
           ## Results
           See attached artifacts for detailed output.
           EOF
-          
+
       - name: Comment on PR
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
@@ -1305,12 +1305,12 @@ mod verification {
     fn verify_insertion_sort_correct() {
         let mut arr: [i32; 5] = any();
         let original = arr;
-        
+
         insertion_sort(&mut arr);
-        
+
         // 属性 1: 结果有序
         assert!(is_sorted(&arr));
-        
+
         // 属性 2: 元素集合不变
         assert!(same_elements(&arr, &original));
     }
@@ -1320,14 +1320,14 @@ mod verification {
         // 空数组和单元素数组总是有序的
         let empty: [i32; 0] = [];
         assert!(is_sorted(&empty));
-        
+
         let single: [i32; 1] = any();
         assert!(is_sorted(&single));
-        
+
         // 有序数组的检测
         let sorted: [i32; 3] = [1, 2, 3];
         assert!(is_sorted(&sorted));
-        
+
         // 无序数组的检测
         let unsorted: [i32; 3] = [3, 1, 2];
         assert!(!is_sorted(&unsorted));
@@ -1350,23 +1350,23 @@ impl<T> Node<T> {
     pub fn new(data: T) -> Self {
         Self { data, next: None }
     }
-    
+
     /// 在头部插入
     pub fn prepend(self, data: T) -> Self {
         let mut new_node = Self::new(data);
         new_node.next = Some(Box::new(self));
         new_node
     }
-    
+
     /// 获取长度
     pub fn len(&self) -> usize {
         1 + self.next.as_ref().map_or(0, |n| n.len())
     }
-    
+
     /// 查找元素
-    pub fn contains(&self, val: &T) -> bool 
-    where 
-        T: PartialEq 
+    pub fn contains(&self, val: &T) -> bool
+    where
+        T: PartialEq
     {
         if &self.data == val {
             true
@@ -1385,7 +1385,7 @@ impl<T> LinkedList<T> {
     pub fn new() -> Self {
         Self { head: None }
     }
-    
+
     pub fn push_front(&mut self, data: T) {
         match self.head.take() {
             Some(node) => {
@@ -1396,11 +1396,11 @@ impl<T> LinkedList<T> {
             }
         }
     }
-    
+
     pub fn len(&self) -> usize {
         self.head.as_ref().map_or(0, |n| n.len())
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.head.is_none()
     }
@@ -1415,15 +1415,15 @@ mod verification {
     #[kani::unwind(5)]
     fn verify_list_invariants() {
         let mut list: LinkedList<i32> = LinkedList::new();
-        
+
         // 空列表性质
         assert!(list.is_empty());
         assert_eq!(list.len(), 0);
-        
+
         // 添加元素
         let val: i32 = any();
         list.push_front(val);
-        
+
         assert!(!list.is_empty());
         assert_eq!(list.len(), 1);
     }
@@ -1434,11 +1434,11 @@ mod verification {
         let mut list: LinkedList<i32> = LinkedList::new();
         let n: u8 = any();
         assume(n <= 3);
-        
+
         for _ in 0..n {
             list.push_front(any());
         }
-        
+
         assert_eq!(list.len(), n as usize);
     }
 }
@@ -1466,19 +1466,19 @@ impl<T: Copy + Default, const N: usize> RingBuffer<T, N> {
             count: 0,
         }
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.count == 0
     }
-    
+
     pub fn is_full(&self) -> bool {
         self.count == N
     }
-    
+
     pub fn len(&self) -> usize {
         self.count
     }
-    
+
     pub fn push(&mut self, item: T) -> Result<(), T> {
         if self.is_full() {
             return Err(item);
@@ -1488,7 +1488,7 @@ impl<T: Copy + Default, const N: usize> RingBuffer<T, N> {
         self.count += 1;
         Ok(())
     }
-    
+
     pub fn pop(&mut self) -> Option<T> {
         if self.is_empty() {
             return None;
@@ -1498,7 +1498,7 @@ impl<T: Copy + Default, const N: usize> RingBuffer<T, N> {
         self.count -= 1;
         item
     }
-    
+
     pub fn peek(&self) -> Option<T> {
         self.buffer[self.head].clone()
     }
@@ -1524,13 +1524,13 @@ mod verification {
         let items: [i32; 4] = any();
         let n: usize = any();
         assume(n <= 4);
-        
+
         // 推入 n 个元素
         for i in 0..n {
             assert!(buf.push(items[i]).is_ok());
             assert_eq!(buf.len(), i + 1);
         }
-        
+
         // 弹出 n 个元素
         for i in 0..n {
             assert!(!buf.is_empty());
@@ -1538,19 +1538,19 @@ mod verification {
             assert!(popped.is_some());
             assert_eq!(buf.len(), n - i - 1);
         }
-        
+
         assert!(buf.is_empty());
     }
 
     #[proof]
     fn verify_push_full() {
         let mut buf: RingBuffer<i32, 2> = RingBuffer::new();
-        
+
         // 填满缓冲区
         assert!(buf.push(1).is_ok());
         assert!(buf.push(2).is_ok());
         assert!(buf.is_full());
-        
+
         // 再推应该失败
         let result = buf.push(3);
         assert!(result.is_err());
@@ -1563,10 +1563,10 @@ mod verification {
         let mut buf: RingBuffer<i32, 4> = RingBuffer::new();
         let a: i32 = any();
         let b: i32 = any();
-        
+
         buf.push(a).unwrap();
         buf.push(b).unwrap();
-        
+
         // FIFO: 先进先出
         assert_eq!(buf.pop(), Some(a));
         assert_eq!(buf.pop(), Some(b));
@@ -1610,25 +1610,25 @@ impl TcpConnection {
             can_receive: false,
         }
     }
-    
+
     pub fn open(&mut self) {
         if self.state == TcpState::Closed {
             self.state = TcpState::SynSent;
         }
     }
-    
+
     pub fn listen(&mut self) {
         if self.state == TcpState::Closed {
             self.state = TcpState::Listen;
         }
     }
-    
+
     pub fn syn_received(&mut self) {
         if self.state == TcpState::Listen {
             self.state = TcpState::SynReceived;
         }
     }
-    
+
     pub fn established(&mut self) {
         match self.state {
             TcpState::SynSent | TcpState::SynReceived => {
@@ -1639,7 +1639,7 @@ impl TcpConnection {
             _ => {}
         }
     }
-    
+
     pub fn close(&mut self) {
         match self.state {
             TcpState::Established => {
@@ -1652,7 +1652,7 @@ impl TcpConnection {
             _ => {}
         }
     }
-    
+
     pub fn is_valid(&self) -> bool {
         // 不变式：只有 Established 状态可以同时发送和接收
         match self.state {
@@ -1672,11 +1672,11 @@ mod verification {
     #[proof]
     fn verify_state_invariants() {
         let mut conn = TcpConnection::new();
-        
+
         // 初始状态
         assert_eq!(conn.state, TcpState::Closed);
         assert!(conn.is_valid());
-        
+
         // 测试所有可能的转换
         conn.open();
         assert!(conn.is_valid());
@@ -1686,16 +1686,16 @@ mod verification {
     #[proof]
     fn verify_established_properties() {
         let mut conn = TcpConnection::new();
-        
+
         conn.listen();
         conn.syn_received();
         conn.established();
-        
+
         assert_eq!(conn.state, TcpState::Established);
         assert!(conn.can_send);
         assert!(conn.can_receive);
         assert!(conn.is_valid());
-        
+
         conn.close();
         assert!(!conn.can_send);
         assert!(conn.is_valid());
@@ -1704,7 +1704,7 @@ mod verification {
     #[proof]
     fn verify_close_from_invalid_states() {
         let mut conn = TcpConnection::new();
-        
+
         // 从未建立连接就关闭
         conn.close();
         assert_eq!(conn.state, TcpState::Closed);  // 状态不变
@@ -1722,12 +1722,12 @@ pub fn secure_compare(a: &[u8], b: &[u8]) -> bool {
     if a.len() != b.len() {
         return false;
     }
-    
+
     let mut result: u8 = 0;
     for i in 0..a.len() {
         result |= a[i] ^ b[i];
     }
-    
+
     result == 0
 }
 
@@ -1742,7 +1742,7 @@ pub fn xor_in_place(a: &mut [u8], b: &[u8]) {
 /// 简单的校验和计算
 pub fn checksum(data: &[u8]) -> u16 {
     let mut sum: u32 = 0;
-    
+
     // 两字节一组相加
     for chunk in data.chunks(2) {
         let word = if chunk.len() == 2 {
@@ -1752,12 +1752,12 @@ pub fn checksum(data: &[u8]) -> u16 {
         };
         sum += word as u32;
     }
-    
+
     // 进位回卷
     while (sum >> 16) != 0 {
         sum = (sum & 0xFFFF) + (sum >> 16);
     }
-    
+
     !sum as u16
 }
 
@@ -1769,7 +1769,7 @@ mod verification {
     #[proof]
     fn verify_secure_compare_reflexive() {
         let data: [u8; 16] = any();
-        
+
         // 任何值与自身比较应为 true
         assert!(secure_compare(&data, &data));
     }
@@ -1778,7 +1778,7 @@ mod verification {
     fn verify_secure_compare_length() {
         let a: [u8; 8] = any();
         let b: [u8; 16] = any();
-        
+
         // 不同长度应为 false
         assert!(!secure_compare(&a, &b[..8]));
     }
@@ -1787,17 +1787,17 @@ mod verification {
     fn verify_xor_properties() {
         let original: [u8; 8] = any();
         let key: [u8; 8] = any();
-        
+
         let mut encrypted = original;
         xor_in_place(&mut encrypted, &key);
-        
+
         // 验证：加密 != 原文（除非 key 全为0）
         // 不能直接用 assert，因为 key 可能为0
-        
+
         // XOR 两次应恢复原文
         let mut decrypted = encrypted;
         xor_in_place(&mut decrypted, &key);
-        
+
         assert_eq!(decrypted, original);
     }
 
@@ -1807,10 +1807,10 @@ mod verification {
         let data: [u8; 10] = any();
         let len: usize = any();
         assume(len <= 10);
-        
+
         let slice = &data[..len];
         let cs = checksum(slice);
-        
+
         // 校验和是一个 u16
         // 相同数据应有相同校验和
         let cs2 = checksum(slice);
@@ -1956,7 +1956,7 @@ def swap (T : Type) (a : RefMut T) (b : RefMut T) : Unit :=
   let tmp := !a  -- 解引用 a
   a := !b        -- 写入 a
   b := tmp       -- 写入 b
-  
+
 def use_after_move : Unit :=
   let x := Vec.mk [1, 2, 3]
   let y := move x  -- 'move' 显式标记
@@ -2092,7 +2092,7 @@ theorem length_append {α : Type} (xs ys : List α) :
   list_length (xs ++ ys) = list_length xs + list_length ys := by
   induction xs with
   | nil => simp [list_length]
-  | cons x xs ih => 
+  | cons x xs ih =>
     simp [list_length]
     rw [ih]
     simp [Nat.add_assoc]
@@ -2196,7 +2196,7 @@ End Tutorial.
 fn ownership_example() {
     let x = 5;           // x: i32
     let y = x;           // 复制 (i32 实现 Copy)
-    
+
     let s = String::from("hello");  // s: String
     let t = s;                      // 移动，s 无效
     // println!("{}", s);           // 编译错误！
@@ -2210,7 +2210,7 @@ fn ownership_example() {
 def ownership_example : Unit :=
   let x : I32 := 5
   let y : I32 := x       -- 复制，两者都有效
-  
+
   let s : String := String.from "hello"
   let t : String := move s  -- 移动，s 不再有效
   -- 任何使用 s 的代码都会生成证明错误
@@ -2274,11 +2274,11 @@ impl Resource {
     pub fn new(id: u64) -> Self {
         Self { id, active: true }
     }
-    
+
     pub fn consume(self) -> u64 {
         self.id
     }
-    
+
     pub fn is_active(&self) -> bool {
         self.active
     }
@@ -2392,7 +2392,7 @@ def swap_elements (arr : MutRef (Slice I32)) (i j : Usize) : Unit :=
     ()
 
 -- 定理：交换后数组长度不变
-theorem swap_preserves_length 
+theorem swap_preserves_length
   (arr : MutRef (Slice I32)) (i j : Usize) :
   let arr' := swap_elements arr i j
   arr'.length = arr.length := by
@@ -2415,7 +2415,7 @@ def find_and_double (arr : MutRef (Slice I32)) (target : I32) : Bool :=
   loop 0
 
 -- 定理：如果找到并修改，元素值被加倍
-theorem find_and_double_correct 
+theorem find_and_double_correct
   (arr : MutRef (Slice I32)) (target : I32) :
   find_and_double arr target = true ->
   ∃ i : Usize, i < arr.length ∧ arr.index i = target * 2 := by
@@ -2464,7 +2464,7 @@ pub fn recursive_binary_search(arr: &[i32], target: i32) -> Option<usize> {
     if arr.is_empty() {
         return None;
     }
-    
+
     let mid = arr.len() / 2;
     if arr[mid] == target {
         Some(mid)
@@ -2519,7 +2519,7 @@ def tail_factorial (n : U64) : U64 :=
 theorem fact_acc_correct (n acc : U64) :
   fact_acc n acc = acc * factorial n := by
   induction n with
-  | zero => 
+  | zero =>
     simp [fact_acc, factorial]
   | succ n ih =>
     simp [fact_acc, factorial, ih]
@@ -2536,7 +2536,7 @@ theorem tail_factorial_correct (n : U64) :
 def Sorted (arr : Slice I32) : Prop :=
   ∀ (i j : Nat), i < j → j < arr.length → arr[i] ≤ arr[j]
 
-def recursive_binary_search 
+def recursive_binary_search
   (arr : Slice I32) (target : I32) : Option Usize :=
   if arr.isEmpty then
     none
@@ -2551,7 +2551,7 @@ def recursive_binary_search
       |>.map (fun i => i + mid + 1)
 
 -- 定理：如果返回 Some i，则 arr[i] = target
-theorem binary_search_found 
+theorem binary_search_found
   (arr : Slice I32) (target : I32) (i : Usize) :
   Sorted arr →
   recursive_binary_search arr target = some i →
@@ -2559,7 +2559,7 @@ theorem binary_search_found
   intro h_sorted h_found
   -- 对数组长度进行归纳
   induction arr using Slice.inductionOn with
-  | empty => 
+  | empty =>
     simp [recursive_binary_search] at h_found
   | cons head tail ih =>
     simp [recursive_binary_search] at h_found
@@ -2572,7 +2572,7 @@ theorem binary_search_found
       sorry
 
 -- 定理：如果目标在数组中，必定能找到
-theorem binary_search_complete 
+theorem binary_search_complete
   (arr : Slice I32) (target : I32) (i : Usize) :
   Sorted arr →
   i < arr.length →
@@ -2666,7 +2666,7 @@ fn stacked_borrows_violation() {
     let mut x = 5;
     let y = &mut x;  // 创建可变引用
     let z = &mut *y; // 从 y 创建新的可变引用
-    
+
     // 在 z 仍然有效时使用 y
     // 在 Stacked Borrows 下这是未定义行为
     *y = 10;  // 错误！y 被 z "弹出"了
@@ -2696,7 +2696,7 @@ fn tree_borrows_ok() {
     let mut x = 5;
     let y = &mut x;  // 创建可变引用
     let z = &mut *y; // 从 y 创建新的可变引用
-    
+
     // 在 Tree Borrows 下，这是允许的
     // y 和 z 被视为同一树的子节点
     *y = 10;  // OK in Tree Borrows
@@ -2707,7 +2707,7 @@ fn tree_borrows_violation() {
     let mut x = 5;
     let y = &x;      // 不可变借用
     let z = &mut x;  // 错误：不能与活跃的可变借用共存
-    
+
     println!("{}", y);  // 使用 y
     *z = 10;
 }
@@ -2748,7 +2748,7 @@ fn use_after_free() {
         let x = 42;
         ptr = &x;  // ptr 指向局部变量
     }  // x 在这里被释放
-    
+
     // 使用已释放的内存 - UB!
     unsafe {
         println!("{}", *ptr);  // Miri 会报错
@@ -2782,7 +2782,7 @@ use std::thread;
 fn data_race() {
     let mut x = 0;
     let ptr: *mut i32 = &mut x;
-    
+
     thread::scope(|s| {
         s.spawn(|| unsafe {
             *ptr = 1;  // 线程 1 写入
@@ -2812,10 +2812,10 @@ cargo miri run --example data_race
 
 fn unaligned_read() {
     let bytes: [u8; 8] = [1, 2, 3, 4, 5, 6, 7, 8];
-    
+
     // 尝试从未对齐地址读取 u64
     let ptr = bytes.as_ptr().wrapping_add(1) as *const u64;
-    
+
     unsafe {
         let val = *ptr;  // 未对齐读取 - UB！
         println!("{}", val);
@@ -2824,10 +2824,10 @@ fn unaligned_read() {
 
 fn aligned_read() {
     let bytes: [u8; 8] = [1, 2, 3, 4, 5, 6, 7, 8];
-    
+
     // 正确：从对齐地址读取
     let ptr = bytes.as_ptr() as *const u64;
-    
+
     unsafe {
         // 确保对齐
         assert_eq!(ptr.align_offset(std::mem::align_of::<u64>()), 0);
@@ -2849,7 +2849,7 @@ fn main() {
 
 fn out_of_bounds_access() {
     let arr = [1, 2, 3];
-    
+
     unsafe {
         // 越界读取
         let val = *arr.as_ptr().wrapping_add(10);  // Miri 报错
@@ -2859,7 +2859,7 @@ fn out_of_bounds_access() {
 
 fn buffer_overflow() {
     let mut buf = vec![0; 10];
-    
+
     unsafe {
         std::ptr::write(buf.as_mut_ptr().wrapping_add(20), 42);  // 溢出！
     }
@@ -2885,7 +2885,7 @@ enum Color {
 
 fn invalid_enum_value() {
     let val: u8 = 255;
-    
+
     unsafe {
         let color: Color = std::mem::transmute(val);  // 无效值！
         match color {
@@ -2930,18 +2930,18 @@ path = "tests/miri_tests.rs"
 // tests/miri_tests.rs
 
 //! Miri 专用测试
-//! 
+//!
 //! 运行：cargo miri test
 
 /// 测试内存安全
 #[test]
 fn test_safe_vec_operations() {
     let mut vec = Vec::with_capacity(10);
-    
+
     for i in 0..10 {
         vec.push(i);
     }
-    
+
     assert_eq!(vec.len(), 10);
     assert_eq!(vec.capacity(), 10);
 }
@@ -2959,9 +2959,9 @@ fn test_reference_lifetime() {
 fn test_concurrent_access() {
     use std::sync::Arc;
     use std::sync::atomic::{AtomicUsize, Ordering};
-    
+
     let counter = Arc::new(AtomicUsize::new(0));
-    
+
     std::thread::scope(|s| {
         for _ in 0..4 {
             let c = Arc::clone(&counter);
@@ -2970,7 +2970,7 @@ fn test_concurrent_access() {
             });
         }
     });
-    
+
     assert_eq!(counter.load(Ordering::SeqCst), 4);
 }
 
@@ -2978,14 +2978,14 @@ fn test_concurrent_access() {
 #[test]
 fn test_safe_unsafe_block() {
     let mut data = [1, 2, 3, 4, 5];
-    
+
     // 安全的 unsafe 用法
     unsafe {
         let ptr = data.as_mut_ptr();
         *ptr.add(0) = 10;
         *ptr.add(1) = 20;
     }
-    
+
     assert_eq!(data[0], 10);
     assert_eq!(data[1], 20);
 }
@@ -3009,18 +3009,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install Rust nightly
         uses: dtolnay/rust-toolchain@nightly
         with:
           components: miri
-      
+
       - name: Run Miri tests
         run: |
           cargo miri test --verbose
         env:
           MIRIFLAGS: "-Zmiri-tree-borrows -Zmiri-backtrace=short"
-      
+
       - name: Run Miri on examples
         run: |
           cargo miri run --example basic
@@ -3084,15 +3084,15 @@ jobs:
 // src/lib.rs
 
 //! # 分级验证示例
-//! 
+//!
 //! ## Level 0: Miri 检查（每次提交）
 //! - 确保无未定义行为
 //! - 快速反馈
-//! 
+//!
 //! ## Level 1: Kani 验证（每次 PR）
 //! - 安全属性验证
 //! - 边界检查
-//! 
+//!
 //! ## Level 2: Aeneas 证明（关键模块）
 //! - 函数正确性
 //! - 数学性质证明
@@ -3109,11 +3109,11 @@ impl SafeBuffer {
             data: vec![0; size],
         }
     }
-    
+
     pub fn get(&self, index: usize) -> Option<u8> {
         self.data.get(index).copied()
     }
-    
+
     pub fn set(&mut self, index: usize, value: u8) -> bool {
         if let Some(ptr) = self.data.get_mut(index) {
             *ptr = value;
@@ -3136,11 +3136,11 @@ mod kani_verification {
     fn verify_buffer_operations() {
         let size: usize = any();
         assume(size <= 10);
-        
+
         let mut buf = SafeBuffer::new(size);
         let index: usize = any();
         let value: u8 = any();
-        
+
         // 验证 get
         let result = buf.get(index);
         if index < size {
@@ -3148,11 +3148,11 @@ mod kani_verification {
         } else {
             assert_eq!(result, None);
         }
-        
+
         // 验证 set
         let success = buf.set(index, value);
         assert_eq!(success, index < size);
-        
+
         if success {
             assert_eq!(buf.get(index), Some(value));
         }
@@ -3162,7 +3162,7 @@ mod kani_verification {
 // ========== Level 2: Aeneas 正确性证明 ==========
 
 /// 需要证明的复杂算法
-/// 
+///
 /// 经过 Aeneas 转换后，在 Lean 中证明：
 /// - 对于所有输入，输出满足规范
 /// - 终止性
@@ -3288,13 +3288,13 @@ pub fn complex_algorithm(input: &[i32]) -> Vec<i32> {
 
 | 资源 | 链接 | 描述 |
 |------|------|------|
-| **Kani 文档** | https://model-checking.github.io/kani/ | 完整的 Kani 用户指南 |
-| **Kani GitHub** | https://github.com/model-checking/kani | 源码和问题跟踪 |
-| **Aeneas 文档** | https://aeneasverif.github.io/aeneas/ | Aeneas 官方文档 |
-| **Aeneas GitHub** | https://github.com/AeneasVerif/aeneas | 源码和示例 |
-| **Charon GitHub** | https://github.com/AeneasVerif/charon | Rust 到 LLBC 转换器 |
-| **Miri 文档** | https://github.com/rust-lang/miri | Miri README 和文档 |
-| **Rust 不安全指南** | https://doc.rust-lang.org/nomicon/ | Rust 不安全代码指南 |
+| **Kani 文档** | <https://model-checking.github.io/kani/> | 完整的 Kani 用户指南 |
+| **Kani GitHub** | <https://github.com/model-checking/kani> | 源码和问题跟踪 |
+| **Aeneas 文档** | <https://aeneasverif.github.io/aeneas/> | Aeneas 官方文档 |
+| **Aeneas GitHub** | <https://github.com/AeneasVerif/aeneas> | 源码和示例 |
+| **Charon GitHub** | <https://github.com/AeneasVerif/charon> | Rust 到 LLBC 转换器 |
+| **Miri 文档** | <https://github.com/rust-lang/miri> | Miri README 和文档 |
+| **Rust 不安全指南** | <https://doc.rust-lang.org/nomicon/> | Rust 不安全代码指南 |
 
 ### 7.2 学术论文
 
@@ -3312,9 +3312,9 @@ pub fn complex_algorithm(input: &[i32]) -> Vec<i32> {
 
 ### 7.3 社区资源
 
-- **Rust 形式化方法工作组**: https://rust-formal-methods.github.io/
-- **Rust 安全工作组**: https://www.rust-lang.org/governance/wg-secure-code
-- **Zulip 讨论**: https://rust-lang.zulipchat.com/#narrow/stream/269128-miri
+- **Rust 形式化方法工作组**: <https://rust-formal-methods.github.io/>
+- **Rust 安全工作组**: <https://www.rust-lang.org/governance/wg-secure-code>
+- **Zulip 讨论**: <https://rust-lang.zulipchat.com/#narrow/stream/269128-miri>
 
 ### 7.4 示例项目
 
@@ -3387,9 +3387,9 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
 ---
 
-> **文档版本**: 1.0.0  
-> **最后更新**: 2026-02-28  
-> **维护者**: Rust 形式化验证研究组  
+> **文档版本**: 1.0.0
+> **最后更新**: 2026-02-28
+> **维护者**: Rust 形式化验证研究组
 > **反馈**: 欢迎通过 issue 提交改进建议
 
 ---

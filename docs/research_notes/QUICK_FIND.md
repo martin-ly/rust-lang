@@ -217,7 +217,7 @@
 
 ### 我想看批判性意见与改进计划
 
-- **批判性分析与可持续改进计划** → [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)  
+- **批判性分析与可持续改进计划** → [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)
   （概念定义/属性关系/解释论证/多维矩阵/层次化/思维表征 缺口；建议 P0–P3；四阶段可持续推进任务与计划）
 - **层次化映射总结** → [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)（文档树、概念族↔文档↔Def/定理、文档↔思维表征、文档依赖）
 

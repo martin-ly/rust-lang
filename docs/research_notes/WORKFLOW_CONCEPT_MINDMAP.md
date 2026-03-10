@@ -1,7 +1,7 @@
 # 工作流引擎概念族谱
 
-> **创建日期**: 2026-03-08  
-> **版本**: v1.0  
+> **创建日期**: 2026-03-08
+> **版本**: v1.0
 > **描述**: 工作流引擎核心概念的完整族谱
 
 ---
@@ -86,21 +86,25 @@ mindmap
 ## 🌿 概念层次结构
 
 ### Level 1: 基础模型
+
 - 状态机 (State Machine)
 - 流程定义 (Workflow Definition)
 - 流程实例 (Instance)
 
 ### Level 2: 控制结构
+
 - 任务 (Task)
 - 网关 (Gateway)
 - 事件 (Event)
 
 ### Level 3: 事务管理
+
 - 补偿 (Compensation)
 - 长事务 (LRT)
 - 持久化 (Persistence)
 
 ### Level 4: 高级特性
+
 - 子流程 (Sub-process)
 - 动态流程
 - 分布式工作流

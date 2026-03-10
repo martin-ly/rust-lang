@@ -2,7 +2,9 @@
 
 > "Macros are the ultimate metaprogramming tool in Rust, allowing you to extend the language itself."
 
-Procedural macros (proc macros) are one of Rust's most powerful metaprogramming features. Unlike declarative macros (`macro_rules!`), proc macros operate on the Abstract Syntax Tree (AST) and can perform arbitrary transformations. This chapter provides a comprehensive deep dive into proc macro architecture, implementation patterns, common pitfalls, and best practices.
+Procedural macros (proc macros) are one of Rust's most powerful metaprogramming features.
+Unlike declarative macros (`macro_rules!`), proc macros operate on the Abstract Syntax Tree (AST) and can perform arbitrary transformations.
+This chapter provides a comprehensive deep dive into proc macro architecture, implementation patterns, common pitfalls, and best practices.
 
 ## 8.4.1 Proc Macro Architecture
 

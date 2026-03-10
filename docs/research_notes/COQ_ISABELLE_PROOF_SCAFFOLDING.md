@@ -22,8 +22,8 @@ Inductive Ownership :=
 
 (* 所有权转移 *)
 Inductive transfer_ownership (v: variable) (o: Ownership) : Prop :=
-  | transfer: forall new_owner, 
-      o = Owned v -> 
+  | transfer: forall new_owner,
+      o = Owned v ->
       transfer_ownership v (Owned new_owner).
 ```
 
@@ -32,7 +32,7 @@ Inductive transfer_ownership (v: variable) (o: Ownership) : Prop :=
 ```coq
 (* 借用有效性 *)
 Inductive valid_borrow (r: reference) (ctx: context) : Prop :=
-  | valid_mut_borrow: 
+  | valid_mut_borrow:
       mutability r = Mutable ->
       no_other_borrows r ctx ->
       valid_borrow r ctx
@@ -52,7 +52,7 @@ theory Rust_Type_System
 begin
 
 (* 类型定义 *)
-datatype 'a rust_type = 
+datatype 'a rust_type =
   Owned 'a |
   Shared 'a |
   Mutable 'a
