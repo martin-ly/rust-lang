@@ -212,7 +212,7 @@ let config: Config = Config::zeroed();
 
 **与Pod的关系**：
 
-```
+```text
 所有Pod类型都是Zeroable
 但不是所有Zeroable都是Pod
 
