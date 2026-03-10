@@ -15,7 +15,8 @@
 本项目现已采用 **Tier 1-4 分层架构**，提供从入门到精通的系统化学习路径：
 
 | Tier                                      | 名称       | 定位     | 适合      | 时间  |
-| :--- | :--- | :--- | :--- | :--- || **[Tier 1](./docs/tier_01_foundations/README.md)** | 基础文档层 | 快速入门 | 🆕 新手   | 2-4h  |
+| :--- | :--- | :--- | :--- | :--- |
+| **[Tier 1](./docs/tier_01_foundations/README.md)** | 基础文档层 | 快速入门 | 🆕 新手   | 2-4h  |
 | **[Tier 2](./docs/tier_02_guides/README.md)** | 核心概念层 | 系统掌握 | 💼 开发者 | 2-3天 |
 | **[Tier 3](./docs/tier_03_references/README.md)**  | 高级应用层 | 深入实践 | 🏗️ 架构师 | 1-2周 |
 | **[Tier 4](./docs/tier_04_advanced/README.md)**   | 理论深化层 | 学术研究 | 🔬 研究者 | 持续  |
@@ -683,9 +684,9 @@ cargo test --example rust_190_rich_practical_examples
 
 ### 知识结构体系
 
-- **[知识结构框架](../../docs/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
-- **[多维概念矩阵](../../docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** ⭐ NEW! - 所有权系统对比矩阵
-- **[思维导图集合](../../docs/MIND_MAP_COLLECTION.md)** ⭐ NEW! - 所有权系统思维导图
+- **[知识结构框架](../../docs/07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)** ⭐ NEW! - 完整知识结构体系（概念定义、属性、关系、解释、证明）
+- **[多维概念矩阵](../../docs/02_reference/CROSS_LANGUAGE_COMPARISON.md)** ⭐ NEW! - 所有权系统对比矩阵
+- **[速查卡目录](../../docs/02_reference/quick_reference/README.md)** ⭐ NEW! - 所有权系统速查卡
 - **[决策图网](../../docs/04_thinking/DECISION_GRAPH_NETWORK.md)** - 技术选型决策支持
 - **[证明图网](../../docs/04_thinking/PROOF_GRAPH_NETWORK.md)** - 形式化证明结构
 
