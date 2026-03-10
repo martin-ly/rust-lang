@@ -40,7 +40,7 @@
 **标准格式**:
 
 ```markdown
-> **快速参考** | [完整文档](../../../crates/xxx/docs/) | [代码示例](../../../crates/xxx/examples/)
+> **快速参考** | [完整文档](../crates/c01_ownership_borrow_scope/docs/README.md) | [代码示例](../crates/c01_ownership_borrow_scope/examples/README.md)
 > **创建日期**: YYYY-MM-DD
 > **最后更新**: YYYY-MM-DD
 > **Rust 版本**: 1.94.0+ (Edition 2024)

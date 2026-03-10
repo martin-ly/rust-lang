@@ -1,13 +1,13 @@
 # Markdown 内部链接检查报告
 
-**扫描时间:** 2026-03-10 14:02:11
+**扫描时间:** 2026-03-10 14:07:27
 
 ## 统计信息
 
 - **总检查文件数:** 1267
-- **总检查链接数:** 8118
-- **有效链接数:** 7623
-- **断链数量:** 495
+- **总检查链接数:** 8106
+- **有效链接数:** 7631
+- **断链数量:** 475
 
 ## 断链详情（按文件分组）
 
@@ -3586,142 +3586,16 @@ Files that mention key concepts but don't link to them:
 
 ### `rust-ownership-decidability/MASTER_INDEX_AUTO.md`
 
-- **链接文本:** `formal-foundations/models/`
-  - **链接目标:** `formal-foundations/models/`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\formal-foundations\models`
+- **链接文本:** `formal-foundations/semantics/README.md`
+  - **链接目标:** `formal-foundations/semantics/README.md`
+  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\formal-foundations\semantics\README.md`
   - **修复建议:**
     - 相似文件:
-  - - `research_notes/TUTORIAL_CONCURRENCY_MODELS.md`
-  - - `rust-ownership-decidability/comprehensive-analysis/architecture-models-comparison.md`
-  - - `rust-ownership-decidability/progress/2026-03-07_SEMANTIC_MODELS_COMPLETION_REPORT.md`
-
-- **链接文本:** `formal-foundations/semantics/`
-  - **链接目标:** `formal-foundations/semantics/`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\formal-foundations\semantics`
-  - **修复建议:**
-    - 相似文件:
-  - - `research_notes/EXECUTABLE_SEMANTICS_ROADMAP.md`
-  - - `research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md`
-  - - `Rust所有权与可判定性/rust_ownership_semantics_complete_analysis.md`
-
-- **链接文本:** `formal-foundations/proofs/`
-  - **链接目标:** `formal-foundations/proofs/`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\formal-foundations\proofs`
-  - **修复建议:**
-    - 相似文件:
-  - - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`
-  - - `research_notes/FORMAL_LANGUAGE_AND_PROOFS.md`
-  - - `Rust所有权与可判定性/guides/complete-formal-proofs.md`
-
-- **链接文本:** `coq-formalization/`
-  - **链接目标:** `coq-formalization/`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\coq-formalization`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `ownership-types.md`
-  - **链接目标:** `formal-foundations/models/ownership-types.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\formal-foundations\models\ownership-types.md`
-  - **修复建议:**
-    - 相似文件:
-  - - `rust-ownership-decidability/formal-foundations/models/02-02-ownership-types.md`
-
-- **链接文本:** `borrow-semantics.md`
-  - **链接目标:** `formal-foundations/models/borrow-semantics.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\formal-foundations\models\borrow-semantics.md`
-  - **修复建议:**
-    - 相似文件:
-  - - `rust-ownership-decidability/formal-foundations/models/02-03-borrow-semantics.md`
-
-- **链接文本:** `lifetime-logic.md`
-  - **链接目标:** `formal-foundations/models/lifetime-logic.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\formal-foundations\models\lifetime-logic.md`
-  - **修复建议:**
-    - 相似文件:
-  - - `rust-ownership-decidability/formal-foundations/models/02-04-lifetime-logic.md`
+  - - `README.md`
+  - - `01_learning/README.md`
+  - - `02_reference/README.md`
 
 ### `rust-ownership-decidability/case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md`
-
-- **链接文本:** `Web 开发指南`
-  - **链接目标:** `web-development.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\web-development.md`
-  - **修复建议:**
-    - 相似文件:
-  - - `rust-ownership-decidability/15-application-domains/web-development.md`
-
-- **链接文本:** `Burn 框架`
-  - **链接目标:** `burn-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\burn-formal-analysis.md`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `Candle 框架`
-  - **链接目标:** `candle-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\candle-formal-analysis.md`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `Substrate 分析`
-  - **链接目标:** `substrate-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\substrate-formal-analysis.md`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `kube 客户端`
-  - **链接目标:** `kube-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\kube-formal-analysis.md`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `ring 加密库`
-  - **链接目标:** `ring-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\ring-formal-analysis.md`
-  - **修复建议:**
-    - 相似文件:
-  - - `rust-ownership-decidability/case-studies/std-string-formal-analysis.md`
-
-- **链接文本:** `burn-formal-analysis.md`
-  - **链接目标:** `ml-ai/burn-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\ml-ai\burn-formal-analysis.md`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `candle-formal-analysis.md`
-  - **链接目标:** `ml-ai/candle-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\ml-ai\candle-formal-analysis.md`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `polars-formal-analysis.md`
-  - **链接目标:** `database/polars-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\database\polars-formal-analysis.md`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `substrate-formal-analysis.md`
-  - **链接目标:** `blockchain/substrate-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\blockchain\substrate-formal-analysis.md`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `kube-formal-analysis.md`
-  - **链接目标:** `cloud/kube-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\cloud\kube-formal-analysis.md`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `linkerd-formal-analysis.md`
-  - **链接目标:** `cloud/linkerd-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\cloud\linkerd-formal-analysis.md`
-  - **修复建议:**
-    - 文件不存在，请检查路径是否正确或创建该文件
-
-- **链接文本:** `ring-formal-analysis.md`
-  - **链接目标:** `security/ring-formal-analysis.md`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\case-studies\security\ring-formal-analysis.md`
-  - **修复建议:**
-    - 相似文件:
-  - - `rust-ownership-decidability/case-studies/std-string-formal-analysis.md`
 
 - **链接文本:** `形式化基础`
   - **链接目标:** `../../formal-foundations/README.md`
@@ -3754,23 +3628,14 @@ Files that mention key concepts but don't link to them:
 
 ### `rust-ownership-decidability/formal-foundations/proofs/README.md`
 
-- **链接文本:** `形式化模型`
-  - **链接目标:** `../models/`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\formal-foundations\models`
-  - **修复建议:**
-    - 可能的正确路径:
-  - - `research_notes/TUTORIAL_CONCURRENCY_MODELS.md`
-  - - `rust-ownership-decidability/comprehensive-analysis/architecture-models-comparison.md`
-  - - `rust-ownership-decidability/progress/2026-03-07_SEMANTIC_MODELS_COMPLETION_REPORT.md`
-
 - **链接文本:** `语义定义`
-  - **链接目标:** `../semantics/`
-  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\formal-foundations\semantics`
+  - **链接目标:** `../semantics/README.md`
+  - **解析路径:** `E:\_src\rust-lang\docs\rust-ownership-decidability\formal-foundations\semantics\README.md`
   - **修复建议:**
     - 可能的正确路径:
-  - - `research_notes/EXECUTABLE_SEMANTICS_ROADMAP.md`
-  - - `research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md`
-  - - `Rust所有权与可判定性/rust_ownership_semantics_complete_analysis.md`
+  - - `README.md`
+  - - `01_learning/README.md`
+  - - `02_reference/README.md`
 
 ## 修复建议汇总
 

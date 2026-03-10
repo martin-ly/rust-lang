@@ -338,8 +338,8 @@ cargo fix --edition --edition-idioms
 
 ### 代码示例
 
-- [c01 Rust 1.94 特性](../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
-- [c02 Rust 1.94 特性](../crates/c02_type_system/src/rust_194_features.rs)
+- [c01 Rust 1.94 特性](../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
+- [c02 Rust 1.94 特性](../../crates/c02_type_system/src/rust_194_features.rs)
 
 ---
 

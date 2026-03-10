@@ -21,7 +21,7 @@
 | **05_guides 专题指南** | 异步/线程/设计模式/宏/WASM/Unsafe 等如何实践 | 每专题有完整使用指南与最佳实践 | [ASYNC_PROGRAMMING_USAGE_GUIDE](05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)、[THREADS_CONCURRENCY_USAGE_GUIDE](05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md)、[DESIGN_PATTERNS_USAGE_GUIDE](05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md)、[BEST_PRACTICES](05_guides/BEST_PRACTICES.md) 等 |
 | **06_toolchain 工具链与版本** | 编译器/Cargo/rustdoc、1.89–1.93 版本演进 | 版本变更可追溯、兼容性可判定 | [00_rust_2024_edition_learning_impact](06_toolchain/00_rust_2024_edition_learning_impact.md)、[08_rust_version_evolution](06_toolchain/08_rust_version_evolution_1.89_to_1.93.md)、[09_rust_1.93_compatibility_deep_dive](06_toolchain/09_rust_1.93_compatibility_deep_dive.md) |
 | **07_project 项目元文档** | 知识结构、版本追踪、文档交叉引用 | 结构可维护、任务可追踪 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)、[TASK_INDEX](07_project/TASK_INDEX.md)、[MODULE_1.93_ADAPTATION_STATUS](07_project/MODULE_1.93_ADAPTATION_STATUS.md) |
-| **archive 归档** | 过程性报告、历史版本文档 | 历史可查、主目录简洁 | [archive/README](archive/README.md)、[archive/process_reports](archive/process_reports/)、[archive/version_reports](archive/version_reports/) |
+| **archive 归档** | 过程性报告、历史版本文档 | 历史可查、主目录简洁 | [archive/README](archive/README.md)、[archive/process_reports](archive/process_reports/README.md)、[archive/version_reports](archive/version_reports/README.md) |
 | **rust-formal-engineering-system** | 形式化工程系统索引（映射到 research_notes） | 索引层统一入口 | [00_master_index](rust-formal-engineering-system/00_master_index.md) |
 
 ---
@@ -153,7 +153,7 @@
 | :--- | :--- | :--- |
 | **元信息** | 创建日期、最后更新、Rust 版本、状态、用途 | [QUALITY_CHECKLIST](research_notes/QUALITY_CHECKLIST.md)、[FORMAT_AND_CONTENT_ALIGNMENT_PLAN](archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) |
 | **表格风格** | 左对齐 `:---`，列名清晰 | 00_COMPREHENSIVE_SUMMARY、本文件 |
-| **链接风格** | `[文本](相对路径)` 相对 docs 根或当前目录 | 全库 |
+| **链接风格** | `文本`(相对路径)`` 相对 docs 根或当前目录 | 全库 |
 | **标题层级** | 一级不含 emoji；二级可选；目录块统一 | FORMAT_AND_CONTENT_ALIGNMENT_PLAN § F1.3 |
 | **文末块** | 核心文档含「维护者」「最后更新」「状态」 | MAINTENANCE_GUIDE |
 

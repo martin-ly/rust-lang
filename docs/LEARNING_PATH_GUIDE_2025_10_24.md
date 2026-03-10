@@ -35,8 +35,8 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 
 ## 📚 关键资源
 
-- [QUICK_REFERENCE](../QUICK_REFERENCE.md)
-- [crates/c01_ownership_borrow_scope](../crates/c01_ownership_borrow_scope/)
+- [QUICK_REFERENCE](./research_notes/QUICK_REFERENCE.md)
+- [crates/c01_ownership_borrow_scope](../crates/c01_ownership_borrow_scope/README.md)
 
 ---
 

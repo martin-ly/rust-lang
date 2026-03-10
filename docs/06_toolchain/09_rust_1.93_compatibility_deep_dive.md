@@ -29,7 +29,7 @@
   - [#\[test\] 属性严格化](#test-属性严格化)
   - [offset\_of! 类型检查](#offset_of-类型检查)
   - [deref\_nullptr deny-by-default](#deref_nullptr-deny-by-default)
-  - [... 可变参数 future-incompat ](#-可变参数-future-incompat--可变参数-future-incompat)
+  - [... 可变参数 future-incompat](#-可变参数-future-incompat)
   - [repr(C) enum 判别值警告](#reprc-enum-判别值警告)
   - [repr(transparent) 忽略 repr(C) 警告](#reprtransparent-忽略-reprc-警告)
   - [相关文档](#相关文档)
@@ -185,7 +185,7 @@ fn legacy_code() { ... }
 
 ---
 
-## ... 可变参数 future-incompat 
+## ... 可变参数 future-incompat
 
 **变更**：在 `extern` 块外使用 `...` 作为函数参数且无模式，将产生 **future-incompatibility** 警告。
 

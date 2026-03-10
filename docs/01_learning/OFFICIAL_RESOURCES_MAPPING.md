@@ -234,8 +234,8 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 22.1 Keywords | 关键字列表 | [QUICK_REFERENCE](../QUICK_REFERENCE.md) | 快速参考 |
-| 22.2 Operators and Symbols | 运算符 | [QUICK_REFERENCE](../QUICK_REFERENCE.md) | 运算符优先级 |
+| 22.1 Keywords | 关键字列表 | [QUICK_REFERENCE](../research_notes/QUICK_REFERENCE.md) | 快速参考 |
+| 22.2 Operators and Symbols | 运算符 | [QUICK_REFERENCE](../research_notes/QUICK_REFERENCE.md) | 运算符优先级 |
 | 22.3 Derivable Traits | 可派生 Trait | [type_system](../02_reference/quick_reference/type_system.md) § Derive | 自定义 derive |
 | 22.4 Useful Development Tools | 开发工具 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) § 工具 | 完整工具链 |
 | 22.5 Editions | Edition 差异 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) | 迁移指南 |
@@ -247,7 +247,7 @@
 
 | 章节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| **2. Lexical Structure** | 词法结构 | [QUICK_REFERENCE](../QUICK_REFERENCE.md) § 语法 | 快速参考 |
+| **2. Lexical Structure** | 词法结构 | [QUICK_REFERENCE](../research_notes/QUICK_REFERENCE.md) § 语法 | 快速参考 |
 | **3. Macros** | 宏系统 | [macros_cheatsheet](../02_reference/quick_reference/macros_cheatsheet.md) | 宏决策树 |
 | **6. Items** | 所有 Item 类型 | 各 crate 源码示例 | 实战示例 |
 | **8. Statements and Expressions** | 语句与表达式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | 控制流决策树 |

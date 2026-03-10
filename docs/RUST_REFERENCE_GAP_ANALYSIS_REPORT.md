@@ -68,7 +68,7 @@
 
 **已有内容**:
 
-- `docs/05_guides/UNSAFE_RUST_GUIDE.md` §5: 基础示例（约30行）
+- `./05_guides/UNSAFE_RUST_GUIDE.md` §5: 基础示例（约30行）
   - `rdtsc` 指令读取时间戳计数器
   - `mfence` 内存屏障
 - 工具链文档: Rust 1.93 `asm_cfg` 特性说明
@@ -136,7 +136,7 @@ fn read_tsc() -> u64 {
 ### 建议补充文档结构
 
 ```text
-docs/05_guides/INLINE_ASSEMBLY_GUIDE.md (新增)
+./05_guides/INLINE_ASSEMBLY_GUIDE.md (新增)
 ├── 1. 基础语法
 │   ├── asm! 宏
 │   └── global_asm!
@@ -173,7 +173,7 @@ docs/05_guides/INLINE_ASSEMBLY_GUIDE.md (新增)
 
 **已有内容**:
 
-- `docs/05_guides/FFI_PRACTICAL_GUIDE.md`: **2620行** 综合指南
+- `./05_guides/FFI_PRACTICAL_GUIDE.md`: **2620行** 综合指南
   - bindgen: C → Rust 绑定生成
   - cbindgen: Rust → C 头文件生成
   - wasm-bindgen: Rust → JS/WASM
@@ -276,7 +276,7 @@ extern "wasm"       // WebAssembly
 
 **已有内容**:
 
-- `docs/research_notes/type_theory/advanced_types.md`:
+- `./research_notes/type_theory/advanced_types.md`:
   - `CONST-EVAL1` 定义: const 表达式求值失败
   - `CONST-EVAL-T1` 定理: const 求值失败即类型错误
   - const 泛型形式化定义
@@ -328,7 +328,7 @@ const 表达式 $e$ 在 const 上下文中求值失败时，
 
 ### 建议补充内容3
 
-在 `docs/research_notes/type_theory/` 下扩展：
+在 `./research_notes/type_theory/` 下扩展：
 
 ```text
 const_evaluation.md (新增)
@@ -357,11 +357,11 @@ const_evaluation.md (新增)
 
 **已有内容**:
 
-- `docs/05_guides/MACRO_SYSTEM_USAGE_GUIDE.md`:
+- `./05_guides/MACRO_SYSTEM_USAGE_GUIDE.md`:
   - "陷阱 1: 卫生性问题 (Hygiene)"（约20行）
   - 简单示例和解决方案
 
-- `docs/research_notes/MACROS_CHEATSHEET.md`:
+- `./research_notes/MACROS_CHEATSHEET.md`:
 
   ```rust
   macro_rules! using_a {
@@ -370,7 +370,7 @@ const_evaluation.md (新增)
   let four = using_a!(a / 10);  // 错误! a在宏外不可见
   ```
 
-- `docs/research_notes/formal_methods/MACRO_SYSTEM_MINDMAP.md`:
+- `./research_notes/formal_methods/MACRO_SYSTEM_MINDMAP.md`:
   - 提到"标识符隔离"、"避免捕获"
 
 - `docs/TERMINOLOGY_STANDARD.md`:
@@ -410,7 +410,7 @@ const_evaluation.md (新增)
 
 ### 建议补充内容1
 
-扩展 `docs/research_notes/formal_methods/MACRO_SYSTEM_MINDMAP.md` 或新增 `macro_hygiene.md`:
+扩展 `./research_notes/formal_methods/MACRO_SYSTEM_MINDMAP.md` 或新增 `macro_hygiene.md`:
 
 ```markdown
 ## 宏卫生性深入
@@ -487,10 +487,10 @@ const_evaluation.md (新增)
 
 ### 项目内部文档
 
-- [FFI 实战指南](docs/05_guides/FFI_PRACTICAL_GUIDE.md)
-- [Unsafe Rust 指南](docs/05_guides/UNSAFE_RUST_GUIDE.md)
-- [宏系统使用指南](docs/05_guides/MACRO_SYSTEM_USAGE_GUIDE.md)
-- [类型理论 - 高级类型](docs/research_notes/type_theory/advanced_types.md)
+- [FFI 实战指南](./05_guides/FFI_PRACTICAL_GUIDE.md)
+- [Unsafe Rust 指南](./05_guides/UNSAFE_RUST_GUIDE.md)
+- [宏系统使用指南](./05_guides/MACRO_SYSTEM_USAGE_GUIDE.md)
+- [类型理论 - 高级类型](./research_notes/type_theory/advanced_types.md)
 
 ---
 

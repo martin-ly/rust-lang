@@ -1,9 +1,9 @@
 {
-  "scan_time": "2026-03-10T14:02:11.430055",
+  "scan_time": "2026-03-10T14:07:27.141222",
   "total_files": 1267,
-  "total_links": 8118,
-  "valid_links": 7623,
-  "broken_links": 495,
+  "total_links": 8106,
+  "valid_links": 7631,
+  "broken_links": 475,
   "broken_by_file": {
     "DOCS_STRUCTURE_OVERVIEW.md": [
       {
@@ -1151,46 +1151,10 @@
     ],
     "rust-ownership-decidability/MASTER_INDEX_AUTO.md": [
       {
-        "link_text": "formal-foundations/models/",
-        "link_target": "formal-foundations/models/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\formal-foundations\\models",
-        "suggestion": "相似文件:\n  - `research_notes/TUTORIAL_CONCURRENCY_MODELS.md`\n  - `rust-ownership-decidability/comprehensive-analysis/architecture-models-comparison.md`\n  - `rust-ownership-decidability/progress/2026-03-07_SEMANTIC_MODELS_COMPLETION_REPORT.md`"
-      },
-      {
-        "link_text": "formal-foundations/semantics/",
-        "link_target": "formal-foundations/semantics/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\formal-foundations\\semantics",
-        "suggestion": "相似文件:\n  - `research_notes/EXECUTABLE_SEMANTICS_ROADMAP.md`\n  - `research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md`\n  - `Rust所有权与可判定性/rust_ownership_semantics_complete_analysis.md`"
-      },
-      {
-        "link_text": "formal-foundations/proofs/",
-        "link_target": "formal-foundations/proofs/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\formal-foundations\\proofs",
-        "suggestion": "相似文件:\n  - `research_notes/CORE_THEOREMS_FULL_PROOFS.md`\n  - `research_notes/FORMAL_LANGUAGE_AND_PROOFS.md`\n  - `Rust所有权与可判定性/guides/complete-formal-proofs.md`"
-      },
-      {
-        "link_text": "coq-formalization/",
-        "link_target": "coq-formalization/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\coq-formalization",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "ownership-types.md",
-        "link_target": "formal-foundations/models/ownership-types.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\formal-foundations\\models\\ownership-types.md",
-        "suggestion": "相似文件:\n  - `rust-ownership-decidability/formal-foundations/models/02-02-ownership-types.md`"
-      },
-      {
-        "link_text": "borrow-semantics.md",
-        "link_target": "formal-foundations/models/borrow-semantics.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\formal-foundations\\models\\borrow-semantics.md",
-        "suggestion": "相似文件:\n  - `rust-ownership-decidability/formal-foundations/models/02-03-borrow-semantics.md`"
-      },
-      {
-        "link_text": "lifetime-logic.md",
-        "link_target": "formal-foundations/models/lifetime-logic.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\formal-foundations\\models\\lifetime-logic.md",
-        "suggestion": "相似文件:\n  - `rust-ownership-decidability/formal-foundations/models/02-04-lifetime-logic.md`"
+        "link_text": "formal-foundations/semantics/README.md",
+        "link_target": "formal-foundations/semantics/README.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\formal-foundations\\semantics\\README.md",
+        "suggestion": "相似文件:\n  - `README.md`\n  - `01_learning/README.md`\n  - `02_reference/README.md`"
       }
     ],
     "Rust所有权与可判定性/rust_go_cpp_c_comprehensive_comparison.md": [
@@ -1341,84 +1305,6 @@
     ],
     "rust-ownership-decidability/case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md": [
       {
-        "link_text": "Web 开发指南",
-        "link_target": "web-development.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\web-development.md",
-        "suggestion": "相似文件:\n  - `rust-ownership-decidability/15-application-domains/web-development.md`"
-      },
-      {
-        "link_text": "Burn 框架",
-        "link_target": "burn-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\burn-formal-analysis.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "Candle 框架",
-        "link_target": "candle-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\candle-formal-analysis.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "Substrate 分析",
-        "link_target": "substrate-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\substrate-formal-analysis.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "kube 客户端",
-        "link_target": "kube-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\kube-formal-analysis.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "ring 加密库",
-        "link_target": "ring-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\ring-formal-analysis.md",
-        "suggestion": "相似文件:\n  - `rust-ownership-decidability/case-studies/std-string-formal-analysis.md`"
-      },
-      {
-        "link_text": "burn-formal-analysis.md",
-        "link_target": "ml-ai/burn-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\ml-ai\\burn-formal-analysis.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "candle-formal-analysis.md",
-        "link_target": "ml-ai/candle-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\ml-ai\\candle-formal-analysis.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "polars-formal-analysis.md",
-        "link_target": "database/polars-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\database\\polars-formal-analysis.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "substrate-formal-analysis.md",
-        "link_target": "blockchain/substrate-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\blockchain\\substrate-formal-analysis.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "kube-formal-analysis.md",
-        "link_target": "cloud/kube-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\cloud\\kube-formal-analysis.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "linkerd-formal-analysis.md",
-        "link_target": "cloud/linkerd-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\cloud\\linkerd-formal-analysis.md",
-        "suggestion": "文件不存在，请检查路径是否正确或创建该文件"
-      },
-      {
-        "link_text": "ring-formal-analysis.md",
-        "link_target": "security/ring-formal-analysis.md",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\case-studies\\security\\ring-formal-analysis.md",
-        "suggestion": "相似文件:\n  - `rust-ownership-decidability/case-studies/std-string-formal-analysis.md`"
-      },
-      {
         "link_text": "形式化基础",
         "link_target": "../../formal-foundations/README.md",
         "resolved_path": "E:\\_src\\rust-lang\\docs\\formal-foundations\\README.md",
@@ -1441,16 +1327,10 @@
     ],
     "rust-ownership-decidability/formal-foundations/proofs/README.md": [
       {
-        "link_text": "形式化模型",
-        "link_target": "../models/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\formal-foundations\\models",
-        "suggestion": "可能的正确路径:\n  - `research_notes/TUTORIAL_CONCURRENCY_MODELS.md`\n  - `rust-ownership-decidability/comprehensive-analysis/architecture-models-comparison.md`\n  - `rust-ownership-decidability/progress/2026-03-07_SEMANTIC_MODELS_COMPLETION_REPORT.md`"
-      },
-      {
         "link_text": "语义定义",
-        "link_target": "../semantics/",
-        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\formal-foundations\\semantics",
-        "suggestion": "可能的正确路径:\n  - `research_notes/EXECUTABLE_SEMANTICS_ROADMAP.md`\n  - `research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md`\n  - `Rust所有权与可判定性/rust_ownership_semantics_complete_analysis.md`"
+        "link_target": "../semantics/README.md",
+        "resolved_path": "E:\\_src\\rust-lang\\docs\\rust-ownership-decidability\\formal-foundations\\semantics\\README.md",
+        "suggestion": "可能的正确路径:\n  - `README.md`\n  - `01_learning/README.md`\n  - `02_reference/README.md`"
       }
     ],
     "rust-ownership-decidability/16-program-semantics/04-verification/README.md": [

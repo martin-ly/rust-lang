@@ -51,8 +51,8 @@ We have successfully completed all **24 core tasks**, achieving **100% completio
 
 | Resource                              | Description                                               | Quick Link                                                                        |
 | :--- | :--- | :--- |
-| **🎓 International Alignment Report** | Alignment with top universities, Rust 1.90, formal theory | [View Report](./COMPREHENSIVE_UNIVERSITY_ALIGNMENT_REPORT_2025.md) ⭐⭐⭐         |
-| **📊 Alignment Executive Summary**    | Quick understanding of international level comparison     | [View Summary](./UNIVERSITY_ALIGNMENT_EXECUTIVE_SUMMARY.md) ⭐⭐⭐                |
+| **🎓 Rust 1.94 Crates Update Report** | Rust 1.94 crates documentation update report | [View Report](./RUST_194_CRATES_UPDATE_REPORT.md) ⭐⭐⭐         |
+| **📊 Cross Reference Verification**    | Cross reference verification report for all documentation     | [View Report](./CROSS_REFERENCE_VERIFICATION_REPORT.md) ⭐⭐⭐                |
 | **⚡ Quick Start**                    | Get started with guides                                  | [Start Now](./guides/README.md) ⭐                                                 |
 | **🔍 Smart Document Search**          | Full-text search tool                                     | [Use Search](./tools/doc_search/README.md) ⭐                                     |
 | **🎓 Learning Guides**                 | Guides, exercises, AI assistance                          | [Browse](./guides/README.md) ⭐                                                    |

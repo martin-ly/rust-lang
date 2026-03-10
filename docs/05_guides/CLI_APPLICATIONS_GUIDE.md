@@ -171,7 +171,7 @@ fn main() {
 }
 ```
 
-### 5. 错误处理最佳实践 
+### 5. 错误处理最佳实践
 
 ```rust
 use thiserror::Error;

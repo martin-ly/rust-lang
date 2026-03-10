@@ -7,11 +7,11 @@
 
 ---
 
-## 📊 目录 
+## 📊 目录
 
 - [Rust 编译器特性与优化](#rust-编译器特性与优化)
-  - [📊 目录 ](#-目录--目录)
-  - [🎯 文档说明 ](#-文档说明--文档说明)
+  - [📊 目录](#-目录)
+  - [🎯 文档说明](#-文档说明)
   - [1. 编译器概览](#1-编译器概览)
     - [1.1 编译流程](#11-编译流程)
     - [1.2 编译器版本](#12-编译器版本)
@@ -63,12 +63,12 @@
     - [15.4 LTO 的形式化分析](#154-lto-的形式化分析)
     - [15.5 PGO 的形式化模型](#155-pgo-的形式化模型)
   - [16. 相关资源](#16-相关资源)
-    - [📚 官方文档 ](#-官方文档--官方文档)
-    - [🔗 相关文档 ](#-相关文档--相关文档)
+    - [📚 官方文档](#-官方文档)
+    - [🔗 相关文档](#-相关文档)
     - [🔗 形式化理论文档](#-形式化理论文档)
-    - [📦 推荐工具 ](#-推荐工具--推荐工具)
+    - [📦 推荐工具](#-推荐工具)
 
-## 🎯 文档说明 
+## 🎯 文档说明
 
 本文档涵盖 Rust 编译器 (`rustc`) 的核心特性、优化技术和最新改进，帮助开发者更好地理解和利用编译器功能。
 
@@ -1065,13 +1065,13 @@ fn pgo_workflow() {
 
 ## 16. 相关资源
 
-### 📚 官方文档 
+### 📚 官方文档
 
 - [Rustc Book](https://doc.rust-lang.org/rustc/)
 - [Cargo Book - Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html)
 - [LLVM Documentation](https://llvm.org/docs/)
 
-### 🔗 相关文档 
+### 🔗 相关文档
 
 - [02_cargo_workspace_guide.md](./02_cargo_workspace_guide.md)
 - [03_rustdoc_advanced.md](./03_rustdoc_advanced.md)
@@ -1083,7 +1083,7 @@ fn pgo_workflow() {
 - [类型系统基础](../research_notes/type_theory/type_system_foundations.md)
 - [生命周期形式化](../research_notes/formal_methods/lifetime_formalization.md)
 
-### 📦 推荐工具 
+### 📦 推荐工具
 
 - **sccache**: 编译缓存
 - **cargo-bloat**: 分析二进制大小

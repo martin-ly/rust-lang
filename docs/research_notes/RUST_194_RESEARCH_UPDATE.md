@@ -203,7 +203,7 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 
 ### 内部代码
 
-- [Rust 1.94 特性示例](../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
+- [Rust 1.94 特性示例](../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
 
 ### 项目文档
 

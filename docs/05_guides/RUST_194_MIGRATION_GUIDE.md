@@ -433,7 +433,7 @@ rust-version = "1.94"
 
 ### 代码示例
 
-- [Rust 1.94 特性示例](../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
+- [Rust 1.94 特性示例](../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
 
 ---
 
