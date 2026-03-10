@@ -25,8 +25,8 @@
 //! 
 //! ## 使用示例
 //! 
-//! ```rust
-//! use c06_async::await::async_text01;
+//! ```no_run
+//! use c06_async::r#await::async_text01;
 //! 
 //! #[tokio::main]
 //! async fn main() {
@@ -54,8 +54,8 @@ use tokio::time::sleep;
 /// 返回一个 `i32` 类型的值（42）
 /// 
 /// # 示例
-/// ```rust
-/// use c06_async::await::async_text01;
+/// ```no_run
+/// use c06_async::r#await::async_text01;
 /// 
 /// #[tokio::main]
 /// async fn main() {

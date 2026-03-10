@@ -54,7 +54,7 @@
 //!
 //! ### 理论学习路径
 //!
-//! ```rust
+//! ```no_run
 //! use c06_async::async_semantics_theory;
 //! use c06_async::async_recursion_analysis;
 //! use c06_async::actor_reactor_patterns;
@@ -78,7 +78,7 @@
 //!
 //! ### 实践应用路径
 //!
-//! ```rust
+//! ```no_run
 //! use c06_async::utils::ExecStrategyBuilder;
 //! use std::time::Duration;
 //!

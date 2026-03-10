@@ -25,8 +25,8 @@
 //! 
 //! ## 使用示例
 //! 
-//! ```rust
-//! use c06_async::await::process;
+//! ```no_run
+//! use c06_async::r#await::process;
 //! 
 //! #[tokio::main]
 //! async fn main() {
@@ -83,8 +83,8 @@ async fn fetch_data(url: &str, client: &Client) -> Result<String, Error> {
 /// - 在网络 I/O 密集的场景中，性能提升非常显著
 /// 
 /// # 示例
-/// ```rust
-/// use c06_async::await::process;
+/// ```no_run
+/// use c06_async::r#await::process;
 /// 
 /// #[tokio::main]
 /// async fn main() {

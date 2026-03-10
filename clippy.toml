@@ -140,9 +140,6 @@ enforced-import-renames = []
 # 最小Rust版本
 msrv = "1.94.0"
 
-# 允许近似值常量（用于教学目的）
-allow-approx-constant = true
-
 # 公共下划线字段行为
 pub-underscore-fields-behavior = "PubliclyExported"
 

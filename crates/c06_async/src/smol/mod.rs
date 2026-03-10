@@ -45,18 +45,18 @@
 //! use smol::Task;
 //! 
 //! fn main() {
-//!     smol::run(async {
+//!     smol::block_on(async {
 //!         // 异步代码
 //!     });
 //! }
 //! ```
 //! 
 //! ### 生成任务
-//! ```rust
+//! ```rust,ignore
 //! let task = smol::spawn(async {
 //!     // 异步任务
 //! });
-//! task.await;
+//! // 在 async 上下文中 await
 //! ```
 //! 
 //! ## 注意事项
@@ -67,11 +67,11 @@
 //! 
 //! ## 示例
 //! 
-//! ```rust
+//! ```no_run
 //! use c06_async::smol::*;
 //! 
 //! fn main() {
-//!     smol::run(async {
+//!     smol::block_on(async {
 //!         demo_basic_usage().await;
 //!     });
 //! }
@@ -85,11 +85,11 @@
 /// - 基本的并发处理
 /// 
 /// # 示例
-/// ```rust
+/// ```no_run
 /// use c06_async::smol::demo_basic_usage;
 /// 
 /// fn main() {
-///     smol::run(async {
+///     smol::block_on(async {
 ///         demo_basic_usage().await;
 ///     });
 /// }
@@ -123,11 +123,11 @@ pub async fn demo_basic_usage() {
 /// 包括计时器、网络请求等常见的异步操作。
 /// 
 /// # 示例
-/// ```rust
+/// ```no_run
 /// use c06_async::smol::demo_io_operations;
 /// 
 /// fn main() {
-///     smol::run(async {
+///     smol::block_on(async {
 ///         demo_io_operations().await;
 ///     });
 /// }

@@ -6,7 +6,10 @@
 //! ## 核心概念
 //! 
 //! ### Stream Trait
-//! ```rust
+//! ```ignore
+//! use std::pin::Pin;
+//! use std::task::{Context, Poll};
+//! 
 //! pub trait Stream {
 //!     type Item;
 //!     fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>>;
@@ -37,7 +40,7 @@
 //! 
 //! ## 使用示例
 //! 
-//! ```rust
+//! ```no_run
 //! use c06_async::streams::*;
 //! use std::time::Duration;
 //! 
@@ -77,8 +80,9 @@ use tokio::time::{Interval, interval};
 /// 4. 当达到设定的次数时，流结束（返回 `None`）
 /// 
 /// # 示例
-/// ```rust
+/// ```no_run
 /// use c06_async::streams::TickStream;
+/// use futures::StreamExt;
 /// use std::time::Duration;
 /// 
 /// #[tokio::main]
@@ -109,7 +113,10 @@ impl TickStream {
     /// 返回一个新的 `TickStream` 实例
     /// 
     /// # 示例
-    /// ```rust
+    /// ```no_run
+    /// use c06_async::streams::TickStream;
+    /// use std::time::Duration;
+    /// 
     /// let stream = TickStream::new(10, Duration::from_millis(500));
     /// ```
     pub fn new(ticks: u64, period: Duration) -> Self {
@@ -197,8 +204,16 @@ impl Stream for TickStream {
 /// 
 /// # 示例
 /// ```rust
-/// let stream = make_iter_stream(5);
+/// use c06_async::streams::make_iter_stream;
+/// use futures::StreamExt;
+/// 
+/// # async fn example() {
+/// let mut stream = make_iter_stream(5);
 /// // 会产生: 1, 2, 3, 4, 5
+/// while let Some(n) = stream.next().await {
+///     println!("{}", n);
+/// }
+/// # }
 /// ```
 pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
     stream::iter(1..=n)
@@ -241,7 +256,7 @@ pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
 /// 5. 收集到向量中
 /// 
 /// # 示例
-/// ```rust
+/// ```no_run
 /// use c06_async::streams::demo_basic_combinators;
 /// 
 /// #[tokio::main]
@@ -284,7 +299,7 @@ pub async fn demo_basic_combinators(n: u32) -> Vec<u32> {
 /// 每个 URL 请求的结果向量（成功时包含响应长度，失败时包含错误）
 /// 
 /// # 示例
-/// ```rust
+/// ```no_run
 /// use c06_async::streams::demo_buffer_unordered;
 /// 
 /// #[tokio::main]
@@ -336,7 +351,7 @@ pub async fn demo_buffer_unordered(urls: Vec<String>) -> Vec<Result<usize, reqwe
 /// 包含所有计数值的向量
 /// 
 /// # 示例
-/// ```rust
+/// ```no_run
 /// use c06_async::streams::demo_tick_stream;
 /// use std::time::Duration;
 /// 

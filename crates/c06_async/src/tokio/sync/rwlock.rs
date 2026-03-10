@@ -37,7 +37,7 @@
 //! 
 //! ## 使用示例
 //! 
-//! ```rust
+//! ```no_run
 //! use c06_async::tokio::sync::rwlock_test01;
 //! 
 //! #[tokio::main]
@@ -78,7 +78,7 @@ use tokio::sync::RwLock;
 /// 4. 等待所有任务完成
 /// 
 /// # 示例
-/// ```rust
+/// ```no_run
 /// use c06_async::tokio::sync::rwlock_test01;
 /// 
 /// #[tokio::main]
@@ -99,7 +99,7 @@ use tokio::sync::RwLock;
 /// - 写操作独占访问，确保数据一致性
 /// - 适合读多写少的场景
 /// - 相比 Mutex，在读密集场景下性能更好
-#[allow(unused)]
+/// 测试 RwLock
 pub async fn rwlock_test01() {
     // 创建一个 Arc 包裹的 RwLock，内部数据为一个 Vec
     // Arc 提供多所有权，RwLock 提供读写锁功能

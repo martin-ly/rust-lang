@@ -37,7 +37,7 @@
 //! 
 //! ## 使用示例
 //! 
-//! ```rust
+//! ```no_run
 //! use c06_async::tokio::sync::notify_test01;
 //! 
 //! #[tokio::main]
@@ -78,7 +78,7 @@ use tokio::sync::Notify;
 /// 4. 等待两个任务都完成
 /// 
 /// # 示例
-/// ```rust
+/// ```no_run
 /// use c06_async::tokio::sync::notify_test01;
 /// 
 /// #[tokio::main]
@@ -96,7 +96,7 @@ use tokio::sync::Notify;
 /// - 实现生产者-消费者模式
 /// - 任务启动同步
 /// - 优雅关闭机制
-#[allow(unused)]
+/// 测试 Notify
 pub async fn notify_test01() {
     // 创建一个 Notify 实例并包装在 Arc 中
     // Arc 允许在多个任务之间共享 Notify

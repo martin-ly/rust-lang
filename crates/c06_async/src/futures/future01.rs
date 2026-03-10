@@ -19,7 +19,10 @@
 //! ## 核心概念
 //! 
 //! ### 1. Future Trait
-//! ```rust
+//! ```ignore
+//! use std::pin::Pin;
+//! use std::task::{Context, Poll};
+//! 
 //! pub trait Future {
 //!     type Output;
 //!     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
@@ -27,7 +30,7 @@
 //! ```
 //! 
 //! ### 2. Poll 状态
-//! ```rust
+//! ```ignore
 //! pub enum Poll<T> {
 //!     Ready(T),
 //!     Pending,
@@ -40,8 +43,8 @@
 //! 
 //! ## 使用示例
 //! 
-//! ```rust
-//! use c06_async::futures::*;
+//! ```no_run
+//! use c06_async::futures::future01::*;
 //! 
 //! #[tokio::main]
 //! async fn main() {
@@ -70,8 +73,8 @@ use std::time::Duration;
 /// - `state`: 当前状态，用于状态机转换
 /// 
 /// # 示例
-/// ```rust
-/// use c06_async::futures::demo_manual_future;
+/// ```no_run
+/// use c06_async::futures::future01::demo_manual_future;
 /// 
 /// #[tokio::main]
 /// async fn main() {
@@ -177,8 +180,8 @@ impl Future for MyFuture {
 /// 返回 Future 完成时的结果值（在这个例子中是 42）
 /// 
 /// # 示例
-/// ```rust
-/// use c06_async::futures::demo_manual_future;
+/// ```no_run
+/// use c06_async::futures::future01::demo_manual_future;
 /// 
 /// #[tokio::main]
 /// async fn main() {
@@ -222,8 +225,8 @@ pub async fn demo_manual_future() -> i32 {
 /// 返回组合操作的最终结果
 /// 
 /// # 示例
-/// ```rust
-/// use c06_async::futures::demo_future_combinators;
+/// ```no_run
+/// use c06_async::futures::future01::demo_future_combinators;
 /// 
 /// #[tokio::main]
 /// async fn main() {

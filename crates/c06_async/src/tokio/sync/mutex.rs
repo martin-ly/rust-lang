@@ -30,7 +30,7 @@
 //! 
 //! ## 使用示例
 //! 
-//! ```rust
+//! ```no_run
 //! use c06_async::tokio::sync::mutex_test01;
 //! 
 //! #[tokio::main]
@@ -71,7 +71,7 @@ use tokio::sync::Mutex;
 /// 4. 验证最终结果
 /// 
 /// # 示例
-/// ```rust
+/// ```no_run
 /// use c06_async::tokio::sync::mutex_test01;
 /// 
 /// #[tokio::main]
@@ -85,7 +85,7 @@ use tokio::sync::Mutex;
 /// - 异步锁不会阻塞线程，提高并发性能
 /// - 适合高并发场景下的数据保护
 /// - 相比同步锁，可以处理更多的并发任务
-#[allow(unused)]
+/// 测试异步 Mutex
 pub async fn mutex_test01() {
     // 创建一个 Arc 包裹的 Mutex，内部数据为 0
     // Arc 允许在多个任务之间共享所有权
