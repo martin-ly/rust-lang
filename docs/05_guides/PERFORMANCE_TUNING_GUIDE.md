@@ -62,7 +62,8 @@
 
 本文档提供全面的 Rust 性能调优指南，涵盖编译优化、运行时优化、内存管理、并发优化等方面。
 
-**形式化引用**：T-OW3 (内存安全)、[ownership_model](../research_notes/formal_methods/ownership_model.md)。内存优化与所有权/借用规则一致；并发优化见 SEND-T1、SYNC-T1。
+**形式化引用**：T-OW3 (内存安全)、[ownership_model](../research_notes/formal_methods/ownership_model.md)。
+内存优化与所有权/借用规则一致；并发优化见 SEND-T1、SYNC-T1。
 
 ---
 

@@ -58,7 +58,8 @@
 
 本指南介绍如何使用 C05 线程与并发模块的功能，包括线程管理、并发控制、同步原语、无锁数据结构等。
 
-**形式化引用**：SEND-T1 (Send 安全)、SYNC-T1 (Sync 安全)、T-BR1 (数据竞争自由)。详见 [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md)。
+**形式化引用**：SEND-T1 (Send 安全)、SYNC-T1 (Sync 安全)、T-BR1 (数据竞争自由)。
+详见 [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md)。
 
 ---
 

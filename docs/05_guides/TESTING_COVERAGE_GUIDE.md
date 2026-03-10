@@ -52,7 +52,8 @@
 
 本文档介绍如何测量和提高 Rust 项目的测试覆盖率，包括工具使用、最佳实践和覆盖率目标。
 
-**形式化引用**：T-TY3 (类型安全)、T-BR1 (数据竞争自由)。测试验证形式化性质见 [CORE_THEOREMS_FULL_PROOFS](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)。
+**形式化引用**：T-TY3 (类型安全)、T-BR1 (数据竞争自由)。
+测试验证形式化性质见 [CORE_THEOREMS_FULL_PROOFS](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)。
 
 ---
 

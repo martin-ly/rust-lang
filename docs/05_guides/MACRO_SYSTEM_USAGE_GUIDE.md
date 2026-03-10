@@ -59,7 +59,8 @@
 
 本指南介绍 Rust 宏系统的使用，包括声明宏、过程宏、属性宏、派生宏等。
 
-**形式化引用**：COH-T1 (Trait 一致性)、[trait_system_formalization](../research_notes/type_theory/trait_system_formalization.md)。宏展开与类型检查衔接见 [type_system_foundations](../research_notes/type_theory/type_system_foundations.md)。
+**形式化引用**：COH-T1 (Trait 一致性)、[trait_system_formalization](../research_notes/type_theory/trait_system_formalization.md)。
+宏展开与类型检查衔接见 [type_system_foundations](../research_notes/type_theory/type_system_foundations.md)。
 
 ---
 

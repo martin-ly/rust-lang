@@ -48,7 +48,8 @@
 
 本指南介绍如何使用 Rust 编译到 WebAssembly (WASM)，包括项目设置、编译配置、与 JavaScript 互操作等。
 
-**形式化引用**：T-ASYNC1 (Future 安全性)、[async_state_machine](../research_notes/formal_methods/async_state_machine.md) T6.1-T6.3。WASM 异步与 Rust 异步模型一致。
+**形式化引用**：T-ASYNC1 (Future 安全性)、[async_state_machine](../research_notes/formal_methods/async_state_machine.md) T6.1-T6.3。
+WASM 异步与 Rust 异步模型一致。
 
 ---
 

@@ -1,6 +1,7 @@
 # FFI 绑定实战指南
 
-> **FFI (Foreign Function Interface)** 是 Rust 与外部代码交互的核心机制。本指南涵盖从 C 到 Rust、Rust 到 C、以及 Rust 到 WebAssembly 的完整实践方案。
+> **FFI (Foreign Function Interface)** 是 Rust 与外部代码交互的核心机制。
+> 本指南涵盖从 C 到 Rust、Rust 到 C、以及 Rust 到 WebAssembly 的完整实践方案。
 
 ---
 

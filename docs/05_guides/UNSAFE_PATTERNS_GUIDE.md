@@ -88,7 +88,8 @@
 
 ### 1.1 什么是 Miri
 
-Miri 是 Rust 的解释器，用于检测未定义行为。它执行 Rust 中间表示 (MIR) 并检查所有 unsafe 操作的安全性。
+Miri 是 Rust 的解释器，用于检测未定义行为。
+它执行 Rust 中间表示 (MIR) 并检查所有 unsafe 操作的安全性。
 
 ### 1.2 安装 Miri
 
