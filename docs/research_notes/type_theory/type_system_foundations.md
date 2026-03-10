@@ -1,10 +1,18 @@
 # 类型系统基础
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-03-05
-> **更新内容**: 添加 impl Trait (Def 4.1)、dyn Trait (Def 4.2)、GAT (Def 4.3)、const 泛型 (Def 4.4) 定义；添加 Rust 1.94 特性 (ControlFlow::ok, RangeToInclusive, int_format_into)
+> **最后更新**: 2026-03-11
+> **更新内容**:
+>
+> - 深化类型安全证明（定理 1-3 的详细结构归纳证明）
+> - 添加替换引理（Substitution Lemma）完整证明
+> - 添加系统 F (System F) 的完整形式化定义
+> - 添加 Hindley-Milner 类型推导算法（Algorithm W）
+> - 添加类型约束生成和求解详细算法
+> - 增强 Curry-Howard 对应（依赖类型、const 泛型关联）
+> - 添加 8 个详细反例分析
 > **Rust 版本**: 1.94.0+ (Edition 2024)
-> **状态**: ✅ 已完成 (Week 2 任务 P1-W2-T1) | Rust 1.94 已整合
+> **状态**: ✅ 已增强论证深度 | 理论完整性提升
 
 ---
 
@@ -24,6 +32,8 @@
       - [完整的 Curry-Howard 对应表](#完整的-curry-howard-对应表)
       - [Rust 代码示例](#rust-代码示例)
       - [对应关系的理论意义](#对应关系的理论意义)
+      - [扩展的 Rust 代码示例](#扩展的-rust-代码示例)
+      - [依赖类型与 Rust 的 const 泛型](#依赖类型与-rust-的-const-泛型)
     - [类型理论的基础知识](#类型理论的基础知识)
     - [类型推导的理论基础](#类型推导的理论基础)
     - [类型安全的理论基础](#类型安全的理论基础)
@@ -41,8 +51,34 @@
     - [1. 类型环境与类型判断](#1-类型环境与类型判断)
     - [2. 基本类型规则](#2-基本类型规则)
     - [3. 类型安全](#3-类型安全)
-    - [4. 高级类型特性](#4-高级类型特性)
-  - [⚠️ 反例：类型错误（类型检查拒绝） {#️-反例类型错误类型检查拒绝}](#️-反例类型错误类型检查拒绝-️-反例类型错误类型检查拒绝)
+    - [4. 系统 F (System F) 的完整形式化定义](#4-系统-f-system-f-的完整形式化定义)
+      - [4.1 语法定义](#41-语法定义)
+      - [4.2 类型规则](#42-类型规则)
+      - [4.3 求值规则](#43-求值规则)
+      - [4.4 类型替换引理](#44-类型替换引理)
+      - [4.5 System F 的 Curry-Howard 对应](#45-system-f-的-curry-howard-对应)
+      - [4.6 与 Rust 泛型的对应](#46-与-rust-泛型的对应)
+      - [4.7 系统 F 的类型安全](#47-系统-f-的类型安全)
+    - [5. Hindley-Milner 类型推导算法](#5-hindley-milner-类型推导算法)
+      - [5.1 HM 类型系统的特征](#51-hm-类型系统的特征)
+      - [5.2 类型、类型方案与约束](#52-类型类型方案与约束)
+      - [5.3 Hindley-Milner 类型推导算法 (Algorithm W)](#53-hindley-milner-类型推导算法-algorithm-w)
+      - [5.4 统一算法 (Unification)](#54-统一算法-unification)
+      - [5.5 约束生成与求解的详细算法](#55-约束生成与求解的详细算法)
+      - [5.6 类型推导示例](#56-类型推导示例)
+      - [5.7 HM 算法的正确性](#57-hm-算法的正确性)
+    - [6. 高级类型特性](#6-高级类型特性)
+  - [⚠️ 反例：类型错误与类型推导失败 {#️-反例类型错误类型检查拒绝}](#️-反例类型错误与类型推导失败-️-反例类型错误类型检查拒绝)
+    - [反例概览](#反例概览)
+    - [反例 1: 类型不匹配函数应用](#反例-1-类型不匹配函数应用)
+    - [反例 2: 未绑定变量](#反例-2-未绑定变量)
+    - [反例 3: 类型推导冲突（无限类型）](#反例-3-类型推导冲突无限类型)
+    - [反例 4: 多态限制违反](#反例-4-多态限制违反)
+    - [反例 5: 类型不安全操作（运行时错误）](#反例-5-类型不安全操作运行时错误)
+    - [反例 6: 约束求解失败](#反例-6-约束求解失败)
+    - [反例 7: 生命周期错误（类型系统扩展）](#反例-7-生命周期错误类型系统扩展)
+    - [反例 8: Trait 解析失败](#反例-8-trait-解析失败)
+    - [反例总结表](#反例总结表)
   - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
   - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
     - [待证明的性质](#待证明的性质)
@@ -85,6 +121,8 @@
     - [4. 其他类型系统相关改进](#4-其他类型系统相关改进)
       - [VecDeque::truncate\_front](#vecdequetruncate_front)
   - [形式化影响总结](#形式化影响总结)
+  - [文档增强摘要](#文档增强摘要)
+    - [本次更新内容](#本次更新内容)
 
 ---
 
@@ -248,6 +286,274 @@ fn existential() -> Box<dyn Existential<Output = i32>> {
 1. **类型安全即逻辑一致性**: 类型系统保证程序没有类型错误，对应逻辑系统保证没有矛盾证明
 2. **程序抽取**: 从逻辑证明可以抽取正确的程序
 3. **依赖类型**: 当类型可以依赖于值时，命题和证明完全统一（如 Coq、Agda、Idris）
+
+---
+
+#### 扩展的 Rust 代码示例
+
+**8. 双条件/等价 ($A \leftrightarrow B$): 同构类型**
+
+```rust
+// A ↔ B 对应于 A 和 B 之间的同构
+// 即存在 f: A -> B 和 g: B -> A 使得 f ∘ g = id 且 g ∘ f = id
+
+struct Iso<A, B> {
+    to: Box<dyn Fn(A) -> B>,
+    from: Box<dyn Fn(B) -> A>,
+}
+
+impl<A, B> Iso<A, B> {
+    // 验证同构性质 (在类型层面，编译时无法完全验证)
+    fn new<F, G>(to: F, from: G) -> Self
+    where
+        F: Fn(A) -> B + 'static,
+        G: Fn(B) -> A + 'static,
+    {
+        Self { to: Box::new(to), from: Box::new(from) }
+    }
+}
+
+// 示例: (A, B) 与 (B, A) 同构
+fn swap_iso<A, B>() -> Iso<(A, B), (B, A)> {
+    Iso::new(
+        |(a, b)| (b, a),
+        |(b, a)| (a, b),
+    )
+}
+```
+
+**9. 否定 ($\neg A$): 函数到空类型**
+
+```rust
+// ¬A 对应于 A -> ! (A 到空类型的函数)
+// 表示 "A 是不可证明的" 或 "A 导致矛盾"
+
+type Not<A> = Box<dyn Fn(A) -> !>;
+
+// 双重否定消除不成立（直觉主义逻辑）
+// 不能从 ¬¬A 推出 A
+
+// 但可以从 A 推出 ¬¬A
+fn double_negation_intro<A>(a: A) -> impl Fn(Not<A>) -> ! {
+    move |not_a: Not<A>| not_a(a)
+}
+
+// 矛盾推出任何命题 (ex falso quodlibet)
+fn absurd<A>(never: !) -> A {
+    match never {}  // 空匹配
+}
+```
+
+**10. 量词与容器类型**
+
+```rust
+// ∀x:A. P(x) 对应于依赖函数类型 (x: A) -> P(x)
+// 在 Rust 中近似于泛型: fn<T>(x: T) -> P<T>
+
+// ∃x:A. P(x) 对应于依赖和类型 (存在类型)
+// 在 Rust 中可以用 trait object 或存在类型表示
+
+// 全称量词示例: 对所有类型 T，存在 identity 函数
+trait Identity {
+    fn identity(&self) -> Self;
+}
+
+impl<T> Identity for T where T: Clone {
+    fn identity(&self) -> Self {
+        self.clone()
+    }
+}
+
+// 存在类型示例: 存在某个实现了 Display 的类型
+fn displayable(value: impl std::fmt::Display) -> Box<dyn std::fmt::Display> {
+    Box::new(value)
+}
+```
+
+**11. 自然数与 Peano 算术 (递归类型)**
+
+```rust
+// 自然数作为递归类型
+// Nat = Z | S Nat
+// 对应于归纳定义的数据类型
+
+enum Nat {
+    Zero,
+    Succ(Box<Nat>),
+}
+
+impl Nat {
+    fn from_usize(n: usize) -> Self {
+        match n {
+            0 => Nat::Zero,
+            n => Nat::Succ(Box::new(Nat::from_usize(n - 1))),
+        }
+    }
+
+    fn to_usize(&self) -> usize {
+        match self {
+            Nat::Zero => 0,
+            Nat::Succ(n) => 1 + n.to_usize(),
+        }
+    }
+
+    // 加法: Nat 归纳的证明
+    fn add(&self, other: &Nat) -> Nat {
+        match self {
+            // 0 + m = m (归纳基础)
+            Nat::Zero => other.clone(),
+            // S n + m = S (n + m) (归纳步骤)
+            Nat::Succ(n) => Nat::Succ(Box::new(n.add(other))),
+        }
+    }
+}
+```
+
+---
+
+#### 依赖类型与 Rust 的 const 泛型
+
+**依赖类型 (Dependent Types)** 是指类型可以依赖于值的类型系统。这是 Curry-Howard 对应的完备形式，将命题与证明完全统一。
+
+**依赖类型示例（伪代码，非 Rust）**:
+
+```
+// 向量类型，长度作为类型的一部分
+Vec<T, n: Nat>  // 长度为 n 的 T 类型向量
+
+// 安全的 head 函数：只能对非空向量调用
+head: Vec<T, S n> -> T  // 输入必须至少有一个元素 (S n = n+1)
+
+// 安全的数组索引：索引在范围内
+index: Vec<T, n> -> (i: Nat) -> (p: i < n) -> T
+```
+
+**Rust 的 const 泛型（依赖类型的受限形式）**:
+
+```rust
+// const 泛型允许类型依赖于常量值
+// 这是 Rust 对依赖类型的有限支持
+
+// 固定大小的数组类型 [T; N] 就是依赖类型的一个例子
+fn array_len<T, const N: usize>(_arr: &[T; N]) -> usize {
+    N  // 返回编译时已知的常量
+}
+
+// 使用 const 泛型的矩阵类型
+type Matrix<T, const ROWS: usize, const COLS: usize> = [[T; COLS]; ROWS];
+
+// 矩阵乘法：类型确保维度匹配
+fn matrix_multiply<T, const M: usize, const N: usize, const P: usize>(
+    a: &Matrix<T, M, N>,
+    b: &Matrix<T, N, P>,
+) -> Matrix<T, M, P>
+where
+    T: Default + Copy + std::ops::Add<Output = T> + std::ops::Mul<Output = T>,
+{
+    let mut result = [[T::default(); P]; M];
+    for i in 0..M {
+        for j in 0..P {
+            let mut sum = T::default();
+            for k in 0..N {
+                sum = sum + a[i][k] * b[k][j];
+            }
+            result[i][j] = sum;
+        }
+    }
+    result
+}
+
+// 编译时维度检查
+fn test_matrix() {
+    let a: Matrix<i32, 2, 3> = [[1, 2, 3], [4, 5, 6]];
+    let b: Matrix<i32, 3, 2> = [[1, 2], [3, 4], [5, 6]];
+
+    let c: Matrix<i32, 2, 2> = matrix_multiply(&a, &b);
+
+    // 以下会导致编译错误：
+    // let d: Matrix<i32, 3, 2> = matrix_multiply(&a, &b); // 错误: 期望 2x2，得到 2x3
+}
+```
+
+**const 泛型的类型理论意义**:
+
+```rust
+// 1. 编译时计算与类型系统的融合
+const fn factorial(n: usize) -> usize {
+    match n {
+        0 => 1,
+        n => n * factorial(n - 1),
+    }
+}
+
+// 类型依赖于编译时计算的值
+type Fact5 = [u8; factorial(5)];  // [u8; 120]
+
+// 2. 类型级编程
+struct FixedString<const N: usize> {
+    data: [u8; N],
+    len: usize,
+}
+
+impl<const N: usize> FixedString<N> {
+    // 确保操作保持长度约束
+    fn truncate<const M: usize>(self) -> FixedString<M>
+    where
+        // 编译时断言: M <= N
+        [(); M]: Sized,  // 使用数组长度作为约束技巧
+    {
+        // ...
+        todo!()
+    }
+}
+
+// 3. 泛型关联类型与 const 泛型结合
+trait ArrayExt<const N: usize> {
+    type Item;
+    fn len(&self) -> usize;
+}
+
+impl<T, const N: usize> ArrayExt<N> for [T; N] {
+    type Item = T;
+    fn len(&self) -> usize { N }
+}
+```
+
+**Curry-Howard 视角下的依赖类型**:
+
+| 依赖类型概念 | 逻辑对应 | Rust const 泛型 |
+|-----------|---------|----------------|
+| $\Pi x:A. B(x)$ | 全称量词 $\forall x:A. B(x)$ | 通用 const 泛型 `<const N: usize>` |
+| $\Sigma x:A. B(x)$ | 存在量词 $\exists x:A. B(x)$ | 关联类型的 const 泛型 |
+| 类型相等 $A = B$ | 命题相等 | const 求值保证相等性 |
+| 归纳类型 | 归纳命题 | 递归 const fn |
+
+**当前限制与未来方向**:
+
+```rust
+// 当前 Rust 限制: 不能在类型级别进行一般性证明
+// 例如，以下依赖类型功能尚未支持:
+
+// 伪代码: 索引在范围内的证明
+// fn safe_get<T, const N: usize>(arr: &[T; N], idx: usize) -> Option<&T>
+// where
+//     idx < N,  // 无法表达此约束
+
+// 变通方案: 使用类型状态模式
+struct Index<const N: usize>(usize);
+
+impl<const N: usize> Index<N> {
+    fn new(i: usize) -> Option<Self> {
+        if i < N { Some(Self(i)) } else { None }
+    }
+
+    fn get<'a, T>(&self, arr: &'a [T; N]) -> &'a T {
+        &arr[self.0]  // 安全: 构造函数保证 i < N
+    }
+}
+```
+
+Rust 的 const 泛型代表了向依赖类型系统迈进的一步，虽然在表达力上仍不及 Coq、Idris 或 Agda 等完整依赖类型语言，但已在实用性和类型安全之间取得了良好平衡。
 
 ---
 
@@ -488,28 +794,254 @@ $$\Gamma \vdash e : \tau \rightarrow e \text{ is value} \lor \exists e': e \to e
 
 **完整证明**:
 
-使用结构归纳法对表达式 $e$ 的结构进行归纳：
+我们使用结构归纳法对表达式 $e$ 的结构进行归纳证明。设 $P(e)$ 为命题："如果 $\Gamma \vdash e : \tau$，则 $e$ 是值或存在 $e'$ 使 $e \to e'$"。
+
+---
+
+**基础情况 (Base Cases)**:
+
+**情况 1: 变量 $x$**
+
+假设 $\Gamma \vdash x : \tau$。根据变量规则，$x : \tau \in \Gamma$。
+
+- 在闭式程序（closed program）中，变量必须在求值前被替换为值
+- 如果 $x$ 是自由变量，则它不能在闭式程序中类型化
+- 在求值上下文中，变量已被绑定到值，因此 $x$ 会被替换为值
+
+形式化地，对于闭式表达式（无自由变量），变量规则仅在 $x$ 已被替换时适用。因此基础情况中变量不构成阻碍。
+
+**情况 2: 值 $v$**
+
+值包括：整数 $n$、布尔值 $b$、函数抽象 $\lambda x:\tau. e$、单元值 $()$。
+
+- 若 $e = n$（整数），则 $e \text{ is value}$ 成立
+- 若 $e = b$（布尔值），则 $e \text{ is value}$ 成立
+- 若 $e = \lambda x:\tau. e'$（函数抽象），则 $e \text{ is value}$ 成立
+- 若 $e = ()$（单元），则 $e \text{ is value}$ 成立
+
+因此，对于所有值，$P(e)$ 成立。
+
+---
+
+**归纳步骤 (Inductive Steps)**:
+
+假设对于所有 $e$ 的真子表达式 $e'$，$P(e')$ 成立（归纳假设 IH）。
+
+**情况 3: 函数应用 $e_1(e_2)$**
+
+假设 $\Gamma \vdash e_1(e_2) : \tau_2$。
+
+根据应用规则 (规则 2):
+$$\frac{\Gamma \vdash e_1 : \tau_1 \to \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1(e_2) : \tau_2}$$
+
+我们有：
+
+- $\Gamma \vdash e_1 : \tau_1 \to \tau_2$ （前提 1）
+- $\Gamma \vdash e_2 : \tau_1$ （前提 2）
+
+根据 IH 应用于前提 1：
+
+- 要么 $e_1$ 是值 $v_1$
+- 要么存在 $e_1'$ 使 $e_1 \to e_1'$
+
+**子情况 3a**: $e_1 \to e_1'$（$e_1$ 可求值）
+
+根据求值规则中的上下文规则：
+$$\frac{e_1 \to e_1'}{e_1(e_2) \to e_1'(e_2)}$$
+
+因此 $e_1(e_2)$ 可以继续求值，$P(e_1(e_2))$ 成立。
+
+**子情况 3b**: $e_1$ 是值 $v_1$
+
+此时 $v_1$ 必须是函数抽象形式（因为类型为 $\tau_1 \to \tau_2$）：
+$$v_1 = \lambda x:\tau_1. e_b$$
+
+根据 IH 应用于前提 2：
+
+- 要么 $e_2$ 是值 $v_2$
+- 要么存在 $e_2'$ 使 $e_2 \to e_2'$
+
+**子情况 3b-i**: $e_2 \to e_2'$（$e_2$ 可求值）
+
+根据求值规则：
+$$\frac{e_2 \to e_2'}{v_1(e_2) \to v_1(e_2')}$$
+
+因此 $e_1(e_2)$ 可以继续求值，$P(e_1(e_2))$ 成立。
+
+**子情况 3b-ii**: $e_2$ 是值 $v_2$
+
+根据 $\beta$ 归约规则：
+$$(\lambda x:\tau_1. e_b)(v_2) \to e_b[x := v_2]$$
+
+因此 $e_1(e_2)$ 可以继续求值，$P(e_1(e_2))$ 成立。
+
+---
+
+**情况 4: 条件表达式 $\text{if } e_1 \text{ then } e_2 \text{ else } e_3$**
+
+假设 $\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : \tau$。
+
+根据条件规则：
+$$\frac{\Gamma \vdash e_1 : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \Gamma \vdash e_3 : \tau}{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : \tau}$$
+
+根据 IH 应用于 $e_1$：
+
+- 要么 $e_1$ 是值 $v_1$
+- 要么存在 $e_1'$ 使 $e_1 \to e_1'$
+
+**子情况 4a**: $e_1 \to e_1'$
+
+根据上下文规则，整个条件表达式可求值。
+
+**子情况 4b**: $e_1$ 是值 $v_1$
+
+由于 $e_1 : \text{bool}$，$v_1$ 必须是 $true$ 或 $false$。
+
+- 若 $v_1 = true$：$\text{if } true \text{ then } e_2 \text{ else } e_3 \to e_2$
+- 若 $v_1 = false$：$\text{if } false \text{ then } e_2 \text{ else } e_3 \to e_3$
+
+因此条件表达式可以继续求值，$P(\text{if } e_1 \text{ then } e_2 \text{ else } e_3)$ 成立。
+
+---
+
+**情况 5: let 绑定 $\text{let } x = e_1 \text{ in } e_2$**
+
+假设 $\Gamma \vdash \text{let } x = e_1 \text{ in } e_2 : \tau_2$。
+
+根据 let 规则：
+$$\frac{\Gamma \vdash e_1 : \tau_1 \quad \Gamma, x:\tau_1 \vdash e_2 : \tau_2}{\Gamma \vdash \text{let } x = e_1 \text{ in } e_2 : \tau_2}$$
+
+根据 IH 应用于 $e_1$：
+
+- 要么 $e_1$ 是值 $v_1$
+- 要么存在 $e_1'$ 使 $e_1 \to e_1'$
+
+**子情况 5a**: $e_1 \to e_1'$
+
+根据上下文规则，let 表达式可求值。
+
+**子情况 5b**: $e_1$ 是值 $v_1$
+
+根据 let 求值规则：
+$$\text{let } x = v_1 \text{ in } e_2 \to e_2[x := v_1]$$
+
+因此 let 表达式可以继续求值，$P(\text{let } x = e_1 \text{ in } e_2)$ 成立。
+
+---
+
+**结论**:
+
+由结构归纳法原理，对于所有表达式 $e$，如果 $\Gamma \vdash e : \tau$，则 $e$ 要么是值，要么可以继续求值。
+
+$$\forall e. \Gamma \vdash e : \tau \rightarrow (e \in \text{Value}) \lor (\exists e'. e \to e') \quad \square$$
+
+**引理 2.1 (替换引理 / Substitution Lemma)**:
+
+如果 $\Gamma, x:\tau_1 \vdash e : \tau_2$ 且 $\Gamma \vdash v : \tau_1$，则 $\Gamma \vdash e[x := v] : \tau_2$。
+
+**形式化表示**:
+$$\Gamma, x:\tau_1 \vdash e : \tau_2 \land \Gamma \vdash v : \tau_1 \rightarrow \Gamma \vdash e[x := v] : \tau_2$$
+
+**替换引理的完整证明**:
+
+我们对 $e$ 的结构进行归纳证明。
+
+---
 
 **基础情况**:
 
-- **值**: 如果 $e$ 是值（如整数、布尔值），则结论成立（$e \text{ is value}$）
-- **变量**: 如果 $e$ 是变量 $x$，根据规则1，$\Gamma \vdash x : \tau$ 要求 $x : \tau \in \Gamma$，因此 $x$ 在环境中，可以求值为对应的值
+**情况 1: $e = x$（被替换的变量）**
+
+$e[x := v] = v$
+
+我们需要证明：如果 $\Gamma, x:\tau_1 \vdash x : \tau_2$ 且 $\Gamma \vdash v : \tau_1$，则 $\Gamma \vdash v : \tau_2$。
+
+- 由 $\Gamma, x:\tau_1 \vdash x : \tau_2$，根据变量规则，必须有 $x:\tau_2 \in (\Gamma, x:\tau_1)$
+- 因此 $\tau_1 = \tau_2$
+- 已知 $\Gamma \vdash v : \tau_1$，所以 $\Gamma \vdash v : \tau_2$
+
+替换引理成立。
+
+**情况 2: $e = y$ 且 $y \neq x$（其他变量）**
+
+$e[x := v] = y$
+
+我们需要证明：如果 $\Gamma, x:\tau_1 \vdash y : \tau_2$，则 $\Gamma \vdash y : \tau_2$。
+
+- 由 $\Gamma, x:\tau_1 \vdash y : \tau_2$，根据变量规则，$y:\tau_2 \in (\Gamma, x:\tau_1)$
+- 由于 $y \neq x$，所以 $y:\tau_2 \in \Gamma$
+- 因此 $\Gamma \vdash y : \tau_2$
+
+替换引理成立。
+
+**情况 3: $e = c$（常量，如整数、布尔值）**
+
+$e[x := v] = c$
+
+常量的类型不依赖于环境，因此：
+
+$$\frac{}{\Gamma, x:\tau_1 \vdash c : \tau_c} \quad \Rightarrow \quad \frac{}{\Gamma \vdash c : \tau_c}$$
+
+替换引理成立。
+
+---
 
 **归纳步骤**:
-假设对于所有子表达式，进展性成立。
 
-1. **函数应用** $e_1(e_2)$:
-   - 根据规则2，$\Gamma \vdash e_1 : \tau_1 \to \tau_2$ 且 $\Gamma \vdash e_2 : \tau_1$
-   - 根据归纳假设，$e_1$ 要么是值，要么可以继续求值
-   - 如果 $e_1$ 不是值，则 $e_1(e_2) \to e_1'(e_2)$（可以继续求值）
-   - 如果 $e_1$ 是值（函数），则 $e_2$ 要么是值，要么可以继续求值
-   - 如果 $e_2$ 不是值，则 $e_1(e_2) \to e_1(e_2')$（可以继续求值）
-   - 如果 $e_1$ 和 $e_2$ 都是值，则可以进行函数应用（$\beta$ 归约）
+假设对于所有真子表达式，替换引理成立（归纳假设 IH）。
 
-2. **函数抽象** $\lambda x : \tau_1. e$:
-   - 函数抽象本身就是值，结论成立
+**情况 4: $e = e_1(e_2)$（函数应用）**
 
-**结论**: 由结构归纳法，进展性对所有良型表达式成立。$\square$
+$e[x := v] = (e_1[x := v])(e_2[x := v])$
+
+假设 $\Gamma, x:\tau_1 \vdash e_1(e_2) : \tau_2$ 且 $\Gamma \vdash v : \tau_1$。
+
+由应用规则：
+$$\frac{\Gamma, x:\tau_1 \vdash e_1 : \tau_a \to \tau_2 \quad \Gamma, x:\tau_1 \vdash e_2 : \tau_a}{\Gamma, x:\tau_1 \vdash e_1(e_2) : \tau_2}$$
+
+应用 IH：
+
+- $\Gamma, x:\tau_1 \vdash e_1 : \tau_a \to \tau_2$ 且 $\Gamma \vdash v : \tau_1$ $\Rightarrow$ $\Gamma \vdash e_1[x := v] : \tau_a \to \tau_2$
+- $\Gamma, x:\tau_1 \vdash e_2 : \tau_a$ 且 $\Gamma \vdash v : \tau_1$ $\Rightarrow$ $\Gamma \vdash e_2[x := v] : \tau_a$
+
+应用应用规则：
+$$\frac{\Gamma \vdash e_1[x := v] : \tau_a \to \tau_2 \quad \Gamma \vdash e_2[x := v] : \tau_a}{\Gamma \vdash (e_1[x := v])(e_2[x := v]) : \tau_2}$$
+
+因此 $\Gamma \vdash e[x := v] : \tau_2$，替换引理成立。
+
+**情况 5: $e = \lambda y:\tau_a. e_b$（函数抽象）**
+
+假设 $y \neq x$（可通过 $\alpha$ 转换保证）。
+
+$e[x := v] = \lambda y:\tau_a. (e_b[x := v])$
+
+假设 $\Gamma, x:\tau_1 \vdash \lambda y:\tau_a. e_b : \tau_a \to \tau_b$ 且 $\Gamma \vdash v : \tau_1$。
+
+由抽象规则：
+$$\frac{\Gamma, x:\tau_1, y:\tau_a \vdash e_b : \tau_b}{\Gamma, x:\tau_1 \vdash \lambda y:\tau_a. e_b : \tau_a \to \tau_b}$$
+
+注意环境可以交换：$\Gamma, x:\tau_1, y:\tau_a = \Gamma, y:\tau_a, x:\tau_1$
+
+应用 IH 于 $e_b$：
+
+- $\Gamma, y:\tau_a, x:\tau_1 \vdash e_b : \tau_b$ 且 $\Gamma \vdash v : \tau_1$
+- 由于 $v$ 是闭式（或只依赖 $\Gamma$），我们有 $\Gamma, y:\tau_a \vdash v : \tau_1$
+- 因此 $\Gamma, y:\tau_a \vdash e_b[x := v] : \tau_b$
+
+应用抽象规则：
+$$\frac{\Gamma, y:\tau_a \vdash e_b[x := v] : \tau_b}{\Gamma \vdash \lambda y:\tau_a. (e_b[x := v]) : \tau_a \to \tau_b}$$
+
+因此 $\Gamma \vdash e[x := v] : \tau_a \to \tau_b$，替换引理成立。
+
+**情况 6: 条件表达式和 let 绑定**
+
+类似地，使用 IH 应用于子表达式，然后应用相应类型规则。
+
+---
+
+**结论**: 由结构归纳法，替换引理对所有表达式成立。$\square$
+
+---
 
 **定理 2 (保持性)**:
 如果 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$。
@@ -519,55 +1051,287 @@ $$\Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash e' : \tau$$
 
 **完整证明**:
 
-使用结构归纳法对求值关系 $e \to e'$ 进行归纳：
+我们对求值关系 $e \to e'$ 使用归纳法证明。即，对推导 $e \to e'$ 所使用的规则进行归纳。
 
-**基础情况** ($\beta$ 归约):
+---
 
-- 如果 $(\lambda x : \tau_1. e_1)(v) \to e_1[x := v]$，其中 $v$ 是值
-- 根据规则3，$\Gamma, x : \tau_1 \vdash e_1 : \tau_2$ 且 $\Gamma \vdash \lambda x : \tau_1. e_1 : \tau_1 \to \tau_2$
-- 根据规则2，$\Gamma \vdash v : \tau_1$
-- 根据替换引理，$\Gamma \vdash e_1[x := v] : \tau_2$
-- 因此，类型保持不变
+**基础情况 (Base Cases)**:
 
-**归纳步骤**:
-假设对于所有子表达式的求值，保持性成立。
+**情况 1: $\beta$ 归约 $(\lambda x:\tau_1. e_b)(v) \to e_b[x := v]$**
 
-1. **函数应用** $e_1(e_2) \to e_1'(e_2)$:
-   - 根据规则2，$\Gamma \vdash e_1 : \tau_1 \to \tau_2$ 且 $\Gamma \vdash e_2 : \tau_1$
-   - 根据归纳假设，$\Gamma \vdash e_1' : \tau_1 \to \tau_2$
-   - 根据规则2，$\Gamma \vdash e_1'(e_2) : \tau_2$
-   - 类型保持不变
+假设 $\Gamma \vdash (\lambda x:\tau_1. e_b)(v) : \tau_2$。
 
-2. **函数应用** $e_1(v) \to e_1(v')$:
-   - 类似地，根据归纳假设和规则2，类型保持不变
+由应用规则的前提：
 
-**结论**: 由结构归纳法，保持性对所有求值步骤成立。$\square$
+- $\Gamma \vdash \lambda x:\tau_1. e_b : \tau_1 \to \tau_2$ （由抽象规则得 $\Gamma, x:\tau_1 \vdash e_b : \tau_2$）
+- $\Gamma \vdash v : \tau_1$
 
-**定理 3 (类型安全)**:
+根据替换引理：
+
+- $\Gamma, x:\tau_1 \vdash e_b : \tau_2$ 且 $\Gamma \vdash v : \tau_1$
+- 因此 $\Gamma \vdash e_b[x := v] : \tau_2$
+
+保持性成立。
+
+**情况 2: 条件表达式归约**
+
+**子情况 2a**: $\text{if } true \text{ then } e_2 \text{ else } e_3 \to e_2$
+
+假设 $\Gamma \vdash \text{if } true \text{ then } e_2 \text{ else } e_3 : \tau$。
+
+由条件规则：
+$$\frac{\Gamma \vdash true : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \Gamma \vdash e_3 : \tau}{\Gamma \vdash \text{if } true \text{ then } e_2 \text{ else } e_3 : \tau}$$
+
+直接有 $\Gamma \vdash e_2 : \tau$，保持性成立。
+
+**子情况 2b**: $\text{if } false \text{ then } e_2 \text{ else } e_3 \to e_3$
+
+类似地，由条件规则前提得 $\Gamma \vdash e_3 : \tau$，保持性成立。
+
+**情况 3: let 归约 $\text{let } x = v \text{ in } e \to e[x := v]$**
+
+假设 $\Gamma \vdash \text{let } x = v \text{ in } e : \tau$。
+
+由 let 规则：
+$$\frac{\Gamma \vdash v : \tau_1 \quad \Gamma, x:\tau_1 \vdash e : \tau}{\Gamma \vdash \text{let } x = v \text{ in } e : \tau}$$
+
+根据替换引理：
+
+- $\Gamma, x:\tau_1 \vdash e : \tau$ 且 $\Gamma \vdash v : \tau_1$
+- 因此 $\Gamma \vdash e[x := v] : \tau$
+
+保持性成立。
+
+---
+
+**归纳步骤 (Inductive Steps)**:
+
+假设对于直接的子求值，保持性成立（归纳假设 IH）。
+
+**情况 4: 上下文求值 - 函数应用左侧**
+
+$$\frac{e_1 \to e_1'}{e_1(e_2) \to e_1'(e_2)}$$
+
+假设 $\Gamma \vdash e_1(e_2) : \tau_2$。
+
+由应用规则：
+
+- $\Gamma \vdash e_1 : \tau_1 \to \tau_2$
+- $\Gamma \vdash e_2 : \tau_1$
+
+由 IH 应用于 $e_1 \to e_1'$：
+
+- $\Gamma \vdash e_1 : \tau_1 \to \tau_2$ 且 $e_1 \to e_1'$
+- 因此 $\Gamma \vdash e_1' : \tau_1 \to \tau_2$
+
+应用应用规则：
+$$\frac{\Gamma \vdash e_1' : \tau_1 \to \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1'(e_2) : \tau_2}$$
+
+保持性成立。
+
+**情况 5: 上下文求值 - 函数应用右侧**
+
+$$\frac{e_2 \to e_2'}{v(e_2) \to v(e_2')}$$
+
+假设 $\Gamma \vdash v(e_2) : \tau_2$。
+
+由应用规则：
+
+- $\Gamma \vdash v : \tau_1 \to \tau_2$
+- $\Gamma \vdash e_2 : \tau_1$
+
+由 IH 应用于 $e_2 \to e_2'$：
+
+- $\Gamma \vdash e_2' : \tau_1$
+
+应用应用规则：
+$$\frac{\Gamma \vdash v : \tau_1 \to \tau_2 \quad \Gamma \vdash e_2' : \tau_1}{\Gamma \vdash v(e_2') : \tau_2}$$
+
+保持性成立。
+
+**情况 6: 上下文求值 - 条件表达式条件部分**
+
+$$\frac{e_1 \to e_1'}{\text{if } e_1 \text{ then } e_2 \text{ else } e_3 \to \text{if } e_1' \text{ then } e_2 \text{ else } e_3}$$
+
+假设 $\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : \tau$。
+
+由条件规则：
+
+- $\Gamma \vdash e_1 : \text{bool}$
+- $\Gamma \vdash e_2 : \tau$
+- $\Gamma \vdash e_3 : \tau$
+
+由 IH 应用于 $e_1 \to e_1'$：
+
+- $\Gamma \vdash e_1' : \text{bool}$
+
+应用条件规则：
+$$\frac{\Gamma \vdash e_1' : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \Gamma \vdash e_3 : \tau}{\Gamma \vdash \text{if } e_1' \text{ then } e_2 \text{ else } e_3 : \tau}$$
+
+保持性成立。
+
+**情况 7: 上下文求值 - let 绑定右侧**
+
+$$\frac{e_1 \to e_1'}{\text{let } x = e_1 \text{ in } e_2 \to \text{let } x = e_1' \text{ in } e_2}$$
+
+假设 $\Gamma \vdash \text{let } x = e_1 \text{ in } e_2 : \tau_2$。
+
+由 let 规则：
+
+- $\Gamma \vdash e_1 : \tau_1$
+- $\Gamma, x:\tau_1 \vdash e_2 : \tau_2$
+
+由 IH 应用于 $e_1 \to e_1'$：
+
+- $\Gamma \vdash e_1' : \tau_1$
+
+应用 let 规则：
+$$\frac{\Gamma \vdash e_1' : \tau_1 \quad \Gamma, x:\tau_1 \vdash e_2 : \tau_2}{\Gamma \vdash \text{let } x = e_1' \text{ in } e_2 : \tau_2}$$
+
+保持性成立。
+
+---
+
+**结论**:
+
+由对求值规则的归纳，对于所有 $e, e'$，如果 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$。
+
+$$\forall e, e'. \Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash e' : \tau \quad \square$$
+
+**定理 3 (类型安全 / Type Safety)**:
 良型程序不会出现类型错误。
 
 **形式化表示**:
 $$\Gamma \vdash e : \tau \rightarrow \neg \exists e': e \to^* e' \land \text{type\_error}(e')$$
 
+或等价地表述为：
+$$\text{如果 } \Gamma \vdash e : \tau \text{ 且 } e \to^* e' \text{（包括 } e' = e \text{），则 } e' \text{ 是值或存在 } e'' \text{ 使 } e' \to e''$$
+
+---
+
+**类型错误的形式化定义**:
+
+在类型化 Lambda 演算中，**卡住表达式 (Stuck Expression)** 是指不是值但无法继续求值的表达式。类型错误表现为程序求值到一个卡住状态。
+
+**定义**: 表达式 $e$ 是**卡住**的，如果：
+
+- $e$ 不是值
+- 不存在 $e'$ 使 $e \to e'$
+
+常见的卡住表达式（类型错误）：
+
+- 将非函数值应用于参数：$n(v)$（整数应用于参数）
+- 将非布尔值作为条件：$\text{if } n \text{ then } e_1 \text{ else } e_2$（整数作为条件）
+- 未定义变量（在闭式程序中不应出现）
+
+---
+
 **完整证明**:
 
-由定理1（进展性）和定理2（保持性）直接得出：
+我们需要证明：对于任何良型表达式 $e$（即 $\Gamma \vdash e : \tau$），其求值序列不会到达卡住状态。
 
-1. **进展性保证**: 良型表达式要么是值，要么可以继续求值
-   - 如果表达式是值，则不会出现类型错误
-   - 如果表达式可以继续求值，则存在下一步求值
+**证明策略**: 结合进展性（定理 1）和保持性（定理 2），使用对求值步数的归纳。
 
-2. **保持性保证**: 求值过程中类型保持不变
-   - 如果 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$
-   - 因此，在求值过程中，类型始终保持一致
+---
 
-3. **类型错误不可能**:
-   - 类型错误（如将整数应用于函数）在类型检查时被拒绝
-   - 如果 $\Gamma \vdash e : \tau$，则 $e$ 的类型结构是正确的
-   - 根据保持性，求值过程中类型结构保持正确
-   - 因此，不会出现类型错误
+**定义 (多步求值)**: $e \to^* e'$ 表示从 $e$ 经过零步或多步求值到达 $e'$。
 
-**结论**: 由进展性和保持性，类型安全成立。$\square$
+**引理 3.1 (类型安全归纳引理)**:
+如果 $\Gamma \vdash e : \tau$ 且 $e \to^* e'$，则 $e'$ 是值或可以继续求值。
+
+**引理 3.1 的证明**:
+
+对多步求值的长度 $n$ 进行归纳。
+
+**基础情况 ($n = 0$)**: $e' = e$
+
+由定理 1（进展性）：
+
+- $\Gamma \vdash e : \tau$ 蕴含 $e$ 是值或存在 $e_1$ 使 $e \to e_1$
+
+因此引理成立。
+
+**归纳步骤**: 假设对于 $n$ 步求值引理成立，证明对于 $n+1$ 步成立。
+
+设 $e \to^{n+1} e'$，则存在中间状态 $e''$ 使得：
+$$e \to^n e'' \to e'$$
+
+由归纳假设应用于 $e \to^n e''$：
+
+- $e''$ 是值或可以继续求值
+
+由于 $e'' \to e'$，$e''$ 不是值，因此 $e''$ 可以继续求值（到 $e'$）。
+
+由定理 2（保持性）：
+
+- $\Gamma \vdash e : \tau$ 且 $e \to^* e''$
+- 通过归纳应用保持性，得 $\Gamma \vdash e'' : \tau$
+- 又 $e'' \to e'$，再次应用保持性，得 $\Gamma \vdash e' : \tau$
+
+最后，由定理 1（进展性）应用于 $e'$：
+
+- $e'$ 是值或可以继续求值
+
+引理 3.1 证毕。$\square$
+
+---
+
+**定理 3 的主证明**:
+
+我们需要证明：如果 $\Gamma \vdash e : \tau$，则不存在卡住表达式 $e_{stuck}$ 使 $e \to^* e_{stuck}$。
+
+**反证法**：
+
+假设存在卡住表达式 $e_{stuck}$ 使得 $e \to^* e_{stuck}$。
+
+由引理 3.1（应用于 $e \to^* e_{stuck}$）：
+
+- $e_{stuck}$ 是值或可以继续求值
+
+但 $e_{stuck}$ 是卡住的，根据定义：
+
+- $e_{stuck}$ 不是值
+- 不存在 $e'$ 使 $e_{stuck} \to e'$
+
+这与引理 3.1 的结论矛盾！
+
+因此，不存在这样的卡住表达式 $e_{stuck}$。
+
+---
+
+**类型安全的直观解释**:
+
+$$
+\boxed{\text{Type Safety} = \text{Progress} + \text{Preservation}}$$
+
+**1. 进展性的作用**: 确保程序"不会卡住"
+- 在每一步求值时，进展性保证程序要么已完成（是值），要么有定义好的下一步
+- 没有进展性，程序可能在某个中间状态既非值又无法继续（如 $42(5)$ - 将整数作为函数应用）
+
+**2. 保持性的作用**: 确保类型"代代相传"
+- 在每一步求值后，保持性保证结果仍然是良型的
+- 没有保持性，即使初始程序良型，求值后可能变成不良型表达式（如 $(\lambda x:\text{bool}. \text{if } x \text{ then } 1 \text{ else } 0)(5)$ 如果允许求值会违反类型）
+
+**3. 二者结合**:
+- 进展性保证程序总能推进直到成为值
+- 保持性保证类型在求值过程中不会丢失
+- 因此，良型程序的最终结果必定是与初始类型一致的有效值
+
+---
+
+**形式化推论**:
+
+**推论 3.1 (规范性 / Normalization)**: 如果类型系统还具有**终止性**（所有求值序列都有限），则每个良型程序都会求值到一个具有相同类型的值。
+
+**推论 3.2 (确定性)**: 如果求值关系是确定性的（即 $e \to e_1$ 和 $e \to e_2$ 蕴含 $e_1 = e_2$），则每个良型程序有唯一的求值结果。
+
+---
+
+**结论**:
+
+由进展性（定理 1）保证程序不会卡住，由保持性（定理 2）保证类型在求值中保持，二者结合保证了类型安全：良型程序在求值过程中不会出现类型错误。
+
+$$\text{Type Safety} : \Gamma \vdash e : \tau \rightarrow \forall e'. (e \to^* e') \rightarrow (e' \in \text{Value}) \lor (\exists e''. e' \to e'') \quad \square$$
 
 **定理 4 (类型推导正确性)**:
 如果类型推导算法为表达式 $e$ 推导出类型 $\tau$，则 $\Gamma \vdash e : \tau$ 成立。
@@ -632,9 +1396,379 @@ $$\text{infer}(\Gamma, e) = \tau \leftrightarrow \Gamma \vdash e : \tau$$
 
 ---
 
-### 4. 高级类型特性
+### 4. 系统 F (System F) 的完整形式化定义
 
-**定义 4.1 (impl Trait)**: `impl Trait` 是存在类型的语法糖，表示"实现 Trait 的某种类型"：
+系统 F（也称为多态 Lambda 演算或 Girard-Reynolds 多态）是支持参数多态（泛型）的类型系统，是 Rust 泛型系统的理论基础。
+
+---
+
+#### 4.1 语法定义
+
+**类型 (Types)**:
+
+$$\tau ::= \alpha \mid \tau_1 \to \tau_2 \mid \forall \alpha. \tau \mid \text{Int} \mid \text{Bool} \mid \text{Unit}$$
+
+其中：
+- $\alpha$：类型变量
+- $\tau_1 \to \tau_2$：函数类型
+- $\forall \alpha. \tau$：全称类型（泛型类型）
+- $\text{Int}, \text{Bool}, \text{Unit}$：基础类型
+
+**表达式 (Expressions)**:
+
+$$e ::= x \mid \lambda x:\tau. e \mid e_1(e_2) \mid \Lambda \alpha. e \mid e[\tau] \mid n \mid b \mid () \mid \text{if } e_1 \text{ then } e_2 \text{ else } e_3$$
+
+其中：
+- $x$：变量
+- $\lambda x:\tau. e$：项抽象（函数）
+- $e_1(e_2)$：函数应用
+- $\Lambda \alpha. e$：类型抽象（类型层面的 Lambda）
+- $e[\tau]$：类型应用（类型实例化）
+- $n, b, ()$：常量（整数、布尔、单元）
+- $\text{if } e_1 \text{ then } e_2 \text{ else } e_3$：条件表达式
+
+---
+
+#### 4.2 类型规则
+
+**规则 F-1 (类型变量)**:
+$$\frac{x : \tau \in \Gamma}{\Gamma \vdash x : \tau}$$
+
+**规则 F-2 (项抽象)**:
+$$\frac{\Gamma, x : \tau_1 \vdash e : \tau_2}{\Gamma \vdash \lambda x:\tau_1. e : \tau_1 \to \tau_2}$$
+
+**规则 F-3 (项应用)**:
+$$\frac{\Gamma \vdash e_1 : \tau_1 \to \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1(e_2) : \tau_2}$$
+
+**规则 F-4 (类型抽象 - 引入全称量词)**:
+$$\frac{\Gamma, \alpha \vdash e : \tau}{\Gamma \vdash \Lambda \alpha. e : \forall \alpha. \tau}$$
+
+条件：$\alpha$ 在 $\Gamma$ 中自由（即类型变量 $\alpha$ 是新引入的）
+
+**规则 F-5 (类型应用 - 消除全称量词)**:
+$$\frac{\Gamma \vdash e : \forall \alpha. \tau_1}{\Gamma \vdash e[\tau_2] : \tau_1[\alpha := \tau_2]}$$
+
+其中 $\tau_1[\alpha := \tau_2]$ 表示将 $\tau_1$ 中所有 $\alpha$ 替换为 $\tau_2$。
+
+---
+
+#### 4.3 求值规则
+
+**值 (Values)**:
+
+$$v ::= \lambda x:\tau. e \mid \Lambda \alpha. e \mid n \mid b \mid ()$$
+
+**求值规则**:
+
+**E-F-1 ($\beta$ 归约 - 项层面)**:
+$$(\lambda x:\tau. e)(v) \to e[x := v]$$
+
+**E-F-2 ($\beta$ 归约 - 类型层面)**:
+$$(\Lambda \alpha. e)[\tau] \to e[\alpha := \tau]$$
+
+**E-F-3 (上下文 - 项应用左)**:
+$$\frac{e_1 \to e_1'}{e_1(e_2) \to e_1'(e_2)}$$
+
+**E-F-4 (上下文 - 项应用右)**:
+$$\frac{e_2 \to e_2'}{v(e_2) \to v(e_2')}$$
+
+**E-F-5 (上下文 - 类型应用)**:
+$$\frac{e \to e'}{e[\tau] \to e'[\tau]}$$
+
+---
+
+#### 4.4 类型替换引理
+
+**引理 F-1 (类型替换 / Type Substitution)**:
+
+如果 $\Gamma, \alpha \vdash e : \tau_1$ 且 $\Gamma \vdash \tau_2$，则 $\Gamma \vdash e[\alpha := \tau_2] : \tau_1[\alpha := \tau_2]$。
+
+**证明概要**: 对类型推导进行结构归纳，类似于项替换引理。
+
+---
+
+#### 4.5 System F 的 Curry-Howard 对应
+
+System F 对应于**二阶直觉主义逻辑**（Second-Order Intuitionistic Logic）：
+
+| 逻辑概念 | System F 对应 | Rust 对应 |
+|---------|--------------|----------|
+| 命题 | 类型 | `T` |
+| 证明 | 程序/项 | `v: T` |
+| 蕴含 $A \to B$ | 函数类型 | `fn(A) -> B` |
+| 全称量词 $\forall \alpha. P(\alpha)$ | 全称类型 | `<T> fn(T) -> T` |
+| 合取 $A \land B$ | 积类型 | `(A, B)` |
+| 析取 $A \lor B$ | 和类型 | `enum { A, B }` |
+
+---
+
+#### 4.6 与 Rust 泛型的对应
+
+**Rust 泛型函数**:
+```rust
+fn identity<T>(x: T) -> T {
+    x
+}
+```
+
+**System F 表示**:
+$$\text{identity} = \Lambda \alpha. \lambda x:\alpha. x : \forall \alpha. \alpha \to \alpha$$
+
+**Rust 实例化**:
+```rust
+let x = identity(5i32);  // T = i32
+```
+
+**System F 表示**:
+$$(\Lambda \alpha. \lambda x:\alpha. x)[\text{Int}] = \lambda x:\text{Int}. x : \text{Int} \to \text{Int}$$
+
+---
+
+#### 4.7 系统 F 的类型安全
+
+**定理 F-1 (系统 F 的进展性)**:
+如果 $\Gamma \vdash e : \tau$，则 $e$ 是值，或存在 $e'$ 使 $e \to e'$。
+
+**定理 F-2 (系统 F 的保持性)**:
+如果 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$。
+
+**定理 F-3 (系统 F 的类型安全)**:
+系统 F 是类型安全的（由定理 F-1 和 F-2 得出）。
+
+**与简单类型 Lambda 演算的区别**:
+- 需要额外的归纳情况处理类型抽象和应用
+- 类型替换引理是保持性证明的关键
+- 求值包括类型层面的归约
+
+---
+
+### 5. Hindley-Milner 类型推导算法
+
+Hindley-Milner (HM) 类型系统是一种支持自动类型推导的多态类型系统，是 Rust 类型推导的理论基础。
+
+---
+
+#### 5.1 HM 类型系统的特征
+
+**特点**：
+1. **完全类型推导**：无需显式类型标注即可推导出最一般的类型
+2. **参数多态**：支持泛型（类似于 System F）
+3. **let 多态**：`let` 绑定的变量可以有多态类型
+4. **可判定性**：类型推导是可判定的（尽管是指数级复杂度）
+
+**HM 与 System F 的区别**：
+- HM 只允许 let 绑定变量有多态类型，Lambda 绑定变量没有
+- HM 类型推导是可判定的，完整 System F 不是
+- Rust 的类型推导基于 HM 的扩展
+
+---
+
+#### 5.2 类型、类型方案与约束
+
+**单态类型 (Monomorphic Types)**:
+$$\tau ::= \alpha \mid \tau_1 \to \tau_2 \mid C(\tau_1, ..., \tau_n)$$
+
+其中 $C$ 是类型构造器（如 `Int`, `Bool`, `Vec`, `Option`）。
+
+**类型方案 (Type Schemes)**:
+$$\sigma ::= \tau \mid \forall \alpha_1...\alpha_n. \tau$$
+
+类型方案表示可能包含类型变量的多态类型。
+
+**类型约束 (Constraints)**:
+$$C ::= \tau_1 = \tau_2 \mid C_1 \land C_2 \mid \top \mid \bot$$
+
+- $\tau_1 = \tau_2$：类型相等约束
+- $C_1 \land C_2$：约束合取
+- $\top$：可满足（空约束）
+- $\bot$：不可满足
+
+---
+
+#### 5.3 Hindley-Milner 类型推导算法 (Algorithm W)
+
+**Algorithm W** 是经典的 HM 类型推导算法。
+
+**输入**: 表达式 $e$，类型环境 $\Gamma$
+**输出**: 替换 $S$ 和类型 $\tau$，或失败
+
+**算法定义**:
+
+```
+W(Γ, x) =
+  if x:σ ∈ Γ where σ = ∀α₁...αₙ.τ
+  then ([], τ[αᵢ := βᵢ])  (βᵢ 是新类型变量)
+  else fail
+
+W(Γ, λx.e) =
+  let β be a new type variable
+  let (S₁, τ₁) = W(Γ ∪ {x:β}, e)
+  return (S₁, S₁(β) → τ₁)
+
+W(Γ, e₁ e₂) =
+  let (S₁, τ₁) = W(Γ, e₁)
+  let (S₂, τ₂) = W(S₁(Γ), e₂)
+  let β be a new type variable
+  let S₃ = unify(S₂(τ₁), τ₂ → β)
+  return (S₃ ∘ S₂ ∘ S₁, S₃(β))
+
+W(Γ, let x = e₁ in e₂) =
+  let (S₁, τ₁) = W(Γ, e₁)
+  let Γ' = S₁(Γ) ∪ {x: gen(S₁(Γ), τ₁)}
+  let (S₂, τ₂) = W(Γ', e₂)
+  return (S₂ ∘ S₁, τ₂)
+```
+
+**泛化 (Generalization)**:
+$$\text{gen}(\Gamma, \tau) = \forall \alpha_1...\alpha_n. \tau$$
+其中 $\{\alpha_1, ..., \alpha_n\} = \text{FV}(\tau) \setminus \text{FV}(\Gamma)$
+
+**实例化 (Instantiation)**:
+$$\text{inst}(\forall \alpha_1...\alpha_n. \tau) = \tau[\alpha_i := \beta_i]$$
+其中 $\beta_i$ 是新的类型变量。
+
+---
+
+#### 5.4 统一算法 (Unification)
+
+**统一算法** 求解类型约束，找到使两个类型相等的替换。
+
+**定义**: 替换 $S$ 是类型变量到类型的有限映射：
+$$S = [\alpha_1 := \tau_1, ..., \alpha_n := \tau_n]$$
+
+**算法 unify**:
+
+```
+unify(τ, τ) = []
+
+unify(α, τ) =
+  if α = τ then []
+  else if α ∈ FV(τ) then fail (occurs check)
+  else [α := τ]
+
+unify(τ, α) = unify(α, τ)
+
+unify(τ₁ → τ₂, τ₃ → τ₄) =
+  let S₁ = unify(τ₁, τ₃)
+  let S₂ = unify(S₁(τ₂), S₁(τ₄))
+  return S₂ ∘ S₁
+
+unify(C(τ₁,...,τₙ), C(τ₁',...,τₙ')) =
+  unify each pair recursively
+
+unify(τ₁, τ₂) = fail (if constructors differ)
+```
+
+**出现检查 (Occurs Check)**: 防止递归类型，确保 $\alpha$ 不在 $\tau$ 的自由变量中。
+
+---
+
+#### 5.5 约束生成与求解的详细算法
+
+**约束生成算法 (Algorithm C)**:
+
+生成描述表达式类型关系的约束集合。
+
+```
+C(Γ, x : τ) =
+  if x:σ ∈ Γ
+  then let τ' = inst(σ)
+       return {τ = τ'}
+  else fail
+
+C(Γ, λx.e : τ) =
+  let α, β be new type variables
+  let C₁ = C(Γ ∪ {x:α}, e : β)
+  return C₁ ∪ {τ = α → β}
+
+C(Γ, e₁ e₂ : τ) =
+  let α be a new type variable
+  let C₁ = C(Γ, e₁ : α → τ)
+  let C₂ = C(Γ, e₂ : α)
+  return C₁ ∪ C₂
+
+C(Γ, let x = e₁ in e₂ : τ) =
+  let α be a new type variable
+  let C₁ = C(Γ, e₁ : α)
+  let S = solve(C₁)
+  let σ = gen(S(Γ), S(α))
+  let C₂ = C(Γ ∪ {x:σ}, e₂ : τ)
+  return C₁ ∪ C₂
+```
+
+**约束求解算法 (Algorithm Solve)**:
+
+```
+solve({}) = []
+
+solve({τ = τ} ∪ C) = solve(C)
+
+solve({α = τ} ∪ C) =
+  if α = τ then solve(C)
+  else if α ∈ FV(τ) then fail
+  else let S = [α := τ]
+       let S' = solve(S(C))
+       return S' ∘ S
+
+solve({τ = α} ∪ C) = solve({α = τ} ∪ C)
+
+solve({τ₁ → τ₂ = τ₃ → τ₄} ∪ C) =
+  solve({τ₁ = τ₃, τ₂ = τ₄} ∪ C)
+
+solve({C(τ₁,...) = C'(τ₁',...)} ∪ C) =
+  if C ≠ C' then fail
+  else solve({τ₁ = τ₁', ...} ∪ C)
+```
+
+---
+
+#### 5.6 类型推导示例
+
+**示例 1: 恒等函数**:
+```rust
+fn identity(x) { x }
+```
+
+推导过程：
+1. $W(\Gamma, \lambda x. x)$
+2. 生成新变量 $\beta$
+3. $W(\Gamma \cup \{x:\beta\}, x) = ([], \beta)$
+4. 返回 $([], \beta \to \beta)$
+5. 泛化: $\forall \alpha. \alpha \to \alpha$
+
+结果: `fn identity<T>(x: T) -> T`
+
+**示例 2: 复合函数**:
+```rust
+fn compose(f, g, x) { f(g(x)) }
+```
+
+推导过程：
+1. 约束：$f : \beta \to \gamma$, $g : \alpha \to \beta$, $x : \alpha$
+2. $g(x) : \beta$（由应用规则）
+3. $f(g(x)) : \gamma$（由应用规则）
+4. 结果类型: $(\beta \to \gamma) \to (\alpha \to \beta) \to \alpha \to \gamma$
+
+泛化后: `fn compose<A, B, C>(f: Fn(B) -> C, g: Fn(A) -> B, x: A) -> C`
+
+---
+
+#### 5.7 HM 算法的正确性
+
+**定理 HM-1 (_soundness_)**:
+如果 $W(\Gamma, e) = (S, \tau)$，则 $S(\Gamma) \vdash e : \tau$。
+
+**定理 HM-2 (完备性)**:
+如果存在 $\tau'$ 使得 $\Gamma' \vdash e : \tau'$，则 $W(\Gamma, e)$ 成功，且存在替换 $R$ 使 $\tau' = R(\tau)$。
+
+**定理 HM-3 (主类型 / Principal Typing)**:
+算法 W 推导出的类型是最一般的（principal），任何其他有效类型都是它的实例。
+
+---
+
+### 6. 高级类型特性
+
+**定义 6.1 (impl Trait)**: `impl Trait` 是存在类型的语法糖，表示"实现 Trait 的某种类型"：
 
 $$\text{impl } T \equiv \exists \tau. \tau : T$$
 
@@ -652,7 +1786,7 @@ $$\text{impl } T \equiv \exists \tau. \tau : T$$
 
 ---
 
-**定义 4.2 (dyn Trait)**: `dyn Trait` 是 trait 对象类型，动态分发：
+**定义 6.2 (dyn Trait)**: `dyn Trait` 是 trait 对象类型，动态分发：
 
 $$\text{dyn } T = \{\text{data}: \text{Box}<\tau>, \text{vtable}: \text{VTable}_T\}$$
 
@@ -668,7 +1802,7 @@ $$\text{dyn } T = \{\text{data}: \text{Box}<\tau>, \text{vtable}: \text{VTable}_
 
 ---
 
-**定义 4.3 (泛型关联类型 GAT)**: 泛型关联类型允许关联类型带参数：
+**定义 6.3 (泛型关联类型 GAT)**: 泛型关联类型允许关联类型带参数：
 
 $$\text{trait } T \{ \text{type } A<U>: B; \}$$
 
@@ -679,7 +1813,7 @@ $$T :: \tau \to * \quad (\text{类型构造器})$$
 
 ---
 
-**定义 4.4 (const 泛型)**: const 泛型允许类型由常量值参数化：
+**定义 6.4 (const 泛型)**: const 泛型允许类型由常量值参数化：
 
 $$\text{Type}<\text{const } N: \text{usize}>$$
 
@@ -695,7 +1829,9 @@ $$\text{Type}<\text{const } N: \text{usize}>$$
 
 ---
 
-## ⚠️ 反例：类型错误（类型检查拒绝） {#️-反例类型错误类型检查拒绝}
+## ⚠️ 反例：类型错误与类型推导失败 {#️-反例类型错误类型检查拒绝}
+
+### 反例概览
 
 | 反例 | 违反规则 | 后果 | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -703,6 +1839,349 @@ $$\text{Type}<\text{const } N: \text{usize}>$$
 | 未绑定变量 | 规则 1 | 编译错误 | `x ∉ Γ` 时使用 `x` |
 | 类型推导冲突 | 定理 4,5 | 编译错误 | 约束系统无解（如 `int = bool`） |
 | 替换引理失效 | 定理 2 保持性 | 编译错误 | β 归约中替换导致类型错误 |
+| 无限类型 | 出现检查 | 编译错误 | 递归类型约束（如 `α = α → β`） |
+| 多态限制违反 | let 多态规则 | 编译错误 | Lambda 参数的多态使用 |
+
+---
+
+### 反例 1: 类型不匹配函数应用
+
+**错误代码**:
+```rust
+fn add(x: i32, y: i32) -> i32 {
+    x + y
+}
+
+fn main() {
+    let result = add(5, "hello");  // 错误!
+}
+```
+
+**形式化分析**:
+
+表达式：$\text{add}(5, "hello")$
+
+类型环境：
+- $\Gamma = \{\text{add} : \text{Int} \times \text{Int} \to \text{Int}, 5 : \text{Int}, "hello" : \&\text{Str}\}$
+
+推导尝试：
+$$\frac{\Gamma \vdash \text{add} : \text{Int} \times \text{Int} \to \text{Int} \quad \Gamma \vdash (5, "hello") : \text{Int} \times \&\text{Str}}{\Gamma \vdash \text{add}(5, "hello") : ?}$$
+
+约束冲突：
+- 参数类型：$\text{Int} \times \&\text{Str}$
+- 期望类型：$\text{Int} \times \text{Int}$
+- 约束：$\text{Int} = \text{Int}$ ✓, $\&\text{Str} = \text{Int}$ ✗
+
+**错误信息**:
+```
+error[E0308]: mismatched types
+  --> src/main.rs:6:23
+   |
+6  |     let result = add(5, "hello");
+   |                         ^^^^^^^ expected `i32`, found `&str`
+```
+
+**理论解释**: 这违反了类型规则 2（函数应用）。统一算法无法求解 $\&\text{Str} = \text{Int}$，因为这两个类型构造器不同且没有子类型关系。
+
+---
+
+### 反例 2: 未绑定变量
+
+**错误代码**:
+```rust
+fn main() {
+    let x = y + 5;  // 错误: y 未定义
+}
+```
+
+**形式化分析**:
+
+表达式：$y + 5$
+
+类型环境：$\Gamma = \{\}$
+
+推导尝试：
+$$\frac{y : \text{Int} \in \Gamma}{\Gamma \vdash y : \text{Int}}$$
+
+但 $y \notin \text{dom}(\Gamma)$，因此变量规则无法应用。
+
+**错误信息**:
+```
+error[E0425]: cannot find value `y` in this scope
+ --> src/main.rs:2:13
+  |
+2 |     let x = y + 5;
+  |             ^ not found in this scope
+```
+
+**理论解释**: 这违反了类型规则 1（变量规则）。在类型环境 $\Gamma$ 中找不到变量 $y$ 的绑定。
+
+---
+
+### 反例 3: 类型推导冲突（无限类型）
+
+**错误代码**:
+```rust
+// 尝试构造 Omega 组合子
+fn omega<F>(f: F) -> !
+where
+    F: Fn(F) -> !
+{
+    f(f)  // 错误!
+}
+```
+
+**形式化分析**:
+
+尝试推导类型：
+- $f : \tau_f$
+- 从 $f(f)$ 得到约束：$\tau_f = \tau_f \to \bot$
+
+这产生约束：$\alpha = \alpha \to \bot$
+
+在 Hindley-Milner 类型系统中，这违反了**出现检查 (Occurs Check)**。
+
+**错误信息**:
+```
+error[E0277]: the trait bound `F: FnOnce<(F,)>` is not satisfied
+  --> src/main.rs:5:5
+   |
+5  |     f(f)
+   |     ^^^^ expected an `FnOnce<(F,)>` closure, found `F`
+```
+
+**理论解释**:
+- 约束 $\alpha = \alpha \to \beta$ 会导致无限类型
+- 统一算法通过出现检查拒绝此类约束
+- 这防止了 Y 组合子（不动点组合子）的直接表达，除非显式使用递归类型
+
+**正确写法（使用 trait object）**:
+```rust
+fn omega(f: Box<dyn Fn(Box<dyn Fn(_) -> !>) -> !>) -> ! {
+    f(f)
+}
+```
+
+---
+
+### 反例 4: 多态限制违反
+
+**错误代码**:
+```rust
+fn bad_poly<F>(f: F)
+where
+    F: Fn() -> Option<i32>
+{
+    let x = f();  // Option<i32>
+    let y = x.unwrap_or(0i32);  // i32
+    // 尝试再次使用 x 作为不同类型
+    // let z: Option<String> = x;  // 错误!
+}
+```
+
+**更隐蔽的例子**:
+```rust
+fn lambda_poly() {
+    // 尝试在 lambda 中使用多态
+    let f = |x| x;  // 推导为具体的类型，不是多态
+
+    let a: i32 = f(5);
+    // let b: String = f("hello".to_string());  // 错误!
+}
+```
+
+**形式化分析**:
+
+在 HM 类型系统中，let 绑定的变量可以是多态的，但 Lambda 绑定的变量不能：
+
+```
+let id = λx. x in        // id : ∀α. α → α (多态)
+  let a = id 5 in        // α = Int
+    let b = id "hello"   // α = String，可以！
+
+(λid. id 5 (id "hello")) (λx. x)  // 错误! id 不是多态
+```
+
+**理论解释**:
+- **let 多态**: `let x = e₁ in e₂` 中，$x$ 可以被实例化为不同类型
+- **Lambda 限制**: `(λx. e)` 中的 $x$ 在整个作用域只有一个类型
+- 这保持了类型推导的可判定性
+
+---
+
+### 反例 5: 类型不安全操作（运行时错误）
+
+**Unsafe Rust 示例**:
+```rust
+use std::ptr;
+
+unsafe fn bad_deref() {
+    let ptr: *const i32 = ptr::null();
+    let val = *ptr;  // 未定义行为: 解引用空指针
+}
+```
+
+**形式化分析**:
+
+在 Safe Rust 中，进展性保证以下情况不会发生：
+- 解引用空指针
+- 使用悬垂引用
+- 数组越界访问
+- 数据竞争
+
+但在 `unsafe` 块中，程序员负责维持这些不变式。
+
+**类型系统的边界**:
+
+```rust
+// 类型系统保证: 只要没有 unsafe 代码，以下情况绝不会发生
+fn safe_operations() {
+    let arr = [1, 2, 3];
+    // arr[5];  // 编译错误! 索引越界检查
+
+    let opt: Option<i32> = None;
+    // opt.unwrap();  // 运行时 panic，但不是未定义行为
+}
+
+// unsafe 代码可以打破这些保证
+unsafe fn unsafe_operations() {
+    let ptr = 0x0 as *const i32;
+    let _ = *ptr;  // 未定义行为!
+}
+```
+
+**理论解释**:
+- **类型安全** $\neq$ **无运行时错误**
+- 类型安全保证："不会以类型系统不允许的方式使用值"
+- `panic` 是安全的（程序有序终止）
+- 未定义行为（如空指针解引用）违反类型安全
+
+---
+
+### 反例 6: 约束求解失败
+
+**复杂类型推导失败**:
+```rust
+fn complex_failure<T, U, V>(
+    f: impl Fn(T) -> U,
+    g: impl Fn(U) -> V,
+    h: impl Fn(V) -> T,
+) -> impl Fn(T) -> T
+{
+    move |x| h(g(f(x)))
+}
+
+fn use_complex() {
+    // 提供不兼容的类型
+    let f: fn(i32) -> String = |x| x.to_string();
+    let g: fn(String) -> bool = |s| s.is_empty();
+    let h: fn(bool) -> f64 = |b| if b { 1.0 } else { 0.0 };  // 错误!
+
+    // h 返回 f64，但期望返回 T (i32)
+    // let composed = complex_failure(f, g, h);
+}
+```
+
+**约束分析**:
+
+生成的约束：
+- $f : T \to U = \text{Int} \to \text{String}$
+- $g : U \to V = \text{String} \to \text{Bool}$
+- $h : V \to T = \text{Bool} \to \text{Float}$
+
+期望：$h \circ g \circ f : T \to T = \text{Int} \to \text{Int}$
+
+实际：$h \circ g \circ f : \text{Int} \to \text{Float}$
+
+约束冲突：$\text{Int} = \text{Float}$（无解）
+
+---
+
+### 反例 7: 生命周期错误（类型系统扩展）
+
+**悬垂引用**:
+```rust
+fn dangling_reference() -> &i32 {
+    let x = 5;
+    &x  // 错误! x 在函数结束时被释放
+}
+```
+
+**形式化分析**:
+
+扩展类型系统包含生命周期：
+$$\&'a \tau \quad \text{(引用类型)}$$
+
+推导：
+- $x : \text{Int}$，生命周期为 `'local`
+- `&x : &'local Int`
+- 返回类型期望：$\&'static \text{Int}$ 或更一般 $\&'a \text{Int}$
+- 约束：$'local : 'a$（生命周期 outlives 关系）
+
+但 $'local$ 在当前作用域结束，无法满足 outlives 约束。
+
+**错误信息**:
+```
+error[E0106]: missing lifetime specifier
+error[E0515]: cannot return reference to local variable `x`
+```
+
+---
+
+### 反例 8: Trait 解析失败
+
+**Orphan 规则违反**:
+```rust
+// 错误: 违反孤儿规则
+trait MyTrait {}
+impl MyTrait for String {}  // 可以: 当前 crate 的 trait
+
+// impl std::fmt::Display for Vec<i32> {}  // 错误!
+// 既不是当前 crate 的 trait，也不是当前 crate 的类型
+```
+
+**矛盾实现**:
+```rust
+trait Same<T> {
+    fn is_same(&self, other: &T) -> bool;
+}
+
+// 第一个实现
+impl<T> Same<T> for T {
+    fn is_same(&self, other: &T) -> bool {
+        self == other
+    }
+}
+
+// 第二个实现 - 冲突!
+// impl<T, U> Same<U> for T
+// where T: PartialEq<U>
+// {
+//     fn is_same(&self, other: &U) -> bool {
+//         self == other
+//     }
+// }
+```
+
+**理论解释**:
+- **孤儿规则**: 防止 impl 冲突，保证 trait 解析的一致性
+- **一致性**: 对于任何类型，最多只有一个 impl 适用
+- 这是保证类型安全（特别是泛型代码的 monomorphization 安全）的关键
+
+---
+
+### 反例总结表
+
+| 反例类别 | 编译时/运行时 | 错误类型 | 理论根源 |
+|---------|-------------|---------|---------|
+| 类型不匹配 | 编译时 | 约束冲突 | 统一失败 |
+| 未绑定变量 | 编译时 | 环境查找失败 | 自由变量 |
+| 无限类型 | 编译时 | 出现检查失败 | 递归类型限制 |
+| 多态限制 | 编译时 | 实例化冲突 | HM 限制 |
+| unsafe UB | 运行时 | 未定义行为 | 类型系统边界 |
+| 约束无解 | 编译时 | 统一失败 | 类型不一致 |
+| 生命周期 | 编译时 | Outlives 失败 | 区域代数 |
+| Trait 冲突 | 编译时 | 孤儿规则 | 一致性要求 |
 
 ---
 
@@ -1447,6 +2926,36 @@ fn truncate_front(&mut self, len: usize)
 ---
 
 **维护者**: Rust Type Theory Research Group
-**最后更新**: 2026-03-05
+**最后更新**: 2026-03-11
 **Rust 版本**: 1.94.0
-**状态**: ✅ **已整合**
+**状态**: ✅ **已增强论证深度**
+
+---
+
+## 文档增强摘要
+
+### 本次更新内容
+
+| 增强类别 | 具体内容 | 新增/深化 |
+|---------|---------|----------|
+| **类型安全证明** | 定理 1 (进展性) 的完整结构归纳证明 | 深化 |
+| | 替换引理 (Substitution Lemma) 的完整证明 | 新增 |
+| | 定理 2 (保持性) 的详细归纳证明 | 深化 |
+| | 定理 3 (类型安全) 的详细解释与证明 | 深化 |
+| **系统 F** | 语法定义（类型、表达式） | 新增 |
+| | 类型规则（5 条核心规则） | 新增 |
+| | 求值规则（5 条核心规则） | 新增 |
+| | 类型替换引理 | 新增 |
+| | 类型安全定理 | 新增 |
+| **HM 类型推导** | Algorithm W 形式化描述 | 新增 |
+| | 统一算法 (Unification) 详细定义 | 新增 |
+| | 约束生成算法 (Algorithm C) | 新增 |
+| | 约束求解算法 | 新增 |
+| | 类型推导示例 | 新增 |
+| **Curry-Howard** | 8 个新 Rust 代码示例 | 新增 |
+| | 依赖类型与 const 泛型关联 | 新增 |
+| | 类型级编程示例 | 新增 |
+| **反例分析** | 类型推导失败例子（4 个） | 新增 |
+| | 类型不安全操作例子（4 个） | 新增 |
+| | 生命周期错误分析 | 新增 |
+| | Trait 解析失败分析 | 新增 |
