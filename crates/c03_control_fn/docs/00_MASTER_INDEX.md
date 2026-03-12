@@ -4,8 +4,8 @@
 > **使用方式**: 作为学习起点，根据需求选择合适的学习路径和文档
 > **相关文档**: [README](../README.md) | [FAQ](./FAQ.md) | [Glossary](./Glossary.md)
 
-**最后更新**: 2026-02-14
-**适用版本**: Rust 1.93.0+
+**最后更新**: 2026-03-13
+**适用版本**: Rust 1.94.0+
 **文档类型**: 📚 导航索引
 **English**: [00_MASTER_INDEX.en.md](./00_MASTER_INDEX.en.md)
 

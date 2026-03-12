@@ -2,7 +2,9 @@
 
 > **文档定位**: 网络编程学习路径总导航，快速定位所有网络相关资源
 > **使用方式**: 作为学习起点，根据需求选择合适的文档和代码模块
-> **相关文档**: [README](./README.md) | [FAQ](references/FAQ.md) | [Glossary](references/Glossary.md)
+> **适用版本**: Rust 1.94.0+
+**最后更新**: 2026-03-13
+**相关文档**: [README](./README.md) | [FAQ](references/FAQ.md) | [Glossary](references/Glossary.md)
 
 📄 **一页纸总结**: [ONE_PAGE_SUMMARY](./ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
 
