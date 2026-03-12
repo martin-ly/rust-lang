@@ -36,7 +36,7 @@
 
 ### 内容分布
 
-```
+```text
 内容金字塔:
                     ┌─────────┐
                     │  前沿研究 │  10% (PLDI/POPL/ICFP 2024-2025)
@@ -287,7 +287,7 @@ Rust 所有权可判定性文档库现已达到 **真正 100% 完成**:
 
 ### 文档统计详情
 
-```
+```text
 docs/rust-ownership-decidability/
 ├── 00-foundations/          # 理论基础
 ├── 01-core-concepts/        # 核心概念 ⭐

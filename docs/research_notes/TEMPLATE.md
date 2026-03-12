@@ -104,7 +104,7 @@ fn example_definition() {
 
 **形式化表示**:
 
-```
+```text
 [形式化规则或伪代码]
 ```
 

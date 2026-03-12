@@ -159,7 +159,10 @@ cargo kani --function test_abs
 
 ### 可选进阶：Coq/Lean
 
-**说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../archive/deprecated/README.md)。主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md)）。若需机器可检查证明，可参考 Prusti/Kani 或国际对标 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)。
+**说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。
+本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../archive/deprecated/README.md)。
+主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md)）。
+若需机器可检查证明，可参考 Prusti/Kani 或国际对标 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)。
 
 ---
 
@@ -312,7 +315,8 @@ MIRIFLAGS="-Zmiri-tag-raw-pointers" cargo miri test
 cargo miri test --test my_test
 ```
 
-**与形式化衔接**：Miri 检测违反 [ownership_model](formal_methods/ownership_model.md)、[borrow_checker_proof](formal_methods/borrow_checker_proof.md) 的 UB；与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 契约体系对应。
+**与形式化衔接**：Miri 检测违反 [ownership_model](formal_methods/ownership_model.md)、[borrow_checker_proof](formal_methods/borrow_checker_proof.md) 的 UB；
+与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 契约体系对应。
 
 **相关资源**:
 

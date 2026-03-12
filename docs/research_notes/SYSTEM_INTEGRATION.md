@@ -89,7 +89,7 @@
 
 ### 类型系统
 
-| 研究笔记系统                                                    | 形式化工程系统                                                                                                                         | 关系                                             |
+| 研究笔记系统 | 形式化工程系统 | 关系 |
 | :--- | :--- | :--- |
 | [类型系统基础](./type_theory/type_system_foundations.md)        | [类型系统理论基础](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md) | 研究笔记提供研究问题，形式化系统提供理论基础     |
 | [Trait 系统形式化](./type_theory/trait_system_formalization.md) | [Trait 系统理论](../rust-formal-engineering-system/01_theoretical_foundations/05_trait_system/README.md)        | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
@@ -97,7 +97,7 @@
 
 ### 形式化方法
 
-| 研究笔记系统                                                 | 形式化工程系统                                                                                          | 关系                                             |
+| 研究笔记系统 | 形式化工程系统 | 关系 |
 | :--- | :--- | :--- |
 | [所有权模型形式化](./formal_methods/ownership_model.md)      | [所有权系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)  | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
 | [借用检查器证明](./formal_methods/borrow_checker_proof.md)   | [借用系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)    | 研究笔记提供证明研究，形式化系统提供证明框架     |
@@ -105,7 +105,7 @@
 
 ### 实验研究
 
-| 研究笔记系统                                            | 形式化工程系统                                                                              | 关系                                           |
+| 研究笔记系统 | 形式化工程系统 | 关系 |
 | :--- | :--- | :--- |
 | [性能基准测试](./experiments/performance_benchmarks.md) | [性能优化理论](../rust-formal-engineering-system/02_practical_applications/performance/README.md) | 研究笔记提供实验数据，形式化系统提供优化理论   |
 | [内存分析](./experiments/memory_analysis.md)            | [内存管理理论](../rust-formal-engineering-system/02_practical_applications/memory/README.md)      | 研究笔记提供分析结果，形式化系统提供管理理论   |

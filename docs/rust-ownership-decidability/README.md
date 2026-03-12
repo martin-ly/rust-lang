@@ -333,12 +333,12 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 
 | 阶段 | 内容 | 时间 | 文件 |
 |:----:|:-----|:----:|:-----|
-| **第1周** |
+| **第1周** ||||
 | Day 1-2 | 详细概念学习 | 6小时 | `01-core-concepts/detailed-concepts/*.md` |
 | Day 3 | 验证工具了解 | 3小时 | `03-verification-tools/*.md` |
 | Day 4-5 | 设计模式 | 8小时 | `11-design-patterns/*.md` |
 | Day 6-7 | 并发模式 | 10小时 | `12-concurrency-patterns/*.md` |
-| **第2周** |
+| **第2周** ||||
 | Day 8-9 | 高级主题 | 8小时 | `08-advanced-topics/*.md` |
 | Day 10-11 | 案例研究 | 6小时 | `case-studies/*.md` |
 | Day 12-13 | Async专题 | 6小时 | `async-specialty/**/*.md` |
