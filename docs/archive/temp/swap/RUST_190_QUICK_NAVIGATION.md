@@ -286,15 +286,15 @@ Day 6-7: 深入理解
 
 ### 官方文档
 
-- 📖 [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-- 📖 [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
-- 📖 [Rust API Documentation](https://doc.rust-lang.org/std/)
+- 📖 [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/README.md)
+- 📖 [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/README.md)
+- 📖 [Rust API Documentation](https://doc.rust-lang.org/std/README.md)
 
 ### 社区资源
 
-- 💬 [Rust Users Forum](https://users.rust-lang.org/)
+- 💬 [Rust Users Forum](https://users.rust-lang.org/README.md)
 - 💬 [Rust Discord](https://discord.gg/rust-lang)
-- 📚 [This Week in Rust](https://this-week-in-rust.org/)
+- 📚 [This Week in Rust](https://this-week-in-rust.org/README.md)
 
 ---
 

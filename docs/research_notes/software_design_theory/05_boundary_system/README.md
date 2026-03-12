@@ -29,7 +29,7 @@
 
 **Axiom B1**：三维边界独立；任一维度可单独判定；组合使用时需同时满足各维约束。
 
-**定理 B-T1（边界一致性）**：对任意模式 $D$，$B_s(D)$、$B_p(D)$、$B_e(D)$ 由各矩阵文档的 Def 与定理唯一确定；与 [02_workflow_safe_complete_models](../02_workflow_safe_complete_models/) 的 23/43 分类一致。
+**定理 B-T1（边界一致性）**：对任意模式 $D$，$B_s(D)$、$B_p(D)$、$B_e(D)$ 由各矩阵文档的 Def 与定理唯一确定；与 [02_workflow_safe_complete_models](../02_workflow_safe_complete_models/README.md) 的 23/43 分类一致。
 
 *证明*：由各矩阵 Def 1.1；23 安全、43 完全的分类与 safe_unsafe、supported_unsupported、expressive_inexpressive 三矩阵对应。∎
 

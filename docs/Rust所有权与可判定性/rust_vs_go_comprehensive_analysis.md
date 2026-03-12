@@ -1869,9 +1869,9 @@ func sagaDemo() {
 
 ### 官方文档
 
-- [Rust 1.93.1 Documentation](https://doc.rust-lang.org/)
+- [Rust 1.93.1 Documentation](https://doc.rust-lang.org/README.md)
 - [Go 1.26 Release Notes](https://go.dev/doc/go1.26)
-- [Temporal Documentation](https://docs.temporal.io/)
+- [Temporal Documentation](https://docs.temporal.io/README.md)
 
 ### 学术论文
 

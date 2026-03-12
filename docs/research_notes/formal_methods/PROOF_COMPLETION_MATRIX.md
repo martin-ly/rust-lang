@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已更新 (Phase 2 Week 7-8)
 > **用途**: 跟踪所有核心定理的证明完成度（L1/L2 目标；L3 已归档）
-> **说明**: 聚焦数学风格形式化论证 + Rust 示例；Coq/L3 已归档至 [archive/deprecated/](../../archive/deprecated/)
+> **说明**: 聚焦数学风格形式化论证 + Rust 示例；Coq/L3 已归档至 [archive/deprecated/](../../archive/deprecated/README.md)
 
 ---
 

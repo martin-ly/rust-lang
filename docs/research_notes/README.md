@@ -99,10 +99,10 @@ research_notes/
 ├── EXECUTABLE_SEMANTICS_ROADMAP.md  # 可执行语义路线图 🆕
 ├── CORE_THEOREMS_FULL_PROOFS.md  # 核心定理完整证明（L2 级，数学风格）🆕
 ├── THEOREM_RUST_EXAMPLE_MAPPING.md  # 定理↔Rust 示例映射 🆕
-├── AENEAS_INTEGRATION_PLAN.md  # 已归档 → [archive/deprecated/](../archive/deprecated/)
-├── COQ_OF_RUST_INTEGRATION_PLAN.md  # 已归档 → [archive/deprecated/](../archive/deprecated/)
-├── COQ_ISABELLE_PROOF_SCAFFOLDING.md  # 已归档 → [archive/deprecated/](../archive/deprecated/)
-├── coq_skeleton/  # 已归档 → [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/)
+├── AENEAS_INTEGRATION_PLAN.md  # 已归档 → [archive/deprecated/](../archive/deprecated/README.md)
+├── COQ_OF_RUST_INTEGRATION_PLAN.md  # 已归档 → [archive/deprecated/](../archive/deprecated/README.md)
+├── COQ_ISABELLE_PROOF_SCAFFOLDING.md  # 已归档 → [archive/deprecated/](../archive/deprecated/README.md)
+├── coq_skeleton/  # 已归档 → [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/README.md)
 ├── CONTENT_ENHANCEMENT.md      # 内容完善指南（含层次推进、实质内容自检表）🆕
 ├── CLASSIFICATION.md           # 文档分类体系（按角色/层次/主题域）🆕
 ├── WRITING_GUIDE.md            # 研究笔记写作指南
@@ -189,7 +189,7 @@ research_notes/
 
 **相关文档**:
 
-- [形式化工程系统](../rust-formal-engineering-system/01_theoretical_foundations/)
+- [形式化工程系统](../rust-formal-engineering-system/01_theoretical_foundations/README.md)
 - [所有权与借用](../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [异步语义理论](../../crates/c06_async/src/async_semantics_theory.rs)
 
@@ -213,9 +213,9 @@ research_notes/
 
 **相关文档**:
 
-- [类型系统基础](../../crates/c02_type_system/docs/tier_04_advanced/)
-- [类型型变参考](../../crates/c02_type_system/docs/tier_03_references/) - 类型系统参考文档
-- [形式化工程系统 - 类型系统](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)
+- [类型系统基础](../../crates/c02_type_system/docs/tier_04_advanced/README.md)
+- [类型型变参考](../../crates/c02_type_system/docs/tier_03_references/README.md) - 类型系统参考文档
+- [形式化工程系统 - 类型系统](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 
 ---
 
@@ -237,9 +237,9 @@ research_notes/
 
 **相关工具**:
 
-- [基准测试框架](../../crates/c08_algorithms/benches/)
-- [性能分析工具](../../crates/c06_async/benches/)
-- [内存分析工具](../../crates/c05_threads/benches/)
+- [基准测试框架](../../crates/c08_algorithms/benches/README.md)
+- [性能分析工具](../../crates/c06_async/benches/README.md)
+- [内存分析工具](../../crates/c05_threads/benches/README.md)
 
 ---
 
@@ -249,13 +249,13 @@ research_notes/
 
 - [形式化工程系统](../rust-formal-engineering-system/README.md)
 - [研究议程](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md) - 形式化工程系统研究方法
-- [个人索引](../archive/temp/) - 归档目录（历史文档）
+- [个人索引](../archive/temp/README.md) - 归档目录（历史文档）
 
 ### 代码实现
 
-- [所有权与借用实现](../../crates/c01_ownership_borrow_scope/src/)
-- [类型系统实现](../../crates/c02_type_system/src/)
-- [异步系统实现](../../crates/c06_async/src/)
+- [所有权与借用实现](../../crates/c01_ownership_borrow_scope/src/README.md)
+- [类型系统实现](../../crates/c02_type_system/src/README.md)
+- [异步系统实现](../../crates/c06_async/src/README.md)
 
 ### 学习资源
 

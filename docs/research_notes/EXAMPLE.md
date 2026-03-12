@@ -267,7 +267,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ### 相关代码
 
 - [RustBelt 项目](https://github.com/rust-lang/rustbelt)
-- [所有权系统实现](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/)
+- [所有权系统实现](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)
 
 ### 工具资源
 

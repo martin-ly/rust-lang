@@ -13,7 +13,7 @@
 
 | 文档 | 说明 |
 | :--- | :--- |
-| [variance_theory](../type_theory/variance_theory.md) | 型变理论形式化定义与定理 |
+| [variance_theory](../../research_notes/type_theory/variance_theory.md) | 型变理论形式化定义与定理 |
 | [lifetime_formalization](lifetime_formalization.md) | 生命周期形式化（型变在生命周期中的体现）|
 | [MIND_MAP_COLLECTION](../../../04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合索引 |
 

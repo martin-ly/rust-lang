@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 将 ownership_model、borrow_checker_proof 与 RustBelt 论文逐章对标，标注「已覆盖」「部分覆盖」「未覆盖」
-> **参考**: [RustBelt: Logical Foundations for the Future of Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/) (POPL 2018)
+> **参考**: [RustBelt: Logical Foundations for the Future of Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/README.md) (POPL 2018)
 
 ---
 
@@ -23,7 +23,7 @@
 | **&T** | 共享引用 | borrow 规则 5、A-BR1 | 已覆盖 |
 | **Copy** | 复制语义 | ownership 规则、Copy trait | 已覆盖 |
 | **Send/Sync** | 并发 trait | async_state_machine T6.2、SPAWN-T1 | 已覆盖 |
-| **Iris 分离逻辑** | 机器可检查证明框架 | [coq_skeleton](coq_skeleton/)（T-OW2 骨架，证明 Admitted） | 部分 |
+| **Iris 分离逻辑** | 机器可检查证明框架 | [coq_skeleton](coq_skeleton/README.md)（T-OW2 骨架，证明 Admitted） | 部分 |
 | **MIR 级建模** | 中间表示级语义 | 无 | 未覆盖 |
 | **unsafe 库验证** | 每库验证条件 | borrow UNSAFE1、UNSAFE-T1/T2 | 部分 |
 
@@ -35,7 +35,7 @@
 
 | RustBelt 概念 | 本项目 | 差距 |
 | :--- | :--- | :--- |
-| 唯一所有者 | ownership T2、A-OW1、[coq_skeleton](coq_skeleton/) | Coq 骨架已创建，证明待补全 |
+| 唯一所有者 | ownership T2、A-OW1、[coq_skeleton](coq_skeleton/README.md) | Coq 骨架已创建，证明待补全 |
 | 移动语义 | ownership 规则 2、A-OW2 | 语言级有，MIR 级无 |
 | 借用互斥 | borrow T1、A-BR2/3 | Coq 骨架待扩展（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](COQ_ISABELLE_PROOF_SCAFFOLDING.md)） |
 | 生命周期 outlives | lifetime LF-T1–T3 | 无 Iris lifetime 逻辑 |
@@ -75,7 +75,7 @@
 ## 四、补全路线图
 
 1. **短期**：保持语言级形式化与 RustBelt 概念对齐；在 PROOF_INDEX 中标注 RustBelt 对应章节
-2. **中期**：补全 [coq_skeleton](coq_skeleton/) Admitted 证明；扩展 T-BR1/T-TY3 骨架（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)、[AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](./COQ_OF_RUST_INTEGRATION_PLAN.md)）
+2. **中期**：补全 [coq_skeleton](coq_skeleton/README.md) Admitted 证明；扩展 T-BR1/T-TY3 骨架（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)、[AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](./COQ_OF_RUST_INTEGRATION_PLAN.md)）
 3. **长期**：若资源允许，对标 RustBelt Meets Relaxed Memory，补全原子操作与 Arc 松弛内存形式化
 
 ---

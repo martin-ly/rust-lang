@@ -174,7 +174,7 @@
 | [trait_system_formalization](./type_theory/trait_system_formalization.md) | - | T1–T3, COH-T1, RPIT-T1, … |
 | [async_state_machine](./formal_methods/async_state_machine.md) | §2.4 A-AS1–2 | T6.1–T6.3, SPAWN-T1 |
 | [pin_self_referential](./formal_methods/pin_self_referential.md) | §2.4 A-PIN1–2 | T1–T3 |
-| [04_compositional_engineering](./software_design_theory/04_compositional_engineering/) | 组合层 | CE-T1–T3, CE-L1, CE-C1 |
+| [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | 组合层 | CE-T1–T3, CE-L1, CE-C1 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./UNIFIED_SYSTEMATIC_FRAMEWORK.md) | 顶层 | USF-T1, USF-C1 |
 
 ---

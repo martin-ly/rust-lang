@@ -49,30 +49,30 @@
    - 作者: Ralf Jung, et al.
    - 年份: 2018
    - 摘要: 使用分离逻辑形式化验证 Rust 的类型系统
-   - 链接: [论文链接](https://plv.mpi-sws.org/rustbelt/)
+   - 链接: [论文链接](https://plv.mpi-sws.org/rustbelt/README.md)
 
 2. **Stacked Borrows: An Aliasing Model for Rust**
    - 作者: Ralf Jung, et al.
    - 年份: 2019
    - 摘要: Rust 借用检查器的形式化模型
-   - 链接: [论文链接](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
+   - 链接: [论文链接](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md)
 
 3. **The RustBelt Project**
    - 作者: Ralf Jung, et al.
    - 摘要: Rust 形式化验证的综合项目
-   - 链接: [项目主页](https://plv.mpi-sws.org/rustbelt/)
+   - 链接: [项目主页](https://plv.mpi-sws.org/rustbelt/README.md)
 
 ### 类型理论相关论文
 
 1. **Type Systems for Programming Languages**
    - 作者: Benjamin C. Pierce
    - 摘要: 类型系统理论的经典教材
-   - 链接: [书籍链接](https://www.cis.upenn.edu/~bcpierce/tapl/)
+   - 链接: [书籍链接](https://www.cis.upenn.edu/~bcpierce/tapl/README.md)
 
 2. **Advanced Topics in Types and Programming Languages**
    - 作者: Benjamin C. Pierce
    - 摘要: 类型系统高级主题
-   - 链接: [书籍链接](https://www.cis.upenn.edu/~bcpierce/attapl/)
+   - 链接: [书籍链接](https://www.cis.upenn.edu/~bcpierce/attapl/README.md)
 
 3. **Rust's Type System**
    - 作者: Various
@@ -302,7 +302,7 @@
 
 | 资源类型 | 形式化文档 | 可验证/支撑的定理 |
 | :--- | :--- | :--- |
-| RustBelt、Stacked Borrows | [ownership_model](formal_methods/ownership_model.md)、[borrow_checker_proof](formal_methods/borrow_checker_proof.md)、[coq_skeleton](coq_skeleton/)、[RUSTBELT_ALIGNMENT](RUSTBELT_ALIGNMENT.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
+| RustBelt、Stacked Borrows | [ownership_model](formal_methods/ownership_model.md)、[borrow_checker_proof](formal_methods/borrow_checker_proof.md)、[coq_skeleton](coq_skeleton/README.md)、[RUSTBELT_ALIGNMENT](RUSTBELT_ALIGNMENT.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
 | Rust 类型系统研究 | [type_system_foundations](type_theory/type_system_foundations.md)、[trait_system_formalization](type_theory/trait_system_formalization.md) | 类型保持、coherence、RPITIT |
 | Prusti、Kani | [formal_methods](formal_methods/README.md) | 所有权、借用、unsafe 契约 |
 | Criterion、Miri | [experiments/README](experiments/README.md) | EX-T1、EX-T2；内存安全验证 |
@@ -334,7 +334,7 @@
 - [国际对标索引](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) - RustBelt、Aeneas、RustSEM 等
 - [形式化全模型入口](./FORMAL_FULL_MODEL_OVERVIEW.md) - 统一形式系统
 - [核心定理完整证明](./CORE_THEOREMS_FULL_PROOFS.md) - L2 级 ownership T2、borrow T1、type T3
-- [Coq 证明骨架](./coq_skeleton/) - T-OW2 所有权唯一性
+- [Coq 证明骨架](./coq_skeleton/README.md) - T-OW2 所有权唯一性
 - [L3 实施指南](../archive/deprecated/COQ_ISABELLE_PROOF_SCAFFOLDING.md) - Coq/Isabelle 补全路线（已归档）
 
 ---

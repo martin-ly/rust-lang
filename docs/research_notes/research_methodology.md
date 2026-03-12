@@ -341,7 +341,7 @@ Qed.
 - **可重复性**：环境、命令、版本可复现；实验类需「数据收集执行指南」+「结果分析模板」。
 - **逻辑一致**：形式化研究中的定义、定理、证明与代码示例一致；类型/借用规则与实现对应。
 - **可验证**：形式化可用 Coq/Lean/Prusti 等验证；实验可用 `cargo bench`/`cargo test`/Valgrind 等复现。
-- **交叉引用**：与 [formal_methods](./formal_methods/)、[type_theory](./type_theory/)、[experiments](./experiments/)、[practical_applications](./practical_applications.md) 的关联明确。
+- **交叉引用**：与 [formal_methods](./formal_methods/README.md)、[type_theory](./type_theory/README.md)、[experiments](./experiments/README.md)、[practical_applications](./practical_applications.md) 的关联明确。
 - **时效性**：注明 Rust 版本（如 1.93.1+）；若依赖未稳定特性，需标出。
 
 ### 研究模板
@@ -391,19 +391,19 @@ Qed.
 ### 方法论文献
 
 - [研究方法索引](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md)
-- [研究工具指南](../rust-formal-engineering-system/09_research_agenda/04_research_methods/)
+- [研究工具指南](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md)
 
 ### 工具文档
 
 - [研究工具使用指南](./TOOLS_GUIDE.md) - 详细的工具安装和使用方法
-- [Criterion.rs 文档](https://docs.rs/criterion/)
+- [Criterion.rs 文档](https://docs.rs/criterion/README.md)
 - [Miri 文档](https://github.com/rust-lang/miri)
-- [Prusti 文档](https://viperproject.github.io/prusti-dev/)
+- [Prusti 文档](https://viperproject.github.io/prusti-dev/README.md)
 
 ### 最佳实践
 
-- [Rust 研究最佳实践](https://doc.rust-lang.org/book/)
-- [性能研究指南](https://nnethercote.github.io/perf-book/)
+- [Rust 研究最佳实践](https://doc.rust-lang.org/book/README.md)
+- [性能研究指南](https://nnethercote.github.io/perf-book/README.md)
 - [形式化验证指南](https://doc.rust-lang.org/book/ch19-00-advanced-topics.html)
 
 ---

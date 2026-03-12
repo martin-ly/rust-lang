@@ -1,84 +1,87 @@
 #!/usr/bin/env python3
-"""修复所有剩余断链"""
+# -*- coding: utf-8 -*-
+"""批量修复所有剩余断链"""
 
-import os
+import json
 import re
 from pathlib import Path
 
-def find_markdown_files(root_dir):
-    md_files = []
-    for root, dirs, files in os.walk(root_dir):
-        dirs[:] = [d for d in dirs if d not in ['.git', 'node_modules']]
-        for file in files:
-            if file.endswith('.md'):
-                md_files.append(os.path.join(root, file))
-    return md_files
-
-def fix_file(filepath):
-    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
-        content = f.read()
-    
-    original = content
-    fixes = []
-    
-    # 1. 修复 archive/deprecated/ 链接到 docs/archive/deprecated/
-    if 'archive/deprecated/' in content and 'docs/archive/deprecated/' not in content:
-        # 计算相对路径
-        rel_path = os.path.relpath('docs/archive/deprecated', os.path.dirname(filepath))
-        content = re.sub(r'\]\((\.\.?/?)*archive/deprecated/', f']({rel_path}/', content)
-        fixes.append('archive/deprecated -> docs/archive/deprecated')
-    
-    # 2. 修复 docs/docs/ 双重路径
-    if 'docs/docs/' in content:
-        content = content.replace('docs/docs/', 'docs/')
-        fixes.append('docs/docs/ -> docs/')
-    
-    # 3. 修复 research_notes/research_notes/
-    if 'research_notes/research_notes/' in content:
-        content = content.replace('research_notes/research_notes/', 'research_notes/')
-        fixes.append('research_notes/research_notes/ -> research_notes/')
-    
-    # 4. 修复 .md.md 错误
-    if '.md.md' in content:
-        content = content.replace('.md.md', '.md')
-        fixes.append('.md.md -> .md')
-    
-    # 5. 修复 xxx/ 占位符
-    if 'crates/xxx/' in content or '/xxx/' in content:
-        # 跳过修复，这些是模板示例
-        pass
-    
-    # 6. 修复路径中的特殊字符
-    if '{}' in content or '{#}' in content:
-        # 移除或替换锚点中的特殊字符
-        content = re.sub(r'\{#.*?\}', '', content)
-        fixes.append('移除特殊锚点')
-    
-    if content != original:
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(content)
-        return fixes
-    return []
-
 def main():
-    md_files = find_markdown_files('.')
-    total_fixes = 0
-    fixed_files = []
+    docs_path = Path('e:/_src/rust-lang/docs')
     
-    print(f"扫描 {len(md_files)} 个文件...")
+    with open(docs_path / 'link_check_report.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
     
-    for filepath in md_files:
+    fixed_total = 0
+    
+    for file_path_str, broken_links in data['broken_by_file'].items():
+        full_path = docs_path / file_path_str
+        if not full_path.exists():
+            continue
+        
         try:
-            fixes = fix_file(filepath)
-            if fixes:
-                fixed_files.append((filepath, fixes))
-                total_fixes += len(fixes)
+            with open(full_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            original_content = content
+            
+            for link in broken_links:
+                target = link['link_target']
+                text = link['link_text']
+                
+                # 跳过代码语法误报
+                if any(x in target for x in [' T', 'a, b', 'item T', 'x T']) and 'T ' in text:
+                    continue
+                if text.startswith('\\'):  # LaTeX
+                    continue
+                if '{}' in target:  # 模板
+                    continue
+                if target == 'path' or target == '(.*)' or target == 'path/to/doc.md':
+                    # 占位符链接，移除
+                    pattern = rf'\[{re.escape(text)}\]\({re.escape(target)}\)'
+                    content = re.sub(pattern, text, content)
+                    continue
+                
+                # 修复特定模式
+                # 1. 目录链接 -> README.md
+                if target.endswith('/') and not target.startswith('http'):
+                    old = f']({target})'
+                    new = f']({target}README.md)'
+                    content = content.replace(old, new)
+                
+                # 2. archive/process_reports 链接
+                if '../archive/process_reports/2026_02/' in target:
+                    content = content.replace(
+                        '](../archive/process_reports/2026_02/)',
+                        '](../archive/process_reports/)'
+                    )
+                
+                # 3. coq_skeleton 链接
+                if 'coq_skeleton/' in target and '../' in target:
+                    content = content.replace(
+                        '../coq_skeleton/',
+                        './coq_skeleton/'
+                    )
+                
+                # 4. 修复 software_design_theory 链接
+                for subdir in ['01_design_patterns_formal', '02_workflow', '03_execution_models', 
+                               '04_compositional_engineering', '05_boundary_system']:
+                    if f'{subdir}/' in target and 'README.md' not in target:
+                        content = content.replace(
+                            f']({subdir}/)',
+                            f']({subdir}/README.md)'
+                        )
+            
+            if content != original_content:
+                with open(full_path, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                fixed_total += len(broken_links)
+                print(f'Fixed: {file_path_str} ({len(broken_links)} links)')
+        
         except Exception as e:
-            pass
+            print(f'Error: {file_path_str}: {e}')
     
-    print(f"修复了 {len(fixed_files)} 个文件，{total_fixes} 处链接")
-    for fp, fixes in fixed_files[:20]:
-        print(f"  {fp}: {fixes}")
+    print(f'\nTotal links fixed: {fixed_total}')
 
 if __name__ == '__main__':
     main()

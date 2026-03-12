@@ -189,7 +189,7 @@
 
 ### Curry-Howard 对应 (Stanford CS242 Lecture 16-20)
 
-> **课程**: [Stanford CS242: Programming Languages](https://cs242.stanford.edu/)
+> **课程**: [Stanford CS242: Programming Languages](https://cs242.stanford.edu/README.md)
 > **关键 Lecture**: Lecture 16-20 详细讲解 Curry-Howard 对应
 
 **核心思想**: Curry-Howard 对应（同构）揭示了类型理论和数理逻辑之间的深层联系：
@@ -882,7 +882,9 @@ $$(\lambda x:\tau_1. e_b)(v_2) \to e_b[x := v_2]$$
 假设 $\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : \tau$。
 
 根据条件规则：
-$$\frac{\Gamma \vdash e_1 : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \Gamma \vdash e_3 : \tau}{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : \tau}$$
+$$
+\frac{\Gamma \vdash e_1 : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \Gamma \vdash e_3 : \tau}{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : \tau}
+$$
 
 根据 IH 应用于 $e_1$：
 
@@ -909,7 +911,9 @@ $$\frac{\Gamma \vdash e_1 : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \Ga
 假设 $\Gamma \vdash \text{let } x = e_1 \text{ in } e_2 : \tau_2$。
 
 根据 let 规则：
-$$\frac{\Gamma \vdash e_1 : \tau_1 \quad \Gamma, x:\tau_1 \vdash e_2 : \tau_2}{\Gamma \vdash \text{let } x = e_1 \text{ in } e_2 : \tau_2}$$
+$$
+\frac{\Gamma \vdash e_1 : \tau_1 \quad \Gamma, x:\tau_1 \vdash e_2 : \tau_2}{\Gamma \vdash \text{let } x = e_1 \text{ in } e_2 : \tau_2}
+$$
 
 根据 IH 应用于 $e_1$：
 
@@ -997,7 +1001,9 @@ $e[x := v] = (e_1[x := v])(e_2[x := v])$
 假设 $\Gamma, x:\tau_1 \vdash e_1(e_2) : \tau_2$ 且 $\Gamma \vdash v : \tau_1$。
 
 由应用规则：
-$$\frac{\Gamma, x:\tau_1 \vdash e_1 : \tau_a \to \tau_2 \quad \Gamma, x:\tau_1 \vdash e_2 : \tau_a}{\Gamma, x:\tau_1 \vdash e_1(e_2) : \tau_2}$$
+$$
+\frac{\Gamma, x:\tau_1 \vdash e_1 : \tau_a \to \tau_2 \quad \Gamma, x:\tau_1 \vdash e_2 : \tau_a}{\Gamma, x:\tau_1 \vdash e_1(e_2) : \tau_2}
+$$
 
 应用 IH：
 
@@ -1005,7 +1011,9 @@ $$\frac{\Gamma, x:\tau_1 \vdash e_1 : \tau_a \to \tau_2 \quad \Gamma, x:\tau_1 \
 - $\Gamma, x:\tau_1 \vdash e_2 : \tau_a$ 且 $\Gamma \vdash v : \tau_1$ $\Rightarrow$ $\Gamma \vdash e_2[x := v] : \tau_a$
 
 应用应用规则：
-$$\frac{\Gamma \vdash e_1[x := v] : \tau_a \to \tau_2 \quad \Gamma \vdash e_2[x := v] : \tau_a}{\Gamma \vdash (e_1[x := v])(e_2[x := v]) : \tau_2}$$
+$$
+\frac{\Gamma \vdash e_1[x := v] : \tau_a \to \tau_2 \quad \Gamma \vdash e_2[x := v] : \tau_a}{\Gamma \vdash (e_1[x := v])(e_2[x := v]) : \tau_2}
+$$
 
 因此 $\Gamma \vdash e[x := v] : \tau_2$，替换引理成立。
 
@@ -1080,7 +1088,9 @@ $$\Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash e' : \tau$$
 假设 $\Gamma \vdash \text{if } true \text{ then } e_2 \text{ else } e_3 : \tau$。
 
 由条件规则：
-$$\frac{\Gamma \vdash true : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \Gamma \vdash e_3 : \tau}{\Gamma \vdash \text{if } true \text{ then } e_2 \text{ else } e_3 : \tau}$$
+$$
+\frac{\Gamma \vdash true : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \Gamma \vdash e_3 : \tau}{\Gamma \vdash \text{if } true \text{ then } e_2 \text{ else } e_3 : \tau}
+$$
 
 直接有 $\Gamma \vdash e_2 : \tau$，保持性成立。
 
@@ -1093,7 +1103,9 @@ $$\frac{\Gamma \vdash true : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \G
 假设 $\Gamma \vdash \text{let } x = v \text{ in } e : \tau$。
 
 由 let 规则：
-$$\frac{\Gamma \vdash v : \tau_1 \quad \Gamma, x:\tau_1 \vdash e : \tau}{\Gamma \vdash \text{let } x = v \text{ in } e : \tau}$$
+$$
+\frac{\Gamma \vdash v : \tau_1 \quad \Gamma, x:\tau_1 \vdash e : \tau}{\Gamma \vdash \text{let } x = v \text{ in } e : \tau}
+$$
 
 根据替换引理：
 
@@ -1166,7 +1178,9 @@ $$\frac{e_1 \to e_1'}{\text{if } e_1 \text{ then } e_2 \text{ else } e_3 \to \te
 - $\Gamma \vdash e_1' : \text{bool}$
 
 应用条件规则：
-$$\frac{\Gamma \vdash e_1' : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \Gamma \vdash e_3 : \tau}{\Gamma \vdash \text{if } e_1' \text{ then } e_2 \text{ else } e_3 : \tau}$$
+$$
+\frac{\Gamma \vdash e_1' : \text{bool} \quad \Gamma \vdash e_2 : \tau \quad \Gamma \vdash e_3 : \tau}{\Gamma \vdash \text{if } e_1' \text{ then } e_2 \text{ else } e_3 : \tau}
+$$
 
 保持性成立。
 
@@ -1205,7 +1219,9 @@ $$\forall e, e'. \Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash
 $$\Gamma \vdash e : \tau \rightarrow \neg \exists e': e \to^* e' \land \text{type\_error}(e')$$
 
 或等价地表述为：
-$$\text{如果 } \Gamma \vdash e : \tau \text{ 且 } e \to^* e' \text{（包括 } e' = e \text{），则 } e' \text{ 是值或存在 } e'' \text{ 使 } e' \to e''$$
+$$
+\text{如果 } \Gamma \vdash e : \tau \text{ 且 } e \to^* e' \text{（包括 } e' = e \text{），则 } e' \text{ 是值或存在 } e'' \text{ 使 } e' \to e''
+$$
 
 ---
 
@@ -2464,9 +2480,9 @@ fn main() {
 
 **课程链接**:
 
-- [Stanford CS242: Programming Languages](https://cs242.stanford.edu/)
-- [CS242 Lecture Notes - Type Systems](https://cs242.stanford.edu/lectures/)
-- [CS242 Lecture Notes - Curry-Howard](https://cs242.stanford.edu/lectures/)
+- [Stanford CS242: Programming Languages](https://cs242.stanford.edu/README.md)
+- [CS242 Lecture Notes - Type Systems](https://cs242.stanford.edu/lectures/README.md)
+- [CS242 Lecture Notes - Curry-Howard](https://cs242.stanford.edu/lectures/README.md)
 
 ### 学术论文
 
@@ -2484,19 +2500,19 @@ fn main() {
 
 - [Rust Book - Types](https://doc.rust-lang.org/book/ch03-02-data-types.html)
 - [Rust Reference - Types](https://doc.rust-lang.org/reference/types.html)
-- [类型系统文档](../../../crates/c02_type_system/docs/)
+- [类型系统文档](../../../crates/c02_type_system/docs/README.md)
 
 ### 相关代码
 
-- [类型系统实现](../../../crates/c02_type_system/src/)
-- [类型系统示例](../../../crates/c02_type_system/examples/)
-- [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)
+- [类型系统实现](../../../crates/c02_type_system/src/README.md)
+- [类型系统示例](../../../crates/c02_type_system/examples/README.md)
+- [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 
 ### 工具资源
 
-- [Coq](https://coq.inria.fr/): 类型理论证明助手
-- [Agda](https://agda.readthedocs.io/): 依赖类型编程语言
-- [Idris](https://www.idris-lang.org/): 依赖类型函数式编程语言
+- [Coq](https://coq.inria.fr/README.md): 类型理论证明助手
+- [Agda](https://agda.readthedocs.io/README.md): 依赖类型编程语言
+- [Idris](https://www.idris-lang.org/README.md): 依赖类型函数式编程语言
 
 ---
 

@@ -18,9 +18,9 @@
 
 | 文件 | 主题 | 难度 |
 |------|------|------|
-| [`04-uninitialized-memory.md`](./04-uninitialized-memory.md) | 未初始化内存处理 | 🟡 中级 |
-| [`05-maybeuninit.md`](./05-maybeuninit.md) | MaybeUninit 类型 | 🟡 中级 |
-| [`06-atomics.md`](./06-atomics.md) | 原子操作与内存序 | 🔴 高级 |
+| [`05-uninitialized-memory.md`](./05-uninitialized-memory.md) | 未初始化内存处理 | 🟡 中级 |
+| [`06-maybe-uninit.md`](./06-maybe-uninit.md) | MaybeUninit 类型 | 🟡 中级 |
+| [`09-atomics.md`](./09-atomics.md) | 原子操作与内存序 | 🔴 高级 |
 | [`07-drop-flags.md`](./07-drop-flags.md) | Drop 检查与析构安全 | 🔴 高级 |
 | [`08-aliasing.md`](./08-aliasing.md) | 别名规则与优化 | 🔴 高级 |
 
@@ -28,8 +28,8 @@
 
 | 文件 | 主题 | 难度 |
 |------|------|------|
-| [`09-inline-asm.md`](./09-inline-asm.md) | 内联汇编 | 🔴 高级 |
-| [`10-ffi-boundaries.md`](./10-ffi-boundaries.md) | FFI 边界安全 | 🔴 高级 |
+| [`10-inline-asm.md`](./10-inline-asm.md) | 内联汇编 | 🔴 高级 |
+| [`04-extern-ffi.md`](./04-extern-ffi.md) | FFI 边界安全 | 🔴 高级 |
 | [`11-impl-vec.md`](./11-impl-vec.md) | 实现 Vec<T> | 🔴 高级 |
 
 ---
@@ -62,13 +62,13 @@
 - [1. Unsafe Rust 入门](01-intro.md)
 - [2. 原始指针](02-raw-pointers.md)
 - [3. Unsafe 函数与 FFI](03-unsafe-functions.md)
-- [4. 未初始化内存](04-uninitialized-memory.md)
-- [5. MaybeUninit 类型](05-maybeuninit.md)
-- [6. 原子操作](06-atomics.md)
+- [4. 未初始化内存](05-uninitialized-memory.md)
+- [5. MaybeUninit 类型](06-maybe-uninit.md)
+- [6. 原子操作](09-atomics.md)
 - [7. Drop 检查](07-drop-flags.md)
 - [8. 别名规则](08-aliasing.md)
-- [9. 内联汇编](09-inline-asm.md)
-- [10. FFI 边界](10-ffi-boundaries.md)
+- [9. 内联汇编](10-inline-asm.md)
+- [10. FFI 边界](04-extern-ffi.md)
 - [11. 实现 Vec<T>](11-impl-vec.md)
 
 ---

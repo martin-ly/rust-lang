@@ -1,70 +1,96 @@
 #!/usr/bin/env python3
-"""修复剩余的路径问题"""
+# -*- coding: utf-8 -*-
+"""批量修复剩余断链"""
 
-import os
+import json
 import re
+from pathlib import Path
 
-def find_markdown_files(root_dir):
-    md_files = []
-    for root, dirs, files in os.walk(root_dir):
-        dirs[:] = [d for d in dirs if d not in ['.git', 'node_modules']]
-        for file in files:
-            if file.endswith('.md'):
-                md_files.append(os.path.join(root, file))
-    return md_files
+def fix_directory_links(content):
+    """修复指向目录的链接，改为指向 README.md"""
+    # 匹配 ](path/) 但不以 .md 结尾的链接
+    pattern = r'\]\(([^)]+/)(?!.*\.md)\)'
+    
+    def replace_link(match):
+        path = match.group(1)
+        # 如果路径以 / 结尾，添加 README.md
+        if path.endswith('/'):
+            return f']({path}README.md)'
+        return match.group(0)
+    
+    return re.sub(pattern, replace_link, content)
 
-def fix_file(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        content = f.read()
+def fix_specific_patterns(content, file_path):
+    """修复特定模式"""
     
-    original = content
-    fixes = []
+    # 修复 archive/temp 中的 rust-formal-engineering-system 链接
+    if 'archive/temp' in str(file_path):
+        content = content.replace(
+            '../../rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models/',
+            '../../rust-formal-engineering-system/03_design_patterns/04_concurrent/README.md'
+        )
+        content = content.replace(
+            '../../rust-formal-engineering-system/01_theoretical_foundations/08_macro_system/',
+            '../../rust-formal-engineering-system/03_compiler_theory/README.md'
+        )
+        content = content.replace(
+            '../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/generics/',
+            '../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md'
+        )
     
-    # 1. 修复 docs/crates/ 路径错误
-    if 'docs/crates/' in content:
-        content = content.replace('docs/crates/', '../crates/')
-        fixes.append('docs/crates/ -> ../crates/')
+    # 修复 research_notes 中的目录链接
+    if 'research_notes' in str(file_path):
+        # 修复 software_design_theory 子目录链接
+        for subdir in ['01_design_patterns_formal', '02_workflow_safe_complete_models', 
+                       '03_execution_models', '04_compositional_engineering', 
+                       '05_boundary_system', '05_distributed', '02_workflow']:
+            content = content.replace(
+                f'](./software_design_theory/{subdir}/)',
+                f'](./software_design_theory/{subdir}/README.md)'
+            )
+            content = content.replace(
+                f'](software_design_theory/{subdir}/)',
+                f'](software_design_theory/{subdir}/README.md)'
+            )
     
-    # 2. 修复 xxx 占位符链接
-    if 'crates/xxx/' in content or 'xxx/docs' in content or 'xxx/examples' in content:
-        # 这些通常是示例链接，保留或替换为通用说明
-        pass
-    
-    # 3. 修复相对路径文本
-    if '[相对路径]' in content or '](相对路径)' in content:
-        content = content.replace('](相对路径)', '](./docs/)')
-        fixes.append('相对路径 -> ./docs/')
-    
-    # 4. 修复其他.md链接
-    if 'other.md' in content:
-        content = content.replace('other.md', 'README.md')
-        fixes.append('other.md -> README.md')
-    
-    if content != original:
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(content)
-        return fixes
-    return []
+    return content
 
 def main():
-    md_files = find_markdown_files('.')
-    total_fixes = 0
-    fixed_files = []
+    docs_path = Path('e:/_src/rust-lang/docs')
     
-    print(f"扫描 {len(md_files)} 个文件...")
+    # 读取断链报告
+    with open(docs_path / 'link_check_report.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
     
-    for filepath in md_files:
+    fixed_count = 0
+    
+    # 处理每个有断链的文件
+    for file_path_str, broken_links in data['broken_by_file'].items():
+        full_path = docs_path / file_path_str
+        if not full_path.exists():
+            continue
+        
         try:
-            fixes = fix_file(filepath)
-            if fixes:
-                fixed_files.append((filepath, fixes))
-                total_fixes += len(fixes)
+            with open(full_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            original_content = content
+            
+            # 应用修复
+            content = fix_directory_links(content)
+            content = fix_specific_patterns(content, file_path_str)
+            
+            # 如果有修改，保存
+            if content != original_content:
+                with open(full_path, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                fixed_count += 1
+                print(f'Fixed: {file_path_str} ({len(broken_links)} links)')
+        
         except Exception as e:
-            pass
+            print(f'Error processing {file_path_str}: {e}')
     
-    print(f"修复了 {len(fixed_files)} 个文件，{total_fixes} 处链接")
-    for fp, fixes in fixed_files[:10]:
-        print(f"  {fp}: {fixes}")
+    print(f'\nTotal files fixed: {fixed_count}')
 
 if __name__ == '__main__':
     main()

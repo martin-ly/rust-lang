@@ -78,7 +78,7 @@
 
 ### 形式化论证与实验衔接
 
-**Def CP1（并发实验验证）**：并发性能实验 $E$ 验证 [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) T1、[async_state_machine](../formal_methods/async_state_machine.md) T6.2，当且仅当 $E$ 在观测下无数据竞争。
+**Def CP1（并发实验验证）**：并发性能实验 $E$ 验证 [borrow_checker_proof](../../research_notes/formal_methods/borrow_checker_proof.md) T1、[async_state_machine](../../research_notes/formal_methods/async_state_machine.md) T6.2，当且仅当 $E$ 在观测下无数据竞争。
 
 **Axiom CP1**：ThreadSanitizer 等工具可检测数据竞争；实验观测与 borrow T1、async T6.2 结论一致即验证。
 
@@ -88,7 +88,7 @@
 
 **引理 CP-L1（Send/Sync 与 borrow T1 衔接）**：若类型 $T$ 满足 `Send + Sync` 且跨线程共享，则 borrow T1 保证无数据竞争；TSan 观测与 borrow T1、async T6.2 结论一致。
 
-*证明*：由 [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) T1、[async_state_machine](../formal_methods/async_state_machine.md) T6.2；Send/Sync 为跨线程传递的必要条件；满足则无数据竞争。∎
+*证明*：由 [borrow_checker_proof](../../research_notes/formal_methods/borrow_checker_proof.md) T1、[async_state_machine](../../research_notes/formal_methods/async_state_machine.md) T6.2；Send/Sync 为跨线程传递的必要条件；满足则无数据竞争。∎
 
 **推论 CP-C1**：Mutex、channel 等并发原语性能开销可实验测量；形式化保证正确性，性能需实验评估。
 
@@ -457,7 +457,7 @@ async fn async_task_benchmark() {
 | 锁/同步点、happens-before | `Acquire`/`Release`/`AcqRel` | 获取-释放语义；Mutex 内部 |
 | 纯计数器、无跨线程依赖 | `Relaxed` | 最弱、最快；仅需原子性 |
 
-**引用**：[ownership_model](../formal_methods/ownership_model.md) Def ATOMIC1；[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证。
+**引用**：[ownership_model](../../research_notes/formal_methods/ownership_model.md) Def ATOMIC1；[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证。
 
 ### 死锁检测与运行时验证工具
 
@@ -486,8 +486,8 @@ async fn async_task_benchmark() {
 
 ### 与形式化方法的集成
 
-- **异步状态机**：见 [async_state_machine.md](../formal_methods/async_state_machine.md)。异步任务的 Poll、Waker 与状态转换，可与本研究的 async 基准对应；并发安全定理与「无数据竞争」可共同验证。
-- **借用检查器**：见 [borrow_checker_proof.md](../formal_methods/borrow_checker_proof.md)。Rust 的并发原语（Mutex、Arc、channel）在类型与借用层面保证数据竞争自由，本研究的性能数据不改变该结论，但可指导「在安全前提下选更快实现」。
+- **异步状态机**：见 [async_state_machine.md](../../research_notes/formal_methods/async_state_machine.md)。异步任务的 Poll、Waker 与状态转换，可与本研究的 async 基准对应；并发安全定理与「无数据竞争」可共同验证。
+- **借用检查器**：见 [borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md)。Rust 的并发原语（Mutex、Arc、channel）在类型与借用层面保证数据竞争自由，本研究的性能数据不改变该结论，但可指导「在安全前提下选更快实现」。
 
 ### 与实验研究的集成
 
@@ -517,8 +517,8 @@ async fn async_task_benchmark() {
 
 ### 相关代码
 
-- [并发性能测试代码](../../../crates/c05_threads/benches/)
-- [异步性能测试代码](../../../crates/c06_async/benches/)
+- [并发性能测试代码](../../../crates/c05_threads/benches/README.md)
+- [异步性能测试代码](../../../crates/c06_async/benches/README.md)
 
 ---
 

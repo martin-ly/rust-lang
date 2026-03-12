@@ -31,12 +31,12 @@
       - [📦 标准库更新](#-标准库更新)
       - [🔍 Lint 改进](#-lint-改进)
     - [Q3.2: 如何使用新的稳定 API？](#q32-如何使用新的稳定-api)
-      - [checked_sub_signed()](#checked_sub_signed)
+      - [checked\_sub\_signed()](#checked_sub_signed)
       - [const 函数增强](#const-函数增强)
       - [const 数学函数](#const-数学函数)
   - [4. 常见问题](#4-常见问题)
-    - [Q4.1: rust_189\_\*.rs 文件的作用是什么？](#q41-rust_189_rs-文件的作用是什么)
-    - [Q4.2: 是否需要删除 rust_189\_\*.rs 文件？](#q42-是否需要删除-rust_189_rs-文件)
+    - [Q4.1: rust*189*\*.rs 文件的作用是什么？](#q41-rust189rs-文件的作用是什么)
+    - [Q4.2: 是否需要删除 rust*189*\*.rs 文件？](#q42-是否需要删除-rust189rs-文件)
     - [Q4.3: Edition 2024 和 Rust 1.90 的关系？](#q43-edition-2024-和-rust-190-的关系)
     - [Q4.4: 如何在 CI/CD 中使用 Rust 1.90？](#q44-如何在-cicd-中使用-rust-190)
       - [GitHub Actions](#github-actions)
@@ -516,9 +516,9 @@ fn example() {
 
 ### 官方文档
 
-- 📖 [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-- 📖 [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
-- 📖 [Rust API Documentation](https://doc.rust-lang.org/std/)
+- 📖 [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/README.md)
+- 📖 [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/README.md)
+- 📖 [Rust API Documentation](https://doc.rust-lang.org/std/README.md)
 
 ### 本项目文档
 
@@ -529,9 +529,9 @@ fn example() {
 
 ### 社区资源
 
-- 💬 [Rust Users Forum](https://users.rust-lang.org/)
+- 💬 [Rust Users Forum](https://users.rust-lang.org/README.md)
 - 💬 [Rust Discord](https://discord.gg/rust-lang)
-- 📚 [This Week in Rust](https://this-week-in-rust.org/)
+- 📚 [This Week in Rust](https://this-week-in-rust.org/README.md)
 
 ---
 

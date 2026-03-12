@@ -473,7 +473,7 @@ RFC 1023。形式化：$\text{Fundamental}(\tau) \rightarrow \text{OrphanRule}(\
 *证明思路*：RPITIT 的返回类型由 impl 绑定；由 COH-T1，$(\tau, T)$ 至多一个 impl，故返回类型唯一。∎
 
 **定理 ASYNC-T1（async fn Send 边界）**：若 `async fn m(...) -> R` 用于跨线程（如 `Send` 边界），则其生成的 Future 类型须满足 `Future: Send`；
-等价于 $\tau_R$ 及相关借用的生命周期、自引用约束满足 Send。见 [async_state_machine](../formal_methods/async_state_machine.md) 定理 6.2。
+等价于 $\tau_R$ 及相关借用的生命周期、自引用约束满足 Send。见 [async_state_machine](../../research_notes/formal_methods/async_state_machine.md) 定理 6.2。
 
 *证明思路*：async fn 脱糖为 `impl Future`；Send 由 Future 的 poll 状态与捕获的 `&self`/`&mut self` 决定；类型系统在 Trait 约束传播时检查。∎
 
@@ -1068,13 +1068,13 @@ fn main() {
 
 ### 相关代码
 
-- [Trait 系统实现](../../../crates/c02_type_system/src/)
-- [Trait 系统示例](../../../crates/c02_type_system/examples/)
-- [形式化工程系统 - Trait](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)
+- [Trait 系统实现](../../../crates/c02_type_system/src/README.md)
+- [Trait 系统示例](../../../crates/c02_type_system/examples/README.md)
+- [形式化工程系统 - Trait](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 
 ### 工具资源
 
-- [Rust Analyzer](https://rust-analyzer.github.io/): Rust 语言服务器，提供类型检查
+- [Rust Analyzer](https://rust-analyzer.github.io/README.md): Rust 语言服务器，提供类型检查
 - [Chalk](https://github.com/rust-lang/chalk): Rust Trait 系统的形式化模型
 
 ---

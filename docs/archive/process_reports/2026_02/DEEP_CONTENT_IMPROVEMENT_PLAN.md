@@ -8,7 +8,6 @@
 
 ---
 
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
@@ -145,14 +144,14 @@ L1 元概念层
 
 | 来源 | 类型 | 优先级 |
 | :--- | :--- | :--- |
-| [The Rust Book](https://doc.rust-lang.org/book/) | 官方教程 | P0 |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | 语言规范 | P0 |
-| [RFCs](https://rust-lang.github.io/rfcs/) | 设计文档 | P0 |
-| [releases.rs](https://releases.rs/) | 版本发布 | P0 |
-| [RustBelt](https://plv.mpi-sws.org/rustbelt/) | 学术研究 | P1 |
+| [The Rust Book](https://doc.rust-lang.org/book/README.md) | 官方教程 | P0 |
+| [Rust Reference](https://doc.rust-lang.org/reference/README.md) | 语言规范 | P0 |
+| [RFCs](https://rust-lang.github.io/rfcs/README.md) | 设计文档 | P0 |
+| [releases.rs](https://releases.rs/README.md) | 版本发布 | P0 |
+| [RustBelt](https://plv.mpi-sws.org/rustbelt/README.md) | 学术研究 | P1 |
 | [Stack Overflow Rust](https://stackoverflow.com/questions/tagged/rust) | 社区问答 | P1 |
-| [Rust by Example](https://doc.rust-lang.org/rust-by-example/) | 示例集 | P2 |
-| [Crates.io](https://crates.io/) | 生态库 | P2 |
+| [Rust by Example](https://doc.rust-lang.org/rust-by-example/README.md) | 示例集 | P2 |
+| [Crates.io](https://crates.io/README.md) | 生态库 | P2 |
 
 #### 4.2 对齐内容类型
 

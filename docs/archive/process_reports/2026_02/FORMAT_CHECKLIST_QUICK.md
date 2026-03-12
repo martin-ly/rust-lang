@@ -8,7 +8,6 @@
 
 ---
 
-
 > **用途**: 快速检查 Markdown 文档格式合规性
 > **适用**: 所有 docs 目录下的 .md 文件
 
@@ -217,7 +216,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ## 📖 相关文档
 
 - [DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT](./DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md) - 完整审计报告
-- [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) - 质量检查清单
+- [QUALITY_CHECKLIST](../../../../../research_notes/QUALITY_CHECKLIST.md) - 质量检查清单
 - [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) - 格式统一与内容对齐计划
 - [FORMAT_FIX_COMPLETION_REPORT](./FORMAT_FIX_COMPLETION_REPORT.md) - 格式修复完成报告
 - [FORMAT_FIX_FINAL_REPORT](./FORMAT_FIX_FINAL_REPORT.md) - 格式修复最终报告

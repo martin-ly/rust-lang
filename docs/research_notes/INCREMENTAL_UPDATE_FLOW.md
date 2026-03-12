@@ -37,7 +37,7 @@
 ## 触发条件
 
 - **Rust 新版本发布**（如 1.94.0、1.95.0）
-- **权威来源**：[releases.rs](https://releases.rs/)、[Rust Blog](https://blog.rust-lang.org/)
+- **权威来源**：[releases.rs](https://releases.rs/README.md)、[Rust Blog](https://blog.rust-lang.org/README.md)
 - **建议周期**：每季度或每 Rust 稳定版发布后
 
 ---
@@ -48,8 +48,8 @@
 
 | 步骤 | 操作 | 来源 |
 | :--- | :--- | :--- |
-| 1.1 | 获取新版本发布说明 | [blog.rust-lang.org](https://blog.rust-lang.org/) |
-| 1.2 | 获取完整变更清单 | [releases.rs/docs/X.Y.Z](https://releases.rs/docs/1.93.0/) |
+| 1.1 | 获取新版本发布说明 | [blog.rust-lang.org](https://blog.rust-lang.org/README.md) |
+| 1.2 | 获取完整变更清单 | [releases.rs/docs/X.Y.Z](https://releases.rs/docs/1.93.0/README.md) |
 | 1.3 | 识别语言特性、库、工具链变更 | releases.rs § Language、Library、Compiler |
 
 ### 2. 更新文档
@@ -57,8 +57,8 @@
 | 步骤 | 文档 | 操作 |
 | :--- | :--- | :--- |
 | 2.1 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 新增「Rust X.Y 新增/变更」表；更新特性总数 |
-| 2.2 | [06_toolchain/](../06_toolchain/) | 新建 `07_rust_X.Y_full_changelog.md`、`05_rust_X.Y_vs_X.Y-1_comparison.md` |
-| 2.3 | [formal_methods](formal_methods/)、[type_theory](type_theory/) | 若有新形式化相关特性，更新 00_completeness_gaps |
+| 2.2 | [06_toolchain/](../06_toolchain/README.md) | 新建 `07_rust_X.Y_full_changelog.md`、`05_rust_X.Y_vs_X.Y-1_comparison.md` |
+| 2.3 | [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md) | 若有新形式化相关特性，更新 00_completeness_gaps |
 | 2.4 | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) | 若核心特性有变更，更新对应链 |
 | 2.5 | [INDEX](INDEX.md)、[README](README.md) | 更新版本号、链接、统计 |
 

@@ -296,7 +296,7 @@ $$
 
 | 定理 | crates 示例 | 说明 |
 | :--- | :--- | :--- |
-| T-PIN1 (Pin 保证)、T1-T3 | [c06 async 示例](../../../crates/c06_async/examples/) | Pin、自引用 Future、位置稳定 |
+| T-PIN1 (Pin 保证)、T1-T3 | [c06 async 示例](../../../crates/c06_async/examples/README.md) | Pin、自引用 Future、位置稳定 |
 
 详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
 
@@ -584,7 +584,7 @@ async fn use_future() {
 
 3. **Ferrocene FLS** — Rust 1.93 形式化规范
    - [Ch. 17.3 Asynchronous Computation](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation)
-   - 与本目录: Pin 与 Future、自引用、!Unpin 对应；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/)
+   - 与本目录: Pin 与 Future、自引用、!Unpin 对应；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/README.md)
 
 ### 官方文档
 
@@ -595,12 +595,12 @@ async fn use_future() {
 
 ### 相关代码
 
-- [自引用结构实现](../../../crates/c01_ownership_borrow_scope/src/)
-- [异步 Future 实现](../../../crates/c06_async/src/)
+- [自引用结构实现](../../../crates/c01_ownership_borrow_scope/src/README.md)
+- [异步 Future 实现](../../../crates/c06_async/src/README.md)
 
 ### 工具资源
 
-- [Rust Analyzer](https://rust-analyzer.github.io/): 提供 Pin 类型检查
+- [Rust Analyzer](https://rust-analyzer.github.io/README.md): 提供 Pin 类型检查
 - [Miri](https://github.com/rust-lang/miri): 检查 Pin 相关的未定义行为
 
 ---

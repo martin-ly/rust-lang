@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [c05_threads/](../../../../crates/c05_threads/)
+> 内容已整合至： [c05_threads/](../../../../crates/c05_threads/README.md)
 
 [返回主索引](../../00_master_index.md)
 
@@ -305,5 +305,5 @@ fn thread_local_demo() {
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
-| c05_threads | 线程并发实现 | [../../../../crates/c05_threads/](../../../../crates/c05_threads/) |
-| c09_design_pattern | 并发设计模式 | [../../../../crates/c09_design_pattern/](../../../../crates/c09_design_pattern/) |
+| c05_threads | 线程并发实现 | [../../../../crates/c05_threads/](../../../../crates/c05_threads/README.md) |
+| c09_design_pattern | 并发设计模式 | [../../../../crates/c09_design_pattern/](../../../../crates/c09_design_pattern/README.md) |

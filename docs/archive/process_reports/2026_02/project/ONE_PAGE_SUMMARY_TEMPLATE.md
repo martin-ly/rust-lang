@@ -8,7 +8,6 @@
 
 ---
 
-
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
@@ -240,7 +239,7 @@ fn generate_summary_content(m: &ModuleInfo) -> String {
 ## 速查与练习
 
 - **速查卡**: [{}_cheatsheet](../../../../02_reference/quick_reference/{}_cheatsheet.md)
-- **RBE 练习**: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
+- **RBE 练习**: [Rust by Example](https://doc.rust-lang.org/rust-by-example/README.md)
 - **Rustlings**: [映射表](../../../../../exercises/RUSTLINGS_MAPPING.md)
 "#,
         m.code,

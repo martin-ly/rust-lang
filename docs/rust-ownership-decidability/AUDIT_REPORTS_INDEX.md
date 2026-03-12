@@ -115,7 +115,7 @@
 ### 如果你是读者/用户
 
 1. **了解现状**: 阅读 [PROJECT_COMPREHENSIVE_AUDIT_REPORT.md](PROJECT_COMPREHENSIVE_AUDIT_REPORT.md)
-2. **关注进展**: 查看 [progress/](progress/) 目录
+2. **关注进展**: 查看 [progress/](progress/README.md) 目录
 3. **提供反馈**: 提交 Issue 建议改进
 
 ---

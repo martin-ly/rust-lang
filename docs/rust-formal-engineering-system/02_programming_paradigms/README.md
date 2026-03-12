@@ -18,9 +18,9 @@
 
 | 子目录 | 内容 |
 | :--- | :--- |
-| [01_synchronous/](01_synchronous/) | 同步编程范式 |
-| [02_async/](02_async/) | 异步编程模型 |
-| [09_actor_model/](09_actor_model/) | Actor 模型实现 |
+| [01_synchronous/](01_synchronous/README.md) | 同步编程范式 |
+| [02_async/](02_async/README.md) | 异步编程模型 |
+| [09_actor_model/](09_actor_model/README.md) | Actor 模型实现 |
 
 ### 文档
 

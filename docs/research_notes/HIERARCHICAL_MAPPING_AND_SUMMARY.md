@@ -107,11 +107,11 @@ research_notes/
 
 | 概念族 | 主文档 | Def/Axiom | 定理/推论 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
-| 设计模式 23 | [01_design_patterns_formal](software_design_theory/01_design_patterns_formal/) | 各模式 Def, Axiom | 各模式 B-T1、AF-T1 等 | 见 00_MASTER_INDEX |
-| 23 安全 / 43 完全 | [02_workflow_safe_complete_models](software_design_theory/02_workflow_safe_complete_models/) | 安全/完全模型定义 | 语义边界 SB1–SB3 | |
-| 执行模型 | [03_execution_models](software_design_theory/03_execution_models/) | 01–05 Def, 06 EB-DET1 | EB-DET-T1, 并发选型决策树 | |
+| 设计模式 23 | [01_design_patterns_formal](software_design_theory/01_design_patterns_formal/README.md) | 各模式 Def, Axiom | 各模式 B-T1、AF-T1 等 | 见 00_MASTER_INDEX |
+| 23 安全 / 43 完全 | [02_workflow_safe_complete_models](software_design_theory/02_workflow_safe_complete_models/README.md) | 安全/完全模型定义 | 语义边界 SB1–SB3 | |
+| 执行模型 | [03_execution_models](software_design_theory/03_execution_models/README.md) | 01–05 Def, 06 EB-DET1 | EB-DET-T1, 并发选型决策树 | |
 | 表达边界 | [04_expressiveness_boundary](software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md) | 等价/近似/不可表达 | EB-Meta, EB-L1, EB-C1/C2 | |
-| 边界系统 | [05_boundary_system](software_design_theory/05_boundary_system/) | Def 1.1–1.2, B1–B3 | SBM-T1/T2, SUM-T1/T2, EIM-T1/T2 | |
+| 边界系统 | [05_boundary_system](software_design_theory/05_boundary_system/README.md) | Def 1.1–1.2, B1–B3 | SBM-T1/T2, SUM-T1/T2, EIM-T1/T2 | |
 
 ### 2.3 支柱 3（组件组合）
 
@@ -123,7 +123,7 @@ research_notes/
 
 ## 三、文档 ↔ 思维表征 映射表
 
-以下为 research_notes 文档与思维表征（思维导图、多维矩阵、证明树、决策树）的对应关系；思维表征主文档位于 [04_thinking](../04_thinking/)。
+以下为 research_notes 文档与思维表征（思维导图、多维矩阵、证明树、决策树）的对应关系；思维表征主文档位于 [04_thinking](../04_thinking/README.md)。
 
 ### 3.1 按文档 → 思维表征
 

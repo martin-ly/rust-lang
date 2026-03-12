@@ -362,7 +362,7 @@
    - 作者: Ralf Jung, et al.
    - 年份: 2018
    - 摘要: 为 Rust 的所有权和借用系统提供形式化基础
-   - 链接: [论文链接](https://plv.mpi-sws.org/rustbelt/)
+   - 链接: [论文链接](https://plv.mpi-sws.org/rustbelt/README.md)
 
 ### 官方文档
 
@@ -371,7 +371,7 @@
 
 ### 相关代码
 
-- [所有权实现](../../crates/c01_ownership_borrow_scope/src/)
+- [所有权实现](../../crates/c01_ownership_borrow_scope/src/README.md)
 - [所有权文档](../../crates/c01_ownership_borrow_scope/docs/README.md)
 ```
 

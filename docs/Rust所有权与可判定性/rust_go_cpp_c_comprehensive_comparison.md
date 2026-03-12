@@ -1719,7 +1719,7 @@ int order_pay(Order* order, double amount) {
 
 ### 官方文档
 
-- [Rust 1.93.1 Documentation](https://doc.rust-lang.org/)
+- [Rust 1.93.1 Documentation](https://doc.rust-lang.org/README.md)
 - [Go 1.26 Release Notes](https://go.dev/doc/go1.26)
 - [C++26 Working Draft](https://en.cppreference.com/w/cpp/26)
 - [C23 Standard](https://en.cppreference.com/w/c/23)
@@ -1733,7 +1733,7 @@ int order_pay(Order* order, double amount) {
 ### 性能基准
 
 - [Programming Language Performance Comparison](https://hildstrom.com/projects/2015/01/langcomp/index.html)
-- [Rust vs Go vs C++ Benchmark](https://jinaldesai.com/performance-comparison-of-python-golang-rust-and-c/)
+- [Rust vs Go vs C++ Benchmark](https://jinaldesai.com/performance-comparison-of-python-golang-rust-and-c/README.md)
 
 ---
 

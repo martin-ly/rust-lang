@@ -44,11 +44,11 @@
 
 | 主题  | 文件 | 状态 |
 | :--- | :--- | :--- |
-| 设计模式形式化   | [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/)             | ✅ 23 模式  |
-| 23/43 模型 | [02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/) | ✅ 100% |
-| 执行模型 | [03_execution_models](./software_design_theory/03_execution_models/) | ✅ 五模型 |
-| 组合工程 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/) | ✅ CE-T1–T3 |
-| 边界体系 | [05_boundary_system](./software_design_theory/05_boundary_system/) | ✅ 三维矩阵 |
+| 设计模式形式化   | [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md)             | ✅ 23 模式  |
+| 23/43 模型 | [02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/README.md) | ✅ 100% |
+| 执行模型 | [03_execution_models](./software_design_theory/03_execution_models/README.md) | ✅ 五模型 |
+| 组合工程 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | ✅ CE-T1–T3 |
+| 边界体系 | [05_boundary_system](./software_design_theory/05_boundary_system/README.md) | ✅ 三维矩阵 |
 | Rust 惯用模式 | [06_rust_idioms](./software_design_theory/06_rust_idioms.md) | ✅ RAII、Newtype、类型状态 |
 | 反模式与边界 | [07_anti_patterns](./software_design_theory/07_anti_patterns.md) | ✅ 13 反例、规避策略 |
 
@@ -79,7 +79,7 @@
 
 - 批判性分析与推进计划 → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
 - 核心定理完整证明 → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)（L2）
-- Coq 证明骨架 → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/)（已归档）
+- Coq 证明骨架 → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/README.md)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)（已归档）
 
 **形式化方法研究**:
 
@@ -227,8 +227,8 @@
 ### 外部资源
 
 - [形式化工程系统](../rust-formal-engineering-system/README.md)
-- [Rust Book](https://doc.rust-lang.org/book/)
-- [Rust Reference](https://doc.rust-lang.org/reference/)
+- [Rust Book](https://doc.rust-lang.org/book/README.md)
+- [Rust Reference](https://doc.rust-lang.org/reference/README.md)
 
 ---
 

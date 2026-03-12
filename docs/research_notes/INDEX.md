@@ -161,8 +161,8 @@
 - ownership T2、borrow T1、type T3 完整证明
 - 辅助引理显式编号、证明依赖 DAG、反例形式化否定
 
-7l. **[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/)** - Coq/Isabelle 证明骨架与 L3 实施指南（已归档）
-7m. **[coq_skeleton](../archive/deprecated/coq_skeleton/)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）；本目录仅保留 [coq_skeleton/README.md](./coq_skeleton/README.md) 重定向（已归档）
+7l. **[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)** - Coq/Isabelle 证明骨架与 L3 实施指南（已归档）
+7m. **[coq_skeleton](../archive/deprecated/coq_skeleton/README.md)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）；本目录仅保留 [coq_skeleton/README.md](./coq_skeleton/README.md) 重定向（已归档）
 
 1. **[COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md)** - 全面系统化梳理总览
    - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）
@@ -336,7 +336,7 @@
 
 ### 形式化方法研究
 
-**目录**: [formal_methods/](./formal_methods/)
+**目录**: [formal_methods/](./formal_methods/README.md)
 
 1. **[ownership_model.md](./formal_methods/ownership_model.md)** - 所有权模型形式化
    - 研究目标: 形式化定义所有权系统，证明内存安全
@@ -387,7 +387,7 @@
 
 ### 类型理论研究
 
-**目录**: [type_theory/](./type_theory/)
+**目录**: [type_theory/](./type_theory/README.md)
 
 1. **[00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)** - 类型理论完备性缺口
    - 研究目标: 形式化论证不充分声明；LUB、Copy、RPITIT、组合法则等缺口索引
@@ -423,7 +423,7 @@
 
 ### 实验研究
 
-**目录**: [experiments/](./experiments/)
+**目录**: [experiments/](./experiments/README.md)
 
 1. **[performance_benchmarks.md](./experiments/performance_benchmarks.md)** - 性能基准测试
    - 研究目标: 通过基准测试评估不同实现的性能特征
@@ -454,24 +454,24 @@
 
 ### 软件设计理论研究
 
-**目录**: [software_design_theory/](./software_design_theory/)
+**目录**: [software_design_theory/](./software_design_theory/README.md)
 
 1. **[software_design_theory/README.md](./software_design_theory/README.md)** - 软件设计理论体系
    - 研究目标: 设计模式形式化、23/43 模型、执行模型、组合工程有效性
    - 状态: 100% 完成
    - 关键词: 设计模式、安全边界、执行模型、组合工程
 
-2. **[01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/)** - 设计模式形式分析
+2. **[01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md)** - 设计模式形式分析
    - GoF 23 种模式形式化（创建型、结构型、行为型）
    - 与 ownership、borrow、trait 衔接
 
-3. **[02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/)** - 23 安全 vs 43 完全模型
+3. **[02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/README.md)** - 23 安全 vs 43 完全模型
    - 安全设计模型索引、语义边界
 
-4. **[03_execution_models](./software_design_theory/03_execution_models/)** - 执行模型形式化
+4. **[03_execution_models](./software_design_theory/03_execution_models/README.md)** - 执行模型形式化
    - 同步、异步、并发、并行、分布式
 
-5. **[04_compositional_engineering](./software_design_theory/04_compositional_engineering/)** - 组合软件工程有效性
+5. **[04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md)** - 组合软件工程有效性
    - 定理 CE-T1、CE-T2、CE-T3
 
 6. **[06_rust_idioms](./software_design_theory/06_rust_idioms.md)** - Rust 惯用模式

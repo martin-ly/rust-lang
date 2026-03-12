@@ -37,9 +37,9 @@
 ## 使用说明
 
 - ⚠️ 这些文件为**历史归档**，内容可能已过时
-- ✅ 最新内容请参考 [docs/02_reference/quick_reference/](../02_reference/quick_reference/)
-- ✅ 版本文档请参考 [docs/06_toolchain/](../06_toolchain/)
-- ✅ 形式化文档请参考 [docs/research_notes/](../research_notes/)
+- ✅ 最新内容请参考 [docs/02_reference/quick_reference/](../02_reference/quick_reference/README.md)
+- ✅ 版本文档请参考 [docs/06_toolchain/](../06_toolchain/README.md)
+- ✅ 形式化文档请参考 [docs/research_notes/](../research_notes/README.md)
 
 ---
 

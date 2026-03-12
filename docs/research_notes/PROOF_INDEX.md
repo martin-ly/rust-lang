@@ -91,7 +91,7 @@
 | **L2** | 完整证明 | 归纳基、归纳步、辅助引理编号、形式化陈述 |
 | **L3** | 机器可检查 | Coq/Isabelle/Lean 证明代码 |
 
-**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](./coq_skeleton/) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)、[FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md)。
+**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](./coq_skeleton/README.md) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)、[FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md)。
 
 ---
 
@@ -462,9 +462,9 @@
 2. **引理 VI-L1、推论 VI-C1** ✅ — Visitor；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/visitor.md)
 3. **引理 IN-L1、推论 IN-C1** ✅ — Interpreter；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/interpreter.md)
 4. **引理 TM-L1、推论 TM-C1** ✅ — Template Method；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/template_method.md)
-5. **推论 FA-C1、DE-C1、CO-C1、BR-C1、FL-C1、PR-C1** ✅ — 结构型 6 种（Facade、Decorator、Composite、Bridge、Flyweight、Proxy）纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/02_structural/)
-6. **推论 B-C1、AF-C1、FM-C1、P-C1、S-C1** ✅ — 创建型 5 种（Builder、Abstract Factory、Factory Method、Prototype、Singleton）纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/01_creational/)
-7. **推论 CR-C1、CM-C1、SR-C1、IT-C1、ME-C1、OB-C1、ST-C1** ✅ — 行为型 7 种（Chain、Command、Strategy、Iterator、Mediator、Observer、State）纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/)
+5. **推论 FA-C1、DE-C1、CO-C1、BR-C1、FL-C1、PR-C1** ✅ — 结构型 6 种（Facade、Decorator、Composite、Bridge、Flyweight、Proxy）纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/02_structural/README.md)
+6. **推论 B-C1、AF-C1、FM-C1、P-C1、S-C1** ✅ — 创建型 5 种（Builder、Abstract Factory、Factory Method、Prototype、Singleton）纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/01_creational/README.md)
+7. **推论 CR-C1、CM-C1、SR-C1、IT-C1、ME-C1、OB-C1、ST-C1** ✅ — 行为型 7 种（Chain、Command、Strategy、Iterator、Mediator、Observer、State）纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/README.md)
 8. **推论 AD-C1** ✅ — Adapter 纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/02_structural/adapter.md)
 
 **Rust Idioms 与反模式**：
@@ -476,7 +476,7 @@
 
 #### 边界系统
 
-**文档**: [05_boundary_system](./software_design_theory/05_boundary_system/)、[04_boundary_matrix](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)、[06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md)
+**文档**: [05_boundary_system](./software_design_theory/05_boundary_system/README.md)、[04_boundary_matrix](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)、[06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md)
 
 **已完成的证明**:
 
@@ -762,9 +762,9 @@
 
 ### 工具资源
 
-- [Coq](https://coq.inria.fr/): 类型理论证明助手
-- [Agda](https://agda.readthedocs.io/): 依赖类型编程语言
-- [Iris](https://iris-project.org/): 分离逻辑框架
+- [Coq](https://coq.inria.fr/README.md): 类型理论证明助手
+- [Agda](https://agda.readthedocs.io/README.md): 依赖类型编程语言
+- [Iris](https://iris-project.org/README.md): 分离逻辑框架
 
 ### 思维表征文档中的证明树
 

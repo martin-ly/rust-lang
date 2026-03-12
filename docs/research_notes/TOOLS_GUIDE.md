@@ -54,7 +54,7 @@
 
 ## 🔬 形式化验证工具 {#-形式化验证工具}
 
-**主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../archive/deprecated/)。
+**主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../archive/deprecated/README.md)。
 
 ### Prusti
 
@@ -102,8 +102,8 @@ cargo prusti --file src/lib.rs
 
 **相关资源**:
 
-- [Prusti 文档](https://viperproject.github.io/prusti-dev/)
-- [Prusti 用户指南](https://viperproject.github.io/prusti-dev/user-guide/)
+- [Prusti 文档](https://viperproject.github.io/prusti-dev/README.md)
+- [Prusti 用户指南](https://viperproject.github.io/prusti-dev/user-guide/README.md)
 - [Prusti 教程](https://viperproject.github.io/prusti-dev/user-guide/getting-started.html)
 
 ---
@@ -152,14 +152,14 @@ cargo kani --function test_abs
 **相关资源**:
 
 - [Kani 文档](https://github.com/model-checking/kani)
-- [Kani 用户指南](https://model-checking.github.io/kani/)
+- [Kani 用户指南](https://model-checking.github.io/kani/README.md)
 - [Kani 教程](https://model-checking.github.io/kani/tutorial.html)
 
 ---
 
 ### 可选进阶：Coq/Lean
 
-**说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../archive/deprecated/)。主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md)）。若需机器可检查证明，可参考 Prusti/Kani 或国际对标 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)。
+**说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../archive/deprecated/README.md)。主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md)）。若需机器可检查证明，可参考 Prusti/Kani 或国际对标 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)。
 
 ---
 
@@ -212,7 +212,7 @@ cargo bench
 
 **相关资源**:
 
-- [Criterion.rs 文档](https://docs.rs/criterion/)
+- [Criterion.rs 文档](https://docs.rs/criterion/README.md)
 - [Criterion.rs 指南](https://github.com/bheisler/criterion.rs/blob/master/book/src/user_guide/index.md)
 
 ---
@@ -249,7 +249,7 @@ perf stat ./target/release/my_program
 
 **相关资源**:
 
-- [perf 文档](https://perf.wiki.kernel.org/)
+- [perf 文档](https://perf.wiki.kernel.org/README.md)
 - [perf 教程](https://perf.wiki.kernel.org/index.php/Tutorial)
 
 ---
@@ -439,7 +439,7 @@ proptest! {
 
 **相关资源**:
 
-- [proptest 文档](https://docs.rs/proptest/)
+- [proptest 文档](https://docs.rs/proptest/README.md)
 - [proptest 教程](https://altsysrq.github.io/proptest-book/intro.html)
 
 ---
@@ -478,7 +478,7 @@ mod tests {
 
 **相关资源**:
 
-- [loom 文档](https://docs.rs/loom/)
+- [loom 文档](https://docs.rs/loom/README.md)
 - [loom 使用指南](https://github.com/tokio-rs/loom#usage)
 
 ---
@@ -542,7 +542,7 @@ rust-analyzer 通常在 IDE 中自动使用，提供：
 
 **相关资源**:
 
-- [rust-analyzer 文档](https://rust-analyzer.github.io/)
+- [rust-analyzer 文档](https://rust-analyzer.github.io/README.md)
 - [rust-analyzer 用户指南](https://rust-analyzer.github.io/manual.html)
 
 ---

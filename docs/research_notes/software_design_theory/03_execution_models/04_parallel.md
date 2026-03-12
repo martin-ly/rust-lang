@@ -51,7 +51,7 @@ $\mathit{par\_map}(f, S) = \mathit{merge}(\mathit{map}(f, S_1), \ldots, \mathit{
 
 **Axiom PL2**：任务结果合并顺序可无关（如归约满足结合律）；或任务顺序确定。
 
-**定理 PL-T1**：Rayon 等库保证数据竞争自由；由 Send/Sync 与 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)。
+**定理 PL-T1**：Rayon 等库保证数据竞争自由；由 Send/Sync 与 [borrow_checker_proof](../../../research_notes/formal_methods/borrow_checker_proof.md)。
 
 **引理 PL-L1（无共享可变）**：`par_iter` 闭包捕获为 move 或只读引用；各子任务无共享可变；归约满足结合律时结果确定。
 
@@ -244,4 +244,4 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 | 场景 | ✅ | 典型场景、Rayon 调度 |
 | 反例 | ✅ | 闭包非 Send、共享可变 |
 | 衔接 | ✅ | Send、ownership、async 组合 |
-| 权威对应 | ✅ | [formal_methods](../../formal_methods/README.md)、[Rayon](https://github.com/rayon-rs/rayon) |
+| 权威对应 | ✅ | [formal_methods](../../../research_notes/formal_methods/README.md)、[Rayon](https://github.com/rayon-rs/rayon) |

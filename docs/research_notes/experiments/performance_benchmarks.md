@@ -1130,16 +1130,16 @@ criterion_main!(serialization_benches);
 1. **"Rust Performance Book"**
    - 作者: Rust Performance Team
    - 摘要: Rust 性能优化指南
-   - 链接: [Rust Performance Book](https://nnethercote.github.io/perf-book/)
+   - 链接: [Rust Performance Book](https://nnethercote.github.io/perf-book/README.md)
 
 ### 官方文档
 
-- [Criterion.rs 文档](https://docs.rs/criterion/)
+- [Criterion.rs 文档](https://docs.rs/criterion/README.md)
 - [Rust 性能指南](https://doc.rust-lang.org/book/ch13-04-performance.html)
 
 ### 相关代码
 
-- [性能基准测试代码](../../../crates/cXX_performance_benchmarks/)
+- [性能基准测试代码](../../../crates/cXX_performance_benchmarks/README.md)
 
 ### 工具资源
 

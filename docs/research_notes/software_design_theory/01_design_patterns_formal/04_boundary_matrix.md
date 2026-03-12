@@ -26,7 +26,7 @@
 
 *证明*：由 [05_boundary_system](../05_boundary_system/README.md) 定理 B-T1，三维边界由各矩阵定义唯一确定；设计模式为 05 边界体系的子集。∎
 
-**定理 BMP-T2（23 模式与 05 矩阵一致）**：23 种 GoF 模式的本表与 [05_boundary_system](../05_boundary_system/) 三矩阵对应一致；无冲突。
+**定理 BMP-T2（23 模式与 05 矩阵一致）**：23 种 GoF 模式的本表与 [05_boundary_system](../05_boundary_system/README.md) 三矩阵对应一致；无冲突。
 
 *证明*：由各矩阵文档的 Def 与设计模式表；safe_unsafe_matrix、supported_unsupported_matrix、expressive_inexpressive_matrix 分别覆盖 23 模式；交叉验证无矛盾。∎
 

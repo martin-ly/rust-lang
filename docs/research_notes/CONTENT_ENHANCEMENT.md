@@ -159,8 +159,8 @@
 
 | 位置 | 要求 |
 | :--- | :--- |
-| **矩阵文档**（如 01_design_patterns_formal/README §23 模式矩阵、03_execution_models/README §执行模型矩阵、formal_methods/README §六篇并表） | 每行/每格注明「详见 [xx](path/to/doc.md)」或列「形式化文档」列链接到具体子文档 |
-| **子文档**（各模式、各执行模型、ownership/borrow/…、send_sync） | 元信息或文末注明「本概念在 [矩阵文档 §节名](path) 第 x 行/第 y 列」或「23 模式矩阵」「六篇并表」等 |
+| **矩阵文档**（如 01_design_patterns_formal/README §23 模式矩阵、03_execution_models/README §执行模型矩阵、formal_methods/README §六篇并表） | 每行/每格注明「详见 xx」或列「形式化文档」列链接到具体子文档 |
+| **子文档**（各模式、各执行模型、ownership/borrow/…、send_sync） | 元信息或文末注明「本概念在 矩阵文档 §节名 第 x 行/第 y 列」或「23 模式矩阵」「六篇并表」等 |
 
 **已实施**：23 模式均在元信息中含「23 模式矩阵」行号；执行模型矩阵、formal_methods **六篇并表**均含文档列。新增矩阵时按上表补全双向链接；见 [MAINTENANCE_GUIDE](MAINTENANCE_GUIDE.md) 更新流程。
 
@@ -377,14 +377,14 @@ error[E0382]: borrow of moved value: `s1`
    - 年份: 2018
    - 会议: POPL 2018
    - 摘要: 为 Rust 的所有权和借用系统提供形式化基础
-   - 链接: [论文链接](https://plv.mpi-sws.org/rustbelt/)
+   - 链接: [论文链接](https://plv.mpi-sws.org/rustbelt/README.md)
    - 相关章节: 第 3 章 - 所有权系统形式化
 
 2. **The RustBelt Project: Formalizing Rust's Type System**
    - 作者: Derek Dreyer
    - 年份: 2017
    - 摘要: Rust 类型系统的形式化研究
-   - 链接: [项目链接](https://plv.mpi-sws.org/rustbelt/)
+   - 链接: [项目链接](https://plv.mpi-sws.org/rustbelt/README.md)
 ```
 
 ### 2. 添加官方文档
@@ -422,7 +422,7 @@ error[E0382]: borrow of moved value: `s1`
 ```markdown
 ### 相关代码
 
-- [所有权实现](../../../crates/c01_ownership_borrow_scope/src/)
+- [所有权实现](../../../crates/c01_ownership_borrow_scope/src/README.md)
   - 关键文件: `ownership.rs` - 所有权规则实现
   - 关键文件: `borrow_checker.rs` - 借用检查器实现
 

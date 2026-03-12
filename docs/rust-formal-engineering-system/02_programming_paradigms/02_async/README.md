@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [c06_async/](../../../../crates/c06_async/)
+> 内容已整合至： [c06_async/](../../../../crates/c06_async/README.md)
 
 [返回主索引](../../00_master_index.md)
 
@@ -392,5 +392,5 @@ where
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
-| c06_async | 异步并发实现 | [../../../../crates/c06_async/](../../../../crates/c06_async/) |
-| c09_design_pattern | 异步设计模式 | [../../../../crates/c09_design_pattern/](../../../../crates/c09_design_pattern/) |
+| c06_async | 异步并发实现 | [../../../../crates/c06_async/](../../../../crates/c06_async/README.md) |
+| c09_design_pattern | 异步设计模式 | [../../../../crates/c09_design_pattern/](../../../../crates/c09_design_pattern/README.md) |

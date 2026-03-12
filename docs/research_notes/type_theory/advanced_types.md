@@ -723,12 +723,12 @@ fn use_family<F: Family>() -> F::Member<i32> {
 
 ### 相关代码
 
-- [类型系统实现](../../../crates/c02_type_system/src/)
-- [类型系统示例](../../../crates/c02_type_system/examples/)
+- [类型系统实现](../../../crates/c02_type_system/src/README.md)
+- [类型系统示例](../../../crates/c02_type_system/examples/README.md)
 
 ### 工具资源
 
-- [Rust Analyzer](https://rust-analyzer.github.io/): 提供 GATs 和 const 泛型的支持
+- [Rust Analyzer](https://rust-analyzer.github.io/README.md): 提供 GATs 和 const 泛型的支持
 - [Chalk](https://github.com/rust-lang/chalk): Rust Trait 系统的形式化模型
 
 ---

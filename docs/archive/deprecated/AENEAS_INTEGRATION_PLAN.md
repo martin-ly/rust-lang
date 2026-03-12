@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **用途**: 调研 Aeneas（Safe Rust → Coq/F*/HOL4/Lean）的输入要求，给出「本项目文档 → 工具输入」的映射方案
-> **参考**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
+> **参考**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../../../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
 > **状态**: 📋 规划中；步骤 1–4 可执行
 
 ---
@@ -34,8 +34,8 @@
 
 | Aeneas 需求 | 本项目对应 | 映射方式 |
 | :--- | :--- | :--- |
-| Rust 源码 | 无直接对应；需编写示例程序 | 从 [practical_applications](../../research_notes/practical_applications.md)、各文档代码示例提取 |
-| Safe 子集 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 选无 unsafe 的示例 |
+| Rust 源码 | 无直接对应；需编写示例程序 | 从 [practical_applications](../../../../../research_notes/practical_applications.md)、各文档代码示例提取 |
+| Safe 子集 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../../../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 选无 unsafe 的示例 |
 | 类型注解 | type_system、trait 形式化 | 确保示例满足本项目定理（如 ownership T2、borrow T1） |
 
 ### 2.2 验证目标对应
@@ -67,7 +67,7 @@
 | 从 ownership_model、borrow_checker_proof 代码示例选 3–5 个 | 简单所有权转移、借用 |
 | 编写最小可验证程序 | 如：Box 创建、移动、drop |
 
-**首个示例规格（Aeneas 优先）**：[c01/examples/aeneas_first.rs](../../crates/c01_ownership_borrow_scope/examples/aeneas_first.rs)
+**首个示例规格（Aeneas 优先）**：[c01/examples/aeneas_first.rs](../../../crates/c01_ownership_borrow_scope/examples/aeneas_first.rs)
 
 ```rust
 fn main() {
@@ -230,31 +230,31 @@ Aeneas支持多个定理证明器后端：
 
 #### 与 ownership_model.md 的整合
 
-需要在 [ownership_model.md](./formal_methods/ownership_model.md) 中添加Aeneas引用：
+需要在 [ownership_model.md](../../../../research_notes/formal_methods/ownership_model.md) 中添加Aeneas引用：
 
 1. **理论基础章节**: 添加"Aeneas 函数式翻译方法"
 2. **所有权规则**: 对比 CPV 与所有权环境 Ω
 3. **移动语义**: 与函数式状态传递对应
 4. **参考文献**: 添加 ICFP 2022 论文
 
-具体添加内容见 [ownership_model.md](./formal_methods/ownership_model.md) §Aeneas 函数式翻译方法。
+具体添加内容见 [ownership_model.md](../../../../research_notes/formal_methods/ownership_model.md) §Aeneas 函数式翻译方法。
 
 #### 与 borrow_checker_proof.md 的整合
 
-需要在 [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) 中添加：
+需要在 [borrow_checker_proof.md](../../../../research_notes/formal_methods/borrow_checker_proof.md) 中添加：
 
 1. **对比分析**: Aeneas 借用处理 vs 传统借用检查
 2. **borrow_generated_from**: 与 Def 1.3（借用有效性）的关系
 3. **预言变量**: 与 Axiom 3（借用有效性保持）的对应
 4. **数据竞争自由**: 两种方法的路径对比
 
-具体添加内容见 [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) §与Aeneas对比。
+具体添加内容见 [borrow_checker_proof.md](../../../../research_notes/formal_methods/borrow_checker_proof.md) §与Aeneas对比。
 
 ### 类型理论整合
 
 **函数式翻译与类型保持**:
 
-Aeneas的翻译保持类型结构，与 [type_system_foundations](./type_theory/type_system_foundations.md) 的形式化对应：
+Aeneas的翻译保持类型结构，与 [type_system_foundations](../../../../research_notes/type_theory/type_system_foundations.md) 的形式化对应：
 
 | 类型理论概念 | Rust 形式 | Aeneas 翻译 |
 | :--- | :--- | :--- |
@@ -266,7 +266,7 @@ Aeneas的翻译保持类型结构，与 [type_system_foundations](./type_theory/
 
 **整合建议**:
 
-- 在 [type_system_foundations](./type_theory/type_system_foundations.md) 添加"函数式视角"小节
+- 在 [type_system_foundations](../../../../research_notes/type_theory/type_system_foundations.md) 添加"函数式视角"小节
 - 对比 Rust 类型系统与函数式翻译的对应
 - 参考 Aeneas ICFP 2022 论文的类型系统章节
 
@@ -302,8 +302,8 @@ Aeneas的翻译保持类型结构，与 [type_system_foundations](./type_theory/
 
 ## 六、与 Rust 1.93 的对应
 
-- 本项目文档与 **Rust 1.93.0+ (Edition 2024)** 对齐；Aeneas 输入为 Rust 源码，工具链版本建议与 [00_ORGANIZATION § 六 权威来源与版本约定](./00_ORGANIZATION_AND_NAVIGATION.md#六权威来源与版本约定) 一致。
-- 示例程序（如 `aeneas_first.rs`）应在 1.93 下编译通过；1.93 相关反例见 [RUST_193_COUNTEREXAMPLES_INDEX](./RUST_193_COUNTEREXAMPLES_INDEX.md)。
+- 本项目文档与 **Rust 1.93.0+ (Edition 2024)** 对齐；Aeneas 输入为 Rust 源码，工具链版本建议与 [00_ORGANIZATION § 六 权威来源与版本约定](../../../../research_notes/00_ORGANIZATION_AND_NAVIGATION.md#六权威来源与版本约定) 一致。
+- 示例程序（如 `aeneas_first.rs`）应在 1.93 下编译通过；1.93 相关反例见 [RUST_193_COUNTEREXAMPLES_INDEX](../../../../research_notes/RUST_193_COUNTEREXAMPLES_INDEX.md)。
 
 ---
 

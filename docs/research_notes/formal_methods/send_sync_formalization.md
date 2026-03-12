@@ -161,7 +161,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 | 定理 | crates 示例 | 说明 |
 | :--- | :--- | :--- |
-| SEND-T1、SYNC-T1、SEND-SYNC-T1 | [c05 thread/spawn 示例](../../../crates/c05_threads/examples/)、Arc/Mutex 示例 | 跨线程转移、多线程共享 |
+| SEND-T1、SYNC-T1、SEND-SYNC-T1 | [c05 thread/spawn 示例](../../../crates/c05_threads/examples/README.md)、Arc/Mutex 示例 | 跨线程转移、多线程共享 |
 
 详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
 
@@ -217,7 +217,7 @@ Def SEND1, SYNC1
 ## 📖 参考文献 {#-参考文献}
 
 - [Ferrocene FLS Ch. 17.1 Send and Sync](https://spec.ferrocene.dev/concurrency.html#send-and-sync)
-- [RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/) — Arc、Send/Sync 与松弛内存
+- [RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md) — Arc、Send/Sync 与松弛内存
 - [async_state_machine](async_state_machine.md) — Future 与 Send/Sync 约束、定理 6.2
 - [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) § Send/Sync — 设计理由与决策树
 

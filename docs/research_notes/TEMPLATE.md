@@ -275,22 +275,22 @@ Qed.
 
 ### 官方文档
 
-- [Rust Reference](https://doc.rust-lang.org/reference/)
-- [Rust Book](https://doc.rust-lang.org/book/)
-- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [Rust Reference](https://doc.rust-lang.org/reference/README.md)
+- [Rust Book](https://doc.rust-lang.org/book/README.md)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/README.md)
 
 ### 相关代码
 
-- [相关代码位置](../../crates/xxx/src/)
-- [示例代码位置](../../crates/xxx/examples/)
+- [相关代码位置](../../crates/xxx/src/README.md)
+- [示例代码位置](../../crates/xxx/examples/README.md)
 
 ### 工具资源
 
-- [Rust Analyzer](https://rust-analyzer.github.io/)
+- [Rust Analyzer](https://rust-analyzer.github.io/README.md)
 - [Clippy](https://github.com/rust-lang/rust-clippy)
 - [Miri](https://github.com/rust-lang/miri)
-- [Coq](https://coq.inria.fr/)
-- [Isabelle](https://isabelle.in.tum.de/)
+- [Coq](https://coq.inria.fr/README.md)
+- [Isabelle](https://isabelle.in.tum.de/README.md)
 
 ---
 

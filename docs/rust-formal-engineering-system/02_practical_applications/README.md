@@ -18,8 +18,8 @@
 
 | 子目录 | 内容 |
 | :--- | :--- |
-| [memory/](memory/) | 内存管理实践与优化 |
-| [performance/](performance/) | 性能优化技术与案例 |
+| [memory/](memory/README.md) | 内存管理实践与优化 |
+| [performance/](performance/README.md) | 性能优化技术与案例 |
 
 ---
 

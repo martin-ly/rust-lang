@@ -136,21 +136,21 @@
 
 ### 核心文档
 
-- [基准测试框架](../../../crates/c08_algorithms/benches/)
-- [性能分析工具](../../../crates/c06_async/benches/)
-- [内存分析工具](../../../crates/c05_threads/benches/)
+- [基准测试框架](../../../crates/c08_algorithms/benches/README.md)
+- [性能分析工具](../../../crates/c06_async/benches/README.md)
+- [内存分析工具](../../../crates/c05_threads/benches/README.md)
 
 ### 代码实现
 
-- [算法实现](../../../crates/c08_algorithms/src/)
-- [异步实现](../../../crates/c06_async/src/)
-- [并发实现](../../../crates/c05_threads/src/)
+- [算法实现](../../../crates/c08_algorithms/src/README.md)
+- [异步实现](../../../crates/c06_async/src/README.md)
+- [并发实现](../../../crates/c05_threads/src/README.md)
 
 ### 工具资源
 
 - [Criterion.rs](https://github.com/bheisler/criterion.rs): 统计驱动的基准测试框架
-- [perf](https://perf.wiki.kernel.org/): Linux 性能分析工具
-- [Valgrind](https://valgrind.org/): 内存分析工具
+- [perf](https://perf.wiki.kernel.org/README.md): Linux 性能分析工具
+- [Valgrind](https://valgrind.org/README.md): 内存分析工具
 - [flamegraph](https://github.com/flamegraph-rs/flamegraph): 性能火焰图生成工具
 
 ---
@@ -205,9 +205,9 @@
 
 | 实验类型 | 形式化定理 | 验证目标 | 文档链接 |
 | :--- | :--- | :--- | :--- |
-| 内存分析 | ownership T2/T3、RC-T1、REFCELL-T1 | 无泄漏、无双重释放 | [ownership_model](../formal_methods/ownership_model.md) |
-| 并发性能 | borrow T1、CHAN-T1、MUTEX-T1、async T6.2、SPAWN-T1 | 无数据竞争 | [borrow_checker_proof](../formal_methods/borrow_checker_proof.md)、[async_state_machine](../formal_methods/async_state_machine.md) |
-| 编译器优化 | type_system 保持性 | 优化保持类型 | [type_system_foundations](../type_theory/type_system_foundations.md) |
+| 内存分析 | ownership T2/T3、RC-T1、REFCELL-T1 | 无泄漏、无双重释放 | [ownership_model](../../research_notes/formal_methods/ownership_model.md) |
+| 并发性能 | borrow T1、CHAN-T1、MUTEX-T1、async T6.2、SPAWN-T1 | 无数据竞争 | [borrow_checker_proof](../../research_notes/formal_methods/borrow_checker_proof.md)、[async_state_machine](../../research_notes/formal_methods/async_state_machine.md) |
+| 编译器优化 | type_system 保持性 | 优化保持类型 | [type_system_foundations](../../research_notes/type_theory/type_system_foundations.md) |
 | 宏展开 | 宏卫生、展开正确性 | 编译时间与正确性 | — |
 
 ---

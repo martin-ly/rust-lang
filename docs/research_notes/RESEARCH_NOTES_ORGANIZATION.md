@@ -93,8 +93,8 @@ research_notes/
 | :--- | :--- | :--- |
 | AENEAS_INTEGRATION_PLAN.md | [archive/deprecated/AENEAS_INTEGRATION_PLAN.md](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md) | Aeneas 对接计划 |
 | COQ_OF_RUST_INTEGRATION_PLAN.md | [archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md) | coq-of-rust 对接计划 |
-| COQ_ISABELLE_PROOF_SCAFFOLDING.md | [archive/deprecated/](../archive/deprecated/) | Coq/Isabelle 骨架说明 |
-| coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/) | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](./coq_skeleton/README.md) 重定向 |
+| COQ_ISABELLE_PROOF_SCAFFOLDING.md | [archive/deprecated/](../archive/deprecated/README.md) | Coq/Isabelle 骨架说明 |
+| coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/README.md) | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](./coq_skeleton/README.md) 重定向 |
 
 **引用建议**：新文档中提及 Aeneas、coq-of-rust、Coq 骨架时，链接至上述 `archive/deprecated/` 路径；INDEX/README 中已统一标注「已归档」。
 
@@ -117,8 +117,8 @@ research_notes/
 ## 五、版本与元数据约定
 
 - **默认版本**：所有 research_notes 下文档元数据统一为 **Rust 1.93.1+ (Edition 2024)**（历史归档保留原版本）。
-- **权威引用**：releases.rs [1.93.0](https://releases.rs/docs/1.93.0/)、
-- [Rust 1.93.1 公告](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/)；
+- **权威引用**：releases.rs [1.93.0](https://releases.rs/docs/1.93.0/README.md)、
+- [Rust 1.93.1 公告](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/README.md)；
 - 详见 [00_ORGANIZATION_AND_NAVIGATION § 六](./00_ORGANIZATION_AND_NAVIGATION.md#六权威来源与版本约定)。
 
 ---

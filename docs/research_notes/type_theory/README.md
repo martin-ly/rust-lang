@@ -198,18 +198,18 @@
 
 ### 核心文档
 
-- [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)
-- [类型系统文档](../../../crates/c02_type_system/docs/)
+- [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
+- [类型系统文档](../../../crates/c02_type_system/docs/README.md)
 - [类型系统速查卡](../../02_reference/quick_reference/type_system.md)
 
 ### 代码实现
 
-- [类型系统实现](../../../crates/c02_type_system/src/)
-- [类型系统示例](../../../crates/c02_type_system/examples/)
+- [类型系统实现](../../../crates/c02_type_system/src/README.md)
+- [类型系统示例](../../../crates/c02_type_system/examples/README.md)
 
 ### 学术资源
 
-- [CORE_THEOREMS_FULL_PROOFS](../CORE_THEOREMS_FULL_PROOFS.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../coq_skeleton/) — Coq 证明骨架
+- [CORE_THEOREMS_FULL_PROOFS](../CORE_THEOREMS_FULL_PROOFS.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../coq_skeleton/README.md) — Coq 证明骨架
 - **Types and Programming Languages** (Benjamin C. Pierce)
 - **Advanced Topics in Types and Programming Languages**
 - **Category Theory for Programmers** (Bartosz Milewski)

@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [compiler_optimizations.md](../../research_notes/experiments/compiler_optimizations.md)、[01_compiler_features.md](../../06_toolchain/01_compiler_features.md)
+> 内容已整合至： [compiler_optimizations.md](../../../../research_notes/experiments/compiler_optimizations.md)、[01_compiler_features.md](../../06_toolchain/01_compiler_features.md)
 
 ## 知识结构思维导图
 
@@ -269,25 +269,25 @@ unsafe fn very_dangerous() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 编译器优化实验 | 编译器优化分析 | [../../research_notes/experiments/compiler_optimizations.md](../../research_notes/experiments/compiler_optimizations.md) |
-| 内存分析 | 内存使用分析 | [../../research_notes/experiments/memory_analysis.md](../../research_notes/experiments/memory_analysis.md) |
-| 性能基准 | 性能测试方法论 | [../../research_notes/experiments/performance_benchmarks.md](../../research_notes/experiments/performance_benchmarks.md) |
+| 编译器优化实验 | 编译器优化分析 | [../../../../research_notes/experiments/compiler_optimizations.md](../../../../research_notes/experiments/compiler_optimizations.md) |
+| 内存分析 | 内存使用分析 | [../../../../research_notes/experiments/memory_analysis.md](../../../../research_notes/experiments/memory_analysis.md) |
+| 性能基准 | 性能测试方法论 | [../../../../research_notes/experiments/performance_benchmarks.md](../../../../research_notes/experiments/performance_benchmarks.md) |
 
 ### 形式化方法
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 借用检查证明 | 借用检查器形式化 | [../../research_notes/formal_methods/borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md) |
-| 所有权模型 | 所有权系统形式化 | [../../research_notes/formal_methods/ownership_model.md](../../research_notes/formal_methods/ownership_model.md) |
-| 生命周期形式化 | 生命周期系统理论 | [../../research_notes/formal_methods/lifetime_formalization.md](../../research_notes/formal_methods/lifetime_formalization.md) |
+| 借用检查证明 | 借用检查器形式化 | [../../../../research_notes/formal_methods/borrow_checker_proof.md](../../../../research_notes/formal_methods/borrow_checker_proof.md) |
+| 所有权模型 | 所有权系统形式化 | [../../../../research_notes/formal_methods/ownership_model.md](../../../../research_notes/formal_methods/ownership_model.md) |
+| 生命周期形式化 | 生命周期系统理论 | [../../../../research_notes/formal_methods/lifetime_formalization.md](../../../../research_notes/formal_methods/lifetime_formalization.md) |
 
 ### 类型理论
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 类型系统基础 | 类型系统理论 | [../../research_notes/type_theory/type_system_foundations.md](../../research_notes/type_theory/type_system_foundations.md) |
-| 高级类型 | 高级类型特性 | [../../research_notes/type_theory/advanced_types.md](../../research_notes/type_theory/advanced_types.md) |
-| 变型理论 | 类型变型 | [../../research_notes/type_theory/variance_theory.md](../../research_notes/type_theory/variance_theory.md) |
+| 类型系统基础 | 类型系统理论 | [../../../../research_notes/type_theory/type_system_foundations.md](../../../../research_notes/type_theory/type_system_foundations.md) |
+| 高级类型 | 高级类型特性 | [../../../../research_notes/type_theory/advanced_types.md](../../../../research_notes/type_theory/advanced_types.md) |
+| 变型理论 | 类型变型 | [../../../../research_notes/type_theory/variance_theory.md](../../../../research_notes/type_theory/variance_theory.md) |
 
 ### 工具链
 

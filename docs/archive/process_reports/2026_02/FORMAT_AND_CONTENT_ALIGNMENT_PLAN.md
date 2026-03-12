@@ -1,4 +1,5 @@
 ﻿# research_notes 格式统一与内容充分性、Rust 1.93 对齐计划
+>
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
 > **归档日期**: 2026-02-20
@@ -6,7 +7,6 @@
 > **状态**: 📦 已归档
 
 ---
-
 
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
@@ -26,7 +26,7 @@
 | **元信息不统一** | 部分文档缺「Rust 版本」「最后更新」「状态」；部分有「用途」「分类」「23 模式矩阵」等扩展元信息；blockquote 写法（`> **key**: value`）偶有空格/冒号不一致 | 难以批量校验、自动化脚本无法统一解析 |
 | **一级/二级标题风格不一** | 有的用 emoji（`## 📊 目录`），有的不用（`## 目录`、`## 一、按三大支柱`）；同一层级混用「一、二、三」与「📋 📚 🔬」 | 观感杂乱、目录生成风格不统一 |
 | **目录块不统一** | 有的有完整 TOC（含子节），有的仅顶层；有的用「## 📊 目录」有的用「## 目录」 | 导航体验不一致 |
-| **表格与链接风格** | 表格对齐（`:---` vs `---`）、链接用「[文本](path)」vs「[文本](path) 说明」混用；相对路径层级（`../` vs `../../`）因文件深度不同未统一规范 | 可读性与维护成本 |
+| **表格与链接风格** | 表格对齐（`:---` vs `---`）、链接用「文本」vs「文本 说明」混用；相对路径层级（`../` vs `../../`）因文件深度不同未统一规范 | 可读性与维护成本 |
 | **文末元信息** | 有的有「**维护者**」「**最后更新**」「**状态**」块，有的没有；位置不统一（文末 vs 文首已有则不再重复） | 难以批量检查「最后更新」是否与 1.93 同步 |
 
 **建议**：
@@ -62,7 +62,7 @@
 | **版本与 Edition 标注不完整** | 部分文档无「Rust 版本」或「Edition 2024」；[FORMAL_VERIFICATION_GUIDE](../../../research_notes/FORMAL_VERIFICATION_GUIDE.md) 等缺 Rust 版本行 | 全库扫描：凡有「创建日期」的 .md 均补「Rust 版本**: 1.93.0+ (Edition 2024)」 |
 | **92 项特性未逐项落点到文档** | RUST_193 已有 92 项×动机/形式化/反例；但「每项特性→应出现在哪些 research_notes 文档」的映射未系统化（仅部分在 RUST_193 表中有「形式化」列） | 建立「92 项 → 推荐落点文档」表；对「推荐落点」中尚未提及该特性的文档做小幅补充（至少 1 句或 1 链接） |
 | **1.93 新增/变更在子文档中的体现不足** | 如 C variadic、asm_cfg、deref_nullptr、const &mut static、Copy specialization 移除、offset_of!、全局分配器 thread_local 等，在 formal_methods/type_theory/borrow 等子文档中多为「在 00_completeness_gaps 或 RUST_193 中已列」，正文未展开 | 在 borrow_checker_proof、ownership_model、type_theory 相关篇中为上述每项增 1 段「1.93 与本篇」或链到 06_toolchain/09_compatibility |
-| **权威来源版本** | 引用 [releases.rs](https://releases.rs/docs/1.93.0/)、[Ferrocene FLS](https://spec.ferrocene.dev/) 时未统一注明「FLS 当前覆盖 Rust 2021 + rustc 1.93」「本项目采用 Edition 2024」 | 在 README 或 00_ORGANIZATION 中单列「权威来源与版本约定」；各文档引用 FLS/releases 时可复用该约定句 |
+| **权威来源版本** | 引用 [releases.rs](https://releases.rs/docs/1.93.0/README.md)、[Ferrocene FLS](https://spec.ferrocene.dev/README.md) 时未统一注明「FLS 当前覆盖 Rust 2021 + rustc 1.93」「本项目采用 Edition 2024」 | 在 README 或 00_ORGANIZATION 中单列「权威来源与版本约定」；各文档引用 FLS/releases 时可复用该约定句 |
 
 **建议**：
 

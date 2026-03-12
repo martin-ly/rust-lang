@@ -178,10 +178,10 @@
 | 研究笔记                                                                    | 研究目标                           | 状态      | 完成度 |
 | :--- | :--- | :--- | :--- |
 | [软件设计理论体系](./software_design_theory/README.md)                     | 设计模式、23/43、执行模型、组合工程 | ✅ 已完成 | 100%   |
-| [设计模式形式化](./software_design_theory/01_design_patterns_formal/)       | GoF 23 种模式形式化                | ✅ 已完成 | 100%   |
-| [23/43 模型](./software_design_theory/02_workflow_safe_complete_models/)   | 安全 vs 完全模型                   | ✅ 已完成 | 100%   |
-| [执行模型](./software_design_theory/03_execution_models/)                   | 同步、异步、并发、并行、分布式     | ✅ 已完成 | 100%   |
-| [组合工程](./software_design_theory/04_compositional_engineering/)          | CE-T1–T3 有效性证明                | ✅ 已完成 | 100%   |
+| [设计模式形式化](./software_design_theory/01_design_patterns_formal/README.md)       | GoF 23 种模式形式化                | ✅ 已完成 | 100%   |
+| [23/43 模型](./software_design_theory/02_workflow_safe_complete_models/README.md)   | 安全 vs 完全模型                   | ✅ 已完成 | 100%   |
+| [执行模型](./software_design_theory/03_execution_models/README.md)                   | 同步、异步、并发、并行、分布式     | ✅ 已完成 | 100%   |
+| [组合工程](./software_design_theory/04_compositional_engineering/README.md)          | CE-T1–T3 有效性证明                | ✅ 已完成 | 100%   |
 | [Rust 惯用模式](./software_design_theory/06_rust_idioms.md)                | RAII、Newtype、类型状态            | ✅ 已完成 | 100%   |
 | [反模式与边界](./software_design_theory/07_anti_patterns.md)                | 13 反例、反模式分类、规避策略      | ✅ 已完成 | 100%   |
 
@@ -227,7 +227,7 @@
 
 - **批判性分析与推进计划** → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
 - **核心定理完整证明** → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)（L2 级 ownership T2、borrow T1、type T3）
-- **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/)（已归档）
+- **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)（已归档）
 - **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[RUSTBELT_ALIGNMENT](./RUSTBELT_ALIGNMENT.md)
 - **权威对齐指南** → [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)（原三大支柱文档已归档至 `../archive/process_reports/2026_02/`）
 - **工具对接** → [Aeneas 集成计划](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)、[coq-of-rust 集成计划](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md)（已归档）
@@ -255,10 +255,10 @@
 
 **软件设计理论**:
 
-- **设计模式** → [设计模式形式化](./software_design_theory/01_design_patterns_formal/)
-- **23/43 模型** → [安全 vs 完全模型](./software_design_theory/02_workflow_safe_complete_models/)
-- **执行模型** → [五模型形式化](./software_design_theory/03_execution_models/)
-- **组合工程** → [CE-T1–T3 有效性](./software_design_theory/04_compositional_engineering/)
+- **设计模式** → [设计模式形式化](./software_design_theory/01_design_patterns_formal/README.md)
+- **23/43 模型** → [安全 vs 完全模型](./software_design_theory/02_workflow_safe_complete_models/README.md)
+- **执行模型** → [五模型形式化](./software_design_theory/03_execution_models/README.md)
+- **组合工程** → [CE-T1–T3 有效性](./software_design_theory/04_compositional_engineering/README.md)
 - **Rust 惯用模式** → [RAII、Newtype、类型状态](./software_design_theory/06_rust_idioms.md)
 - **反模式与边界** → [13 反例、规避策略](./software_design_theory/07_anti_patterns.md)
 

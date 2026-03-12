@@ -1089,7 +1089,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 
 | 定理 | crates 示例 | 说明 |
 | :--- | :--- | :--- |
-| T6.1-T6.3 (状态一致性、数据竞争自由、进度性) | [c06 futures_smoke](../../../crates/c06_async/examples/futures_smoke.rs)、[async 示例](../../../crates/c06_async/examples/) | Future、Poll、异步状态机 |
+| T6.1-T6.3 (状态一致性、数据竞争自由、进度性) | [c06 futures_smoke](../../../crates/c06_async/examples/futures_smoke.rs)、[async 示例](../../../crates/c06_async/examples/README.md) | Future、Poll、异步状态机 |
 | T-PIN1 (Pin 不动性) | c06 pin 相关示例 | 自引用 Future |
 
 详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
@@ -1154,11 +1154,11 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 
 4. **Ferrocene FLS** — Rust 1.93 形式化规范
    - [Ch. 17.3 Asynchronous Computation](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation)
-   - 与本目录: Send/Sync、Future、async 状态机对应；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/)
+   - 与本目录: Send/Sync、Future、async 状态机对应；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/README.md)
 
 ### 官方文档
 
-- [Rust 异步编程](https://rust-lang.github.io/async-book/)
+- [Rust 异步编程](https://rust-lang.github.io/async-book/README.md)
 - [Future Trait](https://doc.rust-lang.org/std/future/trait.Future.html)
 - [Pin 类型](https://doc.rust-lang.org/std/pin/index.html)
 - [Waker 类型](https://doc.rust-lang.org/std/task/struct.Waker.html)
@@ -1270,4 +1270,4 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 **最后更新**: 2026-02-27
 **状态**: ✅ **已完成** (Week 2 任务 P1-W2-T2)
 
-**国际权威对标**：[RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/)；[FLS Ch. 17](https://spec.ferrocene.dev/concurrency.html) Concurrency（17.1 Send/Sync、17.2 Atomics、17.3 Asynchronous Computation）；[std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)。
+**国际权威对标**：[RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md)；[FLS Ch. 17](https://spec.ferrocene.dev/concurrency.html) Concurrency（17.1 Send/Sync、17.2 Atomics、17.3 Asynchronous Computation）；[std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)。

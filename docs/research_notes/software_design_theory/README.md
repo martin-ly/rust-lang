@@ -40,11 +40,11 @@
 | 目录 | 内容 |
 | :--- | :--- |
 | [00_MASTER_INDEX](00_MASTER_INDEX.md) | 主索引、层次、边界、扩展路线 |
-| [01_design_patterns_formal](01_design_patterns_formal/) | 设计模式形式分析（GoF 23） |
-| [02_workflow_safe_complete_models](02_workflow_safe_complete_models/) | 23 安全 vs 43 完全模型 |
-| [03_execution_models](03_execution_models/) | 同步/异步/并发/并行/分布式 |
-| [04_compositional_engineering](04_compositional_engineering/) | 组合软件工程有效性形式论证 |
-| [05_boundary_system](05_boundary_system/) | 边界体系统一分析 |
+| [01_design_patterns_formal](01_design_patterns_formal/README.md) | 设计模式形式分析（GoF 23） |
+| [02_workflow_safe_complete_models](02_workflow_safe_complete_models/README.md) | 23 安全 vs 43 完全模型 |
+| [03_execution_models](03_execution_models/README.md) | 同步/异步/并发/并行/分布式 |
+| [04_compositional_engineering](04_compositional_engineering/README.md) | 组合软件工程有效性形式论证 |
+| [05_boundary_system](05_boundary_system/README.md) | 边界体系统一分析 |
 | [06_rust_idioms](06_rust_idioms.md) | Rust 惯用模式（RAII、Newtype、类型状态） |
 | [07_anti_patterns](07_anti_patterns.md) | 反模式与边界、13 反例索引 |
 
@@ -99,7 +99,7 @@
 | 需求 | 入口 |
 | :--- | :--- |
 | 查某模式是否纯 Safe | [01_safe_23_catalog](02_workflow_safe_complete_models/01_safe_23_catalog.md) |
-| 查某模式 Rust 实现 | [01_design_patterns_formal](01_design_patterns_formal/) 对应模式文档 |
+| 查某模式 Rust 实现 | [01_design_patterns_formal](01_design_patterns_formal/README.md) 对应模式文档 |
 | 选执行模型（同步/异步/并发/并行/分布式） | [06_boundary_analysis](03_execution_models/06_boundary_analysis.md) |
 | 查模式反例 | [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例) |
 
@@ -174,9 +174,9 @@
 | 来源 | 内容 |
 | :--- | :--- |
 | [Refactoring.Guru 设计模式](https://refactoring.guru/design-patterns) | 各模式结构、示例、关系 |
-| [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/) | Rust Idioms、Patterns、Anti-patterns |
-| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | 命名、错误处理、文档 |
-| [Fowler EAA](https://martinfowler.com/eaaCatalog/) | 企业架构模式 |
+| [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/README.md) | Rust Idioms、Patterns、Anti-patterns |
+| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/README.md) | 命名、错误处理、文档 |
+| [Fowler EAA](https://martinfowler.com/eaaCatalog/README.md) | 企业架构模式 |
 
 ---
 

@@ -533,13 +533,13 @@ fn use_contravariant_callback() {
 
 ### 相关代码
 
-- [型变实现](../../../crates/c02_type_system/src/)
-- [型变示例](../../../crates/c02_type_system/examples/)
+- [型变实现](../../../crates/c02_type_system/src/README.md)
+- [型变示例](../../../crates/c02_type_system/examples/README.md)
 - [形式化工程系统 - 型变](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/06_variance.md)
 
 ### 工具资源
 
-- [Rust Analyzer](https://rust-analyzer.github.io/): 提供型变检查
+- [Rust Analyzer](https://rust-analyzer.github.io/README.md): 提供型变检查
 - [Chalk](https://github.com/rust-lang/chalk): Rust Trait 系统的形式化模型，包含型变
 
 ---

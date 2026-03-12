@@ -163,7 +163,7 @@ fn example_anti_pattern() {
 1. **补形式化**：为核心概念添加 Def（含符号、前置条件、结论）；为结论添加定理及证明思路；引用 [PROOF_INDEX](PROOF_INDEX.md) 中已有证明。
 2. **补代码**：添加可运行 Rust 示例（`cargo build` 通过）；在注释中标明对应定理（如 `// 对应 ownership T2`）。
 3. **补场景与反例**：添加 1–3 个典型使用场景；添加 1–2 个反例及规避策略。
-4. **补衔接**：在相关段落增加 `[文档名](path)` 链接至 formal_methods、type_theory、practical_applications。
+4. **补衔接**：在相关段落增加 `文档名` 链接至 formal_methods、type_theory、practical_applications。
 
 **逐文档自检**：按 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) 实质内容检查清单逐项核对；若任一项为空或仅占位，则需修复。
 见 [FAQ Q2.5](FAQ.md#q25-如何判断研究笔记是否有实质内容) 快速判断指引。
@@ -320,7 +320,7 @@ fn example_anti_pattern() {
 
 ```markdown
 ✅ 正确: [研究路线图](./RESEARCH_ROADMAP.md)
-❌ 错误: [研究路线图](wrong/absolute/path/RESEARCH_ROADMAP.md)
+❌ 错误: 研究路线图
 ```
 
 ### 2. 提供描述性链接文本

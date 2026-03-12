@@ -527,9 +527,9 @@ $ python -m pytest
 
 | 语言 | 规范/形式化资源 |
 | :--- | :--- |
-| **C++** | [ISO C++ Standard](https://isocpp.org/std/the-standard)、[cppreference](https://en.cppreference.com/) |
+| **C++** | [ISO C++ Standard](https://isocpp.org/std/the-standard)、[cppreference](https://en.cppreference.com/README.md) |
 | **Go** | [Go Language Specification](https://golang.org/ref/spec)、[Go Memory Model](https://golang.org/ref/mem) |
-| **Python** | [Python Language Reference](https://docs.python.org/3/reference/) |
+| **Python** | [Python Language Reference](https://docs.python.org/3/reference/README.md) |
 
 ---
 

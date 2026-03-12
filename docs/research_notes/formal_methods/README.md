@@ -28,7 +28,7 @@
 **与子文档衔接**：
 
 - [borrow_checker_proof](borrow_checker_proof.md) Def MATCH1/FOR1/QUERY1、定理 MATCH-T1/FOR-T1/QUERY-T1
-- [type_system_foundations](../type_theory/type_system_foundations.md) 定理 T2（保持性）、T3（类型安全）
+- [type_system_foundations](../../research_notes/type_theory/type_system_foundations.md) 定理 T2（保持性）、T3（类型安全）
 
 ---
 
@@ -269,23 +269,23 @@
 ### 核心文档
 
 - [形式化论证系统梳理指南](../FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、反例索引、公理-定理证明树
-- [形式化工程系统 - 理论基础](../../rust-formal-engineering-system/01_theoretical_foundations/)
+- [形式化工程系统 - 理论基础](../../rust-formal-engineering-system/01_theoretical_foundations/README.md)
 - [所有权与借用文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [异步语义理论](../../../../crates/c06_async/src/async_semantics_theory.rs)
 
 ### 代码实现
 
-- [所有权实现](../../../crates/c01_ownership_borrow_scope/src/)
-- [借用检查器实现](../../../crates/c01_ownership_borrow_scope/src/)
-- [异步系统实现](../../../crates/c06_async/src/)
+- [所有权实现](../../../crates/c01_ownership_borrow_scope/src/README.md)
+- [借用检查器实现](../../../crates/c01_ownership_borrow_scope/src/README.md)
+- [异步系统实现](../../../crates/c06_async/src/README.md)
 
 ### 学术资源
 
-- [RustBelt 项目](https://plv.mpi-sws.org/rustbelt/) — MPI-SWS 形式化 Rust 研究；Ralf Jung 博士论文获 **ACM SIGPLAN John C. Reynolds Doctoral Dissertation Award**
-- [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) — 首个 Rust 安全形式化证明
-- [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) — 别名模型；Miri 实现
+- [RustBelt 项目](https://plv.mpi-sws.org/rustbelt/README.md) — MPI-SWS 形式化 Rust 研究；Ralf Jung 博士论文获 **ACM SIGPLAN John C. Reynolds Doctoral Dissertation Award**
+- [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/README.md) — 首个 Rust 安全形式化证明
+- [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md) — 别名模型；Miri 实现
 - [Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) — Stacked Borrows 演进（**Distinguished Paper Award**）；[ACM PDF](https://dl.acm.org/doi/pdf/10.1145/3735592)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf)、[源码](https://gitlab.mpi-sws.org/iris/simuliris/-/tree/master/theories/tree_borrows)
-- [Ferrocene FLS](https://spec.ferrocene.dev/) — Rust 1.93 形式化规范；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/)
+- [Ferrocene FLS](https://spec.ferrocene.dev/README.md) — Rust 1.93 形式化规范；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/README.md)
 
 ---
 
@@ -297,28 +297,28 @@
 
 | 本目录 Def/定理 | 国际权威来源 | 对应关系 |
 | :--- | :--- | :--- |
-| ownership 规则 1–8、T2/T3 | [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | Iris 分离逻辑、unsafe 安全抽象 |
-| borrow 规则、T1 数据竞争自由 | [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)、[Stacked Borrows POPL 2020](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | 别名模型、&mut 唯一性 |
-| RAW1、裸指针 | [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)、[Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | 解引用非空、对齐、有效；Tree Borrows 为 Stacked Borrows 演进（Distinguished Paper Award；Rocq 形式化证明） |
-| CHAN/MUTEX、relaxed memory | [RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/) | Arc 数据竞争、同步 ghost state |
-| lifetime outlives、NLL | [RustBelt](https://plv.mpi-sws.org/rustbelt/)、[Polonius](https://rust-lang.github.io/polonius/) | 区域类型、NLL；Polonius 为 datalog 形式化 borrow 分析 |
+| ownership 规则 1–8、T2/T3 | [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/README.md) | Iris 分离逻辑、unsafe 安全抽象 |
+| borrow 规则、T1 数据竞争自由 | [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/README.md)、[Stacked Borrows POPL 2020](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md) | 别名模型、&mut 唯一性 |
+| RAW1、裸指针 | [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md)、[Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | 解引用非空、对齐、有效；Tree Borrows 为 Stacked Borrows 演进（Distinguished Paper Award；Rocq 形式化证明） |
+| CHAN/MUTEX、relaxed memory | [RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md) | Arc 数据竞争、同步 ghost state |
+| lifetime outlives、NLL | [RustBelt](https://plv.mpi-sws.org/rustbelt/README.md)、[Polonius](https://rust-lang.github.io/polonius/README.md) | 区域类型、NLL；Polonius 为 datalog 形式化 borrow 分析 |
 | Pin T1–T3 | [Rust RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)、[async 规范](https://doc.rust-lang.org/std/future/trait.Future.html) | 自引用、!Unpin |
-| 形式化工具 | [Prusti](https://prusti.org/)、[Kani](https://model-checking.github.io/kani/)、[Miri](https://github.com/rust-lang/miri)、[Iris (Coq)](https://iris-project.org/) | Miri 实现 Stacked Borrows |
+| 形式化工具 | [Prusti](https://prusti.org/README.md)、[Kani](https://model-checking.github.io/kani/README.md)、[Miri](https://github.com/rust-lang/miri)、[Iris (Coq)](https://iris-project.org/README.md) | Miri 实现 Stacked Borrows |
 
 ### 权威论文与规范（含链接）
 
 | 来源 | 类型 | 链接 | 说明 |
 | :--- | :--- | :--- | :--- |
-| **RustBelt** | 论文 POPL 2018 | [plv.mpi-sws.org/rustbelt/popl18](https://plv.mpi-sws.org/rustbelt/popl18/) | 首个 Rust 安全形式化证明；Iris + Coq |
-| **Stacked Borrows** | 论文 POPL 2020 | [plv.mpi-sws.org/rustbelt/stacked-borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | 别名模型；UB 定义；Miri 实现 |
-| **RustBelt Meets Relaxed Memory** | 论文 POPL 2020 | [plv.mpi-sws.org/rustbelt/rbrlx](https://plv.mpi-sws.org/rustbelt/rbrlx/) | relaxed memory、Arc 数据竞争 |
-| **Rust Reference** | 官方规范 | [doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/) | 语法、语义、UB 列表 |
-| **Rustonomicon** | 官方文档 | [doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/) | unsafe、内存布局、UB |
-| **Ferrocene FLS** | 形式化规范 | [spec.ferrocene.dev](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/) |
+| **RustBelt** | 论文 POPL 2018 | [plv.mpi-sws.org/rustbelt/popl18](https://plv.mpi-sws.org/rustbelt/popl18/README.md) | 首个 Rust 安全形式化证明；Iris + Coq |
+| **Stacked Borrows** | 论文 POPL 2020 | [plv.mpi-sws.org/rustbelt/stacked-borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md) | 别名模型；UB 定义；Miri 实现 |
+| **RustBelt Meets Relaxed Memory** | 论文 POPL 2020 | [plv.mpi-sws.org/rustbelt/rbrlx](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md) | relaxed memory、Arc 数据竞争 |
+| **Rust Reference** | 官方规范 | [doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/README.md) | 语法、语义、UB 列表 |
+| **Rustonomicon** | 官方文档 | [doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/README.md) | unsafe、内存布局、UB |
+| **Ferrocene FLS** | 形式化规范 | [spec.ferrocene.dev](https://spec.ferrocene.dev/README.md) | Rust 1.93 形式化规范；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/README.md) |
 | **Tree Borrows** | 论文 PLDI 2025（Distinguished Paper Award） | [ETH 项目页](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf)、[Ralf 博客](https://www.ralfj.de/blog/2025/07/07/tree-borrows-paper.html) | Stacked Borrows 演进；树结构；30k crates 测试 54% 更少拒绝；Rocq 形式化证明 |
-| **Polonius** | 形式化 borrow 分析 | [rust-lang.github.io/polonius](https://rust-lang.github.io/polonius/) | datalog 形式化；NLL 后继；`-Zpolonius` |
-| **Prusti** | 验证工具 | [prusti.org](https://prusti.org/) | 基于 Viper 的 deductive verification |
-| **Kani** | 验证工具 | [model-checking.github.io/kani](https://model-checking.github.io/kani/) | 模型检查、UB 验证 |
+| **Polonius** | 形式化 borrow 分析 | [rust-lang.github.io/polonius](https://rust-lang.github.io/polonius/README.md) | datalog 形式化；NLL 后继；`-Zpolonius` |
+| **Prusti** | 验证工具 | [prusti.org](https://prusti.org/README.md) | 基于 Viper 的 deductive verification |
+| **Kani** | 验证工具 | [model-checking.github.io/kani](https://model-checking.github.io/kani/README.md) | 模型检查、UB 验证 |
 
 ### 与本目录的对应说明
 
@@ -332,15 +332,15 @@
 
 | 来源 | 链接 | 用途 |
 | :--- | :--- | :--- |
-| **releases.rs 1.93.0** | [releases.rs/docs/1.93.0](https://releases.rs/docs/1.93.0/) | 完整变更清单 |
-| **Rust 1.93 发布说明** | [blog.rust-lang.org/2026/01/22/Rust-1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/) | 语言特性权威公告 |
-| **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范 |
+| **releases.rs 1.93.0** | [releases.rs/docs/1.93.0](https://releases.rs/docs/1.93.0/README.md) | 完整变更清单 |
+| **Rust 1.93 发布说明** | [blog.rust-lang.org/2026/01/22/Rust-1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/README.md) | 语言特性权威公告 |
+| **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/README.md) | Rust 1.93 形式化规范 |
 
 **版本说明**：Ferrocene FLS 覆盖 **Rust 2021 Edition** 与 rustc 1.93.0。本项目文档使用 **Edition 2024**；Edition 2024 新增语法与语义尚未纳入 FLS 正式章节，形式化引用以 FLS 当前覆盖范围为准。
 
 ### Ferrocene FLS 章节与本目录对应
 
-Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.dev/) 覆盖 Rust 1.93 语法与 legality；本目录侧重**语义与安全性质**，二者互补：
+Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.dev/README.md) 覆盖 Rust 1.93 语法与 legality；本目录侧重**语义与安全性质**，二者互补：
 
 | FLS 章节 | 直接链接 | 本目录对应 |
 | :--- | :--- | :--- |

@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [type_theory/](../../../research_notes/type_theory/)
+> 内容已整合至： [type_theory/](../../../research_notes/type_theory/README.md)
 
 - [类型系统基础](../../../research_notes/type_theory/type_system_foundations.md)
 - [Trait 系统形式化](../../../research_notes/type_theory/trait_system_formalization.md)

@@ -183,9 +183,9 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 | 定理 | 依赖 | 来源 |
 | :--- | :--- | :--- |
-| CE-T1 | ownership T2、T3 | [ownership_model](../../formal_methods/ownership_model.md) |
-| CE-T2 | borrow T1、Send/Sync | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)、[send_sync_formalization](../../formal_methods/send_sync_formalization.md) |
-| CE-T3 | type T1、T2、T3 | [type_system_foundations](../../type_theory/type_system_foundations.md) |
+| CE-T1 | ownership T2、T3 | [ownership_model](../../../research_notes/formal_methods/ownership_model.md) |
+| CE-T2 | borrow T1、Send/Sync | [borrow_checker_proof](../../../research_notes/formal_methods/borrow_checker_proof.md)、[send_sync_formalization](../../../research_notes/formal_methods/send_sync_formalization.md) |
+| CE-T3 | type T1、T2、T3 | [type_system_foundations](../../../research_notes/type_theory/type_system_foundations.md) |
 
 ---
 
@@ -235,7 +235,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 | **cargo-udeps** | 未使用依赖检测 | L3 | `cargo install cargo-udeps` |
 | **cargo-fuzz** | 模糊测试 | L4 | `cargo install cargo-fuzz` |
 | **Miri** | 未定义行为检测 | L4 | `cargo +nightly miri test` |
-| **Pact** | 消费者契约测试 | L4 | [pact.io](https://pact.io/) |
+| **Pact** | 消费者契约测试 | L4 | [pact.io](https://pact.io/README.md) |
 | **OpenAPI/Swagger** | API 契约定义与校验 | L4 | 契约即文档、代码生成 |
 | **gRPC/protobuf** | 跨进程契约 | L4 | tonic、prost |
 
@@ -273,9 +273,9 @@ ownership T2,T3  borrow T1    type T1,T2,T3
     └── L4；架构模式（Repository、Gateway、DTO）+ 契约/集成测试/Miri/模糊测试（见 § L3/L4 验证手段）
 ```
 
-**衔接**：与 [02_workflow_safe_complete_models](../02_workflow_safe_complete_models/)、
+**衔接**：与 [02_workflow_safe_complete_models](../02_workflow_safe_complete_models/README.md)、
 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md)、
-[05_boundary_system](../05_boundary_system/) 三维矩阵一致；
+[05_boundary_system](../05_boundary_system/README.md) 三维矩阵一致；
 选型决策树见 [03_semantic_boundary_map](../02_workflow_safe_complete_models/03_semantic_boundary_map.md)。
 
 ---
@@ -303,8 +303,8 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 | **不可表达** | 规避；重构为等价/近似 | 同上 |
 
 **引用**：[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) 等价/近似/不可表达表；
-~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN~~（已归档至 [../../../archive/process_reports/2026_02/](../../../archive/process_reports/2026_02/)）支柱 2+3；
-现参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](../../research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md)。
+~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN~~（已归档至 [../../../archive/process_reports/](../../../archive/process_reports/README.md)）支柱 2+3；
+现参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](../../../../research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md)。
 
 ---
 

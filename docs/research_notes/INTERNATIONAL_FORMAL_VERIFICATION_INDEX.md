@@ -13,7 +13,7 @@
 
 | 成果 | 机构/作者 | 年份 | 形式化范围 | 证明助手/工具 | 与本项目对应 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权、借用、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](./coq_skeleton/)（T-OW2/BR1/TY3 骨架） |
+| **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权、借用、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](./coq_skeleton/README.md)（T-OW2/BR1/TY3 骨架） |
 | **Tree Borrows** | ETH (PLDI 2025) | 2025 | 借用模型、树结构、54% 更少拒绝 | Iris (Coq)、Rocq | borrow_checker_proof 演进；Distinguished Paper |
 | **RustBelt Meets Relaxed Memory** | MPI-SWS | 2020 | 松弛内存、Arc、原子操作 | Iris (Coq) | formal_methods Phase 4（部分） |
 | **Rust Distilled** | DBLP | - | 高层所有权、无生命周期 | - | ownership_model（高层部分） |
@@ -29,14 +29,14 @@
 
 ### 2.1 RustBelt
 
-- **论文**: [RustBelt: Logical Foundations for the Future of Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)
+- **论文**: [RustBelt: Logical Foundations for the Future of Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/README.md)
 - **形式化**: λ Rust 模型、分离逻辑、MIR 级语义
 - **本项目对应**: `formal_methods/ownership_model.md`, `formal_methods/borrow_checker_proof.md`
 - **差距**: 无 Iris 分离逻辑形式化；无 MIR 级建模；**Coq 骨架已创建**（[coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)），证明 Admitted 待补全
 
 ### 2.2 RustBelt Meets Relaxed Memory (POPL 2020)
 
-- **论文**: [RustBelt Meets Relaxed Memory](https://plv.mpi-sws.org/rustbelt/rbrlx/)
+- **论文**: [RustBelt Meets Relaxed Memory](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md)
 - **形式化**: 松弛内存、Arc 数据竞争、synchronized ghost state
 - **本项目对应**: `formal_methods` Phase 4（MaybeUninit、原子操作）— 仅 Def 级
 - **差距**: 无松弛内存模型；无 Arc 形式化；无 ghost state 构造
@@ -86,11 +86,11 @@
 
 | 会议 | 论文 | 年份 | 链接 | 本项目对应 |
 | :--- | :--- | :--- | :--- | :--- |
-| **POPL** | RustBelt: Logical Foundations for the Future of Safe Systems Programming | 2018 | [plv.mpi-sws.org/rustbelt](https://plv.mpi-sws.org/rustbelt/popl18/) | ownership_model、borrow_checker_proof |
-| **POPL** | RustBelt Meets Relaxed Memory | 2020 | [rbrlx](https://plv.mpi-sws.org/rustbelt/rbrlx/) | send_sync_formalization、async_state_machine |
+| **POPL** | RustBelt: Logical Foundations for the Future of Safe Systems Programming | 2018 | [plv.mpi-sws.org/rustbelt](https://plv.mpi-sws.org/rustbelt/popl18/README.md) | ownership_model、borrow_checker_proof |
+| **POPL** | RustBelt Meets Relaxed Memory | 2020 | [rbrlx](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md) | send_sync_formalization、async_state_machine |
 | **PLDI** | Tree Borrows: A New Aliasing Model for Rust (Distinguished Paper) | 2025 | [ETH PLDI25](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | borrow_checker_proof、BORROW_DATARACE_FREE.v |
 | **ICFP** | Oxide: The Essence of Rust | 2023 | [Oxide](https://arxiv.org/abs/2303.00924) | ownership_model（高层语义） |
-| **PLDI** | Stacked Borrows (Miri 实现基础) | 2019 | [Ralf Jung 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | borrow_checker_proof、Miri 检测 |
+| **PLDI** | Stacked Borrows (Miri 实现基础) | 2019 | [Ralf Jung 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md) | borrow_checker_proof、Miri 检测 |
 
 > **说明**：RustBelt 系列为 Rust 形式化验证奠基性工作；Tree Borrows 为 PLDI 2025 杰出论文；Oxide 为 ICFP 高层语义抽象。
 

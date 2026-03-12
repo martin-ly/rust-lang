@@ -197,7 +197,7 @@
 
 ## 相关文档
 
-- [Coq证明骨架](../coq_skeleton/)
+- [Coq证明骨架](../coq_skeleton/README.md)
 - [分布式模式形式化](../coq_skeleton/DISTRIBUTED_PATTERNS.v) 🆕
 - [工作流形式化](../coq_skeleton/WORKFLOW_FORMALIZATION.v) 🆕
 - [证明技术概念族](./PROOF_TECHNIQUES_MINDMAP.md) 🆕

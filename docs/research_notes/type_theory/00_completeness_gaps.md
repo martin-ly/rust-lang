@@ -190,6 +190,6 @@
 
 | 缺口类型 | 说明 | 对标成果 |
 | :--- | :--- | :--- |
-| **L3 机器可检查证明** | 类型系统 T-TY3 骨架已创建（[TYPE_SAFETY.v](../coq_skeleton/TYPE_SAFETY.v)，证明 Admitted 待补全）；T-OW2/T-BR1 骨架见 [coq_skeleton](../coq_skeleton/) | RustBelt、Aeneas |
+| **L3 机器可检查证明** | 类型系统 T-TY3 骨架已创建（[TYPE_SAFETY.v](../coq_skeleton/TYPE_SAFETY.v)，证明 Admitted 待补全）；T-OW2/T-BR1 骨架见 [coq_skeleton](../coq_skeleton/README.md) | RustBelt、Aeneas |
 | **范畴论对应** | 指称语义与类型论（Fω、System F）的范畴论对应未形式化 | 学术前沿 |
 | **工具对接** | 无 Aeneas、coq-of-rust 对接 | [AENEAS_INTEGRATION_PLAN](../AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../COQ_OF_RUST_INTEGRATION_PLAN.md) |

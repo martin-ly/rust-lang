@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 阶段 3「1–2 定理 Coq/Isabelle 证明」的骨架交付物与实施指南
-> **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+> **上位文档**: [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md)
 
 ---
 
@@ -156,7 +156,7 @@ coqc TYPE_SAFETY.v
 
 ### 步骤 3：补全 T-BR1、T-TY3 骨架
 
-- **T-BR1**：将 `Parameter` 替换为具体定义；实现 L-BR1/L-BR2；见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §3
+- **T-BR1**：将 `Parameter` 替换为具体定义；实现 L-BR1/L-BR2；见 [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §3
 - **T-TY3**：定义 `Expr`、`has_type`、`step`、`type_error`；实现 L-TY1；见 §4
 
 ---
@@ -226,7 +226,7 @@ fn type_safety_scenario() {
 
 ## 五、与 FORMAL_VERIFICATION_GUIDE 的衔接
 
-本骨架对应 [FORMAL_VERIFICATION_GUIDE](./FORMAL_VERIFICATION_GUIDE.md) 六类验证中的**所有权模型验证**。补全证明后，可勾选该指南任务清单中的相应项。
+本骨架对应 [FORMAL_VERIFICATION_GUIDE](../../research_notes/FORMAL_VERIFICATION_GUIDE.md) 六类验证中的**所有权模型验证**。补全证明后，可勾选该指南任务清单中的相应项。
 
 ---
 
@@ -236,19 +236,19 @@ fn type_safety_scenario() {
 
 | 定理 | 文档 | Coq 骨架 |
 | :--- | :--- | :--- |
-| T-OW1 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §2.1 | - |
-| T-OW2 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §2.2 | [OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) |
-| T-OW3 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §2.3 | - |
-| T-BR1 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §3.1 | [BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v) |
-| T-TY1 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §4.1 | - |
-| T-TY2 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §4.2 | - |
-| T-TY3 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §4.3 | [TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) |
+| T-OW1 | [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §2.1 | - |
+| T-OW2 | [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §2.2 | [OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) |
+| T-OW3 | [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §2.3 | - |
+| T-BR1 | [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §3.1 | [BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v) |
+| T-TY1 | [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §4.1 | - |
+| T-TY2 | [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §4.2 | - |
+| T-TY3 | [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §4.3 | [TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) |
 
 ### 相关研究笔记
 
-- [ownership_model.md](./formal_methods/ownership_model.md) - 所有权模型形式化
-- [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) - 借用检查器证明
-- [type_system_foundations.md](./type_theory/type_system_foundations.md) - 类型系统基础
+- [ownership_model.md](../../research_notes/formal_methods/ownership_model.md) - 所有权模型形式化
+- [borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md) - 借用检查器证明
+- [type_system_foundations.md](../../research_notes/type_theory/type_system_foundations.md) - 类型系统基础
 
 ### 集成计划
 

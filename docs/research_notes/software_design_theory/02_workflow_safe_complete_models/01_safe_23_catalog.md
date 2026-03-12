@@ -199,9 +199,9 @@
 
 | 模式族 | 形式化文档 | 核心 Def/定理 |
 | :--- | :--- | :--- |
-| 创建型 | [ownership_model](../../formal_methods/ownership_model.md)、[01_creational](../01_design_patterns_formal/01_creational/) | BOX1、RC1、所有权规则 2、3 |
-| 结构型 | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)、[02_structural](../01_design_patterns_formal/02_structural/) | 借用规则 1、2，CHAN1、MUTEX1 |
-| 行为型 | [async_state_machine](../../formal_methods/async_state_machine.md)、[03_behavioral](../01_design_patterns_formal/03_behavioral/) | T6.2 并发安全、QUERY1 |
+| 创建型 | [ownership_model](../../formal_methods/ownership_model.md)、[01_creational](../01_design_patterns_formal/01_creational/README.md) | BOX1、RC1、所有权规则 2、3 |
+| 结构型 | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)、[02_structural](../01_design_patterns_formal/02_structural/README.md) | 借用规则 1、2，CHAN1、MUTEX1 |
+| 行为型 | [async_state_machine](../../formal_methods/async_state_machine.md)、[03_behavioral](../01_design_patterns_formal/03_behavioral/README.md) | T6.2 并发安全、QUERY1 |
 
 ---
 

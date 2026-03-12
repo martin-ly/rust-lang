@@ -400,8 +400,8 @@ where
 - [Rust 1.91 vs 1.90 对比文档](./toolchain/04_rust_1.91_vs_1.90_comparison.md)
 - [Rust 1.91.0 Release Notes](https://blog.rust-lang.org/2025/XX/XX/Rust-1.91.0.html)（待发布）
 - [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2024/09/12/Rust-1.90.0.html)
-- [Rust Language Reference](https://doc.rust-lang.org/reference/)
-- [Rust Standard Library Documentation](https://doc.rust-lang.org/std/)
+- [Rust Language Reference](https://doc.rust-lang.org/reference/README.md)
+- [Rust Standard Library Documentation](https://doc.rust-lang.org/std/README.md)
 
 ---
 

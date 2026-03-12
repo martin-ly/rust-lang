@@ -233,11 +233,11 @@ where
 
 **定理 DI-CONC-T1（Saga + Send/Sync 组合）**：Saga 编排式实现中，各步骤闭包若跨线程传递，须满足 `Send + Sync`；
 补偿闭包 `Box<dyn Fn() -> Result<(), E> + Send>` 保证跨线程安全。
-由 [send_sync_formalization](../../formal_methods/send_sync_formalization.md) SEND-T1、SYNC-T1 与 Saga 补偿语义组合。
+由 [send_sync_formalization](../../../research_notes/formal_methods/send_sync_formalization.md) SEND-T1、SYNC-T1 与 Saga 补偿语义组合。
 
 **定理 DI-CONC-T2（CQRS + 通道组合）**：CQRS 读写分离时，命令端与查询端通过 channel 通信；
 `Sender<Event>: Send`、`Receiver<Event>: Send` 保证跨线程事件传递无数据竞争。
-由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1 与 channel 语义。
+由 [borrow_checker_proof](../../../research_notes/formal_methods/borrow_checker_proof.md) T1 与 channel 语义。
 
 **Rust 对应**：`OrchestratedSaga` 的 `steps`/`compensations` 若为 `Vec<Box<dyn Saga<(), E> + Send>>`，则 `run()` 可安全跨线程调度；
 CQRS 使用 `tokio::sync::mpsc` 传递事件。
@@ -282,7 +282,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 | 场景 | ✅ | 典型场景、RPC、重试 |
 | 反例 | ✅ | 安全边界与 FFI |
 | 衔接 | ✅ | Send、序列化、形式化基础 |
-| 权威对应 | ✅ | [Fowler EAA](https://martinfowler.com/eaaCatalog/)、[formal_methods](../../formal_methods/README.md)、[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) |
+| 权威对应 | ✅ | [Fowler EAA](https://martinfowler.com/eaaCatalog/)、[formal_methods](../../../research_notes/formal_methods/README.md)、[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) |
 
 ---
 

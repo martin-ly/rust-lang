@@ -239,7 +239,7 @@ $$
 ## 八、引用
 
 - [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) — 完整证明（L2）
-- [coq_skeleton](./coq_skeleton/) — Coq 骨架（L3）
+- [coq_skeleton](./coq_skeleton/README.md) — Coq 骨架（L3）
 - [ownership_model](./formal_methods/ownership_model.md)、[borrow_checker_proof](./formal_methods/borrow_checker_proof.md)、[type_system_foundations](./type_theory/type_system_foundations.md)
 
 ---

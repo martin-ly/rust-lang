@@ -18,7 +18,7 @@
 
 | 子目录 | 内容 |
 | :--- | :--- |
-| [04_research_methods/](04_research_methods/) | 研究方法与工具 |
+| [04_research_methods/](04_research_methods/README.md) | 研究方法与工具 |
 
 ---
 

@@ -35,7 +35,7 @@
 - const 函数 API 扩展
 - 更好的 trait 实现
 
-参考：[Rust API Documentation](https://doc.rust-lang.org/std/)
+参考：[Rust API Documentation](https://doc.rust-lang.org/std/README.md)
 
 ---
 
@@ -152,7 +152,7 @@ let arr: [i32; 5] = create_array();
 edition = "2024"
 ```
 
-参考：[Edition Guide](https://doc.rust-lang.org/edition-guide/)
+参考：[Edition Guide](https://doc.rust-lang.org/edition-guide/README.md)
 
 ---
 
@@ -257,7 +257,7 @@ linker = "clang"
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 ```
 
-参考：[LLVM LLD](https://lld.llvm.org/)
+参考：[LLVM LLD](https://lld.llvm.org/README.md)
 
 ---
 
@@ -486,10 +486,10 @@ trait Summary {
 
 ### 外部参考
 
-- 📖 [Rust Reference](https://doc.rust-lang.org/reference/)
+- 📖 [Rust Reference](https://doc.rust-lang.org/reference/README.md)
 - 📖 [Rust Glossary](https://doc.rust-lang.org/reference/glossary.html)
-- 📖 [Rust API Docs](https://doc.rust-lang.org/std/)
-- 📖 [Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+- 📖 [Rust API Docs](https://doc.rust-lang.org/std/README.md)
+- 📖 [Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/README.md)
 
 ---
 

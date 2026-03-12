@@ -68,6 +68,17 @@
     - [主要论文](#主要论文)
     - [相关资源](#相关资源)
     - [工具与实现](#工具与实现)
+  - [9. 最新进展 (2024-2025)](#9-最新进展-2024-2025)
+    - [9.1 PLDI 2025 正式发布](#91-pldi-2025-正式发布)
+    - [9.2 Miri 中的状态](#92-miri-中的状态)
+    - [9.3 与编译器的关系](#93-与编译器的关系)
+    - [9.4 未来扩展: Unique 类型](#94-未来扩展-unique-类型)
+    - [9.5 Simuliris 验证框架](#95-simuliris-验证框架)
+  - [10. 与 Rust 生态的集成](#10-与-rust-生态的集成)
+    - [10.1 对 unsafe 代码作者的建议](#101-对-unsafe-代码作者的建议)
+    - [10.2 工具链支持](#102-工具链支持)
+  - [11. 参考文献更新](#11-参考文献更新)
+    - [2024-2025 新增资源](#2024-2025-新增资源)
 
 ---
 
@@ -665,7 +676,159 @@ let r2 = unsafe { &mut *ptr };  // 重叠可变引用
 
 ---
 
-*文档版本: 1.0.0*
-*最后更新: 2026-03-07*
+*文档版本: 1.1.0*
+*最后更新: 2026-03-12*
 *作者: Rust 形式化理论研究组*
-*状态: 完成*
+*状态: 已更新 (PLDI 2025 最新研究)*
+
+---
+
+## 9. 最新进展 (2024-2025)
+
+### 9.1 PLDI 2025 正式发布
+
+Tree Borrows 论文已被 **PLDI 2025** (Programming Language Design and Implementation) 接收:
+
+- **论文**: "Tree Borrows: A New Aliasing Model for Rust"
+- **作者**: Ralf Jung 团队 (ETH Zürich, MPI-SWS)
+- **PDF**: <https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf>
+
+**核心数据** (基于 30,000 个 crates.io 库的评估):
+
+- 相比 Stacked Borrows，**误报率降低 54%**
+- 仅 31 个测试用例从通过变为失败
+- 6,568 (SB) → 3,023 (TB) 个借用违规报告
+
+### 9.2 Miri 中的状态
+
+```bash
+# 使用 Tree Borrows 运行 Miri
+MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
+
+# 预计将成为 Miri 的默认别名模型
+# Stacked Borrows 将逐步弃用
+```
+
+### 9.3 与编译器的关系
+
+**重要澄清**:
+> Tree Borrows **不是借用检查器** (Borrow Checker)，而是**别名模型** (Aliasing Model)。
+
+- **借用检查器**: 编译时静态分析，类型系统的一部分
+- **别名模型**: 运行时操作语义，定义 UB (未定义行为)
+
+**关系**:
+
+```
+类型安全定理目标:
+Well-typed Safe Rust (通过借用检查器)
+    ↓
+永不导致 UB (通过 Tree Borrows)
+```
+
+此定理已通过 Miri 广泛测试，但尚未形式化证明。
+
+### 9.4 未来扩展: Unique 类型
+
+Tree Borrows 为 `std::ptr::Unique` 的语义化铺平道路:
+
+```rust
+// Vec 使用 Unique 作为内部指针
+pub struct Vec<T> {
+    buf: Unique<T>,  // 未来可能获得 noalias 语义
+    len: usize,
+}
+```
+
+**可能性**:
+
+- `Box<T>` 可能不再需要特殊处理
+- `Vec` 可以获得更好的别名优化
+- 需要社区实验验证兼容性
+
+### 9.5 Simuliris 验证框架
+
+使用 **Simuliris** (基于 Iris 的关系程序逻辑) 验证编译器优化:
+
+```coq
+(* 已验证的优化 *)
+- 读-读重排序
+- 冗余读取消除
+- 写入后读取优化
+```
+
+**限制** (未来工作):
+
+- 激活写入不能向下重排序
+- 暂不支持数据竞争推理
+
+---
+
+## 10. 与 Rust 生态的集成
+
+### 10.1 对 unsafe 代码作者的建议
+
+**应该做的** ✅:
+
+```rust
+// 1. 使用两阶段借用模式
+vec.push(vec.len());
+
+// 2. 合理的指针算术
+let arr = [1, 2, 3, 4];
+let ptr = &arr[0] as *const i32;
+let second = unsafe { ptr.add(1).read() }; // TB: OK
+
+// 3. 通过原始指针别名局部变量
+let mut x = 0;
+let ptr = std::ptr::addr_of_mut!(x);
+x = 1;              // OK
+unsafe { ptr.read() }; // TB: OK
+```
+
+**避免做的** ❌:
+
+```rust
+// 1. 通过 &T 修改非 UnsafeCell 数据
+let x = &data;
+unsafe { *(x as *const _ as *mut _) = 42; } // UB
+
+// 2. 创建重叠的可变引用
+let ptr = addr_of_mut!(data);
+let r1 = unsafe { &mut *ptr };
+let r2 = unsafe { &mut *ptr }; // UB
+```
+
+### 10.2 工具链支持
+
+| 工具 | Tree Borrows 支持 | 状态 |
+|------|------------------|------|
+| **Miri** | `-Zmiri-tree-borrows` | ✅ 可用 |
+| **Kani** | 计划中 | 🚧 开发中 |
+| **CBMC** | 暂无 | 📋 评估中 |
+| **LLVM** | 未来可能 | 📋 研究中 |
+
+---
+
+## 11. 参考文献更新
+
+### 2024-2025 新增资源
+
+1. **PLDI 2025 论文**
+   - <https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf>
+
+2. **Ralf Jung 博客** (2023-2024)
+   - <https://www.ralfj.de/blog/2023/06/02/tree-borrows.html>
+   - 详细解释与 Stacked Borrows 的差异
+
+3. **Tree Borrows 预印本**
+   - <https://perso.crans.org/vanille/treebor/aux/preprint.pdf>
+
+4. **RFMIG 演讲** (2024)
+   - <https://rust-formal-methods.github.io/>
+   - Neven Villard 的演讲录像
+
+*文档版本: 1.1.0*
+*最后更新: 2026-03-12*
+*作者: Rust 形式化理论研究组*
+*状态: 已更新 (PLDI 2025 最新研究)*

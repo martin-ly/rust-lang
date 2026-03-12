@@ -43,7 +43,7 @@
    - **可执行**的小步操作语义（如 K-Framework、PLT Redex）
    - 指称语义与类型论的**范畴论对应**（如 Fω、System F 的 Rust 片段）
 
-3. **机器可检查性**：FORMAL_VERIFICATION_GUIDE 有六类验证任务清单；**Coq 骨架已创建**（[coq_skeleton](../../../research_notes/coq_skeleton/) T-OW2，证明 Admitted）；Aeneas/coq-of-rust 对接方案已制定（[AENEAS_INTEGRATION_PLAN](../../../research_notes/AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../../../research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md)）
+3. **机器可检查性**：FORMAL_VERIFICATION_GUIDE 有六类验证任务清单；**Coq 骨架已创建**（[coq_skeleton](../../../research_notes/coq_skeleton/README.md) T-OW2，证明 Admitted）；Aeneas/coq-of-rust 对接方案已制定（[AENEAS_INTEGRATION_PLAN](../../../research_notes/AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../../../research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md)）
 
 ### 1.4 整体性与层次性缺口
 
@@ -112,7 +112,7 @@
 | :--- | :--- | :--- | :--- |
 | Aeneas 对接调研 | `AENEAS_INTEGRATION_PLAN.md` | 中 | ✅ 已创建 |
 | coq-of-rust 对接调研 | `COQ_OF_RUST_INTEGRATION_PLAN.md` | 中 | ✅ 已创建 |
-| 1–2 定理 Coq/Isabelle 证明 | 实际证明代码 + 文档 | 高（若资源允许） | ✅ 骨架已创建 [coq_skeleton](../../../research_notes/coq_skeleton/)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| 1–2 定理 Coq/Isabelle 证明 | 实际证明代码 + 文档 | 高（若资源允许） | ✅ 骨架已创建 [coq_skeleton](../../../research_notes/coq_skeleton/README.md)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../../../research_notes/COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
 
 ### 3.4 持续机制
 

@@ -68,9 +68,10 @@
 | **Creusot** | LMF, Paris-Saclay | Why3, 预言变量 | 高 | Safe Rust | ⭐⭐⭐⭐ 需要特定版本 |
 | **Prusti** | ETH Zurich | Viper, 分离逻辑 | 高 | Safe Rust | ⭐⭐⭐ 维护模式 |
 | **RustHorn** | 东京大学 | CHC编码 | 高 | Safe Rust子集 | ⭐⭐⭐ 实验性 |
-| **Aeneas** | Inria | 函数式提取 | 中 | Safe Rust | ⭐⭐⭐⭐ 活跃开发 |
-| **Verus** | CMU/VMware | Z3, 资源代数 | 高 | Safe + 部分Unsafe | ⭐⭐⭐⭐⭐ 推荐 |
+| **Aeneas** | Inria | 函数式提取 | 中 | Safe Rust | ⭐⭐⭐⭐ ICFP 2024 |
+| **Verus** | CMU/VMware | Z3, 资源代数 | 高 | Safe + 部分Unsafe | ⭐⭐⭐⭐⭐ SOSP 2024 |
 | **Kani** | Amazon | CBMC | 自动 | Unsafe支持 | ⭐⭐⭐⭐⭐ 官方支持 |
+| **RefinedRust** | MPI-SWS | Iris, 精细化类型 | 中 | Safe + Unsafe | ⭐⭐⭐⭐⭐ PLDI 2024 ⭐ 基础性证明 |
 
 ## 3. 各工具核心特性
 
@@ -319,4 +320,6 @@ cargo install cargo-creusot --locked
 3. Matsushita, Y., et al. (2021). RustHorn: CHC-based Verification for Rust Programs. *TOPLAS*.
 4. Lattuada, A., et al. (2024). Aeneas: Rust Verification by Functional Translation. *ICFP*.
 5. Lorch, J.R., et al. (2024). Verus: A Practical Foundation for Systems Verification. *SOSP*.
-6. Rust Formal Methods Interest Group. (2025). Rust Verification Tools Status. <https://rust-formal-methods.github.io/>
+6. Gaher, L., et al. (2024). RefinedRust: A Type System for High-Assurance Verification of Rust Programs. *PLDI*.
+7. Lattuada, A., et al. (2024). Aeneas: Rust Verification by Functional Translation. *ICFP*.
+8. Rust Formal Methods Interest Group. (2025). Rust Verification Tools Status. <https://rust-formal-methods.github.io/>

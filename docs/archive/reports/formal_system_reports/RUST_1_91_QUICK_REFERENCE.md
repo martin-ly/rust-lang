@@ -166,7 +166,7 @@ cargo test --target aarch64-pc-windows-msvc
 ### 官方资源
 
 - [Rust 1.91.0 Release Notes](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0.html)
-- [Rust Edition 2024 Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
+- [Rust Edition 2024 Guide](https://doc.rust-lang.org/edition-guide/rust-2024/README.md)
 - [Rust Changelog](https://github.com/rust-lang/rust/blob/master/RELEASES.md)
 - [ARM Windows Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)
 

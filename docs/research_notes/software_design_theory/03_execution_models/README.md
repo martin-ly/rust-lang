@@ -52,7 +52,7 @@
 
 ## 执行模型多维对比矩阵
 
-下表为同步/异步/并发/并行/分布式的**概念定义/属性关系/选型**多维对比；与 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md) 文档↔思维表征映射衔接。各子文档在本矩阵中的位置见「形式化文档」列。
+下表为同步/异步/并发/并行/分布式的**概念定义/属性关系/选型**多维对比；与 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../../../research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md) 文档↔思维表征映射衔接。各子文档在本矩阵中的位置见「形式化文档」列。
 
 | 模型 | 确定性 | 数据竞争 | 表达力/典型用途 | 选型条件 | 形式化文档 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -72,10 +72,10 @@
 
 | 依赖 | 文档 |
 | :--- | :--- |
-| 异步状态机 | [async_state_machine](../../formal_methods/async_state_machine.md) |
-| Pin | [pin_self_referential](../../formal_methods/pin_self_referential.md) |
-| 借用 | [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) |
-| 所有权 | [ownership_model](../../formal_methods/ownership_model.md) |
+| 异步状态机 | [async_state_machine](../../../research_notes/formal_methods/async_state_machine.md) |
+| Pin | [pin_self_referential](../../../research_notes/formal_methods/pin_self_referential.md) |
+| 借用 | [borrow_checker_proof](../../../research_notes/formal_methods/borrow_checker_proof.md) |
+| 所有权 | [ownership_model](../../../research_notes/formal_methods/ownership_model.md) |
 | Rust Book Ch16 | 线程、消息传递、Send/Sync |
 | Async Book | Future、async/await、Pin |
 

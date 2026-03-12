@@ -1187,7 +1187,7 @@ graph TD
 
 | 定理 | crates 示例 | 说明 |
 | :--- | :--- | :--- |
-| Theorem 1 (T-BR1 数据竞争自由) | [c01 借用示例](../../../crates/c01_ownership_borrow_scope/examples/)、[c05 Arc/Mutex](../../../crates/c05_threads/examples/) | 借用规则、无数据竞争 |
+| Theorem 1 (T-BR1 数据竞争自由) | [c01 借用示例](../../../crates/c01_ownership_borrow_scope/examples/README.md)、[c05 Arc/Mutex](../../../crates/c05_threads/examples/README.md) | 借用规则、无数据竞争 |
 
 详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
 
@@ -1684,7 +1684,7 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 
 - [Rust 借用检查器](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
 - [Rust Reference - Undefined behavior](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
-- [Rustonomicon](https://doc.rust-lang.org/nomicon/) — 内存模型、unsafe
+- [Rustonomicon](https://doc.rust-lang.org/nomicon/README.md) — 内存模型、unsafe
 
 ### 相关代码
 
@@ -1726,4 +1726,4 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 - 添加了概念定义-属性关系-解释论证 汇总表
 - 新增定理/证明数量: 4个定理（含完整证明）+ 5个引理 + 2个推论
 
-**国际权威对标**：[Stacked Borrows POPL 2020](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)、[Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[Polonius](https://rust-lang.github.io/polonius/)；[FLS Ch. 15.4](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) Borrowing、[Ch. 19](https://spec.ferrocene.dev/unsafety.html) Unsafety；Miri 实现 Stacked Borrows。
+**国际权威对标**：[Stacked Borrows POPL 2020](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md)、[Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[Polonius](https://rust-lang.github.io/polonius/README.md)；[FLS Ch. 15.4](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) Borrowing、[Ch. 19](https://spec.ferrocene.dev/unsafety.html) Unsafety；Miri 实现 Stacked Borrows。

@@ -284,7 +284,7 @@ docs/
 ### 3.5 链接格式规范
 
 ```markdown
-[链接文本](./docs/)
+[链接文本](./docs/README.md)
 ```
 
 **要求**:
@@ -429,7 +429,7 @@ docs/
 
 ### 6.3 质量门禁建议
 
-在 [CONTRIBUTING.md](../../../research_notes/CONTRIBUTING.md) 中明确：
+在 [CONTRIBUTING.md](../../../../../research_notes/CONTRIBUTING.md) 中明确：
 
 1. 新文档必须包含完整元信息
 2. 表格必须使用 `:---` 左对齐格式
@@ -439,7 +439,7 @@ docs/
 
 ### 6.4 季度复核建议
 
-在 [MAINTENANCE_GUIDE.md](../../../research_notes/MAINTENANCE_GUIDE.md) 中增加：
+在 [MAINTENANCE_GUIDE.md](../../../../../research_notes/MAINTENANCE_GUIDE.md) 中增加：
 
 1. 格式统一抽查
 2. 链接有效性检查
@@ -454,10 +454,10 @@ docs/
 | :--- | :--- |
 | [DOCS_STRUCTURE_OVERVIEW](../../../DOCS_STRUCTURE_OVERVIEW.md) | 完整结构总览 |
 | [00_MASTER_INDEX](../../../00_MASTER_INDEX.md) | 文档中心主索引 |
-| [QUALITY_CHECKLIST](../../../research_notes/QUALITY_CHECKLIST.md) | 质量检查清单 |
+| [QUALITY_CHECKLIST](../../../../../research_notes/QUALITY_CHECKLIST.md) | 质量检查清单 |
 | [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) | 格式统一计划 |
-| [CONTRIBUTING](../../../research_notes/CONTRIBUTING.md) | 贡献指南 |
-| [MAINTENANCE_GUIDE](../../../research_notes/MAINTENANCE_GUIDE.md) | 维护指南 |
+| [CONTRIBUTING](../../../../../research_notes/CONTRIBUTING.md) | 贡献指南 |
+| [MAINTENANCE_GUIDE](../../../../../research_notes/MAINTENANCE_GUIDE.md) | 维护指南 |
 
 ---
 

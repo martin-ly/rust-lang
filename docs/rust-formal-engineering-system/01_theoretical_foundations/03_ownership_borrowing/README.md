@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [formal_methods/](../../../research_notes/formal_methods/)
+> 内容已整合至： [formal_methods/](../../../research_notes/formal_methods/README.md)
 
 - [所有权模型](../../../research_notes/formal_methods/ownership_model.md)
 - [借用检查器证明](../../../research_notes/formal_methods/borrow_checker_proof.md)

@@ -394,8 +394,8 @@ git commit -m "chore: add new spell check terms"
 
 ### 官方文档
 
-- [Code Spell Checker](https://streetsidesoftware.github.io/vscode-spell-checker/)
-- [cSpell Configuration](https://cspell.org/configuration/)
+- [Code Spell Checker](https://streetsidesoftware.github.io/vscode-spell-checker/README.md)
+- [cSpell Configuration](https://cspell.org/configuration/README.md)
 - [VS Code Settings](https://code.visualstudio.com/docs/getstarted/settings)
 
 ### 社区资源
