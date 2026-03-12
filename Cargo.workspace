@@ -85,7 +85,7 @@ tracing-subscriber = { version = "0.3.22", features = ["env-filter", "json"] }  
 
 # 测试依赖 - 已更新至最新稳定版本
 tokio-test = "0.4.5"  # 2026年3月最新稳定版本
-tempfile = "3.26.0"  # 2026年3月最新稳定版本
+tempfile = "3.27.0"  # 2026年3月最新稳定版本
 criterion = "0.8.2"  # 2026年3月最新稳定版本
 proptest = "1.10.0"  # 2026年3月最新稳定版本
 mockall = "0.14.0"  # 2026年3月最新稳定版本

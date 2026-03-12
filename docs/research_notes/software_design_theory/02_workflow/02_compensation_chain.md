@@ -12,7 +12,7 @@
 
 补偿链是一系列**有序补偿操作**，用于撤销已完成的业务操作。
 
-```
+```text
 CompensationChain := (O, C, ≺, status)
   where:
     O = [o₁, o₂, ..., oₙ]     -- 已执行的操作序列
@@ -23,7 +23,7 @@ CompensationChain := (O, C, ≺, status)
 
 ### Def CC2: 补偿顺序
 
-```
+```text
 CompensationOrder := Reverse(ExecutionOrder)
 
 如果执行顺序是 o₁ → o₂ → o₃
@@ -32,7 +32,7 @@ CompensationOrder := Reverse(ExecutionOrder)
 
 ### Def CC3: 补偿状态机
 
-```
+```text
 CompensationState :=
   | Active          -- 正常运行
   | Compensating(k) -- 正在补偿第 k 步
@@ -46,7 +46,7 @@ CompensationState :=
 
 ### Axiom CC1: 补偿幂等性
 
-```
+```text
 ∀c ∈ C. exec(c) = s → exec(c, s) = s
 ```
 
@@ -54,7 +54,7 @@ CompensationState :=
 
 ### Axiom CC2: 补偿完备性
 
-```
+```text
 ∀oᵢ ∈ O. ∃cᵢ ∈ C. Correct(cᵢ, oᵢ)
 ```
 
@@ -62,7 +62,7 @@ CompensationState :=
 
 ### Axiom CC3: 补偿原子性
 
-```
+```text
 ∀cᵢ. cᵢ 是原子的（要么成功，要么不改变状态）
 ```
 
@@ -72,7 +72,7 @@ CompensationState :=
 
 ### Theorem CC1: 补偿一致性
 
-```
+```text
 exec(O) = s' ∧ exec(C) = s'' → s'' ≈ s₀
 ```
 
@@ -85,7 +85,7 @@ exec(O) = s' ∧ exec(C) = s'' → s'' ≈ s₀
 
 ### Theorem CC2: 部分补偿安全性
 
-```
+```text
 Compensating(k) → o₁..oₖ₋₁ 已补偿 ∧ oₖ..oₙ 待补偿
 ```
 
@@ -316,7 +316,7 @@ impl BankContext {
 
 补偿链是 Saga 模式的核心实现机制：
 
-```
+```text
 Saga = Workflow + CompensationChain
 ```
 

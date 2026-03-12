@@ -18,10 +18,11 @@ pub mod async_control_flow;
 pub mod async_control_flow_189;
 pub mod performance_optimization_189;
 pub mod rust_189_enhanced_features;
-pub mod rust_189_features;
+pub mod archive;
+pub use archive::rust_189_features;
 
 // 导出Rust 1.90新特性模块
-pub mod rust_190_features;
+pub use archive::rust_190_features;
 pub mod rust_190_real_implementation;  // 真正的Rust 1.90特性实现
 pub mod rust_190_complete_features;    // Rust 1.90完整特性实现
 pub mod advanced_async_control_flow_190; // 高级异步控制流
@@ -31,10 +32,10 @@ pub mod performance_optimization_190;
 pub mod formal_verification_190;
 
 // 导出Rust 1.91新特性模块
-pub mod rust_191_features;
+pub use archive::rust_191_features;
 
 // 导出Rust 1.92.0新特性模块
-pub mod rust_192_features;
+pub use archive::rust_192_features;
 pub mod rust_194_features;
 
 // 重新导出Rust 1.92.0新特性

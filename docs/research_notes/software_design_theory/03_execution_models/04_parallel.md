@@ -116,9 +116,9 @@ assert_eq!(a + b, 15);
 
 | 组合 | 说明 |
 | :--- | :--- |
-| 并行 + Iterator | `par_iter` 扩展 `Iterator`；见 [iterator](../../01_design_patterns_formal/03_behavioral/iterator.md) |
+| 并行 + Iterator | `par_iter` 扩展 `Iterator`；见 [iterator](../01_design_patterns_formal/03_behavioral/iterator.md) |
 | 并行 + Strategy | 可替换算法；`par_iter().map(\|x\| strategy.apply(x))` |
-| 并行 + Flyweight | 共享不可变；`Arc` 在闭包中 move；见 [flyweight](../../01_design_patterns_formal/02_structural/flyweight.md) |
+| 并行 + Flyweight | 共享不可变；`Arc` 在闭包中 move；见 [flyweight](../01_design_patterns_formal/02_structural/flyweight.md) |
 | 并行 + 通道 | 结果归约；`par_iter().for_each(\|x\| tx.send(x).ok())` |
 
 ### 常见陷阱

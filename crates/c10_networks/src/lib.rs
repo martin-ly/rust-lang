@@ -29,10 +29,11 @@ pub mod security;
 pub mod semantics;
 
 // Rust 1.91 新特性模块
-pub mod rust_191_features;
+pub mod archive;
+pub use archive::rust_191_features;
 
 // Rust 1.92.0 新特性模块
-pub mod rust_192_features;
+pub use archive::rust_192_features;
 pub mod rust_194_features;
 #[cfg(any(feature = "sniff", feature = "offline", feature = "pcap_live"))]
 pub mod sniff;

@@ -22,13 +22,14 @@ pub mod web_framework_patterns;
 pub mod error_handling;
 
 // Rust 1.89 新特性演示模块
-pub mod rust_189_features;
+pub mod archive;
+pub use archive::rust_189_features;
 // Rust 1.90 / Edition 2024 特性演示模块
-pub mod rust_190_features;
+pub use archive::rust_190_features;
 // Rust 1.91 新特性演示模块
-pub mod rust_191_features;
+pub use archive::rust_191_features;
 // Rust 1.92.0 新特性演示模块
-pub mod rust_192_features;
+pub use archive::rust_192_features;
 pub mod rust_194_features;
 
 // 性能基准测试模块

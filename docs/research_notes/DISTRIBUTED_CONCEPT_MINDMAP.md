@@ -1,136 +1,224 @@
 # 分布式系统概念族谱
 
-> **创建日期**: 2026-03-08
-> **版本**: v1.0
-> **描述**: 分布式系统核心模式与概念的完整族谱
+> **Rust 版本**: 1.94.0+
+> **最后更新**: 2026-03-12
+> **状态**: ✅ 活跃维护
 
 ---
 
-## 🧬 核心概念族谱
+## 概念族谱概览
 
 ```mermaid
 mindmap
   root((分布式系统))
-    事务模式
-      Saga模式
-        编排式 Saga
-        协调式 Saga
-        补偿操作
-      长事务 LRT
-        持久化点
-        状态恢复
-    数据模式
-      CQRS
-        命令端
-        查询端
-        事件投影
-      Event Sourcing
-        事件存储
-        状态重建
-        事件不可变
-      Outbox模式
-        事务性消息
-        中继进程
-    容错模式
-      Circuit Breaker
-        Closed
-        Open
-        HalfOpen
-      重试模式
-        固定间隔
-        指数退避
-        抖动策略
-      超时模式
-        连接超时
-        请求超时
-      Fallback
-        静态降级
-        缓存降级
-        简化逻辑
-    一致性模型
-      强一致性
-      最终一致性
-      因果一致性
-      读己之写
-    通信模式
-      同步 RPC
-      异步消息
-      事件驱动
-      发布订阅
+    基础理论
+      CAP定理
+        一致性
+        可用性
+        分区容错
+      PACELC定理
+        扩展CAP
+        延迟与一致性
+      线性一致性
+        强一致性
+        顺序一致性
+        因果一致性
+    共识算法
+      Paxos
+        准备阶段
+        接受阶段
+        学习者
+      Raft
+        领导者选举
+        日志复制
+        安全性
+      PBFT
+        拜占庭容错
+        视图变更
+        三阶段提交
+    数据分区
+      水平分区
+        哈希分区
+        范围分区
+        列表分区
+      垂直分区
+        列族分离
+        冷热分离
+      副本策略
+        主从复制
+        多主复制
+        无主复制
+    容错机制
+      故障检测
+        心跳机制
+        超时策略
+        Phi累积
+      故障恢复
+        检查点
+        日志回放
+        状态迁移
+      熔断降级
+        熔断器模式
+        舱壁隔离
+        限流控制
+    Rust生态
+      异步运行时
+        Tokio
+        async-std
+        glommio
+      序列化
+        serde
+        prost
+        bincode
+      网络通信
+        tonic
+        tarpc
+        libp2p
+      存储系统
+        sled
+        rocksdb
+        raft-rs
 ```
 
 ---
 
-## 📊 概念关系矩阵
+## 核心概念详解
 
-| 概念A | 关系 | 概念B | 说明 |
-|-------|------|-------|------|
-| Saga | uses | Compensation | Saga使用补偿保证一致性 |
-| CQRS | combines with | Event Sourcing | 常组合使用 |
-| Outbox | ensures | Exactly Once | Outbox保证恰好一次投递 |
-| Circuit Breaker | protects | Remote Service | 熔断器保护远程服务 |
-| Retry | complements | Timeout | 重试与超时配合 |
-| Fallback | triggered by | Circuit Breaker | 熔断触发降级 |
+### 1. CAP 定理
 
----
+**定义**: 分布式系统最多同时满足一致性、可用性、分区容错性中的两项。
 
-## 🎯 核心定理映射
+```rust
+// CAP 权衡示例
+enum ConsistencyLevel {
+    Strong,    // CP 系统
+    Eventual,  // AP 系统
+    Causal,    // 折中方案
+}
 
-| 定理编号 | 定理名称 | 相关概念 |
-|----------|----------|----------|
-| T-SG1 | Saga最终一致性定理 | Saga |
-| T-CQ1 | CQRS读写分离定理 | CQRS |
-| T-CB1 | 熔断故障隔离定理 | Circuit Breaker |
-| T-OB1 | Outbox消息不丢失定理 | Outbox |
-| T-ES1 | Event Sourcing可重现性定理 | Event Sourcing |
+struct DistributedSystem {
+    consistency: ConsistencyLevel,
+    availability: bool,
+    partition_tolerance: bool, // 总是 true
+}
+```
 
----
+### 2. 共识算法对比
 
-## 🌿 概念层次结构
+| 算法 | 容错类型 | 性能 | 复杂度 | Rust 实现 |
+|------|----------|------|--------|-----------|
+| Paxos | 崩溃容错 | 中 | 高 | - |
+| Raft | 崩溃容错 | 高 | 中 | raft-rs |
+| PBFT | 拜占庭容错 | 低 | 高 | - |
 
-### Level 1: 基础模式
+### 3. 数据分区策略
 
-- Saga 事务
-- CQRS 读写分离
-- Event Sourcing 事件溯源
+```rust
+// 一致性哈希
+struct ConsistentHash {
+    ring: BTreeMap<u64, Node>,
+    replicas: usize, // 虚拟节点数
+}
 
-### Level 2: 容错机制
-
-- Circuit Breaker 熔断
-- Retry 重试
-- Timeout 超时
-- Fallback 降级
-
-### Level 3: 消息可靠性
-
-- Outbox 发件箱
-- Idempotency 幂等性
-- Deduplication 去重
-
-### Level 4: 一致性模型
-
-- 强一致性
-- 最终一致性
-- CAP 权衡
+impl ConsistentHash {
+    fn get_node(&self, key: &str) -> Option<&Node> {
+        let hash = self.hash(key);
+        self.ring.range(hash..).next()
+            .or_else(|| self.ring.first_key_value())
+            .map(|(_, node)| node)
+    }
+}
+```
 
 ---
 
-## 🔗 与Rust示例的映射
+## Rust 分布式系统工具链
 
-| 概念 | 形式化定义 | Rust实现 |
-|------|-----------|----------|
-| Saga | `05_distributed/01_saga_pattern.md` | 见文档内代码 |
-| CQRS | `05_distributed/02_cqrs_pattern.md` | 见文档内代码 |
-| Circuit Breaker | `05_distributed/03_circuit_breaker.md` | 见文档内代码 |
-| Event Sourcing | `05_distributed/04_event_sourcing.md` | 见文档内代码 |
-| Outbox | `05_distributed/05_outbox_pattern.md` | 见文档内代码 |
-| Retry | `05_distributed/07_retry_pattern.md` | 见文档内代码 |
+### 异步运行时对比
+
+```mermaid
+graph LR
+    A[应用层] --> B[运行时选择]
+    B --> C[Tokio]
+    B --> D[async-std]
+    B --> E[glommio]
+
+    C --> C1[通用场景]
+    C --> C2[高并发网络]
+    D --> D1[标准库兼容]
+    E --> E1[高性能IO]
+    E --> E2[io_uring]
+```
+
+### 关键库生态系统
+
+| 用途 | 推荐库 | 版本 |
+|------|--------|------|
+| RPC 框架 | tonic | 0.14+ |
+| 序列化 | serde | 1.0+ |
+| 分布式追踪 | opentelemetry | 0.31+ |
+| 服务发现 | consul | 0.4+ |
+| 消息队列 | rdkafka | 0.37+ |
 
 ---
 
-## 📚 相关文档
+## 分布式模式实现
 
-- [Saga形式化定义](./software_design_theory/05_distributed/01_saga_pattern.md)
-- [CQRS形式化定义](./software_design_theory/05_distributed/02_cqrs_pattern.md)
+### 1. 熔断器模式
+
+```rust
+use std::sync::atomic::{AtomicU32, Ordering};
+use std::time::{Duration, Instant};
+
+struct CircuitBreaker {
+    failure_count: AtomicU32,
+    threshold: u32,
+    timeout: Duration,
+    last_failure: std::sync::Mutex<Option<Instant>>,
+}
+
+enum CircuitState {
+    Closed,    // 正常
+    Open,      // 熔断
+    HalfOpen,  // 半开试探
+}
+```
+
+### 2. 限流控制
+
+```rust
+use std::sync::atomic::{AtomicU64, Ordering};
+
+struct RateLimiter {
+    tokens: AtomicU64,
+    max_tokens: u64,
+    refill_rate: u64, // tokens per second
+    last_refill: std::sync::Mutex<Instant>,
+}
+
+impl RateLimiter {
+    fn allow(&self) -> bool {
+        self.refill();
+        let tokens = self.tokens.load(Ordering::Relaxed);
+        if tokens > 0 {
+            self.tokens.fetch_sub(1, Ordering::Relaxed);
+            true
+        } else {
+            false
+        }
+    }
+}
+```
+
+---
+
+## 相关文档
+
 - [分布式架构决策树](./DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md)
 - [分布式模式矩阵](./DISTRIBUTED_PATTERNS_MATRIX.md)
+- [软件设计理论 - 分布式](./software_design_theory/03_execution_models/05_distributed.md)
+
+---
+
+**文档版本**: 1.0
+**创建日期**: 2026-03-12

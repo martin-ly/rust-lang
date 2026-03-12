@@ -31,11 +31,12 @@ pub mod rust_190_latest_features {
 // 导出 Rust 1.90 高级特性模块
 pub mod rust_190_advanced_features;
 
-// 导出 Rust 1.91 特性模块
-pub mod rust_191_features;
+// 导出归档模块（包含旧版本特性）
+pub mod archive;
+pub use archive::rust_191_features;
+pub use archive::rust_192_features;
 
-// 导出 Rust 1.92 特性模块
-pub mod rust_192_features;
+// 导出 Rust 1.94 特性模块
 pub mod rust_194_features;
 
 // 导出 WebAssembly 支持模块

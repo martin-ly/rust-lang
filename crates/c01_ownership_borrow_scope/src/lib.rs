@@ -341,10 +341,11 @@ pub mod internal_mut;
 pub mod scope;
 pub mod variable;
 pub mod ownership_utils;
-pub mod rust_190_features;
+pub mod archive;
+pub use archive::rust_190_features;
 pub mod rust_190_latest_features;
-pub mod rust_191_features;
-pub mod rust_192_features;
+pub use archive::rust_191_features;
+pub use archive::rust_192_features;
 pub mod rust_194_features;
 
 // 重新导出主要类型 / Re-export main types

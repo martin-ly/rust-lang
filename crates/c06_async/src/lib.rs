@@ -272,8 +272,8 @@ pub mod advanced_tools;
 // Rust 1.90 特性模块 (Rust 1.90 Features)
 // ============================================================================
 
-/// Rust 1.90 异步特性
-pub mod rust_190_features;
+pub mod archive;
+pub use archive::rust_190_features;
 
 /// Rust 1.90 真实特性实现
 pub mod rust_190_real_features;
@@ -284,15 +284,8 @@ pub mod rust_190_real_stable_features;
 /// Rust 1.90 高级异步特性
 pub mod rust_190_advanced_features;
 
-// ============================================================================
-// Rust 1.91 特性模块 (Rust 1.91 Features)
-// ============================================================================
-
-/// Rust 1.91 异步特性实现
-pub mod rust_191_features;
-
-/// Rust 1.92.0 异步特性实现
-pub mod rust_192_features;
+pub use archive::rust_191_features;
+pub use archive::rust_192_features;
 pub mod rust_194_features;
 
 /// 改进的异步特性实现

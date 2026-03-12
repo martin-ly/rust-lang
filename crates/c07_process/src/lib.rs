@@ -62,14 +62,10 @@ pub mod fork;
 // 异步运行时模块
 pub mod async_runtime;
 
-// Rust 1.90 新特性模块
-pub mod rust_190_features;
-
-// Rust 1.91 新特性模块
-pub mod rust_191_features;
-
-// Rust 1.92 新特性模块
-pub mod rust_192_features;
+pub mod archive;
+pub use archive::rust_190_features;
+pub use archive::rust_191_features;
+pub use archive::rust_192_features;
 pub mod rust_194_features;
 
 // 性能优化模块
@@ -287,7 +283,7 @@ pub mod prelude {
     };
 
     // Rust 1.90 新特性
-    pub use super::rust_190_features::{Rust190Features, AsyncTaskDemo, TaskStatus};
+    pub use super::archive::rust_190_features::{Rust190Features, AsyncTaskDemo, TaskStatus};
 
     // 增强的异步功能
     #[cfg(feature = "async")]

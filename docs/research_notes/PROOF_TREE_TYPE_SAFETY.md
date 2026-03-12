@@ -179,4 +179,4 @@ fn type_safety_theorem() {
 
 - [所有权证明树](./PROOF_TREE_OWNERSHIP.md)
 - [借用证明树](./PROOF_TREE_BORROW.md)
-- [类型系统基础](./formal_methods/type_system_foundations.md)
+- [类型系统基础](./type_theory/type_system_foundations.md)

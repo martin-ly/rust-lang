@@ -214,7 +214,7 @@ research_notes/
 **相关文档**:
 
 - [类型系统基础](../../crates/c02_type_system/docs/tier_04_advanced/README.md)
-- [类型型变参考](../../crates/c02_type_system/docs/tier_03_references/README.md) - 类型系统参考文档
+- [类型型变参考](../../crates/c02_type_system/docs/README.md) - 类型系统参考文档
 - [形式化工程系统 - 类型系统](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 
 ---
@@ -237,9 +237,9 @@ research_notes/
 
 **相关工具**:
 
-- [基准测试框架](../../crates/c08_algorithms/benches/README.md)
-- [性能分析工具](../../crates/c06_async/benches/README.md)
-- [内存分析工具](../../crates/c05_threads/benches/README.md)
+- [基准测试框架](../../crates/c08_algorithms/docs/README.md)
+- [性能分析工具](../../crates/c06_async/docs/README.md)
+- [内存分析工具](../../crates/c05_threads/docs/README.md)
 
 ---
 
@@ -253,9 +253,9 @@ research_notes/
 
 ### 代码实现
 
-- [所有权与借用实现](../../crates/c01_ownership_borrow_scope/src/README.md)
+- [所有权与借用实现](../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [类型系统实现](../../crates/c02_type_system/src/README.md)
-- [异步系统实现](../../crates/c06_async/src/README.md)
+- [异步系统实现](../../crates/c06_async/docs/README.md)
 
 ### 学习资源
 

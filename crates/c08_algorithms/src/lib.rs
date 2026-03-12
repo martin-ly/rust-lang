@@ -80,11 +80,9 @@ pub mod string_algorithms;
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误
 
-// Rust 1.91 新特性模块（保留兼容性）
-pub mod rust_191_features;
-
-// Rust 1.92.0 新特性模块
-pub mod rust_192_features;
+pub mod archive;
+pub use archive::rust_191_features;
+pub use archive::rust_192_features;
 pub mod rust_194_features;
 
 // LeetCode 分类算法模块（结合 Rust 1.91 特性）

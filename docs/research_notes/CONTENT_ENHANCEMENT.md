@@ -422,11 +422,11 @@ error[E0382]: borrow of moved value: `s1`
 ```markdown
 ### 相关代码
 
-- [所有权实现](../../../crates/c01_ownership_borrow_scope/src/README.md)
+- [所有权实现](../../crates/c01_ownership_borrow_scope/README.md)
   - 关键文件: `ownership.rs` - 所有权规则实现
   - 关键文件: `borrow_checker.rs` - 借用检查器实现
 
-- [所有权文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
+- [所有权文档](../../crates/c01_ownership_borrow_scope/README.md)
   - 文档: `ownership_model.md` - 所有权模型文档
 ```
 

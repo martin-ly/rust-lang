@@ -517,8 +517,8 @@ async fn async_task_benchmark() {
 
 ### 相关代码
 
-- [并发性能测试代码](../../../crates/c05_threads/benches/README.md)
-- [异步性能测试代码](../../../crates/c06_async/benches/README.md)
+- [并发性能测试代码](../../../crates/c05_threads/docs/README.md)
+- [异步性能测试代码](../../../crates/c06_async/docs/README.md)
 
 ---
 

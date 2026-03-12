@@ -12,7 +12,7 @@
 
 Saga 是一种**长事务管理模式**，它将一个长事务分解为一系列**本地事务**（Local Transactions），每个本地事务有对应的**补偿操作**（Compensating Transaction）。
 
-```
+```text
 Saga := (T, C, ≺, σ)
   where:
     T = {t₁, t₂, ..., tₙ}     -- 本地事务集合
@@ -23,7 +23,7 @@ Saga := (T, C, ≺, σ)
 
 ### Def S2: Saga 执行状态
 
-```
+```text
 State(Saga) :=
   | Running(tᵢ)      -- 正在执行第 i 个事务
   | Compensating(cⱼ) -- 正在执行第 j 个补偿
@@ -35,7 +35,7 @@ State(Saga) :=
 
 补偿操作 cᵢ 对于事务 tᵢ 是**正确的**，当且仅当：
 
-```
+```text
 Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
                    → s ≈ s''
 ```
@@ -48,7 +48,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ### Axiom S1: 补偿幂等性
 
-```
+```text
 ∀c ∈ C. exec(c, s) = s' → exec(c, s') = s'
 ```
 
@@ -56,7 +56,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ### Axiom S2: 偏序无环性
 
-```
+```text
 ¬∃t₁, t₂, ..., tₙ ∈ T. t₁ ≺ t₂ ≺ ... ≺ tₙ ≺ t₁
 ```
 
@@ -64,7 +64,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ### Axiom S3: 最终一致性
 
-```
+```text
 ∀tᵢ ∈ T. σ(tᵢ) = success → ◇(∀tⱼ ≺ tᵢ. σ(tⱼ) = success)
 ```
 
@@ -76,7 +76,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ### Theorem S1: Saga 原子性
 
-```
+```text
 Saga 满足弱原子性：
 ∀Saga. Completed ∨ Compensated
 ```
@@ -91,7 +91,7 @@ Saga 满足弱原子性：
 
 ### Theorem S2: 补偿终止性
 
-```
+```text
 ∀Saga. Compensating(cᵢ) → ◇Compensated
 ```
 

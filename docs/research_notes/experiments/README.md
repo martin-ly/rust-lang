@@ -136,15 +136,15 @@
 
 ### 核心文档
 
-- [基准测试框架](../../../crates/c08_algorithms/benches/README.md)
-- [性能分析工具](../../../crates/c06_async/benches/README.md)
-- [内存分析工具](../../../crates/c05_threads/benches/README.md)
+- [基准测试框架](../../../crates/c08_algorithms/docs/README.md)
+- [性能分析工具](../../../crates/c06_async/docs/README.md)
+- [内存分析工具](../../../crates/c05_threads/docs/README.md)
 
 ### 代码实现
 
 - [算法实现](../../../crates/c08_algorithms/src/README.md)
-- [异步实现](../../../crates/c06_async/src/README.md)
-- [并发实现](../../../crates/c05_threads/src/README.md)
+- [异步实现](../../../crates/c06_async/docs/README.md)
+- [并发实现](../../../crates/c05_threads/docs/README.md)
 
 ### 工具资源
 

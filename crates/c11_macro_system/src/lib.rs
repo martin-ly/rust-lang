@@ -36,17 +36,18 @@ pub mod declarative;
 pub mod utils;
 
 // Rust 1.91 新特性模块
-pub mod rust_191_features;
+pub mod archive;
+pub use archive::rust_191_features;
 
 // Rust 1.92 新特性模块
-pub mod rust_192_features;
+pub use archive::rust_192_features;
 pub mod rust_194_features;
 
 // 重新导出常用项
 pub use declarative::*;
 
 // 重新导出 Rust 1.91 特性
-pub use rust_191_features::{
+pub use archive::rust_191_features::{
     // 主要功能函数
     demonstrate_rust_191_macro_features,
     demonstrate_all_rust_191_macro_features,
@@ -59,7 +60,7 @@ pub use rust_191_features::{
 };
 
 // 重新导出 Rust 1.92 特性
-pub use rust_192_features::{
+pub use archive::rust_192_features::{
     // 主要功能函数
     demonstrate_rust_192_macro_features,
     // 宏展开队列

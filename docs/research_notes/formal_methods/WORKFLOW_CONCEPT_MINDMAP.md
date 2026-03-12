@@ -73,7 +73,7 @@ $
 \mathit{WorkflowState} \in \{\mathrm{Created}, \mathrm{Running}(s), \mathrm{Waiting}(e), \mathrm{Compensating}(f), \mathrm{Completed}(r), \mathrm{Failed}(e), \mathrm{Cancelled}\}
 $。
 状态转换由事件驱动；
-见 [04_expressiveness_boundary](../../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md)。
+见 [04_expressiveness_boundary](../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md)。
 
 ---
 
@@ -149,7 +149,7 @@ Comp3(undo) <- Comp2(undo) <- Comp1(undo)
 **Def WF3（补偿链）**：设栈 $\mathit{stack} = [c_n, \ldots, c_1]$（LIFO）。
 补偿执行 $\mathit{execute\_compensation}(\mathit{stack})$：若 $\mathit{stack} = []$ 则成功；
 否则对 $c_1$ 执行 $\mathit{comp}(c_1.\mathit{output})$，成功则递归 $\mathit{rest}$，失败则整体失败。
-与 [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md) Saga 补偿语义一致。
+与 [05_distributed](../software_design_theory/03_execution_models/05_distributed.md) Saga 补偿语义一致。
 
 ---
 
@@ -242,7 +242,7 @@ Comp3(undo) <- Comp2(undo) <- Comp1(undo)
 
 - [04_expressiveness_boundary](../../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md) - 工作流表达力边界
 - [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md) - Saga 补偿链
-- [06_boundary_analysis](../../software_design_theory/03_execution_models/06_boundary_analysis.md) - 执行模型选型
+- [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) - 执行模型选型
 
 ---
 

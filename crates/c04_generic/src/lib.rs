@@ -103,23 +103,18 @@ pub mod type_parameter;
 pub mod type_aliases;
 
 pub mod generic_define;
-pub mod rust_189_features;
-pub mod rust_189_gat_hrtbs;
+/// 归档的历史版本特性模块 - 包含 Rust 1.89-1.92 版本的历史特性实现
+pub mod archive;
+pub use archive::rust_189_features;
+pub use archive::rust_189_gat_hrtbs;
+pub use archive::rust_189_comprehensive;
+pub use archive::rust_190_features;
+pub use archive::rust_190_real_generics;
+pub use archive::rust_191_features;
+pub use archive::rust_192_features;
 
 /// 基础语法模块 - 提供 Rust 泛型编程的基础语法和概念
 pub mod basic_syntax;
-
-/// Rust 1.89 全面特性展示模块 - 展示 Rust 1.89 版本的新特性和改进
-pub mod rust_189_comprehensive;
-/// Rust 1.90 特性与基础语法演示模块
-pub mod rust_190_features;
-/// Rust 1.90 真正的泛型特性实现
-pub mod rust_190_real_generics;
-/// Rust 1.91 泛型特性实现
-pub mod rust_191_features;
-
-/// Rust 1.92.0 泛型特性实现
-pub mod rust_192_features;
 pub mod rust_194_features;
 
 /// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式

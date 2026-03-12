@@ -1247,7 +1247,7 @@ impl Config {
 
 ---
 
-##### **引理 5.1 (无空指针)**
+#### **引理 5.1 (无空指针)**
 
 对于任何有效的引用 $r$，$r \neq \text{null}$。
 
@@ -1263,7 +1263,7 @@ impl Config {
 
 ---
 
-##### **引理 5.2 (无悬垂指针)**
+#### **引理 5.2 (无悬垂指针)**
 
 对于任何时刻 $t$ 和引用 $r$，若 $r$ 在 $t$ 时刻有效，则其指向的内存仍被分配。
 
@@ -1281,7 +1281,7 @@ $$\text{valid}(r, t) \rightarrow \exists x: \text{owner}(x, t) = \text{target}(r
 
 ---
 
-##### **引理 5.3 (无数据竞争)**
+#### **引理 5.3 (无数据竞争)**
 
 并发程序中，对同一内存位置的读写不会发生冲突。
 
@@ -1316,7 +1316,7 @@ $$\forall t_1, t_2, x: \text{access}(t_1, x) \land \text{access}(t_2, x) \land t
 
 ---
 
-##### **引理 5.4 (无 use-after-free)**
+#### **引理 5.4 (无 use-after-free)**
 
 值被释放后不会被访问。
 
@@ -1337,7 +1337,7 @@ $$\text{deallocated}(v, t) \rightarrow \forall t' > t: \neg\text{access}(v, t')$
 
 ---
 
-##### **与分离逻辑 (Separation Logic) 的正式对应**
+#### **与分离逻辑 (Separation Logic) 的正式对应**
 
 我们将所有权系统映射到分离逻辑框架：
 
@@ -2322,7 +2322,7 @@ fn main() {
 
 ### 相关代码
 
-- [所有权实现](../../../crates/c01_ownership_borrow_scope/src/README.md)
+- [所有权实现](../../crates/c01_ownership_borrow_scope/README.md)
 - [所有权文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 
 ### 工具资源

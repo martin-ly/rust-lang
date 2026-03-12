@@ -62,9 +62,10 @@
 
 **形式化定义**（数学风格）:
 
-**Def SG1（Saga 步骤）**：设 $\mathit{step\_id}$ 为事务标识，$\mathit{step\_action}: V \to \mathit{Result}$ 为执行动作，$\mathit{step\_compensation}: V \to \mathit{Result}$ 为补偿动作。Saga 步骤三元组 $(\mathit{id}, \mathit{action}, \mathit{comp})$ 满足：若 $\mathit{action}(v) = \mathrm{Err}(e)$，则执行 $\mathit{comp}(v)$ 撤销效果。
+**Def SG1（Saga 步骤）**：设 $\mathit{step\_id}$ 为事务标识，$\mathit{step\_action}: V \to \mathit{Result}$ 为执行动作，$\mathit{step\_compensation}: V \to \mathit{Result}$ 为补偿动作。
+Saga 步骤三元组 $(\mathit{id}, \mathit{action}, \mathit{comp})$ 满足：若 $\mathit{action}(v) = \mathrm{Err}(e)$，则执行 $\mathit{comp}(v)$ 撤销效果。
 
-**Rust 对应**：`Result` + `Vec<Box<dyn Fn() -> Result<(), E>>>` 补偿闭包；见 [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md)。
+**Rust 对应**：`Result` + `Vec<Box<dyn Fn() -> Result<(), E>>>` 补偿闭包；见 [05_distributed](../software_design_theory/03_execution_models/05_distributed.md)。
 
 ---
 
@@ -95,7 +96,10 @@
 
 **形式化定义**（数学风格）:
 
-**Def CQ1（CQRS 系统）**：设 $\mathit{Write\ Model} \neq \mathit{Read\ Model}$；事件存储 $\mathit{EventStore}$ 追加-only；投影 $\mathit{projection}: \mathit{EventStore} \to \mathit{ReadModel}$ 同步读模型。见 [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md) Def DI-CQ1。
+**Def CQ1（CQRS 系统）**：设 $\mathit{Write\ Model} \neq \mathit{Read\ Model}$；
+事件存储 $\mathit{EventStore}$ 追加-only；
+投影 $\mathit{projection}: \mathit{EventStore} \to \mathit{ReadModel}$ 同步读模型。
+见 [05_distributed](../software_design_theory/03_execution_models/05_distributed.md) Def DI-CQ1。
 
 ---
 

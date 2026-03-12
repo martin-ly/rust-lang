@@ -190,7 +190,7 @@ rcgen = "0.14.7"
 dotenvy = "0.15.7"
 # tempfile: 临时文件和目录管理库
 # 2026-02-20: 3.25.0 -> 3.26.0 (cargo update，锁定 23 包至 Rust 1.93 兼容版本)
-tempfile = "3.26.0"
+tempfile = "3.27.0"
 
 # gRPC 相关 - 2025年12月11日最新稳定版本
 # tonic: 高性能的gRPC over HTTP/2实现，专注于互操作性和灵活性 - 版本 0.12+ (字母索引)
@@ -317,7 +317,7 @@ bytes = "1.11.1"
 # indexmap: 保持插入顺序的HashMap实现 - 2025年12月11日更新
 indexmap = "2.13.0"
 # once_cell: 单次初始化单元格，用于全局变量初始化
-once_cell = "1.21.3"
+once_cell = "1.21.4"
 # num_cpus: CPU核心数检测库
 num_cpus = "1.17.0"
 # libc: 系统调用接口库，提供与C库的绑定

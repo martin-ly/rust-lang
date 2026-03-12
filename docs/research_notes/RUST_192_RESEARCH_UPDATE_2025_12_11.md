@@ -274,7 +274,7 @@ fn api_stabilization_examples() {
 
 | 资源 | 链接 | 说明 |
 | :--- | :--- | :--- |
-| Rust 1.92.0 特性实现 | [../../crates/c01_ownership_borrow_scope/src/rust_192_features.rs](../../crates/c01_ownership_borrow_scope/src/rust_192_features.rs) | 代码实现 |
+| Rust 1.92.0 特性实现 | [../../crates/c01_ownership_borrow_scope/src/archive/rust_192_features.rs](../../crates/c01_ownership_borrow_scope/src/archive/rust_192_features.rs) | 代码实现 |
 | Rust 1.92.0 示例代码 | [../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs](../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs) | 示例代码 |
 
 ### 形式化文档

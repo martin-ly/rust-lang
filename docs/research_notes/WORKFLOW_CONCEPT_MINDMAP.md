@@ -1,130 +1,269 @@
 # 工作流引擎概念族谱
 
-> **创建日期**: 2026-03-08
-> **版本**: v1.0
-> **描述**: 工作流引擎核心概念的完整族谱
+> **Rust 版本**: 1.94.0+
+> **最后更新**: 2026-03-12
+> **状态**: ✅ 活跃维护
 
 ---
 
-## 🧬 核心概念族谱
+## 概念族谱概览
 
 ```mermaid
 mindmap
   root((工作流引擎))
-    工作流定义
-      状态机模型
-        状态 State
-        转换 Transition
-        事件 Event
-        动作 Action
-      流程元素
-        开始节点
-        任务节点
-        网关节点
-          排他网关 XOR
-          并行网关 AND
-          包容网关 OR
-        结束节点
+    基础概念
+      工作流定义
+        BPMN
+        状态机
+        Petri网
+      活动类型
+        人工任务
+        自动任务
+        子流程
+      流转控制
+        顺序
+        并行
+        条件分支
     执行模型
-      流程实例
-        实例ID
-        当前状态
-        流程变量
-        执行历史
-      任务执行
-        用户任务
-        服务任务
-        脚本任务
+      状态机模型
+        状态
+        事件
+        转换
+      活动模型
+        活动实例
+        令牌
+        执行路径
+      数据流
+        变量
+        表达式
+        数据映射
+    高级模式
+      Saga模式
+        编排式
+        协调式
+        补偿操作
+      事件驱动
+        事件订阅
+        事件发布
+        事件溯源
+      长时间运行
+        持久化
+        定时器
+        重试策略
+    容错机制
+      事务补偿
+        向前恢复
+        向后恢复
+        SAGA
+      超时处理
+        任务超时
+        流程超时
+        提醒机制
+      异常处理
+        边界事件
+        错误捕获
+        升级处理
+    Rust实现
+      状态机框架
+        machine
+        rustfsm
+        statesman
+      工作流引擎
+        temporal-rs
+        activity
+        cadence
       持久化
-        状态快照
-        事件日志
-        恢复点
-    事务管理
-      补偿机制
-        补偿链
-        补偿顺序
-        补偿幂等性
-      长事务
-        持久化点
-        超时控制
-        回滚策略
-    模式支持
-      顺序模式
-      并行分支
-      条件分支
-      循环模式
-      子流程
+        sqlx
+        redis
+        sled
 ```
 
 ---
 
-## 📊 概念关系矩阵
+## 核心概念详解
 
-| 概念A | 关系 | 概念B | 说明 |
-|-------|------|-------|------|
-| State Machine | models | Workflow | 状态机模型建模工作流 |
-| Compensation | reverses | Task | 补偿撤销任务效果 |
-| Gateway | controls | Flow | 网关控制流程分支 |
-| Persistence Point | saves | State | 持久化点保存状态 |
-| Instance | instantiates | Definition | 实例化定义 |
+### 1. 工作流定义语言
+
+| 标准 | 特点 | 适用场景 |
+|------|------|----------|
+| BPMN 2.0 | 图形化、标准化 | 业务流程 |
+| DMN | 决策表 | 业务规则 |
+| CMMN | 案例管理 | 知识工作 |
+
+### 2. 状态机实现
+
+```rust
+// Rust 状态机 DSL 示例
+use state_machine_procmacro::fsm;
+
+fsm! {
+    enum OrderWorkflow {
+        InitialState = Created,
+        Created {
+            submit -> Submitted,
+            cancel -> Cancelled,
+        },
+        Submitted {
+            approve -> Approved,
+            reject -> Rejected,
+        },
+        Approved {
+            ship -> Shipped,
+        },
+        Shipped {
+            deliver -> Completed,
+        },
+        Rejected, Completed, Cancelled: Terminal,
+    }
+}
+```
+
+### 3. Saga 模式实现
+
+```rust
+// Saga 编排器
+trait SagaActivity {
+    type Input;
+    type Output;
+    type Error;
+
+    async fn execute(&self, input: Self::Input) -> Result<Self::Output, Self::Error>;
+    async fn compensate(&self, output: Self::Output) -> Result<(), Self::Error>;
+}
+
+struct SagaOrchestrator {
+    activities: Vec<Box<dyn SagaActivity>>,
+    executed: Vec<Box<dyn Any>>, // 记录执行结果用于补偿
+}
+
+impl SagaOrchestrator {
+    async fn execute(&mut self) -> Result<(), SagaError> {
+        for activity in &self.activities {
+            match activity.execute(()).await {
+                Ok(output) => self.executed.push(Box::new(output)),
+                Err(e) => {
+                    self.compensate().await;
+                    return Err(SagaError::ActivityFailed(e));
+                }
+            }
+        }
+        Ok(())
+    }
+
+    async fn compensate(&mut self) {
+        for (activity, output) in self.activities.iter().zip(&self.executed).rev() {
+            let _ = activity.compensate(()).await;
+        }
+    }
+}
+```
 
 ---
 
-## 🎯 核心定理映射
+## Rust 工作流工具链
 
-| 定理编号 | 定理名称 | 相关概念 |
-|----------|----------|----------|
-| T-WF1 | 工作流活性定理 | State Machine |
-| T-WF2 | 状态一致性定理 | Instance, State |
-| T-CC1 | 补偿一致性定理 | Compensation Chain |
-| T-CC2 | 部分补偿安全性定理 | Compensation |
-| T-LT1 | 故障可恢复性定理 | Persistence Point |
-| T-LT2 | 最终一致性定理 | Long Running Transaction |
+### 框架对比
 
----
+| 框架 | 类型 | 持久化 | 适用场景 |
+|------|------|--------|----------|
+| temporal-rs | 完整引擎 | 内置 | 长时间运行 |
+| activity | 轻量级 | 可选 | 简单工作流 |
+| rustfsm | 状态机 | 无 | 嵌入式逻辑 |
 
-## 🌿 概念层次结构
+### 与 Tokio 集成
 
-### Level 1: 基础模型
+```rust
+use tokio::time::{sleep, Duration};
+use tokio::sync::mpsc;
 
-- 状态机 (State Machine)
-- 流程定义 (Workflow Definition)
-- 流程实例 (Instance)
+struct WorkflowEngine {
+    task_queue: mpsc::Receiver<Task>,
+    state_store: sled::Db,
+}
 
-### Level 2: 控制结构
-
-- 任务 (Task)
-- 网关 (Gateway)
-- 事件 (Event)
-
-### Level 3: 事务管理
-
-- 补偿 (Compensation)
-- 长事务 (LRT)
-- 持久化 (Persistence)
-
-### Level 4: 高级特性
-
-- 子流程 (Sub-process)
-- 动态流程
-- 分布式工作流
+impl WorkflowEngine {
+    async fn run(&mut self) {
+        while let Some(task) = self.task_queue.recv().await {
+            tokio::spawn(async move {
+                execute_task(task).await
+            });
+        }
+    }
+}
+```
 
 ---
 
-## 🔗 与Rust示例的映射
+## 工作流模式实现
 
-| 概念 | 形式化定义 | Rust实现 |
-|------|-----------|----------|
-| 工作流状态机 | `02_workflow/01_workflow_state_machine.md` | 见文档内代码 |
-| 补偿链 | `02_workflow/02_compensation_chain.md` | 见文档内代码 |
-| 长事务 | `02_workflow/03_long_running_transaction.md` | 见文档内代码 |
+### 1. 并行分支
+
+```rust
+use futures::future::join_all;
+
+async fn parallel_branch(activities: Vec<Activity>) -> Vec<Result<Output, Error>> {
+    let handles: Vec<_> = activities
+        .into_iter()
+        .map(|act| tokio::spawn(async move { act.execute().await }))
+        .collect();
+
+    join_all(handles).await
+        .into_iter()
+        .map(|r| r.unwrap_or_else(|e| Err(Error::Join(e))))
+        .collect()
+}
+```
+
+### 2. 定时器与延迟
+
+```rust
+use tokio::time::{sleep_until, Instant};
+
+struct TimerActivity {
+    deadline: Instant,
+}
+
+impl TimerActivity {
+    async fn execute(&self) -> TimerResult {
+        sleep_until(self.deadline).await;
+        TimerResult::Expired
+    }
+}
+```
+
+### 3. 事件驱动工作流
+
+```rust
+use tokio::sync::broadcast;
+
+struct EventDrivenWorkflow {
+    event_bus: broadcast::Sender<WorkflowEvent>,
+    state: WorkflowState,
+}
+
+impl EventDrivenWorkflow {
+    async fn run(mut self) {
+        let mut rx = self.event_bus.subscribe();
+
+        loop {
+            match rx.recv().await {
+                Ok(event) => self.handle_event(event).await,
+                Err(_) => break,
+            }
+        }
+    }
+}
+```
 
 ---
 
-## 📚 相关文档
+## 相关文档
 
-- [工作流状态机形式化](./software_design_theory/02_workflow/01_workflow_state_machine.md)
-- [补偿链形式化](./software_design_theory/02_workflow/02_compensation_chain.md)
-- [长事务形式化](./software_design_theory/02_workflow/03_long_running_transaction.md)
-- [工作流引擎决策树](./WORKFLOW_ENGINE_DECISION_TREE.md)
-- [工作流引擎矩阵](./WORKFLOW_ENGINES_MATRIX.md)
+- [工作流引擎决策树](./formal_methods/WORKFLOW_ENGINE_DECISION_TREE.md)
+- [工作流引擎矩阵](./formal_methods/WORKFLOW_ENGINES_MATRIX.md)
+- [软件设计理论 - 工作流](./software_design_theory/02_workflow_safe_complete_models/)
+
+---
+
+**文档版本**: 1.0
+**创建日期**: 2026-03-12

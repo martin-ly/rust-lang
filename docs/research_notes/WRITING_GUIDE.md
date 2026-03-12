@@ -371,7 +371,7 @@
 
 ### 相关代码
 
-- [所有权实现](../../crates/c01_ownership_borrow_scope/src/README.md)
+- [所有权实现](../../crates/c01_ownership_borrow_scope/README.md)
 - [所有权文档](../../crates/c01_ownership_borrow_scope/docs/README.md)
 ```
 

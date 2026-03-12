@@ -133,10 +133,10 @@ impl Handler<MyMessage> for MyActor {
 
 | 组合 | 说明 |
 | :--- | :--- |
-| 分布式 + DTO | 跨边界序列化；见 [02_complete_43_catalog](../../02_workflow_safe_complete_models/02_complete_43_catalog.md) DTO |
+| 分布式 + DTO | 跨边界序列化；见 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md) DTO |
 | 分布式 + Gateway | 外部系统集成；见 [02_complete_43_catalog](../../02_workflow_safe_complete_models/02_complete_43_catalog.md) Gateway |
 | 分布式 + Remote Facade | 粗粒度接口；batch 减少 RPC；见 02_complete_43_catalog |
-| 分布式 + Observer | 事件总线、消息队列；见 [observer](../../01_design_patterns_formal/03_behavioral/observer.md) |
+| 分布式 + Observer | 事件总线、消息队列；见 [observer](../01_design_patterns_formal/03_behavioral/observer.md) |
 
 ### 常见陷阱
 
@@ -145,7 +145,7 @@ impl Handler<MyMessage> for MyActor {
 | 忽略超时 | 永久阻塞 | `tokio::time::timeout`、`tokio::time::interval` |
 | 非幂等重试 | 重复操作 | 设计幂等接口；或去重 |
 | 序列化版本不兼容 | 反序列化失败 | 版本管理；向后兼容 schema |
-| 无熔断 | 雪崩 | 熔断器、限流；见 [02_effectiveness_proofs](../../04_compositional_engineering/02_effectiveness_proofs.md) |
+| 无熔断 | 雪崩 | 熔断器、限流；见 [02_effectiveness_proofs](../04_compositional_engineering/02_effectiveness_proofs.md) |
 
 ---
 
@@ -302,7 +302,8 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 
 **Axiom DI-SG1**：补偿幂等；补偿顺序与执行逆序。
 
-**定理 DI-SG-T1**：Rust 用 `Result` + 补偿闭包 `Vec<Box<dyn Fn() -> Result<(), E>>>` 可近似表达 Saga；无内置编排器，与 Temporal 对接时为近似。见 [04_expressiveness_boundary](../../02_workflow_safe_complete_models/04_expressiveness_boundary.md)。
+**定理 DI-SG-T1**：Rust 用 `Result` + 补偿闭包 `Vec<Box<dyn Fn() -> Result<(), E>>>` 可近似表达 Saga；无内置编排器，与 Temporal 对接时为近似。
+见 [04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md)。
 
 **定理 S-T1（Saga 补偿完整性）**：设 $S_1, \ldots, S_k$ 已成功执行，$S_{k+1}$ 失败。若补偿链 $\mathit{Comp}_k \circ \cdots \circ \mathit{Comp}_1$ 按逆序执行且各 $\mathit{Comp}_i$ 幂等，则系统回退至 $S_0$ 前状态（语义等价）。
 

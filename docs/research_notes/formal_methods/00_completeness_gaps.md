@@ -168,7 +168,7 @@ $
 | **可执行语义** | 无可执行小步操作语义 | RustSEM (K-Framework)、[EXECUTABLE_SEMANTICS_ROADMAP](../EXECUTABLE_SEMANTICS_ROADMAP.md) |
 | **松弛内存模型** | 原子操作、Arc 仅 Def 级；无松弛内存形式化 | RustBelt Meets Relaxed Memory |
 | **MIR/THIR 级** | 无编译器 IR 级建模 | RustBelt MIR、coq-of-rust THIR |
-| **工具对接** | 无 Aeneas、coq-of-rust 对接 | [AENEAS_INTEGRATION_PLAN](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md) |
+| **工具对接** | 无 Aeneas、coq-of-rust 对接 | [AENEAS_INTEGRATION_PLAN](../../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md) |
 
 **RustBelt 逐章对标**: [RUSTBELT_ALIGNMENT](../RUSTBELT_ALIGNMENT.md)
 
