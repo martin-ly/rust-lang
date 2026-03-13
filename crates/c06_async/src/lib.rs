@@ -1,6 +1,6 @@
 //! # C06 Async - Rust 异步编程全面解析
 //!
-//! 本 crate 提供 Rust 1.90 异步编程的全面、深入的理论与实践指南。
+//! 本 crate 提供 Rust 1.94 异步编程的全面、深入的理论与实践指南。
 //!
 //! ## 模块组织
 //!
@@ -30,15 +30,12 @@
 //! - [`utils`] - 重试、超时、限流、熔断、监督树
 //! - [`advanced_tools`] - 批处理、任务管理、重试引擎
 //!
-//! ### Rust 1.90 特性 (Rust 1.90 Features)
+//! ### Rust 1.94 特性 (Rust 1.94 Features)
 //!
-//! - [`rust_190_features`] - Rust 1.90 异步新特性
-//! - [`rust_190_real_features`] - 真实稳定特性实现
-//! - [`rust_190_real_stable_features`] - 稳定特性详解
-//! - [`rust_190_advanced_features`] - 高级异步特性
-//! - [`improved_async_features`] - 改进的异步实现
-//! - [`async_control_flow_190`] - 控制流分析
-//! - [`performance_optimization_190`] - 性能优化技术
+//! - [`rust_194_features`] - Rust 1.94 异步新特性
+//!   - array_windows 用于异步数据流处理
+//!   - LazyCell/LazyLock 用于异步缓存
+//!   - 数学常量用于异步算法
 //!
 //! ### 生态系统集成 (Ecosystem Integration)
 //!
@@ -269,33 +266,13 @@ pub mod utils;
 pub mod advanced_tools;
 
 // ============================================================================
-// Rust 1.90 特性模块 (Rust 1.90 Features)
+// Rust 1.94 特性模块 (Rust 1.94 Features)
 // ============================================================================
 
 pub mod archive;
-pub use archive::rust_190_features;
 
-/// Rust 1.90 真实特性实现
-pub mod rust_190_real_features;
-
-/// Rust 1.90 真实稳定特性
-pub mod rust_190_real_stable_features;
-
-/// Rust 1.90 高级异步特性
-pub mod rust_190_advanced_features;
-
-pub use archive::rust_191_features;
-pub use archive::rust_192_features;
+/// Rust 1.94 异步特性
 pub mod rust_194_features;
-
-/// 改进的异步特性实现
-pub mod improved_async_features;
-
-/// 异步控制流分析 (Rust 1.90)
-pub mod async_control_flow_190;
-
-/// 性能优化技术 (Rust 1.90)
-pub mod performance_optimization_190;
 
 // ============================================================================
 // 异步生态系统模块 (Async Ecosystem)

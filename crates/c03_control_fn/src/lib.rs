@@ -15,63 +15,35 @@
 
 // 导出核心模块
 pub mod async_control_flow;
-pub mod async_control_flow_189;
-pub mod performance_optimization_189;
-pub mod rust_189_enhanced_features;
-pub mod archive;
-pub use archive::rust_189_features;
+pub mod rust_194_features;  // Rust 1.94 特性
 
-// 导出Rust 1.90新特性模块
-pub use archive::rust_190_features;
-pub mod rust_190_real_implementation;  // 真正的Rust 1.90特性实现
-pub mod rust_190_complete_features;    // Rust 1.90完整特性实现
-pub mod advanced_async_control_flow_190; // 高级异步控制流
-pub mod performance_benchmarks_190;    // 性能基准测试
-pub mod async_control_flow_190;
-pub mod performance_optimization_190;
-pub mod formal_verification_190;
-
-// 导出Rust 1.91新特性模块
-pub use archive::rust_191_features;
-
-// 导出Rust 1.92.0新特性模块
-pub use archive::rust_192_features;
-pub mod rust_194_features;
-
-// 重新导出Rust 1.92.0新特性
-pub use rust_192_features::{
-    control_flow_check, control_flow_branch, control_flow_loop, control_flow_match,
-    control_flow_with_never, LocatedError, ErrorContext,
-    ControlFlowAnalyzer, ControlFlowOptimizer,
-    ControlFlowMatcher, ControlFlowCombinator, ControlFlowProfiler, ControlFlowValidator,
-    ControlFlowStateMachine, ControlFlowState,
-    IteratorControlFlow,
-    ControlFlowVisualization,
-    ControlFlowUtils, ControlFlowDecorator,
-    get_rust_192_control_flow_info, demonstrate_rust_192_control_flow,
-};
-
-// 注意：async_control_flow 和 parallel_control_flow 是模块，已在 rust_192_features 中定义
-// 可以通过 rust_192_features::async_control_flow 和 rust_192_features::parallel_control_flow 访问
-
-// 重新导出Rust 1.91新特性
-pub use rust_191_features::{
-    const_control_flow,
-    improved_control_flow,
-    function_performance,
-    error_handling as rust_191_error_handling,
-    optimized_conditionals,
-    optimized_loops,
-    function_call_optimization,
-    closure_optimization,
-    comprehensive_examples,
-    demonstrate_rust_191_control_flow,
-    get_rust_191_control_flow_info,
+// 重新导出Rust 1.94.0新特性
+pub use rust_194_features::{
+    // array_windows 相关
+    StateMachineParser, EventStreamProcessor,
+    // LazyCell 控制流
+    ConditionalLazyController, ControlFlowLazyCache,
+    // 数学常量控制流
+    ConvergenceController, golden_section_search, controlled_harmonic_sum,
+    math_consts,
+    // Peekable新方法
+    SimpleLexer, Token, TokenIterator, DataFilterProcessor, GenericParser, ParseResult,
+    // 闭包和控制流
+    ClosureCaptureAnalyzer, create_precise_closure,
+    // Match增强
+    MatchResult, EnhancedMatcher, process_match_result,
+    // 函数指针优化
+    FunctionPtrWrapper, compose_functions, conditional_execute,
+    // Edition 2024
+    Edition2024ControlFlow, Edition2024,
+    // 性能优化
+    optimized_loop, vectorizable_loop, branch_predictor_friendly, branchless_computation,
+    // 演示函数
+    demonstrate_rust_194_control_flow, get_rust_194_control_flow_info,
 };
 
 // 导出基础语法模块
 pub mod basic_syntax;
-pub mod rust_189_basic_syntax;
 
 // 导出子模块
 pub mod closure;
@@ -84,38 +56,15 @@ pub mod items;
 pub mod pattern_matching;
 pub mod statements;
 
-// 重新导出主要功能（避免重复）
+// 重新导出主要功能
 pub use async_control_flow::*;
-pub use async_control_flow_189::*;
-pub use performance_optimization_189::*;
-pub use rust_189_enhanced_features::*;
-
-// 重新导出Rust 1.90新特性
-pub use rust_190_features::*;
-pub use rust_190_real_implementation::*;  // 真正的Rust 1.90特性实现
-
-// 选择性导出rust_190_complete_features以避免名称冲突
-pub use rust_190_complete_features::{
-    AsyncClosureDemo, TupleCollectionDemo, AsyncProcessor, DataProcessor,
-    CompleteAdvancedDataProcessor, AdvancedDataProcessor, AsyncProcessorManager,
-    ProcessorWrapper, CompleteAsyncResource, CompleteAsyncResourceManager,
-    CompleteAsyncResourceManagerType, CompleteAsyncResourceType,
-    DatabaseConnection, FileResource, demonstrate_rust_190_complete_features
-};
-
-pub use advanced_async_control_flow_190::*; // 高级异步控制流
-pub use performance_benchmarks_190::*;    // 性能基准测试
-pub use async_control_flow_190::*;
-pub use performance_optimization_190::*;
-pub use formal_verification_190::*;
 
 // 重新导出基础语法模块
 pub use basic_syntax::*;
-pub use rust_189_basic_syntax::*;
 
 // 版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
-pub const RUST_VERSION: &str = "1.92.0";
+pub const RUST_VERSION: &str = "1.94.0";
 
 /// 项目信息
 pub struct ProjectInfo;

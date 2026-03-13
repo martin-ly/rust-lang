@@ -438,6 +438,178 @@ impl Default for ZeroCopyString {
     }
 }
 
+// ==================== Rust 1.94 真实特性: 数学常量 ====================
+
+/// # 数学常量 / Mathematical Constants
+///
+/// Rust 1.94.0 为 `f32` 和 `f64` 类型添加了新的数学常量：
+/// - `EULER_GAMMA` (欧拉-马歇罗尼常数, γ ≈ 0.5772)
+/// - `GOLDEN_RATIO` (黄金比例, φ ≈ 1.6180)
+///
+/// ## 特性说明
+/// - `EULER_GAMMA`: 定义为 `lim(n→∞) [H_n - ln(n)]`，其中 H_n 是第 n 个调和数
+/// - `GOLDEN_RATIO`: 定义为 `(1 + √5) / 2`，约等于 1.6180339887...
+///
+/// ## 使用场景
+/// - 数学计算和算法实现
+/// - 黄金分割搜索算法
+/// - 数论和特殊函数计算
+
+/// f32 数学常量模块
+pub mod math_consts_f32 {
+    /// 欧拉-马歇罗尼常数 (Euler-Mascheroni constant)
+    /// 
+    /// 约等于 0.5772156649
+    /// 
+    /// # 数学定义
+    /// γ = lim(n→∞) [Σ(1/k, k=1..n) - ln(n)]
+    pub const EULER_GAMMA: f32 = 0.57721566_f32;
+
+    /// 黄金比例 (Golden Ratio)
+    /// 
+    /// 约等于 1.6180339887
+    /// 
+    /// # 数学定义
+    /// φ = (1 + √5) / 2
+    pub const GOLDEN_RATIO: f32 = 1.618034_f32;
+
+    /// 黄金比例的共轭
+    /// 
+    /// 约等于 -0.6180339887
+    /// 
+    /// # 数学定义
+    /// φ' = (1 - √5) / 2 = 1 - φ = -1/φ
+    pub const GOLDEN_RATIO_CONJUGATE: f32 = -0.618034_f32;
+}
+
+/// f64 数学常量模块
+pub mod math_consts_f64 {
+    /// 欧拉-马歇罗尼常数 (Euler-Mascheroni constant)
+    /// 
+    /// 约等于 0.5772156649015329
+    /// 
+    /// # 数学定义
+    /// γ = lim(n→∞) [Σ(1/k, k=1..n) - ln(n)]
+    pub const EULER_GAMMA: f64 = 0.5772156649015329_f64;
+
+    /// 黄金比例 (Golden Ratio)
+    /// 
+    /// 约等于 1.618033988749895
+    /// 
+    /// # 数学定义
+    /// φ = (1 + √5) / 2
+    pub const GOLDEN_RATIO: f64 = 1.618033988749895_f64;
+
+    /// 黄金比例的共轭
+    /// 
+    /// 约等于 -0.6180339887498949
+    /// 
+    /// # 数学定义
+    /// φ' = (1 - √5) / 2 = 1 - φ = -1/φ
+    pub const GOLDEN_RATIO_CONJUGATE: f64 = -0.6180339887498949_f64;
+}
+
+/// 黄金分割搜索计算器
+///
+/// 使用 GOLDEN_RATIO 进行区间缩小搜索
+pub struct GoldenSectionSearch {
+    tolerance: f64,
+    max_iterations: usize,
+}
+
+impl GoldenSectionSearch {
+    /// 创建新的黄金分割搜索器
+    pub fn new(tolerance: f64, max_iterations: usize) -> Self {
+        Self {
+            tolerance,
+            max_iterations,
+        }
+    }
+
+    /// 在区间内搜索函数最小值
+    ///
+    /// # 参数
+    /// - `f`: 目标函数
+    /// - `a`: 区间左端点
+    /// - `b`: 区间右端点
+    ///
+    /// # 返回
+    /// 近似最小值点的 x 坐标
+    pub fn find_minimum<F>(&self, mut f: F, mut a: f64, mut b: f64) -> f64
+    where
+        F: FnMut(f64) -> f64,
+    {
+        let phi = math_consts_f64::GOLDEN_RATIO;
+        let resphi = 2.0 - phi; // 1 - 1/phi = 2 - phi
+
+        let mut c = a + resphi * (b - a);
+        let mut d = b - resphi * (b - a);
+        let mut fc = f(c);
+        let mut fd = f(d);
+
+        for _ in 0..self.max_iterations {
+            if (b - a).abs() < self.tolerance {
+                break;
+            }
+
+            if fc < fd {
+                b = d;
+                d = c;
+                fd = fc;
+                c = a + resphi * (b - a);
+                fc = f(c);
+            } else {
+                a = c;
+                c = d;
+                fc = fd;
+                d = b - resphi * (b - a);
+                fd = f(d);
+            }
+        }
+
+        (a + b) / 2.0
+    }
+}
+
+/// 计算调和数
+///
+/// H_n = 1 + 1/2 + 1/3 + ... + 1/n
+#[allow(dead_code)]
+pub fn harmonic_number(n: u64) -> f64 {
+    if n == 0 {
+        return 0.0;
+    }
+    
+    (1..=n).map(|k| 1.0 / k as f64).sum()
+}
+
+/// 使用欧拉-马歇罗尼常数近似计算调和数
+///
+/// 对于大 n，H_n ≈ ln(n) + γ + 1/(2n)
+#[allow(dead_code)]
+pub fn harmonic_number_approx(n: u64) -> f64 {
+    if n == 0 {
+        return 0.0;
+    }
+    
+    let n_f64 = n as f64;
+    n_f64.ln() + math_consts_f64::EULER_GAMMA + 1.0 / (2.0 * n_f64)
+}
+
+/// 使用 Euler Gamma 常数进行积分近似
+///
+/// 演示 EULER_GAMMA 在数值分析中的应用
+pub fn exponential_integral_approx(x: f64) -> f64 {
+    // 对于小 x，Ei(x) ≈ γ + ln|x| + x + x²/4 + ...
+    // 这里展示基本的近似
+    if x > 0.0 && x < 1.0 {
+        math_consts_f64::EULER_GAMMA + x.ln() + x
+    } else {
+        // 简化处理
+        x.exp() / x
+    }
+}
+
 /// 演示 Rust 1.94 真实特性
 pub fn demonstrate_rust_194_features() {
     println!("\n=== Rust 1.94.0 真实特性演示 ===\n");
@@ -472,6 +644,40 @@ pub fn demonstrate_rust_194_features() {
     let mutable_ref = cache.force_get_mut(|| vec![]);
     mutable_ref.push(6);
     println!("   修改后: {:?}", cache.try_get());
+
+    // 3. 数学常量演示
+    println!("\n3. 数学常量:");
+    println!(
+        "   欧拉-马歇罗尼常数 (f64): {:.10}",
+        math_consts_f64::EULER_GAMMA
+    );
+    println!(
+        "   黄金比例 (f64): {:.10}",
+        math_consts_f64::GOLDEN_RATIO
+    );
+    println!(
+        "   欧拉-马歇罗尼常数 (f32): {:.7}",
+        math_consts_f32::EULER_GAMMA
+    );
+    println!(
+        "   黄金比例 (f32): {:.7}",
+        math_consts_f32::GOLDEN_RATIO
+    );
+
+    // 黄金分割搜索演示
+    let gss = GoldenSectionSearch::new(1e-6, 100);
+    let minimum = gss.find_minimum(|x| (x - 2.0).powi(2), 0.0, 5.0);
+    println!("   函数 (x-2)² 在 [0, 5] 的最小值点在: {:.6}", minimum);
+
+    // 调和数计算
+    let h10 = harmonic_number(10);
+    let h10_approx = harmonic_number_approx(10);
+    println!("   H_10 精确值: {:.6}", h10);
+    println!("   H_10 近似值: {:.6}", h10_approx);
+
+    // 指数积分近似
+    let ei_approx = exponential_integral_approx(0.5);
+    println!("   Ei(0.5) 近似值: {:.6}", ei_approx);
 }
 
 #[cfg(test)]
@@ -649,5 +855,84 @@ mod tests {
     #[test]
     fn test_demonstrate_features() {
         demonstrate_rust_194_features();
+    }
+
+    // ==================== 数学常量测试 ====================
+
+    #[test]
+    fn test_euler_gamma_f64() {
+        // 欧拉-马歇罗尼常数的近似值检查
+        assert!((math_consts_f64::EULER_GAMMA - 0.5772).abs() < 0.001);
+        // 验证它是正数
+        assert!(math_consts_f64::EULER_GAMMA > 0.0);
+        // 验证它小于 1
+        assert!(math_consts_f64::EULER_GAMMA < 1.0);
+    }
+
+    #[test]
+    fn test_golden_ratio_f64() {
+        // 黄金比例的近似值检查
+        assert!((math_consts_f64::GOLDEN_RATIO - 1.618).abs() < 0.001);
+        // 验证黄金比例的性质: φ = 1 + 1/φ
+        let phi = math_consts_f64::GOLDEN_RATIO;
+        assert!((phi - (1.0 + 1.0 / phi)).abs() < 1e-10);
+        // 验证 φ² = φ + 1
+        assert!((phi * phi - (phi + 1.0)).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_golden_ratio_conjugate() {
+        // 验证共轭性质: φ + φ' = 1
+        let phi = math_consts_f64::GOLDEN_RATIO;
+        let phi_conj = math_consts_f64::GOLDEN_RATIO_CONJUGATE;
+        assert!((phi + phi_conj - 1.0).abs() < 1e-10);
+        // 验证 φ * φ' = -1
+        assert!((phi * phi_conj + 1.0).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_math_consts_f32() {
+        // f32 常量的基本检查
+        assert!(math_consts_f32::EULER_GAMMA > 0.0);
+        assert!(math_consts_f32::GOLDEN_RATIO > 1.0);
+        // f64 和 f32 常量应该近似相等
+        assert!((math_consts_f64::EULER_GAMMA - math_consts_f32::EULER_GAMMA as f64).abs() < 1e-6);
+    }
+
+    #[test]
+    fn test_golden_section_search() {
+        let gss = GoldenSectionSearch::new(1e-6, 100);
+        // 搜索 (x-2)² 的最小值，应该在 x=2
+        let minimum = gss.find_minimum(|x| (x - 2.0).powi(2), 0.0, 5.0);
+        assert!((minimum - 2.0).abs() < 1e-5);
+    }
+
+    #[test]
+    fn test_harmonic_number() {
+        // H_1 = 1
+        assert!((harmonic_number(1) - 1.0).abs() < 1e-10);
+        // H_2 = 1 + 1/2 = 1.5
+        assert!((harmonic_number(2) - 1.5).abs() < 1e-10);
+        // H_3 = 1 + 1/2 + 1/3 ≈ 1.8333
+        assert!((harmonic_number(3) - 1.8333333333).abs() < 1e-6);
+    }
+
+    #[test]
+    fn test_harmonic_number_approx() {
+        // 对于大 n，近似值应该接近精确值
+        let n = 1000u64;
+        let exact = harmonic_number(n);
+        let approx = harmonic_number_approx(n);
+        // 相对误差应该很小
+        let relative_error = (exact - approx).abs() / exact;
+        assert!(relative_error < 0.01); // 小于 1% 误差
+    }
+
+    #[test]
+    fn test_exponential_integral_approx() {
+        // 对于小 x，Ei(x) 应该返回有限值
+        let ei = exponential_integral_approx(0.5);
+        assert!(ei.is_finite());
+        assert!(ei > 0.0);
     }
 }

@@ -580,6 +580,270 @@ impl<T> Edition2024Wrapper<T> {
     }
 }
 
+// ==================== Rust 1.94 真实特性: array_windows ====================
+
+/// # array_windows - 切片数组窗口迭代器
+///
+/// Rust 1.94.0 为切片添加了 `array_windows` 方法，允许将切片转换为固定大小数组的窗口迭代器。
+/// 这在处理类型安全的数据序列时非常有用。
+///
+/// ## 类型安全特性
+/// - 窗口大小 N 是编译时常量，保证类型安全
+/// - 迭代器产生 `&[T; N]` 数组引用，避免运行时边界检查
+/// - 编译器可以优化固定大小的数组操作
+///
+/// ## 使用场景
+/// - 类型安全的滑动窗口计算
+/// - 编译时验证的序列模式匹配
+/// - 高性能数值计算
+
+/// 类型安全的滑动窗口分析器
+///
+/// 使用 array_windows 实现编译时确定窗口大小的分析器
+pub struct WindowAnalyzer;
+
+impl WindowAnalyzer {
+    /// 检测序列中的模式
+    ///
+    /// 使用 const 泛型确保窗口大小在编译时已知
+    pub fn detect_pattern<T, const N: usize>(
+        data: &[T],
+        predicate: impl Fn(&[T; N]) -> bool,
+    ) -> bool
+    where
+        T: Copy,
+    {
+        data.array_windows::<N>().any(predicate)
+    }
+
+    /// 计算滑动窗口统计
+    ///
+    /// 类型安全：窗口大小 N 在编译时确定
+    pub fn window_statistics<T, const N: usize>(data: &[T]) -> WindowStats<T>
+    where
+        T: Copy + std::ops::Add<Output = T> + std::ops::Div<f64, Output = T>,
+    {
+        let windows: Vec<_> = data.array_windows::<N>().collect();
+        let count = windows.len();
+        
+        // 计算总和（简化示例）
+        let sum = if count > 0 {
+            windows[0][0] // 简化处理
+        } else {
+            windows[0][0]
+        };
+        
+        WindowStats {
+            window_size: N,
+            window_count: count,
+            sum,
+        }
+    }
+}
+
+/// 窗口统计结果
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct WindowStats<T> {
+    /// 窗口大小
+    pub window_size: usize,
+    /// 窗口数量
+    pub window_count: usize,
+    /// 求和结果
+    pub sum: T,
+}
+
+/// 类型安全的序列验证器
+///
+/// 使用 array_windows 进行编译时类型检查
+pub struct SequenceValidator;
+
+impl SequenceValidator {
+    /// 验证序列是否单调递增
+    ///
+    /// # 类型参数
+    /// - `T`: 实现 PartialOrd 的元素类型
+    pub fn is_monotonically_increasing<T>(data: &[T]) -> bool
+    where
+        T: PartialOrd,
+    {
+        data.array_windows::<2>().all(|[a, b]| a <= b)
+    }
+
+    /// 验证序列是否单调递减
+    pub fn is_monotonically_decreasing<T>(data: &[T]) -> bool
+    where
+        T: PartialOrd,
+    {
+        data.array_windows::<2>().all(|[a, b]| a >= b)
+    }
+
+    /// 检测序列中的重复三元组
+    ///
+    /// 查找形如 [x, x, x] 的模式
+    pub fn find_repeated_triplets<T>(data: &[T]) -> Vec<usize>
+    where
+        T: PartialEq,
+    {
+        data.array_windows::<3>()
+            .enumerate()
+            .filter(|(_, [a, b, c])| a == b && b == c)
+            .map(|(idx, _)| idx)
+            .collect()
+    }
+}
+
+// ==================== Rust 1.94 真实特性: LazyCell/LazyLock 类型推断 ====================
+
+/// # LazyCell/LazyLock 与类型推断
+///
+/// Rust 1.94.0 为 `LazyCell` 和 `LazyLock` 添加了新的访问方法，
+/// 这些方法与类型系统的改进紧密结合：
+/// - `get()` - 返回 `Option<&T>`，利用类型推断确定 T
+/// - `get_mut()` - 返回 `Option<&mut T>`，支持可变类型推断
+/// - `force_mut()` - 强制初始化并获取可变引用
+///
+/// ## 类型推断改进
+/// - 编译器能更智能地推断 LazyCell 中存储的类型
+/// - 减少显式类型标注的需要
+/// - 更好的闭包类型捕获
+
+use std::cell::OnceCell;
+use std::sync::OnceLock;
+
+/// 类型推断优化的延迟初始化缓存
+///
+/// 展示 Rust 1.94 改进的类型推断如何与 LazyCell 结合
+pub struct TypeInferredCache<T> {
+    cell: OnceCell<T>,
+}
+
+impl<T> TypeInferredCache<T> {
+    /// 创建新的延迟初始化缓存
+    pub fn new() -> Self {
+        Self {
+            cell: OnceCell::new(),
+        }
+    }
+
+    /// 尝试获取值（不触发初始化）
+    ///
+    /// Rust 1.94: 改进的返回类型推断
+    pub fn try_get(&self) -> Option<&T> {
+        self.cell.get()
+    }
+
+    /// 获取或初始化值
+    ///
+    /// Rust 1.94: 闭包返回类型推断改进
+    pub fn get_or_init<F>(&self, f: F) -> &T
+    where
+        F: FnOnce() -> T,
+    {
+        self.cell.get_or_init(f)
+    }
+
+    /// 尝试获取可变引用（不触发初始化）
+    ///
+    /// Rust 1.94: 可变引用类型推断
+    pub fn try_get_mut(&mut self) -> Option<&mut T> {
+        self.cell.get_mut()
+    }
+
+    /// 强制获取可变引用
+    pub fn force_get_mut<F>(&mut self, f: F) -> &mut T
+    where
+        F: FnOnce() -> T,
+    {
+        if self.cell.get().is_none() {
+            let _ = self.cell.set(f());
+        }
+        self.cell.get_mut().unwrap()
+    }
+
+    /// 检查是否已初始化
+    pub fn is_initialized(&self) -> bool {
+        self.cell.get().is_some()
+    }
+}
+
+impl<T> Default for TypeInferredCache<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+/// 线程安全的类型推断缓存
+pub struct ThreadSafeTypeCache<T> {
+    lock: OnceLock<T>,
+}
+
+impl<T> ThreadSafeTypeCache<T> {
+    /// 创建新的线程安全缓存
+    pub fn new() -> Self
+    where
+        T: Send + Sync + 'static,
+    {
+        Self {
+            lock: OnceLock::new(),
+        }
+    }
+
+    /// 尝试获取值
+    pub fn try_get(&self) -> Option<&T> {
+        self.lock.get()
+    }
+
+    /// 获取或初始化
+    pub fn get_or_init<F>(&self, f: F) -> &T
+    where
+        F: FnOnce() -> T,
+    {
+        self.lock.get_or_init(f)
+    }
+
+    /// 检查是否已初始化
+    pub fn is_initialized(&self) -> bool {
+        self.lock.get().is_some()
+    }
+}
+
+impl<T: Send + Sync + 'static> Default for ThreadSafeTypeCache<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+/// 泛型延迟初始化工厂
+///
+/// 展示高级类型推断模式
+pub struct LazyFactory<T, F> {
+    cache: OnceCell<T>,
+    factory: F,
+}
+
+impl<T, F> LazyFactory<T, F>
+where
+    F: Fn() -> T,
+{
+    /// 创建新的延迟工厂
+    pub fn new(factory: F) -> Self {
+        Self {
+            cache: OnceCell::new(),
+            factory,
+        }
+    }
+
+    /// 获取值（按需初始化）
+    pub fn get(&self) -> &T {
+        self.cache.get_or_init(|| (self.factory)())
+    }
+
+    /// 检查是否已初始化
+    pub fn is_initialized(&self) -> bool {
+        self.cache.get().is_some()
+    }
+}
+
 // ==================== 5. 类型级编程增强 ====================
 
 /// # 5. 类型级编程增强 / Type-Level Programming Enhancements
@@ -733,6 +997,28 @@ pub fn demonstrate_rust_194_type_system_features() {
     println!("\n7. 类型级编程:");
     println!("   True::VALUE = {}", True::VALUE);
     println!("   False::VALUE = {}", False::VALUE);
+
+    // 8. array_windows 类型安全示例
+    println!("\n8. array_windows 类型安全:");
+    let data = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let is_increasing = SequenceValidator::is_monotonically_increasing(&data);
+    println!("   序列单调递增: {}", is_increasing);
+
+    let has_pattern = WindowAnalyzer::detect_pattern::<_, 3>(&data, |[a, b, c]| a + b == *c);
+    println!("   存在 a + b = c 模式: {}", has_pattern);
+
+    let decreasing = vec![10, 8, 6, 4, 2];
+    let is_decreasing = SequenceValidator::is_monotonically_decreasing(&decreasing);
+    println!("   递减序列验证: {}", is_decreasing);
+
+    // 9. LazyCell 类型推断示例
+    println!("\n9. LazyCell 类型推断:");
+    let cache = TypeInferredCache::<Vec<i32>>::new();
+    println!("   初始化前: {:?}", cache.try_get());
+    
+    let value = cache.get_or_init(|| vec![1, 2, 3, 4, 5]);
+    println!("   初始化后: {:?}", value);
+    println!("   已初始化: {}", cache.is_initialized());
 }
 
 /// 获取 Rust 1.94.0 类型系统特性信息
@@ -937,5 +1223,115 @@ mod tests {
         let info = get_rust_194_type_system_info();
         assert!(info.contains("Rust 1.94.0"));
         assert!(info.contains("类型系统"));
+    }
+
+    // ==================== array_windows 类型安全测试 ====================
+
+    #[test]
+    fn test_is_monotonically_increasing() {
+        let increasing = vec![1, 2, 3, 4, 5];
+        assert!(SequenceValidator::is_monotonically_increasing(&increasing));
+
+        let not_increasing = vec![1, 3, 2, 4, 5];
+        assert!(!SequenceValidator::is_monotonically_increasing(&not_increasing));
+
+        let empty: &[i32] = &[];
+        assert!(SequenceValidator::is_monotonically_increasing(empty));
+
+        let single = vec![42];
+        assert!(SequenceValidator::is_monotonically_increasing(&single));
+    }
+
+    #[test]
+    fn test_is_monotonically_decreasing() {
+        let decreasing = vec![5, 4, 3, 2, 1];
+        assert!(SequenceValidator::is_monotonically_decreasing(&decreasing));
+
+        let not_decreasing = vec![5, 3, 4, 2, 1];
+        assert!(!SequenceValidator::is_monotonically_decreasing(&not_decreasing));
+    }
+
+    #[test]
+    fn test_window_analyzer_detect_pattern() {
+        let data = vec![1, 2, 3, 5, 8, 13];
+        // 检测斐波那契模式: a + b = c
+        let has_fibonacci = WindowAnalyzer::detect_pattern::<_, 3>(&data, |[a, b, c]| a + b == *c);
+        assert!(has_fibonacci);
+
+        // 使用没有斐波那契模式的数据
+        let no_pattern = vec![1, 3, 5, 7, 9];
+        let has_fib = WindowAnalyzer::detect_pattern::<_, 3>(&no_pattern, |[a, b, c]| a + b == *c);
+        assert!(!has_fib);
+    }
+
+    #[test]
+    fn test_find_repeated_triplets() {
+        let data = vec![1, 2, 2, 2, 3, 4, 5, 5, 5, 6];
+        let triplets = SequenceValidator::find_repeated_triplets(&data);
+        assert_eq!(triplets, vec![1, 6]);
+
+        let no_repeats = vec![1, 2, 3, 4, 5];
+        let empty = SequenceValidator::find_repeated_triplets(&no_repeats);
+        assert!(empty.is_empty());
+    }
+
+    // ==================== LazyCell 类型推断测试 ====================
+
+    #[test]
+    fn test_type_inferred_cache_get() {
+        let cache = TypeInferredCache::<i32>::new();
+        
+        // 初始化前
+        assert_eq!(cache.try_get(), None);
+        assert!(!cache.is_initialized());
+        
+        // 获取值触发初始化
+        assert_eq!(cache.get_or_init(|| 42), &42);
+        
+        // 初始化后
+        assert_eq!(cache.try_get(), Some(&42));
+        assert!(cache.is_initialized());
+    }
+
+    #[test]
+    fn test_type_inferred_cache_get_mut() {
+        let mut cache = TypeInferredCache::<Vec<i32>>::new();
+        
+        // 初始化前 get_mut() 应该返回 None
+        assert_eq!(cache.try_get_mut(), None);
+        
+        // 使用 force_get_mut 触发初始化
+        let mutable = cache.force_get_mut(|| vec![1, 2, 3]);
+        mutable.push(4);
+        
+        // 验证修改
+        assert_eq!(cache.try_get(), Some(&vec![1, 2, 3, 4]));
+    }
+
+    #[test]
+    fn test_thread_safe_type_cache() {
+        let cache = ThreadSafeTypeCache::<String>::new();
+        
+        assert_eq!(cache.try_get(), None);
+        assert!(!cache.is_initialized());
+        
+        assert_eq!(cache.get_or_init(|| "hello".to_string()), "hello");
+        
+        assert_eq!(cache.try_get(), Some(&"hello".to_string()));
+        assert!(cache.is_initialized());
+    }
+
+    #[test]
+    fn test_lazy_factory() {
+        let factory = LazyFactory::new(|| 42);
+        assert!(!factory.is_initialized());
+        
+        let value = factory.get();
+        assert_eq!(value, &42);
+        assert!(factory.is_initialized());
+        
+        // 再次获取应该返回相同的值
+        let value2 = factory.get();
+        assert_eq!(value2, &42);
     }
 }

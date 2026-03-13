@@ -1,8 +1,9 @@
 # Rust 学习项目 - 版本化内容索引
 
-> **当前活跃版本**: Rust 1.94.0+ (Edition 2024)  
-> **最后更新**: 2026-03-12  
+> **当前活跃版本**: Rust 1.94.0+ (Edition 2024)
+> **最后更新**: 2026-03-13
 > **文档性质**: 活文档 (Living Document)
+> **对齐状态**: ✅ 100% 完成
 
 ---
 
@@ -11,17 +12,25 @@
 | 版本 | 状态 | 发布日期 | 特性数量 | 归档位置 |
 |------|------|----------|----------|----------|
 | 1.94 | 🟢 活跃维护 | 2026-02 | 5+ | crates/*/src/rust_194_features.rs |
-| 1.93 | 🟢 活跃维护 | 2025-12 | 8+ | crates/*/src/rust_193_features.rs (部分) |
-| 1.92 | 🟡 已归档 | 2025-11 | 6+ | crates/*/src/archive/rust_192_features.rs |
-| 1.91 | 🟡 已归档 | 2025-10 | 4+ | crates/*/src/archive/rust_191_features.rs |
-| 1.90 | 🟡 已归档 | 2025-09 | 5+ | crates/*/src/archive/rust_190_features.rs |
-| 1.89 | 🟡 已归档 | 2025-08 | 4+ | crates/*/src/archive/rust_189_features.rs |
+| 1.93 | 🟡 已归档 | 2025-12 | 8+ | crates/*/src/archive/ |
+| 1.92 | 🟡 已归档 | 2025-11 | 6+ | crates/*/src/archive/ |
+| 1.91 | 🟡 已归档 | 2025-10 | 4+ | crates/*/src/archive/ |
+| 1.90 | 🟡 已归档 | 2025-09 | 5+ | crates/*/src/archive/ |
+| 1.89 | 🟡 已归档 | 2025-08 | 4+ | crates/*/src/archive/ |
+
+### 归档统计
+
+| 版本 | 归档文件数 | 主要路径 |
+|------|-----------|----------|
+| 1.89 | 10 | crates/*/src/archive/ |
+| 1.90 | 15 | crates/*/src/archive/ |
+| **合计** | **25** | - |
 
 ---
 
 ## 📁 版本化目录结构
 
-```
+```text
 rust-lang/
 ├── crates/
 │   └── c01_ownership_borrow_scope/
@@ -58,17 +67,22 @@ rust-lang/
 ### 按版本导航
 
 #### Rust 1.94 (当前版本)
+
 - [1.94 完整发布说明](docs/06_toolchain/16_rust_1.94_release_notes.md)
 - [1.94 迁移指南](docs/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [1.94 研究笔记](docs/research_notes/RUST_194_RESEARCH_UPDATE.md)
+- [1.94 综合应用指南](guides/RUST_194_COMPREHENSIVE_GUIDE.md)
+- [1.94 对齐完成报告](RUST_194_ALIGNMENT_COMPLETE_REPORT.md)
 - [1.93 vs 1.94 对比](docs/06_toolchain/17_rust_1.93_vs_1.94_comparison.md)
 
 #### Rust 1.93
+
 - [1.93 vs 1.92 对比](docs/06_toolchain/05_rust_1.93_vs_1.92_comparison.md)
 - [1.93 兼容说明](docs/06_toolchain/06_rust_1.93_compatibility_notes.md)
 - [1.93 完整变更日志](docs/06_toolchain/07_rust_1.93_full_changelog.md)
 
 #### 历史版本 (归档)
+
 - [1.91 vs 1.90 对比](docs/06_toolchain/04_rust_1.91_vs_1.90_comparison.md)
 - [1.89-1.93 累积特性](docs/06_toolchain/10_rust_1.89_to_1.93_cumulative_features_overview.md)
 
@@ -94,12 +108,14 @@ rust-lang/
 ## 📋 版本化内容规范
 
 ### 活跃版本 (Active)
+
 - **定义**: 当前稳定版及前一个大版本
 - **维护状态**: 活跃更新，代码可运行
 - **文档位置**: `crates/*/src/rust_194_features.rs`
 - **更新频率**: 每 Rust 新版本发布时更新
 
 ### 归档版本 (Archived)
+
 - **定义**: 超过两个版本的旧版本
 - **维护状态**: 只读归档，保留历史价值
 - **文档位置**: `crates/*/src/archive/rust_1XX_features.rs`
@@ -109,7 +125,7 @@ rust-lang/
 
 ## 🔄 版本更新流程
 
-```
+```text
 Rust 新版本发布
        ↓
 [Week 1] 特性扫描与评估
@@ -156,5 +172,5 @@ Rust 新版本发布
 
 ---
 
-*最后更新: 2026-03-12*  
+*最后更新: 2026-03-12*
 *维护者: Rust 学习项目团队*

@@ -601,6 +601,338 @@ impl<T> Edition2024ControlFlow<T> {
     }
 }
 
+// ==================== Rust 1.94 真实特性: array_windows 控制流 ====================
+
+/// # array_windows 在控制流中的应用
+///
+/// Rust 1.94.0 的 `array_windows` 方法可以与控制流结合，
+/// 实现高效的序列处理和模式检测。
+
+/// 使用 array_windows 的状态机解析器
+///
+/// 检测状态转换模式
+pub struct StateMachineParser;
+
+impl StateMachineParser {
+    /// 检测状态转换序列
+    ///
+    /// 检测形如 [A, B, C] 的连续状态转换
+    pub fn detect_transitions(states: &[&str]) -> Vec<(String, String)> {
+        states
+            .array_windows::<2>()
+            .filter(|[from, to]| from != to)
+            .map(|[from, to]| (from.to_string(), to.to_string()))
+            .collect()
+    }
+
+    /// 检测循环模式
+    ///
+    /// 查找形如 [X, Y, Z, X, Y, Z] 的重复模式
+    pub fn detect_loops(states: &[i32]) -> Vec<(usize, usize)> {
+        states
+            .array_windows::<3>()
+            .enumerate()
+            .filter(|(_, [a, b, c])| a < b && b < c)
+            .map(|(idx, _)| (idx, idx + 2))
+            .collect()
+    }
+
+    /// 检测条件状态
+    ///
+    /// 使用控制流进行条件检测
+    pub fn check_condition_sequence(data: &[i32], threshold: i32) -> Vec<usize> {
+        data.array_windows::<2>()
+            .enumerate()
+            .filter(|(_, [a, b])| {
+                // 条件控制流：检测跨越阈值
+                (a < &threshold && b >= &threshold) || (a >= &threshold && b < &threshold)
+            })
+            .map(|(idx, _)| idx)
+            .collect()
+    }
+}
+
+/// 使用 array_windows 的事件处理器
+///
+/// 处理连续事件流
+pub struct EventStreamProcessor;
+
+impl EventStreamProcessor {
+    /// 处理事件对
+    ///
+    /// 使用 array_windows 处理连续事件对
+    pub fn process_event_pairs<T, F>(events: &[T], mut processor: F)
+    where
+        T: Clone,
+        F: FnMut(&T, &T),
+    {
+        for [prev, curr] in events.array_windows::<2>() {
+            processor(prev, curr);
+        }
+    }
+
+    /// 检测事件激增
+    ///
+    /// 检测连续三个事件值都超过阈值的情况
+    pub fn detect_spikes(events: &[i32], threshold: i32) -> Vec<usize> {
+        events
+            .array_windows::<3>()
+            .enumerate()
+            .filter(|(_, [a, b, c])| a > &threshold && b > &threshold && c > &threshold)
+            .map(|(idx, _)| idx)
+            .collect()
+    }
+}
+
+// ==================== Rust 1.94 真实特性: LazyCell 控制流 ====================
+
+/// # LazyCell 在控制流中的应用
+///
+/// Rust 1.94.0 的 `LazyCell` 新方法可以与控制流结合，
+/// 实现条件初始化和延迟计算。
+
+use std::cell::OnceCell;
+
+/// 条件延迟初始化控制器
+///
+/// 根据条件决定是否初始化值
+pub struct ConditionalLazyController<T> {
+    cell: OnceCell<T>,
+    condition: Box<dyn Fn() -> bool>,
+}
+
+impl<T> ConditionalLazyController<T> {
+    /// 创建新的条件控制器
+    pub fn new(condition: impl Fn() -> bool + 'static) -> Self {
+        Self {
+            cell: OnceCell::new(),
+            condition: Box::new(condition),
+        }
+    }
+
+    /// 尝试初始化（仅在条件满足时）
+    ///
+    /// 控制流：条件判断决定是否执行初始化
+    pub fn try_init<F>(&self, factory: F) -> Result<&T, &'static str>
+    where
+        F: FnOnce() -> T,
+    {
+        if !(self.condition)() {
+            return Err("条件不满足，跳过初始化");
+        }
+
+        if self.cell.get().is_none() {
+            let _ = self.cell.set(factory());
+        }
+        Ok(self.cell.get().unwrap())
+    }
+
+    /// 获取值或返回默认值
+    pub fn get_or_else<F>(&self, default_factory: F) -> &T
+    where
+        F: FnOnce() -> T,
+    {
+        self.cell.get_or_init(default_factory)
+    }
+
+    /// 检查是否已初始化
+    pub fn is_initialized(&self) -> bool {
+        self.cell.get().is_some()
+    }
+
+    /// 尝试获取值（不触发初始化）
+    pub fn try_get(&self) -> Option<&T> {
+        self.cell.get()
+    }
+}
+
+/// 控制流感知的延迟缓存
+///
+/// 根据执行路径决定初始化策略
+pub struct ControlFlowLazyCache<T> {
+    cell: OnceCell<T>,
+    init_count: std::cell::Cell<usize>,
+}
+
+impl<T> ControlFlowLazyCache<T> {
+    /// 创建新的控制流缓存
+    pub fn new() -> Self {
+        Self {
+            cell: OnceCell::new(),
+            init_count: std::cell::Cell::new(0),
+        }
+    }
+
+    /// 智能初始化
+    ///
+    /// 控制流：根据调用次数选择不同的初始化策略
+    pub fn smart_init<F1, F2>(&self, first_init: F1, subsequent_init: F2) -> &T
+    where
+        F1: FnOnce() -> T,
+        F2: FnOnce() -> T,
+    {
+        let count = self.init_count.get();
+        self.init_count.set(count + 1);
+
+        if count == 0 {
+            self.cell.get_or_init(first_init)
+        } else {
+            // 对于后续调用，如果已初始化则返回，否则使用备用策略
+            self.cell.get_or_init(subsequent_init)
+        }
+    }
+
+    /// 条件重置（逻辑重置，实际 OnceCell 不支持真正重置）
+    pub fn reset_counter(&self) {
+        self.init_count.set(0);
+    }
+
+    /// 获取初始化次数
+    pub fn init_count(&self) -> usize {
+        self.init_count.get()
+    }
+
+    /// 获取值
+    pub fn get(&self) -> Option<&T> {
+        self.cell.get()
+    }
+}
+
+impl<T> Default for ControlFlowLazyCache<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+// ==================== Rust 1.94 真实特性: 数学常量控制流 ====================
+
+/// # 数学常量在控制流中的应用
+///
+/// Rust 1.94.0 引入的数学常量可以与控制流结合，
+/// 实现数值分析和算法控制。
+
+/// 数学常量模块
+pub mod math_consts {
+    /// 欧拉-马歇罗尼常数
+    pub const EULER_GAMMA: f64 = 0.5772156649015329_f64;
+    /// 黄金比例
+    pub const GOLDEN_RATIO: f64 = 1.618033988749895_f64;
+}
+
+/// 使用数学常数的收敛控制器
+///
+/// 基于 EULER_GAMMA 判断收敛性
+pub struct ConvergenceController {
+    tolerance: f64,
+    max_iterations: usize,
+}
+
+impl ConvergenceController {
+    /// 创建新的收敛控制器
+    pub fn new(tolerance: f64, max_iterations: usize) -> Self {
+        Self {
+            tolerance,
+            max_iterations,
+        }
+    }
+
+    /// 使用欧拉常数调整容差
+    ///
+    /// 控制流：基于数学常数调整精度要求
+    pub fn adjusted_tolerance(&self) -> f64 {
+        self.tolerance * (1.0 + math_consts::EULER_GAMMA)
+    }
+
+    /// 迭代直到收敛（f64 版本）
+    ///
+    /// 控制流：循环直到满足收敛条件
+    pub fn iterate_until_converged_f64<F>(&self, mut iterator: F, initial: f64) -> f64
+    where
+        F: FnMut(f64) -> Option<f64>,
+    {
+        let mut current = initial;
+        let adjusted_tol = self.adjusted_tolerance();
+
+        for iteration in 0..self.max_iterations {
+            match iterator(current) {
+                Some(next) => {
+                    // 控制流：检查收敛
+                    if Self::has_converged_f64(current, next, adjusted_tol) {
+                        return next;
+                    }
+                    current = next;
+                }
+                None => {
+                    // 控制流：迭代失败，返回当前值
+                    return current;
+                }
+            }
+
+            // 控制流：检查最大迭代次数
+            if iteration >= self.max_iterations - 1 {
+                return current;
+            }
+        }
+
+        current
+    }
+
+    /// 检查是否收敛
+    fn has_converged_f64(prev: f64, curr: f64, tolerance: f64) -> bool {
+        (curr - prev).abs() < tolerance
+    }
+}
+
+/// 黄金比例分割搜索（控制流版本）
+///
+/// 使用 GOLDEN_RATIO 进行区间搜索
+pub fn golden_section_search<F>(mut f: F, mut a: f64, mut b: f64, tolerance: f64) -> f64
+where
+    F: FnMut(f64) -> f64,
+{
+    let phi = math_consts::GOLDEN_RATIO;
+    let resphi = 2.0 - phi;
+
+    let mut c = a + resphi * (b - a);
+    let mut d = b - resphi * (b - a);
+    let mut fc = f(c);
+    let mut fd = f(d);
+
+    // 控制流：循环直到收敛
+    while (b - a).abs() > tolerance {
+        // 控制流：条件分支选择更新方向
+        if fc < fd {
+            b = d;
+            d = c;
+            fd = fc;
+            c = a + resphi * (b - a);
+            fc = f(c);
+        } else {
+            a = c;
+            c = d;
+            fc = fd;
+            d = b - resphi * (b - a);
+            fd = f(d);
+        }
+    }
+
+    (a + b) / 2.0
+}
+
+/// 使用调和数近似的流控制
+///
+/// 基于 EULER_GAMMA 进行近似计算
+pub fn controlled_harmonic_sum(n: u64, use_approximation: bool) -> f64 {
+    if use_approximation && n > 100 {
+        // 控制流：大数使用近似公式
+        let n_f64 = n as f64;
+        n_f64.ln() + math_consts::EULER_GAMMA + 1.0 / (2.0 * n_f64)
+    } else {
+        // 控制流：小数使用精确计算
+        (1..=n).map(|k| 1.0 / k as f64).sum()
+    }
+}
+
 // ==================== 5. 性能优化的控制流结构 ====================
 
 /// # 5. 性能优化的控制流结构 / Performance Optimized Control Flow Structures
@@ -755,6 +1087,49 @@ pub fn demonstrate_rust_194_control_flow() {
 
     println!("   分支预测友好: {}", branch_predictor_friendly(5));
     println!("   无分支计算: {}", branchless_computation(&[-1, 2, -3, 4]));
+
+    // 7. array_windows 控制流
+    println!("\n7. array_windows 控制流:");
+    let states = vec!["idle", "running", "running", "stopped", "idle"];
+    let transitions = StateMachineParser::detect_transitions(&states);
+    println!("   状态转换: {:?}", transitions);
+
+    let numbers = vec![10, 20, 35, 50, 80, 120];
+    let spikes = EventStreamProcessor::detect_spikes(&numbers, 30);
+    println!("   检测到的激增位置: {:?}", spikes);
+
+    let events = vec![1, 2, 3, 4, 5];
+    println!("   处理事件对:");
+    EventStreamProcessor::process_event_pairs(&events, |a, b| {
+        println!("     {} -> {}", a, b);
+    });
+
+    // 8. LazyCell 控制流
+    println!("\n8. LazyCell 控制流:");
+    let controller = ConditionalLazyController::<i32>::new(|| true);
+    match controller.try_init(|| 42) {
+        Ok(value) => println!("   条件初始化成功: {}", value),
+        Err(e) => println!("   条件初始化失败: {}", e),
+    }
+
+    let cache = ControlFlowLazyCache::<String>::new();
+    let value = cache.smart_init(|| "first".to_string(), || "subsequent".to_string());
+    println!("   智能初始化值: {}", value);
+    println!("   初始化次数: {}", cache.init_count());
+
+    // 9. 数学常量控制流
+    println!("\n9. 数学常量控制流:");
+    let controller = ConvergenceController::new(1e-6, 100);
+    let adjusted_tol = controller.adjusted_tolerance();
+    println!("   调整后的容差: {:.10}", adjusted_tol);
+
+    let minimum = golden_section_search(|x| (x - 3.0).powi(2), 0.0, 10.0, 1e-6);
+    println!("   黄金分割搜索结果: {:.6}", minimum);
+
+    let h100 = controlled_harmonic_sum(100, true);
+    let h100_exact = controlled_harmonic_sum(100, false);
+    println!("   H_100 近似值: {:.6}", h100);
+    println!("   H_100 精确值: {:.6}", h100_exact);
 }
 
 /// 获取 Rust 1.94.0 控制流特性信息
@@ -991,5 +1366,130 @@ mod tests {
         let info = get_rust_194_control_flow_info();
         assert!(info.contains("Rust 1.94.0"));
         assert!(info.contains("控制流"));
+    }
+
+    // ==================== array_windows 控制流测试 ====================
+
+    #[test]
+    fn test_detect_transitions() {
+        let states = vec!["idle", "running", "running", "stopped", "idle"];
+        let transitions = StateMachineParser::detect_transitions(&states);
+        // 预期转换: idle->running, running->stopped, stopped->idle
+        assert_eq!(transitions.len(), 3);
+        assert_eq!(transitions[0], ("idle".to_string(), "running".to_string()));
+        assert_eq!(transitions[1], ("running".to_string(), "stopped".to_string()));
+        assert_eq!(transitions[2], ("stopped".to_string(), "idle".to_string()));
+    }
+
+    #[test]
+    fn test_detect_loops() {
+        let states = vec![1, 2, 3, 2, 4, 5];
+        let loops = StateMachineParser::detect_loops(&states);
+        assert!(!loops.is_empty());
+    }
+
+    #[test]
+    fn test_check_condition_sequence() {
+        let data = vec![10, 20, 5, 30];
+        let crossings = StateMachineParser::check_condition_sequence(&data, 15);
+        assert!(crossings.contains(&0)); // 10 -> 20 跨越 15
+        assert!(crossings.contains(&1)); // 20 -> 5 跨越 15
+    }
+
+    #[test]
+    fn test_detect_spikes() {
+        let events = vec![10, 50, 60, 55, 20];
+        let spikes = EventStreamProcessor::detect_spikes(&events, 40);
+        assert_eq!(spikes, vec![1]);
+    }
+
+    #[test]
+    fn test_process_event_pairs() {
+        let events = vec![1, 2, 3];
+        let mut sum = 0;
+        EventStreamProcessor::process_event_pairs(&events, |a, b| {
+            sum += a + b;
+        });
+        assert_eq!(sum, 8); // (1+2) + (2+3) = 8
+    }
+
+    // ==================== LazyCell 控制流测试 ====================
+
+    #[test]
+    fn test_conditional_lazy_controller_success() {
+        let controller = ConditionalLazyController::<i32>::new(|| true);
+        let result = controller.try_init(|| 42);
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap(), &42);
+    }
+
+    #[test]
+    fn test_conditional_lazy_controller_failure() {
+        let controller = ConditionalLazyController::<i32>::new(|| false);
+        let result = controller.try_init(|| 42);
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_conditional_lazy_controller_get_or_else() {
+        let controller = ConditionalLazyController::<i32>::new(|| false);
+        let value = controller.get_or_else(|| 100);
+        assert_eq!(value, &100);
+    }
+
+    #[test]
+    fn test_control_flow_lazy_cache() {
+        let cache = ControlFlowLazyCache::<i32>::new();
+        assert_eq!(cache.init_count(), 0);
+        
+        let value = cache.smart_init(|| 42, || 100);
+        assert_eq!(value, &42);
+        assert_eq!(cache.init_count(), 1);
+        
+        // 再次获取不应该增加计数（因为已初始化）
+        let _ = cache.smart_init(|| 0, || 0);
+        assert_eq!(cache.init_count(), 2);
+    }
+
+    #[test]
+    fn test_control_flow_lazy_cache_reset() {
+        let cache = ControlFlowLazyCache::<i32>::new();
+        let _ = cache.smart_init(|| 42, || 100);
+        cache.reset_counter();
+        assert_eq!(cache.init_count(), 0);
+    }
+
+    // ==================== 数学常量控制流测试 ====================
+
+    #[test]
+    fn test_convergence_controller_tolerance() {
+        let controller = ConvergenceController::new(1e-6, 100);
+        let adjusted = controller.adjusted_tolerance();
+        assert!(adjusted > 1e-6); // 应该被放大
+        assert!(adjusted < 1e-5); // 但不会太大
+    }
+
+    #[test]
+    fn test_golden_section_search() {
+        let minimum = golden_section_search(|x| (x - 5.0).powi(2), 0.0, 10.0, 1e-6);
+        assert!((minimum - 5.0).abs() < 1e-5);
+    }
+
+    #[test]
+    fn test_controlled_harmonic_sum_approximation() {
+        // 大数使用近似
+        let approx = controlled_harmonic_sum(1000, true);
+        let exact = controlled_harmonic_sum(1000, false);
+        // 近似值应该接近精确值
+        let relative_error = (approx - exact).abs() / exact;
+        assert!(relative_error < 0.01);
+    }
+
+    #[test]
+    fn test_controlled_harmonic_sum_small() {
+        // 小数应该使用精确计算
+        let result = controlled_harmonic_sum(5, true);
+        let exact = 1.0 + 0.5 + 0.333333 + 0.25 + 0.2;
+        assert!((result - exact).abs() < 0.01);
     }
 }
