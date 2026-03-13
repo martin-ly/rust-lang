@@ -55,9 +55,9 @@
 use std::collections::{BinaryHeap, HashMap, VecDeque};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use tokio::sync::{mpsc, Mutex, RwLock};
+use tokio::sync::{Mutex, RwLock, mpsc};
 use tokio::time::sleep;
-use tracing::{info, warn, error, debug, instrument, span, Level};
+use tracing::{Level, debug, error, info, instrument, span, warn};
 
 // ============================================================================
 // 第一部分: Reactor 模式理论形式化
@@ -199,12 +199,7 @@ pub struct Event {
 impl Event {
     /// 创建新事件
     /// Create new event
-    pub fn new(
-        id: u64,
-        event_type: EventType,
-        priority: Priority,
-        data: Vec<u8>,
-    ) -> Self {
+    pub fn new(id: u64, event_type: EventType, priority: Priority, data: Vec<u8>) -> Self {
         Self {
             id,
             event_type,
@@ -229,7 +224,8 @@ impl Ord for Event {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // 优先级高的排在前面
         // Higher priority comes first
-        self.priority.cmp(&other.priority)
+        self.priority
+            .cmp(&other.priority)
             .then_with(|| other.timestamp.cmp(&self.timestamp)) // 时间早的排在前面
     }
 }
@@ -407,11 +403,7 @@ impl Reactor {
     /// - `event_type`: 事件类型 (Event type)
     /// - `handler`: 事件处理器 (Event handler)
     #[instrument(skip(self, handler))]
-    pub async fn register_handler(
-        &self,
-        event_type: EventType,
-        handler: Arc<dyn EventHandler>,
-    ) {
+    pub async fn register_handler(&self, event_type: EventType, handler: Arc<dyn EventHandler>) {
         let mut handlers = self.handlers.write().await;
         info!(
             event_type = ?event_type,
@@ -607,7 +599,8 @@ impl Reactor {
                         event_queue,
                         fifo_queue,
                         config,
-                    ).await
+                    )
+                    .await
                 })
             })
             .collect();
@@ -667,7 +660,7 @@ impl Reactor {
                         let elapsed = start.elapsed().as_micros() as u64;
                         stats.avg_processing_time_us =
                             (stats.avg_processing_time_us * (stats.events_processed - 1) + elapsed)
-                            / stats.events_processed;
+                                / stats.events_processed;
                     }
                     HandleResult::Failed(reason) => {
                         error!(
@@ -722,11 +715,7 @@ impl Reactor {
                         };
 
                         if let Err(e) = submit_result {
-                            error!(
-                                event_id = event_id,
-                                error = e,
-                                "Failed to reschedule event"
-                            );
+                            error!(event_id = event_id, error = e, "Failed to reschedule event");
                         } else {
                             debug!(
                                 event_id = event_id,
@@ -953,37 +942,37 @@ async fn basic_example() {
 
     // 注册处理器
     // Register handlers
-    reactor.register_handler(
-        EventType::NetworkIo,
-        Arc::new(NetworkIoHandler {
-            name: "NetworkHandler".to_string(),
-        }),
-    ).await;
+    reactor
+        .register_handler(
+            EventType::NetworkIo,
+            Arc::new(NetworkIoHandler {
+                name: "NetworkHandler".to_string(),
+            }),
+        )
+        .await;
 
-    reactor.register_handler(
-        EventType::Timer,
-        Arc::new(TimerHandler {
-            name: "TimerHandler".to_string(),
-        }),
-    ).await;
+    reactor
+        .register_handler(
+            EventType::Timer,
+            Arc::new(TimerHandler {
+                name: "TimerHandler".to_string(),
+            }),
+        )
+        .await;
 
     // 提交事件
     // Submit events
     for i in 0..5 {
-        let event = reactor.create_event(
-            EventType::NetworkIo,
-            Priority::Normal,
-            vec![i; 100],
-        ).await;
+        let event = reactor
+            .create_event(EventType::NetworkIo, Priority::Normal, vec![i; 100])
+            .await;
         reactor.submit_event(event).await.ok();
     }
 
     for i in 0..3 {
-        let event = reactor.create_event(
-            EventType::Timer,
-            Priority::High,
-            vec![i; 50],
-        ).await;
+        let event = reactor
+            .create_event(EventType::Timer, Priority::High, vec![i; 50])
+            .await;
         reactor.submit_event(event).await.ok();
     }
 
@@ -1002,9 +991,15 @@ async fn basic_example() {
     // Get statistics
     let stats = reactor.get_stats().await;
     println!("\n统计信息 (Statistics):");
-    println!("  处理的事件数 (Events processed): {}", stats.events_processed);
+    println!(
+        "  处理的事件数 (Events processed): {}",
+        stats.events_processed
+    );
     println!("  失败的事件数 (Events failed): {}", stats.events_failed);
-    println!("  平均处理时间 (Avg processing time): {} μs", stats.avg_processing_time_us);
+    println!(
+        "  平均处理时间 (Avg processing time): {} μs",
+        stats.avg_processing_time_us
+    );
 
     // 关闭 Reactor
     // Shutdown Reactor
@@ -1025,12 +1020,14 @@ async fn priority_scheduling_example() {
     let reactor = Arc::new(Reactor::new(config));
 
     // 注册处理器
-    reactor.register_handler(
-        EventType::UserInput,
-        Arc::new(UserInputHandler {
-            name: "UserInputHandler".to_string(),
-        }),
-    ).await;
+    reactor
+        .register_handler(
+            EventType::UserInput,
+            Arc::new(UserInputHandler {
+                name: "UserInputHandler".to_string(),
+            }),
+        )
+        .await;
 
     // 提交不同优先级的事件
     // Submit events with different priorities
@@ -1043,12 +1040,7 @@ async fn priority_scheduling_example() {
     ];
 
     for (i, priority) in priorities.iter().enumerate() {
-        let event = Event::new(
-            i as u64,
-            EventType::UserInput,
-            *priority,
-            vec![i as u8; 10],
-        );
+        let event = Event::new(i as u64, EventType::UserInput, *priority, vec![i as u8; 10]);
         println!("提交事件 {} (优先级: {:?})", i, priority);
         reactor.submit_event(event).await.ok();
     }
@@ -1078,12 +1070,14 @@ async fn performance_test() {
     };
     let reactor = Arc::new(Reactor::new(config));
 
-    reactor.register_handler(
-        EventType::NetworkIo,
-        Arc::new(NetworkIoHandler {
-            name: "FastNetworkHandler".to_string(),
-        }),
-    ).await;
+    reactor
+        .register_handler(
+            EventType::NetworkIo,
+            Arc::new(NetworkIoHandler {
+                name: "FastNetworkHandler".to_string(),
+            }),
+        )
+        .await;
 
     // 提交大量事件
     // Submit many events
@@ -1093,12 +1087,7 @@ async fn performance_test() {
     let start = Instant::now();
 
     for i in 0..num_events {
-        let event = Event::new(
-            i,
-            EventType::NetworkIo,
-            Priority::Normal,
-            vec![0; 100],
-        );
+        let event = Event::new(i, EventType::NetworkIo, Priority::Normal, vec![0; 100]);
         reactor.submit_event(event).await.ok();
     }
 
@@ -1119,12 +1108,19 @@ async fn performance_test() {
 
     println!("\n性能统计 (Performance Statistics):");
     println!("  总事件数 (Total events): {}", num_events);
-    println!("  处理的事件数 (Events processed): {}", stats.events_processed);
+    println!(
+        "  处理的事件数 (Events processed): {}",
+        stats.events_processed
+    );
     println!("  总耗时 (Total time): {:?}", total_time);
-    println!("  吞吐量 (Throughput): {:.2} events/sec",
-        stats.events_processed as f64 / total_time.as_secs_f64());
-    println!("  平均处理时间 (Avg processing time): {} μs",
-        stats.avg_processing_time_us);
+    println!(
+        "  吞吐量 (Throughput): {:.2} events/sec",
+        stats.events_processed as f64 / total_time.as_secs_f64()
+    );
+    println!(
+        "  平均处理时间 (Avg processing time): {} μs",
+        stats.avg_processing_time_us
+    );
 
     reactor.shutdown().await;
     reactor_handle.await.ok();
@@ -1139,9 +1135,7 @@ async fn performance_test() {
 async fn main() {
     // 初始化日志
     // Initialize logging
-    tracing_subscriber::fmt()
-        .with_max_level(Level::INFO)
-        .init();
+    tracing_subscriber::fmt().with_max_level(Level::INFO).init();
 
     println!("╔════════════════════════════════════════════════════════════════╗");
     println!("║  Reactor 模式完整实现与形式化分析 2025                         ║");
@@ -1169,12 +1163,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_event_creation() {
-        let event = Event::new(
-            1,
-            EventType::NetworkIo,
-            Priority::Normal,
-            vec![1, 2, 3],
-        );
+        let event = Event::new(1, EventType::NetworkIo, Priority::Normal, vec![1, 2, 3]);
 
         assert_eq!(event.id, 1);
         assert_eq!(event.priority, Priority::Normal);
@@ -1186,8 +1175,18 @@ mod tests {
         let mut heap = BinaryHeap::new();
 
         heap.push(Event::new(1, EventType::NetworkIo, Priority::Low, vec![]));
-        heap.push(Event::new(2, EventType::NetworkIo, Priority::Critical, vec![]));
-        heap.push(Event::new(3, EventType::NetworkIo, Priority::Normal, vec![]));
+        heap.push(Event::new(
+            2,
+            EventType::NetworkIo,
+            Priority::Critical,
+            vec![],
+        ));
+        heap.push(Event::new(
+            3,
+            EventType::NetworkIo,
+            Priority::Normal,
+            vec![],
+        ));
 
         // Critical 应该最先出队
         // Critical should be dequeued first
@@ -1208,12 +1207,14 @@ mod tests {
     async fn test_handler_registration() {
         let reactor = Reactor::new(ReactorConfig::default());
 
-        reactor.register_handler(
-            EventType::NetworkIo,
-            Arc::new(NetworkIoHandler {
-                name: "TestHandler".to_string(),
-            }),
-        ).await;
+        reactor
+            .register_handler(
+                EventType::NetworkIo,
+                Arc::new(NetworkIoHandler {
+                    name: "TestHandler".to_string(),
+                }),
+            )
+            .await;
 
         let handlers = reactor.handlers.read().await;
         assert!(handlers.contains_key(&EventType::NetworkIo));
@@ -1222,45 +1223,47 @@ mod tests {
     #[tokio::test]
     async fn test_event_rescheduling() {
         use std::time::Duration;
-        
+
         let mut config = ReactorConfig::default();
         config.enable_priority = false;
         config.max_queue_length = 100;
-        
+
         let reactor = Reactor::new(config);
-        
+
         // 创建一个会重新调度的事件处理器
         struct ReschedulingHandler {
             reschedule_count: Arc<std::sync::Mutex<usize>>,
         }
-        
+
         #[async_trait::async_trait]
         impl EventHandler for ReschedulingHandler {
             async fn handle(&self, _event: &Event) -> HandleResult {
                 let mut count = self.reschedule_count.lock().unwrap();
                 *count += 1;
-                
+
                 if *count <= 2 {
                     HandleResult::Reschedule(Duration::from_millis(10))
                 } else {
                     HandleResult::Success
                 }
             }
-            
+
             fn name(&self) -> &str {
                 "ReschedulingHandler"
             }
         }
-        
+
         let handler = Arc::new(ReschedulingHandler {
             reschedule_count: Arc::new(std::sync::Mutex::new(0)),
         });
-        
-        reactor.register_handler(EventType::NetworkIo, handler.clone()).await;
-        
+
+        reactor
+            .register_handler(EventType::NetworkIo, handler.clone())
+            .await;
+
         let event = Event::new(1, EventType::NetworkIo, Priority::Normal, vec![]);
         reactor.submit_event(event).await;
-        
+
         // 运行 reactor 处理事件
         let reactor_clone = reactor.clone();
         let handle = tokio::spawn(async move {
@@ -1268,18 +1271,18 @@ mod tests {
             tokio::time::sleep(Duration::from_millis(100)).await;
             reactor_clone.stop().await;
         });
-        
+
         // 启动 reactor（在后台运行）
         let reactor_run = reactor.clone();
         tokio::spawn(async move {
             reactor_run.run().await;
         });
-        
+
         handle.await.unwrap();
-        
+
         // 等待事件处理完成
         tokio::time::sleep(Duration::from_millis(200)).await;
-        
+
         let stats = reactor.get_stats().await;
         assert!(stats.events_rescheduled >= 0); // 至少应该尝试重新调度
     }
@@ -1287,23 +1290,23 @@ mod tests {
     #[tokio::test]
     async fn test_event_generation() {
         use std::time::Duration;
-        
+
         let mut config = ReactorConfig::default();
         config.enable_priority = false;
         config.max_queue_length = 100;
-        
+
         let reactor = Reactor::new(config);
-        
+
         // 创建一个会生成新事件的事件处理器
         struct EventGeneratingHandler {
             generated_count: Arc<std::sync::Mutex<usize>>,
         }
-        
+
         #[async_trait::async_trait]
         impl EventHandler for EventGeneratingHandler {
             async fn handle(&self, event: &Event) -> HandleResult {
                 let mut count = self.generated_count.lock().unwrap();
-                
+
                 if *count == 0 {
                     *count += 1;
                     // 生成一个新事件
@@ -1318,41 +1321,48 @@ mod tests {
                     HandleResult::Success
                 }
             }
-            
+
             fn name(&self) -> &str {
                 "EventGeneratingHandler"
             }
         }
-        
+
         let handler = Arc::new(EventGeneratingHandler {
             generated_count: Arc::new(std::sync::Mutex::new(0)),
         });
-        
-        reactor.register_handler(EventType::NetworkIo, handler.clone()).await;
-        reactor.register_handler(EventType::Timer, Arc::new(NetworkIoHandler {
-            name: "TimerHandler".to_string(),
-        })).await;
-        
+
+        reactor
+            .register_handler(EventType::NetworkIo, handler.clone())
+            .await;
+        reactor
+            .register_handler(
+                EventType::Timer,
+                Arc::new(NetworkIoHandler {
+                    name: "TimerHandler".to_string(),
+                }),
+            )
+            .await;
+
         let event = Event::new(1, EventType::NetworkIo, Priority::Normal, vec![]);
         reactor.submit_event(event).await;
-        
+
         // 运行 reactor 处理事件
         let reactor_clone = reactor.clone();
         let handle = tokio::spawn(async move {
             tokio::time::sleep(Duration::from_millis(100)).await;
             reactor_clone.stop().await;
         });
-        
+
         let reactor_run = reactor.clone();
         tokio::spawn(async move {
             reactor_run.run().await;
         });
-        
+
         handle.await.unwrap();
-        
+
         // 等待事件处理完成
         tokio::time::sleep(Duration::from_millis(200)).await;
-        
+
         let stats = reactor.get_stats().await;
         assert!(stats.events_processed >= 0);
     }

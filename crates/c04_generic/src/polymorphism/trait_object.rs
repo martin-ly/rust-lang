@@ -562,6 +562,8 @@ Trait Object 为 Rust 提供了强大的运行时多态能力。
 通过合理使用特征对象，可以创建灵活、可扩展的系统架构。
 */
 
+#![allow(clippy::type_complexity)]
+
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 

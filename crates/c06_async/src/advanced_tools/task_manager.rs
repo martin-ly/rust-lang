@@ -1,5 +1,5 @@
 //! 异步任务管理器
-//! 
+//!
 //! 提供高级任务管理功能：
 //! - 任务优先级队列
 //! - 任务依赖管理
@@ -7,14 +7,14 @@
 //! - 任务监控和统计
 //! - 任务失败重试
 //! - 任务取消和超时
-use std::collections::{HashMap, BinaryHeap};
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
+use std::cmp::Ordering;
+use std::collections::{BinaryHeap, HashMap};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use std::cmp::Ordering;
-use tokio::sync::{Mutex, RwLock, mpsc, Notify};
+use tokio::sync::{Mutex, Notify, RwLock, mpsc};
 use tokio::time::sleep;
-use anyhow::Result;
-use serde::{Serialize, Deserialize};
 use uuid::Uuid;
 
 /// 任务优先级
@@ -127,7 +127,7 @@ impl TaskManager {
     /// 创建新的任务管理器
     pub fn new(executor: Arc<dyn TaskExecutor>, max_concurrent_tasks: usize) -> Self {
         let (tx, _rx) = mpsc::unbounded_channel();
-        
+
         let manager = Self {
             tasks: Arc::new(RwLock::new(HashMap::new())),
             task_queue: Arc::new(Mutex::new(BinaryHeap::new())),
@@ -148,7 +148,7 @@ impl TaskManager {
             loop {
                 // 处理待处理的任务
                 manager_clone.process_pending_tasks().await;
-                
+
                 // 短暂休眠以避免过度占用CPU
                 tokio::time::sleep(Duration::from_millis(100)).await;
             }
@@ -245,7 +245,11 @@ impl TaskManager {
     }
 
     /// 等待任务完成
-    pub async fn wait_for_task(&self, task_id: Uuid, timeout_duration: Option<Duration>) -> Result<TaskInfo> {
+    pub async fn wait_for_task(
+        &self,
+        task_id: Uuid,
+        timeout_duration: Option<Duration>,
+    ) -> Result<TaskInfo> {
         let start = Instant::now();
         let timeout_duration = timeout_duration.unwrap_or(Duration::from_secs(30));
 
@@ -257,7 +261,9 @@ impl TaskManager {
             if let Some(task) = self.get_task(task_id).await {
                 match task.status {
                     TaskStatus::Completed => return Ok(task),
-                    TaskStatus::Failed => return Err(anyhow::anyhow!("任务执行失败: {:?}", task.error)),
+                    TaskStatus::Failed => {
+                        return Err(anyhow::anyhow!("任务执行失败: {:?}", task.error));
+                    }
                     TaskStatus::Cancelled => return Err(anyhow::anyhow!("任务已取消")),
                     _ => {
                         sleep(Duration::from_millis(100)).await;
@@ -313,9 +319,10 @@ impl TaskManager {
         if let Some(task) = tasks.get(&task_id) {
             for dep_id in &task.dependencies {
                 if let Some(dep_task) = tasks.get(dep_id)
-                    && dep_task.status != TaskStatus::Completed {
-                        return false;
-                    }
+                    && dep_task.status != TaskStatus::Completed
+                {
+                    return false;
+                }
             }
         }
         true
@@ -421,7 +428,7 @@ impl TaskManager {
                 let mut tasks = tasks.write().await;
                 if let Some(task) = tasks.get_mut(&task_id) {
                     task.completed_at = Some(Instant::now());
-                    
+
                     match result {
                         Ok(_) => {
                             task.status = TaskStatus::Completed;
@@ -445,7 +452,7 @@ impl TaskManager {
             {
                 let mut stats = stats.lock().await;
                 stats.running_tasks = stats.running_tasks.saturating_sub(1);
-                
+
                 let tasks = tasks.read().await;
                 if let Some(task) = tasks.get(&task_id) {
                     match task.status {
@@ -453,7 +460,8 @@ impl TaskManager {
                             stats.completed_tasks += 1;
                             stats.total_execution_time += execution_time;
                             stats.avg_execution_time = Duration::from_nanos(
-                                stats.total_execution_time.as_nanos() as u64 / stats.completed_tasks.max(1) as u64
+                                stats.total_execution_time.as_nanos() as u64
+                                    / stats.completed_tasks.max(1) as u64,
                             );
                         }
                         TaskStatus::Failed => {
@@ -540,9 +548,10 @@ impl TaskManagerClone {
         if let Some(task) = tasks.get(&task_id) {
             for dep_id in &task.dependencies {
                 if let Some(dep_task) = tasks.get(dep_id)
-                    && dep_task.status != TaskStatus::Completed {
-                        return false;
-                    }
+                    && dep_task.status != TaskStatus::Completed
+                {
+                    return false;
+                }
             }
         }
         true
@@ -583,7 +592,7 @@ impl TaskManagerClone {
                 let mut tasks = tasks.write().await;
                 if let Some(task) = tasks.get_mut(&task_id) {
                     task.completed_at = Some(Instant::now());
-                    
+
                     match result {
                         Ok(_) => {
                             task.status = TaskStatus::Completed;
@@ -605,7 +614,7 @@ impl TaskManagerClone {
             {
                 let mut stats = stats.lock().await;
                 stats.running_tasks = stats.running_tasks.saturating_sub(1);
-                
+
                 let tasks = tasks.read().await;
                 if let Some(task) = tasks.get(&task_id) {
                     match task.status {
@@ -613,7 +622,8 @@ impl TaskManagerClone {
                             stats.completed_tasks += 1;
                             stats.total_execution_time += execution_time;
                             stats.avg_execution_time = Duration::from_nanos(
-                                stats.total_execution_time.as_nanos() as u64 / stats.completed_tasks.max(1) as u64
+                                stats.total_execution_time.as_nanos() as u64
+                                    / stats.completed_tasks.max(1) as u64,
                             );
                         }
                         TaskStatus::Failed => {
@@ -656,10 +666,10 @@ impl SimpleTaskExecutor {
 impl TaskExecutor for SimpleTaskExecutor {
     async fn execute(&self, task_id: Uuid, input: serde_json::Value) -> Result<serde_json::Value> {
         println!("执行任务 {}: {} (输入: {:?})", task_id, self.name, input);
-        
+
         // 模拟任务执行
         sleep(Duration::from_millis(1000)).await;
-        
+
         Ok(serde_json::json!({
             "task_id": task_id,
             "executor": self.name,

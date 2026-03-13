@@ -7,7 +7,7 @@
 //! cargo run --example async_theory_comprehensive
 //! ```
 use c06_async::{
-    async_semantics_theory, async_recursion_analysis, actor_reactor_patterns, csp_model_comparison,
+    actor_reactor_patterns, async_recursion_analysis, async_semantics_theory, csp_model_comparison,
 };
 
 #[tokio::main]
@@ -111,4 +111,3 @@ async fn main() {
     println!("  4. 尝试修改示例并观察结果");
     println!("\n");
 }
-

@@ -60,18 +60,20 @@ impl IpcChannel for SharedMemoryRegion {
         for key in shared_data.keys() {
             if key.starts_with("msg_")
                 && let Ok(id) = key[4..].parse::<u64>()
-                    && id > latest_id {
-                        latest_id = id;
-                        latest_key = Some(key.clone());
-                    }
+                && id > latest_id
+            {
+                latest_id = id;
+                latest_key = Some(key.clone());
+            }
         }
 
         if let Some(key) = latest_key
-            && let Some(data) = shared_data.get(&key) {
-                let msg: Message<Vec<u8>> = serde_json::from_slice(data)
-                    .map_err(|e| IpcError::DeserializationError(e.to_string()))?;
-                return Ok(msg);
-            }
+            && let Some(data) = shared_data.get(&key)
+        {
+            let msg: Message<Vec<u8>> = serde_json::from_slice(data)
+                .map_err(|e| IpcError::DeserializationError(e.to_string()))?;
+            return Ok(msg);
+        }
 
         Err(IpcError::ReceiveFailed("No message available".to_string()))
     }

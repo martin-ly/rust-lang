@@ -4,17 +4,17 @@
 //! 包括复杂的所有权模式、高级借用技巧和最佳实践。
 //! This example demonstrates advanced usage of Rust 1.90's ownership and borrowing system,
 //! including complex ownership patterns, advanced borrowing techniques, and best practices.
+use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::{Rc, Weak};
 use std::sync::{Arc, Mutex, RwLock};
-use std::cell::RefCell;
 use std::thread;
 use std::time::Duration;
 
 /// # 1. 复杂所有权模式 / Complex Ownership Patterns
 
 /// ## 1.1 所有权转移链 / Ownership Transfer Chain
-/// 
+///
 /// 演示所有权如何在多个函数和结构体之间转移
 /// Demonstrates how ownership transfers between multiple functions and structs
 pub mod ownership_transfer_chain {
@@ -34,19 +34,15 @@ pub mod ownership_transfer_chain {
             let mut metadata = HashMap::new();
             metadata.insert("created_at".to_string(), "2025-01-01".to_string());
             metadata.insert("version".to_string(), "1.0".to_string());
-            
-            Self {
-                id,
-                data,
-                metadata,
-            }
+
+            Self { id, data, metadata }
         }
-        
+
         /// 添加元数据 / Add metadata
         pub fn add_metadata(&mut self, key: String, value: String) {
             self.metadata.insert(key, value);
         }
-        
+
         /// 获取数据长度 / Get data length
         pub fn get_data_length(&self) -> usize {
             self.data.len()
@@ -56,19 +52,19 @@ pub mod ownership_transfer_chain {
     /// 所有权转移链示例 / Ownership Transfer Chain Example
     pub fn ownership_transfer_chain_example() {
         println!("=== 所有权转移链示例 / Ownership Transfer Chain Example ===");
-        
+
         // 创建数据容器 / Create data container
         let container = DataContainer::new(1, "Hello, World!".to_string());
         println!("Created container: {:?}", container);
-        
+
         // 第一次转移 / First transfer
         let container = process_container(container);
         println!("After first processing: {:?}", container);
-        
+
         // 第二次转移 / Second transfer
         let container = enhance_container(container);
         println!("After enhancement: {:?}", container);
-        
+
         // 第三次转移 / Third transfer
         let final_result = finalize_container(container);
         println!("Final result: {:?}", final_result);
@@ -77,7 +73,10 @@ pub mod ownership_transfer_chain {
     /// 处理容器 / Process container
     fn process_container(mut container: DataContainer) -> DataContainer {
         container.add_metadata("processed".to_string(), "true".to_string());
-        container.add_metadata("process_time".to_string(), "2025-01-01T10:00:00Z".to_string());
+        container.add_metadata(
+            "process_time".to_string(),
+            "2025-01-01T10:00:00Z".to_string(),
+        );
         container
     }
 
@@ -91,13 +90,16 @@ pub mod ownership_transfer_chain {
     /// 完成容器 / Finalize container
     fn finalize_container(mut container: DataContainer) -> DataContainer {
         container.add_metadata("finalized".to_string(), "true".to_string());
-        container.add_metadata("finalization_time".to_string(), "2025-01-01T11:00:00Z".to_string());
+        container.add_metadata(
+            "finalization_time".to_string(),
+            "2025-01-01T11:00:00Z".to_string(),
+        );
         container
     }
 }
 
 /// ## 1.2 所有权共享模式 / Ownership Sharing Patterns
-/// 
+///
 /// 演示如何使用智能指针实现所有权共享
 /// Demonstrates how to use smart pointers for ownership sharing
 pub mod ownership_sharing_patterns {
@@ -122,34 +124,35 @@ pub mod ownership_sharing_patterns {
                 parent: None,
             }))
         }
-        
+
         /// 添加子节点 / Add child node
         pub fn add_child(parent: &Rc<RefCell<Self>>, child: Rc<RefCell<Self>>) {
             // 设置子节点的父引用 / Set child's parent reference
             child.borrow_mut().parent = Some(Rc::downgrade(parent));
-            
+
             // 添加子节点到父节点 / Add child to parent
             parent.borrow_mut().children.push(child);
         }
-        
+
         /// 获取所有后代节点 / Get all descendant nodes
         pub fn get_descendants(&self) -> Vec<u32> {
             let mut descendants = Vec::new();
-            
+
             for child in &self.children {
                 descendants.push(child.borrow().id);
                 descendants.extend(child.borrow().get_descendants());
             }
-            
+
             descendants
         }
-        
+
         /// 获取根节点 / Get root node
         pub fn get_root(&self) -> Option<Rc<RefCell<Self>>> {
             if let Some(parent_weak) = &self.parent
-                && let Some(parent_strong) = parent_weak.upgrade() {
-                    return parent_strong.borrow().get_root();
-                }
+                && let Some(parent_strong) = parent_weak.upgrade()
+            {
+                return parent_strong.borrow().get_root();
+            }
             None
         }
     }
@@ -157,44 +160,47 @@ pub mod ownership_sharing_patterns {
     /// 所有权共享模式示例 / Ownership Sharing Patterns Example
     pub fn ownership_sharing_patterns_example() {
         println!("=== 所有权共享模式示例 / Ownership Sharing Patterns Example ===");
-        
+
         // 创建根节点 / Create root node
         let root = SharedNode::new(1, "Root Node".to_string());
         println!("Created root node: {:?}", root.borrow());
-        
+
         // 创建子节点 / Create child nodes
         let child1 = SharedNode::new(2, "Child 1".to_string());
         let child2 = SharedNode::new(3, "Child 2".to_string());
-        
+
         // 添加子节点 / Add child nodes
         SharedNode::add_child(&root, child1);
         SharedNode::add_child(&root, child2);
-        
+
         // 创建孙节点 / Create grandchild nodes
         let grandchild1 = SharedNode::new(4, "Grandchild 1".to_string());
         let grandchild2 = SharedNode::new(5, "Grandchild 2".to_string());
-        
+
         // 添加孙节点到第一个子节点 / Add grandchildren to first child
         if let Some(first_child) = root.borrow().children.first() {
             SharedNode::add_child(first_child, grandchild1);
             SharedNode::add_child(first_child, grandchild2);
         }
-        
+
         // 显示树结构 / Display tree structure
         println!("Tree structure:");
         print_tree(&root, 0);
-        
+
         // 获取后代节点 / Get descendant nodes
         let descendants = root.borrow().get_descendants();
         println!("Descendants of root: {:?}", descendants);
-        
+
         // 演示弱引用 / Demonstrate weak references
         if let Some(first_child) = root.borrow().children.first() {
             let weak_ref = Rc::downgrade(first_child);
             println!("Weak reference count: {}", Rc::weak_count(first_child));
-            
+
             if let Some(strong_ref) = weak_ref.upgrade() {
-                println!("Successfully upgraded weak reference: {:?}", strong_ref.borrow().id);
+                println!(
+                    "Successfully upgraded weak reference: {:?}",
+                    strong_ref.borrow().id
+                );
             }
         }
     }
@@ -204,7 +210,7 @@ pub mod ownership_sharing_patterns {
         let indent = "  ".repeat(depth);
         let node_data = node.borrow();
         println!("{}{}: {}", indent, node_data.id, node_data.data);
-        
+
         for child in &node_data.children {
             print_tree(child, depth + 1);
         }
@@ -214,7 +220,7 @@ pub mod ownership_sharing_patterns {
 /// # 2. 高级借用技巧 / Advanced Borrowing Techniques
 
 /// ## 2.1 复杂借用模式 / Complex Borrowing Patterns
-/// 
+///
 /// 演示复杂的借用模式和多层借用
 /// Demonstrates complex borrowing patterns and multi-level borrowing
 pub mod complex_borrowing_patterns {
@@ -239,17 +245,17 @@ pub mod complex_borrowing_patterns {
                 nested: None,
             }
         }
-        
+
         /// 添加数据 / Add data
         pub fn add_data(&mut self, item: String) {
             self.data.push(item);
         }
-        
+
         /// 添加元数据 / Add metadata
         pub fn add_metadata(&mut self, key: String, value: String) {
             self.metadata.insert(key, value);
         }
-        
+
         /// 设置嵌套数据 / Set nested data
         pub fn set_nested(&mut self, nested: ComplexData) {
             self.nested = Some(Box::new(nested));
@@ -259,21 +265,21 @@ pub mod complex_borrowing_patterns {
     /// 复杂借用模式示例 / Complex Borrowing Patterns Example
     pub fn complex_borrowing_patterns_example() {
         println!("=== 复杂借用模式示例 / Complex Borrowing Patterns Example ===");
-        
+
         let mut complex_data = ComplexData::new(1);
         complex_data.add_data("Item 1".to_string());
         complex_data.add_data("Item 2".to_string());
         complex_data.add_metadata("type".to_string(), "complex".to_string());
-        
+
         // 创建嵌套数据 / Create nested data
         let mut nested_data = ComplexData::new(2);
         nested_data.add_data("Nested Item 1".to_string());
         nested_data.add_metadata("type".to_string(), "nested".to_string());
         complex_data.set_nested(nested_data);
-        
+
         // 演示复杂借用 / Demonstrate complex borrowing
         demonstrate_complex_borrowing(&mut complex_data);
-        
+
         // 演示借用检查器的智能分析 / Demonstrate borrow checker's intelligent analysis
         demonstrate_smart_borrow_analysis(&mut complex_data);
     }
@@ -283,14 +289,14 @@ pub mod complex_borrowing_patterns {
         // 同时借用不同的字段 / Borrow different fields simultaneously
         let data_ref = &data.data;
         let metadata_ref = &data.metadata;
-        
+
         println!("Data length: {}", data_ref.len());
         println!("Metadata count: {}", metadata_ref.len());
-        
+
         // 在借用结束后修改数据 / Modify data after borrows end
         data.add_data("New Item".to_string());
         data.add_metadata("new_key".to_string(), "new_value".to_string());
-        
+
         println!("After modification - Data: {:?}", data.data);
         println!("After modification - Metadata: {:?}", data.metadata);
     }
@@ -299,7 +305,7 @@ pub mod complex_borrowing_patterns {
     fn demonstrate_smart_borrow_analysis(data: &mut ComplexData) {
         // Rust 1.90 的智能借用检查器可以分析更复杂的借用模式
         // Rust 1.90's smart borrow checker can analyze more complex borrowing patterns
-        
+
         // 可以同时借用向量的不同部分 / Can borrow different parts of vector simultaneously
         if data.data.len() >= 2 {
             let data_len = data.data.len();
@@ -307,7 +313,7 @@ pub mod complex_borrowing_patterns {
             println!("First half: {:?}", first_half);
             println!("Second half: {:?}", second_half);
         }
-        
+
         // 可以同时借用哈希映射的不同键 / Can borrow different keys of HashMap simultaneously
         if data.metadata.contains_key("type") && data.metadata.contains_key("new_key") {
             let type_value = data.metadata.get("type").unwrap();
@@ -318,7 +324,7 @@ pub mod complex_borrowing_patterns {
 }
 
 /// ## 2.2 借用生命周期管理 / Borrow Lifetime Management
-/// 
+///
 /// 演示如何管理复杂的借用生命周期
 /// Demonstrates how to manage complex borrow lifetimes
 pub mod borrow_lifetime_management {
@@ -337,24 +343,24 @@ pub mod borrow_lifetime_management {
                 active_borrows: Vec::new(),
             }
         }
-        
+
         /// 添加数据 / Add data
         pub fn add_data(&mut self, item: String) {
             self.data.push(item);
         }
-        
+
         /// 获取数据引用 / Get data reference
         pub fn get_data_ref(&self) -> &Vec<String> {
             self.data
         }
-        
+
         /// 获取可变数据引用 / Get mutable data reference
         pub fn get_data_mut(&mut self) -> &mut Vec<String> {
             self.data
         }
-        
+
         /// 处理数据 / Process data
-        pub fn process_data<F>(&mut self, processor: F) 
+        pub fn process_data<F>(&mut self, processor: F)
         where
             F: FnOnce(&mut Vec<String>),
         {
@@ -365,34 +371,34 @@ pub mod borrow_lifetime_management {
     /// 借用生命周期管理示例 / Borrow Lifetime Management Example
     pub fn borrow_lifetime_management_example() {
         println!("=== 借用生命周期管理示例 / Borrow Lifetime Management Example ===");
-        
+
         let mut data = vec![
             "Item 1".to_string(),
             "Item 2".to_string(),
             "Item 3".to_string(),
         ];
-        
+
         // 创建生命周期管理器 / Create lifetime manager
         let mut manager = LifetimeManager::new(&mut data);
-        
+
         // 添加数据 / Add data
         manager.add_data("Item 4".to_string());
         manager.add_data("Item 5".to_string());
-        
+
         // 获取数据引用 / Get data reference
         let data_ref = manager.get_data_ref();
         println!("Data: {:?}", data_ref);
-        
+
         // 处理数据 / Process data
         manager.process_data(|data| {
             data.push("Processed Item".to_string());
             data.sort();
         });
-        
+
         // 获取最终数据 / Get final data
         let final_data = manager.get_data_ref();
         println!("Final data: {:?}", final_data);
-        
+
         // 演示生命周期约束 / Demonstrate lifetime constraints
         demonstrate_lifetime_constraints();
     }
@@ -401,11 +407,11 @@ pub mod borrow_lifetime_management {
     fn demonstrate_lifetime_constraints() {
         let mut data1 = vec!["Data1".to_string()];
         let mut data2 = vec!["Data2".to_string()];
-        
+
         // 函数可以接受不同生命周期的引用 / Function can accept references with different lifetimes
         let result = process_multiple_data(&mut data1, &mut data2);
         println!("Processed result: {:?}", result);
-        
+
         // 演示生命周期推断 / Demonstrate lifetime inference
         let inferred_result = infer_lifetimes(&data1, &data2);
         println!("Inferred result: {:?}", inferred_result);
@@ -434,7 +440,7 @@ pub mod borrow_lifetime_management {
 /// # 3. 并发所有权模式 / Concurrent Ownership Patterns
 
 /// ## 3.1 线程间所有权共享 / Inter-thread Ownership Sharing
-/// 
+///
 /// 演示如何在多个线程之间安全地共享所有权
 /// Demonstrates how to safely share ownership between multiple threads
 pub mod inter_thread_ownership_sharing {
@@ -456,34 +462,34 @@ pub mod inter_thread_ownership_sharing {
                 metadata: Arc::new(RwLock::new(HashMap::new())),
             }
         }
-        
+
         /// 添加数据 / Add data
         pub fn add_data(&self, item: String) {
             let mut data = self.data.lock().unwrap();
             data.push(item);
-            
+
             let mut counter = self.counter.lock().unwrap();
             *counter += 1;
         }
-        
+
         /// 获取数据 / Get data
         pub fn get_data(&self) -> Vec<String> {
             let data = self.data.lock().unwrap();
             data.clone()
         }
-        
+
         /// 获取计数器值 / Get counter value
         pub fn get_counter(&self) -> u32 {
             let counter = self.counter.lock().unwrap();
             *counter
         }
-        
+
         /// 添加元数据 / Add metadata
         pub fn add_metadata(&self, key: String, value: String) {
             let mut metadata = self.metadata.write().unwrap();
             metadata.insert(key, value);
         }
-        
+
         /// 获取元数据 / Get metadata
         pub fn get_metadata(&self, key: &str) -> Option<String> {
             let metadata = self.metadata.read().unwrap();
@@ -494,10 +500,10 @@ pub mod inter_thread_ownership_sharing {
     /// 线程间所有权共享示例 / Inter-thread Ownership Sharing Example
     pub fn inter_thread_ownership_sharing_example() {
         println!("=== 线程间所有权共享示例 / Inter-thread Ownership Sharing Example ===");
-        
+
         let container = Arc::new(ThreadSafeContainer::new());
         let mut handles = vec![];
-        
+
         // 创建多个生产者线程 / Create multiple producer threads
         for i in 0..3 {
             let container_clone = Arc::clone(&container);
@@ -507,14 +513,14 @@ pub mod inter_thread_ownership_sharing {
                     container_clone.add_data(item);
                     container_clone.add_metadata(
                         format!("thread_{}_item_{}", i, j),
-                        format!("Produced by thread {}", i)
+                        format!("Produced by thread {}", i),
                     );
                     thread::sleep(Duration::from_millis(10));
                 }
             });
             handles.push(handle);
         }
-        
+
         // 创建消费者线程 / Create consumer thread
         let container_clone = Arc::clone(&container);
         let consumer_handle = thread::spawn(move || {
@@ -525,13 +531,13 @@ pub mod inter_thread_ownership_sharing {
                 thread::sleep(Duration::from_millis(50));
             }
         });
-        
+
         // 等待所有线程完成 / Wait for all threads to complete
         for handle in handles {
             handle.join().unwrap();
         }
         consumer_handle.join().unwrap();
-        
+
         // 显示最终结果 / Show final results
         let final_data = container.get_data();
         let final_counter = container.get_counter();
@@ -542,12 +548,12 @@ pub mod inter_thread_ownership_sharing {
 }
 
 /// ## 3.2 原子所有权操作 / Atomic Ownership Operations
-/// 
+///
 /// 演示如何使用原子操作进行所有权管理
 /// Demonstrates how to use atomic operations for ownership management
 pub mod atomic_ownership_operations {
     use super::*;
-    use std::sync::atomic::{AtomicUsize, AtomicBool, Ordering};
+    use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 
     /// 原子所有权管理器 / Atomic Ownership Manager
     pub struct AtomicOwnershipManager {
@@ -567,35 +573,39 @@ pub mod atomic_ownership_operations {
                 total_processed: AtomicUsize::new(0),
             }
         }
-        
+
         /// 开始处理 / Start processing
         pub fn start_processing(&self) -> bool {
             // 使用原子操作检查是否可以开始处理 / Use atomic operation to check if processing can start
-            if self.is_processing.compare_exchange(false, true, Ordering::SeqCst, Ordering::SeqCst).is_ok() {
+            if self
+                .is_processing
+                .compare_exchange(false, true, Ordering::SeqCst, Ordering::SeqCst)
+                .is_ok()
+            {
                 self.active_count.fetch_add(1, Ordering::SeqCst);
                 true
             } else {
                 false
             }
         }
-        
+
         /// 结束处理 / End processing
         pub fn end_processing(&self) {
             self.active_count.fetch_sub(1, Ordering::SeqCst);
             self.total_processed.fetch_add(1, Ordering::SeqCst);
-            
+
             // 如果没有活跃的处理，重置处理标志 / If no active processing, reset processing flag
             if self.active_count.load(Ordering::SeqCst) == 0 {
                 self.is_processing.store(false, Ordering::SeqCst);
             }
         }
-        
+
         /// 添加数据 / Add data
         pub fn add_data(&self, item: String) {
             let mut data = self.data.lock().unwrap();
             data.push(item);
         }
-        
+
         /// 获取统计信息 / Get statistics
         pub fn get_statistics(&self) -> (usize, usize, usize) {
             let data_count = self.data.lock().unwrap().len();
@@ -608,10 +618,10 @@ pub mod atomic_ownership_operations {
     /// 原子所有权操作示例 / Atomic Ownership Operations Example
     pub fn atomic_ownership_operations_example() {
         println!("=== 原子所有权操作示例 / Atomic Ownership Operations Example ===");
-        
+
         let manager = Arc::new(AtomicOwnershipManager::new());
         let mut handles = vec![];
-        
+
         // 创建多个工作线程 / Create multiple worker threads
         for i in 0..5 {
             let manager_clone = Arc::clone(&manager);
@@ -620,13 +630,13 @@ pub mod atomic_ownership_operations {
                     // 尝试开始处理 / Try to start processing
                     if manager_clone.start_processing() {
                         println!("Thread {} started processing batch {}", i, j);
-                        
+
                         // 模拟处理工作 / Simulate processing work
                         thread::sleep(Duration::from_millis(100));
-                        
+
                         // 添加处理结果 / Add processing result
                         manager_clone.add_data(format!("Thread-{}-Batch-{}", i, j));
-                        
+
                         // 结束处理 / End processing
                         manager_clone.end_processing();
                         println!("Thread {} finished processing batch {}", i, j);
@@ -637,35 +647,40 @@ pub mod atomic_ownership_operations {
             });
             handles.push(handle);
         }
-        
+
         // 创建监控线程 / Create monitoring thread
         let manager_clone = Arc::clone(&manager);
         let monitor_handle = thread::spawn(move || {
             for _ in 0..20 {
                 let (data_count, active_count, total_processed) = manager_clone.get_statistics();
-                println!("Monitor: data={}, active={}, processed={}", 
-                        data_count, active_count, total_processed);
+                println!(
+                    "Monitor: data={}, active={}, processed={}",
+                    data_count, active_count, total_processed
+                );
                 thread::sleep(Duration::from_millis(50));
             }
         });
-        
+
         // 等待所有线程完成 / Wait for all threads to complete
         for handle in handles {
             handle.join().unwrap();
         }
         monitor_handle.join().unwrap();
-        
+
         // 显示最终统计信息 / Show final statistics
-        let (final_data_count, final_active_count, final_total_processed) = manager.get_statistics();
-        println!("Final statistics: data={}, active={}, processed={}", 
-                final_data_count, final_active_count, final_total_processed);
+        let (final_data_count, final_active_count, final_total_processed) =
+            manager.get_statistics();
+        println!(
+            "Final statistics: data={}, active={}, processed={}",
+            final_data_count, final_active_count, final_total_processed
+        );
     }
 }
 
 /// # 4. 高级作用域管理 / Advanced Scope Management
 
 /// ## 4.1 动态作用域 / Dynamic Scope
-/// 
+///
 /// 演示如何实现动态作用域管理
 /// Demonstrates how to implement dynamic scope management
 pub mod dynamic_scope {
@@ -704,17 +719,17 @@ pub mod dynamic_scope {
                 children: Vec::new(),
             }
         }
-        
+
         /// 添加变量 / Add variable
         pub fn add_variable(&mut self, name: String, value: String) {
             self.variables.insert(name, value);
         }
-        
+
         /// 获取变量 / Get variable
         pub fn get_variable(&self, name: &str) -> Option<&str> {
             self.variables.get(name).map(|s| s.as_str())
         }
-        
+
         /// 添加子作用域 / Add child scope
         pub fn add_child(&mut self, child_id: u32) {
             self.children.push(child_id);
@@ -736,48 +751,48 @@ pub mod dynamic_scope {
                 scope_stack: Vec::new(),
                 next_scope_id: 1,
             };
-            
+
             // 创建全局作用域 / Create global scope
             let global_scope = ScopeInfo::new(0, "global".to_string(), ScopeType::Global);
             manager.scopes.insert(0, global_scope);
             manager.scope_stack.push(0);
-            
+
             manager
         }
-        
+
         /// 进入作用域 / Enter scope
         pub fn enter_scope(&mut self, name: String, scope_type: ScopeType) -> u32 {
             let scope_id = self.next_scope_id;
             self.next_scope_id += 1;
-            
+
             let mut scope_info = ScopeInfo::new(scope_id, name, scope_type);
-            
+
             // 设置父作用域 / Set parent scope
             if let Some(&parent_id) = self.scope_stack.last() {
                 scope_info.parent_id = Some(parent_id);
-                
+
                 // 添加子作用域到父作用域 / Add child scope to parent scope
                 if let Some(parent_scope) = self.scopes.get_mut(&parent_id) {
                     parent_scope.add_child(scope_id);
                 }
             }
-            
+
             self.scopes.insert(scope_id, scope_info);
             self.scope_stack.push(scope_id);
-            
+
             scope_id
         }
-        
+
         /// 退出作用域 / Exit scope
         pub fn exit_scope(&mut self) -> Option<u32> {
             self.scope_stack.pop()
         }
-        
+
         /// 获取当前作用域 / Get current scope
         pub fn get_current_scope(&self) -> Option<&ScopeInfo> {
             self.scope_stack.last().and_then(|&id| self.scopes.get(&id))
         }
-        
+
         /// 在当前作用域中添加变量 / Add variable to current scope
         pub fn add_variable(&mut self, name: String, value: String) -> Result<(), String> {
             if let Some(&current_id) = self.scope_stack.last() {
@@ -791,7 +806,7 @@ pub mod dynamic_scope {
                 Err("No active scope".to_string())
             }
         }
-        
+
         /// 查找变量 / Find variable
         pub fn find_variable(&self, name: &str) -> Option<(u32, String)> {
             // 从当前作用域开始向上查找 / Start from current scope and search upward
@@ -804,20 +819,22 @@ pub mod dynamic_scope {
             }
             None
         }
-        
+
         /// 打印作用域树 / Print scope tree
         pub fn print_scope_tree(&self) {
             println!("=== 作用域树 / Scope Tree ===");
             self.print_scope_recursive(0, 0);
         }
-        
+
         /// 递归打印作用域 / Print scope recursively
         fn print_scope_recursive(&self, scope_id: u32, depth: usize) {
             if let Some(scope) = self.scopes.get(&scope_id) {
                 let indent = "  ".repeat(depth);
-                println!("{}{} (ID: {}, Type: {:?})", 
-                        indent, scope.name, scope.id, scope.scope_type);
-                
+                println!(
+                    "{}{} (ID: {}, Type: {:?})",
+                    indent, scope.name, scope.id, scope.scope_type
+                );
+
                 for &child_id in &scope.children {
                     self.print_scope_recursive(child_id, depth + 1);
                 }
@@ -828,48 +845,58 @@ pub mod dynamic_scope {
     /// 动态作用域示例 / Dynamic Scope Example
     pub fn dynamic_scope_example() {
         println!("=== 动态作用域示例 / Dynamic Scope Example ===");
-        
+
         let mut manager = DynamicScopeManager::new();
-        
+
         // 添加全局变量 / Add global variables
-        manager.add_variable("global_var".to_string(), "global_value".to_string()).unwrap();
-        manager.add_variable("config".to_string(), "production".to_string()).unwrap();
-        
+        manager
+            .add_variable("global_var".to_string(), "global_value".to_string())
+            .unwrap();
+        manager
+            .add_variable("config".to_string(), "production".to_string())
+            .unwrap();
+
         // 进入函数作用域 / Enter function scope
         let _function_id = manager.enter_scope("main_function".to_string(), ScopeType::Function);
-        manager.add_variable("function_var".to_string(), "function_value".to_string()).unwrap();
-        
+        manager
+            .add_variable("function_var".to_string(), "function_value".to_string())
+            .unwrap();
+
         // 进入块作用域 / Enter block scope
         let _block_id = manager.enter_scope("if_block".to_string(), ScopeType::Block);
-        manager.add_variable("block_var".to_string(), "block_value".to_string()).unwrap();
-        
+        manager
+            .add_variable("block_var".to_string(), "block_value".to_string())
+            .unwrap();
+
         // 进入循环作用域 / Enter loop scope
         let _loop_id = manager.enter_scope("for_loop".to_string(), ScopeType::Loop);
-        manager.add_variable("loop_var".to_string(), "loop_value".to_string()).unwrap();
-        
+        manager
+            .add_variable("loop_var".to_string(), "loop_value".to_string())
+            .unwrap();
+
         // 查找变量 / Find variables
         println!("Looking for variables:");
         if let Some((scope_id, value)) = manager.find_variable("global_var") {
             println!("Found global_var in scope {}: {}", scope_id, value);
         }
-        
+
         if let Some((scope_id, value)) = manager.find_variable("function_var") {
             println!("Found function_var in scope {}: {}", scope_id, value);
         }
-        
+
         if let Some((scope_id, value)) = manager.find_variable("block_var") {
             println!("Found block_var in scope {}: {}", scope_id, value);
         }
-        
+
         if let Some((scope_id, value)) = manager.find_variable("loop_var") {
             println!("Found loop_var in scope {}: {}", scope_id, value);
         }
-        
+
         // 退出作用域 / Exit scopes
         manager.exit_scope(); // 退出循环作用域 / Exit loop scope
         manager.exit_scope(); // 退出块作用域 / Exit block scope
         manager.exit_scope(); // 退出函数作用域 / Exit function scope
-        
+
         // 打印作用域树 / Print scope tree
         manager.print_scope_tree();
     }
@@ -878,23 +905,23 @@ pub mod dynamic_scope {
 /// 主函数 / Main Function
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("=== 高级所有权和借用示例 / Advanced Ownership and Borrowing Examples ===");
-    
+
     // 1. 复杂所有权模式 / Complex Ownership Patterns
     ownership_transfer_chain::ownership_transfer_chain_example();
     ownership_sharing_patterns::ownership_sharing_patterns_example();
-    
+
     // 2. 高级借用技巧 / Advanced Borrowing Techniques
     complex_borrowing_patterns::complex_borrowing_patterns_example();
     borrow_lifetime_management::borrow_lifetime_management_example();
-    
+
     // 3. 并发所有权模式 / Concurrent Ownership Patterns
     inter_thread_ownership_sharing::inter_thread_ownership_sharing_example();
     atomic_ownership_operations::atomic_ownership_operations_example();
-    
+
     // 4. 高级作用域管理 / Advanced Scope Management
     dynamic_scope::dynamic_scope_example();
-    
+
     println!("\n=== 所有高级示例运行完成 / All Advanced Examples Completed ===");
-    
+
     Ok(())
 }

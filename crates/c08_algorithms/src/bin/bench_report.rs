@@ -134,7 +134,6 @@ fn main() {
             for _ in 0..args.repeat {
                 let (_r, us) = time_it(|| {
                     sort_sync(&mut v, SortingAlgo::Quick);
-
                 });
                 best = best.min(us);
             }
@@ -145,7 +144,6 @@ fn main() {
             for _ in 0..args.repeat {
                 let (_r, us) = time_it(|| {
                     sort_parallel(&mut v, SortingAlgo::Quick);
-
                 });
                 best = best.min(us);
             }
@@ -253,10 +251,12 @@ fn main() {
             write_row("strings", "rk", "sync", "n", n, "chars", best);
         }
         let text = "ahishers".to_string();
-        let patterns = ["he".to_string(),
+        let patterns = [
+            "he".to_string(),
             "she".to_string(),
             "hers".to_string(),
-            "his".to_string()];
+            "his".to_string(),
+        ];
         let mut best = u128::MAX;
         for _ in 0..args.repeat {
             let (_r, us) = time_it(|| {

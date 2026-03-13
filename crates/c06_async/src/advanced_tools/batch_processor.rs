@@ -1,18 +1,18 @@
 //! 异步批处理器
-//! 
+//!
 //! 提供高效的批处理功能：
 //! - 智能批处理策略
 //! - 背压控制
 //! - 批量操作优化
 //! - 错误处理和重试
 //! - 性能监控
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::collections::VecDeque;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use tokio::sync::{Mutex, Semaphore, Notify};
-use tokio::time::{sleep, interval, timeout};
-use anyhow::Result;
-use serde::{Serialize, Deserialize};
+use tokio::sync::{Mutex, Notify, Semaphore};
+use tokio::time::{interval, sleep, timeout};
 use uuid::Uuid;
 
 /// 批处理策略
@@ -172,7 +172,7 @@ where
     pub async fn add_item(&self, item: BatchItem<T>) -> Result<()> {
         let queue_size = {
             let mut queue = self.queue.lock().await;
-            
+
             if queue.len() >= self.config.max_queue_size {
                 return Err(anyhow::anyhow!("队列已满"));
             }
@@ -186,11 +186,11 @@ where
                     break;
                 }
             }
-            
+
             if !inserted {
                 queue.push_back(item);
             }
-            
+
             queue.len()
         };
 
@@ -227,21 +227,21 @@ where
         config: &BatchConfig,
     ) {
         let batch = Self::create_batch(queue, config).await;
-        
+
         if batch.is_empty() {
             return;
         }
 
         let _permit = semaphore.acquire().await.unwrap();
-        
+
         let processor_clone = Arc::clone(processor);
         let stats_clone = Arc::clone(stats);
         let config = config.clone();
-        
+
         tokio::spawn(async move {
             let start_time = Instant::now();
             let _batch_id = Uuid::new_v4();
-            
+
             // 更新统计信息
             {
                 let mut stats = stats_clone.lock().await;
@@ -251,7 +251,12 @@ where
 
             // 处理批次
             let result = if let Some(timeout_duration) = config.processing_timeout {
-                match timeout(timeout_duration, processor_clone.process_batch(batch.clone())).await {
+                match timeout(
+                    timeout_duration,
+                    processor_clone.process_batch(batch.clone()),
+                )
+                .await
+                {
                     Ok(result) => result,
                     Err(_) => Err(anyhow::anyhow!("批处理超时")),
                 }
@@ -265,7 +270,7 @@ where
             {
                 let mut stats = stats_clone.lock().await;
                 stats.total_processing_time += processing_time;
-                
+
                 match result {
                     Ok(_) => {
                         stats.successful_batches += 1;
@@ -279,11 +284,12 @@ where
                 if stats.total_batches > 0 {
                     stats.avg_batch_size = stats.total_items as f64 / stats.total_batches as f64;
                     stats.avg_processing_time = Duration::from_nanos(
-                        stats.total_processing_time.as_nanos() as u64 / stats.total_batches as u64
+                        stats.total_processing_time.as_nanos() as u64 / stats.total_batches as u64,
                     );
-                    
+
                     if stats.total_processing_time.as_secs_f64() > 0.0 {
-                        stats.throughput = stats.total_items as f64 / stats.total_processing_time.as_secs_f64();
+                        stats.throughput =
+                            stats.total_items as f64 / stats.total_processing_time.as_secs_f64();
                     }
                 }
             }
@@ -291,7 +297,7 @@ where
             // 处理结果
             if let Err(e) = result {
                 println!("批处理失败: {}", e);
-                
+
                 // 如果配置了重试，将失败的项重新加入队列
                 if let Some(_retry_config) = &config.retry_config {
                     // 这里可以实现重试逻辑
@@ -301,24 +307,27 @@ where
         });
     }
 
-    async fn create_batch(queue: &Arc<Mutex<VecDeque<BatchItem<T>>>>, config: &BatchConfig) -> Vec<BatchItem<T>> {
+    async fn create_batch(
+        queue: &Arc<Mutex<VecDeque<BatchItem<T>>>>,
+        config: &BatchConfig,
+    ) -> Vec<BatchItem<T>> {
         let mut batch = Vec::new();
         let mut batch_size = 0;
         let start_time = Instant::now();
-        
+
         loop {
             let should_continue = {
                 let mut queue = queue.lock().await;
-                
+
                 if queue.is_empty() {
                     false
                 } else {
                     let item = queue.pop_front().unwrap();
                     let item_size = item.size;
-                    
+
                     // 检查批处理条件
                     let mut add_item = true;
-                    
+
                     match &config.strategy {
                         BatchStrategy::ByCount(max_count) => {
                             if batch.len() >= *max_count {
@@ -335,35 +344,41 @@ where
                                 add_item = false;
                             }
                         }
-                        BatchStrategy::Hybrid { max_count, max_time, max_size } => {
+                        BatchStrategy::Hybrid {
+                            max_count,
+                            max_time,
+                            max_size,
+                        } => {
                             let time_expired = start_time.elapsed() >= *max_time;
                             let count_exceeded = batch.len() >= *max_count;
                             let size_exceeded = batch_size + item_size > *max_size;
-                            
-                            if (time_expired || count_exceeded || size_exceeded) && !batch.is_empty() {
+
+                            if (time_expired || count_exceeded || size_exceeded)
+                                && !batch.is_empty()
+                            {
                                 add_item = false;
                             }
                         }
                     }
-                    
+
                     if !add_item {
                         // 将项目放回队列前面
                         queue.push_front(item);
                         break;
                     }
-                    
+
                     batch_size += item_size;
                     batch.push(item);
-                    
+
                     false
                 }
             };
-            
+
             if !should_continue {
                 break;
             }
         }
-        
+
         batch
     }
 }
@@ -390,16 +405,16 @@ where
 {
     async fn process_batch(&self, items: Vec<BatchItem<T>>) -> Result<Vec<BatchItem<T>>> {
         println!("批处理器 {} 处理 {} 个项目", self.name, items.len());
-        
+
         // 模拟批处理时间
         let processing_time = Duration::from_millis(100 + items.len() as u64 * 10);
         sleep(processing_time).await;
-        
+
         // 模拟偶尔失败
         if rand::random::<f32>() < 0.1 {
             return Err(anyhow::anyhow!("模拟批处理失败"));
         }
-        
+
         println!("批处理器 {} 完成处理", self.name);
         Ok(items)
     }
@@ -443,10 +458,16 @@ where
     }
 
     pub fn build(self) -> Result<AsyncBatchProcessor<T, P>> {
-        let processor = self.processor.ok_or_else(|| anyhow::anyhow!("处理器未设置"))?;
+        let processor = self
+            .processor
+            .ok_or_else(|| anyhow::anyhow!("处理器未设置"))?;
         let max_concurrent = self.max_concurrent_batches.unwrap_or(10);
 
-        Ok(AsyncBatchProcessor::new(processor, self.config, max_concurrent))
+        Ok(AsyncBatchProcessor::new(
+            processor,
+            self.config,
+            max_concurrent,
+        ))
     }
 }
 

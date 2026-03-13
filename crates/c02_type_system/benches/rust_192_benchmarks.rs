@@ -1,7 +1,7 @@
 //! Rust 1.92.0 性能基准测试
 //!
 //! 本文件提供了 Rust 1.92.0 新特性的性能基准测试
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::num::NonZeroUsize;
 
@@ -17,17 +17,13 @@ fn benchmark_type_converter(c: &mut Criterion) {
     let input = String::from("benchmark test string");
 
     group.bench_function("string_converter", |b| {
-        b.iter(|| {
-            black_box(converter.convert(black_box(input.clone())))
-        });
+        b.iter(|| black_box(converter.convert(black_box(input.clone()))));
     });
 
     let generic_converter = GenericTypeConverter::<String, String>::new();
 
     group.bench_function("generic_converter", |b| {
-        b.iter(|| {
-            black_box(generic_converter.convert(black_box(input.clone())))
-        });
+        b.iter(|| black_box(generic_converter.convert(black_box(input.clone()))));
     });
 
     group.finish();
@@ -41,22 +37,16 @@ fn benchmark_higher_ranked_lifetimes(c: &mut Criterion) {
     let input = "benchmark string for lifetime processing";
 
     group.bench_function("convert_with_lifetime", |b| {
-        b.iter(|| {
-            black_box(convert_with_lifetime(black_box(input), |s| s))
-        });
+        b.iter(|| black_box(convert_with_lifetime(black_box(input), |s| s)));
     });
 
     group.bench_function("process_strings", |b| {
-        b.iter(|| {
-            black_box(process_strings(black_box(input), |s| s))
-        });
+        b.iter(|| black_box(process_strings(black_box(input), |s| s)));
     });
 
     let processor = StringReverser;
     group.bench_function("processor_process", |b| {
-        b.iter(|| {
-            black_box(processor.process(black_box(input)))
-        });
+        b.iter(|| black_box(processor.process(black_box(input))));
     });
 
     group.finish();
@@ -68,9 +58,7 @@ fn benchmark_maybe_uninit(c: &mut Criterion) {
     let mut group = c.benchmark_group("maybe_uninit");
 
     group.bench_function("create_manager", |b| {
-        b.iter(|| {
-            black_box(TypeSafeUninitManager::<i32>::new())
-        });
+        b.iter(|| black_box(TypeSafeUninitManager::<i32>::new()));
     });
 
     group.bench_function("initialize_and_get", |b| {
@@ -107,9 +95,7 @@ fn benchmark_nonzero_div_ceil(c: &mut Criterion) {
             BenchmarkId::new("calculate_aligned_u64", count),
             count,
             |b, &count| {
-                b.iter(|| {
-                    black_box(calculator.calculate_aligned::<u64>(black_box(count)))
-                });
+                b.iter(|| black_box(calculator.calculate_aligned::<u64>(black_box(count))));
             },
         );
     }
@@ -120,10 +106,10 @@ fn benchmark_nonzero_div_ceil(c: &mut Criterion) {
             size,
             |b, &size| {
                 b.iter(|| {
-                    black_box(calculator.calculate_blocks(
-                        black_box(size),
-                        NonZeroUsize::new(16).unwrap()
-                    ))
+                    black_box(
+                        calculator
+                            .calculate_blocks(black_box(size), NonZeroUsize::new(16).unwrap()),
+                    )
                 });
             },
         );
@@ -144,13 +130,19 @@ fn benchmark_iterator_specialization(c: &mut Criterion) {
 
     group.bench_function("compare_small_equal", |b| {
         b.iter(|| {
-            black_box(compare_type_lists(black_box(&small_list1), black_box(&small_list2)))
+            black_box(compare_type_lists(
+                black_box(&small_list1),
+                black_box(&small_list2),
+            ))
         });
     });
 
     group.bench_function("compare_small_different", |b| {
         b.iter(|| {
-            black_box(compare_type_lists(black_box(&small_list1), black_box(&small_list3)))
+            black_box(compare_type_lists(
+                black_box(&small_list1),
+                black_box(&small_list3),
+            ))
         });
     });
 
@@ -161,13 +153,19 @@ fn benchmark_iterator_specialization(c: &mut Criterion) {
 
     group.bench_function("compare_medium_equal", |b| {
         b.iter(|| {
-            black_box(compare_type_lists(black_box(&medium_list1), black_box(&medium_list2)))
+            black_box(compare_type_lists(
+                black_box(&medium_list1),
+                black_box(&medium_list2),
+            ))
         });
     });
 
     group.bench_function("compare_medium_different", |b| {
         b.iter(|| {
-            black_box(compare_type_lists(black_box(&medium_list1), black_box(&medium_list3)))
+            black_box(compare_type_lists(
+                black_box(&medium_list1),
+                black_box(&medium_list3),
+            ))
         });
     });
 
@@ -178,13 +176,19 @@ fn benchmark_iterator_specialization(c: &mut Criterion) {
 
     group.bench_function("compare_large_equal", |b| {
         b.iter(|| {
-            black_box(compare_type_lists(black_box(&large_list1), black_box(&large_list2)))
+            black_box(compare_type_lists(
+                black_box(&large_list1),
+                black_box(&large_list2),
+            ))
         });
     });
 
     group.bench_function("compare_large_different", |b| {
         b.iter(|| {
-            black_box(compare_type_lists(black_box(&large_list1), black_box(&large_list3)))
+            black_box(compare_type_lists(
+                black_box(&large_list1),
+                black_box(&large_list3),
+            ))
         });
     });
 
@@ -202,15 +206,11 @@ fn benchmark_type_list_validator(c: &mut Criterion) {
     let actual_mismatch: Vec<i32> = (1..=99).chain(std::iter::once(0)).collect();
 
     group.bench_function("validate_match", |b| {
-        b.iter(|| {
-            black_box(validator.validate(black_box(&actual_match)))
-        });
+        b.iter(|| black_box(validator.validate(black_box(&actual_match))));
     });
 
     group.bench_function("validate_mismatch", |b| {
-        b.iter(|| {
-            black_box(validator.validate(black_box(&actual_mismatch)))
-        });
+        b.iter(|| black_box(validator.validate(black_box(&actual_mismatch))));
     });
 
     // 更大的列表
@@ -220,15 +220,11 @@ fn benchmark_type_list_validator(c: &mut Criterion) {
     let large_actual_mismatch: Vec<i32> = (1..=999).chain(std::iter::once(0)).collect();
 
     group.bench_function("validate_large_match", |b| {
-        b.iter(|| {
-            black_box(large_validator.validate(black_box(&large_actual_match)))
-        });
+        b.iter(|| black_box(large_validator.validate(black_box(&large_actual_match))));
     });
 
     group.bench_function("validate_large_mismatch", |b| {
-        b.iter(|| {
-            black_box(large_validator.validate(black_box(&large_actual_mismatch)))
-        });
+        b.iter(|| black_box(large_validator.validate(black_box(&large_actual_mismatch))));
     });
 
     group.finish();
@@ -240,23 +236,17 @@ fn benchmark_auto_traits(c: &mut Criterion) {
     let mut group = c.benchmark_group("auto_traits");
 
     group.bench_function("create_auto_trait_example", |b| {
-        b.iter(|| {
-            black_box(AutoTraitExample::new(black_box(42)))
-        });
+        b.iter(|| black_box(AutoTraitExample::new(black_box(42))));
     });
 
     let example = AutoTraitExample::new(42);
     group.bench_function("get_from_auto_trait_example", |b| {
-        b.iter(|| {
-            black_box(example.get())
-        });
+        b.iter(|| black_box(example.get()));
     });
 
     let string_example = AutoTraitExample::new(String::from("test"));
     group.bench_function("get_string_from_auto_trait_example", |b| {
-        b.iter(|| {
-            black_box(string_example.get())
-        });
+        b.iter(|| black_box(string_example.get()));
     });
 
     group.finish();

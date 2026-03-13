@@ -7,9 +7,9 @@
 //! 本示例展示了如何使用Rust 1.90的新异步特性来改进网络编程
 use c10_networks::error::{NetworkError, NetworkResult};
 use c10_networks::unified_api::NetClient;
+use futures::StreamExt;
 use std::time::{Duration, Instant};
 use tokio::time::timeout;
-use futures::StreamExt;
 
 /// Rust 1.90 异步特性演示
 #[tokio::main]
@@ -52,7 +52,8 @@ async fn demo_async_traits() -> NetworkResult<()> {
         async_network_operation(&client, "example.com", 1),
         async_network_operation(&client, "google.com", 2),
         async_network_operation(&client, "github.com", 3),
-    ]).await?;
+    ])
+    .await?;
 
     let duration = start.elapsed();
     println!("   并发操作完成，耗时: {:?}", duration);
@@ -73,10 +74,10 @@ async fn async_network_operation(
     tokio::time::sleep(Duration::from_millis(100)).await;
 
     // 使用改进的错误处理
-    let result = client.dns_lookup_ips(host).await
-        .map_err(|e| {
-            NetworkError::Other(format!("DNS lookup failed for {}: {}", host, e))
-        })?;
+    let result = client
+        .dns_lookup_ips(host)
+        .await
+        .map_err(|e| NetworkError::Other(format!("DNS lookup failed for {}: {}", host, e)))?;
 
     println!("   操作 {}: 完成，找到 {} 个IP", operation_id, result.len());
     Ok(format!("{}: {} IPs", host, result.len()))
@@ -89,25 +90,20 @@ async fn demo_async_closures() -> NetworkResult<()> {
     let client = NetClient::new();
 
     // Rust 1.90的异步闭包改进
-    let operations = vec![
-        "httpbin.org",
-        "jsonplaceholder.typicode.com",
-        "reqres.in",
-    ];
+    let operations = vec!["httpbin.org", "jsonplaceholder.typicode.com", "reqres.in"];
 
     // 使用改进的异步闭包语法
-    let results = futures::future::try_join_all(
-        operations.into_iter().map(|host| {
-            let client = client.clone();
-            // 异步闭包捕获优化
-            async move {
-                let start = Instant::now();
-                let result = client.dns_lookup_ips(host).await?;
-                let duration = start.elapsed();
-                Ok::<String, NetworkError>(format!("{}: {} IPs in {:?}", host, result.len(), duration))
-            }
-        })
-    ).await?;
+    let results = futures::future::try_join_all(operations.into_iter().map(|host| {
+        let client = client.clone();
+        // 异步闭包捕获优化
+        async move {
+            let start = Instant::now();
+            let result = client.dns_lookup_ips(host).await?;
+            let duration = start.elapsed();
+            Ok::<String, NetworkError>(format!("{}: {} IPs in {:?}", host, result.len(), duration))
+        }
+    }))
+    .await?;
 
     for result in results {
         println!("   {}", result);
@@ -146,7 +142,9 @@ async fn process_packet_improved<const N: usize>(data: [u8; N]) -> NetworkResult
     tokio::time::sleep(Duration::from_millis(50)).await;
 
     // 计算校验和
-    let checksum = data.iter().fold(0u32, |acc, &byte| acc.wrapping_add(byte as u32));
+    let checksum = data
+        .iter()
+        .fold(0u32, |acc, &byte| acc.wrapping_add(byte as u32));
 
     Ok(checksum)
 }
@@ -224,7 +222,8 @@ async fn with_improved_lifetimes<'a>(
     // 使用timeout包装异步操作
     let result = timeout(Duration::from_secs(5), async {
         client.dns_lookup_ips(host).await
-    }).await
+    })
+    .await
     .map_err(|_| NetworkError::Timeout(Duration::from_secs(5)))?
     .map_err(|e| NetworkError::Other(format!("DNS error: {}", e)))?;
 
@@ -238,7 +237,9 @@ async fn process_with_lifetime_check(data: &[u8]) -> NetworkResult<String> {
     tokio::time::sleep(Duration::from_millis(30)).await;
 
     // 计算哈希值
-    let hash = data.iter().fold(0u32, |acc, &byte| acc.wrapping_mul(31).wrapping_add(byte as u32));
+    let hash = data.iter().fold(0u32, |acc, &byte| {
+        acc.wrapping_mul(31).wrapping_add(byte as u32)
+    });
 
     Ok(format!("Hash: 0x{:08x}", hash))
 }
@@ -263,17 +264,17 @@ async fn benchmark_async_performance() -> NetworkResult<()> {
 
     // 测试2: 并发执行
     let start = Instant::now();
-    let futures = (0..iterations).map(|_| {
-        client.dns_lookup_ips("example.com")
-    });
+    let futures = (0..iterations).map(|_| client.dns_lookup_ips("example.com"));
 
     let _results = futures::future::try_join_all(futures).await?;
     let concurrent_time = start.elapsed();
 
     println!("   顺序执行时间: {:?}", sequential_time);
     println!("   并发执行时间: {:?}", concurrent_time);
-    println!("   性能提升: {:.2}x",
-        sequential_time.as_secs_f64() / concurrent_time.as_secs_f64());
+    println!(
+        "   性能提升: {:.2}x",
+        sequential_time.as_secs_f64() / concurrent_time.as_secs_f64()
+    );
 
     Ok(())
 }

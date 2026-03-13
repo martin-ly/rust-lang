@@ -1,5 +1,5 @@
 //! 内存安全高级演示模块
-//! 
+//!
 //! 本模块演示了 Rust 1.90 中的各种内存安全高级特性，包括：
 //! - 高级生命周期管理
 //! - 内存布局优化
@@ -11,7 +11,7 @@
 //! - 内存对齐和缓存优化
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::marker::PhantomData;
-use std::mem::{size_of, align_of};
+use std::mem::{align_of, size_of};
 use std::ops::{Deref, DerefMut};
 use std::ptr;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -51,8 +51,8 @@ pub mod advanced_lifetimes {
     }
 
     /// 生命周期组合器
-    pub struct LifetimeCombinator<'a, 'b, T, U> 
-    where 
+    pub struct LifetimeCombinator<'a, 'b, T, U>
+    where
         T: 'a,
         U: 'b,
     {
@@ -62,7 +62,7 @@ pub mod advanced_lifetimes {
     }
 
     impl<'a, 'b, T, U> LifetimeCombinator<'a, 'b, T, U>
-    where 
+    where
         T: 'a,
         U: 'b,
     {
@@ -159,7 +159,7 @@ pub mod memory_layout {
     impl MemoryPool {
         pub fn new(block_size: usize, total_blocks: usize) -> Self {
             let mut blocks = Vec::with_capacity(total_blocks);
-            
+
             unsafe {
                 for _ in 0..total_blocks {
                     let layout = Layout::from_size_align(block_size, align_of::<u8>()).unwrap();
@@ -185,12 +185,11 @@ pub mod memory_layout {
             }
 
             let new_free = current_free - 1;
-            if self.free_blocks.compare_exchange_weak(
-                current_free, 
-                new_free, 
-                Ordering::Release, 
-                Ordering::Relaxed
-            ).is_ok() {
+            if self
+                .free_blocks
+                .compare_exchange_weak(current_free, new_free, Ordering::Release, Ordering::Relaxed)
+                .is_ok()
+            {
                 Some(self.blocks[current_free - 1])
             } else {
                 None
@@ -212,7 +211,8 @@ pub mod memory_layout {
             unsafe {
                 for &ptr in &self.blocks {
                     if !ptr.is_null() {
-                        let layout = Layout::from_size_align(self.block_size, align_of::<u8>()).unwrap();
+                        let layout =
+                            Layout::from_size_align(self.block_size, align_of::<u8>()).unwrap();
                         System.dealloc(ptr, layout);
                     }
                 }
@@ -349,6 +349,7 @@ pub mod smart_pointers {
             }
         }
 
+        #[allow(clippy::should_implement_trait)]
         pub fn clone(&self) -> Self {
             unsafe {
                 (*self.count).fetch_add(1, Ordering::Relaxed);
@@ -452,11 +453,12 @@ pub mod smart_pointers {
 /// 内存泄漏检测
 pub mod memory_leak_detection {
     use std::collections::HashMap;
-    use std::sync::{Arc, Mutex};
     use std::sync::atomic::{AtomicUsize, Ordering};
+    use std::sync::{Arc, Mutex};
     use std::time::Instant;
 
     /// 内存泄漏检测器
+    #[allow(clippy::arc_with_non_send_sync)]
     pub struct MemoryLeakDetector {
         allocations: Arc<Mutex<HashMap<*mut u8, AllocationInfo>>>,
         total_allocated: AtomicUsize,
@@ -470,6 +472,7 @@ pub mod memory_leak_detection {
         pub stack_trace: Vec<String>,
     }
 
+    #[allow(clippy::arc_with_non_send_sync)]
     impl Default for MemoryLeakDetector {
         fn default() -> Self {
             Self {
@@ -493,7 +496,7 @@ pub mod memory_leak_detection {
             };
 
             self.total_allocated.fetch_add(size, Ordering::Relaxed);
-            
+
             let mut allocations = self.allocations.lock().unwrap();
             allocations.insert(ptr, info);
         }
@@ -501,7 +504,8 @@ pub mod memory_leak_detection {
         pub fn track_deallocation(&self, ptr: *mut u8) {
             let mut allocations = self.allocations.lock().unwrap();
             if let Some(info) = allocations.remove(&ptr) {
-                self.total_deallocated.fetch_add(info.size, Ordering::Relaxed);
+                self.total_deallocated
+                    .fetch_add(info.size, Ordering::Relaxed);
             }
         }
 
@@ -548,7 +552,7 @@ pub mod buffer_overflow_protection {
         pub fn new(size: usize) -> Self {
             let mut data = vec![0u8; size];
             let canary = Self::CANARY_VALUE;
-            
+
             // 在缓冲区末尾放置金丝雀值
             let canary_bytes = canary.to_le_bytes();
             let data_len = data.len();
@@ -593,8 +597,14 @@ pub mod buffer_overflow_protection {
 
             let canary_bytes = &self.data[self.data.len() - 8..];
             let stored_canary = u64::from_le_bytes([
-                canary_bytes[0], canary_bytes[1], canary_bytes[2], canary_bytes[3],
-                canary_bytes[4], canary_bytes[5], canary_bytes[6], canary_bytes[7],
+                canary_bytes[0],
+                canary_bytes[1],
+                canary_bytes[2],
+                canary_bytes[3],
+                canary_bytes[4],
+                canary_bytes[5],
+                canary_bytes[6],
+                canary_bytes[7],
             ]);
 
             stored_canary == self.canary
@@ -624,7 +634,10 @@ pub mod buffer_overflow_protection {
     impl BoundsChecker {
         pub fn check_bounds<T>(slice: &[T], index: usize) -> Result<(), BoundsError> {
             if index >= slice.len() {
-                Err(BoundsError::OutOfBounds { index, len: slice.len() })
+                Err(BoundsError::OutOfBounds {
+                    index,
+                    len: slice.len(),
+                })
             } else {
                 Ok(())
             }
@@ -637,7 +650,10 @@ pub mod buffer_overflow_protection {
 
         pub fn safe_get_mut<T>(slice: &mut [T], index: usize) -> Result<&mut T, BoundsError> {
             if index >= slice.len() {
-                return Err(BoundsError::OutOfBounds { index, len: slice.len() });
+                return Err(BoundsError::OutOfBounds {
+                    index,
+                    len: slice.len(),
+                });
             }
             Ok(&mut slice[index])
         }
@@ -652,7 +668,11 @@ pub mod buffer_overflow_protection {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match self {
                 BoundsError::OutOfBounds { index, len } => {
-                    write!(f, "Index {} out of bounds for slice of length {}", index, len)
+                    write!(
+                        f,
+                        "Index {} out of bounds for slice of length {}",
+                        index, len
+                    )
                 }
             }
         }
@@ -668,11 +688,9 @@ pub mod memory_alignment_cache {
     #[repr(align(64))]
     #[derive(Default)]
     pub struct CacheFriendlyStruct {
-        pub hot_data: [u64; 8],    // 热数据，经常访问
-        pub cold_data: [u8; 32],   // 冷数据，很少访问
+        pub hot_data: [u64; 8],  // 热数据，经常访问
+        pub cold_data: [u8; 32], // 冷数据，很少访问
     }
-
-    
 
     impl CacheFriendlyStruct {
         pub fn new() -> Self {
@@ -748,48 +766,54 @@ pub mod memory_alignment_cache {
 pub fn demonstrate_memory_safety_advanced() {
     println!("🛡️  Rust 1.90 内存安全高级演示");
     println!("=================================");
-    
+
     // 1. 高级生命周期管理演示
     println!("\n=== 高级生命周期管理演示 ===");
     let data = 42i32;
     let tracker = advanced_lifetimes::LifetimeTracker::new(&data, 1);
-    println!("生命周期追踪器 ID: {}, 年龄: {:?}", tracker.tracker_id(), tracker.age());
-    
+    println!(
+        "生命周期追踪器 ID: {}, 年龄: {:?}",
+        tracker.tracker_id(),
+        tracker.age()
+    );
+
     let long_lived = "长期数据".to_string();
     let combinator = advanced_lifetimes::LifetimeCombinator::new(&data, &long_lived);
     let result = combinator.combine(|short, long| format!("{} + {}", short, long));
     println!("生命周期组合结果: {}", result);
-    
+
     // 2. 内存布局优化演示
     println!("\n=== 内存布局优化演示 ===");
     let aligned_data = memory_layout::CacheAligned::new(42u64);
     println!("缓存对齐数据: {}", aligned_data.get());
-    
+
     let memory_pool = memory_layout::MemoryPool::new(1024, 10);
     println!("内存池可用块数: {}", memory_pool.available_blocks());
-    
+
     // 3. 零成本抽象演示
     println!("\n=== 零成本抽象演示 ===");
     let wrapper = zero_cost_abstractions::ZeroCostWrapper::new(100);
     println!("零成本包装器值: {}", wrapper.get());
-    
+
     const FACTORIAL_5: u32 = zero_cost_abstractions::compile_time_factorial(5);
     println!("编译时计算 5!: {}", FACTORIAL_5);
-    
+
     // 4. 智能指针演示
     println!("\n=== 智能指针演示 ===");
     let rc = smart_pointers::RefCounted::new(200);
     let rc2 = rc.clone();
     println!("引用计数智能指针值: {}", rc.get());
     println!("克隆后值: {}", rc2.get());
-    
+
     // 5. 内存泄漏检测演示
     println!("\n=== 内存泄漏检测演示 ===");
     let detector = memory_leak_detection::MemoryLeakDetector::new();
     let stats = detector.get_memory_stats();
-    println!("内存统计: 总分配={}, 总释放={}, 当前分配={}", 
-             stats.total_allocated, stats.total_deallocated, stats.current_allocations);
-    
+    println!(
+        "内存统计: 总分配={}, 总释放={}, 当前分配={}",
+        stats.total_allocated, stats.total_deallocated, stats.current_allocations
+    );
+
     // 6. 缓冲区溢出防护演示
     println!("\n=== 缓冲区溢出防护演示 ===");
     let mut safe_buffer = buffer_overflow_protection::SafeBuffer::new(100);
@@ -797,22 +821,22 @@ pub fn demonstrate_memory_safety_advanced() {
         Ok(_) => println!("安全写入成功"),
         Err(e) => println!("写入失败: {}", e),
     }
-    
+
     match safe_buffer.read(0, 13) {
         Ok(data) => println!("安全读取: {}", String::from_utf8_lossy(data)),
         Err(e) => println!("读取失败: {}", e),
     }
-    
+
     // 7. 内存对齐和缓存优化演示
     println!("\n=== 内存对齐和缓存优化演示 ===");
     let mut cache_friendly = memory_alignment_cache::CacheFriendlyStruct::new();
     cache_friendly.update_hot_data(0, 123);
     println!("缓存友好结构热数据: {:?}", cache_friendly.hot_data);
-    
+
     let data_array = vec![1, 2, 3, 4, 5];
     memory_alignment_cache::MemoryAccessOptimizer::sequential_access(&data_array, |x| {
         println!("顺序访问: {}", x);
     });
-    
+
     println!("\n✅ 内存安全高级演示完成！");
 }

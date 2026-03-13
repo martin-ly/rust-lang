@@ -1,5 +1,5 @@
 //! 控制流与函数模块性能基准测试 / Control Flow and Functions Module Performance Benchmarks
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 fn bench_control_flow_operations(c: &mut Criterion) {
@@ -44,5 +44,10 @@ fn bench_match_operations(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, bench_control_flow_operations, bench_branch_operations, bench_match_operations);
+criterion_group!(
+    benches,
+    bench_control_flow_operations,
+    bench_branch_operations,
+    bench_match_operations
+);
 criterion_main!(benches);

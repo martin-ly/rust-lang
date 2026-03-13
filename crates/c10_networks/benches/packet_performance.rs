@@ -3,8 +3,8 @@
 //! 这个模块包含了 c10_networks 库数据包处理的性能基准测试
 use bytes::Bytes;
 use c10_networks::{
-    packet::{Packet, PacketBuilder, PacketBuffer, PacketFilter, PacketStats, PacketType},
     packet::buffer::BufferConfig,
+    packet::{Packet, PacketBuffer, PacketBuilder, PacketFilter, PacketStats, PacketType},
 };
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
@@ -179,9 +179,7 @@ fn bench_packet_filter(c: &mut Criterion) {
     });
 
     group.bench_function("size_filter", |b| {
-        let filter = PacketFilter::new()
-            .min_size(5)
-            .max_size(20);
+        let filter = PacketFilter::new().min_size(5).max_size(20);
         let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
 
         b.iter(|| {
@@ -191,8 +189,7 @@ fn bench_packet_filter(c: &mut Criterion) {
     });
 
     group.bench_function("sequence_filter", |b| {
-        let filter = PacketFilter::new()
-            .sequence_range(100, 200);
+        let filter = PacketFilter::new().sequence_range(100, 200);
         let packet = Packet::with_sequence(PacketType::Tcp, Bytes::copy_from_slice(b"data"), 150);
 
         b.iter(|| {
@@ -357,7 +354,9 @@ fn bench_concurrent_packet_processing(c: &mut Criterion) {
                     for i in 0..100 {
                         let packet = Packet::new(
                             PacketType::Raw,
-                            Bytes::copy_from_slice(format!("thread {} data {}", thread_id, i).as_bytes()),
+                            Bytes::copy_from_slice(
+                                format!("thread {} data {}", thread_id, i).as_bytes(),
+                            ),
                         );
                         local_stats.add_packet(&packet);
                     }
@@ -396,7 +395,9 @@ fn bench_concurrent_packet_processing(c: &mut Criterion) {
                     for i in 0..100 {
                         let packet = Packet::new(
                             PacketType::Raw,
-                            Bytes::copy_from_slice(format!("thread {} data {}", thread_id, i).as_bytes()),
+                            Bytes::copy_from_slice(
+                                format!("thread {} data {}", thread_id, i).as_bytes(),
+                            ),
                         );
                         let _ = buffer_clone.lock().unwrap().push(packet);
                     }

@@ -14,10 +14,10 @@
 pub trait PipelineProcessor {
     type Input;
     type Output;
-    
+
     /// 处理单个元素 - 返回 impl Iterator (RPITIT)
     fn process(&self, input: Self::Input) -> impl Iterator<Item = Self::Output>;
-    
+
     /// 批量处理 - 返回 impl Iterator (RPITIT)
     fn process_batch<I>(&self, inputs: I) -> impl Iterator<Item = Self::Output>
     where
@@ -25,10 +25,11 @@ pub trait PipelineProcessor {
         Self::Input: 'static,
         Self::Output: 'static,
     {
-        inputs.into_iter()
+        inputs
+            .into_iter()
             .flat_map(move |input| self.process(input))
     }
-    
+
     /// 处理器名称
     fn name(&self) -> &str;
 }
@@ -66,22 +67,23 @@ impl TokenizerProcessor {
 impl PipelineProcessor for TokenizerProcessor {
     type Input = String;
     type Output = String;
-    
+
     fn process(&self, input: String) -> impl Iterator<Item = String> {
         let delimiter = self.delimiter;
-        input.split(delimiter)
+        input
+            .split(delimiter)
             .map(|s| s.to_string())
             .collect::<Vec<_>>()
             .into_iter()
     }
-    
+
     fn name(&self) -> &str {
         "Tokenizer"
     }
 }
 
 /// 过滤处理器
-pub struct FilterProcessor<F> 
+pub struct FilterProcessor<F>
 where
     F: Fn(&str) -> bool,
 {
@@ -103,7 +105,7 @@ where
 {
     type Input = String;
     type Output = String;
-    
+
     fn process(&self, input: String) -> impl Iterator<Item = String> {
         if (self.predicate)(&input) {
             Some(input).into_iter()
@@ -111,7 +113,7 @@ where
             None.into_iter()
         }
     }
-    
+
     fn name(&self) -> &str {
         "Filter"
     }
@@ -140,11 +142,11 @@ where
 {
     type Input = String;
     type Output = T;
-    
+
     fn process(&self, input: String) -> impl Iterator<Item = T> {
         std::iter::once((self.mapper)(input))
     }
-    
+
     fn name(&self) -> &str {
         "Map"
     }
@@ -169,11 +171,11 @@ impl RangeGenerator {
 impl PipelineProcessor for RangeGenerator {
     type Input = ();
     type Output = i32;
-    
+
     fn process(&self, _input: ()) -> impl Iterator<Item = i32> {
         (self.start..self.end).collect::<Vec<_>>().into_iter()
     }
-    
+
     fn name(&self) -> &str {
         "RangeGenerator"
     }
@@ -185,7 +187,7 @@ pub struct EvenFilter;
 impl PipelineProcessor for EvenFilter {
     type Input = i32;
     type Output = i32;
-    
+
     fn process(&self, input: i32) -> impl Iterator<Item = i32> {
         if input % 2 == 0 {
             Some(input).into_iter()
@@ -193,7 +195,7 @@ impl PipelineProcessor for EvenFilter {
             None.into_iter()
         }
     }
-    
+
     fn name(&self) -> &str {
         "EvenFilter"
     }
@@ -205,11 +207,11 @@ pub struct SquareMapper;
 impl PipelineProcessor for SquareMapper {
     type Input = i32;
     type Output = i32;
-    
+
     fn process(&self, input: i32) -> impl Iterator<Item = i32> {
         std::iter::once(input * input)
     }
-    
+
     fn name(&self) -> &str {
         "SquareMapper"
     }
@@ -226,7 +228,7 @@ impl SumReducer {
             sum: std::cell::RefCell::new(0),
         }
     }
-    
+
     pub fn get_sum(&self) -> i32 {
         *self.sum.borrow()
     }
@@ -235,12 +237,12 @@ impl SumReducer {
 impl PipelineProcessor for SumReducer {
     type Input = i32;
     type Output = i32;
-    
+
     fn process(&self, input: i32) -> impl Iterator<Item = i32> {
         *self.sum.borrow_mut() += input;
         std::iter::once(*self.sum.borrow())
     }
-    
+
     fn name(&self) -> &str {
         "SumReducer"
     }
@@ -273,7 +275,7 @@ impl RecordValidator {
 impl PipelineProcessor for RecordValidator {
     type Input = Record;
     type Output = Record;
-    
+
     fn process(&self, input: Record) -> impl Iterator<Item = Record> {
         if input.value >= self.min_value {
             Some(input).into_iter()
@@ -281,7 +283,7 @@ impl PipelineProcessor for RecordValidator {
             None.into_iter()
         }
     }
-    
+
     fn name(&self) -> &str {
         "RecordValidator"
     }
@@ -301,12 +303,12 @@ impl RecordEnricher {
 impl PipelineProcessor for RecordEnricher {
     type Input = Record;
     type Output = Record;
-    
+
     fn process(&self, mut input: Record) -> impl Iterator<Item = Record> {
         input.tags.push(self.tag.clone());
         std::iter::once(input)
     }
-    
+
     fn name(&self) -> &str {
         "RecordEnricher"
     }
@@ -325,7 +327,7 @@ pub struct RecordAggregator;
 impl PipelineProcessor for RecordAggregator {
     type Input = Record;
     type Output = RecordSummary;
-    
+
     fn process(&self, input: Record) -> impl Iterator<Item = RecordSummary> {
         std::iter::once(RecordSummary {
             id: input.id,
@@ -333,7 +335,7 @@ impl PipelineProcessor for RecordAggregator {
             tag_count: input.tags.len(),
         })
     }
-    
+
     fn name(&self) -> &str {
         "RecordAggregator"
     }
@@ -364,14 +366,15 @@ where
 {
     type Input = P1::Input;
     type Output = P2::Output;
-    
+
     fn process(&self, input: Self::Input) -> impl Iterator<Item = Self::Output> {
-        self.first.process(input)
+        self.first
+            .process(input)
             .flat_map(|x| self.second.process(x))
             .collect::<Vec<_>>()
             .into_iter()
     }
-    
+
     fn name(&self) -> &str {
         "Chain"
     }
@@ -385,10 +388,9 @@ where
 pub trait ParallelProcessor {
     type Input: Send;
     type Output: Send;
-    
+
     /// 并行处理（返回 Send 迭代器）
-    fn process_parallel(&self, input: Self::Input) 
-        -> impl Iterator<Item = Self::Output> + Send;
+    fn process_parallel(&self, input: Self::Input) -> impl Iterator<Item = Self::Output> + Send;
 }
 
 /// 并行数值处理器
@@ -405,10 +407,11 @@ impl ParallelNumProcessor {
 impl ParallelProcessor for ParallelNumProcessor {
     type Input = Vec<i32>;
     type Output = i32;
-    
+
     fn process_parallel(&self, input: Vec<i32>) -> impl Iterator<Item = i32> + Send {
         let multiplier = self.multiplier;
-        input.into_iter()
+        input
+            .into_iter()
             .map(move |x| x * multiplier)
             .collect::<Vec<_>>()
             .into_iter()
@@ -433,22 +436,24 @@ impl PipelineStats {
             start_time: std::time::Instant::now(),
         }
     }
-    
+
     pub fn add_processor(&mut self, name: impl Into<String>) {
         self.processors.push(name.into());
     }
-    
+
     pub fn record_item(&mut self) {
         self.items_processed += 1;
     }
-    
+
     pub fn report(&self) {
         println!("\n📊 流水线统计:");
         println!("  处理器链: {}", self.processors.join(" → "));
         println!("  处理项数: {}", self.items_processed);
         println!("  总耗时: {:?}", self.start_time.elapsed());
-        println!("  平均耗时: {:.2} µs/item", 
-                 self.start_time.elapsed().as_micros() as f64 / self.items_processed as f64);
+        println!(
+            "  平均耗时: {:.2} µs/item",
+            self.start_time.elapsed().as_micros() as f64 / self.items_processed as f64
+        );
     }
 }
 
@@ -460,10 +465,10 @@ impl PipelineStats {
 pub trait OldPipelineProcessor {
     type Input;
     type Output;
-    type Iter<'a>: Iterator<Item = Self::Output> 
-    where 
+    type Iter<'a>: Iterator<Item = Self::Output>
+    where
         Self: 'a;
-    
+
     fn process(&self, input: Self::Input) -> Self::Iter<'_>;
 }
 
@@ -471,18 +476,18 @@ pub trait OldPipelineProcessor {
 pub fn compare_approaches() {
     println!("\n📊 RPITIT vs 关联类型对比");
     println!("{}", "-".repeat(70));
-    
+
     println!("\n✅ RPITIT 优势:");
     println!("  1. 代码更简洁（无需定义 Iter 关联类型）");
     println!("  2. 更好的类型推导");
     println!("  3. 更灵活的返回类型");
     println!("  4. 零性能开销（完全内联）");
-    
+
     println!("\n⚖️  关联类型的场景:");
     println!("  1. 需要在 trait 外部引用迭代器类型");
     println!("  2. 更复杂的生命周期约束");
     println!("  3. trait 对象（dyn Trait）");
-    
+
     println!("\n💡 性能:");
     println!("  - 编译后性能完全相同");
     println!("  - 都是零成本抽象");
@@ -496,44 +501,44 @@ pub fn compare_approaches() {
 fn main() {
     println!("🦀 Rust 1.90 RPITIT 流水线模式高级示例\n");
     println!("{}", "=".repeat(70));
-    
+
     // 示例 1: 文本处理流水线
     println!("\n📌 示例 1: 文本处理流水线");
     println!("{}", "-".repeat(70));
-    
+
     let text = "hello,world,rust,programming,design,patterns".to_string();
     println!("输入: {}", text);
-    
+
     let pipeline = TokenizerProcessor::new(',')
         .chain(FilterProcessor::new(|s| s.len() > 4))
         .chain(MapProcessor::new(|s| s.to_uppercase()));
-    
+
     println!("\n处理器链: Tokenizer → Filter → Map");
     println!("结果:");
     for (i, result) in pipeline.process(text).enumerate() {
         println!("  {}. {}", i + 1, result);
     }
-    
+
     // 示例 2: 数值处理流水线
     println!("\n📌 示例 2: 数值处理流水线");
     println!("{}", "-".repeat(70));
-    
+
     let pipeline = RangeGenerator::new(1, 11)
         .chain(EvenFilter)
         .chain(SquareMapper);
-    
+
     println!("输入: 1..11");
     println!("处理器链: RangeGenerator → EvenFilter → SquareMapper");
     println!("结果:");
-    
+
     let results: Vec<_> = pipeline.process(()).collect();
     println!("  {:?}", results);
     println!("  (偶数的平方: 4, 16, 36, 64, 100)");
-    
+
     // 示例 3: 数据记录流水线
     println!("\n📌 示例 3: 数据记录处理流水线");
     println!("{}", "-".repeat(70));
-    
+
     let records = vec![
         Record {
             id: 1,
@@ -554,77 +559,78 @@ fn main() {
             tags: vec!["initial".to_string()],
         },
     ];
-    
+
     println!("输入: {} 条记录", records.len());
-    
+
     let pipeline = RecordValidator::new(75.0)
         .chain(RecordEnricher::new("validated"))
         .chain(RecordAggregator);
-    
+
     println!("处理器链: Validator(≥75) → Enricher → Aggregator");
     println!("\n结果:");
-    
+
     for record in records {
         for summary in pipeline.process(record) {
-            println!("  ID: {}, Value: {:.2}, Tags: {}", 
-                     summary.id, summary.value, summary.tag_count);
+            println!(
+                "  ID: {}, Value: {:.2}, Tags: {}",
+                summary.id, summary.value, summary.tag_count
+            );
         }
     }
-    
+
     // 示例 4: 批量处理
     println!("\n📌 示例 4: 批量处理");
     println!("{}", "-".repeat(70));
-    
+
     let inputs = vec!["apple", "banana", "cherry", "date"];
     println!("输入: {:?}", inputs);
-    
+
     let processor = MapProcessor::new(|s| s.to_uppercase());
     println!("处理器: ToUppercase");
-    
-    let results: Vec<_> = processor.process_batch(
-        inputs.into_iter().map(String::from)
-    ).collect();
-    
+
+    let results: Vec<_> = processor
+        .process_batch(inputs.into_iter().map(String::from))
+        .collect();
+
     println!("结果: {:?}", results);
-    
+
     // 示例 5: 并行处理
     println!("\n📌 示例 5: 并行处理");
     println!("{}", "-".repeat(70));
-    
+
     let parallel_processor = ParallelNumProcessor::new(2);
     let data = vec![1, 2, 3, 4, 5];
-    
+
     println!("输入: {:?}", data);
     println!("操作: 每个元素 × 2");
-    
+
     let results: Vec<_> = parallel_processor.process_parallel(data).collect();
     println!("结果: {:?}", results);
-    
+
     // 性能统计
     println!("\n📌 性能统计示例");
     println!("{}", "-".repeat(70));
-    
+
     let mut stats = PipelineStats::new();
     stats.add_processor("Filter");
     stats.add_processor("Map");
     stats.add_processor("Reduce");
-    
+
     let input = (1..1001).map(|i| i.to_string()).collect::<Vec<_>>();
-    
-    let processor = FilterProcessor::new(|s| s.len() > 1)
-        .chain(MapProcessor::new(|s| s.len()));
-    
+
+    let processor = FilterProcessor::new(|s| s.len() > 1).chain(MapProcessor::new(|s| s.len()));
+
     for item in input {
         for _ in processor.process(item) {
             stats.record_item();
         }
     }
-    
+
     stats.report();
-    
+
     // 方法对比
     compare_approaches();
-    
+
     // 总结
     println!("\n{}", "=".repeat(70));
     println!("✅ RPITIT 流水线模式的优势:");
@@ -645,34 +651,34 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_tokenizer() {
         let processor = TokenizerProcessor::new(',');
         let result: Vec<_> = processor.process("a,b,c".to_string()).collect();
         assert_eq!(result, vec!["a", "b", "c"]);
     }
-    
+
     #[test]
     fn test_filter() {
         let processor = FilterProcessor::new(|s| s.len() > 2);
         let result: Vec<_> = processor.process("hello".to_string()).collect();
         assert_eq!(result.len(), 1);
-        
+
         let result: Vec<_> = processor.process("hi".to_string()).collect();
         assert_eq!(result.len(), 0);
     }
-    
+
     #[test]
     fn test_chain() {
         let pipeline = RangeGenerator::new(1, 6)
             .chain(EvenFilter)
             .chain(SquareMapper);
-        
+
         let result: Vec<_> = pipeline.process(()).collect();
         assert_eq!(result, vec![4, 16]);
     }
-    
+
     #[test]
     fn test_record_pipeline() {
         let record = Record {
@@ -681,14 +687,13 @@ mod tests {
             value: 100.0,
             tags: vec![],
         };
-        
+
         let pipeline = RecordValidator::new(50.0)
             .chain(RecordEnricher::new("test"))
             .chain(RecordAggregator);
-        
+
         let result: Vec<_> = pipeline.process(record).collect();
         assert_eq!(result.len(), 1);
         assert_eq!(result[0].tag_count, 1);
     }
 }
-

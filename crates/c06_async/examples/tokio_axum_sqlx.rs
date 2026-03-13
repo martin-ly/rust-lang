@@ -1,20 +1,23 @@
-use axum::{routing::get, Router, extract::State, Json};
+use axum::{Json, Router, extract::State, routing::get};
 use serde::{Deserialize, Serialize};
 // use sqlx::{Pool, Postgres, postgres::PgPoolOptions}; // 暂时注释以避免链接冲突
-use std::{net::SocketAddr, time::Duration};
-use tokio::time::{timeout, sleep};
-use tracing_subscriber::EnvFilter;
 use reqwest::Client;
+use std::{net::SocketAddr, time::Duration};
+use tokio::time::{sleep, timeout};
+use tracing_subscriber::EnvFilter;
 
 #[derive(Clone)]
-struct AppState { 
+struct AppState {
     // db: Pool<Postgres>, // 暂时注释以避免链接冲突
     http_client: Client,
 }
 
 #[derive(Serialize, Deserialize)]
 #[allow(dead_code)] // 暂时注释数据库功能时未使用
-struct Item { id: i64, name: String }
+struct Item {
+    id: i64,
+    name: String,
+}
 
 #[tokio::main(flavor = "multi_thread")]
 async fn main() -> anyhow::Result<()> {
@@ -32,9 +35,7 @@ async fn main() -> anyhow::Result<()> {
     // sqlx::query("CREATE TABLE IF NOT EXISTS items (id SERIAL PRIMARY KEY, name TEXT NOT NULL)")
     //     .execute(&db).await?;
 
-    let http_client = Client::builder()
-        .timeout(Duration::from_secs(10))
-        .build()?;
+    let http_client = Client::builder().timeout(Duration::from_secs(10)).build()?;
 
     let app = Router::new()
         .route("/health", get(health))
@@ -49,7 +50,9 @@ async fn main() -> anyhow::Result<()> {
     Ok(())
 }
 
-async fn health() -> &'static str { "ok" }
+async fn health() -> &'static str {
+    "ok"
+}
 
 // 暂时注释数据库相关函数以避免链接冲突
 // async fn list_items(State(state): State<AppState>) -> anyhow::Result<Json<Vec<Item>>, axum::http::StatusCode> {
@@ -81,12 +84,14 @@ async fn health() -> &'static str { "ok" }
 // }
 
 /// 外部 HTTP 请求示例：带重试与指数退避
-async fn fetch_external_data(State(state): State<AppState>) -> anyhow::Result<Json<serde_json::Value>, axum::http::StatusCode> {
+async fn fetch_external_data(
+    State(state): State<AppState>,
+) -> anyhow::Result<Json<serde_json::Value>, axum::http::StatusCode> {
     let fut = async {
         let url = "https://httpbin.org/json";
         let mut retries = 3;
         let mut delay = Duration::from_millis(100);
-        
+
         loop {
             match state.http_client.get(url).send().await {
                 Ok(resp) => {
@@ -102,22 +107,20 @@ async fn fetch_external_data(State(state): State<AppState>) -> anyhow::Result<Js
                     tracing::warn!(error = %e, "external fetch error");
                 }
             }
-            
+
             if retries == 0 {
                 return Err(anyhow::anyhow!("max retries exceeded"));
             }
-            
+
             retries -= 1;
             sleep(delay).await;
             delay *= 2; // 指数退避
         }
     };
-    
+
     match timeout(Duration::from_secs(15), fut).await {
         Ok(Ok(json)) => Ok(json),
         Ok(Err(_)) => Err(axum::http::StatusCode::BAD_GATEWAY),
         Err(_) => Err(axum::http::StatusCode::GATEWAY_TIMEOUT),
     }
 }
-
-

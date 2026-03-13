@@ -149,14 +149,12 @@ pub mod macro_new_apis {
     }
 
     /// 使用 ControlFlow 进行宏参数检查
-    pub fn check_macro_args(
-        args: &[String],
-        max_args: usize,
-    ) -> ControlFlow<String, Vec<String>> {
+    pub fn check_macro_args(args: &[String], max_args: usize) -> ControlFlow<String, Vec<String>> {
         if args.len() > max_args {
             return ControlFlow::Break(format!(
                 "宏参数数量超出限制: {} > {}",
-                args.len(), max_args
+                args.len(),
+                max_args
             ));
         }
 
@@ -222,7 +220,11 @@ pub mod macro_jit_optimizations {
         let (sum, count, avg) = calculate_macro_stats(&counts);
         println!("宏统计: 总和={}, 数量={}, 平均值={}", sum, count, avg);
 
-        let tokens = vec!["token1".to_string(), "token2".to_string(), "token3".to_string()];
+        let tokens = vec![
+            "token1".to_string(),
+            "token2".to_string(),
+            "token3".to_string(),
+        ];
         let filtered = filter_and_transform_tokens(&tokens);
         println!("过滤和转换后的令牌数: {}", filtered.len());
     }
@@ -288,7 +290,9 @@ pub mod macro_std_new_apis {
     /// Vec::try_reserve_exact 示例
     ///
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
-    pub fn allocate_macro_buffer(size: usize) -> Result<Vec<u8>, std::collections::TryReserveError> {
+    pub fn allocate_macro_buffer(
+        size: usize,
+    ) -> Result<Vec<u8>, std::collections::TryReserveError> {
         let mut vec = Vec::new();
         vec.try_reserve_exact(size)?;
         Ok(vec)
@@ -462,8 +466,8 @@ pub fn demonstrate_rust_191_macro_features() {
 /// Rust 1.91 改进了宏展开缓存，减少重复展开的编译时间
 pub mod macro_expansion_cache {
     use std::collections::HashMap;
-    use std::hash::{Hash, Hasher};
     use std::collections::hash_map::DefaultHasher;
+    use std::hash::{Hash, Hasher};
 
     /// 宏展开结果
     #[derive(Debug, Clone)]
@@ -533,8 +537,7 @@ pub mod macro_expansion_cache {
             let result = self.cache.get(&key).cloned();
 
             let lookup_time = start_time.elapsed().as_micros() as u64;
-            self.stats.avg_lookup_time =
-                (self.stats.avg_lookup_time + lookup_time) / 2;
+            self.stats.avg_lookup_time = (self.stats.avg_lookup_time + lookup_time) / 2;
 
             match result {
                 Some(mut expansion) => {
@@ -677,7 +680,11 @@ pub mod improved_macro_errors {
         /// Rust 1.91: 提供更友好的错误消息格式
         pub fn format_error(error: &MacroError) -> String {
             match error {
-                MacroError::ArgumentCount { expected, found, macro_name } => {
+                MacroError::ArgumentCount {
+                    expected,
+                    found,
+                    macro_name,
+                } => {
                     format!(
                         "宏 `{}` 的参数数量错误\n\
                          期望: {} 个参数\n\
@@ -686,7 +693,11 @@ pub mod improved_macro_errors {
                         macro_name, expected, found
                     )
                 }
-                MacroError::ArgumentType { expected_type, found_type, position } => {
+                MacroError::ArgumentType {
+                    expected_type,
+                    found_type,
+                    position,
+                } => {
                     format!(
                         "宏参数类型错误（位置 {}）\n\
                          期望类型: {}\n\
@@ -695,7 +706,10 @@ pub mod improved_macro_errors {
                         position, expected_type, found_type
                     )
                 }
-                MacroError::RecursionDepth { current_depth, max_depth } => {
+                MacroError::RecursionDepth {
+                    current_depth,
+                    max_depth,
+                } => {
                     format!(
                         "宏递归深度超出限制\n\
                          当前深度: {}\n\
@@ -704,7 +718,11 @@ pub mod improved_macro_errors {
                         current_depth, max_depth
                     )
                 }
-                MacroError::PatternMismatch { macro_name, pattern, input } => {
+                MacroError::PatternMismatch {
+                    macro_name,
+                    pattern,
+                    input,
+                } => {
                     format!(
                         "宏 `{}` 的模式匹配失败\n\
                          期望模式: `{}`\n\
@@ -796,7 +814,10 @@ pub mod improved_macro_errors {
             println!("\n错误 {}:", i + 1);
             println!("{}", ImprovedMacroErrorFormatter::format_error(error));
             println!("\n修复建议:");
-            for (j, suggestion) in ImprovedMacroErrorFormatter::suggest_fix(error).iter().enumerate() {
+            for (j, suggestion) in ImprovedMacroErrorFormatter::suggest_fix(error)
+                .iter()
+                .enumerate()
+            {
                 println!("  {}. {}", j + 1, suggestion);
             }
         }
@@ -865,7 +886,8 @@ pub mod proc_macro_compilation_optimization {
             let compiled = format!("compiled_{}", macro_source);
 
             // 缓存编译结果
-            self.compilation_cache.insert(macro_source.to_string(), compiled.clone());
+            self.compilation_cache
+                .insert(macro_source.to_string(), compiled.clone());
 
             // 更新统计信息
             let compilation_time = start_time.elapsed().as_micros() as u64;
@@ -902,11 +924,8 @@ pub mod proc_macro_compilation_optimization {
 
         // 编译一些宏
         let macros = vec![
-            "macro1",
-            "macro2",
-            "macro1", // 重复，应该使用缓存
-            "macro3",
-            "macro2", // 重复，应该使用缓存
+            "macro1", "macro2", "macro1", // 重复，应该使用缓存
+            "macro3", "macro2", // 重复，应该使用缓存
         ];
 
         for macro_source in macros {
@@ -922,7 +941,9 @@ pub mod proc_macro_compilation_optimization {
         println!("  总编译时间: {} μs", stats.total_compilation_time);
 
         if stats.compiled_macros > 0 {
-            let cache_rate = (stats.cache_used as f64 / (stats.compiled_macros + stats.cache_used) as f64) * 100.0;
+            let cache_rate = (stats.cache_used as f64
+                / (stats.compiled_macros + stats.cache_used) as f64)
+                * 100.0;
             println!("  缓存命中率: {:.2}%", cache_rate);
         }
     }

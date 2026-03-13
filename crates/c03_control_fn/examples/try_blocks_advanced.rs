@@ -1,6 +1,9 @@
 #[derive(Debug, PartialEq)]
 #[allow(dead_code)]
-enum AppErr { Parse, Io }
+enum AppErr {
+    Parse,
+    Io,
+}
 
 fn parse_num(s: &str) -> Result<i32, AppErr> {
     s.parse::<i32>().map_err(|_| AppErr::Parse)
@@ -25,5 +28,3 @@ fn main() {
     assert_eq!(head_plus_parsed(&["7"]), Some(7));
     assert_eq!(head_plus_parsed(&[]), None);
 }
-
-

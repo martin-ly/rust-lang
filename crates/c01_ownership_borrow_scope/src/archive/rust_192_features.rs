@@ -12,9 +12,9 @@
 //! - 关联项的多个边界 / Multiple Bounds for Associated Items
 //! - 增强的高阶生命周期区域处理 / Enhanced Higher-Ranked Region Handling
 //! - 改进的 `unused_must_use` Lint 行为 / Refined `unused_must_use` Lint Behavior
+use std::marker::PhantomData;
 use std::mem::MaybeUninit;
 use std::ptr;
-use std::marker::PhantomData;
 
 /// # 1. `MaybeUninit` 表示和有效性文档化 / Documented `MaybeUninit` Representation and Validity
 ///
@@ -373,8 +373,12 @@ pub fn rust_192_iterator_eq_example() {
     // 使用自定义比较 / Use custom comparison
     // 注意：eq_by 在稳定版本中可能不可用，使用手动比较
     // Note: eq_by may not be available in stable, use manual comparison
-    let are_equal_manual = vec1.len() == vec2.len() && vec1.iter().zip(vec2.iter()).all(|(a, b)| a == b);
-    println!("Vectors are equal by custom comparison: {}", are_equal_manual);
+    let are_equal_manual =
+        vec1.len() == vec2.len() && vec1.iter().zip(vec2.iter()).all(|(a, b)| a == b);
+    println!(
+        "Vectors are equal by custom comparison: {}",
+        are_equal_manual
+    );
 }
 
 /// # 12. 简化的元组扩展 / Simplified Tuple Extension
@@ -463,7 +467,9 @@ pub fn run_all_rust_192_features_examples() {
     println!("   Is empty: {}\n", zero_array.is_empty());
 
     // 5. track_caller 和 no_mangle 组合示例
-    println!("5. #[track_caller] 和 #[no_mangle] 的组合使用 / Combined Use of #[track_caller] and #[no_mangle]:");
+    println!(
+        "5. #[track_caller] 和 #[no_mangle] 的组合使用 / Combined Use of #[track_caller] and #[no_mangle]:"
+    );
     let result = rust_192_tracked_function(21);
     println!("   Result: {}\n", result);
 

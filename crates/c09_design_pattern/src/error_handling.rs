@@ -87,11 +87,8 @@ impl ErrorHandler {
                 delay_ms,
             } => self.handle_with_retry(operation, *max_attempts, *delay_ms),
             RecoveryStrategy::Fallback => self.handle_with_fallback(operation),
-            RecoveryStrategy::Ignore => {
-                operation().map_err(|_| DesignPatternError::ConfigurationError(
-                        "操作被忽略".to_string(),
-                    ))
-            }
+            RecoveryStrategy::Ignore => operation()
+                .map_err(|_| DesignPatternError::ConfigurationError("操作被忽略".to_string())),
             RecoveryStrategy::Propagate => operation(),
         }
     }
@@ -133,10 +130,7 @@ impl ErrorHandler {
                 .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
 
             // 返回降级结果
-            DesignPatternError::ConfigurationError(format!(
-                "降级处理: {}",
-                error
-            ))
+            DesignPatternError::ConfigurationError(format!("降级处理: {}", error))
         })
     }
 
@@ -346,7 +340,10 @@ pub mod utils {
     /// 验证输入参数
     pub fn validate_input<T>(value: Option<T>, name: &str) -> PatternResult<T> {
         let Some(v) = value else {
-            return Err(DesignPatternError::ConfigurationError(format!("{} 不能为空", name)));
+            return Err(DesignPatternError::ConfigurationError(format!(
+                "{} 不能为空",
+                name
+            )));
         };
         Ok(v)
     }

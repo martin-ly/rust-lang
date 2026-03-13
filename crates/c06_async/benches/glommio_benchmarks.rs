@@ -13,7 +13,7 @@
 //! ```
 #![cfg(target_os = "linux")]
 
-use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
+use criterion::{BenchmarkId, Criterion, Throughput, black_box, criterion_group, criterion_main};
 use std::time::Duration;
 
 // ============================================================================
@@ -95,7 +95,7 @@ fn bench_file_io(c: &mut Criterion) {
     // Glommio DMA 文件 I/O
     group.bench_function("glommio_dma", |b| {
         b.iter(|| {
-            use glommio::{io::DmaFile, LocalExecutor};
+            use glommio::{LocalExecutor, io::DmaFile};
 
             LocalExecutor::default().run(async {
                 let path = "/tmp/glommio_bench.dat";

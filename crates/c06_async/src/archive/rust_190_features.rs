@@ -3,25 +3,25 @@
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//! 
+//!
 //! 本模块实现了当前稳定版本中的异步编程特性，包括：
 //! - 改进的异步性能优化
 //! - 增强的错误处理机制
 //! - 稳定的异步 Traits
 //! - 结构化并发支持
 //! - 超时控制和取消机制
-//! 
+//!
 //! 注意：AsyncDrop、Async Generators 等特性仍在开发中，
 //! 本模块提供了模拟实现以供学习和测试使用。
+use anyhow::Result;
+use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::Duration;
-use tokio::time::sleep;
 use tokio::sync::{Mutex, Semaphore};
-use std::collections::HashMap;
-use anyhow::Result;
+use tokio::time::sleep;
 
 /// 异步资源管理模拟实现
-/// 
+///
 /// 注意：AsyncDrop trait 仍在开发中，这里使用 Drop trait 模拟异步资源清理
 #[derive(Debug)]
 pub struct AsyncResource {
@@ -40,10 +40,10 @@ impl AsyncResource {
     pub async fn process_data(&self, input: &[u8]) -> Result<Vec<u8>> {
         let mut data = self.data.lock().await;
         data.extend_from_slice(input);
-        
+
         // 模拟异步处理
         sleep(Duration::from_millis(10)).await;
-        
+
         Ok(data.clone())
     }
 
@@ -62,7 +62,7 @@ impl Drop for AsyncResource {
 }
 
 /// 异步生成器模拟实现
-/// 
+///
 /// 在Rust 1.90中，AsyncIterator trait尚未稳定，这里使用自定义实现
 pub struct AsyncDataGenerator {
     current: usize,
@@ -100,7 +100,7 @@ impl AsyncDataGenerator {
 }
 
 /// 改进的借用检查器演示
-/// 
+///
 /// 展示Polonius借用检查器的改进，包括更好的生命周期推断
 pub struct BorrowCheckerDemo {
     data: Arc<Mutex<HashMap<String, String>>>,
@@ -118,19 +118,19 @@ impl BorrowCheckerDemo {
     /// 演示改进的借用检查器如何处理复杂的借用场景
     pub async fn complex_borrow_operation(&self, key: String, value: String) -> Result<String> {
         let _permit = self.semaphore.acquire().await?;
-        
+
         // 这里展示了改进的借用检查器如何更好地处理嵌套借用
         let result = {
             let mut data = self.data.lock().await;
             data.insert(key.clone(), value.clone());
-            
+
             // 在同一个作用域中进行多次借用操作
             let existing = data.get(&key).cloned();
             data.insert(format!("{}_processed", key), format!("processed_{}", value));
-            
+
             existing.unwrap_or_else(|| "not_found".to_string())
         };
-        
+
         Ok(result)
     }
 
@@ -141,11 +141,11 @@ impl BorrowCheckerDemo {
             map.insert("demo_key".to_string(), "demo_value".to_string());
             map.get("demo_key").cloned()
         };
-        
+
         if let Some(value) = data {
             println!("生命周期转换成功: {}", value);
         }
-        
+
         Ok(())
     }
 }
@@ -171,13 +171,13 @@ impl TraitSolverDemo {
     /// 演示特质求解器的性能优化
     pub async fn trait_solver_performance_test(&self, input: &str) -> Result<usize> {
         let start = std::time::Instant::now();
-        
+
         // 模拟复杂的特质求解过程
         let result = self.compute_hash(input).await?;
-        
+
         let duration = start.elapsed();
         println!("特质求解耗时: {:?}", duration);
-        
+
         Ok(result)
     }
 
@@ -189,16 +189,16 @@ impl TraitSolverDemo {
                 return Ok(cached);
             }
         }
-        
+
         // 计算哈希值
         let hash = input.len() * 31 + input.chars().count() * 17;
-        
+
         // 更新缓存
         {
             let mut cache = self.cache.lock().await;
             cache.insert(input.to_string(), hash);
         }
-        
+
         Ok(hash)
     }
 }
@@ -225,7 +225,7 @@ impl ParallelFrontendDemo {
     pub async fn parallel_compilation_demo(&self, tasks: Vec<String>) -> Result<Vec<String>> {
         let semaphore = Arc::new(Semaphore::new(self.workers));
         let mut handles = Vec::new();
-        
+
         for task in tasks {
             let semaphore = Arc::clone(&semaphore);
             let handle = tokio::spawn(async move {
@@ -234,13 +234,13 @@ impl ParallelFrontendDemo {
             });
             handles.push(handle);
         }
-        
+
         let mut results = Vec::new();
         for handle in handles {
             let result = handle.await??;
             results.push(result);
         }
-        
+
         Ok(results)
     }
 
@@ -274,21 +274,29 @@ pub async fn demonstrate_rust_190_async_features() -> Result<()> {
     // 3. 改进的借用检查器演示
     println!("\n3. 改进的借用检查器演示:");
     let borrow_demo = BorrowCheckerDemo::new(3);
-    let result = borrow_demo.complex_borrow_operation("key1".to_string(), "value1".to_string()).await?;
+    let result = borrow_demo
+        .complex_borrow_operation("key1".to_string(), "value1".to_string())
+        .await?;
     println!("  借用检查结果: {}", result);
-    
+
     borrow_demo.lifetime_conversion_demo().await?;
 
     // 4. 特质求解器性能演示
     println!("\n4. 特质求解器性能演示:");
     let trait_demo = TraitSolverDemo::new();
-    let hash_result = trait_demo.trait_solver_performance_test("test_input").await?;
+    let hash_result = trait_demo
+        .trait_solver_performance_test("test_input")
+        .await?;
     println!("  特质求解结果: {}", hash_result);
 
     // 5. 并行前端编译演示
     println!("\n5. 并行前端编译演示:");
     let parallel_demo = ParallelFrontendDemo::new();
-    let tasks = vec!["task1".to_string(), "task2".to_string(), "task3".to_string()];
+    let tasks = vec![
+        "task1".to_string(),
+        "task2".to_string(),
+        "task3".to_string(),
+    ];
     let compiled_tasks = parallel_demo.parallel_compilation_demo(tasks).await?;
     println!("  编译结果: {:?}", compiled_tasks);
 
@@ -317,7 +325,10 @@ mod tests {
     #[tokio::test]
     async fn test_borrow_checker_demo() {
         let demo = BorrowCheckerDemo::new(2);
-        let result = demo.complex_borrow_operation("key".to_string(), "value".to_string()).await.unwrap();
+        let result = demo
+            .complex_borrow_operation("key".to_string(), "value".to_string())
+            .await
+            .unwrap();
         assert_eq!(result, "value");
     }
 

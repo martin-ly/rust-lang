@@ -139,11 +139,7 @@ pub mod enhanced_lifetime_inference {
 
     /// 编译器可以推断生命周期的函数 / Function where compiler can infer lifetime
     fn longest_string<'a>(x: &'a str, y: &'a str) -> &'a str {
-        if x.len() > y.len() {
-            x
-        } else {
-            y
-        }
+        if x.len() > y.len() { x } else { y }
     }
 
     /// ## 2.2 改进的生命周期约束 / Improved Lifetime Constraints
@@ -206,7 +202,12 @@ pub mod optimized_memory_management {
             d: u16,
         }
 
-        let s = OptimizedStruct { a: 1, b: 2, c: 3, d: 4 };
+        let s = OptimizedStruct {
+            a: 1,
+            b: 2,
+            c: 3,
+            d: 4,
+        };
         println!("Struct: {:?}", s);
         println!("Size: {}", std::mem::size_of::<OptimizedStruct>());
         println!("Alignment: {}", std::mem::align_of::<OptimizedStruct>());
@@ -223,11 +224,7 @@ pub mod optimized_memory_management {
 
         // 迭代器链是零成本抽象
         // Iterator chains are zero-cost abstractions
-        let result: Vec<i32> = numbers
-            .iter()
-            .map(|x| x * 2)
-            .filter(|&x| x > 5)
-            .collect();
+        let result: Vec<i32> = numbers.iter().map(|x| x * 2).filter(|&x| x > 5).collect();
 
         println!("Filtered and mapped: {:?}", result);
     }
@@ -329,8 +326,8 @@ pub mod enhanced_concurrency_safety {
 /// Rust 1.89 版本对智能指针进行了多项增强。
 /// Rust 1.89 has made several enhancements to smart pointers.
 pub mod smart_pointer_enhancements {
-    use std::rc::Rc;
     use std::cell::RefCell;
+    use std::rc::Rc;
 
     /// ## 5.1 改进的引用计数 / Improved Reference Counting
     ///
@@ -437,8 +434,10 @@ pub mod toolchain_improvements {
         // Improved borrow checker can provide better suggestions
         let borrowed_data = &data;
 
-        println!("Original: {:?}, Cloned: {:?}, Borrowed: {:?}",
-                 data, cloned_data, borrowed_data);
+        println!(
+            "Original: {:?}, Cloned: {:?}, Borrowed: {:?}",
+            data, cloned_data, borrowed_data
+        );
     }
 
     /// ## 7.2 更好的错误诊断 / Better Error Diagnostics
@@ -503,7 +502,9 @@ pub fn run_all_rust_189_examples() {
     toolchain_improvements::improved_clippy();
     toolchain_improvements::better_error_diagnostics();
 
-    println!("\n=== 所有 Rust 1.89 特性示例运行完成 / All Rust 1.89 Feature Examples Completed ===");
+    println!(
+        "\n=== 所有 Rust 1.89 特性示例运行完成 / All Rust 1.89 Feature Examples Completed ==="
+    );
 }
 
 /// 获取 Rust 1.89 特性信息 / Get Rust 1.89 Feature Information

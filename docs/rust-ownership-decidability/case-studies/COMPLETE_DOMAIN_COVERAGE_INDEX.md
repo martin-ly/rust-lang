@@ -109,7 +109,7 @@
 
 ### 路径 1: Web 开发者
 
-```
+```text
 1. Web框架分析 (Actix-web / Axum)
 2. 序列化分析 (Serde)
 3. 数据库分析 (SQLx / SeaORM)
@@ -118,7 +118,7 @@
 
 ### 路径 2: 系统开发者
 
-```
+```text
 1. 嵌入式分析 (Embassy / RTIC)
 2. 网络协议 (smoltcp / rustls)
 3. 并发模式 (Crossbeam / Rayon)
@@ -127,7 +127,7 @@
 
 ### 路径 3: 数据工程师
 
-```
+```text
 1. 数据库指南 (database/README.md)
 2. 序列化分析 (serde / rkyv)
 3. 数据处理 (ndarray / polars)
@@ -136,7 +136,7 @@
 
 ### 路径 4: 多媒体开发者
 
-```
+```text
 1. 音视频指南 (media/README.md)
 2. 异步运行时 (Tokio)
 3. SIMD优化 (std::arch)

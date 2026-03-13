@@ -2,14 +2,14 @@
 //!
 //! 本模块实现了各种排序算法，包括同步、异步、并行、分布式四个版本。
 //! 充分利用 Rust 1.90 的新特性，提供高性能、类型安全的排序实现。
-pub mod sync;
 pub mod async_exec;
-pub mod parallel;
 pub mod distributed;
+pub mod parallel;
+pub mod sync;
 
 // 重新导出所有排序算法
-pub use sync::*;
 pub use async_exec::*;
+pub use sync::*;
 
 use crate::algorithms::execution_modes::*;
 use std::cmp::Ordering;
@@ -155,7 +155,14 @@ pub struct AlgorithmComplexity {
 }
 
 impl AlgorithmComplexity {
-    pub fn new(time_best: &str, time_average: &str, time_worst: &str, space: &str, stable: bool, in_place: bool) -> Self {
+    pub fn new(
+        time_best: &str,
+        time_average: &str,
+        time_worst: &str,
+        space: &str,
+        stable: bool,
+        in_place: bool,
+    ) -> Self {
         Self {
             time_best: time_best.to_string(),
             time_average: time_average.to_string(),
@@ -243,7 +250,8 @@ impl SortingBenchmarker {
                 });
 
                 // 分布式基准测试
-                let _distributed_algorithm = SortingAlgorithmFactory::create_distributed(*algorithm);
+                let _distributed_algorithm =
+                    SortingAlgorithmFactory::create_distributed(*algorithm);
                 let mut distributed_data = test_data.clone();
                 let start = std::time::Instant::now();
                 distributed_data.sort(); // 使用标准库排序作为示例
@@ -333,19 +341,32 @@ impl ComprehensiveSortingBenchmark {
             let sync_perf = self.get_best_performance(*algorithm, ExecutionMode::Sync);
             let async_perf = self.get_best_performance(*algorithm, ExecutionMode::Async);
             let parallel_perf = self.get_best_performance(*algorithm, ExecutionMode::Parallel);
-            let distributed_perf = self.get_best_performance(*algorithm, ExecutionMode::Distributed);
+            let distributed_perf =
+                self.get_best_performance(*algorithm, ExecutionMode::Distributed);
 
             if let Some(perf) = sync_perf {
-                report.push_str(&format!("  同步执行: {:?} (数据大小: {})\n", perf.result.execution_time, perf.data_size));
+                report.push_str(&format!(
+                    "  同步执行: {:?} (数据大小: {})\n",
+                    perf.result.execution_time, perf.data_size
+                ));
             }
             if let Some(perf) = async_perf {
-                report.push_str(&format!("  异步执行: {:?} (数据大小: {})\n", perf.result.execution_time, perf.data_size));
+                report.push_str(&format!(
+                    "  异步执行: {:?} (数据大小: {})\n",
+                    perf.result.execution_time, perf.data_size
+                ));
             }
             if let Some(perf) = parallel_perf {
-                report.push_str(&format!("  并行执行: {:?} (数据大小: {})\n", perf.result.execution_time, perf.data_size));
+                report.push_str(&format!(
+                    "  并行执行: {:?} (数据大小: {})\n",
+                    perf.result.execution_time, perf.data_size
+                ));
             }
             if let Some(perf) = distributed_perf {
-                report.push_str(&format!("  分布式执行: {:?} (数据大小: {})\n", perf.result.execution_time, perf.data_size));
+                report.push_str(&format!(
+                    "  分布式执行: {:?} (数据大小: {})\n",
+                    perf.result.execution_time, perf.data_size
+                ));
             }
 
             report.push('\n');
@@ -388,10 +409,7 @@ impl ComprehensiveSortingBenchmark {
                 self.get_best_performance(alg, mode).map(|r| {
                     format!(
                         "{:?}/{:?}: {:?} (n={})",
-                        alg,
-                        mode,
-                        r.result.execution_time,
-                        r.data_size
+                        alg, mode, r.result.execution_time, r.data_size
                     )
                 })
             })
@@ -399,7 +417,11 @@ impl ComprehensiveSortingBenchmark {
     }
 
     /// 获取指定算法和模式的最佳性能
-    fn get_best_performance(&self, algorithm: SortingAlgorithm, mode: ExecutionMode) -> Option<&SortingBenchmarkResult> {
+    fn get_best_performance(
+        &self,
+        algorithm: SortingAlgorithm,
+        mode: ExecutionMode,
+    ) -> Option<&SortingBenchmarkResult> {
         let results = match mode {
             ExecutionMode::Sync => &self.sync_results,
             ExecutionMode::Async => &self.async_results,

@@ -102,8 +102,16 @@ impl OwnershipTracker {
     /// 获取所有权统计信息 / Get Ownership Statistics
     pub fn get_statistics(&self) -> OwnershipStatistics {
         let total_owners = self.ownership_records.len();
-        let active_owners = self.ownership_records.values().filter(|r| r.is_active).count();
-        let total_accesses: usize = self.ownership_records.values().map(|r| r.access_count).sum();
+        let active_owners = self
+            .ownership_records
+            .values()
+            .filter(|r| r.is_active)
+            .count();
+        let total_accesses: usize = self
+            .ownership_records
+            .values()
+            .map(|r| r.access_count)
+            .sum();
         let average_accesses = if total_owners > 0 {
             total_accesses as f64 / total_owners as f64
         } else {
@@ -193,7 +201,12 @@ impl BorrowTracker {
     }
 
     /// 记录借用 / Record Borrow
-    pub fn record_borrow(&mut self, owner_id: String, borrower_id: String, borrow_type: BorrowType) -> Result<(), BorrowError> {
+    pub fn record_borrow(
+        &mut self,
+        owner_id: String,
+        borrower_id: String,
+        borrow_type: BorrowType,
+    ) -> Result<(), BorrowError> {
         // 检查借用冲突 / Check for borrow conflicts
         if let Some(borrows) = self.borrow_records.get(&owner_id) {
             for borrow in borrows {
@@ -211,12 +224,19 @@ impl BorrowTracker {
             is_active: true,
         };
 
-        self.borrow_records.entry(owner_id).or_default().push(record);
+        self.borrow_records
+            .entry(owner_id)
+            .or_default()
+            .push(record);
         Ok(())
     }
 
     /// 记录借用结束 / Record Borrow End
-    pub fn record_borrow_end(&mut self, owner_id: &str, borrower_id: &str) -> Result<(), BorrowError> {
+    pub fn record_borrow_end(
+        &mut self,
+        owner_id: &str,
+        borrower_id: &str,
+    ) -> Result<(), BorrowError> {
         if let Some(borrows) = self.borrow_records.get_mut(owner_id) {
             for borrow in borrows.iter_mut() {
                 if borrow.borrower_id == borrower_id && borrow.is_active {
@@ -241,7 +261,9 @@ impl BorrowTracker {
     /// 获取借用统计信息 / Get Borrow Statistics
     pub fn get_statistics(&self) -> BorrowStatistics {
         let total_borrows: usize = self.borrow_records.values().map(|v| v.len()).sum();
-        let active_borrows: usize = self.borrow_records.values()
+        let active_borrows: usize = self
+            .borrow_records
+            .values()
             .flatten()
             .filter(|b| b.is_active)
             .count();
@@ -249,7 +271,9 @@ impl BorrowTracker {
         let mut borrow_type_counts = HashMap::new();
         for borrows in self.borrow_records.values() {
             for borrow in borrows {
-                *borrow_type_counts.entry(borrow.borrow_type.clone()).or_insert(0) += 1;
+                *borrow_type_counts
+                    .entry(borrow.borrow_type.clone())
+                    .or_insert(0) += 1;
             }
         }
 
@@ -349,7 +373,10 @@ impl LifetimeTracker {
     }
 
     /// 记录引用关联 / Record Reference Association
-    pub fn record_reference_association(&mut self, lifetime_name: &str) -> Result<(), LifetimeError> {
+    pub fn record_reference_association(
+        &mut self,
+        lifetime_name: &str,
+    ) -> Result<(), LifetimeError> {
         if let Some(record) = self.lifetime_records.get_mut(lifetime_name) {
             record.reference_count += 1;
             Ok(())
@@ -361,8 +388,16 @@ impl LifetimeTracker {
     /// 获取生命周期统计信息 / Get Lifetime Statistics
     pub fn get_statistics(&self) -> LifetimeStatistics {
         let total_lifetimes = self.lifetime_records.len();
-        let active_lifetimes = self.lifetime_records.values().filter(|r| r.is_active).count();
-        let total_references: usize = self.lifetime_records.values().map(|r| r.reference_count).sum();
+        let active_lifetimes = self
+            .lifetime_records
+            .values()
+            .filter(|r| r.is_active)
+            .count();
+        let total_references: usize = self
+            .lifetime_records
+            .values()
+            .map(|r| r.reference_count)
+            .sum();
         let average_references = if total_lifetimes > 0 {
             total_references as f64 / total_lifetimes as f64
         } else {
@@ -633,7 +668,13 @@ mod tests {
     fn test_borrow_tracker() {
         let mut tracker = BorrowTracker::new();
 
-        tracker.record_borrow("owner1".to_string(), "borrower1".to_string(), BorrowType::Immutable).unwrap();
+        tracker
+            .record_borrow(
+                "owner1".to_string(),
+                "borrower1".to_string(),
+                BorrowType::Immutable,
+            )
+            .unwrap();
         tracker.record_borrow_end("owner1", "borrower1").unwrap();
 
         let stats = tracker.get_statistics();
@@ -658,9 +699,20 @@ mod tests {
     fn test_ownership_system_manager() {
         let mut manager = OwnershipSystemManager::new();
 
-        manager.ownership_tracker().record_ownership("owner1".to_string(), "String".to_string());
-        manager.borrow_tracker().record_borrow("owner1".to_string(), "borrower1".to_string(), BorrowType::Immutable).unwrap();
-        manager.lifetime_tracker().record_lifetime_start("'a".to_string(), "scope1".to_string());
+        manager
+            .ownership_tracker()
+            .record_ownership("owner1".to_string(), "String".to_string());
+        manager
+            .borrow_tracker()
+            .record_borrow(
+                "owner1".to_string(),
+                "borrower1".to_string(),
+                BorrowType::Immutable,
+            )
+            .unwrap();
+        manager
+            .lifetime_tracker()
+            .record_lifetime_start("'a".to_string(), "scope1".to_string());
 
         let stats = manager.get_system_statistics();
         assert_eq!(stats.ownership.total_owners, 1);

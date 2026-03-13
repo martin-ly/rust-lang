@@ -30,6 +30,10 @@
 //! // 3. 使用增强的 trait 边界
 //! let validator = GenericValidator::new();
 //! ```
+
+// 允许MSRV不兼容警告，因为本模块专门展示Rust 1.94+特性
+#![allow(clippy::incompatible_msrv)]
+
 use std::marker::PhantomData;
 
 // ==================== Rust 1.94 真实特性: array_windows 泛型应用 ====================
@@ -37,7 +41,6 @@ use std::marker::PhantomData;
 /// # array_windows 在泛型编程中的应用
 ///
 /// Rust 1.94.0 的 `array_windows` 方法可以与泛型结合，创建通用的窗口处理算法
-
 /// 通用滑动窗口处理器
 ///
 /// 使用 const 泛型参数指定窗口大小
@@ -58,7 +61,7 @@ impl<T: Copy + std::ops::Add<Output = T> + Default, const N: usize> SlidingWindo
         if data.len() < N {
             return Vec::new();
         }
-        
+
         data.array_windows::<N>()
             .map(|window| window.iter().copied().fold(T::default(), |acc, x| acc + x))
             .collect()
@@ -75,7 +78,9 @@ impl<T: Copy + std::ops::Add<Output = T> + Default, const N: usize> SlidingWindo
     }
 }
 
-impl<T: Copy + std::ops::Add<Output = T> + Default, const N: usize> Default for SlidingWindowProcessor<T, N> {
+impl<T: Copy + std::ops::Add<Output = T> + Default, const N: usize> Default
+    for SlidingWindowProcessor<T, N>
+{
     fn default() -> Self {
         Self::new()
     }
@@ -89,11 +94,10 @@ use std::sync::OnceLock;
 /// # LazyCell/LazyLock 的泛型封装
 ///
 /// Rust 1.94.0 的新方法与泛型结合，提供更灵活的延迟初始化模式
-/// 
+///
 /// ## 注意
 /// 在 Rust 1.94 之前的版本中，使用 OnceCell/OnceLock 实现类似功能。
 /// Rust 1.94 引入了 LazyCell::get(), get_mut(), force_mut() 方法。
-
 /// 泛型延迟初始化容器
 ///
 /// 支持单线程和多线程两种模式
@@ -158,6 +162,12 @@ pub struct LazyCellContainer<T> {
     cell: OnceCell<T>,
 }
 
+impl<T> Default for LazyCellContainer<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> LazyCellContainer<T> {
     /// 创建新的延迟初始化容器
     pub fn new() -> Self {
@@ -212,7 +222,6 @@ impl<T> LazyCellContainer<T> {
 ///
 /// Rust 1.94.0 的数学常量 EULER_GAMMA 和 GOLDEN_RATIO
 /// 可以与泛型 trait 结合使用
-
 /// 数学常量 trait
 pub trait MathConstants {
     /// 欧拉-马歇罗尼常数
@@ -255,7 +264,10 @@ impl<T: MathConstants + Copy> FibonacciCalculator<T> {
     /// 注意：由于浮点精度限制，仅对较小的 n 有效
     pub fn calculate(&self, n: u32) -> T
     where
-        T: std::ops::Mul<Output = T> + std::ops::Sub<Output = T> + std::ops::Div<Output = T> + From<f64>,
+        T: std::ops::Mul<Output = T>
+            + std::ops::Sub<Output = T>
+            + std::ops::Div<Output = T>
+            + From<f64>,
     {
         let phi = T::GOLDEN_RATIO;
         let psi = T::GOLDEN_RATIO_CONJUGATE;
@@ -294,7 +306,6 @@ impl<T: MathConstants + Copy> Default for FibonacciCalculator<T> {
 /// # char 到 usize 转换在泛型编程中的应用
 ///
 /// Rust 1.94.0 的 TryFrom<char> for usize 可以与泛型结合
-
 /// 泛型字符编码转换器
 pub trait CharEncoder<T> {
     /// 将字符编码为类型 T
@@ -347,9 +358,7 @@ impl<V: Clone> CharMap<V> {
     pub fn to_usize_map(&self) -> Vec<(usize, V)> {
         self.entries
             .iter()
-            .filter_map(|(c, v)| {
-                usize::try_from(*c).ok().map(|idx| (idx, v.clone()))
-            })
+            .filter_map(|(c, v)| usize::try_from(*c).ok().map(|idx| (idx, v.clone())))
             .collect()
     }
 }
@@ -366,7 +375,6 @@ impl<V: Clone> Default for CharMap<V> {
 ///
 /// Rust 1.94.0 显著改进了泛型类型推断，减少了显式类型标注的需要：
 /// Rust 1.94.0 significantly improves generic type inference, reducing the need for explicit type annotations:
-
 /// 智能容器 - 演示改进的泛型推断
 ///
 /// Rust 1.94.0: 更智能的泛型类型推断
@@ -464,7 +472,6 @@ impl<F, G> GenericComposer<F, G> {
 ///
 /// Rust 1.94.0 提供了更灵活的关联类型定义和使用方式：
 /// Rust 1.94.0 provides more flexible associated type definitions and usage:
-
 /// 类型适配器 Trait
 ///
 /// Rust 1.94.0: 更灵活的关联类型定义
@@ -482,10 +489,7 @@ pub trait TypeAdapter {
     /// 批量适配
     ///
     /// Rust 1.94.0: 改进的关联类型在泛型上下文中的使用
-    fn adapt_batch(
-        &self,
-        inputs: Vec<Self::Input>,
-    ) -> Result<Vec<Self::Output>, Self::Error>
+    fn adapt_batch(&self, inputs: Vec<Self::Input>) -> Result<Vec<Self::Output>, Self::Error>
     where
         Self: Sized,
     {
@@ -567,7 +571,6 @@ where
 ///
 /// Rust 1.94.0 改进了 trait 边界的自动推断：
 /// Rust 1.94.0 improves automatic trait bounds inference:
-
 /// 泛型验证器
 ///
 /// Rust 1.94.0: 更智能的 trait 边界推断
@@ -662,7 +665,6 @@ where
 ///
 /// Rust 1.94.0 与 Edition 2024 的泛型系统集成：
 /// Rust 1.94.0 generic system integration with Edition 2024:
-
 /// Edition 2024 泛型容器
 ///
 /// Rust 1.94.0: Edition 2024 优化的泛型代码
@@ -726,7 +728,6 @@ impl<T> Edition2024Generic<T> {
 ///
 /// Rust 1.94.0 增强了编译时的泛型验证能力：
 /// Rust 1.94.0 enhances compile-time generic validation:
-
 /// 编译时类型断言
 ///
 /// Rust 1.94.0: 编译时泛型约束验证
@@ -740,7 +741,6 @@ impl<T: ?Sized> CompileTimeAssert<T> {
     where
         T: Send,
     {
-        
     }
 
     /// 断言类型实现 Sync
@@ -748,7 +748,6 @@ impl<T: ?Sized> CompileTimeAssert<T> {
     where
         T: Sync,
     {
-        
     }
 
     /// 断言类型大小
@@ -819,7 +818,7 @@ pub fn demonstrate_rust_194_generic_features() {
     char_map.insert('A', "Alpha");
     char_map.insert('B', "Beta");
     char_map.insert('C', "Gamma");
-    
+
     let usize_map = char_map.to_usize_map();
     for (idx, value) in &usize_map {
         println!("   索引 {} -> {}", idx, value);
@@ -842,18 +841,17 @@ pub fn demonstrate_rust_194_generic_features() {
     let result = adapter.adapt("42".to_string());
     println!("   适配结果: {:?}", result);
 
-    let batch_result = adapter.adapt_batch(vec![
-        "1".to_string(),
-        "2".to_string(),
-        "3".to_string(),
-    ]);
+    let batch_result = adapter.adapt_batch(vec!["1".to_string(), "2".to_string(), "3".to_string()]);
     println!("   批量适配结果: {:?}", batch_result);
 
     // 7. 增强的 trait 边界推断
     println!("\n7. 增强的 trait 边界推断:");
     let validator = GenericValidator::<String>::new();
     println!("   String 实现 Clone: {}", validator.validate_clone());
-    println!("   String 实现 Send+Sync: {}", validator.validate_thread_safe());
+    println!(
+        "   String 实现 Send+Sync: {}",
+        validator.validate_thread_safe()
+    );
     println!("   String 大小: {} 字节", validator.check_size());
 
     let complex = ComplexBoundsStruct::new(1, "hello");
@@ -874,7 +872,10 @@ pub fn demonstrate_rust_194_generic_features() {
     println!("\n9. 编译时泛型验证:");
     CompileTimeAssert::<i32>::assert_send();
     CompileTimeAssert::<i32>::assert_sync();
-    println!("   i32 IS_VALID: {}", <i32 as TypeLevelValidation>::IS_VALID);
+    println!(
+        "   i32 IS_VALID: {}",
+        <i32 as TypeLevelValidation>::IS_VALID
+    );
     println!("   i32 SIZE: {} 字节", <i32 as TypeLevelValidation>::SIZE);
     println!("   i32 ALIGN: {} 字节", <i32 as TypeLevelValidation>::ALIGN);
 }
@@ -913,7 +914,7 @@ mod tests {
     fn test_sliding_window_processor_find() {
         let processor = SlidingWindowProcessor::<i32, 3>::new();
         let data = vec![1, 2, 3, 4, 5];
-        
+
         // 查找和为 9 的窗口
         let result = processor.find_window(&data, |w| w.iter().sum::<i32>() == 9);
         assert_eq!(result, Some([2, 3, 4]));
@@ -956,16 +957,16 @@ mod tests {
     #[test]
     fn test_lazy_cell_container() {
         let mut container = LazyCellContainer::<Vec<i32>>::new();
-        
+
         // 未初始化
         assert!(!container.is_initialized());
         assert_eq!(container.try_get(), None);
         assert_eq!(container.try_get_mut(), None);
-        
+
         // 强制初始化
         let mutable = container.force_get_mut(|| vec![1, 2, 3]);
         mutable.push(4);
-        
+
         // 已初始化
         assert!(container.is_initialized());
         assert_eq!(container.try_get(), Some(&vec![1, 2, 3, 4]));
@@ -997,7 +998,7 @@ mod tests {
     #[test]
     fn test_fibonacci_calculator() {
         let calc = FibonacciCalculator::<f64>::new();
-        
+
         // 验证前几个斐波那契数
         assert!((calc.calculate(1) - 1.0).abs() < 0.1);
         assert!((calc.calculate(2) - 1.0).abs() < 0.1);
@@ -1013,7 +1014,7 @@ mod tests {
         // 测试编码
         assert_eq!(UsizeCharEncoder::encode('A'), Some(65));
         assert_eq!(UsizeCharEncoder::encode('汉'), Some(0x6C49));
-        
+
         // 测试解码
         assert_eq!(UsizeCharEncoder::decode(65), Some('A'));
         assert_eq!(UsizeCharEncoder::decode(0x6C49), Some('汉'));
@@ -1024,15 +1025,15 @@ mod tests {
         let mut map = CharMap::new();
         map.insert('A', 100);
         map.insert('B', 200);
-        
+
         assert_eq!(map.get('A'), Some(&100));
         assert_eq!(map.get('B'), Some(&200));
         assert_eq!(map.get('C'), None);
-        
+
         // 测试更新
         map.insert('A', 150);
         assert_eq!(map.get('A'), Some(&150));
-        
+
         // 测试转换为 usize 映射
         let usize_map = map.to_usize_map();
         assert!(usize_map.contains(&(65, 150))); // 'A' = 65
@@ -1072,15 +1073,19 @@ mod tests {
     #[test]
     fn test_adapter_batch() {
         let adapter = StringToIntAdapter;
-        let results = adapter.adapt_batch(vec!["1".to_string(), "2".to_string()]).unwrap();
+        let results = adapter
+            .adapt_batch(vec!["1".to_string(), "2".to_string()])
+            .unwrap();
         assert_eq!(results, vec![1, 2]);
     }
 
     #[test]
     fn test_generic_adapter() {
-        let adapter = GenericAdapter::new(|s: String| s.parse::<i32>().map_err(|e| AdapterError {
-            message: e.to_string(),
-        }));
+        let adapter = GenericAdapter::new(|s: String| {
+            s.parse::<i32>().map_err(|e| AdapterError {
+                message: e.to_string(),
+            })
+        });
         assert_eq!(adapter.adapt("100".to_string()).unwrap(), 100);
     }
 

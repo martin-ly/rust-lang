@@ -47,7 +47,11 @@ async fn demonstrate_vecdeque_async_task_queue() {
         println!("  处理就绪任务 ID={}", id);
         processed += 1;
     }
-    println!("  已处理 {} 个就绪任务，剩余 {} 个待处理", processed, queue.len());
+    println!(
+        "  已处理 {} 个就绪任务，剩余 {} 个待处理",
+        processed,
+        queue.len()
+    );
 }
 
 /// slice::as_array (Rust 1.93) - 异步流中固定大小块

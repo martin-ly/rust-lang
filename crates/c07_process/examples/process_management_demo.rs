@@ -70,8 +70,8 @@ fn main() -> Result<()> {
     // 5. 资源限制示例
     println!("📊 资源限制示例...");
     let limits = ResourceLimits {
-        max_memory: Some(1024 * 1024 * 100), // 100MB
-        max_cpu_time: Some(60), // 60 seconds
+        max_memory: Some(1024 * 1024 * 100),   // 100MB
+        max_cpu_time: Some(60),                // 60 seconds
         max_file_size: Some(1024 * 1024 * 10), // 10MB
         max_file_descriptors: Some(100),
     };
@@ -98,11 +98,11 @@ fn main() -> Result<()> {
     // 7. 系统资源示例
     println!("💻 系统资源示例...");
     let resources = SystemResources {
-        total_memory: 8 * 1024 * 1024 * 1024, // 8GB
+        total_memory: 8 * 1024 * 1024 * 1024,     // 8GB
         available_memory: 4 * 1024 * 1024 * 1024, // 4GB
         cpu_cores: 4,
         cpu_usage: 0.5,
-        total_disk: 500 * 1024 * 1024 * 1024, // 500GB
+        total_disk: 500 * 1024 * 1024 * 1024,     // 500GB
         available_disk: 250 * 1024 * 1024 * 1024, // 250GB
         timestamp: std::time::SystemTime::now(),
     };

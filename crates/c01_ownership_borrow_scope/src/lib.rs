@@ -319,108 +319,92 @@
 //! }
 //! ```
 // 核心类型定义 / Core Type Definitions
+pub mod archive;
 pub mod basic_syntax;
 pub mod copy_move;
 pub mod expression;
 pub mod function;
 pub mod internal_mut;
+pub mod ownership_utils;
+pub mod rust_194_features;
 pub mod scope;
 pub mod variable;
-pub mod ownership_utils;
-pub mod archive;
-pub mod rust_194_features;
 
 // 重新导出主要类型 / Re-export main types
 // 使用具体的导出而不是通配符导出以避免名称冲突 / Use specific exports instead of wildcard exports to avoid name conflicts
 
 // 从 basic_syntax 模块导出 / Export from basic_syntax module
 pub use basic_syntax::{
-    ownership_basics,
-    borrowing_basics,
-    lifetime_basics,
-    scope_basics,
-    smart_pointer_basics,
-    error_handling_basics,
-    concurrency_basics,
-    performance_basics,
-    testing_basics,
-    module_basics,
     OwnershipError,
-    run_all_basic_syntax_examples,
+    borrowing_basics,
+    concurrency_basics,
+    error_handling_basics,
     // 重命名以避免与下面的函数冲突 / Rename to avoid conflict with function below
     get_basic_syntax_info as basic_syntax_info,
+    lifetime_basics,
+    module_basics,
+    ownership_basics,
+    performance_basics,
+    run_all_basic_syntax_examples,
+    scope_basics,
+    smart_pointer_basics,
+    testing_basics,
 };
 
 // 从 copy_move 模块导出 / Export from copy_move module
-pub use copy_move::{
-    factory,
-    strategy,
-    r#struct,
-};
+pub use copy_move::{factory, strategy, r#struct};
 
 // 从 internal_mut 模块导出 / Export from internal_mut module
-pub use internal_mut::{
-    cell,
-    refcell,
-    threads,
-    unsafecell,
-};
+pub use internal_mut::{cell, refcell, threads, unsafecell};
 
 // 从 scope 模块导出 / Export from scope module
-pub use scope::{
-    ScopeType,
-    Scope,
-    ScopeError,
-    ScopeManager,
-    VariableInfo,
-    ScopeAnalyzer,
-};
+pub use scope::{Scope, ScopeAnalyzer, ScopeError, ScopeManager, ScopeType, VariableInfo};
 
 // 从 ownership_utils 模块导出 / Export from ownership_utils module
 pub use ownership_utils::{
-    OwnershipTracker,
-    OwnershipRecord,
-    OwnershipStatistics,
-    BorrowTracker,
+    BorrowError as UtilsBorrowError,
     BorrowRecord,
-    BorrowType,
     BorrowStatistics,
-    LifetimeTracker,
+    BorrowTracker,
+    BorrowType,
+    LifetimeError as UtilsLifetimeError,
     LifetimeRecord,
     LifetimeStatistics,
-    OwnershipSystemManager,
-    SystemStatistics,
-    PerformanceAnalyzer,
-    PerformanceMetric,
+    LifetimeTracker,
     // 注意：这里重命名了冲突的错误类型 / Note: Renamed conflicting error types here
     OwnershipError as UtilsOwnershipError,
-    BorrowError as UtilsBorrowError,
-    LifetimeError as UtilsLifetimeError,
+    OwnershipRecord,
+    OwnershipStatistics,
+    OwnershipSystemManager,
+    OwnershipTracker,
+    PerformanceAnalyzer,
+    PerformanceMetric,
+    SystemStatistics,
+    safe_borrow_check,
+    safe_lifetime_check,
+    safe_mutable_borrow_check,
     // 实用函数 / Utility functions
     safe_ownership_transfer,
-    safe_borrow_check,
-    safe_mutable_borrow_check,
-    safe_lifetime_check,
 };
 
 // 从 rust_194_features 模块导出 / Export from rust_194_features module
 pub use rust_194_features::{
-    // array_windows 相关
-    has_abba,
-    sliding_window_averages,
-    count_increasing_triplets,
+    GoldenSectionSearch,
     // LazyCell/LazyLock 相关
     LazyCache,
     ThreadSafeLazyCache,
+    count_increasing_triplets,
+    // 演示函数
+    demonstrate_rust_194_features,
+    exponential_integral_approx,
+    harmonic_number,
+    harmonic_number_approx,
+    // array_windows 相关
+    has_abba,
     // 数学常量
     math_consts_f32,
     math_consts_f64,
-    GoldenSectionSearch,
-    harmonic_number,
-    harmonic_number_approx,
-    exponential_integral_approx,
-    // 演示函数
-    demonstrate_rust_194_features,
+    sliding_window_averages,
 };
 
 /// 所有权系统版本 / Ownership System Version

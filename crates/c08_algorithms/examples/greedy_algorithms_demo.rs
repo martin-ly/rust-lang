@@ -75,9 +75,5 @@ fn coin_change_greedy(coins: &[usize], amount: usize) -> Option<Vec<usize>> {
         }
     }
 
-    if remaining == 0 {
-        Some(result)
-    } else {
-        None
-    }
+    if remaining == 0 { Some(result) } else { None }
 }

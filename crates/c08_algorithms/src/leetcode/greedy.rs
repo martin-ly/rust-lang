@@ -33,8 +33,8 @@ pub fn jump(nums: Vec<i32>) -> i32 {
     let mut current_end = 0;
     let mut farthest = 0;
 
-    for i in 0..n - 1 {
-        farthest = farthest.max(i + nums[i] as usize);
+    for (i, &num) in nums.iter().enumerate().take(n - 1) {
+        farthest = farthest.max(i + num as usize);
 
         if i == current_end {
             jumps += 1;
@@ -66,11 +66,11 @@ pub fn can_jump(nums: Vec<i32>) -> bool {
     let n = nums.len();
     let mut farthest = 0;
 
-    for i in 0..n {
+    for (i, &num) in nums.iter().enumerate().take(n) {
         if i > farthest {
             return false;
         }
-        farthest = farthest.max(i + nums[i] as usize);
+        farthest = farthest.max(i + num as usize);
         if farthest >= n - 1 {
             return true;
         }
@@ -134,11 +134,7 @@ pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
         }
     }
 
-    if total_tank >= 0 {
-        start as i32
-    } else {
-        -1
-    }
+    if total_tank >= 0 { start as i32 } else { -1 }
 }
 
 /// 179. Largest Number（最大数）
@@ -281,7 +277,10 @@ mod tests {
 
     #[test]
     fn test_can_complete_circuit() {
-        assert_eq!(can_complete_circuit(vec![1, 2, 3, 4, 5], vec![3, 4, 5, 1, 2]), 3);
+        assert_eq!(
+            can_complete_circuit(vec![1, 2, 3, 4, 5], vec![3, 4, 5, 1, 2]),
+            3
+        );
         assert_eq!(can_complete_circuit(vec![2, 3, 4], vec![3, 4, 3]), -1);
     }
 

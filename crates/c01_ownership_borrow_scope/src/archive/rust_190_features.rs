@@ -111,9 +111,16 @@ impl ImprovedBorrowChecker {
     }
 
     /// 检查借用规则 / Check borrow rules
-    pub fn check_borrow_rules(&self, owner: &str, _borrower: &str, borrow_type: BorrowType) -> BorrowCheckResult {
+    pub fn check_borrow_rules(
+        &self,
+        owner: &str,
+        _borrower: &str,
+        borrow_type: BorrowType,
+    ) -> BorrowCheckResult {
         // 检查是否有活跃的借用冲突
-        let active_borrows_for_owner: Vec<_> = self.active_borrows.values()
+        let active_borrows_for_owner: Vec<_> = self
+            .active_borrows
+            .values()
             .filter(|b| b.owner == owner)
             .collect();
 
@@ -122,61 +129,73 @@ impl ImprovedBorrowChecker {
             for active_borrow in &active_borrows_for_owner {
                 match (&active_borrow.borrow_type, &borrow_type) {
                     (BorrowType::Mutable, BorrowType::Immutable) => {
-                        return BorrowCheckResult::Conflict(
-                            format!("Cannot create immutable borrow while mutable borrow exists for {}", owner)
-                        );
+                        return BorrowCheckResult::Conflict(format!(
+                            "Cannot create immutable borrow while mutable borrow exists for {}",
+                            owner
+                        ));
                     }
                     (BorrowType::Mutable, BorrowType::Mutable) => {
-                        return BorrowCheckResult::Conflict(
-                            format!("Cannot create multiple mutable borrows for {}", owner)
-                        );
+                        return BorrowCheckResult::Conflict(format!(
+                            "Cannot create multiple mutable borrows for {}",
+                            owner
+                        ));
                     }
                     (BorrowType::Mutable, BorrowType::Exclusive) => {
-                        return BorrowCheckResult::Conflict(
-                            format!("Cannot create exclusive borrow while mutable borrow exists for {}", owner)
-                        );
+                        return BorrowCheckResult::Conflict(format!(
+                            "Cannot create exclusive borrow while mutable borrow exists for {}",
+                            owner
+                        ));
                     }
                     (BorrowType::Exclusive, _) => {
-                        return BorrowCheckResult::Conflict(
-                            format!("Cannot create any borrow while exclusive borrow exists for {}", owner)
-                        );
+                        return BorrowCheckResult::Conflict(format!(
+                            "Cannot create any borrow while exclusive borrow exists for {}",
+                            owner
+                        ));
                     }
                     (BorrowType::Immutable, BorrowType::Mutable) => {
-                        return BorrowCheckResult::Conflict(
-                            format!("Cannot create mutable borrow while immutable borrow exists for {}", owner)
-                        );
+                        return BorrowCheckResult::Conflict(format!(
+                            "Cannot create mutable borrow while immutable borrow exists for {}",
+                            owner
+                        ));
                     }
                     (BorrowType::Immutable, BorrowType::Exclusive) => {
-                        return BorrowCheckResult::Conflict(
-                            format!("Cannot create exclusive borrow while immutable borrow exists for {}", owner)
-                        );
+                        return BorrowCheckResult::Conflict(format!(
+                            "Cannot create exclusive borrow while immutable borrow exists for {}",
+                            owner
+                        ));
                     }
                     (BorrowType::Immutable, BorrowType::Immutable) => {
                         // 可以有多个不可变借用，但需要检查总数
-                        let immutable_count = self.active_borrows.values()
+                        let immutable_count = self
+                            .active_borrows
+                            .values()
                             .filter(|b| b.borrow_type == BorrowType::Immutable)
                             .count();
-                        if immutable_count >= 10 { // 限制不可变借用的数量
-                            return BorrowCheckResult::Conflict(
-                                format!("Too many immutable borrows for {}", owner)
-                            );
+                        if immutable_count >= 10 {
+                            // 限制不可变借用的数量
+                            return BorrowCheckResult::Conflict(format!(
+                                "Too many immutable borrows for {}",
+                                owner
+                            ));
                         }
                     }
                     // Rust 1.90 新增：处理新的借用类型
                     (_, BorrowType::SharedExclusive) => {
                         // 共享独占借用可以与某些借用共存
                         if active_borrow.borrow_type == BorrowType::Exclusive {
-                            return BorrowCheckResult::Conflict(
-                                format!("Cannot create shared exclusive borrow while exclusive borrow exists for {}", owner)
-                            );
+                            return BorrowCheckResult::Conflict(format!(
+                                "Cannot create shared exclusive borrow while exclusive borrow exists for {}",
+                                owner
+                            ));
                         }
                     }
                     (BorrowType::SharedExclusive, _) => {
                         // 共享独占借用存在时的处理
                         if borrow_type == BorrowType::Exclusive {
-                            return BorrowCheckResult::Conflict(
-                                format!("Cannot create exclusive borrow while shared exclusive borrow exists for {}", owner)
-                            );
+                            return BorrowCheckResult::Conflict(format!(
+                                "Cannot create exclusive borrow while shared exclusive borrow exists for {}",
+                                owner
+                            ));
                         }
                     }
                     (_, BorrowType::Conditional) => {
@@ -203,7 +222,12 @@ impl ImprovedBorrowChecker {
     }
 
     /// 创建借用 / Create borrow
-    pub fn create_borrow(&mut self, owner: String, borrower: String, borrow_type: BorrowType) -> Result<BorrowRecord, BorrowCheckResult> {
+    pub fn create_borrow(
+        &mut self,
+        owner: String,
+        borrower: String,
+        borrow_type: BorrowType,
+    ) -> Result<BorrowRecord, BorrowCheckResult> {
         let check_result = self.check_borrow_rules(&owner, &borrower, borrow_type.clone());
 
         match check_result {
@@ -211,8 +235,12 @@ impl ImprovedBorrowChecker {
                 let borrow_record = BorrowRecord::new(owner.clone(), borrower.clone(), borrow_type);
                 let key = format!("{}_{}", owner, borrower);
 
-                self.active_borrows.insert(key.clone(), borrow_record.clone());
-                self.borrow_records.entry(owner).or_default().push(borrow_record.clone());
+                self.active_borrows
+                    .insert(key.clone(), borrow_record.clone());
+                self.borrow_records
+                    .entry(owner)
+                    .or_default()
+                    .push(borrow_record.clone());
 
                 Ok(borrow_record)
             }
@@ -228,7 +256,10 @@ impl ImprovedBorrowChecker {
             borrow_record.end_borrow();
             Ok(())
         } else {
-            Err(BorrowCheckResult::Conflict(format!("No active borrow found for {} by {}", owner, borrower)))
+            Err(BorrowCheckResult::Conflict(format!(
+                "No active borrow found for {} by {}",
+                owner, borrower
+            )))
         }
     }
 
@@ -236,22 +267,34 @@ impl ImprovedBorrowChecker {
     pub fn get_borrow_statistics(&self) -> BorrowStatistics {
         let total_borrows = self.borrow_records.values().map(|v| v.len()).sum();
         let active_borrows = self.active_borrows.len();
-        let immutable_borrows = self.active_borrows.values()
+        let immutable_borrows = self
+            .active_borrows
+            .values()
             .filter(|b| b.borrow_type == BorrowType::Immutable)
             .count();
-        let mutable_borrows = self.active_borrows.values()
+        let mutable_borrows = self
+            .active_borrows
+            .values()
             .filter(|b| b.borrow_type == BorrowType::Mutable)
             .count();
-        let exclusive_borrows = self.active_borrows.values()
+        let exclusive_borrows = self
+            .active_borrows
+            .values()
             .filter(|b| b.borrow_type == BorrowType::Exclusive)
             .count();
-        let shared_exclusive_borrows = self.active_borrows.values()
+        let shared_exclusive_borrows = self
+            .active_borrows
+            .values()
             .filter(|b| b.borrow_type == BorrowType::SharedExclusive)
             .count();
-        let conditional_borrows = self.active_borrows.values()
+        let conditional_borrows = self
+            .active_borrows
+            .values()
             .filter(|b| b.borrow_type == BorrowType::Conditional)
             .count();
-        let deferred_borrows = self.active_borrows.values()
+        let deferred_borrows = self
+            .active_borrows
+            .values()
             .filter(|b| b.borrow_type == BorrowType::Deferred)
             .count();
 
@@ -320,7 +363,9 @@ impl LifetimeParam {
 
     /// 检查约束 / Check constraints
     pub fn check_constraints(&self, other: &LifetimeParam) -> bool {
-        self.constraints.iter().any(|c| other.constraints.contains(c))
+        self.constraints
+            .iter()
+            .any(|c| other.constraints.contains(c))
     }
 }
 
@@ -380,10 +425,14 @@ impl LifetimeInferencer {
     }
 
     /// 检查生命周期约束 / Check lifetime constraints
-    pub fn check_lifetime_constraints(&self, param1: &LifetimeParam, param2: &LifetimeParam) -> bool {
-        self.inference_rules.iter().any(|rule| {
-            (rule.rule_fn)(param1, param2)
-        })
+    pub fn check_lifetime_constraints(
+        &self,
+        param1: &LifetimeParam,
+        param2: &LifetimeParam,
+    ) -> bool {
+        self.inference_rules
+            .iter()
+            .any(|rule| (rule.rule_fn)(param1, param2))
     }
 
     /// 优化生命周期 / Optimize lifetime
@@ -475,9 +524,15 @@ impl SmartPointerManager {
 
         for (name, count) in &self.reference_counts {
             if *count == 1 {
-                suggestions.push(format!("Consider using Box<T> instead of Rc<T> for {}", name));
+                suggestions.push(format!(
+                    "Consider using Box<T> instead of Rc<T> for {}",
+                    name
+                ));
             } else if *count > 10 {
-                suggestions.push(format!("High reference count for {}, consider optimization", name));
+                suggestions.push(format!(
+                    "High reference count for {}, consider optimization",
+                    name
+                ));
             }
         }
 
@@ -699,7 +754,10 @@ impl ScopeOptimizer {
     pub fn optimize_scope(&self, scope: &ScopeInfo) {
         for rule in &self.optimization_rules {
             if (rule.rule_fn)(scope) {
-                println!("Applying optimization rule: {} for scope: {}", rule.name, scope.name);
+                println!(
+                    "Applying optimization rule: {} for scope: {}",
+                    rule.name, scope.name
+                );
             }
         }
     }
@@ -880,9 +938,10 @@ impl ConcurrencySafetyChecker {
 
         // 更新线程资源列表 / Update thread resource list
         if let Some(thread_info) = self.thread_map.get_mut(&thread_id)
-            && !thread_info.resources.contains(&resource) {
-                thread_info.resources.push(resource);
-            }
+            && !thread_info.resources.contains(&resource)
+        {
+            thread_info.resources.push(resource);
+        }
     }
 
     /// 检测数据竞争 / Detect data races
@@ -910,10 +969,10 @@ impl DataRaceDetector {
             name: "write_write_conflict".to_string(),
             description: "Detect write-write conflicts".to_string(),
             rule_fn: |a, b| {
-                a.resource == b.resource &&
-                a.access_type == AccessType::Write &&
-                b.access_type == AccessType::Write &&
-                a.thread_id != b.thread_id
+                a.resource == b.resource
+                    && a.access_type == AccessType::Write
+                    && b.access_type == AccessType::Write
+                    && a.thread_id != b.thread_id
             },
         });
 
@@ -921,10 +980,11 @@ impl DataRaceDetector {
             name: "read_write_conflict".to_string(),
             description: "Detect read-write conflicts".to_string(),
             rule_fn: |a, b| {
-                a.resource == b.resource &&
-                ((a.access_type == AccessType::Read && b.access_type == AccessType::Write) ||
-                 (a.access_type == AccessType::Write && b.access_type == AccessType::Read)) &&
-                a.thread_id != b.thread_id
+                a.resource == b.resource
+                    && ((a.access_type == AccessType::Read && b.access_type == AccessType::Write)
+                        || (a.access_type == AccessType::Write
+                            && b.access_type == AccessType::Read))
+                    && a.thread_id != b.thread_id
             },
         });
 
@@ -1130,12 +1190,17 @@ impl SmartMemoryManager {
         let mut suggestions = Vec::new();
 
         // 检查内存泄漏 / Check for memory leaks
-        let leaked_allocations = self.allocation_records.values()
+        let leaked_allocations = self
+            .allocation_records
+            .values()
             .filter(|r| !r.freed)
             .count();
 
         if leaked_allocations > 0 {
-            suggestions.push(format!("Potential memory leak: {} unfreed allocations", leaked_allocations));
+            suggestions.push(format!(
+                "Potential memory leak: {} unfreed allocations",
+                leaked_allocations
+            ));
         }
 
         // 检查大分配 / Check for large allocations
@@ -1144,15 +1209,20 @@ impl SmartMemoryManager {
             .count();
 
         if large_allocations > 0 {
-            suggestions.push(format!("Large allocations detected: {} allocations > 1MB", large_allocations));
+            suggestions.push(format!(
+                "Large allocations detected: {} allocations > 1MB",
+                large_allocations
+            ));
         }
 
         // 检查分配模式 / Check allocation patterns
-        let heap_ratio = self.usage_statistics.heap_allocations as f64 /
-                        self.usage_statistics.total_allocations as f64;
+        let heap_ratio = self.usage_statistics.heap_allocations as f64
+            / self.usage_statistics.total_allocations as f64;
 
         if heap_ratio > 0.8 {
-            suggestions.push("High heap allocation ratio, consider stack allocation optimization".to_string());
+            suggestions.push(
+                "High heap allocation ratio, consider stack allocation optimization".to_string(),
+            );
         }
 
         self.optimization_suggestions = suggestions.clone();
@@ -1188,7 +1258,9 @@ pub fn run_all_rust_190_features_examples() {
     println!("\n6. 智能内存管理 / Smart Memory Management");
     smart_memory_management_example();
 
-    println!("\n=== 所有 Rust 1.90 特性示例运行完成 / All Rust 1.90 Features Examples Completed ===");
+    println!(
+        "\n=== 所有 Rust 1.90 特性示例运行完成 / All Rust 1.90 Features Examples Completed ==="
+    );
 }
 
 /// 改进的借用检查器示例 / Improved Borrow Checker Example
@@ -1196,15 +1268,27 @@ fn improved_borrow_checker_example() {
     let mut checker = ImprovedBorrowChecker::new();
 
     // 创建不可变借用 / Create immutable borrow
-    let borrow1 = checker.create_borrow("owner1".to_string(), "borrower1".to_string(), BorrowType::Immutable);
+    let borrow1 = checker.create_borrow(
+        "owner1".to_string(),
+        "borrower1".to_string(),
+        BorrowType::Immutable,
+    );
     println!("Immutable borrow: {:?}", borrow1);
 
     // 创建另一个不可变借用 / Create another immutable borrow
-    let borrow2 = checker.create_borrow("owner1".to_string(), "borrower2".to_string(), BorrowType::Immutable);
+    let borrow2 = checker.create_borrow(
+        "owner1".to_string(),
+        "borrower2".to_string(),
+        BorrowType::Immutable,
+    );
     println!("Another immutable borrow: {:?}", borrow2);
 
     // 尝试创建可变借用（应该失败）/ Try to create mutable borrow (should fail)
-    let borrow3 = checker.create_borrow("owner1".to_string(), "borrower3".to_string(), BorrowType::Mutable);
+    let borrow3 = checker.create_borrow(
+        "owner1".to_string(),
+        "borrower3".to_string(),
+        BorrowType::Mutable,
+    );
     println!("Mutable borrow attempt: {:?}", borrow3);
 
     // 获取统计信息 / Get statistics
@@ -1246,8 +1330,14 @@ fn new_smart_pointer_features_example() {
     manager.clone_smart_pointer("ptr1").unwrap();
 
     // 获取引用计数 / Get reference counts
-    println!("ptr1 reference count: {:?}", manager.get_reference_count("ptr1"));
-    println!("ptr2 reference count: {:?}", manager.get_reference_count("ptr2"));
+    println!(
+        "ptr1 reference count: {:?}",
+        manager.get_reference_count("ptr1")
+    );
+    println!(
+        "ptr2 reference count: {:?}",
+        manager.get_reference_count("ptr2")
+    );
 
     // 分析使用情况 / Analyze usage
     let suggestions = manager.analyze_usage();
@@ -1291,8 +1381,16 @@ fn enhanced_concurrency_safety_example() {
     checker.register_lock("rwlock1".to_string(), LockType::RwLock);
 
     // 记录资源访问 / Record resource access
-    checker.record_access("thread1".to_string(), "resource1".to_string(), AccessType::Write);
-    checker.record_access("thread2".to_string(), "resource1".to_string(), AccessType::Write);
+    checker.record_access(
+        "thread1".to_string(),
+        "resource1".to_string(),
+        AccessType::Write,
+    );
+    checker.record_access(
+        "thread2".to_string(),
+        "resource1".to_string(),
+        AccessType::Write,
+    );
 
     // 检测数据竞争 / Detect data races
     let races = checker.detect_data_races();

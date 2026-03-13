@@ -1,6 +1,6 @@
-use async_channel::{bounded, Receiver, Sender};
+use async_channel::{Receiver, Sender, bounded};
 use async_io::Timer;
-use futures::{StreamExt};
+use futures::StreamExt;
 use std::time::Duration;
 
 fn main() -> anyhow::Result<()> {
@@ -40,5 +40,3 @@ async fn consumer(rx: Receiver<String>) -> anyhow::Result<()> {
     println!("fetched {} pages", bodies.len());
     Ok(())
 }
-
-

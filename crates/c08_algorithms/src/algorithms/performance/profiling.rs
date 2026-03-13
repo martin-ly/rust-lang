@@ -1,7 +1,7 @@
 //! # 性能分析模块
 //!
 //! 本模块提供算法性能分析的工具和方法。
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// 性能分析结果
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -19,10 +19,7 @@ pub struct Profiler;
 
 impl Profiler {
     /// 分析算法性能
-    pub fn profile_algorithm<F>(
-        algorithm_name: &str,
-        algorithm_fn: F,
-    ) -> ProfilingResult
+    pub fn profile_algorithm<F>(algorithm_name: &str, algorithm_fn: F) -> ProfilingResult
     where
         F: Fn() -> std::time::Duration,
     {
@@ -31,9 +28,9 @@ impl Profiler {
         ProfilingResult {
             algorithm_name: algorithm_name.to_string(),
             execution_time,
-            memory_usage: 0, // 占位实现
-            cpu_usage: 0.0,  // 占位实现
-            cache_misses: 0, // 占位实现
+            memory_usage: 0,  // 占位实现
+            cpu_usage: 0.0,   // 占位实现
+            cache_misses: 0,  // 占位实现
             branch_misses: 0, // 占位实现
         }
     }

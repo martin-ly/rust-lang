@@ -12,9 +12,8 @@ async fn main() {
         task(Duration::from_millis(10), 1),
         task(Duration::from_millis(20), 2),
         task(Duration::from_millis(5), 3),
-    ]).await;
+    ])
+    .await;
     let sum: u32 = vals.into_iter().sum();
     println!("futures_smoke: sum={}", sum);
 }
-
-

@@ -74,15 +74,9 @@ pub enum TcpInvariantCondition {
     /// 状态条件
     StateCondition(TcpState),
     /// 序列号条件
-    SequenceNumberCondition {
-        min_seq: u32,
-        max_seq: u32,
-    },
+    SequenceNumberCondition { min_seq: u32, max_seq: u32 },
     /// 窗口大小条件
-    WindowSizeCondition {
-        min_window: u16,
-        max_window: u16,
-    },
+    WindowSizeCondition { min_window: u16, max_window: u16 },
     /// 认证条件
     AuthenticationCondition(bool),
     /// 复合条件
@@ -165,16 +159,12 @@ impl TcpFormalSpec {
     /// 初始化状态转换
     fn initialize_transitions(&mut self) {
         // CLOSED -> LISTEN (被动打开)
-        self.transition_table.insert(
-            (TcpState::Closed, TcpEvent::PassiveOpen),
-            TcpState::Listen,
-        );
+        self.transition_table
+            .insert((TcpState::Closed, TcpEvent::PassiveOpen), TcpState::Listen);
 
         // CLOSED -> SYN_SENT (主动打开)
-        self.transition_table.insert(
-            (TcpState::Closed, TcpEvent::ActiveOpen),
-            TcpState::SynSent,
-        );
+        self.transition_table
+            .insert((TcpState::Closed, TcpEvent::ActiveOpen), TcpState::SynSent);
 
         // LISTEN -> SYN_RECEIVED (接收SYN)
         self.transition_table.insert(
@@ -223,29 +213,21 @@ impl TcpFormalSpec {
         );
 
         // CLOSE_WAIT -> LAST_ACK (发送FIN)
-        self.transition_table.insert(
-            (TcpState::CloseWait, TcpEvent::SendFin),
-            TcpState::LastAck,
-        );
+        self.transition_table
+            .insert((TcpState::CloseWait, TcpEvent::SendFin), TcpState::LastAck);
 
         // LAST_ACK -> CLOSED (接收ACK)
-        self.transition_table.insert(
-            (TcpState::LastAck, TcpEvent::ReceiveAck),
-            TcpState::Closed,
-        );
+        self.transition_table
+            .insert((TcpState::LastAck, TcpEvent::ReceiveAck), TcpState::Closed);
 
         // TIME_WAIT -> CLOSED (超时)
-        self.transition_table.insert(
-            (TcpState::TimeWait, TcpEvent::Timeout),
-            TcpState::Closed,
-        );
+        self.transition_table
+            .insert((TcpState::TimeWait, TcpEvent::Timeout), TcpState::Closed);
 
         // 任何状态 -> CLOSED (重置)
         for state in &self.states {
-            self.transition_table.insert(
-                (*state, TcpEvent::Reset),
-                TcpState::Closed,
-            );
+            self.transition_table
+                .insert((*state, TcpEvent::Reset), TcpState::Closed);
         }
     }
 
@@ -298,74 +280,66 @@ impl TcpFormalSpec {
     /// 检查不变量
     pub fn check_invariant(&self, state: &ConnectionState, invariant: &TcpInvariant) -> bool {
         match &invariant.condition {
-            TcpInvariantCondition::StateCondition(expected_state) => {
-                state.state == *expected_state
-            }
+            TcpInvariantCondition::StateCondition(expected_state) => state.state == *expected_state,
             TcpInvariantCondition::SequenceNumberCondition { min_seq, max_seq } => {
                 state.sequence_number >= *min_seq && state.sequence_number <= *max_seq
             }
-            TcpInvariantCondition::WindowSizeCondition { min_window, max_window } => {
-                state.window_size >= *min_window && state.window_size <= *max_window
-            }
+            TcpInvariantCondition::WindowSizeCondition {
+                min_window,
+                max_window,
+            } => state.window_size >= *min_window && state.window_size <= *max_window,
             TcpInvariantCondition::AuthenticationCondition(expected_auth) => {
                 state.authenticated == *expected_auth
             }
-            TcpInvariantCondition::CompoundCondition { operator, conditions } => {
-                match operator {
-                    LogicalOperator::And => {
-                        conditions.iter().all(|condition| {
-                            self.check_invariant_condition(state, condition)
-                        })
-                    }
-                    LogicalOperator::Or => {
-                        conditions.iter().any(|condition| {
-                            self.check_invariant_condition(state, condition)
-                        })
-                    }
-                    LogicalOperator::Not => {
-                        !conditions.iter().any(|condition| {
-                            self.check_invariant_condition(state, condition)
-                        })
-                    }
-                }
-            }
+            TcpInvariantCondition::CompoundCondition {
+                operator,
+                conditions,
+            } => match operator {
+                LogicalOperator::And => conditions
+                    .iter()
+                    .all(|condition| self.check_invariant_condition(state, condition)),
+                LogicalOperator::Or => conditions
+                    .iter()
+                    .any(|condition| self.check_invariant_condition(state, condition)),
+                LogicalOperator::Not => !conditions
+                    .iter()
+                    .any(|condition| self.check_invariant_condition(state, condition)),
+            },
         }
     }
 
     /// 检查不变量条件
-    fn check_invariant_condition(&self, state: &ConnectionState, condition: &TcpInvariantCondition) -> bool {
+    fn check_invariant_condition(
+        &self,
+        state: &ConnectionState,
+        condition: &TcpInvariantCondition,
+    ) -> bool {
         match condition {
-            TcpInvariantCondition::StateCondition(expected_state) => {
-                state.state == *expected_state
-            }
+            TcpInvariantCondition::StateCondition(expected_state) => state.state == *expected_state,
             TcpInvariantCondition::SequenceNumberCondition { min_seq, max_seq } => {
                 state.sequence_number >= *min_seq && state.sequence_number <= *max_seq
             }
-            TcpInvariantCondition::WindowSizeCondition { min_window, max_window } => {
-                state.window_size >= *min_window && state.window_size <= *max_window
-            }
+            TcpInvariantCondition::WindowSizeCondition {
+                min_window,
+                max_window,
+            } => state.window_size >= *min_window && state.window_size <= *max_window,
             TcpInvariantCondition::AuthenticationCondition(expected_auth) => {
                 state.authenticated == *expected_auth
             }
-            TcpInvariantCondition::CompoundCondition { operator, conditions } => {
-                match operator {
-                    LogicalOperator::And => {
-                        conditions.iter().all(|condition| {
-                            self.check_invariant_condition(state, condition)
-                        })
-                    }
-                    LogicalOperator::Or => {
-                        conditions.iter().any(|condition| {
-                            self.check_invariant_condition(state, condition)
-                        })
-                    }
-                    LogicalOperator::Not => {
-                        !conditions.iter().any(|condition| {
-                            self.check_invariant_condition(state, condition)
-                        })
-                    }
-                }
-            }
+            TcpInvariantCondition::CompoundCondition {
+                operator,
+                conditions,
+            } => match operator {
+                LogicalOperator::And => conditions
+                    .iter()
+                    .all(|condition| self.check_invariant_condition(state, condition)),
+                LogicalOperator::Or => conditions
+                    .iter()
+                    .any(|condition| self.check_invariant_condition(state, condition)),
+                LogicalOperator::Not => !conditions
+                    .iter()
+                    .any(|condition| self.check_invariant_condition(state, condition)),
+            },
         }
     }
 
@@ -485,10 +459,7 @@ pub enum HttpRuleCondition {
     /// 状态码条件
     StatusCodeCondition(HttpStatusCode),
     /// 头部条件
-    HeaderCondition {
-        name: String,
-        value: String,
-    },
+    HeaderCondition { name: String, value: String },
     /// 复合条件
     CompoundCondition {
         operator: LogicalOperator,
@@ -505,18 +476,11 @@ pub enum HttpRuleAction {
     /// 拒绝
     Deny,
     /// 修改头部
-    ModifyHeader {
-        name: String,
-        value: String,
-    },
+    ModifyHeader { name: String, value: String },
     /// 重定向
-    Redirect {
-        location: String,
-    },
+    Redirect { location: String },
     /// 缓存
-    Cache {
-        duration: u64,
-    },
+    Cache { duration: u64 },
 }
 
 /// HTTP规则类型
@@ -593,10 +557,23 @@ impl HttpFormalSpec {
     /// 初始化头部字段
     fn initialize_header_fields(&mut self) {
         let headers = vec![
-            "Content-Type", "Content-Length", "Authorization", "Accept",
-            "Accept-Encoding", "Accept-Language", "Cache-Control",
-            "Connection", "Host", "User-Agent", "Cookie", "Set-Cookie",
-            "Location", "Server", "Date", "Last-Modified", "ETag",
+            "Content-Type",
+            "Content-Length",
+            "Authorization",
+            "Accept",
+            "Accept-Encoding",
+            "Accept-Language",
+            "Cache-Control",
+            "Connection",
+            "Host",
+            "User-Agent",
+            "Cookie",
+            "Set-Cookie",
+            "Location",
+            "Server",
+            "Date",
+            "Last-Modified",
+            "ETag",
         ];
 
         for header in headers {
@@ -661,19 +638,30 @@ impl HttpFormalSpec {
     }
 
     /// 检查HTTP响应的有效性
-    pub fn is_valid_response(&self, status_code: &HttpStatusCode, headers: &HashMap<String, String>) -> bool {
+    pub fn is_valid_response(
+        &self,
+        status_code: &HttpStatusCode,
+        headers: &HashMap<String, String>,
+    ) -> bool {
         // 检查状态码是否支持
         if !self.status_codes.contains(status_code) {
             return false;
         }
 
         // 检查必需的头部字段
-        headers.contains_key("Content-Type") ||
-        matches!(status_code, HttpStatusCode::Informational(_) | HttpStatusCode::Redirection(_))
+        headers.contains_key("Content-Type")
+            || matches!(
+                status_code,
+                HttpStatusCode::Informational(_) | HttpStatusCode::Redirection(_)
+            )
     }
 
     /// 应用协议规则
-    pub fn apply_rules(&self, method: &HttpMethod, headers: &HashMap<String, String>) -> Vec<HttpRuleAction> {
+    pub fn apply_rules(
+        &self,
+        method: &HttpMethod,
+        headers: &HashMap<String, String>,
+    ) -> Vec<HttpRuleAction> {
         let mut actions = Vec::new();
 
         for rule in &self.protocol_rules {
@@ -686,11 +674,14 @@ impl HttpFormalSpec {
     }
 
     /// 检查规则条件匹配
-    fn matches_condition(&self, condition: &HttpRuleCondition, method: &HttpMethod, headers: &HashMap<String, String>) -> bool {
+    fn matches_condition(
+        &self,
+        condition: &HttpRuleCondition,
+        method: &HttpMethod,
+        headers: &HashMap<String, String>,
+    ) -> bool {
         match condition {
-            HttpRuleCondition::MethodCondition(expected_method) => {
-                method == expected_method
-            }
+            HttpRuleCondition::MethodCondition(expected_method) => method == expected_method,
             HttpRuleCondition::StatusCodeCondition(_) => {
                 // 响应规则，请求时不适用
                 false
@@ -701,25 +692,20 @@ impl HttpFormalSpec {
                     header_value.contains(value) || value.contains(header_value)
                 })
             }
-            HttpRuleCondition::CompoundCondition { operator, conditions } => {
-                match operator {
-                    LogicalOperator::And => {
-                        conditions.iter().all(|condition| {
-                            self.matches_condition(condition, method, headers)
-                        })
-                    }
-                    LogicalOperator::Or => {
-                        conditions.iter().any(|condition| {
-                            self.matches_condition(condition, method, headers)
-                        })
-                    }
-                    LogicalOperator::Not => {
-                        !conditions.iter().any(|condition| {
-                            self.matches_condition(condition, method, headers)
-                        })
-                    }
-                }
-            }
+            HttpRuleCondition::CompoundCondition {
+                operator,
+                conditions,
+            } => match operator {
+                LogicalOperator::And => conditions
+                    .iter()
+                    .all(|condition| self.matches_condition(condition, method, headers)),
+                LogicalOperator::Or => conditions
+                    .iter()
+                    .any(|condition| self.matches_condition(condition, method, headers)),
+                LogicalOperator::Not => !conditions
+                    .iter()
+                    .any(|condition| self.matches_condition(condition, method, headers)),
+            },
         }
     }
 }

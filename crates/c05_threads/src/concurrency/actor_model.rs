@@ -49,7 +49,10 @@ impl<M: Message> Mailbox<M> {
 
     /// 发送消息到邮箱
     pub fn send(&self, msg: M) -> Result<(), String> {
-        let mut queue = self.messages.lock().map_err(|e| format!("Lock error: {}", e))?;
+        let mut queue = self
+            .messages
+            .lock()
+            .map_err(|e| format!("Lock error: {}", e))?;
         queue.push_back(msg);
         Ok(())
     }
@@ -72,10 +75,7 @@ impl<M: Message> Mailbox<M> {
 
     /// 检查邮箱是否为空
     pub fn is_empty(&self) -> bool {
-        self.messages
-            .lock()
-            .map(|q| q.is_empty())
-            .unwrap_or(true)
+        self.messages.lock().map(|q| q.is_empty()).unwrap_or(true)
     }
 
     /// 获取邮箱中的消息数量
@@ -130,9 +130,7 @@ pub struct ActorSystem {
 impl ActorSystem {
     /// 创建新的 Actor 系统
     pub fn new() -> Self {
-        Self {
-            actors: Vec::new(),
-        }
+        Self { actors: Vec::new() }
     }
 
     /// 启动一个 Actor

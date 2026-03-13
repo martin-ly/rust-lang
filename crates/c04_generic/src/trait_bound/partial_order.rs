@@ -285,6 +285,8 @@ PartialOrd trait 为 Rust 提供了部分序比较支持。
 同时需要注意部分序关系的性质和 NaN 等特殊值的处理。
 */
 
+#![allow(clippy::type_complexity)]
+
 use std::cmp::Ordering;
 
 // 示例结构体

@@ -1,19 +1,19 @@
 //! 异步集成框架层面分析
-//! 
+//!
 //! 本模块提供了异步生态系统在集成框架层面的分析，
 //! 包括：运行时共性、异步同步转换、聚合组合设计模式等。
-use std::sync::Arc;
-use std::time::Duration;
-use std::collections::HashMap;
 use anyhow::Result;
-use tokio::time::sleep;
-use tokio::sync::{Mutex, Semaphore, RwLock};
-use tokio::task;
 use futures::future::try_join_all;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use std::sync::Arc;
+use std::time::Duration;
+use tokio::sync::{Mutex, RwLock, Semaphore};
+use tokio::task;
+use tokio::time::sleep;
 
 /// 异步运行时共性分析
-/// 
+///
 /// 分析不同异步运行时的共同特性和设计模式
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncRuntimeCommonality {
@@ -53,10 +53,10 @@ pub struct DesignPattern {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum PatternType {
-    Creational,    // 创建型模式
-    Structural,    // 结构型模式
-    Behavioral,    // 行为型模式
-    Concurrency,   // 并发模式
+    Creational,  // 创建型模式
+    Structural,  // 结构型模式
+    Behavioral,  // 行为型模式
+    Concurrency, // 并发模式
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -165,7 +165,7 @@ impl AsyncCommonalityAnalyzer {
 
         // 为每个运行时创建共性分析
         let runtime_names = vec!["std", "tokio", "async-std", "smol"];
-        
+
         for runtime_name in runtime_names {
             let performance_profile = match runtime_name {
                 "std" => PerformanceProfile {
@@ -200,12 +200,15 @@ impl AsyncCommonalityAnalyzer {
                 },
             };
 
-            self.runtimes.insert(runtime_name.to_string(), AsyncRuntimeCommonality {
-                runtime_name: runtime_name.to_string(),
-                common_features: common_features.clone(),
-                design_patterns: design_patterns.clone(),
-                performance_characteristics: performance_profile,
-            });
+            self.runtimes.insert(
+                runtime_name.to_string(),
+                AsyncRuntimeCommonality {
+                    runtime_name: runtime_name.to_string(),
+                    common_features: common_features.clone(),
+                    design_patterns: design_patterns.clone(),
+                    performance_characteristics: performance_profile,
+                },
+            );
         }
     }
 
@@ -235,7 +238,7 @@ impl AsyncCommonalityAnalyzer {
 }
 
 /// 异步同步转换框架
-/// 
+///
 /// 提供异步和同步代码之间的转换机制
 #[allow(unused)]
 pub struct AsyncSyncConversionFramework {
@@ -258,10 +261,10 @@ impl AsyncSyncConversionFramework {
         T: Send + 'static,
     {
         println!("🔄 异步到同步转换:");
-        
+
         // 直接执行异步操作，不需要转换
         let result = async_operation.await?;
-        
+
         println!("  异步操作转换为同步完成");
         Ok(result)
     }
@@ -273,10 +276,10 @@ impl AsyncSyncConversionFramework {
         T: Send + 'static,
     {
         println!("🔄 同步到异步转换:");
-        
+
         // 使用 spawn_blocking 将同步操作转换为异步
         let result = task::spawn_blocking(sync_operation).await??;
-        
+
         println!("  同步操作转换为异步完成");
         Ok(result)
     }
@@ -284,27 +287,35 @@ impl AsyncSyncConversionFramework {
     /// 混合模式转换
     pub async fn hybrid_conversion(&self) -> Result<()> {
         println!("🔄 混合模式转换:");
-        
+
         // 在异步上下文中调用同步操作
-        let sync_result = self.sync_to_async_conversion(|| {
-            std::thread::sleep(Duration::from_millis(10));
-            Ok("sync_operation_result".to_string())
-        }).await?;
-        
+        let sync_result = self
+            .sync_to_async_conversion(|| {
+                std::thread::sleep(Duration::from_millis(10));
+                Ok("sync_operation_result".to_string())
+            })
+            .await?;
+
         // 在同步上下文中调用异步操作
-        let async_result = self.async_to_sync_conversion(async {
-            sleep(Duration::from_millis(10)).await;
-            Ok("async_operation_result".to_string())
-        }).await?;
-        
+        let async_result = self
+            .async_to_sync_conversion(async {
+                sleep(Duration::from_millis(10)).await;
+                Ok("async_operation_result".to_string())
+            })
+            .await?;
+
         println!("  同步结果: {}", sync_result);
         println!("  异步结果: {}", async_result);
-        
+
         Ok(())
     }
 
     /// 转换缓存机制
-    pub async fn conversion_with_caching(&self, key: &str, operation: impl FnOnce() -> Result<String>) -> Result<String> {
+    pub async fn conversion_with_caching(
+        &self,
+        key: &str,
+        operation: impl FnOnce() -> Result<String>,
+    ) -> Result<String> {
         // 检查缓存
         {
             let cache = self.conversion_cache.read().await;
@@ -313,23 +324,23 @@ impl AsyncSyncConversionFramework {
                 return Ok(cached_result.clone());
             }
         }
-        
+
         // 执行转换操作
         let result = operation()?;
-        
+
         // 更新缓存
         {
             let mut cache = self.conversion_cache.write().await;
             cache.insert(key.to_string(), result.clone());
         }
-        
+
         println!("  转换结果已缓存: {}", key);
         Ok(result)
     }
 }
 
 /// 聚合组合设计模式框架
-/// 
+///
 /// 提供聚合和组合的设计模式实现
 #[allow(unused)]
 pub struct AggregationCompositionFramework {
@@ -353,11 +364,11 @@ pub struct AggregationEngine {
 
 #[derive(Debug, Clone)]
 pub enum AggregationStrategy {
-    Sequential,    // 顺序聚合
-    Parallel,      // 并行聚合
-    Pipeline,      // 管道聚合
-    FanOut,        // 扇出聚合
-    FanIn,         // 扇入聚合
+    Sequential, // 顺序聚合
+    Parallel,   // 并行聚合
+    Pipeline,   // 管道聚合
+    FanOut,     // 扇出聚合
+    FanIn,      // 扇入聚合
 }
 
 impl Default for AggregationCompositionFramework {
@@ -377,7 +388,10 @@ impl AggregationCompositionFramework {
     }
 
     /// 注册组件
-    pub async fn register_component(&self, component: Box<dyn AsyncComponent + Send + Sync>) -> Result<()> {
+    pub async fn register_component(
+        &self,
+        component: Box<dyn AsyncComponent + Send + Sync>,
+    ) -> Result<()> {
         let name = component.get_name().to_string();
         let mut registry = self.component_registry.write().await;
         registry.insert(name.clone(), component);
@@ -386,13 +400,17 @@ impl AggregationCompositionFramework {
     }
 
     /// 顺序聚合模式
-    pub async fn sequential_aggregation(&self, component_names: Vec<String>, input: &str) -> Result<Vec<String>> {
+    pub async fn sequential_aggregation(
+        &self,
+        component_names: Vec<String>,
+        input: &str,
+    ) -> Result<Vec<String>> {
         println!("📊 顺序聚合模式:");
-        
+
         let registry = self.component_registry.read().await;
         let mut results = Vec::new();
         let mut current_input = input.to_string();
-        
+
         for component_name in component_names {
             if let Some(component) = registry.get(&component_name) {
                 let result = component.execute(current_input.clone()).await?;
@@ -401,67 +419,81 @@ impl AggregationCompositionFramework {
                 println!("    组件 {} 执行完成", component_name);
             }
         }
-        
+
         Ok(results)
     }
 
     /// 并行聚合模式
-    pub async fn parallel_aggregation(&self, component_names: Vec<String>, input: &str) -> Result<Vec<String>> {
+    pub async fn parallel_aggregation(
+        &self,
+        component_names: Vec<String>,
+        input: &str,
+    ) -> Result<Vec<String>> {
         println!("📊 并行聚合模式:");
-        
+
         let registry = self.component_registry.read().await;
         let mut tasks = Vec::new();
-        
+
         for component_name in component_names {
             if let Some(component) = registry.get(&component_name) {
                 let task = component.execute(input.to_string());
                 tasks.push(task);
             }
         }
-        
+
         let results = try_join_all(tasks).await?;
         println!("  并行聚合完成，处理了 {} 个组件", results.len());
-        
+
         Ok(results)
     }
 
     /// 管道聚合模式
-    pub async fn pipeline_aggregation(&self, pipeline_stages: Vec<Vec<String>>, input: &str) -> Result<Vec<String>> {
+    pub async fn pipeline_aggregation(
+        &self,
+        pipeline_stages: Vec<Vec<String>>,
+        input: &str,
+    ) -> Result<Vec<String>> {
         println!("📊 管道聚合模式:");
-        
+
         let mut current_input = input.to_string();
         let mut all_results = Vec::new();
-        
+
         for (stage_index, stage_components) in pipeline_stages.into_iter().enumerate() {
             println!("  执行管道阶段 {}", stage_index + 1);
-            
+
             // 每个阶段内部并行执行
-            let stage_results = self.parallel_aggregation(stage_components, &current_input).await?;
-            
+            let stage_results = self
+                .parallel_aggregation(stage_components, &current_input)
+                .await?;
+
             // 将阶段结果合并作为下一阶段的输入
             current_input = stage_results.join("|");
             all_results.extend(stage_results);
         }
-        
+
         Ok(all_results)
     }
 
     /// 扇出聚合模式
-    pub async fn fan_out_aggregation(&self, component_name: &str, inputs: Vec<String>) -> Result<Vec<String>> {
+    pub async fn fan_out_aggregation(
+        &self,
+        component_name: &str,
+        inputs: Vec<String>,
+    ) -> Result<Vec<String>> {
         println!("📊 扇出聚合模式:");
-        
+
         let registry = self.component_registry.read().await;
         if let Some(component) = registry.get(component_name) {
             let mut tasks = Vec::new();
-            
+
             for input in inputs {
                 let task = component.execute(input.clone());
                 tasks.push(task);
             }
-            
+
             let results = try_join_all(tasks).await?;
             println!("  扇出聚合完成，处理了 {} 个输入", results.len());
-            
+
             Ok(results)
         } else {
             Err(anyhow::anyhow!("组件不存在: {}", component_name))
@@ -469,22 +501,26 @@ impl AggregationCompositionFramework {
     }
 
     /// 扇入聚合模式
-    pub async fn fan_in_aggregation(&self, component_names: Vec<String>, input: &str) -> Result<String> {
+    pub async fn fan_in_aggregation(
+        &self,
+        component_names: Vec<String>,
+        input: &str,
+    ) -> Result<String> {
         println!("📊 扇入聚合模式:");
-        
+
         let registry = self.component_registry.read().await;
         let mut tasks = Vec::new();
-        
+
         for component_name in component_names {
             if let Some(component) = registry.get(&component_name) {
                 let task = component.execute(input.to_string());
                 tasks.push(task);
             }
         }
-        
+
         let results = try_join_all(tasks).await?;
         let aggregated_result = results.join("+");
-        
+
         println!("  扇入聚合完成，聚合了 {} 个组件的结果", results.len());
         Ok(aggregated_result)
     }
@@ -529,13 +565,13 @@ pub async fn demonstrate_async_integration_framework() -> Result<()> {
     // 1. 异步运行时共性分析
     println!("\n🔍 1. 异步运行时共性分析:");
     let analyzer = AsyncCommonalityAnalyzer::new();
-    
+
     let common_features = analyzer.analyze_common_features();
     println!("  共同特性:");
     for feature in &common_features {
         println!("    - {}: {}", feature.name, feature.description);
     }
-    
+
     let common_patterns = analyzer.analyze_common_patterns();
     println!("  共同设计模式:");
     for pattern in &common_patterns {
@@ -545,64 +581,82 @@ pub async fn demonstrate_async_integration_framework() -> Result<()> {
     // 2. 异步同步转换框架
     println!("\n🔄 2. 异步同步转换框架:");
     let conversion_framework = AsyncSyncConversionFramework::new(4);
-    
+
     conversion_framework.hybrid_conversion().await?;
-    
+
     // 转换缓存演示
-    let cached_result = conversion_framework.conversion_with_caching("test_key", || {
-        Ok("cached_operation_result".to_string())
-    }).await?;
+    let cached_result = conversion_framework
+        .conversion_with_caching("test_key", || Ok("cached_operation_result".to_string()))
+        .await?;
     println!("  缓存转换结果: {}", cached_result);
 
     // 3. 聚合组合设计模式框架
     println!("\n📊 3. 聚合组合设计模式框架:");
     let composition_framework = AggregationCompositionFramework::new();
-    
+
     // 注册组件
     let component1 = Box::new(DataProcessingComponent::new("processor1", 10));
     let component2 = Box::new(DataProcessingComponent::new("processor2", 15));
     let component3 = Box::new(DataProcessingComponent::new("processor3", 20));
-    
+
     composition_framework.register_component(component1).await?;
     composition_framework.register_component(component2).await?;
     composition_framework.register_component(component3).await?;
-    
+
     // 顺序聚合
-    let sequential_results = composition_framework.sequential_aggregation(
-        vec!["processor1".to_string(), "processor2".to_string()],
-        "input_data"
-    ).await?;
+    let sequential_results = composition_framework
+        .sequential_aggregation(
+            vec!["processor1".to_string(), "processor2".to_string()],
+            "input_data",
+        )
+        .await?;
     println!("  顺序聚合结果: {:?}", sequential_results);
-    
+
     // 并行聚合
-    let parallel_results = composition_framework.parallel_aggregation(
-        vec!["processor1".to_string(), "processor2".to_string(), "processor3".to_string()],
-        "input_data"
-    ).await?;
+    let parallel_results = composition_framework
+        .parallel_aggregation(
+            vec![
+                "processor1".to_string(),
+                "processor2".to_string(),
+                "processor3".to_string(),
+            ],
+            "input_data",
+        )
+        .await?;
     println!("  并行聚合结果: {:?}", parallel_results);
-    
+
     // 管道聚合
-    let pipeline_results = composition_framework.pipeline_aggregation(
-        vec![
-            vec!["processor1".to_string()],
-            vec!["processor2".to_string(), "processor3".to_string()],
-        ],
-        "pipeline_input"
-    ).await?;
+    let pipeline_results = composition_framework
+        .pipeline_aggregation(
+            vec![
+                vec!["processor1".to_string()],
+                vec!["processor2".to_string(), "processor3".to_string()],
+            ],
+            "pipeline_input",
+        )
+        .await?;
     println!("  管道聚合结果: {:?}", pipeline_results);
-    
+
     // 扇出聚合
-    let fan_out_results = composition_framework.fan_out_aggregation(
-        "processor1",
-        vec!["input1".to_string(), "input2".to_string(), "input3".to_string()]
-    ).await?;
+    let fan_out_results = composition_framework
+        .fan_out_aggregation(
+            "processor1",
+            vec![
+                "input1".to_string(),
+                "input2".to_string(),
+                "input3".to_string(),
+            ],
+        )
+        .await?;
     println!("  扇出聚合结果: {:?}", fan_out_results);
-    
+
     // 扇入聚合
-    let fan_in_result = composition_framework.fan_in_aggregation(
-        vec!["processor1".to_string(), "processor2".to_string()],
-        "fan_in_input"
-    ).await?;
+    let fan_in_result = composition_framework
+        .fan_in_aggregation(
+            vec!["processor1".to_string(), "processor2".to_string()],
+            "fan_in_input",
+        )
+        .await?;
     println!("  扇入聚合结果: {}", fan_in_result);
 
     println!("\n✅ 异步集成框架层面分析演示完成!");
@@ -625,7 +679,12 @@ mod tests {
     async fn test_async_sync_conversion() {
         let framework = AsyncSyncConversionFramework::new(2);
         assert!(framework.hybrid_conversion().await.is_ok());
-        assert!(framework.conversion_with_caching("test", || Ok("result".to_string())).await.is_ok());
+        assert!(
+            framework
+                .conversion_with_caching("test", || Ok("result".to_string()))
+                .await
+                .is_ok()
+        );
     }
 
     #[tokio::test]

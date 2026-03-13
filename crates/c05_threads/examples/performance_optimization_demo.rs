@@ -7,11 +7,14 @@
 //! - 线程池性能调优
 //! - NUMA 感知优化
 //! - 工作窃取性能分析
-use std::sync::{Arc, Mutex, atomic::{AtomicUsize, Ordering}};
+use rayon::prelude::*;
+use std::collections::VecDeque;
+use std::sync::{
+    Arc, Mutex,
+    atomic::{AtomicUsize, Ordering},
+};
 use std::thread;
 use std::time::{Duration, Instant};
-use std::collections::VecDeque;
-use rayon::prelude::*;
 
 /// 缓存行填充结构
 #[repr(align(64))]
@@ -53,14 +56,18 @@ impl FalseSharingTest {
 
     pub fn run_test(&self, iterations: usize) -> Duration {
         let start = Instant::now();
-        let handles: Vec<_> = self.counters.iter().map(|counter| {
-            let counter = Arc::clone(counter);
-            thread::spawn(move || {
-                for _ in 0..iterations {
-                    counter.get().fetch_add(1, Ordering::Relaxed);
-                }
+        let handles: Vec<_> = self
+            .counters
+            .iter()
+            .map(|counter| {
+                let counter = Arc::clone(counter);
+                thread::spawn(move || {
+                    for _ in 0..iterations {
+                        counter.get().fetch_add(1, Ordering::Relaxed);
+                    }
+                })
             })
-        }).collect();
+            .collect();
 
         for handle in handles {
             handle.join().unwrap();
@@ -70,7 +77,10 @@ impl FalseSharingTest {
     }
 
     pub fn get_total(&self) -> usize {
-        self.counters.iter().map(|c| c.get().load(Ordering::Relaxed)).sum()
+        self.counters
+            .iter()
+            .map(|c| c.get().load(Ordering::Relaxed))
+            .sum()
     }
 }
 
@@ -262,24 +272,28 @@ impl NumaAwareBenchmark {
 
         let start = Instant::now();
 
-        let handles: Vec<_> = (0..4).map(|thread_id| {
-            let data = Arc::clone(&data);
-            thread::spawn(move || {
-                let mut sum = 0u64;
-                let chunk_size = SIZE / 4;
-                let start = thread_id * chunk_size;
-                let end = if thread_id == 3 { SIZE } else { (thread_id + 1) * chunk_size };
+        let handles: Vec<_> = (0..4)
+            .map(|thread_id| {
+                let data = Arc::clone(&data);
+                thread::spawn(move || {
+                    let mut sum = 0u64;
+                    let chunk_size = SIZE / 4;
+                    let start = thread_id * chunk_size;
+                    let end = if thread_id == 3 {
+                        SIZE
+                    } else {
+                        (thread_id + 1) * chunk_size
+                    };
 
-                for i in start..end {
-                    sum += data[i];
-                }
-                sum
+                    for i in start..end {
+                        sum += data[i];
+                    }
+                    sum
+                })
             })
-        }).collect();
+            .collect();
 
-        let total_sum: u64 = handles.into_iter()
-            .map(|h| h.join().unwrap())
-            .sum();
+        let total_sum: u64 = handles.into_iter().map(|h| h.join().unwrap()).sum();
 
         std::hint::black_box(total_sum);
         start.elapsed()
@@ -327,12 +341,14 @@ impl WorkStealingAnalysis {
         let max = durations.iter().max().unwrap().clone();
         let min = durations.iter().min().unwrap().clone();
 
-        let variance = durations.iter()
+        let variance = durations
+            .iter()
             .map(|d| {
                 let diff = if *d > avg { *d - avg } else { avg - *d };
                 diff.as_nanos() as f64
             })
-            .sum::<f64>() / durations.len() as f64;
+            .sum::<f64>()
+            / durations.len() as f64;
 
         (min, max, variance)
     }
@@ -367,15 +383,17 @@ impl MemoryAllocationBenchmark {
     pub fn benchmark_parallel_allocation() -> Duration {
         let start = Instant::now();
 
-        let handles: Vec<_> = (0..4).map(|_| {
-            thread::spawn(|| {
-                let mut vec = Vec::new();
-                for i in 0..25000 {
-                    vec.push(i);
-                }
-                vec
+        let handles: Vec<_> = (0..4)
+            .map(|_| {
+                thread::spawn(|| {
+                    let mut vec = Vec::new();
+                    for i in 0..25000 {
+                        vec.push(i);
+                    }
+                    vec
+                })
             })
-        }).collect();
+            .collect();
 
         for handle in handles {
             handle.join().unwrap();
@@ -408,7 +426,10 @@ fn main() {
 
     println!("无锁队列 {} 次操作耗时: {:?}", num_ops, lockfree_time);
     println!("有锁队列 {} 次操作耗时: {:?}", num_ops, locked_time);
-    println!("性能提升: {:.2}x", locked_time.as_nanos() as f64 / lockfree_time.as_nanos() as f64);
+    println!(
+        "性能提升: {:.2}x",
+        locked_time.as_nanos() as f64 / lockfree_time.as_nanos() as f64
+    );
     println!();
 
     // 3. 线程池性能对比
@@ -421,7 +442,10 @@ fn main() {
 
     println!("Rayon 线程池 {} 个任务耗时: {:?}", num_tasks, rayon_time);
     println!("标准线程 {} 个任务耗时: {:?}", num_tasks, std_time);
-    println!("性能提升: {:.2}x", std_time.as_nanos() as f64 / rayon_time.as_nanos() as f64);
+    println!(
+        "性能提升: {:.2}x",
+        std_time.as_nanos() as f64 / rayon_time.as_nanos() as f64
+    );
     println!();
 
     // 4. NUMA 感知优化
@@ -432,7 +456,10 @@ fn main() {
     println!("顺序内存访问耗时: {:?}", sequential_time);
     println!("随机内存访问耗时: {:?}", random_time);
     println!("并行内存访问耗时: {:?}", parallel_time);
-    println!("顺序 vs 随机性能比: {:.2}x", random_time.as_nanos() as f64 / sequential_time.as_nanos() as f64);
+    println!(
+        "顺序 vs 随机性能比: {:.2}x",
+        random_time.as_nanos() as f64 / sequential_time.as_nanos() as f64
+    );
     println!();
 
     // 5. 工作窃取负载均衡分析
@@ -444,7 +471,10 @@ fn main() {
     println!("  最短: {:?}", min);
     println!("  最长: {:?}", max);
     println!("  方差: {:.2}", variance);
-    println!("  负载均衡度: {:.2}%", (1.0 - variance / max.as_nanos() as f64) * 100.0);
+    println!(
+        "  负载均衡度: {:.2}%",
+        (1.0 - variance / max.as_nanos() as f64) * 100.0
+    );
     println!();
 
     // 6. 内存分配性能测试
@@ -456,7 +486,10 @@ fn main() {
     println!("动态增长 Vec 耗时: {:?}", growth_time);
     println!("预分配容量 Vec 耗时: {:?}", capacity_time);
     println!("并行分配耗时: {:?}", parallel_time);
-    println!("预分配性能提升: {:.2}x", growth_time.as_nanos() as f64 / capacity_time.as_nanos() as f64);
+    println!(
+        "预分配性能提升: {:.2}x",
+        growth_time.as_nanos() as f64 / capacity_time.as_nanos() as f64
+    );
     println!();
 
     println!("=== 性能优化示例完成 ===");

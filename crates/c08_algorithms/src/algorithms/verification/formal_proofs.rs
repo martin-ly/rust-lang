@@ -1,7 +1,7 @@
 //! # 形式化证明模块
 //!
 //! 本模块提供算法的形式化证明框架和具体证明实现。
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// 形式化证明
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -55,7 +55,9 @@ impl FormalProver {
             proof_steps: vec![
                 ProofStep {
                     step_number: 1,
-                    description: "分区操作的正确性：分区后，基准元素左侧都小于等于基准，右侧都大于基准".to_string(),
+                    description:
+                        "分区操作的正确性：分区后，基准元素左侧都小于等于基准，右侧都大于基准"
+                            .to_string(),
                     proof_type: ProofType::Correctness,
                     status: ProofStatus::Completed,
                     dependencies: vec![],
@@ -69,7 +71,8 @@ impl FormalProver {
                 },
                 ProofStep {
                     step_number: 3,
-                    description: "终止性：每次递归调用都会减少数组大小，最终达到基本情况".to_string(),
+                    description: "终止性：每次递归调用都会减少数组大小，最终达到基本情况"
+                        .to_string(),
                     proof_type: ProofType::Termination,
                     status: ProofStatus::Completed,
                     dependencies: vec![1, 2],
@@ -141,14 +144,16 @@ impl FormalProver {
             proof_steps: vec![
                 ProofStep {
                     step_number: 1,
-                    description: "搜索空间的不变性：每次迭代后，目标元素（如果存在）仍在搜索范围内".to_string(),
+                    description: "搜索空间的不变性：每次迭代后，目标元素（如果存在）仍在搜索范围内"
+                        .to_string(),
                     proof_type: ProofType::Invariant,
                     status: ProofStatus::Completed,
                     dependencies: vec![],
                 },
                 ProofStep {
                     step_number: 2,
-                    description: "终止性：每次迭代搜索空间减半，最终收敛到单个元素或空集".to_string(),
+                    description: "终止性：每次迭代搜索空间减半，最终收敛到单个元素或空集"
+                        .to_string(),
                     proof_type: ProofType::Termination,
                     status: ProofStatus::Completed,
                     dependencies: vec![1],

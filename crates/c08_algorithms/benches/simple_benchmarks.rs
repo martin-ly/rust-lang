@@ -1,10 +1,10 @@
 //! 简化的算法性能基准测试
 //!
 //! 本文件包含简化的算法性能基准测试，使用实际存在的函数
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
-use std::hint::black_box;
-use c08_algorithms::algorithms::sorting::sync::{QuickSort, MergeSort};
 use c08_algorithms::algorithms::SyncAlgorithm;
+use c08_algorithms::algorithms::sorting::sync::{MergeSort, QuickSort};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 /// 排序算法基准测试
 fn bench_sorting_algorithms(c: &mut Criterion) {
@@ -40,25 +40,33 @@ fn bench_memory_allocation(c: &mut Criterion) {
 
     // 测试不同大小的数据结构
     for size in [1000, 10000, 100000].iter() {
-        group.bench_with_input(BenchmarkId::new("vector_allocation", size), size, |b, size| {
-            b.iter(|| {
-                let mut vec = Vec::with_capacity(*size);
-                for i in 0..*size {
-                    vec.push(i);
-                }
-                vec
-            })
-        });
+        group.bench_with_input(
+            BenchmarkId::new("vector_allocation", size),
+            size,
+            |b, size| {
+                b.iter(|| {
+                    let mut vec = Vec::with_capacity(*size);
+                    for i in 0..*size {
+                        vec.push(i);
+                    }
+                    vec
+                })
+            },
+        );
 
-        group.bench_with_input(BenchmarkId::new("vector_with_capacity", size), size, |b, size| {
-            b.iter(|| {
-                let mut vec = Vec::with_capacity(*size);
-                for i in 0..*size {
-                    vec.push(i);
-                }
-                vec
-            })
-        });
+        group.bench_with_input(
+            BenchmarkId::new("vector_with_capacity", size),
+            size,
+            |b, size| {
+                b.iter(|| {
+                    let mut vec = Vec::with_capacity(*size);
+                    for i in 0..*size {
+                        vec.push(i);
+                    }
+                    vec
+                })
+            },
+        );
     }
 
     group.finish();
@@ -74,21 +82,15 @@ fn bench_math_operations(c: &mut Criterion) {
         let data: Vec<f64> = (0..*size).map(|i| i as f64).collect();
 
         group.bench_with_input(BenchmarkId::new("sum", size), size, |b, _| {
-            b.iter(|| {
-                data.iter().sum::<f64>()
-            })
+            b.iter(|| data.iter().sum::<f64>())
         });
 
         group.bench_with_input(BenchmarkId::new("product", size), size, |b, _| {
-            b.iter(|| {
-                data.iter().product::<f64>()
-            })
+            b.iter(|| data.iter().product::<f64>())
         });
 
         group.bench_with_input(BenchmarkId::new("mean", size), size, |b, _| {
-            b.iter(|| {
-                data.iter().sum::<f64>() / *size as f64
-            })
+            b.iter(|| data.iter().sum::<f64>() / *size as f64)
         });
     }
 
@@ -115,15 +117,11 @@ fn bench_string_operations(c: &mut Criterion) {
         });
 
         group.bench_with_input(BenchmarkId::new("string_find", size), size, |b, _| {
-            b.iter(|| {
-                text.find("a")
-            })
+            b.iter(|| text.find("a"))
         });
 
         group.bench_with_input(BenchmarkId::new("string_replace", size), size, |b, _| {
-            b.iter(|| {
-                text.replace("a", "b")
-            })
+            b.iter(|| text.replace("a", "b"))
         });
     }
 
@@ -147,9 +145,7 @@ fn bench_concurrent_operations(c: &mut Criterion) {
         });
 
         group.bench_with_input(BenchmarkId::new("sequential_sum", size), size, |b, _| {
-            b.iter(|| {
-                data.iter().sum::<i32>()
-            })
+            b.iter(|| data.iter().sum::<i32>())
         });
 
         group.bench_with_input(BenchmarkId::new("parallel_map", size), size, |b, _| {
@@ -160,9 +156,7 @@ fn bench_concurrent_operations(c: &mut Criterion) {
         });
 
         group.bench_with_input(BenchmarkId::new("sequential_map", size), size, |b, _| {
-            b.iter(|| {
-                data.iter().map(|x| x * 2).collect::<Vec<_>>()
-            })
+            b.iter(|| data.iter().map(|x| x * 2).collect::<Vec<_>>())
         });
     }
 

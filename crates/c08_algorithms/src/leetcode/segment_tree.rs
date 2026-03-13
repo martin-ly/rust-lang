@@ -99,13 +99,11 @@ pub fn count_smaller(nums: Vec<i32>) -> Vec<i32> {
     let n = nums.len();
     let mut result = vec![0; n];
     let mut indices: Vec<usize> = (0..n).collect();
-    let mut temp = vec![0; n];
     let mut temp_indices = vec![0; n];
 
     fn merge_sort(
         nums: &[i32],
         indices: &mut [usize],
-        temp: &mut [usize],
         temp_indices: &mut [usize],
         result: &mut [i32],
         left: usize,
@@ -115,8 +113,8 @@ pub fn count_smaller(nums: Vec<i32>) -> Vec<i32> {
             return;
         }
         let mid = (left + right) / 2;
-        merge_sort(nums, indices, temp, temp_indices, result, left, mid);
-        merge_sort(nums, indices, temp, temp_indices, result, mid + 1, right);
+        merge_sort(nums, indices, temp_indices, result, left, mid);
+        merge_sort(nums, indices, temp_indices, result, mid + 1, right);
 
         let mut i = left;
         let mut j = mid + 1;
@@ -149,12 +147,20 @@ pub fn count_smaller(nums: Vec<i32>) -> Vec<i32> {
             k += 1;
         }
 
+        #[allow(clippy::manual_memcpy)]
         for i in left..=right {
             indices[i] = temp_indices[i];
         }
     }
 
-    merge_sort(&nums, &mut indices, &mut temp, &mut temp_indices, &mut result, 0, n - 1);
+    merge_sort(
+        &nums,
+        &mut indices,
+        &mut temp_indices,
+        &mut result,
+        0,
+        n - 1,
+    );
     result
 }
 
@@ -222,6 +228,7 @@ pub fn count_range_sum(nums: Vec<i32>, lower: i32, upper: i32) -> i32 {
             t += 1;
         }
 
+        #[allow(clippy::manual_memcpy)]
         for i in left..=right {
             prefix[i] = temp[i];
         }
@@ -256,10 +263,7 @@ pub fn falling_squares(positions: Vec<Vec<i32>>) -> Vec<i32> {
         heights.insert(right, max_h);
 
         // 移除中间的点
-        let keys_to_remove: Vec<i32> = heights
-            .range((left + 1)..right)
-            .map(|(&k, _)| k)
-            .collect();
+        let keys_to_remove: Vec<i32> = heights.range((left + 1)..right).map(|(&k, _)| k).collect();
         for key in keys_to_remove {
             heights.remove(&key);
         }

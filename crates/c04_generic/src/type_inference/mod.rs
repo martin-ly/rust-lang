@@ -296,6 +296,8 @@ fn main() {
 减少了显式类型注解的需要，使代码更加简洁和易读。
 */
 
+#![allow(clippy::type_complexity)]
+
 // 基本类型推断示例
 pub fn demonstrate_basic_inference() {
     println!("=== Basic Type Inference Demo ===\n");

@@ -1,31 +1,31 @@
 //! # Rust 所有权系统综合示例
-//! 
+//!
 //! 本文件包含了 Rust 所有权系统的综合示例，涵盖了所有权、借用、生命周期等各个方面
 //! This file contains comprehensive examples of Rust's ownership system, covering ownership, borrowing, lifetimes, etc.
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
 
 /// 所有权基础示例 / Basic Ownership Examples
 fn ownership_basics() {
     println!("=== 所有权基础示例 / Basic Ownership Examples ===");
-    
+
     // 示例 1：所有权转移 / Example 1: Ownership Transfer
     let s1 = String::from("hello");
     let s2 = s1; // s1 的所有权转移给 s2 / Ownership of s1 is transferred to s2
     // println!("{}", s1); // 编译错误：s1 不再有效 / Compilation error: s1 is no longer valid
     println!("s2: {}", s2);
-    
+
     // 示例 2：函数参数所有权转移 / Example 2: Function Parameter Ownership Transfer
     let s3 = String::from("world");
     takes_ownership(s3);
     // println!("{}", s3); // 编译错误：s3 不再有效 / Compilation error: s3 is no longer valid
-    
+
     // 示例 3：返回值所有权转移 / Example 3: Return Value Ownership Transfer
     let s4 = gives_ownership();
     println!("s4: {}", s4);
-    
+
     // 示例 4：获取并返回所有权 / Example 4: Take and Return Ownership
     let s5 = String::from("rust");
     let s6 = takes_and_gives_back(s5);
@@ -39,7 +39,6 @@ fn takes_ownership(some_string: String) {
 
 /// 返回所有权的函数 / Function that returns ownership
 fn gives_ownership() -> String {
-    
     String::from("yours") // 返回所有权 / return ownership
 }
 
@@ -51,24 +50,24 @@ fn takes_and_gives_back(a_string: String) -> String {
 /// 借用基础示例 / Basic Borrowing Examples
 fn borrowing_basics() {
     println!("\n=== 借用基础示例 / Basic Borrowing Examples ===");
-    
+
     let s1 = String::from("hello");
-    
+
     // 示例 1：不可变借用 / Example 1: Immutable Borrowing
     let len = calculate_length(&s1);
     println!("The length of '{}' is {}.", s1, len);
-    
+
     // 示例 2：可变借用 / Example 2: Mutable Borrowing
     let mut s2 = String::from("hello");
     change(&mut s2);
     println!("Changed string: {}", s2);
-    
+
     // 示例 3：借用规则 / Example 3: Borrowing Rules
     let mut s3 = String::from("hello");
     let r1 = &s3;
     let r2 = &s3;
     println!("r1: {}, r2: {}", r1, r2);
-    
+
     let r3 = &mut s3;
     // println!("r1: {}", r1); // 编译错误：不能同时有可变和不可变借用 / Compilation error: cannot have mutable and immutable borrows at the same time
     println!("r3: {}", r3);
@@ -87,21 +86,21 @@ fn change(some_string: &mut String) {
 /// 生命周期基础示例 / Basic Lifetime Examples
 fn lifetime_basics() {
     println!("\n=== 生命周期基础示例 / Basic Lifetime Examples ===");
-    
+
     let string1 = String::from("abcd");
     let string2 = "xyz";
-    
+
     // 示例 1：生命周期注解 / Example 1: Lifetime Annotations
     let result = longest(&string1, string2);
     println!("The longest string is {}", result);
-    
+
     // 示例 2：结构体生命周期 / Example 2: Struct Lifetimes
     let novel = String::from("Call me Ishmael. Some years ago...");
     let first_sentence = novel.split('.').next().expect("Could not find a '.'");
     let i = ImportantExcerpt {
         part: first_sentence,
     };
-    
+
     println!("Part: {}", i.part);
     println!("Level: {}", i.level());
     println!("Announcement: {}", i.announce_and_return_part("Hello"));
@@ -109,11 +108,7 @@ fn lifetime_basics() {
 
 /// 带生命周期注解的函数 / Function with lifetime annotations
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
+    if x.len() > y.len() { x } else { y }
 }
 
 /// 带生命周期注解的结构体 / Struct with lifetime annotations
@@ -126,7 +121,7 @@ impl<'a> ImportantExcerpt<'a> {
     fn level(&self) -> i32 {
         3
     }
-    
+
     /// 方法中的生命周期省略 / Lifetime elision in methods
     fn announce_and_return_part(&self, announcement: &str) -> &str {
         println!("Attention please: {}", announcement);
@@ -137,38 +132,38 @@ impl<'a> ImportantExcerpt<'a> {
 /// 智能指针示例 / Smart Pointer Examples
 fn smart_pointer_examples() {
     println!("\n=== 智能指针示例 / Smart Pointer Examples ===");
-    
+
     // 示例 1：Box<T> / Example 1: Box<T>
     let _b = Box::new(5);
     println!("b = {}", _b);
-    
+
     // 示例 2：Rc<T> / Example 2: Rc<T>
     let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
     println!("count after creating a = {}", Rc::strong_count(&a));
-    
+
     let _b = Cons(3, Rc::clone(&a));
     println!("count after creating b = {}", Rc::strong_count(&a));
-    
+
     {
         let _c = Cons(4, Rc::clone(&a));
         println!("count after creating c = {}", Rc::strong_count(&a));
     }
-    
+
     println!("count after c goes out of scope = {}", Rc::strong_count(&a));
-    
+
     // 示例 3：RefCell<T> / Example 3: RefCell<T>
     let data = RefCell::new(5);
-    
+
     {
         let r1 = data.borrow();
         println!("r1: {}", r1);
     }
-    
+
     {
         let mut r2 = data.borrow_mut();
         *r2 += 1;
     }
-    
+
     let r3 = data.borrow();
     println!("r3: {}", r3);
 }
@@ -186,11 +181,11 @@ use List::{Cons, Nil};
 /// 并发安全示例 / Concurrency Safety Examples
 fn concurrency_safety_examples() {
     println!("\n=== 并发安全示例 / Concurrency Safety Examples ===");
-    
+
     // 示例 1：Arc + Mutex / Example 1: Arc + Mutex
     let data = Arc::new(Mutex::new(vec![1, 2, 3]));
     let mut handles = vec![];
-    
+
     for i in 0..3 {
         let data_clone = Arc::clone(&data);
         let handle = thread::spawn(move || {
@@ -199,17 +194,17 @@ fn concurrency_safety_examples() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     println!("Final data: {:?}", data.lock().unwrap());
-    
+
     // 示例 2：Arc + RwLock / Example 2: Arc + RwLock
     let rw_data: Arc<RwLock<Vec<i32>>> = Arc::new(RwLock::new(vec![1, 2, 3]));
     let mut handles = vec![];
-    
+
     // 多个读线程 / Multiple reader threads
     for i in 0..3 {
         let data_clone: Arc<RwLock<Vec<i32>>> = Arc::clone(&rw_data);
@@ -219,7 +214,7 @@ fn concurrency_safety_examples() {
         });
         handles.push(handle);
     }
-    
+
     // 一个写线程 / One writer thread
     let data_clone: Arc<RwLock<Vec<i32>>> = Arc::clone(&rw_data);
     let handle = thread::spawn(move || {
@@ -228,7 +223,7 @@ fn concurrency_safety_examples() {
         println!("Writer: {:?}", *data_guard);
     });
     handles.push(handle);
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -237,30 +232,26 @@ fn concurrency_safety_examples() {
 /// 性能优化示例 / Performance Optimization Examples
 fn performance_optimization_examples() {
     println!("\n=== 性能优化示例 / Performance Optimization Examples ===");
-    
+
     let data = vec![1, 2, 3, 4, 5];
-    
+
     // 示例 1：使用引用避免克隆 / Example 1: Use references to avoid cloning
     let sum = calculate_sum(&data);
     println!("Sum: {}", sum);
-    
+
     // 示例 2：使用迭代器链 / Example 2: Use iterator chains
-    let result: Vec<i32> = data
-        .iter()
-        .filter(|&&x| x > 2)
-        .map(|&x| x * 2)
-        .collect();
-    
+    let result: Vec<i32> = data.iter().filter(|&&x| x > 2).map(|&x| x * 2).collect();
+
     println!("Filtered and mapped: {:?}", result);
-    
+
     // 示例 3：使用切片 / Example 3: Use slices
     let slice = &data[1..4];
     println!("Slice: {:?}", slice);
-    
+
     // 示例 4：使用智能指针共享数据 / Example 4: Use smart pointers to share data
     let shared_data = Rc::new(data);
     let shared_clone = Rc::clone(&shared_data);
-    
+
     println!("Shared data: {:?}", shared_data);
     println!("Shared clone: {:?}", shared_clone);
 }
@@ -273,40 +264,40 @@ fn calculate_sum(data: &[i32]) -> i32 {
 /// 错误处理示例 / Error Handling Examples
 fn error_handling_examples() {
     println!("\n=== 错误处理示例 / Error Handling Examples ===");
-    
+
     // 示例 1：Result 类型 / Example 1: Result Type
     let result = safe_division(10, 2);
     match result {
         Ok(value) => println!("Division result: {}", value),
         Err(error) => println!("Error: {}", error),
     }
-    
+
     let result2 = safe_division(10, 0);
     match result2 {
         Ok(value) => println!("Division result: {}", value),
         Err(error) => println!("Error: {}", error),
     }
-    
+
     // 示例 2：Option 类型 / Example 2: Option Type
     let option = safe_get_first(&[1, 2, 3]);
     match option {
         Some(value) => println!("First element: {}", value),
         None => println!("No elements"),
     }
-    
+
     let option2 = safe_get_first(&[]);
     match option2 {
         Some(value) => println!("First element: {}", value),
         None => println!("No elements"),
     }
-    
+
     // 示例 3：自定义错误类型 / Example 3: Custom Error Types
     let custom_result = safe_custom_operation("valid");
     match custom_result {
         Ok(value) => println!("Custom operation result: {}", value),
         Err(error) => println!("Custom error: {}", error),
     }
-    
+
     let custom_result2 = safe_custom_operation("");
     match custom_result2 {
         Ok(value) => println!("Custom operation result: {}", value),
@@ -325,11 +316,7 @@ fn safe_division(a: i32, b: i32) -> Result<i32, String> {
 
 /// 安全获取第一个元素函数 / Safe get first element function
 fn safe_get_first(data: &[i32]) -> Option<i32> {
-    if data.is_empty() {
-        None
-    } else {
-        Some(data[0])
-    }
+    if data.is_empty() { None } else { Some(data[0]) }
 }
 
 /// 自定义错误类型 / Custom Error Type
@@ -364,32 +351,35 @@ fn safe_custom_operation(input: &str) -> Result<String, CustomError> {
 /// 设计模式示例 / Design Pattern Examples
 fn design_pattern_examples() {
     println!("\n=== 设计模式示例 / Design Pattern Examples ===");
-    
+
     // 示例 1：工厂模式 / Example 1: Factory Pattern
     let resource1 = ResourceFactory::create("type1");
     let resource2 = ResourceFactory::create("type2");
-    
+
     println!("Resource1: {:?}", resource1);
     println!("Resource2: {:?}", resource2);
-    
+
     // 示例 2：观察者模式 / Example 2: Observer Pattern
     let mut subject = Subject::new();
-    
+
     let observer1 = Box::new(ConcreteObserver::new("Observer1"));
     let observer2 = Box::new(ConcreteObserver::new("Observer2"));
-    
+
     subject.add_observer(observer1);
     subject.add_observer(observer2);
-    
+
     subject.notify("Hello, observers!");
-    
+
     // 示例 3：单例模式 / Example 3: Singleton Pattern
     let singleton1 = Singleton::get_instance();
     let singleton2 = Singleton::get_instance();
-    
+
     println!("Singleton1: {:?}", singleton1);
     println!("Singleton2: {:?}", singleton2);
-    println!("Are they the same? {}", std::ptr::eq(singleton1, singleton2));
+    println!(
+        "Are they the same? {}",
+        std::ptr::eq(singleton1, singleton2)
+    );
 }
 
 /// 资源工厂 / Resource Factory
@@ -465,11 +455,11 @@ impl Subject {
             observers: Vec::new(),
         }
     }
-    
+
     fn add_observer(&mut self, observer: Box<dyn Observer>) {
         self.observers.push(observer);
     }
-    
+
     fn notify(&self, message: &str) {
         for observer in &self.observers {
             observer.update(message);
@@ -512,7 +502,7 @@ impl Singleton {
     fn get_instance() -> &'static Singleton {
         static INIT: std::sync::Once = std::sync::Once::new();
         static mut INSTANCE: Option<Singleton> = None;
-        
+
         unsafe {
             INIT.call_once(|| {
                 INSTANCE = Some(Singleton {
@@ -534,7 +524,7 @@ impl std::fmt::Debug for Singleton {
 fn main() {
     println!("Rust 所有权系统综合示例 / Rust Ownership System Comprehensive Examples");
     println!("================================================");
-    
+
     // 运行所有示例 / Run all examples
     ownership_basics();
     borrowing_basics();
@@ -544,6 +534,6 @@ fn main() {
     performance_optimization_examples();
     error_handling_examples();
     design_pattern_examples();
-    
+
     println!("\n所有示例运行完成！/ All examples completed!");
 }

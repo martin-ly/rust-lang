@@ -1,5 +1,5 @@
 //! 微服务架构异步演示
-//! 
+//!
 //! 本示例展示了基于异步编程的微服务架构：
 //! - 服务发现和注册
 //! - 负载均衡
@@ -9,18 +9,18 @@
 //! - 配置管理
 //! - 健康检查
 //! - 优雅关闭
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example microservices_async_demo
 //! ```
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};
-use tokio::sync::{Mutex, RwLock, Notify};
-use tokio::time::{sleep, interval};
-use serde::{Serialize, Deserialize};
-use anyhow::Result;
+use tokio::sync::{Mutex, Notify, RwLock};
+use tokio::time::{interval, sleep};
 use uuid::Uuid;
 
 /// 服务实例信息
@@ -64,7 +64,9 @@ impl ServiceRegistry {
 
     pub async fn register_service(&self, instance: ServiceInstance) -> Result<()> {
         let mut services = self.services.write().await;
-        let service_instances = services.entry(instance.name.clone()).or_insert_with(Vec::new);
+        let service_instances = services
+            .entry(instance.name.clone())
+            .or_insert_with(Vec::new);
         service_instances.push(instance);
         Ok(())
     }
@@ -87,7 +89,10 @@ impl ServiceRegistry {
 
     pub async fn get_healthy_instances(&self, service_name: &str) -> Vec<ServiceInstance> {
         let instances = self.get_service_instances(service_name).await;
-        instances.into_iter().filter(|instance| matches!(instance.status, ServiceStatus::Healthy)).collect()
+        instances
+            .into_iter()
+            .filter(|instance| matches!(instance.status, ServiceStatus::Healthy))
+            .collect()
     }
 
     pub async fn update_heartbeat(&self, service_name: &str, instance_id: &str) -> Result<()> {
@@ -136,14 +141,20 @@ impl ServiceRegistry {
 
         for (_, instances) in services_guard.iter_mut() {
             for instance in instances.iter_mut() {
-                if now.duration_since(instance.last_heartbeat).unwrap_or_default() > heartbeat_interval {
+                if now
+                    .duration_since(instance.last_heartbeat)
+                    .unwrap_or_default()
+                    > heartbeat_interval
+                {
                     instance.status = ServiceStatus::Unhealthy;
                 }
             }
-            
+
             // 移除不健康的实例
             instances.retain(|instance| {
-                now.duration_since(instance.last_heartbeat).unwrap_or_default() <= health_check_timeout
+                now.duration_since(instance.last_heartbeat)
+                    .unwrap_or_default()
+                    <= health_check_timeout
             });
         }
     }
@@ -179,7 +190,7 @@ impl LoadBalancer {
 
     pub async fn select_instance(&self, service_name: &str) -> Option<ServiceInstance> {
         let instances = self.registry.get_healthy_instances(service_name).await;
-        
+
         if instances.is_empty() {
             return None;
         }
@@ -218,9 +229,9 @@ pub struct CircuitBreaker {
 
 #[derive(Debug, Clone)]
 pub enum CircuitState {
-    Closed,    // 正常状态
-    Open,      // 熔断状态
-    HalfOpen,  // 半开状态
+    Closed,   // 正常状态
+    Open,     // 熔断状态
+    HalfOpen, // 半开状态
 }
 
 impl CircuitBreaker {
@@ -238,7 +249,7 @@ impl CircuitBreaker {
         Fut: std::future::Future<Output = Result<T>>,
     {
         let state = self.state.lock().await;
-        
+
         match *state {
             CircuitState::Open => {
                 return Err(anyhow::anyhow!("熔断器开启，拒绝请求"));
@@ -253,7 +264,7 @@ impl CircuitBreaker {
         drop(state);
 
         let result = operation().await;
-        
+
         let mut state = self.state.lock().await;
         match result {
             Ok(_) => {
@@ -320,8 +331,11 @@ impl DistributedTracer {
 
     pub async fn start_span(&self, operation_name: &str, parent_span_id: Option<String>) -> String {
         let span_id = Uuid::new_v4().to_string();
-        let trace_id = parent_span_id.as_ref().map(|_| Uuid::new_v4().to_string()).unwrap_or_else(|| Uuid::new_v4().to_string());
-        
+        let trace_id = parent_span_id
+            .as_ref()
+            .map(|_| Uuid::new_v4().to_string())
+            .unwrap_or_else(|| Uuid::new_v4().to_string());
+
         let trace = Trace {
             trace_id: trace_id.clone(),
             span_id: span_id.clone(),
@@ -335,7 +349,7 @@ impl DistributedTracer {
 
         let mut traces = self.traces.lock().await;
         traces.push(trace);
-        
+
         span_id
     }
 
@@ -390,7 +404,13 @@ pub struct Microservice {
 }
 
 impl Microservice {
-    pub fn new(name: String, host: String, port: u16, registry: Arc<ServiceRegistry>, tracer: Arc<DistributedTracer>) -> Self {
+    pub fn new(
+        name: String,
+        host: String,
+        port: u16,
+        registry: Arc<ServiceRegistry>,
+        tracer: Arc<DistributedTracer>,
+    ) -> Self {
         Self {
             instance_id: Uuid::new_v4().to_string(),
             name,
@@ -464,10 +484,10 @@ impl Microservice {
                     _ = interval.tick() => {
                         let span_id = tracer.start_span(&format!("{}_process", service_name), None).await;
                         tracer.add_tag(&span_id, "service".to_string(), service_name.clone()).await;
-                        
+
                         // 模拟服务处理
                         sleep(Duration::from_millis(100)).await;
-                        
+
                         tracer.log(&span_id, LogLevel::Info, "处理请求完成".to_string()).await;
                         tracer.finish_span(&span_id).await;
                     }
@@ -481,13 +501,15 @@ impl Microservice {
 
     pub async fn shutdown(&self) -> Result<()> {
         println!("    🛑 关闭服务 {}", self.name);
-        
+
         // 注销服务
-        self.registry.deregister_service(&self.name, &self.instance_id).await?;
-        
+        self.registry
+            .deregister_service(&self.name, &self.instance_id)
+            .await?;
+
         // 通知关闭
         self.shutdown_notify.notify_waiters();
-        
+
         Ok(())
     }
 }
@@ -504,7 +526,10 @@ pub struct MicroserviceClient {
 impl MicroserviceClient {
     pub fn new(registry: Arc<ServiceRegistry>, tracer: Arc<DistributedTracer>) -> Self {
         Self {
-            load_balancer: LoadBalancer::new(Arc::clone(&registry), LoadBalancingStrategy::RoundRobin),
+            load_balancer: LoadBalancer::new(
+                Arc::clone(&registry),
+                LoadBalancingStrategy::RoundRobin,
+            ),
             circuit_breaker: CircuitBreaker::new(3, Duration::from_secs(30)),
             registry,
             tracer,
@@ -512,35 +537,62 @@ impl MicroserviceClient {
     }
 
     pub async fn call_service(&self, service_name: &str, operation: &str) -> Result<String> {
-        let span_id = self.tracer.start_span(&format!("call_{}", service_name), None).await;
-        self.tracer.add_tag(&span_id, "service".to_string(), service_name.to_string()).await;
-        self.tracer.add_tag(&span_id, "operation".to_string(), operation.to_string()).await;
+        let span_id = self
+            .tracer
+            .start_span(&format!("call_{}", service_name), None)
+            .await;
+        self.tracer
+            .add_tag(&span_id, "service".to_string(), service_name.to_string())
+            .await;
+        self.tracer
+            .add_tag(&span_id, "operation".to_string(), operation.to_string())
+            .await;
 
-        let result = self.circuit_breaker.call(|| async {
-            let instance = self.load_balancer.select_instance(service_name).await
-                .ok_or_else(|| anyhow::anyhow!("没有可用的服务实例"))?;
+        let result = self
+            .circuit_breaker
+            .call(|| async {
+                let instance = self
+                    .load_balancer
+                    .select_instance(service_name)
+                    .await
+                    .ok_or_else(|| anyhow::anyhow!("没有可用的服务实例"))?;
 
-            self.tracer.add_tag(&span_id, "target_host".to_string(), format!("{}:{}", instance.host, instance.port)).await;
+                self.tracer
+                    .add_tag(
+                        &span_id,
+                        "target_host".to_string(),
+                        format!("{}:{}", instance.host, instance.port),
+                    )
+                    .await;
 
-            // 模拟服务调用
-            sleep(Duration::from_millis(50)).await;
+                // 模拟服务调用
+                sleep(Duration::from_millis(50)).await;
 
-            // 模拟偶尔失败
-            if rand::random::<f32>() < 0.1 {
-                Err(anyhow::anyhow!("服务调用失败"))
-            } else {
-                Ok(format!("响应来自 {}:{}", instance.host, instance.port))
-            }
-        }).await;
+                // 模拟偶尔失败
+                if rand::random::<f32>() < 0.1 {
+                    Err(anyhow::anyhow!("服务调用失败"))
+                } else {
+                    Ok(format!("响应来自 {}:{}", instance.host, instance.port))
+                }
+            })
+            .await;
 
         match &result {
             Ok(_response) => {
-                self.tracer.log(&span_id, LogLevel::Info, "服务调用成功".to_string()).await;
-                self.tracer.add_tag(&span_id, "success".to_string(), "true".to_string()).await;
+                self.tracer
+                    .log(&span_id, LogLevel::Info, "服务调用成功".to_string())
+                    .await;
+                self.tracer
+                    .add_tag(&span_id, "success".to_string(), "true".to_string())
+                    .await;
             }
             Err(e) => {
-                self.tracer.log(&span_id, LogLevel::Error, format!("服务调用失败: {}", e)).await;
-                self.tracer.add_tag(&span_id, "success".to_string(), "false".to_string()).await;
+                self.tracer
+                    .log(&span_id, LogLevel::Error, format!("服务调用失败: {}", e))
+                    .await;
+                self.tracer
+                    .add_tag(&span_id, "success".to_string(), "false".to_string())
+                    .await;
             }
         }
 
@@ -615,12 +667,17 @@ impl MicroservicesAsyncDemo {
 
         // 注销一个服务
         if let Some(instance) = user_instances.first() {
-            registry.deregister_service("user-service", &instance.id).await?;
+            registry
+                .deregister_service("user-service", &instance.id)
+                .await?;
             println!("    注销服务实例: {}", instance.id);
         }
 
         let remaining_instances = registry.get_healthy_instances("user-service").await;
-        println!("    剩余 user-service 实例数: {}", remaining_instances.len());
+        println!(
+            "    剩余 user-service 实例数: {}",
+            remaining_instances.len()
+        );
 
         registry.shutdown().await;
         let _ = registry_handle.await;
@@ -667,13 +724,15 @@ impl MicroservicesAsyncDemo {
 
         // 模拟多次失败
         for i in 0..5 {
-            let result = circuit_breaker.call(|| async {
-                if i < 3 {
-                    Err(anyhow::anyhow!("模拟失败"))
-                } else {
-                    Ok("成功")
-                }
-            }).await;
+            let result = circuit_breaker
+                .call(|| async {
+                    if i < 3 {
+                        Err(anyhow::anyhow!("模拟失败"))
+                    } else {
+                        Ok("成功")
+                    }
+                })
+                .await;
 
             match result {
                 Ok(response) => println!("      请求 {}: ✅ {}", i, response),
@@ -686,9 +745,9 @@ impl MicroservicesAsyncDemo {
         sleep(Duration::from_secs(6)).await;
 
         // 测试恢复
-        let result = circuit_breaker.call(|| async {
-            Ok("恢复后的成功响应")
-        }).await;
+        let result = circuit_breaker
+            .call(|| async { Ok("恢复后的成功响应") })
+            .await;
 
         match result {
             Ok(response) => println!("      恢复测试: ✅ {}", response),
@@ -703,19 +762,31 @@ impl MicroservicesAsyncDemo {
 
         // 创建分布式追踪
         let root_span = tracer.start_span("user_request", None).await;
-        tracer.add_tag(&root_span, "user_id".to_string(), "12345".to_string()).await;
+        tracer
+            .add_tag(&root_span, "user_id".to_string(), "12345".to_string())
+            .await;
 
         // 子操作 1
-        let span1 = tracer.start_span("validate_user", Some(root_span.clone())).await;
-        tracer.log(&span1, LogLevel::Info, "开始验证用户".to_string()).await;
+        let span1 = tracer
+            .start_span("validate_user", Some(root_span.clone()))
+            .await;
+        tracer
+            .log(&span1, LogLevel::Info, "开始验证用户".to_string())
+            .await;
         sleep(Duration::from_millis(50)).await;
         tracer.finish_span(&span1).await;
 
         // 子操作 2
-        let span2 = tracer.start_span("fetch_orders", Some(root_span.clone())).await;
-        tracer.log(&span2, LogLevel::Info, "开始获取订单".to_string()).await;
+        let span2 = tracer
+            .start_span("fetch_orders", Some(root_span.clone()))
+            .await;
+        tracer
+            .log(&span2, LogLevel::Info, "开始获取订单".to_string())
+            .await;
         sleep(Duration::from_millis(100)).await;
-        tracer.log(&span2, LogLevel::Info, "订单获取完成".to_string()).await;
+        tracer
+            .log(&span2, LogLevel::Info, "订单获取完成".to_string())
+            .await;
         tracer.finish_span(&span2).await;
 
         tracer.finish_span(&root_span).await;
@@ -729,7 +800,11 @@ impl MicroservicesAsyncDemo {
             } else {
                 None
             };
-            println!("      Span: {} ({:?})", trace.operation_name, duration.unwrap_or_default());
+            println!(
+                "      Span: {} ({:?})",
+                trace.operation_name,
+                duration.unwrap_or_default()
+            );
             println!("        Tags: {:?}", trace.tags);
             for log in trace.logs {
                 println!("        Log: [{}] {}", log.level, log.message);

@@ -1,5 +1,5 @@
 //! AI集成异步演示
-//! 
+//!
 //! 本示例展示了异步编程在AI应用中的使用：
 //! - 异步AI模型推理
 //! - 批量处理
@@ -9,18 +9,18 @@
 //! - 异步训练
 //! - 模型版本管理
 //! - AI服务编排
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example ai_integration_demo
 //! ```
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use tokio::sync::{Mutex, RwLock, mpsc, Semaphore};
+use tokio::sync::{Mutex, RwLock, Semaphore, mpsc};
 use tokio::time::sleep;
-use serde::{Serialize, Deserialize};
-use anyhow::Result;
 use uuid::Uuid;
 
 /// AI模型信息
@@ -188,15 +188,16 @@ impl AsyncAIModel {
         (max_value / (max_value + 1.0) * 100.0).min(100.0)
     }
 
-    pub async fn batch_inference(&self, requests: Vec<InferenceRequest>) -> Result<Vec<InferenceResult>> {
+    pub async fn batch_inference(
+        &self,
+        requests: Vec<InferenceRequest>,
+    ) -> Result<Vec<InferenceResult>> {
         let mut results = Vec::with_capacity(requests.len());
         let mut handles = Vec::new();
 
         for request in requests {
             let model = self.clone();
-            let handle = tokio::spawn(async move {
-                model.inference(request).await
-            });
+            let handle = tokio::spawn(async move { model.inference(request).await });
             handles.push(handle);
         }
 
@@ -432,16 +433,16 @@ impl AsyncAITrainer {
 
     pub async fn start_training(&self) -> Result<()> {
         let start_time = Instant::now();
-        
+
         for epoch in 1..=self.training_config.epochs {
             let _epoch_start = Instant::now();
-            
+
             // 模拟训练过程
             let (loss, accuracy) = self.train_epoch(epoch).await?;
             let (validation_loss, validation_accuracy) = self.validate_epoch().await?;
-            
+
             let elapsed_time = start_time.elapsed();
-            
+
             let progress = TrainingProgress {
                 epoch,
                 loss,
@@ -456,8 +457,10 @@ impl AsyncAITrainer {
                 break;
             }
 
-            println!("      Epoch {}: Loss={:.4}, Accuracy={:.2}%, Val_Loss={:.4}, Val_Accuracy={:.2}%", 
-                epoch, loss, accuracy, validation_loss, validation_accuracy);
+            println!(
+                "      Epoch {}: Loss={:.4}, Accuracy={:.2}%, Val_Loss={:.4}, Val_Accuracy={:.2}%",
+                epoch, loss, accuracy, validation_loss, validation_accuracy
+            );
         }
 
         Ok(())
@@ -472,7 +475,8 @@ impl AsyncAITrainer {
         // 模拟损失和准确率计算
         let base_loss = 1.0 - (epoch as f32 / self.training_config.epochs as f32) * 0.8;
         let loss = base_loss + rand::random::<f32>() * 0.1;
-        let accuracy = (epoch as f32 / self.training_config.epochs as f32) * 90.0 + rand::random::<f32>() * 5.0;
+        let accuracy = (epoch as f32 / self.training_config.epochs as f32) * 90.0
+            + rand::random::<f32>() * 5.0;
 
         Ok((loss, accuracy.min(100.0)))
     }
@@ -567,9 +571,7 @@ impl AIIntegrationDemo {
         let mut handles = Vec::new();
         for request in requests {
             let model = model.clone();
-            let handle = tokio::spawn(async move {
-                model.inference(request).await
-            });
+            let handle = tokio::spawn(async move { model.inference(request).await });
             handles.push(handle);
         }
 
@@ -592,7 +594,10 @@ impl AIIntegrationDemo {
         println!("    模型统计:");
         println!("      队列大小: {}", stats.queue_size);
         println!("      缓存大小: {}", stats.cache_size);
-        println!("      可用并发: {}/{}", stats.available_permits, stats.total_permits);
+        println!(
+            "      可用并发: {}/{}",
+            stats.available_permits, stats.total_permits
+        );
 
         Ok(())
     }
@@ -630,9 +635,9 @@ impl AIIntegrationDemo {
 
         println!("    批量推理 {} 个请求", batch_requests.len());
         let start_time = Instant::now();
-        
+
         let results = model.batch_inference(batch_requests).await?;
-        
+
         let total_time = start_time.elapsed();
         let avg_time = total_time / results.len() as u32;
 
@@ -640,8 +645,10 @@ impl AIIntegrationDemo {
         println!("      总时间: {:?}", total_time);
         println!("      平均时间: {:?}", avg_time);
         println!("      成功数量: {}", results.len());
-        println!("      平均置信度: {:.2}%", 
-            results.iter().map(|r| r.confidence).sum::<f32>() / results.len() as f32);
+        println!(
+            "      平均置信度: {:.2}%",
+            results.iter().map(|r| r.confidence).sum::<f32>() / results.len() as f32
+        );
 
         Ok(())
     }
@@ -671,9 +678,7 @@ impl AIIntegrationDemo {
         let mut processor = StreamingAIProcessor::new(model, input_receiver, output_sender);
 
         // 启动处理器
-        let processor_handle = tokio::spawn(async move {
-            processor.start_processing().await
-        });
+        let processor_handle = tokio::spawn(async move { processor.start_processing().await });
 
         // 发送输入数据
         println!("    发送流式数据:");
@@ -692,7 +697,10 @@ impl AIIntegrationDemo {
         let mut result_count = 0;
         while let Some(result) = output_receiver.recv().await {
             result_count += 1;
-            println!("      接收结果 {}: 置信度 {:.2}%", result_count, result.confidence);
+            println!(
+                "      接收结果 {}: 置信度 {:.2}%",
+                result_count, result.confidence
+            );
         }
 
         let _ = processor_handle.await?;
@@ -753,7 +761,10 @@ impl AIIntegrationDemo {
         let all_models = manager.list_models().await;
         println!("    已注册模型:");
         for model in &all_models {
-            println!("      {} v{} ({})", model.name, model.version, model.model_type);
+            println!(
+                "      {} v{} ({})",
+                model.name, model.version, model.model_type
+            );
         }
 
         // 获取模型版本
@@ -765,7 +776,10 @@ impl AIIntegrationDemo {
         // 获取特定模型
         if let Some(model) = manager.get_model("model-1").await {
             let stats = model.get_stats().await;
-            println!("    model-1 统计: 可用并发 {}/{}", stats.available_permits, stats.total_permits);
+            println!(
+                "    model-1 统计: 可用并发 {}/{}",
+                stats.available_permits, stats.total_permits
+            );
         }
 
         // 注销模型
@@ -808,18 +822,22 @@ impl AIIntegrationDemo {
         );
 
         // 启动训练
-        let trainer_handle = tokio::spawn(async move {
-            trainer.start_training().await
-        });
+        let trainer_handle = tokio::spawn(async move { trainer.start_training().await });
 
         // 监控训练进度
         let mut progress_count = 0;
         while let Some(progress) = progress_receiver.recv().await {
             progress_count += 1;
-            if progress_count % 2 == 0 { // 每2个epoch显示一次
-                println!("      Epoch {}: Loss={:.4}, Acc={:.1}%, Val_Loss={:.4}, Val_Acc={:.1}%", 
-                    progress.epoch, progress.loss, progress.accuracy, 
-                    progress.validation_loss, progress.validation_accuracy);
+            if progress_count % 2 == 0 {
+                // 每2个epoch显示一次
+                println!(
+                    "      Epoch {}: Loss={:.4}, Acc={:.1}%, Val_Loss={:.4}, Val_Acc={:.1}%",
+                    progress.epoch,
+                    progress.loss,
+                    progress.accuracy,
+                    progress.validation_loss,
+                    progress.validation_accuracy
+                );
             }
         }
 
@@ -834,33 +852,39 @@ impl AIIntegrationDemo {
         println!("    创建AI服务编排工作流");
 
         // 创建多个AI服务
-        let text_classifier = AsyncAIModel::new(ModelInfo {
-            id: "text-classifier".to_string(),
-            name: "TextClassifier".to_string(),
-            version: "1.0.0".to_string(),
-            model_type: ModelType::Classification,
-            input_shape: vec![512],
-            output_shape: vec![5],
-            parameters: HashMap::new(),
-            created_at: Instant::now(),
-            last_updated: Instant::now(),
-        }, 2);
+        let text_classifier = AsyncAIModel::new(
+            ModelInfo {
+                id: "text-classifier".to_string(),
+                name: "TextClassifier".to_string(),
+                version: "1.0.0".to_string(),
+                model_type: ModelType::Classification,
+                input_shape: vec![512],
+                output_shape: vec![5],
+                parameters: HashMap::new(),
+                created_at: Instant::now(),
+                last_updated: Instant::now(),
+            },
+            2,
+        );
 
-        let text_generator = AsyncAIModel::new(ModelInfo {
-            id: "text-generator".to_string(),
-            name: "TextGenerator".to_string(),
-            version: "1.0.0".to_string(),
-            model_type: ModelType::Generation,
-            input_shape: vec![256],
-            output_shape: vec![512],
-            parameters: HashMap::new(),
-            created_at: Instant::now(),
-            last_updated: Instant::now(),
-        }, 2);
+        let text_generator = AsyncAIModel::new(
+            ModelInfo {
+                id: "text-generator".to_string(),
+                name: "TextGenerator".to_string(),
+                version: "1.0.0".to_string(),
+                model_type: ModelType::Generation,
+                input_shape: vec![256],
+                output_shape: vec![512],
+                parameters: HashMap::new(),
+                created_at: Instant::now(),
+                last_updated: Instant::now(),
+            },
+            2,
+        );
 
         // 模拟AI服务编排工作流
         let input_text = vec![0.1; 256];
-        
+
         // 步骤1: 文本分类
         let classification_request = InferenceRequest {
             id: Uuid::new_v4().to_string(),
@@ -873,10 +897,15 @@ impl AIIntegrationDemo {
         };
 
         let classification_result = text_classifier.inference(classification_request).await?;
-        println!("      步骤1 - 文本分类: 置信度 {:.2}%", classification_result.confidence);
+        println!(
+            "      步骤1 - 文本分类: 置信度 {:.2}%",
+            classification_result.confidence
+        );
 
         // 步骤2: 基于分类结果生成文本
-        let generation_input = classification_result.output_data[..256.min(classification_result.output_data.len())].to_vec();
+        let generation_input = classification_result.output_data
+            [..256.min(classification_result.output_data.len())]
+            .to_vec();
         let generation_request = InferenceRequest {
             id: Uuid::new_v4().to_string(),
             model_id: text_generator.info.id.clone(),
@@ -888,7 +917,10 @@ impl AIIntegrationDemo {
         };
 
         let generation_result = text_generator.inference(generation_request).await?;
-        println!("      步骤2 - 文本生成: 置信度 {:.2}%", generation_result.confidence);
+        println!(
+            "      步骤2 - 文本生成: 置信度 {:.2}%",
+            generation_result.confidence
+        );
 
         // 步骤3: 并行后处理
         let post_processing_handles = vec![

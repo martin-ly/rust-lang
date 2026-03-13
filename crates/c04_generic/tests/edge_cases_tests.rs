@@ -159,8 +159,6 @@ fn test_resource_exhaustion() {
     assert_eq!(large_vec.len(), 10000);
 
     // 测试复杂泛型结构
-    let complex: Vec<(i32, String)> = (0..1000)
-        .map(|i| (i, format!("item_{}", i)))
-        .collect();
+    let complex: Vec<(i32, String)> = (0..1000).map(|i| (i, format!("item_{}", i))).collect();
     assert_eq!(complex.len(), 1000);
 }

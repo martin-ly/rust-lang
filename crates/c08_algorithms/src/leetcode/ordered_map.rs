@@ -26,7 +26,7 @@ impl SummaryRanges {
     pub fn add_num(&mut self, val: i32) {
         let mut start = val;
         let mut end = val;
-        
+
         // 查找可能合并的区间
         if let Some((&s, &e)) = self.intervals.range(..=val).next_back() {
             if e >= val {
@@ -37,21 +37,19 @@ impl SummaryRanges {
                 self.intervals.remove(&s);
             }
         }
-        
+
         if let Some((&s, &e)) = self.intervals.range(val + 1..).next()
-            && s == val + 1 {
-                end = e;
-                self.intervals.remove(&s);
-            }
-        
+            && s == val + 1
+        {
+            end = e;
+            self.intervals.remove(&s);
+        }
+
         self.intervals.insert(start, end);
     }
 
     pub fn get_intervals(&self) -> Vec<Vec<i32>> {
-        self.intervals
-            .iter()
-            .map(|(&s, &e)| vec![s, e])
-            .collect()
+        self.intervals.iter().map(|(&s, &e)| vec![s, e]).collect()
     }
 }
 
@@ -66,29 +64,31 @@ impl Default for SummaryRanges {
 /// 220. Contains Duplicate III（存在重复元素 III）
 pub fn contains_nearby_almost_duplicate(nums: Vec<i32>, k: i32, t: i32) -> bool {
     use std::collections::BTreeSet;
-    
+
     let k = k as usize;
     let t = t as i64;
     let mut set = BTreeSet::new();
-    
+
     for i in 0..nums.len() {
         if i > k {
             set.remove(&(nums[i - k - 1] as i64));
         }
-        
+
         let num = nums[i] as i64;
         if let Some(&lower) = set.range(..=num).next_back()
-            && num - lower <= t {
-                return true;
-            }
+            && num - lower <= t
+        {
+            return true;
+        }
         if let Some(&upper) = set.range(num..).next()
-            && upper - num <= t {
-                return true;
-            }
-        
+            && upper - num <= t
+        {
+            return true;
+        }
+
         set.insert(num);
     }
-    
+
     false
 }
 
@@ -97,34 +97,31 @@ pub fn falling_squares_ordered_map(positions: Vec<Vec<i32>>) -> Vec<i32> {
     let mut heights = BTreeMap::new();
     let mut result = Vec::new();
     let mut max_height = 0;
-    
+
     for pos in positions {
         let left = pos[0];
         let side = pos[1];
         let right = left + side;
-        
+
         let mut max_h = 0;
         for (_, &height) in heights.range(left..right) {
             max_h = max_h.max(height);
         }
-        
+
         let new_height = max_h + side;
         heights.insert(left, new_height);
         heights.insert(right, max_h);
-        
+
         // 移除中间的点
-        let keys_to_remove: Vec<i32> = heights
-            .range((left + 1)..right)
-            .map(|(&k, _)| k)
-            .collect();
+        let keys_to_remove: Vec<i32> = heights.range((left + 1)..right).map(|(&k, _)| k).collect();
         for key in keys_to_remove {
             heights.remove(&key);
         }
-        
+
         max_height = max_height.max(new_height);
         result.push(max_height);
     }
-    
+
     result
 }
 

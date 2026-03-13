@@ -121,8 +121,13 @@ pub fn count_range_sum_bit(nums: Vec<i32>, lower: i32, upper: i32) -> i32 {
 
     for i in (0..=n).rev() {
         let sum = prefix_sum[i];
-        let left_pos = all_nums.binary_search(&(sum - upper as i64)).unwrap_or_else(|x| x);
-        let right_pos = all_nums.binary_search(&(sum - lower as i64 + 1)).unwrap_or_else(|x| x) - 1;
+        let left_pos = all_nums
+            .binary_search(&(sum - upper as i64))
+            .unwrap_or_else(|x| x);
+        let right_pos = all_nums
+            .binary_search(&(sum - lower as i64 + 1))
+            .unwrap_or_else(|x| x)
+            - 1;
 
         if right_pos < all_nums.len() {
             count += if left_pos > 0 {

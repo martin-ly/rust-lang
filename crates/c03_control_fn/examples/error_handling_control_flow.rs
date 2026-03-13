@@ -21,5 +21,3 @@ fn main() {
 
     assert_eq!(sum3(Ok(2), Ok(3)).unwrap(), 5);
 }
-
-

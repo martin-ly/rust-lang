@@ -4,9 +4,9 @@ use std::sync::Arc;
 use tokio::{
     io::{AsyncReadExt, AsyncWriteExt},
     net::TcpListener,
-    sync::{mpsc, Semaphore},
+    sync::{Semaphore, mpsc},
     task::JoinSet,
-    time::{timeout, Duration},
+    time::{Duration, timeout},
 };
 
 /// 入口：多线程 Tokio 运行时。生产环境建议结合 CPU 配额调整线程数。
@@ -37,26 +37,37 @@ async fn mpsc_backpressure() {
     let (tx, mut rx) = mpsc::channel::<u64>(256);
     let prod = tokio::spawn(async move {
         for i in 0..10_000u64 {
-            if tx.send(i).await.is_err() { break; }
+            if tx.send(i).await.is_err() {
+                break;
+            }
         }
     });
     let cons = tokio::spawn(async move {
-        while let Some(v) = rx.recv().await { let _ = v; /* 业务处理 */ }
+        while let Some(v) = rx.recv().await {
+            let _ = v; /* 业务处理 */
+        }
     });
     let _ = tokio::join!(prod, cons);
 }
 
 /// 并发限流：信号量与 JoinSet 控制并发上限与结果收割。
 async fn limited_concurrency(n: usize) -> Result<()> {
-    async fn work(i: usize) -> Result<usize> { Ok(i * 2) }
+    async fn work(i: usize) -> Result<usize> {
+        Ok(i * 2)
+    }
     let limiter = Arc::new(Semaphore::new(64));
     let mut set = JoinSet::new();
     for i in 0..n {
         let sem = limiter.clone();
-        set.spawn(async move { let _p = sem.acquire_owned().await.unwrap(); work(i).await });
+        set.spawn(async move {
+            let _p = sem.acquire_owned().await.unwrap();
+            work(i).await
+        });
     }
     let mut sum = 0usize;
-    while let Some(r) = set.join_next().await { sum += r??; }
+    while let Some(r) = set.join_next().await {
+        sum += r??;
+    }
     tracing::info!(%sum, "limited_concurrency done");
     Ok(())
 }
@@ -72,18 +83,28 @@ async fn echo_server(addr: &str) -> Result<()> {
             tokio::spawn(async move {
                 let mut buf = vec![0u8; 1024];
                 loop {
-                    match s.read(&mut buf).await { Ok(0) => break, Ok(n) => {
-                        if s.write_all(&buf[..n]).await.is_err() { break; }
-                    }, Err(_) => break }
+                    match s.read(&mut buf).await {
+                        Ok(0) => break,
+                        Ok(n) => {
+                            if s.write_all(&buf[..n]).await.is_err() {
+                                break;
+                            }
+                        }
+                        Err(_) => break,
+                    }
                 }
             });
-            if false { break; }
+            if false {
+                break;
+            }
         }
         #[allow(unreachable_code)]
         Ok::<_, std::io::Error>(())
     };
-    let _ = server.map(|r| { let _=r; }).await;
+    let _ = server
+        .map(|r| {
+            let _ = r;
+        })
+        .await;
     Ok(())
 }
-
-

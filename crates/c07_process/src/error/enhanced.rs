@@ -1,15 +1,15 @@
 //! 增强的错误处理系统
-//! 
+//!
 //! 这个模块提供了增强的错误处理功能，包括错误恢复、
 //! 错误链追踪、错误分类等 Rust 1.90 新特性
 #[cfg(test)]
 use crate::error::ProcessError;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::error::Error as StdError;
 use std::sync::Arc;
 use std::time::{Duration, SystemTime};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
-use serde::{Serialize, Deserialize};
-use std::error::Error as StdError;
 
 /// 增强的错误管理器
 #[cfg(feature = "async")]
@@ -320,7 +320,8 @@ impl EnhancedErrorManager {
                 error_chain_tracker_clone,
                 error_notifier_clone,
                 config_clone,
-            ).await;
+            )
+            .await;
         });
 
         Self {
@@ -357,14 +358,17 @@ impl EnhancedErrorManager {
             stack_trace: self.capture_stack_trace(),
             recovery_attempts: 0,
             recovery_success: false,
-            chain_id: self.error_chain_tracker.get_or_create_chain(&error_id).await,
+            chain_id: self
+                .error_chain_tracker
+                .get_or_create_chain(&error_id)
+                .await,
         };
 
         // 记录错误历史
         {
             let mut history = self.error_history.write().await;
             history.push(entry.clone());
-            
+
             // 限制历史记录大小
             if history.len() > self.config.max_history_size {
                 history.remove(0);
@@ -386,16 +390,22 @@ impl EnhancedErrorManager {
 
     /// 尝试错误恢复（使用 Rust 1.90 改进的模式匹配）
     pub async fn attempt_recovery(&self, error_entry: &EnhancedErrorEntry) -> RecoveryResult {
-        let strategies = self.error_recovery.get_recovery_strategies(error_entry.error_type).await;
-        
+        let strategies = self
+            .error_recovery
+            .get_recovery_strategies(error_entry.error_type)
+            .await;
+
         // 使用 Rust 1.90 改进的迭代器和模式匹配
         for strategy in strategies.into_iter() {
-            let result = self.execute_recovery_strategy(strategy.clone(), error_entry).await;
-            
+            let result = self
+                .execute_recovery_strategy(strategy.clone(), error_entry)
+                .await;
+
             // Rust 1.90 改进的模式匹配 - 更智能的匹配和早期返回
             match result {
                 RecoveryResult::Success { message, duration } => {
-                    self.record_recovery_success(error_entry.id.clone(), strategy).await;
+                    self.record_recovery_success(error_entry.id.clone(), strategy)
+                        .await;
                     return RecoveryResult::Success { message, duration };
                 }
                 RecoveryResult::Retry { delay, reason } => {
@@ -415,12 +425,13 @@ impl EnhancedErrorManager {
                 }
                 RecoveryResult::Failure { error, duration } => {
                     // 记录失败原因并继续尝试下一个策略
-                    self.log_recovery_failure(&error_entry.id, &error, duration).await;
+                    self.log_recovery_failure(&error_entry.id, &error, duration)
+                        .await;
                     continue;
                 }
             }
         }
-        
+
         RecoveryResult::Failure {
             error: "All recovery strategies failed".to_string(),
             duration: Duration::ZERO,
@@ -445,10 +456,22 @@ impl EnhancedErrorManager {
 
         for entry in history.iter() {
             stats.total_errors += 1;
-            stats.error_type_counts.entry(entry.error_type).and_modify(|e| *e += 1).or_insert(1);
-            stats.severity_counts.entry(entry.severity).and_modify(|e| *e += 1).or_insert(1);
-            stats.source_counts.entry(entry.source.clone()).and_modify(|e| *e += 1).or_insert(1);
-            
+            stats
+                .error_type_counts
+                .entry(entry.error_type)
+                .and_modify(|e| *e += 1)
+                .or_insert(1);
+            stats
+                .severity_counts
+                .entry(entry.severity)
+                .and_modify(|e| *e += 1)
+                .or_insert(1);
+            stats
+                .source_counts
+                .entry(entry.source.clone())
+                .and_modify(|e| *e += 1)
+                .or_insert(1);
+
             if entry.recovery_success {
                 stats.successful_recoveries += 1;
             }
@@ -459,7 +482,13 @@ impl EnhancedErrorManager {
 
     /// 生成错误ID
     fn generate_error_id(&self) -> String {
-        format!("ERR_{}", SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_nanos())
+        format!(
+            "ERR_{}",
+            SystemTime::now()
+                .duration_since(SystemTime::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        )
     }
 
     /// 分类错误类型
@@ -483,7 +512,11 @@ impl EnhancedErrorManager {
     }
 
     /// 分类错误严重程度
-    fn classify_error_severity(&self, _error: &dyn StdError, error_type: &ErrorType) -> ErrorSeverity {
+    fn classify_error_severity(
+        &self,
+        _error: &dyn StdError,
+        error_type: &ErrorType,
+    ) -> ErrorSeverity {
         match error_type {
             ErrorType::Process => ErrorSeverity::High,
             ErrorType::Ipc => ErrorSeverity::Medium,
@@ -504,13 +537,21 @@ impl EnhancedErrorManager {
 
     /// 执行恢复策略
     #[allow(unused_variables)]
-    async fn execute_recovery_strategy(&self, strategy: RecoveryStrategy, _error_entry: &EnhancedErrorEntry) -> RecoveryResult {
+    async fn execute_recovery_strategy(
+        &self,
+        strategy: RecoveryStrategy,
+        _error_entry: &EnhancedErrorEntry,
+    ) -> RecoveryResult {
         match strategy {
-            RecoveryStrategy::Retry { max_attempts, backoff_duration, backoff_multiplier } => {
+            RecoveryStrategy::Retry {
+                max_attempts,
+                backoff_duration,
+                backoff_multiplier,
+            } => {
                 for attempt in 1..=max_attempts {
                     // 模拟重试逻辑
                     tokio::time::sleep(backoff_duration).await;
-                    
+
                     if attempt == max_attempts {
                         return RecoveryResult::Success {
                             message: format!("Retry successful after {} attempts", attempt),
@@ -518,7 +559,7 @@ impl EnhancedErrorManager {
                         };
                     }
                 }
-                
+
                 RecoveryResult::Failure {
                     error: "Max retry attempts exceeded".to_string(),
                     duration: backoff_duration,
@@ -527,33 +568,32 @@ impl EnhancedErrorManager {
             RecoveryStrategy::Restart { component, timeout } => {
                 // 模拟重启逻辑
                 tokio::time::sleep(Duration::from_millis(100)).await;
-                
+
                 RecoveryResult::Success {
                     message: format!("Component {} restarted successfully", component),
                     duration: timeout,
                 }
             }
-            RecoveryStrategy::Fallback { alternative, timeout } => {
+            RecoveryStrategy::Fallback {
+                alternative,
+                timeout,
+            } => {
                 // 模拟回退逻辑
                 tokio::time::sleep(Duration::from_millis(50)).await;
-                
+
                 RecoveryResult::Success {
                     message: format!("Fallback to {} successful", alternative),
                     duration: timeout,
                 }
             }
-            RecoveryStrategy::Skip { reason } => {
-                RecoveryResult::Success {
-                    message: format!("Error skipped: {}", reason),
-                    duration: Duration::ZERO,
-                }
-            }
-            RecoveryStrategy::Escalate { level, target } => {
-                RecoveryResult::Escalate {
-                    level,
-                    reason: format!("Escalated to {}", target),
-                }
-            }
+            RecoveryStrategy::Skip { reason } => RecoveryResult::Success {
+                message: format!("Error skipped: {}", reason),
+                duration: Duration::ZERO,
+            },
+            RecoveryStrategy::Escalate { level, target } => RecoveryResult::Escalate {
+                level,
+                reason: format!("Escalated to {}", target),
+            },
             RecoveryStrategy::Custom { name, handler } => {
                 let _ = handler;
                 RecoveryResult::Success {
@@ -578,92 +618,118 @@ impl EnhancedErrorManager {
     /// 记录恢复失败（使用 Rust 1.90 改进的错误处理）
     async fn log_recovery_failure(&self, error_id: &str, error: &str, duration: Duration) {
         // 使用 Rust 1.90 改进的字符串处理和错误记录
-        let failure_info = format!("Recovery failed for error {}: {} (duration: {:?})", error_id, error, duration);
-        
+        let failure_info = format!(
+            "Recovery failed for error {}: {} (duration: {:?})",
+            error_id, error, duration
+        );
+
         // 记录到错误历史中
         let mut history = self.error_history.write().await;
         if let Some(entry) = history.iter_mut().find(|e| e.id == error_id) {
             entry.recovery_attempts += 1;
             // 更新上下文信息
-            entry.context.insert("last_failure".to_string(), failure_info);
+            entry
+                .context
+                .insert("last_failure".to_string(), failure_info);
         }
     }
 
     /// 智能错误恢复（使用 Rust 1.90 异步闭包）
-    pub async fn smart_recovery<F, Fut>(&self, error_entry: &EnhancedErrorEntry, recovery_fn: F) -> RecoveryResult 
+    pub async fn smart_recovery<F, Fut>(
+        &self,
+        error_entry: &EnhancedErrorEntry,
+        recovery_fn: F,
+    ) -> RecoveryResult
     where
         F: FnOnce(&EnhancedErrorEntry) -> Fut + Send + Sync + 'static,
         Fut: std::future::Future<Output = RecoveryResult> + Send + 'static,
     {
         // 使用 Rust 1.90 异步闭包进行智能恢复
         let start_time = std::time::Instant::now();
-        
+
         // 执行恢复函数
         let result = recovery_fn(error_entry).await;
-        
+
         let duration = start_time.elapsed();
-        
+
         // 根据结果类型进行智能处理
         match result {
             RecoveryResult::Success { message, .. } => {
-                self.record_recovery_success(error_entry.id.clone(), RecoveryStrategy::Custom {
-                    name: "smart_recovery".to_string(),
-                    handler: Arc::new(|_| RecoveryResult::Success {
-                        message: "Smart recovery executed".to_string(),
-                        duration: Duration::ZERO,
-                    }),
-                }).await;
-                
+                self.record_recovery_success(
+                    error_entry.id.clone(),
+                    RecoveryStrategy::Custom {
+                        name: "smart_recovery".to_string(),
+                        handler: Arc::new(|_| RecoveryResult::Success {
+                            message: "Smart recovery executed".to_string(),
+                            duration: Duration::ZERO,
+                        }),
+                    },
+                )
+                .await;
+
                 RecoveryResult::Success {
                     message: format!("Smart recovery: {}", message),
                     duration,
                 }
             }
-            RecoveryResult::Failure { error, .. } => {
-                RecoveryResult::Failure {
-                    error: format!("Smart recovery failed: {}", error),
-                    duration,
-                }
-            }
+            RecoveryResult::Failure { error, .. } => RecoveryResult::Failure {
+                error: format!("Smart recovery failed: {}", error),
+                duration,
+            },
             other => other,
         }
     }
 
     /// 批量错误恢复（使用 Rust 1.90 改进的迭代器）
-    pub async fn batch_recovery(&self, error_entries: Vec<EnhancedErrorEntry>) -> Vec<RecoveryResult> {
+    pub async fn batch_recovery(
+        &self,
+        error_entries: Vec<EnhancedErrorEntry>,
+    ) -> Vec<RecoveryResult> {
         // 使用 Rust 1.90 改进的迭代器进行批量处理
         let mut results = Vec::new();
-        
+
         for entry in error_entries {
             let result = self.attempt_recovery(&entry).await;
             results.push(result);
         }
-        
+
         // 使用 Rust 1.90 改进的模式匹配进行结果分析
-        let success_count = results.iter().filter(|result| matches!(result, RecoveryResult::Success { .. })).count();
-        let failure_count = results.iter().filter(|result| matches!(result, RecoveryResult::Failure { .. })).count();
-        
+        let success_count = results
+            .iter()
+            .filter(|result| matches!(result, RecoveryResult::Success { .. }))
+            .count();
+        let failure_count = results
+            .iter()
+            .filter(|result| matches!(result, RecoveryResult::Failure { .. }))
+            .count();
+
         // 记录批量恢复统计
-        self.log_batch_recovery_stats(success_count, failure_count).await;
-        
+        self.log_batch_recovery_stats(success_count, failure_count)
+            .await;
+
         results
     }
 
     /// 记录批量恢复统计
     async fn log_batch_recovery_stats(&self, success_count: usize, failure_count: usize) {
-        let stats_info = format!("Batch recovery completed: {} successes, {} failures", success_count, failure_count);
-        
+        let stats_info = format!(
+            "Batch recovery completed: {} successes, {} failures",
+            success_count, failure_count
+        );
+
         // 记录到错误历史中
         let mut history = self.error_history.write().await;
         if let Some(entry) = history.last_mut() {
-            entry.context.insert("batch_recovery_stats".to_string(), stats_info);
+            entry
+                .context
+                .insert("batch_recovery_stats".to_string(), stats_info);
         }
     }
 
     /// 智能错误链追踪（使用 Rust 1.90 改进的模式匹配）
     pub async fn trace_error_chain(&self, root_error_id: &str) -> Option<ErrorChain> {
         let chains = self.error_chain_tracker.error_chains.lock().await;
-        
+
         // 使用 Rust 1.90 改进的模式匹配查找错误链
         match chains.get(root_error_id) {
             Some(chain) => Some(chain.clone()),
@@ -678,7 +744,7 @@ impl EnhancedErrorManager {
     /// 分析错误链模式（使用 Rust 1.90 改进的迭代器）
     pub async fn analyze_error_patterns(&self) -> ErrorPatternAnalysis {
         let history = self.error_history.read().await;
-        
+
         // 使用 Rust 1.90 改进的迭代器进行模式分析
         let pattern_analysis = history
             .iter()
@@ -692,24 +758,24 @@ impl EnhancedErrorManager {
                     (ErrorType::Resource, ErrorSeverity::Critical) => "critical_resource",
                     _ => "other",
                 };
-                
+
                 (pattern_type.to_string(), entry.clone())
             })
             .collect::<Vec<_>>();
-        
+
         // 统计模式出现频率
         let mut pattern_counts = HashMap::new();
         for (pattern, _) in &pattern_analysis {
             *pattern_counts.entry(pattern.clone()).or_insert(0) += 1;
         }
-        
+
         // 找出最常见的模式
         let most_common_pattern = pattern_counts
             .iter()
             .max_by_key(|(_, count)| *count)
             .map(|(pattern, _)| pattern.clone())
             .unwrap_or_else(|| "none".to_string());
-        
+
         ErrorPatternAnalysis {
             total_chained_errors: pattern_analysis.len(),
             pattern_counts,
@@ -722,7 +788,7 @@ impl EnhancedErrorManager {
     pub async fn predict_errors(&self) -> Vec<ErrorPrediction> {
         let history = self.error_history.read().await;
         let mut predictions = Vec::new();
-        
+
         // 使用 Rust 1.90 改进的模式匹配进行预测
         for entry in history.iter() {
             // 基于错误类型和上下文进行预测
@@ -756,10 +822,10 @@ impl EnhancedErrorManager {
                 }
                 _ => continue,
             };
-            
+
             predictions.push(prediction);
         }
-        
+
         predictions
     }
 
@@ -767,7 +833,7 @@ impl EnhancedErrorManager {
     #[allow(unused_variables)]
     async fn send_notifications(&self, error_entry: &EnhancedErrorEntry) {
         let rules = self.error_notifier.get_matching_rules(error_entry).await;
-        
+
         for rule in rules {
             for channel in rule.channels {
                 let notification = Notification {
@@ -778,7 +844,7 @@ impl EnhancedErrorManager {
                     success: true,
                     message: format!("Error notification: {}", error_entry.message),
                 };
-                
+
                 self.error_notifier.send_notification(notification).await;
             }
         }
@@ -795,20 +861,20 @@ impl EnhancedErrorManager {
         config: ErrorManagerConfig,
     ) {
         let mut interval = tokio::time::interval(Duration::from_secs(60));
-        
+
         loop {
             interval.tick().await;
-            
+
             // 清理过期的错误历史
             let cutoff_time = SystemTime::now() - config.retention_duration;
             {
                 let mut history = error_history.write().await;
                 history.retain(|entry| entry.timestamp > cutoff_time);
             }
-            
+
             // 清理过期的错误链
             error_chain_tracker.cleanup_expired_chains().await;
-            
+
             // 清理过期的通知历史
             error_notifier.cleanup_expired_notifications().await;
         }
@@ -817,8 +883,7 @@ impl EnhancedErrorManager {
 
 /// 错误统计信息
 #[cfg(feature = "async")]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct ErrorStatistics {
     pub total_errors: u64,
     pub error_type_counts: HashMap<ErrorType, u64>,
@@ -851,9 +916,9 @@ pub struct ErrorPrediction {
 }
 
 #[cfg(feature = "async")]
-fn now_instant() -> SystemTime { SystemTime::now() }
-
-#[cfg(feature = "async")]
+fn now_instant() -> SystemTime {
+    SystemTime::now()
+}
 
 #[cfg(feature = "async")]
 impl ErrorStatistics {
@@ -883,7 +948,10 @@ impl ErrorRecovery {
     #[allow(unused_variables)]
     pub async fn add_recovery_strategy(&self, error_type: ErrorType, strategy: RecoveryStrategy) {
         let mut strategies = self.recovery_strategies.lock().await;
-        strategies.entry(error_type).or_insert_with(Vec::new).push(strategy);
+        strategies
+            .entry(error_type)
+            .or_insert_with(Vec::new)
+            .push(strategy);
     }
 
     pub async fn get_recovery_strategies(&self, error_type: ErrorType) -> Vec<RecoveryStrategy> {
@@ -909,9 +977,13 @@ impl ErrorClassifier {
         Self::default()
     }
 
-    pub async fn classify_error(&self, error: &dyn StdError, context: &HashMap<String, String>) -> ErrorClassification {
+    pub async fn classify_error(
+        &self,
+        error: &dyn StdError,
+        context: &HashMap<String, String>,
+    ) -> ErrorClassification {
         let error_key = format!("{}:{:?}", error, context);
-        
+
         // 检查缓存
         {
             let cache = self.classification_cache.lock().await;
@@ -919,21 +991,25 @@ impl ErrorClassifier {
                 return classification.clone();
             }
         }
-        
+
         // 执行分类
         let classification = self.perform_classification(error, context).await;
-        
+
         // 更新缓存
         {
             let mut cache = self.classification_cache.lock().await;
             cache.insert(error_key, classification.clone());
         }
-        
+
         classification
     }
 
     #[allow(unused_variables)]
-    async fn perform_classification(&self, error: &dyn StdError, context: &HashMap<String, String>) -> ErrorClassification {
+    async fn perform_classification(
+        &self,
+        error: &dyn StdError,
+        context: &HashMap<String, String>,
+    ) -> ErrorClassification {
         // 简化的分类逻辑
         let error_type = if error.to_string().contains("process") {
             ErrorType::Process
@@ -944,13 +1020,13 @@ impl ErrorClassifier {
         } else {
             ErrorType::Unknown
         };
-        
+
         let severity = ErrorSeverity::Medium;
         let category = "system".to_string();
         let subcategory = "runtime".to_string();
         let confidence = 0.8;
         let rules_matched = vec!["default_rule".to_string()];
-        
+
         ErrorClassification {
             error_type,
             severity,
@@ -982,7 +1058,7 @@ impl ErrorChainTracker {
     #[allow(unused_variables)]
     pub async fn get_or_create_chain(&self, error_id: &str) -> Option<String> {
         let chain_id = format!("CHAIN_{}", error_id);
-        
+
         let mut chains = self.error_chains.lock().await;
         if !chains.contains_key(&chain_id) {
             let chain = ErrorChain {
@@ -996,7 +1072,7 @@ impl ErrorChainTracker {
             };
             chains.insert(chain_id.clone(), chain);
         }
-        
+
         Some(chain_id)
     }
 
@@ -1025,9 +1101,13 @@ impl ErrorNotifier {
         Self::default()
     }
 
-    pub async fn get_matching_rules(&self, error_entry: &EnhancedErrorEntry) -> Vec<NotificationRule> {
+    pub async fn get_matching_rules(
+        &self,
+        error_entry: &EnhancedErrorEntry,
+    ) -> Vec<NotificationRule> {
         let rules = self.notification_rules.lock().await;
-        rules.iter()
+        rules
+            .iter()
             .filter(|rule| rule.enabled && self.rule_matches(rule, error_entry))
             .cloned()
             .collect()
@@ -1046,7 +1126,7 @@ impl ErrorNotifier {
     pub async fn send_notification(&self, notification: Notification) {
         let mut history = self.notification_history.lock().await;
         history.push(notification);
-        
+
         // 限制通知历史大小
         if history.len() > 1000 {
             history.remove(0);
@@ -1075,20 +1155,20 @@ mod tests {
             chain_tracking: true,
             performance_monitoring: true,
         };
-        
+
         let manager = EnhancedErrorManager::new(config).await;
-        
+
         // 测试错误记录
         let error = ProcessError::StartFailed("Test error".to_string());
         let context = HashMap::new();
         let error_id = manager.record_error(&error, "test_source", context).await;
-        
+
         assert!(!error_id.is_empty());
-        
+
         // 测试错误历史
         let history = manager.get_error_history(Some(10)).await;
         assert!(!history.is_empty());
-        
+
         // 测试错误统计
         let stats = manager.get_error_statistics().await;
         assert!(stats.total_errors > 0);
@@ -1097,15 +1177,17 @@ mod tests {
     #[tokio::test]
     async fn test_error_recovery() {
         let recovery = ErrorRecovery::new();
-        
+
         let strategy = RecoveryStrategy::Retry {
             max_attempts: 3,
             backoff_duration: Duration::from_millis(100),
             backoff_multiplier: 2.0,
         };
-        
-        recovery.add_recovery_strategy(ErrorType::Process, strategy).await;
-        
+
+        recovery
+            .add_recovery_strategy(ErrorType::Process, strategy)
+            .await;
+
         let strategies = recovery.get_recovery_strategies(ErrorType::Process).await;
         assert!(!strategies.is_empty());
     }
@@ -1113,10 +1195,10 @@ mod tests {
     #[tokio::test]
     async fn test_error_classification() {
         let classifier = ErrorClassifier::new();
-        
+
         let error = ProcessError::StartFailed("Test error".to_string());
         let context = HashMap::new();
-        
+
         let classification = classifier.classify_error(&error, &context).await;
         assert_eq!(classification.error_type, ErrorType::Process);
     }
@@ -1132,9 +1214,9 @@ mod tests {
             chain_tracking: true,
             performance_monitoring: true,
         };
-        
+
         let manager = EnhancedErrorManager::new(config).await;
-        
+
         let error_entry = EnhancedErrorEntry {
             id: "test_error".to_string(),
             error_type: ErrorType::Process,
@@ -1148,15 +1230,17 @@ mod tests {
             recovery_success: false,
             chain_id: None,
         };
-        
+
         // 测试智能恢复
-        let result = manager.smart_recovery(&error_entry, |_| async {
-            RecoveryResult::Success {
-                message: "Smart recovery successful".to_string(),
-                duration: Duration::from_millis(100),
-            }
-        }).await;
-        
+        let result = manager
+            .smart_recovery(&error_entry, |_| async {
+                RecoveryResult::Success {
+                    message: "Smart recovery successful".to_string(),
+                    duration: Duration::from_millis(100),
+                }
+            })
+            .await;
+
         match result {
             RecoveryResult::Success { message, .. } => {
                 assert!(message.contains("Smart recovery"));
@@ -1176,9 +1260,9 @@ mod tests {
             chain_tracking: true,
             performance_monitoring: true,
         };
-        
+
         let manager = EnhancedErrorManager::new(config).await;
-        
+
         let error_entries = vec![
             EnhancedErrorEntry {
                 id: "error1".to_string(),
@@ -1207,7 +1291,7 @@ mod tests {
                 chain_id: None,
             },
         ];
-        
+
         // 测试批量恢复
         let results = manager.batch_recovery(error_entries).await;
         assert_eq!(results.len(), 2);
@@ -1224,14 +1308,14 @@ mod tests {
             chain_tracking: true,
             performance_monitoring: true,
         };
-        
+
         let manager = EnhancedErrorManager::new(config).await;
-        
+
         // 添加一些测试错误
         let error = ProcessError::StartFailed("Test error".to_string());
         let context = HashMap::new();
         manager.record_error(&error, "test_source", context).await;
-        
+
         // 测试错误模式分析
         let analysis = manager.analyze_error_patterns().await;
         // total_chained_errors is usize, so it's always >= 0
@@ -1249,19 +1333,19 @@ mod tests {
             chain_tracking: true,
             performance_monitoring: true,
         };
-        
+
         let manager = EnhancedErrorManager::new(config).await;
-        
+
         // 添加一些测试错误
         let error = ProcessError::StartFailed("Test error".to_string());
         let mut context = HashMap::new();
         context.insert("memory_usage".to_string(), "high".to_string());
         manager.record_error(&error, "test_source", context).await;
-        
+
         // 测试错误预测
         let predictions = manager.predict_errors().await;
         assert!(!predictions.is_empty());
-        
+
         // 验证预测结果
         for prediction in predictions {
             assert!(prediction.probability > 0.0);

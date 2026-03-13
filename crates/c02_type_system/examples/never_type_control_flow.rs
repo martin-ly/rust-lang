@@ -1,4 +1,6 @@
-fn diverge() -> ! { panic!("never returns") }
+fn diverge() -> ! {
+    panic!("never returns")
+}
 
 fn choose(flag: bool) -> i32 {
     if flag { 1 } else { diverge() }

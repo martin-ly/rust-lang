@@ -287,6 +287,8 @@ Ord trait 为 Rust 提供了全序比较支持。
 同时需要注意全序关系的性质和性能影响。
 */
 
+#![allow(clippy::type_complexity)]
+
 use std::cmp::Ordering;
 
 // 示例结构体

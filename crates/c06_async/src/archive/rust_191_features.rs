@@ -39,10 +39,10 @@ pub mod const_async_config {
         pub const BUFFER_SIZE: usize = 4096;
         pub const TIMEOUT_MS: u64 = 5000;
 
-        pub const CONNECTIONS_REF: &usize = &Self::MAX_CONNECTIONS;  // ✅ Rust 1.91
+        pub const CONNECTIONS_REF: &usize = &Self::MAX_CONNECTIONS; // ✅ Rust 1.91
         pub const TOTAL_BUFFER: usize = *Self::CONNECTIONS_REF * Self::BUFFER_SIZE;
 
-        pub const TIMEOUT_REF: &u64 = &Self::TIMEOUT_MS;  // ✅ Rust 1.91
+        pub const TIMEOUT_REF: &u64 = &Self::TIMEOUT_MS; // ✅ Rust 1.91
         pub const TOTAL_TIMEOUT_MS: u64 = *Self::TIMEOUT_REF * 2;
     }
 
@@ -294,8 +294,8 @@ pub mod async_error_handling {
 ///
 /// 注意：此模块需要 futures 依赖
 pub mod comprehensive_async_examples {
-    use super::*;
     use super::const_async_config;
+    use super::*;
 
     /// 异步数据处理管道
     pub struct AsyncPipeline {
@@ -394,10 +394,7 @@ pub mod async_stream_benchmarks {
     }
 
     /// 批量异步处理性能测试
-    pub async fn benchmark_batch_processing<S>(
-        input: S,
-        batch_size: usize,
-    ) -> PerformanceResult
+    pub async fn benchmark_batch_processing<S>(input: S, batch_size: usize) -> PerformanceResult
     where
         S: Stream<Item = i32> + Send,
     {
@@ -665,9 +662,10 @@ pub mod async_cache_system {
             let cache = self.cache.read().await;
 
             if let Some(entry) = cache.get(key)
-                && !entry.is_expired() {
-                    return Some(entry.value.clone());
-                }
+                && !entry.is_expired()
+            {
+                return Some(entry.value.clone());
+            }
 
             None
         }
@@ -675,7 +673,12 @@ pub mod async_cache_system {
         /// 设置值
         ///
         /// Rust 1.91 优化：小对象分配性能提升 25-30%
-        pub async fn set(&self, key: K, value: V, ttl: Option<TokioDuration>) -> Result<(), String> {
+        pub async fn set(
+            &self,
+            key: K,
+            value: V,
+            ttl: Option<TokioDuration>,
+        ) -> Result<(), String> {
             let mut cache = self.cache.write().await;
 
             // 检查容量
@@ -694,7 +697,8 @@ pub mod async_cache_system {
             }
 
             let expires_at = ttl.map(|d| {
-                let std_duration = Duration::from_secs(d.as_secs()) + Duration::from_nanos((d.as_nanos() % 1_000_000_000) as u64);
+                let std_duration = Duration::from_secs(d.as_secs())
+                    + Duration::from_nanos((d.as_nanos() % 1_000_000_000) as u64);
                 Instant::now() + std_duration
             });
 
@@ -722,11 +726,7 @@ pub mod async_cache_system {
 
             let expired_keys: Vec<_> = cache
                 .iter()
-                .filter(|(_, entry)| {
-                    entry
-                        .expires_at
-                        .is_some_and(|expires| expires < now)
-                })
+                .filter(|(_, entry)| entry.expires_at.is_some_and(|expires| expires < now))
                 .map(|(k, _)| k.clone())
                 .collect();
 
@@ -743,10 +743,7 @@ pub mod async_cache_system {
             let cache = self.cache.read().await;
 
             let total = cache.len();
-            let expired = cache
-                .values()
-                .filter(|e| e.is_expired())
-                .count();
+            let expired = cache.values().filter(|e| e.is_expired()).count();
 
             CacheStatistics {
                 total,

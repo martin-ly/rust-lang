@@ -1,7 +1,7 @@
 //! 网络性能基准测试
 //!
 //! 本文件包含各种网络操作的性能基准测试，用于评估2025年最新优化后的性能
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::io::{Read, Write};
 use std::time::Duration;
 
@@ -63,31 +63,33 @@ fn bench_data_serialization(c: &mut Criterion) {
         let data = create_test_data(*size);
 
         group.bench_with_input(BenchmarkId::new("json_serialize", size), size, |b, _| {
-            b.iter(|| {
-                serde_json::to_string(&data).unwrap()
-            })
+            b.iter(|| serde_json::to_string(&data).unwrap())
         });
 
         group.bench_with_input(BenchmarkId::new("json_deserialize", size), size, |b, _| {
             let json = serde_json::to_string(&data).unwrap();
-            b.iter(|| {
-                serde_json::from_str::<TestData>(&json).unwrap()
-            })
+            b.iter(|| serde_json::from_str::<TestData>(&json).unwrap())
         });
 
         group.bench_with_input(BenchmarkId::new("bincode_serialize", size), size, |b, _| {
-            b.iter(|| {
-                bincode::encode_to_vec(&data, bincode::config::standard()).unwrap()
-            })
+            b.iter(|| bincode::encode_to_vec(&data, bincode::config::standard()).unwrap())
         });
 
-        group.bench_with_input(BenchmarkId::new("bincode_deserialize", size), size, |b, _| {
-            let binary = bincode::encode_to_vec(&data, bincode::config::standard()).unwrap();
-            b.iter(|| {
-                let (result, _) = bincode::decode_from_slice::<TestData, _>(&binary, bincode::config::standard()).unwrap();
-                result
-            })
-        });
+        group.bench_with_input(
+            BenchmarkId::new("bincode_deserialize", size),
+            size,
+            |b, _| {
+                let binary = bincode::encode_to_vec(&data, bincode::config::standard()).unwrap();
+                b.iter(|| {
+                    let (result, _) = bincode::decode_from_slice::<TestData, _>(
+                        &binary,
+                        bincode::config::standard(),
+                    )
+                    .unwrap();
+                    result
+                })
+            },
+        );
     }
 
     group.finish();
@@ -105,8 +107,8 @@ fn bench_encryption_decryption(c: &mut Criterion) {
 
         group.bench_with_input(BenchmarkId::new("aes_encrypt", size), size, |b, _| {
             b.iter(|| {
-                use aes_gcm::{Aes256Gcm, KeyInit};
                 use aes_gcm::aead::Aead;
+                use aes_gcm::{Aes256Gcm, KeyInit};
 
                 #[allow(deprecated)]
                 let cipher = Aes256Gcm::new_from_slice(key).unwrap();
@@ -118,7 +120,7 @@ fn bench_encryption_decryption(c: &mut Criterion) {
 
         group.bench_with_input(BenchmarkId::new("sha256_hash", size), size, |b, _| {
             b.iter(|| {
-                use sha2::{Sha256, Digest};
+                use sha2::{Digest, Sha256};
                 let mut hasher = Sha256::new();
                 hasher.update(&data);
                 hasher.finalize()
@@ -168,27 +170,35 @@ fn bench_connection_pool(c: &mut Criterion) {
     let pool_sizes = [10, 100, 1000];
 
     for pool_size in pool_sizes.iter() {
-        group.bench_with_input(BenchmarkId::new("pool_acquire", pool_size), pool_size, |b, _| {
-            b.iter(|| {
-                // 模拟连接池获取
+        group.bench_with_input(
+            BenchmarkId::new("pool_acquire", pool_size),
+            pool_size,
+            |b, _| {
+                b.iter(|| {
+                    // 模拟连接池获取
+                    let mut pool = Vec::new();
+                    for i in 0..*pool_size {
+                        pool.push(format!("connection_{}", i));
+                    }
+                    pool
+                })
+            },
+        );
+
+        group.bench_with_input(
+            BenchmarkId::new("pool_release", pool_size),
+            pool_size,
+            |b, _| {
                 let mut pool = Vec::new();
                 for i in 0..*pool_size {
                     pool.push(format!("connection_{}", i));
                 }
-                pool
-            })
-        });
-
-        group.bench_with_input(BenchmarkId::new("pool_release", pool_size), pool_size, |b, _| {
-            let mut pool = Vec::new();
-            for i in 0..*pool_size {
-                pool.push(format!("connection_{}", i));
-            }
-            b.iter(|| {
-                // 模拟连接池释放
-                pool.clone()
-            })
-        });
+                b.iter(|| {
+                    // 模拟连接池释放
+                    pool.clone()
+                })
+            },
+        );
     }
 
     group.finish();
@@ -205,41 +215,49 @@ fn bench_load_balancing(c: &mut Criterion) {
             .map(|i| format!("server_{}", i))
             .collect();
 
-        group.bench_with_input(BenchmarkId::new("round_robin", server_count), server_count, |b, _| {
-            b.iter(|| {
-                // 轮询负载均衡
-                let mut index = 0;
-                let mut selected = Vec::new();
-                for _ in 0..1000 {
-                    selected.push(&servers[index % servers.len()]);
-                    index += 1;
-                }
-                selected
-            })
-        });
-
-        group.bench_with_input(BenchmarkId::new("weighted_round_robin", server_count), server_count, |b, _| {
-            let weights: Vec<u32> = (0..*server_count).map(|i| (i + 1) as u32).collect();
-            b.iter(|| {
-                // 加权轮询负载均衡
-                let mut current_weight = 0;
-                let mut selected = Vec::new();
-                for _ in 0..1000 {
-                    let mut max_weight = 0;
-                    let mut selected_index = 0;
-                    for (i, &weight) in weights.iter().enumerate() {
-                        current_weight += weight;
-                        if current_weight > max_weight {
-                            max_weight = current_weight;
-                            selected_index = i;
-                        }
+        group.bench_with_input(
+            BenchmarkId::new("round_robin", server_count),
+            server_count,
+            |b, _| {
+                b.iter(|| {
+                    // 轮询负载均衡
+                    let mut index = 0;
+                    let mut selected = Vec::new();
+                    for _ in 0..1000 {
+                        selected.push(&servers[index % servers.len()]);
+                        index += 1;
                     }
-                    selected.push(&servers[selected_index]);
-                    current_weight -= weights[selected_index];
-                }
-                selected
-            })
-        });
+                    selected
+                })
+            },
+        );
+
+        group.bench_with_input(
+            BenchmarkId::new("weighted_round_robin", server_count),
+            server_count,
+            |b, _| {
+                let weights: Vec<u32> = (0..*server_count).map(|i| (i + 1) as u32).collect();
+                b.iter(|| {
+                    // 加权轮询负载均衡
+                    let mut current_weight = 0;
+                    let mut selected = Vec::new();
+                    for _ in 0..1000 {
+                        let mut max_weight = 0;
+                        let mut selected_index = 0;
+                        for (i, &weight) in weights.iter().enumerate() {
+                            current_weight += weight;
+                            if current_weight > max_weight {
+                                max_weight = current_weight;
+                                selected_index = i;
+                            }
+                        }
+                        selected.push(&servers[selected_index]);
+                        current_weight -= weights[selected_index];
+                    }
+                    selected
+                })
+            },
+        );
     }
 
     group.finish();
@@ -252,43 +270,52 @@ fn bench_caching(c: &mut Criterion) {
     let cache_sizes = [100, 1000, 10000];
 
     for cache_size in cache_sizes.iter() {
-        group.bench_with_input(BenchmarkId::new("lru_cache", cache_size), cache_size, |b, _| {
-            b.iter(|| {
-                use lru::LruCache;
-                let mut cache = LruCache::new(std::num::NonZeroUsize::new(*cache_size).unwrap());
+        group.bench_with_input(
+            BenchmarkId::new("lru_cache", cache_size),
+            cache_size,
+            |b, _| {
+                b.iter(|| {
+                    use lru::LruCache;
+                    let mut cache =
+                        LruCache::new(std::num::NonZeroUsize::new(*cache_size).unwrap());
 
-                // 模拟缓存操作
-                for i in 0..*cache_size {
-                    cache.put(i, format!("value_{}", i));
-                }
+                    // 模拟缓存操作
+                    for i in 0..*cache_size {
+                        cache.put(i, format!("value_{}", i));
+                    }
 
-                // 模拟缓存访问
-                for i in 0..*cache_size {
-                    cache.get(&i);
-                }
+                    // 模拟缓存访问
+                    for i in 0..*cache_size {
+                        cache.get(&i);
+                    }
 
-                cache
-            })
-        });
+                    cache
+                })
+            },
+        );
 
-        group.bench_with_input(BenchmarkId::new("hash_map_cache", cache_size), cache_size, |b, _| {
-            b.iter(|| {
-                use std::collections::HashMap;
-                let mut cache = HashMap::new();
+        group.bench_with_input(
+            BenchmarkId::new("hash_map_cache", cache_size),
+            cache_size,
+            |b, _| {
+                b.iter(|| {
+                    use std::collections::HashMap;
+                    let mut cache = HashMap::new();
 
-                // 模拟缓存操作
-                for i in 0..*cache_size {
-                    cache.insert(i, format!("value_{}", i));
-                }
+                    // 模拟缓存操作
+                    for i in 0..*cache_size {
+                        cache.insert(i, format!("value_{}", i));
+                    }
 
-                // 模拟缓存访问
-                for i in 0..*cache_size {
-                    cache.get(&i);
-                }
+                    // 模拟缓存访问
+                    for i in 0..*cache_size {
+                        cache.get(&i);
+                    }
 
-                cache
-            })
-        });
+                    cache
+                })
+            },
+        );
     }
 
     group.finish();
@@ -301,48 +328,56 @@ fn bench_async_operations(c: &mut Criterion) {
     let task_counts = [10, 100, 1000];
 
     for task_count in task_counts.iter() {
-        group.bench_with_input(BenchmarkId::new("async_spawn", task_count), task_count, |b, _| {
-            b.iter(|| {
-                use tokio::runtime::Runtime;
-                let rt = Runtime::new().unwrap();
-                rt.block_on(async {
-                    let mut handles = Vec::new();
-                    for i in 0..*task_count {
-                        let handle = tokio::spawn(async move {
-                            // 模拟异步任务
-                            tokio::time::sleep(Duration::from_millis(1)).await;
-                            i * 2
-                        });
-                        handles.push(handle);
-                    }
+        group.bench_with_input(
+            BenchmarkId::new("async_spawn", task_count),
+            task_count,
+            |b, _| {
+                b.iter(|| {
+                    use tokio::runtime::Runtime;
+                    let rt = Runtime::new().unwrap();
+                    rt.block_on(async {
+                        let mut handles = Vec::new();
+                        for i in 0..*task_count {
+                            let handle = tokio::spawn(async move {
+                                // 模拟异步任务
+                                tokio::time::sleep(Duration::from_millis(1)).await;
+                                i * 2
+                            });
+                            handles.push(handle);
+                        }
 
-                    let mut results = Vec::new();
-                    for handle in handles {
-                        results.push(handle.await.unwrap());
-                    }
-                    results
+                        let mut results = Vec::new();
+                        for handle in handles {
+                            results.push(handle.await.unwrap());
+                        }
+                        results
+                    })
                 })
-            })
-        });
+            },
+        );
 
-        group.bench_with_input(BenchmarkId::new("async_join", task_count), task_count, |b, _| {
-            b.iter(|| {
-                use tokio::runtime::Runtime;
-                let rt = Runtime::new().unwrap();
-                rt.block_on(async {
-                    let mut tasks = Vec::new();
-                    for i in 0..*task_count {
-                        tasks.push(async move {
-                            tokio::time::sleep(Duration::from_millis(1)).await;
-                            i * 2
-                        });
-                    }
+        group.bench_with_input(
+            BenchmarkId::new("async_join", task_count),
+            task_count,
+            |b, _| {
+                b.iter(|| {
+                    use tokio::runtime::Runtime;
+                    let rt = Runtime::new().unwrap();
+                    rt.block_on(async {
+                        let mut tasks = Vec::new();
+                        for i in 0..*task_count {
+                            tasks.push(async move {
+                                tokio::time::sleep(Duration::from_millis(1)).await;
+                                i * 2
+                            });
+                        }
 
-                    let results = futures::future::join_all(tasks).await;
-                    results
+                        let results = futures::future::join_all(tasks).await;
+                        results
+                    })
                 })
-            })
-        });
+            },
+        );
     }
 
     group.finish();

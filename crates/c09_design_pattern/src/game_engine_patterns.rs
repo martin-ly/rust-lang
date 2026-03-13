@@ -108,15 +108,13 @@ impl EntityManager {
         entity_id: EntityId,
     ) -> Option<&mut T> {
         self.entities.get_mut(&entity_id).and_then(|components| {
-            components
-                .get_mut(&TypeId::of::<T>())
-                .map(|component| {
-                    // 使用unsafe来绕过类型检查，因为我们知道类型是正确的
-                    unsafe {
-                        let ptr = component.as_mut() as *mut dyn Component as *mut T;
-                        &mut *ptr
-                    }
-                })
+            components.get_mut(&TypeId::of::<T>()).map(|component| {
+                // 使用unsafe来绕过类型检查，因为我们知道类型是正确的
+                unsafe {
+                    let ptr = component.as_mut() as *mut dyn Component as *mut T;
+                    &mut *ptr
+                }
+            })
         })
     }
 
@@ -178,18 +176,18 @@ impl System for RenderSystem {
             if let (Some(position), Some(renderable)) = (
                 entity_manager.get_component::<Position>(entity_id),
                 entity_manager.get_component::<Renderable>(entity_id),
-            )
-                && renderable.visible {
-                    println!(
-                        "渲染实体 {}: 位置({:.2}, {:.2}, {:.2}), 网格: {}, 纹理: {}",
-                        entity_id,
-                        position.x,
-                        position.y,
-                        position.z,
-                        renderable.mesh_id,
-                        renderable.texture_id
-                    );
-                }
+            ) && renderable.visible
+            {
+                println!(
+                    "渲染实体 {}: 位置({:.2}, {:.2}, {:.2}), 网格: {}, 纹理: {}",
+                    entity_id,
+                    position.x,
+                    position.y,
+                    position.z,
+                    renderable.mesh_id,
+                    renderable.texture_id
+                );
+            }
         }
     }
 }

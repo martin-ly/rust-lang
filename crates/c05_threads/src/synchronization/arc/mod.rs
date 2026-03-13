@@ -92,7 +92,7 @@ pub fn mutex_vs_rwlock(readers: usize, writers: usize, iters: usize) -> (usize, 
     for t in h {
         total += t.join().unwrap();
     }
-     (total, *m.lock().unwrap() + *r.read().unwrap())
+    (total, *m.lock().unwrap() + *r.read().unwrap())
 }
 
 #[cfg(test)]

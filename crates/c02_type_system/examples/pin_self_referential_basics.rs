@@ -9,7 +9,11 @@ struct SelfRef {
 
 impl SelfRef {
     fn new(data: String) -> Pin<Box<SelfRef>> {
-        let mut boxed = Box::pin(SelfRef { data, ptr: std::ptr::null(), len: 0 });
+        let mut boxed = Box::pin(SelfRef {
+            data,
+            ptr: std::ptr::null(),
+            len: 0,
+        });
         // SAFETY: 对已 Pin 的对象进行内部可变写入，且不移动其地址
         unsafe {
             let this = Pin::as_mut(&mut boxed).get_unchecked_mut();
@@ -30,5 +34,3 @@ fn main() {
     let s = SelfRef::new("hello".to_string());
     println!("{}", s.get());
 }
-
-

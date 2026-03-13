@@ -1,11 +1,11 @@
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::sync::RwLock;
 use tokio::time::{sleep, timeout};
-use tracing::{info, warn, debug, error};
-use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use tracing::{debug, error, info, warn};
 
 /// 2025年简化异步测试框架演示
 /// 展示实用的异步测试技术和最佳实践
@@ -82,7 +82,7 @@ impl SimpleAsyncTestRunner {
 
     pub async fn run_all_tests(&self) -> Result<TestSummary> {
         info!("🚀 开始运行异步测试套件");
-        
+
         let tests = self.tests.read().await.clone();
         let start_time = Instant::now();
 
@@ -97,10 +97,22 @@ impl SimpleAsyncTestRunner {
 
         let summary = TestSummary {
             total_tests: results.len(),
-            passed: results.iter().filter(|r| matches!(r.status, TestStatus::Passed)).count(),
-            failed: results.iter().filter(|r| matches!(r.status, TestStatus::Failed)).count(),
-            skipped: results.iter().filter(|r| matches!(r.status, TestStatus::Skipped)).count(),
-            timeout: results.iter().filter(|r| matches!(r.status, TestStatus::Timeout)).count(),
+            passed: results
+                .iter()
+                .filter(|r| matches!(r.status, TestStatus::Passed))
+                .count(),
+            failed: results
+                .iter()
+                .filter(|r| matches!(r.status, TestStatus::Failed))
+                .count(),
+            skipped: results
+                .iter()
+                .filter(|r| matches!(r.status, TestStatus::Skipped))
+                .count(),
+            timeout: results
+                .iter()
+                .filter(|r| matches!(r.status, TestStatus::Timeout))
+                .count(),
             total_duration,
             results,
         };
@@ -190,13 +202,19 @@ impl SimpleAsyncTestRunner {
                             .as_secs(),
                     };
                     self.results.write().await.push(test_result);
-                    info!("✅ 测试 '{}' 通过 (重试: {}, 耗时: {:?})", test_name, retry_count, duration);
+                    info!(
+                        "✅ 测试 '{}' 通过 (重试: {}, 耗时: {:?})",
+                        test_name, retry_count, duration
+                    );
                     break;
                 }
                 TestStatus::Failed | TestStatus::Timeout => {
                     retry_count += 1;
                     if retry_count <= test_case.retries {
-                        warn!("🔄 测试 '{}' 失败，准备重试 ({}/{})", test_name, retry_count, test_case.retries);
+                        warn!(
+                            "🔄 测试 '{}' 失败，准备重试 ({}/{})",
+                            test_name, retry_count, test_case.retries
+                        );
                         sleep(Duration::from_millis(100 * retry_count as u64)).await; // 指数退避
                     } else {
                         let duration = start_time.elapsed();
@@ -205,7 +223,7 @@ impl SimpleAsyncTestRunner {
                         } else {
                             TestStatus::RetryFailed
                         };
-                        
+
                         let test_result = SimpleTestResult {
                             test_name: test_name.clone(),
                             status: final_status,
@@ -218,7 +236,10 @@ impl SimpleAsyncTestRunner {
                                 .as_secs(),
                         };
                         self.results.write().await.push(test_result);
-                        error!("❌ 测试 '{}' 最终失败 (重试: {}, 耗时: {:?})", test_name, retry_count, duration);
+                        error!(
+                            "❌ 测试 '{}' 最终失败 (重试: {}, 耗时: {:?})",
+                            test_name, retry_count, duration
+                        );
                         break;
                     }
                 }
@@ -270,7 +291,10 @@ impl SimpleAsyncTestRunner {
         if summary.failed > 0 {
             info!("失败的测试:");
             for result in &summary.results {
-                if matches!(result.status, TestStatus::Failed | TestStatus::Timeout | TestStatus::RetryFailed) {
+                if matches!(
+                    result.status,
+                    TestStatus::Failed | TestStatus::Timeout | TestStatus::RetryFailed
+                ) {
                     info!("  - {}: {:?}", result.test_name, result.status);
                 }
             }
@@ -323,10 +347,10 @@ impl SimpleAsyncTestFixture {
     pub async fn cleanup(&self) -> Result<()> {
         let mut count = self.cleanup_count.write().await;
         *count += 1;
-        
+
         self.setup_data.write().await.clear();
         info!("清理完成，清理次数: {}", count);
-        
+
         Ok(())
     }
 
@@ -358,9 +382,16 @@ impl SimpleAsyncPerformanceTester {
         }
     }
 
-    pub async fn benchmark_operation(&self, operation_name: &str, iterations: usize) -> Result<SimplePerformanceMetrics> {
-        info!("🚀 开始性能测试: {} ({} 次迭代)", operation_name, iterations);
-        
+    pub async fn benchmark_operation(
+        &self,
+        operation_name: &str,
+        iterations: usize,
+    ) -> Result<SimplePerformanceMetrics> {
+        info!(
+            "🚀 开始性能测试: {} ({} 次迭代)",
+            operation_name, iterations
+        );
+
         let start_time = Instant::now();
         let mut successful = 0;
         let mut failed = 0;
@@ -368,7 +399,7 @@ impl SimpleAsyncPerformanceTester {
 
         for i in 0..iterations {
             let op_start = Instant::now();
-            
+
             // 模拟操作
             match self.simulate_operation().await {
                 Ok(_) => {
@@ -387,7 +418,7 @@ impl SimpleAsyncPerformanceTester {
 
         let total_time = start_time.elapsed();
         let total_ops = successful + failed;
-        
+
         let average_duration = if successful > 0 {
             Duration::from_nanos(total_duration.as_nanos() as u64 / successful as u64)
         } else {
@@ -409,23 +440,29 @@ impl SimpleAsyncPerformanceTester {
             throughput_ops_per_sec: throughput,
         };
 
-        self.print_performance_results(operation_name, &metrics).await;
+        self.print_performance_results(operation_name, &metrics)
+            .await;
         Ok(metrics)
     }
 
     async fn simulate_operation(&self) -> Result<String> {
         // 模拟异步操作
         sleep(Duration::from_millis(10)).await;
-        
+
         // 模拟偶尔失败
-        if rand::random::<f64>() < 0.05 { // 5% 失败率
+        if rand::random::<f64>() < 0.05 {
+            // 5% 失败率
             Err(anyhow::anyhow!("模拟操作失败"))
         } else {
             Ok("操作完成".to_string())
         }
     }
 
-    async fn print_performance_results(&self, operation_name: &str, metrics: &SimplePerformanceMetrics) {
+    async fn print_performance_results(
+        &self,
+        operation_name: &str,
+        metrics: &SimplePerformanceMetrics,
+    ) {
         info!("📊 性能测试结果: {}", operation_name);
         info!("  总操作数: {}", metrics.total_operations);
         info!("  成功操作: {}", metrics.successful_operations);
@@ -453,15 +490,22 @@ impl SimpleAsyncMockService {
     }
 
     pub async fn set_return_value(&self, method: String, return_value: String) {
-        self.return_values.write().await.insert(method, return_value);
+        self.return_values
+            .write()
+            .await
+            .insert(method, return_value);
     }
 
     pub async fn call(&self, method: String) -> Result<String> {
-        let call_info = format!("{}:{}", method, std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .unwrap()
-            .as_secs());
-        
+        let call_info = format!(
+            "{}:{}",
+            method,
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_secs()
+        );
+
         self.call_history.write().await.push(call_info.clone());
 
         let mut call_counts = self.call_count.write().await;
@@ -476,7 +520,12 @@ impl SimpleAsyncMockService {
     }
 
     pub async fn get_call_count(&self, method: &str) -> u32 {
-        self.call_count.read().await.get(method).copied().unwrap_or(0)
+        self.call_count
+            .read()
+            .await
+            .get(method)
+            .copied()
+            .unwrap_or(0)
     }
 
     pub async fn get_call_history(&self) -> Vec<String> {
@@ -502,9 +551,7 @@ impl SimpleAsyncMockService {
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志
-    tracing_subscriber::fmt()
-        .with_env_filter("info")
-        .init();
+    tracing_subscriber::fmt().with_env_filter("info").init();
 
     info!("🚀 开始 2025 年简化异步测试框架演示");
 
@@ -529,42 +576,50 @@ async fn demo_simple_async_test_runner() -> Result<()> {
 
     let test_runner = SimpleAsyncTestRunner::new(
         Duration::from_secs(10),
-        true,  // 并行执行
+        true, // 并行执行
     );
 
     // 添加异步测试
-    test_runner.add_test(
-        "async_success_test".to_string(),
-        "成功的异步测试".to_string(),
-        TestType::Async,
-        Some(Duration::from_secs(5)),
-        2,
-    ).await;
+    test_runner
+        .add_test(
+            "async_success_test".to_string(),
+            "成功的异步测试".to_string(),
+            TestType::Async,
+            Some(Duration::from_secs(5)),
+            2,
+        )
+        .await;
 
-    test_runner.add_test(
-        "async_fail_test".to_string(),
-        "失败的异步测试".to_string(),
-        TestType::Async,
-        None,
-        2,
-    ).await;
+    test_runner
+        .add_test(
+            "async_fail_test".to_string(),
+            "失败的异步测试".to_string(),
+            TestType::Async,
+            None,
+            2,
+        )
+        .await;
 
     // 添加同步测试
-    test_runner.add_test(
-        "sync_success_test".to_string(),
-        "成功的同步测试".to_string(),
-        TestType::Sync,
-        None,
-        1,
-    ).await;
+    test_runner
+        .add_test(
+            "sync_success_test".to_string(),
+            "成功的同步测试".to_string(),
+            TestType::Sync,
+            None,
+            1,
+        )
+        .await;
 
-    test_runner.add_test(
-        "sync_fail_test".to_string(),
-        "失败的同步测试".to_string(),
-        TestType::Sync,
-        None,
-        1,
-    ).await;
+    test_runner
+        .add_test(
+            "sync_fail_test".to_string(),
+            "失败的同步测试".to_string(),
+            TestType::Sync,
+            None,
+            1,
+        )
+        .await;
 
     // 运行所有测试
     let _summary = test_runner.run_all_tests().await?;
@@ -582,8 +637,15 @@ async fn demo_simple_async_test_fixtures() -> Result<()> {
     let fixture = SimpleAsyncTestFixture::new();
 
     // 设置测试数据
-    fixture.setup("database_url".to_string(), "postgresql://localhost:5432/test".to_string()).await;
-    fixture.setup("api_key".to_string(), "test_api_key_123".to_string()).await;
+    fixture
+        .setup(
+            "database_url".to_string(),
+            "postgresql://localhost:5432/test".to_string(),
+        )
+        .await;
+    fixture
+        .setup("api_key".to_string(), "test_api_key_123".to_string())
+        .await;
 
     // 获取测试数据
     let db_url = fixture.get("database_url").await;
@@ -605,12 +667,17 @@ async fn demo_simple_async_performance_testing() -> Result<()> {
     let performance_tester = SimpleAsyncPerformanceTester::new();
 
     // 性能测试
-    let metrics = performance_tester.benchmark_operation(
-        "async_operation",
-        500, // 500次迭代
-    ).await?;
+    let metrics = performance_tester
+        .benchmark_operation(
+            "async_operation",
+            500, // 500次迭代
+        )
+        .await?;
 
-    info!("性能测试完成，吞吐量: {:.2} ops/sec", metrics.throughput_ops_per_sec);
+    info!(
+        "性能测试完成，吞吐量: {:.2} ops/sec",
+        metrics.throughput_ops_per_sec
+    );
 
     Ok(())
 }
@@ -621,8 +688,12 @@ async fn demo_simple_async_test_mocks() -> Result<()> {
     let mock_service = SimpleAsyncMockService::new();
 
     // 设置返回值
-    mock_service.set_return_value("get_user".to_string(), "John Doe".to_string()).await;
-    mock_service.set_return_value("update_user".to_string(), "success".to_string()).await;
+    mock_service
+        .set_return_value("get_user".to_string(), "John Doe".to_string())
+        .await;
+    mock_service
+        .set_return_value("update_user".to_string(), "success".to_string())
+        .await;
 
     // 执行调用
     let result1 = mock_service.call("get_user".to_string()).await?;
@@ -649,15 +720,17 @@ mod tests {
     #[tokio::test]
     async fn test_simple_async_test_runner() {
         let runner = SimpleAsyncTestRunner::new(Duration::from_secs(5), false);
-        
-        runner.add_test(
-            "test".to_string(),
-            "测试".to_string(),
-            TestType::Sync,
-            None,
-            0,
-        ).await;
-        
+
+        runner
+            .add_test(
+                "test".to_string(),
+                "测试".to_string(),
+                TestType::Sync,
+                None,
+                0,
+            )
+            .await;
+
         let summary = runner.run_all_tests().await.unwrap();
         assert_eq!(summary.passed, 1);
     }
@@ -666,10 +739,10 @@ mod tests {
     async fn test_simple_async_test_fixture() {
         let fixture = SimpleAsyncTestFixture::new();
         fixture.setup("key".to_string(), "value".to_string()).await;
-        
+
         assert_eq!(fixture.get("key").await, Some("value".to_string()));
         assert_eq!(fixture.get("nonexistent").await, None);
-        
+
         fixture.cleanup().await.unwrap();
         assert_eq!(fixture.get("key").await, None);
     }
@@ -677,18 +750,19 @@ mod tests {
     #[tokio::test]
     async fn test_simple_async_mock_service() {
         let mock = SimpleAsyncMockService::new();
-        mock.set_return_value("test".to_string(), "result".to_string()).await;
-        
+        mock.set_return_value("test".to_string(), "result".to_string())
+            .await;
+
         let result = mock.call("test".to_string()).await.unwrap();
         assert_eq!(result, "result");
-        
+
         mock.verify_calls("test", 1).await.unwrap();
     }
 
     #[tokio::test]
     async fn test_simple_async_performance_tester() {
         let tester = SimpleAsyncPerformanceTester::new();
-        
+
         let metrics = tester.benchmark_operation("test_op", 10).await.unwrap();
         assert_eq!(metrics.total_operations, 10);
     }

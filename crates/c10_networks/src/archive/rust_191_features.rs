@@ -88,7 +88,9 @@ pub mod network_new_apis {
     /// 使用 BufRead::skip_while 解析网络消息
     ///
     /// Rust 1.91 新增：跳过满足条件的字节
-    pub fn parse_network_message<R: BufRead>(reader: &mut R) -> Result<Vec<String>, std::io::Error> {
+    pub fn parse_network_message<R: BufRead>(
+        reader: &mut R,
+    ) -> Result<Vec<String>, std::io::Error> {
         let mut lines = Vec::new();
         let mut buf = String::new();
 
@@ -196,9 +198,7 @@ pub mod network_jit_optimizations {
     pub fn demonstrate_network_performance() {
         println!("\n=== 网络编程 JIT 优化演示 ===");
 
-        let packets: Vec<Vec<u8>> = (0..1000)
-            .map(|i| vec![i as u8; 64])
-            .collect();
+        let packets: Vec<Vec<u8>> = (0..1000).map(|i| vec![i as u8; 64]).collect();
         let processed = process_network_packets(&packets);
         println!("处理的网络数据包数: {}", processed.len());
 
@@ -293,8 +293,13 @@ pub mod network_async_improvements {
 
         println!("处理了 {} 个异步网络数据包", results.len());
         if !results.is_empty() {
-            println!("前几个数据包大小: {:?}",
-                results[..results.len().min(3)].iter().map(|p| p.len()).collect::<Vec<_>>());
+            println!(
+                "前几个数据包大小: {:?}",
+                results[..results.len().min(3)]
+                    .iter()
+                    .map(|p| p.len())
+                    .collect::<Vec<_>>()
+            );
         }
     }
 }
@@ -313,7 +318,9 @@ pub mod network_std_new_apis {
     /// Vec::try_reserve_exact 示例
     ///
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
-    pub fn allocate_network_buffer(size: usize) -> Result<Vec<u8>, std::collections::TryReserveError> {
+    pub fn allocate_network_buffer(
+        size: usize,
+    ) -> Result<Vec<u8>, std::collections::TryReserveError> {
         let mut vec = Vec::new();
         vec.try_reserve_exact(size)?;
         Ok(vec)

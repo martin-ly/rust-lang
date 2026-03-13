@@ -314,9 +314,11 @@ impl SupervisedLearning for MultinomialNaiveBayes {
             let feature_probs = feature_conditionals.get(&class).unwrap();
             for (feature_idx, &feature_value) in sample.iter().enumerate() {
                 if let Some(&prob) = feature_probs.get(feature_idx)
-                    && prob > 0.0 && feature_value > 0.0 {
-                        log_probability += feature_value * prob.ln();
-                    }
+                    && prob > 0.0
+                    && feature_value > 0.0
+                {
+                    log_probability += feature_value * prob.ln();
+                }
             }
 
             if log_probability > best_log_probability {

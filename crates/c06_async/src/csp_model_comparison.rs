@@ -230,7 +230,7 @@ pub mod producer_consumer {
         pub async fn demo() {
             println!("\n=== Rust 惯用风格: 生产者-消费者 ===");
 
-            use tokio_stream::{wrappers::ReceiverStream, StreamExt};
+            use tokio_stream::{StreamExt, wrappers::ReceiverStream};
 
             let (tx, rx) = mpsc::channel(2);
 
@@ -618,36 +618,36 @@ pub mod pipeline {
     /// Rust 惯用风格: 使用 Stream
     pub mod rust_style {
         use super::*;
-            use tokio_stream::{wrappers::ReceiverStream, StreamExt};
+        use tokio_stream::{StreamExt, wrappers::ReceiverStream};
 
-            pub async fn demo() {
-                println!("\n=== Rust 惯用风格: Pipeline with Stream ===");
+        pub async fn demo() {
+            println!("\n=== Rust 惯用风格: Pipeline with Stream ===");
 
-                let (tx, rx) = mpsc::channel(10);
+            let (tx, rx) = mpsc::channel(10);
 
-                // 生成器
-                tokio::spawn(async move {
-                    for n in 1..=5 {
-                        println!("  [Gen] 生成: {}", n);
-                        tx.send(n).await.unwrap();
-                    }
-                    println!("  [Gen] 完成");
-                });
-
-                // 使用 Stream API 构建流水线
-                let mut total = 0;
-                let mut stream = ReceiverStream::new(rx).map(|n| {
-                    let sq = n * n;
-                    println!("  [Square] {} -> {}", n, sq);
-                    sq
-                });
-
-                while let Some(n) = stream.next().await {
-                    total += n;
-                    println!("  [Sum] 累加: {}, 当前总和: {}", n, total);
+            // 生成器
+            tokio::spawn(async move {
+                for n in 1..=5 {
+                    println!("  [Gen] 生成: {}", n);
+                    tx.send(n).await.unwrap();
                 }
+                println!("  [Gen] 完成");
+            });
 
-                let result = total;
+            // 使用 Stream API 构建流水线
+            let mut total = 0;
+            let mut stream = ReceiverStream::new(rx).map(|n| {
+                let sq = n * n;
+                println!("  [Square] {} -> {}", n, sq);
+                sq
+            });
+
+            while let Some(n) = stream.next().await {
+                total += n;
+                println!("  [Sum] 累加: {}, 当前总和: {}", n, total);
+            }
+
+            let result = total;
 
             println!("  结果: {}", result);
             println!("✓ 完成");
@@ -726,7 +726,8 @@ pub async fn run_all_examples() {
     println!("\n════════════════════════════════════════════════════════════");
     println!("语义对比总结:");
     println!("════════════════════════════════════════════════════════════");
-    println!("
+    println!(
+        "
 1. 基本等价性:
    ✓ Golang goroutine <-> Rust async task
    ✓ Golang channel <-> Rust mpsc channel
@@ -747,7 +748,8 @@ pub async fn run_all_examples() {
 5. 开发体验:
    • Golang: 语法更简洁，内置支持
    • Rust: 类型系统更强大，错误处理更显式
-    ");
+    "
+    );
     println!("════════════════════════════════════════════════════════════\n");
 }
 
@@ -775,4 +777,3 @@ mod tests {
         fan_in_out::demo().await;
     }
 }
-

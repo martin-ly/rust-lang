@@ -1,5 +1,5 @@
 //! 高级异步工具演示
-//! 
+//!
 //! 本示例展示了高级异步工具的使用：
 //! - 异步任务管理器
 //! - 智能重试引擎
@@ -9,17 +9,17 @@
 //! - 异步事件总线
 //! - 异步健康检查器
 //! - 异步配置管理器
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example advanced_tools_demo
 //! ```
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::sync::Mutex;
-use tokio::time::{sleep, interval};
-use anyhow::Result;
-use serde::{Serialize, Deserialize};
+use tokio::time::{interval, sleep};
 
 // 模拟高级工具模块（在实际项目中这些会从 advanced_tools 模块导入）
 mod mock_tools {
@@ -226,9 +226,9 @@ mod mock_tools {
         fn calculate_delay(&self, attempt: u32) -> Duration {
             let base_delay = match &self.config.backoff_strategy {
                 BackoffStrategy::Fixed(delay) => *delay,
-                BackoffStrategy::Exponential(initial, multiplier) => {
-                    Duration::from_millis((initial.as_millis() as f64 * multiplier.powi(attempt as i32)) as u64)
-                }
+                BackoffStrategy::Exponential(initial, multiplier) => Duration::from_millis(
+                    (initial.as_millis() as f64 * multiplier.powi(attempt as i32)) as u64,
+                ),
                 BackoffStrategy::Linear(initial, max) => {
                     let delay = *initial + Duration::from_millis(attempt as u64 * 100);
                     delay.min(*max)
@@ -311,8 +311,8 @@ mod mock_tools {
                     stats.total_items += batch_size as u64;
                     stats.avg_batch_size = stats.total_items as f64 / stats.total_batches as f64;
                     stats.avg_processing_time = processing_time;
-                    stats.throughput = stats.total_items as f64 / 
-                        (batch_count as f64 * self.processing_interval.as_secs_f64());
+                    stats.throughput = stats.total_items as f64
+                        / (batch_count as f64 * self.processing_interval.as_secs_f64());
                 }
 
                 println!("    ✅ 批次 #{} 处理完成", batch_count);
@@ -404,7 +404,7 @@ mod mock_tools {
             }
 
             let mut cache = self.cache.lock().await;
-            
+
             if let Some(entry) = cache.get_mut(key) {
                 if entry.created_at.elapsed() < self.ttl {
                     entry.access_count += 1;
@@ -418,7 +418,7 @@ mod mock_tools {
                     cache.remove(key);
                 }
             }
-            
+
             {
                 let mut stats = self.stats.lock().await;
                 stats.cache_misses += 1;
@@ -469,7 +469,7 @@ mod mock_tools {
 
         pub async fn subscribe(&self) -> tokio::sync::mpsc::UnboundedReceiver<T> {
             let (tx, rx) = tokio::sync::mpsc::unbounded_channel();
-            
+
             {
                 let mut subscribers = self.subscribers.lock().await;
                 subscribers.push(tx);
@@ -595,13 +595,15 @@ impl AdvancedToolsDemo {
         let retry_engine = MockRetryEngine::new(config);
 
         // 模拟一个不稳定的操作
-        let result = retry_engine.execute(|| async {
-            if rand::random::<f32>() < 0.7 {
-                Err(anyhow::anyhow!("模拟网络错误"))
-            } else {
-                Ok("操作成功".to_string())
-            }
-        }).await;
+        let result = retry_engine
+            .execute(|| async {
+                if rand::random::<f32>() < 0.7 {
+                    Err(anyhow::anyhow!("模拟网络错误"))
+                } else {
+                    Ok("操作成功".to_string())
+                }
+            })
+            .await;
 
         match result {
             Ok(value) => println!("    ✅ 最终结果: {}", value),
@@ -653,7 +655,7 @@ impl AdvancedToolsDemo {
         let rate_limiter = MockRateLimiter::new(3); // 每秒最多3个请求
 
         println!("    测试限流器 (每秒最多3个请求):");
-        
+
         for i in 0..10 {
             if rate_limiter.try_acquire().await {
                 println!("      ✅ 请求 {} 通过", i);
@@ -683,11 +685,13 @@ impl AdvancedToolsDemo {
 
         // 设置一些缓存项
         for i in 0..5 {
-            cache.set(format!("key_{}", i), format!("value_{}", i)).await;
+            cache
+                .set(format!("key_{}", i), format!("value_{}", i))
+                .await;
         }
 
         println!("    测试缓存命中:");
-        
+
         // 测试缓存命中
         for i in 0..5 {
             if let Some(value) = cache.get(&format!("key_{}", i)).await {
@@ -796,13 +800,15 @@ impl AdvancedToolsDemo {
             let _task_id = task_manager.submit_task(task_name).await?;
 
             // 4. 执行重试操作
-            let result = retry_engine.execute(|| async {
-                if rand::random::<f32>() < 0.6 {
-                    Err(anyhow::anyhow!("模拟操作失败"))
-                } else {
-                    Ok(format!("工作流_{} 处理成功", i))
-                }
-            }).await?;
+            let result = retry_engine
+                .execute(|| async {
+                    if rand::random::<f32>() < 0.6 {
+                        Err(anyhow::anyhow!("模拟操作失败"))
+                    } else {
+                        Ok(format!("工作流_{} 处理成功", i))
+                    }
+                })
+                .await?;
 
             // 5. 缓存结果
             cache.set(cache_key, result.clone()).await;
@@ -813,16 +819,25 @@ impl AdvancedToolsDemo {
 
         // 显示各组件统计信息
         println!("      系统统计信息:");
-        
+
         let task_stats = task_manager.get_stats().await;
-        println!("        任务管理器: {} 任务, {} 完成", task_stats.total_tasks, task_stats.completed_tasks);
-        
+        println!(
+            "        任务管理器: {} 任务, {} 完成",
+            task_stats.total_tasks, task_stats.completed_tasks
+        );
+
         let retry_stats = retry_engine.get_stats().await;
-        println!("        重试引擎: {} 尝试, {} 成功", retry_stats.total_attempts, retry_stats.successful_attempts);
-        
+        println!(
+            "        重试引擎: {} 尝试, {} 成功",
+            retry_stats.total_attempts, retry_stats.successful_attempts
+        );
+
         let cache_stats = cache.get_stats().await;
-        println!("        缓存管理器: {} 请求, {:.1}% 命中率", 
-            cache_stats.total_requests, cache_stats.hit_rate * 100.0);
+        println!(
+            "        缓存管理器: {} 请求, {:.1}% 命中率",
+            cache_stats.total_requests,
+            cache_stats.hit_rate * 100.0
+        );
 
         Ok(())
     }

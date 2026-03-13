@@ -22,7 +22,7 @@
 //!
 //! ```text
 //! Poll<T> = Ready(T) | Pending
-//! 
+//!
 //! 状态转换规则：
 //! ────────────────────────────────────────
 //! (s, cx) ⊢ δ(s, cx) = (Pending, s')
@@ -99,7 +99,7 @@
 //!
 //! ```text
 //! 执行配置: Conf = (State, Continuation)
-//! 
+//!
 //! 小步语义 (Small-step semantics):
 //! ────────────────────────────────────────
 //!    (s, await e) → (s', ⟨suspend, k⟩)
@@ -173,7 +173,7 @@ pub mod state_machine_example {
     /// ```text
     /// S = {Start, Waiting(n), Complete}
     /// s₀ = Start
-    /// 
+    ///
     /// δ(Start, cx) = (Pending, Waiting(0))
     /// δ(Waiting(n), cx) = (Pending, Waiting(n+1))  if n < max_polls
     /// δ(Waiting(max_polls), cx) = (Ready(result), Complete)
@@ -315,7 +315,10 @@ pub mod sync_async_equivalence {
                 n, sync_result, async_result
             );
 
-            println!("✓ n={:2} : sync={:3}, async={:3}", n, sync_result, async_result);
+            println!(
+                "✓ n={:2} : sync={:3}, async={:3}",
+                n, sync_result, async_result
+            );
         }
 
         println!("✓ 所有测试通过，证明同步和异步实现语义等价");
@@ -628,4 +631,3 @@ mod tests {
         monad_laws::verify_all().await;
     }
 }
-

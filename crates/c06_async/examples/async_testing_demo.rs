@@ -1,5 +1,5 @@
 //! 异步测试框架演示
-//! 
+//!
 //! 本示例展示了异步测试的各种技术和最佳实践：
 //! - 异步单元测试
 //! - 集成测试
@@ -7,7 +7,7 @@
 //! - 并发测试
 //! - 模拟和存根
 //! - 测试工具和辅助函数
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo test --example async_testing_demo
@@ -17,13 +17,12 @@
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::sync::{Mutex, RwLock, Semaphore};
-use tokio::time::{sleep, timeout, interval};
+use tokio::time::{interval, sleep, timeout};
 //use futures::{StreamExt};
 use anyhow::Result;
 
 /// 异步计数器 - 用于测试
-#[derive(Debug)]
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 pub struct AsyncCounter {
     count: Arc<Mutex<i32>>,
     operations: Arc<Mutex<Vec<String>>>,
@@ -40,20 +39,20 @@ impl AsyncCounter {
     pub async fn increment(&self) -> i32 {
         let mut count = self.count.lock().await;
         *count += 1;
-        
+
         let mut operations = self.operations.lock().await;
         operations.push(format!("increment to {}", *count));
-        
+
         *count
     }
 
     pub async fn decrement(&self) -> i32 {
         let mut count = self.count.lock().await;
         *count -= 1;
-        
+
         let mut operations = self.operations.lock().await;
         operations.push(format!("decrement to {}", *count));
-        
+
         *count
     }
 
@@ -68,7 +67,7 @@ impl AsyncCounter {
     pub async fn reset(&self) {
         let mut count = self.count.lock().await;
         *count = 0;
-        
+
         let mut operations = self.operations.lock().await;
         operations.clear();
     }
@@ -144,7 +143,7 @@ impl AsyncTaskScheduler {
                             let tasks = Arc::clone(&tasks);
                             async move {
                                 sleep(task.duration).await;
-                                
+
                                 let mut tasks = tasks.write().await;
                                 if let Some(t) = tasks.iter_mut().find(|t| t.id == task.id) {
                                     t.completed = true;
@@ -224,10 +223,10 @@ impl AsyncDataProcessor {
                 if let Some(data) = data {
                     // 模拟数据处理
                     sleep(Duration::from_millis(50)).await;
-                    
+
                     let mut count = processed_count.lock().await;
                     *count += 1;
-                    
+
                     println!("      处理数据: {}", data);
                 } else {
                     sleep(Duration::from_millis(10)).await;
@@ -255,20 +254,23 @@ pub mod test_utils {
     use super::*;
 
     /// 等待条件满足
-    pub async fn wait_for_condition<F, Fut>(mut condition: F, timeout_duration: Duration) -> Result<bool>
+    pub async fn wait_for_condition<F, Fut>(
+        mut condition: F,
+        timeout_duration: Duration,
+    ) -> Result<bool>
     where
         F: FnMut() -> Fut,
         Fut: std::future::Future<Output = bool>,
     {
         let start = Instant::now();
-        
+
         while start.elapsed() < timeout_duration {
             if condition().await {
                 return Ok(true);
             }
             sleep(Duration::from_millis(10)).await;
         }
-        
+
         Ok(false)
     }
 
@@ -363,7 +365,8 @@ async fn demo_basic_async_tests() -> Result<()> {
     let result = timeout(Duration::from_millis(100), async {
         sleep(Duration::from_millis(50)).await;
         "success"
-    }).await;
+    })
+    .await;
 
     assert!(result.is_ok());
     assert_eq!(result.unwrap(), "success");
@@ -384,13 +387,13 @@ async fn demo_concurrent_tests() -> Result<()> {
     for i in 0..10 {
         let counter = counter.clone();
         let semaphore = Arc::clone(&semaphore);
-        
+
         let handle = tokio::spawn(async move {
             let _permit = semaphore.acquire().await.unwrap();
             counter.increment().await;
             println!("      并发操作 {} 完成", i);
         });
-        
+
         handles.push(handle);
     }
 
@@ -451,12 +454,16 @@ async fn demo_performance_tests() -> Result<()> {
         }
 
         counter.get_count().await
-    }).await;
+    })
+    .await;
 
     assert_eq!(result, 1000);
     println!("    ✅ 批处理性能测试通过");
     println!("      处理1000个操作耗时: {:?}", duration);
-    println!("      吞吐量: {:.2} ops/sec", 1000.0 / duration.as_secs_f64());
+    println!(
+        "      吞吐量: {:.2} ops/sec",
+        1000.0 / duration.as_secs_f64()
+    );
 
     // 测试内存使用（模拟）
     let counter = AsyncCounter::new();
@@ -485,9 +492,15 @@ async fn demo_integration_tests() -> Result<()> {
 
     // 添加一些任务
     let _task_ids = vec![
-        scheduler.add_task("任务1".to_string(), Duration::from_millis(100)).await,
-        scheduler.add_task("任务2".to_string(), Duration::from_millis(200)).await,
-        scheduler.add_task("任务3".to_string(), Duration::from_millis(150)).await,
+        scheduler
+            .add_task("任务1".to_string(), Duration::from_millis(100))
+            .await,
+        scheduler
+            .add_task("任务2".to_string(), Duration::from_millis(200))
+            .await,
+        scheduler
+            .add_task("任务3".to_string(), Duration::from_millis(150))
+            .await,
     ];
 
     // 添加一些数据
@@ -524,10 +537,12 @@ async fn demo_mocking_and_stubbing() -> Result<()> {
 
     // 模拟一个异步服务
     let mock_service = MockAsyncService::new();
-    
+
     // 设置模拟行为
     mock_service.set_should_fail(false).await;
-    mock_service.set_response_time(Duration::from_millis(100)).await;
+    mock_service
+        .set_response_time(Duration::from_millis(100))
+        .await;
 
     // 测试成功情况
     let result = mock_service.process_request("test_data".to_string()).await;
@@ -542,11 +557,14 @@ async fn demo_mocking_and_stubbing() -> Result<()> {
 
     // 测试响应时间
     mock_service.set_should_fail(false).await;
-    mock_service.set_response_time(Duration::from_millis(200)).await;
+    mock_service
+        .set_response_time(Duration::from_millis(200))
+        .await;
 
     let (result, duration) = test_utils::measure_execution_time(|| async {
         mock_service.process_request("test_data".to_string()).await
-    }).await;
+    })
+    .await;
 
     assert!(result.is_ok());
     assert!(duration >= Duration::from_millis(200));
@@ -601,13 +619,13 @@ mod tests {
     #[tokio::test]
     async fn test_async_counter_basic() {
         let counter = AsyncCounter::new();
-        
+
         assert_eq!(counter.get_count().await, 0);
-        
+
         let count = counter.increment().await;
         assert_eq!(count, 1);
         assert_eq!(counter.get_count().await, 1);
-        
+
         let count = counter.decrement().await;
         assert_eq!(count, 0);
         assert_eq!(counter.get_count().await, 0);
@@ -637,11 +655,11 @@ mod tests {
     #[tokio::test]
     async fn test_async_counter_operations() {
         let counter = AsyncCounter::new();
-        
+
         counter.increment().await;
         counter.decrement().await;
         counter.increment().await;
-        
+
         let operations = counter.get_operations().await;
         assert_eq!(operations.len(), 3);
         assert!(operations[0].contains("increment"));
@@ -652,9 +670,11 @@ mod tests {
     #[tokio::test]
     async fn test_task_scheduler() {
         let scheduler = AsyncTaskScheduler::new();
-        
-        let task_id = scheduler.add_task("测试任务".to_string(), Duration::from_millis(100)).await;
-        
+
+        let task_id = scheduler
+            .add_task("测试任务".to_string(), Duration::from_millis(100))
+            .await;
+
         let tasks = scheduler.get_tasks().await;
         assert_eq!(tasks.len(), 1);
         assert_eq!(tasks[0].id, task_id);
@@ -665,10 +685,10 @@ mod tests {
     #[tokio::test]
     async fn test_data_processor() {
         let processor = AsyncDataProcessor::new();
-        
+
         processor.add_data("测试数据1".to_string()).await.unwrap();
         processor.add_data("测试数据2".to_string()).await.unwrap();
-        
+
         assert_eq!(processor.get_buffer_size().await, 2);
         assert_eq!(processor.get_processed_count().await, 0);
     }
@@ -676,7 +696,7 @@ mod tests {
     #[tokio::test]
     async fn test_wait_for_condition() {
         let counter = AsyncCounter::new();
-        
+
         // 启动后台任务
         let counter_clone = counter.clone();
         tokio::spawn(async move {
@@ -687,8 +707,10 @@ mod tests {
         // 等待条件满足
         let condition_met = test_utils::wait_for_condition(
             || async { counter.get_count().await > 0 },
-            Duration::from_secs(1)
-        ).await.unwrap();
+            Duration::from_secs(1),
+        )
+        .await
+        .unwrap();
 
         assert!(condition_met);
         assert_eq!(counter.get_count().await, 1);
@@ -699,7 +721,8 @@ mod tests {
         let (result, duration) = test_utils::measure_execution_time(|| async {
             sleep(Duration::from_millis(100)).await;
             42
-        }).await;
+        })
+        .await;
 
         assert_eq!(result, 42);
         assert!(duration >= Duration::from_millis(100));
@@ -727,6 +750,6 @@ async fn main() -> Result<()> {
 
     println!("\n🎉 异步测试框架演示完成！");
     println!("运行 'cargo test --example async_testing_demo' 来执行所有测试");
-    
+
     Ok(())
 }

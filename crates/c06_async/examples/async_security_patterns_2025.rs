@@ -1,12 +1,12 @@
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use std::collections::hash_map::DefaultHasher;
+use std::hash::{Hash, Hasher};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::sync::RwLock;
-use tracing::{info, warn, debug, error};
-use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
-use std::hash::{Hash, Hasher};
-use std::collections::hash_map::DefaultHasher;
+use tracing::{debug, error, info, warn};
 
 /// 2025年异步安全编程模式演示
 /// 展示最新的异步安全编程技术和最佳实践
@@ -47,7 +47,10 @@ impl AsyncAccessControlManager {
 
     pub async fn grant_permission(&self, user_id: String, resource: String) {
         let mut permissions = self.permissions.write().await;
-        permissions.entry(user_id).or_insert_with(Vec::new).push(resource);
+        permissions
+            .entry(user_id)
+            .or_insert_with(Vec::new)
+            .push(resource);
     }
 
     pub async fn revoke_permission(&self, user_id: String, resource: String) {
@@ -59,9 +62,9 @@ impl AsyncAccessControlManager {
 
     pub async fn check_permission(&self, user_id: &str, resource: &str) -> bool {
         let permissions = self.permissions.read().await;
-        permissions
-            .get(user_id)
-            .map_or(false, |user_permissions| user_permissions.contains(&resource.to_string()))
+        permissions.get(user_id).map_or(false, |user_permissions| {
+            user_permissions.contains(&resource.to_string())
+        })
     }
 
     pub async fn set_rate_limit(&self, user_id: String, max_requests: u32, time_window: Duration) {
@@ -76,7 +79,7 @@ impl AsyncAccessControlManager {
 
     pub async fn check_rate_limit(&self, user_id: &str) -> bool {
         let mut rate_limits = self.rate_limits.write().await;
-        
+
         if let Some(rate_limit) = rate_limits.get_mut(user_id) {
             // 检查时间窗口是否已过期
             if rate_limit.window_start.elapsed() >= rate_limit.time_window {
@@ -96,7 +99,14 @@ impl AsyncAccessControlManager {
         }
     }
 
-    pub async fn log_access(&self, user_id: String, action: String, resource: String, success: bool, ip_address: Option<String>) {
+    pub async fn log_access(
+        &self,
+        user_id: String,
+        action: String,
+        resource: String,
+        success: bool,
+        ip_address: Option<String>,
+    ) {
         let entry = AuditEntry {
             timestamp: std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)
@@ -112,21 +122,42 @@ impl AsyncAccessControlManager {
         self.audit_log.write().await.push(entry);
     }
 
-    pub async fn secure_access(&self, user_id: String, action: String, resource: String, ip_address: Option<String>) -> Result<bool> {
+    pub async fn secure_access(
+        &self,
+        user_id: String,
+        action: String,
+        resource: String,
+        ip_address: Option<String>,
+    ) -> Result<bool> {
         // 检查权限
         if !self.check_permission(&user_id, &resource).await {
-            self.log_access(user_id.clone(), action.clone(), resource.clone(), false, ip_address.clone()).await;
+            self.log_access(
+                user_id.clone(),
+                action.clone(),
+                resource.clone(),
+                false,
+                ip_address.clone(),
+            )
+            .await;
             return Err(anyhow::anyhow!("访问被拒绝：权限不足"));
         }
 
         // 检查速率限制
         if !self.check_rate_limit(&user_id).await {
-            self.log_access(user_id.clone(), action.clone(), resource.clone(), false, ip_address.clone()).await;
+            self.log_access(
+                user_id.clone(),
+                action.clone(),
+                resource.clone(),
+                false,
+                ip_address.clone(),
+            )
+            .await;
             return Err(anyhow::anyhow!("访问被拒绝：超出速率限制"));
         }
 
         // 记录成功访问
-        self.log_access(user_id, action, resource, true, ip_address).await;
+        self.log_access(user_id, action, resource, true, ip_address)
+            .await;
         Ok(true)
     }
 
@@ -168,7 +199,7 @@ impl AsyncEncryptionService {
         let hash = hasher.finish();
 
         let encrypted = format!("{:x}", hash);
-        
+
         // 记录加密操作
         let record = EncryptionRecord {
             timestamp: std::time::SystemTime::now()
@@ -188,9 +219,9 @@ impl AsyncEncryptionService {
     pub async fn decrypt(&self, encrypted_data: &str, original_data: &str) -> Result<bool> {
         let start_time = Instant::now();
         let encrypted = self.encrypt(original_data).await?;
-        
+
         let is_valid = encrypted == encrypted_data;
-        
+
         // 记录解密操作
         let record = EncryptionRecord {
             timestamp: std::time::SystemTime::now()
@@ -250,7 +281,9 @@ impl AsyncInputValidator {
     }
 
     pub async fn add_rule(&self, field_name: String, rule: ValidationRule) {
-        self.validation_rules.write().await
+        self.validation_rules
+            .write()
+            .await
             .entry(field_name)
             .or_insert_with(Vec::new)
             .push(rule);
@@ -258,31 +291,58 @@ impl AsyncInputValidator {
 
     pub async fn validate_field(&self, field_name: &str, value: &str) -> Result<()> {
         let rules = self.validation_rules.read().await;
-        
+
         if let Some(field_rules) = rules.get(field_name) {
             for rule in field_rules {
                 if rule.required && value.is_empty() {
-                    self.log_validation(field_name, value, false, Some("字段是必需的".to_string())).await;
+                    self.log_validation(field_name, value, false, Some("字段是必需的".to_string()))
+                        .await;
                     return Err(anyhow::anyhow!("字段 '{}' 是必需的", field_name));
                 }
 
                 if let Some(min_len) = rule.min_length {
                     if value.len() < min_len {
-                        self.log_validation(field_name, value, false, Some(format!("最小长度应为 {}", min_len))).await;
-                        return Err(anyhow::anyhow!("字段 '{}' 长度不能少于 {}", field_name, min_len));
+                        self.log_validation(
+                            field_name,
+                            value,
+                            false,
+                            Some(format!("最小长度应为 {}", min_len)),
+                        )
+                        .await;
+                        return Err(anyhow::anyhow!(
+                            "字段 '{}' 长度不能少于 {}",
+                            field_name,
+                            min_len
+                        ));
                     }
                 }
 
                 if let Some(max_len) = rule.max_length {
                     if value.len() > max_len {
-                        self.log_validation(field_name, value, false, Some(format!("最大长度应为 {}", max_len))).await;
-                        return Err(anyhow::anyhow!("字段 '{}' 长度不能超过 {}", field_name, max_len));
+                        self.log_validation(
+                            field_name,
+                            value,
+                            false,
+                            Some(format!("最大长度应为 {}", max_len)),
+                        )
+                        .await;
+                        return Err(anyhow::anyhow!(
+                            "字段 '{}' 长度不能超过 {}",
+                            field_name,
+                            max_len
+                        ));
                     }
                 }
 
                 // 简化的正则表达式验证
                 if !rule.pattern.is_empty() && !value.contains(&rule.pattern) {
-                    self.log_validation(field_name, value, false, Some(format!("格式不符合要求: {}", rule.pattern))).await;
+                    self.log_validation(
+                        field_name,
+                        value,
+                        false,
+                        Some(format!("格式不符合要求: {}", rule.pattern)),
+                    )
+                    .await;
                     return Err(anyhow::anyhow!("字段 '{}' 格式不正确", field_name));
                 }
             }
@@ -299,7 +359,13 @@ impl AsyncInputValidator {
         Ok(())
     }
 
-    async fn log_validation(&self, field_name: &str, value: &str, success: bool, error_message: Option<String>) {
+    async fn log_validation(
+        &self,
+        field_name: &str,
+        value: &str,
+        success: bool,
+        error_message: Option<String>,
+    ) {
         let record = ValidationRecord {
             timestamp: std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)
@@ -345,7 +411,12 @@ impl AsyncSecureSessionManager {
         }
     }
 
-    pub async fn create_session(&self, user_id: String, ip_address: String, user_agent: String) -> Result<String> {
+    pub async fn create_session(
+        &self,
+        user_id: String,
+        ip_address: String,
+        user_agent: String,
+    ) -> Result<String> {
         // 清理过期会话
         self.cleanup_expired_sessions().await;
 
@@ -358,10 +429,14 @@ impl AsyncSecureSessionManager {
             }
         }
 
-        let session_id = format!("session_{}_{}", user_id, std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .unwrap()
-            .as_secs());
+        let session_id = format!(
+            "session_{}_{}",
+            user_id,
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_secs()
+        );
 
         let session = SecureSession {
             session_id: session_id.clone(),
@@ -373,15 +448,18 @@ impl AsyncSecureSessionManager {
             is_active: true,
         };
 
-        self.sessions.write().await.insert(session_id.clone(), session);
+        self.sessions
+            .write()
+            .await
+            .insert(session_id.clone(), session);
         info!("为用户 '{}' 创建新会话: {}", user_id, session_id);
-        
+
         Ok(session_id)
     }
 
     pub async fn validate_session(&self, session_id: &str, ip_address: &str) -> Result<String> {
         let mut sessions = self.sessions.write().await;
-        
+
         if let Some(session) = sessions.get_mut(session_id) {
             // 检查会话是否过期
             if session.last_accessed.elapsed() > self.session_timeout {
@@ -420,7 +498,9 @@ impl AsyncSecureSessionManager {
     }
 
     pub async fn get_user_sessions(&self, user_id: &str) -> Vec<SecureSession> {
-        self.sessions.read().await
+        self.sessions
+            .read()
+            .await
             .values()
             .filter(|s| s.user_id == user_id)
             .cloned()
@@ -430,14 +510,16 @@ impl AsyncSecureSessionManager {
     async fn cleanup_expired_sessions(&self) {
         let mut sessions = self.sessions.write().await;
         let _now = Instant::now();
-        
+
         sessions.retain(|_, session| {
             session.last_accessed.elapsed() <= self.session_timeout && session.is_active
         });
     }
 
     pub async fn get_active_sessions_count(&self) -> usize {
-        self.sessions.read().await
+        self.sessions
+            .read()
+            .await
             .values()
             .filter(|s| s.is_active && s.last_accessed.elapsed() <= self.session_timeout)
             .count()
@@ -515,7 +597,8 @@ impl AsyncSecureLogger {
         };
 
         // 检查组件日志级别
-        let should_log = if let Some(component_level) = self.log_levels.read().await.get(&component) {
+        let should_log = if let Some(component_level) = self.log_levels.read().await.get(&component)
+        {
             self.should_log_level(&level, component_level)
         } else {
             true // 默认记录所有级别
@@ -547,19 +630,29 @@ impl AsyncSecureLogger {
             (LogLevel::Debug, _) => true,
             (LogLevel::Info, LogLevel::Debug | LogLevel::Info) => true,
             (LogLevel::Warning, LogLevel::Debug | LogLevel::Info | LogLevel::Warning) => true,
-            (LogLevel::Error, LogLevel::Debug | LogLevel::Info | LogLevel::Warning | LogLevel::Error) => true,
+            (
+                LogLevel::Error,
+                LogLevel::Debug | LogLevel::Info | LogLevel::Warning | LogLevel::Error,
+            ) => true,
             (LogLevel::Critical, _) => true,
             _ => false,
         }
     }
 
-    pub async fn get_security_logs(&self, component: Option<String>, level: Option<LogLevel>) -> Vec<SecurityLogEntry> {
+    pub async fn get_security_logs(
+        &self,
+        component: Option<String>,
+        level: Option<LogLevel>,
+    ) -> Vec<SecurityLogEntry> {
         let entries = self.log_entries.read().await;
-        
-        entries.iter()
+
+        entries
+            .iter()
             .filter(|entry| {
                 let component_match = component.as_ref().map_or(true, |c| entry.component == *c);
-                let level_match = level.as_ref().map_or(true, |l| std::mem::discriminant(&entry.level) == std::mem::discriminant(l));
+                let level_match = level.as_ref().map_or(true, |l| {
+                    std::mem::discriminant(&entry.level) == std::mem::discriminant(l)
+                });
                 component_match && level_match
             })
             .cloned()
@@ -568,9 +661,15 @@ impl AsyncSecureLogger {
 
     pub async fn get_critical_security_events(&self) -> Vec<SecurityLogEntry> {
         let entries = self.log_entries.read().await;
-        
-        entries.iter()
-            .filter(|entry| matches!(entry.severity, SeverityLevel::Critical | SeverityLevel::High))
+
+        entries
+            .iter()
+            .filter(|entry| {
+                matches!(
+                    entry.severity,
+                    SeverityLevel::Critical | SeverityLevel::High
+                )
+            })
             .cloned()
             .collect()
     }
@@ -580,9 +679,7 @@ impl AsyncSecureLogger {
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志
-    tracing_subscriber::fmt()
-        .with_env_filter("info")
-        .init();
+    tracing_subscriber::fmt().with_env_filter("info").init();
 
     info!("🚀 开始 2025 年异步安全编程模式演示");
 
@@ -611,29 +708,43 @@ async fn demo_async_access_control() -> Result<()> {
     let access_control = AsyncAccessControlManager::new();
 
     // 设置权限
-    access_control.grant_permission("user1".to_string(), "read_data".to_string()).await;
-    access_control.grant_permission("user1".to_string(), "write_data".to_string()).await;
-    access_control.grant_permission("user2".to_string(), "read_data".to_string()).await;
+    access_control
+        .grant_permission("user1".to_string(), "read_data".to_string())
+        .await;
+    access_control
+        .grant_permission("user1".to_string(), "write_data".to_string())
+        .await;
+    access_control
+        .grant_permission("user2".to_string(), "read_data".to_string())
+        .await;
 
     // 设置速率限制
-    access_control.set_rate_limit("user1".to_string(), 5, Duration::from_secs(10)).await;
-    access_control.set_rate_limit("user2".to_string(), 3, Duration::from_secs(10)).await;
+    access_control
+        .set_rate_limit("user1".to_string(), 5, Duration::from_secs(10))
+        .await;
+    access_control
+        .set_rate_limit("user2".to_string(), 3, Duration::from_secs(10))
+        .await;
 
     // 测试访问控制
-    let result1 = access_control.secure_access(
-        "user1".to_string(),
-        "read".to_string(),
-        "read_data".to_string(),
-        Some("192.168.1.1".to_string()),
-    ).await?;
+    let result1 = access_control
+        .secure_access(
+            "user1".to_string(),
+            "read".to_string(),
+            "read_data".to_string(),
+            Some("192.168.1.1".to_string()),
+        )
+        .await?;
     info!("用户1读取数据: {}", result1);
 
-    let result2 = access_control.secure_access(
-        "user2".to_string(),
-        "write".to_string(),
-        "write_data".to_string(),
-        Some("192.168.1.2".to_string()),
-    ).await;
+    let result2 = access_control
+        .secure_access(
+            "user2".to_string(),
+            "write".to_string(),
+            "write_data".to_string(),
+            Some("192.168.1.2".to_string()),
+        )
+        .await;
     match result2 {
         Ok(_) => info!("用户2写入数据成功"),
         Err(e) => warn!("用户2写入数据失败: {}", e),
@@ -652,13 +763,15 @@ async fn demo_async_encryption_service() -> Result<()> {
     let encryption_service = AsyncEncryptionService::new(b"secret_key_2025".to_vec());
 
     let original_data = "敏感数据：用户密码和信用卡信息";
-    
+
     // 加密数据
     let encrypted = encryption_service.encrypt(original_data).await?;
     info!("加密后的数据: {}", encrypted);
 
     // 验证解密
-    let is_valid = encryption_service.decrypt(&encrypted, original_data).await?;
+    let is_valid = encryption_service
+        .decrypt(&encrypted, original_data)
+        .await?;
     info!("解密验证结果: {}", is_valid);
 
     // 查看加密历史
@@ -666,7 +779,9 @@ async fn demo_async_encryption_service() -> Result<()> {
     info!("加密操作历史: {} 条记录", history.len());
 
     // 轮换密钥
-    encryption_service.rotate_key(b"new_secret_key_2025".to_vec()).await;
+    encryption_service
+        .rotate_key(b"new_secret_key_2025".to_vec())
+        .await;
     info!("加密密钥已轮换");
 
     Ok(())
@@ -678,21 +793,31 @@ async fn demo_async_input_validation() -> Result<()> {
     let validator = AsyncInputValidator::new();
 
     // 添加验证规则
-    validator.add_rule("username".to_string(), ValidationRule {
-        name: "username_rule".to_string(),
-        pattern: "user".to_string(),
-        min_length: Some(3),
-        max_length: Some(20),
-        required: true,
-    }).await;
+    validator
+        .add_rule(
+            "username".to_string(),
+            ValidationRule {
+                name: "username_rule".to_string(),
+                pattern: "user".to_string(),
+                min_length: Some(3),
+                max_length: Some(20),
+                required: true,
+            },
+        )
+        .await;
 
-    validator.add_rule("email".to_string(), ValidationRule {
-        name: "email_rule".to_string(),
-        pattern: "@".to_string(),
-        min_length: Some(5),
-        max_length: Some(100),
-        required: true,
-    }).await;
+    validator
+        .add_rule(
+            "email".to_string(),
+            ValidationRule {
+                name: "email_rule".to_string(),
+                pattern: "@".to_string(),
+                min_length: Some(5),
+                max_length: Some(100),
+                required: true,
+            },
+        )
+        .await;
 
     // 验证数据
     let mut data = HashMap::new();
@@ -728,26 +853,32 @@ async fn demo_async_secure_session_management() -> Result<()> {
 
     let session_manager = AsyncSecureSessionManager::new(
         Duration::from_secs(300), // 5分钟超时
-        3, // 每个用户最多3个会话
+        3,                        // 每个用户最多3个会话
     );
 
     // 创建会话
-    let session_id1 = session_manager.create_session(
-        "user1".to_string(),
-        "192.168.1.1".to_string(),
-        "Mozilla/5.0".to_string(),
-    ).await?;
+    let session_id1 = session_manager
+        .create_session(
+            "user1".to_string(),
+            "192.168.1.1".to_string(),
+            "Mozilla/5.0".to_string(),
+        )
+        .await?;
     info!("创建会话1: {}", session_id1);
 
-    let session_id2 = session_manager.create_session(
-        "user1".to_string(),
-        "192.168.1.2".to_string(),
-        "Chrome/91.0".to_string(),
-    ).await?;
+    let session_id2 = session_manager
+        .create_session(
+            "user1".to_string(),
+            "192.168.1.2".to_string(),
+            "Chrome/91.0".to_string(),
+        )
+        .await?;
     info!("创建会话2: {}", session_id2);
 
     // 验证会话
-    let user_id = session_manager.validate_session(&session_id1, "192.168.1.1").await?;
+    let user_id = session_manager
+        .validate_session(&session_id1, "192.168.1.1")
+        .await?;
     info!("会话验证成功，用户ID: {}", user_id);
 
     // 查看用户会话
@@ -767,43 +898,55 @@ async fn demo_async_secure_logging() -> Result<()> {
     let secure_logger = AsyncSecureLogger::new(1000);
 
     // 设置组件日志级别
-    secure_logger.set_component_log_level("auth".to_string(), LogLevel::Info).await;
-    secure_logger.set_component_log_level("payment".to_string(), LogLevel::Warning).await;
+    secure_logger
+        .set_component_log_level("auth".to_string(), LogLevel::Info)
+        .await;
+    secure_logger
+        .set_component_log_level("payment".to_string(), LogLevel::Warning)
+        .await;
 
     // 记录安全事件
-    secure_logger.log_security_event(
-        LogLevel::Info,
-        "auth".to_string(),
-        "用户登录成功".to_string(),
-        Some("user1".to_string()),
-        Some("192.168.1.1".to_string()),
-        SeverityLevel::Low,
-    ).await;
+    secure_logger
+        .log_security_event(
+            LogLevel::Info,
+            "auth".to_string(),
+            "用户登录成功".to_string(),
+            Some("user1".to_string()),
+            Some("192.168.1.1".to_string()),
+            SeverityLevel::Low,
+        )
+        .await;
 
-    secure_logger.log_security_event(
-        LogLevel::Warning,
-        "payment".to_string(),
-        "异常支付尝试".to_string(),
-        Some("user2".to_string()),
-        Some("192.168.1.100".to_string()),
-        SeverityLevel::High,
-    ).await;
+    secure_logger
+        .log_security_event(
+            LogLevel::Warning,
+            "payment".to_string(),
+            "异常支付尝试".to_string(),
+            Some("user2".to_string()),
+            Some("192.168.1.100".to_string()),
+            SeverityLevel::High,
+        )
+        .await;
 
-    secure_logger.log_security_event(
-        LogLevel::Error,
-        "auth".to_string(),
-        "多次登录失败".to_string(),
-        Some("user3".to_string()),
-        Some("192.168.1.200".to_string()),
-        SeverityLevel::Critical,
-    ).await;
+    secure_logger
+        .log_security_event(
+            LogLevel::Error,
+            "auth".to_string(),
+            "多次登录失败".to_string(),
+            Some("user3".to_string()),
+            Some("192.168.1.200".to_string()),
+            SeverityLevel::Critical,
+        )
+        .await;
 
     // 查看关键安全事件
     let critical_events = secure_logger.get_critical_security_events().await;
     info!("关键安全事件数: {}", critical_events.len());
 
     // 查看特定组件的日志
-    let auth_logs = secure_logger.get_security_logs(Some("auth".to_string()), None).await;
+    let auth_logs = secure_logger
+        .get_security_logs(Some("auth".to_string()), None)
+        .await;
     info!("认证组件日志数: {}", auth_logs.len());
 
     Ok(())
@@ -816,8 +959,10 @@ mod tests {
     #[tokio::test]
     async fn test_async_access_control() {
         let access_control = AsyncAccessControlManager::new();
-        access_control.grant_permission("user1".to_string(), "resource1".to_string()).await;
-        
+        access_control
+            .grant_permission("user1".to_string(), "resource1".to_string())
+            .await;
+
         assert!(access_control.check_permission("user1", "resource1").await);
         assert!(!access_control.check_permission("user1", "resource2").await);
     }
@@ -826,55 +971,73 @@ mod tests {
     async fn test_async_encryption_service() {
         let encryption_service = AsyncEncryptionService::new(b"test_key".to_vec());
         let data = "test data";
-        
+
         let encrypted = encryption_service.encrypt(data).await.unwrap();
         let is_valid = encryption_service.decrypt(&encrypted, data).await.unwrap();
-        
+
         assert!(is_valid);
     }
 
     #[tokio::test]
     async fn test_async_input_validation() {
         let validator = AsyncInputValidator::new();
-        validator.add_rule("test_field".to_string(), ValidationRule {
-            name: "test_rule".to_string(),
-            pattern: "".to_string(),
-            min_length: Some(3),
-            max_length: Some(10),
-            required: true,
-        }).await;
-        
-        assert!(validator.validate_field("test_field", "valid").await.is_ok());
+        validator
+            .add_rule(
+                "test_field".to_string(),
+                ValidationRule {
+                    name: "test_rule".to_string(),
+                    pattern: "".to_string(),
+                    min_length: Some(3),
+                    max_length: Some(10),
+                    required: true,
+                },
+            )
+            .await;
+
+        assert!(
+            validator
+                .validate_field("test_field", "valid")
+                .await
+                .is_ok()
+        );
         assert!(validator.validate_field("test_field", "ab").await.is_err());
     }
 
     #[tokio::test]
     async fn test_async_secure_session_management() {
         let session_manager = AsyncSecureSessionManager::new(Duration::from_secs(60), 5);
-        
-        let session_id = session_manager.create_session(
-            "user1".to_string(),
-            "127.0.0.1".to_string(),
-            "test".to_string(),
-        ).await.unwrap();
-        
-        let user_id = session_manager.validate_session(&session_id, "127.0.0.1").await.unwrap();
+
+        let session_id = session_manager
+            .create_session(
+                "user1".to_string(),
+                "127.0.0.1".to_string(),
+                "test".to_string(),
+            )
+            .await
+            .unwrap();
+
+        let user_id = session_manager
+            .validate_session(&session_id, "127.0.0.1")
+            .await
+            .unwrap();
         assert_eq!(user_id, "user1");
     }
 
     #[tokio::test]
     async fn test_async_secure_logger() {
         let logger = AsyncSecureLogger::new(100);
-        
-        logger.log_security_event(
-            LogLevel::Info,
-            "test".to_string(),
-            "test message".to_string(),
-            None,
-            None,
-            SeverityLevel::Low,
-        ).await;
-        
+
+        logger
+            .log_security_event(
+                LogLevel::Info,
+                "test".to_string(),
+                "test message".to_string(),
+                None,
+                None,
+                SeverityLevel::Low,
+            )
+            .await;
+
         let logs = logger.get_security_logs(None, None).await;
         assert_eq!(logs.len(), 1);
     }

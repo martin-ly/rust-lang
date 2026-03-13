@@ -45,14 +45,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 创建性能配置
     let config = PerformanceConfig {
-        memory_threshold: 0.8,      // 内存使用阈值 80%
-        cpu_threshold: 0.7,         // CPU使用阈值 70%
-        io_threshold: 0.6,          // I/O使用阈值 60%
-        cache_threshold: 0.75,       // 缓存使用阈值 75%
-        auto_optimization: true,     // 启用自动优化
-        optimization_interval: Duration::from_secs(30),  // 优化间隔 30秒
-        monitoring_interval: Duration::from_secs(5),      // 监控间隔 5秒
-        history_retention: Duration::from_secs(3600),    // 历史保留 1小时
+        memory_threshold: 0.8,                          // 内存使用阈值 80%
+        cpu_threshold: 0.7,                             // CPU使用阈值 70%
+        io_threshold: 0.6,                              // I/O使用阈值 60%
+        cache_threshold: 0.75,                          // 缓存使用阈值 75%
+        auto_optimization: true,                        // 启用自动优化
+        optimization_interval: Duration::from_secs(30), // 优化间隔 30秒
+        monitoring_interval: Duration::from_secs(5),    // 监控间隔 5秒
+        history_retention: Duration::from_secs(3600),   // 历史保留 1小时
     };
 
     println!("📊 创建性能管理器...");
@@ -64,7 +64,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let memory_result = manager.optimize_memory().await;
     println!("内存优化结果:");
     println!("  - 成功: {}", memory_result.success);
-    println!("  - 性能提升: {:.1}%", memory_result.performance_gain * 100.0);
+    println!(
+        "  - 性能提升: {:.1}%",
+        memory_result.performance_gain * 100.0
+    );
     println!("  - 消息: {}", memory_result.message);
     if !memory_result.optimizations_applied.is_empty() {
         println!("  - 应用的优化:");
@@ -76,38 +79,38 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 演示CPU优化
     println!("⚡ 执行CPU优化...");
-    let cpu_result = manager.optimize_cpu(|usage| async move {
-        println!("  - 当前CPU使用率: {:.1}%", usage * 100.0);
+    let cpu_result = manager
+        .optimize_cpu(|usage| async move {
+            println!("  - 当前CPU使用率: {:.1}%", usage * 100.0);
 
-        if usage > 0.8 {
-            OptimizationResult {
-                success: true,
-                performance_gain: 0.25,
-                message: "高CPU使用率检测，应用优化策略".to_string(),
-                optimizations_applied: vec![
-                    "调整线程池大小".to_string(),
-                    "启用CPU节流".to_string(),
-                    "优先处理关键任务".to_string(),
-                ],
+            if usage > 0.8 {
+                OptimizationResult {
+                    success: true,
+                    performance_gain: 0.25,
+                    message: "高CPU使用率检测，应用优化策略".to_string(),
+                    optimizations_applied: vec![
+                        "调整线程池大小".to_string(),
+                        "启用CPU节流".to_string(),
+                        "优先处理关键任务".to_string(),
+                    ],
+                }
+            } else if usage > 0.6 {
+                OptimizationResult {
+                    success: true,
+                    performance_gain: 0.15,
+                    message: "中等CPU使用率，应用中等优化".to_string(),
+                    optimizations_applied: vec!["调整线程优先级".to_string()],
+                }
+            } else {
+                OptimizationResult {
+                    success: true,
+                    performance_gain: 0.0,
+                    message: "CPU使用率正常".to_string(),
+                    optimizations_applied: vec![],
+                }
             }
-        } else if usage > 0.6 {
-            OptimizationResult {
-                success: true,
-                performance_gain: 0.15,
-                message: "中等CPU使用率，应用中等优化".to_string(),
-                optimizations_applied: vec![
-                    "调整线程优先级".to_string(),
-                ],
-            }
-        } else {
-            OptimizationResult {
-                success: true,
-                performance_gain: 0.0,
-                message: "CPU使用率正常".to_string(),
-                optimizations_applied: vec![],
-            }
-        }
-    }).await;
+        })
+        .await;
     println!("CPU优化结果:");
     println!("  - 成功: {}", cpu_result.success);
     println!("  - 性能提升: {:.1}%", cpu_result.performance_gain * 100.0);
@@ -141,10 +144,19 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("性能报告:");
     println!("  - 时间戳: {:?}", report.timestamp);
     println!("  - 性能分数: {:.2}", report.performance_score);
-    println!("  - 内存压力: {:.1}%", report.memory_stats.memory_pressure * 100.0);
+    println!(
+        "  - 内存压力: {:.1}%",
+        report.memory_stats.memory_pressure * 100.0
+    );
     println!("  - CPU使用率: {:.1}%", report.cpu_stats.cpu_usage * 100.0);
-    println!("  - I/O使用率: {:.1}%", report.io_stats.io_utilization * 100.0);
-    println!("  - 缓存命中率: {:.1}%", report.cache_stats.hit_ratio * 100.0);
+    println!(
+        "  - I/O使用率: {:.1}%",
+        report.io_stats.io_utilization * 100.0
+    );
+    println!(
+        "  - 缓存命中率: {:.1}%",
+        report.cache_stats.hit_ratio * 100.0
+    );
     println!();
 
     // 等待一段时间以收集监控数据
@@ -158,10 +170,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("更新后的性能报告:");
     println!("  - 时间戳: {:?}", updated_report.timestamp);
     println!("  - 性能分数: {:.2}", updated_report.performance_score);
-    println!("  - 内存压力: {:.1}%", updated_report.memory_stats.memory_pressure * 100.0);
-    println!("  - CPU使用率: {:.1}%", updated_report.cpu_stats.cpu_usage * 100.0);
-    println!("  - I/O使用率: {:.1}%", updated_report.io_stats.io_utilization * 100.0);
-    println!("  - 缓存命中率: {:.1}%", updated_report.cache_stats.hit_ratio * 100.0);
+    println!(
+        "  - 内存压力: {:.1}%",
+        updated_report.memory_stats.memory_pressure * 100.0
+    );
+    println!(
+        "  - CPU使用率: {:.1}%",
+        updated_report.cpu_stats.cpu_usage * 100.0
+    );
+    println!(
+        "  - I/O使用率: {:.1}%",
+        updated_report.io_stats.io_utilization * 100.0
+    );
+    println!(
+        "  - 缓存命中率: {:.1}%",
+        updated_report.cache_stats.hit_ratio * 100.0
+    );
     println!();
 
     println!("✅ 性能优化演示完成！");

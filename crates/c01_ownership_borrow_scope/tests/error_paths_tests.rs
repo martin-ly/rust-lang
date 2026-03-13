@@ -7,15 +7,17 @@ fn test_error_inputs() {
     let mut manager = ScopeManager::new();
 
     // 测试在空栈中操作变量
-    assert!(manager
-        .declare_variable(
-            "var".to_string(),
-            "i32".to_string(),
-            "0".to_string(),
-            false,
-            None
-        )
-        .is_err());
+    assert!(
+        manager
+            .declare_variable(
+                "var".to_string(),
+                "i32".to_string(),
+                "0".to_string(),
+                false,
+                None
+            )
+            .is_err()
+    );
     assert!(manager.get_variable_scope_path("var").is_none());
 
     // 测试退出空栈
@@ -37,15 +39,17 @@ fn test_error_states() {
     assert!(manager.exit_scope().is_err());
 
     // 尝试在空栈中添加变量应该失败
-    assert!(manager
-        .declare_variable(
-            "var".to_string(),
-            "i32".to_string(),
-            "0".to_string(),
-            false,
-            None
-        )
-        .is_err());
+    assert!(
+        manager
+            .declare_variable(
+                "var".to_string(),
+                "i32".to_string(),
+                "0".to_string(),
+                false,
+                None
+            )
+            .is_err()
+    );
 }
 
 /// 测试异常情况
@@ -57,7 +61,7 @@ fn test_exception_cases() {
     manager
         .enter_scope("test".to_string(), ScopeType::Block)
         .unwrap();
-    
+
     // 尝试查找不存在的变量
     assert!(manager.find_variable("nonexistent").is_none());
     assert_eq!(

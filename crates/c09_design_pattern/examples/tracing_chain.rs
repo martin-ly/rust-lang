@@ -1,7 +1,7 @@
 #[cfg(feature = "obs-tracing")]
-use tracing::{info, info_span, Instrument};
+use tracing::{Instrument, info, info_span};
 #[cfg(feature = "obs-tracing")]
-use tracing_subscriber::{fmt, EnvFilter};
+use tracing_subscriber::{EnvFilter, fmt};
 
 #[cfg(feature = "obs-tracing")]
 async fn chain_process(input: &str) -> String {
@@ -23,8 +23,7 @@ async fn step(tag: &str, v: &str) -> String {
 
 #[cfg(feature = "obs-tracing")]
 fn init_tracing() {
-    let filter = EnvFilter::try_from_default_env()
-        .unwrap_or_else(|_| EnvFilter::new("info"));
+    let filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info"));
     let subscriber = fmt().with_env_filter(filter).finish();
     tracing::subscriber::set_global_default(subscriber).ok();
 }

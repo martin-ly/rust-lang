@@ -339,16 +339,16 @@ impl PerformanceProfiler {
     pub fn generate_profile_report(&self, thread_id: usize) -> Option<ProfileReport> {
         let profile_data = self.profile_data.lock().unwrap();
         profile_data.get(&thread_id).map(|data| ProfileReport {
-                thread_id: data.thread_id,
-                total_function_calls: data.function_calls.values().sum(),
-                total_execution_time: data.execution_times.values().sum(),
-                total_memory_allocations: data.memory_allocations.values().sum(),
-                cache_misses: data.cache_misses,
-                branch_mispredictions: data.branch_mispredictions,
-                function_calls: data.function_calls.clone(),
-                execution_times: data.execution_times.clone(),
-                memory_allocations: data.memory_allocations.clone(),
-            })
+            thread_id: data.thread_id,
+            total_function_calls: data.function_calls.values().sum(),
+            total_execution_time: data.execution_times.values().sum(),
+            total_memory_allocations: data.memory_allocations.values().sum(),
+            cache_misses: data.cache_misses,
+            branch_mispredictions: data.branch_mispredictions,
+            function_calls: data.function_calls.clone(),
+            execution_times: data.execution_times.clone(),
+            memory_allocations: data.memory_allocations.clone(),
+        })
     }
 
     pub fn enable_profiling(&self, enabled: bool) {

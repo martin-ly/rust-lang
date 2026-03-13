@@ -80,7 +80,9 @@ impl KMeans {
         let mut rng = ThreadRng::default();
 
         // 随机选择第一个中心（let-else 早返回空数据集）
-        let Some(_first) = data.first() else { return centers; };
+        let Some(_first) = data.first() else {
+            return centers;
+        };
         let first_idx = rng.random_range(0..data.len());
         centers.push(data[first_idx].clone());
 

@@ -5,10 +5,8 @@ use std::thread;
 /// 测试线程创建集成
 #[test]
 fn test_thread_creation_integration() {
-    let handle = thread::spawn(|| {
-        "Hello from thread"
-    });
-    
+    let handle = thread::spawn(|| "Hello from thread");
+
     let result = handle.join().unwrap();
     assert_eq!(result, "Hello from thread");
 }
@@ -18,12 +16,12 @@ fn test_thread_creation_integration() {
 fn test_thread_communication_integration() {
     let shared = Arc::new(Mutex::new(0));
     let shared_clone = Arc::clone(&shared);
-    
+
     let handle = thread::spawn(move || {
         let mut value = shared_clone.lock().unwrap();
         *value += 1;
     });
-    
+
     handle.join().unwrap();
     assert_eq!(*shared.lock().unwrap(), 1);
 }
@@ -54,7 +52,7 @@ fn test_multithreaded_cooperation_integration() {
 #[test]
 fn test_thread_synchronization_integration() {
     use std::sync::Barrier;
-    
+
     let barrier = Arc::new(Barrier::new(3));
     let mut handles = vec![];
 
@@ -69,7 +67,7 @@ fn test_thread_synchronization_integration() {
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     assert!(true); // 所有线程都已同步
 }
 
@@ -77,7 +75,7 @@ fn test_thread_synchronization_integration() {
 #[test]
 fn test_atomic_operations_integration() {
     use std::sync::atomic::{AtomicUsize, Ordering};
-    
+
     let counter = Arc::new(AtomicUsize::new(0));
     let mut handles = vec![];
 
@@ -101,15 +99,15 @@ fn test_atomic_operations_integration() {
 fn test_thread_local_storage_integration() {
     use std::cell::RefCell;
     use std::thread_local;
-    
+
     thread_local! {
         static COUNTER: RefCell<usize> = RefCell::new(0);
     }
-    
+
     COUNTER.with(|c| {
         *c.borrow_mut() += 1;
     });
-    
+
     COUNTER.with(|c| {
         assert_eq!(*c.borrow(), 1);
     });

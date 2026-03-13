@@ -44,10 +44,7 @@ impl<T: Ord> PriorityQueue<T> {
     pub fn pop(&mut self) -> Option<T> {
         match self.kind {
             HeapKind::Max => self.max_heap.pop(),
-            HeapKind::Min => {
-                let Some(Reverse(v)) = self.min_heap.pop() else { return None; };
-                Some(v)
-            }
+            HeapKind::Min => Some(self.min_heap.pop()?.0),
         }
     }
 

@@ -44,8 +44,7 @@ async fn main() -> NetworkResult<()> {
     println!("🚀 启动 TCP Echo 服务器...");
 
     // 从环境变量读取配置，提供默认值
-    let address = std::env::var("C10_TCP_ADDRESS")
-        .unwrap_or_else(|_| "127.0.0.1:8080".to_string());
+    let address = std::env::var("C10_TCP_ADDRESS").unwrap_or_else(|_| "127.0.0.1:8080".to_string());
     let timeout_secs = std::env::var("C10_TCP_TIMEOUT")
         .ok()
         .and_then(|s| s.parse().ok())

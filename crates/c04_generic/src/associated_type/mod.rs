@@ -838,9 +838,7 @@ mod tests {
 
     #[test]
     fn test_vec_storage_empty() {
-        let storage = VecStorage::<i32> {
-            items: Vec::new(),
-        };
+        let storage = VecStorage::<i32> { items: Vec::new() };
         let values: Vec<&i32> = storage.iter().collect();
         assert_eq!(values.len(), 0);
         assert_eq!(storage.get(0), None);

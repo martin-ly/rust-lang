@@ -82,10 +82,7 @@ pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 /// ## 复杂度
 /// - 时间复杂度: O(n)
 /// - 空间复杂度: O(h)
-pub fn is_same_tree(
-    p: Option<Rc<RefCell<TreeNode>>>,
-    q: Option<Rc<RefCell<TreeNode>>>,
-) -> bool {
+pub fn is_same_tree(p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeNode>>>) -> bool {
     match (p, q) {
         (None, None) => true,
         (Some(p_node), Some(q_node)) => {
@@ -164,9 +161,8 @@ fn is_balanced_helper(root: Option<Rc<RefCell<TreeNode>>>) -> (bool, i32) {
             let (right_balanced, right_height) = is_balanced_helper(node.right.clone());
 
             let height = 1 + left_height.max(right_height);
-            let balanced = left_balanced
-                && right_balanced
-                && (left_height - right_height).abs() <= 1;
+            let balanced =
+                left_balanced && right_balanced && (left_height - right_height).abs() <= 1;
 
             (balanced, height)
         }
@@ -622,15 +618,8 @@ mod tests {
 
     #[test]
     fn test_max_depth() {
-        let tree = build_tree_from_vec(&[
-            Some(3),
-            Some(9),
-            Some(20),
-            None,
-            None,
-            Some(15),
-            Some(7),
-        ]);
+        let tree =
+            build_tree_from_vec(&[Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]);
         assert_eq!(max_depth(tree), 3);
     }
 
@@ -661,29 +650,15 @@ mod tests {
 
     #[test]
     fn test_is_balanced() {
-        let tree = build_tree_from_vec(&[
-            Some(3),
-            Some(9),
-            Some(20),
-            None,
-            None,
-            Some(15),
-            Some(7),
-        ]);
+        let tree =
+            build_tree_from_vec(&[Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]);
         assert!(is_balanced(tree));
     }
 
     #[test]
     fn test_min_depth() {
-        let tree = build_tree_from_vec(&[
-            Some(3),
-            Some(9),
-            Some(20),
-            None,
-            None,
-            Some(15),
-            Some(7),
-        ]);
+        let tree =
+            build_tree_from_vec(&[Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]);
         assert_eq!(min_depth(tree), 2);
     }
 
@@ -732,15 +707,7 @@ mod tests {
     #[test]
     fn test_merge_trees() {
         let tree1 = build_tree_from_vec(&[Some(1), Some(3), Some(2), Some(5)]);
-        let tree2 = build_tree_from_vec(&[
-            Some(2),
-            Some(1),
-            Some(3),
-            None,
-            Some(4),
-            None,
-            Some(7),
-        ]);
+        let tree2 = build_tree_from_vec(&[Some(2), Some(1), Some(3), None, Some(4), None, Some(7)]);
         let merged = merge_trees(tree1, tree2);
         let result = inorder_traversal(merged);
         assert_eq!(result, vec![5, 4, 4, 3, 5, 7]);

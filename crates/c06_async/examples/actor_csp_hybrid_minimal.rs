@@ -109,7 +109,11 @@ async fn main() {
     for i in 0..10 {
         ingress
             .send(Message {
-                priority: if i % 3 == 0 { Priority::High } else { Priority::Normal },
+                priority: if i % 3 == 0 {
+                    Priority::High
+                } else {
+                    Priority::Normal
+                },
                 payload: format!("msg-{i}"),
             })
             .await;
@@ -125,5 +129,3 @@ async fn main() {
     let _ = mux_handle.await;
     let _ = stage_handle.await;
 }
-
-

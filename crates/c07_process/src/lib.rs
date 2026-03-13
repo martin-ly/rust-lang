@@ -80,10 +80,10 @@ pub use error::{IpcResult, ProcessResult, ResourceResult, Result, SyncResult};
 
 #[cfg(feature = "async")]
 pub use error::enhanced::{
-    EnhancedErrorManager, EnhancedErrorEntry, ErrorType, ErrorSeverity, ErrorRecovery,
-    ErrorClassifier, ErrorChainTracker, ErrorNotifier, ErrorStatistics, RecoveryStrategy,
-    RecoveryResult, ErrorClassification, ErrorChain, NotificationChannel, NotificationRule,
-    Notification, ErrorManagerConfig
+    EnhancedErrorEntry, EnhancedErrorManager, ErrorChain, ErrorChainTracker, ErrorClassification,
+    ErrorClassifier, ErrorManagerConfig, ErrorNotifier, ErrorRecovery, ErrorSeverity,
+    ErrorStatistics, ErrorType, Notification, NotificationChannel, NotificationRule,
+    RecoveryResult, RecoveryStrategy,
 };
 
 pub use process::{
@@ -96,15 +96,13 @@ pub use async_runtime::{AsyncProcessManager, AsyncProcessPool, AsyncTask, AsyncT
 
 #[cfg(feature = "async")]
 pub use async_runtime::enhanced::{
-    EnhancedAsyncProcessManager, ProcessOutput, ProcessMetrics,
-    PerformanceMonitor, RetryPolicy,
+    EnhancedAsyncProcessManager, PerformanceMonitor, ProcessMetrics, ProcessOutput, RetryPolicy,
 };
 
 // 为避免与 error::enhanced 中的同名类型冲突，使用别名重新导出
 #[cfg(feature = "async")]
 pub use async_runtime::enhanced::{
-    ErrorRecovery as AsyncProcessErrorRecovery,
-    RecoveryStrategy as AsyncProcessRecoveryStrategy,
+    ErrorRecovery as AsyncProcessErrorRecovery, RecoveryStrategy as AsyncProcessRecoveryStrategy,
 };
 
 pub use inter_process_communication::{
@@ -113,17 +111,17 @@ pub use inter_process_communication::{
 
 #[cfg(feature = "async")]
 pub use inter_process_communication::enhanced::{
-    EnhancedIpcManager, EnhancedIpcChannel, IpcMetrics,
-    IpcPerformanceMonitor, IpcErrorRecovery, IpcRetryPolicy, IpcRecoveryStrategy
+    EnhancedIpcChannel, EnhancedIpcManager, IpcErrorRecovery, IpcMetrics, IpcPerformanceMonitor,
+    IpcRecoveryStrategy, IpcRetryPolicy,
 };
 
 pub use concurrency::{PrimitiveStats, SyncManager, SyncPrimitiveTrait};
 
 #[cfg(feature = "async")]
 pub use concurrency::enhanced::{
-    EnhancedSyncManager, EnhancedMutex, EnhancedRwLock, EnhancedSemaphore, EnhancedBarrier,
-    EnhancedPrimitiveStats, SyncPerformanceMetrics, DeadlockRisk, DeadlockDetector,
-    SyncPerformanceMonitor, AdaptiveScheduler
+    AdaptiveScheduler, DeadlockDetector, DeadlockRisk, EnhancedBarrier, EnhancedMutex,
+    EnhancedPrimitiveStats, EnhancedRwLock, EnhancedSemaphore, EnhancedSyncManager,
+    SyncPerformanceMetrics, SyncPerformanceMonitor,
 };
 
 pub use pipe::NamedPipe;
@@ -282,45 +280,45 @@ pub mod prelude {
     };
 
     // Rust 1.90 新特性
-    pub use super::archive::rust_190_features::{Rust190Features, AsyncTaskDemo, TaskStatus};
+    pub use super::archive::rust_190_features::{AsyncTaskDemo, Rust190Features, TaskStatus};
 
     // 增强的异步功能
     #[cfg(feature = "async")]
     pub use super::async_runtime::enhanced::{
-        EnhancedAsyncProcessManager, ProcessOutput, ProcessMetrics,
-        PerformanceMonitor, RetryPolicy
+        EnhancedAsyncProcessManager, PerformanceMonitor, ProcessMetrics, ProcessOutput, RetryPolicy,
     };
 
     // 增强的IPC功能
     #[cfg(feature = "async")]
     pub use super::inter_process_communication::enhanced::{
-        EnhancedIpcManager, EnhancedIpcChannel, IpcMetrics,
-        IpcPerformanceMonitor, IpcErrorRecovery, IpcRetryPolicy, IpcRecoveryStrategy
+        EnhancedIpcChannel, EnhancedIpcManager, IpcErrorRecovery, IpcMetrics,
+        IpcPerformanceMonitor, IpcRecoveryStrategy, IpcRetryPolicy,
     };
 
     // 增强的同步原语功能
     #[cfg(feature = "async")]
     pub use super::concurrency::enhanced::{
-        EnhancedSyncManager, EnhancedMutex, EnhancedRwLock, EnhancedSemaphore, EnhancedBarrier,
-        EnhancedPrimitiveStats, SyncPerformanceMetrics, DeadlockRisk, DeadlockDetector,
-        SyncPerformanceMonitor, AdaptiveScheduler
+        AdaptiveScheduler, DeadlockDetector, DeadlockRisk, EnhancedBarrier, EnhancedMutex,
+        EnhancedPrimitiveStats, EnhancedRwLock, EnhancedSemaphore, EnhancedSyncManager,
+        SyncPerformanceMetrics, SyncPerformanceMonitor,
     };
 
     // 增强的错误处理功能
     #[cfg(feature = "async")]
     pub use super::error::enhanced::{
-        EnhancedErrorManager, EnhancedErrorEntry, ErrorType, ErrorSeverity,
-        ErrorClassifier, ErrorChainTracker, ErrorNotifier, ErrorStatistics,
-        RecoveryResult, ErrorClassification, ErrorChain, NotificationChannel, NotificationRule,
-        Notification, ErrorManagerConfig
+        EnhancedErrorEntry, EnhancedErrorManager, ErrorChain, ErrorChainTracker,
+        ErrorClassification, ErrorClassifier, ErrorManagerConfig, ErrorNotifier, ErrorSeverity,
+        ErrorStatistics, ErrorType, Notification, NotificationChannel, NotificationRule,
+        RecoveryResult,
     };
 
     // 增强的性能优化功能
     #[cfg(feature = "async")]
     pub use super::performance::enhanced::{
-        EnhancedPerformanceManager, MemoryMonitor, CpuMonitor, IoMonitor, CacheManager,
-        PerformanceOptimizer, MemorySnapshot, CpuSnapshot, IoSnapshot, IoStats, CacheStats,
-        OptimizationResult, PerformanceReport, PerformanceConfig, ThermalState, EvictionStrategy
+        CacheManager, CacheStats, CpuMonitor, CpuSnapshot, EnhancedPerformanceManager,
+        EvictionStrategy, IoMonitor, IoSnapshot, IoStats, MemoryMonitor, MemorySnapshot,
+        OptimizationResult, PerformanceConfig, PerformanceOptimizer, PerformanceReport,
+        ThermalState,
     };
 }
 

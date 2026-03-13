@@ -107,11 +107,11 @@ impl Device for SmartBulb {
     fn device_id(&self) -> &str {
         &self.id
     }
-    
+
     fn device_type(&self) -> &str {
         "SmartBulb"
     }
-    
+
     fn status(&self) -> DeviceStatus {
         self.status
     }
@@ -126,13 +126,13 @@ impl Controllable for SmartBulb {
         println!("💡 灯泡 {} 已打开", self.id);
         Ok(())
     }
-    
+
     fn turn_off(&mut self) -> Result<(), String> {
         self.is_on = false;
         println!("💡 灯泡 {} 已关闭", self.id);
         Ok(())
     }
-    
+
     fn is_on(&self) -> bool {
         self.is_on
     }
@@ -146,7 +146,7 @@ impl Monitorable for SmartBulb {
             error_count: 0,
         }
     }
-    
+
     fn get_health(&self) -> HealthStatus {
         if self.status == DeviceStatus::Online {
             HealthStatus::Healthy
@@ -160,7 +160,7 @@ impl SmartDevice for SmartBulb {
     fn firmware_version(&self) -> &str {
         &self.firmware
     }
-    
+
     fn update_firmware(&mut self, version: &str) -> Result<(), String> {
         println!("🔄 更新固件: {} -> {}", self.firmware, version);
         self.firmware = version.to_string();
@@ -191,11 +191,11 @@ impl Device for LegacyDeviceAdapter {
     fn device_id(&self) -> &str {
         &self.id
     }
-    
+
     fn device_type(&self) -> &str {
         "LegacyDevice"
     }
-    
+
     fn status(&self) -> DeviceStatus {
         DeviceStatus::Online
     }
@@ -205,11 +205,11 @@ impl Controllable for LegacyDeviceAdapter {
     fn turn_on(&mut self) -> Result<(), String> {
         self.device.turn_on()
     }
-    
+
     fn turn_off(&mut self) -> Result<(), String> {
         self.device.turn_off()
     }
-    
+
     fn is_on(&self) -> bool {
         self.device.is_on()
     }
@@ -224,7 +224,7 @@ impl Monitorable for LegacyDeviceAdapter {
             error_count: 0,
         }
     }
-    
+
     fn get_health(&self) -> HealthStatus {
         HealthStatus::Healthy
     }
@@ -234,7 +234,7 @@ impl SmartDevice for LegacyDeviceAdapter {
     fn firmware_version(&self) -> &str {
         "Legacy"
     }
-    
+
     fn update_firmware(&mut self, _version: &str) -> Result<(), String> {
         Err("旧设备不支持固件更新".to_string())
     }
@@ -257,7 +257,7 @@ pub fn process_controllable(device: &mut dyn Controllable) {
     println!("\n🎮 控制设备:");
     let _ = device.turn_on();
     println!("  开关状态: {}", if device.is_on() { "开" } else { "关" });
-    
+
     // ✅ dyn upcasting: Controllable -> Device
     let base: &dyn Device = device;
     println!("  [上转型] 设备ID: {}", base.device_id());
@@ -270,7 +270,7 @@ pub fn process_monitorable(device: &dyn Monitorable) {
     println!("  运行时间: {} 秒", metrics.uptime_secs);
     println!("  处理请求: {}", metrics.requests_handled);
     println!("  健康状态: {}", device.get_health());
-    
+
     // ✅ dyn upcasting: Monitorable -> Device
     let base: &dyn Device = device;
     println!("  [上转型] 设备类型: {}", base.device_type());
@@ -280,15 +280,15 @@ pub fn process_monitorable(device: &dyn Monitorable) {
 pub fn process_smart_device(device: &mut dyn SmartDevice) {
     println!("\n🤖 智能设备:");
     println!("  固件版本: {}", device.firmware_version());
-    
+
     // ✅ dyn upcasting: SmartDevice -> Controllable
     let controllable: &mut dyn Controllable = device;
     let _ = controllable.turn_on();
-    
+
     // ✅ dyn upcasting: SmartDevice -> Monitorable
     let monitorable: &dyn Monitorable = device;
     println!("  健康状态: {}", monitorable.get_health());
-    
+
     // ✅ dyn upcasting: SmartDevice -> Device
     let base: &dyn Device = device;
     println!("  [上转型] 设备ID: {}", base.device_id());
@@ -308,11 +308,11 @@ impl DeviceManager {
             devices: Vec::new(),
         }
     }
-    
+
     pub fn add_device(&mut self, device: Box<dyn SmartDevice>) {
         self.devices.push(device);
     }
-    
+
     /// 控制所有设备
     pub fn control_all(&mut self, turn_on: bool) {
         println!("\n🎛️  {} 所有设备", if turn_on { "打开" } else { "关闭" });
@@ -324,36 +324,40 @@ impl DeviceManager {
             } else {
                 controllable.turn_off()
             };
-            
+
             match result {
                 Ok(_) => println!("  ✅ {}: 成功", device.device_id()),
                 Err(e) => println!("  ❌ {}: {}", device.device_id(), e),
             }
         }
     }
-    
+
     /// 监控所有设备
     pub fn monitor_all(&self) {
         println!("\n📈 监控所有设备");
         for device in &self.devices {
             // ✅ 上转型到 Monitorable
             let monitorable: &dyn Monitorable = &**device;
-            println!("  {} - 健康: {}", 
-                     device.device_id(), 
-                     monitorable.get_health());
+            println!(
+                "  {} - 健康: {}",
+                device.device_id(),
+                monitorable.get_health()
+            );
         }
     }
-    
+
     /// 列出所有设备
     pub fn list_devices(&self) {
         println!("\n📋 设备列表");
         for device in &self.devices {
             // ✅ 上转型到 Device
             let base: &dyn Device = &**device;
-            println!("  • {} ({}) - {}", 
-                     base.device_id(), 
-                     base.device_type(), 
-                     base.status());
+            println!(
+                "  • {} ({}) - {}",
+                base.device_id(),
+                base.device_type(),
+                base.status()
+            );
         }
     }
 }
@@ -365,72 +369,69 @@ impl DeviceManager {
 fn main() {
     println!("🦀 Rust 1.90 dyn upcasting 适配器模式示例\n");
     println!("{}", "=".repeat(70));
-    
+
     // 示例 1: 单个智能设备
     println!("\n📌 示例 1: 智能灯泡基本操作");
     println!("{}", "-".repeat(70));
-    
+
     let mut bulb = SmartBulb::new("bulb-001");
-    
+
     // 作为 Device 使用
     process_device(&bulb);
-    
+
     // 作为 Controllable 使用（自动上转型）
     process_controllable(&mut bulb);
-    
+
     // 作为 Monitorable 使用（自动上转型）
     process_monitorable(&bulb);
-    
+
     // 作为 SmartDevice 使用
     process_smart_device(&mut bulb);
-    
+
     // 示例 2: 设备管理器
     println!("\n📌 示例 2: 设备管理器");
     println!("{}", "-".repeat(70));
-    
+
     let mut manager = DeviceManager::new();
-    
+
     // 添加多个设备
     manager.add_device(Box::new(SmartBulb::new("bulb-001")));
     manager.add_device(Box::new(SmartBulb::new("bulb-002")));
     manager.add_device(Box::new(SmartBulb::new("bulb-003")));
-    
+
     // 列出设备
     manager.list_devices();
-    
+
     // 控制所有设备
     manager.control_all(true);
-    
+
     // 监控所有设备
     manager.monitor_all();
-    
+
     // 关闭所有设备
     manager.control_all(false);
-    
+
     // 示例 3: 适配器模式
     println!("\n📌 示例 3: 旧设备适配");
     println!("{}", "-".repeat(70));
-    
+
     // 创建一个只实现 Controllable 的设备
     let legacy = SmartBulb::new("legacy-001");
-    
+
     // 使用适配器包装
-    let mut adapter = LegacyDeviceAdapter::new(
-        "adapted-legacy-001",
-        Box::new(legacy)
-    );
-    
+    let mut adapter = LegacyDeviceAdapter::new("adapted-legacy-001", Box::new(legacy));
+
     println!("适配前: 旧设备只支持控制");
     println!("适配后: 可以作为 SmartDevice 使用");
-    
+
     process_smart_device(&mut adapter);
-    
+
     // 尝试更新固件（会失败）
     match adapter.update_firmware("2.0.0") {
         Ok(_) => println!("✅ 固件更新成功"),
         Err(e) => println!("⚠️  {}", e),
     }
-    
+
     // 总结
     println!("\n{}", "=".repeat(70));
     println!("✅ dyn upcasting 的优势:");
@@ -454,55 +455,55 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_smart_bulb() {
         let mut bulb = SmartBulb::new("test-bulb");
-        
+
         // 测试 Device trait
         assert_eq!(bulb.device_id(), "test-bulb");
         assert_eq!(bulb.device_type(), "SmartBulb");
-        
+
         // 测试 Controllable trait
         assert!(!bulb.is_on());
         bulb.turn_on().unwrap();
         assert!(bulb.is_on());
-        
+
         // 测试 Monitorable trait
         let metrics = bulb.get_metrics();
         assert_eq!(metrics.uptime_secs, 0);
-        
+
         // 测试 SmartDevice trait
         assert_eq!(bulb.firmware_version(), "1.0.0");
     }
-    
+
     #[test]
     fn test_upcasting() {
         let mut bulb = SmartBulb::new("test");
-        
+
         // SmartDevice -> Controllable
         let controllable: &mut dyn Controllable = &mut bulb;
         controllable.turn_on().unwrap();
-        
+
         // SmartDevice -> Monitorable
         let monitorable: &dyn Monitorable = &bulb;
         assert!(matches!(monitorable.get_health(), HealthStatus::Healthy));
-        
+
         // SmartDevice -> Device
         let device: &dyn Device = &bulb;
         assert_eq!(device.device_type(), "SmartBulb");
     }
-    
+
     #[test]
     fn test_device_manager() {
         let mut manager = DeviceManager::new();
         manager.add_device(Box::new(SmartBulb::new("b1")));
         manager.add_device(Box::new(SmartBulb::new("b2")));
-        
+
         assert_eq!(manager.devices.len(), 2);
-        
+
         manager.control_all(true);
-        
+
         // 验证所有设备都打开了
         for device in &manager.devices {
             let controllable: &dyn Controllable = &**device;
@@ -510,4 +511,3 @@ mod tests {
         }
     }
 }
-

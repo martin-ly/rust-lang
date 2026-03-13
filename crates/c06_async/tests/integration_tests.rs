@@ -100,7 +100,9 @@ fn test_async_sync_primitives_integration() {
         tokio::spawn(async move {
             let mut value = mutex_clone.lock().await;
             *value += 1;
-        }).await.unwrap();
+        })
+        .await
+        .unwrap();
 
         let value = mutex.lock().await;
         *value

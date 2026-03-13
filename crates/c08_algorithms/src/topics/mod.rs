@@ -7,9 +7,9 @@
 //! - 形式化验证和证明
 //! - 完整的文档和注释
 // 基础算法主题
-pub mod sorting;
-pub mod searching;
 pub mod formal_verification;
+pub mod searching;
+pub mod sorting;
 
 // 其他模块暂时注释，避免编译错误
 // pub mod graph_theory;
@@ -151,8 +151,6 @@ pub struct LibraryStats {
 
 /// 获取算法库统计信息
 pub fn get_library_stats() -> LibraryStats {
-    
-
     // 这里会根据实际实现的算法数量来填充统计信息
     // 暂时返回基础结构
     LibraryStats {
@@ -228,7 +226,10 @@ pub fn search_algorithms(query: &str) -> Vec<AlgorithmInfo> {
         .filter(|algorithm| {
             algorithm.name.to_lowercase().contains(&query_lower)
                 || algorithm.description.to_lowercase().contains(&query_lower)
-                || algorithm.use_cases.iter().any(|case| case.to_lowercase().contains(&query_lower))
+                || algorithm
+                    .use_cases
+                    .iter()
+                    .any(|case| case.to_lowercase().contains(&query_lower))
         })
         .collect()
 }
@@ -291,7 +292,10 @@ impl AlgorithmBenchmark {
         report.push_str("========================\n\n");
 
         for (name, results) in &self.results {
-            let avg_time = results.iter().map(|r| r.execution_time).sum::<std::time::Duration>()
+            let avg_time = results
+                .iter()
+                .map(|r| r.execution_time)
+                .sum::<std::time::Duration>()
                 / results.len() as u32;
             let min_time = results.iter().map(|r| r.execution_time).min().unwrap();
             let max_time = results.iter().map(|r| r.execution_time).max().unwrap();

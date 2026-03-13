@@ -22,6 +22,7 @@ impl FileSystemChannel {
         // 创建通道文件
         let _file = OpenOptions::new()
             .create(true)
+            .truncate(true)
             .write(true)
             .open(&file_path)
             .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?;
@@ -63,7 +64,6 @@ impl IpcChannel for FileSystemChannel {
 
         // 写入通道文件
         let mut file = OpenOptions::new()
-            
             .append(true)
             .open(&file_path)
             .map_err(|e| IpcError::SendFailed(e.to_string()))?;

@@ -16,9 +16,9 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.91.0
 //! - Edition: 2024
+use std::ops::ControlFlow;
 use std::sync::{Arc, Mutex};
 use std::thread;
-use std::ops::ControlFlow;
 
 // ==================== 1. const 上下文增强在多线程配置中的应用 ====================
 
@@ -33,13 +33,13 @@ pub mod const_thread_config {
     impl ThreadConfig {
         // Rust 1.91: const 上下文使用引用
         pub const MAX_THREADS: usize = 8;
-        pub const STACK_SIZE: usize = 2 * 1024 * 1024;  // 2MB
+        pub const STACK_SIZE: usize = 2 * 1024 * 1024; // 2MB
 
-        pub const THREADS_REF: &usize = &Self::MAX_THREADS;  // ✅ Rust 1.91
+        pub const THREADS_REF: &usize = &Self::MAX_THREADS; // ✅ Rust 1.91
         pub const TOTAL_STACK: usize = *Self::THREADS_REF * Self::STACK_SIZE;
 
         pub const TIMEOUT_MS: u64 = 5000;
-        pub const TIMEOUT_REF: &u64 = &Self::TIMEOUT_MS;  // ✅ Rust 1.91
+        pub const TIMEOUT_REF: &u64 = &Self::TIMEOUT_MS; // ✅ Rust 1.91
         pub const TOTAL_TIMEOUT_MS: u64 = *Self::TIMEOUT_REF * 2;
     }
 
@@ -68,10 +68,7 @@ pub mod thread_jit_optimizations {
         // Rust 1.91 优化：并行迭代器链式操作性能提升
         use rayon::prelude::*;
 
-        data.par_iter()
-            .map(|x| x * 2)
-            .filter(|&x| x > 0)
-            .sum()
+        data.par_iter().map(|x| x * 2).filter(|&x| x > 0).sum()
     }
 
     /// 多线程数据处理示例
@@ -133,7 +130,10 @@ pub mod thread_memory_optimizations {
     /// 并发小对象分配示例
     ///
     /// Rust 1.91 优化：并发场景下小对象分配性能提升 25-30%
-    pub fn concurrent_small_object_allocation(thread_count: usize, objects_per_thread: usize) -> Vec<Vec<i32>> {
+    pub fn concurrent_small_object_allocation(
+        thread_count: usize,
+        objects_per_thread: usize,
+    ) -> Vec<Vec<i32>> {
         let results = Arc::new(Mutex::new(Vec::new()));
 
         let handles: Vec<_> = (0..thread_count)
@@ -163,7 +163,10 @@ pub mod thread_memory_optimizations {
     }
 
     /// 并发 HashMap 操作优化示例
-    pub fn concurrent_hashmap_operations(thread_count: usize, operations_per_thread: usize) -> Arc<Mutex<std::collections::HashMap<usize, i32>>> {
+    pub fn concurrent_hashmap_operations(
+        thread_count: usize,
+        operations_per_thread: usize,
+    ) -> Arc<Mutex<std::collections::HashMap<usize, i32>>> {
         let map = Arc::new(Mutex::new(std::collections::HashMap::new()));
 
         let handles: Vec<_> = (0..thread_count)
@@ -193,7 +196,10 @@ pub mod thread_memory_optimizations {
 
         let objects = concurrent_small_object_allocation(4, 100);
         println!("并发创建了 {} 个线程的小对象", objects.len());
-        println!("总对象数: {}", objects.iter().map(|v| v.len()).sum::<usize>());
+        println!(
+            "总对象数: {}",
+            objects.iter().map(|v| v.len()).sum::<usize>()
+        );
 
         let map = concurrent_hashmap_operations(4, 50);
         let map = map.lock().unwrap();
@@ -305,11 +311,7 @@ pub mod comprehensive_thread_examples {
         }
 
         /// Rust 1.91 优化：多线程处理管道性能提升
-        pub fn process<U, R, M, Red>(
-            &self,
-            mapper: M,
-            reducer: Red,
-        ) -> R
+        pub fn process<U, R, M, Red>(&self, mapper: M, reducer: Red) -> R
         where
             T: Send + Sync + Clone + 'static,
             U: Send + Sync + Clone + 'static,
@@ -332,10 +334,8 @@ pub mod comprehensive_thread_examples {
                         let end = (start + chunk_size).min(data.len());
 
                         // Rust 1.91 优化：迭代器链式操作性能提升
-                        let chunk_results: Vec<U> = data[start..end]
-                            .iter()
-                            .map(|item| mapper(item))
-                            .collect();
+                        let chunk_results: Vec<U> =
+                            data[start..end].iter().map(|item| mapper(item)).collect();
 
                         let mut results = results.lock().unwrap();
                         results.push(chunk_results);
@@ -357,10 +357,7 @@ pub mod comprehensive_thread_examples {
         println!("\n=== 多线程综合应用示例 ===");
 
         let pipeline = ThreadPipeline::new(vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4);
-        let result = pipeline.process(
-            |x| x * 2,
-            |items| items.iter().sum::<i32>(),
-        );
+        let result = pipeline.process(|x| x * 2, |items| items.iter().sum::<i32>());
         println!("多线程管道处理结果: {}", result);
     }
 }

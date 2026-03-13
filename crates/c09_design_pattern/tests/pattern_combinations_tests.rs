@@ -144,7 +144,11 @@ fn test_web_server_concurrent_requests() {
         let handle = thread::spawn(move || {
             let request = HttpRequestBuilder::new()
                 .method("GET")
-                .path(if i % 2 == 0 { "/api/users" } else { "/api/posts" })
+                .path(if i % 2 == 0 {
+                    "/api/users"
+                } else {
+                    "/api/posts"
+                })
                 .build()
                 .unwrap();
 
@@ -195,7 +199,10 @@ fn test_circuit_breaker_concurrent_access() {
     // 验证断路器状态
     let state = breaker.get_state();
     // 由于并发，状态可能是 Open 或 HalfOpen
-    assert!(matches!(state, CircuitState::Open | CircuitState::HalfOpen | CircuitState::Closed));
+    assert!(matches!(
+        state,
+        CircuitState::Open | CircuitState::HalfOpen | CircuitState::Closed
+    ));
 }
 
 #[test]

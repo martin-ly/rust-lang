@@ -6,7 +6,7 @@ use std::sync::{Arc, Mutex};
 fn test_ownership_transfer_integration() {
     let data = vec![1, 2, 3, 4, 5];
     let moved_data = data; // 所有权转移
-    
+
     // 验证所有权已转移
     assert_eq!(moved_data.len(), 5);
     // data 不再可用
@@ -16,16 +16,16 @@ fn test_ownership_transfer_integration() {
 #[test]
 fn test_borrowing_integration() {
     let data = vec![1, 2, 3, 4, 5];
-    
+
     // 不可变借用
     let borrowed = &data;
     assert_eq!(borrowed.len(), 5);
-    
+
     // 可变借用
     let mut mutable_data = vec![1, 2, 3];
     let mutable_borrow = &mut mutable_data;
     mutable_borrow.push(4);
-    
+
     assert_eq!(mutable_data.len(), 4);
 }
 
@@ -33,13 +33,13 @@ fn test_borrowing_integration() {
 #[test]
 fn test_scope_integration() {
     let outer = 10;
-    
+
     {
         let inner = 20;
         assert_eq!(inner, 20);
         assert_eq!(outer, 10);
     }
-    
+
     // inner 已超出作用域
     assert_eq!(outer, 10);
 }
@@ -48,19 +48,15 @@ fn test_scope_integration() {
 #[test]
 fn test_lifetime_integration() {
     fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-        if x.len() > y.len() {
-            x
-        } else {
-            y
-        }
+        if x.len() > y.len() { x } else { y }
     }
-    
+
     let string1 = String::from("long string");
     let result = {
         let string2 = String::from("xyz");
         longest(string1.as_str(), string2.as_str()).to_string()
     };
-    
+
     assert_eq!(result, "long string");
 }
 
@@ -69,11 +65,11 @@ fn test_lifetime_integration() {
 fn test_concurrent_ownership_integration() {
     let shared = Arc::new(Mutex::new(0));
     let shared_clone = Arc::clone(&shared);
-    
+
     let mut value = shared_clone.lock().unwrap();
     *value += 1;
     drop(value);
-    
+
     assert_eq!(*shared.lock().unwrap(), 1);
 }
 
@@ -81,10 +77,10 @@ fn test_concurrent_ownership_integration() {
 #[test]
 fn test_smart_pointer_integration() {
     use std::rc::Rc;
-    
+
     let rc1 = Rc::new(5);
     let rc2 = Rc::clone(&rc1);
-    
+
     assert_eq!(Rc::strong_count(&rc1), 2);
     assert_eq!(*rc1, 5);
     assert_eq!(*rc2, 5);

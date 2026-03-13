@@ -87,14 +87,15 @@ impl User {
             }
             "UserStatusChanged" => {
                 if let Some(data) = event.data.as_object()
-                    && let Some(status) = data.get("status").and_then(|v| v.as_str()) {
-                        self.status = match status {
-                            "active" => UserStatus::Active,
-                            "inactive" => UserStatus::Inactive,
-                            "suspended" => UserStatus::Suspended,
-                            _ => UserStatus::Active,
-                        };
-                    }
+                    && let Some(status) = data.get("status").and_then(|v| v.as_str())
+                {
+                    self.status = match status {
+                        "active" => UserStatus::Active,
+                        "inactive" => UserStatus::Inactive,
+                        "suspended" => UserStatus::Suspended,
+                        _ => UserStatus::Active,
+                    };
+                }
                 self.updated_at = event.timestamp;
             }
             _ => {}

@@ -10,7 +10,10 @@ use crate::algorithms::execution_modes::SyncAlgorithm;
 pub struct QuickSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for QuickSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -66,7 +69,10 @@ fn partition(arr: &mut [i32], low: usize, high: usize) -> usize {
 pub struct MergeSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for MergeSort {
-    fn execute(&self, input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -83,7 +89,14 @@ impl SyncSortingAlgorithm for MergeSort {
     }
 
     fn get_complexity(&self) -> AlgorithmComplexity {
-        AlgorithmComplexity::new("O(n log n)", "O(n log n)", "O(n log n)", "O(n)", true, false)
+        AlgorithmComplexity::new(
+            "O(n log n)",
+            "O(n log n)",
+            "O(n log n)",
+            "O(n)",
+            true,
+            false,
+        )
     }
 }
 
@@ -139,7 +152,10 @@ fn merge(arr: &mut [i32], mid: usize) {
 pub struct HeapSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for HeapSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -155,7 +171,14 @@ impl SyncSortingAlgorithm for HeapSort {
     }
 
     fn get_complexity(&self) -> AlgorithmComplexity {
-        AlgorithmComplexity::new("O(n log n)", "O(n log n)", "O(n log n)", "O(1)", false, true)
+        AlgorithmComplexity::new(
+            "O(n log n)",
+            "O(n log n)",
+            "O(n log n)",
+            "O(1)",
+            false,
+            true,
+        )
     }
 }
 
@@ -199,7 +222,10 @@ fn heapify(arr: &mut [i32], n: usize, i: usize) {
 pub struct InsertionSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for InsertionSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -238,7 +264,10 @@ fn insertion_sort(arr: &mut [i32]) {
 pub struct SelectionSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for SelectionSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -279,7 +308,10 @@ fn selection_sort(arr: &mut [i32]) {
 pub struct BubbleSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for BubbleSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -323,7 +355,10 @@ fn bubble_sort(arr: &mut [i32]) {
 pub struct RadixSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for RadixSort {
-    fn execute(&self, input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -386,7 +421,10 @@ fn counting_sort_by_digit(arr: &mut [i32], exp: i32) {
 pub struct CountingSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for CountingSort {
-    fn execute(&self, input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -441,7 +479,10 @@ fn counting_sort(arr: &mut [i32]) {
 pub struct BucketSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for BucketSort {
-    fn execute(&self, input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -503,7 +544,10 @@ fn bucket_sort(arr: &mut [i32]) {
 pub struct TimSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for TimSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }

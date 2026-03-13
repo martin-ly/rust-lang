@@ -24,9 +24,7 @@ pub struct TaskHandle {
 impl AsyncTaskManager {
     /// 创建新的异步任务管理器
     pub fn new() -> Self {
-        Self {
-            tasks: Vec::new(),
-        }
+        Self { tasks: Vec::new() }
     }
 
     /// 注册任务

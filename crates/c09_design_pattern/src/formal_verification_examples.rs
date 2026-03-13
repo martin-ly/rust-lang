@@ -5,6 +5,10 @@
 //! - 不变量验证
 //! - 终止性证明
 //! - 并发安全性证明
+
+// 允许文档注释后空行，因为本模块需要格式化分隔
+#![allow(clippy::empty_line_after_doc_comments)]
+
 use std::marker::PhantomData;
 use std::sync::{Arc, Mutex};
 
@@ -368,7 +372,7 @@ mod tests {
     fn test_singleton_uniqueness() {
         let s1 = Singleton::instance();
         let s2 = Singleton::instance();
-        
+
         // 验证：两个引用指向同一实例
         assert_eq!(s1.data(), s2.data());
         assert_eq!(s1 as *const _, s2 as *const _);
@@ -379,19 +383,19 @@ mod tests {
         struct TestObserver {
             state: i32,
         }
-        
+
         impl Observer for TestObserver {
             fn update(&mut self, state: i32) {
                 self.state = state;
             }
         }
-        
+
         let mut subject = Subject::new();
         let observer = Arc::new(Mutex::new(TestObserver { state: 0 }));
-        
+
         subject.attach(observer.clone());
         subject.set_state(42);
-        
+
         // 验证：观察者状态与Subject一致
         assert_eq!(observer.lock().unwrap().state, 42);
     }
@@ -407,7 +411,7 @@ mod tests {
     fn test_safe_counter_no_race() {
         let counter = SafeCounter::new();
         let mut handles = vec![];
-        
+
         for _ in 0..10 {
             let c = counter.clone();
             handles.push(std::thread::spawn(move || {
@@ -416,11 +420,11 @@ mod tests {
                 }
             }));
         }
-        
+
         for handle in handles {
             handle.join().unwrap();
         }
-        
+
         // 验证：无数据竞争，结果正确
         assert_eq!(counter.get(), 1000);
     }
@@ -483,4 +487,3 @@ mod tests {
 // 2. C.A.R. Hoare, "An Axiomatic Basis for Computer Programming" (1969)
 // 3. Peter O'Hearn, "Separation Logic" (2019)
 // 4. Rust Belt Project: <https://plv.mpi-sws.org/rustbelt/>
-

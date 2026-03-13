@@ -23,8 +23,7 @@ pub struct PerformanceMetrics {
 }
 
 /// 磁盘IO统计
-#[derive(Debug, Clone)]
-#[derive(Default)]
+#[derive(Debug, Clone, Default)]
 pub struct DiskIOStats {
     pub read_bytes: u64,
     pub write_bytes: u64,
@@ -33,8 +32,7 @@ pub struct DiskIOStats {
 }
 
 /// 网络IO统计
-#[derive(Debug, Clone)]
-#[derive(Default)]
+#[derive(Debug, Clone, Default)]
 pub struct NetworkIOStats {
     pub bytes_sent: u64,
     pub bytes_received: u64,
@@ -255,5 +253,3 @@ impl Default for PerformanceMetrics {
         }
     }
 }
-
-

@@ -1,12 +1,12 @@
 //! # 分布式算法执行模式
-//! 
+//!
 //! 本模块实现分布式算法执行，支持跨节点的分布式计算。
 //! 适用于大规模数据处理和需要水平扩展的场景。
 use super::{DistributedAlgorithm, ExecutionResult};
-use std::time::Instant;
-use std::sync::{Arc, Mutex};
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use serde::{Serialize, Deserialize};
+use std::sync::{Arc, Mutex};
+use std::time::Instant;
 
 /// 分布式节点信息
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -117,10 +117,10 @@ impl DistributedExecutor {
         let start = Instant::now();
         let memory_before = get_memory_usage();
         let node_count = nodes.len();
-        
+
         // 将输入数据序列化
         let serialized_input = serde_json::to_value(input)?;
-        
+
         // 创建分布式任务
         let task = DistributedTask {
             id: uuid::Uuid::new_v4().to_string(),
@@ -129,23 +129,23 @@ impl DistributedExecutor {
             timeout: Some(std::time::Duration::from_secs(300)), // 5分钟超时
             retry_count: 0,
         };
-        
+
         // 将任务添加到队列
         {
             let mut task_queue = self.task_queue.lock().unwrap();
             task_queue.push(task.clone());
         }
-        
+
         // 模拟分布式执行
         let result = self.simulate_distributed_execution(task, nodes)?;
-        
+
         // 反序列化结果
         let deserialized_result: R = serde_json::from_value(result)?;
-        
+
         let execution_time = start.elapsed();
         let memory_after = get_memory_usage();
         let memory_usage = memory_after.saturating_sub(memory_before);
-        
+
         Ok(ExecutionResult {
             result: deserialized_result,
             execution_time,
@@ -164,30 +164,33 @@ impl DistributedExecutor {
         // 1. 将任务分发到各个节点
         // 2. 等待节点完成计算
         // 3. 收集结果并合并
-        
+
         // 模拟计算延迟
         std::thread::sleep(std::time::Duration::from_millis(100));
-        
+
         // 模拟结果
         let result = serde_json::json!({
             "task_id": task.id,
             "processed_by": nodes,
             "result": "distributed_computation_completed"
         });
-        
+
         // 存储结果
         {
             let mut results = self.results.lock().unwrap();
             let task_id = task.id.clone();
-            results.insert(task_id.clone(), DistributedTaskResult {
-                task_id,
-                result: result.clone(),
-                execution_time: std::time::Duration::from_millis(100),
-                node_id: nodes.first().unwrap_or(&"unknown".to_string()).clone(),
-                memory_usage: 1024,
-            });
+            results.insert(
+                task_id.clone(),
+                DistributedTaskResult {
+                    task_id,
+                    result: result.clone(),
+                    execution_time: std::time::Duration::from_millis(100),
+                    node_id: nodes.first().unwrap_or(&"unknown".to_string()).clone(),
+                    memory_usage: 1024,
+                },
+            );
         }
-        
+
         Ok(result)
     }
 
@@ -204,12 +207,12 @@ impl DistributedExecutor {
         R: Clone + Serialize + for<'de> Deserialize<'de>,
     {
         let mut results = Vec::with_capacity(inputs.len());
-        
+
         for input in inputs {
             let result = self.execute_distributed(algorithm.clone(), input, nodes.clone())?;
             results.push(result);
         }
-        
+
         Ok(results)
     }
 
@@ -218,12 +221,15 @@ impl DistributedExecutor {
         let task_queue = self.task_queue.lock().unwrap();
         let results = self.results.lock().unwrap();
         let nodes = self.nodes.lock().unwrap();
-        
+
         let total_tasks = task_queue.len() + results.len();
         let completed_tasks = results.len();
         let pending_tasks = task_queue.len();
-        let available_nodes = nodes.values().filter(|n| matches!(n.status, NodeStatus::Available)).count();
-        
+        let available_nodes = nodes
+            .values()
+            .filter(|n| matches!(n.status, NodeStatus::Available))
+            .count();
+
         TaskExecutionStats {
             total_tasks,
             completed_tasks,
@@ -278,7 +284,7 @@ impl DistributedBenchmarker {
         R: Clone + Serialize + for<'de> Deserialize<'de>,
     {
         let executor = DistributedExecutor::new();
-        
+
         // 添加测试节点
         for (i, node_id) in nodes.iter().enumerate() {
             executor.add_node(NodeInfo {
@@ -290,28 +296,28 @@ impl DistributedBenchmarker {
                 status: NodeStatus::Available,
             });
         }
-        
+
         let mut results = Vec::with_capacity(test_cases.len());
-        
+
         for test_case in test_cases {
             let mut execution_times = Vec::new();
             let mut memory_usages = Vec::new();
-            
+
             for _ in 0..test_case.iterations {
                 let result = executor.execute_distributed(
                     algorithm.clone(),
                     test_case.input.clone(),
                     nodes.clone(),
                 )?;
-                
+
                 execution_times.push(result.execution_time);
                 memory_usages.push(result.memory_usage);
             }
-            
+
             let total_time: std::time::Duration = execution_times.iter().sum();
             let avg_time = total_time / test_case.iterations as u32;
             let avg_memory = memory_usages.iter().sum::<usize>() / test_case.iterations;
-            
+
             let stats = DistributedExecutionStats {
                 average_execution_time: avg_time,
                 average_memory_usage: avg_memory,
@@ -320,13 +326,13 @@ impl DistributedBenchmarker {
                 total_iterations: test_case.iterations,
                 node_count: nodes.len(),
             };
-            
+
             results.push(DistributedBenchmarkResult {
                 test_case: test_case.name,
                 stats,
             });
         }
-        
+
         Ok(DistributedBenchmarkResults { results })
     }
 }
@@ -374,15 +380,17 @@ impl DistributedExecutionStats {
         if self.execution_times.is_empty() {
             return std::time::Duration::ZERO;
         }
-        
-        let variance: f64 = self.execution_times
+
+        let variance: f64 = self
+            .execution_times
             .iter()
             .map(|&time| {
                 let diff = time.as_nanos() as f64 - self.average_execution_time.as_nanos() as f64;
                 diff * diff
             })
-            .sum::<f64>() / self.execution_times.len() as f64;
-        
+            .sum::<f64>()
+            / self.execution_times.len() as f64;
+
         let std_dev = variance.sqrt();
         std::time::Duration::from_nanos(std_dev as u64)
     }
@@ -392,8 +400,9 @@ impl DistributedExecutionStats {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
         }
-        
-        self.execution_time_std_dev().as_nanos() as f64 / self.average_execution_time.as_nanos() as f64
+
+        self.execution_time_std_dev().as_nanos() as f64
+            / self.average_execution_time.as_nanos() as f64
     }
 
     /// 计算扩展效率
@@ -401,8 +410,9 @@ impl DistributedExecutionStats {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
         }
-        
-        let speedup = single_node_time.as_nanos() as f64 / self.average_execution_time.as_nanos() as f64;
+
+        let speedup =
+            single_node_time.as_nanos() as f64 / self.average_execution_time.as_nanos() as f64;
         speedup / self.node_count as f64
     }
 }
@@ -429,14 +439,17 @@ impl DistributedBenchmarkResults {
     }
 
     /// 获取最高扩展效率的测试用例
-    pub fn best_scaling_efficiency(&self, single_node_time: std::time::Duration) -> Option<&DistributedBenchmarkResult> {
-        self.results
-            .iter()
-            .max_by(|a, b| {
-                let eff_a = a.stats.scaling_efficiency(single_node_time);
-                let eff_b = b.stats.scaling_efficiency(single_node_time);
-                eff_a.partial_cmp(&eff_b).unwrap_or(std::cmp::Ordering::Equal)
-            })
+    pub fn best_scaling_efficiency(
+        &self,
+        single_node_time: std::time::Duration,
+    ) -> Option<&DistributedBenchmarkResult> {
+        self.results.iter().max_by(|a, b| {
+            let eff_a = a.stats.scaling_efficiency(single_node_time);
+            let eff_b = b.stats.scaling_efficiency(single_node_time);
+            eff_a
+                .partial_cmp(&eff_b)
+                .unwrap_or(std::cmp::Ordering::Equal)
+        })
     }
 
     /// 生成分布式性能报告
@@ -466,10 +479,7 @@ impl DistributedBenchmarkResults {
                 "  扩展效率: {:.2}%\n",
                 result.stats.scaling_efficiency(single_node_time) * 100.0
             ));
-            report.push_str(&format!(
-                "  节点数: {}\n",
-                result.stats.node_count
-            ));
+            report.push_str(&format!("  节点数: {}\n", result.stats.node_count));
             report.push('\n');
         }
 
@@ -517,7 +527,7 @@ impl DistributedLoadBalancer {
     pub fn add_node(&self, node: NodeInfo) {
         let mut nodes = self.nodes.lock().unwrap();
         let mut node_loads = self.node_loads.lock().unwrap();
-        
+
         let node_id = node.id.clone();
         nodes.insert(node_id.clone(), node);
         node_loads.insert(node_id, 0);
@@ -527,7 +537,7 @@ impl DistributedLoadBalancer {
     pub fn select_best_node(&self) -> Option<String> {
         let nodes = self.nodes.lock().unwrap();
         let node_loads = self.node_loads.lock().unwrap();
-        
+
         nodes
             .values()
             .filter(|node| matches!(node.status, NodeStatus::Available))
@@ -544,7 +554,9 @@ impl DistributedLoadBalancer {
     /// 完成任务
     pub fn complete_task(&self, node_id: &str) {
         let mut node_loads = self.node_loads.lock().unwrap();
-        if let Some(load) = node_loads.get_mut(node_id) && *load > 0 {
+        if let Some(load) = node_loads.get_mut(node_id)
+            && *load > 0
+        {
             *load -= 1;
         }
     }

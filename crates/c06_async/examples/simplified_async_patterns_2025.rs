@@ -1,10 +1,10 @@
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use tokio::sync::{RwLock, Mutex};
+use tokio::sync::{Mutex, RwLock};
 use tokio::time::sleep;
-use tracing::{info, warn, error};
-use serde::{Deserialize, Serialize};
+use tracing::{error, info, warn};
 
 /// 2025年简化异步设计模式演示
 /// 展示实用的异步编程模式和最佳实践
@@ -35,9 +35,13 @@ impl AsyncStateMachine {
 
     pub async fn transition(&self, from: AsyncState, to: AsyncState, reason: String) -> Result<()> {
         let current_state = self.state.read().await.clone();
-        
+
         if current_state != from {
-            return Err(anyhow::anyhow!("Invalid transition from {:?} to {:?}", current_state, to));
+            return Err(anyhow::anyhow!(
+                "Invalid transition from {:?} to {:?}",
+                current_state,
+                to
+            ));
         }
 
         // 记录转换
@@ -86,12 +90,12 @@ impl AsyncEventSystem {
     pub async fn publish(&self, event: String) -> Result<()> {
         let subscribers = self.subscribers.read().await;
         let mut history = self.event_history.write().await;
-        
+
         info!("发布事件: {}", event);
-        
+
         // 记录事件历史
         history.push(event.clone());
-        
+
         // 通知所有订阅者
         for subscriber in subscribers.iter() {
             info!("通知订阅者 {}: {}", subscriber, event);
@@ -121,13 +125,13 @@ impl AsyncCommandInvoker {
 
     pub async fn execute_command(&self, command: String) -> Result<()> {
         info!("执行命令: {}", command);
-        
+
         // 模拟命令执行
         sleep(Duration::from_millis(50)).await;
 
         let mut history = self.history.write().await;
         let mut index = self.current_index.write().await;
-        
+
         *index += 1;
         history.truncate(*index as usize);
         history.push(command);
@@ -151,7 +155,7 @@ impl AsyncCommandInvoker {
     pub async fn redo(&self) -> Result<()> {
         let mut index = self.current_index.write().await;
         let history = self.history.read().await;
-        
+
         if (*index + 1) < history.len() as isize {
             *index += 1;
             if let Some(command) = history.get(*index as usize) {
@@ -210,7 +214,7 @@ impl<K: Clone + std::hash::Hash + Eq + Send + Sync, V: Clone + Send + Sync> Asyn
     pub async fn hit_rate(&self) -> f64 {
         let hits = *self.hit_count.read().await;
         let misses = *self.miss_count.read().await;
-        
+
         if hits + misses == 0 {
             0.0
         } else {
@@ -254,10 +258,10 @@ impl AsyncTaskScheduler {
         *self.current_running.write().await += 1;
 
         info!("开始执行任务: {}", task);
-        
+
         // 模拟任务执行
         sleep(Duration::from_millis(100)).await;
-        
+
         info!("任务完成: {}", task);
 
         // 减少运行计数并记录完成的任务
@@ -294,7 +298,7 @@ impl AsyncRetryManager {
         F: FnMut() -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<T>> + Send>>,
     {
         let mut last_error = None;
-        
+
         for attempt in 1..=self.max_attempts {
             match operation().await {
                 Ok(result) => {
@@ -307,7 +311,11 @@ impl AsyncRetryManager {
                     last_error = Some(e);
                     if attempt < self.max_attempts {
                         let delay = self.base_delay * attempt;
-                        warn!("操作失败，第 {} 次尝试，{}ms 后重试", attempt, delay.as_millis());
+                        warn!(
+                            "操作失败，第 {} 次尝试，{}ms 后重试",
+                            attempt,
+                            delay.as_millis()
+                        );
                         sleep(delay).await;
                     }
                 }
@@ -337,10 +345,10 @@ impl AsyncRateLimiter {
     pub async fn allow_request(&self) -> bool {
         let now = Instant::now();
         let mut requests = self.requests.write().await;
-        
+
         // 清理过期的请求记录
         requests.retain(|&time| now.duration_since(time) < self.time_window);
-        
+
         if requests.len() < self.max_requests as usize {
             requests.push(now);
             true
@@ -397,11 +405,11 @@ impl AsyncHealthChecker {
     pub async fn run_health_checks(&self) -> Result<()> {
         let now = Instant::now();
         let mut checks = self.checks.write().await;
-        
+
         for check in checks.iter_mut() {
             // 模拟健康检查
             sleep(Duration::from_millis(10)).await;
-            
+
             // 简单的随机健康状态（用于演示）
             let is_healthy = rand::random::<bool>();
             check.status = if is_healthy {
@@ -410,7 +418,7 @@ impl AsyncHealthChecker {
                 HealthStatus::Unhealthy
             };
             check.last_checked = Some(now);
-            
+
             info!("健康检查 '{}': {:?}", check.name, check.status);
         }
 
@@ -420,12 +428,13 @@ impl AsyncHealthChecker {
 
     pub async fn get_overall_health(&self) -> HealthStatus {
         let checks = self.checks.read().await;
-        
+
         if checks.is_empty() {
             return HealthStatus::Unknown;
         }
 
-        let unhealthy_count = checks.iter()
+        let unhealthy_count = checks
+            .iter()
             .filter(|check| check.status == HealthStatus::Unhealthy)
             .count();
 
@@ -443,9 +452,7 @@ impl AsyncHealthChecker {
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志
-    tracing_subscriber::fmt()
-        .with_env_filter("info")
-        .init();
+    tracing_subscriber::fmt().with_env_filter("info").init();
 
     info!("🚀 开始 2025 年简化异步设计模式演示");
 
@@ -483,20 +490,44 @@ async fn demo_async_state_machine() -> Result<()> {
     let state_machine = AsyncStateMachine::new(AsyncState::Idle);
 
     // 执行状态转换
-    state_machine.transition(AsyncState::Idle, AsyncState::Loading, "开始加载".to_string()).await?;
+    state_machine
+        .transition(
+            AsyncState::Idle,
+            AsyncState::Loading,
+            "开始加载".to_string(),
+        )
+        .await?;
     sleep(Duration::from_millis(100)).await;
-    
-    state_machine.transition(AsyncState::Loading, AsyncState::Ready, "加载完成".to_string()).await?;
+
+    state_machine
+        .transition(
+            AsyncState::Loading,
+            AsyncState::Ready,
+            "加载完成".to_string(),
+        )
+        .await?;
     sleep(Duration::from_millis(50)).await;
-    
-    state_machine.transition(AsyncState::Ready, AsyncState::Processing, "开始处理".to_string()).await?;
+
+    state_machine
+        .transition(
+            AsyncState::Ready,
+            AsyncState::Processing,
+            "开始处理".to_string(),
+        )
+        .await?;
     sleep(Duration::from_millis(100)).await;
-    
-    state_machine.transition(AsyncState::Processing, AsyncState::Completed, "处理完成".to_string()).await?;
+
+    state_machine
+        .transition(
+            AsyncState::Processing,
+            AsyncState::Completed,
+            "处理完成".to_string(),
+        )
+        .await?;
 
     let final_state = state_machine.get_state().await;
     let transitions = state_machine.get_transitions().await;
-    
+
     info!("最终状态: {:?}", final_state);
     info!("状态转换历史: {:?}", transitions);
 
@@ -507,7 +538,7 @@ async fn demo_async_event_system() -> Result<()> {
     info!("👀 演示异步事件系统");
 
     let event_system = AsyncEventSystem::new();
-    
+
     // 添加订阅者
     event_system.subscribe("订阅者1".to_string()).await;
     event_system.subscribe("订阅者2".to_string()).await;
@@ -516,10 +547,10 @@ async fn demo_async_event_system() -> Result<()> {
     // 发布事件
     event_system.publish("事件1".to_string()).await?;
     sleep(Duration::from_millis(50)).await;
-    
+
     event_system.publish("事件2".to_string()).await?;
     sleep(Duration::from_millis(50)).await;
-    
+
     event_system.publish("事件3".to_string()).await?;
 
     info!("总共发布了 {} 个事件", event_system.get_event_count().await);
@@ -586,9 +617,8 @@ async fn demo_async_task_scheduler() -> Result<()> {
     let mut handles = Vec::new();
     for i in 1..=10 {
         let scheduler = scheduler.clone();
-        let handle = tokio::spawn(async move {
-            scheduler.execute_task(format!("任务_{}", i)).await
-        });
+        let handle =
+            tokio::spawn(async move { scheduler.execute_task(format!("任务_{}", i)).await });
         handles.push(handle);
     }
 
@@ -600,7 +630,10 @@ async fn demo_async_task_scheduler() -> Result<()> {
     }
 
     let (pending, running, completed) = scheduler.get_stats().await;
-    info!("任务统计 - 待执行: {}, 运行中: {}, 已完成: {}", pending, running, completed);
+    info!(
+        "任务统计 - 待执行: {}, 运行中: {}, 已完成: {}",
+        pending, running, completed
+    );
 
     Ok(())
 }
@@ -611,17 +644,19 @@ async fn demo_async_retry_mechanism() -> Result<()> {
     let retry_manager = AsyncRetryManager::new(3, Duration::from_millis(100));
 
     let mut attempt_count = 0;
-    let result = retry_manager.execute_with_retry(|| {
-        attempt_count += 1;
-        Box::pin(async move {
-            // 模拟可能失败的操作
-            if attempt_count < 3 {
-                Err(anyhow::anyhow!("模拟失败"))
-            } else {
-                Ok("操作成功".to_string())
-            }
+    let result = retry_manager
+        .execute_with_retry(|| {
+            attempt_count += 1;
+            Box::pin(async move {
+                // 模拟可能失败的操作
+                if attempt_count < 3 {
+                    Err(anyhow::anyhow!("模拟失败"))
+                } else {
+                    Ok("操作成功".to_string())
+                }
+            })
         })
-    }).await?;
+        .await?;
 
     info!("重试结果: {}", result);
 
@@ -685,8 +720,10 @@ mod tests {
     async fn test_async_state_machine() {
         let sm = AsyncStateMachine::new(AsyncState::Idle);
         assert_eq!(sm.get_state().await, AsyncState::Idle);
-        
-        sm.transition(AsyncState::Idle, AsyncState::Loading, "test".to_string()).await.unwrap();
+
+        sm.transition(AsyncState::Idle, AsyncState::Loading, "test".to_string())
+            .await
+            .unwrap();
         assert_eq!(sm.get_state().await, AsyncState::Loading);
     }
 
@@ -694,15 +731,18 @@ mod tests {
     async fn test_async_cache() {
         let cache = AsyncCache::new();
         cache.set("key".to_string(), "value".to_string()).await;
-        
-        assert_eq!(cache.get(&"key".to_string()).await, Some("value".to_string()));
+
+        assert_eq!(
+            cache.get(&"key".to_string()).await,
+            Some("value".to_string())
+        );
         assert_eq!(cache.get(&"nonexistent".to_string()).await, None);
     }
 
     #[tokio::test]
     async fn test_async_rate_limiter() {
         let limiter = AsyncRateLimiter::new(2, Duration::from_millis(100));
-        
+
         assert!(limiter.allow_request().await);
         assert!(limiter.allow_request().await);
         assert!(!limiter.allow_request().await); // 应该被限流

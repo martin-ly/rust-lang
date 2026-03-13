@@ -118,6 +118,7 @@ impl Layer {
 
 /// 多层感知机
 #[derive(Debug, Clone)]
+#[allow(clippy::upper_case_acronyms)]
 pub struct MLP {
     /// 网络层
     layers: Vec<Layer>,

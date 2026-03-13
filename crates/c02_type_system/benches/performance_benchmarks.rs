@@ -1,5 +1,5 @@
 //! 类型系统模块性能基准测试 / Type System Module Performance Benchmarks
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 fn bench_type_conversion(c: &mut Criterion) {
@@ -54,5 +54,11 @@ fn bench_trait_operations(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, bench_type_conversion, bench_type_inference, bench_generic_operations, bench_trait_operations);
+criterion_group!(
+    benches,
+    bench_type_conversion,
+    bench_type_inference,
+    bench_generic_operations,
+    bench_trait_operations
+);
 criterion_main!(benches);

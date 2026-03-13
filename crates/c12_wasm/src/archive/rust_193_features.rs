@@ -15,6 +15,10 @@
 //! - 版本: 1.0
 //! - Rust 版本: 1.93.0
 //! - Edition: 2024
+
+// 允许MSRV不兼容警告，因为本模块专门展示Rust 1.93+特性
+#![allow(clippy::incompatible_msrv)]
+
 use std::collections::VecDeque;
 use std::fmt;
 use std::mem::MaybeUninit;
@@ -62,7 +66,7 @@ impl WasmBuffer193 {
         let slice = &self.buffer[..len];
         // SAFETY: len <= initialized_len，该范围内已初始化；MaybeUninit<u8> 与 u8 布局相同
         // SAFETY: 已由调用者保证
-        unsafe { std::slice::from_raw_parts(slice.as_ptr() as *const u8, len) }
+        unsafe { std::slice::from_raw_parts(slice.as_ptr().cast::<u8>(), len) }
     }
 
     pub fn initialized_len(&self) -> usize {
@@ -85,7 +89,7 @@ pub fn string_to_raw_parts_wasm(s: String) -> (usize, usize, usize) {
 pub fn vec_to_raw_parts_wasm<T>(v: Vec<T>) -> (usize, usize, usize) {
     let (ptr, len, capacity) = v.into_raw_parts();
     let meta = (ptr as usize, len, capacity);
-    let _ = unsafe { Vec::from_raw_parts(ptr as *mut T, len, capacity) };
+    let _ = unsafe { Vec::from_raw_parts(ptr, len, capacity) };
     meta
 }
 

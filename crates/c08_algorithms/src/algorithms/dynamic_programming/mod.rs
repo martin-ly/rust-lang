@@ -1,5 +1,5 @@
 //! # 动态规划算法模块
-//! 
+//!
 //! 本模块实现了各种动态规划算法。
 //use serde::{Serialize, Deserialize};
 
@@ -12,7 +12,7 @@ impl DynamicProgrammingAlgorithms {
         let m = text1.len();
         let n = text2.len();
         let mut dp = vec![vec![0; n + 1]; m + 1];
-        
+
         for i in 1..=m {
             for j in 1..=n {
                 if text1.chars().nth(i - 1) == text2.chars().nth(j - 1) {
@@ -22,7 +22,7 @@ impl DynamicProgrammingAlgorithms {
                 }
             }
         }
-        
+
         dp[m][n]
     }
 
@@ -30,19 +30,18 @@ impl DynamicProgrammingAlgorithms {
     pub fn knapsack_01(weights: &[i32], values: &[i32], capacity: i32) -> i32 {
         let n = weights.len();
         let mut dp = vec![vec![0; (capacity + 1) as usize]; n + 1];
-        
+
         for i in 1..=n {
             for w in 0..=capacity {
                 if weights[i - 1] <= w {
-                    dp[i][w as usize] = dp[i - 1][w as usize].max(
-                        dp[i - 1][(w - weights[i - 1]) as usize] + values[i - 1]
-                    );
+                    dp[i][w as usize] = dp[i - 1][w as usize]
+                        .max(dp[i - 1][(w - weights[i - 1]) as usize] + values[i - 1]);
                 } else {
                     dp[i][w as usize] = dp[i - 1][w as usize];
                 }
             }
         }
-        
+
         dp[n][capacity as usize]
     }
 }

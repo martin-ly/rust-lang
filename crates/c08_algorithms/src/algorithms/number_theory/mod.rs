@@ -1,5 +1,5 @@
 //! # 数论算法模块
-//! 
+//!
 //! 本模块实现了各种数论算法。
 //use serde::{Serialize, Deserialize};
 
@@ -9,11 +9,7 @@ pub struct NumberTheoryAlgorithms;
 impl NumberTheoryAlgorithms {
     /// 最大公约数 (GCD)
     pub fn gcd(a: u64, b: u64) -> u64 {
-        if b == 0 {
-            a
-        } else {
-            Self::gcd(b, a % b)
-        }
+        if b == 0 { a } else { Self::gcd(b, a % b) }
     }
 
     /// 最小公倍数 (LCM)
@@ -26,7 +22,7 @@ impl NumberTheoryAlgorithms {
         let mut result = 1;
         let mut base = base % modulus;
         let mut exp = exponent;
-        
+
         while exp > 0 {
             if exp % 2 == 1 {
                 result = (result * base) % modulus;
@@ -34,7 +30,7 @@ impl NumberTheoryAlgorithms {
             exp >>= 1;
             base = (base * base) % modulus;
         }
-        
+
         result
     }
 
@@ -49,7 +45,7 @@ impl NumberTheoryAlgorithms {
         if n.is_multiple_of(2) {
             return false;
         }
-        
+
         let mut i = 3;
         while i * i <= n {
             if n.is_multiple_of(i) {
@@ -57,7 +53,7 @@ impl NumberTheoryAlgorithms {
             }
             i += 2;
         }
-        
+
         true
     }
 
@@ -66,7 +62,7 @@ impl NumberTheoryAlgorithms {
         let mut is_prime = vec![true; n + 1];
         is_prime[0] = false;
         is_prime[1] = false;
-        
+
         let mut p = 2;
         while p * p <= n {
             if is_prime[p] {
@@ -78,7 +74,7 @@ impl NumberTheoryAlgorithms {
             }
             p += 1;
         }
-        
+
         is_prime
     }
 }

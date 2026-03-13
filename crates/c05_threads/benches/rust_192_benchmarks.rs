@@ -10,16 +10,15 @@
 //! ```bash
 //! cargo bench --bench rust_192_benchmarks
 //! ```
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId, Throughput};
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::num::NonZeroUsize;
 use std::sync::Arc;
 use std::thread;
 
 use c05_threads::rust_192_features::{
-    ThreadPoolTaskQueue, ThreadPoolManager, ThreadResourceAllocator,
-    ThreadTask, calculate_thread_pool_size, ThreadSchedulingConfig,
-    ThreadSafeUninitBuffer,
+    ThreadPoolManager, ThreadPoolTaskQueue, ThreadResourceAllocator, ThreadSafeUninitBuffer,
+    ThreadSchedulingConfig, ThreadTask, calculate_thread_pool_size,
 };
 
 /// 基准测试 rotate_right 在线程池任务队列中的性能
@@ -29,28 +28,24 @@ fn bench_rotate_right_performance(c: &mut Criterion) {
 
     // 测试不同队列大小的轮转性能
     for size in [10, 100, 1000, 10000].iter() {
-        group.bench_with_input(
-            BenchmarkId::new("rotate_queue", size),
-            size,
-            |b, &size| {
-                b.iter(|| {
-                    let mut queue = ThreadPoolTaskQueue::new();
+        group.bench_with_input(BenchmarkId::new("rotate_queue", size), size, |b, &size| {
+            b.iter(|| {
+                let mut queue = ThreadPoolTaskQueue::new();
 
-                    // 填充队列
-                    for i in 0..size {
-                        queue.push(ThreadTask {
-                            id: i as u64,
-                            priority: (i % 256) as u8,
-                        });
-                    }
+                // 填充队列
+                for i in 0..size {
+                    queue.push(ThreadTask {
+                        id: i as u64,
+                        priority: (i % 256) as u8,
+                    });
+                }
 
-                    // 执行轮转
-                    queue.rotate(size / 2);
+                // 执行轮转
+                queue.rotate(size / 2);
 
-                    black_box(&queue);
-                });
-            },
-        );
+                black_box(&queue);
+            });
+        });
     }
 
     group.finish();
@@ -92,12 +87,7 @@ fn bench_resource_allocator_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("resource_allocator_performance");
 
     // 测试不同配置的资源分配器
-    let configs: &[(usize, usize)] = &[
-        (16, 2),
-        (32, 4),
-        (64, 8),
-        (128, 16),
-    ];
+    let configs: &[(usize, usize)] = &[(16, 2), (32, 4), (64, 8), (128, 16)];
 
     for (total, per_thread) in configs {
         let per_thread_nonzero = NonZeroUsize::new(*per_thread).unwrap();

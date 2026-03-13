@@ -1,5 +1,5 @@
 //! 语义模型分析和形式化验证模块
-//! 
+//!
 //! 本模块提供了C10 Networks的完整语义模型分析框架，包括：
 //! - 形式化规范定义
 //! - 模型检查和验证
@@ -144,7 +144,7 @@ pub struct SemanticVerifier {
 pub trait PropertyChecker {
     /// 检查属性
     fn check_property(&self, state: &NetworkState) -> Option<Violation>;
-    
+
     /// 获取支持的属性类型
     fn supported_property_types(&self) -> Vec<PropertyType>;
 }
@@ -154,7 +154,7 @@ pub trait PropertyChecker {
 pub trait ModelChecker {
     /// 检查模型
     fn check_model(&self, model: &SemanticModel) -> NetworkResult<SemanticVerificationResult>;
-    
+
     /// 探索状态空间
     fn explore_state_space(&self, initial_state: NetworkState) -> ExplorationResult;
 }
@@ -331,23 +331,16 @@ pub enum Action {
     /// 无动作
     NoOp,
     /// 变量赋值
-    Assignment {
-        variable: String,
-        value: Value,
-    },
+    Assignment { variable: String, value: Value },
     /// 消息发送
     SendMessage {
         message: Message,
         destination: String,
     },
     /// 消息接收
-    ReceiveMessage {
-        message: Message,
-    },
+    ReceiveMessage { message: Message },
     /// 复合动作
-    Compound {
-        actions: Vec<Action>,
-    },
+    Compound { actions: Vec<Action> },
 }
 
 /// 不变量
@@ -380,10 +373,7 @@ pub enum Predicate {
     /// 假谓词
     False,
     /// 变量谓词
-    Variable {
-        name: String,
-        value: Value,
-    },
+    Variable { name: String, value: Value },
     /// 比较谓词
     Comparison {
         left: Box<Predicate>,
@@ -466,48 +456,48 @@ impl SemanticVerifier {
             config,
         }
     }
-    
+
     /// 添加属性检查器
     pub fn add_property_checker(&mut self, checker: Box<dyn PropertyChecker>) {
         self.property_checkers.push(checker);
     }
-    
+
     /// 设置模型检查器
     pub fn set_model_checker(&mut self, checker: Box<dyn ModelChecker>) {
         self.model_checker = checker;
     }
-    
+
     /// 验证语义模型
     pub fn verify_model(&self, model: &SemanticModel) -> NetworkResult<SemanticVerificationResult> {
         let start_time = std::time::Instant::now();
-        
+
         // 运行模型检查
         let mut result = self.model_checker.check_model(model)?;
-        
+
         // 运行属性检查
         for checker in &self.property_checkers {
             if let Some(violation) = checker.check_property(&model.initial_state) {
                 result.violations.push(violation);
             }
         }
-        
+
         // 更新验证时间
         result.verification_time = start_time.elapsed();
         result.success = result.violations.is_empty();
-        
+
         Ok(result)
     }
-    
+
     /// 验证网络状态
     pub fn verify_state(&self, state: &NetworkState) -> Vec<Violation> {
         let mut violations = Vec::new();
-        
+
         for checker in &self.property_checkers {
             if let Some(violation) = checker.check_property(state) {
                 violations.push(violation);
             }
         }
-        
+
         violations
     }
 }
@@ -525,7 +515,7 @@ impl ModelChecker for DummyModelChecker {
             verification_time: std::time::Duration::from_millis(1),
         })
     }
-    
+
     fn explore_state_space(&self, _initial_state: NetworkState) -> ExplorationResult {
         ExplorationResult {
             states_explored: 1,
@@ -539,14 +529,14 @@ impl ModelChecker for DummyModelChecker {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_semantic_verifier_creation() {
         let config = VerificationConfig::default();
         let verifier = SemanticVerifier::new(config);
         assert!(verifier.property_checkers.is_empty());
     }
-    
+
     #[test]
     fn test_network_state_creation() {
         let state = NetworkState {
@@ -556,12 +546,12 @@ mod tests {
             global_vars: HashMap::new(),
             timestamp: 0,
         };
-        
+
         assert_eq!(state.id, "test_state");
         assert_eq!(state.connections.len(), 0);
         assert_eq!(state.message_queue.len(), 0);
     }
-    
+
     #[test]
     fn test_connection_state_creation() {
         let conn_state = ConnectionState {
@@ -574,7 +564,7 @@ mod tests {
             authenticated: false,
             encrypted: false,
         };
-        
+
         assert_eq!(conn_state.connection_id, "conn_1");
         assert_eq!(conn_state.state, TcpState::Closed);
         assert_eq!(conn_state.authenticated, false);

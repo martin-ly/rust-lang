@@ -20,7 +20,7 @@
 //! └── 使用
 //!     └── 异步调用
 //! ```
-use c09_design_pattern::concurrency::asynchronous::native_async_trait::{run_demo, EchoProcessor};
+use c09_design_pattern::concurrency::asynchronous::native_async_trait::{EchoProcessor, run_demo};
 
 fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {
     use core::pin::Pin;
@@ -28,7 +28,9 @@ fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {
 
     fn dummy_raw_waker() -> RawWaker {
         fn no_op(_: *const ()) {}
-        fn clone(_: *const ()) -> RawWaker { dummy_raw_waker() }
+        fn clone(_: *const ()) -> RawWaker {
+            dummy_raw_waker()
+        }
         static VTABLE: RawWakerVTable = RawWakerVTable::new(clone, no_op, no_op, no_op);
         RawWaker::new(core::ptr::null(), &VTABLE)
     }

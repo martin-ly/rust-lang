@@ -240,11 +240,16 @@ impl Rust191BorrowChecker {
 
         match check_result {
             BorrowCheckResult191::Success => {
-                let borrow_record = BorrowRecord191::new(owner.clone(), borrower.clone(), borrow_type);
+                let borrow_record =
+                    BorrowRecord191::new(owner.clone(), borrower.clone(), borrow_type);
                 let key = format!("{}_{}", owner, borrower);
 
-                self.active_borrows.insert(key.clone(), borrow_record.clone());
-                self.borrow_records.entry(owner).or_default().push(borrow_record.clone());
+                self.active_borrows
+                    .insert(key.clone(), borrow_record.clone());
+                self.borrow_records
+                    .entry(owner)
+                    .or_default()
+                    .push(borrow_record.clone());
 
                 Ok(borrow_record)
             }
@@ -392,7 +397,10 @@ impl ConstContextLifetimeInferencer191 {
             return true;
         }
 
-        param1.constraints.iter().any(|c| param2.constraints.contains(c))
+        param1
+            .constraints
+            .iter()
+            .any(|c| param2.constraints.contains(c))
     }
 }
 
@@ -489,21 +497,25 @@ impl OptimizedMemoryManager191 {
         // Rust 1.91 优化：对于小对象，使用对象池
         // Rust 1.91 optimization: For small objects, use object pool
         let uses_small_pool = size < 32
-            && matches!(allocation_type, AllocationType191::Heap | AllocationType191::SmallPool);
+            && matches!(
+                allocation_type,
+                AllocationType191::Heap | AllocationType191::SmallPool
+            );
 
         if uses_small_pool {
             // 尝试从池中获取 / Try to get from pool
             if let Some(pool) = self.small_object_pool.get_mut(&size)
-                && let Some(reused_id) = pool.pop() {
-                    // 复用已有对象 / Reuse existing object
-                    self.statistics.small_pool_hits += 1;
-                    if let Some(record) = self.allocation_records.get_mut(&reused_id) {
-                        record.freed = false;
-                        record.timestamp = std::time::Instant::now();
-                        record.uses_small_pool = true;
-                        return;
-                    }
+                && let Some(reused_id) = pool.pop()
+            {
+                // 复用已有对象 / Reuse existing object
+                self.statistics.small_pool_hits += 1;
+                if let Some(record) = self.allocation_records.get_mut(&reused_id) {
+                    record.freed = false;
+                    record.timestamp = std::time::Instant::now();
+                    record.uses_small_pool = true;
+                    return;
                 }
+            }
             self.small_object_pool.entry(size).or_default();
             self.statistics.small_object_allocations += 1;
         }
@@ -538,9 +550,10 @@ impl OptimizedMemoryManager191 {
             // Rust 1.91 优化：小对象归还到池中
             // Rust 1.91 optimization: Small objects returned to pool
             if allocation_record.uses_small_pool
-                && let Some(pool) = self.small_object_pool.get_mut(&allocation_record.size) {
-                    pool.push(id.to_string());
-                }
+                && let Some(pool) = self.small_object_pool.get_mut(&allocation_record.size)
+            {
+                pool.push(id.to_string());
+            }
 
             Ok(())
         } else {
@@ -601,11 +614,7 @@ impl OptimizedLifetimeInferencer191 {
 
     /// 推断生命周期（带缓存优化）/ Infer lifetime (with cache optimization)
     /// Rust 1.91: 使用缓存加速生命周期推断
-    pub fn infer_lifetime_cached(
-        &mut self,
-        name: String,
-        scope: String,
-    ) -> LifetimeParam191 {
+    pub fn infer_lifetime_cached(&mut self, name: String, scope: String) -> LifetimeParam191 {
         let start_time = std::time::Instant::now();
         self.statistics.total_inferences += 1;
 
@@ -659,19 +668,29 @@ impl OptimizedLifetimeInferencer191 {
 pub fn run_all_rust_191_features_examples() {
     println!("=== Rust 1.91 特性示例 / Rust 1.91 Features Examples ===");
 
-    println!("\n1. 改进的类型检查器（借用检查器优化）/ Improved Type Checker (Borrow Checker Optimizations)");
+    println!(
+        "\n1. 改进的类型检查器（借用检查器优化）/ Improved Type Checker (Borrow Checker Optimizations)"
+    );
     improved_borrow_checker_example();
 
-    println!("\n2. 增强的 const 上下文（对生命周期的影响）/ Enhanced Const Context (Impact on Lifetimes)");
+    println!(
+        "\n2. 增强的 const 上下文（对生命周期的影响）/ Enhanced Const Context (Impact on Lifetimes)"
+    );
     enhanced_const_context_example();
 
-    println!("\n3. 优化的内存分配器（所有权和内存管理改进）/ Optimized Memory Allocator (Ownership and Memory Management Improvements)");
+    println!(
+        "\n3. 优化的内存分配器（所有权和内存管理改进）/ Optimized Memory Allocator (Ownership and Memory Management Improvements)"
+    );
     optimized_memory_allocator_example();
 
-    println!("\n4. 改进的生命周期推断（编译时优化）/ Improved Lifetime Inference (Compile-time Optimizations)");
+    println!(
+        "\n4. 改进的生命周期推断（编译时优化）/ Improved Lifetime Inference (Compile-time Optimizations)"
+    );
     improved_lifetime_inference_example();
 
-    println!("\n=== 所有 Rust 1.91 特性示例运行完成 / All Rust 1.91 Features Examples Completed ===");
+    println!(
+        "\n=== 所有 Rust 1.91 特性示例运行完成 / All Rust 1.91 Features Examples Completed ==="
+    );
 }
 
 /// 改进的借用检查器示例 / Improved Borrow Checker Example
@@ -697,7 +716,8 @@ fn improved_borrow_checker_example() {
     // 获取统计信息 / Get statistics
     let stats = checker.get_statistics();
     println!("Borrow checker statistics: {:?}", stats);
-    println!("Cache hit rate: {:.2}%",
+    println!(
+        "Cache hit rate: {:.2}%",
         if stats.total_checks > 0 {
             (stats.cache_hits as f64 / stats.total_checks as f64) * 100.0
         } else {
@@ -726,7 +746,10 @@ fn enhanced_const_context_example() {
 
     // 检查生命周期约束 / Check lifetime constraints
     let constraint_result = inferencer.check_lifetime_constraints(&lifetime1, &lifetime2);
-    println!("Lifetime constraint check (const context): {}", constraint_result);
+    println!(
+        "Lifetime constraint check (const context): {}",
+        constraint_result
+    );
 }
 
 /// 优化的内存分配器示例 / Optimized Memory Allocator Example
@@ -754,7 +777,8 @@ fn optimized_memory_allocator_example() {
     // 获取统计信息 / Get statistics
     let stats = manager.get_statistics();
     println!("Memory manager statistics: {:?}", stats);
-    println!("Small pool hit rate: {:.2}%",
+    println!(
+        "Small pool hit rate: {:.2}%",
         if stats.small_object_allocations > 0 {
             (stats.small_pool_hits as f64 / stats.small_object_allocations as f64) * 100.0
         } else {
@@ -778,7 +802,8 @@ fn improved_lifetime_inference_example() {
     // 获取统计信息 / Get statistics
     let stats = inferencer.get_statistics();
     println!("Lifetime inference statistics: {:?}", stats);
-    println!("Cache hit rate: {:.2}%",
+    println!(
+        "Cache hit rate: {:.2}%",
         if stats.total_inferences > 0 {
             (stats.cache_hits as f64 / stats.total_inferences as f64) * 100.0
         } else {

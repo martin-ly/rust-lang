@@ -37,7 +37,8 @@ impl<T> WindowsIterator<T> {
 }
 
 impl<T> LendingIterator for WindowsIterator<T> {
-    type Item<'a> = &'a [T]
+    type Item<'a>
+        = &'a [T]
     where
         T: 'a;
 
@@ -74,7 +75,8 @@ impl<T> VecContainer<T> {
 }
 
 impl<T> Container for VecContainer<T> {
-    type Item<'a> = &'a T
+    type Item<'a>
+        = &'a T
     where
         T: 'a;
 

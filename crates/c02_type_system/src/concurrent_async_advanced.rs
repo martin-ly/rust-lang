@@ -9,18 +9,21 @@
 //! - 并发安全的数据结构
 //! - 异步错误处理
 //! - 性能监控和调优
-use std::collections::{HashMap, VecDeque};
-use std::sync::{Arc, Mutex, RwLock, Condvar};
-use std::sync::atomic::{AtomicUsize, AtomicBool, AtomicPtr, Ordering};
-use std::thread;
-use std::time::{Duration, Instant};
-use tokio::sync::{Mutex as AsyncMutex, RwLock as AsyncRwLock, Semaphore, Barrier as AsyncBarrier};
-use tokio::sync::broadcast;
-use tokio::task::JoinHandle;
-use tokio::time::{sleep, timeout, interval};
-use futures::stream::{Stream, StreamExt, FuturesUnordered};
+
+#![allow(clippy::type_complexity)]
+
 use futures::future::{Future, join_all};
 use futures::pin_mut;
+use futures::stream::{FuturesUnordered, Stream, StreamExt};
+use std::collections::{HashMap, VecDeque};
+use std::sync::atomic::{AtomicBool, AtomicPtr, AtomicUsize, Ordering};
+use std::sync::{Arc, Condvar, Mutex, RwLock};
+use std::thread;
+use std::time::{Duration, Instant};
+use tokio::sync::broadcast;
+use tokio::sync::{Barrier as AsyncBarrier, Mutex as AsyncMutex, RwLock as AsyncRwLock, Semaphore};
+use tokio::task::JoinHandle;
+use tokio::time::{interval, sleep, timeout};
 
 /// 高级异步编程模式
 pub mod async_patterns {
@@ -62,12 +65,17 @@ pub mod async_patterns {
 
             // 验证状态转换的合法性
             match (&old_state, &new_state) {
-                (AsyncState::Idle, AsyncState::Processing) => {},
-                (AsyncState::Processing, AsyncState::Completed) => {},
-                (AsyncState::Processing, AsyncState::Error(_)) => {},
-                (AsyncState::Completed, AsyncState::Idle) => {},
-                (AsyncState::Error(_), AsyncState::Idle) => {},
-                _ => return Err(format!("Invalid state transition: {:?} -> {:?}", old_state, new_state)),
+                (AsyncState::Idle, AsyncState::Processing) => {}
+                (AsyncState::Processing, AsyncState::Completed) => {}
+                (AsyncState::Processing, AsyncState::Error(_)) => {}
+                (AsyncState::Completed, AsyncState::Idle) => {}
+                (AsyncState::Error(_), AsyncState::Idle) => {}
+                _ => {
+                    return Err(format!(
+                        "Invalid state transition: {:?} -> {:?}",
+                        old_state, new_state
+                    ));
+                }
             }
 
             // 广播状态变化
@@ -131,13 +139,18 @@ pub mod async_patterns {
                             return Err(error);
                         }
 
-                        println!("Attempt {} failed: {:?}, retrying in {:?}", attempt, error, delay);
+                        println!(
+                            "Attempt {} failed: {:?}, retrying in {:?}",
+                            attempt, error, delay
+                        );
                         sleep(delay).await;
 
                         // 指数退避
                         delay = std::cmp::min(
-                            Duration::from_millis((delay.as_millis() as f64 * self.backoff_multiplier) as u64),
-                            self.max_delay
+                            Duration::from_millis(
+                                (delay.as_millis() as f64 * self.backoff_multiplier) as u64,
+                            ),
+                            self.max_delay,
                         );
                     }
                 }
@@ -181,20 +194,23 @@ pub mod async_patterns {
         batch_size: usize,
         flush_interval: Duration,
         items: Arc<AsyncMutex<Vec<T>>>,
-        processor: Arc<dyn Fn(Vec<T>) -> std::pin::Pin<Box<dyn Future<Output = Result<(), String>> + Send>> + Send + Sync>,
+        processor: Arc<
+            dyn Fn(Vec<T>) -> std::pin::Pin<Box<dyn Future<Output = Result<(), String>> + Send>>
+                + Send
+                + Sync,
+        >,
     }
 
     impl<T> AsyncBatchProcessor<T>
     where
         T: Send + Sync + 'static,
     {
-        pub fn new<F>(
-            batch_size: usize,
-            flush_interval: Duration,
-            processor: F,
-        ) -> Self
+        pub fn new<F>(batch_size: usize, flush_interval: Duration, processor: F) -> Self
         where
-            F: Fn(Vec<T>) -> std::pin::Pin<Box<dyn Future<Output = Result<(), String>> + Send>> + Send + Sync + 'static,
+            F: Fn(Vec<T>) -> std::pin::Pin<Box<dyn Future<Output = Result<(), String>> + Send>>
+                + Send
+                + Sync
+                + 'static,
         {
             Self {
                 batch_size,
@@ -318,9 +334,7 @@ pub mod concurrent_data_structures {
             let next_head = (current_head + 1) % self.capacity;
             self.head.store(next_head, Ordering::Release);
 
-            unsafe {
-                Some(*Box::from_raw(item_ptr))
-            }
+            unsafe { Some(*Box::from_raw(item_ptr)) }
         }
 
         pub fn len(&self) -> usize {
@@ -342,7 +356,9 @@ pub mod concurrent_data_structures {
     impl<T> Clone for LockFreeRingBuffer<T> {
         fn clone(&self) -> Self {
             Self {
-                buffer: (0..self.capacity).map(|_| AtomicPtr::new(std::ptr::null_mut())).collect(),
+                buffer: (0..self.capacity)
+                    .map(|_| AtomicPtr::new(std::ptr::null_mut()))
+                    .collect(),
                 head: AtomicUsize::new(self.head.load(Ordering::Relaxed)),
                 tail: AtomicUsize::new(self.tail.load(Ordering::Relaxed)),
                 capacity: self.capacity,
@@ -450,9 +466,10 @@ pub mod concurrent_data_structures {
             let stealers = self.stealers.lock().unwrap();
             for stealer in stealers.iter() {
                 if let Ok(mut tasks) = stealer.try_lock()
-                    && let Some(task) = tasks.pop_back() {
-                        return Some(task);
-                    }
+                    && let Some(task) = tasks.pop_back()
+                {
+                    return Some(task);
+                }
             }
             None
         }
@@ -480,7 +497,11 @@ pub mod async_streams {
     pub struct AsyncStreamProcessor<T, R> {
         buffer_size: usize,
         concurrency: usize,
-        processor: Arc<dyn Fn(T) -> std::pin::Pin<Box<dyn Future<Output = Result<R, String>> + Send>> + Send + Sync>,
+        processor: Arc<
+            dyn Fn(T) -> std::pin::Pin<Box<dyn Future<Output = Result<R, String>> + Send>>
+                + Send
+                + Sync,
+        >,
     }
 
     impl<T, R> AsyncStreamProcessor<T, R>
@@ -488,13 +509,12 @@ pub mod async_streams {
         T: Send + Sync + 'static,
         R: Send + Sync + 'static,
     {
-        pub fn new<F>(
-            buffer_size: usize,
-            concurrency: usize,
-            processor: F,
-        ) -> Self
+        pub fn new<F>(buffer_size: usize, concurrency: usize, processor: F) -> Self
         where
-            F: Fn(T) -> std::pin::Pin<Box<dyn Future<Output = Result<R, String>> + Send>> + Send + Sync + 'static,
+            F: Fn(T) -> std::pin::Pin<Box<dyn Future<Output = Result<R, String>> + Send>>
+                + Send
+                + Sync
+                + 'static,
         {
             Self {
                 buffer_size,
@@ -524,9 +544,10 @@ pub mod async_streams {
 
                 // 限制并发数量
                 if futures.len() >= self.buffer_size
-                    && let Some(result) = futures.next().await {
-                        results.push(result?);
-                    }
+                    && let Some(result) = futures.next().await
+                {
+                    results.push(result?);
+                }
             }
 
             // 处理剩余的未来
@@ -540,7 +561,13 @@ pub mod async_streams {
 
     /// 异步管道
     pub struct AsyncPipeline<T> {
-        stages: Vec<Arc<dyn Fn(T) -> std::pin::Pin<Box<dyn Future<Output = Result<T, String>> + Send>> + Send + Sync>>,
+        stages: Vec<
+            Arc<
+                dyn Fn(T) -> std::pin::Pin<Box<dyn Future<Output = Result<T, String>> + Send>>
+                    + Send
+                    + Sync,
+            >,
+        >,
     }
 
     impl<T> AsyncPipeline<T>
@@ -557,9 +584,7 @@ pub mod async_streams {
         T: Send + Sync + 'static,
     {
         fn default() -> Self {
-            Self {
-                stages: Vec::new(),
-            }
+            Self { stages: Vec::new() }
         }
     }
 
@@ -567,10 +592,12 @@ pub mod async_streams {
     where
         T: Send + Sync + 'static,
     {
-
         pub fn add_stage<F>(&mut self, stage: F)
         where
-            F: Fn(T) -> std::pin::Pin<Box<dyn Future<Output = Result<T, String>> + Send>> + Send + Sync + 'static,
+            F: Fn(T) -> std::pin::Pin<Box<dyn Future<Output = Result<T, String>> + Send>>
+                + Send
+                + Sync
+                + 'static,
         {
             self.stages.push(Arc::new(stage));
         }
@@ -590,7 +617,11 @@ pub mod async_streams {
     pub struct AsyncWindowAggregator<T, R> {
         window_size: Duration,
         windows: Arc<AsyncMutex<HashMap<u64, Vec<T>>>>,
-        aggregator: Arc<dyn Fn(Vec<T>) -> std::pin::Pin<Box<dyn Future<Output = Result<R, String>> + Send>> + Send + Sync>,
+        aggregator: Arc<
+            dyn Fn(Vec<T>) -> std::pin::Pin<Box<dyn Future<Output = Result<R, String>> + Send>>
+                + Send
+                + Sync,
+        >,
     }
 
     impl<T, R> AsyncWindowAggregator<T, R>
@@ -598,12 +629,12 @@ pub mod async_streams {
         T: Send + Sync + 'static,
         R: Send + Sync + 'static,
     {
-        pub fn new<F>(
-            window_size: Duration,
-            aggregator: F,
-        ) -> Self
+        pub fn new<F>(window_size: Duration, aggregator: F) -> Self
         where
-            F: Fn(Vec<T>) -> std::pin::Pin<Box<dyn Future<Output = Result<R, String>> + Send>> + Send + Sync + 'static,
+            F: Fn(Vec<T>) -> std::pin::Pin<Box<dyn Future<Output = Result<R, String>> + Send>>
+                + Send
+                + Sync
+                + 'static,
         {
             Self {
                 window_size,
@@ -644,7 +675,8 @@ pub mod async_streams {
                     interval.tick().await;
 
                     let now = Instant::now();
-                    let current_window = (now.elapsed().as_millis() / window_size.as_millis()) as u64;
+                    let current_window =
+                        (now.elapsed().as_millis() / window_size.as_millis()) as u64;
                     let old_window = current_window - 1;
 
                     let mut windows_guard = windows.lock().await;
@@ -668,21 +700,24 @@ pub mod work_stealing_scheduler {
     /// 工作窃取调度器
     pub struct WorkStealingScheduler {
         workers: Vec<Arc<Worker>>,
-        global_queue: Arc<super::concurrent_data_structures::WorkStealingQueue<Box<dyn Fn() + Send + Sync>>>,
+        global_queue:
+            Arc<super::concurrent_data_structures::WorkStealingQueue<Box<dyn Fn() + Send + Sync>>>,
         shutdown: Arc<AtomicBool>,
     }
 
     struct Worker {
         id: usize,
         local_queue: Arc<Mutex<VecDeque<Box<dyn Fn() + Send + Sync>>>>,
-        global_queue: Arc<super::concurrent_data_structures::WorkStealingQueue<Box<dyn Fn() + Send + Sync>>>,
+        global_queue:
+            Arc<super::concurrent_data_structures::WorkStealingQueue<Box<dyn Fn() + Send + Sync>>>,
         other_workers: Vec<Arc<Mutex<VecDeque<Box<dyn Fn() + Send + Sync>>>>>,
         shutdown: Arc<AtomicBool>,
     }
 
     impl WorkStealingScheduler {
         pub fn new(worker_count: usize) -> Self {
-            let global_queue = Arc::new(super::concurrent_data_structures::WorkStealingQueue::new());
+            let global_queue =
+                Arc::new(super::concurrent_data_structures::WorkStealingQueue::new());
             let shutdown = Arc::new(AtomicBool::new(false));
             let mut workers = Vec::new();
             let mut worker_queues = Vec::new();
@@ -763,9 +798,10 @@ pub mod work_stealing_scheduler {
             for (i, other_queue) in self.other_workers.iter().enumerate() {
                 if i != self.id
                     && let Ok(mut queue) = other_queue.try_lock()
-                        && let Some(task) = queue.pop_back() {
-                            return Some(task);
-                        }
+                    && let Some(task) = queue.pop_back()
+                {
+                    return Some(task);
+                }
             }
             None
         }
@@ -1067,7 +1103,14 @@ pub mod async_error_handling {
     pub struct AsyncErrorRecovery<T> {
         max_retries: usize,
         retry_delay: Duration,
-        recovery_strategies: HashMap<String, Box<dyn Fn(&str) -> std::pin::Pin<Box<dyn Future<Output = Result<T, String>> + Send>> + Send + Sync>>,
+        recovery_strategies: HashMap<
+            String,
+            Box<
+                dyn Fn(&str) -> std::pin::Pin<Box<dyn Future<Output = Result<T, String>> + Send>>
+                    + Send
+                    + Sync,
+            >,
+        >,
     }
 
     impl<T> AsyncErrorRecovery<T> {
@@ -1081,9 +1124,13 @@ pub mod async_error_handling {
 
         pub fn add_recovery_strategy<F>(&mut self, error_type: String, strategy: F)
         where
-            F: Fn(&str) -> std::pin::Pin<Box<dyn Future<Output = Result<T, String>> + Send>> + Send + Sync + 'static,
+            F: Fn(&str) -> std::pin::Pin<Box<dyn Future<Output = Result<T, String>> + Send>>
+                + Send
+                + Sync
+                + 'static,
         {
-            self.recovery_strategies.insert(error_type, Box::new(strategy));
+            self.recovery_strategies
+                .insert(error_type, Box::new(strategy));
         }
 
         pub async fn execute_with_recovery<F>(&self, operation: F) -> Result<T, String>
@@ -1116,7 +1163,10 @@ pub mod async_error_handling {
                 }
             }
 
-            Err(format!("Operation failed after {} retries: {}", self.max_retries, last_error))
+            Err(format!(
+                "Operation failed after {} retries: {}",
+                self.max_retries, last_error
+            ))
         }
     }
 
@@ -1238,7 +1288,10 @@ pub mod performance_monitoring {
             let duration = start_time.elapsed();
 
             let mut task_times = self.task_times.lock().await;
-            task_times.entry(task_name).or_insert_with(Vec::new).push(duration);
+            task_times
+                .entry(task_name)
+                .or_insert_with(Vec::new)
+                .push(duration);
 
             result
         }
@@ -1322,25 +1375,33 @@ pub async fn demonstrate_concurrent_async_advanced() {
         }
     });
 
-    state_machine.transition_to(async_patterns::AsyncState::Processing).await.unwrap();
+    state_machine
+        .transition_to(async_patterns::AsyncState::Processing)
+        .await
+        .unwrap();
     sleep(Duration::from_millis(100)).await;
-    state_machine.transition_to(async_patterns::AsyncState::Completed).await.unwrap();
+    state_machine
+        .transition_to(async_patterns::AsyncState::Completed)
+        .await
+        .unwrap();
 
     // 2. 异步重试机制演示
     println!("\n=== 异步重试机制演示 ===");
     let retry = async_patterns::AsyncRetry::new(3, Duration::from_millis(100));
 
     let mut attempt_count = 0;
-    let result = retry.execute(|| {
-        attempt_count += 1;
-        Box::pin(async move {
-            if attempt_count < 3 {
-                Err(format!("Attempt {} failed", attempt_count))
-            } else {
-                Ok("Success!".to_string())
-            }
+    let result = retry
+        .execute(|| {
+            attempt_count += 1;
+            Box::pin(async move {
+                if attempt_count < 3 {
+                    Err(format!("Attempt {} failed", attempt_count))
+                } else {
+                    Ok("Success!".to_string())
+                }
+            })
         })
-    }).await;
+        .await;
 
     println!("重试结果: {:?}", result);
 
@@ -1349,28 +1410,26 @@ pub async fn demonstrate_concurrent_async_advanced() {
     let concurrent_map = concurrent_data_structures::ConcurrentHashMap::new(4);
 
     // 并发插入
-    let handles: Vec<_> = (0..10).map(|i| {
-        let map = concurrent_map.clone();
-        tokio::spawn(async move {
-            map.insert(format!("key_{}", i), format!("value_{}", i));
+    let handles: Vec<_> = (0..10)
+        .map(|i| {
+            let map = concurrent_map.clone();
+            tokio::spawn(async move {
+                map.insert(format!("key_{}", i), format!("value_{}", i));
+            })
         })
-    }).collect();
+        .collect();
 
     join_all(handles).await;
     println!("并发哈希表大小: {}", concurrent_map.len());
 
     // 4. 异步流处理演示
     println!("\n=== 异步流处理演示 ===");
-    let stream_processor = async_streams::AsyncStreamProcessor::new(
-        10,
-        3,
-        |item: i32| {
-            Box::pin(async move {
-                sleep(Duration::from_millis(50)).await;
-                Ok(item * 2)
-            })
-        }
-    );
+    let stream_processor = async_streams::AsyncStreamProcessor::new(10, 3, |item: i32| {
+        Box::pin(async move {
+            sleep(Duration::from_millis(50)).await;
+            Ok(item * 2)
+        })
+    });
 
     let stream = futures::stream::iter(0..10);
     let results = stream_processor.process_stream(stream).await.unwrap();
@@ -1398,10 +1457,12 @@ pub async fn demonstrate_concurrent_async_advanced() {
 
     for i in 0..5 {
         let profiler = profiler.clone();
-        profiler.profile_task(format!("task_{}", i), async {
-            sleep(Duration::from_millis(100 + i * 10)).await;
-            format!("Task {} completed", i)
-        }).await;
+        profiler
+            .profile_task(format!("task_{}", i), async {
+                sleep(Duration::from_millis(100 + i * 10)).await;
+                format!("Task {} completed", i)
+            })
+            .await;
     }
 
     let stats = profiler.get_all_task_stats().await;

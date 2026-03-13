@@ -13,7 +13,9 @@ trait Greeter {
 struct SimpleGreeter(String);
 
 impl Greeter for SimpleGreeter {
-    fn greet(&self) -> String { format!("Hello, {}", self.0) }
+    fn greet(&self) -> String {
+        format!("Hello, {}", self.0)
+    }
     fn clone_box(&self) -> Box<dyn Greeter>
     where
         Self: Sized,
@@ -30,5 +32,3 @@ fn main() {
     let s = SimpleGreeter(String::from("World"));
     let _boxed = s.clone_box();
 }
-
-

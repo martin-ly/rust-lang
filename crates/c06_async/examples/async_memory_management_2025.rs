@@ -1,12 +1,12 @@
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use std::sync::Arc;
+use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
 use std::time::{Duration, Instant};
 use tokio::sync::{RwLock, Semaphore};
 use tokio::time::sleep;
-use tracing::{info, warn, debug};
-use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
-use std::sync::atomic::{AtomicUsize, AtomicU64, Ordering};
+use tracing::{debug, info, warn};
 
 /// 2025年异步内存管理优化演示
 /// 展示最新的异步内存管理技术和最佳实践
@@ -71,7 +71,7 @@ impl AsyncMemoryPool {
             stats: Arc::new(RwLock::new(MemoryPoolStats::default())),
             semaphore,
         };
-        
+
         // 初始化内存池
         tokio::spawn({
             let pool = pool.clone();
@@ -79,14 +79,14 @@ impl AsyncMemoryPool {
                 pool.initialize_pool().await;
             }
         });
-        
+
         pool
     }
 
     async fn initialize_pool(&self) {
         let mut chunks = self.chunks.write().await;
         let mut available = self.available_chunks.write().await;
-        
+
         for i in 0..(self.config.initial_size / self.config.chunk_size) {
             let chunk = MemoryChunk {
                 id: i,
@@ -95,20 +95,20 @@ impl AsyncMemoryPool {
                 allocated_at: Instant::now(),
                 last_accessed: Instant::now(),
             };
-            
+
             chunks.push(chunk);
             available.push(i);
         }
-        
+
         info!("内存池初始化完成，创建了 {} 个块", available.len());
     }
 
     pub async fn allocate(&self, size: usize) -> Result<usize> {
         let _permit = self.semaphore.acquire().await.unwrap();
-        
+
         let mut stats = self.stats.write().await;
         stats.allocation_requests += 1;
-        
+
         // 尝试从可用块中分配
         let mut available = self.available_chunks.write().await;
         if let Some(chunk_id) = available.pop() {
@@ -116,16 +116,16 @@ impl AsyncMemoryPool {
             allocated.insert(chunk_id, size);
             stats.cache_hits += 1;
             stats.total_allocations += 1;
-            
+
             let mut chunks = self.chunks.write().await;
             if let Some(chunk) = chunks.get_mut(chunk_id) {
                 chunk.last_accessed = Instant::now();
             }
-            
+
             info!("从内存池分配块 {}，大小: {} 字节", chunk_id, size);
             return Ok(chunk_id);
         }
-        
+
         // 需要创建新块
         stats.cache_misses += 1;
         self.create_new_chunk(size).await
@@ -134,11 +134,11 @@ impl AsyncMemoryPool {
     async fn create_new_chunk(&self, size: usize) -> Result<usize> {
         let mut chunks = self.chunks.write().await;
         let chunk_id = chunks.len();
-        
+
         if chunk_id >= self.config.max_size / self.config.chunk_size {
             return Err(anyhow::anyhow!("内存池已达到最大大小限制"));
         }
-        
+
         let chunk = MemoryChunk {
             id: chunk_id,
             size: self.config.chunk_size,
@@ -146,19 +146,19 @@ impl AsyncMemoryPool {
             allocated_at: Instant::now(),
             last_accessed: Instant::now(),
         };
-        
+
         chunks.push(chunk);
-        
+
         let mut allocated = self.allocated_chunks.write().await;
         allocated.insert(chunk_id, size);
-        
+
         let mut stats = self.stats.write().await;
         stats.total_allocations += 1;
         stats.current_memory_usage += self.config.chunk_size;
         if stats.current_memory_usage > stats.peak_memory_usage {
             stats.peak_memory_usage = stats.current_memory_usage;
         }
-        
+
         info!("创建新内存块 {}，大小: {} 字节", chunk_id, size);
         Ok(chunk_id)
     }
@@ -168,11 +168,13 @@ impl AsyncMemoryPool {
         if allocated.remove(&chunk_id).is_some() {
             let mut available = self.available_chunks.write().await;
             available.push(chunk_id);
-            
+
             let mut stats = self.stats.write().await;
             stats.total_deallocations += 1;
-            stats.current_memory_usage = stats.current_memory_usage.saturating_sub(self.config.chunk_size);
-            
+            stats.current_memory_usage = stats
+                .current_memory_usage
+                .saturating_sub(self.config.chunk_size);
+
             info!("释放内存块 {}", chunk_id);
             Ok(())
         } else {
@@ -188,18 +190,20 @@ impl AsyncMemoryPool {
         let chunks = self.chunks.write().await;
         let mut available = self.available_chunks.write().await;
         let mut stats = self.stats.write().await;
-        
+
         let now = Instant::now();
         let mut removed_count = 0;
-        
+
         // 移除长时间未使用的块
         let current_len = available.len();
         available.retain(|&chunk_id| {
             if let Some(chunk) = chunks.get(chunk_id) {
                 let age = now.duration_since(chunk.last_accessed);
-                if age > max_age && current_len > self.config.initial_size / self.config.chunk_size {
+                if age > max_age && current_len > self.config.initial_size / self.config.chunk_size
+                {
                     removed_count += 1;
-                    stats.current_memory_usage = stats.current_memory_usage.saturating_sub(chunk.size);
+                    stats.current_memory_usage =
+                        stats.current_memory_usage.saturating_sub(chunk.size);
                     false
                 } else {
                     true
@@ -208,7 +212,7 @@ impl AsyncMemoryPool {
                 false
             }
         });
-        
+
         if removed_count > 0 {
             info!("清理了 {} 个未使用的内存块", removed_count);
         }
@@ -262,13 +266,13 @@ impl AsyncGarbageCollector {
             gc_stats: Arc::new(RwLock::new(GCStats::default())),
             gc_interval,
         };
-        
+
         // 启动垃圾回收任务
         let gc_clone = gc.clone();
         tokio::spawn(async move {
             gc_clone.gc_loop().await;
         });
-        
+
         gc
     }
 
@@ -280,13 +284,13 @@ impl AsyncGarbageCollector {
             last_accessed: Instant::now(),
             references: Vec::new(),
         };
-        
+
         self.objects.write().await.insert(id, object);
         self.reference_counts.write().await.insert(id, 1);
-        
+
         let mut stats = self.gc_stats.write().await;
         stats.total_objects += 1;
-        
+
         info!("创建对象 {}，大小: {} 字节", id, size);
         Ok(())
     }
@@ -297,10 +301,10 @@ impl AsyncGarbageCollector {
             from_obj.references.push(to_id);
             from_obj.last_accessed = Instant::now();
         }
-        
+
         let mut ref_counts = self.reference_counts.write().await;
         *ref_counts.entry(to_id).or_insert(0) += 1;
-        
+
         debug!("对象 {} 引用对象 {}", from_id, to_id);
         Ok(())
     }
@@ -311,12 +315,12 @@ impl AsyncGarbageCollector {
             from_obj.references.retain(|&id| id != to_id);
             from_obj.last_accessed = Instant::now();
         }
-        
+
         let mut ref_counts = self.reference_counts.write().await;
         if let Some(count) = ref_counts.get_mut(&to_id) {
             *count = count.saturating_sub(1);
         }
-        
+
         debug!("对象 {} 取消引用对象 {}", from_id, to_id);
         Ok(())
     }
@@ -331,28 +335,28 @@ impl AsyncGarbageCollector {
 
     pub async fn collect_garbage(&self) -> Result<()> {
         let start_time = Instant::now();
-        
+
         let mut stats = self.gc_stats.write().await;
         stats.gc_cycles += 1;
-        
+
         // 标记阶段：标记所有可达对象
         let mut reachable = std::collections::HashSet::new();
         let objects = self.objects.read().await;
         let ref_counts = self.reference_counts.read().await;
-        
+
         // 从根对象开始标记
         for (id, count) in ref_counts.iter() {
             if *count > 0 {
                 self.mark_reachable(*id, &objects, &mut reachable);
             }
         }
-        
+
         // 清理阶段：删除不可达对象
         let mut objects_write = self.objects.write().await;
         let mut ref_counts_write = self.reference_counts.write().await;
         let mut collected_count = 0;
         let mut memory_freed = 0;
-        
+
         objects_write.retain(|id, object| {
             if reachable.contains(id) {
                 true
@@ -363,25 +367,33 @@ impl AsyncGarbageCollector {
                 false
             }
         });
-        
+
         stats.collected_objects += collected_count;
         stats.memory_freed += memory_freed;
         stats.total_gc_time += start_time.elapsed();
-        
+
         if collected_count > 0 {
-            info!("垃圾回收完成，回收了 {} 个对象，释放内存: {} 字节", collected_count, memory_freed);
+            info!(
+                "垃圾回收完成，回收了 {} 个对象，释放内存: {} 字节",
+                collected_count, memory_freed
+            );
         }
-        
+
         Ok(())
     }
 
-    fn mark_reachable(&self, object_id: usize, objects: &HashMap<usize, GarbageCollectable>, reachable: &mut std::collections::HashSet<usize>) {
+    fn mark_reachable(
+        &self,
+        object_id: usize,
+        objects: &HashMap<usize, GarbageCollectable>,
+        reachable: &mut std::collections::HashSet<usize>,
+    ) {
         if reachable.contains(&object_id) {
             return;
         }
-        
+
         reachable.insert(object_id);
-        
+
         if let Some(object) = objects.get(&object_id) {
             for &ref_id in &object.references {
                 self.mark_reachable(ref_id, objects, reachable);
@@ -425,20 +437,20 @@ impl AsyncMemoryMonitor {
             monitor_interval,
             alert_threshold,
         };
-        
+
         // 启动监控任务
         let monitor_clone = monitor.clone();
         tokio::spawn(async move {
             monitor_clone.monitor_loop().await;
         });
-        
+
         monitor
     }
 
     pub fn record_allocation(&self, size: usize) {
         self.memory_usage.fetch_add(size as u64, Ordering::Relaxed);
         self.allocation_count.fetch_add(1, Ordering::Relaxed);
-        
+
         let current = self.memory_usage.load(Ordering::Relaxed);
         let peak = self.peak_memory.load(Ordering::Relaxed);
         if current > peak {
@@ -462,16 +474,23 @@ impl AsyncMemoryMonitor {
     async fn check_memory_usage(&self) {
         let current_usage = self.memory_usage.load(Ordering::Relaxed);
         let peak_usage = self.peak_memory.load(Ordering::Relaxed);
-        
+
         if peak_usage > 0 {
             let usage_ratio = current_usage as f64 / peak_usage as f64;
             if usage_ratio > self.alert_threshold {
-                warn!("内存使用率过高: {:.2}% ({}/{} 字节)", 
-                      usage_ratio * 100.0, current_usage, peak_usage);
+                warn!(
+                    "内存使用率过高: {:.2}% ({}/{} 字节)",
+                    usage_ratio * 100.0,
+                    current_usage,
+                    peak_usage
+                );
             }
         }
-        
-        debug!("内存监控 - 当前: {} 字节, 峰值: {} 字节", current_usage, peak_usage);
+
+        debug!(
+            "内存监控 - 当前: {} 字节, 峰值: {} 字节",
+            current_usage, peak_usage
+        );
     }
 
     pub fn get_stats(&self) -> MemoryMonitorStats {
@@ -542,7 +561,7 @@ impl AsyncMemoryOptimizer {
         let memory_pool = AsyncMemoryPool::new(pool_config);
         let garbage_collector = AsyncGarbageCollector::new(config.gc_interval);
         let memory_monitor = AsyncMemoryMonitor::new(config.monitor_interval, 0.8);
-        
+
         Self {
             memory_pool,
             garbage_collector,
@@ -553,13 +572,15 @@ impl AsyncMemoryOptimizer {
 
     pub async fn optimize_memory_usage(&self) -> Result<()> {
         if self.optimization_config.enable_pooling {
-            self.memory_pool.cleanup_unused_chunks(Duration::from_secs(300)).await;
+            self.memory_pool
+                .cleanup_unused_chunks(Duration::from_secs(300))
+                .await;
         }
-        
+
         if self.optimization_config.enable_gc {
             self.garbage_collector.collect_garbage().await?;
         }
-        
+
         Ok(())
     }
 
@@ -567,7 +588,7 @@ impl AsyncMemoryOptimizer {
         let pool_stats = self.memory_pool.get_stats().await;
         let gc_stats = self.garbage_collector.get_stats().await;
         let monitor_stats = self.memory_monitor.get_stats();
-        
+
         ComprehensiveMemoryStats {
             pool_stats,
             gc_stats,
@@ -586,7 +607,7 @@ pub struct ComprehensiveMemoryStats {
 #[tokio::main]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
-    
+
     info!("🚀 开始 2025 年异步内存管理优化演示");
 
     // 1. 演示异步内存池
@@ -597,12 +618,12 @@ async fn main() -> Result<()> {
         chunk_size: 128,
         growth_factor: 1.5,
     };
-    
+
     let memory_pool = AsyncMemoryPool::new(pool_config);
-    
+
     // 等待初始化完成
     sleep(Duration::from_millis(100)).await;
-    
+
     // 分配一些内存块
     let mut allocated_chunks = Vec::new();
     for i in 0..10 {
@@ -610,50 +631,62 @@ async fn main() -> Result<()> {
         allocated_chunks.push(chunk_id);
         info!("分配内存块 {} 用于对象 {}", chunk_id, i);
     }
-    
+
     // 释放一些内存块
     for &chunk_id in &allocated_chunks[0..5] {
         memory_pool.deallocate(chunk_id).await?;
         info!("释放内存块 {}", chunk_id);
     }
-    
+
     let pool_stats = memory_pool.get_stats().await;
     info!("内存池统计:");
-    info!("   总分配: {}, 总释放: {}", pool_stats.total_allocations, pool_stats.total_deallocations);
-    info!("   缓存命中: {}, 缓存未命中: {}", pool_stats.cache_hits, pool_stats.cache_misses);
+    info!(
+        "   总分配: {}, 总释放: {}",
+        pool_stats.total_allocations, pool_stats.total_deallocations
+    );
+    info!(
+        "   缓存命中: {}, 缓存未命中: {}",
+        pool_stats.cache_hits, pool_stats.cache_misses
+    );
     info!("   当前内存使用: {} 字节", pool_stats.current_memory_usage);
 
     // 2. 演示异步垃圾回收器
     info!("🗑️ 演示异步垃圾回收器");
     let gc = AsyncGarbageCollector::new(Duration::from_secs(5));
-    
+
     // 创建一些对象
     for i in 0..20 {
         gc.create_object(i, 256).await?;
     }
-    
+
     // 建立一些引用关系
     for i in 0..10 {
         gc.add_reference(i, i + 10).await?;
     }
-    
+
     // 移除一些引用，使对象变为垃圾
     for i in 5..10 {
         gc.remove_reference(i, i + 10).await?;
     }
-    
+
     // 手动触发垃圾回收
     gc.collect_garbage().await?;
-    
+
     let gc_stats = gc.get_stats().await;
     info!("垃圾回收统计:");
-    info!("   总对象: {}, 回收对象: {}", gc_stats.total_objects, gc_stats.collected_objects);
-    info!("   GC周期: {}, 释放内存: {} 字节", gc_stats.gc_cycles, gc_stats.memory_freed);
+    info!(
+        "   总对象: {}, 回收对象: {}",
+        gc_stats.total_objects, gc_stats.collected_objects
+    );
+    info!(
+        "   GC周期: {}, 释放内存: {} 字节",
+        gc_stats.gc_cycles, gc_stats.memory_freed
+    );
 
     // 3. 演示异步内存监控器
     info!("📊 演示异步内存监控器");
     let monitor = AsyncMemoryMonitor::new(Duration::from_secs(2), 0.7);
-    
+
     // 模拟内存分配和释放
     for i in 0..50 {
         monitor.record_allocation(1024);
@@ -661,36 +694,47 @@ async fn main() -> Result<()> {
             monitor.record_deallocation(512);
         }
     }
-    
+
     sleep(Duration::from_millis(100)).await;
-    
+
     let monitor_stats = monitor.get_stats();
     info!("内存监控统计:");
-    info!("   当前内存使用: {} 字节", monitor_stats.current_memory_usage);
+    info!(
+        "   当前内存使用: {} 字节",
+        monitor_stats.current_memory_usage
+    );
     info!("   峰值内存使用: {} 字节", monitor_stats.peak_memory_usage);
-    info!("   总分配: {}, 总释放: {}", monitor_stats.total_allocations, monitor_stats.total_deallocations);
+    info!(
+        "   总分配: {}, 总释放: {}",
+        monitor_stats.total_allocations, monitor_stats.total_deallocations
+    );
 
     // 4. 演示综合内存优化管理器
     info!("⚡ 演示综合异步内存优化管理器");
     let config = OptimizationConfig::default();
     let optimizer = AsyncMemoryOptimizer::new(config);
-    
+
     // 执行内存优化
     optimizer.optimize_memory_usage().await?;
-    
+
     let comprehensive_stats = optimizer.get_comprehensive_stats().await;
     info!("综合内存统计:");
-    info!("   内存池 - 分配: {}, 释放: {}", 
-          comprehensive_stats.pool_stats.total_allocations, 
-          comprehensive_stats.pool_stats.total_deallocations);
-    info!("   垃圾回收 - 对象: {}, 回收: {}", 
-          comprehensive_stats.gc_stats.total_objects, 
-          comprehensive_stats.gc_stats.collected_objects);
-    info!("   内存监控 - 当前: {} 字节, 峰值: {} 字节", 
-          comprehensive_stats.monitor_stats.current_memory_usage,
-          comprehensive_stats.monitor_stats.peak_memory_usage);
+    info!(
+        "   内存池 - 分配: {}, 释放: {}",
+        comprehensive_stats.pool_stats.total_allocations,
+        comprehensive_stats.pool_stats.total_deallocations
+    );
+    info!(
+        "   垃圾回收 - 对象: {}, 回收: {}",
+        comprehensive_stats.gc_stats.total_objects, comprehensive_stats.gc_stats.collected_objects
+    );
+    info!(
+        "   内存监控 - 当前: {} 字节, 峰值: {} 字节",
+        comprehensive_stats.monitor_stats.current_memory_usage,
+        comprehensive_stats.monitor_stats.peak_memory_usage
+    );
 
     info!("✅ 2025 年异步内存管理优化演示完成!");
-    
+
     Ok(())
 }

@@ -1,12 +1,11 @@
 use anyhow::Result;
 use prometheus::{
-    Counter, CounterVec, Gauge, GaugeVec, Histogram, HistogramOpts,
-    Opts, Registry, TextEncoder,
+    Counter, CounterVec, Gauge, GaugeVec, Histogram, HistogramOpts, Opts, Registry, TextEncoder,
 };
 use std::time::{Duration, Instant};
 use tokio::sync::RwLock;
 use tokio::time::{interval, sleep};
-use tracing::{info, error, debug};
+use tracing::{debug, error, info};
 
 /// 应用指标收集器
 #[derive(Debug, Clone)]
@@ -42,61 +41,48 @@ impl MetricsCollector {
         let registry = Registry::new();
 
         // 基础计数器
-        let requests_total = Counter::new(
-            "http_requests_total",
-            "Total number of HTTP requests"
-        )?;
+        let requests_total = Counter::new("http_requests_total", "Total number of HTTP requests")?;
 
         let errors_total = CounterVec::new(
-            Opts::new("http_errors_total", "Total number of HTTP errors")
-                .namespace("app"),
-            &["method", "status_code", "endpoint"]
+            Opts::new("http_errors_total", "Total number of HTTP errors").namespace("app"),
+            &["method", "status_code", "endpoint"],
         )?;
 
         // 仪表盘
-        let active_connections = Gauge::new(
-            "active_connections",
-            "Number of active connections"
-        )?;
+        let active_connections = Gauge::new("active_connections", "Number of active connections")?;
 
-        let memory_usage_bytes = Gauge::new(
-            "memory_usage_bytes",
-            "Current memory usage in bytes"
-        )?;
+        let memory_usage_bytes = Gauge::new("memory_usage_bytes", "Current memory usage in bytes")?;
 
-        let cpu_usage_percent = Gauge::new(
-            "cpu_usage_percent",
-            "Current CPU usage percentage"
-        )?;
+        let cpu_usage_percent = Gauge::new("cpu_usage_percent", "Current CPU usage percentage")?;
 
         // 直方图
         let request_duration_seconds = Histogram::with_opts(
-            HistogramOpts::new("http_request_duration_seconds", "HTTP request duration")
-                .buckets(vec![0.001, 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0])
+            HistogramOpts::new("http_request_duration_seconds", "HTTP request duration").buckets(
+                vec![
+                    0.001, 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0,
+                ],
+            ),
         )?;
 
         let response_size_bytes = Histogram::with_opts(
             HistogramOpts::new("http_response_size_bytes", "HTTP response size in bytes")
-                .buckets(vec![100.0, 1000.0, 10000.0, 100000.0, 1000000.0])
+                .buckets(vec![100.0, 1000.0, 10000.0, 100000.0, 1000000.0]),
         )?;
 
         // 自定义指标
         let queue_size = GaugeVec::new(
-            Opts::new("queue_size", "Current queue size")
-                .namespace("custom"),
-            &["queue_name"]
+            Opts::new("queue_size", "Current queue size").namespace("custom"),
+            &["queue_name"],
         )?;
 
         let processing_rate = GaugeVec::new(
-            Opts::new("processing_rate", "Items processed per second")
-                .namespace("custom"),
-            &["processor_type"]
+            Opts::new("processing_rate", "Items processed per second").namespace("custom"),
+            &["processor_type"],
         )?;
 
         let cache_hit_ratio = GaugeVec::new(
-            Opts::new("cache_hit_ratio", "Cache hit ratio")
-                .namespace("custom"),
-            &["cache_name"]
+            Opts::new("cache_hit_ratio", "Cache hit ratio").namespace("custom"),
+            &["cache_name"],
         )?;
 
         let custom_metrics = CustomMetrics {
@@ -131,14 +117,24 @@ impl MetricsCollector {
     }
 
     /// 记录请求
-    pub fn record_request(&self, method: &str, status_code: u16, endpoint: &str, duration: Duration, response_size: usize) {
+    pub fn record_request(
+        &self,
+        method: &str,
+        status_code: u16,
+        endpoint: &str,
+        duration: Duration,
+        response_size: usize,
+    ) {
         self.requests_total.inc();
 
         if status_code >= 400 {
-            self.errors_total.with_label_values(&[method, &status_code.to_string(), endpoint]).inc();
+            self.errors_total
+                .with_label_values(&[method, &status_code.to_string(), endpoint])
+                .inc();
         }
 
-        self.request_duration_seconds.observe(duration.as_secs_f64());
+        self.request_duration_seconds
+            .observe(duration.as_secs_f64());
         self.response_size_bytes.observe(response_size as f64);
     }
 
@@ -159,17 +155,26 @@ impl MetricsCollector {
 
     /// 更新队列大小
     pub fn update_queue_size(&self, queue_name: &str, size: usize) {
-        self.custom_metrics.queue_size.with_label_values(&[queue_name]).set(size as f64);
+        self.custom_metrics
+            .queue_size
+            .with_label_values(&[queue_name])
+            .set(size as f64);
     }
 
     /// 更新处理速率
     pub fn update_processing_rate(&self, processor_type: &str, rate: f64) {
-        self.custom_metrics.processing_rate.with_label_values(&[processor_type]).set(rate);
+        self.custom_metrics
+            .processing_rate
+            .with_label_values(&[processor_type])
+            .set(rate);
     }
 
     /// 更新缓存命中率
     pub fn update_cache_hit_ratio(&self, cache_name: &str, ratio: f64) {
-        self.custom_metrics.cache_hit_ratio.with_label_values(&[cache_name]).set(ratio);
+        self.custom_metrics
+            .cache_hit_ratio
+            .with_label_values(&[cache_name])
+            .set(ratio);
     }
 
     /// 获取指标文本格式
@@ -221,7 +226,7 @@ impl ApplicationService {
             status_code,
             endpoint,
             start.elapsed(),
-            response_size
+            response_size,
         );
 
         // 更新计数器
@@ -317,10 +322,11 @@ impl ApplicationService {
         let metrics = self.metrics.clone();
 
         tokio::spawn(async move {
-            use axum::{routing::get, Router, response::Html};
+            use axum::{Router, response::Html, routing::get};
 
-            let app = Router::new()
-                .route("/metrics", get(move || async move {
+            let app = Router::new().route(
+                "/metrics",
+                get(move || async move {
                     match metrics.gather_metrics() {
                         Ok(metrics_text) => Html(metrics_text),
                         Err(e) => {
@@ -328,7 +334,8 @@ impl ApplicationService {
                             Html("Error gathering metrics".to_string())
                         }
                     }
-                }));
+                }),
+            );
 
             let addr = format!("0.0.0.0:{}", port);
             let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
@@ -350,9 +357,7 @@ impl ApplicationService {
 
 #[tokio::main(flavor = "multi_thread")]
 async fn main() -> Result<()> {
-    tracing_subscriber::fmt()
-        .with_env_filter("info")
-        .init();
+    tracing_subscriber::fmt().with_env_filter("info").init();
 
     // 创建应用服务
     let app = ApplicationService::new()?;
@@ -399,7 +404,11 @@ async fn main() -> Result<()> {
     info!(
         total_requests = total_requests,
         total_errors = total_errors,
-        error_rate = if total_requests > 0 { total_errors as f64 / total_requests as f64 } else { 0.0 },
+        error_rate = if total_requests > 0 {
+            total_errors as f64 / total_requests as f64
+        } else {
+            0.0
+        },
         "Final statistics"
     );
 

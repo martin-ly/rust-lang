@@ -221,4 +221,3 @@ mod tests {
         assert!(!practices.is_empty());
     }
 }
-

@@ -6,9 +6,7 @@
 
 #[allow(unused)]
 // 表达式定义
-pub fn test_expression() {
-
-}
+pub fn test_expression() {}
 
 /*
 项（Item）与表达式（Expression）：

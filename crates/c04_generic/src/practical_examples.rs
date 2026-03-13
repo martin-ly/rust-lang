@@ -18,7 +18,7 @@
 use std::collections::{HashMap, VecDeque};
 use std::fmt::{Debug, Display};
 use std::marker::PhantomData;
-use std::ops::{Add, Mul, Sub, Div, Rem};
+use std::ops::{Add, Div, Mul, Rem, Sub};
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
 use std::time::{Duration, Instant};
@@ -261,9 +261,7 @@ pub mod data_structures {
     impl<T> Stack<T> {
         /// 创建新的堆栈
         pub fn new() -> Self {
-            Self {
-                items: Vec::new(),
-            }
+            Self { items: Vec::new() }
         }
 
         /// 推入元素
@@ -496,7 +494,13 @@ pub mod algorithms {
     /// 计算最小公倍数
     pub fn lcm<T>(a: T, b: T) -> T
     where
-        T: PartialEq + Sub<Output = T> + Rem<Output = T> + Mul<Output = T> + Div<Output = T> + Clone + Default,
+        T: PartialEq
+            + Sub<Output = T>
+            + Rem<Output = T>
+            + Mul<Output = T>
+            + Div<Output = T>
+            + Clone
+            + Default,
     {
         (a.clone() * b.clone()) / gcd(a, b)
     }
@@ -797,10 +801,7 @@ pub mod error_handling {
         }
     }
 
-    impl<T> std::error::Error for GenericError<T>
-    where
-        T: Display + Debug,
-    {}
+    impl<T> std::error::Error for GenericError<T> where T: Display + Debug {}
 
     /// 泛型结果类型
     pub type GenericResult<T, E> = Result<T, GenericError<E>>;
@@ -1060,9 +1061,8 @@ pub mod performance {
 
         #[test]
         fn test_batch_processor() {
-            let processor = BatchProcessor::new(2, |batch| {
-                batch.into_iter().map(|x| x * 2).collect()
-            });
+            let processor =
+                BatchProcessor::new(2, |batch| batch.into_iter().map(|x| x * 2).collect());
 
             let data = vec![1, 2, 3, 4, 5];
             let results = processor.process_all(data);
@@ -1079,9 +1079,7 @@ pub mod rust_190_improvements {
     pub fn improved_type_inference() {
         // Rust 1.90 在类型推断方面有所改进
         let numbers = [1, 2, 3, 4, 5];
-        let doubled: Vec<i32> = numbers.iter()
-            .map(|&x| x * 2)
-            .collect();
+        let doubled: Vec<i32> = numbers.iter().map(|&x| x * 2).collect();
 
         println!("改进的类型推断示例: {:?}", doubled);
     }
@@ -1101,8 +1099,9 @@ pub mod rust_190_improvements {
         T: Display,
         E: Display,
     {
-        result.map(|v| format!("成功: {}", v))
-              .map_err(|e| format!("错误: {}", e))
+        result
+            .map(|v| format!("成功: {}", v))
+            .map_err(|e| format!("错误: {}", e))
     }
 
     /// 改进的异步泛型
@@ -1255,9 +1254,8 @@ pub fn demonstrate_practical_examples() {
     }
 
     println!("\n5. 性能优化示例:");
-    let (result, elapsed) = performance::PerformanceTimer::<u32>::measure(|| {
-        algorithms::fibonacci::<u32>(20)
-    });
+    let (result, elapsed) =
+        performance::PerformanceTimer::<u32>::measure(|| algorithms::fibonacci::<u32>(20));
     println!("斐波那契(20) = {}, 耗时: {:?}", result, elapsed);
 
     let mut cache = performance::Cache::new(3);

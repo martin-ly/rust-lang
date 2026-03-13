@@ -1,11 +1,13 @@
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {
     use core::pin::Pin;
     use core::task::{Context, Poll, RawWaker, RawWakerVTable, Waker};
     fn dummy_raw_waker() -> RawWaker {
         fn no_op(_: *const ()) {}
-        fn clone(_: *const ()) -> RawWaker { dummy_raw_waker() }
+        fn clone(_: *const ()) -> RawWaker {
+            dummy_raw_waker()
+        }
         static VTABLE: RawWakerVTable = RawWakerVTable::new(clone, no_op, no_op, no_op);
         RawWaker::new(core::ptr::null(), &VTABLE)
     }
@@ -21,8 +23,10 @@ fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {
 }
 
 fn bench_async_event_bus(c: &mut Criterion) {
-    use c09_design_pattern::concurrency::message_passing::define::async_bus::{EventBusString, BackpressureStrategy};
     use c09_design_pattern::concurrency::message_passing::define::StringEventHandler;
+    use c09_design_pattern::concurrency::message_passing::define::async_bus::{
+        BackpressureStrategy, EventBusString,
+    };
 
     let bus = EventBusString::new(StringEventHandler);
     let events: Vec<String> = (0..1_000).map(|i| format!("ev{}", i)).collect();
@@ -65,7 +69,9 @@ fn bench_async_event_bus(c: &mut Criterion) {
 }
 
 fn bench_gats_observer(c: &mut Criterion) {
-    use c09_design_pattern::behavioral::observer::define::{BorrowingObserver, BorrowingSubjectString};
+    use c09_design_pattern::behavioral::observer::define::{
+        BorrowingObserver, BorrowingSubjectString,
+    };
 
     let mut subject = BorrowingSubjectString::new();
     subject.register_observer(BorrowingObserver);
@@ -78,5 +84,3 @@ fn bench_gats_observer(c: &mut Criterion) {
 
 criterion_group!(benches, bench_async_event_bus, bench_gats_observer);
 criterion_main!(benches);
-
-

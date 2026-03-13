@@ -5,9 +5,9 @@
 // criterion 0.8.2 的 black_box 已弃用，本文件使用 std::hint::black_box
 #![allow(deprecated)]
 
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
-use std::sync::atomic::{AtomicU64, Ordering};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::thread;
 
 /// 伪共享：两计数器在同一缓存行

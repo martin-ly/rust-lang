@@ -32,11 +32,11 @@ pub mod const_context_enhancements {
     pub fn demonstrate_const_refs() {
         // Rust 1.91: 支持非静态常量的引用
         const VALUE: i32 = 42;
-        const REF: &i32 = &VALUE;  // ✅ 1.91 新特性
+        const REF: &i32 = &VALUE; // ✅ 1.91 新特性
 
         // 在 const 上下文中进行计算
-        const DOUBLE: i32 = *REF * 2;  // ✅ 1.91 支持
-        const TRIPLE: i32 = *REF * 3;  // ✅ 1.91 支持
+        const DOUBLE: i32 = *REF * 2; // ✅ 1.91 支持
+        const TRIPLE: i32 = *REF * 3; // ✅ 1.91 支持
 
         println!("常量值: {}", VALUE);
         println!("常量引用: {}", REF);
@@ -97,8 +97,8 @@ pub mod const_context_enhancements {
         println!("\n=== Const 上下文斐波那契计算 ===");
 
         const FIB_10: u32 = fibonacci(10);
-        const FIB_REF: &u32 = &FIB_10;  // ✅ 1.91 新特性
-        const FIB_SQUARED: u32 = *FIB_REF * *FIB_REF;  // ✅ 1.91 支持
+        const FIB_REF: &u32 = &FIB_10; // ✅ 1.91 新特性
+        const FIB_SQUARED: u32 = *FIB_REF * *FIB_REF; // ✅ 1.91 支持
 
         println!("斐波那契(10): {}", FIB_10);
         println!("斐波那契(10) 的平方: {}", FIB_SQUARED);
@@ -178,15 +178,14 @@ pub mod new_stable_apis {
 
     /// 使用改进的 ControlFlow 进行复杂验证
     pub fn validate_and_process(data: &[i32]) -> ControlFlow<String, Vec<i32>> {
-        data.iter()
-            .try_fold(Vec::new(), |mut acc, &n| {
-                if n < 0 {
-                    ControlFlow::Break(format!("无效值: {}", n))
-                } else {
-                    acc.push(n * 2);
-                    ControlFlow::Continue(acc)
-                }
-            })
+        data.iter().try_fold(Vec::new(), |mut acc, &n| {
+            if n < 0 {
+                ControlFlow::Break(format!("无效值: {}", n))
+            } else {
+                acc.push(n * 2);
+                ControlFlow::Continue(acc)
+            }
+        })
     }
 }
 
@@ -209,10 +208,7 @@ pub mod jit_optimizations {
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 15-25%
     pub fn process_data(v: &[i32]) -> Vec<i32> {
         // Rust 1.91 优化：链式迭代器在 JIT 模式下性能提升更明显
-        v.iter()
-            .map(|x| x * 2)
-            .filter(|&x| x > 10)
-            .collect()
+        v.iter().map(|x| x * 2).filter(|&x| x > 10).collect()
     }
 
     /// 复杂嵌套迭代器性能提升示例
@@ -259,7 +255,7 @@ pub mod memory_optimizations {
         let mut vec = Vec::new();
         // Rust 1.91 优化：频繁的小对象分配更加高效
         for i in 0..10000 {
-            vec.push(vec![i; 10]);  // 每个 Vec 约 40 bytes
+            vec.push(vec![i; 10]); // 每个 Vec 约 40 bytes
         }
         vec
     }
@@ -431,7 +427,7 @@ pub mod type_checker_optimizations {
     pub const fn const_type_inference() -> &'static str {
         // Rust 1.91: const 上下文中的类型推断改进
         // 注意：这是演示 const 上下文中的类型推断，VALUE 用于类型推断
-        const _VALUE: i32 = 42;  // 用于类型推断示例
+        const _VALUE: i32 = 42; // 用于类型推断示例
         const TYPE: &str = "i32";
         TYPE
     }
@@ -449,9 +445,9 @@ pub mod type_checker_optimizations {
 
             println!("第一个元素: {}", first);
             println!("最后一个元素: {}", last);
-        }  // first 和 last 的作用域结束
+        } // first 和 last 的作用域结束
 
-        vec.push(6);  // 现在可以安全地修改
+        vec.push(6); // 现在可以安全地修改
     }
 
     /// 类型推断演示
@@ -481,8 +477,7 @@ pub mod type_checker_optimizations {
         println!("缓存命中: {}", stats.cache_hits);
         println!("缓存未命中: {}", stats.cache_misses);
         if stats.total_inferences > 0 {
-            let hit_rate =
-                (stats.cache_hits as f64 / stats.total_inferences as f64) * 100.0;
+            let hit_rate = (stats.cache_hits as f64 / stats.total_inferences as f64) * 100.0;
             println!("缓存命中率: {:.2}%", hit_rate);
         }
         println!("平均推断时间: {} μs", stats.avg_inference_time);
@@ -620,7 +615,6 @@ pub mod comprehensive_examples {
     }
 
     impl ComprehensiveConfig {
-
         pub fn demonstrate() {
             println!("\n=== 综合配置系统示例 ===");
             println!("最大工作线程: {}", Self::MAX_WORKERS);

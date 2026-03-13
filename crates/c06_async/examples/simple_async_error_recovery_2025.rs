@@ -1,10 +1,10 @@
 use anyhow::Result;
+use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::sync::RwLock;
-use tokio::time::{sleep};
-use tracing::{info, warn, debug};
-use std::collections::HashMap;
+use tokio::time::sleep;
+use tracing::{debug, info, warn};
 
 /// 2025年简化异步错误恢复和重试机制演示
 /// 展示实用的异步错误处理和恢复最佳实践
@@ -35,13 +35,17 @@ impl SimpleAsyncRetryManager {
         }
     }
 
-    pub async fn execute_with_retry<T>(&self, operation_name: &str, mut operation: impl FnMut() -> Result<T>) -> Result<T> {
+    pub async fn execute_with_retry<T>(
+        &self,
+        operation_name: &str,
+        mut operation: impl FnMut() -> Result<T>,
+    ) -> Result<T> {
         let start_time = Instant::now();
         let mut last_error = None;
 
         for attempt in 1..=self.max_attempts {
             let attempt_start = Instant::now();
-            
+
             match operation() {
                 Ok(result) => {
                     self.update_metrics(true, attempt_start.elapsed()).await;
@@ -61,19 +65,25 @@ impl SimpleAsyncRetryManager {
             // 如果不是最后一次尝试，计算延迟并等待
             if attempt < self.max_attempts {
                 let delay = self.calculate_delay(attempt);
-                warn!("操作 '{}' 失败，第 {} 次尝试，{}ms 后重试", operation_name, attempt, delay.as_millis());
+                warn!(
+                    "操作 '{}' 失败，第 {} 次尝试，{}ms 后重试",
+                    operation_name,
+                    attempt,
+                    delay.as_millis()
+                );
                 sleep(delay).await;
             }
         }
 
         let total_time = start_time.elapsed();
         self.update_total_retry_time(total_time).await;
-        
+
         Err(last_error.unwrap())
     }
 
     fn calculate_delay(&self, attempt: u32) -> Duration {
-        let exponential_delay = self.base_delay.as_millis() as f64 * 2.0_f64.powi(attempt as i32 - 1);
+        let exponential_delay =
+            self.base_delay.as_millis() as f64 * 2.0_f64.powi(attempt as i32 - 1);
         let base_delay = Duration::from_millis(exponential_delay as u64);
 
         if self.jitter {
@@ -90,7 +100,7 @@ impl SimpleAsyncRetryManager {
     async fn update_metrics(&self, success: bool, _duration: Duration) {
         let mut metrics = self.metrics.write().await;
         metrics.total_attempts += 1;
-        
+
         if success {
             metrics.successful_attempts += 1;
         } else {
@@ -111,9 +121,9 @@ impl SimpleAsyncRetryManager {
 /// 2. 简化异步熔断器
 #[derive(Debug, Clone, PartialEq)]
 pub enum CircuitState {
-    Closed,    // 正常状态
-    Open,      // 熔断状态
-    HalfOpen,  // 半开状态
+    Closed,   // 正常状态
+    Open,     // 熔断状态
+    HalfOpen, // 半开状态
 }
 
 pub struct SimpleAsyncCircuitBreaker {
@@ -150,9 +160,13 @@ impl SimpleAsyncCircuitBreaker {
         }
     }
 
-    pub async fn execute<T>(&self, operation_name: &str, operation: impl FnOnce() -> Result<T>) -> Result<T> {
+    pub async fn execute<T>(
+        &self,
+        operation_name: &str,
+        operation: impl FnOnce() -> Result<T>,
+    ) -> Result<T> {
         let current_state = self.state.read().await.clone();
-        
+
         match current_state {
             CircuitState::Open => {
                 if self.should_attempt_reset().await {
@@ -194,13 +208,13 @@ impl SimpleAsyncCircuitBreaker {
 
     async fn on_success(&self) {
         self.update_metrics_successful_requests().await;
-        
+
         let current_state = self.state.read().await.clone();
         match current_state {
             CircuitState::HalfOpen => {
                 let mut success_count = self.success_count.write().await;
                 *success_count += 1;
-                
+
                 if *success_count >= self.success_threshold {
                     self.transition_to_closed().await;
                 }
@@ -217,12 +231,12 @@ impl SimpleAsyncCircuitBreaker {
 
     async fn on_failure(&self) {
         self.update_metrics_failed_requests().await;
-        
+
         let mut failure_count = self.failure_count.write().await;
         *failure_count += 1;
-        
+
         *self.last_failure_time.write().await = Some(Instant::now());
-        
+
         if *failure_count >= self.failure_threshold {
             self.transition_to_open().await;
         }
@@ -348,12 +362,14 @@ impl SimpleAsyncTimeoutManager {
     async fn update_metrics_successful_operation(&self, duration: Duration) {
         let mut metrics = self.metrics.write().await;
         metrics.successful_operations += 1;
-        
+
         // 更新平均持续时间
         let total_ops = metrics.total_operations;
         if total_ops > 0 {
-            let total_duration = metrics.average_duration.as_nanos() * (total_ops - 1) as u128 + duration.as_nanos();
-            metrics.average_duration = Duration::from_nanos((total_duration / total_ops as u128) as u64);
+            let total_duration =
+                metrics.average_duration.as_nanos() * (total_ops - 1) as u128 + duration.as_nanos();
+            metrics.average_duration =
+                Duration::from_nanos((total_duration / total_ops as u128) as u64);
         }
     }
 
@@ -361,12 +377,14 @@ impl SimpleAsyncTimeoutManager {
     async fn update_metrics_timed_out_operation(&self, duration: Duration) {
         let mut metrics = self.metrics.write().await;
         metrics.timed_out_operations += 1;
-        
+
         // 更新平均持续时间（包括超时的操作）
         let total_ops = metrics.total_operations;
         if total_ops > 0 {
-            let total_duration = metrics.average_duration.as_nanos() * (total_ops - 1) as u128 + duration.as_nanos();
-            metrics.average_duration = Duration::from_nanos((total_duration / total_ops as u128) as u64);
+            let total_duration =
+                metrics.average_duration.as_nanos() * (total_ops - 1) as u128 + duration.as_nanos();
+            metrics.average_duration =
+                Duration::from_nanos((total_duration / total_ops as u128) as u64);
         }
     }
 
@@ -383,10 +401,21 @@ pub struct SimpleAsyncErrorRecoveryManager {
 
 #[derive(Debug, Clone)]
 pub enum RecoveryStrategyType {
-    Retry { max_attempts: u32, base_delay: Duration },
-    CircuitBreaker { failure_threshold: u32, success_threshold: u32, timeout: Duration },
-    Timeout { duration: Duration },
-    Fallback { message: String },
+    Retry {
+        max_attempts: u32,
+        base_delay: Duration,
+    },
+    CircuitBreaker {
+        failure_threshold: u32,
+        success_threshold: u32,
+        timeout: Duration,
+    },
+    Timeout {
+        duration: Duration,
+    },
+    Fallback {
+        message: String,
+    },
 }
 
 #[derive(Debug, Default, Clone)]
@@ -405,8 +434,15 @@ impl SimpleAsyncErrorRecoveryManager {
         }
     }
 
-    pub async fn add_recovery_strategy(&self, operation_name: String, strategy: RecoveryStrategyType) {
-        self.strategies.write().await.insert(operation_name, strategy);
+    pub async fn add_recovery_strategy(
+        &self,
+        operation_name: String,
+        strategy: RecoveryStrategyType,
+    ) {
+        self.strategies
+            .write()
+            .await
+            .insert(operation_name, strategy);
     }
 
     pub async fn execute_with_recovery<T>(
@@ -415,7 +451,7 @@ impl SimpleAsyncErrorRecoveryManager {
         mut operation: impl FnMut() -> Result<T>,
     ) -> Result<T> {
         let strategies = self.strategies.read().await;
-        
+
         if let Some(strategy) = strategies.get(operation_name) {
             self.apply_recovery_strategy(strategy, || operation()).await
         } else {
@@ -430,41 +466,57 @@ impl SimpleAsyncErrorRecoveryManager {
         mut operation: impl FnMut() -> Result<T>,
     ) -> Result<T> {
         match strategy {
-            RecoveryStrategyType::Retry { max_attempts, base_delay } => {
+            RecoveryStrategyType::Retry {
+                max_attempts,
+                base_delay,
+            } => {
                 let retry_manager = SimpleAsyncRetryManager::new(*max_attempts, *base_delay, true);
-                retry_manager.execute_with_retry("operation", || operation()).await
+                retry_manager
+                    .execute_with_retry("operation", || operation())
+                    .await
             }
-            RecoveryStrategyType::CircuitBreaker { failure_threshold, success_threshold, timeout } => {
-                let circuit_breaker = SimpleAsyncCircuitBreaker::new(*failure_threshold, *success_threshold, *timeout);
+            RecoveryStrategyType::CircuitBreaker {
+                failure_threshold,
+                success_threshold,
+                timeout,
+            } => {
+                let circuit_breaker = SimpleAsyncCircuitBreaker::new(
+                    *failure_threshold,
+                    *success_threshold,
+                    *timeout,
+                );
                 circuit_breaker.execute("operation", operation).await
             }
             RecoveryStrategyType::Timeout { duration } => {
                 let timeout_manager = SimpleAsyncTimeoutManager::new(*duration);
-                timeout_manager.execute_with_timeout("operation", operation).await
+                timeout_manager
+                    .execute_with_timeout("operation", operation)
+                    .await
             }
-            RecoveryStrategyType::Fallback { message } => {
-                match operation() {
-                    Ok(result) => Ok(result),
-                    Err(_) => {
-                        self.update_recovery_metrics("fallback", true).await;
-                        Err(anyhow::anyhow!("操作失败，回退: {}", message))
-                    }
+            RecoveryStrategyType::Fallback { message } => match operation() {
+                Ok(result) => Ok(result),
+                Err(_) => {
+                    self.update_recovery_metrics("fallback", true).await;
+                    Err(anyhow::anyhow!("操作失败，回退: {}", message))
                 }
-            }
+            },
         }
     }
 
     async fn update_recovery_metrics(&self, recovery_type: &str, success: bool) {
         let mut metrics = self.recovery_metrics.write().await;
         metrics.total_recoveries += 1;
-        
+
         if success {
             metrics.successful_recoveries += 1;
         } else {
             metrics.failed_recoveries += 1;
         }
-        
-        *metrics.recovery_types.entry(recovery_type.to_string()).or_insert(0) += 1;
+
+        *metrics
+            .recovery_types
+            .entry(recovery_type.to_string())
+            .or_insert(0) += 1;
     }
 
     pub async fn get_metrics(&self) -> RecoveryMetrics {
@@ -476,9 +528,7 @@ impl SimpleAsyncErrorRecoveryManager {
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志
-    tracing_subscriber::fmt()
-        .with_env_filter("info")
-        .init();
+    tracing_subscriber::fmt().with_env_filter("info").init();
 
     info!("🚀 开始 2025 年简化异步错误恢复和重试机制演示");
 
@@ -504,21 +554,25 @@ async fn demo_simple_async_retry_manager() -> Result<()> {
     let retry_manager = SimpleAsyncRetryManager::new(5, Duration::from_millis(100), true);
 
     let mut attempt_count = 0;
-    let result = retry_manager.execute_with_retry("test_operation", || {
-        attempt_count += 1;
-        // 模拟可能失败的操作
-        if attempt_count < 4 {
-            Err(anyhow::anyhow!("模拟失败 (尝试 {})", attempt_count))
-        } else {
-            Ok(format!("操作成功 (尝试 {})", attempt_count))
-        }
-    }).await?;
+    let result = retry_manager
+        .execute_with_retry("test_operation", || {
+            attempt_count += 1;
+            // 模拟可能失败的操作
+            if attempt_count < 4 {
+                Err(anyhow::anyhow!("模拟失败 (尝试 {})", attempt_count))
+            } else {
+                Ok(format!("操作成功 (尝试 {})", attempt_count))
+            }
+        })
+        .await?;
 
     info!("重试结果: {}", result);
 
     let metrics = retry_manager.get_metrics().await;
-    info!("重试指标: 总尝试 {}, 成功 {}, 失败 {}", 
-          metrics.total_attempts, metrics.successful_attempts, metrics.failed_attempts);
+    info!(
+        "重试指标: 总尝试 {}, 成功 {}, 失败 {}",
+        metrics.total_attempts, metrics.successful_attempts, metrics.failed_attempts
+    );
 
     Ok(())
 }
@@ -530,14 +584,16 @@ async fn demo_simple_async_circuit_breaker() -> Result<()> {
 
     // 模拟一系列操作
     for i in 1..=10 {
-        let result = circuit_breaker.execute("test_operation", || {
-            // 前几次操作失败，触发熔断
-            if i <= 4 {
-                Err(anyhow::anyhow!("操作失败"))
-            } else {
-                Ok(format!("操作成功 {}", i))
-            }
-        }).await;
+        let result = circuit_breaker
+            .execute("test_operation", || {
+                // 前几次操作失败，触发熔断
+                if i <= 4 {
+                    Err(anyhow::anyhow!("操作失败"))
+                } else {
+                    Ok(format!("操作成功 {}", i))
+                }
+            })
+            .await;
 
         let state = circuit_breaker.get_state().await;
         match result {
@@ -549,9 +605,13 @@ async fn demo_simple_async_circuit_breaker() -> Result<()> {
     }
 
     let metrics = circuit_breaker.get_metrics().await;
-    info!("熔断器指标: 总请求 {}, 成功 {}, 失败 {}, 开启次数 {}", 
-          metrics.total_requests, metrics.successful_requests, 
-          metrics.failed_requests, metrics.circuit_open_count);
+    info!(
+        "熔断器指标: 总请求 {}, 成功 {}, 失败 {}, 开启次数 {}",
+        metrics.total_requests,
+        metrics.successful_requests,
+        metrics.failed_requests,
+        metrics.circuit_open_count
+    );
 
     Ok(())
 }
@@ -562,31 +622,43 @@ async fn demo_simple_async_timeout_manager() -> Result<()> {
     let timeout_manager = SimpleAsyncTimeoutManager::new(Duration::from_millis(200));
 
     // 设置不同操作的超时时间
-    timeout_manager.set_timeout("fast_operation".to_string(), Duration::from_millis(100)).await;
-    timeout_manager.set_timeout("slow_operation".to_string(), Duration::from_millis(500)).await;
+    timeout_manager
+        .set_timeout("fast_operation".to_string(), Duration::from_millis(100))
+        .await;
+    timeout_manager
+        .set_timeout("slow_operation".to_string(), Duration::from_millis(500))
+        .await;
 
     // 快速操作
-    let result = timeout_manager.execute_with_timeout("fast_operation", || {
-        // 模拟快速操作
-        Ok("快速操作完成".to_string())
-    }).await?;
+    let result = timeout_manager
+        .execute_with_timeout("fast_operation", || {
+            // 模拟快速操作
+            Ok("快速操作完成".to_string())
+        })
+        .await?;
     info!("快速操作结果: {}", result);
 
     // 超时操作
-    let result = timeout_manager.execute_with_timeout("fast_operation", || {
-        // 模拟慢操作
-        std::thread::sleep(Duration::from_millis(300)); // 超过超时时间
-        Ok("超时操作完成".to_string())
-    }).await;
+    let result = timeout_manager
+        .execute_with_timeout("fast_operation", || {
+            // 模拟慢操作
+            std::thread::sleep(Duration::from_millis(300)); // 超过超时时间
+            Ok("超时操作完成".to_string())
+        })
+        .await;
     match result {
         Ok(msg) => info!("超时操作结果: {}", msg),
         Err(e) => warn!("超时操作失败: {}", e),
     }
 
     let metrics = timeout_manager.get_metrics().await;
-    info!("超时管理器指标: 总操作 {}, 成功 {}, 超时 {}, 平均耗时 {:?}", 
-          metrics.total_operations, metrics.successful_operations, 
-          metrics.timed_out_operations, metrics.average_duration);
+    info!(
+        "超时管理器指标: 总操作 {}, 成功 {}, 超时 {}, 平均耗时 {:?}",
+        metrics.total_operations,
+        metrics.successful_operations,
+        metrics.timed_out_operations,
+        metrics.average_duration
+    );
 
     Ok(())
 }
@@ -597,56 +669,68 @@ async fn demo_simple_async_error_recovery_manager() -> Result<()> {
     let recovery_manager = SimpleAsyncErrorRecoveryManager::new();
 
     // 添加重试策略
-    recovery_manager.add_recovery_strategy(
-        "retry_operation".to_string(),
-        RecoveryStrategyType::Retry { 
-            max_attempts: 3, 
-            base_delay: Duration::from_millis(100) 
-        }
-    ).await;
+    recovery_manager
+        .add_recovery_strategy(
+            "retry_operation".to_string(),
+            RecoveryStrategyType::Retry {
+                max_attempts: 3,
+                base_delay: Duration::from_millis(100),
+            },
+        )
+        .await;
 
     // 添加熔断器策略
-    recovery_manager.add_recovery_strategy(
-        "circuit_breaker_operation".to_string(),
-        RecoveryStrategyType::CircuitBreaker { 
-            failure_threshold: 2, 
-            success_threshold: 1, 
-            timeout: Duration::from_millis(200) 
-        }
-    ).await;
+    recovery_manager
+        .add_recovery_strategy(
+            "circuit_breaker_operation".to_string(),
+            RecoveryStrategyType::CircuitBreaker {
+                failure_threshold: 2,
+                success_threshold: 1,
+                timeout: Duration::from_millis(200),
+            },
+        )
+        .await;
 
     // 添加回退策略
-    recovery_manager.add_recovery_strategy(
-        "fallback_operation".to_string(),
-        RecoveryStrategyType::Fallback { 
-            message: "回退操作结果".to_string() 
-        }
-    ).await;
+    recovery_manager
+        .add_recovery_strategy(
+            "fallback_operation".to_string(),
+            RecoveryStrategyType::Fallback {
+                message: "回退操作结果".to_string(),
+            },
+        )
+        .await;
 
     // 测试重试策略
     let mut attempt_count = 0;
-    let result = recovery_manager.execute_with_recovery("retry_operation", || {
-        attempt_count += 1;
-        if attempt_count < 3 {
-            Err(anyhow::anyhow!("模拟失败"))
-        } else {
-            Ok("重试操作成功".to_string())
-        }
-    }).await?;
+    let result = recovery_manager
+        .execute_with_recovery("retry_operation", || {
+            attempt_count += 1;
+            if attempt_count < 3 {
+                Err(anyhow::anyhow!("模拟失败"))
+            } else {
+                Ok("重试操作成功".to_string())
+            }
+        })
+        .await?;
     info!("重试策略结果: {}", result);
 
     // 测试回退策略
-    let result: Result<String, _> = recovery_manager.execute_with_recovery("fallback_operation", || {
-        Err(anyhow::anyhow!("主要操作失败"))
-    }).await;
+    let result: Result<String, _> = recovery_manager
+        .execute_with_recovery("fallback_operation", || {
+            Err(anyhow::anyhow!("主要操作失败"))
+        })
+        .await;
     match result {
         Ok(msg) => info!("回退策略结果: {}", msg),
         Err(e) => info!("回退策略结果: {}", e),
     }
 
     let metrics = recovery_manager.get_metrics().await;
-    info!("错误恢复指标: 总恢复 {}, 成功 {}, 失败 {}", 
-          metrics.total_recoveries, metrics.successful_recoveries, metrics.failed_recoveries);
+    info!(
+        "错误恢复指标: 总恢复 {}, 成功 {}, 失败 {}",
+        metrics.total_recoveries, metrics.successful_recoveries, metrics.failed_recoveries
+    );
 
     Ok(())
 }
@@ -658,17 +742,19 @@ mod tests {
     #[tokio::test]
     async fn test_simple_async_retry_manager() {
         let retry_manager = SimpleAsyncRetryManager::new(3, Duration::from_millis(10), false);
-        
+
         let mut attempt_count = 0;
-        let result = retry_manager.execute_with_retry("test", || {
-            attempt_count += 1;
-            if attempt_count < 3 {
-                Err(anyhow::anyhow!("模拟失败"))
-            } else {
-                Ok("成功".to_string())
-            }
-        }).await;
-        
+        let result = retry_manager
+            .execute_with_retry("test", || {
+                attempt_count += 1;
+                if attempt_count < 3 {
+                    Err(anyhow::anyhow!("模拟失败"))
+                } else {
+                    Ok("成功".to_string())
+                }
+            })
+            .await;
+
         assert!(result.is_ok());
         assert_eq!(attempt_count, 3);
     }
@@ -676,24 +762,28 @@ mod tests {
     #[tokio::test]
     async fn test_simple_async_circuit_breaker() {
         let circuit_breaker = SimpleAsyncCircuitBreaker::new(2, 1, Duration::from_millis(100));
-        
+
         // 触发熔断
         for _ in 0..3 {
-            let _ = circuit_breaker.execute("test", || { Err::<String, _>(anyhow::anyhow!("失败")) }).await;
+            let _ = circuit_breaker
+                .execute("test", || Err::<String, _>(anyhow::anyhow!("失败")))
+                .await;
         }
-        
+
         assert_eq!(circuit_breaker.get_state().await, CircuitState::Open);
     }
 
     #[tokio::test]
     async fn test_simple_async_timeout_manager() {
         let timeout_manager = SimpleAsyncTimeoutManager::new(Duration::from_millis(50));
-        
-        let result = timeout_manager.execute_with_timeout("test", || {
-            std::thread::sleep(Duration::from_millis(100));
-            Ok("成功".to_string())
-        }).await;
-        
+
+        let result = timeout_manager
+            .execute_with_timeout("test", || {
+                std::thread::sleep(Duration::from_millis(100));
+                Ok("成功".to_string())
+            })
+            .await;
+
         assert!(result.is_err());
         assert!(result.unwrap_err().to_string().contains("超时"));
     }

@@ -1,6 +1,10 @@
 #[derive(Debug)]
 #[allow(dead_code)]
-enum Token { Ident(String), Number(i64), Symbol(char) }
+enum Token {
+    Ident(String),
+    Number(i64),
+    Symbol(char),
+}
 
 fn classify(tok: Token) -> String {
     match tok {
@@ -13,7 +17,10 @@ fn classify(tok: Token) -> String {
 
 #[derive(Debug)]
 #[allow(dead_code)]
-struct Point { x: i32, y: i32 }
+struct Point {
+    x: i32,
+    y: i32,
+}
 
 fn on_axis(p: Point) -> bool {
     match p {
@@ -44,11 +51,9 @@ fn main() {
     assert!(on_axis(Point { x: 0, y: 5 }));
     assert!(!on_axis(Point { x: 1, y: 2 }));
 
-    assert_eq!(head_tail(&[1,2,3,4]), Some((1,4)));
-    assert_eq!(head_tail(&[9]), Some((9,9)));
+    assert_eq!(head_tail(&[1, 2, 3, 4]), Some((1, 4)));
+    assert_eq!(head_tail(&[9]), Some((9, 9)));
 
     assert!(is_ok_even(Ok(4)));
     assert!(!is_ok_even(Ok(3)));
 }
-
-

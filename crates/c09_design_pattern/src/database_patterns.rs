@@ -213,14 +213,11 @@ impl Product {
 
 impl ActiveRecord for Product {
     fn save(&mut self) -> Result<(), String> {
-        if self.id.is_some() {
+        if let Some(id) = self.id {
             // 更新
             let query = format!(
                 "UPDATE products SET name = '{}', price = {}, description = '{}' WHERE id = {}",
-                self.name,
-                self.price,
-                self.description,
-                self.id.unwrap()
+                self.name, self.price, self.description, id
             );
             // 这里应该执行数据库操作
             println!("执行更新: {}", query);

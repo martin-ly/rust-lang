@@ -96,7 +96,7 @@ impl TestSuiteResult {
             self.passed_count as f64 / total as f64
         }
     }
-    
+
     /// 是否所有测试都通过
     pub fn all_passed(&self) -> bool {
         self.failed_count == 0
@@ -113,43 +113,43 @@ impl TestRunner {
     pub fn new(config: TestRunnerConfig) -> Self {
         Self { config }
     }
-    
+
     /// 运行所有测试
     pub fn run_all_tests(&self) -> Vec<TestSuiteResult> {
         let mut results = Vec::new();
-        
+
         if self.config.run_unit_tests {
             results.push(self.run_unit_tests());
         }
-        
+
         if self.config.run_integration_tests {
             results.push(self.run_integration_tests());
         }
-        
+
         if self.config.run_performance_tests {
             results.push(self.run_performance_tests());
         }
-        
+
         if self.config.run_security_tests {
             results.push(self.run_security_tests());
         }
-        
+
         if self.config.run_protocol_tests {
             results.push(self.run_protocol_tests());
         }
-        
+
         if self.config.run_dns_tests {
             results.push(self.run_dns_tests());
         }
-        
+
         results
     }
-    
+
     /// 运行单元测试
     fn run_unit_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
-        
+
         // 这里可以添加实际的单元测试运行逻辑
         // 目前只是模拟测试结果
         let test_names = vec![
@@ -167,13 +167,13 @@ impl TestRunner {
             "test_socket_configs",
             "test_packet_serialization",
         ];
-        
+
         for test_name in test_names {
             let test_start = Instant::now();
             // 模拟测试执行
             let passed = true; // 实际测试中这里会是真实的测试结果
             let duration = test_start.elapsed();
-            
+
             results.push(TestResult {
                 name: test_name.to_string(),
                 passed,
@@ -182,11 +182,11 @@ impl TestRunner {
                 test_type: TestType::Unit,
             });
         }
-        
+
         let total_duration = start.elapsed();
         let passed_count = results.iter().filter(|r| r.passed).count();
         let failed_count = results.len() - passed_count;
-        
+
         TestSuiteResult {
             suite_name: "单元测试".to_string(),
             results,
@@ -196,12 +196,12 @@ impl TestRunner {
             skipped_count: 0,
         }
     }
-    
+
     /// 运行集成测试
     fn run_integration_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
-        
+
         let test_names = vec![
             "test_tcp_socket_basic",
             "test_udp_socket_basic",
@@ -218,12 +218,12 @@ impl TestRunner {
             "test_timeout_handling",
             "test_memory_usage",
         ];
-        
+
         for test_name in test_names {
             let test_start = Instant::now();
             let passed = true;
             let duration = test_start.elapsed();
-            
+
             results.push(TestResult {
                 name: test_name.to_string(),
                 passed,
@@ -232,11 +232,11 @@ impl TestRunner {
                 test_type: TestType::Integration,
             });
         }
-        
+
         let total_duration = start.elapsed();
         let passed_count = results.iter().filter(|r| r.passed).count();
         let failed_count = results.len() - passed_count;
-        
+
         TestSuiteResult {
             suite_name: "集成测试".to_string(),
             results,
@@ -246,12 +246,12 @@ impl TestRunner {
             skipped_count: 0,
         }
     }
-    
+
     /// 运行性能测试
     fn run_performance_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
-        
+
         let test_names = vec![
             "test_packet_creation_performance",
             "test_packet_builder_performance",
@@ -269,12 +269,12 @@ impl TestRunner {
             "test_error_handling_performance",
             "test_packet_type_comparison_performance",
         ];
-        
+
         for test_name in test_names {
             let test_start = Instant::now();
             let passed = true;
             let duration = test_start.elapsed();
-            
+
             results.push(TestResult {
                 name: test_name.to_string(),
                 passed,
@@ -283,11 +283,11 @@ impl TestRunner {
                 test_type: TestType::Performance,
             });
         }
-        
+
         let total_duration = start.elapsed();
         let passed_count = results.iter().filter(|r| r.passed).count();
         let failed_count = results.len() - passed_count;
-        
+
         TestSuiteResult {
             suite_name: "性能测试".to_string(),
             results,
@@ -297,12 +297,12 @@ impl TestRunner {
             skipped_count: 0,
         }
     }
-    
+
     /// 运行安全测试
     fn run_security_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
-        
+
         let test_names = vec![
             "test_malicious_packet_detection",
             "test_http_security_headers",
@@ -320,12 +320,12 @@ impl TestRunner {
             "test_boundary_condition_security",
             "test_protocol_security",
         ];
-        
+
         for test_name in test_names {
             let test_start = Instant::now();
             let passed = true;
             let duration = test_start.elapsed();
-            
+
             results.push(TestResult {
                 name: test_name.to_string(),
                 passed,
@@ -334,11 +334,11 @@ impl TestRunner {
                 test_type: TestType::Security,
             });
         }
-        
+
         let total_duration = start.elapsed();
         let passed_count = results.iter().filter(|r| r.passed).count();
         let failed_count = results.len() - passed_count;
-        
+
         TestSuiteResult {
             suite_name: "安全测试".to_string(),
             results,
@@ -348,12 +348,12 @@ impl TestRunner {
             skipped_count: 0,
         }
     }
-    
+
     /// 运行协议测试
     fn run_protocol_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
-        
+
         let test_names = vec![
             "test_http_protocol_implementation",
             "test_http_methods",
@@ -372,12 +372,12 @@ impl TestRunner {
             "test_protocol_performance",
             "test_protocol_boundary_conditions",
         ];
-        
+
         for test_name in test_names {
             let test_start = Instant::now();
             let passed = true;
             let duration = test_start.elapsed();
-            
+
             results.push(TestResult {
                 name: test_name.to_string(),
                 passed,
@@ -386,11 +386,11 @@ impl TestRunner {
                 test_type: TestType::Protocol,
             });
         }
-        
+
         let total_duration = start.elapsed();
         let passed_count = results.iter().filter(|r| r.passed).count();
         let failed_count = results.len() - passed_count;
-        
+
         TestSuiteResult {
             suite_name: "协议测试".to_string(),
             results,
@@ -400,23 +400,23 @@ impl TestRunner {
             skipped_count: 0,
         }
     }
-    
+
     /// 运行DNS测试
     fn run_dns_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
-        
+
         let test_names = vec![
             "dns_lookup_system_smoke",
             "dns_system_lookup_ips",
             "dns_doh_txt",
         ];
-        
+
         for test_name in test_names {
             let test_start = Instant::now();
             let passed = true;
             let duration = test_start.elapsed();
-            
+
             results.push(TestResult {
                 name: test_name.to_string(),
                 passed,
@@ -425,11 +425,11 @@ impl TestRunner {
                 test_type: TestType::Dns,
             });
         }
-        
+
         let total_duration = start.elapsed();
         let passed_count = results.iter().filter(|r| r.passed).count();
         let failed_count = results.len() - passed_count;
-        
+
         TestSuiteResult {
             suite_name: "DNS测试".to_string(),
             results,
@@ -448,22 +448,26 @@ impl TestReportGenerator {
     /// 生成测试报告
     pub fn generate_report(suite_results: &[TestSuiteResult]) -> String {
         let mut report = String::new();
-        
+
         report.push_str("=== C10 Networks 测试报告 ===\n\n");
-        
+
         let total_tests: usize = suite_results.iter().map(|s| s.results.len()).sum();
         let total_passed: usize = suite_results.iter().map(|s| s.passed_count).sum();
         let total_failed: usize = suite_results.iter().map(|s| s.failed_count).sum();
         let total_skipped: usize = suite_results.iter().map(|s| s.skipped_count).sum();
-        let total_duration: std::time::Duration = suite_results.iter().map(|s| s.total_duration).sum();
-        
+        let total_duration: std::time::Duration =
+            suite_results.iter().map(|s| s.total_duration).sum();
+
         report.push_str(&format!("总测试数: {}\n", total_tests));
         report.push_str(&format!("通过: {}\n", total_passed));
         report.push_str(&format!("失败: {}\n", total_failed));
         report.push_str(&format!("跳过: {}\n", total_skipped));
         report.push_str(&format!("总执行时间: {:?}\n", total_duration));
-        report.push_str(&format!("通过率: {:.2}%\n\n", (total_passed as f64 / total_tests as f64) * 100.0));
-        
+        report.push_str(&format!(
+            "通过率: {:.2}%\n\n",
+            (total_passed as f64 / total_tests as f64) * 100.0
+        ));
+
         for suite_result in suite_results {
             report.push_str(&format!("=== {} ===\n", suite_result.suite_name));
             report.push_str(&format!("测试数: {}\n", suite_result.results.len()));
@@ -471,13 +475,19 @@ impl TestReportGenerator {
             report.push_str(&format!("失败: {}\n", suite_result.failed_count));
             report.push_str(&format!("跳过: {}\n", suite_result.skipped_count));
             report.push_str(&format!("执行时间: {:?}\n", suite_result.total_duration));
-            report.push_str(&format!("通过率: {:.2}%\n", suite_result.pass_rate() * 100.0));
-            
+            report.push_str(&format!(
+                "通过率: {:.2}%\n",
+                suite_result.pass_rate() * 100.0
+            ));
+
             if !suite_result.results.is_empty() {
                 report.push_str("\n详细结果:\n");
                 for result in &suite_result.results {
                     let status = if result.passed { "✓" } else { "✗" };
-                    report.push_str(&format!("  {} {} ({:?})\n", status, result.name, result.duration));
+                    report.push_str(&format!(
+                        "  {} {} ({:?})\n",
+                        status, result.name, result.duration
+                    ));
                     if let Some(error) = &result.error {
                         report.push_str(&format!("    错误: {}\n", error));
                     }
@@ -485,7 +495,7 @@ impl TestReportGenerator {
             }
             report.push_str("\n");
         }
-        
+
         report
     }
 }
@@ -495,12 +505,12 @@ impl TestReportGenerator {
 fn test_test_runner() {
     let config = TestRunnerConfig::default();
     let runner = TestRunner::new(config);
-    
+
     let suite_results = runner.run_all_tests();
     let report = TestReportGenerator::generate_report(&suite_results);
-    
+
     println!("{}", report);
-    
+
     // 验证测试结果
     assert!(!suite_results.is_empty());
     for suite_result in &suite_results {
@@ -513,7 +523,7 @@ fn test_test_runner() {
 #[test]
 fn test_test_runner_config() {
     let config = TestRunnerConfig::default();
-    
+
     assert!(config.run_unit_tests);
     assert!(config.run_integration_tests);
     assert!(config.run_performance_tests);
@@ -535,7 +545,7 @@ fn test_test_result() {
         error: None,
         test_type: TestType::Unit,
     };
-    
+
     assert_eq!(result.name, "test_example");
     assert!(result.passed);
     assert_eq!(result.duration, std::time::Duration::from_millis(100));
@@ -562,7 +572,7 @@ fn test_test_suite_result() {
             test_type: TestType::Unit,
         },
     ];
-    
+
     let suite_result = TestSuiteResult {
         suite_name: "测试套件".to_string(),
         results,
@@ -571,7 +581,7 @@ fn test_test_suite_result() {
         failed_count: 1,
         skipped_count: 0,
     };
-    
+
     assert_eq!(suite_result.suite_name, "测试套件");
     assert_eq!(suite_result.results.len(), 2);
     assert_eq!(suite_result.passed_count, 1);
@@ -584,27 +594,23 @@ fn test_test_suite_result() {
 /// 测试报告生成验证
 #[test]
 fn test_test_report_generation() {
-    let suite_results = vec![
-        TestSuiteResult {
-            suite_name: "单元测试".to_string(),
-            results: vec![
-                TestResult {
-                    name: "test1".to_string(),
-                    passed: true,
-                    duration: std::time::Duration::from_millis(50),
-                    error: None,
-                    test_type: TestType::Unit,
-                },
-            ],
-            total_duration: std::time::Duration::from_millis(50),
-            passed_count: 1,
-            failed_count: 0,
-            skipped_count: 0,
-        },
-    ];
-    
+    let suite_results = vec![TestSuiteResult {
+        suite_name: "单元测试".to_string(),
+        results: vec![TestResult {
+            name: "test1".to_string(),
+            passed: true,
+            duration: std::time::Duration::from_millis(50),
+            error: None,
+            test_type: TestType::Unit,
+        }],
+        total_duration: std::time::Duration::from_millis(50),
+        passed_count: 1,
+        failed_count: 0,
+        skipped_count: 0,
+    }];
+
     let report = TestReportGenerator::generate_report(&suite_results);
-    
+
     assert!(report.contains("C10 Networks 测试报告"));
     assert!(report.contains("总测试数: 1"));
     assert!(report.contains("通过: 1"));

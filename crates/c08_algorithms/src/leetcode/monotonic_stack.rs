@@ -98,9 +98,9 @@ pub fn maximal_rectangle(matrix: Vec<Vec<char>>) -> i32 {
     let mut heights = vec![0; cols];
     let mut max_area = 0;
 
-    for i in 0..rows {
-        for j in 0..cols {
-            if matrix[i][j] == '1' {
+    for row in matrix.iter().take(rows) {
+        for (j, &cell) in row.iter().enumerate().take(cols) {
+            if cell == '1' {
                 heights[j] += 1;
             } else {
                 heights[j] = 0;
@@ -178,7 +178,8 @@ pub fn next_greater_element(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
     }
 
     // 查找结果
-    nums1.iter()
+    nums1
+        .iter()
         .map(|&num| *next_greater.get(&num).unwrap_or(&-1))
         .collect()
 }

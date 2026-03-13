@@ -1,13 +1,13 @@
 //! Rust 1.90 异步特性集成测试套件
-//! 
+//!
 //! 本测试套件提供了全面的集成测试，验证 Rust 1.90 异步特性
 //! 在实际应用场景中的正确性和性能表现
+use anyhow::Result;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use anyhow::Result;
 use tokio::sync::Mutex;
 use tokio::time::sleep;
-use tracing::{info, debug};
+use tracing::{debug, info};
 
 /// 集成测试管理器
 pub struct IntegrationTestManager {
@@ -41,7 +41,7 @@ impl IntegrationTestManager {
 
     pub async fn run_all_tests(&self) -> Result<()> {
         info!("🧪 开始运行 Rust 1.90 异步特性集成测试套件");
-        
+
         // 逐个运行测试
         self.test_async_basic_functionality().await;
         self.test_async_error_handling().await;
@@ -56,7 +56,14 @@ impl IntegrationTestManager {
         Ok(())
     }
 
-    async fn record_test_result(&self, test_name: &str, success: bool, duration_ms: u64, error_message: Option<String>, metrics: TestMetrics) {
+    async fn record_test_result(
+        &self,
+        test_name: &str,
+        success: bool,
+        duration_ms: u64,
+        error_message: Option<String>,
+        metrics: TestMetrics,
+    ) {
         let result = TestResult {
             test_name: test_name.to_string(),
             success,
@@ -81,7 +88,10 @@ impl IntegrationTestManager {
         println!("总测试数: {}", total_tests);
         println!("成功: {}", successful_tests);
         println!("失败: {}", failed_tests);
-        println!("成功率: {:.2}%", (successful_tests as f64 / total_tests as f64) * 100.0);
+        println!(
+            "成功率: {:.2}%",
+            (successful_tests as f64 / total_tests as f64) * 100.0
+        );
         println!("总耗时: {:?}", total_duration);
 
         println!("\n详细结果:");
@@ -99,31 +109,37 @@ impl IntegrationTestManager {
 
     async fn analyze_performance(&self, results: &[TestResult]) {
         println!("\n⚡ 性能分析:");
-        
+
         let successful_results: Vec<_> = results.iter().filter(|r| r.success).collect();
         if successful_results.is_empty() {
             println!("没有成功的测试结果可供分析");
             return;
         }
 
-        let total_operations: usize = successful_results.iter()
+        let total_operations: usize = successful_results
+            .iter()
             .map(|r| r.metrics.operations_count)
             .sum();
-        
-        let avg_memory: f64 = successful_results.iter()
-            .map(|r| r.metrics.memory_usage_mb)
-            .sum::<f64>() / successful_results.len() as f64;
 
-        let avg_cpu: f64 = successful_results.iter()
+        let avg_memory: f64 = successful_results
+            .iter()
+            .map(|r| r.metrics.memory_usage_mb)
+            .sum::<f64>()
+            / successful_results.len() as f64;
+
+        let avg_cpu: f64 = successful_results
+            .iter()
             .map(|r| r.metrics.cpu_usage_percent)
-            .sum::<f64>() / successful_results.len() as f64;
+            .sum::<f64>()
+            / successful_results.len() as f64;
 
         println!("总操作数: {}", total_operations);
         println!("平均内存使用: {:.2} MB", avg_memory);
         println!("平均CPU使用: {:.2}%", avg_cpu);
 
         // 识别性能瓶颈
-        let slow_tests: Vec<_> = successful_results.iter()
+        let slow_tests: Vec<_> = successful_results
+            .iter()
             .filter(|r| r.duration_ms > 1000)
             .collect();
 
@@ -146,7 +162,8 @@ impl IntegrationTestManager {
             sleep(Duration::from_millis(10)).await;
             operations_count += 1;
             "async_result"
-        }.await;
+        }
+        .await;
 
         assert_eq!(result, "async_result");
         operations_count += 1;
@@ -174,8 +191,9 @@ impl IntegrationTestManager {
                 operations_count,
                 memory_usage_mb: 2.5,
                 cpu_usage_percent: 15.0,
-            }
-        ).await;
+            },
+        )
+        .await;
     }
 
     async fn test_async_error_handling(&self) {
@@ -190,7 +208,8 @@ impl IntegrationTestManager {
             } else {
                 Ok("成功".to_string())
             }
-        }.await;
+        }
+        .await;
 
         assert!(result.is_err());
         operations_count += 1;
@@ -201,7 +220,8 @@ impl IntegrationTestManager {
                 Ok(val) => Ok(val),
                 Err(_) => Ok("错误已恢复".to_string()),
             }
-        }.await;
+        }
+        .await;
 
         assert!(recovered_result.is_ok());
         assert_eq!(recovered_result.unwrap(), "错误已恢复");
@@ -217,8 +237,9 @@ impl IntegrationTestManager {
                 operations_count,
                 memory_usage_mb: 1.2,
                 cpu_usage_percent: 5.0,
-            }
-        ).await;
+            },
+        )
+        .await;
     }
 
     async fn test_async_concurrency_control(&self) {
@@ -273,8 +294,9 @@ impl IntegrationTestManager {
                 operations_count,
                 memory_usage_mb: 3.8,
                 cpu_usage_percent: 25.0,
-            }
-        ).await;
+            },
+        )
+        .await;
     }
 
     async fn test_async_resource_management(&self) {
@@ -285,7 +307,10 @@ impl IntegrationTestManager {
         // 测试资源自动清理
         {
             let resource = AsyncTestResource::new("test_resource".to_string());
-            let result = resource.process_data("test_data".to_string()).await.unwrap();
+            let result = resource
+                .process_data("test_data".to_string())
+                .await
+                .unwrap();
             assert_eq!(result, "processed: test_data");
             operations_count += 1;
         } // 资源在这里被自动清理
@@ -293,7 +318,7 @@ impl IntegrationTestManager {
         // 测试资源池
         let resource_pool = AsyncResourcePool::new(5);
         let mut handles = Vec::new();
-        
+
         for i in 0..15 {
             let pool = Arc::clone(&resource_pool);
             let handle = tokio::spawn(async move {
@@ -321,8 +346,9 @@ impl IntegrationTestManager {
                 operations_count,
                 memory_usage_mb: 4.2,
                 cpu_usage_percent: 20.0,
-            }
-        ).await;
+            },
+        )
+        .await;
     }
 
     async fn test_async_performance_benchmark(&self) {
@@ -361,8 +387,9 @@ impl IntegrationTestManager {
                 operations_count,
                 memory_usage_mb: 8.5,
                 cpu_usage_percent: 80.0,
-            }
-        ).await;
+            },
+        )
+        .await;
     }
 
     async fn test_async_memory_management(&self) {
@@ -376,8 +403,9 @@ impl IntegrationTestManager {
             let processed = async {
                 sleep(Duration::from_millis(1)).await;
                 large_data.len()
-            }.await;
-            
+            }
+            .await;
+
             assert_eq!(processed, 1024 * 1024);
             operations_count += 1;
         }
@@ -385,7 +413,7 @@ impl IntegrationTestManager {
         // 测试内存池使用
         let memory_pool = Arc::new(MemoryPool::new(10));
         let mut handles = Vec::new();
-        
+
         for i in 0..50 {
             let pool = Arc::clone(&memory_pool);
             let handle = tokio::spawn(async move {
@@ -413,8 +441,9 @@ impl IntegrationTestManager {
                 operations_count,
                 memory_usage_mb: 15.2,
                 cpu_usage_percent: 35.0,
-            }
-        ).await;
+            },
+        )
+        .await;
     }
 
     async fn test_async_network_operations(&self) {
@@ -424,7 +453,7 @@ impl IntegrationTestManager {
 
         // 模拟网络请求
         let network_client = MockNetworkClient::new();
-        
+
         let urls = vec![
             "http://example.com/api/1",
             "http://example.com/api/2",
@@ -433,9 +462,7 @@ impl IntegrationTestManager {
 
         let futures = urls.into_iter().map(|url| {
             let client = network_client.clone();
-            async move {
-                client.get(url).await
-            }
+            async move { client.get(url).await }
         });
 
         let results = futures::future::join_all(futures).await;
@@ -455,8 +482,9 @@ impl IntegrationTestManager {
                 operations_count,
                 memory_usage_mb: 2.1,
                 cpu_usage_percent: 10.0,
-            }
-        ).await;
+            },
+        )
+        .await;
     }
 
     async fn test_async_database_operations(&self) {
@@ -466,13 +494,14 @@ impl IntegrationTestManager {
 
         // 模拟数据库连接池
         let db_pool = MockDatabasePool::new(5);
-        
+
         // 模拟数据库操作
         let futures = (0..20).map(|i| {
             let pool = db_pool.clone();
             async move {
                 let conn = pool.acquire_connection().await;
-                conn.query(&format!("SELECT * FROM users WHERE id = {}", i)).await
+                conn.query(&format!("SELECT * FROM users WHERE id = {}", i))
+                    .await
             }
         });
 
@@ -493,8 +522,9 @@ impl IntegrationTestManager {
                 operations_count,
                 memory_usage_mb: 5.8,
                 cpu_usage_percent: 30.0,
-            }
-        ).await;
+            },
+        )
+        .await;
     }
 }
 
@@ -531,7 +561,7 @@ impl AsyncResourcePool {
         for i in 0..capacity {
             resources.push(AsyncTestResource::new(format!("resource_{}", i)));
         }
-        
+
         Arc::new(Self {
             resources: Arc::new(Mutex::new(resources)),
         })
@@ -539,7 +569,9 @@ impl AsyncResourcePool {
 
     async fn acquire(&self) -> AsyncTestResource {
         let mut resources = self.resources.lock().await;
-        resources.pop().unwrap_or_else(|| AsyncTestResource::new("new_resource".to_string()))
+        resources
+            .pop()
+            .unwrap_or_else(|| AsyncTestResource::new("new_resource".to_string()))
     }
 }
 
@@ -553,7 +585,7 @@ impl MemoryPool {
         for _ in 0..capacity {
             buffers.push(vec![0u8; 1024]); // 1KB buffer
         }
-        
+
         Self {
             buffers: Arc::new(Mutex::new(buffers)),
         }
@@ -593,7 +625,7 @@ impl MockDatabasePool {
         for _ in 0..capacity {
             connections.push(MockConnection);
         }
-        
+
         Arc::new(Self {
             connections: Arc::new(Mutex::new(connections)),
         })

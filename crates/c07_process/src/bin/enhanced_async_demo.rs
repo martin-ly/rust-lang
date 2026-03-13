@@ -1,13 +1,11 @@
 //! 增强的异步功能演示程序
-//! 
+//!
 //! 这个程序展示了增强的异步进程管理功能，包括异步闭包、
 //! 性能监控、错误恢复等 Rust 1.90 新特性
 #[cfg(feature = "async")]
-use c07_process::prelude::*;
+use c07_process::EnhancedAsyncProcessManager;
 #[cfg(feature = "async")]
-use c07_process::{
-    EnhancedAsyncProcessManager,  
-};
+use c07_process::prelude::*;
 #[cfg(feature = "async")]
 use std::collections::HashMap;
 #[cfg(feature = "async")]
@@ -67,32 +65,35 @@ async fn main() -> Result<()> {
 async fn demonstrate_basic_async_features(manager: &EnhancedAsyncProcessManager) -> Result<()> {
     // 创建进程配置
     let config = create_demo_config("basic_demo")?;
-    
+
     // 启动进程
     println!("  启动基础异步进程...");
     let pid = manager.spawn(config).await?;
     println!("  ✅ 进程启动成功，PID: {}", pid);
-    
+
     // 获取进程信息
     println!("  获取进程信息...");
     let info = manager.get_info(pid).await?;
     println!("  ✅ 进程信息: {:?}", info);
-    
+
     // 获取性能指标
     println!("  获取性能指标...");
     let metrics = manager.get_metrics(pid).await?;
     println!("  ✅ 性能指标: {:?}", metrics);
-    
+
     // 等待进程完成
     println!("  等待进程完成...");
-    if let Some(output) = manager.wait_with_timeout(pid, Duration::from_secs(5)).await? {
+    if let Some(output) = manager
+        .wait_with_timeout(pid, Duration::from_secs(5))
+        .await?
+    {
         println!("  ✅ 进程完成，退出码: {:?}", output.exit_code);
         println!("  📤 标准输出: {}", String::from_utf8_lossy(&output.stdout));
     } else {
         println!("  ⏰ 进程超时");
         let _ = manager.kill(pid, true).await;
     }
-    
+
     Ok(())
 }
 
@@ -100,7 +101,7 @@ async fn demonstrate_basic_async_features(manager: &EnhancedAsyncProcessManager)
 async fn demonstrate_async_closures(manager: &EnhancedAsyncProcessManager) -> Result<()> {
     // 创建进程配置
     let config = create_demo_config("async_closure_demo")?;
-    
+
     // 使用异步闭包启动进程
     println!("  使用异步闭包启动进程...");
     let callback = |result: ProcessResult<u32>| -> ProcessResult<()> {
@@ -115,18 +116,21 @@ async fn demonstrate_async_closures(manager: &EnhancedAsyncProcessManager) -> Re
             }
         }
     };
-    
+
     let pid = manager.spawn_with_callback(config, callback).await?;
     println!("  ✅ 异步闭包进程启动成功，PID: {}", pid);
-    
+
     // 等待进程完成
-    if let Some(output) = manager.wait_with_timeout(pid, Duration::from_secs(5)).await? {
+    if let Some(output) = manager
+        .wait_with_timeout(pid, Duration::from_secs(5))
+        .await?
+    {
         println!("  ✅ 异步闭包进程完成，退出码: {:?}", output.exit_code);
     } else {
         println!("  ⏰ 异步闭包进程超时");
         let _ = manager.kill(pid, true).await;
     }
-    
+
     Ok(())
 }
 
@@ -135,14 +139,14 @@ async fn demonstrate_performance_monitoring(manager: &EnhancedAsyncProcessManage
     // 创建多个进程进行性能监控
     println!("  创建多个进程进行性能监控...");
     let mut pids = Vec::new();
-    
+
     for i in 0..3 {
         let config = create_demo_config(&format!("perf_monitor_{}", i))?;
         let pid = manager.spawn(config).await?;
         pids.push(pid);
         println!("    ✅ 进程 {} 启动，PID: {}", i, pid);
     }
-    
+
     // 监控性能指标
     println!("  监控性能指标...");
     for (i, &pid) in pids.iter().enumerate() {
@@ -154,18 +158,21 @@ async fn demonstrate_performance_monitoring(manager: &EnhancedAsyncProcessManage
         println!("      I/O 写入: {} bytes", metrics.io_write_bytes);
         println!("      运行时间: {:?}", metrics.start_time.elapsed());
     }
-    
+
     // 等待所有进程完成
     println!("  等待所有进程完成...");
     for (i, &pid) in pids.iter().enumerate() {
-        if let Some(output) = manager.wait_with_timeout(pid, Duration::from_secs(5)).await? {
+        if let Some(output) = manager
+            .wait_with_timeout(pid, Duration::from_secs(5))
+            .await?
+        {
             println!("    ✅ 进程 {} 完成，运行时间: {:?}", i, output.duration);
         } else {
             println!("    ⏰ 进程 {} 超时", i);
             let _ = manager.kill(pid, true).await;
         }
     }
-    
+
     Ok(())
 }
 
@@ -173,7 +180,7 @@ async fn demonstrate_performance_monitoring(manager: &EnhancedAsyncProcessManage
 async fn demonstrate_error_recovery(manager: &EnhancedAsyncProcessManager) -> Result<()> {
     // 演示错误恢复机制
     println!("  演示错误恢复机制...");
-    
+
     // 尝试启动一个不存在的程序
     let invalid_config = ProcessConfig {
         program: "nonexistent_program".to_string(),
@@ -185,7 +192,7 @@ async fn demonstrate_error_recovery(manager: &EnhancedAsyncProcessManager) -> Re
         priority: None,
         resource_limits: Default::default(),
     };
-    
+
     match manager.spawn(invalid_config).await {
         Ok(pid) => {
             println!("    ⚠️ 意外成功启动进程，PID: {}", pid);
@@ -193,14 +200,14 @@ async fn demonstrate_error_recovery(manager: &EnhancedAsyncProcessManager) -> Re
         }
         Err(e) => {
             println!("    ✅ 预期的错误: {}", e);
-            
+
             // 演示错误恢复
             println!("    尝试错误恢复...");
             // 这里可以添加具体的错误恢复逻辑
             println!("    ✅ 错误恢复完成");
         }
     }
-    
+
     Ok(())
 }
 
@@ -208,17 +215,17 @@ async fn demonstrate_error_recovery(manager: &EnhancedAsyncProcessManager) -> Re
 async fn demonstrate_advanced_async_features(manager: &EnhancedAsyncProcessManager) -> Result<()> {
     // 演示高级异步功能
     println!("  演示高级异步功能...");
-    
+
     // 创建进程配置
     let config = create_demo_config("advanced_demo")?;
-    
+
     // 启动进程
     let pid = manager.spawn(config).await?;
     println!("    ✅ 高级异步进程启动，PID: {}", pid);
-    
+
     // 演示异步 I/O 操作
     println!("    演示异步 I/O 操作...");
-    
+
     // 写入标准输入
     let input_data = b"Hello from enhanced async demo!";
     if let Err(e) = manager.write_stdin(pid, input_data).await {
@@ -226,28 +233,40 @@ async fn demonstrate_advanced_async_features(manager: &EnhancedAsyncProcessManag
     } else {
         println!("      ✅ 写入标准输入成功");
     }
-    
+
     // 读取标准输出
     if let Ok(output_data) = manager.read_stdout(pid).await {
-        println!("      ✅ 读取标准输出: {}", String::from_utf8_lossy(&output_data));
+        println!(
+            "      ✅ 读取标准输出: {}",
+            String::from_utf8_lossy(&output_data)
+        );
     } else {
         println!("      ⚠️ 读取标准输出失败");
     }
-    
+
     // 等待进程完成
-    if let Some(output) = manager.wait_with_timeout(pid, Duration::from_secs(5)).await? {
+    if let Some(output) = manager
+        .wait_with_timeout(pid, Duration::from_secs(5))
+        .await?
+    {
         println!("    ✅ 高级异步进程完成");
         println!("      退出码: {:?}", output.exit_code);
         println!("      运行时间: {:?}", output.duration);
-        println!("      标准输出: {}", String::from_utf8_lossy(&output.stdout));
+        println!(
+            "      标准输出: {}",
+            String::from_utf8_lossy(&output.stdout)
+        );
         if !output.stderr.is_empty() {
-            println!("      标准错误: {}", String::from_utf8_lossy(&output.stderr));
+            println!(
+                "      标准错误: {}",
+                String::from_utf8_lossy(&output.stderr)
+            );
         }
     } else {
         println!("    ⏰ 高级异步进程超时");
         let _ = manager.kill(pid, true).await;
     }
-    
+
     Ok(())
 }
 
@@ -259,11 +278,18 @@ fn create_demo_config(name: &str) -> Result<ProcessConfig> {
     } else {
         env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
     }
-    
+
     Ok(ProcessConfig {
-        program: if cfg!(windows) { "cmd".to_string() } else { "echo".to_string() },
+        program: if cfg!(windows) {
+            "cmd".to_string()
+        } else {
+            "echo".to_string()
+        },
         args: if cfg!(windows) {
-            vec!["/c".to_string(), format!("echo {} - Enhanced Async Demo", name)]
+            vec![
+                "/c".to_string(),
+                format!("echo {} - Enhanced Async Demo", name),
+            ]
         } else {
             vec![format!("{} - Enhanced Async Demo", name)]
         },

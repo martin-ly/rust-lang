@@ -1,5 +1,5 @@
 //! 算法模块性能基准测试 / Algorithms Module Performance Benchmarks
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 fn bench_vector_operations(c: &mut Criterion) {
@@ -35,5 +35,10 @@ fn bench_search_operations(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, bench_vector_operations, bench_sorting_operations, bench_search_operations);
+criterion_group!(
+    benches,
+    bench_vector_operations,
+    bench_sorting_operations,
+    bench_search_operations
+);
 criterion_main!(benches);

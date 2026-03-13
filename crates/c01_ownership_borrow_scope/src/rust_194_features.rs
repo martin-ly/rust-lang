@@ -12,6 +12,10 @@
 //! - 版本: 1.0
 //! - Rust 版本: 1.94.0
 //! - Edition: 2024
+
+// 允许MSRV不兼容警告，因为本模块专门展示Rust 1.94+特性
+#![allow(clippy::incompatible_msrv)]
+
 use std::cell::RefCell;
 use std::mem::MaybeUninit;
 use std::ops::Deref;
@@ -33,7 +37,7 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 /// - 检测回文模式 (ABBA)
 /// - 滑动窗口平均值计算
 /// - 序列模式匹配
-
+///
 /// 检测字符串中是否存在 ABBA 模式
 ///
 /// 使用 array_windows 检测四个字符的模式：a1 b1 b2 a2，其中 a1 == a2 且 b1 == b2
@@ -108,6 +112,12 @@ pub struct LazyCache<T> {
     cell: OnceCell<T>,
 }
 
+impl<T> Default for LazyCache<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> LazyCache<T> {
     /// 创建新的延迟初始化缓存
     pub fn new() -> Self {
@@ -162,6 +172,15 @@ impl<T> LazyCache<T> {
 /// 注意：在 Rust 1.94 中可以直接使用 LazyLock::get()
 pub struct ThreadSafeLazyCache<T> {
     lock: OnceLock<T>,
+}
+
+impl<T> Default for ThreadSafeLazyCache<T>
+where
+    T: Send + Sync + 'static,
+{
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<T> ThreadSafeLazyCache<T> {
@@ -265,12 +284,7 @@ impl<T: Copy> SafeBuffer<T> {
 
     /// 获取已初始化部分的切片
     pub fn initialized_slice(&self) -> &[T] {
-        unsafe {
-            std::slice::from_raw_parts(
-                self.buffer.as_ptr() as *const T,
-                self.initialized,
-            )
-        }
+        unsafe { std::slice::from_raw_parts(self.buffer.as_ptr() as *const T, self.initialized) }
     }
 
     pub fn capacity(&self) -> usize {
@@ -290,7 +304,10 @@ impl<T> Drop for SafeBuffer<T> {
     fn drop(&mut self) {
         // 仅释放已初始化的元素
         unsafe {
-            std::ptr::drop_in_place(std::ptr::slice_from_raw_parts_mut(self.buffer.as_mut_ptr() as *mut T, self.initialized));
+            std::ptr::drop_in_place(std::ptr::slice_from_raw_parts_mut(
+                self.buffer.as_mut_ptr() as *mut T,
+                self.initialized,
+            ));
         }
     }
 }
@@ -313,21 +330,30 @@ impl<T> SmartPtrChain<T> {
 
     /// 转换为原始指针并保留元数据
     pub fn into_raw_parts(mut self) -> (*mut T, usize) {
-        let ptr = self.inner.take().map_or(std::ptr::null_mut(), |b| Box::into_raw(b));
+        let ptr = self
+            .inner
+            .take()
+            .map_or(std::ptr::null_mut(), |b| Box::into_raw(b));
         (ptr, self.metadata)
     }
 
     /// 从原始指针重建（不安全）
-    /// 
+    ///
     /// # Safety
     /// - ptr 必须是由 into_raw_parts 生成的有效指针
     /// - ptr 必须指向未释放的内存
-    pub unsafe fn from_raw_parts(ptr: *mut T, metadata: usize) -> Self { unsafe {
-        Self {
-            inner: if ptr.is_null() { None } else { Some(Box::from_raw(ptr)) },
-            metadata,
+    pub unsafe fn from_raw_parts(ptr: *mut T, metadata: usize) -> Self {
+        unsafe {
+            Self {
+                inner: if ptr.is_null() {
+                    None
+                } else {
+                    Some(Box::from_raw(ptr))
+                },
+                metadata,
+            }
         }
-    }}
+    }
 
     pub fn metadata(&self) -> usize {
         self.metadata
@@ -449,29 +475,29 @@ impl Default for ZeroCopyString {
 /// - 数学计算和算法实现
 /// - 黄金分割搜索算法
 /// - 数论和特殊函数计算
-
+///
 /// f32 数学常量模块
 pub mod math_consts_f32 {
     /// 欧拉-马歇罗尼常数 (Euler-Mascheroni constant)
-    /// 
+    ///
     /// 约等于 0.5772156649
-    /// 
+    ///
     /// # 数学定义
     /// γ = lim(n→∞) [Σ(1/k, k=1..n) - ln(n)]
     pub const EULER_GAMMA: f32 = 0.577_215_7_f32;
 
     /// 黄金比例 (Golden Ratio)
-    /// 
+    ///
     /// 约等于 1.6180339887
-    /// 
+    ///
     /// # 数学定义
     /// φ = (1 + √5) / 2
     pub const GOLDEN_RATIO: f32 = 1.618034_f32;
 
     /// 黄金比例的共轭
-    /// 
+    ///
     /// 约等于 -0.6180339887
-    /// 
+    ///
     /// # 数学定义
     /// φ' = (1 - √5) / 2 = 1 - φ = -1/φ
     pub const GOLDEN_RATIO_CONJUGATE: f32 = -0.618034_f32;
@@ -480,25 +506,25 @@ pub mod math_consts_f32 {
 /// f64 数学常量模块
 pub mod math_consts_f64 {
     /// 欧拉-马歇罗尼常数 (Euler-Mascheroni constant)
-    /// 
+    ///
     /// 约等于 0.5772156649015329
-    /// 
+    ///
     /// # 数学定义
     /// γ = lim(n→∞) [Σ(1/k, k=1..n) - ln(n)]
     pub const EULER_GAMMA: f64 = 0.5772156649015329_f64;
 
     /// 黄金比例 (Golden Ratio)
-    /// 
+    ///
     /// 约等于 1.618033988749895
-    /// 
+    ///
     /// # 数学定义
     /// φ = (1 + √5) / 2
     pub const GOLDEN_RATIO: f64 = 1.618033988749895_f64;
 
     /// 黄金比例的共轭
-    /// 
+    ///
     /// 约等于 -0.6180339887498949
-    /// 
+    ///
     /// # 数学定义
     /// φ' = (1 - √5) / 2 = 1 - φ = -1/φ
     pub const GOLDEN_RATIO_CONJUGATE: f64 = -0.6180339887498949_f64;
@@ -574,7 +600,7 @@ pub fn harmonic_number(n: u64) -> f64 {
     if n == 0 {
         return 0.0;
     }
-    
+
     (1..=n).map(|k| 1.0 / k as f64).sum()
 }
 
@@ -586,7 +612,7 @@ pub fn harmonic_number_approx(n: u64) -> f64 {
     if n == 0 {
         return 0.0;
     }
-    
+
     let n_f64 = n as f64;
     n_f64.ln() + math_consts_f64::EULER_GAMMA + 1.0 / (2.0 * n_f64)
 }
@@ -625,16 +651,19 @@ pub fn demonstrate_rust_194_features() {
     // 2. LazyCell 新方法演示
     println!("\n2. LazyCell 新方法 (get, get_mut, force_mut):");
     let mut cache = LazyCache::<Vec<i32>>::new();
-    
+
     println!("   初始化前 try_get(): {:?}", cache.try_get());
     println!("   是否已初始化: {}", cache.is_initialized());
-    
+
     let _ = cache.get_or_init(|| {
         println!("   [LazyCell] 执行初始化...");
         vec![1, 2, 3, 4, 5]
     }); // 触发初始化
-    println!("   初始化后 try_get(): {:?}", cache.try_get().map(|v| v.as_slice()));
-    
+    println!(
+        "   初始化后 try_get(): {:?}",
+        cache.try_get().map(|v| v.as_slice())
+    );
+
     // 使用 force_get_mut 获取可变引用
     let mutable_ref = cache.force_get_mut(std::vec::Vec::new);
     mutable_ref.push(6);
@@ -646,18 +675,12 @@ pub fn demonstrate_rust_194_features() {
         "   欧拉-马歇罗尼常数 (f64): {:.10}",
         math_consts_f64::EULER_GAMMA
     );
-    println!(
-        "   黄金比例 (f64): {:.10}",
-        math_consts_f64::GOLDEN_RATIO
-    );
+    println!("   黄金比例 (f64): {:.10}", math_consts_f64::GOLDEN_RATIO);
     println!(
         "   欧拉-马歇罗尼常数 (f32): {:.7}",
         math_consts_f32::EULER_GAMMA
     );
-    println!(
-        "   黄金比例 (f32): {:.7}",
-        math_consts_f32::GOLDEN_RATIO
-    );
+    println!("   黄金比例 (f32): {:.7}", math_consts_f32::GOLDEN_RATIO);
 
     // 黄金分割搜索演示
     let gss = GoldenSectionSearch::new(1e-6, 100);
@@ -716,13 +739,13 @@ mod tests {
     #[test]
     fn test_lazy_cache_get() {
         let cache = LazyCache::<i32>::new();
-        
+
         // 初始化前 try_get() 应该返回 None
         assert_eq!(cache.try_get(), None);
-        
+
         // 获取值触发初始化
         assert_eq!(cache.get_or_init(|| 42), &42);
-        
+
         // 初始化后 try_get() 应该返回 Some
         assert_eq!(cache.try_get(), Some(&42));
     }
@@ -730,14 +753,14 @@ mod tests {
     #[test]
     fn test_lazy_cache_get_mut() {
         let mut cache = LazyCache::<Vec<i32>>::new();
-        
+
         // 初始化前 get_mut() 应该返回 None
         assert_eq!(cache.try_get_mut(), None);
-        
+
         // 使用 force_get_mut 触发初始化并获取可变引用
         let mutable = cache.force_get_mut(|| vec![1, 2, 3]);
         mutable.push(4);
-        
+
         // 验证修改
         assert_eq!(cache.try_get(), Some(&vec![1, 2, 3, 4]));
     }
@@ -746,7 +769,7 @@ mod tests {
     fn test_lazy_cache_is_initialized() {
         let cache = LazyCache::<i32>::new();
         assert!(!cache.is_initialized());
-        
+
         let _ = cache.get_or_init(|| 100);
         assert!(cache.is_initialized());
     }
@@ -763,14 +786,14 @@ mod tests {
     #[test]
     fn test_thread_safe_lazy_cache() {
         let cache = ThreadSafeLazyCache::<String>::new();
-        
+
         // 初始化前
         assert_eq!(cache.try_get(), None);
         assert!(!cache.is_initialized());
-        
+
         // 获取值
         assert_eq!(cache.get_or_init(|| "hello".to_string()), "hello");
-        
+
         // 初始化后
         assert_eq!(cache.try_get(), Some(&"hello".to_string()));
         assert!(cache.is_initialized());
@@ -810,11 +833,11 @@ mod tests {
     fn test_smart_ptr_chain() {
         let chain = SmartPtrChain::new(100);
         assert_eq!(chain.metadata(), 0);
-        
+
         let (ptr, meta) = chain.into_raw_parts();
         assert!(!ptr.is_null());
         assert_eq!(unsafe { *ptr }, 100);
-        
+
         let _restored = unsafe { SmartPtrChain::from_raw_parts(ptr, meta) };
     }
 
@@ -842,7 +865,7 @@ mod tests {
         let original = String::from("Hello, Rust 1.94!");
         let zc = ZeroCopyString::from_string(original);
         assert_eq!(zc.as_str(), "Hello, Rust 1.94!");
-        
+
         let restored = zc.into_string();
         assert_eq!(restored, "Hello, Rust 1.94!");
     }

@@ -48,14 +48,15 @@ impl PerformanceAnalyzer {
         let mut analysis = PerformanceAnalysis::new();
 
         if let Some(baseline_name) = &self.baseline
-            && let Some(baseline) = self.results.get(baseline_name) {
-                for (name, result) in &self.results {
-                    if name != baseline_name {
-                        let improvement = self.calculate_improvement(baseline, result);
-                        analysis.add_comparison(name.clone(), improvement);
-                    }
+            && let Some(baseline) = self.results.get(baseline_name)
+        {
+            for (name, result) in &self.results {
+                if name != baseline_name {
+                    let improvement = self.calculate_improvement(baseline, result);
+                    analysis.add_comparison(name.clone(), improvement);
                 }
             }
+        }
 
         analysis
     }

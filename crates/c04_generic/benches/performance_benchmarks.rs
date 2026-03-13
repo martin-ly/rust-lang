@@ -1,5 +1,5 @@
 //! 泛型模块性能基准测试 / Generics Module Performance Benchmarks
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 fn bench_generic_operations(c: &mut Criterion) {
     c.bench_function("generic_operations", |b| {
@@ -43,5 +43,10 @@ fn bench_trait_operations(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, bench_generic_operations, bench_type_inference, bench_trait_operations);
+criterion_group!(
+    benches,
+    bench_generic_operations,
+    bench_type_inference,
+    bench_trait_operations
+);
 criterion_main!(benches);

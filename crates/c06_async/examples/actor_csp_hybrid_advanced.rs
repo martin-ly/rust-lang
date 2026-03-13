@@ -1,52 +1,95 @@
 use std::sync::Arc;
 use std::time::Duration;
 
-use tokio::select;
-use tokio::sync::{broadcast, mpsc, Mutex};
-use tokio::time::{interval, sleep, Instant};
-use tracing::{info, warn, instrument};
 use c06_async::utils::{metrics, supervisor};
+use tokio::select;
+use tokio::sync::{Mutex, broadcast, mpsc};
+use tokio::time::{Instant, interval, sleep};
+use tracing::{info, instrument, warn};
 
 // 指标导出（Prometheus）
 use prometheus::{Histogram, HistogramOpts, IntCounter, IntGauge, Opts, Registry};
 
 #[derive(Clone, Debug)]
-enum Priority { High, Normal }
+enum Priority {
+    High,
+    Normal,
+}
 
 #[derive(Clone, Debug)]
-struct Message { priority: Priority, payload: String }
+struct Message {
+    priority: Priority,
+    payload: String,
+}
 
 #[derive(Clone)]
-struct IngressActor { tx_high: mpsc::Sender<Message>, tx_norm: mpsc::Sender<Message> }
+struct IngressActor {
+    tx_high: mpsc::Sender<Message>,
+    tx_norm: mpsc::Sender<Message>,
+}
 
 impl IngressActor {
-    fn new(tx_high: mpsc::Sender<Message>, tx_norm: mpsc::Sender<Message>) -> Self { Self { tx_high, tx_norm } }
+    fn new(tx_high: mpsc::Sender<Message>, tx_norm: mpsc::Sender<Message>) -> Self {
+        Self { tx_high, tx_norm }
+    }
     async fn send(&self, msg: Message) {
-        let res = match msg.priority { Priority::High => self.tx_high.send(msg).await, Priority::Normal => self.tx_norm.send(msg).await };
-        if let Err(e) = res { warn!(error = %e, "ingress mailbox full or closed"); }
+        let res = match msg.priority {
+            Priority::High => self.tx_high.send(msg).await,
+            Priority::Normal => self.tx_norm.send(msg).await,
+        };
+        if let Err(e) = res {
+            warn!(error = %e, "ingress mailbox full or closed");
+        }
     }
 }
 
 /// 简易限速器：令牌桶
-struct TokenBucket { capacity: u64, tokens: u64, refill_per_ms: f64, last: Instant }
+struct TokenBucket {
+    capacity: u64,
+    tokens: u64,
+    refill_per_ms: f64,
+    last: Instant,
+}
 
 impl TokenBucket {
     fn new(capacity: u64, refill_per_sec: u64) -> Self {
-        Self { capacity, tokens: capacity, refill_per_ms: refill_per_sec as f64 / 1000.0, last: Instant::now() }
+        Self {
+            capacity,
+            tokens: capacity,
+            refill_per_ms: refill_per_sec as f64 / 1000.0,
+            last: Instant::now(),
+        }
     }
     fn allow(&mut self, cost: u64) -> bool {
         let now = Instant::now();
         let elapsed_ms = now.duration_since(self.last).as_millis() as f64;
         let add = (elapsed_ms * self.refill_per_ms) as u64;
-        if add > 0 { self.tokens = (self.tokens + add).min(self.capacity); self.last = now; }
-        if self.tokens >= cost { self.tokens -= cost; true } else { false }
+        if add > 0 {
+            self.tokens = (self.tokens + add).min(self.capacity);
+            self.last = now;
+        }
+        if self.tokens >= cost {
+            self.tokens -= cost;
+            true
+        } else {
+            false
+        }
     }
 }
 
 // 监督器已抽取到 utils::supervisor
 
-#[instrument(skip(rx_high, rx_norm, tx_pipeline, shutdown_rx), level = "info", name = "mailbox_mux")]
-async fn run_mailbox_mux(mut rx_high: mpsc::Receiver<Message>, mut rx_norm: mpsc::Receiver<Message>, tx_pipeline: mpsc::Sender<Message>, mut shutdown_rx: broadcast::Receiver<()>) -> anyhow::Result<()> {
+#[instrument(
+    skip(rx_high, rx_norm, tx_pipeline, shutdown_rx),
+    level = "info",
+    name = "mailbox_mux"
+)]
+async fn run_mailbox_mux(
+    mut rx_high: mpsc::Receiver<Message>,
+    mut rx_norm: mpsc::Receiver<Message>,
+    tx_pipeline: mpsc::Sender<Message>,
+    mut shutdown_rx: broadcast::Receiver<()>,
+) -> anyhow::Result<()> {
     loop {
         select! {
             biased;
@@ -59,7 +102,11 @@ async fn run_mailbox_mux(mut rx_high: mpsc::Receiver<Message>, mut rx_norm: mpsc
     Ok(())
 }
 
-#[instrument(skip(rx, limiter, shutdown_rx, processed_total, dropped_total, process_hist), level = "info", name = "stage_limited")]
+#[instrument(
+    skip(rx, limiter, shutdown_rx, processed_total, dropped_total, process_hist),
+    level = "info",
+    name = "stage_limited"
+)]
 async fn run_stage_limited(
     mut rx: mpsc::Receiver<Message>,
     limiter: Arc<Mutex<TokenBucket>>,
@@ -114,7 +161,10 @@ async fn run_metrics_heartbeat(mut shutdown_rx: broadcast::Receiver<()>) -> anyh
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let _ = tracing_subscriber::fmt().with_env_filter("info").with_target(false).try_init();
+    let _ = tracing_subscriber::fmt()
+        .with_env_filter("info")
+        .with_target(false)
+        .try_init();
 
     // 广播关闭（任务组取消）
     let (shutdown_tx, _shutdown_rx) = broadcast::channel::<()>(8);
@@ -130,56 +180,71 @@ async fn main() -> anyhow::Result<()> {
 
     // Prometheus 指标注册
     let registry = Registry::new();
-    let processed_total = IntCounter::with_opts(Opts::new("stage_processed_total", "总处理条数")).unwrap();
-    let dropped_total = IntCounter::with_opts(Opts::new("stage_dropped_total", "限速丢弃条数")).unwrap();
+    let processed_total =
+        IntCounter::with_opts(Opts::new("stage_processed_total", "总处理条数")).unwrap();
+    let dropped_total =
+        IntCounter::with_opts(Opts::new("stage_dropped_total", "限速丢弃条数")).unwrap();
     let inflight_gauge = IntGauge::with_opts(Opts::new("mailbox_inflight", "入口在途(估算)"));
-    let process_hist = Histogram::with_opts(HistogramOpts::new("stage_process_seconds", "处理耗时(秒)")).unwrap();
-    registry.register(Box::new(processed_total.clone())).unwrap();
+    let process_hist =
+        Histogram::with_opts(HistogramOpts::new("stage_process_seconds", "处理耗时(秒)")).unwrap();
+    registry
+        .register(Box::new(processed_total.clone()))
+        .unwrap();
     registry.register(Box::new(dropped_total.clone())).unwrap();
     registry.register(Box::new(process_hist.clone())).unwrap();
-    if let Ok(g) = inflight_gauge { let _ = registry.register(Box::new(g)); }
+    if let Ok(g) = inflight_gauge {
+        let _ = registry.register(Box::new(g));
+    }
 
     // 监督：合并器
     let mux_shutdown = shutdown_tx.subscribe();
     let rxh_cell = std::sync::Arc::new(std::sync::Mutex::new(Some(rx_high)));
     let rxn_cell = std::sync::Arc::new(std::sync::Mutex::new(Some(rx_norm)));
-    let mux_handle = tokio::spawn(supervisor::supervise("mux", move || {
-        let txp = tx_pipeline.clone();
-        let sdr = mux_shutdown.resubscribe();
-        let rxh_cell_cloned = rxh_cell.clone();
-        let rxn_cell_cloned = rxn_cell.clone();
-        async move {
-            let rxh = rxh_cell_cloned.lock().unwrap().take();
-            let rxn = rxn_cell_cloned.lock().unwrap().take();
-            if let (Some(rxh), Some(rxn)) = (rxh, rxn) {
-                run_mailbox_mux(rxh, rxn, txp, sdr).await
-            } else {
-                // 已经消费过接收端，后续重启时直接退出
-                Ok(())
+    let mux_handle = tokio::spawn(supervisor::supervise(
+        "mux",
+        move || {
+            let txp = tx_pipeline.clone();
+            let sdr = mux_shutdown.resubscribe();
+            let rxh_cell_cloned = rxh_cell.clone();
+            let rxn_cell_cloned = rxn_cell.clone();
+            async move {
+                let rxh = rxh_cell_cloned.lock().unwrap().take();
+                let rxn = rxn_cell_cloned.lock().unwrap().take();
+                if let (Some(rxh), Some(rxn)) = (rxh, rxn) {
+                    run_mailbox_mux(rxh, rxn, txp, sdr).await
+                } else {
+                    // 已经消费过接收端，后续重启时直接退出
+                    Ok(())
+                }
             }
-        }
-    }, shutdown_tx.subscribe()));
+        },
+        shutdown_tx.subscribe(),
+    ));
 
     // 监督：限速阶段
     let stage_shutdown = shutdown_tx.subscribe();
     let limiter_cloned = limiter.clone();
     let rxp_cell = std::sync::Arc::new(std::sync::Mutex::new(Some(rx_pipeline)));
-    let stage_handle = tokio::spawn(supervisor::supervise("stage", move || {
-        let sdr = stage_shutdown.resubscribe();
-        let lim = limiter_cloned.clone();
-        let processed = processed_total.clone();
-        let dropped = dropped_total.clone();
-        let hist = process_hist.clone();
-        let rxp_cell_cloned = rxp_cell.clone();
-        async move {
-            let rxp = rxp_cell_cloned.lock().unwrap().take();
-            if let Some(rxp) = rxp {
-                run_stage_limited(rxp, lim, sdr, processed, dropped, hist).await
-            } else {
-                Ok(())
+    let stage_handle = tokio::spawn(supervisor::supervise(
+        "stage",
+        move || {
+            let sdr = stage_shutdown.resubscribe();
+            let lim = limiter_cloned.clone();
+            let processed = processed_total.clone();
+            let dropped = dropped_total.clone();
+            let hist = process_hist.clone();
+            let rxp_cell_cloned = rxp_cell.clone();
+            async move {
+                let rxp = rxp_cell_cloned.lock().unwrap().take();
+                if let Some(rxp) = rxp {
+                    run_stage_limited(rxp, lim, sdr, processed, dropped, hist).await
+                } else {
+                    Ok(())
+                }
             }
-        }
-    }, shutdown_tx.subscribe()));
+        },
+        shutdown_tx.subscribe(),
+    ));
 
     // 指标心跳（示例）
     let hb_handle = tokio::spawn(run_metrics_heartbeat(shutdown_tx.subscribe()));
@@ -189,7 +254,16 @@ async fn main() -> anyhow::Result<()> {
 
     // 注入一些请求（混合优先级）
     for i in 0..120 {
-        ingress.send(Message { priority: if i % 5 == 0 { Priority::High } else { Priority::Normal }, payload: format!("job-{i}") }).await;
+        ingress
+            .send(Message {
+                priority: if i % 5 == 0 {
+                    Priority::High
+                } else {
+                    Priority::Normal
+                },
+                payload: format!("job-{i}"),
+            })
+            .await;
     }
 
     // 运行一段时间，然后广播关闭
@@ -203,5 +277,3 @@ async fn main() -> anyhow::Result<()> {
 
     Ok(())
 }
-
-

@@ -52,29 +52,29 @@ use std::marker::PhantomData;
 /// - 数论和特殊函数计算
 // use std::f32;  // 目前直接使用模块常量
 // use std::f64;
-
+///
 /// f32 数学常量模块
 pub mod math_consts_f32 {
     /// 欧拉-马歇罗尼常数 (Euler-Mascheroni constant)
-    /// 
+    ///
     /// 约等于 0.5772156649
-    /// 
+    ///
     /// # 数学定义
     /// γ = lim(n→∞) [Σ(1/k, k=1..n) - ln(n)]
     pub const EULER_GAMMA: f32 = 0.577_215_7_f32;
 
     /// 黄金比例 (Golden Ratio)
-    /// 
+    ///
     /// 约等于 1.6180339887
-    /// 
+    ///
     /// # 数学定义
     /// φ = (1 + √5) / 2
     pub const GOLDEN_RATIO: f32 = 1.618034_f32;
 
     /// 黄金比例的共轭
-    /// 
+    ///
     /// 约等于 -0.6180339887
-    /// 
+    ///
     /// # 数学定义
     /// φ' = (1 - √5) / 2 = 1 - φ = -1/φ
     pub const GOLDEN_RATIO_CONJUGATE: f32 = -0.618034_f32;
@@ -83,25 +83,25 @@ pub mod math_consts_f32 {
 /// f64 数学常量模块
 pub mod math_consts_f64 {
     /// 欧拉-马歇罗尼常数 (Euler-Mascheroni constant)
-    /// 
+    ///
     /// 约等于 0.5772156649015329
-    /// 
+    ///
     /// # 数学定义
     /// γ = lim(n→∞) [Σ(1/k, k=1..n) - ln(n)]
     pub const EULER_GAMMA: f64 = 0.5772156649015329_f64;
 
     /// 黄金比例 (Golden Ratio)
-    /// 
+    ///
     /// 约等于 1.618033988749895
-    /// 
+    ///
     /// # 数学定义
     /// φ = (1 + √5) / 2
     pub const GOLDEN_RATIO: f64 = 1.618033988749895_f64;
 
     /// 黄金比例的共轭
-    /// 
+    ///
     /// 约等于 -0.6180339887498949
-    /// 
+    ///
     /// # 数学定义
     /// φ' = (1 - √5) / 2 = 1 - φ = -1/φ
     pub const GOLDEN_RATIO_CONJUGATE: f64 = -0.6180339887498949_f64;
@@ -177,7 +177,7 @@ pub fn harmonic_number(n: u64) -> f64 {
     if n == 0 {
         return 0.0;
     }
-    
+
     (1..=n).map(|k| 1.0 / k as f64).sum()
 }
 
@@ -189,7 +189,7 @@ pub fn harmonic_number_approx(n: u64) -> f64 {
     if n == 0 {
         return 0.0;
     }
-    
+
     let n_f64 = n as f64;
     n_f64.ln() + math_consts_f64::EULER_GAMMA + 1.0 / (2.0 * n_f64)
 }
@@ -214,7 +214,6 @@ pub fn harmonic_number_approx(n: u64) -> f64 {
 /// ## 注意
 /// 在 Rust 1.94 之前的版本中，可以直接使用 `c as usize` 进行转换，
 /// 因为 char 的 Unicode 标量值范围 (0..=0x10FFFF) 在 usize 的范围内。
-
 /// 将 char 转换为 usize
 ///
 /// 在 Rust 1.94 中，可以直接使用 `usize::try_from(c)`。
@@ -275,7 +274,7 @@ impl UnicodeCharInfo {
     pub fn from_char(c: char) -> Option<Self> {
         // Rust 1.94: let scalar_value = usize::try_from(c).ok()?;
         let scalar_value = c as usize;
-        
+
         let category = if c.is_ascii_control() {
             CharCategory::Control
         } else if c.is_ascii_alphabetic() || c.is_alphabetic() {
@@ -315,7 +314,7 @@ impl UnicodeCharInfo {
 /// - 更好的闭包类型推断 / Better closure type inference
 /// - 改进的泛型方法推断 / Improved generic method inference
 /// - 更智能的关联类型推断 / Smarter associated type inference
-
+///
 /// 类型处理器 - 演示增强的类型推断
 ///
 /// Rust 1.94.0: 改进的类型推断使得复杂的泛型模式更易于使用
@@ -385,7 +384,6 @@ impl<T: PartialEq, U> PartialEq for ProcessedValue<T, U> {
 ///
 /// Rust 1.94.0 简化了复杂的泛型约束表达式，提高了可读性：
 /// Rust 1.94.0 simplifies complex generic constraint expressions for better readability:
-
 /// 类型容器 Trait - 演示改进的约束处理
 ///
 /// Rust 1.94.0: 更清晰的约束语法
@@ -472,7 +470,6 @@ impl<T: Clone + Send + Sync + 'static + Default> Default for TypedContainer<T> {
 ///
 /// Rust 1.94.0 提供了更精确的类型系统验证工具：
 /// Rust 1.94.0 provides more precise type system validation tools:
-
 /// 类型验证器
 ///
 /// Rust 1.94.0: 增强的类型系统验证
@@ -487,11 +484,13 @@ impl PreciseTypeValidator {
     /// 验证类型是否满足约束
     ///
     /// Rust 1.94.0: 更精确的类型约束检查
+    #[allow(clippy::extra_unused_type_parameters)]
     pub fn validate<T>(&self) -> bool
     where
         T: Clone + Send + 'static,
     {
         // 在 Rust 1.94.0 中，编译器能更精确地验证这些约束
+        let _ = std::marker::PhantomData::<T>;
         true
     }
 
@@ -522,7 +521,6 @@ impl Default for PreciseTypeValidator {
 ///
 /// Rust 1.94.0 与 Edition 2024 的深度集成：
 /// Rust 1.94.0 deep integration with Edition 2024:
-
 /// Edition 2024 兼容的类型包装器
 ///
 /// Rust 1.94.0: Edition 2024 类型系统优化
@@ -594,7 +592,7 @@ impl<T> Edition2024Wrapper<T> {
 /// - 类型安全的滑动窗口计算
 /// - 编译时验证的序列模式匹配
 /// - 高性能数值计算
-
+///
 /// 类型安全的滑动窗口分析器
 ///
 /// 使用 array_windows 实现编译时确定窗口大小的分析器
@@ -623,14 +621,10 @@ impl WindowAnalyzer {
     {
         let windows: Vec<_> = data.array_windows::<N>().collect();
         let count = windows.len();
-        
+
         // 计算总和（简化示例）
-        let sum = if count > 0 {
-            windows[0][0] // 简化处理
-        } else {
-            windows[0][0]
-        };
-        
+        let sum = windows[0][0]; // 简化处理
+
         WindowStats {
             window_size: N,
             window_count: count,
@@ -847,7 +841,6 @@ where
 ///
 /// Rust 1.94.0 增强了类型级编程能力：
 /// Rust 1.94.0 enhances type-level programming capabilities:
-
 /// 类型级布尔值
 pub trait TypeBool {
     const VALUE: bool;
@@ -876,7 +869,7 @@ pub struct TypeEq<T, U>(PhantomData<(T, U)>);
 // impl<T> TypeBool for TypeEq<T, T> {
 //     const VALUE: bool = true;
 // }
-// 
+//
 // impl<T, U> TypeBool for TypeEq<T, U> {
 //     default const VALUE: bool = false;
 // }
@@ -916,18 +909,12 @@ pub fn demonstrate_rust_194_type_system_features() {
         "   欧拉-马歇罗尼常数 (f64): {:.10}",
         math_consts_f64::EULER_GAMMA
     );
-    println!(
-        "   黄金比例 (f64): {:.10}",
-        math_consts_f64::GOLDEN_RATIO
-    );
+    println!("   黄金比例 (f64): {:.10}", math_consts_f64::GOLDEN_RATIO);
     println!(
         "   欧拉-马歇罗尼常数 (f32): {:.7}",
         math_consts_f32::EULER_GAMMA
     );
-    println!(
-        "   黄金比例 (f32): {:.7}",
-        math_consts_f32::GOLDEN_RATIO
-    );
+    println!("   黄金比例 (f32): {:.7}", math_consts_f32::GOLDEN_RATIO);
 
     // 黄金分割搜索演示
     let gss = GoldenSectionSearch::new(1e-6, 100);
@@ -1012,7 +999,7 @@ pub fn demonstrate_rust_194_type_system_features() {
     println!("\n9. LazyCell 类型推断:");
     let cache = TypeInferredCache::<Vec<i32>>::new();
     println!("   初始化前: {:?}", cache.try_get());
-    
+
     let value = cache.get_or_init(|| vec![1, 2, 3, 4, 5]);
     println!("   初始化后: {:?}", value);
     println!("   已初始化: {}", cache.is_initialized());
@@ -1033,8 +1020,8 @@ pub fn get_rust_194_type_system_info() -> String {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use super::math_consts_f64;
+    use super::*;
 
     // ==================== 数学常量测试 ====================
 
@@ -1230,7 +1217,9 @@ mod tests {
         assert!(SequenceValidator::is_monotonically_increasing(&increasing));
 
         let not_increasing = vec![1, 3, 2, 4, 5];
-        assert!(!SequenceValidator::is_monotonically_increasing(&not_increasing));
+        assert!(!SequenceValidator::is_monotonically_increasing(
+            &not_increasing
+        ));
 
         let empty: &[i32] = &[];
         assert!(SequenceValidator::is_monotonically_increasing(empty));
@@ -1245,7 +1234,9 @@ mod tests {
         assert!(SequenceValidator::is_monotonically_decreasing(&decreasing));
 
         let not_decreasing = vec![5, 3, 4, 2, 1];
-        assert!(!SequenceValidator::is_monotonically_decreasing(&not_decreasing));
+        assert!(!SequenceValidator::is_monotonically_decreasing(
+            &not_decreasing
+        ));
     }
 
     #[test]
@@ -1277,14 +1268,14 @@ mod tests {
     #[test]
     fn test_type_inferred_cache_get() {
         let cache = TypeInferredCache::<i32>::new();
-        
+
         // 初始化前
         assert_eq!(cache.try_get(), None);
         assert!(!cache.is_initialized());
-        
+
         // 获取值触发初始化
         assert_eq!(cache.get_or_init(|| 42), &42);
-        
+
         // 初始化后
         assert_eq!(cache.try_get(), Some(&42));
         assert!(cache.is_initialized());
@@ -1293,14 +1284,14 @@ mod tests {
     #[test]
     fn test_type_inferred_cache_get_mut() {
         let mut cache = TypeInferredCache::<Vec<i32>>::new();
-        
+
         // 初始化前 get_mut() 应该返回 None
         assert_eq!(cache.try_get_mut(), None);
-        
+
         // 使用 force_get_mut 触发初始化
         let mutable = cache.force_get_mut(|| vec![1, 2, 3]);
         mutable.push(4);
-        
+
         // 验证修改
         assert_eq!(cache.try_get(), Some(&vec![1, 2, 3, 4]));
     }
@@ -1308,12 +1299,12 @@ mod tests {
     #[test]
     fn test_thread_safe_type_cache() {
         let cache = ThreadSafeTypeCache::<String>::new();
-        
+
         assert_eq!(cache.try_get(), None);
         assert!(!cache.is_initialized());
-        
+
         assert_eq!(cache.get_or_init(|| "hello".to_string()), "hello");
-        
+
         assert_eq!(cache.try_get(), Some(&"hello".to_string()));
         assert!(cache.is_initialized());
     }
@@ -1322,11 +1313,11 @@ mod tests {
     fn test_lazy_factory() {
         let factory = LazyFactory::new(|| 42);
         assert!(!factory.is_initialized());
-        
+
         let value = factory.get();
         assert_eq!(value, &42);
         assert!(factory.is_initialized());
-        
+
         // 再次获取应该返回相同的值
         let value2 = factory.get();
         assert_eq!(value2, &42);

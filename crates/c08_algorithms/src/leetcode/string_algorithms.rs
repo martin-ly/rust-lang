@@ -152,20 +152,22 @@ pub fn can_construct(ransom_note: String, magazine: String) -> bool {
     // Rust 1.91 JIT 优化：字符迭代器遍历
     for ch in magazine.chars() {
         if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
-            && index < 26 {
-                counts[index as usize] += 1;
-            }
+            && index < 26
+        {
+            counts[index as usize] += 1;
+        }
     }
 
     for ch in ransom_note.chars() {
         if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
-            && index < 26 {
-                let idx = index as usize;
-                if counts[idx] <= 0 {
-                    return false;
-                }
-                counts[idx] -= 1;
+            && index < 26
+        {
+            let idx = index as usize;
+            if counts[idx] <= 0 {
+                return false;
             }
+            counts[idx] -= 1;
+        }
     }
 
     true
@@ -189,17 +191,20 @@ pub fn first_uniq_char(s: String) -> i32 {
     // Rust 1.91 JIT 优化：第一次遍历统计频率
     for ch in s.chars() {
         if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
-            && index < 26 {
-                counts[index as usize] += 1;
-            }
+            && index < 26
+        {
+            counts[index as usize] += 1;
+        }
     }
 
     // Rust 1.91 JIT 优化：第二次遍历查找第一个唯一字符
     for (i, ch) in s.char_indices() {
         if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
-            && index < 26 && counts[index as usize] == 1 {
-                return i as i32;
-            }
+            && index < 26
+            && counts[index as usize] == 1
+        {
+            return i as i32;
+        }
     }
 
     -1
@@ -229,12 +234,13 @@ pub fn is_subsequence(s: String, t: String) -> bool {
     // Rust 1.91 JIT 优化：单次遍历
     for ch in t.chars() {
         if let Some(expected) = s_next
-            && ch == expected {
-                s_next = s_iter.next();
-                if s_next.is_none() {
-                    return true;
-                }
+            && ch == expected
+        {
+            s_next = s_iter.next();
+            if s_next.is_none() {
+                return true;
             }
+        }
     }
 
     false
@@ -258,9 +264,10 @@ pub fn longest_palindrome(s: String) -> i32 {
     // Rust 1.91 JIT 优化：字符频率统计
     for ch in s.chars() {
         if let Some(index) = (ch as u32).checked_sub(b'A' as u32)
-            && index < 58 {
-                counts[index as usize] += 1;
-            }
+            && index < 58
+        {
+            counts[index as usize] += 1;
+        }
     }
 
     let mut length = 0;
@@ -381,7 +388,9 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Longest Common Prefix".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::String, LeetCodeTag::Trie],
-            description: "编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串。".to_string(),
+            description:
+                "编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串。"
+                    .to_string(),
             examples: vec![
                 "输入：strs = [\"flower\",\"flow\",\"flight\"]\n输出：\"fl\"".to_string(),
             ],
@@ -405,7 +414,9 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Valid Parentheses".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::String, LeetCodeTag::Stack],
-            description: "给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s，判断字符串是否有效。".to_string(),
+            description:
+                "给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s，判断字符串是否有效。"
+                    .to_string(),
             examples: vec![
                 "输入：s = \"()\"\n输出：true".to_string(),
                 "输入：s = \"()[]{}\"\n输出：true".to_string(),
@@ -439,7 +450,14 @@ mod tests {
             "flight".to_string(),
         ];
         assert_eq!(longest_common_prefix(strs), "fl");
-        assert_eq!(longest_common_prefix(vec!["dog".to_string(), "racecar".to_string(), "car".to_string()]), "");
+        assert_eq!(
+            longest_common_prefix(vec![
+                "dog".to_string(),
+                "racecar".to_string(),
+                "car".to_string()
+            ]),
+            ""
+        );
     }
 
     #[test]

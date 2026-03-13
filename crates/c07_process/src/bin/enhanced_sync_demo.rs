@@ -1,11 +1,11 @@
 //! 增强的同步原语演示程序
-//! 
+//!
 //! 这个程序展示了增强的同步原语功能，包括死锁检测、
 //! 性能监控、自适应锁策略等 Rust 1.90 新特性
 #[cfg(feature = "async")]
 use c07_process::prelude::*;
 #[cfg(feature = "async")]
-use c07_process::{EnhancedSyncManager, DeadlockRisk};
+use c07_process::{DeadlockRisk, EnhancedSyncManager};
 #[cfg(feature = "async")]
 use std::time::Duration;
 
@@ -69,7 +69,9 @@ async fn demonstrate_basic_sync_features(manager: &EnhancedSyncManager) -> Resul
 
     // 创建增强的信号量
     println!("  创建增强的信号量...");
-    let semaphore = manager.create_enhanced_semaphore("basic_semaphore", 3).await?;
+    let semaphore = manager
+        .create_enhanced_semaphore("basic_semaphore", 3)
+        .await?;
     println!("  ✅ 增强的信号量创建成功");
 
     // 创建增强的屏障
@@ -100,12 +102,16 @@ async fn demonstrate_basic_sync_features(manager: &EnhancedSyncManager) -> Resul
     // 获取统计信息
     println!("  获取统计信息...");
     let mutex_stats = manager.get_primitive_stats("basic_mutex").await.unwrap();
-    println!("    互斥锁统计: 锁定次数={}, 解锁次数={}", 
-            mutex_stats.lock_count, mutex_stats.unlock_count);
+    println!(
+        "    互斥锁统计: 锁定次数={}, 解锁次数={}",
+        mutex_stats.lock_count, mutex_stats.unlock_count
+    );
 
     let rwlock_stats = manager.get_primitive_stats("basic_rwlock").await.unwrap();
-    println!("    读写锁统计: 锁定次数={}, 解锁次数={}", 
-            rwlock_stats.lock_count, rwlock_stats.unlock_count);
+    println!(
+        "    读写锁统计: 锁定次数={}, 解锁次数={}",
+        rwlock_stats.lock_count, rwlock_stats.unlock_count
+    );
 
     Ok(())
 }
@@ -127,9 +133,9 @@ async fn demonstrate_deadlock_detection(manager: &EnhancedSyncManager) -> Result
     let task1 = tokio::spawn(async move {
         let _guard1 = mutex1_clone.lock().await.unwrap();
         println!("    任务1: 获取mutex1成功");
-        
+
         tokio::time::sleep(Duration::from_millis(100)).await;
-        
+
         let _guard2 = mutex2_clone.lock().await.unwrap();
         println!("    任务1: 获取mutex2成功");
     });
@@ -138,9 +144,9 @@ async fn demonstrate_deadlock_detection(manager: &EnhancedSyncManager) -> Result
     let task2 = tokio::spawn(async move {
         let _guard2 = mutex2.lock().await.unwrap();
         println!("    任务2: 获取mutex2成功");
-        
+
         tokio::time::sleep(Duration::from_millis(100)).await;
-        
+
         let _guard1 = mutex1.lock().await.unwrap();
         println!("    任务2: 获取mutex1成功");
     });
@@ -249,8 +255,10 @@ async fn demonstrate_adaptive_scheduling(manager: &EnhancedSyncManager) -> Resul
 
     // 获取调整后的统计信息
     let stats = manager.get_primitive_stats("adaptive_mutex").await.unwrap();
-    println!("    调整后统计: 锁定次数={}, 争用次数={}", 
-            stats.lock_count, stats.contention_count);
+    println!(
+        "    调整后统计: 锁定次数={}, 争用次数={}",
+        stats.lock_count, stats.contention_count
+    );
 
     Ok(())
 }
@@ -264,8 +272,12 @@ async fn demonstrate_advanced_sync_features(manager: &EnhancedSyncManager) -> Re
     println!("    创建复杂的同步原语组合...");
     let mutex = manager.create_enhanced_mutex("advanced_mutex").await?;
     let rwlock = manager.create_enhanced_rwlock("advanced_rwlock").await?;
-    let semaphore = manager.create_enhanced_semaphore("advanced_semaphore", 5).await?;
-    let barrier = manager.create_enhanced_barrier("advanced_barrier", 3).await?;
+    let semaphore = manager
+        .create_enhanced_semaphore("advanced_semaphore", 5)
+        .await?;
+    let barrier = manager
+        .create_enhanced_barrier("advanced_barrier", 3)
+        .await?;
 
     // 测试复杂的同步场景
     println!("    测试复杂的同步场景...");
@@ -310,16 +322,23 @@ async fn demonstrate_advanced_sync_features(manager: &EnhancedSyncManager) -> Re
     println!("    获取所有原语的统计信息...");
     let all_stats = manager.get_all_stats().await;
     for (name, stats) in all_stats {
-        println!("      {}: 锁定次数={}, 争用次数={}, 死锁风险={:?}", 
-                name, stats.lock_count, stats.contention_count, stats.deadlock_risk);
+        println!(
+            "      {}: 锁定次数={}, 争用次数={}, 死锁风险={:?}",
+            name, stats.lock_count, stats.contention_count, stats.deadlock_risk
+        );
     }
 
     // 获取所有性能指标
     println!("    获取所有性能指标...");
     let all_metrics = manager.get_all_performance_metrics().await;
     for (name, metrics) in all_metrics {
-        println!("      {}: 吞吐量={:.2}, 延迟={:?}, 争用率={:.2}%", 
-                name, metrics.throughput, metrics.latency, metrics.contention_rate * 100.0);
+        println!(
+            "      {}: 吞吐量={:.2}, 延迟={:?}, 争用率={:.2}%",
+            name,
+            metrics.throughput,
+            metrics.latency,
+            metrics.contention_rate * 100.0
+        );
     }
 
     // 检查死锁风险

@@ -21,7 +21,11 @@ impl CircuitBreaker {
         Self::new_with_half_open_max(fail_threshold, open_window, 1)
     }
 
-    pub fn new_with_half_open_max(fail_threshold: u64, open_window: Duration, half_open_max_calls: u32) -> Self {
+    pub fn new_with_half_open_max(
+        fail_threshold: u64,
+        open_window: Duration,
+        half_open_max_calls: u32,
+    ) -> Self {
         Self {
             inner: Arc::new(Inner {
                 failures: AtomicU64::new(0),

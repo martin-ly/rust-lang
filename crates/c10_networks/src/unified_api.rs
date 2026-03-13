@@ -1,11 +1,11 @@
 use crate::diagnostics::NetDiagnostics;
 use crate::error::{NetworkError, NetworkResult};
 use bytes::Bytes;
+use std::collections::HashMap;
 use std::net::IpAddr;
+use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, OnceLock, RwLock};
 use std::time::{Duration, Instant};
-use std::sync::atomic::{AtomicUsize, Ordering};
-use std::collections::HashMap;
 
 /// 连接池配置
 #[derive(Debug, Clone)]
@@ -60,12 +60,12 @@ impl CacheEntry {
     pub fn data(&self) -> &Bytes {
         &self.data
     }
-    
+
     /// 检查是否过期
     pub fn is_expired(&self) -> bool {
         Instant::now().duration_since(self.timestamp) >= self.ttl
     }
-    
+
     /// 创建新的缓存条目
     pub fn new(data: Bytes, ttl: Duration) -> Self {
         Self {
@@ -74,7 +74,7 @@ impl CacheEntry {
             ttl,
         }
     }
-    
+
     /// 获取数据大小（用于调试和监控）
     pub fn data_size(&self) -> usize {
         self.data.len()
@@ -112,7 +112,9 @@ impl NetClient {
     /// 获取连接池统计信息
     pub fn get_stats(&self) -> PoolStats {
         PoolStats {
-            active_connections: AtomicUsize::new(self.stats.active_connections.load(Ordering::Relaxed)),
+            active_connections: AtomicUsize::new(
+                self.stats.active_connections.load(Ordering::Relaxed),
+            ),
             total_requests: AtomicUsize::new(self.stats.total_requests.load(Ordering::Relaxed)),
             cache_hits: AtomicUsize::new(self.stats.cache_hits.load(Ordering::Relaxed)),
             cache_misses: AtomicUsize::new(self.stats.cache_misses.load(Ordering::Relaxed)),
@@ -130,7 +132,7 @@ impl NetClient {
     fn get_from_cache(&self, key: &str) -> Option<Bytes> {
         let cache = self.cache.read().ok()?;
         let entry = cache.get(key)?;
-        
+
         if !entry.is_expired() {
             self.stats.cache_hits.fetch_add(1, Ordering::Relaxed);
             Some(entry.data().clone())
@@ -153,7 +155,7 @@ impl NetClient {
     pub fn get_performance_metrics(&self) -> PerformanceMetrics {
         let stats = self.get_stats();
         let cache_size = self.cache.read().map(|c| c.len()).unwrap_or(0);
-        
+
         PerformanceMetrics {
             active_connections: stats.active_connections.load(Ordering::Relaxed),
             total_requests: stats.total_requests.load(Ordering::Relaxed),
@@ -161,8 +163,8 @@ impl NetClient {
             cache_misses: stats.cache_misses.load(Ordering::Relaxed),
             cache_size,
             cache_hit_rate: if stats.total_requests.load(Ordering::Relaxed) > 0 {
-                stats.cache_hits.load(Ordering::Relaxed) as f64 / 
-                stats.total_requests.load(Ordering::Relaxed) as f64
+                stats.cache_hits.load(Ordering::Relaxed) as f64
+                    / stats.total_requests.load(Ordering::Relaxed) as f64
             } else {
                 0.0
             },
@@ -209,7 +211,7 @@ impl NetClient {
     pub async fn dns_lookup_ips(&self, host: &str) -> NetworkResult<Vec<IpAddr>> {
         // 更新统计信息
         self.stats.total_requests.fetch_add(1, Ordering::Relaxed);
-        
+
         static CACHE: OnceLock<Arc<crate::performance::cache::Cache<String, Vec<IpAddr>>>> =
             OnceLock::new();
         let cache = CACHE
@@ -228,13 +230,13 @@ impl NetClient {
                 )
             })
             .clone();
-        
+
         // 检查缓存
         if let Some(v) = cache.get(&host.to_string()) {
             self.stats.cache_hits.fetch_add(1, Ordering::Relaxed);
             return Ok(v);
         }
-        
+
         self.stats.cache_misses.fetch_add(1, Ordering::Relaxed);
         // 多级回退：当前选择的解析器 -> Cloudflare DoH -> Google DoH
         use crate::protocol::dns::{DnsResolver, presets};
@@ -332,14 +334,14 @@ impl NetClient {
     pub async fn grpc_hello(&self, endpoint: &str, name: &str) -> NetworkResult<String> {
         // 使用 tonic 进行 gRPC 调用
         use tonic::transport::Channel;
-        
+
         // 创建 gRPC 通道
         let _channel = Channel::from_shared(endpoint.to_string())
             .map_err(|e| NetworkError::Connection(e.to_string()))?
             .connect()
             .await
             .map_err(|e| NetworkError::Connection(e.to_string()))?;
-        
+
         // 这里可以添加实际的 gRPC 服务调用
         // 目前返回格式化的响应
         Ok(format!("Hello, {}! (gRPC call to {})", name, endpoint))
@@ -472,13 +474,13 @@ mod tests {
         let data = Bytes::from("test data");
         let ttl = Duration::from_secs(60);
         let entry = CacheEntry::new(data.clone(), ttl);
-        
+
         // 测试数据访问
         assert_eq!(entry.data(), &data);
-        
+
         // 测试过期检查
         assert!(!entry.is_expired());
-        
+
         // 测试数据大小
         assert_eq!(entry.data_size(), 9);
     }

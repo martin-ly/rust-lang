@@ -8,5 +8,3 @@ fn main() {
     let ys: Vec<_> = xs.into_iter().map(|x| x + 1).collect();
     println!("ys={:?}", ys);
 }
-
-

@@ -103,7 +103,11 @@ fn main() {
     println!("\n📊 Trait扩展特化:");
     println!("{}", "-".repeat(60));
     let number: i32 = 42;
-    println!("数字 {} 的通用序列化: {}", number, number.optimized_serialize());
+    println!(
+        "数字 {} 的通用序列化: {}",
+        number,
+        number.optimized_serialize()
+    );
     println!("数字 {} 的特化序列化: {}", number, number.int_serialize());
 
     let text = "Hello";

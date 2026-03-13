@@ -9,19 +9,19 @@
 //! - **复杂度分析**: 主定理、摊还分析、渐进分析
 //! - **多种实现**: 同步、并行、异步、分布式
 //! - **Rust 1.90**: GATs、Async Traits、常量泛型
-pub mod sorting;
-pub mod searching;
-pub mod graph;
-pub mod dynamic_programming;
-pub mod divide_and_conquer;
-pub mod greedy;
 pub mod backtracking;
-pub mod string_algorithms;
-pub mod number_theory;
-pub mod geometry;
-pub mod machine_learning;
-pub mod optimization;
 pub mod combinatorics;
+pub mod divide_and_conquer;
+pub mod dynamic_programming;
+pub mod geometry;
+pub mod graph;
+pub mod greedy;
+pub mod machine_learning;
+pub mod number_theory;
+pub mod optimization;
+pub mod searching;
+pub mod sorting;
+pub mod string_algorithms;
 
 // 形式化验证与证明示例
 pub mod formal_verification_examples;
@@ -36,27 +36,27 @@ pub mod execution_modes;
 
 // 算法验证和证明
 pub mod verification {
-    pub mod formal_proofs;
-    pub mod correctness;
     pub mod complexity_analysis;
+    pub mod correctness;
+    pub mod formal_proofs;
 }
 
 // 算法性能分析
 pub mod performance {
     pub mod benchmarking;
-    pub mod profiling;
     pub mod optimization;
+    pub mod profiling;
 }
 
 // 算法知识体系
 pub mod knowledge_base {
-    pub mod theory;
     pub mod applications;
     pub mod best_practices;
+    pub mod theory;
 }
 
 // 重新导出常用类型和特征
 pub use execution_modes::*;
-pub use verification::*;
-pub use performance::*;
 pub use knowledge_base::*;
+pub use performance::*;
+pub use verification::*;

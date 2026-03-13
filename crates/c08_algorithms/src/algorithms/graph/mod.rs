@@ -1,7 +1,7 @@
 //! # 图算法模块
-//! 
+//!
 //! 本模块实现了各种图算法。
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use std::collections::{
     //HashMap,
     VecDeque,
@@ -31,11 +31,11 @@ impl GraphAlgorithms {
         let mut visited = vec![false; graph.vertices];
         let mut queue = VecDeque::new();
         let mut distances = vec![f64::INFINITY; graph.vertices];
-        
+
         visited[start] = true;
         distances[start] = 0.0;
         queue.push_back(start);
-        
+
         while let Some(current) = queue.pop_front() {
             for &(from, to, weight) in &graph.edges {
                 if from == current && !visited[to] {
@@ -45,7 +45,7 @@ impl GraphAlgorithms {
                 }
             }
         }
-        
+
         GraphResult::Distances(distances)
     }
 
@@ -53,16 +53,16 @@ impl GraphAlgorithms {
     pub fn dfs(graph: &Graph, start: usize) -> GraphResult {
         let mut visited = vec![false; graph.vertices];
         let mut path = Vec::new();
-        
+
         Self::dfs_recursive(graph, start, &mut visited, &mut path);
-        
+
         GraphResult::Path(path)
     }
-    
+
     fn dfs_recursive(graph: &Graph, current: usize, visited: &mut [bool], path: &mut Vec<usize>) {
         visited[current] = true;
         path.push(current);
-        
+
         for &(from, to, _) in &graph.edges {
             if from == current && !visited[to] {
                 Self::dfs_recursive(graph, to, visited, path);

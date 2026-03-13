@@ -24,7 +24,6 @@ use std::time::Duration;
 ///
 /// Rust 1.94.0 的 `array_windows` 方法在网络协议解析中非常有用，
 /// 特别是需要检测固定字节序列的场景，如协议魔数、帧边界等。
-
 /// HTTP/2 协议魔数检测器
 ///
 /// 使用 array_windows 检测 HTTP/2 连接前导码 (PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n)
@@ -194,7 +193,9 @@ impl PacketReassembler {
         let mut offsets: Vec<u16> = self.fragments.keys().copied().collect();
         offsets.sort_unstable();
 
-        offsets.array_windows::<2>().all(|[a, b]| b.wrapping_sub(*a) == 1)
+        offsets
+            .array_windows::<2>()
+            .all(|[a, b]| b.wrapping_sub(*a) == 1)
     }
 
     /// 重组数据包
@@ -204,9 +205,10 @@ impl PacketReassembler {
         }
 
         if let Some(expected) = self.expected_count
-            && self.fragments.len() != expected as usize {
-                return None;
-            }
+            && self.fragments.len() != expected as usize
+        {
+            return None;
+        }
 
         let mut offsets: Vec<u16> = self.fragments.keys().copied().collect();
         offsets.sort_unstable();
@@ -234,7 +236,6 @@ impl Default for PacketReassembler {
 ///
 /// Rust 1.94.0 的 LazyLock 新方法 get(), get_mut(), force_mut() 可以用于
 /// 实现延迟初始化的网络配置，并支持运行时更新。
-
 /// 全局网络配置
 static NETWORK_CONFIG: LazyLock<Mutex<NetworkConfig>> =
     LazyLock::new(|| Mutex::new(NetworkConfig::default()));
@@ -244,7 +245,9 @@ static NETWORK_CONFIG: LazyLock<Mutex<NetworkConfig>> =
 pub struct NetworkConfig {
     timeout: Duration,
     retry_count: u32,
+    #[allow(dead_code)]
     buffer_size: usize,
+    #[allow(dead_code)]
     keep_alive: bool,
 }
 
@@ -318,6 +321,7 @@ static CONNECTION_POOL_CONFIG: LazyLock<ConnectionPoolSettings> = LazyLock::new(
 pub struct ConnectionPoolSettings {
     max_connections: usize,
     idle_timeout: Duration,
+    #[allow(dead_code)]
     connection_lifetime: Duration,
 }
 
@@ -347,18 +351,18 @@ type ProtocolHandlerFn = Box<dyn Fn(&[u8]) -> Vec<u8> + Send>;
 type ProtocolHandlerRegistry = HashMap<String, ProtocolHandlerFn>;
 
 /// 延迟初始化的协议处理器注册表
-static PROTOCOL_HANDLERS: LazyLock<Mutex<ProtocolHandlerRegistry>> =
-    LazyLock::new(|| {
-        let mut handlers: ProtocolHandlerRegistry = HashMap::new();
+static PROTOCOL_HANDLERS: LazyLock<Mutex<ProtocolHandlerRegistry>> = LazyLock::new(|| {
+    let mut handlers: ProtocolHandlerRegistry = HashMap::new();
 
-        // 注册默认处理器
-        handlers.insert("echo".to_string(), Box::new(|data| data.to_vec()));
-        handlers.insert("reverse".to_string(), Box::new(|data| {
-            data.iter().rev().copied().collect()
-        }));
+    // 注册默认处理器
+    handlers.insert("echo".to_string(), Box::new(|data| data.to_vec()));
+    handlers.insert(
+        "reverse".to_string(),
+        Box::new(|data| data.iter().rev().copied().collect()),
+    );
 
-        Mutex::new(handlers)
-    });
+    Mutex::new(handlers)
+});
 
 /// 注册协议处理器
 pub fn register_protocol_handler<F>(name: impl Into<String>, handler: F)
@@ -381,12 +385,12 @@ pub fn handle_protocol(name: &str, data: &[u8]) -> Option<Vec<u8>> {
 ///
 /// Rust 1.94.0 添加的数学常量可用于网络算法优化，
 /// 如黄金分割搜索用于负载均衡、欧拉常数用于概率计算等。
-
 /// 基于黄金分割的负载均衡器
 ///
 /// 使用 GOLDEN_RATIO 实现平滑的权重分配
 pub struct GoldenRatioLoadBalancer {
     servers: Vec<ServerWeight>,
+    #[allow(dead_code)]
     current_index: AtomicU64,
 }
 
@@ -395,6 +399,7 @@ pub struct GoldenRatioLoadBalancer {
 struct ServerWeight {
     address: String,
     weight: f64,
+    #[allow(dead_code)]
     golden_factor: f64,
 }
 
@@ -546,7 +551,6 @@ impl NetworkParameterOptimizer {
 ///
 /// Rust 1.94.0 的 Peekable 新方法 next_if_map() 和 next_if_map_mut()
 /// 在协议流解析中非常有用，可以简化条件解析逻辑。
-
 /// HTTP 请求行解析器
 ///
 /// 使用 Peekable 新方法简化解析逻辑
@@ -590,15 +594,14 @@ impl<'a> HttpRequestLineParser<'a> {
     fn parse_path(&mut self) -> Option<String> {
         let mut path = String::new();
 
-        while let Some(c) = self.chars.next_if(|c| c.is_ascii_graphic() && !c.is_whitespace()) {
+        while let Some(c) = self
+            .chars
+            .next_if(|c| c.is_ascii_graphic() && !c.is_whitespace())
+        {
             path.push(c);
         }
 
-        if path.is_empty() {
-            None
-        } else {
-            Some(path)
-        }
+        if path.is_empty() { None } else { Some(path) }
     }
 
     /// 解析 HTTP 版本
@@ -606,7 +609,10 @@ impl<'a> HttpRequestLineParser<'a> {
         let mut version = String::new();
 
         // 解析 "HTTP/x.y"
-        while let Some(c) = self.chars.next_if(|c| c.is_ascii_alphanumeric() || *c == '/' || *c == '.') {
+        while let Some(c) = self
+            .chars
+            .next_if(|c| c.is_ascii_alphanumeric() || *c == '/' || *c == '.')
+        {
             version.push(c);
         }
 
@@ -693,7 +699,6 @@ impl<'a> TlvParser<'a> {
 /// # 5. char 到 usize 转换 - 协议编码
 ///
 /// Rust 1.94.0 的 TryFrom<char> for usize 可用于协议编码和地址解析。
-
 /// 十六进制编码器/解码器
 ///
 /// 使用 char 到 usize 转换进行十六进制处理
@@ -813,7 +818,9 @@ pub fn demonstrate_rust_194_network_features() {
     }
 
     // 帧边界检测
-    let frame_data = [0x7E, 0x7E, 0x7E, 0x7E, 0x01, 0x02, 0x03, 0x7F, 0x7F, 0x7F, 0x7F];
+    let frame_data = [
+        0x7E, 0x7E, 0x7E, 0x7E, 0x01, 0x02, 0x03, 0x7F, 0x7F, 0x7F, 0x7F,
+    ];
     let boundaries = FrameBoundaryDetector::find_frame_boundaries(&frame_data);
     println!("   检测到帧边界: {:?}", boundaries);
 
@@ -877,7 +884,11 @@ pub fn demonstrate_rust_194_network_features() {
     println!("\n5. char 到 usize 转换 - 协议编码:");
     let hex_encoded = "48656c6c6f"; // "Hello"
     if let Some(decoded) = HexCodec::decode(hex_encoded) {
-        println!("   解码十六进制 '{}': {:?}", hex_encoded, String::from_utf8_lossy(&decoded));
+        println!(
+            "   解码十六进制 '{}': {:?}",
+            hex_encoded,
+            String::from_utf8_lossy(&decoded)
+        );
     }
 
     let encoded = HexCodec::encode(b"World");

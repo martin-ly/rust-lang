@@ -35,7 +35,7 @@ pub fn cooperative_cancellation(workers: usize, ticks: usize) -> usize {
     for h in handles {
         h.join().unwrap();
     }
-     *progress.lock().unwrap()
+    *progress.lock().unwrap()
 }
 
 /// 共享可变状态：多个线程累加到一个共享 Vec
@@ -55,7 +55,7 @@ pub fn shared_vec_sum(workers: usize, each: usize) -> usize {
     for h in handles {
         h.join().unwrap();
     }
-     data.lock().unwrap().iter().sum()
+    data.lock().unwrap().iter().sum()
 }
 
 #[cfg(test)]

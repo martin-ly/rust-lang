@@ -23,7 +23,6 @@ use std::sync::LazyLock;
 ///
 /// Rust 1.94.0 的 array_windows 方法非常适合处理进程产生的连续数据流，
 /// 如日志分析、指标计算和异常检测。
-
 /// 进程指标分析器
 ///
 /// Rust 1.94.0: 使用 array_windows 分析进程性能指标
@@ -145,9 +144,9 @@ impl LogAnalyzer {
 
         // 查找连续 3 个错误或警告
         for (i, window) in entries.windows(3).enumerate() {
-            let all_errors = window.iter().all(|e| {
-                matches!(e.level, LogLevel::Error | LogLevel::Warn)
-            });
+            let all_errors = window
+                .iter()
+                .all(|e| matches!(e.level, LogLevel::Error | LogLevel::Warn));
 
             if all_errors {
                 patterns.push(i);
@@ -161,7 +160,8 @@ impl LogAnalyzer {
     ///
     /// Rust 1.94.0: array_windows::<2>() 用于计算时间差
     pub fn analyze_time_intervals(entries: &[LogEntry]) -> Vec<u64> {
-        entries.windows(2)
+        entries
+            .windows(2)
             .map(|window| window[1].timestamp - window[0].timestamp)
             .collect()
     }
@@ -201,7 +201,6 @@ pub fn demonstrate_array_windows_processing() {
 /// # 2. LazyLock 在进程配置中的应用 / LazyLock in Process Configuration
 ///
 /// Rust 1.94.0 为 LazyLock 添加了新方法，使其在进程配置管理中更加灵活。
-
 /// 全局进程配置
 ///
 /// Rust 1.94.0: 使用 LazyLock 管理进程全局配置
@@ -289,8 +288,14 @@ pub fn demonstrate_lazylock_config() {
     println!("资源限制: {:?}", limits);
 
     // 检查限制
-    println!("进程数检查 (50): {}", ProcessConfigManager::check_process_limit(50));
-    println!("内存检查 (2000MB): {}", ProcessConfigManager::check_memory_limit(2000));
+    println!(
+        "进程数检查 (50): {}",
+        ProcessConfigManager::check_process_limit(50)
+    );
+    println!(
+        "内存检查 (2000MB): {}",
+        ProcessConfigManager::check_memory_limit(2000)
+    );
 }
 
 // ==================== 3. 数学常量在数据分析中的应用 ====================
@@ -299,7 +304,6 @@ pub fn demonstrate_lazylock_config() {
 ///
 /// Rust 1.94.0 添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量，
 /// 这些常量在进程数据分析和算法中非常有用。
-
 /// 数据分析器
 ///
 /// Rust 1.94.0: 使用数学常量进行数据分析
@@ -420,7 +424,6 @@ pub fn demonstrate_math_constants() {
 ///
 /// Rust 1.94.0 为 Peekable 添加了 next_if_map 和 next_if_map_mut 方法，
 /// 这些方法在日志处理和解析中特别有用。
-
 /// 日志解析器
 ///
 /// Rust 1.94.0: 使用 Peekable 新方法解析日志
@@ -442,9 +445,10 @@ impl<I: Iterator<Item = LogEntry>> LogParser<I> {
     pub fn parse_next_level(&mut self, level: LogLevel) -> Option<LogEntry> {
         // 使用 next_if_map 模式
         if let Some(entry) = self.entries.peek()
-            && entry.level == level {
-                return self.entries.next();
-            }
+            && entry.level == level
+        {
+            return self.entries.next();
+        }
         None
     }
 
@@ -512,11 +516,31 @@ pub fn demonstrate_peekable_logs() {
 
     // 创建日志条目
     let entries = vec![
-        LogEntry { timestamp: 1, level: LogLevel::Info, message: "启动".to_string() },
-        LogEntry { timestamp: 2, level: LogLevel::Error, message: "错误1".to_string() },
-        LogEntry { timestamp: 3, level: LogLevel::Error, message: "错误2".to_string() },
-        LogEntry { timestamp: 4, level: LogLevel::Warn, message: "警告".to_string() },
-        LogEntry { timestamp: 5, level: LogLevel::Info, message: "完成".to_string() },
+        LogEntry {
+            timestamp: 1,
+            level: LogLevel::Info,
+            message: "启动".to_string(),
+        },
+        LogEntry {
+            timestamp: 2,
+            level: LogLevel::Error,
+            message: "错误1".to_string(),
+        },
+        LogEntry {
+            timestamp: 3,
+            level: LogLevel::Error,
+            message: "错误2".to_string(),
+        },
+        LogEntry {
+            timestamp: 4,
+            level: LogLevel::Warn,
+            message: "警告".to_string(),
+        },
+        LogEntry {
+            timestamp: 5,
+            level: LogLevel::Info,
+            message: "完成".to_string(),
+        },
     ];
 
     let mut parser = LogParser::new(entries.into_iter());
@@ -541,7 +565,6 @@ pub fn demonstrate_peekable_logs() {
 ///
 /// Rust 1.94.0 实现了 TryFrom<char> for usize，
 /// 这在进程间通信的字符编码处理中非常有用。
-
 /// 进程通信编码器
 ///
 /// Rust 1.94.0: 使用 char 到 usize 转换进行通信编码
@@ -596,7 +619,10 @@ impl ProcessCommunicationEncoder {
 
     /// 验证字符编码范围
     pub fn validate_codepoints(chars: &[char], max_codepoint: usize) -> Vec<bool> {
-        chars.iter().map(|&ch| (ch as usize) <= max_codepoint).collect()
+        chars
+            .iter()
+            .map(|&ch| (ch as usize) <= max_codepoint)
+            .collect()
     }
 }
 
@@ -672,7 +698,10 @@ pub fn demonstrate_rust_194_process_features() {
     let avg_cpu = ma.iter().sum::<f64>() / ma.len() as f64;
     let config = ProcessConfigManager::get_config();
     if avg_cpu > config.cpu_limit_percent {
-        println!("警告: CPU 使用率 {:.1}% 超过限制 {}%", avg_cpu, config.cpu_limit_percent);
+        println!(
+            "警告: CPU 使用率 {:.1}% 超过限制 {}%",
+            avg_cpu, config.cpu_limit_percent
+        );
     } else {
         println!("CPU 使用率正常: {:.1}%", avg_cpu);
     }
@@ -718,9 +747,21 @@ mod tests {
     #[test]
     fn test_detect_error_patterns() {
         let entries = vec![
-            LogEntry { timestamp: 1, level: LogLevel::Error, message: "e1".to_string() },
-            LogEntry { timestamp: 2, level: LogLevel::Error, message: "e2".to_string() },
-            LogEntry { timestamp: 3, level: LogLevel::Error, message: "e3".to_string() },
+            LogEntry {
+                timestamp: 1,
+                level: LogLevel::Error,
+                message: "e1".to_string(),
+            },
+            LogEntry {
+                timestamp: 2,
+                level: LogLevel::Error,
+                message: "e2".to_string(),
+            },
+            LogEntry {
+                timestamp: 3,
+                level: LogLevel::Error,
+                message: "e3".to_string(),
+            },
         ];
 
         let patterns = LogAnalyzer::detect_error_patterns(&entries);
@@ -753,9 +794,21 @@ mod tests {
     #[test]
     fn test_log_parser() {
         let entries = vec![
-            LogEntry { timestamp: 1, level: LogLevel::Error, message: "e1".to_string() },
-            LogEntry { timestamp: 2, level: LogLevel::Error, message: "e2".to_string() },
-            LogEntry { timestamp: 3, level: LogLevel::Info, message: "i1".to_string() },
+            LogEntry {
+                timestamp: 1,
+                level: LogLevel::Error,
+                message: "e1".to_string(),
+            },
+            LogEntry {
+                timestamp: 2,
+                level: LogLevel::Error,
+                message: "e2".to_string(),
+            },
+            LogEntry {
+                timestamp: 3,
+                level: LogLevel::Info,
+                message: "i1".to_string(),
+            },
         ];
 
         let mut parser = LogParser::new(entries.into_iter());

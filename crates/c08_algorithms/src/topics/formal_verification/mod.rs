@@ -7,7 +7,7 @@
 //! - 终止性证明
 //! - 安全性验证
 use anyhow::Result;
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fmt;
 
@@ -213,7 +213,11 @@ impl FormalVerifier {
             step_number: 1,
             description: "验证前置条件".to_string(),
             rule: "前置条件检查".to_string(),
-            premises: spec.preconditions.iter().map(|p| p.description.clone()).collect(),
+            premises: spec
+                .preconditions
+                .iter()
+                .map(|p| p.description.clone())
+                .collect(),
             conclusion: "前置条件满足".to_string(),
             verified: true,
         });
@@ -235,7 +239,11 @@ impl FormalVerifier {
             step_number: steps.len() + 1,
             description: "验证后置条件".to_string(),
             rule: "后置条件检查".to_string(),
-            premises: spec.postconditions.iter().map(|p| p.description.clone()).collect(),
+            premises: spec
+                .postconditions
+                .iter()
+                .map(|p| p.description.clone())
+                .collect(),
             conclusion: "后置条件满足".to_string(),
             verified: true,
         });
@@ -248,9 +256,21 @@ impl FormalVerifier {
             verification_type: VerificationType::Correctness,
             status: VerificationStatus::Verified,
             steps,
-            preconditions: spec.preconditions.iter().map(|p| p.description.clone()).collect(),
-            postconditions: spec.postconditions.iter().map(|p| p.description.clone()).collect(),
-            invariants: spec.invariants.iter().map(|i| i.description.clone()).collect(),
+            preconditions: spec
+                .preconditions
+                .iter()
+                .map(|p| p.description.clone())
+                .collect(),
+            postconditions: spec
+                .postconditions
+                .iter()
+                .map(|p| p.description.clone())
+                .collect(),
+            invariants: spec
+                .invariants
+                .iter()
+                .map(|i| i.description.clone())
+                .collect(),
             proof_time,
             prover: "Rust Formal Verifier".to_string(),
             proof_date: "2025-01-27".to_string(),
@@ -320,37 +340,35 @@ impl FormalVerifier {
         _implementation: &dyn AlgorithmImplementation,
     ) -> Result<FormalProof> {
         let start_time = std::time::Instant::now();
-        let mut steps = Vec::new();
-
-        // 步骤1：识别循环结构
-        steps.push(ProofStep {
-            step_number: 1,
-            description: "识别循环结构".to_string(),
-            rule: "控制流分析".to_string(),
-            premises: vec!["算法实现".to_string()],
-            conclusion: "识别所有循环".to_string(),
-            verified: true,
-        });
-
-        // 步骤2：找到终止条件
-        steps.push(ProofStep {
-            step_number: 2,
-            description: "找到终止条件".to_string(),
-            rule: "终止条件分析".to_string(),
-            premises: vec!["循环结构".to_string()],
-            conclusion: "每个循环都有终止条件".to_string(),
-            verified: true,
-        });
-
-        // 步骤3：证明终止条件可达
-        steps.push(ProofStep {
-            step_number: 3,
-            description: "证明终止条件可达".to_string(),
-            rule: "可达性分析".to_string(),
-            premises: vec!["终止条件".to_string()],
-            conclusion: "算法必然终止".to_string(),
-            verified: true,
-        });
+        let steps = vec![
+            // 步骤1：识别循环结构
+            ProofStep {
+                step_number: 1,
+                description: "识别循环结构".to_string(),
+                rule: "控制流分析".to_string(),
+                premises: vec!["算法实现".to_string()],
+                conclusion: "识别所有循环".to_string(),
+                verified: true,
+            },
+            // 步骤2：找到终止条件
+            ProofStep {
+                step_number: 2,
+                description: "找到终止条件".to_string(),
+                rule: "终止条件分析".to_string(),
+                premises: vec!["循环结构".to_string()],
+                conclusion: "每个循环都有终止条件".to_string(),
+                verified: true,
+            },
+            // 步骤3：证明终止条件可达
+            ProofStep {
+                step_number: 3,
+                description: "证明终止条件可达".to_string(),
+                rule: "可达性分析".to_string(),
+                premises: vec!["终止条件".to_string()],
+                conclusion: "算法必然终止".to_string(),
+                verified: true,
+            },
+        ];
 
         let proof_time = start_time.elapsed();
 
@@ -376,37 +394,35 @@ impl FormalVerifier {
         _implementation: &dyn AlgorithmImplementation,
     ) -> Result<FormalProof> {
         let start_time = std::time::Instant::now();
-        let mut steps = Vec::new();
-
-        // 步骤1：检查数组边界
-        steps.push(ProofStep {
-            step_number: 1,
-            description: "检查数组边界访问".to_string(),
-            rule: "边界检查".to_string(),
-            premises: vec!["数组访问操作".to_string()],
-            conclusion: "所有数组访问都在边界内".to_string(),
-            verified: true,
-        });
-
-        // 步骤2：检查空指针
-        steps.push(ProofStep {
-            step_number: 2,
-            description: "检查空指针访问".to_string(),
-            rule: "空指针检查".to_string(),
-            premises: vec!["指针操作".to_string()],
-            conclusion: "没有空指针访问".to_string(),
-            verified: true,
-        });
-
-        // 步骤3：检查整数溢出
-        steps.push(ProofStep {
-            step_number: 3,
-            description: "检查整数溢出".to_string(),
-            rule: "溢出检查".to_string(),
-            premises: vec!["算术运算".to_string()],
-            conclusion: "没有整数溢出".to_string(),
-            verified: true,
-        });
+        let steps = vec![
+            // 步骤1：检查数组边界
+            ProofStep {
+                step_number: 1,
+                description: "检查数组边界访问".to_string(),
+                rule: "边界检查".to_string(),
+                premises: vec!["数组访问操作".to_string()],
+                conclusion: "所有数组访问都在边界内".to_string(),
+                verified: true,
+            },
+            // 步骤2：检查空指针
+            ProofStep {
+                step_number: 2,
+                description: "检查空指针访问".to_string(),
+                rule: "空指针检查".to_string(),
+                premises: vec!["指针操作".to_string()],
+                conclusion: "没有空指针访问".to_string(),
+                verified: true,
+            },
+            // 步骤3：检查整数溢出
+            ProofStep {
+                step_number: 3,
+                description: "检查整数溢出".to_string(),
+                rule: "溢出检查".to_string(),
+                premises: vec!["算术运算".to_string()],
+                conclusion: "没有整数溢出".to_string(),
+                verified: true,
+            },
+        ];
 
         let proof_time = start_time.elapsed();
 
@@ -486,7 +502,8 @@ impl ProofManager {
         algorithm_name: &str,
         implementation: &dyn AlgorithmImplementation,
     ) -> Result<Vec<FormalProof>> {
-        let spec = self.get_specification(algorithm_name)
+        let spec = self
+            .get_specification(algorithm_name)
             .ok_or_else(|| anyhow::anyhow!("算法规范未找到: {}", algorithm_name))?
             .clone();
 
@@ -537,7 +554,10 @@ impl ProofManager {
                 report.push_str(&format!("  {}. {}\n", step.step_number, step.description));
                 report.push_str(&format!("     规则: {}\n", step.rule));
                 report.push_str(&format!("     结论: {}\n", step.conclusion));
-                report.push_str(&format!("     验证: {}\n", if step.verified { "✓" } else { "✗" }));
+                report.push_str(&format!(
+                    "     验证: {}\n",
+                    if step.verified { "✓" } else { "✗" }
+                ));
             }
             report.push('\n');
         }
@@ -684,11 +704,17 @@ mod tests {
         let algorithm = TestAlgorithm;
 
         let correctness_proof = verifier.verify_correctness(&spec, &algorithm).unwrap();
-        assert_eq!(correctness_proof.verification_type, VerificationType::Correctness);
+        assert_eq!(
+            correctness_proof.verification_type,
+            VerificationType::Correctness
+        );
         assert_eq!(correctness_proof.status, VerificationStatus::Verified);
 
         let complexity_proof = verifier.verify_complexity(&spec, &algorithm).unwrap();
-        assert_eq!(complexity_proof.verification_type, VerificationType::Complexity);
+        assert_eq!(
+            complexity_proof.verification_type,
+            VerificationType::Complexity
+        );
         assert_eq!(complexity_proof.status, VerificationStatus::Verified);
     }
 
@@ -721,7 +747,9 @@ mod tests {
         manager.add_specification(spec);
         let algorithm = TestAlgorithm;
 
-        let proofs = manager.verify_algorithm("TestAlgorithm", &algorithm).unwrap();
+        let proofs = manager
+            .verify_algorithm("TestAlgorithm", &algorithm)
+            .unwrap();
         assert_eq!(proofs.len(), 4); // 正确性、复杂度、终止性、安全性
 
         let report = manager.generate_report("TestAlgorithm");

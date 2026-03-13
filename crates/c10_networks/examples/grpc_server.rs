@@ -22,8 +22,8 @@
 //! └── 请求处理
 //!     └── 异步处理
 //! ```
+use c10_networks::hello::{HelloReply, HelloRequest};
 use tonic::{Request, Response, Status};
-use c10_networks::hello::{HelloRequest, HelloReply};
 
 // 手动定义gRPC服务trait
 #[tonic::async_trait]
@@ -73,10 +73,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 使用axum创建一个简单的HTTP服务器
     use axum::{
+        Router,
         extract::{Query, State},
         response::Json,
         routing::get,
-        Router,
     };
     use serde::Deserialize;
     use serde_json::json;

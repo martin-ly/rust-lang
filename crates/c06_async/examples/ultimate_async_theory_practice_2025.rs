@@ -1,5 +1,5 @@
 //! # Rust 异步编程终极理论与实践指南 2025
-//! 
+//!
 //! Ultimate Rust Async Programming: Theory and Practice Guide 2025
 //!
 //! ## 📚 本示例全面涵盖
@@ -46,7 +46,7 @@
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use tokio::sync::{mpsc, oneshot, Mutex, RwLock};
+use tokio::sync::{Mutex, RwLock, mpsc, oneshot};
 use tokio::time::sleep;
 
 // ============================================================================
@@ -55,7 +55,7 @@ use tokio::time::sleep;
 // ============================================================================
 
 /// # 理论模块: Actor 模型形式化
-/// 
+///
 /// ## 数学定义
 /// ```text
 /// Actor = (State, Mailbox, Behavior)
@@ -77,7 +77,7 @@ mod theory_actor_model {
     use super::*;
 
     /// Actor 消息 trait - 定义消息必须满足的约束
-    /// 
+    ///
     /// ## 类型约束
     /// - `Send`: 消息可以在线程间安全传递
     /// - `'static`: 消息的生命周期独立于 Actor
@@ -87,12 +87,12 @@ mod theory_actor_model {
     }
 
     /// Actor trait - 定义 Actor 必须实现的行为
-    /// 
+    ///
     /// ## 生命周期钩子
     /// - `started`: Actor 启动时调用
     /// - `handle`: 处理消息的核心方法
     /// - `stopped`: Actor 停止时调用
-    /// 
+    ///
     /// ## 数学语义
     /// ```text
     /// ∀ actor: Actor, msg: Message
@@ -104,11 +104,11 @@ mod theory_actor_model {
         type Message: Message;
 
         /// 处理消息 - Actor 的核心行为
-        /// 
+        ///
         /// # 参数
         /// - `msg`: 接收到的消息
         /// - `ctx`: Actor 上下文,包含地址和控制信息
-        /// 
+        ///
         /// # 返回
         /// 消息的响应结果
         async fn handle(
@@ -125,7 +125,7 @@ mod theory_actor_model {
     }
 
     /// Actor 上下文 - 提供 Actor 运行时信息
-    /// 
+    ///
     /// ## 功能
     /// - 持有 Actor 地址用于自我引用
     /// - 提供生命周期管理
@@ -146,10 +146,10 @@ mod theory_actor_model {
     }
 
     /// Actor 地址 - 用于向 Actor 发送消息
-    /// 
+    ///
     /// ## 设计模式: Proxy Pattern
     /// ActorAddress 是 Actor 的代理,封装了消息传递的细节
-    /// 
+    ///
     /// ## 线程安全
     /// - `Clone`: 可以在多个线程间共享
     /// - 内部使用 `mpsc::UnboundedSender` 保证线程安全
@@ -157,13 +157,15 @@ mod theory_actor_model {
     pub struct ActorAddress<A: Actor> {
         tx: mpsc::UnboundedSender<ActorEnvelope<A>>,
     }
-    
+
     impl<A: Actor> Clone for ActorAddress<A> {
         fn clone(&self) -> Self {
-            Self { tx: self.tx.clone() }
+            Self {
+                tx: self.tx.clone(),
+            }
         }
     }
-    
+
     impl<A: Actor> std::fmt::Debug for ActorAddress<A> {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             f.debug_struct("ActorAddress")
@@ -173,7 +175,7 @@ mod theory_actor_model {
     }
 
     /// 消息信封 - 封装消息和响应通道
-    /// 
+    ///
     /// ## 设计模式: Command Pattern
     /// 将消息和响应封装为一个对象,支持延迟执行
     struct ActorEnvelope<A: Actor> {
@@ -184,7 +186,7 @@ mod theory_actor_model {
     #[allow(dead_code)]
     impl<A: Actor> ActorAddress<A> {
         /// 发送消息并等待响应 (同步语义)
-        /// 
+        ///
         /// ## 语义
         /// ```text
         /// send(msg) = do
@@ -193,7 +195,7 @@ mod theory_actor_model {
         ///   response ← await(envelope.response_channel)
         ///   return response
         /// ```
-        /// 
+        ///
         /// # 错误处理
         /// - Actor 已停止: 返回 "Actor 已停止"
         /// - Actor 未响应: 返回 "Actor 未响应"
@@ -207,15 +209,13 @@ mod theory_actor_model {
                 respond_to: tx,
             };
 
-            self.tx
-                .send(envelope)
-                .map_err(|_| "Actor 已停止")?;
+            self.tx.send(envelope).map_err(|_| "Actor 已停止")?;
 
             rx.await.map_err(|_| "Actor 未响应")
         }
 
         /// 发送消息不等待响应 (异步语义 - Fire and Forget)
-        /// 
+        ///
         /// ## 语义
         /// ```text
         /// do_send(msg) = enqueue(mailbox, msg); return ()
@@ -232,20 +232,20 @@ mod theory_actor_model {
     }
 
     /// Actor 系统 - 管理 Actor 生命周期
-    /// 
+    ///
     /// ## 设计模式: Factory Pattern
     /// 负责创建和启动 Actor
     pub struct ActorSystem;
 
     impl ActorSystem {
         /// 启动一个 Actor
-        /// 
+        ///
         /// ## 实现细节
         /// 1. 创建无界消息通道
         /// 2. 生成 Actor 任务
         /// 3. 进入消息循环
         /// 4. 调用生命周期钩子
-        /// 
+        ///
         /// ## 并发模型
         /// 每个 Actor 在独立的 tokio task 中运行,
         /// 通过消息传递实现并发安全
@@ -266,14 +266,14 @@ mod theory_actor_model {
                 // 消息循环 - Actor 的心跳
                 while let Some(envelope) = rx.recv().await {
                     let start = Instant::now();
-                    
+
                     // 处理消息
                     let response = actor.handle(envelope.msg, &mut ctx).await;
-                    
+
                     // 更新统计
                     ctx.stats.messages_processed += 1;
                     ctx.stats.total_processing_time += start.elapsed();
-                    
+
                     // 发送响应
                     let _ = envelope.respond_to.send(response);
                 }
@@ -291,7 +291,7 @@ mod theory_actor_model {
     // ========================================================================
 
     /// 账户消息枚举 - 定义账户支持的所有操作
-    /// 
+    ///
     /// ## 消息类型
     /// - `Deposit`: 存款操作
     /// - `Withdraw`: 取款操作
@@ -302,7 +302,10 @@ mod theory_actor_model {
         Deposit(u64),
         Withdraw(u64),
         GetBalance,
-        Transfer { to: ActorAddress<BankAccount>, amount: u64 },
+        Transfer {
+            to: ActorAddress<BankAccount>,
+            amount: u64,
+        },
     }
 
     impl Message for AccountMessage {
@@ -310,7 +313,7 @@ mod theory_actor_model {
     }
 
     /// 银行账户 Actor - 封装账户状态和行为
-    /// 
+    ///
     /// ## 不变量
     /// - balance ≥ 0 (余额非负)
     /// - 所有操作原子性执行
@@ -362,23 +365,23 @@ mod theory_actor_model {
                         println!("[{}] ✓ 取出 {}, 余额: {}", self.name, amount, self.balance);
                         Ok(self.balance)
                     } else {
-                        println!("[{}] ✗ 余额不足: 需要 {}, 当前 {}", 
-                            self.name, amount, self.balance);
+                        println!(
+                            "[{}] ✗ 余额不足: 需要 {}, 当前 {}",
+                            self.name, amount, self.balance
+                        );
                         Err(format!("余额不足: {}", self.balance))
                     }
                 }
-                AccountMessage::GetBalance => {
-                    Ok(self.balance)
-                }
+                AccountMessage::GetBalance => Ok(self.balance),
                 AccountMessage::Transfer { to, amount } => {
                     // 先从本账户扣款
                     if self.balance < amount {
                         return Err(format!("余额不足: {}", self.balance));
                     }
-                    
+
                     self.balance -= amount;
                     self.record(format!("转出 {}", amount));
-                    
+
                     // 向目标账户存款 (Actor 间通信)
                     match to.send(AccountMessage::Deposit(amount)).await {
                         Ok(_) => {
@@ -431,17 +434,25 @@ mod theory_actor_model {
         let bob = ActorSystem::spawn(BankAccount::new("Bob".to_string(), 500));
 
         println!("\n📝 场景 1: 基本存取款操作\n");
-        
+
         // Alice 存款
-        let balance = alice.send(AccountMessage::Deposit(500)).await.unwrap().unwrap();
+        let balance = alice
+            .send(AccountMessage::Deposit(500))
+            .await
+            .unwrap()
+            .unwrap();
         println!("   Alice 存款后余额: {}\n", balance);
 
         // Alice 取款
-        let balance = alice.send(AccountMessage::Withdraw(300)).await.unwrap().unwrap();
+        let balance = alice
+            .send(AccountMessage::Withdraw(300))
+            .await
+            .unwrap()
+            .unwrap();
         println!("   Alice 取款后余额: {}\n", balance);
 
         println!("\n📝 场景 2: 余额不足处理\n");
-        
+
         // Alice 尝试取款超过余额
         match alice.send(AccountMessage::Withdraw(5000)).await.unwrap() {
             Ok(balance) => println!("   取款成功,余额: {}", balance),
@@ -449,20 +460,28 @@ mod theory_actor_model {
         }
 
         println!("\n📝 场景 3: Actor 间通信 - 转账\n");
-        
+
         // Alice 向 Bob 转账
-        match alice.send(AccountMessage::Transfer {
-            to: bob.clone(),
-            amount: 200,
-        }).await.unwrap() {
+        match alice
+            .send(AccountMessage::Transfer {
+                to: bob.clone(),
+                amount: 200,
+            })
+            .await
+            .unwrap()
+        {
             Ok(balance) => println!("   Alice 转账后余额: {}", balance),
             Err(e) => println!("   转账失败: {}", e),
         }
 
         // 查询双方余额
-        let alice_balance = alice.send(AccountMessage::GetBalance).await.unwrap().unwrap();
+        let alice_balance = alice
+            .send(AccountMessage::GetBalance)
+            .await
+            .unwrap()
+            .unwrap();
         let bob_balance = bob.send(AccountMessage::GetBalance).await.unwrap().unwrap();
-        
+
         println!("\n💰 最终余额:");
         println!("   Alice: {}", alice_balance);
         println!("   Bob: {}", bob_balance);
@@ -478,7 +497,7 @@ mod theory_actor_model {
 // ============================================================================
 
 /// # 理论模块: Reactor 模式形式化
-/// 
+///
 /// ## 数学定义
 /// ```text
 /// Reactor = (EventQueue, HandlerRegistry, EventLoop)
@@ -501,7 +520,7 @@ mod theory_reactor_pattern {
     use super::*;
 
     /// 事件类型枚举 - 定义系统支持的事件类型
-    /// 
+    ///
     /// ## 设计考虑
     /// - 可扩展: 支持自定义事件类型
     /// - 类型安全: 使用 enum 而非字符串
@@ -523,7 +542,7 @@ mod theory_reactor_pattern {
     }
 
     /// 事件结构 - 封装事件的所有信息
-    /// 
+    ///
     /// ## 字段说明
     /// - `source_id`: 事件源标识符 (如 socket fd)
     /// - `event_type`: 事件类型
@@ -566,17 +585,17 @@ mod theory_reactor_pattern {
     }
 
     /// 事件处理器 trait - 定义如何处理事件
-    /// 
+    ///
     /// ## 设计模式: Strategy Pattern
     /// 不同的事件可以有不同的处理策略
     #[async_trait::async_trait]
     #[allow(dead_code)]
     pub trait EventHandler: Send + Sync {
         /// 处理事件
-        /// 
+        ///
         /// # 参数
         /// - `event`: 要处理的事件
-        /// 
+        ///
         /// # 返回
         /// - `Ok(())`: 处理成功
         /// - `Err(e)`: 处理失败,包含错误信息
@@ -594,10 +613,10 @@ mod theory_reactor_pattern {
     }
 
     /// Reactor 核心 - 事件驱动的核心引擎
-    /// 
+    ///
     /// ## 线程安全
     /// 所有字段都使用 Arc<Mutex<>> 包装,支持多线程访问
-    /// 
+    ///
     /// ## 性能考虑
     /// - 事件队列使用 Vec 而非 VecDeque,批量处理
     /// - 处理器注册表使用 HashMap,O(1) 查找
@@ -634,13 +653,13 @@ mod theory_reactor_pattern {
         }
 
         /// 注册事件处理器
-        /// 
+        ///
         /// ## 语义
         /// ```text
         /// register(source_id, event_type, handler) =
         ///   HandlerRegistry[(source_id, event_type)] ← handler
         /// ```
-        /// 
+        ///
         /// # 参数
         /// - `source_id`: 事件源 ID
         /// - `event_type`: 事件类型
@@ -653,10 +672,10 @@ mod theory_reactor_pattern {
         ) {
             let mut handlers = self.handlers.lock().await;
             handlers.insert((source_id, event_type), handler);
-            
+
             let mut stats = self.stats.lock().await;
             stats.handlers_registered = handlers.len();
-            
+
             println!(
                 "[Reactor] ✓ 注册处理器: source={}, type={:?}",
                 source_id, event_type
@@ -664,13 +683,13 @@ mod theory_reactor_pattern {
         }
 
         /// 提交事件到队列
-        /// 
+        ///
         /// ## 性能优化
         /// 批量提交事件以减少锁竞争
         pub async fn submit_event(&self, event: Event) {
             let mut queue = self.event_queue.lock().await;
             queue.push(event);
-            
+
             let mut stats = self.stats.lock().await;
             stats.events_pending = queue.len() as u64;
         }
@@ -679,13 +698,13 @@ mod theory_reactor_pattern {
         pub async fn submit_events(&self, events: Vec<Event>) {
             let mut queue = self.event_queue.lock().await;
             queue.extend(events);
-            
+
             let mut stats = self.stats.lock().await;
             stats.events_pending = queue.len() as u64;
         }
 
         /// 启动事件循环 - Reactor 的心跳
-        /// 
+        ///
         /// ## 事件循环算法
         /// ```text
         /// while running do
@@ -743,7 +762,7 @@ mod theory_reactor_pattern {
                         // 异步并发处理事件
                         let stats = self.stats.clone();
                         let event_clone = event.clone();
-                        
+
                         tokio::spawn(async move {
                             // 立即消费 Result,提取出 Send 安全的数据
                             let (is_ok, error_msg) = match h.handle(event_clone).await {
@@ -754,7 +773,7 @@ mod theory_reactor_pattern {
                                     (false, Some(msg))
                                 }
                             };
-                            
+
                             let mut stats = stats.lock().await;
                             if is_ok {
                                 stats.events_processed += 1;
@@ -838,10 +857,10 @@ mod theory_reactor_pattern {
                 "  [{}] 📨 {:?} 事件: source={}, data='{}'",
                 self.name, event.event_type, event.source_id, data_str
             );
-            
+
             let mut count = self.processed.lock().await;
             *count += 1;
-            
+
             sleep(Duration::from_millis(50)).await; // 模拟处理
             Ok(())
         }
@@ -883,40 +902,44 @@ mod theory_reactor_pattern {
 
         // 注册各类事件处理器
         println!("📋 注册事件处理器...\n");
-        
-        reactor.register(
-            1,
-            EventType::Connect,
-            Arc::new(ConnectionHandler {
-                name: "ConnHandler".to_string(),
-            }),
-        ).await;
+
+        reactor
+            .register(
+                1,
+                EventType::Connect,
+                Arc::new(ConnectionHandler {
+                    name: "ConnHandler".to_string(),
+                }),
+            )
+            .await;
 
         let processed_count = Arc::new(Mutex::new(0));
-        
-        reactor.register(
-            1,
-            EventType::Read,
-            Arc::new(DataHandler {
-                name: "ReadHandler".to_string(),
-                processed: processed_count.clone(),
-            }),
-        ).await;
 
-        reactor.register(
-            1,
-            EventType::Write,
-            Arc::new(DataHandler {
-                name: "WriteHandler".to_string(),
-                processed: Arc::new(Mutex::new(0)),
-            }),
-        ).await;
+        reactor
+            .register(
+                1,
+                EventType::Read,
+                Arc::new(DataHandler {
+                    name: "ReadHandler".to_string(),
+                    processed: processed_count.clone(),
+                }),
+            )
+            .await;
 
-        reactor.register(
-            2,
-            EventType::Timer,
-            Arc::new(TimerHandler),
-        ).await;
+        reactor
+            .register(
+                1,
+                EventType::Write,
+                Arc::new(DataHandler {
+                    name: "WriteHandler".to_string(),
+                    processed: Arc::new(Mutex::new(0)),
+                }),
+            )
+            .await;
+
+        reactor
+            .register(2, EventType::Timer, Arc::new(TimerHandler))
+            .await;
 
         // 启动事件循环
         let reactor_clone = reactor.clone();
@@ -926,15 +949,17 @@ mod theory_reactor_pattern {
 
         // 模拟事件产生
         println!("\n🎬 开始产生事件...\n");
-        
+
         sleep(Duration::from_millis(100)).await;
 
         // 场景 1: 客户端连接
-        reactor.submit_event(
-            Event::new(1, EventType::Connect)
-                .with_data(b"client:192.168.1.100".to_vec())
-                .with_priority(255) // 最高优先级
-        ).await;
+        reactor
+            .submit_event(
+                Event::new(1, EventType::Connect)
+                    .with_data(b"client:192.168.1.100".to_vec())
+                    .with_priority(255), // 最高优先级
+            )
+            .await;
 
         sleep(Duration::from_millis(150)).await;
 
@@ -944,12 +969,12 @@ mod theory_reactor_pattern {
             events.push(
                 Event::new(1, EventType::Read)
                     .with_data(format!("request-{}", i).into_bytes())
-                    .with_priority(200)
+                    .with_priority(200),
             );
             events.push(
                 Event::new(1, EventType::Write)
                     .with_data(format!("response-{}", i).into_bytes())
-                    .with_priority(180)
+                    .with_priority(180),
             );
         }
         reactor.submit_events(events).await;
@@ -958,10 +983,9 @@ mod theory_reactor_pattern {
 
         // 场景 3: 定时器事件
         for _ in 0..3 {
-            reactor.submit_event(
-                Event::new(2, EventType::Timer)
-                    .with_priority(100)
-            ).await;
+            reactor
+                .submit_event(Event::new(2, EventType::Timer).with_priority(100))
+                .await;
             sleep(Duration::from_millis(100)).await;
         }
 
@@ -984,7 +1008,7 @@ mod theory_reactor_pattern {
 // ============================================================================
 
 /// # 理论模块: CSP 模式形式化
-/// 
+///
 /// ## 数学定义 (Hoare 1978)
 /// ```text
 /// P ::= STOP                    // 停止进程
@@ -1003,7 +1027,7 @@ mod theory_reactor_pattern {
 /// ```
 ///
 /// ## CSP vs Actor vs Reactor
-/// 
+///
 /// | 特性 | CSP | Actor | Reactor |
 /// |------|-----|-------|---------|
 /// | 通信 | Channel | Message | Event |
@@ -1016,14 +1040,14 @@ mod theory_csp_pattern {
     use tokio::sync::broadcast;
 
     /// CSP 示例 1: 生产者-消费者模式
-    /// 
+    ///
     /// ## 形式化描述
     /// ```text
     /// Producer = produce → send!ch → Producer
     /// Consumer = recv?ch → consume → Consumer
     /// System = Producer ||| Consumer
     /// ```
-    /// 
+    ///
     /// ## 特点
     /// - 解耦: 生产者和消费者独立
     /// - 背压: 通道容量限制生产速度
@@ -1050,10 +1074,10 @@ mod theory_csp_pattern {
                 for i in 0..5 {
                     let item = format!("P{}-Item{}", id, i);
                     println!("  [Producer {}] ⚡ 生产: {}", id, item);
-                    
+
                     // 模拟生产时间
                     sleep(Duration::from_millis(50 + id * 10)).await;
-                    
+
                     // 发送到通道 (可能阻塞,背压生效)
                     if tx.send(item).await.is_err() {
                         println!("  [Producer {}] ✗ 通道已关闭", id);
@@ -1076,7 +1100,7 @@ mod theory_csp_pattern {
             while let Some(item) = rx.recv().await {
                 println!("  [Consumer] 📦 消费: {}", item);
                 count += 1;
-                
+
                 // 模拟消费时间 (比生产慢,触发背压)
                 sleep(Duration::from_millis(80)).await;
             }
@@ -1091,13 +1115,13 @@ mod theory_csp_pattern {
 
         // 等待消费者完成
         let total = consumer.await.unwrap();
-        
+
         println!("\n✅ 生产者-消费者演示完成");
         println!("   总处理项目: {}", total);
     }
 
     /// CSP 示例 2: Pipeline 模式
-    /// 
+    ///
     /// ## 形式化描述
     /// ```text
     /// Stage1 = generate → send!ch1 → Stage1
@@ -1105,7 +1129,7 @@ mod theory_csp_pattern {
     /// Stage3 = recv?ch2 → aggregate → Stage3
     /// Pipeline = Stage1 ||| Stage2 ||| Stage3
     /// ```
-    /// 
+    ///
     /// ## 应用场景
     /// - 数据处理流水线
     /// - 编译器 (词法→语法→语义→代码生成)
@@ -1174,7 +1198,7 @@ mod theory_csp_pattern {
     }
 
     /// CSP 示例 3: Fan-out/Fan-in 模式
-    /// 
+    ///
     /// ## 形式化描述
     /// ```text
     /// Distributor = recv?input → (send!worker1 || ... || send!workerN)
@@ -1182,7 +1206,7 @@ mod theory_csp_pattern {
     /// Collector = (recv?result1 || ... || recv?resultN) → aggregate
     /// System = Distributor ||| Worker1 ||| ... ||| WorkerN ||| Collector
     /// ```
-    /// 
+    ///
     /// ## 应用场景
     /// - 并行任务处理
     /// - 分布式计算
@@ -1211,19 +1235,19 @@ mod theory_csp_pattern {
             let worker = tokio::spawn(async move {
                 println!("  [Worker {}] 启动", worker_id);
                 let mut processed = 0;
-                
+
                 while let Ok(work) = work_rx.recv().await {
                     // 模拟工作处理
                     sleep(Duration::from_millis(100 + worker_id * 20)).await;
-                    
+
                     let result = format!("Worker {} 处理: {}", worker_id, work);
                     processed += 1;
-                    
+
                     if result_tx.send(result).await.is_err() {
                         break;
                     }
                 }
-                
+
                 println!("  [Worker {}] ✓ 完成,处理 {} 个任务", worker_id, processed);
             });
             workers.push(worker);
@@ -1261,7 +1285,7 @@ mod theory_csp_pattern {
     }
 
     /// CSP 示例 4: Select 模式 (多路复用)
-    /// 
+    ///
     /// ## 形式化描述
     /// ```text
     /// Select = (ch1?x → P) □ (ch2?y → Q) □ (ch3?z → R)
@@ -1347,10 +1371,10 @@ mod async_design_patterns {
     // ------------------------------------------------------------------------
 
     /// # 设计模式: Builder 构建器模式
-    /// 
+    ///
     /// ## 意图
     /// 将复杂对象的构建与表示分离,使用相同的构建过程可以创建不同的表示
-    /// 
+    ///
     /// ## 适用场景
     /// - 对象有多个可选参数
     /// - 构建过程需要逐步进行
@@ -1359,7 +1383,7 @@ mod async_design_patterns {
         use super::*;
 
         /// HTTP 客户端构建器 - 演示 Builder 模式
-        /// 
+        ///
         /// ## 优势
         /// - 流畅接口 (Fluent Interface)
         /// - 可选参数清晰
@@ -1420,7 +1444,9 @@ mod async_design_patterns {
                     timeout: self.timeout.unwrap_or(Duration::from_secs(30)),
                     max_connections: self.max_connections,
                     retry_attempts: self.retry_attempts,
-                    user_agent: self.user_agent.unwrap_or_else(|| "RustClient/1.0".to_string()),
+                    user_agent: self
+                        .user_agent
+                        .unwrap_or_else(|| "RustClient/1.0".to_string()),
                     headers: self.headers,
                 }
             }
@@ -1475,10 +1501,10 @@ mod async_design_patterns {
     }
 
     /// # 设计模式: Factory 工厂模式
-    /// 
+    ///
     /// ## 意图
     /// 定义创建对象的接口,但让子类决定实例化哪个类
-    /// 
+    ///
     /// ## 适用场景
     /// - 创建过程复杂
     /// - 需要根据条件创建不同对象
@@ -1560,7 +1586,7 @@ mod async_design_patterns {
 
         impl ConnectionFactory {
             /// 创建连接
-            /// 
+            ///
             /// # 参数
             /// - `conn_type`: 连接类型 ("tcp", "websocket", "http")
             /// - `address`: 连接地址
@@ -1577,11 +1603,9 @@ mod async_design_patterns {
                             port,
                         }))
                     }
-                    "websocket" | "ws" => {
-                        Ok(Box::new(WebSocketConnection {
-                            url: address.to_string(),
-                        }))
-                    }
+                    "websocket" | "ws" => Ok(Box::new(WebSocketConnection {
+                        url: address.to_string(),
+                    })),
                     _ => Err(format!("不支持的连接类型: {}", conn_type)),
                 }
             }
@@ -1618,10 +1642,10 @@ mod async_design_patterns {
     // ------------------------------------------------------------------------
 
     /// # 设计模式: Adapter 适配器模式
-    /// 
+    ///
     /// ## 意图
     /// 将一个类的接口转换成客户希望的另一个接口
-    /// 
+    ///
     /// ## 适用场景
     /// - 使用已有的类,但接口不符合需求
     /// - 创建可复用的类与不兼容的类协同工作
@@ -1688,7 +1712,10 @@ mod async_design_patterns {
             }
 
             async fn set(&self, key: &str, value: String) -> Result<(), String> {
-                println!("  [Adapter] 适配 set('{}', '{}') → legacy.write()", key, value);
+                println!(
+                    "  [Adapter] 适配 set('{}', '{}') → legacy.write()",
+                    key, value
+                );
                 self.legacy.write(key, value).await;
                 Ok(())
             }
@@ -1724,10 +1751,10 @@ mod async_design_patterns {
     // ------------------------------------------------------------------------
 
     /// # 设计模式: Strategy 策略模式
-    /// 
+    ///
     /// ## 意图
     /// 定义算法族,分别封装,让它们可以互相替换
-    /// 
+    ///
     /// ## 适用场景
     /// - 需要在运行时选择算法
     /// - 有多个相关的类仅行为不同
@@ -1767,8 +1794,11 @@ mod async_design_patterns {
             async fn compress(&self, data: &[u8]) -> Vec<u8> {
                 sleep(Duration::from_millis(10)).await; // 模拟快速压缩
                 let compressed_size = data.len() / 2;
-                println!("  [FastCompression] 快速压缩: {} → {} bytes", 
-                    data.len(), compressed_size);
+                println!(
+                    "  [FastCompression] 快速压缩: {} → {} bytes",
+                    data.len(),
+                    compressed_size
+                );
                 vec![0u8; compressed_size] // 模拟压缩结果
             }
 
@@ -1786,8 +1816,11 @@ mod async_design_patterns {
             async fn compress(&self, data: &[u8]) -> Vec<u8> {
                 sleep(Duration::from_millis(50)).await; // 模拟慢速但高压缩率
                 let compressed_size = data.len() / 4;
-                println!("  [BestCompression] 最优压缩: {} → {} bytes", 
-                    data.len(), compressed_size);
+                println!(
+                    "  [BestCompression] 最优压缩: {} → {} bytes",
+                    data.len(),
+                    compressed_size
+                );
                 vec![0u8; compressed_size] // 模拟压缩结果
             }
 
@@ -1850,10 +1883,10 @@ mod async_design_patterns {
     }
 
     /// # 设计模式: Observer 观察者模式
-    /// 
+    ///
     /// ## 意图
     /// 定义对象间的一对多依赖,当一个对象状态改变时,所有依赖者都得到通知
-    /// 
+    ///
     /// ## 适用场景
     /// - 一个对象的改变需要同时改变其他对象
     /// - 不知道有多少对象需要改变
@@ -1942,7 +1975,7 @@ mod async_design_patterns {
             pub async fn notify(&self, event: Event) {
                 println!("\n  🔔 通知事件: {:?}", event);
                 let observers = self.observers.lock().await;
-                
+
                 // 并发通知所有观察者
                 let mut tasks = vec![];
                 for observer in observers.iter() {
@@ -1966,19 +1999,25 @@ mod async_design_patterns {
             let subject = Subject::new();
 
             // 注册多个观察者
-            subject.attach(Arc::new(LogObserver {
-                name: "Logger".to_string(),
-            })).await;
+            subject
+                .attach(Arc::new(LogObserver {
+                    name: "Logger".to_string(),
+                }))
+                .await;
 
-            subject.attach(Arc::new(EmailObserver {
-                name: "Mailer".to_string(),
-            })).await;
+            subject
+                .attach(Arc::new(EmailObserver {
+                    name: "Mailer".to_string(),
+                }))
+                .await;
 
             // 触发事件
             subject.notify(Event::UserLogin("Alice".to_string())).await;
             sleep(Duration::from_millis(100)).await;
 
-            subject.notify(Event::DataUpdated("config.json".to_string())).await;
+            subject
+                .notify(Event::DataUpdated("config.json".to_string()))
+                .await;
             sleep(Duration::from_millis(100)).await;
 
             // 移除观察者
@@ -2083,13 +2122,21 @@ mod tests {
         use theory_actor_model::*;
 
         let account = ActorSystem::spawn(BankAccount::new("Test".to_string(), 100));
-        
+
         // 测试存款
-        let balance = account.send(AccountMessage::Deposit(50)).await.unwrap().unwrap();
+        let balance = account
+            .send(AccountMessage::Deposit(50))
+            .await
+            .unwrap()
+            .unwrap();
         assert_eq!(balance, 150);
 
         // 测试取款
-        let balance = account.send(AccountMessage::Withdraw(30)).await.unwrap().unwrap();
+        let balance = account
+            .send(AccountMessage::Withdraw(30))
+            .await
+            .unwrap()
+            .unwrap();
         assert_eq!(balance, 120);
 
         // 测试余额不足
@@ -2102,9 +2149,9 @@ mod tests {
         use theory_reactor_pattern::*;
 
         let reactor = Arc::new(Reactor::new());
-        
+
         struct TestHandler;
-        
+
         #[async_trait::async_trait]
         impl EventHandler for TestHandler {
             async fn handle(&self, _event: Event) -> Result<(), Box<dyn std::error::Error>> {
@@ -2112,10 +2159,12 @@ mod tests {
             }
         }
 
-        reactor.register(1, EventType::Read, Arc::new(TestHandler)).await;
-        
+        reactor
+            .register(1, EventType::Read, Arc::new(TestHandler))
+            .await;
+
         reactor.submit_event(Event::new(1, EventType::Read)).await;
-        
+
         // 启动并快速停止
         let reactor_clone = reactor.clone();
         let handle = tokio::spawn(async move {
@@ -2145,4 +2194,3 @@ mod tests {
         assert_eq!(sum, 10); // 0+1+2+3+4 = 10
     }
 }
-

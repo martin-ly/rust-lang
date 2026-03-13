@@ -1,7 +1,7 @@
 //! # 算法正确性验证模块
 //!
 //! 本模块提供算法正确性验证的工具和方法。
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// 正确性验证结果
 #[derive(Debug, Clone, Serialize, Deserialize)]

@@ -179,9 +179,7 @@ impl Rust190Features {
         // 类型推断更智能
         let _closure = |pid: u32| -> ProcessResult<ProcessInfo> {
             let map = arc_map.lock().unwrap();
-            map.get(&pid)
-                .cloned()
-                .ok_or(ProcessError::NotFound(pid))
+            map.get(&pid).cloned().ok_or(ProcessError::NotFound(pid))
         };
 
         println!("✅ 类型推断成功");

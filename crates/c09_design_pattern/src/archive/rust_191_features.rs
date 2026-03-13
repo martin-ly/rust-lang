@@ -134,7 +134,8 @@ pub mod pattern_new_apis {
         if strategies.len() > max_strategies {
             return ControlFlow::Break(format!(
                 "策略数量超出限制: {} > {}",
-                strategies.len(), max_strategies
+                strategies.len(),
+                max_strategies
             ));
         }
 
@@ -311,7 +312,9 @@ pub mod pattern_std_new_apis {
     /// Vec::try_reserve_exact 示例
     ///
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
-    pub fn allocate_pattern_buffer(size: usize) -> Result<Vec<u8>, std::collections::TryReserveError> {
+    pub fn allocate_pattern_buffer(
+        size: usize,
+    ) -> Result<Vec<u8>, std::collections::TryReserveError> {
         let mut vec = Vec::new();
         vec.try_reserve_exact(size)?;
         Ok(vec)

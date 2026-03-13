@@ -37,7 +37,6 @@ pub struct ModelCheckingConfig {
     pub verbose: bool,
 }
 
-
 /// 模型检查结果
 #[derive(Debug, Clone)]
 pub struct ModelCheckingResult {
@@ -120,14 +119,18 @@ impl ModelChecker {
     }
 
     /// 执行模型检查
-    pub fn check_model(&mut self, initial_state: NetworkState) -> NetworkResult<ModelCheckingResult> {
+    pub fn check_model(
+        &mut self,
+        initial_state: NetworkState,
+    ) -> NetworkResult<ModelCheckingResult> {
         let start_time = Instant::now();
 
         // 清空状态空间
         self.state_space.clear();
 
         // 添加初始状态
-        self.state_space.insert(initial_state.id.clone(), initial_state.clone());
+        self.state_space
+            .insert(initial_state.id.clone(), initial_state.clone());
 
         // 执行状态空间探索
         let exploration_result = self.explore_state_space(initial_state)?;
@@ -147,7 +150,10 @@ impl ModelChecker {
     }
 
     /// 探索状态空间
-    fn explore_state_space(&mut self, initial_state: NetworkState) -> NetworkResult<ExplorationResult> {
+    fn explore_state_space(
+        &mut self,
+        initial_state: NetworkState,
+    ) -> NetworkResult<ExplorationResult> {
         let start_time = Instant::now();
         let mut visited = HashSet::new();
         let mut queue = VecDeque::new();
@@ -185,8 +191,9 @@ impl ModelChecker {
                 });
             }
 
-            let current_state = self.state_space.get(&current_state_id)
-                .ok_or_else(|| crate::error::NetworkError::InvalidState(current_state_id.clone()))?;
+            let current_state = self.state_space.get(&current_state_id).ok_or_else(|| {
+                crate::error::NetworkError::InvalidState(current_state_id.clone())
+            })?;
 
             // 检查属性
             for checker in &self.property_checkers {
@@ -194,11 +201,9 @@ impl ModelChecker {
                     violations.push(violation.clone());
 
                     // 生成反例
-                    if let Some(counter_example) = self.generate_counter_example(
-                        current_state,
-                        &violation,
-                        &visited,
-                    ) {
+                    if let Some(counter_example) =
+                        self.generate_counter_example(current_state, &violation, &visited)
+                    {
                         counter_examples.push(counter_example);
                     }
                 }
@@ -209,12 +214,14 @@ impl ModelChecker {
             let transitions_to_apply = self.transitions.clone();
             for transition in transitions_to_apply {
                 if transition.from == current_state_id
-                    && let Some(next_state) = self.apply_transition(&current_state_clone, &transition)
-                        && !visited.contains(&next_state.id) {
-                            visited.insert(next_state.id.clone());
-                            queue.push_back(next_state.id.clone());
-                            self.state_space.insert(next_state.id.clone(), next_state);
-                        }
+                    && let Some(next_state) =
+                        self.apply_transition(&current_state_clone, &transition)
+                    && !visited.contains(&next_state.id)
+                {
+                    visited.insert(next_state.id.clone());
+                    queue.push_back(next_state.id.clone());
+                    self.state_space.insert(next_state.id.clone(), next_state);
+                }
             }
 
             // states_processed += 1;
@@ -231,7 +238,11 @@ impl ModelChecker {
     }
 
     /// 应用状态转换
-    fn apply_transition(&self, state: &NetworkState, transition: &StateTransition) -> Option<NetworkState> {
+    fn apply_transition(
+        &self,
+        state: &NetworkState,
+        transition: &StateTransition,
+    ) -> Option<NetworkState> {
         // 检查守卫条件
         if !self.evaluate_guard(&transition.guard, state) {
             return None;
@@ -250,52 +261,53 @@ impl ModelChecker {
         match guard {
             Guard::True => true,
             Guard::False => false,
-            Guard::VariableComparison { variable, operator, value } => {
+            Guard::VariableComparison {
+                variable,
+                operator,
+                value,
+            } => {
                 if let Some(state_value) = state.global_vars.get(variable) {
                     self.compare_values(state_value, value, operator)
                 } else {
                     false
                 }
             }
-            Guard::Compound { operator, conditions } => {
-                match operator {
-                    LogicalOperator::And => {
-                        conditions.iter().all(|condition| self.evaluate_guard(condition, state))
-                    }
-                    LogicalOperator::Or => {
-                        conditions.iter().any(|condition| self.evaluate_guard(condition, state))
-                    }
-                    LogicalOperator::Not => {
-                        !conditions.iter().any(|condition| self.evaluate_guard(condition, state))
-                    }
-                }
-            }
+            Guard::Compound {
+                operator,
+                conditions,
+            } => match operator {
+                LogicalOperator::And => conditions
+                    .iter()
+                    .all(|condition| self.evaluate_guard(condition, state)),
+                LogicalOperator::Or => conditions
+                    .iter()
+                    .any(|condition| self.evaluate_guard(condition, state)),
+                LogicalOperator::Not => !conditions
+                    .iter()
+                    .any(|condition| self.evaluate_guard(condition, state)),
+            },
         }
     }
 
     /// 比较值
     fn compare_values(&self, left: &Value, right: &Value, operator: &ComparisonOperator) -> bool {
         match (left, right) {
-            (Value::Int(a), Value::Int(b)) => {
-                match operator {
-                    ComparisonOperator::Equal => a == b,
-                    ComparisonOperator::NotEqual => a != b,
-                    ComparisonOperator::LessThan => a < b,
-                    ComparisonOperator::LessThanOrEqual => a <= b,
-                    ComparisonOperator::GreaterThan => a > b,
-                    ComparisonOperator::GreaterThanOrEqual => a >= b,
-                }
-            }
-            (Value::UInt(a), Value::UInt(b)) => {
-                match operator {
-                    ComparisonOperator::Equal => a == b,
-                    ComparisonOperator::NotEqual => a != b,
-                    ComparisonOperator::LessThan => a < b,
-                    ComparisonOperator::LessThanOrEqual => a <= b,
-                    ComparisonOperator::GreaterThan => a > b,
-                    ComparisonOperator::GreaterThanOrEqual => a >= b,
-                }
-            }
+            (Value::Int(a), Value::Int(b)) => match operator {
+                ComparisonOperator::Equal => a == b,
+                ComparisonOperator::NotEqual => a != b,
+                ComparisonOperator::LessThan => a < b,
+                ComparisonOperator::LessThanOrEqual => a <= b,
+                ComparisonOperator::GreaterThan => a > b,
+                ComparisonOperator::GreaterThanOrEqual => a >= b,
+            },
+            (Value::UInt(a), Value::UInt(b)) => match operator {
+                ComparisonOperator::Equal => a == b,
+                ComparisonOperator::NotEqual => a != b,
+                ComparisonOperator::LessThan => a < b,
+                ComparisonOperator::LessThanOrEqual => a <= b,
+                ComparisonOperator::GreaterThan => a > b,
+                ComparisonOperator::GreaterThanOrEqual => a >= b,
+            },
             (Value::Bool(a), Value::Bool(b)) => {
                 match operator {
                     ComparisonOperator::Equal => a == b,
@@ -323,7 +335,10 @@ impl ModelChecker {
             Action::Assignment { variable, value } => {
                 state.global_vars.insert(variable.clone(), value.clone());
             }
-            Action::SendMessage { message, destination: _ } => {
+            Action::SendMessage {
+                message,
+                destination: _,
+            } => {
                 state.message_queue.push(message.clone());
             }
             Action::ReceiveMessage { message } => {
@@ -383,7 +398,11 @@ impl ModelChecker {
     }
 
     /// 寻找前驱状态
-    fn find_predecessor(&self, state_id: String, visited_states: &HashSet<String>) -> Option<String> {
+    fn find_predecessor(
+        &self,
+        state_id: String,
+        visited_states: &HashSet<String>,
+    ) -> Option<String> {
         // 简化实现：返回第一个可能的前驱状态
         for transition in &self.transitions {
             if transition.to == state_id && visited_states.contains(&transition.from) {
@@ -414,7 +433,7 @@ impl ModelChecker {
         CoverageStats {
             state_coverage,
             transition_coverage,
-            path_coverage: state_coverage, // 简化
+            path_coverage: state_coverage,        // 简化
             branch_coverage: transition_coverage, // 简化
         }
     }
@@ -468,7 +487,6 @@ pub struct TlaConfig {
     pub deadlock_check: bool,
 }
 
-
 #[allow(dead_code)]
 impl TlaModelChecker {
     /// 创建TLA+模型检查器
@@ -516,7 +534,9 @@ impl TlaModelChecker {
 
     /// 生成变量声明
     fn generate_variables(&self, model: &SemanticModel) -> String {
-        model.state_variables.keys()
+        model
+            .state_variables
+            .keys()
             .cloned()
             .collect::<Vec<_>>()
             .join(", ")
@@ -542,7 +562,9 @@ impl TlaModelChecker {
 
     /// 生成变量列表
     fn generate_variable_list(&self, model: &SemanticModel) -> String {
-        model.state_variables.keys()
+        model
+            .state_variables
+            .keys()
             .cloned()
             .collect::<Vec<_>>()
             .join(", ")

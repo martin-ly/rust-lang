@@ -12,14 +12,16 @@ async fn exec_strategy_basic_works() {
     let out = runner
         .run(
             |attempt| async move {
-                if attempt < 2 { Err(anyhow::anyhow!("transient")) } else { Ok::<_, anyhow::Error>(42) }
+                if attempt < 2 {
+                    Err(anyhow::anyhow!("transient"))
+                } else {
+                    Ok::<_, anyhow::Error>(42)
+                }
             },
-            None::<fn(&anyhow::Error)->bool>,
+            None::<fn(&anyhow::Error) -> bool>,
         )
         .await
         .expect("should not error");
 
     assert_eq!(out, Some(42));
 }
-
-

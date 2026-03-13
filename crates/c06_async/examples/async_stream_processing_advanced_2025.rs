@@ -2,13 +2,13 @@ use anyhow::Result;
 use futures::{Stream, StreamExt, stream};
 use std::pin::Pin;
 //use std::task::{Context, Poll};
-use std::time::{Duration, Instant};
-use tokio::sync::{mpsc, RwLock, Semaphore};
-use tokio::time::{sleep};
-use tracing::{info, warn, debug};
 use serde::{Deserialize, Serialize};
-use std::sync::Arc;
 use std::collections::HashMap;
+use std::sync::Arc;
+use std::time::{Duration, Instant};
+use tokio::sync::{RwLock, Semaphore, mpsc};
+use tokio::time::sleep;
+use tracing::{debug, info, warn};
 
 /// 2025年高级异步流处理演示
 /// 展示最新的异步流处理技术和模式
@@ -75,7 +75,10 @@ impl StreamTransform {
 
 /// 流转换器trait (保留用于具体实现)
 pub trait StreamTransformImpl: Send + Sync + Clone {
-    fn transform(&mut self, input: StreamEvent) -> impl std::future::Future<Output = Result<Option<StreamEvent>>> + Send;
+    fn transform(
+        &mut self,
+        input: StreamEvent,
+    ) -> impl std::future::Future<Output = Result<Option<StreamEvent>>> + Send;
     fn name(&self) -> &str;
 }
 
@@ -137,20 +140,24 @@ impl AsyncStreamProcessor {
 
         let total_time = start_time.elapsed();
         let metrics_data = metrics.read().await;
-        info!("流处理完成: 处理了 {} 个项目，耗时 {:?}", metrics_data.processed_count, total_time);
+        info!(
+            "流处理完成: 处理了 {} 个项目，耗时 {:?}",
+            metrics_data.processed_count, total_time
+        );
 
         Ok(())
     }
-
 
     async fn update_metrics_static(metrics: Arc<RwLock<StreamMetrics>>, item_start: Instant) {
         let mut metrics_data = metrics.write().await;
         metrics_data.processed_count += 1;
         metrics_data.last_processed_time = Some(Instant::now());
-        
+
         let latency = item_start.elapsed();
         metrics_data.average_latency = Duration::from_nanos(
-            ((metrics_data.average_latency.as_nanos() * (metrics_data.processed_count - 1) as u128 + latency.as_nanos()) / metrics_data.processed_count as u128) as u64
+            ((metrics_data.average_latency.as_nanos() * (metrics_data.processed_count - 1) as u128
+                + latency.as_nanos())
+                / metrics_data.processed_count as u128) as u64,
         );
     }
 
@@ -190,10 +197,10 @@ impl<T: Clone, Acc: Clone> AsyncStreamAggregator<T, Acc> {
 
     pub async fn process_item(&mut self, item: T) -> Option<Acc> {
         self.current_window.push(item);
-        
+
         // 检查是否需要刷新窗口
-        let should_flush = self.current_window.len() >= self.max_items ||
-                          self.last_window_time.elapsed() >= self.window_size;
+        let should_flush = self.current_window.len() >= self.max_items
+            || self.last_window_time.elapsed() >= self.window_size;
 
         if should_flush {
             self.flush_window().await
@@ -255,13 +262,16 @@ impl<T: Send + 'static> AsyncStreamSharder<T> {
 
     pub async fn shard_item(&self, item: T) -> Result<()> {
         let shard_index = (self.shard_function)(&item) % self.shard_count;
-        self.shards[shard_index].send(item)
+        self.shards[shard_index]
+            .send(item)
             .map_err(|_| anyhow::anyhow!("Failed to send to shard {}", shard_index))?;
         Ok(())
     }
 
     pub fn get_shard_stream(&mut self, shard_index: usize) -> Option<mpsc::UnboundedReceiver<T>> {
-        self.receivers.get_mut(shard_index).map(|rx| std::mem::replace(rx, mpsc::unbounded_channel().1))
+        self.receivers
+            .get_mut(shard_index)
+            .map(|rx| std::mem::replace(rx, mpsc::unbounded_channel().1))
     }
 
     pub async fn shard_stream(
@@ -340,24 +350,27 @@ impl<T: Send + 'static> AsyncStreamMerger<T> {
         let streams = self.input_streams;
         let current_index = 0;
 
-        stream::unfold((streams, current_index), |(mut streams, mut index)| async move {
-            if streams.is_empty() {
-                return None;
-            }
-
-            loop {
-                if let Some(item) = streams[index].next().await {
-                    index = (index + 1) % streams.len();
-                    return Some((item, (streams, index)));
-                } else {
-                    let _ = streams.remove(index);
-                    if streams.is_empty() {
-                        return None;
-                    }
-                    index = index % streams.len();
+        stream::unfold(
+            (streams, current_index),
+            |(mut streams, mut index)| async move {
+                if streams.is_empty() {
+                    return None;
                 }
-            }
-        })
+
+                loop {
+                    if let Some(item) = streams[index].next().await {
+                        index = (index + 1) % streams.len();
+                        return Some((item, (streams, index)));
+                    } else {
+                        let _ = streams.remove(index);
+                        if streams.is_empty() {
+                            return None;
+                        }
+                        index = index % streams.len();
+                    }
+                }
+            },
+        )
     }
 
     async fn priority_merge(self, _priorities: Vec<usize>) -> impl Stream<Item = T> {
@@ -398,7 +411,7 @@ impl<T: Send + Sync + 'static> AsyncStreamFilter<T> {
     ) -> Pin<Box<dyn Stream<Item = T> + Send>> {
         let metrics = self.metrics.clone();
         let filter_fn = self.filter_fn.clone();
-        
+
         Box::pin(input_stream.filter_map(move |item: T| {
             let metrics = metrics.clone();
             let filter_fn = filter_fn.clone();
@@ -412,12 +425,8 @@ impl<T: Send + Sync + 'static> AsyncStreamFilter<T> {
                 }
 
                 m.pass_rate = m.filtered_items as f64 / m.total_items as f64;
-                
-                if passes {
-                    Some(item)
-                } else {
-                    None
-                }
+
+                if passes { Some(item) } else { None }
             }
         }))
     }
@@ -435,7 +444,7 @@ impl StreamTransformImpl for AsyncDataTransformer {
     async fn transform(&mut self, mut event: StreamEvent) -> Result<Option<StreamEvent>> {
         // 模拟数据转换
         sleep(Duration::from_millis(10)).await;
-        
+
         event.data = format!("Transformed: {}", event.data);
         event.timestamp = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)?
@@ -488,7 +497,7 @@ impl StreamTransformImpl for AsyncEventEnricher {
     async fn transform(&mut self, mut event: StreamEvent) -> Result<Option<StreamEvent>> {
         // 模拟数据丰富化
         sleep(Duration::from_millis(5)).await;
-        
+
         for (key, value) in &self.enrichment_data {
             event.data = format!("{}[{}={}]", event.data, key, value);
         }
@@ -518,7 +527,9 @@ impl AsyncBackpressureController {
     }
 
     pub async fn acquire_permit(&self) -> Result<()> {
-        self.semaphore.acquire().await
+        self.semaphore
+            .acquire()
+            .await
             .map_err(|_| anyhow::anyhow!("Failed to acquire permit"))?
             .forget(); // 忘记permit，手动管理
         Ok(())
@@ -570,16 +581,14 @@ impl AsyncStreamMonitor {
         if metrics.average_latency > self.alert_thresholds.max_latency {
             alerts.push(format!(
                 "高延迟告警: {:?} > {:?}",
-                metrics.average_latency,
-                self.alert_thresholds.max_latency
+                metrics.average_latency, self.alert_thresholds.max_latency
             ));
         }
 
         if metrics.throughput_per_second < self.alert_thresholds.min_throughput {
             alerts.push(format!(
                 "低吞吐量告警: {:.2} < {:.2}",
-                metrics.throughput_per_second,
-                self.alert_thresholds.min_throughput
+                metrics.throughput_per_second, self.alert_thresholds.min_throughput
             ));
         }
 
@@ -605,9 +614,7 @@ impl AsyncStreamMonitor {
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志
-    tracing_subscriber::fmt()
-        .with_env_filter("info")
-        .init();
+    tracing_subscriber::fmt().with_env_filter("info").init();
 
     info!("🚀 开始 2025 年高级异步流处理演示");
 
@@ -640,20 +647,19 @@ async fn demo_basic_stream_processing() -> Result<()> {
     info!("📊 演示基础异步流处理");
 
     // 创建输入流
-    let input_stream = stream::iter(0..100)
-        .map(|i| StreamEvent {
-            id: i,
-            timestamp: std::time::SystemTime::now()
-                .duration_since(std::time::UNIX_EPOCH)
-                .unwrap()
-                .as_millis() as u64,
-            data: format!("Event_{}", i),
-            event_type: if i % 10 == 0 {
-                EventType::Error
-            } else {
-                EventType::Data
-            },
-        });
+    let input_stream = stream::iter(0..100).map(|i| StreamEvent {
+        id: i,
+        timestamp: std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_millis() as u64,
+        data: format!("Event_{}", i),
+        event_type: if i % 10 == 0 {
+            EventType::Error
+        } else {
+            EventType::Data
+        },
+    });
 
     // 创建流处理器
     let processor = AsyncStreamProcessor::new(input_stream)
@@ -663,18 +669,22 @@ async fn demo_basic_stream_processing() -> Result<()> {
         .with_buffer_size(50);
 
     let mut processed_count = 0;
-    processor.process_stream(|event| {
-        processed_count += 1;
-        if processed_count % 20 == 0 {
-            info!("处理事件: {} - {}", event.id, event.data);
-        }
-        Ok(())
-    }).await?;
+    processor
+        .process_stream(|event| {
+            processed_count += 1;
+            if processed_count % 20 == 0 {
+                info!("处理事件: {} - {}", event.id, event.data);
+            }
+            Ok(())
+        })
+        .await?;
 
     // 由于 processor 已经被消费，我们需要重新获取指标
     let metrics = StreamMetrics::default();
-    info!("流处理指标: 处理了 {} 个项目，平均延迟 {:?}", 
-          metrics.processed_count, metrics.average_latency);
+    info!(
+        "流处理指标: 处理了 {} 个项目，平均延迟 {:?}",
+        metrics.processed_count, metrics.average_latency
+    );
 
     Ok(())
 }
@@ -689,13 +699,12 @@ async fn demo_stream_aggregation() -> Result<()> {
         0,
     );
 
-    let input_stream = stream::iter(0..25)
-        .map(|i| StreamEvent {
-            id: i,
-            timestamp: 0,
-            data: format!("Agg_{}", i),
-            event_type: EventType::Data,
-        });
+    let input_stream = stream::iter(0..25).map(|i| StreamEvent {
+        id: i,
+        timestamp: 0,
+        data: format!("Agg_{}", i),
+        event_type: EventType::Data,
+    });
 
     let mut stream = input_stream;
     while let Some(event) = stream.next().await {
@@ -716,14 +725,13 @@ async fn demo_stream_sharding() -> Result<()> {
     info!("🔀 演示流分片");
 
     let sharder = AsyncStreamSharder::new(3, |event: &StreamEvent| event.id as usize);
-    
-    let input_stream = stream::iter(0..30)
-        .map(|i| StreamEvent {
-            id: i,
-            timestamp: 0,
-            data: format!("Shard_{}", i),
-            event_type: EventType::Data,
-        });
+
+    let input_stream = stream::iter(0..30).map(|i| StreamEvent {
+        id: i,
+        timestamp: 0,
+        data: format!("Shard_{}", i),
+        event_type: EventType::Data,
+    });
 
     let shard_streams = sharder.shard_stream(input_stream).await;
 
@@ -754,14 +762,11 @@ async fn demo_stream_sharding() -> Result<()> {
 async fn demo_stream_merging() -> Result<()> {
     info!("🔗 演示流合并");
 
-    let stream1 = stream::iter(0..10)
-        .map(|i| format!("Stream1_Event_{}", i));
-    
-    let stream2 = stream::iter(0..10)
-        .map(|i| format!("Stream2_Event_{}", i));
-    
-    let stream3 = stream::iter(0..10)
-        .map(|i| format!("Stream3_Event_{}", i));
+    let stream1 = stream::iter(0..10).map(|i| format!("Stream1_Event_{}", i));
+
+    let stream2 = stream::iter(0..10).map(|i| format!("Stream2_Event_{}", i));
+
+    let stream3 = stream::iter(0..10).map(|i| format!("Stream3_Event_{}", i));
 
     let merged_stream = AsyncStreamMerger::new()
         .add_stream(stream1)
@@ -790,13 +795,12 @@ async fn demo_stream_filtering() -> Result<()> {
 
     let filter = AsyncStreamFilter::new(|event: &StreamEvent| event.id % 2 == 0);
 
-    let input_stream = stream::iter(0..20)
-        .map(|i| StreamEvent {
-            id: i,
-            timestamp: 0,
-            data: format!("Filter_{}", i),
-            event_type: EventType::Data,
-        });
+    let input_stream = stream::iter(0..20).map(|i| StreamEvent {
+        id: i,
+        timestamp: 0,
+        data: format!("Filter_{}", i),
+        event_type: EventType::Data,
+    });
 
     let filtered_stream = filter.filter_stream(input_stream).await;
     let mut stream = filtered_stream;
@@ -808,8 +812,12 @@ async fn demo_stream_filtering() -> Result<()> {
     }
 
     let metrics = filter.get_metrics().await;
-    info!("过滤指标: 总事件 {}，通过事件 {}，通过率 {:.2}%",
-          metrics.total_items, metrics.filtered_items, metrics.pass_rate * 100.0);
+    info!(
+        "过滤指标: 总事件 {}，通过事件 {}，通过率 {:.2}%",
+        metrics.total_items,
+        metrics.filtered_items,
+        metrics.pass_rate * 100.0
+    );
 
     Ok(())
 }
@@ -822,14 +830,18 @@ async fn demo_backpressure_control() -> Result<()> {
 
     for _i in 0..20 {
         controller.acquire_permit().await?;
-        
+
         // 模拟处理
         sleep(Duration::from_millis(50)).await;
         count += 1;
-        
+
         if count % 5 == 0 {
             let usage = controller.get_buffer_usage().await;
-            info!("背压控制: 处理了 {} 个事件，缓冲区使用率: {:.2}%", count, usage * 100.0);
+            info!(
+                "背压控制: 处理了 {} 个事件，缓冲区使用率: {:.2}%",
+                count,
+                usage * 100.0
+            );
         }
 
         controller.release_permit().await;
@@ -848,9 +860,11 @@ async fn demo_stream_monitoring() -> Result<()> {
     });
 
     // 模拟一些指标更新
-    monitor.update_metrics(100, 5, Duration::from_millis(50)).await;
+    monitor
+        .update_metrics(100, 5, Duration::from_millis(50))
+        .await;
     let alerts = monitor.check_alerts().await;
-    
+
     if alerts.is_empty() {
         info!("监控正常，无告警");
     } else {
@@ -860,9 +874,11 @@ async fn demo_stream_monitoring() -> Result<()> {
     }
 
     // 模拟高延迟场景
-    monitor.update_metrics(100, 5, Duration::from_millis(150)).await;
+    monitor
+        .update_metrics(100, 5, Duration::from_millis(150))
+        .await;
     let alerts = monitor.check_alerts().await;
-    
+
     for alert in alerts {
         warn!("监控告警: {}", alert);
     }
@@ -912,16 +928,31 @@ mod tests {
     #[tokio::test]
     async fn test_async_stream_filter() {
         let filter = AsyncStreamFilter::new(|event: &StreamEvent| event.id % 2 == 0);
-        
+
         let input_stream = stream::iter(vec![
-            StreamEvent { id: 1, timestamp: 0, data: "odd".to_string(), event_type: EventType::Data },
-            StreamEvent { id: 2, timestamp: 0, data: "even".to_string(), event_type: EventType::Data },
-            StreamEvent { id: 3, timestamp: 0, data: "odd".to_string(), event_type: EventType::Data },
+            StreamEvent {
+                id: 1,
+                timestamp: 0,
+                data: "odd".to_string(),
+                event_type: EventType::Data,
+            },
+            StreamEvent {
+                id: 2,
+                timestamp: 0,
+                data: "even".to_string(),
+                event_type: EventType::Data,
+            },
+            StreamEvent {
+                id: 3,
+                timestamp: 0,
+                data: "odd".to_string(),
+                event_type: EventType::Data,
+            },
         ]);
 
         let filtered_stream = filter.filter_stream(input_stream).await;
         let results: Vec<_> = filtered_stream.collect().await;
-        
+
         assert_eq!(results.len(), 1);
         assert_eq!(results[0].id, 2);
     }

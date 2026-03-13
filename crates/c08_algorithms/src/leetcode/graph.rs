@@ -117,8 +117,8 @@ pub fn find_circle_num(is_connected: Vec<Vec<i32>>) -> i32 {
 fn dfs_provinces(is_connected: &[Vec<i32>], visited: &mut [bool], node: usize, n: usize) {
     visited[node] = true;
 
-    for neighbor in 0..n {
-        if is_connected[node][neighbor] == 1 && !visited[neighbor] {
+    for (neighbor, &connected) in is_connected[node].iter().enumerate().take(n) {
+        if connected == 1 && !visited[neighbor] {
             dfs_provinces(is_connected, visited, neighbor, n);
         }
     }
@@ -175,7 +175,15 @@ fn dfs_flood_fill(
         let ni = i as i32 + dx;
         let nj = j as i32 + dy;
         if ni >= 0 && nj >= 0 {
-            dfs_flood_fill(image, ni as usize, nj as usize, old_color, new_color, rows, cols);
+            dfs_flood_fill(
+                image,
+                ni as usize,
+                nj as usize,
+                old_color,
+                new_color,
+                rows,
+                cols,
+            );
         }
     }
 }
@@ -328,11 +336,11 @@ pub fn oranges_rotting(grid: Vec<Vec<i32>>) -> i32 {
     let mut fresh_count = 0;
 
     // Rust 1.91 JIT 优化：初始化 BFS 队列
-    for i in 0..rows {
-        for j in 0..cols {
-            if grid[i][j] == 2 {
+    for (i, row) in grid.iter().enumerate().take(rows) {
+        for (j, &cell) in row.iter().enumerate().take(cols) {
+            if cell == 2 {
                 queue.push_back((i, j, 0));
-            } else if grid[i][j] == 1 {
+            } else if cell == 1 {
                 fresh_count += 1;
             }
         }
@@ -366,11 +374,7 @@ pub fn oranges_rotting(grid: Vec<Vec<i32>>) -> i32 {
         }
     }
 
-    if fresh_count > 0 {
-        -1
-    } else {
-        minutes
-    }
+    if fresh_count > 0 { -1 } else { minutes }
 }
 
 /// 130. Surrounded Regions（被围绕的区域）
@@ -416,12 +420,12 @@ pub fn solve(board: &mut [Vec<char>]) {
     }
 
     // 将所有标记的保留，其他的改为 'X'
-    for i in 0..rows {
-        for j in 0..cols {
-            if board[i][j] == 'O' {
-                board[i][j] = 'X';
-            } else if board[i][j] == '#' {
-                board[i][j] = 'O';
+    for row in board.iter_mut().take(rows) {
+        for cell in row.iter_mut().take(cols) {
+            if *cell == 'O' {
+                *cell = 'X';
+            } else if *cell == '#' {
+                *cell = 'O';
             }
         }
     }
@@ -546,28 +550,16 @@ mod tests {
 
     #[test]
     fn test_find_circle_num() {
-        let is_connected = vec![
-            vec![1, 1, 0],
-            vec![1, 1, 0],
-            vec![0, 0, 1],
-        ];
+        let is_connected = vec![vec![1, 1, 0], vec![1, 1, 0], vec![0, 0, 1]];
         assert_eq!(find_circle_num(is_connected), 2);
 
-        let is_connected = vec![
-            vec![1, 0, 0],
-            vec![0, 1, 0],
-            vec![0, 0, 1],
-        ];
+        let is_connected = vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]];
         assert_eq!(find_circle_num(is_connected), 3);
     }
 
     #[test]
     fn test_flood_fill() {
-        let image = vec![
-            vec![1, 1, 1],
-            vec![1, 1, 0],
-            vec![1, 0, 1],
-        ];
+        let image = vec![vec![1, 1, 1], vec![1, 1, 0], vec![1, 0, 1]];
         let result = flood_fill(image, 1, 1, 2);
         assert_eq!(result[1][1], 2);
     }
@@ -595,18 +587,10 @@ mod tests {
 
     #[test]
     fn test_oranges_rotting() {
-        let grid = vec![
-            vec![2, 1, 1],
-            vec![1, 1, 0],
-            vec![0, 1, 1],
-        ];
+        let grid = vec![vec![2, 1, 1], vec![1, 1, 0], vec![0, 1, 1]];
         assert_eq!(oranges_rotting(grid), 4);
 
-        let grid = vec![
-            vec![2, 1, 1],
-            vec![0, 1, 1],
-            vec![1, 0, 1],
-        ];
+        let grid = vec![vec![2, 1, 1], vec![0, 1, 1], vec![1, 0, 1]];
         assert_eq!(oranges_rotting(grid), -1);
     }
 

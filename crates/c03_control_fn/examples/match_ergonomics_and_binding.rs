@@ -1,5 +1,9 @@
 #[allow(dead_code)]
-enum Msg { Ping, Pong, Data(i32) }
+enum Msg {
+    Ping,
+    Pong,
+    Data(i32),
+}
 
 fn handle(m: Msg) -> &'static str {
     match m {
@@ -25,7 +29,11 @@ fn touch_first(v: &mut Vec<i32>) {
 }
 
 #[allow(dead_code)]
-struct Config { host: String, port: u16, tls: bool }
+struct Config {
+    host: String,
+    port: u16,
+    tls: bool,
+}
 
 fn port_enabled(c: &Config) -> bool {
     match c {
@@ -42,12 +50,14 @@ fn main() {
     let elf = [0x7F, b'E', b'L', b'F', 1, 2];
     assert!(describe(&elf).starts_with("ELF:"));
 
-    let mut v = vec![1,2,3];
+    let mut v = vec![1, 2, 3];
     touch_first(&mut v);
     assert_eq!(v[0], 2);
 
-    let c = Config { host: "h".into(), port: 8080, tls: true };
+    let c = Config {
+        host: "h".into(),
+        port: 8080,
+        tls: true,
+    };
     assert!(port_enabled(&c));
 }
-
-

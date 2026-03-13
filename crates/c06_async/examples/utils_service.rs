@@ -9,28 +9,41 @@
 use std::fs;
 use std::net::SocketAddr;
 
-use axum::{routing::{get, post}, Json, Router};
+use axum::{
+    Json, Router,
+    routing::{get, post},
+};
 use serde::{Deserialize, Serialize};
-use tracing::{info, info_span, Instrument};
-use tracing_subscriber::{fmt, EnvFilter};
-use tracing_subscriber::prelude::*; // for .with()
+use tracing::{Instrument, info, info_span};
+use tracing_subscriber::prelude::*;
+use tracing_subscriber::{EnvFilter, fmt}; // for .with()
 
 #[derive(Debug, Deserialize, Serialize)]
-struct WorkReq { n: u32 }
+struct WorkReq {
+    n: u32,
+}
 
 #[derive(Debug, Deserialize, Serialize)]
-struct WorkResp { ok: bool, message: String }
+struct WorkResp {
+    ok: bool,
+    message: String,
+}
 
 async fn run() -> anyhow::Result<()> {
     // 1) 初始化 tracing：结构化 JSON 日志，支持 RUST_LOG 覆盖
     let filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info"));
     // 改为易读的文本格式（pretty）。如需更紧凑可改为 `.compact()`
     let fmt_layer = fmt::layer().with_target(true).pretty();
-    tracing_subscriber::registry().with(filter).with(fmt_layer).init();
+    tracing_subscriber::registry()
+        .with(filter)
+        .with(fmt_layer)
+        .init();
 
     // 2) 加载服务端口与策略配置
-    let bind_addr: String = std::env::var("BIND_ADDR").unwrap_or_else(|_| "127.0.0.1:8088".to_string());
-    let metrics_addr: String = std::env::var("METRICS_ADDR").unwrap_or_else(|_| "127.0.0.1:9899".to_string());
+    let bind_addr: String =
+        std::env::var("BIND_ADDR").unwrap_or_else(|_| "127.0.0.1:8088".to_string());
+    let metrics_addr: String =
+        std::env::var("METRICS_ADDR").unwrap_or_else(|_| "127.0.0.1:9899".to_string());
     let cfg_path = std::env::var("CONFIG_PATH").ok();
 
     let strategy_cfg: c06_async::utils::StrategyConfig = if let Some(path) = cfg_path.as_ref() {
@@ -57,49 +70,76 @@ async fn run() -> anyhow::Result<()> {
     // 3) 指标服务（后台）
     let registry = prometheus::Registry::new();
     let _ = registry.register(Box::new(prometheus::IntCounter::with_opts(
-        prometheus::Opts::new("service_requests_total", "服务请求数")
+        prometheus::Opts::new("service_requests_total", "服务请求数"),
     )?));
     let reg_for_srv = registry.clone();
     let metrics_addr_clone = metrics_addr.clone();
     tokio::spawn(async move {
-        let _ = c06_async::utils::metrics::serve_metrics(reg_for_srv, metrics_addr_clone.as_str()).await;
+        let _ = c06_async::utils::metrics::serve_metrics(reg_for_srv, metrics_addr_clone.as_str())
+            .await;
     });
 
     // 4) Axum 路由
     let runner = std::sync::Arc::new(runner);
     let app = Router::new()
         .route("/health", get(|| async { axum::http::StatusCode::OK }))
-        .route("/work", post({
-            let runner = runner.clone();
-            move |Json(req): Json<WorkReq>| {
+        .route(
+            "/work",
+            post({
                 let runner = runner.clone();
-                async move {
-                    let request_id = uuid::Uuid::new_v4();
-                    let req_span = info_span!("work_request", %request_id, n = %req.n);
-                    let _enter = req_span.enter();
-                    // 模拟“可能失败”的后端：依据 n 与 attempt 控制成功/失败
-                    async fn flaky(n: u32, attempt: u32) -> Result<String, anyhow::Error> {
-                        if (n + attempt) % 5 < 2 { Err(anyhow::anyhow!("temporary backend error")) } else { Ok(format!("ok:{}@{}", n, attempt)) }
-                    }
+                move |Json(req): Json<WorkReq>| {
+                    let runner = runner.clone();
+                    async move {
+                        let request_id = uuid::Uuid::new_v4();
+                        let req_span = info_span!("work_request", %request_id, n = %req.n);
+                        let _enter = req_span.enter();
+                        // 模拟“可能失败”的后端：依据 n 与 attempt 控制成功/失败
+                        async fn flaky(n: u32, attempt: u32) -> Result<String, anyhow::Error> {
+                            if (n + attempt) % 5 < 2 {
+                                Err(anyhow::anyhow!("temporary backend error"))
+                            } else {
+                                Ok(format!("ok:{}@{}", n, attempt))
+                            }
+                        }
 
-                    let n = req.n;
-                    let res = runner
-                        .run(
-                            move |attempt| {
-                                let att_span = info_span!("attempt", %request_id, attempt = %attempt);
-                                async move { flaky(n, attempt).await }.instrument(att_span)
-                            },
-                            None::<fn(&anyhow::Error)->bool>,
-                        )
-                        .await;
-                    match res {
-                        Ok(Some(msg)) => (axum::http::StatusCode::OK, Json(WorkResp{ ok: true, message: msg })),
-                        Ok(None) => (axum::http::StatusCode::REQUEST_TIMEOUT, Json(WorkResp{ ok: false, message: "timeout/deadline".to_string() })),
-                        Err(e) => (axum::http::StatusCode::BAD_GATEWAY, Json(WorkResp{ ok: false, message: format!("error: {}", e) })),
+                        let n = req.n;
+                        let res = runner
+                            .run(
+                                move |attempt| {
+                                    let att_span =
+                                        info_span!("attempt", %request_id, attempt = %attempt);
+                                    async move { flaky(n, attempt).await }.instrument(att_span)
+                                },
+                                None::<fn(&anyhow::Error) -> bool>,
+                            )
+                            .await;
+                        match res {
+                            Ok(Some(msg)) => (
+                                axum::http::StatusCode::OK,
+                                Json(WorkResp {
+                                    ok: true,
+                                    message: msg,
+                                }),
+                            ),
+                            Ok(None) => (
+                                axum::http::StatusCode::REQUEST_TIMEOUT,
+                                Json(WorkResp {
+                                    ok: false,
+                                    message: "timeout/deadline".to_string(),
+                                }),
+                            ),
+                            Err(e) => (
+                                axum::http::StatusCode::BAD_GATEWAY,
+                                Json(WorkResp {
+                                    ok: false,
+                                    message: format!("error: {}", e),
+                                }),
+                            ),
+                        }
                     }
                 }
-            }
-        }));
+            }),
+        );
 
     let addr: SocketAddr = bind_addr.parse()?;
     info!(%addr, %metrics_addr, "utils_service starting");
@@ -114,5 +154,3 @@ fn main() -> anyhow::Result<()> {
         .build()?;
     runtime.block_on(run())
 }
-
-

@@ -1,5 +1,5 @@
 //! 异步编程模块性能基准测试 / Async Programming Module Performance Benchmarks
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 fn bench_async_operations(c: &mut Criterion) {
@@ -44,5 +44,11 @@ fn bench_concurrent_operations(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, bench_async_operations, bench_future_operations, bench_stream_operations, bench_concurrent_operations);
+criterion_group!(
+    benches,
+    bench_async_operations,
+    bench_future_operations,
+    bench_stream_operations,
+    bench_concurrent_operations
+);
 criterion_main!(benches);

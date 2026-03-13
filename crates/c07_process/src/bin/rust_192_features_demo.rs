@@ -2,10 +2,9 @@
 //!
 //! 这个程序展示了如何在 c07_process 项目中使用最新的 Rust 1.92.0 特性
 use c07_process::rust_192_features::{
+    ProcessInfo, ProcessQueue, ProcessResourceAllocator, RoundRobinScheduler,
+    calculate_process_pool_size, check_process_states, compare_process_lists,
     demonstrate_rust_192_process_features,
-    ProcessQueue, ProcessInfo, RoundRobinScheduler,
-    calculate_process_pool_size, ProcessResourceAllocator,
-    compare_process_lists, check_process_states,
 };
 use std::num::NonZeroUsize;
 
@@ -44,22 +43,34 @@ fn main() {
 
     println!("初始队列顺序:");
     for (i, proc) in queue.iter().enumerate() {
-        println!("  {}: PID={}, Name={}, Priority={}",
-            i + 1, proc.pid, proc.name, proc.priority);
+        println!(
+            "  {}: PID={}, Name={}, Priority={}",
+            i + 1,
+            proc.pid,
+            proc.name,
+            proc.priority
+        );
     }
 
     // 轮转队列
     queue.rotate(2);
     println!("\n轮转 2 个位置后:");
     for (i, proc) in queue.iter().enumerate() {
-        println!("  {}: PID={}, Name={}, Priority={}",
-            i + 1, proc.pid, proc.name, proc.priority);
+        println!(
+            "  {}: PID={}, Name={}, Priority={}",
+            i + 1,
+            proc.pid,
+            proc.name,
+            proc.priority
+        );
     }
 
     // 额外演示：进程池大小计算
     println!("\n=== 额外演示：进程池大小计算 ===");
     let chunk_size = NonZeroUsize::new(8).unwrap();
-    let total_tasks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    let total_tasks = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    ];
     let pool_size = calculate_process_pool_size(total_tasks.len(), chunk_size);
     println!("总任务数: {}", total_tasks.len());
     println!("每进程任务数: {}", chunk_size);
@@ -100,8 +111,14 @@ fn main() {
         },
     ];
 
-    println!("列表1 和 列表2 相等: {}", compare_process_lists(&list1, &list2));
-    println!("列表1 和 列表3 相等: {}", compare_process_lists(&list1, &list3));
+    println!(
+        "列表1 和 列表2 相等: {}",
+        compare_process_lists(&list1, &list2)
+    );
+    println!(
+        "列表1 和 列表3 相等: {}",
+        compare_process_lists(&list1, &list3)
+    );
 
     // 额外演示：进程状态检查
     println!("\n=== 额外演示：进程状态检查 ===");
@@ -120,8 +137,14 @@ fn main() {
     let expected_pids = vec![3001, 3002];
     let wrong_pids = vec![3001, 3003];
 
-    println!("进程列表匹配预期PID: {}", check_process_states(&processes, &expected_pids));
-    println!("进程列表匹配错误PID: {}", check_process_states(&processes, &wrong_pids));
+    println!(
+        "进程列表匹配预期PID: {}",
+        check_process_states(&processes, &expected_pids)
+    );
+    println!(
+        "进程列表匹配错误PID: {}",
+        check_process_states(&processes, &wrong_pids)
+    );
 
     // 额外演示：循环调度器
     println!("\n=== 额外演示：循环调度器 ===");

@@ -1,8 +1,8 @@
 //! # 并行算法执行模式
-//! 
+//!
 //! 本模块实现并行算法执行，充分利用多核 CPU 的计算能力。
 //! 基于 rayon 实现数据并行和任务并行。
-use super::{ParallelAlgorithm, ExecutionResult};
+use super::{ExecutionResult, ParallelAlgorithm};
 use rayon::prelude::*;
 use std::time::Instant;
 
@@ -22,13 +22,13 @@ impl ParallelExecutor {
         let start = Instant::now();
         let memory_before = get_memory_usage();
         let thread_count = num_cpus::get();
-        
+
         let result = algorithm.execute(input)?;
-        
+
         let execution_time = start.elapsed();
         let memory_after = get_memory_usage();
         let memory_usage = memory_after.saturating_sub(memory_before);
-        
+
         Ok(ExecutionResult {
             result,
             execution_time,
@@ -49,13 +49,13 @@ impl ParallelExecutor {
     {
         let start = Instant::now();
         let memory_before = get_memory_usage();
-        
+
         let result = algorithm.execute_with_threads(input, thread_count)?;
-        
+
         let execution_time = start.elapsed();
         let memory_after = get_memory_usage();
         let memory_usage = memory_after.saturating_sub(memory_before);
-        
+
         Ok(ExecutionResult {
             result,
             execution_time,
@@ -146,16 +146,15 @@ impl ParallelExecutor {
             let mut total_time = std::time::Duration::ZERO;
 
             for _ in 0..iterations_per_thread {
-                let result = Self::execute_with_threads(algorithm.clone(), input.clone(), thread_count)?;
+                let result =
+                    Self::execute_with_threads(algorithm.clone(), input.clone(), thread_count)?;
                 total_time += result.execution_time;
                 thread_results.push(result);
             }
 
             let avg_time = total_time / iterations_per_thread as u32;
-            let avg_memory = thread_results
-                .iter()
-                .map(|r| r.memory_usage)
-                .sum::<usize>() / iterations_per_thread;
+            let avg_memory = thread_results.iter().map(|r| r.memory_usage).sum::<usize>()
+                / iterations_per_thread;
 
             results.push(ThreadScalingResult {
                 thread_count,
@@ -222,8 +221,9 @@ impl<T> ParallelExecutionStats<T> {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
         }
-        
-        self.execution_time_std_dev.as_nanos() as f64 / self.average_execution_time.as_nanos() as f64
+
+        self.execution_time_std_dev.as_nanos() as f64
+            / self.average_execution_time.as_nanos() as f64
     }
 
     /// 计算并行效率
@@ -231,8 +231,9 @@ impl<T> ParallelExecutionStats<T> {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
         }
-        
-        let speedup = single_thread_time.as_nanos() as f64 / self.average_execution_time.as_nanos() as f64;
+
+        let speedup =
+            single_thread_time.as_nanos() as f64 / self.average_execution_time.as_nanos() as f64;
         speedup / self.thread_count as f64
     }
 }
@@ -291,12 +292,12 @@ impl<T> ThreadScalingResults<T> {
                 "  平均内存使用: {} bytes\n",
                 result.average_memory_usage
             ));
-            
+
             if !self.results.is_empty() {
-                let speedup = self.results[0].average_execution_time.as_nanos() as f64 
+                let speedup = self.results[0].average_execution_time.as_nanos() as f64
                     / result.average_execution_time.as_nanos() as f64;
                 report.push_str(&format!("  加速比: {:.2}x\n", speedup));
-                
+
                 let efficiency = speedup / result.thread_count as f64;
                 report.push_str(&format!("  并行效率: {:.2}%\n", efficiency * 100.0));
             }
@@ -416,14 +417,17 @@ impl<T> ParallelBenchmarkResults<T> {
     }
 
     /// 获取最高并行效率的测试用例
-    pub fn best_efficiency(&self, single_thread_time: std::time::Duration) -> Option<&ParallelBenchmarkResult<T>> {
-        self.results
-            .iter()
-            .max_by(|a, b| {
-                let eff_a = a.stats.parallel_efficiency(single_thread_time);
-                let eff_b = b.stats.parallel_efficiency(single_thread_time);
-                eff_a.partial_cmp(&eff_b).unwrap_or(std::cmp::Ordering::Equal)
-            })
+    pub fn best_efficiency(
+        &self,
+        single_thread_time: std::time::Duration,
+    ) -> Option<&ParallelBenchmarkResult<T>> {
+        self.results.iter().max_by(|a, b| {
+            let eff_a = a.stats.parallel_efficiency(single_thread_time);
+            let eff_b = b.stats.parallel_efficiency(single_thread_time);
+            eff_a
+                .partial_cmp(&eff_b)
+                .unwrap_or(std::cmp::Ordering::Equal)
+        })
     }
 
     /// 生成并行性能报告
@@ -496,15 +500,18 @@ impl<T, R> ParallelWorkPool<T, R> {
     }
 
     /// 执行并行任务
-    pub fn execute<F>(&self, tasks: Vec<T>, task_fn: F) -> Result<Vec<R>, Box<dyn std::error::Error + Send + Sync>>
+    pub fn execute<F>(
+        &self,
+        tasks: Vec<T>,
+        task_fn: F,
+    ) -> Result<Vec<R>, Box<dyn std::error::Error + Send + Sync>>
     where
         F: Fn(T) -> Result<R, Box<dyn std::error::Error + Send + Sync>> + Send + Sync,
         T: Send,
         R: Send,
     {
-        self.thread_pool.install(|| {
-            tasks.into_par_iter().map(task_fn).collect()
-        })
+        self.thread_pool
+            .install(|| tasks.into_par_iter().map(task_fn).collect())
     }
 
     /// 执行并行任务并收集结果
@@ -519,23 +526,26 @@ impl<T, R> ParallelWorkPool<T, R> {
         R: Send + Sync,
     {
         self.thread_pool.install(|| {
-            tasks.into_par_iter().map(|task| {
-                let start = Instant::now();
-                let memory_before = get_memory_usage();
-                
-                let result = task_fn(task)?;
-                
-                let execution_time = start.elapsed();
-                let memory_after = get_memory_usage();
-                let memory_usage = memory_after.saturating_sub(memory_before);
-                
-                Ok(ExecutionResult {
-                    result,
-                    execution_time,
-                    memory_usage,
-                    thread_count: self.thread_pool.current_num_threads(),
+            tasks
+                .into_par_iter()
+                .map(|task| {
+                    let start = Instant::now();
+                    let memory_before = get_memory_usage();
+
+                    let result = task_fn(task)?;
+
+                    let execution_time = start.elapsed();
+                    let memory_after = get_memory_usage();
+                    let memory_usage = memory_after.saturating_sub(memory_before);
+
+                    Ok(ExecutionResult {
+                        result,
+                        execution_time,
+                        memory_usage,
+                        thread_count: self.thread_pool.current_num_threads(),
+                    })
                 })
-            }).collect()
+                .collect()
         })
     }
 }

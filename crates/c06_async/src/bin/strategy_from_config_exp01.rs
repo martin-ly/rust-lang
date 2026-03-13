@@ -20,7 +20,11 @@ async fn main() -> anyhow::Result<()> {
                 async move {
                     let r = client.get(&url).send().await?;
                     let s = r.status();
-                    if s.is_success() { Ok(s) } else { Err(anyhow::anyhow!("status {s}")) }
+                    if s.is_success() {
+                        Ok(s)
+                    } else {
+                        Err(anyhow::anyhow!("status {s}"))
+                    }
                 }
             },
             Some(|_e: &anyhow::Error| true),
@@ -29,5 +33,3 @@ async fn main() -> anyhow::Result<()> {
     println!("result = {:?}", out);
     Ok(())
 }
-
-

@@ -151,11 +151,7 @@ impl SymmetricCipher {
     }
 
     /// 解密数据
-    pub fn decrypt(
-        &self,
-        key: &[u8],
-        encrypted: &EncryptedData,
-    ) -> Result<Vec<u8>, CryptoError> {
+    pub fn decrypt(&self, key: &[u8], encrypted: &EncryptedData) -> Result<Vec<u8>, CryptoError> {
         println!("\n=== Decryption ===");
         println!("Algorithm: {}", self.algorithm.name());
         println!("Ciphertext size: {} bytes", encrypted.ciphertext.len());
@@ -166,7 +162,9 @@ impl SymmetricCipher {
         }
 
         if encrypted.nonce.len() != self.algorithm.nonce_size() {
-            return Err(CryptoError::InvalidInput("Invalid nonce length".to_string()));
+            return Err(CryptoError::InvalidInput(
+                "Invalid nonce length".to_string(),
+            ));
         }
 
         // 实际实现中会调用 WASI-Crypto API
@@ -368,7 +366,7 @@ impl KeyDerivation {
     /// HKDF 密钥派生
     pub fn hkdf(
         hash_algo: HashAlgorithm,
-        ikm: &[u8],  // Input Key Material
+        ikm: &[u8], // Input Key Material
         salt: &[u8],
         info: &[u8],
         output_len: usize,
@@ -528,7 +526,10 @@ fn demo_digital_signature() {
 
                         match signer.verify(&keypair.public_key, message, &signature) {
                             Ok(valid) => {
-                                println!("Verification result: {}", if valid { "VALID" } else { "INVALID" });
+                                println!(
+                                    "Verification result: {}",
+                                    if valid { "VALID" } else { "INVALID" }
+                                );
                             }
                             Err(e) => eprintln!("Verification error: {}", e),
                         }
@@ -637,13 +638,15 @@ fn demo_secure_communication() {
     // 5. Bob 接收并验证
     println!("\n5. Bob receives and verifies...");
     let decrypted = cipher.decrypt(&sym_key, &encrypted).unwrap();
-    let verified = signer.verify(&alice_keypair.public_key, &decrypted, &signature).unwrap();
+    let verified = signer
+        .verify(&alice_keypair.public_key, &decrypted, &signature)
+        .unwrap();
 
+    println!("\n✓ Message: {}", String::from_utf8_lossy(&decrypted));
     println!(
-        "\n✓ Message: {}",
-        String::from_utf8_lossy(&decrypted)
+        "✓ Signature: {}",
+        if verified { "VERIFIED" } else { "FAILED" }
     );
-    println!("✓ Signature: {}", if verified { "VERIFIED" } else { "FAILED" });
     println!("\n[Secure communication successful!]");
 }
 
@@ -669,4 +672,3 @@ mod tests {
         assert_eq!(hex_encode(&data), "01020aff");
     }
 }
-

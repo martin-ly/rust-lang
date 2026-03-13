@@ -22,7 +22,7 @@
     - [3.3 最弱前置条件（Weakest Precondition）](#33-最弱前置条件weakest-precondition)
   - [4. 高阶协议（Higher-Order Protocols）](#4-高阶协议higher-order-protocols)
     - [4.1 协议定义](#41-协议定义)
-    - [4.2 协议示例：Cell](#42-协议示例cell)
+    - [4.2 协议示例：`Cell<T>`](#42-协议示例cellt)
     - [4.3 协议兼容性](#43-协议兼容性)
   - [5. 幽灵状态（Ghost State）](#5-幽灵状态ghost-state)
     - [5.1 幽灵变量](#51-幽灵变量)
@@ -61,7 +61,8 @@ Iris是一个**高阶并发分离逻辑**框架，RustBelt基于它构建了Rust
 Iris断言 $P, Q$ 的语法：
 
 $$
-P, Q ::= \text{True} \mid \text{False} \mid P \land Q \mid P \lor Q \mid P \Rightarrow Q \mid \forall x. P \mid \exists x. P \mid P * Q \mid P \wand Q \mid \ell \mapsto v \mid \square P \mid \Diamond P
+P, Q ::= \text{True} \mid \text{False} \mid P \land Q \mid P \lor Q \mid P \Rightarrow Q \mid \forall x. P
+ \mid \exists x. P \mid P * Q \mid P \wand Q \mid \ell \mapsto v \mid \square P \mid \Diamond P
 $$
 
 **分离逻辑运算符**：
@@ -213,9 +214,9 @@ $$
 
 其中 $\text{iProp}$ 是Iris命题。
 
-### 4.2 协议示例：Cell<T>
+### 4.2 协议示例：`Cell<T>`
 
-**Cell<T>的协议**：
+**`Cell<T>`的协议**：
 
 ```rust
 // Cell<T> 允许通过共享引用进行内部可变性
@@ -371,7 +372,7 @@ fn push(&self, value: T) {
 
 ### 8.1 证明层次
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    安全定理 (Safety Theorem)                 │
 │              "良类型Rust程序是内存安全的"                     │
@@ -414,4 +415,4 @@ $$
 
 ---
 
-*本文档为《Rust所有权与可判定性》项目的RustBelt/Iris深度解析补充*
+*本文档为《Rust所有权与可判定性》项目的RustBelt/Iris深度解析补充*:

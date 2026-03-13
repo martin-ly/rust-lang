@@ -10,16 +10,16 @@
 //! - 内存使用效率
 //! - 并发处理能力
 //! - 不同运行时性能对比
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId, Throughput};
-use std::time::Duration;
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use std::sync::Arc;
 use std::sync::atomic::{AtomicUsize, Ordering};
+use std::time::Duration;
 use tokio::runtime::Runtime;
 use tokio::sync::Semaphore;
 use tokio::time::sleep;
 
-use c06_async::rust_190_real_stable_features::Rust190AsyncFeatures;
 use c06_async::rust_190_advanced_features::AdvancedAsyncFeatures190;
+use c06_async::rust_190_real_stable_features::Rust190AsyncFeatures;
 
 /// 基础异步操作基准测试
 fn bench_basic_async_operations(c: &mut Criterion) {
@@ -111,9 +111,7 @@ fn bench_resource_pool_performance(c: &mut Criterion) {
                     let handles: Vec<_> = (0..pool_size)
                         .map(|_| {
                             let pool = Arc::clone(&pool);
-                            tokio::spawn(async move {
-                                pool.demo_advanced_resource_pool().await
-                            })
+                            tokio::spawn(async move { pool.demo_advanced_resource_pool().await })
                         })
                         .collect();
 
@@ -226,7 +224,10 @@ fn bench_rust_190_features_comparison(c: &mut Criterion) {
     group.bench_function("basic_features", |b| {
         b.to_async(&rt).iter(|| async {
             let features = Rust190AsyncFeatures::new();
-            features.demo_enhanced_async_resource_management().await.unwrap();
+            features
+                .demo_enhanced_async_resource_management()
+                .await
+                .unwrap();
         });
     });
 

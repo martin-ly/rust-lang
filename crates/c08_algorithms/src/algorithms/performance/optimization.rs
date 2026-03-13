@@ -1,7 +1,7 @@
 //! # 性能优化模块
 //!
 //! 本模块提供算法性能优化的工具和方法。
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// 优化建议
 #[derive(Debug, Clone, Serialize, Deserialize)]

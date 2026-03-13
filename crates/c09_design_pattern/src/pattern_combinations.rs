@@ -216,11 +216,12 @@ impl CircuitBreaker {
 
         let state = *self.state.lock().unwrap();
         if state == CircuitState::HalfOpen
-            && self.successes.load(Ordering::Relaxed) >= self.success_threshold {
-                *self.state.lock().unwrap() = CircuitState::Closed;
-                self.successes.store(0, Ordering::Relaxed);
-                self.failures.store(0, Ordering::Relaxed);
-            }
+            && self.successes.load(Ordering::Relaxed) >= self.success_threshold
+        {
+            *self.state.lock().unwrap() = CircuitState::Closed;
+            self.successes.store(0, Ordering::Relaxed);
+            self.failures.store(0, Ordering::Relaxed);
+        }
     }
 
     fn on_failure(&self) {
@@ -281,13 +282,19 @@ pub struct WebServerFacade {
 impl WebServerFacade {
     pub fn new(routing_strategy: Box<dyn RoutingStrategy>) -> Self {
         let mut services = HashMap::new();
-        services.insert("UserService".to_string(), Arc::new(UserService) as Arc<dyn Service>);
-        services.insert("PostService".to_string(), Arc::new(PostService) as Arc<dyn Service>);
+        services.insert(
+            "UserService".to_string(),
+            Arc::new(UserService) as Arc<dyn Service>,
+        );
+        services.insert(
+            "PostService".to_string(),
+            Arc::new(PostService) as Arc<dyn Service>,
+        );
 
         let circuit_breaker = Arc::new(CircuitBreaker::new(
-            5,                              // 失败阈值
-            3,                              // 成功阈值
-            Duration::from_secs(10),        // 超时时间
+            5,                       // 失败阈值
+            3,                       // 成功阈值
+            Duration::from_secs(10), // 超时时间
         ));
 
         Self {
@@ -324,7 +331,7 @@ impl WebServerFacade {
 
         let result = circuit_breaker.call(|| service.handle(&request));
 
-        if let Err(_) = &result {
+        if result.is_err() {
             self.error_count.fetch_add(1, Ordering::Relaxed);
         }
 
@@ -356,17 +363,9 @@ pub struct ServerStats {
 /// 游戏事件（Observer 模式）
 #[derive(Debug, Clone)]
 pub enum GameEvent {
-    PlayerInput {
-        input: String,
-        timestamp: Instant,
-    },
-    StateChanged {
-        from: String,
-        to: String,
-    },
-    CommandExecuted {
-        command: String,
-    },
+    PlayerInput { input: String, timestamp: Instant },
+    StateChanged { from: String, to: String },
+    CommandExecuted { command: String },
 }
 
 /// 观察者 trait
@@ -423,7 +422,10 @@ impl MoveCommand {
 impl GameCommand for MoveCommand {
     fn execute(&self, context: &mut GameContext) -> Result<(), String> {
         context.player_position += 1;
-        println!("执行移动命令: 向{}移动，新位置: {}", self.direction, context.player_position);
+        println!(
+            "执行移动命令: 向{}移动，新位置: {}",
+            self.direction, context.player_position
+        );
         Ok(())
     }
 
@@ -484,14 +486,29 @@ impl CommandMapper {
         // 先插入不同类型的命令以强制类型推断为 trait object
         let mut commands: HashMap<String, Box<dyn GameCommand>> = {
             let mut map = HashMap::new();
-            map.insert("attack".to_string(), Box::new(AttackCommand) as Box<dyn GameCommand>);
+            map.insert(
+                "attack".to_string(),
+                Box::new(AttackCommand) as Box<dyn GameCommand>,
+            );
             map
         };
 
-        commands.insert("w".to_string(), Box::new(MoveCommand::new("上".to_string())) as Box<dyn GameCommand>);
-        commands.insert("s".to_string(), Box::new(MoveCommand::new("下".to_string())) as Box<dyn GameCommand>);
-        commands.insert("a".to_string(), Box::new(MoveCommand::new("左".to_string())) as Box<dyn GameCommand>);
-        commands.insert("d".to_string(), Box::new(MoveCommand::new("右".to_string())) as Box<dyn GameCommand>);
+        commands.insert(
+            "w".to_string(),
+            Box::new(MoveCommand::new("上".to_string())) as Box<dyn GameCommand>,
+        );
+        commands.insert(
+            "s".to_string(),
+            Box::new(MoveCommand::new("下".to_string())) as Box<dyn GameCommand>,
+        );
+        commands.insert(
+            "a".to_string(),
+            Box::new(MoveCommand::new("左".to_string())) as Box<dyn GameCommand>,
+        );
+        commands.insert(
+            "d".to_string(),
+            Box::new(MoveCommand::new("右".to_string())) as Box<dyn GameCommand>,
+        );
 
         Self { commands }
     }

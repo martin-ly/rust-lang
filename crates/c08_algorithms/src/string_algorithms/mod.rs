@@ -65,7 +65,9 @@ pub async fn kmp_search_async(text: String, pattern: String) -> Result<Vec<usize
 pub fn rabin_karp_search(text: &str, pattern: &str) -> Vec<usize> {
     let n = text.len();
     let m = pattern.len();
-    if m == 0 { return (0..=n).collect(); }
+    if m == 0 {
+        return (0..=n).collect();
+    }
     if m > n {
         return Vec::new();
     }
@@ -135,7 +137,9 @@ impl Trie {
     pub fn insert(&mut self, pattern: &[u8], id: usize) {
         let mut s = 0usize;
         for &ch in pattern {
-            let nxt = if let Some(&v) = self.nodes[s].next.get(&ch) { v } else {
+            let nxt = if let Some(&v) = self.nodes[s].next.get(&ch) {
+                v
+            } else {
                 let v = self.nodes.len();
                 self.nodes[s].next.insert(ch, v);
                 self.nodes.push(TrieNode::default());
@@ -301,6 +305,7 @@ pub fn suffix_array(text: &str) -> Vec<usize> {
             let curr = (rank[b], if b + k < n { rank[b + k] } else { -1 });
             tmp[b] = tmp[a] + if curr > prev { 1 } else { 0 };
         }
+        #[allow(clippy::manual_memcpy)]
         for i in 0..n {
             rank[i] = tmp[i];
         }
@@ -381,13 +386,14 @@ pub fn manacher_longest_palindrome(s: &str) -> (usize, usize) {
             right = i + p[i];
         }
     }
-    let (mut max_len, mut center_idx) = (0usize, 0usize);
-    for i in 1..n - 1 {
-        if p[i] > max_len {
-            max_len = p[i];
-            center_idx = i;
-        }
-    }
+    let (max_len, center_idx) = p
+        .iter()
+        .enumerate()
+        .skip(1)
+        .take(n - 2)
+        .max_by_key(|&(_, &len)| len)
+        .map(|(i, &len)| (len, i))
+        .unwrap_or((0, 0));
     let start = (center_idx - max_len) / 2; // 映射回原串索引
     (start, max_len)
 }

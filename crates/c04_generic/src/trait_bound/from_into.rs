@@ -266,6 +266,8 @@ From 和 Into trait 为 Rust 提供了类型转换的基础。
 同时保持零成本抽象的优势。
 */
 
+#![allow(clippy::type_complexity)]
+
 // 示例结构体
 #[derive(Debug)]
 pub struct FromIntoExample {

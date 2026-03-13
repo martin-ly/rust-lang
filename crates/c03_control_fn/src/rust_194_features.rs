@@ -36,7 +36,6 @@ use std::fmt::Debug;
 /// ## 注意
 /// 在当前 Rust 版本中，`next_if_map` 可能尚未稳定或 API 有所不同。
 /// 以下代码展示了概念用法，实际 API 请以 Rust 1.94 文档为准。
-
 /// 使用 Peekable 新方法实现的简单词法分析器
 ///
 /// 演示如何使用 `next_if_map` 进行前瞻并条件性消耗标记
@@ -54,11 +53,7 @@ impl<'a> SimpleLexer<'a> {
 
     /// 跳过空白字符
     pub fn skip_whitespace(&mut self) {
-        while self
-            .input
-            .next_if(|c| c.is_whitespace())
-            .is_some()
-        {}
+        while self.input.next_if(|c| c.is_whitespace()).is_some() {}
     }
 
     /// 解析数字
@@ -75,7 +70,7 @@ impl<'a> SimpleLexer<'a> {
         // 消耗第一个数字字符
         let first_digit = self.input.next().unwrap() as i64 - '0' as i64;
         let mut result = first_digit;
-        
+
         // 继续消耗后续数字
         while let Some(c) = self.input.next_if(|c| c.is_ascii_digit()) {
             let digit = c as i64 - '0' as i64;
@@ -102,7 +97,10 @@ impl<'a> SimpleLexer<'a> {
         result.push(first);
 
         // 继续消耗后续字母、数字或下划线
-        while let Some(c) = self.input.next_if(|c| c.is_ascii_alphanumeric() || *c == '_') {
+        while let Some(c) = self
+            .input
+            .next_if(|c| c.is_ascii_alphanumeric() || *c == '_')
+        {
             result.push(c);
         }
 
@@ -139,7 +137,7 @@ pub enum Token {
     /// 括号
     Paren(char),
     /// 结束
-    EOF,
+    Eof,
 }
 
 /// 标记迭代器
@@ -299,10 +297,7 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
         match self.try_parse(predicate) {
             Some(result) => ParseResult::Success(result),
             None => match self.input.peek() {
-                Some(item) => ParseResult::Failure(format!(
-                    "期望 {}，但找到 {:?}",
-                    expected, item
-                )),
+                Some(item) => ParseResult::Failure(format!("期望 {}，但找到 {:?}", expected, item)),
                 None => ParseResult::EndOfInput,
             },
         }
@@ -338,7 +333,6 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
 ///
 /// Rust 1.94.0 进一步优化了闭包捕获规则，使代码更直观：
 /// Rust 1.94.0 further optimizes closure capture rules for more intuitive code:
-
 /// 闭包捕获分析器
 ///
 /// Rust 1.94.0: 更精确的闭包捕获分析
@@ -403,7 +397,6 @@ pub fn create_precise_closure<T: Clone>(value: T) -> impl Fn() -> T {
 ///
 /// Rust 1.94.0 改进了 match 表达式的性能和可用性：
 /// Rust 1.94.0 improves match expression performance and usability:
-
 /// 匹配结果枚举
 #[derive(Debug, Clone, PartialEq)]
 pub enum MatchResult<T> {
@@ -434,9 +427,7 @@ impl<T: PartialEq + std::fmt::Debug> EnhancedMatcher<T> {
                 // Rust 1.94.0: 守卫条件优化
                 MatchResult::Success(v)
             }
-            Some(v) => {
-                MatchResult::Failure(format!("无效值: {:?}", v))
-            }
+            Some(v) => MatchResult::Failure(format!("无效值: {:?}", v)),
             None => MatchResult::Pending,
         }
     }
@@ -478,7 +469,6 @@ pub fn process_match_result<T: Debug>(result: MatchResult<T>) -> String {
 ///
 /// Rust 1.94.0 优化了函数指针的处理和性能：
 /// Rust 1.94.0 optimizes function pointer handling and performance:
-
 /// 函数指针包装器
 ///
 /// Rust 1.94.0: 改进的函数指针类型推断
@@ -490,7 +480,10 @@ pub struct FunctionPtrWrapper<T, R> {
 impl<T, R> FunctionPtrWrapper<T, R> {
     /// 创建新的函数指针包装器
     pub fn new(func: fn(T) -> R) -> Self {
-        Self { func, call_count: 0 }
+        Self {
+            func,
+            call_count: 0,
+        }
     }
 
     /// 调用函数
@@ -518,11 +511,7 @@ pub fn compose_functions<T, U, V>(f: fn(T) -> U, g: fn(U) -> V) -> impl Fn(T) ->
 ///
 /// Rust 1.94.0: 改进的条件编译优化
 pub fn conditional_execute<T>(condition: bool, f: fn() -> T, g: fn() -> T) -> T {
-    if condition {
-        f()
-    } else {
-        g()
-    }
+    if condition { f() } else { g() }
 }
 
 // ==================== 4. Edition 2024 控制流改进 ====================
@@ -531,7 +520,6 @@ pub fn conditional_execute<T>(condition: bool, f: fn() -> T, g: fn() -> T) -> T 
 ///
 /// Rust 1.94.0 与 Edition 2024 的控制流集成：
 /// Rust 1.94.0 control flow integration with Edition 2024:
-
 /// Edition 2024 控制流处理器
 ///
 /// Rust 1.94.0: Edition 2024 优化的控制流
@@ -604,7 +592,6 @@ impl<T> Edition2024ControlFlow<T> {
 ///
 /// Rust 1.94.0 的 `array_windows` 方法可以与控制流结合，
 /// 实现高效的序列处理和模式检测。
-
 /// 使用 array_windows 的状态机解析器
 ///
 /// 检测状态转换模式
@@ -806,7 +793,6 @@ impl<T> Default for ControlFlowLazyCache<T> {
 ///
 /// Rust 1.94.0 引入的数学常量可以与控制流结合，
 /// 实现数值分析和算法控制。
-
 /// 数学常量模块
 pub mod math_consts {
     /// 欧拉-马歇罗尼常数
@@ -935,7 +921,6 @@ pub fn controlled_harmonic_sum(n: u64, use_approximation: bool) -> f64 {
 ///
 /// Rust 1.94.0 提供了性能优化的控制流模式：
 /// Rust 1.94.0 provides performance-optimized control flow patterns:
-
 /// 优化循环结构
 ///
 /// Rust 1.94.0: 编译器优化的循环模式
@@ -995,16 +980,16 @@ pub fn demonstrate_rust_194_control_flow() {
     println!("1. Peekable 新方法 (next_if_map, next_if_map_mut):");
     let input = "123 abc 456";
     let mut lexer = SimpleLexer::new(input);
-    
+
     println!("   输入: '{}'", input);
     lexer.skip_whitespace();
-    
+
     if let Some(num) = lexer.parse_number() {
         println!("   解析到数字: {}", num);
     }
-    
+
     lexer.skip_whitespace();
-    
+
     if let Some(ident) = lexer.parse_identifier() {
         println!("   解析到标识符: {}", ident);
     }
@@ -1192,30 +1177,24 @@ mod tests {
     fn test_data_filter_processor() {
         let data = vec![1, 2, 3, 4, 5];
         let mut processor = DataFilterProcessor::new(data.into_iter());
-        
+
         // 提取偶数并乘以10
         // 数据是 [1, 2, 3, 4, 5]，extract_and_map 会跳过 1，找到第一个偶数 2
-        let result = processor.extract_and_map(|x| {
-            if x % 2 == 0 { Some(x * 10) } else { None }
-        });
+        let result = processor.extract_and_map(|x| if x % 2 == 0 { Some(x * 10) } else { None });
         // 第一个偶数是 2
         assert_eq!(result, Some(20));
-        
+
         // 当前位置在 3，继续提取下一个偶数
         // extract_and_map 会跳过 3，找到下一个偶数 4
-        let result2 = processor.extract_and_map(|x| {
-            if x % 2 == 0 { Some(x * 10) } else { None }
-        });
+        let result2 = processor.extract_and_map(|x| if x % 2 == 0 { Some(x * 10) } else { None });
         // 4 是偶数
         assert_eq!(result2, Some(40));
-        
+
         // 检查 peek 是 5
         assert_eq!(processor.peek(), Some(&5));
-        
+
         // 尝试再提取一个偶数，但没有了
-        let result3 = processor.extract_and_map(|x| {
-            if x % 2 == 0 { Some(x * 10) } else { None }
-        });
+        let result3 = processor.extract_and_map(|x| if x % 2 == 0 { Some(x * 10) } else { None });
         assert_eq!(result3, None);
     }
 
@@ -1223,23 +1202,23 @@ mod tests {
     fn test_generic_parser() {
         let data = vec![1, 2, 3, 4, 5];
         let mut parser = GenericParser::new(data.into_iter());
-        
+
         // 尝试解析大于 2 的数
         let result = parser.try_parse(|x| if *x > 2 { Some(*x) } else { None });
         // 第一个元素是 1，不大于 2
         assert_eq!(result, None);
-        
+
         // 跳过前两个元素
         parser.try_parse(|x| if *x <= 2 { Some(()) } else { None });
         parser.try_parse(|x| if *x <= 2 { Some(()) } else { None });
-        
+
         // 现在应该是 3
         assert_eq!(parser.peek(), Some(&3));
-        
+
         // 解析多个大于 2 的数
         let results = parser.parse_many(|x| if *x > 2 { Some(*x * 10) } else { None });
         assert_eq!(results, vec![30, 40, 50]);
-        
+
         // 没有更多元素
         assert!(!parser.has_more());
     }
@@ -1248,11 +1227,11 @@ mod tests {
     fn test_generic_parser_require() {
         let data = vec![42];
         let mut parser = GenericParser::new(data.into_iter());
-        
+
         // 成功解析
         let result = parser.require(|x| if *x == 42 { Some(*x) } else { None }, "42");
         assert_eq!(result, ParseResult::Success(42));
-        
+
         // 尝试解析但已结束
         let result2 = parser.require(|x| Some(*x), "任意值");
         assert_eq!(result2, ParseResult::EndOfInput);
@@ -1373,7 +1352,10 @@ mod tests {
         // 预期转换: idle->running, running->stopped, stopped->idle
         assert_eq!(transitions.len(), 3);
         assert_eq!(transitions[0], ("idle".to_string(), "running".to_string()));
-        assert_eq!(transitions[1], ("running".to_string(), "stopped".to_string()));
+        assert_eq!(
+            transitions[1],
+            ("running".to_string(), "stopped".to_string())
+        );
         assert_eq!(transitions[2], ("stopped".to_string(), "idle".to_string()));
     }
 
@@ -1437,11 +1419,11 @@ mod tests {
     fn test_control_flow_lazy_cache() {
         let cache = ControlFlowLazyCache::<i32>::new();
         assert_eq!(cache.init_count(), 0);
-        
+
         let value = cache.smart_init(|| 42, || 100);
         assert_eq!(value, &42);
         assert_eq!(cache.init_count(), 1);
-        
+
         // 再次获取不应该增加计数（因为已初始化）
         let _ = cache.smart_init(|| 0, || 0);
         assert_eq!(cache.init_count(), 2);

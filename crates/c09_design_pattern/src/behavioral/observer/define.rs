@@ -104,7 +104,9 @@ impl Default for BorrowingSubjectString {
 
 impl BorrowingSubjectString {
     pub fn new() -> Self {
-        Self { observers: Vec::new() }
+        Self {
+            observers: Vec::new(),
+        }
     }
 
     pub fn register_observer(&mut self, observer: BorrowingObserver) {
@@ -122,7 +124,10 @@ impl BorrowingSubjectString {
 pub struct BorrowingObserver;
 
 impl ObserverRef<String> for BorrowingObserver {
-    type Ref<'a> = &'a String where String: 'a;
+    type Ref<'a>
+        = &'a String
+    where
+        String: 'a;
 
     fn update<'a>(&self, data: Self::Ref<'a>) {
         println!("Borrowed update: {}", data);

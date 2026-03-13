@@ -48,14 +48,15 @@ fn test_resource_exhaustion() {
     // 测试大量线程创建（模拟）
     let large_number = 1000;
     let mut handles = vec![];
-    
-    for _ in 0..large_number.min(100) { // 限制实际创建的线程数
+
+    for _ in 0..large_number.min(100) {
+        // 限制实际创建的线程数
         let handle = thread::spawn(|| {
             // 简单任务
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -91,9 +92,7 @@ fn test_thread_creation_failure() {
     use std::thread;
 
     // 测试线程创建（正常情况下应该成功）
-    let handle = thread::spawn(|| {
-        42
-    });
+    let handle = thread::spawn(|| 42);
 
     let result = handle.join().unwrap();
     assert_eq!(result, 42);

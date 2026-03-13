@@ -1,5 +1,5 @@
 //! 异步编程综合演示示例
-//! 
+//!
 //! 本示例展示了 Rust 异步编程的各个方面：
 //! - Future 状态机
 //! - async/await 用法
@@ -7,17 +7,17 @@
 //! - 并发控制
 //! - 错误处理
 //! - 性能优化
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example comprehensive_async_demo
 //! ```
-use std::time::Duration;
-use std::sync::Arc;
-use tokio::sync::{Mutex, RwLock, Semaphore, Notify};
-use tokio::time::{sleep, timeout};
+use anyhow::{Context, Result};
 use futures::{StreamExt, future, stream};
-use anyhow::{Result, Context};
+use std::sync::Arc;
+use std::time::Duration;
+use tokio::sync::{Mutex, Notify, RwLock, Semaphore};
+use tokio::time::{sleep, timeout};
 
 /// 演示基本的异步函数和并发执行
 #[tokio::main]
@@ -63,16 +63,19 @@ async fn demo_basic_async() -> Result<()> {
     let result1 = async_task("任务1", 100).await;
     let result2 = async_task("任务2", 100).await;
     let sequential_time = start.elapsed();
-    println!("  顺序执行结果: {}, {}, 耗时: {:?}", result1, result2, sequential_time);
+    println!(
+        "  顺序执行结果: {}, {}, 耗时: {:?}",
+        result1, result2, sequential_time
+    );
 
     // 并发执行
     let start = std::time::Instant::now();
-    let (result1, result2) = futures::join!(
-        async_task("任务1", 100),
-        async_task("任务2", 100)
-    );
+    let (result1, result2) = futures::join!(async_task("任务1", 100), async_task("任务2", 100));
     let concurrent_time = start.elapsed();
-    println!("  并发执行结果: {}, {}, 耗时: {:?}", result1, result2, concurrent_time);
+    println!(
+        "  并发执行结果: {}, {}, 耗时: {:?}",
+        result1, result2, concurrent_time
+    );
 
     // 选择执行（先完成的返回）
     let result = tokio::select! {
@@ -127,11 +130,7 @@ async fn demo_stream_processing() -> Result<()> {
 
     // 基本 Stream 操作
     let numbers = stream::iter(1..=10);
-    let result = numbers
-        .map(|x| x * 2)
-        .take(3)
-        .collect::<Vec<_>>()
-        .await;
+    let result = numbers.map(|x| x * 2).take(3).collect::<Vec<_>>().await;
     println!("  基本 Stream 操作结果: {:?}", result);
 
     // 并发 Stream 处理
@@ -348,8 +347,7 @@ async fn slow_operation() -> String {
 
 /// 错误转换演示
 async fn error_transformation() -> Result<String, anyhow::Error> {
-    let result = risky_operation().await
-        .context("执行风险操作失败")?;
+    let result = risky_operation().await.context("执行风险操作失败")?;
     Ok(result)
 }
 
@@ -365,9 +363,9 @@ async fn demo_performance_optimization() -> Result<()> {
     let mut results = Vec::new();
 
     for chunk in items.chunks(batch_size) {
-        let chunk_futures = chunk.iter().map(|&item| async move {
-            process_item(item).await
-        });
+        let chunk_futures = chunk
+            .iter()
+            .map(|&item| async move { process_item(item).await });
         let chunk_results = future::join_all(chunk_futures).await;
         results.extend(chunk_results);
     }

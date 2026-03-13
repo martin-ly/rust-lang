@@ -100,12 +100,12 @@ fn merge<T: Ord + Clone>(data: &mut [T], mid: usize) {
     let (left, right) = buf.split_at(mid);
     let mut i = 0;
     let mut j = 0;
-    for k in 0..data.len() {
+    for data_item in data.iter_mut() {
         if i < left.len() && (j >= right.len() || left[i] <= right[j]) {
-            data[k] = left[i].to_owned();
+            *data_item = left[i].to_owned();
             i += 1;
         } else {
-            data[k] = right[j].to_owned();
+            *data_item = right[j].to_owned();
             j += 1;
         }
     }

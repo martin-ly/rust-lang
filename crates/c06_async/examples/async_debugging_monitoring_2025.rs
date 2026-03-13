@@ -1,5 +1,5 @@
 //! # Rust 异步编程调试与监控完整指南 2025
-//! 
+//!
 //! Complete Guide to Async Debugging and Monitoring in Rust 2025
 //!
 //! ## 📚 本示例涵盖
@@ -43,21 +43,21 @@ use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::{Mutex, RwLock};
 use tokio::time::sleep;
-use tracing::{debug, error, info, instrument, span, trace, warn, Level};
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
+use tracing::{Level, debug, error, info, instrument, span, trace, warn};
+use tracing_subscriber::{EnvFilter, layer::SubscriberExt, util::SubscriberInitExt};
 
 // ============================================================================
 // 第一部分: 结构化日志 - Tracing 框架
 // ============================================================================
 
 /// # Tracing 初始化 - 配置日志订阅器
-/// 
+///
 /// ## Tracing 架构
 /// - **Subscriber**: 订阅和处理事件
 /// - **Layer**: 可组合的中间件
 /// - **Span**: 带有进入/退出事件的时间段
 /// - **Event**: 单点事件(日志)
-/// 
+///
 /// ## 日志级别
 /// - TRACE: 最详细的信息
 /// - DEBUG: 调试信息
@@ -74,23 +74,23 @@ pub fn init_tracing() {
         .with_line_number(true) // 显示行号
         .with_level(true) // 显示日志级别
         .pretty(); // 美化输出
-    
+
     // 创建环境过滤器 - 根据环境变量过滤日志
     let filter = EnvFilter::try_from_default_env()
         .or_else(|_| EnvFilter::try_new("info"))
         .unwrap();
-    
+
     // 组合订阅器
     tracing_subscriber::registry()
         .with(filter)
         .with(fmt_layer)
         .init();
-    
+
     info!("Tracing 初始化完成 - 日志系统已启动");
 }
 
 /// # 带追踪的业务服务
-/// 
+///
 /// 演示如何在实际业务代码中使用 tracing
 pub struct UserService {
     users: Arc<RwLock<Vec<User>>>,
@@ -112,9 +112,9 @@ impl UserService {
             request_count: Arc::new(Mutex::new(0)),
         }
     }
-    
+
     /// # 创建用户 - 带完整的追踪信息
-    /// 
+    ///
     /// ## `#[instrument]` 宏的作用
     /// - 自动创建 span
     /// - 记录函数参数
@@ -138,33 +138,33 @@ impl UserService {
             *count += 1;
             debug!(request_count = %count, "请求计数增加");
         }
-        
+
         // 验证输入
         if name.is_empty() {
             warn!(user.id = %id, "用户名为空");
             return Err("用户名不能为空".to_string());
         }
-        
+
         if !email.contains('@') {
             error!(user.id = %id, user.email = %email, "邮箱格式无效");
             return Err("邮箱格式无效".to_string());
         }
-        
+
         // 模拟数据库操作
         info!("开始写入数据库");
         sleep(Duration::from_millis(50)).await;
-        
+
         let user = User { id, name, email };
-        
+
         {
             let mut users = self.users.write().await;
             users.push(user.clone());
             info!(total_users = users.len(), "用户创建成功");
         }
-        
+
         Ok(user)
     }
-    
+
     /// # 查询用户 - 带性能追踪
     #[instrument(
         name = "user_service.get_user",
@@ -173,15 +173,15 @@ impl UserService {
     )]
     pub async fn get_user(&self, id: u64) -> Option<User> {
         let start = Instant::now();
-        
+
         // 模拟数据库查询
         sleep(Duration::from_millis(10)).await;
-        
+
         let users = self.users.read().await;
         let user = users.iter().find(|u| u.id == id).cloned();
-        
+
         let elapsed = start.elapsed();
-        
+
         match &user {
             Some(u) => {
                 info!(
@@ -198,27 +198,27 @@ impl UserService {
                 );
             }
         }
-        
+
         user
     }
-    
+
     /// # 获取统计信息
     #[instrument(skip(self))]
     pub async fn get_stats(&self) -> UserServiceStats {
         let users_count = self.users.read().await.len();
         let request_count = *self.request_count.lock().await;
-        
+
         let stats = UserServiceStats {
             total_users: users_count,
             total_requests: request_count,
         };
-        
+
         info!(
             total_users = stats.total_users,
             total_requests = stats.total_requests,
             "获取统计信息"
         );
-        
+
         stats
     }
 }
@@ -235,7 +235,7 @@ pub struct UserServiceStats {
 // ============================================================================
 
 /// # 指标收集器
-/// 
+///
 /// 使用简化的指标收集系统(生产环境建议使用 Prometheus)
 pub struct MetricsCollector {
     /// 计数器 - 单调递增
@@ -255,73 +255,82 @@ impl MetricsCollector {
             histograms: Arc::new(RwLock::new(std::collections::HashMap::new())),
         }
     }
-    
+
     /// 增加计数器
     pub async fn inc_counter(&self, name: &str, value: u64) {
         let mut counters = self.counters.write().await;
         *counters.entry(name.to_string()).or_insert(0) += value;
         trace!(metric = %name, value = %value, "计数器增加");
     }
-    
+
     /// 设置仪表盘值
     pub async fn set_gauge(&self, name: &str, value: f64) {
         let mut gauges = self.gauges.write().await;
         gauges.insert(name.to_string(), value);
         trace!(metric = %name, value = %value, "仪表盘更新");
     }
-    
+
     /// 记录直方图值
     pub async fn observe_histogram(&self, name: &str, value: f64) {
         let mut histograms = self.histograms.write().await;
-        histograms.entry(name.to_string()).or_insert_with(Vec::new).push(value);
+        histograms
+            .entry(name.to_string())
+            .or_insert_with(Vec::new)
+            .push(value);
         trace!(metric = %name, value = %value, "直方图记录");
     }
-    
+
     /// 获取所有指标的快照
     #[instrument(skip(self))]
     pub async fn snapshot(&self) -> MetricsSnapshot {
         let counters = self.counters.read().await.clone();
         let gauges = self.gauges.read().await.clone();
-        
+
         let mut histogram_summaries = std::collections::HashMap::new();
         let histograms = self.histograms.read().await;
-        
+
         for (name, values) in histograms.iter() {
             if !values.is_empty() {
                 let sum: f64 = values.iter().sum();
                 let count = values.len();
                 let avg = sum / count as f64;
-                
+
                 let mut sorted = values.clone();
                 sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
                 let p50 = sorted[count / 2];
                 let p95 = sorted[(count as f64 * 0.95) as usize];
                 let p99 = sorted[(count as f64 * 0.99) as usize];
-                
+
                 histogram_summaries.insert(
                     name.clone(),
-                    HistogramSummary { count, avg, p50, p95, p99 },
+                    HistogramSummary {
+                        count,
+                        avg,
+                        p50,
+                        p95,
+                        p99,
+                    },
                 );
             }
         }
-        
+
         let counters_len = counters.len();
         let gauges_len = gauges.len();
         let histograms_len = histogram_summaries.len();
-        
+
         let snapshot = MetricsSnapshot {
             counters,
             gauges,
             histograms: histogram_summaries,
         };
-        
+
         debug!(
             counters = counters_len,
             gauges = gauges_len,
             histograms = histograms_len,
             "指标快照生成"
         );
-        
+
         snapshot
     }
 }
@@ -349,7 +358,7 @@ pub struct HistogramSummary {
 // ============================================================================
 
 /// # 健康检查服务
-/// 
+///
 /// ## Kubernetes 健康检查
 /// - **Liveness**: 应用是否活着(崩溃重启)
 /// - **Readiness**: 应用是否准备好接收流量
@@ -376,7 +385,7 @@ impl HealthChecker {
             dependencies: Arc::new(RwLock::new(Vec::new())),
         }
     }
-    
+
     /// 注册依赖项
     pub async fn register_dependency(&self, name: String) {
         let mut deps = self.dependencies.write().await;
@@ -388,7 +397,7 @@ impl HealthChecker {
         });
         info!(dependency = %name, "依赖项已注册");
     }
-    
+
     /// 活性检查 - 基本健康状态
     #[instrument(skip(self))]
     pub async fn liveness_check(&self) -> HealthStatus {
@@ -396,29 +405,29 @@ impl HealthChecker {
             .duration_since(self.start_time)
             .unwrap()
             .as_secs();
-        
+
         info!(uptime_seconds = uptime, "活性检查通过");
-        
+
         HealthStatus {
             healthy: true,
             uptime_seconds: uptime,
             message: "Service is alive".to_string(),
         }
     }
-    
+
     /// 就绪检查 - 检查所有依赖项
     #[instrument(skip(self))]
     pub async fn readiness_check(&self) -> HealthStatus {
         let deps = self.dependencies.read().await;
-        
+
         let all_healthy = deps.iter().all(|d| d.healthy);
         let unhealthy_count = deps.iter().filter(|d| !d.healthy).count();
-        
+
         let uptime = SystemTime::now()
             .duration_since(self.start_time)
             .unwrap()
             .as_secs();
-        
+
         let message = if all_healthy {
             info!(total_deps = deps.len(), "就绪检查通过 - 所有依赖项健康");
             "Service is ready".to_string()
@@ -430,24 +439,29 @@ impl HealthChecker {
             );
             format!("{} dependencies unhealthy", unhealthy_count)
         };
-        
+
         HealthStatus {
             healthy: all_healthy,
             uptime_seconds: uptime,
             message,
         }
     }
-    
+
     /// 更新依赖项健康状态
     #[instrument(skip(self))]
-    pub async fn update_dependency_health(&self, name: &str, healthy: bool, error_msg: Option<String>) {
+    pub async fn update_dependency_health(
+        &self,
+        name: &str,
+        healthy: bool,
+        error_msg: Option<String>,
+    ) {
         let mut deps = self.dependencies.write().await;
-        
+
         if let Some(dep) = deps.iter_mut().find(|d| d.name == name) {
             dep.healthy = healthy;
             dep.last_check = SystemTime::now();
             dep.error_msg = error_msg.clone();
-            
+
             if healthy {
                 info!(dependency = %name, "依赖项健康");
             } else {
@@ -473,7 +487,7 @@ pub struct HealthStatus {
 // ============================================================================
 
 /// # 任务监控器
-/// 
+///
 /// 追踪异步任务的生命周期和性能
 pub struct TaskMonitor {
     metrics: Arc<MetricsCollector>,
@@ -483,41 +497,36 @@ impl TaskMonitor {
     pub fn new(metrics: Arc<MetricsCollector>) -> Self {
         Self { metrics }
     }
-    
+
     /// 运行被监控的任务
     #[instrument(skip(self, task_fn), fields(task.name = %task_name))]
-    pub async fn run_monitored_task<F, T>(
-        &self,
-        task_name: &str,
-        task_fn: F,
-    ) -> Result<T, String>
+    pub async fn run_monitored_task<F, T>(&self, task_name: &str, task_fn: F) -> Result<T, String>
     where
         F: std::future::Future<Output = Result<T, String>>,
     {
         info!("任务开始执行");
-        
+
         // 记录任务开始
         self.metrics.inc_counter("task.started", 1).await;
-        
+
         let start = Instant::now();
-        
+
         // 执行任务
         let result = task_fn.await;
-        
+
         let elapsed = start.elapsed();
-        
+
         // 记录任务完成
         match &result {
             Ok(_) => {
-                info!(
-                    duration_ms = elapsed.as_millis(),
-                    "任务成功完成"
-                );
+                info!(duration_ms = elapsed.as_millis(), "任务成功完成");
                 self.metrics.inc_counter("task.completed", 1).await;
-                self.metrics.observe_histogram(
-                    &format!("task.{}.duration_ms", task_name),
-                    elapsed.as_millis() as f64,
-                ).await;
+                self.metrics
+                    .observe_histogram(
+                        &format!("task.{}.duration_ms", task_name),
+                        elapsed.as_millis() as f64,
+                    )
+                    .await;
             }
             Err(e) => {
                 error!(
@@ -528,7 +537,7 @@ impl TaskMonitor {
                 self.metrics.inc_counter("task.failed", 1).await;
             }
         }
-        
+
         result
     }
 }
@@ -541,108 +550,125 @@ impl TaskMonitor {
 async fn main() {
     // 初始化 tracing
     init_tracing();
-    
+
     info!("╔═══════════════════════════════════════════════════════════╗");
     info!("║   Rust 异步编程调试与监控完整指南 2025                   ║");
     info!("║   Complete Guide to Async Debugging and Monitoring       ║");
     info!("╚═══════════════════════════════════════════════════════════╝");
-    
+
     // 创建服务实例
     let user_service = Arc::new(UserService::new());
     let metrics = Arc::new(MetricsCollector::new());
     let health_checker = Arc::new(HealthChecker::new());
     let task_monitor = Arc::new(TaskMonitor::new(metrics.clone()));
-    
+
     info!("\n{}", "=".repeat(60));
     info!("演示 1: 结构化日志 - Tracing");
     info!("{}", "=".repeat(60));
-    
+
     // 注册依赖项
-    health_checker.register_dependency("database".to_string()).await;
-    health_checker.register_dependency("cache".to_string()).await;
-    
+    health_checker
+        .register_dependency("database".to_string())
+        .await;
+    health_checker
+        .register_dependency("cache".to_string())
+        .await;
+
     // 演示用户服务操作
     {
         let span = span!(Level::INFO, "user_operations");
         let _guard = span.enter();
-        
+
         info!("开始用户操作演示");
-        
+
         // 创建用户
-        match user_service.create_user(1, "Alice".to_string(), "alice@example.com".to_string()).await {
+        match user_service
+            .create_user(1, "Alice".to_string(), "alice@example.com".to_string())
+            .await
+        {
             Ok(user) => info!(user.name = %user.name, "✅ 用户创建成功"),
             Err(e) => error!(error = %e, "❌ 用户创建失败"),
         }
-        
-        match user_service.create_user(2, "Bob".to_string(), "bob@example.com".to_string()).await {
+
+        match user_service
+            .create_user(2, "Bob".to_string(), "bob@example.com".to_string())
+            .await
+        {
             Ok(user) => info!(user.name = %user.name, "✅ 用户创建成功"),
             Err(e) => error!(error = %e, "❌ 用户创建失败"),
         }
-        
+
         // 测试验证失败
-        match user_service.create_user(3, "".to_string(), "invalid".to_string()).await {
-            Ok(_) => {},
+        match user_service
+            .create_user(3, "".to_string(), "invalid".to_string())
+            .await
+        {
+            Ok(_) => {}
             Err(e) => warn!(error = %e, "⚠️  预期的验证失败"),
         }
-        
+
         // 查询用户
         user_service.get_user(1).await;
         user_service.get_user(999).await; // 不存在的用户
     }
-    
+
     info!("\n{}", "=".repeat(60));
     info!("演示 2: 性能指标收集 - Metrics");
     info!("{}", "=".repeat(60));
-    
+
     // 模拟业务指标
     for i in 0..10 {
         metrics.inc_counter("http.requests", 1).await;
-        metrics.observe_histogram("http.request.duration_ms", i as f64 * 10.0 + 50.0).await;
-        
+        metrics
+            .observe_histogram("http.request.duration_ms", i as f64 * 10.0 + 50.0)
+            .await;
+
         if i % 3 == 0 {
             metrics.inc_counter("http.errors", 1).await;
         }
     }
-    
+
     metrics.set_gauge("system.cpu_usage", 45.5).await;
     metrics.set_gauge("system.memory_usage", 70.2).await;
-    
+
     let snapshot = metrics.snapshot().await;
     info!("📊 指标快照:");
     info!("   计数器: {:?}", snapshot.counters);
     info!("   仪表盘: {:?}", snapshot.gauges);
     info!("   直方图: {:?}", snapshot.histograms);
-    
+
     info!("\n{}", "=".repeat(60));
     info!("演示 3: 健康检查系统");
     info!("{}", "=".repeat(60));
-    
+
     // 更新依赖项状态
-    health_checker.update_dependency_health("database", true, None).await;
-    health_checker.update_dependency_health("cache", true, None).await;
-    
+    health_checker
+        .update_dependency_health("database", true, None)
+        .await;
+    health_checker
+        .update_dependency_health("cache", true, None)
+        .await;
+
     // 活性检查
     let liveness = health_checker.liveness_check().await;
     info!("🏥 活性检查: {:?}", liveness);
-    
+
     // 就绪检查
     let readiness = health_checker.readiness_check().await;
     info!("🏥 就绪检查: {:?}", readiness);
-    
+
     // 模拟依赖项故障
-    health_checker.update_dependency_health(
-        "cache",
-        false,
-        Some("Connection timeout".to_string()),
-    ).await;
-    
+    health_checker
+        .update_dependency_health("cache", false, Some("Connection timeout".to_string()))
+        .await;
+
     let readiness = health_checker.readiness_check().await;
     info!("🏥 就绪检查(有故障): {:?}", readiness);
-    
+
     info!("\n{}", "=".repeat(60));
     info!("演示 4: 任务监控");
     info!("{}", "=".repeat(60));
-    
+
     // 监控成功任务
     let result = task_monitor
         .run_monitored_task("data_processing", async {
@@ -652,7 +678,7 @@ async fn main() {
         })
         .await;
     info!("✅ 任务结果: {:?}", result);
-    
+
     // 监控失败任务
     let result: Result<i32, String> = task_monitor
         .run_monitored_task("failing_task", async {
@@ -662,23 +688,35 @@ async fn main() {
         })
         .await;
     info!("❌ 任务结果: {:?}", result);
-    
+
     info!("\n{}", "=".repeat(60));
     info!("最终统计");
     info!("{}", "=".repeat(60));
-    
+
     let stats = user_service.get_stats().await;
     info!("👥 用户服务统计:");
     info!("   总用户数: {}", stats.total_users);
     info!("   总请求数: {}", stats.total_requests);
-    
+
     let final_metrics = metrics.snapshot().await;
     info!("📊 最终指标:");
-    info!("   HTTP 请求: {}", final_metrics.counters.get("http.requests").unwrap_or(&0));
-    info!("   HTTP 错误: {}", final_metrics.counters.get("http.errors").unwrap_or(&0));
-    info!("   任务完成: {}", final_metrics.counters.get("task.completed").unwrap_or(&0));
-    info!("   任务失败: {}", final_metrics.counters.get("task.failed").unwrap_or(&0));
-    
+    info!(
+        "   HTTP 请求: {}",
+        final_metrics.counters.get("http.requests").unwrap_or(&0)
+    );
+    info!(
+        "   HTTP 错误: {}",
+        final_metrics.counters.get("http.errors").unwrap_or(&0)
+    );
+    info!(
+        "   任务完成: {}",
+        final_metrics.counters.get("task.completed").unwrap_or(&0)
+    );
+    info!(
+        "   任务失败: {}",
+        final_metrics.counters.get("task.failed").unwrap_or(&0)
+    );
+
     info!("\n{}", "=".repeat(60));
     info!("最佳实践总结");
     info!("{}", "=".repeat(60));
@@ -713,48 +751,50 @@ async fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[tokio::test]
     async fn test_user_service() {
         let service = UserService::new();
-        
-        let user = service.create_user(1, "Test".to_string(), "test@example.com".to_string())
+
+        let user = service
+            .create_user(1, "Test".to_string(), "test@example.com".to_string())
             .await
             .unwrap();
-        
+
         assert_eq!(user.id, 1);
         assert_eq!(user.name, "Test");
-        
+
         let found = service.get_user(1).await;
         assert!(found.is_some());
     }
-    
+
     #[tokio::test]
     async fn test_metrics_collector() {
         let metrics = MetricsCollector::new();
-        
+
         metrics.inc_counter("test.counter", 5).await;
         metrics.set_gauge("test.gauge", 42.0).await;
         metrics.observe_histogram("test.hist", 10.0).await;
-        
+
         let snapshot = metrics.snapshot().await;
-        
+
         assert_eq!(*snapshot.counters.get("test.counter").unwrap(), 5);
         assert_eq!(*snapshot.gauges.get("test.gauge").unwrap(), 42.0);
     }
-    
+
     #[tokio::test]
     async fn test_health_checker() {
         let checker = HealthChecker::new();
-        
+
         checker.register_dependency("test_dep".to_string()).await;
-        checker.update_dependency_health("test_dep", true, None).await;
-        
+        checker
+            .update_dependency_health("test_dep", true, None)
+            .await;
+
         let liveness = checker.liveness_check().await;
         assert!(liveness.healthy);
-        
+
         let readiness = checker.readiness_check().await;
         assert!(readiness.healthy);
     }
 }
-

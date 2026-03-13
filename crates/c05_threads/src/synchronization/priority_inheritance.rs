@@ -166,15 +166,16 @@ impl<T> PriorityInheritanceMutex<T> {
         if let Some(ref mut owner_info) = *owner {
             let mut registry = self.thread_registry.lock().unwrap();
             if let Some(waiting_thread) = registry.get(&waiting_thread_id).cloned()
-                && waiting_thread.priority > owner_info.priority {
-                    // 需要优先级继承
-                    owner_info.inherit_priority(waiting_thread.priority);
+                && waiting_thread.priority > owner_info.priority
+            {
+                // 需要优先级继承
+                owner_info.inherit_priority(waiting_thread.priority);
 
-                    // 更新注册表中的所有者信息
-                    if let Some(ref mut owner_in_registry) = registry.get_mut(&owner_info.id) {
-                        owner_in_registry.inherit_priority(waiting_thread.priority);
-                    }
+                // 更新注册表中的所有者信息
+                if let Some(ref mut owner_in_registry) = registry.get_mut(&owner_info.id) {
+                    owner_in_registry.inherit_priority(waiting_thread.priority);
                 }
+            }
         }
     }
 
@@ -369,15 +370,16 @@ impl<T> PriorityInheritanceRwLock<T> {
         if let Some(ref mut writer_info) = *writer {
             let mut registry = self.thread_registry.lock().unwrap();
             if let Some(waiting_thread) = registry.get(&waiting_thread_id).cloned()
-                && waiting_thread.priority > writer_info.priority {
-                    // 需要优先级继承
-                    writer_info.inherit_priority(waiting_thread.priority);
+                && waiting_thread.priority > writer_info.priority
+            {
+                // 需要优先级继承
+                writer_info.inherit_priority(waiting_thread.priority);
 
-                    // 更新注册表中的写者信息
-                    if let Some(ref mut writer_in_registry) = registry.get_mut(&writer_info.id) {
-                        writer_in_registry.inherit_priority(waiting_thread.priority);
-                    }
+                // 更新注册表中的写者信息
+                if let Some(ref mut writer_in_registry) = registry.get_mut(&writer_info.id) {
+                    writer_in_registry.inherit_priority(waiting_thread.priority);
                 }
+            }
         }
 
         // 检查读者优先级继承

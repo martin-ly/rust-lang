@@ -25,7 +25,6 @@ use std::time::Instant;
 ///
 /// Rust 1.94.0 的 `array_windows` 方法在宏系统中可用于处理标记流（token stream），
 /// 特别是需要检测连续标记模式的场景。
-
 /// 宏标记类型
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TokenKind {
@@ -42,7 +41,7 @@ pub enum TokenKind {
     /// 空白字符
     Whitespace,
     /// 文件结束
-    EOF,
+    Eof,
 }
 
 /// 宏标记
@@ -221,7 +220,6 @@ impl BlockMatcher {
 /// # 2. LazyLock 新方法 - 宏编译缓存
 ///
 /// Rust 1.94.0 的 LazyLock 新方法可用于实现宏编译的延迟初始化和缓存机制。
-
 /// 宏编译结果缓存
 static MACRO_COMPILE_CACHE: LazyLock<Mutex<HashMap<String, CompileResult>>> =
     LazyLock::new(|| Mutex::new(HashMap::new()));
@@ -229,8 +227,11 @@ static MACRO_COMPILE_CACHE: LazyLock<Mutex<HashMap<String, CompileResult>>> =
 /// 编译结果
 #[derive(Debug, Clone)]
 pub struct CompileResult {
+    /// 展开的代码
     pub expanded_code: String,
+    /// 编译时间（毫秒）
     pub compile_time_ms: u64,
+    /// 版本号
     pub version: u32,
 }
 
@@ -264,9 +265,13 @@ pub struct MacroMetadataRegistry {
 /// 宏信息
 #[derive(Debug, Clone)]
 pub struct MacroInfo {
+    /// 宏名称
     pub name: String,
+    /// 定义位置
     pub defined_in: String,
+    /// 展开计数
     pub expansion_count: u64,
+    /// 最后使用时间
     pub last_used: Option<Instant>,
 }
 
@@ -346,10 +351,8 @@ impl MacroRuleLibrary {
             "vec".to_string(),
             vec!["vec![]".to_string(), "vec![elem; n]".to_string()],
         );
-        self.rules.insert(
-            "println".to_string(),
-            vec!["println!(...)".to_string()],
-        );
+        self.rules
+            .insert("println".to_string(), vec!["println!(...)".to_string()]);
     }
 
     /// 添加规则
@@ -376,7 +379,6 @@ pub fn get_macro_rules() -> std::sync::MutexGuard<'static, MacroRuleLibrary> {
 /// # 3. 数学常量 - 宏扩展优化
 ///
 /// Rust 1.94.0 的数学常量可用于宏扩展的性能优化和资源分配。
-
 /// 基于黄金比例的宏扩展策略
 ///
 /// 使用 GOLDEN_RATIO 优化宏展开顺序
@@ -408,7 +410,7 @@ impl GoldenRatioExpansionStrategy {
     /// 优先级计算（黄金比例散列）
     pub fn calculate_priority(macro_id: u64) -> u8 {
         let phi_frac = std::f64::consts::GOLDEN_RATIO.fract();
-        
+
         ((macro_id as f64 * phi_frac).fract() * 256.0) as u8
     }
 }
@@ -499,7 +501,6 @@ impl ExpansionTimeEstimator {
 /// # 4. Peekable 新方法 - 宏标记解析
 ///
 /// Rust 1.94.0 的 Peekable 新方法在宏标记解析中提供了更强大的条件处理能力。
-
 /// 改进的宏标记解析器
 ///
 /// 使用 next_if_map() 简化标记解析逻辑
@@ -732,7 +733,6 @@ impl MacroArgumentProcessor {
 /// # 5. char 到 usize 转换 - 宏编码
 ///
 /// Rust 1.94.0 的 TryFrom<char> for usize 在宏系统中可用于字符编码和位置计算。
-
 /// 宏标记编码器
 ///
 /// 使用 char 到 usize 转换进行标记编码
@@ -878,11 +878,31 @@ pub fn demonstrate_rust_194_macro_features() {
     // 1. array_windows - 宏标记流处理
     println!("1. array_windows - 宏标记流处理:");
     let tokens = vec![
-        Token { kind: TokenKind::Keyword, text: "let".to_string(), position: 0 },
-        Token { kind: TokenKind::Keyword, text: "mut".to_string(), position: 4 },
-        Token { kind: TokenKind::Identifier, text: "x".to_string(), position: 8 },
-        Token { kind: TokenKind::Operator, text: "=".to_string(), position: 10 },
-        Token { kind: TokenKind::Literal, text: "42".to_string(), position: 12 },
+        Token {
+            kind: TokenKind::Keyword,
+            text: "let".to_string(),
+            position: 0,
+        },
+        Token {
+            kind: TokenKind::Keyword,
+            text: "mut".to_string(),
+            position: 4,
+        },
+        Token {
+            kind: TokenKind::Identifier,
+            text: "x".to_string(),
+            position: 8,
+        },
+        Token {
+            kind: TokenKind::Operator,
+            text: "=".to_string(),
+            position: 10,
+        },
+        Token {
+            kind: TokenKind::Literal,
+            text: "42".to_string(),
+            position: 12,
+        },
     ];
 
     let let_mut_positions = TokenStreamAnalyzer::detect_let_mut_pattern(&tokens);
@@ -953,9 +973,21 @@ mod tests {
     #[test]
     fn test_array_windows_token_analyzer() {
         let tokens = vec![
-            Token { kind: TokenKind::Keyword, text: "let".to_string(), position: 0 },
-            Token { kind: TokenKind::Keyword, text: "mut".to_string(), position: 4 },
-            Token { kind: TokenKind::Identifier, text: "x".to_string(), position: 8 },
+            Token {
+                kind: TokenKind::Keyword,
+                text: "let".to_string(),
+                position: 0,
+            },
+            Token {
+                kind: TokenKind::Keyword,
+                text: "mut".to_string(),
+                position: 4,
+            },
+            Token {
+                kind: TokenKind::Identifier,
+                text: "x".to_string(),
+                position: 8,
+            },
         ];
 
         let positions = TokenStreamAnalyzer::detect_let_mut_pattern(&tokens);
@@ -965,8 +997,16 @@ mod tests {
     #[test]
     fn test_array_windows_block_matcher() {
         let tokens = vec![
-            Token { kind: TokenKind::Punctuation, text: "{".to_string(), position: 0 },
-            Token { kind: TokenKind::Punctuation, text: "}".to_string(), position: 1 },
+            Token {
+                kind: TokenKind::Punctuation,
+                text: "{".to_string(),
+                position: 0,
+            },
+            Token {
+                kind: TokenKind::Punctuation,
+                text: "}".to_string(),
+                position: 1,
+            },
         ];
 
         let empty_blocks = BlockMatcher::find_empty_blocks(&tokens);

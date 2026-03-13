@@ -23,5 +23,3 @@ async fn main() {
 
     println!("tokio_smoke: elapsed={:?}, sum={}", t0.elapsed(), sum);
 }
-
-

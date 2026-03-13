@@ -6,8 +6,8 @@
 //!
 //! 1. **性能优化**: 队列操作性能提升
 //! 2. **内存优化**: 使用 VecDeque 高效队列
-use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use crate::leetcode::tree::TreeNode;
+use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::cell::RefCell;
 use std::collections::VecDeque;
 use std::rc::Rc;
@@ -284,14 +284,16 @@ mod tests {
 
     #[test]
     fn test_level_order() {
-        let root = build_tree_from_vec(&[Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]);
+        let root =
+            build_tree_from_vec(&[Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]);
         let result = level_order(root);
         assert_eq!(result, vec![vec![3], vec![9, 20], vec![15, 7]]);
     }
 
     #[test]
     fn test_min_depth() {
-        let root = build_tree_from_vec(&[Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]);
+        let root =
+            build_tree_from_vec(&[Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]);
         assert_eq!(min_depth(root), 2);
     }
 }

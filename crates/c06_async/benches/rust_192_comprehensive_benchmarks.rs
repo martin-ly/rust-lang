@@ -10,14 +10,14 @@
 //! ```bash
 //! cargo bench --bench rust_192_comprehensive_benchmarks
 //! ```
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId, Throughput};
-use std::sync::Arc;
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use std::num::NonZeroUsize;
+use std::sync::Arc;
 use tokio::runtime::Runtime;
 
 use c06_async::rust_192_features::{
-    AsyncTaskQueue, AsyncTaskScheduler, AsyncResourceAllocator,
-    TaskItem, calculate_async_pool_size, compare_async_task_lists,
+    AsyncResourceAllocator, AsyncTaskQueue, AsyncTaskScheduler, TaskItem,
+    calculate_async_pool_size, compare_async_task_lists,
 };
 
 /// 基准测试 rotate_right 在异步任务队列中的性能
@@ -29,29 +29,25 @@ fn bench_rotate_right_performance(c: &mut Criterion) {
 
     // 测试不同队列大小的轮转性能
     for size in [10, 100, 1000, 10000].iter() {
-        group.bench_with_input(
-            BenchmarkId::new("rotate_queue", size),
-            size,
-            |b, &size| {
-                b.to_async(&rt).iter(|| async {
-                    let mut queue: AsyncTaskQueue<u64> = AsyncTaskQueue::new();
+        group.bench_with_input(BenchmarkId::new("rotate_queue", size), size, |b, &size| {
+            b.to_async(&rt).iter(|| async {
+                let mut queue: AsyncTaskQueue<u64> = AsyncTaskQueue::new();
 
-                    // 填充队列
-                    for i in 0..size {
-                        queue.push(TaskItem {
-                            id: i,
-                            priority: (i % 256) as u8,
-                            data: i,
-                        });
-                    }
+                // 填充队列
+                for i in 0..size {
+                    queue.push(TaskItem {
+                        id: i,
+                        priority: (i % 256) as u8,
+                        data: i,
+                    });
+                }
 
-                    // 执行轮转
-                    queue.rotate((size / 2) as usize);
+                // 执行轮转
+                queue.rotate((size / 2) as usize);
 
-                    std::hint::black_box(&queue);
-                });
-            },
-        );
+                std::hint::black_box(&queue);
+            });
+        });
     }
 
     group.finish();
@@ -93,12 +89,7 @@ fn bench_resource_allocator_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("resource_allocator_performance");
 
     // 测试不同配置的资源分配器
-    let configs = vec![
-        (1024, 64),
-        (4096, 256),
-        (16384, 1024),
-        (65536, 4096),
-    ];
+    let configs = vec![(1024, 64), (4096, 256), (16384, 1024), (65536, 4096)];
 
     for (total, per_task) in configs {
         let per_task_nonzero = NonZeroUsize::new(per_task).unwrap();
@@ -187,11 +178,13 @@ fn bench_task_scheduler_performance(c: &mut Criterion) {
 
                     // 添加任务
                     for i in 0..count {
-                        scheduler.add_task(TaskItem {
-                            id: i,
-                            priority: (i % 256) as u8,
-                            data: i,
-                        }).await;
+                        scheduler
+                            .add_task(TaskItem {
+                                id: i,
+                                priority: (i % 256) as u8,
+                                data: i,
+                            })
+                            .await;
                     }
 
                     // 执行调度
@@ -233,11 +226,13 @@ fn bench_concurrent_queue_operations(c: &mut Criterion) {
                     for i in 0..count {
                         let scheduler_clone = scheduler.clone();
                         let handle = tokio::spawn(async move {
-                            scheduler_clone.add_task(TaskItem {
-                                id: i,
-                                priority: (i % 256) as u8,
-                                data: i,
-                            }).await;
+                            scheduler_clone
+                                .add_task(TaskItem {
+                                    id: i,
+                                    priority: (i % 256) as u8,
+                                    data: i,
+                                })
+                                .await;
                         });
                         handles.push(handle);
                     }
@@ -280,7 +275,8 @@ fn bench_complete_workflow_performance(c: &mut Criterion) {
             |b, &size| {
                 b.to_async(&rt).iter(|| async {
                     // 1. 创建资源分配器
-                    let allocator = AsyncResourceAllocator::new(1024, NonZeroUsize::new(64).unwrap());
+                    let allocator =
+                        AsyncResourceAllocator::new(1024, NonZeroUsize::new(64).unwrap());
                     let max_tasks = allocator.max_concurrent_tasks();
                     std::hint::black_box(max_tasks);
 
@@ -327,43 +323,35 @@ fn bench_rotate_comparison(c: &mut Criterion) {
 
     for size in [100, 1000, 10000].iter() {
         // 测试 rotate_right
-        group.bench_with_input(
-            BenchmarkId::new("rotate_right", size),
-            size,
-            |b, &size| {
-                let mut queue: AsyncTaskQueue<u64> = AsyncTaskQueue::new();
-                for i in 0..size {
-                    queue.push(TaskItem {
-                        id: i as u64,
-                        priority: (i % 256) as u8,
-                        data: i as u64,
-                    });
-                }
-
-                b.iter(|| {
-                    queue.rotate(size / 2);
+        group.bench_with_input(BenchmarkId::new("rotate_right", size), size, |b, &size| {
+            let mut queue: AsyncTaskQueue<u64> = AsyncTaskQueue::new();
+            for i in 0..size {
+                queue.push(TaskItem {
+                    id: i as u64,
+                    priority: (i % 256) as u8,
+                    data: i as u64,
                 });
-            },
-        );
+            }
+
+            b.iter(|| {
+                queue.rotate(size / 2);
+            });
+        });
 
         // 测试手动实现（用于对比）
-        group.bench_with_input(
-            BenchmarkId::new("manual_rotate", size),
-            size,
-            |b, &size| {
-                let size_usize = size as usize;
-                let mut vec: Vec<u64> = (0..size as u64).collect();
+        group.bench_with_input(BenchmarkId::new("manual_rotate", size), size, |b, &size| {
+            let size_usize = size as usize;
+            let mut vec: Vec<u64> = (0..size as u64).collect();
 
-                b.iter(|| {
-                    let rotate_by = size_usize / 2;
-                    let mut rotated = vec![0u64; size_usize];
-                    for i in 0..size_usize {
-                        rotated[(i + rotate_by) % size_usize] = vec[i];
-                    }
-                    vec = rotated;
-                });
-            },
-        );
+            b.iter(|| {
+                let rotate_by = size_usize / 2;
+                let mut rotated = vec![0u64; size_usize];
+                for i in 0..size_usize {
+                    rotated[(i + rotate_by) % size_usize] = vec[i];
+                }
+                vec = rotated;
+            });
+        });
     }
 
     group.finish();

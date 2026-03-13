@@ -2,11 +2,9 @@
 //!
 //! 这个程序展示了如何在 c11_macro_system 项目中使用最新的 Rust 1.92.0 特性
 use c11_macro_system::rust_192_features::{
-    demonstrate_rust_192_macro_features,
-    MacroExpansionQueue, MacroExpansionItem,
-    calculate_macro_cache_size, MacroMemoryAllocator,
-    compare_macro_lists, check_macro_expansion_states,
-    MacroExpansionPerformanceMonitor,
+    MacroExpansionItem, MacroExpansionPerformanceMonitor, MacroExpansionQueue,
+    MacroMemoryAllocator, calculate_macro_cache_size, check_macro_expansion_states,
+    compare_macro_lists, demonstrate_rust_192_macro_features,
 };
 use std::num::NonZeroUsize;
 
@@ -45,16 +43,26 @@ fn main() {
 
     println!("初始队列顺序:");
     for (i, item) in queue.iter().enumerate() {
-        println!("  {}: Name={}, Priority={}, Depth={}",
-            i + 1, item.name, item.priority, item.depth);
+        println!(
+            "  {}: Name={}, Priority={}, Depth={}",
+            i + 1,
+            item.name,
+            item.priority,
+            item.depth
+        );
     }
 
     // 轮转队列
     queue.rotate(2);
     println!("\n轮转 2 个位置后:");
     for (i, item) in queue.iter().enumerate() {
-        println!("  {}: Name={}, Priority={}, Depth={}",
-            i + 1, item.name, item.priority, item.depth);
+        println!(
+            "  {}: Name={}, Priority={}, Depth={}",
+            i + 1,
+            item.name,
+            item.priority,
+            item.depth
+        );
     }
 
     // 额外演示：宏缓存大小计算
@@ -101,8 +109,14 @@ fn main() {
         },
     ];
 
-    println!("列表1 和 列表2 相等: {}", compare_macro_lists(&list1, &list2));
-    println!("列表1 和 列表3 相等: {}", compare_macro_lists(&list1, &list3));
+    println!(
+        "列表1 和 列表2 相等: {}",
+        compare_macro_lists(&list1, &list2)
+    );
+    println!(
+        "列表1 和 列表3 相等: {}",
+        compare_macro_lists(&list1, &list3)
+    );
 
     // 额外演示：宏展开状态检查
     println!("\n=== 额外演示：宏展开状态检查 ===");
@@ -121,10 +135,14 @@ fn main() {
     let expected_names = vec!["test_macro_1".to_string(), "test_macro_2".to_string()];
     let wrong_names = vec!["test_macro_1".to_string(), "test_macro_3".to_string()];
 
-    println!("宏列表匹配预期名称: {}",
-        check_macro_expansion_states(&macros, &expected_names));
-    println!("宏列表匹配错误名称: {}",
-        check_macro_expansion_states(&macros, &wrong_names));
+    println!(
+        "宏列表匹配预期名称: {}",
+        check_macro_expansion_states(&macros, &expected_names)
+    );
+    println!(
+        "宏列表匹配错误名称: {}",
+        check_macro_expansion_states(&macros, &wrong_names)
+    );
 
     // 额外演示：性能监控
     println!("\n=== 额外演示：宏展开性能监控 ===");

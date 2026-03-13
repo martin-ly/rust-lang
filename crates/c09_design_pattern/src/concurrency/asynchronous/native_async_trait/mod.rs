@@ -29,7 +29,7 @@ pub mod tokio_demo {
 
     impl AsyncProcessor for DelayProcessor {
         async fn process(&self, input: &str) -> String {
-            use tokio::time::{sleep, Duration};
+            use tokio::time::{Duration, sleep};
             sleep(Duration::from_millis(5)).await;
             format!("delay:{}", input)
         }
@@ -54,7 +54,9 @@ mod tests {
 
         fn dummy_raw_waker() -> RawWaker {
             fn no_op(_: *const ()) {}
-            fn clone(_: *const ()) -> RawWaker { dummy_raw_waker() }
+            fn clone(_: *const ()) -> RawWaker {
+                dummy_raw_waker()
+            }
             static VTABLE: RawWakerVTable = RawWakerVTable::new(clone, no_op, no_op, no_op);
             RawWaker::new(core::ptr::null(), &VTABLE)
         }
@@ -77,5 +79,3 @@ mod tests {
         assert_eq!(out, "echo:demo");
     }
 }
-
-

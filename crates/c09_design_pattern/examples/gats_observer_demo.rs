@@ -7,5 +7,3 @@ fn main() {
     let msg = String::from("GATs observer demo");
     subject.notify_observers(&msg);
 }
-
-

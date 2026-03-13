@@ -1,11 +1,11 @@
 use anyhow::Result;
-use std::sync::Arc;
-use std::time::{Duration, Instant};
-use tokio::sync::{RwLock};
-use tokio::time::sleep;
-use tracing::{info, debug};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::sync::Arc;
+use std::time::{Duration, Instant};
+use tokio::sync::RwLock;
+use tokio::time::sleep;
+use tracing::{debug, info};
 //use std::sync::atomic::{AtomicUsize, AtomicU64, Ordering};
 
 /// 2025年异步监控和可观测性演示
@@ -82,7 +82,13 @@ impl AsyncMetricsCollector {
         }
     }
 
-    pub async fn record_metric(&self, name: String, value: f64, metric_type: MetricType, labels: HashMap<String, String>) -> Result<()> {
+    pub async fn record_metric(
+        &self,
+        name: String,
+        value: f64,
+        metric_type: MetricType,
+        labels: HashMap<String, String>,
+    ) -> Result<()> {
         let metric = Metric {
             name: name.clone(),
             value,
@@ -90,13 +96,13 @@ impl AsyncMetricsCollector {
             labels,
             timestamp: Instant::now(),
         };
-        
+
         let mut metrics = self.metrics.write().await;
         metrics.insert(name.clone(), metric);
-        
+
         let mut stats = self.stats.write().await;
         stats.total_metrics_collected += 1;
-        
+
         debug!("记录指标: {} = {}", name, value);
         Ok(())
     }
@@ -104,10 +110,10 @@ impl AsyncMetricsCollector {
     pub async fn add_collector(&self, collector: MetricsCollector) -> Result<()> {
         let mut collectors = self.collectors.write().await;
         collectors.push(collector.clone());
-        
+
         let mut stats = self.stats.write().await;
         stats.active_collectors += 1;
-        
+
         info!("添加指标收集器: {}", collector.name);
         Ok(())
     }
@@ -115,38 +121,43 @@ impl AsyncMetricsCollector {
     pub async fn start_collection(&self) -> Result<()> {
         let collectors = self.collectors.read().await;
         let mut tasks = Vec::new();
-        
+
         for collector in collectors.iter() {
             if collector.enabled {
                 let collector_clone = self.clone();
                 let collector_id = collector.id.clone();
-                
+
                 let task = tokio::spawn(async move {
                     collector_clone.collection_loop(&collector_id).await;
                 });
-                
+
                 tasks.push(task);
             }
         }
-        
+
         info!("启动 {} 个指标收集器", tasks.len());
         Ok(())
     }
 
     async fn collection_loop(&self, collector_id: &str) {
         let mut interval = tokio::time::interval(self.config.collection_interval);
-        
+
         loop {
             interval.tick().await;
-            
+
             // 模拟指标收集
-            let labels = [("collector".to_string(), collector_id.to_string())].iter().cloned().collect();
-            let _ = self.record_metric(
-                format!("collector_metrics_{}", collector_id),
-                rand::random::<f64>() * 100.0,
-                MetricType::Gauge,
-                labels,
-            ).await;
+            let labels = [("collector".to_string(), collector_id.to_string())]
+                .iter()
+                .cloned()
+                .collect();
+            let _ = self
+                .record_metric(
+                    format!("collector_metrics_{}", collector_id),
+                    rand::random::<f64>() * 100.0,
+                    MetricType::Gauge,
+                    labels,
+                )
+                .await;
         }
     }
 
@@ -248,7 +259,13 @@ impl AsyncLogAggregator {
         }
     }
 
-    pub async fn log(&self, level: LogLevel, message: String, source: String, fields: HashMap<String, String>) -> Result<()> {
+    pub async fn log(
+        &self,
+        level: LogLevel,
+        message: String,
+        source: String,
+        fields: HashMap<String, String>,
+    ) -> Result<()> {
         let log_entry = LogEntry {
             id: uuid::Uuid::new_v4().to_string(),
             level,
@@ -257,19 +274,19 @@ impl AsyncLogAggregator {
             source,
             fields,
         };
-        
+
         let mut logs = self.logs.write().await;
         logs.push(log_entry.clone());
-        
+
         let mut stats = self.stats.write().await;
         stats.total_logs += 1;
-        
+
         // 限制日志数量
         if logs.len() > self.config.max_logs {
             let excess = logs.len() - self.config.max_logs;
             logs.drain(0..excess);
         }
-        
+
         debug!("记录日志: {:?} - {}", log_entry.level, log_entry.message);
         Ok(())
     }
@@ -277,10 +294,10 @@ impl AsyncLogAggregator {
     pub async fn add_aggregator(&self, aggregator: LogAggregator) -> Result<()> {
         let mut aggregators = self.aggregators.write().await;
         aggregators.push(aggregator.clone());
-        
+
         let mut stats = self.stats.write().await;
         stats.active_aggregators += 1;
-        
+
         info!("添加日志聚合器: {}", aggregator.name);
         Ok(())
     }
@@ -289,9 +306,9 @@ impl AsyncLogAggregator {
         if !self.config.enable_aggregation {
             return Ok(());
         }
-        
+
         let mut interval = tokio::time::interval(self.config.aggregation_interval);
-        
+
         loop {
             interval.tick().await;
             self.perform_aggregation().await;
@@ -301,18 +318,23 @@ impl AsyncLogAggregator {
     async fn perform_aggregation(&self) {
         let logs = self.logs.read().await;
         let aggregators = self.aggregators.read().await;
-        
+
         for aggregator in aggregators.iter() {
             for rule in &aggregator.aggregation_rules {
-                let matching_logs: Vec<&LogEntry> = logs.iter()
+                let matching_logs: Vec<&LogEntry> = logs
+                    .iter()
                     .filter(|log| log.message.contains(&rule.pattern))
                     .collect();
-                
+
                 if !matching_logs.is_empty() {
                     let mut stats = self.stats.write().await;
                     stats.aggregated_logs += matching_logs.len();
-                    
-                    info!("聚合日志: 规则 '{}' 匹配 {} 条日志", rule.pattern, matching_logs.len());
+
+                    info!(
+                        "聚合日志: 规则 '{}' 匹配 {} 条日志",
+                        rule.pattern,
+                        matching_logs.len()
+                    );
                 }
             }
         }
@@ -321,7 +343,10 @@ impl AsyncLogAggregator {
     pub async fn get_logs(&self, level: Option<LogLevel>) -> Vec<LogEntry> {
         let logs = self.logs.read().await;
         if let Some(level) = level {
-            logs.iter().filter(|log| log.level == level).cloned().collect()
+            logs.iter()
+                .filter(|log| log.level == level)
+                .cloned()
+                .collect()
         } else {
             logs.clone()
         }
@@ -416,14 +441,18 @@ impl AsyncDistributedTracing {
         }
     }
 
-    pub async fn start_trace(&self, operation_name: String, tags: HashMap<String, String>) -> Result<TraceHandle> {
+    pub async fn start_trace(
+        &self,
+        operation_name: String,
+        tags: HashMap<String, String>,
+    ) -> Result<TraceHandle> {
         let trace_id = uuid::Uuid::new_v4().to_string();
-        
+
         // 采样决策
         if rand::random::<f64>() > self.config.sampling_rate {
             return Ok(TraceHandle::NoOp);
         }
-        
+
         let trace = Trace {
             id: trace_id.clone(),
             operation_name: operation_name.clone(),
@@ -433,21 +462,27 @@ impl AsyncDistributedTracing {
             tags,
             status: TraceStatus::Started,
         };
-        
+
         let mut traces = self.traces.write().await;
         traces.insert(trace_id.clone(), trace);
-        
+
         let mut stats = self.stats.write().await;
         stats.total_traces += 1;
         stats.sampling_decisions += 1;
-        
+
         info!("开始追踪: {} ({})", operation_name, trace_id);
         Ok(TraceHandle::Active(trace_id))
     }
 
-    pub async fn start_span(&self, trace_id: &str, operation_name: String, parent_id: Option<String>, tags: HashMap<String, String>) -> Result<SpanHandle> {
+    pub async fn start_span(
+        &self,
+        trace_id: &str,
+        operation_name: String,
+        parent_id: Option<String>,
+        tags: HashMap<String, String>,
+    ) -> Result<SpanHandle> {
         let span_id = uuid::Uuid::new_v4().to_string();
-        
+
         let span = Span {
             id: span_id.clone(),
             trace_id: trace_id.to_string(),
@@ -458,13 +493,13 @@ impl AsyncDistributedTracing {
             tags,
             logs: Vec::new(),
         };
-        
+
         let mut spans = self.spans.write().await;
         spans.insert(span_id.clone(), span);
-        
+
         let mut stats = self.stats.write().await;
         stats.total_spans += 1;
-        
+
         Ok(SpanHandle::Active(span_id))
     }
 
@@ -473,17 +508,17 @@ impl AsyncDistributedTracing {
         if let Some(trace) = traces.get_mut(trace_id) {
             trace.end_time = Some(Instant::now());
             trace.status = status.clone();
-            
+
             let mut stats = self.stats.write().await;
             match status {
                 TraceStatus::Completed => stats.completed_traces += 1,
                 TraceStatus::Failed => stats.failed_traces += 1,
                 _ => {}
             }
-            
+
             info!("完成追踪: {} ({:?})", trace_id, status);
         }
-        
+
         Ok(())
     }
 
@@ -583,7 +618,7 @@ impl AsyncHealthChecker {
     pub async fn add_check(&self, check: HealthCheck) -> Result<()> {
         let mut checks = self.checks.write().await;
         checks.insert(check.id.clone(), check.clone());
-        
+
         info!("添加健康检查: {}", check.name);
         Ok(())
     }
@@ -591,42 +626,42 @@ impl AsyncHealthChecker {
     pub async fn start_health_checks(&self) -> Result<()> {
         let checks = self.checks.read().await;
         let mut tasks = Vec::new();
-        
+
         for check in checks.values() {
             if check.enabled {
                 let checker_clone = self.clone();
                 let check_id = check.id.clone();
-                
+
                 let task = tokio::spawn(async move {
                     checker_clone.health_check_loop(&check_id).await;
                 });
-                
+
                 tasks.push(task);
             }
         }
-        
+
         info!("启动 {} 个健康检查", tasks.len());
         Ok(())
     }
 
     async fn health_check_loop(&self, check_id: &str) {
         let mut interval = tokio::time::interval(self.config.check_interval);
-        
+
         loop {
             interval.tick().await;
-            
+
             let checks = self.checks.read().await;
             if let Some(check) = checks.get(check_id) {
                 let result = self.perform_health_check(check).await;
-                
+
                 let mut checks_write = self.checks.write().await;
                 if let Some(check) = checks_write.get_mut(check_id) {
                     check.last_result = Some(result.clone());
                 }
-                
+
                 let mut stats = self.stats.write().await;
                 stats.total_checks += 1;
-                
+
                 if result.healthy {
                     stats.healthy_checks += 1;
                 } else {
@@ -639,7 +674,7 @@ impl AsyncHealthChecker {
 
     async fn perform_health_check(&self, check: &HealthCheck) -> HealthResult {
         let start_time = Instant::now();
-        
+
         // 模拟健康检查
         let is_healthy = match check.check_type {
             HealthCheckType::Http => {
@@ -659,14 +694,14 @@ impl AsyncHealthChecker {
                 rand::random::<f64>() > 0.08
             }
         };
-        
+
         let response_time = start_time.elapsed();
         let error_message = if !is_healthy {
             Some("模拟健康检查失败".to_string())
         } else {
             None
         };
-        
+
         HealthResult {
             healthy: is_healthy,
             response_time,
@@ -678,13 +713,13 @@ impl AsyncHealthChecker {
     pub async fn get_health_status(&self) -> HashMap<String, HealthResult> {
         let checks = self.checks.read().await;
         let mut status = HashMap::new();
-        
+
         for (id, check) in checks.iter() {
             if let Some(result) = &check.last_result {
                 status.insert(id.clone(), result.clone());
             }
         }
-        
+
         status
     }
 
@@ -696,14 +731,14 @@ impl AsyncHealthChecker {
 #[tokio::main]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
-    
+
     info!("🚀 开始 2025 年异步监控和可观测性演示");
 
     // 1. 演示异步指标收集器
     info!("📊 演示异步指标收集器");
     let metrics_config = MetricsConfig::default();
     let metrics_collector = AsyncMetricsCollector::new(metrics_config);
-    
+
     // 添加收集器
     let collectors = vec![
         MetricsCollector {
@@ -719,101 +754,130 @@ async fn main() -> Result<()> {
             enabled: true,
         },
     ];
-    
+
     for collector in collectors {
         metrics_collector.add_collector(collector).await?;
     }
-    
+
     // 记录一些指标
     for i in 0..10 {
-        let labels = [("service".to_string(), "api-gateway".to_string())].iter().cloned().collect();
-        metrics_collector.record_metric(
-            format!("request_count_{}", i),
-            i as f64 * 10.0,
-            MetricType::Counter,
-            labels,
-        ).await?;
+        let labels = [("service".to_string(), "api-gateway".to_string())]
+            .iter()
+            .cloned()
+            .collect();
+        metrics_collector
+            .record_metric(
+                format!("request_count_{}", i),
+                i as f64 * 10.0,
+                MetricType::Counter,
+                labels,
+            )
+            .await?;
     }
-    
+
     let metrics_stats = metrics_collector.get_stats().await;
-    info!("指标收集统计: 总指标 {}, 活跃收集器 {}", 
-          metrics_stats.total_metrics_collected, metrics_stats.active_collectors);
+    info!(
+        "指标收集统计: 总指标 {}, 活跃收集器 {}",
+        metrics_stats.total_metrics_collected, metrics_stats.active_collectors
+    );
 
     // 2. 演示异步日志聚合器
     info!("📝 演示异步日志聚合器");
     let log_config = LogConfig::default();
     let log_aggregator = AsyncLogAggregator::new(log_config);
-    
+
     // 添加聚合器
     let aggregator = LogAggregator {
         id: "aggregator_1".to_string(),
         name: "错误日志聚合器".to_string(),
         filter_level: LogLevel::Error,
-        aggregation_rules: vec![
-            AggregationRule {
-                pattern: "error".to_string(),
-                aggregation_type: AggregationType::Count,
-                time_window: Duration::from_secs(60),
-            }
-        ],
+        aggregation_rules: vec![AggregationRule {
+            pattern: "error".to_string(),
+            aggregation_type: AggregationType::Count,
+            time_window: Duration::from_secs(60),
+        }],
     };
-    
+
     log_aggregator.add_aggregator(aggregator).await?;
-    
+
     // 记录一些日志
     for i in 0..20 {
-        let level = if i % 5 == 0 { LogLevel::Error } else { LogLevel::Info };
-        let fields = [("request_id".to_string(), format!("req_{}", i))].iter().cloned().collect();
-        
-        log_aggregator.log(
-            level,
-            format!("处理请求 {}", i),
-            "api-gateway".to_string(),
-            fields,
-        ).await?;
+        let level = if i % 5 == 0 {
+            LogLevel::Error
+        } else {
+            LogLevel::Info
+        };
+        let fields = [("request_id".to_string(), format!("req_{}", i))]
+            .iter()
+            .cloned()
+            .collect();
+
+        log_aggregator
+            .log(
+                level,
+                format!("处理请求 {}", i),
+                "api-gateway".to_string(),
+                fields,
+            )
+            .await?;
     }
-    
+
     let error_logs = log_aggregator.get_logs(Some(LogLevel::Error)).await;
     let log_stats = log_aggregator.get_stats().await;
-    info!("日志统计: 总日志 {}, 错误日志 {}, 聚合日志 {}", 
-          log_stats.total_logs, error_logs.len(), log_stats.aggregated_logs);
+    info!(
+        "日志统计: 总日志 {}, 错误日志 {}, 聚合日志 {}",
+        log_stats.total_logs,
+        error_logs.len(),
+        log_stats.aggregated_logs
+    );
 
     // 3. 演示异步分布式追踪
     info!("🔍 演示异步分布式追踪");
     let tracing_config = TracingConfig::default();
     let distributed_tracing = AsyncDistributedTracing::new(tracing_config);
-    
+
     // 开始追踪
-    let tags = [("service".to_string(), "api-gateway".to_string())].iter().cloned().collect();
-    let trace_handle = distributed_tracing.start_trace("api_request".to_string(), tags).await?;
-    
+    let tags = [("service".to_string(), "api-gateway".to_string())]
+        .iter()
+        .cloned()
+        .collect();
+    let trace_handle = distributed_tracing
+        .start_trace("api_request".to_string(), tags)
+        .await?;
+
     if let TraceHandle::Active(trace_id) = trace_handle {
         // 开始子span
-        let _span_handle = distributed_tracing.start_span(
-            &trace_id,
-            "database_query".to_string(),
-            None,
-            HashMap::new(),
-        ).await?;
-        
+        let _span_handle = distributed_tracing
+            .start_span(
+                &trace_id,
+                "database_query".to_string(),
+                None,
+                HashMap::new(),
+            )
+            .await?;
+
         // 模拟一些工作
         sleep(Duration::from_millis(100)).await;
-        
+
         // 完成追踪
-        distributed_tracing.finish_trace(&trace_id, TraceStatus::Completed).await?;
-        
+        distributed_tracing
+            .finish_trace(&trace_id, TraceStatus::Completed)
+            .await?;
+
         info!("完成追踪: {}", trace_id);
     }
-    
+
     let tracing_stats = distributed_tracing.get_stats().await;
-    info!("追踪统计: 总追踪 {}, 完成追踪 {}, 总Span {}", 
-          tracing_stats.total_traces, tracing_stats.completed_traces, tracing_stats.total_spans);
+    info!(
+        "追踪统计: 总追踪 {}, 完成追踪 {}, 总Span {}",
+        tracing_stats.total_traces, tracing_stats.completed_traces, tracing_stats.total_spans
+    );
 
     // 4. 演示异步健康检查系统
     info!("🏥 演示异步健康检查系统");
     let health_config = HealthConfig::default();
     let health_checker = AsyncHealthChecker::new(health_config);
-    
+
     // 添加健康检查
     let health_checks = vec![
         HealthCheck {
@@ -835,34 +899,42 @@ async fn main() -> Result<()> {
             last_result: None,
         },
     ];
-    
+
     for check in health_checks {
         health_checker.add_check(check).await?;
     }
-    
+
     // 启动健康检查（短时间运行）
     let health_checker_clone = health_checker.clone();
-    let health_task = tokio::spawn(async move {
-        health_checker_clone.start_health_checks().await
-    });
-    
+    let health_task = tokio::spawn(async move { health_checker_clone.start_health_checks().await });
+
     // 让健康检查运行一段时间
     sleep(Duration::from_millis(2000)).await;
-    
+
     health_task.abort();
-    
+
     let health_status = health_checker.get_health_status().await;
     let health_stats = health_checker.get_stats().await;
-    
-    info!("健康检查统计: 总检查 {}, 健康检查 {}, 不健康检查 {}", 
-          health_stats.total_checks, health_stats.healthy_checks, health_stats.unhealthy_checks);
-    
+
+    info!(
+        "健康检查统计: 总检查 {}, 健康检查 {}, 不健康检查 {}",
+        health_stats.total_checks, health_stats.healthy_checks, health_stats.unhealthy_checks
+    );
+
     for (check_id, result) in health_status {
-        info!("健康检查 {}: {} (响应时间: {:?})", 
-              check_id, if result.healthy { "健康" } else { "不健康" }, result.response_time);
+        info!(
+            "健康检查 {}: {} (响应时间: {:?})",
+            check_id,
+            if result.healthy {
+                "健康"
+            } else {
+                "不健康"
+            },
+            result.response_time
+        );
     }
 
     info!("✅ 2025 年异步监控和可观测性演示完成!");
-    
+
     Ok(())
 }

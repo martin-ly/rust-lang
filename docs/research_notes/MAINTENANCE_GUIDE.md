@@ -130,8 +130,10 @@
 - [ ] 更新研究优先级
 - [ ] 优化导航系统
 - [ ] 生成质量报告
-- [ ] **层次化与矩阵**：核对 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md) 与最新文档一致；23 模式矩阵、执行模型矩阵、formal_methods 六篇并表与各子文档双向链接完整（见 [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)）
-- [ ] **格式与内容与 1.93 对齐**：按 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) 执行季度抽查：元信息/目录/文末块统一；实质内容五维自检抽样；92 项落点与 [RUST_193_COUNTEREXAMPLES_INDEX](RUST_193_COUNTEREXAMPLES_INDEX.md) 反例索引更新
+- [ ] **层次化与矩阵**：核对 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md) 与最新文档一致；
+- [ ] 23 模式矩阵、执行模型矩阵、formal_methods 六篇并表与各子文档双向链接完整（见 [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)）
+- [ ] **格式与内容与 1.93 对齐**：按 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) 执行季度抽查：元信息/目录/文末块统一；实质内容五维自检抽样；
+- [ ] 92 项落点与 [RUST_193_COUNTEREXAMPLES_INDEX](RUST_193_COUNTEREXAMPLES_INDEX.md) 反例索引更新
 
 ### 年度维护 (每年)
 
@@ -221,7 +223,8 @@
 2. **执行更新**
    - 更新文档内容
    - 保持格式一致性
-   - 若涉及概念/定理/文档结构变更：视情况更新 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md)、相关多维矩阵（23 模式、执行模型、formal_methods 六篇并表）及子文档中的「矩阵行/列」标注（见 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) § 矩阵与文档双向链接规范）
+   - 若涉及概念/定理/文档结构变更：视情况更新 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md)、
+   - 相关多维矩阵（23 模式、执行模型、formal_methods 六篇并表）及子文档中的「矩阵行/列」标注（见 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) § 矩阵与文档双向链接规范）
    - 更新相关链接
 
 3. **验证更新**

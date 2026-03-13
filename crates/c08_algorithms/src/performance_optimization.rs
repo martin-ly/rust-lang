@@ -292,8 +292,7 @@ impl ConcurrentOptimizedProcessor {
     }
 
     pub fn process_data_parallel(&self, data: Vec<i32>) -> Vec<i32> {
-        let chunk_size =
-            data.len().div_ceil(self.thread_pool.workers.len());
+        let chunk_size = data.len().div_ceil(self.thread_pool.workers.len());
         let results_arc = Arc::new(Mutex::new(vec![0; data.len()]));
 
         for (i, chunk) in data.chunks(chunk_size).enumerate() {
@@ -313,7 +312,6 @@ impl ConcurrentOptimizedProcessor {
         // 等待所有任务完成
         thread::sleep(Duration::from_millis(100));
 
-        
         Arc::try_unwrap(results_arc).unwrap().into_inner().unwrap()
     }
 

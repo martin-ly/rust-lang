@@ -33,7 +33,7 @@
 
 ### 1. 链接检查 ✅
 
-```
+```text
 ✓ 恭喜！未发现断链。
 总检查文件数: 1295
 总检查链接数: 7927
@@ -93,7 +93,7 @@ $ cargo test --lib
 | c02_type_system | approx_constant | 3.14 → PI |
 | c02_type_system | mutable_borrow | 方法签名修改 |
 | c05_threads | never_loop | 移除loop |
-| c05_threads | infinite_loop | Arc<AtomicBool> |
+| c05_threads | infinite_loop | `Arc<AtomicBool>` |
 | c06_async | never_loop | 移除loop |
 | c08_algorithms | approx_constant | PI/E → 标准库常量 |
 

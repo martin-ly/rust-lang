@@ -91,6 +91,8 @@ Rust的泛型是一种类型的态射，
 
 */
 
+#![allow(clippy::type_complexity)]
+
 pub mod associated_type;
 pub mod natural_transformation;
 pub mod polymorphism;
@@ -102,10 +104,10 @@ pub mod type_parameter;
 /// 类型别名模块 - 提供项目中使用的所有复杂类型别名
 pub mod type_aliases;
 
-pub mod generic_define;
 /// 归档的历史版本特性模块 - 包含 Rust 1.89-1.92 版本的历史特性实现
 /// 归档的历史版本特性模块 - 包含 Rust 1.89-1.92 版本的历史特性实现
 pub mod archive;
+pub mod generic_define;
 
 /// 基础语法模块 - 提供 Rust 泛型编程的基础语法和概念
 pub mod basic_syntax;
@@ -256,6 +258,7 @@ pub mod benchmarks {
         // 测试泛型容器性能
         let mut container = Vec::with_capacity(10000);
         let start = Instant::now();
+        #[allow(clippy::excessive_nesting)]
         for i in 0..10000 {
             container.push(i);
         }
@@ -273,16 +276,18 @@ pub mod benchmarks {
         let counter: ArcMutexCounter = Arc::new(Mutex::new(0));
         let start = Instant::now();
 
-        let handles: Vec<_> = (0..1000)
-            .map(|_| {
-                let counter = Arc::clone(&counter);
-                thread::spawn(move || {
-                    for _ in 0..100 {
-                        let mut num = counter.lock().unwrap();
-                        *num += 1;
-                    }
-                })
+        #[allow(clippy::excessive_nesting)]
+        fn spawn_increment_thread(counter: Arc<Mutex<i32>>) -> thread::JoinHandle<()> {
+            thread::spawn(move || {
+                for _ in 0..100 {
+                    let mut num = counter.lock().unwrap();
+                    *num += 1;
+                }
             })
+        }
+
+        let handles: Vec<_> = (0..1000)
+            .map(|_| spawn_increment_thread(Arc::clone(&counter)))
             .collect();
 
         for handle in handles {

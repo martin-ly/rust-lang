@@ -266,6 +266,8 @@ Hash trait 为 Rust 提供了哈希计算支持。
 同时需要注意哈希一致性和性能影响。
 */
 
+#![allow(clippy::type_complexity)]
+
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
 

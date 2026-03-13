@@ -1,9 +1,9 @@
 // 流水线 helper 演示：背压 + 并发 + 限速 + 重试 + 超时 + 熔断
 
-use c06_async::utils::{ExecHelper, SimpleTokenBucket};
 use c06_async::utils::circuit_breaker::CircuitBreaker;
+use c06_async::utils::{ExecHelper, SimpleTokenBucket};
+use prometheus::{CounterVec, Encoder, Histogram, HistogramOpts, Opts, Registry, TextEncoder};
 use std::time::Duration;
-use prometheus::{Registry, CounterVec, Histogram, HistogramOpts, Opts, Encoder, TextEncoder};
 
 #[tokio::main(flavor = "multi_thread")]
 async fn main() -> anyhow::Result<()> {
@@ -11,9 +11,18 @@ async fn main() -> anyhow::Result<()> {
     let _ = tracing_subscriber::fmt::try_init();
     // Prometheus 指标注册
     let registry = Registry::new();
-    let req_counter = CounterVec::new(Opts::new("pipeline_requests_total", "Pipeline requests"), &["phase"]) ?;
-    let err_counter = CounterVec::new(Opts::new("pipeline_errors_total", "Pipeline errors"), &["phase"]) ?;
-    let latency = Histogram::with_opts(HistogramOpts::new("pipeline_latency_seconds", "End-to-end latency").buckets(vec![0.01,0.05,0.1,0.2,0.5,1.0,2.0,5.0])) ?;
+    let req_counter = CounterVec::new(
+        Opts::new("pipeline_requests_total", "Pipeline requests"),
+        &["phase"],
+    )?;
+    let err_counter = CounterVec::new(
+        Opts::new("pipeline_errors_total", "Pipeline errors"),
+        &["phase"],
+    )?;
+    let latency = Histogram::with_opts(
+        HistogramOpts::new("pipeline_latency_seconds", "End-to-end latency")
+            .buckets(vec![0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0]),
+    )?;
     registry.register(Box::new(req_counter.clone()))?;
     registry.register(Box::new(err_counter.clone()))?;
     registry.register(Box::new(latency.clone()))?;
@@ -21,15 +30,28 @@ async fn main() -> anyhow::Result<()> {
     tokio::spawn({
         let registry = registry.clone();
         async move {
-            use tokio::net::TcpListener; use tokio::io::AsyncWriteExt; use tokio::io::AsyncReadExt;
-            let listener = TcpListener::bind(("127.0.0.1", 9898)).await.expect("bind metrics");
+            use tokio::io::AsyncReadExt;
+            use tokio::io::AsyncWriteExt;
+            use tokio::net::TcpListener;
+            let listener = TcpListener::bind(("127.0.0.1", 9898))
+                .await
+                .expect("bind metrics");
             loop {
                 if let Ok((mut socket, _)) = listener.accept().await {
-                    let mut buf = [0u8; 1024]; let _ = socket.read(&mut buf).await; // 读丢弃
-                    let mf = registry.gather(); let encoder = TextEncoder::new(); let mut out = Vec::new(); let _ = encoder.encode(&mf, &mut out);
+                    let mut buf = [0u8; 1024];
+                    let _ = socket.read(&mut buf).await; // 读丢弃
+                    let mf = registry.gather();
+                    let encoder = TextEncoder::new();
+                    let mut out = Vec::new();
+                    let _ = encoder.encode(&mf, &mut out);
                     let body = out;
-                    let header = format!("HTTP/1.1 200 OK\r\nContent-Type: text/plain; version=0.0.4\r\nContent-Length: {}\r\n\r\n", body.len());
-                    let _ = socket.write_all(header.as_bytes()).await; let _ = socket.write_all(&body).await; let _ = socket.shutdown().await;
+                    let header = format!(
+                        "HTTP/1.1 200 OK\r\nContent-Type: text/plain; version=0.0.4\r\nContent-Length: {}\r\n\r\n",
+                        body.len()
+                    );
+                    let _ = socket.write_all(header.as_bytes()).await;
+                    let _ = socket.write_all(&body).await;
+                    let _ = socket.shutdown().await;
                 }
             }
         }
@@ -44,7 +66,9 @@ async fn main() -> anyhow::Result<()> {
     let exec = ExecHelper::new(4).with_breaker(breaker);
 
     let client = reqwest::Client::new();
-    let urls: Vec<String> = (0..20).map(|i| format!("https://httpbin.org/status/20{}", i % 5)).collect();
+    let urls: Vec<String> = (0..20)
+        .map(|i| format!("https://httpbin.org/status/20{}", i % 5))
+        .collect();
 
     let mut handles = Vec::new();
     for (idx, url) in urls.into_iter().enumerate() {
@@ -80,13 +104,15 @@ async fn main() -> anyhow::Result<()> {
                 .await;
             let elapsed = start.elapsed().as_secs_f64();
             latency.observe(elapsed);
-            if res.is_err() { err_counter.with_label_values(&["worker"]).inc(); }
+            if res.is_err() {
+                err_counter.with_label_values(&["worker"]).inc();
+            }
             tracing::info!(job = idx, ?res, elapsed, "pipeline handled one job");
         }));
     }
 
-    for h in handles { let _ = h.await; }
+    for h in handles {
+        let _ = h.await;
+    }
     Ok(())
 }
-
-

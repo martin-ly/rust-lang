@@ -66,7 +66,7 @@ pub fn bounded_queue_demo(
     for h in handles {
         h.join().unwrap();
     }
-     *consumed_total.lock().unwrap()
+    *consumed_total.lock().unwrap()
 }
 
 /// 超时等待：直到某事件发生或达到截止时间
@@ -93,10 +93,10 @@ pub fn wait_with_timeout_demo(timeout_ms: u64) -> bool {
     let (_guard, wait_result) = res;
     let timed_out = wait_result.timed_out();
     let _elapsed = start.elapsed();
-    
+
     // 确保通知线程完成
     let _ = notifier.join();
-    
+
     !timed_out
 }
 

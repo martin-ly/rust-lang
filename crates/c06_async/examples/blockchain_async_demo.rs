@@ -1,5 +1,5 @@
 //! 区块链异步演示
-//! 
+//!
 //! 本示例展示了异步编程在区块链应用中的使用：
 //! - 异步交易处理
 //! - 区块验证和挖矿
@@ -9,21 +9,21 @@
 //! - 钱包管理
 //! - 挖矿池
 //! - 区块链浏览器
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example blockchain_async_demo
 //! ```
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
+use std::collections::hash_map::DefaultHasher;
 use std::collections::{HashMap, VecDeque};
+use std::hash::{Hash, Hasher};
 use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};
-use tokio::sync::{RwLock};
-use tokio::time::{sleep};
-use serde::{Serialize, Deserialize};
-use anyhow::Result;
+use tokio::sync::RwLock;
+use tokio::time::sleep;
 use uuid::Uuid;
-use std::hash::{Hash, Hasher};
-use std::collections::hash_map::DefaultHasher;
 
 /// 交易
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -105,7 +105,7 @@ impl Blockchain {
     async fn validate_transaction(&self, transaction: &Transaction) -> bool {
         let accounts = self.accounts.read().await;
         let balance = accounts.get(&transaction.from).copied().unwrap_or(0);
-        
+
         // 检查余额是否足够
         balance >= transaction.amount + transaction.fee
     }
@@ -153,7 +153,9 @@ impl Blockchain {
         let merkle_root = self.calculate_merkle_root(&block_transactions);
 
         // 挖矿
-        let (nonce, hash) = self.mine_block_hash(index, &previous_hash, &merkle_root).await;
+        let (nonce, hash) = self
+            .mine_block_hash(index, &previous_hash, &merkle_root)
+            .await;
 
         let new_block = Block {
             index,
@@ -170,7 +172,10 @@ impl Blockchain {
         for tx in &block_transactions {
             if tx.from != "system" {
                 let from_balance = accounts.get(&tx.from).copied().unwrap_or(0);
-                accounts.insert(tx.from.clone(), from_balance.saturating_sub(tx.amount + tx.fee));
+                accounts.insert(
+                    tx.from.clone(),
+                    from_balance.saturating_sub(tx.amount + tx.fee),
+                );
             }
 
             let to_balance = accounts.get(&tx.to).copied().unwrap_or(0);
@@ -181,20 +186,25 @@ impl Blockchain {
         Ok(new_block)
     }
 
-    async fn mine_block_hash(&self, index: u64, previous_hash: &str, merkle_root: &str) -> (u64, String) {
+    async fn mine_block_hash(
+        &self,
+        index: u64,
+        previous_hash: &str,
+        merkle_root: &str,
+    ) -> (u64, String) {
         let mut nonce = 0u64;
-        
+
         loop {
             let data = format!("{}{}{}{}", index, previous_hash, merkle_root, nonce);
             let hash = self.calculate_hash(&data);
-            
+
             // 检查是否满足难度要求
             if self.is_valid_hash(&hash) {
                 return (nonce, hash);
             }
-            
+
             nonce += 1;
-            
+
             // 模拟挖矿延迟
             if nonce % 10000 == 0 {
                 sleep(Duration::from_micros(1)).await;
@@ -218,7 +228,8 @@ impl Blockchain {
             return "0".to_string();
         }
 
-        let mut hashes: Vec<String> = transactions.iter()
+        let mut hashes: Vec<String> = transactions
+            .iter()
             .map(|tx| self.calculate_hash(&tx.id))
             .collect();
 
@@ -304,9 +315,17 @@ impl SmartContract {
         }
     }
 
-    pub async fn execute_function(&self, function_name: &str, inputs: Vec<String>, caller: String) -> Result<String> {
+    pub async fn execute_function(
+        &self,
+        function_name: &str,
+        inputs: Vec<String>,
+        caller: String,
+    ) -> Result<String> {
         // 查找函数定义
-        let _function = self.abi.functions.iter()
+        let _function = self
+            .abi
+            .functions
+            .iter()
             .find(|f| f.name == function_name)
             .ok_or_else(|| anyhow::anyhow!("函数不存在: {}", function_name))?;
 
@@ -327,7 +346,10 @@ impl SmartContract {
                 if inputs.len() >= 1 {
                     let key = inputs[0].clone();
                     let state = self.state.read().await;
-                    Ok(state.get(&key).cloned().unwrap_or_else(|| "Not found".to_string()))
+                    Ok(state
+                        .get(&key)
+                        .cloned()
+                        .unwrap_or_else(|| "Not found".to_string()))
                 } else {
                     Err(anyhow::anyhow!("参数不足"))
                 }
@@ -336,12 +358,20 @@ impl SmartContract {
                 if inputs.len() >= 2 {
                     let to = inputs[0].clone();
                     let amount = inputs[1].parse::<u64>()?;
-                    
+
                     // 模拟转账逻辑
                     let mut state = self.state.write().await;
-                    let caller_balance = state.get(&caller).unwrap_or(&"0".to_string()).parse::<u64>().unwrap_or(0);
-                    let to_balance = state.get(&to).unwrap_or(&"0".to_string()).parse::<u64>().unwrap_or(0);
-                    
+                    let caller_balance = state
+                        .get(&caller)
+                        .unwrap_or(&"0".to_string())
+                        .parse::<u64>()
+                        .unwrap_or(0);
+                    let to_balance = state
+                        .get(&to)
+                        .unwrap_or(&"0".to_string())
+                        .parse::<u64>()
+                        .unwrap_or(0);
+
                     if caller_balance >= amount {
                         state.insert(caller.clone(), (caller_balance - amount).to_string());
                         state.insert(to.clone(), (to_balance + amount).to_string());
@@ -409,7 +439,7 @@ impl MiningPool {
     pub async fn distribute_rewards(&self, block_reward: u64) -> Result<()> {
         let miners = self.miners.read().await;
         let total_shares: u64 = miners.values().map(|m| m.shares).sum();
-        
+
         if total_shares == 0 {
             return Ok(());
         }
@@ -418,7 +448,7 @@ impl MiningPool {
         let distributed_reward = block_reward - pool_fee;
 
         let mut rewards = self.reward_distribution.write().await;
-        
+
         for miner in miners.values() {
             let miner_reward = (distributed_reward * miner.shares) / total_shares;
             *rewards.entry(miner.address.clone()).or_insert(0) += miner_reward;
@@ -431,7 +461,10 @@ impl MiningPool {
         let miners = self.miners.read().await;
         let total_hashrate: u64 = miners.values().map(|m| m.hashrate).sum();
         let total_shares: u64 = miners.values().map(|m| m.shares).sum();
-        let active_miners = miners.values().filter(|m| m.last_share_time.elapsed() < Duration::from_secs(600)).count();
+        let active_miners = miners
+            .values()
+            .filter(|m| m.last_share_time.elapsed() < Duration::from_secs(600))
+            .count();
 
         PoolStats {
             name: self.name.clone(),
@@ -523,7 +556,7 @@ impl BlockchainNode {
     pub async fn broadcast_transaction(&self, transaction: Transaction) -> Result<()> {
         // 添加到本地区块链
         self.blockchain.add_transaction(transaction.clone()).await?;
-        
+
         // 广播给所有对等节点
         let peers = self.peers.read().await;
         for peer in peers.iter() {
@@ -540,13 +573,17 @@ impl BlockchainNode {
         let local_block_count = self.blockchain.get_block_count().await;
 
         println!("      同步区块 (本地: {})", local_block_count);
-        
+
         for peer in peers.iter() {
             // 模拟从对等节点获取区块
             let peer_block_count = local_block_count + (rand::random::<u32>() as usize) % 3;
-            
+
             if peer_block_count > local_block_count {
-                println!("        从 {} 同步 {} 个新区块", peer, peer_block_count - local_block_count);
+                println!(
+                    "        从 {} 同步 {} 个新区块",
+                    peer,
+                    peer_block_count - local_block_count
+                );
                 // 这里应该实际下载和验证区块
             }
         }
@@ -597,9 +634,15 @@ impl BlockchainAsyncDemo {
         }
 
         println!("    初始账户余额:");
-        println!("      Alice: {} coins", blockchain.get_balance("alice").await);
+        println!(
+            "      Alice: {} coins",
+            blockchain.get_balance("alice").await
+        );
         println!("      Bob: {} coins", blockchain.get_balance("bob").await);
-        println!("      Charlie: {} coins", blockchain.get_balance("charlie").await);
+        println!(
+            "      Charlie: {} coins",
+            blockchain.get_balance("charlie").await
+        );
 
         // 创建交易
         let transaction1 = Transaction {
@@ -628,12 +671,15 @@ impl BlockchainAsyncDemo {
         blockchain.add_transaction(transaction1).await?;
         blockchain.add_transaction(transaction2).await?;
 
-        println!("    添加了 {} 个待处理交易", blockchain.get_pending_transaction_count().await);
+        println!(
+            "    添加了 {} 个待处理交易",
+            blockchain.get_pending_transaction_count().await
+        );
 
         // 挖矿
         println!("    开始挖矿...");
         let block = blockchain.mine_block("miner1".to_string()).await?;
-        
+
         println!("    挖到新区块:");
         println!("      索引: {}", block.index);
         println!("      哈希: {}", block.hash);
@@ -642,10 +688,19 @@ impl BlockchainAsyncDemo {
 
         // 显示更新后的余额
         println!("    交易后的账户余额:");
-        println!("      Alice: {} coins", blockchain.get_balance("alice").await);
+        println!(
+            "      Alice: {} coins",
+            blockchain.get_balance("alice").await
+        );
         println!("      Bob: {} coins", blockchain.get_balance("bob").await);
-        println!("      Charlie: {} coins", blockchain.get_balance("charlie").await);
-        println!("      Miner1: {} coins", blockchain.get_balance("miner1").await);
+        println!(
+            "      Charlie: {} coins",
+            blockchain.get_balance("charlie").await
+        );
+        println!(
+            "      Miner1: {} coins",
+            blockchain.get_balance("miner1").await
+        );
 
         Ok(())
     }
@@ -657,32 +712,57 @@ impl BlockchainAsyncDemo {
                 ContractFunction {
                     name: "setValue".to_string(),
                     inputs: vec![
-                        ContractParameter { name: "key".to_string(), param_type: "string".to_string() },
-                        ContractParameter { name: "value".to_string(), param_type: "string".to_string() },
+                        ContractParameter {
+                            name: "key".to_string(),
+                            param_type: "string".to_string(),
+                        },
+                        ContractParameter {
+                            name: "value".to_string(),
+                            param_type: "string".to_string(),
+                        },
                     ],
-                    outputs: vec![ContractParameter { name: "result".to_string(), param_type: "string".to_string() }],
+                    outputs: vec![ContractParameter {
+                        name: "result".to_string(),
+                        param_type: "string".to_string(),
+                    }],
                     constant: false,
                 },
                 ContractFunction {
                     name: "getValue".to_string(),
-                    inputs: vec![ContractParameter { name: "key".to_string(), param_type: "string".to_string() }],
-                    outputs: vec![ContractParameter { name: "value".to_string(), param_type: "string".to_string() }],
+                    inputs: vec![ContractParameter {
+                        name: "key".to_string(),
+                        param_type: "string".to_string(),
+                    }],
+                    outputs: vec![ContractParameter {
+                        name: "value".to_string(),
+                        param_type: "string".to_string(),
+                    }],
                     constant: true,
                 },
                 ContractFunction {
                     name: "transfer".to_string(),
                     inputs: vec![
-                        ContractParameter { name: "to".to_string(), param_type: "address".to_string() },
-                        ContractParameter { name: "amount".to_string(), param_type: "uint256".to_string() },
+                        ContractParameter {
+                            name: "to".to_string(),
+                            param_type: "address".to_string(),
+                        },
+                        ContractParameter {
+                            name: "amount".to_string(),
+                            param_type: "uint256".to_string(),
+                        },
                     ],
-                    outputs: vec![ContractParameter { name: "success".to_string(), param_type: "bool".to_string() }],
+                    outputs: vec![ContractParameter {
+                        name: "success".to_string(),
+                        param_type: "bool".to_string(),
+                    }],
                     constant: false,
                 },
             ],
             events: vec![],
         };
 
-        let contract = SmartContract::new("StorageContract".to_string(), abi, "deployer".to_string());
+        let contract =
+            SmartContract::new("StorageContract".to_string(), abi, "deployer".to_string());
         println!("    创建智能合约: {}", contract.name);
 
         // 初始化合约状态
@@ -695,15 +775,29 @@ impl BlockchainAsyncDemo {
         println!("    执行合约函数:");
 
         // setValue
-        let result1 = contract.execute_function("setValue", vec!["name".to_string(), "Alice".to_string()], "deployer".to_string()).await?;
+        let result1 = contract
+            .execute_function(
+                "setValue",
+                vec!["name".to_string(), "Alice".to_string()],
+                "deployer".to_string(),
+            )
+            .await?;
         println!("      setValue('name', 'Alice'): {}", result1);
 
         // getValue
-        let result2 = contract.execute_function("getValue", vec!["name".to_string()], "alice".to_string()).await?;
+        let result2 = contract
+            .execute_function("getValue", vec!["name".to_string()], "alice".to_string())
+            .await?;
         println!("      getValue('name'): {}", result2);
 
         // transfer
-        let result3 = contract.execute_function("transfer", vec!["alice".to_string(), "100".to_string()], "deployer".to_string()).await?;
+        let result3 = contract
+            .execute_function(
+                "transfer",
+                vec!["alice".to_string(), "100".to_string()],
+                "deployer".to_string(),
+            )
+            .await?;
         println!("      transfer('alice', 100): {}", result3);
 
         // 显示合约状态
@@ -770,7 +864,7 @@ impl BlockchainAsyncDemo {
         // 分配奖励
         let block_reward = 100;
         pool.distribute_rewards(block_reward).await?;
-        
+
         let rewards = pool.reward_distribution.read().await;
         println!("    奖励分配 (总奖励: {}):", block_reward);
         for (address, reward) in rewards.iter() {
@@ -782,7 +876,8 @@ impl BlockchainAsyncDemo {
 
     async fn demo_network_nodes() -> Result<()> {
         let blockchain = Arc::new(Blockchain::new(2, 100).await);
-        let node = BlockchainNode::new("node1".to_string(), "192.168.1.100".to_string(), blockchain);
+        let node =
+            BlockchainNode::new("node1".to_string(), "192.168.1.100".to_string(), blockchain);
 
         // 添加对等节点
         let peers = vec![
@@ -795,7 +890,11 @@ impl BlockchainAsyncDemo {
             node.add_peer(peer).await;
         }
 
-        println!("    节点 {} 已连接到 {} 个对等节点", node.id, node.peers.read().await.len());
+        println!(
+            "    节点 {} 已连接到 {} 个对等节点",
+            node.id,
+            node.peers.read().await.len()
+        );
 
         // 广播交易
         let transaction = Transaction {
@@ -858,7 +957,11 @@ impl BlockchainAsyncDemo {
         }
 
         // 创建网络节点
-        let node = BlockchainNode::new("main_node".to_string(), "10.0.0.1".to_string(), Arc::clone(&blockchain));
+        let node = BlockchainNode::new(
+            "main_node".to_string(),
+            "10.0.0.1".to_string(),
+            Arc::clone(&blockchain),
+        );
 
         // 模拟系统运行
         println!("    系统运行中...");
@@ -893,13 +996,24 @@ impl BlockchainAsyncDemo {
         println!("    挖到区块 #{}", block.index);
 
         // 4. 分配奖励
-        pool.distribute_rewards(block.transactions.iter().find(|tx| tx.from == "system").unwrap().amount).await?;
+        pool.distribute_rewards(
+            block
+                .transactions
+                .iter()
+                .find(|tx| tx.from == "system")
+                .unwrap()
+                .amount,
+        )
+        .await?;
 
         // 5. 显示系统状态
         println!("    系统状态:");
         println!("      区块数: {}", blockchain.get_block_count().await);
-        println!("      待处理交易: {}", blockchain.get_pending_transaction_count().await);
-        
+        println!(
+            "      待处理交易: {}",
+            blockchain.get_pending_transaction_count().await
+        );
+
         let pool_stats = pool.get_pool_stats().await;
         println!("      矿池矿工数: {}", pool_stats.active_miners);
         println!("      矿池总算力: {} H/s", pool_stats.total_hashrate);

@@ -1,9 +1,12 @@
 //! Rust 1.90 Edition 2024 新特性演示程序
-//! 
+//!
 //! 这个程序展示了如何在 c07_process 项目中使用最新的 Rust 1.90 特性
-use c07_process::prelude::*;
-use c07_process::prelude::{Rust190Features, AsyncTaskDemo, TaskStatus, ProcessConfig, ProcessManager, IpcManager, IpcConfig, Message, SyncManager, SyncConfig};
 use c07_process::error::ProcessError;
+use c07_process::prelude::*;
+use c07_process::prelude::{
+    AsyncTaskDemo, IpcConfig, IpcManager, Message, ProcessConfig, ProcessManager, Rust190Features,
+    SyncConfig, SyncManager, TaskStatus,
+};
 use std::collections::HashMap;
 // 移除未使用的导入
 
@@ -28,7 +31,9 @@ async fn main() -> Result<()> {
     println!("----------------------");
     features.demonstrate_improved_pattern_matching(Ok(1234));
     features.demonstrate_improved_pattern_matching(Err(ProcessError::NotFound(5678)));
-    features.demonstrate_improved_pattern_matching(Err(ProcessError::PermissionDenied("测试权限错误".to_string())));
+    features.demonstrate_improved_pattern_matching(Err(ProcessError::PermissionDenied(
+        "测试权限错误".to_string(),
+    )));
     println!();
 
     // 3. 演示改进的迭代器
@@ -140,7 +145,7 @@ async fn main() -> Result<()> {
 
     println!("🎉 Rust 1.90 新特性演示完成！");
     println!("=============================");
-    
+
     Ok(())
 }
 
@@ -148,59 +153,64 @@ async fn main() -> Result<()> {
 async fn demonstrate_integration_with_existing_features() -> Result<()> {
     // 创建进程管理器
     let mut pm = ProcessManager::new();
-    
+
     // 使用新特性创建进程配置
     let config = create_config_with_new_features()?;
-    
+
     // 启动进程
     let pid = pm.spawn(config)?;
     println!("✅ 使用新特性启动进程，PID: {}", pid);
-    
+
     // 获取进程信息
     if let Ok(info) = pm.get_process_info(pid) {
         println!("📋 进程信息: {:?}", info);
     }
-    
+
     // 等待进程完成
     if let Ok(output) = pm.get_output(pid) {
         println!("📤 进程输出: {:?}", output);
     }
-    
+
     // 创建IPC管理器
     let mut ipc = IpcManager::new(IpcConfig::default());
-    
+
     // 使用新特性创建IPC通道
     ipc.create_named_pipe("rust_190_demo_pipe")?;
     println!("✅ 创建IPC通道: rust_190_demo_pipe");
-    
+
     // 发送消息
-    let message = Message::new(1, "rust_190_demo", "Hello from Rust 1.90!".as_bytes().to_vec(), 1234);
+    let message = Message::new(
+        1,
+        "rust_190_demo",
+        "Hello from Rust 1.90!".as_bytes().to_vec(),
+        1234,
+    );
     ipc.send_message("rust_190_demo_pipe", &message)?;
     println!("📤 发送消息到 IPC 通道");
-    
+
     // 接收消息
     if let Ok(received) = ipc.receive_message("rust_190_demo_pipe") {
         println!("📥 从 IPC 通道接收消息: {:?}", received);
     }
-    
+
     // 创建同步管理器
     let mut sync = SyncManager::new(SyncConfig::default());
-    
+
     // 使用新特性创建同步原语
     let mutex = sync.create_mutex("rust_190_demo_mutex")?;
     println!("✅ 创建互斥锁: rust_190_demo_mutex");
-    
+
     // 测试锁
     if let Ok(guard) = mutex.lock() {
         println!("🔒 获取互斥锁成功");
         drop(guard);
         println!("🔓 释放互斥锁");
     }
-    
+
     // 清理资源
     ipc.cleanup()?;
     println!("🧹 清理完成");
-    
+
     Ok(())
 }
 
@@ -211,13 +221,17 @@ fn create_config_with_new_features() -> Result<ProcessConfig> {
         .into_iter()
         .map(|s| s.to_string())
         .collect();
-    
+
     let mut env = HashMap::new();
     env.insert("RUST_VERSION".to_string(), "1.90".to_string());
     env.insert("EDITION".to_string(), "2024".to_string());
-    
+
     Ok(ProcessConfig {
-        program: if cfg!(windows) { "cmd".to_string() } else { "echo".to_string() },
+        program: if cfg!(windows) {
+            "cmd".to_string()
+        } else {
+            "echo".to_string()
+        },
         args: if cfg!(windows) {
             vec!["/c".to_string(), "echo Hello from Rust 1.90!".to_string()]
         } else {

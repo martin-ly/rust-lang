@@ -47,29 +47,32 @@ pub use declarative::*;
 
 // 重新导出 Rust 1.91 特性
 pub use archive::rust_191_features::{
+    demonstrate_all_rust_191_macro_features,
     // 主要功能函数
     demonstrate_rust_191_macro_features,
-    demonstrate_all_rust_191_macro_features,
-    // 宏展开缓存
-    macro_expansion_cache,
     // 改进的错误消息
     improved_macro_errors,
+    // 宏展开缓存
+    macro_expansion_cache,
     // 过程宏编译优化
     proc_macro_compilation_optimization,
 };
 
 // 重新导出 Rust 1.92 特性
 pub use archive::rust_192_features::{
-    // 主要功能函数
-    demonstrate_rust_192_macro_features,
-    // 宏展开队列
-    MacroExpansionQueue, MacroExpansionItem,
-    // 宏缓存计算
-    calculate_macro_cache_size, MacroMemoryAllocator,
-    // 宏列表比较
-    compare_macro_lists, check_macro_expansion_states,
+    MacroExpansionItem,
     // 性能监控
     MacroExpansionPerformanceMonitor,
+    // 宏展开队列
+    MacroExpansionQueue,
+    MacroMemoryAllocator,
+    // 宏缓存计算
+    calculate_macro_cache_size,
+    check_macro_expansion_states,
+    // 宏列表比较
+    compare_macro_lists,
+    // 主要功能函数
+    demonstrate_rust_192_macro_features,
 };
 
 /// 模块版本信息

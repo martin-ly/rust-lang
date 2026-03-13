@@ -30,11 +30,9 @@ async fn main() -> anyhow::Result<()> {
     let results = futures::future::join_all(tasks).await;
     for (idx, r) in results.into_iter().enumerate() {
         match r {
-            Ok(s) => println!("req#{idx} => status={}" , s),
+            Ok(s) => println!("req#{idx} => status={}", s),
             Err(e) => println!("req#{idx} => error={:#}", e),
         }
     }
     Ok(())
 }
-
-

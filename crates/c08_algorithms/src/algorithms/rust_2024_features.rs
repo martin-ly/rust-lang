@@ -6,11 +6,13 @@
 //! - `Option::is_some_and`/`bool::then_some`
 //! - 返回位置 `impl Trait`（RPITIT）
 //! - 从不返回类型 `!`
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 
 /// let-else：从切片中取首元素并早返回
 pub fn first_or_error(data: &[i32]) -> Result<i32> {
-    let Some(&first) = data.first() else { return Err(anyhow!("empty")); };
+    let Some(&first) = data.first() else {
+        return Err(anyhow!("empty"));
+    };
     Ok(first)
 }
 

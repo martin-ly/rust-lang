@@ -14,8 +14,8 @@
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
 use std::iter::Peekable;
-use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::LazyLock;
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::Duration;
 
 // ==================== 1. 异步上下文中的 LazyLock ====================
@@ -25,7 +25,7 @@ use std::time::Duration;
 /// Rust 1.94.0 为 LazyLock 添加了新方法，使其在异步环境中更加灵活：
 /// - `get()`: 获取引用，如果未初始化则进行初始化
 /// - 这些新方法在异步上下文中特别有用，可以避免在 async fn 中直接使用阻塞初始化
-
+///
 /// 异步全局配置
 ///
 /// Rust 1.94.0: 在异步上下文中使用 LazyLock 管理全局配置
@@ -160,7 +160,6 @@ impl<T: Send + Sync> AsyncLazyValue<T> {
 ///
 /// Rust 1.94.0 添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量，
 /// 这些常量在异步数值计算和科学计算中非常有用。
-
 /// 异步数学计算器
 ///
 /// Rust 1.94.0: 使用数学常量进行异步数值计算
@@ -253,7 +252,6 @@ where
 ///
 /// Rust 1.94.0 为 Peekable 添加了 next_if_map 和 next_if_map_mut 方法，
 /// 这些方法在异步流处理和解析中特别有用。
-
 /// 异步令牌流
 ///
 /// Rust 1.94.0: 使用 Peekable 处理异步数据流
@@ -292,10 +290,11 @@ impl AsyncTokenStream {
     /// Rust 1.94.0: 使用 next_if_map 模式
     pub async fn parse_number(&mut self) -> Option<f64> {
         if let Some(token) = self.peek().await
-            && let Ok(num) = token.parse::<f64>() {
-                self.position += 1;
-                return Some(num);
-            }
+            && let Ok(num) = token.parse::<f64>()
+        {
+            self.position += 1;
+            return Some(num);
+        }
         None
     }
 }
@@ -348,10 +347,11 @@ impl<I: Iterator<Item = String>> AsyncExpressionParser<I> {
 
         // 使用 next_if_map 模式
         if let Some(token) = self.tokens.peek()
-            && let Ok(num) = token.parse::<f64>() {
-                self.tokens.next();
-                return Some(num);
-            }
+            && let Ok(num) = token.parse::<f64>()
+        {
+            self.tokens.next();
+            return Some(num);
+        }
         None
     }
 }
@@ -383,7 +383,6 @@ pub async fn demonstrate_async_stream_processing() {
 ///
 /// Rust 1.94.0 的 array_windows 方法可以与异步流处理结合，
 /// 用于实现高效的异步滑动窗口算法。
-
 /// 异步滑动窗口处理器
 ///
 /// Rust 1.94.0: 在异步上下文中处理数据窗口
@@ -476,7 +475,6 @@ pub async fn demonstrate_async_windows() {
 /// # 5. char 转换在异步解析中的应用 / char Conversion in Async Parsing
 ///
 /// Rust 1.94.0 的 TryFrom<char> for usize 实现可以在异步解析中使用。
-
 /// 异步 Unicode 解析器
 ///
 /// Rust 1.94.0: 使用 char 到 usize 转换进行异步文本处理

@@ -137,7 +137,7 @@ enforce-iter-loop-reborrow = true
 # 强制导入重命名
 enforced-import-renames = []
 
-# 最小Rust版本
+# 最小Rust版本 - 与Cargo.toml保持一致
 msrv = "1.94.0"
 
 # 公共下划线字段行为

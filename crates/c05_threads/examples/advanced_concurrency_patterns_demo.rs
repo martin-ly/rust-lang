@@ -8,11 +8,14 @@
 //! - 背压处理
 //! - 熔断器模式
 //! - 限流器模式
-use std::sync::{Arc, Mutex, atomic::{AtomicUsize, Ordering}};
+use crossbeam_channel::{Receiver, Sender, unbounded};
+use std::collections::HashMap;
+use std::sync::{
+    Arc, Mutex,
+    atomic::{AtomicUsize, Ordering},
+};
 use std::thread;
 use std::time::{Duration, Instant};
-use std::collections::HashMap;
-use crossbeam_channel::{unbounded, Receiver, Sender};
 
 /// Actor 模型实现
 #[allow(dead_code)]
@@ -174,10 +177,7 @@ impl Pipeline {
             }
         });
 
-        Self {
-            input,
-            output,
-        }
+        Self { input, output }
     }
 
     pub fn send(&self, data: String) -> Result<(), crossbeam_channel::SendError<String>> {
@@ -413,7 +413,8 @@ impl RateLimiter {
         let now = Instant::now();
 
         if now - *last_refill >= self.refill_rate {
-            let tokens_to_add = ((now - *last_refill).as_nanos() / self.refill_rate.as_nanos()) as usize;
+            let tokens_to_add =
+                ((now - *last_refill).as_nanos() / self.refill_rate.as_nanos()) as usize;
             let current = self.tokens.load(Ordering::Relaxed);
             let new_tokens = (current + tokens_to_add).min(self.max_tokens);
             self.tokens.store(new_tokens, Ordering::Relaxed);

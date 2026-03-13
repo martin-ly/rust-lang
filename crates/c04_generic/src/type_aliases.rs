@@ -2,11 +2,11 @@
 //!
 //! 该模块包含项目中使用的所有复杂类型别名，
 //! 用于简化类型复杂度并提高代码可读性。
-use std::collections::{HashMap, VecDeque, HashSet};
+use std::collections::{HashMap, HashSet, VecDeque};
+use std::fmt::Debug;
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread::JoinHandle;
 use std::time::Instant;
-use std::fmt::Debug;
 
 // =============================================================================
 // 基础类型别名
@@ -98,7 +98,8 @@ pub type HashMapType<K, V> = HashMap<K, V>;
 pub type AsyncTask = Box<dyn std::future::Future<Output = ()> + Send + Unpin>;
 
 /// 异步结果类型别名
-pub type AsyncResult<T> = std::pin::Pin<Box<dyn std::future::Future<Output = Result<T, String>> + Send>>;
+pub type AsyncResult<T> =
+    std::pin::Pin<Box<dyn std::future::Future<Output = Result<T, String>> + Send>>;
 
 /// 通道发送器类型别名
 pub type Sender<T> = std::sync::mpsc::Sender<T>;
@@ -411,7 +412,8 @@ pub type ChannelRecvError = std::sync::mpsc::RecvError;
 pub type AsyncTaskType = Box<dyn std::future::Future<Output = ()> + Send + Unpin>;
 
 /// 异步结果类型别名（无 Arc 包装）
-pub type AsyncResultType<T> = std::pin::Pin<Box<dyn std::future::Future<Output = Result<T, String>> + Send>>;
+pub type AsyncResultType<T> =
+    std::pin::Pin<Box<dyn std::future::Future<Output = Result<T, String>> + Send>>;
 
 /// 异步发送器类型别名（无 Arc 包装）
 pub type AsyncSenderType<T> = std::sync::mpsc::Sender<T>;

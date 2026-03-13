@@ -28,16 +28,17 @@ pub fn rotate(matrix: &mut [Vec<i32>]) {
 
     // 先转置矩阵
     for i in 0..n {
-        for j in i..n {
-            let temp = matrix[i][j];
-            matrix[i][j] = matrix[j][i];
-            matrix[j][i] = temp;
+        let (head, tail) = matrix.split_at_mut(i);
+        if let Some(row_i) = tail.first_mut() {
+            for (j, row_j) in head.iter_mut().enumerate() {
+                std::mem::swap(&mut row_i[j], &mut row_j[i]);
+            }
         }
     }
 
     // 再翻转每一行
-    for i in 0..n {
-        matrix[i].reverse();
+    for row in matrix.iter_mut().take(n) {
+        row.reverse();
     }
 }
 
@@ -69,14 +70,14 @@ pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {
 
     while top <= bottom && left <= right {
         // 从左到右
-        for j in left..=right {
-            result.push(matrix[top][j]);
-        }
+        result.extend(matrix[top].iter().skip(left).take(right - left + 1));
         top += 1;
 
         // 从上到下
-        for i in top..=bottom {
-            result.push(matrix[i][right]);
+        if top <= bottom {
+            for row in matrix.iter().skip(top).take(bottom - top + 1) {
+                result.push(row[right]);
+            }
         }
         right = right.saturating_sub(1);
 
@@ -120,18 +121,12 @@ pub fn set_zeroes(matrix: &mut [Vec<i32>]) {
     let mut first_col_zero = false;
 
     // 检查第一行和第一列是否有0
-    for j in 0..cols {
-        if matrix[0][j] == 0 {
-            first_row_zero = true;
-            break;
-        }
+    if matrix[0].contains(&0) {
+        first_row_zero = true;
     }
 
-    for i in 0..rows {
-        if matrix[i][0] == 0 {
-            first_col_zero = true;
-            break;
-        }
+    if matrix.iter().any(|row| row[0] == 0) {
+        first_col_zero = true;
     }
 
     // 使用第一行和第一列作为标记
@@ -155,14 +150,12 @@ pub fn set_zeroes(matrix: &mut [Vec<i32>]) {
 
     // 处理第一行和第一列
     if first_row_zero {
-        for j in 0..cols {
-            matrix[0][j] = 0;
-        }
+        matrix[0].iter_mut().take(cols).for_each(|x| *x = 0);
     }
 
     if first_col_zero {
-        for i in 0..rows {
-            matrix[i][0] = 0;
+        for row in matrix.iter_mut().take(rows) {
+            row[0] = 0;
         }
     }
 }
@@ -365,42 +358,22 @@ mod tests {
 
     #[test]
     fn test_rotate() {
-        let mut matrix = vec![
-            vec![1, 2, 3],
-            vec![4, 5, 6],
-            vec![7, 8, 9],
-        ];
+        let mut matrix = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
         rotate(&mut matrix);
-        assert_eq!(matrix, vec![
-            vec![7, 4, 1],
-            vec![8, 5, 2],
-            vec![9, 6, 3],
-        ]);
+        assert_eq!(matrix, vec![vec![7, 4, 1], vec![8, 5, 2], vec![9, 6, 3],]);
     }
 
     #[test]
     fn test_spiral_order() {
-        let matrix = vec![
-            vec![1, 2, 3],
-            vec![4, 5, 6],
-            vec![7, 8, 9],
-        ];
+        let matrix = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
         assert_eq!(spiral_order(matrix), vec![1, 2, 3, 6, 9, 8, 7, 4, 5]);
     }
 
     #[test]
     fn test_set_zeroes() {
-        let mut matrix = vec![
-            vec![1, 1, 1],
-            vec![1, 0, 1],
-            vec![1, 1, 1],
-        ];
+        let mut matrix = vec![vec![1, 1, 1], vec![1, 0, 1], vec![1, 1, 1]];
         set_zeroes(&mut matrix);
-        assert_eq!(matrix, vec![
-            vec![1, 0, 1],
-            vec![0, 0, 0],
-            vec![1, 0, 1],
-        ]);
+        assert_eq!(matrix, vec![vec![1, 0, 1], vec![0, 0, 0], vec![1, 0, 1],]);
     }
 
     #[test]

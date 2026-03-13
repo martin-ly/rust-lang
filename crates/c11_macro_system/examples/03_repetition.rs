@@ -1,4 +1,4 @@
-﻿//! # 示例03: 重复语法
+//! # 示例03: 重复语法
 //!
 //! 演示宏中的重复模式 $(...)*
 use std::collections::HashMap;
@@ -60,13 +60,11 @@ fn main() {
         email: String,
     });
 
-    let person = Person::new(
-        "Alice".to_string(),
-        30,
-        "alice@example.com".to_string(),
+    let person = Person::new("Alice".to_string(), 30, "alice@example.com".to_string());
+    println!(
+        "Person: {{ name: {}, age: {}, email: {} }}",
+        person.name, person.age, person.email
     );
-    println!("Person: {{ name: {}, age: {}, email: {} }}",
-        person.name, person.age, person.email);
     println!();
 
     // 4. 使用hashmap宏

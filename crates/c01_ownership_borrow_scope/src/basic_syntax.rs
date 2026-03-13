@@ -5,9 +5,9 @@
 //! This module provides detailed explanations of Rust's ownership, borrowing, and scope system basic syntax,
 //! including detailed comments, standardized language usage, and comprehensive explanatory examples.
 // use std::collections::HashMap; // 未使用，已注释 / unused, commented out
+use std::cell::RefCell;
 use std::fmt;
 use std::rc::Rc;
-use std::cell::RefCell;
 use std::sync::{Arc, Mutex};
 use std::thread;
 
@@ -27,15 +27,15 @@ pub mod ownership_basics {
     /// 基础变量声明示例 / Basic Variable Declaration Example
     pub fn basic_variable_declaration() {
         // 整数类型 - 实现了 Copy trait，按值复制 / Integer type - implements Copy trait, copied by value
-        let x = 5;                    // x 拥有值 5 / x owns the value 5
-        let y = x;                    // y 获得 x 的副本 / y gets a copy of x
+        let x = 5; // x 拥有值 5 / x owns the value 5
+        let y = x; // y 获得 x 的副本 / y gets a copy of x
         println!("x = {}, y = {}", x, y); // 两者都可以使用 / both can be used
 
         // 字符串类型 - 未实现 Copy trait，所有权转移 / String type - doesn't implement Copy trait, ownership moves
         let s1 = String::from("hello"); // s1 拥有字符串 / s1 owns the string
-        let s2 = s1;                    // s1 的所有权转移给 s2 / s1's ownership moves to s2
+        let s2 = s1; // s1 的所有权转移给 s2 / s1's ownership moves to s2
         // println!("{}", s1);          // 编译错误：s1 不再有效 / Compile error: s1 is no longer valid
-        println!("s2 = {}", s2);        // s2 可以使用 / s2 can be used
+        println!("s2 = {}", s2); // s2 可以使用 / s2 can be used
     }
 
     /// ## 1.2 所有权转移 / Ownership Transfer
@@ -87,7 +87,6 @@ pub mod ownership_basics {
 
     /// 返回所有权的函数 / Function that gives ownership
     fn gives_ownership() -> String {
-
         String::from("yours") // 返回所有权 / return ownership
     }
 
@@ -208,11 +207,7 @@ pub mod lifetime_basics {
 
     /// 返回较长字符串的函数 / Function that returns the longer string
     fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-        if x.len() > y.len() {
-            x
-        } else {
-            y
-        }
+        if x.len() > y.len() { x } else { y }
     }
 
     /// ## 3.2 结构体生命周期 / Struct Lifetimes
@@ -760,11 +755,7 @@ pub mod rust_190_basics {
     /// 在 Rust 1.90 中，编译器可以更好地推断这个函数的生命周期
     /// In Rust 1.90, the compiler can better infer lifetimes for this function
     fn longest_enhanced<'a>(x: &'a str, y: &'a str) -> &'a str {
-        if x.len() > y.len() {
-            x
-        } else {
-            y
-        }
+        if x.len() > y.len() { x } else { y }
     }
 
     /// 复杂生命周期函数 / Complex lifetime function
@@ -790,7 +781,9 @@ pub mod rust_190_basics {
     /// 创建摘录 / Create excerpt
     fn create_excerpt<'a>(text: &'a str) -> ImportantExcerpt<'a> {
         let first_sentence = text.split('.').next().expect("Could not find a '.'");
-        ImportantExcerpt { part: first_sentence }
+        ImportantExcerpt {
+            part: first_sentence,
+        }
     }
 
     /// ## 11.3 新的智能指针特性 / New Smart Pointer Features
@@ -860,7 +853,11 @@ pub mod rust_190_basics {
         let strong = Rc::new(42);
         let weak = Rc::downgrade(&strong);
 
-        println!("Strong count: {}, Weak count: {}", Rc::strong_count(&strong), Rc::weak_count(&strong));
+        println!(
+            "Strong count: {}, Weak count: {}",
+            Rc::strong_count(&strong),
+            Rc::weak_count(&strong)
+        );
 
         // 丢弃强引用 / Drop strong reference
         drop(strong);
@@ -908,7 +905,6 @@ pub mod rust_190_basics {
                 let triple_combined = format!("{} + {} + {}", outer_data, inner_data, nested_data);
                 println!("Triple combined: {}", triple_combined);
             } // nested_data 离开作用域 / nested_data goes out of scope
-
         } // inner_data 离开作用域 / inner_data goes out of scope
 
         // outer_data 仍然有效 / outer_data is still valid
@@ -987,8 +983,8 @@ pub mod rust_190_basics {
 
     /// 演示高级并发模式 / Demonstrate advanced concurrency patterns
     fn demonstrate_advanced_concurrency() {
-        use std::sync::{RwLock, Barrier};
         use std::sync::atomic::{AtomicUsize, Ordering};
+        use std::sync::{Barrier, RwLock};
 
         // 使用读写锁 / Use read-write lock
         let rw_data = Arc::new(RwLock::new(vec![1, 2, 3, 4, 5]));
@@ -1077,7 +1073,8 @@ pub mod rust_190_basics {
 
         // 智能指针自动管理内存
         // Smart pointers automatically manage memory
-        let processed_data = data.iter()
+        let processed_data = data
+            .iter()
             .map(|x| x * 2)
             .filter(|&x| x > 5)
             .collect::<Vec<_>>();
@@ -1114,7 +1111,10 @@ pub mod rust_190_basics {
         // 内存重用 / Memory reuse
         preallocated.clear();
         preallocated.shrink_to_fit();
-        println!("After clear and shrink: capacity = {}", preallocated.capacity());
+        println!(
+            "After clear and shrink: capacity = {}",
+            preallocated.capacity()
+        );
 
         // 使用 Box<[T]> 进行固定大小堆分配 / Use Box<[T]> for fixed-size heap allocation
         let fixed_heap_array = Box::new([1, 2, 3, 4, 5]);
@@ -1245,9 +1245,8 @@ pub mod rust_190_basics {
 
         // 使用 Result 的便捷方法 / Use Result convenience methods
         let numbers = [1, 2, 0, 4, 5];
-        let results: Vec<Result<i32, MathError>> = numbers.iter()
-            .map(|&n| safe_divide(10, n))
-            .collect();
+        let results: Vec<Result<i32, MathError>> =
+            numbers.iter().map(|&n| safe_divide(10, n)).collect();
 
         for (i, result) in results.iter().enumerate() {
             match result {
@@ -1280,19 +1279,13 @@ pub mod rust_190_basics {
 
         // Rust 1.90 中的性能优化
         // Performance optimization in Rust 1.90
-        let sum: i32 = numbers.iter()
-            .map(|x| x * x)
-            .filter(|&x| x % 2 == 0)
-            .sum();
+        let sum: i32 = numbers.iter().map(|x| x * x).filter(|&x| x % 2 == 0).sum();
 
         println!("Sum of even squares: {}", sum);
 
         // 使用并行迭代器（如果可用）
         // Use parallel iterators (if available)
-        let parallel_sum: i32 = numbers.iter()
-            .map(|x| x * x)
-            .filter(|&x| x % 2 == 0)
-            .sum();
+        let parallel_sum: i32 = numbers.iter().map(|x| x * x).filter(|&x| x % 2 == 0).sum();
 
         println!("Parallel sum: {}", parallel_sum);
 
@@ -1321,7 +1314,10 @@ pub mod rust_190_basics {
         // 使用内联函数 / Use inline functions
         let result1 = fast_add(10, 20);
         let result2 = slow_complex_calculation(42);
-        println!("Fast add result: {}, Slow calculation result: {}", result1, result2);
+        println!(
+            "Fast add result: {}, Slow calculation result: {}",
+            result1, result2
+        );
 
         // 内存访问优化 / Memory access optimization
         let mut matrix = vec![vec![0; 1000]; 1000];
@@ -1348,7 +1344,8 @@ pub mod rust_190_basics {
         println!("Doubled data: {:?}", doubled);
 
         // 零成本抽象 / Zero-cost abstractions
-        let processed_data = data.iter()
+        let processed_data = data
+            .iter()
             .map(|&x| x * x)
             .filter(|&x| x % 2 == 0)
             .map(|x| x + 1)
@@ -1367,7 +1364,8 @@ pub mod rust_190_basics {
         let sorted_data = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         let mut count = 0;
         for &value in &sorted_data {
-            if value > 5 { // 分支预测友好 / Branch prediction friendly
+            if value > 5 {
+                // 分支预测友好 / Branch prediction friendly
                 count += 1;
             }
         }

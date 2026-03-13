@@ -11,8 +11,8 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
-use std::num::NonZeroUsize;
 use std::collections::VecDeque;
+use std::num::NonZeroUsize;
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
@@ -197,10 +197,7 @@ impl<T> AsyncTaskScheduler<T> {
 /// 使用 NonZero::div_ceil 计算异步任务池大小
 ///
 /// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算异步池的容量
-pub fn calculate_async_pool_size(
-    total_tasks: usize,
-    tasks_per_worker: NonZeroUsize,
-) -> usize {
+pub fn calculate_async_pool_size(total_tasks: usize, tasks_per_worker: NonZeroUsize) -> usize {
     if total_tasks == 0 {
         return 0;
     }
@@ -268,7 +265,10 @@ impl AsyncBatchConfig {
 /// 使用特化的迭代器比较方法比较异步任务列表
 ///
 /// Rust 1.92.0: Iterator::eq 为 TrustedLen 迭代器特化，性能更好
-pub fn compare_async_task_lists<T: PartialEq>(list1: &[TaskItem<T>], list2: &[TaskItem<T>]) -> bool {
+pub fn compare_async_task_lists<T: PartialEq>(
+    list1: &[TaskItem<T>],
+    list2: &[TaskItem<T>],
+) -> bool {
     // Rust 1.92.0: 特化的迭代器比较方法，性能更好
     list1.iter().eq(list2.iter())
 }
@@ -305,12 +305,16 @@ pub async fn demonstrate_rust_192_async_features() {
         data: "task3",
     });
 
-    println!("   原始队列: {:?}",
-        queue.tasks.iter().map(|t| t.id).collect::<Vec<_>>());
+    println!(
+        "   原始队列: {:?}",
+        queue.tasks.iter().map(|t| t.id).collect::<Vec<_>>()
+    );
 
     queue.rotate(1);
-    println!("   轮转后: {:?}",
-        queue.tasks.iter().map(|t| t.id).collect::<Vec<_>>());
+    println!(
+        "   轮转后: {:?}",
+        queue.tasks.iter().map(|t| t.id).collect::<Vec<_>>()
+    );
 
     // 2. NonZero::div_ceil 演示
     println!("\n2. NonZero::div_ceil 在异步池计算中的应用:");
@@ -341,28 +345,41 @@ pub async fn demonstrate_rust_192_async_features() {
         },
     ];
     let list2 = list1.clone();
-    println!("   任务列表相等: {}", compare_async_task_lists(&list1, &list2));
+    println!(
+        "   任务列表相等: {}",
+        compare_async_task_lists(&list1, &list2)
+    );
 
     let expected_ids = vec![1, 2];
-    println!("   ID 列表匹配: {}", check_async_task_states(&list1, &expected_ids));
+    println!(
+        "   ID 列表匹配: {}",
+        check_async_task_states(&list1, &expected_ids)
+    );
 
     // 4. 异步调度器演示
     println!("\n4. 异步任务调度器:");
     let scheduler = AsyncTaskScheduler::new(1);
-    scheduler.add_task(TaskItem {
-        id: 1,
-        priority: 10,
-        data: "async_task1",
-    }).await;
-    scheduler.add_task(TaskItem {
-        id: 2,
-        priority: 20,
-        data: "async_task2",
-    }).await;
+    scheduler
+        .add_task(TaskItem {
+            id: 1,
+            priority: 10,
+            data: "async_task1",
+        })
+        .await;
+    scheduler
+        .add_task(TaskItem {
+            id: 2,
+            priority: 20,
+            data: "async_task2",
+        })
+        .await;
 
     scheduler.schedule().await;
     if let Some(task) = scheduler.next_task().await {
-        println!("   获取到的任务: ID={}, Priority={}", task.id, task.priority);
+        println!(
+            "   获取到的任务: ID={}, Priority={}",
+            task.id, task.priority
+        );
     }
 }
 

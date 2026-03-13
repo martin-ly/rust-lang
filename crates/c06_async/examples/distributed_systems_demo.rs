@@ -1,5 +1,5 @@
 //! 分布式系统异步演示
-//! 
+//!
 //! 本示例展示了分布式系统中的异步编程模式：
 //! - 分布式锁
 //! - 一致性哈希
@@ -9,20 +9,20 @@
 //! - 分布式配置管理
 //! - 分布式日志
 //! - 分布式监控
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example distributed_systems_demo
 //! ```
-use std::collections::{HashMap, BTreeMap, VecDeque};
+use anyhow::Result;
+use std::collections::hash_map::DefaultHasher;
+use std::collections::{BTreeMap, HashMap, VecDeque};
+use std::hash::{Hash, Hasher};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::sync::{Mutex, RwLock};
-use tokio::time::{interval};
-use anyhow::Result;
+use tokio::time::interval;
 use uuid::Uuid;
-use std::hash::{Hash, Hasher};
-use std::collections::hash_map::DefaultHasher;
 
 /// 分布式锁
 #[allow(dead_code)]
@@ -61,10 +61,10 @@ impl DistributedLock {
         if holder.is_none() {
             *holder = Some(client_id.clone());
             *expiry = Some(Instant::now() + self.lock_timeout);
-            
+
             // 启动心跳
             self.start_heartbeat(client_id.clone()).await;
-            
+
             Ok(true)
         } else {
             Ok(false)
@@ -126,7 +126,7 @@ impl<T: Clone + Send + Sync + std::fmt::Debug> ConsistentHashRing<T> {
         T: Hash,
     {
         let mut ring = self.ring.write().await;
-        
+
         for i in 0..self.virtual_nodes {
             let mut hasher = DefaultHasher::new();
             format!("{:?}:{}", node, i).hash(&mut hasher);
@@ -202,24 +202,27 @@ impl DistributedCache {
 
     pub async fn add_node(&self, node_id: String) -> Result<()> {
         self.nodes.add_node(node_id.clone()).await?;
-        
+
         let mut caches = self.caches.write().await;
-        caches.insert(node_id.clone(), CacheNode {
-            id: node_id,
-            data: HashMap::new(),
-            last_accessed: Instant::now(),
-        });
+        caches.insert(
+            node_id.clone(),
+            CacheNode {
+                id: node_id,
+                data: HashMap::new(),
+                last_accessed: Instant::now(),
+            },
+        );
 
         Ok(())
     }
 
     pub async fn get(&self, key: &str) -> Option<String> {
         let node_id = self.nodes.get_node(key).await?;
-        
+
         let mut caches = self.caches.write().await;
         if let Some(node) = caches.get_mut(&node_id) {
             node.last_accessed = Instant::now();
-            
+
             if let Some(entry) = node.data.get(key) {
                 // 检查是否过期
                 if let Some(expiry) = entry.expiry {
@@ -236,20 +239,23 @@ impl DistributedCache {
     }
 
     pub async fn set(&self, key: String, value: String, ttl: Option<Duration>) -> Result<()> {
-        let node_id = self.nodes.get_node(&key).await
+        let node_id = self
+            .nodes
+            .get_node(&key)
+            .await
             .ok_or_else(|| anyhow::anyhow!("没有可用的缓存节点"))?;
 
         let mut caches = self.caches.write().await;
         if let Some(node) = caches.get_mut(&node_id) {
             node.last_accessed = Instant::now();
-            
+
             let expiry = ttl.map(|duration| Instant::now() + duration);
             let entry = CacheEntry {
                 value,
                 expiry,
                 created_at: Instant::now(),
             };
-            
+
             node.data.insert(key, entry);
         }
 
@@ -328,7 +334,7 @@ impl DistributedMessageQueue {
 
     pub async fn create_topic(&self, name: String, partitions: u32) -> Result<()> {
         let mut topics = self.topics.write().await;
-        
+
         let topic_partitions = (0..partitions)
             .map(|i| Partition {
                 id: i,
@@ -351,7 +357,7 @@ impl DistributedMessageQueue {
         let mut topics = self.topics.write().await;
         if let Some(topic_data) = topics.get_mut(topic) {
             let partition = (rand::random::<u32>() as usize) % topic_data.partitions.len();
-            
+
             let msg = Message {
                 id: Uuid::new_v4().to_string(),
                 payload: message,
@@ -364,24 +370,32 @@ impl DistributedMessageQueue {
         Ok(())
     }
 
-    pub async fn consume(&self, topic: &str, consumer_id: String, group_id: String) -> Result<Option<Message>> {
+    pub async fn consume(
+        &self,
+        topic: &str,
+        consumer_id: String,
+        group_id: String,
+    ) -> Result<Option<Message>> {
         let mut topics = self.topics.write().await;
         let mut consumers = self.consumers.write().await;
 
         // 注册消费者
         if !consumers.contains_key(&consumer_id) {
-            consumers.insert(consumer_id.clone(), vec![Consumer {
-                id: consumer_id.clone(),
-                group_id: group_id.clone(),
-                partitions: vec![],
-                offset: 0,
-            }]);
+            consumers.insert(
+                consumer_id.clone(),
+                vec![Consumer {
+                    id: consumer_id.clone(),
+                    group_id: group_id.clone(),
+                    partitions: vec![],
+                    offset: 0,
+                }],
+            );
         }
 
         if let Some(topic_data) = topics.get_mut(topic) {
             let consumer_group = consumers.get_mut(&consumer_id).unwrap();
             let consumer = &mut consumer_group[0];
-            
+
             // 分配分区（简化实现）
             if consumer.partitions.is_empty() {
                 consumer.partitions = (0..topic_data.partitions.len() as u32).collect();
@@ -404,9 +418,7 @@ impl DistributedMessageQueue {
     pub async fn get_topic_stats(&self, topic: &str) -> Option<TopicStats> {
         let topics = self.topics.read().await;
         if let Some(topic_data) = topics.get(topic) {
-            let total_messages = topic_data.partitions.iter()
-                .map(|p| p.messages.len())
-                .sum();
+            let total_messages = topic_data.partitions.iter().map(|p| p.messages.len()).sum();
 
             Some(TopicStats {
                 name: topic.to_string(),
@@ -472,7 +484,7 @@ impl DistributedTransactionCoordinator {
 
     pub async fn begin_transaction(&self, participants: Vec<String>) -> String {
         let transaction_id = Uuid::new_v4().to_string();
-        
+
         let transaction = Transaction {
             id: transaction_id.clone(),
             status: TransactionStatus::Active,
@@ -490,13 +502,16 @@ impl DistributedTransactionCoordinator {
         {
             let mut participants_guard = self.participants.write().await;
             for participant_id in participants {
-                participants_guard.insert(participant_id.clone(), Participant {
-                    id: participant_id,
-                    service_name: "unknown".to_string(),
-                    prepared: false,
-                    committed: false,
-                    aborted: false,
-                });
+                participants_guard.insert(
+                    participant_id.clone(),
+                    Participant {
+                        id: participant_id,
+                        service_name: "unknown".to_string(),
+                        prepared: false,
+                        committed: false,
+                        aborted: false,
+                    },
+                );
             }
         }
 
@@ -521,12 +536,14 @@ impl DistributedTransactionCoordinator {
 
         if let Some(transaction) = transactions.get_mut(transaction_id) {
             // 检查所有参与者是否已准备
-            let all_prepared = transaction.participants.iter()
+            let all_prepared = transaction
+                .participants
+                .iter()
                 .all(|p| participants.get(p).map(|p| p.prepared).unwrap_or(false));
 
             if all_prepared {
                 transaction.status = TransactionStatus::Committed;
-                
+
                 // 提交所有参与者
                 for participant_id in &transaction.participants {
                     if let Some(participant) = participants.get_mut(participant_id) {
@@ -535,7 +552,7 @@ impl DistributedTransactionCoordinator {
                 }
             } else {
                 transaction.status = TransactionStatus::Aborted;
-                
+
                 // 中止所有参与者
                 for participant_id in &transaction.participants {
                     if let Some(participant) = participants.get_mut(participant_id) {
@@ -554,7 +571,7 @@ impl DistributedTransactionCoordinator {
 
         if let Some(transaction) = transactions.get_mut(transaction_id) {
             transaction.status = TransactionStatus::Aborted;
-            
+
             // 中止所有参与者
             for participant_id in &transaction.participants {
                 if let Some(participant) = participants.get_mut(participant_id) {
@@ -603,12 +620,18 @@ impl DistributedSystemsDemo {
         // 客户端 1 尝试获取锁
         let client1 = "client-1".to_string();
         let acquired1 = lock.acquire(client1.clone()).await?;
-        println!("    客户端 1 获取锁: {}", if acquired1 { "成功" } else { "失败" });
+        println!(
+            "    客户端 1 获取锁: {}",
+            if acquired1 { "成功" } else { "失败" }
+        );
 
         // 客户端 2 尝试获取锁
         let client2 = "client-2".to_string();
         let acquired2 = lock.acquire(client2.clone()).await?;
-        println!("    客户端 2 获取锁: {}", if acquired2 { "成功" } else { "失败" });
+        println!(
+            "    客户端 2 获取锁: {}",
+            if acquired2 { "成功" } else { "失败" }
+        );
 
         // 客户端 1 释放锁
         lock.release(client1).await?;
@@ -616,7 +639,10 @@ impl DistributedSystemsDemo {
 
         // 客户端 2 再次尝试获取锁
         let acquired2_again = lock.acquire(client2.clone()).await?;
-        println!("    客户端 2 再次获取锁: {}", if acquired2_again { "成功" } else { "失败" });
+        println!(
+            "    客户端 2 再次获取锁: {}",
+            if acquired2_again { "成功" } else { "失败" }
+        );
 
         lock.release(client2).await?;
 
@@ -636,7 +662,7 @@ impl DistributedSystemsDemo {
         // 测试键的分布
         let test_keys = vec!["key-1", "key-2", "key-3", "key-4", "key-5"];
         println!("    键分布测试:");
-        
+
         for key in &test_keys {
             if let Some(node) = ring.get_node(key).await {
                 println!("      {} -> {}", key, node);
@@ -678,7 +704,13 @@ impl DistributedSystemsDemo {
         ];
 
         for (key, value) in &test_data {
-            cache.set(key.to_string(), value.to_string(), Some(Duration::from_secs(60))).await?;
+            cache
+                .set(
+                    key.to_string(),
+                    value.to_string(),
+                    Some(Duration::from_secs(60)),
+                )
+                .await?;
             println!("    设置缓存: {} = {}", key, value);
         }
 
@@ -729,8 +761,16 @@ impl DistributedSystemsDemo {
         let group_id = "user-service".to_string();
 
         for i in 0..messages.len() {
-            if let Some(message) = queue.consume("user-events", consumer_id.clone(), group_id.clone()).await? {
-                println!("      消费消息 {}: {} (分区: {})", i + 1, message.payload, message.partition);
+            if let Some(message) = queue
+                .consume("user-events", consumer_id.clone(), group_id.clone())
+                .await?
+            {
+                println!(
+                    "      消费消息 {}: {} (分区: {})",
+                    i + 1,
+                    message.payload,
+                    message.partition
+                );
             } else {
                 println!("      没有更多消息");
                 break;
@@ -752,7 +792,11 @@ impl DistributedSystemsDemo {
         let coordinator = DistributedTransactionCoordinator::new();
 
         // 开始分布式事务
-        let participants = vec!["service-a".to_string(), "service-b".to_string(), "service-c".to_string()];
+        let participants = vec![
+            "service-a".to_string(),
+            "service-b".to_string(),
+            "service-c".to_string(),
+        ];
         let transaction_id = coordinator.begin_transaction(participants.clone()).await;
         println!("    开始分布式事务: {}", transaction_id);
 
@@ -760,7 +804,11 @@ impl DistributedSystemsDemo {
         println!("    准备阶段:");
         for participant in &participants {
             let prepared = coordinator.prepare(&transaction_id, participant).await?;
-            println!("      {} 准备: {}", participant, if prepared { "成功" } else { "失败" });
+            println!(
+                "      {} 准备: {}",
+                participant,
+                if prepared { "成功" } else { "失败" }
+            );
         }
 
         // 提交事务
@@ -771,7 +819,7 @@ impl DistributedSystemsDemo {
         println!("    模拟失败事务:");
         let participants2 = vec!["service-x".to_string(), "service-y".to_string()];
         let transaction_id2 = coordinator.begin_transaction(participants2.clone()).await;
-        
+
         // 只让一个服务准备成功
         coordinator.prepare(&transaction_id2, "service-x").await?;
         println!("      service-x 准备: 成功");

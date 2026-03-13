@@ -9,8 +9,8 @@
 //! - 形式化验证和证明
 use anyhow::Result;
 use rayon::prelude::*;
-use std::collections::{HashMap, HashSet, VecDeque};
 use std::cmp::Ordering;
+use std::collections::{HashMap, HashSet, VecDeque};
 use std::hash::Hash;
 use std::time::Instant;
 
@@ -263,16 +263,11 @@ impl SearchingEngine {
     }
 
     /// 异步线性搜索
-    pub async fn linear_search_async<T>(
-        data: Vec<T>,
-        target: T,
-    ) -> Result<SearchResult<T>>
+    pub async fn linear_search_async<T>(data: Vec<T>, target: T) -> Result<SearchResult<T>>
     where
         T: PartialEq + Send + Clone + 'static,
     {
-        let handle = tokio::task::spawn_blocking(move || {
-            Self::linear_search_sync(&data, &target)
-        });
+        let handle = tokio::task::spawn_blocking(move || Self::linear_search_sync(&data, &target));
 
         Ok(handle.await?)
     }
@@ -331,16 +326,11 @@ impl SearchingEngine {
     }
 
     /// 异步二分搜索
-    pub async fn binary_search_async<T>(
-        data: Vec<T>,
-        target: T,
-    ) -> Result<SearchResult<T>>
+    pub async fn binary_search_async<T>(data: Vec<T>, target: T) -> Result<SearchResult<T>>
     where
         T: Ord + Send + Clone + 'static,
     {
-        let handle = tokio::task::spawn_blocking(move || {
-            Self::binary_search_sync(&data, &target)
-        });
+        let handle = tokio::task::spawn_blocking(move || Self::binary_search_sync(&data, &target));
 
         Ok(handle.await?)
     }
@@ -460,8 +450,9 @@ impl SearchingEngine {
                 }
             }
 
-            let pos = left + (((target - data[left]) as f64 * (right - left) as f64)
-                / (data[right] - data[left]) as f64) as usize;
+            let pos = left
+                + (((target - data[left]) as f64 * (right - left) as f64)
+                    / (data[right] - data[left]) as f64) as usize;
 
             if pos > right {
                 break;
@@ -544,14 +535,14 @@ impl SearchingEngine {
         let start_linear = prev.saturating_sub(step);
         let end_linear = prev.min(n);
 
-        for i in start_linear..end_linear {
+        for (i, item) in data.iter().enumerate().take(end_linear).skip(start_linear) {
             nodes_visited += 1;
             comparisons += 1;
-            if data[i] == *target {
+            if item == target {
                 return SearchResult {
                     found: true,
                     index: Some(i),
-                    value: Some(data[i].clone()),
+                    value: Some(item.clone()),
                     execution_time: start.elapsed(),
                     comparisons,
                     nodes_visited,
@@ -578,7 +569,12 @@ impl SearchingEngine {
     }
 
     /// 三分搜索（用于单峰函数）
-    pub fn ternary_search_sync<F>(mut left: f64, mut right: f64, f: F, iterations: usize) -> SearchResult<f64>
+    pub fn ternary_search_sync<F>(
+        mut left: f64,
+        mut right: f64,
+        f: F,
+        iterations: usize,
+    ) -> SearchResult<f64>
     where
         F: Fn(f64) -> f64,
     {
@@ -632,22 +628,22 @@ impl SearchingEngine {
             nodes_visited += 1;
             comparisons += 1;
 
-        if &node == target {
-            path.push(node.clone());
-            let path_len = path.len();
-            return SearchResult {
-                found: true,
-                index: None,
-                value: Some(node),
-                execution_time: start_time.elapsed(),
-                comparisons,
-                nodes_visited,
-                algorithm: SearchingAlgorithm::DepthFirst,
-                implementation: ImplementationType::Synchronous,
-                path: Some(path),
-                distance: Some(path_len as f64),
-            };
-        }
+            if &node == target {
+                path.push(node.clone());
+                let path_len = path.len();
+                return SearchResult {
+                    found: true,
+                    index: None,
+                    value: Some(node),
+                    execution_time: start_time.elapsed(),
+                    comparisons,
+                    nodes_visited,
+                    algorithm: SearchingAlgorithm::DepthFirst,
+                    implementation: ImplementationType::Synchronous,
+                    path: Some(path),
+                    distance: Some(path_len as f64),
+                };
+            }
 
             if !visited.insert(node.clone()) {
                 continue;
@@ -761,9 +757,15 @@ impl SearchingValidator {
         result: &SearchResult<T>,
     ) -> bool {
         if result.found {
-            let Some(index) = result.index else { return false; };
-            if index >= data.len() { return false; }
-            let Some(value) = &result.value else { return false; };
+            let Some(index) = result.index else {
+                return false;
+            };
+            if index >= data.len() {
+                return false;
+            }
+            let Some(value) = &result.value else {
+                return false;
+            };
             data[index] == *value && value == target
         } else {
             // 如果没找到，验证数据中确实没有目标
@@ -773,9 +775,7 @@ impl SearchingValidator {
 
     /// 验证搜索算法的性能
     pub fn validate_performance(result: &SearchResult<()>) -> bool {
-        result.execution_time.as_nanos() > 0
-            && result.comparisons > 0
-            && result.nodes_visited > 0
+        result.execution_time.as_nanos() > 0 && result.comparisons > 0 && result.nodes_visited > 0
     }
 }
 
@@ -914,7 +914,8 @@ mod tests {
         let complexities = SearchingComplexity::get_all_complexities();
         assert_eq!(complexities.len(), 10);
 
-        let binary_complexity = complexities.iter()
+        let binary_complexity = complexities
+            .iter()
             .find(|c| c.algorithm == SearchingAlgorithm::Binary)
             .unwrap();
         assert_eq!(binary_complexity.time_complexity, "O(log n)");
@@ -928,7 +929,9 @@ mod tests {
         let data = vec![1, 3, 5, 7, 9];
         let result = SearchingEngine::linear_search_sync(&data, &5);
 
-        assert!(SearchingValidator::validate_search_result(&data, &5, &result));
+        assert!(SearchingValidator::validate_search_result(
+            &data, &5, &result
+        ));
         assert!(SearchingValidator::validate_performance(&SearchResult {
             found: true,
             index: Some(2),

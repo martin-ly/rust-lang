@@ -138,7 +138,10 @@ impl<T> CacheFriendlyArray<T> {
     /// 设置元素
     pub fn set(&mut self, index: usize, value: T) -> Result<(), String> {
         if index >= self.size {
-            return Err(format!("Index {} out of bounds (size: {})", index, self.size));
+            return Err(format!(
+                "Index {} out of bounds (size: {})",
+                index, self.size
+            ));
         }
         self.data[index] = value;
         Ok(())
@@ -300,6 +303,10 @@ mod tests {
         // 验证缓存行对齐
         let counter = CacheAlignedCounter::new(0);
         let addr = &counter as *const CacheAlignedCounter as usize;
-        assert_eq!(addr % CACHE_LINE_SIZE, 0, "Counter should be cache-line aligned");
+        assert_eq!(
+            addr % CACHE_LINE_SIZE,
+            0,
+            "Counter should be cache-line aligned"
+        );
     }
 }

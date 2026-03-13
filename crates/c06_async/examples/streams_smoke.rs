@@ -4,7 +4,7 @@ use std::time::Duration;
 
 #[tokio::main]
 async fn main() {
-    use tokio_stream::{wrappers::IntervalStream, StreamExt};
+    use tokio_stream::{StreamExt, wrappers::IntervalStream};
     let interval = tokio::time::interval(Duration::from_millis(10));
     let mut s = IntervalStream::new(interval).take(5);
     let mut acc = 0u64;
@@ -15,5 +15,3 @@ async fn main() {
     }
     println!("streams_smoke: acc={}", acc);
 }
-
-

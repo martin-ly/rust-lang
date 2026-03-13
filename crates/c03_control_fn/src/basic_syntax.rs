@@ -119,7 +119,11 @@ where
     T: Clone + PartialEq + Display,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "BasicSyntaxDemo(data: {}, count: {})", self.data, self.count)
+        write!(
+            f,
+            "BasicSyntaxDemo(data: {}, count: {})",
+            self.data, self.count
+        )
     }
 }
 
@@ -155,11 +159,13 @@ pub mod variable_binding {
         println!("显式类型注解: z = {}, name = {}", z, name);
 
         // 4. 类型推断
-        let inferred_int = 42;        // 推断为 i32
-        let inferred_float = std::f64::consts::PI;    // 推断为 f64
+        let inferred_int = 42; // 推断为 i32
+        let inferred_float = std::f64::consts::PI; // 推断为 f64
         let inferred_string = "Hello"; // 推断为 &str
-        println!("类型推断: int = {}, float = {}, string = {}",
-                inferred_int, inferred_float, inferred_string);
+        println!(
+            "类型推断: int = {}, float = {}, string = {}",
+            inferred_int, inferred_float, inferred_string
+        );
 
         // 5. 变量遮蔽（shadowing）
         let shadowed = 1;
@@ -229,15 +235,23 @@ pub mod variable_binding {
 
         // 2. 结构体解构
         let demo = BasicSyntaxDemo::new(42);
-        let BasicSyntaxDemo { data, count, metadata } = demo;
-        println!("结构体解构: data = {}, count = {}, metadata = {:?}",
-                data, count, metadata);
+        let BasicSyntaxDemo {
+            data,
+            count,
+            metadata,
+        } = demo;
+        println!(
+            "结构体解构: data = {}, count = {}, metadata = {:?}",
+            data, count, metadata
+        );
 
         // 3. 数组/切片解构
         let array = [1, 2, 3, 4, 5];
         let [first, second, .., last] = array;
-        println!("数组解构: first = {}, second = {}, last = {}",
-                first, second, last);
+        println!(
+            "数组解构: first = {}, second = {}, last = {}",
+            first, second, last
+        );
 
         // 4. 枚举解构
         #[allow(dead_code)]
@@ -343,11 +357,8 @@ pub mod type_system {
         println!("向量: {:?}", vector);
 
         // 5. 字符串向量
-        let string_vector: Vec<String> = vec![
-            "Hello".to_string(),
-            "World".to_string(),
-            "Rust".to_string(),
-        ];
+        let string_vector: Vec<String> =
+            vec!["Hello".to_string(), "World".to_string(), "Rust".to_string()];
         println!("字符串向量: {:?}", string_vector);
     }
 
@@ -358,10 +369,10 @@ pub mod type_system {
         println!("\n=== 类型推断演示 ===");
 
         // 1. 基础类型推断
-        let x = 42;           // 推断为 i32
-        let y = std::f64::consts::PI;         // 推断为 f64
-        let z = true;         // 推断为 bool
-        let s = "Hello";      // 推断为 &str
+        let x = 42; // 推断为 i32
+        let y = std::f64::consts::PI; // 推断为 f64
+        let z = true; // 推断为 bool
+        let s = "Hello"; // 推断为 &str
 
         println!("推断类型:");
         println!("  x = {} (i32)", x);
@@ -656,7 +667,10 @@ pub mod functions {
         // 1. 基础泛型函数
         let int_result = identity(42);
         let string_result = identity("Hello");
-        println!("泛型函数结果: int = {}, string = {}", int_result, string_result);
+        println!(
+            "泛型函数结果: int = {}, string = {}",
+            int_result, string_result
+        );
 
         // 2. 泛型函数与约束
         let max_int = max_value(10, 20);
@@ -723,11 +737,7 @@ pub mod functions {
 
     /// 递归计算阶乘
     pub fn factorial(n: u32) -> u32 {
-        if n <= 1 {
-            1
-        } else {
-            n * factorial(n - 1)
-        }
+        if n <= 1 { 1 } else { n * factorial(n - 1) }
     }
 
     /// 泛型恒等函数
@@ -969,7 +979,10 @@ mod tests {
     #[test]
     fn test_max_value() {
         assert_eq!(functions::max_value(10, 20), 20);
-        assert_eq!(functions::max_value(std::f64::consts::PI, 2.71), std::f64::consts::PI);
+        assert_eq!(
+            functions::max_value(std::f64::consts::PI, 2.71),
+            std::f64::consts::PI
+        );
     }
 
     #[test]

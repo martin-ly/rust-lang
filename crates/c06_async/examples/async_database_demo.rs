@@ -1,5 +1,5 @@
 //! 异步数据库和缓存演示
-//! 
+//!
 //! 本示例展示了异步数据库和缓存操作：
 //! - 数据库连接池管理
 //! - 异步查询和事务
@@ -7,18 +7,18 @@
 //! - 批量操作优化
 //! - 读写分离
 //! - 分布式锁
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example async_database_demo
 //! ```
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};
-use tokio::sync::{RwLock, Mutex, Semaphore, Notify};
+use tokio::sync::{Mutex, Notify, RwLock, Semaphore};
 use tokio::time::{sleep, timeout};
-use anyhow::Result;
-use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -76,8 +76,9 @@ impl ConnectionPool {
     async fn get_connection(&self) -> Result<DatabaseConnection> {
         let _permit = timeout(
             self.config.connection_timeout,
-            self.available_connections.acquire()
-        ).await??;
+            self.available_connections.acquire(),
+        )
+        .await??;
 
         // 更新统计信息
         {
@@ -112,10 +113,10 @@ impl DatabaseConnection {
         T: for<'de> Deserialize<'de> + Clone,
     {
         let _permit = self.pool.acquire().await.unwrap();
-        
+
         // 模拟查询延迟
         sleep(Duration::from_millis(100)).await;
-        
+
         // 更新统计信息
         {
             let mut stats = self.stats.lock().await;
@@ -131,15 +132,15 @@ impl DatabaseConnection {
         F: FnOnce() -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<R>> + Send>>,
     {
         let _permit = self.pool.acquire().await.unwrap();
-        
+
         println!("    🔄 开始事务");
-        
+
         // 模拟事务处理
         let result = f().await?;
-        
+
         // 模拟提交延迟
         sleep(Duration::from_millis(50)).await;
-        
+
         println!("    ✅ 事务提交成功");
         Ok(result)
     }
@@ -177,7 +178,7 @@ impl CacheManager {
 
     async fn get(&self, key: &str) -> Option<String> {
         let mut cache = self.cache.write().await;
-        
+
         if let Some(entry) = cache.get_mut(key) {
             // 检查是否过期
             if entry.created_at.elapsed() < self.ttl {
@@ -188,29 +189,34 @@ impl CacheManager {
                 cache.remove(key);
             }
         }
-        
+
         None
     }
 
     async fn set(&self, key: String, value: String) -> Result<()> {
         let mut cache = self.cache.write().await;
-        
+
         // 检查缓存大小限制
         if cache.len() >= self.max_size && !cache.contains_key(&key) {
             // 删除最少使用的条目
-            if let Some((oldest_key, _)) = cache.iter()
+            if let Some((oldest_key, _)) = cache
+                .iter()
                 .min_by_key(|(_, entry)| entry.access_count)
-                .map(|(k, _)| (k.clone(), ())) {
+                .map(|(k, _)| (k.clone(), ()))
+            {
                 cache.remove(&oldest_key);
             }
         }
-        
-        cache.insert(key, CacheEntry {
-            value,
-            created_at: Instant::now(),
-            access_count: 1,
-        });
-        
+
+        cache.insert(
+            key,
+            CacheEntry {
+                value,
+                created_at: Instant::now(),
+                access_count: 1,
+            },
+        );
+
         Ok(())
     }
 
@@ -229,10 +235,11 @@ impl CacheManager {
     async fn get_stats(&self) -> CacheStats {
         let cache = self.cache.read().await;
         let total_entries = cache.len();
-        let expired_entries = cache.values()
+        let expired_entries = cache
+            .values()
             .filter(|entry| entry.created_at.elapsed() >= self.ttl)
             .count();
-        
+
         CacheStats {
             total_entries,
             expired_entries,
@@ -298,20 +305,20 @@ impl DatabaseDemo {
 
     async fn connection_pool_demo(&self) -> Result<()> {
         let mut handles = vec![];
-        
+
         // 创建多个并发任务来测试连接池
         for i in 0..15 {
             let pool = self.connection_pool.clone();
             let handle = tokio::spawn(async move {
                 println!("    🏊 任务 {} 请求连接", i);
-                
+
                 match pool.get_connection().await {
                     Ok(connection) => {
                         println!("    ✅ 任务 {} 获得连接: {}", i, connection.id);
-                        
+
                         // 模拟数据库操作
                         sleep(Duration::from_millis(200)).await;
-                        
+
                         println!("    🔓 任务 {} 释放连接", i);
                     }
                     Err(e) => {
@@ -319,15 +326,15 @@ impl DatabaseDemo {
                     }
                 }
             });
-            
+
             handles.push(handle);
         }
-        
+
         // 等待所有任务完成
         for handle in handles {
             handle.await?;
         }
-        
+
         // 显示连接池统计信息
         let stats = self.connection_pool.get_stats().await;
         println!("    连接池统计:");
@@ -335,13 +342,13 @@ impl DatabaseDemo {
         println!("      活跃连接数: {}", stats.active_connections);
         println!("      总查询数: {}", stats.total_queries);
         println!("      失败查询数: {}", stats.failed_queries);
-        
+
         Ok(())
     }
 
     async fn async_queries_demo(&self) -> Result<()> {
         let connection = self.connection_pool.get_connection().await?;
-        
+
         // 模拟多个并发查询
         let queries = vec![
             "SELECT * FROM users WHERE active = true",
@@ -349,16 +356,16 @@ impl DatabaseDemo {
             "SELECT product_id, SUM(quantity) FROM order_items GROUP BY product_id",
             "SELECT * FROM products WHERE price > 100 ORDER BY created_at DESC",
         ];
-        
+
         let mut handles = vec![];
-        
+
         for (i, query) in queries.iter().enumerate() {
             let conn = connection.clone();
             let query = query.to_string();
-            
+
             let handle = tokio::spawn(async move {
                 println!("    🔍 执行查询 {}: {}", i + 1, query);
-                
+
                 match conn.execute_query::<User>(&query).await {
                     Ok(_) => {
                         println!("    ✅ 查询 {} 完成", i + 1);
@@ -368,37 +375,39 @@ impl DatabaseDemo {
                     }
                 }
             });
-            
+
             handles.push(handle);
         }
-        
+
         // 等待所有查询完成
         for handle in handles {
             handle.await?;
         }
-        
+
         Ok(())
     }
 
     async fn transaction_demo(&self) -> Result<()> {
         let connection = self.connection_pool.get_connection().await?;
-        
+
         // 模拟事务操作
-        let result = connection.execute_transaction(|| {
-            Box::pin(async move {
-                println!("      📝 更新用户信息");
-                sleep(Duration::from_millis(100)).await;
-                
-                println!("      💰 更新账户余额");
-                sleep(Duration::from_millis(100)).await;
-                
-                println!("      📧 发送通知邮件");
-                sleep(Duration::from_millis(100)).await;
-                
-                Ok("事务执行成功".to_string())
+        let result = connection
+            .execute_transaction(|| {
+                Box::pin(async move {
+                    println!("      📝 更新用户信息");
+                    sleep(Duration::from_millis(100)).await;
+
+                    println!("      💰 更新账户余额");
+                    sleep(Duration::from_millis(100)).await;
+
+                    println!("      📧 发送通知邮件");
+                    sleep(Duration::from_millis(100)).await;
+
+                    Ok("事务执行成功".to_string())
+                })
             })
-        }).await?;
-        
+            .await?;
+
         println!("      {}", result);
         Ok(())
     }
@@ -411,7 +420,7 @@ impl DatabaseDemo {
             let value = format!("用户数据 {}", i);
             self.cache.set(key, value).await?;
         }
-        
+
         // 缓存读取
         println!("    📖 读取缓存数据");
         for i in 0..7 {
@@ -425,31 +434,31 @@ impl DatabaseDemo {
                 }
             }
         }
-        
+
         // 显示缓存统计
         let stats = self.cache.get_stats().await;
         println!("    📊 缓存统计:");
         println!("      总条目数: {}", stats.total_entries);
         println!("      过期条目数: {}", stats.expired_entries);
         println!("      命中率: {:.1}%", stats.hit_rate * 100.0);
-        
+
         Ok(())
     }
 
     async fn batch_operations_demo(&self) -> Result<()> {
         println!("    📦 批量插入操作");
-        
+
         let connection = self.connection_pool.get_connection().await?;
         let batch_size = 100;
         let total_records = 500;
-        
+
         let start = std::time::Instant::now();
-        
+
         for batch_start in (0..total_records).step_by(batch_size) {
             let batch_end = (batch_start + batch_size).min(total_records);
-            
+
             println!("      📝 处理批次: {} - {}", batch_start, batch_end);
-            
+
             // 模拟批量插入
             let mut futures = vec![];
             for _i in batch_start..batch_end {
@@ -461,15 +470,18 @@ impl DatabaseDemo {
                 };
                 futures.push(future);
             }
-            
+
             // 并发执行批次内的插入
             futures::future::join_all(futures).await;
         }
-        
+
         let duration = start.elapsed();
         println!("      ✅ 批量操作完成，耗时: {:?}", duration);
-        println!("      📊 平均速度: {:.0} 记录/秒", total_records as f64 / duration.as_secs_f64());
-        
+        println!(
+            "      📊 平均速度: {:.0} 记录/秒",
+            total_records as f64 / duration.as_secs_f64()
+        );
+
         Ok(())
     }
 
@@ -477,79 +489,86 @@ impl DatabaseDemo {
         // 模拟读写分离：读从从库，写从主库
         let read_connection = self.connection_pool.get_connection().await?;
         let write_connection = self.connection_pool.get_connection().await?;
-        
+
         println!("    📖 从从库读取数据");
         // 模拟从从库读取
-        read_connection.execute_query::<User>("SELECT * FROM users").await?;
-        
+        read_connection
+            .execute_query::<User>("SELECT * FROM users")
+            .await?;
+
         println!("    📝 向主库写入数据");
         // 模拟向主库写入
-        write_connection.execute_query::<User>("INSERT INTO users (name, email) VALUES ('新用户', 'new@example.com')").await?;
-        
+        write_connection
+            .execute_query::<User>(
+                "INSERT INTO users (name, email) VALUES ('新用户', 'new@example.com')",
+            )
+            .await?;
+
         println!("    ✅ 读写分离操作完成");
-        
+
         Ok(())
     }
 
     async fn distributed_lock_demo(&self) -> Result<()> {
         let lock_key = "distributed_lock:critical_section";
         let lock_timeout = Duration::from_secs(5);
-        
+
         // 模拟分布式锁
         let lock_manager = Arc::new(Mutex::new(HashMap::<String, Instant>::new()));
         let notify = Arc::new(Notify::new());
-        
+
         // 启动多个任务竞争锁
         let mut handles = vec![];
-        
+
         for i in 0..3 {
             let lock_manager = Arc::clone(&lock_manager);
             let notify = Arc::clone(&notify);
-            
+
             let handle = tokio::spawn(async move {
                 println!("      🔒 任务 {} 尝试获取分布式锁", i);
-                
+
                 loop {
                     // 尝试获取锁
                     {
                         let mut locks = lock_manager.lock().await;
-                        if !locks.contains_key(lock_key) || 
-                           locks.get(lock_key).unwrap().elapsed() > lock_timeout {
+                        if !locks.contains_key(lock_key)
+                            || locks.get(lock_key).unwrap().elapsed() > lock_timeout
+                        {
                             locks.insert(lock_key.to_string(), Instant::now());
                             println!("      ✅ 任务 {} 获得分布式锁", i);
                             break;
                         }
                     }
-                    
+
                     // 等待锁释放
                     notify.notified().await;
                 }
-                
+
                 // 持有锁执行关键代码
                 println!("      🔧 任务 {} 执行关键代码", i);
                 sleep(Duration::from_millis(1000)).await;
-                
+
                 // 释放锁
                 {
                     let mut locks = lock_manager.lock().await;
                     locks.remove(lock_key);
                     println!("      🔓 任务 {} 释放分布式锁", i);
                 }
-                
+
                 // 通知其他等待的任务
                 notify.notify_waiters();
             });
-            
+
             handles.push(handle);
         }
-        
+
         // 等待所有任务完成
         for handle in handles {
             handle.await?;
         }
-        
+
         println!("    ✅ 分布式锁演示完成");
-        
+
         Ok(())
     }
 }

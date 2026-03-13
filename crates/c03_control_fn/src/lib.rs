@@ -14,31 +14,50 @@
 //! - **并行前端**: 并行编译支持
 // 导出核心模块
 pub mod async_control_flow;
-pub mod rust_194_features;  // Rust 1.94 特性
+pub mod rust_194_features; // Rust 1.94 特性
 
 // 重新导出Rust 1.94.0新特性
 pub use rust_194_features::{
-    // array_windows 相关
-    StateMachineParser, EventStreamProcessor,
-    // LazyCell 控制流
-    ConditionalLazyController, ControlFlowLazyCache,
-    // 数学常量控制流
-    ConvergenceController, golden_section_search, controlled_harmonic_sum,
-    math_consts,
-    // Peekable新方法
-    SimpleLexer, Token, TokenIterator, DataFilterProcessor, GenericParser, ParseResult,
     // 闭包和控制流
-    ClosureCaptureAnalyzer, create_precise_closure,
-    // Match增强
-    MatchResult, EnhancedMatcher, process_match_result,
-    // 函数指针优化
-    FunctionPtrWrapper, compose_functions, conditional_execute,
+    ClosureCaptureAnalyzer,
+    // LazyCell 控制流
+    ConditionalLazyController,
+    ControlFlowLazyCache,
+    // 数学常量控制流
+    ConvergenceController,
+    DataFilterProcessor,
+    Edition2024,
     // Edition 2024
-    Edition2024ControlFlow, Edition2024,
-    // 性能优化
-    optimized_loop, vectorizable_loop, branch_predictor_friendly, branchless_computation,
+    Edition2024ControlFlow,
+    EnhancedMatcher,
+    EventStreamProcessor,
+    // 函数指针优化
+    FunctionPtrWrapper,
+    GenericParser,
+    // Match增强
+    MatchResult,
+    ParseResult,
+    // Peekable新方法
+    SimpleLexer,
+    // array_windows 相关
+    StateMachineParser,
+    Token,
+    TokenIterator,
+    branch_predictor_friendly,
+    branchless_computation,
+    compose_functions,
+    conditional_execute,
+    controlled_harmonic_sum,
+    create_precise_closure,
     // 演示函数
-    demonstrate_rust_194_control_flow, get_rust_194_control_flow_info,
+    demonstrate_rust_194_control_flow,
+    get_rust_194_control_flow_info,
+    golden_section_search,
+    math_consts,
+    // 性能优化
+    optimized_loop,
+    process_match_result,
+    vectorizable_loop,
 };
 
 // 导出基础语法模块

@@ -68,8 +68,10 @@ impl NetDiagnostics {
         let start = std::time::Instant::now();
         let dns_ok = addr.to_socket_addrs().is_ok();
         let fut = tokio::net::TcpStream::connect(addr);
-        let tcp_connect_ok =
-            matches!(tokio::time::timeout(Duration::from_millis(timeout_ms), fut).await, Ok(Ok(_stream)));
+        let tcp_connect_ok = matches!(
+            tokio::time::timeout(Duration::from_millis(timeout_ms), fut).await,
+            Ok(Ok(_stream))
+        );
         let latency_ms = if tcp_connect_ok {
             Some(start.elapsed().as_millis())
         } else {
@@ -88,7 +90,10 @@ impl NetDiagnostics {
         for &p in ports {
             let addr = format!("{}:{}", host, p);
             let fut = tokio::net::TcpStream::connect(&addr);
-              let ok = matches!(tokio::time::timeout(Duration::from_millis(timeout_ms), fut).await, Ok(Ok(_)));
+            let ok = matches!(
+                tokio::time::timeout(Duration::from_millis(timeout_ms), fut).await,
+                Ok(Ok(_))
+            );
             if ok {
                 open.push(p);
             }
@@ -108,9 +113,10 @@ impl NetDiagnostics {
             "all_proxy",
         ] {
             if let Ok(v) = std::env::var(k)
-                && !v.is_empty() {
-                    m.insert(k.to_string(), v);
-                }
+                && !v.is_empty()
+            {
+                m.insert(k.to_string(), v);
+            }
         }
         m
     }

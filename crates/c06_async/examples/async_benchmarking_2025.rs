@@ -1,11 +1,11 @@
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
 use std::time::{Duration, Instant};
 use tokio::sync::{RwLock, Semaphore};
 use tokio::time::{sleep, timeout};
-use tracing::{info, warn, error};
-use serde::{Deserialize, Serialize};
-use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
+use tracing::{error, info, warn};
 
 /// 2025年异步性能基准测试套件
 /// 展示最新的异步性能测试和基准测试最佳实践
@@ -109,8 +109,11 @@ impl AsyncBenchmarkRunner {
     {
         let mut result = BenchmarkResult::new(benchmark_name.to_string(), self.config.iterations);
         let mut durations = Vec::with_capacity(self.config.iterations);
-        
-        info!("🚀 开始基准测试: {} ({} 次迭代)", benchmark_name, self.config.iterations);
+
+        info!(
+            "🚀 开始基准测试: {} ({} 次迭代)",
+            benchmark_name, self.config.iterations
+        );
 
         // 预热阶段
         if self.config.warmup_iterations > 0 {
@@ -122,10 +125,10 @@ impl AsyncBenchmarkRunner {
 
         // 主测试阶段
         let start_time = Instant::now();
-        
+
         for i in 0..self.config.iterations {
             let iteration_start = Instant::now();
-            
+
             match timeout(self.config.timeout, operation()).await {
                 Ok(Ok(_)) => {
                     result.successful_iterations += 1;
@@ -139,10 +142,10 @@ impl AsyncBenchmarkRunner {
                     warn!("基准测试 {} 迭代 {} 超时", benchmark_name, i);
                 }
             }
-            
+
             let duration = iteration_start.elapsed();
             durations.push(duration);
-            
+
             // 更新最小和最大持续时间
             if duration < result.min_duration {
                 result.min_duration = duration;
@@ -153,33 +156,40 @@ impl AsyncBenchmarkRunner {
         }
 
         result.total_duration = start_time.elapsed();
-        
+
         // 计算统计信息
         if !durations.is_empty() {
             durations.sort();
-            
+
             let total_nanos: u64 = durations.iter().map(|d| d.as_nanos() as u64).sum();
             result.avg_duration = Duration::from_nanos(total_nanos / durations.len() as u64);
-            
+
             result.p50_duration = durations[durations.len() * 50 / 100];
             result.p95_duration = durations[durations.len() * 95 / 100];
             result.p99_duration = durations[durations.len() * 99 / 100];
         }
 
         // 计算吞吐量
-        result.throughput_ops_per_sec = result.successful_iterations as f64 / result.total_duration.as_secs_f64();
+        result.throughput_ops_per_sec =
+            result.successful_iterations as f64 / result.total_duration.as_secs_f64();
 
         // 估算内存使用（简化版本）
-        result.memory_usage_bytes = std::mem::size_of::<BenchmarkResult>() as u64 * result.successful_iterations as u64;
+        result.memory_usage_bytes =
+            std::mem::size_of::<BenchmarkResult>() as u64 * result.successful_iterations as u64;
 
         // 估算CPU使用率（简化版本）
-        result.cpu_usage_percent = (result.total_duration.as_secs_f64() / result.total_duration.as_secs_f64()) * 100.0;
+        result.cpu_usage_percent =
+            (result.total_duration.as_secs_f64() / result.total_duration.as_secs_f64()) * 100.0;
 
         info!("📊 基准测试 {} 完成", benchmark_name);
-        info!("   成功: {}, 失败: {}, 总耗时: {:?}", 
-              result.successful_iterations, result.failed_iterations, result.total_duration);
-        info!("   平均耗时: {:?}, 吞吐量: {:.2} ops/sec", 
-              result.avg_duration, result.throughput_ops_per_sec);
+        info!(
+            "   成功: {}, 失败: {}, 总耗时: {:?}",
+            result.successful_iterations, result.failed_iterations, result.total_duration
+        );
+        info!(
+            "   平均耗时: {:?}, 吞吐量: {:.2} ops/sec",
+            result.avg_duration, result.throughput_ops_per_sec
+        );
 
         // 保存结果
         self.results.write().await.push(result.clone());
@@ -310,7 +320,10 @@ impl AsyncMemoryBenchmark {
         let memory_used = after_bytes - before_bytes;
         let allocations_made = after_allocations - before_allocations;
 
-        info!("内存使用: {} 字节, 分配次数: {}", memory_used, allocations_made);
+        info!(
+            "内存使用: {} 字节, 分配次数: {}",
+            memory_used, allocations_made
+        );
 
         Ok(memory_used)
     }
@@ -371,7 +384,7 @@ impl AsyncNetworkBenchmark {
 #[tokio::main]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
-    
+
     info!("🚀 开始 2025 年异步性能基准测试套件演示");
 
     // 1. 演示基本异步基准测试
@@ -388,22 +401,27 @@ async fn main() -> Result<()> {
     let benchmark_runner = AsyncBenchmarkRunner::new(config);
 
     // 模拟异步操作
-    let result = benchmark_runner.run_benchmark("async_operation", || async {
-        // 模拟一些异步工作
-        sleep(Duration::from_millis(10)).await;
-        
-        // 模拟偶尔失败（使用简单的伪随机）
-        let random_val = (Instant::now().elapsed().as_nanos() % 100) as f64 / 100.0;
-        if random_val < 0.05 {
-            Err(anyhow::anyhow!("模拟操作失败"))
-        } else {
-            Ok(())
-        }
-    }).await?;
+    let result = benchmark_runner
+        .run_benchmark("async_operation", || async {
+            // 模拟一些异步工作
+            sleep(Duration::from_millis(10)).await;
+
+            // 模拟偶尔失败（使用简单的伪随机）
+            let random_val = (Instant::now().elapsed().as_nanos() % 100) as f64 / 100.0;
+            if random_val < 0.05 {
+                Err(anyhow::anyhow!("模拟操作失败"))
+            } else {
+                Ok(())
+            }
+        })
+        .await?;
 
     info!("📊 基准测试结果:");
     info!("   总迭代: {}", result.total_iterations);
-    info!("   成功: {}, 失败: {}", result.successful_iterations, result.failed_iterations);
+    info!(
+        "   成功: {}, 失败: {}",
+        result.successful_iterations, result.failed_iterations
+    );
     info!("   平均耗时: {:?}", result.avg_duration);
     info!("   吞吐量: {:.2} ops/sec", result.throughput_ops_per_sec);
 
@@ -411,37 +429,47 @@ async fn main() -> Result<()> {
     info!("🔄 演示异步并发基准测试");
     let concurrency_benchmark = AsyncConcurrencyBenchmark::new(10);
 
-    let concurrent_result = concurrency_benchmark.run_concurrent_benchmark(
-        || async {
-            // 模拟并发异步操作
-            sleep(Duration::from_millis(5)).await;
-            
-            let random_val = (Instant::now().elapsed().as_nanos() % 100) as f64 / 100.0;
-            if random_val < 0.02 {
-                Err(anyhow::anyhow!("并发操作失败"))
-            } else {
-                Ok(())
-            }
-        },
-        200,
-    ).await?;
+    let concurrent_result = concurrency_benchmark
+        .run_concurrent_benchmark(
+            || async {
+                // 模拟并发异步操作
+                sleep(Duration::from_millis(5)).await;
+
+                let random_val = (Instant::now().elapsed().as_nanos() % 100) as f64 / 100.0;
+                if random_val < 0.02 {
+                    Err(anyhow::anyhow!("并发操作失败"))
+                } else {
+                    Ok(())
+                }
+            },
+            200,
+        )
+        .await?;
 
     info!("📊 并发基准测试结果:");
-    info!("   成功: {}, 失败: {}", concurrent_result.successful_iterations, concurrent_result.failed_iterations);
-    info!("   吞吐量: {:.2} ops/sec", concurrent_result.throughput_ops_per_sec);
+    info!(
+        "   成功: {}, 失败: {}",
+        concurrent_result.successful_iterations, concurrent_result.failed_iterations
+    );
+    info!(
+        "   吞吐量: {:.2} ops/sec",
+        concurrent_result.throughput_ops_per_sec
+    );
 
     // 3. 演示内存基准测试
     info!("💾 演示异步内存基准测试");
     let memory_benchmark = AsyncMemoryBenchmark::new();
 
-    let memory_usage = memory_benchmark.measure_memory_usage(|| async {
-        // 模拟内存分配操作
-        let mut data = Vec::with_capacity(1024);
-        for i in 0..1024 {
-            data.push(i as u8);
-        }
-        Ok(data)
-    }).await?;
+    let memory_usage = memory_benchmark
+        .measure_memory_usage(|| async {
+            // 模拟内存分配操作
+            let mut data = Vec::with_capacity(1024);
+            for i in 0..1024 {
+                data.push(i as u8);
+            }
+            Ok(data)
+        })
+        .await?;
 
     info!("📊 内存使用: {} 字节", memory_usage);
 
@@ -451,11 +479,13 @@ async fn main() -> Result<()> {
 
     // 模拟网络请求
     for i in 0..10 {
-        let latency = network_benchmark.measure_network_latency(|| async {
-            // 模拟网络延迟
-            sleep(Duration::from_millis(20 + (i * 5) as u64)).await;
-            Ok(format!("响应 {}", i))
-        }).await?;
+        let latency = network_benchmark
+            .measure_network_latency(|| async {
+                // 模拟网络延迟
+                sleep(Duration::from_millis(20 + (i * 5) as u64)).await;
+                Ok(format!("响应 {}", i))
+            })
+            .await?;
 
         info!("网络请求 {} 延迟: {:?}", i, latency);
     }
@@ -472,10 +502,13 @@ async fn main() -> Result<()> {
     info!("   总基准测试数: {}", all_results.len());
 
     for result in &all_results {
-        info!("   {}: {:.2} ops/sec", result.name, result.throughput_ops_per_sec);
+        info!(
+            "   {}: {:.2} ops/sec",
+            result.name, result.throughput_ops_per_sec
+        );
     }
 
     info!("✅ 2025 年异步性能基准测试套件演示完成!");
-    
+
     Ok(())
 }

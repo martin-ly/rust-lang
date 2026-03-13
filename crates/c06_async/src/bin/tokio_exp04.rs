@@ -22,9 +22,10 @@ async fn main() -> io::Result<()> {
         // 检查是否有键盘事件
         if event::poll(Duration::from_millis(300))?
             && let event::Event::Key(key_event) = event::read()?
-                && key_event.code == KeyCode::Char('q') {
-                    break; // 按下 'q' 键退出
-                }
+            && key_event.code == KeyCode::Char('q')
+        {
+            break; // 按下 'q' 键退出
+        }
 
         // 每秒增加计数
         count += 1;

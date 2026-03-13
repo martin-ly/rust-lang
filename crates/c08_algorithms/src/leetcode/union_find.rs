@@ -131,11 +131,10 @@ pub fn num_islands_union_find(grid: Vec<Vec<char>>) -> i32 {
                     let nj = j as i32 + dy;
                     if ni >= 0 && nj >= 0 && (ni as usize) < rows && (nj as usize) < cols {
                         let nidx = ni as usize * cols + nj as usize;
-                        if grid[ni as usize][nj as usize] == '1'
-                            && uf.find(idx) != uf.find(nidx) {
-                                uf.union(idx, nidx);
-                                count -= 1;
-                            }
+                        if grid[ni as usize][nj as usize] == '1' && uf.find(idx) != uf.find(nidx) {
+                            uf.union(idx, nidx);
+                            count -= 1;
+                        }
                     }
                 }
             }
@@ -161,9 +160,9 @@ pub fn find_circle_num(is_connected: Vec<Vec<i32>>) -> i32 {
     let n = is_connected.len();
     let mut uf = UnionFind::new(n);
 
-    for i in 0..n {
-        for j in 0..n {
-            if is_connected[i][j] == 1 {
+    for (i, row) in is_connected.iter().enumerate().take(n) {
+        for (j, &connected) in row.iter().enumerate().take(n) {
+            if connected == 1 {
                 uf.union(i, j);
             }
         }
@@ -233,7 +232,10 @@ pub fn accounts_merge(accounts: Vec<Vec<String>>) -> Vec<Vec<String>> {
     let mut index_to_emails: HashMap<usize, HashSet<String>> = HashMap::new();
     for (email, &index) in &email_to_index {
         let root = uf.find(index);
-        index_to_emails.entry(root).or_default().insert(email.clone());
+        index_to_emails
+            .entry(root)
+            .or_default()
+            .insert(email.clone());
     }
 
     // 构建结果
@@ -349,12 +351,21 @@ mod tests {
 
     #[test]
     fn test_find_circle_num() {
-        assert_eq!(find_circle_num(vec![vec![1, 1, 0], vec![1, 1, 0], vec![0, 0, 1]]), 2);
-        assert_eq!(find_circle_num(vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]]), 3);
+        assert_eq!(
+            find_circle_num(vec![vec![1, 1, 0], vec![1, 1, 0], vec![0, 0, 1]]),
+            2
+        );
+        assert_eq!(
+            find_circle_num(vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]]),
+            3
+        );
     }
 
     #[test]
     fn test_find_redundant_connection() {
-        assert_eq!(find_redundant_connection(vec![vec![1, 2], vec![1, 3], vec![2, 3]]), vec![2, 3]);
+        assert_eq!(
+            find_redundant_connection(vec![vec![1, 2], vec![1, 3], vec![2, 3]]),
+            vec![2, 3]
+        );
     }
 }

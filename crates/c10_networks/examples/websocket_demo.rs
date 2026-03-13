@@ -89,16 +89,15 @@ async fn main() -> NetworkResult<()> {
     println!("\n🤝 演示 WebSocket 握手:");
 
     // 从环境变量读取配置
-    let host = std::env::var("C10_WS_DEMO_HOST")
-        .unwrap_or_else(|_| "example.com".to_string());
-    let path = std::env::var("C10_WS_DEMO_PATH")
-        .unwrap_or_else(|_| "/chat".to_string());
+    let host = std::env::var("C10_WS_DEMO_HOST").unwrap_or_else(|_| "example.com".to_string());
+    let path = std::env::var("C10_WS_DEMO_PATH").unwrap_or_else(|_| "/chat".to_string());
     let custom_key = std::env::var("C10_WS_DEMO_KEY").ok();
 
     // 创建握手请求
     let mut request = WebSocketHandshakeRequest::new(&path);
     request.set_host(&host);
-    request.set_websocket_key(&custom_key.unwrap_or_else(|| "dGhlIHNhbXBsZSBub25jZQ==".to_string()));
+    request
+        .set_websocket_key(&custom_key.unwrap_or_else(|| "dGhlIHNhbXBsZSBub25jZQ==".to_string()));
     request.set_websocket_version("13");
     request.set_upgrade();
 

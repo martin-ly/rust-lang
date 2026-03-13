@@ -1,11 +1,11 @@
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
 use std::time::{Duration, Instant};
 use tokio::sync::{RwLock, Semaphore};
 use tokio::time::sleep;
 use tracing::{info, warn};
-use serde::{Deserialize, Serialize};
-use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
 
 /// 2025年简化异步性能基准测试套件
 /// 展示实用的异步性能测试和基准测试最佳实践
@@ -83,10 +83,14 @@ impl SimpleAsyncBenchmarkRunner {
         F: Fn() -> Fut + Send + Sync,
         Fut: std::future::Future<Output = Result<()>> + Send,
     {
-        let mut result = SimpleBenchmarkResult::new(benchmark_name.to_string(), self.config.iterations);
+        let mut result =
+            SimpleBenchmarkResult::new(benchmark_name.to_string(), self.config.iterations);
         let mut durations = Vec::with_capacity(self.config.iterations);
-        
-        info!("🚀 开始基准测试: {} ({} 次迭代)", benchmark_name, self.config.iterations);
+
+        info!(
+            "🚀 开始基准测试: {} ({} 次迭代)",
+            benchmark_name, self.config.iterations
+        );
 
         // 预热阶段
         if self.config.warmup_iterations > 0 {
@@ -102,14 +106,14 @@ impl SimpleAsyncBenchmarkRunner {
         // 主测试阶段
         println!("🚀 开始主测试阶段: {} 次迭代", self.config.iterations);
         let start_time = Instant::now();
-        
+
         for i in 0..self.config.iterations {
             if i % 10 == 0 {
                 println!("主测试迭代 {}/{}", i + 1, self.config.iterations);
             }
             let iteration_start = Instant::now();
             println!("开始迭代 {} 操作", i + 1);
-            
+
             match operation().await {
                 Ok(_) => {
                     result.successful_iterations += 1;
@@ -121,10 +125,10 @@ impl SimpleAsyncBenchmarkRunner {
                     println!("迭代 {} 失败", i + 1);
                 }
             }
-            
+
             let duration = iteration_start.elapsed();
             durations.push(duration);
-            
+
             // 更新最小和最大持续时间
             if duration < result.min_duration {
                 result.min_duration = duration;
@@ -135,7 +139,7 @@ impl SimpleAsyncBenchmarkRunner {
         }
 
         result.total_duration = start_time.elapsed();
-        
+
         // 计算统计信息
         if !durations.is_empty() {
             let total_nanos: u64 = durations.iter().map(|d| d.as_nanos() as u64).sum();
@@ -143,13 +147,18 @@ impl SimpleAsyncBenchmarkRunner {
         }
 
         // 计算吞吐量
-        result.throughput_ops_per_sec = result.successful_iterations as f64 / result.total_duration.as_secs_f64();
+        result.throughput_ops_per_sec =
+            result.successful_iterations as f64 / result.total_duration.as_secs_f64();
 
         info!("📊 基准测试 {} 完成", benchmark_name);
-        info!("   成功: {}, 失败: {}, 总耗时: {:?}", 
-              result.successful_iterations, result.failed_iterations, result.total_duration);
-        info!("   平均耗时: {:?}, 吞吐量: {:.2} ops/sec", 
-              result.avg_duration, result.throughput_ops_per_sec);
+        info!(
+            "   成功: {}, 失败: {}, 总耗时: {:?}",
+            result.successful_iterations, result.failed_iterations, result.total_duration
+        );
+        info!(
+            "   平均耗时: {:?}, 吞吐量: {:.2} ops/sec",
+            result.avg_duration, result.throughput_ops_per_sec
+        );
 
         // 保存结果
         self.results.write().await.push(result.clone());
@@ -195,9 +204,14 @@ impl SimpleAsyncConcurrencyBenchmark {
 
                 // 模拟异步操作
                 sleep(Duration::from_millis(5)).await;
-                
+
                 // 模拟偶尔失败
-                let random_val = (std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos() % 100) as f64 / 100.0;
+                let random_val = (std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos()
+                    % 100) as f64
+                    / 100.0;
                 if random_val < 0.02 {
                     failure_count.fetch_add(1, Ordering::Relaxed);
                 } else {
@@ -257,7 +271,10 @@ impl SimpleAsyncMemoryBenchmark {
         let memory_used = after_bytes - before_bytes;
         let allocations_made = after_allocations - before_allocations;
 
-        info!("内存使用: {} 字节, 分配次数: {}", memory_used, allocations_made);
+        info!(
+            "内存使用: {} 字节, 分配次数: {}",
+            memory_used, allocations_made
+        );
 
         Ok(memory_used)
     }
@@ -288,11 +305,11 @@ impl SimpleAsyncNetworkBenchmark {
 
         // 模拟网络延迟
         sleep(Duration::from_millis(20 + (request_id * 5) as u64)).await;
-        
+
         let latency = start_time.elapsed();
         self.response_times.write().await.push(latency);
         info!("请求 {} 延迟: {:?}", request_id, latency);
-        
+
         Ok(latency)
     }
 
@@ -310,7 +327,7 @@ impl SimpleAsyncNetworkBenchmark {
 #[tokio::main]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
-    
+
     println!("🚀 开始 2025 年简化异步性能基准测试套件演示");
     info!("🚀 开始 2025 年简化异步性能基准测试套件演示");
 
@@ -329,17 +346,22 @@ async fn main() -> Result<()> {
 
     // 模拟异步操作
     println!("开始运行基准测试");
-    let result = benchmark_runner.run_benchmark("async_operation", || async {
-        // 模拟一些异步工作
-        sleep(Duration::from_millis(1)).await;
-        
-        // 简化的操作，总是成功
-        Ok(())
-    }).await?;
+    let result = benchmark_runner
+        .run_benchmark("async_operation", || async {
+            // 模拟一些异步工作
+            sleep(Duration::from_millis(1)).await;
+
+            // 简化的操作，总是成功
+            Ok(())
+        })
+        .await?;
 
     info!("📊 基准测试结果:");
     info!("   总迭代: {}", result.total_iterations);
-    info!("   成功: {}, 失败: {}", result.successful_iterations, result.failed_iterations);
+    info!(
+        "   成功: {}, 失败: {}",
+        result.successful_iterations, result.failed_iterations
+    );
     info!("   平均耗时: {:?}", result.avg_duration);
     info!("   吞吐量: {:.2} ops/sec", result.throughput_ops_per_sec);
 
@@ -350,8 +372,14 @@ async fn main() -> Result<()> {
     let concurrent_result = concurrency_benchmark.run_concurrent_benchmark(5).await?;
 
     info!("📊 并发基准测试结果:");
-    info!("   成功: {}, 失败: {}", concurrent_result.successful_iterations, concurrent_result.failed_iterations);
-    info!("   吞吐量: {:.2} ops/sec", concurrent_result.throughput_ops_per_sec);
+    info!(
+        "   成功: {}, 失败: {}",
+        concurrent_result.successful_iterations, concurrent_result.failed_iterations
+    );
+    info!(
+        "   吞吐量: {:.2} ops/sec",
+        concurrent_result.throughput_ops_per_sec
+    );
 
     // 3. 演示内存基准测试
     info!("💾 演示异步内存基准测试");
@@ -381,10 +409,13 @@ async fn main() -> Result<()> {
     info!("   总基准测试数: {}", all_results.len());
 
     for result in &all_results {
-        info!("   {}: {:.2} ops/sec", result.name, result.throughput_ops_per_sec);
+        info!(
+            "   {}: {:.2} ops/sec",
+            result.name, result.throughput_ops_per_sec
+        );
     }
 
     info!("✅ 2025 年简化异步性能基准测试套件演示完成!");
-    
+
     Ok(())
 }

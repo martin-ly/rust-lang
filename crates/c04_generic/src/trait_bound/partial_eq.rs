@@ -209,6 +209,8 @@ PartialEq trait 为 Rust 提供了部分相等性比较支持。
 同时需要注意性能影响和语义一致性。
 */
 
+#![allow(clippy::type_complexity)]
+
 // 示例结构体
 #[derive(Debug)]
 pub struct PartialEqExample {

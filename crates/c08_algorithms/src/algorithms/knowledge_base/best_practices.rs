@@ -1,7 +1,7 @@
 //! # 算法最佳实践模块
 //!
 //! 本模块提供算法实现和使用的最佳实践。
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// 最佳实践
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -61,14 +61,8 @@ impl BestPracticesAnalyzer {
                     "内存池管理".to_string(),
                     "缓存友好的合并操作".to_string(),
                 ],
-                common_pitfalls: vec![
-                    "合并操作实现错误".to_string(),
-                    "内存使用过多".to_string(),
-                ],
-                testing_strategies: vec![
-                    "稳定性测试".to_string(),
-                    "边界情况测试".to_string(),
-                ],
+                common_pitfalls: vec!["合并操作实现错误".to_string(), "内存使用过多".to_string()],
+                testing_strategies: vec!["稳定性测试".to_string(), "边界情况测试".to_string()],
                 usage_guidelines: vec![
                     "适合稳定排序需求".to_string(),
                     "适合外部排序".to_string(),

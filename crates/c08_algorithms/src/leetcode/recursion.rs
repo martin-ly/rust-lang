@@ -80,10 +80,7 @@ pub fn my_pow_recursive(x: f64, n: i32) -> f64 {
 
 /// 206. Reverse Linked List（反转链表）- 递归版本
 pub fn reverse_list_recursive(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-    fn reverse(
-        head: Option<Box<ListNode>>,
-        prev: Option<Box<ListNode>>,
-    ) -> Option<Box<ListNode>> {
+    fn reverse(head: Option<Box<ListNode>>, prev: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         match head {
             None => prev,
             Some(mut node) => {

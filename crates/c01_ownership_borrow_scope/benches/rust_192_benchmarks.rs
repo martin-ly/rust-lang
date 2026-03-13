@@ -12,18 +12,12 @@
 //! ```bash
 //! cargo bench --bench rust_192_benchmarks
 //! ```
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId, Throughput};
-use std::hint::black_box;
 use c01_ownership_borrow_scope::{
-    SafeMaybeUninit,
-    Rust192Union,
-    Rust192ZeroSizedArray,
-    rust_192_tracked_function,
-    rust_192_higher_ranked_lifetime,
-    OwnershipTracker,
-    BorrowTracker,
-    LifetimeTracker,
+    BorrowTracker, LifetimeTracker, OwnershipTracker, Rust192Union, Rust192ZeroSizedArray,
+    SafeMaybeUninit, rust_192_higher_ranked_lifetime, rust_192_tracked_function,
 };
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+use std::hint::black_box;
 
 /// 基准测试 MaybeUninit 性能
 fn bench_maybe_uninit(c: &mut Criterion) {
@@ -145,16 +139,12 @@ fn bench_ownership_transfer(c: &mut Criterion) {
 
     for size in sizes.iter() {
         group.throughput(Throughput::Elements(*size as u64));
-        group.bench_with_input(
-            BenchmarkId::from_parameter(size),
-            size,
-            |b, &size| {
-                b.iter(|| {
-                    let vec = vec![0u8; size];
-                    let _moved = black_box(vec);
-                });
-            },
-        );
+        group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &size| {
+            b.iter(|| {
+                let vec = vec![0u8; size];
+                let _moved = black_box(vec);
+            });
+        });
     }
 
     group.finish();
@@ -168,22 +158,18 @@ fn bench_borrow_checking(c: &mut Criterion) {
 
     for size in sizes.iter() {
         group.throughput(Throughput::Elements(*size as u64));
-        group.bench_with_input(
-            BenchmarkId::from_parameter(size),
-            size,
-            |b, &size| {
-                b.iter(|| {
-                    let mut tracker = BorrowTracker::new();
-                    for i in 0..size {
-                        let _ = tracker.record_borrow(
-                            format!("owner_{}", i),
-                            format!("borrower_{}", i),
-                            c01_ownership_borrow_scope::BorrowType::Immutable,
-                        );
-                    }
-                });
-            },
-        );
+        group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &size| {
+            b.iter(|| {
+                let mut tracker = BorrowTracker::new();
+                for i in 0..size {
+                    let _ = tracker.record_borrow(
+                        format!("owner_{}", i),
+                        format!("borrower_{}", i),
+                        c01_ownership_borrow_scope::BorrowType::Immutable,
+                    );
+                }
+            });
+        });
     }
 
     group.finish();
@@ -197,21 +183,15 @@ fn bench_lifetime_inference(c: &mut Criterion) {
 
     for size in sizes.iter() {
         group.throughput(Throughput::Elements(*size as u64));
-        group.bench_with_input(
-            BenchmarkId::from_parameter(size),
-            size,
-            |b, &size| {
-                b.iter(|| {
-                    let mut tracker = LifetimeTracker::new();
-                    for i in 0..size {
-                        tracker.record_lifetime_start(
-                            format!("var_{}", i),
-                            format!("scope_{}", i % 10),
-                        );
-                    }
-                });
-            },
-        );
+        group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &size| {
+            b.iter(|| {
+                let mut tracker = LifetimeTracker::new();
+                for i in 0..size {
+                    tracker
+                        .record_lifetime_start(format!("var_{}", i), format!("scope_{}", i % 10));
+                }
+            });
+        });
     }
 
     group.finish();
@@ -225,29 +205,20 @@ fn bench_ownership_tracking(c: &mut Criterion) {
 
     for size in sizes.iter() {
         group.throughput(Throughput::Elements(*size as u64));
-        group.bench_with_input(
-            BenchmarkId::from_parameter(size),
-            size,
-            |b, &size| {
-                b.iter(|| {
-                    let mut tracker = OwnershipTracker::new();
-                    // 先创建所有权记录
-                    for i in 0..size {
-                        tracker.record_ownership(
-                            format!("owner_{}", i),
-                            "TestType".to_string(),
-                        );
-                    }
-                    // 然后转移所有权
-                    for i in 0..size - 1 {
-                        let _ = tracker.record_transfer(
-                            format!("owner_{}", i),
-                            format!("owner_{}", i + 1),
-                        );
-                    }
-                });
-            },
-        );
+        group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &size| {
+            b.iter(|| {
+                let mut tracker = OwnershipTracker::new();
+                // 先创建所有权记录
+                for i in 0..size {
+                    tracker.record_ownership(format!("owner_{}", i), "TestType".to_string());
+                }
+                // 然后转移所有权
+                for i in 0..size - 1 {
+                    let _ =
+                        tracker.record_transfer(format!("owner_{}", i), format!("owner_{}", i + 1));
+                }
+            });
+        });
     }
 
     group.finish();
@@ -309,16 +280,12 @@ fn bench_rotate_right(c: &mut Criterion) {
 
     for size in sizes.iter() {
         group.throughput(Throughput::Elements(*size as u64));
-        group.bench_with_input(
-            BenchmarkId::from_parameter(size),
-            size,
-            |b, &size| {
-                let mut vec: Vec<i32> = (0..size as i32).collect();
-                b.iter(|| {
-                    vec.rotate_right(black_box(size / 4));
-                });
-            },
-        );
+        group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &size| {
+            let mut vec: Vec<i32> = (0..size as i32).collect();
+            b.iter(|| {
+                vec.rotate_right(black_box(size / 4));
+            });
+        });
     }
 
     group.finish();
@@ -332,18 +299,14 @@ fn bench_iterator_eq(c: &mut Criterion) {
 
     for size in sizes.iter() {
         group.throughput(Throughput::Elements(*size as u64));
-        group.bench_with_input(
-            BenchmarkId::from_parameter(size),
-            size,
-            |b, &size| {
-                let vec1: Vec<i32> = (0..size as i32).collect();
-                let vec2: Vec<i32> = (0..size as i32).collect();
-                b.iter(|| {
-                    let _equal = vec1.iter().eq(vec2.iter());
-                    black_box(())
-                });
-            },
-        );
+        group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &size| {
+            let vec1: Vec<i32> = (0..size as i32).collect();
+            let vec2: Vec<i32> = (0..size as i32).collect();
+            b.iter(|| {
+                let _equal = vec1.iter().eq(vec2.iter());
+                black_box(())
+            });
+        });
     }
 
     group.finish();

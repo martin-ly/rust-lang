@@ -13,7 +13,9 @@ pub mod highlights {
     /// 展示 if-let 链式匹配
     #[allow(unused)]
     pub fn if_let_chain(opt_a: Option<i32>, opt_b: Option<i32>) -> Option<i32> {
-        if let Some(a) = opt_a && let Some(b) = opt_b {
+        if let Some(a) = opt_a
+            && let Some(b) = opt_b
+        {
             Some(a + b)
         } else {
             None
@@ -33,7 +35,10 @@ pub mod gats_demo {
     }
 
     impl<T> CollectionView for Vec<T> {
-        type Item<'a> = &'a T where Self: 'a;
+        type Item<'a>
+            = &'a T
+        where
+            Self: 'a;
 
         fn get<'a>(&'a self, index: usize) -> Option<Self::Item<'a>> {
             self.as_slice().get(index)
@@ -109,11 +114,15 @@ pub mod dyn_upcasting_demo {
     pub struct SimpleTs;
 
     impl Logger for SimpleTs {
-        fn log(&self, msg: &str) -> String { format!("[{}] {}", self.now(), msg) }
+        fn log(&self, msg: &str) -> String {
+            format!("[{}] {}", self.now(), msg)
+        }
     }
 
     impl TimestampLogger for SimpleTs {
-        fn now(&self) -> &'static str { "2025-09-26T00:00:00Z" }
+        fn now(&self) -> &'static str {
+            "2025-09-26T00:00:00Z"
+        }
     }
 
     #[allow(dead_code)]

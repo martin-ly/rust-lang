@@ -25,7 +25,6 @@ use std::sync::LazyLock;
 /// Rust 1.94.0 的 `array_windows` 方法为滑动窗口算法提供了更简洁、
 /// 类型安全的实现方式。它返回固定大小的数组窗口 `[&T; N]`，
 /// 使得算法实现更加清晰。
-
 /// 滑动窗口算法集合
 ///
 /// Rust 1.94.0: 使用 array_windows 实现各种滑动窗口算法
@@ -232,11 +231,7 @@ impl StringWindowAlgorithms {
             let curr = &window[1..=window_size];
 
             // 计算汉明距离比例
-            let differences: usize = prev
-                .iter()
-                .zip(curr.iter())
-                .filter(|(a, b)| a != b)
-                .count();
+            let differences: usize = prev.iter().zip(curr.iter()).filter(|(a, b)| a != b).count();
 
             transitions.push(differences as f64 / window_size as f64);
         }
@@ -259,8 +254,12 @@ pub fn demonstrate_array_windows_algorithms() {
 
     // 最长递增子序列
     let (start, len) = SlidingWindowAlgorithms::longest_increasing_subsequence(&data);
-    println!("最长递增子序列: 位置={}, 长度={}, 数据={:?}",
-        start, len, &data[start..start + len]);
+    println!(
+        "最长递增子序列: 位置={}, 长度={}, 数据={:?}",
+        start,
+        len,
+        &data[start..start + len]
+    );
 
     // 模式查找
     let pattern = vec![3, 4, 5];
@@ -275,8 +274,11 @@ pub fn demonstrate_array_windows_algorithms() {
     // 最大子数组和
     let sum_data = vec![-2, 1, -3, 4, -1, 2, 1, -5, 4];
     let (max_sum, start_idx, end_idx) = SlidingWindowAlgorithms::max_subarray_sum(&sum_data);
-    println!("最大子数组和: {}, 子数组: {:?}",
-        max_sum, &sum_data[start_idx..end_idx]);
+    println!(
+        "最大子数组和: {}, 子数组: {:?}",
+        max_sum,
+        &sum_data[start_idx..end_idx]
+    );
 
     // 字符串算法
     let text = "abracadabra";
@@ -292,7 +294,6 @@ pub fn demonstrate_array_windows_algorithms() {
 /// # 2. LazyCell 在算法缓存中的应用 / LazyCell in Algorithm Caching
 ///
 /// Rust 1.94.0 为 LazyCell 添加了新方法，使其在算法缓存中更加灵活。
-
 /// 斐波那契缓存
 ///
 /// Rust 1.94.0: 使用 LazyCell 实现斐波那契数懒加载
@@ -398,7 +399,6 @@ pub fn demonstrate_lazycell_caching() {
 ///
 /// Rust 1.94.0 添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量，
 /// 这些常量在数值算法中非常重要。
-
 /// 数值算法集合
 ///
 /// Rust 1.94.0: 使用数学常量实现数值算法
@@ -492,12 +492,9 @@ pub fn demonstrate_math_constants_algorithms() {
     println!("\n=== 数学常量数值算法演示 ===\n");
 
     // 黄金分割搜索
-    let (min_x, min_val) = NumericalAlgorithms::golden_section_search(
-        0.0,
-        10.0,
-        0.0001,
-        |x| (x - std::f64::consts::PI).powi(2)
-    );
+    let (min_x, min_val) = NumericalAlgorithms::golden_section_search(0.0, 10.0, 0.0001, |x| {
+        (x - std::f64::consts::PI).powi(2)
+    });
     println!("黄金分割搜索结果: x = {:.6}, f(x) = {:.6}", min_x, min_val);
 
     // 调和数估算
@@ -526,7 +523,6 @@ pub fn demonstrate_math_constants_algorithms() {
 ///
 /// Rust 1.94.0 为 Peekable 添加了 next_if_map 和 next_if_map_mut 方法，
 /// 这些方法在算法遍历和解析中非常有用。
-
 /// 有序迭代器合并
 ///
 /// Rust 1.94.0: 使用 Peekable 合并有序序列
@@ -670,7 +666,6 @@ pub fn demonstrate_peekable_algorithms() {
 ///
 /// Rust 1.94.0 实现了 TryFrom<char> for usize，
 /// 这在字符串算法和字符编码处理中非常有用。
-
 /// 字符串算法集合
 ///
 /// Rust 1.94.0: 使用 char 到 usize 转换
@@ -826,9 +821,8 @@ pub fn demonstrate_rust_194_algorithm_features() {
     println!("最长递增子序列: {:?}", &data[start..start + len]);
 
     // 使用数学常量的优化
-    let (min_x, _) = NumericalAlgorithms::golden_section_search(0.0, 10.0, 0.01, |x| {
-        (x - 5.0).powi(2)
-    });
+    let (min_x, _) =
+        NumericalAlgorithms::golden_section_search(0.0, 10.0, 0.01, |x| (x - 5.0).powi(2));
     println!("优化结果: x = {}", min_x);
 
     // 字符串分析
@@ -900,9 +894,8 @@ mod tests {
 
     #[test]
     fn test_golden_section_search() {
-        let (min_x, min_val) = NumericalAlgorithms::golden_section_search(
-            0.0, 10.0, 0.001, |x| (x - 5.0).powi(2)
-        );
+        let (min_x, min_val) =
+            NumericalAlgorithms::golden_section_search(0.0, 10.0, 0.001, |x| (x - 5.0).powi(2));
         assert!((min_x - 5.0).abs() < 0.01);
         assert!(min_val < 0.0001);
     }

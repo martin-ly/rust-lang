@@ -9,8 +9,8 @@
 //! ```bash
 //! cargo run --example process_monitoring_demo
 //! ```
-use c07_process::prelude::*;
 use c07_process::SystemResources;
+use c07_process::prelude::*;
 
 fn main() -> Result<()> {
     println!("🚀 进程监控示例\n");
@@ -45,7 +45,7 @@ fn main() -> Result<()> {
         name: "example_process".to_string(),
         status: ProcessStatus::Running,
         memory_usage: 1024 * 1024, // 1MB
-        cpu_usage: 0.5,             // 50%
+        cpu_usage: 0.5,            // 50%
         created_at: std::time::SystemTime::now(),
         parent_pid: Some(1),
         children_pids: vec![5678, 5679],
@@ -71,17 +71,23 @@ fn main() -> Result<()> {
     println!("\n📊 系统资源说明:");
     println!("{}", "-".repeat(60));
     let resources = SystemResources {
-        total_memory: 8 * 1024 * 1024 * 1024,      // 8GB
-        available_memory: 4 * 1024 * 1024 * 1024,  // 4GB
+        total_memory: 8 * 1024 * 1024 * 1024,     // 8GB
+        available_memory: 4 * 1024 * 1024 * 1024, // 4GB
         cpu_cores: 4,
-        cpu_usage: 0.3, // 30%
-        total_disk: 500 * 1024 * 1024 * 1024,      // 500GB
-        available_disk: 250 * 1024 * 1024 * 1024,  // 250GB
+        cpu_usage: 0.3,                           // 30%
+        total_disk: 500 * 1024 * 1024 * 1024,     // 500GB
+        available_disk: 250 * 1024 * 1024 * 1024, // 250GB
         timestamp: std::time::SystemTime::now(),
     };
 
-    println!("  总内存: {} GB", resources.total_memory / (1024 * 1024 * 1024));
-    println!("  可用内存: {} GB", resources.available_memory / (1024 * 1024 * 1024));
+    println!(
+        "  总内存: {} GB",
+        resources.total_memory / (1024 * 1024 * 1024)
+    );
+    println!(
+        "  可用内存: {} GB",
+        resources.available_memory / (1024 * 1024 * 1024)
+    );
     println!("  CPU核心数: {}", resources.cpu_cores);
     println!("  CPU使用率: {:.1}%", resources.cpu_usage * 100.0);
 

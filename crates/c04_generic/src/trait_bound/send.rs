@@ -320,6 +320,8 @@ Send trait 为 Rust 提供了线程间安全传递的基础。
 同时需要注意安全性和性能影响。
 */
 
+#![allow(clippy::type_complexity)]
+
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex, mpsc};
 use std::thread;
@@ -328,6 +330,7 @@ use std::thread;
 #[derive(Debug)]
 pub struct SendExample {
     pub name: String,
+    #[allow(clippy::type_complexity)]
     pub value: i32,
     pub active: bool,
 }

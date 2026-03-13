@@ -3,26 +3,28 @@
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//! 
+//!
 //! 本模块实现了Rust 1.90版本中真正可用的泛型特性，包括：
 //! - 改进的const generics
 //! - 更好的trait bounds
 //! - 优化的类型推断
 //! - 新的泛型约束
 //! - 改进的关联类型
+use anyhow::Result;
 use std::collections::HashMap;
 use std::fmt::Display;
-use anyhow::Result;
 
 /// 利用Rust 1.90改进的const generics
-/// 
+///
 /// 在Rust 1.90中，const generics得到了显著改进
 pub struct ConstGenericMatrix<T, const ROWS: usize, const COLS: usize> {
     data: [[T; COLS]; ROWS],
     current_row: usize,
 }
 
-impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Default for ConstGenericMatrix<T, ROWS, COLS> {
+impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Default
+    for ConstGenericMatrix<T, ROWS, COLS>
+{
     fn default() -> Self {
         Self {
             data: [[T::default(); COLS]; ROWS],
@@ -40,7 +42,7 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> ConstGenericMatrix
         if self.current_row >= ROWS {
             return Err(anyhow::anyhow!("矩阵已满"));
         }
-        
+
         self.data[self.current_row] = row;
         self.current_row += 1;
         Ok(())
@@ -73,7 +75,7 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> ConstGenericMatrix
 }
 
 /// 利用Rust 1.90改进的trait bounds
-/// 
+///
 /// 在Rust 1.90中，trait bounds得到了显著改进
 pub trait ImprovedTraitBounds<T> {
     type Output;
@@ -83,7 +85,8 @@ pub trait ImprovedTraitBounds<T> {
 }
 
 /// 复杂trait bounds的实现
-impl<T, U, const ROWS: usize, const COLS: usize> ImprovedTraitBounds<T> for ConstGenericMatrix<U, ROWS, COLS>
+impl<T, U, const ROWS: usize, const COLS: usize> ImprovedTraitBounds<T>
+    for ConstGenericMatrix<U, ROWS, COLS>
 where
     T: Display + Clone,
     U: Default + Copy + std::fmt::Display,
@@ -94,7 +97,19 @@ where
     fn process(&self, input: T) -> Result<Self::Output, Self::Error> {
         let mut result = String::new();
         result.push_str(&format!("处理输入: {}\n", input));
-        
+        result.push_str(&self.format_matrix_data());
+        Ok(result)
+    }
+}
+
+impl<U: Default + Copy, const ROWS: usize, const COLS: usize> ConstGenericMatrix<U, ROWS, COLS>
+where
+    U: std::fmt::Display,
+{
+    /// 格式化矩阵数据为字符串
+    #[allow(clippy::excessive_nesting)]
+    fn format_matrix_data(&self) -> String {
+        let mut result = String::new();
         for row in 0..self.rows() {
             for col in 0..self.cols() {
                 if let Some(value) = self.get(row, col) {
@@ -102,13 +117,12 @@ where
                 }
             }
         }
-        
-        Ok(result)
+        result
     }
 }
 
 /// 利用Rust 1.90优化的类型推断
-/// 
+///
 /// 在Rust 1.90中，类型推断得到了显著优化
 #[allow(dead_code)]
 pub struct TypeInferenceOptimized<T> {
@@ -158,9 +172,9 @@ impl<T> TypeInferenceOptimized<T> {
 }
 
 /// 利用Rust 1.90新的泛型约束
-/// 
+///
 /// 在Rust 1.90中，泛型约束得到了显著改进
-pub struct GenericConstraints<T, U> 
+pub struct GenericConstraints<T, U>
 where
     T: Display + Clone,
     U: Default + Copy + std::fmt::Debug,
@@ -211,7 +225,7 @@ where
 }
 
 /// 利用Rust 1.90改进的关联类型
-/// 
+///
 /// 在Rust 1.90中，关联类型得到了显著改进
 pub trait ImprovedAssociatedTypes {
     type Input;
@@ -248,7 +262,7 @@ where
 }
 
 /// 利用Rust 1.90的泛型特化
-/// 
+///
 /// 在Rust 1.90中，泛型特化得到了显著改进
 pub struct GenericSpecialization<T> {
     data: T,
@@ -304,7 +318,7 @@ pub fn demonstrate_rust_190_real_generics() -> Result<()> {
     matrix.push_row([1, 2, 3])?;
     matrix.push_row([4, 5, 6])?;
     matrix.push_row([7, 8, 9])?;
-    
+
     println!("  矩阵大小: {}x{}", matrix.rows(), matrix.cols());
     for row in 0..matrix.rows() {
         for col in 0..matrix.cols() {
@@ -317,7 +331,9 @@ pub fn demonstrate_rust_190_real_generics() -> Result<()> {
 
     // 2. 改进的trait bounds演示
     println!("\n2. 改进的trait bounds演示:");
-    let result = matrix.process("测试输入".to_string()).map_err(|e| anyhow::anyhow!("{}", e))?;
+    let result = matrix
+        .process("测试输入".to_string())
+        .map_err(|e| anyhow::anyhow!("{}", e))?;
     println!("  Trait bounds处理结果:\n{}", result);
 
     // 3. 优化的类型推断演示
@@ -326,7 +342,7 @@ pub fn demonstrate_rust_190_real_generics() -> Result<()> {
     type_inference.push(1);
     type_inference.push(2);
     type_inference.push(3);
-    
+
     let processed = type_inference.process_with_improved_inference(|x| x * 2);
     println!("  类型推断处理结果: {:?}", processed);
 
@@ -340,9 +356,11 @@ pub fn demonstrate_rust_190_real_generics() -> Result<()> {
 
     // 5. 改进的关联类型演示
     println!("\n5. 改进的关联类型演示:");
-    let result = constraints.process("关联类型测试".to_string()).map_err(|e| anyhow::anyhow!("{}", e))?;
+    let result = constraints
+        .process("关联类型测试".to_string())
+        .map_err(|e| anyhow::anyhow!("{}", e))?;
     println!("  关联类型处理结果: {}", result);
-    
+
     let metadata = constraints.get_metadata();
     println!("  元数据: {:?}", metadata);
 
@@ -352,7 +370,7 @@ pub fn demonstrate_rust_190_real_generics() -> Result<()> {
     string_spec.set_special_handling(true);
     let string_result = string_spec.process_string();
     println!("  字符串特化结果: {}", string_result);
-    
+
     let mut int_spec = GenericSpecialization::new(42);
     int_spec.set_special_handling(true);
     let int_result = int_spec.process_integer();
@@ -371,7 +389,7 @@ mod tests {
         let mut matrix: ConstGenericMatrix<i32, 2, 2> = ConstGenericMatrix::new();
         matrix.push_row([1, 2]).unwrap();
         matrix.push_row([3, 4]).unwrap();
-        
+
         assert_eq!(matrix.rows(), 2);
         assert_eq!(matrix.cols(), 2);
         assert_eq!(matrix.get(0, 0), Some(&1));
@@ -390,7 +408,7 @@ mod tests {
         let mut type_inference = TypeInferenceOptimized::new();
         type_inference.push(1);
         type_inference.push(2);
-        
+
         let processed = type_inference.process_with_improved_inference(|x| x * 2);
         assert_eq!(processed, vec![2, 4]);
     }
@@ -417,7 +435,7 @@ mod tests {
         string_spec.set_special_handling(true);
         let result = string_spec.process_string();
         assert_eq!(result, "特殊处理: HELLO");
-        
+
         let mut int_spec = GenericSpecialization::new(5);
         int_spec.set_special_handling(true);
         let result = int_spec.process_integer();

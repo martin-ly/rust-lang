@@ -156,7 +156,10 @@ pub mod simple_actor_system {
     pub trait Actor: Send + 'static {
         /// 处理消息
         #[allow(unused_variables)]
-        async fn handle(&mut self, msg: Box<dyn std::any::Any + Send>) -> Box<dyn std::any::Any + Send>;
+        async fn handle(
+            &mut self,
+            msg: Box<dyn std::any::Any + Send>,
+        ) -> Box<dyn std::any::Any + Send>;
 
         /// Actor 启动时调用
         async fn started(&mut self) {}
@@ -230,7 +233,11 @@ pub mod simple_actor_system {
 
     /// Handler trait: Actor 处理特定消息类型
     pub trait Handler<M: Message>: Actor {
-        fn handle_message(&mut self, msg: M, ctx: &mut Context) -> impl std::future::Future<Output = M::Result> + Send;
+        fn handle_message(
+            &mut self,
+            msg: M,
+            ctx: &mut Context,
+        ) -> impl std::future::Future<Output = M::Result> + Send;
     }
 
     /// Actor 系统
@@ -308,8 +315,6 @@ pub mod simple_actor_system {
         count: i32,
     }
 
-    
-
     impl Counter {
         pub fn new() -> Self {
             Self::default()
@@ -318,7 +323,10 @@ pub mod simple_actor_system {
 
     #[async_trait::async_trait]
     impl Actor for Counter {
-        async fn handle(&mut self, _msg: Box<dyn std::any::Any + Send>) -> Box<dyn std::any::Any + Send> {
+        async fn handle(
+            &mut self,
+            _msg: Box<dyn std::any::Any + Send>,
+        ) -> Box<dyn std::any::Any + Send> {
             // 简化实现：实际应根据消息类型分发
             println!("  [Counter] 处理消息");
             Box::new(())
@@ -386,8 +394,6 @@ pub mod actix_analysis {
         total: i32,
     }
 
-    
-
     impl Calculator {
         pub fn new() -> Self {
             Self::default()
@@ -413,7 +419,10 @@ pub mod actix_analysis {
         fn handle(&mut self, msg: Add, _ctx: &mut Context<Self>) -> Self::Result {
             let result = msg.0 + msg.1;
             self.total += result;
-            println!("  [Calculator] {} + {} = {}, 累计: {}", msg.0, msg.1, result, self.total);
+            println!(
+                "  [Calculator] {} + {} = {}, 累计: {}",
+                msg.0, msg.1, result, self.total
+            );
             result
         }
     }
@@ -425,7 +434,10 @@ pub mod actix_analysis {
         fn handle(&mut self, msg: Multiply, _ctx: &mut Context<Self>) -> Self::Result {
             let result = msg.0 * msg.1;
             self.total += result;
-            println!("  [Calculator] {} × {} = {}, 累计: {}", msg.0, msg.1, result, self.total);
+            println!(
+                "  [Calculator] {} × {} = {}, 累计: {}",
+                msg.0, msg.1, result, self.total
+            );
             result
         }
     }
@@ -535,7 +547,10 @@ pub mod reactor_pattern {
         pub fn register(&self, source: u64, event_type: EventType, handler: Arc<dyn EventHandler>) {
             let mut handlers = self.handlers.lock().unwrap();
             handlers.insert((source, event_type), handler);
-            println!("  [Reactor] 注册处理器: source={}, type={:?}", source, event_type);
+            println!(
+                "  [Reactor] 注册处理器: source={}, type={:?}",
+                source, event_type
+            );
         }
 
         /// 提交事件（模拟）
@@ -718,7 +733,8 @@ pub mod tokio_reactor_analysis {
     pub fn explain_tokio_architecture() {
         println!("\n=== Tokio Reactor 架构分析 ===");
 
-        println!("
+        println!(
+            "
 1. Runtime 层:
    - 管理工作线程池
    - 任务调度与负载均衡
@@ -739,7 +755,8 @@ pub mod tokio_reactor_analysis {
    - TcpListener/TcpStream: 异步 TCP
    - UdpSocket: 异步 UDP
    - File: 异步文件 I/O (基于线程池)
-        ");
+        "
+        );
 
         println!("✓ 架构分析完成");
     }
@@ -841,8 +858,8 @@ pub mod actor_vs_reactor {
 
     /// ## Reactor 方式
     pub mod reactor_approach {
-        use tokio::time::sleep;
         use std::time::Duration;
+        use tokio::time::sleep;
 
         pub async fn demo() {
             println!("\n  === Reactor 方式 ===");

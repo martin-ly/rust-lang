@@ -109,7 +109,11 @@ where
 
     // 对于小数据集，直接顺序处理
     if items.len() < 100 {
-        return items.iter().filter(|item| predicate(item)).cloned().collect();
+        return items
+            .iter()
+            .filter(|item| predicate(item))
+            .cloned()
+            .collect();
     }
 
     let num_threads = num_cpus::get().min(items.len());
@@ -126,10 +130,8 @@ where
             let predicate = Arc::clone(&predicate);
 
             thread::spawn(move || {
-                let mut chunk_results: Vec<T> = chunk
-                    .into_iter()
-                    .filter(|item| predicate(item))
-                    .collect();
+                let mut chunk_results: Vec<T> =
+                    chunk.into_iter().filter(|item| predicate(item)).collect();
                 let mut results = results.lock().unwrap();
                 results.append(&mut chunk_results);
             })
@@ -246,11 +248,7 @@ where
 
     if found.load(Ordering::Relaxed) {
         let idx = result_index.load(Ordering::Relaxed);
-        if idx < items.len() {
-            Some(idx)
-        } else {
-            None
-        }
+        if idx < items.len() { Some(idx) } else { None }
     } else {
         None
     }

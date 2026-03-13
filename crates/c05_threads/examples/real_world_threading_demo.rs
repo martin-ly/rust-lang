@@ -6,12 +6,15 @@
 //! - 实时数据处理
 //! - 任务调度系统
 //! - 资源池管理
-use std::sync::{Arc, Mutex, atomic::{AtomicUsize, Ordering}};
-use std::thread;
-use std::time::{Duration, Instant};
+use rayon::prelude::*;
 use std::collections::VecDeque;
 use std::sync::mpsc;
-use rayon::prelude::*;
+use std::sync::{
+    Arc, Mutex,
+    atomic::{AtomicUsize, Ordering},
+};
+use std::thread;
+use std::time::{Duration, Instant};
 
 /// 文件处理任务
 #[allow(dead_code)]
@@ -25,7 +28,12 @@ pub struct FileTask {
 
 impl FileTask {
     fn new(id: usize, filename: String, size: usize, priority: u8) -> Self {
-        Self { id, filename, size, priority }
+        Self {
+            id,
+            filename,
+            size,
+            priority,
+        }
     }
 }
 
@@ -69,8 +77,10 @@ impl MultiThreadFileProcessor {
                                 thread::sleep(processing_time);
 
                                 let duration = start.elapsed();
-                                println!("工作线程 {} 处理文件 {} 完成，耗时 {:?}",
-                                    worker_id, task.filename, duration);
+                                println!(
+                                    "工作线程 {} 处理文件 {} 完成，耗时 {:?}",
+                                    worker_id, task.filename, duration
+                                );
 
                                 result_sender.send((task.id, duration)).unwrap();
                                 completed_count.fetch_add(1, Ordering::Relaxed);
@@ -192,8 +202,10 @@ impl RealTimeDataProcessor {
                                 }
 
                                 if processor_id == 0 {
-                                    println!("处理器 {} 处理数据: {:.2} -> {:.2}",
-                                        processor_id, value, processed_value);
+                                    println!(
+                                        "处理器 {} 处理数据: {:.2} -> {:.2}",
+                                        processor_id, value, processed_value
+                                    );
                                 }
                             }
                             Err(_) => {
@@ -262,7 +274,10 @@ impl TaskScheduler {
 
                     while let Some((scheduled_time, task)) = tasks_guard.front() {
                         if *scheduled_time <= now {
-                            let (_scheduled_time, task): (Instant, Box<dyn FnOnce() + Send + 'static>) = tasks_guard.pop_front().unwrap();
+                            let (_scheduled_time, task): (
+                                Instant,
+                                Box<dyn FnOnce() + Send + 'static>,
+                            ) = tasks_guard.pop_front().unwrap();
                             drop(tasks_guard);
                             task();
                             tasks_guard = tasks.lock().unwrap();
@@ -289,7 +304,10 @@ impl TaskScheduler {
         F: FnOnce() + Send + 'static,
     {
         let scheduled_time = Instant::now() + delay;
-        self.tasks.lock().unwrap().push_back((scheduled_time, Box::new(task)));
+        self.tasks
+            .lock()
+            .unwrap()
+            .push_back((scheduled_time, Box::new(task)));
     }
 
     pub fn shutdown(self) {
@@ -374,7 +392,10 @@ fn demo_file_processing() {
 
     // 等待处理完成
     thread::sleep(Duration::from_millis(2000));
-    println!("处理完成，共处理 {} 个文件", processor.get_completed_count());
+    println!(
+        "处理完成，共处理 {} 个文件",
+        processor.get_completed_count()
+    );
 
     processor.shutdown();
     println!();
@@ -397,7 +418,8 @@ fn demo_concurrent_requests() {
     let start = Instant::now();
 
     // 使用 rayon 并行处理请求
-    let results: Vec<_> = urls.into_par_iter()
+    let results: Vec<_> = urls
+        .into_par_iter()
         .map(|url| {
             // 模拟异步调用
             let _client = &client;
@@ -405,7 +427,9 @@ fn demo_concurrent_requests() {
                 // 这里简化了异步调用
                 thread::sleep(Duration::from_millis(100));
                 format!("Response from {}", url)
-            }).join().unwrap()
+            })
+            .join()
+            .unwrap()
         })
         .collect();
 

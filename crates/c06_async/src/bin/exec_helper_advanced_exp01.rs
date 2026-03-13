@@ -19,7 +19,8 @@ async fn main() -> anyhow::Result<()> {
                 async move {
                     let resp = client.get(&url).send().await?;
                     let s = resp.status();
-                    if s.is_server_error() { // 5xx 可重试
+                    if s.is_server_error() {
+                        // 5xx 可重试
                         Err(anyhow::anyhow!("server error: {}", s))
                     } else if s.is_success() {
                         Ok(s)
@@ -38,5 +39,3 @@ async fn main() -> anyhow::Result<()> {
     println!("result = {:?}", out);
     Ok(())
 }
-
-

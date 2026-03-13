@@ -105,7 +105,9 @@ impl StringAlgorithms {
                 let new_char_value = text_bytes[i + pattern_bytes.len()] as u64;
 
                 // 移除最左边的字符并添加最右边的字符
-                text_hash = (base * (text_hash + modulus - (old_char_value * h) % modulus) + new_char_value) % modulus;
+                text_hash = (base * (text_hash + modulus - (old_char_value * h) % modulus)
+                    + new_char_value)
+                    % modulus;
             }
         }
 

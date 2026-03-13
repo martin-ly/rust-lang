@@ -4,8 +4,8 @@
 #[cfg(feature = "async")]
 mod async_edge_cases {
     use c07_process::AsyncProcessManager;
-    use c07_process::types::{ProcessConfig, ResourceLimits};
     use c07_process::error::ProcessError;
+    use c07_process::types::{ProcessConfig, ResourceLimits};
     use std::collections::HashMap;
     use std::time::Duration;
 
@@ -54,7 +54,9 @@ mod async_edge_cases {
         let manager = AsyncProcessManager::new().await;
 
         // 尝试等待不存在的进程
-        let result = manager.wait_with_timeout(99999, Duration::from_secs(1)).await;
+        let result = manager
+            .wait_with_timeout(99999, Duration::from_secs(1))
+            .await;
         assert!(result.is_err());
         assert!(matches!(result.unwrap_err(), ProcessError::NotFound(99999)));
     }
@@ -189,7 +191,9 @@ mod async_edge_cases {
         let pid = manager.spawn(config).await.unwrap();
 
         // 使用很短的超时
-        let result = manager.wait_with_timeout(pid, Duration::from_millis(100)).await;
+        let result = manager
+            .wait_with_timeout(pid, Duration::from_millis(100))
+            .await;
 
         // 应该超时返回 None
         assert!(result.is_ok());

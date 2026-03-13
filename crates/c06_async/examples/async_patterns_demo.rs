@@ -1,5 +1,5 @@
 //! 异步编程模式演示
-//! 
+//!
 //! 本示例展示了常见的异步编程模式：
 //! - 生产者-消费者模式
 //! - 发布-订阅模式
@@ -7,16 +7,16 @@
 //! - 背压处理
 //! - 优雅关闭
 //! - 错误恢复
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example async_patterns_demo
 //! ```
 use std::sync::Arc;
 use std::time::Duration;
-use tokio::sync::{mpsc, broadcast, RwLock, Mutex, Notify};
-use tokio::time::{sleep, interval};
+use tokio::sync::{Mutex, Notify, RwLock, broadcast, mpsc};
 use tokio::task::JoinSet;
+use tokio::time::{interval, sleep};
 // use futures::StreamExt;
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
@@ -44,20 +44,18 @@ impl ProducerConsumerDemo {
 
     async fn run(&self) -> Result<()> {
         println!("🔄 生产者-消费者模式演示");
-        
+
         let (tx, rx) = mpsc::channel::<Message>(100);
         let message_count = Arc::clone(&self.message_count);
         let shutdown_notify = Arc::clone(&self.shutdown_notify);
 
         // 启动生产者
-        let producer_handle = tokio::spawn(async move {
-            Self::producer_task(tx, message_count).await
-        });
+        let producer_handle =
+            tokio::spawn(async move { Self::producer_task(tx, message_count).await });
 
         // 启动消费者
-        let consumer_handle = tokio::spawn(async move {
-            Self::consumer_task(rx, shutdown_notify).await
-        });
+        let consumer_handle =
+            tokio::spawn(async move { Self::consumer_task(rx, shutdown_notify).await });
 
         // 运行一段时间后关闭
         sleep(Duration::from_secs(3)).await;
@@ -66,10 +64,10 @@ impl ProducerConsumerDemo {
 
         // 等待任务完成
         let _ = tokio::join!(producer_handle, consumer_handle);
-        
+
         let final_count = *self.message_count.lock().await;
         println!("  生产者-消费者演示完成，处理消息数: {}", final_count);
-        
+
         Ok(())
     }
 
@@ -79,7 +77,7 @@ impl ProducerConsumerDemo {
 
         loop {
             interval.tick().await;
-            
+
             let message = Message {
                 id,
                 content: format!("消息 {}", id),
@@ -130,7 +128,7 @@ impl ProducerConsumerDemo {
                 }
             }
         }
-        
+
         println!("    消费者: 处理完成，共处理 {} 条消息", processed_count);
     }
 }
@@ -149,10 +147,10 @@ impl PubSubDemo {
 
     async fn run(&self) -> Result<()> {
         println!("\n📡 发布-订阅模式演示");
-        
+
         // 创建广播通道
         let (tx, _rx) = broadcast::channel(16);
-        
+
         // 添加订阅者
         for i in 0..3 {
             let rx = tx.subscribe();
@@ -171,7 +169,7 @@ impl PubSubDemo {
 
         sleep(Duration::from_secs(1)).await;
         println!("  发布-订阅演示完成");
-        
+
         Ok(())
     }
 
@@ -216,14 +214,14 @@ impl WorkerPoolDemo {
 
     async fn run(&self) -> Result<()> {
         println!("\n👥 工作池模式演示");
-        
+
         let mut join_set = JoinSet::new();
-        
+
         // 启动工作线程
         for worker_id in 0..self.pool_size {
             let task_queue = Arc::clone(&self.task_queue);
             let result_collector = Arc::clone(&self.result_collector);
-            
+
             join_set.spawn(async move {
                 Self::worker_task(worker_id, task_queue, result_collector).await;
             });
@@ -241,10 +239,12 @@ impl WorkerPoolDemo {
         let results = self.result_collector.lock().await;
         println!("  工作池演示完成，处理任务数: {}", results.len());
         for result in results.iter() {
-            println!("    任务 {} 完成: {} (耗时: {:?})", 
-                result.task_id, result.result, result.duration);
+            println!(
+                "    任务 {} 完成: {} (耗时: {:?})",
+                result.task_id, result.result, result.duration
+            );
         }
-        
+
         Ok(())
     }
 
@@ -255,14 +255,14 @@ impl WorkerPoolDemo {
                 duration_ms: 100 + (i * 50),
                 description: format!("任务 {}", i),
             };
-            
+
             let mut queue = self.task_queue.lock().await;
             queue.push(task);
             println!("    提交任务 {}", i);
-            
+
             sleep(Duration::from_millis(50)).await;
         }
-        
+
         // 添加结束标记
         for _ in 0..self.pool_size {
             let mut queue = self.task_queue.lock().await;
@@ -294,10 +294,10 @@ impl WorkerPoolDemo {
 
                     println!("    工作线程 {}: 开始处理任务 {}", worker_id, task.id);
                     let start = std::time::Instant::now();
-                    
+
                     // 模拟工作
                     sleep(Duration::from_millis(task.duration_ms)).await;
-                    
+
                     let duration = start.elapsed();
                     let result = TaskResult {
                         task_id: task.id,
@@ -307,7 +307,7 @@ impl WorkerPoolDemo {
 
                     let mut collector = result_collector.lock().await;
                     collector.push(result);
-                    
+
                     println!("    工作线程 {}: 完成任务 {}", worker_id, task.id);
                 }
                 None => {
@@ -315,7 +315,7 @@ impl WorkerPoolDemo {
                 }
             }
         }
-        
+
         println!("    工作线程 {}: 退出", worker_id);
     }
 }
@@ -331,7 +331,7 @@ impl BackpressureDemo {
 
     async fn run(&self) -> Result<()> {
         println!("\n🌊 背压处理演示");
-        
+
         let (tx, rx) = mpsc::channel(self.buffer_size);
         let semaphore = Arc::new(tokio::sync::Semaphore::new(self.buffer_size));
 
@@ -353,7 +353,7 @@ impl BackpressureDemo {
         };
 
         let _ = tokio::join!(producer_handle, consumer_handle);
-        
+
         println!("  背压处理演示完成");
         Ok(())
     }
@@ -362,7 +362,7 @@ impl BackpressureDemo {
         for i in 0..20 {
             // 获取信号量，模拟背压
             let _permit = semaphore.acquire().await.unwrap();
-            
+
             match tx.try_send(i) {
                 Ok(_) => {
                     println!("    生产者: 发送消息 {}", i);
@@ -374,10 +374,10 @@ impl BackpressureDemo {
                     continue;
                 }
             }
-            
+
             sleep(Duration::from_millis(50)).await;
         }
-        
+
         // 发送结束信号
         let _ = tx.send(999).await;
         println!("    生产者: 完成发送");
@@ -393,11 +393,11 @@ impl BackpressureDemo {
             println!("    消费者: 处理消息 {}", message);
             // 模拟慢速处理
             sleep(Duration::from_millis(200)).await;
-            
+
             // 释放信号量
             semaphore.add_permits(1);
         }
-        
+
         println!("    消费者: 完成处理");
     }
 }
@@ -418,9 +418,9 @@ impl GracefulShutdownDemo {
 
     async fn run(&self) -> Result<()> {
         println!("\n🛑 优雅关闭演示");
-        
+
         let mut join_set = JoinSet::new();
-        
+
         // 启动多个长时间运行的任务
         for i in 0..3 {
             let shutdown_rx = Arc::clone(&self.shutdown_rx);
@@ -447,14 +447,14 @@ impl GracefulShutdownDemo {
                 }
             }
         }
-        
+
         println!("  优雅关闭演示完成，{} 个任务已关闭", completed);
         Ok(())
     }
 
     async fn long_running_task(id: usize, shutdown_rx: Arc<Mutex<mpsc::Receiver<()>>>) -> usize {
         let mut interval = interval(Duration::from_millis(500));
-        
+
         loop {
             tokio::select! {
                 _ = interval.tick() => {
@@ -471,7 +471,7 @@ impl GracefulShutdownDemo {
                 }
             }
         }
-        
+
         id
     }
 }
@@ -481,23 +481,23 @@ struct ErrorRecoveryDemo;
 impl ErrorRecoveryDemo {
     async fn run() -> Result<()> {
         println!("\n🔄 错误恢复演示");
-        
+
         // 演示重试机制
         Self::retry_mechanism().await?;
-        
+
         // 演示熔断器模式
         Self::circuit_breaker_pattern().await?;
-        
+
         // 演示降级策略
         Self::fallback_strategy().await?;
-        
+
         println!("  错误恢复演示完成");
         Ok(())
     }
 
     async fn retry_mechanism() -> Result<()> {
         println!("    重试机制演示");
-        
+
         for attempt in 1..=3 {
             match Self::unreliable_operation().await {
                 Ok(result) => {
@@ -513,23 +513,23 @@ impl ErrorRecoveryDemo {
                 }
             }
         }
-        
+
         Ok(())
     }
 
     async fn circuit_breaker_pattern() -> Result<()> {
         println!("    熔断器模式演示");
-        
+
         let mut failure_count = 0;
         let failure_threshold = 3;
-        
+
         for i in 0..10 {
             if failure_count >= failure_threshold {
                 println!("      熔断器开启，跳过请求 {}", i);
                 sleep(Duration::from_millis(100)).await;
                 continue;
             }
-            
+
             match Self::unreliable_operation().await {
                 Ok(result) => {
                     println!("      请求 {} 成功: {}", i, result);
@@ -540,16 +540,16 @@ impl ErrorRecoveryDemo {
                     println!("      请求 {} 失败，失败计数: {}", i, failure_count);
                 }
             }
-            
+
             sleep(Duration::from_millis(100)).await;
         }
-        
+
         Ok(())
     }
 
     async fn fallback_strategy() -> Result<()> {
         println!("    降级策略演示");
-        
+
         match Self::primary_service().await {
             Ok(result) => {
                 println!("      主服务可用: {}", result);
@@ -566,7 +566,7 @@ impl ErrorRecoveryDemo {
                 }
             }
         }
-        
+
         Ok(())
     }
 

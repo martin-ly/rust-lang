@@ -1,5 +1,5 @@
 //! # Tokio 1.41+ 和 Smol 2.0+ 最新特性完整演示 2025
-//! 
+//!
 //! Latest Features of Tokio 1.41+ and Smol 2.0+ Complete Demo 2025
 //!
 //! ## 📚 本示例涵盖
@@ -25,8 +25,8 @@
 //use std::sync::Arc;
 use std::time::{Duration, Instant};
 //use tokio::sync::{Mutex, Semaphore};
-use tokio::task::{JoinSet};
-use tokio::time::{sleep, interval};
+use tokio::task::JoinSet;
+use tokio::time::{interval, sleep};
 
 // ============================================================================
 // 第一部分: Tokio 1.41+ 最新特性
@@ -37,13 +37,13 @@ mod tokio_latest_features {
     use super::*;
 
     /// # Tokio 特性 1: JoinSet 动态任务集管理
-    /// 
+    ///
     /// ## 新特性
     /// - 动态添加/移除任务
     /// - 有序/无序结果收集
     /// - 提前终止支持
     /// - 错误传播
-    /// 
+    ///
     /// ## 使用场景
     /// - 并行爬虫 (动态发现新 URL)
     /// - 工作池 (动态任务队列)
@@ -99,12 +99,12 @@ mod tokio_latest_features {
     }
 
     /// # Tokio 特性 2: TaskLocal 任务本地存储
-    /// 
+    ///
     /// ## 特性说明
     /// - 类似线程本地存储,但用于异步任务
     /// - 每个任务有独立的值
     /// - 零成本抽象
-    /// 
+    ///
     /// ## 使用场景
     /// - 请求追踪 (Trace ID)
     /// - 上下文传播
@@ -124,10 +124,7 @@ mod tokio_latest_features {
         async fn handle_request(endpoint: &str) {
             REQUEST_ID.with(|req_id| {
                 USER_ID.with(|user_id| {
-                    println!(
-                        "  [{}] 👤 用户 {} 访问 {}",
-                        req_id, user_id, endpoint
-                    );
+                    println!("  [{}] 👤 用户 {} 访问 {}", req_id, user_id, endpoint);
                 });
             });
 
@@ -174,13 +171,13 @@ mod tokio_latest_features {
     }
 
     /// # Tokio 特性 3: Runtime Metrics 运行时指标
-    /// 
+    ///
     /// ## 可收集的指标
     /// - 活跃任务数
     /// - 任务调度延迟
     /// - Worker 线程利用率
     /// - I/O 事件统计
-    /// 
+    ///
     /// ## 使用场景
     /// - 性能监控
     /// - 容量规划
@@ -217,7 +214,7 @@ mod tokio_latest_features {
                 println!("  📈 运行时指标快照:");
                 println!("     活跃任务数: {}", metrics.num_alive_tasks());
                 println!("     Worker 数量: {}", metrics.num_workers());
-                
+
                 // 每个 worker 的统计 (部分指标)
                 for worker_id in 0..metrics.num_workers() {
                     let park_count = metrics.worker_park_count(worker_id);
@@ -237,12 +234,12 @@ mod tokio_latest_features {
     }
 
     /// # Tokio 特性 4: 协作式调度优化
-    /// 
+    ///
     /// ## 特性说明
     /// - 自动插入 yield 点
     /// - 防止任务饿死
     /// - 公平调度保证
-    /// 
+    ///
     /// ## 使用场景
     /// - CPU 密集型任务
     /// - 长时间运行的循环
@@ -292,12 +289,12 @@ mod tokio_latest_features {
     }
 
     /// # Tokio 特性 5: 取消令牌 (Cancellation Token)
-    /// 
+    ///
     /// ## 特性说明
     /// - 结构化取消传播
     /// - 父子令牌层次
     /// - 优雅关闭支持
-    /// 
+    ///
     /// ## 使用场景
     /// - 请求超时
     /// - 优雅关闭
@@ -315,9 +312,7 @@ mod tokio_latest_features {
         let parent_token = CancellationToken::new();
 
         // 创建多个子令牌
-        let child_tokens: Vec<_> = (0..3)
-            .map(|_| parent_token.child_token())
-            .collect();
+        let child_tokens: Vec<_> = (0..3).map(|_| parent_token.child_token()).collect();
 
         // 启动多个子任务
         let mut tasks = vec![];
@@ -385,17 +380,17 @@ mod tokio_latest_features {
 
 mod smol_latest_features {
     use super::*;
-    use smol::{Executor, LocalExecutor, Timer};
     use async_io::Async;
+    use smol::{Executor, LocalExecutor, Timer};
     use std::net::TcpListener;
 
     /// # Smol 特性 1: 轻量级 Executor
-    /// 
+    ///
     /// ## 特性说明
     /// - 极小的内存占用 (~200 bytes per task)
     /// - 快速任务创建
     /// - 单线程/多线程灵活配置
-    /// 
+    ///
     /// ## 性能对比
     /// - Tokio: ~1KB per task
     /// - Smol: ~200 bytes per task
@@ -431,12 +426,12 @@ mod smol_latest_features {
     }
 
     /// # Smol 特性 2: Async-io 集成
-    /// 
+    ///
     /// ## 特性说明
     /// - 跨平台 I/O 抽象
     /// - epoll/kqueue/IOCP 自动选择
     /// - 与标准库兼容
-    /// 
+    ///
     /// ## 使用场景
     /// - 网络服务器
     /// - 文件 I/O
@@ -459,7 +454,7 @@ mod smol_latest_features {
         // 启动服务器任务
         let server = async move {
             println!("  [Server] 等待连接...");
-            
+
             // 接受连接(异步)
             match listener.accept().await {
                 Ok((stream, peer_addr)) => {
@@ -475,7 +470,7 @@ mod smol_latest_features {
         // 启动客户端任务
         let client = async move {
             Timer::after(Duration::from_millis(100)).await;
-            
+
             println!("  [Client] 🔗 连接到服务器...");
             match std::net::TcpStream::connect(addr) {
                 Ok(_stream) => {
@@ -496,12 +491,12 @@ mod smol_latest_features {
     }
 
     /// # Smol 特性 3: 与 Tokio 互操作
-    /// 
+    ///
     /// ## 特性说明
     /// - 在 Smol 中运行 Tokio 代码
     /// - 共享异步生态
     /// - 灵活运行时选择
-    /// 
+    ///
     /// ## 使用场景
     /// - 迁移现有项目
     /// - 使用特定库
@@ -525,14 +520,12 @@ mod smol_latest_features {
         // 通用异步任务(兼容两种运行时)
         let generic_task = async {
             println!("  [Generic] 🔵 通用异步任务");
-            
+
             // 使用 futures 标准库
             use futures::future::FutureExt;
-            
-            let result = async { 42 }
-                .map(|x| x * 2)
-                .await;
-            
+
+            let result = async { 42 }.map(|x| x * 2).await;
+
             println!("  [Generic] ✓ 计算结果: {}", result);
         };
 
@@ -545,12 +538,12 @@ mod smol_latest_features {
     }
 
     /// # Smol 特性 4: LocalExecutor 单线程优化
-    /// 
+    ///
     /// ## 特性说明
     /// - 单线程专用 executor
     /// - !Send 任务支持
     /// - 更低开销
-    /// 
+    ///
     /// ## 使用场景
     /// - GUI 应用
     /// - 单线程服务器
@@ -657,7 +650,8 @@ mod performance_comparison {
             for i in 0..1000 {
                 ex.spawn(async move {
                     let _ = i * 2;
-                }).detach();
+                })
+                .detach();
             }
             smol::Timer::after(Duration::from_millis(10)).await;
         });
@@ -676,7 +670,9 @@ mod performance_comparison {
             for _ in 0..10000 {
                 tokio::task::yield_now().await;
             }
-        }).await.ok();
+        })
+        .await
+        .ok();
         let tokio_switch_time = tokio_start.elapsed();
 
         println!("  Tokio: {:?} (10000 次 yield)", tokio_switch_time);
@@ -761,4 +757,3 @@ async fn main() {
     println!("╚══════════════════════════════════════════════════════════════════╝");
     println!();
 }
-

@@ -10,11 +10,14 @@
 //! - 增强的类型系统
 //! - 新的标准库功能
 //! - 性能优化特性
-use std::sync::{Arc, Mutex, atomic::{AtomicUsize, Ordering}};
-use std::thread;
-use std::collections::HashMap;
-use std::time::{Duration, Instant};
 use rayon::prelude::*;
+use std::collections::HashMap;
+use std::sync::{
+    Arc, Mutex,
+    atomic::{AtomicUsize, Ordering},
+};
+use std::thread;
+use std::time::{Duration, Instant};
 
 // ============================================================================
 // 显式推断的常量泛型参数 (Rust 1.89+)
@@ -59,6 +62,11 @@ impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
     /// 获取数组长度
     pub const fn len(&self) -> usize {
         N
+    }
+
+    /// 检查数组是否为空
+    pub const fn is_empty(&self) -> bool {
+        N == 0
     }
 
     /// 获取元素
@@ -307,10 +315,7 @@ impl AdvancedConcurrency {
             .unwrap();
 
         pool.install(|| {
-            let results: Vec<i32> = (0..1000)
-                .into_par_iter()
-                .map(|i| i * i)
-                .collect();
+            let results: Vec<i32> = (0..1000).into_par_iter().map(|i| i * i).collect();
 
             println!("线程池计算结果长度: {}", results.len());
         });
@@ -530,7 +535,8 @@ pub struct AdvancedThreadPool {
 
 impl AdvancedThreadPool {
     pub fn new(num_threads: usize) -> Self {
-        let (sender, receiver) = crossbeam_channel::unbounded::<Box<dyn FnOnce() + Send + 'static>>();
+        let (sender, receiver) =
+            crossbeam_channel::unbounded::<Box<dyn FnOnce() + Send + 'static>>();
         let receiver = Arc::new(Mutex::new(receiver));
         let counter = Arc::new(HighPerformanceCounter::new());
 
@@ -601,6 +607,7 @@ impl<const N: usize> LockFreeRingBuffer<N> {
         Self::default()
     }
 
+    #[allow(clippy::result_unit_err)]
     pub fn try_push(&self, _value: usize) -> Result<(), ()> {
         let current_tail = self.tail.load(Ordering::Relaxed);
         let next_tail = (current_tail + 1) & self.mask;

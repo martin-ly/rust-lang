@@ -170,9 +170,10 @@ impl WordDictionary {
             // '.' 可以匹配任何字符
             for child in node.children.iter() {
                 if let Some(child_node) = child
-                    && self.search_helper(child_node, word, index + 1) {
-                        return true;
-                    }
+                    && self.search_helper(child_node, word, index + 1)
+                {
+                    return true;
+                }
             }
             false
         } else {

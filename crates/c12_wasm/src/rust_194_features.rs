@@ -22,7 +22,6 @@ use std::sync::{LazyLock, Mutex};
 ///
 /// Rust 1.94.0 的 `array_windows` 方法在 WebAssembly 应用中特别有用，
 /// 可以用于高效处理线性内存中的数据序列。
-
 /// WASM 线性内存视图
 ///
 /// 使用 array_windows 处理 WASM 内存中的数据
@@ -48,9 +47,9 @@ impl<'a> WasmMemoryView<'a> {
     ///
     /// Rust 1.94.0: array_windows<4> 批量读取 4 字节整数
     pub fn read_all_i32_le(&self) -> impl Iterator<Item = i32> + '_ {
-        self.data.array_windows::<4>().map(|window| {
-            i32::from_le_bytes([window[0], window[1], window[2], window[3]])
-        })
+        self.data
+            .array_windows::<4>()
+            .map(|window| i32::from_le_bytes([window[0], window[1], window[2], window[3]]))
     }
 
     /// 查找字节序列
@@ -84,8 +83,8 @@ impl<'a> WasmMemoryView<'a> {
             8 => {
                 if pattern.len() == 8 {
                     let pat = [
-                        pattern[0], pattern[1], pattern[2], pattern[3],
-                        pattern[4], pattern[5], pattern[6], pattern[7],
+                        pattern[0], pattern[1], pattern[2], pattern[3], pattern[4], pattern[5],
+                        pattern[6], pattern[7],
                     ];
                     for (idx, window) in self.data.array_windows::<8>().enumerate() {
                         if *window == pat {
@@ -256,7 +255,8 @@ impl WasmImageProcessor {
                     let prev = if x > 0 {
                         let prev_idx = (y * width + x - 1) * 3;
                         if let Some(prev_window) = data.get(prev_idx..prev_idx + 3) {
-                            (prev_window[0] as i16 + prev_window[1] as i16 + prev_window[2] as i16) / 3
+                            (prev_window[0] as i16 + prev_window[1] as i16 + prev_window[2] as i16)
+                                / 3
                         } else {
                             curr
                         }
@@ -278,7 +278,6 @@ impl WasmImageProcessor {
 /// # 2. LazyLock 新方法 - WASM 模块管理
 ///
 /// Rust 1.94.0 的 LazyLock 新方法在 WASM 环境中可用于延迟初始化模块和资源。
-
 /// 全局 WASM 实例配置
 static WASM_INSTANCE_CONFIG: LazyLock<Mutex<WasmInstanceConfig>> = LazyLock::new(|| {
     Mutex::new(WasmInstanceConfig {
@@ -374,13 +373,11 @@ pub fn get_export_info(name: &str) -> Option<&'static WasmExportInfo> {
 
 /// 延迟初始化的 WASI 预打开目录
 static WASI_PREOPENS: LazyLock<Mutex<Vec<WasiPreopenDir>>> = LazyLock::new(|| {
-    Mutex::new(vec![
-        WasiPreopenDir {
-            guest_path: "/".to_string(),
-            host_path: ".".to_string(),
-            read_only: false,
-        },
-    ])
+    Mutex::new(vec![WasiPreopenDir {
+        guest_path: "/".to_string(),
+        host_path: ".".to_string(),
+        read_only: false,
+    }])
 });
 
 /// WASI 预打开目录
@@ -411,7 +408,6 @@ pub fn get_preopen_dirs() -> Vec<WasiPreopenDir> {
 /// # 3. 数学常量 - WASM 图形计算
 ///
 /// Rust 1.94.0 的数学常量在 WebAssembly 图形和数学计算中非常有用。
-
 /// 黄金比例布局计算器
 ///
 /// 使用 GOLDEN_RATIO 计算响应式布局
@@ -453,7 +449,11 @@ impl GoldenRatioLayout {
     /// 计算黄金比例网格
     ///
     /// 生成符合黄金比例的网格布局
-    pub fn golden_grid(container_width: f64, container_height: f64, items: usize) -> Vec<(f64, f64, f64, f64)> {
+    pub fn golden_grid(
+        container_width: f64,
+        container_height: f64,
+        items: usize,
+    ) -> Vec<(f64, f64, f64, f64)> {
         let mut layouts = Vec::new();
         let _phi = Self::PHI;
 
@@ -585,8 +585,8 @@ impl WasmTransform {
 
         Self {
             matrix: [
-                cos_a, 0.0, sin_a, 0.0, 0.0, 1.0, 0.0, 0.0, -sin_a, 0.0, cos_a, 0.0, 0.0, 0.0,
-                0.0, 1.0,
+                cos_a, 0.0, sin_a, 0.0, 0.0, 1.0, 0.0, 0.0, -sin_a, 0.0, cos_a, 0.0, 0.0, 0.0, 0.0,
+                1.0,
             ],
         }
     }
@@ -607,7 +607,6 @@ impl WasmTransform {
 /// # 4. Peekable 新方法 - WASM 文本解析
 ///
 /// Rust 1.94.0 的 Peekable 新方法在 WASM 文本解析中非常有用。
-
 /// WAT (WebAssembly Text) 解析器
 ///
 /// 使用 Peekable 新方法解析 WASM 文本格式
@@ -700,7 +699,10 @@ impl<'a> WatParser<'a> {
         let mut ident = String::new();
 
         // 解析首字符
-        if let Some(c) = self.chars.next_if(|c| c.is_alphabetic() || "_$".contains(*c)) {
+        if let Some(c) = self
+            .chars
+            .next_if(|c| c.is_alphabetic() || "_$".contains(*c))
+        {
             ident.push(c);
             self.column += 1;
         } else {
@@ -708,7 +710,10 @@ impl<'a> WatParser<'a> {
         }
 
         // 解析后续字符
-        while let Some(c) = self.chars.next_if(|c| c.is_alphanumeric() || "_$".contains(*c)) {
+        while let Some(c) = self
+            .chars
+            .next_if(|c| c.is_alphanumeric() || "_$".contains(*c))
+        {
             ident.push(c);
             self.column += 1;
         }
@@ -759,7 +764,10 @@ impl<'a> WatParser<'a> {
         let mut num_str = String::new();
 
         // 解析整数部分（包括符号）
-        while let Some(c) = self.chars.next_if(|c| c.is_ascii_digit() || *c == '-' || *c == '+') {
+        while let Some(c) = self
+            .chars
+            .next_if(|c| c.is_ascii_digit() || *c == '-' || *c == '+')
+        {
             num_str.push(c);
             self.column += 1;
         }
@@ -798,13 +806,13 @@ impl<'a> WatParser<'a> {
                 Some(WatToken::RParen)
             }
             Some(&'"') => self.parse_string().map(WatToken::String),
-            Some(c) if c.is_ascii_digit() || *c == '-' => {
-                self.parse_number().map(WatToken::Number)
-            }
+            Some(c) if c.is_ascii_digit() || *c == '-' => self.parse_number().map(WatToken::Number),
             Some(_) => {
                 if let Some(ident) = self.parse_identifier() {
                     // 检查是否为关键字
-                    let keywords = ["module", "func", "param", "result", "i32", "i64", "f32", "f64"];
+                    let keywords = [
+                        "module", "func", "param", "result", "i32", "i64", "f32", "f64",
+                    ];
                     if keywords.contains(&ident.as_str()) {
                         Some(WatToken::Keyword(ident))
                     } else {
@@ -849,7 +857,10 @@ impl<'a> SimpleCsvParser<'a> {
     fn parse_field(&mut self) -> String {
         let mut field = String::new();
 
-        while let Some(c) = self.chars.next_if(|c| *c != ',' && *c != '\n' && *c != '\r') {
+        while let Some(c) = self
+            .chars
+            .next_if(|c| *c != ',' && *c != '\n' && *c != '\r')
+        {
             field.push(c);
         }
 
@@ -902,7 +913,6 @@ impl<'a> SimpleCsvParser<'a> {
 /// # 5. char 到 usize 转换 - WASM 字符编码
 ///
 /// Rust 1.94.0 的 TryFrom<char> for usize 在 WASM 字符编码和 UTF-8 处理中非常有用。
-
 /// UTF-8 编码器（用于 WASM 字符串处理）
 ///
 /// 使用 char 到 usize 转换进行 UTF-8 编码
@@ -1209,7 +1219,10 @@ pub fn demonstrate_rust_194_wasm_features() {
     println!("   Base64 编码 'Hello WASM': {}", encoded);
 
     if let Some(decoded) = WasmBase64::decode(&encoded) {
-        println!("   Base64 解码结果: {:?}", String::from_utf8_lossy(&decoded));
+        println!(
+            "   Base64 解码结果: {:?}",
+            String::from_utf8_lossy(&decoded)
+        );
     }
 
     // 字符频率分析

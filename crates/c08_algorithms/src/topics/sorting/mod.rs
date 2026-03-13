@@ -228,7 +228,8 @@ impl SortingEngine {
         }
 
         let execution_time = start.elapsed();
-        let memory_usage = std::mem::size_of_val(&data) + data.capacity() * std::mem::size_of::<T>();
+        let memory_usage =
+            std::mem::size_of_val(&data) + data.capacity() * std::mem::size_of::<T>();
 
         SortingResult {
             data,
@@ -264,7 +265,8 @@ impl SortingEngine {
         }
 
         let execution_time = start.elapsed();
-        let memory_usage = std::mem::size_of_val(&data) + data.capacity() * std::mem::size_of::<T>();
+        let memory_usage =
+            std::mem::size_of_val(&data) + data.capacity() * std::mem::size_of::<T>();
 
         SortingResult {
             data,
@@ -278,14 +280,15 @@ impl SortingEngine {
     }
 
     /// 异步排序实现
-    pub async fn sort_async<T>(data: Vec<T>, algorithm: SortingAlgorithm) -> Result<SortingResult<T>>
+    pub async fn sort_async<T>(
+        data: Vec<T>,
+        algorithm: SortingAlgorithm,
+    ) -> Result<SortingResult<T>>
     where
         T: Ord + Send + Clone + 'static,
     {
-        let handle = tokio::task::spawn_blocking(move || {
-            Self::sort_sync(data, algorithm)
-        });
-        
+        let handle = tokio::task::spawn_blocking(move || Self::sort_sync(data, algorithm));
+
         Ok(handle.await?)
     }
 
@@ -401,7 +404,10 @@ impl SortingEngine {
         let (left_comp, left_swaps) = Self::quick_sort_partition(&mut data[..i]);
         let (right_comp, right_swaps) = Self::quick_sort_partition(&mut data[i + 1..]);
 
-        (comparisons + left_comp + right_comp, swaps + left_swaps + right_swaps)
+        (
+            comparisons + left_comp + right_comp,
+            swaps + left_swaps + right_swaps,
+        )
     }
 
     /// 归并排序
@@ -415,7 +421,10 @@ impl SortingEngine {
         let (right_comp, right_swaps) = Self::merge_sort(&mut data[mid..]);
         let (merge_comp, merge_swaps) = Self::merge(data, mid);
 
-        (left_comp + right_comp + merge_comp, left_swaps + right_swaps + merge_swaps)
+        (
+            left_comp + right_comp + merge_comp,
+            left_swaps + right_swaps + merge_swaps,
+        )
     }
 
     fn merge<T: Ord + Clone>(data: &mut [T], mid: usize) -> (usize, usize) {
@@ -561,10 +570,7 @@ impl SortingValidator {
     }
 
     /// 验证排序算法的正确性
-    pub fn validate_sorting<T: Ord + Clone>(
-        original: Vec<T>,
-        result: &SortingResult<T>,
-    ) -> bool {
+    pub fn validate_sorting<T: Ord + Clone>(original: Vec<T>, result: &SortingResult<T>) -> bool {
         // 检查长度是否一致
         if original.len() != result.data.len() {
             return false;
@@ -593,7 +599,7 @@ mod tests {
     fn test_bubble_sort() {
         let data = vec![64, 34, 25, 12, 22, 11, 90];
         let result = SortingEngine::sort_sync(data, SortingAlgorithm::Bubble);
-        
+
         assert!(SortingValidator::is_sorted(&result.data));
         assert_eq!(result.algorithm, SortingAlgorithm::Bubble);
         assert_eq!(result.implementation, ImplementationType::Synchronous);
@@ -603,7 +609,7 @@ mod tests {
     fn test_quick_sort() {
         let data = vec![64, 34, 25, 12, 22, 11, 90];
         let result = SortingEngine::sort_sync(data, SortingAlgorithm::Quick);
-        
+
         assert!(SortingValidator::is_sorted(&result.data));
         assert_eq!(result.algorithm, SortingAlgorithm::Quick);
     }
@@ -612,7 +618,7 @@ mod tests {
     fn test_merge_sort() {
         let data = vec![64, 34, 25, 12, 22, 11, 90];
         let result = SortingEngine::sort_sync(data, SortingAlgorithm::Merge);
-        
+
         assert!(SortingValidator::is_sorted(&result.data));
         assert_eq!(result.algorithm, SortingAlgorithm::Merge);
     }
@@ -621,7 +627,7 @@ mod tests {
     fn test_heap_sort() {
         let data = vec![64, 34, 25, 12, 22, 11, 90];
         let result = SortingEngine::sort_sync(data, SortingAlgorithm::Heap);
-        
+
         assert!(SortingValidator::is_sorted(&result.data));
         assert_eq!(result.algorithm, SortingAlgorithm::Heap);
     }
@@ -630,7 +636,7 @@ mod tests {
     fn test_parallel_sort() {
         let data = vec![64, 34, 25, 12, 22, 11, 90];
         let result = SortingEngine::sort_parallel(data, SortingAlgorithm::Quick);
-        
+
         assert!(SortingValidator::is_sorted(&result.data));
         assert_eq!(result.implementation, ImplementationType::Parallel);
     }
@@ -638,8 +644,10 @@ mod tests {
     #[tokio::test]
     async fn test_async_sort() {
         let data = vec![64, 34, 25, 12, 22, 11, 90];
-        let result = SortingEngine::sort_async(data, SortingAlgorithm::Merge).await.unwrap();
-        
+        let result = SortingEngine::sort_async(data, SortingAlgorithm::Merge)
+            .await
+            .unwrap();
+
         assert!(SortingValidator::is_sorted(&result.data));
         // 注意：异步函数内部调用同步函数，所以实现类型是 Synchronous
         assert_eq!(result.implementation, ImplementationType::Synchronous);
@@ -649,11 +657,15 @@ mod tests {
     fn test_sorting_complexities() {
         let complexities = SortingComplexity::get_all_complexities();
         assert_eq!(complexities.len(), 11);
-        
-        let quick_complexity = complexities.iter()
+
+        let quick_complexity = complexities
+            .iter()
             .find(|c| c.algorithm == SortingAlgorithm::Quick)
             .unwrap();
-        assert_eq!(quick_complexity.time_complexity, "O(n log n) 平均，O(n²) 最坏");
+        assert_eq!(
+            quick_complexity.time_complexity,
+            "O(n log n) 平均，O(n²) 最坏"
+        );
         assert_eq!(quick_complexity.space_complexity, "O(log n)");
         assert!(!quick_complexity.stability);
         assert!(quick_complexity.in_place);
@@ -663,7 +675,7 @@ mod tests {
     fn test_sorting_validator() {
         let sorted = vec![1, 2, 3, 4, 5];
         let unsorted = vec![5, 1, 3, 2, 4];
-        
+
         assert!(SortingValidator::is_sorted(&sorted));
         assert!(!SortingValidator::is_sorted(&unsorted));
     }

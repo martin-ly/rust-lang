@@ -25,6 +25,7 @@ impl NamedPipe {
         // 创建管道文件
         let _file = OpenOptions::new()
             .create(true)
+            .truncate(true)
             .write(true)
             .open(&pipe_path)
             .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?;
@@ -65,7 +66,6 @@ impl NamedPipe {
 
         // 写入管道文件
         let mut file = OpenOptions::new()
-            
             .append(true)
             .open(&pipe_path)
             .map_err(|e| IpcError::SendFailed(e.to_string()))?;

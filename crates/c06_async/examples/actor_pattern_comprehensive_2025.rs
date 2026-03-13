@@ -61,9 +61,9 @@ use std::collections::HashMap;
 use std::fmt;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use tokio::sync::{mpsc, oneshot, RwLock};
+use tokio::sync::{RwLock, mpsc, oneshot};
 use tokio::time::sleep;
-use tracing::{info, warn, debug, instrument, Level};
+use tracing::{Level, debug, info, instrument, warn};
 
 // ============================================================================
 // 第一部分: Actor 模式理论形式化
@@ -373,9 +373,7 @@ impl<M: ActorMessage> ActorRef<M> {
 
 impl<M: ActorMessage> fmt::Debug for ActorRef<M> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_struct("ActorRef")
-            .field("id", &self.id)
-            .finish()
+        f.debug_struct("ActorRef").field("id", &self.id).finish()
     }
 }
 
@@ -771,10 +769,16 @@ impl ActorSystem {
 #[derive(Debug)]
 pub enum BankAccountMessage {
     /// 存款 (Deposit)
-    Deposit { amount: f64, reply: oneshot::Sender<f64> },
+    Deposit {
+        amount: f64,
+        reply: oneshot::Sender<f64>,
+    },
 
     /// 取款 (Withdraw)
-    Withdraw { amount: f64, reply: oneshot::Sender<Result<f64, String>> },
+    Withdraw {
+        amount: f64,
+        reply: oneshot::Sender<Result<f64, String>>,
+    },
 
     /// 查询余额 (Get balance)
     GetBalance { reply: oneshot::Sender<f64> },
@@ -812,7 +816,8 @@ impl BankAccount {
     }
 
     fn record_transaction(&mut self, description: String, amount: f64) {
-        self.transactions.push((Instant::now(), description, amount));
+        self.transactions
+            .push((Instant::now(), description, amount));
     }
 }
 
@@ -897,23 +902,31 @@ impl Actor for BankAccount {
                     // 向目标账户存款
                     // Deposit to target account
                     let (deposit_tx, deposit_rx) = oneshot::channel();
-                    if to.send(BankAccountMessage::Deposit {
-                        amount,
-                        reply: deposit_tx,
-                    }).await.is_ok() {
+                    if to
+                        .send(BankAccountMessage::Deposit {
+                            amount,
+                            reply: deposit_tx,
+                        })
+                        .await
+                        .is_ok()
+                    {
                         if deposit_rx.await.is_ok() {
                             reply.send(Ok(())).ok();
                         } else {
                             // 存款失败，回滚
                             // Deposit failed, rollback
                             self.balance += amount;
-                            reply.send(Err("Transfer failed: deposit failed".to_string())).ok();
+                            reply
+                                .send(Err("Transfer failed: deposit failed".to_string()))
+                                .ok();
                         }
                     } else {
                         // 发送失败，回滚
                         // Send failed, rollback
                         self.balance += amount;
-                        reply.send(Err("Transfer failed: cannot reach target".to_string())).ok();
+                        reply
+                            .send(Err("Transfer failed: cannot reach target".to_string()))
+                            .ok();
                     }
                 } else {
                     reply.send(Err("Insufficient funds".to_string())).ok();
@@ -968,36 +981,60 @@ async fn basic_bank_example() {
     // 查询初始余额
     // Query initial balances
     let (tx, rx) = oneshot::channel();
-    actor1.send(BankAccountMessage::GetBalance { reply: tx }).await.ok();
+    actor1
+        .send(BankAccountMessage::GetBalance { reply: tx })
+        .await
+        .ok();
     let balance1 = rx.await.unwrap();
-    println!("账户1初始余额 (Account 1 initial balance): ${:.2}", balance1);
+    println!(
+        "账户1初始余额 (Account 1 initial balance): ${:.2}",
+        balance1
+    );
 
     let (tx, rx) = oneshot::channel();
-    actor2.send(BankAccountMessage::GetBalance { reply: tx }).await.ok();
+    actor2
+        .send(BankAccountMessage::GetBalance { reply: tx })
+        .await
+        .ok();
     let balance2 = rx.await.unwrap();
-    println!("账户2初始余额 (Account 2 initial balance): ${:.2}", balance2);
+    println!(
+        "账户2初始余额 (Account 2 initial balance): ${:.2}",
+        balance2
+    );
 
     // 存款操作
     // Deposit operation
     println!("\n--- 存款操作 (Deposit Operation) ---");
     let (tx, rx) = oneshot::channel();
-    actor1.send(BankAccountMessage::Deposit {
-        amount: 200.0,
-        reply: tx,
-    }).await.ok();
+    actor1
+        .send(BankAccountMessage::Deposit {
+            amount: 200.0,
+            reply: tx,
+        })
+        .await
+        .ok();
     let new_balance = rx.await.unwrap();
-    println!("账户1存款 $200 后余额 (Account 1 balance after $200 deposit): ${:.2}", new_balance);
+    println!(
+        "账户1存款 $200 后余额 (Account 1 balance after $200 deposit): ${:.2}",
+        new_balance
+    );
 
     // 取款操作
     // Withdrawal operation
     println!("\n--- 取款操作 (Withdrawal Operation) ---");
     let (tx, rx) = oneshot::channel();
-    actor1.send(BankAccountMessage::Withdraw {
-        amount: 300.0,
-        reply: tx,
-    }).await.ok();
+    actor1
+        .send(BankAccountMessage::Withdraw {
+            amount: 300.0,
+            reply: tx,
+        })
+        .await
+        .ok();
     match rx.await.unwrap() {
-        Ok(balance) => println!("账户1取款 $300 后余额 (Account 1 balance after $300 withdrawal): ${:.2}", balance),
+        Ok(balance) => println!(
+            "账户1取款 $300 后余额 (Account 1 balance after $300 withdrawal): ${:.2}",
+            balance
+        ),
         Err(e) => println!("取款失败 (Withdrawal failed): {}", e),
     }
 
@@ -1005,11 +1042,14 @@ async fn basic_bank_example() {
     // Transfer operation
     println!("\n--- 转账操作 (Transfer Operation) ---");
     let (tx, rx) = oneshot::channel();
-    actor1.send(BankAccountMessage::Transfer {
-        to: actor2.clone(),
-        amount: 250.0,
-        reply: tx,
-    }).await.ok();
+    actor1
+        .send(BankAccountMessage::Transfer {
+            to: actor2.clone(),
+            amount: 250.0,
+            reply: tx,
+        })
+        .await
+        .ok();
     match rx.await.unwrap() {
         Ok(_) => println!("转账 $250 成功 (Transfer of $250 successful)"),
         Err(e) => println!("转账失败 (Transfer failed): {}", e),
@@ -1019,12 +1059,18 @@ async fn basic_bank_example() {
     // Query final balances
     println!("\n--- 最终余额 (Final Balances) ---");
     let (tx, rx) = oneshot::channel();
-    actor1.send(BankAccountMessage::GetBalance { reply: tx }).await.ok();
+    actor1
+        .send(BankAccountMessage::GetBalance { reply: tx })
+        .await
+        .ok();
     let balance1 = rx.await.unwrap();
     println!("账户1最终余额 (Account 1 final balance): ${:.2}", balance1);
 
     let (tx, rx) = oneshot::channel();
-    actor2.send(BankAccountMessage::GetBalance { reply: tx }).await.ok();
+    actor2
+        .send(BankAccountMessage::GetBalance { reply: tx })
+        .await
+        .ok();
     let balance2 = rx.await.unwrap();
     println!("账户2最终余额 (Account 2 final balance): ${:.2}", balance2);
 
@@ -1032,8 +1078,14 @@ async fn basic_bank_example() {
     // Get actor statistics
     println!("\n--- Actor 统计信息 (Actor Statistics) ---");
     let stats1 = actor1.get_stats().await.unwrap();
-    println!("账户1处理的消息数 (Account 1 messages processed): {}", stats1.messages_processed);
-    println!("账户1平均处理时间 (Account 1 avg processing time): {} μs", stats1.avg_processing_time_us);
+    println!(
+        "账户1处理的消息数 (Account 1 messages processed): {}",
+        stats1.messages_processed
+    );
+    println!(
+        "账户1平均处理时间 (Account 1 avg processing time): {} μs",
+        stats1.avg_processing_time_us
+    );
 
     // 关闭系统
     // Shutdown system
@@ -1070,18 +1122,24 @@ async fn supervision_tree_example() {
     println!("  Performing operations...");
 
     let (tx1, rx1) = oneshot::channel();
-    actor1.send(BankAccountMessage::Deposit {
-        amount: 50.0,
-        reply: tx1,
-    }).await.ok();
+    actor1
+        .send(BankAccountMessage::Deposit {
+            amount: 50.0,
+            reply: tx1,
+        })
+        .await
+        .ok();
     let balance1 = rx1.await.unwrap();
     println!("  Account 1 balance: ${:.2}", balance1);
 
     let (tx2, rx2) = oneshot::channel();
-    actor2.send(BankAccountMessage::Deposit {
-        amount: 100.0,
-        reply: tx2,
-    }).await.ok();
+    actor2
+        .send(BankAccountMessage::Deposit {
+            amount: 100.0,
+            reply: tx2,
+        })
+        .await
+        .ok();
     let balance2 = rx2.await.unwrap();
     println!("  Account 2 balance: ${:.2}", balance2);
 
@@ -1148,17 +1206,23 @@ async fn performance_test() {
         let handle = tokio::spawn(async move {
             if i % 2 == 0 {
                 let (tx, rx) = oneshot::channel();
-                actor_clone.send(BankAccountMessage::Deposit {
-                    amount: 10.0,
-                    reply: tx,
-                }).await.ok();
+                actor_clone
+                    .send(BankAccountMessage::Deposit {
+                        amount: 10.0,
+                        reply: tx,
+                    })
+                    .await
+                    .ok();
                 rx.await.ok();
             } else {
                 let (tx, rx) = oneshot::channel();
-                actor_clone.send(BankAccountMessage::Withdraw {
-                    amount: 5.0,
-                    reply: tx,
-                }).await.ok();
+                actor_clone
+                    .send(BankAccountMessage::Withdraw {
+                        amount: 5.0,
+                        reply: tx,
+                    })
+                    .await
+                    .ok();
                 rx.await.ok();
             }
         });
@@ -1179,11 +1243,19 @@ async fn performance_test() {
 
     println!("\n性能统计 (Performance Statistics):");
     println!("  总操作数 (Total operations): {}", num_operations);
-    println!("  处理的消息数 (Messages processed): {}", stats.messages_processed);
+    println!(
+        "  处理的消息数 (Messages processed): {}",
+        stats.messages_processed
+    );
     println!("  总耗时 (Total time): {:?}", elapsed);
-    println!("  吞吐量 (Throughput): {:.2} ops/sec",
-        stats.messages_processed as f64 / elapsed.as_secs_f64());
-    println!("  平均处理时间 (Avg processing time): {} μs", stats.avg_processing_time_us);
+    println!(
+        "  吞吐量 (Throughput): {:.2} ops/sec",
+        stats.messages_processed as f64 / elapsed.as_secs_f64()
+    );
+    println!(
+        "  平均处理时间 (Avg processing time): {} μs",
+        stats.avg_processing_time_us
+    );
 
     system.shutdown().await;
 }
@@ -1197,9 +1269,7 @@ async fn performance_test() {
 async fn main() {
     // 初始化日志
     // Initialize logging
-    tracing_subscriber::fmt()
-        .with_max_level(Level::INFO)
-        .init();
+    tracing_subscriber::fmt().with_max_level(Level::INFO).init();
 
     println!("╔════════════════════════════════════════════════════════════════╗");
     println!("║  Actor 模式完整实现与形式化分析 2025                           ║");
@@ -1240,10 +1310,13 @@ mod tests {
         let actor = system.spawn(account, config).await;
 
         let (tx, rx) = oneshot::channel();
-        actor.send(BankAccountMessage::Deposit {
-            amount: 50.0,
-            reply: tx,
-        }).await.ok();
+        actor
+            .send(BankAccountMessage::Deposit {
+                amount: 50.0,
+                reply: tx,
+            })
+            .await
+            .ok();
 
         let balance = rx.await.unwrap();
         assert_eq!(balance, 150.0);
@@ -1259,10 +1332,13 @@ mod tests {
         let actor = system.spawn(account, config).await;
 
         let (tx, rx) = oneshot::channel();
-        actor.send(BankAccountMessage::Withdraw {
-            amount: 30.0,
-            reply: tx,
-        }).await.ok();
+        actor
+            .send(BankAccountMessage::Withdraw {
+                amount: 30.0,
+                reply: tx,
+            })
+            .await
+            .ok();
 
         let result = rx.await.unwrap();
         assert!(result.is_ok());
@@ -1279,10 +1355,13 @@ mod tests {
         let actor = system.spawn(account, config).await;
 
         let (tx, rx) = oneshot::channel();
-        actor.send(BankAccountMessage::Withdraw {
-            amount: 100.0,
-            reply: tx,
-        }).await.ok();
+        actor
+            .send(BankAccountMessage::Withdraw {
+                amount: 100.0,
+                reply: tx,
+            })
+            .await
+            .ok();
 
         let result = rx.await.unwrap();
         assert!(result.is_err());
@@ -1303,10 +1382,13 @@ mod tests {
 
         // 执行一些操作
         let (tx, rx) = oneshot::channel();
-        actor.send(BankAccountMessage::Deposit {
-            amount: 50.0,
-            reply: tx,
-        }).await.ok();
+        actor
+            .send(BankAccountMessage::Deposit {
+                amount: 50.0,
+                reply: tx,
+            })
+            .await
+            .ok();
 
         let balance = rx.await.unwrap();
         assert_eq!(balance, 150.0);
@@ -1322,7 +1404,10 @@ mod tests {
         let actor = system.spawn(account, config).await;
 
         let (tx, rx) = oneshot::channel();
-        actor.send(BankAccountMessage::GetBalance { reply: tx }).await.ok();
+        actor
+            .send(BankAccountMessage::GetBalance { reply: tx })
+            .await
+            .ok();
 
         let balance = rx.await.unwrap();
         assert_eq!(balance, 200.0);
@@ -1339,17 +1424,23 @@ mod tests {
 
         // 执行一些操作以生成统计信息
         let (tx1, rx1) = oneshot::channel();
-        actor.send(BankAccountMessage::Deposit {
-            amount: 50.0,
-            reply: tx1,
-        }).await.ok();
+        actor
+            .send(BankAccountMessage::Deposit {
+                amount: 50.0,
+                reply: tx1,
+            })
+            .await
+            .ok();
         rx1.await.unwrap();
 
         let (tx2, rx2) = oneshot::channel();
-        actor.send(BankAccountMessage::Withdraw {
-            amount: 30.0,
-            reply: tx2,
-        }).await.ok();
+        actor
+            .send(BankAccountMessage::Withdraw {
+                amount: 30.0,
+                reply: tx2,
+            })
+            .await
+            .ok();
         rx2.await.unwrap();
 
         // 获取统计信息

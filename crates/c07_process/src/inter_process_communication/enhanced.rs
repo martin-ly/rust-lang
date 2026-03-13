@@ -1,18 +1,18 @@
 //! 增强的进程间通信功能
-//! 
+//!
 //! 这个模块提供了高性能的IPC通信功能，包括零拷贝数据传输、
 //! 智能错误恢复、连接池管理等 Rust 1.90 新特性
 use crate::error::{IpcError, IpcResult};
 use crate::types::{IpcConfig, IpcProtocol, Message};
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
 #[cfg(unix)]
 use tokio::net::{UnixListener, UnixStream};
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
-use serde::{Serialize, Deserialize};
+use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的IPC管理器
 #[cfg(feature = "async")]
@@ -156,7 +156,6 @@ pub struct ChannelStats {
     pub created_at: Instant,
 }
 
-
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 impl EnhancedIpcManager {
@@ -179,15 +178,15 @@ impl EnhancedIpcManager {
     /// 创建TCP套接字通道
     #[allow(dead_code)]
     pub async fn create_tcp_channel(&self, name: &str, host: &str, port: u16) -> IpcResult<()> {
-        let _listener = TcpListener::bind(format!("{}:{}", host, port)).await
+        let _listener = TcpListener::bind(format!("{}:{}", host, port))
+            .await
             .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?;
 
-        let connection = EnhancedConnection::Tcp(
-            tokio::sync::Mutex::new(
-                TcpStream::connect(format!("{}:{}", host, port)).await
-                    .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?
-            )
-        );
+        let connection = EnhancedConnection::Tcp(tokio::sync::Mutex::new(
+            TcpStream::connect(format!("{}:{}", host, port))
+                .await
+                .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?,
+        ));
 
         let stats = ChannelStats {
             name: name.to_string(),
@@ -210,7 +209,10 @@ impl EnhancedIpcManager {
             last_activity: Arc::new(TokioMutex::new(Instant::now())),
         };
 
-        self.channels.write().await.insert(name.to_string(), channel);
+        self.channels
+            .write()
+            .await
+            .insert(name.to_string(), channel);
         self.performance_monitor.add_channel(name).await;
 
         Ok(())
@@ -221,8 +223,9 @@ impl EnhancedIpcManager {
     #[allow(dead_code)]
     pub async fn create_unix_channel(&self, name: &str, path: &str) -> IpcResult<()> {
         let connection = EnhancedConnection::Unix(
-            UnixStream::connect(path).await
-                .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?
+            UnixStream::connect(path)
+                .await
+                .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?,
         );
 
         let stats = ChannelStats {
@@ -246,7 +249,10 @@ impl EnhancedIpcManager {
             last_activity: Arc::new(TokioMutex::new(Instant::now())),
         };
 
-        self.channels.write().await.insert(name.to_string(), channel);
+        self.channels
+            .write()
+            .await
+            .insert(name.to_string(), channel);
         self.performance_monitor.add_channel(name).await;
 
         Ok(())
@@ -258,8 +264,7 @@ impl EnhancedIpcManager {
         let region = memmap2::MmapOptions::new()
             .len(size)
             .map_anon()
-            .map_err(|e| IpcError::SharedMemoryError(e.to_string()))?
-            ;
+            .map_err(|e| IpcError::SharedMemoryError(e.to_string()))?;
 
         let connection = EnhancedConnection::SharedMemory(SharedMemoryConnection {
             region: Arc::new(tokio::sync::Mutex::new(region)),
@@ -288,7 +293,10 @@ impl EnhancedIpcManager {
             last_activity: Arc::new(TokioMutex::new(Instant::now())),
         };
 
-        self.channels.write().await.insert(name.to_string(), channel);
+        self.channels
+            .write()
+            .await
+            .insert(name.to_string(), channel);
         self.performance_monitor.add_channel(name).await;
 
         Ok(())
@@ -324,29 +332,37 @@ impl EnhancedIpcManager {
             last_activity: Arc::new(TokioMutex::new(Instant::now())),
         };
 
-        self.channels.write().await.insert(name.to_string(), channel);
+        self.channels
+            .write()
+            .await
+            .insert(name.to_string(), channel);
         self.performance_monitor.add_channel(name).await;
 
         Ok(())
     }
 
     /// 发送消息（零拷贝优化）
-    /// 
+    ///
     /// 使用 Rust 1.90 新特性进行零拷贝数据传输优化
     #[allow(dead_code)]
-    pub async fn send_message_zero_copy<T>(&self, channel_name: &str, message: &Message<T>) -> IpcResult<()>
+    pub async fn send_message_zero_copy<T>(
+        &self,
+        channel_name: &str,
+        message: &Message<T>,
+    ) -> IpcResult<()>
     where
         T: Serialize,
     {
         let start_time = Instant::now();
-        
+
         let channels = self.channels.read().await;
-        let channel = channels.get(channel_name)
+        let channel = channels
+            .get(channel_name)
             .ok_or_else(|| IpcError::ChannelNotFound(channel_name.to_string()))?;
 
         // 序列化消息
-        let serialized = serde_json::to_vec(message)
-            .map_err(|e| IpcError::SerializationError(e.to_string()))?;
+        let serialized =
+            serde_json::to_vec(message).map_err(|e| IpcError::SerializationError(e.to_string()))?;
 
         // 根据协议类型发送
         match &channel.connection {
@@ -380,9 +396,11 @@ impl EnhancedIpcManager {
             EnhancedConnection::SharedMemory(conn) => {
                 let mut region = conn.region.lock().await;
                 if serialized.len() > region.len() {
-                    return Err(IpcError::SendFailed("Message too large for shared memory".to_string()));
+                    return Err(IpcError::SendFailed(
+                        "Message too large for shared memory".to_string(),
+                    ));
                 }
-                
+
                 region[..serialized.len()].copy_from_slice(&serialized);
             }
             EnhancedConnection::MessageQueue(conn) => {
@@ -390,7 +408,7 @@ impl EnhancedIpcManager {
                 if queue.len() >= conn.capacity {
                     return Err(IpcError::SendFailed("Message queue is full".to_string()));
                 }
-                
+
                 let message = Message {
                     id: message.id,
                     message_type: message.message_type.clone(),
@@ -400,21 +418,26 @@ impl EnhancedIpcManager {
                     target_pid: message.target_pid,
                     priority: message.priority,
                 };
-                
+
                 queue.push(message);
             }
-            _ => return Err(IpcError::ProtocolNotSupported("Unsupported connection type".to_string())),
+            _ => {
+                return Err(IpcError::ProtocolNotSupported(
+                    "Unsupported connection type".to_string(),
+                ));
+            }
         }
 
         // 更新统计信息
         let latency = start_time.elapsed();
-        self.update_channel_stats(channel_name, serialized.len() as u64, 0, latency).await;
+        self.update_channel_stats(channel_name, serialized.len() as u64, 0, latency)
+            .await;
 
         Ok(())
     }
 
     /// 接收消息（零拷贝优化）
-    /// 
+    ///
     /// 使用 Rust 1.90 新特性进行零拷贝数据接收优化
     #[allow(dead_code)]
     pub async fn receive_message_zero_copy<T>(&self, channel_name: &str) -> IpcResult<Message<T>>
@@ -422,9 +445,10 @@ impl EnhancedIpcManager {
         T: for<'de> Deserialize<'de>,
     {
         let start_time = Instant::now();
-        
+
         let channels = self.channels.read().await;
-        let channel = channels.get(channel_name)
+        let channel = channels
+            .get(channel_name)
             .ok_or_else(|| IpcError::ChannelNotFound(channel_name.to_string()))?;
 
         let (data, latency) = match &channel.connection {
@@ -472,7 +496,11 @@ impl EnhancedIpcManager {
                     return Err(IpcError::ReceiveFailed("No messages in queue".to_string()));
                 }
             }
-            _ => return Err(IpcError::ProtocolNotSupported("Unsupported connection type".to_string())),
+            _ => {
+                return Err(IpcError::ProtocolNotSupported(
+                    "Unsupported connection type".to_string(),
+                ));
+            }
         };
 
         // 反序列化消息
@@ -480,7 +508,8 @@ impl EnhancedIpcManager {
             .map_err(|e| IpcError::DeserializationError(e.to_string()))?;
 
         // 更新统计信息
-        self.update_channel_stats(channel_name, 0, data.len() as u64, latency).await;
+        self.update_channel_stats(channel_name, 0, data.len() as u64, latency)
+            .await;
 
         Ok(message)
     }
@@ -496,19 +525,19 @@ impl EnhancedIpcManager {
     }
 
     /// 批量发送消息（使用 Rust 1.90 改进的迭代器）
-    /// 
+    ///
     /// 使用 Rust 1.90 的改进迭代器特性进行批量消息处理
     #[allow(dead_code)]
     pub async fn send_batch_messages<T>(
-        &self, 
-        channel_name: &str, 
-        messages: Vec<Message<T>>
+        &self,
+        channel_name: &str,
+        messages: Vec<Message<T>>,
     ) -> IpcResult<usize>
     where
         T: Serialize,
     {
         let mut success_count = 0;
-        
+
         // 使用 Rust 1.90 改进的迭代器
         for message in messages.into_iter() {
             match self.send_message_zero_copy(channel_name, &message).await {
@@ -528,37 +557,38 @@ impl EnhancedIpcManager {
                 }
             }
         }
-        
+
         Ok(success_count)
     }
 
     /// 高性能消息广播（使用 Rust 1.90 并发特性）
-    /// 
+    ///
     /// 使用 Rust 1.90 的改进并发特性进行消息广播
     #[allow(dead_code)]
     pub async fn broadcast_message<T>(
-        &self, 
-        message: Message<T>, 
-        channel_names: Vec<String>
+        &self,
+        message: Message<T>,
+        channel_names: Vec<String>,
     ) -> IpcResult<usize>
     where
         T: Serialize + Clone + Send + Sync + 'static,
     {
         let mut handles = Vec::new();
-        
+
         // 使用 Rust 1.90 的改进并发特性
         for channel_name in channel_names {
             let channels = Arc::clone(&self.channels);
             let performance_monitor = Arc::clone(&self.performance_monitor);
             let _error_recovery = Arc::clone(&self.error_recovery);
             let message_clone = message.clone();
-            
+
             let handle = tokio::spawn(async move {
                 // 直接使用通道发送消息
                 let start_time = Instant::now();
-                
+
                 let channels_guard = channels.read().await;
-                let channel = channels_guard.get(&channel_name)
+                let channel = channels_guard
+                    .get(&channel_name)
                     .ok_or_else(|| IpcError::ChannelNotFound(channel_name.clone()))?;
 
                 // 序列化消息
@@ -585,7 +615,7 @@ impl EnhancedIpcManager {
                         if queue.len() >= conn.capacity {
                             return Err(IpcError::SendFailed("Message queue is full".to_string()));
                         }
-                        
+
                         let message = Message {
                             id: message_clone.id,
                             message_type: message_clone.message_type.clone(),
@@ -595,37 +625,41 @@ impl EnhancedIpcManager {
                             target_pid: message_clone.target_pid,
                             priority: message_clone.priority,
                         };
-                        
+
                         queue.push(message);
                         Ok(())
                     }
-                    _ => Err(IpcError::ProtocolNotSupported("Unsupported connection type".to_string())),
+                    _ => Err(IpcError::ProtocolNotSupported(
+                        "Unsupported connection type".to_string(),
+                    )),
                 };
 
                 // 更新统计信息
                 let latency = start_time.elapsed();
                 if let Ok(()) = result {
-                    performance_monitor.update_metrics(&channel_name, serialized.len() as u64, 0, latency).await;
+                    performance_monitor
+                        .update_metrics(&channel_name, serialized.len() as u64, 0, latency)
+                        .await;
                 }
 
                 result
             });
-            
+
             handles.push(handle);
         }
-        
+
         let mut success_count = 0;
         for handle in handles {
             if let Ok(Ok(())) = handle.await {
                 success_count += 1;
             }
         }
-        
+
         Ok(success_count)
     }
 
     /// 零拷贝共享内存传输（使用 Rust 1.90 内存映射特性）
-    /// 
+    ///
     /// 使用 Rust 1.90 的内存映射和零拷贝特性进行高性能数据传输
     #[allow(dead_code)]
     pub async fn zero_copy_shared_memory_transfer(
@@ -634,19 +668,21 @@ impl EnhancedIpcManager {
         data: &[u8],
     ) -> IpcResult<()> {
         let channels = self.channels.read().await;
-        let channel = channels.get(channel_name)
+        let channel = channels
+            .get(channel_name)
             .ok_or_else(|| IpcError::ChannelNotFound(channel_name.to_string()))?;
 
         match &channel.connection {
             EnhancedConnection::SharedMemory(conn) => {
                 let mut region = conn.region.lock().await;
-                
+
                 // 使用 Rust 1.90 改进的模式匹配
                 match (data.len(), region.len()) {
                     (data_len, region_len) if data_len > region_len => {
-                        return Err(IpcError::SendFailed(
-                            format!("Data size {} exceeds region size {}", data_len, region_len)
-                        ));
+                        return Err(IpcError::SendFailed(format!(
+                            "Data size {} exceeds region size {}",
+                            data_len, region_len
+                        )));
                     }
                     (0, _region_len) => {
                         return Err(IpcError::SendFailed("Empty data not allowed".to_string()));
@@ -654,22 +690,25 @@ impl EnhancedIpcManager {
                     (data_len, _region_len) => {
                         // 零拷贝写入
                         region[..data_len].copy_from_slice(data);
-                        
+
                         // 更新统计信息
-                        self.update_channel_stats(channel_name, data_len as u64, 0, Duration::ZERO).await;
+                        self.update_channel_stats(channel_name, data_len as u64, 0, Duration::ZERO)
+                            .await;
                     }
                 }
             }
-            _ => return Err(IpcError::ProtocolNotSupported(
-                "Zero-copy transfer only supported for shared memory".to_string()
-            )),
+            _ => {
+                return Err(IpcError::ProtocolNotSupported(
+                    "Zero-copy transfer only supported for shared memory".to_string(),
+                ));
+            }
         }
 
         Ok(())
     }
 
     /// 智能连接池管理（使用 Rust 1.90 智能指针特性）
-    /// 
+    ///
     /// 使用 Rust 1.90 的智能指针和生命周期管理特性
     #[allow(dead_code)]
     pub async fn get_or_create_connection(
@@ -685,19 +724,24 @@ impl EnhancedIpcManager {
         // 创建新连接
         let connection = match protocol {
             IpcProtocol::Socket => {
-                let stream = TcpStream::connect(endpoint).await
+                let stream = TcpStream::connect(endpoint)
+                    .await
                     .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?;
                 EnhancedConnection::Tcp(tokio::sync::Mutex::new(stream))
             }
             #[cfg(unix)]
             IpcProtocol::UnixSocket => {
-                let stream = UnixStream::connect(endpoint).await
+                let stream = UnixStream::connect(endpoint)
+                    .await
                     .map_err(|e| IpcError::ConnectionFailed(e.to_string()))?;
                 EnhancedConnection::Unix(tokio::sync::Mutex::new(stream))
             }
-            _ => return Err(IpcError::ProtocolNotSupported(
-                format!("Protocol {:?} not supported for connection creation", protocol)
-            )),
+            _ => {
+                return Err(IpcError::ProtocolNotSupported(format!(
+                    "Protocol {:?} not supported for connection creation",
+                    protocol
+                )));
+            }
         };
 
         Ok(connection)
@@ -707,13 +751,13 @@ impl EnhancedIpcManager {
     pub async fn get_all_channel_stats(&self) -> HashMap<String, ChannelStats> {
         let channels = self.channels.read().await;
         let mut stats = HashMap::new();
-        
+
         for (name, channel) in channels.iter() {
             if let Ok(stats_guard) = channel.stats.try_lock() {
                 stats.insert(name.clone(), stats_guard.clone());
             }
         }
-        
+
         stats
     }
 
@@ -725,14 +769,20 @@ impl EnhancedIpcManager {
     }
 
     /// 更新通道统计信息
-    async fn update_channel_stats(&self, channel_name: &str, bytes_sent: u64, bytes_received: u64, latency: Duration) {
+    async fn update_channel_stats(
+        &self,
+        channel_name: &str,
+        bytes_sent: u64,
+        bytes_received: u64,
+        latency: Duration,
+    ) {
         let channels = self.channels.read().await;
         if let Some(channel) = channels.get(channel_name) {
             if let Ok(mut stats) = channel.stats.try_lock() {
                 stats.bytes_sent += bytes_sent;
                 stats.bytes_received += bytes_received;
                 stats.last_activity = Instant::now();
-                
+
                 if bytes_sent > 0 {
                     stats.messages_sent += 1;
                 }
@@ -740,13 +790,15 @@ impl EnhancedIpcManager {
                     stats.messages_received += 1;
                 }
             }
-            
+
             if let Ok(mut last_activity) = channel.last_activity.try_lock() {
                 *last_activity = Instant::now();
             }
         }
-        
-        self.performance_monitor.update_metrics(channel_name, bytes_sent, bytes_received, latency).await;
+
+        self.performance_monitor
+            .update_metrics(channel_name, bytes_sent, bytes_received, latency)
+            .await;
     }
 }
 
@@ -755,7 +807,7 @@ impl ConnectionPool {
     pub fn new(max_connections_per_endpoint: usize, connection_timeout: Duration) -> Self {
         Self {
             tcp_connections: Arc::new(TokioMutex::new(HashMap::new())),
-            
+
             max_connections_per_endpoint,
             connection_timeout,
         }
@@ -768,8 +820,10 @@ impl ConnectionPool {
 
     pub async fn return_tcp_connection(&self, endpoint: &str, connection: TcpStream) {
         let mut connections = self.tcp_connections.lock().await;
-        let conns = connections.entry(endpoint.to_string()).or_insert_with(Vec::new);
-        
+        let conns = connections
+            .entry(endpoint.to_string())
+            .or_insert_with(Vec::new);
+
         if conns.len() < self.max_connections_per_endpoint {
             conns.push(connection);
         }
@@ -803,35 +857,46 @@ impl IpcPerformanceMonitor {
             error_count: 0,
             last_activity: Instant::now(),
         };
-        
-        self.metrics.lock().await.insert(channel_name.to_string(), metrics);
+
+        self.metrics
+            .lock()
+            .await
+            .insert(channel_name.to_string(), metrics);
     }
 
-    pub async fn update_metrics(&self, channel_name: &str, bytes_sent: u64, bytes_received: u64, latency: Duration) {
+    pub async fn update_metrics(
+        &self,
+        channel_name: &str,
+        bytes_sent: u64,
+        bytes_received: u64,
+        latency: Duration,
+    ) {
         {
             let mut metrics = self.metrics.lock().await;
             if let Some(metric) = metrics.get_mut(channel_name) {
                 metric.bytes_sent += bytes_sent;
                 metric.bytes_received += bytes_received;
                 metric.last_activity = Instant::now();
-                
+
                 if bytes_sent > 0 {
                     metric.messages_sent += 1;
                 }
                 if bytes_received > 0 {
                     metric.messages_received += 1;
                 }
-                
+
                 // 更新延迟统计
                 if latency > metric.max_latency {
                     metric.max_latency = latency;
                 }
-                
+
                 // 计算平均延迟
                 let total_messages = metric.messages_sent + metric.messages_received;
                 if total_messages > 0 {
                     metric.average_latency = Duration::from_nanos(
-                        (metric.average_latency.as_nanos() as u64 * (total_messages - 1) + latency.as_nanos() as u64) / total_messages
+                        (metric.average_latency.as_nanos() as u64 * (total_messages - 1)
+                            + latency.as_nanos() as u64)
+                            / total_messages,
                     );
                 }
             }
@@ -865,7 +930,10 @@ impl IpcErrorRecovery {
 
     pub async fn add_recovery_strategy(&self, error: IpcError, strategy: IpcRecoveryStrategy) {
         // 使用字符串键，避免 IpcError 需要实现 Hash/Eq
-        self.recovery_strategies.lock().await.insert(format!("{:?}", error), strategy);
+        self.recovery_strategies
+            .lock()
+            .await
+            .insert(format!("{:?}", error), strategy);
     }
 
     pub async fn attempt_recovery(&self, error: &IpcError) -> IpcResult<()> {
@@ -884,12 +952,12 @@ impl IpcErrorRecovery {
                     // 跳过错误
                     Ok(())
                 }
-                IpcRecoveryStrategy::Custom(f) => {
-                    f(error)
-                }
+                IpcRecoveryStrategy::Custom(f) => f(error),
             }
         } else {
-            Err(IpcError::ConnectionFailed("No recovery strategy found".to_string()))
+            Err(IpcError::ConnectionFailed(
+                "No recovery strategy found".to_string(),
+            ))
         }
     }
 }
@@ -902,18 +970,27 @@ mod tests {
     async fn test_enhanced_ipc_manager() {
         let config = IpcConfig::default();
         let manager = EnhancedIpcManager::new(config).await.unwrap();
-        
+
         // 测试创建消息队列通道
-        manager.create_message_queue_channel("test_queue", 100).await.unwrap();
-        
+        manager
+            .create_message_queue_channel("test_queue", 100)
+            .await
+            .unwrap();
+
         // 测试发送和接收消息
         let message = Message::new(1, "test", "Hello, World!".as_bytes().to_vec(), 1234);
-        manager.send_message_zero_copy("test_queue", &message).await.unwrap();
-        
-        let received: Message<Vec<u8>> = manager.receive_message_zero_copy("test_queue").await.unwrap();
+        manager
+            .send_message_zero_copy("test_queue", &message)
+            .await
+            .unwrap();
+
+        let received: Message<Vec<u8>> = manager
+            .receive_message_zero_copy("test_queue")
+            .await
+            .unwrap();
         assert_eq!(received.id, message.id);
         assert_eq!(received.message_type, message.message_type);
-        
+
         // 清理
         manager.cleanup().await.unwrap();
     }
@@ -922,14 +999,20 @@ mod tests {
     async fn test_shared_memory_channel() {
         let config = IpcConfig::default();
         let manager = EnhancedIpcManager::new(config).await.unwrap();
-        
+
         // 测试创建共享内存通道
-        manager.create_shared_memory_channel("test_memory", 1024).await.unwrap();
-        
+        manager
+            .create_shared_memory_channel("test_memory", 1024)
+            .await
+            .unwrap();
+
         // 测试发送消息
         let message = Message::new(1, "test", "Hello, Shared Memory!".as_bytes().to_vec(), 1234);
-        manager.send_message_zero_copy("test_memory", &message).await.unwrap();
-        
+        manager
+            .send_message_zero_copy("test_memory", &message)
+            .await
+            .unwrap();
+
         // 清理
         manager.cleanup().await.unwrap();
     }
@@ -938,19 +1021,32 @@ mod tests {
     async fn test_batch_messages() {
         let config = IpcConfig::default();
         let manager = EnhancedIpcManager::new(config).await.unwrap();
-        
+
         // 创建消息队列通道
-        manager.create_message_queue_channel("batch_queue", 100).await.unwrap();
-        
+        manager
+            .create_message_queue_channel("batch_queue", 100)
+            .await
+            .unwrap();
+
         // 创建批量消息
         let messages: Vec<Message<Vec<u8>>> = (0..5)
-            .map(|i| Message::new(i, "batch", format!("Message {}", i).as_bytes().to_vec(), 1234))
+            .map(|i| {
+                Message::new(
+                    i,
+                    "batch",
+                    format!("Message {}", i).as_bytes().to_vec(),
+                    1234,
+                )
+            })
             .collect();
-        
+
         // 测试批量发送
-        let success_count = manager.send_batch_messages("batch_queue", messages).await.unwrap();
+        let success_count = manager
+            .send_batch_messages("batch_queue", messages)
+            .await
+            .unwrap();
         assert_eq!(success_count, 5);
-        
+
         // 清理
         manager.cleanup().await.unwrap();
     }
@@ -959,14 +1055,20 @@ mod tests {
     async fn test_zero_copy_shared_memory() {
         let config = IpcConfig::default();
         let manager = EnhancedIpcManager::new(config).await.unwrap();
-        
+
         // 创建共享内存通道
-        manager.create_shared_memory_channel("zero_copy_memory", 1024).await.unwrap();
-        
+        manager
+            .create_shared_memory_channel("zero_copy_memory", 1024)
+            .await
+            .unwrap();
+
         // 测试零拷贝传输
         let test_data = b"Zero-copy test data";
-        manager.zero_copy_shared_memory_transfer("zero_copy_memory", test_data).await.unwrap();
-        
+        manager
+            .zero_copy_shared_memory_transfer("zero_copy_memory", test_data)
+            .await
+            .unwrap();
+
         // 清理
         manager.cleanup().await.unwrap();
     }
@@ -975,21 +1077,32 @@ mod tests {
     async fn test_performance_monitoring() {
         let config = IpcConfig::default();
         let manager = EnhancedIpcManager::new(config).await.unwrap();
-        
+
         // 创建通道
-        manager.create_message_queue_channel("perf_test", 100).await.unwrap();
-        
+        manager
+            .create_message_queue_channel("perf_test", 100)
+            .await
+            .unwrap();
+
         // 发送一些消息
         for i in 0..10 {
-            let message = Message::new(i, "perf", format!("Performance test {}", i).as_bytes().to_vec(), 1234);
-            manager.send_message_zero_copy("perf_test", &message).await.unwrap();
+            let message = Message::new(
+                i,
+                "perf",
+                format!("Performance test {}", i).as_bytes().to_vec(),
+                1234,
+            );
+            manager
+                .send_message_zero_copy("perf_test", &message)
+                .await
+                .unwrap();
         }
-        
+
         // 获取统计信息
         let stats = manager.get_channel_stats("perf_test").await.unwrap();
         assert_eq!(stats.messages_sent, 10);
         assert!(stats.bytes_sent > 0);
-        
+
         // 清理
         manager.cleanup().await.unwrap();
     }

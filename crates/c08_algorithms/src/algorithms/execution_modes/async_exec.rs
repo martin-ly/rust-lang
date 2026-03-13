@@ -1,12 +1,15 @@
 //! # 异步算法执行模式
-//! 
+//!
 //! 本模块实现异步算法执行，充分利用 Rust 1.90 的异步特性。
 //! 适用于 I/O 密集型任务和需要非阻塞执行的场景。
+
+#![allow(clippy::type_complexity)]
+
 use super::{AsyncAlgorithm, ExecutionResult};
 use std::future::Future;
 use std::pin::Pin;
 use std::time::Instant;
-use tokio::time::{timeout, Duration};
+use tokio::time::{Duration, timeout};
 
 /// 异步算法执行器
 pub struct AsyncExecutor;
@@ -14,7 +17,7 @@ pub struct AsyncExecutor;
 impl AsyncExecutor {
     /// 执行异步算法并测量性能
     pub async fn execute_with_metrics<A, T, R>(
-        algorithm: A,   
+        algorithm: A,
         input: T,
     ) -> Result<ExecutionResult<R>, Box<dyn std::error::Error + Send + Sync>>
     where
@@ -24,13 +27,13 @@ impl AsyncExecutor {
     {
         let start = Instant::now();
         let memory_before = get_memory_usage();
-        
+
         let result = algorithm.execute(input).await?;
-        
+
         let execution_time = start.elapsed();
         let memory_after = get_memory_usage();
         let memory_usage = memory_after.saturating_sub(memory_before);
-        
+
         Ok(ExecutionResult {
             result,
             execution_time,
@@ -52,15 +55,15 @@ impl AsyncExecutor {
     {
         let start = Instant::now();
         let memory_before = get_memory_usage();
-        
+
         let result = timeout(timeout_duration, algorithm.execute(input))
             .await
             .map_err(|_| "算法执行超时")??;
-        
+
         let execution_time = start.elapsed();
         let memory_after = get_memory_usage();
         let memory_usage = memory_after.saturating_sub(memory_before);
-        
+
         Ok(ExecutionResult {
             result,
             execution_time,
@@ -80,21 +83,22 @@ impl AsyncExecutor {
         R: Send + 'static,
     {
         let mut handles = Vec::with_capacity(inputs.len());
-        
+
         for input in inputs {
             let algorithm_clone = algorithm.clone();
-            let handle = tokio::spawn(async move {
-                Self::execute_with_metrics(algorithm_clone, input).await
-            });
+            let handle =
+                tokio::spawn(
+                    async move { Self::execute_with_metrics(algorithm_clone, input).await },
+                );
             handles.push(handle);
         }
-        
+
         let mut results = Vec::with_capacity(handles.len());
         for handle in handles {
             let result = handle.await??;
             results.push(result);
         }
-        
+
         Ok(results)
     }
 
@@ -109,29 +113,29 @@ impl AsyncExecutor {
         T: Send + 'static,
         R: Send + 'static,
     {
-        use tokio::sync::Semaphore;
         use std::sync::Arc;
-        
+        use tokio::sync::Semaphore;
+
         let semaphore = Arc::new(Semaphore::new(max_concurrent));
         let mut handles = Vec::with_capacity(inputs.len());
-        
+
         for input in inputs {
             let algorithm_clone = algorithm.clone();
             let semaphore_clone = semaphore.clone();
-            
+
             let handle = tokio::spawn(async move {
                 let _permit = semaphore_clone.acquire().await?;
                 Self::execute_with_metrics(algorithm_clone, input).await
             });
             handles.push(handle);
         }
-        
+
         let mut results = Vec::with_capacity(handles.len());
         for handle in handles {
             let result = handle.await??;
             results.push(result);
         }
-        
+
         Ok(results)
     }
 
@@ -234,8 +238,9 @@ impl<T> AsyncExecutionStats<T> {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
         }
-        
-        self.execution_time_std_dev.as_nanos() as f64 / self.average_execution_time.as_nanos() as f64
+
+        self.execution_time_std_dev.as_nanos() as f64
+            / self.average_execution_time.as_nanos() as f64
     }
 }
 
@@ -260,7 +265,8 @@ impl AsyncBenchmarker {
                 algorithm.clone(),
                 test_case.input,
                 test_case.iterations,
-            ).await?;
+            )
+            .await?;
 
             results.push(AsyncBenchmarkResult {
                 test_case: test_case.name,
@@ -287,21 +293,17 @@ impl AsyncBenchmarker {
 
         for test_case in test_cases {
             let inputs = vec![test_case.input; test_case.iterations];
-            let execution_results = AsyncExecutor::execute_concurrent(
-                algorithm.clone(),
-                inputs,
-                max_concurrent,
-            ).await?;
+            let execution_results =
+                AsyncExecutor::execute_concurrent(algorithm.clone(), inputs, max_concurrent)
+                    .await?;
 
-            let total_time: Duration = execution_results
-                .iter()
-                .map(|r| r.execution_time)
-                .sum();
+            let total_time: Duration = execution_results.iter().map(|r| r.execution_time).sum();
             let avg_time = total_time / test_case.iterations as u32;
             let avg_memory = execution_results
                 .iter()
                 .map(|r| r.memory_usage)
-                .sum::<usize>() / test_case.iterations;
+                .sum::<usize>()
+                / test_case.iterations;
 
             let stats = AsyncExecutionStats {
                 results: execution_results,
@@ -355,13 +357,12 @@ impl<T> AsyncBenchmarkResults<T> {
 
     /// 获取最稳定性能的测试用例
     pub fn most_stable(&self) -> Option<&AsyncBenchmarkResult<T>> {
-        self.results
-            .iter()
-            .min_by(|a, b| {
-                a.stats.performance_stability()
-                    .partial_cmp(&b.stats.performance_stability())
-                    .unwrap_or(std::cmp::Ordering::Equal)
-            })
+        self.results.iter().min_by(|a, b| {
+            a.stats
+                .performance_stability()
+                .partial_cmp(&b.stats.performance_stability())
+                .unwrap_or(std::cmp::Ordering::Equal)
+        })
     }
 
     /// 生成异步性能报告
@@ -414,7 +415,19 @@ impl<T> AsyncBenchmarkResults<T> {
 
 /// 异步算法管道
 pub struct AsyncPipeline<T> {
-    stages: Vec<Box<dyn Fn(T) -> Pin<Box<dyn Future<Output = Result<T, Box<dyn std::error::Error + Send + Sync>>> + Send>> + Send + Sync>>,
+    stages: Vec<
+        Box<
+            dyn Fn(
+                    T,
+                ) -> Pin<
+                    Box<
+                        dyn Future<Output = Result<T, Box<dyn std::error::Error + Send + Sync>>>
+                            + Send,
+                    >,
+                > + Send
+                + Sync,
+        >,
+    >,
 }
 
 impl<T> Default for AsyncPipeline<T> {
@@ -426,9 +439,7 @@ impl<T> Default for AsyncPipeline<T> {
 impl<T> AsyncPipeline<T> {
     /// 创建新的异步管道
     pub fn new() -> Self {
-        Self {
-            stages: Vec::new(),
-        }
+        Self { stages: Vec::new() }
     }
 
     /// 添加处理阶段
@@ -437,9 +448,8 @@ impl<T> AsyncPipeline<T> {
         F: Fn(T) -> Fut + Send + Sync + 'static,
         Fut: Future<Output = Result<T, Box<dyn std::error::Error + Send + Sync>>> + Send + 'static,
     {
-        self.stages.push(Box::new(move |input| {
-            Box::pin(stage(input))
-        }));
+        self.stages
+            .push(Box::new(move |input| Box::pin(stage(input))));
     }
 
     /// 执行管道
@@ -448,11 +458,11 @@ impl<T> AsyncPipeline<T> {
         T: Clone,
     {
         let mut current_input = input;
-        
+
         for stage in &self.stages {
             current_input = stage(current_input).await?;
         }
-        
+
         Ok(current_input)
     }
 }

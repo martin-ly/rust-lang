@@ -1,5 +1,5 @@
 //! 特征系统示例代码
-//! 
+//!
 //! 本文件包含了特征系统的各种示例，包括：
 //! - 特征定义与实现
 //! - 特征对象和动态分发
@@ -11,20 +11,20 @@ use std::fmt::{Debug, Display};
 /// 特征基础示例
 pub fn trait_basics_examples() {
     println!("=== 特征基础示例 ===");
-    
+
     // 基本特征实现
     let circle = Circle { radius: 5.0 };
-    let rectangle = Rectangle { width: 3.0, height: 4.0 };
-    
+    let rectangle = Rectangle {
+        width: 3.0,
+        height: 4.0,
+    };
+
     println!("Circle area: {:.2}", circle.area());
     println!("Rectangle area: {:.2}", rectangle.area());
-    
+
     // 特征对象
-    let shapes: Vec<Box<dyn Shape>> = vec![
-        Box::new(circle),
-        Box::new(rectangle),
-    ];
-    
+    let shapes: Vec<Box<dyn Shape>> = vec![Box::new(circle), Box::new(rectangle)];
+
     for shape in shapes {
         println!("Shape area: {:.2}", shape.area());
     }
@@ -33,13 +33,10 @@ pub fn trait_basics_examples() {
 /// 特征对象示例
 pub fn trait_object_examples() {
     println!("\n=== 特征对象示例 ===");
-    
+
     // 动态分发
-    let processors: Vec<Box<dyn Processor>> = vec![
-        Box::new(Trimmer),
-        Box::new(Uppercaser),
-    ];
-    
+    let processors: Vec<Box<dyn Processor>> = vec![Box::new(Trimmer), Box::new(Uppercaser)];
+
     for processor in processors {
         let result = processor.process("hello world");
         println!("Processed: {}", result);
@@ -49,7 +46,7 @@ pub fn trait_object_examples() {
 /// 高级特征特性示例
 pub fn advanced_traits_examples() {
     println!("\n=== 高级特征特性示例 ===");
-    
+
     // 关联类型
     let mut counter = Counter { count: 0 };
     while let Some(item) = counter.next() {
@@ -58,17 +55,17 @@ pub fn advanced_traits_examples() {
             break;
         }
     }
-    
+
     // 泛型关联类型 (GATs)
     let mut stream = StringStream {
         data: vec!["hello".to_string(), "world".to_string()],
         index: 0,
     };
-    
+
     while let Some(item) = stream.next() {
         println!("Stream item: {}", item);
     }
-    
+
     // 关联常量
     use_constants::<MyType>();
 }
@@ -76,12 +73,12 @@ pub fn advanced_traits_examples() {
 /// 标准库特征示例
 pub fn std_traits_examples() {
     println!("\n=== 标准库特征示例 ===");
-    
+
     // Clone 和 Copy
     let point1 = Point { x: 1, y: 2 };
-    let point2 = point1;  // Copy
+    let point2 = point1; // Copy
     println!("Point1: {:?}, Point2: {:?}", point1, point2);
-    
+
     // Debug 和 Display
     let person = Person {
         name: "Alice".to_string(),
@@ -89,10 +86,16 @@ pub fn std_traits_examples() {
     };
     println!("Debug: {:?}", person);
     println!("Display: {}", person);
-    
+
     // 数值特征
-    let complex1 = Complex { real: 1.0, imag: 2.0 };
-    let complex2 = Complex { real: 3.0, imag: 4.0 };
+    let complex1 = Complex {
+        real: 1.0,
+        imag: 2.0,
+    };
+    let complex2 = Complex {
+        real: 3.0,
+        imag: 4.0,
+    };
     let sum = complex1 + complex2;
     println!("Complex sum: {:?}", sum);
 }
@@ -100,7 +103,7 @@ pub fn std_traits_examples() {
 /// 设计模式示例
 pub fn design_patterns_examples() {
     println!("\n=== 设计模式示例 ===");
-    
+
     // 建造者模式
     let person = PersonBuilder::new()
         .name("Bob".to_string())
@@ -108,22 +111,24 @@ pub fn design_patterns_examples() {
         .email("bob@example.com".to_string())
         .build();
     println!("Built person: {:?}", person);
-    
+
     // 策略模式
     let sorter = Sorter::new(Box::new(QuickSort));
     let mut data = vec![3, 1, 4, 1, 5, 9, 2, 6];
     sorter.sort(&mut data);
     println!("Quick sorted: {:?}", data);
-    
+
     // 适配器模式
     let loggers: Vec<Box<dyn Logger>> = vec![
         Box::new(ConsoleLogger),
-        Box::new(FileLogger { filename: "app.log".to_string() }),
+        Box::new(FileLogger {
+            filename: "app.log".to_string(),
+        }),
         Box::new(LoggerAdapter {
             external_logger: ExternalLogger,
         }),
     ];
-    
+
     for logger in loggers {
         logger.log("Hello, world!");
     }
@@ -132,14 +137,14 @@ pub fn design_patterns_examples() {
 /// 性能考虑示例
 pub fn performance_examples() {
     println!("\n=== 性能考虑示例 ===");
-    
+
     // 泛型 vs 特征对象
     let data = vec![1, 2, 3, 4, 5];
-    
+
     // 泛型：编译时多态
     let result1 = process_generic(data.iter().sum::<i32>());
     println!("Generic result: {}", result1);
-    
+
     // 特征对象：运行时多态
     let processor = Box::new(SumProcessor);
     let result2 = process_trait_object(processor, data);
@@ -170,7 +175,7 @@ trait Processor {
 #[allow(unused_variables)]
 trait Iterator {
     type Item;
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -178,8 +183,10 @@ trait Iterator {
 #[allow(dead_code)]
 #[allow(unused_variables)]
 trait StreamingIterator {
-    type Item<'a> where Self: 'a;
-    
+    type Item<'a>
+    where
+        Self: 'a;
+
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 
@@ -214,7 +221,7 @@ impl Shape for Circle {
     fn area(&self) -> f64 {
         std::f64::consts::PI * self.radius * self.radius
     }
-    
+
     fn perimeter(&self) -> f64 {
         2.0 * std::f64::consts::PI * self.radius
     }
@@ -232,7 +239,7 @@ impl Shape for Rectangle {
     fn area(&self) -> f64 {
         self.width * self.height
     }
-    
+
     fn perimeter(&self) -> f64 {
         2.0 * (self.width + self.height)
     }
@@ -269,7 +276,7 @@ struct Counter {
 
 impl Iterator for Counter {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         self.count += 1;
         Some(self.count)
@@ -285,8 +292,11 @@ struct StringStream {
 }
 
 impl StreamingIterator for StringStream {
-    type Item<'a> = &'a str where Self: 'a;
-    
+    type Item<'a>
+        = &'a str
+    where
+        Self: 'a;
+
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>> {
         if self.index < self.data.len() {
             let result = &self.data[self.index];
@@ -342,7 +352,7 @@ struct Complex {
 
 impl std::ops::Add for Complex {
     type Output = Self;
-    
+
     fn add(self, other: Self) -> Self::Output {
         Complex {
             real: self.real + other.real,
@@ -371,22 +381,22 @@ impl PersonBuilder {
             email: None,
         }
     }
-    
+
     fn name(mut self, name: String) -> Self {
         self.name = Some(name);
         self
     }
-    
+
     fn age(mut self, age: u32) -> Self {
         self.age = Some(age);
         self
     }
-    
+
     fn email(mut self, email: String) -> Self {
         self.email = Some(email);
         self
     }
-    
+
     fn build(self) -> Person {
         Person {
             name: self.name.unwrap_or_else(|| "Unknown".to_string()),
@@ -421,7 +431,7 @@ impl<T> Sorter<T> {
     fn new(strategy: Box<dyn SortStrategy<T>>) -> Self {
         Sorter { strategy }
     }
-    
+
     fn sort(&self, items: &mut [T]) {
         self.strategy.sort(items);
     }
@@ -498,21 +508,25 @@ impl Processor for SumProcessor {
 
 /// 使用关联常量
 fn use_constants<T: Constants>() {
-    println!("Max: {}, Min: {}, Default: {}", 
-             T::MAX_VALUE, T::MIN_VALUE, T::DEFAULT_VALUE);
+    println!(
+        "Max: {}, Min: {}, Default: {}",
+        T::MAX_VALUE,
+        T::MIN_VALUE,
+        T::DEFAULT_VALUE
+    );
 }
 
 /// 运行所有特征示例
 pub fn run_all_examples() {
     println!("Rust 特征系统示例");
     println!("==================");
-    
+
     trait_basics_examples();
     trait_object_examples();
     advanced_traits_examples();
     std_traits_examples();
     design_patterns_examples();
     performance_examples();
-    
+
     println!("\n所有示例运行完成！");
 }

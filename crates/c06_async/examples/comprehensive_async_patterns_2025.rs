@@ -15,7 +15,7 @@
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::Duration;
-use tokio::sync::{mpsc, oneshot, Mutex};
+use tokio::sync::{Mutex, mpsc, oneshot};
 use tokio::time::{sleep, timeout};
 
 // ============================================================================
@@ -79,9 +79,7 @@ mod actor_pattern {
                 respond_to: tx,
             };
 
-            self.tx
-                .send(envelope)
-                .map_err(|_| "Actor 已停止")?;
+            self.tx.send(envelope).map_err(|_| "Actor 已停止")?;
 
             rx.await.map_err(|_| "Actor 未响应")
         }
@@ -176,10 +174,7 @@ mod actor_pattern {
                 AccountMessage::Withdraw(amount) => {
                     if self.balance >= amount {
                         self.balance -= amount;
-                        println!(
-                            "[{}] 取出 {}, 余额: {}",
-                            self.name, amount, self.balance
-                        );
+                        println!("[{}] 取出 {}, 余额: {}", self.name, amount, self.balance);
                         Ok(self.balance)
                     } else {
                         Err(format!("余额不足: {}", self.balance))
@@ -607,7 +602,7 @@ mod csp_pattern {
         println!("╚════════════════════════════════════════╝\n");
 
         use tokio::sync::broadcast;
-        
+
         let (work_tx, _) = broadcast::channel(100);
         let (result_tx, mut result_rx) = mpsc::channel(100);
 
@@ -1063,8 +1058,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_actor_pattern() {
-        let account =
-            actor_pattern::ActorSystem::spawn(actor_pattern::BankAccount::new("Test".to_string(), 100));
+        let account = actor_pattern::ActorSystem::spawn(actor_pattern::BankAccount::new(
+            "Test".to_string(),
+            100,
+        ));
 
         let balance = account
             .send(actor_pattern::AccountMessage::Deposit(50))
@@ -1083,13 +1080,7 @@ mod tests {
         let result = retry
             .execute(|| {
                 count += 1;
-                Box::pin(async move {
-                    if count < 2 {
-                        Err("fail")
-                    } else {
-                        Ok(42)
-                    }
-                })
+                Box::pin(async move { if count < 2 { Err("fail") } else { Ok(42) } })
             })
             .await;
 

@@ -18,7 +18,11 @@
  */
 
 // 允许类型复杂度、过度嵌套和冗余闭包警告，因为这是高级泛型模式演示
-#![allow(clippy::type_complexity, clippy::excessive_nesting, clippy::redundant_closure)]
+#![allow(
+    clippy::type_complexity,
+    clippy::excessive_nesting,
+    clippy::redundant_closure
+)]
 
 use std::collections::HashMap;
 use std::fmt::Debug;
@@ -46,7 +50,11 @@ pub mod factory_pattern {
 
     impl ElectronicProduct {
         pub fn new(name: String, price: f64, warranty_months: u32) -> Self {
-            Self { name, price, warranty_months }
+            Self {
+                name,
+                price,
+                warranty_months,
+            }
         }
     }
 
@@ -169,9 +177,7 @@ pub mod factory_pattern {
 
         #[test]
         fn test_factory_pattern() {
-            let mut electronic_manager = FactoryManager::new(
-                ElectronicProductFactory::new(12)
-            );
+            let mut electronic_manager = FactoryManager::new(ElectronicProductFactory::new(12));
 
             let laptop = electronic_manager.create_and_add("笔记本电脑".to_string(), 5000.0);
             assert_eq!(laptop.name(), "笔记本电脑");
@@ -898,7 +904,10 @@ pub mod singleton_pattern {
 
             // 第一次获取实例
             let instance1 = manager.get_instance(|| ConfigManager::new()).unwrap();
-            assert_eq!(instance1.get("app_name"), Some(&"Rust 泛型示例".to_string()));
+            assert_eq!(
+                instance1.get("app_name"),
+                Some(&"Rust 泛型示例".to_string())
+            );
 
             // 第二次获取实例（应该是同一个）
             let instance2 = manager.get_instance(|| ConfigManager::new()).unwrap();
@@ -910,8 +919,8 @@ pub mod singleton_pattern {
     }
 }
 
-    /// 命令模式 - 使用泛型实现可撤销的操作
-    pub mod command_pattern {
+/// 命令模式 - 使用泛型实现可撤销的操作
+pub mod command_pattern {
 
     /// 命令 trait
     pub trait Command<T> {
@@ -920,8 +929,8 @@ pub mod singleton_pattern {
         fn get_description(&self) -> String;
     }
 
-        /// 命令容器别名，降低类型复杂度
-        pub type CommandBox<T> = Box<dyn Command<T>>;
+    /// 命令容器别名，降低类型复杂度
+    pub type CommandBox<T> = Box<dyn Command<T>>;
 
     /// 具体命令 - 设置值命令
     pub struct SetValueCommand<T> {
@@ -1006,10 +1015,10 @@ pub mod singleton_pattern {
     }
 
     /// 命令调用者
-        pub struct CommandInvoker<T> {
-            history: Vec<CommandBox<T>>,
-            current_index: usize,
-        }
+    pub struct CommandInvoker<T> {
+        history: Vec<CommandBox<T>>,
+        current_index: usize,
+    }
 
     impl<T> Default for CommandInvoker<T> {
         fn default() -> Self {
@@ -1025,7 +1034,11 @@ pub mod singleton_pattern {
             }
         }
 
-        pub fn execute_command<C: Command<T> + 'static>(&mut self, mut command: C, target: &mut T) -> Result<(), String> {
+        pub fn execute_command<C: Command<T> + 'static>(
+            &mut self,
+            mut command: C,
+            target: &mut T,
+        ) -> Result<(), String> {
             command.execute(target)?;
             self.history.truncate(self.current_index);
             self.history.push(Box::new(command));
@@ -1061,7 +1074,10 @@ pub mod singleton_pattern {
         }
 
         pub fn get_history(&self) -> Vec<String> {
-            self.history.iter().map(|cmd| cmd.get_description()).collect()
+            self.history
+                .iter()
+                .map(|cmd| cmd.get_description())
+                .collect()
         }
     }
 
@@ -1080,11 +1096,7 @@ pub mod singleton_pattern {
             assert_eq!(value, 20);
 
             // 执行数学运算命令
-            let add_cmd = MathOperationCommand::new(
-                |x| x + 5,
-                |x| x - 5,
-                "加5".to_string(),
-            );
+            let add_cmd = MathOperationCommand::new(|x| x + 5, |x| x - 5, "加5".to_string());
             invoker.execute_command(add_cmd, &mut value).unwrap();
             assert_eq!(value, 25);
 
@@ -1109,17 +1121,16 @@ pub mod singleton_pattern {
 
 /// 综合演示函数
 pub fn demonstrate_advanced_patterns() {
-    use factory_pattern::Product;
     use builder_pattern::{Buildable, Builder};
-    use observer_pattern::Subject;
     use decorator_pattern::Component;
+    use factory_pattern::Product;
+    use observer_pattern::Subject;
 
     println!("\n=== 高级泛型模式和设计模式演示 ===");
 
     println!("\n1. 工厂模式演示:");
-    let mut electronic_manager = factory_pattern::FactoryManager::new(
-        factory_pattern::ElectronicProductFactory::new(12)
-    );
+    let mut electronic_manager =
+        factory_pattern::FactoryManager::new(factory_pattern::ElectronicProductFactory::new(12));
     let laptop = electronic_manager.create_and_add("笔记本电脑".to_string(), 5000.0);
     println!("创建产品: {} - 价格: {}", laptop.name(), laptop.price());
 
@@ -1153,7 +1164,9 @@ pub fn demonstrate_advanced_patterns() {
 
     println!("\n6. 单例模式演示:");
     let manager = singleton_pattern::SingletonManager::new();
-    let instance = manager.get_instance(singleton_pattern::ConfigManager::new).unwrap();
+    let instance = manager
+        .get_instance(singleton_pattern::ConfigManager::new)
+        .unwrap();
     println!("配置应用名称: {:?}", instance.get("app_name"));
 
     println!("\n7. 命令模式演示:");
@@ -1164,11 +1177,8 @@ pub fn demonstrate_advanced_patterns() {
     invoker.execute_command(set_cmd, &mut value).unwrap();
     println!("执行设置命令后: {}", value);
 
-    let add_cmd = command_pattern::MathOperationCommand::new(
-        |x| x + 5,
-        |x| x - 5,
-        "加5".to_string(),
-    );
+    let add_cmd =
+        command_pattern::MathOperationCommand::new(|x| x + 5, |x| x - 5, "加5".to_string());
     invoker.execute_command(add_cmd, &mut value).unwrap();
     println!("执行加法命令后: {}", value);
 

@@ -6,11 +6,11 @@ use crate::error::{ProcessError, ProcessResult};
 use crate::types::{ProcessConfig, ProcessInfo, ProcessStatus};
 use std::collections::HashMap;
 use std::sync::Arc;
-use std::time::{Duration, SystemTime, Instant};
-use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, mpsc, oneshot, Semaphore};
-use tokio::time::timeout;
-use tokio::process::{Command, Child};
+use std::time::{Duration, Instant, SystemTime};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::process::{Child, Command};
+use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, Semaphore, mpsc, oneshot};
+use tokio::time::timeout;
 
 /// 增强的异步进程管理器
 #[cfg(feature = "async")]
@@ -173,7 +173,8 @@ impl EnhancedAsyncProcessManager {
                 performance_monitor_clone,
                 error_recovery_clone,
                 resource_limiter_clone,
-            ).await;
+            )
+            .await;
         });
 
         // 启动性能监控任务
@@ -302,7 +303,9 @@ impl EnhancedAsyncProcessManager {
             response: response_sender,
         };
 
-        if self.command_sender.send(command).is_ok() && let Ok(result) = response_receiver.await {
+        if self.command_sender.send(command).is_ok()
+            && let Ok(result) = response_receiver.await
+        {
             return result;
         }
 
@@ -323,7 +326,8 @@ impl EnhancedAsyncProcessManager {
                     stats.high_cpu_processes += 1;
                     stats.total_cpu_usage += cpu;
                 }
-                (_cpu, mem) if mem > 100_000_000 => { // 100MB
+                (_cpu, mem) if mem > 100_000_000 => {
+                    // 100MB
                     stats.high_memory_processes += 1;
                     stats.total_memory_usage += mem;
                 }
@@ -353,9 +357,9 @@ impl EnhancedAsyncProcessManager {
             response: response_sender,
         };
 
-        self.command_sender
-            .send(command)
-            .map_err(|_| ProcessError::TerminationFailed("Failed to send cleanup command".to_string()))?;
+        self.command_sender.send(command).map_err(|_| {
+            ProcessError::TerminationFailed("Failed to send cleanup command".to_string())
+        })?;
 
         response_receiver.await.map_err(|_| {
             ProcessError::TerminationFailed("Failed to receive cleanup response".to_string())
@@ -368,14 +372,13 @@ impl EnhancedAsyncProcessManager {
         if let Some(managed_process) = processes.get_mut(&pid) {
             if let Some(child) = managed_process.child.as_mut() {
                 if let Some(stdin) = child.stdin.as_mut() {
-                    stdin
-                        .write_all(data)
-                        .await
-                        .map_err(ProcessError::Io)?;
+                    stdin.write_all(data).await.map_err(ProcessError::Io)?;
                     stdin.flush().await.map_err(ProcessError::Io)?;
                     return Ok(());
                 }
-                return Err(ProcessError::InvalidConfig("stdin not available".to_string()));
+                return Err(ProcessError::InvalidConfig(
+                    "stdin not available".to_string(),
+                ));
             }
             return Err(ProcessError::NotFound(pid));
         }
@@ -395,7 +398,9 @@ impl EnhancedAsyncProcessManager {
                         .map_err(ProcessError::Io)?;
                     return Ok(buffer);
                 }
-                return Err(ProcessError::InvalidConfig("stdout not available".to_string()));
+                return Err(ProcessError::InvalidConfig(
+                    "stdout not available".to_string(),
+                ));
             }
             return Err(ProcessError::NotFound(pid));
         }
@@ -422,9 +427,7 @@ impl EnhancedAsyncProcessManager {
             callback: Box::new(move |result| {
                 // 使用 tokio::spawn 来处理异步回调
                 let future = callback(result);
-                tokio::task::block_in_place(|| {
-                    tokio::runtime::Handle::current().block_on(future)
-                })
+                tokio::task::block_in_place(|| tokio::runtime::Handle::current().block_on(future))
             }),
             response: response_sender,
         };
@@ -492,7 +495,9 @@ impl EnhancedAsyncProcessManager {
                         .map_err(ProcessError::Io)?;
                     return Ok(buffer);
                 }
-                return Err(ProcessError::InvalidConfig("stderr not available".to_string()));
+                return Err(ProcessError::InvalidConfig(
+                    "stderr not available".to_string(),
+                ));
             }
             return Err(ProcessError::NotFound(pid));
         }
@@ -517,10 +522,15 @@ impl EnhancedAsyncProcessManager {
                         &next_pid,
                         &performance_monitor,
                         &resource_limiter,
-                    ).await;
+                    )
+                    .await;
                     let _ = response.send(result);
                 }
-                EnhancedAsyncCommand::SpawnWithCallback { config, callback, response } => {
+                EnhancedAsyncCommand::SpawnWithCallback {
+                    config,
+                    callback,
+                    response,
+                } => {
                     let result = Self::handle_spawn_with_callback(
                         config,
                         callback,
@@ -528,10 +538,15 @@ impl EnhancedAsyncProcessManager {
                         &next_pid,
                         &performance_monitor,
                         &resource_limiter,
-                    ).await;
+                    )
+                    .await;
                     let _ = response.send(result);
                 }
-                EnhancedAsyncCommand::Kill { pid, force, response } => {
+                EnhancedAsyncCommand::Kill {
+                    pid,
+                    force,
+                    response,
+                } => {
                     let result = Self::handle_kill(pid, force, &processes, &error_recovery).await;
                     let _ = response.send(result);
                 }
@@ -564,7 +579,9 @@ impl EnhancedAsyncProcessManager {
         resource_limiter: &Arc<Semaphore>,
     ) -> ProcessResult<u32> {
         // 获取资源许可
-        let _permit = resource_limiter.acquire().await
+        let _permit = resource_limiter
+            .acquire()
+            .await
             .map_err(|_| ProcessError::ResourceExhausted("Resource limiter closed".to_string()))?;
 
         let mut next_pid_guard = next_pid.lock().await;
@@ -588,7 +605,8 @@ impl EnhancedAsyncProcessManager {
         command.stdout(std::process::Stdio::piped());
         command.stderr(std::process::Stdio::piped());
 
-        let child = command.spawn()
+        let child = command
+            .spawn()
             .map_err(|e| ProcessError::StartFailed(e.to_string()))?;
 
         let (status_sender, _status_receiver) = mpsc::unbounded_channel();
@@ -642,7 +660,14 @@ impl EnhancedAsyncProcessManager {
         F: FnOnce(ProcessResult<u32>) -> ProcessResult<()> + Send + Sync,
     {
         // 先启动进程
-        let result = Self::handle_spawn(config, processes, next_pid, performance_monitor, resource_limiter).await;
+        let result = Self::handle_spawn(
+            config,
+            processes,
+            next_pid,
+            performance_monitor,
+            resource_limiter,
+        )
+        .await;
 
         // 预先保存可能的 pid，避免消费 result 后无法访问
         let pid_before_callback = result.as_ref().ok().copied();
@@ -651,13 +676,18 @@ impl EnhancedAsyncProcessManager {
         if let Err(e) = callback(result) {
             // 如果回调失败，清理已创建的进程
             if let Some(pid) = pid_before_callback {
-                let _ = Self::handle_kill(pid, true, processes, &Arc::new(ErrorRecovery::new())).await;
+                let _ =
+                    Self::handle_kill(pid, true, processes, &Arc::new(ErrorRecovery::new())).await;
             }
             return Err(e);
         }
 
         // 回调成功时返回 pid
-        if let Some(pid) = pid_before_callback { Ok(pid) } else { Err(ProcessError::StartFailed("spawn failed".to_string())) }
+        if let Some(pid) = pid_before_callback {
+            Ok(pid)
+        } else {
+            Err(ProcessError::StartFailed("spawn failed".to_string()))
+        }
     }
 
     /// 处理终止进程命令
@@ -673,13 +703,17 @@ impl EnhancedAsyncProcessManager {
         if let Some(managed_process) = processes_guard.get_mut(&pid) {
             if let Some(child) = &mut managed_process.child {
                 if force {
-                    child.kill().await
+                    child
+                        .kill()
+                        .await
                         .map_err(|e| ProcessError::TerminationFailed(e.to_string()))?;
                 } else {
                     // 尝试优雅终止
                     if let Err(e) = child.kill().await {
                         // 如果优雅终止失败，尝试强制终止
-                        child.kill().await
+                        child
+                            .kill()
+                            .await
                             .map_err(|e| ProcessError::TerminationFailed(e.to_string()))?;
                     }
                 }
@@ -737,9 +771,7 @@ impl EnhancedAsyncProcessManager {
         let mut processes_guard = processes.write().await;
 
         // 清理已终止的进程
-        processes_guard.retain(|_, process| {
-            process.info.status == ProcessStatus::Running
-        });
+        processes_guard.retain(|_, process| process.info.status == ProcessStatus::Running);
 
         Ok(())
     }
@@ -755,8 +787,8 @@ impl EnhancedAsyncProcessManager {
         loop {
             interval.tick().await;
 
-        let processes_guard = processes.read().await;
-        for (_pid, process) in processes_guard.iter() {
+            let processes_guard = processes.read().await;
+            for (_pid, process) in processes_guard.iter() {
                 // 更新性能指标
                 let mut metrics = process.performance_metrics.lock().await;
                 metrics.last_update = Instant::now();
@@ -828,7 +860,10 @@ impl ErrorRecovery {
     }
 
     pub async fn add_recovery_strategy(&self, error: ProcessError, strategy: RecoveryStrategy) {
-        self.recovery_strategies.lock().await.insert(format!("{:?}", error), strategy);
+        self.recovery_strategies
+            .lock()
+            .await
+            .insert(format!("{:?}", error), strategy);
     }
 
     pub async fn attempt_recovery(&self, error: &ProcessError) -> ProcessResult<()> {
@@ -854,7 +889,9 @@ impl ErrorRecovery {
                 }
             }
         } else {
-            Err(ProcessError::StartFailed("No recovery strategy found".to_string()))
+            Err(ProcessError::StartFailed(
+                "No recovery strategy found".to_string(),
+            ))
         }
     }
 }
@@ -1017,7 +1054,10 @@ mod tests {
             }
         };
 
-        let pid = manager.spawn_with_async_callback(config, async_callback).await.unwrap();
+        let pid = manager
+            .spawn_with_async_callback(config, async_callback)
+            .await
+            .unwrap();
         assert!(pid > 0);
 
         let _ = manager.kill(pid, false).await;

@@ -151,11 +151,12 @@ pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
 /// - 空间复杂度: O(1)
 pub fn max_subarray(nums: &[i32]) -> i32 {
     // Rust 1.91 JIT 优化：使用 fold 操作
-    nums.iter().fold((0, i32::MIN), |(current, max), &x| {
-        let new_current = current.max(0) + x;
-        (new_current, max.max(new_current))
-    })
-    .1
+    nums.iter()
+        .fold((0, i32::MIN), |(current, max), &x| {
+            let new_current = current.max(0) + x;
+            (new_current, max.max(new_current))
+        })
+        .1
 }
 
 /// 121. Best Time to Buy and Sell Stock（买卖股票的最佳时机）

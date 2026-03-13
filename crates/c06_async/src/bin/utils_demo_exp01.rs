@@ -25,9 +25,11 @@ async fn main() -> anyhow::Result<()> {
                             }
                         };
 
-                        let fut = utils::retry_with_backoff(|attempt| async move {
-                            if attempt < 3 { op().await } else { op().await }
-                        }, 3, Duration::from_millis(50));
+                        let fut = utils::retry_with_backoff(
+                            |_attempt| async move { op().await },
+                            3,
+                            Duration::from_millis(50),
+                        );
 
                         match utils::with_timeout(Duration::from_millis(200), fut).await {
                             Some(Ok(v)) => format!("task#{i}: {v}"),
@@ -57,5 +59,3 @@ async fn main() -> anyhow::Result<()> {
 
     Ok(())
 }
-
-

@@ -343,8 +343,8 @@ pub struct Matrix {
 impl Matrix {
     pub fn identity(n: usize) -> Self {
         let mut a = vec![vec![0u64; n]; n];
-        for i in 0..n {
-            a[i][i] = 1;
+        for (i, row) in a.iter_mut().enumerate().take(n) {
+            row[i] = 1;
         }
         Self { n, a }
     }
@@ -353,14 +353,14 @@ impl Matrix {
         let n = self.n;
         assert_eq!(n, other.n);
         let mut c = vec![vec![0u64; n]; n];
-        for i in 0..n {
-            for k in 0..n {
-                let vik = self.a[i][k] % modu;
+        for (i, c_i) in c.iter_mut().enumerate().take(n) {
+            for (k, self_a_ik) in self.a[i].iter().enumerate().take(n) {
+                let vik = *self_a_ik % modu;
                 if vik == 0 {
                     continue;
                 }
-                for j in 0..n {
-                    c[i][j] = (c[i][j] + vik.wrapping_mul(other.a[k][j] % modu)) % modu;
+                for (c_ij, other_a_kj) in c_i.iter_mut().zip(other.a[k].iter()).take(n) {
+                    *c_ij = (*c_ij + vik.wrapping_mul(*other_a_kj % modu)) % modu;
                 }
             }
         }

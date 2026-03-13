@@ -148,7 +148,7 @@ async fn demonstrate_threading() {
 
 /// C06: 演示异步编程
 async fn demonstrate_async() {
-    use tokio::time::{sleep, Instant};
+    use tokio::time::{Instant, sleep};
 
     let start = Instant::now();
 
@@ -233,7 +233,7 @@ fn demonstrate_algorithms() {
 async fn demonstrate_integrated_system() -> Result<(), Box<dyn std::error::Error>> {
     use std::sync::Arc;
     use tokio::sync::Mutex;
-    use tokio::time::{sleep, Duration};
+    use tokio::time::{Duration, sleep};
 
     // 任务队列（使用 C05 的并发原语）
     let task_queue: Arc<Mutex<Vec<String>>> = Arc::new(Mutex::new(Vec::new()));

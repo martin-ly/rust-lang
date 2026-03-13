@@ -8,7 +8,7 @@ fn test_declarative_macro_integration() {
             $a + $b
         };
     }
-    
+
     assert_eq!(add!(3, 4), 7);
     assert_eq!(add!(1.5, 2.5), 4.0);
 }
@@ -27,7 +27,7 @@ fn test_macro_repetition_integration() {
             }
         };
     }
-    
+
     let v = vec![1, 2, 3];
     assert_eq!(v, vec![1, 2, 3]);
 }
@@ -36,12 +36,20 @@ fn test_macro_repetition_integration() {
 #[test]
 fn test_macro_pattern_matching_integration() {
     macro_rules! test_match {
-        (one) => { 1 };
-        (two) => { 2 };
-        (three) => { 3 };
-        ($other:expr) => { 0 };
+        (one) => {
+            1
+        };
+        (two) => {
+            2
+        };
+        (three) => {
+            3
+        };
+        ($other:expr) => {
+            0
+        };
     }
-    
+
     assert_eq!(test_match!(one), 1);
     assert_eq!(test_match!(two), 2);
     assert_eq!(test_match!(three), 3);
@@ -83,17 +91,17 @@ fn test_metaprogramming_integration() {
             }
         };
     }
-    
+
     create_struct!(Person {
         name: String,
         age: u32
     });
-    
+
     let person = Person {
         name: "Alice".to_string(),
         age: 30,
     };
-    
+
     assert_eq!(person.name, "Alice");
     assert_eq!(person.age, 30);
 }
@@ -112,22 +120,22 @@ fn test_code_generation_integration() {
             }
         };
     }
-    
+
     struct Data {
         value: i32,
         name: String,
     }
-    
+
     generate_getters!(Data {
         value: i32,
         name: String
     });
-    
+
     let data = Data {
         value: 42,
         name: "test".to_string(),
     };
-    
+
     assert_eq!(*data.value(), 42);
     assert_eq!(*data.name(), "test");
 }

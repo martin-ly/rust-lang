@@ -31,14 +31,14 @@ pub mod const_generics {
     impl GenericConfig<i32> {
         // Rust 1.91: const 上下文中使用引用
         pub const DEFAULT_VALUE: i32 = 42;
-        pub const VALUE_REF: &i32 = &Self::DEFAULT_VALUE;  // ✅ Rust 1.91
+        pub const VALUE_REF: &i32 = &Self::DEFAULT_VALUE; // ✅ Rust 1.91
         pub const DOUBLE_VALUE: i32 = *Self::VALUE_REF * 2;
     }
 
     impl GenericConfig<usize> {
         // Rust 1.91: const 上下文计算
         pub const MAX_SIZE: usize = 1024;
-        pub const SIZE_REF: &usize = &Self::MAX_SIZE;  // ✅ Rust 1.91
+        pub const SIZE_REF: &usize = &Self::MAX_SIZE; // ✅ Rust 1.91
         pub const DOUBLE_SIZE: usize = *Self::SIZE_REF * 2;
     }
 
@@ -52,7 +52,7 @@ pub mod const_generics {
 
     /// 使用 const 引用进行泛型计算
     pub const CONST_GENERIC_VALUE: u32 = 10;
-    pub const CONST_GENERIC_REF: &u32 = &CONST_GENERIC_VALUE;  // ✅ Rust 1.91
+    pub const CONST_GENERIC_REF: &u32 = &CONST_GENERIC_VALUE; // ✅ Rust 1.91
     pub const FACTORIAL_10: u32 = const_generic_factorial(*CONST_GENERIC_REF);
 
     pub fn demonstrate() {
@@ -93,7 +93,8 @@ pub mod generic_jit_optimizations {
         items
             .iter()
             .filter(|x| predicate(x))
-            .take(100).cloned()
+            .take(100)
+            .cloned()
             .collect()
     }
 
@@ -158,7 +159,7 @@ pub mod optimized_generic_containers {
     {
         // Rust 1.91 优化：集合操作性能提升
         let mut result: Vec<T> = items.to_vec();
-        result.sort();  // Rust 1.91 优化：排序性能提升
+        result.sort(); // Rust 1.91 优化：排序性能提升
         result.dedup(); // Rust 1.91 优化：去重性能提升
         result
     }
@@ -210,10 +211,7 @@ pub mod generic_type_inference {
         T: Clone,
     {
         // Rust 1.91 优化：嵌套泛型类型推断性能提升
-        items
-            .chunks(5)
-            .map(|chunk| chunk.to_vec())
-            .collect()
+        items.chunks(5).map(|chunk| chunk.to_vec()).collect()
     }
 
     pub fn demonstrate() {
@@ -222,11 +220,7 @@ pub mod generic_type_inference {
         let data = vec![1, 2, 3, 4, 5];
 
         // Rust 1.91 优化：类型推断更快
-        let result = complex_generic_function(
-            &data,
-            |x| x * 2,
-            |items| items.iter().sum::<i32>(),
-        );
+        let result = complex_generic_function(&data, |x| x * 2, |items| items.iter().sum::<i32>());
         println!("复杂泛型函数结果: {}", result);
 
         let nested = nested_generic_inference(&data);
@@ -355,7 +349,7 @@ pub mod comprehensive_generic_examples {
 
     impl GenericConfig<i32> {
         pub const DEFAULT: i32 = 100;
-        pub const REF: &i32 = &Self::DEFAULT;  // ✅ Rust 1.91
+        pub const REF: &i32 = &Self::DEFAULT; // ✅ Rust 1.91
         pub const DOUBLE: i32 = *Self::REF * 2;
     }
 
@@ -364,11 +358,7 @@ pub mod comprehensive_generic_examples {
 
         // 泛型管道示例
         let pipeline = GenericPipeline::new(vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-        let result = pipeline.process(
-            |x| x * 2,
-            |&x| x > 10,
-            |items| items.iter().sum::<i32>(),
-        );
+        let result = pipeline.process(|x| x * 2, |&x| x > 10, |items| items.iter().sum::<i32>());
         println!("泛型管道处理结果: {}", result);
 
         // 泛型配置示例
@@ -408,11 +398,13 @@ pub mod generic_associated_types {
     }
 
     impl<T> Iterable for GenericCollection<T> {
-        type Item<'a> = &'a T
+        type Item<'a>
+            = &'a T
         where
             T: 'a;
 
-        type Iterator<'a> = std::slice::Iter<'a, T>
+        type Iterator<'a>
+            = std::slice::Iter<'a, T>
         where
             T: 'a;
 
@@ -476,7 +468,11 @@ pub mod higher_ranked_trait_bounds {
         T: Clone,
     {
         // Rust 1.91 优化：HRTB 类型检查更快
-        items.iter().filter(|item| processor(item)).cloned().collect()
+        items
+            .iter()
+            .filter(|item| processor(item))
+            .cloned()
+            .collect()
     }
 
     /// 使用 HRTB 的映射函数
@@ -506,7 +502,11 @@ pub mod higher_ranked_trait_bounds {
     where
         F: for<'b> Fn(&'b str) -> bool,
     {
-        items.iter().copied().filter(|item| processor(item)).collect()
+        items
+            .iter()
+            .copied()
+            .filter(|item| processor(item))
+            .collect()
     }
 
     pub fn demonstrate() {
@@ -521,8 +521,7 @@ pub mod higher_ranked_trait_bounds {
 
         let strings = vec!["a", "ab", "abc", "abcd", "abcde"];
         let processor = FilterProcessor;
-        let filtered_strings =
-            use_processor_with_hrb(&strings, |s| processor.process(s));
+        let filtered_strings = use_processor_with_hrb(&strings, |s| processor.process(s));
         println!("字符串过滤结果: {:?}", filtered_strings);
     }
 }
@@ -616,12 +615,12 @@ pub mod generic_trait_objects {
     /// 使用 trait 对象的泛型函数
     ///
     /// Rust 1.91 优化：trait 对象调用更高效
-    pub fn process_with_trait_object<T>(
-        processor: &dyn Processor<T>,
-        items: Vec<T>,
-    ) -> Vec<T> {
+    pub fn process_with_trait_object<T>(processor: &dyn Processor<T>, items: Vec<T>) -> Vec<T> {
         // Rust 1.91 优化：trait 对象方法的调用开销更小
-        items.into_iter().map(|item| processor.process(item)).collect()
+        items
+            .into_iter()
+            .map(|item| processor.process(item))
+            .collect()
     }
 
     pub fn demonstrate() {

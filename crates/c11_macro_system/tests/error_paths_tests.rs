@@ -13,7 +13,7 @@ fn test_error_inputs() {
             $x
         };
     }
-    
+
     assert_eq!(test_macro!(42), 42);
 }
 

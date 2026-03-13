@@ -1,5 +1,5 @@
 //! 泛型系统示例代码
-//! 
+//!
 //! 本文件包含了泛型系统的各种示例，包括：
 //! - 泛型函数和结构体
 //! - 特征约束和 where 子句
@@ -11,17 +11,17 @@ use std::fmt::Debug;
 /// 泛型函数示例
 pub fn generic_function_examples() {
     println!("=== 泛型函数示例 ===");
-    
+
     // 基本泛型函数
     let result1 = identity(42);
     let result2 = identity("hello");
     println!("identity(42) = {}", result1);
     println!("identity(\"hello\") = {}", result2);
-    
+
     // 多个类型参数
     let pair = make_pair(42, "world");
     println!("make_pair(42, \"world\") = {:?}", pair);
-    
+
     // 带约束的泛型函数
     let cloned = clone_and_print("hello");
     println!("cloned = {}", cloned);
@@ -30,17 +30,17 @@ pub fn generic_function_examples() {
 /// 泛型结构体示例
 pub fn generic_struct_examples() {
     println!("\n=== 泛型结构体示例 ===");
-    
+
     // 基本泛型结构体
     let point_i32 = Point::new(1, 2);
     let point_f64 = Point::new(1.0, 2.0);
     println!("Point<i32>: {:?}", point_i32);
     println!("Point<f64>: {:?}", point_f64);
-    
+
     // 多个类型参数
     let pair = Pair::new(42, "hello");
     println!("Pair<i32, &str>: {:?}", pair);
-    
+
     // 泛型容器
     let mut container = Container::new(100);
     container.set(200);
@@ -50,15 +50,15 @@ pub fn generic_struct_examples() {
 /// 特征约束示例
 pub fn trait_constraint_examples() {
     println!("\n=== 特征约束示例 ===");
-    
+
     // 基本约束
     print_debug(42);
     print_debug("hello");
-    
+
     // 多个约束
     let cloned = clone_and_debug("world");
     println!("cloned = {}", cloned);
-    
+
     // where 子句
     let result = complex_function(42, "hello");
     println!("complex_function result = {}", result);
@@ -67,7 +67,7 @@ pub fn trait_constraint_examples() {
 /// 高级泛型特性示例
 pub fn advanced_generics_examples() {
     println!("\n=== 高级泛型特性示例 ===");
-    
+
     // 泛型关联类型 (GATs)
     let mut counter = Counter { count: 0 };
     while let Some(item) = counter.next() {
@@ -76,17 +76,13 @@ pub fn advanced_generics_examples() {
             break;
         }
     }
-    
+
     // 高阶生命周期约束 (HRTB)
     fn truncate_string(s: &str) -> &str {
-        if s.len() > 5 {
-            &s[..5]
-        } else {
-            s
-        }
+        if s.len() > 5 { &s[..5] } else { s }
     }
     higher_ranked_lifetime(&truncate_string);
-    
+
     // 常量泛型
     let array: Array<i32, 5> = Array::new();
     println!("Array length: {}", array.len());
@@ -95,13 +91,13 @@ pub fn advanced_generics_examples() {
 /// 变型示例
 pub fn variance_examples() {
     println!("\n=== 变型示例 ===");
-    
+
     // 协变示例
     let long_lived = String::from("long lived");
     let short_lived = String::from("short");
     let result = longest(&long_lived, &short_lived);
     println!("Longest string: {}", result);
-    
+
     // 逆变示例
     let handler = StringHandler;
     use_handler(handler);
@@ -110,13 +106,13 @@ pub fn variance_examples() {
 /// 性能优化示例
 pub fn performance_examples() {
     println!("\n=== 性能优化示例 ===");
-    
+
     // 单态化示例
     let int_result = generic_function(42);
     let str_result = generic_function("hello");
     println!("int_result = {}", int_result);
     println!("str_result = {}", str_result);
-    
+
     // 零成本抽象
     let items = [1, 2, 3, 4, 5];
     let doubled: Vec<i32> = items.iter().map(|x| x * 2).collect();
@@ -179,11 +175,11 @@ impl<T> Container<T> {
     pub fn new(value: T) -> Self {
         Container { value }
     }
-    
+
     pub fn get(&self) -> &T {
         &self.value
     }
-    
+
     pub fn set(&mut self, value: T) {
         self.value = value;
     }
@@ -213,8 +209,10 @@ where
 
 /// 泛型关联类型 (GATs) 示例
 pub trait Iterator {
-    type Item<'a> where Self: 'a;
-    
+    type Item<'a>
+    where
+        Self: 'a;
+
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 
@@ -225,7 +223,7 @@ pub struct Counter {
 
 impl Iterator for Counter {
     type Item<'a> = &'a u32;
-    
+
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>> {
         self.count += 1;
         Some(&self.count)
@@ -272,19 +270,19 @@ impl<T, const N: usize> Array<T, N>
 where
     T: Default,
 {
-    
     pub fn len(&self) -> usize {
         N
+    }
+
+    /// 检查数组是否为空
+    pub fn is_empty(&self) -> bool {
+        N == 0
     }
 }
 
 /// 变型示例 - 协变
 pub fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
+    if x.len() > y.len() { x } else { y }
 }
 
 /// 变型示例 - 逆变
@@ -319,13 +317,13 @@ pub fn generic_function<T>(x: T) -> T {
 pub fn run_all_examples() {
     println!("Rust 泛型系统示例");
     println!("==================");
-    
+
     generic_function_examples();
     generic_struct_examples();
     trait_constraint_examples();
     advanced_generics_examples();
     variance_examples();
     performance_examples();
-    
+
     println!("\n所有示例运行完成！");
 }

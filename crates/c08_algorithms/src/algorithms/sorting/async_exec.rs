@@ -3,8 +3,8 @@
 //! 本模块实现了各种异步排序算法。
 use super::*;
 use crate::algorithms::execution_modes::AsyncAlgorithm;
-use std::pin::Pin;
 use std::future::Future;
+use std::pin::Pin;
 
 /// 异步快速排序算法
 pub struct AsyncQuickSort;
@@ -13,7 +13,13 @@ impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncQuickSort {
     fn execute<'a>(
         &'a self,
         input: Vec<i32>,
-    ) -> Pin<Box<dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+    ) -> Pin<
+        Box<
+            dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>>
+                + Send
+                + 'a,
+        >,
+    > {
         Box::pin(async move {
             tokio::task::spawn_blocking(move || {
                 if input.len() <= 1 {
@@ -26,7 +32,9 @@ impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncQuickSort {
                     quick_sort_recursive(&mut data, 0, len - 1);
                 }
                 data
-            }).await.map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)
+            })
+            .await
+            .map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)
         })
     }
 }
@@ -48,7 +56,13 @@ impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncMergeSort {
     fn execute<'a>(
         &'a self,
         input: Vec<i32>,
-    ) -> Pin<Box<dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+    ) -> Pin<
+        Box<
+            dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>>
+                + Send
+                + 'a,
+        >,
+    > {
         Box::pin(async move {
             tokio::task::spawn_blocking(move || {
                 if input.len() <= 1 {
@@ -58,7 +72,9 @@ impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncMergeSort {
                 let mut data = input;
                 merge_sort_recursive(&mut data);
                 data
-            }).await.map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)
+            })
+            .await
+            .map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)
         })
     }
 }
@@ -69,97 +85,215 @@ impl AsyncSortingAlgorithm for AsyncMergeSort {
     }
 
     fn get_complexity(&self) -> AlgorithmComplexity {
-        AlgorithmComplexity::new("O(n log n)", "O(n log n)", "O(n log n)", "O(n)", true, false)
+        AlgorithmComplexity::new(
+            "O(n log n)",
+            "O(n log n)",
+            "O(n log n)",
+            "O(n)",
+            true,
+            false,
+        )
     }
 }
 
 // 占位实现：其他异步排序算法
 pub struct AsyncHeapSort;
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncHeapSort {
-    fn execute<'a>(&'a self, input: Vec<i32>) -> Pin<Box<dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+    fn execute<'a>(
+        &'a self,
+        input: Vec<i32>,
+    ) -> Pin<
+        Box<
+            dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>>
+                + Send
+                + 'a,
+        >,
+    > {
         Box::pin(async move { Ok(input) })
     }
 }
 impl AsyncSortingAlgorithm for AsyncHeapSort {
-    fn get_algorithm_type(&self) -> SortingAlgorithm { SortingAlgorithm::HeapSort }
-    fn get_complexity(&self) -> AlgorithmComplexity { AlgorithmComplexity::new("O(n log n)", "O(n log n)", "O(n log n)", "O(1)", false, true) }
+    fn get_algorithm_type(&self) -> SortingAlgorithm {
+        SortingAlgorithm::HeapSort
+    }
+    fn get_complexity(&self) -> AlgorithmComplexity {
+        AlgorithmComplexity::new(
+            "O(n log n)",
+            "O(n log n)",
+            "O(n log n)",
+            "O(1)",
+            false,
+            true,
+        )
+    }
 }
 
 pub struct AsyncInsertionSort;
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncInsertionSort {
-    fn execute<'a>(&'a self, input: Vec<i32>) -> Pin<Box<dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+    fn execute<'a>(
+        &'a self,
+        input: Vec<i32>,
+    ) -> Pin<
+        Box<
+            dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>>
+                + Send
+                + 'a,
+        >,
+    > {
         Box::pin(async move { Ok(input) })
     }
 }
 impl AsyncSortingAlgorithm for AsyncInsertionSort {
-    fn get_algorithm_type(&self) -> SortingAlgorithm { SortingAlgorithm::InsertionSort }
-    fn get_complexity(&self) -> AlgorithmComplexity { AlgorithmComplexity::new("O(n)", "O(n²)", "O(n²)", "O(1)", true, true) }
+    fn get_algorithm_type(&self) -> SortingAlgorithm {
+        SortingAlgorithm::InsertionSort
+    }
+    fn get_complexity(&self) -> AlgorithmComplexity {
+        AlgorithmComplexity::new("O(n)", "O(n²)", "O(n²)", "O(1)", true, true)
+    }
 }
 
 pub struct AsyncSelectionSort;
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncSelectionSort {
-    fn execute<'a>(&'a self, input: Vec<i32>) -> Pin<Box<dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+    fn execute<'a>(
+        &'a self,
+        input: Vec<i32>,
+    ) -> Pin<
+        Box<
+            dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>>
+                + Send
+                + 'a,
+        >,
+    > {
         Box::pin(async move { Ok(input) })
     }
 }
 impl AsyncSortingAlgorithm for AsyncSelectionSort {
-    fn get_algorithm_type(&self) -> SortingAlgorithm { SortingAlgorithm::SelectionSort }
-    fn get_complexity(&self) -> AlgorithmComplexity { AlgorithmComplexity::new("O(n²)", "O(n²)", "O(n²)", "O(1)", false, true) }
+    fn get_algorithm_type(&self) -> SortingAlgorithm {
+        SortingAlgorithm::SelectionSort
+    }
+    fn get_complexity(&self) -> AlgorithmComplexity {
+        AlgorithmComplexity::new("O(n²)", "O(n²)", "O(n²)", "O(1)", false, true)
+    }
 }
 
 pub struct AsyncBubbleSort;
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncBubbleSort {
-    fn execute<'a>(&'a self, input: Vec<i32>) -> Pin<Box<dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+    fn execute<'a>(
+        &'a self,
+        input: Vec<i32>,
+    ) -> Pin<
+        Box<
+            dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>>
+                + Send
+                + 'a,
+        >,
+    > {
         Box::pin(async move { Ok(input) })
     }
 }
 impl AsyncSortingAlgorithm for AsyncBubbleSort {
-    fn get_algorithm_type(&self) -> SortingAlgorithm { SortingAlgorithm::BubbleSort }
-    fn get_complexity(&self) -> AlgorithmComplexity { AlgorithmComplexity::new("O(n)", "O(n²)", "O(n²)", "O(1)", true, true) }
+    fn get_algorithm_type(&self) -> SortingAlgorithm {
+        SortingAlgorithm::BubbleSort
+    }
+    fn get_complexity(&self) -> AlgorithmComplexity {
+        AlgorithmComplexity::new("O(n)", "O(n²)", "O(n²)", "O(1)", true, true)
+    }
 }
 
 pub struct AsyncRadixSort;
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncRadixSort {
-    fn execute<'a>(&'a self, input: Vec<i32>) -> Pin<Box<dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+    fn execute<'a>(
+        &'a self,
+        input: Vec<i32>,
+    ) -> Pin<
+        Box<
+            dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>>
+                + Send
+                + 'a,
+        >,
+    > {
         Box::pin(async move { Ok(input) })
     }
 }
 impl AsyncSortingAlgorithm for AsyncRadixSort {
-    fn get_algorithm_type(&self) -> SortingAlgorithm { SortingAlgorithm::RadixSort }
-    fn get_complexity(&self) -> AlgorithmComplexity { AlgorithmComplexity::new("O(d(n+k))", "O(d(n+k))", "O(d(n+k))", "O(n+k)", true, false) }
+    fn get_algorithm_type(&self) -> SortingAlgorithm {
+        SortingAlgorithm::RadixSort
+    }
+    fn get_complexity(&self) -> AlgorithmComplexity {
+        AlgorithmComplexity::new("O(d(n+k))", "O(d(n+k))", "O(d(n+k))", "O(n+k)", true, false)
+    }
 }
 
 pub struct AsyncCountingSort;
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncCountingSort {
-    fn execute<'a>(&'a self, input: Vec<i32>) -> Pin<Box<dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+    fn execute<'a>(
+        &'a self,
+        input: Vec<i32>,
+    ) -> Pin<
+        Box<
+            dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>>
+                + Send
+                + 'a,
+        >,
+    > {
         Box::pin(async move { Ok(input) })
     }
 }
 impl AsyncSortingAlgorithm for AsyncCountingSort {
-    fn get_algorithm_type(&self) -> SortingAlgorithm { SortingAlgorithm::CountingSort }
-    fn get_complexity(&self) -> AlgorithmComplexity { AlgorithmComplexity::new("O(n+k)", "O(n+k)", "O(n+k)", "O(k)", true, false) }
+    fn get_algorithm_type(&self) -> SortingAlgorithm {
+        SortingAlgorithm::CountingSort
+    }
+    fn get_complexity(&self) -> AlgorithmComplexity {
+        AlgorithmComplexity::new("O(n+k)", "O(n+k)", "O(n+k)", "O(k)", true, false)
+    }
 }
 
 pub struct AsyncBucketSort;
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncBucketSort {
-    fn execute<'a>(&'a self, input: Vec<i32>) -> Pin<Box<dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+    fn execute<'a>(
+        &'a self,
+        input: Vec<i32>,
+    ) -> Pin<
+        Box<
+            dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>>
+                + Send
+                + 'a,
+        >,
+    > {
         Box::pin(async move { Ok(input) })
     }
 }
 impl AsyncSortingAlgorithm for AsyncBucketSort {
-    fn get_algorithm_type(&self) -> SortingAlgorithm { SortingAlgorithm::BucketSort }
-    fn get_complexity(&self) -> AlgorithmComplexity { AlgorithmComplexity::new("O(n+k)", "O(n+k)", "O(n²)", "O(n)", true, false) }
+    fn get_algorithm_type(&self) -> SortingAlgorithm {
+        SortingAlgorithm::BucketSort
+    }
+    fn get_complexity(&self) -> AlgorithmComplexity {
+        AlgorithmComplexity::new("O(n+k)", "O(n+k)", "O(n²)", "O(n)", true, false)
+    }
 }
 
 pub struct AsyncTimSort;
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncTimSort {
-    fn execute<'a>(&'a self, input: Vec<i32>) -> Pin<Box<dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+    fn execute<'a>(
+        &'a self,
+        input: Vec<i32>,
+    ) -> Pin<
+        Box<
+            dyn Future<Output = Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>>
+                + Send
+                + 'a,
+        >,
+    > {
         Box::pin(async move { Ok(input) })
     }
 }
 impl AsyncSortingAlgorithm for AsyncTimSort {
-    fn get_algorithm_type(&self) -> SortingAlgorithm { SortingAlgorithm::TimSort }
-    fn get_complexity(&self) -> AlgorithmComplexity { AlgorithmComplexity::new("O(n)", "O(n log n)", "O(n log n)", "O(n)", true, false) }
+    fn get_algorithm_type(&self) -> SortingAlgorithm {
+        SortingAlgorithm::TimSort
+    }
+    fn get_complexity(&self) -> AlgorithmComplexity {
+        AlgorithmComplexity::new("O(n)", "O(n log n)", "O(n log n)", "O(n)", true, false)
+    }
 }
 
 /// 快速排序递归实现

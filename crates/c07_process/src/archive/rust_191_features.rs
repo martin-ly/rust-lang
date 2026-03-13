@@ -326,7 +326,9 @@ pub mod process_std_new_apis {
     /// Vec::try_reserve_exact 示例
     ///
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
-    pub fn allocate_process_buffer(size: usize) -> Result<Vec<u8>, std::collections::TryReserveError> {
+    pub fn allocate_process_buffer(
+        size: usize,
+    ) -> Result<Vec<u8>, std::collections::TryReserveError> {
         let mut vec = Vec::new();
         vec.try_reserve_exact(size)?;
         Ok(vec)

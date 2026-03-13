@@ -10,15 +10,14 @@
 //! ```bash
 //! cargo bench --bench rust_192_benchmarks
 //! ```
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId, Throughput};
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::num::NonZeroUsize;
 
 use c04_generic::rust_192_features::{
-    GenericVector, GenericContainer, GenericTransformer, GenericLifetimeProcessor,
-    StringToNumberTransformer, IdentityProcessor, compose_generic_processors,
-    calculate_generic_aligned_size, GenericMemoryAllocator,
-    compare_generic_collections, GenericCollectionValidator,
+    GenericCollectionValidator, GenericContainer, GenericLifetimeProcessor, GenericMemoryAllocator,
+    GenericTransformer, GenericVector, IdentityProcessor, StringToNumberTransformer,
+    calculate_generic_aligned_size, compare_generic_collections, compose_generic_processors,
 };
 
 /// 基准测试关联项的多个边界性能
@@ -100,9 +99,7 @@ fn bench_higher_ranked_lifetime_performance(c: &mut Criterion) {
         let processor2 = IdentityProcessor::<String>::new();
         let input = String::from("test");
         b.iter(|| {
-            let result = compose_generic_processors(
-                &input, &processor1, &processor2
-            );
+            let result = compose_generic_processors(&input, &processor1, &processor2);
             black_box(result);
         });
     });
@@ -162,29 +159,23 @@ fn bench_iterator_specialization_performance(c: &mut Criterion) {
     for size in [10, 100, 1000, 10000].iter() {
         let col1: Vec<i32> = (0..*size).collect();
         let col2: Vec<i32> = (0..*size).collect();
-        let col3: Vec<i32> = (0..*size).map(|x| if x == *size - 1 { x + 1 } else { x }).collect();
+        let col3: Vec<i32> = (0..*size)
+            .map(|x| if x == *size - 1 { x + 1 } else { x })
+            .collect();
 
-        group.bench_with_input(
-            BenchmarkId::new("compare_equal", size),
-            size,
-            |b, _| {
-                b.iter(|| {
-                    let result = compare_generic_collections(&col1, &col2);
-                    black_box(result);
-                });
-            },
-        );
+        group.bench_with_input(BenchmarkId::new("compare_equal", size), size, |b, _| {
+            b.iter(|| {
+                let result = compare_generic_collections(&col1, &col2);
+                black_box(result);
+            });
+        });
 
-        group.bench_with_input(
-            BenchmarkId::new("compare_different", size),
-            size,
-            |b, _| {
-                b.iter(|| {
-                    let result = compare_generic_collections(&col1, &col3);
-                    black_box(result);
-                });
-            },
-        );
+        group.bench_with_input(BenchmarkId::new("compare_different", size), size, |b, _| {
+            b.iter(|| {
+                let result = compare_generic_collections(&col1, &col3);
+                black_box(result);
+            });
+        });
     }
 
     group.finish();
@@ -200,29 +191,23 @@ fn bench_collection_validator_performance(c: &mut Criterion) {
         let expected: Vec<i32> = (0..*size).collect();
         let validator = GenericCollectionValidator::new(expected.clone());
         let actual_match = expected.clone();
-        let actual_mismatch: Vec<i32> = (0..*size).map(|x| if x == *size - 1 { x + 1 } else { x }).collect();
+        let actual_mismatch: Vec<i32> = (0..*size)
+            .map(|x| if x == *size - 1 { x + 1 } else { x })
+            .collect();
 
-        group.bench_with_input(
-            BenchmarkId::new("validate_match", size),
-            size,
-            |b, _| {
-                b.iter(|| {
-                    let result = validator.validate(&actual_match);
-                    black_box(result);
-                });
-            },
-        );
+        group.bench_with_input(BenchmarkId::new("validate_match", size), size, |b, _| {
+            b.iter(|| {
+                let result = validator.validate(&actual_match);
+                black_box(result);
+            });
+        });
 
-        group.bench_with_input(
-            BenchmarkId::new("validate_mismatch", size),
-            size,
-            |b, _| {
-                b.iter(|| {
-                    let result = validator.validate(&actual_mismatch);
-                    black_box(result);
-                });
-            },
-        );
+        group.bench_with_input(BenchmarkId::new("validate_mismatch", size), size, |b, _| {
+            b.iter(|| {
+                let result = validator.validate(&actual_mismatch);
+                black_box(result);
+            });
+        });
     }
 
     group.finish();
@@ -253,12 +238,14 @@ fn bench_complete_workflow_performance(c: &mut Criterion) {
                     // 3. 处理生命周期
                     let processor = IdentityProcessor::<String>::new();
                     if let Some(item) = container.get(0) {
-                        let _processed = GenericLifetimeProcessor::<String>::process(&processor, item);
+                        let _processed =
+                            GenericLifetimeProcessor::<String>::process(&processor, item);
                     }
 
                     // 4. 计算内存
                     let alignment = NonZeroUsize::new(8).unwrap();
-                    let _size = calculate_generic_aligned_size::<String>(container.size(), alignment);
+                    let _size =
+                        calculate_generic_aligned_size::<String>(container.size(), alignment);
 
                     // 5. 验证集合
                     let expected: Vec<i32> = (0..10).collect();

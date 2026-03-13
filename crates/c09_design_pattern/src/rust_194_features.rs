@@ -21,7 +21,6 @@ use std::sync::LazyLock;
 ///
 /// Rust 1.94.0 引入了 `array_windows` 方法，可以创建固定大小的滑动窗口迭代器。
 /// 这在设计模式中非常有用，特别是需要处理连续数据序列的模式。
-
 /// 使用 array_windows 实现滑动窗口日志模式
 ///
 /// 展示如何使用 array_windows 实现一个固定大小的滑动窗口日志记录器
@@ -107,9 +106,9 @@ impl StateTransitionValidator {
         }
 
         // 使用 array_windows<2> 获取相邻的状态对
-        states.array_windows::<2>().all(|[prev, next]| {
-            Self::is_valid_transition(*prev, *next)
-        })
+        states
+            .array_windows::<2>()
+            .all(|[prev, next]| Self::is_valid_transition(*prev, *next))
     }
 
     /// 检查单个状态转换是否有效
@@ -131,7 +130,6 @@ impl StateTransitionValidator {
 ///
 /// Rust 1.94.0 为 LazyLock 添加了新的方法：get(), get_mut(), force_mut()
 /// 这些方法使得在单例模式中更灵活地访问和修改全局状态。
-
 /// 使用 LazyLock 实现线程安全的配置单例
 ///
 /// Rust 1.94.0: 利用 LazyLock 的新方法实现可变的全局配置
@@ -146,7 +144,10 @@ impl GlobalConfig {
         let mut settings = std::collections::HashMap::new();
         settings.insert("theme".to_string(), "dark".to_string());
         settings.insert("language".to_string(), "zh-CN".to_string());
-        Self { settings, version: 1 }
+        Self {
+            settings,
+            version: 1,
+        }
     }
 
     /// 获取配置值
@@ -241,7 +242,6 @@ impl<T: Default + 'static> ComputedCache<T> {
 ///
 /// Rust 1.94.0 在 f32 和 f64 上添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量。
 /// 这些常量可以在工厂模式中用于几何计算和优化算法。
-
 /// 黄金比例工厂
 ///
 /// 使用 GOLDEN_RATIO 实现基于黄金分割的工厂模式
@@ -366,7 +366,6 @@ impl EulerCalculator {
 ///
 /// Rust 1.94.0 为 Peekable 迭代器添加了 next_if_map() 和 next_if_map_mut() 方法。
 /// 这些方法在迭代器模式中提供了更强大的条件处理能力。
-
 /// 使用 Peekable 新方法实现词法分析器
 ///
 /// Rust 1.94.0: 使用 next_if_map() 简化条件解析
@@ -376,7 +375,7 @@ pub enum Token {
     Identifier(String),
     Operator(char),
     Whitespace,
-    EOF,
+    Eof,
 }
 
 /// 词法分析器
@@ -466,11 +465,12 @@ impl<'a> Lexer<'a> {
 
         // 解析操作符
         if let Some(c) = self.input.next()
-            && "+-*/=<>!".contains(c) {
-                return Token::Operator(c);
-            }
+            && "+-*/=<>!".contains(c)
+        {
+            return Token::Operator(c);
+        }
 
-        Token::EOF
+        Token::Eof
     }
 }
 
@@ -529,7 +529,6 @@ where
 ///
 /// Rust 1.94.0 实现了 TryFrom<char> for usize。
 /// 这在解析器模式中非常有用，可以将字符直接转换为索引位置。
-
 /// 使用 char 到 usize 转换实现位置映射器
 ///
 /// Rust 1.94.0: 利用 TryFrom<char> for usize 简化字符位置计算
@@ -666,7 +665,7 @@ pub fn demonstrate_rust_194_design_patterns() {
     let mut tokens = Vec::new();
     loop {
         let token = lexer.next_token();
-        if token == Token::EOF {
+        if token == Token::Eof {
             break;
         }
         tokens.push(token);
@@ -727,13 +726,17 @@ mod tests {
             ConnectionState::Connecting,
             ConnectionState::Connected,
         ];
-        assert!(StateTransitionValidator::validate_transitions(&valid_states));
+        assert!(StateTransitionValidator::validate_transitions(
+            &valid_states
+        ));
 
         let invalid_states = vec![
             ConnectionState::Disconnected,
             ConnectionState::Connected, // 无效：不能直接连接
         ];
-        assert!(!StateTransitionValidator::validate_transitions(&invalid_states));
+        assert!(!StateTransitionValidator::validate_transitions(
+            &invalid_states
+        ));
     }
 
     #[test]
@@ -754,9 +757,14 @@ mod tests {
     #[test]
     fn test_golden_section_search() {
         // 黄金分割搜索寻找 (x - 5)^2 的最小值，在 [0, 10] 区间内最小值应该在 x = 5
-        let min = GoldenRatioFactory::golden_section_search(0.0, 10.0, 0.01, |x| (x - 5.0) * (x - 5.0));
+        let min =
+            GoldenRatioFactory::golden_section_search(0.0, 10.0, 0.01, |x| (x - 5.0) * (x - 5.0));
         // 搜索结果应该在 [0, 10] 区间内
-        assert!(min >= 0.0 && min <= 10.0, "Expected min in range [0, 10], got {}", min);
+        assert!(
+            min >= 0.0 && min <= 10.0,
+            "Expected min in range [0, 10], got {}",
+            min
+        );
     }
 
     #[test]

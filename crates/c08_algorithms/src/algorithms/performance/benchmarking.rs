@@ -1,7 +1,7 @@
 //! # 基准测试模块
 //!
 //! 本模块提供算法基准测试的工具和方法。
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// 基准测试结果
 #[derive(Debug, Clone, Serialize, Deserialize)]

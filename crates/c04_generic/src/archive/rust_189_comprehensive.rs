@@ -46,10 +46,10 @@ use std::ops::Add;
 //     RingBuffer, MemoryData, SortableVec, Cache, PerformanceTimer,
 // };
 
-    /// RPITIT 特性演示
-    ///
-    /// RPITIT 允许在 trait 方法的返回位置直接使用 impl Trait
-    pub mod rpitit_features {
+/// RPITIT 特性演示
+///
+/// RPITIT 允许在 trait 方法的返回位置直接使用 impl Trait
+pub mod rpitit_features {
 
     /// 数据处理器 trait - 展示 RPITIT
     pub trait DataProcessor<T> {
@@ -80,7 +80,11 @@ use std::ops::Add;
             data.into_iter().map(move |x| x * self.multiplier)
         }
 
-        fn filter_and_process<F>(&self, data: Vec<i32>, predicate: F) -> impl Iterator<Item = i32> + '_
+        fn filter_and_process<F>(
+            &self,
+            data: Vec<i32>,
+            predicate: F,
+        ) -> impl Iterator<Item = i32> + '_
         where
             F: Fn(&i32) -> bool + 'static,
         {
@@ -103,10 +107,15 @@ use std::ops::Add;
 
     impl DataProcessor<String> for StringProcessor {
         fn process(&self, data: Vec<String>) -> impl Iterator<Item = String> + '_ {
-            data.into_iter().map(move |s| format!("{}{}", self.prefix, s))
+            data.into_iter()
+                .map(move |s| format!("{}{}", self.prefix, s))
         }
 
-        fn filter_and_process<F>(&self, data: Vec<String>, predicate: F) -> impl Iterator<Item = String> + '_
+        fn filter_and_process<F>(
+            &self,
+            data: Vec<String>,
+            predicate: F,
+        ) -> impl Iterator<Item = String> + '_
         where
             F: Fn(&String) -> bool + 'static,
         {
@@ -128,7 +137,9 @@ use std::ops::Add;
             let result: Vec<i32> = processor.process(data).collect();
             assert_eq!(result, vec![2, 4, 6, 8, 10]);
 
-            let filtered: Vec<i32> = processor.filter_and_process(vec![1, 2, 3, 4, 5], |&x| x % 2 == 0).collect();
+            let filtered: Vec<i32> = processor
+                .filter_and_process(vec![1, 2, 3, 4, 5], |&x| x % 2 == 0)
+                .collect();
             assert_eq!(filtered, vec![4, 8]);
         }
 
@@ -173,10 +184,11 @@ pub mod enhanced_const_generics {
         pub fn set(&mut self, row: usize, col: usize, value: T) -> bool {
             #[allow(clippy::excessive_nesting)]
             if let Some(row_data) = self.data.get_mut(row)
-                && let Some(cell) = row_data.get_mut(col) {
-                    *cell = value;
-                    return true;
-                }
+                && let Some(cell) = row_data.get_mut(col)
+            {
+                *cell = value;
+                return true;
+            }
             false
         }
 
@@ -322,8 +334,8 @@ pub mod enhanced_const_generics {
     }
 }
 
-    /// 改进的 trait 上行转换特性演示
-    pub mod trait_upcasting {
+/// 改进的 trait 上行转换特性演示
+pub mod trait_upcasting {
 
     /// 基础 trait
     #[allow(clippy::type_complexity)]
@@ -354,7 +366,12 @@ pub mod enhanced_const_generics {
 
     impl Circle {
         pub fn new(radius: f64, x: f64, y: f64, color: String) -> Self {
-            Self { radius, x, y, color }
+            Self {
+                radius,
+                x,
+                y,
+                color,
+            }
         }
     }
 
@@ -403,9 +420,7 @@ pub mod enhanced_const_generics {
 
     impl ShapeManager {
         pub fn new() -> Self {
-            Self {
-                shapes: Vec::new(),
-            }
+            Self { shapes: Vec::new() }
         }
 
         #[allow(clippy::type_complexity)]
@@ -416,7 +431,8 @@ pub mod enhanced_const_generics {
         /// 上转到 Shape trait - 展示新的上行转换语法
         #[allow(clippy::type_complexity)]
         pub fn get_total_area(&self) -> f64 {
-            self.shapes.iter()
+            self.shapes
+                .iter()
                 .map(|shape| {
                     let shape_ref: &dyn Shape = shape.as_ref();
                     shape_ref.area()
@@ -446,7 +462,8 @@ pub mod enhanced_const_generics {
         /// 批量处理形状
         #[allow(clippy::type_complexity)]
         pub fn process_shapes(shapes: &[&dyn Drawable]) -> Vec<(f64, f64, String)> {
-            shapes.iter()
+            shapes
+                .iter()
                 .map(|shape| Self::process_shape(*shape))
                 .collect()
         }
@@ -460,9 +477,7 @@ pub mod enhanced_const_generics {
         fn test_trait_upcasting() {
             let mut manager = ShapeManager::new();
 
-            let circle = Box::new(Circle::new(
-                5.0, 0.0, 0.0, "红色".to_string()
-            ));
+            let circle = Box::new(Circle::new(5.0, 0.0, 0.0, "红色".to_string()));
 
             manager.add_shape(circle);
 
@@ -544,9 +559,7 @@ pub mod type_inference_improvements {
 
         // 批量转换的类型推断
         let numbers = vec![1, 2, 3, 4, 5];
-        let strings: Vec<String> = converter.convert_batch(numbers, |x| {
-            format!("值: {}", x)
-        });
+        let strings: Vec<String> = converter.convert_batch(numbers, |x| format!("值: {}", x));
         println!("批量转换: {:?}", strings);
     }
 
@@ -554,17 +567,11 @@ pub mod type_inference_improvements {
     #[allow(clippy::type_complexity)]
     pub fn complex_type_inference() {
         // 多级泛型推断
-        let data: Vec<Vec<Option<i32>>> = vec![
-            vec![Some(1), None, Some(3)],
-            vec![None, Some(2), Some(4)],
-        ];
+        let data: Vec<Vec<Option<i32>>> =
+            vec![vec![Some(1), None, Some(3)], vec![None, Some(2), Some(4)]];
 
         // 编译器可以推断复杂的迭代器类型
-        let flattened: Vec<i32> = data
-            .into_iter()
-            .flatten()
-            .flatten()
-            .collect();
+        let flattened: Vec<i32> = data.into_iter().flatten().flatten().collect();
 
         println!("扁平化结果: {:?}", flattened);
 
@@ -593,8 +600,8 @@ pub mod type_inference_improvements {
     }
 }
 
-    /// 生命周期推断增强演示
-    pub mod lifetime_inference_enhancements {
+/// 生命周期推断增强演示
+pub mod lifetime_inference_enhancements {
 
     /// 生命周期推断改进示例
     #[allow(clippy::type_complexity)]
@@ -677,9 +684,7 @@ pub mod type_inference_improvements {
             let data2 = vec![4, 5, 6];
 
             let holder = MultiLifetimeHolder::new(&data1, &data2);
-            let result = holder.combine(|a, b| {
-                format!("{:?} + {:?}", a, b)
-            });
+            let result = holder.combine(|a, b| format!("{:?} + {:?}", a, b));
 
             assert!(result.contains("[1, 2, 3]"));
             assert!(result.contains("[4, 5, 6]"));
@@ -752,10 +757,7 @@ pub mod new_generic_constraint_syntax {
     }
 
     /// 使用新的约束语法的函数
-    pub fn advanced_generic_function<T, U, F>(
-        input: T,
-        processor: F,
-    ) -> U
+    pub fn advanced_generic_function<T, U, F>(input: T, processor: F) -> U
     where
         T: Clone + Send + Sync,
         U: Display,
@@ -793,10 +795,12 @@ pub mod new_generic_constraint_syntax {
             let result: String = processor.process("42".to_string());
             assert_eq!(result, "42");
 
-            let conditional_result: Option<String> = processor.conditional_process("10".to_string(), |x| x.len() > 1);
+            let conditional_result: Option<String> =
+                processor.conditional_process("10".to_string(), |x| x.len() > 1);
             assert_eq!(conditional_result, Some("10".to_string()));
 
-            let conditional_none: Option<String> = processor.conditional_process("3".to_string(), |x| x.len() > 2);
+            let conditional_none: Option<String> =
+                processor.conditional_process("3".to_string(), |x| x.len() > 2);
             assert_eq!(conditional_none, None);
         }
 
@@ -811,8 +815,8 @@ pub mod new_generic_constraint_syntax {
             let data = vec![1, 2, 3, 4, 5];
             let result = complex_constraint_example(
                 data,
-                |x| x * 2,           // 处理器：乘以2
-                |&x| x > 5,          // 验证器：大于5
+                |x| x * 2,                // 处理器：乘以2
+                |&x| x > 5,               // 验证器：大于5
                 |x| format!("值: {}", x), // 映射器：格式化
             );
 
@@ -823,8 +827,8 @@ pub mod new_generic_constraint_syntax {
 
 /// 综合演示函数
 pub fn demonstrate_rust_189_comprehensive() {
-    use rpitit_features::DataProcessor;
     use new_generic_constraint_syntax::AdvancedProcessor;
+    use rpitit_features::DataProcessor;
 
     println!("\n=== Rust 1.89 全面特性演示 ===");
 
@@ -850,7 +854,10 @@ pub fn demonstrate_rust_189_comprehensive() {
     println!("\n3. Trait 上行转换演示:");
     let mut manager = trait_upcasting::ShapeManager::new();
     let circle = Box::new(trait_upcasting::Circle::new(
-        5.0, 0.0, 0.0, "红色".to_string()
+        5.0,
+        0.0,
+        0.0,
+        "红色".to_string(),
     ));
     manager.add_shape(circle);
     let total_area = manager.get_total_area();

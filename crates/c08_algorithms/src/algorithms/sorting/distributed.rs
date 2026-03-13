@@ -2,7 +2,7 @@
 //!
 //! 本模块实现了各种排序算法的分布式版本，支持跨节点的分布式计算。
 //! 适用于大规模数据处理和需要水平扩展的场景。
-use super::{SortingAlgorithm, AlgorithmComplexity};
+use super::{AlgorithmComplexity, SortingAlgorithm};
 use crate::algorithms::execution_modes::{
     DistributedAlgorithm,
     //ExecutionResult,
@@ -14,7 +14,11 @@ use crate::algorithms::execution_modes::{
 pub struct DistributedQuickSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedQuickSort {
-    fn execute(&self, input: Vec<i32>, nodes: Vec<String>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+        nodes: Vec<String>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -51,7 +55,11 @@ impl super::DistributedSortingAlgorithm for DistributedQuickSort {
 pub struct DistributedMergeSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedMergeSort {
-    fn execute(&self, input: Vec<i32>, nodes: Vec<String>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+        nodes: Vec<String>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -80,7 +88,14 @@ impl super::DistributedSortingAlgorithm for DistributedMergeSort {
     }
 
     fn get_complexity(&self) -> AlgorithmComplexity {
-        AlgorithmComplexity::new("O(n log n)", "O(n log n)", "O(n log n)", "O(n)", true, false)
+        AlgorithmComplexity::new(
+            "O(n log n)",
+            "O(n log n)",
+            "O(n log n)",
+            "O(n)",
+            true,
+            false,
+        )
     }
 }
 
@@ -88,7 +103,11 @@ impl super::DistributedSortingAlgorithm for DistributedMergeSort {
 pub struct DistributedHeapSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedHeapSort {
-    fn execute(&self, input: Vec<i32>, nodes: Vec<String>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+        nodes: Vec<String>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -115,7 +134,14 @@ impl super::DistributedSortingAlgorithm for DistributedHeapSort {
     }
 
     fn get_complexity(&self) -> AlgorithmComplexity {
-        AlgorithmComplexity::new("O(n log n)", "O(n log n)", "O(n log n)", "O(1)", false, true)
+        AlgorithmComplexity::new(
+            "O(n log n)",
+            "O(n log n)",
+            "O(n log n)",
+            "O(1)",
+            false,
+            true,
+        )
     }
 }
 
@@ -123,7 +149,11 @@ impl super::DistributedSortingAlgorithm for DistributedHeapSort {
 pub struct DistributedInsertionSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedInsertionSort {
-    fn execute(&self, input: Vec<i32>, nodes: Vec<String>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+        nodes: Vec<String>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -158,7 +188,11 @@ impl super::DistributedSortingAlgorithm for DistributedInsertionSort {
 pub struct DistributedSelectionSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedSelectionSort {
-    fn execute(&self, input: Vec<i32>, nodes: Vec<String>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+        nodes: Vec<String>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -193,7 +227,11 @@ impl super::DistributedSortingAlgorithm for DistributedSelectionSort {
 pub struct DistributedBubbleSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedBubbleSort {
-    fn execute(&self, input: Vec<i32>, nodes: Vec<String>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+        nodes: Vec<String>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -228,7 +266,11 @@ impl super::DistributedSortingAlgorithm for DistributedBubbleSort {
 pub struct DistributedRadixSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedRadixSort {
-    fn execute(&self, input: Vec<i32>, nodes: Vec<String>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+        nodes: Vec<String>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -261,7 +303,11 @@ impl super::DistributedSortingAlgorithm for DistributedRadixSort {
 pub struct DistributedCountingSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedCountingSort {
-    fn execute(&self, input: Vec<i32>, nodes: Vec<String>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+        nodes: Vec<String>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -304,7 +350,11 @@ impl super::DistributedSortingAlgorithm for DistributedCountingSort {
 pub struct DistributedBucketSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedBucketSort {
-    fn execute(&self, input: Vec<i32>, nodes: Vec<String>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+        nodes: Vec<String>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -353,7 +403,11 @@ impl super::DistributedSortingAlgorithm for DistributedBucketSort {
 pub struct DistributedTimSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedTimSort {
-    fn execute(&self, input: Vec<i32>, nodes: Vec<String>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+        nodes: Vec<String>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -481,9 +535,7 @@ fn insertion_sort_distributed(arr: &mut [i32]) {
 
 fn selection_sort_distributed(arr: &mut [i32]) {
     for i in 0..arr.len() {
-        let min_idx = (i..arr.len())
-            .min_by_key(|&j| arr[j])
-            .unwrap_or(i);
+        let min_idx = (i..arr.len()).min_by_key(|&j| arr[j]).unwrap_or(i);
         arr.swap(i, min_idx);
     }
 }

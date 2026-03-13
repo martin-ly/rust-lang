@@ -379,6 +379,8 @@ Sync trait 为 Rust 提供了线程间安全共享引用的基础。
 同时需要注意安全性和性能影响。
 */
 
+#![allow(clippy::type_complexity)]
+
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, RwLock};
 use std::thread;

@@ -43,9 +43,9 @@
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use tokio::sync::{mpsc, broadcast, oneshot, Mutex};
-use tokio::time::{sleep, timeout};
 use tokio::select;
+use tokio::sync::{Mutex, broadcast, mpsc, oneshot};
+use tokio::time::{sleep, timeout};
 
 // ============================================================================
 // 第一部分: CSP 模式理论形式化
@@ -85,7 +85,7 @@ use tokio::select;
 /// ### 1. 通信同步 (Communication Synchronization)
 /// - **定义**: 发送和接收必须同步进行
 /// - **Rust 实现**: `mpsc::channel`, `oneshot::channel`
-/// - **特性**: 
+/// - **特性**:
 ///   - 有界通道提供背压控制
 ///   - 无界通道可能导致内存问题
 ///   - 广播通道支持多播
@@ -119,7 +119,7 @@ use tokio::select;
 /// 假设存在死锁，则存在进程集合 {P1, P2, ..., Pn}，其中:
 /// - Pi 等待 P(i+1) 的消息 (i = 1..n-1)
 /// - Pn 等待 P1 的消息
-/// 
+///
 /// 但根据条件 3，不存在循环等待，矛盾。
 /// 因此系统无死锁。 ∎
 /// ```
@@ -145,7 +145,7 @@ use tokio::select;
 /// 1. 检查所有分支的就绪状态
 /// 2. 从就绪分支中随机选择一个
 /// 3. 执行选中的分支
-/// 
+///
 /// 因此，每个就绪分支被选中的概率为 1/n (n 为就绪分支数)。 ∎
 /// ```
 ///
@@ -216,17 +216,17 @@ pub enum ChannelType {
     /// - 固定容量，提供背压控制
     /// - Fixed capacity, provides backpressure control
     Bounded,
-    
+
     /// 无界通道 (Unbounded Channel)
     /// - 无限容量，可能导致内存问题
     /// - Unlimited capacity, may cause memory issues
     Unbounded,
-    
+
     /// 广播通道 (Broadcast Channel)
     /// - 多个接收者，消息广播
     /// - Multiple receivers, message broadcast
     Broadcast,
-    
+
     /// 单次通道 (Oneshot Channel)
     /// - 单次发送和接收
     /// - Single send and receive
@@ -239,13 +239,13 @@ pub enum ChannelType {
 pub enum ProcessState {
     /// 运行中 (Running)
     Running,
-    
+
     /// 等待中 (Waiting)
     Waiting,
-    
+
     /// 完成 (Completed)
     Completed,
-    
+
     /// 错误 (Error)
     Error,
 }
@@ -256,19 +256,19 @@ pub enum ProcessState {
 pub struct ProcessStats {
     /// 进程 ID (Process ID)
     pub id: String,
-    
+
     /// 状态 (State)
     pub state: ProcessState,
-    
+
     /// 发送消息数 (Messages sent)
     pub messages_sent: u64,
-    
+
     /// 接收消息数 (Messages received)
     pub messages_received: u64,
-    
+
     /// 运行时间 (Runtime)
     pub runtime: Duration,
-    
+
     /// 启动时间 (Start time)
     pub start_time: Instant,
 }
@@ -310,13 +310,13 @@ impl ProcessStats {
 pub struct CspSystemConfig {
     /// 通道容量 (Channel capacity)
     pub channel_capacity: usize,
-    
+
     /// 进程数量 (Number of processes)
     pub num_processes: usize,
-    
+
     /// 超时时间 (Timeout duration)
     pub timeout_duration: Duration,
-    
+
     /// 是否启用统计 (Enable statistics)
     pub enable_stats: bool,
 }
@@ -342,10 +342,10 @@ impl Default for CspSystemConfig {
 pub struct CspSystem {
     /// 配置 (Configuration)
     config: CspSystemConfig,
-    
+
     /// 进程统计 (Process statistics)
     stats: Arc<Mutex<HashMap<String, ProcessStats>>>,
-    
+
     /// 系统启动时间 (System start time)
     start_time: Instant,
 }
@@ -442,27 +442,31 @@ pub async fn data_processing_pipeline_example() {
     let system_clone = system.clone();
     let source = tokio::spawn(async move {
         system_clone.register_process("source".to_string()).await;
-        
+
         println!("[Source] 🎲 开始生成数据...");
         for i in 1..=20 {
             let data = format!("data-{}", i);
             println!("  [Source] 生成: {}", data);
-            
+
             if tx1.send(data).await.is_err() {
                 break;
             }
-            
-            system_clone.update_stats("source", |s| {
-                s.messages_sent += 1;
-            }).await;
-            
+
+            system_clone
+                .update_stats("source", |s| {
+                    s.messages_sent += 1;
+                })
+                .await;
+
             sleep(Duration::from_millis(50)).await;
         }
-        
-        system_clone.update_stats("source", |s| {
-            s.state = ProcessState::Completed;
-        }).await;
-        
+
+        system_clone
+            .update_stats("source", |s| {
+                s.state = ProcessState::Completed;
+            })
+            .await;
+
         println!("[Source] ✓ 完成\n");
     });
 
@@ -471,32 +475,38 @@ pub async fn data_processing_pipeline_example() {
     let system_clone = system.clone();
     let transform = tokio::spawn(async move {
         system_clone.register_process("transform".to_string()).await;
-        
+
         println!("[Transform] 🔧 开始转换数据...");
         while let Some(data) = rx1.recv().await {
-            system_clone.update_stats("transform", |s| {
-                s.messages_received += 1;
-            }).await;
-            
+            system_clone
+                .update_stats("transform", |s| {
+                    s.messages_received += 1;
+                })
+                .await;
+
             // 模拟数据处理
             let processed = data.to_uppercase();
             println!("  [Transform] 处理: {} → {}", data, processed);
-            
+
             if tx2.send(processed).await.is_err() {
                 break;
             }
-            
-            system_clone.update_stats("transform", |s| {
-                s.messages_sent += 1;
-            }).await;
-            
+
+            system_clone
+                .update_stats("transform", |s| {
+                    s.messages_sent += 1;
+                })
+                .await;
+
             sleep(Duration::from_millis(30)).await;
         }
-        
-        system_clone.update_stats("transform", |s| {
-            s.state = ProcessState::Completed;
-        }).await;
-        
+
+        system_clone
+            .update_stats("transform", |s| {
+                s.state = ProcessState::Completed;
+            })
+            .await;
+
         println!("[Transform] ✓ 完成\n");
     });
 
@@ -504,24 +514,28 @@ pub async fn data_processing_pipeline_example() {
     let system_clone = system.clone();
     let sink = tokio::spawn(async move {
         system_clone.register_process("sink".to_string()).await;
-        
+
         println!("[Sink] 💾 开始存储数据...");
         let mut count = 0;
         while let Some(data) = rx2.recv().await {
-            system_clone.update_stats("sink", |s| {
-                s.messages_received += 1;
-            }).await;
-            
+            system_clone
+                .update_stats("sink", |s| {
+                    s.messages_received += 1;
+                })
+                .await;
+
             count += 1;
             println!("  [Sink] 存储: {} (总数: {})", data, count);
-            
+
             sleep(Duration::from_millis(20)).await;
         }
-        
-        system_clone.update_stats("sink", |s| {
-            s.state = ProcessState::Completed;
-        }).await;
-        
+
+        system_clone
+            .update_stats("sink", |s| {
+                s.state = ProcessState::Completed;
+            })
+            .await;
+
         println!("[Sink] ✓ 完成，共存储 {} 条数据\n", count);
     });
 
@@ -562,44 +576,50 @@ pub async fn distributed_task_scheduler_example() {
 
     // 任务队列
     let (task_tx, mut task_rx) = mpsc::channel::<u32>(20);
-    
+
     // 结果队列
     let (result_tx, mut result_rx) = mpsc::channel::<(u32, u32)>(20);
 
     // 任务分发器 (Dispatcher)
     let system_clone = system.clone();
     let dispatcher = tokio::spawn(async move {
-        system_clone.register_process("dispatcher".to_string()).await;
-        
+        system_clone
+            .register_process("dispatcher".to_string())
+            .await;
+
         println!("[Dispatcher] 📤 开始分发任务...");
         for task_id in 1..=30 {
             println!("  [Dispatcher] 分发任务: {}", task_id);
-            
+
             if task_tx.send(task_id).await.is_err() {
                 break;
             }
-            
-            system_clone.update_stats("dispatcher", |s| {
-                s.messages_sent += 1;
-            }).await;
-            
+
+            system_clone
+                .update_stats("dispatcher", |s| {
+                    s.messages_sent += 1;
+                })
+                .await;
+
             sleep(Duration::from_millis(20)).await;
         }
-        
-        system_clone.update_stats("dispatcher", |s| {
-            s.state = ProcessState::Completed;
-        }).await;
-        
+
+        system_clone
+            .update_stats("dispatcher", |s| {
+                s.state = ProcessState::Completed;
+            })
+            .await;
+
         println!("[Dispatcher] ✓ 完成\n");
     });
 
     // 工作进程 (Workers)
     let num_workers = system.config.num_processes;
     let mut workers = vec![];
-    
+
     // 为每个 worker 创建独立的任务接收通道
     let (worker_tx, _) = broadcast::channel(100);
-    
+
     // 任务分发到广播通道
     let worker_tx_clone = worker_tx.clone();
     tokio::spawn(async move {
@@ -607,45 +627,51 @@ pub async fn distributed_task_scheduler_example() {
             let _ = worker_tx_clone.send(task);
         }
     });
-    
+
     for worker_id in 0..num_workers {
         let mut task_rx = worker_tx.subscribe();
         let result_tx = result_tx.clone();
         let system_clone = system.clone();
-        
+
         let worker = tokio::spawn(async move {
             let worker_name = format!("worker-{}", worker_id);
             system_clone.register_process(worker_name.clone()).await;
-            
+
             println!("[Worker-{}] 🔨 开始工作...", worker_id);
-            
+
             while let Ok(task_id) = task_rx.recv().await {
-                system_clone.update_stats(&worker_name, |s| {
-                    s.messages_received += 1;
-                }).await;
-                
+                system_clone
+                    .update_stats(&worker_name, |s| {
+                        s.messages_received += 1;
+                    })
+                    .await;
+
                 println!("  [Worker-{}] 执行任务: {}", worker_id, task_id);
-                
+
                 // 模拟任务执行
                 sleep(Duration::from_millis(100)).await;
                 let result = task_id * 2;
-                
+
                 if result_tx.send((task_id, result)).await.is_err() {
                     break;
                 }
-                
-                system_clone.update_stats(&worker_name, |s| {
-                    s.messages_sent += 1;
-                }).await;
+
+                system_clone
+                    .update_stats(&worker_name, |s| {
+                        s.messages_sent += 1;
+                    })
+                    .await;
             }
-            
-            system_clone.update_stats(&worker_name, |s| {
-                s.state = ProcessState::Completed;
-            }).await;
-            
+
+            system_clone
+                .update_stats(&worker_name, |s| {
+                    s.state = ProcessState::Completed;
+                })
+                .await;
+
             println!("[Worker-{}] ✓ 完成\n", worker_id);
         });
-        
+
         workers.push(worker);
     }
 
@@ -653,27 +679,30 @@ pub async fn distributed_task_scheduler_example() {
     let system_clone = system.clone();
     let collector = tokio::spawn(async move {
         system_clone.register_process("collector".to_string()).await;
-        
+
         println!("[Collector] 📥 开始收集结果...");
         let mut results = HashMap::new();
-        
+
         // 使用超时避免永久等待
-        while let Ok(Some((task_id, result))) = timeout(
-            Duration::from_secs(2),
-            result_rx.recv()
-        ).await {
-            system_clone.update_stats("collector", |s| {
-                s.messages_received += 1;
-            }).await;
-            
+        while let Ok(Some((task_id, result))) =
+            timeout(Duration::from_secs(2), result_rx.recv()).await
+        {
+            system_clone
+                .update_stats("collector", |s| {
+                    s.messages_received += 1;
+                })
+                .await;
+
             results.insert(task_id, result);
             println!("  [Collector] 收集结果: 任务 {} → 结果 {}", task_id, result);
         }
-        
-        system_clone.update_stats("collector", |s| {
-            s.state = ProcessState::Completed;
-        }).await;
-        
+
+        system_clone
+            .update_stats("collector", |s| {
+                s.state = ProcessState::Completed;
+            })
+            .await;
+
         println!("[Collector] ✓ 完成，共收集 {} 个结果\n", results.len());
     });
 
@@ -724,59 +753,63 @@ pub async fn realtime_log_aggregation_example() {
 
     // 日志通道
     let (log_tx, mut log_rx) = mpsc::channel::<LogEntry>(50);
-    
+
     // 过滤后的日志通道
     let (filtered_tx, mut filtered_rx) = mpsc::channel::<LogEntry>(50);
-    
+
     // 聚合后的日志通道
     let (output_tx, mut output_rx) = mpsc::channel::<String>(50);
 
     // 日志源 (Log Sources)
     let num_sources = 3;
     let mut sources = vec![];
-    
+
     for source_id in 0..num_sources {
         let log_tx = log_tx.clone();
         let system_clone = system.clone();
-        
+
         let source = tokio::spawn(async move {
             let source_name = format!("source-{}", source_id);
             system_clone.register_process(source_name.clone()).await;
-            
+
             println!("[Source-{}] 📡 开始生成日志...", source_id);
-            
+
             for i in 0..10 {
                 let level = match i % 3 {
                     0 => "INFO",
                     1 => "WARN",
                     _ => "ERROR",
                 };
-                
+
                 let entry = LogEntry {
                     source: source_name.clone(),
                     level: level.to_string(),
                     message: format!("Log message {} from source {}", i, source_id),
                     timestamp: Instant::now(),
                 };
-                
+
                 if log_tx.send(entry).await.is_err() {
                     break;
                 }
-                
-                system_clone.update_stats(&source_name, |s| {
-                    s.messages_sent += 1;
-                }).await;
-                
+
+                system_clone
+                    .update_stats(&source_name, |s| {
+                        s.messages_sent += 1;
+                    })
+                    .await;
+
                 sleep(Duration::from_millis(50)).await;
             }
-            
-            system_clone.update_stats(&source_name, |s| {
-                s.state = ProcessState::Completed;
-            }).await;
-            
+
+            system_clone
+                .update_stats(&source_name, |s| {
+                    s.state = ProcessState::Completed;
+                })
+                .await;
+
             println!("[Source-{}] ✓ 完成\n", source_id);
         });
-        
+
         sources.push(source);
     }
 
@@ -784,52 +817,62 @@ pub async fn realtime_log_aggregation_example() {
     let system_clone = system.clone();
     let filter = tokio::spawn(async move {
         system_clone.register_process("filter".to_string()).await;
-        
+
         println!("[Filter] 🔍 开始过滤日志...");
-        
+
         while let Some(entry) = log_rx.recv().await {
-            system_clone.update_stats("filter", |s| {
-                s.messages_received += 1;
-            }).await;
-            
+            system_clone
+                .update_stats("filter", |s| {
+                    s.messages_received += 1;
+                })
+                .await;
+
             // 只保留 WARN 和 ERROR 级别的日志
             if entry.level == "WARN" || entry.level == "ERROR" {
                 println!("  [Filter] 保留: {:?}", entry.level);
-                
+
                 if filtered_tx.send(entry).await.is_err() {
                     break;
                 }
-                
-                system_clone.update_stats("filter", |s| {
-                    s.messages_sent += 1;
-                }).await;
+
+                system_clone
+                    .update_stats("filter", |s| {
+                        s.messages_sent += 1;
+                    })
+                    .await;
             } else {
                 println!("  [Filter] 丢弃: {:?}", entry.level);
             }
         }
-        
-        system_clone.update_stats("filter", |s| {
-            s.state = ProcessState::Completed;
-        }).await;
-        
+
+        system_clone
+            .update_stats("filter", |s| {
+                s.state = ProcessState::Completed;
+            })
+            .await;
+
         println!("[Filter] ✓ 完成\n");
     });
 
     // 日志聚合器 (Log Aggregator)
     let system_clone = system.clone();
     let aggregator = tokio::spawn(async move {
-        system_clone.register_process("aggregator".to_string()).await;
-        
+        system_clone
+            .register_process("aggregator".to_string())
+            .await;
+
         println!("[Aggregator] 📊 开始聚合日志...");
         let mut stats: HashMap<String, u32> = HashMap::new();
-        
+
         while let Some(entry) = filtered_rx.recv().await {
-            system_clone.update_stats("aggregator", |s| {
-                s.messages_received += 1;
-            }).await;
-            
+            system_clone
+                .update_stats("aggregator", |s| {
+                    s.messages_received += 1;
+                })
+                .await;
+
             *stats.entry(entry.level.clone()).or_insert(0) += 1;
-            
+
             let summary = format!(
                 "[{}] {} - {} (总计: WARN={}, ERROR={})",
                 entry.source,
@@ -838,20 +881,24 @@ pub async fn realtime_log_aggregation_example() {
                 stats.get("WARN").unwrap_or(&0),
                 stats.get("ERROR").unwrap_or(&0)
             );
-            
+
             if output_tx.send(summary).await.is_err() {
                 break;
             }
-            
-            system_clone.update_stats("aggregator", |s| {
-                s.messages_sent += 1;
-            }).await;
+
+            system_clone
+                .update_stats("aggregator", |s| {
+                    s.messages_sent += 1;
+                })
+                .await;
         }
-        
-        system_clone.update_stats("aggregator", |s| {
-            s.state = ProcessState::Completed;
-        }).await;
-        
+
+        system_clone
+            .update_stats("aggregator", |s| {
+                s.state = ProcessState::Completed;
+            })
+            .await;
+
         println!("[Aggregator] ✓ 完成\n");
     });
 
@@ -859,21 +906,25 @@ pub async fn realtime_log_aggregation_example() {
     let system_clone = system.clone();
     let output = tokio::spawn(async move {
         system_clone.register_process("output".to_string()).await;
-        
+
         println!("[Output] 📺 开始显示日志...\n");
-        
+
         while let Some(summary) = output_rx.recv().await {
-            system_clone.update_stats("output", |s| {
-                s.messages_received += 1;
-            }).await;
-            
+            system_clone
+                .update_stats("output", |s| {
+                    s.messages_received += 1;
+                })
+                .await;
+
             println!("  [Output] {}", summary);
         }
-        
-        system_clone.update_stats("output", |s| {
-            s.state = ProcessState::Completed;
-        }).await;
-        
+
+        system_clone
+            .update_stats("output", |s| {
+                s.state = ProcessState::Completed;
+            })
+            .await;
+
         println!("\n[Output] ✓ 完成\n");
     });
 
@@ -905,14 +956,14 @@ pub async fn basic_communication_example() {
     // 1. 有界通道 (Bounded Channel)
     println!("1️⃣  有界通道 (Bounded Channel):");
     let (tx, mut rx) = mpsc::channel(5);
-    
+
     tokio::spawn(async move {
         for i in 0..10 {
             println!("   发送: {}", i);
             tx.send(i).await.unwrap();
         }
     });
-    
+
     while let Some(msg) = rx.recv().await {
         println!("   接收: {}", msg);
         sleep(Duration::from_millis(100)).await;
@@ -922,10 +973,10 @@ pub async fn basic_communication_example() {
     // 2. 广播通道 (Broadcast Channel)
     println!("2️⃣  广播通道 (Broadcast Channel):");
     let (tx, _) = broadcast::channel(10);
-    
+
     let mut rx1 = tx.subscribe();
     let mut rx2 = tx.subscribe();
-    
+
     tokio::spawn(async move {
         for i in 0..5 {
             println!("   广播: {}", i);
@@ -933,32 +984,32 @@ pub async fn basic_communication_example() {
             sleep(Duration::from_millis(50)).await;
         }
     });
-    
+
     let h1 = tokio::spawn(async move {
         while let Ok(msg) = rx1.recv().await {
             println!("   接收者 1: {}", msg);
         }
     });
-    
+
     let h2 = tokio::spawn(async move {
         while let Ok(msg) = rx2.recv().await {
             println!("   接收者 2: {}", msg);
         }
     });
-    
+
     let _ = tokio::join!(h1, h2);
     println!();
 
     // 3. 单次通道 (Oneshot Channel)
     println!("3️⃣  单次通道 (Oneshot Channel):");
     let (tx, rx) = oneshot::channel();
-    
+
     tokio::spawn(async move {
         sleep(Duration::from_millis(100)).await;
         println!("   发送: 42");
         let _ = tx.send(42);
     });
-    
+
     match rx.await {
         Ok(msg) => println!("   接收: {}", msg),
         Err(_) => println!("   错误: 发送者已关闭"),
@@ -1048,13 +1099,13 @@ pub async fn performance_benchmark() {
     println!("1️⃣  单生产者单消费者 (SPSC):");
     let start = Instant::now();
     let (tx, mut rx) = mpsc::channel(channel_capacity);
-    
+
     let producer = tokio::spawn(async move {
         for i in 0..num_messages {
             let _ = tx.send(i).await;
         }
     });
-    
+
     let consumer = tokio::spawn(async move {
         let mut count = 0;
         while let Some(_) = rx.recv().await {
@@ -1065,23 +1116,26 @@ pub async fn performance_benchmark() {
         }
         count
     });
-    
+
     let _ = producer.await;
     let count = consumer.await.unwrap();
     let elapsed = start.elapsed();
-    
+
     println!("   消息数: {}", count);
     println!("   耗时: {:?}", elapsed);
-    println!("   吞吐量: {:.2} msg/s\n", count as f64 / elapsed.as_secs_f64());
+    println!(
+        "   吞吐量: {:.2} msg/s\n",
+        count as f64 / elapsed.as_secs_f64()
+    );
 
     // 测试 2: 多生产者单消费者
     println!("2️⃣  多生产者单消费者 (MPSC):");
     let start = Instant::now();
     let (tx, mut rx) = mpsc::channel(channel_capacity);
-    
+
     let num_producers = 4;
     let messages_per_producer = num_messages / num_producers;
-    
+
     let mut producers = vec![];
     for _ in 0..num_producers {
         let tx = tx.clone();
@@ -1093,7 +1147,7 @@ pub async fn performance_benchmark() {
         producers.push(producer);
     }
     drop(tx);
-    
+
     let consumer = tokio::spawn(async move {
         let mut count = 0;
         while let Some(_) = rx.recv().await {
@@ -1101,26 +1155,29 @@ pub async fn performance_benchmark() {
         }
         count
     });
-    
+
     for producer in producers {
         let _ = producer.await;
     }
     let count = consumer.await.unwrap();
     let elapsed = start.elapsed();
-    
+
     println!("   生产者数: {}", num_producers);
     println!("   消息数: {}", count);
     println!("   耗时: {:?}", elapsed);
-    println!("   吞吐量: {:.2} msg/s\n", count as f64 / elapsed.as_secs_f64());
+    println!(
+        "   吞吐量: {:.2} msg/s\n",
+        count as f64 / elapsed.as_secs_f64()
+    );
 
     // 测试 3: 广播通道
     println!("3️⃣  广播通道 (Broadcast):");
     let start = Instant::now();
     let (tx, _) = broadcast::channel(channel_capacity);
-    
+
     let num_receivers = 4;
     let mut receivers = vec![];
-    
+
     for _ in 0..num_receivers {
         let mut rx = tx.subscribe();
         let receiver = tokio::spawn(async move {
@@ -1132,25 +1189,28 @@ pub async fn performance_benchmark() {
         });
         receivers.push(receiver);
     }
-    
+
     let producer = tokio::spawn(async move {
         for i in 0..num_messages {
             let _ = tx.send(i);
         }
     });
-    
+
     let _ = producer.await;
-    
+
     let mut total_received = 0;
     for receiver in receivers {
         total_received += receiver.await.unwrap();
     }
     let elapsed = start.elapsed();
-    
+
     println!("   接收者数: {}", num_receivers);
     println!("   总接收消息数: {}", total_received);
     println!("   耗时: {:?}", elapsed);
-    println!("   吞吐量: {:.2} msg/s\n", total_received as f64 / elapsed.as_secs_f64());
+    println!(
+        "   吞吐量: {:.2} msg/s\n",
+        total_received as f64 / elapsed.as_secs_f64()
+    );
 }
 
 // ============================================================================
@@ -1225,18 +1285,18 @@ mod tests {
     #[tokio::test]
     async fn test_bounded_channel() {
         let (tx, mut rx) = mpsc::channel(5);
-        
+
         tokio::spawn(async move {
             for i in 0..10 {
                 tx.send(i).await.unwrap();
             }
         });
-        
+
         let mut count = 0;
         while let Some(_) = rx.recv().await {
             count += 1;
         }
-        
+
         assert_eq!(count, 10);
     }
 
@@ -1245,13 +1305,13 @@ mod tests {
         let (tx, _) = broadcast::channel(10);
         let mut rx1 = tx.subscribe();
         let mut rx2 = tx.subscribe();
-        
+
         tokio::spawn(async move {
             for i in 0..5 {
                 let _ = tx.send(i);
             }
         });
-        
+
         let h1 = tokio::spawn(async move {
             let mut count = 0;
             while let Ok(_) = rx1.recv().await {
@@ -1259,7 +1319,7 @@ mod tests {
             }
             count
         });
-        
+
         let h2 = tokio::spawn(async move {
             let mut count = 0;
             while let Ok(_) = rx2.recv().await {
@@ -1267,7 +1327,7 @@ mod tests {
             }
             count
         });
-        
+
         let (count1, count2) = tokio::join!(h1, h2);
         assert_eq!(count1.unwrap(), 5);
         assert_eq!(count2.unwrap(), 5);
@@ -1276,11 +1336,11 @@ mod tests {
     #[tokio::test]
     async fn test_oneshot_channel() {
         let (tx, rx) = oneshot::channel();
-        
+
         tokio::spawn(async move {
             let _ = tx.send(42);
         });
-        
+
         let result = rx.await.unwrap();
         assert_eq!(result, 42);
     }
@@ -1289,15 +1349,17 @@ mod tests {
     async fn test_csp_system() {
         let system = CspSystem::new(CspSystemConfig::default());
         system.register_process("test".to_string()).await;
-        
-        system.update_stats("test", |s| {
-            s.messages_sent = 10;
-            s.messages_received = 5;
-        }).await;
-        
+
+        system
+            .update_stats("test", |s| {
+                s.messages_sent = 10;
+                s.messages_received = 5;
+            })
+            .await;
+
         let stats = system.stats.lock().await;
         let test_stats = stats.get("test").unwrap();
-        
+
         assert_eq!(test_stats.messages_sent, 10);
         assert_eq!(test_stats.messages_received, 5);
     }

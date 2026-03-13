@@ -83,9 +83,13 @@ pub trait AsyncEventHandler<E: ?Sized> {
 pub struct StringEventHandler;
 
 impl AsyncEventHandler<String> for StringEventHandler {
-    type Ref<'a> = &'a String where String: 'a;
+    type Ref<'a>
+        = &'a String
+    where
+        String: 'a;
 
-    type Fut<'a> = std::pin::Pin<Box<dyn std::future::Future<Output = ()> + 'a>>
+    type Fut<'a>
+        = std::pin::Pin<Box<dyn std::future::Future<Output = ()> + 'a>>
     where
         String: 'a,
         Self: 'a;
@@ -135,8 +139,13 @@ pub mod async_bus {
 
         fn run_with_backpressure<'a>(&'a self, events: &'a [E]) -> Self::Fut<'a>;
         fn run_until_cancel<'a>(&'a self, events: &'a [E], cancel: bool) -> Self::Fut<'a>;
-        fn run_with_strategy<'a>(&'a self, events: &'a [E], strategy: BackpressureStrategy) -> Self::Fut<'a>;
-        fn run_with_timeout_like<'a>(&'a self, events: &'a [E], max_events: usize) -> Self::Fut<'a>;
+        fn run_with_strategy<'a>(
+            &'a self,
+            events: &'a [E],
+            strategy: BackpressureStrategy,
+        ) -> Self::Fut<'a>;
+        fn run_with_timeout_like<'a>(&'a self, events: &'a [E], max_events: usize)
+        -> Self::Fut<'a>;
     }
 
     impl EventBusString {
@@ -154,7 +163,9 @@ pub mod async_bus {
         /// 处理事件，遇到取消信号则提前返回
         pub async fn run_until_cancel(&self, events: &[String], cancel: bool) {
             for e in events {
-                if cancel { break; }
+                if cancel {
+                    break;
+                }
                 self.handler.on_event(e).await;
             }
         }
@@ -191,15 +202,19 @@ pub mod async_bus {
         /// max_events 作为超时阈值的无运行时近似（处理达到阈值即视为超时）。
         pub async fn run_with_timeout_like(&self, events: &[String], max_events: usize) {
             for (count, e) in events.iter().enumerate() {
-                if count >= max_events { break; }
+                if count >= max_events {
+                    break;
+                }
                 self.handler.on_event(e).await;
             }
         }
-
     }
 
     impl EventBus<String> for EventBusString {
-        type Fut<'a> = Pin<Box<dyn Future<Output = ()> + 'a>> where Self: 'a;
+        type Fut<'a>
+            = Pin<Box<dyn Future<Output = ()> + 'a>>
+        where
+            Self: 'a;
 
         fn run_with_backpressure<'a>(&'a self, events: &'a [String]) -> Self::Fut<'a> {
             Box::pin(self.run_with_backpressure(events))
@@ -209,107 +224,130 @@ pub mod async_bus {
             Box::pin(self.run_until_cancel(events, cancel))
         }
 
-        fn run_with_strategy<'a>(&'a self, events: &'a [String], strategy: BackpressureStrategy) -> Self::Fut<'a> {
+        fn run_with_strategy<'a>(
+            &'a self,
+            events: &'a [String],
+            strategy: BackpressureStrategy,
+        ) -> Self::Fut<'a> {
             Box::pin(self.run_with_strategy(events, strategy))
         }
 
-        fn run_with_timeout_like<'a>(&'a self, events: &'a [String], max_events: usize) -> Self::Fut<'a> {
+        fn run_with_timeout_like<'a>(
+            &'a self,
+            events: &'a [String],
+            max_events: usize,
+        ) -> Self::Fut<'a> {
             Box::pin(self.run_with_timeout_like(events, max_events))
         }
     }
 
     impl<H, E> EventBusGeneric<H, E>
-        where
-            H: AsyncEventHandler<E>,
-            for<'a> H::Ref<'a>: From<&'a E>,
-        {
-            pub fn new(handler: H) -> Self {
-                Self { handler, _marker: core::marker::PhantomData }
-            }
-
-            pub async fn run_with_backpressure(&self, events: &[E]) {
-                for e in events {
-                    let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
-                    self.handler.on_event(r).await;
-                }
-            }
-
-            pub async fn run_until_cancel(&self, events: &[E], cancel: bool) {
-                for e in events {
-                    if cancel { break; }
-                    let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
-                    self.handler.on_event(r).await;
-                }
-            }
-
-            pub async fn run_with_strategy(&self, events: &[E], strategy: BackpressureStrategy) {
-                match strategy {
-                    BackpressureStrategy::Block => {
-                        for e in events {
-                            let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
-                            self.handler.on_event(r).await;
-                        }
-                    }
-                    BackpressureStrategy::DropOldest => {
-                        let half = events.len() / 2;
-                        for e in &events[half..] {
-                            let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
-                            self.handler.on_event(r).await;
-                        }
-                    }
-                    BackpressureStrategy::Batch(batch_size) => {
-                        let mut idx = 0;
-                        while idx < events.len() {
-                            let end = (idx + batch_size).min(events.len());
-                            for e in &events[idx..end] {
-                                let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
-                                self.handler.on_event(r).await;
-                            }
-                            idx = end;
-                        }
-                    }
-                }
-            }
-
-            pub async fn run_with_timeout_like(&self, events: &[E], max_events: usize) {
-                for (count, e) in events.iter().enumerate() {
-                    if count >= max_events { break; }
-                    let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
-                    self.handler.on_event(r).await;
-                }
-            }
-        }
-    }
-
-    impl<H, E> self::async_bus::EventBus<E> for self::async_bus::EventBusGeneric<H, E>
     where
         H: AsyncEventHandler<E>,
         for<'a> H::Ref<'a>: From<&'a E>,
     {
-        type Fut<'a> = std::pin::Pin<Box<dyn std::future::Future<Output = ()> + 'a>> where Self: 'a, E: 'a;
-
-        fn run_with_backpressure<'a>(&'a self, events: &'a [E]) -> Self::Fut<'a> {
-            std::boxed::Box::pin(self.run_with_backpressure(events))
+        pub fn new(handler: H) -> Self {
+            Self {
+                handler,
+                _marker: core::marker::PhantomData,
+            }
         }
 
-        fn run_until_cancel<'a>(&'a self, events: &'a [E], cancel: bool) -> Self::Fut<'a> {
-            std::boxed::Box::pin(self.run_until_cancel(events, cancel))
+        pub async fn run_with_backpressure(&self, events: &[E]) {
+            for e in events {
+                let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
+                self.handler.on_event(r).await;
+            }
         }
 
-        fn run_with_strategy<'a>(&'a self, events: &'a [E], strategy: self::async_bus::BackpressureStrategy) -> Self::Fut<'a> {
-            std::boxed::Box::pin(self.run_with_strategy(events, strategy))
+        pub async fn run_until_cancel(&self, events: &[E], cancel: bool) {
+            for e in events {
+                if cancel {
+                    break;
+                }
+                let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
+                self.handler.on_event(r).await;
+            }
         }
 
-        fn run_with_timeout_like<'a>(&'a self, events: &'a [E], max_events: usize) -> Self::Fut<'a> {
-            std::boxed::Box::pin(self.run_with_timeout_like(events, max_events))
+        pub async fn run_with_strategy(&self, events: &[E], strategy: BackpressureStrategy) {
+            match strategy {
+                BackpressureStrategy::Block => {
+                    for e in events {
+                        let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
+                        self.handler.on_event(r).await;
+                    }
+                }
+                BackpressureStrategy::DropOldest => {
+                    let half = events.len() / 2;
+                    for e in &events[half..] {
+                        let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
+                        self.handler.on_event(r).await;
+                    }
+                }
+                BackpressureStrategy::Batch(batch_size) => {
+                    let mut idx = 0;
+                    while idx < events.len() {
+                        let end = (idx + batch_size).min(events.len());
+                        for e in &events[idx..end] {
+                            let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
+                            self.handler.on_event(r).await;
+                        }
+                        idx = end;
+                    }
+                }
+            }
+        }
+
+        pub async fn run_with_timeout_like(&self, events: &[E], max_events: usize) {
+            for (count, e) in events.iter().enumerate() {
+                if count >= max_events {
+                    break;
+                }
+                let r: H::Ref<'_> = <H::Ref<'_> as core::convert::From<&E>>::from(e);
+                self.handler.on_event(r).await;
+            }
         }
     }
+}
+
+impl<H, E> self::async_bus::EventBus<E> for self::async_bus::EventBusGeneric<H, E>
+where
+    H: AsyncEventHandler<E>,
+    for<'a> H::Ref<'a>: From<&'a E>,
+{
+    type Fut<'a>
+        = std::pin::Pin<Box<dyn std::future::Future<Output = ()> + 'a>>
+    where
+        Self: 'a,
+        E: 'a;
+
+    fn run_with_backpressure<'a>(&'a self, events: &'a [E]) -> Self::Fut<'a> {
+        std::boxed::Box::pin(self.run_with_backpressure(events))
+    }
+
+    fn run_until_cancel<'a>(&'a self, events: &'a [E], cancel: bool) -> Self::Fut<'a> {
+        std::boxed::Box::pin(self.run_until_cancel(events, cancel))
+    }
+
+    fn run_with_strategy<'a>(
+        &'a self,
+        events: &'a [E],
+        strategy: self::async_bus::BackpressureStrategy,
+    ) -> Self::Fut<'a> {
+        std::boxed::Box::pin(self.run_with_strategy(events, strategy))
+    }
+
+    fn run_with_timeout_like<'a>(&'a self, events: &'a [E], max_events: usize) -> Self::Fut<'a> {
+        std::boxed::Box::pin(self.run_with_timeout_like(events, max_events))
+    }
+}
 
 #[cfg(test)]
 mod async_bus_tests {
-    use super::async_bus::*;
-    use super::StringEventHandler;
     use super::AsyncEventHandler;
+    use super::StringEventHandler;
+    use super::async_bus::*;
 
     // 轻量 block_on：无外部运行时依赖，仅用于验证异步流程可执行
     fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {
@@ -318,7 +356,9 @@ mod async_bus_tests {
 
         fn dummy_raw_waker() -> RawWaker {
             fn no_op(_: *const ()) {}
-            fn clone(_: *const ()) -> RawWaker { dummy_raw_waker() }
+            fn clone(_: *const ()) -> RawWaker {
+                dummy_raw_waker()
+            }
             static VTABLE: RawWakerVTable = RawWakerVTable::new(clone, no_op, no_op, no_op);
             RawWaker::new(core::ptr::null(), &VTABLE)
         }
@@ -375,8 +415,15 @@ mod async_bus_tests {
     struct PassthroughHandler;
 
     impl AsyncEventHandler<String> for PassthroughHandler {
-        type Ref<'a> = &'a String where String: 'a;
-        type Fut<'a> = std::pin::Pin<Box<dyn std::future::Future<Output = ()> + 'a>> where Self: 'a, String: 'a;
+        type Ref<'a>
+            = &'a String
+        where
+            String: 'a;
+        type Fut<'a>
+            = std::pin::Pin<Box<dyn std::future::Future<Output = ()> + 'a>>
+        where
+            Self: 'a,
+            String: 'a;
         fn on_event<'a>(&'a self, event: Self::Ref<'a>) -> Self::Fut<'a> {
             std::boxed::Box::pin(async move {
                 let _ = event.len();

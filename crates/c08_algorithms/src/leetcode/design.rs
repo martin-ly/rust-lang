@@ -45,7 +45,9 @@ impl LRUCache {
         } else {
             if self.cache.len() >= self.capacity {
                 // 找到最旧的项
-                let lru_key = *self.cache.iter()
+                let lru_key = *self
+                    .cache
+                    .iter()
                     .min_by_key(|(_, (_, ts))| *ts)
                     .map(|(k, _)| k)
                     .unwrap();
@@ -79,9 +81,10 @@ impl MinStack {
 
     pub fn pop(&mut self) {
         if let Some(val) = self.stack.pop()
-            && Some(&val) == self.min_stack.last() {
-                self.min_stack.pop();
-            }
+            && Some(&val) == self.min_stack.last()
+        {
+            self.min_stack.pop();
+        }
     }
 
     pub fn top(&self) -> i32 {
@@ -100,8 +103,8 @@ impl Default for MinStack {
 }
 
 // 复用其他模块的数据结构
+pub use crate::leetcode::queue::{MyQueue, MyStack};
 pub use crate::leetcode::trie::{Trie, WordDictionary};
-pub use crate::leetcode::queue::{MyStack, MyQueue};
 
 // ==================== 问题信息注册 ====================
 

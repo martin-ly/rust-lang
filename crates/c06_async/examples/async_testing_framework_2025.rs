@@ -1,11 +1,11 @@
 use anyhow::Result;
-use std::sync::Arc;
-use std::time::{Duration, Instant};
-use tokio::sync::{RwLock};
-use tokio::time::{sleep, timeout};
-use tracing::{info, warn, debug, error};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::sync::Arc;
+use std::time::{Duration, Instant};
+use tokio::sync::RwLock;
+use tokio::time::{sleep, timeout};
+use tracing::{debug, error, info, warn};
 
 /// 2025年异步测试框架和最佳实践演示
 /// 展示最新的异步测试技术和最佳实践
@@ -29,7 +29,13 @@ pub struct AsyncTestCase {
 }
 
 pub enum TestFunction {
-    Async(Box<dyn Fn() -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<()>> + Send>> + Send + Sync>),
+    Async(
+        Box<
+            dyn Fn() -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<()>> + Send>>
+                + Send
+                + Sync,
+        >,
+    ),
     Sync(Box<dyn Fn() -> Result<()> + Send + Sync>),
 }
 
@@ -85,7 +91,7 @@ impl AsyncTestRunner {
 
     pub async fn run_all_tests(&self) -> Result<TestSummary> {
         info!("🚀 开始运行异步测试套件");
-        
+
         let tests = self.tests.read().await;
         let start_time = Instant::now();
 
@@ -100,10 +106,22 @@ impl AsyncTestRunner {
 
         let summary = TestSummary {
             total_tests: results.len(),
-            passed: results.iter().filter(|r| matches!(r.status, TestStatus::Passed)).count(),
-            failed: results.iter().filter(|r| matches!(r.status, TestStatus::Failed)).count(),
-            skipped: results.iter().filter(|r| matches!(r.status, TestStatus::Skipped)).count(),
-            timeout: results.iter().filter(|r| matches!(r.status, TestStatus::Timeout)).count(),
+            passed: results
+                .iter()
+                .filter(|r| matches!(r.status, TestStatus::Passed))
+                .count(),
+            failed: results
+                .iter()
+                .filter(|r| matches!(r.status, TestStatus::Failed))
+                .count(),
+            skipped: results
+                .iter()
+                .filter(|r| matches!(r.status, TestStatus::Skipped))
+                .count(),
+            timeout: results
+                .iter()
+                .filter(|r| matches!(r.status, TestStatus::Timeout))
+                .count(),
             total_duration,
             results,
         };
@@ -130,7 +148,9 @@ impl AsyncTestRunner {
                 name: test_case.name.clone(),
                 description: test_case.description.clone(),
                 test_fn: match &test_case.test_fn {
-                    TestFunction::Async(_) => TestFunction::Async(Box::new(|| Box::pin(async { Ok(()) }))),
+                    TestFunction::Async(_) => {
+                        TestFunction::Async(Box::new(|| Box::pin(async { Ok(()) })))
+                    }
                     TestFunction::Sync(_) => TestFunction::Sync(Box::new(|| Ok(()))),
                 },
                 timeout: test_case.timeout,
@@ -168,28 +188,24 @@ impl AsyncTestRunner {
 
         loop {
             let result = match &test_case.test_fn {
-                TestFunction::Async(f) => {
-                    match timeout(timeout_duration, f()).await {
-                        Ok(Ok(())) => TestStatus::Passed,
-                        Ok(Err(e)) => {
-                            error!("测试 '{}' 失败: {}", test_name, e);
-                            TestStatus::Failed
-                        }
-                        Err(_) => {
-                            error!("测试 '{}' 超时", test_name);
-                            TestStatus::Timeout
-                        }
+                TestFunction::Async(f) => match timeout(timeout_duration, f()).await {
+                    Ok(Ok(())) => TestStatus::Passed,
+                    Ok(Err(e)) => {
+                        error!("测试 '{}' 失败: {}", test_name, e);
+                        TestStatus::Failed
                     }
-                }
-                TestFunction::Sync(f) => {
-                    match f() {
-                        Ok(()) => TestStatus::Passed,
-                        Err(e) => {
-                            error!("测试 '{}' 失败: {}", test_name, e);
-                            TestStatus::Failed
-                        }
+                    Err(_) => {
+                        error!("测试 '{}' 超时", test_name);
+                        TestStatus::Timeout
                     }
-                }
+                },
+                TestFunction::Sync(f) => match f() {
+                    Ok(()) => TestStatus::Passed,
+                    Err(e) => {
+                        error!("测试 '{}' 失败: {}", test_name, e);
+                        TestStatus::Failed
+                    }
+                },
             };
 
             match result {
@@ -207,13 +223,19 @@ impl AsyncTestRunner {
                             .as_secs(),
                     };
                     self.results.write().await.push(test_result);
-                    info!("✅ 测试 '{}' 通过 (重试: {}, 耗时: {:?})", test_name, retry_count, duration);
+                    info!(
+                        "✅ 测试 '{}' 通过 (重试: {}, 耗时: {:?})",
+                        test_name, retry_count, duration
+                    );
                     break;
                 }
                 TestStatus::Failed | TestStatus::Timeout => {
                     retry_count += 1;
                     if retry_count <= test_case.retries {
-                        warn!("🔄 测试 '{}' 失败，准备重试 ({}/{})", test_name, retry_count, test_case.retries);
+                        warn!(
+                            "🔄 测试 '{}' 失败，准备重试 ({}/{})",
+                            test_name, retry_count, test_case.retries
+                        );
                         sleep(Duration::from_millis(100 * retry_count as u64)).await; // 指数退避
                     } else {
                         let duration = start_time.elapsed();
@@ -222,7 +244,7 @@ impl AsyncTestRunner {
                         } else {
                             TestStatus::RetryFailed
                         };
-                        
+
                         let test_result = TestResult {
                             test_name: test_name.clone(),
                             status: final_status,
@@ -235,7 +257,10 @@ impl AsyncTestRunner {
                                 .as_secs(),
                         };
                         self.results.write().await.push(test_result);
-                        error!("❌ 测试 '{}' 最终失败 (重试: {}, 耗时: {:?})", test_name, retry_count, duration);
+                        error!(
+                            "❌ 测试 '{}' 最终失败 (重试: {}, 耗时: {:?})",
+                            test_name, retry_count, duration
+                        );
                         break;
                     }
                 }
@@ -256,7 +281,10 @@ impl AsyncTestRunner {
         if summary.failed > 0 {
             info!("失败的测试:");
             for result in &summary.results {
-                if matches!(result.status, TestStatus::Failed | TestStatus::Timeout | TestStatus::RetryFailed) {
+                if matches!(
+                    result.status,
+                    TestStatus::Failed | TestStatus::Timeout | TestStatus::RetryFailed
+                ) {
                     info!("  - {}: {:?}", result.test_name, result.status);
                 }
             }
@@ -269,7 +297,7 @@ impl AsyncTestRunner {
 
     pub async fn export_results(&self, format: ExportFormat) -> Result<String> {
         let results = self.results.read().await.clone();
-        
+
         match format {
             ExportFormat::Json => Ok(serde_json::to_string_pretty(&results)?),
             ExportFormat::Csv => self.export_csv(&results).await,
@@ -278,8 +306,9 @@ impl AsyncTestRunner {
     }
 
     async fn export_csv(&self, results: &[TestResult]) -> Result<String> {
-        let mut csv = String::from("test_name,status,duration_ms,error_message,retry_count,timestamp\n");
-        
+        let mut csv =
+            String::from("test_name,status,duration_ms,error_message,retry_count,timestamp\n");
+
         for result in results {
             csv.push_str(&format!(
                 "{},{},{},{},{},{}\n",
@@ -291,37 +320,37 @@ impl AsyncTestRunner {
                 result.timestamp
             ));
         }
-        
+
         Ok(csv)
     }
 
     async fn export_junit(&self, results: &[TestResult]) -> Result<String> {
         let mut xml = String::from("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         xml.push_str("<testsuite>\n");
-        
+
         for result in results {
             let status = match result.status {
                 TestStatus::Passed => "success",
                 _ => "failure",
             };
-            
+
             xml.push_str(&format!(
                 "  <testcase name=\"{}\" time=\"{}\" status=\"{}\">\n",
                 result.test_name,
                 result.duration.as_secs_f64(),
                 status
             ));
-            
+
             if !matches!(result.status, TestStatus::Passed) {
                 xml.push_str(&format!(
                     "    <failure message=\"{}\"/>\n",
                     result.error_message.as_deref().unwrap_or("测试失败")
                 ));
             }
-            
+
             xml.push_str("  </testcase>\n");
         }
-        
+
         xml.push_str("</testsuite>\n");
         Ok(xml)
     }
@@ -373,16 +402,16 @@ impl AsyncTestFixture {
 
     pub async fn cleanup(&self) -> Result<()> {
         let actions = self.cleanup_actions.read().await;
-        
+
         for action in actions.iter() {
             if let Err(e) = action() {
                 warn!("清理操作失败: {}", e);
             }
         }
-        
+
         self.setup_data.write().await.clear();
         self.cleanup_actions.write().await.clear();
-        
+
         Ok(())
     }
 }
@@ -432,7 +461,13 @@ impl AsyncMockService {
         }
     }
 
-    pub async fn expect_call(&self, method: String, args: Vec<String>, return_value: Result<String>, call_count: Option<usize>) {
+    pub async fn expect_call(
+        &self,
+        method: String,
+        args: Vec<String>,
+        return_value: Result<String>,
+        call_count: Option<usize>,
+    ) {
         let expectation = MockExpectation {
             method,
             args,
@@ -461,13 +496,13 @@ impl AsyncMockService {
         for expectation in expectations.iter_mut() {
             if expectation.method == method && expectation.args == args {
                 expectation.actual_calls += 1;
-                
+
                 if let Some(expected_count) = expectation.call_count {
                     if expectation.actual_calls > expected_count {
                         return Err(anyhow::anyhow!("方法 '{}' 被调用次数超过预期", method));
                     }
                 }
-                
+
                 return match &expectation.return_value {
                     Ok(val) => Ok(val.clone()),
                     Err(_) => Err(anyhow::anyhow!("Mock error")),
@@ -480,7 +515,7 @@ impl AsyncMockService {
 
     pub async fn verify_expectations(&self) -> Result<()> {
         let expectations = self.expectations.read().await;
-        
+
         for expectation in expectations.iter() {
             if let Some(expected_count) = expectation.call_count {
                 if expectation.actual_calls != expected_count {
@@ -493,7 +528,7 @@ impl AsyncMockService {
                 }
             }
         }
-        
+
         Ok(())
     }
 
@@ -528,12 +563,20 @@ impl AsyncPerformanceTester {
         }
     }
 
-    pub async fn benchmark_operation<F, T>(&self, operation_name: &str, operation: F, iterations: usize) -> Result<PerformanceMetrics>
+    pub async fn benchmark_operation<F, T>(
+        &self,
+        operation_name: &str,
+        operation: F,
+        iterations: usize,
+    ) -> Result<PerformanceMetrics>
     where
         F: Fn() -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<T>> + Send>>,
     {
-        info!("🚀 开始性能测试: {} ({} 次迭代)", operation_name, iterations);
-        
+        info!(
+            "🚀 开始性能测试: {} ({} 次迭代)",
+            operation_name, iterations
+        );
+
         let start_time = Instant::now();
         let mut durations = Vec::new();
         let mut successful = 0;
@@ -541,7 +584,7 @@ impl AsyncPerformanceTester {
 
         for i in 0..iterations {
             let op_start = Instant::now();
-            
+
             match operation().await {
                 Ok(_) => {
                     successful += 1;
@@ -559,7 +602,7 @@ impl AsyncPerformanceTester {
 
         let total_duration = start_time.elapsed();
         let total_ops = successful + failed;
-        
+
         let min_duration = durations.iter().min().copied();
         let max_duration = durations.iter().max().copied();
         let average_duration = if !durations.is_empty() {
@@ -586,7 +629,8 @@ impl AsyncPerformanceTester {
             throughput_ops_per_sec: throughput,
         };
 
-        self.print_performance_results(operation_name, &metrics).await;
+        self.print_performance_results(operation_name, &metrics)
+            .await;
         Ok(metrics)
     }
 
@@ -597,15 +641,15 @@ impl AsyncPerformanceTester {
         info!("  失败操作: {}", metrics.failed_operations);
         info!("  总耗时: {:?}", metrics.total_duration);
         info!("  平均耗时: {:?}", metrics.average_duration);
-        
+
         if let Some(min) = metrics.min_duration {
             info!("  最小耗时: {:?}", min);
         }
-        
+
         if let Some(max) = metrics.max_duration {
             info!("  最大耗时: {:?}", max);
         }
-        
+
         info!("  吞吐量: {:.2} ops/sec", metrics.throughput_ops_per_sec);
     }
 }
@@ -614,9 +658,7 @@ impl AsyncPerformanceTester {
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志
-    tracing_subscriber::fmt()
-        .with_env_filter("info")
-        .init();
+    tracing_subscriber::fmt().with_env_filter("info").init();
 
     info!("🚀 开始 2025 年异步测试框架演示");
 
@@ -642,50 +684,54 @@ async fn demo_async_test_runner() -> Result<()> {
 
     let test_runner = AsyncTestRunner::new(
         Duration::from_secs(10),
-        true,  // 并行执行
-        4,     // 最大并发数
+        true, // 并行执行
+        4,    // 最大并发数
     );
 
     // 添加异步测试
-    test_runner.add_test(
-        "async_basic_test".to_string(),
-        "基础异步测试".to_string(),
-        TestFunction::Async(Box::new(|| {
-            Box::pin(async move {
-                sleep(Duration::from_millis(100)).await;
-                info!("执行异步测试");
-                Ok(())
-            })
-        })),
-        Some(Duration::from_secs(5)),
-        2,
-        vec!["async".to_string(), "basic".to_string()],
-    ).await;
+    test_runner
+        .add_test(
+            "async_basic_test".to_string(),
+            "基础异步测试".to_string(),
+            TestFunction::Async(Box::new(|| {
+                Box::pin(async move {
+                    sleep(Duration::from_millis(100)).await;
+                    info!("执行异步测试");
+                    Ok(())
+                })
+            })),
+            Some(Duration::from_secs(5)),
+            2,
+            vec!["async".to_string(), "basic".to_string()],
+        )
+        .await;
 
     // 添加同步测试
-    test_runner.add_test(
-        "sync_basic_test".to_string(),
-        "基础同步测试".to_string(),
-        TestFunction::Sync(Box::new(|| {
-            info!("执行同步测试");
-            Ok(())
-        })),
-        None,
-        1,
-        vec!["sync".to_string(), "basic".to_string()],
-    ).await;
+    test_runner
+        .add_test(
+            "sync_basic_test".to_string(),
+            "基础同步测试".to_string(),
+            TestFunction::Sync(Box::new(|| {
+                info!("执行同步测试");
+                Ok(())
+            })),
+            None,
+            1,
+            vec!["sync".to_string(), "basic".to_string()],
+        )
+        .await;
 
     // 添加会失败的测试
-    test_runner.add_test(
-        "failing_test".to_string(),
-        "会失败的测试".to_string(),
-        TestFunction::Sync(Box::new(|| {
-            Err(anyhow::anyhow!("故意失败的测试"))
-        })),
-        None,
-        2,
-        vec!["failing".to_string()],
-    ).await;
+    test_runner
+        .add_test(
+            "failing_test".to_string(),
+            "会失败的测试".to_string(),
+            TestFunction::Sync(Box::new(|| Err(anyhow::anyhow!("故意失败的测试")))),
+            None,
+            2,
+            vec!["failing".to_string()],
+        )
+        .await;
 
     // 运行所有测试
     let summary = test_runner.run_all_tests().await?;
@@ -703,8 +749,15 @@ async fn demo_async_test_fixtures() -> Result<()> {
     let fixture = AsyncTestFixture::new();
 
     // 设置测试数据
-    fixture.setup("database_url".to_string(), "postgresql://localhost:5432/test".to_string()).await;
-    fixture.setup("api_key".to_string(), "test_api_key_123".to_string()).await;
+    fixture
+        .setup(
+            "database_url".to_string(),
+            "postgresql://localhost:5432/test".to_string(),
+        )
+        .await;
+    fixture
+        .setup("api_key".to_string(), "test_api_key_123".to_string())
+        .await;
 
     // 获取测试数据
     let db_url = fixture.get("database_url").await;
@@ -714,15 +767,19 @@ async fn demo_async_test_fixtures() -> Result<()> {
     info!("API密钥: {:?}", api_key);
 
     // 添加清理操作
-    fixture.add_cleanup(Box::new(|| {
-        info!("清理数据库连接");
-        Ok(())
-    })).await;
+    fixture
+        .add_cleanup(Box::new(|| {
+            info!("清理数据库连接");
+            Ok(())
+        }))
+        .await;
 
-    fixture.add_cleanup(Box::new(|| {
-        info!("清理API连接");
-        Ok(())
-    })).await;
+    fixture
+        .add_cleanup(Box::new(|| {
+            info!("清理API连接");
+            Ok(())
+        }))
+        .await;
 
     // 执行清理
     fixture.cleanup().await?;
@@ -736,25 +793,36 @@ async fn demo_async_test_mocks() -> Result<()> {
     let mock_service = AsyncMockService::new();
 
     // 设置期望
-    mock_service.expect_call(
-        "get_user".to_string(),
-        vec!["123".to_string()],
-        Ok("John Doe".to_string()),
-        Some(1),
-    ).await;
+    mock_service
+        .expect_call(
+            "get_user".to_string(),
+            vec!["123".to_string()],
+            Ok("John Doe".to_string()),
+            Some(1),
+        )
+        .await;
 
-    mock_service.expect_call(
-        "update_user".to_string(),
-        vec!["123".to_string(), "Jane Doe".to_string()],
-        Ok("success".to_string()),
-        Some(1),
-    ).await;
+    mock_service
+        .expect_call(
+            "update_user".to_string(),
+            vec!["123".to_string(), "Jane Doe".to_string()],
+            Ok("success".to_string()),
+            Some(1),
+        )
+        .await;
 
     // 执行调用
-    let result1 = mock_service.call("get_user".to_string(), vec!["123".to_string()]).await?;
+    let result1 = mock_service
+        .call("get_user".to_string(), vec!["123".to_string()])
+        .await?;
     info!("获取用户结果: {}", result1);
 
-    let result2 = mock_service.call("update_user".to_string(), vec!["123".to_string(), "Jane Doe".to_string()]).await?;
+    let result2 = mock_service
+        .call(
+            "update_user".to_string(),
+            vec!["123".to_string(), "Jane Doe".to_string()],
+        )
+        .await?;
     info!("更新用户结果: {}", result2);
 
     // 验证期望
@@ -773,18 +841,23 @@ async fn demo_async_performance_testing() -> Result<()> {
     let performance_tester = AsyncPerformanceTester::new();
 
     // 性能测试：模拟异步操作
-    let metrics = performance_tester.benchmark_operation(
-        "async_operation",
-        || {
-            Box::pin(async move {
-                sleep(Duration::from_millis(10)).await;
-                Ok("操作完成".to_string())
-            })
-        },
-        1000, // 1000次迭代
-    ).await?;
+    let metrics = performance_tester
+        .benchmark_operation(
+            "async_operation",
+            || {
+                Box::pin(async move {
+                    sleep(Duration::from_millis(10)).await;
+                    Ok("操作完成".to_string())
+                })
+            },
+            1000, // 1000次迭代
+        )
+        .await?;
 
-    info!("性能测试完成，吞吐量: {:.2} ops/sec", metrics.throughput_ops_per_sec);
+    info!(
+        "性能测试完成，吞吐量: {:.2} ops/sec",
+        metrics.throughput_ops_per_sec
+    );
 
     Ok(())
 }
@@ -796,16 +869,18 @@ mod tests {
     #[tokio::test]
     async fn test_async_test_runner() {
         let runner = AsyncTestRunner::new(Duration::from_secs(5), false, 1);
-        
-        runner.add_test(
-            "test".to_string(),
-            "测试".to_string(),
-            TestFunction::Sync(Box::new(|| Ok(()))),
-            None,
-            0,
-            vec![],
-        ).await;
-        
+
+        runner
+            .add_test(
+                "test".to_string(),
+                "测试".to_string(),
+                TestFunction::Sync(Box::new(|| Ok(()))),
+                None,
+                0,
+                vec![],
+            )
+            .await;
+
         let summary = runner.run_all_tests().await.unwrap();
         assert_eq!(summary.passed, 1);
     }
@@ -814,10 +889,10 @@ mod tests {
     async fn test_async_test_fixture() {
         let fixture = AsyncTestFixture::new();
         fixture.setup("key".to_string(), "value".to_string()).await;
-        
+
         assert_eq!(fixture.get("key").await, Some("value".to_string()));
         assert_eq!(fixture.get("nonexistent").await, None);
-        
+
         fixture.cleanup().await.unwrap();
         assert_eq!(fixture.get("key").await, None);
     }
@@ -825,24 +900,32 @@ mod tests {
     #[tokio::test]
     async fn test_async_mock_service() {
         let mock = AsyncMockService::new();
-        mock.expect_call("test".to_string(), vec!["arg".to_string()], Ok("result".to_string()), Some(1)).await;
-        
-        let result = mock.call("test".to_string(), vec!["arg".to_string()]).await.unwrap();
+        mock.expect_call(
+            "test".to_string(),
+            vec!["arg".to_string()],
+            Ok("result".to_string()),
+            Some(1),
+        )
+        .await;
+
+        let result = mock
+            .call("test".to_string(), vec!["arg".to_string()])
+            .await
+            .unwrap();
         assert_eq!(result, "result");
-        
+
         mock.verify_expectations().await.unwrap();
     }
 
     #[tokio::test]
     async fn test_async_performance_tester() {
         let tester = AsyncPerformanceTester::new();
-        
-        let metrics = tester.benchmark_operation(
-            "test_op",
-            || Box::pin(async move { Ok(()) }),
-            10,
-        ).await.unwrap();
-        
+
+        let metrics = tester
+            .benchmark_operation("test_op", || Box::pin(async move { Ok(()) }), 10)
+            .await
+            .unwrap();
+
         assert_eq!(metrics.total_operations, 10);
         assert_eq!(metrics.successful_operations, 10);
         assert_eq!(metrics.failed_operations, 0);

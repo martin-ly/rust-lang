@@ -241,6 +241,8 @@ Drop trait 为 Rust 提供了资源管理的核心机制。
 同时保持零成本抽象的优势。
 */
 
+#![allow(clippy::type_complexity)]
+
 use std::sync::Mutex;
 use std::sync::MutexGuard;
 

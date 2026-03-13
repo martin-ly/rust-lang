@@ -1,13 +1,13 @@
 //! 增强的性能优化系统
-//! 
+//!
 //! 这个模块提供了增强的性能优化功能，包括内存使用优化、
 //! CPU性能提升、I/O性能改进等 Rust 1.90 新特性
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
+use std::sync::atomic::{AtomicU64, AtomicUsize};
 use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
-use serde::{Serialize, Deserialize};
-use std::sync::atomic::{AtomicUsize, AtomicU64};
 
 /// 增强的性能管理器
 #[cfg(feature = "async")]
@@ -186,8 +186,8 @@ pub struct OptimizationRule {
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum OptimizationCondition {
-    MemoryUsage(f64), // Percentage
-    CpuUsage(f64),    // Percentage
+    MemoryUsage(f64),   // Percentage
+    CpuUsage(f64),      // Percentage
     IoUtilization(f64), // Percentage
     CacheHitRatio(f64), // Ratio
     ResponseTime(Duration),
@@ -312,7 +312,8 @@ impl EnhancedPerformanceManager {
                 io_monitor_clone,
                 optimizer_clone,
                 config_clone,
-            ).await;
+            )
+            .await;
         });
 
         Self {
@@ -328,7 +329,7 @@ impl EnhancedPerformanceManager {
     /// 智能内存优化（使用 Rust 1.90 改进的模式匹配）
     pub async fn optimize_memory(&self) -> OptimizationResult {
         let memory_stats = self.memory_monitor.get_memory_stats().await;
-        
+
         // 使用 Rust 1.90 改进的模式匹配进行智能优化
         let optimization = match memory_stats.memory_pressure {
             pressure if pressure > 0.9 => {
@@ -362,9 +363,7 @@ impl EnhancedPerformanceManager {
                     success: true,
                     performance_gain: 0.1,
                     message: "Light memory optimization applied".to_string(),
-                    optimizations_applied: vec![
-                        "Compact memory".to_string(),
-                    ],
+                    optimizations_applied: vec!["Compact memory".to_string()],
                 }
             }
             _ => {
@@ -379,27 +378,39 @@ impl EnhancedPerformanceManager {
         };
 
         // 记录优化尝试
-        self.optimizer.record_optimization_attempt("memory_optimization", optimization.success, optimization.performance_gain).await;
-        
+        self.optimizer
+            .record_optimization_attempt(
+                "memory_optimization",
+                optimization.success,
+                optimization.performance_gain,
+            )
+            .await;
+
         optimization
     }
 
     /// 智能CPU优化（使用 Rust 1.90 异步闭包）
-    pub async fn optimize_cpu<F, Fut>(&self, optimization_fn: F) -> OptimizationResult 
+    pub async fn optimize_cpu<F, Fut>(&self, optimization_fn: F) -> OptimizationResult
     where
         F: FnOnce(f64) -> Fut + Send + Sync + 'static,
         Fut: std::future::Future<Output = OptimizationResult> + Send + 'static,
     {
         let cpu_usage = self.cpu_monitor.get_cpu_usage().await;
-        
+
         // 使用 Rust 1.90 异步闭包进行智能CPU优化
         let start_time = Instant::now();
         let result = optimization_fn(cpu_usage).await;
         let _duration = start_time.elapsed();
-        
+
         // 记录优化结果
-        self.optimizer.record_optimization_attempt("cpu_optimization", result.success, result.performance_gain).await;
-        
+        self.optimizer
+            .record_optimization_attempt(
+                "cpu_optimization",
+                result.success,
+                result.performance_gain,
+            )
+            .await;
+
         result
     }
 
@@ -408,42 +419,45 @@ impl EnhancedPerformanceManager {
         // 使用 Rust 1.90 改进的迭代器进行批量优化
         // 执行各种优化任务
         let memory_result = self.optimize_memory().await;
-        let cpu_result = self.optimize_cpu(|usage| async move {
-            if usage > 80.0 {
-                OptimizationResult {
-                    success: true,
-                    performance_gain: 0.25,
-                    message: "High CPU usage optimization".to_string(),
-                    optimizations_applied: vec!["Thread pool adjustment".to_string()],
+        let cpu_result = self
+            .optimize_cpu(|usage| async move {
+                if usage > 80.0 {
+                    OptimizationResult {
+                        success: true,
+                        performance_gain: 0.25,
+                        message: "High CPU usage optimization".to_string(),
+                        optimizations_applied: vec!["Thread pool adjustment".to_string()],
+                    }
+                } else {
+                    OptimizationResult {
+                        success: true,
+                        performance_gain: 0.0,
+                        message: "CPU usage normal".to_string(),
+                        optimizations_applied: vec![],
+                    }
                 }
-            } else {
-                OptimizationResult {
-                    success: true,
-                    performance_gain: 0.0,
-                    message: "CPU usage normal".to_string(),
-                    optimizations_applied: vec![],
-                }
-            }
-        }).await;
+            })
+            .await;
         let io_result = self.optimize_io().await;
         let cache_result = self.optimize_cache().await;
-        
+
         let results = vec![memory_result, cpu_result, io_result, cache_result];
-        
+
         // 使用 Rust 1.90 改进的模式匹配分析结果
         let total_gain: f64 = results.iter().map(|r| r.performance_gain).sum();
         let success_count = results.iter().filter(|r| r.success).count();
-        
+
         // 记录批量优化统计
-        self.log_batch_optimization_stats(success_count, results.len(), total_gain).await;
-        
+        self.log_batch_optimization_stats(success_count, results.len(), total_gain)
+            .await;
+
         results
     }
 
     /// I/O优化
     pub async fn optimize_io(&self) -> OptimizationResult {
         let io_stats = self.io_monitor.get_io_stats().await;
-        
+
         // 基于I/O统计进行优化
         if io_stats.io_utilization > 0.8 {
             OptimizationResult {
@@ -468,7 +482,7 @@ impl EnhancedPerformanceManager {
     /// 缓存优化
     pub async fn optimize_cache(&self) -> OptimizationResult {
         let cache_stats = self.cache_manager.get_cache_stats().await;
-        
+
         // 基于缓存统计进行优化
         if cache_stats.hit_ratio < 0.7 {
             OptimizationResult {
@@ -496,10 +510,12 @@ impl EnhancedPerformanceManager {
         let cpu_stats = self.cpu_monitor.get_cpu_stats().await;
         let io_stats = self.io_monitor.get_io_stats().await;
         let cache_stats = self.cache_manager.get_cache_stats().await;
-        
+
         // 计算综合性能分数
-        let performance_score = self.calculate_performance_score(&memory_stats, &cpu_stats, &io_stats, &cache_stats).await;
-        
+        let performance_score = self
+            .calculate_performance_score(&memory_stats, &cpu_stats, &io_stats, &cache_stats)
+            .await;
+
         PerformanceReport {
             timestamp: SystemTime::now(),
             performance_score,
@@ -527,7 +543,7 @@ impl EnhancedPerformanceManager {
             pressure if pressure < 0.9 => 40.0,
             _ => 20.0,
         };
-        
+
         let cpu_score = match cpu_stats.cpu_usage {
             usage if usage < 30.0 => 100.0,
             usage if usage < 50.0 => 80.0,
@@ -535,7 +551,7 @@ impl EnhancedPerformanceManager {
             usage if usage < 90.0 => 40.0,
             _ => 20.0,
         };
-        
+
         let io_score = match io_stats.io_utilization {
             util if util < 0.3 => 100.0,
             util if util < 0.5 => 80.0,
@@ -543,7 +559,7 @@ impl EnhancedPerformanceManager {
             util if util < 0.9 => 40.0,
             _ => 20.0,
         };
-        
+
         let cache_score = match cache_stats.hit_ratio {
             ratio if ratio > 0.9 => 100.0,
             ratio if ratio > 0.8 => 80.0,
@@ -551,14 +567,14 @@ impl EnhancedPerformanceManager {
             ratio if ratio > 0.6 => 40.0,
             _ => 20.0,
         };
-        
+
         (memory_score + cpu_score + io_score + cache_score) / 4.0
     }
 
     /// 生成优化建议
     async fn generate_recommendations(&self, performance_score: f64) -> Vec<String> {
         let mut recommendations = Vec::new();
-        
+
         // 使用 Rust 1.90 改进的模式匹配生成建议
         match performance_score {
             score if score < 30.0 => {
@@ -578,15 +594,24 @@ impl EnhancedPerformanceManager {
                 recommendations.push("Continue current configuration".to_string());
             }
         }
-        
+
         recommendations
     }
 
     /// 记录批量优化统计
-    async fn log_batch_optimization_stats(&self, success_count: usize, total_count: usize, total_gain: f64) {
-        let _stats_info = format!("Batch optimization completed: {}/{} successful, total gain: {:.2}%", 
-            success_count, total_count, total_gain * 100.0);
-        
+    async fn log_batch_optimization_stats(
+        &self,
+        success_count: usize,
+        total_count: usize,
+        total_gain: f64,
+    ) {
+        let _stats_info = format!(
+            "Batch optimization completed: {}/{} successful, total gain: {:.2}%",
+            success_count,
+            total_count,
+            total_gain * 100.0
+        );
+
         // 记录到优化历史中
         let mut history = self.optimizer.optimization_history.write().await;
         if let Some(_attempt) = history.last_mut() {
@@ -603,15 +628,15 @@ impl EnhancedPerformanceManager {
         config: PerformanceConfig,
     ) {
         let mut interval = tokio::time::interval(config.monitoring_interval);
-        
+
         loop {
             interval.tick().await;
-            
+
             // 收集性能数据
             memory_monitor.collect_memory_data().await;
             cpu_monitor.collect_cpu_data().await;
             io_monitor.collect_io_data().await;
-            
+
             // 自动优化
             if config.auto_optimization {
                 optimizer.auto_optimize().await;
@@ -666,10 +691,10 @@ impl MemoryMonitor {
         MemorySnapshot {
             timestamp: SystemTime::now(),
             total_memory: 8 * 1024 * 1024 * 1024, // 8GB
-            used_memory: 4 * 1024 * 1024 * 1024, // 4GB
-            free_memory: 4 * 1024 * 1024 * 1024, // 4GB
-            cached_memory: 512 * 1024 * 1024, // 512MB
-            buffer_memory: 256 * 1024 * 1024, // 256MB
+            used_memory: 4 * 1024 * 1024 * 1024,  // 4GB
+            free_memory: 4 * 1024 * 1024 * 1024,  // 4GB
+            cached_memory: 512 * 1024 * 1024,     // 512MB
+            buffer_memory: 256 * 1024 * 1024,     // 256MB
             swap_memory: 0,
             memory_pressure: 0.5,
         }
@@ -679,7 +704,7 @@ impl MemoryMonitor {
         let snapshot = self.get_memory_stats().await;
         let mut history = self.memory_history.write().await;
         history.push(snapshot);
-        
+
         // 限制历史记录大小
         if history.len() > 1000 {
             history.remove(0);
@@ -725,7 +750,7 @@ impl CpuMonitor {
         let snapshot = self.get_cpu_stats().await;
         let mut history = self.cpu_history.write().await;
         history.push(snapshot);
-        
+
         // 限制历史记录大小
         if history.len() > 1000 {
             history.remove(0);
@@ -776,10 +801,10 @@ impl IoMonitor {
             write_latency: Duration::from_millis(2),
             io_utilization: 0.3,
         };
-        
+
         let mut history = self.io_history.write().await;
         history.push(snapshot);
-        
+
         // 限制历史记录大小
         if history.len() > 1000 {
             history.remove(0);
@@ -835,9 +860,20 @@ impl PerformanceOptimizer {
         Self::default()
     }
 
-    pub async fn record_optimization_attempt(&self, rule_name: &str, success: bool, performance_gain: f64) {
+    pub async fn record_optimization_attempt(
+        &self,
+        rule_name: &str,
+        success: bool,
+        performance_gain: f64,
+    ) {
         let attempt = OptimizationAttempt {
-            id: format!("OPT_{}", SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_nanos()),
+            id: format!(
+                "OPT_{}",
+                SystemTime::now()
+                    .duration_since(SystemTime::UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos()
+            ),
             rule_name: rule_name.to_string(),
             timestamp: SystemTime::now(),
             success,
@@ -845,10 +881,10 @@ impl PerformanceOptimizer {
             duration: Duration::from_millis(100),
             message: format!("Optimization attempt: {}", rule_name),
         };
-        
+
         let mut history = self.optimization_history.write().await;
         history.push(attempt);
-        
+
         // 限制历史记录大小
         if history.len() > 1000 {
             history.remove(0);
@@ -857,7 +893,8 @@ impl PerformanceOptimizer {
 
     pub async fn auto_optimize(&self) {
         // 自动优化逻辑
-        self.record_optimization_attempt("auto_optimization", true, 0.1).await;
+        self.record_optimization_attempt("auto_optimization", true, 0.1)
+            .await;
     }
 }
 
@@ -932,28 +969,30 @@ mod tests {
             monitoring_interval: Duration::from_secs(10),
             history_retention: Duration::from_secs(3600),
         };
-        
+
         let manager = EnhancedPerformanceManager::new(config).await;
-        
+
         // 测试内存优化
         let memory_result = manager.optimize_memory().await;
         assert!(memory_result.success);
-        
+
         // 测试CPU优化
-        let cpu_result = manager.optimize_cpu(|usage| async move {
-            OptimizationResult {
-                success: true,
-                performance_gain: 0.2,
-                message: "CPU optimization successful".to_string(),
-                optimizations_applied: vec!["Thread pool adjustment".to_string()],
-            }
-        }).await;
+        let cpu_result = manager
+            .optimize_cpu(|usage| async move {
+                OptimizationResult {
+                    success: true,
+                    performance_gain: 0.2,
+                    message: "CPU optimization successful".to_string(),
+                    optimizations_applied: vec!["Thread pool adjustment".to_string()],
+                }
+            })
+            .await;
         assert!(cpu_result.success);
-        
+
         // 测试批量优化
         let batch_results = manager.batch_optimize().await;
         assert_eq!(batch_results.len(), 4);
-        
+
         // 测试性能报告
         let report = manager.get_performance_report().await;
         assert!(report.performance_score > 0.0);
@@ -963,34 +1002,34 @@ mod tests {
     #[tokio::test]
     async fn test_memory_monitor() {
         let monitor = MemoryMonitor::new();
-        
+
         let stats = monitor.get_memory_stats().await;
         assert!(stats.total_memory > 0);
         assert!(stats.memory_pressure >= 0.0);
         assert!(stats.memory_pressure <= 1.0);
-        
+
         monitor.collect_memory_data().await;
     }
 
     #[tokio::test]
     async fn test_cpu_monitor() {
         let monitor = CpuMonitor::new();
-        
+
         let usage = monitor.get_cpu_usage().await;
         assert!(usage >= 0.0);
         assert!(usage <= 100.0);
-        
+
         let stats = monitor.get_cpu_stats().await;
         assert!(stats.cpu_usage >= 0.0);
         assert!(stats.cpu_usage <= 100.0);
-        
+
         monitor.collect_cpu_data().await;
     }
 
     #[tokio::test]
     async fn test_io_monitor() {
         let monitor = IoMonitor::new();
-        
+
         let stats = monitor.get_io_stats().await;
         // Test that stats are properly initialized
         assert_eq!(stats.total_read_bytes, 0);
@@ -1000,14 +1039,14 @@ mod tests {
         assert_eq!(stats.peak_read_throughput, 0.0);
         assert_eq!(stats.peak_write_throughput, 0.0);
         assert_eq!(stats.io_utilization, 0.0);
-        
+
         monitor.collect_io_data().await;
     }
 
     #[tokio::test]
     async fn test_cache_manager() {
         let manager = CacheManager::new();
-        
+
         let stats = manager.get_cache_stats().await;
         assert!(stats.max_cache_size > 0);
         assert!(stats.hit_ratio >= 0.0);

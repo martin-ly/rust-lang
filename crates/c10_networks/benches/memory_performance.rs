@@ -4,7 +4,7 @@
 use bytes::Bytes;
 use c10_networks::{
     packet::{Packet, PacketStats, PacketType},
-    performance::{memory_pool::MemoryPool, cache::Cache},
+    performance::{cache::Cache, memory_pool::MemoryPool},
 };
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;

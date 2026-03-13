@@ -9,4 +9,6 @@ fn handle(e: ApiEvent) -> &'static str {
     }
 }
 
-fn main() { println!("{}", handle(ApiEvent::Started)); }
+fn main() {
+    println!("{}", handle(ApiEvent::Started));
+}

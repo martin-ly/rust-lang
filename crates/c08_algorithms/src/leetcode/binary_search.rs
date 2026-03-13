@@ -555,17 +555,9 @@ mod tests {
 
     #[test]
     fn test_search_matrix() {
-        let matrix = vec![
-            vec![1, 3, 5, 7],
-            vec![10, 11, 16, 20],
-            vec![23, 30, 34, 60],
-        ];
+        let matrix = vec![vec![1, 3, 5, 7], vec![10, 11, 16, 20], vec![23, 30, 34, 60]];
         assert!(search_matrix(matrix, 3));
-        let matrix2 = vec![
-            vec![1, 3, 5, 7],
-            vec![10, 11, 16, 20],
-            vec![23, 30, 34, 60],
-        ];
+        let matrix2 = vec![vec![1, 3, 5, 7], vec![10, 11, 16, 20], vec![23, 30, 34, 60]];
         assert!(!search_matrix(matrix2, 13));
     }
 

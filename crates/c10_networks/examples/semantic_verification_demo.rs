@@ -1,9 +1,14 @@
 //! 语义验证演示示例
 //!
 //! 本示例展示了如何使用C10 Networks的语义验证框架来验证网络协议的正确性。
+use c10_networks::semantics::formal_spec::{
+    HttpFormalSpec, HttpMethod, HttpRuleAction, HttpStatusCode, HttpVersion, TcpEvent,
+    TcpFormalSpec,
+};
+use c10_networks::semantics::model_checking::{
+    ModelChecker, ModelCheckingConfig, TlaConfig, TlaModelChecker,
+};
 use c10_networks::semantics::*;
-use c10_networks::semantics::formal_spec::{TcpFormalSpec, TcpEvent, HttpFormalSpec, HttpVersion, HttpMethod, HttpStatusCode, HttpRuleAction};
-use c10_networks::semantics::model_checking::{ModelChecker, ModelCheckingConfig, TlaModelChecker, TlaConfig};
 use std::collections::HashMap;
 
 /// 演示TCP协议语义验证
@@ -12,8 +17,11 @@ async fn demo_tcp_semantic_verification() -> Result<(), Box<dyn std::error::Erro
 
     // 创建TCP形式化规范
     let tcp_spec = TcpFormalSpec::new();
-    println!("TCP规范创建完成，包含 {} 个状态和 {} 个转换",
-        tcp_spec.states.len(), tcp_spec.get_transition_table().len());
+    println!(
+        "TCP规范创建完成，包含 {} 个状态和 {} 个转换",
+        tcp_spec.states.len(),
+        tcp_spec.get_transition_table().len()
+    );
 
     // 创建TCP连接状态
     let mut tcp_connection = ConnectionState {
@@ -35,13 +43,20 @@ async fn demo_tcp_semantic_verification() -> Result<(), Box<dyn std::error::Erro
     // 1. 主动打开 -> SYN_SENT
     tcp_connection.state = TcpState::SynSent;
     tcp_connection.sequence_number = 1000;
-    println!("1. 主动打开: {:?}, 序列号: {}", tcp_connection.state, tcp_connection.sequence_number);
+    println!(
+        "1. 主动打开: {:?}, 序列号: {}",
+        tcp_connection.state, tcp_connection.sequence_number
+    );
 
     // 2. 接收SYN+ACK -> SYN_RECEIVED
-    if let Some(new_state) = tcp_spec.get_transition(tcp_connection.state, TcpEvent::ReceiveSynAck) {
+    if let Some(new_state) = tcp_spec.get_transition(tcp_connection.state, TcpEvent::ReceiveSynAck)
+    {
         tcp_connection.state = new_state;
         tcp_connection.acknowledgment_number = 2001; // 假设对端序列号2000
-        println!("2. 接收SYN+ACK: {:?}, 确认号: {}", tcp_connection.state, tcp_connection.acknowledgment_number);
+        println!(
+            "2. 接收SYN+ACK: {:?}, 确认号: {}",
+            tcp_connection.state, tcp_connection.acknowledgment_number
+        );
     }
 
     // 3. 发送ACK -> ESTABLISHED
@@ -56,7 +71,11 @@ async fn demo_tcp_semantic_verification() -> Result<(), Box<dyn std::error::Erro
     println!("\n--- 验证TCP不变量 ---");
     for invariant in tcp_spec.get_invariants() {
         let is_satisfied = tcp_spec.check_invariant(&tcp_connection, invariant);
-        println!("不变量 '{}': {}", invariant.name, if is_satisfied { "满足" } else { "违反" });
+        println!(
+            "不变量 '{}': {}",
+            invariant.name,
+            if is_satisfied { "满足" } else { "违反" }
+        );
     }
 
     // 模拟连接关闭
@@ -95,8 +114,11 @@ async fn demo_http_semantic_verification() -> Result<(), Box<dyn std::error::Err
 
     // 创建HTTP形式化规范
     let http_spec = HttpFormalSpec::new(HttpVersion::Http1_1);
-    println!("HTTP/1.1规范创建完成，支持 {} 个方法和 {} 个状态码",
-        http_spec.methods.len(), http_spec.status_codes.len());
+    println!(
+        "HTTP/1.1规范创建完成，支持 {} 个方法和 {} 个状态码",
+        http_spec.methods.len(),
+        http_spec.status_codes.len()
+    );
 
     // 创建HTTP请求头部
     let mut request_headers = HashMap::new();
@@ -112,7 +134,10 @@ async fn demo_http_semantic_verification() -> Result<(), Box<dyn std::error::Err
     // 验证POST请求
     println!("\n--- 验证POST请求 ---");
     let post_valid = http_spec.is_valid_request(&HttpMethod::Post, &request_headers);
-    println!("POST请求有效性: {}", if post_valid { "有效" } else { "无效" });
+    println!(
+        "POST请求有效性: {}",
+        if post_valid { "有效" } else { "无效" }
+    );
 
     // 应用协议规则
     println!("\n--- 应用协议规则 ---");
@@ -145,11 +170,17 @@ async fn demo_http_semantic_verification() -> Result<(), Box<dyn std::error::Err
     println!("\n--- 验证HTTP响应 ---");
     let success_response = HttpStatusCode::Success(200);
     let success_valid = http_spec.is_valid_response(&success_response, &response_headers);
-    println!("200响应有效性: {}", if success_valid { "有效" } else { "无效" });
+    println!(
+        "200响应有效性: {}",
+        if success_valid { "有效" } else { "无效" }
+    );
 
     let not_found_response = HttpStatusCode::ClientError(404);
     let not_found_valid = http_spec.is_valid_response(&not_found_response, &response_headers);
-    println!("404响应有效性: {}", if not_found_valid { "有效" } else { "无效" });
+    println!(
+        "404响应有效性: {}",
+        if not_found_valid { "有效" } else { "无效" }
+    );
 
     Ok(())
 }
@@ -220,13 +251,20 @@ async fn demo_model_checking() -> Result<(), Box<dyn std::error::Error>> {
     println!("  发现违规: {}", result.violations.len());
     println!("  检查时间: {:?}", result.checking_time);
     println!("  内存使用: {} bytes", result.memory_usage);
-    println!("  状态覆盖度: {:.2}%", result.coverage.state_coverage * 100.0);
+    println!(
+        "  状态覆盖度: {:.2}%",
+        result.coverage.state_coverage * 100.0
+    );
 
     // 显示发现的违规
     if !result.violations.is_empty() {
         println!("\n发现的违规:");
         for violation in &result.violations {
-            println!("  - {}: {}", violation.violation_type.clone() as u8, violation.description);
+            println!(
+                "  - {}: {}",
+                violation.violation_type.clone() as u8,
+                violation.description
+            );
         }
     }
 
@@ -234,7 +272,10 @@ async fn demo_model_checking() -> Result<(), Box<dyn std::error::Error>> {
     if !result.counter_examples.is_empty() {
         println!("\n反例:");
         for counter_example in &result.counter_examples {
-            println!("  - {}: {}", counter_example.id, counter_example.description);
+            println!(
+                "  - {}: {}",
+                counter_example.id, counter_example.description
+            );
             println!("    违规属性: {}", counter_example.violated_property);
             println!("    执行路径长度: {}", counter_example.execution_path.len());
         }
@@ -285,7 +326,10 @@ async fn demo_tla_model_checking() -> Result<(), Box<dyn std::error::Error>> {
     println!("  成功: {}", tla_result.success);
     println!("  探索状态数: {}", tla_result.states_explored);
     println!("  检查时间: {:?}", tla_result.checking_time);
-    println!("  状态覆盖度: {:.2}%", tla_result.coverage.state_coverage * 100.0);
+    println!(
+        "  状态覆盖度: {:.2}%",
+        tla_result.coverage.state_coverage * 100.0
+    );
 
     Ok(())
 }
@@ -296,16 +340,19 @@ async fn demo_property_checker() -> Result<(), Box<dyn std::error::Error>> {
 
     // 创建网络状态
     let mut connections = HashMap::new();
-    connections.insert("conn_1".to_string(), ConnectionState {
-        connection_id: "conn_1".to_string(),
-        state: TcpState::Established,
-        sequence_number: 1000,
-        acknowledgment_number: 500,
-        window_size: 1024,
-        message_history: Vec::new(),
-        authenticated: true,
-        encrypted: true,
-    });
+    connections.insert(
+        "conn_1".to_string(),
+        ConnectionState {
+            connection_id: "conn_1".to_string(),
+            state: TcpState::Established,
+            sequence_number: 1000,
+            acknowledgment_number: 500,
+            window_size: 1024,
+            message_history: Vec::new(),
+            authenticated: true,
+            encrypted: true,
+        },
+    );
 
     let network_state = NetworkState {
         id: "demo_state".to_string(),
@@ -330,8 +377,10 @@ async fn demo_property_checker() -> Result<(), Box<dyn std::error::Error>> {
 
     // 显示连接状态
     for (conn_id, conn_state) in &network_state.connections {
-        println!("  连接 {}: {:?}, 认证: {}, 加密: {}",
-            conn_id, conn_state.state, conn_state.authenticated, conn_state.encrypted);
+        println!(
+            "  连接 {}: {:?}, 认证: {}, 加密: {}",
+            conn_id, conn_state.state, conn_state.authenticated, conn_state.encrypted
+        );
     }
 
     Ok(())

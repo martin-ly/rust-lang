@@ -1,5 +1,5 @@
 //! 异步监控和诊断工具演示
-//! 
+//!
 //! 本示例展示了异步应用的监控和诊断功能：
 //! - 性能指标收集
 //! - 内存使用监控
@@ -8,18 +8,18 @@
 //! - 延迟分布分析
 //! - 健康检查
 //! - 告警机制
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example async_monitoring_demo
 //! ```
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
+use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};
-use std::collections::{HashMap, VecDeque};
 use tokio::sync::{Mutex, Notify};
-use tokio::time::{sleep, interval};
-use serde::{Serialize, Deserialize};
-use anyhow::Result;
+use tokio::time::{interval, sleep};
 
 /// 性能指标
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -172,8 +172,17 @@ impl AsyncMonitor {
         let mut executions = self.task_executions.lock().await;
         if let Some(task_info) = executions.get_mut(task_id) {
             task_info.end_time = Some(Instant::now());
-            task_info.duration = Some(task_info.end_time.unwrap().duration_since(task_info.start_time));
-            task_info.status = if success { TaskStatus::Completed } else { TaskStatus::Failed };
+            task_info.duration = Some(
+                task_info
+                    .end_time
+                    .unwrap()
+                    .duration_since(task_info.start_time),
+            );
+            task_info.status = if success {
+                TaskStatus::Completed
+            } else {
+                TaskStatus::Failed
+            };
             task_info.error = error;
 
             // 更新延迟分布
@@ -186,7 +195,7 @@ impl AsyncMonitor {
     /// 执行健康检查
     pub async fn perform_health_check(&self, component: &str) -> HealthCheckResult {
         let start = Instant::now();
-        
+
         // 模拟健康检查
         let (status, message) = match component {
             "database" => {
@@ -214,7 +223,7 @@ impl AsyncMonitor {
         };
 
         let response_time = start.elapsed();
-        
+
         let result = HealthCheckResult {
             component: component.to_string(),
             status: status.clone(),
@@ -235,7 +244,8 @@ impl AsyncMonitor {
                 AlertSeverity::Warning,
                 component,
                 &format!("健康检查失败: {:?}", status),
-            ).await;
+            )
+            .await;
         }
 
         result
@@ -254,7 +264,7 @@ impl AsyncMonitor {
 
         let mut alerts = self.alerts.lock().await;
         alerts.push(alert);
-        
+
         println!("    🚨 告警: {} - {}", component, message);
     }
 
@@ -267,31 +277,31 @@ impl AsyncMonitor {
     /// 获取任务执行统计
     pub async fn get_task_stats(&self) -> TaskStats {
         let executions = self.task_executions.lock().await;
-        
+
         let mut stats = TaskStats::default();
         for task_info in executions.values() {
             stats.total_tasks += 1;
-            
+
             match task_info.status {
                 TaskStatus::Completed => stats.completed_tasks += 1,
                 TaskStatus::Failed => stats.failed_tasks += 1,
                 TaskStatus::Timeout => stats.timeout_tasks += 1,
                 TaskStatus::Running => stats.running_tasks += 1,
             }
-            
+
             if let Some(duration) = task_info.duration {
                 stats.total_execution_time += duration;
                 stats.min_execution_time = stats.min_execution_time.min(duration);
                 stats.max_execution_time = stats.max_execution_time.max(duration);
             }
         }
-        
+
         if stats.completed_tasks > 0 {
             stats.avg_execution_time = Duration::from_nanos(
-                stats.total_execution_time.as_nanos() as u64 / stats.completed_tasks as u64
+                stats.total_execution_time.as_nanos() as u64 / stats.completed_tasks as u64,
             );
         }
-        
+
         stats
     }
 
@@ -325,13 +335,13 @@ impl AsyncMonitor {
         task_executions: &Arc<Mutex<HashMap<String, TaskExecutionInfo>>>,
     ) {
         let executions = task_executions.lock().await;
-        
+
         let mut active_tasks = 0;
         let mut completed_tasks = 0;
         let mut failed_tasks = 0;
         let mut total_response_time = Duration::ZERO;
         let mut response_count = 0;
-        
+
         for task_info in executions.values() {
             match task_info.status {
                 TaskStatus::Running => active_tasks += 1,
@@ -346,20 +356,20 @@ impl AsyncMonitor {
                 TaskStatus::Timeout => failed_tasks += 1,
             }
         }
-        
+
         let avg_response_time = if response_count > 0 {
             Duration::from_nanos(total_response_time.as_nanos() as u64 / response_count as u64)
         } else {
             Duration::ZERO
         };
-        
+
         let total_tasks = completed_tasks + failed_tasks;
         let error_rate = if total_tasks > 0 {
             failed_tasks as f64 / total_tasks as f64
         } else {
             0.0
         };
-        
+
         let metric = PerformanceMetrics {
             timestamp: SystemTime::now(),
             cpu_usage: rand::random::<f64>() * 100.0, // 模拟CPU使用率
@@ -371,10 +381,10 @@ impl AsyncMonitor {
             throughput: completed_tasks as f64, // 简化计算
             error_rate,
         };
-        
+
         let mut metrics_queue = metrics.lock().await;
         metrics_queue.push_back(metric);
-        
+
         // 保持队列大小
         if metrics_queue.len() > 1000 {
             metrics_queue.pop_front();
@@ -383,7 +393,7 @@ impl AsyncMonitor {
 
     async fn update_latency_distribution(&self, duration: Duration) {
         let mut distribution = self.latency_distribution.lock().await;
-        
+
         // 定义延迟桶
         let buckets = vec![
             (Duration::ZERO, Duration::from_millis(10)),
@@ -393,13 +403,17 @@ impl AsyncMonitor {
             (Duration::from_millis(500), Duration::from_secs(1)),
             (Duration::from_secs(1), Duration::from_secs(5)),
         ];
-        
+
         // 重置分布
         distribution.clear();
         let mut total_count = 0;
-        
+
         for (min, max) in buckets {
-            let count = if duration >= min && duration < max { 1 } else { 0 };
+            let count = if duration >= min && duration < max {
+                1
+            } else {
+                0
+            };
             total_count += count;
             distribution.push(LatencyBucket {
                 range: (min, max),
@@ -407,7 +421,7 @@ impl AsyncMonitor {
                 percentage: 0.0,
             });
         }
-        
+
         // 计算百分比
         if total_count > 0 {
             for bucket in distribution.iter_mut() {
@@ -489,17 +503,20 @@ impl AsyncMonitoringDemo {
 
     async fn demo_metrics_collection(monitor: &AsyncMonitor) -> Result<()> {
         println!("  收集性能指标...");
-        
+
         // 等待一些指标收集
         sleep(Duration::from_secs(3)).await;
-        
+
         let metrics = monitor.get_metrics().await;
         println!("    收集到 {} 个指标样本", metrics.len());
-        
+
         if let Some(latest_metric) = metrics.last() {
             println!("    最新指标:");
             println!("      CPU使用率: {:.1}%", latest_metric.cpu_usage);
-            println!("      内存使用: {:.2} MB", latest_metric.memory_usage as f64 / 1024.0 / 1024.0);
+            println!(
+                "      内存使用: {:.2} MB",
+                latest_metric.memory_usage as f64 / 1024.0 / 1024.0
+            );
             println!("      活跃任务: {}", latest_metric.active_tasks);
             println!("      完成任务: {}", latest_metric.completed_tasks);
             println!("      失败任务: {}", latest_metric.failed_tasks);
@@ -513,7 +530,7 @@ impl AsyncMonitoringDemo {
 
     async fn demo_task_tracking(monitor: &AsyncMonitor) -> Result<()> {
         println!("  追踪任务执行...");
-        
+
         // 模拟一些任务
         let task_names = vec![
             "数据处理任务",
@@ -522,46 +539,48 @@ impl AsyncMonitoringDemo {
             "数据库查询任务",
             "缓存更新任务",
         ];
-        
+
         let mut task_handles = Vec::new();
-        
+
         for (i, name) in task_names.iter().enumerate() {
             let task_id = format!("task_{}", i);
             let monitor = monitor.clone();
             let name = name.to_string();
-            
+
             // 记录任务开始
-            monitor.record_task_start(task_id.clone(), name.to_string()).await;
-            
+            monitor
+                .record_task_start(task_id.clone(), name.to_string())
+                .await;
+
             // 启动任务
             let handle = tokio::spawn(async move {
                 let start = Instant::now();
-                
+
                 // 模拟任务执行
                 let duration = Duration::from_millis(100 + i as u64 * 50);
                 sleep(duration).await;
-                
+
                 let success = rand::random::<f32>() < 0.8;
                 let error = if success {
                     None
                 } else {
                     Some("模拟任务失败".to_string())
                 };
-                
+
                 // 记录任务完成
                 monitor.record_task_complete(&task_id, success, error).await;
-                
+
                 println!("      任务 {} 完成，耗时: {:?}", name, start.elapsed());
             });
-            
+
             task_handles.push(handle);
         }
-        
+
         // 等待所有任务完成
         for handle in task_handles {
             handle.await?;
         }
-        
+
         // 显示任务统计
         let stats = monitor.get_task_stats().await;
         println!("    任务执行统计:");
@@ -577,70 +596,74 @@ impl AsyncMonitoringDemo {
 
     async fn demo_health_checks(monitor: &AsyncMonitor) -> Result<()> {
         println!("  执行健康检查...");
-        
+
         let components = vec!["database", "cache", "api", "storage"];
-        
+
         for component in components {
             let result = monitor.perform_health_check(component).await;
-            
+
             let status_icon = match result.status {
                 HealthStatus::Healthy => "✅",
                 HealthStatus::Degraded => "⚠️",
                 HealthStatus::Unhealthy => "❌",
             };
-            
-            println!("      {} {}: {} (响应时间: {:?})", 
-                status_icon, component, result.message, result.response_time);
+
+            println!(
+                "      {} {}: {} (响应时间: {:?})",
+                status_icon, component, result.message, result.response_time
+            );
         }
-        
+
         // 显示健康状态摘要
         let health_status = monitor.get_health_status().await;
-        let healthy_count = health_status.values().filter(|r| matches!(r.status, HealthStatus::Healthy)).count();
+        let healthy_count = health_status
+            .values()
+            .filter(|r| matches!(r.status, HealthStatus::Healthy))
+            .count();
         let total_count = health_status.len();
-        
-        println!("    健康状态摘要: {}/{} 组件健康", healthy_count, total_count);
+
+        println!(
+            "    健康状态摘要: {}/{} 组件健康",
+            healthy_count, total_count
+        );
 
         Ok(())
     }
 
     async fn demo_alerting(monitor: &AsyncMonitor) -> Result<()> {
         println!("  测试告警机制...");
-        
+
         // 创建一些测试告警
-        monitor.create_alert(
-            AlertSeverity::Warning,
-            "database",
-            "数据库连接池使用率超过80%",
-        ).await;
-        
-        monitor.create_alert(
-            AlertSeverity::Critical,
-            "cache",
-            "缓存服务完全不可用",
-        ).await;
-        
-        monitor.create_alert(
-            AlertSeverity::Info,
-            "api",
-            "API响应时间超过阈值",
-        ).await;
-        
+        monitor
+            .create_alert(
+                AlertSeverity::Warning,
+                "database",
+                "数据库连接池使用率超过80%",
+            )
+            .await;
+
+        monitor
+            .create_alert(AlertSeverity::Critical, "cache", "缓存服务完全不可用")
+            .await;
+
+        monitor
+            .create_alert(AlertSeverity::Info, "api", "API响应时间超过阈值")
+            .await;
+
         // 显示告警列表
         let alerts = monitor.get_alerts().await;
         println!("    当前告警数量: {}", alerts.len());
-        
+
         for alert in alerts.iter().take(5) {
             let severity_icon = match alert.severity {
                 AlertSeverity::Info => "ℹ️",
                 AlertSeverity::Warning => "⚠️",
                 AlertSeverity::Critical => "🚨",
             };
-            
-            println!("      {} [{}] {}: {}", 
-                severity_icon, 
-                alert.component, 
-                alert.severity,
-                alert.message
+
+            println!(
+                "      {} [{}] {}: {}",
+                severity_icon, alert.component, alert.severity, alert.message
             );
         }
 
@@ -649,40 +672,44 @@ impl AsyncMonitoringDemo {
 
     async fn demo_latency_analysis(monitor: &AsyncMonitor) -> Result<()> {
         println!("  分析延迟分布...");
-        
+
         // 生成一些延迟数据
         let mut task_handles = Vec::new();
-        
+
         for i in 0..50 {
             let monitor = monitor.clone();
             let task_id = format!("latency_task_{}", i);
-            
+
             let handle = tokio::spawn(async move {
-                monitor.record_task_start(task_id.clone(), "延迟测试任务".to_string()).await;
-                
+                monitor
+                    .record_task_start(task_id.clone(), "延迟测试任务".to_string())
+                    .await;
+
                 // 模拟不同的延迟
                 let delay = Duration::from_millis(rand::random::<u64>() % 1000);
                 sleep(delay).await;
-                
+
                 monitor.record_task_complete(&task_id, true, None).await;
             });
-            
+
             task_handles.push(handle);
         }
-        
+
         // 等待所有任务完成
         for handle in task_handles {
             handle.await?;
         }
-        
+
         // 显示延迟分布
         let distribution = monitor.get_latency_distribution().await;
         println!("    延迟分布:");
-        
+
         for bucket in distribution {
             let (min, max) = bucket.range;
-            println!("      {:?} - {:?}: {} 次 ({:.1}%)", 
-                min, max, bucket.count, bucket.percentage);
+            println!(
+                "      {:?} - {:?}: {} 次 ({:.1}%)",
+                min, max, bucket.count, bucket.percentage
+            );
         }
 
         Ok(())
@@ -690,27 +717,31 @@ impl AsyncMonitoringDemo {
 
     async fn demo_monitoring_report(monitor: &AsyncMonitor) -> Result<()> {
         println!("  生成综合监控报告...");
-        
+
         // 收集所有监控数据
         let metrics = monitor.get_metrics().await;
         let task_stats = monitor.get_task_stats().await;
         let health_status = monitor.get_health_status().await;
         let alerts = monitor.get_alerts().await;
-        
+
         println!("    📊 监控报告摘要:");
         println!("      ===================");
-        
+
         if let Some(latest_metric) = metrics.last() {
             println!("      📈 性能指标:");
             println!("        CPU使用率: {:.1}%", latest_metric.cpu_usage);
-            println!("        内存使用: {:.2} MB", latest_metric.memory_usage as f64 / 1024.0 / 1024.0);
+            println!(
+                "        内存使用: {:.2} MB",
+                latest_metric.memory_usage as f64 / 1024.0 / 1024.0
+            );
             println!("        吞吐量: {:.2} req/sec", latest_metric.throughput);
             println!("        错误率: {:.1}%", latest_metric.error_rate * 100.0);
         }
-        
+
         println!("      🔍 任务统计:");
         println!("        总任务数: {}", task_stats.total_tasks);
-        println!("        成功率: {:.1}%", 
+        println!(
+            "        成功率: {:.1}%",
             if task_stats.total_tasks > 0 {
                 (task_stats.completed_tasks as f64 / task_stats.total_tasks as f64) * 100.0
             } else {
@@ -718,19 +749,30 @@ impl AsyncMonitoringDemo {
             }
         );
         println!("        平均执行时间: {:?}", task_stats.avg_execution_time);
-        
+
         println!("      🏥 健康状态:");
-        let healthy_components = health_status.values()
+        let healthy_components = health_status
+            .values()
             .filter(|r| matches!(r.status, HealthStatus::Healthy))
             .count();
-        println!("        健康组件: {}/{}", healthy_components, health_status.len());
-        
+        println!(
+            "        健康组件: {}/{}",
+            healthy_components,
+            health_status.len()
+        );
+
         println!("      🚨 告警信息:");
-        let critical_alerts = alerts.iter().filter(|a| matches!(a.severity, AlertSeverity::Critical)).count();
-        let warning_alerts = alerts.iter().filter(|a| matches!(a.severity, AlertSeverity::Warning)).count();
+        let critical_alerts = alerts
+            .iter()
+            .filter(|a| matches!(a.severity, AlertSeverity::Critical))
+            .count();
+        let warning_alerts = alerts
+            .iter()
+            .filter(|a| matches!(a.severity, AlertSeverity::Warning))
+            .count();
         println!("        严重告警: {}", critical_alerts);
         println!("        警告告警: {}", warning_alerts);
-        
+
         // 系统建议
         println!("      💡 系统建议:");
         if let Some(latest_metric) = metrics.last() {

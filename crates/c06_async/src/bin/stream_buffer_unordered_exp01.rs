@@ -1,7 +1,7 @@
 // 并发流处理示例：buffer_unordered（Rust 1.90）
 // 说明：对一组 URL 并发抓取，限制同时在途请求数量，结果乱序到达
 
-use futures::{stream, StreamExt};
+use futures::{StreamExt, stream};
 use std::time::Duration;
 
 #[tokio::main(flavor = "multi_thread")]
@@ -38,5 +38,3 @@ async fn main() -> anyhow::Result<()> {
     }
     Ok(())
 }
-
-

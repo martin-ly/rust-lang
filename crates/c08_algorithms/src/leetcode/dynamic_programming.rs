@@ -488,13 +488,22 @@ mod tests {
     #[test]
     fn test_min_cost_climbing_stairs() {
         assert_eq!(min_cost_climbing_stairs(vec![10, 15, 20]), 15);
-        assert_eq!(min_cost_climbing_stairs(vec![1, 100, 1, 1, 1, 100, 1, 1, 100, 1]), 6);
+        assert_eq!(
+            min_cost_climbing_stairs(vec![1, 100, 1, 1, 1, 100, 1, 1, 100, 1]),
+            6
+        );
     }
 
     #[test]
     fn test_longest_common_subsequence() {
-        assert_eq!(longest_common_subsequence("abcde".to_string(), "ace".to_string()), 3);
-        assert_eq!(longest_common_subsequence("abc".to_string(), "abc".to_string()), 3);
+        assert_eq!(
+            longest_common_subsequence("abcde".to_string(), "ace".to_string()),
+            3
+        );
+        assert_eq!(
+            longest_common_subsequence("abc".to_string(), "abc".to_string()),
+            3
+        );
     }
 
     #[test]

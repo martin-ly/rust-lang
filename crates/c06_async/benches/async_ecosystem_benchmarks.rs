@@ -2,17 +2,16 @@
 //!
 //! 本模块提供了对各个异步运行时的性能基准测试，
 //! 包括内存使用、启动时间、并发性能等指标。
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
-use std::hint::black_box;
 use c06_async::{
-    async_runtime_examples::{
-        StdAsyncExamples, TokioExamples, AsyncStdExamples, SmolExamples,
-        RuntimeCompositionExamples
-    },
     async_integration_framework::{
-        AsyncSyncConversionFramework, AggregationCompositionFramework, DataProcessingComponent
-    }
+        AggregationCompositionFramework, AsyncSyncConversionFramework, DataProcessingComponent,
+    },
+    async_runtime_examples::{
+        AsyncStdExamples, RuntimeCompositionExamples, SmolExamples, StdAsyncExamples, TokioExamples,
+    },
 };
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 use std::time::Duration;
 use tokio::runtime::Runtime;
 
@@ -26,7 +25,9 @@ fn bench_async_task_execution(c: &mut Criterion) {
         b.to_async(rt).iter(|| async {
             let tokio_examples = TokioExamples::new(10);
             let tasks = (0..100).map(|i| format!("task_{}", i)).collect();
-            tokio_examples.high_performance_concurrent_processing(tasks).await
+            tokio_examples
+                .high_performance_concurrent_processing(tasks)
+                .await
         });
     });
 
@@ -72,10 +73,12 @@ fn bench_async_sync_conversion(c: &mut Criterion) {
         let rt = Runtime::new().unwrap();
         b.to_async(rt).iter(|| async {
             let conversion_framework = AsyncSyncConversionFramework::new(4);
-            conversion_framework.sync_to_async_conversion(|| {
-                std::thread::sleep(Duration::from_micros(1));
-                Ok("sync_result".to_string())
-            }).await
+            conversion_framework
+                .sync_to_async_conversion(|| {
+                    std::thread::sleep(Duration::from_micros(1));
+                    Ok("sync_result".to_string())
+                })
+                .await
         });
     });
 
@@ -95,13 +98,21 @@ fn bench_aggregation_composition(c: &mut Criterion) {
             let component1 = Box::new(DataProcessingComponent::new("processor1", 1));
             let component2 = Box::new(DataProcessingComponent::new("processor2", 1));
 
-            composition_framework.register_component(component1).await.unwrap();
-            composition_framework.register_component(component2).await.unwrap();
+            composition_framework
+                .register_component(component1)
+                .await
+                .unwrap();
+            composition_framework
+                .register_component(component2)
+                .await
+                .unwrap();
 
-            composition_framework.sequential_aggregation(
-                vec!["processor1".to_string(), "processor2".to_string()],
-                "test_input"
-            ).await
+            composition_framework
+                .sequential_aggregation(
+                    vec!["processor1".to_string(), "processor2".to_string()],
+                    "test_input",
+                )
+                .await
         });
     });
 
@@ -114,13 +125,21 @@ fn bench_aggregation_composition(c: &mut Criterion) {
             let component1 = Box::new(DataProcessingComponent::new("processor1", 1));
             let component2 = Box::new(DataProcessingComponent::new("processor2", 1));
 
-            composition_framework.register_component(component1).await.unwrap();
-            composition_framework.register_component(component2).await.unwrap();
+            composition_framework
+                .register_component(component1)
+                .await
+                .unwrap();
+            composition_framework
+                .register_component(component2)
+                .await
+                .unwrap();
 
-            composition_framework.parallel_aggregation(
-                vec!["processor1".to_string(), "processor2".to_string()],
-                "test_input"
-            ).await
+            composition_framework
+                .parallel_aggregation(
+                    vec!["processor1".to_string(), "processor2".to_string()],
+                    "test_input",
+                )
+                .await
         });
     });
 
@@ -135,7 +154,9 @@ fn bench_runtime_composition(c: &mut Criterion) {
         let rt = Runtime::new().unwrap();
         b.to_async(rt).iter(|| async {
             let composition_examples = RuntimeCompositionExamples::new();
-            composition_examples.runtime_selector_pattern("high_performance").await
+            composition_examples
+                .runtime_selector_pattern("high_performance")
+                .await
         });
     });
 
@@ -229,7 +250,9 @@ fn bench_concurrency_performance(c: &mut Criterion) {
                 b.to_async(rt).iter(|| async {
                     let tokio_examples = TokioExamples::new(concurrency);
                     let tasks = (0..concurrency).map(|i| format!("task_{}", i)).collect();
-                    tokio_examples.high_performance_concurrent_processing(tasks).await
+                    tokio_examples
+                        .high_performance_concurrent_processing(tasks)
+                        .await
                 });
             },
         );

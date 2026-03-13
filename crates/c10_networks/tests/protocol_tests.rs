@@ -7,8 +7,8 @@ use c10_networks::{
     packet::{Packet, PacketType},
     protocol::{
         http::{HttpMethod, HttpStatusCode, HttpVersion},
-        websocket::{WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode},
         tcp::{TcpConnection, TcpConnectionConfig, TcpState},
+        websocket::{WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode},
     },
     socket::{TcpConfig, UdpConfig, utils},
 };
@@ -24,30 +24,28 @@ fn test_http_protocol_implementation() {
         "/api/users",
         HttpVersion::Http1_1,
     );
-    
+
     request.add_header("User-Agent", "c10_networks-test");
     request.add_header("Accept", "application/json");
     request.add_header("Authorization", "Bearer token123");
     request.set_body(b"{\"query\": \"test\"}".as_slice());
-    
+
     // 验证请求属性
     assert_eq!(request.method, HttpMethod::GET);
     assert_eq!(request.uri, "/api/users");
     assert_eq!(request.version, HttpVersion::Http1_1);
     assert!(request.headers.len() >= 3);
     assert_eq!(request.body.len(), 20);
-    
+
     // 测试HTTP响应创建
-    let mut response = c10_networks::protocol::http::HttpResponse::new(
-        HttpVersion::Http1_1,
-        HttpStatusCode::ok(),
-    );
-    
+    let mut response =
+        c10_networks::protocol::http::HttpResponse::new(HttpVersion::Http1_1, HttpStatusCode::ok());
+
     response.add_header("Content-Type", "application/json");
     response.add_header("Server", "c10_networks");
     response.add_header("Cache-Control", "no-cache");
     response.set_body(r#"{"status": "success", "data": []}"#);
-    
+
     // 验证响应属性
     assert_eq!(response.status.code, 200);
     assert_eq!(response.version, HttpVersion::Http1_1);
@@ -67,14 +65,14 @@ fn test_http_methods() {
         HttpMethod::OPTIONS,
         HttpMethod::PATCH,
     ];
-    
+
     for method in methods {
         let request = c10_networks::protocol::http::HttpRequest::new(
             method.clone(),
             "/test",
             HttpVersion::Http1_1,
         );
-        
+
         // 验证方法设置
         assert_eq!(request.method, method);
         assert_eq!(request.uri, "/test");
@@ -94,13 +92,11 @@ fn test_http_status_codes() {
         HttpStatusCode::not_found(),
         HttpStatusCode::internal_server_error(),
     ];
-    
+
     for status in status_codes {
-        let response = c10_networks::protocol::http::HttpResponse::new(
-            HttpVersion::Http1_1,
-            status,
-        );
-        
+        let response =
+            c10_networks::protocol::http::HttpResponse::new(HttpVersion::Http1_1, status);
+
         // 验证状态码设置
         assert!(response.status.code >= 100 && response.status.code < 600);
         assert_eq!(response.version, HttpVersion::Http1_1);
@@ -115,14 +111,14 @@ fn test_http_versions() {
         HttpVersion::Http1_1,
         HttpVersion::Http2_0,
     ];
-    
+
     for version in versions {
         let request = c10_networks::protocol::http::HttpRequest::new(
             HttpMethod::GET,
             "/test",
             version.clone(),
         );
-        
+
         // 验证版本设置
         assert_eq!(request.version, version);
     }
@@ -137,21 +133,21 @@ fn test_websocket_protocol_implementation() {
     assert_eq!(text_frame.payload, Bytes::from("Hello, WebSocket!"));
     assert!(text_frame.fin);
     assert!(!text_frame.mask);
-    
+
     let binary_frame = WebSocketFrame::binary(&[1, 2, 3, 4, 5]);
     assert_eq!(binary_frame.opcode, WebSocketOpcode::Binary);
     assert_eq!(binary_frame.payload, Bytes::from(&[1, 2, 3, 4, 5][..]));
     assert!(binary_frame.fin);
-    
+
     let close_frame = WebSocketFrame::close(Some(1000), Some("Normal closure"));
     assert_eq!(close_frame.opcode, WebSocketOpcode::Close);
     assert!(close_frame.fin);
-    
+
     let ping_frame = WebSocketFrame::ping(Some(&[1, 2, 3, 4]));
     assert_eq!(ping_frame.opcode, WebSocketOpcode::Ping);
     assert_eq!(ping_frame.payload, Bytes::from(&[1, 2, 3, 4][..]));
     assert!(ping_frame.fin);
-    
+
     let pong_frame = WebSocketFrame::pong(Some(&[5, 6, 7, 8]));
     assert_eq!(pong_frame.opcode, WebSocketOpcode::Pong);
     assert_eq!(pong_frame.payload, Bytes::from(&[5, 6, 7, 8][..]));
@@ -167,9 +163,9 @@ fn test_websocket_handshake_request() {
     request.set_websocket_version("13");
     request.set_upgrade();
     request.add_header("Origin", "https://example.com");
-    
+
     let request_str = request.encode();
-    
+
     // 验证握手请求格式
     assert!(request_str.contains("GET /chat HTTP/1.1"));
     assert!(request_str.contains("Host: example.com"));
@@ -190,7 +186,7 @@ fn test_websocket_opcodes() {
         WebSocketOpcode::Ping,
         WebSocketOpcode::Pong,
     ];
-    
+
     for opcode in opcodes {
         let frame = WebSocketFrame {
             fin: true,
@@ -200,7 +196,7 @@ fn test_websocket_opcodes() {
             masking_key: None,
             payload: Bytes::copy_from_slice(b"test"),
         };
-        
+
         // 验证操作码设置
         assert_eq!(frame.opcode, opcode);
         assert!(frame.fin);
@@ -224,7 +220,7 @@ fn test_tcp_protocol_implementation() {
         max_segment_size: 1460,
         window_size: 65535,
     };
-    
+
     // 验证配置属性
     assert_eq!(config.local_addr.port(), 0);
     assert_eq!(config.remote_addr.port(), 8080);
@@ -235,7 +231,7 @@ fn test_tcp_protocol_implementation() {
     assert_eq!(config.recv_buffer_size, 8192);
     assert_eq!(config.max_segment_size, 1460);
     assert_eq!(config.window_size, 65535);
-    
+
     // 测试TCP连接创建
     let connection = TcpConnection::new(1, config);
     assert_eq!(connection.id, 1);
@@ -249,12 +245,12 @@ fn test_tcp_protocol_implementation() {
 fn test_tcp_state_machine() {
     let config = TcpConnectionConfig::default();
     let connection = TcpConnection::new(1, config);
-    
+
     // 测试初始状态
     assert_eq!(*connection.state(), TcpState::Closed);
     assert!(!connection.state().can_send_data());
     assert!(!connection.state().can_receive_data());
-    
+
     // 测试状态转换（这里可以添加更多状态转换测试）
     // 注意：实际的状态转换需要网络操作，这里主要测试状态查询
 }
@@ -264,14 +260,14 @@ fn test_tcp_state_machine() {
 fn test_tcp_congestion_control() {
     let config = TcpConnectionConfig::default();
     let mut connection = TcpConnection::new(1, config);
-    
+
     // 测试拥塞窗口更新
     connection.update_congestion_window();
     assert_eq!(connection.congestion_window, 2);
-    
+
     connection.update_congestion_window();
     assert_eq!(connection.congestion_window, 4);
-    
+
     // 测试拥塞处理
     connection.handle_congestion();
     assert_eq!(connection.congestion_window, 1);
@@ -289,13 +285,13 @@ fn test_socket_configurations() {
         keep_alive: true,
         tcp_nodelay: true,
     };
-    
+
     assert_eq!(tcp_config.address.port(), 8080);
     assert_eq!(tcp_config.timeout, Some(Duration::from_secs(30)));
     assert_eq!(tcp_config.buffer_size, 8192);
     assert!(tcp_config.keep_alive);
     assert!(tcp_config.tcp_nodelay);
-    
+
     // 测试UDP套接字配置
     let udp_config = UdpConfig {
         address: utils::localhost(8081),
@@ -304,7 +300,7 @@ fn test_socket_configurations() {
         broadcast: false,
         multicast_loop_v4: false,
     };
-    
+
     assert_eq!(udp_config.address.port(), 8081);
     assert_eq!(udp_config.timeout, Some(Duration::from_secs(10)));
     assert_eq!(udp_config.buffer_size, 4096);
@@ -322,7 +318,7 @@ fn test_protocol_packets() {
     );
     assert_eq!(http_packet.packet_type(), &PacketType::Http);
     assert!(http_packet.payload_length() > 0);
-    
+
     // 测试WebSocket数据包
     let websocket_packet = Packet::new(
         PacketType::WebSocket,
@@ -330,20 +326,14 @@ fn test_protocol_packets() {
     );
     assert_eq!(websocket_packet.packet_type(), &PacketType::WebSocket);
     assert_eq!(websocket_packet.payload_length(), 17);
-    
+
     // 测试TCP数据包
-    let tcp_packet = Packet::new(
-        PacketType::Tcp,
-        Bytes::copy_from_slice(b"TCP data"),
-    );
+    let tcp_packet = Packet::new(PacketType::Tcp, Bytes::copy_from_slice(b"TCP data"));
     assert_eq!(tcp_packet.packet_type(), &PacketType::Tcp);
     assert_eq!(tcp_packet.payload_length(), 8);
-    
+
     // 测试UDP数据包
-    let udp_packet = Packet::new(
-        PacketType::Udp,
-        Bytes::copy_from_slice(b"UDP data"),
-    );
+    let udp_packet = Packet::new(PacketType::Udp, Bytes::copy_from_slice(b"UDP data"));
     assert_eq!(udp_packet.packet_type(), &PacketType::Udp);
     assert_eq!(udp_packet.payload_length(), 8);
 }
@@ -357,30 +347,29 @@ fn test_protocol_error_handling() {
         message: "Not Found".to_string(),
     };
     assert_eq!(format!("{}", http_error), "HTTP error: 404 - Not Found");
-    
+
     // 测试WebSocket协议错误
-    let websocket_error = c10_networks::error::ProtocolError::WebSocket(
-        "Connection failed".to_string(),
+    let websocket_error =
+        c10_networks::error::ProtocolError::WebSocket("Connection failed".to_string());
+    assert_eq!(
+        format!("{}", websocket_error),
+        "WebSocket error: Connection failed"
     );
-    assert_eq!(format!("{}", websocket_error), "WebSocket error: Connection failed");
-    
+
     // 测试TCP协议错误
-    let tcp_error = c10_networks::error::ProtocolError::Tcp(
-        "Connection reset".to_string(),
-    );
+    let tcp_error = c10_networks::error::ProtocolError::Tcp("Connection reset".to_string());
     assert_eq!(format!("{}", tcp_error), "TCP error: Connection reset");
-    
+
     // 测试UDP协议错误
-    let udp_error = c10_networks::error::ProtocolError::Udp(
-        "Port unreachable".to_string(),
-    );
+    let udp_error = c10_networks::error::ProtocolError::Udp("Port unreachable".to_string());
     assert_eq!(format!("{}", udp_error), "UDP error: Port unreachable");
-    
+
     // 测试DNS协议错误
-    let dns_error = c10_networks::error::ProtocolError::Dns(
-        "Name resolution failed".to_string(),
+    let dns_error = c10_networks::error::ProtocolError::Dns("Name resolution failed".to_string());
+    assert_eq!(
+        format!("{}", dns_error),
+        "DNS error: Name resolution failed"
     );
-    assert_eq!(format!("{}", dns_error), "DNS error: Name resolution failed");
 }
 
 /// 测试协议兼容性
@@ -393,7 +382,7 @@ fn test_protocol_compatibility() {
         HttpVersion::Http1_1,
     );
     assert_eq!(http11_request.version, HttpVersion::Http1_1);
-    
+
     // 测试HTTP/2.0兼容性
     let http20_request = c10_networks::protocol::http::HttpRequest::new(
         HttpMethod::GET,
@@ -401,7 +390,7 @@ fn test_protocol_compatibility() {
         HttpVersion::Http2_0,
     );
     assert_eq!(http20_request.version, HttpVersion::Http2_0);
-    
+
     // 测试WebSocket RFC 6455兼容性
     let mut ws_request = WebSocketHandshakeRequest::new("/test");
     ws_request.set_websocket_version("13"); // RFC 6455 version
@@ -413,7 +402,7 @@ fn test_protocol_compatibility() {
 #[test]
 fn test_protocol_performance() {
     const ITERATIONS: usize = 1000;
-    
+
     // 测试HTTP请求创建性能
     let start = std::time::Instant::now();
     for i in 0..ITERATIONS {
@@ -424,26 +413,26 @@ fn test_protocol_performance() {
         );
     }
     let http_time = start.elapsed();
-    
+
     // 测试WebSocket帧创建性能
     let start = std::time::Instant::now();
     for i in 0..ITERATIONS {
         let _frame = WebSocketFrame::text(&format!("message {}", i));
     }
     let websocket_time = start.elapsed();
-    
+
     // 测试TCP连接创建性能
     let start = std::time::Instant::now();
     for i in 0..ITERATIONS {
         let _connection = TcpConnection::new(i as u64, TcpConnectionConfig::default());
     }
     let tcp_time = start.elapsed();
-    
+
     println!("协议性能测试结果:");
     println!("  HTTP请求创建: {:?}", http_time);
     println!("  WebSocket帧创建: {:?}", websocket_time);
     println!("  TCP连接创建: {:?}", tcp_time);
-    
+
     // 验证性能在合理范围内
     assert!(http_time < Duration::from_millis(100));
     assert!(websocket_time < Duration::from_millis(100));
@@ -454,18 +443,15 @@ fn test_protocol_performance() {
 #[test]
 fn test_protocol_boundary_conditions() {
     // 测试空HTTP请求
-    let empty_request = c10_networks::protocol::http::HttpRequest::new(
-        HttpMethod::GET,
-        "",
-        HttpVersion::Http1_1,
-    );
+    let empty_request =
+        c10_networks::protocol::http::HttpRequest::new(HttpMethod::GET, "", HttpVersion::Http1_1);
     assert_eq!(empty_request.uri, "");
-    
+
     // 测试空WebSocket帧
     let empty_frame = WebSocketFrame::text("");
     assert_eq!(empty_frame.payload, Bytes::new());
     assert_eq!(empty_frame.payload.len(), 0);
-    
+
     // 测试最大长度HTTP请求
     let long_uri = "/".repeat(1000);
     let long_request = c10_networks::protocol::http::HttpRequest::new(
@@ -474,7 +460,7 @@ fn test_protocol_boundary_conditions() {
         HttpVersion::Http1_1,
     );
     assert_eq!(long_request.uri, long_uri);
-    
+
     // 测试最大长度WebSocket帧
     let long_message = "a".repeat(1000);
     let long_frame = WebSocketFrame::text(&long_message);
@@ -486,7 +472,7 @@ fn test_protocol_boundary_conditions() {
 #[ignore] // 协议测试套件在部分环境可能失败
 fn test_protocol_test_suite() {
     println!("=== C10 Networks 协议测试套件 ===");
-    
+
     // 运行所有协议测试
     test_http_protocol_implementation();
     test_http_methods();
@@ -504,6 +490,6 @@ fn test_protocol_test_suite() {
     test_protocol_compatibility();
     test_protocol_performance();
     test_protocol_boundary_conditions();
-    
+
     println!("=== 协议测试套件完成 ===");
 }

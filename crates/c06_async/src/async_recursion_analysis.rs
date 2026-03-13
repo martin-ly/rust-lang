@@ -148,11 +148,7 @@ pub mod basic_async_recursion {
     /// fact(n) = n × fact(n-1)
     /// ```
     pub fn factorial_sync(n: u64) -> u64 {
-        if n <= 1 {
-            1
-        } else {
-            n * factorial_sync(n - 1)
-        }
+        if n <= 1 { 1 } else { n * factorial_sync(n - 1) }
     }
 
     /// 异步递归: 计算阶乘（使用 Box 实现）
@@ -261,10 +257,7 @@ pub mod tail_recursion {
     }
 
     /// 异步尾递归版本
-    pub fn factorial_async_tail(
-        n: u64,
-        acc: u64,
-    ) -> Pin<Box<dyn Future<Output = u64> + Send>> {
+    pub fn factorial_async_tail(n: u64, acc: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
         Box::pin(async move {
             if n <= 1 {
                 acc
@@ -401,8 +394,7 @@ pub mod tree_traversal {
                 Tree::Node(val, left, right) => {
                     sleep(Duration::from_micros(1)).await;
                     // 并发计算左右子树
-                    let (left_sum, right_sum) =
-                        futures::join!(sum_async(left), sum_async(right));
+                    let (left_sum, right_sum) = futures::join!(sum_async(left), sum_async(right));
                     val + left_sum + right_sum
                 }
             }
@@ -492,11 +484,7 @@ pub mod deep_recursion {
     /// 同步递归: 求和 1 到 n
     /// ⚠️ 注意: 深度过大会导致栈溢出
     pub fn sum_to_n_sync(n: u64) -> u64 {
-        if n == 0 {
-            0
-        } else {
-            n + sum_to_n_sync(n - 1)
-        }
+        if n == 0 { 0 } else { n + sum_to_n_sync(n - 1) }
     }
 
     /// 异步递归: 求和 1 到 n
@@ -595,20 +583,12 @@ pub mod mutual_recursion {
 
     /// 判断偶数（通过互递归）
     pub fn is_even_sync(n: u32) -> bool {
-        if n == 0 {
-            true
-        } else {
-            is_odd_sync(n - 1)
-        }
+        if n == 0 { true } else { is_odd_sync(n - 1) }
     }
 
     /// 判断奇数（通过互递归）
     pub fn is_odd_sync(n: u32) -> bool {
-        if n == 0 {
-            false
-        } else {
-            is_even_sync(n - 1)
-        }
+        if n == 0 { false } else { is_even_sync(n - 1) }
     }
 
     /// 异步版本: 判断偶数
@@ -713,4 +693,3 @@ mod tests {
         mutual_recursion::verify_mutual_recursion().await;
     }
 }
-

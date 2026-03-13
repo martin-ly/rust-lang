@@ -1,5 +1,5 @@
 use anyhow::Result;
-use futures::{stream::FuturesUnordered, StreamExt};
+use futures::{StreamExt, stream::FuturesUnordered};
 use smol::io::{AsyncReadExt, AsyncWriteExt};
 use smol::net::TcpListener;
 
@@ -17,11 +17,17 @@ fn main() -> Result<()> {
 
 /// 并发集合：FuturesUnordered 适合大量动态并发任务。
 async fn basic_concurrency() -> Result<()> {
-    async fn compute(i: usize) -> Result<usize> { Ok(i * 2) }
+    async fn compute(i: usize) -> Result<usize> {
+        Ok(i * 2)
+    }
     let mut futs = FuturesUnordered::new();
-    for i in 0..100 { futs.push(async move { compute(i).await }); }
+    for i in 0..100 {
+        futs.push(async move { compute(i).await });
+    }
     let mut acc = 0usize;
-    while let Some(v) = futs.next().await { acc += v?; }
+    while let Some(v) = futs.next().await {
+        acc += v?;
+    }
     println!("acc={}", acc);
     Ok(())
 }
@@ -37,14 +43,20 @@ async fn tcp_echo(addr: &str) -> Result<()> {
             smol::spawn(async move {
                 let mut buf = vec![0u8; 1024];
                 loop {
-                    match s.read(&mut buf).await { Ok(0) => break, Ok(n) => {
-                        if s.write_all(&buf[..n]).await.is_err() { break; }
-                    }, Err(_) => break }
+                    match s.read(&mut buf).await {
+                        Ok(0) => break,
+                        Ok(n) => {
+                            if s.write_all(&buf[..n]).await.is_err() {
+                                break;
+                            }
+                        }
+                        Err(_) => break,
+                    }
                 }
-            }).detach();
+            })
+            .detach();
         }
-    }).detach();
+    })
+    .detach();
     Ok(())
 }
-
-

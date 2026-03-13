@@ -296,11 +296,15 @@ fn interpolation_search(arr: &[i32], target: i32) -> Option<usize> {
 
     while left <= right && target >= arr[left] && target <= arr[right] {
         if left == right {
-            return if arr[left] == target { Some(left) } else { None };
+            return if arr[left] == target {
+                Some(left)
+            } else {
+                None
+            };
         }
 
-        let pos = left + ((target - arr[left]) as usize * (right - left))
-            / (arr[right] - arr[left]) as usize;
+        let pos = left
+            + ((target - arr[left]) as usize * (right - left)) / (arr[right] - arr[left]) as usize;
 
         if arr[pos] == target {
             return Some(pos);
@@ -442,9 +446,7 @@ fn knapsack_01(weights: &[i32], values: &[i32], capacity: i32) -> i32 {
     for i in 1..=n {
         for w in 0..=capacity as usize {
             if weights[i - 1] as usize <= w {
-                dp[i][w] = dp[i - 1][w].max(
-                    dp[i - 1][w - weights[i - 1] as usize] + values[i - 1]
-                );
+                dp[i][w] = dp[i - 1][w].max(dp[i - 1][w - weights[i - 1] as usize] + values[i - 1]);
             } else {
                 dp[i][w] = dp[i - 1][w];
             }

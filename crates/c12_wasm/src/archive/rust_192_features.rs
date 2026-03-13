@@ -140,10 +140,7 @@ impl<T> WasmObjectPool<T> {
 /// This function uses Rust 1.92.0 feature `div_ceil`. MSRV warnings are expected
 /// since clippy.toml specifies MSRV 1.90.0, but this crate requires Rust 1.92.0+.
 #[allow(clippy::min_ident_chars)] // MSRV difference: using Rust 1.92.0 feature
-pub fn calculate_buffer_chunks(
-    total_size: usize,
-    chunk_size: NonZeroUsize,
-) -> usize {
+pub fn calculate_buffer_chunks(total_size: usize, chunk_size: NonZeroUsize) -> usize {
     if total_size == 0 {
         return 0;
     }

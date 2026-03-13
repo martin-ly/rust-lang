@@ -1,5 +1,5 @@
 //! 网络编程模块性能基准测试 / Network Programming Module Performance Benchmarks
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 fn bench_network_operations(c: &mut Criterion) {
@@ -44,5 +44,11 @@ fn bench_protocol_operations(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, bench_network_operations, bench_packet_operations, bench_connection_operations, bench_protocol_operations);
+criterion_group!(
+    benches,
+    bench_network_operations,
+    bench_packet_operations,
+    bench_connection_operations,
+    bench_protocol_operations
+);
 criterion_main!(benches);

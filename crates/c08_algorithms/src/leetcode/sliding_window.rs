@@ -75,28 +75,28 @@ pub fn min_window(s: String, t: String) -> String {
     }
 
     use std::collections::HashMap;
-    
+
     // 统计 t 中每个字符的出现次数
     let mut need: HashMap<char, i32> = HashMap::new();
     for ch in t.chars() {
         *need.entry(ch).or_insert(0) += 1;
     }
-    
+
     let need_count = need.len();
     let mut window: HashMap<char, i32> = HashMap::new();
     let mut valid = 0;
-    
+
     let s_chars: Vec<char> = s.chars().collect();
     let mut left = 0;
     let mut right = 0;
     let mut start = 0;
     let mut len = usize::MAX;
-    
+
     // Rust 1.91 JIT 优化：滑动窗口
     while right < s_chars.len() {
         let c = s_chars[right];
         right += 1;
-        
+
         // 更新窗口
         if need.contains_key(&c) {
             *window.entry(c).or_insert(0) += 1;
@@ -104,7 +104,7 @@ pub fn min_window(s: String, t: String) -> String {
                 valid += 1;
             }
         }
-        
+
         // 收缩窗口
         while valid == need_count {
             // 更新最小覆盖子串
@@ -112,10 +112,10 @@ pub fn min_window(s: String, t: String) -> String {
                 start = left;
                 len = right - left;
             }
-            
+
             let d = s_chars[left];
             left += 1;
-            
+
             // 更新窗口
             if need.contains_key(&d) {
                 if window.get(&d) == need.get(&d) {
@@ -125,7 +125,7 @@ pub fn min_window(s: String, t: String) -> String {
             }
         }
     }
-    
+
     if len == usize::MAX {
         String::new()
     } else {
@@ -243,9 +243,10 @@ pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
     // Rust 1.91 JIT 优化：字符频率统计
     for ch in p.chars() {
         if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
-            && index < 26 {
-                p_counts[index as usize] += 1;
-            }
+            && index < 26
+        {
+            p_counts[index as usize] += 1;
+        }
     }
 
     let s_chars: Vec<char> = s.chars().collect();
@@ -254,16 +255,18 @@ pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
     for i in 0..s_chars.len() {
         // 添加右边字符
         if let Some(index) = (s_chars[i] as u32).checked_sub(b'a' as u32)
-            && index < 26 {
-                window_counts[index as usize] += 1;
-            }
+            && index < 26
+        {
+            window_counts[index as usize] += 1;
+        }
 
         // 移除左边字符（窗口大小超过 p_len）
         if i >= p_len
             && let Some(index) = (s_chars[i - p_len] as u32).checked_sub(b'a' as u32)
-                && index < 26 {
-                    window_counts[index as usize] -= 1;
-                }
+            && index < 26
+        {
+            window_counts[index as usize] -= 1;
+        }
 
         // 检查窗口是否为字母异位词（窗口大小达到 p_len 时开始检查）
         if i >= p_len - 1 {
@@ -311,9 +314,10 @@ pub fn check_inclusion(s1: String, s2: String) -> bool {
     // Rust 1.91 JIT 优化：字符频率统计
     for ch in s1.chars() {
         if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
-            && index < 26 {
-                s1_counts[index as usize] += 1;
-            }
+            && index < 26
+        {
+            s1_counts[index as usize] += 1;
+        }
     }
 
     let s2_chars: Vec<char> = s2.chars().collect();
@@ -322,16 +326,18 @@ pub fn check_inclusion(s1: String, s2: String) -> bool {
     for i in 0..s2_chars.len() {
         // 添加右边字符
         if let Some(index) = (s2_chars[i] as u32).checked_sub(b'a' as u32)
-            && index < 26 {
-                window_counts[index as usize] += 1;
-            }
+            && index < 26
+        {
+            window_counts[index as usize] += 1;
+        }
 
         // 移除左边字符（窗口大小超过 s1_len）
         if i >= s1_len
             && let Some(index) = (s2_chars[i - s1_len] as u32).checked_sub(b'a' as u32)
-                && index < 26 {
-                    window_counts[index as usize] -= 1;
-                }
+            && index < 26
+        {
+            window_counts[index as usize] -= 1;
+        }
 
         // 检查窗口是否为排列
         if i >= s1_len - 1 && window_counts == s1_counts {
@@ -587,7 +593,10 @@ mod tests {
 
     #[test]
     fn test_min_window() {
-        assert_eq!(min_window("ADOBECODEBANC".to_string(), "ABC".to_string()), "BANC");
+        assert_eq!(
+            min_window("ADOBECODEBANC".to_string(), "ABC".to_string()),
+            "BANC"
+        );
         assert_eq!(min_window("a".to_string(), "a".to_string()), "a");
         assert_eq!(min_window("a".to_string(), "aa".to_string()), "");
     }

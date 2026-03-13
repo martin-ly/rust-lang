@@ -1,12 +1,12 @@
 use anyhow::Result;
-use std::sync::Arc;
-use std::time::Duration;
-use tokio::sync::{RwLock, Mutex};
-use tokio::time::sleep;
-use tracing::{info, instrument};
 use c06_async::utils::metrics;
 use once_cell::sync::Lazy;
-use prometheus::{Registry, IntCounter, Histogram, HistogramOpts, Opts};
+use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};
+use std::sync::Arc;
+use std::time::Duration;
+use tokio::sync::{Mutex, RwLock};
+use tokio::time::sleep;
+use tracing::{info, instrument};
 
 /// 2025年高级异步设计模式演示
 /// 包含最新的异步编程模式和最佳实践
@@ -25,7 +25,9 @@ pub enum AsyncState {
 pub struct AsyncStateMachine {
     state: Arc<RwLock<AsyncState>>,
     transitions: Arc<Mutex<Vec<(AsyncState, AsyncState, String)>>>,
-    state_handlers: Arc<RwLock<std::collections::HashMap<AsyncState, Box<dyn Fn() -> Result<()> + Send + Sync>>>>,
+    state_handlers: Arc<
+        RwLock<std::collections::HashMap<AsyncState, Box<dyn Fn() -> Result<()> + Send + Sync>>>,
+    >,
 }
 
 impl AsyncStateMachine {
@@ -39,9 +41,13 @@ impl AsyncStateMachine {
 
     pub async fn transition(&self, from: AsyncState, to: AsyncState, reason: String) -> Result<()> {
         let current_state = self.state.read().await.clone();
-        
+
         if current_state != from {
-            return Err(anyhow::anyhow!("Invalid transition from {:?} to {:?}", current_state, to));
+            return Err(anyhow::anyhow!(
+                "Invalid transition from {:?} to {:?}",
+                current_state,
+                to
+            ));
         }
 
         // 记录转换
@@ -73,7 +79,10 @@ impl AsyncStateMachine {
     where
         F: Fn() -> Result<()> + Send + Sync + 'static,
     {
-        self.state_handlers.write().await.insert(state, Box::new(handler));
+        self.state_handlers
+            .write()
+            .await
+            .insert(state, Box::new(handler));
     }
 
     pub async fn get_transitions(&self) -> Vec<(AsyncState, AsyncState, String)> {
@@ -185,7 +194,7 @@ impl AsyncCommandInvoker {
 
         let mut history = self.history.write().await;
         let mut index = self.current_index.write().await;
-        
+
         // 移除当前位置之后的历史记录
         *index += 1;
         history.truncate(*index as usize);
@@ -213,7 +222,7 @@ impl AsyncCommandInvoker {
     pub async fn redo(&self) -> Result<()> {
         let mut index = self.current_index.write().await;
         let history = self.history.read().await;
-        
+
         if (*index + 1) < history.len() as isize {
             *index += 1;
             if let Some(command) = history.get(*index as usize) {
@@ -318,7 +327,8 @@ impl AsyncTarget for AsyncAdapter {
         let result = tokio::task::spawn_blocking({
             let adaptee = self.adaptee.clone();
             move || adaptee.sync_request()
-        }).await??;
+        })
+        .await??;
 
         Ok(result)
     }
@@ -413,7 +423,10 @@ impl AsyncFacade {
         let result_b = self.subsystem_b.operation_b().await?;
         let result_c = self.subsystem_c.operation_c().await?;
 
-        Ok(format!("Facade: {} + {} + {}", result_a, result_b, result_c))
+        Ok(format!(
+            "Facade: {} + {} + {}",
+            result_a, result_b, result_c
+        ))
     }
 }
 
@@ -424,13 +437,17 @@ pub struct AsyncSingleton {
 
 impl AsyncSingleton {
     pub async fn get_instance() -> Arc<Self> {
-        static INSTANCE: tokio::sync::OnceCell<Arc<AsyncSingleton>> = tokio::sync::OnceCell::const_new();
-        
-        INSTANCE.get_or_init(|| async {
-            Arc::new(Self {
-                data: Arc::new(RwLock::new("Singleton Data".to_string())),
+        static INSTANCE: tokio::sync::OnceCell<Arc<AsyncSingleton>> =
+            tokio::sync::OnceCell::const_new();
+
+        INSTANCE
+            .get_or_init(|| async {
+                Arc::new(Self {
+                    data: Arc::new(RwLock::new("Singleton Data".to_string())),
+                })
             })
-        }).await.clone()
+            .await
+            .clone()
     }
 
     pub async fn get_data(&self) -> String {
@@ -485,9 +502,15 @@ impl AsyncBuilder {
 
     pub fn build(self) -> Result<AsyncProduct> {
         Ok(AsyncProduct {
-            part_a: self.part_a.ok_or_else(|| anyhow::anyhow!("Missing part_a"))?,
-            part_b: self.part_b.ok_or_else(|| anyhow::anyhow!("Missing part_b"))?,
-            part_c: self.part_c.ok_or_else(|| anyhow::anyhow!("Missing part_c"))?,
+            part_a: self
+                .part_a
+                .ok_or_else(|| anyhow::anyhow!("Missing part_a"))?,
+            part_b: self
+                .part_b
+                .ok_or_else(|| anyhow::anyhow!("Missing part_b"))?,
+            part_c: self
+                .part_c
+                .ok_or_else(|| anyhow::anyhow!("Missing part_c"))?,
         })
     }
 }
@@ -530,7 +553,10 @@ impl AsyncStrategyB {
 impl AsyncStrategyC {
     pub async fn execute(&self, input: String) -> Result<String> {
         sleep(Duration::from_millis(200)).await;
-        Ok(format!("StrategyC: {}", input.chars().rev().collect::<String>()))
+        Ok(format!(
+            "StrategyC: {}",
+            input.chars().rev().collect::<String>()
+        ))
     }
 }
 
@@ -556,15 +582,17 @@ impl AsyncContext {
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志
-    tracing_subscriber::fmt()
-        .with_env_filter("info")
-        .init();
+    tracing_subscriber::fmt().with_env_filter("info").init();
 
     // 启动基础 /metrics 服务（仅用于本文件演示期间的观测，可选）
     let registry = Registry::new();
     // 注册通用 demo 指标（示例）：执行计数与耗时直方图
-    static DEMO_EXEC_TOTAL: Lazy<IntCounter> = Lazy::new(|| IntCounter::with_opts(Opts::new("demo_exec_total", "demo 执行总次数")).unwrap());
-    static DEMO_EXEC_SECONDS: Lazy<Histogram> = Lazy::new(|| Histogram::with_opts(HistogramOpts::new("demo_exec_seconds", "demo 执行耗时(秒)")).unwrap());
+    static DEMO_EXEC_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+        IntCounter::with_opts(Opts::new("demo_exec_total", "demo 执行总次数")).unwrap()
+    });
+    static DEMO_EXEC_SECONDS: Lazy<Histogram> = Lazy::new(|| {
+        Histogram::with_opts(HistogramOpts::new("demo_exec_seconds", "demo 执行耗时(秒)")).unwrap()
+    });
     let _ = registry.register(Box::new(DEMO_EXEC_TOTAL.clone()));
     let _ = registry.register(Box::new(DEMO_EXEC_SECONDS.clone()));
     let metrics_handle = tokio::spawn(metrics::serve_metrics(registry.clone(), "127.0.0.1:9899"));
@@ -663,36 +691,66 @@ async fn demo_async_state_machine() -> Result<()> {
     let state_machine = AsyncStateMachine::new(AsyncState::Idle);
 
     // 设置状态处理器
-    state_machine.set_handler(AsyncState::Loading, || {
-        info!("开始加载数据...");
-        Ok(())
-    }).await;
+    state_machine
+        .set_handler(AsyncState::Loading, || {
+            info!("开始加载数据...");
+            Ok(())
+        })
+        .await;
 
-    state_machine.set_handler(AsyncState::Ready, || {
-        info!("数据加载完成，准备就绪");
-        Ok(())
-    }).await;
+    state_machine
+        .set_handler(AsyncState::Ready, || {
+            info!("数据加载完成，准备就绪");
+            Ok(())
+        })
+        .await;
 
-    state_machine.set_handler(AsyncState::Processing, || {
-        info!("开始处理数据...");
-        Ok(())
-    }).await;
+    state_machine
+        .set_handler(AsyncState::Processing, || {
+            info!("开始处理数据...");
+            Ok(())
+        })
+        .await;
 
     // 执行状态转换
-    state_machine.transition(AsyncState::Idle, AsyncState::Loading, "开始加载".to_string()).await?;
+    state_machine
+        .transition(
+            AsyncState::Idle,
+            AsyncState::Loading,
+            "开始加载".to_string(),
+        )
+        .await?;
     sleep(Duration::from_millis(100)).await;
-    
-    state_machine.transition(AsyncState::Loading, AsyncState::Ready, "加载完成".to_string()).await?;
+
+    state_machine
+        .transition(
+            AsyncState::Loading,
+            AsyncState::Ready,
+            "加载完成".to_string(),
+        )
+        .await?;
     sleep(Duration::from_millis(50)).await;
-    
-    state_machine.transition(AsyncState::Ready, AsyncState::Processing, "开始处理".to_string()).await?;
+
+    state_machine
+        .transition(
+            AsyncState::Ready,
+            AsyncState::Processing,
+            "开始处理".to_string(),
+        )
+        .await?;
     sleep(Duration::from_millis(100)).await;
-    
-    state_machine.transition(AsyncState::Processing, AsyncState::Completed, "处理完成".to_string()).await?;
+
+    state_machine
+        .transition(
+            AsyncState::Processing,
+            AsyncState::Completed,
+            "处理完成".to_string(),
+        )
+        .await?;
 
     let final_state = state_machine.get_state().await;
     let transitions = state_machine.get_transitions().await;
-    
+
     info!("最终状态: {:?}", final_state);
     info!("状态转换历史: {:?}", transitions);
 
@@ -704,7 +762,7 @@ async fn demo_async_observer() -> Result<()> {
     info!("👀 演示异步观察者模式");
 
     let subject = AsyncSubject::new();
-    
+
     // 创建观察者
     let observer1 = AsyncObserver::EventLogger(AsyncEventLogger::new("Observer1".to_string()));
     let observer2 = AsyncObserver::EventLogger(AsyncEventLogger::new("Observer2".to_string()));
@@ -720,10 +778,10 @@ async fn demo_async_observer() -> Result<()> {
     // 发送事件
     subject.notify_all("Event1").await?;
     sleep(Duration::from_millis(50)).await;
-    
+
     subject.notify_all("Event2").await?;
     sleep(Duration::from_millis(50)).await;
-    
+
     subject.notify_all("Event3").await?;
 
     Ok(())
@@ -763,9 +821,15 @@ async fn demo_async_chain_of_responsibility() -> Result<()> {
     info!("⛓️ 演示异步责任链模式");
 
     let chain = AsyncChainBuilder::new()
-        .add_handler(AsyncHandler::Validation(AsyncValidationHandler::new("验证".to_string())))
-        .add_handler(AsyncHandler::Processing(AsyncProcessingHandler::new("处理".to_string())))
-        .add_handler(AsyncHandler::Logging(AsyncLoggingHandler::new("日志".to_string())))
+        .add_handler(AsyncHandler::Validation(AsyncValidationHandler::new(
+            "验证".to_string(),
+        )))
+        .add_handler(AsyncHandler::Processing(AsyncProcessingHandler::new(
+            "处理".to_string(),
+        )))
+        .add_handler(AsyncHandler::Logging(AsyncLoggingHandler::new(
+            "日志".to_string(),
+        )))
         .build();
 
     let result = chain.process("请求数据".to_string()).await?;
@@ -780,7 +844,7 @@ async fn demo_async_adapter() -> Result<()> {
 
     let adaptee = Arc::new(SyncAdapteeImpl);
     let adapter = AsyncAdapter::new(adaptee);
-    
+
     let result = adapter.async_request().await?;
     info!("适配器结果: {}", result);
 
@@ -792,9 +856,13 @@ async fn demo_async_decorator() -> Result<()> {
     info!("🎨 演示异步装饰器模式");
 
     let component = AsyncComponent::Concrete(AsyncConcreteComponent);
-    let decorated = AsyncComponent::Decorator(AsyncDecorator::new(component, "Decorated".to_string()));
-    let double_decorated = AsyncComponent::Decorator(AsyncDecorator::new(decorated, "DoubleDecorated".to_string()));
-    
+    let decorated =
+        AsyncComponent::Decorator(AsyncDecorator::new(component, "Decorated".to_string()));
+    let double_decorated = AsyncComponent::Decorator(AsyncDecorator::new(
+        decorated,
+        "DoubleDecorated".to_string(),
+    ));
+
     let result = double_decorated.operation().await?;
     info!("装饰器结果: {}", result);
 
@@ -822,7 +890,7 @@ async fn demo_async_singleton() -> Result<()> {
     // 验证是同一个实例
     singleton1.set_data("Singleton Data 1".to_string()).await;
     let data2 = singleton2.get_data().await;
-    
+
     info!("单例数据: {}", data2);
     assert_eq!(data2, "Singleton Data 1");
 
@@ -834,12 +902,18 @@ async fn demo_async_builder() -> Result<()> {
     info!("🔨 演示异步建造者模式");
 
     let product = AsyncBuilder::new()
-        .build_part_a("数据A".to_string()).await
-        .build_part_b("数据B".to_string()).await
-        .build_part_c("数据C".to_string()).await
+        .build_part_a("数据A".to_string())
+        .await
+        .build_part_b("数据B".to_string())
+        .await
+        .build_part_c("数据C".to_string())
+        .await
         .build()?;
 
-    info!("建造者结果: {} + {} + {}", product.part_a, product.part_b, product.part_c);
+    info!(
+        "建造者结果: {} + {} + {}",
+        product.part_a, product.part_b, product.part_c
+    );
 
     Ok(())
 }
@@ -849,7 +923,7 @@ async fn demo_async_strategy() -> Result<()> {
     info!("⚡ 演示异步策略模式");
 
     let mut context = AsyncContext::new(AsyncStrategy::StrategyA(AsyncStrategyA));
-    
+
     let result1 = context.execute_strategy("Hello World".to_string()).await?;
     info!("策略A结果: {}", result1);
 
@@ -979,8 +1053,10 @@ mod tests {
     async fn test_async_state_machine() {
         let sm = AsyncStateMachine::new(AsyncState::Idle);
         assert_eq!(sm.get_state().await, AsyncState::Idle);
-        
-        sm.transition(AsyncState::Idle, AsyncState::Loading, "test".to_string()).await.unwrap();
+
+        sm.transition(AsyncState::Idle, AsyncState::Loading, "test".to_string())
+            .await
+            .unwrap();
         assert_eq!(sm.get_state().await, AsyncState::Loading);
     }
 
@@ -988,7 +1064,7 @@ mod tests {
     async fn test_async_singleton() {
         let s1 = AsyncSingleton::get_instance().await;
         let s2 = AsyncSingleton::get_instance().await;
-        
+
         s1.set_data("test".to_string()).await;
         assert_eq!(s2.get_data().await, "test");
     }
@@ -996,11 +1072,15 @@ mod tests {
     #[tokio::test]
     async fn test_async_builder() {
         let product = AsyncBuilder::new()
-            .build_part_a("a".to_string()).await
-            .build_part_b("b".to_string()).await
-            .build_part_c("c".to_string()).await
-            .build().unwrap();
-            
+            .build_part_a("a".to_string())
+            .await
+            .build_part_b("b".to_string())
+            .await
+            .build_part_c("c".to_string())
+            .await
+            .build()
+            .unwrap();
+
         assert!(product.part_a.contains("AsyncPartA"));
         assert!(product.part_b.contains("AsyncPartB"));
         assert!(product.part_c.contains("AsyncPartC"));

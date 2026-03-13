@@ -5,5 +5,3 @@ fn main() {
     let v: Vec<i32> = make_pipeline_iter(&data).collect();
     println!("pipeline_iter_demo: {:?}", v);
 }
-
-

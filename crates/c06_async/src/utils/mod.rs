@@ -113,11 +113,14 @@ pub mod circuit_breaker;
 
 pub mod supervisor {
     use tokio::sync::broadcast;
-    use tokio::time::{sleep, Duration};
+    use tokio::time::{Duration, sleep};
     use tracing::{info, warn};
 
-    pub async fn supervise<F, Fut>(name: &'static str, mut factory: F, mut shutdown_rx: broadcast::Receiver<()>)
-    where
+    pub async fn supervise<F, Fut>(
+        name: &'static str,
+        mut factory: F,
+        mut shutdown_rx: broadcast::Receiver<()>,
+    ) where
         F: FnMut() -> Fut + Send + 'static,
         Fut: std::future::Future<Output = anyhow::Result<()>> + Send,
     {
@@ -179,7 +182,10 @@ pub struct ExecHelper {
 
 impl ExecHelper {
     pub fn new(concurrency: usize) -> Self {
-        Self { limiter: SemaphoreLimiter::new(concurrency), breaker: None }
+        Self {
+            limiter: SemaphoreLimiter::new(concurrency),
+            breaker: None,
+        }
     }
 
     pub fn with_breaker(mut self, breaker: circuit_breaker::CircuitBreaker) -> Self {
@@ -206,16 +212,19 @@ impl ExecHelper {
         };
 
         // 统一为一个 Boxed Future，避免 async block 类型不一致
-        use std::pin::Pin;
         use std::future::Future as StdFuture;
-        let fut: Pin<Box<dyn StdFuture<Output = Result<T, E>> + Send>> = if let Some(breaker) = &self.breaker {
-            let b = breaker.clone();
-            Box::pin(async move { b.run(fut).await })
-        } else {
-            Box::pin(fut)
-        };
+        use std::pin::Pin;
+        let fut: Pin<Box<dyn StdFuture<Output = Result<T, E>> + Send>> =
+            if let Some(breaker) = &self.breaker {
+                let b = breaker.clone();
+                Box::pin(async move { b.run(fut).await })
+            } else {
+                Box::pin(fut)
+            };
 
-        let run = self.limiter.run(async move { with_timeout(timeout, fut).await });
+        let run = self
+            .limiter
+            .run(async move { with_timeout(timeout, fut).await });
         match run.await {
             Some(Ok(v)) => Ok(Some(v)),
             Some(Err(e)) => Err(e),
@@ -258,14 +267,15 @@ impl ExecHelper {
             }
         };
 
-        use std::pin::Pin;
         use std::future::Future as StdFuture;
-        let fut: Pin<Box<dyn StdFuture<Output = Result<T, E>> + Send>> = if let Some(breaker) = &self.breaker {
-            let b = breaker.clone();
-            Box::pin(async move { b.run(fut).await })
-        } else {
-            Box::pin(fut)
-        };
+        use std::pin::Pin;
+        let fut: Pin<Box<dyn StdFuture<Output = Result<T, E>> + Send>> =
+            if let Some(breaker) = &self.breaker {
+                let b = breaker.clone();
+                Box::pin(async move { b.run(fut).await })
+            } else {
+                Box::pin(fut)
+            };
 
         // 将截止时间转为剩余超时，执行检查
         let now = std::time::Instant::now();
@@ -273,7 +283,10 @@ impl ExecHelper {
             return Ok(None);
         }
         let remain = deadline - now;
-        let res = self.limiter.run(async { tokio::time::timeout(remain, fut).await }).await;
+        let res = self
+            .limiter
+            .run(async { tokio::time::timeout(remain, fut).await })
+            .await;
         match res {
             Ok(Ok(v)) => Ok(Some(v)),
             Ok(Err(e)) => Err(e),
@@ -312,13 +325,36 @@ impl ExecStrategyBuilder {
             token_bucket: None,
         }
     }
-    pub fn concurrency(mut self, c: usize) -> Self { self.concurrency = c; self }
-    pub fn attempts(mut self, n: u32) -> Self { self.max_attempts = n; self }
-    pub fn start_delay(mut self, d: Duration) -> Self { self.start_delay = d; self }
-    pub fn timeout(mut self, d: Duration) -> Self { self.timeout = Some(d); self.deadline = None; self }
-    pub fn deadline(mut self, t: std::time::Instant) -> Self { self.deadline = Some(t); self.timeout = None; self }
-    pub fn breaker(mut self, b: circuit_breaker::CircuitBreaker) -> Self { self.breaker = Some(b); self }
-    pub fn token_bucket(mut self, b: SimpleTokenBucket) -> Self { self.token_bucket = Some(b); self }
+    pub fn concurrency(mut self, c: usize) -> Self {
+        self.concurrency = c;
+        self
+    }
+    pub fn attempts(mut self, n: u32) -> Self {
+        self.max_attempts = n;
+        self
+    }
+    pub fn start_delay(mut self, d: Duration) -> Self {
+        self.start_delay = d;
+        self
+    }
+    pub fn timeout(mut self, d: Duration) -> Self {
+        self.timeout = Some(d);
+        self.deadline = None;
+        self
+    }
+    pub fn deadline(mut self, t: std::time::Instant) -> Self {
+        self.deadline = Some(t);
+        self.timeout = None;
+        self
+    }
+    pub fn breaker(mut self, b: circuit_breaker::CircuitBreaker) -> Self {
+        self.breaker = Some(b);
+        self
+    }
+    pub fn token_bucket(mut self, b: SimpleTokenBucket) -> Self {
+        self.token_bucket = Some(b);
+        self
+    }
 
     pub fn build(self) -> ExecStrategyRunner {
         ExecStrategyRunner {
@@ -353,7 +389,11 @@ impl ExecStrategyBuilder {
             let threshold = cfg.breaker_threshold.unwrap_or(5) as u64;
             let window = Duration::from_millis(cfg.breaker_window_ms.unwrap_or(30000));
             let half_open_max = cfg.breaker_half_open_max_calls.unwrap_or(3);
-            b = b.breaker(circuit_breaker::CircuitBreaker::new_with_half_open_max(threshold, window, half_open_max));
+            b = b.breaker(circuit_breaker::CircuitBreaker::new_with_half_open_max(
+                threshold,
+                window,
+                half_open_max,
+            ));
         }
 
         b
@@ -395,16 +435,48 @@ impl ExecStrategyRunner {
             tb.acquire(1).await;
         }
         match (self.timeout, self.deadline, is_retryable) {
-            (Some(to), _, None) => self.helper.run_with_policies(make_fut, self.max_attempts, self.start_delay, to).await,
-            (None, Some(dl), None) => self.helper.run_with_decider_and_deadline(make_fut, |_e: &E| true, self.max_attempts, self.start_delay, dl).await,
+            (Some(to), _, None) => {
+                self.helper
+                    .run_with_policies(make_fut, self.max_attempts, self.start_delay, to)
+                    .await
+            }
+            (None, Some(dl), None) => {
+                self.helper
+                    .run_with_decider_and_deadline(
+                        make_fut,
+                        |_e: &E| true,
+                        self.max_attempts,
+                        self.start_delay,
+                        dl,
+                    )
+                    .await
+            }
             (Some(to), _, Some(decider)) => {
                 // 使用 deadline 近似：多次切片在 to 内
                 let dl = std::time::Instant::now() + to;
                 // 将 decider 包装在 Mutex 中以便可变借用
                 let d = std::sync::Mutex::new(decider);
-                self.helper.run_with_decider_and_deadline(make_fut, move |e| (d.lock().unwrap())(e), self.max_attempts, self.start_delay, dl).await
+                self.helper
+                    .run_with_decider_and_deadline(
+                        make_fut,
+                        move |e| (d.lock().unwrap())(e),
+                        self.max_attempts,
+                        self.start_delay,
+                        dl,
+                    )
+                    .await
             }
-            (None, Some(dl), Some(decider)) => self.helper.run_with_decider_and_deadline(make_fut, decider, self.max_attempts, self.start_delay, dl).await,
+            (None, Some(dl), Some(decider)) => {
+                self.helper
+                    .run_with_decider_and_deadline(
+                        make_fut,
+                        decider,
+                        self.max_attempts,
+                        self.start_delay,
+                        dl,
+                    )
+                    .await
+            }
             _ => unreachable!("必须设置 timeout 或 deadline 其一"),
         }
     }

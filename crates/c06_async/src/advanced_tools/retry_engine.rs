@@ -1,17 +1,17 @@
 //! 智能重试引擎
-//! 
+//!
 //! 提供高级重试机制：
 //! - 多种重试策略（指数退避、线性退避、固定间隔）
 //! - 智能错误分类
 //! - 断路器集成
 //! - 重试监控和统计
 //! - 自定义重试条件
+use anyhow::Result;
+use futures::Future;
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::time::{sleep, timeout};
-use futures::Future;
-use anyhow::Result;
-use serde::{Serialize, Deserialize};
 
 /// 重试策略
 #[derive(Debug, Clone)]
@@ -22,7 +22,7 @@ pub enum RetryStrategy {
     Linear(Duration, Duration), // (初始间隔, 最大间隔)
     /// 指数退避重试
     Exponential(Duration, f64, Duration), // (初始间隔, 倍数, 最大间隔)
-    // 注意：Custom 变体被移除，因为 dyn Trait 无法实现 Debug 和 Clone
+                                          // 注意：Custom 变体被移除，因为 dyn Trait 无法实现 Debug 和 Clone
 }
 
 /// 退避策略 trait
@@ -97,8 +97,7 @@ impl RetryBackoff for ExponentialBackoff {
 }
 
 /// 重试条件
-#[derive(Debug, Clone)]
-#[derive(Default)]
+#[derive(Debug, Clone, Default)]
 pub enum RetryCondition {
     /// 总是重试
     #[default]
@@ -108,7 +107,6 @@ pub enum RetryCondition {
     /// 根据错误消息重试
     OnErrorMessage(String),
 }
-
 
 /// 重试配置
 #[derive(Debug, Clone)]
@@ -201,11 +199,11 @@ impl RetryEngine {
                     // 成功，更新统计信息并返回
                     let total_time = start_time.elapsed();
                     let attempt_time = attempt_start.elapsed();
-                    
+
                     self.update_stats(true, attempt_time, total_time).await;
-                    
+
                     let stats = self.get_stats().await;
-                    
+
                     return RetryResult {
                         result: Ok(value),
                         attempts,
@@ -216,15 +214,15 @@ impl RetryEngine {
                 Err(error) => {
                     _last_error = Some(error);
                     let attempt_time = attempt_start.elapsed();
-                    
+
                     // 检查是否应该重试
                     if attempts >= self.config.max_attempts {
                         // 达到最大重试次数，失败
                         let total_time = start_time.elapsed();
                         self.update_stats(false, attempt_time, total_time).await;
-                        
+
                         let stats = self.get_stats().await;
-                        
+
                         return RetryResult {
                             result: Err(_last_error.unwrap()),
                             attempts,
@@ -237,9 +235,9 @@ impl RetryEngine {
                     if !self.should_retry(_last_error.as_ref().unwrap()) {
                         let total_time = start_time.elapsed();
                         self.update_stats(false, attempt_time, total_time).await;
-                        
+
                         let stats = self.get_stats().await;
-                        
+
                         return RetryResult {
                             result: Err(_last_error.unwrap()),
                             attempts,
@@ -250,10 +248,10 @@ impl RetryEngine {
 
                     // 计算重试延迟
                     let delay = self.calculate_delay(attempts);
-                    
+
                     // 更新统计信息
                     self.update_stats(false, attempt_time, Duration::ZERO).await;
-                    
+
                     // 等待重试
                     sleep(delay).await;
                 }
@@ -281,9 +279,7 @@ impl RetryEngine {
                 let error_type = error.to_string();
                 types.iter().any(|t| error_type.contains(t))
             }
-            RetryCondition::OnErrorMessage(message) => {
-                error.to_string().contains(message)
-            }
+            RetryCondition::OnErrorMessage(message) => error.to_string().contains(message),
         }
     }
 
@@ -298,8 +294,7 @@ impl RetryEngine {
                 let delay_ms = initial.as_millis() as f64 * multiplier.powi(attempt as i32);
                 let delay = Duration::from_millis(delay_ms as u64);
                 delay.min(*max)
-            }
-            // 注意：Custom 变体已被移除，这里不再需要默认分支
+            } // 注意：Custom 变体已被移除，这里不再需要默认分支
         };
 
         if self.config.jitter {
@@ -315,28 +310,28 @@ impl RetryEngine {
 
     async fn update_stats(&self, success: bool, _attempt_time: Duration, total_time: Duration) {
         let mut stats = self.stats.lock().await;
-        
+
         stats.total_attempts += 1;
-        
+
         if success {
             stats.successful_attempts += 1;
         } else {
             stats.failed_attempts += 1;
         }
-        
+
         stats.total_retry_time += total_time;
-        
+
         if stats.max_retry_time < total_time {
             stats.max_retry_time = total_time;
         }
-        
+
         if stats.min_retry_time == Duration::ZERO || stats.min_retry_time > total_time {
             stats.min_retry_time = total_time;
         }
-        
+
         if stats.successful_attempts > 0 {
             stats.avg_retry_time = Duration::from_nanos(
-                stats.total_retry_time.as_nanos() as u64 / stats.successful_attempts as u64
+                stats.total_retry_time.as_nanos() as u64 / stats.successful_attempts as u64,
             );
         }
     }
@@ -400,9 +395,7 @@ impl Default for RetryEngineBuilder {
 /// 便捷宏用于快速创建重试操作
 #[macro_export]
 macro_rules! retry {
-    ($engine:expr, $operation:expr) => {{
-        $engine.execute(|| async { $operation }).await
-    }};
+    ($engine:expr, $operation:expr) => {{ $engine.execute(|| async { $operation }).await }};
 }
 
 #[cfg(test)]
@@ -425,18 +418,20 @@ mod tests {
         let attempt_count = Arc::new(Mutex::new(0));
 
         let attempt_count_clone = Arc::clone(&attempt_count);
-        let result: RetryResult<String> = engine.execute(move || {
-            let attempt_count = Arc::clone(&attempt_count_clone);
-            async move {
-                let mut count = attempt_count.lock().await;
-                *count += 1;
-                if *count < 3 {
-                    Err(anyhow::anyhow!("模拟错误"))
-                } else {
-                    Ok("成功".to_string())
+        let result: RetryResult<String> = engine
+            .execute(move || {
+                let attempt_count = Arc::clone(&attempt_count_clone);
+                async move {
+                    let mut count = attempt_count.lock().await;
+                    *count += 1;
+                    if *count < 3 {
+                        Err(anyhow::anyhow!("模拟错误"))
+                    } else {
+                        Ok("成功".to_string())
+                    }
                 }
-            }
-        }).await;
+            })
+            .await;
 
         assert!(result.result.is_ok());
         assert_eq!(result.attempts, 3);
@@ -463,23 +458,25 @@ mod tests {
 
         let start = Instant::now();
         let attempt_count_clone = Arc::clone(&attempt_count);
-        let result: RetryResult<String> = engine.execute(move || {
-            let attempt_count = Arc::clone(&attempt_count_clone);
-            async move {
-                let mut count = attempt_count.lock().await;
-                *count += 1;
-                if *count < 4 {
-                    Err(anyhow::anyhow!("模拟错误"))
-                } else {
-                    Ok("成功".to_string())
+        let result: RetryResult<String> = engine
+            .execute(move || {
+                let attempt_count = Arc::clone(&attempt_count_clone);
+                async move {
+                    let mut count = attempt_count.lock().await;
+                    *count += 1;
+                    if *count < 4 {
+                        Err(anyhow::anyhow!("模拟错误"))
+                    } else {
+                        Ok("成功".to_string())
+                    }
                 }
-            }
-        }).await;
+            })
+            .await;
         let total_time = start.elapsed();
 
         assert!(result.result.is_ok());
         assert_eq!(result.attempts, 4);
-        
+
         // 验证指数退避：100ms + 200ms + 400ms = 700ms (加上执行时间)
         assert!(total_time >= Duration::from_millis(700));
         assert!(total_time < Duration::from_millis(1000));
@@ -501,14 +498,16 @@ mod tests {
 
         // 应该重试的错误
         let attempt_count_clone = Arc::clone(&attempt_count);
-        let result1: RetryResult<String> = engine.execute(move || {
-            let attempt_count = Arc::clone(&attempt_count_clone);
-            async move {
-                let mut count = attempt_count.lock().await;
-                *count += 1;
-                Err(anyhow::anyhow!("这是一个可重试的错误"))
-            }
-        }).await;
+        let result1: RetryResult<String> = engine
+            .execute(move || {
+                let attempt_count = Arc::clone(&attempt_count_clone);
+                async move {
+                    let mut count = attempt_count.lock().await;
+                    *count += 1;
+                    Err(anyhow::anyhow!("这是一个可重试的错误"))
+                }
+            })
+            .await;
 
         assert!(result1.result.is_err());
         assert_eq!(result1.attempts, 3); // 应该重试3次
@@ -518,14 +517,16 @@ mod tests {
 
         // 不应该重试的错误
         let attempt_count_clone2 = Arc::clone(&attempt_count);
-        let result2: RetryResult<String> = engine.execute(move || {
-            let attempt_count = Arc::clone(&attempt_count_clone2);
-            async move {
-                let mut count = attempt_count.lock().await;
-                *count += 1;
-                Err(anyhow::anyhow!("这是一个不可重试的错误"))
-            }
-        }).await;
+        let result2: RetryResult<String> = engine
+            .execute(move || {
+                let attempt_count = Arc::clone(&attempt_count_clone2);
+                async move {
+                    let mut count = attempt_count.lock().await;
+                    *count += 1;
+                    Err(anyhow::anyhow!("这是一个不可重试的错误"))
+                }
+            })
+            .await;
 
         assert!(result2.result.is_err());
         assert_eq!(result2.attempts, 1); // 只尝试1次

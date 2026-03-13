@@ -33,7 +33,7 @@
 use std::time::Duration;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpListener;
-use tokio::time::{sleep, Instant};
+use tokio::time::{Instant, sleep};
 
 /// 异步 TCP 服务器
 ///
@@ -103,9 +103,7 @@ async fn concurrent_requests() -> Result<(), Box<dyn std::error::Error>> {
     let start = Instant::now();
 
     // 使用 join_all 并发执行
-    let futures: Vec<_> = urls.iter()
-        .map(|url| async_http_client(url))
-        .collect();
+    let futures: Vec<_> = urls.iter().map(|url| async_http_client(url)).collect();
 
     let results = futures::future::join_all(futures).await;
 
@@ -155,9 +153,7 @@ async fn stream_processing() -> Result<(), Box<dyn std::error::Error>> {
 
     use tokio_stream::StreamExt;
 
-    let mut stream = tokio_stream::iter(1..=10)
-        .map(|x| x * 2)
-        .filter(|&x| x > 5);
+    let mut stream = tokio_stream::iter(1..=10).map(|x| x * 2).filter(|&x| x > 5);
 
     while let Some(value) = stream.next().await {
         println!("  📊 处理值: {}", value);

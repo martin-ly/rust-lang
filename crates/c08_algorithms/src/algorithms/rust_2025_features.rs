@@ -2,9 +2,9 @@
 //!
 //! 本模块展示了如何在算法实现中充分利用 Rust 2025 的最新特性，
 //! 包括异步闭包、RPITIT、AFIT、TAIT、生成器等。
+use futures::StreamExt;
 use std::future::Future;
 use std::pin::Pin;
-use futures::StreamExt;
 
 /// Rust 2025 异步闭包示例
 ///
@@ -28,24 +28,31 @@ impl AsyncClosureAlgorithms {
 
         // 将数据分块处理
         let chunk_size = (data.len() / num_cpus::get()).max(1);
-        let chunks: Vec<Vec<T>> = data.chunks(chunk_size).map(|chunk| chunk.to_vec()).collect();
+        let chunks: Vec<Vec<T>> = data
+            .chunks(chunk_size)
+            .map(|chunk| chunk.to_vec())
+            .collect();
 
         // 并行处理每个块
-        let futures: Vec<_> = chunks.into_iter().map(|chunk| {
-            let mapper = mapper.clone();
-            task::spawn(async move {
-                let mut results = Vec::new();
-                for item in chunk {
-                    let result = mapper(item).await;
-                    results.push(result);
-                }
-                results
+        let futures: Vec<_> = chunks
+            .into_iter()
+            .map(|chunk| {
+                let mapper = mapper.clone();
+                task::spawn(async move {
+                    let mut results = Vec::new();
+                    for item in chunk {
+                        let result = mapper(item).await;
+                        results.push(result);
+                    }
+                    results
+                })
             })
-        }).collect();
+            .collect();
 
         // 等待所有任务完成并合并结果
         let results: Result<Vec<Vec<R>>, _> = futures::future::try_join_all(futures).await;
-        let results = results.map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)?;
+        let results =
+            results.map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)?;
 
         Ok(results.into_iter().flatten().collect())
     }
@@ -118,7 +125,10 @@ impl GeneratorAlgorithms {
     /// 使用生成器的组合生成器
     ///
     /// 这个函数展示了如何使用生成器来创建组合生成器
-    pub fn combinations_generator<T: Clone>(items: Vec<T>, k: usize) -> impl Iterator<Item = Vec<T>> {
+    pub fn combinations_generator<T: Clone>(
+        items: Vec<T>,
+        k: usize,
+    ) -> impl Iterator<Item = Vec<T>> {
         let n = items.len();
         let mut indices = (0..k).collect::<Vec<_>>();
         let mut has_next = k <= n;
@@ -201,9 +211,9 @@ impl ConstContextAlgorithms {
     /// 在 Rust 1.91 中，可以在 const 上下文中引用非静态常量
     pub const fn demonstrate_const_refs() {
         const _VALUE: u32 = 42;
-        const _REF: &u32 = &_VALUE;  // ✅ Rust 1.91 新特性
-        const _DOUBLE: u32 = *_REF * 2;  // ✅ Rust 1.91 新特性
-        const _RESULT: u32 = _DOUBLE;  // 使用结果
+        const _REF: &u32 = &_VALUE; // ✅ Rust 1.91 新特性
+        const _DOUBLE: u32 = *_REF * 2; // ✅ Rust 1.91 新特性
+        const _RESULT: u32 = _DOUBLE; // 使用结果
     }
 
     /// Rust 1.91 新增：编译时配置计算
@@ -215,7 +225,7 @@ impl ConstContextAlgorithms {
         // Rust 1.91: 可以创建对计算结果的引用
         const _SIZE_REF: &usize = &_TOTAL_SIZE;
         const _SIZE_DOUBLED: usize = *_SIZE_REF * 2;
-        const _CONFIG_SIZE: usize = _SIZE_DOUBLED;  // 使用配置大小
+        const _CONFIG_SIZE: usize = _SIZE_DOUBLED; // 使用配置大小
     }
 }
 
@@ -378,7 +388,10 @@ impl PerformanceOptimizedAlgorithms {
     /// 使用 SIMD 优化的向量加法
     ///
     /// 这个函数展示了如何使用 SIMD 指令来优化向量运算
-    pub fn simd_vector_add(a: &[f32], b: &[f32]) -> Result<Vec<f32>, Box<dyn std::error::Error + Send + Sync>> {
+    pub fn simd_vector_add(
+        a: &[f32],
+        b: &[f32],
+    ) -> Result<Vec<f32>, Box<dyn std::error::Error + Send + Sync>> {
         if a.len() != b.len() {
             return Err("向量长度不匹配".into());
         }
@@ -413,9 +426,8 @@ mod tests {
     #[tokio::test]
     async fn test_async_closure_algorithms() {
         let data = vec![1, 2, 3, 4, 5];
-        let mapper = |x: i32| {
-            Box::pin(async move { x * 2 }) as Pin<Box<dyn Future<Output = i32> + Send>>
-        };
+        let mapper =
+            |x: i32| Box::pin(async move { x * 2 }) as Pin<Box<dyn Future<Output = i32> + Send>>;
 
         let result = AsyncClosureAlgorithms::parallel_map_async(data, mapper).await;
         assert!(result.is_ok());

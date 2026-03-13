@@ -57,7 +57,9 @@ pub fn sort_colors(nums: &mut [i32]) {
 }
 
 /// 148. Sort List（排序链表）
-pub fn sort_list_sorting(head: Option<Box<crate::leetcode::linked_list::ListNode>>) -> Option<Box<crate::leetcode::linked_list::ListNode>> {
+pub fn sort_list_sorting(
+    head: Option<Box<crate::leetcode::linked_list::ListNode>>,
+) -> Option<Box<crate::leetcode::linked_list::ListNode>> {
     use crate::leetcode::linked_list::ListNode;
 
     // 收集所有值
@@ -255,7 +257,10 @@ mod tests {
 
     #[test]
     fn test_is_anagram_sorting() {
-        assert!(is_anagram_sorting("anagram".to_string(), "nagaram".to_string()));
+        assert!(is_anagram_sorting(
+            "anagram".to_string(),
+            "nagaram".to_string()
+        ));
         assert!(!is_anagram_sorting("rat".to_string(), "car".to_string()));
     }
 }

@@ -401,7 +401,6 @@ pub mod wasm_compilation_optimizations {
         code_size: usize,
         use_optimizations: bool,
     ) -> WasmCompilationStats {
-
         // Rust 1.91 优化：类型检查器性能提升
         let type_check_time = if use_optimizations {
             // Rust 1.91: 类型检查时间减少 10-20%
@@ -608,10 +607,7 @@ pub mod wasm_runtime_optimizations {
     }
 
     /// 模拟 WASM 运行时执行（展示性能改进）
-    pub fn simulate_wasm_execution(
-        iterations: usize,
-        use_optimizations: bool,
-    ) -> WasmRuntimeStats {
+    pub fn simulate_wasm_execution(iterations: usize, use_optimizations: bool) -> WasmRuntimeStats {
         // Rust 1.91 JIT 优化：迭代器操作性能提升 10-25%
         let base_time_per_iteration = if use_optimizations {
             100 // 优化的执行时间
@@ -652,8 +648,8 @@ pub mod wasm_runtime_optimizations {
             let stats_without = simulate_wasm_execution(iter, false);
             let stats_with = simulate_wasm_execution(iter, true);
 
-            let exec_improvement = ((stats_without.execution_time_us
-                - stats_with.execution_time_us) as f64
+            let exec_improvement = ((stats_without.execution_time_us - stats_with.execution_time_us)
+                as f64
                 / stats_without.execution_time_us as f64)
                 * 100.0;
 

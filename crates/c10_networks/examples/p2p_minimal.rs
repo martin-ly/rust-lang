@@ -84,10 +84,9 @@ async fn main() -> anyhow::Result<()> {
     let identify = identify::Behaviour::new(identify::Config::new("c10/1.0".into(), key.public()));
 
     // 从环境变量读取配置
-    let topic_name = std::env::var("C10_P2P_TOPIC")
-        .unwrap_or_else(|_| "c10-demo".to_string());
-    let listen_addr = std::env::var("C10_P2P_LISTEN_ADDR")
-        .unwrap_or_else(|_| "/ip4/0.0.0.0/tcp/0".to_string());
+    let topic_name = std::env::var("C10_P2P_TOPIC").unwrap_or_else(|_| "c10-demo".to_string());
+    let listen_addr =
+        std::env::var("C10_P2P_LISTEN_ADDR").unwrap_or_else(|_| "/ip4/0.0.0.0/tcp/0".to_string());
     let publish_interval_secs = std::env::var("C10_P2P_PUBLISH_INTERVAL")
         .ok()
         .and_then(|s| s.parse().ok())

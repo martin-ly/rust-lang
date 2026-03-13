@@ -545,7 +545,9 @@ pub fn create_generic_vectors<T>(data: Vec<Vec<T>>) -> Vec<GenericVector<T>>
 where
     T: Clone + Send + Sync + 'static,
 {
-    data.into_iter().map(|items| GenericVector::from_vec(items)).collect()
+    data.into_iter()
+        .map(|items| GenericVector::from_vec(items))
+        .collect()
 }
 
 /// 从多个转换器创建转换器链
@@ -725,7 +727,11 @@ pub fn filter_batch<T, F: GenericFilter<T>>(filter: &F, values: &[T]) -> Vec<T>
 where
     T: Clone,
 {
-    values.iter().filter(|v| filter.filter(v)).cloned().collect()
+    values
+        .iter()
+        .filter(|v| filter.filter(v))
+        .cloned()
+        .collect()
 }
 
 // ==================== 10. 泛型组合和链式操作 ====================
@@ -766,11 +772,7 @@ impl<T> GenericChainBuilder<T> {
     }
 
     pub fn filter<F: FnOnce(&T) -> bool>(self, f: F) -> Option<GenericChainBuilder<T>> {
-        if f(&self.value) {
-            Some(self)
-        } else {
-            None
-        }
+        if f(&self.value) { Some(self) } else { None }
     }
 
     pub fn unwrap(self) -> T {
@@ -783,7 +785,10 @@ impl<T> GenericChainBuilder<T> {
 }
 
 impl<T> GenericChainBuilder<T> {
-    pub fn and_then<U, F: FnOnce(T) -> GenericChainBuilder<U>>(self, f: F) -> GenericChainBuilder<U> {
+    pub fn and_then<U, F: FnOnce(T) -> GenericChainBuilder<U>>(
+        self,
+        f: F,
+    ) -> GenericChainBuilder<U> {
         f(self.value)
     }
 
@@ -1070,8 +1075,14 @@ pub fn demonstrate_rust_192_generic_features() {
     let col1 = vec![1, 2, 3, 4, 5];
     let col2 = vec![1, 2, 3, 4, 5];
     let col3 = vec![1, 2, 3, 4, 6];
-    println!("   col1 == col2: {}", compare_generic_collections(&col1, &col2));
-    println!("   col1 == col3: {}", compare_generic_collections(&col1, &col3));
+    println!(
+        "   col1 == col2: {}",
+        compare_generic_collections(&col1, &col2)
+    );
+    println!(
+        "   col1 == col3: {}",
+        compare_generic_collections(&col1, &col3)
+    );
 
     let validator = GenericCollectionValidator::new(vec![1, 2, 3]);
     println!("   验证 [1, 2, 3]: {}", validator.validate(&[1, 2, 3]));

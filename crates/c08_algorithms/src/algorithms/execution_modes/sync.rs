@@ -1,8 +1,8 @@
 //! # 同步算法执行模式
-//! 
+//!
 //! 本模块实现同步算法执行，提供传统的单线程算法执行方式。
 //! 适用于 CPU 密集型任务和需要确定性执行顺序的场景。
-use super::{SyncAlgorithm, ExecutionResult};
+use super::{ExecutionResult, SyncAlgorithm};
 use std::time::Instant;
 
 /// 同步算法执行器
@@ -20,13 +20,13 @@ impl SyncExecutor {
     {
         let start = Instant::now();
         let memory_before = get_memory_usage();
-        
+
         let result = algorithm.execute(input)?;
-        
+
         let execution_time = start.elapsed();
         let memory_after = get_memory_usage();
         let memory_usage = memory_after.saturating_sub(memory_before);
-        
+
         Ok(ExecutionResult {
             result,
             execution_time,
@@ -148,8 +148,9 @@ impl<T> SyncExecutionStats<T> {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
         }
-        
-        self.execution_time_std_dev.as_nanos() as f64 / self.average_execution_time.as_nanos() as f64
+
+        self.execution_time_std_dev.as_nanos() as f64
+            / self.average_execution_time.as_nanos() as f64
     }
 }
 
@@ -223,13 +224,12 @@ impl<T> BenchmarkResults<T> {
 
     /// 获取最稳定性能的测试用例
     pub fn most_stable(&self) -> Option<&BenchmarkResult<T>> {
-        self.results
-            .iter()
-            .min_by(|a, b| {
-                a.stats.performance_stability()
-                    .partial_cmp(&b.stats.performance_stability())
-                    .unwrap_or(std::cmp::Ordering::Equal)
-            })
+        self.results.iter().min_by(|a, b| {
+            a.stats
+                .performance_stability()
+                .partial_cmp(&b.stats.performance_stability())
+                .unwrap_or(std::cmp::Ordering::Equal)
+        })
     }
 
     /// 生成性能报告

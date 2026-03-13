@@ -8,10 +8,7 @@ fn main() -> Result<()> {
 
     let mut env = HashMap::new();
     if cfg!(windows) {
-        env.insert(
-            "PATH".to_string(),
-            "C:Windows\\System32".to_string(),
-        ); // 占位，不依赖 PATH
+        env.insert("PATH".to_string(), "C:Windows\\System32".to_string()); // 占位，不依赖 PATH
     } else {
         env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
     }

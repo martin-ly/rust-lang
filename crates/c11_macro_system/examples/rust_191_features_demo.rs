@@ -146,7 +146,7 @@ fn demo_improved_macro_errors() {
     println!("\n6. 改进的宏错误消息（开发体验提升）");
     println!("   Rust 1.91: 提供更详细、更有帮助的错误消息\n");
 
-    use improved_macro_errors::{MacroError, ImprovedMacroErrorFormatter};
+    use improved_macro_errors::{ImprovedMacroErrorFormatter, MacroError};
 
     let errors = vec![
         MacroError::ArgumentCount {
@@ -169,7 +169,10 @@ fn demo_improved_macro_errors() {
         println!("   错误 {}:", i + 1);
         println!("   {}", ImprovedMacroErrorFormatter::format_error(error));
         println!("\n   修复建议:");
-        for (j, suggestion) in ImprovedMacroErrorFormatter::suggest_fix(error).iter().enumerate() {
+        for (j, suggestion) in ImprovedMacroErrorFormatter::suggest_fix(error)
+            .iter()
+            .enumerate()
+        {
             println!("     {}. {}", j + 1, suggestion);
         }
     }
@@ -186,11 +189,8 @@ fn demo_proc_macro_compilation_optimization() {
 
     // 编译一些过程宏
     let macros = vec![
-        "macro1",
-        "macro2",
-        "macro1", // 重复，应该使用缓存
-        "macro3",
-        "macro2", // 重复，应该使用缓存
+        "macro1", "macro2", "macro1", // 重复，应该使用缓存
+        "macro3", "macro2", // 重复，应该使用缓存
     ];
 
     println!("   编译过程宏...");
@@ -206,7 +206,8 @@ fn demo_proc_macro_compilation_optimization() {
     println!("     平均编译时间: {} μs", stats.avg_compilation_time);
 
     if stats.compiled_macros > 0 {
-        let cache_rate = (stats.cache_used as f64 / (stats.compiled_macros + stats.cache_used) as f64) * 100.0;
+        let cache_rate =
+            (stats.cache_used as f64 / (stats.compiled_macros + stats.cache_used) as f64) * 100.0;
         println!("     缓存命中率: {:.2}%", cache_rate);
     }
 }

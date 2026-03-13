@@ -12,5 +12,3 @@ fn main() {
     }
     println!("refcell {}", r.borrow());
 }
-
-

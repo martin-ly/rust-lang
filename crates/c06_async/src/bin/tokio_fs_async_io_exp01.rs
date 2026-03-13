@@ -20,9 +20,11 @@ async fn main() -> anyhow::Result<()> {
     // 读文件并设置 1s 超时
     let read_fut = tokio::fs::read(&path);
     let bytes = tokio::time::timeout(Duration::from_secs(1), read_fut).await??;
-    println!("read {} bytes: {}", bytes.len(), String::from_utf8_lossy(&bytes));
+    println!(
+        "read {} bytes: {}",
+        bytes.len(),
+        String::from_utf8_lossy(&bytes)
+    );
 
     Ok(())
 }
-
-

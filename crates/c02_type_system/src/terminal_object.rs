@@ -11,6 +11,4 @@ Rust中的类比:
 */
 
 #[allow(dead_code)]
-pub fn to_unit<T>(_: T) {
-    
-}
+pub fn to_unit<T>(_: T) {}

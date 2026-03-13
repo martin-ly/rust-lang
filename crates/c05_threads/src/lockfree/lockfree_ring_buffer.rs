@@ -5,16 +5,16 @@
 //! - 多生产者单消费者环形缓冲区
 //! - 多生产者多消费者环形缓冲区
 //! - 可扩展环形缓冲区
+use crossbeam_queue::ArrayQueue;
+#[allow(unused_imports)]
+use crossbeam_utils::CachePadded;
+#[cfg(feature = "custom_ring_buffers")]
+use std::cell::UnsafeCell;
 #[allow(unused_imports)]
 use std::sync::{
     Arc,
     atomic::{AtomicPtr, AtomicUsize, Ordering},
 };
-#[cfg(feature = "custom_ring_buffers")]
-use std::cell::UnsafeCell;
-use crossbeam_queue::ArrayQueue;
-#[allow(unused_imports)]
-use crossbeam_utils::CachePadded;
 use std::thread;
 #[cfg(feature = "custom_ring_buffers")]
 /// 单生产者单消费者环形缓冲区

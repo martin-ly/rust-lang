@@ -1,5 +1,5 @@
 //! Rust 1.90 高级宏系统演示
-//! 
+//!
 //! 本模块展示了 Rust 1.90 中宏系统的高级用法，包括：
 //! - 声明宏 (Declarative Macros)
 //! - 过程宏 (Procedural Macros)
@@ -42,26 +42,46 @@ pub mod declarative_macros {
     /// 递归宏 - 计算阶乘 (限制递归深度)
     #[macro_export]
     macro_rules! factorial {
-        (0) => { 1 };
-        (1) => { 1 };
-        (2) => { 2 };
-        (3) => { 6 };
-        (4) => { 24 };
-        (5) => { 120 };
-        (6) => { 720 };
-        (7) => { 5040 };
-        (8) => { 40320 };
-        (9) => { 362880 };
-        (10) => { 3628800 };
-        ($n:expr) => {
-            {
-                let mut result = 1;
-                for i in 1..=($n) {
-                    result *= i;
-                }
-                result
-            }
+        (0) => {
+            1
         };
+        (1) => {
+            1
+        };
+        (2) => {
+            2
+        };
+        (3) => {
+            6
+        };
+        (4) => {
+            24
+        };
+        (5) => {
+            120
+        };
+        (6) => {
+            720
+        };
+        (7) => {
+            5040
+        };
+        (8) => {
+            40320
+        };
+        (9) => {
+            362880
+        };
+        (10) => {
+            3628800
+        };
+        ($n:expr) => {{
+            let mut result = 1;
+            for i in 1..=($n) {
+                result *= i;
+            }
+            result
+        }};
     }
 
     /// 模式匹配宏
@@ -86,9 +106,7 @@ pub mod declarative_macros {
 
             impl $name {
                 pub fn new() -> Self {
-                    Self {
-                        data: Vec::new(),
-                    }
+                    Self { data: Vec::new() }
                 }
 
                 pub fn add_byte(&mut self, byte: u8) -> &mut Self {
@@ -114,15 +132,13 @@ pub mod procedural_macros {
     /// 简单的函数式宏
     #[macro_export]
     macro_rules! measure_time {
-        ($name:literal, $code:block) => {
-            {
-                let start = std::time::Instant::now();
-                let result = $code;
-                let duration = start.elapsed();
-                println!("{} 执行时间: {:?}", $name, duration);
-                result
-            }
-        };
+        ($name:literal, $code:block) => {{
+            let start = std::time::Instant::now();
+            let result = $code;
+            let duration = start.elapsed();
+            println!("{} 执行时间: {:?}", $name, duration);
+            result
+        }};
     }
 
     /// 日志宏
@@ -162,61 +178,55 @@ pub mod attribute_macros {
     /// 缓存属性宏
     #[macro_export]
     macro_rules! cached {
-        ($key:expr, $value:expr) => {
-            {
-                static mut CACHE: Option<HashMap<String, i32>> = None;
-                unsafe {
-                    if CACHE.is_none() {
-                        CACHE = Some(HashMap::new());
-                    }
-                    let cache = CACHE.as_mut().unwrap();
-                    let key_str = $key.to_string();
-                    if let Some(&cached_value) = cache.get(&key_str) {
-                        cached_value
-                    } else {
-                        let result = $value;
-                        cache.insert(key_str, result);
-                        result
-                    }
+        ($key:expr, $value:expr) => {{
+            static mut CACHE: Option<HashMap<String, i32>> = None;
+            unsafe {
+                if CACHE.is_none() {
+                    CACHE = Some(HashMap::new());
+                }
+                let cache = CACHE.as_mut().unwrap();
+                let key_str = $key.to_string();
+                if let Some(&cached_value) = cache.get(&key_str) {
+                    cached_value
+                } else {
+                    let result = $value;
+                    cache.insert(key_str, result);
+                    result
                 }
             }
-        };
+        }};
     }
 
     /// 重试属性宏
     #[macro_export]
     macro_rules! retry {
-        ($max_attempts:expr, $code:block) => {
-            {
-                let mut attempts = 0;
-                loop {
-                    match $code {
-                        Ok(result) => break Ok(result),
-                        Err(e) => {
-                            attempts += 1;
-                            if attempts >= $max_attempts {
-                                break Err(e);
-                            }
-                            std::thread::sleep(std::time::Duration::from_millis(100));
+        ($max_attempts:expr, $code:block) => {{
+            let mut attempts = 0;
+            loop {
+                match $code {
+                    Ok(result) => break Ok(result),
+                    Err(e) => {
+                        attempts += 1;
+                        if attempts >= $max_attempts {
+                            break Err(e);
                         }
+                        std::thread::sleep(std::time::Duration::from_millis(100));
                     }
                 }
             }
-        };
+        }};
     }
 
     /// 性能监控宏
     #[macro_export]
     macro_rules! profile {
-        ($name:literal, $code:block) => {
-            {
-                let start = std::time::Instant::now();
-                let result = $code;
-                let duration = start.elapsed();
-                println!("[PROFILE] {}: {:?}", $name, duration);
-                result
-            }
-        };
+        ($name:literal, $code:block) => {{
+            let start = std::time::Instant::now();
+            let result = $code;
+            let duration = start.elapsed();
+            println!("[PROFILE] {}: {:?}", $name, duration);
+            result
+        }};
     }
 }
 
@@ -265,39 +275,27 @@ pub mod macro_composition {
     /// 组合多个宏
     #[macro_export]
     macro_rules! complex_operation {
-        ($name:literal, $data:expr) => {
-            {
-                log_info!("开始执行: {}", $name);
-                let result = measure_time!($name, {
-                    profile!("数据处理", {
-                        $data
-                    })
-                });
-                log_info!("完成执行: {}", $name);
-                result
-            }
-        };
+        ($name:literal, $data:expr) => {{
+            log_info!("开始执行: {}", $name);
+            let result = measure_time!($name, { profile!("数据处理", { $data }) });
+            log_info!("完成执行: {}", $name);
+            result
+        }};
     }
 
     /// 嵌套宏调用
     #[macro_export]
     macro_rules! nested_macro {
-        ($level1:expr) => {
-            {
-                let level1_result = $level1;
-                debug_print!("Level 1 结果: {:?}", level1_result);
-                
-                let level2_result = measure_time!("Level 2", {
-                    level1_result * 2
-                });
-                
-                let level3_result = profile!("Level 3", {
-                    level2_result + 10
-                });
-                
-                level3_result
-            }
-        };
+        ($level1:expr) => {{
+            let level1_result = $level1;
+            debug_print!("Level 1 结果: {:?}", level1_result);
+
+            let level2_result = measure_time!("Level 2", { level1_result * 2 });
+
+            let level3_result = profile!("Level 3", { level2_result + 10 });
+
+            level3_result
+        }};
     }
 
     /// 条件宏组合
@@ -388,12 +386,10 @@ pub mod compile_time_macros {
     /// 编译时字符串处理
     #[macro_export]
     macro_rules! compile_time_string {
-        ($s:literal) => {
-            {
-                let s = $s;
-                format!("编译时字符串: {} (长度: {})", s, s.len())
-            }
-        };
+        ($s:literal) => {{
+            let s = $s;
+            format!("编译时字符串: {} (长度: {})", s, s.len())
+        }};
     }
 
     /// 编译时数学计算
@@ -416,14 +412,13 @@ pub mod compile_time_macros {
     /// 编译时类型信息
     #[macro_export]
     macro_rules! type_info {
-        ($type:ty) => {
-            {
-                format!("类型: {}, 大小: {} 字节", 
-                    stringify!($type),
-                    std::mem::size_of::<$type>()
-                )
-            }
-        };
+        ($type:ty) => {{
+            format!(
+                "类型: {}, 大小: {} 字节",
+                stringify!($type),
+                std::mem::size_of::<$type>()
+            )
+        }};
     }
 
     /// 编译时条件编译
@@ -452,17 +447,17 @@ pub mod macro_utilities {
     /// 宏性能测试
     #[macro_export]
     macro_rules! macro_benchmark {
-        ($name:literal, $iterations:literal, $code:block) => {
-            {
-                let start = std::time::Instant::now();
-                for _ in 0..$iterations {
-                    let _ = $code;
-                }
-                let duration = start.elapsed();
-                println!("[MACRO_BENCHMARK] {}: {} 次迭代耗时 {:?}", 
-                    $name, $iterations, duration);
+        ($name:literal, $iterations:literal, $code:block) => {{
+            let start = std::time::Instant::now();
+            for _ in 0..$iterations {
+                let _ = $code;
             }
-        };
+            let duration = start.elapsed();
+            println!(
+                "[MACRO_BENCHMARK] {}: {} 次迭代耗时 {:?}",
+                $name, $iterations, duration
+            );
+        }};
     }
 
     /// 宏错误处理

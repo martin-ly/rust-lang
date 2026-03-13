@@ -51,9 +51,8 @@
 #[cfg(target_os = "linux")]
 fn main() {
     use glommio::{
-        channels::channel_mesh::MeshBuilder,
+        LocalExecutor, LocalExecutorBuilder, Shares, Task, channels::channel_mesh::MeshBuilder,
         timer::sleep,
-        LocalExecutor, LocalExecutorBuilder, Shares, Task,
     };
     use std::time::{Duration, Instant};
 
@@ -162,10 +161,16 @@ fn main() {
 
     LocalExecutor::default().run(async {
         // 创建不同优先级的任务队列
-        let high_priority_tq =
-            glommio::executor().create_task_queue(Shares::Static(1000), glommio::Latency::Matters(Duration::from_millis(10)), "high");
-        let low_priority_tq =
-            glommio::executor().create_task_queue(Shares::Static(100), glommio::Latency::NotImportant, "low");
+        let high_priority_tq = glommio::executor().create_task_queue(
+            Shares::Static(1000),
+            glommio::Latency::Matters(Duration::from_millis(10)),
+            "high",
+        );
+        let low_priority_tq = glommio::executor().create_task_queue(
+            Shares::Static(100),
+            glommio::Latency::NotImportant,
+            "low",
+        );
 
         // 高优先级任务
         let high_task = Task::local_into(
@@ -221,10 +226,7 @@ fn main() {
                 for peer in 0..num_executors {
                     if peer != i {
                         if let Some(sender) = mesh.sender_for(peer) {
-                            sender
-                                .send(format!("Hello from executor {}", i))
-                                .await
-                                .ok();
+                            sender.send(format!("Hello from executor {}", i)).await.ok();
                         }
                     }
                 }

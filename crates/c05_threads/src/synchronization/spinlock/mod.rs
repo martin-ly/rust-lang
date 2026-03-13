@@ -91,7 +91,7 @@ pub fn spinlock_demo(workers: usize, iters: usize) -> usize {
     for h in handles {
         h.join().unwrap();
     }
-     *lock.lock()
+    *lock.lock()
 }
 
 #[cfg(test)]

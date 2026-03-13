@@ -5,13 +5,13 @@
 //! - 优先级工作窃取
 //! - 自适应工作窃取
 //! - NUMA感知工作窃取
-use std::sync::{Arc, Mutex};
 use crossbeam_deque::{
     Injector,
     Worker,
     //Stealer,
 };
 use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 /// 基础工作窃取调度器

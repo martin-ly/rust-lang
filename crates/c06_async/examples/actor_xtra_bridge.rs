@@ -8,15 +8,23 @@ fn main() {
 async fn main() {
     use tracing::info;
     let _ = tracing_subscriber::fmt().with_env_filter("info").try_init();
-    use once_cell::sync::Lazy;
-    use prometheus::{Registry, IntCounter, Opts};
     use c06_async::utils::metrics;
+    use once_cell::sync::Lazy;
+    use prometheus::{IntCounter, Opts, Registry};
 
-    use xtra::{prelude::*, Address};
+    use xtra::{Address, prelude::*};
 
     // 指标
-    static BRIDGE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| IntCounter::with_opts(Opts::new("xtra_bridge_in_total", "xtra 桥接入口消息计数")).unwrap());
-    static PIPELINE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| IntCounter::with_opts(Opts::new("xtra_pipeline_in_total", "xtra 流水线入口消息计数")).unwrap());
+    static BRIDGE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+        IntCounter::with_opts(Opts::new("xtra_bridge_in_total", "xtra 桥接入口消息计数")).unwrap()
+    });
+    static PIPELINE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+        IntCounter::with_opts(Opts::new(
+            "xtra_pipeline_in_total",
+            "xtra 流水线入口消息计数",
+        ))
+        .unwrap()
+    });
     let registry = Registry::new();
     let _ = registry.register(Box::new(BRIDGE_IN_TOTAL.clone()));
     let _ = registry.register(Box::new(PIPELINE_IN_TOTAL.clone()));
@@ -32,11 +40,15 @@ async fn main() {
         }
     });
 
-    struct Router { tx: tokio::sync::mpsc::Sender<String> }
+    struct Router {
+        tx: tokio::sync::mpsc::Sender<String>,
+    }
     struct Inbound(pub String);
 
     #[async_trait::async_trait]
-    impl Actor for Router { type Stop = (); }
+    impl Actor for Router {
+        type Stop = ();
+    }
 
     #[async_trait::async_trait]
     impl Handler<Inbound> for Router {
@@ -56,5 +68,3 @@ async fn main() {
 
     tokio::time::sleep(std::time::Duration::from_millis(200)).await;
 }
-
-

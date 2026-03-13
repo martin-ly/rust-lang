@@ -111,9 +111,10 @@ impl MinStack {
     pub fn pop(&mut self) {
         if let Some(val) = self.stack.pop()
             && let Some(&min_val) = self.min_stack.last()
-                && val == min_val {
-                    self.min_stack.pop();
-                }
+            && val == min_val
+        {
+            self.min_stack.pop();
+        }
     }
 
     /// 获取栈顶元素
@@ -394,7 +395,10 @@ mod tests {
     #[test]
     fn test_daily_temperatures() {
         let temperatures = vec![73, 74, 75, 71, 69, 72, 76, 73];
-        assert_eq!(daily_temperatures(temperatures), vec![1, 1, 4, 2, 1, 1, 0, 0]);
+        assert_eq!(
+            daily_temperatures(temperatures),
+            vec![1, 1, 4, 2, 1, 1, 0, 0]
+        );
     }
 
     #[test]

@@ -1,15 +1,15 @@
 use c04_generic::{
+    advanced_patterns::*,
+    basic_syntax::*,
     generic_define::{
         Dog, Point, hashmap_test, largest, longest, print_description, summarize_item,
     },
+    practical_examples::*,
+    rust_194_features::*,
     trait_bound::{
         clone::*, copy::*, debug::*, default::*, display::*, drop::*, eq::*, from_into::*, hash::*,
         order::*, partial_eq::*, partial_order::*, send::*, sync::*,
     },
-    basic_syntax::*,
-    advanced_patterns::*,
-    practical_examples::*,
-    rust_194_features::*,
 };
 
 fn main() {
@@ -70,7 +70,9 @@ fn demonstrate_basic_generics() {
     let result = longest(string1.as_str(), string2.as_str());
     println!("The longest string is {}", result);
 
-    let dog = Dog { name: String::from("Buddy") };
+    let dog = Dog {
+        name: String::from("Buddy"),
+    };
     print_description(dog);
     hashmap_test();
 }

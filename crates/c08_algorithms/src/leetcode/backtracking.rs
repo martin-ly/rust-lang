@@ -258,12 +258,7 @@ pub fn generate_parenthesis(n: i32) -> Vec<String> {
     result
 }
 
-fn backtrack_parenthesis(
-    left: i32,
-    right: i32,
-    current: &mut String,
-    result: &mut Vec<String>,
-) {
+fn backtrack_parenthesis(left: i32, right: i32, current: &mut String, result: &mut Vec<String>) {
     if left == 0 && right == 0 {
         result.push(current.clone());
         return;
@@ -393,12 +388,13 @@ fn backtrack_word_search(
     for (dx, dy) in directions.iter() {
         let ni = i as i32 + dx;
         let nj = j as i32 + dy;
-        if ni >= 0 && nj >= 0
+        if ni >= 0
+            && nj >= 0
             && backtrack_word_search(board, word, ni as usize, nj as usize, index + 1, rows, cols)
-            {
-                board[i][j] = temp; // 恢复
-                return true;
-            }
+        {
+            board[i][j] = temp; // 恢复
+            return true;
+        }
     }
 
     board[i][j] = temp; // 恢复
@@ -472,17 +468,16 @@ pub fn partition(s: String) -> Vec<Vec<String>> {
 
     // 预处理：使用动态规划判断回文
     let mut dp = vec![vec![false; n]; n];
-    for i in 0..n {
-        dp[i][i] = true;
+    for (i, dp_i) in dp.iter_mut().enumerate().take(n) {
+        dp_i[i] = true;
     }
 
     for len in 2..=n {
         for i in 0..=n - len {
             let j = i + len - 1;
-            if chars[i] == chars[j]
-                && (len == 2 || dp[i + 1][j - 1]) {
-                    dp[i][j] = true;
-                }
+            if chars[i] == chars[j] && (len == 2 || dp[i + 1][j - 1]) {
+                dp[i][j] = true;
+            }
         }
     }
 

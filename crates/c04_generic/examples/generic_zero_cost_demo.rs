@@ -38,7 +38,10 @@ impl<T> GenericContainer<T> {
     where
         T: std::ops::Add<Output = T> + Default + Copy,
     {
-        self.items.iter().copied().fold(T::default(), |acc, x| acc + x)
+        self.items
+            .iter()
+            .copied()
+            .fold(T::default(), |acc, x| acc + x)
     }
 }
 
@@ -116,8 +119,7 @@ fn main() {
     println!("具体类型容器耗时: {:?}", concrete_container_time);
     println!(
         "性能差异: {:.2}%",
-        ((generic_container_time.as_nanos() as f64
-            - concrete_container_time.as_nanos() as f64)
+        ((generic_container_time.as_nanos() as f64 - concrete_container_time.as_nanos() as f64)
             / concrete_container_time.as_nanos() as f64)
             * 100.0
     );

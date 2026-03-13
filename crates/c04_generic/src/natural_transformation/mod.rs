@@ -57,7 +57,8 @@ trait Functor<A, B> {
 
     fn map<F>(self, f: F) -> Self::Output
     where
-        F: Fn(A) -> B;
+        #[allow(clippy::type_complexity)]
+    F: Fn(A) -> B;
 }
 
 struct OptionFunctor<T>(Option<T>);
@@ -72,6 +73,7 @@ impl<T> Functor<T, T> for OptionFunctor<T> {
         OptionFunctor(self.0.map(f))
     }
 }
+#[allow(clippy::type_complexity)]
 
 // 自然变换：Option<T> -> Result<T, E>
 struct OptionToResult<E>(std::marker::PhantomData<E>);
@@ -341,6 +343,8 @@ impl ConditionalTransformation<String, i32> for ConditionalConverter {
 同时保持零成本抽象的优势。
 */
 
+#![allow(clippy::type_complexity)]
+
 // 基本自然变换 trait
 pub trait NaturalTransformation<A, B> {
     fn transform(&self, a: A) -> B;
@@ -367,7 +371,9 @@ impl NaturalTransformation<A, B> for AtoB {
 }
 
 // 泛型自然变换
+#[allow(clippy::type_complexity)]
 pub trait Functor<A, B> {
+    #[allow(clippy::type_complexity)]
     type Output;
 
     fn map<F>(self, f: F) -> Self::Output
@@ -434,13 +440,16 @@ impl NaturalTransformation<String, String> for StringTransformation {
 }
 
 // 数据结构变换
+#[allow(clippy::type_complexity)]
 pub trait DataStructure<A> {
     fn add(&mut self, item: A);
     fn get(&self, index: usize) -> Option<&A>;
     fn len(&self) -> usize;
+    #[allow(clippy::type_complexity)]
     fn is_empty(&self) -> bool;
 }
 
+#[allow(clippy::type_complexity)]
 pub struct VecStructure<T> {
     pub data: Vec<T>,
 }

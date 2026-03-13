@@ -60,7 +60,8 @@ impl NumberIterator {
 }
 
 impl LendingIterator for NumberIterator {
-    type Item<'a> = &'a i32
+    type Item<'a>
+        = &'a i32
     where
         Self: 'a;
 

@@ -120,11 +120,11 @@ impl SystemResourceManagerSingleton {
 /// 设备类型枚举
 #[derive(Debug, Clone, PartialEq)]
 pub enum DeviceType {
-    CPU,
+    Cpu,
     Memory,
     Disk,
     Network,
-    GPU,
+    Gpu,
 }
 
 /// 设备接口
@@ -144,15 +144,15 @@ pub struct DeviceStatus {
     pub error_count: u32,
 }
 
-/// CPU设备
-pub struct CPUDevice {
+/// Cpu设备
+pub struct CpuDevice {
     id: String,
     cores: u32,
     frequency: f32,
     status: DeviceStatus,
 }
 
-impl CPUDevice {
+impl CpuDevice {
     pub fn new(id: String, cores: u32, frequency: f32) -> Self {
         Self {
             id,
@@ -167,19 +167,19 @@ impl CPUDevice {
     }
 }
 
-impl Device for CPUDevice {
+impl Device for CpuDevice {
     fn get_id(&self) -> String {
         self.id.clone()
     }
 
     fn get_type(&self) -> DeviceType {
-        DeviceType::CPU
+        DeviceType::Cpu
     }
 
     fn initialize(&mut self) -> Result<(), String> {
         self.status.is_online = true;
         println!(
-            "CPU设备 {} 初始化完成 ({} 核, {:.1} GHz)",
+            "Cpu设备 {} 初始化完成 ({} 核, {:.1} GHz)",
             self.id, self.cores, self.frequency
         );
         Ok(())
@@ -187,7 +187,7 @@ impl Device for CPUDevice {
 
     fn shutdown(&mut self) -> Result<(), String> {
         self.status.is_online = false;
-        println!("CPU设备 {} 已关闭", self.id);
+        println!("Cpu设备 {} 已关闭", self.id);
         Ok(())
     }
 
@@ -319,7 +319,7 @@ impl DeviceFactory for OSDeviceFactory {
         params: HashMap<String, String>,
     ) -> Box<dyn Device> {
         match device_type {
-            DeviceType::CPU => {
+            DeviceType::Cpu => {
                 let cores = params
                     .get("cores")
                     .and_then(|s| s.parse().ok())
@@ -328,7 +328,7 @@ impl DeviceFactory for OSDeviceFactory {
                     .get("frequency")
                     .and_then(|s| s.parse().ok())
                     .unwrap_or(2.4);
-                Box::new(CPUDevice::new(id, cores, frequency))
+                Box::new(CpuDevice::new(id, cores, frequency))
             }
             DeviceType::Memory => {
                 let capacity = params
@@ -345,8 +345,8 @@ impl DeviceFactory for OSDeviceFactory {
                 Box::new(DiskDevice::new(id, capacity))
             }
             _ => {
-                // 默认返回CPU设备
-                Box::new(CPUDevice::new(id, 4, 2.4))
+                // 默认返回Cpu设备
+                Box::new(CpuDevice::new(id, 4, 2.4))
             }
         }
     }
@@ -691,8 +691,8 @@ mod tests {
         params.insert("cores".to_string(), "8".to_string());
         params.insert("frequency".to_string(), "3.2".to_string());
 
-        let device = factory.create_device(DeviceType::CPU, "cpu0".to_string(), params);
-        assert_eq!(device.get_type(), DeviceType::CPU);
+        let device = factory.create_device(DeviceType::Cpu, "cpu0".to_string(), params);
+        assert_eq!(device.get_type(), DeviceType::Cpu);
         assert_eq!(device.get_id(), "cpu0");
 
         let mut device = device;

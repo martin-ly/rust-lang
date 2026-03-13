@@ -15,8 +15,8 @@
 //! - Edition: 2024
 use std::cell::LazyCell;
 use std::iter::Peekable;
-use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::LazyLock;
+use std::sync::atomic::{AtomicU64, Ordering};
 
 // ==================== 1. LazyCell 和 LazyLock 新方法 ====================
 
@@ -28,7 +28,6 @@ use std::sync::LazyLock;
 /// - `force_mut()`: 强制初始化并获取可变引用
 ///
 /// 这些新方法使得在并发和单线程环境中使用懒加载更加灵活。
-
 /// 线程安全的全局懒加载值
 ///
 /// Rust 1.94.0: 使用 LazyLock 存储全局配置
@@ -88,10 +87,7 @@ pub struct SingleThreadCache<T> {
 impl<T> SingleThreadCache<T> {
     /// 创建新的缓存
     pub fn new(init: fn() -> T) -> Self {
-        Self {
-            value: None,
-            init,
-        }
+        Self { value: None, init }
     }
 
     /// 获取缓存值
@@ -162,7 +158,6 @@ impl<T: Send + Sync> ThreadSafeResourceManager<T> {
 /// - `GOLDEN_RATIO`: 黄金比例 (φ ≈ 1.61803)
 ///
 /// 这些常量可用于 f32 和 f64 类型。
-
 /// 数学常量的使用示例
 #[allow(dead_code)]
 pub fn demonstrate_math_constants() {
@@ -223,7 +218,6 @@ pub fn euler_gamma_approximation(n: u64) -> f64 {
 /// - `next_if_map_mut()`: 可变版本，允许修改元素
 ///
 /// 这些方法简化了条件消费和转换的模式。
-
 /// 演示 Peekable 的新方法
 #[allow(dead_code)]
 pub fn demonstrate_peekable_methods() {
@@ -289,10 +283,11 @@ impl<I: Iterator> SimpleParser<I> {
         F: FnOnce(&I::Item) -> Option<T>,
     {
         if let Some(item) = self.iter.peek()
-            && let Some(result) = f(item) {
-                self.iter.next();
-                return Some(result);
-            }
+            && let Some(result) = f(item)
+        {
+            self.iter.next();
+            return Some(result);
+        }
         None
     }
 
@@ -354,7 +349,6 @@ pub enum Token {
 ///
 /// Rust 1.94.0 为切片添加了 `array_windows` 方法，
 /// 允许以固定大小的数组窗口遍历切片。
-
 /// 演示 array_windows 的基本用法
 #[allow(dead_code)]
 pub fn demonstrate_array_windows() {
@@ -426,7 +420,6 @@ pub fn detect_outliers(data: &[f64], threshold: f64) -> Vec<usize> {
 ///
 /// Rust 1.94.0 实现了 `TryFrom<char>` for `usize`，
 /// 允许将 char 安全地转换为 usize（基于其 Unicode 标量值）。
-
 /// 演示 char 到 usize 的转换
 #[allow(dead_code)]
 pub fn demonstrate_char_to_usize() {
@@ -538,7 +531,10 @@ pub fn demonstrate_rust_194_thread_features() {
 
     let unicode_str = "Hello 世界 🦀";
     let code_points = string_to_usize_array(unicode_str);
-    println!("字符串 '{}' 的 Unicode 码点: {:?}", unicode_str, code_points);
+    println!(
+        "字符串 '{}' 的 Unicode 码点: {:?}",
+        unicode_str, code_points
+    );
 }
 
 /// 获取 Rust 1.94.0 线程特性信息
@@ -602,10 +598,14 @@ mod tests {
         let mut iter = data.into_iter().peekable();
 
         // 使用 next_if 模式
-        let n1 = iter.next_if(|s| s.parse::<i32>().is_ok()).map(|s| s.parse::<i32>().unwrap());
+        let n1 = iter
+            .next_if(|s| s.parse::<i32>().is_ok())
+            .map(|s| s.parse::<i32>().unwrap());
         assert_eq!(n1, Some(1));
 
-        let n2 = iter.next_if(|s| s.parse::<i32>().is_ok()).map(|s| s.parse::<i32>().unwrap());
+        let n2 = iter
+            .next_if(|s| s.parse::<i32>().is_ok())
+            .map(|s| s.parse::<i32>().unwrap());
         assert_eq!(n2, Some(2));
 
         // 检查迭代器位置

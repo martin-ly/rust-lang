@@ -11,8 +11,8 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
-use std::num::NonZeroUsize;
 use std::collections::VecDeque;
+use std::num::NonZeroUsize;
 
 // ==================== 1. rotate_right 在宏展开队列管理中的应用 ====================
 
@@ -248,12 +248,16 @@ pub fn demonstrate_rust_192_macro_features() {
         depth: 3,
     });
 
-    println!("   原始队列: {:?}",
-        queue.items.iter().map(|m| &m.name).collect::<Vec<_>>());
+    println!(
+        "   原始队列: {:?}",
+        queue.items.iter().map(|m| &m.name).collect::<Vec<_>>()
+    );
 
     queue.rotate(1);
-    println!("   轮转后: {:?}",
-        queue.items.iter().map(|m| &m.name).collect::<Vec<_>>());
+    println!(
+        "   轮转后: {:?}",
+        queue.items.iter().map(|m| &m.name).collect::<Vec<_>>()
+    );
 
     // 2. NonZero::div_ceil 演示
     println!("\n2. NonZero::div_ceil 在宏缓存计算中的应用:");
@@ -287,8 +291,10 @@ pub fn demonstrate_rust_192_macro_features() {
     println!("   宏列表相等: {}", compare_macro_lists(&list1, &list2));
 
     let expected_names = vec!["m1".to_string(), "m2".to_string()];
-    println!("   宏名称列表匹配: {}",
-        check_macro_expansion_states(&list1, &expected_names));
+    println!(
+        "   宏名称列表匹配: {}",
+        check_macro_expansion_states(&list1, &expected_names)
+    );
 
     // 4. 性能监控演示
     println!("\n4. 宏展开性能监控:");

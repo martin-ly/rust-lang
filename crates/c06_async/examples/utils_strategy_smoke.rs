@@ -14,7 +14,8 @@ async fn main() -> anyhow::Result<()> {
     let out = runner
         .run(
             |attempt| async move {
-                if attempt < 2 { // 首次失败，第二次成功
+                if attempt < 2 {
+                    // 首次失败，第二次成功
                     Err(anyhow::anyhow!("transient error"))
                 } else {
                     Ok::<_, anyhow::Error>(format!("ok on attempt {}", attempt))
@@ -27,5 +28,3 @@ async fn main() -> anyhow::Result<()> {
     println!("result = {:?}", out);
     Ok(())
 }
-
-

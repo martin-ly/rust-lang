@@ -352,10 +352,7 @@ pub mod utils {
 
     /// 打印张量形状
     pub fn print_tensor_info(name: &str, shape: &[usize], dtype: TensorType) {
-        println!(
-            "Tensor '{}': shape={:?}, dtype={:?}",
-            name, shape, dtype
-        );
+        println!("Tensor '{}': shape={:?}, dtype={:?}", name, shape, dtype);
     }
 }
 
@@ -385,10 +382,7 @@ fn main() {
 fn demo_image_classification() {
     println!("\n### Demo 1: Image Classification ###\n");
 
-    match ImageClassifier::new(
-        "mobilenet_v2.onnx".to_string(),
-        InferenceBackend::PyTorch,
-    ) {
+    match ImageClassifier::new("mobilenet_v2.onnx".to_string(), InferenceBackend::PyTorch) {
         Ok(classifier) => {
             // 模拟图像数据
             let mock_image = vec![128u8; 224 * 224 * 3];
@@ -495,4 +489,3 @@ mod tests {
         assert_eq!(error.to_string(), "Model file not found");
     }
 }
-

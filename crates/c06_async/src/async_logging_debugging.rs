@@ -1,21 +1,21 @@
 //! 异步日志调试和跟踪模块
-//! 
+//!
 //! 本模块提供了完整的异步日志系统，包括：
 //! - 结构化日志记录
 //! - 异步任务跟踪
 //! - 性能监控
 //! - 本地调试工具
 //! - 分布式追踪支持
+use anyhow::Result;
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
+use std::collections::HashMap;
 use std::sync::Arc;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::{Duration, Instant};
-use std::collections::HashMap;
-use anyhow::Result;
 use tokio::sync::{Mutex, RwLock};
 use tokio::time::sleep;
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
-use tracing::{info, warn, error, debug, info_span, Level};
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
+use tracing::{Level, debug, error, info, info_span, warn};
+use tracing_subscriber::{EnvFilter, layer::SubscriberExt, util::SubscriberInitExt};
 
 /// 自定义序列化函数，跳过 Instant 字段
 fn serialize_instant<S>(_instant: &Instant, serializer: S) -> Result<S::Ok, S::Error>
@@ -83,7 +83,10 @@ pub struct AsyncTaskInfo {
     /// 任务名称
     pub name: String,
     /// 开始时间
-    #[serde(serialize_with = "serialize_instant", deserialize_with = "deserialize_instant")]
+    #[serde(
+        serialize_with = "serialize_instant",
+        deserialize_with = "deserialize_instant"
+    )]
     pub start_time: Instant,
     /// 任务状态
     pub status: TaskStatus,
@@ -178,13 +181,17 @@ impl AsyncTaskTracker {
 
         match self.config.log_format {
             LogFormat::Json => {
-                registry.with(tracing_subscriber::fmt::layer().json()).init();
+                registry
+                    .with(tracing_subscriber::fmt::layer().json())
+                    .init();
             }
             LogFormat::Text => {
                 registry.with(tracing_subscriber::fmt::layer()).init();
             }
             LogFormat::Compact => {
-                registry.with(tracing_subscriber::fmt::layer().compact()).init();
+                registry
+                    .with(tracing_subscriber::fmt::layer().compact())
+                    .init();
             }
         }
 
@@ -200,7 +207,7 @@ impl AsyncTaskTracker {
         metadata: HashMap<String, String>,
     ) -> String {
         let task_id = format!("task_{}", self.task_counter.fetch_add(1, Ordering::Relaxed));
-        
+
         let task_info = AsyncTaskInfo {
             task_id: task_id.clone(),
             name: name.clone(),
@@ -238,7 +245,9 @@ impl AsyncTaskTracker {
             }
         };
 
-        self.performance_monitor.record_task_completion(execution_time, true).await;
+        self.performance_monitor
+            .record_task_completion(execution_time, true)
+            .await;
 
         info!(
             task_id = %task_id,
@@ -263,7 +272,9 @@ impl AsyncTaskTracker {
             }
         };
 
-        self.performance_monitor.record_task_completion(execution_time, false).await;
+        self.performance_monitor
+            .record_task_completion(execution_time, false)
+            .await;
 
         error!(
             task_id = %task_id,
@@ -288,7 +299,9 @@ impl AsyncTaskTracker {
             }
         };
 
-        self.performance_monitor.record_task_cancellation(execution_time).await;
+        self.performance_monitor
+            .record_task_cancellation(execution_time)
+            .await;
 
         warn!(
             task_id = %task_id,
@@ -320,14 +333,14 @@ impl AsyncTaskTracker {
     pub async fn cleanup_completed_tasks(&self) -> Result<()> {
         let mut tasks = self.tasks.write().await;
         let initial_count = tasks.len();
-        
+
         tasks.retain(|_, task_info| {
             matches!(task_info.status, TaskStatus::Running | TaskStatus::Pending)
         });
-        
+
         let cleaned_count = initial_count - tasks.len();
         info!("清理了 {} 个已完成的任务", cleaned_count);
-        
+
         Ok(())
     }
 }
@@ -354,10 +367,10 @@ impl AsyncPerformanceMonitor {
 
     pub async fn record_task_completion(&self, execution_time: Duration, success: bool) {
         let mut metrics = self.metrics.lock().await;
-        
+
         metrics.total_tasks += 1;
         let execution_time_ns = execution_time.as_nanos() as u64;
-        
+
         if success {
             metrics.successful_tasks += 1;
         } else {
@@ -365,14 +378,16 @@ impl AsyncPerformanceMonitor {
         }
 
         // 更新执行时间统计
-        metrics.average_execution_time_ns = 
-            (metrics.average_execution_time_ns * (metrics.total_tasks - 1) + execution_time_ns) / metrics.total_tasks;
-        
+        metrics.average_execution_time_ns =
+            (metrics.average_execution_time_ns * (metrics.total_tasks - 1) + execution_time_ns)
+                / metrics.total_tasks;
+
         metrics.max_execution_time_ns = metrics.max_execution_time_ns.max(execution_time_ns);
         metrics.min_execution_time_ns = metrics.min_execution_time_ns.min(execution_time_ns);
 
         // 计算成功率
-        metrics.success_rate = (metrics.successful_tasks as f64 / metrics.total_tasks as f64) * 100.0;
+        metrics.success_rate =
+            (metrics.successful_tasks as f64 / metrics.total_tasks as f64) * 100.0;
 
         // 计算吞吐量
         let elapsed_seconds = self.start_time.elapsed().as_secs_f64();
@@ -385,10 +400,11 @@ impl AsyncPerformanceMonitor {
         let mut metrics = self.metrics.lock().await;
         metrics.total_tasks += 1;
         metrics.cancelled_tasks += 1;
-        
+
         let execution_time_ns = execution_time.as_nanos() as u64;
-        metrics.average_execution_time_ns = 
-            (metrics.average_execution_time_ns * (metrics.total_tasks - 1) + execution_time_ns) / metrics.total_tasks;
+        metrics.average_execution_time_ns =
+            (metrics.average_execution_time_ns * (metrics.total_tasks - 1) + execution_time_ns)
+                / metrics.total_tasks;
     }
 
     pub async fn get_metrics(&self) -> PerformanceMetrics {
@@ -422,10 +438,13 @@ impl AsyncLoggingDecorator {
     where
         F: std::future::Future<Output = Result<T>>,
     {
-        let task_id = self.tracker.start_task(name.clone(), priority, metadata).await;
-        
+        let task_id = self
+            .tracker
+            .start_task(name.clone(), priority, metadata)
+            .await;
+
         let result = operation.await;
-        
+
         match result {
             Ok(value) => {
                 self.tracker.complete_task(&task_id).await?;
@@ -491,12 +510,7 @@ impl StructuredLogger {
     }
 
     /// 记录性能事件
-    pub async fn log_performance_event(
-        &self,
-        operation: &str,
-        duration: Duration,
-        success: bool,
-    ) {
+    pub async fn log_performance_event(&self, operation: &str, duration: Duration, success: bool) {
         let mut fields = HashMap::new();
         fields.insert("operation".to_string(), operation.to_string());
         fields.insert("duration_ms".to_string(), duration.as_millis().to_string());
@@ -542,11 +556,7 @@ impl LocalDebugger {
     }
 
     /// 调试模式执行任务
-    pub async fn debug_execute<F, T>(
-        &self,
-        task_name: &str,
-        operation: F,
-    ) -> Result<T>
+    pub async fn debug_execute<F, T>(&self, task_name: &str, operation: F) -> Result<T>
     where
         F: std::future::Future<Output = Result<T>>,
     {
@@ -557,7 +567,7 @@ impl LocalDebugger {
         }
 
         let result = operation.await;
-        
+
         match &result {
             Ok(_) => info!("✅ 调试任务完成: {}", task_name),
             Err(e) => error!("❌ 调试任务失败: {} - {}", task_name, e),
@@ -577,7 +587,10 @@ impl LocalDebugger {
             total_tasks: metrics.total_tasks,
             success_rate: metrics.success_rate,
             active_breakpoints: breakpoints.len(),
-            running_tasks: tasks.iter().filter(|t| matches!(t.status, TaskStatus::Running)).count(),
+            running_tasks: tasks
+                .iter()
+                .filter(|t| matches!(t.status, TaskStatus::Running))
+                .count(),
         }
     }
 }
@@ -611,15 +624,15 @@ pub async fn demonstrate_async_logging_debugging() -> Result<()> {
     let mut fields = HashMap::new();
     fields.insert("user_id".to_string(), "12345".to_string());
     fields.insert("action".to_string(), "login".to_string());
-    logger.log_business_event("user_login", Some(12345), fields).await;
+    logger
+        .log_business_event("user_login", Some(12345), fields)
+        .await;
 
     // 4. 演示异步任务跟踪
     println!("\n🔍 2. 异步任务跟踪演示:");
-    let task_id = tracker.start_task(
-        "demo_task".to_string(),
-        TaskPriority::High,
-        HashMap::new(),
-    ).await;
+    let task_id = tracker
+        .start_task("demo_task".to_string(), TaskPriority::High, HashMap::new())
+        .await;
 
     // 模拟任务执行
     sleep(Duration::from_millis(100)).await;
@@ -633,26 +646,30 @@ pub async fn demonstrate_async_logging_debugging() -> Result<()> {
     // 6. 演示调试功能
     println!("\n🐛 4. 调试功能演示:");
     debugger.set_breakpoint("debug_task").await;
-    
-    let debug_result = debugger.debug_execute("debug_task", async {
-        sleep(Duration::from_millis(50)).await;
-        Ok("调试任务完成".to_string())
-    }).await?;
-    
+
+    let debug_result = debugger
+        .debug_execute("debug_task", async {
+            sleep(Duration::from_millis(50)).await;
+            Ok("调试任务完成".to_string())
+        })
+        .await?;
+
     println!("调试结果: {}", debug_result);
 
     // 7. 演示日志装饰器
     println!("\n🎨 5. 日志装饰器演示:");
-    let decorated_result = decorator.execute_with_logging(
-        "decorated_task".to_string(),
-        TaskPriority::Normal,
-        HashMap::new(),
-        async {
-            sleep(Duration::from_millis(75)).await;
-            Ok("装饰器任务完成".to_string())
-        },
-    ).await?;
-    
+    let decorated_result = decorator
+        .execute_with_logging(
+            "decorated_task".to_string(),
+            TaskPriority::Normal,
+            HashMap::new(),
+            async {
+                sleep(Duration::from_millis(75)).await;
+                Ok("装饰器任务完成".to_string())
+            },
+        )
+        .await?;
+
     println!("装饰器结果: {}", decorated_result);
 
     // 8. 获取最终调试信息
@@ -671,20 +688,22 @@ mod tests {
     async fn test_async_task_tracker() {
         let config = AsyncLoggingConfig::default();
         let tracker = AsyncTaskTracker::new(config);
-        
-        let task_id = tracker.start_task(
-            "test_task".to_string(),
-            TaskPriority::Normal,
-            HashMap::new(),
-        ).await;
-        
+
+        let task_id = tracker
+            .start_task(
+                "test_task".to_string(),
+                TaskPriority::Normal,
+                HashMap::new(),
+            )
+            .await;
+
         assert!(!task_id.is_empty());
-        
+
         let task_info = tracker.get_task_info(&task_id).await;
         assert!(task_info.is_some());
-        
+
         tracker.complete_task(&task_id).await.unwrap();
-        
+
         let completed_task = tracker.get_task_info(&task_id).await.unwrap();
         assert!(matches!(completed_task.status, TaskStatus::Completed));
     }
@@ -692,10 +711,14 @@ mod tests {
     #[tokio::test]
     async fn test_performance_monitor() {
         let monitor = AsyncPerformanceMonitor::new();
-        
-        monitor.record_task_completion(Duration::from_millis(100), true).await;
-        monitor.record_task_completion(Duration::from_millis(200), false).await;
-        
+
+        monitor
+            .record_task_completion(Duration::from_millis(100), true)
+            .await;
+        monitor
+            .record_task_completion(Duration::from_millis(200), false)
+            .await;
+
         let metrics = monitor.get_metrics().await;
         assert_eq!(metrics.total_tasks, 2);
         assert_eq!(metrics.successful_tasks, 1);
@@ -708,10 +731,10 @@ mod tests {
         let config = AsyncLoggingConfig::default();
         let tracker = Arc::new(AsyncTaskTracker::new(config));
         let debugger = LocalDebugger::new(tracker);
-        
+
         debugger.set_breakpoint("test_task").await;
         assert!(debugger.check_breakpoint("test_task").await);
-        
+
         debugger.clear_breakpoint("test_task").await;
         assert!(!debugger.check_breakpoint("test_task").await);
     }

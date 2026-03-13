@@ -35,7 +35,7 @@ fn demo_high_performance_memory_manager() {
     // 创建 WASM 内存分配器配置
     let allocator = WasmAllocatorConfig::new(
         NonZeroUsize::new(65536).unwrap(), // 64KB 页面
-        100 // 最大 100 页
+        100,                               // 最大 100 页
     );
 
     // 计算不同大小数据需要的页面数
@@ -124,7 +124,10 @@ fn demo_complete_optimization() {
     let chunk_size = NonZeroUsize::new(1024).unwrap();
     let total_size = 5000;
     let chunks = calculate_buffer_chunks(total_size, chunk_size);
-    println!("   ✅ NonZero::div_ceil: 计算性能提升 10%，需要 {} 块", chunks);
+    println!(
+        "   ✅ NonZero::div_ceil: 计算性能提升 10%，需要 {} 块",
+        chunks
+    );
 
     // 3. 使用迭代器特化进行数组比较
     let vec1: Vec<i32> = (1..=100).collect();

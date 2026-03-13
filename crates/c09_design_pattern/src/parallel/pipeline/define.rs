@@ -60,7 +60,10 @@ pub enum StageFn {
 
 /// 根据阶段列表构建流水线，返回位 impl Iterator + Send
 #[allow(unused)]
-pub fn make_pluggable_iter<'a>(input: &'a [i32], stages: &'a [StageFn]) -> Box<dyn Iterator<Item = i32> + Send + 'a> {
+pub fn make_pluggable_iter<'a>(
+    input: &'a [i32],
+    stages: &'a [StageFn],
+) -> Box<dyn Iterator<Item = i32> + Send + 'a> {
     let mut it: Box<dyn Iterator<Item = i32> + Send + 'a> = Box::new(input.iter().copied());
     for stage in stages {
         it = match stage {
@@ -85,13 +88,21 @@ mod tests {
 mod pluggable_tests {
     use super::*;
 
-    fn double(x: i32) -> i32 { x * 2 }
-    fn is_div3(x: &i32) -> bool { *x % 3 == 0 }
+    fn double(x: i32) -> i32 {
+        x * 2
+    }
+    fn is_div3(x: &i32) -> bool {
+        *x % 3 == 0
+    }
 
     #[test]
     fn test_make_pluggable_iter() {
         let data = [1, 2, 3, 4, 5, 6];
-        let stages = [StageFn::Map(double), StageFn::Filter(is_div3), StageFn::Map(|v| v + 1)];
+        let stages = [
+            StageFn::Map(double),
+            StageFn::Filter(is_div3),
+            StageFn::Map(|v| v + 1),
+        ];
         let out: Vec<i32> = make_pluggable_iter(&data, &stages).collect();
         assert_eq!(out, vec![7, 13]);
     }

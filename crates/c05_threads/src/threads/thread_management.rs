@@ -5,6 +5,10 @@
 //! - 线程池管理
 //! - 线程状态监控
 //! - 线程通信
+
+// 允许类型复杂性警告
+#![allow(clippy::type_complexity)]
+
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::mpsc;
@@ -389,8 +393,6 @@ pub fn demonstrate_thread_management() {
         .map(|i| {
             let manager = manager.clone();
             thread::spawn(move || {
-                
-
                 manager
                     .create_thread(format!("TestThread-{}", i), 2, move || {
                         for j in 0..100 {

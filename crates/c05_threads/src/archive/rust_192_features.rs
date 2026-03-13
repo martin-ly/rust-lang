@@ -34,10 +34,10 @@
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
 //! - 最后更新: 2025-12-11
+use std::collections::VecDeque;
 use std::mem::MaybeUninit;
 use std::num::NonZeroUsize;
 use std::sync::{Arc, Mutex};
-use std::collections::VecDeque;
 
 // ==================== 1. MaybeUninit 在并发编程中的应用 ====================
 
@@ -454,10 +454,7 @@ impl Default for ThreadPoolManager {
 /// ```ignore
 /// // 归档模块示例
 /// ```
-pub fn calculate_thread_pool_size(
-    total_tasks: usize,
-    tasks_per_thread: NonZeroUsize,
-) -> usize {
+pub fn calculate_thread_pool_size(total_tasks: usize, tasks_per_thread: NonZeroUsize) -> usize {
     if total_tasks == 0 {
         return 0;
     }
@@ -491,7 +488,7 @@ pub fn create_default_resource_allocator() -> ThreadResourceAllocator {
 pub fn create_default_scheduling_config() -> ThreadSchedulingConfig {
     ThreadSchedulingConfig::new(
         NonZeroUsize::new(2).unwrap(), // 最小 2 个线程
-        16, // 最大 16 个线程
+        16,                            // 最大 16 个线程
     )
 }
 
@@ -521,9 +518,7 @@ pub fn create_high_priority_tasks<I>(ids: I) -> Vec<ThreadTask>
 where
     I: IntoIterator<Item = u64>,
 {
-    ids.into_iter()
-        .map(ThreadTask::high_priority)
-        .collect()
+    ids.into_iter().map(ThreadTask::high_priority).collect()
 }
 
 /// 创建低优先级任务批次
@@ -536,9 +531,7 @@ pub fn create_low_priority_tasks<I>(ids: I) -> Vec<ThreadTask>
 where
     I: IntoIterator<Item = u64>,
 {
-    ids.into_iter()
-        .map(ThreadTask::low_priority)
-        .collect()
+    ids.into_iter().map(ThreadTask::low_priority).collect()
 }
 
 /// 从任务列表创建线程池管理器并添加所有任务
@@ -670,16 +663,29 @@ pub fn demonstrate_rust_192_thread_features() {
     // 1. rotate_right 演示
     println!("1. rotate_right 在线程池管理中的应用:");
     let mut queue = ThreadPoolTaskQueue::new();
-    queue.push(ThreadTask { id: 1, priority: 10 });
-    queue.push(ThreadTask { id: 2, priority: 20 });
-    queue.push(ThreadTask { id: 3, priority: 30 });
+    queue.push(ThreadTask {
+        id: 1,
+        priority: 10,
+    });
+    queue.push(ThreadTask {
+        id: 2,
+        priority: 20,
+    });
+    queue.push(ThreadTask {
+        id: 3,
+        priority: 30,
+    });
 
-    println!("   原始队列: {:?}",
-        queue.iter().map(|t| t.id).collect::<Vec<_>>());
+    println!(
+        "   原始队列: {:?}",
+        queue.iter().map(|t| t.id).collect::<Vec<_>>()
+    );
 
     queue.rotate(1);
-    println!("   轮转后: {:?}",
-        queue.iter().map(|t| t.id).collect::<Vec<_>>());
+    println!(
+        "   轮转后: {:?}",
+        queue.iter().map(|t| t.id).collect::<Vec<_>>()
+    );
 
     // 2. NonZero::div_ceil 演示
     println!("\n2. NonZero::div_ceil 在线程数量计算中的应用:");
@@ -698,7 +704,10 @@ pub fn demonstrate_rust_192_thread_features() {
     let config = ThreadSchedulingConfig::new(NonZeroUsize::new(2).unwrap(), 10);
     println!("   最小线程数: 2");
     println!("   最大线程数: 10");
-    println!("   23 个任务需要线程数: {}", config.calculate_threads_for_tasks(23));
+    println!(
+        "   23 个任务需要线程数: {}",
+        config.calculate_threads_for_tasks(23)
+    );
 
     // 3. MaybeUninit 演示
     println!("\n3. MaybeUninit 在并发编程中的应用:");
@@ -713,12 +722,21 @@ pub fn demonstrate_rust_192_thread_features() {
     // 4. 线程池管理器演示
     println!("\n4. 线程池管理器:");
     let manager = ThreadPoolManager::new();
-    manager.add_task(ThreadTask { id: 1, priority: 10 });
-    manager.add_task(ThreadTask { id: 2, priority: 20 });
+    manager.add_task(ThreadTask {
+        id: 1,
+        priority: 10,
+    });
+    manager.add_task(ThreadTask {
+        id: 2,
+        priority: 20,
+    });
 
     manager.rotate();
     if let Some(task) = manager.next_task() {
-        println!("   获取到的任务: ID={}, Priority={}", task.id, task.priority);
+        println!(
+            "   获取到的任务: ID={}, Priority={}",
+            task.id, task.priority
+        );
     }
 }
 
@@ -729,8 +747,14 @@ mod tests {
     #[test]
     fn test_thread_pool_queue_rotate() {
         let mut queue = ThreadPoolTaskQueue::new();
-        queue.push(ThreadTask { id: 1, priority: 10 });
-        queue.push(ThreadTask { id: 2, priority: 20 });
+        queue.push(ThreadTask {
+            id: 1,
+            priority: 10,
+        });
+        queue.push(ThreadTask {
+            id: 2,
+            priority: 20,
+        });
 
         queue.rotate(1);
         let first = queue.pop().unwrap();

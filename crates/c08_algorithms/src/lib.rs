@@ -121,8 +121,8 @@ pub fn get_rust_version() -> &'static str {
 
 /// 重新导出主题化模块的主要类型
 pub use topics::{
-    AlgorithmCategory, AlgorithmInfo, AlgorithmBenchmark, ComplexityAnalyzer,
-    ImplementationType, LibraryStats, get_library_stats, BenchmarkResult,
+    AlgorithmBenchmark, AlgorithmCategory, AlgorithmInfo, BenchmarkResult, ComplexityAnalyzer,
+    ImplementationType, LibraryStats, get_library_stats,
 };
 
 // 兼容性函数，使用主题化模块的实现

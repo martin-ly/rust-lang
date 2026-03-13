@@ -2,7 +2,7 @@
 //!
 //! 本模块实现了各种排序算法的并行版本，充分利用多核 CPU 的计算能力。
 //! 基于 rayon 实现数据并行和任务并行。
-use super::{SortingAlgorithm, AlgorithmComplexity};
+use super::{AlgorithmComplexity, SortingAlgorithm};
 use crate::algorithms::execution_modes::ParallelAlgorithm;
 use rayon::prelude::*;
 
@@ -10,7 +10,10 @@ use rayon::prelude::*;
 pub struct ParallelQuickSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelQuickSort {
-    fn execute(&self, input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -25,9 +28,8 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelQuickSort {
             .map(|(i, &val)| (i, val))
             .collect();
 
-        let (left, right): (Vec<(usize, i32)>, Vec<(usize, i32)>) = filtered
-            .into_iter()
-            .partition(|(_, val)| *val <= pivot_val);
+        let (left, right): (Vec<(usize, i32)>, Vec<(usize, i32)>) =
+            filtered.into_iter().partition(|(_, val)| *val <= pivot_val);
 
         let left_sorted = if left.len() > 1 {
             let left_algorithm = ParallelQuickSort;
@@ -50,7 +52,11 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelQuickSort {
         Ok(result)
     }
 
-    fn execute_with_threads(&self, input: Vec<i32>, _thread_count: usize) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute_with_threads(
+        &self,
+        input: Vec<i32>,
+        _thread_count: usize,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         // 对于并行算法，线程数由 rayon 自动管理
         self.execute(input)
     }
@@ -70,7 +76,10 @@ impl super::ParallelSortingAlgorithm for ParallelQuickSort {
 pub struct ParallelMergeSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelMergeSort {
-    fn execute(&self, input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.len() <= 1 {
             return Ok(input);
         }
@@ -86,7 +95,7 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelMergeSort {
             || {
                 let right_algorithm = ParallelMergeSort;
                 right_algorithm.execute(right.to_vec())
-            }
+            },
         );
 
         let left_sorted = left_sorted?;
@@ -95,7 +104,11 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelMergeSort {
         Ok(merge_parallel(&left_sorted, &right_sorted))
     }
 
-    fn execute_with_threads(&self, input: Vec<i32>, _thread_count: usize) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute_with_threads(
+        &self,
+        input: Vec<i32>,
+        _thread_count: usize,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         self.execute(input)
     }
 }
@@ -106,7 +119,14 @@ impl super::ParallelSortingAlgorithm for ParallelMergeSort {
     }
 
     fn get_complexity(&self) -> AlgorithmComplexity {
-        AlgorithmComplexity::new("O(n log n)", "O(n log n)", "O(n log n)", "O(n)", true, false)
+        AlgorithmComplexity::new(
+            "O(n log n)",
+            "O(n log n)",
+            "O(n log n)",
+            "O(n)",
+            true,
+            false,
+        )
     }
 }
 
@@ -114,7 +134,10 @@ impl super::ParallelSortingAlgorithm for ParallelMergeSort {
 pub struct ParallelHeapSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelHeapSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         let len = input.len();
 
         // 构建最大堆
@@ -131,7 +154,11 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelHeapSort {
         Ok(input)
     }
 
-    fn execute_with_threads(&self, input: Vec<i32>, _thread_count: usize) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute_with_threads(
+        &self,
+        input: Vec<i32>,
+        _thread_count: usize,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         self.execute(input)
     }
 }
@@ -142,7 +169,14 @@ impl super::ParallelSortingAlgorithm for ParallelHeapSort {
     }
 
     fn get_complexity(&self) -> AlgorithmComplexity {
-        AlgorithmComplexity::new("O(n log n)", "O(n log n)", "O(n log n)", "O(1)", false, true)
+        AlgorithmComplexity::new(
+            "O(n log n)",
+            "O(n log n)",
+            "O(n log n)",
+            "O(1)",
+            false,
+            true,
+        )
     }
 }
 
@@ -150,7 +184,10 @@ impl super::ParallelSortingAlgorithm for ParallelHeapSort {
 pub struct ParallelInsertionSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelInsertionSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         for i in 1..input.len() {
             let key = input[i];
             let mut j = i;
@@ -165,7 +202,11 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelInsertionSort {
         Ok(input)
     }
 
-    fn execute_with_threads(&self, input: Vec<i32>, _thread_count: usize) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute_with_threads(
+        &self,
+        input: Vec<i32>,
+        _thread_count: usize,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         self.execute(input)
     }
 }
@@ -184,18 +225,23 @@ impl super::ParallelSortingAlgorithm for ParallelInsertionSort {
 pub struct ParallelSelectionSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelSelectionSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         for i in 0..input.len() {
-            let min_idx = (i..input.len())
-                .min_by_key(|&j| input[j])
-                .unwrap_or(i);
+            let min_idx = (i..input.len()).min_by_key(|&j| input[j]).unwrap_or(i);
             input.swap(i, min_idx);
         }
 
         Ok(input)
     }
 
-    fn execute_with_threads(&self, input: Vec<i32>, _thread_count: usize) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute_with_threads(
+        &self,
+        input: Vec<i32>,
+        _thread_count: usize,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         self.execute(input)
     }
 }
@@ -214,7 +260,10 @@ impl super::ParallelSortingAlgorithm for ParallelSelectionSort {
 pub struct ParallelBubbleSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelBubbleSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         let len = input.len();
         for i in 0..len {
             for j in 0..len - i - 1 {
@@ -227,7 +276,11 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelBubbleSort {
         Ok(input)
     }
 
-    fn execute_with_threads(&self, input: Vec<i32>, _thread_count: usize) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute_with_threads(
+        &self,
+        input: Vec<i32>,
+        _thread_count: usize,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         self.execute(input)
     }
 }
@@ -246,7 +299,10 @@ impl super::ParallelSortingAlgorithm for ParallelBubbleSort {
 pub struct ParallelRadixSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelRadixSort {
-    fn execute(&self, input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -263,7 +319,11 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelRadixSort {
         Ok(output)
     }
 
-    fn execute_with_threads(&self, input: Vec<i32>, _thread_count: usize) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute_with_threads(
+        &self,
+        input: Vec<i32>,
+        _thread_count: usize,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         self.execute(input)
     }
 }
@@ -282,7 +342,10 @@ impl super::ParallelSortingAlgorithm for ParallelRadixSort {
 pub struct ParallelCountingSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelCountingSort {
-    fn execute(&self, input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -309,7 +372,11 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelCountingSort {
         Ok(output)
     }
 
-    fn execute_with_threads(&self, input: Vec<i32>, _thread_count: usize) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute_with_threads(
+        &self,
+        input: Vec<i32>,
+        _thread_count: usize,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         self.execute(input)
     }
 }
@@ -328,7 +395,10 @@ impl super::ParallelSortingAlgorithm for ParallelCountingSort {
 pub struct ParallelBucketSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelBucketSort {
-    fn execute(&self, input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         if input.is_empty() {
             return Ok(input);
         }
@@ -348,13 +418,14 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelBucketSort {
         }
 
         // 并行排序每个桶
-        let sorted_buckets: Result<Vec<Vec<i32>>, Box<dyn std::error::Error + Send + Sync>> = buckets
-            .into_par_iter()
-            .map(|mut bucket: Vec<i32>| {
-                bucket.sort();
-                Ok::<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>(bucket)
-            })
-            .collect();
+        let sorted_buckets: Result<Vec<Vec<i32>>, Box<dyn std::error::Error + Send + Sync>> =
+            buckets
+                .into_par_iter()
+                .map(|mut bucket: Vec<i32>| {
+                    bucket.sort();
+                    Ok::<Vec<i32>, Box<dyn std::error::Error + Send + Sync>>(bucket)
+                })
+                .collect();
 
         let sorted_buckets = sorted_buckets?;
 
@@ -364,7 +435,11 @@ impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelBucketSort {
         Ok(result)
     }
 
-    fn execute_with_threads(&self, input: Vec<i32>, _thread_count: usize) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute_with_threads(
+        &self,
+        input: Vec<i32>,
+        _thread_count: usize,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         self.execute(input)
     }
 }
@@ -383,14 +458,21 @@ impl super::ParallelSortingAlgorithm for ParallelBucketSort {
 pub struct ParallelTimSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelTimSort {
-    fn execute(&self, mut input: Vec<i32>) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute(
+        &self,
+        mut input: Vec<i32>,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         // TimSort 是一个复杂的混合排序算法，这里提供简化版本
         // 实际实现会结合插入排序和归并排序
         input.sort();
         Ok(input)
     }
 
-    fn execute_with_threads(&self, input: Vec<i32>, _thread_count: usize) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
+    fn execute_with_threads(
+        &self,
+        input: Vec<i32>,
+        _thread_count: usize,
+    ) -> Result<Vec<i32>, Box<dyn std::error::Error + Send + Sync>> {
         self.execute(input)
     }
 }

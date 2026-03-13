@@ -49,10 +49,7 @@ fn test_large_arrays() {
 
     // 大数组查找
     assert_eq!(large_vec.iter().find(|&&x| x == 2500), Some(&2500));
-    assert_eq!(
-        large_vec.iter().find(|&&x| x == large_size as i32),
-        None
-    );
+    assert_eq!(large_vec.iter().find(|&&x| x == large_size as i32), None);
 }
 
 /// 测试算法边界条件

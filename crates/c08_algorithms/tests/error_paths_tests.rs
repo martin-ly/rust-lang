@@ -20,7 +20,7 @@ fn test_error_inputs() {
 fn test_error_states() {
     // 测试已排序数组的边界情况
     let sorted = vec![1, 2, 3, 4, 5];
-    
+
     // 测试查找不存在的元素
     let result = sorted.binary_search(&10);
     assert!(result.is_err());
@@ -37,7 +37,7 @@ fn test_exception_cases() {
     // 测试溢出情况（模拟）
     let large_value = i32::MAX;
     let small_value = 1;
-    
+
     // 注意：实际溢出会导致panic，这里只测试边界值
     assert_eq!(large_value, i32::MAX);
     assert_eq!(small_value, 1);

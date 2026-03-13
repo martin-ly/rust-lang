@@ -484,8 +484,12 @@ pub fn topo_sort_sync<T>(graph: &HashMap<T, Vec<T>>) -> Option<Vec<T>>
 where
     T: Eq + Hash + Clone,
 {
-    fn zero_indegree_keys<T: Eq + Hash + Clone>(indeg: &HashMap<T, usize>) -> impl Iterator<Item = T> + '_ {
-        indeg.iter().filter_map(|(k, d)| (*d == 0).then_some(k.clone()))
+    fn zero_indegree_keys<T: Eq + Hash + Clone>(
+        indeg: &HashMap<T, usize>,
+    ) -> impl Iterator<Item = T> + '_ {
+        indeg
+            .iter()
+            .filter_map(|(k, d)| (*d == 0).then_some(k.clone()))
     }
 
     let mut indeg: HashMap<T, usize> = HashMap::new();
@@ -605,10 +609,11 @@ pub async fn bellman_ford_async(
 }
 
 /// Floyd–Warshall：多源最短路（允许负边但无负环）。返回 n×n 距离矩阵
+#[allow(clippy::needless_range_loop)]
 pub fn floyd_warshall_sync(n: usize, edges: &[(usize, usize, f64)]) -> Vec<Vec<f64>> {
     let mut d = vec![vec![f64::INFINITY; n]; n];
-    for i in 0..n {
-        d[i][i] = 0.0;
+    for (i, row) in d.iter_mut().enumerate().take(n) {
+        row[i] = 0.0;
     }
     for &(u, v, w) in edges {
         d[u][v] = d[u][v].min(w);
@@ -714,8 +719,8 @@ pub fn hopcroft_karp_sync(
     fn bfs_hk(
         adj: &[Vec<usize>],
         n_left: usize,
-        pair_u: &Vec<Option<usize>>,
-        pair_v: &Vec<Option<usize>>,
+        pair_u: &[Option<usize>],
+        pair_v: &[Option<usize>],
         dist: &mut [i32],
     ) -> bool {
         let mut q = VecDeque::new();
@@ -808,10 +813,11 @@ pub fn min_vertex_cover_bipartite(
             if !vis_v[v] && pair_u[u] != Some(v) {
                 vis_v[v] = true;
                 if let Some(u2) = pair_v[v]
-                    && !vis_u[u2] {
-                        vis_u[u2] = true;
-                        q.push_back(u2);
-                    }
+                    && !vis_u[u2]
+                {
+                    vis_u[u2] = true;
+                    q.push_back(u2);
+                }
             }
         }
     }
@@ -1181,7 +1187,7 @@ pub fn tree_diameter_undirected(n: usize, edges: &[(usize, usize)]) -> usize {
         g[u].push(v);
         g[v].push(u);
     }
-    fn bfs(start: usize, g: &Vec<Vec<usize>>) -> (usize, usize) {
+    fn bfs(start: usize, g: &[Vec<usize>]) -> (usize, usize) {
         let n = g.len();
         let mut dist = vec![usize::MAX; n];
         let mut q = VecDeque::new();
@@ -1195,13 +1201,11 @@ pub fn tree_diameter_undirected(n: usize, edges: &[(usize, usize)]) -> usize {
                 }
             }
         }
-        let mut best = (0, 0);
-        for i in 0..n {
-            if dist[i] > best.1 {
-                best = (i, dist[i]);
-            }
-        }
-        best
+        dist.iter()
+            .enumerate()
+            .max_by_key(|&(_, &d)| d)
+            .map(|(i, &d)| (i, d))
+            .unwrap_or((0, 0))
     }
     let (p, _) = bfs(0, &g);
     let (_, d) = bfs(p, &g);

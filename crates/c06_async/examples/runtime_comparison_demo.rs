@@ -1,16 +1,16 @@
 //! 异步运行时对比演示
-//! 
+//!
 //! 本示例对比了不同的异步运行时：
 //! - Tokio（生产级运行时）
 //! - Smol（轻量级运行时）
 //! - Async-std（标准库风格运行时）
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example runtime_comparison_demo
 //! ```
-use std::time::{Duration, Instant};
 use anyhow::Result;
+use std::time::{Duration, Instant};
 
 /// 主函数 - 使用 Tokio 运行时
 #[tokio::main]
@@ -102,7 +102,7 @@ async fn demo_smol_runtime() -> Result<()> {
     // 1. 轻量级任务生成
     println!("    1. 轻量级任务生成");
     let start = Instant::now();
-    
+
     // 模拟 Smol 的任务生成（使用 Tokio 的 spawn）
     let handles: Vec<_> = (0..5)
         .map(|i| {
@@ -122,7 +122,7 @@ async fn demo_smol_runtime() -> Result<()> {
     // 2. 简单的异步操作
     println!("    2. 简单异步操作");
     let start = Instant::now();
-    
+
     // 模拟 Smol 的简单异步操作
     let tasks = (0..3)
         .map(|i| async move {
@@ -179,7 +179,7 @@ async fn compare_performance() -> Result<()> {
     println!("    3. 受限并发执行");
     let semaphore = std::sync::Arc::new(tokio::sync::Semaphore::new(10)); // 最多10个并发
     let start = Instant::now();
-    
+
     let handles: Vec<_> = (0..TASK_COUNT)
         .map(|i| {
             let semaphore = std::sync::Arc::clone(&semaphore);
@@ -201,7 +201,7 @@ async fn compare_performance() -> Result<()> {
     println!("      顺序执行耗时: {:?}", sequential_time);
     println!("      完全并发耗时: {:?}", tokio_concurrent_time);
     println!("      受限并发耗时: {:?}", limited_concurrent_time);
-    
+
     let speedup_ratio = sequential_time.as_nanos() as f64 / tokio_concurrent_time.as_nanos() as f64;
     println!("      并发加速比: {:.2}x", speedup_ratio);
 
@@ -242,7 +242,7 @@ async fn analyze_memory_usage() -> Result<()> {
 fn print_runtime_selection_guide() {
     println!("\n📋 运行时选择指南");
     println!("====================");
-    
+
     println!("🚀 选择 Tokio 当:");
     println!("  - 构建生产级应用");
     println!("  - 需要丰富的生态系统");

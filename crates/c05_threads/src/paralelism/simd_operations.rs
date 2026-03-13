@@ -534,13 +534,13 @@ impl SimdOptimizedAlgorithms {
         let len = input.len();
 
         // 简化的FFT实现，使用SIMD指令优化
-        for i in 0..len {
+        for (i, result_item) in result.iter_mut().enumerate().take(len) {
             let mut sum = 0.0;
-            for j in 0..len {
+            for (j, &input_item) in input.iter().enumerate().take(len) {
                 let angle = -2.0 * std::f32::consts::PI * (i * j) as f32 / len as f32;
-                sum += input[j] * angle.cos();
+                sum += input_item * angle.cos();
             }
-            result[i] = sum;
+            *result_item = sum;
         }
     }
 }

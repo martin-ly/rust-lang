@@ -178,7 +178,10 @@ pub mod invariant_verification {
             assert_eq!(new_balance, old_balance - amount);
             assert!(new_balance >= 0, "违反不变式: 余额为负");
 
-            println!("  [Withdraw] {} - {} = {}", old_balance, amount, new_balance);
+            println!(
+                "  [Withdraw] {} - {} = {}",
+                old_balance, amount, new_balance
+            );
             Ok(new_balance)
         }
 
@@ -240,10 +243,7 @@ pub mod invariant_verification {
             + account3.get_balance().await;
 
         println!("最终总额: {}", final_total);
-        assert_eq!(
-            initial_total, final_total,
-            "违反全局不变式: 总额发生变化"
-        );
+        assert_eq!(initial_total, final_total, "违反全局不变式: 总额发生变化");
         println!("✓ 全局不变式验证通过");
     }
 }
@@ -358,10 +358,14 @@ pub mod deadlock_detection {
             let mut holders = self.resource_holders.lock().await;
 
             if let Some(holder) = holders.get(resource)
-                && holder != task {
-                    println!("  [Warning] {} 等待资源 {}，当前持有者: {}", task, resource, holder);
-                    return Err("资源被占用");
-                }
+                && holder != task
+            {
+                println!(
+                    "  [Warning] {} 等待资源 {}，当前持有者: {}",
+                    task, resource, holder
+                );
+                return Err("资源被占用");
+            }
 
             holders.insert(resource.to_string(), task.to_string());
             println!("  [Acquire] {} 获取资源 {}", task, resource);

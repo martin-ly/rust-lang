@@ -55,18 +55,20 @@ pub fn bridge_to_mpsc<T: Send, R>(
     let mut forwarded = 0usize;
     loop {
         if let Some(flag) = &stop
-            && flag.load(AtomicOrdering::Relaxed) {
-                break;
-            }
+            && flag.load(AtomicOrdering::Relaxed)
+        {
+            break;
+        }
         if let Some(v) = rx.recv() {
             if tx.send(v).is_err() {
                 break;
             }
             forwarded += 1;
             if let Some(limit) = max_forward
-                && forwarded >= limit {
-                    break;
-                }
+                && forwarded >= limit
+            {
+                break;
+            }
         } else {
             break;
         }
@@ -87,9 +89,10 @@ pub fn bridge_to_mpsc_rate_limited<T: Send, R>(
     let mut last = Instant::now();
     loop {
         if let Some(flag) = &stop
-            && flag.load(AtomicOrdering::Relaxed) {
-                break;
-            }
+            && flag.load(AtomicOrdering::Relaxed)
+        {
+            break;
+        }
         if let Some(v) = rx.recv() {
             let elapsed = last.elapsed();
             if elapsed < min_interval {
@@ -101,9 +104,10 @@ pub fn bridge_to_mpsc_rate_limited<T: Send, R>(
             last = Instant::now();
             forwarded += 1;
             if let Some(limit) = max_forward
-                && forwarded >= limit {
-                    break;
-                }
+                && forwarded >= limit
+            {
+                break;
+            }
         } else {
             break;
         }

@@ -1,5 +1,5 @@
 //! 真实世界应用场景演示
-//! 
+//!
 //! 本示例展示了在真实世界应用中使用异步编程的场景：
 //! - Web API 服务器
 //! - 消息队列处理
@@ -7,18 +7,18 @@
 //! - 定时任务调度
 //! - 配置热重载
 //! - 健康检查和监控
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example real_world_app_demo
 //! ```
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};
-use tokio::sync::{RwLock, Mutex, Notify};
-use tokio::time::{sleep, interval};
-use anyhow::Result;
-use serde::{Serialize, Deserialize};
+use tokio::sync::{Mutex, Notify, RwLock};
+use tokio::time::{interval, sleep};
 use uuid::Uuid;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -36,7 +36,7 @@ impl Default for Config {
         features.insert("caching".to_string(), true);
         features.insert("metrics".to_string(), true);
         features.insert("rate_limiting".to_string(), false);
-        
+
         Self {
             server_port: 8080,
             database_url: "postgresql://localhost:5432/myapp".to_string(),
@@ -219,19 +219,19 @@ impl RealWorldApp {
 
         let handle = tokio::spawn(async move {
             println!("    🚀 API 服务器启动在端口 8080");
-            
+
             let mut request_count = 0;
             let mut interval = interval(Duration::from_secs(1));
-            
+
             loop {
                 tokio::select! {
                     _ = interval.tick() => {
                         request_count += 1;
                         println!("      📡 处理 API 请求 #{}", request_count);
-                        
+
                         // 模拟API请求处理
                         Self::handle_api_request(&state, &message_queue, request_count).await;
-                        
+
                         // 更新指标
                         {
                             let mut metrics = state.metrics.lock().await;
@@ -269,12 +269,12 @@ impl RealWorldApp {
                     created_at: SystemTime::now(),
                     last_login: None,
                 };
-                
+
                 {
                     let mut users = state.users.write().await;
                     users.insert(user.id, user.clone());
                 }
-                
+
                 let mut queue = message_queue.lock().await;
                 queue.push(Message::UserCreated(user));
             }
@@ -289,12 +289,12 @@ impl RealWorldApp {
                     created_at: SystemTime::now(),
                     updated_at: SystemTime::now(),
                 };
-                
+
                 {
                     let mut tasks = state.tasks.write().await;
                     tasks.insert(task.id, task.clone());
                 }
-                
+
                 let mut queue = message_queue.lock().await;
                 queue.push(Message::TaskUpdated(task));
             }
@@ -308,12 +308,12 @@ impl RealWorldApp {
                     user_id: Uuid::new_v4(),
                     created_at: SystemTime::now(),
                 };
-                
+
                 {
                     let mut uploads = state.uploads.write().await;
                     uploads.insert(upload.id, upload.clone());
                 }
-                
+
                 let mut queue = message_queue.lock().await;
                 queue.push(Message::FileUploaded(upload));
             }
@@ -332,9 +332,9 @@ impl RealWorldApp {
 
         let handle = tokio::spawn(async move {
             println!("    📨 消息队列处理器启动");
-            
+
             let mut processed_count = 0;
-            
+
             loop {
                 tokio::select! {
                     _ = sleep(Duration::from_millis(500)) => {
@@ -368,8 +368,10 @@ impl RealWorldApp {
                 sleep(Duration::from_millis(150)).await;
             }
             Message::FileUploaded(upload) => {
-                println!("      📁 处理文件上传消息 #{}: {} ({} 字节)", 
-                    count, upload.filename, upload.size);
+                println!(
+                    "      📁 处理文件上传消息 #{}: {} ({} 字节)",
+                    count, upload.filename, upload.size
+                );
                 // 模拟异步处理：病毒扫描、缩略图生成等
                 sleep(Duration::from_millis(200)).await;
             }
@@ -387,10 +389,10 @@ impl RealWorldApp {
 
         let handle = tokio::spawn(async move {
             println!("    📁 文件上传处理器启动");
-            
+
             let mut processed_uploads = 0;
             let mut interval = interval(Duration::from_secs(2));
-            
+
             loop {
                 tokio::select! {
                     _ = interval.tick() => {
@@ -399,7 +401,7 @@ impl RealWorldApp {
                             uploads_map.remove(&id);
                             processed_uploads += 1;
                             println!("      📤 处理文件上传 #{}: {}", processed_uploads, upload.filename);
-                            
+
                             // 模拟文件处理
                             Self::process_file_upload(upload).await;
                         }
@@ -419,13 +421,13 @@ impl RealWorldApp {
         // 模拟文件处理步骤
         println!("        🔍 病毒扫描: {}", upload.filename);
         sleep(Duration::from_millis(100)).await;
-        
+
         println!("        🖼️ 生成缩略图: {}", upload.filename);
         sleep(Duration::from_millis(200)).await;
-        
+
         println!("        💾 存储到云存储: {}", upload.filename);
         sleep(Duration::from_millis(150)).await;
-        
+
         println!("        ✅ 文件处理完成: {}", upload.filename);
     }
 
@@ -435,16 +437,16 @@ impl RealWorldApp {
 
         let handle = tokio::spawn(async move {
             println!("    ⏰ 定时任务调度器启动");
-            
+
             let mut scheduled_tasks = 0;
             let mut interval = interval(Duration::from_secs(3));
-            
+
             loop {
                 tokio::select! {
                     _ = interval.tick() => {
                         scheduled_tasks += 1;
                         println!("      ⏰ 执行定时任务 #{}", scheduled_tasks);
-                        
+
                         // 模拟定时任务
                         Self::execute_scheduled_task(&tasks, scheduled_tasks).await;
                     }
@@ -483,10 +485,10 @@ impl RealWorldApp {
 
         let handle = tokio::spawn(async move {
             println!("    ⚙️ 配置热重载启动");
-            
+
             let mut reload_count = 0;
             let mut interval = interval(Duration::from_secs(5));
-            
+
             loop {
                 tokio::select! {
                     _ = interval.tick() => {
@@ -494,7 +496,7 @@ impl RealWorldApp {
                         if rand::random::<f32>() < 0.3 {
                             reload_count += 1;
                             println!("      🔄 检测到配置变化，重新加载 #{}", reload_count);
-                            
+
                             Self::reload_config(&config).await;
                             config_watcher.notify_waiters();
                         }
@@ -512,20 +514,23 @@ impl RealWorldApp {
 
     async fn reload_config(config: &Arc<RwLock<Config>>) {
         let mut config_guard = config.write().await;
-        
+
         // 模拟配置更新
         config_guard.log_level = if config_guard.log_level == "info" {
             "debug".to_string()
         } else {
             "info".to_string()
         };
-        
+
         let current_rate_limiting = config_guard.features.get("rate_limiting").unwrap_or(&false);
         let new_rate_limiting = !current_rate_limiting;
-        config_guard.features.insert("rate_limiting".to_string(), new_rate_limiting);
-        println!("        ✅ 配置已更新: log_level={}, rate_limiting={}", 
-            config_guard.log_level, 
-            new_rate_limiting);
+        config_guard
+            .features
+            .insert("rate_limiting".to_string(), new_rate_limiting);
+        println!(
+            "        ✅ 配置已更新: log_level={}, rate_limiting={}",
+            config_guard.log_level, new_rate_limiting
+        );
     }
 
     async fn start_health_monitor(&self) -> Result<tokio::task::JoinHandle<()>> {
@@ -534,16 +539,16 @@ impl RealWorldApp {
 
         let handle = tokio::spawn(async move {
             println!("    🏥 健康检查监控启动");
-            
+
             let mut health_checks = 0;
             let mut interval = interval(Duration::from_secs(4));
-            
+
             loop {
                 tokio::select! {
                     _ = interval.tick() => {
                         health_checks += 1;
                         println!("      🏥 执行健康检查 #{}", health_checks);
-                        
+
                         Self::perform_health_check(&metrics).await;
                     }
                     _ = shutdown.notified() => {
@@ -559,33 +564,34 @@ impl RealWorldApp {
 
     async fn perform_health_check(metrics: &Arc<Mutex<ApplicationMetrics>>) {
         let metrics_guard = metrics.lock().await;
-        
+
         let uptime = metrics_guard.start_time.elapsed();
         let success_rate = if metrics_guard.requests_total > 0 {
             metrics_guard.requests_success as f64 / metrics_guard.requests_total as f64
         } else {
             1.0
         };
-        
+
         let cache_hit_rate = if metrics_guard.cache_hits + metrics_guard.cache_misses > 0 {
-            metrics_guard.cache_hits as f64 / (metrics_guard.cache_hits + metrics_guard.cache_misses) as f64
+            metrics_guard.cache_hits as f64
+                / (metrics_guard.cache_hits + metrics_guard.cache_misses) as f64
         } else {
             0.0
         };
-        
+
         println!("        ✅ 系统健康状态:");
         println!("          运行时间: {:?}", uptime);
         println!("          请求成功率: {:.1}%", success_rate * 100.0);
         println!("          缓存命中率: {:.1}%", cache_hit_rate * 100.0);
         println!("          活跃连接: {}", metrics_guard.active_connections);
-        
+
         // 模拟健康检查
         sleep(Duration::from_millis(50)).await;
     }
 
     async fn simulate_user_activity(&self) -> Result<()> {
         println!("\n👥 模拟用户活动");
-        
+
         // 模拟用户注册
         for i in 0..5 {
             let user = User {
@@ -595,19 +601,19 @@ impl RealWorldApp {
                 created_at: SystemTime::now(),
                 last_login: None,
             };
-            
+
             {
                 let mut users = self.state.users.write().await;
                 users.insert(user.id, user.clone());
             }
-            
+
             let mut queue = self.message_queue.lock().await;
             queue.push(Message::UserCreated(user));
-            
+
             println!("  👤 模拟用户注册: 用户 {}", i);
             sleep(Duration::from_millis(200)).await;
         }
-        
+
         // 模拟任务创建
         for i in 0..3 {
             let task = Task {
@@ -619,34 +625,34 @@ impl RealWorldApp {
                 created_at: SystemTime::now(),
                 updated_at: SystemTime::now(),
             };
-            
+
             {
                 let mut tasks = self.state.tasks.write().await;
                 tasks.insert(task.id, task.clone());
             }
-            
+
             let mut queue = self.message_queue.lock().await;
             queue.push(Message::TaskUpdated(task));
-            
+
             println!("  📝 模拟任务创建: 任务 {}", i);
             sleep(Duration::from_millis(300)).await;
         }
-        
+
         Ok(())
     }
 
     async fn print_final_statistics(&self) {
         println!("\n📊 最终统计信息");
         println!("==================");
-        
+
         let users_count = self.state.users.read().await.len();
         let tasks_count = self.state.tasks.read().await.len();
         let uploads_count = self.state.uploads.read().await.len();
         let messages_count = self.message_queue.lock().await.len();
-        
+
         let metrics = self.state.metrics.lock().await;
         let uptime = metrics.start_time.elapsed();
-        
+
         println!("  👥 用户数量: {}", users_count);
         println!("  📝 任务数量: {}", tasks_count);
         println!("  📁 上传数量: {}", uploads_count);
@@ -655,7 +661,7 @@ impl RealWorldApp {
         println!("  📡 总请求数: {}", metrics.requests_total);
         println!("  ✅ 成功请求: {}", metrics.requests_success);
         println!("  ❌ 失败请求: {}", metrics.requests_failed);
-        
+
         if metrics.requests_total > 0 {
             let success_rate = metrics.requests_success as f64 / metrics.requests_total as f64;
             println!("  📈 成功率: {:.1}%", success_rate * 100.0);

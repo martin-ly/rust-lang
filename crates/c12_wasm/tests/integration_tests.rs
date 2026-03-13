@@ -15,7 +15,7 @@ fn test_wasm_function_call_integration() {
     fn wasm_add(a: i32, b: i32) -> i32 {
         a + b
     }
-    
+
     assert_eq!(wasm_add(3, 4), 7);
 }
 
@@ -34,7 +34,7 @@ fn test_wasm_import_export_integration() {
     pub fn exported_function(x: i32) -> i32 {
         x * 2
     }
-    
+
     assert_eq!(exported_function(21), 42);
 }
 
@@ -43,7 +43,7 @@ fn test_wasm_import_export_integration() {
 fn test_wasi_integration() {
     // 模拟WASI功能
     use std::env;
-    
+
     let args: Vec<String> = env::args().collect();
     assert!(!args.is_empty());
 }
@@ -55,19 +55,17 @@ fn test_wasm_rust_interop_integration() {
     struct WasmContext {
         data: Vec<u8>,
     }
-    
+
     impl WasmContext {
         fn new() -> Self {
-            WasmContext {
-                data: Vec::new(),
-            }
+            WasmContext { data: Vec::new() }
         }
-        
+
         fn add_data(&mut self, data: u8) {
             self.data.push(data);
         }
     }
-    
+
     let mut context = WasmContext::new();
     context.add_data(42);
     assert_eq!(context.data.len(), 1);

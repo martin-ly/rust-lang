@@ -429,6 +429,8 @@ impl<'a, T> ReferenceContainer<'a, T> {
 理解类型构造器的使用对于编写高效和安全的Rust代码至关重要。
 */
 
+#![allow(clippy::type_complexity)]
+
 use std::collections::HashMap;
 
 // 类型别名 - 简化复杂类型

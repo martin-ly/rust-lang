@@ -41,10 +41,23 @@ pub enum Type {
 /// 基础类型
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum PrimitiveType {
-    I8, I16, I32, I64, I128, Isize,
-    U8, U16, U32, U64, U128, Usize,
-    F32, F64,
-    Bool, Char, String,
+    I8,
+    I16,
+    I32,
+    I64,
+    I128,
+    Isize,
+    U8,
+    U16,
+    U32,
+    U64,
+    U128,
+    Usize,
+    F32,
+    F64,
+    Bool,
+    Char,
+    String,
     Unit,
 }
 
@@ -54,13 +67,22 @@ pub enum CompositeType {
     /// 元组类型
     Tuple(Vec<Type>),
     /// 数组类型
-    Array { element: Box<Type>, size: Option<usize> },
+    Array {
+        element: Box<Type>,
+        size: Option<usize>,
+    },
     /// 切片类型
     Slice(Box<Type>),
     /// 结构体类型
-    Struct { name: String, fields: HashMap<String, Type> },
+    Struct {
+        name: String,
+        fields: HashMap<String, Type>,
+    },
     /// 枚举类型
-    Enum { name: String, variants: HashMap<String, Vec<Type>> },
+    Enum {
+        name: String,
+        variants: HashMap<String, Vec<Type>>,
+    },
 }
 
 /// 泛型类型
@@ -227,7 +249,10 @@ impl TypeValidator {
                 } else {
                     stats.failed_validations += 1;
                 }
-                *stats.validations_by_severity.entry(result.severity).or_insert(0) += 1;
+                *stats
+                    .validations_by_severity
+                    .entry(result.severity)
+                    .or_insert(0) += 1;
             }
         }
 
@@ -259,8 +284,11 @@ impl TypeValidator {
 
         ValidationResult {
             valid: false,
-            message: format!("Type {} is not compatible with {}",
-                           self.format_type(from), self.format_type(to)),
+            message: format!(
+                "Type {} is not compatible with {}",
+                self.format_type(from),
+                self.format_type(to)
+            ),
             suggestions: vec![
                 "Consider using explicit type conversion".to_string(),
                 "Check if the types have a common trait".to_string(),
@@ -289,7 +317,10 @@ impl TypeValidator {
 
         // 检查生命周期约束
         for constraint in &lifetime.constraints {
-            if !self.validate_lifetime_constraint(&LifetimeConstraint::Outlives(constraint.clone(), constraint.clone()), &env) {
+            if !self.validate_lifetime_constraint(
+                &LifetimeConstraint::Outlives(constraint.clone(), constraint.clone()),
+                &env,
+            ) {
                 return ValidationResult {
                     valid: false,
                     message: format!("Lifetime constraint violated for '{}'", lifetime.name),
@@ -406,14 +437,25 @@ impl TypeValidator {
         // 简化实现，实际中需要更复杂的子类型关系
         matches!(
             (from, to),
-            (Type::Primitive(PrimitiveType::I8), Type::Primitive(PrimitiveType::I32))
-                | (Type::Primitive(PrimitiveType::I16), Type::Primitive(PrimitiveType::I32))
-                | (Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::I64))
+            (
+                Type::Primitive(PrimitiveType::I8),
+                Type::Primitive(PrimitiveType::I32)
+            ) | (
+                Type::Primitive(PrimitiveType::I16),
+                Type::Primitive(PrimitiveType::I32)
+            ) | (
+                Type::Primitive(PrimitiveType::I32),
+                Type::Primitive(PrimitiveType::I64)
+            )
         )
     }
 
     /// 验证生命周期约束
-    fn validate_lifetime_constraint(&self, constraint: &LifetimeConstraint, _env: &TypeEnvironment) -> bool {
+    fn validate_lifetime_constraint(
+        &self,
+        constraint: &LifetimeConstraint,
+        _env: &TypeEnvironment,
+    ) -> bool {
         // 简化实现
         match constraint {
             LifetimeConstraint::Outlives(_, _) => true,
@@ -450,11 +492,24 @@ impl TypeValidator {
         match type_ {
             Type::Primitive(p) => format!("{:?}", p),
             Type::Composite(c) => format!("{:?}", c),
-            Type::Generic(g) => format!("{}<{}>", g.name,
-                g.parameters.iter().map(|p| self.format_type(p)).collect::<Vec<_>>().join(", ")),
-            Type::Function(f) => format!("fn({}) -> {}",
-                f.parameters.iter().map(|p| self.format_type(p)).collect::<Vec<_>>().join(", "),
-                self.format_type(&f.return_type)),
+            Type::Generic(g) => format!(
+                "{}<{}>",
+                g.name,
+                g.parameters
+                    .iter()
+                    .map(|p| self.format_type(p))
+                    .collect::<Vec<_>>()
+                    .join(", ")
+            ),
+            Type::Function(f) => format!(
+                "fn({}) -> {}",
+                f.parameters
+                    .iter()
+                    .map(|p| self.format_type(p))
+                    .collect::<Vec<_>>()
+                    .join(", "),
+                self.format_type(&f.return_type)
+            ),
             Type::Reference(r) => {
                 let lifetime = if let Some(l) = &r.lifetime {
                     format!("'{} ", l.name)
@@ -463,7 +518,7 @@ impl TypeValidator {
                 };
                 let mutability = if r.mutable { "mut " } else { "" };
                 format!("&{}{}{}", lifetime, mutability, self.format_type(&r.target))
-            },
+            }
             Type::Lifetime(l) => format!("'{}", l.name),
             Type::Unknown => "?".to_string(),
         }
@@ -520,18 +575,22 @@ impl TypeInferencer {
         match expression {
             Expression::Literal(lit) => Ok(self.infer_literal_type(lit)),
             Expression::Variable(name) => self.infer_variable_type(name),
-            Expression::BinaryOp { left, operator, right } => {
-                self.infer_binary_operation_type(left, operator, right)
-            },
+            Expression::BinaryOp {
+                left,
+                operator,
+                right,
+            } => self.infer_binary_operation_type(left, operator, right),
             Expression::UnaryOp { operator, operand } => {
                 self.infer_unary_operation_type(operator, operand)
-            },
+            }
             Expression::FunctionCall { name, arguments } => {
                 self.infer_function_call_type(name, arguments)
-            },
-            Expression::If { condition, then_branch, else_branch } => {
-                self.infer_if_expression_type(condition, then_branch, else_branch)
-            },
+            }
+            Expression::If {
+                condition,
+                then_branch,
+                else_branch,
+            } => self.infer_if_expression_type(condition, then_branch, else_branch),
         }
     }
 
@@ -549,36 +608,51 @@ impl TypeInferencer {
     /// 推断变量类型
     fn infer_variable_type(&self, name: &str) -> Result<Type, String> {
         let env = self.type_env.lock().unwrap();
-        env.variable_types.get(name)
+        env.variable_types
+            .get(name)
             .cloned()
             .ok_or_else(|| format!("Variable '{}' is not defined", name))
     }
 
     /// 推断二元操作类型
-    fn infer_binary_operation_type(&self, left: &Expression, operator: &BinaryOperator, right: &Expression) -> Result<Type, String> {
+    fn infer_binary_operation_type(
+        &self,
+        left: &Expression,
+        operator: &BinaryOperator,
+        right: &Expression,
+    ) -> Result<Type, String> {
         let left_type = self.infer_expression_type(left)?;
         let right_type = self.infer_expression_type(right)?;
 
         match operator {
-            BinaryOperator::Add | BinaryOperator::Sub | BinaryOperator::Mul | BinaryOperator::Div => {
-                self.infer_arithmetic_type(&left_type, &right_type)
-            },
-            BinaryOperator::Eq | BinaryOperator::Ne | BinaryOperator::Lt | BinaryOperator::Le | BinaryOperator::Gt | BinaryOperator::Ge => {
-                Ok(Type::Primitive(PrimitiveType::Bool))
-            },
+            BinaryOperator::Add
+            | BinaryOperator::Sub
+            | BinaryOperator::Mul
+            | BinaryOperator::Div => self.infer_arithmetic_type(&left_type, &right_type),
+            BinaryOperator::Eq
+            | BinaryOperator::Ne
+            | BinaryOperator::Lt
+            | BinaryOperator::Le
+            | BinaryOperator::Gt
+            | BinaryOperator::Ge => Ok(Type::Primitive(PrimitiveType::Bool)),
             BinaryOperator::And | BinaryOperator::Or => {
-                if self.types_compatible(&left_type, &Type::Primitive(PrimitiveType::Bool)) &&
-                   self.types_compatible(&right_type, &Type::Primitive(PrimitiveType::Bool)) {
+                if self.types_compatible(&left_type, &Type::Primitive(PrimitiveType::Bool))
+                    && self.types_compatible(&right_type, &Type::Primitive(PrimitiveType::Bool))
+                {
                     Ok(Type::Primitive(PrimitiveType::Bool))
                 } else {
                     Err("Boolean operators require boolean operands".to_string())
                 }
-            },
+            }
         }
     }
 
     /// 推断一元操作类型
-    fn infer_unary_operation_type(&self, operator: &UnaryOperator, operand: &Expression) -> Result<Type, String> {
+    fn infer_unary_operation_type(
+        &self,
+        operator: &UnaryOperator,
+        operand: &Expression,
+    ) -> Result<Type, String> {
         let operand_type = self.infer_expression_type(operand)?;
 
         match operator {
@@ -588,34 +662,49 @@ impl TypeInferencer {
                 } else {
                     Err("Not operator requires boolean operand".to_string())
                 }
-            },
+            }
             UnaryOperator::Neg => {
                 if self.is_numeric_type(&operand_type) {
                     Ok(operand_type)
                 } else {
                     Err("Negation operator requires numeric operand".to_string())
                 }
-            },
+            }
         }
     }
 
     /// 推断函数调用类型
-    fn infer_function_call_type(&self, name: &str, arguments: &[Expression]) -> Result<Type, String> {
+    fn infer_function_call_type(
+        &self,
+        name: &str,
+        arguments: &[Expression],
+    ) -> Result<Type, String> {
         let env = self.type_env.lock().unwrap();
 
         if let Some(function_type) = env.type_definitions.get(name) {
             if let Type::Function(func_type) = function_type {
                 // 验证参数数量
                 if arguments.len() != func_type.parameters.len() {
-                    return Err(format!("Function '{}' expects {} arguments, got {}",
-                                     name, func_type.parameters.len(), arguments.len()));
+                    return Err(format!(
+                        "Function '{}' expects {} arguments, got {}",
+                        name,
+                        func_type.parameters.len(),
+                        arguments.len()
+                    ));
                 }
 
                 // 验证参数类型
-                for (i, (arg, expected_type)) in arguments.iter().zip(func_type.parameters.iter()).enumerate() {
+                for (i, (arg, expected_type)) in arguments
+                    .iter()
+                    .zip(func_type.parameters.iter())
+                    .enumerate()
+                {
                     let arg_type = self.infer_expression_type(arg)?;
                     if !self.types_compatible(&arg_type, expected_type) {
-                        return Err(format!("Argument {} of function '{}' has incompatible type", i, name));
+                        return Err(format!(
+                            "Argument {} of function '{}' has incompatible type",
+                            i, name
+                        ));
                     }
                 }
 
@@ -629,7 +718,12 @@ impl TypeInferencer {
     }
 
     /// 推断 if 表达式类型
-    fn infer_if_expression_type(&self, condition: &Expression, then_branch: &Expression, else_branch: &Expression) -> Result<Type, String> {
+    fn infer_if_expression_type(
+        &self,
+        condition: &Expression,
+        then_branch: &Expression,
+        else_branch: &Expression,
+    ) -> Result<Type, String> {
         let condition_type = self.infer_expression_type(condition)?;
         if !self.types_compatible(&condition_type, &Type::Primitive(PrimitiveType::Bool)) {
             return Err("If condition must be boolean".to_string());
@@ -650,16 +744,16 @@ impl TypeInferencer {
         match (left, right) {
             (Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::I32)) => {
                 Ok(Type::Primitive(PrimitiveType::I32))
-            },
+            }
             (Type::Primitive(PrimitiveType::F64), Type::Primitive(PrimitiveType::F64)) => {
                 Ok(Type::Primitive(PrimitiveType::F64))
-            },
+            }
             (Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::F64)) => {
                 Ok(Type::Primitive(PrimitiveType::F64))
-            },
+            }
             (Type::Primitive(PrimitiveType::F64), Type::Primitive(PrimitiveType::I32)) => {
                 Ok(Type::Primitive(PrimitiveType::F64))
-            },
+            }
             _ => Err("Arithmetic operations require numeric types".to_string()),
         }
     }
@@ -673,14 +767,22 @@ impl TypeInferencer {
         // 简化实现
         matches!(
             (from, to),
-            (Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::F64))
-                | (Type::Primitive(PrimitiveType::F64), Type::Primitive(PrimitiveType::I32))
+            (
+                Type::Primitive(PrimitiveType::I32),
+                Type::Primitive(PrimitiveType::F64)
+            ) | (
+                Type::Primitive(PrimitiveType::F64),
+                Type::Primitive(PrimitiveType::I32)
+            )
         )
     }
 
     /// 检查是否为数值类型
     fn is_numeric_type(&self, type_: &Type) -> bool {
-        matches!(type_, Type::Primitive(PrimitiveType::I32 | PrimitiveType::F64))
+        matches!(
+            type_,
+            Type::Primitive(PrimitiveType::I32 | PrimitiveType::F64)
+        )
     }
 
     /// 添加类型定义
@@ -725,10 +827,24 @@ impl Clone for InferenceStats {
 pub enum Expression {
     Literal(Literal),
     Variable(String),
-    BinaryOp { left: Box<Expression>, operator: BinaryOperator, right: Box<Expression> },
-    UnaryOp { operator: UnaryOperator, operand: Box<Expression> },
-    FunctionCall { name: String, arguments: Vec<Expression> },
-    If { condition: Box<Expression>, then_branch: Box<Expression>, else_branch: Box<Expression> },
+    BinaryOp {
+        left: Box<Expression>,
+        operator: BinaryOperator,
+        right: Box<Expression>,
+    },
+    UnaryOp {
+        operator: UnaryOperator,
+        operand: Box<Expression>,
+    },
+    FunctionCall {
+        name: String,
+        arguments: Vec<Expression>,
+    },
+    If {
+        condition: Box<Expression>,
+        then_branch: Box<Expression>,
+        else_branch: Box<Expression>,
+    },
 }
 
 /// 字面量
@@ -744,15 +860,25 @@ pub enum Literal {
 /// 二元操作符
 #[derive(Debug, Clone, Copy)]
 pub enum BinaryOperator {
-    Add, Sub, Mul, Div,
-    Eq, Ne, Lt, Le, Gt, Ge,
-    And, Or,
+    Add,
+    Sub,
+    Mul,
+    Div,
+    Eq,
+    Ne,
+    Lt,
+    Le,
+    Gt,
+    Ge,
+    And,
+    Or,
 }
 
 /// 一元操作符
 #[derive(Debug, Clone, Copy)]
 pub enum UnaryOperator {
-    Not, Neg,
+    Not,
+    Neg,
 }
 
 // ==================== 演示函数 ====================
@@ -770,53 +896,49 @@ pub fn demonstrate_type_system_validation() {
     validator.add_validation_rule(
         "primitive_type_validation".to_string(),
         "验证基础类型".to_string(),
-        |type_, _env| {
-            match type_ {
-                Type::Primitive(_) => ValidationResult {
-                    valid: true,
-                    message: "Primitive type is valid".to_string(),
-                    suggestions: Vec::new(),
-                    severity: ValidationSeverity::Info,
-                },
-                _ => ValidationResult {
-                    valid: false,
-                    message: "Expected primitive type".to_string(),
-                    suggestions: vec!["Use a primitive type".to_string()],
-                    severity: ValidationSeverity::Warning,
-                },
-            }
+        |type_, _env| match type_ {
+            Type::Primitive(_) => ValidationResult {
+                valid: true,
+                message: "Primitive type is valid".to_string(),
+                suggestions: Vec::new(),
+                severity: ValidationSeverity::Info,
+            },
+            _ => ValidationResult {
+                valid: false,
+                message: "Expected primitive type".to_string(),
+                suggestions: vec!["Use a primitive type".to_string()],
+                severity: ValidationSeverity::Warning,
+            },
         },
     );
 
     validator.add_validation_rule(
         "generic_type_validation".to_string(),
         "验证泛型类型".to_string(),
-        |type_, _env| {
-            match type_ {
-                Type::Generic(generic) => {
-                    if generic.parameters.is_empty() {
-                        ValidationResult {
-                            valid: false,
-                            message: "Generic type has no parameters".to_string(),
-                            suggestions: vec!["Add type parameters".to_string()],
-                            severity: ValidationSeverity::Error,
-                        }
-                    } else {
-                        ValidationResult {
-                            valid: true,
-                            message: "Generic type is valid".to_string(),
-                            suggestions: Vec::new(),
-                            severity: ValidationSeverity::Info,
-                        }
+        |type_, _env| match type_ {
+            Type::Generic(generic) => {
+                if generic.parameters.is_empty() {
+                    ValidationResult {
+                        valid: false,
+                        message: "Generic type has no parameters".to_string(),
+                        suggestions: vec!["Add type parameters".to_string()],
+                        severity: ValidationSeverity::Error,
                     }
-                },
-                _ => ValidationResult {
-                    valid: true,
-                    message: "Not a generic type".to_string(),
-                    suggestions: Vec::new(),
-                    severity: ValidationSeverity::Info,
-                },
+                } else {
+                    ValidationResult {
+                        valid: true,
+                        message: "Generic type is valid".to_string(),
+                        suggestions: Vec::new(),
+                        severity: ValidationSeverity::Info,
+                    }
+                }
             }
+            _ => ValidationResult {
+                valid: true,
+                message: "Not a generic type".to_string(),
+                suggestions: Vec::new(),
+                severity: ValidationSeverity::Info,
+            },
         },
     );
 
@@ -825,16 +947,22 @@ pub fn demonstrate_type_system_validation() {
         ("整数类型", Type::Primitive(PrimitiveType::I32)),
         ("浮点类型", Type::Primitive(PrimitiveType::F64)),
         ("布尔类型", Type::Primitive(PrimitiveType::Bool)),
-        ("空泛型", Type::Generic(GenericType {
-            name: "Vec".to_string(),
-            parameters: Vec::new(),
-            constraints: Vec::new(),
-        })),
-        ("有效泛型", Type::Generic(GenericType {
-            name: "Vec".to_string(),
-            parameters: vec![Type::Primitive(PrimitiveType::I32)],
-            constraints: Vec::new(),
-        })),
+        (
+            "空泛型",
+            Type::Generic(GenericType {
+                name: "Vec".to_string(),
+                parameters: Vec::new(),
+                constraints: Vec::new(),
+            }),
+        ),
+        (
+            "有效泛型",
+            Type::Generic(GenericType {
+                name: "Vec".to_string(),
+                parameters: vec![Type::Primitive(PrimitiveType::I32)],
+                constraints: Vec::new(),
+            }),
+        ),
     ];
 
     for (type_name, type_) in test_types {
@@ -855,10 +983,26 @@ pub fn demonstrate_type_system_validation() {
     // 2. 类型兼容性验证演示
     println!("2. 类型兼容性验证演示:");
     let compatibility_tests = vec![
-        ("i32 -> i32", Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::I32)),
-        ("i32 -> f64", Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::F64)),
-        ("f64 -> i32", Type::Primitive(PrimitiveType::F64), Type::Primitive(PrimitiveType::I32)),
-        ("bool -> i32", Type::Primitive(PrimitiveType::Bool), Type::Primitive(PrimitiveType::I32)),
+        (
+            "i32 -> i32",
+            Type::Primitive(PrimitiveType::I32),
+            Type::Primitive(PrimitiveType::I32),
+        ),
+        (
+            "i32 -> f64",
+            Type::Primitive(PrimitiveType::I32),
+            Type::Primitive(PrimitiveType::F64),
+        ),
+        (
+            "f64 -> i32",
+            Type::Primitive(PrimitiveType::F64),
+            Type::Primitive(PrimitiveType::I32),
+        ),
+        (
+            "bool -> i32",
+            Type::Primitive(PrimitiveType::Bool),
+            Type::Primitive(PrimitiveType::I32),
+        ),
     ];
 
     for (test_name, from, to) in compatibility_tests {
@@ -917,23 +1061,33 @@ pub fn demonstrate_type_system_validation() {
     // 测试表达式推断
     let expressions = vec![
         ("字面量", Expression::Literal(Literal::Integer(42))),
-        ("二元操作", Expression::BinaryOp {
-            left: Box::new(Expression::Literal(Literal::Integer(10))),
-            operator: BinaryOperator::Add,
-            right: Box::new(Expression::Literal(Literal::Integer(20))),
-        }),
-        ("函数调用", Expression::FunctionCall {
-            name: "add".to_string(),
-            arguments: vec![
-                Expression::Literal(Literal::Integer(5)),
-                Expression::Literal(Literal::Integer(3)),
-            ],
-        }),
+        (
+            "二元操作",
+            Expression::BinaryOp {
+                left: Box::new(Expression::Literal(Literal::Integer(10))),
+                operator: BinaryOperator::Add,
+                right: Box::new(Expression::Literal(Literal::Integer(20))),
+            },
+        ),
+        (
+            "函数调用",
+            Expression::FunctionCall {
+                name: "add".to_string(),
+                arguments: vec![
+                    Expression::Literal(Literal::Integer(5)),
+                    Expression::Literal(Literal::Integer(3)),
+                ],
+            },
+        ),
     ];
 
     for (expr_name, expr) in expressions {
         match inferencer.infer_expression_type(&expr) {
-            Ok(type_) => println!("  ✅ {} 推断类型: {}", expr_name, validator.format_type(&type_)),
+            Ok(type_) => println!(
+                "  ✅ {} 推断类型: {}",
+                expr_name,
+                validator.format_type(&type_)
+            ),
             Err(e) => println!("  ❌ {} 推断失败: {}", expr_name, e),
         }
     }

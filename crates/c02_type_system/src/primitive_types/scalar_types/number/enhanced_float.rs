@@ -295,12 +295,26 @@ pub mod float_types {
 
         /// 有序比较
         pub fn ordered_comparison() {
-            let values = vec![std::f64::consts::PI, 2.71, 1.41, 0.0, -1.0, f64::NAN, f64::INFINITY];
+            let values = vec![
+                std::f64::consts::PI,
+                2.71,
+                1.41,
+                0.0,
+                -1.0,
+                f64::NAN,
+                f64::INFINITY,
+            ];
 
             println!("有序比较:");
             for value in &values {
-                println!("  {}: is_nan={}, is_infinite={}, is_finite={}, is_normal={}",
-                    value, value.is_nan(), value.is_infinite(), value.is_finite(), value.is_normal());
+                println!(
+                    "  {}: is_nan={}, is_infinite={}, is_finite={}, is_normal={}",
+                    value,
+                    value.is_nan(),
+                    value.is_infinite(),
+                    value.is_finite(),
+                    value.is_normal()
+                );
             }
 
             // 排序（NaN 会被放在最后）
@@ -477,7 +491,10 @@ pub mod float_types {
             // 检查加法溢出
             let result2 = large_value + large_value;
             if result2.is_infinite() {
-                println!("  加法溢出: {} + {} = {}", large_value, large_value, result2);
+                println!(
+                    "  加法溢出: {} + {} = {}",
+                    large_value, large_value, result2
+                );
             }
         }
 
@@ -579,7 +596,10 @@ pub mod performance_tests {
 
         // 性能比较
         println!("性能比较:");
-        println!("  f64 vs f32: {:.2}x", f64_duration.as_nanos() as f64 / f32_duration.as_nanos() as f64);
+        println!(
+            "  f64 vs f32: {:.2}x",
+            f64_duration.as_nanos() as f64 / f32_duration.as_nanos() as f64
+        );
     }
 
     /// 数学函数性能测试
@@ -595,7 +615,10 @@ pub mod performance_tests {
             sum_f32 += (i as f32 * 0.001).sin();
         }
         let f32_duration = start.elapsed();
-        println!("  f32 sin() 运算时间: {:?}, 结果: {}", f32_duration, sum_f32);
+        println!(
+            "  f32 sin() 运算时间: {:?}, 结果: {}",
+            f32_duration, sum_f32
+        );
 
         // f64 数学函数性能测试
         let start = Instant::now();
@@ -604,11 +627,17 @@ pub mod performance_tests {
             sum_f64 += (i as f64 * 0.001).sin();
         }
         let f64_duration = start.elapsed();
-        println!("  f64 sin() 运算时间: {:?}, 结果: {}", f64_duration, sum_f64);
+        println!(
+            "  f64 sin() 运算时间: {:?}, 结果: {}",
+            f64_duration, sum_f64
+        );
 
         // 性能比较
         println!("性能比较:");
-        println!("  f64 vs f32: {:.2}x", f64_duration.as_nanos() as f64 / f32_duration.as_nanos() as f64);
+        println!(
+            "  f64 vs f32: {:.2}x",
+            f64_duration.as_nanos() as f64 / f32_duration.as_nanos() as f64
+        );
     }
 
     /// 内存使用测试
@@ -622,8 +651,14 @@ pub mod performance_tests {
         let f64_array: [f64; 1000] = [0.0; 1000];
 
         println!("  数组内存使用:");
-        println!("    [f32; 1000]: {} 字节", std::mem::size_of_val(&f32_array));
-        println!("    [f64; 1000]: {} 字节", std::mem::size_of_val(&f64_array));
+        println!(
+            "    [f32; 1000]: {} 字节",
+            std::mem::size_of_val(&f32_array)
+        );
+        println!(
+            "    [f64; 1000]: {} 字节",
+            std::mem::size_of_val(&f64_array)
+        );
     }
 }
 

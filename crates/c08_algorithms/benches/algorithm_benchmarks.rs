@@ -1,17 +1,13 @@
 //! 算法性能基准测试
 //!
 //! 本文件包含各种算法的性能基准测试，用于评估2025年最新优化后的性能
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
-use std::hint::black_box;
 use c08_algorithms::algorithms::{
-    sorting::QuickSort,
-    searching::SearchingAlgorithms,
-    string_algorithms::StringAlgorithms,
-    graph::GraphAlgorithms,
-    dynamic_programming::DynamicProgrammingAlgorithms,
-    number_theory::NumberTheoryAlgorithms,
-    execution_modes::SyncAlgorithm,
+    dynamic_programming::DynamicProgrammingAlgorithms, execution_modes::SyncAlgorithm,
+    graph::GraphAlgorithms, number_theory::NumberTheoryAlgorithms, searching::SearchingAlgorithms,
+    sorting::QuickSort, string_algorithms::StringAlgorithms,
 };
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 /// 排序算法基准测试
 fn bench_sorting_algorithms(c: &mut Criterion) {
@@ -42,11 +38,13 @@ fn bench_searching_algorithms(c: &mut Criterion) {
     let targets = [100, 1000, 5000, 9999];
 
     for target in targets.iter() {
-        group.bench_with_input(BenchmarkId::new("binary_search", target), target, |b, target| {
-            b.iter(|| {
-                SearchingAlgorithms::binary_search(black_box(&data), black_box(target))
-            })
-        });
+        group.bench_with_input(
+            BenchmarkId::new("binary_search", target),
+            target,
+            |b, target| {
+                b.iter(|| SearchingAlgorithms::binary_search(black_box(&data), black_box(target)))
+            },
+        );
     }
 
     group.finish();
@@ -61,15 +59,11 @@ fn bench_string_algorithms(c: &mut Criterion) {
     let pattern = "ba";
 
     group.bench_function("kmp_search", |b| {
-        b.iter(|| {
-            StringAlgorithms::kmp_search(black_box(&text), black_box(pattern))
-        })
+        b.iter(|| StringAlgorithms::kmp_search(black_box(&text), black_box(pattern)))
     });
 
     group.bench_function("rabin_karp_search", |b| {
-        b.iter(|| {
-            StringAlgorithms::rabin_karp_search(black_box(&text), black_box(pattern))
-        })
+        b.iter(|| StringAlgorithms::rabin_karp_search(black_box(&text), black_box(pattern)))
     });
 
     group.finish();
@@ -84,15 +78,11 @@ fn bench_graph_algorithms(c: &mut Criterion) {
     let start = 0;
 
     group.bench_function("bfs", |b| {
-        b.iter(|| {
-            GraphAlgorithms::bfs(black_box(&graph), black_box(start))
-        })
+        b.iter(|| GraphAlgorithms::bfs(black_box(&graph), black_box(start)))
     });
 
     group.bench_function("dfs", |b| {
-        b.iter(|| {
-            GraphAlgorithms::dfs(black_box(&graph), black_box(start))
-        })
+        b.iter(|| GraphAlgorithms::dfs(black_box(&graph), black_box(start)))
     });
 
     group.finish();
@@ -109,7 +99,7 @@ fn bench_dynamic_programming(c: &mut Criterion) {
         b.iter(|| {
             DynamicProgrammingAlgorithms::longest_common_subsequence(
                 black_box(text1),
-                black_box(text2)
+                black_box(text2),
             )
         })
     });
@@ -123,7 +113,7 @@ fn bench_dynamic_programming(c: &mut Criterion) {
             DynamicProgrammingAlgorithms::knapsack_01(
                 black_box(&weights),
                 black_box(&values),
-                black_box(capacity)
+                black_box(capacity),
             )
         })
     });
@@ -135,14 +125,21 @@ fn bench_dynamic_programming(c: &mut Criterion) {
 fn bench_math_algorithms(c: &mut Criterion) {
     let mut group = c.benchmark_group("math_algorithms");
 
-    let test_cases = [(100u64, 25u64), (1000u64, 250u64), (10000u64, 2500u64), (100000u64, 25000u64)];
+    let test_cases = [
+        (100u64, 25u64),
+        (1000u64, 250u64),
+        (10000u64, 2500u64),
+        (100000u64, 25000u64),
+    ];
 
     for (a, b) in test_cases.iter() {
-        group.bench_with_input(BenchmarkId::new("gcd", format!("{}_{}", a, b)), &(a, b), |bench, (a, b)| {
-            bench.iter(|| {
-                NumberTheoryAlgorithms::gcd(black_box(**a), black_box(**b))
-            })
-        });
+        group.bench_with_input(
+            BenchmarkId::new("gcd", format!("{}_{}", a, b)),
+            &(a, b),
+            |bench, (a, b)| {
+                bench.iter(|| NumberTheoryAlgorithms::gcd(black_box(**a), black_box(**b)))
+            },
+        );
     }
 
     group.finish();
@@ -154,15 +151,19 @@ fn bench_memory_usage(c: &mut Criterion) {
 
     // 测试不同大小的数据结构
     for size in [1000, 10000, 100000].iter() {
-        group.bench_with_input(BenchmarkId::new("vector_allocation", size), size, |b, size| {
-            b.iter(|| {
-                let mut vec = Vec::with_capacity(*size);
-                for i in 0..*size {
-                    vec.push(i);
-                }
-                vec
-            })
-        });
+        group.bench_with_input(
+            BenchmarkId::new("vector_allocation", size),
+            size,
+            |b, size| {
+                b.iter(|| {
+                    let mut vec = Vec::with_capacity(*size);
+                    for i in 0..*size {
+                        vec.push(i);
+                    }
+                    vec
+                })
+            },
+        );
     }
 
     group.finish();
@@ -181,11 +182,7 @@ fn bench_concurrent_algorithms(c: &mut Criterion) {
         })
     });
 
-    group.bench_function("sequential_sum", |b| {
-        b.iter(|| {
-            data.iter().sum::<i32>()
-        })
-    });
+    group.bench_function("sequential_sum", |b| b.iter(|| data.iter().sum::<i32>()));
 
     group.finish();
 }
@@ -206,10 +203,7 @@ fn create_test_graph(n: usize) -> c08_algorithms::algorithms::graph::Graph {
         }
     }
 
-    c08_algorithms::algorithms::graph::Graph {
-        vertices: n,
-        edges,
-    }
+    c08_algorithms::algorithms::graph::Graph { vertices: n, edges }
 }
 
 // 基准测试配置

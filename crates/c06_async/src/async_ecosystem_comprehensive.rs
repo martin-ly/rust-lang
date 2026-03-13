@@ -1,20 +1,20 @@
 //! Rust 异步生态系统全面分析模块
-//! 
+//!
 //! 本模块提供了对Rust异步编程生态系统中各个主要库的全面分析，
 //! 包括：std、smol、async-std、tokio等库的概念定义、属性、联系关系、
 //! 区别、使用场景、示例和组合设计模式。
-use std::sync::Arc;
-use std::time::Duration;
-use std::collections::HashMap;
 use anyhow::Result;
-use tokio::time::sleep;
-use tokio::sync::{Semaphore, RwLock};
-use tokio::task;
 use futures::future::join_all;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use std::sync::Arc;
+use std::time::Duration;
+use tokio::sync::{RwLock, Semaphore};
+use tokio::task;
+use tokio::time::sleep;
 
 /// 异步生态系统架构分析
-/// 
+///
 /// 这个结构体展示了不同异步运行时之间的关系和特性
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncEcosystemAnalysis {
@@ -90,147 +90,159 @@ impl AsyncRuntimeAnalyzer {
 
     fn initialize_runtime_analyses(&mut self) {
         // 1. std 标准库分析
-        self.runtimes.insert("std".to_string(), AsyncEcosystemAnalysis {
-            runtime_name: "std".to_string(),
-            core_features: vec![
-                "Future trait 基础支持".to_string(),
-                "async/await 语法支持".to_string(),
-                "基础并发原语".to_string(),
-                "无内置运行时".to_string(),
-            ],
-            performance_characteristics: PerformanceCharacteristics {
-                memory_usage: "极低".to_string(),
-                startup_time: "极快".to_string(),
-                concurrency_performance: "需要外部运行时".to_string(),
-                latency_characteristics: "取决于外部运行时".to_string(),
+        self.runtimes.insert(
+            "std".to_string(),
+            AsyncEcosystemAnalysis {
+                runtime_name: "std".to_string(),
+                core_features: vec![
+                    "Future trait 基础支持".to_string(),
+                    "async/await 语法支持".to_string(),
+                    "基础并发原语".to_string(),
+                    "无内置运行时".to_string(),
+                ],
+                performance_characteristics: PerformanceCharacteristics {
+                    memory_usage: "极低".to_string(),
+                    startup_time: "极快".to_string(),
+                    concurrency_performance: "需要外部运行时".to_string(),
+                    latency_characteristics: "取决于外部运行时".to_string(),
+                },
+                use_cases: vec![
+                    "基础异步编程概念".to_string(),
+                    "与外部运行时集成".to_string(),
+                    "跨平台兼容性".to_string(),
+                ],
+                ecosystem_maturity: EcosystemMaturity {
+                    community_activity: "官方维护".to_string(),
+                    documentation_quality: "优秀".to_string(),
+                    third_party_support: "广泛".to_string(),
+                    maintenance_commitment: "长期稳定".to_string(),
+                },
+                learning_curve: LearningCurve {
+                    api_complexity: "简单".to_string(),
+                    concept_difficulty: "中等".to_string(),
+                    migration_difficulty: "低".to_string(),
+                    debugging_difficulty: "中等".to_string(),
+                },
             },
-            use_cases: vec![
-                "基础异步编程概念".to_string(),
-                "与外部运行时集成".to_string(),
-                "跨平台兼容性".to_string(),
-            ],
-            ecosystem_maturity: EcosystemMaturity {
-                community_activity: "官方维护".to_string(),
-                documentation_quality: "优秀".to_string(),
-                third_party_support: "广泛".to_string(),
-                maintenance_commitment: "长期稳定".to_string(),
-            },
-            learning_curve: LearningCurve {
-                api_complexity: "简单".to_string(),
-                concept_difficulty: "中等".to_string(),
-                migration_difficulty: "低".to_string(),
-                debugging_difficulty: "中等".to_string(),
-            },
-        });
+        );
 
         // 2. tokio 分析
-        self.runtimes.insert("tokio".to_string(), AsyncEcosystemAnalysis {
-            runtime_name: "tokio".to_string(),
-            core_features: vec![
-                "高性能多线程运行时".to_string(),
-                "基于 mio 的事件循环".to_string(),
-                "丰富的生态系统".to_string(),
-                "生产级稳定性".to_string(),
-                "零成本抽象".to_string(),
-            ],
-            performance_characteristics: PerformanceCharacteristics {
-                memory_usage: "中等".to_string(),
-                startup_time: "快".to_string(),
-                concurrency_performance: "优秀".to_string(),
-                latency_characteristics: "低延迟".to_string(),
+        self.runtimes.insert(
+            "tokio".to_string(),
+            AsyncEcosystemAnalysis {
+                runtime_name: "tokio".to_string(),
+                core_features: vec![
+                    "高性能多线程运行时".to_string(),
+                    "基于 mio 的事件循环".to_string(),
+                    "丰富的生态系统".to_string(),
+                    "生产级稳定性".to_string(),
+                    "零成本抽象".to_string(),
+                ],
+                performance_characteristics: PerformanceCharacteristics {
+                    memory_usage: "中等".to_string(),
+                    startup_time: "快".to_string(),
+                    concurrency_performance: "优秀".to_string(),
+                    latency_characteristics: "低延迟".to_string(),
+                },
+                use_cases: vec![
+                    "高性能网络服务".to_string(),
+                    "微服务架构".to_string(),
+                    "Web 服务器".to_string(),
+                    "gRPC 服务".to_string(),
+                    "消息队列".to_string(),
+                ],
+                ecosystem_maturity: EcosystemMaturity {
+                    community_activity: "非常活跃".to_string(),
+                    documentation_quality: "优秀".to_string(),
+                    third_party_support: "极其丰富".to_string(),
+                    maintenance_commitment: "长期承诺".to_string(),
+                },
+                learning_curve: LearningCurve {
+                    api_complexity: "中等".to_string(),
+                    concept_difficulty: "中等".to_string(),
+                    migration_difficulty: "中等".to_string(),
+                    debugging_difficulty: "中等".to_string(),
+                },
             },
-            use_cases: vec![
-                "高性能网络服务".to_string(),
-                "微服务架构".to_string(),
-                "Web 服务器".to_string(),
-                "gRPC 服务".to_string(),
-                "消息队列".to_string(),
-            ],
-            ecosystem_maturity: EcosystemMaturity {
-                community_activity: "非常活跃".to_string(),
-                documentation_quality: "优秀".to_string(),
-                third_party_support: "极其丰富".to_string(),
-                maintenance_commitment: "长期承诺".to_string(),
-            },
-            learning_curve: LearningCurve {
-                api_complexity: "中等".to_string(),
-                concept_difficulty: "中等".to_string(),
-                migration_difficulty: "中等".to_string(),
-                debugging_difficulty: "中等".to_string(),
-            },
-        });
+        );
 
         // 3. async-std 分析
-        self.runtimes.insert("async-std".to_string(), AsyncEcosystemAnalysis {
-            runtime_name: "async-std".to_string(),
-            core_features: vec![
-                "标准库风格的 API".to_string(),
-                "单线程和多线程支持".to_string(),
-                "易用性优先".to_string(),
-                "快速编译".to_string(),
-            ],
-            performance_characteristics: PerformanceCharacteristics {
-                memory_usage: "低到中等".to_string(),
-                startup_time: "快".to_string(),
-                concurrency_performance: "良好".to_string(),
-                latency_characteristics: "中等".to_string(),
+        self.runtimes.insert(
+            "async-std".to_string(),
+            AsyncEcosystemAnalysis {
+                runtime_name: "async-std".to_string(),
+                core_features: vec![
+                    "标准库风格的 API".to_string(),
+                    "单线程和多线程支持".to_string(),
+                    "易用性优先".to_string(),
+                    "快速编译".to_string(),
+                ],
+                performance_characteristics: PerformanceCharacteristics {
+                    memory_usage: "低到中等".to_string(),
+                    startup_time: "快".to_string(),
+                    concurrency_performance: "良好".to_string(),
+                    latency_characteristics: "中等".to_string(),
+                },
+                use_cases: vec![
+                    "快速原型开发".to_string(),
+                    "学习异步编程".to_string(),
+                    "CLI 工具".to_string(),
+                    "中小型应用".to_string(),
+                ],
+                ecosystem_maturity: EcosystemMaturity {
+                    community_activity: "活跃".to_string(),
+                    documentation_quality: "良好".to_string(),
+                    third_party_support: "良好".to_string(),
+                    maintenance_commitment: "稳定".to_string(),
+                },
+                learning_curve: LearningCurve {
+                    api_complexity: "简单".to_string(),
+                    concept_difficulty: "低".to_string(),
+                    migration_difficulty: "低".to_string(),
+                    debugging_difficulty: "低".to_string(),
+                },
             },
-            use_cases: vec![
-                "快速原型开发".to_string(),
-                "学习异步编程".to_string(),
-                "CLI 工具".to_string(),
-                "中小型应用".to_string(),
-            ],
-            ecosystem_maturity: EcosystemMaturity {
-                community_activity: "活跃".to_string(),
-                documentation_quality: "良好".to_string(),
-                third_party_support: "良好".to_string(),
-                maintenance_commitment: "稳定".to_string(),
-            },
-            learning_curve: LearningCurve {
-                api_complexity: "简单".to_string(),
-                concept_difficulty: "低".to_string(),
-                migration_difficulty: "低".to_string(),
-                debugging_difficulty: "低".to_string(),
-            },
-        });
+        );
 
         // 4. smol 分析
-        self.runtimes.insert("smol".to_string(), AsyncEcosystemAnalysis {
-            runtime_name: "smol".to_string(),
-            core_features: vec![
-                "轻量级设计".to_string(),
-                "代码量少（约1500行）".to_string(),
-                "与其他运行时兼容".to_string(),
-                "嵌入式友好".to_string(),
-                "零依赖".to_string(),
-            ],
-            performance_characteristics: PerformanceCharacteristics {
-                memory_usage: "极低".to_string(),
-                startup_time: "极快".to_string(),
-                concurrency_performance: "良好".to_string(),
-                latency_characteristics: "低".to_string(),
+        self.runtimes.insert(
+            "smol".to_string(),
+            AsyncEcosystemAnalysis {
+                runtime_name: "smol".to_string(),
+                core_features: vec![
+                    "轻量级设计".to_string(),
+                    "代码量少（约1500行）".to_string(),
+                    "与其他运行时兼容".to_string(),
+                    "嵌入式友好".to_string(),
+                    "零依赖".to_string(),
+                ],
+                performance_characteristics: PerformanceCharacteristics {
+                    memory_usage: "极低".to_string(),
+                    startup_time: "极快".to_string(),
+                    concurrency_performance: "良好".to_string(),
+                    latency_characteristics: "低".to_string(),
+                },
+                use_cases: vec![
+                    "嵌入式系统".to_string(),
+                    "资源受限环境".to_string(),
+                    "CLI 工具".to_string(),
+                    "轻量级服务".to_string(),
+                    "运行时组合".to_string(),
+                ],
+                ecosystem_maturity: EcosystemMaturity {
+                    community_activity: "中等".to_string(),
+                    documentation_quality: "良好".to_string(),
+                    third_party_support: "中等".to_string(),
+                    maintenance_commitment: "稳定".to_string(),
+                },
+                learning_curve: LearningCurve {
+                    api_complexity: "简单".to_string(),
+                    concept_difficulty: "低".to_string(),
+                    migration_difficulty: "低".to_string(),
+                    debugging_difficulty: "低".to_string(),
+                },
             },
-            use_cases: vec![
-                "嵌入式系统".to_string(),
-                "资源受限环境".to_string(),
-                "CLI 工具".to_string(),
-                "轻量级服务".to_string(),
-                "运行时组合".to_string(),
-            ],
-            ecosystem_maturity: EcosystemMaturity {
-                community_activity: "中等".to_string(),
-                documentation_quality: "良好".to_string(),
-                third_party_support: "中等".to_string(),
-                maintenance_commitment: "稳定".to_string(),
-            },
-            learning_curve: LearningCurve {
-                api_complexity: "简单".to_string(),
-                concept_difficulty: "低".to_string(),
-                migration_difficulty: "低".to_string(),
-                debugging_difficulty: "低".to_string(),
-            },
-        });
+        );
     }
 
     /// 获取运行时分析
@@ -257,7 +269,11 @@ impl AsyncRuntimeAnalyzer {
         })
     }
 
-    fn determine_performance_winner(&self, a1: &AsyncEcosystemAnalysis, a2: &AsyncEcosystemAnalysis) -> String {
+    fn determine_performance_winner(
+        &self,
+        a1: &AsyncEcosystemAnalysis,
+        a2: &AsyncEcosystemAnalysis,
+    ) -> String {
         // 简化的性能比较逻辑
         match (a1.runtime_name.as_str(), a2.runtime_name.as_str()) {
             ("tokio", _) => "tokio".to_string(),
@@ -268,7 +284,11 @@ impl AsyncRuntimeAnalyzer {
         }
     }
 
-    fn determine_ecosystem_winner(&self, a1: &AsyncEcosystemAnalysis, a2: &AsyncEcosystemAnalysis) -> String {
+    fn determine_ecosystem_winner(
+        &self,
+        a1: &AsyncEcosystemAnalysis,
+        a2: &AsyncEcosystemAnalysis,
+    ) -> String {
         match (a1.runtime_name.as_str(), a2.runtime_name.as_str()) {
             ("tokio", _) => "tokio".to_string(),
             (_, "tokio") => "tokio".to_string(),
@@ -276,7 +296,11 @@ impl AsyncRuntimeAnalyzer {
         }
     }
 
-    fn determine_learning_curve_winner(&self, a1: &AsyncEcosystemAnalysis, a2: &AsyncEcosystemAnalysis) -> String {
+    fn determine_learning_curve_winner(
+        &self,
+        a1: &AsyncEcosystemAnalysis,
+        a2: &AsyncEcosystemAnalysis,
+    ) -> String {
         match (a1.runtime_name.as_str(), a2.runtime_name.as_str()) {
             ("async-std", _) => "async-std".to_string(),
             (_, "async-std") => "async-std".to_string(),
@@ -297,7 +321,7 @@ pub struct RuntimeComparison {
 }
 
 /// 异步运行时集成模式演示
-/// 
+///
 #[allow(unused)]
 pub struct AsyncIntegrationPatterns {
     shared_state: Arc<RwLock<HashMap<String, String>>>,
@@ -316,16 +340,17 @@ impl AsyncIntegrationPatterns {
     /// 为不同的异步运行时提供统一的接口
     pub async fn runtime_adapter_pattern(&self) -> Result<()> {
         println!("🔄 运行时适配器模式演示");
-        
+
         // 模拟不同运行时的统一接口
         let results = futures::future::try_join3(
             self.simulate_tokio_task("tokio_task_1"),
             self.simulate_async_std_task("async_std_task_1"),
-            self.simulate_smol_task("smol_task_1")
-        ).await?;
+            self.simulate_smol_task("smol_task_1"),
+        )
+        .await?;
         let results = vec![results.0, results.1, results.2];
         println!("  适配器模式结果: {:?}", results);
-        
+
         Ok(())
     }
 
@@ -333,7 +358,7 @@ impl AsyncIntegrationPatterns {
     /// 将多个异步任务组合成更复杂的任务
     pub async fn task_composition_pattern(&self) -> Result<()> {
         println!("🔗 任务组合模式演示");
-        
+
         // 创建多个子任务
         let data_processing = self.process_data("input_data".to_string());
         let validation = self.validate_data("validation_data".to_string());
@@ -344,9 +369,10 @@ impl AsyncIntegrationPatterns {
             let processed = data_processing.await?;
             let validated = validation.await?;
             let stored = storage.await?;
-            
+
             Ok::<(String, String, String), anyhow::Error>((processed, validated, stored))
-        }.await?;
+        }
+        .await?;
 
         println!("  组合任务结果: {:?}", result);
         Ok(())
@@ -356,7 +382,7 @@ impl AsyncIntegrationPatterns {
     /// 通过抽象接口支持不同的异步运行时
     pub async fn runtime_abstraction_pattern(&self) -> Result<()> {
         println!("🏗️ 运行时抽象模式演示");
-        
+
         // 定义抽象的异步操作接口
         let operations = vec![
             AbstractAsyncOperation::new("operation_1", Duration::from_millis(10)),
@@ -367,7 +393,7 @@ impl AsyncIntegrationPatterns {
         // 使用抽象接口执行操作
         let results = join_all(operations.into_iter().map(|op| op.execute())).await;
         println!("  抽象模式结果: {:?}", results);
-        
+
         Ok(())
     }
 
@@ -375,20 +401,21 @@ impl AsyncIntegrationPatterns {
     /// 演示异步和同步代码之间的转换
     pub async fn async_sync_conversion_pattern(&self) -> Result<()> {
         println!("🔄 异步同步转换模式演示");
-        
+
         // 异步到同步的转换
         let async_result = self.async_operation().await?;
         println!("  异步操作结果: {}", async_result);
-        
+
         // 同步到异步的转换
         let sync_result = task::spawn_blocking(|| {
             // 模拟CPU密集型同步操作
             std::thread::sleep(Duration::from_millis(5));
             "sync_result".to_string()
-        }).await?;
-        
+        })
+        .await?;
+
         println!("  同步操作结果: {}", sync_result);
-        
+
         Ok(())
     }
 
@@ -396,7 +423,7 @@ impl AsyncIntegrationPatterns {
     /// 演示聚合和组合的设计模式
     pub async fn aggregation_composition_pattern(&self) -> Result<()> {
         println!("📊 聚合组合设计模式演示");
-        
+
         // 创建多个数据源
         let data_sources = vec![
             DataSource::new("source_1", vec![1, 2, 3]),
@@ -407,11 +434,11 @@ impl AsyncIntegrationPatterns {
         // 聚合数据
         let aggregated_data = self.aggregate_data_sources(data_sources).await?;
         println!("  聚合数据: {:?}", aggregated_data);
-        
+
         // 组合处理
         let processed_data = self.compose_data_processing(aggregated_data).await?;
         println!("  组合处理结果: {:?}", processed_data);
-        
+
         Ok(())
     }
 
@@ -498,7 +525,7 @@ impl AbstractAsyncOperation {
 }
 
 /// 数据源
-/// 
+///
 #[allow(unused)]
 #[derive(Debug)]
 pub struct DataSource {
@@ -528,8 +555,8 @@ pub async fn demonstrate_async_ecosystem_comprehensive() -> Result<()> {
     // 1. 运行时分析
     println!("\n📊 1. 异步运行时特性分析:");
     let analyzer = AsyncRuntimeAnalyzer::new();
-    
-        for analysis in analyzer.get_all_analyses().values() {
+
+    for analysis in analyzer.get_all_analyses().values() {
         println!("\n  🔍 {} 运行时分析:", analysis.runtime_name);
         println!("    核心特性: {:?}", analysis.core_features);
         println!("    适用场景: {:?}", analysis.use_cases);
@@ -548,7 +575,7 @@ pub async fn demonstrate_async_ecosystem_comprehensive() -> Result<()> {
     // 3. 集成模式演示
     println!("\n🔧 3. 异步集成模式演示:");
     let patterns = AsyncIntegrationPatterns::new(3);
-    
+
     patterns.runtime_adapter_pattern().await?;
     patterns.task_composition_pattern().await?;
     patterns.runtime_abstraction_pattern().await?;

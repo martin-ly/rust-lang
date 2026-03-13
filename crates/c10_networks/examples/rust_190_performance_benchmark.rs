@@ -7,9 +7,9 @@
 //! 本示例展示了如何使用Rust 1.90的新特性进行性能基准测试
 use c10_networks::error::{NetworkError, NetworkResult};
 use c10_networks::unified_api::NetClient;
+use futures::StreamExt;
 use std::time::{Duration, Instant};
 use tokio::time::timeout;
-use futures::StreamExt;
 
 /// 性能基准测试结果
 #[allow(dead_code)]
@@ -45,9 +45,10 @@ impl BenchmarkResult {
     #[allow(dead_code)]
     fn calculate_metrics(&mut self) {
         if self.total_operations > 0 {
-            self.operations_per_second = self.total_operations as f64 / self.total_duration.as_secs_f64();
+            self.operations_per_second =
+                self.total_operations as f64 / self.total_duration.as_secs_f64();
             self.average_latency = Duration::from_nanos(
-                self.total_duration.as_nanos() as u64 / self.total_operations as u64
+                self.total_duration.as_nanos() as u64 / self.total_operations as u64,
             );
         }
     }
@@ -92,7 +93,10 @@ async fn main() -> NetworkResult<()> {
 }
 
 /// 基准测试1: DNS解析性能
-async fn benchmark_dns_lookup(client: &NetClient, operations: usize) -> NetworkResult<BenchmarkResult> {
+async fn benchmark_dns_lookup(
+    client: &NetClient,
+    operations: usize,
+) -> NetworkResult<BenchmarkResult> {
     println!("\n📡 基准测试1: DNS解析性能 ({} 次操作)", operations);
 
     let mut result = BenchmarkResult::new("DNS解析".to_string());
@@ -142,7 +146,10 @@ async fn benchmark_concurrent_operations(
     total_operations: usize,
     concurrency: usize,
 ) -> NetworkResult<BenchmarkResult> {
-    println!("\n⚡ 基准测试2: 并发异步操作性能 ({} 次操作, 并发度: {})", total_operations, concurrency);
+    println!(
+        "\n⚡ 基准测试2: 并发异步操作性能 ({} 次操作, 并发度: {})",
+        total_operations, concurrency
+    );
 
     let mut result = BenchmarkResult::new("并发操作".to_string());
     let start = Instant::now();
@@ -282,8 +289,8 @@ async fn benchmark_cache_operations(operations: usize) -> NetworkResult<Benchmar
     let start = Instant::now();
 
     // 创建缓存
-    let cache = c10_networks::performance::cache::Cache::new(1000)
-        .with_ttl(Duration::from_secs(60));
+    let cache =
+        c10_networks::performance::cache::Cache::new(1000).with_ttl(Duration::from_secs(60));
 
     for i in 0..operations {
         let operation_start = Instant::now();
@@ -325,7 +332,14 @@ fn print_benchmark_results(results: &[BenchmarkResult]) {
     println!("{:-<120}", "");
     println!(
         "{:<15} {:<10} {:<12} {:<12} {:<12} {:<12} {:<12} {:<10}",
-        "测试名称", "操作次数", "总耗时", "每秒操作", "平均延迟", "最小延迟", "最大延迟", "内存使用"
+        "测试名称",
+        "操作次数",
+        "总耗时",
+        "每秒操作",
+        "平均延迟",
+        "最小延迟",
+        "最大延迟",
+        "内存使用"
     );
     println!("{:-<120}", "");
 
@@ -352,7 +366,10 @@ async fn generate_performance_report(results: &[BenchmarkResult]) -> NetworkResu
 
     let mut report = String::new();
     report.push_str("# Rust 1.90 性能基准测试报告\n\n");
-    report.push_str(&format!("**生成时间**: {}\n", chrono::Utc::now().format("%Y-%m-%d %H:%M:%S UTC")));
+    report.push_str(&format!(
+        "**生成时间**: {}\n",
+        chrono::Utc::now().format("%Y-%m-%d %H:%M:%S UTC")
+    ));
     report.push_str(&format!("**Rust版本**: Rust 1.90+\n"));
     report.push_str(&format!("**测试环境**: {}\n\n", std::env::consts::OS));
 
@@ -360,17 +377,26 @@ async fn generate_performance_report(results: &[BenchmarkResult]) -> NetworkResu
         report.push_str(&format!("## {}\n\n", result.test_name));
         report.push_str(&format!("- **总操作数**: {}\n", result.total_operations));
         report.push_str(&format!("- **总耗时**: {:?}\n", result.total_duration));
-        report.push_str(&format!("- **每秒操作数**: {:.2}\n", result.operations_per_second));
+        report.push_str(&format!(
+            "- **每秒操作数**: {:.2}\n",
+            result.operations_per_second
+        ));
         report.push_str(&format!("- **平均延迟**: {:?}\n", result.average_latency));
         report.push_str(&format!("- **最小延迟**: {:?}\n", result.min_latency));
         report.push_str(&format!("- **最大延迟**: {:?}\n", result.max_latency));
-        report.push_str(&format!("- **内存使用**: {}KB\n\n", result.memory_usage / 1024));
+        report.push_str(&format!(
+            "- **内存使用**: {}KB\n\n",
+            result.memory_usage / 1024
+        ));
     }
 
     // 保存报告到文件
-    let filename = format!("performance_report_{}.md",
-        chrono::Utc::now().format("%Y%m%d_%H%M%S"));
-    tokio::fs::write(&filename, report).await
+    let filename = format!(
+        "performance_report_{}.md",
+        chrono::Utc::now().format("%Y%m%d_%H%M%S")
+    );
+    tokio::fs::write(&filename, report)
+        .await
         .map_err(|e| NetworkError::Other(format!("无法写入报告文件: {}", e)))?;
 
     println!("   报告已保存到: {}", filename);

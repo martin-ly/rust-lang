@@ -47,6 +47,7 @@ impl<T: PartialEq + Eq> PriorityMessage<T> {
     }
 }
 
+#[allow(clippy::non_canonical_partial_ord_impl)]
 impl<T: PartialEq + Eq> PartialOrd for PriorityMessage<T> {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         // BinaryHeap 是最大堆：我们需要“更小的优先级值更大”。
@@ -112,9 +113,10 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
 
         // 检查容量限制
         if let Some(capacity) = self.capacity
-            && queue.len() >= capacity {
-                return Err(message.into_data());
-            }
+            && queue.len() >= capacity
+        {
+            return Err(message.into_data());
+        }
 
         queue.push(message);
         self.notifier.notify_one();

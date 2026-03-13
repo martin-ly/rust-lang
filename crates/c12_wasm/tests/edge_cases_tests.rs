@@ -68,7 +68,7 @@ fn test_boundary_value_combinations() {
     // 测试最小值和最大值
     let min_value = i32::MIN;
     let max_value = i32::MAX;
-    
+
     assert_eq!(min_value, i32::MIN);
     assert_eq!(max_value, i32::MAX);
 

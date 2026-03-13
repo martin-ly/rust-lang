@@ -187,7 +187,6 @@ impl Counter {
     }
 }
 
-
 #[wasm_bindgen(start)]
 #[allow(clippy::main_recursion)]
 pub fn main() {

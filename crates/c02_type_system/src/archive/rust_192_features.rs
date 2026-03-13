@@ -29,8 +29,8 @@
 //! - [特性完整指南](../docs/RUST_192_FEATURES_GUIDE.md)
 //! - [示例代码集合](../docs/RUST_192_EXAMPLES_COLLECTION.md)
 //! - [测试用例](../tests/rust_192_features_tests.rs)
-use std::mem::MaybeUninit;
 use std::marker::PhantomData;
+use std::mem::MaybeUninit;
 use std::num::NonZeroUsize;
 
 // ==================== 1. 关联项的多个边界在类型系统中的应用 ====================

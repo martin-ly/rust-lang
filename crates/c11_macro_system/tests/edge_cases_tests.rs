@@ -106,8 +106,12 @@ fn test_resource_exhaustion() {
 fn test_complex_macro_scenarios() {
     // 测试条件宏
     macro_rules! conditional_macro {
-        (true) => { 1 };
-        (false) => { 0 };
+        (true) => {
+            1
+        };
+        (false) => {
+            0
+        };
     }
 
     assert_eq!(conditional_macro!(true), 1);
@@ -133,7 +137,9 @@ fn test_macro_performance_boundaries() {
     // 测试快速宏展开
     let start = Instant::now();
     macro_rules! fast_macro {
-        ($x:expr) => { $x };
+        ($x:expr) => {
+            $x
+        };
     }
     let _result = fast_macro!(42);
     let duration = start.elapsed();
@@ -152,7 +158,9 @@ fn test_macro_recursion_boundaries() {
 fn test_macro_parameter_type_boundaries() {
     // 测试表达式参数
     macro_rules! expr_macro {
-        ($e:expr) => { $e };
+        ($e:expr) => {
+            $e
+        };
     }
     assert_eq!(expr_macro!(42), 42);
 

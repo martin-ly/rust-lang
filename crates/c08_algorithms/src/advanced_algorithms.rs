@@ -248,9 +248,10 @@ where
     pub fn put(&self, key: K, value: V) {
         let node_id = self.hash_key(&key);
         if let Some(node) = self.nodes.get(&node_id)
-            && let Ok(mut node_data) = node.lock() {
-                node_data.insert(key, value);
-            }
+            && let Ok(mut node_data) = node.lock()
+        {
+            node_data.insert(key, value);
+        }
     }
 
     pub fn get(&self, key: &K) -> Option<V> {
@@ -358,10 +359,15 @@ impl KMeans {
             }
 
             // 更新聚类中心
-            for i in 0..self.k {
-                if cluster_counts[i] > 0 {
-                    for j in 0..self.centroids[i].len() {
-                        self.centroids[i][j] = cluster_sums[i][j] / cluster_counts[i] as f64;
+            for ((centroid, cluster_sum), &count) in self
+                .centroids
+                .iter_mut()
+                .zip(&cluster_sums)
+                .zip(&cluster_counts)
+            {
+                if count > 0 {
+                    for (c, &s) in centroid.iter_mut().zip(cluster_sum) {
+                        *c = s / count as f64;
                     }
                 }
             }
@@ -596,6 +602,7 @@ impl DecisionTree {
 pub struct CryptographicAlgorithms;
 
 /// RSA加密算法实现
+#[allow(clippy::upper_case_acronyms)]
 pub struct RSA {
     public_key: (u64, u64),
     private_key: (u64, u64),
@@ -742,6 +749,7 @@ impl RSA {
 }
 
 /// AES加密算法实现 (简化版)
+#[allow(clippy::upper_case_acronyms)]
 pub struct AES {
     key: [u8; 16],
     round_keys: [[u8; 16]; 11],
@@ -985,15 +993,15 @@ impl SHA256 {
         let mut h = self.state[7];
 
         // 主循环
-        for i in 0..64 {
+        for (&k, &w_i) in Self::K.iter().zip(&w) {
             let s1 =
                 Self::right_rotate(e, 6) ^ Self::right_rotate(e, 11) ^ Self::right_rotate(e, 25);
             let ch = (e & f) ^ (!e & g);
             let temp1 = h
                 .wrapping_add(s1)
                 .wrapping_add(ch)
-                .wrapping_add(Self::K[i])
-                .wrapping_add(w[i]);
+                .wrapping_add(k)
+                .wrapping_add(w_i);
             let s0 =
                 Self::right_rotate(a, 2) ^ Self::right_rotate(a, 13) ^ Self::right_rotate(a, 22);
             let maj = (a & b) ^ (a & c) ^ (b & c);

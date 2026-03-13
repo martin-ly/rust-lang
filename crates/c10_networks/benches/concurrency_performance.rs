@@ -1,8 +1,8 @@
 //! 并发性能基准测试
 //!
 //! 这个模块包含了 c10_networks 库并发处理相关的性能基准测试
-use c10_networks::{
-    error::{ErrorRecovery, NetworkError, ErrorStats, ProtocolError, PerformanceError, SecurityError},
+use c10_networks::error::{
+    ErrorRecovery, ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
 };
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
@@ -33,7 +33,9 @@ fn bench_error_creation(c: &mut Criterion) {
 
     group.bench_function("performance_error", |b| {
         b.iter(|| {
-            let error = PerformanceError::HighLoad { load: black_box(95.0) };
+            let error = PerformanceError::HighLoad {
+                load: black_box(95.0),
+            };
             black_box(error)
         })
     });
@@ -79,8 +81,8 @@ fn bench_error_recovery(c: &mut Criterion) {
     group.bench_function("should_retry", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
         b.iter(|| {
-            let should_retry = black_box(&error).is_retryable() &&
-                black_box(&error).max_retries().map_or(false, |max| 3 < max);
+            let should_retry = black_box(&error).is_retryable()
+                && black_box(&error).max_retries().map_or(false, |max| 3 < max);
             black_box(should_retry)
         })
     });
@@ -149,7 +151,8 @@ fn bench_error_propagation(c: &mut Criterion) {
 
     group.bench_function("result_creation", |b| {
         b.iter(|| {
-            let result: Result<(), NetworkError> = Err(black_box(NetworkError::Timeout(Duration::from_secs(5))));
+            let result: Result<(), NetworkError> =
+                Err(black_box(NetworkError::Timeout(Duration::from_secs(5))));
             black_box(result)
         })
     });
@@ -157,11 +160,9 @@ fn bench_error_propagation(c: &mut Criterion) {
     group.bench_function("result_match", |b| {
         let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
 
-        b.iter(|| {
-            match black_box(&result) {
-                Ok(_) => black_box(0),
-                Err(e) => black_box(e.max_retries().unwrap_or(0)),
-            }
+        b.iter(|| match black_box(&result) {
+            Ok(_) => black_box(0),
+            Err(e) => black_box(e.max_retries().unwrap_or(0)),
         })
     });
 
@@ -169,7 +170,9 @@ fn bench_error_propagation(c: &mut Criterion) {
         let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
 
         b.iter(|| {
-            let mapped = black_box(&result).as_ref().map_err(|e| e.max_retries().unwrap_or(0));
+            let mapped = black_box(&result)
+                .as_ref()
+                .map_err(|e| e.max_retries().unwrap_or(0));
             black_box(mapped)
         })
     });
@@ -192,7 +195,8 @@ fn bench_error_handling_chain(c: &mut Criterion) {
 
     group.bench_function("simple_chain", |b| {
         b.iter(|| {
-            let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
+            let result: Result<(), NetworkError> =
+                Err(NetworkError::Timeout(Duration::from_secs(5)));
 
             let processed = result
                 .map_err(|e| e.max_retries().unwrap_or(0))
@@ -205,7 +209,8 @@ fn bench_error_handling_chain(c: &mut Criterion) {
 
     group.bench_function("complex_chain", |b| {
         b.iter(|| {
-            let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
+            let result: Result<(), NetworkError> =
+                Err(NetworkError::Timeout(Duration::from_secs(5)));
 
             let processed = result
                 .map_err(|e| e.max_retries().unwrap_or(0))
@@ -220,12 +225,14 @@ fn bench_error_handling_chain(c: &mut Criterion) {
 
     group.bench_function("nested_chain", |b| {
         b.iter(|| {
-            let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
+            let result: Result<(), NetworkError> =
+                Err(NetworkError::Timeout(Duration::from_secs(5)));
 
             let processed = result
                 .map_err(|e| e.max_retries().unwrap_or(0))
                 .and_then(|_| {
-                    let inner_result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(3)));
+                    let inner_result: Result<(), NetworkError> =
+                        Err(NetworkError::Timeout(Duration::from_secs(3)));
                     inner_result.map_err(|e| e.max_retries().unwrap_or(0))
                 })
                 .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries as u64)));
@@ -311,7 +318,8 @@ fn bench_error_handling_performance(c: &mut Criterion) {
 
     group.bench_function("error_handling_overhead", |b| {
         b.iter(|| {
-            let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
+            let result: Result<(), NetworkError> =
+                Err(NetworkError::Timeout(Duration::from_secs(5)));
 
             match result {
                 Ok(_) => black_box(0),
@@ -329,7 +337,8 @@ fn bench_error_handling_performance(c: &mut Criterion) {
         let mut stats = ErrorStats::default();
 
         b.iter(|| {
-            let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
+            let result: Result<(), NetworkError> =
+                Err(NetworkError::Timeout(Duration::from_secs(5)));
 
             match result {
                 Ok(_) => black_box(0),
@@ -346,7 +355,8 @@ fn bench_error_handling_performance(c: &mut Criterion) {
 
     group.bench_function("error_handling_with_recovery", |b| {
         b.iter(|| {
-            let result: Result<(), NetworkError> = Err(NetworkError::Timeout(Duration::from_secs(5)));
+            let result: Result<(), NetworkError> =
+                Err(NetworkError::Timeout(Duration::from_secs(5)));
 
             match result {
                 Ok(_) => black_box(0),

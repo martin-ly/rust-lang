@@ -4,8 +4,8 @@
 use c10_networks::{
     protocol::{
         http::{HttpMethod, HttpRequest, HttpStatusCode, HttpVersion},
-        websocket::{WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode},
         tcp::{TcpConnection, TcpConnectionConfig, TcpState},
+        websocket::{WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode},
     },
     socket::{TcpConfig, UdpConfig, utils},
 };
@@ -59,11 +59,8 @@ fn bench_http_protocol(c: &mut Criterion) {
 
         b.iter(|| {
             for method in &methods {
-                let request = HttpRequest::new(
-                    black_box(method.clone()),
-                    "/test",
-                    HttpVersion::Http1_1,
-                );
+                let request =
+                    HttpRequest::new(black_box(method.clone()), "/test", HttpVersion::Http1_1);
                 black_box(request);
             }
         })
@@ -98,14 +95,18 @@ fn bench_websocket_protocol(c: &mut Criterion) {
         b.iter(|| {
             let text_frame = WebSocketFrame::text(black_box("Hello, WebSocket!"));
             let binary_frame = WebSocketFrame::binary(black_box(&[1, 2, 3, 4, 5]));
-            let close_frame = WebSocketFrame::close(
-                black_box(Some(1000)),
-                black_box(Some("Normal closure")),
-            );
+            let close_frame =
+                WebSocketFrame::close(black_box(Some(1000)), black_box(Some("Normal closure")));
             let ping_frame = WebSocketFrame::ping(black_box(Some(&[1, 2, 3, 4])));
             let pong_frame = WebSocketFrame::pong(black_box(Some(&[5, 6, 7, 8])));
 
-            black_box((text_frame, binary_frame, close_frame, ping_frame, pong_frame))
+            black_box((
+                text_frame,
+                binary_frame,
+                close_frame,
+                ping_frame,
+                pong_frame,
+            ))
         })
     });
 
@@ -208,9 +209,8 @@ fn bench_tcp_protocol(c: &mut Criterion) {
         b.iter(|| {
             let pool = TcpConnectionPool::new(black_box(10), Duration::from_secs(30));
             let config = TcpConnectionConfig::default();
-            let connection_id = futures::executor::block_on(
-                pool.create_connection(config)
-            ).unwrap();
+            let connection_id =
+                futures::executor::block_on(pool.create_connection(config)).unwrap();
             black_box(connection_id)
         })
     });
@@ -320,11 +320,7 @@ fn bench_protocol_serialization(c: &mut Criterion) {
     let mut group = c.benchmark_group("protocol_serialization");
 
     group.bench_function("http_request_serialization", |b| {
-        let mut request = HttpRequest::new(
-            HttpMethod::GET,
-            "/api/test",
-            HttpVersion::Http1_1,
-        );
+        let mut request = HttpRequest::new(HttpMethod::GET, "/api/test", HttpVersion::Http1_1);
         request.add_header("User-Agent", "c10_networks");
         request.add_header("Accept", "application/json");
         request.set_body(b"{\"query\": \"test\"}".as_slice());
@@ -370,11 +366,8 @@ fn bench_protocol_compatibility(c: &mut Criterion) {
 
         b.iter(|| {
             for version in &versions {
-                let request = HttpRequest::new(
-                    HttpMethod::GET,
-                    "/test",
-                    black_box(version.clone()),
-                );
+                let request =
+                    HttpRequest::new(HttpMethod::GET, "/test", black_box(version.clone()));
                 black_box(request);
             }
         })
@@ -432,18 +425,17 @@ fn bench_protocol_error_handling(c: &mut Criterion) {
 
     group.bench_function("websocket_error_creation", |b| {
         b.iter(|| {
-            let error = c10_networks::error::ProtocolError::WebSocket(
-                black_box("Connection failed".to_string()),
-            );
+            let error = c10_networks::error::ProtocolError::WebSocket(black_box(
+                "Connection failed".to_string(),
+            ));
             black_box(error)
         })
     });
 
     group.bench_function("tcp_error_creation", |b| {
         b.iter(|| {
-            let error = c10_networks::error::ProtocolError::Tcp(
-                black_box("Connection reset".to_string()),
-            );
+            let error =
+                c10_networks::error::ProtocolError::Tcp(black_box("Connection reset".to_string()));
             black_box(error)
         })
     });

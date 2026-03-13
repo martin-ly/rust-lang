@@ -46,7 +46,7 @@ fn main() {
 
     // 2. 表达式求值
     println!("2. 表达式求值:");
-    println!("eval (2 + 3) * 4 = {}", calc!(eval (2 + 3) * 4));
+    println!("eval (2 + 3) * 4 = {}", calc!(eval(2 + 3) * 4));
     println!();
 
     // 3. 类型转换

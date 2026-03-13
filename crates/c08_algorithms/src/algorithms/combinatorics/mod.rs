@@ -1,5 +1,5 @@
 //! # 组合数学算法模块
-//! 
+//!
 //! 本模块实现了各种组合数学算法。
 //use serde::{Serialize, Deserialize};
 
@@ -40,11 +40,11 @@ impl CombinatoricsAlgorithms {
     pub fn generate_combinations(n: usize, k: usize) -> Vec<Vec<usize>> {
         let mut result = Vec::new();
         let mut current = Vec::new();
-        
+
         Self::generate_combinations_recursive(0, n, k, &mut current, &mut result);
         result
     }
-    
+
     fn generate_combinations_recursive(
         start: usize,
         n: usize,
@@ -56,7 +56,7 @@ impl CombinatoricsAlgorithms {
             result.push(current.clone());
             return;
         }
-        
+
         for i in start..n {
             current.push(i);
             Self::generate_combinations_recursive(i + 1, n, k, current, result);
@@ -80,13 +80,13 @@ impl CombinatoricsAlgorithms {
         } else {
             let mut a = 0;
             let mut b = 1;
-            
+
             for _ in 2..=n {
                 let temp = a + b;
                 a = b;
                 b = temp;
             }
-            
+
             b
         }
     }

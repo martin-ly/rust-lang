@@ -199,6 +199,7 @@ impl UnsupervisedLearning for KMeans {
 
 /// DBSCAN 聚类算法
 #[derive(Debug, Clone)]
+#[allow(clippy::upper_case_acronyms)]
 pub struct DBSCAN {
     /// 邻域半径
     eps: f64,

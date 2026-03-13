@@ -1,5 +1,5 @@
 //! 边缘计算异步演示
-//! 
+//!
 //! 本示例展示了异步编程在边缘计算中的应用：
 //! - 边缘节点管理
 //! - 数据预处理和过滤
@@ -9,18 +9,18 @@
 //! - 网络连接管理
 //! - 资源调度
 //! - 边缘协同计算
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example edge_computing_demo
 //! ```
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};
-use tokio::sync::{Mutex, RwLock, mpsc, Semaphore};
+use tokio::sync::{Mutex, RwLock, Semaphore, mpsc};
 use tokio::time::sleep;
-use serde::{Serialize, Deserialize};
-use anyhow::Result;
 use uuid::Uuid;
 
 /// 边缘节点信息
@@ -173,7 +173,7 @@ impl EdgeTaskScheduler {
         for task in tasks {
             // 寻找合适的节点
             let suitable_node = self.find_suitable_node(&task, &nodes).await;
-            
+
             if let Some(node_id) = suitable_node {
                 // 提交任务到节点
                 self.assign_task_to_node(task.clone(), node_id).await?;
@@ -186,7 +186,11 @@ impl EdgeTaskScheduler {
         Ok(())
     }
 
-    async fn find_suitable_node(&self, task: &EdgeTask, nodes: &HashMap<String, EdgeNode>) -> Option<String> {
+    async fn find_suitable_node(
+        &self,
+        task: &EdgeTask,
+        nodes: &HashMap<String, EdgeNode>,
+    ) -> Option<String> {
         let mut best_node = None;
         let mut best_score = 0.0;
 
@@ -213,12 +217,16 @@ impl EdgeTaskScheduler {
         }
 
         // 检查内存
-        if (capabilities.memory_gb as f32 * 1024.0 * (1.0 - resources.memory_usage)) < requirements.min_memory_mb as f32 {
+        if (capabilities.memory_gb as f32 * 1024.0 * (1.0 - resources.memory_usage))
+            < requirements.min_memory_mb as f32
+        {
             return false;
         }
 
         // 检查存储
-        if (capabilities.storage_gb as f32 * 1024.0 * (1.0 - resources.storage_usage)) < requirements.min_storage_mb as f32 {
+        if (capabilities.storage_gb as f32 * 1024.0 * (1.0 - resources.storage_usage))
+            < requirements.min_storage_mb as f32
+        {
             return false;
         }
 
@@ -233,12 +241,15 @@ impl EdgeTaskScheduler {
         }
 
         // 检查节点状态
-        !matches!(node.status, NodeStatus::Offline | NodeStatus::Maintenance | NodeStatus::Overloaded)
+        !matches!(
+            node.status,
+            NodeStatus::Offline | NodeStatus::Maintenance | NodeStatus::Overloaded
+        )
     }
 
     fn calculate_node_score(&self, node: &EdgeNode, _requirements: &TaskRequirements) -> f32 {
         let resources = &node.resources;
-        
+
         // 基于资源可用性的评分
         let cpu_score = 1.0 - resources.cpu_usage;
         let memory_score = 1.0 - resources.memory_usage;
@@ -253,7 +264,8 @@ impl EdgeTaskScheduler {
         let _permit = self.semaphore.acquire().await?;
 
         let started_at = Instant::now();
-        let estimated_completion = started_at + Duration::from_millis(1000 + rand::random::<u64>() % 5000);
+        let estimated_completion =
+            started_at + Duration::from_millis(1000 + rand::random::<u64>() % 5000);
 
         let running_task = RunningTask {
             task: task.clone(),
@@ -286,7 +298,11 @@ impl EdgeTaskScheduler {
             // 模拟任务执行结果
             let success = rand::random::<f32>() > 0.1; // 90% 成功率
             let output_data = if success {
-                format!("Task {} completed successfully on node {}", task.id, node_id).into_bytes()
+                format!(
+                    "Task {} completed successfully on node {}",
+                    task.id, node_id
+                )
+                .into_bytes()
             } else {
                 Vec::new()
             };
@@ -297,7 +313,11 @@ impl EdgeTaskScheduler {
                 output_data,
                 execution_time,
                 success,
-                error_message: if success { None } else { Some("Task execution failed".to_string()) },
+                error_message: if success {
+                    None
+                } else {
+                    Some("Task execution failed".to_string())
+                },
                 completed_at: Instant::now(),
             };
 
@@ -334,7 +354,10 @@ impl EdgeTaskScheduler {
         let results = self.task_results.read().await;
 
         let total_nodes = nodes.len();
-        let online_nodes = nodes.values().filter(|n| matches!(n.status, NodeStatus::Online)).count();
+        let online_nodes = nodes
+            .values()
+            .filter(|n| matches!(n.status, NodeStatus::Online))
+            .count();
         let pending_tasks = queue.len();
         let active_tasks = running_tasks.len();
         let completed_tasks = results.len();
@@ -416,9 +439,17 @@ pub struct ProcessingRule {
 
 #[derive(Debug, Clone)]
 pub enum ProcessingCondition {
-    ValueRange { min: f64, max: f64 },
-    Threshold { threshold: f64, operator: ThresholdOperator },
-    Anomaly { threshold: f32 },
+    ValueRange {
+        min: f64,
+        max: f64,
+    },
+    Threshold {
+        threshold: f64,
+        operator: ThresholdOperator,
+    },
+    Anomaly {
+        threshold: f32,
+    },
 }
 
 #[derive(Debug, Clone)]
@@ -457,7 +488,7 @@ impl EdgeDataProcessor {
     pub async fn start_processing(&mut self) -> Result<()> {
         while let Some(sensor_data) = self.input_stream.recv().await {
             let processed_data = self.process_sensor_data(sensor_data).await;
-            
+
             if let Err(e) = self.output_stream.send(processed_data) {
                 println!("      发送处理结果失败: {}", e);
                 break;
@@ -490,12 +521,19 @@ impl EdgeDataProcessor {
                             anomaly_score += 0.5;
                         }
                     }
-                    ProcessingCondition::Threshold { threshold, operator } => {
+                    ProcessingCondition::Threshold {
+                        threshold,
+                        operator,
+                    } => {
                         let condition_met = match operator {
                             ThresholdOperator::GreaterThan => sensor_data.value > *threshold,
                             ThresholdOperator::LessThan => sensor_data.value < *threshold,
-                            ThresholdOperator::EqualTo => (sensor_data.value - *threshold).abs() < 0.001,
-                            ThresholdOperator::NotEqualTo => (sensor_data.value - *threshold).abs() >= 0.001,
+                            ThresholdOperator::EqualTo => {
+                                (sensor_data.value - *threshold).abs() < 0.001
+                            }
+                            ThresholdOperator::NotEqualTo => {
+                                (sensor_data.value - *threshold).abs() >= 0.001
+                            }
                         };
 
                         if condition_met {
@@ -593,7 +631,8 @@ impl EdgeAIEngine {
             if let Some(model) = models.get(&request.model_id) {
                 // 执行推理
                 let start_time = Instant::now();
-                let (output_data, confidence) = self.run_inference(&request.input_data, model).await;
+                let (output_data, confidence) =
+                    self.run_inference(&request.input_data, model).await;
                 let inference_time = start_time.elapsed();
 
                 let result = InferenceResult {
@@ -802,13 +841,19 @@ impl EdgeComputingDemo {
             ProcessingRule {
                 id: "rule-1".to_string(),
                 sensor_type: "temperature".to_string(),
-                condition: ProcessingCondition::ValueRange { min: -10.0, max: 50.0 },
+                condition: ProcessingCondition::ValueRange {
+                    min: -10.0,
+                    max: 50.0,
+                },
                 action: ProcessingAction::Filter,
             },
             ProcessingRule {
                 id: "rule-2".to_string(),
                 sensor_type: "temperature".to_string(),
-                condition: ProcessingCondition::Threshold { threshold: 40.0, operator: ThresholdOperator::GreaterThan },
+                condition: ProcessingCondition::Threshold {
+                    threshold: 40.0,
+                    operator: ThresholdOperator::GreaterThan,
+                },
                 action: ProcessingAction::Alert,
             },
             ProcessingRule {
@@ -824,9 +869,7 @@ impl EdgeComputingDemo {
         }
 
         // 启动处理器
-        let processor_handle = tokio::spawn(async move {
-            processor.start_processing().await
-        });
+        let processor_handle = tokio::spawn(async move { processor.start_processing().await });
 
         // 发送传感器数据
         let sensor_data = vec![
@@ -884,8 +927,13 @@ impl EdgeComputingDemo {
         let mut result_count = 0;
         while let Some(result) = output_receiver.recv().await {
             result_count += 1;
-            println!("      数据 {}: 原值={:.1}, 处理值={:.1}, 异常分数={:.2}", 
-                result_count, result.original_data.value, result.processed_value, result.anomaly_score);
+            println!(
+                "      数据 {}: 原值={:.1}, 处理值={:.1}, 异常分数={:.2}",
+                result_count,
+                result.original_data.value,
+                result.processed_value,
+                result.anomaly_score
+            );
         }
 
         let _ = processor_handle.await?;
@@ -951,8 +999,13 @@ impl EdgeComputingDemo {
         println!("    推理结果:");
         let results = ai_engine.results.read().await;
         for (request_id, result) in results.iter() {
-            println!("      请求 {}: 模型={}, 置信度={:.2}%, 推理时间={:?}", 
-                request_id, result.model_id, result.confidence * 100.0, result.inference_time);
+            println!(
+                "      请求 {}: 模型={}, 置信度={:.2}%, 推理时间={:?}",
+                request_id,
+                result.model_id,
+                result.confidence * 100.0,
+                result.inference_time
+            );
         }
 
         Ok(())
@@ -1000,14 +1053,14 @@ impl EdgeComputingDemo {
             let node_id = node.id.clone();
             let handle = tokio::spawn(async move {
                 println!("      节点 {} 开始协同计算", node_id);
-                
+
                 // 模拟计算任务
                 let computation_time = Duration::from_millis(1000 + i as u64 * 500);
                 sleep(computation_time).await;
-                
+
                 let result = format!("Node {} completed collaborative task", node_id);
                 println!("      节点 {} 完成协同计算", node_id);
-                
+
                 result
             });
             handles.push(handle);
@@ -1024,7 +1077,7 @@ impl EdgeComputingDemo {
         for i in 1..=3 {
             let source_node = format!("collab-node-{}", i);
             let target_node = format!("collab-node-{}", (i % 3) + 1);
-            
+
             println!("        {} -> {}: 数据传输", source_node, target_node);
             sleep(Duration::from_millis(100)).await;
         }
@@ -1092,7 +1145,11 @@ impl EdgeComputingDemo {
                 let task = EdgeTask {
                     id: Uuid::new_v4().to_string(),
                     task_type: task_type.clone(),
-                    priority: if rand::random::<bool>() { TaskPriority::High } else { TaskPriority::Normal },
+                    priority: if rand::random::<bool>() {
+                        TaskPriority::High
+                    } else {
+                        TaskPriority::Normal
+                    },
                     input_data: vec![rand::random::<u8>(); 100],
                     requirements: TaskRequirements {
                         min_cpu_cores: rand::random::<u32>() % 4 + 1,
@@ -1117,10 +1174,12 @@ impl EdgeComputingDemo {
         println!("    系统运行中...");
         for i in 1..=5 {
             sleep(Duration::from_secs(1)).await;
-            
+
             let stats = scheduler.get_system_stats().await;
-            println!("      第 {} 秒: 活跃任务={}, 完成任务={}, 成功率={:.1}%", 
-                i, stats.active_tasks, stats.completed_tasks, stats.success_rate);
+            println!(
+                "      第 {} 秒: 活跃任务={}, 完成任务={}, 成功率={:.1}%",
+                i, stats.active_tasks, stats.completed_tasks, stats.success_rate
+            );
         }
 
         // 最终统计
@@ -1128,7 +1187,10 @@ impl EdgeComputingDemo {
         println!("    最终系统统计:");
         println!("      总节点数: {}", final_stats.total_nodes);
         println!("      在线节点数: {}", final_stats.online_nodes);
-        println!("      总任务数: {}", final_stats.pending_tasks + final_stats.active_tasks + final_stats.completed_tasks);
+        println!(
+            "      总任务数: {}",
+            final_stats.pending_tasks + final_stats.active_tasks + final_stats.completed_tasks
+        );
         println!("      完成任务数: {}", final_stats.completed_tasks);
         println!("      成功任务数: {}", final_stats.successful_tasks);
         println!("      系统成功率: {:.1}%", final_stats.success_rate);

@@ -48,10 +48,11 @@ pub fn find_kth_largest(nums: Vec<i32>, k: i32) -> i32 {
         } else {
             // 如果当前数比堆顶（k个最大中最小的）大，替换堆顶
             if let Some(&std::cmp::Reverse(min)) = heap.peek()
-                && num > min {
-                    heap.pop();
-                    heap.push(std::cmp::Reverse(num));
-                }
+                && num > min
+            {
+                heap.pop();
+                heap.push(std::cmp::Reverse(num));
+            }
         }
     }
 
@@ -162,9 +163,7 @@ pub fn top_k_frequent_words(words: Vec<String>, k: i32) -> Vec<String> {
     let mut entries: Vec<(String, i32)> = freq_map.into_iter().collect();
 
     // 排序：频率降序，相同频率时字典序升序
-    entries.sort_by(|a, b| {
-        b.1.cmp(&a.1).then_with(|| a.0.cmp(&b.0))
-    });
+    entries.sort_by(|a, b| b.1.cmp(&a.1).then_with(|| a.0.cmp(&b.0)));
 
     // 取前 k 个
     entries.into_iter().take(k).map(|(word, _)| word).collect()
@@ -197,10 +196,11 @@ impl KthLargest {
             if heap.len() < k {
                 heap.push(std::cmp::Reverse(num));
             } else if let Some(&std::cmp::Reverse(min)) = heap.peek()
-                && num > min {
-                    heap.pop();
-                    heap.push(std::cmp::Reverse(num));
-                }
+                && num > min
+            {
+                heap.pop();
+                heap.push(std::cmp::Reverse(num));
+            }
         }
 
         Self { k, heap } // heap 类型是 BinaryHeap<std::cmp::Reverse<i32>>
@@ -210,10 +210,11 @@ impl KthLargest {
         if self.heap.len() < self.k {
             self.heap.push(std::cmp::Reverse(val));
         } else if let Some(&std::cmp::Reverse(min)) = self.heap.peek()
-            && val > min {
-                self.heap.pop();
-                self.heap.push(std::cmp::Reverse(val));
-            }
+            && val > min
+        {
+            self.heap.pop();
+            self.heap.push(std::cmp::Reverse(val));
+        }
 
         // 堆顶就是第 k 大的元素
         self.heap.peek().unwrap().0
@@ -241,15 +242,15 @@ pub fn k_closest(points: Vec<Vec<i32>>, k: i32) -> Vec<Vec<i32>> {
         point: Vec<i32>,
     }
 
-    impl PartialOrd for PointDist {
-        fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-            Some(self.dist_sq.cmp(&other.dist_sq))
+    impl Ord for PointDist {
+        fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+            self.dist_sq.cmp(&other.dist_sq)
         }
     }
 
-    impl Ord for PointDist {
-        fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-            self.partial_cmp(other).unwrap()
+    impl PartialOrd for PointDist {
+        fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+            Some(self.cmp(other))
         }
     }
 
@@ -403,7 +404,11 @@ mod tests {
     fn test_frequency_sort() {
         let result = frequency_sort("tree".to_string());
         // 应该是按频率排序：e(2) -> r(1) 或 t(1)
-        assert!(result.starts_with("ee") || result == "eert".to_string() || result == "eetr".to_string());
+        assert!(
+            result.starts_with("ee")
+                || result == "eert".to_string()
+                || result == "eetr".to_string()
+        );
     }
 
     #[test]

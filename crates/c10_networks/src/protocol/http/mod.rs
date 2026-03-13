@@ -8,6 +8,7 @@ use std::str::FromStr;
 
 /// HTTP 方法枚举
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[allow(clippy::upper_case_acronyms)]
 pub enum HttpMethod {
     GET,
     POST,

@@ -54,8 +54,9 @@ impl OptimizationAlgorithms {
             let new_cost = Self::cost_function(new_solution);
 
             // 接受准则
-            if new_cost < current_cost ||
-               rand::random::<f64>() < ((current_cost - new_cost) / temperature).exp() {
+            if new_cost < current_cost
+                || rand::random::<f64>() < ((current_cost - new_cost) / temperature).exp()
+            {
                 current_solution = new_solution;
                 current_cost = new_cost;
 

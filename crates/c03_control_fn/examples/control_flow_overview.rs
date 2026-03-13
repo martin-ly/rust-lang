@@ -21,7 +21,9 @@ fn parse_port(s: &str) -> Result<u16, String> {
 fn find_first_even(nums: &[i32]) -> Option<i32> {
     'outer: {
         for &n in nums {
-            if n % 2 != 0 { continue; }
+            if n % 2 != 0 {
+                continue;
+            }
             break 'outer Some(n);
         }
         None
@@ -30,7 +32,9 @@ fn find_first_even(nums: &[i32]) -> Option<i32> {
 
 fn index_of(nums: &[i32], target: i32) -> Option<usize> {
     for (i, &n) in nums.iter().enumerate() {
-        if n == target { return Some(i); }
+        if n == target {
+            return Some(i);
+        }
     }
     None
 }
@@ -51,8 +55,8 @@ fn main() {
     assert_eq!(parse_port("port=8080").unwrap(), 8080);
     assert!(parse_port("p=1").is_err());
 
-    assert_eq!(find_first_even(&[1,3,5,6,7]), Some(6));
-    assert_eq!(index_of(&[10,20,30], 20), Some(1));
+    assert_eq!(find_first_even(&[1, 3, 5, 6, 7]), Some(6));
+    assert_eq!(index_of(&[10, 20, 30], 20), Some(1));
 
     let _ = std::panic::catch_unwind(|| pick(None));
 }

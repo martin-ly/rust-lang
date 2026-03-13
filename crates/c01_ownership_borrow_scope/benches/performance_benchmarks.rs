@@ -1,6 +1,6 @@
 //! 所有权和借用作用域模块性能基准测试 / Ownership and Borrowing Scope Module Performance Benchmarks
 use c01_ownership_borrow_scope::scope::{ScopeManager, ScopeType};
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 fn bench_scope_creation(c: &mut Criterion) {
     c.bench_function("scope_creation", |b| {
@@ -39,7 +39,10 @@ fn bench_scope_nesting(c: &mut Criterion) {
             let mut manager = ScopeManager::new();
             for i in 0..100 {
                 manager
-                    .enter_scope(std::hint::black_box(format!("scope_{}", i)), ScopeType::Block)
+                    .enter_scope(
+                        std::hint::black_box(format!("scope_{}", i)),
+                        ScopeType::Block,
+                    )
                     .unwrap();
             }
             for _ in 0..100 {
@@ -49,5 +52,10 @@ fn bench_scope_nesting(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, bench_scope_creation, bench_variable_operations, bench_scope_nesting);
+criterion_group!(
+    benches,
+    bench_scope_creation,
+    bench_variable_operations,
+    bench_scope_nesting
+);
 criterion_main!(benches);

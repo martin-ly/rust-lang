@@ -7,16 +7,20 @@ fn main() {
 #[tokio::main]
 async fn main() {
     use bastion::prelude::*;
-    use tracing::{info, instrument};
-    use once_cell::sync::Lazy;
-    use prometheus::{Registry, IntCounter, Opts};
     use c06_async::utils::metrics;
+    use once_cell::sync::Lazy;
+    use prometheus::{IntCounter, Opts, Registry};
+    use tracing::{info, instrument};
 
     let _ = tracing_subscriber::fmt().with_env_filter("info").try_init();
 
     // 指标
-    static BRIDGE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| IntCounter::with_opts(Opts::new("bridge_in_total", "桥接入口收到的消息总数")).unwrap());
-    static PIPELINE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| IntCounter::with_opts(Opts::new("pipeline_in_total", "流水线入口收到的消息总数")).unwrap());
+    static BRIDGE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+        IntCounter::with_opts(Opts::new("bridge_in_total", "桥接入口收到的消息总数")).unwrap()
+    });
+    static PIPELINE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+        IntCounter::with_opts(Opts::new("pipeline_in_total", "流水线入口收到的消息总数")).unwrap()
+    });
     let registry = Registry::new();
     let _ = registry.register(Box::new(BRIDGE_IN_TOTAL.clone()));
     let _ = registry.register(Box::new(PIPELINE_IN_TOTAL.clone()));
@@ -72,5 +76,3 @@ async fn main() {
     std::thread::sleep(std::time::Duration::from_millis(300));
     Bastion::stop();
 }
-
-

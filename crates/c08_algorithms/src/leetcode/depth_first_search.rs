@@ -6,8 +6,8 @@
 //!
 //! 1. **性能优化**: 递归和迭代器操作性能提升
 //! 2. **内存优化**: 使用栈或递归优化
-use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use crate::leetcode::tree::TreeNode;
+use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -21,13 +21,15 @@ pub fn is_valid_bst(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
             Some(n) => {
                 let val = n.borrow().val;
                 if let Some(min_val) = min
-                    && val <= min_val {
-                        return false;
-                    }
+                    && val <= min_val
+                {
+                    return false;
+                }
                 if let Some(max_val) = max
-                    && val >= max_val {
-                        return false;
-                    }
+                    && val >= max_val
+                {
+                    return false;
+                }
                 validate(n.borrow().left.clone(), min, Some(val))
                     && validate(n.borrow().right.clone(), Some(val), max)
             }
@@ -242,7 +244,8 @@ mod tests {
 
     #[test]
     fn test_max_depth_dfs() {
-        let root = build_tree_from_vec(&[Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]);
+        let root =
+            build_tree_from_vec(&[Some(3), Some(9), Some(20), None, None, Some(15), Some(7)]);
         assert_eq!(max_depth_dfs(root), 3);
     }
 

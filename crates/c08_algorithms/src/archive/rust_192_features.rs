@@ -11,8 +11,8 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
-use std::num::NonZeroUsize;
 use std::collections::BTreeMap;
+use std::num::NonZeroUsize;
 
 // ==================== 1. rotate_right 在算法中的应用 ====================
 
@@ -121,12 +121,7 @@ pub fn search_rotated_array(arr: &[i32], target: i32) -> Option<usize> {
 }
 
 fn find_pivot(arr: &[i32]) -> Option<usize> {
-    for i in 1..arr.len() {
-        if arr[i] < arr[i - 1] {
-            return Some(i);
-        }
-    }
-    None
+    (1..arr.len()).find(|&i| arr[i] < arr[i - 1])
 }
 
 /// 案例2: 使用 div_ceil 实现内存对齐算法
@@ -211,7 +206,10 @@ pub fn demonstrate_btree_map_insert_entry() {
     // 如果键已存在，返回现有值的可变引用
     {
         let existing_value_entry = map.entry("key1".to_string()).insert_entry(300);
-        println!("2. 键 'key1' 已存在，返回现有值: {}", existing_value_entry.get());
+        println!(
+            "2. 键 'key1' 已存在，返回现有值: {}",
+            existing_value_entry.get()
+        );
     }
     println!("3. 最终值: {}", map.get("key1").unwrap());
 

@@ -1,7 +1,7 @@
 //! # 搜索算法模块
 //!
 //! 本模块实现了各种搜索算法。
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// 搜索算法类型
 #[derive(Debug, Clone, Serialize, Deserialize)]

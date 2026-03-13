@@ -391,6 +391,8 @@ Generic Trait 为 Rust 提供了强大的编译时多态能力。
 通过合理使用泛型特征，可以创建灵活、高效、类型安全的代码。
 */
 
+#![allow(clippy::type_complexity)]
+
 use std::fmt::Display;
 
 // 基本泛型特征

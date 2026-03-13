@@ -142,16 +142,10 @@ pub mod algorithm_new_apis {
 
         for &value in data {
             if value < min_value {
-                return ControlFlow::Break(format!(
-                    "值 {} 小于最小值 {}",
-                    value, min_value
-                ));
+                return ControlFlow::Break(format!("值 {} 小于最小值 {}", value, min_value));
             }
             if value > max_value {
-                return ControlFlow::Break(format!(
-                    "值 {} 大于最大值 {}",
-                    value, max_value
-                ));
+                return ControlFlow::Break(format!("值 {} 大于最大值 {}", value, max_value));
             }
             valid_data.push(value);
         }
@@ -160,15 +154,9 @@ pub mod algorithm_new_apis {
     }
 
     /// 使用 ControlFlow 进行算法边界检查
-    pub fn check_algorithm_bounds(
-        array: &[i32],
-        index: usize,
-    ) -> ControlFlow<String, i32> {
+    pub fn check_algorithm_bounds(array: &[i32], index: usize) -> ControlFlow<String, i32> {
         if index >= array.len() {
-            return ControlFlow::Break(format!(
-                "索引 {} 超出数组长度 {}",
-                index, array.len()
-            ));
+            return ControlFlow::Break(format!("索引 {} 超出数组长度 {}", index, array.len()));
         }
         ControlFlow::Continue(array[index])
     }
@@ -193,10 +181,7 @@ pub mod algorithm_jit_optimizations {
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 15-25%
     pub fn process_algorithm_data(v: &[i32]) -> Vec<i32> {
         // Rust 1.91 优化：链式迭代器在 JIT 模式下性能提升更明显
-        v.iter()
-            .map(|x| x * 2)
-            .filter(|&x| x > 10)
-            .collect()
+        v.iter().map(|x| x * 2).filter(|&x| x > 10).collect()
     }
 
     /// 嵌套迭代器算法操作
@@ -323,7 +308,9 @@ pub mod algorithm_std_new_apis {
     /// Vec::try_reserve_exact 示例
     ///
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
-    pub fn allocate_algorithm_buffer(size: usize) -> Result<Vec<i32>, std::collections::TryReserveError> {
+    pub fn allocate_algorithm_buffer(
+        size: usize,
+    ) -> Result<Vec<i32>, std::collections::TryReserveError> {
         let mut vec = Vec::new();
         vec.try_reserve_exact(size)?;
         Ok(vec)

@@ -36,9 +36,7 @@ fn test_max_min_values() {
     let max_depth = 1000;
     for i in 0..max_depth {
         let scope_name = format!("scope_{}", i);
-        manager
-            .enter_scope(scope_name, ScopeType::Block)
-            .unwrap();
+        manager.enter_scope(scope_name, ScopeType::Block).unwrap();
     }
 
     assert_eq!(manager.get_scope_depth(), max_depth);
@@ -95,23 +93,27 @@ fn test_overflow_underflow() {
     assert_eq!(manager.get_scope_depth(), 0);
 
     // 测试在空栈中操作变量
-    assert!(manager
-        .declare_variable(
-            "var".to_string(),
-            "i32".to_string(),
-            "0".to_string(),
-            false,
-            None
-        )
-        .is_err());
+    assert!(
+        manager
+            .declare_variable(
+                "var".to_string(),
+                "i32".to_string(),
+                "0".to_string(),
+                false,
+                None
+            )
+            .is_err()
+    );
 
     // 测试重复进入同名作用域
     manager
         .enter_scope("test".to_string(), ScopeType::Block)
         .unwrap();
-    assert!(manager
-        .enter_scope("test".to_string(), ScopeType::Block)
-        .is_err()); // 不允许同名作用域
+    assert!(
+        manager
+            .enter_scope("test".to_string(), ScopeType::Block)
+            .is_err()
+    ); // 不允许同名作用域
 
     // 清理
     manager.exit_scope().unwrap();

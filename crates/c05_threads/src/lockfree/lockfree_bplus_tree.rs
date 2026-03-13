@@ -290,6 +290,7 @@ where
     }
 
     /// 递归查找
+    #[allow(clippy::only_used_in_recursion)]
     fn get_recursive(
         &self,
         node_ptr: *mut BPlusTreeNode<K, V>,
@@ -339,6 +340,7 @@ where
     }
 
     /// 递归删除
+    #[allow(clippy::only_used_in_recursion)]
     fn remove_recursive(
         &self,
         node_ptr: *mut BPlusTreeNode<K, V>,
@@ -435,10 +437,12 @@ where
                 let node = &*current;
 
                 for (i, key) in node.keys.iter().enumerate() {
-                    if key >= start && key <= end
-                        && let Some(value) = node.get_value(i) {
-                            result.push(value);
-                        }
+                    if key >= start
+                        && key <= end
+                        && let Some(value) = node.get_value(i)
+                    {
+                        result.push(value);
+                    }
 
                     if key > end {
                         return;

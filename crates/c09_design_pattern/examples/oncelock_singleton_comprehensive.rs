@@ -1,15 +1,15 @@
 //! Rust 1.90 OnceLock 单例模式综合示例
-//! 
+//!
 //! 本示例展示：
 //! 1. 全局配置单例（线程安全）
 //! 2. 全局日志器单例（内部可变性）
 //! 3. 全局缓存单例（性能优化）
 //! 4. 全局连接池单例（资源管理）
 //! 5. 与 lazy_static 的性能对比
-use std::sync::{OnceLock, Mutex, Arc};
 use std::collections::{HashMap, VecDeque};
-use std::time::{Instant, Duration};
+use std::sync::{Arc, Mutex, OnceLock};
 use std::thread;
+use std::time::{Duration, Instant};
 
 // ============================================================================
 // 示例 1: 全局配置单例 - 最简单的用法
@@ -34,8 +34,7 @@ impl AppConfig {
         CONFIG.get_or_init(|| {
             println!("🔧 初始化全局配置...");
             AppConfig {
-                app_name: std::env::var("APP_NAME")
-                    .unwrap_or_else(|_| "RustApp".to_string()),
+                app_name: std::env::var("APP_NAME").unwrap_or_else(|_| "RustApp".to_string()),
                 version: "1.0.0".to_string(),
                 api_endpoint: std::env::var("API_ENDPOINT")
                     .unwrap_or_else(|_| "https://api.example.com".to_string()),
@@ -45,7 +44,7 @@ impl AppConfig {
             }
         })
     }
-    
+
     /// 测试环境专用初始化
     #[cfg(test)]
     pub fn init_for_test(config: AppConfig) -> Result<(), AppConfig> {
@@ -109,7 +108,7 @@ impl GlobalLogger {
             }
         })
     }
-    
+
     /// 记录日志
     pub fn log(&self, level: LogLevel, message: impl Into<String>) {
         let entry = LogEntry {
@@ -118,35 +117,31 @@ impl GlobalLogger {
             message: message.into(),
             thread_id: format!("{:?}", thread::current().id()),
         };
-        
+
         let mut entries = self.entries.lock().unwrap();
         if entries.len() >= self.max_entries {
             entries.pop_front(); // 移除最旧的日志
         }
         entries.push_back(entry);
     }
-    
+
     /// 获取最近的日志
     pub fn recent_logs(&self, count: usize) -> Vec<LogEntry> {
         let entries = self.entries.lock().unwrap();
-        entries.iter()
-            .rev()
-            .take(count)
-            .cloned()
-            .collect()
+        entries.iter().rev().take(count).cloned().collect()
     }
-    
+
     /// 获取指定级别的日志数量
     pub fn count_by_level(&self, level: LogLevel) -> usize {
         let entries = self.entries.lock().unwrap();
         entries.iter().filter(|e| e.level == level).count()
     }
-    
+
     /// 获取运行时间
     pub fn uptime(&self) -> Duration {
         self.start_time.elapsed()
     }
-    
+
     /// 清空日志
     pub fn clear(&self) {
         let mut entries = self.entries.lock().unwrap();
@@ -194,8 +189,8 @@ macro_rules! log_error {
 // 示例 3: 全局缓存单例 - 性能优化
 // ============================================================================
 
-pub struct GlobalCache<K, V> 
-where 
+pub struct GlobalCache<K, V>
+where
     K: Eq + std::hash::Hash + Clone,
     V: Clone,
 {
@@ -213,7 +208,7 @@ struct CacheEntry<V> {
 }
 
 impl<K, V> GlobalCache<K, V>
-where 
+where
     K: Eq + std::hash::Hash + Clone,
     V: Clone,
 {
@@ -225,33 +220,37 @@ where
             miss_count: Mutex::new(0),
         }
     }
-    
+
     /// 插入缓存项
     pub fn insert(&self, key: K, value: V, ttl: Option<Duration>) {
         let mut cache = self.cache.lock().unwrap();
-        
+
         // 如果超过容量，移除最少使用的项
         if cache.len() >= self.max_size && !cache.contains_key(&key) {
-            if let Some(lru_key) = cache.iter()
+            if let Some(lru_key) = cache
+                .iter()
                 .min_by_key(|(_, entry)| entry.access_count)
                 .map(|(k, _)| k.clone())
             {
                 cache.remove(&lru_key);
             }
         }
-        
+
         let expires_at = ttl.map(|d| Instant::now() + d);
-        cache.insert(key, CacheEntry {
-            value,
-            expires_at,
-            access_count: 0,
-        });
+        cache.insert(
+            key,
+            CacheEntry {
+                value,
+                expires_at,
+                access_count: 0,
+            },
+        );
     }
-    
+
     /// 获取缓存项
     pub fn get(&self, key: &K) -> Option<V> {
         let mut cache = self.cache.lock().unwrap();
-        
+
         if let Some(entry) = cache.get_mut(key) {
             // 检查是否过期
             if let Some(expires_at) = entry.expires_at {
@@ -261,7 +260,7 @@ where
                     return None;
                 }
             }
-            
+
             // 更新访问计数
             entry.access_count += 1;
             *self.hit_count.lock().unwrap() += 1;
@@ -271,13 +270,13 @@ where
             None
         }
     }
-    
+
     /// 获取缓存统计
     pub fn stats(&self) -> CacheStats {
         let hits = *self.hit_count.lock().unwrap();
         let misses = *self.miss_count.lock().unwrap();
         let size = self.cache.lock().unwrap().len();
-        
+
         CacheStats {
             hits,
             misses,
@@ -289,7 +288,7 @@ where
             },
         }
     }
-    
+
     /// 清空缓存
     pub fn clear(&self) {
         self.cache.lock().unwrap().clear();
@@ -352,17 +351,17 @@ impl ConnectionPool {
             }
         })
     }
-    
+
     /// 获取一个连接
     pub fn acquire(&self) -> Option<usize> {
         let mut connections = self.connections.lock().unwrap();
-        
+
         // 查找空闲连接
         if let Some(conn) = connections.iter_mut().find(|c| !c.in_use) {
             conn.in_use = true;
             return Some(conn.id);
         }
-        
+
         // 如果没有空闲连接，尝试创建新连接
         let count = *self.connection_count.lock().unwrap();
         if count < self.max_connections {
@@ -378,7 +377,7 @@ impl ConnectionPool {
             None
         }
     }
-    
+
     /// 释放连接
     pub fn release(&self, conn_id: usize) {
         let mut connections = self.connections.lock().unwrap();
@@ -386,13 +385,13 @@ impl ConnectionPool {
             conn.in_use = false;
         }
     }
-    
+
     /// 获取池统计
     pub fn stats(&self) -> PoolStats {
         let connections = self.connections.lock().unwrap();
         let active = connections.iter().filter(|c| c.in_use).count();
         let idle = connections.len() - active;
-        
+
         PoolStats {
             total: connections.len(),
             active,
@@ -414,22 +413,27 @@ pub struct PoolStats {
 
 pub fn benchmark_oncelock_vs_lazy() {
     const ITERATIONS: usize = 1_000_000;
-    
+
     // OnceLock 性能测试
     let start = Instant::now();
     for _ in 0..ITERATIONS {
         let _ = AppConfig::global();
     }
     let oncelock_duration = start.elapsed();
-    
+
     println!("\n📊 性能对比 ({}次访问):", ITERATIONS);
-    println!("  OnceLock: {:?} ({:.2} ns/iter)", 
-             oncelock_duration,
-             oncelock_duration.as_nanos() as f64 / ITERATIONS as f64);
-    
+    println!(
+        "  OnceLock: {:?} ({:.2} ns/iter)",
+        oncelock_duration,
+        oncelock_duration.as_nanos() as f64 / ITERATIONS as f64
+    );
+
     // 内存占用对比
     println!("\n💾 内存占用对比:");
-    println!("  OnceLock<T>: {} bytes", std::mem::size_of::<OnceLock<AppConfig>>());
+    println!(
+        "  OnceLock<T>: {} bytes",
+        std::mem::size_of::<OnceLock<AppConfig>>()
+    );
     println!("  Arc<T>: {} bytes", std::mem::size_of::<Arc<AppConfig>>());
     println!("  Box<T>: {} bytes", std::mem::size_of::<Box<AppConfig>>());
 }
@@ -441,7 +445,7 @@ pub fn benchmark_oncelock_vs_lazy() {
 fn main() {
     println!("🦀 Rust 1.90 OnceLock 单例模式综合示例\n");
     println!("{}", "=".repeat(70));
-    
+
     // 示例 1: 全局配置
     println!("\n📌 示例 1: 全局配置单例");
     println!("{}", "-".repeat(70));
@@ -452,59 +456,71 @@ fn main() {
     println!("超时时间: {} 秒", config.timeout_secs);
     println!("最大重试: {} 次", config.max_retries);
     println!("调试模式: {}", config.debug_mode);
-    
+
     // 示例 2: 全局日志器
     println!("\n📌 示例 2: 全局日志器单例");
     println!("{}", "-".repeat(70));
-    
+
     log_info!("应用启动");
     log_debug!("调试信息: 配置加载完成");
     log_warn!("警告: 连接超时，准备重试");
     log_error!("错误: 无法连接到数据库");
-    
+
     // 多线程日志记录
-    let handles: Vec<_> = (0..5).map(|i| {
-        thread::spawn(move || {
-            for j in 0..3 {
-                log_info!("线程 {} 消息 {}", i, j);
-                thread::sleep(Duration::from_millis(10));
-            }
+    let handles: Vec<_> = (0..5)
+        .map(|i| {
+            thread::spawn(move || {
+                for j in 0..3 {
+                    log_info!("线程 {} 消息 {}", i, j);
+                    thread::sleep(Duration::from_millis(10));
+                }
+            })
         })
-    }).collect();
-    
+        .collect();
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     // 显示日志统计
     let logger = GlobalLogger::global();
     let recent = logger.recent_logs(5);
     println!("\n最近的 5 条日志:");
     for entry in recent {
-        println!("  [{:?}] [{}] [{}] {}", 
-                 entry.timestamp.duration_since(logger.start_time),
-                 entry.level,
-                 entry.thread_id,
-                 entry.message);
+        println!(
+            "  [{:?}] [{}] [{}] {}",
+            entry.timestamp.duration_since(logger.start_time),
+            entry.level,
+            entry.thread_id,
+            entry.message
+        );
     }
-    
+
     println!("\n日志统计:");
     println!("  运行时间: {:?}", logger.uptime());
     println!("  INFO数量: {}", logger.count_by_level(LogLevel::Info));
     println!("  WARN数量: {}", logger.count_by_level(LogLevel::Warning));
     println!("  ERROR数量: {}", logger.count_by_level(LogLevel::Error));
-    
+
     // 示例 3: 全局缓存
     println!("\n📌 示例 3: 全局缓存单例");
     println!("{}", "-".repeat(70));
-    
+
     let cache = string_cache();
-    
+
     // 插入一些数据
-    cache.insert("user:1".to_string(), "Alice".to_string(), Some(Duration::from_secs(60)));
+    cache.insert(
+        "user:1".to_string(),
+        "Alice".to_string(),
+        Some(Duration::from_secs(60)),
+    );
     cache.insert("user:2".to_string(), "Bob".to_string(), None);
-    cache.insert("user:3".to_string(), "Charlie".to_string(), Some(Duration::from_secs(60)));
-    
+    cache.insert(
+        "user:3".to_string(),
+        "Charlie".to_string(),
+        Some(Duration::from_secs(60)),
+    );
+
     // 访问缓存
     println!("\n缓存访问测试:");
     for i in 1..=5 {
@@ -514,7 +530,7 @@ fn main() {
             None => println!("  ❌ 缓存未命中: {}", key),
         }
     }
-    
+
     // 显示缓存统计
     let stats = cache.stats();
     println!("\n缓存统计:");
@@ -522,36 +538,40 @@ fn main() {
     println!("  命中次数: {}", stats.hits);
     println!("  未命中次数: {}", stats.misses);
     println!("  命中率: {:.2}%", stats.hit_rate * 100.0);
-    
+
     // 示例 4: 连接池
     println!("\n📌 示例 4: 全局连接池单例");
     println!("{}", "-".repeat(70));
-    
+
     let pool = ConnectionPool::global();
-    
+
     // 获取连接
     println!("\n获取连接:");
     let conn1 = pool.acquire().unwrap();
     let conn2 = pool.acquire().unwrap();
     println!("  获得连接: #{}, #{}", conn1, conn2);
-    
+
     let stats = pool.stats();
-    println!("  连接池状态: 总数={}, 活跃={}, 空闲={}", 
-             stats.total, stats.active, stats.idle);
-    
+    println!(
+        "  连接池状态: 总数={}, 活跃={}, 空闲={}",
+        stats.total, stats.active, stats.idle
+    );
+
     // 释放连接
     pool.release(conn1);
     println!("\n释放连接 #{}", conn1);
-    
+
     let stats = pool.stats();
-    println!("  连接池状态: 总数={}, 活跃={}, 空闲={}", 
-             stats.total, stats.active, stats.idle);
-    
+    println!(
+        "  连接池状态: 总数={}, 活跃={}, 空闲={}",
+        stats.total, stats.active, stats.idle
+    );
+
     // 示例 5: 性能对比
     println!("\n📌 示例 5: 性能对比");
     println!("{}", "-".repeat(70));
     benchmark_oncelock_vs_lazy();
-    
+
     // 总结
     println!("\n{}", "=".repeat(70));
     println!("✅ OnceLock 单例模式的优势:");
@@ -571,63 +591,61 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_config_singleton() {
         let config1 = AppConfig::global();
         let config2 = AppConfig::global();
-        
+
         // 验证是同一个实例
         assert_eq!(config1.app_name, config2.app_name);
-        assert_eq!(
-            config1 as *const AppConfig, 
-            config2 as *const AppConfig
-        );
+        assert_eq!(config1 as *const AppConfig, config2 as *const AppConfig);
     }
-    
+
     #[test]
     fn test_logger_multithread() {
         let logger = GlobalLogger::global();
         logger.clear(); // 清空之前的日志
-        
-        let handles: Vec<_> = (0..10).map(|i| {
-            thread::spawn(move || {
-                logger.log(LogLevel::Info, format!("Thread {}", i));
+
+        let handles: Vec<_> = (0..10)
+            .map(|i| {
+                thread::spawn(move || {
+                    logger.log(LogLevel::Info, format!("Thread {}", i));
+                })
             })
-        }).collect();
-        
+            .collect();
+
         for handle in handles {
             handle.join().unwrap();
         }
-        
+
         assert_eq!(logger.count_by_level(LogLevel::Info), 10);
     }
-    
+
     #[test]
     fn test_cache_operations() {
         let cache = string_cache();
         cache.clear();
-        
+
         cache.insert("test1".to_string(), "value1".to_string(), None);
         assert_eq!(cache.get(&"test1".to_string()), Some("value1".to_string()));
         assert_eq!(cache.get(&"test2".to_string()), None);
-        
+
         let stats = cache.stats();
         assert_eq!(stats.hits, 1);
         assert_eq!(stats.misses, 1);
     }
-    
+
     #[test]
     fn test_connection_pool() {
         let pool = ConnectionPool::global();
-        
+
         let conn = pool.acquire().unwrap();
         assert!(conn < 10);
-        
+
         pool.release(conn);
-        
+
         let stats = pool.stats();
         assert!(stats.idle > 0);
     }
 }
-

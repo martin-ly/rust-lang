@@ -1,8 +1,8 @@
 //! 运行：`cargo bench -p c06_async`
 //! 说明：该文件包含多组异步原语基准（JoinSet、MPSC、Semaphore 等），均在本地 Tokio 运行时内执行
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use once_cell::sync::Lazy;
-use prometheus::{Registry, IntCounter, Histogram, HistogramOpts, Opts};
+use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};
 use std::hint::black_box;
 use std::time::Duration;
 
@@ -10,8 +10,11 @@ use std::time::Duration;
 
 fn bench_joinset_concurrency(c: &mut Criterion) {
     // 基准×指标：最小联动（可选）
-    static BENCH_EXEC_TOTAL: Lazy<IntCounter> = Lazy::new(|| IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap());
-    static BENCH_EXEC_SECONDS: Lazy<Histogram> = Lazy::new(|| Histogram::with_opts(HistogramOpts::new("bench_exec_seconds", "基准耗时(秒)")).unwrap());
+    static BENCH_EXEC_TOTAL: Lazy<IntCounter> =
+        Lazy::new(|| IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap());
+    static BENCH_EXEC_SECONDS: Lazy<Histogram> = Lazy::new(|| {
+        Histogram::with_opts(HistogramOpts::new("bench_exec_seconds", "基准耗时(秒)")).unwrap()
+    });
     let registry = Registry::new();
     let _ = registry.register(Box::new(BENCH_EXEC_TOTAL.clone()));
     let _ = registry.register(Box::new(BENCH_EXEC_SECONDS.clone()));
@@ -19,30 +22,33 @@ fn bench_joinset_concurrency(c: &mut Criterion) {
     for conc in [1usize, 2, 4, 8, 16] {
         group.throughput(Throughput::Elements(conc as u64));
         group.measurement_time(Duration::from_secs(5));
-        group.bench_with_input(BenchmarkId::from_parameter(conc), &conc, |b, &concurrency| {
-            b.iter(|| {
-                let rt = tokio::runtime::Runtime::new().unwrap();
-                let t = std::time::Instant::now();
-                rt.block_on(async move {
-                    use tokio::task::JoinSet;
-                    let mut set = JoinSet::new();
-                    for _ in 0..concurrency {
-                        set.spawn(async {
-                            tokio::time::sleep(Duration::from_millis(1)).await;
-                            1u64
-                        });
-                    }
-                    let mut sum = 0u64;
-                    while let Some(r) = set.join_next().await {
-                        sum += r.unwrap();
-                    }
-                    sum
-                })
-                ;
-                BENCH_EXEC_TOTAL.inc();
-                BENCH_EXEC_SECONDS.observe(t.elapsed().as_secs_f64());
-            });
-        });
+        group.bench_with_input(
+            BenchmarkId::from_parameter(conc),
+            &conc,
+            |b, &concurrency| {
+                b.iter(|| {
+                    let rt = tokio::runtime::Runtime::new().unwrap();
+                    let t = std::time::Instant::now();
+                    rt.block_on(async move {
+                        use tokio::task::JoinSet;
+                        let mut set = JoinSet::new();
+                        for _ in 0..concurrency {
+                            set.spawn(async {
+                                tokio::time::sleep(Duration::from_millis(1)).await;
+                                1u64
+                            });
+                        }
+                        let mut sum = 0u64;
+                        while let Some(r) = set.join_next().await {
+                            sum += r.unwrap();
+                        }
+                        sum
+                    });
+                    BENCH_EXEC_TOTAL.inc();
+                    BENCH_EXEC_SECONDS.observe(t.elapsed().as_secs_f64());
+                });
+            },
+        );
     }
     group.finish();
 }
@@ -52,21 +58,25 @@ fn bench_join_all_concurrency(c: &mut Criterion) {
     for conc in [1usize, 2, 4, 8, 16] {
         group.throughput(Throughput::Elements(conc as u64));
         group.measurement_time(Duration::from_secs(5));
-        group.bench_with_input(BenchmarkId::from_parameter(conc), &conc, |b, &concurrency| {
-            b.iter(|| {
-                let rt = tokio::runtime::Runtime::new().unwrap();
-                rt.block_on(async move {
-                    let tasks: Vec<_> = (0..concurrency)
-                        .map(|_| async {
-                            tokio::time::sleep(Duration::from_millis(1)).await;
-                            1u64
-                        })
-                        .collect();
-                    let vals = futures::future::join_all(tasks).await;
-                    vals.into_iter().sum::<u64>()
-                })
-            });
-        });
+        group.bench_with_input(
+            BenchmarkId::from_parameter(conc),
+            &conc,
+            |b, &concurrency| {
+                b.iter(|| {
+                    let rt = tokio::runtime::Runtime::new().unwrap();
+                    rt.block_on(async move {
+                        let tasks: Vec<_> = (0..concurrency)
+                            .map(|_| async {
+                                tokio::time::sleep(Duration::from_millis(1)).await;
+                                1u64
+                            })
+                            .collect();
+                        let vals = futures::future::join_all(tasks).await;
+                        vals.into_iter().sum::<u64>()
+                    })
+                });
+            },
+        );
     }
     group.finish();
 }
@@ -216,7 +226,7 @@ fn bench_backpressure_limit(c: &mut Criterion) {
                         while let Some(v) = rx.recv().await {
                             sum += v as u64;
                         }
-                    black_box(sum);
+                        black_box(sum);
                     });
                     let _ = tokio::join!(prod, cons);
                 })
@@ -253,5 +263,13 @@ fn bench_backpressure_limit(c: &mut Criterion) {
 // 统一在末尾注册
 
 // 统一注册所有基准组
-criterion_group!(benches, bench_joinset_concurrency, bench_join_all_concurrency, bench_mpsc, bench_semaphore_pipeline, bench_select_and_joinset, bench_backpressure_limit);
+criterion_group!(
+    benches,
+    bench_joinset_concurrency,
+    bench_join_all_concurrency,
+    bench_mpsc,
+    bench_semaphore_pipeline,
+    bench_select_and_joinset,
+    bench_backpressure_limit
+);
 criterion_main!(benches);

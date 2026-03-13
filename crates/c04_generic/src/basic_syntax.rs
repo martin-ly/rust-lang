@@ -272,10 +272,7 @@ pub mod generic_structs {
         /// # 返回值
         /// 返回新的 Node 实例
         pub fn new(data: T) -> Self {
-            Self {
-                data,
-                next: None,
-            }
+            Self { data, next: None }
         }
 
         /// 设置下一个节点
@@ -605,9 +602,7 @@ pub mod generic_methods {
         /// # 返回值
         /// 返回新的空容器
         pub fn new() -> Self {
-            Self {
-                items: Vec::new(),
-            }
+            Self { items: Vec::new() }
         }
 
         /// 向容器中添加元素
@@ -1331,9 +1326,7 @@ pub mod advanced_patterns {
         /// # 返回值
         /// 返回新的 Builder 实例
         pub fn new() -> Self {
-            Self {
-                parts: Vec::new(),
-            }
+            Self { parts: Vec::new() }
         }
 
         /// 添加部分
@@ -1433,11 +1426,7 @@ pub mod advanced_patterns {
 
         #[test]
         fn test_integer_builder() {
-            let sum = Builder::<i32>::new()
-                .append(1)
-                .append(2)
-                .append(3)
-                .build();
+            let sum = Builder::<i32>::new().append(1).append(2).append(3).build();
             assert_eq!(sum, 6);
 
             let product = Builder::<i32>::new()
@@ -1499,7 +1488,7 @@ pub mod rust_189_new_features {
         /// 返回转置后的 COLS x ROWS 矩阵
         #[allow(clippy::excessive_nesting, clippy::needless_range_loop)]
         pub fn transpose_matrix<const ROWS: usize, const COLS: usize>(
-            matrix: [[i32; COLS]; ROWS]
+            matrix: [[i32; COLS]; ROWS],
         ) -> [[i32; ROWS]; COLS] {
             let mut result = [[0; ROWS]; COLS];
             for i in 0..ROWS {
@@ -1760,10 +1749,7 @@ pub mod rust_189_new_features {
         ///
         /// # 注意
         /// 展示 Rust 1.89 在复杂类型推断方面的改进
-        pub fn complex_inference<T, U, F>(
-            items: Vec<T>,
-            processor: F,
-        ) -> Vec<U>
+        pub fn complex_inference<T, U, F>(items: Vec<T>, processor: F) -> Vec<U>
         where
             T: Clone,
             F: Fn(T) -> U,
@@ -1785,10 +1771,7 @@ pub mod rust_189_new_features {
         where
             T: Clone,
         {
-            data.into_iter()
-                .flatten()
-                .flatten()
-                .collect()
+            data.into_iter().flatten().flatten().collect()
         }
 
         /// 条件类型推断示例
@@ -1803,11 +1786,7 @@ pub mod rust_189_new_features {
         ///
         /// # 注意
         /// 展示 Rust 1.89 在条件类型推断方面的改进
-        pub fn conditional_inference<T>(
-            condition: bool,
-            true_value: T,
-            false_value: T,
-        ) -> T {
+        pub fn conditional_inference<T>(condition: bool, true_value: T, false_value: T) -> T {
             if condition { true_value } else { false_value }
         }
 
@@ -1833,10 +1812,7 @@ pub mod rust_189_new_features {
 
             #[test]
             fn test_nested_inference() {
-                let data = vec![
-                    vec![Some(1), None, Some(3)],
-                    vec![None, Some(2), Some(4)],
-                ];
+                let data = vec![vec![Some(1), None, Some(3)], vec![None, Some(2), Some(4)]];
                 let result = nested_inference(data);
                 assert_eq!(result, vec![1, 3, 2, 4]);
             }
@@ -1919,7 +1895,8 @@ pub fn demonstrate_basic_syntax() {
     // 泛型枚举
     println!("\n3. 泛型枚举:");
     let success: generic_enums::MyResult<i32, String> = generic_enums::MyResult::Ok(42);
-    let error: generic_enums::MyResult<i32, String> = generic_enums::MyResult::Err("错误".to_string());
+    let error: generic_enums::MyResult<i32, String> =
+        generic_enums::MyResult::Err("错误".to_string());
     println!("结果: {:?}, {:?}", success, error);
 
     let some: generic_enums::MyOption<i32> = generic_enums::MyOption::Some(42);

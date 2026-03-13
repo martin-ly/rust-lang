@@ -98,7 +98,8 @@ fn test_resource_exhaustion() {
     let large_number = 1000;
     let mut handles = vec![];
 
-    for _ in 0..large_number.min(100) { // 限制实际创建的线程数
+    for _ in 0..large_number.min(100) {
+        // 限制实际创建的线程数
         let handle = thread::spawn(|| {
             // 简单任务
         });

@@ -29,6 +29,7 @@ impl<T> ReceiverStream<T> {
     }
 
     /// 消费 self，返回阻塞迭代器
+    #[allow(clippy::should_implement_trait)]
     pub fn into_iter(self) -> ReceiverIntoIter<T> {
         ReceiverIntoIter {
             inner: self.receiver,

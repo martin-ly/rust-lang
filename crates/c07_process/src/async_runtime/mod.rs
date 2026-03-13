@@ -11,15 +11,15 @@ use crate::types::ProcessStatus;
 #[cfg(feature = "async")]
 use std::collections::HashMap;
 #[cfg(feature = "async")]
-use std::sync::Arc;
-#[cfg(feature = "async")]
 use std::process::ExitStatus;
+#[cfg(feature = "async")]
+use std::sync::Arc;
 #[cfg(feature = "async")]
 use std::time::Duration;
 #[cfg(feature = "async")]
-use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, mpsc, oneshot};
-#[cfg(feature = "async")]
 use tokio::process::Command as TokioCommand;
+#[cfg(feature = "async")]
+use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, mpsc, oneshot};
 
 /// 异步进程管理器
 #[cfg(feature = "async")]
@@ -44,6 +44,7 @@ struct AsyncManagedProcess {
 /// 异步命令
 #[cfg(feature = "async")]
 #[allow(dead_code)]
+#[allow(clippy::large_enum_variant)]
 enum AsyncCommand {
     Spawn {
         config: ProcessConfig,
@@ -93,16 +94,28 @@ impl AsyncProcessManager {
             if let Some(ref mut child) = managed_process.child {
                 if let Some(ref mut stdin) = child.stdin {
                     use tokio::io::AsyncWriteExt;
-                    stdin.write_all(data).await
-                        .map_err(|e| ProcessError::Io(std::io::Error::other(format!("Failed to write to stdin: {}", e))))?;
-                    stdin.flush().await
-                        .map_err(|e| ProcessError::Io(std::io::Error::other(format!("Failed to flush stdin: {}", e))))?;
+                    stdin.write_all(data).await.map_err(|e| {
+                        ProcessError::Io(std::io::Error::other(format!(
+                            "Failed to write to stdin: {}",
+                            e
+                        )))
+                    })?;
+                    stdin.flush().await.map_err(|e| {
+                        ProcessError::Io(std::io::Error::other(format!(
+                            "Failed to flush stdin: {}",
+                            e
+                        )))
+                    })?;
                     Ok(())
                 } else {
-                    Err(ProcessError::InvalidConfig("stdin not available".to_string()))
+                    Err(ProcessError::InvalidConfig(
+                        "stdin not available".to_string(),
+                    ))
                 }
             } else {
-                Err(ProcessError::InvalidConfig("process child not available".to_string()))
+                Err(ProcessError::InvalidConfig(
+                    "process child not available".to_string(),
+                ))
             }
         } else {
             Err(ProcessError::NotFound(pid))
@@ -118,7 +131,9 @@ impl AsyncProcessManager {
                 child.stdin.take();
                 Ok(())
             } else {
-                Err(ProcessError::InvalidConfig("process child not available".to_string()))
+                Err(ProcessError::InvalidConfig(
+                    "process child not available".to_string(),
+                ))
             }
         } else {
             Err(ProcessError::NotFound(pid))
@@ -133,14 +148,22 @@ impl AsyncProcessManager {
                 if let Some(ref mut stdout) = child.stdout {
                     use tokio::io::AsyncReadExt;
                     let mut buf = Vec::new();
-                    stdout.read_to_end(&mut buf).await
-                        .map_err(|e| ProcessError::Io(std::io::Error::other(format!("Failed to read stdout: {}", e))))?;
+                    stdout.read_to_end(&mut buf).await.map_err(|e| {
+                        ProcessError::Io(std::io::Error::other(format!(
+                            "Failed to read stdout: {}",
+                            e
+                        )))
+                    })?;
                     Ok(buf)
                 } else {
-                    Err(ProcessError::InvalidConfig("stdout not available".to_string()))
+                    Err(ProcessError::InvalidConfig(
+                        "stdout not available".to_string(),
+                    ))
                 }
             } else {
-                Err(ProcessError::InvalidConfig("process child not available".to_string()))
+                Err(ProcessError::InvalidConfig(
+                    "process child not available".to_string(),
+                ))
             }
         } else {
             Err(ProcessError::NotFound(pid))
@@ -155,14 +178,22 @@ impl AsyncProcessManager {
                 if let Some(ref mut stderr) = child.stderr {
                     use tokio::io::AsyncReadExt;
                     let mut buf = Vec::new();
-                    stderr.read_to_end(&mut buf).await
-                        .map_err(|e| ProcessError::Io(std::io::Error::other(format!("Failed to read stderr: {}", e))))?;
+                    stderr.read_to_end(&mut buf).await.map_err(|e| {
+                        ProcessError::Io(std::io::Error::other(format!(
+                            "Failed to read stderr: {}",
+                            e
+                        )))
+                    })?;
                     Ok(buf)
                 } else {
-                    Err(ProcessError::InvalidConfig("stderr not available".to_string()))
+                    Err(ProcessError::InvalidConfig(
+                        "stderr not available".to_string(),
+                    ))
                 }
             } else {
-                Err(ProcessError::InvalidConfig("process child not available".to_string()))
+                Err(ProcessError::InvalidConfig(
+                    "process child not available".to_string(),
+                ))
             }
         } else {
             Err(ProcessError::NotFound(pid))
@@ -180,8 +211,9 @@ impl AsyncProcessManager {
             if let Some(ref mut child) = managed_process.child {
                 match tokio::time::timeout(timeout, child.wait()).await {
                     Ok(status) => {
-                        let status = status
-                            .map_err(|e| ProcessError::WaitFailed(format!("Failed to wait for process: {}", e)))?;
+                        let status = status.map_err(|e| {
+                            ProcessError::WaitFailed(format!("Failed to wait for process: {}", e))
+                        })?;
                         // 更新进程状态
                         managed_process.info.status = ProcessStatus::Stopped;
                         Ok(Some(status))
@@ -192,7 +224,9 @@ impl AsyncProcessManager {
                     }
                 }
             } else {
-                Err(ProcessError::InvalidConfig("process child not available".to_string()))
+                Err(ProcessError::InvalidConfig(
+                    "process child not available".to_string(),
+                ))
             }
         } else {
             Err(ProcessError::NotFound(pid))
@@ -263,7 +297,9 @@ impl AsyncProcessManager {
             response: response_sender,
         };
 
-        if self.command_sender.send(command).await.is_ok() && let Ok(result) = response_receiver.await {
+        if self.command_sender.send(command).await.is_ok()
+            && let Ok(result) = response_receiver.await
+        {
             return result;
         }
 
@@ -343,7 +379,8 @@ impl AsyncProcessManager {
         command.stderr(std::process::Stdio::piped());
 
         // 启动进程
-        let child = command.spawn()
+        let child = command
+            .spawn()
             .map_err(|e| ProcessError::InvalidConfig(format!("Failed to spawn process: {}", e)))?;
 
         let managed_process = AsyncManagedProcess {
@@ -907,6 +944,11 @@ mod tests {
         assert!(manager.close_stdin(invalid_pid).await.is_err());
         assert!(manager.read_stdout(invalid_pid).await.is_err());
         assert!(manager.read_stderr(invalid_pid).await.is_err());
-        assert!(manager.wait_with_timeout(invalid_pid, Duration::from_secs(1)).await.is_err());
+        assert!(
+            manager
+                .wait_with_timeout(invalid_pid, Duration::from_secs(1))
+                .await
+                .is_err()
+        );
     }
 }

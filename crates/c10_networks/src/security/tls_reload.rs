@@ -1,9 +1,7 @@
 use crate::error::{NetworkError, NetworkResult};
 use rustls::ServerConfig;
 use rustls::crypto::ring;
-use rustls::pki_types::{
-    CertificateDer, PrivateKeyDer,
-};
+use rustls::pki_types::{CertificateDer, PrivateKeyDer};
 use rustls::version::TLS13;
 use std::sync::Arc;
 use tokio::sync::RwLock;

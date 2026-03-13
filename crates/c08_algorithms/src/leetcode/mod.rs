@@ -418,7 +418,7 @@ pub fn get_problem_implementation(
     // 根据 problem_id 查找对应的问题和实现
     // 遍历所有分类查找问题
     let all_tags = LeetCodeTag::all_tags();
-    
+
     for tag in all_tags {
         let problems = get_all_problems_by_tag(tag);
         if let Some(problem) = problems.iter().find(|p| p.problem_id == problem_id) {
@@ -432,12 +432,12 @@ pub fn get_problem_implementation(
             });
         }
     }
-    
+
     None
 }
 
 /// 生成实现代码（根据问题编号）
-/// 
+///
 /// 支持80+个常见LeetCode问题的代码生成，包括：
 /// - 数组类：1, 11, 15, 26, 27, 53, 88, 121, 189, 217, 238, 283, 448, 485, 905, 977
 /// - 字符串类：3, 14, 125, 344, 383, 387, 392, 409, 415, 438, 567, 647, 771, 844
@@ -450,7 +450,10 @@ pub fn get_problem_implementation(
 /// - 回溯：46, 78
 /// - 位操作：136, 268, 371, 461
 /// - 其他：56, 69, 75, 88, 200, 202, 215, 226, 234, 235, 242, 268, 300, 322, 344, 347, 349, 350, 367, 371, 383, 387, 392, 409, 415, 438, 448, 461, 485, 509, 543, 567, 617, 647, 739, 771, 844, 905, 977, 994, 1046, 1143
-fn generate_implementation_code(problem_id: u32, _implementation_type: ImplementationType) -> String {
+fn generate_implementation_code(
+    problem_id: u32,
+    _implementation_type: ImplementationType,
+) -> String {
     // 根据 problem_id 返回对应的实现代码
     // 支持80+个常见问题的代码生成
     match problem_id {

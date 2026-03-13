@@ -220,9 +220,10 @@ impl WebSocketFrameSerializer {
 
         // 掩码键
         if frame.mask
-            && let Some(key) = frame.masking_key {
-                buffer.extend_from_slice(&key);
-            }
+            && let Some(key) = frame.masking_key
+        {
+            buffer.extend_from_slice(&key);
+        }
 
         // 载荷
         let payload = frame.payload.clone();

@@ -99,13 +99,21 @@ pub trait AsyncStreamProcessor {
         F: futures::StreamExt<Item = Result<Bytes, NetworkError>>;
 
     /// 异步过滤数据流
-    async fn filter_stream<F>(&self, stream: F, predicate: fn(&Bytes) -> bool) -> NetworkResult<Vec<Bytes>>
+    async fn filter_stream<F>(
+        &self,
+        stream: F,
+        predicate: fn(&Bytes) -> bool,
+    ) -> NetworkResult<Vec<Bytes>>
     where
         F: futures::Stream<Item = Result<Bytes, NetworkError>> + Send + 'static,
         F: futures::StreamExt<Item = Result<Bytes, NetworkError>>;
 
     /// 异步转换数据流
-    async fn transform_stream<F, Fut>(&self, stream: F, transformer: fn(Bytes) -> Fut) -> NetworkResult<Vec<Bytes>>
+    async fn transform_stream<F, Fut>(
+        &self,
+        stream: F,
+        transformer: fn(Bytes) -> Fut,
+    ) -> NetworkResult<Vec<Bytes>>
     where
         F: futures::Stream<Item = Result<Bytes, NetworkError>> + Send + 'static,
         Fut: std::future::Future<Output = NetworkResult<Bytes>> + Send,
@@ -119,7 +127,12 @@ pub trait AsyncErrorHandler {
     async fn handle_error(&self, error: NetworkError) -> NetworkResult<()>;
 
     /// 异步重试操作
-    async fn retry_with_backoff<F, Fut>(&self, operation: F, max_retries: usize, base_delay: Duration) -> NetworkResult<()>
+    async fn retry_with_backoff<F, Fut>(
+        &self,
+        operation: F,
+        max_retries: usize,
+        base_delay: Duration,
+    ) -> NetworkResult<()>
     where
         F: Fn() -> Fut + Send + Sync,
         Fut: std::future::Future<Output = NetworkResult<()>> + Send;
@@ -132,7 +145,12 @@ pub trait AsyncErrorHandler {
 #[async_trait::async_trait]
 pub trait AsyncMonitor {
     /// 异步记录指标
-    async fn record_metric(&self, name: &str, value: f64, tags: &[(&str, &str)]) -> NetworkResult<()>;
+    async fn record_metric(
+        &self,
+        name: &str,
+        value: f64,
+        tags: &[(&str, &str)],
+    ) -> NetworkResult<()>;
 
     /// 异步记录事件
     async fn record_event(&self, event: &str, details: &str) -> NetworkResult<()>;
@@ -191,10 +209,7 @@ impl<T> AsyncTraitComposer<T> {
     }
 
     /// 并行执行多个异步操作
-    pub async fn parallel_execute<F, Fut, T2>(
-        &self,
-        operations: Vec<F>,
-    ) -> NetworkResult<Vec<T2>>
+    pub async fn parallel_execute<F, Fut, T2>(&self, operations: Vec<F>) -> NetworkResult<Vec<T2>>
     where
         F: Fn() -> Fut + Send + Sync,
         Fut: std::future::Future<Output = NetworkResult<T2>> + Send,
@@ -326,10 +341,12 @@ mod tests {
     async fn test_async_trait_composer() -> NetworkResult<()> {
         let composer = AsyncTraitComposer::new(());
 
-        let (result1, result2) = composer.compose_operations(
-            || async { Ok::<i32, NetworkError>(42) },
-            || async { Ok::<String, NetworkError>("test".to_string()) },
-        ).await?;
+        let (result1, result2) = composer
+            .compose_operations(
+                || async { Ok::<i32, NetworkError>(42) },
+                || async { Ok::<String, NetworkError>("test".to_string()) },
+            )
+            .await?;
 
         assert_eq!(result1, 42);
         assert_eq!(result2, "test");

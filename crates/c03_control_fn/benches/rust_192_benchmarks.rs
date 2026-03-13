@@ -10,16 +10,14 @@
 //! ```bash
 //! cargo bench --bench rust_192_benchmarks
 //! ```
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId, Throughput};
-use std::hint::black_box;
 use c03_control_fn::rust_192_features::{
-    control_flow_check, control_flow_branch, control_flow_loop, control_flow_match,
-    control_flow_with_never, LocatedError, ErrorContext,
-    ControlFlowAnalyzer, ControlFlowOptimizer,
-    ControlFlowMatcher, ControlFlowCombinator, ControlFlowValidator,
-    ControlFlowStateMachine, ControlFlowState,
-    IteratorControlFlow,
+    ControlFlowAnalyzer, ControlFlowCombinator, ControlFlowMatcher, ControlFlowOptimizer,
+    ControlFlowState, ControlFlowStateMachine, ControlFlowValidator, ErrorContext,
+    IteratorControlFlow, LocatedError, control_flow_branch, control_flow_check, control_flow_loop,
+    control_flow_match, control_flow_with_never,
 };
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+use std::hint::black_box;
 
 /// 基准测试控制流检查性能
 fn bench_control_flow_check(c: &mut Criterion) {
@@ -42,20 +40,12 @@ fn bench_control_flow_branch(c: &mut Criterion) {
     let mut group = c.benchmark_group("control_flow_branch");
     group.throughput(Throughput::Elements(1));
 
-    let test_values = vec![
-        ("valid", 42),
-        ("negative", -1),
-        ("too_large", 150),
-    ];
+    let test_values = vec![("valid", 42), ("negative", -1), ("too_large", 150)];
 
     for (name, value) in test_values {
-        group.bench_with_input(
-            BenchmarkId::from_parameter(name),
-            &value,
-            |b, &val| {
-                b.iter(|| control_flow_branch(black_box(val)))
-            },
-        );
+        group.bench_with_input(BenchmarkId::from_parameter(name), &value, |b, &val| {
+            b.iter(|| control_flow_branch(black_box(val)))
+        });
     }
 
     group.finish();
@@ -69,13 +59,9 @@ fn bench_control_flow_loop(c: &mut Criterion) {
 
     for size in sizes.iter() {
         group.throughput(Throughput::Elements(*size as u64));
-        group.bench_with_input(
-            BenchmarkId::from_parameter(size),
-            size,
-            |b, &size| {
-                b.iter(|| control_flow_loop(black_box(size)))
-            },
-        );
+        group.bench_with_input(BenchmarkId::from_parameter(size), size, |b, &size| {
+            b.iter(|| control_flow_loop(black_box(size)))
+        });
     }
 
     group.finish();
@@ -94,13 +80,9 @@ fn bench_control_flow_match(c: &mut Criterion) {
     ];
 
     for (name, value) in test_values {
-        group.bench_with_input(
-            BenchmarkId::from_parameter(name),
-            &value,
-            |b, val| {
-                b.iter(|| control_flow_match(black_box(*val)))
-            },
-        );
+        group.bench_with_input(BenchmarkId::from_parameter(name), &value, |b, val| {
+            b.iter(|| control_flow_match(black_box(*val)))
+        });
     }
 
     group.finish();
@@ -130,17 +112,13 @@ fn bench_control_flow_analyzer(c: &mut Criterion) {
 
     for &iter in iterations.iter() {
         group.throughput(Throughput::Elements(iter as u64));
-        group.bench_with_input(
-            BenchmarkId::new("analyze_loop", iter),
-            &iter,
-            |b, &iter| {
-                b.iter(|| {
-                    let mut analyzer = ControlFlowAnalyzer::new();
-                    analyzer.analyze_loop(iter, |i| i % 2 == 0);
-                    analyzer
-                })
-            },
-        );
+        group.bench_with_input(BenchmarkId::new("analyze_loop", iter), &iter, |b, &iter| {
+            b.iter(|| {
+                let mut analyzer = ControlFlowAnalyzer::new();
+                analyzer.analyze_loop(iter, |i| i % 2 == 0);
+                analyzer
+            })
+        });
     }
 
     group.bench_function("analyze_branch", |b| {
@@ -174,13 +152,9 @@ fn bench_control_flow_optimizer(c: &mut Criterion) {
 
     for size in sizes.iter() {
         group.throughput(Throughput::Elements(*size as u64));
-        group.bench_with_input(
-            BenchmarkId::new("optimize_loop", size),
-            size,
-            |b, &size| {
-                b.iter(|| ControlFlowOptimizer::optimize_loop(black_box(size)))
-            },
-        );
+        group.bench_with_input(BenchmarkId::new("optimize_loop", size), size, |b, &size| {
+            b.iter(|| ControlFlowOptimizer::optimize_loop(black_box(size)))
+        });
     }
 
     group.bench_function("optimize_branch_success", |b| {
@@ -224,36 +198,32 @@ fn bench_comprehensive_control_flow(c: &mut Criterion) {
 
     for size in sizes.iter() {
         group.throughput(Throughput::Elements(*size as u64));
-        group.bench_with_input(
-            BenchmarkId::new("full_workflow", size),
-            size,
-            |b, &size| {
-                b.iter(|| {
-                    // 组合多种控制流操作
-                    let mut analyzer = ControlFlowAnalyzer::new();
+        group.bench_with_input(BenchmarkId::new("full_workflow", size), size, |b, &size| {
+            b.iter(|| {
+                // 组合多种控制流操作
+                let mut analyzer = ControlFlowAnalyzer::new();
 
-                    // 分支
-                    for i in 0..size {
-                        analyzer.analyze_branch(i % 2 == 0);
-                    }
+                // 分支
+                for i in 0..size {
+                    analyzer.analyze_branch(i % 2 == 0);
+                }
 
-                    // 循环
-                    analyzer.analyze_loop(size, |i| i % 3 == 0);
+                // 循环
+                analyzer.analyze_loop(size, |i| i % 3 == 0);
 
-                    // 匹配
-                    for i in 0..size {
-                        analyzer.analyze_match(Some(i));
-                    }
+                // 匹配
+                for i in 0..size {
+                    analyzer.analyze_match(Some(i));
+                }
 
-                    // 优化操作
-                    let _ = ControlFlowOptimizer::optimize_loop(size);
-                    let _ = ControlFlowOptimizer::optimize_branch(42);
-                    let _ = ControlFlowOptimizer::optimize_match(Some(21));
+                // 优化操作
+                let _ = ControlFlowOptimizer::optimize_loop(size);
+                let _ = ControlFlowOptimizer::optimize_branch(42);
+                let _ = ControlFlowOptimizer::optimize_match(Some(21));
 
-                    analyzer
-                })
-            },
-        );
+                analyzer
+            })
+        });
     }
 
     group.finish();
@@ -405,48 +375,34 @@ fn bench_iterator_control_flow(c: &mut Criterion) {
     for size in sizes.iter() {
         group.throughput(Throughput::Elements(*size as u64));
 
-        group.bench_with_input(
-            BenchmarkId::new("filter", size),
-            size,
-            |b, &size| {
-                let numbers: Vec<i32> = (0..size).map(|i| i as i32).collect();
-                b.iter(|| {
-                    black_box(IteratorControlFlow::filter_with_control_flow(
-                        numbers.iter(),
-                        |&x| Ok(*x % 2 == 0),
-                    ))
-                })
-            },
-        );
+        group.bench_with_input(BenchmarkId::new("filter", size), size, |b, &size| {
+            let numbers: Vec<i32> = (0..size).map(|i| i as i32).collect();
+            b.iter(|| {
+                black_box(IteratorControlFlow::filter_with_control_flow(
+                    numbers.iter(),
+                    |&x| Ok(*x % 2 == 0),
+                ))
+            })
+        });
 
-        group.bench_with_input(
-            BenchmarkId::new("map", size),
-            size,
-            |b, &size| {
-                let numbers: Vec<i32> = (0..size).map(|i| i as i32 * 10).collect();
-                b.iter(|| {
-                    let _ = IteratorControlFlow::map_with_control_flow(
-                        numbers.iter(),
-                        |&x| control_flow_branch(x),
-                    );
-                })
-            },
-        );
+        group.bench_with_input(BenchmarkId::new("map", size), size, |b, &size| {
+            let numbers: Vec<i32> = (0..size).map(|i| i as i32 * 10).collect();
+            b.iter(|| {
+                let _ = IteratorControlFlow::map_with_control_flow(numbers.iter(), |&x| {
+                    control_flow_branch(x)
+                });
+            })
+        });
 
-        group.bench_with_input(
-            BenchmarkId::new("fold", size),
-            size,
-            |b, &size| {
-                let numbers: Vec<i32> = (0..size).map(|i| i as i32).collect();
-                b.iter(|| {
-                    let _ = IteratorControlFlow::fold_with_control_flow(
-                        numbers.iter(),
-                        0,
-                        |acc, &x| Ok(acc + x),
-                    );
-                })
-            },
-        );
+        group.bench_with_input(BenchmarkId::new("fold", size), size, |b, &size| {
+            let numbers: Vec<i32> = (0..size).map(|i| i as i32).collect();
+            b.iter(|| {
+                let _ =
+                    IteratorControlFlow::fold_with_control_flow(numbers.iter(), 0, |acc, &x| {
+                        Ok(acc + x)
+                    });
+            })
+        });
     }
 
     group.finish();

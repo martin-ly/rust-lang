@@ -181,9 +181,12 @@ pub fn demonstrate_rust_189_generics() {
     // TAIT-like
     {
         let data = [1, 2, 3, 4, 5];
-        let out: Vec<_> =
-            crate::archive::rust_189_features::tait_like::map_then_filter(&data, |x| x * 3, |x| *x % 2 == 0)
-                .collect();
+        let out: Vec<_> = crate::archive::rust_189_features::tait_like::map_then_filter(
+            &data,
+            |x| x * 3,
+            |x| *x % 2 == 0,
+        )
+        .collect();
         println!("TAIT-like out: {:?}", out);
     }
 

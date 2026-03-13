@@ -41,6 +41,7 @@ impl Default for LinearRegression {
 }
 
 impl Regression for LinearRegression {
+    #[allow(clippy::needless_range_loop)]
     fn train(&mut self, data: &Dataset, targets: &[f64]) -> MLResult<()> {
         if data.len() != targets.len() {
             return Err(MLError::DimensionMismatch {
@@ -70,26 +71,26 @@ impl Regression for LinearRegression {
 
         // 计算 X^T * X
         let mut xtx = vec![vec![0.0; n_features + 1]; n_features + 1];
-        for i in 0..=n_features {
-            for j in 0..=n_features {
-                for k in 0..n_samples {
-                    xtx[i][j] += x_matrix[k][i] * x_matrix[k][j];
+        for (i, xtx_i) in xtx.iter_mut().enumerate().take(n_features + 1) {
+            for (j, xtx_ij) in xtx_i.iter_mut().enumerate().take(n_features + 1) {
+                for x_row in x_matrix.iter().take(n_samples) {
+                    *xtx_ij += x_row[i] * x_row[j];
                 }
             }
         }
 
         // 计算 X^T * y
         let mut xty = vec![0.0; n_features + 1];
-        for i in 0..=n_features {
-            for k in 0..n_samples {
-                xty[i] += x_matrix[k][i] * targets[k];
+        for (i, xty_i) in xty.iter_mut().enumerate().take(n_features + 1) {
+            for (x_row, &target) in x_matrix.iter().zip(targets).take(n_samples) {
+                *xty_i += x_row[i] * target;
             }
         }
 
         // 解线性方程组 (简化版本：使用高斯消元法)
         let mut augmented = xtx;
-        for i in 0..=n_features {
-            augmented[i].push(xty[i]);
+        for (i, aug_i) in augmented.iter_mut().enumerate().take(n_features + 1) {
+            aug_i.push(xty[i]);
         }
 
         // 高斯消元

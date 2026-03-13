@@ -7,10 +7,7 @@ pub struct DisjointSet {
 
 impl DisjointSet {
     pub fn new(n: usize) -> Self {
-        let mut parent = vec![0; n];
-        for i in 0..n {
-            parent[i] = i;
-        }
+        let parent: Vec<usize> = (0..n).collect();
         Self {
             parent,
             rank: vec![0; n],

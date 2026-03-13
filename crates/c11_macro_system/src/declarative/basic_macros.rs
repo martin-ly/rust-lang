@@ -1,4 +1,4 @@
-﻿//! 基础声明宏示例
+//! 基础声明宏示例
 
 /// 简单的打印宏
 ///
@@ -43,13 +43,11 @@ macro_rules! create_function {
 /// ```
 #[macro_export]
 macro_rules! calculate {
-    ($e:expr) => {
-        {
-            let val = $e;
-            println!("{} = {}", stringify!($e), val);
-            val
-        }
-    };
+    ($e:expr) => {{
+        let val = $e;
+        println!("{} = {}", stringify!($e), val);
+        val
+    }};
 }
 
 #[cfg(test)]

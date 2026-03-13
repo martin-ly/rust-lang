@@ -11,8 +11,8 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
-use std::num::NonZeroUsize;
 use std::collections::VecDeque;
+use std::num::NonZeroUsize;
 
 // ==================== 1. rotate_right 在网络缓冲区中的应用 ====================
 
@@ -129,10 +129,7 @@ impl Default for NetworkPacketQueue {
 /// 使用 NonZero::div_ceil 计算网络数据包分片数量
 ///
 /// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算网络分片的数量
-pub fn calculate_packet_fragments(
-    total_size: usize,
-    fragment_size: NonZeroUsize,
-) -> usize {
+pub fn calculate_packet_fragments(total_size: usize, fragment_size: NonZeroUsize) -> usize {
     if total_size == 0 {
         return 0;
     }
@@ -248,12 +245,16 @@ pub fn demonstrate_rust_192_network_features() {
         priority: 30,
     });
 
-    println!("   原始数据包队列: {:?}",
-        queue.packets.iter().map(|p| p.id).collect::<Vec<_>>());
+    println!(
+        "   原始数据包队列: {:?}",
+        queue.packets.iter().map(|p| p.id).collect::<Vec<_>>()
+    );
 
     queue.rotate(1);
-    println!("   轮转后: {:?}",
-        queue.packets.iter().map(|p| p.id).collect::<Vec<_>>());
+    println!(
+        "   轮转后: {:?}",
+        queue.packets.iter().map(|p| p.id).collect::<Vec<_>>()
+    );
 
     // 2. NonZero::div_ceil 演示
     println!("\n2. NonZero::div_ceil 在网络分片计算中的应用:");
@@ -272,7 +273,10 @@ pub fn demonstrate_rust_192_network_features() {
     let bandwidth_allocator = NetworkBandwidthAllocator::new(1000, NonZeroUsize::new(100).unwrap());
     println!("   总带宽: 1000 Mbps");
     println!("   每连接带宽: 100 Mbps");
-    println!("   最大并发连接数: {}", bandwidth_allocator.max_connections());
+    println!(
+        "   最大并发连接数: {}",
+        bandwidth_allocator.max_connections()
+    );
 
     // 3. 迭代器特化演示
     println!("\n3. 迭代器方法特化在网络数据处理中的应用:");
@@ -289,10 +293,16 @@ pub fn demonstrate_rust_192_network_features() {
         },
     ];
     let list2 = list1.clone();
-    println!("   数据包列表相等: {}", compare_packet_lists(&list1, &list2));
+    println!(
+        "   数据包列表相等: {}",
+        compare_packet_lists(&list1, &list2)
+    );
 
     let expected_ids = vec![1, 2];
-    println!("   ID 序列匹配: {}", check_packet_sequence(&list1, &expected_ids));
+    println!(
+        "   ID 序列匹配: {}",
+        check_packet_sequence(&list1, &expected_ids)
+    );
 
     let data1 = vec![1, 2, 3, 4, 5];
     let data2 = vec![1, 2, 3, 4, 5];

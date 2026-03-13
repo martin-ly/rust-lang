@@ -308,9 +308,9 @@ fn main() {
 
 | 场景 | 实施步骤 | 参考代码 |
 | :--- | :--- | :--- |
-| **新模块总结** | 1. 使用 OnePageSummary 定义内容<br>2. 调用 generate() 生成 Markdown<br>3. 写入模块 docs/ 目录 | `OnePageSummary::generate()` |
-| **批量更新** | 1. 定义所有模块信息<br>2. 调用批量生成器<br>3. 验证输出 | `generate_all_summaries()` |
-| **模板定制** | 1. 根据模块特点定制模板<br>2. 添加特定决策表<br>3. 更新学习路径 | 修改 `generate_summary_content()` |
+| **新模块总结** | 1. 使用 OnePageSummary 定义内容 2. 调用 generate() 生成 Markdown 3. 写入模块 docs/ 目录 | `OnePageSummary::generate()` |
+| **批量更新** | 1. 定义所有模块信息 2. 调用批量生成器 3. 验证输出 | `generate_all_summaries()` |
+| **模板定制** | 1. 根据模块特点定制模板 2. 添加特定决策表 3. 更新学习路径 | 修改 `generate_summary_content()` |
 
 ---
 

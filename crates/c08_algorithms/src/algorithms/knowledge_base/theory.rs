@@ -1,7 +1,7 @@
 //! # 算法理论知识模块
 //!
 //! 本模块提供算法的理论基础和数学原理。
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// 理论知识
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -50,10 +50,7 @@ impl TheoryAnalyzer {
                     "合并后的数组保持有序".to_string(),
                     "相等元素的相对位置不变".to_string(),
                 ],
-                proof_techniques: vec![
-                    "数学归纳法".to_string(),
-                    "分治分析".to_string(),
-                ],
+                proof_techniques: vec!["数学归纳法".to_string(), "分治分析".to_string()],
                 formal_specification: Some("递归规范".to_string()),
             },
             _ => TheoryKnowledge {

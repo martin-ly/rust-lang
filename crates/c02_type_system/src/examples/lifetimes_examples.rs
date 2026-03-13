@@ -1,5 +1,5 @@
 //! 生命周期系统示例代码
-//! 
+//!
 //! 本文件包含了生命周期系统的各种示例，包括：
 //! - 生命周期基础
 //! - 生命周期注解
@@ -10,12 +10,12 @@
 /// 生命周期基础示例
 pub fn lifetime_basics_examples() {
     println!("=== 生命周期基础示例 ===");
-    
+
     // 基本生命周期
     let x = 5;
     let r = &x;
     println!("r: {}", r);
-    
+
     // 函数中的生命周期
     let string1 = String::from("long string is long");
     {
@@ -28,17 +28,17 @@ pub fn lifetime_basics_examples() {
 /// 生命周期注解示例
 pub fn lifetime_annotation_examples() {
     println!("\n=== 生命周期注解示例 ===");
-    
+
     // 结构体中的生命周期
     let novel = String::from("Call me Ishmael. Some years ago...");
     let first_sentence = novel.split('.').next().expect("Could not find a '.'");
     let i = ImportantExcerpt {
         part: first_sentence,
     };
-    
+
     println!("Excerpt: {}", i.part);
     println!("Level: {}", i.level());
-    
+
     let announcement = "Attention please";
     let part = i.announce_and_return_part(announcement);
     println!("Announced part: {}", part);
@@ -47,11 +47,11 @@ pub fn lifetime_annotation_examples() {
 /// 生命周期推断示例
 pub fn lifetime_elision_examples() {
     println!("\n=== 生命周期推断示例 ===");
-    
+
     let s = String::from("hello world");
     let first_word = get_first_word(&s);
     println!("First word: {}", first_word);
-    
+
     let s2 = String::from("rust programming");
     let first_word2 = get_first_word(&s2);
     println!("First word: {}", first_word2);
@@ -60,26 +60,22 @@ pub fn lifetime_elision_examples() {
 /// 高级生命周期示例
 pub fn advanced_lifetimes_examples() {
     println!("\n=== 高级生命周期示例 ===");
-    
+
     // 多重生命周期
     let s1 = "hello";
     let s2 = "world";
     let result = multiple_lifetimes(s1, s2);
     println!("Multiple lifetimes result: {}", result);
-    
+
     // 生命周期约束
     let long = "this is a long string";
     let short = "short";
     let constrained_result = lifetime_constraints(long, short);
     println!("Constrained result: {}", constrained_result);
-    
+
     // 高阶生命周期
     fn truncate_string(s: &str) -> &str {
-        if s.len() > 5 {
-            &s[..5]
-        } else {
-            s
-        }
+        if s.len() > 5 { &s[..5] } else { s }
     }
     higher_ranked_lifetime(&truncate_string);
 }
@@ -87,12 +83,12 @@ pub fn advanced_lifetimes_examples() {
 /// 生命周期与泛型示例
 pub fn lifetime_generics_examples() {
     println!("\n=== 生命周期与泛型示例 ===");
-    
+
     let x = 42;
     let y = 100;
     let result = generic_lifetime(&x, &y);
     println!("Generic lifetime result: {}", result);
-    
+
     let string_ref = GenericRef::new("hello");
     let value = string_ref.get();
     println!("Generic ref value: {}", value);
@@ -101,48 +97,51 @@ pub fn lifetime_generics_examples() {
 /// 生命周期与特征示例
 pub fn lifetime_traits_examples() {
     println!("\n=== 生命周期与特征示例 ===");
-    
+
     let processor = StringProcessor;
     let input = "hello world";
     let result = use_processor(processor, input);
     println!("Processor result: {}", result);
-    
+
     // 特征对象生命周期
     let objects: Vec<Box<dyn Drawable>> = vec![
         Box::new(Circle { radius: 5.0 }),
-        Box::new(Rectangle { width: 3.0, height: 4.0 }),
+        Box::new(Rectangle {
+            width: 3.0,
+            height: 4.0,
+        }),
     ];
-    
+
     draw_objects(&objects);
 }
 
 /// 常见模式示例
 pub fn common_patterns_examples() {
     println!("\n=== 常见模式示例 ===");
-    
+
     // 迭代器模式
     let text = "hello world from rust";
     let words = Words::new(text);
-    
+
     println!("Words:");
     for word in words {
         println!("  {}", word);
     }
-    
+
     // 缓存模式
     let mut cache = Cache::new();
     let data = vec![1, 2, 3, 4, 5];
-    
+
     cache.insert("numbers".to_string(), &data);
-    
+
     if let Some(cached) = cache.get("numbers") {
         println!("Cached data: {:?}", cached);
     }
-    
+
     // 解析器模式
     let input = "hello 123 world 456";
     let mut parser = Parser::new(input);
-    
+
     println!("Parsed tokens:");
     while let Some(token) = parser.parse_token() {
         println!("  {:?}", token);
@@ -153,17 +152,17 @@ pub fn common_patterns_examples() {
 #[allow(unused_variables)]
 pub fn performance_examples() {
     println!("\n=== 性能考虑示例 ===");
-    
+
     // 生命周期对性能的影响
     let data = "hello world";
     let result = no_runtime_cost(data);
     println!("No runtime cost result: {}", result);
-    
+
     // 优化策略
     let s = String::from("hello");
     let result = simple_function(&s);
     println!("Simple function result: {}", result);
-    
+
     // 内存布局
     let s = String::from("hello");
     let r = RefStruct { data: &s };
@@ -175,18 +174,18 @@ pub fn performance_examples() {
 #[allow(unused_variables)]
 pub fn debugging_examples() {
     println!("\n=== 调试技巧示例 ===");
-    
+
     // 使用类型注解帮助调试
     let x: i32 = 42;
     let y: i32 = x + 1;
     let z: String = y.to_string();
     println!("Debug values: x={}, y={}, z={}", x, y, z);
-    
+
     // 常见错误模式
     let s = String::from("hello");
     let result = get_first_word(&s);
     println!("First word: {}", result);
-    println!("Original string: {}", s);  // 正确：s 仍然有效
+    println!("Original string: {}", s); // 正确：s 仍然有效
 }
 
 // ============================================================================
@@ -195,11 +194,7 @@ pub fn debugging_examples() {
 
 /// 最长字符串函数
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
+    if x.len() > y.len() { x } else { y }
 }
 
 /// 重要摘录结构体
@@ -211,7 +206,7 @@ impl<'a> ImportantExcerpt<'a> {
     fn level(&self) -> i32 {
         3
     }
-    
+
     fn announce_and_return_part(&self, announcement: &str) -> &str {
         println!("Attention please: {}", announcement);
         self.part
@@ -221,13 +216,13 @@ impl<'a> ImportantExcerpt<'a> {
 /// 获取第一个单词
 fn get_first_word(s: &str) -> &str {
     let bytes = s.as_bytes();
-    
+
     for (i, &item) in bytes.iter().enumerate() {
         if item == b' ' {
             return &s[0..i];
         }
     }
-    
+
     s
 }
 
@@ -243,11 +238,7 @@ fn lifetime_constraints<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
 where
     'b: 'a,
 {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
+    if x.len() > y.len() { x } else { y }
 }
 
 /// 高阶生命周期约束
@@ -280,7 +271,7 @@ impl<'a, T: ?Sized> GenericRef<'a, T> {
     fn new(value: &'a T) -> Self {
         GenericRef { value }
     }
-    
+
     fn get(&self) -> &'a T {
         self.value
     }
@@ -289,7 +280,9 @@ impl<'a, T: ?Sized> GenericRef<'a, T> {
 /// 处理器特征
 #[allow(unused_variables)]
 trait Processor {
-    type Output<'a> where Self: 'a;
+    type Output<'a>
+    where
+        Self: 'a;
     fn process<'a>(&self, input: &'a str) -> Self::Output<'a>;
 }
 
@@ -299,7 +292,7 @@ struct StringProcessor;
 
 impl Processor for StringProcessor {
     type Output<'a> = &'a str;
-    
+
     fn process<'a>(&self, input: &'a str) -> Self::Output<'a> {
         input.trim()
     }
@@ -368,10 +361,10 @@ impl<'a> Words<'a> {
 
 impl<'a> Iterator for Words<'a> {
     type Item = &'a str;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         let text = &self.text[self.position..];
-        
+
         for (i, c) in text.char_indices() {
             if c.is_whitespace() {
                 if i > 0 {
@@ -382,7 +375,7 @@ impl<'a> Iterator for Words<'a> {
                 self.position += 1;
             }
         }
-        
+
         if text.is_empty() {
             None
         } else {
@@ -404,11 +397,11 @@ impl<'a, T> Cache<'a, T> {
             data: std::collections::HashMap::new(),
         }
     }
-    
+
     fn get(&self, key: &str) -> Option<&'a T> {
         self.data.get(key).copied()
     }
-    
+
     fn insert(&mut self, key: String, value: &'a T) {
         self.data.insert(key, value);
     }
@@ -425,16 +418,16 @@ impl<'a> Parser<'a> {
     fn new(input: &'a str) -> Self {
         Parser { input, position: 0 }
     }
-    
+
     fn parse_token(&mut self) -> Option<Token<'a>> {
         self.skip_whitespace();
-        
+
         if self.position >= self.input.len() {
             return None;
         }
-        
+
         let start = self.position;
-        
+
         if self.peek().unwrap().is_ascii_alphabetic() {
             self.parse_word()
         } else if self.peek().unwrap().is_ascii_digit() {
@@ -444,7 +437,7 @@ impl<'a> Parser<'a> {
             Some(Token::Other(&self.input[start..self.position]))
         }
     }
-    
+
     fn skip_whitespace(&mut self) {
         while let Some(ch) = self.peek() {
             if ch.is_whitespace() {
@@ -454,7 +447,7 @@ impl<'a> Parser<'a> {
             }
         }
     }
-    
+
     fn parse_word(&mut self) -> Option<Token<'a>> {
         let start = self.position;
         while let Some(ch) = self.peek() {
@@ -466,7 +459,7 @@ impl<'a> Parser<'a> {
         }
         Some(Token::Word(&self.input[start..self.position]))
     }
-    
+
     fn parse_number(&mut self) -> Option<Token<'a>> {
         let start = self.position;
         while let Some(ch) = self.peek() {
@@ -478,11 +471,11 @@ impl<'a> Parser<'a> {
         }
         Some(Token::Number(&self.input[start..self.position]))
     }
-    
+
     fn peek(&self) -> Option<char> {
         self.input[self.position..].chars().next()
     }
-    
+
     fn consume(&mut self) -> Option<char> {
         let ch = self.peek()?;
         self.position += ch.len_utf8();
@@ -522,7 +515,7 @@ struct RefStruct<'a> {
 pub fn run_all_examples() {
     println!("Rust 生命周期系统示例");
     println!("======================");
-    
+
     lifetime_basics_examples();
     lifetime_annotation_examples();
     lifetime_elision_examples();
@@ -532,6 +525,6 @@ pub fn run_all_examples() {
     common_patterns_examples();
     performance_examples();
     debugging_examples();
-    
+
     println!("\n所有示例运行完成！");
 }

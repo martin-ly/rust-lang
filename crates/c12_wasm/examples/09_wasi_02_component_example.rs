@@ -66,8 +66,7 @@ impl AppConfig {
     /// 从环境变量加载配置
     fn from_env() -> Result<Self, String> {
         let work_dir = std::env::var("WORK_DIR").unwrap_or_else(|_| ".".to_string());
-        let output_file =
-            std::env::var("OUTPUT_FILE").unwrap_or_else(|_| "output.txt".to_string());
+        let output_file = std::env::var("OUTPUT_FILE").unwrap_or_else(|_| "output.txt".to_string());
 
         let log_level = match std::env::var("LOG_LEVEL").as_deref() {
             Ok("debug") => LogLevel::Debug,
@@ -174,7 +173,8 @@ impl FileProcessor {
     fn read_file(&self, path: &str) -> Result<String, String> {
         self.logger.debug(&format!("Reading file: {}", path));
 
-        let content = fs::read_to_string(path).map_err(|e| format!("Failed to read file: {}", e))?;
+        let content =
+            fs::read_to_string(path).map_err(|e| format!("Failed to read file: {}", e))?;
 
         self.logger
             .info(&format!("Read {} bytes from {}", content.len(), path));
@@ -203,8 +203,7 @@ impl FileProcessor {
             byte_count: content.len(),
         };
 
-        self.logger
-            .info(&format!("Text analysis: {:?}", stats));
+        self.logger.info(&format!("Text analysis: {:?}", stats));
         stats
     }
 }
@@ -364,9 +363,18 @@ impl Application {
         // 各种转换
         println!("\nTransformations:");
         println!("Original: '{}'", sample_text);
-        println!("Uppercase: '{}'", self.transformer.to_uppercase(sample_text));
-        println!("Lowercase: '{}'", self.transformer.to_lowercase(sample_text));
-        println!("Trimmed: '{}'", self.transformer.trim_whitespace(sample_text));
+        println!(
+            "Uppercase: '{}'",
+            self.transformer.to_uppercase(sample_text)
+        );
+        println!(
+            "Lowercase: '{}'",
+            self.transformer.to_lowercase(sample_text)
+        );
+        println!(
+            "Trimmed: '{}'",
+            self.transformer.trim_whitespace(sample_text)
+        );
         println!("Reversed: '{}'", self.transformer.reverse(sample_text));
 
         Ok(())
@@ -435,7 +443,10 @@ mod tests {
         assert_eq!(transformer.to_uppercase("hello"), "HELLO");
         assert_eq!(transformer.to_lowercase("WORLD"), "world");
         assert_eq!(transformer.reverse("abc"), "cba");
-        assert_eq!(transformer.trim_whitespace("  hello   world  "), "hello world");
+        assert_eq!(
+            transformer.trim_whitespace("  hello   world  "),
+            "hello world"
+        );
     }
 
     #[test]

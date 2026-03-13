@@ -121,9 +121,10 @@ impl NumaAwareTaskAllocator {
     pub fn complete_task(&self, node_id: usize) {
         let mut workloads = self.node_workloads.lock().unwrap();
         if let Some(workload) = workloads.get_mut(&node_id)
-            && *workload > 0 {
-                *workload -= 1;
-            }
+            && *workload > 0
+        {
+            *workload -= 1;
+        }
     }
 
     /// 获取NUMA节点工作负载
@@ -221,14 +222,13 @@ impl NumaAwareParallelCompute {
         let mut node_tasks: HashMap<usize, Vec<(usize, F)>> = HashMap::new();
         for (task_id, task) in tasks.into_iter().enumerate() {
             let node_id = task_assignments[task_id];
-            node_tasks
-                .entry(node_id)
-                .or_default()
-                .push((task_id, task));
+            node_tasks.entry(node_id).or_default().push((task_id, task));
         }
 
         // 在每个NUMA节点上并行执行任务
-        let handles: Vec<_> = node_tasks.into_values().map(|tasks| {
+        let handles: Vec<_> = node_tasks
+            .into_values()
+            .map(|tasks| {
                 let results = results.clone();
 
                 thread::spawn(move || {
@@ -275,7 +275,9 @@ impl NumaAwareParallelCompute {
         }
 
         // 在每个NUMA节点上并行归约
-        let node_results: Vec<_> = node_data.into_values().map(|data| {
+        let node_results: Vec<_> = node_data
+            .into_values()
+            .map(|data| {
                 let reduce_fn = reduce_fn.clone();
                 thread::spawn(move || {
                     if data.is_empty() {
@@ -320,14 +322,13 @@ impl NumaAwareParallelCompute {
         let mut node_data: HashMap<usize, Vec<(usize, T)>> = HashMap::new();
         for (i, item) in data.into_iter().enumerate() {
             let node_id = i % self.topology.node_count();
-            node_data
-                .entry(node_id)
-                .or_default()
-                .push((i, item));
+            node_data.entry(node_id).or_default().push((i, item));
         }
 
         // 在每个NUMA节点上并行映射
-        let handles: Vec<_> = node_data.into_values().map(|data| {
+        let handles: Vec<_> = node_data
+            .into_values()
+            .map(|data| {
                 let results = results.clone();
                 let map_fn = map_fn.clone();
 
@@ -445,10 +446,11 @@ impl NumaAwareMemoryAllocator {
 
         let mut allocations = self.node_allocations.lock().unwrap();
         if let Some(node_allocations) = allocations.get_mut(&node_id)
-            && address < node_allocations.len() {
-                node_allocations[address] = 0; // 标记为已释放
-                return Ok(());
-            }
+            && address < node_allocations.len()
+        {
+            node_allocations[address] = 0; // 标记为已释放
+            return Ok(());
+        }
 
         Err(format!("无效的内存地址: {}", address))
     }

@@ -1,23 +1,23 @@
 //! 异步编程最佳实践示例
-//! 
+//!
 //! 本示例展示了异步编程的最佳实践和常见陷阱：
 //! - 正确的异步函数设计
 //! - 资源管理和生命周期
 //! - 错误处理策略
 //! - 性能优化技巧
 //! - 常见陷阱和解决方案
-//! 
+//!
 //! 运行方式：
 //! ```bash
 //! cargo run --example async_best_practices
 //! ```
+use anyhow::{Context, Result};
+use futures::{StreamExt, future, stream};
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::{Mutex, Semaphore};
-use tokio::time::{sleep, timeout};
 use tokio::task::JoinSet;
-use futures::{StreamExt, future, stream};
-use anyhow::{Result, Context};
+use tokio::time::{sleep, timeout};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -70,7 +70,7 @@ async fn demo_async_function_design() -> Result<()> {
 
     // ✅ 好的设计：使用 JoinSet 管理任务生命周期
     let mut join_set = JoinSet::new();
-    
+
     for i in 0..5 {
         join_set.spawn(async move {
             let result = async_task(&format!("任务{}", i), 100).await;
@@ -198,9 +198,13 @@ async fn demo_performance_best_practices() -> Result<()> {
         .buffer_unordered(5) // 控制并发度
         .collect::<Vec<_>>()
         .await;
-    
+
     let stream_time = start.elapsed();
-    println!("    Stream 处理 {} 个项目耗时: {:?}", processed.len(), stream_time);
+    println!(
+        "    Stream 处理 {} 个项目耗时: {:?}",
+        processed.len(),
+        stream_time
+    );
 
     // ✅ 使用 pin! 宏避免堆分配
     let future = expensive_operation();
@@ -274,7 +278,7 @@ async fn demo_common_pitfalls() -> Result<()> {
     // ✅ 解决方案：使用 Weak 引用
     let data = Arc::new(Mutex::new(0));
     let weak_data = Arc::downgrade(&data);
-    
+
     let handle = tokio::spawn(async move {
         for i in 0..3 {
             if let Some(strong_data) = weak_data.upgrade() {
@@ -298,11 +302,11 @@ async fn demo_common_pitfalls() -> Result<()> {
 async fn fetch_user_data(user_id: u32) -> Result<User> {
     // 模拟网络请求
     sleep(Duration::from_millis(100)).await;
-    
+
     if user_id == 0 {
         return Err(anyhow::anyhow!("用户不存在"));
     }
-    
+
     Ok(User {
         id: user_id,
         name: format!("用户{}", user_id),
@@ -313,7 +317,7 @@ async fn fetch_user_data(user_id: u32) -> Result<User> {
 async fn process_data_safely(data: String) -> Result<ProcessedData> {
     // 模拟数据处理
     sleep(Duration::from_millis(50)).await;
-    
+
     Ok(ProcessedData {
         original: data.clone(),
         processed: data.to_uppercase(),
@@ -336,7 +340,7 @@ async fn async_task(name: &str, delay_ms: u64) -> String {
 /// 风险操作（可能失败）
 async fn risky_operation() -> Result<String> {
     sleep(Duration::from_millis(50)).await;
-    
+
     if rand::random::<f32>() < 0.3 {
         Err(anyhow::anyhow!("随机失败"))
     } else {
@@ -370,8 +374,7 @@ async fn chain_operations() -> Result<String> {
 
 /// 带上下文的操作
 async fn operation_with_context() -> Result<String> {
-    risky_operation().await
-        .context("执行风险操作失败")?;
+    risky_operation().await.context("执行风险操作失败")?;
     Ok("操作成功".to_string())
 }
 

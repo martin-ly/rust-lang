@@ -11,9 +11,9 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
+use std::collections::VecDeque;
 use std::num::NonZeroUsize;
 use std::sync::{Arc, Mutex};
-use std::collections::VecDeque;
 
 // ==================== 1. rotate_right 在进程队列管理中的应用 ====================
 
@@ -107,10 +107,7 @@ impl RoundRobinScheduler {
 /// 使用 NonZero::div_ceil 计算进程池大小
 ///
 /// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算进程池的容量
-pub fn calculate_process_pool_size(
-    total_tasks: usize,
-    tasks_per_process: NonZeroUsize,
-) -> usize {
+pub fn calculate_process_pool_size(total_tasks: usize, tasks_per_process: NonZeroUsize) -> usize {
     if total_tasks == 0 {
         return 0;
     }
@@ -188,12 +185,16 @@ pub fn demonstrate_rust_192_process_features() {
         priority: 30,
     });
 
-    println!("   原始队列: {:?}",
-        queue.processes.iter().map(|p| p.pid).collect::<Vec<_>>());
+    println!(
+        "   原始队列: {:?}",
+        queue.processes.iter().map(|p| p.pid).collect::<Vec<_>>()
+    );
 
     queue.rotate(1);
-    println!("   轮转后: {:?}",
-        queue.processes.iter().map(|p| p.pid).collect::<Vec<_>>());
+    println!(
+        "   轮转后: {:?}",
+        queue.processes.iter().map(|p| p.pid).collect::<Vec<_>>()
+    );
 
     // 2. NonZero::div_ceil 演示
     println!("\n2. NonZero::div_ceil 在进程池计算中的应用:");
@@ -238,7 +239,10 @@ pub fn demonstrate_rust_192_process_features() {
     println!("   进程列表相等: {}", compare_process_lists(&list1, &list2));
 
     let expected_pids = vec![1, 2];
-    println!("   PID 列表匹配: {}", check_process_states(&list1, &expected_pids));
+    println!(
+        "   PID 列表匹配: {}",
+        check_process_states(&list1, &expected_pids)
+    );
 }
 
 #[cfg(test)]

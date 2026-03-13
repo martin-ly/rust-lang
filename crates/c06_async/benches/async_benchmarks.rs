@@ -11,14 +11,14 @@
 //! ```bash
 //! cargo bench --bench async_benchmarks
 //! ```
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use futures::StreamExt;
+use std::collections::HashMap;
 use std::hint::black_box;
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::{Mutex, RwLock, Semaphore, mpsc};
-use tokio::time::{sleep};
-use futures::{StreamExt};
-use std::collections::HashMap;
+use tokio::time::sleep;
 
 /// 异步任务生成基准测试
 async fn benchmark_task_spawning(num_tasks: usize) {
@@ -183,8 +183,10 @@ async fn benchmark_timeout(num_operations: usize) {
         let handle = tokio::spawn(async move {
             match tokio::time::timeout(
                 Duration::from_millis(100),
-                sleep(Duration::from_millis(delay_ms))
-            ).await {
+                sleep(Duration::from_millis(delay_ms)),
+            )
+            .await
+            {
                 Ok(_) => black_box("completed"),
                 Err(_) => black_box("timeout"),
             }
@@ -225,7 +227,9 @@ async fn benchmark_retry(num_operations: usize, max_attempts: u32) {
 
 /// 异步缓存基准测试
 async fn benchmark_cache(num_operations: usize, cache_size: usize) {
-    let cache = Arc::new(RwLock::new(HashMap::<usize, String>::with_capacity(cache_size)));
+    let cache = Arc::new(RwLock::new(HashMap::<usize, String>::with_capacity(
+        cache_size,
+    )));
     let mut handles = Vec::with_capacity(num_operations);
 
     for i in 0..num_operations {
@@ -285,18 +289,26 @@ fn setup_benchmark(c: &mut Criterion) {
     // 任务生成基准测试
     let mut group = c.benchmark_group("task_spawning");
     for num_tasks in [100, 1000, 10000].iter() {
-        group.bench_with_input(BenchmarkId::new("spawn_tasks", num_tasks), num_tasks, |b, &num_tasks| {
-            b.to_async(&rt).iter(|| benchmark_task_spawning(num_tasks));
-        });
+        group.bench_with_input(
+            BenchmarkId::new("spawn_tasks", num_tasks),
+            num_tasks,
+            |b, &num_tasks| {
+                b.to_async(&rt).iter(|| benchmark_task_spawning(num_tasks));
+            },
+        );
     }
     group.finish();
 
     // 异步计数器基准测试
     let mut group = c.benchmark_group("async_counter");
     for num_ops in [100, 1000, 10000].iter() {
-        group.bench_with_input(BenchmarkId::new("counter_operations", num_ops), num_ops, |b, &num_ops| {
-            b.to_async(&rt).iter(|| benchmark_async_counter(num_ops));
-        });
+        group.bench_with_input(
+            BenchmarkId::new("counter_operations", num_ops),
+            num_ops,
+            |b, &num_ops| {
+                b.to_async(&rt).iter(|| benchmark_async_counter(num_ops));
+            },
+        );
     }
     group.finish();
 
@@ -308,7 +320,7 @@ fn setup_benchmark(c: &mut Criterion) {
             &(readers, writers),
             |b, &(readers, writers)| {
                 b.to_async(&rt).iter(|| benchmark_rwlock(readers, writers));
-            }
+            },
         );
     }
     group.finish();
@@ -317,11 +329,14 @@ fn setup_benchmark(c: &mut Criterion) {
     let mut group = c.benchmark_group("channels");
     for &(msgs, buf_size) in [(1000, 100), (10000, 1000), (100000, 10000)].iter() {
         group.bench_with_input(
-            BenchmarkId::new("channel_throughput", format!("{}msgs_{}buf", msgs, buf_size)),
+            BenchmarkId::new(
+                "channel_throughput",
+                format!("{}msgs_{}buf", msgs, buf_size),
+            ),
             &(msgs, buf_size),
             |b, &(msgs, buf_size)| {
                 b.to_async(&rt).iter(|| benchmark_channels(msgs, buf_size));
-            }
+            },
         );
     }
     group.finish();
@@ -330,11 +345,14 @@ fn setup_benchmark(c: &mut Criterion) {
     let mut group = c.benchmark_group("semaphore");
     for &(tasks, permits) in [(100, 10), (1000, 100), (10000, 1000)].iter() {
         group.bench_with_input(
-            BenchmarkId::new("semaphore_control", format!("{}tasks_{}permits", tasks, permits)),
+            BenchmarkId::new(
+                "semaphore_control",
+                format!("{}tasks_{}permits", tasks, permits),
+            ),
             &(tasks, permits),
             |b, &(tasks, permits)| {
                 b.to_async(&rt).iter(|| benchmark_semaphore(tasks, permits));
-            }
+            },
         );
     }
     group.finish();
@@ -342,9 +360,14 @@ fn setup_benchmark(c: &mut Criterion) {
     // 流处理基准测试
     let mut group = c.benchmark_group("stream_processing");
     for num_items in [1000, 10000, 100000].iter() {
-        group.bench_with_input(BenchmarkId::new("stream_items", num_items), num_items, |b, &num_items| {
-            b.to_async(&rt).iter(|| benchmark_stream_processing(num_items));
-        });
+        group.bench_with_input(
+            BenchmarkId::new("stream_items", num_items),
+            num_items,
+            |b, &num_items| {
+                b.to_async(&rt)
+                    .iter(|| benchmark_stream_processing(num_items));
+            },
+        );
     }
     group.finish();
 
@@ -355,8 +378,9 @@ fn setup_benchmark(c: &mut Criterion) {
             BenchmarkId::new("batch_size", format!("{}items_{}batch", items, batch_size)),
             &(items, batch_size),
             |b, &(items, batch_size)| {
-                b.to_async(&rt).iter(|| benchmark_batch_processing(items, batch_size));
-            }
+                b.to_async(&rt)
+                    .iter(|| benchmark_batch_processing(items, batch_size));
+            },
         );
     }
     group.finish();
@@ -364,18 +388,26 @@ fn setup_benchmark(c: &mut Criterion) {
     // 超时基准测试
     let mut group = c.benchmark_group("timeout");
     for num_ops in [100, 1000, 10000].iter() {
-        group.bench_with_input(BenchmarkId::new("timeout_operations", num_ops), num_ops, |b, &num_ops| {
-            b.to_async(&rt).iter(|| benchmark_timeout(num_ops));
-        });
+        group.bench_with_input(
+            BenchmarkId::new("timeout_operations", num_ops),
+            num_ops,
+            |b, &num_ops| {
+                b.to_async(&rt).iter(|| benchmark_timeout(num_ops));
+            },
+        );
     }
     group.finish();
 
     // 重试基准测试
     let mut group = c.benchmark_group("retry");
     for num_ops in [100, 1000, 10000].iter() {
-        group.bench_with_input(BenchmarkId::new("retry_operations", num_ops), num_ops, |b, &num_ops| {
-            b.to_async(&rt).iter(|| benchmark_retry(num_ops, 3));
-        });
+        group.bench_with_input(
+            BenchmarkId::new("retry_operations", num_ops),
+            num_ops,
+            |b, &num_ops| {
+                b.to_async(&rt).iter(|| benchmark_retry(num_ops, 3));
+            },
+        );
     }
     group.finish();
 
@@ -387,7 +419,7 @@ fn setup_benchmark(c: &mut Criterion) {
             &(ops, cache_size),
             |b, &(ops, cache_size)| {
                 b.to_async(&rt).iter(|| benchmark_cache(ops, cache_size));
-            }
+            },
         );
     }
     group.finish();
@@ -395,9 +427,13 @@ fn setup_benchmark(c: &mut Criterion) {
     // 事件循环基准测试
     let mut group = c.benchmark_group("event_loop");
     for num_events in [1000, 10000, 100000].iter() {
-        group.bench_with_input(BenchmarkId::new("event_processing", num_events), num_events, |b, &num_events| {
-            b.to_async(&rt).iter(|| benchmark_event_loop(num_events));
-        });
+        group.bench_with_input(
+            BenchmarkId::new("event_processing", num_events),
+            num_events,
+            |b, &num_events| {
+                b.to_async(&rt).iter(|| benchmark_event_loop(num_events));
+            },
+        );
     }
     group.finish();
 }
