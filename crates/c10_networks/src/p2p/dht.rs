@@ -1,5 +1,4 @@
 //! DHT 抽象（预留接口）
-
 #[derive(Clone, Debug)]
 pub struct DhtKey(pub Vec<u8>);
 

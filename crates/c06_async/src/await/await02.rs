@@ -33,7 +33,6 @@
 //!     process().await;
 //! }
 //! ```
-
 use reqwest::{Client, Error};
 
 /// 异步获取数据的辅助函数

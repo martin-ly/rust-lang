@@ -11,7 +11,6 @@
 //! ```bash
 //! cargo run --example async_best_practices
 //! ```
-
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::{Mutex, Semaphore};

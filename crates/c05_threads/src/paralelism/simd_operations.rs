@@ -5,7 +5,6 @@
 //! - 并行数据处理
 //! - SIMD优化算法
 //! - 自动向量化
-
 use std::arch::x86_64::*;
 //use std::mem;
 //use std::thread;

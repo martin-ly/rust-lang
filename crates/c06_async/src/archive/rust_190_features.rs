@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 异步编程特性模块 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -14,7 +13,6 @@
 //! 
 //! 注意：AsyncDrop、Async Generators 等特性仍在开发中，
 //! 本模块提供了模拟实现以供学习和测试使用。
-
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::time::sleep;

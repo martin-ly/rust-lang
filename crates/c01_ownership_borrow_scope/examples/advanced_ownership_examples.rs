@@ -4,7 +4,6 @@
 //! 包括复杂的所有权模式、高级借用技巧和最佳实践。
 //! This example demonstrates advanced usage of Rust 1.90's ownership and borrowing system,
 //! including complex ownership patterns, advanced borrowing techniques, and best practices.
-
 use std::collections::HashMap;
 use std::rc::{Rc, Weak};
 use std::sync::{Arc, Mutex, RwLock};
@@ -18,7 +17,6 @@ use std::time::Duration;
 /// 
 /// 演示所有权如何在多个函数和结构体之间转移
 /// Demonstrates how ownership transfers between multiple functions and structs
-
 pub mod ownership_transfer_chain {
     use super::*;
 
@@ -102,7 +100,6 @@ pub mod ownership_transfer_chain {
 /// 
 /// 演示如何使用智能指针实现所有权共享
 /// Demonstrates how to use smart pointers for ownership sharing
-
 pub mod ownership_sharing_patterns {
     use super::*;
 
@@ -220,7 +217,6 @@ pub mod ownership_sharing_patterns {
 /// 
 /// 演示复杂的借用模式和多层借用
 /// Demonstrates complex borrowing patterns and multi-level borrowing
-
 pub mod complex_borrowing_patterns {
     use super::*;
 
@@ -325,7 +321,6 @@ pub mod complex_borrowing_patterns {
 /// 
 /// 演示如何管理复杂的借用生命周期
 /// Demonstrates how to manage complex borrow lifetimes
-
 pub mod borrow_lifetime_management {
 
     /// 生命周期管理器 / Lifetime Manager
@@ -442,7 +437,6 @@ pub mod borrow_lifetime_management {
 /// 
 /// 演示如何在多个线程之间安全地共享所有权
 /// Demonstrates how to safely share ownership between multiple threads
-
 pub mod inter_thread_ownership_sharing {
     use super::*;
 
@@ -551,7 +545,6 @@ pub mod inter_thread_ownership_sharing {
 /// 
 /// 演示如何使用原子操作进行所有权管理
 /// Demonstrates how to use atomic operations for ownership management
-
 pub mod atomic_ownership_operations {
     use super::*;
     use std::sync::atomic::{AtomicUsize, AtomicBool, Ordering};
@@ -675,7 +668,6 @@ pub mod atomic_ownership_operations {
 /// 
 /// 演示如何实现动态作用域管理
 /// Demonstrates how to implement dynamic scope management
-
 pub mod dynamic_scope {
     use super::*;
 

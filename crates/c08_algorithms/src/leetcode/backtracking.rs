@@ -20,7 +20,6 @@
 //! - 90. Subsets II（子集 II）
 //! - 131. Palindrome Partitioning（分割回文串）
 //! - 216. Combination Sum III（组合总和 III）
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 46. Permutations（全排列）
@@ -394,13 +393,12 @@ fn backtrack_word_search(
     for (dx, dy) in directions.iter() {
         let ni = i as i32 + dx;
         let nj = j as i32 + dy;
-        if ni >= 0 && nj >= 0 {
-            if backtrack_word_search(board, word, ni as usize, nj as usize, index + 1, rows, cols)
+        if ni >= 0 && nj >= 0
+            && backtrack_word_search(board, word, ni as usize, nj as usize, index + 1, rows, cols)
             {
                 board[i][j] = temp; // 恢复
                 return true;
             }
-        }
     }
 
     board[i][j] = temp; // 恢复
@@ -481,11 +479,10 @@ pub fn partition(s: String) -> Vec<Vec<String>> {
     for len in 2..=n {
         for i in 0..=n - len {
             let j = i + len - 1;
-            if chars[i] == chars[j] {
-                if len == 2 || dp[i + 1][j - 1] {
+            if chars[i] == chars[j]
+                && (len == 2 || dp[i + 1][j - 1]) {
                     dp[i][j] = true;
                 }
-            }
         }
     }
 

@@ -14,7 +14,6 @@
 //! ```bash
 //! cargo run --example edge_computing_demo
 //! ```
-
 use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};

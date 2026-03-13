@@ -1,7 +1,6 @@
 //! 综合集成示例 - 展示多个模块的协同使用
 //!
 //! 本示例展示如何将多个Rust模块组合使用，构建一个完整的应用程序
-
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};

@@ -18,7 +18,6 @@
 //! - 703. Kth Largest Element in a Stream（数据流中的第 K 大元素）
 //! - 973. K Closest Points to Origin（最接近原点的 K 个点）
 //! - 1046. Last Stone Weight（最后一块石头的重量）
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::BinaryHeap;
 use std::collections::HashMap;
@@ -48,12 +47,11 @@ pub fn find_kth_largest(nums: Vec<i32>, k: i32) -> i32 {
             heap.push(std::cmp::Reverse(num));
         } else {
             // 如果当前数比堆顶（k个最大中最小的）大，替换堆顶
-            if let Some(&std::cmp::Reverse(min)) = heap.peek() {
-                if num > min {
+            if let Some(&std::cmp::Reverse(min)) = heap.peek()
+                && num > min {
                     heap.pop();
                     heap.push(std::cmp::Reverse(num));
                 }
-            }
         }
     }
 
@@ -198,12 +196,11 @@ impl KthLargest {
         for num in nums {
             if heap.len() < k {
                 heap.push(std::cmp::Reverse(num));
-            } else if let Some(&std::cmp::Reverse(min)) = heap.peek() {
-                if num > min {
+            } else if let Some(&std::cmp::Reverse(min)) = heap.peek()
+                && num > min {
                     heap.pop();
                     heap.push(std::cmp::Reverse(num));
                 }
-            }
         }
 
         Self { k, heap } // heap 类型是 BinaryHeap<std::cmp::Reverse<i32>>
@@ -212,12 +209,11 @@ impl KthLargest {
     pub fn add(&mut self, val: i32) -> i32 {
         if self.heap.len() < self.k {
             self.heap.push(std::cmp::Reverse(val));
-        } else if let Some(&std::cmp::Reverse(min)) = self.heap.peek() {
-            if val > min {
+        } else if let Some(&std::cmp::Reverse(min)) = self.heap.peek()
+            && val > min {
                 self.heap.pop();
                 self.heap.push(std::cmp::Reverse(val));
             }
-        }
 
         // 堆顶就是第 k 大的元素
         self.heap.peek().unwrap().0

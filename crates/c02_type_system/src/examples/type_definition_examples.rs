@@ -7,7 +7,6 @@
 //! - 指针类型
 //! - 函数类型
 //! - 泛型类型
-
 use std::rc::Rc;
 use std::sync::Arc;
 
@@ -218,7 +217,7 @@ pub fn type_conversion_examples() {
     println!("\n=== 类型转换示例 ===");
     
     // 显式转换
-    let x = 3.14;
+    let x = std::f64::consts::PI;
     let y = x as i32;
     println!("x: {}, y: {}", x, y);
     
@@ -240,7 +239,7 @@ pub fn type_inference_examples() {
     
     // 字面量推断
     let x = 42;        // i32
-    let y = 3.14;      // f64
+    let y = std::f64::consts::PI;  // f64
     let z = true;      // bool
     
     println!("x: {}, y: {}, z: {}", x, y, z);

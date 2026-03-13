@@ -14,7 +14,6 @@
 //! 6. wasm-bindgen 集成优化
 //! 7. WASM 二进制大小优化
 //! 8. WASM 运行时性能优化
-
 use c12_wasm::rust_191_features::*;
 
 fn main() {

@@ -267,19 +267,17 @@ impl ExecHelper {
             Box::pin(fut)
         };
 
-        // 将截止时间转为剩余超时，循环检查
-        loop {
-            let now = std::time::Instant::now();
-            if now >= deadline {
-                return Ok(None);
-            }
-            let remain = deadline - now;
-            let res = self.limiter.run(async { tokio::time::timeout(remain, fut).await }).await;
-            match res {
-                Ok(Ok(v)) => return Ok(Some(v)),
-                Ok(Err(e)) => return Err(e),
-                Err(_) => return Ok(None), // reach deadline in this slice
-            }
+        // 将截止时间转为剩余超时，执行检查
+        let now = std::time::Instant::now();
+        if now >= deadline {
+            return Ok(None);
+        }
+        let remain = deadline - now;
+        let res = self.limiter.run(async { tokio::time::timeout(remain, fut).await }).await;
+        match res {
+            Ok(Ok(v)) => Ok(Some(v)),
+            Ok(Err(e)) => Err(e),
+            Err(_) => Ok(None), // reach deadline in this slice
         }
     }
 }

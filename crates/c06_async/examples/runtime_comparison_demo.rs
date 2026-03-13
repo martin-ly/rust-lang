@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example runtime_comparison_demo
 //! ```
-
 use std::time::{Duration, Instant};
 use anyhow::Result;
 

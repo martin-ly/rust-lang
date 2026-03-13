@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.92.0 综合特性测试
 //!
 //! 本测试文件包含 Rust 1.92.0 版本所有新特性的综合测试：
@@ -12,7 +11,6 @@
 //! ```bash
 //! cargo test rust_192_comprehensive_tests
 //! ```
-
 use c03_control_fn::rust_192_features::{
     control_flow_check, control_flow_branch, control_flow_loop, control_flow_match,
     control_flow_with_never, LocatedError, ErrorContext,

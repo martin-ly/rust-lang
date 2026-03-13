@@ -2,7 +2,6 @@
 //!
 //! 本模块整合了完整的算法知识体系，包括理论基础、应用场景、最佳实践等。
 //! 为算法学习和应用提供全面的知识支持。
-
 pub mod theory;
 pub mod applications;
 pub mod best_practices;

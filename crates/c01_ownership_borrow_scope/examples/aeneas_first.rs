@@ -4,7 +4,6 @@
 //! 验证目标：移动后无双重所有者
 //!
 //! 见 docs/research_notes/AENEAS_INTEGRATION_PLAN.md
-
 fn main() {
     let x = String::from("hello");
     let y = x; // 移动；x 不再可用

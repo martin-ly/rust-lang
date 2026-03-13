@@ -23,7 +23,6 @@
 //! - 283. Move Zeroes（移动零）
 //! - 344. Reverse String（反转字符串）
 //! - 345. Reverse Vowels of a String（反转字符串中的元音字母）
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 16. 3Sum Closest（最接近的三数之和）
@@ -207,7 +206,7 @@ pub fn is_palindrome(s: &str) -> bool {
             right -= 1;
         }
 
-        if chars[left].to_ascii_lowercase() != chars[right].to_ascii_lowercase() {
+        if !chars[left].eq_ignore_ascii_case(&chars[right]) {
             return false;
         }
 

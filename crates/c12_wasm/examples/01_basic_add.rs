@@ -45,7 +45,6 @@
 //! const result = wasmModule.instance.exports.add(5, 3);
 //! console.log('5 + 3 =', result); // 输出: 5 + 3 = 8
 //! ```
-
 use wasm_bindgen::prelude::*;
 
 /// 简单的加法函数

@@ -1,7 +1,6 @@
 //! # 算法理论知识模块
 //!
 //! 本模块提供算法的理论基础和数学原理。
-
 use serde::{Serialize, Deserialize};
 
 /// 理论知识

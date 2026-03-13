@@ -1,5 +1,4 @@
 //! 设计模式模块并发安全测试套件 / Design Patterns Module Concurrent Safety Test Suite
-
 use std::sync::{Arc, Mutex};
 use std::thread;
 

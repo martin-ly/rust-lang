@@ -5,7 +5,6 @@
 //! - 多级优先级通道
 //! - 动态优先级调整通道
 //! - 公平调度优先级通道
-
 use std::cmp::Ordering;
 use std::collections::{BinaryHeap, VecDeque};
 use std::sync::{Arc, Condvar, Mutex};

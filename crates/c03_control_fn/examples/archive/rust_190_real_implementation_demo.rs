@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 真正的语言特性实现演示程序 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -11,7 +10,6 @@
 //! - 优化的trait求解器
 //! - 改进的错误处理
 //! - 新的标准库特性
-
 use c03_control_fn::rust_190_real_implementation::*;
 use anyhow::Result;
 

@@ -6,7 +6,6 @@
 //! - fmt::from_fn - 自定义格式化器模式
 //!
 //! 运行: cargo run -p c09_design_pattern --example rust_193_features_demo
-
 use std::fmt;
 
 fn main() {

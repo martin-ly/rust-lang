@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.92.0 异步编程综合测试套件
 //!
 //! 本测试套件验证 Rust 1.92.0 版本中的所有异步编程新特性，确保：
@@ -7,7 +6,6 @@
 //! - 迭代器方法特化性能优化有效
 //! - 异步任务调度器功能完整
 //! - 异步资源分配器工作正常
-
 use c06_async::rust_192_features::{
     AsyncTaskQueue, AsyncTaskScheduler, AsyncResourceAllocator,
     TaskItem, calculate_async_pool_size, compare_async_task_lists,

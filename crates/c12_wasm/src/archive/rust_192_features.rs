@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.92.0 WASM 特性实现模块
 //!
 //! 本模块展示了 Rust 1.92.0 在 WASM 场景中的应用，包括：
@@ -16,7 +15,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
-
 use std::mem::MaybeUninit;
 use std::num::NonZeroUsize;
 use std::panic::Location;

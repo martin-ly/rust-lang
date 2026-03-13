@@ -2,7 +2,6 @@
 //! 
 //! 本模块实现并行算法执行，充分利用多核 CPU 的计算能力。
 //! 基于 rayon 实现数据并行和任务并行。
-
 use super::{ParallelAlgorithm, ExecutionResult};
 use rayon::prelude::*;
 use std::time::Instant;

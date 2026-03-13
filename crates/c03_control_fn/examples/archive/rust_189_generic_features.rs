@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! # Rust 1.89 特性示例 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -33,7 +32,6 @@
 //! - 常量泛型改进
 //! - 生命周期推断优化
 //! - 简化的类型级编程
-
 //use std::collections::HashMap;
 use anyhow::Result;
 use std::fmt::Display;

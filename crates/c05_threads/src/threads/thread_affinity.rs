@@ -5,7 +5,6 @@
 //! - NUMA节点绑定
 //! - 动态亲和性调整
 //! - 亲和性监控
-
 use num_cpus;
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -274,7 +273,7 @@ pub enum WorkloadType {
 /// 线程亲和性监控器
 pub struct ThreadAffinityMonitor {
     manager: Arc<ThreadAffinityManager>,
-    monitoring_enabled: AtomicBool,
+    monitoring_enabled: Arc<AtomicBool>,
     monitoring_interval: Duration,
 }
 
@@ -282,18 +281,18 @@ impl ThreadAffinityMonitor {
     pub fn new(manager: Arc<ThreadAffinityManager>) -> Self {
         Self {
             manager,
-            monitoring_enabled: AtomicBool::new(true),
+            monitoring_enabled: Arc::new(AtomicBool::new(true)),
             monitoring_interval: Duration::from_secs(1),
         }
     }
 
     pub fn start_monitoring(&self) {
         let manager = self.manager.clone();
-        let monitoring_enabled = Arc::new(self.monitoring_enabled.load(Ordering::Relaxed));
+        let monitoring_enabled = Arc::clone(&self.monitoring_enabled);
         let interval = self.monitoring_interval;
 
         thread::spawn(move || {
-            while *monitoring_enabled {
+            while monitoring_enabled.load(Ordering::Relaxed) {
                 // 收集性能统计
                 manager.collect_performance_stats();
 

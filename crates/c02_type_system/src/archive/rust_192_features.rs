@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! # Rust 1.92.0 类型系统特性实现模块 / Rust 1.92.0 Type System Features Implementation Module
 //!
 //! 本模块实现了 Rust 1.92.0 版本中与类型系统相关的新特性和改进，包括：
@@ -30,7 +29,6 @@
 //! - [特性完整指南](../docs/RUST_192_FEATURES_GUIDE.md)
 //! - [示例代码集合](../docs/RUST_192_EXAMPLES_COLLECTION.md)
 //! - [测试用例](../tests/rust_192_features_tests.rs)
-
 use std::mem::MaybeUninit;
 use std::marker::PhantomData;
 use std::num::NonZeroUsize;

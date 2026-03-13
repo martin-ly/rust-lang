@@ -24,7 +24,6 @@
 //!     ├── Block
 //!     └── Batch
 //! ```
-
 use c09_design_pattern::concurrency::message_passing::define::async_bus::{EventBusString, BackpressureStrategy};
 use c09_design_pattern::concurrency::message_passing::define::StringEventHandler;
 

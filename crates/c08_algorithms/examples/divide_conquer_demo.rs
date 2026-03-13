@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example divide_conquer_demo
 //! ```
-
 fn main() {
     println!("🚀 分治算法示例\n");
     println!("{}", "=".repeat(60));

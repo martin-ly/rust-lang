@@ -10,7 +10,6 @@
 //! ```bash
 //! cargo run --example data_structures_demo
 //! ```
-
 use std::collections::{BinaryHeap, HashMap, VecDeque};
 
 fn main() {

@@ -2,7 +2,6 @@
 //!
 //! 本模块展示了如何组合多个设计模式来解决复杂的工程问题。
 //! 这些案例展示了模式之间的协作和组合使用。
-
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::{Arc, Mutex};
@@ -40,6 +39,12 @@ pub struct ExactMatchRouting {
     routes: HashMap<String, String>,
 }
 
+impl Default for ExactMatchRouting {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ExactMatchRouting {
     pub fn new() -> Self {
         let mut routes = HashMap::new();
@@ -59,6 +64,12 @@ impl RoutingStrategy for ExactMatchRouting {
 /// 前缀匹配路由策略
 pub struct PrefixMatchRouting {
     prefixes: Vec<(String, String)>,
+}
+
+impl Default for PrefixMatchRouting {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl PrefixMatchRouting {
@@ -87,6 +98,12 @@ pub struct HttpRequestBuilder {
     path: Option<String>,
     headers: HashMap<String, String>,
     body: Option<String>,
+}
+
+impl Default for HttpRequestBuilder {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl HttpRequestBuilder {
@@ -167,21 +184,18 @@ impl CircuitBreaker {
     {
         let state = *self.state.lock().unwrap();
 
-        match state {
-            CircuitState::Open => {
-                // 检查是否可以尝试恢复
-                let last_failure = self.last_failure_time.lock().unwrap();
-                if let Some(time) = *last_failure {
-                    if time.elapsed() > self.timeout {
-                        *self.state.lock().unwrap() = CircuitState::HalfOpen;
-                    } else {
-                        return Err("Circuit breaker is open".to_string());
-                    }
+        if state == CircuitState::Open {
+            // 检查是否可以尝试恢复
+            let last_failure = self.last_failure_time.lock().unwrap();
+            if let Some(time) = *last_failure {
+                if time.elapsed() > self.timeout {
+                    *self.state.lock().unwrap() = CircuitState::HalfOpen;
                 } else {
                     return Err("Circuit breaker is open".to_string());
                 }
+            } else {
+                return Err("Circuit breaker is open".to_string());
             }
-            _ => {}
         }
 
         // 执行调用
@@ -201,13 +215,12 @@ impl CircuitBreaker {
         self.successes.fetch_add(1, Ordering::Relaxed);
 
         let state = *self.state.lock().unwrap();
-        if state == CircuitState::HalfOpen {
-            if self.successes.load(Ordering::Relaxed) >= self.success_threshold {
+        if state == CircuitState::HalfOpen
+            && self.successes.load(Ordering::Relaxed) >= self.success_threshold {
                 *self.state.lock().unwrap() = CircuitState::Closed;
                 self.successes.store(0, Ordering::Relaxed);
                 self.failures.store(0, Ordering::Relaxed);
             }
-        }
     }
 
     fn on_failure(&self) {
@@ -311,11 +324,8 @@ impl WebServerFacade {
 
         let result = circuit_breaker.call(|| service.handle(&request));
 
-        match &result {
-            Err(_) => {
-                self.error_count.fetch_add(1, Ordering::Relaxed);
-            }
-            _ => {}
+        if let Err(_) = &result {
+            self.error_count.fetch_add(1, Ordering::Relaxed);
         }
 
         result
@@ -367,6 +377,12 @@ pub trait EventObserver: Send {
 /// 事件总线（Observer 模式）
 pub struct EventBus {
     observers: Vec<Box<dyn EventObserver>>,
+}
+
+impl Default for EventBus {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl EventBus {
@@ -437,6 +453,12 @@ pub struct GameContext {
     pub enemy_health: u32,
 }
 
+impl Default for GameContext {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl GameContext {
     pub fn new() -> Self {
         Self {
@@ -449,6 +471,12 @@ impl GameContext {
 /// 命令映射器（Command 模式）
 pub struct CommandMapper {
     commands: HashMap<String, Box<dyn GameCommand>>,
+}
+
+impl Default for CommandMapper {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl CommandMapper {
@@ -491,6 +519,12 @@ pub struct PatrolState {
     patrol_count: u32,
 }
 
+impl Default for PatrolState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PatrolState {
     pub fn new() -> Self {
         Self { patrol_count: 0 }
@@ -526,6 +560,12 @@ impl AiState for PatrolState {
 /// 追逐状态
 pub struct ChaseState {
     chase_count: u32,
+}
+
+impl Default for ChaseState {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl ChaseState {
@@ -565,6 +605,12 @@ impl AiState for ChaseState {
 /// 逃跑状态
 pub struct FleeState;
 
+impl Default for FleeState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl FleeState {
     pub fn new() -> Self {
         Self
@@ -601,6 +647,12 @@ pub struct AiStateManager {
     current_state: Option<Box<dyn AiState>>,
 }
 
+impl Default for AiStateManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AiStateManager {
     pub fn new() -> Self {
         Self {
@@ -631,6 +683,12 @@ pub struct LoggingObserver {
     logs: Vec<String>,
 }
 
+impl Default for LoggingObserver {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl LoggingObserver {
     pub fn new() -> Self {
         Self { logs: Vec::new() }
@@ -655,6 +713,12 @@ pub struct GameEngine {
     command_mapper: CommandMapper,
     ai_state_manager: AiStateManager,
     context: GameContext,
+}
+
+impl Default for GameEngine {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl GameEngine {

@@ -6,7 +6,6 @@
 //! - 高级泛型特性（GATs、HRTB、常量泛型）
 //! - 变型（Variance）
 //! - 性能优化技巧
-
 use std::fmt::Debug;
 
 /// 泛型函数示例
@@ -119,7 +118,7 @@ pub fn performance_examples() {
     println!("str_result = {}", str_result);
     
     // 零成本抽象
-    let items = vec![1, 2, 3, 4, 5];
+    let items = [1, 2, 3, 4, 5];
     let doubled: Vec<i32> = items.iter().map(|x| x * 2).collect();
     println!("Doubled: {:?}", doubled);
 }

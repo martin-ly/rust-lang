@@ -6,7 +6,6 @@
 //!
 //! 1. **性能优化**: 使用 BTreeMap 等有序映射数据结构
 //! 2. **内存优化**: 高效的有序映射实现
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::BTreeMap;
 
@@ -39,12 +38,11 @@ impl SummaryRanges {
             }
         }
         
-        if let Some((&s, &e)) = self.intervals.range(val + 1..).next() {
-            if s == val + 1 {
+        if let Some((&s, &e)) = self.intervals.range(val + 1..).next()
+            && s == val + 1 {
                 end = e;
                 self.intervals.remove(&s);
             }
-        }
         
         self.intervals.insert(start, end);
     }
@@ -79,16 +77,14 @@ pub fn contains_nearby_almost_duplicate(nums: Vec<i32>, k: i32, t: i32) -> bool 
         }
         
         let num = nums[i] as i64;
-        if let Some(&lower) = set.range(..=num).next_back() {
-            if num - lower <= t {
+        if let Some(&lower) = set.range(..=num).next_back()
+            && num - lower <= t {
                 return true;
             }
-        }
-        if let Some(&upper) = set.range(num..).next() {
-            if upper - num <= t {
+        if let Some(&upper) = set.range(num..).next()
+            && upper - num <= t {
                 return true;
             }
-        }
         
         set.insert(num);
     }

@@ -8,7 +8,6 @@
 //! - 单例模式 (Singleton Pattern)
 //! - 观察者模式 (Observer Pattern)
 //! - 策略模式 (Strategy Pattern)
-
 use std::sync::OnceLock;
 use wasm_bindgen::prelude::*;
 

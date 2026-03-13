@@ -6,7 +6,6 @@
 //! - slice::as_array - 固定大小缓冲区的类型安全访问
 //!
 //! 运行: cargo run -p c05_threads --example rust_193_features_demo
-
 use std::collections::VecDeque;
 use std::sync::mpsc;
 use std::thread;

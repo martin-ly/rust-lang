@@ -1,5 +1,4 @@
 //! 泛型模块测试套件
-
 #[test]
 fn test_generic_stack() {
     use std::collections::VecDeque;

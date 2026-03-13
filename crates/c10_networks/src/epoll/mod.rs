@@ -2,7 +2,6 @@
 //! - Linux: epoll (LT/ET)
 //! - macOS/BSD: kqueue
 //! - Windows: IOCP
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TriggerMode {
     Level,

@@ -2,7 +2,6 @@
 //!
 //! 本模块展示了在游戏引擎中应用各种设计模式的实践案例，
 //! 包括Component、Observer、State等经典模式。
-
 use std::any::{Any, TypeId};
 use std::collections::HashMap;
 

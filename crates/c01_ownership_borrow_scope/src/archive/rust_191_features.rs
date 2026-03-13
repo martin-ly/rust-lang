@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! # Rust 1.91 特性实现模块 / Rust 1.91 Features Implementation Module (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -14,7 +13,6 @@
 //! - 更好的生命周期推断（编译时优化）/ Better lifetime inference (compile-time optimizations)
 //! - 改进的借用检查器错误信息 / Improved borrow checker error messages
 //! - 非词法生命周期（NLL）进一步优化 / Further optimizations to Non-Lexical Lifetimes (NLL)
-
 use std::collections::HashMap;
 use std::time::Duration;
 

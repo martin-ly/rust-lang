@@ -1,6 +1,5 @@
 //! 将 `crossbeam_channel::Receiver<T>` 适配为可迭代流。
 //! 注意：这是同步阻塞迭代器，适用于简单消费场景。
-
 use crossbeam_channel::Receiver;
 use std::thread::sleep;
 use std::time::{Duration, Instant};

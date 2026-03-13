@@ -12,7 +12,6 @@
 //! GATs（泛型关联类型）使 trait 不再 dyn-compatible（对象安全），因此不能
 //! 使用 `Box<dyn Observer>` 等 trait 对象。本示例使用枚举包装不同类型的
 //! 观察者来解决这个问题，这是 Rust 中处理此类情况的惯用方法。
-
 use std::time::Instant;
 use std::collections::HashMap;
 

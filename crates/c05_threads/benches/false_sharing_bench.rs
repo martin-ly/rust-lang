@@ -2,7 +2,6 @@
 //!
 //! 对比「有/无缓存行填充」时多线程原子计数器增量的性能差异。
 //! 预期：GoodCounters（缓存行隔离）明显快于 BadCounters（伪共享）。
-
 // criterion 0.8.2 的 black_box 已弃用，本文件使用 std::hint::black_box
 #![allow(deprecated)]
 

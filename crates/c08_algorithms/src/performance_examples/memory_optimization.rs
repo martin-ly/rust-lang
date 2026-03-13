@@ -1,5 +1,4 @@
 //! 内存优化实践示例
-
 use std::collections::VecDeque;
 
 /// 简单对象池实现

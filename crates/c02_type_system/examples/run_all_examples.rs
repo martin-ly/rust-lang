@@ -1,5 +1,4 @@
 //! 运行所有类型系统示例
-
 use c02_type_system::examples::{
     generics_examples,
     lifetimes_examples,

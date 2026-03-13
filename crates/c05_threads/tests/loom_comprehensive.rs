@@ -8,7 +8,6 @@
 //!
 //! Windows 上 loom 状态空间探索易导致栈溢出，全部 loom 测试在 Windows 上默认忽略。
 //! Run with `cargo test -p c05_threads --test loom_comprehensive -- --ignored` to run them.
-
 use loom::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use loom::sync::{Arc, Condvar, Mutex};
 use loom::thread;

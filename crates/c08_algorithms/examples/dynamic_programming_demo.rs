@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example dynamic_programming_demo
 //! ```
-
 fn main() {
     println!("🚀 动态规划算法示例\n");
     println!("{}", "=".repeat(60));

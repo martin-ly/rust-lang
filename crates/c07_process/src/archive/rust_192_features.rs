@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.92.0 进程管理特性实现模块
 //!
 //! 本模块展示了 Rust 1.92.0 在进程管理场景中的应用，包括：
@@ -12,7 +11,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
-
 use std::num::NonZeroUsize;
 use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;

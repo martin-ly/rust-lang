@@ -7,7 +7,6 @@
 //! ```bash
 //! cargo test --target wasm32-wasi
 //! ```
-
 #[cfg(target_family = "wasm")]
 use c12_wasm::wasi_examples::*;
 

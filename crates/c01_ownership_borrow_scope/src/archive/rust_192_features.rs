@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! # Rust 1.92.0 特性实现模块 / Rust 1.92.0 Features Implementation Module
 //!
 //! 本模块实现了 Rust 1.92.0 版本中与所有权、借用、生命周期相关的新特性和改进，包括：
@@ -13,7 +12,6 @@
 //! - 关联项的多个边界 / Multiple Bounds for Associated Items
 //! - 增强的高阶生命周期区域处理 / Enhanced Higher-Ranked Region Handling
 //! - 改进的 `unused_must_use` Lint 行为 / Refined `unused_must_use` Lint Behavior
-
 use std::mem::MaybeUninit;
 use std::ptr;
 use std::marker::PhantomData;

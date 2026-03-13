@@ -12,7 +12,6 @@
 //! 带有 async 方法的 trait 不是 dyn-compatible（对象安全），因为异步方法返回
 //! 的 impl Future 类型无法用于 trait 对象。本示例使用枚举包装不同类型的实现，
 //! 这是 Rust 中处理此类情况的标准做法。
-
 use std::future::Future;
 use std::time::{Duration, Instant};
 use std::pin::Pin;

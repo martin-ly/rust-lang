@@ -1,7 +1,6 @@
 //! 异步数据库操作示例
 //! 
 //! 展示如何使用异步编程进行数据库操作
-
 use std::sync::Arc;
 use std::time::Duration;
 use anyhow::Result;

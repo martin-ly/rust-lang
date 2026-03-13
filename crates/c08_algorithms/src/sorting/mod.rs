@@ -1,5 +1,4 @@
 //! 排序算法：同步 / Rayon并行 / Tokio异步 统一接口
-
 use anyhow::Result;
 use rayon::prelude::*;
 use rayon::slice::{ParallelSlice, ParallelSliceMut};

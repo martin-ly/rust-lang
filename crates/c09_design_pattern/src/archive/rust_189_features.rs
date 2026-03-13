@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! # Rust 1.89 特性示例 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -30,7 +29,6 @@
 //! # Rust 1.89 新特性演示模块
 //!
 //! 本模块展示了如何在设计模式中充分利用 Rust 1.89 的新特性
-
 use std::cell::Cell;
 use std::ptr;
 use std::sync::OnceLock;

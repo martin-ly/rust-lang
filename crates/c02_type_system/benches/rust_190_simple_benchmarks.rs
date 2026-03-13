@@ -5,7 +5,6 @@
 //! **当前推荐版本**: Rust 1.92.0+ | 最新基准测试请参考 `rust_192_benchmarks.rs`
 //!
 //! 本文件提供了 Rust 1.90 新特性的简化性能基准测试
-
 use criterion::{criterion_group, criterion_main, Criterion};
 use std::hint::black_box;
 

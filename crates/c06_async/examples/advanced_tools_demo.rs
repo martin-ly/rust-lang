@@ -14,7 +14,6 @@
 //! ```bash
 //! cargo run --example advanced_tools_demo
 //! ```
-
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::sync::Mutex;

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 性能优化模块
 //! 
 //! 本模块实现了Rust 1.90版本中的性能优化特性，包括：
@@ -7,7 +6,6 @@
 //! - 借用检查器性能优化
 //! - 内存布局优化
 //! - 零成本抽象验证
-
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::time::sleep;

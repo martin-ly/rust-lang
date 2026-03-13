@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.91 算法特性实现模块（历史版本）
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -18,7 +17,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.91.0
 //! - Edition: 2024
-
 use std::io::{BufRead, BufReader, Cursor};
 use std::ops::ControlFlow;
 
@@ -62,8 +60,8 @@ pub mod const_algorithm_config {
     pub struct MathConstants;
 
     impl MathConstants {
-        pub const PI_APPROX: f64 = 3.141592653589793;
-        pub const E_APPROX: f64 = 2.718281828459045;
+        pub const PI_APPROX: f64 = std::f64::consts::PI;
+        pub const E_APPROX: f64 = std::f64::consts::E;
         pub const GOLDEN_RATIO: f64 = 1.618033988749895;
 
         // Rust 1.91: const 引用计算

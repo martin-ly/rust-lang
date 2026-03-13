@@ -1,6 +1,4 @@
-#![doc(test(ignore))]
 //! 控制流与函数模块边界情况测试套件 / Control Flow and Functions Module Edge Cases Test Suite
-
 use c03_control_fn::*;
 
 /// 测试空循环边界情况

@@ -2,7 +2,6 @@
 //!
 //! 本模块展示了在数据库系统中应用各种设计模式的实践案例，
 //! 包括DAO、Active Record、Unit of Work等经典模式。
-
 use std::any::Any;
 use std::collections::HashMap;
 

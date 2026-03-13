@@ -13,7 +13,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
-
 use std::fmt::Debug;
 
 // ==================== Rust 1.94 真实特性: Peekable 新方法 ====================
@@ -213,7 +212,7 @@ impl<T, I: Iterator<Item = T>> DataFilterProcessor<T, I> {
     {
         // 跳过不满足条件的元素
         while self.iter.peek().is_some() {
-            if let Some(result) = self.iter.peek().and_then(|item| predicate(item)) {
+            if let Some(result) = self.iter.peek().and_then(&mut predicate) {
                 self.iter.next(); // 消耗元素
                 return Some(result);
             }
@@ -277,7 +276,7 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
     where
         F: Fn(&T) -> Option<R>,
     {
-        if let Some(result) = self.input.peek().and_then(|item| predicate(item)) {
+        if let Some(result) = self.input.peek().and_then(predicate) {
             self.input.next(); // 消耗元素
             Some(result)
         } else {
@@ -315,7 +314,7 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
         F: FnMut(&T) -> Option<R>,
     {
         let mut results = Vec::new();
-        while let Some(result) = self.input.peek().and_then(|item| predicate(item)) {
+        while let Some(result) = self.input.peek().and_then(&mut predicate) {
             self.input.next(); // 消耗元素
             results.push(result);
         }
@@ -579,10 +578,8 @@ impl<T> Edition2024ControlFlow<T> {
     where
         F: FnMut(&T),
     {
-        while let Some(ref v) = self.value {
+        if let Some(ref v) = self.value {
             f(v);
-            // 实际逻辑会更复杂，这里简化处理
-            break;
         }
     }
 
@@ -690,7 +687,6 @@ impl EventStreamProcessor {
 ///
 /// Rust 1.94.0 的 `LazyCell` 新方法可以与控制流结合，
 /// 实现条件初始化和延迟计算。
-
 use std::cell::OnceCell;
 
 /// 条件延迟初始化控制器

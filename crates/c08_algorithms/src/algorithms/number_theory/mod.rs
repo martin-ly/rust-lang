@@ -1,7 +1,6 @@
 //! # 数论算法模块
 //! 
 //! 本模块实现了各种数论算法。
-
 //use serde::{Serialize, Deserialize};
 
 /// 数论算法实现

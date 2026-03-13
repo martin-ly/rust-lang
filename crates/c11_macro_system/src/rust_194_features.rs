@@ -13,7 +13,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
-
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -150,11 +149,7 @@ impl MacroExpansionAnalyzer {
         let mut anomalies = Vec::new();
 
         for (idx, [prev, next]) in depths.array_windows::<2>().enumerate() {
-            let diff = if next > prev {
-                next - prev
-            } else {
-                prev - next
-            };
+            let diff = next.abs_diff(*prev);
             if diff > threshold {
                 anomalies.push(idx);
             }
@@ -361,7 +356,7 @@ impl MacroRuleLibrary {
     pub fn add_rule(&mut self, name: impl Into<String>, pattern: impl Into<String>) {
         self.rules
             .entry(name.into())
-            .or_insert_with(Vec::new)
+            .or_default()
             .push(pattern.into());
     }
 
@@ -413,8 +408,8 @@ impl GoldenRatioExpansionStrategy {
     /// 优先级计算（黄金比例散列）
     pub fn calculate_priority(macro_id: u64) -> u8 {
         let phi_frac = std::f64::consts::GOLDEN_RATIO.fract();
-        let priority = ((macro_id as f64 * phi_frac).fract() * 256.0) as u8;
-        priority
+        
+        ((macro_id as f64 * phi_frac).fract() * 256.0) as u8
     }
 }
 
@@ -609,7 +604,7 @@ impl<'a> PeekableMacroParser<'a> {
         let mut string = String::new();
         let mut escaped = false;
 
-        while let Some(c) = self.chars.next() {
+        for c in self.chars.by_ref() {
             self.position += 1;
 
             if escaped {
@@ -712,7 +707,7 @@ impl MacroArgumentProcessor {
         let mut args = Vec::new();
         let mut current = String::new();
 
-        while let Some(c) = input.next() {
+        for c in input.by_ref() {
             if c == separator {
                 if !current.is_empty() {
                     args.push(current.trim().to_string());

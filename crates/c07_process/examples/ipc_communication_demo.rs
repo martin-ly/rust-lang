@@ -10,7 +10,6 @@
 //! ```bash
 //! cargo run --example ipc_communication_demo
 //! ```
-
 use c07_process::prelude::*;
 use std::time::Duration;
 

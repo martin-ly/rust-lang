@@ -6,7 +6,6 @@
 //!
 //! 1. **性能优化**: 递归和迭代器操作性能提升
 //! 2. **内存优化**: 使用栈或递归优化
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use crate::leetcode::tree::TreeNode;
 use std::cell::RefCell;
@@ -21,16 +20,14 @@ pub fn is_valid_bst(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
             None => true,
             Some(n) => {
                 let val = n.borrow().val;
-                if let Some(min_val) = min {
-                    if val <= min_val {
+                if let Some(min_val) = min
+                    && val <= min_val {
                         return false;
                     }
-                }
-                if let Some(max_val) = max {
-                    if val >= max_val {
+                if let Some(max_val) = max
+                    && val >= max_val {
                         return false;
                     }
-                }
                 validate(n.borrow().left.clone(), min, Some(val))
                     && validate(n.borrow().right.clone(), Some(val), max)
             }

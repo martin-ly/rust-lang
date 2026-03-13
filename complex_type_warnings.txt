@@ -1,0 +1,19 @@
+﻿
+> warning: very complex type used. Consider factoring parts into `type` definitions
+     --> crates\c06_async\src\actor_reactor_patterns.rs:234:17
+      |
+  234 |         actors: Arc<RwLock<HashMap<ActorId, mpsc::UnboundedSender<Box<dyn std::any::Any + Send>>>>>,
+> warning: very complex type used. Consider factoring parts into `type` definitions
+     --> crates\c06_async\src\actor_reactor_patterns.rs:508:19
+      |
+  508 |         handlers: Arc<Mutex<HashMap<(u64, EventType), Arc<dyn EventHandler>>>>,
+> warning: very complex type used. Consider factoring parts into `type` definitions
+     --> crates\c10_networks\src\rust_194_features.rs:345:27
+      |
+  345 | static PROTOCOL_HANDLERS: LazyLock<Mutex<HashMap<String, Box<dyn Fn(&[u8]) -> Vec<u8> + Send>>>> =
+> warning: very complex type used. Consider factoring parts into `type` definitions
+     --> crates\c10_networks\src\rust_194_features.rs:347:27
+      |
+  347 |         let mut handlers: HashMap<String, Box<dyn Fn(&[u8]) -> Vec<u8> + Send>> = HashMap::new();
+
+

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 综合特性测试
 //!
 //! 本测试文件包含 Rust 1.90 版本所有新特性的综合测试：
@@ -13,7 +12,6 @@
 //! ```bash
 //! cargo test rust_190_comprehensive_tests
 //! ```
-
 use c03_control_fn::{
     rust_190_features::*,
     async_control_flow_190::*,

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 新特性模块 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -16,7 +15,6 @@
 //! - 生命周期转换改进
 //!
 //! 所有示例都使用 Rust 1.90 的最新语法，并包含详细的注释和最佳实践。
-
 use std::collections::HashMap;
 use std::time::Duration;
 use tokio::time::sleep;

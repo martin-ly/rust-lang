@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.92.0 线程特性实现模块
 //!
 //! 本模块展示了 Rust 1.92.0 在线程和并发编程场景中的应用，包括：
@@ -35,7 +34,6 @@
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
 //! - 最后更新: 2025-12-11
-
 use std::mem::MaybeUninit;
 use std::num::NonZeroUsize;
 use std::sync::{Arc, Mutex};

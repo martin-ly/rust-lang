@@ -13,7 +13,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
-
 use std::cell::LazyCell;
 use std::iter::Peekable;
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -289,12 +288,11 @@ impl<I: Iterator> SimpleParser<I> {
     where
         F: FnOnce(&I::Item) -> Option<T>,
     {
-        if let Some(item) = self.iter.peek() {
-            if let Some(result) = f(item) {
+        if let Some(item) = self.iter.peek()
+            && let Some(result) = f(item) {
                 self.iter.next();
                 return Some(result);
             }
-        }
         None
     }
 

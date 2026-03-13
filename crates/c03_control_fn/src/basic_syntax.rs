@@ -10,7 +10,6 @@
 //! - 错误处理
 //!
 //! 所有示例都遵循 Rust 1.89 的最新语法规范，并包含详细的注释说明。
-
 use std::collections::HashMap;
 use std::fmt::{self, Display};
 

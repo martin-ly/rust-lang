@@ -1,5 +1,4 @@
 //! 所有权和借用作用域模块错误路径测试套件 / Ownership and Borrowing Scope Module Error Paths Test Suite
-
 use c01_ownership_borrow_scope::scope::{ScopeManager, ScopeType};
 
 /// 测试错误输入情况

@@ -1,7 +1,6 @@
 //! 共享状态与取消标志
 //! - 使用 `Arc<AtomicBool>` 进行跨线程停止信号
 //! - 使用 `Arc<Mutex<T>>` 维护共享可变状态
-
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -36,7 +35,7 @@ pub fn cooperative_cancellation(workers: usize, ticks: usize) -> usize {
     for h in handles {
         h.join().unwrap();
     }
-    let x = *progress.lock().unwrap(); x
+     *progress.lock().unwrap()
 }
 
 /// 共享可变状态：多个线程累加到一个共享 Vec
@@ -56,7 +55,7 @@ pub fn shared_vec_sum(workers: usize, each: usize) -> usize {
     for h in handles {
         h.join().unwrap();
     }
-    let x = data.lock().unwrap().iter().sum(); x
+     data.lock().unwrap().iter().sum()
 }
 
 #[cfg(test)]

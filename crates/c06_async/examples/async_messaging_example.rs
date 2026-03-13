@@ -1,7 +1,6 @@
 //! 异步消息传递示例
 //! 
 //! 展示如何使用异步编程进行消息传递和事件处理
-
 use std::sync::Arc;
 use std::time::Duration;
 use anyhow::Result;

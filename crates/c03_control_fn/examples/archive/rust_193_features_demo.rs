@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.93.0 控制流与函数相关特性演示
 //!
 //! 本示例展示 Rust 1.93.0 在控制流、格式化、时间等场景中的新 API：
@@ -8,7 +7,6 @@
 //! - slice::as_array / as_mut_array
 //!
 //! 运行: cargo run --example rust_193_features_demo
-
 use std::fmt;
 use std::time::Duration;
 

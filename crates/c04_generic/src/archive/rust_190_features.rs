@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 特性演示模块 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -9,7 +8,6 @@
 //! - 返回位置 impl Trait (RPITIT) 的改进
 //! - 异步泛型函数的支持
 //! - 共享状态的不同锁策略对比
-
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
 
@@ -35,8 +33,7 @@ impl<T> Data<T> {
                 // 简单的过滤逻辑
                 true
             })
-            .cloned()
-            .take(100) // 限制输出数量
+            .take(100).cloned() // 限制输出数量
     }
 }
 
@@ -49,8 +46,7 @@ where
         items
             .iter()
             .filter(|_| true)
-            .cloned()
-            .take(100)
+            .take(100).cloned()
     )
 }
 

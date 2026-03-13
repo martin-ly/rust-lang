@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.92.0 设计模式特性实现模块
 //!
 //! 本模块展示了 Rust 1.92.0 在设计模式场景中的应用，包括：
@@ -12,7 +11,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.92.0
 //! - Edition: 2024
-
 use std::mem::MaybeUninit;
 use std::panic::Location;
 

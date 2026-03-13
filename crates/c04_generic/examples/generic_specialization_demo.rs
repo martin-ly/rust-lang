@@ -12,7 +12,6 @@
 //! ```bash
 //! cargo run --example generic_specialization_demo
 //! ```
-
 use std::fmt::Display;
 
 /// 序列化trait

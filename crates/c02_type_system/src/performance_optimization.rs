@@ -8,7 +8,6 @@
 //! - 缓存友好的数据结构
 //! - SIMD 优化
 //! - 编译时优化
-
 use std::arch::x86_64::*;
 use std::mem;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -517,19 +516,13 @@ pub mod profiling_tools {
     }
 
     /// 内存使用统计
+    #[derive(Default)]
     pub struct MemoryStats {
         pub allocated: usize,
         pub peak: usize,
     }
 
-    impl Default for MemoryStats {
-        fn default() -> Self {
-            Self {
-                allocated: 0,
-                peak: 0,
-            }
-        }
-    }
+    
 
     impl MemoryStats {
         pub fn new() -> Self {

@@ -32,7 +32,6 @@
 //! - crossbeam-channel vs std::mpsc 对比
 //! - rayon 数据并行 map/reduce
 //! - parking_lot 互斥/读写锁
-
 use std::thread;
 
 pub fn demo_scoped_threads() {

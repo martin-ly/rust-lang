@@ -117,7 +117,6 @@ use tracing::{info, warn, error, debug, instrument, span, Level};
 /// - FIFO 队列保证顺序
 /// - 事件循环不会跳过事件
 /// - 因此所有事件都会被处理 □
-
 // ============================================================================
 // 第二部分: 核心数据结构
 // Part 2: Core Data Structures

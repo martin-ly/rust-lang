@@ -13,7 +13,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
-
 use std::sync::LazyLock;
 
 // ==================== 1. array_windows - 滑动窗口模式 ====================
@@ -466,11 +465,10 @@ impl<'a> Lexer<'a> {
         }
 
         // 解析操作符
-        if let Some(c) = self.input.next() {
-            if "+-*/=<>!".contains(c) {
+        if let Some(c) = self.input.next()
+            && "+-*/=<>!".contains(c) {
                 return Token::Operator(c);
             }
-        }
 
         Token::EOF
     }

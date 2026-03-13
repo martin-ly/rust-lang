@@ -5,7 +5,6 @@
 //! - 优先级继承读写锁
 //! - 优先级继承信号量
 //! - 优先级继承屏障
-
 use std::collections::{BinaryHeap, HashMap};
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.92.0 控制流特性演示示例
 //!
 //! 本示例展示了 Rust 1.92.0 在控制流和函数场景中的新特性应用：
@@ -12,7 +11,6 @@
 //! ```bash
 //! cargo run --example rust_192_features_demo
 //! ```
-
 use c03_control_fn::rust_192_features::{
     control_flow_check, control_flow_branch, control_flow_loop, control_flow_match,
     control_flow_with_never, LocatedError, ErrorContext,

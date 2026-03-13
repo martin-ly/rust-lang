@@ -13,7 +13,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
-
 use std::cell::LazyCell;
 use std::collections::HashMap;
 use std::iter::Peekable;
@@ -358,12 +357,12 @@ impl<K: std::hash::Hash + Eq + Clone, V: Clone> AlgorithmResultCache<K, V> {
     ///
     /// Rust 1.94.0: 使用 Deref
     pub fn get(&self, key: &K) -> Option<V> {
-        (&*self.cache).get(key).cloned()
+        (*self.cache).get(key).cloned()
     }
 
     /// 检查是否包含键
     pub fn contains_key(&self, key: &K) -> bool {
-        (&*self.cache).contains_key(key)
+        (*self.cache).contains_key(key)
     }
 }
 
@@ -497,7 +496,7 @@ pub fn demonstrate_math_constants_algorithms() {
         0.0,
         10.0,
         0.0001,
-        |x| (x - 3.14159).powi(2)
+        |x| (x - std::f64::consts::PI).powi(2)
     );
     println!("黄金分割搜索结果: x = {:.6}, f(x) = {:.6}", min_x, min_val);
 

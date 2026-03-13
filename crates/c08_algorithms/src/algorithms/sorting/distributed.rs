@@ -2,7 +2,6 @@
 //!
 //! 本模块实现了各种排序算法的分布式版本，支持跨节点的分布式计算。
 //! 适用于大规模数据处理和需要水平扩展的场景。
-
 use super::{SortingAlgorithm, AlgorithmComplexity};
 use crate::algorithms::execution_modes::{
     DistributedAlgorithm,
@@ -502,7 +501,7 @@ fn bubble_sort_distributed(arr: &mut [i32]) {
 
 fn counting_sort_by_digit_distributed(arr: &[i32], exp: i32, _nodes: &[String]) -> Vec<i32> {
     let mut output = vec![0; arr.len()];
-    let mut count = vec![0; 10];
+    let mut count = [0; 10];
 
     // 计数
     for &num in arr {

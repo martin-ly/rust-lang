@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 性能基准测试模块
 //!
 //! 本模块提供了全面的性能基准测试，展示 Rust 1.90 新特性在性能方面的优势：
@@ -9,7 +8,6 @@
 //! - 运行时性能分析
 //!
 //! 所有基准测试都使用 Rust 1.90 的最新特性，并提供详细的性能分析报告。
-
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};

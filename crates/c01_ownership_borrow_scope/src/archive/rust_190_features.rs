@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! # Rust 1.90 特性实现模块 / Rust 1.90 Features Implementation Module (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -14,7 +13,6 @@
 //! - 优化的作用域管理 / Optimized scope management
 //! - 增强的并发安全 / Enhanced concurrency safety
 //! - 智能内存管理 / Smart memory management
-
 use std::collections::HashMap;
 use std::time::Duration;
 

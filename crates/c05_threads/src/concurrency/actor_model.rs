@@ -9,7 +9,6 @@
 //! - **Mailbox**: 消息队列，存储发送给 Actor 的消息
 //! - **Message**: Actor 之间通信的数据结构
 //! - **Scheduler**: 负责调度 Actor 处理消息
-
 use std::collections::VecDeque;
 use std::sync::{Arc, Mutex};
 use std::thread;

@@ -1,6 +1,4 @@
-#![doc(test(ignore))]
 //! 控制流与函数模块错误路径测试套件 / Control Flow and Functions Module Error Paths Test Suite
-
 use c03_control_fn::*;
 
 /// 测试错误输入情况

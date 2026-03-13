@@ -2,7 +2,6 @@
 //!
 //! 本模块展示了 Rust 1.89 中 thread::scope 的强大功能
 //! 允许安全地跨线程借用数据，无需 Arc 和 Mutex
-
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Condvar, Mutex, mpsc};

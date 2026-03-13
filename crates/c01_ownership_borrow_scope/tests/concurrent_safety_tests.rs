@@ -1,5 +1,4 @@
 //! 所有权和借用作用域模块并发安全测试套件 / Ownership and Borrowing Scope Module Concurrent Safety Test Suite
-
 use c01_ownership_borrow_scope::scope::{ScopeManager, ScopeType};
 use std::sync::{Arc, Mutex};
 use std::thread;

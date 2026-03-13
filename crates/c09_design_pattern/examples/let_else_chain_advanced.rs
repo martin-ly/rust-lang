@@ -6,7 +6,6 @@
 //! 3. 请求验证责任链
 //! 4. 错误处理责任链
 //! 5. 与传统 if-let/match 的代码对比
-
 use std::collections::HashMap;
 use std::fmt;
 

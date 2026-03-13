@@ -11,7 +11,6 @@
 //! ```bash
 //! cargo run --example sorting_algorithms_demo
 //! ```
-
 use c08_algorithms::sorting::{sort_sync, SortingAlgo};
 
 fn main() {

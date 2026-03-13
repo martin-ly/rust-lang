@@ -19,7 +19,6 @@
 //! - 503. Next Greater Element II（下一个更大元素 II）
 //! - 739. Daily Temperatures（每日温度）
 //! - 844. Backspace String Compare（比较含退格的字符串）
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 150. Evaluate Reverse Polish Notation（逆波兰表达式求值）
@@ -110,13 +109,11 @@ impl MinStack {
 
     /// 删除栈顶元素
     pub fn pop(&mut self) {
-        if let Some(val) = self.stack.pop() {
-            if let Some(&min_val) = self.min_stack.last() {
-                if val == min_val {
+        if let Some(val) = self.stack.pop()
+            && let Some(&min_val) = self.min_stack.last()
+                && val == min_val {
                     self.min_stack.pop();
                 }
-            }
-        }
     }
 
     /// 获取栈顶元素

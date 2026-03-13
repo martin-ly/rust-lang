@@ -1,5 +1,4 @@
 //! 搜索算法：同步 / Rayon并行 / Tokio异步
-
 use anyhow::Result;
 use rayon::prelude::*;
 use std::collections::{HashMap, VecDeque};

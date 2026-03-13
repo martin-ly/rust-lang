@@ -6,7 +6,6 @@
 //! tx.send(7).unwrap();
 //! assert_eq!(rx.recv().unwrap(), 7);
 //! ```
-
 pub use crossbeam_channel::{
     Receiver, RecvTimeoutError, SendError, Sender, TryRecvError, TrySendError, bounded, unbounded,
 };

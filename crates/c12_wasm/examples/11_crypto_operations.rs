@@ -26,7 +26,6 @@
 //! curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | \
 //!   bash -s -- --plugins wasi_crypto
 //! ```
-
 use std::fmt;
 
 /// 密码学错误类型

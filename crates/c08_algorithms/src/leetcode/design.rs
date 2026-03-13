@@ -6,7 +6,6 @@
 //!
 //! 1. **性能优化**: 使用标准库高效数据结构
 //! 2. **内存优化**: 智能指针和生命周期优化
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::HashMap;
 
@@ -79,11 +78,10 @@ impl MinStack {
     }
 
     pub fn pop(&mut self) {
-        if let Some(val) = self.stack.pop() {
-            if Some(&val) == self.min_stack.last() {
+        if let Some(val) = self.stack.pop()
+            && Some(&val) == self.min_stack.last() {
                 self.min_stack.pop();
             }
-        }
     }
 
     pub fn top(&self) -> i32 {

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! # Rust 1.89 特性示例 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -41,7 +40,6 @@
 //! ```bash
 //! cargo run --example rust_189_new_features_showcase
 //! ```
-
 use std::collections::HashMap;
 use std::fmt::{self, Display};
 use std::thread;

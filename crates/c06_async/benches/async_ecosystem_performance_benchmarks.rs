@@ -2,7 +2,6 @@
 //!
 //! 本基准测试套件用于测试和比较不同异步运行时的性能，
 //! 包括std、tokio、async-std、smol等库的性能对比
-
 use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
 use std::hint::black_box;
 use std::time::Duration;

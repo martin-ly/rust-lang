@@ -1,7 +1,6 @@
 //! # 算法最佳实践模块
 //!
 //! 本模块提供算法实现和使用的最佳实践。
-
 use serde::{Serialize, Deserialize};
 
 /// 最佳实践

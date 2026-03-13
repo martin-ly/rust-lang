@@ -6,7 +6,6 @@
 //! tx.send(1).unwrap();
 //! assert_eq!(rx.recv().unwrap(), 1);
 //! ```
-
 pub use std::sync::mpsc::{Receiver, RecvTimeoutError, SyncSender, TryRecvError, sync_channel};
 use std::time::Duration;
 

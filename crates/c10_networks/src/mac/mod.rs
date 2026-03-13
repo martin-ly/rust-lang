@@ -1,5 +1,4 @@
 //! MAC 地址工具
-
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct MacAddress([u8; 6]);
 

@@ -14,7 +14,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.90.0
 //! - Edition: 2024
-
 use std::collections::{HashMap};
 use std::fmt;
 
@@ -455,14 +454,11 @@ impl PatternMatchingOptimizer {
         match expr {
             // 常量折叠优化
             ComplexExpression::BinaryOp { left, operator, right } => {
-                match (left.as_ref(), right.as_ref()) {
-                    (ComplexExpression::Literal(a), ComplexExpression::Literal(b)) => {
-                        // 尝试常量折叠
-                        if let Ok(result) = self.fold_constants(a, operator, b) {
-                            return ComplexExpression::Literal(result);
-                        }
-                    },
-                    _ => {},
+                if let (ComplexExpression::Literal(a), ComplexExpression::Literal(b)) = (left.as_ref(), right.as_ref()) {
+                    // 尝试常量折叠
+                    if let Ok(result) = self.fold_constants(a, operator, b) {
+                        return ComplexExpression::Literal(result);
+                    }
                 }
                 
                 // 递归优化子表达式
@@ -475,13 +471,10 @@ impl PatternMatchingOptimizer {
             
             // 一元运算优化
             ComplexExpression::UnaryOp { operator, operand } => {
-                match operand.as_ref() {
-                    ComplexExpression::Literal(lit) => {
-                        if let Ok(result) = self.fold_unary_constant(operator, lit) {
-                            return ComplexExpression::Literal(result);
-                        }
-                    },
-                    _ => {},
+                if let ComplexExpression::Literal(lit) = operand.as_ref() {
+                    if let Ok(result) = self.fold_unary_constant(operator, lit) {
+                        return ComplexExpression::Literal(result);
+                    }
                 }
                 
                 ComplexExpression::UnaryOp {

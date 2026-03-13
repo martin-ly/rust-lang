@@ -1,7 +1,6 @@
 //! 简化的优先级通道实现
 //!
 //! 为了避免复杂的线程安全问题，这里提供了一个简化版本的优先级通道
-
 use std::collections::{
     //BinaryHeap,
     VecDeque,

@@ -6,7 +6,6 @@
 //! tx.send(1);
 //! assert_eq!(*rx.borrow(), 1);
 //! ```
-
 use std::sync::{Arc, Condvar, Mutex};
 
 pub struct Sender<T> {

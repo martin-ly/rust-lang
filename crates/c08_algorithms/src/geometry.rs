@@ -1,5 +1,4 @@
 //! 计算几何：凸包（Andrew）与旋转卡壳直径
-
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Pt {
     pub x: f64,

@@ -12,7 +12,6 @@
 //! ```bash
 //! cargo run --example async_network_demo
 //! ```
-
 use std::net::SocketAddr;
 use std::sync::Arc;
 use std::time::Duration;

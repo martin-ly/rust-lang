@@ -1,5 +1,4 @@
 //! Fenwick 树（Binary Indexed Tree）：支持前缀和与点更新，O(log n)
-
 #[derive(Clone, Debug)]
 pub struct Fenwick {
     n: usize,

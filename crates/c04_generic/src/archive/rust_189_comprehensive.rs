@@ -35,7 +35,6 @@
 //! 4. 类型推断改进 (Type Inference Improvements)
 //! 5. 生命周期推断增强 (Lifetime Inference Enhancements)
 //! 6. 新的泛型约束语法 (New Generic Constraint Syntax)
-
 use std::fmt::{Debug, Display};
 use std::marker::PhantomData;
 use std::ops::Add;
@@ -173,12 +172,11 @@ pub mod enhanced_const_generics {
         #[allow(clippy::type_complexity)]
         pub fn set(&mut self, row: usize, col: usize, value: T) -> bool {
             #[allow(clippy::excessive_nesting)]
-            if let Some(row_data) = self.data.get_mut(row) {
-                if let Some(cell) = row_data.get_mut(col) {
+            if let Some(row_data) = self.data.get_mut(row)
+                && let Some(cell) = row_data.get_mut(col) {
                     *cell = value;
                     return true;
                 }
-            }
             false
         }
 

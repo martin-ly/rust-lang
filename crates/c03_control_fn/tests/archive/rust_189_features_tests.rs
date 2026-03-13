@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.89 功能 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -12,7 +11,6 @@
 //! 参考:
 //! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-
 use c03_control_fn::async_control_flow_189::AsyncControlFlowExecutor189;
 use c03_control_fn::performance_optimization_189::{
     COptimizedLayout, ControlFlowOptimizer, DefaultLayout, FACTORIAL_10, PRIME_17, fast_add,

@@ -7,7 +7,6 @@
 //! ```bash
 //! cargo bench --bench design_patterns_bench
 //! ```
-
 use c12_wasm::ecosystem_examples::design_patterns::strategy::SortStrategy;
 use c12_wasm::ecosystem_examples::design_patterns::*;
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};

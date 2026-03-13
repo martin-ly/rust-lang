@@ -2,7 +2,6 @@
 //!
 //! 本模块实现了各种排序算法的并行版本，充分利用多核 CPU 的计算能力。
 //! 基于 rayon 实现数据并行和任务并行。
-
 use super::{SortingAlgorithm, AlgorithmComplexity};
 use crate::algorithms::execution_modes::ParallelAlgorithm;
 use rayon::prelude::*;
@@ -450,7 +449,7 @@ fn heapify_parallel(arr: &mut [i32], n: usize, i: usize) {
 
 fn counting_sort_by_digit_parallel(arr: &[i32], exp: i32) -> Vec<i32> {
     let mut output = vec![0; arr.len()];
-    let mut count = vec![0; 10];
+    let mut count = [0; 10];
 
     // 计数
     for &num in arr {

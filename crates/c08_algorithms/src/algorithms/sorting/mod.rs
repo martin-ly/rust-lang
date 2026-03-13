@@ -2,7 +2,6 @@
 //!
 //! 本模块实现了各种排序算法，包括同步、异步、并行、分布式四个版本。
 //! 充分利用 Rust 1.90 的新特性，提供高性能、类型安全的排序实现。
-
 pub mod sync;
 pub mod async_exec;
 pub mod parallel;

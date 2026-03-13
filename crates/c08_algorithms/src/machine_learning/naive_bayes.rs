@@ -1,7 +1,6 @@
 //! 朴素贝叶斯分类器实现
 //!
 //! 本模块提供了朴素贝叶斯分类器的基础实现
-
 use super::*;
 use std::collections::HashMap;
 
@@ -90,7 +89,7 @@ impl NaiveBayesClassifier {
 
     /// 返回已知类别的只读迭代器（若未训练则为空）
     pub fn classes_iter(&self) -> impl Iterator<Item = &Label> {
-        self.classes.as_ref().map(|v| v.as_slice()).into_iter().flatten()
+        self.classes.as_deref().into_iter().flatten()
     }
 }
 

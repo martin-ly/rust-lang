@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example string_algorithms_demo
 //! ```
-
 fn main() {
     println!("🚀 字符串算法示例\n");
     println!("{}", "=".repeat(60));

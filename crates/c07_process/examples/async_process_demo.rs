@@ -11,7 +11,6 @@
 //! ```bash
 //! cargo run --example async_process_demo --features async
 //! ```
-
 use c07_process::prelude::*;
 
 fn main() -> Result<()> {

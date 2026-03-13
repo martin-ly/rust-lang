@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 高级异步控制流模块
 //!
 //! 本模块展示了 Rust 1.90 在复杂异步控制流场景中的高级应用：
@@ -10,7 +9,6 @@
 //! - 异步监控和指标收集
 //!
 //! 所有示例都使用 Rust 1.90 的最新特性，并包含详细的注释和最佳实践。
-
 use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
 use std::time::{Duration, Instant};

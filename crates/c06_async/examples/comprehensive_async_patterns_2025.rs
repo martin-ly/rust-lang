@@ -12,7 +12,6 @@
 //! ```bash
 //! cargo run --example comprehensive_async_patterns_2025
 //! ```
-
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::Duration;

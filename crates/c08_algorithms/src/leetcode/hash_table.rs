@@ -25,7 +25,6 @@
 //! - 383. Ransom Note（赎金信）
 //! - 389. Find the Difference（找不同）
 //! - 454. 4Sum II（四数相加 II）
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::HashMap;
 use std::collections::HashSet;
@@ -102,7 +101,7 @@ pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
         chars.sort_unstable();
         let key: String = chars.iter().collect();
 
-        map.entry(key).or_insert_with(Vec::new).push(s);
+        map.entry(key).or_default().push(s);
     }
 
     map.into_values().collect()
@@ -233,11 +232,10 @@ pub fn contains_nearby_duplicate(nums: Vec<i32>, k: i32) -> bool {
 
     // Rust 1.91 JIT 优化：滑动窗口 + HashMap
     for (i, &num) in nums.iter().enumerate() {
-        if let Some(&prev_index) = map.get(&num) {
-            if (i - prev_index) <= k as usize {
+        if let Some(&prev_index) = map.get(&num)
+            && (i - prev_index) <= k as usize {
                 return true;
             }
-        }
         map.insert(num, i);
     }
 
@@ -265,22 +263,20 @@ pub fn is_anagram(s: String, t: String) -> bool {
 
     // Rust 1.91 JIT 优化：字符频率统计
     for ch in s.chars() {
-        if let Some(index) = (ch as u32).checked_sub(b'a' as u32) {
-            if index < 26 {
+        if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
+            && index < 26 {
                 counts[index as usize] += 1;
             }
-        }
     }
 
     for ch in t.chars() {
-        if let Some(index) = (ch as u32).checked_sub(b'a' as u32) {
-            if index < 26 {
+        if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
+            && index < 26 {
                 counts[index as usize] -= 1;
                 if counts[index as usize] < 0 {
                     return false;
                 }
             }
-        }
     }
 
     counts.iter().all(|&count| count == 0)
@@ -391,12 +387,11 @@ pub fn intersect(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
 
     // 在较大数组中查找
     for &num in larger {
-        if let Some(count) = freq.get_mut(&num) {
-            if *count > 0 {
+        if let Some(count) = freq.get_mut(&num)
+            && *count > 0 {
                 result.push(num);
                 *count -= 1;
             }
-        }
     }
 
     result

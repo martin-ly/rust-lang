@@ -20,7 +20,6 @@
 //! - 643. Maximum Average Subarray I（子数组最大平均数 I）
 //! - 713. Subarray Product Less Than K（乘积小于 K 的子数组）
 //! - 904. Fruit Into Baskets（水果成篮）
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::HashMap;
 
@@ -243,11 +242,10 @@ pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
 
     // Rust 1.91 JIT 优化：字符频率统计
     for ch in p.chars() {
-        if let Some(index) = (ch as u32).checked_sub(b'a' as u32) {
-            if index < 26 {
+        if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
+            && index < 26 {
                 p_counts[index as usize] += 1;
             }
-        }
     }
 
     let s_chars: Vec<char> = s.chars().collect();
@@ -255,20 +253,17 @@ pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
     // Rust 1.91 JIT 优化：滑动窗口
     for i in 0..s_chars.len() {
         // 添加右边字符
-        if let Some(index) = (s_chars[i] as u32).checked_sub(b'a' as u32) {
-            if index < 26 {
+        if let Some(index) = (s_chars[i] as u32).checked_sub(b'a' as u32)
+            && index < 26 {
                 window_counts[index as usize] += 1;
             }
-        }
 
         // 移除左边字符（窗口大小超过 p_len）
-        if i >= p_len {
-            if let Some(index) = (s_chars[i - p_len] as u32).checked_sub(b'a' as u32) {
-                if index < 26 {
+        if i >= p_len
+            && let Some(index) = (s_chars[i - p_len] as u32).checked_sub(b'a' as u32)
+                && index < 26 {
                     window_counts[index as usize] -= 1;
                 }
-            }
-        }
 
         // 检查窗口是否为字母异位词（窗口大小达到 p_len 时开始检查）
         if i >= p_len - 1 {
@@ -315,11 +310,10 @@ pub fn check_inclusion(s1: String, s2: String) -> bool {
 
     // Rust 1.91 JIT 优化：字符频率统计
     for ch in s1.chars() {
-        if let Some(index) = (ch as u32).checked_sub(b'a' as u32) {
-            if index < 26 {
+        if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
+            && index < 26 {
                 s1_counts[index as usize] += 1;
             }
-        }
     }
 
     let s2_chars: Vec<char> = s2.chars().collect();
@@ -327,20 +321,17 @@ pub fn check_inclusion(s1: String, s2: String) -> bool {
     // Rust 1.91 JIT 优化：滑动窗口
     for i in 0..s2_chars.len() {
         // 添加右边字符
-        if let Some(index) = (s2_chars[i] as u32).checked_sub(b'a' as u32) {
-            if index < 26 {
+        if let Some(index) = (s2_chars[i] as u32).checked_sub(b'a' as u32)
+            && index < 26 {
                 window_counts[index as usize] += 1;
             }
-        }
 
         // 移除左边字符（窗口大小超过 s1_len）
-        if i >= s1_len {
-            if let Some(index) = (s2_chars[i - s1_len] as u32).checked_sub(b'a' as u32) {
-                if index < 26 {
+        if i >= s1_len
+            && let Some(index) = (s2_chars[i - s1_len] as u32).checked_sub(b'a' as u32)
+                && index < 26 {
                     window_counts[index as usize] -= 1;
                 }
-            }
-        }
 
         // 检查窗口是否为排列
         if i >= s1_len - 1 && window_counts == s1_counts {

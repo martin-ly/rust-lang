@@ -21,7 +21,6 @@
 //! - 278. First Bad Version（第一个错误的版本）
 //! - 367. Valid Perfect Square（有效的完全平方数）
 //! - 704. Binary Search（二分查找）
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 704. Binary Search（二分查找）

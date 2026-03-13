@@ -23,7 +23,6 @@
 //! console.log(reverse("hello"));          // "olleh"
 //! console.log(to_uppercase("rust wasm")); // "RUST WASM"
 //! ```
-
 use wasm_bindgen::prelude::*;
 
 /// 问候函数

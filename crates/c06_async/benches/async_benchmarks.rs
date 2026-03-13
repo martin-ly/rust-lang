@@ -11,7 +11,6 @@
 //! ```bash
 //! cargo bench --bench async_benchmarks
 //! ```
-
 use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
 use std::hint::black_box;
 use std::sync::Arc;

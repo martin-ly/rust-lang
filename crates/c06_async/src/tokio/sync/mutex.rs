@@ -38,7 +38,6 @@
 //!     mutex_test01().await;
 //! }
 //! ```
-
 use std::sync::Arc;
 use tokio::sync::Mutex;
 

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.93.0 WASM 特性实现模块
 //!
 //! 本模块展示了 Rust 1.93.0 在 WASM 场景中的应用，包括：
@@ -16,7 +15,6 @@
 //! - 版本: 1.0
 //! - Rust 版本: 1.93.0
 //! - Edition: 2024
-
 use std::collections::VecDeque;
 use std::fmt;
 use std::mem::MaybeUninit;

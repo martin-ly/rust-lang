@@ -47,7 +47,6 @@
 //! insertion_sort_verified(&mut arr);
 //! assert_eq!(arr, vec![1, 1, 3, 4, 5]);
 //! ```
-
 // 核心算法模块（Rust 1.90 特性对齐）
 pub mod algorithms;
 

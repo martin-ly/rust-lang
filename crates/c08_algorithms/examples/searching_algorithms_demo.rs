@@ -10,7 +10,6 @@
 //! ```bash
 //! cargo run --example searching_algorithms_demo
 //! ```
-
 use c08_algorithms::searching::{binary_search_sync, parallel_search};
 
 fn main() {

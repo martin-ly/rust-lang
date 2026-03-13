@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example greedy_algorithms_demo
 //! ```
-
 fn main() {
     println!("🚀 贪心算法示例\n");
     println!("{}", "=".repeat(60));

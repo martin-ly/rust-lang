@@ -6,7 +6,6 @@
 //! ```bash
 //! cargo run --example formal_verification_demo
 //! ```
-
 use c06_async::formal_verification;
 
 #[tokio::main]

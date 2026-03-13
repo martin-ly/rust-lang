@@ -42,7 +42,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.89.0
 //! - 作者: Rust 类型系统项目组
-
 use std::collections::HashMap;
 
 /// Rust 1.89 基础语法特性

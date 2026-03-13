@@ -1,7 +1,6 @@
 //! 实际应用场景示例集合
 //!
 //! 本文件包含各种实际应用场景的示例，展示Rust在实际项目中的使用
-
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;

@@ -2,7 +2,6 @@
 //! 
 //! 这个模块提供了增强的同步原语功能，包括死锁检测、
 //! 性能监控、自适应锁策略等 Rust 1.90 新特性
-
 use crate::error::{SyncError, SyncResult};
 use crate::types::{SyncConfig, SyncPrimitive};
 use std::collections::HashMap;

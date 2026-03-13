@@ -2,7 +2,6 @@
 //! 
 //! 这个程序展示了增强的错误处理功能，包括错误恢复、
 //! 错误链追踪、错误分类等 Rust 1.90 新特性
-
 #[cfg(feature = "async")]
 use c07_process::prelude::*;
 #[cfg(feature = "async")]
@@ -328,7 +327,7 @@ async fn demonstrate_error_chain_tracking(manager: &EnhancedErrorManager) -> Res
     let mut chain_errors: HashMap<String, Vec<&EnhancedErrorEntry>> = HashMap::new();
     for entry in &history {
         if let Some(chain_id) = &entry.chain_id {
-            chain_errors.entry(chain_id.clone()).or_insert_with(Vec::new).push(entry);
+            chain_errors.entry(chain_id.clone()).or_default().push(entry);
         }
     }
     

@@ -37,7 +37,6 @@
 //! - 改进的错误处理
 //!
 //! 所有示例都使用 Rust 1.89 的最新语法，并包含详细的注释和最佳实践。
-
 use std::collections::HashMap;
 use std::fmt::{self, Display};
 use std::sync::Arc;

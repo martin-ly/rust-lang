@@ -49,7 +49,6 @@
 //! # 运行 DNS 查询示例
 //! cargo run --example dns_lookup
 //! ```
-
 use c10_networks::protocol::dns::{DnsResolver, presets};
 
 #[tokio::main]

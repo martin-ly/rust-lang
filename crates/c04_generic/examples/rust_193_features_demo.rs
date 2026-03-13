@@ -6,7 +6,6 @@
 //! - Duration::from_nanos_u128 - 泛型时间计算
 //!
 //! 运行: cargo run -p c04_generic --example rust_193_features_demo
-
 use std::time::Duration;
 
 fn main() {

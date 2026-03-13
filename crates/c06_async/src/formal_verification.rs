@@ -81,7 +81,6 @@
 //!    每个资源有唯一所有者
 //!    访问资源需要获取所有权
 //! ```
-
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::Mutex;
@@ -358,12 +357,11 @@ pub mod deadlock_detection {
         pub async fn acquire(&self, task: &str, resource: &str) -> Result<(), &'static str> {
             let mut holders = self.resource_holders.lock().await;
 
-            if let Some(holder) = holders.get(resource) {
-                if holder != task {
+            if let Some(holder) = holders.get(resource)
+                && holder != task {
                     println!("  [Warning] {} 等待资源 {}，当前持有者: {}", task, resource, holder);
                     return Err("资源被占用");
                 }
-            }
 
             holders.insert(resource.to_string(), task.to_string());
             println!("  [Acquire] {} 获取资源 {}", task, resource);

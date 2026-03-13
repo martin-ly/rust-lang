@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 Edition 2024 新特性实现 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -6,7 +5,6 @@
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 //!
 //! 这个模块展示了如何在 c07_process 项目中使用最新的 Rust 1.90 特性
-
 use crate::error::{ProcessError, ProcessResult};
 use crate::types::{ProcessConfig, ProcessInfo};
 use std::collections::HashMap;

@@ -6,7 +6,6 @@
 //! - 断路器集成
 //! - 重试监控和统计
 //! - 自定义重试条件
-
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::time::{sleep, timeout};
@@ -99,8 +98,10 @@ impl RetryBackoff for ExponentialBackoff {
 
 /// 重试条件
 #[derive(Debug, Clone)]
+#[derive(Default)]
 pub enum RetryCondition {
     /// 总是重试
+    #[default]
     Always,
     /// 根据错误类型重试
     OnErrorType(Vec<String>),
@@ -108,11 +109,6 @@ pub enum RetryCondition {
     OnErrorMessage(String),
 }
 
-impl Default for RetryCondition {
-    fn default() -> Self {
-        RetryCondition::Always
-    }
-}
 
 /// 重试配置
 #[derive(Debug, Clone)]

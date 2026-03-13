@@ -1,7 +1,6 @@
 //! 性能基准测试模块
 //!
 //! 本模块提供了各种设计模式的性能基准测试
-
 use std::sync::Arc;
 use std::time::Instant;
 

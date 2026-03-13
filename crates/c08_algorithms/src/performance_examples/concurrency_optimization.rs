@@ -1,5 +1,4 @@
 //! 并发性能优化实践示例
-
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.91 宏系统特性实现模块（历史版本）
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -20,7 +19,6 @@
 //! - 版本: 1.1 (扩展版本)
 //! - Rust版本: 1.91.0
 //! - Edition: 2024
-
 use std::io::{BufRead, BufReader, Cursor};
 use std::ops::ControlFlow;
 

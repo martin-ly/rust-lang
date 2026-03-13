@@ -1,5 +1,4 @@
 //! P2P 模块（身份、发现、DHT、发布订阅、NAT 可达性）
-
 pub mod dht;
 pub mod discovery;
 pub mod identity;

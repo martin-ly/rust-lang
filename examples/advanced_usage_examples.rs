@@ -1,7 +1,6 @@
 //! 高级用法示例集合
 //!
 //! 本文件包含各种高级Rust用法示例，展示实际应用场景
-
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;

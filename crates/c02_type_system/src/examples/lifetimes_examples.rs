@@ -228,12 +228,12 @@ fn get_first_word(s: &str) -> &str {
         }
     }
     
-    &s[..]
+    s
 }
 
 /// 多重生命周期函数
 #[allow(unused_variables)]
-fn multiple_lifetimes<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
+fn multiple_lifetimes<'a>(x: &'a str, y: &str) -> &'a str {
     x
 }
 
@@ -502,7 +502,7 @@ enum Token<'a> {
 
 /// 性能示例函数
 #[allow(unused_variables)]
-fn no_runtime_cost<'a>(x: &'a str) -> &'a str {
+fn no_runtime_cost(x: &str) -> &str {
     x
 }
 

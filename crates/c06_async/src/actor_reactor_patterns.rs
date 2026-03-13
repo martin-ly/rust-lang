@@ -123,7 +123,6 @@
 //! │ Rust 实现    │ actix, bastion, xtra    │ tokio, async-std, smol   │
 //! └──────────────┴─────────────────────────┴──────────────────────────┘
 //! ```
-
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::mpsc;
@@ -140,6 +139,12 @@ pub mod simple_actor_system {
     /// Actor 地址（唯一标识符）
     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
     pub struct ActorId(u64);
+
+    /// Actor 消息发送器类型别名
+    type ActorMessageSender = mpsc::UnboundedSender<Box<dyn std::any::Any + Send>>;
+
+    /// Actor 注册表类型别名
+    type ActorRegistry = Arc<RwLock<HashMap<ActorId, ActorMessageSender>>>;
 
     /// 消息 trait
     pub trait Message: Send + 'static {
@@ -186,7 +191,7 @@ pub mod simple_actor_system {
     /// Actor 地址（用于发送消息）
     pub struct Addr<A: Actor> {
         id: ActorId,
-        tx: mpsc::UnboundedSender<Box<dyn std::any::Any + Send>>,
+        tx: ActorMessageSender,
         _phantom: std::marker::PhantomData<A>,
     }
 
@@ -231,7 +236,7 @@ pub mod simple_actor_system {
     /// Actor 系统
     pub struct ActorSystem {
         next_id: Arc<RwLock<u64>>,
-        actors: Arc<RwLock<HashMap<ActorId, mpsc::UnboundedSender<Box<dyn std::any::Any + Send>>>>>,
+        actors: ActorRegistry,
     }
 
     impl ActorSystem {
@@ -298,15 +303,12 @@ pub mod simple_actor_system {
     }
 
     /// 示例 Actor: 计数器
+    #[derive(Default)]
     pub struct Counter {
         count: i32,
     }
 
-    impl Default for Counter {
-        fn default() -> Self {
-            Self { count: 0 }
-        }
-    }
+    
 
     impl Counter {
         pub fn new() -> Self {
@@ -379,15 +381,12 @@ pub mod actix_analysis {
     pub struct Multiply(pub i32, pub i32);
 
     /// Calculator Actor
+    #[derive(Default)]
     pub struct Calculator {
         total: i32,
     }
 
-    impl Default for Calculator {
-        fn default() -> Self {
-            Self { total: 0 }
-        }
-    }
+    
 
     impl Calculator {
         pub fn new() -> Self {
@@ -509,9 +508,12 @@ pub mod reactor_pattern {
         async fn handle(&self, event: Event);
     }
 
+    /// 事件处理器注册表类型别名
+    type EventHandlerRegistry = Arc<Mutex<HashMap<(u64, EventType), Arc<dyn EventHandler>>>>;
+
     /// 简单的 Reactor 实现
     pub struct SimpleReactor {
-        handlers: Arc<Mutex<HashMap<(u64, EventType), Arc<dyn EventHandler>>>>,
+        handlers: EventHandlerRegistry,
         event_queue: Arc<Mutex<Vec<Event>>>,
     }
 

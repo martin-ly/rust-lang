@@ -13,7 +13,6 @@
 //! ```bash
 //! cargo run --example async_monitoring_demo
 //! ```
-
 use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};
 use std::collections::{HashMap, VecDeque};

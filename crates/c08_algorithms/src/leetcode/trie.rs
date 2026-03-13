@@ -14,7 +14,6 @@
 //! - 211. Design Add and Search Words Data Structure（添加与搜索单词 - 数据结构设计）
 //! - 212. Word Search II（单词搜索 II）
 //! - 720. Longest Word in Dictionary（词典中最长的单词）
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// Trie 节点结构
@@ -170,11 +169,10 @@ impl WordDictionary {
         if ch == '.' {
             // '.' 可以匹配任何字符
             for child in node.children.iter() {
-                if let Some(child_node) = child {
-                    if self.search_helper(child_node, word, index + 1) {
+                if let Some(child_node) = child
+                    && self.search_helper(child_node, word, index + 1) {
                         return true;
                     }
-                }
             }
             false
         } else {

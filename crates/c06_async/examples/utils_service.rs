@@ -6,7 +6,6 @@
 //! - GET /health           → 健康检查
 //! - POST /work {n:u32}    → 触发一次受策略控制的后端调用（重试/超时/熔断/限速）
 //! - /metrics              → Prometheus 指标（由 utils::metrics 暴露在 METRICS_ADDR）
-
 use std::fs;
 use std::net::SocketAddr;
 

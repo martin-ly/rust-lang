@@ -14,7 +14,6 @@
 //! ```bash
 //! cargo run --example distributed_systems_demo
 //! ```
-
 use std::collections::{HashMap, BTreeMap, VecDeque};
 use std::sync::Arc;
 use std::time::{Duration, Instant};

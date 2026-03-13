@@ -13,7 +13,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
-
 use std::collections::HashMap;
 use std::sync::{LazyLock, Mutex};
 
@@ -264,8 +263,8 @@ impl WasmImageProcessor {
                     } else {
                         curr
                     };
-                    let gradient = ((curr - prev) / 2).abs() as u8;
-                    edges[idx] = gradient.min(255);
+                    let gradient = ((curr - prev) / 2).unsigned_abs() as u8;
+                    edges[idx] = gradient;
                 }
             }
         }
@@ -728,7 +727,7 @@ impl<'a> WatParser<'a> {
         let mut string = String::new();
         let mut escaped = false;
 
-        while let Some(c) = self.chars.next() {
+        for c in self.chars.by_ref() {
             self.column += 1;
 
             if escaped {
@@ -859,9 +858,7 @@ impl<'a> SimpleCsvParser<'a> {
 
     /// 解析一行
     pub fn parse_line(&mut self) -> Option<Vec<String>> {
-        if self.chars.peek().is_none() {
-            return None;
-        }
+        self.chars.peek()?;
 
         let mut fields = Vec::new();
         loop {
@@ -939,7 +936,7 @@ impl Utf8Encoder {
     pub fn char_width(c: char) -> usize {
         if let Some(cp) = Self::code_point(c) {
             // 控制字符宽度为 0
-            if cp < 0x20 || (0x7F <= cp && cp < 0xA0) {
+            if cp < 0x20 || (0x7F..0xA0).contains(&cp) {
                 return 0;
             }
             // CJK 字符宽度为 2
@@ -994,7 +991,7 @@ impl WasmBase64 {
 
     /// 编码字节数组为 Base64
     pub fn encode(data: &[u8]) -> String {
-        let mut result = String::with_capacity((data.len() + 2) / 3 * 4);
+        let mut result = String::with_capacity(data.len().div_ceil(3) * 4);
         let chunks = data.chunks_exact(3);
         let remainder = chunks.remainder();
 

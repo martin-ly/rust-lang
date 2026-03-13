@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example backtracking_algorithms_demo
 //! ```
-
 fn main() {
     println!("🚀 回溯算法示例\n");
     println!("{}", "=".repeat(60));

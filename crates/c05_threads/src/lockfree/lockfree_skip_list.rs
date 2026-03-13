@@ -4,7 +4,6 @@
 //! 跳表是一种概率性数据结构，提供O(log n)的平均时间复杂度。
 //!
 //! 注意：完全无锁的跳表实现非常复杂，本实现使用了一些简化的技术。
-
 use std::sync::atomic::{AtomicUsize, Ordering as AtomicOrdering};
 
 /// 无锁跳表（概念性实现）

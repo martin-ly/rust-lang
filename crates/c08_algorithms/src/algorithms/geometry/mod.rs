@@ -1,7 +1,6 @@
 //! # 几何算法模块
 //! 
 //! 本模块实现了各种几何算法。
-
 use serde::{Serialize, Deserialize};
 
 /// 点结构

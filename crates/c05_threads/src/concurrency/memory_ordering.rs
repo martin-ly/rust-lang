@@ -2,7 +2,6 @@
 //!
 //! 演示基于 `Relaxed` 与 `SeqCst` 的基本可编译示例，后续可扩展
 //! Acquire/Release 与 AcqRel 的更复杂用例。
-
 #![allow(dead_code)]
 
 use std::sync::atomic::{AtomicUsize, Ordering};

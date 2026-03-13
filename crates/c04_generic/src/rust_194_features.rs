@@ -30,7 +30,6 @@
 //! // 3. 使用增强的 trait 边界
 //! let validator = GenericValidator::new();
 //! ```
-
 use std::marker::PhantomData;
 
 // ==================== Rust 1.94 真实特性: array_windows 泛型应用 ====================
@@ -225,7 +224,7 @@ pub trait MathConstants {
 }
 
 impl MathConstants for f32 {
-    const EULER_GAMMA: Self = 0.57721566_f32;
+    const EULER_GAMMA: Self = 0.577_215_7_f32;
     const GOLDEN_RATIO: Self = 1.618034_f32;
     const GOLDEN_RATIO_CONJUGATE: Self = -0.618034_f32;
 }
@@ -737,23 +736,23 @@ pub struct CompileTimeAssert<T: ?Sized> {
 
 impl<T: ?Sized> CompileTimeAssert<T> {
     /// 断言类型实现 Send
-    pub const fn assert_send() -> ()
+    pub const fn assert_send()
     where
         T: Send,
     {
-        ()
+        
     }
 
     /// 断言类型实现 Sync
-    pub const fn assert_sync() -> ()
+    pub const fn assert_sync()
     where
         T: Sync,
     {
-        ()
+        
     }
 
     /// 断言类型大小
-    pub const fn assert_size(expected: usize) -> ()
+    pub const fn assert_size(expected: usize)
     where
         T: Sized,
     {
@@ -875,7 +874,7 @@ pub fn demonstrate_rust_194_generic_features() {
     println!("\n9. 编译时泛型验证:");
     CompileTimeAssert::<i32>::assert_send();
     CompileTimeAssert::<i32>::assert_sync();
-    println!("   i32 IS_VALID: {}", bool::from(<i32 as TypeLevelValidation>::IS_VALID));
+    println!("   i32 IS_VALID: {}", <i32 as TypeLevelValidation>::IS_VALID);
     println!("   i32 SIZE: {} 字节", <i32 as TypeLevelValidation>::SIZE);
     println!("   i32 ALIGN: {} 字节", <i32 as TypeLevelValidation>::ALIGN);
 }

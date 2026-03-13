@@ -1,6 +1,5 @@
 //! 运行方式：
 //! cargo run -p c06_async --example utils_strategy_smoke
-
 use std::time::Duration;
 
 #[tokio::main]

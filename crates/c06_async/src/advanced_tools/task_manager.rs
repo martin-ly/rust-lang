@@ -7,7 +7,6 @@
 //! - 任务监控和统计
 //! - 任务失败重试
 //! - 任务取消和超时
-
 use std::collections::{HashMap, BinaryHeap};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -313,11 +312,10 @@ impl TaskManager {
         let tasks = self.tasks.read().await;
         if let Some(task) = tasks.get(&task_id) {
             for dep_id in &task.dependencies {
-                if let Some(dep_task) = tasks.get(dep_id) {
-                    if dep_task.status != TaskStatus::Completed {
+                if let Some(dep_task) = tasks.get(dep_id)
+                    && dep_task.status != TaskStatus::Completed {
                         return false;
                     }
-                }
             }
         }
         true
@@ -541,11 +539,10 @@ impl TaskManagerClone {
         let tasks = self.tasks.read().await;
         if let Some(task) = tasks.get(&task_id) {
             for dep_id in &task.dependencies {
-                if let Some(dep_task) = tasks.get(dep_id) {
-                    if dep_task.status != TaskStatus::Completed {
+                if let Some(dep_task) = tasks.get(dep_id)
+                    && dep_task.status != TaskStatus::Completed {
                         return false;
                     }
-                }
             }
         }
         true

@@ -9,7 +9,6 @@
 //! - 并发安全的数据结构
 //! - 异步错误处理
 //! - 性能监控和调优
-
 use std::collections::{HashMap, VecDeque};
 use std::sync::{Arc, Mutex, RwLock, Condvar};
 use std::sync::atomic::{AtomicUsize, AtomicBool, AtomicPtr, Ordering};
@@ -450,11 +449,10 @@ pub mod concurrent_data_structures {
         pub fn steal(&self) -> Option<T> {
             let stealers = self.stealers.lock().unwrap();
             for stealer in stealers.iter() {
-                if let Ok(mut tasks) = stealer.try_lock() {
-                    if let Some(task) = tasks.pop_back() {
+                if let Ok(mut tasks) = stealer.try_lock()
+                    && let Some(task) = tasks.pop_back() {
                         return Some(task);
                     }
-                }
             }
             None
         }
@@ -525,11 +523,10 @@ pub mod async_streams {
                 futures.push(future);
 
                 // 限制并发数量
-                if futures.len() >= self.buffer_size {
-                    if let Some(result) = futures.next().await {
+                if futures.len() >= self.buffer_size
+                    && let Some(result) = futures.next().await {
                         results.push(result?);
                     }
-                }
             }
 
             // 处理剩余的未来
@@ -764,13 +761,11 @@ pub mod work_stealing_scheduler {
 
         fn steal_task(&self) -> Option<Box<dyn Fn() + Send + Sync>> {
             for (i, other_queue) in self.other_workers.iter().enumerate() {
-                if i != self.id {
-                    if let Ok(mut queue) = other_queue.try_lock() {
-                        if let Some(task) = queue.pop_back() {
+                if i != self.id
+                    && let Ok(mut queue) = other_queue.try_lock()
+                        && let Some(task) = queue.pop_back() {
                             return Some(task);
                         }
-                    }
-                }
             }
             None
         }

@@ -5,7 +5,6 @@
 //! - 伪共享避免
 //! - 预取优化
 //! - 缓存友好的数据结构
-
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// 缓存行大小（通常为 64 字节）

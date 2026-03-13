@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 Edition 2024 最新特性演示 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -11,7 +10,6 @@
 //! - 增强的类型系统
 //! - 新的标准库功能
 //! - 性能优化特性
-
 use std::sync::{Arc, Mutex, atomic::{AtomicUsize, Ordering}};
 use std::thread;
 use std::collections::HashMap;
@@ -52,7 +50,7 @@ impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
         let mut data = [T::default(); _];
         for (i, &item) in slice.iter().enumerate() {
             if i < N {
-                data[i] = item.clone();
+                data[i] = item;
             }
         }
         Self { data }
@@ -280,7 +278,7 @@ impl PerformanceOptimizations {
 
     /// 使用内存预取优化
     pub fn memory_prefetch_optimization() {
-        let data = vec![1, 2, 3, 4, 5, 6, 7, 8];
+        let data = [1, 2, 3, 4, 5, 6, 7, 8];
 
         // 使用内存预取提示
         for (i, &value) in data.iter().enumerate() {

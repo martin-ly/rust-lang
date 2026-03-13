@@ -5,7 +5,6 @@
 //! - 条件变量
 //! - 原子操作
 //! - 读写锁
-
 use c05_threads::synchronization::mutex::*;
 
 fn main() {

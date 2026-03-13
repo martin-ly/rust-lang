@@ -9,7 +9,6 @@
 //! - 内存泄漏检测
 //! - 缓冲区溢出防护
 //! - 内存对齐和缓存优化
-
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::marker::PhantomData;
 use std::mem::{size_of, align_of};
@@ -364,7 +363,7 @@ pub mod smart_pointers {
             unsafe { &*self.data }
         }
 
-        pub fn get_mut(&self) -> &mut T {
+        pub fn get_mut(&mut self) -> &mut T {
             unsafe { &mut *self.data }
         }
     }
@@ -667,19 +666,13 @@ pub mod memory_alignment_cache {
 
     /// 缓存友好的数据结构
     #[repr(align(64))]
+    #[derive(Default)]
     pub struct CacheFriendlyStruct {
         pub hot_data: [u64; 8],    // 热数据，经常访问
         pub cold_data: [u8; 32],   // 冷数据，很少访问
     }
 
-    impl Default for CacheFriendlyStruct {
-        fn default() -> Self {
-            Self {
-                hot_data: [0; 8],
-                cold_data: [0; 32],
-            }
-        }
-    }
+    
 
     impl CacheFriendlyStruct {
         pub fn new() -> Self {

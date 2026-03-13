@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.89 功能 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -23,7 +22,6 @@
 //! - naked_functions 特性测试
 //! - dangerous_implicit_autorefs 特性测试
 //! - invalid_null_arguments 特性测试
-
 use c03_control_fn::rust_189_enhanced_features::Rust189EnhancedFeatures;
 
 /// let_chains 特性测试

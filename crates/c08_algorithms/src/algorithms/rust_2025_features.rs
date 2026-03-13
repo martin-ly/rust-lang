@@ -2,7 +2,6 @@
 //!
 //! 本模块展示了如何在算法实现中充分利用 Rust 2025 的最新特性，
 //! 包括异步闭包、RPITIT、AFIT、TAIT、生成器等。
-
 use std::future::Future;
 use std::pin::Pin;
 use futures::StreamExt;

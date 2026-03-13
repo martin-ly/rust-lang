@@ -1,7 +1,6 @@
 //! # WASI 应用示例
 //!
 //! 本模块展示了如何编写可以在本地操作系统上运行的 WASI 应用程序
-
 use std::env;
 use std::fs;
 use std::io::{self, Read, Write};

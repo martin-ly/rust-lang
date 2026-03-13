@@ -6,7 +6,6 @@
 //! - 异步实现（使用 Tokio）
 //! - 形式化验证和证明
 //! - 完整的文档和注释
-
 // 基础算法主题
 pub mod sorting;
 pub mod searching;
@@ -152,16 +151,16 @@ pub struct LibraryStats {
 
 /// 获取算法库统计信息
 pub fn get_library_stats() -> LibraryStats {
-    let stats = LibraryStats {
+    
+
+    // 这里会根据实际实现的算法数量来填充统计信息
+    // 暂时返回基础结构
+    LibraryStats {
         total_algorithms: 0,
         algorithms_by_category: std::collections::HashMap::new(),
         implementation_coverage: std::collections::HashMap::new(),
         formal_verification_coverage: 0,
-    };
-
-    // 这里会根据实际实现的算法数量来填充统计信息
-    // 暂时返回基础结构
-    stats
+    }
 }
 
 /// 获取所有算法信息

@@ -11,7 +11,6 @@
 //! ```bash
 //! cargo run --example signal_handling_demo
 //! ```
-
 use c07_process::prelude::*;
 
 fn main() -> Result<()> {

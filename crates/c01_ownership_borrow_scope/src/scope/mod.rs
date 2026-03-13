@@ -4,7 +4,6 @@
 //! 作用域进入/退出管理等功能。
 //! This module provides complete Rust scope management functionality, including scope stack,
 //! variable lifecycle tracking, scope entry/exit management, etc.
-
 use std::collections::HashMap;
 use std::fmt;
 

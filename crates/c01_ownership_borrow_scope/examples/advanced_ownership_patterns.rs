@@ -2,7 +2,6 @@
 //!
 //! 本示例展示了 Rust 中高级的所有权模式，包括复杂的所有权转移、借用模式和生命周期管理。
 //! This example demonstrates advanced ownership patterns in Rust, including complex ownership transfers, borrowing patterns, and lifetime management.
-
 //use c01_ownership_borrow_scope::*;
 //use std::time::Duration;
 
@@ -10,7 +9,6 @@
 /// 
 /// 展示复杂场景下的所有权转移和生命周期管理。
 /// Demonstrates ownership transfer and lifetime management in complex scenarios.
-
 pub mod complex_ownership_transfer {
     //use super::*;
 
@@ -115,7 +113,6 @@ pub mod complex_ownership_transfer {
 /// 
 /// 展示复杂场景下的借用模式和借用检查器优化。
 /// Demonstrates borrowing patterns and borrow checker optimizations in complex scenarios.
-
 pub mod advanced_borrowing_patterns {
     //use super::*;
 
@@ -192,7 +189,6 @@ pub mod advanced_borrowing_patterns {
 /// 
 /// 展示复杂场景下的生命周期管理和约束。
 /// Demonstrates lifetime management and constraints in complex scenarios.
-
 pub mod complex_lifetime_management {
     //use super::*;
 
@@ -268,7 +264,6 @@ pub mod complex_lifetime_management {
 /// 
 /// 展示智能指针的高级使用模式。
 /// Demonstrates advanced usage patterns of smart pointers.
-
 pub mod smart_pointer_advanced_patterns {
     use std::rc::Rc;
     use std::cell::RefCell;
@@ -350,7 +345,6 @@ pub mod smart_pointer_advanced_patterns {
 /// 
 /// 展示并发环境下的所有权管理。
 /// Demonstrates ownership management in concurrent environments.
-
 pub mod concurrent_ownership_patterns {
     use std::sync::{Arc, Mutex};
     use std::thread;
@@ -444,7 +438,6 @@ pub mod concurrent_ownership_patterns {
 /// 
 /// 展示所有权系统的性能优化模式。
 /// Demonstrates performance optimization patterns of the ownership system.
-
 pub mod performance_optimization_patterns {
 
     /// ## 6.1 零成本抽象优化 / Zero-cost Abstraction Optimization

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.89 综合特性演示示例
 //!
 //! 本示例展示了Rust 1.89版本的核心新特性的综合应用：
@@ -6,7 +5,6 @@
 //! - 常量泛型改进
 //! - 异步控制流增强
 //! - 性能优化特性
-
 use c03_control_fn::async_control_flow::AsyncStateMachine;
 use c03_control_fn::async_control_flow_189::AsyncControlFlowExecutor189;
 use c03_control_fn::performance_optimization_189::{COptimizedLayout, DefaultLayout, fast_add};

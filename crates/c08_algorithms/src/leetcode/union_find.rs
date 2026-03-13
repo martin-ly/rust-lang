@@ -6,7 +6,6 @@
 //!
 //! 1. **性能优化**: 使用路径压缩和按秩合并优化
 //! 2. **内存优化**: 高效的并查集数据结构
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::{HashMap, HashSet};
 
@@ -132,12 +131,11 @@ pub fn num_islands_union_find(grid: Vec<Vec<char>>) -> i32 {
                     let nj = j as i32 + dy;
                     if ni >= 0 && nj >= 0 && (ni as usize) < rows && (nj as usize) < cols {
                         let nidx = ni as usize * cols + nj as usize;
-                        if grid[ni as usize][nj as usize] == '1' {
-                            if uf.find(idx) != uf.find(nidx) {
+                        if grid[ni as usize][nj as usize] == '1'
+                            && uf.find(idx) != uf.find(nidx) {
                                 uf.union(idx, nidx);
                                 count -= 1;
                             }
-                        }
                     }
                 }
             }
@@ -235,7 +233,7 @@ pub fn accounts_merge(accounts: Vec<Vec<String>>) -> Vec<Vec<String>> {
     let mut index_to_emails: HashMap<usize, HashSet<String>> = HashMap::new();
     for (email, &index) in &email_to_index {
         let root = uf.find(index);
-        index_to_emails.entry(root).or_insert_with(HashSet::new).insert(email.clone());
+        index_to_emails.entry(root).or_default().insert(email.clone());
     }
 
     // 构建结果

@@ -26,7 +26,6 @@
 //!   -p 8080:8080 \
 //!   my-wasm-microservice:latest
 //! ```
-
 use std::env;
 use std::io::{Read, Write};
 use std::net::{TcpListener, TcpStream};

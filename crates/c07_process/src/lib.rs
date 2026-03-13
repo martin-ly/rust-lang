@@ -34,7 +34,6 @@
 //!     Ok(())
 //! }
 //! ```
-
 use serde::{Deserialize, Serialize};
 
 // 核心模块

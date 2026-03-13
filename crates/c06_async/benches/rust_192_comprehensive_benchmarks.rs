@@ -10,7 +10,6 @@
 //! ```bash
 //! cargo bench --bench rust_192_comprehensive_benchmarks
 //! ```
-
 use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId, Throughput};
 use std::sync::Arc;
 use std::num::NonZeroUsize;

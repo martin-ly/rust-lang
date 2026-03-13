@@ -1,7 +1,6 @@
 //! 微基准测试：迭代器管道与锁策略对比
 //!
 //! 本文件提供可运行的基准测试，对比不同实现的性能特征。
-
 use criterion::{criterion_group, criterion_main, Criterion};
 use std::hint::black_box;
 use futures::executor::block_on;

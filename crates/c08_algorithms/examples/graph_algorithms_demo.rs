@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example graph_algorithms_demo
 //! ```
-
 use c08_algorithms::graph::bfs_shortest_path_sync;
 use std::collections::HashMap;
 

@@ -5,7 +5,6 @@
 //! - 自适应读写锁
 //! - 自适应自旋锁
 //! - 混合锁策略
-
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
@@ -263,36 +262,34 @@ impl<T> AdaptiveSpinLock<T> {
         let spin_duration = self.spin_duration.load(Ordering::Relaxed);
         let _backoff_factor = self.backoff_factor.load(Ordering::Relaxed);
 
-        loop {
-            // 尝试获取锁
+        // 尝试获取锁
+        if let Ok(mut guard) = self.data.try_lock() {
+            self.stats.record_acquire();
+            return f(&mut guard);
+        }
+
+        // 自旋等待
+        let spin_start = Instant::now();
+        while spin_start.elapsed().as_micros() < spin_duration as u128 {
             if let Ok(mut guard) = self.data.try_lock() {
                 self.stats.record_acquire();
                 return f(&mut guard);
             }
-
-            // 自旋等待
-            let spin_start = Instant::now();
-            while spin_start.elapsed().as_micros() < spin_duration as u128 {
-                if let Ok(mut guard) = self.data.try_lock() {
-                    self.stats.record_acquire();
-                    return f(&mut guard);
-                }
-                self.stats.record_spin();
-            }
-
-            // 自旋失败，使用阻塞锁
-            self.stats.record_contention();
-            let wait_start = Instant::now();
-            let mut guard = self.data.lock().unwrap();
-            let wait_time = wait_start.elapsed();
-            self.stats.record_wait(wait_time);
-            self.stats.record_acquire();
-
-            // 自适应调整自旋时间
-            self.adapt_spin_duration(wait_time);
-
-            return f(&mut guard);
+            self.stats.record_spin();
         }
+
+        // 自旋失败，使用阻塞锁
+        self.stats.record_contention();
+        let wait_start = Instant::now();
+        let mut guard = self.data.lock().unwrap();
+        let wait_time = wait_start.elapsed();
+        self.stats.record_wait(wait_time);
+        self.stats.record_acquire();
+
+        // 自适应调整自旋时间
+        self.adapt_spin_duration(wait_time);
+
+        f(&mut guard)
     }
 
     fn adapt_spin_duration(&self, wait_time: Duration) {

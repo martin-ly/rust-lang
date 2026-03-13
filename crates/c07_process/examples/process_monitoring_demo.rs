@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example process_monitoring_demo
 //! ```
-
 use c07_process::prelude::*;
 use c07_process::SystemResources;
 

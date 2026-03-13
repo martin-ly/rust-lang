@@ -1,5 +1,4 @@
 //! 通用优先队列封装：最小堆/最大堆，支持同步/异步批处理
-
 use anyhow::Result;
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;

@@ -1,5 +1,4 @@
 //! 变型（Variance）、GATs 与 HRTB 示例
-
 // 1) 变型直觉示例
 fn covariant_ref<'short, 'long: 'short>(r: &'long str) -> &'short str { r }
 

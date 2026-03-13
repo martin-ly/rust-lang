@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example generic_trait_object_demo
 //! ```
-
 use std::time::Instant;
 
 /// 形状trait

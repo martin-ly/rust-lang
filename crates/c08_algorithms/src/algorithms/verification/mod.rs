@@ -2,7 +2,6 @@
 //!
 //! 本模块提供算法的形式化证明、正确性验证和复杂度分析。
 //! 确保算法的数学正确性和性能保证。
-
 pub mod formal_proofs;
 pub mod correctness;
 pub mod complexity_analysis;

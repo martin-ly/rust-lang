@@ -27,7 +27,6 @@
 //!
 //! - [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
 //! - [The Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)
-
 #![warn(missing_docs)]
 #![warn(clippy::all)]
 

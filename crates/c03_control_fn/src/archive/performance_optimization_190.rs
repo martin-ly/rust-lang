@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 性能优化特性模块
 //!
 //! 本模块专门展示 Rust 1.90 版本中的性能优化特性：
@@ -10,7 +9,6 @@
 //! - 零成本抽象优化
 //!
 //! 所有示例都使用 Rust 1.90 的最新性能优化特性，并包含详细的基准测试。
-
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};

@@ -12,7 +12,6 @@
 //! ```bash
 //! cargo run --example async_database_demo
 //! ```
-
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};

@@ -48,7 +48,6 @@
 //! ```bash
 //! cargo run --example glommio_comprehensive_2025
 //! ```
-
 #[cfg(target_os = "linux")]
 fn main() {
     use glommio::{

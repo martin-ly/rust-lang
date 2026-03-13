@@ -9,7 +9,6 @@
 //! - **复杂度分析**: 主定理、摊还分析、渐进分析
 //! - **多种实现**: 同步、并行、异步、分布式
 //! - **Rust 1.90**: GATs、Async Traits、常量泛型
-
 pub mod sorting;
 pub mod searching;
 pub mod graph;

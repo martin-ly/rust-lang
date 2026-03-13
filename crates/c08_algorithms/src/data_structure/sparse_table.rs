@@ -1,5 +1,4 @@
 //! Sparse Table（稀疏表）：支持幂等操作的静态区间查询，如 RMQ(min/max)、GCD、按位与/或/异或。
-
 #[derive(Clone, Debug)]
 pub struct SparseTable<T> {
     pub n: usize,

@@ -2,7 +2,6 @@
 //!
 //! 本模块实现了各种同步排序算法，提供传统的单线程排序实现。
 //! 适用于小到中等规模的数据排序。
-
 use super::*;
 use crate::algorithms::execution_modes::SyncAlgorithm;
 //use std::cmp::Ordering;

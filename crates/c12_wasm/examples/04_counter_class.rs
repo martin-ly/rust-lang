@@ -28,7 +28,6 @@
 //! counter.reset();
 //! console.log(counter.value);  // 0
 //! ```
-
 use wasm_bindgen::prelude::*;
 
 /// 计数器结构体

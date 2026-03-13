@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.91 泛型特性实现模块（历史版本）
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -17,7 +16,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.91.0
 //! - Edition: 2024
-
 use std::collections::HashMap;
 use std::ops::ControlFlow;
 
@@ -81,10 +79,7 @@ pub mod generic_jit_optimizations {
         T: Clone + std::fmt::Debug,
     {
         // Rust 1.91 优化：泛型迭代器性能提升
-        items
-            .iter()
-            .cloned()
-            .collect()
+        items.to_vec()
     }
 
     /// 复杂泛型迭代器链示例
@@ -98,8 +93,7 @@ pub mod generic_jit_optimizations {
         items
             .iter()
             .filter(|x| predicate(x))
-            .cloned()
-            .take(100)
+            .take(100).cloned()
             .collect()
     }
 
@@ -497,13 +491,13 @@ pub mod higher_ranked_trait_bounds {
 
     /// HRTB 在 trait 对象中的应用
     pub trait Processor {
-        fn process<'a>(&self, item: &'a str) -> bool;
+        fn process(&self, item: &str) -> bool;
     }
 
     pub struct FilterProcessor;
 
     impl Processor for FilterProcessor {
-        fn process<'a>(&self, item: &'a str) -> bool {
+        fn process(&self, item: &str) -> bool {
             item.len() > 3
         }
     }
@@ -576,7 +570,7 @@ pub mod monomorphization_optimization {
         let int_result = generic_compute(42);
         println!("整数计算: {}", int_result);
 
-        let float_result = generic_compute(3.14);
+        let float_result = generic_compute(std::f64::consts::SQRT_2);
         println!("浮点数计算: {}", float_result);
 
         let numbers = vec![1, 2, 3, 4, 5];

@@ -1,5 +1,4 @@
 //! 并查集（DSU/Union-Find）：按秩合并 + 路径压缩
-
 #[derive(Clone, Debug)]
 pub struct DisjointSet {
     parent: Vec<usize>,

@@ -298,7 +298,7 @@ impl ErrorRecovery {
                 },
                 RecoveryStrategy::Fallback { default_value } => {
                     // 简化实现，实际中需要根据类型进行转换
-                    Err(AppError::Unknown(format!("Fallback not implemented for type T")))
+                    Err(AppError::Unknown("Fallback not implemented for type T".to_string()))
                 },
                 RecoveryStrategy::Skip => {
                     Err(AppError::Unknown("Operation skipped".to_string()))

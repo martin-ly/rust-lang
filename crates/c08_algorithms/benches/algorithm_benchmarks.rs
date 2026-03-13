@@ -1,7 +1,6 @@
 //! 算法性能基准测试
 //!
 //! 本文件包含各种算法的性能基准测试，用于评估2025年最新优化后的性能
-
 use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
 use std::hint::black_box;
 use c08_algorithms::algorithms::{

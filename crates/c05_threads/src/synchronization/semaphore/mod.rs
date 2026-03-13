@@ -1,7 +1,6 @@
 //! 计数信号量（基于通道/Condvar 简化实现）
 //! - 限流并发度
 //! - 异步无依赖，纯 std 同步原语
-
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;
 
@@ -58,7 +57,7 @@ pub fn throttle_concurrency(tasks: usize, max_parallel: usize) -> usize {
     for h in handles {
         h.join().unwrap();
     }
-    let x = *completed.lock().unwrap(); x
+     *completed.lock().unwrap()
 }
 
 #[cfg(test)]

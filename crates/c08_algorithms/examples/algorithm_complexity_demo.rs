@@ -11,7 +11,6 @@
 //! ```bash
 //! cargo run --example algorithm_complexity_demo
 //! ```
-
 use std::time::Instant;
 
 fn main() {

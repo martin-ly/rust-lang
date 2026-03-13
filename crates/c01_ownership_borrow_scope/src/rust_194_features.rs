@@ -12,7 +12,6 @@
 //! - 版本: 1.0
 //! - Rust 版本: 1.94.0
 //! - Edition: 2024
-
 use std::cell::RefCell;
 use std::mem::MaybeUninit;
 use std::ops::Deref;
@@ -98,7 +97,6 @@ pub fn count_increasing_triplets(data: &[i32]) -> usize {
 /// ## 注意
 /// 这些新方法在 Rust 1.94.0 中引入。在之前的版本中，可以使用 OnceCell/OnceLock 或
 /// 现有的 LazyCell/LazyLock API 实现类似功能。
-
 use std::cell::OnceCell;
 use std::sync::OnceLock;
 
@@ -292,10 +290,7 @@ impl<T> Drop for SafeBuffer<T> {
     fn drop(&mut self) {
         // 仅释放已初始化的元素
         unsafe {
-            std::ptr::drop_in_place(std::slice::from_raw_parts_mut(
-                self.buffer.as_mut_ptr() as *mut T,
-                self.initialized,
-            ));
+            std::ptr::drop_in_place(std::ptr::slice_from_raw_parts_mut(self.buffer.as_mut_ptr() as *mut T, self.initialized));
         }
     }
 }
@@ -463,7 +458,7 @@ pub mod math_consts_f32 {
     /// 
     /// # 数学定义
     /// γ = lim(n→∞) [Σ(1/k, k=1..n) - ln(n)]
-    pub const EULER_GAMMA: f32 = 0.57721566_f32;
+    pub const EULER_GAMMA: f32 = 0.577_215_7_f32;
 
     /// 黄金比例 (Golden Ratio)
     /// 
@@ -641,7 +636,7 @@ pub fn demonstrate_rust_194_features() {
     println!("   初始化后 try_get(): {:?}", cache.try_get().map(|v| v.as_slice()));
     
     // 使用 force_get_mut 获取可变引用
-    let mutable_ref = cache.force_get_mut(|| vec![]);
+    let mutable_ref = cache.force_get_mut(std::vec::Vec::new);
     mutable_ref.push(6);
     println!("   修改后: {:?}", cache.try_get());
 

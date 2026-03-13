@@ -5,7 +5,6 @@
 //! - 分布式算法  
 //! - 机器学习算法
 //! - 密码学算法
-
 use rayon::prelude::*;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
@@ -1022,7 +1021,7 @@ impl SHA256 {
     }
 
     fn right_rotate(value: u32, shift: u32) -> u32 {
-        (value >> shift) | (value << (32 - shift))
+        value.rotate_right(shift)
     }
 
     const K: [u32; 64] = [

@@ -36,7 +36,6 @@
 //! # 验证安装
 //! wasmedge --version
 //! ```
-
 use std::fs;
 
 /// WASI-NN 错误类型

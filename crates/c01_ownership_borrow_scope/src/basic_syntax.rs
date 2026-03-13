@@ -4,7 +4,6 @@
 //! 包含详细的注释、规范的语言使用和全面的解释示例。
 //! This module provides detailed explanations of Rust's ownership, borrowing, and scope system basic syntax,
 //! including detailed comments, standardized language usage, and comprehensive explanatory examples.
-
 // use std::collections::HashMap; // 未使用，已注释 / unused, commented out
 use std::fmt;
 use std::rc::Rc;

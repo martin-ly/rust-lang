@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! # Rust 1.92.0 泛型编程特性实现模块 / Rust 1.92.0 Generic Programming Features Implementation Module
 //!
 //! 本模块实现了 Rust 1.92.0 版本中与泛型编程相关的新特性和改进，包括：
@@ -19,7 +18,6 @@
 //! - Edition: 2024
 //! - 最后更新: 2025-12-11
 //! - 最后更新: 2025-12-11
-
 use std::marker::PhantomData;
 use std::num::NonZeroUsize;
 

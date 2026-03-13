@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example algorithm_comparison_demo
 //! ```
-
 use std::time::Instant;
 
 fn main() {

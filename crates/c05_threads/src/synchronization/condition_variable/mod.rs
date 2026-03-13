@@ -1,7 +1,6 @@
 //! 条件变量（Condvar）示例
 //! - 经典生产者/消费者
 //! - 超时等待与虚假唤醒处理
-
 use std::collections::VecDeque;
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;
@@ -67,7 +66,7 @@ pub fn bounded_queue_demo(
     for h in handles {
         h.join().unwrap();
     }
-    let x = *consumed_total.lock().unwrap(); x
+     *consumed_total.lock().unwrap()
 }
 
 /// 超时等待：直到某事件发生或达到截止时间

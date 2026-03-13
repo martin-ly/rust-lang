@@ -1,7 +1,6 @@
 //! # 搜索算法模块
 //!
 //! 本模块实现了各种搜索算法。
-
 use serde::{Serialize, Deserialize};
 
 /// 搜索算法类型

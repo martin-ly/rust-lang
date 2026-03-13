@@ -1,5 +1,4 @@
 //! 宏系统测试套件
-
 #[test]
 fn test_declarative_macro() {
     // 测试声明宏的基本功能

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.91 异步编程特性实现模块（历史版本）
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -17,7 +16,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.91.0
 //! - Edition: 2024
-
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
 
@@ -666,11 +664,10 @@ pub mod async_cache_system {
         pub async fn get(&self, key: &K) -> Option<V> {
             let cache = self.cache.read().await;
 
-            if let Some(entry) = cache.get(key) {
-                if !entry.is_expired() {
+            if let Some(entry) = cache.get(key)
+                && !entry.is_expired() {
                     return Some(entry.value.clone());
                 }
-            }
 
             None
         }

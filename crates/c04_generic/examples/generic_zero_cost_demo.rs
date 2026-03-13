@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example generic_zero_cost_demo
 //! ```
-
 use std::time::Instant;
 
 /// 泛型计算函数

@@ -1,7 +1,6 @@
 //! Rust 1.90 Edition 2024 新特性演示程序
 //! 
 //! 这个程序展示了如何在 c07_process 项目中使用最新的 Rust 1.90 特性
-
 use c07_process::prelude::*;
 use c07_process::prelude::{Rust190Features, AsyncTaskDemo, TaskStatus, ProcessConfig, ProcessManager, IpcManager, IpcConfig, Message, SyncManager, SyncConfig};
 use c07_process::error::ProcessError;

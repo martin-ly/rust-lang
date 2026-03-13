@@ -12,7 +12,6 @@
 //! ```bash
 //! cargo run --example comprehensive_async_demo
 //! ```
-
 use std::time::Duration;
 use std::sync::Arc;
 use tokio::sync::{Mutex, RwLock, Semaphore, Notify};

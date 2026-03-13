@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example cross_platform_demo
 //! ```
-
 use c07_process::prelude::*;
 
 fn main() -> Result<()> {

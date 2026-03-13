@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 综合特性演示
 //!
 //! 本示例展示了 Rust 1.90 版本的所有主要新特性和增强功能：
@@ -13,7 +12,6 @@
 //! ```bash
 //! cargo run --example rust_190_comprehensive_demo
 //! ```
-
 use c03_control_fn::{
     rust_190_features::*,
     async_control_flow_190::{AsyncResourceManager, AsyncFileResource, DatabaseResource, AsyncStateMachine190, AsyncState, demonstrate_async_control_flow_190},

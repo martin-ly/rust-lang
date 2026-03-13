@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! # Rust 1.89 特性示例 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -34,7 +33,6 @@
 //! - 异步闭包改进
 //! - 异步迭代器支持
 //! - 异步运行时优化
-
 //use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};

@@ -7,7 +7,6 @@
 //! ```bash
 //! cargo bench --bench array_processing_bench
 //! ```
-
 use c12_wasm::array_examples::*;
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;

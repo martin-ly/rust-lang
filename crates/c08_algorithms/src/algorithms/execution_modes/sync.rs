@@ -2,7 +2,6 @@
 //! 
 //! 本模块实现同步算法执行，提供传统的单线程算法执行方式。
 //! 适用于 CPU 密集型任务和需要确定性执行顺序的场景。
-
 use super::{SyncAlgorithm, ExecutionResult};
 use std::time::Instant;
 

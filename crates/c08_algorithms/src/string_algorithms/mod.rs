@@ -1,5 +1,4 @@
 //! 字符串算法：KMP 与 Rabin-Karp（同步 / 异步）
-
 #[cfg(feature = "with-aho")]
 use aho_corasick::AhoCorasick;
 use anyhow::Result;

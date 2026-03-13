@@ -10,7 +10,6 @@
 //! ```bash
 //! cargo bench --bench rust_192_benchmarks
 //! ```
-
 use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId, Throughput};
 use std::hint::black_box;
 use c03_control_fn::rust_192_features::{

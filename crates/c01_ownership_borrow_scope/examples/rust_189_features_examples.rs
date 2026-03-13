@@ -31,7 +31,6 @@
 //!
 //! 本示例展示了 Rust 1.89 版本在所有权、借用和作用域系统方面的新特性和改进。
 //! This example demonstrates the new features and improvements in Rust 1.89's ownership, borrowing, and scope systems.
-
 //use c01_ownership_borrow_scope::*;
 //use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
@@ -120,7 +119,6 @@ pub mod improved_borrow_checker {
 ///
 /// Rust 1.89 版本改进了生命周期推断算法，减少了需要显式生命周期注解的情况。
 /// Rust 1.89 has improved lifetime inference algorithms, reducing cases where explicit lifetime annotations are needed.
-
 pub mod enhanced_lifetime_inference {
 
     /// ## 2.1 智能生命周期省略 / Smart Lifetime Elision
@@ -170,7 +168,6 @@ pub mod enhanced_lifetime_inference {
 ///
 /// Rust 1.89 版本在内存管理方面进行了多项优化。
 /// Rust 1.89 has made several optimizations in memory management.
-
 pub mod optimized_memory_management {
 
     /// ## 3.1 改进的堆分配 / Improved Heap Allocation
@@ -240,7 +237,6 @@ pub mod optimized_memory_management {
 ///
 /// Rust 1.89 版本在并发安全方面进行了多项改进。
 /// Rust 1.89 has made several improvements in concurrency safety.
-
 pub mod enhanced_concurrency_safety {
     use super::*;
 
@@ -332,7 +328,6 @@ pub mod enhanced_concurrency_safety {
 ///
 /// Rust 1.89 版本对智能指针进行了多项增强。
 /// Rust 1.89 has made several enhancements to smart pointers.
-
 pub mod smart_pointer_enhancements {
     use std::rc::Rc;
     use std::cell::RefCell;
@@ -380,7 +375,6 @@ pub mod smart_pointer_enhancements {
 ///
 /// Rust 1.89 版本在编译器优化方面进行了多项改进。
 /// Rust 1.89 has made several improvements in compiler optimizations.
-
 pub mod compiler_optimizations {
 
     /// ## 6.1 改进的内联优化 / Improved Inline Optimization
@@ -424,7 +418,6 @@ pub mod compiler_optimizations {
 ///
 /// Rust 1.89 版本的工具链得到了多项改进。
 /// Rust 1.89's toolchain has received several improvements.
-
 pub mod toolchain_improvements {
 
     /// ## 7.1 改进的 Clippy / Improved Clippy

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.91 特性实现模块（历史版本）
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -19,7 +18,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.91.0
 //! - Edition: 2024
-
 use std::io::{BufRead, BufReader, Cursor};
 use std::ops::ControlFlow;
 
@@ -412,10 +410,7 @@ pub mod type_checker_optimizations {
         T: Clone + std::fmt::Debug,
     {
         // Rust 1.91 优化：类型推断性能提升
-        items
-            .iter()
-            .cloned()
-            .collect()
+        items.to_vec()
     }
 
     /// 泛型类型推断示例

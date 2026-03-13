@@ -1,7 +1,6 @@
 //! # 优化算法模块
 //!
 //! 本模块实现了各种优化算法。
-
 //use serde::{Serialize, Deserialize};
 
 /// 优化算法实现

@@ -1,7 +1,6 @@
 //! 简化的演示模块
 //!
 //! 本模块提供了简化的演示功能，避免复杂的线程安全问题
-
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};

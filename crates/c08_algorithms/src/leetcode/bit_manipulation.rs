@@ -20,7 +20,6 @@
 //! - 371. Sum of Two Integers（两整数之和）
 //! - 461. Hamming Distance（汉明距离）
 //! - 476. Number Complement（数字的补数）
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 136. Single Number（只出现一次的数字）
@@ -184,7 +183,7 @@ pub fn get_sum(a: i32, b: i32) -> i32 {
     // Rust 1.91 JIT 优化：位运算加法
     while b != 0 {
         let carry = (a & b) << 1; // 计算进位
-        a = a ^ b; // 异或得到无进位的和
+        a ^= b; // 异或得到无进位的和
         b = carry;
     }
 

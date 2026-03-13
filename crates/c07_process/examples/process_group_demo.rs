@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example process_group_demo
 //! ```
-
 use c07_process::prelude::*;
 use c07_process::ProcessGroupManager;
 use std::collections::HashMap;

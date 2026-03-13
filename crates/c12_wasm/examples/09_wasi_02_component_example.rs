@@ -41,7 +41,6 @@
 //! ```bash
 //! wasmtime run target/wasm32-wasip2/release/examples/09_wasi_02_component_example.wasm
 //! ```
-
 use std::fs;
 
 /// 应用配置

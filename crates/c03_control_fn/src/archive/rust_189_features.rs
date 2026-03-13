@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! # Rust 1.89 特性示例 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -30,7 +29,6 @@
 //! # Rust 1.89 最新特性模块
 //!
 //! 包含异步trait、GATs、常量泛型等核心新特性
-
 use std::collections::HashMap;
 use std::fmt::Display;
 use std::future::Future;

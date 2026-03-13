@@ -32,7 +32,6 @@
 //! let validator = PreciseTypeValidator::new();
 //! assert!(validator.validate::<i32>());
 //! ```
-
 use std::marker::PhantomData;
 
 // ==================== Rust 1.94 真实特性: 数学常量 ====================
@@ -51,7 +50,6 @@ use std::marker::PhantomData;
 /// - 数学计算和算法实现
 /// - 黄金分割搜索算法
 /// - 数论和特殊函数计算
-
 // use std::f32;  // 目前直接使用模块常量
 // use std::f64;
 
@@ -63,7 +61,7 @@ pub mod math_consts_f32 {
     /// 
     /// # 数学定义
     /// γ = lim(n→∞) [Σ(1/k, k=1..n) - ln(n)]
-    pub const EULER_GAMMA: f32 = 0.57721566_f32;
+    pub const EULER_GAMMA: f32 = 0.577_215_7_f32;
 
     /// 黄金比例 (Golden Ratio)
     /// 
@@ -239,7 +237,7 @@ pub fn char_to_usize(c: char) -> usize {
 /// 将字符串中所有字符转换为 usize 值
 #[allow(dead_code)]
 pub fn string_to_char_values(s: &str) -> Vec<usize> {
-    s.chars().map(|c| char_to_usize(c)).collect()
+    s.chars().map(char_to_usize).collect()
 }
 
 /// Unicode 字符信息结构
@@ -706,7 +704,6 @@ impl SequenceValidator {
 /// - 编译器能更智能地推断 LazyCell 中存储的类型
 /// - 减少显式类型标注的需要
 /// - 更好的闭包类型捕获
-
 use std::cell::OnceCell;
 use std::sync::OnceLock;
 

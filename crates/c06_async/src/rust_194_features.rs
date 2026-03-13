@@ -13,7 +13,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
-
 use std::iter::Peekable;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::LazyLock;
@@ -292,12 +291,11 @@ impl AsyncTokenStream {
     ///
     /// Rust 1.94.0: 使用 next_if_map 模式
     pub async fn parse_number(&mut self) -> Option<f64> {
-        if let Some(token) = self.peek().await {
-            if let Ok(num) = token.parse::<f64>() {
+        if let Some(token) = self.peek().await
+            && let Ok(num) = token.parse::<f64>() {
                 self.position += 1;
                 return Some(num);
             }
-        }
         None
     }
 }
@@ -349,12 +347,11 @@ impl<I: Iterator<Item = String>> AsyncExpressionParser<I> {
         tokio::time::sleep(Duration::from_micros(1)).await;
 
         // 使用 next_if_map 模式
-        if let Some(token) = self.tokens.peek() {
-            if let Ok(num) = token.parse::<f64>() {
+        if let Some(token) = self.tokens.peek()
+            && let Ok(num) = token.parse::<f64>() {
                 self.tokens.next();
                 return Some(num);
             }
-        }
         None
     }
 }

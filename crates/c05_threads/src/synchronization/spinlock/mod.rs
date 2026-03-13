@@ -1,7 +1,6 @@
 //! 自旋锁（教学示例，生产环境请优先用 `Mutex`）
 //! - 基于 `AtomicBool` 的简化自旋锁
 //! - 支持 `try_lock`
-
 use std::cell::UnsafeCell;
 use std::hint;
 use std::ops::{Deref, DerefMut};
@@ -92,7 +91,7 @@ pub fn spinlock_demo(workers: usize, iters: usize) -> usize {
     for h in handles {
         h.join().unwrap();
     }
-    let x = *lock.lock(); x
+     *lock.lock()
 }
 
 #[cfg(test)]

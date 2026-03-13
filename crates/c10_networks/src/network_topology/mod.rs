@@ -1,5 +1,4 @@
 //! 网络拓扑与路由发现（教学化简化版）
-
 use std::collections::{HashMap, HashSet, VecDeque};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]

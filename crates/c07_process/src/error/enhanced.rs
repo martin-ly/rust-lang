@@ -2,7 +2,6 @@
 //! 
 //! 这个模块提供了增强的错误处理功能，包括错误恢复、
 //! 错误链追踪、错误分类等 Rust 1.90 新特性
-
 #[cfg(test)]
 use crate::error::ProcessError;
 use std::collections::HashMap;
@@ -911,7 +910,7 @@ impl ErrorClassifier {
     }
 
     pub async fn classify_error(&self, error: &dyn StdError, context: &HashMap<String, String>) -> ErrorClassification {
-        let error_key = format!("{}:{:?}", error.to_string(), context);
+        let error_key = format!("{}:{:?}", error, context);
         
         // 检查缓存
         {

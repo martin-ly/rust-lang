@@ -1,7 +1,6 @@
 //! 语义验证演示示例
 //!
 //! 本示例展示了如何使用C10 Networks的语义验证框架来验证网络协议的正确性。
-
 use c10_networks::semantics::*;
 use c10_networks::semantics::formal_spec::{TcpFormalSpec, TcpEvent, HttpFormalSpec, HttpVersion, HttpMethod, HttpStatusCode, HttpRuleAction};
 use c10_networks::semantics::model_checking::{ModelChecker, ModelCheckingConfig, TlaModelChecker, TlaConfig};

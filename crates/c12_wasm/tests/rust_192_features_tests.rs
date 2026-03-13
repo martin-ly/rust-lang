@@ -1,7 +1,6 @@
 //! Rust 1.92.0 WASM 特性测试
 //!
 //! 本测试文件包含所有 Rust 1.92.0 特性在 WASM 中的单元测试
-
 use c12_wasm::rust_192_features::*;
 use std::num::NonZeroUsize;
 

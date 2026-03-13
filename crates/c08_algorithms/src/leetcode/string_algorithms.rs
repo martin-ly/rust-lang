@@ -24,7 +24,6 @@
 //! - 434. Number of Segments in a String（字符串中的单词数）
 //! - 459. Repeated Substring Pattern（重复的子字符串）
 //! - 541. Reverse String II（反转字符串 II）
-
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 14. Longest Common Prefix（最长公共前缀）
@@ -152,23 +151,21 @@ pub fn can_construct(ransom_note: String, magazine: String) -> bool {
 
     // Rust 1.91 JIT 优化：字符迭代器遍历
     for ch in magazine.chars() {
-        if let Some(index) = (ch as u32).checked_sub(b'a' as u32) {
-            if index < 26 {
+        if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
+            && index < 26 {
                 counts[index as usize] += 1;
             }
-        }
     }
 
     for ch in ransom_note.chars() {
-        if let Some(index) = (ch as u32).checked_sub(b'a' as u32) {
-            if index < 26 {
+        if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
+            && index < 26 {
                 let idx = index as usize;
                 if counts[idx] <= 0 {
                     return false;
                 }
                 counts[idx] -= 1;
             }
-        }
     }
 
     true
@@ -191,20 +188,18 @@ pub fn first_uniq_char(s: String) -> i32 {
 
     // Rust 1.91 JIT 优化：第一次遍历统计频率
     for ch in s.chars() {
-        if let Some(index) = (ch as u32).checked_sub(b'a' as u32) {
-            if index < 26 {
+        if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
+            && index < 26 {
                 counts[index as usize] += 1;
             }
-        }
     }
 
     // Rust 1.91 JIT 优化：第二次遍历查找第一个唯一字符
     for (i, ch) in s.char_indices() {
-        if let Some(index) = (ch as u32).checked_sub(b'a' as u32) {
-            if index < 26 && counts[index as usize] == 1 {
+        if let Some(index) = (ch as u32).checked_sub(b'a' as u32)
+            && index < 26 && counts[index as usize] == 1 {
                 return i as i32;
             }
-        }
     }
 
     -1
@@ -233,14 +228,13 @@ pub fn is_subsequence(s: String, t: String) -> bool {
 
     // Rust 1.91 JIT 优化：单次遍历
     for ch in t.chars() {
-        if let Some(expected) = s_next {
-            if ch == expected {
+        if let Some(expected) = s_next
+            && ch == expected {
                 s_next = s_iter.next();
                 if s_next.is_none() {
                     return true;
                 }
             }
-        }
     }
 
     false
@@ -263,11 +257,10 @@ pub fn longest_palindrome(s: String) -> i32 {
 
     // Rust 1.91 JIT 优化：字符频率统计
     for ch in s.chars() {
-        if let Some(index) = (ch as u32).checked_sub(b'A' as u32) {
-            if index < 58 {
+        if let Some(index) = (ch as u32).checked_sub(b'A' as u32)
+            && index < 58 {
                 counts[index as usize] += 1;
             }
-        }
     }
 
     let mut length = 0;
@@ -365,7 +358,7 @@ pub fn repeated_substring_pattern(s: String) -> bool {
 
     // Rust 1.91 JIT 优化：检查可能的子串长度
     for len in 1..=n / 2 {
-        if n % len == 0 {
+        if n.is_multiple_of(len) {
             let substring = &s[..len];
             let repeated = substring.repeat(n / len);
             if repeated == s {

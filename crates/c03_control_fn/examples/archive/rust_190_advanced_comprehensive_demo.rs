@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 高级综合演示程序 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -17,7 +16,6 @@
 //! ```bash
 //! cargo run --example rust_190_advanced_comprehensive_demo
 //! ```
-
 use c03_control_fn::{
     rust_190_complete_features::{
         demonstrate_rust_190_complete_features,

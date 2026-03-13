@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 异步控制流增强模块
 //!
 //! 本模块专门展示 Rust 1.90 版本中异步控制流的增强功能：
@@ -10,7 +9,6 @@
 //! - 异步资源管理
 //!
 //! 所有示例都使用 Rust 1.90 的最新异步特性，并包含详细的注释和最佳实践。
-
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::Duration;

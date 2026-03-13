@@ -2,7 +2,6 @@
 //! - 强/弱引用：`Arc` 与 `Weak`
 //! - 循环引用与打破
 //! - `Arc<Mutex<T>>` vs `Arc<RwLock<T>>`
-
 pub mod count;
 
 use std::sync::{Arc, Mutex, RwLock, Weak};
@@ -93,7 +92,7 @@ pub fn mutex_vs_rwlock(readers: usize, writers: usize, iters: usize) -> (usize, 
     for t in h {
         total += t.join().unwrap();
     }
-    let x = (total, *m.lock().unwrap() + *r.read().unwrap()); x
+     (total, *m.lock().unwrap() + *r.read().unwrap())
 }
 
 #[cfg(test)]

@@ -5,7 +5,6 @@
 //! - 属性验证
 //! - 反例生成
 //! - 可达性分析
-
 use crate::error::NetworkResult;
 use crate::semantics::*;
 use std::collections::{HashMap, HashSet, VecDeque};
@@ -209,15 +208,13 @@ impl ModelChecker {
             let current_state_clone = current_state.clone();
             let transitions_to_apply = self.transitions.clone();
             for transition in transitions_to_apply {
-                if transition.from == current_state_id {
-                    if let Some(next_state) = self.apply_transition(&current_state_clone, &transition) {
-                        if !visited.contains(&next_state.id) {
+                if transition.from == current_state_id
+                    && let Some(next_state) = self.apply_transition(&current_state_clone, &transition)
+                        && !visited.contains(&next_state.id) {
                             visited.insert(next_state.id.clone());
                             queue.push_back(next_state.id.clone());
                             self.state_space.insert(next_state.id.clone(), next_state);
                         }
-                    }
-                }
             }
 
             // states_processed += 1;

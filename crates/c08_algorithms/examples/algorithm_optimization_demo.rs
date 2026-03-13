@@ -9,7 +9,6 @@
 //! ```bash
 //! cargo run --example algorithm_optimization_demo
 //! ```
-
 use std::collections::HashMap;
 use std::time::Instant;
 

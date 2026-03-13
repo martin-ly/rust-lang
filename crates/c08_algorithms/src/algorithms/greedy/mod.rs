@@ -1,7 +1,6 @@
 //! # 贪心算法模块
 //! 
 //! 本模块实现了各种贪心算法。
-
 //use serde::{Serialize, Deserialize};
 
 /// 贪心算法实现

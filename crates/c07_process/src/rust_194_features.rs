@@ -13,7 +13,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
-
 use std::collections::HashMap;
 use std::iter::Peekable;
 use std::sync::LazyLock;
@@ -442,11 +441,10 @@ impl<I: Iterator<Item = LogEntry>> LogParser<I> {
     /// Rust 1.94.0: 使用 next_if_map 简化条件消费
     pub fn parse_next_level(&mut self, level: LogLevel) -> Option<LogEntry> {
         // 使用 next_if_map 模式
-        if let Some(entry) = self.entries.peek() {
-            if entry.level == level {
+        if let Some(entry) = self.entries.peek()
+            && entry.level == level {
                 return self.entries.next();
             }
-        }
         None
     }
 

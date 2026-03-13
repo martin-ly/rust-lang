@@ -1,7 +1,6 @@
 //! # 分治算法模块
 //! 
 //! 本模块实现了各种分治算法。
-
 //use serde::{Serialize, Deserialize};
 
 /// 分治算法实现

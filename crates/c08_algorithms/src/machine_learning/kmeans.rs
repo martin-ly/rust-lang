@@ -1,7 +1,6 @@
 //! K-means 聚类算法实现
 //!
 //! 本模块提供了 K-means 聚类算法的基础实现
-
 use super::*;
 use rand::Rng;
 
@@ -34,7 +33,7 @@ impl KMeans {
 
     /// 返回聚类中心的只读迭代器（若未拟合则为空）
     pub fn centers_iter(&self) -> impl Iterator<Item = &DataPoint> {
-        self.centers.as_ref().map(|v| v.as_slice()).into_iter().flatten()
+        self.centers.as_deref().into_iter().flatten()
     }
 
     /// 设置最大迭代次数

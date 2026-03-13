@@ -22,7 +22,6 @@
 //! ```bash
 //! cargo run --example tokio_smol_latest_features_2025
 //! ```
-
 //use std::sync::Arc;
 use std::time::{Duration, Instant};
 //use tokio::sync::{Mutex, Semaphore};

@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 异步控制流增强模块
 //! 
 //! 本模块实现了Rust 1.90版本中的异步控制流增强特性，包括：
@@ -6,7 +5,6 @@
 //! - 异步资源管理
 //! - 异步错误处理
 //! - 异步并发控制
-
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::time::sleep;

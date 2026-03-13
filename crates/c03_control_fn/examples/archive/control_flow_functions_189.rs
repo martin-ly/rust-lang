@@ -1,6 +1,4 @@
-#![doc(test(ignore))]
 //! Rust 1.89 控制流与函数：综合示例
-
 use c03_control_fn::async_control_flow as acf;
 use c03_control_fn::rust_189_enhanced_features::{
     cfg_boolean_literals_189, dangerous_implicit_autorefs_189, invalid_null_arguments_189,

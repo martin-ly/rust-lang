@@ -348,7 +348,7 @@ impl MemoryPool {
     pub fn allocate(&mut self, size: usize) -> Option<&mut [u8]> {
         if self.allocated + size <= self.capacity {
             let start = self.data.len();
-            self.data.extend(std::iter::repeat(0).take(size));
+            self.data.extend(std::iter::repeat_n(0, size));
             self.allocated += size;
             Some(&mut self.data[start..start + size])
         } else {

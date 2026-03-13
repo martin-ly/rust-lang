@@ -1,4 +1,3 @@
-#![doc(test(ignore))]
 //! Rust 1.90 完整特性演示程序 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -22,7 +21,6 @@
 //! ```bash
 //! cargo run --example rust_190_complete_features_demo
 //! ```
-
 use c03_control_fn::rust_190_complete_features::*;
 use anyhow::Result;
 use std::time::Duration;

@@ -1,5 +1,4 @@
 //! 简易 LRU Cache，提供非线程安全与可选线程安全包装
-
 use std::collections::{HashMap, VecDeque};
 
 #[derive(Clone, Debug)]

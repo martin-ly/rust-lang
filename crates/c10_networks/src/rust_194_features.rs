@@ -13,7 +13,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
-
 use std::collections::HashMap;
 use std::sync::atomic::AtomicU64;
 use std::sync::{LazyLock, Mutex};
@@ -204,11 +203,10 @@ impl PacketReassembler {
             return None;
         }
 
-        if let Some(expected) = self.expected_count {
-            if self.fragments.len() != expected as usize {
+        if let Some(expected) = self.expected_count
+            && self.fragments.len() != expected as usize {
                 return None;
             }
-        }
 
         let mut offsets: Vec<u16> = self.fragments.keys().copied().collect();
         offsets.sort_unstable();
@@ -342,10 +340,16 @@ pub fn get_pool_settings() -> &'static ConnectionPoolSettings {
     &CONNECTION_POOL_CONFIG
 }
 
+/// 协议处理器函数类型别名
+type ProtocolHandlerFn = Box<dyn Fn(&[u8]) -> Vec<u8> + Send>;
+
+/// 协议处理器注册表类型别名
+type ProtocolHandlerRegistry = HashMap<String, ProtocolHandlerFn>;
+
 /// 延迟初始化的协议处理器注册表
-static PROTOCOL_HANDLERS: LazyLock<Mutex<HashMap<String, Box<dyn Fn(&[u8]) -> Vec<u8> + Send>>>> =
+static PROTOCOL_HANDLERS: LazyLock<Mutex<ProtocolHandlerRegistry>> =
     LazyLock::new(|| {
-        let mut handlers: HashMap<String, Box<dyn Fn(&[u8]) -> Vec<u8> + Send>> = HashMap::new();
+        let mut handlers: ProtocolHandlerRegistry = HashMap::new();
 
         // 注册默认处理器
         handlers.insert("echo".to_string(), Box::new(|data| data.to_vec()));
