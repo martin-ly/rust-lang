@@ -13,7 +13,7 @@
 ### 项目元文档索引生成器
 
 <!-- 注意：以下代码块中的占位符是 Rust format! 宏的格式字符串，不是 Markdown 链接 -->
-<!-- markdown-link-check-disable-start -->
+<!-- markdown-link-check-disable -->
 
 ```rust,ignore
 //! 自动生成 07_project 目录文档索引

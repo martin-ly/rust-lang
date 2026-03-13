@@ -19,6 +19,7 @@
 
 ## 代码示例
 
+<!-- markdown-link-check-disable -->
 ### 一页纸总结自动生成器
 
 ```rust
@@ -156,6 +157,7 @@ fn main() {
     println!("{}", c01_summary.generate());
 }
 ```
+<!-- markdown-link-check-enable -->
 
 <!-- markdown-link-check-disable -->
 ### 批量生成所有模块的一页纸总结

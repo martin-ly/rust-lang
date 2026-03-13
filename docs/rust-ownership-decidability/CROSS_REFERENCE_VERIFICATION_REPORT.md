@@ -15,6 +15,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | Broken Links Found | 10 |
 | Missing Cross-References | 381 |
 
+<!-- markdown-link-check-disable -->
 ## Broken Links
 
 ### List of Broken Links
@@ -31,6 +32,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 | README.md | `CROSS_REFERENCE_VERIFICATION_REPORT.md` | 56 | \| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_... |
 | README.md | `formal-foundations/README.md` | 65 | \| 形式化理论 \| [形式化基础](formal-foundations/README.md) / [Coq代码](... |
 | README.md | `CROSS_REFERENCE_VERIFICATION_REPORT.md` | 243 | - [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md... |
+<!-- markdown-link-check-enable -->
 
 ## Missing Cross-References
 

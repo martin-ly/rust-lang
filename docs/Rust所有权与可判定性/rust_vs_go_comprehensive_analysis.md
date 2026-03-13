@@ -278,6 +278,7 @@ func sliceSharing() {
 
 ### 4.1 Trait vs Interface 深度对比
 
+<!-- markdown-link-check-disable -->
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    Rust Trait vs Go Interface 深度对比                       │
@@ -349,6 +350,7 @@ func sliceSharing() {
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
+<!-- markdown-link-check-enable -->
 
 ### 4.2 泛型对比
 
