@@ -5,7 +5,6 @@ edition = "2024"
 resolver = "3"
 rust-version = "1.94"
 
-
 [lib]
 name = "c02_type_system"
 path = "src/lib.rs"
@@ -13,86 +12,6 @@ path = "src/lib.rs"
 [[example]]
 name = "type_system_example"
 path = "examples/type_system_example.rs"
-
-[[example]]
-name = "rust_189_features_demo"
-path = "examples/rust_189_features_demo.rs"
-
-[[example]]
-name = "rust_189_comprehensive_demo"
-path = "examples/rust_189_comprehensive_demo.rs"
-
-[[example]]
-name = "rust_190_features_demo"
-path = "examples/rust_190_features_demo.rs"
-
-[[example]]
-name = "rust_190_comprehensive_demo"
-path = "examples/rust_190_comprehensive_demo.rs"
-
-[[example]]
-name = "rust_190_latest_features_demo"
-path = "examples/rust_190_latest_features_demo.rs"
-
-[[example]]
-name = "rust_190_advanced_features_demo"
-path = "examples/rust_190_advanced_features_demo.rs"
-
-[[example]]
-name = "rust_190_wasm_demo"
-path = "examples/rust_190_wasm_demo.rs"
-
-[[example]]
-name = "rust_190_advanced_pattern_matching_demo"
-path = "examples/rust_190_advanced_pattern_matching_demo.rs"
-
-[[example]]
-name = "rust_190_advanced_error_handling_demo"
-path = "examples/rust_190_advanced_error_handling_demo.rs"
-
-[[example]]
-name = "rust_190_type_system_validator_demo"
-path = "examples/rust_190_type_system_validator_demo.rs"
-
-[[example]]
-name = "rust_190_performance_optimization_demo"
-path = "examples/rust_190_performance_optimization_demo.rs"
-
-[[example]]
-name = "rust_190_concurrent_async_advanced_demo"
-path = "examples/rust_190_concurrent_async_advanced_demo.rs"
-
-[[example]]
-name = "rust_190_memory_safety_advanced_demo"
-path = "examples/rust_190_memory_safety_advanced_demo.rs"
-
-[[example]]
-name = "rust_190_advanced_macros_demo"
-path = "examples/rust_190_advanced_macros_demo.rs"
-
-[[example]]
-name = "rust_191_features_demo"
-path = "examples/rust_191_features_demo.rs"
-
-[[example]]
-name = "rust_192_features_demo"
-path = "examples/rust_192_features_demo.rs"
-
-[[example]]
-name = "rust_192_comprehensive_demo"
-path = "examples/rust_192_comprehensive_demo.rs"
-
-[[example]]
-name = "rust_192_advanced_integration_demo"
-path = "examples/rust_192_advanced_integration_demo.rs"
-
-[[example]]
-name = "rust_192_practical_use_cases"
-path = "examples/rust_192_practical_use_cases.rs"
-
-[[example]]
-name = "rust_193_features_demo"
-path = "examples/rust_193_features_demo.rs"
 
 [[example]]
 name = "const_eval_assoc_consts"
@@ -158,6 +77,10 @@ path = "examples/unsafe_cell_interior_mutability.rs"
 name = "variance_examples"
 path = "examples/variance_examples.rs"
 
+[[example]]
+name = "run_all_examples"
+path = "examples/run_all_examples.rs"
+
 [[bin]]
 name = "ts"
 path = "src/bin/main.rs"
@@ -178,11 +101,3 @@ jemallocator = "0.5.4"
 
 [dev-dependencies]
 criterion = { workspace = true }
-
-[[bench]]
-name = "rust_190_simple_benchmarks"
-harness = false
-
-[[bench]]
-name = "rust_192_benchmarks"
-harness = false

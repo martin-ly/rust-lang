@@ -11,33 +11,14 @@ pub mod type_transformation;
 pub mod type_variance;
 pub mod r#unsafe;
 
-// 导出 Rust 1.89 基础语法模块
-pub mod rust_189_simple_demo;
-// pub mod rust_189_basic_syntax; // 暂时注释掉，需要修复编译错误
-// pub mod rust_189_basic_syntax_simple; // 暂时注释掉，需要修复编译错误
-
-// 重新导出Rust 1.89增强特性
-pub use performance::*;
-pub use type_composition::rust_189_enhancements;
-pub use rust_189_simple_demo::*;
-pub use primitive_types::scalar_types::number::enhanced_integer_fixed::*;
-
-// 导出 Rust 1.90 最新特性演示
-pub mod rust_190_latest_features {
-    // 这里可以添加 Rust 1.90 最新特性的模块导出
-    // 目前通过 examples 目录中的文件进行演示
-}
-
-// 导出 Rust 1.90 高级特性模块
-pub mod rust_190_advanced_features;
-
 // 导出归档模块（包含旧版本特性）
 pub mod archive;
-pub use archive::rust_191_features;
-pub use archive::rust_192_features;
 
 // 导出 Rust 1.94 特性模块
 pub mod rust_194_features;
+
+// 重新导出Rust 1.94特性
+pub use rust_194_features::*;
 
 // 导出 WebAssembly 支持模块
 pub mod wasm_support;

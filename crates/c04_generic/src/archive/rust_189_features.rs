@@ -183,14 +183,14 @@ pub fn demonstrate_rust_189_generics() {
     {
         let data = [1, 2, 3, 4, 5];
         let out: Vec<_> =
-            crate::rust_189_features::tait_like::map_then_filter(&data, |x| x * 3, |x| *x % 2 == 0)
+            crate::archive::rust_189_features::tait_like::map_then_filter(&data, |x| x * 3, |x| *x % 2 == 0)
                 .collect();
         println!("TAIT-like out: {:?}", out);
     }
 
     // RPITIT
     {
-        use crate::rust_189_features::rpitit::{MakeIter, RangeMaker};
+        use crate::archive::rust_189_features::rpitit::{MakeIter, RangeMaker};
         let maker = RangeMaker { start: 0, end: 4 };
         let v: Vec<_> = maker.make_iter().collect();
         println!("RPITIT out: {:?}", v);

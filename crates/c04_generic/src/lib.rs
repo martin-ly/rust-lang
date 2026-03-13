@@ -104,14 +104,8 @@ pub mod type_aliases;
 
 pub mod generic_define;
 /// 归档的历史版本特性模块 - 包含 Rust 1.89-1.92 版本的历史特性实现
+/// 归档的历史版本特性模块 - 包含 Rust 1.89-1.92 版本的历史特性实现
 pub mod archive;
-pub use archive::rust_189_features;
-pub use archive::rust_189_gat_hrtbs;
-pub use archive::rust_189_comprehensive;
-pub use archive::rust_190_features;
-pub use archive::rust_190_real_generics;
-pub use archive::rust_191_features;
-pub use archive::rust_192_features;
 
 /// 基础语法模块 - 提供 Rust 泛型编程的基础语法和概念
 pub mod basic_syntax;
