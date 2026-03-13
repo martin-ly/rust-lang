@@ -387,7 +387,7 @@ pub fn oranges_rotting(grid: Vec<Vec<i32>>) -> i32 {
 /// ## 复杂度
 /// - 时间复杂度: O(m * n)
 /// - 空间复杂度: O(m * n)（递归栈）
-pub fn solve(board: &mut Vec<Vec<char>>) {
+pub fn solve(board: &mut [Vec<char>]) {
     if board.is_empty() || board[0].is_empty() {
         return;
     }

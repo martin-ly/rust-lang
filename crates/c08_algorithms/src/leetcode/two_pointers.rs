@@ -160,7 +160,7 @@ pub fn sort_colors(nums: &mut [i32]) {
 /// ## 复杂度
 /// - 时间复杂度: O(n)
 /// - 空间复杂度: O(1)
-pub fn remove_duplicates_ii(nums: &mut Vec<i32>) -> usize {
+pub fn remove_duplicates_ii(nums: &mut [i32]) -> usize {
     if nums.len() <= 2 {
         return nums.len();
     }

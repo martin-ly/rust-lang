@@ -23,7 +23,7 @@ use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 /// ## 复杂度
 /// - 时间复杂度: O(n²)
 /// - 空间复杂度: O(1)
-pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
+pub fn rotate(matrix: &mut [Vec<i32>]) {
     let n = matrix.len();
 
     // 先转置矩阵
@@ -112,7 +112,7 @@ pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {
 /// ## 复杂度
 /// - 时间复杂度: O(m * n)
 /// - 空间复杂度: O(1)
-pub fn set_zeroes(matrix: &mut Vec<Vec<i32>>) {
+pub fn set_zeroes(matrix: &mut [Vec<i32>]) {
     let rows = matrix.len();
     let cols = matrix[0].len();
 
