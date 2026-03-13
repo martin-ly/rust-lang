@@ -1,4 +1,6 @@
 //! 泛型模块错误路径测试套件 / Generics Module Error Paths Test Suite
+#![allow(clippy::type_complexity)]
+#![allow(clippy::bool_assert_comparison)]
 
 /// 测试错误输入情况
 #[test]

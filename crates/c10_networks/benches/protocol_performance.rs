@@ -1,3 +1,7 @@
+#![allow(clippy::default_constructed_unit_structs)]
+#![allow(clippy::unnecessary_map_or)]
+#![allow(clippy::bind_instead_of_map)]
+
 //! 协议性能基准测试
 //!
 //! 这个模块包含了 c10_networks 库各种网络协议的性能基准测试

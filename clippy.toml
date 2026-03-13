@@ -226,3 +226,5 @@ allow-unwrap-in-tests = true
 
 # 允许测试中的无用vec
 allow-useless-vec-in-tests = true
+
+# 放宽测试和示例中的严格规则 - 这些需要在代码中使用 #![allow(...)] 来设置

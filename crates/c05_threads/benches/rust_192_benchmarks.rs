@@ -16,7 +16,7 @@ use std::num::NonZeroUsize;
 use std::sync::Arc;
 use std::thread;
 
-use c05_threads::rust_192_features::{
+use c05_threads::archive::rust_192_features::{
     ThreadPoolManager, ThreadPoolTaskQueue, ThreadResourceAllocator, ThreadSafeUninitBuffer,
     ThreadSchedulingConfig, ThreadTask, calculate_thread_pool_size,
 };

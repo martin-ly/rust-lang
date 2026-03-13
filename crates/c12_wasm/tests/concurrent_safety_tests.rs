@@ -1,4 +1,5 @@
 //! WebAssembly模块并发安全测试套件 / WebAssembly Module Concurrent Safety Test Suite
+#![allow(clippy::assertions_on_constants)]
 use std::sync::{Arc, Mutex};
 use std::thread;
 

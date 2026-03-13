@@ -1,3 +1,5 @@
+#![allow(clippy::type_complexity)]
+
 //! 微基准测试：迭代器管道与锁策略对比
 //!
 //! 本文件提供可运行的基准测试，对比不同实现的性能特征。
@@ -6,7 +8,7 @@ use futures::executor::block_on;
 use std::hint::black_box;
 
 // 导入我们的示例代码
-use c04_generic::rust_190_features::*;
+use c04_generic::archive::rust_190_features::*;
 
 fn bench_iterator_pipelines(c: &mut Criterion) {
     let data = (1..=1000).collect::<Vec<i32>>();

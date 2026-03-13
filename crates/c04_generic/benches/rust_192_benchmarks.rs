@@ -1,3 +1,5 @@
+#![allow(clippy::type_complexity)]
+
 //! Rust 1.92.0 泛型特性性能基准测试套件
 //!
 //! 本模块提供 Rust 1.92.0 新特性的性能基准测试，包括：
@@ -14,7 +16,7 @@ use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_m
 use std::hint::black_box;
 use std::num::NonZeroUsize;
 
-use c04_generic::rust_192_features::{
+use c04_generic::archive::rust_192_features::{
     GenericCollectionValidator, GenericContainer, GenericLifetimeProcessor, GenericMemoryAllocator,
     GenericTransformer, GenericVector, IdentityProcessor, StringToNumberTransformer,
     calculate_generic_aligned_size, compare_generic_collections, compose_generic_processors,

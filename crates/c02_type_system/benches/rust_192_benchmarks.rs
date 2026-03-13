@@ -6,7 +6,7 @@ use std::hint::black_box;
 use std::num::NonZeroUsize;
 
 // 导入 Rust 1.92.0 特性
-use c02_type_system::rust_192_features::*;
+use c02_type_system::archive::rust_192_features::*;
 
 // ==================== 关联项多边界性能测试 ====================
 

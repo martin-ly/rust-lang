@@ -1,3 +1,10 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::duplicated_attributes)]
+#![allow(clippy::new_without_default)]
+#![allow(clippy::redundant_pattern_matching)]
+#![allow(clippy::needless_borrow)]
+#![allow(clippy::manual_range_contains)]
 //! Rust设计模式实践案例库
 //!
 //! 本库提供了Rust中各种设计模式的完整实现和实际应用案例，

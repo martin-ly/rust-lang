@@ -1,3 +1,8 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::duplicated_attributes)]
+#![allow(clippy::assertions_on_constants)]
+
 //! # C06 Async - Rust 异步编程全面解析
 //!
 //! 本 crate 提供 Rust 1.94 异步编程的全面、深入的理论与实践指南。

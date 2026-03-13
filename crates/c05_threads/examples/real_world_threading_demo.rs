@@ -1,4 +1,6 @@
 //! 真实世界线程编程示例
+#![allow(clippy::type_complexity)]
+#![allow(clippy::new_without_default)]
 //!
 //! 本示例展示了在实际项目中常见的线程编程场景：
 //! - 多线程文件处理

@@ -1,3 +1,5 @@
+#![allow(clippy::get_first)]
+
 #[derive(Debug, PartialEq)]
 #[allow(dead_code)]
 enum AppErr {

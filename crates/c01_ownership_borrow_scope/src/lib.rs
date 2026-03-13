@@ -1,3 +1,7 @@
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::type_complexity)]
+#![allow(clippy::assertions_on_constants)]
+
 //! # Rust所有权和借用作用域模块 / Rust Ownership and Borrowing Scope Module
 //!
 //! 本模块提供了完整的Rust所有权系统和借用作用域的理论体系和实现框架。

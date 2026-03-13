@@ -1018,6 +1018,7 @@ mod tests {
         let registry = get_macro_registry();
         registry.register("test_macro", "test.rs");
         let id = registry.record_expansion();
+        #[allow(unused_comparisons)]
         assert!(id >= 0);
     }
 

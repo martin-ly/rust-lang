@@ -1,3 +1,5 @@
+#![allow(clippy::manual_find)]
+
 fn find_first_even(nums: &[i32]) -> Option<i32> {
     for &n in nums {
         if n % 2 == 0 {

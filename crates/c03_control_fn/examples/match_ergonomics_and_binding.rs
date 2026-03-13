@@ -22,9 +22,8 @@ fn describe(bytes: &[u8]) -> String {
 }
 
 fn touch_first(v: &mut Vec<i32>) {
-    match v.as_mut_slice() {
-        [x, ..] => *x += 1,
-        [] => {}
+    if let [x, ..] = v.as_mut_slice() {
+        *x += 1
     }
 }
 
@@ -36,10 +35,7 @@ struct Config {
 }
 
 fn port_enabled(c: &Config) -> bool {
-    match c {
-        Config { port, .. } if *port != 0 => true,
-        _ => false,
-    }
+    matches!(c, Config { port, .. } if *port != 0)
 }
 
 fn main() {

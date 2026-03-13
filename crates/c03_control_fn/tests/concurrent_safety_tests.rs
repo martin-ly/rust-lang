@@ -1,3 +1,5 @@
+#![allow(clippy::assertions_on_constants)]
+
 //! 控制流与函数模块并发安全测试套件 / Control Flow and Functions Module Concurrent Safety Test Suite
 use std::sync::{Arc, Mutex};
 use std::thread;

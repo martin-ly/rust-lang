@@ -1,3 +1,6 @@
+#![allow(clippy::assertions_on_constants)]
+#![allow(clippy::vec_init_then_push)]
+
 //! 宏系统测试套件
 #[test]
 fn test_declarative_macro() {

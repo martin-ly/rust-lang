@@ -1,4 +1,6 @@
 //! GAT（泛型关联类型）示例
+#![allow(clippy::bool_assert_comparison)]
+#![allow(clippy::type_complexity)]
 //!
 //! 本示例展示GAT（Generic Associated Types）的使用：
 //! - GAT的基本语法

@@ -896,6 +896,7 @@ pub fn get_rust_194_generic_info() -> String {
 }
 
 #[cfg(test)]
+#[allow(clippy::assertions_on_constants)]
 mod tests {
     use super::*;
 

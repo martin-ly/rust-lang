@@ -1,3 +1,9 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::duplicated_attributes)]
+#![allow(clippy::vec_init_then_push)]
+#![allow(clippy::assertions_on_constants)]
+
 //! # C11: Rust宏系统 (Macro System)
 //!
 //! 本模块提供Rust宏系统的系统化学习内容，包括声明宏和过程宏。

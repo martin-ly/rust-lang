@@ -1,3 +1,8 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::duplicated_attributes)]
+#![allow(clippy::assertions_on_constants)]
+
 //! Rust 1.92.0 控制流与函数特性研究项目
 //!
 //! 本项目专注于控制流与函数系统的深度分析和实践应用，

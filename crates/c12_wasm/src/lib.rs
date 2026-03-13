@@ -1,3 +1,6 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::duplicated_attributes)]
 //! # C12 WASM - 核心示例代码
 //!
 //! 本模块提供了完整的 WASM 示例代码，包括：

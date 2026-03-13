@@ -1,3 +1,4 @@
+#![allow(clippy::bool_assert_comparison)]
 //! 宏系统模块错误路径测试套件 / Macro System Module Error Paths Test Suite
 
 /// 测试错误输入情况

@@ -1,3 +1,6 @@
+#![allow(clippy::assertions_on_constants)]
+#![allow(clippy::missing_const_for_thread_local)]
+
 //! 线程模块集成测试套件 / Threads Module Integration Test Suite
 use std::sync::{Arc, Mutex};
 use std::thread;

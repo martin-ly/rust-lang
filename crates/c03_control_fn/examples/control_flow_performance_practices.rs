@@ -1,3 +1,5 @@
+#![allow(clippy::identity_op)]
+
 #[inline]
 fn classify(x: i32) -> i32 {
     if x == 0 {

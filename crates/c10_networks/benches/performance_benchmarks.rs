@@ -1,3 +1,7 @@
+#![allow(clippy::default_constructed_unit_structs)]
+#![allow(clippy::unnecessary_map_or)]
+#![allow(clippy::bind_instead_of_map)]
+
 //! 网络编程模块性能基准测试 / Network Programming Module Performance Benchmarks
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;

@@ -1,3 +1,5 @@
+#![allow(clippy::useless_vec)]
+
 //! Rust 1.92.0 宏系统新特性演示程序
 //!
 //! 这个程序展示了如何在 c11_macro_system 项目中使用最新的 Rust 1.92.0 特性

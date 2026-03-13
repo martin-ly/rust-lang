@@ -1,3 +1,7 @@
+#![allow(clippy::default_constructed_unit_structs)]
+#![allow(clippy::unnecessary_map_or)]
+#![allow(clippy::bind_instead_of_map)]
+
 //! 网络性能基准测试
 //!
 //! 本文件包含各种网络操作的性能基准测试，用于评估2025年最新优化后的性能

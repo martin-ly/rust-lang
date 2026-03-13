@@ -1,3 +1,7 @@
+#![allow(clippy::manual_flatten)]
+#![allow(clippy::useless_format)]
+#![allow(clippy::useless_vec)]
+
 //! Rust 1.90 性能基准测试示例 (历史版本)
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留

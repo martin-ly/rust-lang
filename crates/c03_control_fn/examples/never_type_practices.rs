@@ -1,3 +1,6 @@
+#![allow(clippy::empty_loop)]
+#![allow(clippy::diverging_sub_expression)]
+
 fn abort(msg: &str) -> ! {
     panic!("{}", msg);
 }

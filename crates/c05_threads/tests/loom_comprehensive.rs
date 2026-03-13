@@ -1,4 +1,6 @@
 //! 综合 Loom 并发测试 / Comprehensive Loom Concurrency Tests
+#![allow(clippy::redundant_pattern_matching)]
+#![allow(clippy::collapsible_if)]
 //!
 //! 本模块包含使用 Loom 进行的全面并发测试，确保并发代码的正确性。
 //! This module contains comprehensive concurrency tests using Loom to ensure correctness of concurrent code.

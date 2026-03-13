@@ -567,6 +567,6 @@ mod tests {
 
         assert_eq!(conn_state.connection_id, "conn_1");
         assert_eq!(conn_state.state, TcpState::Closed);
-        assert_eq!(conn_state.authenticated, false);
+        assert!(!conn_state.authenticated);
     }
 }

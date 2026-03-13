@@ -1,6 +1,13 @@
+#![allow(clippy::default_constructed_unit_structs)]
+#![allow(clippy::unnecessary_map_or)]
+#![allow(clippy::bind_instead_of_map)]
+
 //! 并发性能基准测试
 //!
 //! 这个模块包含了 c10_networks 库并发处理相关的性能基准测试
+#![allow(clippy::unnecessary_map_or)]
+#![allow(clippy::bind_instead_of_map)]
+
 use c10_networks::error::{
     ErrorRecovery, ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
 };

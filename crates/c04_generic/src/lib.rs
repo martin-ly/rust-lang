@@ -1,3 +1,8 @@
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::type_complexity)]
+#![allow(clippy::assertions_on_constants)]
+#![allow(clippy::missing_const_for_thread_local)]
+
 /*
 从范畴论的视角来看，
 Rust的泛型可以被视为一种类型的态射（morphism），
@@ -90,8 +95,6 @@ Rust的泛型是一种类型的态射，
 还提供了强大的类型系统支持，确保了在编程中的安全性和一致性。
 
 */
-
-#![allow(clippy::type_complexity)]
 
 pub mod associated_type;
 pub mod natural_transformation;

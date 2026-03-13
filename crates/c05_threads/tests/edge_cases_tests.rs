@@ -1,3 +1,5 @@
+#![allow(clippy::bool_assert_comparison)]
+
 //! 线程并发模块边界情况测试套件 / Threads and Concurrency Module Edge Cases Test Suite
 use std::sync::{Arc, Mutex};
 use std::thread;

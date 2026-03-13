@@ -1,3 +1,5 @@
+#![allow(clippy::match_like_matches_macro)]
+
 #[derive(Debug)]
 #[allow(dead_code)]
 enum Token {

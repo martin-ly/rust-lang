@@ -1,3 +1,6 @@
+#![allow(clippy::redundant_pattern_matching)]
+#![allow(clippy::needless_range_loop)]
+
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::sync::{Arc, Mutex, RwLock};

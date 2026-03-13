@@ -335,7 +335,7 @@ mod tests {
         let default = DefaultExample::default();
         assert_eq!(default.name, "Default Name");
         assert_eq!(default.count, 0);
-        assert_eq!(default.active, false);
+        assert!(!default.active);
     }
 
     #[test]
@@ -343,7 +343,7 @@ mod tests {
         let config = Config::default();
         assert_eq!(config.timeout, 30);
         assert_eq!(config.retries, 3);
-        assert_eq!(config.debug, false);
+        assert!(!config.debug);
     }
 
     #[test]

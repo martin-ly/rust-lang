@@ -8,6 +8,8 @@
 //!   - **属性**: Protocol Buffers、HTTP/2、流式传输、跨语言
 //!   - **关系**: 与RPC、微服务、网络编程相关
 //!
+#![allow(clippy::default_constructed_unit_structs)]
+
 //! ### 思维导图
 //!
 //! ```text

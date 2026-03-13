@@ -1,4 +1,5 @@
 //! Trait对象与泛型对比示例
+#![allow(clippy::type_complexity)]
 //!
 //! 本示例展示Trait对象（动态分派）与泛型（静态分派）的对比：
 //! - 静态分派 vs 动态分派

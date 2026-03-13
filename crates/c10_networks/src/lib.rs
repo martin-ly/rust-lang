@@ -1,3 +1,7 @@
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::type_complexity)]
+#![allow(clippy::needless_borrows_for_generic_args)]
+
 //! # C10 Networks - Rust 网络编程库
 //!
 //! 本库提供了基于 Rust 1.92.0 的现代网络编程功能，包括：

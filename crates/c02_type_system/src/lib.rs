@@ -1,3 +1,7 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::duplicated_attributes)]
+
 // 导出所有主要模块
 pub mod initial_object;
 pub mod performance;

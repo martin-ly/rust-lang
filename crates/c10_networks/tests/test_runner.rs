@@ -1,3 +1,5 @@
+#![allow(clippy::single_char_add_str)]
+
 //! 测试运行器模块
 //!
 //! 本模块提供了统一的测试运行接口，

@@ -1,3 +1,5 @@
+#![allow(clippy::type_complexity)]
+
 //! 高阶Trait边界（HRTB）示例
 //!
 //! 本示例展示HRTB（Higher-Rank Trait Bounds）的使用：

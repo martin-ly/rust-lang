@@ -66,7 +66,3 @@ path = "examples/control_flow_example.rs"
 [[bin]]
 name = "c03_control_fn"
 path = "src/bin/main.rs"
-
-[[bench]]
-name = "rust_192_benchmarks"
-harness = false

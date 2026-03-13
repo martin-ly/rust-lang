@@ -13,8 +13,11 @@
 //! cargo bench --bench rust_192_benchmarks
 //! ```
 use c01_ownership_borrow_scope::{
-    BorrowTracker, LifetimeTracker, OwnershipTracker, Rust192Union, Rust192ZeroSizedArray,
-    SafeMaybeUninit, rust_192_higher_ranked_lifetime, rust_192_tracked_function,
+    BorrowTracker, LifetimeTracker, OwnershipTracker,
+};
+use c01_ownership_borrow_scope::archive::rust_192_features::{
+    Rust192Union, Rust192ZeroSizedArray, SafeMaybeUninit,
+    rust_192_higher_ranked_lifetime, rust_192_tracked_function,
 };
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use std::hint::black_box;

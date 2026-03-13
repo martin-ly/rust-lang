@@ -1,3 +1,7 @@
+#![allow(clippy::repr_packed_without_abi)]
+#![allow(clippy::unnecessary_cast)]
+#![allow(clippy::explicit_auto_deref)]
+
 #[repr(packed)]
 #[derive(Copy, Clone)]
 #[allow(dead_code)]

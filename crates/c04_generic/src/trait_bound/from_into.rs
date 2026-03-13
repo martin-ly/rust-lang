@@ -562,7 +562,7 @@ mod tests {
         let example = FromIntoExample::from(("Test".to_string(), 100, true));
         assert_eq!(example.name, "Test");
         assert_eq!(example.value, 100);
-        assert_eq!(example.active, true);
+        assert!(example.active);
     }
 
     #[test]

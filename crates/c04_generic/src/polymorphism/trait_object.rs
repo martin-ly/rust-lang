@@ -967,14 +967,12 @@ mod tests {
         // 测试可以转换为特征对象
         let _drawable: Box<dyn Drawable> = Box::new(circle);
         // 这里我们只是验证可以创建特征对象，实际绘制是副作用
-        assert!(true);
     }
 
     #[test]
     fn test_square_draw() {
         let square = Square { side: 10.0 };
         let _drawable: Box<dyn Drawable> = Box::new(square);
-        assert!(true);
     }
 
     #[test]

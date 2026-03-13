@@ -1,3 +1,5 @@
+#![allow(clippy::type_complexity)]
+
 //! 泛型模块性能基准测试 / Generics Module Performance Benchmarks
 use criterion::{Criterion, criterion_group, criterion_main};
 

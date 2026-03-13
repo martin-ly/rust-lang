@@ -1,3 +1,5 @@
+#![allow(clippy::type_complexity)]
+
 //! 零成本抽象验证示例
 //!
 //! 本示例展示Rust泛型的零成本抽象特性：

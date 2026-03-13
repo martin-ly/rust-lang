@@ -1,3 +1,7 @@
+#![allow(clippy::redundant_pattern_matching)]
+#![allow(clippy::clone_on_copy)]
+#![allow(clippy::manual_abs_diff)]
+
 //! 性能优化示例
 //!
 //! 本示例展示了各种线程性能优化技术：

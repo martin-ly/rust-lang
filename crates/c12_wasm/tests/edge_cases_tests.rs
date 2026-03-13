@@ -1,4 +1,5 @@
 //! WASM模块边界情况测试套件 / WASM Module Edge Cases Test Suite
+#![allow(clippy::bool_assert_comparison)]
 use c12_wasm::basic_examples;
 
 /// 测试WASM模块大小边界情况

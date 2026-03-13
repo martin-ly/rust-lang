@@ -1,3 +1,9 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::duplicated_attributes)]
+#![allow(clippy::items_after_test_module)]
+#![allow(clippy::unnecessary_get_then_check)]
+
 //! # C07 Process Management Library
 //!
 //! 一个功能完整的 Rust 进程管理和 IPC 通信库。

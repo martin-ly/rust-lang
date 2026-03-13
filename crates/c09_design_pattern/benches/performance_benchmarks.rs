@@ -1,3 +1,5 @@
+#![allow(clippy::arc_with_non_send_sync)]
+
 use c09_design_pattern::behavioral::chain_of_responsibility::define::{
     ConcreteHandlerA, ConcreteHandlerB, ConcreteHandlerC, Handler,
 };

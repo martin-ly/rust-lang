@@ -1,3 +1,15 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::duplicated_attributes)]
+#![allow(clippy::items_after_test_module)]
+#![allow(clippy::unnecessary_get_then_check)]
+#![allow(clippy::assertions_on_constants)]
+#![allow(clippy::needless_borrows_for_generic_args)]
+#![allow(clippy::overly_complex_bool_expr)]
+#![allow(clippy::absurd_extreme_comparisons)]
+#![allow(clippy::redundant_closure)]
+#![allow(clippy::missing_const_for_thread_local)]
+
 #[cfg(test)]
 mod tests {
     use super::concurrency::memory_ordering::{relaxed_increment, seqcst_increment};

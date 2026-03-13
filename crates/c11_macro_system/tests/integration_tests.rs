@@ -1,3 +1,4 @@
+#![allow(clippy::vec_init_then_push)]
 //! 宏系统模块集成测试套件 / Macro System Module Integration Test Suite
 
 /// 测试声明宏集成

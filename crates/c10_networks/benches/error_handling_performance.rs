@@ -1,3 +1,7 @@
+#![allow(clippy::default_constructed_unit_structs)]
+#![allow(clippy::unnecessary_map_or)]
+#![allow(clippy::bind_instead_of_map)]
+
 //! 异常处理性能基准测试
 //!
 //! 这个模块包含了 c10_networks 库异常处理相关的性能基准测试

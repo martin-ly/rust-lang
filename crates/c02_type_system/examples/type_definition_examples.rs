@@ -1,3 +1,6 @@
+#![allow(clippy::approx_constant)]
+#![allow(clippy::vec_init_then_push)]
+
 //! 类型定义系统示例代码
 //!
 //! 本文件包含了类型定义系统的各种示例，包括：

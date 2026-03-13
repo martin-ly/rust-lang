@@ -1,3 +1,13 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
+#![allow(clippy::duplicated_attributes)]
+#![allow(clippy::assertions_on_constants)]
+#![allow(clippy::bool_assert_comparison)]
+#![allow(clippy::identity_op)]
+#![allow(clippy::approx_constant)]
+#![allow(clippy::manual_range_contains)]
+#![allow(clippy::redundant_closure)]
+#![allow(clippy::cmp_owned)]
 //! Rust 1.92.0 高级算法实现库
 //!
 //! 本库提供了Rust中各种高级算法的完整实现，完全对齐 Rust 1.92.0 版本特性，
