@@ -271,37 +271,24 @@
 //! ## 使用示例 / Usage Examples
 //!
 //! ```rust
-//! use c01_ownership_borrow_scope::rust_190_features::{ImprovedBorrowChecker, BorrowType};
-//! use c01_ownership_borrow_scope::scope::{ScopeManager, ScopeType};
+//! use c01_ownership_borrow_scope::rust_194_features::{
+//!     demonstrate_rust_194_features,
+//!     has_abba,
+//!     sliding_window_averages,
+//! };
 //!
-//! fn main() -> Result<(), Box<dyn std::error::Error>> {
-//!     // 创建改进的借用检查器 / Create improved borrow checker
-//!     let mut borrow_checker = ImprovedBorrowChecker::new();
+//! fn main() {
+//!     // 运行 Rust 1.94 特性演示
+//!     demonstrate_rust_194_features();
 //!
-//!     // 创建作用域管理器 / Create scope manager
-//!     let mut scope_manager = ScopeManager::new();
+//!     // 使用 array_windows 检测 ABBA 模式
+//!     let has_abba_pattern = has_abba("abba");
+//!     println!("Has ABBA pattern: {}", has_abba_pattern);
 //!
-//!     // 进入作用域 / Enter scope
-//!     scope_manager.enter_scope("main".to_string(), ScopeType::Block);
-//!
-//!     // 创建不可变借用 / Create immutable borrow
-//!     let borrow_result = borrow_checker.create_borrow(
-//!         "owner".to_string(),
-//!         "borrower".to_string(),
-//!         BorrowType::Immutable
-//!     );
-//!
-//!     match borrow_result {
-//!         Ok(borrow) => println!("借用创建成功 / Borrow created successfully: {:?}", borrow),
-//!         Err(e) => println!("借用创建失败 / Borrow creation failed: {:?}", e),
-//!     }
-//!
-//!     // 退出作用域 / Exit scope
-//!     scope_manager.exit_scope()?;
-//!
-//!     println!("所有权和借用系统运行正常 / Ownership and borrowing system running normally");
-//!
-//!     Ok(())
+//!     // 使用 array_windows 计算滑动窗口平均值
+//!     let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+//!     let averages = sliding_window_averages(&data);
+//!     println!("Sliding window averages: {:?}", averages);
 //! }
 //! ```
 //!

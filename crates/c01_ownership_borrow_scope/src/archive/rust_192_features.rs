@@ -1,3 +1,4 @@
+#![doc(test(ignore))]
 //! # Rust 1.92.0 特性实现模块 / Rust 1.92.0 Features Implementation Module
 //!
 //! 本模块实现了 Rust 1.92.0 版本中与所有权、借用、生命周期相关的新特性和改进，包括：

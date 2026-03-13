@@ -1,3 +1,4 @@
+#![doc(test(ignore))]
 //! Rust 1.92.0 WASM 特性实现模块
 //!
 //! 本模块展示了 Rust 1.92.0 在 WASM 场景中的应用，包括：

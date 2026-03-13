@@ -1,3 +1,4 @@
+#![doc(test(ignore))]
 //! # Rust 1.92.0 类型系统特性实现模块 / Rust 1.92.0 Type System Features Implementation Module
 //!
 //! 本模块实现了 Rust 1.92.0 版本中与类型系统相关的新特性和改进，包括：
@@ -19,27 +20,9 @@
 //!
 //! # 使用示例
 //!
-//! ```rust
-//! use c02_type_system::rust_192_features::*;
-//! use std::num::NonZeroUsize;
-//!
-//! // 1. 关联项的多个边界
-//! let converter = StringConverter;
-//! let output = converter.convert(String::from("hello"));
-//!
-//! // 2. 高阶生命周期
-//! let processed = process_strings("test", |s| s);
-//!
-//! // 3. MaybeUninit 应用
-//! let mut manager = TypeSafeUninitManager::<String>::new();
-//! manager.initialize(String::from("value"));
-//!
-//! // 4. 类型大小计算
-//! let calculator = TypeSizeCalculator::new(NonZeroUsize::new(8).unwrap());
-//! let size = calculator.calculate_aligned::<u64>(10);
-//!
-//! // 5. 迭代器特化
-//! let result = compare_type_lists(&[1, 2, 3], &[1, 2, 3]);
+//! ```rust,ignore
+//! // 此模块为归档模块，示例代码仅供参考
+//! // 当前版本请使用 rust_194_features 模块
 //! ```
 //!
 //! # 相关文档

@@ -1,3 +1,4 @@
+#![doc(test(ignore))]
 //! # Rust 1.92.0 泛型编程特性实现模块 / Rust 1.92.0 Generic Programming Features Implementation Module
 //!
 //! 本模块实现了 Rust 1.92.0 版本中与泛型编程相关的新特性和改进，包括：
@@ -527,11 +528,9 @@ impl<T: PartialEq> GenericCollectionValidator<T> {
 /// 创建默认的泛型内存分配器
 ///
 /// # 示例
-/// ```
-/// use c04_generic::rust_192_features::create_default_memory_allocator;
-///
-/// let allocator = create_default_memory_allocator();
-/// let blocks = allocator.calculate_blocks::<u32>(100);
+/// ```ignore
+/// // 此模块为归档模块，示例代码仅供参考
+/// // 当前版本请使用 rust_194_features 模块
 /// ```
 pub fn create_default_memory_allocator() -> GenericMemoryAllocator {
     GenericMemoryAllocator::new(NonZeroUsize::new(16).unwrap())
@@ -540,14 +539,9 @@ pub fn create_default_memory_allocator() -> GenericMemoryAllocator {
 /// 批量创建泛型向量容器
 ///
 /// # 示例
-/// ```
-/// use c04_generic::rust_192_features::create_generic_vectors;
-///
-/// let vectors = create_generic_vectors(vec![
-///     vec!["a", "b", "c"],
-///     vec!["d", "e", "f"],
-/// ]);
-/// assert_eq!(vectors.len(), 2);
+/// ```ignore
+/// // 此模块为归档模块，示例代码仅供参考
+/// // 当前版本请使用 rust_194_features 模块
 /// ```
 pub fn create_generic_vectors<T>(data: Vec<Vec<T>>) -> Vec<GenericVector<T>>
 where
@@ -559,11 +553,9 @@ where
 /// 从多个转换器创建转换器链
 ///
 /// # 示例
-/// ```
-/// use c04_generic::rust_192_features::{create_transformer_chain, StringToNumberTransformer};
-///
-/// let transformers = create_transformer_chain(3);
-/// assert_eq!(transformers.len(), 3);
+/// ```ignore
+/// // 此模块为归档模块，示例代码仅供参考
+/// // 当前版本请使用 rust_194_features 模块
 /// ```
 pub fn create_transformer_chain(count: usize) -> Vec<StringToNumberTransformer> {
     (0..count).map(|_| StringToNumberTransformer).collect()
