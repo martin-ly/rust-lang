@@ -274,7 +274,7 @@ futures-util = "0.3.32"
 # tracing: 应用程序级别的追踪库，用于结构化日志记录 - 版本 0.1+ (字母索引)
 tracing = "0.1.43"
 # tracing-subscriber: tracing的订阅者实现，支持多种输出格式
-tracing-subscriber = { version = "0.3.22", features = ["env-filter", "json"] }
+tracing-subscriber = { version = "0.3.23", features = ["env-filter", "json"] }
 # log: 标准日志库，提供简单的日志记录接口 - 版本 0.4+ (字母索引)
 log = "0.4.29"
 # prometheus: Prometheus指标收集库
