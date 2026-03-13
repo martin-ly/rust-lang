@@ -35,7 +35,7 @@
 - const 函数 API 扩展
 - 更好的 trait 实现
 
-参考：[Rust API Documentation](https://doc.rust-lang.org/std/README.md)
+参考：Rust API Documentation
 
 ---
 
@@ -53,7 +53,7 @@
 - 改进的依赖解析
 - 更好的构建缓存
 
-参考：[Cargo Book - Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)
+参考：Cargo Book - Workspaces
 
 ---
 
@@ -126,7 +126,7 @@ fn create_array<const N: usize>() -> [i32; N] {
 let arr: [i32; 5] = create_array();
 ```
 
-参考：[Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)
+参考：Const Generics
 
 ---
 
@@ -152,7 +152,7 @@ let arr: [i32; 5] = create_array();
 edition = "2024"
 ```
 
-参考：[Edition Guide](https://doc.rust-lang.org/edition-guide/README.md)
+参考：Edition Guide
 
 ---
 
@@ -257,7 +257,7 @@ linker = "clang"
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 ```
 
-参考：[LLVM LLD](https://lld.llvm.org/README.md)
+参考：LLVM LLD
 
 ---
 
@@ -449,7 +449,7 @@ trait Summary {
 }
 ```
 
-参考：[The Rust Book - Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
+参考：The Rust Book - Traits
 
 ---
 
@@ -478,18 +478,18 @@ trait Summary {
 
 ### 相关文档
 
-- 📄 [FAQ 文档](RUST_190_FAQ.md)
-- 📄 [主报告](RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md)
-- 📄 [完整会话总结](RUST_190_完整会话总结_2025_10_26.md)
+- 📄 FAQ 文档
+- 📄 主报告
+- 📄 完整会话总结
 
 ---
 
 ### 外部参考
 
-- 📖 [Rust Reference](https://doc.rust-lang.org/reference/README.md)
-- 📖 [Rust Glossary](https://doc.rust-lang.org/reference/glossary.html)
-- 📖 [Rust API Docs](https://doc.rust-lang.org/std/README.md)
-- 📖 [Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/README.md)
+- 📖 Rust Reference
+- 📖 Rust Glossary
+- 📖 Rust API Docs
+- 📖 Release Notes
 
 ---
 

@@ -261,7 +261,7 @@ impl EventDrivenWorkflow {
 
 - [工作流引擎决策树](./formal_methods/WORKFLOW_ENGINE_DECISION_TREE.md)
 - [工作流引擎矩阵](./formal_methods/WORKFLOW_ENGINES_MATRIX.md)
-- [软件设计理论 - 工作流](./software_design_theory/02_workflow_safe_complete_models/)
+- [软件设计理论 - 工作流](./software_design_theory/02_workflow_safe_complete_models/README.md)
 
 ---
 

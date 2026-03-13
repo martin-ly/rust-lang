@@ -416,5 +416,5 @@ Drop检查确保：
 ## 参考
 
 1. [Rustonomicon - Drop Check](https://doc.rust-lang.org/nomicon/dropck.html)
-2. [RFC 1238 - Non-lexical lifetimes](<https://rust-lang.github.io/rfcs/1238-non> Lexical-lifetimes.html)
+2. [RFC 1238 - Non-lexical lifetimes](https://rust-lang.github.io/rfcs/1238-non-lexical-lifetimes.html)
 3. [The Drop Check Eyepatch](https://doc.rust-lang.org/nightly/nomicon/phantom-data.html#the-drop-check-eyepatch)

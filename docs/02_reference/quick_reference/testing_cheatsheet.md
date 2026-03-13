@@ -1433,7 +1433,7 @@ fn broken_test() {
 
 - **顶层集成测试**：[`tests/cross_module_integration_tests.rs`](../../../tests/cross_module_integration_tests.rs)
 - **典型 crate 测试目录**：
-  - C02 类型系统：[`crates/c02_type_system/tests/error_paths_tests.rs`](../../../crates/c02_type_system/tests/error_paths_tests.rs)、[`edge_cases_tests.rs`](../../../crates/c02_type_system/tests/edge_cases_tests.rs)
+  - C02 类型系统：error_paths_tests.rs、edge_cases_tests.rs（代码示例待补充）
   - C06 异步：[`crates/c06_async/tests/integration_tests.rs`](../../../crates/c06_async/tests/integration_tests.rs)
   - C05 并发：[`crates/c05_threads/tests/concurrent_safety_tests.rs`](../../../crates/c05_threads/tests/concurrent_safety_tests.rs)
   - C08 算法：[`crates/c08_algorithms/tests/edge_cases_tests.rs`](../../../crates/c08_algorithms/tests/edge_cases_tests.rs)

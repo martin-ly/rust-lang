@@ -85,6 +85,7 @@
 | **crypto/hpke** | 混合公钥加密 | 后量子密码 |
 | **runtime/secret** | 安全擦除临时数据 | 密码学安全 |
 
+<!-- markdown-link-check-disable -->
 ### 2.2 Rust 1.93.1 vs Go 1.26 语言特性矩阵
 
 ```text
@@ -104,7 +105,7 @@
 │  │ 结构体                struct S { x: i32 }        type S struct { x int }│  │
 │  │ 枚举                  enum E { A, B(i32) }       type E int + iota   │   │
 │  │ 接口/Trait            trait T { fn f(&self); }   type T interface { } │   │
-│  │ 泛型                  fn foo<T>(x: T)           func foo[T any](x T)  │   │
+│  │ 泛型                  fn foo<T>(x: T)           `func foo[T any](x T)` /* [T any] 是泛型语法 */ │   │
 │  │ 闭包                  |x| x + 1                 func(x int) int { }   │   │
 │  │ 模式匹配              match x { ... }           switch x { ... }      │   │
 │  │ 控制流                if/while/for/loop         if/for/switch          │   │
@@ -114,6 +115,7 @@
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
+<!-- markdown-link-check-enable -->
 
 ---
 
@@ -327,9 +329,9 @@ func sliceSharing() {
 │  │  // Circle自动实现Drawable接口                                        │   │
 │  │                                                                     │   │
 │  │  // 泛型约束 (Go 1.18+)                                              │   │
-│  │  func Render[T Drawable](item T) interface{} {                      │   │
-│  │      return item.Draw()                                             │   │
-│  │  }                                                                  │   │
+│  │  // func Render[T Drawable](item T) interface{} {                   │   │
+│  │  //     return item.Draw()                                           │   │
+│  │  // }                                                                │   │
 │  │                                                                     │   │
 │  │  // 类型集合                                                         │   │
 │  │  type Number interface {                                            │   │
@@ -400,6 +402,7 @@ trait LendingIterator {
 }
 ```
 
+<!-- markdown-link-check-disable -->
 ```go
 // ============================================
 // Go 泛型示例 (1.18+)
@@ -459,6 +462,7 @@ type Adder[A Adder[A]] interface {
     Add(A) A
 }
 ```
+<!-- markdown-link-check-enable -->
 
 ---
 

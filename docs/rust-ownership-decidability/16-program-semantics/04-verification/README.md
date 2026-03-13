@@ -11,8 +11,8 @@
 | 文档 | 主题 | 难度 | 阅读时间 |
 |------|------|------|----------|
 | [04a-iris-framework](./04a-iris-framework.md) | Iris 高阶分离逻辑 | 🔴 | 3小时 |
-| [04b-rustbelt-methodology](./04b-rustbelt-methodology.md) | RustBelt 验证方法 | 🔴 | 3小时 |
-| [04c-concurrent-separation-logic](./04c-concurrent-separation-logic.md) | 并发分离逻辑 | 🔴 | 2小时 |
+| 04b-rustbelt-methodology | RustBelt 验证方法 | 🔴 | 3小时 |
+| 04c-concurrent-separation-logic | 并发分离逻辑 | 🔴 | 2小时 |
 
 ---
 

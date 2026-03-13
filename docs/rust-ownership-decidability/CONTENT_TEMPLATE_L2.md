@@ -203,15 +203,15 @@ fn main() {
 ## 9. 参考资源
 
 ### 官方文档
-- [The Rust Book - XXX](link)
-- [The Rust Reference - XXX](link)
+- The Rust Book - XXX
+- The Rust Reference - XXX
 
 ### 学术论文
-1. [论文标题](link) - 作者 (年份)
+1. 论文标题 - 作者 (年份)
 
 ### 相关文档
-- [相关文档 A](../path/to/doc.md)
-- [相关文档 B](../path/to/doc.md)
+- 相关文档 A
+- 相关文档 B
 ```
 
 ---

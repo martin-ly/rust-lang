@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [performance_benchmarks.md](../../../../../research_notes/experiments/performance_benchmarks.md)、[PERFORMANCE_TUNING_GUIDE.md](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+> 内容已整合至： performance_benchmarks.md (研究笔记)、PERFORMANCE_TUNING_GUIDE.md (指南)
 
 ## 知识结构思维导图
 
@@ -37,8 +37,8 @@ mindmap
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
-| 本README | research_notes/experiments/performance_benchmarks.md | 索引/重定向 |
-| 本README | 05_guides/PERFORMANCE_TUNING_GUIDE.md | 索引/重定向 |
+| 本README | performance_benchmarks.md (研究笔记) | 索引/重定向 |
+| 本README | PERFORMANCE_TUNING_GUIDE.md (指南) | 索引/重定向 |
 
 [返回主索引](../../00_master_index.md)
 
@@ -286,22 +286,22 @@ criterion_main!(benches);
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 性能基准实验 | 性能测试方法论 | [../../../../../research_notes/experiments/performance_benchmarks.md](../../../../../research_notes/experiments/performance_benchmarks.md) |
-| 编译器优化 | 编译器优化分析 | [../../../../../research_notes/experiments/compiler_optimizations.md](../../../../../research_notes/experiments/compiler_optimizations.md) |
-| 并发性能 | 并发性能测试 | [../../../../../research_notes/experiments/concurrency_performance.md](../../../../../research_notes/experiments/concurrency_performance.md) |
+| 性能基准实验 | 性能测试方法论 | performance_benchmarks.md (研究笔记) |
+| 编译器优化 | 编译器优化分析 | compiler_optimizations.md (研究笔记) |
+| 并发性能 | 并发性能测试 | concurrency_performance.md (研究笔记) |
 
 ### 工具链
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 编译器特性 | 编译器优化选项 | [../../../06_toolchain/01_compiler_features.md](../../../06_toolchain/01_compiler_features.md) |
-| 性能调优指南 | 实用优化技巧 | [../../../05_guides/PERFORMANCE_TUNING_GUIDE.md](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md) |
+| 编译器特性 | 编译器优化选项 | [../../06_toolchain_ecosystem/01_compiler/README.md](../../06_toolchain_ecosystem/01_compiler/README.md) |
+| 性能调优指南 | 实用优化技巧 | PERFORMANCE_TUNING_GUIDE.md (指南) |
 
 ### 形式化方法
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Send/Sync 形式化 | 并发安全形式化 | [../../../../../research_notes/formal_methods/send_sync_formalization.md](../../../../../research_notes/formal_methods/send_sync_formalization.md) |
+| Send/Sync 形式化 | 并发安全形式化 | send_sync_formalization.md (研究笔记) |
 
 ---
 
@@ -309,4 +309,4 @@ criterion_main!(benches);
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
-| c11_advanced | 高级特性实现 | [../../../../crates/c11_advanced/](../../../../crates/c11_advanced/README.md) |
+| c11_advanced | 高级特性实现 | crates/c11_advanced/ (crate) |

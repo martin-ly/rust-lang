@@ -180,14 +180,17 @@ $$
 
 ### 进程代数 (CSP)
 
+<!-- markdown-link-check-disable -->
 ```csp
 -- 多路合并的 CSP 形式化
 
 -- 单个分支
-Branch(i) = start.i -> work.i -> complete.i -> trigger.i -> SKIP
+`Branch(i)` = start.i -> work.i -> complete.i -> trigger.i -> SKIP
 
 -- 多路合并：每个分支独立触发
 MultiMerge(n) = || i:{1..n} @ [i](Branch(i) ; Next)
+```
+<!-- markdown-link-check-enable -->
 
 -- 其中 Next 是后续活动
 Next = execute -> SKIP

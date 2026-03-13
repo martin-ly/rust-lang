@@ -330,7 +330,7 @@ $$\text{TraitObject}[T] = (\text{data} : \exists \tau. \tau, \text{vtable} : \te
 $$\text{VTable}[T] = \{m_1 : \text{fn}(\& \tau) \to \tau_1', m_2 : \text{fn}(\& \tau) \to \tau_2', \ldots\}$$
 
 **定义 2.4 (Trait 对象方法调用)**: Trait 对象方法调用通过虚函数表进行动态分发：
-$$\text{call}((\text{data}, \text{vtable}), m, \text{args}) = \text{vtable}[m](\text{data}, \text{args})$$
+$$\text{call}((\text{data}, \text{vtable}), m, \text{args}) = \text{vtable}`m(data, args)`$$
 
 **类型规则**：
 $$\Gamma \vdash \text{obj} : \text{dyn } T \quad m : \tau_1 \to \tau_2 \in T \quad \Gamma \vdash \text{args} : \tau_1$$
@@ -500,7 +500,7 @@ RFC 1023。形式化：$\text{Fundamental}(\tau) \rightarrow \text{OrphanRule}(\
 
 **Def TRAIT-GAT1（Trait + 泛型 + GAT 组合）**：`impl<T> Trait for Vec<T>` 与 GAT 组合时，解析优先级：具体 impl 优先于泛型 impl；GAT 约束在单态化时检查。
 形式化：$\text{Resolve}(\tau[\vec{\alpha}], T)$ 中优先匹配最具体 impl；
-GAT 约束 $A[P] : B[P]$ 在 [advanced_types](../advanced_types.md) AT-L1 衔接。
+GAT 约束 $A[P] : B[P]$ 在 [advanced_types](advanced_types.md) AT-L1 衔接。
 
 **Def SPEC1（specialization）**： overlapping impl 时（不稳定），更具体的 impl 优先；
 `default` 方法可被更具体 impl 覆盖；

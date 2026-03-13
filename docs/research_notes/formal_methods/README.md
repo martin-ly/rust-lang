@@ -275,9 +275,9 @@
 
 ### 代码实现
 
-- [所有权实现](../../crates/c01_ownership_borrow_scope/docs/README.md)
-- [借用检查器实现](../../crates/c01_ownership_borrow_scope/docs/README.md)
-- [异步系统实现](../../crates/c06_async/README.md)
+- [所有权实现](../../../crates/c01_ownership_borrow_scope/docs/README.md)
+- [借用检查器实现](../../../crates/c01_ownership_borrow_scope/docs/README.md)
+- [异步系统实现](../../../crates/c06_async/README.md)
 
 ### 学术资源
 

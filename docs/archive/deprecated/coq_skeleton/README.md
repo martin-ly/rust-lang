@@ -3,7 +3,7 @@
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
-> **用途**: 为 L3 机器可检查证明提供 Coq 定理陈述骨架，对应 [CORE_THEOREMS_FULL_PROOFS](../../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md)
+> **用途**: 为 L3 机器可检查证明提供 Coq 定理陈述骨架，对应 CORE_THEOREMS_FULL_PROOFS
 > **状态**: ✅ 已完成
 
 ---
@@ -410,17 +410,17 @@ fn type_safety_scenario() {
 
 | 定理 | 文档 | Coq 骨架 |
 | :--- | :--- | :--- |
-| T-OW2 | [CORE_THEOREMS_FULL_PROOFS](../../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §2.2 | [OWNERSHIP_UNIQUENESS.v](./OWNERSHIP_UNIQUENESS.v) |
-| T-BR1 | [CORE_THEOREMS_FULL_PROOFS](../../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §3.1 | [BORROW_DATARACE_FREE.v](./BORROW_DATARACE_FREE.v) |
-| T-TY3 | [CORE_THEOREMS_FULL_PROOFS](../../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §4.3 | [TYPE_SAFETY.v](./TYPE_SAFETY.v) |
+| T-OW2 | CORE_THEOREMS_FULL_PROOFS §2.2 | [OWNERSHIP_UNIQUENESS.v](./OWNERSHIP_UNIQUENESS.v) |
+| T-BR1 | CORE_THEOREMS_FULL_PROOFS §3.1 | [BORROW_DATARACE_FREE.v](./BORROW_DATARACE_FREE.v) |
+| T-TY3 | CORE_THEOREMS_FULL_PROOFS §4.3 | [TYPE_SAFETY.v](./TYPE_SAFETY.v) |
 
 ### 相关研究笔记
 
 | 主题 | 文档 |
 | :--- | :--- |
-| 所有权模型 | [formal_methods/ownership_model.md](../../../../research_notes/formal_methods/ownership_model.md) |
-| 借用检查器 | [formal_methods/borrow_checker_proof.md](../../../../research_notes/formal_methods/borrow_checker_proof.md) |
-| 类型系统 | [type_theory/type_system_foundations.md](../../../../research_notes/type_theory/type_system_foundations.md) |
+| 所有权模型 | formal_methods/ownership_model.md |
+| 借用检查器 | formal_methods/borrow_checker_proof.md |
+| 类型系统 | type_theory/type_system_foundations.md |
 
 ### 集成计划
 

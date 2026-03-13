@@ -625,8 +625,8 @@ mod tests {
 ## 📚 下一步
 
 - [高级实践工作坊](exercises/ADVANCED_OWNERSHIP_WORKSHOP.md) - 深入复杂场景
-- [案例分析](../case-studies/README.md) - 学习生产代码
-- [Coq形式化](../coq-formalization/README.md) - 理解严格证明
+- [案例分析](./case-studies/README.md) - 学习生产代码
+- [Coq形式化](./coq-formalization/README.md) - 理解严格证明
 
 ---
 

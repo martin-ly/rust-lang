@@ -457,7 +457,7 @@ Redis - ✅ 正常
 
 ## 📖 相关文档
 
-- [快速启动指南](./QUICK_START_SPELL_CHECK.md)
+- 快速启动指南 (QUICK_START_SPELL_CHECK.md)
 - [完整配置文档](./SPELL_CHECK_CONFIGURATION.md)
 - [初始配置总结](./SPELL_CHECK_SETUP_SUMMARY.md)
 

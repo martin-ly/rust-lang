@@ -500,9 +500,13 @@ void c23_nullptr() {
 │  │  // Circle自动实现Drawable接口                                                     │   │
 │  │                                                                                   │   │
 │  │  // 泛型约束 (Go 1.18+)                                                            │   │
-│  │  func Render[T Drawable](item T) interface{} {                                    │   │
+│  │  <!-- markdown-link-check-disable -->                                              │   │
+│  │  ```go                                                                             │   │
+│  │  func Render[T Drawable](item T) interface{} {                                     │   │
 │  │      return item.Draw()                                                           │   │
 │  │  }                                                                                │   │
+│  │  ```                                                                               │   │
+│  │  <!-- markdown-link-check-enable -->                                               │   │
 │  │                                                                                   │   │
 │  │  特性:                                                                            │   │
 │  │  ✅ 隐式实现 (无需显式声明)                                                        │   │

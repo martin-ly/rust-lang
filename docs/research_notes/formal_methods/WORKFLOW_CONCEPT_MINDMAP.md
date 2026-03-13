@@ -240,8 +240,8 @@ Comp3(undo) <- Comp2(undo) <- Comp1(undo)
 
 ## 相关文档
 
-- [04_expressiveness_boundary](../../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md) - 工作流表达力边界
-- [05_distributed](../../software_design_theory/03_execution_models/05_distributed.md) - Saga 补偿链
+- [04_expressiveness_boundary](../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md) - 工作流表达力边界
+- [05_distributed](../software_design_theory/03_execution_models/05_distributed.md) - Saga 补偿链
 - [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) - 执行模型选型
 
 ---

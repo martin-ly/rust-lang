@@ -12,7 +12,10 @@
 
 ### 项目元文档索引生成器
 
-```rust
+<!-- 注意：以下代码块中的占位符是 Rust format! 宏的格式字符串，不是 Markdown 链接 -->
+<!-- markdown-link-check-disable-start -->
+
+```rust,ignore
 //! 自动生成 07_project 目录文档索引
 use std::collections::HashMap;
 use std::fs;
@@ -84,10 +87,11 @@ impl ProjectDocIndexer {
         output.push_str("| :--- | :--- | :--- |\n");
 
         for doc in docs {
-            output.push_str(&format!(
+            let line = format!(
                 "| [{}](./{}.md) | {} | {} |\n",
                 doc.title, doc.name, doc.description, doc.status
-            ));
+            );
+            output.push_str(&line);
         }
 
         output.push_str("\n## 主索引\n\n");
@@ -112,6 +116,8 @@ fn main() {
     println!("README.md 已更新，包含 {} 个文档", docs.len());
 }
 ```
+
+<!-- markdown-link-check-enable -->
 
 ---
 

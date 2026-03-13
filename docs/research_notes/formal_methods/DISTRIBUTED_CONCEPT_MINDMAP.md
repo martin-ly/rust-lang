@@ -181,7 +181,7 @@ Saga 步骤三元组 $(\mathit{id}, \mathit{action}, \mathit{comp})$ 满足：�
 
 ## 相关文档
 
-- [05_distributed 分布式形式化](../../software_design_theory/03_execution_models/05_distributed.md) - Saga/CQRS/Circuit Breaker Def
+- [05_distributed 分布式形式化](../software_design_theory/03_execution_models/05_distributed.md) - Saga/CQRS/Circuit Breaker Def
 - [DISTRIBUTED_PATTERNS_MATRIX](./DISTRIBUTED_PATTERNS_MATRIX.md) - 模式对比矩阵
 
 ---

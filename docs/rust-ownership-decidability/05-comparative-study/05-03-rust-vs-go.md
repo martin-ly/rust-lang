@@ -1355,6 +1355,7 @@ impl Reader for Vec<u8> {
 
 **Go 泛型 (1.18+):**
 
+<!-- markdown-link-check-disable -->
 ```go
 package main
 
@@ -1378,6 +1379,8 @@ func Sum[T Number](values []T) T {
     }
     return sum
 }
+```
+<!-- markdown-link-check-enable -->
 
 // 泛型结构体
 type Stack[T any] struct {

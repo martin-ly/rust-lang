@@ -281,8 +281,8 @@ Qed.
 
 ### 相关代码
 
-- [相关代码位置](../../crates/xxx/src/README.md)
-- [示例代码位置](../../crates/xxx/examples/README.md)
+- 相关代码位置: `../../crates/<crate_name>/src/`
+- 示例代码位置: `../../crates/<crate_name>/examples/`
 
 ### 工具资源
 

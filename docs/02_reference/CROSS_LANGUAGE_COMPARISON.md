@@ -404,12 +404,14 @@ T max(T a, T b) {
 auto result = max(10, 20);  // 自动推断 T = int
 ```
 
+<!-- markdown-link-check-disable -->
 ```go
 // Go 1.18+: 泛型
 package main
 
 import "golang.org/x/exp/constraints"
 
+// Go 1.18+ 泛型
 func max[T constraints.Ordered](a, b T) T {
     if a > b {
         return a
@@ -418,8 +420,9 @@ func max[T constraints.Ordered](a, b T) T {
 }
 
 // 使用
-result := max(10, 20)
+// result := max(10, 20)
 ```
+<!-- markdown-link-check-enable -->
 
 ```python
 # Python: 动态类型，无泛型
@@ -527,9 +530,9 @@ $ python -m pytest
 
 | 语言 | 规范/形式化资源 |
 | :--- | :--- |
-| **C++** | [ISO C++ Standard](https://isocpp.org/std/the-standard)、[cppreference](https://en.cppreference.com/README.md) |
+| **C++** | [ISO C++ Standard](https://isocpp.org/std/the-standard)、[cppreference](https://en.cppreference.com/) |
 | **Go** | [Go Language Specification](https://golang.org/ref/spec)、[Go Memory Model](https://golang.org/ref/mem) |
-| **Python** | [Python Language Reference](https://docs.python.org/3/reference/README.md) |
+| **Python** | [Python Language Reference](https://docs.python.org/3/reference/) |
 
 ---
 

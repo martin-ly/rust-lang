@@ -131,7 +131,7 @@
 
 **步骤**：判安全 → 需 `unsafe`；可封装为 Safe API（`Box::from_raw` 等）→ **需 unsafe、可安全抽象**。
 
-**结论**：内部 `unsafe`；对外 `pub fn` 为 Safe 抽象；见 [borrow_checker_proof](borrow_checker_proof.md) Def UNSAFE1。
+**结论**：内部 `unsafe`；对外 `pub fn` 为 Safe 抽象；见 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) Def UNSAFE1。
 
 ---
 

@@ -777,9 +777,9 @@ for item in collection {  // 自动调用 into_iter()
 
 ### 学习资源
 
-- 📖 [完整学习路径](./README.md#学习路径推荐)
-- ✅ [学习检查清单](./LEARNING_CHECKLIST.md)
-- 🤝 [贡献指南](./CONTRIBUTING.md)
+- 📖 完整学习路径 (./README.md)
+- ✅ 学习检查清单 (LEARNING_CHECKLIST.md)
+- 🤝 贡献指南 (CONTRIBUTING.md)
 
 ---
 

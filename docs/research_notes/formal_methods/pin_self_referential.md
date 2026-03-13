@@ -595,8 +595,8 @@ async fn use_future() {
 
 ### 相关代码
 
-- [自引用结构实现](../../crates/c01_ownership_borrow_scope/README.md)
-- [异步 Future 实现](../../crates/c06_async/README.md)
+- [自引用结构实现](../../../crates/c01_ownership_borrow_scope/README.md)
+- [异步 Future 实现](../../../crates/c06_async/README.md)
 
 ### 工具资源
 

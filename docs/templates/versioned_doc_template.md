@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Rust 学习项目 - 版本化文档模板
   使用说明:
   1. 复制此模板创建新文档
@@ -8,10 +8,10 @@
 
 # {{标题}}
 
-> **Rust 版本**: {{ rust_version }}+ ({{ stability }})  
-> **Edition**: {{ edition }}  
-> **最后验证**: {{ validation_date }}  
-> **状态**: {{ status }}  
+> **Rust 版本**: {{ rust_version }}+ ({{ stability }})
+> **Edition**: {{ edition }}
+> **最后验证**: {{ validation_date }}
+> **状态**: {{ status }}
 > **历史版本**: [归档列表](../../VERSION_INDEX.md)
 
 ---
@@ -131,19 +131,22 @@ default = []
 ## 🔗 相关资源
 
 ### 官方资源
+
 - [Rust {{ rust_version }} 发布说明](https://blog.rust-lang.org/)
 - [官方文档](https://doc.rust-lang.org/)
-- [RFC 文档]({{ rfc_link }})
-- [跟踪 Issue]({{ tracking_issue }})
+- RFC 文档: `{{ rfc_link }}`
+- 跟踪 Issue: `{{ tracking_issue }}`
 
 ### 项目内资源
+
 - [版本化索引](../../VERSION_INDEX.md)
-- [历史版本归档](../../crates/{{ crate }}/src/archive/)
-- [相关 crate](crates/{{ related_crate }}/)
+- 历史版本归档: `../../crates/{{ crate }}/src/archive/`
+- 相关 crate: `crates/{{ related_crate }}/`
 
 ### 外部资源
-- [{{ external_resource_1 }}]({{ external_link_1 }})
-- [{{ external_resource_2 }}]({{ external_link_2 }})
+
+- {{ external_resource_1 }}: `{{ external_link_1 }}`
+- {{ external_resource_2 }}: `{{ external_link_2 }}`
 
 ---
 
@@ -159,7 +162,7 @@ default = []
 // ❌ 错误用法
 {{ wrong_usage }}
 
-// ✅ 正确用法  
+// ✅ 正确用法
 {{ correct_usage }}
 ```
 
@@ -197,12 +200,14 @@ mod tests {
 ## 📚 深入阅读
 
 ### 相关概念
-- [{{ related_concept_1 }}]({{ concept_link_1 }})
-- [{{ related_concept_2 }}]({{ concept_link_2 }})
+
+- {{ related_concept_1 }}: `{{ concept_link_1 }}`
+- {{ related_concept_2 }}: `{{ concept_link_2 }}`
 
 ### 设计模式
-- [{{ pattern_1 }}](../../crates/c09_design_pattern/src/)
-- [{{ pattern_2 }}](../../crates/c09_design_pattern/src/)
+
+- {{ pattern_1 }}: `../../crates/c09_design_pattern/src/`
+- {{ pattern_2 }}: `../../crates/c09_design_pattern/src/`
 
 ---
 

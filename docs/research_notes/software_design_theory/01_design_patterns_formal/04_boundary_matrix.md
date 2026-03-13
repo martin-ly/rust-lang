@@ -242,11 +242,11 @@ Observer ──→ Command
 
 | 组合 | 约束 | 引用 |
 | :--- | :--- | :--- |
-| Builder + Factory | 工厂返回 Builder；IT-T1 满足 | [CE-PAT1](../../04_compositional_engineering/02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持) |
+| Builder + Factory | 工厂返回 Builder；IT-T1 满足 | [CE-PAT1](../04_compositional_engineering/02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持) |
 | Decorator + Strategy | 装饰器持 `impl Strategy`；无共享可变 | CE-PAT-C1 |
 | Observer + Command | channel 传 `Box<dyn Command + Send>`；Send 约束 | CE-PAT-C1 |
 | Composite + Visitor | `match` 遍历 + `Visitor` trait | CE-PAT-C1 |
-| Repository + Service + DTO | 模块依赖 DAG；所有权沿调用链 | [03_integration_theory](../../04_compositional_engineering/03_integration_theory.md) |
+| Repository + Service + DTO | 模块依赖 DAG；所有权沿调用链 | [03_integration_theory](../04_compositional_engineering/03_integration_theory.md) |
 
 ### 禁止/慎用组合
 
@@ -257,7 +257,7 @@ Observer ──→ Command
 | Observer 回调持有 `&mut` 跨线程 | 数据竞争；用 channel 替代 |
 
 **引用**：[04_compositional_engineering](../04_compositional_engineering/README.md)、
-[CE-PAT1](../../04_compositional_engineering/02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持)。
+[CE-PAT1](../04_compositional_engineering/02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持)。
 
 ---
 

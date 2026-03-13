@@ -516,22 +516,22 @@ fn example() {
 
 ### 官方文档
 
-- 📖 [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/README.md)
-- 📖 [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/README.md)
-- 📖 [Rust API Documentation](https://doc.rust-lang.org/std/README.md)
+- 📖 Rust 1.90.0 Release Notes
+- 📖 Rust Edition Guide
+- 📖 Rust API Documentation
 
 ### 本项目文档
 
-- 📄 [主报告](RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md)
-- 📄 [术语表](RUST_190_GLOSSARY.md)
-- 📄 [Phase 2 完成报告](RUST_190_PHASE2_完成报告_2025_10_26.md)
-- 📄 [完整会话总结](RUST_190_完整会话总结_2025_10_26.md)
+- 📄 主报告
+- 📄 术语表
+- 📄 Phase 2 完成报告
+- 📄 完整会话总结
 
 ### 社区资源
 
-- 💬 [Rust Users Forum](https://users.rust-lang.org/README.md)
-- 💬 [Rust Discord](https://discord.gg/rust-lang)
-- 📚 [This Week in Rust](https://this-week-in-rust.org/README.md)
+- 💬 Rust Users Forum
+- 💬 Rust Discord
+- 📚 This Week in Rust
 
 ---
 
@@ -539,8 +539,8 @@ fn example() {
 
 如果本 FAQ 没有回答您的问题，请：
 
-1. 📖 查阅 [主报告](RUST_190_CONTENT_ALIGNMENT_REPORT_2025_10_26.md)
-2. 📖 查阅 [术语表](RUST_190_GLOSSARY.md)
+1. 📖 查阅 主报告
+2. 📖 查阅 术语表
 3. 💬 在项目 issue 中提问
 4. 💬 访问 Rust 官方论坛
 

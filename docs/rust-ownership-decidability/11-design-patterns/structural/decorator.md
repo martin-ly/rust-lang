@@ -14,6 +14,7 @@
 
 ## 实现方式
 
+<!-- markdown-link-check-disable -->
 ### 基础装饰者
 
 ```rust
@@ -103,9 +104,11 @@ fn main() {
     let decorated_b = ConcreteDecoratorB::new(decorated_a);
 
     println!("{}", decorated_b.operation());
-    // Output: ConcreteDecoratorB[B_behavior](ConcreteDecoratorA[A](ConcreteComponent))
+    // Output: `ConcreteDecoratorB[B_behavior](ConcreteDecoratorA[A](ConcreteComponent))`
+    // 注: [B_behavior] 和 [A] 是输出格式的一部分，不是 Markdown 链接
 }
 ```
+<!-- markdown-link-check-enable -->
 
 ---
 

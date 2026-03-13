@@ -118,7 +118,7 @@ pkg/**
 - 行内代码: `` `code` ``
 - 数学公式: `$$...$$` 和 `$...$`
 - URL 链接: `http://...`, `https://...`
-- Markdown 链接: `[text](url)`
+- Markdown 链接: `text`
 
 ### 多语言支持
 
@@ -247,14 +247,14 @@ proc-macro, BFS, WebSocket, GATs, Criterion, TypedArray
 
 ### 快速入门
 
-- 📖 [快速启动指南](./QUICK_START_SPELL_CHECK.md) - 3 步解决问题
-- 📘 [完整配置文档](./SPELL_CHECK_CONFIGURATION.md) - 15+ 章节详细说明
+- 📖 快速启动指南 (QUICK_START_SPELL_CHECK.md) - 3 步解决问题
+- 📘 完整配置文档 - 15+ 章节详细说明
 
 ### 配置文件
 
-- ⚙️ [VS Code 配置](./.vscode/settings.json) - 工作区设置
-- ⚙️ [cSpell 配置](./cspell.json) - 全局设置
-- 📦 [推荐扩展](./.vscode/extensions.json) - 扩展列表
+- ⚙️ VS Code 配置 (.vscode/settings.json) - 工作区设置
+- ⚙️ cSpell 配置 (cspell.json) - 全局设置
+- 📦 推荐扩展 (.vscode/extensions.json) - 扩展列表
 
 ---
 
@@ -356,8 +356,8 @@ git commit -m "chore: add new spell check terms"
 
 ### 获取帮助
 
-1. 查看 [完整配置文档](./SPELL_CHECK_CONFIGURATION.md)
-2. 查看 [快速启动指南](./QUICK_START_SPELL_CHECK.md)
+1. 查看 完整配置文档
+2. 查看 快速启动指南 (QUICK_START_SPELL_CHECK.md)
 3. 提交 Issue 到项目仓库
 4. 联系团队维护者
 
@@ -394,14 +394,14 @@ git commit -m "chore: add new spell check terms"
 
 ### 官方文档
 
-- [Code Spell Checker](https://streetsidesoftware.github.io/vscode-spell-checker/README.md)
-- [cSpell Configuration](https://cspell.org/configuration/README.md)
-- [VS Code Settings](https://code.visualstudio.com/docs/getstarted/settings)
+- Code Spell Checker
+- cSpell Configuration
+- VS Code Settings
 
 ### 社区资源
 
-- [cSpell GitHub](https://github.com/streetsidesoftware/cspell)
-- [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+- cSpell GitHub
+- VS Code Marketplace
 
 ---
 

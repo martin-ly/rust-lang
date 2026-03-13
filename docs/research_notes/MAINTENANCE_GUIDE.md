@@ -303,10 +303,13 @@
 
 ### 链接检查
 
+<!-- markdown-link-check-disable -->
 ```bash
 # 检查所有 Markdown 文件中的链接
 find docs/research_notes -name "*.md" -exec grep -l "\[.*\](.*)" {} \;
+# 注：上述命令中的 `[.*]` 是正则表达式语法，匹配方括号内的任意内容
 ```
+<!-- markdown-link-check-enable -->
 
 ### 格式检查
 

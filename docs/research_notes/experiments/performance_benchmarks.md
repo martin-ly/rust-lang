@@ -1139,7 +1139,7 @@ criterion_main!(serialization_benches);
 
 ### 相关代码
 
-- [性能基准测试代码](../../crates/c08_algorithms/docs/README.md)
+- [性能基准测试代码](../../../crates/c08_algorithms/docs/README.md)
 
 ### 工具资源
 

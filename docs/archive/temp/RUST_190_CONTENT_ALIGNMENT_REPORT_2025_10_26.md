@@ -19,4 +19,4 @@
 
 ## 相关文档
 
-- [Rust 1.94 更新报告](../RUST_194_RESEARCH_UPDATE.md)
+- Rust 1.94 更新报告 (../RUST_194_RESEARCH_UPDATE.md)

@@ -4,7 +4,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **对齐标准**: [Ferrocene FLS (Formal Language Specification)](https://spec.ferrocene.dev/README.md)
+> **对齐标准**: [Ferrocene FLS (Formal Language Specification)](https://spec.ferrocene.dev/)
 
 ---
 
@@ -55,7 +55,7 @@
 
 ## 🎯 概述 {#-概述}
 
-本文档定义了 Rust 学习系统的**术语标准化规范**，所有术语均与 [Ferrocene FLS (Formal Language Specification)](https://spec.ferrocene.dev/README.md) 对齐。Ferrocene FLS 是 Rust 语言的官方形式化规范，由 Ferrous Systems 和 AdaCore 维护，于 2024 年被 Rust 项目采纳为官方语言规范。
+本文档定义了 Rust 学习系统的**术语标准化规范**，所有术语均与 [Ferrocene FLS (Formal Language Specification)](https://spec.ferrocene.dev/) 对齐。Ferrocene FLS 是 Rust 语言的官方形式化规范，由 Ferrous Systems 和 AdaCore 维护，于 2024 年被 Rust 项目采纳为官方语言规范。
 
 ### 本文档的目标
 
@@ -84,7 +84,7 @@
 | 中文术语 | 英文原文 | FLS 章节 | 简要说明 |
 | :--- | :--- | :--- | :--- |
 | 所有权 | **Ownership** | [Chapter 15](https://spec.ferrocene.dev/ownership-and-destruction.html) | 值有且仅有一个所有者的机制 |
-| 借用 | **Borrowing** | [§15.4](<https://spec.ferrocene.dev/ownership-and-destruction.html#> borrowing) | 临时获取值的引用而不转移所有权 |
+| 借用 | **Borrowing** | [§15.4](https://spec.ferrocene.dev/ownership-and-destruction.html#borrowing) | 临时获取值的引用而不转移所有权 |
 | 不可变借用 | **Immutable Borrow** / **Shared Borrow** | [§15.4.2](https://spec.ferrocene.dev/ownership-and-destruction.html#immutable-borrows) | 允许多个读者同时访问的借用 |
 | 可变借用 | **Mutable Borrow** / **Unique Borrow** | [§15.4.3](https://spec.ferrocene.dev/ownership-and-destruction.html#mutable-borrows) | 仅允许一个写者访问的独占借用 |
 | 生命周期 | **Lifetime** | [Chapter 16](https://spec.ferrocene.dev/lifetime-analysis.html) | 引用有效的程序点集合 |
@@ -98,7 +98,7 @@
 | 未定义行为 | **Undefined Behavior (UB)** | [§7.8](https://spec.ferrocene.dev/undefined-behavior.html) | 违反语言契约的行为，编译器可做任意假设 |
 | 内存安全 | **Memory Safety** | [Chapter 15](https://spec.ferrocene.dev/ownership-and-destruction.html) | 防止悬垂指针、双重释放等内存错误 |
 | 数据竞争 | **Data Race** | [§10.8.2](https://spec.ferrocene.dev/expressions.html#unsafe-operations) | 非同步的并发读写冲突 |
-| 内部可变性 | **Interior Mutability** | [标准库文档](https://doc.rust-lang.org/std/cell/README.md) | 通过不可变引用修改值的能力 |
+| 内部可变性 | **Interior Mutability** | [标准库文档](https://doc.rust-lang.org/std/cell/) | 通过不可变引用修改值的能力 |
 | RAII | **Resource Acquisition Is Initialization** | - | 资源获取即初始化，Rust 的所有权模型基础 |
 
 ### 类型系统
@@ -139,7 +139,7 @@
 | Trait 对象 | **Trait Object** (`dyn Trait`) | [§4.13](https://spec.ferrocene.dev/types-and-traits.html#trait-objects) | 运行时多态的动态分发 |
 | 自动 Trait | **Auto Trait** | [§13.10](https://spec.ferrocene.dev/traits.html#auto-traits) | 编译器自动实现的 Trait（如 `Send`, `Sync`） |
 | 标记 Trait | **Marker Trait** | [§13.10](https://spec.ferrocene.dev/traits.html#auto-traits) | 无方法的 Trait，仅用于标记类型属性 |
-| 派生 | **Derive** | [§3.6](<https://spec.ferrocene.dev/items.html#derive-macro-> invocations) | 自动实现 Trait 的宏 |
+| 派生 | **Derive** | [§3.6](https://spec.ferrocene.dev/items.html#derive-macro-invocations) | 自动实现 Trait 的宏 |
 | 实现 | **Implementation** / **Impl** | [§3.11](https://spec.ferrocene.dev/items.html#implementations) | 为类型提供 Trait 或方法定义 |
 | 孤儿规则 | **Orphan Rule** | [§13.1.4](https://spec.ferrocene.dev/traits.html#orphan-rules) | 限制跨 crate 实现 Trait 的规则 |
 | 特化 | **Specialization** | [ nightly 特性 ] | 为特定类型提供优化的实现 |
@@ -183,14 +183,14 @@
 | 任务 | **Task** | [tokio 文档] | 异步执行的单元 |
 | 固定/钉住 | **Pin** | [标准库](https://doc.rust-lang.org/std/pin/struct.Pin.html) | 保证值在内存中不移动的抽象 |
 | 自引用 | **Self-Referential** | [标准库] | 包含指向自身引用的类型 |
-| 线程 | **Thread** | [标准库](https://doc.rust-lang.org/std/thread/README.md) | 操作系统线程 |
+| 线程 | **Thread** | [标准库](https://doc.rust-lang.org/std/thread/) | 操作系统线程 |
 | 线程安全 | **Thread Safety** | [标准库] | 跨线程访问的安全性 |
 | 可发送 | **Send** | [§13.10](https://spec.ferrocene.dev/traits.html#auto-traits) | 可安全跨线程转移所有权的标记 |
 | 可同步 | **Sync** | [§13.10](https://spec.ferrocene.dev/traits.html#auto-traits) | 可安全跨线程共享引用的标记 |
 | 互斥锁 | **Mutex** | [标准库](https://doc.rust-lang.org/std/sync/struct.Mutex.html) | 互斥访问的同步原语 |
 | 读写锁 | **RwLock** | [标准库](https://doc.rust-lang.org/std/sync/struct.RwLock.html) | 多读单写的同步原语 |
-| 原子操作 | **Atomic** | [标准库](https://doc.rust-lang.org/std/sync/atomic/README.md) | 无锁的原子操作 |
-| 通道 | **Channel** | [标准库](https://doc.rust-lang.org/std/sync/mpsc/README.md) | 线程间通信机制 |
+| 原子操作 | **Atomic** | [标准库](https://doc.rust-lang.org/std/sync/atomic/) | 无锁的原子操作 |
+| 通道 | **Channel** | [标准库](https://doc.rust-lang.org/std/sync/mpsc/) | 线程间通信机制 |
 | 条件变量 | **Condition Variable** | [标准库](https://doc.rust-lang.org/std/sync/struct.Condvar.html) | 线程同步原语 |
 | 栅栏 | **Barrier** | [标准库](https://doc.rust-lang.org/std/sync/struct.Barrier.html) | 多线程同步点 |
 
@@ -220,7 +220,7 @@
 | 包 | **Package** | [Cargo 文档] | Cargo 的构建单元，可含多个 crate |
 | 工作空间 | **Workspace** | [Cargo 文档] | 多个相关包的集合 |
 | 特性/功能 | **Feature** | [Cargo 文档] | 条件编译和可选依赖的标志 |
-| 版本 | **Edition** | [文档](https://doc.rust-lang.org/edition-guide/README.md) | Rust 语言的兼容性版本 |
+| 版本 | **Edition** | [文档](https://doc.rust-lang.org/edition-guide/) | Rust 语言的兼容性版本 |
 | HIR | **High-Level IR** | [编译器文档] | 高级中间表示 |
 | MIR | **Mid-Level IR** | [编译器文档] | 中级中间表示，借用检查在此进行 |
 | LLVM IR | **LLVM IR** | [编译器文档] | LLVM 的低级中间表示 |
@@ -248,7 +248,7 @@
 | 外部函数接口 | **Foreign Function Interface (FFI)** | [Chapter 18](https://spec.ferrocene.dev/ffi.html) | 与其他语言交互的接口 |
 | 外部块 | **Extern Block** (`extern {}`) | [§18](https://spec.ferrocene.dev/ffi.html) | 声明外部函数的块 |
 | 链接属性 | **Link Attribute** | [§18](https://spec.ferrocene.dev/ffi.html) | 指定链接的库 |
-| ABI | **Application Binary Interface** | [§9.1](<https://spec.ferrocene.dev/functions.html#extern-function-> qualifier) | 函数调用约定 |
+| ABI | **Application Binary Interface** | [§9.1](https://spec.ferrocene.dev/functions.html#extern-function-qualifier) | 函数调用约定 |
 | C ABI | **C ABI** (`extern "C"`) | [§9.1](https://spec.fer-lang.org/stable/std/keyword.extern.html) | C 语言的调用约定 |
 
 ---

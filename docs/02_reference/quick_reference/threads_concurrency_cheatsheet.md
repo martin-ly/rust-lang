@@ -730,7 +730,7 @@ thread::spawn(move || {
 - [消息传递与高级并发](../../../crates/c05_threads/examples/message_passing_demo.rs)、[advanced_concurrency_patterns_demo.rs](../../../crates/c05_threads/examples/advanced_concurrency_patterns_demo.rs)
 - [背压与流式处理](../../../crates/c05_threads/examples/backpressure_overview_demo.rs)、[stream_backpressure_demo.rs](../../../crates/c05_threads/examples/stream_backpressure_demo.rs)、[stream_rate_batch_demo.rs](../../../crates/c05_threads/examples/stream_rate_batch_demo.rs)
 - [优先级通道与实战模式](../../../crates/c05_threads/examples/priority_channels_demo.rs)、[real_world_threading_demo.rs](../../../crates/c05_threads/examples/real_world_threading_demo.rs)、[performance_optimization_demo.rs](../../../crates/c05_threads/examples/performance_optimization_demo.rs)
-- [Rust 1.92 特性演示](../../../crates/c05_threads/examples/rust_192_features_demo.rs)、[rust_190_features_demo.rs](../../../crates/c05_threads/examples/rust_190_features_demo.rs)
+- Rust 1.92 特性演示（代码示例待补充）
 
 ---
 

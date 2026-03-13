@@ -40,7 +40,7 @@ fn example() {
 - 如果必须使用原始指针，确保生命周期正确
 - 关注编译器的警告信息
 
-**相关文档**: [`01_theoretical_foundations/02_memory_safety/03_dangling_pointer_warnings_rust_1_91.md`](./01_theoretical_foundations/02_memory_safety/03_dangling_pointer_warnings_rust_1_91.md)
+**相关文档**: `01_theoretical_foundations/02_memory_safety/03_dangling_pointer_warnings_rust_1_91.md`
 
 ---
 
@@ -73,7 +73,7 @@ match value {
 - 避免依赖特定的绑定顺序
 - 测试模式匹配的行为
 
-**相关文档**: [`01_theoretical_foundations/01_type_system/core_theory/08_pattern_matching_improvements_rust_1_91.md`](./01_theoretical_foundations/01_type_system/core_theory/08_pattern_matching_improvements_rust_1_91.md)
+**相关文档**: `01_theoretical_foundations/01_type_system/core_theory/08_pattern_matching_improvements_rust_1_91.md`
 
 ---
 
@@ -107,7 +107,7 @@ cargo test --target aarch64-pc-windows-msvc
 - 在多个平台上测试代码
 - 明确标注平台特定功能
 
-**相关文档**: [`06_toolchain_ecosystem/01_compiler/03_arm_windows_tier1_support_rust_1_91.md`](./06_toolchain_ecosystem/01_compiler/03_arm_windows_tier1_support_rust_1_91.md)
+**相关文档**: `06_toolchain_ecosystem/01_compiler/03_arm_windows_tier1_support_rust_1_91.md`
 
 ---
 
@@ -172,11 +172,11 @@ cargo test --target aarch64-pc-windows-msvc
 
 ### 项目文档
 
-- [Rust 1.91.0 更新日志](./RUST_1_91_CHANGELOG.md) ⭐⭐⭐
-- [Rust 1.91 更新总结](./RUST_1_91_UPDATE_SUMMARY.md) ⭐⭐
-- [悬空指针警告机制](./01_theoretical_foundations/02_memory_safety/03_dangling_pointer_warnings_rust_1_91.md)
-- [模式匹配改进](./01_theoretical_foundations/01_type_system/core_theory/08_pattern_matching_improvements_rust_1_91.md)
-- [ARM Windows Tier 1 支持](./06_toolchain_ecosystem/01_compiler/03_arm_windows_tier1_support_rust_1_91.md)
+- Rust 1.91.0 更新日志 ⭐⭐⭐
+- Rust 1.91 更新总结 ⭐⭐
+- 悬空指针警告机制
+- 模式匹配改进
+- ARM Windows Tier 1 支持
 
 ---
 

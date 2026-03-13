@@ -21,6 +21,12 @@ JSON_REPORT = Path("e:/_src/rust-lang/docs/link_check_report.json")
 # 格式: [链接文本](链接目标)
 LINK_PATTERN = re.compile(r'\[([^\]]+)\]\((?!https?://)([^)]+)\)')
 
+# 匹配链接检查禁用注释的正则表达式
+DISABLE_CHECK_PATTERN = re.compile(
+    r'<!--\s*markdown-link-check-disable\s*-->(.*?)<!--\s*markdown-link-check-enable\s*-->',
+    re.DOTALL
+)
+
 def get_all_markdown_files(docs_path: Path) -> list[Path]:
     """获取所有 Markdown 文件"""
     return list(docs_path.rglob("*.md"))
@@ -174,6 +180,9 @@ def main():
         except Exception as e:
             print(f"  警告: 无法读取文件 {md_file}: {e}")
             continue
+        
+        # 移除被禁用注释包围的内容
+        content = DISABLE_CHECK_PATTERN.sub('', content)
         
         # 查找所有链接
         matches = LINK_PATTERN.findall(content)

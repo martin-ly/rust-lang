@@ -144,14 +144,14 @@ L1 元概念层
 
 | 来源 | 类型 | 优先级 |
 | :--- | :--- | :--- |
-| [The Rust Book](https://doc.rust-lang.org/book/README.md) | 官方教程 | P0 |
-| [Rust Reference](https://doc.rust-lang.org/reference/README.md) | 语言规范 | P0 |
-| [RFCs](https://rust-lang.github.io/rfcs/README.md) | 设计文档 | P0 |
-| [releases.rs](https://releases.rs/README.md) | 版本发布 | P0 |
-| [RustBelt](https://plv.mpi-sws.org/rustbelt/README.md) | 学术研究 | P1 |
-| [Stack Overflow Rust](https://stackoverflow.com/questions/tagged/rust) | 社区问答 | P1 |
-| [Rust by Example](https://doc.rust-lang.org/rust-by-example/README.md) | 示例集 | P2 |
-| [Crates.io](https://crates.io/README.md) | 生态库 | P2 |
+| The Rust Book | 官方教程 | P0 |
+| Rust Reference | 语言规范 | P0 |
+| RFCs | 设计文档 | P0 |
+| releases.rs | 版本发布 | P0 |
+| RustBelt | 学术研究 | P1 |
+| Stack Overflow Rust | 社区问答 | P1 |
+| Rust by Example | 示例集 | P2 |
+| Crates.io | 生态库 | P2 |
 
 #### 4.2 对齐内容类型
 
@@ -277,7 +277,7 @@ L1 元概念层
 #### 3.1 对齐标记
 
 ```markdown
-> **权威来源**: [The Rust Book - 章节](链接)
+> **权威来源**: The Rust Book - 章节
 > **对齐状态**: ✅ 一致 / ⚠️ 差异 / ❌ 冲突
 > **差异说明**: 如有差异，说明原因
 ```

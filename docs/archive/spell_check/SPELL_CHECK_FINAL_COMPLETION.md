@@ -133,7 +133,7 @@
 - 行内代码: `` `code` ``
 - 数学公式: `$$...$$` / `$...$`
 - URL: `http://...`, `https://...`
-- Markdown 链接: `[text](url)`
+- Markdown 链接: `text`
 
 ### 多语言支持
 
@@ -323,8 +323,8 @@ rust-lang/
 ### 获取帮助
 
 1. **查看文档**:
-   - [快速指南](./QUICK_START_SPELL_CHECK.md)
-   - [完整文档](./SPELL_CHECK_CONFIGURATION.md)
+   - 快速指南 (QUICK_START_SPELL_CHECK.md)
+   - 完整文档
 
 2. **提交问题**:
    - GitHub Issues

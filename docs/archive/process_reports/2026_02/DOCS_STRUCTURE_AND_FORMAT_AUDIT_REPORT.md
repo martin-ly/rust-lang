@@ -12,7 +12,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **用途**: 全面梳理 docs 所有文件的结构和格式，识别拼写和结构格式问题
-> **上位文档**: [DOCS_STRUCTURE_OVERVIEW](../../../DOCS_STRUCTURE_OVERVIEW.md)
+> **上位文档**: DOCS_STRUCTURE_OVERVIEW
 
 ---
 
@@ -257,8 +257,8 @@ docs/
 ```markdown
 ## 📊 目录
 
-- [链接文本](#锚点)
-  - [子节](#子节锚点)
+- 链接文本
+  - 子节
 ```
 
 **要求**:
@@ -284,13 +284,13 @@ docs/
 ### 3.5 链接格式规范
 
 ```markdown
-[链接文本](./docs/README.md)
+链接文本
 ```
 
 **要求**:
 
 - 使用相对路径（相对于 docs 根或当前目录）
-- 格式：`[文本](路径)`
+- 格式：`文本`
 - 避免使用绝对路径或 URL（外部链接除外）
 
 ### 3.6 文末元信息块（核心研究笔记）
@@ -344,7 +344,7 @@ docs/
 
 | 问题 | 错误示例 | 正确示例 |
 | :--- | :--- | :--- |
-| 绝对路径 | `[文本](/docs/path)` | `[文本](./path)` |
+| 绝对路径 | `文本` | `文本` |
 | 路径层级混乱 | `../../path` 过度使用 | 使用相对当前目录的合理层级 |
 | 断链 | 指向不存在的文件 | 确保文件存在 |
 
@@ -429,7 +429,7 @@ docs/
 
 ### 6.3 质量门禁建议
 
-在 [CONTRIBUTING.md](../../../../../research_notes/CONTRIBUTING.md) 中明确：
+在 CONTRIBUTING.md 中明确：
 
 1. 新文档必须包含完整元信息
 2. 表格必须使用 `:---` 左对齐格式
@@ -439,7 +439,7 @@ docs/
 
 ### 6.4 季度复核建议
 
-在 [MAINTENANCE_GUIDE.md](../../../../../research_notes/MAINTENANCE_GUIDE.md) 中增加：
+在 MAINTENANCE_GUIDE.md 中增加：
 
 1. 格式统一抽查
 2. 链接有效性检查
@@ -452,12 +452,12 @@ docs/
 
 | 文档 | 说明 |
 | :--- | :--- |
-| [DOCS_STRUCTURE_OVERVIEW](../../../DOCS_STRUCTURE_OVERVIEW.md) | 完整结构总览 |
-| [00_MASTER_INDEX](../../../00_MASTER_INDEX.md) | 文档中心主索引 |
-| [QUALITY_CHECKLIST](../../../../../research_notes/QUALITY_CHECKLIST.md) | 质量检查清单 |
-| [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](./FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) | 格式统一计划 |
-| [CONTRIBUTING](../../../../../research_notes/CONTRIBUTING.md) | 贡献指南 |
-| [MAINTENANCE_GUIDE](../../../../../research_notes/MAINTENANCE_GUIDE.md) | 维护指南 |
+| DOCS_STRUCTURE_OVERVIEW | 完整结构总览 |
+| 00_MASTER_INDEX | 文档中心主索引 |
+| QUALITY_CHECKLIST | 质量检查清单 |
+| FORMAT_AND_CONTENT_ALIGNMENT_PLAN | 格式统一计划 |
+| CONTRIBUTING | 贡献指南 |
+| MAINTENANCE_GUIDE | 维护指南 |
 
 ---
 

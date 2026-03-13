@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 调研 coq-of-rust（THIR → Rocq/Coq）的输入要求，给出「本项目文档 → 工具输入」的映射方案
-> **参考**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
+> **参考**: INTERNATIONAL_FORMAL_VERIFICATION_INDEX
 
 ---
 

@@ -1059,7 +1059,7 @@ pub struct FlyweightFactory {
 | **Memento** | 所有权 | 直接存储 `T` 导致移动后原对象失效 | `Clone` 快照或 `Option<T>` 交换 |
 | **Chain of Responsibility** | 共享 | `Rc<Handler>` 非 Send | `Arc<dyn Handler + Send + Sync>` |
 
-详见各模式形式化文档（[01_creational](01_creational/README.md)、[02_structural](02_structural/README.md)、[03_behavioral](03_behavioral/README.md)）及 [ANTI_PATTERN_TEMPLATE](../../../../02_reference/quick_reference/ANTI_PATTERN_TEMPLATE.md)。
+详见各模式形式化文档（[01_creational](01_creational/README.md)、[02_structural](02_structural/README.md)、[03_behavioral](03_behavioral/README.md)）及 [ANTI_PATTERN_TEMPLATE](../../../02_reference/quick_reference/ANTI_PATTERN_TEMPLATE.md)。
 
 ---
 
@@ -1067,10 +1067,10 @@ pub struct FlyweightFactory {
 
 ### 8.1 内部文档链接
 
-- [Rust 设计模式实践指南](../../../../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md)
-- [所有权系统详解](../../../../research_notes/formal_methods/ownership_model.md)
-- [类型状态模式指南](../../06_rust_idioms.md)
-- [零成本抽象实践](../../../../02_reference/quick_reference/generics_cheatsheet.md)
+- [Rust 设计模式实践指南](../../../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md)
+- [所有权系统详解](../../../research_notes/formal_methods/ownership_model.md)
+- [类型状态模式指南](../06_rust_idioms.md)
+- [零成本抽象实践](../../../02_reference/quick_reference/generics_cheatsheet.md)
 
 ### 8.2 外部资源
 

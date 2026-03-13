@@ -84,7 +84,7 @@ rust-lang/
 
 查看完整配置文档：
 
-- [SPELL_CHECK_CONFIGURATION.md](./SPELL_CHECK_CONFIGURATION.md)
+- [SPELL_CHECK_CONFIGURATION.md](../spell_check/SPELL_CHECK_CONFIGURATION.md)
 
 ---
 

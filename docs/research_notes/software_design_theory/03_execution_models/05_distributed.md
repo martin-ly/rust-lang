@@ -134,7 +134,7 @@ impl Handler<MyMessage> for MyActor {
 | 组合 | 说明 |
 | :--- | :--- |
 | 分布式 + DTO | 跨边界序列化；见 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md) DTO |
-| 分布式 + Gateway | 外部系统集成；见 [02_complete_43_catalog](../../02_workflow_safe_complete_models/02_complete_43_catalog.md) Gateway |
+| 分布式 + Gateway | 外部系统集成；见 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md) Gateway |
 | 分布式 + Remote Facade | 粗粒度接口；batch 减少 RPC；见 02_complete_43_catalog |
 | 分布式 + Observer | 事件总线、消息队列；见 [observer](../01_design_patterns_formal/03_behavioral/observer.md) |
 

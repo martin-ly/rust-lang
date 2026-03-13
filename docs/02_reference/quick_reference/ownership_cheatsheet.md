@@ -762,7 +762,7 @@ for i in 0..1000 {
 
 - [所有权转移与移动](../../../crates/c01_ownership_borrow_scope/examples/moving00.rs)～[moving06.rs](../../../crates/c01_ownership_borrow_scope/examples/moving06.rs)
 - [作用域与高级所有权](../../../crates/c01_ownership_borrow_scope/examples/scope01.rs)、[advanced_scope_examples.rs](../../../crates/c01_ownership_borrow_scope/examples/advanced_scope_examples.rs)、[advanced_ownership_examples.rs](../../../crates/c01_ownership_borrow_scope/examples/advanced_ownership_examples.rs)、[comprehensive_ownership_examples.rs](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs)
-- [Rust 1.91/1.92 特性演示](../../../crates/c01_ownership_borrow_scope/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs)
+- Rust 1.91/1.92 特性演示（代码示例待补充）
 
 ---
 

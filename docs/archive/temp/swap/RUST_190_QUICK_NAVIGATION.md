@@ -12,9 +12,9 @@
 
 如果您只有5分钟：
 
-1. **看这里 👇** [项目核心成果](#-项目核心成果) - 1分钟了解项目成就
-2. **看这里 👇** [Rust 1.90 关键变化](#-rust-190-关键变化) - 2分钟了解新特性
-3. **看这里 👇** [快速行动](#-快速行动) - 2分钟开始使用
+1. **看这里 👇** 项目核心成果 - 1分钟了解项目成就
+2. **看这里 👇** Rust 1.90 关键变化 - 2分钟了解新特性
+3. **看这里 👇** 快速行动 - 2分钟开始使用
 
 ---
 
@@ -93,7 +93,7 @@ fn items<'a>(scores: &'a [u8]) -> std::slice::Iter<'a, u8> {
 
 ### 🥇 #1: FAQ - 你的问题这里有答案
 
-**[RUST_190_FAQ.md](RUST_190_FAQ.md)** ⭐⭐⭐
+**RUST_190_FAQ.md** ⭐⭐⭐
 
 **包含内容**:
 
@@ -108,7 +108,7 @@ fn items<'a>(scores: &'a [u8]) -> std::slice::Iter<'a, u8> {
 
 ### 🥈 #2: 术语表 - 快速查询核心概念
 
-**[RUST_190_GLOSSARY.md](RUST_190_GLOSSARY.md)** ⭐⭐⭐
+**RUST_190_GLOSSARY.md** ⭐⭐⭐
 
 **包含内容**:
 
@@ -125,7 +125,7 @@ fn items<'a>(scores: &'a [u8]) -> std::slice::Iter<'a, u8> {
 
 ### 🥉 #3: 完整会话总结 - 了解项目全貌
 
-**[RUST*190*完整会话总结\_2025_10_26.md](RUST_190_完整会话总结_2025_10_26.md)** ⭐⭐⭐
+**RUST_190_完整会话总结_2025_10_26.md** ⭐⭐⭐
 
 **包含内容**:
 
@@ -163,7 +163,7 @@ cargo clippy --fix
 cargo test
 ```
 
-**详细指南**: [RUST_190_FAQ.md - Q2.1](RUST_190_FAQ.md#q21-如何升级到-rust-190)
+**详细指南**: RUST_190_FAQ.md - Q2.1
 
 ---
 
@@ -173,10 +173,10 @@ cargo test
 
 | 错误                           | 快速解决               | 详细文档                                                  |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| const 函数错误                 | 检查函数是否支持 const | [FAQ Q5.2](RUST_190_FAQ.md#q52-遇到-const-函数错误怎么办) |
-| 链接速度未提升                 | 验证 LLD 是否启用      | [FAQ Q5.1](RUST_190_FAQ.md#q51-链接速度没有提升怎么办)    |
+| const 函数错误                 | 检查函数是否支持 const | FAQ Q5.2 |
+| 链接速度未提升                 | 验证 LLD 是否启用      | FAQ Q5.1 |
 
-**完整故障排除**: [RUST_190_FAQ.md - 第5节](RUST_190_FAQ.md#5-故障排除)
+**完整故障排除**: RUST_190_FAQ.md - 第5节
 
 ---
 
@@ -184,19 +184,19 @@ cargo test
 
 **核心新特性速查**:
 
-1. **LLD 链接器** - [术语表](RUST_190_GLOSSARY.md#lld-linker)
+1. **LLD 链接器** - 术语表
    - 速度提升 2倍
    - Linux x86_64 默认启用
 
-2. **checked_sub_signed()** - [术语表](RUST_190_GLOSSARY.md#checked_sub_signed)
+2. **checked_sub_signed()** - 术语表
    - 无符号与有符号安全减法
    - 防止溢出
 
-3. **const 函数增强** - [术语表](RUST_190_GLOSSARY.md#const-context)
+3. **const 函数增强** - 术语表
    - 数组 reverse()
    - 浮点数学函数
 
-**完整特性列表**: [FAQ Q3.1](RUST_190_FAQ.md#q31-rust-190-有哪些重大变化)
+**完整特性列表**: FAQ Q3.1
 
 ---
 
@@ -248,15 +248,15 @@ Day 6-7: 深入理解
 
 | 查询内容 | 推荐文档                       | 位置       |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 常见问题 | [FAQ](RUST_190_FAQ.md)         | 按主题查找 |
-| 项目进度 | [本文档](#-项目核心成果)       | 上方       |
+| 常见问题 | FAQ         | 按主题查找 |
+| 项目进度 | 本文档       | 上方       |
 
 ### 需求 2: 系统学习（10-30分钟）
 
 | 学习内容 | 推荐文档                                            | 时长   |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 升级指南 | [FAQ Q2节](RUST_190_FAQ.md#2-迁移指南)              | 15分钟 |
-| 新特性   | [FAQ Q3节](RUST_190_FAQ.md#3-新特性说明)            | 20分钟 |
+| 升级指南 | FAQ Q2节              | 15分钟 |
+| 新特性   | FAQ Q3节            | 20分钟 |
 
 ### 需求 3: 深入研究（> 1小时）
 
@@ -271,7 +271,7 @@ Day 6-7: 深入理解
 
 想要查看完整的文档列表？
 
-👉 **[RUST_190_DOCUMENTATION_INDEX.md](RUST_190_DOCUMENTATION_INDEX.md)**
+👉 **RUST_190_DOCUMENTATION_INDEX.md**
 
 包含：
 
@@ -286,15 +286,15 @@ Day 6-7: 深入理解
 
 ### 官方文档
 
-- 📖 [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/README.md)
-- 📖 [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/README.md)
-- 📖 [Rust API Documentation](https://doc.rust-lang.org/std/README.md)
+- 📖 Rust 1.90.0 Release Notes
+- 📖 Rust Edition Guide
+- 📖 Rust API Documentation
 
 ### 社区资源
 
-- 💬 [Rust Users Forum](https://users.rust-lang.org/README.md)
-- 💬 [Rust Discord](https://discord.gg/rust-lang)
-- 📚 [This Week in Rust](https://this-week-in-rust.org/README.md)
+- 💬 Rust Users Forum
+- 💬 Rust Discord
+- 📚 This Week in Rust
 
 ---
 
@@ -318,7 +318,7 @@ Day 6-7: 深入理解
 
 ### 技巧 3: 按场景导航
 
-不确定看哪个文档？参考 [按需求查找](#-按需求查找) 部分
+不确定看哪个文档？参考 按需求查找 部分
 
 ---
 
@@ -326,9 +326,9 @@ Day 6-7: 深入理解
 
 如果本导航未能解决您的问题：
 
-1. 📖 查阅 [FAQ 文档](RUST_190_FAQ.md)
-2. 📖 查阅 [术语表](RUST_190_GLOSSARY.md)
-3. 📖 查阅 [完整索引](RUST_190_DOCUMENTATION_INDEX.md)
+1. 📖 查阅 FAQ 文档
+2. 📖 查阅 术语表
+3. 📖 查阅 完整索引
 4. 💬 在项目中提出 Issue
 5. 💬 访问 Rust 官方论坛
 
@@ -338,10 +338,10 @@ Day 6-7: 深入理解
 
 现在您已经了解了导航方式，选择您感兴趣的内容开始吧：
 
-- 🚀 [升级到 Rust 1.90](#场景-1-我想升级到-rust-190)
-- 🐛 [解决编译错误](#场景-2-我遇到了编译错误)
-- 📚 [学习新特性](#场景-3-我想了解新特性)
-- 📖 [系统学习](#-深入学习路径)
+- 🚀 升级到 Rust 1.90
+- 🐛 解决编译错误
+- 📚 学习新特性
+- 📖 系统学习
 
 ---
 

@@ -364,7 +364,7 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 - [泛型集合与 GAT](../../../crates/c04_generic/examples/generic_collections_demo.rs)、[generic_gat_demo.rs](../../../crates/c04_generic/examples/generic_gat_demo.rs)
 - [HRTB、特化与 Trait 对象](../../../crates/c04_generic/examples/generic_hrtb_demo.rs)、[generic_specialization_demo.rs](../../../crates/c04_generic/examples/generic_specialization_demo.rs)、[generic_trait_object_demo.rs](../../../crates/c04_generic/examples/generic_trait_object_demo.rs)
 - [类型状态与零成本抽象](../../../crates/c04_generic/examples/generic_type_state_demo.rs)、[generic_zero_cost_demo.rs](../../../crates/c04_generic/examples/generic_zero_cost_demo.rs)
-- [Rust 1.91/1.92 特性演示](../../../crates/c04_generic/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../../crates/c04_generic/examples/rust_192_features_demo.rs)
+- Rust 1.91/1.92 特性演示（代码示例待补充）
 
 ## 🔗 相关资源
 

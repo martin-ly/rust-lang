@@ -548,7 +548,7 @@ fn get_static() -> &'static str {
 
 - [交互式学习指南](INTERACTIVE_LEARNING_GUIDE.md)
 - [全面 FAQ](COMPREHENSIVE_FAQ.md)
-- [案例分析](../case-studies/README.md)
+- [案例分析](case-studies/README.md)
 - [Rust 错误索引](https://doc.rust-lang.org/error_codes/error-index.html)
 
 ---

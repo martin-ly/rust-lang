@@ -1050,7 +1050,7 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 - [类型系统基础](../../../crates/c02_type_system/examples/type_system_example.rs)、[类型定义与等价](../../../crates/c02_type_system/examples/type_definition_examples.rs)、[type_equivalence_newtype_examples.rs](../../../crates/c02_type_system/examples/type_equivalence_newtype_examples.rs)
 - [Trait 对象与型变](../../../crates/c02_type_system/examples/trait_objects_safety.rs)、[variance_examples.rs](../../../crates/c02_type_system/examples/variance_examples.rs)
 - [Pin/自引用、Never 类型、模式匹配](../../../crates/c02_type_system/examples/pin_self_referential_basics.rs)、[never_type_control_flow.rs](../../../crates/c02_type_system/examples/never_type_control_flow.rs)、[pattern_matching_advanced.rs](../../../crates/c02_type_system/examples/pattern_matching_advanced.rs)
-- [Rust 1.91/1.92 特性演示](../../../crates/c02_type_system/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../../crates/c02_type_system/examples/rust_192_features_demo.rs)、[rust_192_comprehensive_demo.rs](../../../crates/c02_type_system/examples/rust_192_comprehensive_demo.rs)
+- Rust 1.91/1.92 特性演示（代码示例待补充）
 
 ---
 

@@ -700,8 +700,8 @@ pub enum MyError {
 
 - [交互式学习指南](INTERACTIVE_LEARNING_GUIDE.md)
 - [高级实践工作坊](exercises/ADVANCED_OWNERSHIP_WORKSHOP.md)
-- [案例分析](../case-studies/README.md)
-- [形式化理论](../formal-foundations/README.md)
+- [案例分析](case-studies/README.md)
+- [形式化理论](formal-foundations/README.md)
 
 ---
 

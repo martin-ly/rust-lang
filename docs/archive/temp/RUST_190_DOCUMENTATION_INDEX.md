@@ -12,4 +12,4 @@
 
 ## 相关文档
 
-- [Rust 1.94 文档](../RUST_194_RESEARCH_UPDATE.md)
+- Rust 1.94 文档 (../RUST_194_RESEARCH_UPDATE.md)

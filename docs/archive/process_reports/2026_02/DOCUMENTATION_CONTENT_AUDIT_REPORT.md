@@ -215,7 +215,7 @@
 ```markdown
 # [主题名称]
 
-> 内容已整合至：[research_notes/...](../research_notes/...)
+> 内容已整合至：research_notes/...
 
 ## 快速概览
 

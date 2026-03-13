@@ -304,7 +304,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 **引用**：[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) 等价/近似/不可表达表；
 ~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN~~（已归档至 [../../../archive/process_reports/](../../../archive/process_reports/README.md)）支柱 2+3；
-现参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](../../../../research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md)。
+现参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](../../../research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md)。
 
 ---
 
