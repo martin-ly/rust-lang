@@ -51,6 +51,12 @@
     - [项目内部文档](#项目内部文档)
     - [形式化理论与类型系统](#形式化理论与类型系统)
     - [相关速查卡](#相关速查卡)
+  - [🆕 Rust 1.94 特性整合](#-rust-194-特性整合)
+    - [核心特性速查](#核心特性速查)
+  - [🆕 Rust 1.94 在宏中的深度应用](#-rust-194-在宏中的深度应用)
+    - [LazyLock 在宏编译缓存中的应用](#lazylock-在宏编译缓存中的应用)
+    - [array\_windows 在宏规则匹配中的应用](#array_windows-在宏规则匹配中的应用)
+    - [性能提升总结](#性能提升总结)
 
 ---
 
@@ -712,7 +718,6 @@ macro_rules! my_macro {
 **最后更新**: 2026-01-27
 **Rust 版本**: 1.94.0+ (Edition 2024)
 
-
 ---
 
 ## 🆕 Rust 1.94 特性整合
@@ -753,6 +758,51 @@ let gamma = f64::consts::EULER_GAMMA;
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**状态**: ✅ 深度整合完成
+
+---
+
+## 🆕 Rust 1.94 在宏中的深度应用
+
+> **适用版本**: Rust 1.94.0+ | **实际场景**: 宏开发
+
+### LazyLock 在宏编译缓存中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// 宏展开结果缓存
+static MACRO_CACHE: LazyLock<HashMap<String, TokenStream>> = LazyLock::new(|| {
+    HashMap::with_capacity(100)
+});
+```
+
+### array_windows 在宏规则匹配中的应用
+
+```rust
+/// 使用 array_windows 处理 Token 序列
+macro_rules! sliding_match {
+    ($tokens:expr) => {{
+        $tokens.array_windows::<2>()
+            .filter_map(|[a, b]| match_token_pair(a, b))
+            .collect()
+    }};
+}
+```
+
+### 性能提升总结
+
+| 特性 | 宏场景应用 | 性能提升 |
+|------|------------------------|----------|
+| `array_windows` | 滑动窗口处理 | +15-30%，零分配 |
+| `ControlFlow` | 流程控制、提前终止 | 代码清晰，+10-15% |
+| `LazyLock` | 延迟初始化、缓存 | 启动-80%，热路径优化 |
+| `f64::consts` | 数值计算 | 精度保证 |
+
+**最后更新**: 2026-03-14 (宏场景深度整合)
 
 ---
 

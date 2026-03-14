@@ -90,7 +90,7 @@ use c01_ownership_borrow_scope::rust_190_features::*;
 
 ### 更新流程
 
-```
+```text
 Rust 新版本发布
        ↓
 创建 rust_XX_features.rs

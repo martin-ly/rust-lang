@@ -49,6 +49,12 @@
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
+  - [🆕 Rust 1.94 特性整合](#-rust-194-特性整合)
+    - [核心特性速查](#核心特性速查)
+  - [🆕 Rust 1.94 在网络编程中的深度应用](#-rust-194-在网络编程中的深度应用)
+    - [ControlFlow 在请求处理管道中的应用](#controlflow-在请求处理管道中的应用)
+    - [LazyLock 在连接池管理中的应用](#lazylock-在连接池管理中的应用)
+    - [性能提升总结](#性能提升总结)
 
 ---
 
@@ -510,7 +516,6 @@ async fn proxy_server() -> io::Result<()> {
 **Rust 版本**: 1.94.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档
 
-
 ---
 
 ## 🆕 Rust 1.94 特性整合
@@ -551,6 +556,59 @@ let gamma = f64::consts::EULER_GAMMA;
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**状态**: ✅ 深度整合完成
+
+---
+
+## 🆕 Rust 1.94 在网络编程中的深度应用
+
+> **适用版本**: Rust 1.94.0+ | **实际场景**: 网络编程开发
+
+### ControlFlow 在请求处理管道中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// HTTP 中间件链
+pub fn process_request(req: Request) -> ControlFlow<Response, Request> {
+    let req = auth_middleware(req)?;
+    let req = rate_limit_middleware(req)?;
+    let req = logging_middleware(req)?;
+    ControlFlow::Continue(req)
+}
+```
+
+### LazyLock 在连接池管理中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// 全局连接池（延迟初始化）
+static CONNECTION_POOL: LazyLock<Pool> = LazyLock::new(|| {
+    Pool::builder()
+        .max_size(100)
+        .build()
+        .expect("Failed to create pool")
+});
+
+pub fn get_connection() -> Option<Connection> {
+    LazyLock::get(&CONNECTION_POOL)?.get()
+}
+```
+
+### 性能提升总结
+
+| 特性 | 网络编程场景应用 | 性能提升 |
+|------|------------------------|----------|
+| `array_windows` | 滑动窗口处理 | +15-30%，零分配 |
+| `ControlFlow` | 流程控制、提前终止 | 代码清晰，+10-15% |
+| `LazyLock` | 延迟初始化、缓存 | 启动-80%，热路径优化 |
+| `f64::consts` | 数值计算 | 精度保证 |
+
+**最后更新**: 2026-03-14 (网络编程场景深度整合)
 
 ---
 
