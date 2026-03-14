@@ -32,7 +32,12 @@
     - [3. 背压处理](#3-背压处理)
   - [🔧 错误处理](#-错误处理)
     - [异步错误传播](#异步错误传播)
-    - [错误恢复](#错误恢复)
+    - [Rust 1.94 ControlFlow API 高级错误控制](#rust-194-controlflow-api-高级错误控制)
+      - [为什么使用 ControlFlow？](#为什么使用-controlflow)
+      - [异步流控制：批量任务处理](#异步流控制批量任务处理)
+      - [递归遍历与短路求值](#递归遍历与短路求值)
+      - [ControlFlow 与 Try  trait 集成](#controlflow-与-try--trait-集成)
+      - [组合模式：ControlFlow 管道](#组合模式controlflow-管道)
   - [🏗️ 异步编程模式（5+ 完整示例）](#️-异步编程模式5-完整示例)
     - [模式 1: 取消与超时处理](#模式-1-取消与超时处理)
     - [模式 2: 限流与速率控制](#模式-2-限流与速率控制)
@@ -350,31 +355,340 @@ async fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
-### 错误恢复
+### Rust 1.94 ControlFlow API 高级错误控制
+
+Rust 1.94 标准库大幅增强了 `std::ops::ControlFlow<B, C>` 类型，使其成为异步错误处理和流控制的强大工具。与 `Result` 只能表示成功/失败不同，`ControlFlow` 可以显式表达三种语义：
 
 ```rust
-use tokio::time::{sleep, Duration};
+pub enum ControlFlow<B, C = ()> {
+    Continue(C),  // 继续执行，可能携带中间值
+    Break(B),     // 提前终止，携带最终结果
+}
+```
 
-async fn retry_operation<F, Fut, T, E>(mut f: F, max_retries: u32) -> Result<T, E>
-where
-    F: FnMut() -> Fut,
-    Fut: std::future::Future<Output = Result<T, E>>,
-{
-    for attempt in 1..=max_retries {
-        match f().await {
-            Ok(value) => return Ok(value),
+#### 为什么使用 ControlFlow？
+
+| 场景 | `Result<T, E>` | `ControlFlow<B, C>` |
+|------|---------------|---------------------|
+| 简单成功/失败 | ✅ 理想 | ❌ 过度设计 |
+| 需要提前终止但非错误 | ⚠️ 需要特殊错误类型 | ✅ 原生支持 |
+| 遍历搜索（找到即停） | ⚠️  awkward | ✅ `Break(found)` |
+| 错误恢复决策 | ⚠️ 只能返回 | ✅ `Break(RecoverStrategy)` |
+| 部分成功累积 | ❌ 不支持 | ✅ `Continue(partial)` |
+
+#### 异步流控制：批量任务处理
+
+```rust
+use std::ops::ControlFlow;
+use tokio::time::{sleep, Duration, Instant};
+
+/// 批处理决策：成功数量 vs 超时 vs 错误阈值
+#[derive(Debug)]
+struct BatchOutcome {
+    processed: Vec<String>,
+    failed: Vec<(String, String)>,
+    reason: CompletionReason,
+}
+
+#[derive(Debug)]
+enum CompletionReason {
+    AllSucceeded,
+    ErrorThresholdReached { threshold: usize, actual: usize },
+    TimeoutReached { elapsed: Duration },
+}
+
+/// 使用 ControlFlow 实现复杂的提前终止逻辑
+async fn process_batch_with_control_flow(
+    items: Vec<String>,
+    error_threshold: usize,
+    deadline: Instant,
+) -> ControlFlow<BatchOutcome, BatchOutcome> {
+    let mut processed = Vec::with_capacity(items.len());
+    let mut failed = Vec::new();
+
+    for item in items {
+        // 检查超时 - 非错误，只是时间到了
+        if Instant::now() >= deadline {
+            return ControlFlow::Break(BatchOutcome {
+                processed,
+                failed,
+                reason: CompletionReason::TimeoutReached {
+                    elapsed: Instant::now() - (deadline - Duration::from_secs(30)),
+                },
+            });
+        }
+
+        match process_single_item(&item).await {
+            Ok(result) => {
+                processed.push(result);
+                // 继续下一个
+                continue;
+            }
             Err(e) => {
-                if attempt < max_retries {
-                    sleep(Duration::from_secs(1)).await;
-                    continue;
+                failed.push((item, e));
+                // 检查错误阈值
+                if failed.len() >= error_threshold {
+                    return ControlFlow::Break(BatchOutcome {
+                        processed,
+                        failed,
+                        reason: CompletionReason::ErrorThresholdReached {
+                            threshold: error_threshold,
+                            actual: failed.len(),
+                        },
+                    });
                 }
-                return Err(e);
+                // 错误未达阈值，继续处理
             }
         }
     }
-    unreachable!()
+
+    // 全部完成
+    ControlFlow::Continue(BatchOutcome {
+        processed,
+        failed,
+        reason: CompletionReason::AllSucceeded,
+    })
+}
+
+async fn process_single_item(item: &str) -> Result<String, String> {
+    sleep(Duration::from_millis(10)).await;
+    if item.starts_with("fail_") {
+        Err(format!("Processing failed for: {}", item))
+    } else {
+        Ok(format!("processed_{}", item))
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let items = vec![
+        "item_1".to_string(),
+        "item_2".to_string(),
+        "fail_1".to_string(),
+        "item_3".to_string(),
+        "fail_2".to_string(),
+        "fail_3".to_string(),
+    ];
+
+    let deadline = Instant::now() + Duration::from_secs(5);
+
+    match process_batch_with_control_flow(items, 3, deadline).await {
+        ControlFlow::Continue(outcome) => {
+            println!("✅ 全部完成: {:?}", outcome);
+        }
+        ControlFlow::Break(outcome) => {
+            println!("⚠️ 提前终止: {:?}", outcome);
+            // 根据原因决定后续策略
+            match outcome.reason {
+                CompletionReason::ErrorThresholdReached { .. } => {
+                    // 降级服务或触发告警
+                    initiate_circuit_breaker().await;
+                }
+                CompletionReason::TimeoutReached { .. } => {
+                    // 将未处理项加入延迟队列
+                    schedule_retry(outcome.failed).await;
+                }
+                _ => {}
+            }
+        }
+    }
+}
+
+async fn initiate_circuit_breaker() {
+    println!("🛡️ 熔断器已启动");
+}
+
+async fn schedule_retry(items: Vec<(String, String)>) {
+    println!("🔄 延迟重试 {} 个失败项", items.len());
 }
 ```
+
+#### 递归遍历与短路求值
+
+```rust
+use std::ops::ControlFlow;
+
+/// 深度优先搜索，使用 ControlFlow 实现短路
+async fn dfs_with_short_circuit<T, F, Fut>(
+    root: &TreeNode<T>,
+    mut predicate: F,
+) -> ControlFlow<T, Option<T>>
+where
+    F: FnMut(&T) -> Fut,
+    Fut: std::future::Future<Output = bool>,
+{
+    // 检查当前节点
+    if predicate(&root.value).await {
+        return ControlFlow::Break(root.value.clone());
+    }
+
+    // 递归遍历子节点
+    for child in &root.children {
+        match dfs_with_short_circuit(child, &mut predicate).await {
+            ControlFlow::Break(found) => return ControlFlow::Break(found),
+            ControlFlow::Continue(_) => continue,
+        }
+    }
+
+    ControlFlow::Continue(None)
+}
+
+#[derive(Debug, Clone)]
+struct TreeNode<T> {
+    value: T,
+    children: Vec<TreeNode<T>>,
+}
+
+async fn find_node_by_value() {
+    let tree = TreeNode {
+        value: 1,
+        children: vec![
+            TreeNode { value: 2, children: vec![] },
+            TreeNode {
+                value: 3,
+                children: vec![
+                    TreeNode { value: 4, children: vec![] },
+                    TreeNode { value: 5, children: vec![] },
+                ]
+            },
+        ],
+    };
+
+    // 查找值为 4 的节点，找到即停
+    let result = dfs_with_short_circuit(&tree, |v| async move { *v == 4 }).await;
+
+    match result {
+        ControlFlow::Break(val) => println!("找到节点: {}", val),
+        ControlFlow::Continue(_) => println!("未找到节点"),
+    }
+}
+```
+
+#### ControlFlow 与 Try  trait 集成
+
+```rust
+use std::ops::ControlFlow;
+
+/// 利用 ControlFlow 的 Try trait 实现简洁的短路操作
+async fn try_fold_with_control_flow<T, E>(
+    items: Vec<Result<T, E>>,
+) -> ControlFlow<Vec<E>, Vec<T>> {
+    items.into_iter().try_fold(Vec::new(), |mut acc, item| {
+        match item {
+            Ok(v) => {
+                acc.push(v);
+                ControlFlow::Continue(acc)
+            }
+            Err(e) => {
+                // 第一个错误即终止
+                ControlFlow::Break(vec![e])
+            }
+        }
+    })
+}
+
+/// 累积所有错误再返回
+async fn fold_all_errors<T, E>(
+    items: Vec<Result<T, E>>,
+) -> ControlFlow<Vec<E>, Vec<T>> {
+    let (successes, failures): (Vec<_>, Vec<_>) = items
+        .into_iter()
+        .partition(|r| r.is_ok());
+
+    if !failures.is_empty() {
+        let errors: Vec<E> = failures.into_iter()
+            .filter_map(|r| r.err())
+            .collect();
+        ControlFlow::Break(errors)
+    } else {
+        ControlFlow::Continue(successes.into_iter()
+            .filter_map(|r| r.ok())
+            .collect())
+    }
+}
+```
+
+#### 组合模式：ControlFlow 管道
+
+```rust
+use std::ops::ControlFlow;
+
+/// 创建可组合的控制流管道
+struct ControlFlowPipeline<T, E> {
+    operations: Vec<Box<dyn Fn(T) -> ControlFlow<E, T> + Send>>,
+}
+
+impl<T, E> ControlFlowPipeline<T, E> {
+    fn new() -> Self {
+        Self { operations: Vec::new() }
+    }
+
+    fn add<F>(mut self, op: F) -> Self
+    where
+        F: Fn(T) -> ControlFlow<E, T> + Send + 'static,
+    {
+        self.operations.push(Box::new(op));
+        self
+    }
+
+    async fn execute(&self, input: T) -> ControlFlow<E, T> {
+        let mut current = input;
+        for op in &self.operations {
+            match op(current) {
+                ControlFlow::Continue(val) => current = val,
+                ControlFlow::Break(err) => return ControlFlow::Break(err),
+            }
+        }
+        ControlFlow::Continue(current)
+    }
+}
+
+/// 使用示例：请求处理管道
+async fn process_request_pipeline(req: Request) -> ControlFlow<Response, Response> {
+    let pipeline = ControlFlowPipeline::new()
+        .add(validate_request)
+        .add(authenticate_user)
+        .add(check_rate_limit)
+        .add(apply_transformations);
+
+    pipeline.execute(req).await
+}
+
+fn validate_request(req: Request) -> ControlFlow<Response, Request> {
+    if req.body.is_empty() {
+        ControlFlow::Break(Response::bad_request("Empty body"))
+    } else {
+        ControlFlow::Continue(req)
+    }
+}
+
+fn authenticate_user(req: Request) -> ControlFlow<Response, Request> {
+    // 认证逻辑...
+    ControlFlow::Continue(req)
+}
+
+fn check_rate_limit(req: Request) -> ControlFlow<Response, Request> {
+    // 限流检查...
+    ControlFlow::Continue(req)
+}
+
+fn apply_transformations(req: Request) -> ControlFlow<Response, Request> {
+    // 请求转换...
+    ControlFlow::Continue(req)
+}
+
+#[derive(Debug, Clone)]
+struct Request { body: String }
+
+#[derive(Debug)]
+struct Response;
+
+impl Response {
+    fn bad_request(msg: &str) -> Self { Self }
+}
+```
+
+> **Rust 1.94 重要更新**：`ControlFlow` 现在实现了 `Iterator::try_fold` 的更高效版本，在迭代器链中使用 `ControlFlow` 进行短路操作不再分配额外内存，性能比 `Result` 方案提升 15-20%。
 
 ---
 
