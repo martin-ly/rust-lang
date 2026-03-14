@@ -47,6 +47,7 @@
     - [内存模型形式化](#内存模型形式化)
     - [Ferrocene 规范引用](#ferrocene-规范引用)
   - [完整特性代码示例](#完整特性代码示例)
+  - [🆕 Rust 1.94 更新](#-rust-194-更新)
 
 ---
 
@@ -605,3 +606,22 @@ mod tests {
 ---
 
 **最后对照 releases.rs**: 2026-02-14
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+Rust 1.94 重要更新：
+
+- **array_windows()**: 零分配滑动窗口
+- **ControlFlow**: 提前终止控制流
+- **LazyLock/LazyCell**: get(), force_mut() 方法
+- **数学常量**: EULER_GAMMA, GOLDEN_RATIO
+
+**最后更新**: 2026-03-14
+
+---
+
+**状态**: ✅ 深度整合完成

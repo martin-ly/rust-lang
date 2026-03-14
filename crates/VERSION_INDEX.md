@@ -13,7 +13,7 @@
 
 ### 目录结构
 
-```
+```text
 crates/
 ├── c01_ownership_borrow_scope/src/archive/
 │   ├── mod.rs

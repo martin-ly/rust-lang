@@ -126,3 +126,22 @@ enum List {
 ---
 
 [返回文档中心](../README.md)
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+Rust 1.94 重要更新：
+
+- **array_windows()**: 零分配滑动窗口
+- **ControlFlow**: 提前终止控制流
+- **LazyLock/LazyCell**: get(), force_mut() 方法
+- **数学常量**: EULER_GAMMA, GOLDEN_RATIO
+
+**最后更新**: 2026-03-14
+
+---
+
+**状态**: ✅ 深度整合完成
