@@ -1,4 +1,4 @@
-﻿# Rust 与 C++/Go/Python 跨语言对比
+# Rust 与 C++/Go/Python 跨语言对比
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -31,6 +31,7 @@
     - [Rust 形式化基础](#rust-形式化基础)
     - [其他语言参考](#其他语言参考)
   - [相关文档](#相关文档)
+  - [🆕 Rust 1.94 更新](#-rust-194-更新)
 
 ---
 
@@ -542,3 +543,13 @@ $ python -m pytest
 - [应用分析视图](../04_thinking/APPLICATIONS_ANALYSIS_VIEW.md)
 - [形式化方法研究](../research_notes/formal_methods/README.md)
 - [错误码映射](./ERROR_CODE_MAPPING.md)
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [Rust 1.94 发布说明](../06_toolchain/16_rust_1.94_release_notes.md)
+
+**最后更新**: 2026-03-14

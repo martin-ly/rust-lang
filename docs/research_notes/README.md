@@ -522,3 +522,17 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记全部完成）
 
 **全面梳理**：[RESEARCH_NOTES_ORGANIZATION](./RESEARCH_NOTES_ORGANIZATION.md) — 实际结构、归档约定、入口与索引关系
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **最新版本**: Rust 1.94.0 (2026-03-05)
+
+- TOML 1.1 支持
+- Cargo.toml 多行内联表
+- 配置文件 include 支持
+
+详见 [Rust 1.94 研究更新](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

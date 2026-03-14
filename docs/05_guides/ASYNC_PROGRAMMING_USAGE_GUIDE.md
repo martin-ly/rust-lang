@@ -50,6 +50,9 @@
     - [问题 4: 忘记处理 Cancel Safety](#问题-4-忘记处理-cancel-safety)
     - [问题 5: 递归 async 函数](#问题-5-递归-async-函数)
   - [📚 相关文档](#-相关文档)
+  - [🆕 Rust 1.94 特性](#-rust-194-特性)
+    - [ControlFlow 在异步编程中的应用](#controlflow-在异步编程中的应用)
+    - [Peekable 迭代器增强](#peekable-迭代器增强)
   - [🔗 形式化引用](#-形式化引用)
 
 ---
@@ -1169,6 +1172,65 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 - [Reactor 模式](../../crates/c06_async/docs/tier_04_advanced/01_异步并发模式.md)
 - [Actor 模式](../../crates/c06_async/docs/tier_02_guides/04_异步设计模式实践.md)
 - [异步状态机形式化](../research_notes/formal_methods/async_state_machine.md) - Future/Poll 状态机形式化定义与证明
+
+---
+
+## 🆕 Rust 1.94 特性
+
+> **适用版本**: Rust 1.94.0+
+
+### ControlFlow 在异步编程中的应用
+
+Rust 1.94 的 `ControlFlow` 类型可以用于异步流的提前终止：
+
+```rust
+use std::ops::ControlFlow;
+use tokio::time::{sleep, Duration};
+
+// 使用 ControlFlow 在异步流中提前终止
+async fn process_items(items: &[i32]) -> ControlFlow<i32, ()> {
+    for &item in items {
+        if item < 0 {
+            return ControlFlow::Break(item);  // 遇到负数提前终止
+        }
+        sleep(Duration::from_millis(10)).await;
+    }
+    ControlFlow::Continue(())
+}
+
+// 在 try_for_each 中使用
+async fn find_negative(items: &[i32]) -> Option<i32> {
+    let result = items.iter().try_for_each(|&n| async move {
+        if n < 0 {
+            ControlFlow::Break(n)
+        } else {
+            ControlFlow::Continue(())
+        }
+    }).await;
+
+    result.break_value()
+}
+```
+
+### Peekable 迭代器增强
+
+Rust 1.94 为 `Peekable` 添加了 `next_if_map`，可用于异步解析器：
+
+```rust
+use std::iter::Peekable;
+
+async fn parse_number(chars: &mut Peekable<impl Iterator<Item = char>>) -> Option<i32> {
+    chars.next_if_map(|c| {
+        if c.is_ascii_digit() {
+            Some(c as i32 - '0' as i32)
+        } else {
+            None
+        }
+    })
+}
+```
+
+**最后更新**: 2026-03-14 (添加 Rust 1.94 特性)
 
 ---
 

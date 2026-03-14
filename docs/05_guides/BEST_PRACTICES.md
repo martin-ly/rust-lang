@@ -68,6 +68,10 @@
     - [官方资源](#官方资源)
     - [在线课程 (Coursera)](#在线课程-coursera)
     - [项目资源](#项目资源)
+  - [🆕 Rust 1.94 最佳实践](#-rust-194-最佳实践)
+    - [使用 array\_windows 替代手动索引](#使用-array_windows-替代手动索引)
+    - [ControlFlow 用于提前返回](#controlflow-用于提前返回)
+    - [LazyCell/LazyLock 的灵活访问](#lazycelllazylock-的灵活访问)
 
 ---
 
@@ -1145,6 +1149,72 @@ println!("运行时长: {:?}", stopped.duration());
 - [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md)
 - [C05 线程与并发](../../crates/c05_threads/docs/00_MASTER_INDEX.md)
 - [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md)
+
+## 🆕 Rust 1.94 最佳实践
+
+> **适用版本**: Rust 1.94.0+
+
+### 使用 array_windows 替代手动索引
+
+Rust 1.94 的 `array_windows` 提供了类型安全的窗口迭代：
+
+```rust
+// ❌ 旧方式：手动索引，容易出错
+fn sum_windows_old(data: &[i32]) -> Vec<i32> {
+    let mut result = Vec::new();
+    for i in 0..data.len() - 2 {
+        result.push(data[i] + data[i + 1] + data[i + 2]);
+    }
+    result
+}
+
+// ✅ 新方式：使用 array_windows
+fn sum_windows_new(data: &[i32]) -> Vec<i32> {
+    data.array_windows::<3>()
+        .map(|&[a, b, c]| a + b + c)
+        .collect()
+}
+```
+
+### ControlFlow 用于提前返回
+
+使用 `ControlFlow` 替代 `Option` 或 `Result` 进行控制流管理：
+
+```rust
+use std::ops::ControlFlow;
+
+// ✅ 使用 ControlFlow 表达提前终止意图
+fn validate_items(items: &[i32]) -> ControlFlow<i32, ()> {
+    for &item in items {
+        if item < 0 {
+            return ControlFlow::Break(item);
+        }
+    }
+    ControlFlow::Continue(())
+}
+```
+
+### LazyCell/LazyLock 的灵活访问
+
+Rust 1.94 新增的方法提供了更灵活的延迟初始化控制：
+
+```rust
+use std::cell::LazyCell;
+
+let cell: LazyCell<Vec<i32>> = LazyCell::new(|| vec![1, 2, 3]);
+
+// ✅ 检查是否已初始化而不触发初始化
+if cell.get().is_some() {
+    println!("已初始化");
+}
+
+// ✅ 获取可变引用
+if let Some(vec) = cell.get_mut() {
+    vec.push(4);
+}
+```
+
+**最后更新**: 2026-03-14 (添加 Rust 1.94 最佳实践)
 
 ---
 

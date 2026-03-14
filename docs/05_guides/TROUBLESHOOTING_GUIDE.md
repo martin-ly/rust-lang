@@ -47,6 +47,9 @@
     - [场景4: 生产环境问题](#场景4-生产环境问题)
   - [形式化链接](#形式化链接)
   - [📚 相关资源](#-相关资源)
+  - [🆕 Rust 1.94 特性](#-rust-194-特性)
+    - [新特性概览](#新特性概览)
+    - [代码示例](#代码示例)
 
 ---
 
@@ -506,6 +509,40 @@ A: 使用 `cargo tree` 查看依赖关系
 - [Rust 错误索引](https://doc.rust-lang.org/error-index.html)
 - [Rust 常见问题](https://doc.rust-lang.org/book/appendix-06-translation.html)
 - [Rust 性能书](https://nnethercote.github.io/perf-book/)
+
+## 🆕 Rust 1.94 特性
+
+> **适用版本**: Rust 1.94.0+
+
+### 新特性概览
+
+Rust 1.94 带来了以下重要更新：
+
+- **rray_windows** - 固定大小的数组窗口迭代器
+- **ControlFlow** - 控制流抽象类型
+- **LazyCell/LazyLock 新方法** - get(), get_mut(), orce_mut()
+- **Peekable::next_if_map** - 条件映射迭代
+- **TryFrom<char> for usize** - Unicode 标量值转换
+
+### 代码示例
+
+`
+ust
+// array_windows 示例
+let data = [1, 2, 3, 4, 5];
+let sums: Vec<i32> = data.array_windows::<2>()
+    .map(|&[a, b]| a + b)
+    .collect();
+
+// ControlFlow 示例
+use std::ops::ControlFlow;
+let result = items.iter().try_for_each(|&n| {
+    if n < 0 { ControlFlow::Break(n) }
+    else { ControlFlow::Continue(()) }
+});
+`
+
+**最后更新**: 2026-03-14 (添加 Rust 1.94 特性)
 
 ---
 

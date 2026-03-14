@@ -1,4 +1,4 @@
-﻿# Rust 对齐知识综合指南
+# Rust 对齐知识综合指南
 
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-02-28
@@ -38,6 +38,7 @@
     - [项目内文档](#项目内文档)
     - [代码示例](#代码示例)
     - [研究笔记](#研究笔记)
+  - [🆕 Rust 1.94 更新](#-rust-194-更新)
 
 ---
 
@@ -355,3 +356,13 @@ struct CacheLinePadded {
 **维护**: 对齐知识随 Rust 版本更新。新版本发布时检查 [Rust Reference - Type layout](https://doc.rust-lang.org/reference/type-layout.html)。发现错误或遗漏请提 issue。
 
 **批判性评估与推进计划**: [ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md](../07_project/ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md)
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [Rust 1.94 发布说明](../06_toolchain/16_rust_1.94_release_notes.md)
+
+**最后更新**: 2026-03-14

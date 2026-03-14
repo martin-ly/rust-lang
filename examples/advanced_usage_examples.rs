@@ -142,6 +142,31 @@ pub fn advanced_performance_example() {
     println!("  - 结果: {}", sum);
 }
 
+/// Rust 1.94 特性示例
+pub fn rust_194_features_example() {
+    println!("\n🆕 Rust 1.94 特性示例");
+
+    // array_windows 示例
+    let data = [1, 2, 3, 4, 5];
+    let sums: Vec<i32> = data.array_windows::<2>()
+        .map(|&[a, b]| a + b)
+        .collect();
+    println!("  - array_windows 结果: {:?}", sums);
+
+    // ControlFlow 示例
+    use std::ops::ControlFlow;
+    let items = vec![1, 2, -3, 4, 5];
+    let result = items.iter().try_for_each(|&n| {
+        if n < 0 { ControlFlow::Break(n) }
+        else { ControlFlow::Continue(()) }
+    });
+    println!("  - ControlFlow 结果: {:?}", result.break_value());
+
+    // 数学常量示例
+    println!("  - 欧拉常数: {}", std::f64::consts::EULER_GAMMA);
+    println!("  - 黄金比例: {}", std::f64::consts::GOLDEN_RATIO);
+}
+
 /// 主函数
 fn main() {
     println!("🚀 Rust 高级用法示例集合");
@@ -152,6 +177,7 @@ fn main() {
     advanced_error_handling_example();
     advanced_type_system_example();
     advanced_performance_example();
+    rust_194_features_example();
 
     println!("\n✅ 所有高级用法示例完成！");
 }

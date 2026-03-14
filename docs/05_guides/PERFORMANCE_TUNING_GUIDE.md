@@ -55,6 +55,8 @@
     - [场景4: 性能瓶颈定位](#场景4-性能瓶颈定位)
   - [形式化链接](#形式化链接)
   - [📚 相关资源](#-相关资源)
+  - [🆕 Rust 1.94 特性](#-rust-194-特性)
+    - [新特性概览](#新特性概览)
 
 ---
 
@@ -783,6 +785,23 @@ codegen-units = 1
 - [C08 算法](../../crates/c08_algorithms/docs/00_MASTER_INDEX.md)
 - [PERFORMANCE_TESTING_REPORT.md](./PERFORMANCE_TESTING_REPORT.md)
 - [BEST_PRACTICES.md](./BEST_PRACTICES.md)
+
+## 🆕 Rust 1.94 特性
+
+> **适用版本**: Rust 1.94.0+
+
+### 新特性概览
+
+Rust 1.94 带来了以下重要更新：
+
+- **rray_windows** - 固定大小的数组窗口迭代器
+- **ControlFlow** - 控制流抽象类型
+- **LazyCell/LazyLock 新方法** - get(), get_mut(), orce_mut()
+- **Peekable::next_if_map** - 条件映射迭代
+- **TryFrom<char> for usize** - Unicode 标量值转换
+- **数学常量** - EULER_GAMMA, GOLDEN_RATIO
+
+**最后更新**: 2026-03-14 (添加 Rust 1.94 特性)
 
 ---
 

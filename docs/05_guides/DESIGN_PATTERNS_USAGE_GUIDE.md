@@ -58,6 +58,9 @@
     - [3. 类型状态模式 (Type State)](#3-类型状态模式-type-state)
     - [4. Builder 模式（消耗型 vs 非消耗型）](#4-builder-模式消耗型-vs-非消耗型)
   - [📚 相关文档](#-相关文档)
+  - [🆕 Rust 1.94 特性](#-rust-194-特性)
+    - [新特性概览](#新特性概览)
+    - [代码示例](#代码示例)
 
 ---
 
@@ -2122,6 +2125,40 @@ let req2 = builder.build()?; // 可以重用
 - [GoF 模式](../../crates/c09_design_pattern/docs/tier_02_guides/01_创建型模式指南.md)
 - [Rust 特有模式](../../crates/c09_design_pattern/docs/tier_02_guides/05_最佳实践与反模式.md)
 - [设计模式形式化文档](../research_notes/software_design_theory/01_design_patterns_formal/README.md) - 23种设计模式的形式化定义与分析
+
+## 🆕 Rust 1.94 特性
+
+> **适用版本**: Rust 1.94.0+
+
+### 新特性概览
+
+Rust 1.94 带来了以下重要更新：
+
+- **rray_windows** - 固定大小的数组窗口迭代器
+- **ControlFlow** - 控制流抽象类型
+- **LazyCell/LazyLock 新方法** - get(), get_mut(), orce_mut()
+- **Peekable::next_if_map** - 条件映射迭代
+- **TryFrom<char> for usize** - Unicode 标量值转换
+
+### 代码示例
+
+`
+ust
+// array_windows 示例
+let data = [1, 2, 3, 4, 5];
+let sums: Vec<i32> = data.array_windows::<2>()
+    .map(|&[a, b]| a + b)
+    .collect();
+
+// ControlFlow 示例
+use std::ops::ControlFlow;
+let result = items.iter().try_for_each(|&n| {
+    if n < 0 { ControlFlow::Break(n) }
+    else { ControlFlow::Continue(()) }
+});
+`
+
+**最后更新**: 2026-03-14 (添加 Rust 1.94 特性)
 
 ---
 

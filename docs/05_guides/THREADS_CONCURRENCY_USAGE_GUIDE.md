@@ -1208,8 +1208,56 @@ let counter = Arc::new(Mutex::new(0));
 - [无锁数据结构](../../crates/c05_threads/docs/tier_03_references/02_无锁编程参考.md)
 - [Send/Sync 形式化](../research_notes/formal_methods/send_sync_formalization.md) - Send/Sync Trait 形式化定义与安全保证
 
+## 🆕 Rust 1.94 特性
+
+> **适用版本**: Rust 1.94.0+
+
+### LazyLock 新方法
+
+Rust 1.94 为 `LazyLock` 添加了更灵活的访问方法：
+
+```rust
+use std::sync::LazyLock;
+
+static CONFIG: LazyLock<String> = LazyLock::new(|| {
+    println!("初始化配置...");
+    "全局配置".to_string()
+});
+
+fn main() {
+    // get() - 获取引用，如果未初始化返回 None
+    if let Some(config) = LazyLock::get(&CONFIG) {
+        println!("配置已初始化: {}", config);
+    } else {
+        println!("配置未初始化");
+    }
+    
+    // force() - 强制初始化并获取值
+    let config: &String = LazyLock::force(&CONFIG);
+    println!("配置: {}", config);
+}
+```
+
+### array_windows 在并发中的应用
+
+Rust 1.94 的 `array_windows` 可用于并发任务的批量处理：
+
+```rust
+fn process_windows(data: &[i32]) {
+    // 使用 array_windows 处理固定大小的窗口
+    for window in data.array_windows::<3>() {
+        let &[a, b, c] = window;
+        // 提交到线程池处理
+        thread::spawn(move || {
+            println!("处理: {} {} {}", a, b, c);
+        });
+    }
+}
+```
+
+**最后更新**: 2026-03-14 (添加 Rust 1.94 特性)
+
 ---
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 完整实现
-**最后更新**: 2026-02-20

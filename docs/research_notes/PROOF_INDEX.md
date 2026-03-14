@@ -59,6 +59,7 @@
     - [软件设计理论 {#软件设计理论-1}](#软件设计理论-软件设计理论-1)
     - [工具资源](#工具资源)
     - [思维表征文档中的证明树](#思维表征文档中的证明树)
+  - [🆕 Rust 1.94 更新](#-rust-194-更新)
 
 ---
 
@@ -786,3 +787,17 @@
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-14
 **状态**: ✅ **证明索引 100% 完成**（110+ 证明已收录；证明深度 L1/L2/L3 已标注；按深度导航已增加；见 [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)）
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **最新版本**: Rust 1.94.0 (2026-03-05)
+
+- TOML 1.1 支持
+- Cargo.toml 多行内联表
+- 配置文件 include 支持
+
+详见 [Rust 1.94 研究更新](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

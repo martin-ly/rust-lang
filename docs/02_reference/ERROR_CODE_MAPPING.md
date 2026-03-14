@@ -1,4 +1,4 @@
-﻿# 编译器错误码 → 本项目文档映射
+# 编译器错误码 → 本项目文档映射
 
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-02-28
@@ -475,3 +475,13 @@ fn make_closure_static() -> impl Fn() -> i32 {
 ### 官方资源
 
 - [官方 Compiler Error Index](https://doc.rust-lang.org/error-index.html)
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [Rust 1.94 发布说明](../06_toolchain/16_rust_1.94_release_notes.md)
+
+**最后更新**: 2026-03-14

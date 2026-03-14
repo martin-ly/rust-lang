@@ -1,4 +1,4 @@
-﻿# Rust 边界条件与特例示例
+# Rust 边界条件与特例示例
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -75,6 +75,7 @@
   - [相关文档](#相关文档)
     - [速查卡](#速查卡)
     - [形式化文档](#形式化文档)
+  - [🆕 Rust 1.94 更新](#-rust-194-更新)
 
 ---
 
@@ -698,3 +699,13 @@ fn iterator_invalidation() {
 - [借用检查器证明](../research_notes/formal_methods/borrow_checker_proof.md)
 - [生命周期形式化](../research_notes/formal_methods/lifetime_formalization.md)
 - [Send/Sync 形式化](../research_notes/formal_methods/send_sync_formalization.md)
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [Rust 1.94 发布说明](../06_toolchain/16_rust_1.94_release_notes.md)
+
+**最后更新**: 2026-03-14
