@@ -40,6 +40,9 @@
   - [🆕 Rust 1.94 特性](#-rust-194-特性)
     - [新特性概览](#新特性概览)
     - [代码示例](#代码示例)
+  - [🆕 Rust 1.94 在 Unsafe Rust 中的应用](#-rust-194-在-unsafe-rust-中的应用)
+    - [LazyLock 在 Unsafe 全局状态管理中的应用](#lazylock-在-unsafe-全局状态管理中的应用)
+    - [ControlFlow 在 Unsafe 边界检查中的应用](#controlflow-在-unsafe-边界检查中的应用)
 
 ---
 
@@ -913,3 +916,61 @@ let result = items.iter().try_for_each(|&n| {
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 完整实现
 **最后更新**: 2026-02-20
+
+---
+
+## 🆕 Rust 1.94 在 Unsafe Rust 中的应用
+
+> **适用版本**: Rust 1.94.0+
+
+### LazyLock 在 Unsafe 全局状态管理中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// 延迟初始化的 unsafe 全局缓冲区
+static UNSAFE_BUFFER: LazyLock<UnsafeBuffer> = LazyLock::new(|| {
+    UnsafeBuffer::allocate(1024 * 1024)  // 1MB 缓冲区
+});
+
+/// 安全地获取缓冲区引用（检查初始化）
+pub fn get_buffer() -> Option<&'static UnsafeBuffer> {
+    LazyLock::get(&UNSAFE_BUFFER)
+}
+```
+
+### ControlFlow 在 Unsafe 边界检查中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// 安全的指针操作，支持提前终止
+fn validate_pointer_range<T>(
+    start: *const T,
+    count: usize,
+) -> ControlFlow<UnsafeError, ()> {
+    if start.is_null() {
+        return ControlFlow::Break(UnsafeError::NullPointer);
+    }
+
+    if count == 0 {
+        return ControlFlow::Break(UnsafeError::ZeroSize);
+    }
+
+    // 检查地址对齐
+    if (start as usize) % std::mem::align_of::<T>() != 0 {
+        return ControlFlow::Break(UnsafeError::Misaligned);
+    }
+
+    ControlFlow::Continue(())
+}
+```
+
+**安全提示**: 即使使用 `LazyLock`，unsafe 块仍需仔细审查。`get()` 方法提供了一种在不触发初始化的情况下检查状态的安全方式。
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成

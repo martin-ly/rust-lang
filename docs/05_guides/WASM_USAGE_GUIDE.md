@@ -41,9 +41,9 @@
     - [场景4: 插件系统](#场景4-插件系统)
   - [形式化链接](#形式化链接)
   - [📚 相关文档](#-相关文档)
-  - [🆕 Rust 1.94 特性](#-rust-194-特性)
-    - [新特性概览](#新特性概览)
-    - [代码示例](#代码示例)
+  - [🆕 Rust 1.94 在 WASM 开发中的应用](#-rust-194-在-wasm-开发中的应用)
+    - [array\_windows 在图像处理中的应用](#array_windows-在图像处理中的应用)
+    - [LazyLock 在 WASM 状态管理中的应用](#lazylock-在-wasm-状态管理中的应用)
 
 ---
 
@@ -390,39 +390,50 @@ pub fn process(data: &str) -> String {
 - [WASM 指南](../../crates/c12_wasm/docs/tier_02_guides/01_wasm_基础指南.md)
 - [JavaScript 互操作](../../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
 
-## 🆕 Rust 1.94 特性
+## 🆕 Rust 1.94 在 WASM 开发中的应用
 
 > **适用版本**: Rust 1.94.0+
 
-### 新特性概览
+### array_windows 在图像处理中的应用
 
-Rust 1.94 带来了以下重要更新：
+```rust
+/// 使用 array_windows 进行像素窗口处理
+#[wasm_bindgen]
+pub fn apply_kernel(data: &[u8], width: usize) -> Vec<u8> {
+    data.array_windows::<9>()
+        .map(|[nw, n, ne, w, c, e, sw, s, se]| {
+            // 3x3 卷积核应用
+            (nw + n + ne + w + c + e + sw + s + se) / 9
+        })
+        .collect()
+}
+```
 
-- **rray_windows** - 固定大小的数组窗口迭代器
-- **ControlFlow** - 控制流抽象类型
-- **LazyCell/LazyLock 新方法** - get(), get_mut(), orce_mut()
-- **Peekable::next_if_map** - 条件映射迭代
-- **TryFrom<char> for usize** - Unicode 标量值转换
+### LazyLock 在 WASM 状态管理中的应用
 
-### 代码示例
+```rust
+use std::sync::LazyLock;
+use wasm_bindgen::prelude::*;
 
-`
-ust
-// array_windows 示例
-let data = [1, 2, 3, 4, 5];
-let sums: Vec<i32> = data.array_windows::<2>()
-    .map(|&[a, b]| a + b)
-    .collect();
-
-// ControlFlow 示例
-use std::ops::ControlFlow;
-let result = items.iter().try_for_each(|&n| {
-    if n < 0 { ControlFlow::Break(n) }
-    else { ControlFlow::Continue(()) }
+/// 全局 WASM 状态（延迟初始化）
+static WASM_STATE: LazyLock<WasmState> = LazyLock::new(|| {
+    WasmState::init()
 });
-`
 
-**最后更新**: 2026-03-14 (添加 Rust 1.94 特性)
+#[wasm_bindgen]
+pub fn get_state_json() -> String {
+    // 使用 get() 避免不必要的克隆
+    if let Some(state) = LazyLock::get(&WASM_STATE) {
+        state.to_json()
+    } else {
+        String::from("{}")
+    }
+}
+```
+
+**性能提示**: WASM 环境下，`array_windows` 的零分配特性尤为重要。
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
 
 ---
 

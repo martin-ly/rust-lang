@@ -68,10 +68,25 @@
     - [官方资源](#官方资源)
     - [在线课程 (Coursera)](#在线课程-coursera)
     - [项目资源](#项目资源)
-  - [🆕 Rust 1.94 最佳实践](#-rust-194-最佳实践)
-    - [使用 array\_windows 替代手动索引](#使用-array_windows-替代手动索引)
-    - [ControlFlow 用于提前返回](#controlflow-用于提前返回)
-    - [LazyCell/LazyLock 的灵活访问](#lazycelllazylock-的灵活访问)
+  - [🆕 Rust 1.94 最佳实践（深度指南）](#-rust-194-最佳实践深度指南)
+    - [1. array\_windows - 零开销滑动窗口](#1-array_windows---零开销滑动窗口)
+      - [什么时候使用 array\_windows？](#什么时候使用-array_windows)
+      - [最佳实践示例](#最佳实践示例)
+      - [性能检查清单](#性能检查清单)
+    - [2. ControlFlow - 清晰的提前终止语义](#2-controlflow---清晰的提前终止语义)
+      - [ControlFlow vs Result/Option 选择指南](#controlflow-vs-resultoption-选择指南)
+      - [最佳实践：验证管道](#最佳实践验证管道)
+      - [最佳实践：搜索与短路](#最佳实践搜索与短路)
+    - [3. LazyLock/LazyCell - 延迟初始化优化](#3-lazylocklazycell---延迟初始化优化)
+      - [热路径优化模式](#热路径优化模式)
+      - [单线程可变缓存模式](#单线程可变缓存模式)
+    - [4. 数学常量 - 精确计算](#4-数学常量---精确计算)
+      - [使用标准库常量的好处](#使用标准库常量的好处)
+    - [5. 综合性能优化检查清单](#5-综合性能优化检查清单)
+      - [array\_windows 优化](#array_windows-优化)
+      - [ControlFlow 优化](#controlflow-优化)
+      - [LazyLock 优化](#lazylock-优化)
+    - [快速参考卡片](#快速参考卡片)
 
 ---
 
@@ -1150,71 +1165,297 @@ println!("运行时长: {:?}", stopped.duration());
 - [C05 线程与并发](../../crates/c05_threads/docs/00_MASTER_INDEX.md)
 - [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md)
 
-## 🆕 Rust 1.94 最佳实践
+## 🆕 Rust 1.94 最佳实践（深度指南）
 
 > **适用版本**: Rust 1.94.0+
 
-### 使用 array_windows 替代手动索引
+---
 
-Rust 1.94 的 `array_windows` 提供了类型安全的窗口迭代：
+### 1. array_windows - 零开销滑动窗口
+
+#### 什么时候使用 array_windows？
+
+| 场景 | 推荐 | 原因 |
+|------|------|------|
+| 固定大小窗口（如 3、5、7） | ✅ `array_windows::<N>()` | 零分配，编译优化 |
+| 动态大小窗口 | `windows(n)` | 运行时确定大小 |
+| 高频数据处理 | ✅ `array_windows` | 缓存友好，无边界检查 |
+| 需要模式匹配 | ✅ `array_windows` | 解构绑定 `[a, b, c]` |
+
+#### 最佳实践示例
 
 ```rust
-// ❌ 旧方式：手动索引，容易出错
-fn sum_windows_old(data: &[i32]) -> Vec<i32> {
-    let mut result = Vec::new();
-    for i in 0..data.len() - 2 {
-        result.push(data[i] + data[i + 1] + data[i + 2]);
-    }
-    result
+// ✅ 推荐：使用 array_windows 进行类型安全迭代
+fn calculate_sma(prices: &[f64]) -> Vec<f64> {
+    prices.array_windows::<5>()
+        .map(|&[a, b, c, d, e]| (a + b + c + d + e) / 5.0)
+        .collect()
 }
 
-// ✅ 新方式：使用 array_windows
-fn sum_windows_new(data: &[i32]) -> Vec<i32> {
+// ✅ 推荐：结合模式匹配进行复杂分析
+fn detect_pattern(data: &[u8]) -> bool {
     data.array_windows::<3>()
-        .map(|&[a, b, c]| a + b + c)
-        .collect()
+        .any(|[a, b, c]| a == b && b == c)  // 连续三个相同
+}
+
+// ❌ 避免：在 array_windows 中使用动态大小
+fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
+    match n {
+        2 => data.array_windows::<2>().map(|[a, b]| a + b).collect(),
+        3 => data.array_windows::<3>().map(|[a, b, c]| a + b + c).collect(),
+        // 太多分支！考虑使用传统 windows()
+        _ => data.windows(n).map(|w| w.iter().sum()).collect(),
+    }
 }
 ```
 
-### ControlFlow 用于提前返回
+#### 性能检查清单
 
-使用 `ControlFlow` 替代 `Option` 或 `Result` 进行控制流管理：
+- [ ] 窗口大小是否在编译期已知？
+- [ ] 是否在热路径上（高频调用）？
+- [ ] 是否需要进行边界检查消除？
+- [ ] 是否涉及 SIMD 优化机会？
+
+---
+
+### 2. ControlFlow - 清晰的提前终止语义
+
+#### ControlFlow vs Result/Option 选择指南
+
+```
+需要提前终止？
+├─ 是 → 终止原因是错误？
+│   ├─ 是 → 使用 Result<T, E>
+│   └─ 否 → 使用 ControlFlow<B, C>
+└─ 否 → 使用 Option<T> 或返回 T
+```
+
+#### 最佳实践：验证管道
 
 ```rust
 use std::ops::ControlFlow;
 
-// ✅ 使用 ControlFlow 表达提前终止意图
-fn validate_items(items: &[i32]) -> ControlFlow<i32, ()> {
-    for &item in items {
-        if item < 0 {
-            return ControlFlow::Break(item);
-        }
+// ✅ 推荐：使用 ControlFlow 构建验证管道
+pub fn validate_user_input(input: &UserInput) -> ControlFlow<ValidationError, ()> {
+    // 验证用户名
+    if input.username.is_empty() {
+        return ControlFlow::Break(ValidationError::EmptyUsername);
     }
+
+    // 验证密码强度
+    if input.password.len() < 8 {
+        return ControlFlow::Break(ValidationError::WeakPassword);
+    }
+
+    // 验证邮箱格式
+    if !input.email.contains('@') {
+        return ControlFlow::Break(ValidationError::InvalidEmail);
+    }
+
     ControlFlow::Continue(())
+}
+
+// ✅ 推荐：使用 ? 操作符进行链式验证
+fn validate_and_process(input: &UserInput) -> ControlFlow<ValidationError, ProcessedData> {
+    validate_user_input(input)?;  // 使用 ? 提前返回 Break
+    ControlFlow::Continue(process_input(input))
 }
 ```
 
-### LazyCell/LazyLock 的灵活访问
+#### 最佳实践：搜索与短路
 
-Rust 1.94 新增的方法提供了更灵活的延迟初始化控制：
+```rust
+// ✅ 推荐：使用 ControlFlow 进行短路搜索
+fn find_first_valid_connection(connections: &[Connection]) -> Option<&Connection> {
+    match connections.iter().try_fold(
+        ControlFlow::Continue(None),
+        |_, conn| {
+            if conn.is_valid() {
+                ControlFlow::Break(Some(conn))  // 找到即停
+            } else {
+                ControlFlow::Continue(None)
+            }
+        }
+    ) {
+        ControlFlow::Break(conn) => conn,
+        _ => None,
+    }
+}
+```
+
+---
+
+### 3. LazyLock/LazyCell - 延迟初始化优化
+
+#### 热路径优化模式
+
+```rust
+use std::sync::LazyLock;
+
+static CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
+    println!("[INIT] 加载配置...");
+    AppConfig::from_env()
+});
+
+// ✅ 推荐：使用 get() 进行热路径优化
+pub fn get_db_url_fast() -> Option<&'static str> {
+    // 如果已初始化，直接返回，无锁开销
+    CONFIG.get().map(|c| c.db_url.as_str())
+}
+
+// ✅ 推荐：性能关键路径的双重检查模式
+pub struct DatabasePool;
+
+impl DatabasePool {
+    pub fn get_connection(&self) -> Option<Connection> {
+        // 热路径：先检查是否已初始化
+        if let Some(config) = LazyLock::get(&CONFIG) {
+            // 无锁快速路径
+            return Some(Connection::new(&config.db_url));
+        }
+
+        // 冷路径：触发初始化
+        Some(Connection::new(&CONFIG.db_url))
+    }
+}
+```
+
+#### 单线程可变缓存模式
 
 ```rust
 use std::cell::LazyCell;
 
-let cell: LazyCell<Vec<i32>> = LazyCell::new(|| vec![1, 2, 3]);
-
-// ✅ 检查是否已初始化而不触发初始化
-if cell.get().is_some() {
-    println!("已初始化");
+// ✅ 推荐：单线程延迟初始化 + 可变更新
+pub struct LocalCache<T> {
+    data: LazyCell<T>,
+    initialized: bool,
 }
 
-// ✅ 获取可变引用
-if let Some(vec) = cell.get_mut() {
-    vec.push(4);
+impl<T> LocalCache<T> {
+    pub fn new(f: impl FnOnce() -> T) -> Self {
+        Self {
+            data: LazyCell::new(f),
+            initialized: false,
+        }
+    }
+
+    /// 安全读取（不触发初始化）
+    pub fn peek(&self) -> Option<&T> {
+        self.data.get()
+    }
+
+    /// 读取或初始化
+    pub fn get(&self) -> &T {
+        &*self.data
+    }
+
+    /// 更新缓存值（Rust 1.94：force_mut）
+    pub fn update(&mut self, new_value: T) {
+        let data = self.data.force_mut();
+        *data = new_value;
+        self.initialized = true;
+    }
 }
 ```
 
-**最后更新**: 2026-03-14 (添加 Rust 1.94 最佳实践)
+---
+
+### 4. 数学常量 - 精确计算
+
+#### 使用标准库常量的好处
+
+```rust
+// ✅ 推荐：使用 Rust 1.94 标准库常量
+use std::f64::consts::{E, LN_2, LN_10, LOG2_E, LOG10_E};
+use std::f64::consts::{EULER_GAMMA, GOLDEN_RATIO, PI};
+
+fn calculate_logarithms(n: f64) -> (f64, f64, f64) {
+    (
+        n.ln(),                    // 自然对数
+        n.ln() / LN_2,            // log2(n) - 使用精确常量
+        n.ln() / LN_10,           // log10(n)
+    )
+}
+
+// ✅ 推荐：黄金比例搜索算法
+fn golden_section_search<F>(mut a: f64, mut b: f64, epsilon: f64, f: F) -> f64
+where
+    F: Fn(f64) -> f64,
+{
+    let phi = GOLDEN_RATIO;  // 精确的 (1 + √5) / 2
+    let resphi = 2.0 - phi;
+
+    let mut x1 = a + resphi * (b - a);
+    let mut x2 = b - resphi * (b - a);
+
+    while (b - a).abs() > epsilon {
+        if f(x1) < f(x2) {
+            b = x2;
+        } else {
+            a = x1;
+        }
+        // ... 更新 x1, x2
+    }
+
+    (a + b) / 2.0
+}
+```
+
+---
+
+### 5. 综合性能优化检查清单
+
+#### array_windows 优化
+
+- [ ] 窗口大小是否 <= 32（编译器展开限制）？
+- [ ] 是否避免了不必要的 collect()？
+- [ ] 是否在迭代器中进行了最小化计算？
+
+#### ControlFlow 优化
+
+- [ ] 是否正确区分了 "错误" vs "提前终止"？
+- [ ] 是否使用了 ? 操作符简化代码？
+- [ ] 是否避免了不必要的类型转换？
+
+#### LazyLock 优化
+
+- [ ] 是否在热路径上使用了 get()？
+- [ ] 是否避免了在循环中重复访问？
+- [ ] 是否考虑了初始化失败的回退策略？
+
+---
+
+### 快速参考卡片
+
+```rust
+// array_windows - 零开销窗口迭代
+data.array_windows::<3>()
+    .map(|[a, b, c]| a + b + c)
+    .collect()
+
+// ControlFlow - 提前终止
+fn search(items: &[T]) -> ControlFlow<T, ()> {
+    for item in items {
+        if matches(item) {
+            return ControlFlow::Break(item.clone());
+        }
+    }
+    ControlFlow::Continue(())
+}
+
+// LazyLock - 延迟初始化 + 热路径优化
+static CONFIG: LazyLock<Config> = LazyLock::new(|| Config::new());
+
+pub fn get_config() -> Option<&'static Config> {
+    CONFIG.get()  // Rust 1.94：无锁快速检查
+}
+
+// 数学常量 - 精确计算
+let phi = f64::consts::GOLDEN_RATIO;
+let gamma = f64::consts::EULER_GAMMA;
+```
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 最佳实践)
 
 ---
 

@@ -47,6 +47,10 @@
   - [形式化链接](#形式化链接)
   - [🆕 Rust 1.94 特性](#-rust-194-特性)
     - [新特性概览](#新特性概览)
+  - [🆕 Rust 1.94 在测试开发中的应用](#-rust-194-在测试开发中的应用)
+    - [array\_windows 在测试数据生成中的应用](#array_windows-在测试数据生成中的应用)
+    - [ControlFlow 在测试验证管道中的应用](#controlflow-在测试验证管道中的应用)
+    - [LazyLock 在测试固件管理中的应用](#lazylock-在测试固件管理中的应用)
 
 ---
 
@@ -444,3 +448,71 @@ Rust 1.94 带来了以下重要更新：
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 持续更新
 **最后更新**: 2026-01-26
+
+---
+
+## 🆕 Rust 1.94 在测试开发中的应用
+
+> **适用版本**: Rust 1.94.0+
+
+### array_windows 在测试数据生成中的应用
+
+```rust
+/// 使用 array_windows 生成滑动窗口测试数据
+#[test]
+fn test_sliding_window_processing() {
+    let test_data = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    let windows: Vec<_> = test_data.array_windows::<3>()
+        .map(|[a, b, c]| (a, b, c))
+        .collect();
+
+    assert_eq!(windows.len(), 8);
+    assert_eq!(windows[0], (1, 2, 3));
+    assert_eq!(windows[7], (8, 9, 10));
+}
+```
+
+### ControlFlow 在测试验证管道中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// 测试验证管道，收集所有失败项
+fn validate_test_results(results: &[TestResult]) -> ControlFlow<Vec<TestFailure>, ()> {
+    let failures: Vec<_> = results.iter()
+        .filter(|r| !r.passed)
+        .map(|r| TestFailure::from(r))
+        .collect();
+
+    if failures.is_empty() {
+        ControlFlow::Continue(())
+    } else {
+        ControlFlow::Break(failures)
+    }
+}
+```
+
+### LazyLock 在测试固件管理中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// 全局测试数据库连接（延迟初始化）
+static TEST_DB: LazyLock<TestDatabase> = LazyLock::new(|| {
+    TestDatabase::connect(&std::env::var("TEST_DATABASE_URL").unwrap())
+        .expect("Failed to connect to test database")
+});
+
+/// 快速检查测试数据库状态
+pub fn is_test_db_ready() -> bool {
+    LazyLock::get(&TEST_DB).is_some()
+}
+```
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成

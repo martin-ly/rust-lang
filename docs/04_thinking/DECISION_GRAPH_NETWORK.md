@@ -903,7 +903,7 @@ graph TD
 
 | 需求场景 | Rust 1.93 推荐方案 | 替代方案 | 性能影响 | 安全影响 |
 | :--- | :--- | :--- | :--- | :--- |
-| 未初始化内存管理 | MaybeUninit<T> | unsafe 指针 | 零成本 | ✅ 类型安全 |
+| 未初始化内存管理 | `MaybeUninit<T>` | unsafe 指针 | 零成本 | ✅ 类型安全 |
 | 联合体字段访问 | &raw const/mut | unsafe 转换 | 零成本 | ✅ 安全访问 |
 | 关联类型多边界 | type Item: A + B + C | where 子句 | 零成本 | ✅ 类型安全 |
 | 零大小数组 | [T; 0] 优化 | PhantomData | 零成本 | ✅ 类型安全 |

@@ -39,6 +39,9 @@
     - [类型安全](#类型安全)
     - [线程安全](#线程安全)
   - [参考资源](#参考资源)
+  - [🆕 Rust 1.94 在 FFI 开发中的应用](#-rust-194-在-ffi-开发中的应用)
+    - [LazyLock 在 C 库句柄管理中的应用](#lazylock-在-c-库句柄管理中的应用)
+    - [ControlFlow 在错误处理转换中的应用](#controlflow-在错误处理转换中的应用)
 
 ---
 
@@ -2645,3 +2648,49 @@ mod debug {
 ---
 
 > **总结**：FFI 是 Rust 与外部世界交互的桥梁。正确的模式（不透明指针、作用域 API、错误处理）和充分的测试（Miri、Valgrind、ASan）是确保 FFI 安全的关键。
+
+---
+
+## 🆕 Rust 1.94 在 FFI 开发中的应用
+
+> **适用版本**: Rust 1.94.0+
+
+### LazyLock 在 C 库句柄管理中的应用
+
+```rust
+use std::sync::LazyLock;
+use std::ffi::CString;
+
+/// C 库句柄单例（延迟初始化）
+static CLIB_HANDLE: LazyLock<CLibHandle> = LazyLock::new(|| {
+    CLibHandle::init().expect("Failed to initialize C library")
+});
+
+/// 快速检查 C 库是否已初始化
+pub fn is_clib_ready() -> bool {
+    LazyLock::get(&CLIB_HANDLE).is_some()
+}
+```
+
+### ControlFlow 在错误处理转换中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// 将 C 错误码转换为 Rust 错误，支持提前终止
+fn check_c_errors(results: &[c_int]) -> ControlFlow<FFIError, ()> {
+    for &code in results {
+        if code < 0 {
+            return ControlFlow::Break(FFIError::from_code(code));
+        }
+    }
+    ControlFlow::Continue(())
+}
+```
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成

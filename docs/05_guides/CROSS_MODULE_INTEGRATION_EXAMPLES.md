@@ -35,6 +35,10 @@
     - [场景3: 嵌入式 + 云端协同](#场景3-嵌入式--云端协同)
     - [场景4: 可扩展的插件系统](#场景4-可扩展的插件系统)
   - [形式化链接](#形式化链接)
+  - [🆕 Rust 1.94 跨模块集成最佳实践](#-rust-194-跨模块集成最佳实践)
+    - [LazyLock 在跨模块配置共享中的应用](#lazylock-在跨模块配置共享中的应用)
+    - [ControlFlow 在跨模块错误处理中的应用](#controlflow-在跨模块错误处理中的应用)
+    - [array\_windows 在跨模块数据流中的应用](#array_windows-在跨模块数据流中的应用)
 
 ---
 
@@ -390,3 +394,76 @@ fn test_wasm_integration() {
 
 **报告日期**: 2026-01-26
 **维护者**: Rust 项目推进团队
+
+---
+
+## 🆕 Rust 1.94 跨模块集成最佳实践
+
+> **适用版本**: Rust 1.94.0+
+
+### LazyLock 在跨模块配置共享中的应用
+
+```rust
+// crate: common_config
+use std::sync::LazyLock;
+
+/// 跨模块共享的全局配置
+pub static SHARED_CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
+    AppConfig::load_from_file("config.toml")
+        .expect("Failed to load shared config")
+});
+
+/// 模块快速检查配置状态
+pub fn is_config_ready() -> bool {
+    LazyLock::get(&SHARED_CONFIG).is_some()
+}
+```
+
+### ControlFlow 在跨模块错误处理中的应用
+
+```rust
+// crate: validation_engine
+use std::ops::ControlFlow;
+
+/// 跨模块验证管道
+pub fn validate_cross_module<M1, M2>(
+    data: &Data,
+    module1: &M1,
+    module2: &M2,
+) -> ControlFlow<CrossModuleError, ValidatedData>
+where
+    M1: ValidationModule,
+    M2: ValidationModule,
+{
+    // 第一模块验证
+    let intermediate = match module1.validate(data) {
+        ControlFlow::Continue(v) => v,
+        ControlFlow::Break(e) => return ControlFlow::Break(e.into()),
+    };
+
+    // 第二模块验证
+    module2.validate(&intermediate)
+}
+```
+
+### array_windows 在跨模块数据流中的应用
+
+```rust
+/// 跨模块数据流处理：使用 array_windows 进行批次处理
+pub fn process_module_pipeline(
+    data: &[ModuleInput],
+) -> Vec<ModuleOutput> {
+    data.array_windows::<3>()
+        .map(|[prev, curr, next]| {
+            ModuleOutput::from_context(prev, curr, next)
+        })
+        .collect()
+}
+```
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成

@@ -50,6 +50,10 @@
   - [🆕 Rust 1.94 特性](#-rust-194-特性)
     - [新特性概览](#新特性概览)
     - [代码示例](#代码示例)
+  - [🆕 Rust 1.94 故障排查指南](#-rust-194-故障排查指南)
+    - [LazyLock 初始化问题排查](#lazylock-初始化问题排查)
+    - [array\_windows 边界问题](#array_windows-边界问题)
+    - [ControlFlow 类型推断问题](#controlflow-类型推断问题)
 
 ---
 
@@ -549,3 +553,85 @@ let result = items.iter().try_for_each(|&n| {
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 持续更新
 **最后更新**: 2026-01-26
+
+---
+
+## 🆕 Rust 1.94 故障排查指南
+
+> **适用版本**: Rust 1.94.0+
+
+### LazyLock 初始化问题排查
+
+**问题**: `LazyLock` 初始化时 panic
+
+```rust
+// ❌ 问题代码：初始化可能失败
+static CONFIG: LazyLock<Config> = LazyLock::new(|| {
+    Config::from_env().unwrap()  // panic if env not set
+});
+
+// ✅ 解决方案：使用 get() 进行安全检查和错误处理
+static CONFIG: LazyLock<Config> = LazyLock::new(|| {
+    Config::default()  // 提供默认值
+});
+
+pub fn get_config() -> Option<&'static Config> {
+    LazyLock::get(&CONFIG)
+}
+```
+
+### array_windows 边界问题
+
+**问题**: 数组长度不足导致 empty iterator
+
+```rust
+// ❌ 问题代码：未检查长度
+fn process(data: &[i32]) -> Vec<i32> {
+    data.array_windows::<5>()  // 如果 data.len() < 5，返回空
+        .map(|[a, b, c, d, e]| a + b + c + d + e)
+        .collect()
+}
+
+// ✅ 解决方案：前置长度检查
+fn process(data: &[i32]) -> Vec<i32> {
+    if data.len() < 5 {
+        return Vec::new();  // 或返回错误
+    }
+    data.array_windows::<5>()
+        .map(|arr| arr.iter().sum())
+        .collect()
+}
+```
+
+### ControlFlow 类型推断问题
+
+**问题**: 编译器无法推断 ControlFlow 类型参数
+
+```rust
+// ❌ 问题代码：类型不明确
+fn search(items: &[i32]) -> ControlFlow<_, ()> {
+    for &item in items {
+        if item < 0 {
+            return ControlFlow::Break(item);  // 错误：类型不匹配
+        }
+    }
+    ControlFlow::Continue(())
+}
+
+// ✅ 解决方案：显式类型标注
+fn search(items: &[i32]) -> ControlFlow<i32, ()> {
+    for &item in items {
+        if item < 0 {
+            return ControlFlow::Break(item);
+        }
+    }
+    ControlFlow::Continue(())
+}
+```
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成

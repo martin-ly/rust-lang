@@ -288,13 +288,12 @@ Rust 1.94 引入了以下新特性，可扩展思维表征：
 
 ### 示例
 
-`
-ust
+```rust
 // array_windows 的思维导图节点
 // [数据切片] -> [array_windows<N>] -> [模式匹配]
 
 // ControlFlow 的决策树
 // [迭代开始] -> [条件检查] -> [Break/Continue]
-`
+```
 
 **最后更新**: 2026-03-14 (添加 Rust 1.94 支持)

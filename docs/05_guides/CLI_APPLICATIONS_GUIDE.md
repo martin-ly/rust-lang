@@ -336,3 +336,61 @@ fn main() -> ExitCode {
 - [官方 Command Line Book](https://rust-cli.github.io/book/)
 - [C03 控制流](../../crates/c03_control_fn/docs/00_MASTER_INDEX.md)
 - [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md)
+
+---
+
+## 🆕 Rust 1.94 在 CLI 开发中的应用
+
+> **适用版本**: Rust 1.94.0+
+
+### array_windows 在参数解析中的应用
+
+```rust
+/// 使用 array_windows 解析命令行参数对
+fn parse_key_value_pairs(args: &[String]) -> Vec<(String, String)> {
+    args.array_windows::<2>()
+        .filter_map(|[key, value]| {
+            if key.starts_with('--') {
+                Some((key.clone(), value.clone()))
+            } else {
+                None
+            }
+        })
+        .collect()
+}
+```
+
+### ControlFlow 在验证管道中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// CLI 参数验证管道
+fn validate_args(args: &CliArgs) -> ControlFlow<ValidationError, ()> {
+    if !args.input.exists() {
+        return ControlFlow::Break(ValidationError::InputNotFound);
+    }
+    ControlFlow::Continue(())
+}
+```
+
+### LazyLock 在配置管理中的应用
+
+```rust
+use std::sync::LazyLock;
+
+static CLI_CONFIG: LazyLock<CliConfig> = LazyLock::new(|| {
+    CliConfig::load().expect("Failed to load config")
+});
+
+pub fn get_config() -> Option<&'static CliConfig> {
+    CLI_CONFIG.get()
+}
+```
+
+**最后更新**: 2026-03-14 (添加 Rust 1.94 深度整合)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成
