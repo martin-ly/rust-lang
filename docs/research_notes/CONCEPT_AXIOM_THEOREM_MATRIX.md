@@ -111,3 +111,20 @@
 - [分布式概念族谱](./DISTRIBUTED_CONCEPT_MINDMAP.md)
 - [工作流概念族谱](./WORKFLOW_CONCEPT_MINDMAP.md)
 - [形式化方法索引](./formal_methods/README.md)
+
+---
+
+## 🆕 Rust 1.94 研究更新
+
+> **适用版本**: Rust 1.94.0+
+
+### 核心研究点
+
+- rray_windows 的形式化语义
+- ControlFlow 的代数结构
+- LazyCell/LazyLock 的延迟语义
+- 与现有理论框架的集成
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

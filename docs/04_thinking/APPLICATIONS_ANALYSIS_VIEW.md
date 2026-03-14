@@ -1,4 +1,4 @@
-﻿# Rust 应用分析论证视图
+# Rust 应用分析论证视图
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -27,6 +27,9 @@
   - [选型冲突与化解](#选型冲突与化解)
   - [与形式化体系衔接](#与形式化体系衔接)
   - [相关文档](#相关文档)
+  - [🆕 Rust 1.94 思维表征更新](#-rust-194-思维表征更新)
+    - [新增思维表征](#新增思维表征)
+    - [示例](#示例)
 
 ---
 
@@ -266,3 +269,32 @@ flowchart LR
 - [实际应用案例研究](./../research_notes/practical_applications.md) - 案例库
 - [执行模型边界分析](./../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) - 模型选型
 - [WASM 使用指南](../05_guides/WASM_USAGE_GUIDE.md)
+
+---
+
+## 🆕 Rust 1.94 思维表征更新
+
+> **适用版本**: Rust 1.94.0+
+
+### 新增思维表征
+
+Rust 1.94 引入了以下新特性，可扩展思维表征：
+
+| 特性 | 思维表征类型 | 说明 |
+|------|-------------|------|
+| rray_windows | 模式识别 | 固定大小窗口的模式检测 |
+| ControlFlow | 决策树 | 控制流的提前终止决策 |
+| LazyCell/LazyLock | 状态图 | 延迟初始化的状态转换 |
+
+### 示例
+
+`
+ust
+// array_windows 的思维导图节点
+// [数据切片] -> [array_windows<N>] -> [模式匹配]
+
+// ControlFlow 的决策树
+// [迭代开始] -> [条件检查] -> [Break/Continue]
+`
+
+**最后更新**: 2026-03-14 (添加 Rust 1.94 支持)

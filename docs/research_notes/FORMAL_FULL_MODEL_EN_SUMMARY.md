@@ -1,4 +1,4 @@
-﻿# Rust Formal Full Model — English Summary
+# Rust Formal Full Model — English Summary
 
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
@@ -85,3 +85,13 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 - [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) — Full proofs for T-OW2, T-BR1, T-TY3 (L2)
 - [PROOF_INDEX](./PROOF_INDEX.md) — 105+ proof index
 - [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) — International alignment
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

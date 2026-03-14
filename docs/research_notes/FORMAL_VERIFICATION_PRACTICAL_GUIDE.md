@@ -3395,3 +3395,13 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ---
 
 *本指南旨在提供 Rust 形式化验证工具的实际操作指南。随着工具的发展，部分内容可能需要更新。建议参考各工具的官方文档获取最新信息。*
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

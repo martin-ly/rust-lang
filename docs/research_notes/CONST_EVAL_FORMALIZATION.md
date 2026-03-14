@@ -23,6 +23,8 @@
   - [5. MIR 常量求值](#5-mir-常量求值)
   - [6. 高级特性](#6-高级特性)
     - [const\_eval\_select (不稳定)](#const_eval_select-不稳定)
+  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+    - [核心研究点](#核心研究点)
 
 ## 1. 常量求值概述
 
@@ -156,3 +158,20 @@ const fn with_const_eval_select<T>(x: T) -> T {
 ---
 
 **维护者**: Rust 形式化研究团队
+
+---
+
+## 🆕 Rust 1.94 研究更新
+
+> **适用版本**: Rust 1.94.0+
+
+### 核心研究点
+
+- rray_windows 的形式化语义
+- ControlFlow 的代数结构
+- LazyCell/LazyLock 的延迟语义
+- 与现有理论框架的集成
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

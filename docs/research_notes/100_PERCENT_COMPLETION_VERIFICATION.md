@@ -273,3 +273,20 @@
 **验证时间**: 2026-02-21
 **验证机构**: Rust Formal Methods Research Team
 **项目状态**: ✅ **100% 完成验证通过**
+
+---
+
+## 🆕 Rust 1.94 研究更新
+
+> **适用版本**: Rust 1.94.0+
+
+### 核心研究点
+
+- rray_windows 的形式化语义
+- ControlFlow 的代数结构
+- LazyCell/LazyLock 的延迟语义
+- 与现有理论框架的集成
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

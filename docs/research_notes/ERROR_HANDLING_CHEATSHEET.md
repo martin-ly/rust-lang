@@ -76,3 +76,13 @@ let file = File::open("file")?;  // IOError自动转为MyError
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-24
 **状态**: ✅ 已完成 - 错误处理速查卡 (4/5)
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

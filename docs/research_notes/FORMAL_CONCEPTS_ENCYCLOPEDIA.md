@@ -42,6 +42,7 @@
     - [A.1 所有权反例](#a1-所有权反例)
     - [A.2 借用反例](#a2-借用反例)
     - [A.3 Send/Sync反例](#a3-sendsync反例)
+  - [🆕 Rust 1.94 更新](#-rust-194-更新)
 
 ---
 
@@ -467,3 +468,13 @@ thread::spawn(move || {
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-23
 **用途**: 给人看的形式化概念定义
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

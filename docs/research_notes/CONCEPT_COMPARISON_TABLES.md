@@ -301,3 +301,20 @@ CPU密集型？
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-24
 **状态**: ✅ 已完成 - 概念对比表汇编
+
+---
+
+## 🆕 Rust 1.94 研究更新
+
+> **适用版本**: Rust 1.94.0+
+
+### 核心研究点
+
+- rray_windows 的形式化语义
+- ControlFlow 的代数结构
+- LazyCell/LazyLock 的延迟语义
+- 与现有理论框架的集成
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

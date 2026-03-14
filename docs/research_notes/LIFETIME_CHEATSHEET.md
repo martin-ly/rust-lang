@@ -452,3 +452,13 @@ let r = &x;  // 编译器自动推断
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-28
 **状态**: ✅ 已扩展 - 生命周期速查卡完整版
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

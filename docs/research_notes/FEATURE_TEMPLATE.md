@@ -1,4 +1,4 @@
-﻿# Rust 特性精简模板
+# Rust 特性精简模板
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -73,3 +73,13 @@
 
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-12
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

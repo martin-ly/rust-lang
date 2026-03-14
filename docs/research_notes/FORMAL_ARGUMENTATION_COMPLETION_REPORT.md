@@ -282,3 +282,13 @@ Week 13-14: 工具实践
 **报告编制**: Rust Formal Methods Research Team
 **报告日期**: 2026-02-28
 **状态**: ✅ 形式化论证体系完成
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

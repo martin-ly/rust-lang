@@ -40,6 +40,7 @@
     - [相关项目](#相关项目)
     - [工具链扩展任务（Rust → 证明助手）](#工具链扩展任务rust--证明助手)
     - [工具资源](#工具资源)
+  - [🆕 Rust 1.94 更新](#-rust-194-更新)
 
 ---
 
@@ -499,3 +500,13 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 **维护者**: Rust Formal Verification Team
 **最后更新**: 2026-01-26
 **状态**: ✅ **指南 100% 完成**
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

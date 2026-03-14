@@ -35,6 +35,8 @@
     - [7.1 内部文档](#71-内部文档)
     - [7.2 外部资源](#72-外部资源)
     - [7.3 相关工具链](#73-相关工具链)
+  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+    - [核心研究点](#核心研究点)
 
 ---
 
@@ -321,3 +323,20 @@ Aeneas 工具生态
 ---
 
 > **注意**: 本文档替代已归档的旧版本。旧版本位于 `archive/deprecated/AENEAS_INTEGRATION_PLAN.md`
+
+---
+
+## 🆕 Rust 1.94 研究更新
+
+> **适用版本**: Rust 1.94.0+
+
+### 核心研究点
+
+- rray_windows 的形式化语义
+- ControlFlow 的代数结构
+- LazyCell/LazyLock 的延迟语义
+- 与现有理论框架的集成
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14

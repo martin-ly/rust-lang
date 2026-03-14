@@ -276,3 +276,13 @@ println!("{}", x);
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-23
 **用途**: 指导学习者渐进掌握Rust形式化方法
+
+---
+
+## 🆕 Rust 1.94 更新
+
+> **适用版本**: Rust 1.94.0+
+
+详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+
+**最后更新**: 2026-03-14
