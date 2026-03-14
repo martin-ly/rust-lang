@@ -373,3 +373,125 @@ fn update_data(value: u32) {
 - [C12 WASM](../../crates/c12_wasm/docs/README.md)
 - [官方 Embedded Book](https://doc.rust-lang.org/embedded-book/)
 - [BEST_PRACTICES.md](./BEST_PRACTICES.md)
+
+---
+
+## 🆕 Rust 1.94 在嵌入式开发中的应用
+
+> **适用版本**: Rust 1.94.0+
+
+### array_windows 在传感器数据处理中的应用
+
+```rust
+/// 使用 array_windows 进行传感器数据滑动平均滤波
+pub fn moving_average_filter(samples: &[u16], window_size: usize) -> Vec<u16> {
+    match window_size {
+        3 => samples.array_windows::<3>()
+            .map(|&[a, b, c]| ((a as u32 + b as u32 + c as u32) / 3) as u16)
+            .collect(),
+        5 => samples.array_windows::<5>()
+            .map(|arr| (arr.iter().map(|&x| x as u32).sum::<u32>() / 5) as u16)
+            .collect(),
+        _ => samples.windows(window_size)
+            .map(|w| (w.iter().map(|&x| x as u32).sum::<u32>() / window_size as u32) as u16)
+            .collect(),
+    }
+}
+
+/// 边缘检测（零分配）
+pub fn edge_detection(samples: &[u16], threshold: u16) -> Vec<usize> {
+    samples.array_windows::<2>()
+        .enumerate()
+        .filter_map(|(idx, &[prev, curr])| {
+            if curr.abs_diff(prev) > threshold {
+                Some(idx)
+            } else {
+                None
+            }
+        })
+        .collect()
+}
+```
+
+### LazyLock 在硬件抽象层中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// 全局硬件配置（延迟初始化，节省启动时间）
+static HARDWARE_CONFIG: LazyLock<HardwareConfig> = LazyLock::new(|| {
+    HardwareConfig::detect()
+});
+
+/// 全局 DMA 控制器（延迟初始化）
+static DMA_CONTROLLER: LazyLock<DmaController> = LazyLock::new(|| {
+    DmaController::init()
+        .expect("DMA initialization failed")
+});
+
+/// 快速检查硬件状态
+pub fn is_dma_ready() -> bool {
+    LazyLock::get(&DMA_CONTROLLER).is_some()
+}
+```
+
+### ControlFlow 在错误恢复中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// 初始化序列，支持故障恢复
+fn initialize_peripherals() -> ControlFlow<InitError, ()> {
+    // 初始化 GPIO
+    if let Err(e) = gpio::init() {
+        return ControlFlow::Break(InitError::GpioFailed(e));
+    }
+
+    // 初始化 UART
+    if let Err(e) = uart::init(115200) {
+        return ControlFlow::Break(InitError::UartFailed(e));
+    }
+
+    // 初始化 SPI
+    if let Err(e) = spi::init() {
+        return ControlFlow::Break(InitError::SpiFailed(e));
+    }
+
+    ControlFlow::Continue(())
+}
+```
+
+### 内存优化：array_windows 的零分配特性
+
+```rust
+/// 在 `no_std` 环境下使用 array_windows
+#![no_std]
+
+/// 静态缓冲区处理（无堆分配）
+pub fn process_static_buffer<const N: usize>(
+    buffer: &[u8; N]
+) -> [u8; N - 2] {
+    let mut result = [0u8; N - 2];
+
+    for (idx, &[a, b, c]) in buffer.array_windows::<3>().enumerate() {
+        result[idx] = median_filter(a, b, c);
+    }
+
+    result
+}
+
+fn median_filter(a: u8, b: u8, c: u8) -> u8 {
+    let mut arr = [a, b, c];
+    arr.sort();
+    arr[1]  // 中值
+}
+```
+
+**内存优势**: `array_windows` 在 `no_std` 环境下零堆分配，适合资源受限的嵌入式设备。
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成

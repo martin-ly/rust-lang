@@ -138,7 +138,7 @@ impl Sync for T where &T: Send { }
 
 ## 📚 快速导航
 
-```
+```text
 📖 理论
 ├── UNIFIED_THEORETICAL_FRAMEWORK.md  // 统一框架
 ├── THEOREM_DEPENDENCY_GRAPH.md       // 定理依赖
@@ -159,7 +159,7 @@ impl Sync for T where &T: Send { }
 
 ## 🎓 学习路径
 
-```
+```text
 初学者: 概念卡片 → 交互指南 → 基础练习
 进阶:   详细概念 → 设计模式 → 案例研究
 专家:   理论框架 → Coq证明 → 研究前沿

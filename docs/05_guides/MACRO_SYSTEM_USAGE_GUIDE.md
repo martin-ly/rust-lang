@@ -55,6 +55,10 @@
   - [🆕 Rust 1.94 特性](#-rust-194-特性)
     - [新特性概览](#新特性概览)
     - [代码示例](#代码示例)
+  - [🆕 Rust 1.94 在宏系统中的应用](#-rust-194-在宏系统中的应用)
+    - [array\_windows 在宏展开优化中的应用](#array_windows-在宏展开优化中的应用)
+    - [LazyLock 在宏编译缓存中的应用](#lazylock-在宏编译缓存中的应用)
+    - [ControlFlow 在宏错误处理中的应用](#controlflow-在宏错误处理中的应用)
 
 ---
 
@@ -846,3 +850,73 @@ let result = items.iter().try_for_each(|&n| {
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 完整实现
 **最后更新**: 2026-02-20
+
+---
+
+## 🆕 Rust 1.94 在宏系统中的应用
+
+> **适用版本**: Rust 1.94.0+
+
+### array_windows 在宏展开优化中的应用
+
+```rust
+/// 使用 array_windows 处理宏 Token 流
+macro_rules! sliding_window_match {
+    ($tokens:expr) => {{
+        let tokens = $tokens;
+        tokens.array_windows::<2>()
+            .filter_map(|[curr, next]| {
+                match (curr.kind, next.kind) {
+                    (TokenKind::Ident, TokenKind::Colon) => Some((curr, next)),
+                    _ => None,
+                }
+            })
+            .collect::<Vec<_>>()
+    }};
+}
+```
+
+### LazyLock 在宏编译缓存中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// 宏展开结果缓存（延迟初始化）
+static MACRO_CACHE: LazyLock<MacroCache> = LazyLock::new(|| {
+    MacroCache::with_capacity(1000)
+});
+
+/// 快速检查缓存状态
+pub fn get_cached_expansion(macro_name: &str) -> Option<TokenStream> {
+    LazyLock::get(&MACRO_CACHE)
+        .and_then(|cache| cache.get(macro_name).cloned())
+}
+```
+
+### ControlFlow 在宏错误处理中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// 宏验证管道
+fn validate_macro_rules(rules: &[MacroRule]) -> ControlFlow<MacroError, ()> {
+    for (idx, rule) in rules.iter().enumerate() {
+        if rule.pattern.is_empty() {
+            return ControlFlow::Break(MacroError::EmptyPattern(idx));
+        }
+        if !is_valid_transcriber(&rule.transcriber) {
+            return ControlFlow::Break(MacroError::InvalidTranscriber(idx));
+        }
+    }
+    ControlFlow::Continue(())
+}
+```
+
+**最佳实践**: 在过程宏中使用 `LazyLock` 管理全局状态，使用 `ControlFlow` 处理多阶段验证。
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成

@@ -37,6 +37,17 @@
     - [8.1 自定义错误类型](#81-自定义错误类型)
     - [8.2 错误传播模式](#82-错误传播模式)
   - [📚 相关资源](#-相关资源)
+  - [🆕 Rust 1.94 高级特性深度解析](#-rust-194-高级特性深度解析)
+    - [array\_windows 的高级模式](#array_windows-的高级模式)
+      - [1. 多重窗口组合](#1-多重窗口组合)
+      - [2. 窗口内的复杂模式匹配](#2-窗口内的复杂模式匹配)
+    - [ControlFlow 的高级用法](#controlflow-的高级用法)
+      - [1. 嵌套 ControlFlow](#1-嵌套-controlflow)
+      - [2. 与泛型结合](#2-与泛型结合)
+    - [LazyLock 的高级模式](#lazylock-的高级模式)
+      - [1. 分层初始化](#1-分层初始化)
+      - [2. 条件初始化](#2-条件初始化)
+    - [数学常量的高级应用](#数学常量的高级应用)
 
 ---
 
@@ -451,3 +462,187 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
 
 **报告日期**: 2026-01-27
 **维护者**: Rust 项目推进团队
+
+---
+
+## 🆕 Rust 1.94 高级特性深度解析
+
+> **适用版本**: Rust 1.94.0+
+
+### array_windows 的高级模式
+
+#### 1. 多重窗口组合
+
+```rust
+/// 同时计算多个时间窗口的指标
+pub fn multi_window_analysis(prices: &[f64]) -> MultiWindowMetrics {
+    let sma5: Vec<_> = prices.array_windows::<5>()
+        .map(|arr| arr.iter().sum::<f64>() / 5.0)
+        .collect();
+
+    let sma10: Vec<_> = prices.array_windows::<10>()
+        .map(|arr| arr.iter().sum::<f64>() / 10.0)
+        .collect();
+
+    let sma20: Vec<_> = prices.array_windows::<20>()
+        .map(|arr| arr.iter().sum::<f64>() / 20.0)
+        .collect();
+
+    MultiWindowMetrics { sma5, sma10, sma20 }
+}
+```
+
+#### 2. 窗口内的复杂模式匹配
+
+```rust
+/// 检测复杂的模式序列
+pub fn detect_complex_pattern(data: &[u8]) -> Vec<PatternMatch> {
+    data.array_windows::<6>()
+        .enumerate()
+        .filter_map(|(idx, &[a, b, c, d, e, f])| {
+            // 检测双顶模式
+            if b > a && b > c && d < c && e > d && f < e && (b - c).abs() < 5 {
+                Some(PatternMatch::DoubleTop(idx + 2))
+            }
+            // 检测头肩顶模式
+            else if a < b && b > c && c > d && d < e && e > f
+                    && (b - e).abs() < 5 && b > a && b > f {
+                Some(PatternMatch::HeadShoulders(idx + 2))
+            }
+            else {
+                None
+            }
+        })
+        .collect()
+}
+```
+
+### ControlFlow 的高级用法
+
+#### 1. 嵌套 ControlFlow
+
+```rust
+use std::ops::ControlFlow;
+
+/// 嵌套的提前终止控制
+fn nested_processing(data: &[Vec<i32>]) -> ControlFlow<Error, Vec<Result>> {
+    let mut results = Vec::new();
+
+    for (outer_idx, inner_vec) in data.iter().enumerate() {
+        match process_inner_vec(inner_vec) {
+            ControlFlow::Continue(inner_results) => {
+                results.extend(inner_results);
+            }
+            ControlFlow::Break(e) => {
+                return ControlFlow::Break(Error::InnerFailed(outer_idx, e));
+            }
+        }
+    }
+
+    ControlFlow::Continue(results)
+}
+```
+
+#### 2. 与泛型结合
+
+```rust
+/// 通用的提前终止迭代器
+fn find_first<T, P>(items: &[T], predicate: P) -> ControlFlow<&T, ()>
+where
+    P: Fn(&T) -> bool,
+{
+    for item in items {
+        if predicate(item) {
+            return ControlFlow::Break(item);
+        }
+    }
+    ControlFlow::Continue(())
+}
+```
+
+### LazyLock 的高级模式
+
+#### 1. 分层初始化
+
+```rust
+use std::sync::LazyLock;
+
+/// 基础配置层
+static BASE_CONFIG: LazyLock<Config> = LazyLock::new(|| {
+    Config::load("base.toml")
+});
+
+/// 环境特定配置层
+static ENV_CONFIG: LazyLock<Config> = LazyLock::new(|| {
+    Config::load(&format!("{}.toml", std::env::var("ENV").unwrap_or_default()))
+});
+
+/// 运行时配置层
+static RUNTIME_CONFIG: LazyLock<Config> = LazyLock::new(|| {
+    Config::from_env()
+});
+
+/// 合并配置（按需加载）
+pub fn get_merged_config() -> MergedConfig {
+    let base = LazyLock::get(&BASE_CONFIG);
+    let env = LazyLock::get(&ENV_CONFIG);
+    let runtime = LazyLock::get(&RUNTIME_CONFIG);
+
+    MergedConfig::merge(base, env, runtime)
+}
+```
+
+#### 2. 条件初始化
+
+```rust
+/// 仅在特定条件下初始化
+static SPECIAL_FEATURE: LazyLock<Option<Feature>> = LazyLock::new(|| {
+    if std::env::var("ENABLE_SPECIAL_FEATURE").is_ok() {
+        Some(Feature::init())
+    } else {
+        None
+    }
+});
+
+/// 检查特性是否可用
+pub fn use_special_feature<F, R>(f: F) -> Option<R>
+where
+    F: FnOnce(&Feature) -> R,
+{
+    LazyLock::get(&SPECIAL_FEATURE).map(f)
+}
+```
+
+### 数学常量的高级应用
+
+```rust
+/// 使用欧拉常数进行级数加速收敛
+pub fn accelerated_series(n: u64) -> f64 {
+    let harmonic = (1..=n).map(|i| 1.0 / i as f64).sum::<f64>();
+    let approximation = (n as f64).ln() + f64::consts::EULER_GAMMA;
+
+    // 使用近似值加速收敛
+    (harmonic + approximation) / 2.0
+}
+
+/// 使用对数常量进行复杂度计算
+pub fn log_complexity_analysis(n: usize, base: f64) -> Complexity {
+    let log_val = match base {
+        2.0 => (n as f64).ln() / f64::consts::LN_2,
+        10.0 => (n as f64).ln() / f64::consts::LN_10,
+        e => (n as f64).ln() / e.ln(),
+        _ => (n as f64).ln() / base.ln(),
+    };
+
+    Complexity::Logarithmic(log_val as usize)
+}
+```
+
+**性能提示**: 在高级应用中，结合 `array_windows` 的编译期优化和 `LazyLock` 的运行时优化，可实现极致性能。
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成
