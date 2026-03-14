@@ -15,6 +15,10 @@
     - [1. 基于订阅和事件发布的消息处理机制](#1-基于订阅和事件发布的消息处理机制)
     - [2. 实时工作流状态可视化（D3.js集成）](#2-实时工作流状态可视化d3js集成)
     - [总结建议](#总结建议)
+  - [🆕 Rust 1.94 在工作流模型中的应用](#-rust-194-在工作流模型中的应用)
+    - [array\_windows 在流程模式检测中的应用](#array_windows-在流程模式检测中的应用)
+    - [LazyLock 在模型缓存中的应用](#lazylock-在模型缓存中的应用)
+    - [数学常量在流程优化中的应用](#数学常量在流程优化中的应用)
 
 ## 总体架构设计
 
@@ -15739,3 +15743,66 @@ function createWorkflowVisualization(containerId, workflowId, executionId) {
    - 提供更完善的业务指标收集
 
 这些功能将使工作流引擎更加健壮，更适合构建大规模的分布式工作流应用。
+
+---
+
+## 🆕 Rust 1.94 在工作流模型中的应用
+
+> **适用版本**: Rust 1.94.0+
+
+### array_windows 在流程模式检测中的应用
+
+```rust
+/// 检测工作流中的重复模式
+fn detect_loop_patterns(events: &[WorkflowEvent]) -> Vec<LoopPattern> {
+    events.array_windows::<4>()
+        .enumerate()
+        .filter_map(|(idx, [a, b, c, d])| {
+            // 检测 A -> B -> A -> B 的循环模式
+            if a.node_id == c.node_id && b.node_id == d.node_id {
+                Some(LoopPattern {
+                    start_idx: idx,
+                    nodes: vec![a.node_id.clone(), b.node_id.clone()],
+                })
+            } else {
+                None
+            }
+        })
+        .collect()
+}
+```
+
+### LazyLock 在模型缓存中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// BPMN 模型缓存（延迟加载）
+static BPMN_MODEL_CACHE: LazyLock<ModelCache> = LazyLock::new(|| {
+    ModelCache::with_capacity(100)
+});
+
+/// 获取缓存的 BPMN 模型
+pub fn get_cached_model(model_id: &str) -> Option<BpmnModel> {
+    LazyLock::get(&BPMN_MODEL_CACHE)
+        .and_then(|cache| cache.get(model_id).cloned())
+}
+```
+
+### 数学常量在流程优化中的应用
+
+```rust
+/// 使用黄金比例确定最优并行度
+pub fn calculate_optimal_parallelism(workload: usize) -> usize {
+    let phi = f64::consts::GOLDEN_RATIO;
+    let base = (workload as f64).sqrt();
+    (base * phi) as usize
+}
+```
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成

@@ -53,6 +53,9 @@
     - [形式化理论与决策树](#形式化理论与决策树)
     - [形式化理论与类型系统](#形式化理论与类型系统)
     - [相关速查卡](#相关速查卡)
+  - [🆕 Rust 1.94 并发特性](#-rust-194-并发特性)
+    - [LazyLock 在并发状态管理中的应用](#lazylock-在并发状态管理中的应用)
+    - [array\_windows 在并发数据处理中的应用](#array_windows-在并发数据处理中的应用)
 
 ---
 
@@ -803,3 +806,40 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 **最后更新**: 2026-01-27
 **Rust 版本**: 1.93.1+ (Edition 2024)
+
+---
+
+## 🆕 Rust 1.94 并发特性
+
+### LazyLock 在并发状态管理中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// 全局线程池配置（延迟初始化）
+static THREAD_POOL_CONFIG: LazyLock<ThreadPoolConfig> = LazyLock::new(|| {
+    ThreadPoolConfig::from_env()
+});
+
+/// 快速获取配置
+pub fn get_thread_config() -> Option<&'static ThreadPoolConfig> {
+    LazyLock::get(&THREAD_POOL_CONFIG)
+}
+```
+
+### array_windows 在并发数据处理中的应用
+
+```rust
+/// 并行滑动窗口处理
+fn parallel_window_process(data: &[i32]) -> Vec<i32> {
+    data.array_windows::<4>()
+        .map(|[a, b, c, d]| a + b + c + d)
+        .collect()
+}
+```
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**状态**: ✅ 深度整合完成

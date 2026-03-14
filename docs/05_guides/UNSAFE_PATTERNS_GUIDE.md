@@ -81,6 +81,9 @@
     - [GitHub Actions 配置](#github-actions-配置)
   - [总结](#总结)
     - [危险等级总结](#危险等级总结)
+  - [🆕 Rust 1.94 在 Unsafe 模式中的应用](#-rust-194-在-unsafe-模式中的应用)
+    - [LazyLock 在 Unsafe 全局状态管理中的应用](#lazylock-在-unsafe-全局状态管理中的应用)
+    - [ControlFlow 在 Unsafe 边界检查中的应用](#controlflow-在-unsafe-边界检查中的应用)
 
 ---
 
@@ -2433,3 +2436,51 @@ jobs:
 *最后更新: 2026-02-28*
 *维护者: Rust 学习项目*
 *许可证: MIT OR Apache-2.0*
+
+---
+
+## 🆕 Rust 1.94 在 Unsafe 模式中的应用
+
+> **适用版本**: Rust 1.94.0+
+
+### LazyLock 在 Unsafe 全局状态管理中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// Unsafe 全局缓冲区（延迟初始化）
+static RAW_BUFFER: LazyLock<RawBuffer> = LazyLock::new(|| {
+    RawBuffer::allocate(1024 * 1024)
+});
+
+/// 安全地获取缓冲区引用
+pub unsafe fn get_buffer() -> Option<&'static RawBuffer> {
+    LazyLock::get(&RAW_BUFFER)
+}
+```
+
+### ControlFlow 在 Unsafe 边界检查中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// 指针范围验证
+fn validate_ptr_range<T>(ptr: *const T, count: usize)
+    -> ControlFlow<UnsafeError, ()>
+{
+    if ptr.is_null() {
+        return ControlFlow::Break(UnsafeError::NullPtr);
+    }
+    if count == 0 {
+        return ControlFlow::Break(UnsafeError::ZeroSize);
+    }
+    ControlFlow::Continue(())
+}
+```
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成

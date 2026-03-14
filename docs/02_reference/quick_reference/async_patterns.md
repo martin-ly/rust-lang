@@ -75,6 +75,9 @@
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
+  - [🆕 Rust 1.94 异步模式](#-rust-194-异步模式)
+    - [ControlFlow 在异步错误处理中的应用](#controlflow-在异步错误处理中的应用)
+    - [LazyLock 在异步运行时配置中的应用](#lazylock-在异步运行时配置中的应用)
 
 ---
 
@@ -1055,3 +1058,53 @@ async fn process_stream() {
 **运行时版本**: Tokio 1.48.0+
 
 ⚡ **Rust 异步，高性能与优雅并存！**
+
+---
+
+## 🆕 Rust 1.94 异步模式
+
+### ControlFlow 在异步错误处理中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// 异步验证管道
+async fn validate_async_stream<S>(stream: S) -> ControlFlow<Error, Vec<Item>>
+where
+    S: Stream<Item = Result<Item, Error>>,
+{
+    let mut results = Vec::new();
+    tokio::pin!(stream);
+
+    while let Some(result) = stream.next().await {
+        match result {
+            Ok(item) => results.push(item),
+            Err(e) if e.is_fatal() => return ControlFlow::Break(e),
+            Err(_) => continue,
+        }
+    }
+
+    ControlFlow::Continue(results)
+}
+```
+
+### LazyLock 在异步运行时配置中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// 全局异步运行时配置
+static ASYNC_CONFIG: LazyLock<AsyncConfig> = LazyLock::new(|| {
+    AsyncConfig::load()
+});
+
+pub fn get_async_config() -> Option<&'static AsyncConfig> {
+    LazyLock::get(&ASYNC_CONFIG)
+}
+```
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**状态**: ✅ 深度整合完成

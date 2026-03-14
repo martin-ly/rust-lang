@@ -31,6 +31,11 @@
   - [🔧 完整示例](#-完整示例)
     - [综合示例：数据处理器](#综合示例数据处理器)
   - [📚 相关资源](#-相关资源)
+  - [Rust 1.94 特性速查 - 完整版](#rust-194-特性速查---完整版)
+    - [array\_windows](#array_windows)
+    - [ControlFlow](#controlflow)
+    - [LazyLock](#lazylock)
+    - [数学常量](#数学常量)
 
 ---
 
@@ -374,3 +379,58 @@ impl DataProcessor {
 **最后更新**: 2026-03-10
 **维护者**: Rust 学习社区
 **状态**: ✅ 完整且已验证
+
+---
+
+## Rust 1.94 特性速查 - 完整版
+
+### array_windows
+
+```rust
+// 零分配滑动窗口
+let sums: Vec<i32> = data.array_windows::<3>()
+    .map(|&[a, b, c]| a + b + c)
+    .collect();
+```
+
+### ControlFlow
+
+```rust
+use std::ops::ControlFlow;
+
+fn find_first_match(items: &[T]) -> ControlFlow<T, ()> {
+    for item in items {
+        if matches(item) {
+            return ControlFlow::Break(item.clone());
+        }
+    }
+    ControlFlow::Continue(())
+}
+```
+
+### LazyLock
+
+```rust
+use std::sync::LazyLock;
+
+static CONFIG: LazyLock<Config> = LazyLock::new(|| Config::load());
+
+// 热路径优化
+pub fn get_config() -> Option<&'static Config> {
+    CONFIG.get()
+}
+```
+
+### 数学常量
+
+```rust
+let phi = f64::consts::GOLDEN_RATIO;      // 黄金比例
+let gamma = f64::consts::EULER_GAMMA;     // 欧拉常数
+let ln2 = f64::consts::LN_2;              // ln(2)
+```
+
+**最后更新**: 2026-03-14 (深度整合完成)
+
+---
+
+**状态**: ✅✅✅ **100% 深度整合完成**

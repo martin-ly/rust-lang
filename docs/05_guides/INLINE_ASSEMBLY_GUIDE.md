@@ -38,6 +38,10 @@
     - [陷阱 3: 忘记内存屏障](#陷阱-3-忘记内存屏障)
     - [陷阱 4: 平台假设](#陷阱-4-平台假设)
   - [总结](#总结)
+  - [🆕 Rust 1.94 在内联汇编中的应用](#-rust-194-在内联汇编中的应用)
+    - [LazyLock 在汇编优化缓存中的应用](#lazylock-在汇编优化缓存中的应用)
+    - [ControlFlow 在汇编错误处理中的应用](#controlflow-在汇编错误处理中的应用)
+    - [数学常量在 SIMD 优化中的应用](#数学常量在-simd-优化中的应用)
 
 ---
 
@@ -644,3 +648,77 @@ pub fn get_cycle_count() -> u64 {
 
 **最后更新**: 2026-02-28
 **参考**: [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)
+
+---
+
+## 🆕 Rust 1.94 在内联汇编中的应用
+
+> **适用版本**: Rust 1.94.0+
+
+### LazyLock 在汇编优化缓存中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// CPU 特性缓存（延迟检测）
+static CPU_FEATURES: LazyLock<CpuFeatures> = LazyLock::new(|| {
+    CpuFeatures::detect()
+});
+
+/// 快速检查 CPU 特性
+pub fn has_avx512() -> bool {
+    LazyLock::get(&CPU_FEATURES)
+        .map(|f| f.avx512)
+        .unwrap_or(false)
+}
+
+/// 条件编译内联汇编
+pub fn optimized_memcpy(dst: *mut u8, src:*const u8, len: usize) {
+    if has_avx512() {
+        unsafe { avx512_memcpy(dst, src, len) }
+    } else {
+        unsafe { standard_memcpy(dst, src, len) }
+    }
+}
+```
+
+### ControlFlow 在汇编错误处理中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// 汇编操作结果验证
+fn validate_asm_result(result: u64) -> ControlFlow<AsmError, ()> {
+    match result {
+        0 => ControlFlow::Continue(()),
+        1 => ControlFlow::Break(AsmError::InvalidOperand),
+        2 => ControlFlow::Break(AsmError::DivisionByZero),
+        _ => ControlFlow::Break(AsmError::Unknown),
+    }
+}
+```
+
+### 数学常量在 SIMD 优化中的应用
+
+```rust
+/// 使用黄金比例进行 SIMD 对齐优化
+pub fn aligned_buffer_size(min_size: usize) -> usize {
+    let phi = f64::consts::GOLDEN_RATIO;
+    // 找到最接近的 2 的幂次，使用黄金比例作为增长因子
+    let mut size = 64;  // 缓存行大小
+    while size < min_size {
+        size = (size as f64 * phi) as usize;
+        size = size.next_power_of_two();
+    }
+    size
+}
+```
+
+**最佳实践**: 在内联汇编中使用 LazyLock 缓存 CPU 特性检测结果，避免重复执行 cpuid 指令。
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成

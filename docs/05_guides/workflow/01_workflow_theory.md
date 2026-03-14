@@ -43,6 +43,10 @@
     - [14.8.3 未来研究方向](#1483-未来研究方向)
     - [14.8.4 工业应用前景](#1484-工业应用前景)
   - [参考资料（权威来源）](#参考资料权威来源)
+  - [🆕 Rust 1.94 工作流理论应用](#-rust-194-工作流理论应用)
+    - [array\_windows 在工作流状态转换中的应用](#array_windows-在工作流状态转换中的应用)
+    - [LazyLock 在工作流引擎配置中的应用](#lazylock-在工作流引擎配置中的应用)
+    - [ControlFlow 在工作流执行控制中的应用](#controlflow-在工作流执行控制中的应用)
 
 ## 14.1 工作流基础理论
 
@@ -952,3 +956,78 @@ impl Workflow {
 - BPMN 2.0（ISO/IEC 19510）：`https://www.iso.org/standard/62652.html`
 - Rust async 官方书：`https://rust-lang.github.io/async-book/`
 - rustc（官方文档）：`https://doc.rust-lang.org/rustc/`
+
+---
+
+## 🆕 Rust 1.94 工作流理论应用
+
+> **适用版本**: Rust 1.94.0+
+
+### array_windows 在工作流状态转换中的应用
+
+```rust
+/// 使用 array_windows 分析工作流状态转换序列
+fn analyze_state_transitions(states: &[WorkflowState]) -> Vec<StateTransition> {
+    states.array_windows::<2>()
+        .filter_map(|[prev, curr]| {
+            if prev.status != curr.status {
+                Some(StateTransition {
+                    from: prev.status.clone(),
+                    to: curr.status.clone(),
+                    timestamp: curr.timestamp,
+                })
+            } else {
+                None
+            }
+        })
+        .collect()
+}
+```
+
+### LazyLock 在工作流引擎配置中的应用
+
+```rust
+use std::sync::LazyLock;
+
+/// 全局工作流引擎配置
+static WORKFLOW_ENGINE_CONFIG: LazyLock<EngineConfig> = LazyLock::new(|| {
+    EngineConfig::load_from_env()
+        .expect("Failed to load workflow engine config")
+});
+
+/// 快速获取引擎配置
+pub fn get_engine_config() -> Option<&'static EngineConfig> {
+    LazyLock::get(&WORKFLOW_ENGINE_CONFIG)
+}
+```
+
+### ControlFlow 在工作流执行控制中的应用
+
+```rust
+use std::ops::ControlFlow;
+
+/// 工作流步骤执行，支持提前终止
+fn execute_workflow_steps(
+    steps: &[WorkflowStep],
+    context: &mut Context,
+) -> ControlFlow<WorkflowError, ()> {
+    for step in steps {
+        match step.execute(context) {
+            Ok(_) => continue,
+            Err(e) if e.is_recoverable() => {
+                context.log_warning(&e);
+                continue;
+            }
+            Err(e) => return ControlFlow::Break(e),
+        }
+    }
+    ControlFlow::Continue(())
+}
+```
+
+**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 深度整合完成
