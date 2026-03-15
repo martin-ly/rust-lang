@@ -112,6 +112,9 @@ pub mod type_aliases;
 pub mod archive;
 pub mod generic_define;
 
+/// 高级泛型模式模块 - GAT、类型族、HList
+pub mod advanced;
+
 /// 基础语法模块 - 提供 Rust 泛型编程的基础语法和概念
 pub mod basic_syntax;
 pub mod rust_194_features;

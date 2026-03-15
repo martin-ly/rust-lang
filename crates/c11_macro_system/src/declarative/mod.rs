@@ -10,3 +10,6 @@ pub mod advanced_macros;
 
 /// 递归宏实现
 pub mod recursive_macros;
+
+/// 实用宏集合
+pub mod utility_macros;

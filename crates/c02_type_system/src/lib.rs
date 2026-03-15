@@ -50,3 +50,7 @@ pub mod advanced_macros;
 
 // 导出示例模块
 pub mod examples;
+
+// 导出练习模块（仅测试时编译）
+#[cfg(test)]
+pub mod exercises;

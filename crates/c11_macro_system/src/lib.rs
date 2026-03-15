@@ -40,6 +40,9 @@
 pub mod declarative;
 pub mod utils;
 
+/// 过程宏实现模块（文档和示例）
+pub mod proc;
+
 // Rust 1.91 新特性模块
 pub mod archive;
 pub use archive::rust_191_features;

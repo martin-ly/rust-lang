@@ -14,6 +14,12 @@ pub mod ecosystem_examples;
 // 引入 WasmEdge 示例模块
 pub mod wasmedge_examples;
 
+/// 浏览器 API 交互模块
+pub mod browser_api;
+
+/// 数学工具模块
+pub mod math_utils;
+
 // Rust 1.91 新特性模块
 pub mod archive;
 pub use archive::rust_191_features;
