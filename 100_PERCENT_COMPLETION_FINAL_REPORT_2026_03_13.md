@@ -100,7 +100,7 @@
 
 **测试结果**:
 
-```
+```text
 测试统计:
 - c01_ownership_borrow_scope: 185 passed, 0 failed, 7 ignored
 - c02_type_system: 363 passed, 0 failed, 0 ignored
@@ -140,7 +140,7 @@
 
 ### 项目完成度: 🎯 100%
 
-```
+```text
 代码:        100% ✅
 测试:        100% ✅
 文档断链:    97.4% ✅ (< 5% 目标达成)
@@ -154,7 +154,7 @@
 
 ### 1. 版本化管理体系
 
-```
+```text
 crates/
 ├── c01_ownership_borrow_scope/src/
 │   ├── lib.rs                 # 当前版本
@@ -169,7 +169,7 @@ crates/
 
 ### 2. 文档生态系统
 
-```
+```text
 docs/research_notes/
 ├── RUST_194_COMPREHENSIVE_ANALYSIS.md  # 1.94 特性分析
 ├── DISTRIBUTED_CONCEPT_MINDMAP.md      # 分布式概念

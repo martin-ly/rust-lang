@@ -68,7 +68,7 @@ docs/research_notes/software_design_theory/02_workflow/
 
 **新建文件**:
 
-```
+```text
 docs/research_notes/
 ├── OWNERSHIP_CONCEPT_MINDMAP.md (3,271 bytes)
 ├── DISTRIBUTED_CONCEPT_MINDMAP.md (3,415 bytes)
@@ -90,7 +90,7 @@ docs/research_notes/
 
 **新建文件**:
 
-```
+```text
 docs/research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md (10,880 bytes)
 ```
 
