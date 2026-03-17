@@ -1,463 +1,328 @@
 # Rust 术语标准化文档
 
-> **创建日期**: 2026-02-28
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **文档版本**: 1.0.0  
+> **创建日期**: 2026-03-17  
+> **最后更新**: 2026-03-17  
+> **Rust 版本**: 1.94.0+ (Edition 2024)  
+> **对齐标准**: Ferrocene Language Specification (FLS)  
 > **状态**: ✅ 已完成
-> **对齐标准**: [Ferrocene FLS (Formal Language Specification)](https://spec.ferrocene.dev/)
 
 ---
 
-## 📋 目录 {#-目录}
+## 📋 目录
 
-- [Rust 术语标准化文档](#rust-术语标准化文档)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
-    - [本文档的目标](#本文档的目标)
-    - [Ferrocene FLS 简介](#ferrocene-fls-简介)
-  - [📊 核心术语对照表 {#-核心术语对照表}](#-核心术语对照表--核心术语对照表)
-    - [所有权与内存安全](#所有权与内存安全)
-    - [类型系统](#类型系统)
-    - [泛型与 Trait](#泛型与-trait)
-    - [模式与表达式](#模式与表达式)
-    - [异步与并发](#异步与并发)
-    - [宏与元编程](#宏与元编程)
-    - [编译器与工具链](#编译器与工具链)
-    - [Unsafe 与 FFI](#unsafe-与-ffi)
-  - [🔗 Ferrocene FLS 引用索引 {#-ferrocene-fls-引用索引}](#-ferrocene-fls-引用索引--ferrocene-fls-引用索引)
-    - [第 4 章：类型与 Trait](#第-4-章类型与-trait)
-    - [第 5 章：模式](#第-5-章模式)
-    - [第 6 章：表达式](#第-6-章表达式)
-    - [第 7 章：作用域与命名空间](#第-7-章作用域与命名空间)
-    - [第 12 章：泛型](#第-12-章泛型)
-    - [第 13 章：Trait](#第-13-章trait)
-    - [第 15 章：所有权与析构](#第-15-章所有权与析构)
-    - [第 16 章：生命周期分析](#第-16-章生命周期分析)
-    - [第 17 章：宏](#第-17-章宏)
-    - [第 18 章：FFI](#第-18-章ffi)
-  - [📝 术语使用规范 {#-术语使用规范}](#-术语使用规范--术语使用规范)
-    - [中英文使用规则](#中英文使用规则)
-    - [大小写规范](#大小写规范)
-    - [代码块中的术语规范](#代码块中的术语规范)
-    - [文档交叉引用规范](#文档交叉引用规范)
-  - [🚫 禁用与避免术语 {#-禁用与避免术语}](#-禁用与避免术语--禁用与避免术语)
-    - [不一致的翻译](#不一致的翻译)
-    - [过时的术语](#过时的术语)
-    - [非标准缩写](#非标准缩写)
-    - [模糊或不准确的术语](#模糊或不准确的术语)
-  - [📚 参考资料 {#-参考资料}](#-参考资料--参考资料)
-    - [官方规范](#官方规范)
-    - [本项目参考文档](#本项目参考文档)
-    - [社区资源](#社区资源)
-  - [🔄 更新日志 {#-更新日志}](#-更新日志--更新日志)
+- [简介](#简介)
+- [所有权相关术语](#所有权相关术语)
+- [类型系统术语](#类型系统术语)
+- [并发相关术语](#并发相关术语)
+- [异步相关术语](#异步相关术语)
+- [宏系统术语](#宏系统术语)
+- [FFI/Unsafe 术语](#ffiunsafe-术语)
+- [生命周期术语](#生命周期术语)
+- [版本演进术语](#版本演进术语)
+- [参考资源](#参考资源)
 
 ---
 
-## 🎯 概述 {#-概述}
+## 简介
 
-本文档定义了 Rust 学习系统的**术语标准化规范**，所有术语均与 [Ferrocene FLS (Formal Language Specification)](https://spec.ferrocene.dev/) 对齐。Ferrocene FLS 是 Rust 语言的官方形式化规范，由 Ferrous Systems 和 AdaCore 维护，于 2024 年被 Rust 项目采纳为官方语言规范。
+本文档旨在为 Rust 学习项目提供标准化的术语对照体系，确保中英文术语使用的一致性和准确性。所有术语定义均对齐 **Ferrocene Language Specification (FLS)** 标准，并引用官方文档（The Book、Reference、RFC）作为权威来源。
 
-### 本文档的目标
+### 术语表使用说明
 
-1. **统一术语翻译**：确保中文文档中的术语翻译一致、准确
-2. **对齐官方规范**：所有术语与 Ferrocene FLS 的英文原文保持一致
-3. **提供参考链接**：为每个核心术语提供 Ferrocene FLS 的对应章节链接
-4. **规范使用场景**：明确术语在不同上下文中的使用规则
-
-### Ferrocene FLS 简介
-
-| 属性 | 说明 |
-| :--- | :--- |
-| **全称** | Ferrocene Formal Language Specification |
-| **官网** | <https://spec.ferrocene.dev/> |
-| **GitHub** | <https://github.com/ferrocene/specification> |
-| **采用时间** | 2024年（成为 Rust 官方语言规范） |
-| **维护方** | Ferrous Systems, AdaCore |
-| **许可证** | MIT / Apache 2.0 |
+- **中文术语**: 推荐使用的中文译名
+- **英文术语**: 官方英文术语（FLS 标准）
+- **定义**: 简洁准确的术语定义
+- **官方来源**: 权威出处引用，格式为 `文档名 章节`
 
 ---
 
-## 📊 核心术语对照表 {#-核心术语对照表}
+## 所有权相关术语
 
-### 所有权与内存安全
-
-| 中文术语 | 英文原文 | FLS 章节 | 简要说明 |
-| :--- | :--- | :--- | :--- |
-| 所有权 | **Ownership** | [Chapter 15](https://spec.ferrocene.dev/ownership-and-destruction.html) | 值有且仅有一个所有者的机制 |
-| 借用 | **Borrowing** | [§15.4](https://spec.ferrocene.dev/ownership-and-destruction.html#borrowing) | 临时获取值的引用而不转移所有权 |
-| 不可变借用 | **Immutable Borrow** / **Shared Borrow** | [§15.4.2](https://spec.ferrocene.dev/ownership-and-destruction.html#immutable-borrows) | 允许多个读者同时访问的借用 |
-| 可变借用 | **Mutable Borrow** / **Unique Borrow** | [§15.4.3](https://spec.ferrocene.dev/ownership-and-destruction.html#mutable-borrows) | 仅允许一个写者访问的独占借用 |
-| 生命周期 | **Lifetime** | [Chapter 16](https://spec.ferrocene.dev/lifetime-analysis.html) | 引用有效的程序点集合 |
-| 所有权转移 | **Move** | [§15.3](https://spec.ferrocene.dev/ownership-and-destruction.html#moves) | 值的所有权从一个变量转移到另一个 |
-| 复制语义 | **Copy** | [§15.2.2](https://spec.ferrocene.dev/ownership-and-destruction.html#the-copy-trait) | 按位复制而非移动的语义 |
-| 克隆 | **Clone** | [§15.2.1](https://spec.ferrocene.dev/ownership-and-destruction.html#the-clone-trait) | 显式创建值的深拷贝 |
-| 丢弃/析构 | **Drop** / **Destruction** | [§15.5](https://spec.ferrocene.dev/ownership-and-destruction.html#destruction) | 值离开作用域时的清理操作 |
-| 释放 | **Deallocation** | [§15.5](https://spec.ferrocene.dev/ownership-and-destruction.html#deallocation) | 内存空间的回收 |
-| 作用域 | **Scope** | [Chapter 7](https://spec.ferrocene.dev/scopes.html) | 名称有效的程序区域 |
-| 悬垂引用 | **Dangling Reference** | [§16.3](https://spec.ferrocene.dev/lifetime-analysis.html) | 指向已释放内存的引用 |
-| 未定义行为 | **Undefined Behavior (UB)** | [§7.8](https://spec.ferrocene.dev/undefined-behavior.html) | 违反语言契约的行为，编译器可做任意假设 |
-| 内存安全 | **Memory Safety** | [Chapter 15](https://spec.ferrocene.dev/ownership-and-destruction.html) | 防止悬垂指针、双重释放等内存错误 |
-| 数据竞争 | **Data Race** | [§10.8.2](https://spec.ferrocene.dev/expressions.html#unsafe-operations) | 非同步的并发读写冲突 |
-| 内部可变性 | **Interior Mutability** | [标准库文档](https://doc.rust-lang.org/std/cell/) | 通过不可变引用修改值的能力 |
-| RAII | **Resource Acquisition Is Initialization** | - | 资源获取即初始化，Rust 的所有权模型基础 |
-
-### 类型系统
-
-| 中文术语 | 英文原文 | FLS 章节 | 简要说明 |
-| :--- | :--- | :--- | :--- |
-| 类型 | **Type** | [Chapter 4](https://spec.ferrocene.dev/types-and-traits.html) | 值的静态分类 |
-| 标量类型 | **Scalar Type** | [§4.1](https://spec.ferrocene.dev/types-and-traits.html#scalar-types) | 单个值的原子类型（整数、浮点等） |
-| 复合类型 | **Compound Type** | [§4.2](https://spec.ferrocene.dev/types-and-traits.html#compound-types) | 包含多个值的类型（元组、数组等） |
-| 结构体 | **Struct** | [§3.13](https://spec.ferrocene.dev/items.html#structs) | 命名字段的复合类型 |
-| 枚举 | **Enum** / **Enumeration** | [§3.8](https://spec.ferrocene.dev/items.html#enumerations) | 变体类型的和类型 |
-| 变体 | **Variant** | [§3.8](https://spec.ferrocene.dev/items.html#variants) | 枚举的成员 |
-| 联合 | **Union** | [§3.21](https://spec.ferrocene.dev/items.html#unions) | C 风格的内存共享类型 |
-| 类型别名 | **Type Alias** | [§3.19](https://spec.ferrocene.dev/items.html#type-aliases) | 类型的替代名称 |
-| 永不类型 | **Never Type** (`!`) | [§4.8](https://spec.ferrocene.dev/types-and-traits.html#the-never-type) | 无值的类型，发散函数的返回类型 |
-| 单元类型 | **Unit Type** (`()`) | [§4.2.1](https://spec.ferrocene.dev/types-and-traits.html#tuple-types) | 空元组，默认返回类型 |
-| 原始指针 | **Raw Pointer** (`*const`, `*mut`) | [§4.11](https://spec.ferrocene.dev/types-and-traits.html#raw-pointers) | 无生命周期约束的裸指针 |
-| 引用 | **Reference** (`&T`, `&mut T`) | [§4.10](https://spec.ferrocene.dev/types-and-traits.html#reference-types) | 有生命周期的借用指针 |
-| 切片 | **Slice** (`[T]`) | [§4.4](https://spec.ferrocene.dev/types-and-traits.html#slice-types) | 动态大小的连续序列视图 |
-| 字符串切片 | **Str** (`str`) | [§4.5](https://spec.ferrocene.dev/types-and-traits.html#str-type) | UTF-8 编码的字符串切片 |
-| 动态大小类型 | **Dynamically Sized Type (DST)** | [§4.9](https://spec.ferrocene.dev/types-and-traits.html#dynamically-sized-types) | 编译时大小未知的类型 |
-| 零大小类型 | **Zero-Sized Type (ZST)** | - | 运行时大小为 0 的类型 |
-| 类型推导 | **Type Inference** | [§6.3](https://spec.ferrocene.dev/expressions.html#type-inference) | 编译器自动推断类型的能力 |
-| 型变 | **Variance** | [§12.1.40](https://spec.ferrocene.dev/generics.html#generic-parameters) | 类型参数在子类型关系中的变化 |
-| 协变 | **Covariance** | [§12.1.40](https://spec.ferrocene.dev/generics.html#generic-parameters) | 子类型关系保持方向 |
-| 逆变 | **Contravariance** | [§12.1.40](https://spec.ferrocene.dev/generics.html#generic-parameters) | 子类型关系反向 |
-| 不变 | **Invariance** | [§12.1.40](https://spec.ferrocene.dev/generics.html#generic-parameters) | 无子类型关系 |
-
-### 泛型与 Trait
-
-| 中文术语 | 英文原文 | FLS 章节 | 简要说明 |
-| :--- | :--- | :--- | :--- |
-| 泛型 | **Generics** | [Chapter 12](https://spec.ferrocene.dev/generics.html) | 参数化类型的机制 |
-| 类型参数 | **Type Parameter** | [§12.1.16](https://spec.ferrocene.dev/generics.html#generic-parameters) | 泛型的类型占位符 |
-| 生命周期参数 | **Lifetime Parameter** | [§12.1.14](https://spec.ferrocene.dev/generics.html#generic-parameters) | 泛型的生命周期占位符 |
-| 常量参数 | **Constant Parameter** / **Const Generic** | [§12.1.10](https://spec.ferrocene.dev/generics.html#generic-parameters) | 编译时常量作为泛型参数 |
-| 特征 / Trait | **Trait** | [Chapter 13](https://spec.ferrocene.dev/traits.html) | 定义类型行为的接口 |
-| Trait 对象 | **Trait Object** (`dyn Trait`) | [§4.13](https://spec.ferrocene.dev/types-and-traits.html#trait-objects) | 运行时多态的动态分发 |
-| 自动 Trait | **Auto Trait** | [§13.10](https://spec.ferrocene.dev/traits.html#auto-traits) | 编译器自动实现的 Trait（如 `Send`, `Sync`） |
-| 标记 Trait | **Marker Trait** | [§13.10](https://spec.ferrocene.dev/traits.html#auto-traits) | 无方法的 Trait，仅用于标记类型属性 |
-| 派生 | **Derive** | [§3.6](https://spec.ferrocene.dev/items.html#derive-macro-invocations) | 自动实现 Trait 的宏 |
-| 实现 | **Implementation** / **Impl** | [§3.11](https://spec.ferrocene.dev/items.html#implementations) | 为类型提供 Trait 或方法定义 |
-| 孤儿规则 | **Orphan Rule** | [§13.1.4](https://spec.ferrocene.dev/traits.html#orphan-rules) | 限制跨 crate 实现 Trait 的规则 |
-| 特化 | **Specialization** | [ nightly 特性 ] | 为特定类型提供优化的实现 |
-| 关联类型 | **Associated Type** | [§13.2](https://spec.ferrocene.dev/traits.html#associated-types) | Trait 中定义的输出类型 |
-| 泛型关联类型 | **Generic Associated Types (GATs)** | [§13.2](https://spec.ferrocene.dev/traits.html#associated-types) | 带泛型参数的关联类型 |
-| Trait 约束 | **Trait Bound** | [§12.2.4](https://spec.ferrocene.dev/generics.html#where-clauses) | 对泛型参数的能力要求 |
-| Where 子句 | **Where Clause** | [§12.2](https://spec.ferrocene.dev/generics.html#where-clauses) | 泛型约束的显式声明 |
-| 高阶 Trait 约束 | **Higher-Ranked Trait Bounds (HRTB)** | [§12.2](https://spec.ferrocene.dev/generics.html#where-clauses) | 对任意生命周期的 Trait 约束 |
-| 单态化 | **Monomorphization** | [编译器实现] | 泛型代码编译为具体类型的过程 |
-|  turbo fish | **Turbofish** (`::<>`) | [§6.4](https://spec.ferrocene.dev/expressions.html#type-inference) | 显式指定泛型参数的语法 |
-
-### 模式与表达式
-
-| 中文术语 | 英文原文 | FLS 章节 | 简要说明 |
-| :--- | :--- | :--- | :--- |
-| 模式 | **Pattern** | [Chapter 5](https://spec.ferrocene.dev/patterns.html) | 匹配值的结构 |
-| 模式匹配 | **Pattern Matching** | [Chapter 5](https://spec.ferrocene.dev/patterns.html) | 根据模式解构值的过程 |
-| 绑定 | **Binding** | [§5.1](https://spec.ferrocene.dev/patterns.html#identifier-patterns) | 将值绑定到变量 |
-| 可辩驳模式 | **Refutable Pattern** | [§5](https://spec.ferrocene.dev/patterns.html) | 可能不匹配的模式 |
-| 无可辩驳模式 | **Irrefutable Pattern** | [§5](https://spec.ferrocene.dev/patterns.html) | 总是匹配的模式 |
-| 解构 | **Destructuring** | [§5](https://spec.ferrocene.dev/patterns.html) | 分解复合类型的值 |
-| 守卫 | **Guard** | [§8.4.2](https://spec.ferrocene.dev/statements.html#if-let-guards) | 模式匹配的额外条件 |
-| 表达式 | **Expression** | [Chapter 6](https://spec.ferrocene.dev/expressions.html) | 产生值的代码片段 |
-| 语句 | **Statement** | [Chapter 8](https://spec.ferrocene.dev/statements.html) | 执行动作的代码片段 |
-| 块表达式 | **Block Expression** | [§6.3](https://spec.ferrocene.dev/expressions.html#block-expressions) | 用大括号包围的表达式序列 |
-| 闭包 | **Closure** / **Closure Expression** | [§6.7](https://spec.ferrocene.dev/expressions.html#closure-expressions) | 匿名函数，可捕获环境 |
-| 立即求值闭包 | **Closure Expression** | [§6.7](https://spec.ferrocene.dev/expressions.html#closure-expressions) | 延迟求值的闭包 |
-| 捕获 | **Capture** | [§6.7](https://spec.ferrocene.dev/expressions.html#closure-expressions) | 闭包引用外部变量的方式 |
-| 移动捕获 | **Move Closure** | [§6.7](https://spec.ferrocene.dev/expressions.html#closure-expressions) | 强制将捕获变量移入闭包 |
-
-### 异步与并发
-
-| 中文术语 | 英文原文 | FLS 章节 | 简要说明 |
-| :--- | :--- | :--- | :--- |
-| 异步 | **Async** / **Asynchronous** | [§6.2](https://spec.ferrocene.dev/expressions.html#async-expressions) | 非阻塞的异步执行 |
-| 等待 | **Await** | [§6.2.1](https://spec.ferrocene.dev/expressions.html#await-expressions) | 挂起异步任务等待完成 |
-| Future | **Future** | [标准库](https://doc.rust-lang.org/std/future/trait.Future.html) | 异步计算的抽象 |
-| 轮询 | **Poll** | [标准库](https://doc.rust-lang.org/std/task/enum.Poll.html) | 检查 Future 状态 |
-| 执行器 | **Executor** | [生态系统] | 调度执行异步任务的运行时 |
-| 反应器 | **Reactor** | [生态系统] | 处理 I/O 事件的组件 |
-| 任务 | **Task** | [tokio 文档] | 异步执行的单元 |
-| 固定/钉住 | **Pin** | [标准库](https://doc.rust-lang.org/std/pin/struct.Pin.html) | 保证值在内存中不移动的抽象 |
-| 自引用 | **Self-Referential** | [标准库] | 包含指向自身引用的类型 |
-| 线程 | **Thread** | [标准库](https://doc.rust-lang.org/std/thread/) | 操作系统线程 |
-| 线程安全 | **Thread Safety** | [标准库] | 跨线程访问的安全性 |
-| 可发送 | **Send** | [§13.10](https://spec.ferrocene.dev/traits.html#auto-traits) | 可安全跨线程转移所有权的标记 |
-| 可同步 | **Sync** | [§13.10](https://spec.ferrocene.dev/traits.html#auto-traits) | 可安全跨线程共享引用的标记 |
-| 互斥锁 | **Mutex** | [标准库](https://doc.rust-lang.org/std/sync/struct.Mutex.html) | 互斥访问的同步原语 |
-| 读写锁 | **RwLock** | [标准库](https://doc.rust-lang.org/std/sync/struct.RwLock.html) | 多读单写的同步原语 |
-| 原子操作 | **Atomic** | [标准库](https://doc.rust-lang.org/std/sync/atomic/) | 无锁的原子操作 |
-| 通道 | **Channel** | [标准库](https://doc.rust-lang.org/std/sync/mpsc/) | 线程间通信机制 |
-| 条件变量 | **Condition Variable** | [标准库](https://doc.rust-lang.org/std/sync/struct.Condvar.html) | 线程同步原语 |
-| 栅栏 | **Barrier** | [标准库](https://doc.rust-lang.org/std/sync/struct.Barrier.html) | 多线程同步点 |
-
-### 宏与元编程
-
-| 中文术语 | 英文原文 | FLS 章节 | 简要说明 |
-| :--- | :--- | :--- | :--- |
-| 宏 | **Macro** | [Chapter 17](https://spec.ferrocene.dev/macros.html) | 元编程代码生成机制 |
-| 声明宏 | **Declarative Macro** (`macro_rules!`) | [§17.1](https://spec.ferrocene.dev/macros.html#declarative-macros) | 基于模式的宏定义 |
-| 过程宏 | **Procedural Macro** | [§17.2](https://spec.ferrocene.dev/macros.html#procedural-macros) | 编译时执行的 Rust 代码 |
-| 派生宏 | **Derive Macro** | [§17.2.1](https://spec.ferrocene.dev/macros.html#derive-macro) | 自动实现 Trait 的过程宏 |
-| 属性宏 | **Attribute Macro** | [§17.2.2](https://spec.ferrocene.dev/macros.html#attribute-macro) | 修改项的属性的过程宏 |
-| 函数式宏 | **Function-like Macro** | [§17.2.3](https://spec.ferrocene.dev/macros.html#function-like-macro) | 类似函数调用的过程宏 |
-| Token 树 | **Token Tree** | [§17](https://spec.ferrocene.dev/macros.html) | 宏处理的基本单元 |
-| 卫生宏 | **Hygienic Macro** | [§17.1](https://spec.ferrocene.dev/macros.html#declarative-macros) | 避免命名冲突的宏机制 |
-| 元变量 | **Metavariable** | [§17.1](https://spec.ferrocene.dev/macros.html#declarative-macros) | 宏规则中的模式变量 |
-| 重复 | **Repetition** | [§17.1](https://spec.ferrocene.dev/macros.html#declarative-macros) | 宏模式中的重复匹配 |
-| 编译时求值 | **Const Evaluation** | [§6.8](https://spec.ferrocene.dev/expressions.html#constant-expressions) | 编译期执行代码 |
-| 常量上下文 | **Constant Context** | [§6.8](https://spec.ferrocene.dev/expressions.html#constant-expressions) | 编译时求值的代码环境 |
-
-### 编译器与工具链
-
-| 中文术语 | 英文原文 | FLS 章节 | 简要说明 |
-| :--- | :--- | :--- | :--- |
-| Crate | **Crate** | [§2.1](https://spec.ferrocene.dev/lexical-elements.html#crates) | 编译单元，库或可执行文件 |
-| 模块 | **Module** | [§3.4](https://spec.ferrocene.dev/items.html#modules) | 代码组织和可见性单元 |
-| 包 | **Package** | [Cargo 文档] | Cargo 的构建单元，可含多个 crate |
-| 工作空间 | **Workspace** | [Cargo 文档] | 多个相关包的集合 |
-| 特性/功能 | **Feature** | [Cargo 文档] | 条件编译和可选依赖的标志 |
-| 版本 | **Edition** | [文档](https://doc.rust-lang.org/edition-guide/) | Rust 语言的兼容性版本 |
-| HIR | **High-Level IR** | [编译器文档] | 高级中间表示 |
-| MIR | **Mid-Level IR** | [编译器文档] | 中级中间表示，借用检查在此进行 |
-| LLVM IR | **LLVM IR** | [编译器文档] | LLVM 的低级中间表示 |
-| 单态化 | **Monomorphization** | [编译器实现] | 泛型代码实例化为具体类型 |
-| 静态链接 | **Static Linking** | [Cargo 文档] | 编译时链接库 |
-| 动态链接 | **Dynamic Linking** | [Cargo 文档] | 运行时链接库 |
-| 静态分发 | **Static Dispatch** | [编译器实现] | 编译时确定调用的函数 |
-| 动态分发 | **Dynamic Dispatch** | [§4.13](https://spec.ferrocene.dev/types-and-traits.html#trait-objects) | 运行时确定调用的函数 |
-| 优化 | **Optimization** | [编译器文档] | 改进代码性能的转换 |
-| 内联 | **Inline** | [§9.8](https://spec.ferrocene.dev/functions.html#inline-attribute) | 函数调用替换为函数体 |
-| 生命周期省略 | **Lifetime Elision** | [§16.2](https://spec.ferrocene.dev/lifetime-analysis.html#lifetime-elision) | 自动推断生命周期参数的语法糖 |
-
-### Unsafe 与 FFI
-
-| 中文术语 | 英文原文 | FLS 章节 | 简要说明 |
-| :--- | :--- | :--- | :--- |
-| 不安全代码 | **Unsafe Code** / **Unsafe Rust** | [§10.8](https://spec.ferrocene.dev/expressions.html#unsafe-expressions) | 绕过安全检查的代码块 |
-| 不安全块 | **Unsafe Block** (`unsafe { }`) | [§10.8](https://spec.ferrocene.dev/expressions.html#unsafe-expressions) | 包含不安全操作的代码块 |
-| 不安全函数 | **Unsafe Function** (`unsafe fn`) | [§9.2](https://spec.ferrocene.dev/functions.html#unsafe-functions) | 调用需满足额外安全条件的函数 |
-| 原始指针 | **Raw Pointer** (`*const`, `*mut`) | [§4.11](https://spec.ferrocene.dev/types-and-traits.html#raw-pointers) | 无生命周期检查的裸指针 |
-| 解引用原始指针 | **Dereference Raw Pointer** | [§10.8.1](https://spec.ferrocene.dev/expressions.html#unsafe-operations) | 不安全的原始指针解引用 |
-| 调用不安全函数 | **Call Unsafe Function** | [§10.8.1](https://spec.ferrocene.dev/expressions.html#unsafe-operations) | 在 unsafe 块中调用 unsafe 函数 |
-| 读取 `union` 字段 | **Access Union Field** | [§10.8.1](https://spec.ferrocene.dev/expressions.html#unsafe-operations) | 读取 union 的未标记字段 |
-| 静态可变变量 | **Static Mutable** (`static mut`) | [§3.18](https://spec.ferrocene.dev/items.html#static-items) | 全局可变状态，访问需 unsafe |
-| 外部函数接口 | **Foreign Function Interface (FFI)** | [Chapter 18](https://spec.ferrocene.dev/ffi.html) | 与其他语言交互的接口 |
-| 外部块 | **Extern Block** (`extern {}`) | [§18](https://spec.ferrocene.dev/ffi.html) | 声明外部函数的块 |
-| 链接属性 | **Link Attribute** | [§18](https://spec.ferrocene.dev/ffi.html) | 指定链接的库 |
-| ABI | **Application Binary Interface** | [§9.1](https://spec.ferrocene.dev/functions.html#extern-function-qualifier) | 函数调用约定 |
-| C ABI | **C ABI** (`extern "C"`) | [§9.1](https://spec.fer-lang.org/stable/std/keyword.extern.html) | C 语言的调用约定 |
+| 中文术语 | 英文术语 | 定义 | 官方来源 |
+|---------|---------|------|---------|
+| 所有权 | Ownership | 每个值在任一时刻有且只有一个所有者，所有者离开作用域时值被释放 | The Book Ch 4.1 |
+| 借用 | Borrowing | 通过引用临时访问值而不获取所有权，分为不可变借用和可变借用 | The Book Ch 4.2 |
+| 不可变借用 | Immutable Borrow / Shared Reference | 允许只读访问的引用类型 `&T`，可同时存在多个 | The Book Ch 4.2 |
+| 可变借用 | Mutable Borrow / Exclusive Reference | 允许读写访问的引用类型 `&mut T`，同一作用域内只能存在一个 | The Book Ch 4.2 |
+| 移动 | Move | 将值的所有权从一个变量转移到另一个变量，原变量失效 | The Book Ch 4.1 |
+| 复制 | Copy | 按位复制的隐式克隆，原变量保持有效；仅适用于实现 `Copy` trait 的类型 | The Book Ch 4.1 |
+| 克隆 | Clone | 显式深度复制，通过 `Clone` trait 实现，可自定义复制逻辑 | The Book Ch 4.1 |
+| 借用检查器 | Borrow Checker | 编译器组件，静态分析代码确保借用规则被遵守，防止数据竞争和悬垂引用 | Reference Ch 8.2 |
+| 所有权规则 | Ownership Rules | (1) 每个值有唯一所有者；(2) 值随所有者离开作用域而释放；(3) 所有权可转移 | The Book Ch 4.1 |
+| 借用规则 | Borrowing Rules | (1) 任一时刻只能有一个可变引用或任意数量的不可变引用；(2) 引用必须始终有效 | The Book Ch 4.2 |
+| 作用域 | Scope | 变量有效的程序文本区域，通常由大括号 `{}` 界定 | The Book Ch 4.1 |
+| 释放 | Drop | 值离开作用域时自动调用 `Drop::drop` 方法回收资源 | The Book Ch 15.3 |
+| RAII | Resource Acquisition Is Initialization | 资源获取即初始化，资源生命周期与对象绑定，通过析构器自动释放 | Reference Ch 11.3 |
+| 资源 | Resource | 程序使用的内存、文件句柄、网络连接等需要管理的实体 | The Book Ch 15.3 |
+| 所有权转移 | Ownership Transfer | 值的所有权从一个绑定移动到另一个绑定的过程 | Reference Ch 8.2 |
+| 词法作用域 | Lexical Scope | 基于源代码文本结构的变量作用域范围 | Reference Ch 8.2 |
+| 非词法生命周期 | Non-Lexical Lifetimes (NLL) | 基于实际使用情况而非词法作用域的生命周期计算，允许更早释放借用 | RFC 2094 |
+| 重新借用 | Reborrow | 从已有引用创建新引用的过程，如从 `&mut T` 重新借出 `&T` | Reference Ch 8.2 |
 
 ---
 
-## 🔗 Ferrocene FLS 引用索引 {#-ferrocene-fls-引用索引}
+## 类型系统术语
 
-以下按 FLS 章节组织核心术语，便于查阅官方规范：
-
-### 第 4 章：类型与 Trait
-
-- [Chapter 4: Types and Traits](https://spec.ferrocene.dev/types-and-traits.html)
-- 核心术语：Type, Trait, Struct, Enum, Reference, Slice, Trait Object, Function Pointer
-
-### 第 5 章：模式
-
-- [Chapter 5: Patterns](https://spec.ferrocene.dev/patterns.html)
-- 核心术语：Pattern, Binding, Destructuring, Refutable, Irrefutable
-
-### 第 6 章：表达式
-
-- [Chapter 6: Expressions](https://spec.ferrocene.dev/expressions.html)
-- 核心术语：Expression, Block, Closure, Async, Await, Unsafe
-
-### 第 7 章：作用域与命名空间
-
-- [Chapter 7: Scopes and Namespaces](https://spec.ferrocene.dev/scopes.html)
-- 核心术语：Scope, Namespace, Shadowing
-
-### 第 12 章：泛型
-
-- [Chapter 12: Generics](https://spec.ferrocene.dev/generics.html)
-- 核心术语：Generic Parameter, Type Parameter, Lifetime Parameter, Const Generic, Where Clause, Trait Bound
-
-### 第 13 章：Trait
-
-- [Chapter 13: Traits](https://spec.ferrocene.dev/traits.html)
-- 核心术语：Trait, Implementation, Associated Type, Auto Trait, Orphan Rule
-
-### 第 15 章：所有权与析构
-
-- [Chapter 15: Ownership and Destruction](https://spec.ferrocene.dev/ownership-and-destruction.html)
-- 核心术语：Ownership, Move, Copy, Clone, Drop, Borrowing, Immutable Borrow, Mutable Borrow
-
-### 第 16 章：生命周期分析
-
-- [Chapter 16: Lifetime Analysis](https://spec.ferrocene.dev/lifetime-analysis.html)
-- 核心术语：Lifetime, Lifetime Parameter, Lifetime Elision, Non-Lexical Lifetime (NLL)
-
-### 第 17 章：宏
-
-- [Chapter 17: Macros](https://spec.ferrocene.dev/macros.html)
-- 核心术语：Macro, Declarative Macro, Procedural Macro, Derive Macro, Attribute Macro
-
-### 第 18 章：FFI
-
-- [Chapter 18: Foreign Function Interface](https://spec.ferrocene.dev/ffi.html)
-- 核心术语：FFI, Extern Block, ABI, Link Attribute
+| 中文术语 | 英文术语 | 定义 | 官方来源 |
+|---------|---------|------|---------|
+| 类型系统 | Type System | 对程序中值的分类和约束系统，确保类型安全 | The Book Ch 3.2 |
+| 静态类型 | Static Typing | 编译期确定所有变量类型的类型系统特性 | The Book Ch 3.2 |
+| 类型推导 | Type Inference | 编译器根据上下文自动推导变量类型的能力 | The Book Ch 3.2 |
+| 标量类型 | Scalar Types | 单一值的类型，包括整数、浮点数、布尔值和字符 | The Book Ch 3.2 |
+| 复合类型 | Compound Types | 可包含多个值的类型，包括元组和数组 | The Book Ch 3.2 |
+| 元组 | Tuple | 固定长度、元素类型可异构的有序集合类型 `(T1, T2, ...)` | The Book Ch 3.2 |
+| 数组 | Array | 固定长度、元素类型同构的连续内存集合类型 `[T; N]` | The Book Ch 3.2 |
+| 切片 | Slice | 动态长度的连续序列视图类型 `&[T]` 或 `&mut [T]` | The Book Ch 4.3 |
+| 结构体 | Struct | 命名字段的复合数据类型，类似其他语言的记录或对象 | The Book Ch 5.1 |
+| 枚举 | Enum | 可拥有多个变体（variants）的代数数据类型 | The Book Ch 6 |
+| 变体 | Variant | 枚举类型的可能取值之一，可包含关联数据 | The Book Ch 6 |
+| 模式匹配 | Pattern Matching | 使用 `match` 等结构解构值并执行对应分支的机制 | The Book Ch 6.2 |
+| 泛型 | Generics | 参数化类型，允许编写适用于多种类型的代码 | The Book Ch 10 |
+| 特征 | Trait | 定义共享行为的抽象接口，可被类型实现 | The Book Ch 10.2 |
+| 实现 | Implementation / Impl | 为类型定义方法或实现特征的具体代码块 | The Book Ch 5.3 |
+| 关联类型 | Associated Type | 在 trait 定义中声明、在实现时指定的占位符类型 | The Book Ch 19.2 |
+| 泛型参数 | Generic Parameter | 类型、生命周期或常量的形式参数，用于泛型定义 | Reference Ch 6.1 |
+| 类型参数 | Type Parameter | 泛型定义中的形式类型参数，如 `T` in `Vec<T>` | The Book Ch 10.1 |
+| 常量泛型 | Const Generics | 使用常量值作为泛型参数，如 `[T; N]` 中的 `N` | RFC 2000 |
+| 约束 | Bound / Constraint | 对泛型参数的限制条件，如 `T: Display` | The Book Ch 10.2 |
+| 特征对象 | Trait Object | 运行时多态，使用 `dyn Trait` 实现的动态分发 | The Book Ch 17.2 |
+| 静态分发 | Static Dispatch | 编译期确定具体实现的函数调用，通过单态化实现 | Reference Ch 8.9 |
+| 动态分发 | Dynamic Dispatch | 运行时确定具体实现的函数调用，通过虚表实现 | Reference Ch 8.9 |
+| 单态化 | Monomorphization | 将泛型代码转换为具体类型代码的编译过程 | Reference Ch 8.9 |
+| 零成本抽象 | Zero-Cost Abstractions | 运行时无开销的高级抽象，开销在编译期消除 | The Book Ch 13.1 |
+| 型变 | Variance | 类型构造器对其参数的子类型关系保持方式（协变/逆变/不变） | Reference Ch 4.6 |
+| 协变 | Covariance | 子类型关系保持方向一致（若 `A <: B` 则 `F<A> <: F<B>`） | Reference Ch 4.6 |
+| 逆变 | Contravariance | 子类型关系方向反转（若 `A <: B` 则 `F<B> <: F<A>`） | Reference Ch 4.6 |
+| 不变 | Invariance | 无子类型关系（`F<A>` 与 `F<B>` 无关） | Reference Ch 4.6 |
+| never 类型 | Never Type (`!`) | 表示永不返回的函数的返回类型，可强制转换为任何类型 | Reference Ch 4.8 |
+| 单元类型 | Unit Type (`()`) | 空元组类型，表示无有意义返回值 | The Book Ch 3.2 |
+| 新类型模式 | Newtype Pattern | 使用元组结构体包装现有类型以提供类型安全和抽象 | The Book Ch 19.3 |
+| 类型别名 | Type Alias | 为现有类型创建同义词，使用 `type` 关键字 | The Book Ch 19.4 |
 
 ---
 
-## 📝 术语使用规范 {#-术语使用规范}
+## 并发相关术语
 
-### 中英文使用规则
-
-| 场景 | 规则 | 示例 |
-| :--- | :--- | :--- |
-| **首次出现** | 中文（英文原文） | 所有权（Ownership） |
-| **后续使用** | 优先使用中文 | 所有权规则、借用检查器 |
-| **代码上下文** | 保留英文 | `T: Clone`、`*const T` |
-| **API 文档** | 英文为主，中文解释 | `Drop::drop` 方法用于释放资源 |
-| **标题/标题** | 中英文并列 | ## 所有权（Ownership） |
-| **表格/列表** | 中英文对照 | 见本文档术语对照表 |
-
-### 大小写规范
-
-| 术语类型 | 规范 | 示例 |
-| :--- | :--- | :--- |
-| **类型名称** | PascalCase | `String`, `Vec<T>`, `MyStruct` |
-| **函数/方法** | snake_case | `drop()`, `clone()`, `as_ref()` |
-| **常量** | SCREAMING_SNAKE_CASE | `const MAX_SIZE: usize` |
-| **生命周期参数** | 单引号 + 小写 | `'a`, `'static`, `'lifetime` |
-| **泛型参数** | PascalCase，单字母优先 | `T`, `U`, `Item`, `Error` |
-| **Trait 名称** | PascalCase，形容词优先 | `Clone`, `Send`, `Display`, `Default` |
-| **模块/包名** | snake_case | `std::collections`, `my_crate` |
-| **宏** | snake_case 或 PascalCase | `macro_rules!`, `derive` |
-
-### 代码块中的术语规范
-
-```rust
-// ✅ 正确：在注释中使用中文术语，代码中使用英文术语
-// 所有权转移示例
-fn take_ownership(s: String) {  // s 获得所有权
-    println!("{}", s);
-} // s 离开作用域，调用 drop
-
-// ✅ 正确：类型参数使用大写字母
-fn identity<T>(value: T) -> T {
-    value
-}
-
-// ✅ 正确：生命周期参数使用小写
-fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() { x } else { y }
-}
-
-// ❌ 错误：在代码中使用中文术语
-// fn 获取所有权(字符串: 字符串) { ... }
-```
-
-### 文档交叉引用规范
-
-| 引用类型 | 格式 | 示例 |
-| :--- | :--- | :--- |
-| 本文档内术语 | 加粗 + 链接 | **[所有权](#所有权与内存安全)** |
-| 其他文档术语 | 相对路径 | [所有权速查卡](./02_reference/quick_reference/ownership_cheatsheet.md) |
-| FLS 官方链接 | 完整 URL | [FLS §15](https://spec.ferrocene.dev/ownership-and-destruction.html) |
-| 标准库文档 | docs.rs URL | [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html) |
+| 中文术语 | 英文术语 | 定义 | 官方来源 |
+|---------|---------|------|---------|
+| 并发 | Concurrency | 多个任务在重叠时间段内执行，可能交替进行 | The Book Ch 16 |
+| 并行 | Parallelism | 多个任务真正同时执行，需要多核处理器 | The Book Ch 16 |
+| 线程 | Thread | 操作系统调度的基本执行单元，Rust 通过 `std::thread` 支持 | The Book Ch 16.1 |
+| 进程 | Process | 独立运行的程序实例，拥有独立的内存空间 | The Book Ch 16.1 |
+| 数据竞争 | Data Race | 多个线程同时访问同一内存，至少一个是写操作且无同步 | The Book Ch 16.1 |
+| 竞态条件 | Race Condition | 程序行为依赖于线程执行顺序的非确定性问题 | The Book Ch 16.1 |
+| 死锁 | Deadlock | 多个线程互相等待对方释放资源而无法继续执行的状态 | The Book Ch 16.2 |
+| 同步 | Synchronization | 协调多线程访问共享资源的机制 | The Book Ch 16.2 |
+| 互斥锁 | Mutex | 互斥（Mutual Exclusion）同步原语，保证同时只有一个线程访问数据 | The Book Ch 16.2 |
+| 读写锁 | RwLock | 允许多读单写的同步原语，读共享写独占 | The Book Ch 16.2 |
+| 原子操作 | Atomic Operation | 不可中断的基本操作，通过 `std::sync::atomic` 提供 | The Book Ch 16.3 |
+| 内存序 | Memory Ordering | 控制原子操作间可见性的规则（Relaxed/Acquire/Release/AcqRel/SeqCst） | Reference Ch 22.9 |
+| 顺序一致性 | Sequential Consistency | 最强的内存序，保证所有线程看到一致的操作顺序 | Reference Ch 22.9 |
+| 获取-释放 | Acquire-Release | 成对的内存序，建立 happens-before 关系 | Reference Ch 22.9 |
+| 条件变量 | Condition Variable | 允许线程等待特定条件满足的同步原语 | The Book Ch 16.2 |
+| 信号量 | Semaphore | 控制同时访问某资源的线程数量的计数同步原语 | The Book Ch 16.2 |
+| 屏障 | Barrier | 使多个线程在某点等待直到所有线程到达的同步原语 | The Book Ch 16.2 |
+| 线程安全 | Thread Safety | 类型可安全地在多线程间共享而不引起数据竞争的性质 | The Book Ch 16.4 |
+| Send | Send Trait | 标记可安全转移到其他线程的类型的 trait | The Book Ch 16.4 |
+| Sync | Sync Trait | 标记可安全被多线程共享引用（`&T` 是 `Send`）的类型的 trait | The Book Ch 16.4 |
+| 内部可变性 | Interior Mutability | 允许在不可变引用后修改数据的设计模式（RefCell/Mutex） | The Book Ch 15.5 |
+| 外部可变性 | Exterior Mutability | 通过 `&mut` 显式声明的可变性 | Reference Ch 8.4 |
+| 消息传递 | Message Passing | 线程间通过通道（channel）发送数据而非共享内存的并发模式 | The Book Ch 16.2 |
+| 通道 | Channel | 线程间通信机制，发送者和接收者通过消息传递数据 | The Book Ch 16.2 |
+| 共享状态 | Shared State | 多线程访问同一内存的并发模式，需要同步机制 | The Book Ch 16.2 |
+| 线程本地存储 | Thread-Local Storage | 每个线程拥有独立实例的数据存储机制 | Reference Ch 10.3 |
+| 工作窃取 | Work Stealing | 线程从其他线程任务队列窃取任务的负载均衡策略 | The Book Ch 16.3 |
+| 无锁编程 | Lock-Free Programming | 不使用互斥锁，依赖原子操作实现的并发 | Reference Ch 22.9 |
 
 ---
 
-## 🚫 禁用与避免术语 {#-禁用与避免术语}
+## 异步相关术语
 
-### 不一致的翻译
-
-| 避免使用 | 推荐用法 | 说明 |
-| :--- | :--- | :--- |
-| 特质 / 特征对象 | **Trait** / **Trait 对象** | "特质" 是早期翻译，现统一为 "Trait" |
-| 生命周期省略 | **生命周期省略** (Elision) | 注意不是 "省略" 或 "消隐" |
-| 借用检查 | **借用检查器** (Borrow Checker) | 使用完整名称，指编译器组件 |
-| 自动 trait | **自动 Trait** (Auto Trait) | Auto Trait 是专有名词 |
-| 原始类型 | **标量类型** (Scalar Type) | 与 "原始指针" (Raw Pointer) 区分 |
-
-### 过时的术语
-
-| 避免使用 | 推荐用法 | 说明 |
-| :--- | :--- | :--- |
-| ~const Trait | **Const Trait** / 编译时常量 | Rust 1.83+ 已稳定 |
-| 装箱 (Box) | **堆分配** / `Box<T>` | 直接使用类型名称 |
-| 解装箱 | **解引用** / **解包** | 根据上下文选择 |
-| 智能指针 | **智能指针** (Smart Pointer) | 保留此翻译，但优先使用类型名 |
-| 语法糖 | **语法糖** (Syntactic Sugar) | 可用，但建议解释具体机制 |
-
-### 非标准缩写
-
-| 避免使用 | 推荐用法 | 说明 |
-| :--- | :--- | :--- |
-| BC | **Borrow Checker** / 借用检查器 | 首次使用全称 |
-| UB (中文文档) | **未定义行为** / Undefined Behavior (UB) | 中文文档优先使用全称 |
-| NLL (中文文档) | **非词法生命周期** / NLL | 解释后可用缩写 |
-| HRTB (中文文档) | **高阶 Trait 约束** / HRTB | 解释后可用缩写 |
-| GATs (中文文档) | **泛型关联类型** / GATs | 解释后可用缩写 |
-| DST (中文文档) | **动态大小类型** / DST | 解释后可用缩写 |
-| ZST (中文文档) | **零大小类型** / ZST | 解释后可用缩写 |
-
-### 模糊或不准确的术语
-
-| 避免使用 | 推荐用法 | 说明 |
-| :--- | :--- | :--- |
-| 引用计数 | **`Rc<T>`** / **`Arc<T>`** | 具体指明类型 |
-| 互斥 | **`Mutex<T>`** / 互斥锁 | 具体指明类型或机制 |
-| 通道 | **`mpsc`** / 通道 | 具体指明类型 |
-| 原子 | **原子操作** / `Atomic*` | 具体指明操作类型 |
-| 不安全 | **Unsafe** / 不安全代码 / 不安全块 | 区分概念层级 |
-| 线程安全 | **Send + Sync** / 线程安全 | 具体指明 Trait |
+| 中文术语 | 英文术语 | 定义 | 官方来源 |
+|---------|---------|------|---------|
+| 异步 | Asynchronous / Async | 允许任务在等待 I/O 时让出执行权，不阻塞线程的编程模型 | The Book Ch 17 |
+| async/await | Async/Await | 异步编程的语法糖，`async` 定义异步代码块，`await` 等待异步操作完成 | The Book Ch 17.1 |
+| Future | Future | 表示尚未完成的异步计算，实现了 `std::future::Future` trait | The Book Ch 17.1 |
+| 轮询 | Polling | 通过调用 `poll` 方法检查 Future 是否完成的机制 | Reference Ch 37.1 |
+| 上下文 | Context | 传递给 `poll` 方法的异步执行上下文，包含 waker | Reference Ch 37.1 |
+| Waker | Waker | 通知执行器 Future 可以再次轮询的机制 | Reference Ch 37.1 |
+| 执行器 | Executor | 管理和调度 Future 执行运行时的组件 | The Book Ch 17.3 |
+| 运行时 | Runtime | 提供异步执行环境的库（如 Tokio、async-std） | The Book Ch 17.3 |
+| 反应器 | Reactor | 监听 I/O 事件并唤醒对应 waker 的运行时组件 | Reference Ch 37.1 |
+| 任务 | Task | 异步运行时调度的执行单元，通常是顶层的 Future | The Book Ch 17.3 |
+| 阻塞操作 | Blocking Operation | 会阻塞当前线程直到完成的操作，不应在异步上下文中执行 | The Book Ch 17.3 |
+| 阻塞线程池 | Blocking Thread Pool | 运行时提供的专用线程池，用于执行阻塞操作 | The Book Ch 17.3 |
+| 状态机 | State Machine | `async fn` 编译后转换成的状态机结构 | Reference Ch 37.1 |
+| Pin | Pin | 固定值在内存中位置的类型，用于自引用结构和异步 Future | The Book Ch 17.4 |
+| Unpin | Unpin | 标记类型可安全移动的 trait，大多数类型自动实现 | The Book Ch 17.4 |
+| 固定 | Pinning | 保证值在内存中不被移动的机制 | The Book Ch 17.4 |
+| 流 | Stream | 异步版本的迭代器，产生一系列异步值 | Reference Ch 37.1 |
+| Sink | Sink | 可异步接收值的抽象，Stream 的反向操作 | Reference Ch 37.1 |
+| 异步迭代器 | Async Iterator | 异步生成值序列的类型（`async fn next(&mut self) -> Option<T>`） | RFC 79 |
+| 并发执行 | Concurrent Execution | 同时执行多个 Future 并等待其完成（`join!`/`select!`） | The Book Ch 17.3 |
+| 竞争选择 | Race / Select | 在多个异步操作中等待最先完成的那个 | The Book Ch 17.3 |
+| 超时 | Timeout | 为异步操作设置最大等待时间的机制 | The Book Ch 17.3 |
+| 背压 | Backpressure | 当消费者慢于生产者时控制数据流率的机制 | The Book Ch 17.3 |
+| 协作式调度 | Cooperative Scheduling | 任务主动让出执行权的调度方式 | The Book Ch 17 |
+| 生成器 | Generator | 可暂停和恢复执行的函数，是 async/await 的实现基础 | RFC 2033 |
+| Yield | Yield | 生成器中暂停执行并返回值的操作 | RFC 2033 |
 
 ---
 
-## 📚 参考资料 {#-参考资料}
+## 宏系统术语
 
-### 官方规范
-
-| 资源 | 链接 | 说明 |
-| :--- | :--- | :--- |
-| Ferrocene FLS | <https://spec.ferrocene.dev/> | Rust 官方形式化语言规范 |
-| The Rust Reference | <https://doc.rust-lang.org/reference/> | Rust 官方参考文档 |
-| The Rust Programming Language | <https://doc.rust-lang.org/book/> | Rust 官方教程 |
-| Rust RFCs | <https://rust-lang.github.io/rfcs/> | Rust 设计文档 |
-
-### 本项目参考文档
-
-| 资源 | 路径 | 说明 |
-| :--- | :--- | :--- |
-| 术语表 | [docs/research_notes/GLOSSARY.md](./research_notes/GLOSSARY.md) | 研究笔记术语表 |
-| 所有权速查卡 | [docs/02_reference/quick_reference/ownership_cheatsheet.md](./02_reference/quick_reference/ownership_cheatsheet.md) | 所有权系统速查 |
-| 泛型速查卡 | [docs/02_reference/quick_reference/generics_cheatsheet.md](./02_reference/quick_reference/generics_cheatsheet.md) | 泛型系统速查 |
-| 类型系统速查卡 | [docs/02_reference/quick_reference/type_system.md](./02_reference/quick_reference/type_system.md) | 类型系统速查 |
-
-### 社区资源
-
-| 资源 | 链接 | 说明 |
-| :--- | :--- | :--- |
-| Rust 术语对照表 (中文) | <https://github.com/rust-lang-cn/> | 中文社区术语对照 |
-| Rust By Example | <https://doc.rust-lang.org/rust-by-example/> | 示例驱动的学习 |
-| Rustlings | <https://github.com/rust-lang/rustlings> | 交互式练习 |
+| 中文术语 | 英文术语 | 定义 | 官方来源 |
+|---------|---------|------|---------|
+| 宏 | Macro | 在编译期进行代码生成和转换的元编程机制 | The Book Ch 19.5 |
+| 声明宏 | Declarative Macro / `macro_rules!` | 基于模式匹配的宏定义方式，类似规则匹配替换 | The Book Ch 19.5 |
+| 过程宏 | Procedural Macro | 在编译期执行 Rust 代码进行代码生成的宏类型 | The Book Ch 19.5 |
+| 派生宏 | Derive Macro | 过程宏的一种，通过 `#[derive(Trait)]` 自动实现 trait | The Book Ch 19.5 |
+| 属性宏 | Attribute Macro | 过程宏的一种，定义自定义属性 `#[attribute]` 修饰项 | The Book Ch 19.5 |
+| 函数式宏 | Function-like Macro | 过程宏的一种，类似函数调用的宏 `macro!()` | The Book Ch 19.5 |
+| Token | Token | 源代码的最小语法单元，宏操作的基本单位 | Reference Ch 3 |
+| Token 树 | Token Tree (TT) | 配对的括号及其内部 tokens 组成的树形结构 | Reference Ch 3 |
+| 元变量 | Metavariable | 宏规则中用于捕获和引用模式的变量，如 `$name:ty` | Reference Ch 6.2 |
+| 重复 | Repetition | 宏中匹配和展开重复模式的机制（`*` 和 `+`） | Reference Ch 6.2 |
+| 片段指定符 | Fragment Specifier | 指定元变量类型的标记（`expr`、`ty`、`ident` 等） | Reference Ch 6.2 |
+| 卫生性 | Hygiene | 宏生成的标识符不会与外部代码意外冲突的性质 | Reference Ch 6.2 |
+| 宏展开 | Macro Expansion | 编译期将宏调用替换为生成代码的过程 | Reference Ch 6 |
+| 编译期计算 | Compile-Time Evaluation | 宏在编译阶段执行代码生成 | The Book Ch 19.5 |
+| TokenStream | TokenStream | 过程宏接收和返回的 token 序列类型 | Reference Ch 6.3 |
+| 语法扩展 | Syntax Extension | 通过宏扩展语言语法的机制 | Reference Ch 6 |
+| 宏导出 | Macro Export | 使用 `#[macro_export]` 使宏可从 crate 外部访问 | The Book Ch 19.5 |
+| 宏导入 | Macro Import | 通过 `#[macro_use]` 或路径导入宏 | The Book Ch 19.5 |
+| 守卫条件 | Guard Condition | 宏规则中额外的 `if` 条件过滤匹配 | Reference Ch 6.2 |
 
 ---
 
-## 🔄 更新日志 {#-更新日志}
+## FFI/Unsafe 术语
 
-| 日期 | 版本 | 变更内容 |
-| :--- | :--- | :--- |
-| 2026-02-28 | 1.0.0 | 初始版本，包含 80+ 核心术语，与 Ferrocene FLS 对齐 |
+| 中文术语 | 英文术语 | 定义 | 官方来源 |
+|---------|---------|------|---------|
+| Unsafe Rust | Unsafe Rust | 允许执行不安全操作的 Rust 代码块，需要 `unsafe` 关键字 | The Book Ch 19.1 |
+| 安全抽象 | Safe Abstraction | 在 unsafe 实现上提供安全接口的封装层 | The Book Ch 19.1 |
+| 原始指针 | Raw Pointer | 不受借用检查器约束的裸指针（`*const T` 和 `*mut T`） | The Book Ch 19.1 |
+| 不安全函数 | Unsafe Function | 声明为 `unsafe fn` 的函数，调用者需保证调用安全 | The Book Ch 19.1 |
+| 不安全块 | Unsafe Block | 声明为 `unsafe { ... }` 的代码块，内部可执行不安全操作 | The Book Ch 19.1 |
+| FFI | Foreign Function Interface | 与其他语言（主要是 C）交互的接口机制 | The Book Ch 19.1 |
+| 外部函数 | Extern Function | 使用 `extern` 声明的来自其他语言或提供给其他语言的函数 | The Book Ch 19.1 |
+| 外部块 | Extern Block | 使用 `extern "C" { ... }` 声明外部库函数的块 | The Book Ch 19.1 |
+| ABI | Application Binary Interface | 定义函数调用约定、数据布局等二进制接口规范 | Reference Ch 8.10 |
+| 调用约定 | Calling Convention | 函数调用的低级约定（如 `"C"`、`"system"`） | Reference Ch 8.10 |
+| 未初始化内存 | Uninitialized Memory | 未写入有效值的内存区域，读取它是未定义行为 | The Book Ch 19.1 |
+| MaybeUninit | MaybeUninit | 安全处理可能未初始化内存的类型 | The Book Ch 19.1 |
+| 未定义行为 | Undefined Behavior (UB) | 违反 Rust 安全假设的行为，后果不可预测 | The Book Ch 19.1 |
+| 悬垂指针 | Dangling Pointer | 指向已释放或未分配内存的指针 | The Book Ch 19.1 |
+| 空指针 | Null Pointer | 不指向任何有效内存地址的指针（值为 0） | The Book Ch 19.1 |
+| 内存对齐 | Memory Alignment | 数据在内存中的地址必须是其类型的对齐值的倍数 | Reference Ch 10.2 |
+| 填充 | Padding | 编译器在结构体字段间插入的空白字节，用于对齐 | Reference Ch 10.2 |
+| 布局 | Layout | 类型的内存布局（大小和对齐）信息 | Reference Ch 10.2 |
+| 类型双关 | Type Punning | 将一种类型的位重新解释为另一种类型 | The Book Ch 19.1 |
+| 联合体 | Union | 共享同一块内存的多种类型，类似 C 的 union | Reference Ch 7.8 |
+| 透明包装 | Transparent Wrapper | 使用 `#[repr(transparent)]` 保证与内部类型相同布局 | Reference Ch 10.1 |
+| 内联汇编 | Inline Assembly | 在 Rust 代码中直接嵌入汇编指令（`asm!` 宏） | Reference Ch 10.4 |
+| 易变读取 | Volatile Read/Write | 不被编译器优化的特殊内存读写操作 | Reference Ch 10.4 |
+| 静态变量 | Static Variable | 程序整个生命周期存在的全局变量，可声明为可变 | The Book Ch 19.1 |
+| 可变静态 | Mutable Static | 使用 `static mut` 声明的可变全局变量，访问需要 unsafe | The Book Ch 19.1 |
 
 ---
 
-**维护团队**: Rust Learning Community
-**最后更新**: 2026-02-28
-**状态**: ✅ **与 Ferrocene FLS 对齐完成**
+## 生命周期术语
+
+| 中文术语 | 英文术语 | 定义 | 官方来源 |
+|---------|---------|------|---------|
+| 生命周期 | Lifetime | 引用有效的程序执行时段，确保引用不悬垂 | The Book Ch 10.3 |
+| 生命周期参数 | Lifetime Parameter | 泛型生命周期，如 `'a`，用于标注引用有效范围 | The Book Ch 10.3 |
+| 生命周期省略 | Lifetime Elision | 编译器根据约定自动推导生命周期标注的规则 | The Book Ch 10.3 |
+| 生命周期标注 | Lifetime Annotation | 显式声明引用生命周期的语法，如 `&'a T` | The Book Ch 10.3 |
+| 生命周期边界 | Lifetime Bound | 对生命周期参数的限制，如 `'a: 'b`（'a 至少和 'b 一样长） | Reference Ch 6.1.4 |
+| 静态生命周期 | Static Lifetime (`'static`) | 整个程序执行期间有效的生命周期 | The Book Ch 10.3 |
+| 生命周期子类型 | Lifetime Subtyping | 生命周期间的包含关系，如 `'long: 'short` | Reference Ch 4.6 |
+| 早期绑定 | Early Bound | 在定义点就确定具体生命周期的泛型参数 | Reference Ch 6.1 |
+| 晚期绑定 | Late Bound | 在调用点根据上下文确定具体生命周期的泛型参数 | Reference Ch 6.1 |
+| 生命周期约束 | Lifetime Constraint | 泛型定义中对生命周期的限制条件 | Reference Ch 6.1.4 |
+| 高阶 trait 边界 | Higher-Ranked Trait Bounds (HRTB) | 对任意生命周期的 trait 约束，如 `for<'a>` | Reference Ch 6.2.4 |
+| 借用集 | Borrow Set | 编译器分析中某点的所有活跃借用集合 | Reference Ch 8.2 |
+| 存活集 | Live Set | 编译器分析中某点的所有存活变量集合 | Reference Ch 8.2 |
+| 限制区域 | Restriction | 生命周期分析中值不可被借用的代码区域 | Reference Ch 8.2 |
+| Polonius | Polonius | 基于逻辑的区域推理的新一代借用检查算法 | RFC 2094 |
+| 区域推理 | Region Inference | 编译器自动推导引用生命周期的算法过程 | Reference Ch 8.2 |
+| 悬垂引用 | Dangling Reference | 指向已释放内存的引用，生命周期系统防止此问题 | The Book Ch 10.3 |
+| 协变生命周期 | Covariant Lifetime | 较长生命周期可替代较短生命周期的性质 | Reference Ch 4.6 |
+| 逆变生命周期 | Contravariant Lifetime | 较短生命周期可替代较长生命周期的性质（罕见） | Reference Ch 4.6 |
+| 出入作用域 | Enter/Exit Scope | 变量进入或离开作用域的生命周期分析概念 | Reference Ch 8.2 |
 
 ---
 
-🦀 **统一术语，精准表达，与官方规范保持一致！** 🦀
+## 版本演进术语
+
+| 中文术语 | 英文术语 | 定义 | 官方来源 |
+|---------|---------|------|---------|
+| Edition | Edition | Rust 语言的大版本，允许不兼容语法演进（2015/2018/2021/2024） | The Book Ch Appendix |
+| 版本迁移 | Edition Migration | 将代码从旧 Edition 迁移到新 Edition 的过程 | The Book Ch Appendix |
+| 弃用 | Deprecation | 标记某些功能将在未来版本移除的机制（`#[deprecated]`） | Reference Ch 7.8 |
+| 不稳定特性 | Unstable Feature | 仅可在 nightly 编译器使用的实验性功能 | Reference Ch 3.1 |
+| 特性门 | Feature Gate | 使用 `#![feature(...)]` 启用不稳定特性的机制 | Reference Ch 3.1 |
+| Nightly | Nightly | 每日构建的 Rust 开发版本，包含实验性功能 | The Book Ch Appendix |
+| Beta | Beta | Rust 的预发布测试版本 | The Book Ch Appendix |
+| Stable | Stable | Rust 的正式稳定版本，每 6 周发布 | The Book Ch Appendix |
+| LTS | Long-Term Support | 长期支持版本，提供更长时间的维护和更新 | RFC 1522 |
+| Ferrocene | Ferrocene | Rust 的安全关键应用认证版本，符合工业标准 | Ferrocene Spec |
+| FLS | Ferrocene Language Specification | Ferrocene 的语言规范文档 | Ferrocene Docs |
+| 语义版本 | Semantic Versioning | 版本号格式 `MAJOR.MINOR.PATCH`，Rust 使用 `MINOR` 发布新功能 | The Book Ch Appendix |
+| 破坏性变更 | Breaking Change | 可能导致现有代码失效的语法或行为变更 | RFC 1105 |
+|  crater 运行 | Crater Run | 使用 crater 工具测试变更对整个生态影响的过程 | Rust Forge |
+| MCP | Major Change Proposal | Rust 编译器重大变更提案流程 | Rust Forge |
+| RFC | Request for Comments | Rust 语言设计和变更的标准提案流程 | RFC Repo |
+| FCP | Final Comment Period | RFC 进入最终评论期，即将接受或拒绝 | RFC Process |
+| 稳定性承诺 | Stability Promise | Rust 对稳定版 API 不引入破坏性变更的承诺 | The Book Ch Appendix |
+| 版本检查 | Version Check | `rust-version` 字段指定最低支持的 Rust 版本 | Cargo Book |
+| Rust 2024 | Rust 2024 Edition | 最新 Edition（2024年发布），包含 `gen` 关键字等新特性 | Rust Blog |
+
+---
+
+## 参考资源
+
+### 官方文档引用格式说明
+
+本文档中的官方来源引用采用以下格式：
+
+| 引用格式 | 说明 | URL |
+|---------|------|-----|
+| The Book Ch X.Y | The Rust Programming Language 官方教程 | https://doc.rust-lang.org/book/ |
+| Reference Ch X.Y | Rust Reference 语言参考 | https://doc.rust-lang.org/reference/ |
+| RFC XXXX | Rust RFC 提案 | https://rust-lang.github.io/rfcs/ |
+| Ferrocene Spec | Ferrocene 语言规范 | https://spec.ferrocene.dev/ |
+| Cargo Book | Cargo 文档 | https://doc.rust-lang.org/cargo/ |
+| Rust Blog | 官方博客 | https://blog.rust-lang.org/ |
+| Rust Forge | 贡献者文档 | https://forge.rust-lang.org/ |
+
+### 相关文档
+
+- [研究笔记术语表](./research_notes/GLOSSARY.md) - 形式化方法和研究相关术语
+- [所有权速查卡](./02_reference/quick_reference/ownership_cheatsheet.md) - 所有权系统快速参考
+- [类型系统速查卡](./02_reference/quick_reference/type_system.md) - 类型系统快速参考
+- [错误码映射](./02_reference/ERROR_CODE_MAPPING.md) - 编译器错误码详解
+
+### Ferrocene FLS 标准对照
+
+本术语表与 Ferrocene Language Specification (FLS) 对齐的关键点：
+
+1. **所有权与借用**: 采用 FLS Chapter 8 的借用检查器术语定义
+2. **类型系统**: 遵循 FLS Chapter 4 的类型分类和型变规则
+3. **生命周期**: 基于 FLS Chapter 6 的泛型生命周期规范
+4. **Unsafe Rust**: 参考 FLS Chapter 11 的不安全操作定义
+5. **并发模型**: 与 FLS Chapter 16 的线程安全 trait 定义一致
+
+---
+
+## 更新历史
+
+| 版本 | 日期 | 更新内容 | 作者 |
+|-----|------|---------|------|
+| 1.0.0 | 2026-03-17 | 初始版本，包含 8 大类术语，对齐 FLS 标准 | Rust 学习项目 |
+
+---
+
+> **维护说明**: 本文档随 Rust 版本更新而维护。如有术语变更或新增，请提交 Issue 或 PR 更新本文档。
