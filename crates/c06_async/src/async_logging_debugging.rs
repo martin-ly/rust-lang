@@ -702,9 +702,9 @@ mod tests {
         let task_info = tracker.get_task_info(&task_id).await;
         assert!(task_info.is_some());
 
-        tracker.complete_task(&task_id).await.unwrap();
+        tracker.complete_task(&task_id).await.expect("完成任务不应失败");
 
-        let completed_task = tracker.get_task_info(&task_id).await.unwrap();
+        let completed_task = tracker.get_task_info(&task_id).await.expect("获取任务信息不应失败");
         assert!(matches!(completed_task.status, TaskStatus::Completed));
     }
 

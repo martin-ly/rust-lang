@@ -538,7 +538,7 @@ mod tests {
         for i in 0..5 {
             let size = 200 + i * 100; // 200, 300, 400, 500, 600 bytes
             let item = BatchItem::new(format!("item_{}", i), size, 0);
-            batch_processor.add_item(item).await.unwrap();
+            batch_processor.add_item(item).await.expect("添加项目不应失败");
         }
 
         // 等待处理完成
@@ -547,7 +547,7 @@ mod tests {
         let stats = batch_processor.get_stats().await;
         assert!(stats.total_batches > 0);
 
-        batch_processor.shutdown().await.unwrap();
+        batch_processor.shutdown().await.expect("关闭批处理器不应失败");
         let _ = handle.await;
     }
 }

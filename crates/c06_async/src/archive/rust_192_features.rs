@@ -408,7 +408,7 @@ mod tests {
 
     #[test]
     fn test_async_pool_size() {
-        let tasks_per_worker = NonZeroUsize::new(5).unwrap();
+        let tasks_per_worker = NonZeroUsize::new(5).expect("每工作线程任务数应非零");
         assert_eq!(calculate_async_pool_size(23, tasks_per_worker), 5);
         assert_eq!(calculate_async_pool_size(25, tasks_per_worker), 5);
         assert_eq!(calculate_async_pool_size(26, tasks_per_worker), 6);
@@ -416,7 +416,7 @@ mod tests {
 
     #[test]
     fn test_async_resource_allocator() {
-        let allocator = AsyncResourceAllocator::new(1024, NonZeroUsize::new(64).unwrap());
+        let allocator = AsyncResourceAllocator::new(1024, NonZeroUsize::new(64).expect("块大小应非零"));
         assert_eq!(allocator.max_concurrent_tasks(), 16);
     }
 
