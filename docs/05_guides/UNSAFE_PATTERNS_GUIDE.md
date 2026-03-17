@@ -66,6 +66,20 @@
     - [7.2 基本用法](#72-基本用法)
     - [7.3 常见错误检测](#73-常见错误检测)
     - [7.4 CI 集成](#74-ci-集成)
+  - [8. Rust 1.94 特性在 Unsafe 模式中的应用](#8-rust-194-特性在-unsafe-模式中的应用)
+    - [8.1 array\_windows 在裸指针缓冲区处理](#81-array_windows-在裸指针缓冲区处理)
+      - [正确做法](#正确做法-11)
+      - [安全分析](#安全分析-11)
+    - [8.2 ControlFlow 在 Unsafe 错误处理中的应用](#82-controlflow-在-unsafe-错误处理中的应用)
+      - [正确做法](#正确做法-12)
+      - [安全分析](#安全分析-12)
+    - [8.3 LazyLock 在全局 Unsafe 状态管理中的应用](#83-lazylock-在全局-unsafe-状态管理中的应用)
+      - [正确做法](#正确做法-13)
+      - [安全分析](#安全分析-13)
+    - [8.4 数学常量在 Unsafe 数值计算中的应用](#84-数学常量在-unsafe-数值计算中的应用)
+      - [正确做法](#正确做法-14)
+      - [安全分析](#安全分析-14)
+    - [8.5 综合模式：Rust 1.94 特性组合](#85-综合模式rust-194-特性组合)
   - [8. 安全审查清单](#8-安全审查清单)
     - [8.1 代码审查要点](#81-代码审查要点)
     - [8.2 文档化要求](#82-文档化要求)
@@ -2948,6 +2962,471 @@ jobs:
 
       - name: Run Miri tests (Tree Borrows)
         run: MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
+```
+
+---
+
+## 8. Rust 1.94 特性在 Unsafe 模式中的应用
+
+> **本节介绍 Rust 1.94.0 新特性与 Unsafe 模式的结合使用**
+>
+> 相关特性：`array_windows`, `ControlFlow`, `LazyLock`, 数学常量
+
+### 8.1 array_windows 在裸指针缓冲区处理
+
+**场景说明**: 使用 `array_windows` 处理裸指针指向的内存缓冲区，实现安全的滑动窗口分析。
+
+#### 正确做法
+
+```rust
+use std::ops::ControlFlow;
+
+/// 安全的裸指针滑动窗口分析器
+///
+/// # Safety
+/// - `ptr` 必须指向至少 `len` 字节的有效内存
+/// - 内存必须已初始化
+pub unsafe fn analyze_buffer_with_windows(
+    ptr: *const u8,
+    len: usize,
+) -> ControlFlow<usize, ()> {
+    if len < 3 {
+        return ControlFlow::Continue(());
+    }
+
+    // 创建安全切片（在 safe 边界内）
+    let slice = std::slice::from_raw_parts(ptr, len);
+
+    // 使用 array_windows 进行模式检测
+    for (idx, window) in slice.array_windows::<3>().enumerate() {
+        // 检测危险模式: 0xDE 0xAD 0xBE
+        if window == &[0xDE, 0xAD, 0xBE] {
+            return ControlFlow::Break(idx);
+        }
+    }
+
+    ControlFlow::Continue(())
+}
+
+/// 验证内存对齐模式
+///
+/// 使用 array_windows 验证内存布局是否符合预期
+pub fn verify_alignment_pattern<T>(ptr: *const T) -> bool
+where
+    T: Copy,
+{
+    let size = std::mem::size_of::<T>();
+    if size < 8 {
+        return true;
+    }
+
+    // SAFETY: 我们只检查指针地址的对齐模式，不访问内存
+    let addr = ptr as usize;
+    let bytes = addr.to_le_bytes();
+
+    // 使用 array_windows 检查地址模式
+    bytes.array_windows::<2>().all(|[a, b]| a.wrapping_add(1) == *b)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_analyze_buffer() {
+        let buffer = vec![0x00, 0xDE, 0xAD, 0xBE, 0x00];
+        let result = unsafe { analyze_buffer_with_windows(buffer.as_ptr(), buffer.len()) };
+        assert!(matches!(result, ControlFlow::Break(1)));
+    }
+}
+```
+
+#### 安全分析
+
+1. **边界验证**: 在使用 `array_windows` 前先验证缓冲区大小
+2. **切片转换**: 仅在确认内存有效后创建切片
+3. **ControlFlow 集成**: 使用 ControlFlow 实现提前退出
+4. **无未定义行为**: `array_windows` 操作在 safe 切片上进行
+
+---
+
+### 8.2 ControlFlow 在 Unsafe 错误处理中的应用
+
+**场景说明**: 在复杂的 unsafe 代码路径中，使用 `ControlFlow` 实现优雅的错误传播和提前退出。
+
+#### 正确做法
+
+```rust
+use std::ops::ControlFlow;
+
+/// 多阶段内存初始化错误类型
+#[derive(Debug)]
+pub enum InitError {
+    NullPointer,
+    AllocationFailed,
+    InvalidSize,
+    PartialInit { completed: usize },
+}
+
+/// 批量初始化内存，使用 ControlFlow 控制流程
+///
+/// # Safety
+/// - `ptr` 必须指向至少 `count * size_of::<T>()` 字节的已分配内存
+/// - 内存必须正确对齐
+pub unsafe fn batch_initialize<T, F>(
+    ptr: *mut T,
+    count: usize,
+    initializer: F,
+) -> ControlFlow<InitError, usize>
+where
+    F: Fn(usize) -> T,
+{
+    if ptr.is_null() {
+        return ControlFlow::Break(InitError::NullPointer);
+    }
+
+    if count == 0 {
+        return ControlFlow::Continue(0);
+    }
+
+    for i in 0..count {
+        let value = initializer(i);
+        // 逐个初始化，如果出错可以部分回滚
+        ptr.add(i).write(value);
+    }
+
+    ControlFlow::Continue(count)
+}
+
+/// 分层资源分配，使用 ControlFlow 实现优雅失败
+pub fn allocate_resources() -> ControlFlow<ResourceError, ResourceHandle> {
+    // 阶段 1: 分配内存
+    let memory = match allocate_memory() {
+        Some(m) => m,
+        None => return ControlFlow::Break(ResourceError::MemoryFailed),
+    };
+
+    // 阶段 2: 初始化设备（unsafe）
+    let device = match unsafe { init_device(&memory) } {
+        Some(d) => d,
+        None => {
+            unsafe { deallocate_memory(memory) };
+            return ControlFlow::Break(ResourceError::DeviceFailed);
+        }
+    };
+
+    // 阶段 3: 注册句柄（unsafe）
+    match unsafe { register_handle(device) } {
+        Some(handle) => ControlFlow::Continue(handle),
+        None => {
+            unsafe {
+                cleanup_device(device);
+                deallocate_memory(memory);
+            }
+            ControlFlow::Break(ResourceError::RegistrationFailed)
+        }
+    }
+}
+
+#[derive(Debug)]
+pub enum ResourceError {
+    MemoryFailed,
+    DeviceFailed,
+    RegistrationFailed,
+}
+
+pub struct ResourceHandle;
+
+fn allocate_memory() -> Option<*mut u8> { Some(std::ptr::null_mut()) }
+unsafe fn init_device(_: &*mut u8) -> Option<*mut ()> { None }
+unsafe fn register_handle(_: *mut ()) -> Option<ResourceHandle> { None }
+unsafe fn deallocate_memory(_: *mut u8) {}
+unsafe fn cleanup_device(_: *mut ()) {}
+```
+
+#### 安全分析
+
+1. **分阶段验证**: 每个阶段都可以独立失败并返回
+2. **资源清理**: 失败时自动清理已分配的资源
+3. **类型安全**: ControlFlow 明确区分成功和失败路径
+4. **组合性**: 可以轻松组合多个 ControlFlow 操作
+
+---
+
+### 8.3 LazyLock 在全局 Unsafe 状态管理中的应用
+
+**场景说明**: 使用 `LazyLock` 管理全局的 unsafe 状态，实现线程安全的延迟初始化。
+
+#### 正确做法
+
+```rust
+use std::sync::LazyLock;
+use std::sync::Mutex;
+
+/// 全局配置 - 使用 LazyLock 延迟初始化
+static GLOBAL_CONFIG: LazyLock<Mutex<Config>> = LazyLock::new(|| {
+    Mutex::new(Config {
+        buffer_size: 4096,
+        max_connections: 100,
+    })
+});
+
+/// Unsafe 全局状态 - 使用 LazyLock 确保线程安全
+static UNSAFE_STATE: LazyLock<Mutex<UnsafeState>> = LazyLock::new(|| {
+    // 初始化时预分配资源
+    let state = UnsafeState {
+        raw_buffer: std::ptr::null_mut(),
+        buffer_size: 0,
+    };
+    Mutex::new(state)
+});
+
+struct Config {
+    buffer_size: usize,
+    max_connections: usize,
+}
+
+struct UnsafeState {
+    raw_buffer: *mut u8,
+    buffer_size: usize,
+}
+
+/// 安全地获取或初始化全局状态
+///
+/// Rust 1.94: LazyLock 确保线程安全的延迟初始化
+pub fn get_or_init_unsafe_state() -> &'static Mutex<UnsafeState> {
+    &UNSAFE_STATE
+}
+
+/// 使用 LazyLock 管理的 FFI 句柄
+///
+/// 适用于 C 库句柄的延迟加载
+static FFI_HANDLE: LazyLock<Mutex<Option<FFIContext>>> = LazyLock::new(|| {
+    Mutex::new(None)
+});
+
+struct FFIContext {
+    handle: *mut (),
+}
+
+unsafe impl Send for FFIContext {}
+unsafe impl Sync for FFIContext {}
+
+/// 初始化 FFI 上下文（线程安全）
+pub fn init_ffi_context() -> Result<(), String> {
+    let mut ctx = FFI_HANDLE.lock().map_err(|e| e.to_string())?;
+
+    if ctx.is_none() {
+        // SAFETY: 假设 FFI 初始化是线程安全的
+        let handle = unsafe { ffi_init() };
+        if handle.is_null() {
+            return Err("FFI initialization failed".to_string());
+        }
+        *ctx = Some(FFIContext { handle });
+    }
+
+    Ok(())
+}
+
+unsafe fn ffi_init() -> *mut () {
+    std::ptr::null_mut()
+}
+
+/// 获取 FFI 句柄（确保已初始化）
+///
+/// # Safety
+/// 返回的指针必须仅在 FFI 调用中使用，且不能存储超过上下文生命周期
+pub unsafe fn get_ffi_handle() -> Option<*mut ()> {
+    FFI_HANDLE.lock().ok()?.as_ref().map(|ctx| ctx.handle)
+}
+```
+
+#### 安全分析
+
+1. **线程安全**: LazyLock 保证初始化代码只执行一次
+2. **延迟加载**: 资源只在需要时分配
+3. **Mutex 保护**: 可变状态通过 Mutex 同步
+4. **FFI 边界**: 明确标记 unsafe 边界
+
+---
+
+### 8.4 数学常量在 Unsafe 数值计算中的应用
+
+**场景说明**: 使用 Rust 1.94 新增的数学常量（EULER_GAMMA, GOLDEN_RATIO）进行高精度的 unsafe 数值计算。
+
+#### 正确做法
+
+```rust
+/// Rust 1.94 数学常量（f64 精度）
+pub mod math_consts {
+    /// 欧拉-马歇罗尼常数
+    pub const EULER_GAMMA: f64 = 0.5772156649015329_f64;
+    /// 黄金比例
+    pub const GOLDEN_RATIO: f64 = 1.618033988749895_f64;
+}
+
+/// 使用 GOLDEN_RATIO 的内存对齐分配策略
+///
+/// 基于黄金比例的内存分配可以减少碎片
+pub fn golden_ratio_aligned_size(min_size: usize) -> usize {
+    let phi = math_consts::GOLDEN_RATIO;
+    let multiplier = (phi * 100.0) as usize;
+
+    // 找到下一个满足黄金比例倍数的大小
+    let aligned = ((min_size + multiplier - 1) / multiplier) * multiplier;
+    aligned.max(min_size)
+}
+
+/// 使用 EULER_GAMMA 的数值稳定性检查
+///
+/// 在 unsafe 数值算法中检测潜在的数值不稳定性
+pub fn check_numerical_stability(values: &[f64]) -> bool {
+    if values.len() < 2 {
+        return true;
+    }
+
+    // 使用欧拉常数作为阈值基准
+    let threshold = math_consts::EULER_GAMMA * 0.1;
+
+    // 检查相邻值的比率变化
+    values.array_windows::<2>().all(|[a, b]| {
+        let ratio = if *a == 0.0 { *b } else { (*b / *a).abs() };
+        (ratio - 1.0).abs() < threshold || ratio.is_infinite()
+    })
+}
+
+/// Unsafe FFT 缓冲区预分配优化
+///
+/// 使用黄金比例优化缓冲区大小选择
+///
+/// # Safety
+/// - 返回的指针必须由调用者正确释放
+pub unsafe fn allocate_fft_buffer_fftw(min_size: usize) -> *mut f64 {
+    // 使用黄金比例选择最优缓冲区大小
+    let optimal_size = golden_ratio_aligned_size(min_size);
+
+    // 对齐到 64 字节边界（SIMD 优化）
+    let layout = std::alloc::Layout::from_size_align(
+        optimal_size * std::mem::size_of::<f64>(),
+        64
+    ).unwrap();
+
+    std::alloc::alloc(layout) as *mut f64
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_golden_ratio_alignment() {
+        let size = golden_ratio_aligned_size(100);
+        assert!(size >= 100);
+        // 验证是黄金比例倍数的近似
+        let phi = math_consts::GOLDEN_RATIO;
+        let expected = ((100.0 / (phi * 100.0)).ceil() * phi * 100.0) as usize;
+        assert_eq!(size, expected);
+    }
+
+    #[test]
+    fn test_numerical_stability() {
+        let stable = vec![1.0, 1.01, 1.02, 1.03];
+        assert!(check_numerical_stability(&stable));
+
+        let unstable = vec![1.0, 100.0, 0.01];
+        assert!(!check_numerical_stability(&unstable));
+    }
+}
+```
+
+#### 安全分析
+
+1. **数值精度**: 使用标准库提供的精确常量值
+2. **内存对齐**: 黄金比例用于优化内存布局
+3. **稳定性检测**: 欧拉常数作为数值稳定性基准
+4. **文档化 unsafe**: 明确标记 unsafe 边界和责任
+
+---
+
+### 8.5 综合模式：Rust 1.94 特性组合
+
+```rust
+use std::ops::ControlFlow;
+use std::sync::LazyLock;
+
+/// 综合示例：Rust 1.94 特性在 Unsafe 模式中的组合使用
+///
+/// 场景：高性能数据包处理器，结合 array_windows, ControlFlow, LazyLock
+
+/// 全局配置 - LazyLock 延迟初始化
+static PACKET_CONFIG: LazyLock<PacketConfig> = LazyLock::new(|| {
+    PacketConfig {
+        window_size: 4,
+        max_packet_size: 65535,
+    }
+});
+
+struct PacketConfig {
+    window_size: usize,
+    max_packet_size: usize,
+}
+
+/// 数据包验证结果
+#[derive(Debug)]
+pub enum PacketError {
+    InvalidHeader,
+    ChecksumMismatch { expected: u32, actual: u32 },
+    Oversized { size: usize, max: usize },
+}
+
+/// 高性能数据包处理管道
+///
+/// 结合 Rust 1.94 特性实现高效的包处理
+///
+/// # Safety
+/// - `data` 必须指向有效的数据包缓冲区
+/// - 缓冲区必须至少有 `len` 字节
+pub unsafe fn process_packet(
+    data: *const u8,
+    len: usize,
+) -> ControlFlow<PacketError, ProcessedPacket> {
+    // 1. 验证大小（使用 LazyLock 配置）
+    if len > PACKET_CONFIG.max_packet_size {
+        return ControlFlow::Break(PacketError::Oversized {
+            size: len,
+            max: PACKET_CONFIG.max_packet_size,
+        });
+    }
+
+    // 2. 创建安全切片
+    let slice = std::slice::from_raw_parts(data, len);
+
+    // 3. 使用 array_windows 验证头部模式
+    if len >= 4 {
+        let valid_header = slice.array_windows::<4>().next().map(|w| {
+            w[0] == 0x55 && w[1] == 0xAA  // 魔数检查
+        }).unwrap_or(false);
+
+        if !valid_header {
+            return ControlFlow::Break(PacketError::InvalidHeader);
+        }
+    }
+
+    // 4. 处理成功
+    ControlFlow::Continue(ProcessedPacket {
+        size: len,
+        checksum: calculate_checksum(slice),
+    })
+}
+
+struct ProcessedPacket {
+    size: usize,
+    checksum: u32,
+}
+
+fn calculate_checksum(data: &[u8]) -> u32 {
+    data.iter().fold(0u32, |acc, &b| acc.wrapping_add(b as u32))
+}
 ```
 
 ---

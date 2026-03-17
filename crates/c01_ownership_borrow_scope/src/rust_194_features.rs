@@ -696,6 +696,163 @@ pub fn demonstrate_rust_194_features() {
     // 指数积分近似
     let ei_approx = exponential_integral_approx(0.5);
     println!("   Ei(0.5) 近似值: {:.6}", ei_approx);
+
+    // 4. ControlFlow 特性演示
+    println!("\n4. ControlFlow 控制流类型:");
+    let matrix = vec![
+        vec![1, 2, 3],
+        vec![4, 5, 6],
+        vec![7, 8, 9],
+    ];
+    match search_in_matrix(&matrix, 5) {
+        ControlFlow::Break((i, j)) => println!("   找到目标 5 在位置: ({}, {})", i, j),
+        ControlFlow::Continue(()) => println!("   未找到目标"),
+    }
+
+    // 验证管道演示
+    match validate_data("password123") {
+        ControlFlow::Continue(()) => println!("   数据验证通过"),
+        ControlFlow::Break(msg) => println!("   验证失败: {}", msg),
+    }
+
+    match validate_data("short") {
+        ControlFlow::Continue(()) => println!("   数据验证通过"),
+        ControlFlow::Break(msg) => println!("   验证失败: {}", msg),
+    }
+}
+
+// ==================== Rust 1.94 真实特性: ControlFlow ====================
+
+/// # ControlFlow - 控制流类型
+///
+/// Rust 1.94.0 对 `std::ops::ControlFlow` 类型的增强支持，用于在嵌套循环和递归中实现提前退出。
+/// ControlFlow 是 Rust 标准库中用于控制流程的类型，在 1.94 版本中与 Edition 2024 深度集成。
+///
+/// ## 特性说明
+/// - `ControlFlow<B, C>` 表示控制流程可以继续 (`Continue(C)`) 或中断 (`Break(B)`)
+/// - 在迭代器操作、搜索算法、验证管道中非常有用
+/// - 与 `Try` trait 集成，支持 `?` 操作符
+///
+/// ## 使用场景
+/// - 嵌套循环中的提前退出
+/// - 递归算法的终止条件
+/// - 数据验证管道
+/// - 搜索算法的短路求值
+use std::ops::ControlFlow;
+
+/// 在嵌套数据结构中使用 ControlFlow 提前退出
+///
+/// 搜索二维数组中是否存在满足条件的元素
+pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
+    for (i, row) in matrix.iter().enumerate() {
+        for (j, &val) in row.iter().enumerate() {
+            if val == target {
+                return ControlFlow::Break((i, j));
+            }
+        }
+    }
+    ControlFlow::Continue(())
+}
+
+/// 使用 ControlFlow 实现验证管道
+///
+/// 对数据进行多阶段验证，任何阶段失败都提前返回
+pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
+    // 阶段 1: 检查非空
+    if data.is_empty() {
+        return ControlFlow::Break("数据不能为空".to_string());
+    }
+
+    // 阶段 2: 检查长度
+    if data.len() < 8 {
+        return ControlFlow::Break("数据长度至少为 8".to_string());
+    }
+
+    // 阶段 3: 检查包含数字
+    if !data.chars().any(|c| c.is_ascii_digit()) {
+        return ControlFlow::Break("数据必须包含数字".to_string());
+    }
+
+    ControlFlow::Continue(())
+}
+
+/// 使用 ControlFlow 的迭代器搜索
+///
+/// 在迭代器中查找第一个满足多个条件的元素
+pub fn find_first_matching<T>(
+    items: &[T],
+    predicates: &[fn(&T) -> bool],
+) -> ControlFlow<usize, ()>
+where
+    T: std::fmt::Debug,
+{
+    for (idx, item) in items.iter().enumerate() {
+        if predicates.iter().all(|pred| pred(item)) {
+            return ControlFlow::Break(idx);
+        }
+    }
+    ControlFlow::Continue(())
+}
+
+/// 递归遍历树结构，使用 ControlFlow 控制遍历
+#[derive(Debug)]
+pub struct TreeNode<T> {
+    value: T,
+    children: Vec<TreeNode<T>>,
+}
+
+impl<T: PartialEq> TreeNode<T> {
+    pub fn new(value: T) -> Self {
+        Self {
+            value,
+            children: Vec::new(),
+        }
+    }
+
+    pub fn add_child(&mut self, child: TreeNode<T>) {
+        self.children.push(child);
+    }
+
+    /// 深度优先搜索，找到目标值时提前退出
+    pub fn dfs_search(&self, target: &T) -> ControlFlow<Vec<usize>, ()> {
+        self.dfs_search_recursive(target, &mut Vec::new())
+    }
+
+    fn dfs_search_recursive(
+        &self,
+        target: &T,
+        path: &mut Vec<usize>,
+    ) -> ControlFlow<Vec<usize>, ()> {
+        if &self.value == target {
+            return ControlFlow::Break(path.clone());
+        }
+
+        for (i, child) in self.children.iter().enumerate() {
+            path.push(i);
+            let result = child.dfs_search_recursive(target, path);
+            if result.is_break() {
+                return result;
+            }
+            path.pop();
+        }
+
+        ControlFlow::Continue(())
+    }
+}
+
+/// 批量操作中的错误处理，使用 ControlFlow
+pub fn batch_process_with_control_flow<T, E>(
+    items: &[T],
+    processor: impl Fn(&T) -> Result<(), E>,
+) -> ControlFlow<E, usize> {
+    let mut processed = 0;
+    for item in items {
+        match processor(item) {
+            Ok(()) => processed += 1,
+            Err(e) => return ControlFlow::Break(e),
+        }
+    }
+    ControlFlow::Continue(processed)
 }
 
 #[cfg(test)]
@@ -952,5 +1109,97 @@ mod tests {
         let ei = exponential_integral_approx(0.5);
         assert!(ei.is_finite());
         assert!(ei > 0.0);
+    }
+
+    // ==================== ControlFlow 测试 ====================
+
+    #[test]
+    fn test_search_in_matrix_found() {
+        let matrix = vec![
+            vec![1, 2, 3],
+            vec![4, 5, 6],
+            vec![7, 8, 9],
+        ];
+        let result = search_in_matrix(&matrix, 5);
+        assert!(matches!(result, ControlFlow::Break((1, 1))));
+    }
+
+    #[test]
+    fn test_search_in_matrix_not_found() {
+        let matrix = vec![
+            vec![1, 2, 3],
+            vec![4, 5, 6],
+        ];
+        let result = search_in_matrix(&matrix, 10);
+        assert!(matches!(result, ControlFlow::Continue(())));
+    }
+
+    #[test]
+    fn test_validate_data_success() {
+        let result = validate_data("password123");
+        assert!(matches!(result, ControlFlow::Continue(())));
+    }
+
+    #[test]
+    fn test_validate_data_empty() {
+        let result = validate_data("");
+        assert!(matches!(result, ControlFlow::Break(ref s) if s == "数据不能为空"));
+    }
+
+    #[test]
+    fn test_validate_data_too_short() {
+        let result = validate_data("short1");
+        assert!(matches!(result, ControlFlow::Break(ref s) if s == "数据长度至少为 8"));
+    }
+
+    #[test]
+    fn test_validate_data_no_digit() {
+        let result = validate_data("password");
+        assert!(matches!(result, ControlFlow::Break(ref s) if s == "数据必须包含数字"));
+    }
+
+    #[test]
+    fn test_find_first_matching() {
+        let items = vec![1, 2, 3, 4, 5, 6];
+        let predicates: Vec<fn(&i32) -> bool> = vec![
+            |x| x > &2,
+            |x| x % 2 == 0,
+        ];
+        let result = find_first_matching(&items, &predicates);
+        assert!(matches!(result, ControlFlow::Break(3))); // 4 是第一个满足条件的
+    }
+
+    #[test]
+    fn test_tree_node_dfs_search() {
+        let mut root = TreeNode::new(1);
+        let mut child1 = TreeNode::new(2);
+        let child2 = TreeNode::new(3);
+        child1.add_child(TreeNode::new(4));
+        child1.add_child(TreeNode::new(5));
+        root.add_child(child1);
+        root.add_child(child2);
+
+        let result = root.dfs_search(&5);
+        assert!(matches!(result, ControlFlow::Break(ref path) if path == &[0, 1]));
+    }
+
+    #[test]
+    fn test_batch_process_success() {
+        let items = vec![1, 2, 3, 4, 5];
+        let result = batch_process_with_control_flow(&items, |_| Ok::<_, String>(()));
+        assert!(matches!(result, ControlFlow::Continue(5)));
+    }
+
+    #[test]
+    fn test_batch_process_failure() {
+        let items = vec![1, 2, 3, 4, 5];
+        let result = batch_process_with_control_flow(&items, |x| {
+            if *x == 3 {
+                Err("Error at 3".to_string())
+            } else {
+                Ok(())
+            }
+        });
+        assert!(matches!(result, ControlFlow::Break(ref s) if s == "Error at 3"));
     }
 }

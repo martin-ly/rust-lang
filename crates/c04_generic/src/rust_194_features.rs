@@ -780,6 +780,48 @@ where
     const ALIGN: usize = std::mem::align_of::<T>();
 }
 
+// ==================== Rust 1.94 真实特性: ControlFlow ====================
+
+use std::ops::ControlFlow;
+
+/// 搜索二维数组，找到目标时提前退出
+pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
+    for (i, row) in matrix.iter().enumerate() {
+        for (j, &val) in row.iter().enumerate() {
+            if val == target {
+                return ControlFlow::Break((i, j));
+            }
+        }
+    }
+    ControlFlow::Continue(())
+}
+
+/// 数据验证管道
+pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
+    if data.is_empty() {
+        return ControlFlow::Break("数据不能为空".to_string());
+    }
+    if data.len() < 8 {
+        return ControlFlow::Break("数据长度至少为 8".to_string());
+    }
+    ControlFlow::Continue(())
+}
+
+/// 批量处理带错误控制
+pub fn batch_process<T, E>(
+    items: &[T],
+    processor: impl Fn(&T) -> Result<(), E>,
+) -> ControlFlow<E, usize> {
+    let mut processed = 0;
+    for item in items {
+        match processor(item) {
+            Ok(()) => processed += 1,
+            Err(e) => return ControlFlow::Break(e),
+        }
+    }
+    ControlFlow::Continue(processed)
+}
+
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 泛型编程特性
@@ -1139,5 +1181,26 @@ mod tests {
         let info = get_rust_194_generic_info();
         assert!(info.contains("Rust 1.94.0"));
         assert!(info.contains("泛型"));
+    }
+
+    // ==================== ControlFlow 测试 ====================
+
+    #[test]
+    fn test_control_flow_matrix_search() {
+        let matrix = vec![vec![1, 2], vec![3, 4]];
+        assert!(matches!(search_in_matrix(&matrix, 3), ControlFlow::Break((1, 0))));
+    }
+
+    #[test]
+    fn test_control_flow_validate() {
+        assert!(matches!(validate_data("valid123"), ControlFlow::Continue(())));
+        assert!(matches!(validate_data(""), ControlFlow::Break(_)));
+    }
+
+    #[test]
+    fn test_control_flow_batch() {
+        let items = vec![1, 2, 3];
+        let result = batch_process(&items, |_| Ok::<_, String>(()));
+        assert!(matches!(result, ControlFlow::Continue(3)));
     }
 }
