@@ -145,14 +145,23 @@ impl<T> LazyCache<T> {
     }
 
     /// 强制获取可变引用（如果未初始化则使用默认值）- 对应 Rust 1.94 LazyCell::force_mut()
+    ///
+    /// # Panics
+    /// 如果初始化函数 `f` 返回的值无法存储到 cell 中（这种情况不应该发生，
+    /// 因为我们已经检查 cell 未初始化）
     pub fn force_get_mut<F>(&mut self, f: F) -> &mut T
     where
         F: FnOnce() -> T,
     {
-        if self.cell.get().is_none() {
+        // 使用 get_or_init 确保初始化，然后通过 get_mut 获取可变引用
+        // 这是一个安全的模式，因为我们知道 cell 已经被初始化
+        if !self.is_initialized() {
+            // set 返回 Err 只有当 cell 已经被初始化时
+            // 由于我们检查了 is_initialized()，这里不应该失败
             let _ = self.cell.set(f());
         }
-        self.cell.get_mut().unwrap()
+        self.cell.get_mut()
+            .expect("cell should be initialized after setting")
     }
 
     /// 检查是否已初始化
@@ -368,7 +377,10 @@ impl<T> Deref for SmartPtrChain<T> {
     type Target = T;
 
     fn deref(&self) -> &T {
-        self.inner.as_ref().unwrap()
+        // SAFETY: inner 在 new() 中被初始化为 Some，只有在 into_raw_parts 后才变为 None
+        // 而 into_raw_parts 会消耗 self，所以通过引用访问时 inner 总是 Some
+        self.inner.as_ref()
+            .expect("SmartPtrChain inner value should always be Some when accessed by reference")
     }
 }
 
@@ -389,19 +401,31 @@ impl<T, F: FnOnce(T)> ScopeGuard<T, F> {
     }
 
     /// 获取可变引用（保留析构函数）
+    ///
+    /// # Panics
+    /// 如果 value 已经被 `complete()` 方法取走
     pub fn get_mut(&mut self) -> &mut T {
-        self.value.as_mut().unwrap()
+        self.value.as_mut()
+            .expect("ScopeGuard value should not be taken before calling get_mut")
     }
 
     /// 获取不可变引用
+    ///
+    /// # Panics
+    /// 如果 value 已经被 `complete()` 方法取走
     pub fn get(&self) -> &T {
-        self.value.as_ref().unwrap()
+        self.value.as_ref()
+            .expect("ScopeGuard value should not be taken before calling get")
     }
 
     /// 主动完成并禁用析构函数
+    ///
+    /// # Panics
+    /// 如果 value 已经被取走（重复调用 complete）
     pub fn complete(mut self) -> T {
         self.on_drop = None;
-        self.value.take().unwrap()
+        self.value.take()
+            .expect("ScopeGuard value should exist when complete is called")
     }
 }
 
@@ -416,11 +440,15 @@ impl<T, F: FnOnce(T)> Drop for ScopeGuard<T, F> {
 // ==================== 5. 零拷贝字符串处理 ====================
 
 /// Rust 1.94 零拷贝字符串处理模式
+/// 
+/// 提供从 String 的零拷贝转换，同时保持 UTF-8 安全保证。
+/// 由于 data 总是从有效的 String 创建，因此可以安全地使用 unchecked 方法。
 pub struct ZeroCopyString {
     data: Vec<u8>,
 }
 
 impl ZeroCopyString {
+    /// 创建空的 ZeroCopyString
     pub fn new() -> Self {
         Self { data: Vec::new() }
     }
@@ -432,24 +460,60 @@ impl ZeroCopyString {
     }
 
     /// 从 String 获取原始部件（零拷贝）
+    /// 
+    /// # Safety Invariant
+    /// 由于 data 来自有效的 String，我们知道它总是有效的 UTF-8
     pub fn from_string(s: String) -> Self {
-        // 使用 String::into_bytes 获取 Vec<u8>，然后分离
         let data = s.into_bytes();
         Self { data }
     }
 
+    /// 安全地尝试从 UTF-8 bytes 创建
+    /// 
+    /// 如果 bytes 不是有效的 UTF-8，返回 None
+    pub fn from_utf8(bytes: Vec<u8>) -> Option<Self> {
+        match String::from_utf8(bytes) {
+            Ok(s) => Some(Self::from_string(s)),
+            Err(_) => None,
+        }
+    }
+
     /// 转换为 String（零拷贝）
+    /// 
+    /// # Safety
+    /// 由于 data 总是从有效的 String 创建，这是安全的
     pub fn into_string(self) -> String {
-        // SAFETY: data 是有效的 UTF-8 字节
+        // SAFETY: data 是从有效 String 创建的 UTF-8 字节
         unsafe { String::from_utf8_unchecked(self.data) }
     }
 
+    /// 获取字符串切片
+    /// 
+    /// # Safety
+    /// 由于 data 总是从有效的 String 创建，这是安全的
     pub fn as_str(&self) -> &str {
+        // SAFETY: data 是从有效 String 创建的 UTF-8 字节
         unsafe { std::str::from_utf8_unchecked(&self.data) }
+    }
+
+    /// 安全地尝试获取字符串切片
+    /// 
+    /// 如果内部数据不是有效的 UTF-8，返回 None
+    /// 正常情况下不会发生，因为 data 来自 String
+    pub fn try_as_str(&self) -> Option<&str> {
+        std::str::from_utf8(&self.data).ok()
     }
 
     pub fn as_bytes(&self) -> &[u8] {
         &self.data
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.data.is_empty()
+    }
+
+    pub fn len(&self) -> usize {
+        self.data.len()
     }
 }
 
@@ -1201,5 +1265,94 @@ mod tests {
             }
         });
         assert!(matches!(result, ControlFlow::Break(ref s) if s == "Error at 3"));
+    }
+
+    // ==================== 反例和边界测试 ====================
+
+    /// 测试 ZeroCopyString 对无效 UTF-8 的处理
+    ///
+    /// 验证当从无效 UTF-8 字节创建时，from_utf8 返回 None
+    #[test]
+    fn test_zero_copy_string_invalid_utf8() {
+        // 无效 UTF-8 序列: 0x80 单独出现是非法的
+        let invalid_utf8 = vec![0x80, 0x81, 0x82];
+        let result = ZeroCopyString::from_utf8(invalid_utf8);
+        assert!(result.is_none(), "无效 UTF-8 应该返回 None");
+    }
+
+    /// 测试 ScopeGuard complete 方法的行为
+    ///
+    /// 验证 complete 方法正确取出值并禁用析构函数
+    #[test]
+    fn test_scope_guard_complete_behavior() {
+        let mut dropped = false;
+        
+        // 测试 complete 方法
+        {
+            let guard = ScopeGuard::new(42, |_| {
+                dropped = true;
+            });
+            
+            // complete 应该返回值
+            let value = guard.complete();
+            assert_eq!(value, 42);
+            
+            // complete 后析构函数不应执行
+            // （guard 在这里被消耗，不会被 drop）
+        }
+        
+        // 由于使用了 complete，析构函数不会执行
+        assert!(!dropped, "使用 complete 后析构函数不应执行");
+        
+        // 测试正常 drop 会执行析构函数
+        {
+            let guard2 = ScopeGuard::new(100, |_| {
+                dropped = true;
+            });
+            // guard2 在这里被 drop，会执行析构函数
+            let _ = guard2.get();
+        }
+        
+        assert!(dropped, "正常 drop 应该执行析构函数");
+    }
+
+    /// 测试 LazyCache 重复初始化错误
+    ///
+    /// 验证一旦设置值后，再次设置会返回错误
+    #[test]
+    fn test_lazy_cache_reinitialize() {
+        let cache = LazyCache::<i32>::new();
+        
+        // 第一次设置应该成功
+        assert!(cache.set(42).is_ok());
+        assert_eq!(cache.try_get(), Some(&42));
+        
+        // 第二次设置应该失败，返回 Err(值)
+        let result = cache.set(100);
+        assert!(result.is_err());
+        assert_eq!(result.unwrap_err(), 100);
+        
+        // 值应该保持不变
+        assert_eq!(cache.try_get(), Some(&42));
+    }
+
+    /// 测试 SafeBuffer 缓冲区溢出保护
+    ///
+    /// 验证 write_slice 不会写入超过容量的数据
+    #[test]
+    fn test_safe_buffer_overwrite() {
+        let mut buf = SafeBuffer::with_capacity(5);
+        
+        // 写入超过容量的数据
+        let written = buf.write_slice(&[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        
+        // 只应该写入 5 个元素（容量限制）
+        assert_eq!(written, 5);
+        assert_eq!(buf.len(), 5);
+        assert_eq!(buf.initialized_slice(), &[1, 2, 3, 4, 5]);
+        
+        // 尝试继续写入（应该失败或写入 0）
+        let written2 = buf.write_slice(&[11, 12, 13]);
+        assert_eq!(written2, 0, "缓冲区已满时不应再写入");
     }
 }

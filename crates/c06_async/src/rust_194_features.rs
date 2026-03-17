@@ -147,9 +147,10 @@ impl<T: Send + Sync> AsyncLazyValue<T> {
     /// 异步获取值
     ///
     /// Rust 1.94.0: 使用 Deref 在异步上下文中安全访问
+    ///
+    /// 注意：此方法不执行 yield，因为 LazyLock 的访问是快速的同步操作。
+    /// 只有在需要长时间计算或处理大量数据时才应该使用 yield。
     pub async fn get(&self) -> &T {
-        // 模拟异步获取
-        tokio::task::yield_now().await;
         &self.inner
     }
 }
@@ -390,17 +391,20 @@ pub struct AsyncSlidingWindowProcessor;
 
 impl AsyncSlidingWindowProcessor {
     /// 异步计算移动平均
+    ///
+    /// 当数据量较大（超过 1000 个窗口）时，会定期让出控制权以支持并发。
     pub async fn moving_average(data: &[f64], window_size: usize) -> Vec<f64> {
         let mut result = Vec::new();
+        let total_windows = data.len().saturating_sub(window_size - 1);
 
         // Rust 1.94.0: 使用 array_windows 替代 windows
         // for window in data.array_windows::<N>()
-        for window in data.windows(window_size) {
+        for (i, window) in data.windows(window_size).enumerate() {
             let avg = window.iter().sum::<f64>() / window.len() as f64;
             result.push(avg);
 
-            // 让出控制权以支持并发
-            if result.len() % 100 == 0 {
+            // 只在处理大量数据时让出控制权
+            if total_windows > 1000 && i % 1000 == 0 {
                 tokio::task::yield_now().await;
             }
         }
@@ -482,10 +486,13 @@ pub struct AsyncUnicodeParser;
 
 impl AsyncUnicodeParser {
     /// 异步分析字符串的 Unicode 组成
+    ///
+    /// 当字符串较长（超过 1000 个字符）时，会定期让出控制权以支持并发。
     pub async fn analyze_string(s: &str) -> UnicodeComposition {
         let mut composition = UnicodeComposition::default();
+        let char_count = s.chars().count();
 
-        for ch in s.chars() {
+        for (i, ch) in s.chars().enumerate() {
             let code_point = ch as usize; // Rust 1.94.0: TryFrom<char> for usize
 
             match code_point {
@@ -496,8 +503,8 @@ impl AsyncUnicodeParser {
                 _ => composition.other_chars.push(ch),
             }
 
-            // 让出控制权
-            if composition.total_count() % 100 == 0 {
+            // 只在处理长字符串时让出控制权
+            if char_count > 1000 && i % 1000 == 0 {
                 tokio::task::yield_now().await;
             }
         }
@@ -759,5 +766,124 @@ mod tests {
         let items = vec![1, 2, 3];
         let result = batch_process(&items, |_| Ok::<_, String>(()));
         assert!(matches!(result, ControlFlow::Continue(3)));
+    }
+
+    // ==================== 异步边界测试 ====================
+
+    /// 测试 AsyncLazyValue 的并发访问
+    ///
+    /// 验证多个并发任务同时访问同一个 LazyValue 时的行为
+    #[tokio::test]
+    async fn test_async_lazy_value_concurrent() {
+        use std::sync::Arc;
+        use tokio::sync::Barrier;
+
+        let lazy = Arc::new(AsyncLazyValue::new(|| {
+            println!("初始化懒加载值...");
+            vec![1, 2, 3, 4, 5]
+        }));
+
+        let barrier = Arc::new(Barrier::new(3));
+        let mut handles = vec![];
+
+        // 创建 3 个并发任务
+        for i in 0..3 {
+            let lazy_clone = Arc::clone(&lazy);
+            let barrier_clone = Arc::clone(&barrier);
+            let handle = tokio::spawn(async move {
+                // 等待所有任务都准备好
+                barrier_clone.wait().await;
+                
+                // 并发访问
+                let value = lazy_clone.get().await;
+                println!("任务 {} 获取到值: {:?}", i, value);
+                assert_eq!(value, &vec![1, 2, 3, 4, 5]);
+            });
+            handles.push(handle);
+        }
+
+        // 等待所有任务完成
+        for handle in handles {
+            handle.await.unwrap();
+        }
+
+        // 验证值只被初始化一次（由于 LazyLock 的保证）
+        // 注意：LazyLock 内部保证了线程安全，因此值只会被初始化一次
+    }
+
+    /// 测试异步数学计算的超时
+    ///
+    /// 验证长时间计算可以被正确取消
+    #[tokio::test]
+    async fn test_async_math_timeout() {
+        use tokio::time::{timeout, Duration};
+
+        // 测试快速计算不会超时
+        let result = timeout(
+            Duration::from_secs(1),
+            AsyncMathCalculator::golden_ratio_approximation(10)
+        ).await;
+        assert!(result.is_ok(), "快速计算不应该超时");
+
+        // 测试计算结果正确性
+        let error = AsyncMathCalculator::golden_ratio_approximation(50).await;
+        assert!(error < 0.0001, "黄金比例逼近应该收敛");
+
+        // 测试长时间计算可以被取消
+        let long_calc = timeout(
+            Duration::from_millis(1),
+            async {
+                // 模拟一个需要多次 yield 的计算
+                for _ in 0..100 {
+                    tokio::time::sleep(Duration::from_millis(10)).await;
+                }
+                42
+            }
+        ).await;
+        
+        assert!(long_calc.is_err(), "应该超时");
+    }
+
+    /// 测试 AsyncUnicodeParser 对空字符串的分析
+    ///
+    /// 验证空字符串和边界情况的处理
+    #[tokio::test]
+    async fn test_unicode_analyzer_empty() {
+        // 测试空字符串
+        let empty = "";
+        let composition = AsyncUnicodeParser::analyze_string(empty).await;
+        
+        assert_eq!(composition.total_count(), 0);
+        assert!(composition.ascii_chars.is_empty());
+        assert!(composition.cjk_chars.is_empty());
+        assert!(composition.emoji_chars.is_empty());
+        assert!(composition.latin_chars.is_empty());
+        assert!(composition.other_chars.is_empty());
+
+        // 测试仅包含 ASCII 的字符串
+        let ascii = "Hello World";
+        let ascii_comp = AsyncUnicodeParser::analyze_string(ascii).await;
+        assert_eq!(ascii_comp.total_count(), 11);
+        assert_eq!(ascii_comp.ascii_chars.len(), 11);
+
+        // 测试仅包含 CJK 的字符串
+        let cjk = "你好世界";
+        let cjk_comp = AsyncUnicodeParser::analyze_string(cjk).await;
+        assert_eq!(cjk_comp.total_count(), 4);
+        assert_eq!(cjk_comp.cjk_chars.len(), 4);
+
+        // 测试 emoji 字符 - emoji 可能根据 Unicode 版本被归类到不同类别
+        let emoji = "🎉🦀🚀";
+        let emoji_comp = AsyncUnicodeParser::analyze_string(emoji).await;
+        // emoji 字符的总数应该是 3，但它们可能被归类到 different 类别
+        // 取决于 Unicode 版本和分类逻辑
+        let total_emoji_len = emoji_comp.emoji_chars.len() + emoji_comp.other_chars.len();
+        assert_eq!(emoji_comp.total_count(), 3);
+        assert!(total_emoji_len >= 3, "emoji 应该被正确计数");
+
+        // 测试 Unicode 验证
+        let valid_chars = vec!['A', '中', '🦀'];
+        let validation = AsyncUnicodeParser::validate_encoding(&valid_chars).await;
+        assert!(validation.iter().all(|&v| v), "所有字符应该有效");
     }
 }

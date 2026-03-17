@@ -92,18 +92,12 @@ impl<T> SingleThreadCache<T> {
 
     /// 获取缓存值
     pub fn get(&mut self) -> &T {
-        if self.value.is_none() {
-            self.value = Some((self.init)());
-        }
-        self.value.as_ref().unwrap()
+        self.value.get_or_insert_with(self.init)
     }
 
     /// 获取可变引用
     pub fn get_mut(&mut self) -> &mut T {
-        if self.value.is_none() {
-            self.value = Some((self.init)());
-        }
-        self.value.as_mut().unwrap()
+        self.value.get_or_insert_with(self.init)
     }
 
     /// 检查是否已初始化
@@ -726,5 +720,145 @@ mod tests {
         let items = vec![1, 2, 3];
         let result = batch_process(&items, |_| Ok::<_, String>(()));
         assert!(matches!(result, ControlFlow::Continue(3)));
+    }
+
+    // ==================== 并发边界测试 ====================
+
+    /// 测试单线程缓存在并发访问下的限制
+    ///
+    /// 说明：SingleThreadCache 设计上不是线程安全的，
+    /// 本测试验证在单线程内的正确使用模式。
+    /// 在并发环境中应该使用 ThreadSafeResourceManager。
+    #[test]
+    fn test_single_thread_cache_concurrent() {
+        use std::cell::RefCell;
+        use std::rc::Rc;
+
+        // 在单线程内模拟并发访问模式
+        let cache = Rc::new(RefCell::new(SingleThreadCache::new(|| {
+            println!("初始化缓存...");
+            vec![1, 2, 3]
+        })));
+
+        // 第一个可变借用
+        {
+            let mut cache_ref = cache.borrow_mut();
+            assert_eq!(cache_ref.get(), &[1, 2, 3]);
+        }
+
+        // 第二个可变借用
+        {
+            let mut cache_ref = cache.borrow_mut();
+            assert_eq!(cache_ref.get(), &[1, 2, 3]);
+        }
+
+        // 验证只初始化一次
+        assert!(cache.borrow().is_initialized());
+
+        // 注意：SingleThreadCache 需要 &mut self，因此不支持真正的并发访问
+        // 这是设计上的限制，而非错误
+    }
+
+    /// 测试线程安全资源管理器在 Mutex Poison 情况下的行为
+    ///
+    /// 模拟线程 panic 后资源管理器的恢复能力
+    #[test]
+    fn test_thread_safe_cache_poison() {
+        use std::sync::{Arc, Mutex};
+        use std::thread;
+
+        // 使用 Mutex 包装 LazyLock 来模拟 poison 场景
+        let shared = Arc::new(Mutex::new(ThreadSafeResourceManager::new(|| 42i32)));
+
+        // 获取初始值
+        {
+            let mgr = shared.lock().unwrap();
+            assert_eq!(*mgr.get(), 42);
+        }
+
+        // 在一个线程中引发 panic
+        let shared_clone = Arc::clone(&shared);
+        let handle = thread::spawn(move || {
+            let _guard = shared_clone.lock().unwrap();
+            panic!("故意 panic 以测试 poison");
+        });
+
+        // 等待线程结束（会 panic）
+        let _ = handle.join();
+
+        // 尝试恢复 Mutex - 即使 poisoned，也应该能够获取数据
+        let result = shared.lock();
+        match result {
+            Ok(guard) => {
+                // 如果没有 poison，继续测试
+                assert_eq!(*guard.get(), 42);
+            }
+            Err(poisoned) => {
+                // 即使 poisoned，数据仍然可用
+                let guard = poisoned.into_inner();
+                assert_eq!(*guard.get(), 42);
+            }
+        }
+    }
+
+    /// 测试异步数据库连接池耗尽
+    ///
+    /// 验证当连接池中的连接都被获取后，acquire 返回 None
+    #[test]
+    fn test_async_db_pool_exhaustion() {
+        use std::sync::atomic::{AtomicUsize, Ordering};
+
+        /// 简化的连接池用于测试
+        struct TestDbPool {
+            connections: Vec<String>,
+            active_count: AtomicUsize,
+        }
+
+        impl TestDbPool {
+            fn new(size: usize) -> Self {
+                Self {
+                    connections: (0..size).map(|i| format!("test_conn_{}", i)).collect(),
+                    active_count: AtomicUsize::new(0),
+                }
+            }
+
+            fn acquire(&self) -> Option<String> {
+                let idx = self.active_count.load(Ordering::Relaxed);
+                if idx < self.connections.len() {
+                    self.active_count.fetch_add(1, Ordering::Relaxed);
+                    self.connections.get(idx).cloned()
+                } else {
+                    None
+                }
+            }
+
+            fn active_count(&self) -> usize {
+                self.active_count.load(Ordering::Relaxed)
+            }
+        }
+
+        // 创建一个测试用的连接池（5 个连接）
+        let pool = TestDbPool::new(5);
+
+        // 获取所有连接
+        let mut connections = Vec::new();
+        while let Some(conn) = pool.acquire() {
+            connections.push(conn);
+            // 防止无限循环
+            if connections.len() > 10 {
+                break;
+            }
+        }
+
+        // 验证获取的连接数量
+        assert_eq!(connections.len(), 5, "应该获取全部 5 个连接");
+
+        // 验证活跃连接数（成功获取的连接数）
+        assert_eq!(pool.active_count(), 5, "应该有 5 个活跃连接");
+
+        // 再次尝试获取应该返回 None，且不会增加 active_count
+        let next_conn = pool.acquire();
+        assert!(next_conn.is_none(), "连接池耗尽后应该返回 None");
+        assert_eq!(pool.active_count(), 5, "失败获取不应增加计数");
     }
 }

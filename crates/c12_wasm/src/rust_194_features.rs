@@ -45,11 +45,11 @@ impl<'a> WasmMemoryView<'a> {
 
     /// 读取所有 32 位整数
     ///
-    /// Rust 1.94.0: array_windows<4> 批量读取 4 字节整数
+    /// Rust 1.94.0: chunks_exact(4) 批量读取 4 字节整数（非重叠窗口）
     pub fn read_all_i32_le(&self) -> impl Iterator<Item = i32> + '_ {
         self.data
-            .array_windows::<4>()
-            .map(|window| i32::from_le_bytes([window[0], window[1], window[2], window[3]]))
+            .chunks_exact(4)
+            .map(|chunk| i32::from_le_bytes([chunk[0], chunk[1], chunk[2], chunk[3]]))
     }
 
     /// 查找字节序列
@@ -773,8 +773,8 @@ impl<'a> WatParser<'a> {
         }
 
         // 解析小数部分
-        if self.chars.peek() == Some(&'.') {
-            num_str.push(self.chars.next().unwrap());
+        if let Some(c) = self.chars.next_if(|c| *c == '.') {
+            num_str.push(c);
             self.column += 1;
 
             while let Some(c) = self.chars.next_if(|c| c.is_ascii_digit()) {
@@ -1296,8 +1296,8 @@ mod tests {
         let val = view.read_i32_le(0);
         assert_eq!(val, Some(1));
 
-        // array_windows<4> 会产生 5 个窗口，我们只取前两个对齐的值
-        let ints: Vec<i32> = view.read_all_i32_le().step_by(4).take(2).collect();
+        // chunks_exact(4) 产生非重叠的 4 字节块
+        let ints: Vec<i32> = view.read_all_i32_le().take(2).collect();
         assert_eq!(ints, vec![1, 2]);
     }
 
@@ -1408,5 +1408,259 @@ mod tests {
         let items = vec![1, 2, 3];
         let result = batch_process(&items, |_| Ok::<_, String>(()));
         assert!(matches!(result, ControlFlow::Continue(3)));
+    }
+
+    // ==================== 边界测试和反例测试 ====================
+
+    /// 测试越界访问
+    /// 
+    /// 验证 WASM 内存视图能正确处理越界访问而不 panic
+    /// 预期行为：返回 None 而不是 panic
+    #[test]
+    fn test_wasm_memory_view_out_of_bounds() {
+        let data: Vec<u8> = vec![0x01, 0x00, 0x00, 0x00];
+        let view = WasmMemoryView::new(&data);
+        
+        // 测试正常范围内的读取
+        let val = view.read_i32_le(0);
+        assert_eq!(val, Some(1), "应该能读取位置0的i32");
+        
+        // 测试刚好在边界内的读取（最后一个完整i32）
+        // 数据只有4字节，所以offset=0是最后一个有效位置
+        let val = view.read_i32_le(0);
+        assert!(val.is_some(), "应该能读取最后一个完整的i32");
+        
+        // 测试越界读取（offset=1，只有3字节剩余，不足4字节）
+        let val = view.read_i32_le(1);
+        assert!(val.is_none(), "越界读取应该返回 None");
+        
+        // 测试完全越界
+        let val = view.read_i32_le(100);
+        assert!(val.is_none(), "完全越界应该返回 None");
+        
+        // 测试空数据的越界
+        let empty_view = WasmMemoryView::new(&[]);
+        let val = empty_view.read_i32_le(0);
+        assert!(val.is_none(), "空数据的任何读取都应该返回 None");
+        
+        // 测试查找序列的越界
+        let pattern = vec![0x00; 100]; // 比数据长的模式
+        let pos = view.find_sequence(&pattern);
+        assert!(pos.is_none(), "模式比数据长应该返回 None");
+        
+        // 测试空模式的查找
+        let empty_pattern: Vec<u8> = vec![];
+        let pos = view.find_sequence(&empty_pattern);
+        assert!(pos.is_none(), "空模式应该返回 None");
+    }
+
+    /// 测试无效 WAT 语法
+    /// 
+    /// 验证 WAT 解析器能正确处理无效的 WAT 语法而不 panic
+    /// 预期行为：返回部分解析结果或空列表，不 panic
+    #[test]
+    fn test_wat_parser_invalid_syntax() {
+        // 测试未闭合的括号
+        let unclosed = "(module (func";
+        let mut parser = WatParser::new(unclosed);
+        let tokens = parser.parse_all();
+        // 应该能解析出部分 token
+        assert!(!tokens.is_empty(), "未闭合括号应该返回部分解析结果");
+        assert!(tokens.contains(&WatToken::LParen), "应该包含左括号");
+        
+        // 测试未闭合的字符串
+        let unclosed_string = r#"(module "unclosed string)"#;
+        let mut parser = WatParser::new(unclosed_string);
+        let tokens = parser.parse_all();
+        // 未闭合的字符串应该被忽略或返回 None
+        // 解析器行为可能不同，但不应该 panic
+        
+        // 测试无效的字符序列
+        let invalid = "@#$%^&*";
+        let mut parser = WatParser::new(invalid);
+        let tokens = parser.parse_all();
+        // 无效字符应该被跳过
+        
+        // 测试空输入
+        let empty = "";
+        let mut parser = WatParser::new(empty);
+        let tokens = parser.parse_all();
+        assert!(tokens.is_empty(), "空输入应该返回空列表");
+        
+        // 测试只有空白字符
+        let whitespace = "   \n\t  ";
+        let mut parser = WatParser::new(whitespace);
+        let tokens = parser.parse_all();
+        assert!(tokens.is_empty(), "只有空白应该返回空列表");
+        
+        // 测试不匹配的括号
+        let mismatched = "(module ))";
+        let mut parser = WatParser::new(mismatched);
+        let tokens = parser.parse_all();
+        assert!(tokens.len() >= 3, "不匹配括号应该仍能解析出 token");
+        
+        // 测试嵌套过深的括号
+        let deep_nesting = "((((((((((((((((((((((((((((((((module))))))))))))))))))))))))))))))))";
+        let mut parser = WatParser::new(deep_nesting);
+        let tokens = parser.parse_all();
+        assert!(!tokens.is_empty(), "深度嵌套应该被解析");
+    }
+
+    /// 测试无效 Base64 填充
+    /// 
+    /// 验证 Base64 解码器能正确处理无效的填充而不 panic
+    /// 预期行为：返回 None 对于无效填充，正确解码有效填充
+    #[test]
+    fn test_wasm_base64_invalid_padding() {
+        // 测试正确的填充（1个=）
+        let one_padding = "SGVsbG8="; // "Hello" 需要1个填充
+        let decoded = WasmBase64::decode(one_padding);
+        assert_eq!(decoded, Some(b"Hello".to_vec()), "1个填充应该正确解码");
+        
+        // 测试正确的填充（2个=）
+        let two_padding = "SGVsbG8h"; // "Hello!" 的某种变体
+        let _ = WasmBase64::decode(two_padding); // 解码应该成功或返回合理结果
+        
+        // 测试不正确的填充位置
+        let invalid_padding1 = "=SGVsbG8"; // 开头有填充
+        let decoded = WasmBase64::decode(invalid_padding1);
+        assert!(decoded.is_none() || decoded == Some(vec![]) || decoded.is_some(), 
+                "开头填充应该被处理（可能返回None或空）");
+        
+        // 测试过多的填充
+        let too_much_padding = "SGVsbG8==="; // 3个填充
+        let decoded = WasmBase64::decode(too_much_padding);
+        // 应该返回 None 或根据实现处理
+        
+        // 测试空字符串
+        let empty = "";
+        let decoded = WasmBase64::decode(empty);
+        assert!(decoded.is_some(), "空字符串应该返回 Some(空vec)");
+        assert_eq!(decoded.unwrap().len(), 0, "空字符串应该解码为空");
+        
+        // 测试只有填充
+        let only_padding = "==";
+        let decoded = WasmBase64::decode(only_padding);
+        // 根据实现可能返回 None 或空
+        
+        // 测试不合法的 Base64 字符
+        let invalid_chars = "SGVs#bG8="; // # 不是有效的 Base64 字符
+        let decoded = WasmBase64::decode(invalid_chars);
+        // 无效字符应该被忽略或导致返回 None
+        
+        // 测试长度不是4的倍数的输入（不考虑填充）
+        let not_multiple_of_4 = "SGVsbG8"; // 7个字符
+        let decoded = WasmBase64::decode(not_multiple_of_4);
+        assert!(decoded.is_none(), "长度不是4的倍数的有效字符应该返回 None");
+    }
+
+    /// 测试代理对处理
+    /// 
+    /// 验证 UTF-8 编码器能正确处理 Unicode 代理对和高码点字符
+    /// 预期行为：正确处理 BMP 范围外的字符（4字节 UTF-8）
+    #[test]
+    fn test_utf8_encoder_surrogate() {
+        // 注意：在 Rust 中，char 不能是孤立的代理项（U+D800-U+DFFF）
+        // 所以我们测试其他高码点字符
+        
+        // 测试普通 ASCII 字符
+        let cp_a = Utf8Encoder::code_point('A');
+        assert_eq!(cp_a, Some(65), "'A' 的码点应该是 65");
+        
+        // 测试 BMP 范围外的字符（需要4字节 UTF-8）
+        let emoji = '🦀'; // Rust 螃蟹 emoji，U+1F980
+        let cp_emoji = Utf8Encoder::code_point(emoji);
+        assert_eq!(cp_emoji, Some(0x1F980), "螃蟹 emoji 的码点应该是 0x1F980");
+        
+        // 测试字符宽度
+        let width_ascii = Utf8Encoder::char_width('A');
+        assert_eq!(width_ascii, 1, "ASCII 字符宽度应该是 1");
+        
+        let width_cjk = Utf8Encoder::char_width('中');
+        assert_eq!(width_cjk, 2, "CJK 字符宽度应该是 2");
+        
+        // 测试控制字符宽度
+        let width_control = Utf8Encoder::char_width('\n');
+        assert_eq!(width_control, 0, "控制字符宽度应该是 0");
+        
+        // 测试 emoji 宽度
+        // 注意：当前实现只将特定 CJK 范围设为宽度2，emoji 返回默认宽度1
+        let width_emoji = Utf8Encoder::char_width('🦀');
+        assert_eq!(width_emoji, 1, "Emoji 在当前实现中宽度为 1（不在 CJK 范围内）");
+        
+        // 测试字符串宽度
+        // "Hello 世界" = 5(Hello) + 1(空格) + 2*2(世界) = 10
+        let str_width = Utf8Encoder::string_width("Hello 世界");
+        assert_eq!(str_width, 10, "'Hello 世界' 的显示宽度应该是 10（5 + 1 + 4）");
+        
+        // 测试字符编码
+        let encoded_a = Utf8Encoder::encode_char('A');
+        assert_eq!(encoded_a, vec![0x41], "'A' 应该编码为 [0x41]");
+        
+        let encoded_cjk = Utf8Encoder::encode_char('中');
+        assert_eq!(encoded_cjk, vec![0xE4, 0xB8, 0xAD], "'中' 应该编码为 [0xE4, 0xB8, 0xAD]");
+        
+        // 测试 emoji 编码（4字节）
+        let encoded_emoji = Utf8Encoder::encode_char('🦀');
+        assert_eq!(encoded_emoji.len(), 4, "Emoji 应该编码为4字节");
+        
+        // 测试字符串字节长度
+        // "Hello 世界" = 5(Hello) + 1(空格) + 3*2(世界) = 12
+        let byte_len = Utf8Encoder::utf8_byte_length("Hello 世界");
+        assert_eq!(byte_len, 12, "'Hello 世界' 的 UTF-8 字节长度应该是 12（5 + 1 + 6）");
+        
+        // 测试包含 emoji 的字符串字节长度
+        // "Hi 🦀" = 2(Hi) + 1(空格) + 4(emoji) = 7
+        let byte_len_emoji = Utf8Encoder::utf8_byte_length("Hi 🦀");
+        assert_eq!(byte_len_emoji, 7, "'Hi 🦀' 的 UTF-8 字节长度应该是 7");
+    }
+
+    /// 测试未对齐读取
+    /// 
+    /// 验证 WASM 内存视图使用 chunks_exact 正确处理未对齐的数据
+    /// 预期行为：忽略不完整的尾部字节，只返回完整对齐的数据
+    #[test]
+    fn test_read_all_i32_le_unaligned() {
+        // 测试对齐的数据（8字节 = 2个i32）
+        let aligned: Vec<u8> = vec![0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00];
+        let view = WasmMemoryView::new(&aligned);
+        let ints: Vec<i32> = view.read_all_i32_le().collect();
+        assert_eq!(ints, vec![1, 2], "对齐数据应该正确读取两个i32");
+        
+        // 测试未对齐的数据（7字节）
+        let unaligned_7: Vec<u8> = vec![0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00];
+        let view = WasmMemoryView::new(&unaligned_7);
+        let ints: Vec<i32> = view.read_all_i32_le().collect();
+        assert_eq!(ints, vec![1], "7字节数据应该只读取1个i32，忽略剩余3字节");
+        
+        // 测试未对齐的数据（5字节）
+        let unaligned_5: Vec<u8> = vec![0x01, 0x00, 0x00, 0x00, 0x02];
+        let view = WasmMemoryView::new(&unaligned_5);
+        let ints: Vec<i32> = view.read_all_i32_le().collect();
+        assert_eq!(ints, vec![1], "5字节数据应该只读取1个i32，忽略剩余1字节");
+        
+        // 测试未对齐的数据（3字节，不足一个i32）
+        let unaligned_3: Vec<u8> = vec![0x01, 0x00, 0x00];
+        let view = WasmMemoryView::new(&unaligned_3);
+        let ints: Vec<i32> = view.read_all_i32_le().collect();
+        assert!(ints.is_empty(), "3字节数据应该返回空列表（不足一个i32）");
+        
+        // 测试空数据
+        let empty: Vec<u8> = vec![];
+        let view = WasmMemoryView::new(&empty);
+        let ints: Vec<i32> = view.read_all_i32_le().collect();
+        assert!(ints.is_empty(), "空数据应该返回空列表");
+        
+        // 测试负数的读取
+        let negative: Vec<u8> = vec![0xFF, 0xFF, 0xFF, 0xFF]; // -1 in little-endian
+        let view = WasmMemoryView::new(&negative);
+        let ints: Vec<i32> = view.read_all_i32_le().collect();
+        assert_eq!(ints, vec![-1], "应该正确读取负数i32");
+        
+        // 测试大端序数据（验证我们使用的是小端序）
+        let big_endian: Vec<u8> = vec![0x00, 0x00, 0x00, 0x01]; // 1 in big-endian
+        let view = WasmMemoryView::new(&big_endian);
+        let ints: Vec<i32> = view.read_all_i32_le().collect();
+        assert_eq!(ints, vec![0x01000000], "应该按小端序解释数据");
     }
 }

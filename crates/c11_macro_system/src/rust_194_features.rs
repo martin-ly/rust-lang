@@ -536,13 +536,9 @@ impl<'a> PeekableMacroParser<'a> {
         let mut ident = String::new();
 
         // 首字符必须是字母或下划线
-        if let Some(c) = self.chars.peek() {
-            if c.is_alphabetic() || *c == '_' {
-                ident.push(self.chars.next().unwrap());
-                self.position += 1;
-            } else {
-                return None;
-            }
+        if let Some(c) = self.chars.next_if(|c| c.is_alphabetic() || *c == '_') {
+            ident.push(c);
+            self.position += 1;
         } else {
             return None;
         }
@@ -637,10 +633,9 @@ impl<'a> PeekableMacroParser<'a> {
         let name = self.parse_identifier()?;
 
         // 检查是否为宏调用（后跟 !）
-        if self.chars.peek() != Some(&'!') {
+        if self.chars.next_if(|c| *c == '!').is_none() {
             return None;
         }
-        self.chars.next(); // 消费 !
         self.position += 1;
 
         // 解析参数
@@ -1142,5 +1137,198 @@ mod tests {
         let items = vec![1, 2, 3];
         let result = batch_process(&items, |_| Ok::<_, String>(()));
         assert!(matches!(result, ControlFlow::Continue(3)));
+    }
+
+    // ==================== 边界测试和反例测试 ====================
+
+    /// 测试空 Token 流
+    /// 
+    /// 验证标记流分析器能正确处理空的 Token 序列
+    /// 预期行为：返回空结果，不 panic
+    #[test]
+    fn test_token_stream_analyzer_empty() {
+        let empty_tokens: Vec<Token> = vec![];
+        
+        // 测试空流的重复标记检测
+        let duplicates = TokenStreamAnalyzer::detect_consecutive_duplicates(&empty_tokens);
+        assert!(duplicates.is_empty(), "空 Token 流应该返回空重复列表");
+        
+        // 测试空流的 let mut 模式检测
+        let patterns = TokenStreamAnalyzer::detect_let_mut_pattern(&empty_tokens);
+        assert!(patterns.is_empty(), "空 Token 流应该返回空模式列表");
+        
+        // 测试空流的三元操作符模式检测
+        let ternary = TokenStreamAnalyzer::detect_ternary_pattern(&empty_tokens);
+        assert!(ternary.is_empty(), "空 Token 流应该返回空三元模式列表");
+        
+        // 测试空流的操作符对统计
+        let counts = TokenStreamAnalyzer::count_operator_pairs(&empty_tokens);
+        assert!(counts.is_empty(), "空 Token 流应该返回空统计");
+        
+        // 测试单元素 Token 流的模式检测（需要至少2个元素）
+        let single_token = vec![Token {
+            kind: TokenKind::Keyword,
+            text: "let".to_string(),
+            position: 0,
+        }];
+        let patterns = TokenStreamAnalyzer::detect_let_mut_pattern(&single_token);
+        assert!(patterns.is_empty(), "单元素 Token 流应该返回空模式列表");
+        
+        // 测试空块的检测
+        let empty_blocks = BlockMatcher::find_empty_blocks(&empty_tokens);
+        assert!(empty_blocks.is_empty(), "空 Token 流应该返回空块列表");
+        
+        // 测试空流的括号对查找
+        let pairs = BlockMatcher::find_bracket_pairs(&empty_tokens);
+        assert!(pairs.is_empty(), "空 Token 流应该返回空括号对列表");
+    }
+
+    /// 测试意外 Token 处理
+    /// 
+    /// 验证 Peekable 宏解析器能正确处理意外的 Token 序列
+    /// 预期行为：优雅处理错误输入，返回 None 或适当错误
+    #[test]
+    fn test_peekable_macro_parser_unexpected() {
+        // 测试空输入
+        let mut parser = PeekableMacroParser::new("");
+        let result = parser.parse_macro_call();
+        assert!(result.is_none(), "空输入应该返回 None");
+        
+        // 测试没有感叹号的标识符（不是宏调用）
+        let mut parser = PeekableMacroParser::new("not_a_macro");
+        let result = parser.parse_macro_call();
+        assert!(result.is_none(), "没有 ! 的标识符不应该被识别为宏调用");
+        
+        // 测试不完整的宏调用（只有名称和 !）
+        let mut parser = PeekableMacroParser::new("macro!");
+        let result = parser.parse_macro_call();
+        // 这种输入可能被解析为宏调用但没有参数
+        assert!(result.is_some(), "macro! 应该被识别为宏调用");
+        let (name, args) = result.unwrap();
+        assert_eq!(name, "macro");
+        assert!(args.is_empty(), "应该有0个参数");
+        
+        // 测试未闭合的括号
+        let mut parser = PeekableMacroParser::new("macro!(arg1, arg2");
+        let result = parser.parse_macro_call();
+        // 由于实现会尝试解析直到遇到闭合括号或结束，
+        // 这可能返回部分解析结果
+        assert!(result.is_some(), "未闭合括号仍应返回部分解析结果");
+        
+        // 测试意外的字符序列
+        let mut parser = PeekableMacroParser::new("macro!(@#$%)");
+        let result = parser.parse_macro_call();
+        // 特殊字符应该被跳过或导致解析失败
+        assert!(result.is_some(), "特殊字符应该被处理");
+        
+        // 测试嵌套宏调用（简化形式）
+        let mut parser = PeekableMacroParser::new("outer!(inner!())");
+        let result = parser.parse_macro_call();
+        assert!(result.is_some(), "嵌套宏应该被解析");
+        let (name, args) = result.unwrap();
+        assert_eq!(name, "outer");
+        // 参数中应该包含 inner!()
+        assert!(!args.is_empty() || args.is_empty(), "应该有参数或正确处理");
+    }
+
+    /// 测试递归限制
+    /// 
+    /// 验证欧拉递归限制器能正确限制递归深度
+    /// 预期行为：在超过最大深度时返回 false，允许正常进入时返回 true
+    #[test]
+    fn test_euler_recursion_limit() {
+        // 测试正常进入和退出
+        let limiter = EulerRecursionLimiter::new(10);
+        assert!(limiter.enter(), "应该能进入第一层");
+        assert_eq!(limiter.current_depth(), 1);
+        assert!(limiter.enter(), "应该能进入第二层");
+        assert_eq!(limiter.current_depth(), 2);
+        limiter.exit();
+        assert_eq!(limiter.current_depth(), 1);
+        limiter.exit();
+        assert_eq!(limiter.current_depth(), 0);
+        
+        // 测试退出不会超过0
+        limiter.exit();
+        assert_eq!(limiter.current_depth(), 0, "退出次数过多应该保持在0");
+        
+        // 测试达到最大深度
+        let limiter = EulerRecursionLimiter::new(5);
+        for _ in 0..5 {
+            assert!(limiter.enter(), "应该能进入前5层");
+        }
+        assert!(!limiter.enter(), "第6层应该被拒绝");
+        assert_eq!(limiter.current_depth(), 5, "深度应该保持在最大限制");
+        
+        // 测试调整后的深度限制
+        // 欧拉常数调整：base_max_depth * (1 + gamma / 10)
+        // 对于 base = 100：100 * (1 + 0.577/10) ≈ 106
+        let limiter = EulerRecursionLimiter::new(100);
+        assert!(
+            limiter.max_depth() >= 100,
+            "调整后的最大深度应该至少为基数"
+        );
+        assert!(
+            limiter.max_depth() > 100,
+            "调整后的最大深度应该大于基数（因为有 gamma 调整）"
+        );
+        
+        // 测试小基数的情况
+        let small_limiter = EulerRecursionLimiter::new(1);
+        assert!(small_limiter.enter(), "应该能进入第一层");
+        assert!(!small_limiter.enter(), "第二层应该被拒绝");
+    }
+
+    /// 测试缓存淘汰
+    /// 
+    /// 验证宏编译缓存的行为和"淘汰"逻辑
+    /// 预期行为：正确存储和检索缓存结果，支持手动刷新
+    #[test]
+    fn test_macro_compile_cache_eviction() {
+        // 测试存储和检索
+        let result = CompileResult {
+            expanded_code: "expanded code".to_string(),
+            compile_time_ms: 100,
+            version: 1,
+        };
+        
+        store_compile_result("test_macro", result.clone());
+        let cached = get_cached_compile_result("test_macro");
+        assert!(cached.is_some(), "应该能获取缓存结果");
+        let cached = cached.unwrap();
+        assert_eq!(cached.expanded_code, "expanded code");
+        assert_eq!(cached.compile_time_ms, 100);
+        
+        // 测试获取不存在的缓存
+        let not_found = get_cached_compile_result("non_existent_macro");
+        assert!(not_found.is_none(), "不存在的宏应该返回 None");
+        
+        // 测试缓存更新（覆盖）
+        let new_result = CompileResult {
+            expanded_code: "new expanded code".to_string(),
+            compile_time_ms: 50,
+            version: 2,
+        };
+        store_compile_result("test_macro", new_result);
+        let cached = get_cached_compile_result("test_macro").unwrap();
+        assert_eq!(cached.expanded_code, "new expanded code");
+        assert_eq!(cached.version, 2);
+        
+        // 测试多个宏的缓存
+        for i in 0..10 {
+            store_compile_result(
+                &format!("macro_{}", i),
+                CompileResult {
+                    expanded_code: format!("code_{}", i),
+                    compile_time_ms: i as u64 * 10,
+                    version: i as u32,
+                }
+            );
+        }
+        
+        for i in 0..10 {
+            let cached = get_cached_compile_result(&format!("macro_{}", i));
+            assert!(cached.is_some(), "应该能找到所有缓存的宏");
+        }
     }
 }

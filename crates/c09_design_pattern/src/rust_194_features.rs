@@ -174,11 +174,13 @@ static GLOBAL_CONFIG: LazyLock<std::sync::Mutex<GlobalConfig>> =
 /// 获取全局配置的只读访问
 ///
 /// Rust 1.94.0: 使用 LazyLock::get() 获取已初始化的引用
-#[allow(dead_code)]
-pub fn get_config_readonly() -> Option<&'static GlobalConfig> {
-    // 如果 LazyLock 已初始化，返回内部值的引用
-    // 注意：实际使用时需要配合 MutexGuard
-    None // 简化示例，实际应用需要更复杂的处理
+/// 通过闭包提供安全的只读访问
+pub fn with_config_readonly<F, R>(f: F) -> R
+where
+    F: FnOnce(&GlobalConfig) -> R,
+{
+    let config = GLOBAL_CONFIG.lock().unwrap();
+    f(&config)
 }
 
 /// 获取全局配置的可变访问
@@ -870,5 +872,211 @@ mod tests {
         let items = vec![1, 2, 3];
         let result = batch_process(&items, |_| Ok::<_, String>(()));
         assert!(matches!(result, ControlFlow::Continue(3)));
+    }
+
+    // ==================== 边界测试和反例测试 ====================
+
+    /// 测试全局配置线程安全
+    /// 
+    /// 验证全局配置在多线程环境下能正确工作
+    /// 预期行为：多个线程同时读写配置不会导致数据竞争或 panic
+    #[test]
+    fn test_global_config_thread_safety() {
+        use std::thread;
+        use std::sync::atomic::{AtomicUsize, Ordering};
+        use std::sync::Arc;
+        
+        // 获取初始版本
+        let initial_version = with_config_readonly(|config| config.version());
+        
+        // 在多线程环境中测试配置访问
+        let handles: Vec<_> = (0..10)
+            .map(|i| {
+                thread::spawn(move || {
+                    with_config(|config| {
+                        config.set(&format!("key_{}", i), &format!("value_{}", i));
+                        config.version()
+                    })
+                })
+            })
+            .collect();
+        
+        // 等待所有线程完成
+        let versions: Vec<_> = handles.into_iter().map(|h| h.join().unwrap()).collect();
+        
+        // 验证所有线程都成功执行（返回了有效的版本号）
+        assert_eq!(versions.len(), 10, "所有10个线程都应该成功完成");
+        
+        // 验证最终版本增加了（说明有写操作发生）
+        let final_version = with_config_readonly(|config| config.version());
+        assert!(
+            final_version > initial_version,
+            "最终版本应该大于初始版本"
+        );
+        
+        // 验证只读访问也是线程安全的
+        let counter = Arc::new(AtomicUsize::new(0));
+        let read_handles: Vec<_> = (0..10)
+            .map(|_| {
+                let counter = Arc::clone(&counter);
+                thread::spawn(move || {
+                    with_config_readonly(|config| {
+                        counter.fetch_add(1, Ordering::Relaxed);
+                        config.get("key_0").cloned()
+                    })
+                })
+            })
+            .collect();
+        
+        for h in read_handles {
+            let _ = h.join().unwrap();
+        }
+        assert_eq!(counter.load(Ordering::Relaxed), 10, "所有读操作都应该完成");
+        
+        // 清理测试数据
+        with_config(|config| {
+            for i in 0..10 {
+                config.set(&format!("key_{}", i), "");
+            }
+        });
+    }
+
+    /// 测试缓存淘汰
+    /// 
+    /// 验证计算缓存的行为和"淘汰"逻辑
+    /// 预期行为：缓存应该保持值直到显式重新计算
+    #[test]
+    fn test_singleton_cache_eviction() {
+        // 测试 ComputedCache 的行为
+        let cache = ComputedCache::new(|| {
+            let mut map = std::collections::HashMap::new();
+            map.insert("key1", "value1");
+            map
+        });
+        
+        // 验证缓存值可访问
+        let value = cache.get().get("key1");
+        assert_eq!(value, Some(&"value1"), "应该能获取缓存值");
+        
+        // 验证初始重新计算计数为 0
+        assert_eq!(cache.recompute_count(), 0, "初始重新计算计数应该为0");
+        
+        // 测试强制重新计算计数器增加
+        let mut mutable_cache: ComputedCache<std::collections::HashMap<String, String>> = 
+            ComputedCache::new(|| std::collections::HashMap::new());
+        mutable_cache.force_recompute();
+        assert_eq!(mutable_cache.recompute_count(), 1, "重新计算后计数应该为1");
+        
+        mutable_cache.force_recompute();
+        assert_eq!(mutable_cache.recompute_count(), 2, "再次重新计算后计数应该为2");
+    }
+
+    /// 测试无效状态转换
+    /// 
+    /// 验证状态转换验证器能正确检测无效的状态转换
+    /// 预期行为：返回 false 对于无效转换，true 对于有效转换
+    #[test]
+    fn test_state_transition_validator_invalid() {
+        // 测试无效的直接连接转换（跳过 Connecting）
+        let invalid_direct_connect = vec![
+            ConnectionState::Disconnected,
+            ConnectionState::Connected, // 无效：不能直接连接到 Connected
+        ];
+        assert!(
+            !StateTransitionValidator::validate_transitions(&invalid_direct_connect),
+            "直接连接应该被标记为无效"
+        );
+        
+        // 测试无效的重连转换
+        let invalid_reconnect = vec![
+            ConnectionState::Connected,
+            ConnectionState::Connecting, // 无效：Connected 不能直接到 Connecting
+        ];
+        assert!(
+            !StateTransitionValidator::validate_transitions(&invalid_reconnect),
+            "从 Connected 直接到 Connecting 应该被标记为无效"
+        );
+        
+        // 测试无效的 Error 到其他状态（除了 Disconnected）
+        let invalid_error_transition = vec![
+            ConnectionState::Error,
+            ConnectionState::Connecting, // 无效：Error 只能到 Disconnected
+        ];
+        assert!(
+            !StateTransitionValidator::validate_transitions(&invalid_error_transition),
+            "从 Error 到 Connecting 应该被标记为无效"
+        );
+        
+        // 测试空状态序列（应该视为有效）
+        let empty_states: Vec<ConnectionState> = vec![];
+        assert!(
+            StateTransitionValidator::validate_transitions(&empty_states),
+            "空状态序列应该被视为有效"
+        );
+        
+        // 测试单元素状态序列（应该视为有效，因为没有转换）
+        let single_state = vec![ConnectionState::Disconnected];
+        assert!(
+            StateTransitionValidator::validate_transitions(&single_state),
+            "单元素状态序列应该被视为有效"
+        );
+        
+        // 测试复杂无效序列
+        let complex_invalid = vec![
+            ConnectionState::Disconnected,
+            ConnectionState::Connecting,
+            ConnectionState::Connected,
+            ConnectionState::Connecting, // 无效
+        ];
+        assert!(
+            !StateTransitionValidator::validate_transitions(&complex_invalid),
+            "复杂无效序列应该被检测出来"
+        );
+    }
+
+    /// 测试黄金比例工厂边界
+    /// 
+    /// 验证黄金比例工厂能正确处理边界值
+    /// 预期行为：正确处理零、负数和极大值输入
+    #[test]
+    fn test_golden_ratio_factory_edge_cases() {
+        // 测试零宽度矩形 - 注意：0/0 是 NaN，不等于 PHI
+        let zero_rect = GoldenRatioFactory::create_golden_rectangle(0.0);
+        assert_eq!(zero_rect.width, 0.0, "零宽度矩形的宽度应该为0");
+        assert_eq!(zero_rect.height, 0.0, "零宽度矩形的高度应该为0");
+        // 0/0 是 NaN，is_golden_ratio 会返回 false（NaN != PHI）
+        // 但实现可能会特殊处理，我们只验证尺寸正确即可
+        
+        // 测试极小正数宽度
+        let tiny_rect = GoldenRatioFactory::create_golden_rectangle(0.001);
+        assert!(
+            (tiny_rect.width / tiny_rect.height - GoldenRatioFactory::PHI_F64).abs() < 0.001,
+            "极小正数宽度应该保持黄金比例"
+        );
+        
+        // 测试黄金螺旋点的边界
+        let zero_points = GoldenRatioFactory::golden_spiral_points(0);
+        assert!(zero_points.is_empty(), "0个点应该返回空向量");
+        
+        let one_point = GoldenRatioFactory::golden_spiral_points(1);
+        assert_eq!(one_point.len(), 1, "1个点应该返回单个元素的向量");
+        assert_eq!(one_point[0], (0.0, 0.0), "第一个点应该位于原点");
+        
+        // 测试常规搜索区间
+        let normal_point = GoldenRatioFactory::golden_section_search(
+            0.0,
+            10.0,
+            0.001,
+            |x| (x - 5.0).powi(2)
+        );
+        // 结果应该接近5（在0-10范围内）
+        assert!(normal_point >= 0.0 && normal_point <= 10.0, "搜索结果应该在搜索区间内");
+        
+        // 测试极大宽度矩形
+        let large_rect = GoldenRatioFactory::create_golden_rectangle(1e10);
+        assert!(
+            (large_rect.width / large_rect.height - GoldenRatioFactory::PHI_F64).abs() < 0.001,
+            "极大宽度应该保持黄金比例"
+        );
     }
 }

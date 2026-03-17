@@ -646,8 +646,10 @@ pub fn demonstrate_char_conversion() {
     println!("编码结果: {:?}", encoded);
 
     // 解码
-    let decoded = ProcessCommunicationEncoder::decode_codepoints(&encoded).unwrap();
-    println!("解码结果: {}", decoded);
+    match ProcessCommunicationEncoder::decode_codepoints(&encoded) {
+        Ok(decoded) => println!("解码结果: {}", decoded),
+        Err(e) => println!("解码错误: {}", e),
+    }
 
     // 分析编码分布
     let distribution = ProcessCommunicationEncoder::analyze_encoding_distribution(message);
@@ -905,5 +907,147 @@ mod tests {
         let items = vec![1, 2, 3];
         let result = batch_process(&items, |_| Ok::<_, String>(()));
         assert!(matches!(result, ControlFlow::Continue(3)));
+    }
+
+    // ==================== 边界测试和反例测试 ====================
+
+    /// 测试空日志处理
+    /// 
+    /// 验证当传入空日志切片时，日志分析器能正确处理而不 panic
+    /// 预期行为：返回空结果向量
+    #[test]
+    fn test_log_analyzer_empty() {
+        let empty_entries: Vec<LogEntry> = vec![];
+        
+        // 测试空日志的错误模式检测
+        let patterns = LogAnalyzer::detect_error_patterns(&empty_entries);
+        assert!(patterns.is_empty(), "空日志应该返回空模式列表");
+        
+        // 测试空日志的时间间隔分析
+        let intervals = LogAnalyzer::analyze_time_intervals(&empty_entries);
+        assert!(intervals.is_empty(), "空日志应该返回空时间间隔列表");
+        
+        // 测试单个日志条目的时间间隔（无法形成窗口）
+        let single_entry = vec![LogEntry {
+            timestamp: 1,
+            level: LogLevel::Info,
+            message: "test".to_string(),
+        }];
+        let intervals = LogAnalyzer::analyze_time_intervals(&single_entry);
+        assert!(intervals.is_empty(), "单个日志条目应该返回空时间间隔列表");
+    }
+
+    /// 测试大日志性能
+    /// 
+    /// 验证日志分析器能处理大量日志数据而不显著降低性能
+    /// 预期行为：在合理时间内完成处理并返回正确结果
+    #[test]
+    fn test_log_analyzer_large_input() {
+        // 生成大量日志条目（10000条）
+        let large_entries: Vec<LogEntry> = (0..10000)
+            .map(|i| LogEntry {
+                timestamp: i as u64,
+                level: if i % 100 == 0 { LogLevel::Error } else { LogLevel::Info },
+                message: format!("Log entry {}", i),
+            })
+            .collect();
+        
+        let start = std::time::Instant::now();
+        
+        // 测试大输入的错误模式检测（连续的3个错误）
+        let patterns = LogAnalyzer::detect_error_patterns(&large_entries);
+        
+        let elapsed = start.elapsed();
+        
+        // 验证性能：处理10000条日志应该在100ms内完成
+        assert!(elapsed.as_millis() < 100, "大日志处理应该高效");
+        
+        // 验证结果正确性：不应该有连续3个错误，因为错误间隔100条
+        assert!(patterns.is_empty(), "错误间隔100条，不应该有连续3个错误");
+        
+        // 测试时间间隔分析
+        let intervals = LogAnalyzer::analyze_time_intervals(&large_entries);
+        assert_eq!(intervals.len(), 9999, "应该返回9999个时间间隔");
+        // 所有间隔都是1
+        assert!(intervals.iter().all(|&i| i == 1), "所有时间间隔应该为1");
+    }
+
+    /// 测试空数据分析
+    /// 
+    /// 验证指标分析器能正确处理空数据或极小数据集
+    /// 预期行为：返回空结果或默认值，不 panic
+    #[test]
+    fn test_metrics_analyzer_empty_data() {
+        let empty_data: Vec<f64> = vec![];
+        
+        // 测试空数据的移动平均
+        let ma = ProcessMetricsAnalyzer::moving_average::<3>(&empty_data);
+        assert!(ma.is_empty(), "空数据应该返回空移动平均");
+        
+        // 测试空数据的异常检测
+        let anomalies = ProcessMetricsAnalyzer::detect_anomalies(&empty_data, 10.0);
+        assert!(anomalies.is_empty(), "空数据应该返回空异常列表");
+        
+        // 测试空数据的变化率计算
+        let rates = ProcessMetricsAnalyzer::calculate_change_rates(&empty_data);
+        assert!(rates.is_empty(), "空数据应该返回空变化率列表");
+        
+        // 测试单元素数据的变化率（无法形成窗口）
+        let single_data = vec![100.0];
+        let rates = ProcessMetricsAnalyzer::calculate_change_rates(&single_data);
+        assert!(rates.is_empty(), "单元素数据应该返回空变化率列表");
+        
+        // 测试双元素数据的趋势转折检测（需要5个元素）
+        let small_data = vec![1.0, 2.0];
+        let reversals = ProcessMetricsAnalyzer::detect_trend_reversals(&small_data);
+        assert!(reversals.is_empty(), "少于5个元素应该返回空趋势转折列表");
+        
+        // 测试空数据的加权移动平均
+        let wma = ProcessMetricsAnalyzer::weighted_moving_average(&empty_data);
+        assert!(wma.is_empty(), "空数据应该返回空加权移动平均");
+        
+        // 测试单元素数据的加权移动平均（需要3个元素）
+        let wma = ProcessMetricsAnalyzer::weighted_moving_average(&single_data);
+        assert!(wma.is_empty(), "少于3个元素应该返回空加权移动平均");
+    }
+
+    /// 测试无效 Unicode 处理
+    /// 
+    /// 验证进程通信编码器能正确处理无效的 Unicode 码点
+    /// 预期行为：返回错误或跳过无效字符，不 panic
+    #[test]
+    fn test_process_communication_invalid_unicode() {
+        // 测试解码包含无效 Unicode 码点的数据
+        // 0xD800 是代理对起始，单独出现是无效的
+        let invalid_codepoints = vec![0x48, 0x65, 0x6C, 0x6C, 0x6F, 0xD800, 0x57, 0x6F, 0x72, 0x6C, 0x64]; // "Hello" + invalid + "World"
+        
+        let result = ProcessCommunicationEncoder::decode_codepoints(&invalid_codepoints);
+        // 由于实现会返回错误，验证返回了错误
+        assert!(result.is_err(), "无效 Unicode 码点应该返回错误");
+        
+        // 测试超出 Unicode 范围的码点
+        let out_of_range = vec![0x110000]; // 超出最大 Unicode 码点 0x10FFFF
+        let result = ProcessCommunicationEncoder::decode_codepoints(&out_of_range);
+        assert!(result.is_err(), "超出范围的 Unicode 码点应该返回错误");
+        
+        // 测试最大有效 Unicode 码点
+        let max_valid = vec![0x10FFFF];
+        let result = ProcessCommunicationEncoder::decode_codepoints(&max_valid);
+        assert!(result.is_ok(), "最大有效 Unicode 码点应该被接受");
+        
+        // 测试验证函数对高码点的处理
+        // 使用实际的 Unicode 字符进行测试
+        let high_chars = ['\u{10FFFE}', '\u{10FFFF}']; // 最高有效 Unicode 范围
+        let validation = ProcessCommunicationEncoder::validate_codepoints(&high_chars, 0x10FFFF);
+        // 这些字符在有效范围内
+        assert_eq!(validation.len(), 2, "应该返回两个验证结果");
+        assert!(validation.iter().all(|&v| v), "有效范围内的字符应该通过验证");
+        
+        // 测试验证函数对超出范围的拒绝（通过降低 max_codepoint）
+        let ascii_chars = ['A', 'B'];
+        let validation = ProcessCommunicationEncoder::validate_codepoints(&ascii_chars, 64); // 'A' = 65
+        assert_eq!(validation.len(), 2);
+        assert!(!validation[0], "码点 65 超过 max_codepoint 64 应该被拒绝");
+        assert!(!validation[1], "码点 66 超过 max_codepoint 64 应该被拒绝");
     }
 }

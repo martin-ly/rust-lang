@@ -67,8 +67,12 @@ impl<'a> SimpleLexer<'a> {
             return None;
         }
 
-        // 消耗第一个数字字符
-        let first_digit = self.input.next().unwrap() as i64 - '0' as i64;
+        // 消耗第一个数字字符（前面已检查存在，使用 expect 说明原因）
+        let first_digit = self
+            .input
+            .next()
+            .expect("parse_number: 第一个数字字符应该存在") as i64
+            - '0' as i64;
         let mut result = first_digit;
 
         // 继续消耗后续数字
@@ -91,8 +95,11 @@ impl<'a> SimpleLexer<'a> {
             return None;
         }
 
-        // 消耗第一个字符
-        let first = self.input.next().unwrap();
+        // 消耗第一个字符（前面已检查存在，使用 expect 说明原因）
+        let first = self
+            .input
+            .next()
+            .expect("parse_identifier: 第一个字符应该存在");
         let mut result = String::new();
         result.push(first);
 
@@ -447,8 +454,10 @@ impl<T: PartialEq + std::fmt::Debug> EnhancedMatcher<T> {
 }
 
 /// 验证值是否有效
-fn is_valid_value<T: PartialEq>(_value: &T) -> bool {
-    // 简化的验证逻辑
+///
+/// 检查值是否符合特定条件。当前实现对所有类型都返回 true，
+/// 实际使用时可以根据具体类型添加验证逻辑（如检查空字符串、零值等）。
+fn is_valid_value<T>(_value: &T) -> bool {
     true
 }
 
@@ -548,14 +557,18 @@ impl<T> Edition2024ControlFlow<T> {
     /// 执行 try 风格操作
     ///
     /// Rust 1.94.0 + Edition 2024: 改进的错误传播
+    ///
+    /// # 错误
+    /// 当没有值存在时返回 `Err(E)`，其中 E 由调用者提供的闭包或类型决定
     pub fn try_operation<F, E>(&self, f: F) -> Result<T, E>
     where
         T: Clone,
+        E: Default,
         F: FnOnce(&T) -> Result<T, E>,
     {
         match &self.value {
             Some(v) => f(v),
-            None => panic!("No value present"),
+            None => Err(E::default()),
         }
     }
 
@@ -1532,5 +1545,103 @@ mod tests {
         let items = vec![1, 2, 3];
         let result = batch_process(&items, |_| Ok::<_, String>(()));
         assert!(matches!(result, ControlFlow::Continue(3)));
+    }
+
+    // ==================== 反例和边界测试 ====================
+
+    /// 测试 SimpleLexer 对无效数字的解析
+    ///
+    /// 验证当输入不是数字时，parse_number 返回 None
+    #[test]
+    fn test_simple_lexer_invalid_number() {
+        let mut lexer = SimpleLexer::new("abc");
+        lexer.skip_whitespace();
+        
+        // 解析标识符应该成功
+        assert_eq!(lexer.parse_identifier(), Some("abc".to_string()));
+        
+        // 创建新的 lexer 测试数字解析失败
+        let mut lexer2 = SimpleLexer::new("abc123");
+        lexer2.skip_whitespace();
+        
+        // 尝试解析数字应该失败（因为第一个字符是 'a'）
+        assert_eq!(lexer2.parse_number(), None);
+        
+        // 但解析标识符应该成功
+        assert_eq!(lexer2.parse_identifier(), Some("abc123".to_string()));
+    }
+
+    /// 测试 SimpleLexer 对空输入的处理
+    ///
+    /// 验证当输入为空字符串时，各种解析方法的行为
+    #[test]
+    fn test_simple_lexer_empty_input() {
+        let mut lexer = SimpleLexer::new("");
+        
+        // 所有解析方法都应该返回 None
+        lexer.skip_whitespace(); // 不应 panic
+        assert_eq!(lexer.parse_number(), None);
+        assert_eq!(lexer.parse_identifier(), None);
+        assert_eq!(lexer.peek(), None);
+        assert_eq!(lexer.next_char(), None);
+        assert_eq!(lexer.expect_char('='), None);
+    }
+
+    /// 测试 validate_data 的边界条件
+    ///
+    /// 验证验证函数在边界值上的行为
+    #[test]
+    fn test_validate_data_edge_cases() {
+        // 空字符串应该失败
+        assert!(matches!(
+            validate_data(""),
+            ControlFlow::Break(ref s) if s == "数据不能为空"
+        ));
+
+        // 长度恰好为 7（小于 8）应该失败
+        assert!(matches!(
+            validate_data("1234567"),
+            ControlFlow::Break(ref s) if s == "数据长度至少为 8"
+        ));
+
+        // 长度恰好为 8 应该通过（不检查数字）
+        assert!(matches!(validate_data("abcdefgh"), ControlFlow::Continue(())));
+
+        // 长度恰好为 8 且有数字应该通过
+        assert!(matches!(validate_data("abcdefg1"), ControlFlow::Continue(())));
+
+        // 长度为 8 全是数字应该通过
+        assert!(matches!(validate_data("12345678"), ControlFlow::Continue(())));
+
+        // 超长字符串只要长度 >= 8 应该通过
+        assert!(matches!(
+            validate_data("this_is_a_very_long_string_without_numbers"),
+            ControlFlow::Continue(())
+        ));
+
+        // 只有空格但长度 >= 8 也应该通过
+        assert!(matches!(validate_data("        "), ControlFlow::Continue(())));
+    }
+
+    /// 测试 Edition2024ControlFlow 对未初始化状态的访问
+    ///
+    /// 验证当值为 None 时，各种方法的正确处理
+    #[test]
+    fn test_edition_wrapper_uninitialized() {
+        let control_flow = Edition2024ControlFlow::<i32>::new(None);
+
+        // try_operation 应该返回 Err
+        let result: Result<i32, ()> = control_flow.try_operation(|v| Ok(*v));
+        assert!(result.is_err());
+
+        // process_while_some 不应执行任何操作
+        let mut executed = false;
+        let mut control_flow_mut = Edition2024ControlFlow::<i32>::new(None);
+        control_flow_mut.process_while_some(|_| executed = true);
+        assert!(!executed, "无值时不应执行操作");
+
+        // chain_if_let 应该返回 None
+        let result2 = control_flow.chain_if_let(|v| Some(v * 2));
+        assert_eq!(result2, None);
     }
 }

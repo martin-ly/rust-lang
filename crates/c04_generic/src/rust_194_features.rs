@@ -202,7 +202,9 @@ impl<T> LazyCellContainer<T> {
         if self.cell.get().is_none() {
             let _ = self.cell.set(f());
         }
-        self.cell.get_mut().unwrap()
+        self.cell
+            .get_mut()
+            .expect("force_get_mut: LazyCell 应该已初始化")
     }
 
     /// 检查是否已初始化
@@ -245,6 +247,27 @@ impl MathConstants for f64 {
 }
 
 /// 使用数学常量的泛型斐波那契计算器
+///
+/// # 浮点精度限制
+///
+/// 本计算器使用比奈公式（Binet's formula）进行计算：
+/// F(n) = (φⁿ - (1-φ)ⁿ) / √5
+///
+/// 由于使用浮点数运算，存在以下精度限制：
+/// - **f32**: 在 n > 35 时开始出现明显精度误差
+/// - **f64**: 在 n > 70 时开始出现明显精度误差
+///
+/// 对于更大的 n 值，建议使用整数实现的斐波那契计算。
+///
+/// # 示例
+///
+/// ```
+/// use c04_generic::rust_194_features::{FibonacciCalculator, MathConstants};
+///
+/// let calc = FibonacciCalculator::<f64>::new();
+/// let f10 = calc.calculate(10); // 精确值: 55
+/// assert!((f10 - 55.0).abs() < 1e-10);
+/// ```
 pub struct FibonacciCalculator<T: MathConstants + Copy> {
     _phantom: PhantomData<T>,
 }
@@ -1202,5 +1225,89 @@ mod tests {
         let items = vec![1, 2, 3];
         let result = batch_process(&items, |_| Ok::<_, String>(()));
         assert!(matches!(result, ControlFlow::Continue(3)));
+    }
+
+    // ==================== 边界测试 ====================
+
+    /// 测试斐波那契计算器的浮点精度限制
+    ///
+    /// 验证使用浮点计算斐波那契数在 n 较大时出现精度误差
+    #[test]
+    fn test_fibonacci_precision_limit() {
+        let calc_f64 = FibonacciCalculator::<f64>::new();
+
+        // 小数值应该精确
+        assert!((calc_f64.calculate(1) - 1.0).abs() < 0.1);
+        assert!((calc_f64.calculate(10) - 55.0).abs() < 0.5);
+        assert!((calc_f64.calculate(20) - 6765.0).abs() < 0.5);
+
+        // 验证 f64 在 n 较大时精度逐渐降低
+        // 比奈公式使用浮点运算，精度限制是渐进的
+        // F(75) 的精确值是 2111485077978050
+        let f75_exact: f64 = 2111485077978050.0;
+        let f75_calc = calc_f64.calculate(75);
+        let f64_error = (f75_calc - f75_exact).abs();
+        
+        // 随着 n 增大，误差应该增加
+        // n=75 时误差应该超过 1.0
+        assert!(f64_error > 1.0, 
+            "f64 在 n=75 时应该出现明显的精度误差，计算值: {}, 精确值: {}, 误差: {}", 
+            f75_calc, f75_exact, f64_error);
+
+        // 验证文档说明的精度限制
+        // f64 在 n > 70 时开始出现明显的精度误差
+    }
+
+    /// 测试 SlidingWindowProcessor 对空数据的处理（扩展版）
+    ///
+    /// 验证当输入数据为空或数据长度小于窗口大小时的正确行为
+    #[test]
+    fn test_sliding_window_empty_extended() {
+        let processor = SlidingWindowProcessor::<i32, 3>::new();
+
+        // 空数据应该返回空结果
+        let empty: &[i32] = &[];
+        let sums = processor.window_sums(empty);
+        assert!(sums.is_empty());
+
+        // 数据长度小于窗口大小应该返回空结果
+        let short = vec![1, 2];
+        let sums2 = processor.window_sums(&short);
+        assert!(sums2.is_empty());
+
+        // 数据长度恰好等于窗口大小
+        let exact = vec![1, 2, 3];
+        let sums3 = processor.window_sums(&exact);
+        assert_eq!(sums3, vec![6]); // 只有一个窗口 [1, 2, 3]
+
+        // find_window 在空数据上应该返回 None
+        let found = processor.find_window(empty, |_| true);
+        assert_eq!(found, None);
+    }
+
+    /// 测试 LazyCellContainer 重复初始化行为
+    ///
+    /// 验证 OnceCell 的 set 操作在已初始化时返回错误
+    #[test]
+    fn test_lazy_cell_container_reinit() {
+        let container = LazyCellContainer::<i32>::new();
+
+        // 第一次设置应该成功
+        assert!(container.set(42).is_ok());
+        assert_eq!(container.try_get(), Some(&42));
+
+        // 第二次设置应该失败
+        let result = container.set(100);
+        assert!(result.is_err());
+        assert_eq!(result.unwrap_err(), 100);
+
+        // 值应该保持不变
+        assert_eq!(container.try_get(), Some(&42));
+
+        // 使用 force_get_mut 应该仍然获取到原始值
+        let mut container2 = LazyCellContainer::<i32>::new();
+        container2.set(10).unwrap();
+        let value = container2.force_get_mut(|| 999);
+        assert_eq!(*value, 10); // 应该还是 10，而不是 999
     }
 }

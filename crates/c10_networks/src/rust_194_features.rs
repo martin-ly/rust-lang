@@ -763,11 +763,12 @@ pub struct MacAddressParser;
 pub struct MacAddress(pub [u8; 6]);
 
 impl MacAddressParser {
-    /// 解析 MAC 地址字符串（格式：xx:xx:xx:xx:xx:xx）
+    /// 解析 MAC 地址字符串（格式：xx:xx:xx:xx:xx:xx 或 xx-xx-xx-xx-xx-xx）
     ///
     /// Rust 1.94.0: 使用 TryFrom<char> for usize 进行字符解析
     pub fn parse(mac_str: &str) -> Option<MacAddress> {
-        let parts: Vec<&str> = mac_str.split(':').collect();
+        // 支持冒号或连字符分隔符
+        let parts: Vec<&str> = mac_str.split(|c| c == ':' || c == '-').collect();
         if parts.len() != 6 {
             return None;
         }
@@ -782,23 +783,60 @@ impl MacAddressParser {
             let high = chars.next()?;
             let low = chars.next()?;
 
-            let high_val = HexCodec::decode(&high.to_string())?[0] >> 4;
-            let low_val = HexCodec::decode(&low.to_string())?[0] >> 4;
+            // 验证字符是否为有效的十六进制字符
+            let high_val = Self::hex_char_to_value(high)?;
+            let low_val = Self::hex_char_to_value(low)?;
 
             mac[i] = (high_val << 4) | low_val;
+        }
+
+        // 验证 MAC 地址不为全零（无效地址）
+        if mac == [0u8; 6] {
+            return None;
+        }
+
+        // 验证不是广播地址（全FF）
+        if mac == [0xFFu8; 6] {
+            return None;
         }
 
         Some(MacAddress(mac))
     }
 
+    /// 将十六进制字符转换为数值
+    fn hex_char_to_value(c: char) -> Option<u8> {
+        if c.is_ascii_digit() {
+            Some(c as u8 - b'0')
+        } else if c.is_ascii_lowercase() {
+            if ('a'..='f').contains(&c) {
+                Some(c as u8 - b'a' + 10)
+            } else {
+                None
+            }
+        } else if c.is_ascii_uppercase() {
+            if ('A'..='F').contains(&c) {
+                Some(c as u8 - b'A' + 10)
+            } else {
+                None
+            }
+        } else {
+            None
+        }
+    }
+
     /// 格式化 MAC 地址
     pub fn format(mac: &MacAddress) -> String {
-        HexCodec::encode(&mac.0)
-            .as_bytes()
-            .chunks(2)
-            .map(|chunk| std::str::from_utf8(chunk).unwrap())
-            .collect::<Vec<_>>()
-            .join(":")
+        let hex = HexCodec::encode(&mac.0);
+        let mut result = String::with_capacity(17);
+        for (i, chunk) in hex.as_bytes().chunks(2).enumerate() {
+            if i > 0 {
+                result.push(':');
+            }
+            if let Ok(s) = std::str::from_utf8(chunk) {
+                result.push_str(s);
+            }
+        }
+        result
     }
 }
 
@@ -1067,5 +1105,268 @@ mod tests {
         let items = vec![1, 2, 3];
         let result = batch_process(&items, |_| Ok::<_, String>(()));
         assert!(matches!(result, ControlFlow::Continue(3)));
+    }
+
+    #[test]
+    fn test_mac_address_parser_valid() {
+        // 测试有效 MAC 地址（冒号分隔）
+        let mac = MacAddressParser::parse("00:1A:2B:3C:4D:5E");
+        assert!(mac.is_some());
+        assert_eq!(mac.unwrap().0, [0x00, 0x1A, 0x2B, 0x3C, 0x4D, 0x5E]);
+
+        // 测试有效 MAC 地址（连字符分隔）
+        let mac2 = MacAddressParser::parse("00-1A-2B-3C-4D-5E");
+        assert!(mac2.is_some());
+        assert_eq!(mac2.unwrap().0, [0x00, 0x1A, 0x2B, 0x3C, 0x4D, 0x5E]);
+
+        // 测试格式化
+        let formatted = MacAddressParser::format(&mac.unwrap());
+        assert_eq!(formatted, "00:1a:2b:3c:4d:5e");
+    }
+
+    #[test]
+    fn test_mac_address_parser_invalid() {
+        // 测试无效 MAC 地址：格式错误（不是6组）
+        assert!(MacAddressParser::parse("00:1A:2B:3C:4D").is_none());
+        assert!(MacAddressParser::parse("00:1A:2B:3C:4D:5E:6F").is_none());
+
+        // 测试无效 MAC 地址：每组长度错误
+        assert!(MacAddressParser::parse("00:1A:2B:3C:4D:5").is_none());
+        assert!(MacAddressParser::parse("00:1A:2B:3C:4D:5EF").is_none());
+
+        // 测试无效 MAC 地址：包含非十六进制字符
+        assert!(MacAddressParser::parse("00:1A:2B:3C:4D:ZZ").is_none());
+        assert!(MacAddressParser::parse("00:1A:2B:3C:4D:G5").is_none());
+
+        // 测试无效 MAC 地址：全零（无效地址）
+        assert!(MacAddressParser::parse("00:00:00:00:00:00").is_none());
+
+        // 测试无效 MAC 地址：广播地址（全FF）
+        assert!(MacAddressParser::parse("FF:FF:FF:FF:FF:FF").is_none());
+
+        // 测试无效 MAC 地址：空字符串
+        assert!(MacAddressParser::parse("").is_none());
+    }
+
+    // ==================== 边界测试和反例测试 ====================
+
+    /// 测试畸形帧处理
+    /// 
+    /// 验证帧边界检测器能正确处理畸形或不完整的帧数据
+    /// 预期行为：正确处理只有起始或结束定界符、重叠定界符等畸形情况
+    #[test]
+    fn test_frame_boundary_detector_malformed() {
+        // 测试只有起始定界符，没有结束定界符
+        let only_start = [0x7E, 0x7E, 0x7E, 0x7E, 0x01, 0x02];
+        let boundaries = FrameBoundaryDetector::find_frame_boundaries(&only_start);
+        assert_eq!(boundaries.len(), 1, "应该只检测到一个起始定界符");
+        assert_eq!(boundaries[0], (0, BoundaryType::Start));
+        
+        let frames = FrameBoundaryDetector::extract_frames(&only_start);
+        assert!(frames.is_empty(), "没有结束定界符应该返回空帧列表");
+        
+        // 测试只有结束定界符，没有起始定界符
+        let only_end = [0x01, 0x02, 0x7F, 0x7F, 0x7F, 0x7F];
+        let boundaries = FrameBoundaryDetector::find_frame_boundaries(&only_end);
+        assert_eq!(boundaries.len(), 1, "应该只检测到一个结束定界符");
+        assert_eq!(boundaries[0], (2, BoundaryType::End));
+        
+        let frames = FrameBoundaryDetector::extract_frames(&only_end);
+        assert!(frames.is_empty(), "没有起始定界符应该返回空帧列表");
+        
+        // 测试多个起始定界符但没有结束定界符
+        let multi_start = [
+            0x7E, 0x7E, 0x7E, 0x7E, // 第一个起始
+            0x01, 0x02,
+            0x7E, 0x7E, 0x7E, 0x7E, // 第二个起始（畸形：没有前一个的结束）
+            0x03, 0x04,
+        ];
+        let boundaries = FrameBoundaryDetector::find_frame_boundaries(&multi_start);
+        assert_eq!(boundaries.len(), 2, "应该检测到两个起始定界符");
+        
+        let frames = FrameBoundaryDetector::extract_frames(&multi_start);
+        assert!(frames.is_empty(), "没有结束定界符应该返回空帧列表");
+        
+        // 测试结束定界符出现在起始之前
+        let end_before_start = [
+            0x7F, 0x7F, 0x7F, 0x7F, // 结束
+            0x01, 0x02,
+            0x7E, 0x7E, 0x7E, 0x7E, // 起始
+        ];
+        let frames = FrameBoundaryDetector::extract_frames(&end_before_start);
+        assert!(frames.is_empty(), "结束在起始之前应该返回空帧列表");
+        
+        // 测试空数据
+        let empty: [u8; 0] = [];
+        let boundaries = FrameBoundaryDetector::find_frame_boundaries(&empty);
+        assert!(boundaries.is_empty(), "空数据应该返回空边界列表");
+        
+        // 测试数据长度小于定界符长度
+        let short = [0x7E, 0x7E];
+        let boundaries = FrameBoundaryDetector::find_frame_boundaries(&short);
+        assert!(boundaries.is_empty(), "数据长度小于定界符应该返回空列表");
+    }
+
+    /// 测试部分数据检测
+    /// 
+    /// 验证 HTTP/2 前导码检测器能正确处理部分或不完整的前导码
+    /// 预期行为：返回 None 对于不完整数据，不 panic
+    #[test]
+    fn test_http2_preamble_detector_partial() {
+        // 测试空数据
+        let empty: [u8; 0] = [];
+        assert!(
+            Http2PreambleDetector::detect_preamble(&empty).is_none(),
+            "空数据应该返回 None"
+        );
+        assert!(
+            !Http2PreambleDetector::is_valid_preamble_start(&empty),
+            "空数据不应该被识别为有效前导码起始"
+        );
+        
+        // 测试部分前导码（少于24字节）
+        let partial = b"PRI * HTTP/2.0";
+        assert!(
+            Http2PreambleDetector::detect_preamble(partial).is_none(),
+            "部分前导码应该返回 None"
+        );
+        assert!(
+            !Http2PreambleDetector::is_valid_preamble_start(partial),
+            "部分数据不应该被识别为有效前导码起始"
+        );
+        
+        // 测试刚好23字节（差1字节）
+        let almost_full = b"PRI * HTTP/2.0\r\n\r\nSM\r\n\r";
+        assert_eq!(almost_full.len(), 23, "应该正好23字节");
+        assert!(
+            Http2PreambleDetector::detect_preamble(almost_full).is_none(),
+            "23字节数据应该返回 None"
+        );
+        
+        // 测试包含前导码但不从开头开始的数据
+        let offset_preamble = b"Some garbage data PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n";
+        assert_eq!(
+            Http2PreambleDetector::detect_preamble(offset_preamble),
+            Some(18),
+            "应该在前导码实际开始的位置找到它"
+        );
+        
+        // 测试包含多个潜在前导码模式的数据
+        let multi_preamble = b"PRI * HTTP/2.0\r\n\r\nSM\r\n\r\nPRI * HTTP/2.0\r\n\r\nSM\r\n\r\n";
+        assert_eq!(
+            Http2PreambleDetector::detect_preamble(multi_preamble),
+            Some(0),
+            "应该返回第一个前导码的位置"
+        );
+        
+        // 测试包含前导码子串但不是完整前导码的数据
+        let false_positive = b"PRI * HTTP/2.0\r\n\r\nXX\r\n\r\n";
+        assert!(
+            Http2PreambleDetector::detect_preamble(false_positive).is_none(),
+            "修改后的前导码应该不被识别"
+        );
+    }
+
+    /// 测试配置过载保护
+    /// 
+    /// 验证网络配置能处理极端值而不 panic 或导致未定义行为
+    /// 预期行为：正确处理极大超时、重试次数等边界值
+    #[test]
+    fn test_network_config_overload() {
+        // 测试极大超时值
+        update_network_config(|config| {
+            config.set_timeout(Duration::from_secs(u64::MAX));
+        });
+        get_network_config(|config| {
+            // 即使设置了极大值，也应该能读取
+            assert_eq!(config.timeout(), Duration::from_secs(u64::MAX));
+        });
+        
+        // 测试零超时
+        update_network_config(|config| {
+            config.set_timeout(Duration::from_secs(0));
+        });
+        get_network_config(|config| {
+            assert_eq!(config.timeout(), Duration::from_secs(0));
+        });
+        
+        // 测试极大重试次数
+        update_network_config(|config| {
+            config.set_retry_count(u32::MAX);
+        });
+        get_network_config(|config| {
+            assert_eq!(config.retry_count(), u32::MAX);
+        });
+        
+        // 测试零重试次数
+        update_network_config(|config| {
+            config.set_retry_count(0);
+        });
+        get_network_config(|config| {
+            assert_eq!(config.retry_count(), 0);
+        });
+        
+        // 恢复默认配置
+        update_network_config(|config| {
+            config.set_timeout(Duration::from_secs(30));
+            config.set_retry_count(3);
+        });
+    }
+
+    /// 测试嵌套 TLV 解析
+    /// 
+    /// 验证 TLV 解析器能正确处理嵌套结构和边界情况
+    /// 预期行为：正确解析嵌套 TLV，处理长度不匹配等错误情况
+    #[test]
+    fn test_tlv_parser_nested() {
+        // 测试嵌套 TLV 结构
+        // 外层 TLV: tag=0x01, length=7 (内层TLV的长度)
+        // 内层 TLV: tag=0x02, length=4, value=[0xAA, 0xBB, 0xCC, 0xDD]
+        let nested_data = vec![
+            0x01, 0x00, 0x07, // 外层: tag=1, length=7
+            0x02, 0x00, 0x04, 0xAA, 0xBB, 0xCC, 0xDD, // 内层 TLV
+        ];
+        let mut parser = TlvParser::new(&nested_data);
+        let records = parser.parse_all();
+        assert_eq!(records.len(), 1, "应该解析出一个外层记录");
+        assert_eq!(records[0].tag, 0x01);
+        assert_eq!(records[0].length, 7);
+        // 内层 TLV 作为外层 value 的字节序列
+        assert_eq!(records[0].value, vec![0x02, 0x00, 0x04, 0xAA, 0xBB, 0xCC, 0xDD]);
+        
+        // 测试多个连续的 TLV
+        let multi_tlv = vec![
+            0x01, 0x00, 0x02, 0xAA, 0xBB, // TLV 1
+            0x02, 0x00, 0x02, 0xCC, 0xDD, // TLV 2
+            0x03, 0x00, 0x02, 0xEE, 0xFF, // TLV 3
+        ];
+        let mut parser = TlvParser::new(&multi_tlv);
+        let records = parser.parse_all();
+        assert_eq!(records.len(), 3, "应该解析出3个记录");
+        
+        // 测试长度为零的 TLV
+        let zero_length = vec![0x01, 0x00, 0x00];
+        let mut parser = TlvParser::new(&zero_length);
+        let record = parser.parse_record();
+        assert!(record.is_some(), "应该能解析长度为零的 TLV");
+        assert_eq!(record.unwrap().value.len(), 0, "value 应该为空");
+        
+        // 测试长度超过数据长度的情况（畸形数据）
+        let invalid_length = vec![0x01, 0x00, 0x10, 0xAA]; // 声称长度16，但只有1字节数据
+        let mut parser = TlvParser::new(&invalid_length);
+        let record = parser.parse_record();
+        assert!(record.is_none(), "长度超过数据应该返回 None");
+        
+        // 测试空数据
+        let empty: Vec<u8> = vec![];
+        let mut parser = TlvParser::new(&empty);
+        let records = parser.parse_all();
+        assert!(records.is_empty(), "空数据应该返回空记录列表");
+        
+        // 测试不完整的 TLV 头（只有 tag，没有 length）
+        let incomplete = vec![0x01];
+        let mut parser = TlvParser::new(&incomplete);
+        let record = parser.parse_record();
+        assert!(record.is_none(), "不完整的 TLV 头应该返回 None");
     }
 }

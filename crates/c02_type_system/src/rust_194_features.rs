@@ -748,7 +748,9 @@ impl<T> TypeInferredCache<T> {
         if self.cell.get().is_none() {
             let _ = self.cell.set(f());
         }
-        self.cell.get_mut().unwrap()
+        self.cell
+            .get_mut()
+            .expect("force_get_mut: LazyCell 应该已初始化")
     }
 
     /// 检查是否已初始化
@@ -1321,5 +1323,80 @@ mod tests {
         // 再次获取应该返回相同的值
         let value2 = factory.get();
         assert_eq!(value2, &42);
+    }
+
+    // ==================== 边界测试 ====================
+
+    /// 测试 char 到 usize 转换的 Unicode 边界字符
+    ///
+    /// 验证各种 Unicode 边界字符（如代理项边界）的正确转换
+    #[test]
+    fn test_char_to_usize_unicode_boundaries() {
+        // ASCII 边界
+        assert_eq!(char_to_usize('\0'), 0x0000); // Null character
+        assert_eq!(char_to_usize('\x7F'), 0x007F); // DEL character (ASCII max)
+
+        // BMP (基本多文种平面) 边界
+        assert_eq!(char_to_usize('\u{D7FF}'), 0xD7FF); // 最后一个有效的 BMP
+        assert_eq!(char_to_usize('\u{E000}'), 0xE000); // 第一个私用区
+        assert_eq!(char_to_usize('\u{FFFF}'), 0xFFFF); // BMP 末尾
+
+        // 辅助平面字符
+        assert_eq!(char_to_usize('\u{10000}'), 0x10000); // 第一个辅助平面字符
+        assert_eq!(char_to_usize('\u{10FFFF}'), 0x10FFFF); // 最后一个有效的 Unicode
+
+        // 常用 Unicode 字符
+        assert_eq!(char_to_usize('汉'), 0x6C49);
+        assert_eq!(char_to_usize('🎉'), 0x1F389);
+    }
+
+    /// 测试黄金分割搜索的边界条件
+    ///
+    /// 验证在极端输入条件下搜索器的行为
+    #[test]
+    fn test_golden_section_search_edge_cases() {
+        // 测试非常小的区间
+        let gss = GoldenSectionSearch::new(1e-10, 100);
+        let minimum = gss.find_minimum(|x| x * x, 0.0, 1e-5);
+        assert!((minimum).abs() < 1e-4, "应该在非常小的区间内找到最小值");
+
+        // 测试平坦函数（所有值相同）
+        let gss2 = GoldenSectionSearch::new(1e-6, 100);
+        let flat_min = gss2.find_minimum(|_| 5.0, 0.0, 10.0);
+        // 对于平坦函数，结果应该在区间内
+        assert!(flat_min >= 0.0 && flat_min <= 10.0);
+
+        // 测试最大迭代次数限制
+        let gss3 = GoldenSectionSearch::new(1e-15, 5); // 很小的容差，很少迭代
+        let limited_min = gss3.find_minimum(|x| (x - 5.0).powi(2), 0.0, 10.0);
+        // 由于迭代次数限制，可能达不到高精度
+        assert!((limited_min - 5.0).abs() < 1.0, "即使迭代受限也应该接近最小值");
+    }
+
+    /// 测试类型验证器的实际检查逻辑
+    ///
+    /// 验证 PreciseTypeValidator 的实际验证行为
+    #[test]
+    fn test_type_validator_actual_check() {
+        let validator = PreciseTypeValidator::new();
+
+        // 验证类型大小检查
+        assert_eq!(validator.check_size::<i8>(), 1);
+        assert_eq!(validator.check_size::<i32>(), 4);
+        assert_eq!(validator.check_size::<i64>(), 8);
+        assert_eq!(validator.check_size::<f64>(), 8);
+
+        // 验证对齐检查
+        assert_eq!(validator.check_alignment::<i8>(), 1);
+        assert_eq!(validator.check_alignment::<i32>(), 4);
+        assert_eq!(validator.check_alignment::<i64>(), 8);
+
+        // 验证 validate 方法对实现了 Clone + Send 的类型返回 true
+        assert!(validator.validate::<i32>());
+        assert!(validator.validate::<String>());
+        assert!(validator.validate::<Vec<u8>>());
+
+        // 注意：对于不满足约束的类型，validate 方法会因为 where 子句限制而无法调用
+        // 这是 Rust 类型系统的安全保证
     }
 }

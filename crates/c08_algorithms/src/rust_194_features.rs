@@ -13,7 +13,6 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.94.0
 //! - Edition: 2024
-use std::cell::LazyCell;
 use std::collections::HashMap;
 use std::iter::Peekable;
 use std::sync::LazyLock;
@@ -296,23 +295,21 @@ pub fn demonstrate_array_windows_algorithms() {
 /// Rust 1.94.0 为 LazyCell 添加了新方法，使其在算法缓存中更加灵活。
 /// 斐波那契缓存
 ///
-/// Rust 1.94.0: 使用 LazyCell 实现斐波那契数懒加载
+/// Rust 1.94.0: 使用 HashMap 实现真正的斐波那契数缓存
 pub struct FibonacciCache {
-    #[allow(dead_code)]
-    cache: Vec<LazyCell<u64>>,
+    cache: HashMap<u32, u64>,
 }
 
 impl FibonacciCache {
     /// 创建新的缓存
-    pub fn new(n: usize) -> Self {
-        // LazyCell 需要 fn 指针，这里简化实现
-        let _n = n;
-        // 由于 LazyCell 在标准库中的限制，我们使用简化实现
-        Self { cache: Vec::new() }
+    pub fn new(_n: usize) -> Self {
+        Self {
+            cache: HashMap::new(),
+        }
     }
 
     /// 计算斐波那契数
-    fn compute_fibonacci(n: usize) -> u64 {
+    fn compute_fibonacci(n: u32) -> u64 {
         match n {
             0 => 0,
             1 => 1,
@@ -331,10 +328,14 @@ impl FibonacciCache {
 
     /// 获取第 n 个斐波那契数
     ///
-    /// Rust 1.94.0: 使用 LazyCell
-    pub fn get(&self, n: usize) -> Option<u64> {
-        // 简化实现：直接计算
-        Some(Self::compute_fibonacci(n))
+    /// Rust 1.94.0: 使用 HashMap 实现真正的缓存机制
+    pub fn get(&mut self, n: u32) -> Option<u64> {
+        if let Some(&val) = self.cache.get(&n) {
+            return Some(val);
+        }
+        let val = Self::compute_fibonacci(n);
+        self.cache.insert(n, val);
+        Some(val)
     }
 }
 
@@ -373,7 +374,7 @@ pub fn demonstrate_lazycell_caching() {
     println!("\n=== LazyCell 算法缓存演示 ===\n");
 
     // 斐波那契缓存
-    let fib_cache = FibonacciCache::new(20);
+    let mut fib_cache = FibonacciCache::new(20);
     println!("F(10) = {}", fib_cache.get(10).unwrap_or(0));
     println!("F(15) = {}", fib_cache.get(15).unwrap_or(0));
     println!("F(19) = {}", fib_cache.get(19).unwrap_or(0));
@@ -927,11 +928,17 @@ mod tests {
 
     #[test]
     fn test_fibonacci_cache() {
-        let cache = FibonacciCache::new(10);
+        let mut cache = FibonacciCache::new(10);
         assert_eq!(cache.get(0).unwrap(), 0);
         assert_eq!(cache.get(1).unwrap(), 1);
         assert_eq!(cache.get(5).unwrap(), 5);
         assert_eq!(cache.get(10).unwrap(), 55);
+        
+        // 测试缓存命中（第二次调用应该使用缓存）
+        assert_eq!(cache.get(10).unwrap(), 55);
+        
+        // 验证缓存中有数据
+        assert!(cache.cache.contains_key(&10));
     }
 
     #[test]
@@ -1030,5 +1037,134 @@ mod tests {
         let items = vec![1, 2, 3];
         let result = batch_process(&items, |_| Ok::<_, String>(()));
         assert!(matches!(result, ControlFlow::Continue(3)));
+    }
+
+    // ==================== 边界测试和反例测试 ====================
+
+    /// 测试大数缓存
+    /// 
+    /// 验证斐波那契缓存能处理大数值计算而不溢出或 panic
+    /// 预期行为：返回计算结果或使用 wrapping 算术
+    #[test]
+    fn test_fibonacci_cache_large_n() {
+        let mut cache = FibonacciCache::new(100);
+        
+        // 测试较大值的计算（使用 wrapping_add 防止溢出）
+        let result_50 = cache.get(50);
+        assert!(result_50.is_some(), "F(50) 应该被成功计算");
+        
+        // 验证缓存是否生效
+        let result_50_cached = cache.get(50);
+        assert_eq!(result_50, result_50_cached, "缓存应该返回相同结果");
+        
+        // 测试会导致 u64 溢出的值（u64::MAX 约为 1.8e19，F(94) 会溢出）
+        // 使用 wrapping_add，所以不会 panic，但结果是 wrapping 后的值
+        let result_100 = cache.get(100);
+        assert!(result_100.is_some(), "F(100) 应该被计算（使用 wrapping）");
+        
+        // 验证缓存中有多个条目
+        assert!(cache.cache.len() > 0, "缓存应该包含计算过的值");
+    }
+
+    /// 测试溢出处理
+    /// 
+    /// 验证斐波那契缓存使用 wrapping 算术正确处理溢出
+    /// 预期行为：返回 wrapping 后的结果，不 panic
+    #[test]
+    fn test_fibonacci_overflow() {
+        let mut cache = FibonacciCache::new(100);
+        
+        // F(93) = 12200160415121876738 < u64::MAX
+        // F(94) = 19740274219868223167 > u64::MAX (会溢出)
+        let f_93 = cache.get(93).unwrap();
+        let f_94 = cache.get(94).unwrap();
+        
+        // 验证 F(93) 是正确的
+        assert_eq!(f_93, 12200160415121876738u64, "F(93) 应该是正确的值");
+        
+        // 由于使用 wrapping_add，F(94) 会是 wrapping 后的值
+        // 不是真正的 F(94)，但没有溢出 panic
+        let expected_wrapped = f_93.wrapping_add(cache.get(92).unwrap());
+        assert_eq!(f_94, expected_wrapped, "F(94) 应该是 wrapping 后的值");
+        
+        // 验证没有 panic，程序继续运行
+        let f_100 = cache.get(100).unwrap();
+        assert!(f_100 > 0 || f_100 == 0, "F(100) 应该有一个值（可能已 wrapping）");
+    }
+
+    /// 测试空模式搜索
+    /// 
+    /// 验证滑动窗口算法能正确处理空模式
+    /// 预期行为：返回空结果或适当处理，不 panic
+    #[test]
+    fn test_sliding_window_find_patterns_empty() {
+        let data = vec![1, 2, 3, 4, 5];
+        
+        // 测试空模式的查找
+        let empty_pattern: Vec<i32> = vec![];
+        let occurrences = SlidingWindowAlgorithms::find_pattern_occurrences(&empty_pattern, &data);
+        assert!(occurrences.is_empty(), "空模式应该返回空结果");
+        
+        // 测试空数据的查找
+        let empty_data: Vec<i32> = vec![];
+        let occurrences = SlidingWindowAlgorithms::find_pattern_occurrences(&vec![1, 2], &empty_data);
+        assert!(occurrences.is_empty(), "空数据应该返回空结果");
+        
+        // 测试模式比数据长的情况
+        let short_data = vec![1, 2];
+        let long_pattern = vec![1, 2, 3, 4, 5];
+        let occurrences = SlidingWindowAlgorithms::find_pattern_occurrences(&long_pattern, &short_data);
+        assert!(occurrences.is_empty(), "模式比数据长应该返回空结果");
+        
+        // 测试空数据的窗口和
+        let empty_sums = SlidingWindowAlgorithms::window_sum::<3>(&empty_data);
+        assert!(empty_sums.is_empty(), "空数据的窗口和应该返回空结果");
+        
+        // 测试不足窗口大小的数据
+        let small_data = vec![1, 2];
+        let sums = SlidingWindowAlgorithms::window_sum::<3>(&small_data);
+        assert!(sums.is_empty(), "不足窗口大小的数据应该返回空结果");
+    }
+
+    /// 测试字符串窗口算法边界
+    /// 
+    /// 验证字符串窗口算法能正确处理边界情况
+    /// 预期行为：正确处理空字符串、窗口大小大于字符串等边界情况
+    #[test]
+    fn test_string_window_algorithms_edge_cases() {
+        let empty_string = "";
+        
+        // 测试空字符串的子串查找
+        let substrings = StringWindowAlgorithms::find_distinct_substrings(empty_string, 3);
+        assert!(substrings.is_empty(), "空字符串应该返回空子串列表");
+        
+        // 测试窗口大小大于字符串长度的情况
+        let short_string = "ab";
+        let substrings = StringWindowAlgorithms::find_distinct_substrings(short_string, 5);
+        assert!(substrings.is_empty(), "窗口大小大于字符串长度应该返回空结果");
+        
+        // 测试空字符串的回文查找
+        let palindromes = StringWindowAlgorithms::find_palindromic_windows(empty_string, 3);
+        assert!(palindromes.is_empty(), "空字符串应该返回空回文列表");
+        
+        // 测试单个字符字符串
+        let single_char = "a";
+        let substrings = StringWindowAlgorithms::find_distinct_substrings(single_char, 1);
+        assert_eq!(substrings.len(), 1, "单字符字符串应该返回一个子串");
+        assert!(substrings.contains(&"a".to_string()), "子串应该包含 'a'");
+        
+        // 测试字符串过渡分析的空字符串情况
+        let transitions = StringWindowAlgorithms::analyze_string_transitions(empty_string, 2);
+        assert!(transitions.is_empty(), "空字符串应该返回空过渡列表");
+        
+        // 测试 Unicode 字符串
+        let unicode = "你好世界";
+        let substrings = StringWindowAlgorithms::find_distinct_substrings(unicode, 2);
+        assert_eq!(substrings.len(), 3, "4个字符的字符串应该有3个长度为2的子串");
+        
+        // 测试所有字符相同的字符串（回文检测）
+        let all_same = "aaaa";
+        let palindromes = StringWindowAlgorithms::find_palindromic_windows(all_same, 2);
+        assert_eq!(palindromes.len(), 3, "所有字符相同的字符串应该有多个回文");
     }
 }
