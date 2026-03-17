@@ -89,10 +89,29 @@ docs/archive/
 - `QUICK_REFERENCE_UPDATE_2025_11_15.md` - 快速参考更新
 - `DOCUMENTATION_UPDATE_COMPLETE_2025_11_15.md` - 文档更新完成
 
-### reports/ - 各种总结和报告
+### reports/ - 各种总结和报告（2026-03-17 重新组织）
 
-包含文档标准化、修复报告等：
+包含文档标准化、修复报告等，按子主题分类：
 
+**核心报告（保留在 docs/ 根目录）**:
+- `PROJECT_STATUS.md` - 统一项目状态报告（2026-03-17 新增）
+- `FINAL_COMPLETION_REPORT_2026_03_14.md` - 最新完成报告
+- `DOCS_CRITICAL_EVALUATION_AND_IMPROVEMENT_PLAN.md` - 文档评估与改进计划
+
+**reports/completion/ - 完成报告（9份，2026-03-17 归档）**:
+- `100_PERCENT_COMPLETION_FINAL_REPORT.md`
+- `COMPLETION_REPORT_FINAL.md`
+- `FINAL_100_PERCENT_COMPLETION_REPORT.md` 等
+
+**reports/rust_194/ - Rust 1.94 相关报告（4份，2026-03-17 归档）**:
+- `RUST_194_COMPLETION_REPORT.md`
+- `RUST_194_DOCUMENTATION_COMPLETION_REPORT.md` 等
+
+**reports/weekly/ - 周报告（2份，2026-03-17 归档）**:
+- `WEEK1_COMPLETION_REPORT.md`
+- `WEEK2_COMPLETION_REPORT.md`
+
+**其他历史报告**:
 - `CRATES_DOCUMENTATION_CONSOLIDATION_SUMMARY_2025_11_15.md` - Crates 文档整合总结
 - `CRATES_DOCUMENTATION_FINAL_REPORT_2025_11_15.md` - Crates 文档最终报告
 - `CRATES_DOCUMENTATION_REVIEW_2025_11_15.md` - Crates 文档审查报告
@@ -100,6 +119,11 @@ docs/archive/
 - `DUPLICATE_TOC_FIX_REPORT_2025_11_15.md` - 重复目录修复报告
 - `CARGO_WORKSPACE_PROFILE_GUIDE.md` - Cargo 工作空间配置文件指南
 - `RUST_1.91_FEATURES_COMPREHENSIVE.md` - Rust 1.91 特性综合说明
+- `ALIGNMENT_COMPLETION_REPORT.md` - 对齐完成报告
+- `DETAILED_QUALITY_ASSESSMENT_REPORT.md` - 质量评估报告
+- `NETWORK_ALIGNMENT_COMPLETION_REPORT.md` - 网络对齐报告
+- `PHASE1_COMPLETION_REPORT.md` - 第一阶段报告
+- `RUST_REFERENCE_GAP_ANALYSIS_REPORT.md` - 参考差距分析
 
 ### temp/ - 临时文件和个人文件
 

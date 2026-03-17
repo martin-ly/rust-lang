@@ -2,10 +2,9 @@
 //! 
 //! 本模块演示 GAT、类型族、HList 等高级泛型特性
 
-use std::marker::PhantomData;
-
 /// 泛型关联类型演示
-trait LendingIterator {
+#[allow(dead_code)]
+pub trait LendingIterator {
     type Item<'a>
     where
         Self: 'a;
@@ -63,7 +62,7 @@ impl HList for HNil {}
 impl<H, T: HList> HList for HCons<H, T> {}
 
 /// HList 长度计算
-trait HListLength {
+pub trait HListLength {
     const LEN: usize;
 }
 
