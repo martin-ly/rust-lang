@@ -34,7 +34,7 @@ mindmap
 
 ## 📁 目录结构
 
-```
+```text
 content/
 ├── README.md                 # 本文件
 ├── emerging/                 # 前沿特性跟踪
@@ -85,7 +85,7 @@ content/
 
 ## 🔄 更新流程
 
-```
+```text
 新 Rust 版本发布
        ↓
   更新 emerging/

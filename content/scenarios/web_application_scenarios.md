@@ -1,7 +1,7 @@
 # Web 应用开发场景树
 
-> **定位**: Web 开发完整场景覆盖  
-> **技术栈**: Axum/Tokio/SQLx  
+> **定位**: Web 开发完整场景覆盖
+> **技术栈**: Axum/Tokio/SQLx
 > **完备度**: 100%
 
 ---
@@ -14,22 +14,22 @@ graph TD
     A --> C[实时应用]
     A --> D[微服务]
     A --> E[Serverless]
-    
+
     B --> B1[RESTful API]
     B --> B2[GraphQL]
     B --> B3[gRPC]
-    
+
     C --> C1[WebSocket]
     C --> C2[SSE]
     C --> C3[长轮询]
-    
+
     D --> D1[服务发现]
     D --> D2[负载均衡]
     D --> D3[熔断降级]
-    
+
     E --> E1[AWS Lambda]
     E --> E2[Cloudflare Workers]
-    
+
     style B fill:#90EE90
     style C fill:#FFD700
     style D fill:#87CEEB
@@ -101,6 +101,6 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 
 ---
 
-**维护者**: Rust 学习项目团队  
-**最后更新**: 2026-03-15  
+**维护者**: Rust 学习项目团队
+**最后更新**: 2026-03-15
 **状态**: ✅ 100% 完成
