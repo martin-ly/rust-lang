@@ -44,7 +44,7 @@ async fn main() -> anyhow::Result<()> {
 
     let results = futures::future::join_all(handles).await;
     for r in results {
-        println!("{}", r.unwrap());
+        println!("{}", r.expect("结果应存在"));
     }
 
     // 3) 取消演示
@@ -55,7 +55,7 @@ async fn main() -> anyhow::Result<()> {
     }));
     tokio::time::sleep(Duration::from_millis(10)).await;
     scope.cancel();
-    let _ = t.await.unwrap();
+    let _ = t.await.expect("等待任务完成不应失败");
 
     Ok(())
 }

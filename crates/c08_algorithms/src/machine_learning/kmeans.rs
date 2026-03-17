@@ -364,11 +364,11 @@ mod tests {
         let result = kmeans.fit(&data);
         assert!(result.is_ok());
 
-        let predictions = kmeans.predict(&data).unwrap();
+        let predictions = kmeans.predict(&data).expect("KMeans预测失败");
         assert_eq!(predictions.len(), data.len());
 
         // 检查聚类中心
-        let centers = kmeans.cluster_centers().unwrap();
+        let centers = kmeans.cluster_centers().expect("获取KMeans聚类中心失败");
         assert_eq!(centers.len(), 2);
     }
 
@@ -400,8 +400,8 @@ mod tests {
         let result = kmeans_fit_async(2, data.clone(), Some(50), Some(1e-3)).await;
         assert!(result.is_ok());
 
-        let kmeans = result.unwrap();
-        let predictions = kmeans.predict(&data).unwrap();
+        let kmeans = result.expect("KMeans训练失败");
+        let predictions = kmeans.predict(&data).expect("KMeans预测失败");
         assert_eq!(predictions.len(), data.len());
     }
 }

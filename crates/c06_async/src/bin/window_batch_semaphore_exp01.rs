@@ -34,7 +34,7 @@ async fn main() {
         if batch.is_empty() {
             break;
         }
-        let permit = sem.clone().acquire_owned().await.unwrap();
+        let permit = sem.clone().acquire_owned().await.expect("获取信号量许可不应失败");
         tokio::spawn(async move {
             let _p = permit;
             tokio::time::sleep(Duration::from_millis(60)).await;

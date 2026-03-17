@@ -848,7 +848,7 @@ mod tests {
         );
 
         assert!(result.found);
-        assert!(result.value.unwrap() - 3.14 < 0.1);
+        assert!(result.value.expect("获取搜索结果值失败") - 3.14 < 0.1);
         assert_eq!(result.algorithm, SearchingAlgorithm::Ternary);
     }
 
@@ -900,7 +900,7 @@ mod tests {
     #[tokio::test]
     async fn test_async_search() {
         let data = vec![1, 3, 5, 7, 9, 11, 13];
-        let result = SearchingEngine::linear_search_async(data, 7).await.unwrap();
+        let result = SearchingEngine::linear_search_async(data, 7).await.expect("异步线性搜索失败");
 
         assert!(result.found);
         assert_eq!(result.index, Some(3));
@@ -917,7 +917,7 @@ mod tests {
         let binary_complexity = complexities
             .iter()
             .find(|c| c.algorithm == SearchingAlgorithm::Binary)
-            .unwrap();
+            .expect("查找二分搜索复杂度失败");
         assert_eq!(binary_complexity.time_complexity, "O(log n)");
         assert_eq!(binary_complexity.space_complexity, "O(1)");
         assert!(binary_complexity.requires_sorted);

@@ -335,7 +335,7 @@ mod tests {
         let result = preprocessing::standardize(&mut data);
         assert!(result.is_ok());
 
-        let (means, stds) = result.unwrap();
+        let (means, stds) = result.expect("标准化失败");
         assert_eq!(means, vec![3.0, 4.0]);
         // population std: sqrt(((4+0+4)/3)) = sqrt(8/3)
         let expected_std = (8.0f64 / 3.0).sqrt();
@@ -355,7 +355,7 @@ mod tests {
         let result = preprocessing::normalize(&mut data);
         assert!(result.is_ok());
 
-        let (mins, maxs) = result.unwrap();
+        let (mins, maxs) = result.expect("归一化失败");
         assert_eq!(mins, vec![1.0, 2.0]);
         assert_eq!(maxs, vec![5.0, 6.0]);
 
@@ -377,7 +377,7 @@ mod tests {
         let result = preprocessing::train_test_split(&data, &labels, 0.25);
         assert!(result.is_ok());
 
-        let (train_data, test_data, train_labels, test_labels) = result.unwrap();
+        let (train_data, test_data, train_labels, test_labels) = result.expect("训练测试集分割失败");
         assert_eq!(train_data.len(), 3);
         assert_eq!(test_data.len(), 1);
         assert_eq!(train_labels.len(), 3);
@@ -389,7 +389,7 @@ mod tests {
         let predictions = vec![1, 0, 1, 0, 1];
         let actual = vec![1, 0, 0, 0, 1];
 
-        let metrics = Metrics::compute_classification_metrics(&predictions, &actual).unwrap();
+        let metrics = Metrics::compute_classification_metrics(&predictions, &actual).expect("计算分类指标失败");
         assert_eq!(metrics.accuracy, 0.8);
         assert_eq!(metrics.precision, 2.0 / 3.0);
         assert_eq!(metrics.recall, 1.0);

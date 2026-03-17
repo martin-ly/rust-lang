@@ -675,7 +675,7 @@ mod tests {
         pool.submit(|| {
             thread::sleep(Duration::from_millis(1));
         })
-        .unwrap();
+        .expect("创建任务不应失败");
 
         assert_eq!(pool.get_active_threads(), 1);
     }

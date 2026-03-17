@@ -88,7 +88,7 @@ impl KMeans {
                     .iter()
                     .enumerate()
                     .map(|(i, centroid)| (i, self.euclidean_distance(point, centroid)))
-                    .min_by(|a, b| a.1.partial_cmp(&b.1).unwrap())
+                    .min_by(|a, b| a.1.partial_cmp(&b.1).expect("距离比较失败"))
                     .map(|(i, _)| i as Label)
                     .unwrap_or(0)
             })
@@ -138,7 +138,7 @@ impl KMeans {
             return Err(MLError::ModelNotTrained);
         }
 
-        let centroids = self.centroids.as_ref().unwrap();
+        let centroids = self.centroids.as_ref().expect("聚类中心未初始化");
         let labels = self.assign_clusters(data, centroids);
 
         let mut inertia = 0.0;
@@ -188,7 +188,7 @@ impl UnsupervisedLearning for KMeans {
             return Err(MLError::ModelNotTrained);
         }
 
-        let centroids = self.centroids.as_ref().unwrap();
+        let centroids = self.centroids.as_ref().expect("聚类中心未初始化");
         Ok(self.assign_clusters(data, centroids))
     }
 
@@ -353,7 +353,7 @@ impl ClusteringMetrics {
                 continue;
             }
 
-            let same_cluster = clusters.get(&label).unwrap();
+            let same_cluster = clusters.get(&label).expect("获取聚类失败");
 
             // 计算 a(i) - 同一聚类内的平均距离
             let a_i = if same_cluster.len() == 1 {
@@ -492,13 +492,13 @@ mod tests {
         let result = kmeans.fit(&data);
         assert!(result.is_ok());
 
-        let labels = kmeans.predict(&data).unwrap();
+        let labels = kmeans.predict(&data).expect("KMeans预测失败");
         assert_eq!(labels.len(), data.len());
 
-        let centroids = kmeans.cluster_centers().unwrap();
+        let centroids = kmeans.cluster_centers().expect("获取KMeans聚类中心失败");
         assert_eq!(centroids.len(), 2);
 
-        let inertia = kmeans.inertia(&data).unwrap();
+        let inertia = kmeans.inertia(&data).expect("计算KMeans惯性失败");
         assert!(inertia > 0.0);
     }
 
@@ -518,7 +518,7 @@ mod tests {
         let result = dbscan.fit(&data);
         assert!(result.is_ok());
 
-        let labels = dbscan.predict(&data).unwrap();
+        let labels = dbscan.predict(&data).expect("DBSCAN预测失败");
         assert_eq!(labels.len(), data.len());
     }
 
@@ -532,7 +532,7 @@ mod tests {
         ];
         let labels = vec![0, 0, 1, 1];
 
-        let score = ClusteringMetrics::silhouette_score(&data, &labels).unwrap();
+        let score = ClusteringMetrics::silhouette_score(&data, &labels).expect("计算轮廓系数失败");
         assert!(score >= -1.0 && score <= 1.0);
     }
 
@@ -546,7 +546,7 @@ mod tests {
         ];
         let labels = vec![0, 0, 1, 1];
 
-        let score = ClusteringMetrics::davies_bouldin_score(&data, &labels).unwrap();
+        let score = ClusteringMetrics::davies_bouldin_score(&data, &labels).expect("计算Davies-Bouldin指数失败");
         assert!(score >= 0.0);
     }
 }

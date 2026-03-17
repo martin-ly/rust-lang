@@ -200,7 +200,7 @@ impl SystemResourceMonitor {
     }
 
     fn collect_system_stats(&self) {
-        let mut system_stats = self.system_stats.lock().unwrap();
+        let mut system_stats = self.system_stats.lock().expect("获取系统统计锁不应失败");
         let thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
 
         // 计算系统总统计

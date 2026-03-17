@@ -184,7 +184,7 @@ impl MLP {
         let mut linear_outputs = Vec::new();
 
         for layer in &self.layers {
-            let current_input = activations.last().unwrap();
+            let current_input = activations.last().expect("获取激活值失败");
             let mut linear_output = Vec::new();
             let mut activation_output = Vec::new();
 
@@ -203,7 +203,7 @@ impl MLP {
             activations.push(activation_output);
         }
 
-        let predictions = activations.last().unwrap();
+        let predictions = activations.last().expect("获取预测值失败");
         let loss = self.loss(predictions, target);
 
         // 反向传播
@@ -213,11 +213,11 @@ impl MLP {
         let output_errors: Vec<f64> = predictions
             .iter()
             .zip(target.iter())
-            .zip(linear_outputs.last().unwrap().iter())
+            .zip(linear_outputs.last().expect("获取线性输出失败").iter())
             .map(|((&pred, &target), &linear)| {
                 let error = pred - target;
                 let activation_derivative =
-                    self.layers.last().unwrap().activation.derivative(linear);
+                    self.layers.last().expect("获取最后一层失败").activation.derivative(linear);
                 error * activation_derivative
             })
             .collect();
@@ -331,7 +331,7 @@ impl SupervisedLearning for MLP {
         let predicted_class = output
             .iter()
             .enumerate()
-            .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
+            .max_by(|a, b| a.1.partial_cmp(b.1).expect("输出值比较失败"))
             .map(|(i, _)| i as Label)
             .unwrap_or(0);
 
@@ -424,7 +424,7 @@ mod tests {
         let mlp = MLP::new(&layer_sizes, activations, 0.01);
         assert!(mlp.is_ok());
 
-        let mlp = mlp.unwrap();
+        let mlp = mlp.expect("创建MLP失败");
         assert_eq!(mlp.layers.len(), 2);
     }
 
@@ -432,7 +432,7 @@ mod tests {
     fn test_mlp_forward() {
         let layer_sizes = vec![2, 3, 1];
         let activations = vec![ActivationFunction::ReLU, ActivationFunction::Sigmoid];
-        let mlp = MLP::new(&layer_sizes, activations, 0.01).unwrap();
+        let mlp = MLP::new(&layer_sizes, activations, 0.01).expect("创建MLP失败");
 
         let input = vec![1.0, 2.0];
         let output = mlp.forward(&input);
@@ -444,7 +444,7 @@ mod tests {
     fn test_mlp_regression_training() {
         let layer_sizes = vec![1, 5, 1];
         let activations = vec![ActivationFunction::ReLU, ActivationFunction::Linear];
-        let mut mlp = MLP::new(&layer_sizes, activations, 0.05).unwrap();
+        let mut mlp = MLP::new(&layer_sizes, activations, 0.05).expect("创建MLP失败");
 
         // 简单的线性关系数据 y = 2x
         let data = vec![vec![1.0], vec![2.0], vec![3.0], vec![4.0]];
@@ -456,7 +456,7 @@ mod tests {
 
         // 进行若干步训练
         for (sample, &target) in data.iter().zip(targets.iter()) {
-            let _ = mlp.train_step(sample, &[target]).unwrap();
+            let _ = mlp.train_step(sample, &[target]).expect("MLP训练步骤失败");
         }
 
         // 训练后损失应降低

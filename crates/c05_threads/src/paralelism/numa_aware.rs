@@ -119,7 +119,7 @@ impl NumaAwareTaskAllocator {
 
     /// 完成任务，减少工作负载
     pub fn complete_task(&self, node_id: usize) {
-        let mut workloads = self.node_workloads.lock().unwrap();
+        let mut workloads = self.node_workloads.lock().expect("获取工作负载锁不应失败");
         if let Some(workload) = workloads.get_mut(&node_id)
             && *workload > 0
         {

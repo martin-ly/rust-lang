@@ -176,9 +176,9 @@ impl GlobalTaskQueue {
     }
 
     fn steal_task(&self) -> Option<Box<dyn FnOnce() + Send + 'static>> {
-        let mut tasks = self.tasks.lock().unwrap();
+        let mut tasks = self.tasks.lock().expect("获取任务锁不应失败");
         if let Some(task) = tasks.pop_back() {
-            let mut stats = self.stats.lock().unwrap();
+            let mut stats = self.stats.lock().expect("获取统计锁不应失败");
             stats.stolen_tasks += 1;
             stats.current_tasks -= 1;
             Some(task)
@@ -518,7 +518,7 @@ where
 
                 if start < end {
                     let chunk = &data[start..end];
-                    let mut results = results.lock().unwrap();
+                    let mut results = results.lock().expect("获取结果锁不应失败");
 
                     for (j, item) in chunk.iter().enumerate() {
                         let result = f(item);

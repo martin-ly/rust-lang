@@ -193,7 +193,7 @@ pub mod producer_consumer {
         pub async fn producer(tx: mpsc::Sender<i32>) {
             for i in 0..5 {
                 println!("  [Go-Producer] 发送: {}", i);
-                tx.send(i).await.unwrap();
+                tx.send(i).await.expect("发送消息不应失败");
                 sleep(Duration::from_millis(100)).await;
             }
             println!("  [Go-Producer] 完成，关闭 channel");
@@ -238,7 +238,7 @@ pub mod producer_consumer {
             let producer = tokio::spawn(async move {
                 for i in 0..5 {
                     println!("  [Rust-Producer] 发送: {}", i);
-                    tx.send(i).await.unwrap();
+                    tx.send(i).await.expect("发送消息不应失败");
                     sleep(Duration::from_millis(100)).await;
                 }
                 println!("  [Rust-Producer] 完成");
@@ -303,12 +303,12 @@ pub mod select_pattern {
             // 启动发送任务
             tokio::spawn(async move {
                 sleep(Duration::from_millis(50)).await;
-                tx1.send("from ch1".to_string()).await.unwrap();
+                tx1.send("from ch1".to_string()).await.expect("发送消息不应失败");
             });
 
             tokio::spawn(async move {
                 sleep(Duration::from_millis(100)).await;
-                tx2.send("from ch2".to_string()).await.unwrap();
+                tx2.send("from ch2".to_string()).await.expect("发送消息不应失败");
             });
 
             // Rust 的 tokio::select! 宏模拟 Go 的 select
@@ -344,12 +344,12 @@ pub mod select_pattern {
 
             tokio::spawn(async move {
                 sleep(Duration::from_millis(50)).await;
-                tx1.send(Ok(42)).await.unwrap();
+                tx1.send(Ok(42)).await.expect("发送消息不应失败");
             });
 
             tokio::spawn(async move {
                 sleep(Duration::from_millis(100)).await;
-                tx2.send(Err("error".to_string())).await.unwrap();
+                tx2.send(Err("error".to_string())).await.expect("发送消息不应失败");
             });
 
             // Rust 的优势: 结合 Result 和模式匹配
@@ -424,7 +424,7 @@ pub mod worker_pool {
             while let Some(j) = jobs.recv().await {
                 println!("  [Worker {}] 处理任务 {}", id, j);
                 sleep(Duration::from_millis(100)).await;
-                results.send(j * 2).await.unwrap();
+                results.send(j * 2).await.expect("发送结果不应失败");
             }
             println!("  [Worker {}] 退出", id);
         }
@@ -455,7 +455,7 @@ pub mod worker_pool {
                             Some(j) => {
                                 println!("  [Worker {}] 处理任务 {}", worker_id, j);
                                 sleep(Duration::from_millis(100)).await;
-                                tx.send(j * 2).await.unwrap();
+                                tx.send(j * 2).await.expect("发送消息不应失败");
                             }
                             None => {
                                 println!("  [Worker {}] 退出", worker_id);
@@ -472,7 +472,7 @@ pub mod worker_pool {
             // 发送任务
             for j in 1..=5 {
                 println!("  [Main] 提交任务 {}", j);
-                job_tx.send(j).await.unwrap();
+                job_tx.send(j).await.expect("发送作业不应失败");
             }
             drop(job_tx); // 关闭任务 channel
 
@@ -485,7 +485,7 @@ pub mod worker_pool {
 
             // 等待 workers
             for handle in workers {
-                handle.await.unwrap();
+                handle.await.expect("等待任务完成不应失败");
             }
 
             println!("  总共收到 {} 个结果", count);
@@ -507,7 +507,7 @@ pub mod worker_pool {
             for j in 1..=5 {
                 let sem = semaphore.clone();
                 let handle = tokio::spawn(async move {
-                    let _permit = sem.acquire().await.unwrap();
+                    let _permit = sem.acquire().await.expect("获取信号量许可不应失败");
                     println!("  [Task {}] 开始处理", j);
                     sleep(Duration::from_millis(100)).await;
                     let result = j * 2;
@@ -519,7 +519,7 @@ pub mod worker_pool {
 
             // 收集结果
             for handle in handles {
-                let result = handle.await.unwrap();
+                let result = handle.await.expect("等待任务完成不应失败");
                 println!("  [Main] 收到结果: {}", result);
             }
 
@@ -572,7 +572,7 @@ pub mod pipeline {
             tokio::spawn(async move {
                 for n in nums {
                     println!("  [Gen] 生成: {}", n);
-                    tx.send(n).await.unwrap();
+                    tx.send(n).await.expect("发送消息不应失败");
                 }
                 println!("  [Gen] 完成");
             });
@@ -585,7 +585,7 @@ pub mod pipeline {
                 while let Some(n) = input.recv().await {
                     let result = n * n;
                     println!("  [Square] {} -> {}", n, result);
-                    tx.send(result).await.unwrap();
+                    tx.send(result).await.expect("发送结果不应失败");
                 }
                 println!("  [Square] 完成");
             });
@@ -629,7 +629,7 @@ pub mod pipeline {
             tokio::spawn(async move {
                 for n in 1..=5 {
                     println!("  [Gen] 生成: {}", n);
-                    tx.send(n).await.unwrap();
+                    tx.send(n).await.expect("发送消息不应失败");
                 }
                 println!("  [Gen] 完成");
             });
@@ -679,7 +679,7 @@ pub mod fan_in_out {
                 for j in 0..3 {
                     let value = i * 10 + j;
                     println!("    [Producer {}] 发送: {}", i, value);
-                    tx.send(value).await.unwrap();
+                    tx.send(value).await.expect("发送值不应失败");
                     sleep(Duration::from_millis(50)).await;
                 }
                 println!("    [Producer {}] 完成", i);

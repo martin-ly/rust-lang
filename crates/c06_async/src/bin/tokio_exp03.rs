@@ -3,7 +3,7 @@ use tokio::sync::Semaphore;
 use tokio::time::{Duration, sleep};
 
 async fn limited_task(id: u32, semaphore: Arc<Semaphore>) {
-    let _permit = semaphore.acquire().await.unwrap(); // 获取许可
+    let _permit = semaphore.acquire().await.expect("获取信号量许可不应失败"); // 获取许可
     println!("任务 {} 开始", id);
     sleep(Duration::from_secs(2)).await;
     println!("任务 {} 完成", id);

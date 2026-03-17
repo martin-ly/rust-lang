@@ -608,7 +608,7 @@ impl DynamicLoadBalancingScopedThreads {
                     loop {
                         // 尝试获取任务
                         let task = {
-                            let mut queue = queue.lock().unwrap();
+                            let mut queue = queue.lock().expect("获取队列锁不应失败");
                             queue.pop()
                         };
 
@@ -623,7 +623,7 @@ impl DynamicLoadBalancingScopedThreads {
 
                                 if local_results.len() % 3 == 0 {
                                     // 每处理3个任务就提交一次结果
-                                    results.lock().unwrap().extend(local_results.drain(..));
+                                    results.lock().expect("获取结果锁不应失败").extend(local_results.drain(..));
                                 }
                             }
                             None => break, // 没有更多任务
@@ -631,7 +631,7 @@ impl DynamicLoadBalancingScopedThreads {
                     }
 
                     // 提交剩余结果
-                    results.lock().unwrap().extend(local_results);
+                    results.lock().expect("获取结果锁不应失败").extend(local_results);
                 });
             }
         });
@@ -670,7 +670,7 @@ impl DynamicLoadBalancingScopedThreads {
 
                     loop {
                         let task = {
-                            let mut queue = queue.lock().unwrap();
+                            let mut queue = queue.lock().expect("获取队列锁不应失败");
                             queue.pop()
                         };
 
@@ -682,7 +682,7 @@ impl DynamicLoadBalancingScopedThreads {
 
                                 // 如果任务队列很长且线程数未达到上限，考虑创建新线程
                                 let queue_len = {
-                                    let queue = queue.lock().unwrap();
+                                    let queue = queue.lock().expect("获取队列锁不应失败");
                                     queue.len()
                                 };
 
@@ -695,7 +695,7 @@ impl DynamicLoadBalancingScopedThreads {
                         }
                     }
 
-                    results.lock().unwrap().extend(local_results);
+                    results.lock().expect("获取结果锁不应失败").extend(local_results);
                     active.fetch_sub(1, Ordering::Relaxed);
                 });
             }

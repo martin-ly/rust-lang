@@ -376,7 +376,7 @@ impl ThreadPriorityScheduler {
                     thread::sleep(Duration::from_millis(1));
 
                     // 更新CPU时间
-                    let mut threads = scheduler.threads.lock().unwrap();
+                    let mut threads = scheduler.threads.lock().expect("获取线程锁不应失败");
                     if let Some(info) = threads.get_mut(&thread_id) {
                         info.update_cpu_time(Duration::from_millis(1));
                     }
@@ -562,7 +562,7 @@ mod tests {
         assert_eq!(scheduler.get_thread_priority(1), Some(ThreadPriority::High));
 
         // Test basic priority setting without OS-level operations
-        let mut threads = scheduler.threads.lock().unwrap();
+        let mut threads = scheduler.threads.lock().expect("获取线程锁不应失败");
         if let Some(info) = threads.get_mut(&1) {
             info.priority = ThreadPriority::Critical;
         }
@@ -581,7 +581,7 @@ mod tests {
         scheduler.register_thread(1, ThreadPriority::Normal, SchedulingPolicy::Priority);
 
         // Test priority boost without OS-level operations
-        let mut threads = scheduler.threads.lock().unwrap();
+        let mut threads = scheduler.threads.lock().expect("获取线程锁不应失败");
         if let Some(info) = threads.get_mut(&1) {
             info.boost_priority(ThreadPriority::High);
         }
@@ -590,7 +590,7 @@ mod tests {
         assert_eq!(scheduler.get_thread_priority(1), Some(ThreadPriority::High));
 
         // Test priority restore without OS-level operations
-        let mut threads = scheduler.threads.lock().unwrap();
+        let mut threads = scheduler.threads.lock().expect("获取线程锁不应失败");
         if let Some(info) = threads.get_mut(&1) {
             info.restore_priority();
         }

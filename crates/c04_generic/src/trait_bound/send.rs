@@ -189,7 +189,7 @@ fn main() {
         println!("Data in thread: {:?}", data_clone);
     });
 
-    handle.join().unwrap();
+    handle.join().expect("线程应成功完成");
     println!("Original data: {:?}", data);
 }
 ```
@@ -208,7 +208,7 @@ fn main() {
         println!("Modified data: {:?}", guard);
     });
 
-    handle.join().unwrap();
+    handle.join().expect("线程应成功完成");
 }
 ```
 
@@ -230,7 +230,7 @@ fn main() {
     }).collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     println!("Final count: {}", counter.load(Ordering::Relaxed));
@@ -434,7 +434,7 @@ fn demonstrate_basic_threading() {
     });
 
     // 等待线程完成
-    handle.join().unwrap();
+    handle.join().expect("线程应成功完成");
     println!();
 }
 
@@ -448,17 +448,17 @@ fn demonstrate_channel_communication() {
     let sender = thread::spawn(move || {
         let data = vec![1, 2, 3, 4, 5];
         println!("Sending data: {:?}", data);
-        tx.send(data).unwrap();
+        tx.send(data).expect("发送数据不应失败");
     });
 
     // 接收线程
     let receiver = thread::spawn(move || {
-        let received = rx.recv().unwrap();
+        let received = rx.recv().expect("接收数据不应失败");
         println!("Received data: {:?}", received);
     });
 
-    sender.join().unwrap();
-    receiver.join().unwrap();
+    sender.join().expect("发送线程应成功完成");
+    receiver.join().expect("接收线程应成功完成");
     println!();
 }
 
@@ -506,7 +506,7 @@ fn demonstrate_atomic_operations() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     println!("Final atomic count: {}", COUNTER.load(Ordering::Relaxed));
@@ -546,7 +546,7 @@ fn demonstrate_custom_send() {
         println!("    Flag: {}", thread_data.flag.load(Ordering::Relaxed));
     });
 
-    handle.join().unwrap();
+    handle.join().expect("线程应成功完成");
     println!();
 }
 
@@ -580,7 +580,7 @@ pub fn demonstrate_thread_safe_processing() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     // 从Arc中获取数据来访问最终状态
@@ -614,7 +614,7 @@ mod tests {
             assert!(!data.active);
         });
 
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     #[test]
@@ -633,7 +633,7 @@ mod tests {
             assert_eq!(container.metadata, "Test");
         });
 
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     #[test]
@@ -655,7 +655,7 @@ mod tests {
             custom.flag.store(true, Ordering::Relaxed);
         });
 
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     #[test]
@@ -673,6 +673,6 @@ mod tests {
             data.set_active(false);
         });
 
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 }

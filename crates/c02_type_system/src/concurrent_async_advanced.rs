@@ -418,7 +418,7 @@ pub mod concurrent_data_structures {
 
         pub fn remove(&self, key: &K) -> Option<V> {
             let shard = self.get_shard(key);
-            let mut map = shard.write().unwrap();
+            let mut map = shard.write().expect("获取分片写锁失败");
             map.remove(key)
         }
 
@@ -1329,8 +1329,8 @@ pub mod performance_monitoring {
                 if !times.is_empty() {
                     let total_time: Duration = times.iter().sum();
                     let avg_time = total_time / times.len() as u32;
-                    let min_time = *times.iter().min().unwrap();
-                    let max_time = *times.iter().max().unwrap();
+                    let min_time = *times.iter().min().expect("获取最小时间失败");
+                    let max_time = *times.iter().max().expect("获取最大时间失败");
 
                     stats.push(TaskStats {
                         task_name: task_name.clone(),

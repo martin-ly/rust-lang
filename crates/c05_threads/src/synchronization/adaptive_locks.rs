@@ -281,7 +281,7 @@ impl<T> AdaptiveSpinLock<T> {
         // 自旋失败，使用阻塞锁
         self.stats.record_contention();
         let wait_start = Instant::now();
-        let mut guard = self.data.lock().unwrap();
+        let mut guard = self.data.lock().expect("获取数据锁不应失败");
         let wait_time = wait_start.elapsed();
         self.stats.record_wait(wait_time);
         self.stats.record_acquire();
@@ -371,7 +371,7 @@ impl<T> HybridLock<T> {
 
         // 自旋失败，回退到阻塞锁
         self.stats.record_contention();
-        let mut guard = self.data.lock().unwrap();
+        let mut guard = self.data.lock().expect("获取数据锁不应失败");
         self.stats.record_acquire();
         f(&mut guard)
     }
@@ -381,7 +381,7 @@ impl<T> HybridLock<T> {
         F: FnOnce(&mut T) -> R,
     {
         let start_time = Instant::now();
-        let mut guard = self.data.lock().unwrap();
+        let mut guard = self.data.lock().expect("获取数据锁不应失败");
         let wait_time = start_time.elapsed();
         self.stats.record_wait(wait_time);
         self.stats.record_acquire();
@@ -412,7 +412,7 @@ impl<T> HybridLock<T> {
         // 自旋失败，使用阻塞锁
         self.stats.record_contention();
         let start_time = Instant::now();
-        let mut guard = self.data.lock().unwrap();
+        let mut guard = self.data.lock().expect("获取数据锁不应失败");
         let wait_time = start_time.elapsed();
         self.stats.record_wait(wait_time);
         self.stats.record_acquire();

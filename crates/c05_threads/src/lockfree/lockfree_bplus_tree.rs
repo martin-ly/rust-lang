@@ -566,7 +566,7 @@ mod tests {
 
         // 插入数据
         for i in 1..=10 {
-            tree.insert(i, format!("value_{}", i)).unwrap();
+            tree.insert(i, format!("value_{}", i)).expect("树插入不应失败");
         }
 
         // 范围查询

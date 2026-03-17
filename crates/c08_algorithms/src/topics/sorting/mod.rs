@@ -646,7 +646,7 @@ mod tests {
         let data = vec![64, 34, 25, 12, 22, 11, 90];
         let result = SortingEngine::sort_async(data, SortingAlgorithm::Merge)
             .await
-            .unwrap();
+            .expect("异步排序失败");
 
         assert!(SortingValidator::is_sorted(&result.data));
         // 注意：异步函数内部调用同步函数，所以实现类型是 Synchronous
@@ -661,7 +661,7 @@ mod tests {
         let quick_complexity = complexities
             .iter()
             .find(|c| c.algorithm == SortingAlgorithm::Quick)
-            .unwrap();
+            .expect("查找快速排序复杂度失败");
         assert_eq!(
             quick_complexity.time_complexity,
             "O(n log n) 平均，O(n²) 最坏"

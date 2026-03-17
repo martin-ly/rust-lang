@@ -441,7 +441,7 @@ impl AsyncSyncConverter {
             .ok_or_else(|| anyhow::anyhow!("默认运行时不可用"))?;
 
         runtime
-            .spawn(async move { tokio::task::spawn_blocking(sync_fn).await.unwrap() })
+            .spawn(async move { tokio::task::spawn_blocking(sync_fn).await.expect("阻塞任务不应失败") })
             .await
     }
 
@@ -624,7 +624,7 @@ mod tests {
         let result = wrapper
             .execute(async { Ok("成功".to_string()) })
             .await
-            .unwrap();
+            .expect("获取结果不应失败");
         assert_eq!(result, "成功");
     }
 

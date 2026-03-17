@@ -297,8 +297,8 @@ impl AlgorithmBenchmark {
                 .map(|r| r.execution_time)
                 .sum::<std::time::Duration>()
                 / results.len() as u32;
-            let min_time = results.iter().map(|r| r.execution_time).min().unwrap();
-            let max_time = results.iter().map(|r| r.execution_time).max().unwrap();
+            let min_time = results.iter().map(|r| r.execution_time).min().expect("获取最小时间失败");
+            let max_time = results.iter().map(|r| r.execution_time).max().expect("获取最大时间失败");
 
             report.push_str(&format!("{}:\n", name));
             report.push_str(&format!("  平均时间: {:?}\n", avg_time));
@@ -400,7 +400,7 @@ mod tests {
 
         let avg_time = benchmark.get_average_time("测试算法");
         assert!(avg_time.is_some());
-        assert!(avg_time.unwrap() >= std::time::Duration::from_micros(100));
+        assert!(avg_time.expect("获取平均时间失败") >= std::time::Duration::from_micros(100));
     }
 
     #[test]

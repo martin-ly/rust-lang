@@ -187,7 +187,7 @@ where
         handle.join().expect("线程应成功完成");
     }
 
-    let partial_results = Arc::try_unwrap(results).unwrap().into_inner().unwrap();
+    let partial_results = Arc::try_unwrap(results).expect("Arc 解包不应失败").into_inner().expect("Mutex 解包不应失败");
     partial_results
         .into_iter()
         .fold(identity, |acc, item| op(acc, &item))

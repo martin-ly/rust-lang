@@ -107,7 +107,7 @@ impl LoadBalancer {
             }
             LoadBalancingStrategy::LeastConnections => instances
                 .iter()
-                .min_by(|a, b| a.load.partial_cmp(&b.load).unwrap()),
+                .min_by(|a, b| a.load.partial_cmp(&b.load).expect("比较负载不应失败")),
             LoadBalancingStrategy::Random => {
                 use rand::{Rng, rngs::ThreadRng};
                 let mut rng = ThreadRng::default();

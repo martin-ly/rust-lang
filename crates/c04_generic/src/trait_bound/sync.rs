@@ -292,7 +292,7 @@ fn main() {
     for handle in read_handles {
         handle.join().expect("线程应成功完成");
     }
-    write_handle.join().unwrap();
+    write_handle.join().expect("写线程应成功完成");
 }
 ```
 
@@ -553,7 +553,7 @@ fn demonstrate_rwlock_usage() {
     for handle in read_handles {
         handle.join().expect("线程应成功完成");
     }
-    write_handle.join().unwrap();
+    write_handle.join().expect("写线程应成功完成");
     println!();
 }
 

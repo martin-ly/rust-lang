@@ -7,7 +7,7 @@ async fn main() {
     let prod = tokio::spawn(async move {
         for i in 0..12u32 {
             // send 在缓冲满时会等待，体现背压
-            tx.send(i).await.unwrap();
+            tx.send(i).await.expect("发送消息不应失败");
             println!("sent {i}");
         }
     });

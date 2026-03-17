@@ -1113,7 +1113,7 @@ pub mod command_pattern {
             assert_eq!(value, 20);
 
             // 再次撤销
-            invoker.undo(&mut value).unwrap();
+            invoker.undo(&mut value).expect("撤销操作不应失败");
             assert_eq!(value, 10);
         }
     }

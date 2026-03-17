@@ -10,7 +10,7 @@ async fn main() {
     let start_b = Instant::now();
     let prod_b = tokio::spawn(async move {
         for i in 0..total {
-            tx_b.send(i).await.unwrap();
+            tx_b.send(i).await.expect("发送消息不应失败");
         }
     });
     let cons_b = tokio::spawn(async move {
@@ -33,7 +33,7 @@ async fn main() {
     let start_u = Instant::now();
     let prod_u = tokio::spawn(async move {
         for i in 0..total {
-            tx_u.send(i).unwrap();
+            tx_u.send(i).expect("发送消息不应失败");
         }
     });
     let cons_u = tokio::spawn(async move {

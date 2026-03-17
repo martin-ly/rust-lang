@@ -178,11 +178,11 @@ mod tests {
         assert!(result.is_ok());
 
         // 测试预测
-        let prediction = lr.predict(&vec![5.0]).unwrap();
+        let prediction = lr.predict(&vec![5.0]).expect("线性回归预测失败");
         assert!((prediction - 11.0).abs() < 0.1); // 允许一定误差
 
         // 测试参数
-        let (coef, intercept) = lr.parameters().unwrap();
+        let (coef, intercept) = lr.parameters().expect("获取线性回归参数失败");
         assert!((coef[0] - 2.0).abs() < 0.1);
         assert!((intercept - 1.0).abs() < 0.1);
     }

@@ -703,14 +703,14 @@ mod tests {
         let verifier = FormalVerifier;
         let algorithm = TestAlgorithm;
 
-        let correctness_proof = verifier.verify_correctness(&spec, &algorithm).unwrap();
+        let correctness_proof = verifier.verify_correctness(&spec, &algorithm).expect("验证正确性失败");
         assert_eq!(
             correctness_proof.verification_type,
             VerificationType::Correctness
         );
         assert_eq!(correctness_proof.status, VerificationStatus::Verified);
 
-        let complexity_proof = verifier.verify_complexity(&spec, &algorithm).unwrap();
+        let complexity_proof = verifier.verify_complexity(&spec, &algorithm).expect("验证复杂度失败");
         assert_eq!(
             complexity_proof.verification_type,
             VerificationType::Complexity
@@ -749,7 +749,7 @@ mod tests {
 
         let proofs = manager
             .verify_algorithm("TestAlgorithm", &algorithm)
-            .unwrap();
+            .expect("验证算法失败");
         assert_eq!(proofs.len(), 4); // 正确性、复杂度、终止性、安全性
 
         let report = manager.generate_report("TestAlgorithm");

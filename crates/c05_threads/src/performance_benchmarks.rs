@@ -560,7 +560,7 @@ fn benchmark_rayon_algorithms(
     rayon::ThreadPoolBuilder::new()
         .num_threads(thread_count)
         .build_global()
-        .unwrap();
+        .expect("基准测试不应失败");
 
     // 预热
     for _ in 0..config.warmup_iterations {

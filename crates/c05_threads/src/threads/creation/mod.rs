@@ -57,7 +57,7 @@ pub fn named_threads() {
         })
         .expect("线程创建不应失败");
 
-    handle.join().unwrap();
+    handle.join().expect("线程应成功完成");
 }
 
 /// 自定义栈大小的线程
@@ -72,7 +72,7 @@ pub fn custom_stack_size_thread() {
             thread::sleep(Duration::from_millis(50));
             println!("  大栈线程执行完成");
         })
-        .unwrap();
+        .expect("线程创建不应失败");
 
     handle.join().unwrap();
 }
@@ -95,7 +95,7 @@ pub fn parallel_execution() {
 
     // 等待所有线程完成
     for (i, handle) in handles.into_iter().enumerate() {
-        let result = handle.join().unwrap();
+        let result = handle.join().expect("线程应成功完成");
         println!("  线程 {} 返回结果: {}", i, result);
     }
 }

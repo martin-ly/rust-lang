@@ -10,7 +10,7 @@ async fn main() {
     // 生产者
     let prod = tokio::spawn(async move {
         for i in 0..20u32 {
-            tx.send(i).await.unwrap();
+            tx.send(i).await.expect("发送消息不应失败");
         }
     });
 

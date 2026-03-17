@@ -90,7 +90,7 @@ pub mod shared_state_demo {
         }
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         *data.read().expect("读锁获取不应失败")
