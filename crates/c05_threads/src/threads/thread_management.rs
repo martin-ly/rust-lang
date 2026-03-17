@@ -459,7 +459,7 @@ pub fn demonstrate_thread_management() {
     // 创建通道
     let receiver = comm_manager
         .create_channel("test_channel".to_string())
-        .unwrap();
+        .expect("创建通道不应失败");
 
     // 注册消息处理器
     comm_manager.register_message_handler("test".to_string(), |message| {
@@ -480,7 +480,7 @@ pub fn demonstrate_thread_management() {
 
     comm_manager
         .send_message("test_channel".to_string(), message)
-        .unwrap();
+        .expect("发送消息不应失败");
 
     // 处理消息
     if let Ok(received_message) = receiver.recv_timeout(Duration::from_millis(100)) {

@@ -151,9 +151,9 @@ impl SupervisedLearning for NaiveBayesClassifier {
             return Err(MLError::ModelNotTrained);
         }
 
-        let classes = self.classes.as_ref().unwrap();
-        let class_priors = self.class_priors.as_ref().unwrap();
-        let feature_conditionals = self.feature_conditionals.as_ref().unwrap();
+        let classes = self.classes.as_ref().expect("类别未初始化");
+        let class_priors = self.class_priors.as_ref().expect("类别先验概率未初始化");
+        let feature_conditionals = self.feature_conditionals.as_ref().expect("特征条件概率未初始化");
 
         let mut best_class = classes[0];
         let mut best_log_probability = f64::NEG_INFINITY;
@@ -162,7 +162,7 @@ impl SupervisedLearning for NaiveBayesClassifier {
             let prior = class_priors.get(&class).unwrap_or(&0.0);
             let mut log_probability = prior.ln();
 
-            let feature_stats = feature_conditionals.get(&class).unwrap();
+            let feature_stats = feature_conditionals.get(&class).expect("获取类别特征统计失败");
             for (feature_idx, &feature_value) in sample.iter().enumerate() {
                 if let Some(&(mean, variance)) = feature_stats.get(feature_idx) {
                     let prob = self.calculate_gaussian_probability(feature_value, mean, variance);
@@ -300,9 +300,9 @@ impl SupervisedLearning for MultinomialNaiveBayes {
             return Err(MLError::ModelNotTrained);
         }
 
-        let classes = self.classes.as_ref().unwrap();
-        let class_priors = self.class_priors.as_ref().unwrap();
-        let feature_conditionals = self.feature_conditionals.as_ref().unwrap();
+        let classes = self.classes.as_ref().expect("类别未初始化");
+        let class_priors = self.class_priors.as_ref().expect("类别先验概率未初始化");
+        let feature_conditionals = self.feature_conditionals.as_ref().expect("特征条件概率未初始化");
 
         let mut best_class = classes[0];
         let mut best_log_probability = f64::NEG_INFINITY;
@@ -311,7 +311,7 @@ impl SupervisedLearning for MultinomialNaiveBayes {
             let prior = class_priors.get(&class).unwrap_or(&0.0);
             let mut log_probability = prior.ln();
 
-            let feature_probs = feature_conditionals.get(&class).unwrap();
+            let feature_probs = feature_conditionals.get(&class).expect("获取类别特征概率失败");
             for (feature_idx, &feature_value) in sample.iter().enumerate() {
                 if let Some(&prob) = feature_probs.get(feature_idx)
                     && prob > 0.0
@@ -372,7 +372,7 @@ mod tests {
         let result = nb.train(&data, &labels);
         assert!(result.is_ok());
 
-        let prediction = nb.predict(&vec![1.5, 1.5]).unwrap();
+        let prediction = nb.predict(&vec![1.5, 1.5]).expect("朴素贝叶斯预测失败");
         assert_eq!(prediction, 0);
 
         let prediction = nb.predict(&vec![5.5, 5.5]).unwrap();
@@ -393,7 +393,7 @@ mod tests {
         let result = mnb.train(&data, &labels);
         assert!(result.is_ok());
 
-        let prediction = mnb.predict(&vec![1.0, 1.0, 0.0]).unwrap();
+        let prediction = mnb.predict(&vec![1.0, 1.0, 0.0]).expect("多项式朴素贝叶斯预测失败");
         assert!(prediction == 0 || prediction == 1);
     }
 
@@ -419,8 +419,8 @@ mod tests {
         let result = naive_bayes_fit_async(data.clone(), labels, Some(0.5)).await;
         assert!(result.is_ok());
 
-        let nb = result.unwrap();
-        let prediction = nb.predict(&vec![1.5, 1.5]).unwrap();
+        let nb = result.expect("异步朴素贝叶斯训练失败");
+        let prediction = nb.predict(&vec![1.5, 1.5]).expect("朴素贝叶斯预测失败");
         assert_eq!(prediction, 0);
     }
 }

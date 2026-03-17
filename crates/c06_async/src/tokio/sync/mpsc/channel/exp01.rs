@@ -144,12 +144,12 @@ pub async fn channel_exp05() {
     // 启动发送者
     tokio::spawn(async move {
         // 发送一条消息
-        tx.send(1).await.unwrap();
+        tx.send(1).await.expect("发送消息不应失败");
         println!("Sent: 1");
         // 模拟发送延迟
         tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
         // 发送另一条消息
-        tx.send(2).await.unwrap();
+        tx.send(2).await.expect("发送消息不应失败");
         println!("Sent: 2");
     });
 
