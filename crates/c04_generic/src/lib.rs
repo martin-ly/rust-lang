@@ -214,15 +214,15 @@ pub mod ecosystem_examples {
                 id: 7,
                 name: "Alice".into(),
             };
-            let s = user_to_json(&u).unwrap();
-            let back = user_from_json(&s).unwrap();
+            let s = user_to_json(&u).expect("User 序列化不应失败");
+            let back = user_from_json(&s).expect("User 反序列化不应失败");
             assert_eq!(u, back);
         }
 
         #[test]
         fn test_anyhow_thiserror() {
             let names = ["foo", "bar"];
-            let ok = find_name(&names, "foo").unwrap();
+            let ok = find_name(&names, "foo").expect("应找到名为 foo 的用户");
             assert_eq!(ok, "foo");
             let err = find_name(&names, "baz").unwrap_err();
             let msg = format!("{err:#}");
@@ -286,7 +286,7 @@ pub mod benchmarks {
         fn spawn_increment_thread(counter: Arc<Mutex<i32>>) -> thread::JoinHandle<()> {
             thread::spawn(move || {
                 for _ in 0..100 {
-                    let mut num = counter.lock().unwrap();
+                    let mut num = counter.lock().expect("Counter 锁被 poisoned");
                     *num += 1;
                 }
             })
@@ -297,12 +297,12 @@ pub mod benchmarks {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("计数线程执行失败");
         }
 
         let duration = start.elapsed();
         println!("1000 个线程并发计数: {:?}", duration);
-        println!("最终计数: {}", *counter.lock().unwrap());
+        println!("最终计数: {}", *counter.lock().expect("Counter 锁被 poisoned"));
     }
 
     /// 内存使用基准测试

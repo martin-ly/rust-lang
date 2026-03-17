@@ -406,13 +406,13 @@ pub mod concurrent_data_structures {
 
         pub fn insert(&self, key: K, value: V) {
             let shard = self.get_shard(&key);
-            let mut map = shard.write().unwrap();
+            let mut map = shard.write().expect("获取分片写锁失败");
             map.insert(key, value);
         }
 
         pub fn get(&self, key: &K) -> Option<V> {
             let shard = self.get_shard(key);
-            let map = shard.read().unwrap();
+            let map = shard.read().expect("获取分片读锁失败");
             map.get(key).cloned()
         }
 
@@ -425,7 +425,7 @@ pub mod concurrent_data_structures {
         pub fn len(&self) -> usize {
             let mut total = 0;
             for shard in &self.shards {
-                let map = shard.read().unwrap();
+                let map = shard.read().expect("获取分片读锁失败");
                 total += map.len();
             }
             total
@@ -453,17 +453,17 @@ pub mod concurrent_data_structures {
 
     impl<T> WorkStealingQueue<T> {
         pub fn push(&self, task: T) {
-            let mut tasks = self.tasks.lock().unwrap();
+            let mut tasks = self.tasks.lock().expect("任务队列锁定失败");
             tasks.push_back(task);
         }
 
         pub fn pop(&self) -> Option<T> {
-            let mut tasks = self.tasks.lock().unwrap();
+            let mut tasks = self.tasks.lock().expect("任务队列锁定失败");
             tasks.pop_front()
         }
 
         pub fn steal(&self) -> Option<T> {
-            let stealers = self.stealers.lock().unwrap();
+            let stealers = self.stealers.lock().expect("任务窃取器锁定失败");
             for stealer in stealers.iter() {
                 if let Ok(mut tasks) = stealer.try_lock()
                     && let Some(task) = tasks.pop_back()
@@ -476,7 +476,7 @@ pub mod concurrent_data_structures {
 
         pub fn create_stealer(&self) -> Arc<Mutex<VecDeque<T>>> {
             let stealer = Arc::new(Mutex::new(VecDeque::new()));
-            let mut stealers = self.stealers.lock().unwrap();
+            let mut stealers = self.stealers.lock().expect("任务窃取器锁定失败");
             stealers.push(stealer.clone());
             stealer
         }
@@ -532,7 +532,7 @@ pub mod async_streams {
             let mut futures = FuturesUnordered::new();
 
             while let Some(item) = stream.next().await {
-                let permit = semaphore.clone().acquire_owned().await.unwrap();
+                let permit = semaphore.clone().acquire_owned().await.expect("获取信号量许可失败");
                 let processor = self.processor.clone();
 
                 let future = async move {
@@ -772,7 +772,7 @@ pub mod work_stealing_scheduler {
         fn run(&self) {
             while !self.shutdown.load(Ordering::Acquire) {
                 // 首先尝试从本地队列获取任务
-                if let Some(task) = self.local_queue.lock().unwrap().pop_front() {
+                if let Some(task) = self.local_queue.lock().expect("本地队列锁定失败").pop_front() {
                     task();
                     continue;
                 }
@@ -926,7 +926,7 @@ pub mod async_sync_primitives {
         }
 
         pub async fn acquire(&self) -> tokio::sync::SemaphorePermit<'_> {
-            self.inner.acquire().await.unwrap()
+            self.inner.acquire().await.expect("获取信号量许可失败")
         }
 
         pub async fn try_acquire(&self) -> Option<tokio::sync::SemaphorePermit<'_>> {
@@ -962,22 +962,22 @@ pub mod concurrent_safe_structures {
         }
 
         pub fn push(&self, item: T) {
-            let mut data = self.data.lock().unwrap();
+            let mut data = self.data.lock().expect("数据锁定失败");
             data.push(item);
         }
 
         pub fn pop(&self) -> Option<T> {
-            let mut data = self.data.lock().unwrap();
+            let mut data = self.data.lock().expect("数据锁定失败");
             data.pop()
         }
 
         pub fn len(&self) -> usize {
-            let data = self.data.lock().unwrap();
+            let data = self.data.lock().expect("数据锁定失败");
             data.len()
         }
 
         pub fn is_empty(&self) -> bool {
-            let data = self.data.lock().unwrap();
+            let data = self.data.lock().expect("数据锁定失败");
             data.is_empty()
         }
     }
@@ -1009,22 +1009,22 @@ pub mod concurrent_safe_structures {
         }
 
         pub fn enqueue(&self, item: T) {
-            let mut data = self.data.lock().unwrap();
+            let mut data = self.data.lock().expect("数据锁定失败");
             data.push_back(item);
         }
 
         pub fn dequeue(&self) -> Option<T> {
-            let mut data = self.data.lock().unwrap();
+            let mut data = self.data.lock().expect("数据锁定失败");
             data.pop_front()
         }
 
         pub fn len(&self) -> usize {
-            let data = self.data.lock().unwrap();
+            let data = self.data.lock().expect("数据锁定失败");
             data.len()
         }
 
         pub fn is_empty(&self) -> bool {
-            let data = self.data.lock().unwrap();
+            let data = self.data.lock().expect("数据锁定失败");
             data.is_empty()
         }
     }
@@ -1056,32 +1056,32 @@ pub mod concurrent_safe_structures {
         }
 
         pub fn push_front(&self, item: T) {
-            let mut data = self.data.lock().unwrap();
+            let mut data = self.data.lock().expect("数据锁定失败");
             data.push_front(item);
         }
 
         pub fn push_back(&self, item: T) {
-            let mut data = self.data.lock().unwrap();
+            let mut data = self.data.lock().expect("数据锁定失败");
             data.push_back(item);
         }
 
         pub fn pop_front(&self) -> Option<T> {
-            let mut data = self.data.lock().unwrap();
+            let mut data = self.data.lock().expect("数据锁定失败");
             data.pop_front()
         }
 
         pub fn pop_back(&self) -> Option<T> {
-            let mut data = self.data.lock().unwrap();
+            let mut data = self.data.lock().expect("数据锁定失败");
             data.pop_back()
         }
 
         pub fn len(&self) -> usize {
-            let data = self.data.lock().unwrap();
+            let data = self.data.lock().expect("数据锁定失败");
             data.len()
         }
 
         pub fn is_empty(&self) -> bool {
-            let data = self.data.lock().unwrap();
+            let data = self.data.lock().expect("数据锁定失败");
             data.is_empty()
         }
     }
@@ -1305,8 +1305,8 @@ pub mod performance_monitoring {
 
                 let total_time: Duration = times.iter().sum();
                 let avg_time = total_time / times.len() as u32;
-                let min_time = *times.iter().min().unwrap();
-                let max_time = *times.iter().max().unwrap();
+                let min_time = *times.iter().min().expect("获取最小时间失败");
+                let max_time = *times.iter().max().expect("获取最大时间失败");
 
                 Some(TaskStats {
                     task_name: task_name.to_string(),
@@ -1378,12 +1378,12 @@ pub async fn demonstrate_concurrent_async_advanced() {
     state_machine
         .transition_to(async_patterns::AsyncState::Processing)
         .await
-        .unwrap();
+        .expect("状态转换失败");
     sleep(Duration::from_millis(100)).await;
     state_machine
         .transition_to(async_patterns::AsyncState::Completed)
         .await
-        .unwrap();
+        .expect("状态转换完成失败");
 
     // 2. 异步重试机制演示
     println!("\n=== 异步重试机制演示 ===");
@@ -1432,7 +1432,7 @@ pub async fn demonstrate_concurrent_async_advanced() {
     });
 
     let stream = futures::stream::iter(0..10);
-    let results = stream_processor.process_stream(stream).await.unwrap();
+    let results = stream_processor.process_stream(stream).await.expect("流处理失败");
     println!("流处理结果: {:?}", results);
 
     // 5. 工作窃取调度器演示

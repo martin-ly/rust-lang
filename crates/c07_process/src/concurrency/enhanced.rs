@@ -1387,16 +1387,16 @@ mod tests {
     #[tokio::test]
     async fn test_enhanced_sync_manager() {
         let config = SyncConfig::default();
-        let manager = EnhancedSyncManager::new(config).await.unwrap();
+        let manager = EnhancedSyncManager::new(config).await.expect("增强同步管理器创建失败");
 
         // 测试创建增强的互斥锁
-        let mutex = manager.create_enhanced_mutex("test_mutex").await.unwrap();
+        let mutex = manager.create_enhanced_mutex("test_mutex").await.expect("创建增强互斥锁失败");
 
         // 测试获取锁
-        let _guard = mutex.lock().await.unwrap();
+        let _guard = mutex.lock().await.expect("获取互斥锁失败");
 
         // 测试统计信息
-        let stats = manager.get_primitive_stats("test_mutex").await.unwrap();
+        let stats = manager.get_primitive_stats("test_mutex").await.expect("获取同步原语统计失败");
         assert_eq!(stats.name, "test_mutex");
         assert_eq!(stats.primitive_type, SyncPrimitive::Mutex);
 
@@ -1438,17 +1438,17 @@ mod tests {
     #[tokio::test]
     async fn stress_test_mutex_rwlock_semaphore() {
         let config = SyncConfig::default();
-        let manager = EnhancedSyncManager::new(config).await.unwrap();
+        let manager = EnhancedSyncManager::new(config).await.expect("增强同步管理器创建失败");
 
-        let mutex = manager.create_enhanced_mutex("stress_mutex").await.unwrap();
+        let mutex = manager.create_enhanced_mutex("stress_mutex").await.expect("创建压力测试互斥锁失败");
         let rwlock = manager
             .create_enhanced_rwlock("stress_rwlock")
             .await
-            .unwrap();
+            .expect("创建压力测试读写锁失败");
         let semaphore = manager
             .create_enhanced_semaphore("stress_semaphore", 5)
             .await
-            .unwrap();
+            .expect("创建压力测试信号量失败");
 
         let mut tasks = Vec::new();
 
@@ -1457,7 +1457,7 @@ mod tests {
             let m = mutex.clone();
             tasks.push(tokio::spawn(async move {
                 for _ in 0..50 {
-                    let _g = m.lock().await.unwrap();
+                    let _g = m.lock().await.expect("压力测试中获取互斥锁失败");
                     tokio::time::sleep(Duration::from_micros(100)).await;
                 }
             }));
@@ -1488,7 +1488,7 @@ mod tests {
             let s = semaphore.clone();
             tasks.push(tokio::spawn(async move {
                 for _ in 0..40 {
-                    let _permit = s.acquire().await.unwrap();
+                    let _permit = s.acquire().await.expect("压力测试中获�许可失败");
                     tokio::time::sleep(Duration::from_micros(80)).await;
                 }
             }));
@@ -1500,7 +1500,7 @@ mod tests {
 
         // 基础断言：统计信息存在且更新
         let stats = manager.get_all_stats().await;
-        assert!(stats.get("stress_mutex").unwrap().lock_count > 0);
+        assert!(stats.get("stress_mutex").expect("获取互斥锁统计失败").lock_count > 0);
         assert!(stats.contains_key("stress_rwlock"));
 
         // 性能指标存在
@@ -1511,19 +1511,19 @@ mod tests {
     #[tokio::test]
     async fn test_performance_analysis() {
         let config = SyncConfig::default();
-        let manager = EnhancedSyncManager::new(config).await.unwrap();
+        let manager = EnhancedSyncManager::new(config).await.expect("增强同步管理器创建失败");
 
         // 创建多个同步原语
-        let mutex = manager.create_enhanced_mutex("perf_mutex").await.unwrap();
-        let rwlock = manager.create_enhanced_rwlock("perf_rwlock").await.unwrap();
+        let mutex = manager.create_enhanced_mutex("perf_mutex").await.expect("创建性能测试互斥锁失败");
+        let rwlock = manager.create_enhanced_rwlock("perf_rwlock").await.expect("创建性能测试读写锁失败");
         let semaphore = manager
             .create_enhanced_semaphore("perf_semaphore", 5)
             .await
-            .unwrap();
+            .expect("创建性能测试信号量失败");
 
         // 使用简单的顺序操作，避免触发死锁检测
         // Mutex 操作 - 单次操作避免高争用率
-        let _guard = mutex.lock().await.unwrap();
+        let _guard = mutex.lock().await.expect("获取互斥锁失败");
         tokio::time::sleep(Duration::from_millis(1)).await;
         drop(_guard);
 
@@ -1533,12 +1533,12 @@ mod tests {
         drop(_guard);
 
         // Semaphore 操作 - 单次操作避免高争用率
-        let _permit = semaphore.acquire().await.unwrap();
+        let _permit = semaphore.acquire().await.expect("获取信号量许可失败");
         tokio::time::sleep(Duration::from_millis(1)).await;
         drop(_permit);
 
         // 执行性能分析
-        let analysis = manager.analyze_performance().await.unwrap();
+        let analysis = manager.analyze_performance().await.expect("性能分析失败");
 
         // 验证分析结果 - 放宽断言条件
         assert!(analysis.total_throughput >= 0.0);

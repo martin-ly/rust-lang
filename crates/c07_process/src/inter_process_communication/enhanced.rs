@@ -969,64 +969,64 @@ mod tests {
     #[tokio::test]
     async fn test_enhanced_ipc_manager() {
         let config = IpcConfig::default();
-        let manager = EnhancedIpcManager::new(config).await.unwrap();
+        let manager = EnhancedIpcManager::new(config).await.expect("创建增强IPC管理器失败");
 
         // 测试创建消息队列通道
         manager
             .create_message_queue_channel("test_queue", 100)
             .await
-            .unwrap();
+            .expect("创建消息队列通道失败");
 
         // 测试发送和接收消息
         let message = Message::new(1, "test", "Hello, World!".as_bytes().to_vec(), 1234);
         manager
             .send_message_zero_copy("test_queue", &message)
             .await
-            .unwrap();
+            .expect("发送零拷贝消息失败");
 
         let received: Message<Vec<u8>> = manager
             .receive_message_zero_copy("test_queue")
             .await
-            .unwrap();
+            .expect("接收零拷贝消息失败");
         assert_eq!(received.id, message.id);
         assert_eq!(received.message_type, message.message_type);
 
         // 清理
-        manager.cleanup().await.unwrap();
+        manager.cleanup().await.expect("IPC管理器清理失败");
     }
 
     #[tokio::test]
     async fn test_shared_memory_channel() {
         let config = IpcConfig::default();
-        let manager = EnhancedIpcManager::new(config).await.unwrap();
+        let manager = EnhancedIpcManager::new(config).await.expect("创建增强IPC管理器失败");
 
         // 测试创建共享内存通道
         manager
             .create_shared_memory_channel("test_memory", 1024)
             .await
-            .unwrap();
+            .expect("创建共享内存通道失败");
 
         // 测试发送消息
         let message = Message::new(1, "test", "Hello, Shared Memory!".as_bytes().to_vec(), 1234);
         manager
             .send_message_zero_copy("test_memory", &message)
             .await
-            .unwrap();
+            .expect("发送共享内存消息失败");
 
         // 清理
-        manager.cleanup().await.unwrap();
+        manager.cleanup().await.expect("IPC管理器清理失败");
     }
 
     #[tokio::test]
     async fn test_batch_messages() {
         let config = IpcConfig::default();
-        let manager = EnhancedIpcManager::new(config).await.unwrap();
+        let manager = EnhancedIpcManager::new(config).await.expect("创建增强IPC管理器失败");
 
         // 创建消息队列通道
         manager
             .create_message_queue_channel("batch_queue", 100)
             .await
-            .unwrap();
+            .expect("创建批处理队列通道失败");
 
         // 创建批量消息
         let messages: Vec<Message<Vec<u8>>> = (0..5)
@@ -1044,45 +1044,45 @@ mod tests {
         let success_count = manager
             .send_batch_messages("batch_queue", messages)
             .await
-            .unwrap();
+            .expect("批量发送消息失败");
         assert_eq!(success_count, 5);
 
         // 清理
-        manager.cleanup().await.unwrap();
+        manager.cleanup().await.expect("IPC管理器清理失败");
     }
 
     #[tokio::test]
     async fn test_zero_copy_shared_memory() {
         let config = IpcConfig::default();
-        let manager = EnhancedIpcManager::new(config).await.unwrap();
+        let manager = EnhancedIpcManager::new(config).await.expect("创建增强IPC管理器失败");
 
         // 创建共享内存通道
         manager
             .create_shared_memory_channel("zero_copy_memory", 1024)
             .await
-            .unwrap();
+            .expect("创建零拷贝共享内存通道失败");
 
         // 测试零拷贝传输
         let test_data = b"Zero-copy test data";
         manager
             .zero_copy_shared_memory_transfer("zero_copy_memory", test_data)
             .await
-            .unwrap();
+            .expect("零拷贝共享内存传输失败");
 
         // 清理
-        manager.cleanup().await.unwrap();
+        manager.cleanup().await.expect("IPC管理器清理失败");
     }
 
     #[tokio::test]
     async fn test_performance_monitoring() {
         let config = IpcConfig::default();
-        let manager = EnhancedIpcManager::new(config).await.unwrap();
+        let manager = EnhancedIpcManager::new(config).await.expect("创建增强IPC管理器失败");
 
         // 创建通道
         manager
             .create_message_queue_channel("perf_test", 100)
             .await
-            .unwrap();
+            .expect("创建性能测试通道失败");
 
         // 发送一些消息
         for i in 0..10 {
@@ -1095,15 +1095,15 @@ mod tests {
             manager
                 .send_message_zero_copy("perf_test", &message)
                 .await
-                .unwrap();
+                .expect("发送性能测试消息失败");
         }
 
         // 获取统计信息
-        let stats = manager.get_channel_stats("perf_test").await.unwrap();
+        let stats = manager.get_channel_stats("perf_test").await.expect("获取通道统计失败");
         assert_eq!(stats.messages_sent, 10);
         assert!(stats.bytes_sent > 0);
 
         // 清理
-        manager.cleanup().await.unwrap();
+        manager.cleanup().await.expect("IPC管理器清理失败");
     }
 }

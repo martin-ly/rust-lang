@@ -31,11 +31,11 @@ mod windows_sync {
         }
 
         pub fn enter(&self) {
-            drop(self.cs.lock().unwrap());
+            drop(self.cs.lock().expect("获取临界区锁不应失败"));
         }
 
         pub fn leave(&self) {
-            drop(self.cs.lock().unwrap());
+            drop(self.cs.lock().expect("获取临界区锁不应失败"));
         }
 
         pub fn try_enter(&self) -> bool {
@@ -58,27 +58,27 @@ mod windows_sync {
         }
 
         pub fn set(&self) {
-            let mut event = self.event.lock().unwrap();
+            let mut event = self.event.lock().expect("获取事件锁不应失败");
             *event = true;
             self.condvar.notify_all();
         }
 
         pub fn reset(&self) {
-            let mut event = self.event.lock().unwrap();
+            let mut event = self.event.lock().expect("获取事件锁不应失败");
             *event = false;
         }
 
         pub fn wait(&self) {
-            let mut event = self.event.lock().unwrap();
+            let mut event = self.event.lock().expect("获取事件锁不应失败");
             while !*event {
-                event = self.condvar.wait(event).unwrap();
+                event = self.condvar.wait(event).expect("条件变量等待不应失败");
             }
         }
 
         pub fn wait_timeout(&self, timeout: Duration) -> bool {
-            let mut event = self.event.lock().unwrap();
+            let mut event = self.event.lock().expect("获取事件锁不应失败");
             while !*event {
-                let result = self.condvar.wait_timeout(event, timeout).unwrap();
+                let result = self.condvar.wait_timeout(event, timeout).expect("条件变量超时等待不应失败");
                 event = result.0;
                 if result.1.timed_out() {
                     return false;
@@ -103,9 +103,9 @@ mod windows_sync {
         }
 
         pub fn acquire(&self) {
-            let mut count = self.count.lock().unwrap();
+            let mut count = self.count.lock().expect("获取计数锁不应失败");
             while *count == 0 {
-                count = self.condvar.wait(count).unwrap();
+                count = self.condvar.wait(count).expect("条件变量等待不应失败");
             }
             *count -= 1;
         }
@@ -184,13 +184,13 @@ mod linux_sync {
         {
             // 尝试快速路径
             if self.futex.compare_and_swap(0, 1) {
-                let result = f(&mut self.data.lock().unwrap());
+                let result = f(&mut self.data.lock().expect("获取数据锁不应失败"));
                 self.futex.wake(1);
                 result
             } else {
                 // 慢速路径
                 self.futex.wait(0);
-                let result = f(&mut self.data.lock().unwrap());
+                let result = f(&mut self.data.lock().expect("获取数据锁不应失败"));
                 self.futex.wake(1);
                 result
             }
@@ -222,7 +222,7 @@ mod macos_sync {
         where
             F: FnOnce() + Send + 'static,
         {
-            let mut queue = self.queue.lock().unwrap();
+            let mut queue = self.queue.lock().expect("获取队列锁不应失败");
             queue.push(Box::new(work));
             self.condvar.notify_one();
         }
@@ -234,9 +234,9 @@ mod macos_sync {
 
             thread::spawn(move || {
                 while running.load(Ordering::Relaxed) {
-                    let mut queue = queue.lock().unwrap();
+                    let mut queue = queue.lock().expect("获取队列锁不应失败");
                     while queue.is_empty() && running.load(Ordering::Relaxed) {
-                        queue = condvar.wait(queue).unwrap();
+                        queue = condvar.wait(queue).expect("条件变量等待不应失败");
                     }
 
                     if let Some(work) = queue.pop() {
@@ -382,7 +382,7 @@ pub fn demonstrate_os_specific() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     println!("跨平台同步测试完成");
@@ -404,7 +404,7 @@ pub fn demonstrate_os_specific() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     println!("性能监控统计:");
@@ -427,7 +427,7 @@ pub fn demonstrate_os_specific() {
 
         thread::sleep(Duration::from_millis(100));
         event.set();
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
 
         // 测试信号量
         semaphore.acquire();

@@ -230,17 +230,17 @@ mod linux_threads {
             thread_id: usize,
             deadline: Duration,
         ) -> Result<(), String> {
-            let mut real_time_threads = self.real_time_threads.lock().unwrap();
+            let mut real_time_threads = self.real_time_threads.lock().expect("获取实时线程锁不应失败");
             real_time_threads.push(thread_id);
 
-            let mut deadline_monitor = self.deadline_monitor.lock().unwrap();
+            let mut deadline_monitor = self.deadline_monitor.lock().expect("获取截止时间监控锁不应失败");
             deadline_monitor.insert(thread_id, deadline);
 
             Ok(())
         }
 
         pub fn check_deadlines(&self) {
-            let deadline_monitor = self.deadline_monitor.lock().unwrap();
+            let deadline_monitor = self.deadline_monitor.lock().expect("获取截止时间监控锁不应失败");
             let now = std::time::Instant::now();
 
             for (thread_id, deadline) in deadline_monitor.iter() {
@@ -273,12 +273,12 @@ mod linux_threads {
         where
             F: Fn() + Send + Sync + 'static,
         {
-            let mut handlers = self.signal_handlers.lock().unwrap();
+            let mut handlers = self.signal_handlers.lock().expect("获取信号处理器锁不应失败");
             handlers.insert(signal, Box::new(handler));
         }
 
         pub fn handle_signal(&self, signal: i32) {
-            let handlers = self.signal_handlers.lock().unwrap();
+            let handlers = self.signal_handlers.lock().expect("获取信号处理器锁不应失败");
             if let Some(handler) = handlers.get(&signal) {
                 handler();
                 self.signal_count.fetch_add(1, Ordering::Relaxed);
@@ -325,7 +325,7 @@ mod macos_threads {
         where
             F: FnOnce() + Send + 'static,
         {
-            let mut tasks = self.tasks.lock().unwrap();
+            let mut tasks = self.tasks.lock().expect("获取任务锁不应失败");
             tasks.push(Box::new(task));
 
             if !self.is_running.load(Ordering::Relaxed) {
@@ -344,7 +344,7 @@ mod macos_threads {
             thread::spawn(move || {
                 while is_running.load(Ordering::Relaxed) {
                     let task = {
-                        let mut tasks = tasks.lock().unwrap();
+                        let mut tasks = tasks.lock().expect("获取任务锁不应失败");
                         tasks.pop()
                     };
 
@@ -541,7 +541,7 @@ pub fn demonstrate_os_thread_features() {
                 thread::sleep(Duration::from_millis(10));
                 println!("任务 {} 在 {} 上执行", i, platform_info);
             })
-            .unwrap();
+            .expect("创建任务不应失败");
     }
 
     #[cfg(target_os = "windows")]
@@ -555,7 +555,7 @@ pub fn demonstrate_os_thread_features() {
                 thread::sleep(Duration::from_millis(10));
                 println!("Windows线程池任务 {} 完成", i);
             })
-            .unwrap();
+            .expect("创建任务不应失败");
         }
 
         // 测试Windows纤程
@@ -565,7 +565,7 @@ pub fn demonstrate_os_thread_features() {
                 thread::sleep(Duration::from_millis(10));
                 println!("Windows纤程执行完成");
             })
-            .unwrap();
+            .expect("创建任务不应失败");
 
         // 测试Windows异步I/O
         let async_io = windows_threads::WindowsAsyncIO::new();
@@ -574,7 +574,7 @@ pub fn demonstrate_os_thread_features() {
                 thread::sleep(Duration::from_millis(10));
                 Ok(())
             })
-            .unwrap();
+            .expect("创建任务不应失败");
 
         let (total, completed, failed) = async_io.get_io_statistics();
         println!(
@@ -594,13 +594,13 @@ pub fn demonstrate_os_thread_features() {
                 thread::sleep(Duration::from_millis(10));
                 println!("Linux pthread执行完成");
             })
-            .unwrap();
+            .expect("创建任务不应失败");
 
         // 测试Linux实时调度
         let rt_scheduler = linux_threads::LinuxRealTimeScheduler::new();
         rt_scheduler
             .register_real_time_thread(1, Duration::from_millis(100))
-            .unwrap();
+            .expect("创建任务不应失败");
         rt_scheduler.check_deadlines();
         println!(
             "Linux实时调度错过的截止时间: {}",
@@ -631,7 +631,7 @@ pub fn demonstrate_os_thread_features() {
                     thread::sleep(Duration::from_millis(10));
                     println!("macOS GCD任务 {} 完成", i);
                 })
-                .unwrap();
+                .expect("创建任务不应失败");
         }
 
         // 测试macOS线程池
@@ -641,7 +641,7 @@ pub fn demonstrate_os_thread_features() {
                 thread::sleep(Duration::from_millis(10));
                 println!("macOS线程池任务 {} 完成", i);
             })
-            .unwrap();
+            .expect("创建任务不应失败");
         }
     }
 
@@ -662,7 +662,7 @@ mod tests {
             .submit_task(|| {
                 thread::sleep(Duration::from_millis(1));
             })
-            .unwrap();
+            .expect("创建任务不应失败");
 
         assert!(!features.get_platform_info().is_empty());
     }
@@ -689,7 +689,7 @@ mod tests {
             .start(|| {
                 thread::sleep(Duration::from_millis(1));
             })
-            .unwrap();
+            .expect("创建任务不应失败");
 
         assert!(pthread.is_running());
     }
@@ -706,7 +706,7 @@ mod tests {
             .dispatch(|| {
                 thread::sleep(Duration::from_millis(1));
             })
-            .unwrap();
+            .expect("创建任务不应失败");
 
         assert!(queue.is_running());
     }

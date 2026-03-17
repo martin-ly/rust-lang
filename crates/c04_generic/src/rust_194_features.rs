@@ -111,12 +111,12 @@ pub enum LazyContainer<T> {
 
 impl<T> LazyContainer<T> {
     /// 创建单线程延迟初始化容器
-    pub fn cell() -> Self {
+    pub const fn cell() -> Self {
         LazyContainer::Cell(OnceCell::new())
     }
 
     /// 创建多线程延迟初始化容器
-    pub fn lock() -> Self
+    pub const fn lock() -> Self
     where
         T: Send + Sync + 'static,
     {
@@ -125,10 +125,11 @@ impl<T> LazyContainer<T> {
 
     /// 尝试获取值（不触发初始化）- 对应 Rust 1.94 LazyCell::get()
     pub fn try_get(&self) -> Option<&T> {
-        match self {
-            LazyContainer::Cell(cell) => cell.get(),
-            LazyContainer::Lock(lock) => lock.get(),
-        }
+        let LazyContainer::Cell(cell) = self else {
+            let Self::Lock(lock) = self else { unreachable!() };
+            return lock.get();
+        };
+        cell.get()
     }
 
     /// 获取或初始化值
@@ -136,10 +137,11 @@ impl<T> LazyContainer<T> {
     where
         F: FnOnce() -> T,
     {
-        match self {
-            LazyContainer::Cell(cell) => cell.get_or_init(f),
-            LazyContainer::Lock(lock) => lock.get_or_init(f),
-        }
+        let LazyContainer::Cell(cell) = self else {
+            let Self::Lock(lock) = self else { unreachable!() };
+            return lock.get_or_init(f);
+        };
+        cell.get_or_init(f)
     }
 
     /// 检查是否已初始化
@@ -149,10 +151,11 @@ impl<T> LazyContainer<T> {
 
     /// 设置值
     pub fn set(&self, value: T) -> Result<(), T> {
-        match self {
-            LazyContainer::Cell(cell) => cell.set(value),
-            LazyContainer::Lock(lock) => lock.set(value),
-        }
+        let LazyContainer::Cell(cell) = self else {
+            let Self::Lock(lock) = self else { unreachable!() };
+            return lock.set(value);
+        };
+        cell.set(value)
     }
 }
 
@@ -274,7 +277,7 @@ pub struct FibonacciCalculator<T: MathConstants + Copy> {
 
 impl<T: MathConstants + Copy> FibonacciCalculator<T> {
     /// 创建新的斐波那契计算器
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self {
             _phantom: PhantomData,
         }
@@ -357,7 +360,7 @@ pub struct CharMap<V> {
 
 impl<V: Clone> CharMap<V> {
     /// 创建新的字符映射表
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self {
             entries: Vec::new(),
         }
@@ -473,7 +476,7 @@ pub struct GenericComposer<F, G> {
 
 impl<F, G> GenericComposer<F, G> {
     /// 创建新的组合器
-    pub fn new(first: F, second: G) -> Self {
+    pub const fn new(first: F, second: G) -> Self {
         Self { first, second }
     }
 
@@ -603,7 +606,7 @@ pub struct GenericValidator<T: ?Sized> {
 
 impl<T: ?Sized> GenericValidator<T> {
     /// 创建新的验证器
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self {
             _phantom: PhantomData,
         }
@@ -662,7 +665,7 @@ where
     T: Clone + Send + Sync + 'static,
     U: Clone + Send + Sync + 'static,
 {
-    pub fn new(first: T, second: U) -> Self {
+    pub const fn new(first: T, second: U) -> Self {
         Self { first, second }
     }
 
@@ -1132,7 +1135,7 @@ mod tests {
     #[test]
     fn test_string_to_int_adapter() {
         let adapter = StringToIntAdapter;
-        assert_eq!(adapter.adapt("42".to_string()).unwrap(), 42);
+        assert_eq!(adapter.adapt("42".to_string()).expect("适配不应失败"), 42);
         assert!(adapter.adapt("not a number".to_string()).is_err());
     }
 
@@ -1141,7 +1144,7 @@ mod tests {
         let adapter = StringToIntAdapter;
         let results = adapter
             .adapt_batch(vec!["1".to_string(), "2".to_string()])
-            .unwrap();
+            .expect("容器设置值不应失败");
         assert_eq!(results, vec![1, 2]);
     }
 
@@ -1152,7 +1155,7 @@ mod tests {
                 message: e.to_string(),
             })
         });
-        assert_eq!(adapter.adapt("100".to_string()).unwrap(), 100);
+        assert_eq!(adapter.adapt("100".to_string()).expect("适配不应失败"), 100);
     }
 
     #[test]
@@ -1306,7 +1309,7 @@ mod tests {
 
         // 使用 force_get_mut 应该仍然获取到原始值
         let mut container2 = LazyCellContainer::<i32>::new();
-        container2.set(10).unwrap();
+        container2.set(10).expect("容器设置值不应失败");
         let value = container2.force_get_mut(|| 999);
         assert_eq!(*value, 10); // 应该还是 10，而不是 999
     }

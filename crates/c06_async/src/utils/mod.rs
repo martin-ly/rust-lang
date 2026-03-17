@@ -459,7 +459,7 @@ impl ExecStrategyRunner {
                 self.helper
                     .run_with_decider_and_deadline(
                         make_fut,
-                        move |e| (d.lock().unwrap())(e),
+                        move |e| (d.lock().expect("Retry decider 锁被 poisoned"))(e),
                         self.max_attempts,
                         self.start_delay,
                         dl,

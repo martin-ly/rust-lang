@@ -269,7 +269,7 @@ impl ErrorMonitor {
     }
 
     pub fn log_error(&self, error: DesignPatternError) {
-        let mut log = self.error_log.lock().unwrap();
+        let mut log = self.error_log.lock().expect("错误日志锁被污染");
 
         if log.len() >= self.max_log_size {
             log.remove(0); // 移除最旧的错误
@@ -279,11 +279,11 @@ impl ErrorMonitor {
     }
 
     pub fn get_error_count(&self) -> usize {
-        self.error_log.lock().unwrap().len()
+        self.error_log.lock().expect("错误日志锁被污染").len()
     }
 
     pub fn get_recent_errors(&self, count: usize) -> Vec<DesignPatternError> {
-        let log = self.error_log.lock().unwrap();
+        let log = self.error_log.lock().expect("错误日志锁被污染");
         let start = if log.len() > count {
             log.len() - count
         } else {
@@ -294,7 +294,7 @@ impl ErrorMonitor {
     }
 
     pub fn clear_errors(&self) {
-        self.error_log.lock().unwrap().clear();
+        self.error_log.lock().expect("错误日志锁被污染").clear();
     }
 }
 
@@ -383,7 +383,7 @@ mod tests {
         });
 
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), "成功");
+        assert_eq!(result.expect("获取结果失败"), "成功");
         assert_eq!(attempt_count, 3);
     }
 

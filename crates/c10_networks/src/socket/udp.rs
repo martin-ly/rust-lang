@@ -18,7 +18,7 @@ pub struct UdpConfig {
 impl Default for UdpConfig {
     fn default() -> Self {
         Self {
-            address: "127.0.0.1:8080".parse().unwrap(),
+            address: "127.0.0.1:8080".parse().expect("hardcoded localhost address should be valid"),
             timeout: Some(Duration::from_secs(30)),
             buffer_size: 8192,
             broadcast: false,

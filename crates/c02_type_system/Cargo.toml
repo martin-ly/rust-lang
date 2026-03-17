@@ -5,6 +5,12 @@ edition = "2024"
 resolver = "3"
 rust-version = "1.94"
 
+
+authors = ["Rust Learning Community"]
+description = "Rust type system comprehensive learning module"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-lang/rust-lang-learning"
+
 [lib]
 name = "c02_type_system"
 path = "src/lib.rs"

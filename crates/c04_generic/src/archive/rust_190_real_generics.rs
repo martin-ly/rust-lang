@@ -387,8 +387,8 @@ mod tests {
     #[test]
     fn test_const_generic_matrix() {
         let mut matrix: ConstGenericMatrix<i32, 2, 2> = ConstGenericMatrix::new();
-        matrix.push_row([1, 2]).unwrap();
-        matrix.push_row([3, 4]).unwrap();
+        matrix.push_row([1, 2]).expect("矩阵添加行不应失败");
+        matrix.push_row([3, 4]).expect("矩阵添加行不应失败");
 
         assert_eq!(matrix.rows(), 2);
         assert_eq!(matrix.cols(), 2);
@@ -399,7 +399,7 @@ mod tests {
     #[test]
     fn test_improved_trait_bounds() {
         let matrix: ConstGenericMatrix<i32, 2, 2> = ConstGenericMatrix::new();
-        let result = matrix.process("test".to_string()).unwrap();
+        let result = matrix.process("test".to_string()).expect("矩阵处理不应失败");
         assert!(result.contains("处理输入: test"));
     }
 
@@ -425,7 +425,7 @@ mod tests {
     #[test]
     fn test_improved_associated_types() {
         let constraints = GenericConstraints::new("test".to_string(), 42);
-        let result = constraints.process("input".to_string()).unwrap();
+        let result = constraints.process("input".to_string()).expect("约束处理不应失败");
         assert!(result.contains("处理输入: input"));
     }
 

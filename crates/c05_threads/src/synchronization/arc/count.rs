@@ -12,7 +12,7 @@ pub fn count_test() {
         let counter_clone = Arc::clone(&counter);
         let handle = thread::spawn(move || {
             // 锁定 Mutex，获取对数据的可变引用
-            let mut num = counter_clone.lock().unwrap();
+            let mut num = counter_clone.lock().expect("获取计数器锁不应失败");
             *num += 1; // 增加计数器的值
         });
         handles.push(handle);
@@ -20,9 +20,9 @@ pub fn count_test() {
 
     // 等待所有线程完成
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     // 打印最终计数器的值
-    println!("Result: {}", *counter.lock().unwrap()); // 输出: Result: 10
+    println!("Result: {}", *counter.lock().expect("获取计数器锁不应失败")); // 输出: Result: 10
 }

@@ -346,7 +346,7 @@ impl BarrierBenchmark {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         start_time.elapsed()
@@ -480,7 +480,7 @@ mod tests {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         assert_eq!(barrier.waiting_count(), 0);
@@ -509,7 +509,7 @@ mod tests {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         assert!(barrier.get_spin_threshold() > 0);
@@ -530,7 +530,7 @@ mod tests {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         assert_eq!(barrier.get_phase(), 3);

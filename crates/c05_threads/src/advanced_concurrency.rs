@@ -50,7 +50,7 @@ impl HighPerformanceThreadPool {
         F: FnOnce() + Send + 'static,
     {
         if let Some(sender) = self.sender.as_ref() {
-            sender.send(Box::new(f)).unwrap();
+            sender.send(Box::new(f)).expect("发送任务不应失败");
         }
     }
 
@@ -167,10 +167,10 @@ impl GlobalTaskQueue {
 
     #[allow(dead_code)]
     fn push(&self, task: Box<dyn FnOnce() + Send + 'static>) {
-        let mut tasks = self.tasks.lock().unwrap();
+        let mut tasks = self.tasks.lock().expect("获取任务锁不应失败");
         tasks.push_back(task);
 
-        let mut stats = self.stats.lock().unwrap();
+        let mut stats = self.stats.lock().expect("获取统计锁不应失败");
         stats.total_tasks += 1;
         stats.current_tasks += 1;
     }
@@ -188,7 +188,7 @@ impl GlobalTaskQueue {
     }
 
     fn get_stats(&self) -> ThreadPoolStats {
-        let stats = self.stats.lock().unwrap();
+        let stats = self.stats.lock().expect("获取统计锁不应失败");
         ThreadPoolStats {
             total_tasks: stats.total_tasks,
             current_tasks: stats.current_tasks,
@@ -476,7 +476,7 @@ where
                     let chunk = &data[start..end];
                     let local_result = chunk.iter().fold(identity, op);
 
-                    let mut results = results.lock().unwrap();
+                    let mut results = results.lock().expect("获取结果锁不应失败");
                     results.push(local_result);
                 }
             })
@@ -484,10 +484,10 @@ where
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
-    let results = results.lock().unwrap();
+    let results = results.lock().expect("获取结果锁不应失败");
     results.iter().fold(identity, op)
 }
 
@@ -530,10 +530,10 @@ where
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
-    Arc::try_unwrap(results).unwrap().into_inner().unwrap()
+    Arc::try_unwrap(results).expect("Arc 解包不应失败").into_inner().expect("Mutex 解包不应失败")
 }
 
 // ============================================================================

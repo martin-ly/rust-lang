@@ -64,7 +64,7 @@ impl IpcManager {
     /// 创建命名管道
     pub fn create_named_pipe(&mut self, name: &str) -> IpcResult<()> {
         let pipe = crate::pipe::NamedPipe::new(name, self.config.clone())?;
-        let mut channels = self.channels.lock().unwrap();
+        let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         channels.insert(name.to_string(), Box::new(pipe));
         Ok(())
     }
@@ -72,7 +72,7 @@ impl IpcManager {
     /// 创建Unix域套接字
     pub fn create_unix_socket(&mut self, name: &str) -> IpcResult<()> {
         let socket = socket::UnixSocket::new(name, self.config.clone())?;
-        let mut channels = self.channels.lock().unwrap();
+        let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         channels.insert(name.to_string(), Box::new(socket));
         Ok(())
     }
@@ -80,7 +80,7 @@ impl IpcManager {
     /// 创建TCP套接字
     pub fn create_tcp_socket(&mut self, name: &str, port: u16) -> IpcResult<()> {
         let socket = socket::TcpSocket::new(name, port, self.config.clone())?;
-        let mut channels = self.channels.lock().unwrap();
+        let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         channels.insert(name.to_string(), Box::new(socket));
         Ok(())
     }
@@ -88,7 +88,7 @@ impl IpcManager {
     /// 创建共享内存区域
     pub fn create_shared_memory(&mut self, name: &str, size: usize) -> IpcResult<()> {
         let shm = shared_memory::SharedMemoryRegion::new(name, size, self.config.clone())?;
-        let mut channels = self.channels.lock().unwrap();
+        let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         channels.insert(name.to_string(), Box::new(shm));
         Ok(())
     }
@@ -96,7 +96,7 @@ impl IpcManager {
     /// 创建消息队列
     pub fn create_message_queue(&mut self, name: &str, capacity: usize) -> IpcResult<()> {
         let queue = message_queue::MessageQueue::new(name, capacity, self.config.clone())?;
-        let mut channels = self.channels.lock().unwrap();
+        let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         channels.insert(name.to_string(), Box::new(queue));
         Ok(())
     }
@@ -104,14 +104,14 @@ impl IpcManager {
     /// 创建文件系统通道
     pub fn create_file_system_channel(&mut self, name: &str) -> IpcResult<()> {
         let fs = channel::FileSystemChannel::new(name, self.config.clone())?;
-        let mut channels = self.channels.lock().unwrap();
+        let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         channels.insert(name.to_string(), Box::new(fs));
         Ok(())
     }
 
     /// 删除通道
     pub fn remove_channel(&mut self, name: &str) -> IpcResult<()> {
-        let mut channels = self.channels.lock().unwrap();
+        let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         if let Some(mut channel) = channels.remove(name) {
             channel.close()?;
         }
@@ -120,7 +120,7 @@ impl IpcManager {
 
     /// 清理所有通道
     pub fn cleanup(&mut self) -> IpcResult<()> {
-        let mut channels = self.channels.lock().unwrap();
+        let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         for (_, mut channel) in channels.drain() {
             channel.close()?;
         }
@@ -129,13 +129,13 @@ impl IpcManager {
 
     /// 获取通道列表
     pub fn list_channels(&self) -> Vec<String> {
-        let channels = self.channels.lock().unwrap();
+        let channels = self.channels.lock().expect("IPC通道锁被污染");
         channels.keys().cloned().collect()
     }
 
     /// 获取通道统计信息
     pub fn get_channel_stats(&self, name: &str) -> Option<ChannelStats> {
-        let channels = self.channels.lock().unwrap();
+        let channels = self.channels.lock().expect("IPC通道锁被污染");
         if channels.contains_key(name) {
             Some(ChannelStats::default())
         } else {
@@ -145,7 +145,7 @@ impl IpcManager {
 
     /// 发送消息到指定通道
     pub fn send_message(&self, channel_name: &str, msg: &Message<Vec<u8>>) -> IpcResult<()> {
-        let channels = self.channels.lock().unwrap();
+        let channels = self.channels.lock().expect("IPC通道锁被污染");
         if let Some(channel) = channels.get(channel_name) {
             channel.send_message(msg)?;
             // 更新统计信息
@@ -162,7 +162,7 @@ impl IpcManager {
 
     /// 从指定通道接收消息
     pub fn receive_message(&self, channel_name: &str) -> IpcResult<Message<Vec<u8>>> {
-        let channels = self.channels.lock().unwrap();
+        let channels = self.channels.lock().expect("IPC通道锁被污染");
         if let Some(channel) = channels.get(channel_name) {
             let msg = channel.receive_message()?;
             // 更新统计信息
@@ -179,7 +179,7 @@ impl IpcManager {
 
     /// 获取总体统计信息
     pub fn get_stats(&self) -> ChannelStats {
-        self.stats.lock().unwrap().clone()
+        self.stats.lock().expect("IPC统计锁被污染").clone()
     }
 }
 

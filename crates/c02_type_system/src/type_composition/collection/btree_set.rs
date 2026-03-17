@@ -82,18 +82,18 @@ pub fn btree_set_demo03() {
     for i in 0..5 {
         let set_clone = Arc::clone(&set);
         let handle = thread::spawn(move || {
-            let mut set = set_clone.lock().unwrap();
+            let mut set = set_clone.lock().expect("BTreeSet锁定失败");
             set.insert(i);
         });
         handles.push(handle);
     }
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("等待BTreeSet线程完成失败");
     }
 
     // 打印最终的 BTreeSet
-    let set = set.lock().unwrap();
+    let set = set.lock().expect("BTreeSet锁定失败");
     println!("最终的 BTreeSet:");
     for value in set.iter() {
         println!("{}", value);

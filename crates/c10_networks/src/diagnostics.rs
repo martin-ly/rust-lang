@@ -37,7 +37,7 @@ impl NetDiagnostics {
                 .to_socket_addrs()
                 .ok()
                 .and_then(|mut it| it.next())
-                .unwrap_or_else(|| "127.0.0.1:9".parse().unwrap()),
+                .unwrap_or_else(|| "127.0.0.1:9".parse().expect("hardcoded localhost address should be valid")),
             Duration::from_millis(timeout_ms),
         )
         .is_ok();

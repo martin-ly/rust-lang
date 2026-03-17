@@ -720,7 +720,7 @@ impl<T> ConditionalLazyController<T> {
         if self.cell.get().is_none() {
             let _ = self.cell.set(factory());
         }
-        Ok(self.cell.get().unwrap())
+        Ok(self.cell.get().expect("LazyCell值不应为None"))
     }
 
     /// 获取值或返回默认值
@@ -1453,7 +1453,7 @@ mod tests {
         let controller = ConditionalLazyController::<i32>::new(|| true);
         let result = controller.try_init(|| 42);
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), &42);
+        assert_eq!(result.expect("条件延迟控制器初始化失败"), &42);
     }
 
     #[test]

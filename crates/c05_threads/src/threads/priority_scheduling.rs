@@ -158,21 +158,21 @@ impl ThreadPriorityScheduler {
         priority: ThreadPriority,
         policy: SchedulingPolicy,
     ) {
-        let mut threads = self.threads.lock().unwrap();
+        let mut threads = self.threads.lock().expect("获取线程锁不应失败");
         let scheduling_info = ThreadSchedulingInfo::new(thread_id, priority, policy);
         threads.insert(thread_id, scheduling_info);
 
         // 添加到就绪队列
-        let mut ready_queue = self.ready_queue.lock().unwrap();
-        ready_queue.push(threads.get(&thread_id).unwrap().clone());
+        let mut ready_queue = self.ready_queue.lock().expect("获取就绪队列锁不应失败");
+        ready_queue.push(threads.get(&thread_id).expect("线程应存在").clone());
     }
 
     pub fn unregister_thread(&self, thread_id: usize) {
-        let mut threads = self.threads.lock().unwrap();
+        let mut threads = self.threads.lock().expect("获取线程锁不应失败");
         threads.remove(&thread_id);
 
         // 从就绪队列中移除
-        let mut ready_queue = self.ready_queue.lock().unwrap();
+        let mut ready_queue = self.ready_queue.lock().expect("获取就绪队列锁不应失败");
         let mut new_queue = BinaryHeap::new();
         while let Some(info) = ready_queue.pop() {
             if info.thread_id != thread_id {
@@ -187,7 +187,7 @@ impl ThreadPriorityScheduler {
         thread_id: usize,
         priority: ThreadPriority,
     ) -> Result<(), String> {
-        let mut threads = self.threads.lock().unwrap();
+        let mut threads = self.threads.lock().expect("获取线程锁不应失败");
         if let Some(info) = threads.get_mut(&thread_id) {
             info.priority = priority;
 
@@ -204,7 +204,7 @@ impl ThreadPriorityScheduler {
     }
 
     pub fn get_thread_priority(&self, thread_id: usize) -> Option<ThreadPriority> {
-        let threads = self.threads.lock().unwrap();
+        let threads = self.threads.lock().expect("获取线程锁不应失败");
         threads.get(&thread_id).map(|info| info.priority)
     }
 
@@ -213,7 +213,7 @@ impl ThreadPriorityScheduler {
         thread_id: usize,
         new_priority: ThreadPriority,
     ) -> Result<(), String> {
-        let mut threads = self.threads.lock().unwrap();
+        let mut threads = self.threads.lock().expect("获取线程锁不应失败");
         if let Some(info) = threads.get_mut(&thread_id) {
             info.boost_priority(new_priority);
 
@@ -230,7 +230,7 @@ impl ThreadPriorityScheduler {
     }
 
     pub fn restore_thread_priority(&self, thread_id: usize) -> Result<(), String> {
-        let mut threads = self.threads.lock().unwrap();
+        let mut threads = self.threads.lock().expect("获取线程锁不应失败");
         if let Some(info) = threads.get_mut(&thread_id) {
             info.restore_priority();
 
@@ -247,8 +247,8 @@ impl ThreadPriorityScheduler {
     }
 
     fn update_ready_queue(&self) {
-        let threads = self.threads.lock().unwrap();
-        let mut ready_queue = self.ready_queue.lock().unwrap();
+        let threads = self.threads.lock().expect("获取线程锁不应失败");
+        let mut ready_queue = self.ready_queue.lock().expect("获取就绪队列锁不应失败");
 
         // 重建就绪队列
         *ready_queue = BinaryHeap::new();
@@ -308,14 +308,14 @@ impl ThreadPriorityScheduler {
             return None;
         }
 
-        let mut ready_queue = self.ready_queue.lock().unwrap();
-        let mut running_thread = self.running_thread.lock().unwrap();
+        let mut ready_queue = self.ready_queue.lock().expect("获取就绪队列锁不应失败");
+        let mut running_thread = self.running_thread.lock().expect("获取运行线程锁不应失败");
 
         if let Some(next_thread) = ready_queue.pop() {
             let thread_id = next_thread.thread_id;
 
             // 记录上下文切换
-            let mut threads = self.threads.lock().unwrap();
+            let mut threads = self.threads.lock().expect("获取线程锁不应失败");
             if let Some(info) = threads.get_mut(&thread_id) {
                 info.record_context_switch();
             }
@@ -329,14 +329,14 @@ impl ThreadPriorityScheduler {
     }
 
     pub fn yield_thread(&self, thread_id: usize) {
-        let mut running_thread = self.running_thread.lock().unwrap();
+        let mut running_thread = self.running_thread.lock().expect("获取运行线程锁不应失败");
         if *running_thread == Some(thread_id) {
             *running_thread = None;
 
             // 将线程重新加入就绪队列
-            let threads = self.threads.lock().unwrap();
+            let threads = self.threads.lock().expect("获取线程锁不应失败");
             if let Some(info) = threads.get(&thread_id) {
-                let mut ready_queue = self.ready_queue.lock().unwrap();
+                let mut ready_queue = self.ready_queue.lock().expect("获取就绪队列锁不应失败");
                 ready_queue.push(info.clone());
             }
         }
@@ -356,12 +356,12 @@ impl ThreadPriorityScheduler {
     }
 
     pub fn get_thread_statistics(&self, thread_id: usize) -> Option<ThreadSchedulingInfo> {
-        let threads = self.threads.lock().unwrap();
+        let threads = self.threads.lock().expect("获取线程锁不应失败");
         threads.get(&thread_id).cloned()
     }
 
     pub fn get_all_thread_statistics(&self) -> Vec<ThreadSchedulingInfo> {
-        let threads = self.threads.lock().unwrap();
+        let threads = self.threads.lock().expect("获取线程锁不应失败");
         threads.values().cloned().collect()
     }
 
@@ -438,15 +438,15 @@ impl RealTimeScheduler {
         );
 
         // 设置截止时间
-        let mut deadline_monitor = self.deadline_monitor.lock().unwrap();
+        let mut deadline_monitor = self.deadline_monitor.lock().expect("获取截止时间监控锁不应失败");
         deadline_monitor.insert(thread_id, Instant::now() + deadline);
 
         Ok(())
     }
 
     pub fn check_deadlines(&self) {
-        let deadline_monitor = self.deadline_monitor.lock().unwrap();
-        let mut missed_deadlines = self.missed_deadlines.lock().unwrap();
+        let deadline_monitor = self.deadline_monitor.lock().expect("获取截止时间监控锁不应失败");
+        let mut missed_deadlines = self.missed_deadlines.lock().expect("获取错过截止时间锁不应失败");
         let now = Instant::now();
 
         for (thread_id, deadline) in deadline_monitor.iter() {
@@ -466,7 +466,7 @@ impl RealTimeScheduler {
     }
 
     pub fn get_missed_deadlines(&self, thread_id: usize) -> usize {
-        let missed_deadlines = self.missed_deadlines.lock().unwrap();
+        let missed_deadlines = self.missed_deadlines.lock().expect("获取错过截止时间锁不应失败");
         missed_deadlines.get(&thread_id).copied().unwrap_or(0)
     }
 
@@ -511,7 +511,7 @@ pub fn demonstrate_priority_scheduling() {
 
     // 等待所有线程完成
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     // 显示统计信息
@@ -532,10 +532,10 @@ pub fn demonstrate_priority_scheduling() {
     // 注册实时线程
     rt_scheduler
         .register_real_time_thread(4, Duration::from_millis(100))
-        .unwrap();
+        .expect("创建实时线程不应失败");
     rt_scheduler
         .register_real_time_thread(5, Duration::from_millis(50))
-        .unwrap();
+        .expect("创建实时线程不应失败");
 
     // 检查截止时间
     for _ in 0..10 {
@@ -608,7 +608,7 @@ mod tests {
 
         rt_scheduler
             .register_real_time_thread(1, Duration::from_millis(100))
-            .unwrap();
+            .expect("创建实时线程不应失败");
         assert_eq!(rt_scheduler.get_missed_deadlines(1), 0);
     }
 

@@ -119,7 +119,7 @@ impl<T> AdaptiveMutex<T> {
         // 自旋失败，使用阻塞锁
         self.stats.record_contention();
         let wait_start = Instant::now();
-        let mut guard = self.data.lock().unwrap();
+        let mut guard = self.data.lock().expect("获取数据锁不应失败");
         let wait_time = wait_start.elapsed();
         self.stats.record_wait(wait_time);
         self.stats.record_acquire();
@@ -185,12 +185,12 @@ impl<T> AdaptiveRwLock<T> {
 
         if self.read_optimized.load(Ordering::Relaxed) {
             // 读优化模式
-            let guard = self.data.read().unwrap();
+            let guard = self.data.read().expect("获取数据读锁不应失败");
             self.stats.record_acquire();
             f(&*guard)
         } else {
             // 写优化模式，读操作也使用写锁
-            let guard = self.data.write().unwrap();
+            let guard = self.data.write().expect("获取数据写锁不应失败");
             self.stats.record_acquire();
             f(&*guard)
         }
@@ -204,12 +204,12 @@ impl<T> AdaptiveRwLock<T> {
 
         if self.write_optimized.load(Ordering::Relaxed) {
             // 写优化模式
-            let mut guard = self.data.write().unwrap();
+            let mut guard = self.data.write().expect("获取数据写锁不应失败");
             self.stats.record_acquire();
             f(&mut *guard)
         } else {
             // 读优化模式
-            let mut guard = self.data.write().unwrap();
+            let mut guard = self.data.write().expect("获取数据写锁不应失败");
             self.stats.record_acquire();
             f(&mut *guard)
         }
@@ -468,7 +468,7 @@ pub fn demonstrate_adaptive_locks() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     let stats = adaptive_mutex.get_stats();
@@ -516,11 +516,11 @@ pub fn demonstrate_adaptive_locks() {
         .collect();
 
     for handle in read_handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     for handle in write_handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     let stats = adaptive_rwlock.get_stats();
@@ -547,7 +547,7 @@ pub fn demonstrate_adaptive_locks() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     let stats = hybrid_lock.get_stats();

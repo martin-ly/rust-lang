@@ -45,7 +45,7 @@ pub mod advanced_lifetimes {
             self.data
         }
 
-        pub fn tracker_id(&self) -> u64 {
+        pub const fn tracker_id(&self) -> u64 {
             self.tracker_id
         }
     }
@@ -497,12 +497,12 @@ pub mod memory_leak_detection {
 
             self.total_allocated.fetch_add(size, Ordering::Relaxed);
 
-            let mut allocations = self.allocations.lock().unwrap();
+            let mut allocations = self.allocations.lock().expect("分配记录锁定失败");
             allocations.insert(ptr, info);
         }
 
         pub fn track_deallocation(&self, ptr: *mut u8) {
-            let mut allocations = self.allocations.lock().unwrap();
+            let mut allocations = self.allocations.lock().expect("分配记录锁定失败");
             if let Some(info) = allocations.remove(&ptr) {
                 self.total_deallocated
                     .fetch_add(info.size, Ordering::Relaxed);
@@ -510,7 +510,7 @@ pub mod memory_leak_detection {
         }
 
         pub fn get_leaks(&self) -> Vec<AllocationInfo> {
-            let allocations = self.allocations.lock().unwrap();
+            let allocations = self.allocations.lock().expect("分配记录锁定失败");
             allocations.values().cloned().collect()
         }
 
@@ -518,7 +518,7 @@ pub mod memory_leak_detection {
             MemoryStats {
                 total_allocated: self.total_allocated.load(Ordering::Relaxed),
                 total_deallocated: self.total_deallocated.load(Ordering::Relaxed),
-                current_allocations: self.allocations.lock().unwrap().len(),
+                current_allocations: self.allocations.lock().expect("分配记录锁定失败").len(),
             }
         }
 

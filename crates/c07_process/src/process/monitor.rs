@@ -67,70 +67,70 @@ impl ProcessMonitor {
 
     /// 添加进程到监控
     pub fn add_process(&self, info: ProcessInfo) -> ProcessResult<()> {
-        let mut processes = self.processes.lock().unwrap();
+        let mut processes = self.processes.lock().expect("进程监控锁被污染");
         processes.insert(info.pid, info);
         Ok(())
     }
 
     /// 移除进程监控
     pub fn remove_process(&self, pid: u32) -> ProcessResult<()> {
-        let mut processes = self.processes.lock().unwrap();
+        let mut processes = self.processes.lock().expect("进程监控锁被污染");
         processes.remove(&pid);
         Ok(())
     }
 
     /// 更新进程信息
     pub fn update_process(&self, info: ProcessInfo) -> ProcessResult<()> {
-        let mut processes = self.processes.lock().unwrap();
+        let mut processes = self.processes.lock().expect("进程监控锁被污染");
         processes.insert(info.pid, info);
         Ok(())
     }
 
     /// 获取所有监控的进程
     pub fn get_processes(&self) -> Vec<ProcessInfo> {
-        let processes = self.processes.lock().unwrap();
+        let processes = self.processes.lock().expect("进程监控锁被污染");
         processes.values().cloned().collect()
     }
 
     /// 获取特定进程信息
     pub fn get_process(&self, pid: u32) -> Option<ProcessInfo> {
-        let processes = self.processes.lock().unwrap();
+        let processes = self.processes.lock().expect("进程监控锁被污染");
         processes.get(&pid).cloned()
     }
 
     /// 更新系统资源信息
     pub fn update_resources(&self, resources: SystemResources) {
-        let mut current_resources = self.resources.lock().unwrap();
+        let mut current_resources = self.resources.lock().expect("系统资源锁被污染");
         *current_resources = resources.clone();
 
         // 更新性能指标历史
         self.update_performance_metrics(&resources);
 
-        let mut last_update = self.last_update.lock().unwrap();
+        let mut last_update = self.last_update.lock().expect("最后更新时间锁被污染");
         *last_update = SystemTime::now();
     }
 
     /// 获取系统资源信息
     pub fn get_resources(&self) -> SystemResources {
-        let resources = self.resources.lock().unwrap();
+        let resources = self.resources.lock().expect("系统资源锁被污染");
         resources.clone()
     }
 
     /// 获取最后更新时间
     pub fn last_update(&self) -> SystemTime {
-        let last_update = self.last_update.lock().unwrap();
+        let last_update = self.last_update.lock().expect("最后更新时间锁被污染");
         *last_update
     }
 
     /// 检查是否需要更新
     pub fn needs_update(&self, interval: Duration) -> bool {
-        let last_update = self.last_update.lock().unwrap();
+        let last_update = self.last_update.lock().expect("最后更新时间锁被污染");
         last_update.elapsed().unwrap_or(Duration::ZERO) >= interval
     }
 
     /// 获取进程统计信息
     pub fn get_stats(&self) -> ProcessStats {
-        let processes = self.processes.lock().unwrap();
+        let processes = self.processes.lock().expect("进程监控锁被污染");
         let total = processes.len();
         let running = processes
             .values()
@@ -145,7 +145,7 @@ impl ProcessMonitor {
             .filter(|p| p.status == crate::types::ProcessStatus::Stopped)
             .count();
 
-        let last_update = self.last_update.lock().unwrap();
+        let last_update = self.last_update.lock().expect("最后更新时间锁被污染");
         ProcessStats {
             total,
             running,
@@ -157,7 +157,7 @@ impl ProcessMonitor {
 
     /// 更新性能指标
     fn update_performance_metrics(&self, resources: &SystemResources) {
-        let mut metrics = self.performance_metrics.lock().unwrap();
+        let mut metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         let now = SystemTime::now();
 
         // 更新CPU使用率历史
@@ -176,13 +176,13 @@ impl ProcessMonitor {
 
     /// 获取性能指标
     pub fn get_performance_metrics(&self) -> PerformanceMetrics {
-        let metrics = self.performance_metrics.lock().unwrap();
+        let metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         metrics.clone()
     }
 
     /// 获取CPU使用率趋势
     pub fn get_cpu_trend(&self, duration: Duration) -> Vec<(SystemTime, f64)> {
-        let metrics = self.performance_metrics.lock().unwrap();
+        let metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         let cutoff = SystemTime::now() - duration;
 
         metrics
@@ -195,7 +195,7 @@ impl ProcessMonitor {
 
     /// 获取内存使用率趋势
     pub fn get_memory_trend(&self, duration: Duration) -> Vec<(SystemTime, u64)> {
-        let metrics = self.performance_metrics.lock().unwrap();
+        let metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         let cutoff = SystemTime::now() - duration;
 
         metrics
@@ -208,7 +208,7 @@ impl ProcessMonitor {
 
     /// 清理旧的历史数据
     pub fn cleanup_old_data(&self, max_age: Duration) {
-        let mut metrics = self.performance_metrics.lock().unwrap();
+        let mut metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         let cutoff = SystemTime::now() - max_age;
 
         metrics

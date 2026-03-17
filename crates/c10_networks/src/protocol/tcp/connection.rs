@@ -24,8 +24,8 @@ pub struct TcpConnectionConfig {
 impl Default for TcpConnectionConfig {
     fn default() -> Self {
         Self {
-            local_addr: "127.0.0.1:0".parse().unwrap(),
-            remote_addr: "127.0.0.1:8080".parse().unwrap(),
+            local_addr: "127.0.0.1:0".parse().expect("hardcoded localhost address should be valid"),
+            remote_addr: "127.0.0.1:8080".parse().expect("hardcoded localhost address should be valid"),
             timeout: Duration::from_secs(30),
             keep_alive: true,
             tcp_nodelay: true,

@@ -44,7 +44,7 @@ impl LifetimeManager {
     
     /// 注册生命周期 / Register Lifetime
     pub fn register_lifetime(&self, name: String, scope: String) -> Result<(), LifetimeError> {
-        let mut lifetime_map = self.lifetime_map.lock().unwrap();
+        let mut lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
         
         if lifetime_map.contains_key(&name) {
             return Err(LifetimeError::LifetimeAlreadyExists);
@@ -55,7 +55,7 @@ impl LifetimeManager {
         
         // 更新统计信息
         {
-            let mut stats = self.statistics.lock().unwrap();
+            let mut stats = self.statistics.lock().expect("统计信息锁定失败");
             stats.total_lifetimes += 1;
         }
         
@@ -64,25 +64,25 @@ impl LifetimeManager {
     
     /// 推断生命周期 / Infer Lifetime
     pub fn infer_lifetime(&self, context: &LifetimeContext) -> Result<LifetimeInfo, LifetimeError> {
-        let engine = self.inference_engine.lock().unwrap();
+        let engine = self.inference_engine.lock().expect("推断引擎锁定失败");
         engine.infer(context)
     }
     
     /// 添加生命周期约束 / Add Lifetime Constraint
     pub fn add_constraint(&self, constraint: LifetimeConstraint) -> Result<(), LifetimeError> {
-        let solver = self.constraint_solver.lock().unwrap();
+        let solver = self.constraint_solver.lock().expect("约束求解器锁定失败");
         solver.add_constraint(constraint)
     }
     
     /// 解决生命周期约束 / Solve Lifetime Constraints
     pub fn solve_constraints(&self) -> Result<LifetimeSolution, LifetimeError> {
-        let solver = self.constraint_solver.lock().unwrap();
+        let solver = self.constraint_solver.lock().expect("约束求解器锁定失败");
         solver.solve()
     }
     
     /// 验证生命周期 / Validate Lifetime
     pub fn validate_lifetime(&self, lifetime_name: &str) -> Result<ValidationResult, LifetimeError> {
-        let lifetime_map = self.lifetime_map.lock().unwrap();
+        let lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
         
         if let Some(lifetime_info) = lifetime_map.get(lifetime_name) {
             let mut result = ValidationResult::new();
@@ -95,7 +95,7 @@ impl LifetimeManager {
             }
             
             // 检查生命周期图连通性
-            let graph = self.lifetime_graph.lock().unwrap();
+            let graph = self.lifetime_graph.lock().expect("生命周期图锁定失败");
             if !graph.is_connected(lifetime_name) {
                 result.add_error(ValidationError::DisconnectedLifetime);
             }
@@ -114,19 +114,19 @@ impl LifetimeManager {
     
     /// 获取生命周期信息 / Get Lifetime Information
     pub fn get_lifetime_info(&self, name: &str) -> Option<LifetimeInfo> {
-        let lifetime_map = self.lifetime_map.lock().unwrap();
+        let lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
         lifetime_map.get(name).cloned()
     }
     
     /// 获取所有生命周期 / Get All Lifetimes
     pub fn get_all_lifetimes(&self) -> Vec<LifetimeInfo> {
-        let lifetime_map = self.lifetime_map.lock().unwrap();
+        let lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
         lifetime_map.values().cloned().collect()
     }
     
     /// 获取统计信息 / Get Statistics
     pub fn get_statistics(&self) -> LifetimeStatistics {
-        self.statistics.lock().unwrap().clone()
+        self.statistics.lock().expect("统计信息锁定失败").clone()
     }
 }
 

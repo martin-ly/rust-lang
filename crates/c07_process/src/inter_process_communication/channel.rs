@@ -103,11 +103,11 @@ impl IpcChannel for FileSystemChannel {
     }
 
     fn is_closed(&self) -> bool {
-        *self.is_closed.lock().unwrap()
+        *self.is_closed.lock().expect("通道关闭状态锁被污染")
     }
 
     fn close(&mut self) -> IpcResult<()> {
-        let mut closed = self.is_closed.lock().unwrap();
+        let mut closed = self.is_closed.lock().expect("通道关闭状态锁被污染");
         *closed = true;
 
         // 删除通道文件

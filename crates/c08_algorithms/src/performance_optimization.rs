@@ -217,7 +217,7 @@ impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<std::sync::mpsc::Receiver<Message>>>) -> Worker {
         let thread = thread::spawn(move || {
             loop {
-                let message = receiver.lock().unwrap().recv().unwrap();
+                let message = receiver.lock().expect("线程池接收器锁被污染").recv().expect("线程池接收器已关闭");
 
                 match message {
                     Message::NewJob(job) => {
@@ -301,7 +301,7 @@ impl ConcurrentOptimizedProcessor {
 
             self.thread_pool.execute(move || {
                 let processed_chunk: Vec<i32> = chunk.iter().map(|&x| x * 2 + 1).collect();
-                let mut results = results_arc.lock().unwrap();
+                let mut results = results_arc.lock().expect("并行结果锁被污染");
 
                 let start = i * chunk_size;
                 let end = std::cmp::min(start + chunk.len(), results.len());

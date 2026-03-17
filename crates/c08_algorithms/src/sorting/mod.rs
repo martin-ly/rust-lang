@@ -193,7 +193,7 @@ pub fn bucket_sort_unit_f64(data: Vec<f64>, bucket_num: usize) -> Vec<f64> {
         buckets[idx].push(x);
     }
     for b in &mut buckets {
-        b.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+        b.sort_unstable_by(|a, b| a.partial_cmp(b).expect("浮点数比较失败"));
     }
     let mut out = Vec::with_capacity(data.len());
     for b in buckets {
@@ -207,7 +207,7 @@ pub fn counting_sort_sync_i32_nonneg(data: &[i32]) -> Vec<i32> {
     if data.is_empty() {
         return Vec::new();
     }
-    let &max_v = data.iter().max().unwrap();
+    let &max_v = data.iter().max().expect("空数据集无法获取最大值");
     assert!(
         max_v >= 0,
         "counting_sort_sync_i32_nonneg requires non-negative integers"
@@ -264,7 +264,7 @@ pub fn counting_sort_sync_u32(data: &[u32]) -> Vec<u32> {
     if data.is_empty() {
         return Vec::new();
     }
-    let &max_v = data.iter().max().unwrap();
+    let &max_v = data.iter().max().expect("空数据集无法获取最大值");
     let mut cnt = vec![0usize; max_v as usize + 1];
     for &x in data {
         cnt[x as usize] += 1;
@@ -283,7 +283,7 @@ pub fn counting_sort_parallel_u32(data: &[u32]) -> Vec<u32> {
     if data.is_empty() {
         return Vec::new();
     }
-    let &max_v = data.iter().max().unwrap();
+    let &max_v = data.iter().max().expect("空数据集无法获取最大值");
     let range = max_v as usize + 1;
     let chunks: Vec<Vec<usize>> = data
         .par_chunks(1.max(data.len() / rayon::current_num_threads().max(1)))

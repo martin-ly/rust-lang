@@ -100,7 +100,7 @@ fn dist(a: Point, b: Point) -> f64 {
 }
 
 pub fn closest_pair_sync(mut pts: Vec<Point>) -> f64 {
-    pts.sort_by(|a, b| a.x.partial_cmp(&b.x).unwrap());
+    pts.sort_by(|a, b| a.x.partial_cmp(&b.x).expect("X坐标比较失败"));
     closest_pair_rec(&pts)
 }
 
@@ -126,7 +126,7 @@ fn closest_pair_rec(pts: &[Point]) -> f64 {
         .copied()
         .filter(|p| (p.x - midx).abs() < d)
         .collect();
-    strip.sort_by(|a, b| a.y.partial_cmp(&b.y).unwrap());
+    strip.sort_by(|a, b| a.y.partial_cmp(&b.y).expect("Y坐标比较失败"));
     let m = strip.len();
     for i in 0..m {
         for j in i + 1..m.min(i + 7) {
@@ -139,7 +139,7 @@ fn closest_pair_rec(pts: &[Point]) -> f64 {
 
 pub fn closest_pair_parallel(mut pts: Vec<Point>) -> f64 {
     // 并行预排序
-    pts.par_sort_unstable_by(|a, b| a.x.partial_cmp(&b.x).unwrap());
+    pts.par_sort_unstable_by(|a, b| a.x.partial_cmp(&b.x).expect("并行X坐标比较失败"));
     // 递归仍采用同步（复杂共享结构），但整体速度受益于预处理
     closest_pair_rec(&pts)
 }
@@ -237,7 +237,7 @@ pub fn karatsuba_mul(a: &str, b: &str) -> String {
             j -= 1;
         }
         out.reverse();
-        String::from_utf8(out).unwrap()
+        String::from_utf8(out).expect("大数乘法结果不是有效UTF-8")
     }
     fn sub_str(x: &str, y: &str) -> String {
         // assume x>=y
@@ -262,11 +262,11 @@ pub fn karatsuba_mul(a: &str, b: &str) -> String {
             i -= 1;
             j -= 1;
         }
-        while out.len() > 1 && *out.last().unwrap() == b'0' {
+        while out.len() > 1 && *out.last().expect("输出为空") == b'0' {
             out.pop();
         }
         out.reverse();
-        String::from_utf8(out).unwrap()
+        String::from_utf8(out).expect("大数乘法结果不是有效UTF-8")
     }
     fn mul_small(a: &str, b: &str) -> String {
         if a.len() <= 32 && b.len() <= 32 {
@@ -418,7 +418,7 @@ mod tests {
     #[test]
     fn test_quickselect_and_karatsuba() {
         let mut v = vec![7, 2, 5, 3, 9, 1, 6, 4, 8];
-        let kth = quickselect_kth(&mut v, 4).copied().unwrap();
+        let kth = quickselect_kth(&mut v, 4).copied().expect("快速选择第k小元素失败");
         assert_eq!(kth, 5);
         assert_eq!(
             karatsuba_mul("12345678901234567890", "9876543210"),

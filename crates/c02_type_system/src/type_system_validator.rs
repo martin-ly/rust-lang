@@ -227,7 +227,7 @@ impl TypeValidator {
 
     /// 验证类型
     pub fn validate_type(&self, type_: &Type) -> Vec<ValidationResult> {
-        let env = self.type_env.lock().unwrap();
+        let env = self.type_env.lock().expect("类型环境锁定失败");
         let mut results = Vec::new();
 
         for rule in &self.validation_rules {
@@ -237,7 +237,7 @@ impl TypeValidator {
 
         // 更新统计
         {
-            let mut stats = self.stats.lock().unwrap();
+            let mut stats = self.stats.lock().expect("统计信息锁定失败");
             stats.total_validations += 1;
 
             let type_name = self.get_type_name(type_);
@@ -262,7 +262,7 @@ impl TypeValidator {
     /// 验证类型兼容性
     #[allow(unused_variables)]
     pub fn validate_compatibility(&self, from: &Type, to: &Type) -> ValidationResult {
-        let env = self.type_env.lock().unwrap();
+        let env = self.type_env.lock().expect("类型环境锁定失败");
 
         if self.types_equal(from, to) {
             return ValidationResult {
@@ -300,7 +300,7 @@ impl TypeValidator {
     /// 验证生命周期
     #[allow(unused_variables)]
     pub fn validate_lifetime(&self, lifetime: &LifetimeType) -> ValidationResult {
-        let env = self.type_env.lock().unwrap();
+        let env = self.type_env.lock().expect("类型环境锁定失败");
 
         // 检查生命周期是否已定义
         if !env.lifetime_definitions.contains_key(&lifetime.name) {
@@ -343,7 +343,7 @@ impl TypeValidator {
 
     /// 验证泛型类型
     pub fn validate_generic_type(&self, generic: &GenericType) -> ValidationResult {
-        let env = self.type_env.lock().unwrap();
+        let env = self.type_env.lock().expect("类型环境锁定失败");
 
         // 检查泛型参数数量
         if generic.parameters.is_empty() {
@@ -398,25 +398,25 @@ impl TypeValidator {
 
     /// 添加类型定义
     pub fn add_type_definition(&self, name: String, type_: Type) {
-        let mut env = self.type_env.lock().unwrap();
+        let mut env = self.type_env.lock().expect("类型环境锁定失败");
         env.type_definitions.insert(name, type_);
     }
 
     /// 添加变量类型
     pub fn add_variable_type(&self, name: String, type_: Type) {
-        let mut env = self.type_env.lock().unwrap();
+        let mut env = self.type_env.lock().expect("类型环境锁定失败");
         env.variable_types.insert(name, type_);
     }
 
     /// 添加生命周期定义
     pub fn add_lifetime_definition(&self, name: String, lifetime: LifetimeType) {
-        let mut env = self.type_env.lock().unwrap();
+        let mut env = self.type_env.lock().expect("类型环境锁定失败");
         env.lifetime_definitions.insert(name, lifetime);
     }
 
     /// 获取验证统计
     pub fn get_stats(&self) -> ValidationStats {
-        self.stats.lock().unwrap().clone()
+        self.stats.lock().expect("统计信息锁定失败").clone()
     }
 
     /// 类型相等检查
@@ -607,7 +607,7 @@ impl TypeInferencer {
 
     /// 推断变量类型
     fn infer_variable_type(&self, name: &str) -> Result<Type, String> {
-        let env = self.type_env.lock().unwrap();
+        let env = self.type_env.lock().expect("类型环境锁定失败");
         env.variable_types
             .get(name)
             .cloned()
@@ -679,7 +679,7 @@ impl TypeInferencer {
         name: &str,
         arguments: &[Expression],
     ) -> Result<Type, String> {
-        let env = self.type_env.lock().unwrap();
+        let env = self.type_env.lock().expect("类型环境锁定失败");
 
         if let Some(function_type) = env.type_definitions.get(name) {
             if let Type::Function(func_type) = function_type {
@@ -787,19 +787,19 @@ impl TypeInferencer {
 
     /// 添加类型定义
     pub fn add_type_definition(&self, name: String, type_: Type) {
-        let mut env = self.type_env.lock().unwrap();
+        let mut env = self.type_env.lock().expect("类型环境锁定失败");
         env.type_definitions.insert(name, type_);
     }
 
     /// 添加变量类型
     pub fn add_variable_type(&self, name: String, type_: Type) {
-        let mut env = self.type_env.lock().unwrap();
+        let mut env = self.type_env.lock().expect("类型环境锁定失败");
         env.variable_types.insert(name, type_);
     }
 
     /// 获取推断统计
     pub fn get_stats(&self) -> InferenceStats {
-        self.stats.lock().unwrap().clone()
+        self.stats.lock().expect("统计信息锁定失败").clone()
     }
 }
 
@@ -1150,6 +1150,6 @@ mod tests {
         let expr = Expression::Literal(Literal::Integer(42));
         let result = inferencer.infer_expression_type(&expr);
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), Type::Primitive(PrimitiveType::I32));
+        assert_eq!(result.expect("类型推断失败"), Type::Primitive(PrimitiveType::I32));
     }
 }

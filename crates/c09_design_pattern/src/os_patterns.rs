@@ -674,9 +674,9 @@ mod tests {
         let manager = singleton.get_instance();
 
         {
-            let mut mgr = manager.lock().unwrap();
+            let mut mgr = manager.lock().expect("系统资源管理器锁被污染");
             mgr.allocate_memory("test_memory".to_string(), 1024)
-                .unwrap();
+                .expect("分配内存失败");
             mgr.create_process();
 
             assert_eq!(mgr.get_memory_usage(), 1024);
@@ -696,7 +696,7 @@ mod tests {
         assert_eq!(device.get_id(), "cpu0");
 
         let mut device = device;
-        device.initialize().unwrap();
+        device.initialize().expect("设备初始化失败");
         let status = device.get_status();
         assert!(status.is_online);
     }

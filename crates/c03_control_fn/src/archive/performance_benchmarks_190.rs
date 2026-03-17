@@ -88,8 +88,8 @@ impl PerformanceBenchmark {
         let average_time = Duration::from_nanos(
             times.iter().map(|t| t.as_nanos() as u64).sum::<u64>() / times.len() as u64
         );
-        let min_time = *times.iter().min().unwrap();
-        let max_time = *times.iter().max().unwrap();
+        let min_time = *times.iter().min().expect("计算最小时间失败");
+        let max_time = *times.iter().max().expect("计算最大时间失败");
         let throughput = iterations as f64 / total_time.as_secs_f64();
 
         let result = BenchmarkResult {
@@ -150,8 +150,8 @@ impl PerformanceBenchmark {
         let average_time = Duration::from_nanos(
             times.iter().map(|t| t.as_nanos() as u64).sum::<u64>() / times.len() as u64
         );
-        let min_time = *times.iter().min().unwrap();
-        let max_time = *times.iter().max().unwrap();
+        let min_time = *times.iter().min().expect("计算最小时间失败");
+        let max_time = *times.iter().max().expect("计算最大时间失败");
         let throughput = iterations as f64 / total_time.as_secs_f64();
 
         let result = BenchmarkResult {
@@ -212,7 +212,7 @@ impl PerformanceBenchmark {
         }
 
         // 找出吞吐量最高的测试
-        if let Some(highest_throughput) = results.iter().max_by(|a, b| a.throughput.partial_cmp(&b.throughput).unwrap()) {
+        if let Some(highest_throughput) = results.iter().max_by(|a, b| a.throughput.partial_cmp(&b.throughput).expect("比较吞吐量失败")) {
             report.push_str(&format!("**最高吞吐量**: {} ({:.2} 操作/秒)\n\n",
                     highest_throughput.test_name, highest_throughput.throughput));
         }
@@ -264,7 +264,7 @@ impl AsyncPerformanceTests {
                 let processor = AsyncTestProcessor::new("test_processor".to_string());
                 let data = vec![1u8; 1024];
 
-                let result = processor.process(data).await.unwrap();
+                let result = processor.process(data).await.expect("处理器执行失败");
                 result.len()
             },
         ).await;
@@ -284,7 +284,7 @@ impl AsyncPerformanceTests {
                 for i in 0..50 {
                     let semaphore = semaphore.clone();
                     let handle = tokio::spawn(async move {
-                        let _permit = semaphore.acquire().await.unwrap();
+                        let _permit = semaphore.acquire().await.expect("获取信号量许可失败");
                         sleep(Duration::from_millis(10)).await;
                         i * 2
                     });
@@ -293,7 +293,7 @@ impl AsyncPerformanceTests {
 
                 let mut sum = 0;
                 for handle in handles {
-                    sum += handle.await.unwrap();
+                    sum += handle.await.expect("等待异步任务失败");
                 }
                 sum
             },
@@ -311,9 +311,9 @@ impl AsyncPerformanceTests {
                 let state_machine = AsyncTestStateMachine::new();
 
                 for _ in 0..10 {
-                    state_machine.transition_to(AsyncTestState::Running).await.unwrap();
-                    state_machine.process_data("test_data".to_string()).await.unwrap();
-                    state_machine.transition_to(AsyncTestState::Completed).await.unwrap();
+                    state_machine.transition_to(AsyncTestState::Running).await.expect("状态转换到Running失败");
+                    state_machine.process_data("test_data".to_string()).await.expect("处理数据失败");
+                    state_machine.transition_to(AsyncTestState::Completed).await.expect("状态转换到Completed失败");
                 }
 
                 state_machine.get_state().await
@@ -551,7 +551,7 @@ impl ConcurrencyPerformanceTests {
 
                 let mut sum = 0;
                 for handle in handles {
-                    sum += handle.await.unwrap();
+                    sum += handle.await.expect("等待异步任务失败");
                 }
                 sum
             },
@@ -581,7 +581,7 @@ impl ConcurrencyPerformanceTests {
                 }
 
                 for handle in handles {
-                    handle.await.unwrap();
+                    handle.await.expect("等待异步锁任务失败");
                 }
 
                 *data.lock().await
@@ -625,7 +625,7 @@ impl ConcurrencyPerformanceTests {
                 }
 
                 for handle in handles {
-                    handle.await.unwrap();
+                    handle.await.expect("等待异步锁任务失败");
                 }
 
                 data.read().await.len()
@@ -703,7 +703,7 @@ mod tests {
     #[tokio::test]
     async fn test_concurrent_processing() {
         let tests = ConcurrencyPerformanceTests::new();
-        let result = tests.test_concurrent_task_processing().await.unwrap();
+        let result = tests.test_concurrent_task_processing().await.expect("并发处理测试失败");
         assert!(result.throughput > 0.0);
     }
 

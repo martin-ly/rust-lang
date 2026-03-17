@@ -72,7 +72,7 @@ impl SyncManager {
         let primitive = arc_mutex.clone() as Arc<dyn SyncPrimitiveTrait>;
         self.primitives
             .lock()
-            .unwrap()
+            .expect("同步原语锁被污染")
             .insert(name.to_string(), primitive);
 
         Ok(arc_mutex)
@@ -89,7 +89,7 @@ impl SyncManager {
         let primitive = arc_rwlock.clone() as Arc<dyn SyncPrimitiveTrait>;
         self.primitives
             .lock()
-            .unwrap()
+            .expect("同步原语锁被污染")
             .insert(name.to_string(), primitive);
 
         Ok(arc_rwlock)
@@ -106,7 +106,7 @@ impl SyncManager {
         let primitive = arc_condvar.clone() as Arc<dyn SyncPrimitiveTrait>;
         self.primitives
             .lock()
-            .unwrap()
+            .expect("同步原语锁被污染")
             .insert(name.to_string(), primitive);
 
         Ok(arc_condvar)
@@ -128,7 +128,7 @@ impl SyncManager {
         let primitive = arc_semaphore.clone() as Arc<dyn SyncPrimitiveTrait>;
         self.primitives
             .lock()
-            .unwrap()
+            .expect("同步原语锁被污染")
             .insert(name.to_string(), primitive);
 
         Ok(arc_semaphore)
@@ -147,7 +147,7 @@ impl SyncManager {
         let primitive = arc_barrier.clone() as Arc<dyn SyncPrimitiveTrait>;
         self.primitives
             .lock()
-            .unwrap()
+            .expect("同步原语锁被污染")
             .insert(name.to_string(), primitive);
 
         Ok(arc_barrier)
@@ -155,23 +155,23 @@ impl SyncManager {
 
     /// 获取所有原语名称
     pub fn get_primitive_names(&self) -> Vec<String> {
-        self.primitives.lock().unwrap().keys().cloned().collect()
+        self.primitives.lock().expect("同步原语锁被污染").keys().cloned().collect()
     }
 
     /// 检查原语是否存在
     pub fn has_primitive(&self, name: &str) -> bool {
-        self.primitives.lock().unwrap().contains_key(name)
+        self.primitives.lock().expect("同步原语锁被污染").contains_key(name)
     }
 
     /// 获取原语统计信息
     pub fn get_primitive_stats(&self, name: &str) -> Option<PrimitiveStats> {
-        let primitives = self.primitives.lock().unwrap();
+        let primitives = self.primitives.lock().expect("同步原语锁被污染");
         primitives.get(name).map(|p| p.get_stats())
     }
 
     /// 获取所有原语统计信息
     pub fn get_all_stats(&self) -> HashMap<String, PrimitiveStats> {
-        let primitives = self.primitives.lock().unwrap();
+        let primitives = self.primitives.lock().expect("同步原语锁被污染");
         let mut stats = HashMap::new();
 
         for (name, primitive) in primitives.iter() {

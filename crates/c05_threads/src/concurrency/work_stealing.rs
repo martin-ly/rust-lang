@@ -109,12 +109,12 @@ impl<T> WorkStealingScheduler<T> {
                             break;
                         }
                     }
-                    results.lock().unwrap().extend(local_results);
+                    results.lock().expect("获取结果锁不应失败").extend(local_results);
                 });
             }
         });
 
-        let final_results = results.lock().unwrap();
+        let final_results = results.lock().expect("获取结果锁不应失败");
         println!("工作窃取结果: {:?}", final_results);
     }
 }
@@ -243,12 +243,12 @@ impl<T> PriorityWorkStealingScheduler<T> {
                             break;
                         }
                     }
-                    results.lock().unwrap().extend(local_results);
+                    results.lock().expect("获取结果锁不应失败").extend(local_results);
                 });
             }
         });
 
-        let final_results = results.lock().unwrap();
+        let final_results = results.lock().expect("获取结果锁不应失败");
         println!("优先级工作窃取结果: {:?}", final_results);
     }
 }
@@ -320,7 +320,7 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
     }
 
     fn check_adaptation(&self) {
-        let mut last_adaptation = self.last_adaptation.lock().unwrap();
+        let mut last_adaptation = self.last_adaptation.lock().expect("获取自适应锁不应失败");
         if last_adaptation.elapsed() > self.adaptation_interval {
             // 重置统计
             self.steal_attempts.store(0, Ordering::Relaxed);
@@ -415,12 +415,12 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
                             break;
                         }
                     }
-                    results.lock().unwrap().extend(local_results);
+                    results.lock().expect("获取结果锁不应失败").extend(local_results);
                 });
             }
         });
 
-        let final_results = results.lock().unwrap();
+        let final_results = results.lock().expect("获取结果锁不应失败");
         println!("自适应工作窃取结果: {:?}", final_results);
     }
 }
@@ -547,13 +547,13 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
                                 break;
                             }
                         }
-                        results.lock().unwrap().extend(local_results);
+                        results.lock().expect("获取结果锁不应失败").extend(local_results);
                     });
                 }
             }
         });
 
-        let final_results = results.lock().unwrap();
+        let final_results = results.lock().expect("获取结果锁不应失败");
         println!("NUMA感知工作窃取结果: {:?}", final_results);
     }
 }

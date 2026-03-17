@@ -14,7 +14,7 @@ pub fn parallel_pipeline_test() {
     // 第一个阶段
     let producer = thread::spawn(move || {
         for i in 0..10 {
-            tx1_clone.send(i).unwrap();
+            tx1_clone.send(i).expect("管道阶段1发送失败");
         }
     });
 
@@ -22,7 +22,7 @@ pub fn parallel_pipeline_test() {
     let stage1 = thread::spawn(move || {
         for value in rx1.iter() {
             let processed_value = value * 2; // 处理数据
-            tx2_clone.send(processed_value).unwrap();
+            tx2_clone.send(processed_value).expect("管道阶段2发送失败");
         }
     });
 
@@ -34,11 +34,11 @@ pub fn parallel_pipeline_test() {
     });
 
     // 等待所有线程完成
-    producer.join().unwrap();
+    producer.join().expect("生产者线程加入失败");
     drop(tx1); // 关闭第一个通道
-    stage1.join().unwrap();
+    stage1.join().expect("阶段1线程加入失败");
     drop(tx2); // 关闭第二个通道
-    consumer.join().unwrap();
+    consumer.join().expect("消费者线程加入失败");
 }
 
 #[allow(unused)]

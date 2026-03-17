@@ -45,7 +45,7 @@ pub fn compare_exchange_demo() {
     let _ = value
         .compare_exchange(5, 20, Ordering::AcqRel, Ordering::Acquire)
         .err()
-        .unwrap();
+        .expect("线程创建不应失败");
 
     assert_eq!(value.load(Ordering::Relaxed), 10);
 }
@@ -75,7 +75,7 @@ pub fn spin_increment(num_threads: usize, iters_per_thread: usize) -> usize {
     }
 
     for h in handles {
-        h.join().unwrap();
+        h.join().expect("线程应成功完成");
     }
     shared.load(Ordering::Relaxed)
 }
@@ -102,8 +102,8 @@ pub fn visibility_demo() -> usize {
         r_data.load(Ordering::Relaxed)
     });
 
-    writer.join().unwrap();
-    reader.join().unwrap()
+    writer.join().expect("写线程应成功完成");
+    reader.join().expect("读线程应成功完成")
 }
 
 #[cfg(test)]

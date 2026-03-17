@@ -486,7 +486,7 @@ impl EnhancedErrorManager {
             "ERR_{}",
             SystemTime::now()
                 .duration_since(SystemTime::UNIX_EPOCH)
-                .unwrap()
+                .expect("计算时间戳失败")
                 .as_nanos()
         )
     }

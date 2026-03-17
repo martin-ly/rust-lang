@@ -308,13 +308,13 @@ mod tests {
         // 创建用户
         let user = controller
             .create_user("test_user".to_string(), "test@example.com".to_string())
-            .unwrap();
+            .expect("创建用户失败");
         assert_eq!(user.username, "test_user");
 
         // 获取用户
         let retrieved_user = controller.get_user(user.id);
         assert!(retrieved_user.is_some());
-        assert_eq!(retrieved_user.unwrap().email, "test@example.com");
+        assert_eq!(retrieved_user.expect("获取用户失败").email, "test@example.com");
 
         // 测试视图
         let html_view = HtmlView;
@@ -361,7 +361,7 @@ mod tests {
             published: true,
         };
 
-        repository.save(article).unwrap();
+        repository.save(article).expect("保存文章失败");
         let articles = repository.find_all();
         assert_eq!(articles.len(), 1);
 

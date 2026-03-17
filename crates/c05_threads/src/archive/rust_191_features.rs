@@ -95,17 +95,17 @@ pub mod thread_jit_optimizations {
                         .filter(|&x| x > 0)
                         .sum();
 
-                    let mut results = results.lock().unwrap();
+                    let mut results = results.lock().expect("获取结果锁不应失败");
                     results.push(chunk_result);
                 })
             })
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
-        let results = results.lock().unwrap();
+        let results = results.lock().expect("获取结果锁不应失败");
         results.iter().sum()
     }
 
@@ -147,17 +147,17 @@ pub mod thread_memory_optimizations {
                         thread_results.push(vec![thread_id as i32, i as i32, (i * 2) as i32]);
                     }
 
-                    let mut results = results.lock().unwrap();
+                    let mut results = results.lock().expect("获取结果锁不应失败");
                     results.push(thread_results);
                 })
             })
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
-        let results = results.lock().unwrap();
+        let results = results.lock().expect("获取结果锁不应失败");
         // 展平结果：Vec<Vec<Vec<i32>>> -> Vec<Vec<i32>>
         results.iter().flatten().cloned().collect()
     }
@@ -177,7 +177,7 @@ pub mod thread_memory_optimizations {
                     // Rust 1.91 优化：HashMap 并发操作性能提升
                     for i in 0..operations_per_thread {
                         let key = thread_id * operations_per_thread + i;
-                        let mut map = map.lock().unwrap();
+                        let mut map = map.lock().expect("获取映射锁不应失败");
                         map.insert(key, (key * 2) as i32);
                     }
                 })
@@ -185,7 +185,7 @@ pub mod thread_memory_optimizations {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         map
@@ -202,7 +202,7 @@ pub mod thread_memory_optimizations {
         );
 
         let map = concurrent_hashmap_operations(4, 50);
-        let map = map.lock().unwrap();
+        let map = map.lock().expect("获取映射锁不应失败");
         println!("并发 HashMap 包含 {} 个元素", map.len());
     }
 }
@@ -243,11 +243,11 @@ pub mod thread_error_handling {
 
                     for &item in &data[start..end] {
                         if item > 0 {
-                            let mut valid = valid_items.lock().unwrap();
+                            let mut valid = valid_items.lock().expect("获取有效项锁不应失败");
                             valid.push(item);
                         } else {
                             // Rust 1.91 改进：可以携带详细的错误信息
-                            let mut errors = errors.lock().unwrap();
+                            let mut errors = errors.lock().expect("获取错误锁不应失败");
                             errors.push(format!("负数: {}", item));
                         }
                     }
@@ -256,15 +256,15 @@ pub mod thread_error_handling {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
-        let errors = errors.lock().unwrap();
+        let errors = errors.lock().expect("获取错误锁不应失败");
         if !errors.is_empty() {
             return ControlFlow::Break(format!("验证失败: {}", errors[0]));
         }
 
-        let valid = valid_items.lock().unwrap();
+        let valid = valid_items.lock().expect("获取有效项锁不应失败");
         ControlFlow::Continue(valid.clone())
     }
 
@@ -337,17 +337,17 @@ pub mod comprehensive_thread_examples {
                         let chunk_results: Vec<U> =
                             data[start..end].iter().map(|item| mapper(item)).collect();
 
-                        let mut results = results.lock().unwrap();
+                        let mut results = results.lock().expect("获取结果锁不应失败");
                         results.push(chunk_results);
                     })
                 })
                 .collect();
 
             for handle in handles {
-                handle.join().unwrap();
+                handle.join().expect("线程应成功完成");
             }
 
-            let results = results.lock().unwrap();
+            let results = results.lock().expect("获取结果锁不应失败");
             let all_results: Vec<U> = results.iter().flatten().cloned().collect();
             reducer(all_results)
         }

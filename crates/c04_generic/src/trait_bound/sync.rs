@@ -93,7 +93,7 @@ fn main() {
     }).collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 }
 ```
@@ -130,7 +130,7 @@ fn main() {
     }).collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 }
 ```
@@ -175,7 +175,7 @@ fn main() {
     }).collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 }
 ```
@@ -234,7 +234,7 @@ fn main() {
     }).collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 }
 ```
@@ -250,14 +250,14 @@ fn main() {
     let handles: Vec<_> = (0..3).map(|id| {
         let data = Arc::clone(&data);
         thread::spawn(move || {
-            let mut guard = data.lock().unwrap();
+            let mut guard = data.lock().expect("Mutex 锁被 poisoned");
             guard.push(id + 10);
             println!("Thread {}: data = {:?}", id, guard);
         })
     }).collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 }
 ```
@@ -274,7 +274,7 @@ fn main() {
     let read_handles: Vec<_> = (0..3).map(|id| {
         let data = Arc::clone(&data);
         thread::spawn(move || {
-            let guard = data.read().unwrap();
+            let guard = data.read().expect("读锁获取不应失败");
             println!("Reader {}: data = {:?}", id, *guard);
         })
     }).collect();
@@ -283,14 +283,14 @@ fn main() {
     let write_handle = {
         let data = Arc::clone(&data);
         thread::spawn(move || {
-            let mut guard = data.write().unwrap();
+            let mut guard = data.write().expect("写锁获取不应失败");
             guard.push(100);
             println!("Writer: added 100, data = {:?}", *guard);
         })
     };
 
     for handle in read_handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
     write_handle.join().unwrap();
 }
@@ -495,7 +495,7 @@ fn demonstrate_basic_sharing() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
     println!();
 }
@@ -518,7 +518,7 @@ fn demonstrate_readonly_sharing() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
     println!();
 }
@@ -534,7 +534,7 @@ fn demonstrate_rwlock_usage() {
         .map(|id| {
             let data = Arc::clone(&data);
             thread::spawn(move || {
-                let guard = data.read().unwrap();
+                let guard = data.read().expect("读锁获取不应失败");
                 println!("Reader {}: data = {:?}", id, *guard);
             })
         })
@@ -544,14 +544,14 @@ fn demonstrate_rwlock_usage() {
     let write_handle = {
         let data = Arc::clone(&data);
         thread::spawn(move || {
-            let mut guard = data.write().unwrap();
+            let mut guard = data.write().expect("写锁获取不应失败");
             guard.push(100);
             println!("Writer: added 100, data = {:?}", *guard);
         })
     };
 
     for handle in read_handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
     write_handle.join().unwrap();
     println!();
@@ -575,7 +575,7 @@ fn demonstrate_atomic_sharing() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     println!(
@@ -621,7 +621,7 @@ fn demonstrate_custom_sync() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     let final_data = shared_data.as_ref();
@@ -659,7 +659,7 @@ mod tests {
             assert!(!shared_data.active);
         });
 
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     #[test]
@@ -679,7 +679,7 @@ mod tests {
             assert_eq!(shared_container.metadata, "Test");
         });
 
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     #[test]
@@ -702,7 +702,7 @@ mod tests {
             shared_custom.flag.store(true, Ordering::Relaxed);
         });
 
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     #[test]
@@ -721,6 +721,6 @@ mod tests {
             shared_data.set_active(false);
         });
 
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 }

@@ -983,15 +983,15 @@ mod tests {
 
     #[test]
     fn test_parse_and_validate() {
-        assert_eq!(improved_error_handling::parse_and_validate("42").unwrap(), 42);
+        assert_eq!(improved_error_handling::parse_and_validate("42").expect("解析验证失败"), 42);
         assert!(improved_error_handling::parse_and_validate("-1").is_err());
         assert!(improved_error_handling::parse_and_validate("abc").is_err());
     }
 
     #[test]
     fn test_recoverable_operation() {
-        assert_eq!(improved_error_handling::recoverable_operation("42").unwrap(), 42);
-        assert_eq!(improved_error_handling::recoverable_operation("invalid").unwrap(), 0);
+        assert_eq!(improved_error_handling::recoverable_operation("42").expect("恢复操作失败"), 42);
+        assert_eq!(improved_error_handling::recoverable_operation("invalid").expect("恢复操作返回默认值失败"), 0);
         assert!(improved_error_handling::recoverable_operation("abc").is_err());
     }
 }

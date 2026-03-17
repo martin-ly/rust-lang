@@ -13,10 +13,10 @@ async fn producer(tx: mpsc::Sender<Task>) {
     for i in 1..=5 {
         if i % 2 == 0 {
             println!("生产者生成高优先级任务: {}", i);
-            tx.send(Task::HighPriority(i)).await.unwrap();
+            tx.send(Task::HighPriority(i)).await.expect("发送高优先级任务失败");
         } else {
             println!("生产者生成低优先级任务: {}", i);
-            tx.send(Task::LowPriority(i)).await.unwrap();
+            tx.send(Task::LowPriority(i)).await.expect("发送低优先级任务失败");
         }
         sleep(Duration::from_secs(1)).await; // 模拟生产延迟
     }

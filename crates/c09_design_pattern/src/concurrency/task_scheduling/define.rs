@@ -24,13 +24,13 @@ impl TaskScheduler {
     }
 
     async fn add_task(&self, task: Task) {
-        let mut tasks = self.tasks.lock().unwrap();
+        let mut tasks = self.tasks.lock().expect("任务调度器锁被污染");
         tasks.push_back(task);
     }
 
     async fn run(&self) {
         while let Some(task) = {
-            let mut tasks = self.tasks.lock().unwrap();
+            let mut tasks = self.tasks.lock().expect("任务调度器锁被污染");
             tasks.pop_front()
         } {
             match task {

@@ -19,7 +19,7 @@ pub fn basic_mutex_usage() {
     for _ in 0..10 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
-            let mut num = counter.lock().unwrap();
+            let mut num = counter.lock().expect("Counter 锁被 poisoned");
             *num += 1;
             println!("  线程增加计数器到: {}", *num);
         });
@@ -27,10 +27,10 @@ pub fn basic_mutex_usage() {
     }
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("SmartMutex 线程执行失败");
     }
 
-    println!("  最终计数器值: {}", *counter.lock().unwrap());
+    println!("  最终计数器值: {}", *counter.lock().expect("Counter 锁被 poisoned"));
 }
 
 /// 共享复杂数据结构
@@ -57,7 +57,7 @@ pub fn shared_complex_data() {
     for i in 0..3 {
         let data = Arc::clone(&shared_data);
         let handle = thread::spawn(move || {
-            let mut data = data.lock().unwrap();
+            let mut data = data.lock().expect("SharedData 锁被 poisoned");
             let user_name = format!("用户-{}", i);
             data.users.push(user_name);
             data.count += 1;
@@ -70,17 +70,17 @@ pub fn shared_complex_data() {
     for _ in 0..2 {
         let data = Arc::clone(&shared_data);
         let handle = thread::spawn(move || {
-            let data = data.lock().unwrap();
+            let data = data.lock().expect("SharedData 锁被 poisoned");
             println!("  读取数据: {:?}", *data);
         });
         handles.push(handle);
     }
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程执行失败");
     }
 
-    let final_data = shared_data.lock().unwrap();
+    let final_data = shared_data.lock().expect("SharedData 锁被 poisoned");
     println!("  最终数据: {:?}", *final_data);
 }
 
@@ -95,9 +95,9 @@ pub fn deadlock_prevention() {
     let resource_a1 = Arc::clone(&resource_a);
     let resource_b1 = Arc::clone(&resource_b);
     let handle1 = thread::spawn(move || {
-        let mut a = resource_a1.lock().unwrap();
+        let mut a = resource_a1.lock().expect("Resource A 锁被 poisoned");
         thread::sleep(Duration::from_millis(10)); // 模拟工作
-        let mut b = resource_b1.lock().unwrap();
+        let mut b = resource_b1.lock().expect("Resource B 锁被 poisoned");
 
         *a += 1;
         *b += 1;
@@ -107,7 +107,7 @@ pub fn deadlock_prevention() {
     let resource_a2 = Arc::clone(&resource_a);
     let resource_b2 = Arc::clone(&resource_b);
     let handle2 = thread::spawn(move || {
-        let mut a = resource_a2.lock().unwrap();
+        let mut a = resource_a2.lock().expect("Resource A 锁被 poisoned");
         thread::sleep(Duration::from_millis(10)); // 模拟工作
         let mut b = resource_b2.lock().unwrap();
 
@@ -145,10 +145,10 @@ pub fn try_lock_example() {
     }
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程执行失败");
     }
 
-    println!("  最终值: {}", *data.lock().unwrap());
+    println!("  最终值: {}", *data.lock().expect("Data 锁被 poisoned"));
 }
 
 /// 条件变量与Mutex结合使用
@@ -166,7 +166,7 @@ pub fn mutex_with_condition() {
     // 等待线程
     let waiter = thread::spawn(move || {
         let (lock, cvar) = &*pair_clone;
-        let mut started = lock.lock().unwrap();
+        let mut started = lock.lock().expect("Condition 锁被 poisoned");
         while !*started {
             started = cvar.wait(started).unwrap();
         }
@@ -176,13 +176,13 @@ pub fn mutex_with_condition() {
     // 通知线程
     thread::sleep(Duration::from_millis(100));
     {
-        let mut started = lock.lock().unwrap();
+        let mut started = lock.lock().expect("Condition 锁被 poisoned");
         *started = true;
         cvar.notify_one();
         println!("  通知线程发送信号");
     }
 
-    waiter.join().unwrap();
+    waiter.join().expect("等待线程执行失败");
 }
 
 /// 性能优化：减少锁的持有时间
@@ -195,7 +195,7 @@ pub fn lock_optimization() {
     let bad_handle = thread::spawn({
         let data = Arc::clone(&data);
         move || {
-            let mut data = data.lock().unwrap();
+            let mut data = data.lock().expect("Data 锁被 poisoned");
             // 模拟长时间操作
             for i in 0..1000 {
                 data[i] = i * 2;
@@ -218,7 +218,7 @@ pub fn lock_optimization() {
 
             // 只在需要时短暂持有锁
             {
-                let mut data = data.lock().unwrap();
+                let mut data = data.lock().expect("Data 锁被 poisoned");
                 for (i, &value) in temp_data.iter().enumerate() {
                     data[i] = value;
                 }
@@ -227,8 +227,8 @@ pub fn lock_optimization() {
         }
     });
 
-    bad_handle.join().unwrap();
-    good_handle.join().unwrap();
+    bad_handle.join().expect("Bad handle 线程执行失败");
+    good_handle.join().expect("Good handle 线程执行失败");
 }
 
 /// 自定义Mutex包装器
@@ -252,7 +252,7 @@ pub fn custom_mutex_wrapper() {
 
         pub fn lock(&self) -> std::sync::MutexGuard<'_, T> {
             self.locked.store(true, Ordering::SeqCst);
-            self.data.lock().unwrap()
+            self.data.lock().expect("SmartMutex 锁被 poisoned")
         }
 
         pub fn unlock(&self) {

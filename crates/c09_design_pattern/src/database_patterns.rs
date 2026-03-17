@@ -525,10 +525,10 @@ mod tests {
             email: "test@example.com".to_string(),
         };
 
-        let id = dao.save(&user).unwrap();
+        let id = dao.save(&user).expect("保存用户失败");
         assert_eq!(id, 1);
 
-        let found_user = dao.find_by_id(1).unwrap();
+        let found_user = dao.find_by_id(1).expect("查找用户失败");
         assert!(found_user.is_some());
     }
 
@@ -541,16 +541,16 @@ mod tests {
         );
 
         // 保存产品
-        product.save().unwrap();
+        product.save().expect("保存产品失败");
         assert!(product.id.is_some());
 
         // 查找产品
-        let found_product = Product::find_by_id(1).unwrap();
+        let found_product = Product::find_by_id(1).expect("查找产品失败");
         assert!(found_product.is_some());
-        assert_eq!(found_product.unwrap().name, "示例产品");
+        assert_eq!(found_product.expect("获取产品失败").name, "示例产品");
 
         // 查找所有产品
-        let all_products = Product::find_all().unwrap();
+        let all_products = Product::find_all().expect("查找所有产品失败");
         assert_eq!(all_products.len(), 2);
     }
 
@@ -577,7 +577,7 @@ mod tests {
         unit_of_work.register_dirty(user2);
 
         // 提交事务
-        unit_of_work.commit().unwrap();
+        unit_of_work.commit().expect("提交事务失败");
     }
 
     #[test]
@@ -591,13 +591,13 @@ mod tests {
         };
 
         // 添加用户
-        repository.add(user).unwrap();
+        repository.add(user).expect("添加用户到仓库失败");
 
         // 提交事务
-        repository.commit().unwrap();
+        repository.commit().expect("仓库提交失败");
 
         // 查找用户
-        let found_user = repository.find_by_id(1).unwrap();
+        let found_user = repository.find_by_id(1).expect("从仓库查找用户失败");
         assert!(found_user.is_some());
     }
 }

@@ -124,7 +124,7 @@ impl PacketBuffer {
     }
 
     /// 获取缓冲区总大小
-    pub fn total_size(&self) -> usize {
+    pub const fn total_size(&self) -> usize {
         self.total_size
     }
 
@@ -281,22 +281,22 @@ impl RingBuffer {
     }
 
     /// 检查缓冲区是否为空
-    pub fn is_empty(&self) -> bool {
+    pub const fn is_empty(&self) -> bool {
         self.size == 0
     }
 
     /// 检查缓冲区是否已满
-    pub fn is_full(&self) -> bool {
+    pub const fn is_full(&self) -> bool {
         self.size == self.capacity
     }
 
     /// 获取可用空间
-    pub fn available(&self) -> usize {
+    pub const fn available(&self) -> usize {
         self.capacity - self.size
     }
 
     /// 获取已使用空间
-    pub fn used(&self) -> usize {
+    pub const fn used(&self) -> usize {
         self.size
     }
 

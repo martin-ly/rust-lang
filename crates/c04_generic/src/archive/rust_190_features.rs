@@ -58,17 +58,17 @@ pub mod shared_state_demo {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
-        *counter.lock().unwrap()
+        *counter.lock().expect("Counter 锁被 poisoned")
     }
 
     /// 生成计数器线程
     fn spawn_counter_thread(counter: Arc<Mutex<i32>>, iterations: usize) -> thread::JoinHandle<()> {
         thread::spawn(move || {
             for _ in 0..iterations {
-                let mut count = counter.lock().unwrap();
+                let mut count = counter.lock().expect("Counter 锁被 poisoned");
                 *count += 1;
             }
         })
@@ -93,14 +93,14 @@ pub mod shared_state_demo {
             handle.join().unwrap();
         }
 
-        *data.read().unwrap()
+        *data.read().expect("读锁获取不应失败")
     }
 
     /// 生成读取线程
     fn spawn_reader_thread(data: Arc<RwLock<i32>>, iterations: usize) -> thread::JoinHandle<()> {
         thread::spawn(move || {
             for _ in 0..iterations {
-                let _value = data.read().unwrap();
+                let _value = data.read().expect("读锁获取不应失败");
                 // 模拟读取操作
             }
         })
@@ -110,7 +110,7 @@ pub mod shared_state_demo {
     fn spawn_writer_thread(data: Arc<RwLock<i32>>, iterations: usize) -> thread::JoinHandle<()> {
         thread::spawn(move || {
             for _ in 0..iterations {
-                let mut value = data.write().unwrap();
+                let mut value = data.write().expect("写锁获取不应失败");
                 *value += 1;
             }
         })

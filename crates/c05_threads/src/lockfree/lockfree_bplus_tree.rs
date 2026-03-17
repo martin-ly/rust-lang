@@ -473,7 +473,7 @@ where
 
         // 插入一些数据
         for i in 1..=10 {
-            tree.insert(i, format!("value_{}", i)).unwrap();
+            tree.insert(i, format!("value_{}", i)).expect("树插入不应失败");
         }
 
         // 查找数据
@@ -545,9 +545,9 @@ mod tests {
         let tree = LockFreeBPlusTree::new(4);
 
         // 插入数据
-        tree.insert(1, "value1".to_string()).unwrap();
-        tree.insert(2, "value2".to_string()).unwrap();
-        tree.insert(3, "value3".to_string()).unwrap();
+        tree.insert(1, "value1".to_string()).expect("树插入不应失败");
+        tree.insert(2, "value2".to_string()).expect("树插入不应失败");
+        tree.insert(3, "value3".to_string()).expect("树插入不应失败");
 
         // 删除数据
         assert_eq!(tree.remove(&2), Some("value2".to_string()));

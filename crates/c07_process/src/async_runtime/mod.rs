@@ -734,7 +734,7 @@ mod tests {
             }
         };
 
-        let pid = manager.spawn(config).await.unwrap();
+        let pid = manager.spawn(config).await.expect("异步进程启动失败");
 
         // 测试写入标准输入
         let result = manager.write_stdin(pid, b"test input\n").await;
@@ -780,7 +780,7 @@ mod tests {
             }
         };
 
-        let pid = manager.spawn(config).await.unwrap();
+        let pid = manager.spawn(config).await.expect("异步进程启动失败");
 
         // 测试关闭标准输入
         let result = manager.close_stdin(pid).await;
@@ -825,7 +825,7 @@ mod tests {
             }
         };
 
-        let pid = manager.spawn(config).await.unwrap();
+        let pid = manager.spawn(config).await.expect("异步进程启动失败");
 
         // 等待进程输出
         tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
@@ -873,7 +873,7 @@ mod tests {
             }
         };
 
-        let pid = manager.spawn(config).await.unwrap();
+        let pid = manager.spawn(config).await.expect("异步进程启动失败");
 
         // 等待进程输出
         tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
@@ -921,7 +921,7 @@ mod tests {
             }
         };
 
-        let pid = manager.spawn(config).await.unwrap();
+        let pid = manager.spawn(config).await.expect("异步进程启动失败");
 
         // 测试带超时的等待
         let timeout = Duration::from_secs(2);

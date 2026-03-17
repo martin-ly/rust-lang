@@ -113,69 +113,69 @@ impl SystemResourceMonitor {
     }
 
     pub fn register_thread(&self, thread_id: usize) {
-        let mut thread_stats = self.thread_stats.lock().unwrap();
+        let mut thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
         thread_stats.insert(thread_id, ThreadResourceStats::new(thread_id));
     }
 
     pub fn unregister_thread(&self, thread_id: usize) {
-        let mut thread_stats = self.thread_stats.lock().unwrap();
+        let mut thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
         thread_stats.remove(&thread_id);
     }
 
     pub fn update_thread_cpu_usage(&self, thread_id: usize, usage: f64) {
-        let mut thread_stats = self.thread_stats.lock().unwrap();
+        let mut thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
         if let Some(stats) = thread_stats.get_mut(&thread_id) {
             stats.update_cpu_usage(usage);
         }
     }
 
     pub fn update_thread_memory_usage(&self, thread_id: usize, usage: usize) {
-        let mut thread_stats = self.thread_stats.lock().unwrap();
+        let mut thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
         if let Some(stats) = thread_stats.get_mut(&thread_id) {
             stats.update_memory_usage(usage);
         }
     }
 
     pub fn record_page_fault(&self, thread_id: usize) {
-        let mut thread_stats = self.thread_stats.lock().unwrap();
+        let mut thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
         if let Some(stats) = thread_stats.get_mut(&thread_id) {
             stats.increment_page_faults();
         }
     }
 
     pub fn record_context_switch(&self, thread_id: usize) {
-        let mut thread_stats = self.thread_stats.lock().unwrap();
+        let mut thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
         if let Some(stats) = thread_stats.get_mut(&thread_id) {
             stats.increment_context_switches();
         }
     }
 
     pub fn record_system_call(&self, thread_id: usize) {
-        let mut thread_stats = self.thread_stats.lock().unwrap();
+        let mut thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
         if let Some(stats) = thread_stats.get_mut(&thread_id) {
             stats.increment_system_calls();
         }
     }
 
     pub fn record_io_operation(&self, thread_id: usize) {
-        let mut thread_stats = self.thread_stats.lock().unwrap();
+        let mut thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
         if let Some(stats) = thread_stats.get_mut(&thread_id) {
             stats.increment_io_operations();
         }
     }
 
     pub fn get_thread_stats(&self, thread_id: usize) -> Option<ThreadResourceStats> {
-        let thread_stats = self.thread_stats.lock().unwrap();
+        let thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
         thread_stats.get(&thread_id).cloned()
     }
 
     pub fn get_all_thread_stats(&self) -> Vec<ThreadResourceStats> {
-        let thread_stats = self.thread_stats.lock().unwrap();
+        let thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
         thread_stats.values().cloned().collect()
     }
 
     pub fn get_system_stats(&self) -> SystemStats {
-        let system_stats = self.system_stats.lock().unwrap();
+        let system_stats = self.system_stats.lock().expect("获取系统统计锁不应失败");
         system_stats.clone()
     }
 
@@ -201,7 +201,7 @@ impl SystemResourceMonitor {
 
     fn collect_system_stats(&self) {
         let mut system_stats = self.system_stats.lock().unwrap();
-        let thread_stats = self.thread_stats.lock().unwrap();
+        let thread_stats = self.thread_stats.lock().expect("获取线程统计锁不应失败");
 
         // 计算系统总统计
         system_stats.total_cpu_usage = thread_stats.values().map(|s| s.cpu_usage).sum();
@@ -256,7 +256,7 @@ impl PerformanceProfiler {
     }
 
     pub fn start_profiling(&self, thread_id: usize) {
-        let mut profile_data = self.profile_data.lock().unwrap();
+        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
         profile_data.insert(
             thread_id,
             ProfileData {
@@ -271,7 +271,7 @@ impl PerformanceProfiler {
     }
 
     pub fn stop_profiling(&self, thread_id: usize) {
-        let mut profile_data = self.profile_data.lock().unwrap();
+        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
         profile_data.remove(&thread_id);
     }
 
@@ -285,7 +285,7 @@ impl PerformanceProfiler {
             return;
         }
 
-        let mut profile_data = self.profile_data.lock().unwrap();
+        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
         if let Some(data) = profile_data.get_mut(&thread_id) {
             *data
                 .function_calls
@@ -303,7 +303,7 @@ impl PerformanceProfiler {
             return;
         }
 
-        let mut profile_data = self.profile_data.lock().unwrap();
+        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
         if let Some(data) = profile_data.get_mut(&thread_id) {
             *data.memory_allocations.entry(allocation_type).or_insert(0) += size;
         }
@@ -314,7 +314,7 @@ impl PerformanceProfiler {
             return;
         }
 
-        let mut profile_data = self.profile_data.lock().unwrap();
+        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
         if let Some(data) = profile_data.get_mut(&thread_id) {
             data.cache_misses += 1;
         }
@@ -325,19 +325,19 @@ impl PerformanceProfiler {
             return;
         }
 
-        let mut profile_data = self.profile_data.lock().unwrap();
+        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
         if let Some(data) = profile_data.get_mut(&thread_id) {
             data.branch_mispredictions += 1;
         }
     }
 
     pub fn get_profile_data(&self, thread_id: usize) -> Option<ProfileData> {
-        let profile_data = self.profile_data.lock().unwrap();
+        let profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
         profile_data.get(&thread_id).cloned()
     }
 
     pub fn generate_profile_report(&self, thread_id: usize) -> Option<ProfileReport> {
-        let profile_data = self.profile_data.lock().unwrap();
+        let profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
         profile_data.get(&thread_id).map(|data| ProfileReport {
             thread_id: data.thread_id,
             total_function_calls: data.function_calls.values().sum(),
@@ -456,7 +456,7 @@ pub fn demonstrate_resource_monitoring() {
 
     // 等待所有线程完成
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("监控线程应成功完成");
     }
 
     // 显示系统统计
@@ -510,7 +510,7 @@ mod tests {
         monitor.update_thread_cpu_usage(1, 0.8);
         monitor.update_thread_memory_usage(1, 1024);
 
-        let stats = monitor.get_thread_stats(1).unwrap();
+        let stats = monitor.get_thread_stats(1).expect("获取线程统计应成功");
         assert_eq!(stats.cpu_usage, 0.8);
         assert_eq!(stats.memory_usage, 1024);
     }
@@ -524,7 +524,7 @@ mod tests {
         profiler.record_function_call(1, "test".to_string(), Duration::from_millis(1));
         profiler.record_memory_allocation(1, "heap".to_string(), 1024);
 
-        let report = profiler.generate_profile_report(1).unwrap();
+        let report = profiler.generate_profile_report(1).expect("生成性能分析报告应成功");
         assert_eq!(report.total_function_calls, 1);
         assert_eq!(report.total_memory_allocations, 1024);
     }

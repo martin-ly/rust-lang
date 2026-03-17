@@ -41,13 +41,13 @@ pub fn break_cycle_demo() -> String {
     });
 
     // 关联父子
-    *child.parent.lock().unwrap() = Arc::downgrade(&root);
-    root._children.lock().unwrap().push(Arc::clone(&child));
+    *child.parent.lock().expect("获取父节点锁不应失败") = Arc::downgrade(&root);
+    root._children.lock().expect("获取子节点锁不应失败").push(Arc::clone(&child));
 
     // 如果 parent 用 Arc<Node> 将形成环而无法回收
     // 使用 Weak 可以在 root 释放后，使 child.parent 升级失败
     drop(root);
-    let up = child.parent.lock().unwrap().upgrade();
+    let up = child.parent.lock().expect("获取父节点锁不应失败").upgrade();
     if up.is_none() {
         "broken".into()
     } else {
@@ -68,8 +68,8 @@ pub fn mutex_vs_rwlock(readers: usize, writers: usize, iters: usize) -> (usize, 
         h.push(std::thread::spawn(move || {
             let mut sum = 0usize;
             for _ in 0..iters {
-                sum += *m1.lock().unwrap();
-                sum += *r1.read().unwrap();
+                sum += *m1.lock().expect("获取互斥锁不应失败");
+                sum += *r1.read().expect("获取读锁不应失败");
             }
             sum
         }));
@@ -81,8 +81,8 @@ pub fn mutex_vs_rwlock(readers: usize, writers: usize, iters: usize) -> (usize, 
         let r1 = Arc::clone(&r);
         h.push(std::thread::spawn(move || {
             for _ in 0..iters {
-                *m1.lock().unwrap() += 1;
-                *r1.write().unwrap() += 1;
+                *m1.lock().expect("获取互斥锁不应失败") += 1;
+                *r1.write().expect("获取写锁不应失败") += 1;
             }
             0usize
         }));
@@ -90,9 +90,9 @@ pub fn mutex_vs_rwlock(readers: usize, writers: usize, iters: usize) -> (usize, 
 
     let mut total = 0usize;
     for t in h {
-        total += t.join().unwrap();
+        total += t.join().expect("线程应成功完成");
     }
-    (total, *m.lock().unwrap() + *r.read().unwrap())
+    (total, *m.lock().expect("获取互斥锁不应失败") + *r.read().expect("获取读锁不应失败"))
 }
 
 #[cfg(test)]

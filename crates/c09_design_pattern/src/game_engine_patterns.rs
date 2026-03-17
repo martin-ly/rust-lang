@@ -715,14 +715,14 @@ mod tests {
         // 验证组件
         let position = entity_manager.get_component::<Position>(entity_id);
         assert!(position.is_some());
-        assert_eq!(position.unwrap().x, 0.0);
+        assert_eq!(position.expect("获取位置组件失败").x, 0.0);
 
         // 测试系统
         let mut movement_system = MovementSystem;
         movement_system.update(&mut entity_manager, 1.0);
 
         let position = entity_manager.get_component::<Position>(entity_id);
-        assert_eq!(position.unwrap().x, 1.0);
+        assert_eq!(position.expect("获取更新后位置组件失败").x, 1.0);
     }
 
     #[test]

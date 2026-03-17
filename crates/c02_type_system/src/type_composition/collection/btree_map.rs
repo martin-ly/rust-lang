@@ -219,18 +219,18 @@ pub fn btree_map_demo08() {
     for i in 0..5 {
         let map_clone = Arc::clone(&map);
         let handle = thread::spawn(move || {
-            let mut map = map_clone.lock().unwrap();
+            let mut map = map_clone.lock().expect("BTreeMap锁定失败");
             map.insert(format!("key{}", i), i);
         });
         handles.push(handle);
     }
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("等待BTreeMap线程完成失败");
     }
 
     // 打印最终的 BTreeMap
-    let map = map.lock().unwrap();
+    let map = map.lock().expect("BTreeMap锁定失败");
     println!("最终的 BTreeMap:");
     for (key, value) in map.iter() {
         println!("{}: {}", key, value);

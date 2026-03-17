@@ -18,7 +18,7 @@ impl LightOnCommand {
 
 impl Command for LightOnCommand {
     fn execute(&self) {
-        let mut light = self.light.lock().unwrap();
+        let mut light = self.light.lock().expect("灯状态锁被污染");
         light.turn_on();
     }
 }
@@ -36,7 +36,7 @@ impl LightOffCommand {
 
 impl Command for LightOffCommand {
     fn execute(&self) {
-        let mut light = self.light.lock().unwrap();
+        let mut light = self.light.lock().expect("灯状态锁被污染");
         light.turn_off();
     }
 }

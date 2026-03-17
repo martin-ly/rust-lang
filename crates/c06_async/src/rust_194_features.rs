@@ -803,7 +803,7 @@ mod tests {
 
         // 等待所有任务完成
         for handle in handles {
-            handle.await.unwrap();
+            handle.await.expect("异步任务执行失败");
         }
 
         // 验证值只被初始化一次（由于 LazyLock 的保证）

@@ -173,7 +173,7 @@ impl BlockMatcher {
 
         for (idx, token) in tokens.iter().enumerate() {
             match token.text.as_str() {
-                "(" | "[" | "{" => stack.push((token.text.chars().next().unwrap(), idx)),
+                "(" | "[" | "{" => stack.push((token.text.chars().next().expect("non-empty bracket token should have a first char"), idx)),
                 ")" => {
                     if let Some(('(', open_idx)) = stack.pop() {
                         pairs.push((open_idx, idx));
@@ -569,7 +569,7 @@ impl<'a> PeekableMacroParser<'a> {
 
         // 解析小数部分
         if self.chars.peek() == Some(&'.') {
-            num.push(self.chars.next().unwrap());
+            num.push(self.chars.next().expect("peeked '.' should be available"));
             self.position += 1;
 
             while let Some(c) = self.chars.next_if(|c| c.is_ascii_digit()) {

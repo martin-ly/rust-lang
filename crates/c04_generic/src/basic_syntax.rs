@@ -350,7 +350,7 @@ pub mod generic_structs {
 
             let mut wrapper = Wrapper::new(vec![1, 2, 3]);
             wrapper.get_mut().push(4);
-            assert_eq!(wrapper.unwrap(), vec![1, 2, 3, 4]);
+            assert_eq!(wrapper.expect("wrapper 应包含值"), vec![1, 2, 3, 4]);
         }
 
         #[test]
@@ -361,7 +361,7 @@ pub mod generic_structs {
 
             assert_eq!(node1.data, 1);
             assert!(node1.get_next().is_some());
-            assert_eq!(node1.get_next().unwrap().data, 2);
+            assert_eq!(node1.get_next().expect("node1 应有下一个节点").data, 2);
         }
 
         #[test]
@@ -601,7 +601,7 @@ pub mod generic_methods {
         ///
         /// # 返回值
         /// 返回新的空容器
-        pub fn new() -> Self {
+        pub const fn new() -> Self {
             Self { items: Vec::new() }
         }
 
@@ -1175,7 +1175,7 @@ pub mod advanced_patterns {
         ///
         /// # 返回值
         /// 返回新的 TypeMarker 实例
-        pub fn new() -> Self {
+        pub const fn new() -> Self {
             Self {
                 _phantom: PhantomData,
             }
@@ -1325,7 +1325,7 @@ pub mod advanced_patterns {
         ///
         /// # 返回值
         /// 返回新的 Builder 实例
-        pub fn new() -> Self {
+        pub const fn new() -> Self {
             Self { parts: Vec::new() }
         }
 

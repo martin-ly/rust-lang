@@ -87,7 +87,7 @@ impl ThreadAffinityManager {
         }
 
         // 记录配置
-        let mut affinities = self.thread_affinities.lock().unwrap();
+        let mut affinities = self.thread_affinities.lock().expect("获取亲和性锁不应失败");
         affinities.insert(thread_id, config);
 
         Ok(())
@@ -146,17 +146,17 @@ impl ThreadAffinityManager {
     }
 
     pub fn get_thread_affinity(&self, thread_id: usize) -> Option<ThreadAffinityConfig> {
-        let affinities = self.thread_affinities.lock().unwrap();
+        let affinities = self.thread_affinities.lock().expect("获取亲和性锁不应失败");
         affinities.get(&thread_id).cloned()
     }
 
     pub fn update_performance_stats(&self, thread_id: usize, stats: PerformanceStats) {
-        let mut performance_stats = self.performance_stats.lock().unwrap();
+        let mut performance_stats = self.performance_stats.lock().expect("获取性能统计锁不应失败");
         performance_stats.insert(thread_id, stats);
     }
 
     pub fn get_performance_stats(&self, thread_id: usize) -> Option<PerformanceStats> {
-        let performance_stats = self.performance_stats.lock().unwrap();
+        let performance_stats = self.performance_stats.lock().expect("获取性能统计锁不应失败");
         performance_stats.get(&thread_id).cloned()
     }
 
@@ -173,13 +173,13 @@ impl ThreadAffinityManager {
             return Ok(());
         }
 
-        let config = self.config.lock().unwrap();
+        let config = self.config.lock().expect("获取配置锁不应失败");
         if !config.dynamic_adjustment {
             return Ok(());
         }
 
-        let performance_stats = self.performance_stats.lock().unwrap();
-        let affinities = self.thread_affinities.lock().unwrap();
+        let performance_stats = self.performance_stats.lock().expect("获取性能统计锁不应失败");
+        let affinities = self.thread_affinities.lock().expect("获取亲和性锁不应失败");
 
         for (thread_id, stats) in performance_stats.iter() {
             if stats.cpu_usage > config.migration_threshold {
@@ -318,7 +318,7 @@ impl ThreadAffinityMonitor {
 impl ThreadAffinityManager {
     fn collect_performance_stats(&self) {
         // 模拟收集性能统计
-        let mut performance_stats = self.performance_stats.lock().unwrap();
+        let mut performance_stats = self.performance_stats.lock().expect("获取性能统计锁不应失败");
 
         for (_thread_id, stats) in performance_stats.iter_mut() {
             // 模拟更新CPU使用率
@@ -387,7 +387,7 @@ pub fn demonstrate_thread_affinity() {
 
     // 等待所有线程完成
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     // 停止监控

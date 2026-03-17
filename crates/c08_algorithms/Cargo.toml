@@ -7,6 +7,12 @@ rust-version = "1.94"
 
 # 算法库CPU指令集优化配置在根Cargo.toml中统一管理
 
+
+authors = ["Rust Learning Community"]
+description = "Rust algorithms and data structures learning module"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-lang/rust-lang-learning"
+
 [dependencies]
 
 # 并行与并发 - 使用工作区统一版本

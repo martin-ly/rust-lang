@@ -19,7 +19,7 @@ pub fn tls_increment() -> u32 {
 pub fn tls_in_threads() -> (u32, u32) {
     let h = std::thread::spawn(tls_increment);
     let a = tls_increment();
-    let b = h.join().unwrap();
+    let b = h.join().expect("线程应成功完成");
     (a, b)
 }
 
@@ -34,7 +34,7 @@ mod tests {
         assert_eq!(main_first, 1);
 
         let handle = thread::spawn(|| tls_increment());
-        let other = handle.join().unwrap();
+        let other = handle.join().expect("线程应成功完成");
         assert_eq!(other, 1);
 
         let main_second = tls_increment();

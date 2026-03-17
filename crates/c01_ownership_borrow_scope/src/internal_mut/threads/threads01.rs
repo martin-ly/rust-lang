@@ -24,24 +24,24 @@ pub fn threads_test() {
 
     let my_struct_clone01 = Arc::clone(&my_struct);
     let handle01 = thread::spawn(move || {
-        let mut borrowed = my_struct_clone01.lock().unwrap();
+        let mut borrowed = my_struct_clone01.lock().expect("Mutex锁定失败");
         borrowed.update(10);
     });
 
     let my_struct_clone02 = Arc::clone(&my_struct);
     let handle02 = thread::spawn(move || {
-        let mut borrowed = my_struct_clone02.lock().unwrap();
+        let mut borrowed = my_struct_clone02.lock().expect("Mutex锁定失败");
         borrowed.update(20);
     });
 
     // 读取值
-    println!("Value: {}", my_struct.lock().unwrap().value);
-    handle01.join().unwrap();
+    println!("Value: {}", my_struct.lock().expect("Mutex锁定失败").value);
+    handle01.join().expect("线程 joining 失败");
 
     // 读取值
-    handle02.join().unwrap();
+    handle02.join().expect("线程 joining 失败");
     // 读取值
-    println!("Value: {}", my_struct.lock().unwrap().value);
+    println!("Value: {}", my_struct.lock().expect("Mutex锁定失败").value);
 }
 
 #[cfg(test)]

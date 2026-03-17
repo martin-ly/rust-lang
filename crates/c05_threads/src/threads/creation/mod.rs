@@ -21,7 +21,7 @@ pub fn basic_thread_creation() {
     });
 
     println!("  主线程等待子线程...");
-    handle.join().unwrap();
+    handle.join().expect("线程应成功完成");
     println!("  主线程继续执行");
 }
 
@@ -38,7 +38,7 @@ pub fn thread_with_parameters() {
         sum
     });
 
-    let result = handle.join().unwrap();
+    let result = handle.join().expect("线程应成功完成");
     println!("  主线程获得结果: {}", result);
 }
 
@@ -55,7 +55,7 @@ pub fn named_threads() {
             thread::sleep(Duration::from_millis(50));
             println!("  线程 '{}' 执行完成", name);
         })
-        .unwrap();
+        .expect("线程创建不应失败");
 
     handle.join().unwrap();
 }
@@ -120,11 +120,11 @@ pub fn thread_best_practices() {
     }
 
     // 收集结果
-    let results: Vec<String> = handles.into_iter().map(|h| h.join().unwrap()).collect();
+    let results: Vec<String> = handles.into_iter().map(|h| h.join().expect("线程应成功完成")).collect();
 
     println!("  创建的线程: {:?}", results);
 
-    let sum = handle.join().unwrap();
+    let sum = handle.join().expect("线程应成功完成");
     println!("  数据处理结果: {}", sum);
 }
 

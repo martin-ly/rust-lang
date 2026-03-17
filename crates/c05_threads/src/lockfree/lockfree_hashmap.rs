@@ -238,7 +238,7 @@ where
 
         // 等待所有线程完成
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         println!("哈希表大小: {}", map.len());
@@ -335,7 +335,7 @@ where
 
         // 等待所有线程完成
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         println!("分段哈希表总大小: {}", map.len());
@@ -503,7 +503,7 @@ where
 
         // 等待所有线程完成
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         println!("DashMap大小: {}", map.len());

@@ -174,7 +174,7 @@ pub fn run_performance_benchmarks() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
     let adaptive_lock_time = start.elapsed();
     println!("自适应锁耗时: {:?}", adaptive_lock_time);
@@ -196,7 +196,7 @@ pub fn run_performance_benchmarks() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
     let barrier_time = start.elapsed();
     println!("无锁屏障耗时: {:?}", barrier_time);
@@ -278,7 +278,7 @@ pub fn run_memory_analysis() {
     }
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
     let thread_creation_time = start.elapsed();
 

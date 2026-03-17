@@ -78,8 +78,8 @@ impl OptimizationBenchmark {
 
         for (name, durations) in results {
             let avg = durations.iter().sum::<Duration>() / durations.len() as u32;
-            let min = durations.iter().min().unwrap();
-            let max = durations.iter().max().unwrap();
+            let min = durations.iter().min().expect("计算最小持续时间失败");
+            let max = durations.iter().max().expect("计算最大持续时间失败");
 
             println!("{}:", name);
             println!("  平均时间: {:?}", avg);
@@ -128,7 +128,7 @@ impl ParallelCompilationDemo {
 
         let mut result = Vec::new();
         for handle in handles {
-            let chunk_result = handle.await.unwrap();
+            let chunk_result = handle.await.expect("等待分块处理结果失败");
             result.extend(chunk_result);
         }
 

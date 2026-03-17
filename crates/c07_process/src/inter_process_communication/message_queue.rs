@@ -40,7 +40,7 @@ impl IpcChannel for MessageQueue {
         let data =
             serde_json::to_vec(&msg).map_err(|e| IpcError::SerializationError(e.to_string()))?;
 
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.lock().expect("消息队列锁被污染");
         if queue.len() >= self.capacity {
             return Err(IpcError::SendFailed("Queue is full".to_string()));
         }
@@ -50,7 +50,7 @@ impl IpcChannel for MessageQueue {
     }
 
     fn receive_message(&self) -> IpcResult<Message<Vec<u8>>> {
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.lock().expect("消息队列锁被污染");
 
         if let Some(data) = queue.pop_front() {
             let msg: Message<Vec<u8>> = serde_json::from_slice(&data)
@@ -62,15 +62,15 @@ impl IpcChannel for MessageQueue {
     }
 
     fn is_closed(&self) -> bool {
-        *self.is_closed.lock().unwrap()
+        *self.is_closed.lock().expect("消息队列关闭状态锁被污染")
     }
 
     fn close(&mut self) -> IpcResult<()> {
-        let mut closed = self.is_closed.lock().unwrap();
+        let mut closed = self.is_closed.lock().expect("消息队列关闭状态锁被污染");
         *closed = true;
 
         // 清理队列
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.lock().expect("消息队列锁被污染");
         queue.clear();
 
         Ok(())

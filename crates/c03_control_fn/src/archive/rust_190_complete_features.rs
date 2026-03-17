@@ -735,7 +735,7 @@ mod tests {
 
         let results = demo.process_with_async_closure(|item| async move {
             Ok(format!("test_{}", item))
-        }).await.unwrap();
+        }).await.expect("异步闭包处理失败");
 
         assert_eq!(results.len(), 3);
         assert!(results[0].starts_with("test_"));
@@ -753,7 +753,7 @@ mod tests {
         manager.add_processor(Box::new(DataProcessor::new("test".to_string())));
 
         let test_data = b"test data";
-        let results = manager.process_with_dynamic_dispatch(test_data.to_vec()).await.unwrap();
+        let results = manager.process_with_dynamic_dispatch(test_data.to_vec()).await.expect("动态分发处理失败");
 
         assert_eq!(results.len(), 1);
         assert_eq!(results[0].len(), test_data.len());
@@ -766,12 +766,12 @@ mod tests {
         manager.add_resource(CompleteAsyncResource::Database(DatabaseConnection::new(
             "test_db".to_string(),
             "test://localhost".to_string(),
-        ))).await.unwrap();
+        ))).await.expect("添加数据库资源失败");
 
         assert!(manager.get_resource_info("test_db").await.is_some());
         assert!(manager.get_resource_info("nonexistent").await.is_none());
 
-        manager.cleanup_all().await.unwrap();
+        manager.cleanup_all().await.expect("清理资源失败");
     }
 
     #[tokio::test]

@@ -18,7 +18,7 @@ impl<T> SharedState<T> {
     where
         F: FnOnce(&mut T),
     {
-        let mut data = self.data.lock().unwrap();
+        let mut data = self.data.lock().expect("共享状态锁被污染");
         update_fn(&mut data);
     }
 
@@ -26,7 +26,7 @@ impl<T> SharedState<T> {
     where
         T: Copy,
     {
-        let data = self.data.lock().unwrap();
+        let data = self.data.lock().expect("共享状态锁被污染");
         *data
     }
 }
@@ -47,7 +47,7 @@ fn shared_state() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("共享状态线程加入失败");
     }
 
     println!("Final value: {}", shared_state.get());

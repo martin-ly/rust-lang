@@ -56,7 +56,7 @@ pub fn demo_mpsc_vs_crossbeam() {
     let (tx, rx) = mpsc::channel();
     let t = thread::spawn(move || {
         for i in 0..5 {
-            tx.send(i).unwrap();
+            tx.send(i).expect("发送消息不应失败");
         }
     });
     let mut collected = Vec::new();
@@ -66,7 +66,7 @@ pub fn demo_mpsc_vs_crossbeam() {
             break;
         }
     }
-    t.join().unwrap();
+    t.join().expect("线程应成功完成");
     println!("std::mpsc collected: {:?}", collected);
 
     // crossbeam-channel
@@ -140,14 +140,14 @@ pub fn demo_barrier_and_condvar() {
         // 模拟生产
         thread::sleep(Duration::from_millis(10));
         let (lock, cvar) = &*pair2;
-        let mut ready = lock.lock().unwrap();
+        let mut ready = lock.lock().expect("获取锁不应失败");
         *ready = true;
         cvar.notify_one();
     });
     let (lock, cvar) = &*pair;
     let mut ready = lock.lock().unwrap();
     while !*ready {
-        ready = cvar.wait(ready).unwrap();
+        ready = cvar.wait(ready).expect("条件变量等待不应失败");
     }
     println!("condvar notified");
 }
@@ -219,8 +219,8 @@ pub fn demo_once_cell_and_once_lock() {
 
     println!(
         "OnceLock={}, OnceCell={}",
-        GLOBAL_ONCE_LOCK.get().unwrap(),
-        GLOBAL_ONCE_CELL.get().unwrap()
+        GLOBAL_ONCE_LOCK.get().expect("OnceLock 应已初始化"),
+        GLOBAL_ONCE_CELL.get().expect("OnceCell 应已初始化")
     );
 }
 
@@ -255,7 +255,7 @@ pub fn demo_sync_channel_backpressure() {
     let consumer = thread::spawn(move || {
         for _ in 0..3 {
             thread::sleep(Duration::from_millis(5));
-            let v = rx.recv().unwrap();
+            let v = rx.recv().expect("接收消息不应失败");
             println!("sync_channel recv={}", v);
         }
     });

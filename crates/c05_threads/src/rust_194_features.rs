@@ -90,6 +90,17 @@ impl<T> SingleThreadCache<T> {
         Self { value: None, init }
     }
 
+    /// 从默认值创建缓存
+    pub const fn with_default() -> Self
+    where
+        T: Default,
+    {
+        Self {
+            value: None,
+            init: T::default,
+        }
+    }
+
     /// 获取缓存值
     pub fn get(&mut self) -> &T {
         self.value.get_or_insert_with(self.init)
@@ -636,12 +647,12 @@ mod tests {
         // 使用 next_if 模式
         let n1 = iter
             .next_if(|s| s.parse::<i32>().is_ok())
-            .map(|s| s.parse::<i32>().unwrap());
+            .map(|s| s.parse::<i32>().expect("解析整数不应失败"));
         assert_eq!(n1, Some(1));
 
         let n2 = iter
             .next_if(|s| s.parse::<i32>().is_ok())
-            .map(|s| s.parse::<i32>().unwrap());
+            .map(|s| s.parse::<i32>().expect("解析整数不应失败"));
         assert_eq!(n2, Some(2));
 
         // 检查迭代器位置

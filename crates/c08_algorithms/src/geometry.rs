@@ -16,8 +16,8 @@ fn dist2(a: Pt, b: Pt) -> f64 {
 pub fn convex_hull(mut pts: Vec<Pt>) -> Vec<Pt> {
     pts.sort_by(|p, q| {
         p.x.partial_cmp(&q.x)
-            .unwrap()
-            .then(p.y.partial_cmp(&q.y).unwrap())
+            .expect("X坐标比较失败")
+            .then(p.y.partial_cmp(&q.y).expect("Y坐标比较失败"))
     });
     let n = pts.len();
     if n <= 1 {

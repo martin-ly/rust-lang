@@ -33,7 +33,7 @@ fn demonstrate_basic_sync() {
             let counter = counter.clone();
             thread::spawn(move || {
                 for _ in 0..iterations / thread_count {
-                    let mut count = counter.lock().unwrap();
+                    let mut count = counter.lock().expect("Counter 锁被 poisoned");
                     *count += 1;
                 }
             })
@@ -41,11 +41,11 @@ fn demonstrate_basic_sync() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
     let duration = start.elapsed();
 
-    let final_count = *counter.lock().unwrap();
+    let final_count = *counter.lock().expect("Counter 锁被 poisoned");
     println!("最终计数: {}", final_count);
     println!("同步耗时: {:?}", duration);
     println!(
@@ -86,8 +86,8 @@ fn demonstrate_message_passing() {
         })
     };
 
-    producer.join().unwrap();
-    consumer.join().unwrap();
+    producer.join().expect("生产者线程应成功完成");
+    consumer.join().expect("消费者线程应成功完成");
 
     println!("消息传递完成");
 }
@@ -107,7 +107,7 @@ fn demonstrate_performance_benchmark() {
             let counter = mutex_counter.clone();
             thread::spawn(move || {
                 for _ in 0..iterations / thread_count {
-                    let mut count = counter.lock().unwrap();
+                    let mut count = counter.lock().expect("Counter 锁被 poisoned");
                     *count += 1;
                 }
             })
@@ -115,7 +115,7 @@ fn demonstrate_performance_benchmark() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
     let mutex_time = start.elapsed();
 
@@ -142,7 +142,7 @@ fn demonstrate_performance_benchmark() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
     let atomic_time = start.elapsed();
 
@@ -171,7 +171,7 @@ mod tests {
                 let counter = counter.clone();
                 thread::spawn(move || {
                     for _ in 0..100 {
-                        let mut count = counter.lock().unwrap();
+                        let mut count = counter.lock().expect("获取计数器锁不应失败");
                         *count += 1;
                     }
                 })
@@ -179,10 +179,10 @@ mod tests {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
-        assert_eq!(*counter.lock().unwrap(), 400);
+        assert_eq!(*counter.lock().expect("Counter 锁被 poisoned"), 400);
     }
 
     #[test]

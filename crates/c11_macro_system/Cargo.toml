@@ -9,6 +9,9 @@ license = "MIT"
 keywords = ["rust", "macros", "metaprogramming", "learning", "tutorial"]
 categories = ["development-tools", "education"]
 
+
+repository = "https://github.com/rust-lang/rust-lang-learning"
+
 [lib]
 name = "c11_macro_system"
 path = "src/lib.rs"

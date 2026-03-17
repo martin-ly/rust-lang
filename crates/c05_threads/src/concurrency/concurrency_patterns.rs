@@ -72,7 +72,7 @@ impl<T> ProducerConsumer<T> {
             // 生产者线程
             s.spawn(move || {
                 for i in 0..100 {
-                    sender.send(i).unwrap();
+                    sender.send(i).expect("发送消息不应失败");
                     if i % 10 == 0 {
                         thread::sleep(Duration::from_millis(1));
                     }
@@ -425,7 +425,7 @@ mod tests {
         thread::scope(|s| {
             s.spawn(move || {
                 for i in 0..10 {
-                    sender.send(i).unwrap();
+                    sender.send(i).expect("发送消息不应失败");
                 }
                 // Close the sender to signal completion
                 drop(sender);

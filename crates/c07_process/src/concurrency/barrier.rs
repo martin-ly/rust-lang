@@ -52,12 +52,12 @@ impl ProcessBarrier {
             .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
 
         let generation = {
-            let generation_guard = self.generation.lock().unwrap();
+            let generation_guard = self.generation.lock().expect("屏障代锁被污染");
             *generation_guard
         };
 
         let position = {
-            let mut current = self.current.lock().unwrap();
+            let mut current = self.current.lock().expect("屏障计数锁被污染");
             *current -= 1;
             *current
         };
@@ -65,11 +65,11 @@ impl ProcessBarrier {
         if position == 0 {
             // 最后一个参与者
             {
-                let mut current = self.current.lock().unwrap();
+                let mut current = self.current.lock().expect("屏障计数锁被污染");
                 *current = self.parties;
             }
             {
-                let mut generation = self.generation.lock().unwrap();
+                let mut generation = self.generation.lock().expect("屏障代锁被污染");
                 *generation += 1;
             }
 
@@ -85,7 +85,7 @@ impl ProcessBarrier {
             // 等待其他参与者
             loop {
                 let current_gen = {
-                    let generation_guard = self.generation.lock().unwrap();
+                    let generation_guard = self.generation.lock().expect("屏障代锁被污染");
                     *generation_guard
                 };
 
@@ -105,7 +105,7 @@ impl ProcessBarrier {
                 }
 
                 // 等待条件变量
-                let current = self.current.lock().unwrap();
+                let current = self.current.lock().expect("屏障计数锁被污染");
                 let result = self
                     .condvar
                     .wait_timeout(current, Duration::from_millis(10));
@@ -123,13 +123,13 @@ impl ProcessBarrier {
 
     /// 检查屏障是否被锁定
     pub fn is_locked(&self) -> bool {
-        let current = self.current.lock().unwrap();
+        let current = self.current.lock().expect("屏障计数锁被污染");
         *current < self.parties
     }
 
     /// 获取等待者数量
     pub fn waiter_count(&self) -> usize {
-        let current = self.current.lock().unwrap();
+        let current = self.current.lock().expect("屏障计数锁被污染");
         self.parties - *current
     }
 }
@@ -145,12 +145,12 @@ pub enum BarrierWaitResult {
 
 impl BarrierWaitResult {
     /// 检查是否为等待状态
-    pub fn is_wait(&self) -> bool {
+    pub const fn is_wait(&self) -> bool {
         matches!(self, BarrierWaitResult::Wait)
     }
 
     /// 检查是否为屏障状态
-    pub fn is_barrier(&self) -> bool {
+    pub const fn is_barrier(&self) -> bool {
         matches!(self, BarrierWaitResult::Barrier)
     }
 }

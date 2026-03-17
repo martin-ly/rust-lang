@@ -425,7 +425,7 @@ impl<'a> Lexer<'a> {
 
         // 解析小数部分
         if self.input.peek() == Some(&'.') {
-            num_str.push(self.input.next().unwrap());
+            num_str.push(self.input.next().expect("解析数字小数点失败"));
             while let Some(digit) = self.input.next_if(|c| c.is_ascii_digit()) {
                 num_str.push(digit);
             }
@@ -447,7 +447,7 @@ impl<'a> Lexer<'a> {
         // 解析首字符（必须是字母或下划线）
         if let Some(c) = self.input.peek() {
             if c.is_alphabetic() || *c == '_' {
-                ident.push(self.input.next().unwrap());
+                ident.push(self.input.next().expect("解析标识符首字符失败"));
             } else {
                 return None;
             }
@@ -648,7 +648,7 @@ pub fn demonstrate_rust_194_design_patterns() {
     with_config(|config| {
         config.set("theme", "light");
         println!("   配置版本: {}", config.version());
-        println!("   当前主题: {}", config.get("theme").unwrap());
+        println!("   当前主题: {}", config.get("theme").expect("获取主题配置失败"));
     });
 
     // 3. 数学常量 - 工厂模式优化
@@ -847,7 +847,7 @@ mod tests {
     fn test_char_to_position_mapper() {
         let pos_a = CharPositionMapper::char_to_position('a');
         assert!(pos_a.is_some());
-        assert_eq!(pos_a.unwrap(), (0, 0));
+        assert_eq!(pos_a.expect("获取字符位置失败"), (0, 0));
 
         let pos_z = CharPositionMapper::char_to_position('z');
         assert!(pos_z.is_some());
@@ -919,7 +919,7 @@ mod tests {
             .collect();
         
         // 等待所有线程完成
-        let versions: Vec<_> = handles.into_iter().map(|h| h.join().unwrap()).collect();
+        let versions: Vec<_> = handles.into_iter().map(|h| h.join().expect("线程加入失败")).collect();
         
         // 验证所有线程都成功执行（返回了有效的版本号）
         assert_eq!(versions.len(), 10, "所有10个线程都应该成功完成");
@@ -946,7 +946,7 @@ mod tests {
             .collect();
         
         for h in read_handles {
-            let _ = h.join().unwrap();
+            let _ = h.join().expect("读操作线程加入失败");
         }
         assert_eq!(counter.load(Ordering::Relaxed), 10, "所有读操作都应该完成");
         

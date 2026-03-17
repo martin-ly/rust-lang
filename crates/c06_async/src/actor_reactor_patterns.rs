@@ -316,8 +316,8 @@ pub mod simple_actor_system {
     }
 
     impl Counter {
-        pub fn new() -> Self {
-            Self::default()
+        pub const fn new() -> Self {
+            Self { count: 0 }
         }
     }
 
@@ -395,8 +395,8 @@ pub mod actix_analysis {
     }
 
     impl Calculator {
-        pub fn new() -> Self {
-            Self::default()
+        pub const fn new() -> Self {
+            Self { total: 0 }
         }
     }
 
@@ -545,7 +545,7 @@ pub mod reactor_pattern {
 
         /// 注册事件处理器
         pub fn register(&self, source: u64, event_type: EventType, handler: Arc<dyn EventHandler>) {
-            let mut handlers = self.handlers.lock().unwrap();
+            let mut handlers = self.handlers.lock().expect("SimpleReactor handlers 锁被 poisoned");
             handlers.insert((source, event_type), handler);
             println!(
                 "  [Reactor] 注册处理器: source={}, type={:?}",
@@ -555,7 +555,7 @@ pub mod reactor_pattern {
 
         /// 提交事件（模拟）
         pub fn submit_event(&self, event: Event) {
-            let mut queue = self.event_queue.lock().unwrap();
+            let mut queue = self.event_queue.lock().expect("SimpleReactor event_queue 锁被 poisoned");
             queue.push(event);
         }
 
@@ -575,7 +575,7 @@ pub mod reactor_pattern {
             for i in 0..iterations {
                 // 模拟事件多路分解器
                 let events = {
-                    let mut queue = self.event_queue.lock().unwrap();
+                    let mut queue = self.event_queue.lock().expect("SimpleReactor event_queue 锁被 poisoned");
                     std::mem::take(&mut *queue)
                 };
 
@@ -590,7 +590,7 @@ pub mod reactor_pattern {
                 // 分发事件
                 for event in events {
                     let handler = {
-                        let handlers = self.handlers.lock().unwrap();
+                        let handlers = self.handlers.lock().expect("SimpleReactor handlers 锁被 poisoned");
                         handlers.get(&(event.source, event.event_type)).cloned()
                     };
 
@@ -636,14 +636,14 @@ pub mod reactor_pattern {
         }
 
         pub fn get_count(&self) -> usize {
-            *self.count.lock().unwrap()
+            *self.count.lock().expect("CounterHandler 锁被 poisoned")
         }
     }
 
     #[async_trait::async_trait]
     impl EventHandler for CounterHandler {
         async fn handle(&self, event: Event) {
-            let mut count = self.count.lock().unwrap();
+            let mut count = self.count.lock().expect("CounterHandler 锁被 poisoned");
             *count += 1;
             println!(
                 "    [CounterHandler] 计数: {}, 事件: source={}, type={:?}",

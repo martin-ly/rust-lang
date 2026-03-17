@@ -19,11 +19,11 @@ impl<T> ProducerConsumer<T> {
     }
 
     fn produce(&self, item: T) {
-        self.sender.send(item).unwrap();
+        self.sender.send(item).expect("发送生产者消费者消息失败");
     }
 
     fn consume(&self) -> Option<T> {
-        let receiver = self.receiver.lock().unwrap();
+        let receiver = self.receiver.lock().expect("生产者-消费者接收器锁被污染");
         receiver.recv().ok()
     }
 }
@@ -53,8 +53,8 @@ fn producer_consumer() {
         })
     };
 
-    producer.join().unwrap();
-    consumer.join().unwrap();
+    producer.join().expect("生产者线程加入失败");
+    consumer.join().expect("消费者线程加入失败");
 }
 
 #[cfg(test)]

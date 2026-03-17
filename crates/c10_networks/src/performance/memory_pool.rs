@@ -112,8 +112,8 @@ impl MemoryPool {
             )));
         }
 
-        let mut blocks = self.blocks.lock().unwrap();
-        let mut stats = self.stats.lock().unwrap();
+        let mut blocks = self.blocks.lock().expect("memory pool blocks mutex poisoned");
+        let mut stats = self.stats.lock().expect("memory pool stats mutex poisoned");
 
         // 查找可用的内存块
         for (index, block) in blocks.iter_mut().enumerate() {
@@ -146,13 +146,13 @@ impl MemoryPool {
 
     /// 获取统计信息
     pub fn get_stats(&self) -> PoolStats {
-        self.stats.lock().unwrap().clone()
+        self.stats.lock().expect("memory pool stats mutex poisoned").clone()
     }
 
     /// 清理内存池
     pub async fn cleanup(&self) -> NetworkResult<()> {
-        let mut blocks = self.blocks.lock().unwrap();
-        let mut stats = self.stats.lock().unwrap();
+        let mut blocks = self.blocks.lock().expect("memory pool blocks mutex poisoned");
+        let mut stats = self.stats.lock().expect("memory pool stats mutex poisoned");
 
         // 重置所有块
         for block in blocks.iter_mut() {
@@ -172,8 +172,8 @@ impl MemoryPool {
 
     /// 垃圾回收
     pub async fn gc(&self) -> NetworkResult<()> {
-        let mut blocks = self.blocks.lock().unwrap();
-        let mut stats = self.stats.lock().unwrap();
+        let mut blocks = self.blocks.lock().expect("memory pool blocks mutex poisoned");
+        let mut stats = self.stats.lock().expect("memory pool stats mutex poisoned");
 
         let mut deallocated = 0;
         for block in blocks.iter_mut() {
@@ -199,19 +199,19 @@ impl MemoryPool {
 
     /// 获取内存池使用率
     pub fn utilization(&self) -> f64 {
-        let stats = self.stats.lock().unwrap();
+        let stats = self.stats.lock().expect("memory pool stats mutex poisoned");
         stats.used_size as f64 / stats.pool_size as f64
     }
 
     /// 检查内存池是否已满
     pub fn is_full(&self) -> bool {
-        let stats = self.stats.lock().unwrap();
+        let stats = self.stats.lock().expect("memory pool stats mutex poisoned");
         stats.current_allocations >= self.max_blocks as u64
     }
 
     /// 获取可用块数
     pub fn available_blocks(&self) -> usize {
-        let stats = self.stats.lock().unwrap();
+        let stats = self.stats.lock().expect("memory pool stats mutex poisoned");
         self.max_blocks - (stats.current_allocations as usize)
     }
 }
@@ -243,25 +243,25 @@ impl PooledBytes {
 
     /// 获取数据切片
     pub fn as_slice(&self) -> Bytes {
-        let blocks = self.blocks.lock().unwrap();
+        let blocks = self.blocks.lock().expect("memory pool blocks mutex poisoned");
         let block = &blocks[self.block_index];
         let end = if self.used == 0 { self.size } else { self.used };
         Bytes::copy_from_slice(&block.data[..end])
     }
 
     /// 获取长度
-    pub fn len(&self) -> usize {
+    pub const fn len(&self) -> usize {
         self.size
     }
 
     /// 检查是否为空
-    pub fn is_empty(&self) -> bool {
+    pub const fn is_empty(&self) -> bool {
         self.size == 0
     }
 
     /// 复制数据
     pub fn copy_from_slice(&mut self, src: &[u8]) {
-        let mut blocks = self.blocks.lock().unwrap();
+        let mut blocks = self.blocks.lock().expect("memory pool blocks mutex poisoned");
         let block = &mut blocks[self.block_index];
         let dst = &mut block.data[..self.size];
         let len = std::cmp::min(src.len(), dst.len());
@@ -271,7 +271,7 @@ impl PooledBytes {
 
     /// 复制到切片
     pub fn copy_to_slice(&self, dst: &mut [u8]) {
-        let blocks = self.blocks.lock().unwrap();
+        let blocks = self.blocks.lock().expect("memory pool blocks mutex poisoned");
         let block = &blocks[self.block_index];
         let end = if self.used == 0 { self.size } else { self.used };
         let src = &block.data[..end];
@@ -282,8 +282,8 @@ impl PooledBytes {
 
 impl Drop for PooledBytes {
     fn drop(&mut self) {
-        let mut blocks = self.blocks.lock().unwrap();
-        let mut stats = self.stats.lock().unwrap();
+        let mut blocks = self.blocks.lock().expect("memory pool blocks mutex poisoned");
+        let mut stats = self.stats.lock().expect("memory pool stats mutex poisoned");
 
         if let Some(block) = blocks.get_mut(self.block_index)
             && block.is_allocated()

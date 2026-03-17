@@ -786,21 +786,21 @@ mod tests {
     fn test_number_stream() {
         let mut stream = NumberStream::new(vec![1, 2, 3]);
 
-        assert_eq!(stream.next().unwrap().unwrap(), 1);
-        assert_eq!(stream.next().unwrap().unwrap(), 2);
-        assert_eq!(stream.next().unwrap().unwrap(), 3);
-        assert_eq!(stream.next().unwrap(), None);
+        assert_eq!(stream.next().expect("流应有值").expect("解析不应失败"), 1);
+        assert_eq!(stream.next().expect("流应有值").expect("解析不应失败"), 2);
+        assert_eq!(stream.next().expect("流应有值").expect("解析不应失败"), 3);
+        assert_eq!(stream.next().expect("流应返回 None"), None);
     }
 
     #[test]
     fn test_sqlite_database() {
         let db = SqliteDatabase;
 
-        let conn = db.connect().unwrap();
+        let conn = db.connect().expect("数据库连接不应失败");
         assert_eq!(conn, "sqlite_connection");
 
         let mut conn_mut = conn;
-        let transaction = db.begin_transaction(&mut conn_mut).unwrap();
+        let transaction = db.begin_transaction(&mut conn_mut).expect("事务开始不应失败");
         assert_eq!(transaction, "sqlite_transaction");
 
         assert!(db.commit(transaction).is_ok());

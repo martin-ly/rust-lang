@@ -305,8 +305,8 @@ pub mod comprehensive_examples {
 
         // 第二步：计算统计信息
         let sum: i32 = data.iter().sum();
-        let min = *data.iter().min().unwrap();
-        let max = *data.iter().max().unwrap();
+        let min = *data.iter().min().expect("数据不应为空");
+        let max = *data.iter().max().expect("数据不应为空");
         let avg = sum / data.len() as i32;
 
         stats.insert("sum".to_string(), sum);
@@ -324,7 +324,7 @@ pub mod comprehensive_examples {
         let mut lines = Vec::new();
         let mut buf = String::new();
 
-        while reader.read_line(&mut buf).unwrap() > 0 {
+        while reader.read_line(&mut buf).expect("读取配置行失败") > 0 {
             // Rust 1.91: 使用 skip_while 跳过注释和空白
             let line: String = buf
                 .bytes()

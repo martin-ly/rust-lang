@@ -97,7 +97,7 @@ impl NumaAwareTaskAllocator {
 
     /// 分配任务到最优NUMA节点
     pub fn allocate_task(&self, _task_id: usize) -> usize {
-        let mut workloads = self.node_workloads.lock().unwrap();
+        let mut workloads = self.node_workloads.lock().expect("获取工作负载锁不应失败");
 
         // 找到工作负载最轻的NUMA节点
         let mut min_workload = usize::MAX;
@@ -129,7 +129,7 @@ impl NumaAwareTaskAllocator {
 
     /// 获取NUMA节点工作负载
     pub fn get_node_workload(&self, node_id: usize) -> usize {
-        let workloads = self.node_workloads.lock().unwrap();
+        let workloads = self.node_workloads.lock().expect("获取工作负载锁不应失败");
         workloads.get(&node_id).copied().unwrap_or(0)
     }
 
@@ -234,7 +234,7 @@ impl NumaAwareParallelCompute {
                 thread::spawn(move || {
                     for (task_id, task) in tasks {
                         let result = task();
-                        results.lock().unwrap()[task_id] = Some(result);
+                        results.lock().expect("获取结果锁不应失败")[task_id] = Some(result);
                     }
                 })
             })
@@ -242,14 +242,14 @@ impl NumaAwareParallelCompute {
 
         // 等待所有线程完成
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         // 收集结果
-        let final_results = results.lock().unwrap();
+        let final_results = results.lock().expect("获取结果锁不应失败");
         final_results
             .iter()
-            .map(|opt| opt.clone().unwrap())
+            .map(|opt| opt.clone().expect("结果应存在"))
             .collect()
     }
 
@@ -293,7 +293,7 @@ impl NumaAwareParallelCompute {
             })
             .collect::<Vec<_>>()
             .into_iter()
-            .filter_map(|handle| handle.join().unwrap())
+            .filter_map(|handle| handle.join().expect("线程应成功完成"))
             .collect();
 
         // 最终归约
@@ -343,7 +343,7 @@ impl NumaAwareParallelCompute {
 
         // 等待所有线程完成
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         // 收集结果
@@ -428,7 +428,7 @@ impl NumaAwareMemoryAllocator {
             return Err(format!("无效的NUMA节点ID: {}", node_id));
         }
 
-        let mut allocations = self.node_allocations.lock().unwrap();
+        let mut allocations = self.node_allocations.lock().expect("获取分配锁不应失败");
         let node_allocations = allocations.entry(node_id).or_default();
 
         // 简化的内存分配：返回一个虚拟地址
@@ -457,7 +457,7 @@ impl NumaAwareMemoryAllocator {
 
     /// 获取NUMA节点内存使用统计
     pub fn get_memory_stats(&self) -> HashMap<usize, usize> {
-        let allocations = self.node_allocations.lock().unwrap();
+        let allocations = self.node_allocations.lock().expect("获取分配锁不应失败");
         allocations
             .iter()
             .map(|(node_id, allocs)| {
@@ -527,7 +527,7 @@ mod tests {
         assert!(layout.allocate_to_node(0, 42).is_ok());
         assert!(layout.allocate_to_node(0, 43).is_ok());
 
-        let data = layout.get_from_node(0).unwrap();
+        let data = layout.get_from_node(0).expect("获取节点数据应成功");
         assert_eq!(data.len(), 2);
         assert_eq!(data[0], 42);
         assert_eq!(data[1], 43);
@@ -550,7 +550,7 @@ mod tests {
     fn test_numa_aware_memory_allocator() {
         let allocator = NumaAwareMemoryAllocator::new();
 
-        let address = allocator.allocate_on_node(0, 1024).unwrap();
+        let address = allocator.allocate_on_node(0, 1024).expect("内存分配应成功");
         assert!(address <= usize::MAX);
 
         assert!(allocator.deallocate_on_node(0, address).is_ok());

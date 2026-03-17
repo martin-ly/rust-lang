@@ -63,14 +63,14 @@ impl ProcessController {
             children_pids: Vec::new(),
         };
 
-        self.processes.lock().unwrap().insert(pid, info);
+        self.processes.lock().expect("进程控制锁被污染").insert(pid, info);
 
         Ok(pid)
     }
 
     /// 停止进程
     pub fn stop(&mut self, pid: u32) -> ProcessResult<()> {
-        let mut processes = self.processes.lock().unwrap();
+        let mut processes = self.processes.lock().expect("进程控制锁被污染");
 
         if let Some(info) = processes.get_mut(&pid) {
             info.status = ProcessStatus::Stopped;
@@ -82,7 +82,7 @@ impl ProcessController {
 
     /// 终止进程
     pub fn terminate(&mut self, pid: u32) -> ProcessResult<()> {
-        let mut processes = self.processes.lock().unwrap();
+        let mut processes = self.processes.lock().expect("进程控制锁被污染");
 
         if let Some(info) = processes.get_mut(&pid) {
             info.status = ProcessStatus::Stopped;
@@ -94,7 +94,7 @@ impl ProcessController {
 
     /// 获取进程信息
     pub fn get_process_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
-        let processes = self.processes.lock().unwrap();
+        let processes = self.processes.lock().expect("进程控制锁被污染");
 
         processes
             .get(&pid)
@@ -104,7 +104,7 @@ impl ProcessController {
 
     /// 获取所有进程信息
     pub fn get_all_processes(&self) -> Vec<ProcessInfo> {
-        let processes = self.processes.lock().unwrap();
+        let processes = self.processes.lock().expect("进程控制锁被污染");
         processes.values().cloned().collect()
     }
 }

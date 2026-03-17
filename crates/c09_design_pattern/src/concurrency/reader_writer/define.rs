@@ -19,12 +19,12 @@ impl<T> SharedData<T> {
     where
         T: Copy,
     {
-        let read_guard = self.data.read().unwrap();
+        let read_guard = self.data.read().expect("读取锁被污染");
         *read_guard
     }
 
     fn write_data(&self, new_data: T) {
-        let mut write_guard = self.data.write().unwrap();
+        let mut write_guard = self.data.write().expect("写入锁被污染");
         *write_guard = new_data;
     }
 }
@@ -60,11 +60,11 @@ fn reader_writer() {
         .collect();
 
     for reader in readers {
-        reader.join().unwrap();
+        reader.join().expect("读者线程加入失败");
     }
 
     for writer in writers {
-        writer.join().unwrap();
+        writer.join().expect("写入线程加入失败");
     }
 }
 

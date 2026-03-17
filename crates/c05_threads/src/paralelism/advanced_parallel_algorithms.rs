@@ -160,7 +160,7 @@ impl ParallelRadixSort {
             return;
         }
 
-        let max_val = *arr.iter().max().unwrap();
+        let max_val = *arr.iter().max().expect("数组不应为空");
         let mut exp = 1;
 
         while max_val / exp > 0 {

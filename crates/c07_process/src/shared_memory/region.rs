@@ -44,14 +44,14 @@ impl IpcChannel for SharedMemoryRegion {
         let data =
             serde_json::to_vec(&msg).map_err(|e| IpcError::SerializationError(e.to_string()))?;
 
-        let mut shared_data = self.data.lock().unwrap();
+        let mut shared_data = self.data.lock().expect("共享内存数据锁被污染");
         shared_data.insert(key, data);
 
         Ok(())
     }
 
     fn receive_message(&self) -> IpcResult<Message<Vec<u8>>> {
-        let shared_data = self.data.lock().unwrap();
+        let shared_data = self.data.lock().expect("共享内存数据锁被污染");
 
         // 查找最新的消息
         let mut latest_key = None;
@@ -79,15 +79,15 @@ impl IpcChannel for SharedMemoryRegion {
     }
 
     fn is_closed(&self) -> bool {
-        *self.is_closed.lock().unwrap()
+        *self.is_closed.lock().expect("共享内存关闭状态锁被污染")
     }
 
     fn close(&mut self) -> IpcResult<()> {
-        let mut closed = self.is_closed.lock().unwrap();
+        let mut closed = self.is_closed.lock().expect("共享内存关闭状态锁被污染");
         *closed = true;
 
         // 清理数据
-        let mut shared_data = self.data.lock().unwrap();
+        let mut shared_data = self.data.lock().expect("共享内存数据锁被污染");
         shared_data.clear();
 
         Ok(())

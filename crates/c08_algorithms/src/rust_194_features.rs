@@ -38,7 +38,7 @@ impl SlidingWindowAlgorithms {
         [(); N]: Sized,
     {
         // Rust 1.94.0: data.array_windows::<N>().map(|[a, b, c, ...]| ...)
-        data.windows(N).map(|window| window.iter().sum()).collect()
+        data.array_windows::<N>().map(|window| window.iter().sum()).collect()
     }
 
     /// 寻找和为目标值的子数组（使用窗口）
@@ -70,8 +70,8 @@ impl SlidingWindowAlgorithms {
         let mut current_start = 0;
 
         // Rust 1.94.0: for (i, [prev, curr]) in data.array_windows::<2>().enumerate()
-        for (i, window) in data.windows(2).enumerate() {
-            if window[1] <= window[0] {
+        for (i, [prev, curr]) in data.array_windows::<2>().enumerate() {
+            if curr <= prev {
                 // 序列中断
                 let current_len = i - current_start + 1;
                 if current_len > max_len {
@@ -116,9 +116,9 @@ impl SlidingWindowAlgorithms {
     ///
     /// Rust 1.94.0: array_windows::<3>() 便于计算中位数
     pub fn moving_median(data: &[i32]) -> Vec<f64> {
-        data.windows(3)
-            .map(|window| {
-                let mut sorted = [window[0], window[1], window[2]];
+        data.array_windows::<3>()
+            .map(|[a, b, c]| {
+                let mut sorted = [*a, *b, *c];
                 sorted.sort();
                 sorted[1] as f64 // 中位数
             })
@@ -132,11 +132,11 @@ impl SlidingWindowAlgorithms {
         let mut change_points = Vec::new();
 
         // 计算一阶差分
-        let first_diff: Vec<f64> = data.windows(2).map(|w| w[1] - w[0]).collect();
+        let first_diff: Vec<f64> = data.array_windows::<2>().map(|[prev, curr]| curr - prev).collect();
 
         // 计算二阶差分并检测变化点
-        for (i, window) in first_diff.windows(2).enumerate() {
-            let second_diff = (window[1] - window[0]).abs();
+        for (i, [prev, curr]) in first_diff.array_windows::<2>().enumerate() {
+            let second_diff = (curr - prev).abs();
             if second_diff > threshold {
                 change_points.push(i + 1);
             }
@@ -159,12 +159,12 @@ impl SlidingWindowAlgorithms {
         let mut max_start = 0;
         let mut max_end = 0;
 
-        for (i, window) in data.windows(2).enumerate() {
+        for (i, [_prev, curr]) in data.array_windows::<2>().enumerate() {
             // 决定是否开始新的子数组
-            if current_sum + window[1] > window[1] {
-                current_sum += window[1];
+            if current_sum + *curr > *curr {
+                current_sum += *curr;
             } else {
-                current_sum = window[1];
+                current_sum = *curr;
                 start = i + 1;
             }
 
@@ -627,7 +627,7 @@ impl<I: Iterator> ConditionalExtractor<I> {
 
         while let Some(item) = self.iter.peek() {
             if predicate(item) {
-                result.push(self.iter.next().unwrap());
+                result.push(self.iter.next().expect("迭代器返回None"));
             } else {
                 break;
             }
@@ -677,7 +677,7 @@ impl StringAlgorithms {
     ///
     /// Rust 1.94.0: TryFrom<char> for usize
     pub fn unicode_sum(s: &str) -> usize {
-        s.chars().map(|c| c as usize).sum()
+        s.chars().map(|c| usize::try_from(c).unwrap_or(0)).sum()
     }
 
     /// 基于 Unicode 的字符串哈希
@@ -686,7 +686,7 @@ impl StringAlgorithms {
     pub fn unicode_hash(s: &str) -> u64 {
         let mut hash: u64 = 5381;
         for ch in s.chars() {
-            let code_point = ch as usize; // Rust 1.94.0 转换
+            let code_point = usize::try_from(ch).unwrap_or(0); // Rust 1.94.0 转换
             hash = hash.wrapping_mul(33).wrapping_add(code_point as u64);
         }
         hash
@@ -699,7 +699,7 @@ impl StringAlgorithms {
         s.chars()
             .enumerate()
             .filter(|(_, ch)| {
-                let code_point = *ch as usize;
+                let code_point = usize::try_from(*ch).unwrap_or(0);
                 code_point >= min && code_point <= max
             })
             .collect()
@@ -712,7 +712,7 @@ impl StringAlgorithms {
         let mut counts = HashMap::new();
 
         for ch in s.chars() {
-            let code_point = ch as usize;
+            let code_point = usize::try_from(ch).unwrap_or(0);
             let block = if code_point <= 0x007F {
                 "Basic Latin"
             } else if code_point <= 0x00FF {
@@ -741,7 +741,7 @@ impl StringAlgorithms {
     ///
     /// Rust 1.94.0: char 转换用于排序键
     pub fn generate_sort_key(s: &str) -> Vec<usize> {
-        s.chars().map(|c| c as usize).collect()
+        s.chars().map(|c| usize::try_from(c).unwrap_or(0)).collect()
     }
 
     /// 查找变位词（基于排序后的字符序列）
@@ -932,13 +932,13 @@ mod tests {
     #[test]
     fn test_fibonacci_cache() {
         let mut cache = FibonacciCache::new(10);
-        assert_eq!(cache.get(0).unwrap(), 0);
-        assert_eq!(cache.get(1).unwrap(), 1);
-        assert_eq!(cache.get(5).unwrap(), 5);
-        assert_eq!(cache.get(10).unwrap(), 55);
+        assert_eq!(cache.get(0).expect("获取F(0)失败"), 0);
+        assert_eq!(cache.get(1).expect("获取F(1)失败"), 1);
+        assert_eq!(cache.get(5).expect("获取F(5)失败"), 5);
+        assert_eq!(cache.get(10).expect("获取F(10)失败"), 55);
         
         // 测试缓存命中（第二次调用应该使用缓存）
-        assert_eq!(cache.get(10).unwrap(), 55);
+        assert_eq!(cache.get(10).expect("获取F(10)失败"), 55);
         
         // 验证缓存中有数据
         assert!(cache.cache.contains_key(&10));
@@ -1079,19 +1079,19 @@ mod tests {
         
         // F(93) = 12200160415121876738 < u64::MAX
         // F(94) = 19740274219868223167 > u64::MAX (会溢出)
-        let f_93 = cache.get(93).unwrap();
-        let f_94 = cache.get(94).unwrap();
+        let f_93 = cache.get(93).expect("获取F(93)失败");
+        let f_94 = cache.get(94).expect("获取F(94)失败");
         
         // 验证 F(93) 是正确的
         assert_eq!(f_93, 12200160415121876738u64, "F(93) 应该是正确的值");
         
         // 由于使用 wrapping_add，F(94) 会是 wrapping 后的值
         // 不是真正的 F(94)，但没有溢出 panic
-        let expected_wrapped = f_93.wrapping_add(cache.get(92).unwrap());
+        let expected_wrapped = f_93.wrapping_add(cache.get(92).expect("获取F(92)失败"));
         assert_eq!(f_94, expected_wrapped, "F(94) 应该是 wrapping 后的值");
         
         // 验证没有 panic，程序继续运行
-        let f_100 = cache.get(100).unwrap();
+        let f_100 = cache.get(100).expect("获取F(100)失败");
         assert!(f_100 > 0 || f_100 == 0, "F(100) 应该有一个值（可能已 wrapping）");
     }
 

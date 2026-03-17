@@ -204,7 +204,7 @@ impl WasmMemoryManager {
 
     /// 分配内存
     pub fn allocate(&self, size: usize) -> Option<usize> {
-        let mut stats = self.usage_stats.lock().unwrap();
+        let mut stats = self.usage_stats.lock().expect("使用统计锁定失败");
 
         // 简单的线性分配策略
         if stats.allocated_bytes + size <= self.memory.len() {
@@ -219,7 +219,7 @@ impl WasmMemoryManager {
 
     /// 释放内存
     pub fn deallocate(&self, _offset: usize, _size: usize) {
-        let mut stats = self.usage_stats.lock().unwrap();
+        let mut stats = self.usage_stats.lock().expect("使用统计锁定失败");
         stats.total_deallocations += 1;
         // 简化实现，实际WASM中内存管理更复杂
     }
@@ -245,7 +245,7 @@ impl WasmMemoryManager {
 
     /// 获取内存使用统计
     pub fn get_usage_stats(&self) -> MemoryUsageStats {
-        self.usage_stats.lock().unwrap().clone()
+        self.usage_stats.lock().expect("使用统计锁定失败").clone()
     }
 
     /// 获取当前内存页数
@@ -380,7 +380,7 @@ impl WasmPerformanceOptimizer {
     where
         F: Fn(Vec<WasmType>) -> Result<R, String>,
     {
-        let mut stats = self.stats.lock().unwrap();
+        let mut stats = self.stats.lock().expect("统计信息锁定失败");
         stats.function_calls += 1;
 
         // 应用优化
@@ -392,7 +392,7 @@ impl WasmPerformanceOptimizer {
 
     /// 优化参数
     fn optimize_arguments(&self, args: Vec<WasmType>) -> Vec<WasmType> {
-        let mut stats = self.stats.lock().unwrap();
+        let mut stats = self.stats.lock().expect("统计信息锁定失败");
         stats.type_conversions += 1;
 
         // 简化优化：确保类型一致性
@@ -407,7 +407,7 @@ impl WasmPerformanceOptimizer {
 
     /// 优化内存访问
     pub fn optimize_memory_access(&self, offset: usize, size: usize) -> (usize, usize) {
-        let mut stats = self.stats.lock().unwrap();
+        let mut stats = self.stats.lock().expect("统计信息锁定失败");
         stats.memory_accesses += 1;
 
         // 内存对齐优化
@@ -420,7 +420,7 @@ impl WasmPerformanceOptimizer {
 
     /// 获取优化统计
     pub fn get_stats(&self) -> OptimizationStats {
-        self.stats.lock().unwrap().clone()
+        self.stats.lock().expect("统计信息锁定失败").clone()
     }
 }
 
@@ -464,7 +464,7 @@ impl JsInterop {
     where
         F: Fn(String) -> String + Send + Sync + 'static,
     {
-        let mut callbacks = self.callbacks.lock().unwrap();
+        let mut callbacks = self.callbacks.lock().expect("回调锁定失败");
         if callbacks.contains_key(&name) {
             return Err(format!("Callback '{}' already registered", name));
         }
@@ -481,7 +481,7 @@ impl JsInterop {
 
     /// 处理来自 JavaScript 的调用
     pub fn handle_js_call(&self, name: &str, data: String) -> String {
-        let callbacks = self.callbacks.lock().unwrap();
+        let callbacks = self.callbacks.lock().expect("回调锁定失败");
         if let Some(callback) = callbacks.get(name) {
             callback(data)
         } else {
@@ -491,7 +491,7 @@ impl JsInterop {
 
     /// 获取所有注册的回调
     pub fn get_registered_callbacks(&self) -> Vec<String> {
-        let callbacks = self.callbacks.lock().unwrap();
+        let callbacks = self.callbacks.lock().expect("回调锁定失败");
         callbacks.keys().cloned().collect()
     }
 }
@@ -528,20 +528,20 @@ pub fn demonstrate_wasm_features() {
     println!("2. WASM 内存管理演示:");
     let mut memory_manager = WasmMemoryManager::new(1, 10); // 1页初始，最大10页
 
-    let offset = memory_manager.allocate(100).unwrap();
+    let offset = memory_manager.allocate(100).expect("内存分配失败");
     println!("  分配100字节，偏移: {}", offset);
 
     let data = b"Hello, WASM!";
     let _ = memory_manager.write(offset, data);
     println!("  写入数据: {:?}", data);
 
-    let read_data = memory_manager.read(offset, data.len()).unwrap();
+    let read_data = memory_manager.read(offset, data.len()).expect("内存读取失败");
     println!("  读取数据: {:?}", read_data);
 
     let stats = memory_manager.get_usage_stats();
     println!("  内存统计: {:?}", stats);
 
-    let old_pages = memory_manager.grow_memory(1).unwrap();
+    let old_pages = memory_manager.grow_memory(1).expect("内存扩展失败");
     println!(
         "  扩展内存，旧页数: {}, 新页数: {}",
         old_pages,
@@ -641,12 +641,12 @@ mod tests {
     #[test]
     fn test_memory_manager() {
         let mut manager = WasmMemoryManager::new(1, 10);
-        let offset = manager.allocate(100).unwrap();
+        let offset = manager.allocate(100).expect("测试内存分配失败");
         assert_eq!(offset, 0);
 
         let data = b"test";
         let _ = manager.write(offset, data);
-        let read_data = manager.read(offset, data.len()).unwrap();
+        let read_data = manager.read(offset, data.len()).expect("测试内存读取失败");
         assert_eq!(read_data, data);
     }
 

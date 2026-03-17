@@ -392,7 +392,7 @@ mod tests {
 
         manager
             .enter_scope("test".to_string(), ScopeType::Block)
-            .unwrap();
+            .expect("进入作用域失败");
         assert_eq!(manager.get_scope_depth(), 1);
     }
 
@@ -401,7 +401,7 @@ mod tests {
         let mut manager = ScopeManager::new();
         manager
             .enter_scope("test".to_string(), ScopeType::Block)
-            .unwrap();
+            .expect("进入作用域失败");
 
         manager
             .declare_variable(
@@ -411,7 +411,7 @@ mod tests {
                 false,
                 None,
             )
-            .unwrap();
+            .expect("声明变量失败");
 
         assert!(manager.find_variable("x").is_some());
     }
@@ -421,14 +421,14 @@ mod tests {
         let mut manager = ScopeManager::new();
         manager
             .enter_scope("test".to_string(), ScopeType::Block)
-            .unwrap();
+            .expect("进入作用域失败");
         manager
             .enter_scope("inner".to_string(), ScopeType::Block)
-            .unwrap();
+            .expect("进入内部作用域失败");
 
         assert_eq!(manager.get_scope_depth(), 2);
 
-        manager.exit_scope().unwrap();
+        manager.exit_scope().expect("退出作用域失败");
         assert_eq!(manager.get_scope_depth(), 1);
     }
 }

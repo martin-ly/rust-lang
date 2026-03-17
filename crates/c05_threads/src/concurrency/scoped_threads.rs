@@ -133,7 +133,7 @@ impl ScopedThreadsDemo {
                     *item *= 3;
                     thread::sleep(Duration::from_millis(1));
 
-                    let mut guard = mutex_ref.lock().unwrap();
+                    let mut guard = mutex_ref.lock().expect("获取互斥锁不应失败");
                     guard.0 += 1;
                     if guard.0 == data_len {
                         guard.1 = true;
@@ -144,9 +144,9 @@ impl ScopedThreadsDemo {
 
             // 消费者线程
             s.spawn(move || {
-                let mut guard = mutex_ref.lock().unwrap();
+                let mut guard = mutex_ref.lock().expect("获取互斥锁不应失败");
                 while !guard.1 {
-                    guard = condvar_ref.wait(guard).unwrap();
+                    guard = condvar_ref.wait(guard).expect("条件变量等待不应失败");
                 }
                 println!("所有数据处理完成，共处理 {} 个元素", guard.0);
             });
@@ -174,12 +174,12 @@ impl ScopedThreadsDemo {
                         Ok(100 / value)
                     };
 
-                    results_ref.lock().unwrap().push(result);
+                    results_ref.lock().expect("获取结果锁不应失败").push(result);
                 });
             }
         });
 
-        let final_results = results.lock().unwrap();
+        let final_results = results.lock().expect("获取结果锁不应失败");
         for (i, result) in final_results.iter().enumerate() {
             match result {
                 Ok(value) => println!("索引 {}: 结果 = {}", i, value),
@@ -203,7 +203,7 @@ impl ScopedThreadsDemo {
             .map(|i| {
                 let data = shared_data.clone();
                 thread::spawn(move || {
-                    let mut guard = data.lock().unwrap();
+                    let mut guard = data.lock().expect("获取数据锁不应失败");
                     let chunk_size = guard.len() / 4;
                     let start = i * chunk_size;
                     let end = if i == 3 {
@@ -220,7 +220,7 @@ impl ScopedThreadsDemo {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
         let traditional_time = start.elapsed();
 
@@ -353,7 +353,7 @@ impl AdvancedScopedPatterns {
 
                     loop {
                         // 尝试从队列中获取工作
-                        let work = if let Some(item) = queue_clone.lock().unwrap().pop() {
+                        let work = if let Some(item) = queue_clone.lock().expect("获取队列锁不应失败").pop() {
                             item
                         } else {
                             break; // 队列为空，退出
@@ -368,7 +368,7 @@ impl AdvancedScopedPatterns {
                     }
 
                     // 将本地结果添加到全局结果
-                    results_clone.lock().unwrap().extend(local_results);
+                    results_clone.lock().expect("获取结果锁不应失败").extend(local_results);
                 });
             }
         });
@@ -395,7 +395,7 @@ impl AdvancedScopedPatterns {
             s.spawn(move || {
                 for &item in &input_data_clone {
                     let processed = item * 2;
-                    tx1.send(processed).unwrap();
+                    tx1.send(processed).expect("发送消息不应失败");
                     thread::sleep(Duration::from_millis(10));
                 }
             });
@@ -404,7 +404,7 @@ impl AdvancedScopedPatterns {
             s.spawn(move || {
                 while let Ok(item) = rx1.recv() {
                     let transformed = item + 1;
-                    tx2.send(transformed).unwrap();
+                    tx2.send(transformed).expect("发送消息不应失败");
                     thread::sleep(Duration::from_millis(10));
                 }
             });
@@ -413,7 +413,7 @@ impl AdvancedScopedPatterns {
             s.spawn(move || {
                 while let Ok(item) = rx2.recv() {
                     let final_result = item * item;
-                    tx3.send(final_result).unwrap();
+                    tx3.send(final_result).expect("发送消息不应失败");
                     thread::sleep(Duration::from_millis(10));
                 }
             });
@@ -446,7 +446,7 @@ impl AdvancedScopedPatterns {
                 s.spawn(move || {
                     // 第一阶段：增加计数器
                     {
-                        let mut counter = counter_clone.lock().unwrap();
+                        let mut counter = counter_clone.lock().expect("获取计数器锁不应失败");
                         *counter += thread_id + 1;
                         println!("线程 {} 完成第一阶段，计数器 = {}", thread_id, *counter);
                     }
@@ -456,7 +456,7 @@ impl AdvancedScopedPatterns {
 
                     // 第二阶段：再次增加计数器
                     {
-                        let mut counter = counter_clone.lock().unwrap();
+                        let mut counter = counter_clone.lock().expect("获取计数器锁不应失败");
                         *counter += (thread_id + 1) * 10;
                         println!("线程 {} 完成第二阶段，计数器 = {}", thread_id, *counter);
                     }
@@ -464,7 +464,7 @@ impl AdvancedScopedPatterns {
             }
         });
 
-        println!("最终计数器值: {}", shared_counter.lock().unwrap());
+        println!("最终计数器值: {}", shared_counter.lock().expect("获取计数器锁不应失败"));
     }
 }
 
@@ -560,12 +560,12 @@ impl ScopedThreadsBestPractices {
                         Ok(i * i)
                     };
 
-                    results_ref.lock().unwrap().push(result);
+                    results_ref.lock().expect("获取结果锁不应失败").push(result);
                 });
             }
         });
 
-        let final_results = results.lock().unwrap();
+        let final_results = results.lock().expect("获取结果锁不应失败");
         let errors: Vec<_> = final_results
             .iter()
             .filter_map(|r| r.as_ref().err())
@@ -636,7 +636,7 @@ impl DynamicLoadBalancingScopedThreads {
             }
         });
 
-        let final_results = results.lock().unwrap();
+        let final_results = results.lock().expect("获取结果锁不应失败");
         println!("动态负载均衡结果: {:?}", final_results);
     }
 
@@ -701,7 +701,7 @@ impl DynamicLoadBalancingScopedThreads {
             }
         });
 
-        let final_results = results.lock().unwrap();
+        let final_results = results.lock().expect("获取结果锁不应失败");
         println!("自适应线程池结果: {:?}", final_results);
     }
 }

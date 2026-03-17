@@ -16,7 +16,7 @@ impl<T> Promise<T> {
     }
 
     async fn resolve(&self, value: T) {
-        let mut result = self.result.lock().unwrap();
+        let mut result = self.result.lock().expect("Promise结果锁被污染");
         *result = Some(value);
     }
 
@@ -25,7 +25,7 @@ impl<T> Promise<T> {
         F: FnOnce(T) -> R,
         T: Clone,
     {
-        let result = self.result.lock().unwrap();
+        let result = self.result.lock().expect("Promise结果锁被污染");
         (*result).as_ref().map(|value| callback(value.clone()))
     }
 }

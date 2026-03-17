@@ -10,9 +10,9 @@ pub fn lockfree_crossbeam_demo01() {
     let queue = ArrayQueue::new(3); // 创建一个容量为 3 的无锁队列
 
     // 向队列中插入元素
-    queue.push(1).unwrap();
-    queue.push(2).unwrap();
-    queue.push(3).unwrap();
+    queue.push(1).expect("队列 Push 不应失败");
+    queue.push(2).expect("队列 Push 不应失败");
+    queue.push(3).expect("队列 Push 不应失败");
 
     // 尝试插入超过容量的元素
     if queue.push(4).is_err() {

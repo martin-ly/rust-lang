@@ -82,19 +82,19 @@ impl DistributedExecutor {
 
     /// 添加节点
     pub fn add_node(&self, node: NodeInfo) {
-        let mut nodes = self.nodes.lock().unwrap();
+        let mut nodes = self.nodes.lock().expect("分布式节点锁被污染");
         nodes.insert(node.id.clone(), node);
     }
 
     /// 移除节点
     pub fn remove_node(&self, node_id: &str) {
-        let mut nodes = self.nodes.lock().unwrap();
+        let mut nodes = self.nodes.lock().expect("分布式节点锁被污染");
         nodes.remove(node_id);
     }
 
     /// 获取可用节点
     pub fn get_available_nodes(&self) -> Vec<NodeInfo> {
-        let nodes = self.nodes.lock().unwrap();
+        let nodes = self.nodes.lock().expect("分布式节点锁被污染");
         nodes
             .values()
             .filter(|node| matches!(node.status, NodeStatus::Available))
@@ -132,7 +132,7 @@ impl DistributedExecutor {
 
         // 将任务添加到队列
         {
-            let mut task_queue = self.task_queue.lock().unwrap();
+            let mut task_queue = self.task_queue.lock().expect("任务队列锁被污染");
             task_queue.push(task.clone());
         }
 
@@ -177,7 +177,7 @@ impl DistributedExecutor {
 
         // 存储结果
         {
-            let mut results = self.results.lock().unwrap();
+            let mut results = self.results.lock().expect("任务结果锁被污染");
             let task_id = task.id.clone();
             results.insert(
                 task_id.clone(),
@@ -218,9 +218,9 @@ impl DistributedExecutor {
 
     /// 获取任务执行统计
     pub fn get_task_stats(&self) -> TaskExecutionStats {
-        let task_queue = self.task_queue.lock().unwrap();
-        let results = self.results.lock().unwrap();
-        let nodes = self.nodes.lock().unwrap();
+        let task_queue = self.task_queue.lock().expect("任务队列锁被污染");
+        let results = self.results.lock().expect("任务结果锁被污染");
+        let nodes = self.nodes.lock().expect("分布式节点锁被污染");
 
         let total_tasks = task_queue.len() + results.len();
         let completed_tasks = results.len();
@@ -525,8 +525,8 @@ impl DistributedLoadBalancer {
 
     /// 添加节点
     pub fn add_node(&self, node: NodeInfo) {
-        let mut nodes = self.nodes.lock().unwrap();
-        let mut node_loads = self.node_loads.lock().unwrap();
+        let mut nodes = self.nodes.lock().expect("分布式节点锁被污染");
+        let mut node_loads = self.node_loads.lock().expect("节点负载锁被污染");
 
         let node_id = node.id.clone();
         nodes.insert(node_id.clone(), node);
@@ -535,8 +535,8 @@ impl DistributedLoadBalancer {
 
     /// 选择最佳节点
     pub fn select_best_node(&self) -> Option<String> {
-        let nodes = self.nodes.lock().unwrap();
-        let node_loads = self.node_loads.lock().unwrap();
+        let nodes = self.nodes.lock().expect("分布式节点锁被污染");
+        let node_loads = self.node_loads.lock().expect("节点负载锁被污染");
 
         nodes
             .values()
@@ -547,13 +547,13 @@ impl DistributedLoadBalancer {
 
     /// 分配任务到节点
     pub fn assign_task(&self, node_id: &str) {
-        let mut node_loads = self.node_loads.lock().unwrap();
+        let mut node_loads = self.node_loads.lock().expect("节点负载锁被污染");
         *node_loads.entry(node_id.to_string()).or_insert(0) += 1;
     }
 
     /// 完成任务
     pub fn complete_task(&self, node_id: &str) {
-        let mut node_loads = self.node_loads.lock().unwrap();
+        let mut node_loads = self.node_loads.lock().expect("节点负载锁被污染");
         if let Some(load) = node_loads.get_mut(node_id)
             && *load > 0
         {
@@ -563,7 +563,7 @@ impl DistributedLoadBalancer {
 
     /// 获取节点负载信息
     pub fn get_node_loads(&self) -> HashMap<String, usize> {
-        let node_loads = self.node_loads.lock().unwrap();
+        let node_loads = self.node_loads.lock().expect("节点负载锁被污染");
         node_loads.clone()
     }
 }

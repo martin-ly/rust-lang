@@ -83,7 +83,7 @@ fn main() {
     });
 
     // 等待线程完成
-    handle.join().unwrap();
+    handle.join().expect("线程应成功完成");
 }
 ```
 
@@ -99,17 +99,17 @@ fn main() {
     // 发送线程
     let sender = thread::spawn(move || {
         let data = vec![1, 2, 3, 4, 5];
-        tx.send(data).unwrap();
+        tx.send(data).expect("发送数据不应失败");
     });
 
     // 接收线程
     let receiver = thread::spawn(move || {
-        let received = rx.recv().unwrap();
+        let received = rx.recv().expect("接收数据不应失败");
         println!("Received: {:?}", received);
     });
 
-    sender.join().unwrap();
-    receiver.join().unwrap();
+    sender.join().expect("发送线程应成功完成");
+    receiver.join().expect("接收线程应成功完成");
 }
 ```
 
@@ -203,7 +203,7 @@ fn main() {
     let data = Mutex::new(vec![1, 2, 3]);
 
     let handle = thread::spawn(move || {
-        let mut guard = data.lock().unwrap();
+        let mut guard = data.lock().expect("Mutex 锁被 poisoned");
         guard.push(4);
         println!("Modified data: {:?}", guard);
     });
@@ -472,7 +472,7 @@ fn demonstrate_shared_state() {
         .map(|id| {
             let data = Arc::clone(&shared_data);
             thread::spawn(move || {
-                let mut guard = data.lock().unwrap();
+                let mut guard = data.lock().expect("SharedData 锁被 poisoned");
                 guard.push(id + 10);
                 println!("Thread {} added value, data: {:?}", id, guard);
             })
@@ -480,10 +480,10 @@ fn demonstrate_shared_state() {
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程执行失败");
     }
 
-    let final_data = shared_data.lock().unwrap();
+    let final_data = shared_data.lock().expect("SharedData 锁被 poisoned");
     println!("Final shared data: {:?}", final_data);
     println!();
 }

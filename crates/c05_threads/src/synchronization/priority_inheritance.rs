@@ -92,7 +92,7 @@ impl<T> PriorityInheritanceMutex<T> {
     }
 
     pub fn register_thread(&self, thread_id: usize, priority: ThreadPriority) {
-        let mut registry = self.thread_registry.lock().unwrap();
+        let mut registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
         registry.insert(thread_id, ThreadInfo::new(thread_id, priority));
     }
 
@@ -100,18 +100,18 @@ impl<T> PriorityInheritanceMutex<T> {
     where
         F: FnOnce(&mut T) -> R,
     {
-        let mut owner = self.owner.lock().unwrap();
+        let mut owner = self.owner.lock().expect("获取所有者锁不应失败");
 
         if owner.is_none() {
             // 锁可用，直接获取
-            let registry = self.thread_registry.lock().unwrap();
+            let registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
             if let Some(thread_info) = registry.get(&thread_id) {
                 *owner = Some(thread_info.clone());
             }
             drop(registry);
             drop(owner);
 
-            let result = f(&mut self.data.lock().unwrap());
+            let result = f(&mut self.data.lock().expect("获取数据锁不应失败"));
 
             // 释放锁时处理优先级继承
             self.release_lock(thread_id);
@@ -127,13 +127,13 @@ impl<T> PriorityInheritanceMutex<T> {
         F: FnOnce(&mut T) -> R,
     {
         let registry = self.thread_registry.lock().unwrap();
-        let mut thread_info = registry.get(&thread_id).unwrap().clone();
+        let mut thread_info = registry.get(&thread_id).expect("线程信息应存在").clone();
         thread_info.wait_start = Some(Instant::now());
         drop(registry);
 
         // 添加到等待队列
         {
-            let mut waiters = self.waiters.lock().unwrap();
+            let mut waiters = self.waiters.lock().expect("获取等待者锁不应失败");
             waiters.push(thread_info.clone());
         }
 
@@ -141,20 +141,20 @@ impl<T> PriorityInheritanceMutex<T> {
         self.check_priority_inheritance(thread_id);
 
         // 等待锁可用
-        let mut owner = self.owner.lock().unwrap();
+        let mut owner = self.owner.lock().expect("获取所有者锁不应失败");
         while owner.is_some() {
-            owner = self.condvar.wait(owner).unwrap();
+            owner = self.condvar.wait(owner).expect("条件变量等待不应失败");
         }
 
         // 获取锁
-        let mut registry = self.thread_registry.lock().unwrap();
+        let mut registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
         if let Some(thread_info) = registry.get_mut(&thread_id) {
             *owner = Some(thread_info.clone());
         }
         drop(registry);
         drop(owner);
 
-        let result = f(&mut self.data.lock().unwrap());
+        let result = f(&mut self.data.lock().expect("获取数据锁不应失败"));
 
         // 释放锁
         self.release_lock(thread_id);
@@ -162,9 +162,9 @@ impl<T> PriorityInheritanceMutex<T> {
     }
 
     fn check_priority_inheritance(&self, waiting_thread_id: usize) {
-        let mut owner = self.owner.lock().unwrap();
+        let mut owner = self.owner.lock().expect("获取所有者锁不应失败");
         if let Some(ref mut owner_info) = *owner {
-            let mut registry = self.thread_registry.lock().unwrap();
+            let mut registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
             if let Some(waiting_thread) = registry.get(&waiting_thread_id).cloned()
                 && waiting_thread.priority > owner_info.priority
             {
@@ -180,12 +180,12 @@ impl<T> PriorityInheritanceMutex<T> {
     }
 
     fn release_lock(&self, thread_id: usize) {
-        let mut owner = self.owner.lock().unwrap();
+        let mut owner = self.owner.lock().expect("获取所有者锁不应失败");
         *owner = None;
         drop(owner);
 
         // 恢复原始优先级
-        let mut registry = self.thread_registry.lock().unwrap();
+        let mut registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
         if let Some(ref mut thread_info) = registry.get_mut(&thread_id) {
             thread_info.restore_priority();
         }
@@ -222,7 +222,7 @@ impl<T> PriorityInheritanceRwLock<T> {
     }
 
     pub fn register_thread(&self, thread_id: usize, priority: ThreadPriority) {
-        let mut registry = self.thread_registry.lock().unwrap();
+        let mut registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
         registry.insert(thread_id, ThreadInfo::new(thread_id, priority));
     }
 
@@ -230,11 +230,11 @@ impl<T> PriorityInheritanceRwLock<T> {
     where
         F: FnOnce(&T) -> R,
     {
-        let writer = self.writer.lock().unwrap();
+        let writer = self.writer.lock().expect("获取写者锁不应失败");
 
         if writer.is_none() {
             // 没有写者，可以读取
-            let registry = self.thread_registry.lock().unwrap();
+            let registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
             if let Some(thread_info) = registry.get(&thread_id) {
                 let mut readers = self.readers.lock().unwrap();
                 readers.push(thread_info.clone());
@@ -368,7 +368,7 @@ impl<T> PriorityInheritanceRwLock<T> {
     fn check_priority_inheritance(&self, waiting_thread_id: usize) {
         let mut writer = self.writer.lock().unwrap();
         if let Some(ref mut writer_info) = *writer {
-            let mut registry = self.thread_registry.lock().unwrap();
+            let mut registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
             if let Some(waiting_thread) = registry.get(&waiting_thread_id).cloned()
                 && waiting_thread.priority > writer_info.priority
             {
@@ -384,7 +384,7 @@ impl<T> PriorityInheritanceRwLock<T> {
 
         // 检查读者优先级继承
         let mut readers = self.readers.lock().unwrap();
-        let mut registry = self.thread_registry.lock().unwrap();
+        let mut registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
         if let Some(waiting_thread) = registry.get(&waiting_thread_id).cloned() {
             for reader in readers.iter_mut() {
                 if waiting_thread.priority > reader.priority {
@@ -415,7 +415,7 @@ impl<T> PriorityInheritanceRwLock<T> {
         drop(writer);
 
         // 恢复原始优先级
-        let mut registry = self.thread_registry.lock().unwrap();
+        let mut registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
         if let Some(ref mut thread_info) = registry.get_mut(&thread_id) {
             thread_info.restore_priority();
         }
@@ -444,7 +444,7 @@ impl PriorityInheritanceSemaphore {
     }
 
     pub fn register_thread(&self, thread_id: usize, priority: ThreadPriority) {
-        let mut registry = self.thread_registry.lock().unwrap();
+        let mut registry = self.thread_registry.lock().expect("获取线程注册表锁不应失败");
         registry.insert(thread_id, ThreadInfo::new(thread_id, priority));
     }
 

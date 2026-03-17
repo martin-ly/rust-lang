@@ -281,7 +281,7 @@ where
     }
 
     fn find<T: Eq + Hash + Clone>(parent: &mut HashMap<T, T>, x: T) -> T {
-        let p = parent.get(&x).cloned().unwrap();
+        let p = parent.get(&x).cloned().expect("并查集查找父节点失败");
         if p != x {
             let root = find(parent, p.clone());
             parent.insert(x.clone(), root.clone());
@@ -343,7 +343,7 @@ where
         rank.insert(node.clone(), 0);
     }
     fn find<T: Eq + Hash + Clone>(parent: &mut HashMap<T, T>, x: T) -> T {
-        let p = parent.get(&x).cloned().unwrap();
+        let p = parent.get(&x).cloned().expect("并查集查找父节点失败");
         if p != x {
             let root = find(parent, p.clone());
             parent.insert(x.clone(), root.clone());
@@ -861,12 +861,12 @@ impl<T: Eq + Hash + Clone> TarjanState<T> {
                 let w_cl = w.clone();
                 if !self.index_map.contains_key(&w_cl) {
                     self.strongconnect(w_cl.clone(), graph);
-                    let vlow = *self.lowlink_map.get(&v).unwrap();
-                    let wlow = *self.lowlink_map.get(&w_cl).unwrap();
+                    let vlow = *self.lowlink_map.get(&v).expect("获取v的lowlink值失败");
+                    let wlow = *self.lowlink_map.get(&w_cl).expect("获取w的lowlink值失败");
                     self.lowlink_map.insert(v.clone(), vlow.min(wlow));
                 } else if self.on_stack.contains(&w_cl) {
-                    let vlow = *self.lowlink_map.get(&v).unwrap();
-                    let widx = *self.index_map.get(&w_cl).unwrap();
+                    let vlow = *self.lowlink_map.get(&v).expect("获取v的lowlink值失败");
+                    let widx = *self.index_map.get(&w_cl).expect("获取w的索引失败");
                     self.lowlink_map.insert(v.clone(), vlow.min(widx));
                 }
             }
@@ -877,7 +877,7 @@ impl<T: Eq + Hash + Clone> TarjanState<T> {
         if v_is_root {
             let mut comp = Vec::new();
             loop {
-                let w = self.stack.pop().unwrap();
+                let w = self.stack.pop().expect("弹出栈元素失败");
                 self.on_stack.remove(&w);
                 comp.push(w.clone());
                 if w == v {
@@ -1324,7 +1324,7 @@ mod tests {
         g.insert(3, vec![4, 5]);
         g.insert(4, vec![]);
         g.insert(5, vec![4]);
-        let path = bfs_shortest_path_sync(&g, &1, &4).unwrap();
+        let path = bfs_shortest_path_sync(&g, &1, &4).expect("BFS最短路径失败");
         assert!(path == vec![1, 2, 4] || path == vec![1, 3, 4]);
     }
 
@@ -1337,8 +1337,8 @@ mod tests {
         g.insert("D", vec![]);
 
         let (dist, prev) = dijkstra_sync(&g, &"A");
-        assert_eq!(dist.get("D").copied().unwrap().round() as i32, 4); // A->B->C->D = 4
-        assert_eq!(prev.get("D").copied().unwrap(), "C");
+        assert_eq!(dist.get("D").copied().expect("获取D节点距离失败").round() as i32, 4); // A->B->C->D = 4
+        assert_eq!(prev.get("D").copied().expect("获取D节点前驱失败"), "C");
     }
 
     #[test]
@@ -1360,7 +1360,7 @@ mod tests {
         dag.insert("B", vec!["D"]);
         dag.insert("C", vec!["D"]);
         dag.insert("D", vec![]);
-        let order = topo_sort_sync(&dag).unwrap();
+        let order = topo_sort_sync(&dag).expect("拓扑排序失败");
         let pos: HashMap<_, _> = order.iter().enumerate().map(|(i, k)| (*k, i)).collect();
         assert!(
             pos["A"] < pos["B"]
@@ -1476,7 +1476,7 @@ mod tests {
         let edges = vec![(0usize, 1usize, 1.0), (1, 2, 2.0), (0, 2, 10.0)];
         let (d, next) = floyd_warshall_with_path_sync(3, &edges);
         assert!((d[0][2] - 3.0).abs() < 1e-9);
-        let p = floyd_reconstruct_path(0, 2, &next).unwrap();
+        let p = floyd_reconstruct_path(0, 2, &next).expect("Floyd路径重建失败");
         assert_eq!(p, vec![0, 1, 2]);
     }
 
@@ -1510,7 +1510,7 @@ mod tests {
         tree.insert(3, vec![1]);
         tree.insert(4, vec![1]);
 
-        let centroid = tree_centroid_sync(&tree, &0).unwrap();
+        let centroid = tree_centroid_sync(&tree, &0).expect("树重心计算失败");
         assert_eq!(centroid, Some(1)); // 节点1是重心
     }
 
@@ -1537,7 +1537,7 @@ mod tests {
         tree.insert(3, vec![1]);
         tree.insert(4, vec![1]);
 
-        let max_set = tree_max_independent_set_sync(&tree, &0).unwrap();
+        let max_set = tree_max_independent_set_sync(&tree, &0).expect("树最大独立集计算失败");
         assert!(max_set >= 2); // 至少可以选择2个节点
     }
 }

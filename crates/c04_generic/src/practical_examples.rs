@@ -260,7 +260,7 @@ pub mod data_structures {
 
     impl<T> Stack<T> {
         /// 创建新的堆栈
-        pub fn new() -> Self {
+        pub const fn new() -> Self {
             Self { items: Vec::new() }
         }
 
@@ -614,12 +614,12 @@ pub mod concurrency {
         where
             T: Clone,
         {
-            self.value.lock().unwrap().clone()
+            self.value.lock().expect("ThreadSafeCounter 锁被 poisoned").clone()
         }
 
         /// 设置值
         pub fn set(&self, new_value: T) {
-            *self.value.lock().unwrap() = new_value;
+            *self.value.lock().expect("ThreadSafeCounter 锁被 poisoned") = new_value;
         }
 
         /// 增加计数（仅适用于数值类型）
@@ -627,7 +627,7 @@ pub mod concurrency {
         where
             T: Add<T, Output = T> + Clone + From<i32>,
         {
-            let mut value = self.value.lock().unwrap();
+            let mut value = self.value.lock().expect("ThreadSafeCounter 锁被 poisoned");
             *value = value.clone() + T::from(1);
             value.clone()
         }
@@ -657,7 +657,7 @@ pub mod concurrency {
         R: Send + 'static,
         F: Fn() -> R + Send + 'static + Clone,
     {
-        while let Ok(_task) = receiver.lock().unwrap().recv() {
+        while let Ok(_task) = receiver.lock().expect("TaskReceiver 锁被 poisoned").recv() {
             let _ = worker_fn();
         }
     }
@@ -717,7 +717,7 @@ pub mod concurrency {
         where
             F: FnOnce(&T) -> R,
         {
-            let data = self.data.read().unwrap();
+            let data = self.data.read().expect("读锁获取不应失败");
             reader(&data)
         }
 
@@ -726,7 +726,7 @@ pub mod concurrency {
         where
             F: FnOnce(&mut T) -> R,
         {
-            let mut data = self.data.write().unwrap();
+            let mut data = self.data.write().expect("写锁获取不应失败");
             writer(&mut data)
         }
     }
@@ -848,7 +848,7 @@ pub mod error_handling {
             let items = vec![1, 2, 3, 4, 5];
             let result = find_item(&items, &3);
             assert!(result.is_ok());
-            assert_eq!(*result.unwrap(), 3);
+            assert_eq!(*result.expect("结果应存在"), 3);
 
             let result = find_item(&items, &6);
             assert!(result.is_err());
@@ -867,7 +867,7 @@ pub mod error_handling {
         fn test_process_data() {
             let result = process_data(42, |x| Ok(x * 2));
             assert!(result.is_ok());
-            assert_eq!(result.unwrap(), 84);
+            assert_eq!(result.expect("结果应存在"), 84);
 
             let result = process_data(42, |_| Err::<i32, String>("处理失败".to_string()));
             assert!(result.is_err());

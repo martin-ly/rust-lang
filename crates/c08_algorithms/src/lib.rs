@@ -209,7 +209,7 @@ mod tests {
 
         let avg_time = benchmark.get_average_time("测试算法");
         assert!(avg_time.is_some());
-        assert!(avg_time.unwrap() >= std::time::Duration::from_micros(100));
+        assert!(avg_time.expect("获取平均时间失败") >= std::time::Duration::from_micros(100));
     }
 
     #[test]

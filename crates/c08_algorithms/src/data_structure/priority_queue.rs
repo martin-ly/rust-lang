@@ -91,7 +91,7 @@ mod tests {
     fn test_max_heap_basic() {
         let mut pq = PriorityQueue::new(HeapKind::Max);
         pq.extend(vec![3, 1, 4, 1, 5]);
-        assert_eq!(pq.peek().copied().unwrap(), 5);
+        assert_eq!(pq.peek().copied().expect("查看最大堆元素失败"), 5);
         assert_eq!(pq.pop(), Some(5));
         assert_eq!(pq.pop(), Some(4));
     }
@@ -100,18 +100,18 @@ mod tests {
     fn test_min_heap_basic() {
         let mut pq = PriorityQueue::new(HeapKind::Min);
         pq.extend(vec![3, 1, 4, 1, 5]);
-        assert_eq!(pq.peek().copied().unwrap(), 1);
+        assert_eq!(pq.peek().copied().expect("查看最小堆元素失败"), 1);
         assert_eq!(pq.pop(), Some(1));
         assert_eq!(pq.pop(), Some(1));
     }
 
     #[test]
     fn test_build_heap_async() {
-        let rt = tokio::runtime::Runtime::new().unwrap();
+        let rt = tokio::runtime::Runtime::new().expect("创建Tokio运行时失败");
         let pq = rt.block_on(async {
             build_heap_async(HeapKind::Max, vec![1, 2, 3])
                 .await
-                .unwrap()
+                .expect("异步构建堆失败")
         });
         assert_eq!(pq.len(), 3);
     }

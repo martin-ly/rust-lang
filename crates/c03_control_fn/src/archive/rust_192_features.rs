@@ -880,17 +880,17 @@ pub mod parallel_control_flow {
                 thread::spawn(move || {
                     for value in chunk {
                         let branch_result = control_flow_branch(value);
-                        result.lock().unwrap().add_result(branch_result);
+                        result.lock().expect("结果锁定失败").add_result(branch_result);
                     }
                 })
             })
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("等待并行控制流线程完成失败");
         }
 
-        Arc::try_unwrap(result).unwrap().into_inner().unwrap()
+        Arc::try_unwrap(result).expect("获取Arc内部值失败").into_inner().expect("获取Mutex内部值失败")
     }
 }
 
@@ -1213,7 +1213,7 @@ mod tests {
     #[test]
     fn test_control_flow_combinator() {
         let values = vec![10, 20, 30, 40, 50];
-        let result = ControlFlowCombinator::chain_conditions(&values).unwrap();
+        let result = ControlFlowCombinator::chain_conditions(&values).expect("链式条件执行失败");
         assert_eq!(result, vec![20, 40, 60, 80, 100]);
 
         let invalid_values = vec![10, -5, 30];
@@ -1284,7 +1284,7 @@ mod tests {
 
         // 测试无效的状态转换
         let mut machine2 = ControlFlowStateMachine::new();
-        machine2.transition_to(ControlFlowState::Processing).unwrap();
+        machine2.transition_to(ControlFlowState::Processing).expect("状态转换到Processing失败");
         assert!(machine2.transition_to(ControlFlowState::Completed).is_err());
 
         // 测试工作流执行
@@ -1318,7 +1318,7 @@ mod tests {
             control_flow_branch(x)
         });
         assert!(mapped.is_ok());
-        assert_eq!(mapped.unwrap().len(), 3);
+        assert_eq!(mapped.expect("映射执行失败").len(), 3);
 
         // 测试折叠
         let numbers = vec![1, 2, 3, 4, 5];
@@ -1327,7 +1327,7 @@ mod tests {
             0,
             |acc, &x| Ok(acc + x),
         );
-        assert_eq!(sum.unwrap(), 15);
+        assert_eq!(sum.expect("折叠计算失败"), 15);
 
         // 测试查找
         let numbers = vec![1, 2, 3, 4, 5];
@@ -1381,7 +1381,7 @@ mod tests {
         // 测试异步分支
         let result = async_control_flow_branch(42).await;
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), 84);
+        assert_eq!(result.expect("异步控制流执行失败"), 84);
 
         // 测试异步循环
         let count = async_control_flow_loop(5).await;
@@ -1395,7 +1395,7 @@ mod tests {
         let values = vec![10, 20, 30];
         let results = async_control_flow_combinator(&values).await;
         assert!(results.is_ok());
-        assert_eq!(results.unwrap().len(), 3);
+        assert_eq!(results.expect("异步组合器执行失败").len(), 3);
     }
 
     #[test]
@@ -1432,7 +1432,7 @@ mod tests {
             3,
         );
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), 42);
+        assert_eq!(result.expect("重试机制执行失败"), 42);
 
         // 测试缓存
         let mut cache = std::collections::HashMap::new();

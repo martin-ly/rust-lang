@@ -78,7 +78,7 @@ fn thread_pool_demo() {
         pool.execute(move || {
             println!("    任务 {} 在工作线程中执行", i);
             thread::sleep(std::time::Duration::from_millis(100));
-            tx.send(i * i).unwrap();
+            tx.send(i * i).expect("发送消息不应失败");
         });
     }
 
@@ -107,7 +107,7 @@ fn thread_pool_demo() {
         pool.execute(move || {
             println!("    配置任务 {} 在工作线程中执行", i);
             thread::sleep(std::time::Duration::from_millis(50));
-            tx.send(i * 10).unwrap();
+            tx.send(i * 10).expect("发送消息不应失败");
         });
     }
 

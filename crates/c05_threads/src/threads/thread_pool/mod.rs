@@ -42,7 +42,7 @@ impl SimpleThreadPool {
         F: FnOnce() + Send + 'static,
     {
         if let Some(sender) = self.sender.as_ref() {
-            sender.send(Box::new(f)).unwrap();
+            sender.send(Box::new(f)).expect("发送任务到线程池不应失败");
         }
     }
 
@@ -96,7 +96,7 @@ impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<Receiver<Box<dyn FnOnce() + Send + 'static>>>>) -> Self {
         let thread = thread::spawn(move || {
             loop {
-                let message = receiver.lock().unwrap().recv();
+                let message = receiver.lock().expect("ThreadPool receiver 锁被 poisoned").recv();
 
                 match message {
                     Ok(job) => {
@@ -274,7 +274,7 @@ impl ConfigurableWorker {
     ) -> Self {
         let thread = thread::spawn(move || {
             loop {
-                let message = receiver.lock().unwrap().recv_timeout(keep_alive_time);
+                let message = receiver.lock().expect("获取接收器锁不应失败").recv_timeout(keep_alive_time);
 
                 match message {
                     Ok(job) => {
@@ -354,10 +354,10 @@ mod tests {
         let (tx, rx) = channel();
 
         pool.execute(move || {
-            tx.send(42).unwrap();
+            tx.send(42).expect("发送值不应失败");
         });
 
-        let result = rx.recv().unwrap();
+        let result = rx.recv().expect("接收值不应失败");
         assert_eq!(result, 42);
     }
 
@@ -388,13 +388,13 @@ mod tests {
     fn test_simple_pool_execute_with_result() {
         let pool = SimpleThreadPool::new(2);
         let rx = pool.execute_with_result(|| 7 * 6);
-        assert_eq!(rx.recv().unwrap(), 42);
+        assert_eq!(rx.recv().expect("接收值不应失败"), 42);
     }
 
     #[test]
     fn test_configurable_pool_execute_with_result() {
         let pool = ConfigurableThreadPool::new(ThreadPoolConfig::default());
         let rx = pool.execute_with_result(|| "ok".to_string());
-        assert_eq!(rx.recv().unwrap(), "ok");
+        assert_eq!(rx.recv().expect("接收消息不应失败"), "ok");
     }
 }

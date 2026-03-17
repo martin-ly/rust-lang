@@ -49,7 +49,7 @@ impl BorrowChecker {
 
         // 更新统计信息
         {
-            let mut stats = self.statistics.lock().unwrap();
+            let mut stats = self.statistics.lock().expect("统计信息锁定失败");
             stats.total_checks += 1;
             stats.check_start_time = start_time;
         }
@@ -77,7 +77,7 @@ impl BorrowChecker {
 
         // 更新统计信息
         {
-            let mut stats = self.statistics.lock().unwrap();
+            let mut stats = self.statistics.lock().expect("统计信息锁定失败");
             stats.last_check_duration = start_time.elapsed();
             stats.total_check_time += stats.last_check_duration;
         }
@@ -154,7 +154,7 @@ impl BorrowChecker {
     /// 检查生命周期约束 / Check Lifetime Constraints
     fn check_lifetime_constraints(&self, borrows: &[Borrow]) -> Result<Vec<LifetimeError>, BorrowError> {
         let mut errors = Vec::new();
-        let analyzer = self.lifetime_analyzer.lock().unwrap();
+        let analyzer = self.lifetime_analyzer.lock().expect("生命周期分析器锁定失败");
 
         for borrow in borrows {
             if let Some(lifetime) = &borrow.lifetime {
@@ -173,24 +173,24 @@ impl BorrowChecker {
 
     /// 优化借用模式 / Optimize Borrow Patterns
     pub fn optimize_borrow_patterns(&self, borrows: &mut Vec<Borrow>) -> Result<OptimizationResult, BorrowError> {
-        let optimizer = self.pattern_optimizer.lock().unwrap();
+        let optimizer = self.pattern_optimizer.lock().expect("模式优化器锁定失败");
         optimizer.optimize(borrows)
     }
 
     /// 检测数据竞争 / Detect Data Races
     pub fn detect_data_races(&self, accesses: &[MemoryAccess]) -> Result<Vec<DataRaceReport>, BorrowError> {
-        let detector = self.data_race_detector.lock().unwrap();
+        let detector = self.data_race_detector.lock().expect("数据竞争检测器锁定失败");
         detector.detect_races(accesses)
     }
 
     /// 获取检查统计信息 / Get Check Statistics
     pub fn get_statistics(&self) -> BorrowCheckStatistics {
-        self.statistics.lock().unwrap().clone()
+        self.statistics.lock().expect("统计信息锁定失败").clone()
     }
 
     /// 重置统计信息 / Reset Statistics
     pub fn reset_statistics(&self) {
-        let mut stats = self.statistics.lock().unwrap();
+        let mut stats = self.statistics.lock().expect("统计信息锁定失败");
         *stats = BorrowCheckStatistics::new();
     }
 }
@@ -261,11 +261,10 @@ impl Borrow {
     }
 
     /// 检查借用是否过期 / Check if Borrow is Expired
-    pub fn is_expired(&self) -> bool {
-        if let Some(duration) = self.duration {
-            duration > Duration::from_secs(3600) // 1小时过期
-        } else {
-            false
+    pub const fn is_expired(&self) -> bool {
+        match self.duration {
+            Some(duration) => duration.as_secs() > 3600, // 1小时过期
+            None => false,
         }
     }
 }

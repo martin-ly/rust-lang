@@ -109,7 +109,7 @@ impl ProcessPool {
 
     /// 生成新的进程ID
     fn generate_process_id(&self) -> u32 {
-        let mut next_id = self.next_process_id.lock().unwrap();
+        let mut next_id = self.next_process_id.lock().expect("进程ID生成器锁被污染");
         *next_id += 1;
         *next_id
     }
@@ -141,8 +141,8 @@ impl ProcessPool {
         };
 
         // 添加到进程池
-        self.processes.lock().unwrap().insert(pid, pooled_process);
-        self.available_processes.lock().unwrap().push_back(pid);
+        self.processes.lock().expect("进程池锁被污染").insert(pid, pooled_process);
+        self.available_processes.lock().expect("可用进程队列锁被污染").push_back(pid);
 
         Ok(pid)
     }
@@ -152,17 +152,17 @@ impl ProcessPool {
         // 检查是否需要自动扩展
         self.check_auto_scaling()?;
 
-        let mut available = self.available_processes.lock().unwrap();
+        let mut available = self.available_processes.lock().expect("可用进程队列锁被污染");
 
         if let Some(pid) = available.pop_front() {
             // 标记进程为忙碌状态
             self.busy_processes
                 .lock()
-                .unwrap()
+                .expect("忙碌进程锁被污染")
                 .insert(pid, SystemTime::now());
 
             // 更新进程使用统计
-            if let Some(process) = self.processes.lock().unwrap().get_mut(&pid) {
+            if let Some(process) = self.processes.lock().expect("进程池锁被污染").get_mut(&pid) {
                 process.current_requests += 1;
                 process.total_requests += 1;
                 process.last_used = SystemTime::now();
@@ -175,7 +175,7 @@ impl ProcessPool {
                 let new_pid = self.spawn_process()?;
                 self.busy_processes
                     .lock()
-                    .unwrap()
+                    .expect("忙碌进程锁被污染")
                     .insert(new_pid, SystemTime::now());
                 Ok(new_pid)
             } else {
@@ -189,17 +189,17 @@ impl ProcessPool {
     /// 释放进程回池
     pub fn release_process(&self, pid: u32) -> ProcessResult<()> {
         // 从忙碌状态移除
-        self.busy_processes.lock().unwrap().remove(&pid);
+        self.busy_processes.lock().expect("忙碌进程锁被污染").remove(&pid);
 
         // 更新进程状态
-        if let Some(process) = self.processes.lock().unwrap().get_mut(&pid) {
+        if let Some(process) = self.processes.lock().expect("进程池锁被污染").get_mut(&pid) {
             process.current_requests = process.current_requests.saturating_sub(1);
         }
 
         // 检查进程是否仍然健康
         if self.is_process_healthy(pid)? {
             // 重新加入可用队列
-            self.available_processes.lock().unwrap().push_back(pid);
+            self.available_processes.lock().expect("可用进程队列锁被污染").push_back(pid);
         } else {
             // 标记为不健康，稍后清理
             self.mark_process_unhealthy(pid)?;
@@ -211,7 +211,7 @@ impl ProcessPool {
     /// 检查进程健康状态
     fn is_process_healthy(&self, pid: u32) -> ProcessResult<bool> {
         // 简化实现，实际应该检查进程是否响应
-        let processes = self.processes.lock().unwrap();
+        let processes = self.processes.lock().expect("进程池锁被污染");
         if let Some(process) = processes.get(&pid) {
             Ok(process.health_status == HealthStatus::Healthy)
         } else {
@@ -221,7 +221,7 @@ impl ProcessPool {
 
     /// 标记进程为不健康
     fn mark_process_unhealthy(&self, pid: u32) -> ProcessResult<()> {
-        if let Some(process) = self.processes.lock().unwrap().get_mut(&pid) {
+        if let Some(process) = self.processes.lock().expect("进程池锁被污染").get_mut(&pid) {
             process.health_status = HealthStatus::Unhealthy;
         }
         Ok(())
@@ -229,7 +229,7 @@ impl ProcessPool {
 
     /// 检查是否可以生成更多进程
     fn can_spawn_more_processes(&self) -> bool {
-        let current_count = self.processes.lock().unwrap().len();
+        let current_count = self.processes.lock().expect("进程池锁被污染").len();
         current_count < self.config.max_processes
     }
 
@@ -239,7 +239,7 @@ impl ProcessPool {
             return Ok(());
         }
 
-        let mut last_check = self.last_scale_check.lock().unwrap();
+        let mut last_check = self.last_scale_check.lock().expect("扩展检查时间锁被污染");
         let now = SystemTime::now();
 
         if now.duration_since(*last_check).unwrap_or(Duration::ZERO)
@@ -270,7 +270,7 @@ impl ProcessPool {
 
     /// 扩展进程池
     fn scale_up(&self) -> ProcessResult<()> {
-        let current_count = self.processes.lock().unwrap().len();
+        let current_count = self.processes.lock().expect("进程池锁被污染").len();
         if current_count < self.config.max_processes {
             self.spawn_process()?;
         }
@@ -279,7 +279,7 @@ impl ProcessPool {
 
     /// 收缩进程池
     fn scale_down(&self) -> ProcessResult<()> {
-        let current_count = self.processes.lock().unwrap().len();
+        let current_count = self.processes.lock().expect("进程池锁被污染").len();
         if current_count > self.config.min_processes {
             // 移除最不活跃的进程
             self.remove_least_active_process()?;
@@ -289,8 +289,8 @@ impl ProcessPool {
 
     /// 移除最不活跃的进程
     fn remove_least_active_process(&self) -> ProcessResult<()> {
-        let mut processes = self.processes.lock().unwrap();
-        let mut available = self.available_processes.lock().unwrap();
+        let mut processes = self.processes.lock().expect("进程池锁被污染");
+        let mut available = self.available_processes.lock().expect("可用进程队列锁被污染");
 
         if let Some((&pid, _)) = processes
             .iter()
@@ -306,7 +306,7 @@ impl ProcessPool {
 
     /// 获取平均CPU使用率
     fn get_average_cpu_usage(&self) -> f64 {
-        let processes = self.processes.lock().unwrap();
+        let processes = self.processes.lock().expect("进程池锁被污染");
         if processes.is_empty() {
             return 0.0;
         }
@@ -317,7 +317,7 @@ impl ProcessPool {
 
     /// 获取平均内存使用率
     fn get_average_memory_usage(&self) -> f64 {
-        let processes = self.processes.lock().unwrap();
+        let processes = self.processes.lock().expect("进程池锁被污染");
         if processes.is_empty() {
             return 0.0;
         }
@@ -328,9 +328,9 @@ impl ProcessPool {
 
     /// 获取进程池统计信息
     pub fn get_stats(&self) -> ProcessPoolStats {
-        let processes = self.processes.lock().unwrap();
-        let available = self.available_processes.lock().unwrap();
-        let busy = self.busy_processes.lock().unwrap();
+        let processes = self.processes.lock().expect("进程池锁被污染");
+        let available = self.available_processes.lock().expect("可用进程队列锁被污染");
+        let busy = self.busy_processes.lock().expect("忙碌进程锁被污染");
 
         ProcessPoolStats {
             total_processes: processes.len(),
@@ -347,9 +347,9 @@ impl ProcessPool {
     /// 清理不健康的进程
     pub fn cleanup_unhealthy_processes(&self) -> ProcessResult<usize> {
         let mut removed_count = 0;
-        let mut processes = self.processes.lock().unwrap();
-        let mut available = self.available_processes.lock().unwrap();
-        let mut busy = self.busy_processes.lock().unwrap();
+        let mut processes = self.processes.lock().expect("进程池锁被污染");
+        let mut available = self.available_processes.lock().expect("可用进程队列锁被污染");
+        let mut busy = self.busy_processes.lock().expect("忙碌进程锁被污染");
 
         let unhealthy_pids: Vec<u32> = processes
             .iter()

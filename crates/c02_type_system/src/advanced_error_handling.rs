@@ -184,7 +184,7 @@ impl ErrorContext {
         Self {
             timestamp: SystemTime::now()
                 .duration_since(UNIX_EPOCH)
-                .unwrap()
+                .expect("系统时间获取失败")
                 .as_secs(),
             request_id: None,
             user_id: None,
@@ -382,7 +382,7 @@ impl ErrorRecovery {
             }
         }
 
-        Err(last_error.unwrap())
+        Err(last_error.expect("重试操作应至少失败一次"))
     }
 }
 
@@ -498,7 +498,7 @@ impl ErrorMonitor {
         let entry = ErrorLogEntry {
             timestamp: SystemTime::now()
                 .duration_since(UNIX_EPOCH)
-                .unwrap()
+                .expect("系统时间获取失败")
                 .as_secs(),
             level,
             error: error.clone(),
@@ -508,7 +508,7 @@ impl ErrorMonitor {
 
         // 记录日志
         {
-            let mut logs = self.logs.lock().unwrap();
+            let mut logs = self.logs.lock().expect("日志锁定失败");
             logs.push(entry.clone());
 
             // 保持最近1000条日志
@@ -519,7 +519,7 @@ impl ErrorMonitor {
 
         // 更新指标
         {
-            let mut metrics = self.metrics.lock().unwrap();
+            let mut metrics = self.metrics.lock().expect("指标锁定失败");
             metrics.total_errors += 1;
 
             let error_type = self.get_error_type(&error);
@@ -538,7 +538,7 @@ impl ErrorMonitor {
     }
 
     pub fn get_metrics(&self) -> ErrorMetrics {
-        let metrics = self.metrics.lock().unwrap();
+        let metrics = self.metrics.lock().expect("指标锁定失败");
         ErrorMetrics {
             total_errors: metrics.total_errors,
             errors_by_type: metrics.errors_by_type.clone(),
@@ -549,7 +549,7 @@ impl ErrorMonitor {
     }
 
     pub fn get_recent_errors(&self, limit: usize) -> Vec<ErrorLogEntry> {
-        let logs = self.logs.lock().unwrap();
+        let logs = self.logs.lock().expect("日志锁定失败");
         logs.iter().rev().take(limit).cloned().collect()
     }
 

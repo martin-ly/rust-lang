@@ -57,18 +57,18 @@ fn refcell_threads() {
     for _ in 0..10 {
         let data_clone = Arc::clone(&data);
         let handle = thread::spawn(move || {
-            let data = data_clone.lock().unwrap();
+            let data = data_clone.lock().expect("Mutex锁定失败");
             data.increment();
         });
         handles.push(handle);
     }
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程 joining 失败");
     }
 
     // 读取最终值
-    let data01 = data.lock().unwrap();
+    let data01 = data.lock().expect("Mutex锁定失败");
     let final_value = data01.value.borrow();
     // 输出: Final Value: 10
     println!("Final Value: {}", final_value);

@@ -8,6 +8,12 @@ rust-version = "1.94"
 
 # 网络库CPU指令集优化配置在根Cargo.toml中统一管理
 
+
+authors = ["Rust Learning Community"]
+description = "Rust network programming learning module"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rust-lang/rust-lang-learning"
+
 [dependencies]
 # 异步运行时 - 使用工作区统一版本
 # async-std 已移除，使用 tokio 替代 (async-std 已弃用)

@@ -159,7 +159,7 @@ pub mod factory_pattern {
         pub fn create_and_add(&mut self, name: String, price: f64) -> &T {
             let product = self.factory.create_product(name, price);
             self.products.push(product);
-            self.products.last().unwrap()
+            self.products.last().expect("产品列表不应为空")
         }
 
         pub fn get_products(&self) -> &[T] {
@@ -903,14 +903,14 @@ pub mod singleton_pattern {
             let manager = SingletonManager::new();
 
             // 第一次获取实例
-            let instance1 = manager.get_instance(|| ConfigManager::new()).unwrap();
+            let instance1 = manager.get_instance(|| ConfigManager::new()).expect("获取实例不应失败");
             assert_eq!(
                 instance1.get("app_name"),
                 Some(&"Rust 泛型示例".to_string())
             );
 
             // 第二次获取实例（应该是同一个）
-            let instance2 = manager.get_instance(|| ConfigManager::new()).unwrap();
+            let instance2 = manager.get_instance(|| ConfigManager::new()).expect("获取实例不应失败");
             assert_eq!(instance1.get("app_name"), instance2.get("app_name"));
 
             // 验证是同一个实例
@@ -1092,24 +1092,24 @@ pub mod command_pattern {
 
             // 执行设置值命令
             let set_cmd = SetValueCommand::new(20);
-            invoker.execute_command(set_cmd, &mut value).unwrap();
+            invoker.execute_command(set_cmd, &mut value).expect("执行命令不应失败");
             assert_eq!(value, 20);
 
             // 执行数学运算命令
             let add_cmd = MathOperationCommand::new(|x| x + 5, |x| x - 5, "加5".to_string());
-            invoker.execute_command(add_cmd, &mut value).unwrap();
+            invoker.execute_command(add_cmd, &mut value).expect("执行命令不应失败");
             assert_eq!(value, 25);
 
             // 撤销操作
-            invoker.undo(&mut value).unwrap();
+            invoker.undo(&mut value).expect("撤销操作不应失败");
             assert_eq!(value, 20);
 
             // 重做操作
-            invoker.redo(&mut value).unwrap();
+            invoker.redo(&mut value).expect("重做操作不应失败");
             assert_eq!(value, 25);
 
             // 再次撤销
-            invoker.undo(&mut value).unwrap();
+            invoker.undo(&mut value).expect("撤销操作不应失败");
             assert_eq!(value, 20);
 
             // 再次撤销
@@ -1166,7 +1166,7 @@ pub fn demonstrate_advanced_patterns() {
     let manager = singleton_pattern::SingletonManager::new();
     let instance = manager
         .get_instance(singleton_pattern::ConfigManager::new)
-        .unwrap();
+        .expect("创建命令不应失败");
     println!("配置应用名称: {:?}", instance.get("app_name"));
 
     println!("\n7. 命令模式演示:");
@@ -1174,12 +1174,12 @@ pub fn demonstrate_advanced_patterns() {
     let mut value = 10;
 
     let set_cmd = command_pattern::SetValueCommand::new(20);
-    invoker.execute_command(set_cmd, &mut value).unwrap();
+    invoker.execute_command(set_cmd, &mut value).expect("执行命令不应失败");
     println!("执行设置命令后: {}", value);
 
     let add_cmd =
         command_pattern::MathOperationCommand::new(|x| x + 5, |x| x - 5, "加5".to_string());
-    invoker.execute_command(add_cmd, &mut value).unwrap();
+    invoker.execute_command(add_cmd, &mut value).expect("执行命令不应失败");
     println!("执行加法命令后: {}", value);
 
     invoker.undo(&mut value).unwrap();

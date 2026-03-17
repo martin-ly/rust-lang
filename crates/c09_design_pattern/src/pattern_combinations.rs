@@ -182,14 +182,14 @@ impl CircuitBreaker {
     where
         F: FnOnce() -> Result<T, String>,
     {
-        let state = *self.state.lock().unwrap();
+        let state = *self.state.lock().expect("熔断器状态锁被污染");
 
         if state == CircuitState::Open {
             // 检查是否可以尝试恢复
-            let last_failure = self.last_failure_time.lock().unwrap();
+            let last_failure = self.last_failure_time.lock().expect("熔断器失败时间锁被污染");
             if let Some(time) = *last_failure {
                 if time.elapsed() > self.timeout {
-                    *self.state.lock().unwrap() = CircuitState::HalfOpen;
+                    *self.state.lock().expect("熔断器状态锁被污染") = CircuitState::HalfOpen;
                 } else {
                     return Err("Circuit breaker is open".to_string());
                 }
@@ -214,11 +214,11 @@ impl CircuitBreaker {
     fn on_success(&self) {
         self.successes.fetch_add(1, Ordering::Relaxed);
 
-        let state = *self.state.lock().unwrap();
+        let state = *self.state.lock().expect("熔断器状态锁被污染");
         if state == CircuitState::HalfOpen
             && self.successes.load(Ordering::Relaxed) >= self.success_threshold
         {
-            *self.state.lock().unwrap() = CircuitState::Closed;
+            *self.state.lock().expect("熔断器状态锁被污染") = CircuitState::Closed;
             self.successes.store(0, Ordering::Relaxed);
             self.failures.store(0, Ordering::Relaxed);
         }
@@ -226,15 +226,15 @@ impl CircuitBreaker {
 
     fn on_failure(&self) {
         self.failures.fetch_add(1, Ordering::Relaxed);
-        *self.last_failure_time.lock().unwrap() = Some(Instant::now());
+        *self.last_failure_time.lock().expect("熔断器失败时间锁被污染") = Some(Instant::now());
 
         if self.failures.load(Ordering::Relaxed) >= self.failure_threshold {
-            *self.state.lock().unwrap() = CircuitState::Open;
+            *self.state.lock().expect("熔断器状态锁被污染") = CircuitState::Open;
         }
     }
 
     pub fn get_state(&self) -> CircuitState {
-        *self.state.lock().unwrap()
+        *self.state.lock().expect("熔断器状态锁被污染")
     }
 }
 
@@ -809,9 +809,9 @@ mod tests {
             .method("GET")
             .path("/api/users")
             .build()
-            .unwrap();
+            .expect("构建HTTP请求失败");
 
-        let response = server.handle_request(request).unwrap();
+        let response = server.handle_request(request).expect("处理请求失败");
         assert_eq!(response.status_code, 200);
         assert!(response.body.contains("users"));
 
@@ -840,7 +840,7 @@ mod tests {
         let mut engine = GameEngine::new();
 
         // 处理输入
-        engine.process_input("w").unwrap();
+        engine.process_input("w").expect("处理输入失败");
         assert_eq!(engine.get_context().player_position, 1);
 
         // 更新 AI
@@ -853,10 +853,10 @@ mod tests {
         let mapper = CommandMapper::new();
         let mut context = GameContext::new();
 
-        mapper.execute_command("w", &mut context).unwrap();
+        mapper.execute_command("w", &mut context).expect("执行w命令失败");
         assert_eq!(context.player_position, 1);
 
-        mapper.execute_command("attack", &mut context).unwrap();
+        mapper.execute_command("attack", &mut context).expect("执行attack命令失败");
         assert_eq!(context.enemy_health, 90);
     }
 

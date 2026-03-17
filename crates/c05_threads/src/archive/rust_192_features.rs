@@ -332,7 +332,7 @@ impl ThreadPoolManager {
 
     /// 执行一轮任务轮转（线程安全）
     pub fn rotate(&self) {
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         if queue.len() > 1 {
             queue.rotate(1);
         }
@@ -340,49 +340,49 @@ impl ThreadPoolManager {
 
     /// 添加任务（线程安全）
     pub fn add_task(&self, task: ThreadTask) {
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.push(task);
     }
 
     /// 获取下一个任务（线程安全）
     pub fn next_task(&self) -> Option<ThreadTask> {
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.pop()
     }
 
     /// 获取队列中的任务数量（线程安全）
     pub fn task_count(&self) -> usize {
-        let queue = self.queue.lock().unwrap();
+        let queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.len()
     }
 
     /// 检查队列是否为空（线程安全）
     pub fn is_empty(&self) -> bool {
-        let queue = self.queue.lock().unwrap();
+        let queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.is_empty()
     }
 
     /// 清空队列（线程安全）
     pub fn clear(&self) {
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.clear();
     }
 
     /// 批量添加任务（线程安全）
     pub fn add_tasks_batch(&self, tasks: impl IntoIterator<Item = ThreadTask>) {
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.push_batch(tasks);
     }
 
     /// 按优先级排序任务（线程安全）
     pub fn sort_by_priority(&self) {
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.sort_by_priority();
     }
 
     /// 获取线程池统计信息
     pub fn get_stats(&self) -> ThreadPoolStats {
-        let queue = self.queue.lock().unwrap();
+        let queue = self.queue.lock().expect("获取队列锁不应失败");
         let tasks: Vec<_> = queue.iter().collect();
 
         let total_tasks = tasks.len();
@@ -407,13 +407,13 @@ impl ThreadPoolManager {
 
     /// 获取所有任务（用于调试和监控）
     pub fn get_all_tasks(&self) -> Vec<ThreadTask> {
-        let queue = self.queue.lock().unwrap();
+        let queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.iter().cloned().collect()
     }
 
     /// 移除指定 ID 的任务
     pub fn remove_task(&self, task_id: u64) -> bool {
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         let mut tasks: Vec<ThreadTask> = queue.iter().cloned().collect();
         let original_len = tasks.len();
         tasks.retain(|t| t.id != task_id);
@@ -459,7 +459,7 @@ pub fn calculate_thread_pool_size(total_tasks: usize, tasks_per_thread: NonZeroU
         return 0;
     }
 
-    let total = NonZeroUsize::new(total_tasks).unwrap();
+    let total = NonZeroUsize::new(total_tasks).expect("任务总数应非零");
     // Rust 1.92.0: 使用 div_ceil 计算需要的线程数
     total.div_ceil(tasks_per_thread).get()
 }
@@ -474,7 +474,7 @@ pub fn create_default_resource_allocator() -> ThreadResourceAllocator {
     let num_cpus = num_cpus::get();
     ThreadResourceAllocator::new(
         num_cpus,
-        NonZeroUsize::new(1).unwrap(), // 默认每线程 1 个 CPU
+        NonZeroUsize::new(1).expect("CPU 数应非零"), // 默认每线程 1 个 CPU
     )
 }
 
@@ -487,7 +487,7 @@ pub fn create_default_resource_allocator() -> ThreadResourceAllocator {
 /// ```
 pub fn create_default_scheduling_config() -> ThreadSchedulingConfig {
     ThreadSchedulingConfig::new(
-        NonZeroUsize::new(2).unwrap(), // 最小 2 个线程
+        NonZeroUsize::new(2).expect("线程数应非零"), // 最小 2 个线程
         16,                            // 最大 16 个线程
     )
 }
@@ -574,7 +574,7 @@ impl ThreadResourceAllocator {
             return 0;
         }
 
-        let total = NonZeroUsize::new(self.total_cpus).unwrap();
+        let total = NonZeroUsize::new(self.total_cpus).expect("CPU 总数应非零");
         // Rust 1.92.0: 使用 div_ceil 计算最大线程数
         total.div_ceil(self.cpus_per_thread).get()
     }
@@ -620,7 +620,7 @@ impl ThreadSchedulingConfig {
             return self.min_threads.get();
         }
 
-        let tasks = NonZeroUsize::new(task_count).unwrap();
+        let tasks = NonZeroUsize::new(task_count).expect("任务数应非零");
         let calculated = tasks.div_ceil(self.min_threads).get();
         calculated.min(self.max_threads)
     }
@@ -689,19 +689,19 @@ pub fn demonstrate_rust_192_thread_features() {
 
     // 2. NonZero::div_ceil 演示
     println!("\n2. NonZero::div_ceil 在线程数量计算中的应用:");
-    let tasks_per_thread = NonZeroUsize::new(5).unwrap();
+    let tasks_per_thread = NonZeroUsize::new(5).expect("每线程任务数应非零");
     let total_tasks = 23;
     let pool_size = calculate_thread_pool_size(total_tasks, tasks_per_thread);
     println!("   总任务数: {}", total_tasks);
     println!("   每线程任务数: {}", tasks_per_thread);
     println!("   需要的线程数: {}", pool_size);
 
-    let allocator = ThreadResourceAllocator::new(16, NonZeroUsize::new(2).unwrap());
+    let allocator = ThreadResourceAllocator::new(16, NonZeroUsize::new(2).expect("线程数应非零"));
     println!("   CPU 核心数: 16");
     println!("   每线程 CPU: 2");
     println!("   最大线程数: {}", allocator.max_threads());
 
-    let config = ThreadSchedulingConfig::new(NonZeroUsize::new(2).unwrap(), 10);
+    let config = ThreadSchedulingConfig::new(NonZeroUsize::new(2).expect("最小线程数应非零"), 10);
     println!("   最小线程数: 2");
     println!("   最大线程数: 10");
     println!(
@@ -757,7 +757,7 @@ mod tests {
         });
 
         queue.rotate(1);
-        let first = queue.pop().unwrap();
+        let first = queue.pop().expect("队列不应为空");
         assert_eq!(first.id, 2);
     }
 

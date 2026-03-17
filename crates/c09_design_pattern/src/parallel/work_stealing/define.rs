@@ -18,7 +18,7 @@ impl Worker {
     fn work(&self) {
         loop {
             let task = {
-                let mut queue = self.task_queue.lock().unwrap();
+                let mut queue = self.task_queue.lock().expect("工作窃取队列锁被污染");
                 queue.pop_front()
             };
 
@@ -63,7 +63,7 @@ impl ThreadPool {
     where
         F: FnOnce() + Send + 'static,
     {
-        let mut queue = self.task_queue.lock().unwrap();
+        let mut queue = self.task_queue.lock().expect("工作窃取队列锁被污染");
         queue.push_back(Box::new(task));
     }
 
@@ -79,7 +79,7 @@ impl ThreadPool {
         }
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("工作窃取线程加入失败");
         }
     }
 }

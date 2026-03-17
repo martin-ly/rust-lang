@@ -123,7 +123,7 @@ impl NetClient {
 
     /// 清理过期缓存
     pub fn cleanup_cache(&self) {
-        let mut cache = self.cache.write().unwrap();
+        let mut cache = self.cache.write().expect("net client cache mutex poisoned");
         cache.retain(|_, entry| !entry.is_expired());
     }
 
@@ -395,9 +395,10 @@ impl NetClient {
         );
         libp2p::Swarm::listen_on(
             &mut swarm,
-            "/ip4/0.0.0.0/tcp/0".parse::<Multiaddr>().unwrap(),
+            "/ip4/0.0.0.0/tcp/0".parse::<Multiaddr>()
+                .map_err(|e| NetworkError::Other(format!("invalid multiaddr: {e}")))?,
         )
-        .unwrap();
+        .map_err(|e| NetworkError::Other(format!("failed to listen on swarm: {e}")))?;
 
         let mut addrs = Vec::new();
         let deadline = tokio::time::Instant::now() + std::time::Duration::from_millis(300);

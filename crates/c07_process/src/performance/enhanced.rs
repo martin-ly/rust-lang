@@ -871,7 +871,7 @@ impl PerformanceOptimizer {
                 "OPT_{}",
                 SystemTime::now()
                     .duration_since(SystemTime::UNIX_EPOCH)
-                    .unwrap()
+                    .expect("计算优化记录时间戳失败")
                     .as_nanos()
             ),
             rule_name: rule_name.to_string(),

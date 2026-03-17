@@ -328,9 +328,9 @@ mod tests {
         assert_eq!(array.len(), 0);
         assert_eq!(array.capacity(), 3);
 
-        array.push(1).unwrap();
-        array.push(2).unwrap();
-        array.push(3).unwrap();
+        array.push(1).expect("数组push失败");
+        array.push(2).expect("数组push失败");
+        array.push(3).expect("数组push失败");
 
         assert_eq!(array.len(), 3);
         assert_eq!(array.get(0), Some(&1));
@@ -344,7 +344,7 @@ mod tests {
     fn test_lifetime_optimized() {
         let data = "test_data";
         let lifetime_opt = LifetimeOptimized::new(&data);
-        let result = lifetime_opt.process_with_improved_lifetimes("key", "value").unwrap();
+        let result = lifetime_opt.process_with_improved_lifetimes("key", "value").expect("处理带生命周期优化的数据失败");
         assert_eq!(result, &data);
     }
 
@@ -352,7 +352,7 @@ mod tests {
     fn test_optimized_trait() {
         let data = "test_data";
         let lifetime_opt = LifetimeOptimized::new(&data);
-        let result = lifetime_opt.process("input").unwrap();
+        let result = lifetime_opt.process("input").expect("处理数据失败");
         assert!(result.contains("处理结果"));
     }
 
@@ -360,7 +360,7 @@ mod tests {
     async fn test_error_handling_190() {
         let error_handler = ErrorHandling190::new();
 
-        let success_result = error_handler.process_with_improved_error_handling(42, |x| Ok(x * 2)).await.unwrap();
+        let success_result = error_handler.process_with_improved_error_handling(42, |x| Ok(x * 2)).await.expect("错误处理执行失败");
         assert_eq!(success_result, 84);
 
         let error_result = error_handler.process_with_improved_error_handling(-1, |x| {
@@ -380,7 +380,7 @@ mod tests {
     #[tokio::test]
     async fn test_standard_library_190() {
         let mut stdlib_demo = StandardLibrary190::new();
-        let hash_result = stdlib_demo.process_with_new_stdlib_features("test_key".to_string(), b"test_data".to_vec()).await.unwrap();
+        let hash_result = stdlib_demo.process_with_new_stdlib_features("test_key".to_string(), b"test_data".to_vec()).await.expect("标准库功能处理失败");
         assert!(!hash_result.is_empty());
 
         let (data_count, cache_count) = stdlib_demo.get_cache_stats();

@@ -101,32 +101,31 @@ where
 
     /// 获取值
     pub fn get(&self, key: &K) -> Option<V> {
-        let mut items = self.items.write().unwrap();
-        let mut stats = self.stats.write().unwrap();
+        let mut items = self.items.write().expect("cache items mutex poisoned");
+        let mut stats = self.stats.write().expect("cache stats mutex poisoned");
 
-        if let Some(item) = items.get_mut(key) {
-            // 检查是否过期
-            if self.is_expired(item) {
-                items.remove(key);
-                stats.misses += 1;
-                stats.evictions += 1;
-                return None;
-            }
-
-            // 更新访问统计
-            item.access();
-            stats.hits += 1;
-            Some(item.value.clone())
-        } else {
+        let Some(item) = items.get_mut(key) else {
             stats.misses += 1;
-            None
+            return None;
+        };
+        // 检查是否过期
+        if self.is_expired(item) {
+            items.remove(key);
+            stats.misses += 1;
+            stats.evictions += 1;
+            return None;
         }
+
+        // 更新访问统计
+        item.access();
+        stats.hits += 1;
+        Some(item.value.clone())
     }
 
     /// 插入值
     pub fn insert(&self, key: K, value: V) -> Option<V> {
-        let mut items = self.items.write().unwrap();
-        let mut stats = self.stats.write().unwrap();
+        let mut items = self.items.write().expect("cache items mutex poisoned");
+        let mut stats = self.stats.write().expect("cache stats mutex poisoned");
 
         // 检查是否需要清理空间
         if items.len() >= self.max_size && !items.contains_key(&key) {
@@ -141,27 +140,24 @@ where
 
     /// 移除值
     pub fn remove(&self, key: &K) -> Option<V> {
-        let mut items = self.items.write().unwrap();
-        let mut stats = self.stats.write().unwrap();
+        let mut items = self.items.write().expect("cache items mutex poisoned");
+        let mut stats = self.stats.write().expect("cache stats mutex poisoned");
 
-        if let Some(item) = items.remove(key) {
-            stats.total_items = items.len();
-            Some(item.value)
-        } else {
-            None
-        }
+        let item = items.remove(key)?;
+        stats.total_items = items.len();
+        Some(item.value)
     }
 
     /// 检查键是否存在
     pub fn contains_key(&self, key: &K) -> bool {
-        let items = self.items.read().unwrap();
+        let items = self.items.read().expect("cache items mutex poisoned");
         items.contains_key(key)
     }
 
     /// 清空缓存
     pub fn clear(&self) {
-        let mut items = self.items.write().unwrap();
-        let mut stats = self.stats.write().unwrap();
+        let mut items = self.items.write().expect("cache items mutex poisoned");
+        let mut stats = self.stats.write().expect("cache stats mutex poisoned");
 
         items.clear();
         stats.total_items = 0;
@@ -169,7 +165,7 @@ where
 
     /// 获取缓存大小
     pub fn len(&self) -> usize {
-        let items = self.items.read().unwrap();
+        let items = self.items.read().expect("cache items mutex poisoned");
         items.len()
     }
 
@@ -180,8 +176,8 @@ where
 
     /// 获取统计信息
     pub fn get_stats(&self) -> CacheStats {
-        let items = self.items.read().unwrap();
-        let mut stats = self.stats.read().unwrap().clone();
+        let items = self.items.read().expect("cache items mutex poisoned");
+        let mut stats = self.stats.read().expect("cache stats mutex poisoned").clone();
 
         // 更新统计信息
         stats.total_items = items.len();
@@ -209,8 +205,8 @@ where
 
     /// 清理过期项
     pub async fn cleanup_expired(&self) -> NetworkResult<()> {
-        let mut items = self.items.write().unwrap();
-        let mut stats = self.stats.write().unwrap();
+        let mut items = self.items.write().expect("cache items mutex poisoned");
+        let mut stats = self.stats.write().expect("cache stats mutex poisoned");
 
         let mut to_remove = Vec::new();
         for (key, item) in items.iter() {
@@ -351,14 +347,14 @@ impl CacheManager {
         V: Clone + Send + Sync + 'static,
     {
         let cache = Arc::new(Cache::new(max_size));
-        let mut caches = self.caches.write().unwrap();
+        let mut caches = self.caches.write().expect("cache manager mutex poisoned");
         caches.insert(name, cache.clone() as Arc<dyn CacheTrait + Send + Sync>);
         cache
     }
 
     /// 获取所有缓存的统计信息
     pub fn get_all_stats(&self) -> HashMap<String, CacheStats> {
-        let caches = self.caches.read().unwrap();
+        let caches = self.caches.read().expect("cache manager mutex poisoned");
         caches
             .iter()
             .map(|(name, cache)| (name.clone(), cache.get_stats()))
@@ -367,7 +363,7 @@ impl CacheManager {
 
     /// 清理所有缓存
     pub async fn cleanup_all(&self) -> NetworkResult<()> {
-        let caches = self.caches.read().unwrap();
+        let caches = self.caches.read().expect("cache manager mutex poisoned");
         for cache in caches.values() {
             cache.cleanup()?;
         }

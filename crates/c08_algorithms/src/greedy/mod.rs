@@ -93,7 +93,7 @@ pub fn fractional_knapsack_sync(mut items: Vec<Item>, capacity: f64) -> f64 {
     items.sort_by(|a, b| {
         (b.value / b.weight)
             .partial_cmp(&(a.value / a.weight))
-            .unwrap()
+            .expect("物品价值密度比较失败")
     });
     let mut cap = capacity;
     let mut total = 0.0;
@@ -112,7 +112,7 @@ pub fn fractional_knapsack_parallel(mut items: Vec<Item>, capacity: f64) -> f64 
     items.par_sort_unstable_by(|a, b| {
         (b.value / b.weight)
             .partial_cmp(&(a.value / a.weight))
-            .unwrap()
+            .expect("物品价值密度比较失败")
     });
     fractional_knapsack_sync(items, capacity)
 }
@@ -165,8 +165,8 @@ fn build_huffman_tree(freqs: &HashMap<u8, usize>) -> Option<Box<HuffNode>> {
         return None;
     }
     while heap.len() > 1 {
-        let a = heap.pop().unwrap();
-        let b = heap.pop().unwrap();
+        let a = heap.pop().expect("弹出堆元素失败（a）");
+        let b = heap.pop().expect("弹出堆元素失败（b）");
         heap.push(HuffNode {
             freq: a.freq + b.freq,
             ch: None,
@@ -351,8 +351,8 @@ mod tests {
         let (codes, tree) = huffman_build_codes(s);
         assert!(!codes.is_empty());
         let bits = huffman_encode(s, &codes);
-        let decoded = huffman_decode(&bits, tree.as_ref().unwrap());
-        assert_eq!(String::from_utf8(decoded).unwrap(), s);
+        let decoded = huffman_decode(&bits, tree.as_ref().expect("霍夫曼树为空"));
+        assert_eq!(String::from_utf8(decoded).expect("解码结果不是有效UTF-8"), s);
     }
 
     #[test]

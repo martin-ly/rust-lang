@@ -38,7 +38,7 @@ impl ProcessMetricsAnalyzer {
     {
         // Rust 1.94.0: data.array_windows::<N>()
         // 返回固定大小的数组引用 [&T; N]
-        data.windows(N)
+        data.array_windows::<N>()
             .map(|window| {
                 // 将窗口转换为数组并计算平均
                 let sum: f64 = window.iter().sum();
@@ -54,12 +54,12 @@ impl ProcessMetricsAnalyzer {
         let mut anomalies = Vec::new();
 
         // Rust 1.94.0: for (i, [prev, curr, next]) in data.array_windows::<3>().enumerate()
-        for (i, window) in data.windows(3).enumerate() {
-            let avg = (window[0] + window[2]) / 2.0;
-            let deviation = (window[1] - avg).abs();
+        for (i, [prev, curr, next]) in data.array_windows::<3>().enumerate() {
+            let avg = (prev + next) / 2.0;
+            let deviation = (curr - avg).abs();
 
             if deviation > threshold {
-                anomalies.push((i + 1, window[1]));
+                anomalies.push((i + 1, *curr));
             }
         }
 
@@ -71,10 +71,10 @@ impl ProcessMetricsAnalyzer {
     /// Rust 1.94.0: array_windows::<2>() 返回 [&f64; 2]
     pub fn calculate_change_rates(data: &[f64]) -> Vec<f64> {
         // Rust 1.94.0: for [prev, curr] in data.array_windows::<2>()
-        data.windows(2)
-            .map(|window| {
-                if window[0] != 0.0 {
-                    (window[1] - window[0]) / window[0]
+        data.array_windows::<2>()
+            .map(|[prev, curr]| {
+                if *prev != 0.0 {
+                    (curr - prev) / prev
                 } else {
                     0.0
                 }
@@ -89,12 +89,12 @@ impl ProcessMetricsAnalyzer {
         let mut reversals = Vec::new();
 
         // Rust 1.94.0: for (i, [a, b, c, d, e]) in data.array_windows::<5>().enumerate()
-        for (i, window) in data.windows(5).enumerate() {
+        for (i, [a, b, c, d, _e]) in data.array_windows::<5>().enumerate() {
             // 检测先上升后下降或先下降后上升的模式
-            let first_trend = window[1] > window[0];
-            let second_trend = window[3] > window[2];
+            let first_trend = b > a;
+            let second_trend = d > c;
 
-            if first_trend != second_trend && (window[2] - window[1]).abs() > 0.1 {
+            if first_trend != second_trend && (c - b).abs() > 0.1 {
                 reversals.push(i + 2); // 转折点的索引
             }
         }
@@ -107,8 +107,8 @@ impl ProcessMetricsAnalyzer {
     /// Rust 1.94.0: array_windows::<3>() 配合权重
     pub fn weighted_moving_average(data: &[f64]) -> Vec<f64> {
         // 权重: [0.25, 0.5, 0.25]
-        data.windows(3)
-            .map(|window| 0.25 * window[0] + 0.5 * window[1] + 0.25 * window[2])
+        data.array_windows::<3>()
+            .map(|[a, b, c]| 0.25 * a + 0.5 * b + 0.25 * c)
             .collect()
     }
 }
@@ -143,10 +143,10 @@ impl LogAnalyzer {
         let mut patterns = Vec::new();
 
         // 查找连续 3 个错误或警告
-        for (i, window) in entries.windows(3).enumerate() {
-            let all_errors = window
-                .iter()
-                .all(|e| matches!(e.level, LogLevel::Error | LogLevel::Warn));
+        for (i, [a, b, c]) in entries.array_windows::<3>().enumerate() {
+            let all_errors = matches!(a.level, LogLevel::Error | LogLevel::Warn)
+                && matches!(b.level, LogLevel::Error | LogLevel::Warn)
+                && matches!(c.level, LogLevel::Error | LogLevel::Warn);
 
             if all_errors {
                 patterns.push(i);
@@ -161,8 +161,8 @@ impl LogAnalyzer {
     /// Rust 1.94.0: array_windows::<2>() 用于计算时间差
     pub fn analyze_time_intervals(entries: &[LogEntry]) -> Vec<u64> {
         entries
-            .windows(2)
-            .map(|window| window[1].timestamp - window[0].timestamp)
+            .array_windows::<2>()
+            .map(|[prev, curr]| curr.timestamp - prev.timestamp)
             .collect()
     }
 }
@@ -864,7 +864,8 @@ mod tests {
     fn test_encode_decode() {
         let original = "Hello 世界";
         let encoded = ProcessCommunicationEncoder::encode_string(original);
-        let decoded = ProcessCommunicationEncoder::decode_codepoints(&encoded).unwrap();
+        let decoded = ProcessCommunicationEncoder::decode_codepoints(&encoded)
+            .expect("解码编码点失败");
         assert_eq!(decoded, original);
     }
 

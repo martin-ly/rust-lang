@@ -45,15 +45,15 @@ impl MetricsCollector {
 
     /// 记录操作
     pub fn record_operation(&self) {
-        let mut metrics = self.metrics.write().unwrap();
+        let mut metrics = self.metrics.write().expect("metrics collector mutex poisoned");
         metrics.total_operations += 1;
         metrics.last_updated = Some(Instant::now());
     }
 
     /// 记录操作时间
     pub fn record_operation_time(&self, operation: &str, duration: Duration) {
-        let mut metrics = self.metrics.write().unwrap();
-        let mut timers = self.operation_timers.write().unwrap();
+        let mut metrics = self.metrics.write().expect("metrics collector mutex poisoned");
+        let mut timers = self.operation_timers.write().expect("operation timers mutex poisoned");
 
         // 更新操作时间映射
         timers
@@ -74,7 +74,7 @@ impl MetricsCollector {
 
     /// 记录内存使用
     pub fn record_memory_usage(&self, bytes: usize) {
-        let mut metrics = self.metrics.write().unwrap();
+        let mut metrics = self.metrics.write().expect("metrics collector mutex poisoned");
         metrics.current_memory_usage = bytes;
 
         if bytes > metrics.peak_memory_usage {
@@ -86,7 +86,7 @@ impl MetricsCollector {
 
     /// 记录网络 I/O
     pub fn record_network_io(&self, bytes: usize, is_read: bool) {
-        let mut metrics = self.metrics.write().unwrap();
+        let mut metrics = self.metrics.write().expect("metrics collector mutex poisoned");
 
         if is_read {
             metrics.network_bytes_received += bytes as u64;
@@ -100,7 +100,7 @@ impl MetricsCollector {
 
     /// 记录错误
     pub fn record_error(&self, error_type: &str) {
-        let mut metrics = self.metrics.write().unwrap();
+        let mut metrics = self.metrics.write().expect("metrics collector mutex poisoned");
         metrics.total_errors += 1;
         *metrics
             .error_counts
@@ -111,22 +111,22 @@ impl MetricsCollector {
 
     /// 获取指标
     pub fn get_metrics(&self) -> PerformanceMetrics {
-        self.metrics.read().unwrap().clone()
+        self.metrics.read().expect("metrics collector mutex poisoned").clone()
     }
 
     /// 重置指标
     pub fn reset(&self) {
-        let mut metrics = self.metrics.write().unwrap();
+        let mut metrics = self.metrics.write().expect("metrics collector mutex poisoned");
         *metrics = PerformanceMetrics::default();
         metrics.last_updated = Some(Instant::now());
 
-        let mut timers = self.operation_timers.write().unwrap();
+        let mut timers = self.operation_timers.write().expect("operation timers mutex poisoned");
         timers.clear();
     }
 
     /// 更新指标
     pub fn update(&self) {
-        let mut metrics = self.metrics.write().unwrap();
+        let mut metrics = self.metrics.write().expect("metrics collector mutex poisoned");
         metrics.last_updated = Some(Instant::now());
     }
 
@@ -137,7 +137,7 @@ impl MetricsCollector {
 
     /// 获取操作统计
     pub fn get_operation_stats(&self) -> HashMap<String, OperationStats> {
-        let timers = self.operation_timers.read().unwrap();
+        let timers = self.operation_timers.read().expect("operation timers mutex poisoned");
         let mut stats = HashMap::new();
 
         for (operation, durations) in timers.iter() {
@@ -165,7 +165,7 @@ impl MetricsCollector {
 
     /// 获取吞吐量统计
     pub fn get_throughput_stats(&self) -> ThroughputStats {
-        let metrics = self.metrics.read().unwrap();
+        let metrics = self.metrics.read().expect("metrics collector mutex poisoned");
         let uptime = self.uptime();
         let uptime_secs = uptime.as_secs_f64();
 
@@ -180,7 +180,7 @@ impl MetricsCollector {
 
     /// 获取内存统计
     pub fn get_memory_stats(&self) -> MemoryStats {
-        let metrics = self.metrics.read().unwrap();
+        let metrics = self.metrics.read().expect("metrics collector mutex poisoned");
 
         MemoryStats {
             current_usage: metrics.current_memory_usage,
@@ -195,7 +195,7 @@ impl MetricsCollector {
 
     /// 获取错误统计
     pub fn get_error_stats(&self) -> ErrorStats {
-        let metrics = self.metrics.read().unwrap();
+        let metrics = self.metrics.read().expect("metrics collector mutex poisoned");
 
         ErrorStats {
             total_errors: metrics.total_errors,

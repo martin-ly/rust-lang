@@ -177,7 +177,7 @@ pub fn init() -> Result<()> {
 /// ```
 /// use c07_process::{init, cleanup};
 ///
-/// init().unwrap();
+/// init().expect("进程管理初始化失败");
 /// let result = cleanup();
 /// assert!(result.is_ok());
 /// ```

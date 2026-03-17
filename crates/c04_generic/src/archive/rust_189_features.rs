@@ -164,9 +164,9 @@ pub mod const_generics {
             let mut rb: RingBuffer<i32, 4> = RingBuffer::new();
             assert!(rb.is_empty());
             assert_eq!(rb.capacity(), 4);
-            rb.push(1).unwrap();
-            rb.push(2).unwrap();
-            rb.push(3).unwrap();
+            rb.push(1).expect("环形缓冲区 Push 不应失败");
+            rb.push(2).expect("环形缓冲区 Push 不应失败");
+            rb.push(3).expect("环形缓冲区 Push 不应失败");
             assert_eq!(rb.len(), 3);
             assert_eq!(rb.pop(), Some(1));
             assert_eq!(rb.pop(), Some(2));

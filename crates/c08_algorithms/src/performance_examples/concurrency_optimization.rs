@@ -46,7 +46,7 @@ impl SimpleThreadPool {
         for _ in 0..size {
             let receiver = Arc::clone(&receiver);
             workers.push(thread::spawn(move || {
-                while let Ok(job) = receiver.lock().unwrap().recv() {
+                while let Ok(job) = receiver.lock().expect("线程池接收器锁被污染").recv() {
                     job();
                 }
             }));
@@ -101,7 +101,7 @@ impl<T> LockFreeStack<T> {
     }
 
     pub fn push(&self, value: T) {
-        let mut data = self.data.lock().unwrap();
+        let mut data = self.data.lock().expect("无锁栈数据锁被污染");
         data.push(Some(value));
         self.head.fetch_add(1, Ordering::Relaxed);
     }
@@ -113,7 +113,7 @@ impl<T> LockFreeStack<T> {
         }
 
         self.head.fetch_sub(1, Ordering::Relaxed);
-        let mut data = self.data.lock().unwrap();
+        let mut data = self.data.lock().expect("无锁栈数据锁被污染");
         data.pop().flatten()
     }
 }

@@ -41,7 +41,7 @@ impl ProcessSemaphore {
 
     /// 尝试获取许可
     pub fn try_acquire(&self) -> Option<SemaphorePermit> {
-        let mut permits = self.permits.lock().unwrap();
+        let mut permits = self.permits.lock().expect("信号量许可锁被污染");
 
         if *permits > 0 {
             *permits -= 1;
@@ -93,7 +93,7 @@ impl ProcessSemaphore {
 
     /// 获取当前可用许可数量
     pub fn available_permits(&self) -> usize {
-        *self.permits.lock().unwrap()
+        *self.permits.lock().expect("信号量许可锁被污染")
     }
 
     /// 检查信号量是否被锁定
@@ -110,7 +110,7 @@ pub struct SemaphorePermit {
 
 impl Drop for SemaphorePermit {
     fn drop(&mut self) {
-        let mut permits = self.semaphore.lock().unwrap();
+        let mut permits = self.semaphore.lock().expect("信号量许可锁被污染");
         *permits += 1;
         self.stats
             .release_count

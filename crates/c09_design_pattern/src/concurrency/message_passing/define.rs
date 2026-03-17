@@ -24,7 +24,7 @@ impl<T: Message> Worker<T> {
     }
 
     fn send_message(&self, msg: T) {
-        self.sender.send(msg).unwrap();
+        self.sender.send(msg).expect("发送消息失败");
     }
 }
 

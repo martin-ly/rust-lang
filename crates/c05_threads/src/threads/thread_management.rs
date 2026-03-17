@@ -100,7 +100,7 @@ impl ThreadManager {
 
         // 注册线程
         {
-            let mut threads = self.threads.lock().unwrap();
+            let mut threads = self.threads.lock().expect("ThreadManager 锁被 poisoned");
             threads.insert(thread_id, thread_info);
         }
 
@@ -112,7 +112,7 @@ impl ThreadManager {
         thread::spawn(move || {
             // 更新线程状态为运行中
             {
-                let mut threads = threads.lock().unwrap();
+                let mut threads = threads.lock().expect("ThreadManager 锁被 poisoned");
                 if let Some(info) = threads.get_mut(&thread_id) {
                     info.update_state(ThreadState::Running);
                 }
@@ -123,7 +123,7 @@ impl ThreadManager {
 
             // 更新线程状态为已终止
             {
-                let mut threads = threads.lock().unwrap();
+                let mut threads = threads.lock().expect("ThreadManager 锁被 poisoned");
                 if let Some(info) = threads.get_mut(&thread_id) {
                     info.update_state(ThreadState::Terminated);
                 }
@@ -138,7 +138,7 @@ impl ThreadManager {
     }
 
     pub fn terminate_thread(&self, thread_id: usize) -> Result<(), String> {
-        let mut threads = self.threads.lock().unwrap();
+        let mut threads = self.threads.lock().expect("获取线程锁不应失败");
         if let Some(info) = threads.get_mut(&thread_id) {
             info.update_state(ThreadState::Terminated);
             Ok(())
@@ -148,12 +148,12 @@ impl ThreadManager {
     }
 
     pub fn get_thread_info(&self, thread_id: usize) -> Option<ThreadInfo> {
-        let threads = self.threads.lock().unwrap();
+        let threads = self.threads.lock().expect("ThreadManager 锁被 poisoned");
         threads.get(&thread_id).cloned()
     }
 
     pub fn get_all_threads(&self) -> Vec<ThreadInfo> {
-        let threads = self.threads.lock().unwrap();
+        let threads = self.threads.lock().expect("ThreadManager 锁被 poisoned");
         threads.values().cloned().collect()
     }
 
@@ -241,7 +241,7 @@ impl AdvancedThreadPool {
 
                             // 接收任务
                             let task = {
-                                let receiver = task_receiver.lock().unwrap();
+                                let receiver = task_receiver.lock().expect("获取任务接收器锁不应失败");
                                 receiver.recv_timeout(Duration::from_millis(100))
                             };
 
@@ -263,7 +263,7 @@ impl AdvancedThreadPool {
                 },
             )?;
 
-            let mut worker_threads = self.worker_threads.lock().unwrap();
+            let mut worker_threads = self.worker_threads.lock().expect("获取工作线程锁不应失败");
             worker_threads.push(thread_id);
         }
 
@@ -347,14 +347,14 @@ impl ThreadCommunicationManager {
     pub fn create_channel(&self, name: String) -> Result<mpsc::Receiver<Message>, String> {
         let (sender, receiver) = mpsc::channel();
 
-        let mut channels = self.channels.lock().unwrap();
+        let mut channels = self.channels.lock().expect("获取通道锁不应失败");
         channels.insert(name, sender);
 
         Ok(receiver)
     }
 
     pub fn send_message(&self, channel_name: String, message: Message) -> Result<(), String> {
-        let channels = self.channels.lock().unwrap();
+        let channels = self.channels.lock().expect("获取通道锁不应失败");
         if let Some(sender) = channels.get(&channel_name) {
             sender
                 .send(message)
@@ -369,12 +369,12 @@ impl ThreadCommunicationManager {
     where
         F: Fn(Message) + Send + Sync + 'static,
     {
-        let mut handlers = self.message_handlers.lock().unwrap();
+        let mut handlers = self.message_handlers.lock().expect("获取处理器锁不应失败");
         handlers.insert(message_type, Box::new(handler));
     }
 
     pub fn handle_message(&self, message: Message) {
-        let handlers = self.message_handlers.lock().unwrap();
+        let handlers = self.message_handlers.lock().expect("获取处理器锁不应失败");
         if let Some(handler) = handlers.get(&message.content) {
             handler(message);
         }
@@ -402,14 +402,14 @@ pub fn demonstrate_thread_management() {
                             }
                         }
                     })
-                    .unwrap()
+                    .expect("线程创建不应失败")
             })
         })
         .collect();
 
     // 等待线程创建完成
     for handle in handles {
-        let _thread_id = handle.join().unwrap();
+        let _thread_id = handle.join().expect("线程应成功完成");
     }
 
     // 显示线程信息
@@ -424,7 +424,7 @@ pub fn demonstrate_thread_management() {
 
     // 测试高级线程池
     let pool = Arc::new(AdvancedThreadPool::new(4));
-    pool.start().unwrap();
+    pool.start().expect("线程池启动不应失败");
 
     // 提交任务
     for i in 0..10 {
@@ -434,7 +434,7 @@ pub fn demonstrate_thread_management() {
                 thread::sleep(Duration::from_millis(10));
                 println!("任务 {} 完成", i);
             })
-            .unwrap();
+            .expect("创建工作线程不应失败");
         });
     }
 
@@ -507,18 +507,18 @@ mod tests {
             .create_thread("test".to_string(), 2, || {
                 thread::sleep(Duration::from_millis(10));
             })
-            .unwrap();
+            .expect("创建工作线程不应失败");
 
         assert_eq!(manager.get_thread_count(), 1);
         assert!(manager.get_thread_info(thread_id).is_some());
 
-        manager.terminate_thread(thread_id).unwrap();
+        manager.terminate_thread(thread_id).expect("终止线程不应失败");
     }
 
     #[test]
     fn test_advanced_thread_pool() {
         let pool = AdvancedThreadPool::new(2);
-        pool.start().unwrap();
+        pool.start().expect("线程池启动不应失败");
 
         pool.submit(|| {
             thread::sleep(Duration::from_millis(10));
@@ -536,7 +536,7 @@ mod tests {
     #[test]
     fn test_thread_communication() {
         let comm_manager = ThreadCommunicationManager::new();
-        let receiver = comm_manager.create_channel("test".to_string()).unwrap();
+        let receiver = comm_manager.create_channel("test".to_string()).expect("创建通道不应失败");
 
         let message = Message {
             id: 1,
@@ -548,9 +548,9 @@ mod tests {
 
         comm_manager
             .send_message("test".to_string(), message)
-            .unwrap();
+            .expect("创建工作线程不应失败");
 
-        let received = receiver.recv_timeout(Duration::from_millis(100)).unwrap();
+        let received = receiver.recv_timeout(Duration::from_millis(100)).expect("接收消息不应失败");
         assert_eq!(received.content, "test");
     }
 }

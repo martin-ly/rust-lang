@@ -107,12 +107,12 @@ impl NamedPipe {
 
     /// 检查管道是否关闭
     pub fn is_closed(&self) -> bool {
-        *self.is_closed.lock().unwrap()
+        *self.is_closed.lock().expect("管道关闭状态锁被污染")
     }
 
     /// 关闭管道
     pub fn close(&mut self) -> IpcResult<()> {
-        let mut closed = self.is_closed.lock().unwrap();
+        let mut closed = self.is_closed.lock().expect("管道关闭状态锁被污染");
         *closed = true;
 
         // 删除管道文件

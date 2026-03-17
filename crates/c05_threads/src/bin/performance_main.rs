@@ -126,7 +126,7 @@ fn demo_lock_free_structures() {
     let start = Instant::now();
 
     for i in 0..1000 {
-        buffer.try_push(i).unwrap();
+        buffer.try_push(i).expect("缓冲区 Push 不应失败");
     }
 
     let mut sum = 0;
@@ -144,7 +144,7 @@ fn demo_lock_free_structures() {
     let start = Instant::now();
 
     for i in 0..1000 {
-        stack.push(i).unwrap();
+        stack.push(i).expect("栈 Push 不应失败");
     }
 
     let mut sum = 0;

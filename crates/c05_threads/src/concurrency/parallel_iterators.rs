@@ -83,17 +83,17 @@ where
 
             thread::spawn(move || {
                 let mut chunk_results: Vec<R> = chunk.iter().map(|item| f(item)).collect();
-                let mut results = results.lock().unwrap();
+                let mut results = results.lock().expect("获取结果锁不应失败");
                 results.append(&mut chunk_results);
             })
         })
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
-    Arc::try_unwrap(results).unwrap().into_inner().unwrap()
+    Arc::try_unwrap(results).expect("Arc 解包不应失败").into_inner().expect("Mutex 解包不应失败")
 }
 
 /// 并行过滤函数
@@ -132,17 +132,17 @@ where
             thread::spawn(move || {
                 let mut chunk_results: Vec<T> =
                     chunk.into_iter().filter(|item| predicate(item)).collect();
-                let mut results = results.lock().unwrap();
+                let mut results = results.lock().expect("获取结果锁不应失败");
                 results.append(&mut chunk_results);
             })
         })
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
-    Arc::try_unwrap(results).unwrap().into_inner().unwrap()
+    Arc::try_unwrap(results).expect("Arc 解包不应失败").into_inner().expect("Mutex 解包不应失败")
 }
 
 /// 并行归约函数
@@ -177,14 +177,14 @@ where
 
             thread::spawn(move || {
                 let result = chunk.iter().fold(identity, |acc, item| op(acc, item));
-                let mut results = results.lock().unwrap();
+                let mut results = results.lock().expect("获取结果锁不应失败");
                 results.push(result);
             })
         })
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     let partial_results = Arc::try_unwrap(results).unwrap().into_inner().unwrap();
@@ -243,7 +243,7 @@ where
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
     if found.load(Ordering::Relaxed) {

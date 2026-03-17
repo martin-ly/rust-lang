@@ -23,7 +23,7 @@ async fn callback() {
         Err(e) => eprintln!("发生错误: {:?}", e),
     })
     .await
-    .unwrap();
+    .expect("执行任务回调失败");
 }
 
 #[cfg(test)]

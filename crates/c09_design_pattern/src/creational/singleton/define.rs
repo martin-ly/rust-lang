@@ -17,7 +17,7 @@ pub struct CellSingleton<T> {
 }
 
 impl<T> Singleton<T> {
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Singleton {
             instance: OnceLock::new(),
         }
@@ -52,7 +52,7 @@ impl<T> CellSingleton<T> {
     {
         self.instance
             .update(|current| Some(current.unwrap_or_else(initializer)));
-        self.instance.get().unwrap()
+        self.instance.get().expect("获取单例实例失败")
     }
 }
 
@@ -135,7 +135,7 @@ mod tests {
             handles.push(handle);
         }
 
-        let results: Vec<String> = handles.into_iter().map(|h| h.join().unwrap()).collect();
+        let results: Vec<String> = handles.into_iter().map(|h| h.join().expect("线程加入失败")).collect();
 
         // 所有线程应该得到相同的实例
         let first_result = &results[0];

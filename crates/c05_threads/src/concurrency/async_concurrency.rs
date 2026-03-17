@@ -287,7 +287,7 @@ mod tests {
         let receiver = channel.receiver();
 
         assert!(sender.send(42).is_ok());
-        assert_eq!(receiver.recv().unwrap(), 42);
+        assert_eq!(receiver.recv().expect("接收消息不应失败"), 42);
     }
 
     #[test]

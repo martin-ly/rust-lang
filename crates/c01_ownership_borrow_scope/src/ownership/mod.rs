@@ -214,7 +214,7 @@ impl OwnershipManager {
     
     /// 声明所有权 / Declare Ownership
     pub fn declare_ownership(&self, owner_id: String, value_type: String) -> Result<(), OwnershipError> {
-        let mut ownership_map = self.ownership_map.lock().unwrap();
+        let mut ownership_map = self.ownership_map.lock().expect("所有权映射锁定失败");
         
         if ownership_map.contains_key(&owner_id) {
             return Err(OwnershipError::OwnerAlreadyExists);
@@ -226,7 +226,7 @@ impl OwnershipManager {
     
     /// 转移所有权 / Transfer Ownership
     pub fn transfer_ownership(&self, from: String, to: String) -> Result<(), OwnershipError> {
-        let mut ownership_map = self.ownership_map.lock().unwrap();
+        let mut ownership_map = self.ownership_map.lock().expect("所有权映射锁定失败");
         
         // 检查源所有者是否存在且拥有所有权
         if let Some(status) = ownership_map.get(&from) {
@@ -251,8 +251,8 @@ impl OwnershipManager {
     
     /// 创建借用 / Create Borrow
     pub fn create_borrow(&self, owner_id: String, borrower_id: String, borrow_type: BorrowType) -> Result<BorrowInfo, BorrowError> {
-        let mut borrow_records = self.borrow_records.lock().unwrap();
-        let ownership_map = self.ownership_map.lock().unwrap();
+        let mut borrow_records = self.borrow_records.lock().expect("借用记录锁定失败");
+        let ownership_map = self.ownership_map.lock().expect("所有权映射锁定失败");
         
         // 检查所有者是否存在
         if !ownership_map.contains_key(&owner_id) {
@@ -277,7 +277,7 @@ impl OwnershipManager {
     
     /// 结束借用 / End Borrow
     pub fn end_borrow(&self, owner_id: String, borrower_id: String) -> Result<(), BorrowError> {
-        let mut borrow_records = self.borrow_records.lock().unwrap();
+        let mut borrow_records = self.borrow_records.lock().expect("借用记录锁定失败");
         
         if let Some(borrows) = borrow_records.get_mut(&owner_id) {
             for borrow in borrows.iter_mut() {
@@ -293,7 +293,7 @@ impl OwnershipManager {
     
     /// 注册生命周期 / Register Lifetime
     pub fn register_lifetime(&self, lifetime_name: String, scope: String) -> Result<(), LifetimeError> {
-        let mut lifetime_map = self.lifetime_map.lock().unwrap();
+        let mut lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
         
         if lifetime_map.contains_key(&lifetime_name) {
             return Err(LifetimeError::LifetimeAlreadyExists);
@@ -307,7 +307,7 @@ impl OwnershipManager {
     
     /// 添加生命周期约束 / Add Lifetime Constraint
     pub fn add_lifetime_constraint(&self, lifetime_name: String, constraint: String) -> Result<(), LifetimeError> {
-        let mut lifetime_map = self.lifetime_map.lock().unwrap();
+        let mut lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
         
         if let Some(lifetime_info) = lifetime_map.get_mut(&lifetime_name) {
             lifetime_info.add_constraint(constraint);
@@ -319,21 +319,21 @@ impl OwnershipManager {
     
     /// 检查数据竞争 / Check Data Races
     pub fn check_data_races(&self) -> Result<Vec<DataRaceReport>, DataRaceError> {
-        let detector = self.data_race_detector.lock().unwrap();
-        detector.detect_races(&self.borrow_records.lock().unwrap())
+        let detector = self.data_race_detector.lock().expect("数据竞争检测器锁定失败");
+        detector.detect_races(&self.borrow_records.lock().expect("借用记录锁定失败"))
     }
     
     /// 检查内存安全 / Check Memory Safety
     pub fn check_memory_safety(&self) -> Result<MemorySafetyReport, MemorySafetyError> {
-        let checker = self.memory_safety_checker.lock().unwrap();
-        checker.check_safety(&self.ownership_map.lock().unwrap(), &self.borrow_records.lock().unwrap())
+        let checker = self.memory_safety_checker.lock().expect("内存安全检查器锁定失败");
+        checker.check_safety(&self.ownership_map.lock().expect("所有权映射锁定失败"), &self.borrow_records.lock().expect("借用记录锁定失败"))
     }
     
     /// 获取所有权统计信息 / Get Ownership Statistics
     pub fn get_statistics(&self) -> OwnershipStatistics {
-        let ownership_map = self.ownership_map.lock().unwrap();
-        let borrow_records = self.borrow_records.lock().unwrap();
-        let lifetime_map = self.lifetime_map.lock().unwrap();
+        let ownership_map = self.ownership_map.lock().expect("所有权映射锁定失败");
+        let borrow_records = self.borrow_records.lock().expect("借用记录锁定失败");
+        let lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
         
         let total_owners = ownership_map.len();
         let active_borrows = borrow_records.values()
@@ -577,7 +577,7 @@ impl MemorySafetyReport {
     }
     
     /// 获取违规数量 / Get Number of Violations
-    pub fn violation_count(&self) -> usize {
+    pub const fn violation_count(&self) -> usize {
         self.violations.len()
     }
     
@@ -788,7 +788,7 @@ mod tests {
     #[test]
     fn test_ownership_transfer() {
         let manager = OwnershipManager::new();
-        manager.declare_ownership("owner1".to_string(), "i32".to_string()).unwrap();
+        manager.declare_ownership("owner1".to_string(), "i32".to_string()).expect("声明所有权失败");
         let result = manager.transfer_ownership("owner1".to_string(), "owner2".to_string());
         assert!(result.is_ok());
     }
@@ -796,7 +796,7 @@ mod tests {
     #[test]
     fn test_borrow_creation() {
         let manager = OwnershipManager::new();
-        manager.declare_ownership("owner1".to_string(), "i32".to_string()).unwrap();
+        manager.declare_ownership("owner1".to_string(), "i32".to_string()).expect("声明所有权失败");
         let result = manager.create_borrow("owner1".to_string(), "borrower1".to_string(), BorrowType::Immutable);
         assert!(result.is_ok());
     }
@@ -804,8 +804,8 @@ mod tests {
     #[test]
     fn test_borrow_conflict() {
         let manager = OwnershipManager::new();
-        manager.declare_ownership("owner1".to_string(), "i32".to_string()).unwrap();
-        manager.create_borrow("owner1".to_string(), "borrower1".to_string(), BorrowType::Mutable).unwrap();
+        manager.declare_ownership("owner1".to_string(), "i32".to_string()).expect("声明所有权失败");
+        manager.create_borrow("owner1".to_string(), "borrower1".to_string(), BorrowType::Mutable).expect("创建借用失败");
         let result = manager.create_borrow("owner1".to_string(), "borrower2".to_string(), BorrowType::Mutable);
         assert!(result.is_err());
     }
@@ -820,8 +820,8 @@ mod tests {
     #[test]
     fn test_statistics() {
         let manager = OwnershipManager::new();
-        manager.declare_ownership("owner1".to_string(), "i32".to_string()).unwrap();
-        manager.register_lifetime("'a".to_string(), "scope1".to_string()).unwrap();
+        manager.declare_ownership("owner1".to_string(), "i32".to_string()).expect("声明所有权失败");
+        manager.register_lifetime("'a".to_string(), "scope1".to_string()).expect("注册生命周期失败");
         
         let stats = manager.get_statistics();
         assert_eq!(stats.total_owners, 1);

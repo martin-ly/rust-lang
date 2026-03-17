@@ -53,7 +53,7 @@ impl SingletonBenchmark {
         }
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("性能测试线程加入失败");
         }
 
         let duration = start.elapsed();

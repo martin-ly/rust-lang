@@ -39,7 +39,7 @@ impl IpcChannel for SharedMemoryRegion {
         }
 
         let key = format!("msg_{}", msg.id);
-        let mut data = self.data.lock().unwrap();
+        let mut data = self.data.lock().expect("共享内存数据锁被污染");
         data.insert(key, msg.data.clone());
         Ok(())
     }
@@ -51,7 +51,7 @@ impl IpcChannel for SharedMemoryRegion {
             ));
         }
 
-        let data = self.data.lock().unwrap();
+        let data = self.data.lock().expect("共享内存数据锁被污染");
         if let Some((key, value)) = data.iter().next() {
             let msg = Message::new(key.parse().unwrap_or(0), "shared_memory", value.clone(), 0);
             Ok(msg)

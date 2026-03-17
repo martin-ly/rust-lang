@@ -71,7 +71,7 @@ impl OptimizedFlyweightFactory {
             self.flyweights.insert(key.to_string(), flyweight.clone());
             flyweight
         } else {
-            self.flyweights.get(key).unwrap().clone()
+            self.flyweights.get(key).expect("获取享元对象失败").clone()
         }
     }
 
@@ -126,7 +126,7 @@ impl FlyweightFactory {
             let flyweight = ConcreteFlyweight::new(intrinsic_state, 0);
             self.flyweights.insert(key.to_string(), flyweight);
         }
-        self.flyweights.get(key).unwrap()
+        self.flyweights.get(key).expect("获取享元对象失败")
     }
 }
 

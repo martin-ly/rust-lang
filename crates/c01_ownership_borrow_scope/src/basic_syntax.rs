@@ -466,7 +466,7 @@ pub mod concurrency_basics {
             std::thread::sleep(std::time::Duration::from_millis(1));
         }
 
-        handle.join().unwrap();
+        handle.join().expect("等待线程完成失败");
     }
 
     /// ## 7.2 消息传递 / Message Passing
@@ -480,10 +480,10 @@ pub mod concurrency_basics {
 
         std::thread::spawn(move || {
             let val = String::from("hi");
-            tx.send(val).unwrap();
+            tx.send(val).expect("发送消息失败");
         });
 
-        let received = rx.recv().unwrap();
+        let received = rx.recv().expect("接收消息失败");
         println!("Got: {}", received);
     }
 
@@ -500,17 +500,17 @@ pub mod concurrency_basics {
         for _ in 0..10 {
             let counter = Arc::clone(&counter);
             let handle = std::thread::spawn(move || {
-                let mut num = counter.lock().unwrap();
+                let mut num = counter.lock().expect("获取锁失败");
                 *num += 1;
             });
             handles.push(handle);
         }
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("等待线程完成失败");
         }
 
-        println!("Result: {}", *counter.lock().unwrap());
+        println!("Result: {}", *counter.lock().expect("获取锁失败"));
     }
 }
 
@@ -835,7 +835,7 @@ pub mod rust_190_basics {
         for i in 0..3 {
             let data_clone = Arc::clone(&shared_data);
             let handle = thread::spawn(move || {
-                let mut data = data_clone.lock().unwrap();
+                let mut data = data_clone.lock().expect("获取锁失败");
                 data.push(i * 10);
                 println!("Thread {} added {}", i, i * 10);
             });
@@ -844,10 +844,10 @@ pub mod rust_190_basics {
 
         // 等待所有线程完成 / Wait for all threads to complete
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("等待线程完成失败");
         }
 
-        println!("Final shared data: {:?}", *shared_data.lock().unwrap());
+        println!("Final shared data: {:?}", *shared_data.lock().expect("获取锁失败"));
 
         // 演示弱引用 / Demonstrate weak references
         let strong = Rc::new(42);
@@ -964,7 +964,7 @@ pub mod rust_190_basics {
         for i in 0..3 {
             let data_clone = Arc::clone(&shared_data);
             let handle = thread::spawn(move || {
-                let mut data = data_clone.lock().unwrap();
+                let mut data = data_clone.lock().expect("获取锁失败");
                 data.push(i);
                 println!("Thread {} added {}", i, i);
             });
@@ -972,10 +972,10 @@ pub mod rust_190_basics {
         }
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("等待线程完成失败");
         }
 
-        println!("Final data: {:?}", *shared_data.lock().unwrap());
+        println!("Final data: {:?}", *shared_data.lock().expect("获取锁失败"));
 
         // 演示更复杂的并发模式 / Demonstrate more complex concurrency patterns
         demonstrate_advanced_concurrency();
@@ -994,7 +994,7 @@ pub mod rust_190_basics {
         for i in 0..3 {
             let data_clone = Arc::clone(&rw_data);
             let handle = thread::spawn(move || {
-                let data = data_clone.read().unwrap();
+                let data = data_clone.read().expect("获取读锁失败");
                 println!("Reader {} read: {:?}", i, *data);
             });
             reader_handles.push(handle);
@@ -1003,16 +1003,16 @@ pub mod rust_190_basics {
         // 创建写线程 / Create writer thread
         let writer_data = Arc::clone(&rw_data);
         let writer_handle = thread::spawn(move || {
-            let mut data = writer_data.write().unwrap();
+            let mut data = writer_data.write().expect("获取写锁失败");
             data.push(6);
             println!("Writer added 6");
         });
 
         // 等待所有线程完成 / Wait for all threads to complete
         for handle in reader_handles {
-            handle.join().unwrap();
+            handle.join().expect("等待读线程完成失败");
         }
-        writer_handle.join().unwrap();
+        writer_handle.join().expect("等待写线程完成失败");
 
         // 使用原子操作 / Use atomic operations
         let counter = Arc::new(AtomicUsize::new(0));
@@ -1030,7 +1030,7 @@ pub mod rust_190_basics {
         }
 
         for handle in atomic_handles {
-            handle.join().unwrap();
+            handle.join().expect("等待原子操作线程完成失败");
         }
 
         println!("Final counter value: {}", counter.load(Ordering::SeqCst));
@@ -1050,7 +1050,7 @@ pub mod rust_190_basics {
         }
 
         for handle in barrier_handles {
-            handle.join().unwrap();
+            handle.join().expect("等待屏障同步线程完成失败");
         }
     }
 

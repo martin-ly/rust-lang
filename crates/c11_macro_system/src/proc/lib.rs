@@ -182,7 +182,7 @@ pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
         }
     };
 
-    input_fn.block = syn::parse2(wrapped_block).unwrap();
+    input_fn.block = syn::parse2(wrapped_block).expect("generated block should be valid syntax");
 
     TokenStream::from(quote! { #input_fn })
 }

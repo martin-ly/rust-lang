@@ -29,7 +29,7 @@ async fn user_input(tx: mpsc::Sender<Event>) {
     ];
 
     for input in inputs {
-        tx.send(Event::UserInput(input)).await.unwrap();
+        tx.send(Event::UserInput(input)).await.expect("发送用户输入事件失败");
         sleep(Duration::from_secs(1)).await; // 模拟用户输入延迟
     }
 }
@@ -37,7 +37,7 @@ async fn user_input(tx: mpsc::Sender<Event>) {
 async fn timer(tx: mpsc::Sender<Event>) {
     for _ in 0..5 {
         sleep(Duration::from_secs(1)).await; // 模拟定时器间隔
-        tx.send(Event::TimerTick).await.unwrap();
+        tx.send(Event::TimerTick).await.expect("发送定时器事件失败");
     }
 }
 

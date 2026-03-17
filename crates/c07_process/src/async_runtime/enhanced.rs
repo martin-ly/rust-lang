@@ -902,7 +902,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_enhanced_async_process_manager() {
-        let manager = EnhancedAsyncProcessManager::new(10).await.unwrap();
+        let manager = EnhancedAsyncProcessManager::new(10).await.expect("创建增强异步进程管理器失败");
 
         let mut env = HashMap::new();
         if cfg!(windows) {
@@ -935,10 +935,10 @@ mod tests {
             }
         };
 
-        let pid = manager.spawn(config).await.unwrap();
+        let pid = manager.spawn(config).await.expect("启动进程失败");
         assert!(pid > 0);
 
-        let info = manager.get_info(pid).await.unwrap();
+        let info = manager.get_info(pid).await.expect("获取进程信息失败");
         assert_eq!(info.pid, pid);
 
         let all_processes = manager.list_all().await;
@@ -950,7 +950,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_spawn_with_callback() {
-        let manager = EnhancedAsyncProcessManager::new(10).await.unwrap();
+        let manager = EnhancedAsyncProcessManager::new(10).await.expect("创建增强异步进程管理器失败");
 
         let mut env = HashMap::new();
         if cfg!(windows) {
@@ -996,7 +996,7 @@ mod tests {
             }
         };
 
-        let pid = manager.spawn_with_callback(config, callback).await.unwrap();
+        let pid = manager.spawn_with_callback(config, callback).await.expect("带回调启动进程失败");
         assert!(pid > 0);
 
         let _ = manager.kill(pid, false).await;
@@ -1005,7 +1005,7 @@ mod tests {
     #[tokio::test]
     #[ignore] // 暂时忽略，spawn_with_async_callback 需要重构以支持异步回调
     async fn test_spawn_with_async_callback() {
-        let manager = EnhancedAsyncProcessManager::new(10).await.unwrap();
+        let manager = EnhancedAsyncProcessManager::new(10).await.expect("创建增强异步进程管理器失败");
 
         let mut env = HashMap::new();
         if cfg!(windows) {
@@ -1057,7 +1057,7 @@ mod tests {
         let pid = manager
             .spawn_with_async_callback(config, async_callback)
             .await
-            .unwrap();
+            .expect("异步回调启动进程失败");
         assert!(pid > 0);
 
         let _ = manager.kill(pid, false).await;
@@ -1065,7 +1065,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_performance_stats() {
-        let manager = EnhancedAsyncProcessManager::new(10).await.unwrap();
+        let manager = EnhancedAsyncProcessManager::new(10).await.expect("创建增强异步进程管理器失败");
 
         let mut env = HashMap::new();
         if cfg!(windows) {
@@ -1098,10 +1098,10 @@ mod tests {
             }
         };
 
-        let pid = manager.spawn(config).await.unwrap();
+        let pid = manager.spawn(config).await.expect("启动进程失败");
         assert!(pid > 0);
 
-        let stats = manager.get_performance_stats().await.unwrap();
+        let stats = manager.get_performance_stats().await.expect("获取性能统计失败");
         assert!(stats.total_processes > 0);
 
         let _ = manager.kill(pid, false).await;

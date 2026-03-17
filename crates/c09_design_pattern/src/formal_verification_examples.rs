@@ -245,13 +245,13 @@ impl SafeCounter {
 
     /// 原子递增
     pub fn increment(&self) {
-        let mut count = self.counter.lock().unwrap();
+        let mut count = self.counter.lock().expect("安全计数器锁被污染");
         *count += 1;
     }
 
     /// 原子读取
     pub fn get(&self) -> u64 {
-        *self.counter.lock().unwrap()
+        *self.counter.lock().expect("安全计数器锁被污染")
     }
 }
 
@@ -280,7 +280,7 @@ pub mod producer_consumer {
         // 生产者
         let producer = thread::spawn(move || {
             for i in 0..5 {
-                tx.send(i).unwrap();
+                tx.send(i).expect("生产者发送消息失败");
             }
         });
 
@@ -291,8 +291,8 @@ pub mod producer_consumer {
             }
         });
 
-        producer.join().unwrap();
-        consumer.join().unwrap();
+        producer.join().expect("生产者线程加入失败");
+        consumer.join().expect("消费者线程加入失败");
     }
 }
 
@@ -362,8 +362,8 @@ mod tests {
     fn test_typestate_file_lifecycle() {
         // 正确的状态转换
         let file = FileHandle::<Uninitialized>::new("test.txt".to_string());
-        let file = file.open().unwrap();
-        let _ = file.read().unwrap();
+        let file = file.open().expect("打开文件失败");
+        let _ = file.read().expect("读取文件失败");
         let file = file.close();
         assert_eq!(file.path(), "test.txt");
     }
@@ -397,7 +397,7 @@ mod tests {
         subject.set_state(42);
 
         // 验证：观察者状态与Subject一致
-        assert_eq!(observer.lock().unwrap().state, 42);
+        assert_eq!(observer.lock().expect("观察者状态锁被污染").state, 42);
     }
 
     #[test]
@@ -422,7 +422,7 @@ mod tests {
         }
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程加入失败");
         }
 
         // 验证：无数据竞争，结果正确

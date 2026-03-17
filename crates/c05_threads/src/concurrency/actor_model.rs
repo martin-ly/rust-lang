@@ -215,7 +215,7 @@ impl Actor for CounterActor {
                 println!("Actor '{}': Decremented, count = {}", self.name, self.count);
             }
             CounterMessage::Get(sender) => {
-                let mut result = sender.lock().unwrap();
+                let mut result = sender.lock().expect("获取发送器锁不应失败");
                 *result = Some(self.count);
                 println!("Actor '{}': Get request, count = {}", self.name, self.count);
             }
@@ -272,7 +272,7 @@ mod tests {
         let result = Arc::new(Mutex::new(None));
         counter.handle(CounterMessage::Get(result.clone()));
 
-        let count = result.lock().unwrap();
+        let count = result.lock().expect("获取结果锁不应失败");
         assert_eq!(*count, Some(1));
     }
 }

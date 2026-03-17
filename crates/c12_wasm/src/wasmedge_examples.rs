@@ -216,16 +216,19 @@ pub mod threading_examples {
 
                     let chunk: Vec<i32> = data[start..end].iter().map(|&x| x * 2).collect();
 
-                    results.lock().unwrap().extend(chunk);
+                    results.lock().expect("parallel process results mutex poisoned").extend(chunk);
                 })
             })
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("parallel processing thread panicked");
         }
 
-        Arc::try_unwrap(results).unwrap().into_inner().unwrap()
+        Arc::try_unwrap(results)
+            .expect("results still referenced by other threads")
+            .into_inner()
+            .expect("results mutex poisoned")
     }
 
     /// 线程池示例
@@ -247,7 +250,7 @@ pub mod threading_examples {
                     let receiver = Arc::clone(&receiver);
                     thread::spawn(move || {
                         loop {
-                            let job: Job = receiver.lock().unwrap().recv().unwrap();
+                            let job: Job = receiver.lock().expect("thread pool receiver mutex poisoned").recv().expect("thread pool channel closed");
                             job();
                         }
                     })
@@ -265,7 +268,11 @@ pub mod threading_examples {
             F: FnOnce() + Send + 'static,
         {
             let job = Box::new(f);
-            self.sender.as_ref().unwrap().send(job).unwrap();
+            self.sender
+                .as_ref()
+                .expect("thread pool sender should be available")
+                .send(job)
+                .expect("thread pool receiver dropped");
         }
     }
 }

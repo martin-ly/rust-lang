@@ -49,7 +49,7 @@ impl Shape {
                 bottom_right.move_by(dx, dy);
             }
             Shape::ThreadSafeCircle(point) => {
-                let p = point.lock().unwrap();
+                let p = point.lock().expect("获取形状锁失败");
                 p.move_by(dx, dy);
             }
         }
@@ -62,7 +62,7 @@ impl Shape {
                 vec![top_left.get_position(), bottom_right.get_position()]
             }
             Shape::ThreadSafeCircle(point) => {
-                let p = point.lock().unwrap();
+                let p = point.lock().expect("获取形状位置锁失败");
                 vec![p.get_position()]
             }
         }

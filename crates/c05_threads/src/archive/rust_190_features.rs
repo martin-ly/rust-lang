@@ -232,7 +232,7 @@ impl StandardLibraryFeatures {
                 let counter = Arc::clone(&counter);
                 thread::spawn(move || {
                     for _ in 0..1000 {
-                        let mut count = counter.lock().unwrap();
+                        let mut count = counter.lock().expect("获取计数器锁不应失败");
                         *count += 1;
                     }
                 })
@@ -240,10 +240,10 @@ impl StandardLibraryFeatures {
             .collect();
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
-        let final_count = *counter.lock().unwrap();
+        let final_count = *counter.lock().expect("获取计数器锁不应失败");
         println!("最终计数: {}", final_count);
     }
 }
@@ -312,7 +312,7 @@ impl AdvancedConcurrency {
         let pool = rayon::ThreadPoolBuilder::new()
             .num_threads(4)
             .build()
-            .unwrap();
+            .expect("线程创建不应失败");
 
         pool.install(|| {
             let results: Vec<i32> = (0..1000).into_par_iter().map(|i| i * i).collect();
@@ -329,7 +329,7 @@ impl AdvancedConcurrency {
 
         // 生产者
         for i in 0..100 {
-            queue.push(i).unwrap();
+            queue.push(i).expect("队列 Push 不应失败");
         }
 
         // 消费者
@@ -353,7 +353,7 @@ impl AdvancedConcurrency {
         let flag_clone = Arc::clone(&flag);
         let handle = thread::spawn(move || {
             // 设置数据
-            *data_clone.lock().unwrap() = 42;
+            *data_clone.lock().expect("获取数据锁不应失败") = 42;
 
             // 使用内存屏障确保数据写入对其他线程可见
             flag_clone.store(true, Ordering::Release);
@@ -365,7 +365,7 @@ impl AdvancedConcurrency {
         }
 
         // 读取数据
-        let value = *data.lock().unwrap();
+        let value = *data.lock().expect("获取数据锁不应失败");
         println!("通过内存屏障读取的值: {}", value);
 
         handle.join().unwrap();
@@ -546,7 +546,7 @@ impl AdvancedThreadPool {
                 let counter = Arc::clone(&counter);
 
                 thread::spawn(move || {
-                    while let Ok(task) = receiver.lock().unwrap().recv() {
+                    while let Ok(task) = receiver.lock().expect("获取接收器锁不应失败").recv() {
                         task();
                         counter.increment();
                     }
@@ -565,7 +565,7 @@ impl AdvancedThreadPool {
     where
         F: FnOnce() + Send + 'static,
     {
-        self.task_sender.send(Box::new(task)).unwrap();
+        self.task_sender.send(Box::new(task)).expect("发送任务不应失败");
     }
 
     pub fn get_completed_tasks(&self) -> usize {
@@ -575,7 +575,7 @@ impl AdvancedThreadPool {
     pub fn shutdown(self) {
         drop(self.task_sender);
         for worker in self.workers {
-            worker.join().unwrap();
+            worker.join().expect("工作线程应成功完成");
         }
     }
 }

@@ -53,7 +53,7 @@ impl MemorySafetyManager {
         
         // 更新统计信息
         {
-            let mut stats = self.statistics.lock().unwrap();
+            let mut stats = self.statistics.lock().expect("统计信息锁定失败");
             stats.total_checks += 1;
             stats.check_start_time = start_time;
         }
@@ -85,7 +85,7 @@ impl MemorySafetyManager {
         
         // 更新统计信息
         {
-            let mut stats = self.statistics.lock().unwrap();
+            let mut stats = self.statistics.lock().expect("统计信息锁定失败");
             stats.last_check_duration = start_time.elapsed();
             stats.total_check_time += stats.last_check_duration;
         }
@@ -95,42 +95,42 @@ impl MemorySafetyManager {
     
     /// 检查内存分配 / Check Memory Allocations
     fn check_memory_allocations(&self, program: &Program) -> Result<AllocationReport, MemorySafetyError> {
-        let tracker = self.allocation_tracker.lock().unwrap();
+        let tracker = self.allocation_tracker.lock().expect("分配跟踪器锁定失败");
         tracker.check_allocations(program)
     }
     
     /// 检查引用有效性 / Check Reference Validity
     fn check_reference_validity(&self, program: &Program) -> Result<ReferenceReport, MemorySafetyError> {
-        let checker = self.reference_checker.lock().unwrap();
+        let checker = self.reference_checker.lock().expect("引用检查器锁定失败");
         checker.check_references(program)
     }
     
     /// 检查数据竞争 / Check Data Races
     fn check_data_races(&self, program: &Program) -> Result<DataRaceReport, MemorySafetyError> {
-        let detector = self.data_race_detector.lock().unwrap();
+        let detector = self.data_race_detector.lock().expect("数据竞争检测器锁定失败");
         detector.detect_races(program)
     }
     
     /// 检查内存泄漏 / Check Memory Leaks
     fn check_memory_leaks(&self, program: &Program) -> Result<LeakReport, MemorySafetyError> {
-        let detector = self.memory_leak_detector.lock().unwrap();
+        let detector = self.memory_leak_detector.lock().expect("内存泄漏检测器锁定失败");
         detector.detect_leaks(program)
     }
     
     /// 检查缓冲区安全 / Check Buffer Safety
     fn check_buffer_safety(&self, program: &Program) -> Result<BufferReport, MemorySafetyError> {
-        let checker = self.buffer_safety_checker.lock().unwrap();
+        let checker = self.buffer_safety_checker.lock().expect("缓冲区安全检查器锁定失败");
         checker.check_buffers(program)
     }
     
     /// 获取统计信息 / Get Statistics
     pub fn get_statistics(&self) -> MemorySafetyStatistics {
-        self.statistics.lock().unwrap().clone()
+        self.statistics.lock().expect("统计信息锁定失败").clone()
     }
     
     /// 重置统计信息 / Reset Statistics
     pub fn reset_statistics(&self) {
-        let mut stats = self.statistics.lock().unwrap();
+        let mut stats = self.statistics.lock().expect("统计信息锁定失败");
         *stats = MemorySafetyStatistics::new();
     }
 }
@@ -490,7 +490,7 @@ impl ReferenceValidityChecker {
                     if allocation.allocation_id == reference.target_allocation
                         && allocation.is_freed
                         && allocation.freed_at.is_some()
-                        && reference.created_at < allocation.freed_at.unwrap()
+                        && reference.created_at < allocation.freed_at.expect("释放时间不应为None")
                     {
                         report.add_violation(ReferenceViolation {
                             reference_id: reference.reference_id.clone(),

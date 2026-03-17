@@ -259,7 +259,7 @@ fn find_max<T>(items: &[T]) -> Option<&T>
 where
     T: PartialOrd,
 {
-    items.iter().max_by(|a, b| a.partial_cmp(b).unwrap())
+    items.iter().max_by(|a, b| a.partial_cmp(b).expect("浮点数比较不应失败"))
 }
 
 fn main() {
@@ -648,8 +648,8 @@ mod tests {
         container.add(100);
 
         assert_eq!(container.len(), 2);
-        assert_eq!(*container.get(0).unwrap(), 42);
-        assert_eq!(*container.get(1).unwrap(), 100);
+        assert_eq!(*container.get(0).expect("索引 0 应存在"), 42);
+        assert_eq!(*container.get(1).expect("索引 1 应存在"), 100);
     }
 
     #[test]

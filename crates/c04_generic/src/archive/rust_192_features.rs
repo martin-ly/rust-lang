@@ -417,7 +417,7 @@ pub fn calculate_generic_aligned_size<T>(count: usize, alignment: NonZeroUsize) 
         return 0;
     }
 
-    let total = NonZeroUsize::new(total_size).unwrap();
+    let total = NonZeroUsize::new(total_size).expect("总大小应非零");
     // Rust 1.92.0: 使用 div_ceil 计算对齐后的大小
     total.div_ceil(alignment).get() * alignment.get()
 }
@@ -446,7 +446,7 @@ impl GenericMemoryAllocator {
             return 0;
         }
 
-        let total = NonZeroUsize::new(total_size).unwrap();
+        let total = NonZeroUsize::new(total_size).expect("总大小应非零");
         // Rust 1.92.0: 使用 div_ceil 计算块数
         total.div_ceil(self.block_size).get()
     }
@@ -531,7 +531,7 @@ impl<T: PartialEq> GenericCollectionValidator<T> {
 /// // 当前版本请使用 rust_194_features 模块
 /// ```
 pub fn create_default_memory_allocator() -> GenericMemoryAllocator {
-    GenericMemoryAllocator::new(NonZeroUsize::new(16).unwrap())
+    GenericMemoryAllocator::new(NonZeroUsize::new(16).expect("块大小应非零"))
 }
 
 /// 批量创建泛型向量容器
@@ -1062,11 +1062,11 @@ pub fn demonstrate_rust_192_generic_features() {
 
     // 4. 泛型内存计算
     println!("\n4. NonZero::div_ceil 在泛型内存计算中的应用:");
-    let alignment = NonZeroUsize::new(8).unwrap();
+    let alignment = NonZeroUsize::new(8).expect("对齐值应非零");
     let aligned_size = calculate_generic_aligned_size::<u64>(10, alignment);
     println!("   10 个 u64 对齐后大小: {} 字节", aligned_size);
 
-    let allocator = GenericMemoryAllocator::new(NonZeroUsize::new(16).unwrap());
+    let allocator = GenericMemoryAllocator::new(NonZeroUsize::new(16).expect("块大小应非零"));
     let blocks = allocator.calculate_blocks::<u32>(100);
     println!("   100 个 u32 需要 {} 个 16 字节块", blocks);
 
@@ -1104,7 +1104,7 @@ mod tests {
     #[test]
     fn test_generic_transformer() {
         let transformer = StringToNumberTransformer;
-        assert_eq!(transformer.transform(String::from("42")).unwrap(), 42);
+        assert_eq!(transformer.transform(String::from("42")).expect("转换不应失败"), 42);
         assert!(transformer.transform(String::from("invalid")).is_err());
     }
 
@@ -1118,14 +1118,14 @@ mod tests {
 
     #[test]
     fn test_calculate_generic_aligned_size() {
-        let alignment = NonZeroUsize::new(8).unwrap();
+        let alignment = NonZeroUsize::new(8).expect("对齐值应非零");
         let size = calculate_generic_aligned_size::<u64>(10, alignment);
         assert_eq!(size, 80); // 10 * 8, 已对齐
     }
 
     #[test]
     fn test_generic_memory_allocator() {
-        let allocator = GenericMemoryAllocator::new(NonZeroUsize::new(16).unwrap());
+        let allocator = GenericMemoryAllocator::new(NonZeroUsize::new(16).expect("块大小应非零"));
         let blocks = allocator.calculate_blocks::<u32>(100);
         assert_eq!(blocks, 25); // (100 * 4) / 16 = 25
     }
