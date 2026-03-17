@@ -239,13 +239,13 @@ pub struct CompileResult {
 ///
 /// Rust 1.94.0: 使用 LazyLock 实现编译结果缓存
 pub fn get_cached_compile_result(macro_name: &str) -> Option<CompileResult> {
-    let cache = MACRO_COMPILE_CACHE.lock().unwrap();
+    let cache = MACRO_COMPILE_CACHE.lock().expect("MACRO_COMPILE_CACHE mutex poisoned");
     cache.get(macro_name).cloned()
 }
 
 /// 存储编译结果
 pub fn store_compile_result(macro_name: impl Into<String>, result: CompileResult) {
-    let mut cache = MACRO_COMPILE_CACHE.lock().unwrap();
+    let mut cache = MACRO_COMPILE_CACHE.lock().expect("MACRO_COMPILE_CACHE mutex poisoned");
     cache.insert(macro_name.into(), result);
 }
 
@@ -286,11 +286,12 @@ impl MacroMetadataRegistry {
 
     /// 注册宏
     pub fn register(&self, name: impl Into<String>, defined_in: impl Into<String>) {
-        let mut macros = self.macros.lock().unwrap();
+        let name = name.into();
+        let mut macros = self.macros.lock().expect("MacroMetadataRegistry mutex poisoned");
         macros.insert(
-            name.into(),
+            name.clone(),
             MacroInfo {
-                name: "unknown".to_string(),
+                name,
                 defined_in: defined_in.into(),
                 expansion_count: 0,
                 last_used: None,
@@ -312,7 +313,7 @@ impl MacroMetadataRegistry {
 
     /// 获取宏信息
     pub fn get_info(&self, name: &str) -> Option<MacroInfo> {
-        let macros = self.macros.lock().unwrap();
+        let macros = self.macros.lock().expect("MacroMetadataRegistry mutex poisoned");
         macros.get(name).cloned()
     }
 }
@@ -371,7 +372,7 @@ impl MacroRuleLibrary {
 
 /// 获取宏规则库
 pub fn get_macro_rules() -> std::sync::MutexGuard<'static, MacroRuleLibrary> {
-    MACRO_RULES.lock().unwrap()
+    MACRO_RULES.lock().expect("MACRO_RULES mutex poisoned")
 }
 
 // ==================== 3. 数学常量 - 宏扩展优化 ====================
@@ -633,9 +634,7 @@ impl<'a> PeekableMacroParser<'a> {
         let name = self.parse_identifier()?;
 
         // 检查是否为宏调用（后跟 !）
-        if self.chars.next_if(|c| *c == '!').is_none() {
-            return None;
-        }
+        self.chars.next_if(|c| *c == '!')?;
         self.position += 1;
 
         // 解析参数
@@ -849,17 +848,11 @@ impl EscapeSequenceHandler {
 
     /// 获取十六进制字符的数值
     fn hex_value(c: char) -> Option<u8> {
-        if c.is_ascii_digit() {
-            let val = usize::try_from(c).ok()?;
-            Some(val.wrapping_sub(usize::try_from('0').ok()?) as u8)
-        } else if ('a'..='f').contains(&c) {
-            let val = usize::try_from(c).ok()?;
-            Some(val.wrapping_sub(usize::try_from('a').ok()?) as u8 + 10)
-        } else if ('A'..='F').contains(&c) {
-            let val = usize::try_from(c).ok()?;
-            Some(val.wrapping_sub(usize::try_from('A').ok()?) as u8 + 10)
-        } else {
-            None
+        match c {
+            '0'..='9' => Some(c as u8 - b'0'),
+            'a'..='f' => Some(c as u8 - b'a' + 10),
+            'A'..='F' => Some(c as u8 - b'A' + 10),
+            _ => None,
         }
     }
 }

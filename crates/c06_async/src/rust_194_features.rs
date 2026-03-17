@@ -393,14 +393,14 @@ impl AsyncSlidingWindowProcessor {
     /// 异步计算移动平均
     ///
     /// 当数据量较大（超过 1000 个窗口）时，会定期让出控制权以支持并发。
-    pub async fn moving_average(data: &[f64], window_size: usize) -> Vec<f64> {
+    /// 使用常量泛型参数支持 array_windows。
+    pub async fn moving_average<const N: usize>(data: &[f64]) -> Vec<f64> {
         let mut result = Vec::new();
-        let total_windows = data.len().saturating_sub(window_size - 1);
+        let total_windows = data.len().saturating_sub(N - 1);
 
         // Rust 1.94.0: 使用 array_windows 替代 windows
-        // for window in data.array_windows::<N>()
-        for (i, window) in data.windows(window_size).enumerate() {
-            let avg = window.iter().sum::<f64>() / window.len() as f64;
+        for (i, window) in data.array_windows::<N>().enumerate() {
+            let avg = window.iter().sum::<f64>() / N as f64;
             result.push(avg);
 
             // 只在处理大量数据时让出控制权
@@ -417,9 +417,8 @@ impl AsyncSlidingWindowProcessor {
         let mut changes = Vec::new();
 
         // Rust 1.94.0: 使用 array_windows::<2>
-        // for (i, [prev, curr]) in data.array_windows::<2>().enumerate()
-        for (i, window) in data.windows(2).enumerate() {
-            if (window[1] - window[0]).abs() > 1.0 {
+        for (i, [prev, curr]) in data.array_windows::<2>().enumerate() {
+            if (curr - prev).abs() > 1.0 {
                 changes.push(i);
             }
 
@@ -461,7 +460,7 @@ pub async fn demonstrate_async_windows() {
     let data: Vec<f64> = (0..100).map(|i| i as f64).collect();
 
     // 计算移动平均
-    let ma = AsyncSlidingWindowProcessor::moving_average(&data, 5).await;
+    let ma = AsyncSlidingWindowProcessor::moving_average::<5>(&data).await;
     println!("前5个移动平均值: {:?}", &ma[..5]);
 
     // 检测趋势变化
@@ -493,7 +492,7 @@ impl AsyncUnicodeParser {
         let char_count = s.chars().count();
 
         for (i, ch) in s.chars().enumerate() {
-            let code_point = ch as usize; // Rust 1.94.0: TryFrom<char> for usize
+            let code_point = usize::try_from(ch).unwrap_or(0); // Rust 1.94.0: TryFrom<char> for usize
 
             match code_point {
                 0..=127 => composition.ascii_chars.push(ch),
@@ -517,7 +516,7 @@ impl AsyncUnicodeParser {
         let mut results = Vec::with_capacity(chars.len());
 
         for &ch in chars {
-            let code_point = ch as usize;
+            let code_point = usize::try_from(ch).unwrap_or(0);
             // 验证是否为有效的 Unicode 标量值
             let is_valid = code_point <= 0x10FFFF;
             results.push(is_valid);
@@ -640,7 +639,7 @@ pub async fn demonstrate_rust_194_async_features() {
         }),
         tokio::spawn(async move {
             let data: Vec<f64> = (0..50).map(|i| i as f64).collect();
-            let _ = AsyncSlidingWindowProcessor::moving_average(&data, 5).await;
+            let _ = AsyncSlidingWindowProcessor::moving_average::<5>(&data).await;
         }),
     ];
 
@@ -709,7 +708,7 @@ mod tests {
     #[tokio::test]
     async fn test_async_sliding_window() {
         let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
-        let ma = AsyncSlidingWindowProcessor::moving_average(&data, 3).await;
+        let ma = AsyncSlidingWindowProcessor::moving_average::<3>(&data).await;
         assert_eq!(ma, vec![2.0, 3.0, 4.0]);
     }
 

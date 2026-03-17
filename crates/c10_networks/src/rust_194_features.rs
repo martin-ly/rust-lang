@@ -291,7 +291,7 @@ pub fn get_network_config<F, R>(f: F) -> R
 where
     F: FnOnce(&NetworkConfig) -> R,
 {
-    let config = NETWORK_CONFIG.lock().unwrap();
+    let config = NETWORK_CONFIG.lock().expect("NETWORK_CONFIG mutex poisoned");
     f(&config)
 }
 
@@ -302,7 +302,7 @@ pub fn update_network_config<F>(f: F)
 where
     F: FnOnce(&mut NetworkConfig),
 {
-    let mut config = NETWORK_CONFIG.lock().unwrap();
+    let mut config = NETWORK_CONFIG.lock().expect("NETWORK_CONFIG mutex poisoned");
     f(&mut config);
 }
 
@@ -369,13 +369,13 @@ pub fn register_protocol_handler<F>(name: impl Into<String>, handler: F)
 where
     F: Fn(&[u8]) -> Vec<u8> + Send + 'static,
 {
-    let mut handlers = PROTOCOL_HANDLERS.lock().unwrap();
+    let mut handlers = PROTOCOL_HANDLERS.lock().expect("PROTOCOL_HANDLERS mutex poisoned");
     handlers.insert(name.into(), Box::new(handler));
 }
 
 /// 处理协议数据
 pub fn handle_protocol(name: &str, data: &[u8]) -> Option<Vec<u8>> {
-    let handlers = PROTOCOL_HANDLERS.lock().unwrap();
+    let handlers = PROTOCOL_HANDLERS.lock().expect("PROTOCOL_HANDLERS mutex poisoned");
     handlers.get(name).map(|handler| handler(data))
 }
 
@@ -706,23 +706,12 @@ pub struct HexCodec;
 
 impl HexCodec {
     /// 将十六进制字符转换为数值
-    ///
-    /// Rust 1.94.0: 使用 TryFrom<char> for usize
     fn hex_char_to_value(c: char) -> Option<u8> {
-        if c.is_ascii_digit() {
-            // '0'..'9' -> 0..9
-            let val = usize::try_from(c).ok()?;
-            Some(val.wrapping_sub(usize::try_from('0').ok()?) as u8)
-        } else if c.is_ascii_lowercase() {
-            // 'a'..'f' -> 10..15
-            let val = usize::try_from(c).ok()?;
-            Some(val.wrapping_sub(usize::try_from('a').ok()?) as u8 + 10)
-        } else if c.is_ascii_uppercase() {
-            // 'A'..'F' -> 10..15
-            let val = usize::try_from(c).ok()?;
-            Some(val.wrapping_sub(usize::try_from('A').ok()?) as u8 + 10)
-        } else {
-            None
+        match c {
+            '0'..='9' => Some(c as u8 - b'0'),
+            'a'..='f' => Some(c as u8 - b'a' + 10),
+            'A'..='F' => Some(c as u8 - b'A' + 10),
+            _ => None,
         }
     }
 
@@ -768,7 +757,7 @@ impl MacAddressParser {
     /// Rust 1.94.0: 使用 TryFrom<char> for usize 进行字符解析
     pub fn parse(mac_str: &str) -> Option<MacAddress> {
         // 支持冒号或连字符分隔符
-        let parts: Vec<&str> = mac_str.split(|c| c == ':' || c == '-').collect();
+        let parts: Vec<&str> = mac_str.split([':', '-']).collect();
         if parts.len() != 6 {
             return None;
         }
@@ -805,22 +794,11 @@ impl MacAddressParser {
 
     /// 将十六进制字符转换为数值
     fn hex_char_to_value(c: char) -> Option<u8> {
-        if c.is_ascii_digit() {
-            Some(c as u8 - b'0')
-        } else if c.is_ascii_lowercase() {
-            if ('a'..='f').contains(&c) {
-                Some(c as u8 - b'a' + 10)
-            } else {
-                None
-            }
-        } else if c.is_ascii_uppercase() {
-            if ('A'..='F').contains(&c) {
-                Some(c as u8 - b'A' + 10)
-            } else {
-                None
-            }
-        } else {
-            None
+        match c {
+            '0'..='9' => Some(c as u8 - b'0'),
+            'a'..='f' => Some(c as u8 - b'a' + 10),
+            'A'..='F' => Some(c as u8 - b'A' + 10),
+            _ => None,
         }
     }
 

@@ -50,7 +50,7 @@ pub struct SlidingWindowProcessor<T, const N: usize> {
 
 impl<T: Copy + std::ops::Add<Output = T> + Default, const N: usize> SlidingWindowProcessor<T, N> {
     /// 创建新的滑动窗口处理器
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self {
             _phantom: PhantomData,
         }
@@ -170,7 +170,7 @@ impl<T> Default for LazyCellContainer<T> {
 
 impl<T> LazyCellContainer<T> {
     /// 创建新的延迟初始化容器
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self {
             cell: OnceCell::new(),
         }
@@ -411,7 +411,7 @@ impl<T> SmartContainer<T> {
     /// 创建新的智能容器
     ///
     /// Rust 1.94.0: 改进的构造函数类型推断
-    pub fn new(data: T) -> Self {
+    pub const fn new(data: T) -> Self {
         Self {
             data,
             metadata: None,
@@ -706,7 +706,7 @@ pub enum Edition2024Marker {
 
 impl<T> Edition2024Generic<T> {
     /// 创建 Edition 2024 泛型容器
-    pub fn new(value: T) -> Self {
+    pub const fn new(value: T) -> Self {
         Self {
             value,
             edition_marker: Edition2024Marker::Modern,

@@ -62,7 +62,7 @@ impl<'a> SimpleLexer<'a> {
     /// 在 Rust 1.94 中可以使用 next_if_map 简化此逻辑
     pub fn parse_number(&mut self) -> Option<i64> {
         // 检查第一个字符是否为数字
-        let first_char = *self.input.peek()?;
+        let &first_char = self.input.peek()?;
         if !first_char.is_ascii_digit() {
             return None;
         }
@@ -90,7 +90,7 @@ impl<'a> SimpleLexer<'a> {
     /// 在 Rust 1.94 中可以使用 next_if_map 简化此逻辑
     pub fn parse_identifier(&mut self) -> Option<String> {
         // 检查第一个字符是否为字母或下划线
-        let first_char = *self.input.peek()?;
+        let &first_char = self.input.peek()?;
         if !first_char.is_ascii_alphabetic() && first_char != '_' {
             return None;
         }
@@ -567,7 +567,7 @@ impl<T> Edition2024ControlFlow<T> {
         F: FnOnce(&T) -> Result<T, E>,
     {
         match &self.value {
-            Some(v) => f(v),
+            Some(v) => f(v).inspect_err(|_| eprintln!("Operation failed")),
             None => Err(E::default()),
         }
     }

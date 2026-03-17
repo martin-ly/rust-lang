@@ -413,7 +413,7 @@ impl NumericalAlgorithms {
     where
         F: Fn(f64) -> f64,
     {
-        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let phi = std::f64::consts::GOLDEN_RATIO;
         let resphi = 2.0 - phi; // ≈ 0.382
 
         let mut x1 = a + resphi * (b - a);
@@ -445,7 +445,7 @@ impl NumericalAlgorithms {
     ///
     /// Rust 1.94.0: EULER_GAMMA 在级数分析中的应用
     pub fn harmonic_number(n: u64) -> f64 {
-        let gamma = 0.5772156649015329_f64; // std::f64::consts::EULER_GAMMA
+        let gamma = std::f64::consts::EULER_GAMMA;
         (n as f64).ln() + gamma + 1.0 / (2.0 * n as f64) - 1.0 / (12.0 * n.pow(2) as f64)
     }
 
@@ -453,7 +453,7 @@ impl NumericalAlgorithms {
     ///
     /// Rust 1.94.0: GOLDEN_RATIO 在斐波那契数列中的应用
     pub fn fibonacci_closed_form(n: u32) -> f64 {
-        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let phi = std::f64::consts::GOLDEN_RATIO;
         let psi = 1.0 - phi; // -1/phi
         let sqrt5 = 5.0_f64.sqrt();
 
@@ -464,7 +464,7 @@ impl NumericalAlgorithms {
     ///
     /// Rust 1.94.0: GOLDEN_RATIO 在哈希算法中的应用
     pub fn golden_ratio_hash<T: std::hash::Hash>(value: T, table_size: usize) -> usize {
-        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let phi = std::f64::consts::GOLDEN_RATIO;
 
         let mut hasher = std::collections::hash_map::DefaultHasher::new();
         std::hash::Hash::hash(&value, &mut hasher);
@@ -479,7 +479,7 @@ impl NumericalAlgorithms {
     ///
     /// Rust 1.94.0: EULER_GAMMA 在数论中的应用
     pub fn prime_counting_estimate(n: u64) -> f64 {
-        let gamma = 0.5772156649015329_f64; // std::f64::consts::EULER_GAMMA
+        let gamma = std::f64::consts::EULER_GAMMA;
         let ln_n = (n as f64).ln();
 
         // π(n) ≈ n / (ln(n) - 1 + γ/ln(n))
@@ -744,14 +744,17 @@ impl StringAlgorithms {
         s.chars().map(|c| c as usize).collect()
     }
 
-    /// 查找变位词（基于码点和）
+    /// 查找变位词（基于排序后的字符序列）
     ///
-    /// Rust 1.94.0: 使用 char 转换检测变位词
+    /// Rust 1.94.0: 使用排序后的字符序列作为 key 检测变位词
+    /// 修复: 使用排序后的字符串作为 key，避免不同字符组合产生相同和的问题
     pub fn find_anagrams(words: &[&str]) -> Vec<Vec<String>> {
-        let mut groups: HashMap<usize, Vec<String>> = HashMap::new();
+        let mut groups: HashMap<String, Vec<String>> = HashMap::new();
 
         for word in words {
-            let key: usize = word.chars().map(|c| c as usize).sum();
+            let mut key_chars: Vec<char> = word.chars().collect();
+            key_chars.sort_unstable();
+            let key: String = key_chars.into_iter().collect();
             groups.entry(key).or_default().push(word.to_string());
         }
 

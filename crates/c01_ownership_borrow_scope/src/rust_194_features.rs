@@ -120,7 +120,7 @@ impl<T> Default for LazyCache<T> {
 
 impl<T> LazyCache<T> {
     /// 创建新的延迟初始化缓存
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self {
             cell: OnceCell::new(),
         }
@@ -194,7 +194,7 @@ where
 
 impl<T> ThreadSafeLazyCache<T> {
     /// 创建新的线程安全延迟初始化缓存
-    pub fn new() -> Self
+    pub const fn new() -> Self
     where
         T: Send + Sync + 'static,
     {
@@ -364,6 +364,7 @@ impl<T> SmartPtrChain<T> {
         }
     }
 
+    #[inline]
     pub fn metadata(&self) -> usize {
         self.metadata
     }
@@ -379,8 +380,10 @@ impl<T> Deref for SmartPtrChain<T> {
     fn deref(&self) -> &T {
         // SAFETY: inner 在 new() 中被初始化为 Some，只有在 into_raw_parts 后才变为 None
         // 而 into_raw_parts 会消耗 self，所以通过引用访问时 inner 总是 Some
-        self.inner.as_ref()
-            .expect("SmartPtrChain inner value should always be Some when accessed by reference")
+        let Some(inner) = self.inner.as_ref() else {
+            panic!("SmartPtrChain inner value should always be Some when accessed by reference")
+        };
+        inner
     }
 }
 
@@ -405,8 +408,10 @@ impl<T, F: FnOnce(T)> ScopeGuard<T, F> {
     /// # Panics
     /// 如果 value 已经被 `complete()` 方法取走
     pub fn get_mut(&mut self) -> &mut T {
-        self.value.as_mut()
-            .expect("ScopeGuard value should not be taken before calling get_mut")
+        let Some(value) = self.value.as_mut() else {
+            panic!("ScopeGuard value should not be taken before calling get_mut")
+        };
+        value
     }
 
     /// 获取不可变引用
@@ -414,8 +419,10 @@ impl<T, F: FnOnce(T)> ScopeGuard<T, F> {
     /// # Panics
     /// 如果 value 已经被 `complete()` 方法取走
     pub fn get(&self) -> &T {
-        self.value.as_ref()
-            .expect("ScopeGuard value should not be taken before calling get")
+        let Some(value) = self.value.as_ref() else {
+            panic!("ScopeGuard value should not be taken before calling get")
+        };
+        value
     }
 
     /// 主动完成并禁用析构函数
@@ -449,7 +456,7 @@ pub struct ZeroCopyString {
 
 impl ZeroCopyString {
     /// 创建空的 ZeroCopyString
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self { data: Vec::new() }
     }
 
@@ -472,10 +479,10 @@ impl ZeroCopyString {
     /// 
     /// 如果 bytes 不是有效的 UTF-8，返回 None
     pub fn from_utf8(bytes: Vec<u8>) -> Option<Self> {
-        match String::from_utf8(bytes) {
-            Ok(s) => Some(Self::from_string(s)),
-            Err(_) => None,
-        }
+        String::from_utf8(bytes)
+            .ok()
+            .inspect(|s| eprintln!("[DEBUG] Created ZeroCopyString: {}", s.as_str()))
+            .map(Self::from_string)
     }
 
     /// 转换为 String（零拷贝）
@@ -508,10 +515,12 @@ impl ZeroCopyString {
         &self.data
     }
 
+    #[inline]
     pub fn is_empty(&self) -> bool {
         self.data.is_empty()
     }
 
+    #[inline]
     pub fn len(&self) -> usize {
         self.data.len()
     }

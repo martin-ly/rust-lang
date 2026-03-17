@@ -317,7 +317,7 @@ impl DataAnalyzer {
     where
         F: Fn(f64) -> f64,
     {
-        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let phi = std::f64::consts::GOLDEN_RATIO;
         let resphi = 2.0 - phi; // 1 - 1/phi = (3 - √5)/2 ≈ 0.382
 
         let mut x1 = a + resphi * (b - a);
@@ -348,7 +348,7 @@ impl DataAnalyzer {
     ///
     /// Rust 1.94.0: EULER_GAMMA 在级数分析中的应用
     pub fn estimate_harmonic_series(n: u64) -> f64 {
-        let gamma = 0.5772156649015329_f64; // std::f64::consts::EULER_GAMMA
+        let gamma = std::f64::consts::EULER_GAMMA;
         (n as f64).ln() + gamma + 1.0 / (2.0 * n as f64)
     }
 
@@ -360,7 +360,7 @@ impl DataAnalyzer {
             return None;
         }
 
-        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let phi = std::f64::consts::GOLDEN_RATIO;
         let split_point = (data.len() as f64 / phi).round() as usize;
 
         Some(split_point.max(1).min(data.len() - 1))
@@ -370,7 +370,7 @@ impl DataAnalyzer {
     ///
     /// Rust 1.94.0: 基于黄金比例的采样策略
     pub fn fibonacci_sampling(data: &[f64], sample_count: usize) -> Vec<f64> {
-        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let phi = std::f64::consts::GOLDEN_RATIO;
         let mut samples = Vec::with_capacity(sample_count);
 
         for i in 0..sample_count {
@@ -590,7 +590,7 @@ impl ProcessCommunicationEncoder {
             }
         }
 
-        Ok(result)
+        Ok(result).inspect(|s| eprintln!("[DEBUG] Decoded codepoints: {}", s))
     }
 
     /// 分析字符编码分布

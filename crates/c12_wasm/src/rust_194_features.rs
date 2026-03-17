@@ -314,7 +314,7 @@ pub fn get_wasm_config<F, R>(f: F) -> R
 where
     F: FnOnce(&WasmInstanceConfig) -> R,
 {
-    let config = WASM_INSTANCE_CONFIG.lock().unwrap();
+    let config = WASM_INSTANCE_CONFIG.lock().expect("WASM_INSTANCE_CONFIG mutex poisoned");
     f(&config)
 }
 
@@ -323,7 +323,7 @@ pub fn update_wasm_config<F>(f: F)
 where
     F: FnOnce(&mut WasmInstanceConfig),
 {
-    let mut config = WASM_INSTANCE_CONFIG.lock().unwrap();
+    let mut config = WASM_INSTANCE_CONFIG.lock().expect("WASM_INSTANCE_CONFIG mutex poisoned");
     f(&mut config);
 }
 
@@ -390,7 +390,7 @@ pub struct WasiPreopenDir {
 
 /// 添加预打开目录
 pub fn add_preopen_dir(guest_path: impl Into<String>, host_path: impl Into<String>) {
-    let mut preopens = WASI_PREOPENS.lock().unwrap();
+    let mut preopens = WASI_PREOPENS.lock().expect("WASI_PREOPENS mutex poisoned");
     preopens.push(WasiPreopenDir {
         guest_path: guest_path.into(),
         host_path: host_path.into(),
@@ -400,7 +400,7 @@ pub fn add_preopen_dir(guest_path: impl Into<String>, host_path: impl Into<Strin
 
 /// 获取预打开目录列表
 pub fn get_preopen_dirs() -> Vec<WasiPreopenDir> {
-    WASI_PREOPENS.lock().unwrap().clone()
+    WASI_PREOPENS.lock().expect("WASI_PREOPENS mutex poisoned").clone()
 }
 
 // ==================== 3. 数学常量 - WASM 图形计算 ====================

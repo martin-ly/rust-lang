@@ -4,6 +4,6 @@
 
 运行测试:
 
-`ash
+```bash
 cargo test --package c01_ownership_borrow_scope
-``n
+```

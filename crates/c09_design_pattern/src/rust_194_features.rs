@@ -179,7 +179,7 @@ pub fn with_config_readonly<F, R>(f: F) -> R
 where
     F: FnOnce(&GlobalConfig) -> R,
 {
-    let config = GLOBAL_CONFIG.lock().unwrap();
+    let config = GLOBAL_CONFIG.lock().expect("GLOBAL_CONFIG mutex poisoned");
     f(&config)
 }
 
@@ -190,7 +190,7 @@ pub fn with_config<F, R>(f: F) -> R
 where
     F: FnOnce(&mut GlobalConfig) -> R,
 {
-    let mut config = GLOBAL_CONFIG.lock().unwrap();
+    let mut config = GLOBAL_CONFIG.lock().expect("GLOBAL_CONFIG mutex poisoned");
     f(&mut config)
 }
 
@@ -253,18 +253,18 @@ impl GoldenRatioFactory {
     /// 黄金比例常量（f64）
     ///
     /// Rust 1.94.0: std::f64::consts::GOLDEN_RATIO
-    pub const PHI_F64: f64 = 1.618_033_988_749_895_f64;
+    pub const PHI_F64: f64 = std::f64::consts::GOLDEN_RATIO;
 
     /// 黄金比例常量（f32）
     ///
     /// Rust 1.94.0: std::f32::consts::GOLDEN_RATIO
-    pub const PHI_F32: f32 = 1.618_034_f32;
+    pub const PHI_F32: f32 = std::f32::consts::GOLDEN_RATIO;
 
     /// 欧拉-马歇罗尼常数（f64）
     ///
     /// Rust 1.94.0: std::f64::consts::EULER_GAMMA
     #[allow(dead_code)]
-    pub const GAMMA_F64: f64 = 0.577_215_664_901_532_9_f64;
+    pub const GAMMA_F64: f64 = std::f64::consts::EULER_GAMMA;
 
     /// 创建黄金比例矩形
     pub fn create_golden_rectangle(width: f64) -> Rectangle {
@@ -284,7 +284,20 @@ impl GoldenRatioFactory {
     }
 
     /// 使用黄金分割搜索查找函数最小值
-    pub fn golden_section_search<F>(mut left: f64, mut right: f64, epsilon: f64, f: F) -> f64
+    /// 
+    /// # Arguments
+    /// * `left` - 搜索区间左边界
+    /// * `right` - 搜索区间右边界
+    /// * `epsilon` - 精度阈值
+    /// * `max_iterations` - 最大迭代次数，防止无限循环
+    /// * `f` - 目标函数
+    pub fn golden_section_search<F>(
+        mut left: f64,
+        mut right: f64,
+        epsilon: f64,
+        max_iterations: usize,
+        f: F,
+    ) -> f64
     where
         F: Fn(f64) -> f64,
     {
@@ -295,7 +308,6 @@ impl GoldenRatioFactory {
         let mut fc = f(c);
         let mut fd = f(d);
 
-        let max_iterations = 1000;
         let mut iterations = 0;
 
         while (right - left).abs() > epsilon && iterations < max_iterations {
@@ -649,7 +661,7 @@ pub fn demonstrate_rust_194_design_patterns() {
     println!("   黄金螺旋点 (前5个): {:?}", points);
 
     // 使用黄金分割搜索
-    let min_point = GoldenRatioFactory::golden_section_search(0.0, 10.0, 0.001, |x| {
+    let min_point = GoldenRatioFactory::golden_section_search(0.0, 10.0, 0.001, 1000, |x| {
         (x - 3.0).powi(2) // 最小值在 x = 3
     });
     println!("   黄金分割搜索结果 (接近3): {:.3}", min_point);
@@ -801,8 +813,13 @@ mod tests {
     #[test]
     fn test_golden_section_search() {
         // 黄金分割搜索寻找 (x - 5)^2 的最小值，在 [0, 10] 区间内最小值应该在 x = 5
-        let min =
-            GoldenRatioFactory::golden_section_search(0.0, 10.0, 0.01, |x| (x - 5.0) * (x - 5.0));
+        let min = GoldenRatioFactory::golden_section_search(
+            0.0,
+            10.0,
+            0.01,
+            1000,
+            |x| (x - 5.0) * (x - 5.0),
+        );
         // 搜索结果应该在 [0, 10] 区间内
         assert!(
             min >= 0.0 && min <= 10.0,
@@ -1067,7 +1084,8 @@ mod tests {
             0.0,
             10.0,
             0.001,
-            |x| (x - 5.0).powi(2)
+            1000,
+            |x| (x - 5.0).powi(2),
         );
         // 结果应该接近5（在0-10范围内）
         assert!(normal_point >= 0.0 && normal_point <= 10.0, "搜索结果应该在搜索区间内");

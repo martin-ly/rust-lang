@@ -229,8 +229,7 @@ pub fn harmonic_number_approx(n: u64) -> f64 {
 #[allow(dead_code)]
 pub fn char_to_usize(c: char) -> usize {
     // Rust 1.94: usize::try_from(c).unwrap_or(0)
-    // 当前版本: 直接使用 as 转换
-    c as usize
+    usize::try_from(c).unwrap_or(0)
 }
 
 /// 将字符串中所有字符转换为 usize 值
@@ -272,8 +271,8 @@ pub enum CharCategory {
 impl UnicodeCharInfo {
     /// 从 char 创建字符信息
     pub fn from_char(c: char) -> Option<Self> {
-        // Rust 1.94: let scalar_value = usize::try_from(c).ok()?;
-        let scalar_value = c as usize;
+        // Rust 1.94: 使用 try_from 进行安全转换
+        let scalar_value = usize::try_from(c).unwrap_or(0);
 
         let category = if c.is_ascii_control() {
             CharCategory::Control
@@ -326,7 +325,7 @@ impl<T> TypeProcessor<T> {
     /// 创建新的类型处理器
     ///
     /// Rust 1.94.0: 类型推断改进使得显式类型标注更少需要
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self {
             _phantom: PhantomData,
         }
@@ -477,7 +476,7 @@ pub struct PreciseTypeValidator;
 
 impl PreciseTypeValidator {
     /// 创建新的类型验证器
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self
     }
 
@@ -541,7 +540,7 @@ impl<T> Edition2024Wrapper<T> {
     /// 创建 Edition 2024 包装器
     ///
     /// Rust 1.94.0: 默认使用 Edition 2024
-    pub fn new(value: T) -> Self {
+    pub const fn new(value: T) -> Self {
         Self {
             value,
             edition: Edition::Edition2024,
@@ -554,6 +553,7 @@ impl<T> Edition2024Wrapper<T> {
     }
 
     /// 获取值引用
+    #[inline]
     pub fn get(&self) -> &T {
         &self.value
     }

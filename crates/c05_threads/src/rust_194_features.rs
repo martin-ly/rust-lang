@@ -86,7 +86,7 @@ pub struct SingleThreadCache<T> {
 
 impl<T> SingleThreadCache<T> {
     /// 创建新的缓存
-    pub fn new(init: fn() -> T) -> Self {
+    pub const fn new(init: fn() -> T) -> Self {
         Self { value: None, init }
     }
 
@@ -354,14 +354,14 @@ pub fn demonstrate_array_windows() {
     println!("大小为 3 的窗口:");
     // Rust 1.94.0: data.array_windows::<3>()
     // 模拟实现
-    for window in data.windows(3) {
+    for window in data.array_windows::<3>() {
         println!("  {:?}", window);
     }
 
     // 计算移动平均
     println!("\n3点移动平均:");
     let averages: Vec<f64> = data
-        .windows(3)
+        .array_windows::<3>()
         .map(|w| w.iter().sum::<i32>() as f64 / 3.0)
         .collect();
     println!("  {:?}", averages);
@@ -369,7 +369,7 @@ pub fn demonstrate_array_windows() {
     // 寻找趋势变化点
     println!("\n寻找趋势变化:");
     let trends: Vec<&str> = data
-        .windows(2)
+        .array_windows::<2>()
         .map(|w| {
             if w[1] > w[0] {
                 "上升"
@@ -388,7 +388,7 @@ pub fn demonstrate_array_windows() {
 /// Rust 1.94.0: 数组窗口在数值分析中的应用
 pub fn compute_differences(data: &[f64]) -> Vec<f64> {
     // Rust 1.94.0: data.array_windows::<2>().map(|[a, b]| b - a).collect()
-    data.windows(2).map(|w| w[1] - w[0]).collect()
+    data.array_windows::<2>().map(|[a, b]| b - a).collect()
 }
 
 /// 检测数据中的异常值
@@ -398,9 +398,9 @@ pub fn detect_outliers(data: &[f64], threshold: f64) -> Vec<usize> {
     let mut outliers = Vec::new();
 
     // Rust 1.94.0: for (i, [prev, curr, next]) in data.array_windows::<3>().enumerate()
-    for (i, window) in data.windows(3).enumerate() {
-        let avg = (window[0] + window[2]) / 2.0;
-        if (window[1] - avg).abs() > threshold {
+    for (i, [prev, curr, next]) in data.array_windows::<3>().enumerate() {
+        let avg = (prev + next) / 2.0;
+        if (curr - avg).abs() > threshold {
             outliers.push(i + 1); // 中间元素的索引
         }
     }
@@ -421,12 +421,12 @@ pub fn demonstrate_char_to_usize() {
 
     // 转换 ASCII 字符
     let ch = 'A';
-    let value: usize = ch as usize; // Rust 1.94.0: TryFrom 实现
+    let value: usize = usize::try_from(ch).unwrap_or(0); // Rust 1.94.0: TryFrom 实现
     println!("字符 '{}' 的 Unicode 标量值: {}", ch, value);
 
     // 转换数字字符
     let digit = '9';
-    let digit_value: usize = digit as usize;
+    let digit_value: usize = usize::try_from(digit).unwrap_or(0);
     println!("字符 '{}' 的 Unicode 标量值: {}", digit, digit_value);
 
     // 转换中文字符
@@ -444,7 +444,7 @@ pub fn demonstrate_char_to_usize() {
 ///
 /// Rust 1.94.0: TryFrom<char> for usize 的应用
 pub fn string_to_usize_array(s: &str) -> Vec<usize> {
-    s.chars().map(|c| c as usize).collect()
+    s.chars().map(|c| usize::try_from(c).unwrap_or(0)).collect()
 }
 
 /// 查找字符的 Unicode 范围
@@ -457,7 +457,7 @@ pub fn analyze_unicode_ranges(chars: &[char]) -> UnicodeAnalysis {
     let mut other_count = 0;
 
     for &ch in chars {
-        let code_point = ch as usize; // Rust 1.94.0 转换
+        let code_point = usize::try_from(ch).unwrap_or(0); // Rust 1.94.0 转换
         match code_point {
             0..=127 => ascii_count += 1,
             128..=255 => latin_count += 1,
@@ -772,14 +772,14 @@ mod tests {
 
         // 获取初始值
         {
-            let mgr = shared.lock().unwrap();
+            let mgr = shared.lock().expect("ThreadSafeResourceManager mutex poisoned");
             assert_eq!(*mgr.get(), 42);
         }
 
         // 在一个线程中引发 panic
         let shared_clone = Arc::clone(&shared);
         let handle = thread::spawn(move || {
-            let _guard = shared_clone.lock().unwrap();
+            let _guard = shared_clone.lock().expect("ThreadSafeResourceManager mutex poisoned");
             panic!("故意 panic 以测试 poison");
         });
 
