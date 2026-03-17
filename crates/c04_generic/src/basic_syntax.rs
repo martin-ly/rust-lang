@@ -350,7 +350,7 @@ pub mod generic_structs {
 
             let mut wrapper = Wrapper::new(vec![1, 2, 3]);
             wrapper.get_mut().push(4);
-            assert_eq!(wrapper.expect("wrapper 应包含值"), vec![1, 2, 3, 4]);
+            assert_eq!(wrapper.unwrap(), vec![1, 2, 3, 4]);
         }
 
         #[test]
