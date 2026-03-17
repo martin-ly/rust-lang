@@ -99,7 +99,7 @@ mod tests {
     
     #[test]
     fn test_hlist_length() {
-        let list = HCons {
+        let _list = HCons {
             head: 1,
             tail: HCons {
                 head: "hello",

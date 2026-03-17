@@ -281,7 +281,7 @@ impl App {
         let mut buffer = [0; 1024];
 
         match stream.read(&mut buffer) {
-            Ok(_) => {
+            Ok(_n) => {
                 if let Some(request) = Request::parse(&buffer) {
                     let response = self.route_request(&request, &metrics);
                     let success = response.status == 200;

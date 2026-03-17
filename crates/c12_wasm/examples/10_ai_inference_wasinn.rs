@@ -69,8 +69,8 @@ pub enum InferenceBackend {
     TFLite,
     /// OpenVINO 后端
     OpenVINO,
-    /// GGML 后端（用于 LLM）
-    GGML,
+    /// Ggml 后端（用于 LLM）
+    Ggml,
 }
 
 impl InferenceBackend {
@@ -80,7 +80,7 @@ impl InferenceBackend {
             Self::PyTorch => "pytorch",
             Self::TFLite => "tensorflowlite",
             Self::OpenVINO => "openvino",
-            Self::GGML => "ggml",
+            Self::Ggml => "ggml",
         }
     }
 }
@@ -222,7 +222,7 @@ impl LLMGenerator {
         println!("Prompt: {}", prompt);
         println!("Max tokens: {}", self.max_tokens);
 
-        // 实际实现中使用 WASI-NN GGML 后端
+        // 实际实现中使用 WASI-NN Ggml 后端
         // 这里提供模拟实现
 
         println!("Tokenizing prompt...");
@@ -247,7 +247,7 @@ impl LLMGenerator {
     fn mock_generate(&self, prompt: &str) -> String {
         format!(
             "{} This is a simulated response from the language model. \
-             In a real implementation, this would use WASI-NN with GGML backend \
+             In a real implementation, this would use WASI-NN with Ggml backend \
              to generate text using models like LLaMA, GPT, or other LLMs.",
             prompt
         )
@@ -480,7 +480,7 @@ mod tests {
         assert_eq!(InferenceBackend::PyTorch.as_str(), "pytorch");
         assert_eq!(InferenceBackend::TFLite.as_str(), "tensorflowlite");
         assert_eq!(InferenceBackend::OpenVINO.as_str(), "openvino");
-        assert_eq!(InferenceBackend::GGML.as_str(), "ggml");
+        assert_eq!(InferenceBackend::Ggml.as_str(), "ggml");
     }
 
     #[test]

@@ -218,7 +218,7 @@ struct TextStats {
 }
 
 impl TextStats {
-    fn to_string(&self) -> String {
+    fn format_stats(&self) -> String {
         format!(
             "Text Statistics:\n\
              - Characters: {}\n\
@@ -358,7 +358,7 @@ impl Application {
 
         // 统计分析
         let stats = self.file_processor.analyze_text(sample_text);
-        println!("{}", stats.to_string());
+        println!("{}", stats.format_stats());
 
         // 各种转换
         println!("\nTransformations:");

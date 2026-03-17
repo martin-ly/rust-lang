@@ -44,8 +44,7 @@ pub fn compare_exchange_demo() {
     // 再次尝试会失败，返回当前值
     let _ = value
         .compare_exchange(5, 20, Ordering::AcqRel, Ordering::Acquire)
-        .err()
-        .expect("线程创建不应失败");
+        .unwrap_err();
 
     assert_eq!(value.load(Ordering::Relaxed), 10);
 }

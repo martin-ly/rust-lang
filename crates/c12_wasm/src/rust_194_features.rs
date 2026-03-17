@@ -1471,14 +1471,14 @@ mod tests {
         // 测试未闭合的字符串
         let unclosed_string = r#"(module "unclosed string)"#;
         let mut parser = WatParser::new(unclosed_string);
-        let tokens = parser.parse_all();
+        let _tokens = parser.parse_all();
         // 未闭合的字符串应该被忽略或返回 None
         // 解析器行为可能不同，但不应该 panic
         
         // 测试无效的字符序列
         let invalid = "@#$%^&*";
         let mut parser = WatParser::new(invalid);
-        let tokens = parser.parse_all();
+        let _tokens = parser.parse_all();
         // 无效字符应该被跳过
         
         // 测试空输入
@@ -1529,7 +1529,7 @@ mod tests {
         
         // 测试过多的填充
         let too_much_padding = "SGVsbG8==="; // 3个填充
-        let decoded = WasmBase64::decode(too_much_padding);
+        let _decoded = WasmBase64::decode(too_much_padding);
         // 应该返回 None 或根据实现处理
         
         // 测试空字符串
@@ -1540,12 +1540,12 @@ mod tests {
         
         // 测试只有填充
         let only_padding = "==";
-        let decoded = WasmBase64::decode(only_padding);
+        let _decoded = WasmBase64::decode(only_padding);
         // 根据实现可能返回 None 或空
         
         // 测试不合法的 Base64 字符
         let invalid_chars = "SGVs#bG8="; // # 不是有效的 Base64 字符
-        let decoded = WasmBase64::decode(invalid_chars);
+        let _decoded = WasmBase64::decode(invalid_chars);
         // 无效字符应该被忽略或导致返回 None
         
         // 测试长度不是4的倍数的输入（不考虑填充）
