@@ -476,7 +476,7 @@ impl ConcurrencyController190 {
     where
         F: Future<Output = String>,
     {
-        let _permit = self.semaphore.acquire().await.unwrap();
+        let _permit = self.semaphore.acquire().await.expect("获取信号量许可不应失败");
         self.active_tasks.fetch_add(1, Ordering::Relaxed);
         
         let result = future.await;
@@ -548,7 +548,7 @@ pub struct StreamMetrics {
 impl SmartAsyncCache190 {
     pub fn new(max_size: usize, ttl: Duration) -> Self {
         Self {
-            cache: Arc::new(RwLock::new(lru::LruCache::new(std::num::NonZeroUsize::new(max_size).unwrap()))),
+            cache: Arc::new(RwLock::new(lru::LruCache::new(std::num::NonZeroUsize::new(max_size).expect("缓存大小应非零")))),
             hit_count: Arc::new(AtomicUsize::new(0)),
             miss_count: Arc::new(AtomicUsize::new(0)),
             eviction_count: Arc::new(AtomicUsize::new(0)),
@@ -688,7 +688,7 @@ mod tests {
         }).await;
         
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), "test_task");
+        assert_eq!(result.expect("结果应存在"), "test_task");
     }
 
     #[tokio::test]
@@ -719,7 +719,7 @@ mod tests {
         
         let result = cache.get("key1").await;
         assert!(result.is_some());
-        assert_eq!(result.unwrap(), vec![1, 2, 3]);
+        assert_eq!(result.expect("结果应存在"), vec![1, 2, 3]);
         
         let stats = cache.get_statistics().await;
         assert!(stats.hit_count > 0);

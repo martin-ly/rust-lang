@@ -244,11 +244,11 @@ pub fn advance_struct08() {
     };
 
     // 序列化为JSON
-    let json = serde_json::to_string(&user).unwrap();
+    let json = serde_json::to_string(&user).expect("序列化用户失败");
     println!("Serialized: {}", json);
 
     // 反序列化
-    let deserialized_user: User = serde_json::from_str(&json).unwrap();
+    let deserialized_user: User = serde_json::from_str(&json).expect("反序列化用户失败");
     println!("Deserialized: {:?}", deserialized_user);
 }
 

@@ -347,7 +347,7 @@ impl AsyncWorkflowEngine {
 
         {
             let mut workflows = self.workflows.write().await;
-            let workflow = workflows.get_mut(workflow_id).unwrap();
+            let workflow = workflows.get_mut(workflow_id).expect("获取工作流失败");
             workflow.status = WorkflowStatus::Running;
         }
 
@@ -370,23 +370,23 @@ impl AsyncWorkflowEngine {
             if !should_continue {
                 // 标记工作流完成
                 let mut workflows = self.workflows.write().await;
-                let workflow = workflows.get_mut(workflow_id).unwrap();
+                let workflow = workflows.get_mut(workflow_id).expect("获取工作流失败");
                 workflow.status = WorkflowStatus::Completed;
                 println!("  工作流 {} 执行完成", workflow_id);
                 break;
             }
 
-            let step = step_to_execute.unwrap();
+            let step = step_to_execute.expect("获取步骤失败");
 
             match self.execute_step(workflow_id, &step).await {
                 Ok(_) => {
                     let mut workflows = self.workflows.write().await;
-                    let workflow = workflows.get_mut(workflow_id).unwrap();
+                    let workflow = workflows.get_mut(workflow_id).expect("获取工作流失败");
                     workflow.current_step += 1;
                 }
                 Err(e) => {
                     let mut workflows = self.workflows.write().await;
-                    let workflow = workflows.get_mut(workflow_id).unwrap();
+                    let workflow = workflows.get_mut(workflow_id).expect("获取工作流失败");
 
                     if workflow.steps[current_step].retry_count < workflow.steps[current_step].max_retries {
                         workflow.steps[current_step].retry_count += 1;
@@ -803,9 +803,9 @@ mod tests {
         event_bus.publish_event(AsyncEvent::DataReceived {
             id: "test_data".to_string(),
             data: vec![1, 2, 3],
-        }).await.unwrap();
+        }).await.expect("发布事件失败");
 
-        event_bus.process_events().await.unwrap();
+        event_bus.process_events().await.expect("处理事件失败");
 
         let metrics = event_bus.get_metrics().await;
         assert_eq!(metrics.total_events, 1);
@@ -834,9 +834,9 @@ mod tests {
             "test_workflow".to_string(),
             "测试工作流".to_string(),
             steps,
-        ).await.unwrap();
+        ).await.expect("创建工作流失败");
 
-        workflow_engine.execute_workflow("test_workflow").await.unwrap();
+        workflow_engine.execute_workflow("test_workflow").await.expect("执行工作流失败");
 
         let status = workflow_engine.get_workflow_status("test_workflow").await;
         assert_eq!(status, Some(WorkflowStatus::Completed));
@@ -863,7 +863,7 @@ mod tests {
             timestamp: Instant::now(),
         };
 
-        let result = pipeline.process_data(data).await.unwrap();
+        let result = pipeline.process_data(data).await.expect("处理管道数据失败");
         assert_eq!(result.content, b"HELLO");
     }
 

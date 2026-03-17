@@ -95,7 +95,7 @@ impl TokioExamples {
         for task in tasks {
             let semaphore = Arc::clone(&semaphore);
             let handle = task::spawn(async move {
-                let _permit = semaphore.acquire().await.unwrap();
+                let _permit = semaphore.acquire().await.expect("获取信号量许可不应失败");
                 Self::process_task(task).await
             });
             handles.push(handle);

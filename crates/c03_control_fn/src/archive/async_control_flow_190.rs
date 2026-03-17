@@ -303,7 +303,7 @@ impl AsyncErrorHandler190 {
 
                     // 更新重试计数
                     let mut counts = self.retry_count.lock().await;
-                    *counts.get_mut(operation_id).unwrap() = retry_count;
+                    *counts.get_mut(operation_id).expect("获取重试计数失败") = retry_count;
                 }
             }
         }
@@ -492,7 +492,7 @@ mod tests {
         assert!(sm.transition_to(AsyncState::Initializing).await.is_err());
 
         // 测试数据处理
-        sm.transition_to(AsyncState::Running).await.unwrap();
+        sm.transition_to(AsyncState::Running).await.expect("状态转换失败");
         assert!(sm.process_data("test_key".to_string(), "test_value".to_string()).await.is_ok());
     }
 
@@ -526,7 +526,7 @@ mod tests {
         }).await;
 
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), "success");
+        assert_eq!(result.expect("重试结果不应为错误"), "success");
     }
 
     #[tokio::test]

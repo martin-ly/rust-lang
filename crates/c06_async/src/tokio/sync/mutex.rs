@@ -116,7 +116,7 @@ pub async fn mutex_test01() {
     // 等待所有任务完成
     // 这确保了所有任务都完成了对计数器的修改
     for handle in handles {
-        handle.await.unwrap();
+        handle.await.expect("等待任务完成不应失败");
     }
 
     // 获取最终结果并打印

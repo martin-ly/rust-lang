@@ -584,7 +584,7 @@ pub mod async_task_manager {
         // 添加任务
         for i in 0..5 {
             let task_id = format!("task_{}", i);
-            manager.add_task(task_id).await.unwrap();
+            manager.add_task(task_id).await.expect("添加任务不应失败");
         }
 
         // 执行任务
@@ -774,7 +774,7 @@ pub mod async_cache_system {
             cache
                 .set(key, i * 2, Some(TokioDuration::from_secs(60)))
                 .await
-                .unwrap();
+                .expect("初始化不应失败");
         }
 
         // 获取值

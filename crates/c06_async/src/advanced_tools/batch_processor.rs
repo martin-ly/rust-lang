@@ -232,7 +232,7 @@ where
             return;
         }
 
-        let _permit = semaphore.acquire().await.unwrap();
+        let _permit = semaphore.acquire().await.expect("获取信号量许可不应失败");
 
         let processor_clone = Arc::clone(processor);
         let stats_clone = Arc::clone(stats);
@@ -322,7 +322,7 @@ where
                 if queue.is_empty() {
                     false
                 } else {
-                    let item = queue.pop_front().unwrap();
+                    let item = queue.pop_front().expect("队列不应为空");
                     let item_size = item.size;
 
                     // 检查批处理条件
@@ -502,7 +502,7 @@ mod tests {
         // 添加一些测试项目
         for i in 0..10 {
             let item = BatchItem::new(format!("item_{}", i), 100, 0);
-            batch_processor.add_item(item).await.unwrap();
+            batch_processor.add_item(item).await.expect("添加项目不应失败");
         }
 
         // 等待处理完成
@@ -512,7 +512,7 @@ mod tests {
         assert!(stats.total_batches > 0);
         assert_eq!(stats.total_items, 10);
 
-        batch_processor.shutdown().await.unwrap();
+        batch_processor.shutdown().await.expect("关闭批处理器不应失败");
         let _ = handle.await;
     }
 

@@ -26,7 +26,7 @@ pub struct MemoryPool {
 
 impl MemoryPool {
     pub fn new(block_size: usize, block_count: usize) -> Self {
-        let layout = Layout::from_size_align(block_size * block_count, 8).unwrap();
+        let layout = Layout::from_size_align(block_size * block_count, 8).expect("内存池布局创建失败");
         let memory = unsafe { alloc(layout) };
 
         let mut free_blocks = Vec::with_capacity(block_count);
@@ -259,19 +259,19 @@ impl ThreadPool {
         F: FnOnce() + Send + 'static,
     {
         let job = Box::new(f);
-        self.sender.send(Message::NewJob(job)).unwrap();
+        self.sender.send(Message::NewJob(job)).expect("发送新任务消息失败");
     }
 }
 
 impl Drop for ThreadPool {
     fn drop(&mut self) {
         for _ in &self.workers {
-            self.sender.send(Message::Terminate).unwrap();
+            self.sender.send(Message::Terminate).expect("发送终止消息失败");
         }
 
         for worker in &mut self.workers {
             if let Some(thread) = worker.thread.take() {
-                thread.join().unwrap();
+                thread.join().expect("工作线程加入失败");
             }
         }
     }
@@ -312,7 +312,7 @@ impl ConcurrentOptimizedProcessor {
         // 等待所有任务完成
         thread::sleep(Duration::from_millis(100));
 
-        Arc::try_unwrap(results_arc).unwrap().into_inner().unwrap()
+        Arc::try_unwrap(results_arc).expect("解包Arc失败").into_inner().expect("获取互斥锁内容失败")
     }
 
     pub fn get_processed_count(&self) -> usize {
@@ -465,8 +465,8 @@ impl PerformanceProfiler {
 
         for (name, durations) in &self.measurements {
             let avg = durations.iter().sum::<Duration>() / durations.len() as u32;
-            let min = durations.iter().min().unwrap();
-            let max = durations.iter().max().unwrap();
+            let min = durations.iter().min().expect("获取最小持续时间失败");
+            let max = durations.iter().max().expect("获取最大持续时间失败");
 
             report.push_str(&format!("{}:\n", name));
             report.push_str(&format!("  平均时间: {:?}\n", avg));
@@ -612,8 +612,8 @@ impl PerformanceExamples {
 
         // 内存池示例
         let mut pool = MemoryPool::new(1024, 10);
-        let block1 = pool.allocate().unwrap();
-        let block2 = pool.allocate().unwrap();
+        let block1 = pool.allocate().expect("分配内存块1失败");
+        let block2 = pool.allocate().expect("分配内存块2失败");
 
         println!("内存池利用率: {:.2}%", pool.get_utilization() * 100.0);
 
@@ -622,8 +622,8 @@ impl PerformanceExamples {
 
         // 对象池示例
         let mut object_pool = ObjectPool::new(5, String::new);
-        let _obj1 = object_pool.acquire().unwrap();
-        let _obj2 = object_pool.acquire().unwrap();
+        let _obj1 = object_pool.acquire().expect("获取对象1失败");
+        let _obj2 = object_pool.acquire().expect("获取对象2失败");
 
         println!(
             "对象池利用率: {:.2}%",
@@ -657,7 +657,7 @@ impl PerformanceExamples {
         }
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("并发优化线程加入失败");
         }
 
         println!("无锁计数器最终值: {}", counter.get());
@@ -684,7 +684,7 @@ impl PerformanceExamples {
         // 泛型优化容器
         let mut container: OptimizedContainer<i32, 10> = OptimizedContainer::new();
         for i in 0..5 {
-            container.push(i).unwrap();
+            container.push(i).expect("推入容器失败");
         }
 
         println!("容器长度: {}", container.len());
@@ -743,8 +743,8 @@ mod tests {
     fn test_memory_pool() {
         let mut pool = MemoryPool::new(1024, 5);
 
-        let block1 = pool.allocate().unwrap();
-        let block2 = pool.allocate().unwrap();
+        let block1 = pool.allocate().expect("分配内存块1失败");
+        let block2 = pool.allocate().expect("分配内存块2失败");
 
         assert_eq!(pool.get_utilization(), 0.4);
 
@@ -785,7 +785,7 @@ mod tests {
         }
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("并发优化线程加入失败");
         }
 
         assert_eq!(counter.get(), 500);
@@ -801,8 +801,8 @@ mod tests {
         container.push(2).unwrap();
 
         assert_eq!(container.len(), 2);
-        assert_eq!(*container.get(0).unwrap(), 1);
-        assert_eq!(*container.get(1).unwrap(), 2);
+        assert_eq!(*container.get(0).expect("获取容器元素0失败"), 1);
+        assert_eq!(*container.get(1).expect("获取容器元素1失败"), 2);
     }
 
     #[test]
@@ -815,7 +815,7 @@ mod tests {
 
         let avg_time = profiler.get_average_time("test");
         assert!(avg_time.is_some());
-        assert!(avg_time.unwrap() >= Duration::from_millis(10));
+        assert!(avg_time.expect("获取平均时间失败") >= Duration::from_millis(10));
     }
 
     #[test]

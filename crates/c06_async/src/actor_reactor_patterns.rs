@@ -475,10 +475,10 @@ pub mod actix_analysis {
             let addr = Calculator::new().start();
 
             // 发送消息并等待响应
-            let result1 = addr.send(Add(10, 20)).await.unwrap();
+            let result1 = addr.send(Add(10, 20)).await.expect("发送 Add 消息不应失败");
             println!("  返回值: {}", result1);
 
-            let result2 = addr.send(Multiply(5, 6)).await.unwrap();
+            let result2 = addr.send(Multiply(5, 6)).await.expect("发送 Multiply 消息不应失败");
             println!("  返回值: {}", result2);
 
             // 停止 Actor

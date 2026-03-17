@@ -205,7 +205,7 @@ impl PaxosNode {
     }
 
     pub fn propose(&mut self, proposal_id: usize, value: String) -> bool {
-        if self.promised_proposal.is_none() || self.promised_proposal.unwrap() < proposal_id {
+        if self.promised_proposal.is_none() || self.promised_proposal.expect("获取承诺提案失败") < proposal_id {
             self.promised_proposal = Some(proposal_id);
             self.value = Some(value);
             true
@@ -215,7 +215,7 @@ impl PaxosNode {
     }
 
     pub fn accept(&mut self, proposal_id: usize, value: String) -> bool {
-        if self.promised_proposal.is_none() || self.promised_proposal.unwrap() <= proposal_id {
+        if self.promised_proposal.is_none() || self.promised_proposal.expect("获取承诺提案失败") <= proposal_id {
             self.accepted_proposal = Some(proposal_id);
             self.accepted_value = Some(value);
             true
@@ -474,8 +474,8 @@ impl DecisionTree {
             });
         }
 
-        let feature_index = best_feature.unwrap();
-        let threshold = best_threshold.unwrap();
+        let feature_index = best_feature.expect("获取最佳特征失败");
+        let threshold = best_threshold.expect("获取最佳阈值失败");
 
         let mut left_features = Vec::new();
         let mut left_targets = Vec::new();
@@ -512,7 +512,7 @@ impl DecisionTree {
 
         for feature_index in 0..features[0].len() {
             let mut values: Vec<f64> = features.iter().map(|f| f[feature_index]).collect();
-            values.sort_by(|a, b| a.partial_cmp(b).unwrap());
+            values.sort_by(|a, b| a.partial_cmp(b).expect("特征值比较失败"));
 
             for i in 0..values.len() - 1 {
                 let threshold = (values[i] + values[i + 1]) / 2.0;

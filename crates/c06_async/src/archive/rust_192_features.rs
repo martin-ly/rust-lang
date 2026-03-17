@@ -202,7 +202,7 @@ pub fn calculate_async_pool_size(total_tasks: usize, tasks_per_worker: NonZeroUs
         return 0;
     }
 
-    let total = NonZeroUsize::new(total_tasks).unwrap();
+    let total = NonZeroUsize::new(total_tasks).expect("任务总数应非零");
     // Rust 1.92.0: 使用 div_ceil 计算需要的 worker 数
     total.div_ceil(tasks_per_worker).get()
 }
@@ -227,7 +227,7 @@ impl AsyncResourceAllocator {
             return 0;
         }
 
-        let total = NonZeroUsize::new(self.total_resources).unwrap();
+        let total = NonZeroUsize::new(self.total_resources).expect("资源总数应非零");
         // Rust 1.92.0: 使用 div_ceil 计算最大并发任务数
         total.div_ceil(self.resources_per_task).get()
     }
@@ -254,7 +254,7 @@ impl AsyncBatchConfig {
             return 0;
         }
 
-        let total = NonZeroUsize::new(total_items).unwrap();
+        let total = NonZeroUsize::new(total_items).expect("项目总数应非零");
         // Rust 1.92.0: 使用 div_ceil 计算批次数量
         total.div_ceil(self.batch_size).get()
     }
@@ -318,14 +318,14 @@ pub async fn demonstrate_rust_192_async_features() {
 
     // 2. NonZero::div_ceil 演示
     println!("\n2. NonZero::div_ceil 在异步池计算中的应用:");
-    let tasks_per_worker = NonZeroUsize::new(5).unwrap();
+    let tasks_per_worker = NonZeroUsize::new(5).expect("每工作线程任务数应非零");
     let total_tasks = 23;
     let pool_size = calculate_async_pool_size(total_tasks, tasks_per_worker);
     println!("   总任务数: {}", total_tasks);
     println!("   每 worker 任务数: {}", tasks_per_worker);
     println!("   需要的 worker 数: {}", pool_size);
 
-    let allocator = AsyncResourceAllocator::new(1024, NonZeroUsize::new(64).unwrap());
+    let allocator = AsyncResourceAllocator::new(1024, NonZeroUsize::new(64).expect("块大小应非零"));
     println!("   总资源: 1024 units");
     println!("   每任务资源: 64 units");
     println!("   最大并发任务数: {}", allocator.max_concurrent_tasks());
@@ -402,7 +402,7 @@ mod tests {
         });
 
         queue.rotate(1);
-        let first = queue.pop().unwrap();
+        let first = queue.pop().expect("队列不应为空");
         assert_eq!(first.id, 2);
     }
 

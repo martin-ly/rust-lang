@@ -96,13 +96,13 @@ pub async fn process() {
     let client = Client::builder()
         .timeout(std::time::Duration::from_secs(1))
         .build()
-        .unwrap();
+        .expect("发送 HTTP 请求不应失败");
 
     // 客户端2：2秒超时，适合响应较慢的服务
     let client2 = Client::builder()
         .timeout(std::time::Duration::from_secs(2))
         .build()
-        .unwrap();
+        .expect("发送 HTTP 请求不应失败");
 
     println!("开始并发获取数据...");
 

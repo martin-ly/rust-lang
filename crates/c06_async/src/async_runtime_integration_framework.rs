@@ -712,17 +712,17 @@ mod tests {
         let config = RuntimeConfig::default();
         let framework = AsyncRuntimeIntegrationFramework::new(config);
         let adapter = Box::new(TokioRuntimeAdapter::new(RuntimeConfig::default()));
-        framework.register_adapter(adapter).await.unwrap();
+        framework.register_adapter(adapter).await.expect("注册适配器不应失败");
 
         let task = Box::new(ExampleTask::new("test_task", TaskPriority::Normal, 10));
-        let result = framework.execute_task(task).await.unwrap();
+        let result = framework.execute_task(task).await.expect("执行任务不应失败");
         assert!(result.contains("test_task_completed"));
     }
 
     #[tokio::test]
     async fn test_async_sync_conversion() {
         let service = AsyncSyncConversionService::new(2);
-        let (async_result, sync_result) = service.hybrid_conversion().await.unwrap();
+        let (async_result, sync_result) = service.hybrid_conversion().await.expect("混合转换不应失败");
         assert_eq!(async_result, "async_result");
         assert_eq!(sync_result, "sync_result");
     }
@@ -731,12 +731,12 @@ mod tests {
     async fn test_aggregation_composition() {
         let service = AggregationCompositionService::new();
         let component = Box::new(DataProcessingComponent::new("test", 1));
-        service.register_component(component).await.unwrap();
+        service.register_component(component).await.expect("注册组件不应失败");
 
         let results = service.parallel_aggregation(
             vec!["test".to_string()],
             "input"
-        ).await.unwrap();
+        ).await.expect("获取结果不应失败");
 
         assert_eq!(results.len(), 1);
         assert!(results[0].contains("test_processed_input"));

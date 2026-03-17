@@ -229,7 +229,7 @@ impl ParallelFrontendDemo {
         for task in tasks {
             let semaphore = Arc::clone(&semaphore);
             let handle = tokio::spawn(async move {
-                let _permit = semaphore.acquire().await.unwrap();
+                let _permit = semaphore.acquire().await.expect("获取信号量许可不应失败");
                 Self::compile_task(task).await
             });
             handles.push(handle);
@@ -311,7 +311,7 @@ mod tests {
     #[tokio::test]
     async fn test_async_resource() {
         let resource = AsyncResource::new("test".to_string());
-        let result = resource.process_data(b"test").await.unwrap();
+        let result = resource.process_data(b"test").await.expect("处理数据不应失败");
         assert!(!result.is_empty());
     }
 
@@ -328,14 +328,14 @@ mod tests {
         let result = demo
             .complex_borrow_operation("key".to_string(), "value".to_string())
             .await
-            .unwrap();
+            .expect("获取结果不应失败");
         assert_eq!(result, "value");
     }
 
     #[tokio::test]
     async fn test_trait_solver_demo() {
         let demo = TraitSolverDemo::new();
-        let result = demo.trait_solver_performance_test("test").await.unwrap();
+        let result = demo.trait_solver_performance_test("test").await.expect("Trait 解决性能测试不应失败");
         assert!(result > 0);
     }
 
@@ -343,7 +343,7 @@ mod tests {
     async fn test_parallel_frontend_demo() {
         let demo = ParallelFrontendDemo::new();
         let tasks = vec!["task1".to_string(), "task2".to_string()];
-        let results = demo.parallel_compilation_demo(tasks).await.unwrap();
+        let results = demo.parallel_compilation_demo(tasks).await.expect("并行编译演示不应失败");
         assert_eq!(results.len(), 2);
     }
 }

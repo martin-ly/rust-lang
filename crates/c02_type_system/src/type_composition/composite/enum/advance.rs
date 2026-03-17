@@ -139,11 +139,11 @@ pub fn advance_enum04() {
     let command = Command::Start;
 
     // 序列化为JSON
-    let json = serde_json::to_string(&command).unwrap();
+    let json = serde_json::to_string(&command).expect("序列化命令失败");
     println!("Serialized: {:?}", json);
 
     // 反序列化
-    let deserialized_command: Command = serde_json::from_str(&json).unwrap();
+    let deserialized_command: Command = serde_json::from_str(&json).expect("反序列化命令失败");
     println!("Deserialized: {:?}", deserialized_command);
 }
 

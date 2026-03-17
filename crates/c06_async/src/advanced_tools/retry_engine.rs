@@ -224,7 +224,7 @@ impl RetryEngine {
                         let stats = self.get_stats().await;
 
                         return RetryResult {
-                            result: Err(_last_error.unwrap()),
+                            result: Err(_last_error.expect("最后错误应存在")),
                             attempts,
                             total_time,
                             stats,
@@ -232,14 +232,14 @@ impl RetryEngine {
                     }
 
                     // 检查重试条件
-                    if !self.should_retry(_last_error.as_ref().unwrap()) {
+                    if !self.should_retry(_last_error.as_ref().expect("最后错误应存在")) {
                         let total_time = start_time.elapsed();
                         self.update_stats(false, attempt_time, total_time).await;
 
                         let stats = self.get_stats().await;
 
                         return RetryResult {
-                            result: Err(_last_error.unwrap()),
+                            result: Err(_last_error.expect("最后错误应存在")),
                             attempts,
                             total_time,
                             stats,

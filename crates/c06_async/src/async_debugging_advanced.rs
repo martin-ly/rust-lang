@@ -210,7 +210,7 @@ impl AsyncExecutionFlowManager {
 
         self.event_sender
             .send(FlowEvent::FlowStarted(flow_id.clone(), name.clone()))
-            .unwrap();
+            .expect("初始化不应失败");
 
         info!(
             flow_id = %flow_id,
@@ -262,7 +262,7 @@ impl AsyncExecutionFlowManager {
                 step_id.clone(),
                 name.clone(),
             ))
-            .unwrap();
+            .expect("初始化不应失败");
 
         debug!(
             flow_id = %flow_id,
@@ -293,7 +293,7 @@ impl AsyncExecutionFlowManager {
                 flow_id.to_string(),
                 step_id.to_string(),
             ))
-            .unwrap();
+            .expect("初始化不应失败");
 
         debug!(
             flow_id = %flow_id,
@@ -325,7 +325,7 @@ impl AsyncExecutionFlowManager {
                 step_id.to_string(),
                 error.clone(),
             ))
-            .unwrap();
+            .expect("初始化不应失败");
 
         error!(
             flow_id = %flow_id,
@@ -354,7 +354,7 @@ impl AsyncExecutionFlowManager {
 
         self.event_sender
             .send(FlowEvent::FlowCompleted(flow_id.to_string()))
-            .unwrap();
+            .expect("初始化不应失败");
 
         info!(
             flow_id = %flow_id,
@@ -377,7 +377,7 @@ impl AsyncExecutionFlowManager {
 
         self.event_sender
             .send(FlowEvent::FlowFailed(flow_id.to_string(), error.clone()))
-            .unwrap();
+            .expect("初始化不应失败");
 
         error!(
             flow_id = %flow_id,
@@ -602,7 +602,7 @@ impl AsyncDebugDecorator {
                         self.flow_manager
                             .fail_step(&flow_id, &step_id, "操作超时".to_string())
                             .await
-                            .unwrap();
+                            .expect("初始化不应失败");
                     }
                     return Err(anyhow::anyhow!("操作超时"));
                 }
@@ -619,7 +619,7 @@ impl AsyncDebugDecorator {
                     self.flow_manager
                         .complete_step(&flow_id, &step_id)
                         .await
-                        .unwrap();
+                        .expect("初始化不应失败");
                 }
 
                 if self.debug_config.enable_verbose_logging {
@@ -637,7 +637,7 @@ impl AsyncDebugDecorator {
                     self.flow_manager
                         .fail_step(&flow_id, &step_id, e.to_string())
                         .await
-                        .unwrap();
+                        .expect("初始化不应失败");
                 }
 
                 error!(
@@ -936,10 +936,10 @@ mod tests {
             )
             .await;
 
-        manager.complete_step(&flow_id, &step_id).await.unwrap();
-        manager.complete_flow(&flow_id).await.unwrap();
+        manager.complete_step(&flow_id, &step_id).await.expect("完成步骤不应失败");
+        manager.complete_flow(&flow_id).await.expect("完成流程不应失败");
 
-        let flow = manager.get_flow(&flow_id).await.unwrap();
+        let flow = manager.get_flow(&flow_id).await.expect("获取流程不应失败");
         assert_eq!(flow.name, "测试流程");
         assert_eq!(flow.steps.len(), 1);
     }
@@ -957,7 +957,7 @@ mod tests {
                 Ok("成功".to_string())
             })
             .await
-            .unwrap();
+            .expect("初始化不应失败");
 
         assert_eq!(result, "成功");
     }

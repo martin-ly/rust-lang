@@ -150,8 +150,8 @@ impl<T> SpscRingBuffer<T> {
             println!("消费者完成");
         });
 
-        producer.join().unwrap();
-        consumer.join().unwrap();
+        producer.join().expect("生产者线程应成功完成");
+        consumer.join().expect("消费者线程应成功完成");
     }
 }
 
@@ -285,7 +285,7 @@ impl<T> MpscRingBuffer<T> {
 
         // 等待所有生产者完成
         for handle in producer_handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         // 等待消费者完成
@@ -439,11 +439,11 @@ impl<T> MpmcRingBuffer<T> {
 
         // 等待所有线程完成
         for handle in producer_handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
 
         for handle in consumer_handles {
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
     }
 }
@@ -557,8 +557,8 @@ impl<T> ScalableRingBuffer<T> {
             }
         });
 
-        producer.join().unwrap();
-        consumer.join().unwrap();
+        producer.join().expect("生产者线程应成功完成");
+        consumer.join().expect("消费者线程应成功完成");
     }
 }
 
@@ -629,8 +629,8 @@ impl<T> CrossbeamRingBuffer<T> {
             }
         });
 
-        producer.join().unwrap();
-        consumer.join().unwrap();
+        producer.join().expect("生产者线程应成功完成");
+        consumer.join().expect("消费者线程应成功完成");
     }
 }
 

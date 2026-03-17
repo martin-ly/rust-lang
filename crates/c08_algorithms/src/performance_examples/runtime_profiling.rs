@@ -52,8 +52,8 @@ impl SimpleProfiler {
         for (name, durations) in &self.measurements {
             let total: Duration = durations.iter().sum();
             let avg = total / durations.len() as u32;
-            let min = durations.iter().min().unwrap();
-            let max = durations.iter().max().unwrap();
+            let min = durations.iter().min().expect("获取最小持续时间失败");
+            let max = durations.iter().max().expect("获取最大持续时间失败");
 
             report.push_str(&format!(
                 "{}: 平均={:?}, 最小={:?}, 最大={:?}, 次数={}\n",

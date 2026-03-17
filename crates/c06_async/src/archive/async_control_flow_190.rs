@@ -406,7 +406,7 @@ mod tests {
         let sm = AsyncStateMachine190::new();
         assert_eq!(sm.get_state().await, AsyncState::Initializing);
         
-        sm.transition_to(AsyncState::Running).await.unwrap();
+        sm.transition_to(AsyncState::Running).await.expect("状态转换不应失败");
         assert_eq!(sm.get_state().await, AsyncState::Running);
         
         sm.add_data("test".to_string(), "value".to_string()).await;
@@ -430,7 +430,7 @@ mod tests {
         }).await;
         
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), "success");
+        assert_eq!(result.expect("结果应存在"), "success");
     }
 
     #[tokio::test]
@@ -439,8 +439,8 @@ mod tests {
         
         controller.submit_task("test_task".to_string(), || {
             Ok(())
-        }).await.unwrap();
+        }).await.expect("生成任务不应失败");
         
-        controller.wait_for_all_tasks().await.unwrap();
+        controller.wait_for_all_tasks().await.expect("等待所有任务不应失败");
     }
 }

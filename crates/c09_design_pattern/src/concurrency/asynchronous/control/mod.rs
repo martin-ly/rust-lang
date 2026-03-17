@@ -16,7 +16,7 @@ impl RateLimiter {
     }
 
     pub async fn acquire(&self) -> OwnedSemaphorePermit {
-        self.semaphore.clone().acquire_owned().await.unwrap()
+        self.semaphore.clone().acquire_owned().await.expect("获取信号量许可失败")
     }
 
     pub fn capacity(&self) -> usize {
@@ -45,7 +45,7 @@ mod tests {
             42
         })
         .await;
-        assert_eq!(res.unwrap(), 42);
+        assert_eq!(res.expect("获取超时结果失败"), 42);
     }
 
     #[tokio::test]
@@ -73,7 +73,7 @@ mod tests {
                 .is_ok()
         });
 
-        let acquired_third = try_third.await.unwrap();
+        let acquired_third = try_third.await.expect("等待第三个许可获取失败");
         assert!(!acquired_third);
     }
 }

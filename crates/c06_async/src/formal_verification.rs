@@ -214,24 +214,24 @@ pub mod invariant_verification {
         let acc2 = account2.clone();
         let t1 = tokio::spawn(async move {
             // Account1 -> Account2: 100
-            acc1.withdraw(100).await.unwrap();
-            acc2.deposit(100).await.unwrap();
+            acc1.withdraw(100).await.expect("取款不应失败");
+            acc2.deposit(100).await.expect("存款不应失败");
         });
 
         let acc2 = account2.clone();
         let acc3 = account3.clone();
         let t2 = tokio::spawn(async move {
             // Account2 -> Account3: 200
-            acc2.withdraw(200).await.unwrap();
-            acc3.deposit(200).await.unwrap();
+            acc2.withdraw(200).await.expect("取款不应失败");
+            acc3.deposit(200).await.expect("存款不应失败");
         });
 
         let acc3 = account3.clone();
         let acc1 = account1.clone();
         let t3 = tokio::spawn(async move {
             // Account3 -> Account1: 150
-            acc3.withdraw(150).await.unwrap();
-            acc1.deposit(150).await.unwrap();
+            acc3.withdraw(150).await.expect("取款不应失败");
+            acc1.deposit(150).await.expect("存款不应失败");
         });
 
         // 等待所有转账完成

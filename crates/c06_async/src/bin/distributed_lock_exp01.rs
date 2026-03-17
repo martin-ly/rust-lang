@@ -179,7 +179,7 @@ async fn main() {
 
     // 等待所有任务完成
     for handle in handles {
-        handle.await.unwrap();
+        handle.await.expect("等待任务完成不应失败");
     }
 
     println!();

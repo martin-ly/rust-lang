@@ -292,7 +292,7 @@ impl ParallelFrontendOptimizer {
                     let mut queue = task_queue.lock().await;
                     queue.pop()
                 } {
-                    let _permit = semaphore.acquire().await.unwrap();
+                    let _permit = semaphore.acquire().await.expect("获取信号量许可不应失败");
                     let compiled_task = Self::compile_task_optimized(task).await;
 
                     let mut results = results.lock().await;
@@ -378,7 +378,7 @@ mod tests {
     async fn test_real_async_resource() {
         let mut resource = AsyncResource190::new("test".to_string());
         resource.create_cleanup_future();
-        let result = resource.process_data(b"test").await.unwrap();
+        let result = resource.process_data(b"test").await.expect("处理数据不应失败");
         assert!(!result.is_empty());
     }
 
@@ -397,14 +397,14 @@ mod tests {
     #[tokio::test]
     async fn test_polonius_borrow_demo() {
         let demo = PoloniusBorrowDemo::new(2);
-        let result = demo.complex_borrow_operation("key".to_string(), "value".to_string()).await.unwrap();
+        let result = demo.complex_borrow_operation("key".to_string(), "value".to_string()).await.expect("复杂借用操作不应失败");
         assert_eq!(result, "not_found");
     }
 
     #[tokio::test]
     async fn test_next_gen_trait_solver() {
         let solver = NextGenTraitSolver::new();
-        let result = solver.optimized_trait_solving("test").await.unwrap();
+        let result = solver.optimized_trait_solving("test").await.expect("优化 trait 解决不应失败");
         assert!(result > 0);
 
         let count = solver.get_computation_count().await;
@@ -415,7 +415,7 @@ mod tests {
     async fn test_parallel_frontend_optimizer() {
         let optimizer = ParallelFrontendOptimizer::new();
         let tasks = vec!["task1".to_string(), "task2".to_string()];
-        let results = optimizer.parallel_compilation(tasks).await.unwrap();
+        let results = optimizer.parallel_compilation(tasks).await.expect("并行编译不应失败");
         assert_eq!(results.len(), 2);
     }
 

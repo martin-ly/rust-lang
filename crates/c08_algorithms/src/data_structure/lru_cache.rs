@@ -73,13 +73,13 @@ pub mod ts {
         where
             V: Clone,
         {
-            self.0.write().unwrap().get(key).cloned()
+            self.0.write().expect("LRU缓存写入锁被污染").get(key).cloned()
         }
         pub fn put(&self, key: K, value: V) {
-            self.0.write().unwrap().put(key, value)
+            self.0.write().expect("LRU缓存写入锁被污染").put(key, value)
         }
         pub fn len(&self) -> usize {
-            self.0.read().unwrap().len()
+            self.0.read().expect("LRU缓存读取锁被污染").len()
         }
     }
 }

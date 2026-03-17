@@ -26,8 +26,8 @@ pub fn spawn_multi_thread_tasks() -> i32 {
             tokio::time::sleep(Duration::from_millis(3)).await;
             2
         });
-        let a = h1.await.unwrap();
-        let b = h2.await.unwrap();
+        let a = h1.await.expect("等待任务 1 完成不应失败");
+        let b = h2.await.expect("等待任务 2 完成不应失败");
         a + b
     })
 }

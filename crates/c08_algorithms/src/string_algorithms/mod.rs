@@ -229,7 +229,7 @@ pub async fn ac_search_async(text: String, patterns: Vec<String>) -> Result<Vec<
 
 #[cfg(feature = "with-aho")]
 pub fn aho_search(text: &str, patterns: &[&str]) -> Vec<(usize, usize)> {
-    let ac = AhoCorasick::new(patterns).unwrap();
+    let ac = AhoCorasick::new(patterns).expect("创建Aho-Corasick自动机失败");
     let mut res = Vec::new();
     for mat in ac.find_iter(text) {
         res.push((mat.start(), mat.pattern().as_usize()));
@@ -588,13 +588,13 @@ mod tests {
 
     #[test]
     fn test_async_wraps() {
-        let rt = tokio::runtime::Runtime::new().unwrap();
-        let r = rt.block_on(async { kmp_search_async("aaaaa".into(), "aa".into()).await.unwrap() });
+        let rt = tokio::runtime::Runtime::new().expect("创建Tokio运行时失败");
+        let r = rt.block_on(async { kmp_search_async("aaaaa".into(), "aa".into()).await.expect("异步KMP搜索失败") });
         assert_eq!(r, vec![0, 1, 2, 3]);
         let r2 = rt.block_on(async {
             rabin_karp_search_async("aaaaa".into(), "aa".into())
                 .await
-                .unwrap()
+                .expect("异步Rabin-Karp搜索失败")
         });
         assert_eq!(r2, vec![0, 1, 2, 3]);
     }

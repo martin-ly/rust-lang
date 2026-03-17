@@ -697,7 +697,7 @@ mod tests {
     #[tokio::test]
     async fn test_data_processing_component() {
         let component = DataProcessingComponent::new("test", 1);
-        let result = component.execute("input".to_string()).await.unwrap();
+        let result = component.execute("input".to_string()).await.expect("执行组件不应失败");
         assert!(result.contains("test_processed_input"));
     }
 }

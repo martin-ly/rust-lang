@@ -324,7 +324,7 @@ async fn test_config_hot_reload(config_manager: Arc<ConfigManager>) {
         new_config.timeout_seconds = 30 + (i * 5) as u64;
 
         // 直接更新配置
-        config_manager.update_config(new_config).await.unwrap();
+        config_manager.update_config(new_config).await.expect("更新配置不应失败");
 
         sleep(Duration::from_millis(1000)).await;
     }

@@ -78,7 +78,7 @@ pub async fn channel_exp03() {
     // 第一个发送者
     tokio::spawn(async move {
         for i in 0..3 {
-            tx.send(i).await.unwrap();
+            tx.send(i).await.expect("发送消息不应失败");
             println!("Sender 1 sent: {}", i);
         }
     });
@@ -86,7 +86,7 @@ pub async fn channel_exp03() {
     // 第二个发送者
     tokio::spawn(async move {
         for i in 3..6 {
-            tx1.send(i).await.unwrap();
+            tx1.send(i).await.expect("发送消息不应失败");
             println!("Sender 2 sent: {}", i);
         }
     });

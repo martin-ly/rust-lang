@@ -32,7 +32,7 @@ fn main() {
 
     // 从字符串转换为整数
     let str_value = "123";
-    let parsed_value: i32 = str_value.parse().unwrap(); // 使用parse方法
+    let parsed_value: i32 = str_value.parse().expect("字符串解析为整数失败"); // 使用parse方法
     println!("Parsed integer from string: {}", parsed_value);
 
     // 自定义类型转换

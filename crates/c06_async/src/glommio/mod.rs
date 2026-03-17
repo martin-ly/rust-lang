@@ -60,9 +60,9 @@ impl GlommioExample {
                     let result = task.await;
                     println!("✅ Glommio: Task result: {}", result);
                 })
-                .unwrap();
+                .expect("线程创建不应失败");
 
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
     }
 
@@ -81,22 +81,22 @@ impl GlommioExample {
                     let task = Task::local(async {
                         // 创建临时文件
                         let path = "/tmp/glommio_test.txt";
-                        let mut file = std::fs::File::create(path).unwrap();
-                        file.write_all(b"Hello Glommio!").unwrap();
+                        let mut file = std::fs::File::create(path).expect("创建文件不应失败");
+                        file.write_all(b"Hello Glommio!").expect("写入文件不应失败");
 
                         // 读取文件
-                        let content = std::fs::read_to_string(path).unwrap();
+                        let content = std::fs::read_to_string(path).expect("读取文件不应失败");
                         println!("✅ File content: {}", content);
 
                         // 清理
-                        std::fs::remove_file(path).unwrap();
+                        std::fs::remove_file(path).expect("删除文件不应失败");
                     });
 
                     task.await;
                 })
-                .unwrap();
+                .expect("线程创建不应失败");
 
-            handle.join().unwrap();
+            handle.join().expect("线程应成功完成");
         }
     }
 
@@ -128,14 +128,14 @@ impl GlommioExample {
                         println!("✅ Core {} completed: sum = {}", core_id, sum);
                         sum
                     })
-                    .unwrap();
+                    .expect("线程创建不应失败");
 
                 handles.push(handle);
             }
 
             // 等待所有执行器完成
             for (i, handle) in handles.into_iter().enumerate() {
-                let result = handle.join().unwrap();
+                let result = handle.join().expect("线程应成功完成");
                 println!("✅ Core {} result: {}", i, result);
             }
         }

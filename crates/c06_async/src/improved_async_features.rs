@@ -314,7 +314,7 @@ impl AsyncErrorRecovery {
             }
         }
         
-        Err(last_error.unwrap())
+        Err(last_error.expect("最后错误应存在"))
     }
 
     /// 计算退避延迟
@@ -357,9 +357,9 @@ mod tests {
         let task3 = async { Ok::<i32, anyhow::Error>(3) };
         
         let results = futures::future::join3(task1, task2, task3).await;
-        assert_eq!(results.0.unwrap(), 1);
-        assert_eq!(results.1.unwrap(), 2);
-        assert_eq!(results.2.unwrap(), 3);
+        assert_eq!(results.0.expect("第一个结果应存在"), 1);
+        assert_eq!(results.1.expect("第二个结果应存在"), 2);
+        assert_eq!(results.2.expect("第三个结果应存在"), 3);
     }
 
     #[tokio::test]
@@ -382,7 +382,7 @@ mod tests {
         }).await;
         
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), "成功");
+        assert_eq!(result.expect("结果应存在"), "成功");
         assert_eq!(attempt_count, 3);
     }
 }

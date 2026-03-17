@@ -23,8 +23,8 @@ async fn main() {
     let (fast, slow) = tokio::join!(handle_fast, handle_slow);
     println!(
         "hello async, results = ({:?}, {:?})",
-        fast.unwrap(),
-        slow.unwrap()
+        fast.expect("快速任务应成功完成"),
+        slow.expect("慢速任务应成功完成")
     );
 }
 

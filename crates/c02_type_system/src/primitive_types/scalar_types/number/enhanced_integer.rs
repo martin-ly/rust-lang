@@ -387,12 +387,12 @@ pub mod integer_types {
         /// 非零有符号整数操作
         pub fn non_zero_signed_operations() {
             // 创建非零整数
-            let non_zero_i8 = NonZeroI8::new(100).unwrap();
-            let non_zero_i16 = NonZeroI16::new(1000).unwrap();
-            let non_zero_i32 = NonZeroI32::new(1_000_000).unwrap();
-            let non_zero_i64 = NonZeroI64::new(1_000_000_000_000).unwrap();
-            let non_zero_i128 = NonZeroI128::new(1_000_000_000_000_000_000_000_000_000_000).unwrap();
-            let non_zero_isize = NonZeroIsize::new(1_000_000).unwrap();
+            let non_zero_i8 = NonZeroI8::new(100).expect("创建NonZeroI8失败");
+            let non_zero_i16 = NonZeroI16::new(1000).expect("创建NonZeroI16失败");
+            let non_zero_i32 = NonZeroI32::new(1_000_000).expect("创建NonZeroI32失败");
+            let non_zero_i64 = NonZeroI64::new(1_000_000_000_000).expect("创建NonZeroI64失败");
+            let non_zero_i128 = NonZeroI128::new(1_000_000_000_000_000_000_000_000_000_000).expect("创建NonZeroI128失败");
+            let non_zero_isize = NonZeroIsize::new(1_000_000).expect("创建NonZeroIsize失败");
 
             println!("非零有符号整数:");
             println!("  NonZeroI8: {}", non_zero_i8.get());
@@ -410,12 +410,12 @@ pub mod integer_types {
         /// 非零无符号整数操作
         pub fn non_zero_unsigned_operations() {
             // 创建非零整数
-            let non_zero_u8 = NonZeroU8::new(200).unwrap();
-            let non_zero_u16 = NonZeroU16::new(30000).unwrap();
-            let non_zero_u32 = NonZeroU32::new(2_000_000_000).unwrap();
-            let non_zero_u64 = NonZeroU64::new(9_000_000_000_000_000_000).unwrap();
-            let non_zero_u128 = NonZeroU128::new(340_282_366_920_938_463_463_374_607_431_768_211_455).unwrap();
-            let non_zero_usize = NonZeroUsize::new(1_000_000).unwrap();
+            let non_zero_u8 = NonZeroU8::new(200).expect("创建NonZeroU8失败");
+            let non_zero_u16 = NonZeroU16::new(30000).expect("创建NonZeroU16失败");
+            let non_zero_u32 = NonZeroU32::new(2_000_000_000).expect("创建NonZeroU32失败");
+            let non_zero_u64 = NonZeroU64::new(9_000_000_000_000_000_000).expect("创建NonZeroU64失败");
+            let non_zero_u128 = NonZeroU128::new(340_282_366_920_938_463_463_374_607_431_768_211_455).expect("创建NonZeroU128失败");
+            let non_zero_usize = NonZeroUsize::new(1_000_000).expect("创建NonZeroUsize失败");
 
             println!("非零无符号整数:");
             println!("  NonZeroU8: {}", non_zero_u8.get());
@@ -482,8 +482,8 @@ pub mod integer_types {
             }
             
             // 安全转换为更大的类型（总是成功）
-            let i64_value: i64 = i32_value.try_into().unwrap();
-            let u64_value: u64 = i32_value.try_into().unwrap();
+            let i64_value: i64 = i32_value.try_into().expect("i32到i64转换失败");
+            let u64_value: u64 = i32_value.try_into().expect("i32到u64转换失败");
             
             println!("安全转换 i32 {} -> i64 {}", i32_value, i64_value);
             println!("安全转换 i32 {} -> u64 {}", i32_value, u64_value);

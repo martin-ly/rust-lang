@@ -63,7 +63,7 @@ impl SimpleThreadPool {
         F: FnOnce() + Send + 'static,
     {
         if let Some(sender) = self.sender.as_ref() {
-            sender.send(Box::new(f)).unwrap();
+            sender.send(Box::new(f)).expect("发送任务失败");
         } else {
             panic!("thread pool has been shut down");
         }

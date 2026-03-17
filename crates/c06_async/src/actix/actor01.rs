@@ -42,7 +42,7 @@ pub async fn actor_exp01() {
     let addr = MyActor.start();
 
     // 发送消息
-    let response = addr.send(Ping).await.unwrap();
+    let response = addr.send(Ping).await.expect("发送 Ping 消息不应失败");
     println!("Received: {}", response);
 }
 

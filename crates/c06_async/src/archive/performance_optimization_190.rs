@@ -72,8 +72,8 @@ impl PerformanceBenchmark {
         for (name, durations) in results {
             let total: Duration = durations.iter().sum();
             let average = total / durations.len() as u32;
-            let min = durations.iter().min().unwrap();
-            let max = durations.iter().max().unwrap();
+            let min = durations.iter().min().expect("持续时间列表不应为空");
+            let max = durations.iter().max().expect("持续时间列表不应为空");
             
             println!("{}:", name);
             println!("  平均时间: {:?}", average);
@@ -120,7 +120,7 @@ impl ParallelCompilationDemo {
         for &item in data {
             let semaphore = Arc::clone(&semaphore);
             let handle = tokio::spawn(async move {
-                let _permit = semaphore.acquire().await.unwrap();
+                let _permit = semaphore.acquire().await.expect("获取信号量许可不应失败");
                 Self::simulate_compilation_async(item).await
             });
             handles.push(handle);
@@ -128,7 +128,7 @@ impl ParallelCompilationDemo {
         
         let mut results = Vec::new();
         for handle in handles {
-            let result = handle.await.unwrap();
+            let result = handle.await.expect("等待任务完成不应失败");
             results.push(result);
         }
         
@@ -484,7 +484,7 @@ mod tests {
     #[tokio::test]
     async fn test_trait_solver_performance() {
         let demo = TraitSolverPerformanceDemo::new();
-        let result = demo.solve_trait_single("test").await.unwrap();
+        let result = demo.solve_trait_single("test").await.expect("解决 trait 不应失败");
         assert!(result > 0);
     }
 

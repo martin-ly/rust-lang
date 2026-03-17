@@ -173,7 +173,7 @@ fn benchmark_rayon_thread_pool(
     rayon::ThreadPoolBuilder::new()
         .num_threads(thread_count)
         .build_global()
-        .unwrap();
+        .expect("基准测试不应失败");
 
     // 预热
     for _ in 0..config.warmup_iterations {
@@ -231,7 +231,7 @@ fn process_data_standard_threads(data: &[i32], thread_count: usize) -> Vec<i32> 
                     let chunk = &data[start..end];
                     let processed_chunk: Vec<i32> = chunk.iter().map(|&x| x * 2 + 1).collect();
 
-                    let mut results = results.lock().unwrap();
+                    let mut results = results.lock().expect("获取结果锁不应失败");
                     for (j, &value) in processed_chunk.iter().enumerate() {
                         results[start + j] = value;
                     }
@@ -241,10 +241,10 @@ fn process_data_standard_threads(data: &[i32], thread_count: usize) -> Vec<i32> 
         .collect();
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("线程应成功完成");
     }
 
-    Arc::try_unwrap(results).unwrap().into_inner().unwrap()
+    Arc::try_unwrap(results).expect("Arc 解包不应失败").into_inner().expect("Mutex 解包不应失败")
 }
 
 /// 使用高性能线程池处理数据
@@ -329,7 +329,7 @@ fn benchmark_lock_free_ring_buffer(config: &BenchmarkConfig) -> BenchmarkResult 
     for _ in 0..config.iterations {
         let start = Instant::now();
         for i in 0..config.data_size {
-            buffer.try_push(i).unwrap();
+            buffer.try_push(i).expect("缓冲区 Push 不应失败");
         }
         for _ in 0..config.data_size {
             let _ = buffer.try_pop();
@@ -373,7 +373,7 @@ fn benchmark_lock_free_stack(config: &BenchmarkConfig) -> BenchmarkResult {
     for _ in 0..config.iterations {
         let start = Instant::now();
         for i in 0..config.data_size {
-            stack.push(i).unwrap();
+            stack.push(i).expect("栈 Push 不应失败");
         }
         for _ in 0..config.data_size {
             let _ = stack.pop();
@@ -405,10 +405,10 @@ fn benchmark_mutex_structures(config: &BenchmarkConfig) -> BenchmarkResult {
     for _ in 0..config.warmup_iterations {
         let start = Instant::now();
         for i in 0..config.data_size {
-            data.lock().unwrap().push(i);
+            data.lock().expect("获取数据锁不应失败").push(i);
         }
         for _ in 0..config.data_size {
-            data.lock().unwrap().pop();
+            data.lock().expect("获取数据锁不应失败").pop();
         }
         let _ = start.elapsed();
     }
@@ -417,10 +417,10 @@ fn benchmark_mutex_structures(config: &BenchmarkConfig) -> BenchmarkResult {
     for _ in 0..config.iterations {
         let start = Instant::now();
         for i in 0..config.data_size {
-            data.lock().unwrap().push(i);
+            data.lock().expect("获取数据锁不应失败").push(i);
         }
         for _ in 0..config.data_size {
-            data.lock().unwrap().pop();
+            data.lock().expect("获取数据锁不应失败").pop();
         }
         times.push(start.elapsed().as_micros() as f64 / 1000.0);
     }

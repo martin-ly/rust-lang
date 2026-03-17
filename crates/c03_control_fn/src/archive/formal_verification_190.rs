@@ -531,7 +531,7 @@ mod tests {
         assert_eq!(demo.get_status(), (4, 10));
 
         // 测试读取
-        let data = demo.read(2).unwrap();
+        let data = demo.read(2).expect("读取演示数据失败");
         assert_eq!(data, b"te");
         assert_eq!(demo.get_status(), (2, 10));
     }
