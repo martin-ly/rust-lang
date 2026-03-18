@@ -1,12 +1,13 @@
 # Rust Edition 2024 完整指南
 
-> **版本**: Edition 2024  
-> **Rust 版本**: 1.94.0+  
+> **版本**: Edition 2024
+> **Rust 版本**: 1.94.0+
 > **权威来源**: [Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
 
 ## 🎯 学习目标
 
 完成本章后，你将能够：
+
 - [ ] 理解 Edition 2024 的核心变更
 - [ ] 成功将项目迁移到 Edition 2024
 - [ ] 使用 `gen` 关键字（预览）
@@ -292,6 +293,6 @@ fn fibonacci() -> impl Iterator<Item = u64> {
 
 ---
 
-**文档版本**: 1.0  
-**对应 Rust 版本**: 1.94.0 (Edition 2024)  
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.94.0 (Edition 2024)
 **最后更新**: 2026-03-19
