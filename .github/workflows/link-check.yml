@@ -1,0 +1,37 @@
+name: Link Check
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 0 * * 0'  # 每周日运行
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check Markdown links
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: |
+            --exclude-path docs/archive/
+            --exclude-path docs/backup/
+            --exclude-path docs/2026_03_reorganization/
+            --exclude "https://spec.ferrocene.dev/*"
+            --exclude "file:///*"
+            --timeout 30
+            --max-retries 3
+            docs/
+          fail: false
+        
+      - name: Create issue for broken links
+        if: failure()
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: "🔗 Broken Links Detected"
+          content-filepath: ./lychee/out.md
+          labels: "documentation, automated"
