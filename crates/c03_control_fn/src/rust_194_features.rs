@@ -692,14 +692,20 @@ use std::cell::LazyCell;
 /// 条件延迟初始化控制器
 ///
 /// 根据条件决定是否初始化值
-pub struct ConditionalLazyController<T> {
-    cell: LazyCell<T>,
+pub struct ConditionalLazyController<T, F = fn() -> T>
+where
+    F: FnOnce() -> T,
+{
+    cell: LazyCell<T, F>,
     condition: Box<dyn Fn() -> bool>,
 }
 
-impl<T> ConditionalLazyController<T> {
+impl<T, F> ConditionalLazyController<T, F>
+where
+    F: FnOnce() -> T,
+{
     /// 创建新的条件控制器
-    pub fn new(condition: impl Fn() -> bool + 'static, factory: impl FnOnce() -> T + 'static) -> Self {
+    pub fn new(condition: impl Fn() -> bool + 'static, factory: F) -> Self {
         Self {
             cell: LazyCell::new(factory),
             condition: Box::new(condition),
@@ -730,14 +736,20 @@ impl<T> ConditionalLazyController<T> {
 /// 控制流感知的延迟缓存
 ///
 /// 根据执行路径决定初始化策略
-pub struct ControlFlowLazyCache<T> {
-    cell: LazyCell<T>,
+pub struct ControlFlowLazyCache<T, F = fn() -> T>
+where
+    F: FnOnce() -> T,
+{
+    cell: LazyCell<T, F>,
     init_count: std::cell::Cell<usize>,
 }
 
-impl<T> ControlFlowLazyCache<T> {
+impl<T, F> ControlFlowLazyCache<T, F>
+where
+    F: FnOnce() -> T,
+{
     /// 创建新的控制流缓存
-    pub fn new(factory: impl FnOnce() -> T + 'static) -> Self {
+    pub fn new(factory: F) -> Self {
         Self {
             cell: LazyCell::new(factory),
             init_count: std::cell::Cell::new(0),
@@ -769,9 +781,9 @@ impl<T> ControlFlowLazyCache<T> {
     }
 }
 
-impl<T> Default for ControlFlowLazyCache<T>
+impl<T> Default for ControlFlowLazyCache<T, fn() -> T>
 where
-    T: Default,
+    T: Default + 'static,
 {
     fn default() -> Self {
         Self::new(T::default)

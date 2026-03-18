@@ -23,6 +23,7 @@ fn test_basic_generic_function() {
 fn test_generic_struct() {
     struct Point<T> {
         x: T,
+        #[allow(dead_code)]
         y: T,
     }
     
@@ -69,7 +70,7 @@ fn test_generic_enum() {
     }
     
     let success: Result<i32, &str> = Result::Ok(42);
-    let failure: Result<i32, &str> = Result::Err("error");
+    let _failure: Result<i32, &str> = Result::Err("error");
     
     match success {
         Result::Ok(v) => assert_eq!(v, 42),
@@ -192,6 +193,7 @@ fn test_generic_methods() {
 #[test]
 fn test_const_generics() {
     struct Array<T, const N: usize> {
+        #[allow(dead_code)]
         data: [T; N],
     }
     

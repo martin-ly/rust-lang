@@ -704,16 +704,16 @@ use std::sync::LazyLock;
 /// 类型推断优化的延迟初始化缓存
 ///
 /// 展示 Rust 1.94 改进的类型推断如何与 LazyCell 结合
-pub struct TypeInferredCache<T> {
-    cell: LazyCell<T>,
+pub struct TypeInferredCache<T, F> {
+    cell: LazyCell<T, F>,
 }
 
-impl<T> TypeInferredCache<T> {
+impl<T, F> TypeInferredCache<T, F>
+where
+    F: FnOnce() -> T,
+{
     /// 创建新的延迟初始化缓存
-    pub fn new<F>(init: F) -> Self
-    where
-        F: FnOnce() -> T,
-    {
+    pub fn new(init: F) -> Self {
         Self {
             cell: LazyCell::new(init),
         }
@@ -723,7 +723,7 @@ impl<T> TypeInferredCache<T> {
     ///
     /// Rust 1.94: 改进的返回类型推断
     pub fn try_get(&self) -> Option<&T> {
-        self.cell.get()
+        LazyCell::get(&self.cell)
     }
 
     /// 获取或初始化值
@@ -737,38 +737,38 @@ impl<T> TypeInferredCache<T> {
     ///
     /// Rust 1.94: 可变引用类型推断
     pub fn try_get_mut(&mut self) -> Option<&mut T> {
-        self.cell.get_mut()
+        LazyCell::get_mut(&mut self.cell)
     }
 
     /// 强制获取可变引用
     pub fn force_get_mut(&mut self) -> &mut T {
-        self.cell.force_mut()
+        LazyCell::force_mut(&mut self.cell)
     }
 
     /// 检查是否已初始化
     pub fn is_initialized(&self) -> bool {
-        self.cell.get().is_some()
+        LazyCell::get(&self.cell).is_some()
     }
 }
 
-impl<T: Default> Default for TypeInferredCache<T> {
+impl<T: Default> Default for TypeInferredCache<T, fn() -> T> {
     fn default() -> Self {
         Self::new(T::default)
     }
 }
 
 /// 线程安全的类型推断缓存
-pub struct ThreadSafeTypeCache<T> {
-    lock: LazyLock<T>,
+pub struct ThreadSafeTypeCache<T, F> {
+    lock: LazyLock<T, F>,
 }
 
-impl<T> ThreadSafeTypeCache<T> {
+impl<T, F> ThreadSafeTypeCache<T, F>
+where
+    F: FnOnce() -> T,
+    T: Send + Sync + 'static,
+{
     /// 创建新的线程安全缓存
-    pub fn new<F>(init: F) -> Self
-    where
-        F: FnOnce() -> T,
-        T: Send + Sync + 'static,
-    {
+    pub fn new(init: F) -> Self {
         Self {
             lock: LazyLock::new(init),
         }
@@ -776,7 +776,7 @@ impl<T> ThreadSafeTypeCache<T> {
 
     /// 尝试获取值
     pub fn try_get(&self) -> Option<&T> {
-        self.lock.get()
+        LazyLock::get(&self.lock)
     }
 
     /// 获取或初始化
@@ -786,11 +786,11 @@ impl<T> ThreadSafeTypeCache<T> {
 
     /// 检查是否已初始化
     pub fn is_initialized(&self) -> bool {
-        self.lock.get().is_some()
+        LazyLock::get(&self.lock).is_some()
     }
 }
 
-impl<T: Send + Sync + 'static + Default> Default for ThreadSafeTypeCache<T> {
+impl<T: Send + Sync + 'static + Default> Default for ThreadSafeTypeCache<T, fn() -> T> {
     fn default() -> Self {
         Self::new(T::default)
     }
@@ -800,7 +800,7 @@ impl<T: Send + Sync + 'static + Default> Default for ThreadSafeTypeCache<T> {
 ///
 /// 展示高级类型推断模式
 pub struct LazyFactory<T, F> {
-    cache: LazyCell<T>,
+    cache: LazyCell<T, F>,
 }
 
 impl<T, F> LazyFactory<T, F>
@@ -821,7 +821,7 @@ where
 
     /// 检查是否已初始化
     pub fn is_initialized(&self) -> bool {
-        self.cache.get().is_some()
+        LazyCell::get(&self.cache).is_some()
     }
 }
 
@@ -987,7 +987,7 @@ pub fn demonstrate_rust_194_type_system_features() {
 
     // 9. LazyCell 类型推断示例
     println!("\n9. LazyCell 类型推断:");
-    let cache = TypeInferredCache::<Vec<i32>>::new(|| vec![1, 2, 3, 4, 5]);
+    let cache = TypeInferredCache::new(|| vec![1, 2, 3, 4, 5]);
     println!("   初始化前: {:?}", cache.try_get());
 
     let value = cache.get_or_init();
@@ -1257,7 +1257,7 @@ mod tests {
 
     #[test]
     fn test_type_inferred_cache_get() {
-        let cache = TypeInferredCache::<i32>::new(|| 42);
+        let cache = TypeInferredCache::new(|| 42i32);
 
         // 初始化前
         assert_eq!(cache.try_get(), None);
@@ -1273,7 +1273,7 @@ mod tests {
 
     #[test]
     fn test_type_inferred_cache_get_mut() {
-        let mut cache = TypeInferredCache::<Vec<i32>>::new(|| vec![1, 2, 3]);
+        let mut cache = TypeInferredCache::new(|| vec![1, 2, 3]);
 
         // 初始化前 get_mut() 应该返回 None
         assert_eq!(cache.try_get_mut(), None);
@@ -1288,7 +1288,7 @@ mod tests {
 
     #[test]
     fn test_thread_safe_type_cache() {
-        let cache = ThreadSafeTypeCache::<String>::new(|| "hello".to_string());
+        let cache = ThreadSafeTypeCache::new(|| "hello".to_string());
 
         assert_eq!(cache.try_get(), None);
         assert!(!cache.is_initialized());

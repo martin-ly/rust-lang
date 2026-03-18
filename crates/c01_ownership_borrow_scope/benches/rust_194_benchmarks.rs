@@ -3,7 +3,8 @@
 //! 运行方式:
 //!   cargo bench --bench rust_194_benchmarks
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+use std::hint::black_box;
 
 // ==================== array_windows 性能测试 ====================
 
@@ -17,7 +18,7 @@ fn bench_array_windows_vs_windows(c: &mut Criterion) {
         group.bench_with_input(
             BenchmarkId::new("array_windows", size),
             &data,
-            |b, data| {
+            |b, _data| {
                 b.iter(|| {
                     let sum: f64 = data.array_windows::<3>()
                         .map(|&[a, b, c]| a + b + c)
@@ -31,7 +32,7 @@ fn bench_array_windows_vs_windows(c: &mut Criterion) {
         group.bench_with_input(
             BenchmarkId::new("windows", size),
             &data,
-            |b, data| {
+            |b, _data| {
                 b.iter(|| {
                     let sum: f64 = data.windows(3)
                         .map(|w| w[0] + w[1] + w[2])
@@ -45,7 +46,7 @@ fn bench_array_windows_vs_windows(c: &mut Criterion) {
         group.bench_with_input(
             BenchmarkId::new("manual_index", size),
             &data,
-            |b, data| {
+            |b, _data| {
                 b.iter(|| {
                     let mut sum = 0.0;
                     for i in 0..data.len() - 2 {
@@ -64,41 +65,43 @@ fn bench_array_windows_different_sizes(c: &mut Criterion) {
     let mut group = c.benchmark_group("array_windows_sizes");
     let data: Vec<f64> = (0..10000).map(|x| x as f64).collect();
     
-    for window_size in [2, 3, 4, 5, 10].iter() {
-        match window_size {
-            2 => group.bench_function("window_2", |b| {
+    for window_size in [2, 3, 4, 5].iter() {
+        if *window_size == 2 {
+            group.bench_function("window_2", |b| {
                 b.iter(|| {
                     let sum: f64 = data.array_windows::<2>()
                         .map(|&[a, b]| a + b)
                         .sum();
                     black_box(sum);
                 });
-            }),
-            3 => group.bench_function("window_3", |b| {
+            });
+        } else if *window_size == 3 {
+            group.bench_function("window_3", |b| {
                 b.iter(|| {
                     let sum: f64 = data.array_windows::<3>()
                         .map(|&[a, b, c]| a + b + c)
                         .sum();
                     black_box(sum);
                 });
-            }),
-            4 => group.bench_function("window_4", |b| {
+            });
+        } else if *window_size == 4 {
+            group.bench_function("window_4", |b| {
                 b.iter(|| {
                     let sum: f64 = data.array_windows::<4>()
                         .map(|&[a, b, c, d]| a + b + c + d)
                         .sum();
                     black_box(sum);
                 });
-            }),
-            5 => group.bench_function("window_5", |b| {
+            });
+        } else if *window_size == 5 {
+            group.bench_function("window_5", |b| {
                 b.iter(|| {
                     let sum: f64 = data.array_windows::<5>()
                         .map(|&[a, b, c, d, e]| a + b + c + d + e)
                         .sum();
                     black_box(sum);
                 });
-            }),
-            _ => {}
+            });
         }
     }
     
@@ -108,7 +111,7 @@ fn bench_array_windows_different_sizes(c: &mut Criterion) {
 // ==================== LazyLock 性能测试 ====================
 
 use std::sync::LazyLock;
-use std::sync::atomic::{AtomicU64, Ordering};
+
 
 static BENCH_LAZYLOCK: LazyLock<Vec<i32>> = LazyLock::new(|| {
     (0..1000).collect()
@@ -184,28 +187,28 @@ fn bench_controlflow_vs_result(c: &mut Criterion) {
     // ControlFlow 版本
     group.bench_function("controlflow", |b| {
         b.iter(|| {
-            let result: ControlFlow<i32, ()> = (0..100).try_for_each(|i| {
+            let result: ControlFlow<usize, ()> = (0..100).try_for_each(|i| {
                 if data.get(i * 10) == Some(&500) {
                     ControlFlow::Break(i)
                 } else {
                     ControlFlow::Continue(())
                 }
             });
-            black_box(result);
+            let _ = black_box(result);
         });
     });
     
     // Result 版本
     group.bench_function("result", |b| {
         b.iter(|| {
-            let result: Result<(), i32> = (0..100).try_for_each(|i| {
+            let result: Result<(), usize> = (0..100).try_for_each(|i| {
                 if data.get(i * 10) == Some(&500) {
                     Err(i)
                 } else {
                     Ok(())
                 }
             });
-            black_box(result);
+            let _ = black_box(result);
         });
     });
     
@@ -224,7 +227,7 @@ fn bench_moving_average(c: &mut Criterion) {
         group.bench_with_input(
             BenchmarkId::new("array_windows", size),
             &prices,
-            |b, prices| {
+            |b, _prices| {
                 b.iter(|| {
                     let sma: Vec<f64> = prices.array_windows::<20>()
                         .map(|window| window.iter().sum::<f64>() / 20.0)
@@ -238,7 +241,7 @@ fn bench_moving_average(c: &mut Criterion) {
         group.bench_with_input(
             BenchmarkId::new("manual_loop", size),
             &prices,
-            |b, prices| {
+            |b, _prices| {
                 b.iter(|| {
                     let mut sma = Vec::with_capacity(prices.len() - 19);
                     for i in 0..prices.len() - 19 {

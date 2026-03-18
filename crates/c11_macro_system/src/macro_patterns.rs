@@ -58,21 +58,20 @@ macro_rules! builder {
     };
 }
 
-/// 自定义Error类型生成宏
+/// 自定义Error类型生成宏（简化版，仅支持无参数变体）
 #[macro_export]
 macro_rules! define_error {
     (
         $name:ident {
             $(
-                $variant:ident $(($inner:ty))?
-                => $msg:expr
+                $variant:ident => $msg:expr
             ),* $(,)?
         }
     ) => {
         #[derive(Debug)]
         pub enum $name {
             $(
-                $variant $(($inner))?,
+                $variant,
             )*
         }
         
@@ -80,7 +79,7 @@ macro_rules! define_error {
             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
                 match self {
                     $(
-                        Self::$variant $( (inner) )? => write!(f, $msg $(, inner)? ),
+                        Self::$variant => write!(f, $msg),
                     )*
                 }
             }
@@ -170,7 +169,6 @@ mod tests {
     // 测试define_error宏
     define_error!(MyError {
         NotFound => "Resource not found",
-        InvalidInput(String) => "Invalid input: {}",
         Timeout => "Operation timed out",
     });
     
@@ -178,5 +176,9 @@ mod tests {
     fn test_error_macro() {
         let err = MyError::NotFound;
         assert_eq!(err.to_string(), "Resource not found");
+        
+        // 使用 Timeout 变体来避免 dead_code 警告
+        let timeout = MyError::Timeout;
+        assert_eq!(timeout.to_string(), "Operation timed out");
     }
 }

@@ -52,7 +52,7 @@ fn main() {
 
     // 5. 递归宏 - 计数
     println!("5. 递归宏 - 计数:");
-    println!("count!(1, 2, 3, 4, 5) = {}", count!(1, 2, 3, 4, 5));
+    println!("count!(1, 2, 3, 4, 5) = {}", c11_macro_system::count!(1, 2, 3, 4, 5));
     println!();
 
     // 6. 递归宏 - 最大值

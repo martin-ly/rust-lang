@@ -17,14 +17,14 @@ macro_rules! my_vec {
     };
 }
 
-/// 带有重复模式的宏
+/// 带有重复模式的宏 - 计算token数量
 #[macro_export]
-macro_rules! count {
+macro_rules! count_tokens {
     // 计算参数数量
     () => { 0 };
     ($single:tt) => { 1 };
     ($first:tt $($rest:tt)*) => {
-        1 + count!($($rest)*)
+        1 + count_tokens!($($rest)*)
     };
 }
 
@@ -89,8 +89,8 @@ mod tests {
 
     #[test]
     fn test_count_macro() {
-        assert_eq!(count!(), 0);
-        assert_eq!(count!(a), 1);
-        assert_eq!(count!(a b c), 3);
+        assert_eq!(count_tokens!(), 0);
+        assert_eq!(count_tokens!(a), 1);
+        assert_eq!(count_tokens!(a b c), 3);
     }
 }

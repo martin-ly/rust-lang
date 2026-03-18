@@ -393,21 +393,21 @@ pub use ownership_utils::{
 
 // 从 rust_194_features 模块导出 / Export from rust_194_features module
 pub use rust_194_features::{
-    GoldenSectionSearch,
-    // LazyCell/LazyLock 相关
-    LazyCache,
-    ThreadSafeLazyCache,
+    ConfigManager, GoldenSectionSearch,
+    // array_windows 相关
+    SingleThreadCache,
+    ThreadSafeCache,
     count_increasing_triplets,
     // 演示函数
     demonstrate_rust_194_features,
     exponential_integral_approx,
+    get_global_config,
     harmonic_number,
     harmonic_number_approx,
     // array_windows 相关
     has_abba,
-    // 数学常量
-    math_consts_f32,
-    math_consts_f64,
+    // 数学常量模块
+    math_consts,
     sliding_window_averages,
 };
 

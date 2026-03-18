@@ -167,6 +167,7 @@ fn test_associated_type_aliases() {
     
     #[derive(Debug)]
     struct HttpRequest {
+        #[allow(dead_code)]
         path: String,
     }
     
@@ -198,8 +199,8 @@ fn test_associated_type_aliases() {
 #[test]
 fn test_default_associated_types() {
     trait Processor {
-        type Input = String;
-        type Output = String;
+        type Input;
+        type Output;
         
         fn process(&self, input: Self::Input) -> Self::Output;
     }
@@ -207,7 +208,9 @@ fn test_default_associated_types() {
     struct UpperCaseProcessor;
     
     impl Processor for UpperCaseProcessor {
-        // 使用默认关联类型
+        type Input = String;
+        type Output = String;
+        
         fn process(&self, input: Self::Input) -> Self::Output {
             input.to_uppercase()
         }
@@ -255,11 +258,16 @@ fn test_complex_associated_type_pattern() {
         fn query(&self, conn: &mut Self::Connection) -> Result<Vec<Self::Record>, Self::Error>;
     }
     
+    #[derive(Debug)]
     struct MockDatabase;
+    #[derive(Debug)]
     struct MockConnection;
+    #[derive(Debug)]
     struct MockRecord {
+        #[allow(dead_code)]
         id: u32,
     }
+    #[derive(Debug)]
     struct MockError;
     
     impl Database for MockDatabase {

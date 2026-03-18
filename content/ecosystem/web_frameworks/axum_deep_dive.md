@@ -45,7 +45,7 @@ Axum 是一个基于 Tower 的 Web 框架，专注于：
 
 ### 设计理念
 
-```
+```text
 Axum 设计原则:
 ├─ 函数即 Handler: 任何函数都可以是 handler
 ├─ Extractor 模式: 声明式参数提取
