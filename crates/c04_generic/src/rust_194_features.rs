@@ -88,8 +88,11 @@ impl<T: Copy + std::ops::Add<Output = T> + Default, const N: usize> Default
 
 // ==================== Rust 1.94 真实特性: LazyCell/LazyLock 泛型封装 ====================
 
-use std::cell::OnceCell;
-use std::sync::OnceLock;
+use std::cell::LazyCell;
+use std::sync::{LazyLock, OnceLock};
+
+// 用于在 LazyCell 中实现 set 功能的辅助类型
+use std::cell::UnsafeCell;
 
 /// # LazyCell/LazyLock 的泛型封装
 ///
@@ -103,16 +106,19 @@ use std::sync::OnceLock;
 /// 支持单线程和多线程两种模式
 /// 在 Rust 1.94 中，可以使用 LazyCell/LazyLock 的 get(), get_mut(), force_mut() 方法
 pub enum LazyContainer<T> {
-    /// 单线程版本
-    Cell(OnceCell<T>),
-    /// 多线程版本
+    /// 单线程版本 (使用 LazyCell + UnsafeCell 支持手动设置)
+    Cell(UnsafeCell<LazyCell<T>>),
+    /// 多线程版本 (使用 OnceLock，支持手动设置)
     Lock(OnceLock<T>),
 }
+
+// 由于使用了 UnsafeCell，需要手动实现 Sync
+unsafe impl<T: Send> Sync for LazyContainer<T> {}
 
 impl<T> LazyContainer<T> {
     /// 创建单线程延迟初始化容器
     pub const fn cell() -> Self {
-        LazyContainer::Cell(OnceCell::new())
+        LazyContainer::Cell(UnsafeCell::new(LazyCell::new()))
     }
 
     /// 创建多线程延迟初始化容器
@@ -125,11 +131,10 @@ impl<T> LazyContainer<T> {
 
     /// 尝试获取值（不触发初始化）- 对应 Rust 1.94 LazyCell::get()
     pub fn try_get(&self) -> Option<&T> {
-        let LazyContainer::Cell(cell) = self else {
-            let Self::Lock(lock) = self else { unreachable!() };
-            return lock.get();
-        };
-        cell.get()
+        match self {
+            LazyContainer::Cell(cell) => unsafe { (*cell.get()).get() },
+            LazyContainer::Lock(lock) => lock.get(),
+        }
     }
 
     /// 获取或初始化值
@@ -137,11 +142,10 @@ impl<T> LazyContainer<T> {
     where
         F: FnOnce() -> T,
     {
-        let LazyContainer::Cell(cell) = self else {
-            let Self::Lock(lock) = self else { unreachable!() };
-            return lock.get_or_init(f);
-        };
-        cell.get_or_init(f)
+        match self {
+            LazyContainer::Cell(cell) => unsafe { (*cell.get()).get_or_init(f) },
+            LazyContainer::Lock(lock) => lock.get_or_init(f),
+        }
     }
 
     /// 检查是否已初始化
@@ -151,19 +155,32 @@ impl<T> LazyContainer<T> {
 
     /// 设置值
     pub fn set(&self, value: T) -> Result<(), T> {
-        let LazyContainer::Cell(cell) = self else {
-            let Self::Lock(lock) = self else { unreachable!() };
-            return lock.set(value);
-        };
-        cell.set(value)
+        match self {
+            LazyContainer::Cell(cell) => {
+                // 使用 force_mut 来设置值
+                unsafe {
+                    let cell_ref = &mut *cell.get();
+                    if cell_ref.get().is_some() {
+                        return Err(value);
+                    }
+                    LazyCell::force_mut(cell_ref, || value);
+                }
+                Ok(())
+            }
+            LazyContainer::Lock(lock) => lock.set(value),
+        }
     }
 }
 
 /// 可变的泛型延迟初始化容器（仅单线程）
 /// 在 Rust 1.94 中，可以直接使用 LazyCell 的 get_mut() 和 force_mut() 方法
 pub struct LazyCellContainer<T> {
-    cell: OnceCell<T>,
+    cell: UnsafeCell<LazyCell<T>>,
 }
+
+// 由于使用了 UnsafeCell，需要手动实现 Send 和 Sync
+unsafe impl<T: Send> Send for LazyCellContainer<T> {}
+unsafe impl<T: Send> Sync for LazyCellContainer<T> {}
 
 impl<T> Default for LazyCellContainer<T> {
     fn default() -> Self {
@@ -175,18 +192,18 @@ impl<T> LazyCellContainer<T> {
     /// 创建新的延迟初始化容器
     pub const fn new() -> Self {
         Self {
-            cell: OnceCell::new(),
+            cell: UnsafeCell::new(LazyCell::new()),
         }
     }
 
     /// 尝试获取值（不触发初始化）- 对应 Rust 1.94 LazyCell::get()
     pub fn try_get(&self) -> Option<&T> {
-        self.cell.get()
+        unsafe { (*self.cell.get()).get() }
     }
 
     /// 尝试获取可变引用（不触发初始化）- 对应 Rust 1.94 LazyCell::get_mut()
     pub fn try_get_mut(&mut self) -> Option<&mut T> {
-        self.cell.get_mut()
+        unsafe { (*self.cell.get()).get_mut() }
     }
 
     /// 获取或初始化值
@@ -194,7 +211,7 @@ impl<T> LazyCellContainer<T> {
     where
         F: FnOnce() -> T,
     {
-        self.cell.get_or_init(f)
+        unsafe { (*self.cell.get()).get_or_init(f) }
     }
 
     /// 强制获取可变引用 - 对应 Rust 1.94 LazyCell::force_mut()
@@ -202,22 +219,31 @@ impl<T> LazyCellContainer<T> {
     where
         F: FnOnce() -> T,
     {
-        if self.cell.get().is_none() {
-            let _ = self.cell.set(f());
+        unsafe {
+            let cell_ref = &mut *self.cell.get();
+            // 如果未初始化，先初始化
+            if cell_ref.get().is_none() {
+                LazyCell::force_mut(cell_ref, f);
+            }
+            LazyCell::get_mut(cell_ref).expect("force_get_mut: LazyCell 应该已初始化")
         }
-        self.cell
-            .get_mut()
-            .expect("force_get_mut: LazyCell 应该已初始化")
     }
 
     /// 检查是否已初始化
     pub fn is_initialized(&self) -> bool {
-        self.cell.get().is_some()
+        unsafe { (*self.cell.get()).get().is_some() }
     }
 
     /// 设置值
     pub fn set(&self, value: T) -> Result<(), T> {
-        self.cell.set(value)
+        unsafe {
+            let cell_ref = &mut *self.cell.get();
+            if cell_ref.get().is_some() {
+                return Err(value);
+            }
+            LazyCell::force_mut(cell_ref, || value);
+        }
+        Ok(())
     }
 }
 

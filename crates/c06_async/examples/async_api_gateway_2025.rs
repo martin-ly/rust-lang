@@ -1,6 +1,6 @@
 use anyhow::Result;
 use c06_async::utils::metrics;
-use once_cell::sync::Lazy;
+use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, IntCounterVec, Opts, Registry};
 use rand::Rng;
 use serde::{Deserialize, Serialize};
@@ -746,31 +746,31 @@ impl AsyncMetricsCollector {
 }
 
 // 模块级指标（避免局部不可见）
-static GW_REQ_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+static GW_REQ_TOTAL: LazyLock<IntCounter> = LazyLock::new(|| {
     IntCounter::with_opts(Opts::new("gateway_request_total", "网关请求总数")).unwrap()
 });
-static GW_REQ_SECONDS: Lazy<Histogram> = Lazy::new(|| {
+static GW_REQ_SECONDS: LazyLock<Histogram> = LazyLock::new(|| {
     Histogram::with_opts(HistogramOpts::new(
         "gateway_request_seconds",
         "网关请求耗时(秒)",
     ))
     .unwrap()
 });
-static RATE_LIMITED_TOTAL: Lazy<IntCounterVec> = Lazy::new(|| {
+static RATE_LIMITED_TOTAL: LazyLock<IntCounterVec> = LazyLock::new(|| {
     IntCounterVec::new(
         Opts::new("gateway_rate_limited_total", "限流命中次数"),
         &["reason"],
     )
     .unwrap()
 });
-static BACKEND_STATUS_TOTAL: Lazy<IntCounterVec> = Lazy::new(|| {
+static BACKEND_STATUS_TOTAL: LazyLock<IntCounterVec> = LazyLock::new(|| {
     IntCounterVec::new(
         Opts::new("gateway_backend_status_total", "后端响应状态计数"),
         &["status"],
     )
     .unwrap()
 });
-static INSTANCE_PICK_TOTAL: Lazy<IntCounterVec> = Lazy::new(|| {
+static INSTANCE_PICK_TOTAL: LazyLock<IntCounterVec> = LazyLock::new(|| {
     IntCounterVec::new(
         Opts::new("gateway_instance_pick_total", "后端实例选择分布"),
         &["instance"],

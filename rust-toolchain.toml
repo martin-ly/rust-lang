@@ -1,0 +1,8 @@
+[toolchain]
+channel = "1.94.0"
+components = ["rustfmt", "clippy", "rust-analyzer"]
+targets = ["x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc"]
+profile = "default"
+
+# 注意: Miri在Windows上不可用，仅在Linux CI中使用
+# 使用: rustup component add miri --toolchain nightly (仅限Linux)

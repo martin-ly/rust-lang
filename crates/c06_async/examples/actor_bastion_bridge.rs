@@ -8,17 +8,17 @@ fn main() {
 async fn main() {
     use bastion::prelude::*;
     use c06_async::utils::metrics;
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use prometheus::{IntCounter, Opts, Registry};
     use tracing::{info, instrument};
 
     let _ = tracing_subscriber::fmt().with_env_filter("info").try_init();
 
     // 指标
-    static BRIDGE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+    static BRIDGE_IN_TOTAL: LazyLock<IntCounter> = LazyLock::new(|| {
         IntCounter::with_opts(Opts::new("bridge_in_total", "桥接入口收到的消息总数")).unwrap()
     });
-    static PIPELINE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+    static PIPELINE_IN_TOTAL: LazyLock<IntCounter> = LazyLock::new(|| {
         IntCounter::with_opts(Opts::new("pipeline_in_total", "流水线入口收到的消息总数")).unwrap()
     });
     let registry = Registry::new();

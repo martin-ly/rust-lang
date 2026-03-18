@@ -1,0 +1,69 @@
+name: Rust Version Tracking
+
+on:
+  schedule:
+    # 每周一运行
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  track-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Run version tracker
+        id: tracker
+        run: |
+          python scripts/rust_version_tracker.py --check --report
+          
+          # 检查是否有新版本
+          if grep -q "⚠️ 需要更新" reports/version_tracking_*.md 2>/dev/null; then
+            echo "has_update=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_update=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        with:
+          name: version-tracking-report
+          path: reports/version_tracking_*.md
+
+      - name: Create issue for new version
+        if: steps.tracker.outputs.has_update == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            const reportsDir = 'reports';
+            const files = fs.readdirSync(reportsDir);
+            const latestReport = files
+              .filter(f => f.startsWith('version_tracking_'))
+              .sort()
+              .pop();
+            
+            if (latestReport) {
+              const content = fs.readFileSync(path.join(reportsDir, latestReport), 'utf8');
+              
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '🎉 Rust 新版本可用',
+                body: content,
+                labels: ['enhancement', 'rust-version']
+              });
+            }

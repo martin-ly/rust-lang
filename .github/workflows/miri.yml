@@ -1,0 +1,135 @@
+name: Miri Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  schedule:
+    # 每周运行一次
+    - cron: '0 0 * * 0'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  miri-tree-borrows:
+    name: Miri (Tree Borrows)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust nightly with Miri
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          components: miri, rust-src
+          override: true
+
+      - name: Cache cargo
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-miri-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Run Miri setup
+        run: cargo miri setup
+
+      - name: Run tests with Tree Borrows
+        run: cargo miri test --workspace --all-features
+        env:
+          MIRIFLAGS: "-Zmiri-tree-borrows -Zmiri-ignore-leaks"
+        continue-on-error: false
+
+  miri-stacked-borrows:
+    name: Miri (Stacked Borrows - Baseline)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust nightly with Miri
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          components: miri, rust-src
+          override: true
+
+      - name: Cache cargo
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-miri-sb-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Run Miri setup
+        run: cargo miri setup
+
+      - name: Run tests with Stacked Borrows
+        run: cargo miri test --workspace --all-features
+        env:
+          MIRIFLAGS: "-Zmiri-stacked-borrows -Zmiri-ignore-leaks"
+        continue-on-error: true  # SB 可能有误报，允许失败
+
+  miri-strict-mode:
+    name: Miri (Strict Mode)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust nightly with Miri
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          components: miri, rust-src
+          override: true
+
+      - name: Run Miri setup
+        run: cargo miri setup
+
+      - name: Run tests with strict mode
+        run: cargo miri test --workspace --all-features
+        env:
+          MIRIFLAGS: "-Zmiri-tree-borrows -Zmiri-tag-raw-pointers -Zmiri-ignore-leaks"
+        continue-on-error: true  # 严格模式可能有更多限制
+
+  miri-specific-crates:
+    name: Miri (Per-Crate)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        crate:
+          - c01_ownership_borrow_scope
+          - c02_type_system
+          - c05_threads
+          - c06_async
+        include:
+          - crate: c01_ownership_borrow_scope
+            flags: "-Zmiri-tree-borrows"
+          - crate: c02_type_system
+            flags: "-Zmiri-tree-borrows"
+          - crate: c05_threads
+            flags: "-Zmiri-tree-borrows -Zmiri-disable-isolation"
+          - crate: c06_async
+            flags: "-Zmiri-tree-borrows -Zmiri-disable-isolation"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust nightly with Miri
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          components: miri, rust-src
+          override: true
+
+      - name: Run Miri setup
+        run: cargo miri setup
+
+      - name: Run tests for ${{ matrix.crate }}
+        run: cargo miri test -p ${{ matrix.crate }} --all-features
+        env:
+          MIRIFLAGS: ${{ matrix.flags }}

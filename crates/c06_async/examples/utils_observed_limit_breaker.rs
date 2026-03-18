@@ -15,13 +15,13 @@ use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};
 async fn main() -> anyhow::Result<()> {
     // 1) 指标注册与 HTTP 暴露
     let registry = Registry::new();
-    static REQUESTS_TOTAL: once_cell::sync::Lazy<IntCounter> = once_cell::sync::Lazy::new(|| {
+    static REQUESTS_TOTAL: std::sync::LazyLock<IntCounter> = std::sync::LazyLock::new(|| {
         IntCounter::with_opts(Opts::new("requests_total", "总请求数")).unwrap()
     });
-    static REQUESTS_FAIL: once_cell::sync::Lazy<IntCounter> = once_cell::sync::Lazy::new(|| {
+    static REQUESTS_FAIL: std::sync::LazyLock<IntCounter> = std::sync::LazyLock::new(|| {
         IntCounter::with_opts(Opts::new("requests_fail_total", "失败请求数")).unwrap()
     });
-    static REQUEST_LATENCY: once_cell::sync::Lazy<Histogram> = once_cell::sync::Lazy::new(|| {
+    static REQUEST_LATENCY: std::sync::LazyLock<Histogram> = std::sync::LazyLock::new(|| {
         Histogram::with_opts(HistogramOpts::new("request_seconds", "请求耗时(秒)")).unwrap()
     });
     let _ = registry.register(Box::new(REQUESTS_TOTAL.clone()));

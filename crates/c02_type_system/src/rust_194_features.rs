@@ -698,21 +698,24 @@ impl SequenceValidator {
 /// - 编译器能更智能地推断 LazyCell 中存储的类型
 /// - 减少显式类型标注的需要
 /// - 更好的闭包类型捕获
-use std::cell::OnceCell;
-use std::sync::OnceLock;
+use std::cell::LazyCell;
+use std::sync::LazyLock;
 
 /// 类型推断优化的延迟初始化缓存
 ///
 /// 展示 Rust 1.94 改进的类型推断如何与 LazyCell 结合
 pub struct TypeInferredCache<T> {
-    cell: OnceCell<T>,
+    cell: LazyCell<T>,
 }
 
 impl<T> TypeInferredCache<T> {
     /// 创建新的延迟初始化缓存
-    pub fn new() -> Self {
+    pub fn new<F>(init: F) -> Self
+    where
+        F: FnOnce() -> T,
+    {
         Self {
-            cell: OnceCell::new(),
+            cell: LazyCell::new(init),
         }
     }
 
@@ -726,11 +729,8 @@ impl<T> TypeInferredCache<T> {
     /// 获取或初始化值
     ///
     /// Rust 1.94: 闭包返回类型推断改进
-    pub fn get_or_init<F>(&self, f: F) -> &T
-    where
-        F: FnOnce() -> T,
-    {
-        self.cell.get_or_init(f)
+    pub fn get_or_init(&self) -> &T {
+        &*self.cell
     }
 
     /// 尝试获取可变引用（不触发初始化）
@@ -741,16 +741,8 @@ impl<T> TypeInferredCache<T> {
     }
 
     /// 强制获取可变引用
-    pub fn force_get_mut<F>(&mut self, f: F) -> &mut T
-    where
-        F: FnOnce() -> T,
-    {
-        if self.cell.get().is_none() {
-            let _ = self.cell.set(f());
-        }
-        self.cell
-            .get_mut()
-            .expect("force_get_mut: LazyCell 应该已初始化")
+    pub fn force_get_mut(&mut self) -> &mut T {
+        self.cell.force_mut()
     }
 
     /// 检查是否已初始化
@@ -759,25 +751,26 @@ impl<T> TypeInferredCache<T> {
     }
 }
 
-impl<T> Default for TypeInferredCache<T> {
+impl<T: Default> Default for TypeInferredCache<T> {
     fn default() -> Self {
-        Self::new()
+        Self::new(T::default)
     }
 }
 
 /// 线程安全的类型推断缓存
 pub struct ThreadSafeTypeCache<T> {
-    lock: OnceLock<T>,
+    lock: LazyLock<T>,
 }
 
 impl<T> ThreadSafeTypeCache<T> {
     /// 创建新的线程安全缓存
-    pub fn new() -> Self
+    pub fn new<F>(init: F) -> Self
     where
+        F: FnOnce() -> T,
         T: Send + Sync + 'static,
     {
         Self {
-            lock: OnceLock::new(),
+            lock: LazyLock::new(init),
         }
     }
 
@@ -787,11 +780,8 @@ impl<T> ThreadSafeTypeCache<T> {
     }
 
     /// 获取或初始化
-    pub fn get_or_init<F>(&self, f: F) -> &T
-    where
-        F: FnOnce() -> T,
-    {
-        self.lock.get_or_init(f)
+    pub fn get_or_init(&self) -> &T {
+        &*self.lock
     }
 
     /// 检查是否已初始化
@@ -800,9 +790,9 @@ impl<T> ThreadSafeTypeCache<T> {
     }
 }
 
-impl<T: Send + Sync + 'static> Default for ThreadSafeTypeCache<T> {
+impl<T: Send + Sync + 'static + Default> Default for ThreadSafeTypeCache<T> {
     fn default() -> Self {
-        Self::new()
+        Self::new(T::default)
     }
 }
 
@@ -810,25 +800,23 @@ impl<T: Send + Sync + 'static> Default for ThreadSafeTypeCache<T> {
 ///
 /// 展示高级类型推断模式
 pub struct LazyFactory<T, F> {
-    cache: OnceCell<T>,
-    factory: F,
+    cache: LazyCell<T>,
 }
 
 impl<T, F> LazyFactory<T, F>
 where
-    F: Fn() -> T,
+    F: FnOnce() -> T,
 {
     /// 创建新的延迟工厂
     pub fn new(factory: F) -> Self {
         Self {
-            cache: OnceCell::new(),
-            factory,
+            cache: LazyCell::new(factory),
         }
     }
 
     /// 获取值（按需初始化）
     pub fn get(&self) -> &T {
-        self.cache.get_or_init(|| (self.factory)())
+        &*self.cache
     }
 
     /// 检查是否已初始化
@@ -999,10 +987,10 @@ pub fn demonstrate_rust_194_type_system_features() {
 
     // 9. LazyCell 类型推断示例
     println!("\n9. LazyCell 类型推断:");
-    let cache = TypeInferredCache::<Vec<i32>>::new();
+    let cache = TypeInferredCache::<Vec<i32>>::new(|| vec![1, 2, 3, 4, 5]);
     println!("   初始化前: {:?}", cache.try_get());
 
-    let value = cache.get_or_init(|| vec![1, 2, 3, 4, 5]);
+    let value = cache.get_or_init();
     println!("   初始化后: {:?}", value);
     println!("   已初始化: {}", cache.is_initialized());
 }
@@ -1269,14 +1257,14 @@ mod tests {
 
     #[test]
     fn test_type_inferred_cache_get() {
-        let cache = TypeInferredCache::<i32>::new();
+        let cache = TypeInferredCache::<i32>::new(|| 42);
 
         // 初始化前
         assert_eq!(cache.try_get(), None);
         assert!(!cache.is_initialized());
 
         // 获取值触发初始化
-        assert_eq!(cache.get_or_init(|| 42), &42);
+        assert_eq!(cache.get_or_init(), &42);
 
         // 初始化后
         assert_eq!(cache.try_get(), Some(&42));
@@ -1285,13 +1273,13 @@ mod tests {
 
     #[test]
     fn test_type_inferred_cache_get_mut() {
-        let mut cache = TypeInferredCache::<Vec<i32>>::new();
+        let mut cache = TypeInferredCache::<Vec<i32>>::new(|| vec![1, 2, 3]);
 
         // 初始化前 get_mut() 应该返回 None
         assert_eq!(cache.try_get_mut(), None);
 
         // 使用 force_get_mut 触发初始化
-        let mutable = cache.force_get_mut(|| vec![1, 2, 3]);
+        let mutable = cache.force_get_mut();
         mutable.push(4);
 
         // 验证修改
@@ -1300,12 +1288,12 @@ mod tests {
 
     #[test]
     fn test_thread_safe_type_cache() {
-        let cache = ThreadSafeTypeCache::<String>::new();
+        let cache = ThreadSafeTypeCache::<String>::new(|| "hello".to_string());
 
         assert_eq!(cache.try_get(), None);
         assert!(!cache.is_initialized());
 
-        assert_eq!(cache.get_or_init(|| "hello".to_string()), "hello");
+        assert_eq!(cache.get_or_init(), "hello");
 
         assert_eq!(cache.try_get(), Some(&"hello".to_string()));
         assert!(cache.is_initialized());

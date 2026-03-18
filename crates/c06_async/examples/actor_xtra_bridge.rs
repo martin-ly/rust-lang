@@ -9,16 +9,16 @@ async fn main() {
     use tracing::info;
     let _ = tracing_subscriber::fmt().with_env_filter("info").try_init();
     use c06_async::utils::metrics;
-    use once_cell::sync::Lazy;
+    use std::sync::LazyLock;
     use prometheus::{IntCounter, Opts, Registry};
 
     use xtra::{Address, prelude::*};
 
     // 指标
-    static BRIDGE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+    static BRIDGE_IN_TOTAL: LazyLock<IntCounter> = LazyLock::new(|| {
         IntCounter::with_opts(Opts::new("xtra_bridge_in_total", "xtra 桥接入口消息计数")).unwrap()
     });
-    static PIPELINE_IN_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+    static PIPELINE_IN_TOTAL: LazyLock<IntCounter> = LazyLock::new(|| {
         IntCounter::with_opts(Opts::new(
             "xtra_pipeline_in_total",
             "xtra 流水线入口消息计数",

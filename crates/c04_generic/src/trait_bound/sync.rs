@@ -102,6 +102,7 @@ fn main() {
 
 ```rust
 use std::sync::Arc;
+use std::sync::LazyLock;
 use std::thread;
 
 struct Config {
@@ -111,14 +112,13 @@ struct Config {
 }
 
 // 全局配置，多个线程共享
-static GLOBAL_CONFIG: once_cell::sync::Lazy<Arc<Config>> =
-    once_cell::sync::Lazy::new(|| {
-        Arc::new(Config {
-            max_threads: 4,
-            timeout: 30,
-            debug: true,
-        })
-    });
+static GLOBAL_CONFIG: LazyLock<Arc<Config>> = LazyLock::new(|| {
+    Arc::new(Config {
+        max_threads: 4,
+        timeout: 30,
+        debug: true,
+    })
+});
 
 fn main() {
     let handles: Vec<_> = (0..3).map(|id| {

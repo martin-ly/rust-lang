@@ -1,0 +1,25 @@
+# Clippy配置文件 - 2026年最佳实践
+
+# 限制大型类型传递
+large-type-threshold = 200
+
+# 限制函数参数数量
+too-many-arguments-threshold = 7
+
+# 限制函数行数
+too-many-lines-threshold = 100
+
+# 认知复杂度阈值
+cognitive-complexity-threshold = 25
+
+# 允许的下划线前缀变量数
+enum-variant-name-threshold = 3
+
+# 允许的结构体字段数
+struct-field-name-threshold = 3
+
+# 忽略的模块
+ignore-interior-mutability = ["bytes::Bytes"]
+
+# 允许不稳定的feature名称
+allow-feature-name = true

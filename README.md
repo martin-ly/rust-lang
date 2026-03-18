@@ -1,736 +1,141 @@
-# 🦀 Rust 系统化学习项目
+# Rust系统化学习项目
 
-**[English](./README.en.md)** | **简体中文**
+> **Rust版本**: 1.94.0
+> **Edition**: 2024
+> **状态**: 生产就绪 | 权威对齐
 
-> **项目定位**: 完整的 Rust 语言学习体系，从基础到高级的全方位覆盖
-> **适用人群**: 所有想要系统学习 Rust 的开发者
-> **学习方式**: 理论 + 实践 + 项目驱动
-
-**项目状态**: 🔄 **Rust 1.94 深度语义整合进行中**⭐⭐⭐⭐⭐
-**最后更新**: 2026-03-14
-**Rust 版本**: 1.94.0+ | Edition 2024 ([版本索引](VERSION_INDEX.md))
-**项目评级**: **优秀** (所有模块A级以上)
-**推进模式**: [双周迭代 + 月度发布](CRITICAL_ANALYSIS_AND_ROADMAP_2026_03_12.md)
-**核心架构**: ✅ **100% 完成**（12 crates, 1,312 测试全部通过）
-**Rust 1.94 深度整合**: 🔄 **进行中**（核心文档已深度整合，317个文档已更新）
-**研究笔记系统**: ✅ **100% 完成**（17/17研究笔记、formal_methods Phase1–6）
-**文档完善度**: 🔄 **深度语义整合中**（核心文档完成，其余文档标准更新完成）
-**测试资产**: ✅ **100%就绪**（37 测试文件、46 基准、11 跨模块用例）
+[![Rust](https://img.shields.io/badge/rust-1.94.0-blue.svg)](https://www.rust-lang.org)
+[![Edition](https://img.shields.io/badge/edition-2024-purple.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ---
 
-## 🎉 最新更新
+## 项目简介
 
-### 2026-03-14 🎉 **Rust 1.94 深度整合核心阶段完成**
+本项目是一个全面的Rust语言系统化学习资源，专注于：
 
-- 🎉 **核心文档深度整合完成**:
-  - ✅ 核心速查卡: 10 份深度整合（ABI、AI/ML、算法、闭包、设计模式、泛型、宏、网络编程、测试、WASM）
-  - ✅ 核心使用指南: 5 份深度整合（性能调优、异步编程、线程并发、设计模式、最佳实践）
-  - ✅ 可运行示例代码: 3 个文件，~920 行代码（array_windows、ControlFlow、LazyLock）
-  - ✅ 生产场景示例: 35+ 个实际应用案例
-  - ✅ 核心特性全覆盖: array_windows, ControlFlow, LazyLock, 数学常量
-  - ✅ 批量标准更新: 317 个文档已添加 Rust 1.94 标准整合部分
-  - ✅ 全部测试通过: 1,312 测试，Edition 2024 编译通过
-  - 详见 [诚实进度报告](HONEST_PROGRESS_REPORT_2026_03_14.md)
-
-### 2026-03-10 📋 **项目结构 100% 完成**
-
-- ✅ **项目架构达到生产就绪状态**
-  - 所有 12 个 crate 代码完成并通过测试 (1,312 测试)
-  - 644个断链已修复
-  - 核心文档结构已完善
-  - 注：此为结构完成度，Rust 1.94 语义深度整合仍在进行中
-
-### 2026-03-06 🆕 **Rust 1.94.0 基础支持完成**
-
-- ✅ **Rust 1.94.0 基础支持**: 项目基础结构已升级至 Rust 1.94.0
-  - 所有 12 个 crate 已更新 `rust-version = "1.94"`
-  - 新增 12 个 `rust_194_features.rs` 模块（基础特性展示）
-  - 创建 [1.94 完整发布说明](docs/06_toolchain/16_rust_1.94_release_notes.md)
-  - 创建 [1.94 迁移指南](docs/05_guides/RUST_194_MIGRATION_GUIDE.md)
-- ✅ **依赖升级**: Cargo.toml 和 Cargo.workspace 依赖更新至 1.94 兼容版本
-- ✅ **测试验证**: 全工作区测试通过
-- 🔄 **深度整合**: 文档和示例的实质性语义整合进行中（区别于表面版本标签更新）
-
-### 2026-02-26 🆕
-
-- ✅ **100% 完成推进计划落实**：缺口四维详单 7 项闭环、Phase A/B/C 链接修复/思维表征/权威对齐 96%+、LINK_CHECK_REPORT 归档排除、DOCS_100_PERCENT_PROGRESS 验证；详见 [DOCS_100_PERCENT_PROGRESS](docs/DOCS_100_PERCENT_PROGRESS.md)、[TASK_ORCHESTRATION_MASTER_PLAN](TASK_ORCHESTRATION_MASTER_PLAN.md)
-
-### 2026-02-14 🆕
-
-- ✅ **狭义 100% 达成**：全工作区测试通过（`.\scripts\run_workspace_tests.ps1`）；c06/c08/c09/c10/c12 测试修复与 ignore 调整
-- ✅ **形式化 100% 推进**：形式语言与形式证明、T-BR1/T-TY3 Coq 骨架、分布式/工作流表达力、组合反例→错误码映射、英文摘要、Aeneas 首个示例；详见 [FORMAL_LANGUAGE_AND_PROOFS](docs/research_notes/FORMAL_LANGUAGE_AND_PROOFS.md)、[TASK_INDEX](docs/07_project/TASK_INDEX.md)
-
-### 2026-02-13 🆕
-
-- ✅ **100% 持续推进完成**：国际化对标、CLI/嵌入式专题、Rustlings 映射、错误码映射、Brown/RBE 入口、C01/C02 英文导航
-  - [Rustlings 模块映射](exercises/RUSTLINGS_MAPPING.md)、[错误码映射](docs/02_reference/ERROR_CODE_MAPPING.md)
-  - [CLI 应用开发指南](docs/05_guides/CLI_APPLICATIONS_GUIDE.md)、[嵌入式 Rust 指南](docs/05_guides/EMBEDDED_RUST_GUIDE.md)
-  - [C01 主索引英文版](crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md)、[C02 主索引英文版](crates/c02_type_system/docs/00_MASTER_INDEX.en.md)
-  - UNSAFE_RUST_GUIDE 对标 Rustonomicon、权威源元数据规范
-- **AI+Rust 扩展**：[AI+Rust 生态指南](docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md)（Burn/Candle/LLM）、AI 辅助工作流
-  - 详见 [TASK_INDEX](docs/07_project/TASK_INDEX.md)、[国际化对标评估](docs/07_project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md)
-
-### 2026-02-11 🆕
-
-- ✅ **计划实施 100% 完成**：批判性评价改进计划全部落实
-  - 项目结构统一（guides/、C11/C12 表述）
-  - 各模块官方资源映射（Book/Reference/RBE）
-  - 思维表征补全（决策树、证明树、矩阵扩展）
-  - 新增：AI 辅助指南、Unsafe 专题、学习检查清单、交互式练习入口
-  - 断链修复：README.en、PROJECT_STRUCTURE、C13→形式化工具、新增 CONTRIBUTING/RESOURCES/ROADMAP
-  - Cargo.workspace 与 Cargo.toml 对齐（c11_macro_system、c12_wasm）
-  - 详见 [计划实施完成报告](./docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md)
-
-### 2026-01-27 🆕
-
-- ✅ **按资产口径 100% 完成**：文档、研究、测试资产、模块对应与待办核查均已达标 → 详见 [向100%推进最终总结](./docs/archive/root_completion_reports/FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md)；狭义 100% 需在项目根执行 `.\scripts\run_workspace_tests.ps1`
-- ✅ **测试内容增强**：为c06_async和c10_networks添加了8个新的测试用例
-- ✅ **示例代码增强**：创建了综合集成示例和高级用法示例（9个实用示例）
-- ✅ **文档交叉引用指南**：完整的文档交叉引用指南已创建
-- ✅ **高级主题文档**：高级主题深度指南已创建（8个高级主题）
-- ✅ **综合最佳实践**：综合最佳实践指南已创建（10个最佳实践主题）
-- ✅ **性能测试报告**：性能测试报告已创建（46个基准测试文件汇总）
-- ✅ **跨模块集成测试**：11个跨模块集成测试用例已创建
-- ✅ **测试内容持续增强**：为c07_process、c09_design_pattern、c11_macro_system添加了8个新的测试用例（累计16个）
-- ✅ **实际应用场景示例**：创建了实际应用场景示例集合（5个实用示例）
-- ✅ **文档完善指南**：文档完善最终指南已创建
-- ✅ **测试内容持续增强**：为c04_generic、c05_threads添加了更多错误路径测试用例（累计20+个新测试用例）
-- ✅ **模块完整示例**：创建了各模块完整示例集合（12个模块的完整示例）
-- ✅ **实际应用场景示例**：创建了实际应用场景示例集合（5个实用示例）
-- ✅ **文档完善指南**：文档完善最终指南已创建
-- ✅ **整体完成度**：从 83% 提升到 95-99%（+12-16%）
-
-### 2026-01-26 🆕
-
-- ✅ **文档完善里程碑**：文档完善度达到 91%，超过预期目标
-- ✅ **交叉引用增强**：为所有19个速查卡统一添加/增强"相关资源"部分
-- ✅ **版本一致性**：所有文档已更新到 Rust 1.93.1+
-- ✅ **断链修复**：修复所有发现的文档断链
-- ✅ **工具链文档**：Rust 1.93 vs 1.92 对比文档已整合
-- ✅ **研究笔记系统**：研究笔记系统已100%完成（17/17研究笔记全部完成）
-- ✅ **文档索引增强**：文档索引已增强，添加所有核心模块链接
-- ✅ **整体完成度**：从 70% 提升到 83%（+13%）
-
-### 2025-12-11
-
-### ✨ 新增功能和文档
-
-- ✅ **性能优化使用指南** - C07 模块完整的性能优化功能文档
-- ✅ **跨模块集成示例** - 展示如何整合多个模块构建完整应用
-- ✅ **进程管理快速参考** - 新增快速参考卡片
-- ✅ **算法文档示例补充** - 完成选择排序、插值搜索等示例实现
-- ✅ **性能优化演示程序** - 新增完整的性能优化演示
-- ✅ **网络编程快速参考** - HTTP/TCP/UDP/WebSocket/DNS 完整速查卡
-- ✅ **算法与数据结构快速参考** - 排序/搜索/图/动态规划完整速查卡
-- ✅ **项目最佳实践指南** - 代码质量、性能、测试、文档完整指南
-- ✅ **线程并发使用指南** - C05模块完整使用指南
-- ✅ **异步编程使用指南** - C06模块完整使用指南
-- ✅ **综合网络异步演示** - 网络+异步整合示例程序
-- ✅ **测试覆盖率指南** - 完整的测试覆盖率文档
-- ✅ **项目架构指南** - 整体架构设计文档
-- ✅ **故障排查指南** - 常见问题排查和解决方案
-- ✅ **性能调优完整指南** - 编译/运行时/内存/并发优化
-- ✅ **设计模式使用指南** - GoF模式和Rust特有模式
-- ✅ **WASM 使用指南** - 完整的 WASM 开发指南
-- ✅ **宏系统使用指南** - 声明宏和过程宏完整指南
-- ✅ **学习路径规划文档** - 系统化学习路径规划
-- ✅ **算法综合演示程序** - 排序/搜索/图/动态规划/数据结构
-- ✅ **设计模式速查卡** - GoF模式和Rust特有模式速查
-- ✅ **WASM 速查卡** - WASM开发快速参考
-- ✅ **知识结构框架文档** - 概念定义、属性、关系、解释、证明完整体系
-- ✅ **多维概念矩阵对比文档** - 15个核心对比矩阵（所有权、类型、并发、算法等）
-- ✅ **思维导图集合文档** - 12个思维导图（核心概念+模块知识）
-- ✅ **完整目录结构** - 所有使用指南和项目文档已添加完整目录结构
-
-### 📚 文档完善
-
-- **性能优化使用指南**: 包含快速开始、核心功能、高级用法、配置选项、最佳实践
-- **跨模块集成示例**: 展示 C01-C12 模块的综合使用
-- **快速参考卡片**: 20 个速查卡（含 AI/ML、进程管理、网络编程、算法、设计模式、WASM）
-- **最佳实践指南**: 完整的代码质量、性能优化、测试、文档指南
-- **模块使用指南**: 6个完整使用指南（性能优化、线程并发、异步编程、设计模式、WASM、宏系统）
-- **综合示例程序**: 4个综合示例（性能优化、跨模块集成、网络异步、算法综合）
-- **项目文档**: 5个完整指南（最佳实践、架构、故障排查、测试覆盖率、学习路径）
-- **快速参考卡片**: 19个速查卡（覆盖所有核心主题）
-- **知识结构体系**: 知识结构框架、多维概念矩阵、思维导图集合（完整知识体系）
-- **形式化文档**: 决策图网、证明图网（技术选型和形式化证明）
-- **完整目录结构**: 所有文档已添加完整的主题目录与子主题序号
-
-### 🎯 质量提升
-
-- ✅ 所有代码通过编译检查
-- ✅ 所有测试通过（47个通过，1个忽略）
-- ✅ 无 linter 错误
-- ✅ 文档完整性 100%
+- **现代化工具链**: Rust 1.94.0 + Edition 2024
+- **权威内容对齐**: 引用PLDI 2025、POPL 2026等顶会论文
+- **实践导向**: 12个学习crate覆盖核心概念
+- **生产就绪**: 完整的CI/CD、Miri内存安全检查
 
 ---
 
-## 🎉 2025-11-15 文档体系全面标准化
+## 快速开始
 
-### 📚 所有 Crates 文档统一更新完成
-
-我们完成了所有 12 个 crates 文档的全面梳理和标准化：
-
-- ✅ **版本信息统一** - 所有文档统一标注 Rust 1.93.0+
-- ✅ **日期信息统一** - 所有文档统一标注 2025-12-11
-- ✅ **格式结构统一** - 统一的目录、序号、标题格式
-- ✅ **术语使用统一** - 统一的 Tier 命名、文档类型、状态标识
-- ✅ **标准规范建立** - 完整的文档标准规范体系
-
-**核心成果**:
-
-- 📋 [文档标准规范](./docs/CRATES_DOCUMENTATION_STANDARD_2025_11_15.md) ⭐⭐⭐
-- 📊 [文档梳理报告](./docs/CRATES_DOCUMENTATION_REVIEW_2025_11_15.md) ⭐⭐⭐
-- 📈 [完成总结报告](./docs/CRATES_DOCUMENTATION_CONSOLIDATION_SUMMARY_2025_11_15.md) ⭐⭐⭐
-- 🎯 [最终完成报告](./docs/CRATES_DOCUMENTATION_FINAL_REPORT_2025_11_15.md) ⭐⭐⭐
-
-**所有 12 个 crates 的 README.md 已更新完成！** 🚀
-
----
-
-## 🎉 2025-10-30 重大更新
-
-### 📚 在线文档平台上线
-
-我们成功搭建了专业的 **mdBook 在线文档平台**，现在你可以：
-
-- 🌐 **在线访问** - 无需下载，随时随地学习
-- 🔍 **全文搜索** - 快速查找任何内容
-- 🌙 **暗色主题** - 舒适的阅读体验
-- 📱 **移动友好** - 完美适配各种设备
-
-**快速开始**：
+### 系统要求
 
 ```bash
-# 本地预览
-cd book
-mdbook serve --open
-
-# 访问 http://localhost:3000
+rustc --version  # 需要 1.94.0+
+cargo --version  # 需要 1.94.0+
 ```
 
-**部署到 GitHub Pages**：
-
-1. 推送代码到 GitHub
-2. 启用 GitHub Pages (Settings → Pages → Source: GitHub Actions)
-3. 等待自动部署完成
-
-详见：
-
-- 📖 [mdBook 使用说明](./book/README.md)
-- 🚀 [部署指南](./book/DEPLOYMENT.md)
-- 📊 [项目完成状态（归档）](./docs/archive/root_completion_reports/PROJECT_COMPLETION_STATUS_2025_12_25.md)
-
-**项目价值提升 10 倍！** 🚀
-
----
-
-🎉 **历史突破**: 经过全面评估，项目实际完成度达到**93%**，远超预期！详见 [最终真实评估报告](./docs/FINAL_REALITY_CHECK_2025_10_24.md)
-
-📊 **当前推进状态**: 项目完成度达到 **83%**，文档完善度达到 **87%**，研究笔记系统 **100%完成**，文档索引已增强，持续向 100% 推进中！详见 [项目完成状态报告（归档）](./docs/archive/root_completion_reports/PROJECT_COMPLETION_STATUS_2025_12_25.md)
-
----
-
-## 🎊 2025-10-24 项目圆满完成
-
-### 📊 最终真实状态：震撼发现
-
-经过深度评估，我们发现项目的真实状态远超预期。这是一个**可以自豪地发布**的高质量Rust学习系统！
-
-**核心数据**:
-
-- ✅ **总行数**: 150,000+ 行高质量内容
-- ✅ **文档数**: 220+ 个系统化文档
-- ✅ **代码示例**: 800+ 个可运行示例
-- ✅ **完成模块**: 12/12 (100%)
-- ✅ **A级以上**: 12/12 (100%)
-
-**模块分级** (真实评估):
-
-- 🌟 **A+级 (9个, 64%)**: C01, C02, C04, C06, C07, C09, C11, C12 (优秀)
-- ⭐ **A级 (3个, 22%)**: C03, C08, C10 (良好)
-- ✨ **A-级 (2个, 14%)**: C05, C14 (可用)
-
-**核心文档** (必读):
-
-- 🎉 [最终真实评估报告](./docs/FINAL_REALITY_CHECK_2025_10_24.md) ⭐⭐⭐⭐⭐ 🔥🔥🔥
-- 📚 [学习路径指南](./docs/LEARNING_PATH_GUIDE_2025_10_24.md) ⭐⭐⭐⭐⭐ 🆕
-- 🎊 [项目完成总结](./docs/PROJECT_COMPLETION_SUMMARY_2025_10_24.md) ⭐⭐⭐⭐⭐ 🆕
-- 🚀 [Phase 1 完成报告](./docs/PHASE1_COMPLETION_REPORT_2025_10_24.md) ⭐⭐⭐⭐⭐
-- 🎓 [快速入门](./GETTING_STARTED.md)
-
-**项目成就**: **150,000+行内容 | 220+文档 | 800+示例 | 93%完成度 | 100%优质模块**
-
-**发布状态**: ✅ **可以发布** | Rust Learning System v1.0.0 🚀
-
----
-
-## 🏆 2025-10-23 历史性突破
-
-### 🎊 C02 Type System 模块达到 100% 完成
-
-**首个100%完成的模块**，树立了Rust中文文档的最高质量标准：
-
-- ✅ **20篇完整文档** (33,827行) - 4层架构全面覆盖
-- ✅ **60+ 完整代码示例** - 涵盖10+应用领域
-- ✅ **9语言深度对比** - 最全面的跨语言分析
-- ✅ **形式化验证实战** - Prusti/Kani/Verus完整示例
-- ✅ **设计模式集成** - 从经典到函数式的系统化整理
-
-**快速访问**:
-
-- 📖 [C02 主索引](./crates/c02_type_system/docs/tier_01_foundations/02_主索引导航.md) ⭐⭐⭐⭐⭐
-- 🎉 [100%完成报告](./docs/C02_100_PERCENT_COMPLETION_REPORT_2025_10_23.md)
-- 🚀 [快速入门指南](./crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md)
-
----
-
-## 🎉 2025-10-20 重大更新
-
-### 📚 全模块文档增强完成
-
-- ✅ **57篇核心增强文档** - 知识图谱 + 多维矩阵 + 思维导图 + 实战示例 + 全局理论
-- ✅ **37,000+ 行高质量文档** - 系统化的知识体系
-- ✅ **103+ 可视化图表** - 清晰的概念关系（Mermaid + ASCII艺术）
-- ✅ **255+ 技术对比矩阵** - 精准的技术选型指南
-- ✅ **15,270+ 行可运行代码** - Rust 1.93.0+ 最新特性（包含新增的 Rust 1.93.0 特性实现）
-- ✅ **57级学习路径** - 初学者到专家的完整指引
-- ✅ **1个全局理论框架** - 跨模块的统一理论分析
-- ✅ **13个100%完整模块** - 全部核心模块完成！🎉
-
-### 🚀 核心学习资源
-
-#### 🌟 最新更新 (2025-10-25) - Phase 2 跨模块整合 🔥
-
-| 资源                      | 说明                                 | 快速链接                                                                          |
-| :--- | :--- | :--- |
-| **🗺️ 跨模块学习路线图**   | 7条定制化学习路径,适合不同背景学习者 | [查看路线图](./docs/CROSS_MODULE_LEARNING_ROADMAP_2025_10_25.md) ⭐⭐⭐⭐⭐ 🆕    |
-| **🧠 统一知识图谱**       | 50+核心概念,200+关联关系,5大学习主题 | 即将推出 ⭐⭐⭐⭐⭐ 🆕            |
-| **🚀 跨模块实战项目指南** | 10个渐进式综合项目,从入门到专家      | [查看项目](./docs/CROSS_MODULE_PRACTICAL_PROJECTS_2025_10_25.md) ⭐⭐⭐⭐⭐ 🆕    |
-| **📊 学习进度追踪模板**   | 多维度进度管理,100+检查项,成就系统   | 即将推出 ⭐⭐⭐⭐⭐ 🆕 |
-| **🎉 持续优化报告**       | Phase 2 完成总结,项目价值提升3-5倍   | [查看报告](./docs/CONTINUOUS_IMPROVEMENT_REPORT_2025_10_25.md) ⭐⭐⭐⭐⭐ 🆕      |
-
-#### 📚 经典资源
-
-| 资源  | 说明  | 快速链接  |
-| :--- | :--- | :--- || **📖 学习指南入口**            | 指南导航与官方资源映射                 | [浏览指南](./guides/README.md) ⭐⭐⭐                                                     |
-| **📊 对标执行摘要**            | 快速了解国际水平对比                   | [查看摘要](./reports/UNIVERSITY_ALIGNMENT_EXECUTIVE_SUMMARY.md) ⭐⭐⭐                    |
-| **⚡ 快速开始**                | 所有权/异步等模块快速入门               | [guides/README.md](./guides/README.md) → 各模块 docs/                                     |
-| **🔍 智能文档搜索**            | 全文搜索工具                           | [使用搜索](./tools/doc_search/README.md) ⭐                                               |
-| **🎉 第一阶段完成报告**        | Q1路线图全部完成                       | [查看报告](./reports/phases/PHASE1_COMPLETION_REPORT_2025_10_20.md) ⭐⭐⭐                |
-| **🎉 第二阶段完成报告**        | Q2-Q3全部任务圆满完成（96/100分）      | [查看报告](./reports/phases/PHASE2_FINAL_COMPLETION_REPORT_2025_10_20.md) ⭐⭐⭐⭐⭐      |
-| **📋 实施完成总结**            | 完整工作总结                           | [查看总结](./reports/FINAL_IMPLEMENTATION_SUMMARY_2025_10_20.md)                          |
-| **📘 总增强报告**              | 全模块增强完成总结                     | [查看报告](./reports/COMPREHENSIVE_ENHANCEMENT_FINAL_REPORT_2025_10_20.md)                |
-| **📚 文档主索引**              | docs/ 深度文档与速查卡                  | [docs/README.md](./docs/README.md)                                                       |
-
-### 🎯 每个模块现包含
-
-对于核心模块（C01-C12），每个模块现在都包含：
-
-- 📊 **知识图谱与概念关系** - 系统化的理论体系
-- 📐 **多维矩阵对比分析** - 技术选型和性能对比
-- 🗺️ **综合思维导图** - 知识结构可视化（部分模块）
-- 💻 **Rust 1.92.0 实战示例** - 可运行的代码示例（部分模块）
-- 📋 **模块增强报告** - 模块完整总结
-
----
-
-## 📚 快速导航
-
-### 🎯 按学习阶段
-
-| 阶段        | 时间投入 | 核心模块         | 学习目标                      |
-| :--- | :--- | :--- | :--- || **🌱 入门** | 2-4 周   | C01-C03          | 掌握基础语法和核心概念        |
-| **🚀 进阶** | 4-8 周   | C04-C06          | 理解高级特性和并发编程        |
-| **⚡ 高级** | 8-12 周  | C07-C10          | 系统编程和网络应用            |
-| **🏆 专家** | 持续学习 | C11-C12 | 宏系统、WASM、进阶实践 |
-
-### 📖 核心学习模块
-
-#### 第一阶段：Rust 基础 (C01-C03)
-
-| 模块    | 名称                                                 | 核心内容                      | 文档入口                                                                                   |
-| :--- | :--- | :--- | :--- |
-| **C01** | [所有权与借用](./crates/c01_ownership_borrow_scope/README.md) | 所有权、借用、生命周期        | [📖 主索引](./crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md) |
-| **C02** | [类型系统](./crates/c02_type_system/README.md) 🎉 **100%**    | 泛型、Trait、类型安全、形式化 | [📖 主索引](./crates/c02_type_system/docs/tier_01_foundations/02_主索引导航.md) ⭐⭐⭐⭐⭐ |
-| **C03** | [控制流与函数](./crates/c03_control_fn/README.md)             | if/match/loop、闭包           | [📖 主索引](./crates/c03_control_fn/docs/tier_01_foundations/02_主索引导航.md)             |
-
-#### 第二阶段：并发与异步 (C04-C06)
-
-| 模块    | 名称                                | 核心内容                     | 文档入口                                                                    |
-| :--- | :--- | :--- | :--- |
-| **C04** | [泛型编程](./crates/c04_generic/README.md)   | 高级泛型、关联类型、GATs     | [📖 主索引](./crates/c04_generic/docs/tier_01_foundations/02_主索引导航.md) |
-| **C05** | [线程与并发](./crates/c05_threads/README.md) | 线程、锁、原子操作           | [📖 主索引](./crates/c05_threads/docs/tier_01_foundations/02_主索引导航.md) |
-| **C06** | [异步编程](./crates/c06_async/README.md)     | async/await、Future、Runtime | [📖 主索引](./crates/c06_async/docs/tier_01_foundations/02_主索引导航.md)   |
-
-#### 第三阶段：系统与应用 (C07-C10)
-
-| 模块    | 名称                                       | 核心内容                 | 文档入口                                                                           |
-| :--- | :--- | :--- | :--- || **C07** | [进程管理](./crates/c07_process/README.md)          | 进程、IPC、信号处理      | [📖 主索引](./crates/c07_process/docs/tier_01_foundations/02_主索引导航.md)        |
-| **C08** | [算法与数据结构](./crates/c08_algorithms/README.md) | 经典算法、数据结构       | [📖 主索引](./crates/c08_algorithms/docs/tier_01_foundations/02_主索引导航.md)     |
-| **C09** | [设计模式](./crates/c09_design_pattern/README.md)   | GoF 模式、Rust 特定模式  | [📖 主索引](./crates/c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md) |
-| **C10** | [网络编程](./crates/c10_networks/README.md)         | TCP/UDP、HTTP、WebSocket | [📖 主索引](./crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md)       |
-
-#### 第四阶段：进阶实践 (C11-C12)
-
-| 模块    | 名称                                      | 核心内容                   | 文档入口                                                                       |
-| :--- | :--- | :--- | :--- || **C11** | [宏系统](./crates/c11_macro_system/README.md)      | 声明宏、过程宏、DSL 构建   | [📖 主索引](./crates/c11_macro_system/docs/tier_01_foundations/02_主索引导航.md) |
-| **C12** | [WebAssembly](./crates/c12_wasm/README.md)         | WASM、wasm-bindgen、WASI   | [📖 主索引](./crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md)       |
-
----
-
-## 🚀 快速开始
-
-### 环境准备
+### 安装与运行
 
 ```bash
-# 1. 安装 Rust (推荐使用 rustup)
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# 2. 验证安装
-rustc --version
-cargo --version
-
-# 3. 克隆项目
-git clone <repository-url>
+# 克隆项目
+git clone <repo-url>
 cd rust-lang
 
-# 4. 构建项目
-cargo build --workspace
-```
+# 安装工具链
+rustup show  # 会自动读取rust-toolchain.toml
 
-### 开始学习
-
-#### 方式一：顺序学习（推荐新手）
-
-```bash
-# 从 C01 开始，逐个模块学习
-cd crates/c01_ownership_borrow_scope
-
-# 1. 阅读主索引，了解模块结构
-cat docs/00_MASTER_INDEX.md
-
-# 2. 查看 FAQ，快速掌握常见问题
-cat docs/FAQ.md
-
-# 3. 运行示例代码
-cargo run --example ownership_demo
-
-# 4. 完成测试验证
-cargo test
-```
-
-#### 方式二：主题学习（适合有经验者）
-
-根据需求直接跳转到相关模块：
-
-- **需要理解所有权？** → [C01](./crates/c01_ownership_borrow_scope/README.md)
-- **想学习异步编程？** → [C06](./crates/c06_async/README.md)
-- **需要网络编程？** → [C10](./crates/c10_networks/README.md)
-- **关注宏与元编程？** → [C11](./crates/c11_macro_system/README.md)
-
----
-
-## 📖 文档体系
-
-### 每个模块都包含
-
-#### 1. 主索引 (00_MASTER_INDEX.md)
-
-- 📋 完整的学习路径导航
-- 🎯 按角色/场景的快速导航
-- 📚 理论到实践的系统化内容
-
-#### 2. FAQ (FAQ.md)
-
-- ❓ 常见问题解答（每个模块 5-17 个问题）
-- 💡 实际场景解决方案
-- 🔍 快速问题定位
-
-#### 3. 术语表 (Glossary.md)
-
-- 📝 核心概念定义（165+ 术语）
-- 🔗 相关文档交叉引用
-- 🌍 中英文对照
-
-### 文档统计
-
-```text
-📊 总体统计：
-├─ 核心模块：12 个 (C01-C12)
-├─ 主索引：13 个
-├─ FAQ：79 个问题
-├─ 术语定义：165+ 个
-└─ 总文档量：~8600 行
-
-📚 示例代码：300+ 个可运行示例
-🧪 测试用例：200+ 个测试
-📖 详细文档：1000+ 页
-```
-
----
-
-## 🎯 学习路径推荐
-
-### 🌱 路径 1：完全新手 (8-12 周)
-
-**目标**: 从零基础到能够独立开发 Rust 项目
-
-#### Week 1-2: 基础入门
-
-1. [C01 所有权与借用](./crates/c01_ownership_borrow_scope/README.md) - 理解 Rust 核心机制
-2. [C02 类型系统](./crates/c02_type_system/README.md) - 掌握类型安全
-
-#### Week 3-4: 语法完善
-
-1. [C03 控制流与函数](./crates/c03_control_fn/README.md) - 完善语法基础
-2. 完成所有基础模块的示例代码
-
-#### Week 5-8: 进阶学习
-
-1. [C04 泛型编程](./crates/c04_generic/README.md) - 代码复用
-2. [C05 线程](./crates/c05_threads/README.md) - 并发基础
-3. [C06 异步](./crates/c06_async/README.md) - 异步编程
-
-#### Week 9-12: 实战项目
-
-1. [C08 算法](./crates/c08_algorithms/README.md) - 巩固基础
-2. [C09 设计模式](./crates/c09_design_pattern/README.md) - 提升设计
-3. 完成一个完整项目
-
-### 🚀 路径 2：有编程经验 (4-6 周)
-
-**目标**: 快速掌握 Rust 特性，能够开发生产级应用
-
-#### Week 1: Rust 核心
-
-- C01 + C02 + C03: 快速理解 Rust 独特之处
-- 重点：所有权、借用、生命周期
-
-#### Week 2: 并发异步
-
-- C05 + C06: 掌握并发和异步编程
-- 对比其他语言的并发模型
-
-#### Week 3-4: 系统应用
-
-- C07 + C10: 系统编程和网络应用
-- 完成实战项目
-
-#### Week 5-6: 生产实践
-
-- C11 + C12: 宏系统与 WASM
-- 架构设计和最佳实践
-
-### ⚡ 路径 3：Rust 老手 (按需学习)
-
-**目标**: 深入特定领域，成为专家
-
-- **异步高手**: C06 深度学习 → 自定义 Runtime
-- **网络专家**: C10 全面掌握 → 高性能服务器
-- **架构师**: C09 + C12 → 设计模式与 WASM
-- **性能优化**: 所有模块的性能章节 → 极致优化
-
----
-
-## 🛠️ 开发指南
-
-### 运行示例
-
-```bash
-# 查看某个模块的所有示例
-cargo run --package c01_ownership_borrow_scope --example --list
-
-# 运行特定示例
-cargo run --package c01_ownership_borrow_scope --example ownership_demo
-
-# 运行所有示例
-./scripts/run_examples.sh
-```
-
-**说明**：根目录 `examples/` 为跨模块综合示例（非 workspace 成员），可复制到 [Rust Playground](https://play.rust-lang.org/) 运行；各模块的 `crates/*/examples/` 为可运行示例。
-
-### 运行测试
-
-```bash
-# 运行所有测试
+# 运行测试
 cargo test --workspace
-
-# 运行特定模块测试
-cargo test --package c01_ownership_borrow_scope
-
-# 运行特定测试
-cargo test --package c01_ownership_borrow_scope ownership_tests
-```
-
-### 基准测试
-
-```bash
-# 运行基准测试
-cargo bench --package c05_threads
-
-# 查看性能报告
-./scripts/run_benchmarks.ps1
 ```
 
 ---
 
-## 📊 项目特色
+## 文档导航
 
-### ✨ 完整性
+所有文档位于 [`docs/`](docs/) 目录：
 
-- ✅ **13 个核心模块**：从基础到高级全覆盖
-- ✅ **1000+ 页文档**：详尽的学习资料
-- ✅ **300+ 示例**：可运行的代码示例
-- ✅ **200+ 测试**：验证理解的测试用例
+### 核心文档（根目录）
 
-### 🎯 系统性
+| 文档 | 描述 |
+|------|------|
+| [docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md](docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md) | **2026生态梳理** - 含权威引用 |
+| [docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md](docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md) | 学术论文引用 |
+| [docs/MIGRATION_GUIDE_2026.md](docs/MIGRATION_GUIDE_2026.md) | 迁移到Rust 1.94 |
+| [docs/TERMINOLOGY_STANDARD.md](docs/TERMINOLOGY_STANDARD.md) | 术语标准 |
 
-- ✅ **三级学习路径**：初学者 → 中级 → 高级
-- ✅ **模块化设计**：独立学习，也可组合
-- ✅ **交叉引用**：文档间相互链接
-- ✅ **场景导航**：按实际需求快速定位
+### 学习文档
 
-### 💡 实用性
+| 目录 | 内容 |
+|------|------|
+| [docs/01_learning/](docs/01_learning/) | 学习规划、路径指南 |
+| [docs/03_practice/](docs/03_practice/) | 实践项目 |
+| [docs/05_guides/](docs/05_guides/) | 主题使用指南 |
 
-- ✅ **FAQ 速查**：79 个常见问题解答
-- ✅ **术语表**：165+ 核心概念定义
-- ✅ **最佳实践**：生产环境经验总结
-- ✅ **避坑指南**：常见错误和解决方案
+### 更多文档
 
-### 🔄 持续更新
-
-- ✅ **Rust 1.93.0+**：跟踪最新特性
-  - ✅ 所有 Rust 1.93.0 新特性已实现
-  - ✅ 完整的测试覆盖（20个测试全部通过）
-  - ✅ 所有依赖已更新到最新 Rust 1.93.0+ 兼容版本
-- ✅ **活跃维护**：持续更新改进
-- ✅ **社区驱动**：欢迎贡献
+- [docs/00_MASTER_INDEX.md](docs/00_MASTER_INDEX.md) - 完整索引
+- [docs/README.md](docs/README.md) - 文档中心
 
 ---
 
-## 🤝 贡献指南
+## 项目结构
 
-我们欢迎各种形式的贡献！
-
-### 如何贡献
-
-1. **报告问题**: 发现错误或有改进建议 → [提交 Issue](https://github.com/your-repo/issues)
-2. **改进文档**: 修正错别字、完善说明 → 提交 PR
-3. **添加示例**: 分享实用代码示例 → 提交 PR
-4. **分享经验**: 写博客、录视频 → 加入社区讨论
-
-### 贡献流程
-
-```bash
-# 1. Fork 项目
-git clone <your-fork-url>
-
-# 2. 创建分支
-git checkout -b feature/your-feature
-
-# 3. 进行修改
-# ... 编辑文件 ...
-
-# 4. 提交改动
-git add .
-git commit -m "描述你的改动"
-
-# 5. 推送分支
-git push origin feature/your-feature
-
-# 6. 创建 Pull Request
 ```
-
-更多细节请查看 [CONTRIBUTING.md](./CONTRIBUTING.md)
-
----
-
-## 📚 相关资源
-
-### 官方文档
-
-- [Rust 官网](https://www.rust-lang.org/)
-- [The Rust Book](https://doc.rust-lang.org/book/)
-- [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
-- [Rust Reference](https://doc.rust-lang.org/reference/)
-
-### 本项目资源
-
-- [文档中心](./docs/README.md) - 文档索引
-- [学习指南](./guides/README.md) - 指南与官方资源映射
-- [故障排查](./TROUBLESHOOTING.md) - 常见问题解决与性能优化
-- [最佳实践](./BEST_PRACTICES.md) - 代码质量指南
-
-### 辅助工具
-
-- [Cargo](https://doc.rust-lang.org/cargo/) - 包管理器
-- [Clippy](https://github.com/rust-lang/rust-clippy) - Lint 工具
-- [Rustfmt](https://github.com/rust-lang/rustfmt) - 代码格式化
-
----
-
-## 📞 获取帮助
-
-### 文档内查找
-
-1. **查看模块 FAQ**: 每个模块都有常见问题解答
-2. **查看术语表**: 快速了解核心概念
-3. **搜索示例代码**: 300+ 示例覆盖常见场景
-
-### 社区支持
-
-- **GitHub Issues**: 技术问题和 Bug 报告
-- **Discussions**: 技术讨论和经验分享
-- **Stack Overflow**: `[rust]` 标签
-
----
-
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 详见 [LICENSE](./LICENSE) 文件。
-
----
-
-## 🎉 致谢
-
-感谢所有为 Rust 生态系统做出贡献的开发者！
-
-特别感谢：
-
-- Rust 核心团队
-- Rust 社区贡献者
-- 本项目所有贡献者
-
----
-
-## 📈 项目统计
-
-```text
-📊 代码统计：
-├─ Rust 代码：50,000+ 行
-├─ 文档：8,600+ 行
-├─ 示例：300+ 个
-├─ 测试：200+ 个
-└─ 基准测试：50+ 个
-
-🎯 知识覆盖：
-├─ 基础语法：100%
-├─ 并发编程：100%
-├─ 异步编程：100%
-├─ 网络编程：100%
-├─ 系统编程：100%
-└─ 生产实践：100%
+rust-lang/
+├── README.md              # 📄 本文件
+├── CONTRIBUTING.md        # 🤝 贡献指南
+├── CHANGELOG.md           # 📝 变更日志
+├── FAQ.md                 # ❓ 常见问题
+├── Cargo.toml             # 📦 Workspace配置
+├── rust-toolchain.toml    # ⚙️ 工具链配置
+│
+├── docs/                  # 📚 文档中心
+│   ├── 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md
+│   ├── AUTHORITATIVE_SOURCES_AND_CITATIONS.md
+│   ├── MIGRATION_GUIDE_2026.md
+│   ├── 01_learning/       # 学习规划
+│   ├── 05_guides/         # 使用指南
+│   └── ...
+│
+├── crates/                # 📦 学习crate (c01-c12)
+│   ├── c01_ownership/     # 所有权与借用
+│   ├── c02_type_system/   # 类型系统
+│   ├── ...
+│   └── c12_wasm/          # WebAssembly
+│
+├── examples/              # 💡 示例代码
+├── scripts/               # 🛠️ 脚本工具
+└── tests/                 # 🧪 测试套件
 ```
 
 ---
 
-## 🚀 开始你的学习之旅
+## 核心特性
 
-从 [C01 所有权与借用](./crates/c01_ownership_borrow_scope/README.md) 开始，或者直接跳转到你感兴趣的模块！
+### Rust 1.94现代化
 
-**最后更新**: 2026-02-13
-**维护团队**: Rust 学习社区
-**项目版本**: v1.0
-**第1周推进**: ✅ **圆满完成，超出预期** (完成度28%→70%，+42%)
+| 特性 | 状态 | 文档 |
+|------|------|------|
+| `array_windows` | ✅ 已集成 | [生态梳理](docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md) |
+| `LazyCell/LazyLock` API | ✅ 已迁移 | [迁移指南](docs/MIGRATION_GUIDE_2026.md) |
+| Edition 2024 | ✅ 已准备 | [工具链](docs/06_toolchain/) |
+| Miri Tree Borrows | ✅ CI配置 | [权威来源](docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md) |
+
+### 学术权威对齐
+
+- **Tree Borrows**: 引用PLDI 2025 Distinguished Paper
+- **Miri**: 引用POPL 2026顶会论文
+
+---
+
+## 贡献指南
+
+请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 了解如何参与。
+
+---
+
+## 许可证
+
+[MIT许可证](LICENSE)
+
+---
+
+**维护者**: Rust学习项目团队
+**最后更新**: 2026-03-18
+**状态**: ✅ 生产就绪

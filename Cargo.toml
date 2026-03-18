@@ -1289,6 +1289,21 @@ nix = "0.31.2"
 #
 # 说明：pass `--verbose` 可查看 12 个未变更的依赖
 # ============================================================
+
+# 2026年3月: 添加workspace级别的lints配置
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+correctness = "deny"
+suspicious = "warn"
+complexity = "warn"
+perf = "warn"
+style = "warn"
+pedantic = "allow"
+nursery = "allow"
+cargo = "allow"
 #
 # 依赖更新日志 - 2026年3月15日 cargo update（Rust 1.94 兼容版本）
 # ============================================================

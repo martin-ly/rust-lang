@@ -1,114 +1,23 @@
-# Cargo配置文件
-# 创建时间: 2025年9月25日 14:20
-# 增强时间: 2025年9月25日 14:50
-# 更新时间: 2026年3月4日
-
 [build]
-# 启用CPU指令集优化
-rustflags = ["-C", "target-cpu=native"]
-# 将构建产物放到非默认 target/ 目录，避免被工具链/编辑器忽略或锁定
-target-dir = "cargo-artifacts"
+# 使用sccache加速构建
+rustc-wrapper = "sccache"
 
-# 针对测试环境的配置
-[target.'cfg(test)']
-rustflags = ["-C", "debug-assertions=on"]
+# 为IDE和命令行使用不同的target目录
+# (避免RUSTFLAGS变化导致缓存失效)
+target-dir = "target"
 
-# 针对基准测试的配置
-[target.'cfg(bench)']
-rustflags = ["-C", "target-cpu=native", "-C", "opt-level=3"]
-
-# 网络配置
-[net]
-retry = 2
-git-fetch-with-cli = true
-
-# 注册表配置
 [registries.crates-io]
 protocol = "sparse"
 
-# ============================================
-# 别名配置
-# ============================================
+[net]
+retry = 3
 
-[alias]
-# 测试别名
-test-all = "test --all"
-test-quick = "test --lib"
-test-integration = "test --test"
-test-doc = "test --doc"
+[profile.dev.build-override]
+opt-level = 1
 
-# 构建别名
-build-all = "build --all"
-build-release = "build --release"
-build-optimized = "build --release --target x86_64-unknown-linux-gnu"
+[profile.release.build-override]
+opt-level = 2
 
-# 检查别名
-check-all = "check --all"
-check-quick = "check --lib"
-
-# 清理别名
-clean-all = "clean --all"
-
-# 格式化别名
-fmt-all = "fmt --all"
-fmt-check = "fmt --all -- --check"
-
-# 代码质量检查别名
-clippy-all = "clippy --all"
-clippy-pedantic = "clippy --all -- -W clippy::pedantic"
-clippy-cargo = "clippy --all -- -W clippy::cargo"
-
-# 基准测试别名
-bench-all = "bench --all"
-bench-quick = "bench --lib"
-
-# 覆盖率测试别名
-coverage = "tarpaulin --all --out Html --out Xml"
-coverage-quick = "tarpaulin --lib --out Html"
-
-# 安全审计别名
-audit-all = "audit"
-audit-fix = "audit --fix"
-
-# 文档生成别名
-doc-all = "doc --all --open"
-doc-lib = "doc --lib --open"
-
-# 依赖更新别名
-update-all = "update"
-
-# 发布别名
-publish-all = "publish --all"
-publish-dry-run = "publish --all --dry-run"
-
-# 性能分析别名
-profile-cpu = "build --release && perf record --call-graph dwarf"
-profile-mem = "build --release && valgrind --tool=massif"
-
-# 编译优化别名
-optimize-size = "build --release --target x86_64-unknown-linux-musl"
-optimize-speed = "build --release --target x86_64-unknown-linux-gnu"
-
-# 多平台构建别名
-build-windows = "build --release --target x86_64-pc-windows-gnu"
-build-linux = "build --release --target x86_64-unknown-linux-gnu"
-build-macos = "build --release --target x86_64-apple-darwin"
-
-# 质量保证别名
-qa-check = "check --all --tests"
-qa-clippy = "clippy --all --tests -- -D warnings"
-qa-fmt = "fmt --all -- --check"
-
-# 持续集成别名
-ci-test = "test --all"
-ci-build = "build --release --all"
-ci-check = "check --all --tests"
-
-# ============================================
-# 环境变量
-# ============================================
-
-[env]
-# 开发环境变量
-RUST_LOG = "debug"
-RUST_BACKTRACE = "1"
+# 启用增量编译优化
+[unstable]
+incremental-parallel = true

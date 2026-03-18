@@ -1,6 +1,6 @@
 use anyhow::Result;
 use c06_async::utils::metrics;
-use once_cell::sync::Lazy;
+use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};
 use std::sync::Arc;
 use std::time::Duration;
@@ -587,10 +587,10 @@ async fn main() -> Result<()> {
     // 启动基础 /metrics 服务（仅用于本文件演示期间的观测，可选）
     let registry = Registry::new();
     // 注册通用 demo 指标（示例）：执行计数与耗时直方图
-    static DEMO_EXEC_TOTAL: Lazy<IntCounter> = Lazy::new(|| {
+    static DEMO_EXEC_TOTAL: LazyLock<IntCounter> = LazyLock::new(|| {
         IntCounter::with_opts(Opts::new("demo_exec_total", "demo 执行总次数")).unwrap()
     });
-    static DEMO_EXEC_SECONDS: Lazy<Histogram> = Lazy::new(|| {
+    static DEMO_EXEC_SECONDS: LazyLock<Histogram> = LazyLock::new(|| {
         Histogram::with_opts(HistogramOpts::new("demo_exec_seconds", "demo 执行耗时(秒)")).unwrap()
     });
     let _ = registry.register(Box::new(DEMO_EXEC_TOTAL.clone()));

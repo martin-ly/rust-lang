@@ -1,7 +1,7 @@
 //! 运行：`cargo bench -p c06_async`
 //! 说明：该文件包含多组异步原语基准（JoinSet、MPSC、Semaphore 等），均在本地 Tokio 运行时内执行
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
-use once_cell::sync::Lazy;
+use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};
 use std::hint::black_box;
 use std::time::Duration;
@@ -10,9 +10,9 @@ use std::time::Duration;
 
 fn bench_joinset_concurrency(c: &mut Criterion) {
     // 基准×指标：最小联动（可选）
-    static BENCH_EXEC_TOTAL: Lazy<IntCounter> =
-        Lazy::new(|| IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap());
-    static BENCH_EXEC_SECONDS: Lazy<Histogram> = Lazy::new(|| {
+    static BENCH_EXEC_TOTAL: LazyLock<IntCounter> =
+        LazyLock::new(|| IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap());
+    static BENCH_EXEC_SECONDS: LazyLock<Histogram> = LazyLock::new(|| {
         Histogram::with_opts(HistogramOpts::new("bench_exec_seconds", "基准耗时(秒)")).unwrap()
     });
     let registry = Registry::new();

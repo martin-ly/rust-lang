@@ -2,12 +2,12 @@
 //! 指标：Prometheus 暴露在 `127.0.0.1:9900/metrics`（基准启动时自动起服务）
 //! 注意：基准会创建临时 Tokio 运行时；不依赖外部服务
 use criterion::{Criterion, criterion_group, criterion_main};
-use once_cell::sync::Lazy;
+use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};
 
-static BENCH_EXEC_TOTAL: Lazy<IntCounter> =
-    Lazy::new(|| IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap());
-static BENCH_EXEC_SECONDS: Lazy<Histogram> = Lazy::new(|| {
+static BENCH_EXEC_TOTAL: LazyLock<IntCounter> =
+    LazyLock::new(|| IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap());
+static BENCH_EXEC_SECONDS: LazyLock<Histogram> = LazyLock::new(|| {
     Histogram::with_opts(HistogramOpts::new("bench_exec_seconds", "基准耗时(秒)")).unwrap()
 });
 

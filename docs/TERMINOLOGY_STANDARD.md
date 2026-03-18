@@ -1,26 +1,33 @@
 # Rust 术语标准化文档
 
-> **文档版本**: 1.0.0  
-> **创建日期**: 2026-03-17  
-> **最后更新**: 2026-03-17  
-> **Rust 版本**: 1.94.0+ (Edition 2024)  
-> **对齐标准**: Ferrocene Language Specification (FLS)  
+> **文档版本**: 1.0.0
+> **创建日期**: 2026-03-17
+> **最后更新**: 2026-03-17
+> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **对齐标准**: Ferrocene Language Specification (FLS)
 > **状态**: ✅ 已完成
 
 ---
 
 ## 📋 目录
 
-- [简介](#简介)
-- [所有权相关术语](#所有权相关术语)
-- [类型系统术语](#类型系统术语)
-- [并发相关术语](#并发相关术语)
-- [异步相关术语](#异步相关术语)
-- [宏系统术语](#宏系统术语)
-- [FFI/Unsafe 术语](#ffiunsafe-术语)
-- [生命周期术语](#生命周期术语)
-- [版本演进术语](#版本演进术语)
-- [参考资源](#参考资源)
+- [Rust 术语标准化文档](#rust-术语标准化文档)
+  - [📋 目录](#-目录)
+  - [简介](#简介)
+    - [术语表使用说明](#术语表使用说明)
+  - [所有权相关术语](#所有权相关术语)
+  - [类型系统术语](#类型系统术语)
+  - [并发相关术语](#并发相关术语)
+  - [异步相关术语](#异步相关术语)
+  - [宏系统术语](#宏系统术语)
+  - [FFI/Unsafe 术语](#ffiunsafe-术语)
+  - [生命周期术语](#生命周期术语)
+  - [版本演进术语](#版本演进术语)
+  - [参考资源](#参考资源)
+    - [官方文档引用格式说明](#官方文档引用格式说明)
+    - [相关文档](#相关文档)
+    - [Ferrocene FLS 标准对照](#ferrocene-fls-标准对照)
+  - [更新历史](#更新历史)
 
 ---
 
@@ -290,13 +297,13 @@
 
 | 引用格式 | 说明 | URL |
 |---------|------|-----|
-| The Book Ch X.Y | The Rust Programming Language 官方教程 | https://doc.rust-lang.org/book/ |
-| Reference Ch X.Y | Rust Reference 语言参考 | https://doc.rust-lang.org/reference/ |
-| RFC XXXX | Rust RFC 提案 | https://rust-lang.github.io/rfcs/ |
-| Ferrocene Spec | Ferrocene 语言规范 | https://spec.ferrocene.dev/ |
-| Cargo Book | Cargo 文档 | https://doc.rust-lang.org/cargo/ |
-| Rust Blog | 官方博客 | https://blog.rust-lang.org/ |
-| Rust Forge | 贡献者文档 | https://forge.rust-lang.org/ |
+| The Book Ch X.Y | The Rust Programming Language 官方教程 | <https://doc.rust-lang.org/book/> |
+| Reference Ch X.Y | Rust Reference 语言参考 | <https://doc.rust-lang.org/reference/> |
+| RFC XXXX | Rust RFC 提案 | <https://rust-lang.github.io/rfcs/> |
+| Ferrocene Spec | Ferrocene 语言规范 | <https://spec.ferrocene.dev/> |
+| Cargo Book | Cargo 文档 | <https://doc.rust-lang.org/cargo/> |
+| Rust Blog | 官方博客 | <https://blog.rust-lang.org/> |
+| Rust Forge | 贡献者文档 | <https://forge.rust-lang.org/> |
 
 ### 相关文档
 

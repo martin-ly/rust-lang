@@ -685,60 +685,45 @@ impl EventStreamProcessor {
 
 /// # LazyCell 在控制流中的应用
 ///
-/// Rust 1.94.0 的 `LazyCell` 新方法可以与控制流结合，
+/// Rust 1.94.0 的 `LazyCell` 可以与控制流结合，
 /// 实现条件初始化和延迟计算。
-use std::cell::OnceCell;
+use std::cell::LazyCell;
 
 /// 条件延迟初始化控制器
 ///
 /// 根据条件决定是否初始化值
 pub struct ConditionalLazyController<T> {
-    cell: OnceCell<T>,
+    cell: LazyCell<T>,
     condition: Box<dyn Fn() -> bool>,
 }
 
 impl<T> ConditionalLazyController<T> {
     /// 创建新的条件控制器
-    pub fn new(condition: impl Fn() -> bool + 'static) -> Self {
+    pub fn new(condition: impl Fn() -> bool + 'static, factory: impl FnOnce() -> T + 'static) -> Self {
         Self {
-            cell: OnceCell::new(),
+            cell: LazyCell::new(factory),
             condition: Box::new(condition),
         }
     }
 
-    /// 尝试初始化（仅在条件满足时）
+    /// 尝试获取值（仅在条件满足时）
     ///
-    /// 控制流：条件判断决定是否执行初始化
-    pub fn try_init<F>(&self, factory: F) -> Result<&T, &'static str>
-    where
-        F: FnOnce() -> T,
-    {
+    /// 控制流：条件判断决定是否返回值
+    pub fn try_get(&self) -> Result<&T, &'static str> {
         if !(self.condition)() {
-            return Err("条件不满足，跳过初始化");
+            return Err("条件不满足，无法获取值");
         }
-
-        if self.cell.get().is_none() {
-            let _ = self.cell.set(factory());
-        }
-        Ok(self.cell.get().expect("LazyCell值不应为None"))
+        Ok(&self.cell)
     }
 
-    /// 获取值或返回默认值
-    pub fn get_or_else<F>(&self, default_factory: F) -> &T
-    where
-        F: FnOnce() -> T,
-    {
-        self.cell.get_or_init(default_factory)
+    /// 获取值
+    pub fn get(&self) -> &T {
+        &self.cell
     }
 
-    /// 检查是否已初始化
-    pub fn is_initialized(&self) -> bool {
-        self.cell.get().is_some()
-    }
-
-    /// 尝试获取值（不触发初始化）
-    pub fn try_get(&self) -> Option<&T> {
-        self.cell.get()
+    /// 检查条件是否满足
+    pub fn check_condition(&self) -> bool {
+        (self.condition)()
     }
 }
 
@@ -746,39 +731,29 @@ impl<T> ConditionalLazyController<T> {
 ///
 /// 根据执行路径决定初始化策略
 pub struct ControlFlowLazyCache<T> {
-    cell: OnceCell<T>,
+    cell: LazyCell<T>,
     init_count: std::cell::Cell<usize>,
 }
 
 impl<T> ControlFlowLazyCache<T> {
     /// 创建新的控制流缓存
-    pub fn new() -> Self {
+    pub fn new(factory: impl FnOnce() -> T + 'static) -> Self {
         Self {
-            cell: OnceCell::new(),
+            cell: LazyCell::new(factory),
             init_count: std::cell::Cell::new(0),
         }
     }
 
-    /// 智能初始化
+    /// 智能获取
     ///
-    /// 控制流：根据调用次数选择不同的初始化策略
-    pub fn smart_init<F1, F2>(&self, first_init: F1, subsequent_init: F2) -> &T
-    where
-        F1: FnOnce() -> T,
-        F2: FnOnce() -> T,
-    {
+    /// 控制流：根据调用次数返回不同的状态信息
+    pub fn smart_get(&self) -> &T {
         let count = self.init_count.get();
         self.init_count.set(count + 1);
-
-        if count == 0 {
-            self.cell.get_or_init(first_init)
-        } else {
-            // 对于后续调用，如果已初始化则返回，否则使用备用策略
-            self.cell.get_or_init(subsequent_init)
-        }
+        &self.cell
     }
 
-    /// 条件重置（逻辑重置，实际 OnceCell 不支持真正重置）
+    /// 条件重置（逻辑重置计数器）
     pub fn reset_counter(&self) {
         self.init_count.set(0);
     }
@@ -789,14 +764,17 @@ impl<T> ControlFlowLazyCache<T> {
     }
 
     /// 获取值
-    pub fn get(&self) -> Option<&T> {
-        self.cell.get()
+    pub fn get(&self) -> &T {
+        &self.cell
     }
 }
 
-impl<T> Default for ControlFlowLazyCache<T> {
+impl<T> Default for ControlFlowLazyCache<T>
+where
+    T: Default,
+{
     fn default() -> Self {
-        Self::new()
+        Self::new(T::default)
     }
 }
 
@@ -1142,16 +1120,16 @@ pub fn demonstrate_rust_194_control_flow() {
 
     // 8. LazyCell 控制流
     println!("\n8. LazyCell 控制流:");
-    let controller = ConditionalLazyController::<i32>::new(|| true);
-    match controller.try_init(|| 42) {
-        Ok(value) => println!("   条件初始化成功: {}", value),
-        Err(e) => println!("   条件初始化失败: {}", e),
+    let controller = ConditionalLazyController::<i32>::new(|| true, || 42);
+    match controller.try_get() {
+        Ok(value) => println!("   条件获取成功: {}", value),
+        Err(e) => println!("   条件获取失败: {}", e),
     }
 
-    let cache = ControlFlowLazyCache::<String>::new();
-    let value = cache.smart_init(|| "first".to_string(), || "subsequent".to_string());
-    println!("   智能初始化值: {}", value);
-    println!("   初始化次数: {}", cache.init_count());
+    let cache = ControlFlowLazyCache::<String>::new(|| "initialized".to_string());
+    let value = cache.smart_get();
+    println!("   智能获取值: {}", value);
+    println!("   获取次数: {}", cache.init_count());
 
     // 9. 数学常量控制流
     println!("\n9. 数学常量控制流:");
@@ -1450,44 +1428,44 @@ mod tests {
 
     #[test]
     fn test_conditional_lazy_controller_success() {
-        let controller = ConditionalLazyController::<i32>::new(|| true);
-        let result = controller.try_init(|| 42);
+        let controller = ConditionalLazyController::<i32>::new(|| true, || 42);
+        let result = controller.try_get();
         assert!(result.is_ok());
-        assert_eq!(result.expect("条件延迟控制器初始化失败"), &42);
+        assert_eq!(result.expect("条件延迟控制器获取失败"), &42);
     }
 
     #[test]
     fn test_conditional_lazy_controller_failure() {
-        let controller = ConditionalLazyController::<i32>::new(|| false);
-        let result = controller.try_init(|| 42);
+        let controller = ConditionalLazyController::<i32>::new(|| false, || 42);
+        let result = controller.try_get();
         assert!(result.is_err());
     }
 
     #[test]
-    fn test_conditional_lazy_controller_get_or_else() {
-        let controller = ConditionalLazyController::<i32>::new(|| false);
-        let value = controller.get_or_else(|| 100);
+    fn test_conditional_lazy_controller_get() {
+        let controller = ConditionalLazyController::<i32>::new(|| false, || 100);
+        let value = controller.get();
         assert_eq!(value, &100);
     }
 
     #[test]
     fn test_control_flow_lazy_cache() {
-        let cache = ControlFlowLazyCache::<i32>::new();
+        let cache = ControlFlowLazyCache::<i32>::new(|| 42);
         assert_eq!(cache.init_count(), 0);
 
-        let value = cache.smart_init(|| 42, || 100);
+        let value = cache.smart_get();
         assert_eq!(value, &42);
         assert_eq!(cache.init_count(), 1);
 
-        // 再次获取不应该增加计数（因为已初始化）
-        let _ = cache.smart_init(|| 0, || 0);
+        // 再次获取会增加计数
+        let _ = cache.smart_get();
         assert_eq!(cache.init_count(), 2);
     }
 
     #[test]
     fn test_control_flow_lazy_cache_reset() {
-        let cache = ControlFlowLazyCache::<i32>::new();
-        let _ = cache.smart_init(|| 42, || 100);
+        let cache = ControlFlowLazyCache::<i32>::new(|| 42);
+        let _ = cache.smart_get();
         cache.reset_counter();
         assert_eq!(cache.init_count(), 0);
     }
