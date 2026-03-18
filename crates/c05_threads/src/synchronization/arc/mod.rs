@@ -55,7 +55,7 @@ pub fn break_cycle_demo() -> String {
     }
 }
 
-/// 对比：Arc<Mutex<T>> 与 Arc<RwLock<T>>
+/// 对比：`Arc<Mutex<T>>` 与 `Arc<RwLock<T>>`
 pub fn mutex_vs_rwlock(readers: usize, writers: usize, iters: usize) -> (usize, usize) {
     let m = Arc::new(Mutex::new(0usize));
     let r = Arc::new(RwLock::new(0usize));

@@ -423,7 +423,7 @@ pub fn detect_outliers(data: &[f64], threshold: f64) -> Vec<usize> {
 
 /// # 5. char 到 usize 转换 / char to usize Conversion
 ///
-/// Rust 1.94.0 实现了 `TryFrom<char>` for `usize`，
+/// Rust 1.94.0 实现了 `TryFrom<char>` for `usize`,
 /// 允许将 char 安全地转换为 usize（基于其 Unicode 标量值）。
 /// 演示 char 到 usize 的转换
 #[allow(dead_code)]
@@ -453,7 +453,7 @@ pub fn demonstrate_char_to_usize() {
 
 /// 将字符串转换为 usize 数组
 ///
-/// Rust 1.94.0: TryFrom<char> for usize 的应用
+/// Rust 1.94.0: `TryFrom<char>` for usize 的应用
 pub fn string_to_usize_array(s: &str) -> Vec<usize> {
     s.chars().map(|c| usize::try_from(c).unwrap_or(0)).collect()
 }
@@ -591,7 +591,7 @@ pub fn get_rust_194_thread_info() -> String {
         - 数学常量 (EULER_GAMMA, GOLDEN_RATIO)\n\
         - Peekable 迭代器新方法 (next_if_map, next_if_map_mut)\n\
         - 数组窗口迭代器 (array_windows)\n\
-        - char 到 usize 转换 (TryFrom<char> for usize)"
+        - char 到 usize 转换 (`TryFrom<char>` for usize)"
         .to_string()
 }
 

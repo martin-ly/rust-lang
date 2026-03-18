@@ -152,7 +152,7 @@ impl DnsResolver {
 pub mod presets {
     use super::*;
 
-    /// Cloudflare DoH: https://cloudflare-dns.com/dns-query
+    /// Cloudflare DoH: <https://cloudflare-dns.com/dns-query>
     pub fn cloudflare_doh() -> (ResolverConfig, ResolverOpts) {
         (ResolverConfig::cloudflare_https(), ResolverOpts::default())
     }
@@ -162,7 +162,7 @@ pub mod presets {
         (ResolverConfig::cloudflare_tls(), ResolverOpts::default())
     }
 
-    /// Google DoH: https://dns.google/dns-query
+    /// Google DoH: <https://dns.google/dns-query>
     pub fn google_doh() -> (ResolverConfig, ResolverOpts) {
         (ResolverConfig::google_https(), ResolverOpts::default())
     }
@@ -172,7 +172,7 @@ pub mod presets {
         (ResolverConfig::google_tls(), ResolverOpts::default())
     }
 
-    /// Quad9 DoH: https://dns.quad9.net/dns-query
+    /// Quad9 DoH: <https://dns.quad9.net/dns-query>
     pub fn quad9_doh() -> (ResolverConfig, ResolverOpts) {
         (ResolverConfig::quad9_https(), ResolverOpts::default())
     }

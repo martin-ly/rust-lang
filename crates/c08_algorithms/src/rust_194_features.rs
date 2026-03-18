@@ -32,7 +32,7 @@ pub struct SlidingWindowAlgorithms;
 impl SlidingWindowAlgorithms {
     /// 固定大小窗口求和
     ///
-    /// Rust 1.94.0: array_windows::<N>() 返回 [&i32; N]
+    /// Rust 1.94.0: `array_windows::<N>()` 返回 `[&i32; N]`
     pub fn window_sum<const N: usize>(data: &[i32]) -> Vec<i32>
     where
         [(); N]: Sized,
@@ -43,7 +43,7 @@ impl SlidingWindowAlgorithms {
 
     /// 寻找和为目标值的子数组（使用窗口）
     ///
-    /// Rust 1.94.0: array_windows::<N> 简化子数组查找
+    /// Rust 1.94.0: `array_windows::<N>` 简化子数组查找
     pub fn find_subarray_with_sum(data: &[i32], target: i32, window_size: usize) -> Vec<usize> {
         let mut results = Vec::new();
 
@@ -665,7 +665,7 @@ pub fn demonstrate_peekable_algorithms() {
 
 /// # 5. char 转换在字符串算法中的应用 / char Conversion in String Algorithms
 ///
-/// Rust 1.94.0 实现了 TryFrom<char> for usize，
+/// Rust 1.94.0 实现了 `TryFrom<char>` for usize，
 /// 这在字符串算法和字符编码处理中非常有用。
 /// 字符串算法集合
 ///
@@ -675,7 +675,7 @@ pub struct StringAlgorithms;
 impl StringAlgorithms {
     /// 计算字符串的 Unicode 码点和
     ///
-    /// Rust 1.94.0: TryFrom<char> for usize
+    /// Rust 1.94.0: `TryFrom<char>` for usize
     pub fn unicode_sum(s: &str) -> usize {
         s.chars().map(|c| usize::try_from(c).unwrap_or(0)).sum()
     }
@@ -842,7 +842,7 @@ pub fn get_rust_194_algorithm_info() -> String {
         - LazyCell 在算法缓存中的应用 (get, get_mut, force_mut)\n\
         - 数学常量在数值算法中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n\
         - Peekable 在算法遍历中的应用 (next_if_map, next_if_map_mut)\n\
-        - char 转换在字符串算法中的应用 (TryFrom<char> for usize)"
+        - char 转换在字符串算法中的应用 (`TryFrom<char>` for usize)"
         .to_string()
 }
 

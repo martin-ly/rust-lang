@@ -5,7 +5,7 @@
 //! - LazyCell/LazyLock 新方法 - get(), get_mut(), force_mut()
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - Peekable 新方法 - next_if_map(), next_if_map_mut()
-//! - char 到 usize 转换 - TryFrom<char> for usize
+//! - char 到 usize 转换 - `TryFrom<char>` for usize
 //!
 //! # 文件信息
 //! - 文件: rust_194_features.rs
@@ -698,7 +698,7 @@ impl<'a> TlvParser<'a> {
 
 /// # 5. char 到 usize 转换 - 协议编码
 ///
-/// Rust 1.94.0 的 TryFrom<char> for usize 可用于协议编码和地址解析。
+/// Rust 1.94.0 的 `TryFrom<char>` for usize 可用于协议编码和地址解析。
 /// 十六进制编码器/解码器
 ///
 /// 使用 char 到 usize 转换进行十六进制处理
@@ -754,7 +754,7 @@ pub struct MacAddress(pub [u8; 6]);
 impl MacAddressParser {
     /// 解析 MAC 地址字符串（格式：xx:xx:xx:xx:xx:xx 或 xx-xx-xx-xx-xx-xx）
     ///
-    /// Rust 1.94.0: 使用 TryFrom<char> for usize 进行字符解析
+    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize 进行字符解析
     pub fn parse(mac_str: &str) -> Option<MacAddress> {
         // 支持冒号或连字符分隔符
         let parts: Vec<&str> = mac_str.split([':', '-']).collect();

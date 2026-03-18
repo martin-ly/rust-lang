@@ -20,7 +20,7 @@
 //!
 //! - [`futures`] - Future 状态机、组合子、调度机制
 //! - [`streams`] - Stream 处理、异步迭代器、背压控制
-//! - [`r#await`] - async/await 语义、控制流分析
+//! - `r#await` - async/await 语义、控制流分析
 //! - [`tokio`] - Tokio 运行时、同步原语、I/O 抽象
 //! - [`smol`] - Smol 轻量级运行时
 //! - [`async_std`] - async-std 运行时

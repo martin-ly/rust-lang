@@ -563,7 +563,7 @@ pub fn demonstrate_peekable_logs() {
 
 /// # 5. char 转换在进程通信中的应用 / char Conversion in Process Communication
 ///
-/// Rust 1.94.0 实现了 TryFrom<char> for usize，
+/// Rust 1.94.0 实现了 `TryFrom<char>` for usize，
 /// 这在进程间通信的字符编码处理中非常有用。
 /// 进程通信编码器
 ///
@@ -573,7 +573,7 @@ pub struct ProcessCommunicationEncoder;
 impl ProcessCommunicationEncoder {
     /// 将字符串编码为 usize 数组
     ///
-    /// Rust 1.94.0: TryFrom<char> for usize
+    /// Rust 1.94.0: `TryFrom<char>` for usize
     pub fn encode_string(s: &str) -> Vec<usize> {
         s.chars().map(|c| c as usize).collect()
     }
@@ -758,7 +758,7 @@ pub fn get_rust_194_process_info() -> String {
         - LazyLock 在进程配置中的应用 (get, get_mut, force_mut)\n\
         - 数学常量在数据分析中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n\
         - Peekable 在日志处理中的应用 (next_if_map, next_if_map_mut)\n\
-        - char 转换在进程通信中的应用 (TryFrom<char> for usize)"
+        - char 转换在进程通信中的应用 (`TryFrom<char>` for usize)"
         .to_string()
 }
 

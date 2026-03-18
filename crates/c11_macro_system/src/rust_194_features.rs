@@ -5,7 +5,7 @@
 //! - LazyCell/LazyLock 新方法 - get(), get_mut(), force_mut()
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - Peekable 新方法 - next_if_map(), next_if_map_mut()
-//! - char 到 usize 转换 - TryFrom<char> for usize
+//! - char 到 usize 转换 - `TryFrom<char>` for usize
 //!
 //! # 文件信息
 //! - 文件: rust_194_features.rs
@@ -726,7 +726,7 @@ impl MacroArgumentProcessor {
 
 /// # 5. char 到 usize 转换 - 宏编码
 ///
-/// Rust 1.94.0 的 TryFrom<char> for usize 在宏系统中可用于字符编码和位置计算。
+/// Rust 1.94.0 的 `TryFrom<char>` for usize 在宏系统中可用于字符编码和位置计算。
 /// 宏标记编码器
 ///
 /// 使用 char 到 usize 转换进行标记编码
@@ -735,7 +735,7 @@ pub struct TokenEncoder;
 impl TokenEncoder {
     /// 将字符编码为数字标识符
     ///
-    /// Rust 1.94.0: 使用 TryFrom<char> for usize
+    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize
     pub fn encode_char(c: char) -> Option<usize> {
         usize::try_from(c).ok()
     }
@@ -774,7 +774,7 @@ pub struct MacroPositionCalculator;
 impl MacroPositionCalculator {
     /// 计算字符在文件中的偏移
     ///
-    /// Rust 1.94.0: 使用 TryFrom<char> for usize
+    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize
     pub fn calculate_offset(line: usize, column: usize, char_val: char) -> usize {
         let char_offset = usize::try_from(char_val).unwrap_or(0);
         line * 10000 + column * 100 + char_offset % 100
@@ -820,7 +820,7 @@ pub struct EscapeSequenceHandler;
 impl EscapeSequenceHandler {
     /// 解析转义字符
     ///
-    /// Rust 1.94.0: 使用 TryFrom<char> for usize
+    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize
     pub fn parse_escape(c: char) -> Option<char> {
         match c {
             'n' => Some('\n'),
@@ -950,7 +950,7 @@ pub fn get_rust_194_macro_info() -> String {
         - LazyLock 新方法 - 宏编译缓存\n\
         - 数学常量 - 宏扩展优化\n\
         - Peekable 新方法 - 宏标记解析\n\
-        - TryFrom<char> for usize - 宏编码"
+        - `TryFrom<char>` for usize - 宏编码"
         .to_string()
 }
 

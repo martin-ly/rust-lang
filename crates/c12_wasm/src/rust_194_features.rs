@@ -5,7 +5,7 @@
 //! - LazyCell/LazyLock 新方法 - get(), get_mut(), force_mut()
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - Peekable 新方法 - next_if_map(), next_if_map_mut()
-//! - char 到 usize 转换 - TryFrom<char> for usize
+//! - char 到 usize 转换 - `TryFrom<char>` for usize
 //!
 //! # 文件信息
 //! - 文件: rust_194_features.rs
@@ -912,7 +912,7 @@ impl<'a> SimpleCsvParser<'a> {
 
 /// # 5. char 到 usize 转换 - WASM 字符编码
 ///
-/// Rust 1.94.0 的 TryFrom<char> for usize 在 WASM 字符编码和 UTF-8 处理中非常有用。
+/// Rust 1.94.0 的 `TryFrom<char>` for usize 在 WASM 字符编码和 UTF-8 处理中非常有用。
 /// UTF-8 编码器（用于 WASM 字符串处理）
 ///
 /// 使用 char 到 usize 转换进行 UTF-8 编码
@@ -921,7 +921,7 @@ pub struct Utf8Encoder;
 impl Utf8Encoder {
     /// 获取字符的 Unicode 码点值
     ///
-    /// Rust 1.94.0: 使用 TryFrom<char> for usize
+    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize
     pub fn code_point(c: char) -> Option<usize> {
         usize::try_from(c).ok()
     }
@@ -977,7 +977,7 @@ impl WasmBase64 {
 
     /// 将 Base64 字符转换为数值（包括填充字符标记）
     ///
-    /// Rust 1.94.0: 使用 TryFrom<char> for usize
+    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize
     fn char_to_value(c: char) -> Option<u8> {
         if c.is_ascii_alphanumeric() {
             if c.is_ascii_uppercase() {
@@ -1088,7 +1088,7 @@ pub struct CharFrequencyAnalyzer;
 impl CharFrequencyAnalyzer {
     /// 分析字符频率
     ///
-    /// Rust 1.94.0: 使用 TryFrom<char> for usize 进行字符分类
+    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize 进行字符分类
     pub fn analyze(s: &str) -> HashMap<String, usize> {
         let mut freq: HashMap<String, usize> = HashMap::new();
 
@@ -1238,7 +1238,7 @@ pub fn get_rust_194_wasm_info() -> String {
         - LazyLock 新方法 - WASM 模块管理\n\
         - 数学常量 - WASM 图形计算\n\
         - Peekable 新方法 - WASM 文本解析\n\
-        - TryFrom<char> for usize - WASM 字符编码"
+        - `TryFrom<char>` for usize - WASM 字符编码"
         .to_string()
 }
 

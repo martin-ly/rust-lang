@@ -453,13 +453,13 @@ impl LifetimeInferencer {
 /// Rust 1.90 增强版本，支持更多智能指针类型
 #[derive(Debug)]
 pub enum SmartPointerType {
-    /// Box<T> - 堆分配 / Heap allocation
+    /// `Box<T>` - 堆分配 / Heap allocation
     Box,
-    /// Rc<T> - 引用计数 / Reference counting
+    /// `Rc<T>` - 引用计数 / Reference counting
     Rc,
-    /// Arc<T> - 原子引用计数 / Atomic reference counting
+    /// `Arc<T>` - 原子引用计数 / Atomic reference counting
     Arc,
-    /// RefCell<T> - 内部可变性 / Interior mutability
+    /// `RefCell<T>` - 内部可变性 / Interior mutability
     RefCell,
     /// Rust 1.90 新增：智能优化指针 / Smart optimized pointer
     SmartOptimized,

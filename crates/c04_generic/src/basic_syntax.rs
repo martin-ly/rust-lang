@@ -1043,7 +1043,7 @@ pub mod generic_trait_impls {
     /// 返回比较结果
     ///
     /// # 约束
-    /// T 必须实现 Comparable<T> trait
+    /// T 必须实现 `Comparable<T>` trait
     ///
     /// # 示例
     /// ```
@@ -1094,7 +1094,7 @@ pub mod generic_trait_impls {
     /// 返回转换后的值
     ///
     /// # 约束
-    /// T 必须实现 Convertible<U> trait
+    /// T 必须实现 `Convertible<U>` trait
     ///
     /// # 示例
     /// ```

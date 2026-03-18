@@ -150,12 +150,12 @@ impl ArrayConversionDemo {
         }
     }
 
-    /// 转换为 Box<[T]>
+    /// 转换为 `Box<[T]>`
     pub fn to_boxed_slice(&self) -> Box<[i32]> {
         self.data.clone().into_boxed_slice()
     }
 
-    /// 从 Box<[T]> 转换回 Vec
+    /// 从 `Box<[T]>` 转换回 Vec
     pub fn from_boxed_slice(boxed: Box<[i32]>) -> Self {
         Self {
             data: boxed.into_vec(),

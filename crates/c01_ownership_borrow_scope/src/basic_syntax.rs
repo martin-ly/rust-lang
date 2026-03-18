@@ -334,7 +334,7 @@ pub mod scope_basics {
 pub mod smart_pointer_basics {
     use super::*;
 
-    /// ## 5.1 Box<T> - 堆分配 / Box<T> - Heap Allocation
+    /// ## 5.1 `Box<T>` - 堆分配 / `Box<T>` - Heap Allocation
     ///
     /// Box 允许在堆上分配数据。
     /// Box allows allocating data on the heap.
@@ -345,7 +345,7 @@ pub mod smart_pointer_basics {
         println!("b = {}", b);
     } // b 离开作用域，堆内存被释放 / b goes out of scope, heap memory is freed
 
-    /// ## 5.2 Rc<T> - 引用计数 / Rc<T> - Reference Counting
+    /// ## 5.2 `Rc<T>` - 引用计数 / `Rc<T>` - Reference Counting
     ///
     /// Rc 允许多个所有者共享数据。
     /// Rc allows multiple owners to share data.
@@ -371,7 +371,7 @@ pub mod smart_pointer_basics {
 
     use List::{Cons, Nil};
 
-    /// ## 5.3 RefCell<T> - 内部可变性 / RefCell<T> - Interior Mutability
+    /// ## 5.3 `RefCell<T>` - 内部可变性 / `RefCell<T>` - Interior Mutability
     ///
     /// RefCell 允许在不可变引用的情况下修改数据。
     /// RefCell allows modifying data even with immutable references.
@@ -396,7 +396,7 @@ pub mod smart_pointer_basics {
 pub mod error_handling_basics {
     // use super::*; // 未使用，已注释 / unused, commented out
 
-    /// ## 6.1 Option<T> / Option<T>
+    /// ## 6.1 `Option<T>` / `Option<T>`
     ///
     /// Option 表示可能存在或不存在的值。
     /// Option represents a value that may or may not exist.

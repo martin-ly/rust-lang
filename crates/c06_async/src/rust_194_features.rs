@@ -477,7 +477,7 @@ pub async fn demonstrate_async_windows() {
 
 /// # 5. char 转换在异步解析中的应用 / char Conversion in Async Parsing
 ///
-/// Rust 1.94.0 的 TryFrom<char> for usize 实现可以在异步解析中使用。
+/// Rust 1.94.0 的 `TryFrom<char>` for usize 实现可以在异步解析中使用。
 /// 异步 Unicode 解析器
 ///
 /// Rust 1.94.0: 使用 char 到 usize 转换进行异步文本处理
@@ -492,7 +492,7 @@ impl AsyncUnicodeParser {
         let char_count = s.chars().count();
 
         for (i, ch) in s.chars().enumerate() {
-            let code_point = usize::try_from(ch).unwrap_or(0); // Rust 1.94.0: TryFrom<char> for usize
+            let code_point = usize::try_from(ch).unwrap_or(0); // Rust 1.94.0: `TryFrom<char>` for usize
 
             match code_point {
                 0..=127 => composition.ascii_chars.push(ch),
@@ -656,7 +656,7 @@ pub fn get_rust_194_async_info() -> String {
         - 数学常量在异步计算中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n\
         - Peekable 流处理 (next_if_map, next_if_map_mut)\n\
         - 异步数组窗口处理 (array_windows)\n\
-        - char 转换在异步解析中的应用 (TryFrom<char> for usize)"
+        - char 转换在异步解析中的应用 (`TryFrom<char>` for usize)"
         .to_string()
 }
 

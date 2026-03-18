@@ -283,7 +283,7 @@ pub fn reverse_string(s: &mut [char]) {
 ///
 /// ## 复杂度
 /// - 时间复杂度: O(n)
-/// - 空间复杂度: O(n)（因为需要转换为 Vec<char>）
+/// - 空间复杂度: O(n)（因为需要转换为 `Vec<char>`）
 pub fn reverse_vowels(s: String) -> String {
     let mut chars: Vec<char> = s.chars().collect();
     let mut left = 0;

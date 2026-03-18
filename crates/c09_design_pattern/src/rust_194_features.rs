@@ -5,7 +5,7 @@
 //! - LazyCell/LazyLock 新方法 - get(), get_mut(), force_mut()
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - Peekable 新方法 - next_if_map(), next_if_map_mut()
-//! - char 到 usize 转换 - TryFrom<char> for usize
+//! - char 到 usize 转换 - `TryFrom<char>` for usize
 //!
 //! # 文件信息
 //! - 文件: rust_194_features.rs
@@ -541,11 +541,11 @@ where
 
 /// # 5. char 到 usize 转换 - 解析器模式
 ///
-/// Rust 1.94.0 实现了 TryFrom<char> for usize。
+/// Rust 1.94.0 实现了 `TryFrom<char>` for usize。
 /// 这在解析器模式中非常有用，可以将字符直接转换为索引位置。
 /// 使用 char 到 usize 转换实现位置映射器
 ///
-/// Rust 1.94.0: 利用 TryFrom<char> for usize 简化字符位置计算
+/// Rust 1.94.0: 利用 `TryFrom<char>` for usize 简化字符位置计算
 pub struct CharPositionMapper;
 
 impl CharPositionMapper {
@@ -575,7 +575,7 @@ impl CharPositionMapper {
 
     /// 计算字符的数值表示（用于哈希等）
     ///
-    /// Rust 1.94.0: 使用 TryFrom<char> for usize
+    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize
     pub fn char_to_numeric_value(c: char) -> Option<usize> {
         if c.is_ascii_digit() {
             // '0' = 48, 所以 '0' -> 0, '1' -> 1, etc.
@@ -589,7 +589,7 @@ impl CharPositionMapper {
 
 /// 使用 char 转换实现简单计算器
 ///
-/// Rust 1.94.0: 利用 TryFrom<char> for usize 解析数字字符
+/// Rust 1.94.0: 利用 `TryFrom<char>` for usize 解析数字字符
 pub struct SimpleCharCalculator;
 
 impl SimpleCharCalculator {
@@ -710,7 +710,7 @@ pub fn get_rust_194_design_pattern_info() -> String {
         - LazyLock 新方法 - 单例模式优化\n\
         - 数学常量 (EULER_GAMMA, GOLDEN_RATIO) - 工厂模式优化\n\
         - Peekable 新方法 - 迭代器模式增强\n\
-        - TryFrom<char> for usize - 解析器模式"
+        - `TryFrom<char>` for usize - 解析器模式"
         .to_string()
 }
 

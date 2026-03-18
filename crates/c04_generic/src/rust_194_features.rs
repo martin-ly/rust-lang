@@ -348,7 +348,7 @@ impl<T: MathConstants + Copy> Default for FibonacciCalculator<T> {
 
 /// # char 到 usize 转换在泛型编程中的应用
 ///
-/// Rust 1.94.0 的 TryFrom<char> for usize 可以与泛型结合
+/// Rust 1.94.0 的 `TryFrom<char>` for usize 可以与泛型结合
 /// 泛型字符编码转换器
 pub trait CharEncoder<T> {
     /// 将字符编码为类型 T

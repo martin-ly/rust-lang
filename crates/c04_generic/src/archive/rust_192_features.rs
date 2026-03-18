@@ -526,7 +526,7 @@ impl<T: PartialEq> GenericCollectionValidator<T> {
 /// 创建默认的泛型内存分配器
 ///
 /// # 示例
-/// ```ignore
+/// ```text
 /// // 此模块为归档模块，示例代码仅供参考
 /// // 当前版本请使用 rust_194_features 模块
 /// ```
@@ -537,7 +537,7 @@ pub fn create_default_memory_allocator() -> GenericMemoryAllocator {
 /// 批量创建泛型向量容器
 ///
 /// # 示例
-/// ```ignore
+/// ```text
 /// // 此模块为归档模块，示例代码仅供参考
 /// // 当前版本请使用 rust_194_features 模块
 /// ```
@@ -553,7 +553,7 @@ where
 /// 从多个转换器创建转换器链
 ///
 /// # 示例
-/// ```ignore
+/// ```text
 /// // 此模块为归档模块，示例代码仅供参考
 /// // 当前版本请使用 rust_194_features 模块
 /// ```

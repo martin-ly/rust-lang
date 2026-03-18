@@ -451,7 +451,7 @@ impl Default for ThreadPoolManager {
 /// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算线程池的容量
 ///
 /// # 示例
-/// ```ignore
+/// ```text
 /// // 归档模块示例
 /// ```
 pub fn calculate_thread_pool_size(total_tasks: usize, tasks_per_thread: NonZeroUsize) -> usize {
@@ -467,7 +467,7 @@ pub fn calculate_thread_pool_size(total_tasks: usize, tasks_per_thread: NonZeroU
 /// 创建默认的线程资源分配器（基于 CPU 核心数）
 ///
 /// # 示例
-/// ```ignore
+/// ```text
 /// // 归档模块示例
 /// ```
 pub fn create_default_resource_allocator() -> ThreadResourceAllocator {
@@ -481,7 +481,7 @@ pub fn create_default_resource_allocator() -> ThreadResourceAllocator {
 /// 创建默认的线程调度配置
 ///
 /// # 示例
-/// ```ignore
+/// ```text
 /// // 归档模块示例
 /// // use c05_threads::archive::rust_192_features::create_default_scheduling_config;
 /// ```
@@ -495,7 +495,7 @@ pub fn create_default_scheduling_config() -> ThreadSchedulingConfig {
 /// 批量创建任务
 ///
 /// # 示例
-/// ```ignore
+/// ```text
 /// // 归档模块示例
 /// ```
 pub fn create_tasks_batch<I, F>(ids: I, priority_fn: F) -> Vec<ThreadTask>
@@ -511,7 +511,7 @@ where
 /// 创建高优先级任务批次
 ///
 /// # 示例
-/// ```ignore
+/// ```text
 /// // 归档模块示例
 /// ```
 pub fn create_high_priority_tasks<I>(ids: I) -> Vec<ThreadTask>
@@ -524,7 +524,7 @@ where
 /// 创建低优先级任务批次
 ///
 /// # 示例
-/// ```ignore
+/// ```text
 /// // 归档模块示例
 /// ```
 pub fn create_low_priority_tasks<I>(ids: I) -> Vec<ThreadTask>
