@@ -69,16 +69,16 @@
 pub mod constants {
     /// 最大流速 (ml/h)
     pub const MAX_FLOW_RATE: f64 = 1200.0;
-    
+
     /// 最小流速 (ml/h)
     pub const MIN_FLOW_RATE: f64 = 0.1;
-    
+
     /// 阻塞压力阈值 (kPa)
     pub const OCCLUSION_THRESHOLD: f64 = 100.0;
-    
+
     /// 气泡检测阈值 (μL)
     pub const AIR_BUBBLE_THRESHOLD: u32 = 50;
-    
+
     ///  watchdog超时 (ms)
     pub const WATCHDOG_TIMEOUT_MS: u32 = 100;
 }
@@ -87,25 +87,25 @@ pub mod constants {
 pub mod dosing {
     use crate::constants::*;
     use crate::types::*;
-    
+
     /// 剂量计算器
     pub struct DoseCalculator {
         prescription: Prescription,
         accumulated_dose: Volume,
     }
-    
+
     impl DoseCalculator {
         /// 创建新的剂量计算器
         pub fn new(prescription: Prescription) -> Result<Self, DosingError> {
             // 验证处方参数
             Self::validate_prescription(&prescription)?;
-            
+
             Ok(Self {
                 prescription,
                 accumulated_dose: Volume::new(0.0),
             })
         }
-        
+
         /// 验证处方参数
         fn validate_prescription(rx: &Prescription) -> Result<(), DosingError> {
             if rx.flow_rate.ml_per_hour < MIN_FLOW_RATE {
@@ -119,18 +119,18 @@ pub mod dosing {
             }
             Ok(())
         }
-        
+
         /// 计算时间步长的输送量
         pub fn calculate_delivery(&mut self, dt: Duration) -> Volume {
-            let delivery_ml = self.prescription.flow_rate.ml_per_hour 
+            let delivery_ml = self.prescription.flow_rate.ml_per_hour
                 * dt.as_hours();
-            
+
             let volume = Volume::new(delivery_ml);
             self.accumulated_dose += volume;
-            
+
             volume
         }
-        
+
         /// 检查是否达到总剂量
         pub fn is_complete(&self) -> bool {
             self.accumulated_dose >= self.prescription.total_volume
@@ -142,7 +142,7 @@ pub mod dosing {
 pub mod flow_control {
     use crate::constants::*;
     use crate::types::*;
-    
+
     /// PID流量控制器
     pub struct FlowController {
         pid: PidController,
@@ -150,7 +150,7 @@ pub mod flow_control {
         actual_flow: FlowRate,
         motor_driver: MotorDriver,
     }
-    
+
     impl FlowController {
         pub fn new(target: FlowRate) -> Result<Self, ControlError> {
             Ok(Self {
@@ -160,62 +160,62 @@ pub mod flow_control {
                 motor_driver: MotorDriver::new(),
             })
         }
-        
+
         /// 控制循环
         pub fn control_cycle(&mut self, dt: Duration) -> Result<ControlOutput, ControlError> {
             // 读取实际流量
             self.actual_flow = self.read_flow_sensor()?;
-            
+
             // 计算控制信号
             let error = self.target_flow.ml_per_hour - self.actual_flow.ml_per_hour;
             let control_signal = self.pid.compute(error, dt);
-            
+
             // 驱动电机
             self.motor_driver.set_speed(control_signal)?;
-            
+
             // 检查安全限值
             self.check_safety_limits()?;
-            
+
             Ok(ControlOutput {
                 motor_speed: control_signal,
                 actual_flow: self.actual_flow,
             })
         }
-        
+
         fn read_flow_sensor(&self) -> Result<FlowRate, ControlError> {
             // 读取流量传感器
             // 包含传感器故障检测
             let raw_value = self.motor_driver.read_encoder()?;
             let flow_rate = self.encoder_to_flow(raw_value);
-            
+
             // 合理性检查
             if flow_rate.ml_per_hour < 0.0 || flow_rate.ml_per_hour > MAX_FLOW_RATE * 1.5 {
                 return Err(ControlError::SensorFault);
             }
-            
+
             Ok(flow_rate)
         }
-        
+
         fn encoder_to_flow(&self, encoder_value: u32) -> FlowRate {
             // 编码器值到流速的转换
             let ml_per_hour = encoder_value as f64 * CALIBRATION_FACTOR;
             FlowRate::new(ml_per_hour)
         }
-        
+
         fn check_safety_limits(&self) -> Result<(), ControlError> {
             // 检查流速偏差
             let deviation = (self.actual_flow.ml_per_hour - self.target_flow.ml_per_hour).abs();
             let max_deviation = self.target_flow.ml_per_hour * 0.1;  // 10%容差
-            
+
             if deviation > max_deviation {
                 // 记录偏差警告
                 log::warn!("流量偏差: {:.2} ml/h", deviation);
-                
+
                 if deviation > self.target_flow.ml_per_hour * 0.2 {
                     return Err(ControlError::FlowDeviation);
                 }
             }
-            
+
             Ok(())
         }
     }
@@ -225,7 +225,7 @@ pub mod flow_control {
 pub mod safety_monitor {
     use crate::constants::*;
     use crate::types::*;
-    
+
     /// 安全监控器
     pub struct SafetyMonitor {
         pressure_sensor: PressureSensor,
@@ -233,7 +233,7 @@ pub mod safety_monitor {
         door_sensor: DoorSensor,
         watchdog: Watchdog,
     }
-    
+
     impl SafetyMonitor {
         pub fn new() -> Self {
             Self {
@@ -243,34 +243,34 @@ pub mod safety_monitor {
                 watchdog: Watchdog::new(Duration::from_millis(WATCHDOG_TIMEOUT_MS as u64)),
             }
         }
-        
+
         /// 安全检查周期
         pub fn safety_check(&mut self) -> SafetyStatus {
             // 喂狗
             self.watchdog.pet();
-            
+
             // 检查阻塞
             if let Some(pressure) = self.pressure_sensor.read() {
                 if pressure.kpa > OCCLUSION_THRESHOLD {
                     return SafetyStatus::Alarm(AlarmType::Occlusion);
                 }
             }
-            
+
             // 检查气泡
             if let Some(bubble_volume) = self.air_detector.detect() {
                 if bubble_volume.ul > AIR_BUBBLE_THRESHOLD {
                     return SafetyStatus::Alarm(AlarmType::AirInLine);
                 }
             }
-            
+
             // 检查门状态
             if !self.door_sensor.is_closed() {
                 return SafetyStatus::Alarm(AlarmType::DoorOpen);
             }
-            
+
             SafetyStatus::Normal
         }
-        
+
         /// 触发紧急停止
         pub fn emergency_stop(&mut self) -> ! {
             // 立即停止电机
@@ -291,48 +291,48 @@ pub mod types {
     pub struct Volume {
         pub ml: f64,
     }
-    
+
     impl Volume {
         pub fn new(ml: f64) -> Self {
             Self { ml }
         }
     }
-    
+
     impl core::ops::AddAssign for Volume {
         fn add_assign(&mut self, other: Self) {
             self.ml += other.ml;
         }
     }
-    
+
     impl PartialOrd for Volume {
         fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
             self.ml.partial_cmp(&other.ml)
         }
     }
-    
+
     #[derive(Debug, Clone, Copy)]
     pub struct FlowRate {
         pub ml_per_hour: f64,
     }
-    
+
     impl FlowRate {
         pub fn new(ml_per_hour: f64) -> Self {
             Self { ml_per_hour }
         }
     }
-    
+
     #[derive(Debug, Clone)]
     pub struct Prescription {
         pub flow_rate: FlowRate,
         pub total_volume: Volume,
         pub drug_name: heapless::String<64>,
     }
-    
+
     #[derive(Debug, Clone, Copy)]
     pub struct Pressure {
         pub kpa: f64,
     }
-    
+
     #[derive(Debug, Clone, Copy)]
     pub struct BubbleVolume {
         pub ul: u32,
@@ -375,25 +375,25 @@ impl PidController {
             last_error: None,
         }
     }
-    
+
     pub fn compute(&mut self, error: f64, dt: Duration) -> f64 {
         let dt_secs = dt.as_secs_f64();
-        
+
         // 比例项
         let p = self.kp * error;
-        
+
         // 积分项 (带抗饱和)
         self.integral += error * dt_secs;
         self.integral = self.integral.clamp(-100.0, 100.0);
         let i = self.ki * self.integral;
-        
+
         // 微分项
         let d = match self.last_error {
             Some(last) => self.kd * (error - last) / dt_secs,
             None => 0.0,
         };
         self.last_error = Some(error);
-        
+
         (p + i + d).clamp(0.0, 100.0)
     }
 }
@@ -412,7 +412,7 @@ Level 1: 单元测试
 ├── 传感器接口
 └── 报警逻辑
 
-Level 2: 集成测试  
+Level 2: 集成测试
 ├── 剂量计算 → 流量控制
 ├── 安全监控 → 执行器
 └── 状态机转换
@@ -440,7 +440,7 @@ Level 3: 系统测试
 mod verification {
     use super::*;
     use kani::proof;
-    
+
     /// 验证: 剂量计算不会产生负值
     #[proof]
     fn verify_dose_non_negative() {
@@ -449,19 +449,19 @@ mod verification {
             total_volume: Volume::new(kani::any::<f64>().abs() % 500.0),
             drug_name: heapless::String::new(),
         };
-        
+
         let mut calc = DoseCalculator::new(rx).unwrap();
         let dt = Duration::from_secs(1);
-        
+
         let volume = calc.calculate_delivery(dt);
         assert!(volume.ml >= 0.0);
     }
-    
+
     /// 验证: 阻塞检测正确性
     #[proof]
     fn verify_occlusion_detection() {
         let pressure = Pressure { kpa: kani::any() };
-        
+
         if pressure.kpa > OCCLUSION_THRESHOLD {
             // 应该触发报警
             assert!(is_alarm_triggered(pressure));
@@ -582,6 +582,6 @@ mod verification {
 
 ---
 
-**案例日期**: 2024-2025  
-**文档版本**: 1.0  
-**联系**: medical-rust@example.com
+**案例日期**: 2024-2025
+**文档版本**: 1.0
+**联系**: <medical-rust@example.com>
