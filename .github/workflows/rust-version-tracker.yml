@@ -1,0 +1,61 @@
+name: Rust Version Tracker
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'  # 每月1日运行
+  workflow_dispatch:
+
+jobs:
+  check-rust-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check latest Rust versions
+        id: check-versions
+        run: |
+          # 获取最新稳定版
+          STABLE=$(curl -s https://api.github.com/repos/rust-lang/rust/releases/latest | jq -r '.tag_name')
+          echo "stable=$STABLE" >> $GITHUB_OUTPUT
+          
+          # 获取当前项目版本
+          CURRENT=$(grep "rust-version" Cargo.toml | head -1 | cut -d'"' -f2)
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          
+          if [ "$STABLE" != "$CURRENT" ]; then
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+          else
+            echo "update_needed=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create update issue
+        if: steps.check-versions.outputs.update_needed == 'true'
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: "🚀 Rust 版本更新: ${{ steps.check-versions.outputs.stable }}"
+          content-filepath: ./.github/ISSUE_TEMPLATE/rust-version-update.md
+          labels: "version-update, automated"
+        env:
+          STABLE_VERSION: ${{ steps.check-versions.outputs.stable }}
+          CURRENT_VERSION: ${{ steps.check-versions.outputs.current }}
+      
+      - name: Update knowledge base tracking
+        if: steps.check-versions.outputs.update_needed == 'true'
+        run: |
+          STABLE="${{ steps.check-versions.outputs.stable }}"
+          
+          # 更新版本跟踪文件
+          cat >> knowledge/99_archive/VERSION_TRACKING.md << EOF
+          
+          ## 检测到新版本
+          
+          检测到 Rust $STABLE 发布，当前项目版本需要更新。
+          
+          请执行以下操作：
+          1. 阅读 [Release Notes](https://github.com/rust-lang/rust/releases/tag/$STABLE)
+          2. 识别新特性
+          3. 创建对应文档
+          4. 更新 Cargo.toml
+          5. 测试所有代码示例
+          
+          EOF
