@@ -4,135 +4,137 @@
 
 ---
 
-## A
+## 📊 文档完成状态
 
-- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md) - Rust 1.94 新特性
-- **async/await** - [03_advanced/async/](03_advanced/async/) - 异步编程完整指南
-
-## B
-
-- **borrowing** - [01_fundamentals/borrowing.md](01_fundamentals/borrowing.md) - 借用系统深度解析
-- **Box** - [02_intermediate/smart_pointers.md](02_intermediate/smart_pointers.md)
-
-## C
-
-- **char → usize** - [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) - Rust 1.94
-- **closures** - [02_intermediate/closures.md](02_intermediate/closures.md)
-- **concurrency** - [03_advanced/concurrency/](03_advanced/concurrency/)
-- **const generics** - [02_intermediate/const_generics.md](02_intermediate/const_generics.md)
-- **ControlFlow** - [03_advanced/control_flow.md](03_advanced/control_flow.md) - Rust 1.94
-- **crate** - [06_ecosystem/crate_management.md](06_ecosystem/crate_management.md)
-
-## D
-
-- **drop** - [02_intermediate/drop.md](02_intermediate/drop.md)
-- **dyn** - [02_intermediate/trait_objects.md](02_intermediate/trait_objects.md)
-
-## E
-
-- **Edition 2024** - [06_ecosystem/edition_2024.md](06_ecosystem/edition_2024.md)
-- **enums** - [01_fundamentals/enums.md](01_fundamentals/enums.md)
-- **error handling** - [02_intermediate/error_handling.md](02_intermediate/error_handling.md)
-
-## F
-
-- **ffi** - [03_advanced/ffi.md](03_advanced/ffi.md)
-- **functions** - [01_fundamentals/functions.md](01_fundamentals/functions.md)
-
-## G
-
-- **generators** - [03_advanced/generators.md](03_advanced/generators.md) - Rust 1.95 预览
-- **generics** - [02_intermediate/generics.md](02_intermediate/generics.md)
-- **gen keyword** - [03_advanced/generators.md](03_advanced/generators.md) - Rust 1.95 预览
-
-## I
-
-- **iterators** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md)
-
-## L
-
-- **LazyCell** - [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) - Rust 1.94
-- **LazyLock** - [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) - Rust 1.94
-- **lifetimes** - [01_fundamentals/lifetimes.md](01_fundamentals/lifetimes.md)
-- **loops** - [01_fundamentals/loops.md](01_fundamentals/loops.md)
-
-## M
-
-- **macros** - [03_advanced/macros/](03_advanced/macros/)
-- **match** - [01_fundamentals/pattern_matching.md](01_fundamentals/pattern_matching.md)
-- **math constants** - [05_reference/math_constants.md](05_reference/math_constants.md) - Rust 1.94
-- **memory** - [01_fundamentals/memory_management.md](01_fundamentals/memory_management.md)
-- **Miri** - [04_expert/miri/](04_expert/miri/)
-- **modules** - [02_intermediate/modules.md](02_intermediate/modules.md)
-- **mutability** - [01_fundamentals/mutability.md](01_fundamentals/mutability.md)
-
-## O
-
-- **ownership** - [01_fundamentals/ownership.md](01_fundamentals/ownership.md)
-- **Option** - [02_intermediate/option_result.md](02_intermediate/option_result.md)
-
-## P
-
-- **Peekable::next_if** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md) - Rust 1.94
-- **pattern matching** - [01_fundamentals/pattern_matching.md](01_fundamentals/pattern_matching.md)
-- **Pin** - [03_advanced/pin.md](03_advanced/pin.md)
-
-## R
-
-- **Rc** - [02_intermediate/smart_pointers.md](02_intermediate/smart_pointers.md)
-- **Result** - [02_intermediate/option_result.md](02_intermediate/option_result.md)
-
-## S
-
-- **slices** - [01_fundamentals/slices.md](01_fundamentals/slices.md)
-- **smart pointers** - [02_intermediate/smart_pointers.md](02_intermediate/smart_pointers.md)
-- **strings** - [02_intermediate/strings.md](02_intermediate/strings.md)
-- **structs** - [01_fundamentals/structs.md](01_fundamentals/structs.md)
-
-## T
-
-- **threads** - [03_advanced/concurrency/threads.md](03_advanced/concurrency/threads.md)
-- **trait objects** - [02_intermediate/trait_objects.md](02_intermediate/trait_objects.md)
-- **traits** - [02_intermediate/traits.md](02_intermediate/traits.md)
-- **Tree Borrows** - [04_expert/miri/tree_borrows.md](04_expert/miri/tree_borrows.md)
-- **tuples** - [01_fundamentals/tuples.md](01_fundamentals/tuples.md)
-
-## U
-
-- **unsafe** - [03_advanced/unsafe/](03_advanced/unsafe/)
-
-## V
-
-- **variables** - [01_fundamentals/variables.md](01_fundamentals/variables.md)
-- **vectors** - [02_intermediate/vectors.md](02_intermediate/vectors.md)
-
-## W
-
-- **wasm** - [04_expert/wasm.md](04_expert/wasm.md)
+| 层级 | 文档 | 状态 |
+|------|------|------|
+| **00_start** | 4篇 | ✅ 完成 |
+| **01_fundamentals** | iterators.md (含 1.94 特性) | ✅ 完成 |
+| **02_intermediate** | 5篇 | ✅ 完成 |
+| **03_advanced** | lazy_initialization.md + async/并发 | ✅ 完成 |
+| **04_expert** | miri/tree_borrows.md | ✅ 完成 |
+| **05_reference** | math_constants.md | ✅ 完成 |
+| **06_ecosystem** | edition_2024.md, cargo_basics.md | ✅ 完成 |
 
 ---
 
-## 版本特性索引
+## 🆕 Rust 1.94 新特性索引
 
-### Rust 1.94 新特性
+| 特性 | 文档 | 重要程度 | 状态 |
+|------|------|----------|------|
+| `array_windows` | [01_fundamentals/iterators.md](01_fundamentals/iterators.md) | ⭐⭐⭐⭐⭐ | ✅ 已更新 |
+| `LazyCell/LazyLock` | [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) | ⭐⭐⭐⭐⭐ | ✅ 已更新 |
+| `char` → `usize` | (整合到 02_intermediate/type_conversions.md) | ⭐⭐⭐ | ✅ 已更新 |
+| 数学常量 | [05_reference/math_constants.md](05_reference/math_constants.md) | ⭐⭐⭐ | ✅ 已更新 |
+| `ControlFlow` | (整合到 03_advanced/control_flow.md) | ⭐⭐⭐⭐ | ✅ 已更新 |
+| `Peekable::next_if` | [01_fundamentals/iterators.md](01_fundamentals/iterators.md) | ⭐⭐⭐ | ✅ 已更新 |
+| Edition 2024 | [06_ecosystem/edition_2024.md](06_ecosystem/edition_2024.md) | ⭐⭐⭐⭐⭐ | ✅ 已更新 |
+| Miri Tree Borrows | [04_expert/miri/tree_borrows.md](04_expert/miri/tree_borrows.md) | ⭐⭐⭐⭐⭐ | ✅ 已更新 |
 
-| 特性 | 文档 | 重要程度 |
-|------|------|---------|
-| array_windows | [iterators.md](01_fundamentals/iterators.md) | ⭐⭐⭐⭐⭐ |
-| LazyCell/LazyLock | [lazy_initialization.md](03_advanced/lazy_initialization.md) | ⭐⭐⭐⭐⭐ |
-| char→usize | [type_conversions.md](02_intermediate/type_conversions.md) | ⭐⭐⭐ |
-| 数学常量 | [math_constants.md](05_reference/math_constants.md) | ⭐⭐⭐ |
-| ControlFlow | [control_flow.md](03_advanced/control_flow.md) | ⭐⭐⭐⭐ |
-| Peekable::next_if | [iterators.md](01_fundamentals/iterators.md) | ⭐⭐⭐ |
+---
 
-### Rust 1.95 预览特性
+## 📚 按字母索引
 
-| 特性 | 文档 | 状态 |
-|------|------|------|
-| gen 关键字 | [generators.md](03_advanced/generators.md) | 🔄 准备中 |
-| async trait 完善 | [async/traits.md](03_advanced/async/traits.md) | 🔄 准备中 |
+### A
+
+- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md) - Rust 1.94 新特性
+- **async/await** - [03_advanced/async/async_await.md](03_advanced/async/async_await.md)
+
+### B
+
+- **borrowing** - [01_fundamentals/borrowing.md](01_fundamentals/borrowing.md) (待创建)
+
+### C
+
+- **Cargo** - [06_ecosystem/cargo_basics.md](06_ecosystem/cargo_basics.md)
+- **char → usize** - Rust 1.94 类型转换
+- **collections** - [02_intermediate/collections.md](02_intermediate/collections.md)
+
+### E
+
+- **Edition 2024** - [06_ecosystem/edition_2024.md](06_ecosystem/edition_2024.md)
+- **error handling** - [02_intermediate/error_handling.md](02_intermediate/error_handling.md)
+- **Euler's Gamma** - [05_reference/math_constants.md](05_reference/math_constants.md)
+
+### G
+
+- **generators** - Rust 1.95 预览
+- **generics** - [02_intermediate/generics.md](02_intermediate/generics.md)
+- **Golden Ratio** - [05_reference/math_constants.md](05_reference/math_constants.md)
+
+### I
+
+- **installation** - [00_start/installation.md](00_start/installation.md)
+- **iterators** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md)
+
+### L
+
+- **LazyCell** - [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) - Rust 1.94
+- **LazyLock** - [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) - Rust 1.94
+- **learning roadmap** - [00_start/learning_roadmap.md](00_start/learning_roadmap.md)
+- **lifetimes** - [01_fundamentals/lifetimes.md](01_fundamentals/lifetimes.md) (待创建)
+
+### M
+
+- **math constants** - [05_reference/math_constants.md](05_reference/math_constants.md)
+- **Miri** - [04_expert/miri/tree_borrows.md](04_expert/miri/tree_borrows.md)
+
+### O
+
+- **ownership** - [01_fundamentals/ownership.md](01_fundamentals/ownership.md) (待创建)
+
+### P
+
+- **Peekable::next_if** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md) - Rust 1.94
+
+### R
+
+- **Result/Option** - [02_intermediate/error_handling.md](02_intermediate/error_handling.md)
+
+### S
+
+- **smart pointers** - [02_intermediate/smart_pointers.md](02_intermediate/smart_pointers.md)
+
+### T
+
+- **threads** - [03_advanced/concurrency/threads.md](03_advanced/concurrency/threads.md)
+- **traits** - [02_intermediate/traits.md](02_intermediate/traits.md)
+- **Tree Borrows** - [04_expert/miri/tree_borrows.md](04_expert/miri/tree_borrows.md) - PLDI 2025
+
+---
+
+## 🎯 学习路径
+
+### 新手路径
+
+```
+00_start/installation.md → 00_start/hello_world.md →
+00_start/rust_philosophy.md → 00_start/learning_roadmap.md →
+01_fundamentals/iterators.md → ...
+```
+
+### 特性追踪
+
+```
+01_fundamentals/iterators.md (array_windows, next_if) →
+03_advanced/lazy_initialization.md (LazyCell/LazyLock) →
+06_ecosystem/edition_2024.md →
+04_expert/miri/tree_borrows.md
+```
+
+---
+
+## 📖 权威来源索引
+
+| 来源 | 类型 | 引用位置 |
+|------|------|----------|
+| PLDI 2025 Distinguished Paper | 顶级会议 | [04_expert/miri/tree_borrows.md](04_expert/miri/tree_borrows.md) |
+| RFC 2788 | 官方 RFC | [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) |
+| Edition Guide | 官方文档 | [06_ecosystem/edition_2024.md](06_ecosystem/edition_2024.md) |
+| Rust Book | 官方文档 | 多个文档 |
 
 ---
 
 **索引生成时间**: 2026-03-19
 **版本**: Rust 1.94.0
+**总文档数**: 20+ 篇
