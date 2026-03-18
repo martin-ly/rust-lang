@@ -20,14 +20,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Rust nightly with Miri
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: nightly
           components: miri, rust-src
-          override: true
 
       - name: Cache cargo
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry
@@ -51,14 +49,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Rust nightly with Miri
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: nightly
           components: miri, rust-src
-          override: true
 
       - name: Cache cargo
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry
@@ -82,11 +78,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Rust nightly with Miri
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: nightly
           components: miri, rust-src
-          override: true
 
       - name: Run Miri setup
         run: cargo miri setup
@@ -120,11 +114,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Rust nightly with Miri
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: nightly
           components: miri, rust-src
-          override: true
 
       - name: Run Miri setup
         run: cargo miri setup
