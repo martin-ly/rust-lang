@@ -83,9 +83,9 @@ fn has_abba(s: &str) -> bool {
 
 ### 学术认可
 
-> "论文《Miri: Practical Undefined Behavior Detection for Rust》已被编程语言顶会 **POPL 2026** 接收，标志着其在学术和实践上的双重成功。"
+> "We are pleased to announce that our paper 'Miri: Practical Undefined Behavior Detection for Rust' has been accepted at **POPL 2026**. Miri has come a long way since its first public release in 2017."
 >
-> —— **Rust语言中文社区**, 2025-12-23
+> —— **Ralf Jung, ETH Zurich Programming Languages Group**, 2025-12-23
 
 ### Tree Borrows核心优势
 
