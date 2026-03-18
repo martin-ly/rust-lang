@@ -11,7 +11,6 @@
 - [ ] 熟练使用 `AsyncFn`/`AsyncFnMut`/`AsyncFnOnce` trait
 - [ ] 在迭代器、流、回调中应用异步闭包
 - [ ] 理解 `async move` 闭包的捕获语义
-- [ ] 掌握异步闭包在并发模式中的最佳实践
 
 ## 📋 先决条件
 
@@ -28,7 +27,7 @@
 异步闭包是 Rust 1.85 引入的稳定特性，它允许你创建返回 Future 的闭包，使用 `async || {}` 语法：
 
 ```rust
-// 传统方式：需要 async fn 或手动返回 impl Future
+// 传统方式
 async fn fetch_url(url: &str) -> Result<String, Error> {
     reqwest::get(url).await?.text().await
 }
@@ -61,9 +60,7 @@ let compute = async |x: i32, y: i32| -> i32 {
 
 // 异步闭包实现了 AsyncFn/AsyncFnMut/AsyncFnOnce trait
 fn use_async_closure<F>(f: F)
-where
-    F: AsyncFn(&str) -> String,
-{
+where F: AsyncFn(&str) -> String {
     let future = f.call(("World",)); // 返回 impl Future
 }
 ```
@@ -79,7 +76,6 @@ where
 | 内部 await | ❌ 不允许 | ✅ 允许 |
 
 ```rust
-// 关键区别示例
 let regular = |x: i32| x + 1;           // 立即计算
 let async_version = async |x: i32| {    // 返回 Future
     tokio::task::yield_now().await;
@@ -92,15 +88,13 @@ let result2 = async_version(5).await;    // 需要 .await
 
 ### 4. FnOnce/FnMut/Fn + async 的组合
 
-Rust 1.85 引入了专门的异步闭包 trait：
-
 ```rust
 // AsyncFnOnce: 只能调用一次
 let consume = async move |data: Vec<u8>| -> String {
     process(data).await  // data 被 move 进闭包
 };
 
-// AsyncFnMut: 可以多次调用，可能修改捕获的状态
+// AsyncFnMut: 可以多次调用，可能修改状态
 let mut counter = 0;
 let mut increment = async || -> i32 {
     counter += 1;
@@ -110,11 +104,10 @@ let mut increment = async || -> i32 {
 let first = increment().await;   // 1
 let second = increment().await;  // 2
 
-// AsyncFn: 可以多次调用，不修改状态（纯异步闭包）
+// AsyncFn: 纯异步闭包，可并发调用
 let fetcher = async |url: &str| -> Result<String, Error> {
     reqwest::get(url).await?.text().await
 };
-// 可以并发调用
 let (r1, r2) = tokio::join!(
     fetcher("https://api1.example.com"),
     fetcher("https://api2.example.com"),
@@ -126,16 +119,13 @@ let (r1, r2) = tokio::join!(
 #### 模式 1: 异步回调处理
 
 ```rust
-// 事件处理器注册
 struct EventHub {
     handlers: Vec<Box<dyn AsyncFn(Event) -> () + Send + Sync>>,
 }
 
 impl EventHub {
     fn on_event<F>(&mut self, handler: F)
-    where
-        F: AsyncFn(Event) -> () + Send + Sync + 'static,
-    {
+    where F: AsyncFn(Event) -> () + Send + Sync + 'static {
         self.handlers.push(Box::new(handler));
     }
 
@@ -149,8 +139,8 @@ impl EventHub {
 // 使用
 let mut hub = EventHub::new();
 hub.on_event(async |evt| {
-    println!("Received: {:?}", evt);
     log_event(evt).await;
+    notify_subscribers(evt).await;
 });
 ```
 
@@ -191,7 +181,6 @@ where
     }
 }
 
-// 使用
 let factory = TaskFactory {
     creator: async || {
         init_resources().await;
@@ -206,13 +195,13 @@ let handle = factory.spawn();
 ```rust
 let data = Arc::new(Mutex::new(vec![1, 2, 3]));
 
-// 引用捕获 - 需要生命周期管理
+// 引用捕获
 let processor = async |item: &Item| -> Result<()> {
     let guard = data.lock().await;
     process_with(&guard, item).await
 };
 
-// move 捕获 - 所有权转移
+// move 捕获
 let owned_data = data.clone();
 let consumer = async move |items: Vec<Item>| -> Vec<Result<()>> {
     futures::future::join_all(
@@ -229,32 +218,14 @@ let consumer = async move |items: Vec<Item>| -> Vec<Result<()>> {
 ```rust
 use futures::stream::{self, StreamExt, TryStreamExt};
 
-async fn concurrent_workflow() {
-    let urls = vec!["https://api1.example.com", "https://api2.example.com"];
-
-    // 使用异步闭包进行并发映射
-    let responses: Vec<_> = stream::iter(urls)
+async fn concurrent_workflow(urls: Vec<&str>) -> Result<Vec<ApiResponse>> {
+    stream::iter(urls)
         .map(async |url| {
             let client = reqwest::Client::new();
             client.get(url).send().await?.json::<ApiResponse>().await
         })
         .buffered(3)
-        .try_collect().await?;
-
-    // 带状态的有状态异步闭包
-    let mut retry_count = 0;
-    let with_retry = async |url: &str| -> Result<Response, Error> {
-        loop {
-            match fetch(url).await {
-                Ok(resp) => return Ok(resp),
-                Err(e) if retry_count < 3 => {
-                    retry_count += 1;
-                    tokio::time::sleep(Duration::from_secs(1)).await;
-                }
-                Err(e) => return Err(e),
-            }
-        }
-    };
+        .try_collect().await
 }
 ```
 
@@ -263,7 +234,7 @@ async fn concurrent_workflow() {
 ### 1. 选择合适的捕获方式
 
 ```rust
-// ✅ 优先使用引用捕获，避免不必要的克隆
+// ✅ 优先使用引用捕获
 let processor = async |item: &Item| { /* ... */ };
 
 // ✅ 需要所有权时使用 async move
@@ -283,14 +254,14 @@ let f1 = {
 // ✅ 总是考虑并发控制
 stream::iter(items)
     .map(async |item| process(item).await)
-    .buffer_unordered(10)  // 明确限制并发
+    .buffer_unordered(10)
     .collect::<Vec<_>>().await;
 ```
 
 ### 3. 错误处理
 
 ```rust
-// ✅ 在异步闭包内部处理错误，或传播到外部
+// ✅ 在异步闭包内部处理错误
 let safe_process = async |item: &Item| -> Result<Output, Error> {
     match risky_operation(item).await {
         Ok(result) => Ok(result),
@@ -307,40 +278,39 @@ let safe_process = async |item: &Item| -> Result<Output, Error> {
 ### 1. 忘记 .await
 
 ```rust
-// ❌ 错误：异步闭包返回的是 Future，不是结果
+// ❌ 错误：异步闭包返回的是 Future
 let result: String = fetch_data().await;
 
-// ✅ 正确
+// ✅ 正确：调用得 Future，await 得结果
 let fetch = async || reqwest::get("...").await?.text().await;
-let result = fetch().await?;  // 调用得 Future，await 得结果
+let result = fetch().await?;
 ```
 
 ### 2. 生命周期陷阱
 
 ```rust
-// ❌ 错误：返回引用到捕获的变量
-let bad_closure = async || -> &str {
+// ❌ 返回引用到捕获的变量
+let bad = async || -> &str {
     let s = String::from("local");
     &s  // s 在闭包结束时被 drop
 };
 
-// ✅ 正确：返回所有权
-let good_closure = async move || -> String {
-    let s = String::from("owned");
-    s  // 所有权转移
+// ✅ 返回所有权
+let good = async move || -> String {
+    String::from("owned")
 };
 ```
 
 ### 3. Send/Sync 边界
 
 ```rust
-// ⚠️ 跨线程使用需要 Send bound
+// ⚠️ 跨线程需要 Send bound
 let handler: Box<dyn AsyncFn() -> () + Send> =
     Box::new(async || { /* ... */ });
 
 // tokio::spawn 要求 Future 是 Send
 tokio::spawn(async move {
-    async_closure().await  // 确保闭包满足 Send
+    async_closure().await
 });
 ```
 
@@ -380,16 +350,14 @@ let result = pipeline.process(raw_data).await;
 
 ```rust
 fn with_exponential_backoff<F, T, E>(
-    max_retries: u32,
-    operation: F,
+    max_retries: u32, operation: F
 ) -> impl AsyncFn() -> Result<T, E>
-where F: AsyncFn() -> Result<T, E> + Clone,
-{
+where F: AsyncFn() -> Result<T, E> + Clone {
     async move || {
         let mut retries = 0;
         loop {
             match operation.call(()).await {
-                Ok(result) => return Ok(result),
+                Ok(r) => return Ok(r),
                 Err(e) if retries < max_retries => {
                     let delay = Duration::from_millis(100 * 2_u64.pow(retries));
                     tokio::time::sleep(delay).await;
@@ -405,20 +373,15 @@ where F: AsyncFn() -> Result<T, E> + Clone,
 ### 练习 3: 并发限流下载器
 
 ```rust
-async fn download_with_rate_limit(
-    urls: Vec<String>,
-    max_concurrent: usize,
+async fn download_with_limit(
+    urls: Vec<String>, limit: usize
 ) -> Vec<Result<Bytes, Error>> {
     let client = Arc::new(reqwest::Client::new());
-
     stream::iter(urls)
         .map(async move |url| {
-            let client = client.clone();
-            async move {
-                client.get(&url).send().await?.bytes().await
-            }.await
+            client.get(&url).send().await?.bytes().await
         })
-        .buffer_unordered(max_concurrent)
+        .buffer_unordered(limit)
         .collect().await
 }
 ```
@@ -427,7 +390,7 @@ async fn download_with_rate_limit(
 
 - [Rust 1.85 Release Notes - Async Closures](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)
 - [RFC 3668 - Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html)
-- [Async Book - 闭包章节](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html)
+- [Async Book](https://rust-lang.github.io/async-book/)
 - [futures crate 文档](https://docs.rs/futures/latest/futures/)
 - [tokio 文档 - Streams](https://tokio.rs/tokio/tutorial/streams)
 
