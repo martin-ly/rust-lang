@@ -1,9 +1,11 @@
 # Rust 项目文档警告修复报告
 
 ## 修复时间
+
 2026-03-19
 
 ## 修复概述
+
 成功修复了项目中所有的文档警告，包括未闭合的 HTML 标签、空的 Rust 代码块、未解决的链接和裸 URL 问题。
 
 ---
@@ -13,6 +15,7 @@
 ### 1. 未闭合的 HTML 标签修复
 
 #### 1.1 `<char>` 标签修复
+
 将 `TryFrom<char>` 包裹在反引号中，共修复 **23 处**：
 
 | 文件 | 修复数量 |
@@ -29,6 +32,7 @@
 | `crates/c07_process/src/rust_194_features.rs` | 3 |
 
 #### 1.2 `<T>` 标签修复
+
 将泛型 `<T>` 包裹在反引号中，共修复 **18 处**：
 
 | 文件 | 修复数量 |
@@ -40,21 +44,25 @@
 | `crates/c09_design_pattern/src/archive/rust_189_features.rs` | 2 |
 
 #### 1.3 `<U>` 标签修复
+
 | 文件 | 修复数量 |
 |------|----------|
 | `crates/c04_generic/src/basic_syntax.rs` | 1 |
 
 #### 1.4 `<N>` 标签修复
+
 | 文件 | 修复数量 |
 |------|----------|
 | `crates/c08_algorithms/src/rust_194_features.rs` | 2 |
 
 #### 1.5 `<i>` 标签修复
+
 | 文件 | 修复数量 |
 |------|----------|
 | `crates/c08_algorithms/src/leetcode/greedy.rs` | 3 |
 
 #### 1.6 `<r>` 链接修复
+
 | 文件 | 修复数量 |
 |------|----------|
 | `crates/c06_async/src/lib.rs` | 1 |
