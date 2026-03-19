@@ -404,6 +404,10 @@ pub fn rust_192_tuple_extend_example() {
 /// Rust 1.92.0 enhances the `Debug` implementation for `EncodeWide` with additional details:
 ///
 /// `EncodeWide` 示例 / `EncodeWide` Example
+///
+/// **注意**: 此功能仅在 Windows 平台上可用
+/// **Note**: This feature is only available on Windows platform
+#[cfg(windows)]
 pub fn rust_192_encode_wide_example() {
     use std::ffi::OsStr;
     use std::os::windows::ffi::OsStrExt;
@@ -411,6 +415,13 @@ pub fn rust_192_encode_wide_example() {
     let os_str = OsStr::new("test");
     let wide: Vec<u16> = os_str.encode_wide().collect();
     println!("Encoded wide string: {:?}", wide);
+}
+
+/// 非 Windows 平台的占位实现
+/// Placeholder implementation for non-Windows platforms
+#[cfg(not(windows))]
+pub fn rust_192_encode_wide_example() {
+    println!("EncodeWide is only available on Windows platform");
 }
 
 /// # 14. `iter::Repeat` 中的无限循环 panic / Panic on Infinite Loops in `iter::Repeat`
