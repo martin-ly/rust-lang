@@ -224,7 +224,7 @@ protobuf = "4.33.2-release" # 修复递归崩溃漏洞
 rustls = { version = "0.23.37", features = ["ring"] }
 # rustls-webpki: rustls的WebPKI支持
 # 2026-01-26: 0.103.8 -> 0.103.9 (cargo update)
-rustls-webpki = "0.103.9"
+rustls-webpki = "0.103.10"  # 2026-03-23: 0.103.9 -> 0.103.10 (cargo update)
 # rustls-pemfile: rustls的PEM文件解析支持
 rustls-pemfile = "2.2.0"
 # tokio-rustls: tokio与rustls的集成
@@ -354,7 +354,7 @@ sqlx = { version = "0.8.6", features = [  # 更新至最新稳定版本
     "uuid",                # UUID类型支持
 ], default-features = false }
 # redis: Redis客户端库，支持异步操作 - 版本 1.0+ (稳定版！)
-redis = "1.0.5"  # 2026-03-10: 1.0.4 -> 1.0.5 (cargo update)
+redis = "1.1.0"  # 2026-03-23: 1.0.5 -> 1.1.0 (cargo update，锁定 13 包至 Rust 1.94 兼容版本)
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.38.0", default-features = false }
 # mysql_async: MySQL异步客户端 - 2025年10月20日更新
@@ -1365,4 +1365,28 @@ cargo = "allow"
 # - web-sys: 0.3.88 -> 0.3.90
 #
 # 说明：pass `--verbose` 可查看 12 个未变更的依赖
+# ============================================================
+
+# 依赖更新日志 - 2026年3月23日 cargo update（Rust 1.94 兼容版本）
+# ============================================================
+# cargo update 更新了13个包到最新 Rust 1.94 兼容版本
+# 更新时间: 2026-03-23
+#
+# 工作区依赖更新（已更新 Cargo.toml）：
+# - redis: 1.0.5 -> 1.1.0
+# - rustls-webpki: 0.103.9 -> 0.103.10
+#
+# 传递依赖更新（Cargo.lock 已锁定，无需修改 Cargo.toml）：
+# - arc-swap: 1.8.2 -> 1.9.0
+# - aws-lc-rs: 1.16.1 -> 1.16.2
+# - aws-lc-sys: 0.38.0 -> 0.39.0
+# - itoa: 1.0.17 -> 1.0.18
+# - jni-sys: 0.3.0 -> 0.3.1, 新增 0.4.1
+# - jni-sys-macros: 新增 0.4.1
+# - moka: 0.12.14 -> 0.12.15
+# - pulldown-cmark: 0.13.1 -> 0.13.3
+# - zerocopy: 0.8.42 -> 0.8.47
+# - zerocopy-derive: 0.8.42 -> 0.8.47
+#
+# 说明：以上为传递依赖，由 Cargo 自动管理；pass `--verbose` 可查看 15 个未变更的依赖
 # ============================================================
