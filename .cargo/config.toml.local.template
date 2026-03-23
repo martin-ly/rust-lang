@@ -1,0 +1,27 @@
+# 本地开发优化配置文件模板
+# 使用方法:
+# 1. 复制此文件: cp config.toml.local.template config.toml.local
+# 2. 根据需要取消注释下方配置
+# 3. 在 config.toml 末尾添加: include = "config.toml.local"
+#
+# 或者直接在环境变量中设置:
+# $env:CARGO_BUILD_JOBS = "16"
+# $env:CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_LINKER = "rust-lld.exe"
+
+[build]
+# 根据你的CPU核心数调整并行作业数
+# 建议: 物理核心数 - 1 或 - 2
+# jobs = 16
+
+# 启用更激进的增量编译
+rustflags = [
+    "-C", "incremental-verification=no",  # 跳过增量验证(更快但风险稍高)
+]
+
+# 内存优化 - 对于大型项目减少内存使用
+[profile.dev]
+# 减少代码生成单元可以降低内存使用，但可能减慢编译
+# codegen-units = 128
+
+# 使用 check-only profile 进行快速检查
+# cargo check --profile check-only

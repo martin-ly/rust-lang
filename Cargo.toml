@@ -62,38 +62,57 @@ panic = "abort"
 #  这种多阶段的优化组合确保了最终生成的二进制文件既小巧又高效。
 
 [profile.dev]
+# ========== 开发环境编译速度优化 ==========
+# 优化级别 0 = 最快编译速度 (推荐开发使用)
 opt-level = 0
-debug = true
+# 调试信息级别: 0=无, 1=仅行表, 2=完整
+debug = 1
 debug-assertions = true
 overflow-checks = true
+# 增量编译 - 开发环境必须启用
 incremental = true
-codegen-units = 256     # 并行编译优化
+# 代码生成单元: 更多=并行度更高=编译更快
+codegen-units = 256
+# 使用 unwind panic 可以获得更好的调试信息
+panic = "unwind"
 
-# 开发环境CPU优化 - 2025年最新设置
-# 在开发环境中也启用CPU指令集优化以提升性能
-# 注意: target-cpu 和 target-feature 需要在编译时通过环境变量或.cargo/config.toml设置
-
-# 开发环境构建优化
+# 开发环境构建优化 - 构建依赖使用轻量级优化
 [profile.dev.build-override]
-opt-level = 1 # 构建依赖使用轻量级优化
+opt-level = 1
+codegen-units = 16
 
 [profile.test]
+# ========== 测试环境编译速度优化 ==========
 opt-level = 1
-debug = true
-# 测试环境CPU优化
-# 注意: target-cpu 和 target-feature 需要在编译时通过环境变量或.cargo/config.toml设置
+debug = 1
+# 增量编译加速测试
+codegen-units = 256
+incremental = true
 
 [profile.bench]
+# ========== 基准测试优化 - 平衡编译和运行速度 ==========
 opt-level = 3
 debug = false
-lto = "fat"       # 基准测试使用最高优化
-codegen-units = 1
-# 基准测试CPU优化 - 最高性能设置
-# 注意: target-cpu 和 target-feature 需要在编译时通过环境变量或.cargo/config.toml设置
+# 使用 thin LTO - 比 fat LTO 快很多，性能接近
+lto = "thin"
+# 更多代码生成单元 = 更快编译
+codegen-units = 4
+# 注意: bench profile 不支持 panic 设置
 
 # 基准测试构建优化
 [profile.bench.build-override]
 opt-level = 2
+codegen-units = 16
+
+# ========== 新增: 超快速检查 Profile ==========
+# 使用: cargo check --profile check-fast
+# 适用于: 快速语法检查，不运行代码
+[profile.check-fast]
+inherits = "dev"
+opt-level = 0
+debug = 0
+codegen-units = 1024
+panic = "abort"
 
 # 工作区级别的依赖版本统一 - 2026年3月4日最新稳定版本
 # 更新时间: 2026-03-06 (cargo update 锁定至 Rust 1.94.0 兼容版本)
@@ -373,9 +392,9 @@ criterion = "0.8.2"
 # config: 分层配置系统，支持多种配置格式
 # 2026-03-18: 0.15.19 -> 0.15.22 (cargo update)
 config = "0.15.22"
-# toml: TOML格式的编码器和解码器 - 版本 1.0+ (字母索引)
-# 2026-03-18: 0.9.12+spec-1.1.0 -> 1.0.7+spec-1.1.0 (cargo update)
-toml = "1.0.7+spec-1.1.0"
+# toml: TOML格式的编码器和解码器 - 版本 1.1+ (字母索引)
+# 2026-03-24: 1.0.7+spec-1.1.0 -> 1.1.0+spec-1.1.0 (cargo update)
+toml = "1.1.0+spec-1.1.0"
 
 # 并发和同步 - 2025年12月11日最新稳定版本
 # crossbeam: 并发编程工具库，提供无锁数据结构和同步原语 - 版本 0.8+ (字母索引)

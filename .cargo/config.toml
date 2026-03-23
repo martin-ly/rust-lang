@@ -1,23 +1,121 @@
 [build]
-# 使用sccache加速构建
+# 使用sccache加速构建 - 需要安装: cargo install sccache
+# sccache 支持磁盘缓存和远程缓存(S3/Azure/GCS等)
 rustc-wrapper = "sccache"
 
-# 为IDE和命令行使用不同的target目录
-# (避免RUSTFLAGS变化导致缓存失效)
-target-dir = "target"
+# 并行编译作业数 - 默认为CPU核心数，可以显式设置
+# 建议: 物理核心数 - 1，保留一个核心给系统
+# jobs = 16
+
+# 通用Rustflags优化
+# - Ctarget-cpu=native: 针对本机CPU优化
+# - Cembed-bitcode=no: 禁用bitcode嵌入(加快编译)
+rustflags = [
+    "-C", "target-cpu=native",
+    "-C", "embed-bitcode=no",
+]
+
+# 链接器优化 - 使用更快的链接器 (Windows)
+[target.x86_64-pc-windows-msvc]
+linker = "rust-lld.exe"
+rustflags = [
+    "-C", "target-cpu=native",
+    "-C", "embed-bitcode=no",
+    "-C", "link-arg=-fuse-ld=lld",
+]
+
+# 链接器优化 - 使用更快的链接器 (Linux)
+[target.x86_64-unknown-linux-gnu]
+linker = "clang"
+rustflags = [
+    "-C", "target-cpu=native",
+    "-C", "embed-bitcode=no",
+    "-C", "link-arg=-fuse-ld=lld",
+]
 
 [registries.crates-io]
+# 稀疏索引协议 - 大幅减少索引下载时间
 protocol = "sparse"
 
 [net]
+# 网络重试配置
 retry = 3
+# 使用Git CLI fetch (对于大型仓库更快)
+git-fetch-with-cli = true
+
+# 启用流水线编译 - 在稳定版1.70+可用
+[pipeline]
+enabled = true
+
+# ============ Profile 优化 ============
+# 这些配置会覆盖 Cargo.toml 中的同名配置
+
+[profile.dev]
+# 增量编译 - 必须启用
+incremental = true
+# 优化级别 0 = 最快编译速度
+opt-level = 0
+# 调试信息 - 1 = line-tables-only (更快)
+debug = 1
+debug-assertions = true
+overflow-checks = true
+# 代码生成单元 - 更多=更快编译
+codegen-units = 256
+# 使用 unwind panic
+panic = "unwind"
 
 [profile.dev.build-override]
+# 构建依赖的优化级别
 opt-level = 1
+codegen-units = 16
+
+# 更快的检查 Profile - 用于快速语法检查
+[profile.check-fast]
+inherits = "dev"
+opt-level = 0
+debug = 0
+codegen-units = 1024
+panic = "abort"
+
+[profile.release]
+# 发布构建优化
+opt-level = 3
+lto = "thin"
+codegen-units = 16
+panic = "abort"
+strip = "symbols"
+incremental = false
 
 [profile.release.build-override]
 opt-level = 2
+codegen-units = 16
 
-# 启用增量编译优化
+[profile.test]
+# 测试优化 - 平衡速度和调试
+opt-level = 1
+debug = 1
+codegen-units = 256
+incremental = true
+
+[profile.bench]
+# 基准测试
+opt-level = 3
+debug = false
+lto = "thin"
+codegen-units = 4
+
+[profile.bench.build-override]
+opt-level = 2
+
+# ============ 不稳定特性 (需要nightly工具链) ============
+# 要使用以下特性，运行: rustup default nightly
+
 [unstable]
+# 并行增量编译
 incremental-parallel = true
+# 快速调试信息生成
+fast-debuginfo = true
+# 优化依赖单元
+dependency-optimizer = true
+# 并行前端 (需要 -Z threads=N)
+parallel-frontend = true
