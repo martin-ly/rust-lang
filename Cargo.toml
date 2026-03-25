@@ -114,10 +114,10 @@ debug = 0
 codegen-units = 1024
 panic = "abort"
 
-# 工作区级别的依赖版本统一 - 2026年3月4日最新稳定版本
-# 更新时间: 2026-03-06 (cargo update 锁定至 Rust 1.94.0 兼容版本)
-# 更新包: aws-lc-rs, aws-lc-sys, const_fn, getrandom, if-addrs, if-watch, ipnet, jiff,
-#         netlink-packet-core, netlink-packet-route, netlink-proto, nix, quote, rtnetlink, tokio
+# 工作区级别的依赖版本统一 - 2026年3月26日最新稳定版本
+# 更新时间: 2026-03-26 (cargo update 锁定至 Rust 1.94 兼容版本)
+# 更新包: ipconfig, libredox, num-conv, proptest, unicode-segmentation
+# 移除包: windows-sys v0.48.0, windows-targets v0.48.5, winreg v0.50.0 等旧版Windows依赖
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
 # rust-version: 1.94.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
@@ -408,11 +408,11 @@ parking_lot = "0.12.5"
 # syn: 语法解析库 - 2026年2月19日 cargo update
 syn = "2.0.117"
 
-# 测试相关 - 2025年12月11日最新稳定版本
+# 测试相关 - 2026年3月26日最新稳定版本
 # mockall: 强大的模拟对象库，用于单元测试 - 版本 0.13+ (字母索引)
 mockall = "0.14.0"
 # proptest: 基于属性的测试库，类似Hypothesis - 版本 1.5+ (字母索引)
-proptest = "1.10.0"
+proptest = "1.11.0"
 # rstest: 基于fixture的测试框架，支持参数化测试
 rstest = "0.26.1"  # 更新至最新稳定版本
 # cargo-tarpaulin: 代码覆盖率测试工具
