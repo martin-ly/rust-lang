@@ -109,9 +109,9 @@ impl LoadBalancer {
                 .iter()
                 .min_by(|a, b| a.load.partial_cmp(&b.load).expect("比较负载不应失败")),
             LoadBalancingStrategy::Random => {
-                use rand::{Rng, rngs::ThreadRng};
+                use rand::{RngExt, rngs::ThreadRng};
                 let mut rng = ThreadRng::default();
-                let index = rng.random_range(0..instances.len());
+                let index = (rng.random::<u64>() % instances.len() as u64) as usize;
                 instances.get(index)
             }
         }

@@ -2,7 +2,7 @@ use anyhow::Result;
 use c06_async::utils::metrics;
 use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, IntCounterVec, Opts, Registry};
-use rand::Rng;
+use rand::RngExt;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -429,7 +429,7 @@ impl AsyncAPIGateway {
         INSTANCE_PICK_TOTAL.with_label_values(&[&instance.id]).inc();
 
         // 模拟转发请求
-        sleep(Duration::from_millis(50 + rand::rng().random_range(0..100))).await;
+        sleep(Duration::from_millis(50 + rand::rng().random::<u64>() % 100)).await;
 
         // 模拟响应
         let status_code = if rand::rng().random::<f64>() < 0.95 {
@@ -440,7 +440,7 @@ impl AsyncAPIGateway {
         BACKEND_STATUS_TOTAL
             .with_label_values(&[if status_code == 200 { "200" } else { "500" }])
             .inc();
-        let response_time = Duration::from_millis(50 + rand::rng().random_range(0..100));
+        let response_time = Duration::from_millis(50 + rand::rng().random::<u64>() % 100);
 
         let mut headers = HashMap::new();
         headers.insert("Content-Type".to_string(), "application/json".to_string());
@@ -483,11 +483,11 @@ impl AsyncAPIGateway {
 
         match service.load_balancer {
             LoadBalancerType::RoundRobin => {
-                let index = rand::rng().random_range(0..healthy_instances.len());
+                let index = (rand::rng().random::<u64>() % healthy_instances.len() as u64) as usize;
                 Ok(healthy_instances[index])
             }
             LoadBalancerType::Random => {
-                let index = rand::rng().random_range(0..healthy_instances.len());
+                let index = (rand::rng().random::<u64>() % healthy_instances.len() as u64) as usize;
                 Ok(healthy_instances[index])
             }
             LoadBalancerType::LeastConnections => {

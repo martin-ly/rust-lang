@@ -383,12 +383,12 @@ impl KMeans {
     }
 
     fn initialize_centroids(&mut self, data: &[Vec<f64>]) {
-        use rand::{Rng, rngs::ThreadRng};
+        use rand::{RngExt, rngs::ThreadRng};
         let mut rng = ThreadRng::default();
 
         self.centroids.clear();
         for _ in 0..self.k {
-            let random_index = rng.random_range(0..data.len());
+            let random_index = (rng.random::<u64>() % data.len() as u64) as usize;
             self.centroids.push(data[random_index].clone());
         }
     }
@@ -639,7 +639,7 @@ impl RSA {
     }
 
     fn generate_prime(bits: usize) -> u64 {
-        use rand::{Rng, rngs::ThreadRng};
+        use rand::{RngExt, rngs::ThreadRng};
         let mut rng = ThreadRng::default();
 
         loop {
@@ -649,7 +649,7 @@ impl RSA {
             // 取区间 [2^(bits-1), 2^bits)，保证乘积在 u64 范围内（当 overall bit_length=2*bits）
             let low = 1u64 << (bits as u32 - 1);
             let high = 1u64 << (bits as u32);
-            let candidate = rng.random_range(low..high);
+            let candidate = rng.random::<u64>() % (high - low) + low;
             if Self::is_prime(candidate) {
                 return candidate;
             }
@@ -657,7 +657,7 @@ impl RSA {
     }
 
     fn is_prime(n: u64) -> bool {
-        use rand::{Rng, rngs::ThreadRng};
+        use rand::{RngExt, rngs::ThreadRng};
 
         if n < 2 {
             return false;
@@ -678,7 +678,7 @@ impl RSA {
 
         // Miller-Rabin素性测试
         for _ in 0..5 {
-            let a = ThreadRng::default().random_range(2..n);
+            let a = ThreadRng::default().random::<u64>() % (n - 2) + 2;
             let mut x = Self::mod_pow(a, d, n);
 
             if x == 1 || x == n - 1 {

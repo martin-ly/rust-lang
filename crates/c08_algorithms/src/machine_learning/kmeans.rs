@@ -2,7 +2,7 @@
 //!
 //! 本模块提供了 K-means 聚类算法的基础实现
 use super::*;
-use rand::Rng;
+use rand::RngExt;
 
 /// K-means 聚类器
 #[derive(Debug, Clone)]
@@ -83,7 +83,7 @@ impl KMeans {
         let Some(_first) = data.first() else {
             return centers;
         };
-        let first_idx = rng.random_range(0..data.len());
+        let first_idx = (rng.random::<u64>() % data.len() as u64) as usize;
         centers.push(data[first_idx].clone());
 
         // 使用 K-means++ 选择剩余中心
@@ -103,7 +103,7 @@ impl KMeans {
 
             // 根据距离概率选择下一个中心
             let mut cumulative = 0.0;
-            let random_value: f64 = rng.random_range(0.0..total_distance);
+            let random_value: f64 = rng.random::<f64>() * (total_distance - 0.0) + 0.0;
 
             for (i, &distance) in distances.iter().enumerate() {
                 cumulative += distance;

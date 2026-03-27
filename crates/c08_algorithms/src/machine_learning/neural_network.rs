@@ -60,7 +60,7 @@ pub struct Layer {
 impl Layer {
     /// 创建新的层
     pub fn new(input_size: usize, output_size: usize, activation: ActivationFunction) -> Self {
-        use rand::{Rng, rngs::ThreadRng};
+        use rand::{RngExt, rngs::ThreadRng};
         let mut rng = ThreadRng::default();
 
         // Xavier 初始化
@@ -69,7 +69,7 @@ impl Layer {
         let weights = (0..output_size)
             .map(|_| {
                 (0..input_size)
-                    .map(|_| rng.random_range(-scale..scale))
+                    .map(|_| rng.random::<f64>() * (scale - (-scale)) + (-scale))
                     .collect()
             })
             .collect();

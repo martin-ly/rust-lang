@@ -1,8 +1,8 @@
 use crate::error::{NetworkError, NetworkResult};
-use hickory_resolver::TokioAsyncResolver;
+use hickory_resolver::TokioResolver;
 use hickory_resolver::config::{ResolverConfig, ResolverOpts};
-use hickory_resolver::error::ResolveErrorKind;
-use hickory_resolver::name_server::{GenericConnector, TokioRuntimeProvider};
+use hickory_proto::ProtoErrorKind;
+use hickory_resolver::name_server::TokioConnectionProvider;
 use hickory_resolver::proto::rr::rdata::SRV;
 use std::net::{IpAddr, SocketAddr};
 use std::time::Duration;
@@ -10,7 +10,7 @@ use std::time::Duration;
 /// DNS 解析器封装（基于 Hickory-DNS）
 #[derive(Clone)]
 pub struct DnsResolver {
-    inner: TokioAsyncResolver,
+    inner: TokioResolver,
 }
 
 impl std::fmt::Debug for DnsResolver {
@@ -22,8 +22,9 @@ impl std::fmt::Debug for DnsResolver {
 impl DnsResolver {
     /// 使用系统 DNS 配置创建解析器（/etc/resolv.conf、Registry 等）
     pub async fn from_system() -> NetworkResult<Self> {
-        let resolver = TokioAsyncResolver::tokio_from_system_conf()
-            .map_err(|e| NetworkError::Other(format!("dns system config: {e}")))?;
+        let resolver = TokioResolver::builder_tokio()
+            .map_err(|e| NetworkError::Other(format!("dns system config: {e}")))?
+            .build();
         Ok(Self { inner: resolver })
     }
 
@@ -49,8 +50,9 @@ impl DnsResolver {
         } else {
             opts.attempts = 2;
         }
-        let connector = GenericConnector::new(TokioRuntimeProvider::default());
-        let resolver = TokioAsyncResolver::new(config, opts, connector);
+        let resolver = TokioResolver::builder_with_config(config, TokioConnectionProvider::default())
+            .with_options(opts)
+            .build();
         Ok(Self { inner: resolver })
     }
 
@@ -130,18 +132,23 @@ impl DnsResolver {
     fn map_resolve_err(
         target: &str,
         ctx: &str,
-        err: Option<hickory_resolver::error::ResolveError>,
+        err: Option<hickory_resolver::ResolveError>,
     ) -> NetworkError {
         if let Some(e) = err {
-            match e.kind() {
-                ResolveErrorKind::NoRecordsFound { .. } => {
-                    NetworkError::Protocol(format!("DNS no records for {target}: {ctx}"))
-                }
-                ResolveErrorKind::Timeout => NetworkError::Timeout(Duration::from_secs(5)),
-                other => {
-                    NetworkError::Other(format!("DNS resolve {target} failed: {ctx}: {other}"))
+            // Check for specific error conditions using helper methods
+            if e.is_no_records_found() {
+                return NetworkError::Protocol(format!("DNS no records for {target}: {ctx}"));
+            }
+            if e.is_nx_domain() {
+                return NetworkError::Protocol(format!("DNS NXDOMAIN for {target}: {ctx}"));
+            }
+            // Check for timeout in the proto error
+            if let Some(proto) = e.proto() {
+                if matches!(proto.kind.as_ref(), ProtoErrorKind::Timeout) {
+                    return NetworkError::Timeout(Duration::from_secs(5));
                 }
             }
+            NetworkError::Other(format!("DNS resolve {target} failed: {ctx}: {e}"))
         } else {
             NetworkError::Other(format!("DNS resolve {target} failed: {ctx}"))
         }

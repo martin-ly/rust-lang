@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 resolver = "3"
 build = "build.rs"
-rust-version = "1.94"
+rust-version = "1.94.1"
 
 # 网络库CPU指令集优化配置在根Cargo.toml中统一管理
 
@@ -58,7 +58,7 @@ tokio-rustls = { workspace = true, optional = true }
 rustls-pemfile = { workspace = true, optional = true }
 sha2 = { workspace = true }
 aes-gcm = "0.10.3"
-generic-array = "1.3.5"
+generic-array = { workspace = true }
 
 # 测试和基准测试 - 使用工作区统一版本
 criterion = { workspace = true, features = ["html_reports"] }
@@ -74,11 +74,11 @@ chrono = { version = "0.4", features = ["serde"] }
 # 缓存和数据结构
 lru = "0.16.2"
 
-# DNS 解析（Hickory-DNS，原 trust-dns）- 使用稳定的 0.24 系列
-# 注意: 0.25+ 有大量破坏性 API 变更，保持使用成熟稳定的 0.24 系列
-hickory-resolver = { version = "0.24.4", features = ["system-config", "dns-over-https-rustls", "dns-over-rustls"] }
-# DNS协议实现 - 与 hickory-resolver 版本对应
-hickory-proto = "0.24.4"
+# DNS 解析（Hickory-DNS，原 trust-dns）- 2026-03-28: 升级到 0.25.2
+# 注意: 0.25+ 特性名称变更
+hickory-resolver = { workspace = true, features = ["system-config", "https-ring", "tls-ring"] }
+# DNS协议实现 - 与工作区统一版本
+hickory-proto = { workspace = true }
 
 # P2P 与 QUIC（新增）- 2025年9月27日最新版本
 libp2p = { version = "0.56.0", features = ["tokio", "tcp", "dns", "tls", "gossipsub", "kad", "noise", "yamux", "ping", "identify", "macros"] }

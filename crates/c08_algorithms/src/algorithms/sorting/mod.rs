@@ -281,9 +281,9 @@ impl SortingBenchmarker {
 
     /// 生成测试数据
     fn generate_test_data(size: usize) -> Vec<i32> {
-        use rand::Rng;
+        use rand::RngExt;
         let mut rng = rand::rng();
-        (0..size).map(|_| rng.random_range(-1000..1000)).collect()
+        (0..size).map(|_| (rng.random::<i64>() % 2000 - 1000) as i32).collect()
     }
 }
 

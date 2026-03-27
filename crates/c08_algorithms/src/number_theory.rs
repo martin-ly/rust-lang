@@ -74,11 +74,11 @@ pub fn pollard_rho(n: u128) -> u128 {
     if n.is_multiple_of(2) {
         return 2;
     }
-    use rand::{Rng, rngs::ThreadRng};
+    use rand::{RngExt, rngs::ThreadRng};
     let mut rng = ThreadRng::default();
     loop {
-        let c = rng.random_range(1..n);
-        let mut x = rng.random_range(0..n);
+        let c = rng.random::<u128>() % (n - 1) + 1;
+        let mut x = rng.random::<u128>() % n;
         let mut y = x;
         let mut d: u128 = 1;
         while d == 1 {

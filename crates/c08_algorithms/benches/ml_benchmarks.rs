@@ -6,7 +6,7 @@ use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 fn generate_synthetic_data(n_samples: usize, n_features: usize) -> (Dataset, Labels) {
-    use rand::{Rng, rngs::ThreadRng};
+    use rand::{RngExt, rngs::ThreadRng};
     let mut rng = ThreadRng::default();
 
     let mut data = Vec::with_capacity(n_samples);
@@ -14,7 +14,7 @@ fn generate_synthetic_data(n_samples: usize, n_features: usize) -> (Dataset, Lab
 
     for _ in 0..n_samples {
         let sample: Vec<f64> = (0..n_features)
-            .map(|_| rng.random_range(-1.0..1.0))
+            .map(|_| rng.random::<f64>() * (1.0 - (-1.0)) + (-1.0))
             .collect();
 
         // 简单的分类规则：特征和大于0为类别1，否则为类别0
@@ -32,7 +32,7 @@ fn generate_synthetic_data(n_samples: usize, n_features: usize) -> (Dataset, Lab
 }
 
 fn generate_regression_data(n_samples: usize, n_features: usize) -> (Dataset, Vec<f64>) {
-    use rand::{Rng, rngs::ThreadRng};
+    use rand::{RngExt, rngs::ThreadRng};
     let mut rng = ThreadRng::default();
 
     let mut data = Vec::with_capacity(n_samples);
@@ -40,11 +40,11 @@ fn generate_regression_data(n_samples: usize, n_features: usize) -> (Dataset, Ve
 
     for _ in 0..n_samples {
         let sample: Vec<f64> = (0..n_features)
-            .map(|_| rng.random_range(-1.0..1.0))
+            .map(|_| rng.random::<f64>() * (1.0 - (-1.0)) + (-1.0))
             .collect();
 
         // 线性关系：y = sum(x) + noise
-        let target = sample.iter().sum::<f64>() + rng.random_range(-0.1..0.1);
+        let target = sample.iter().sum::<f64>() + rng.random::<f64>() * (0.1 - (-0.1)) + (-0.1);
 
         data.push(sample);
         targets.push(target);

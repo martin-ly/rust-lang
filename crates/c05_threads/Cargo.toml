@@ -3,7 +3,7 @@ name = "c05_threads"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.94"
+rust-version = "1.94.1"
 
 authors = ["Rust Learning Community"]
 description = "Rust concurrency and threading learning module"
