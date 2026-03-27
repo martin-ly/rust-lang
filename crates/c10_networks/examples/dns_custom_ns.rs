@@ -1,6 +1,7 @@
 use c10_networks::protocol::dns::DnsResolver;
+use hickory_proto::xfer::Protocol;
 use hickory_resolver::config::{
-    NameServerConfig, NameServerConfigGroup, Protocol, ResolverConfig, ResolverOpts,
+    NameServerConfig, NameServerConfigGroup, ResolverConfig, ResolverOpts,
 };
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 

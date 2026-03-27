@@ -1489,6 +1489,21 @@ cargo = "allow"
 # - uuid: 1.22.0 -> 1.23.0
 #
 # ==================== 代码修复统计 ====================
-# 共修改 9 个文件，修复多处 API 兼容性问题
-# 所有代码已通过 cargo check --all 验证
+# 共修改 10 个文件，修复多处 API 兼容性问题:
+#
+# 1. c08_algorithms/src/number_theory.rs - rand API 变更
+# 2. c08_algorithms/src/machine_learning/neural_network.rs - rand API 变更
+# 3. c08_algorithms/src/machine_learning/kmeans.rs - rand API 变更
+# 4. c08_algorithms/src/algorithms/sorting/mod.rs - rand API 变更
+# 5. c08_algorithms/src/advanced_algorithms.rs - rand API 变更
+# 6. c08_algorithms/benches/ml_benchmarks.rs - rand API 变更
+# 7. c06_async/examples/async_api_gateway_2025.rs - rand API 变更
+# 8. c06_async/src/bin/microservice_patterns_exp01.rs - rand API 变更
+# 9. c10_networks/src/protocol/dns/mod.rs - hickory 0.25 API 变更
+# 10. c10_networks/examples/dns_custom_ns.rs - Protocol 导入路径变更
+#
+# 验证状态:
+# ✅ cargo check --all - 通过
+# ✅ cargo build --all - 通过
+# ✅ cargo test --all - 通过
 # ============================================================
