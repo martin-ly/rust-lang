@@ -300,7 +300,7 @@ pub fn kmeans_fit_parallel(
             let cluster_points: Vec<&DataPoint> = cluster_assignments
                 .iter()
                 .enumerate()
-                .filter(|(_, &cluster)| cluster == i)
+                .filter(|&(_, cluster)| *cluster == i)
                 .map(|(idx, _)| &data[idx])
                 .collect();
 

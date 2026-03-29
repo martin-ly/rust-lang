@@ -138,15 +138,7 @@ pub fn never_returning_function() -> ! {
     }
 }
 
-/// 使用 Never 类型的错误处理
-#[cfg(feature = "unstable")]
-pub fn error_handling_with_never() -> Result<i32, !> {
-    // 这个函数永远不会返回错误
-    Ok(42)
-}
-
-/// 使用 Never 类型的错误处理（稳定版本）
-#[cfg(not(feature = "unstable"))]
+/// 使用 Never 类型的错误处理（Rust 1.94.1 stable：使用 Infallible）
 pub fn error_handling_with_never() -> Result<i32, std::convert::Infallible> {
     // 这个函数永远不会返回错误
     Ok(42)

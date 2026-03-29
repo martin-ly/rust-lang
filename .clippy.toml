@@ -13,4 +13,4 @@ cognitive-complexity-threshold = 25
 ignore-interior-mutability = ["bytes::Bytes"]
 
 # MSRV
-msrv = "1.94.0"
+msrv = "1.94.1"

@@ -15,7 +15,7 @@ pub mod petgraph_bridge {
     /// 将 HashMap<T, Vec<(T, f64)>> 装载为 petgraph 无向加权图
     pub fn to_petgraph_undirected<T: Eq + Hash + Clone>(
         g: &HashMap<T, Vec<(T, f64)>>,
-    ) -> (Graph<T, f64>, HashMap<T, NodeIndex>) {
+    ) -> (Graph<T, f64, petgraph::Undirected>, HashMap<T, NodeIndex>) {
         let mut graph = Graph::<T, f64, petgraph::Undirected>::new_undirected();
         let mut idx = HashMap::new();
         for k in g.keys() {
@@ -45,7 +45,7 @@ pub mod petgraph_bridge {
         // 映射回 HashMap<T,f64>
         let mut out = HashMap::new();
         for (node_idx, &d) in res.iter() {
-            out.insert(pg[node_idx].clone(), d);
+            out.insert(pg[*node_idx].clone(), d);
         }
         out
     }

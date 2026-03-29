@@ -138,7 +138,7 @@ enforce-iter-loop-reborrow = true
 enforced-import-renames = []
 
 # 最小Rust版本 - 与Cargo.toml保持一致
-msrv = "1.94.0"
+msrv = "1.94.1"
 
 # 公共下划线字段行为
 pub-underscore-fields-behavior = "PubliclyExported"

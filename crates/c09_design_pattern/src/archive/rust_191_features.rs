@@ -271,9 +271,9 @@ pub mod pattern_async_improvements {
     {
         // Rust 1.91 优化：异步迭代器链式操作性能提升
         stream
-            .filter(|event| async move { !event.is_empty() })
+            .filter(|event| std::future::ready(!event.is_empty()))
             .map(|event| event.trim().to_string())
-            .filter(|event| async move { !event.starts_with('#') })
+            .filter(|event| std::future::ready(!event.starts_with('#')))
             .take(100)
             .collect()
             .await
