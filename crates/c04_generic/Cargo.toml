@@ -12,14 +12,14 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/rust-lang-learning"
 
 [dependencies]
-itertools = "0.14.0"
+itertools = { workspace = true }
 rayon = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
 array-init = "2.1.0"
-futures = "0.3.31"
+futures = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }

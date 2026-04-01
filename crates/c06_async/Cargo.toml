@@ -41,7 +41,7 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 reqwest = { workspace = true, features = ["json"] }
 prometheus = { workspace = true }
-once_cell = "1.21"
+once_cell = { workspace = true }
 
 # Rust 1.90 新特性支持
 num_cpus = { workspace = true }
@@ -49,7 +49,7 @@ async-trait = { workspace = true }
 rayon = { workspace = true }
 
 # 高级异步特性支持 - 2025年10月15日最新版本
-lru = "0.16.2"
+lru = { workspace = true }
 
 # 异步生态系统分析支持
 chrono = { workspace = true }
@@ -57,7 +57,7 @@ chrono = { workspace = true }
 smol = "2.0.2"
 
 # 性能优化库
-bytes = "1.8"
+bytes = { workspace = true }
 
 # Smol 轻量生态（高级案例）- 2025年10月15日最新版本
 async-io = "2.6.0"
@@ -65,7 +65,7 @@ async-channel = "2.5.0"
 surf = "2.3.2"
 
 # 分布式与微服务（高级案例）- 2025年10月20日最新版本
-redis = { version = "1.0.0-rc.3", features = ["tokio-comp", "connection-manager"] }
+redis = { workspace = true, features = ["tokio-comp", "connection-manager"] }
 dashmap = "7.0.0-rc2"
 backoff = { version = "0.4.0", features = ["tokio"] }
 

@@ -66,13 +66,13 @@ futures = { workspace = true }
 futures-util = { workspace = true }
 
 # 异步trait支持
-async-trait = "0.1"
+async-trait = { workspace = true }
 
 # 时间处理
-chrono = { version = "0.4", features = ["serde"] }
+chrono = { workspace = true }
 
 # 缓存和数据结构
-lru = "0.16.2"
+lru = { workspace = true }
 
 # DNS 解析（Hickory-DNS，原 trust-dns）- 2026-03-28: 升级到 0.25.2
 # 注意: 0.25+ 特性名称变更
@@ -86,7 +86,7 @@ libp2p = { version = "0.56.0", features = ["tokio", "tcp", "dns", "tls", "gossip
 quinn = "0.11.9"
 rcgen = { workspace = true }
 # ACME（证书自动签发/续期）- 更新到最新版本
-instant-acme = "0.8.2"
+instant-acme = "0.8.5"
 # WebSocket - 使用工作区统一版本
 tokio-tungstenite = { workspace = true, features = ["rustls-tls-webpki-roots"] }
 tungstenite = { workspace = true }

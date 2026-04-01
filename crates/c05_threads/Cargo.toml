@@ -53,7 +53,7 @@ path = "src/bin/main.rs"
 [dev-dependencies]
 criterion = { workspace = true }
 loom = { version = "0.7.2", default-features = false }
-tokio = { version = "1.47", features = ["full"] }
+tokio = { workspace = true }
 
 [[bench]]
 name = "priority_channels_bench"
