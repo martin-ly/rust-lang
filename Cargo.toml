@@ -114,7 +114,7 @@ codegen-units = 1024
 panic = "abort"
 
 # 工作区级别的依赖版本统一 - 2026年3月26日最新稳定版本
-# 更新时间: 2026-03-26 (cargo update 锁定至 Rust 1.94 兼容版本)
+# 更新时间: 2026-04-07 (cargo update 锁定至 Rust 1.94.1 兼容版本)
 # 更新包: ipconfig, libredox, num-conv, proptest, unicode-segmentation
 # 移除包: windows-sys v0.48.0, windows-targets v0.48.5, winreg v0.50.0 等旧版Windows依赖
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
@@ -274,7 +274,7 @@ bincode = "=2.0.1"
 
 # 异步运行时 - 2025年12月11日最新稳定版本
 # tokio: 事件驱动的非阻塞I/O平台，用于编写异步I/O应用程序 - 版本 1.40+ (字母索引)
-tokio = { version = "1.49.0", features = ["full"] }
+tokio = { version = "1.51.0", features = ["full"] }  # 2026-04-07: 1.49.0 -> 1.51.0 (cargo update，锁定 11 包至 Rust 1.94.1 兼容版本)
 # tokio-util: tokio的实用工具库
 tokio-util = "0.7.18"
 # tokio-stream: tokio的流处理支持
@@ -333,7 +333,7 @@ url = "2.5.8"
 # bytes: 字节缓冲区处理库，提供高效的字节操作 - 版本 1.7+ (字母索引)
 bytes = "1.11.1"
 # indexmap: 保持插入顺序的HashMap实现 - 2025年12月11日更新
-indexmap = "2.13.0"
+indexmap = "2.13.1"
 # once_cell: 单次初始化单元格，用于全局变量初始化
 once_cell = "1.21.4"
 # num_cpus: CPU核心数检测库
@@ -374,7 +374,7 @@ sqlx = { version = "0.8.6", features = [  # 更新至最新稳定版本
     "uuid",                # UUID类型支持
 ], default-features = false }
 # redis: Redis客户端库，支持异步操作 - 版本 1.0+ (稳定版！)
-redis = "1.1.0"  # 2026-03-23: 1.0.5 -> 1.1.0 (cargo update，锁定 13 包至 Rust 1.94 兼容版本)
+redis = "1.2.0"  # 2026-04-07: 1.1.0 -> 1.2.0 (cargo update，锁定 11 包至 Rust 1.94.1 兼容版本)
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.38.0", default-features = false }
 # mysql_async: MySQL异步客户端 - 2025年10月20日更新
