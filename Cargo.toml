@@ -514,7 +514,8 @@ nix = "0.31.2"
 # 这些依赖被锁定在 Rust 1.94 兼容版本
 
 # clap 系列 - 命令行参数解析
-# 2026-03-28: 升级到 4.6.0
+# 注意: 被 tokio-console v0.1.14 锁定在 ~4.5.4，无法升级到 4.6.0
+# 2026-04-08: 保持 4.5.61，等待 tokio-console 更新
 clap = { version = "=4.5.61", default-features = false }
 clap_builder = { version = "=4.5.61", default-features = false }
 clap_complete = "=4.5.67"
@@ -529,13 +530,21 @@ hickory-resolver = "0.25.2"
 # tungstenite 已在上文声明
 
 # 加密相关传递依赖
+# 注意: crypto-mac 0.10.1 需要 subtle =2.4，与 rustls 需要的 subtle ^2.5.0 冲突
+# 2026-04-08: 保持 0.10.0 以避免 subtle 版本冲突
 crypto-mac = "=0.10.0"
+# 注意: 存在 universal-hash 0.4.0 和 0.5.1 多个版本
+# 2026-04-08: 保持 0.4.0 以维持兼容性
 universal-hash = "=0.4.0"
 # 2026-03-28: generic-array 0.14.9 有版本冲突，保持 0.14.7
 generic-array = "=0.14.7"
 
 # 其他传递依赖
+# 注意: 被 axum v0.8.8 锁定在 =0.8.4
+# 2026-04-08: 保持 0.8.4，等待 axum 更新
 matchit = "=0.8.4"
+# 注意: 存在 unicode-width 0.1.14 和 0.2.0 多个版本
+# 2026-04-08: 保持 0.2.0 以维持兼容性
 unicode-width = "=0.2.0"
 
 # 依赖版本约束 - 在工作区依赖中统一版本 end
