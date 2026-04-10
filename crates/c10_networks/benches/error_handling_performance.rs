@@ -6,7 +6,7 @@
 //!
 //! 这个模块包含了 c10_networks 库异常处理相关的性能基准测试
 use c10_networks::error::{
-    ErrorRecovery, ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
+    ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
 };
 use common::RustLangError;
 use criterion::{Criterion, criterion_group, criterion_main};

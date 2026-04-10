@@ -9,7 +9,7 @@
 #![allow(clippy::bind_instead_of_map)]
 
 use c10_networks::error::{
-    ErrorRecovery, ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
+    ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
 };
 use common::RustLangError;
 use criterion::{Criterion, criterion_group, criterion_main};
