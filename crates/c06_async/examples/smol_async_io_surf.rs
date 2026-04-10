@@ -22,7 +22,7 @@ async fn producer(tx: Sender<String>) {
 }
 
 async fn consumer(rx: Receiver<String>) -> anyhow::Result<()> {
-    let client = surf::Client::new();
+    let client = reqwest::Client::new();
     let bodies = futures::stream::unfold(rx, |rx| async move {
         match rx.recv().await.ok() {
             Some(url) => Some((url, rx)),
@@ -31,7 +31,14 @@ async fn consumer(rx: Receiver<String>) -> anyhow::Result<()> {
     })
     .map(|url| {
         let client = client.clone();
-        async move { client.get(url).recv_string().await }
+        async move {
+            client
+                .get(url)
+                .send()
+                .await?
+                .text()
+                .await
+        }
     })
     .buffer_unordered(8)
     .collect::<Vec<_>>()

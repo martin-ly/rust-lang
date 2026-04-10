@@ -268,8 +268,10 @@ Hash trait 为 Rust 提供了哈希计算支持。
 
 #![allow(clippy::type_complexity)]
 
-use std::collections::hash_map::DefaultHasher;
-use std::hash::{Hash, Hasher};
+use std::{
+    collections::hash_map::DefaultHasher,
+    hash::{Hash, Hasher},
+};
 
 // 示例结构体
 #[derive(Debug)]
@@ -433,8 +435,7 @@ pub fn demonstrate_hash() {
 
 // 集合操作演示
 fn demonstrate_collection_operations() {
-    use std::collections::HashMap;
-    use std::collections::HashSet;
+    use std::collections::{HashMap, HashSet};
 
     // HashMap 使用
     let mut map: HashMap<HashPoint, String> = HashMap::new();

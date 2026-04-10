@@ -287,7 +287,10 @@ fn find_top_k(nums: Vec<i32>, k: usize) -> Vec<i32> {
         }
     }
 
-    heap.into_sorted_vec().into_iter().map(|Reverse(x)| x).collect()
+    heap.into_sorted_vec()
+        .into_iter()
+        .map(|Reverse(x)| x)
+        .collect()
 }
 
 /// # 迭代器模式深度示例
@@ -310,20 +313,16 @@ pub fn iterator_comprehensive_examples() {
         .filter(|&&x| x > 5) // 过滤大于5的
         .map(|x| x * x)      // 平方
         .take(2)             // 只取前2个
-        .sum();              // 求和
+        .sum(); // 求和
     println!("Complex chain result: {}", result);
 
     // 4. 窗口和滑动
-    let window_sums: Vec<i32> = numbers
-        .windows(3)
-        .map(|w| w.iter().sum())
-        .collect();
+    let window_sums: Vec<i32> = numbers.windows(3).map(|w| w.iter().sum()).collect();
     println!("Window sums: {:?}", window_sums);
 
     // 5. 分组
-    let by_parity: HashMap<bool, Vec<i32>> = numbers
-        .into_iter()
-        .fold(HashMap::new(), |mut acc, x| {
+    let by_parity: HashMap<bool, Vec<i32>> =
+        numbers.into_iter().fold(HashMap::new(), |mut acc, x| {
             acc.entry(x % 2 == 0).or_default().push(x);
             acc
         });

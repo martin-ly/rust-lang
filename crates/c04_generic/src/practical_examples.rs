@@ -15,13 +15,15 @@
  * 8. 性能优化示例
  */
 
-use std::collections::{HashMap, VecDeque};
-use std::fmt::{Debug, Display};
-use std::marker::PhantomData;
-use std::ops::{Add, Div, Mul, Rem, Sub};
-use std::sync::{Arc, Mutex, RwLock};
-use std::thread;
-use std::time::{Duration, Instant};
+use std::{
+    collections::{HashMap, VecDeque},
+    fmt::{Debug, Display},
+    marker::PhantomData,
+    ops::{Add, Div, Mul, Rem, Sub},
+    sync::{Arc, Mutex, RwLock},
+    thread,
+    time::{Duration, Instant},
+};
 
 /// 数据结构实现示例
 pub mod data_structures {
@@ -614,7 +616,10 @@ pub mod concurrency {
         where
             T: Clone,
         {
-            self.value.lock().expect("ThreadSafeCounter 锁被 poisoned").clone()
+            self.value
+                .lock()
+                .expect("ThreadSafeCounter 锁被 poisoned")
+                .clone()
         }
 
         /// 设置值

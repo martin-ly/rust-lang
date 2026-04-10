@@ -88,8 +88,7 @@ impl<T: Copy + std::ops::Add<Output = T> + Default, const N: usize> Default
 
 // ==================== Rust 1.94 真实特性: LazyCell/LazyLock 泛型封装 ====================
 
-use std::cell::LazyCell;
-use std::sync::OnceLock;
+use std::{cell::LazyCell, sync::OnceLock};
 
 // 用于在 LazyCell 中实现 set 功能的辅助类型
 use std::cell::UnsafeCell;
@@ -147,7 +146,9 @@ impl<T, F> LazyContainer<T, F> {
     {
         match self {
             LazyContainer::Cell(cell) => unsafe { LazyCell::force(&*cell.get()) },
-            LazyContainer::Lock(lock) => lock.get_or_init(|| panic!("LazyContainer::Lock 需要通过其他方式初始化")),
+            LazyContainer::Lock(lock) => {
+                lock.get_or_init(|| panic!("LazyContainer::Lock 需要通过其他方式初始化"))
+            }
         }
     }
 
@@ -231,7 +232,10 @@ impl<T, F> LazyCellContainer<T, F> {
 
     /// 设置值 - 在 Rust 1.94+ 的 LazyCell 中，值是通过初始化函数设置的
     /// 此方法不再适用，保留 API 兼容性但总是返回错误
-    #[deprecated(since = "1.0.0", note = "LazyCell 在 Rust 1.94+ 需要通过初始化函数设置值，请使用 new() 时传入的初始化函数")]
+    #[deprecated(
+        since = "1.0.0",
+        note = "LazyCell 在 Rust 1.94+ 需要通过初始化函数设置值，请使用 new() 时传入的初始化函数"
+    )]
     pub fn set(&self, _value: T) -> Result<(), T> {
         // Rust 1.94+ 的 LazyCell 需要初始化函数，不支持手动设置
         Err(_value)
@@ -558,9 +562,9 @@ impl std::fmt::Display for AdapterError {
 impl std::error::Error for AdapterError {}
 
 impl TypeAdapter for StringToIntAdapter {
+    type Error = AdapterError;
     type Input = String;
     type Output = i64;
-    type Error = AdapterError;
 
     fn adapt(&self, input: Self::Input) -> Result<Self::Output, Self::Error> {
         input.parse().map_err(|e| AdapterError {
@@ -599,9 +603,9 @@ where
     U: Clone + Send,
     F: Fn(T) -> Result<U, AdapterError>,
 {
+    type Error = AdapterError;
     type Input = T;
     type Output = U;
-    type Error = AdapterError;
 
     fn adapt(&self, input: Self::Input) -> Result<Self::Output, Self::Error> {
         (self.converter)(input)
@@ -818,9 +822,9 @@ impl<T> TypeLevelValidation for T
 where
     T: Sized,
 {
+    const ALIGN: usize = std::mem::align_of::<T>();
     const IS_VALID: bool = true;
     const SIZE: usize = std::mem::size_of::<T>();
-    const ALIGN: usize = std::mem::align_of::<T>();
 }
 
 // ==================== Rust 1.94 真实特性: ControlFlow ====================
@@ -1236,12 +1240,18 @@ mod tests {
     #[test]
     fn test_control_flow_matrix_search() {
         let matrix = vec![vec![1, 2], vec![3, 4]];
-        assert!(matches!(search_in_matrix(&matrix, 3), ControlFlow::Break((1, 0))));
+        assert!(matches!(
+            search_in_matrix(&matrix, 3),
+            ControlFlow::Break((1, 0))
+        ));
     }
 
     #[test]
     fn test_control_flow_validate() {
-        assert!(matches!(validate_data("valid123"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("valid123"),
+            ControlFlow::Continue(())
+        ));
         assert!(matches!(validate_data(""), ControlFlow::Break(_)));
     }
 
@@ -1272,12 +1282,16 @@ mod tests {
         let f75_exact: f64 = 2111485077978050.0;
         let f75_calc = calc_f64.calculate(75);
         let f64_error = (f75_calc - f75_exact).abs();
-        
+
         // 随着 n 增大，误差应该增加
         // n=75 时误差应该超过 1.0
-        assert!(f64_error > 1.0, 
-            "f64 在 n=75 时应该出现明显的精度误差，计算值: {}, 精确值: {}, 误差: {}", 
-            f75_calc, f75_exact, f64_error);
+        assert!(
+            f64_error > 1.0,
+            "f64 在 n=75 时应该出现明显的精度误差，计算值: {}, 精确值: {}, 误差: {}",
+            f75_calc,
+            f75_exact,
+            f64_error
+        );
 
         // 验证文档说明的精度限制
         // f64 在 n > 70 时开始出现明显的精度误差

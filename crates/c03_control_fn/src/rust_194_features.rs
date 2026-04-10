@@ -1160,13 +1160,9 @@ pub fn demonstrate_rust_194_control_flow() {
 
 /// 获取 Rust 1.94.0 控制流特性信息
 pub fn get_rust_194_control_flow_info() -> String {
-    "Rust 1.94.0 控制流特性:\n\
-        - Peekable 新方法: next_if_map, next_if_map_mut\n\
-        - 改进的闭包捕获语义\n\
-        - 增强的 match 表达式\n\
-        - 函数指针优化\n\
-        - Edition 2024 控制流改进\n\
-        - 性能优化的控制流结构"
+    "Rust 1.94.0 控制流特性:\n- Peekable 新方法: next_if_map, next_if_map_mut\n- \
+     改进的闭包捕获语义\n- 增强的 match 表达式\n- 函数指针优化\n- Edition 2024 控制流改进\n- \
+     性能优化的控制流结构"
         .to_string()
 }
 
@@ -1521,12 +1517,18 @@ mod tests {
     #[test]
     fn test_control_flow_matrix_search() {
         let matrix = vec![vec![1, 2], vec![3, 4]];
-        assert!(matches!(search_in_matrix(&matrix, 3), ControlFlow::Break((1, 0))));
+        assert!(matches!(
+            search_in_matrix(&matrix, 3),
+            ControlFlow::Break((1, 0))
+        ));
     }
 
     #[test]
     fn test_control_flow_validate() {
-        assert!(matches!(validate_data("valid123"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("valid123"),
+            ControlFlow::Continue(())
+        ));
         assert!(matches!(validate_data(""), ControlFlow::Break(_)));
     }
 
@@ -1546,17 +1548,17 @@ mod tests {
     fn test_simple_lexer_invalid_number() {
         let mut lexer = SimpleLexer::new("abc");
         lexer.skip_whitespace();
-        
+
         // 解析标识符应该成功
         assert_eq!(lexer.parse_identifier(), Some("abc".to_string()));
-        
+
         // 创建新的 lexer 测试数字解析失败
         let mut lexer2 = SimpleLexer::new("abc123");
         lexer2.skip_whitespace();
-        
+
         // 尝试解析数字应该失败（因为第一个字符是 'a'）
         assert_eq!(lexer2.parse_number(), None);
-        
+
         // 但解析标识符应该成功
         assert_eq!(lexer2.parse_identifier(), Some("abc123".to_string()));
     }
@@ -1567,7 +1569,7 @@ mod tests {
     #[test]
     fn test_simple_lexer_empty_input() {
         let mut lexer = SimpleLexer::new("");
-        
+
         // 所有解析方法都应该返回 None
         lexer.skip_whitespace(); // 不应 panic
         assert_eq!(lexer.parse_number(), None);
@@ -1595,13 +1597,22 @@ mod tests {
         ));
 
         // 长度恰好为 8 应该通过（不检查数字）
-        assert!(matches!(validate_data("abcdefgh"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("abcdefgh"),
+            ControlFlow::Continue(())
+        ));
 
         // 长度恰好为 8 且有数字应该通过
-        assert!(matches!(validate_data("abcdefg1"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("abcdefg1"),
+            ControlFlow::Continue(())
+        ));
 
         // 长度为 8 全是数字应该通过
-        assert!(matches!(validate_data("12345678"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("12345678"),
+            ControlFlow::Continue(())
+        ));
 
         // 超长字符串只要长度 >= 8 应该通过
         assert!(matches!(
@@ -1610,7 +1621,10 @@ mod tests {
         ));
 
         // 只有空格但长度 >= 8 也应该通过
-        assert!(matches!(validate_data("        "), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("        "),
+            ControlFlow::Continue(())
+        ));
     }
 
     /// 测试 Edition2024ControlFlow 对未初始化状态的访问

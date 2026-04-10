@@ -12,6 +12,9 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/rust-lang-learning"
 
 [dependencies]
+common = { path = "../common" }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
 async-trait = { workspace = true }
 tokio = { workspace = true }
 rayon = { workspace = true }

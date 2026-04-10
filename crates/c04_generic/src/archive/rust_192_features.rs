@@ -18,8 +18,7 @@
 //! - Edition: 2024
 //! - 最后更新: 2025-12-11
 //! - 最后更新: 2025-12-11
-use std::marker::PhantomData;
-use std::num::NonZeroUsize;
+use std::{marker::PhantomData, num::NonZeroUsize};
 
 // ==================== 1. 关联项的多个边界在泛型编程中的应用 ====================
 
@@ -77,8 +76,8 @@ impl<T> GenericContainer for GenericVector<T>
 where
     T: Clone + Send + Sync + 'static,
 {
-    type Item = T;
     type Index = usize;
+    type Item = T;
 
     fn get(&self, index: Self::Index) -> Option<&Self::Item> {
         self.items.get(index)
@@ -166,8 +165,8 @@ pub trait GenericTransformer<Input> {
 pub struct StringToNumberTransformer;
 
 impl GenericTransformer<String> for StringToNumberTransformer {
-    type Output = i32;
     type Error = std::num::ParseIntError;
+    type Output = i32;
 
     fn transform(&self, input: String) -> Result<Self::Output, Self::Error> {
         input.parse::<i32>()
@@ -1104,7 +1103,12 @@ mod tests {
     #[test]
     fn test_generic_transformer() {
         let transformer = StringToNumberTransformer;
-        assert_eq!(transformer.transform(String::from("42")).expect("转换不应失败"), 42);
+        assert_eq!(
+            transformer
+                .transform(String::from("42"))
+                .expect("转换不应失败"),
+            42
+        );
         assert!(transformer.transform(String::from("invalid")).is_err());
     }
 

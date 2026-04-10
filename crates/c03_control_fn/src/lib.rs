@@ -20,6 +20,7 @@
 // 导出核心模块
 pub mod async_control_flow;
 pub mod rust_194_features; // Rust 1.94 特性
+pub mod rust_196_gen_examples; // Rust 1.96 gen 关键字
 
 // 重新导出Rust 1.94.0新特性
 pub use rust_194_features::{
@@ -63,6 +64,12 @@ pub use rust_194_features::{
     optimized_loop,
     process_match_result,
     vectorizable_loop,
+};
+
+// 重新导出Rust 1.96.0 gen关键字特性
+pub use rust_196_gen_examples::{
+    advanced_gen, async_gen, basic_gen, demonstrate_rust_196_gen_features, gen_pin,
+    get_rust_196_gen_info,
 };
 
 // 导出基础语法模块

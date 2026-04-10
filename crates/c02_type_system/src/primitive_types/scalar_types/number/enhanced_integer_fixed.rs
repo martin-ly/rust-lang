@@ -302,8 +302,10 @@ pub mod integer_types {
     /// Rust 1.89 提供了非零整数类型，这些类型在编译时保证不为零，
     /// 可以用于优化内存布局和提供更安全的API。
     pub mod non_zero_integers {
-        use std::num::{NonZeroI8, NonZeroI16, NonZeroI32, NonZeroI64, NonZeroI128, NonZeroIsize};
-        use std::num::{NonZeroU8, NonZeroU16, NonZeroU32, NonZeroU64, NonZeroU128, NonZeroUsize};
+        use std::num::{
+            NonZeroI8, NonZeroI16, NonZeroI32, NonZeroI64, NonZeroI128, NonZeroIsize, NonZeroU8,
+            NonZeroU16, NonZeroU32, NonZeroU64, NonZeroU128, NonZeroUsize,
+        };
 
         /// 非零有符号整数操作
         pub fn non_zero_signed_operations() {
@@ -312,8 +314,8 @@ pub mod integer_types {
             let non_zero_i16 = NonZeroI16::new(1000).expect("创建NonZeroI16失败");
             let non_zero_i32 = NonZeroI32::new(1_000_000).expect("创建NonZeroI32失败");
             let non_zero_i64 = NonZeroI64::new(1_000_000_000_000).expect("创建NonZeroI64失败");
-            let non_zero_i128 =
-                NonZeroI128::new(1_000_000_000_000_000_000_000_000_000_000).expect("创建NonZeroI128失败");
+            let non_zero_i128 = NonZeroI128::new(1_000_000_000_000_000_000_000_000_000_000)
+                .expect("创建NonZeroI128失败");
             let non_zero_isize = NonZeroIsize::new(1_000_000).expect("创建NonZeroIsize失败");
 
             println!("非零有符号整数:");
@@ -335,9 +337,11 @@ pub mod integer_types {
             let non_zero_u8 = NonZeroU8::new(200).expect("创建NonZeroU8失败");
             let non_zero_u16 = NonZeroU16::new(30000).expect("创建NonZeroU16失败");
             let non_zero_u32 = NonZeroU32::new(2_000_000_000).expect("创建NonZeroU32失败");
-            let non_zero_u64 = NonZeroU64::new(9_000_000_000_000_000_000).expect("创建NonZeroU64失败");
+            let non_zero_u64 =
+                NonZeroU64::new(9_000_000_000_000_000_000).expect("创建NonZeroU64失败");
             let non_zero_u128 =
-                NonZeroU128::new(340_282_366_920_938_463_463_374_607_431_768_211_455).expect("创建NonZeroU128失败");
+                NonZeroU128::new(340_282_366_920_938_463_463_374_607_431_768_211_455)
+                    .expect("创建NonZeroU128失败");
             let non_zero_usize = NonZeroUsize::new(1_000_000).expect("创建NonZeroUsize失败");
 
             println!("非零无符号整数:");

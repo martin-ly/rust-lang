@@ -11,8 +11,7 @@
 //! - 新的泛型约束
 //! - 改进的关联类型
 use anyhow::Result;
-use std::collections::HashMap;
-use std::fmt::Display;
+use std::{collections::HashMap, fmt::Display};
 
 /// 利用Rust 1.90改进的const generics
 ///
@@ -91,8 +90,8 @@ where
     T: Display + Clone,
     U: Default + Copy + std::fmt::Display,
 {
-    type Output = String;
     type Error = String;
+    type Output = String;
 
     fn process(&self, input: T) -> Result<Self::Output, Self::Error> {
         let mut result = String::new();
@@ -243,10 +242,10 @@ where
     T: Display + Clone,
     U: Default + Copy + std::fmt::Debug,
 {
-    type Input = String;
-    type Output = String;
     type Error = String;
+    type Input = String;
     type Metadata = HashMap<String, String>;
+    type Output = String;
 
     fn process(&self, input: Self::Input) -> Result<Self::Output, Self::Error> {
         let result = format!(
@@ -399,7 +398,9 @@ mod tests {
     #[test]
     fn test_improved_trait_bounds() {
         let matrix: ConstGenericMatrix<i32, 2, 2> = ConstGenericMatrix::new();
-        let result = matrix.process("test".to_string()).expect("矩阵处理不应失败");
+        let result = matrix
+            .process("test".to_string())
+            .expect("矩阵处理不应失败");
         assert!(result.contains("处理输入: test"));
     }
 
@@ -425,7 +426,9 @@ mod tests {
     #[test]
     fn test_improved_associated_types() {
         let constraints = GenericConstraints::new("test".to_string(), 42);
-        let result = constraints.process("input".to_string()).expect("约束处理不应失败");
+        let result = constraints
+            .process("input".to_string())
+            .expect("约束处理不应失败");
         assert!(result.contains("处理输入: input"));
     }
 

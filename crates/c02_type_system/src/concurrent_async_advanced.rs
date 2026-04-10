@@ -20,8 +20,9 @@ use std::sync::atomic::{AtomicBool, AtomicPtr, AtomicUsize, Ordering};
 use std::sync::{Arc, Condvar, Mutex, RwLock};
 use std::thread;
 use std::time::{Duration, Instant};
-use tokio::sync::broadcast;
-use tokio::sync::{Barrier as AsyncBarrier, Mutex as AsyncMutex, RwLock as AsyncRwLock, Semaphore};
+use tokio::sync::{
+    Barrier as AsyncBarrier, Mutex as AsyncMutex, RwLock as AsyncRwLock, Semaphore, broadcast,
+};
 use tokio::task::JoinHandle;
 use tokio::time::{interval, sleep, timeout};
 
@@ -532,7 +533,11 @@ pub mod async_streams {
             let mut futures = FuturesUnordered::new();
 
             while let Some(item) = stream.next().await {
-                let permit = semaphore.clone().acquire_owned().await.expect("获取信号量许可失败");
+                let permit = semaphore
+                    .clone()
+                    .acquire_owned()
+                    .await
+                    .expect("获取信号量许可失败");
                 let processor = self.processor.clone();
 
                 let future = async move {
@@ -772,7 +777,12 @@ pub mod work_stealing_scheduler {
         fn run(&self) {
             while !self.shutdown.load(Ordering::Acquire) {
                 // 首先尝试从本地队列获取任务
-                if let Some(task) = self.local_queue.lock().expect("本地队列锁定失败").pop_front() {
+                if let Some(task) = self
+                    .local_queue
+                    .lock()
+                    .expect("本地队列锁定失败")
+                    .pop_front()
+                {
                     task();
                     continue;
                 }
@@ -1432,7 +1442,10 @@ pub async fn demonstrate_concurrent_async_advanced() {
     });
 
     let stream = futures::stream::iter(0..10);
-    let results = stream_processor.process_stream(stream).await.expect("流处理失败");
+    let results = stream_processor
+        .process_stream(stream)
+        .await
+        .expect("流处理失败");
     println!("流处理结果: {:?}", results);
 
     // 5. 工作窃取调度器演示

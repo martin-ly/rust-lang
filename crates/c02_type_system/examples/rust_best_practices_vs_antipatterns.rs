@@ -55,9 +55,7 @@ mod collections_best_practices {
 
     /// ✅ 最佳实践：使用 collect
     pub fn hashmap_good_example() -> HashMap<String, i32> {
-        (0..100)
-            .map(|i| (format!("key{}", i), i))
-            .collect() // 更高效的批量插入
+        (0..100).map(|i| (format!("key{}", i), i)).collect() // 更高效的批量插入
     }
 
     /// ## 3. 避免不必要的克隆

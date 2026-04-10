@@ -997,21 +997,15 @@ pub fn demonstrate_rust_194_type_system_features() {
 
 /// 获取 Rust 1.94.0 类型系统特性信息
 pub fn get_rust_194_type_system_info() -> String {
-    "Rust 1.94.0 类型系统特性:\n\
-        - 数学常量: EULER_GAMMA, GOLDEN_RATIO\n\
-        - char 到 usize 转换\n\
-        - 增强的类型推断\n\
-        - 改进的泛型约束处理\n\
-        - 更精确的借用检查器诊断\n\
-        - Edition 2024 类型系统深度集成\n\
-        - 类型级编程增强"
+    "Rust 1.94.0 类型系统特性:\n- 数学常量: EULER_GAMMA, GOLDEN_RATIO\n- char 到 usize 转换\n- \
+     增强的类型推断\n- 改进的泛型约束处理\n- 更精确的借用检查器诊断\n- Edition 2024 \
+     类型系统深度集成\n- 类型级编程增强"
         .to_string()
 }
 
 #[cfg(test)]
 mod tests {
-    use super::math_consts_f64;
-    use super::*;
+    use super::{math_consts_f64, *};
 
     // ==================== 数学常量测试 ====================
 
@@ -1358,7 +1352,10 @@ mod tests {
         let gss3 = GoldenSectionSearch::new(1e-15, 5); // 很小的容差，很少迭代
         let limited_min = gss3.find_minimum(|x| (x - 5.0).powi(2), 0.0, 10.0);
         // 由于迭代次数限制，可能达不到高精度
-        assert!((limited_min - 5.0).abs() < 1.0, "即使迭代受限也应该接近最小值");
+        assert!(
+            (limited_min - 5.0).abs() < 1.0,
+            "即使迭代受限也应该接近最小值"
+        );
     }
 
     /// 测试类型验证器的实际检查逻辑

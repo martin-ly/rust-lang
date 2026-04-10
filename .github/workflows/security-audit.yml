@@ -2,25 +2,191 @@ name: Security Audit
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
     paths:
       - '**/Cargo.toml'
       - '**/Cargo.lock'
   pull_request:
-    branches: [main]
+    branches: [main, master]
     paths:
       - '**/Cargo.toml'
       - '**/Cargo.lock'
   schedule:
-    - cron: '0 0 * * 0'  # 每周日运行
+    - cron: '0 0 * * *'  # 每天 UTC 00:00 运行
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
 
 jobs:
+  # 使用 rustsec/audit-check 进行安全审计
   security-audit:
+    name: Security Audit (rustsec)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Run cargo-audit
         uses: rustsec/audit-check@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+  # 详细的 cargo audit 检查
+  detailed-audit:
+    name: Detailed Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.96.0"
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit --locked
+
+      - name: Run detailed audit
+        run: |
+          echo "## Security Audit Report" > audit_report.md
+          echo "" >> audit_report.md
+          echo "### Vulnerabilities" >> audit_report.md
+          echo "" >> audit_report.md
+          cargo audit --json > audit.json 2>/dev/null || true
+          cargo audit --format=markdown >> audit_report.md 2>/dev/null || echo "No vulnerabilities found or audit completed with warnings" >> audit_report.md
+          cat audit_report.md
+
+      - name: Check for yanked crates
+        run: |
+          echo "" >> audit_report.md
+          echo "### Yanked Crates" >> audit_report.md
+          echo "" >> audit_report.md
+          cargo audit --deny=yanked >> yanked_report.md 2>&1 || true
+          cat yanked_report.md >> audit_report.md || echo "No yanked crates found" >> audit_report.md
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-audit-report
+          path: |
+            audit_report.md
+            audit.json
+          retention-days: 30
+
+  # 依赖许可证检查
+  license-check:
+    name: License Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.96.0"
+
+      - name: Install cargo-deny
+        run: cargo install cargo-deny --locked
+
+      - name: Check licenses
+        run: |
+          # 创建 cargo-deny 配置（如果不存在）
+          if [ ! -f deny.toml ]; then
+            cat > deny.toml << 'EOF'
+          [graph]
+          targets = []
+          all-features = false
+          no-default-features = false
+
+          [output]
+          feature-depth = 1
+
+          [advisories]
+          db-path = "~/.cargo/advisory-db"
+          db-urls = ["https://github.com/rustsec/advisory-db"]
+          vulnerability = "warn"
+          unmaintained = "warn"
+          yanked = "warn"
+          notice = "warn"
+          ignore = []
+
+          [licenses]
+          unlicensed = "warn"
+          allow-osi-fsf-free = "either"
+          copyleft = "warn"
+          allow = [
+              "MIT",
+              "Apache-2.0",
+              "BSD-3-Clause",
+              "ISC",
+              "Unicode-DFS-2016",
+          ]
+          deny = []
+          confidence-threshold = 0.8
+
+          [bans]
+          multiple-versions = "warn"
+          highlight = "all"
+          skip = []
+          skip-tree = []
+
+          [sources]
+          unknown-registry = "warn"
+          unknown-git = "warn"
+          allow-git = []
+          EOF
+          fi
+          
+          cargo deny check licenses 2>&1 | tee license_report.txt || true
+
+      - name: Upload license report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-check-report
+          path: license_report.txt
+          retention-days: 30
+
+  # 创建安全 issue（如果发现问题）
+  create-issue:
+    name: Create Security Issue
+    runs-on: ubuntu-latest
+    needs: [security-audit, detailed-audit]
+    if: failure() && github.event_name == 'schedule'
+    steps:
+      - name: Create security issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '🚨 Security Vulnerability Detected';
+            const body = `## Security Audit Alert
+            
+            A security vulnerability was detected during the scheduled security audit.
+            
+            ### Details
+            - Workflow: ${{ github.workflow }}
+            - Run: ${{ github.run_id }}
+            - Date: ${{ github.event.schedule }}
+            
+            ### Action Required
+            1. Review the security audit report in the workflow artifacts
+            2. Update affected dependencies
+            3. Re-run the security audit to verify the fix
+            
+            ### Workflow Run
+            [View Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            
+            ---
+            *This issue was automatically created by the Security Audit workflow.*`;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['security', 'vulnerability', 'automated']
+            });

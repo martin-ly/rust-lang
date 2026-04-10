@@ -2,11 +2,13 @@
 //!
 //! 该模块包含项目中使用的所有复杂类型别名，
 //! 用于简化类型复杂度并提高代码可读性。
-use std::collections::{HashMap, HashSet, VecDeque};
-use std::fmt::Debug;
-use std::sync::{Arc, Mutex, RwLock};
-use std::thread::JoinHandle;
-use std::time::Instant;
+use std::{
+    collections::{HashMap, HashSet, VecDeque},
+    fmt::Debug,
+    sync::{Arc, Mutex, RwLock},
+    thread::JoinHandle,
+    time::Instant,
+};
 
 // =============================================================================
 // 基础类型别名

@@ -511,13 +511,18 @@ impl TypeValidator {
                 self.format_type(&f.return_type)
             ),
             Type::Reference(r) => {
-                let lifetime = if let Some(l) = &r.lifetime {
+                let lifetime_str = if let Some(l) = &r.lifetime {
                     format!("'{} ", l.name)
                 } else {
                     String::new()
                 };
                 let mutability = if r.mutable { "mut " } else { "" };
-                format!("&{}{}{}", lifetime, mutability, self.format_type(&r.target))
+                format!(
+                    "&{}{}{}",
+                    lifetime_str,
+                    mutability,
+                    self.format_type(&r.target)
+                )
             }
             Type::Lifetime(l) => format!("'{}", l.name),
             Type::Unknown => "?".to_string(),
@@ -1150,6 +1155,9 @@ mod tests {
         let expr = Expression::Literal(Literal::Integer(42));
         let result = inferencer.infer_expression_type(&expr);
         assert!(result.is_ok());
-        assert_eq!(result.expect("类型推断失败"), Type::Primitive(PrimitiveType::I32));
+        assert_eq!(
+            result.expect("类型推断失败"),
+            Type::Primitive(PrimitiveType::I32)
+        );
     }
 }

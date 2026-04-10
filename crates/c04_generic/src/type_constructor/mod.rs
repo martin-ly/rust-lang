@@ -512,7 +512,9 @@ pub fn find_max<T>(items: GenSlice<'_, T>) -> GenOption<&T>
 where
     T: PartialOrd,
 {
-    items.iter().max_by(|a, b| a.partial_cmp(b).expect("浮点数比较不应失败"))
+    items
+        .iter()
+        .max_by(|a, b| a.partial_cmp(b).expect("浮点数比较不应失败"))
 }
 
 pub fn sort_items<T>(items: GenMutSlice<T>)

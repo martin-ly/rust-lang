@@ -505,7 +505,9 @@ pub struct NumberIterator {
 }
 
 impl Iterator for NumberIterator {
-    type Item = i32; // 关联类型
+    type Item = i32;
+
+    // 关联类型
 
     fn next(&mut self) -> Option<Self::Item> {
         if self.current < self.max {
@@ -565,7 +567,9 @@ pub fn find_max<T>(items: &[T]) -> Option<&T>
 where
     T: PartialOrd,
 {
-    items.iter().max_by(|a, b| a.partial_cmp(b).expect("浮点数比较不应失败"))
+    items
+        .iter()
+        .max_by(|a, b| a.partial_cmp(b).expect("浮点数比较不应失败"))
 }
 
 pub fn sort_items<T>(items: &mut [T])

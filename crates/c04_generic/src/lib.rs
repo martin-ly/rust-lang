@@ -276,8 +276,10 @@ pub mod benchmarks {
     pub fn benchmark_concurrency() {
         println!("\n=== 并发性能基准测试 ===");
 
-        use std::sync::{Arc, Mutex};
-        use std::thread;
+        use std::{
+            sync::{Arc, Mutex},
+            thread,
+        };
 
         let counter: ArcMutexCounter = Arc::new(Mutex::new(0));
         let start = Instant::now();
@@ -302,7 +304,10 @@ pub mod benchmarks {
 
         let duration = start.elapsed();
         println!("1000 个线程并发计数: {:?}", duration);
-        println!("最终计数: {}", *counter.lock().expect("Counter 锁被 poisoned"));
+        println!(
+            "最终计数: {}",
+            *counter.lock().expect("Counter 锁被 poisoned")
+        );
     }
 
     /// 内存使用基准测试

@@ -150,7 +150,7 @@ pub fn detect_repeated_pattern<T: PartialEq>(data: &[T], pattern: &[T; 2]) -> Ve
 /// assert!(LazyCell::get(&cell).is_none());
 ///
 /// // 获取或初始化
-/// let value = &*cell;  // 或 LazyCell::force(&cell)
+/// let value = &*cell; // 或 LazyCell::force(&cell)
 /// assert_eq!(value, &[1, 2, 3]);
 ///
 /// // 现在 get() 返回 Some
@@ -166,9 +166,8 @@ pub type SingleThreadCache<T> = LazyCell<T>;
 /// ```
 /// use std::sync::LazyLock;
 ///
-/// static CONFIG: LazyLock<String> = LazyLock::new(|| {
-///     std::fs::read_to_string("config.toml").unwrap_or_default()
-/// });
+/// static CONFIG: LazyLock<String> =
+///     LazyLock::new(|| std::fs::read_to_string("config.toml").unwrap_or_default());
 ///
 /// // 热路径：无锁快速检查
 /// if let Some(config) = LazyLock::get(&CONFIG) {
@@ -206,12 +205,12 @@ impl<T> ConfigManager<T> {
     /// 如果已初始化，无锁返回；否则触发初始化
     pub fn get_fast(&self) -> &T {
         self.access_count.fetch_add(1, Ordering::Relaxed);
-        
+
         // 热路径：尝试无锁获取
         if let Some(config) = LazyLock::get(&self.cache) {
             return config;
         }
-        
+
         // 冷路径：触发初始化
         &*self.cache
     }
@@ -269,10 +268,8 @@ pub fn get_global_config() -> &'static str {
 
 /// 使用 Rust 1.94 标准库数学常量
 pub mod math_consts {
-    pub use std::f32::consts::EULER_GAMMA as EULER_GAMMA_F32;
-    pub use std::f32::consts::GOLDEN_RATIO as GOLDEN_RATIO_F32;
-    pub use std::f64::consts::EULER_GAMMA as EULER_GAMMA_F64;
-    pub use std::f64::consts::GOLDEN_RATIO as GOLDEN_RATIO_F64;
+    pub use std::f32::consts::{EULER_GAMMA as EULER_GAMMA_F32, GOLDEN_RATIO as GOLDEN_RATIO_F32};
+    pub use std::f64::consts::{EULER_GAMMA as EULER_GAMMA_F64, GOLDEN_RATIO as GOLDEN_RATIO_F64};
 }
 
 /// 黄金分割搜索计算器
@@ -374,10 +371,7 @@ pub fn harmonic_number(n: u64) -> f64 {
 
     // 大数值：使用欧拉-马歇罗尼常数近似
     let n_f64 = n as f64;
-    n_f64.ln()
-        + std::f64::consts::EULER_GAMMA
-        + 1.0 / (2.0 * n_f64)
-        - 1.0 / (12.0 * n_f64 * n_f64)
+    n_f64.ln() + std::f64::consts::EULER_GAMMA + 1.0 / (2.0 * n_f64) - 1.0 / (12.0 * n_f64 * n_f64)
 }
 
 /// 使用欧拉-马歇罗尼常数近似计算调和数
@@ -445,11 +439,7 @@ use std::ops::ControlFlow;
 /// use c01_ownership_borrow_scope::rust_194_features::search_in_matrix;
 /// use std::ops::ControlFlow;
 ///
-/// let matrix = vec![
-///     vec![1, 2, 3],
-///     vec![4, 5, 6],
-///     vec![7, 8, 9],
-/// ];
+/// let matrix = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
 ///
 /// match search_in_matrix(&matrix, 5) {
 ///     ControlFlow::Break((i, j)) => println!("Found at: ({}, {})", i, j),
@@ -694,20 +684,26 @@ pub fn demonstrate_rust_194_features() {
 
     // 2. LazyCell/LazyLock 新方法演示
     println!("\n2. LazyCell/LazyLock 新方法:");
-    
+
     // 使用 LazyCell
     let cell: LazyCell<Vec<i32>> = LazyCell::new(|| {
         println!("   [LazyCell] 执行初始化...");
         vec![1, 2, 3, 4, 5]
     });
-    
+
     println!("   初始化前 get(): {:?}", std::cell::LazyCell::get(&cell));
     let _ = &*cell; // 触发初始化
-    println!("   初始化后 get(): {:?}", std::cell::LazyCell::get(&cell).map(|v: &Vec<i32>| v.as_slice()));
+    println!(
+        "   初始化后 get(): {:?}",
+        std::cell::LazyCell::get(&cell).map(|v: &Vec<i32>| v.as_slice())
+    );
 
     // 使用 LazyLock 热路径优化
     println!("\n   [LazyLock] 热路径优化测试:");
-    println!("   全局配置是否已初始化: {}", GLOBAL_CONFIG.is_initialized());
+    println!(
+        "   全局配置是否已初始化: {}",
+        GLOBAL_CONFIG.is_initialized()
+    );
     let _ = get_global_config(); // 触发初始化
     println!("   访问次数: {}", GLOBAL_CONFIG.access_count());
 
@@ -737,11 +733,7 @@ pub fn demonstrate_rust_194_features() {
 
     // 4. ControlFlow 特性演示
     println!("\n4. ControlFlow 控制流类型:");
-    let matrix = vec![
-        vec![1, 2, 3],
-        vec![4, 5, 6],
-        vec![7, 8, 9],
-    ];
+    let matrix = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
     match search_in_matrix(&matrix, 5) {
         ControlFlow::Break((i, j)) => println!("   找到目标 5 在位置: ({}, {})", i, j),
         ControlFlow::Continue(()) => println!("   未找到目标"),
@@ -876,35 +868,37 @@ mod tests {
 
     #[test]
     fn test_search_in_matrix() {
-        let matrix = vec![
-            vec![1, 2, 3],
-            vec![4, 5, 6],
-            vec![7, 8, 9],
-        ];
-        
+        let matrix = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
+
         assert_eq!(search_in_matrix(&matrix, 5), ControlFlow::Break((1, 1)));
         assert_eq!(search_in_matrix(&matrix, 10), ControlFlow::Continue(()));
     }
 
     #[test]
     fn test_validate_data() {
-        assert!(matches!(validate_data("password123"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("password123"),
+            ControlFlow::Continue(())
+        ));
         assert!(matches!(validate_data(""), ControlFlow::Break(_)));
         assert!(matches!(validate_data("short"), ControlFlow::Break(_)));
-        assert!(matches!(validate_data("n0letter"), ControlFlow::Continue(()))); // 修正: n0letter 通过验证
+        assert!(matches!(
+            validate_data("n0letter"),
+            ControlFlow::Continue(())
+        )); // 修正: n0letter 通过验证
     }
 
     #[test]
     fn test_batch_process() {
         let items = vec![1, 2, 3, 4, 5];
-        let result = batch_process_with_control_flow(&items, |x| {
-            if *x == 3 {
-                Err("Found 3")
-            } else {
-                Ok(())
-            }
-        });
-        
+        let result =
+            batch_process_with_control_flow(
+                &items,
+                |x| {
+                    if *x == 3 { Err("Found 3") } else { Ok(()) }
+                },
+            );
+
         assert!(matches!(result, ControlFlow::Break("Found 3")));
     }
 
@@ -912,7 +906,7 @@ mod tests {
     fn test_batch_process_success() {
         let items = vec![1, 2, 4, 5];
         let result: ControlFlow<(), usize> = batch_process_with_control_flow(&items, |_| Ok(()));
-        
+
         assert_eq!(result, ControlFlow::Continue(4));
     }
 
@@ -921,21 +915,17 @@ mod tests {
     #[test]
     fn bench_array_windows_vs_windows() {
         let data: Vec<_> = (0..10000).map(|x| x as f64).collect();
-        
+
         // array_windows 版本
         let start = std::time::Instant::now();
-        let sum1: f64 = data.array_windows::<3>()
-            .map(|&[a, b, c]| a + b + c)
-            .sum();
+        let sum1: f64 = data.array_windows::<3>().map(|&[a, b, c]| a + b + c).sum();
         let duration1 = start.elapsed();
-        
+
         // windows 版本
         let start = std::time::Instant::now();
-        let sum2: f64 = data.windows(3)
-            .map(|w| w[0] + w[1] + w[2])
-            .sum();
+        let sum2: f64 = data.windows(3).map(|w| w[0] + w[1] + w[2]).sum();
         let duration2 = start.elapsed();
-        
+
         assert_eq!(sum1, sum2);
         println!("array_windows: {:?}", duration1);
         println!("windows: {:?}", duration2);

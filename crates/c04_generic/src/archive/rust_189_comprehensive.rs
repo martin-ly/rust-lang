@@ -35,9 +35,11 @@
 //! 4. 类型推断改进 (Type Inference Improvements)
 //! 5. 生命周期推断增强 (Lifetime Inference Enhancements)
 //! 6. 新的泛型约束语法 (New Generic Constraint Syntax)
-use std::fmt::{Debug, Display};
-use std::marker::PhantomData;
-use std::ops::Add;
+use std::{
+    fmt::{Debug, Display},
+    marker::PhantomData,
+    ops::Add,
+};
 
 // 类型别名导入（根据需要启用）
 // use crate::type_aliases::{

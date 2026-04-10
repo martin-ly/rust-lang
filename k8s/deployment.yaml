@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-lang-deployment
+  labels:
+    app: rust-lang
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rust-lang
+  template:
+    metadata:
+      labels:
+        app: rust-lang
+    spec:
+      containers:
+      - name: rust-lang
+        image: rust-lang:latest
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: rust-lang-config
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10

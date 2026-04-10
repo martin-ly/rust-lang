@@ -71,6 +71,7 @@ fn test_associated_type() {
 
     impl<T> Container for MyContainer<T> {
         type Item = T;
+
         fn get(&self) -> Option<&Self::Item> {
             self.value.as_ref()
         }

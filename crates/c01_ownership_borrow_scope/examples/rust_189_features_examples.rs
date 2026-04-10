@@ -509,7 +509,8 @@ pub fn run_all_rust_189_examples() {
 
 /// 获取 Rust 1.89 特性信息 / Get Rust 1.89 Feature Information
 pub fn get_rust_189_info() -> &'static str {
-    "Rust 1.89 New Features - Improved borrow checker, enhanced lifetime inference, optimized memory management, and enhanced concurrency safety"
+    "Rust 1.89 New Features - Improved borrow checker, enhanced lifetime inference, optimized \
+     memory management, and enhanced concurrency safety"
 }
 
 /// 主函数 / Main Function

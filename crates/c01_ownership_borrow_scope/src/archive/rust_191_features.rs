@@ -669,22 +669,26 @@ pub fn run_all_rust_191_features_examples() {
     println!("=== Rust 1.91 特性示例 / Rust 1.91 Features Examples ===");
 
     println!(
-        "\n1. 改进的类型检查器（借用检查器优化）/ Improved Type Checker (Borrow Checker Optimizations)"
+        "\n1. 改进的类型检查器（借用检查器优化）/ Improved Type Checker (Borrow Checker \
+         Optimizations)"
     );
     improved_borrow_checker_example();
 
     println!(
-        "\n2. 增强的 const 上下文（对生命周期的影响）/ Enhanced Const Context (Impact on Lifetimes)"
+        "\n2. 增强的 const 上下文（对生命周期的影响）/ Enhanced Const Context (Impact on \
+         Lifetimes)"
     );
     enhanced_const_context_example();
 
     println!(
-        "\n3. 优化的内存分配器（所有权和内存管理改进）/ Optimized Memory Allocator (Ownership and Memory Management Improvements)"
+        "\n3. 优化的内存分配器（所有权和内存管理改进）/ Optimized Memory Allocator (Ownership and \
+         Memory Management Improvements)"
     );
     optimized_memory_allocator_example();
 
     println!(
-        "\n4. 改进的生命周期推断（编译时优化）/ Improved Lifetime Inference (Compile-time Optimizations)"
+        "\n4. 改进的生命周期推断（编译时优化）/ Improved Lifetime Inference (Compile-time \
+         Optimizations)"
     );
     improved_lifetime_inference_example();
 
@@ -814,5 +818,6 @@ fn improved_lifetime_inference_example() {
 
 /// 获取 Rust 1.91 特性模块信息 / Get Rust 1.91 Features Module Information
 pub fn get_rust_191_features_info() -> &'static str {
-    "Rust 1.91 Features Module - Comprehensive implementation of ownership, borrowing, and lifetime improvements"
+    "Rust 1.91 Features Module - Comprehensive implementation of ownership, borrowing, and \
+     lifetime improvements"
 }

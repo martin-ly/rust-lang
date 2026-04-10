@@ -60,11 +60,8 @@ pub fn eval_rpn(tokens: Vec<String>) -> i32 {
                 let a = stack.pop().unwrap();
                 stack.push(a / b);
             }
-            _ => {
-                if let Ok(num) = token.parse::<i32>() {
-                    stack.push(num);
-                }
-            }
+            _ if let Ok(num) = token.parse::<i32>() => stack.push(num),
+            _ => {}
         }
     }
 

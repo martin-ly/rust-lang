@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rust-lang-service
+  labels:
+    app: rust-lang
+spec:
+  selector:
+    app: rust-lang
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rust-lang-loadbalancer
+  labels:
+    app: rust-lang
+spec:
+  selector:
+    app: rust-lang
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer

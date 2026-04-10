@@ -44,6 +44,7 @@ serde_json = { workspace = true }
 bincode = { workspace = true }
 
 # 错误处理 - 使用工作区统一版本
+common = { path = "../common" }
 thiserror = { workspace = true }
 anyhow = { workspace = true }
 

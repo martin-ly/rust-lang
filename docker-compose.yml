@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  rust-lang:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rust-lang-app
+    volumes:
+      - .:/app
+      - cargo-cache:/usr/local/cargo/registry
+    environment:
+      - RUST_LOG=info
+    networks:
+      - rust-lang-network
+
+  # Optional: Development service with hot reload
+  rust-lang-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: rust-lang-dev
+    volumes:
+      - .:/app
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/app/target
+    environment:
+      - RUST_LOG=debug
+    command: cargo watch -x run
+    profiles:
+      - dev
+    networks:
+      - rust-lang-network
+
+volumes:
+  cargo-cache:
+  target-cache:
+
+networks:
+  rust-lang-network:
+    driver: bridge

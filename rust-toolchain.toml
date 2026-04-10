@@ -1,7 +1,22 @@
 [toolchain]
-channel = "stable"  # 当前 stable 版本为 1.94.1
-components = ["rustfmt", "clippy", "rust-analyzer"]
-targets = ["x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc"]
+channel = "nightly"  # 使用 nightly 获取 Rust 1.96 功能 (1.96 预计 2026-05-28 发布稳定版)
+components = [
+    "rustfmt",           # 代码格式化
+    "clippy",            # 静态分析
+    "rust-analyzer",     # IDE支持
+    "rust-src",          # 标准库源码(用于调试)
+    "rust-docs",         # 文档
+    "llvm-tools",        # LLVM工具(用于代码覆盖率)
+]
+targets = [
+    "x86_64-pc-windows-msvc",
+    "x86_64-unknown-linux-gnu",
+    "aarch64-unknown-linux-gnu",
+    "x86_64-apple-darwin",
+    "aarch64-apple-darwin",
+    "wasm32-unknown-unknown",
+    "wasm32-wasip1",
+]
 profile = "default"
 
 # 注意: Miri在Windows上不可用，仅在Linux CI中使用

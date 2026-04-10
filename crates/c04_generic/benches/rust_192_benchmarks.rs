@@ -13,8 +13,7 @@
 //! cargo bench --bench rust_192_benchmarks
 //! ```
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
-use std::hint::black_box;
-use std::num::NonZeroUsize;
+use std::{hint::black_box, num::NonZeroUsize};
 
 use c04_generic::archive::rust_192_features::{
     GenericCollectionValidator, GenericContainer, GenericLifetimeProcessor, GenericMemoryAllocator,

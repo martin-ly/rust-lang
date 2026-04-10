@@ -23,6 +23,7 @@ fastrace = { version = ">=0.7.0", features = ["enable"] }
 # 序列化支持
 serde = { workspace = true }
 # 错误处理
+common = { path = "../common" }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
 # 日志支持

@@ -142,6 +142,7 @@ fn test_complex_generic_scenarios() {
 
     impl Container for IntContainer {
         type Item = i32;
+
         fn get(&self) -> Self::Item {
             self.0
         }

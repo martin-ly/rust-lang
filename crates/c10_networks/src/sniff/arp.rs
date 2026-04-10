@@ -69,11 +69,9 @@ impl ArpSniffer {
         let mut count = 0usize;
         while limit.map(|n| count < n).unwrap_or(true) {
             match rx.next() {
-                Ok(frame) => {
-                    if let Some(rec) = parse_arp_frame(frame) {
-                        out.push(rec);
-                        count += 1;
-                    }
+                Ok(frame) if let Some(rec) = parse_arp_frame(frame) => {
+                    out.push(rec);
+                    count += 1;
                 }
                 Err(_e) => {
                     // ignore transient errors

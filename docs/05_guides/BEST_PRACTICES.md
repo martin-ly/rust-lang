@@ -87,6 +87,27 @@
       - [ControlFlow 优化](#controlflow-优化)
       - [LazyLock 优化](#lazylock-优化)
     - [快速参考卡片](#快速参考卡片)
+  - [🆕 Rust 1.96 最佳实践](#-rust-196-最佳实践)
+    - [1. isqrt - 整数平方根运算](#1-isqrt---整数平方根运算)
+      - [什么时候使用 isqrt？](#什么时候使用-isqrt)
+      - [最佳实践示例](#最佳实践示例-1)
+      - [性能检查清单](#性能检查清单-1)
+    - [2. HashMap::get\_disjoint\_mut - 安全并行访问](#2-hashmapget_disjoint_mut---安全并行访问)
+      - [什么时候使用 get\_disjoint\_mut？](#什么时候使用-get_disjoint_mut)
+      - [最佳实践：并发状态管理](#最佳实践并发状态管理)
+      - [常见模式](#常见模式)
+    - [3. async Fn Trait - 异步抽象改进](#3-async-fn-trait---异步抽象改进)
+      - [最佳实践：清晰的异步 Trait 定义](#最佳实践清晰的异步-trait-定义)
+      - [与 ControlFlow 结合](#与-controlflow-结合)
+    - [4. Vec::pop\_if - 条件弹出](#4-vecpop_if---条件弹出)
+      - [最佳实践：栈和队列操作](#最佳实践栈和队列操作)
+    - [5. 综合性能优化检查清单](#5-综合性能优化检查清单-1)
+      - [isqrt 优化](#isqrt-优化)
+      - [get\_disjoint\_mut 优化](#get_disjoint_mut-优化)
+      - [async Fn 优化](#async-fn-优化)
+    - [6. 版本兼容性与迁移指南](#6-版本兼容性与迁移指南)
+      - [从 1.94 迁移到 1.96](#从-194-迁移到-196)
+    - [7. 快速参考卡片](#7-快速参考卡片)
 
 ---
 
@@ -1456,6 +1477,451 @@ let gamma = f64::consts::EULER_GAMMA;
 ```
 
 **最后更新**: 2026-03-14 (深度整合 Rust 1.94 最佳实践)
+
+---
+
+**维护者**: Rust 学习项目团队
+**状态**: ✅ 持续更新
+
+---
+
+## 🆕 Rust 1.96 最佳实践
+
+> **适用版本**: Rust 1.96.0+
+> **最后更新**: 2026-04-10
+
+---
+
+### 1. isqrt - 整数平方根运算
+
+#### 什么时候使用 isqrt？
+
+| 场景 | 推荐 | 原因 |
+|------|------|------|
+| 质数检测 | ✅ `isqrt()` | 精确计算上限，避免浮点误差 |
+| 几何计算 | ✅ `isqrt()` | 精确整数距离计算 |
+| 需要浮点结果 | `sqrt()` | 使用标准浮点平方根 |
+| 大数据范围 | ✅ `isqrt()` | 避免 `f64` 精度丢失 |
+
+#### 最佳实践示例
+
+```rust
+// ✅ 推荐：使用 isqrt 进行质数检测
+fn is_prime(n: u64) -> bool {
+    if n < 2 { return false; }
+    if n == 2 { return true; }
+    if n % 2 == 0 { return false; }
+
+    // 只需检查到平方根，使用 isqrt 精确计算
+    for i in (3..=n.isqrt()).step_by(2) {
+        if n % i == 0 { return false; }
+    }
+    true
+}
+
+// ✅ 推荐：几何计算中的整数坐标
+fn integer_distance_squared(p1: (i64, i64), p2: (i64, i64)) -> i64 {
+    let dx = (p2.0 - p1.0).abs();
+    let dy = (p2.1 - p1.1).abs();
+    (dx * dx + dy * dy).isqrt()  // 精确的整数距离
+}
+
+// ✅ 推荐：结合 1.94 array_windows 的模式检测
+fn has_square_pattern(points: &[(i64, i64)]) -> bool {
+    points.array_windows::<4>().any(|&[a, b, c, d]| {
+        let ab = integer_distance_squared(a, b);
+        let bc = integer_distance_squared(b, c);
+        let cd = integer_distance_squared(c, d);
+        let da = integer_distance_squared(d, a);
+        let ac = integer_distance_squared(a, c);
+
+        // 正方形检测：四边相等，对角线相等
+        ab == bc && bc == cd && cd == da && ac == 2 * ab
+    })
+}
+
+// ❌ 避免：使用浮点转换
+fn bad_distance(p1: (i64, i64), p2: (i64, i64)) -> i64 {
+    let dx = (p2.0 - p1.0) as f64;
+    let dy = (p2.1 - p1.1) as f64;
+    (dx * dx + dy * dy).sqrt() as i64  // 可能有精度丢失！
+}
+```
+
+#### 性能检查清单
+
+- [ ] 是否避免了 `f64` 转换开销？
+- [ ] 是否在循环边界检查中使用？
+- [ ] 是否处理了 `u64::MAX` 等边界情况？
+- [ ] 是否可以结合 `array_windows` 进行批处理？
+
+---
+
+### 2. HashMap::get_disjoint_mut - 安全并行访问
+
+#### 什么时候使用 get_disjoint_mut？
+
+```
+需要同时获取多个可变引用？
+├─ 是 → 键是否编译期已知且不重复？
+│   ├─ 是 → 使用 get_disjoint_mut()
+│   └─ 否 → 考虑拆分操作或使用内部可变性
+└─ 否 → 使用普通 get_mut()
+```
+
+#### 最佳实践：并发状态管理
+
+```rust
+use std::collections::HashMap;
+
+// ✅ 推荐：使用 get_disjoint_mut 进行并行状态更新
+pub struct StateManager {
+    states: HashMap<String, i32>,
+}
+
+impl StateManager {
+    pub fn update_counters(&mut self, keys: &[&str]) -> Result<(), String> {
+        // 安全地获取多个互斥可变引用
+        match self.states.get_disjoint_mut(keys) {
+            Some(values) => {
+                for v in values.iter_mut().flatten() {
+                    **v += 1;
+                }
+                Ok(())
+            }
+            None => Err("One or more keys not found".to_string()),
+        }
+    }
+
+    // ✅ 推荐：批量交换值
+    pub fn swap_values(&mut self, key1: &str, key2: &str) -> Result<(), String> {
+        let [Some(v1), Some(v2)] = self.states.get_disjoint_mut([key1, key2]) else {
+            return Err("Keys not found".to_string());
+        };
+        std::mem::swap(v1, v2);
+        Ok(())
+    }
+}
+
+// ✅ 推荐：与 LazyLock 结合的全局配置更新
+use std::sync::LazyLock;
+use std::sync::Mutex;
+
+static CONFIG_STORE: LazyLock<Mutex<HashMap<String, String>>> =
+    LazyLock::new(|| Mutex::new(HashMap::new()));
+
+pub fn update_multiple_configs(updates: &[(&str, &str)]) -> Result<(), String> {
+    let mut store = CONFIG_STORE.lock().unwrap();
+
+    // 准备键列表
+    let keys: Vec<_> = updates.iter().map(|(k, _)| *k).collect();
+
+    // 安全地批量更新
+    match store.get_disjoint_mut(&keys) {
+        Some(values) => {
+            for (i, opt_val) in values.iter_mut().enumerate() {
+                if let Some(val) = opt_val {
+                    **val = updates[i].1.to_string();
+                }
+            }
+            Ok(())
+        }
+        None => Err("Configuration keys missing".to_string()),
+    }
+}
+```
+
+#### 常见模式
+
+```rust
+// 模式 1: 两键交换
+let [Some(a), Some(b)] = map.get_disjoint_mut(["key1", "key2"]) else {
+    return;
+};
+std::mem::swap(a, b);
+
+// 模式 2: 批量更新
+let keys = ["a", "b", "c"];
+if let Some(values) = map.get_disjoint_mut(&keys) {
+    for (opt_val, new_val) in values.iter_mut().zip([1, 2, 3]) {
+        if let Some(v) = opt_val {
+            **v = new_val;
+        }
+    }
+}
+
+// 模式 3: 与 entry API 结合
+fn upsert_and_update(map: &mut HashMap<String, i32>, insert_key: &str, update_key: &str) {
+    map.entry(insert_key.to_string()).or_insert(0);
+    let [Some(inserted), Some(updated)] = map.get_disjoint_mut([insert_key, update_key]) else {
+        return;
+    };
+    *updated += *inserted;
+}
+```
+
+---
+
+### 3. async Fn Trait - 异步抽象改进
+
+#### 最佳实践：清晰的异步 Trait 定义
+
+```rust
+// ✅ Rust 1.96: 更自然的异步 trait 定义
+pub trait DataProcessor {
+    async fn process(&self, data: Vec<u8>) -> Result<ProcessedData, Error>;
+    async fn validate(&self, data: &ProcessedData) -> bool;
+}
+
+// 对比旧方式 (需要 async_trait 宏)
+// #[async_trait]
+// pub trait OldProcessor { ... }
+
+// ✅ 推荐：实现异步 trait
+pub struct JsonProcessor;
+
+impl DataProcessor for JsonProcessor {
+    async fn process(&self, data: Vec<u8>) -> Result<ProcessedData, Error> {
+        // 异步解析 JSON
+        tokio::task::spawn_blocking(move || {
+            serde_json::from_slice(&data)
+                .map_err(|e| Error::Parse(e.to_string()))
+        }).await.map_err(|_| Error::TaskFailed)?
+    }
+
+    async fn validate(&self, data: &ProcessedData) -> bool {
+        data.checksum_valid().await
+    }
+}
+
+// ✅ 推荐：使用 async Fn 作为参数
+pub async fn process_with_retry<F>(
+    data: Vec<u8>,
+    processor: F,
+    max_retries: u32,
+) -> Result<ProcessedData, Error>
+where
+    F: async Fn(Vec<u8>) -> Result<ProcessedData, Error>,
+{
+    let mut attempts = 0;
+    loop {
+        match processor(data.clone()).await {
+            Ok(result) => return Ok(result),
+            Err(e) if attempts < max_retries => {
+                attempts += 1;
+                tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+            }
+            Err(e) => return Err(e),
+        }
+    }
+}
+```
+
+#### 与 ControlFlow 结合
+
+```rust
+use std::ops::ControlFlow;
+
+// ✅ 推荐：异步验证管道
+pub async fn validate_pipeline<F>(
+    inputs: Vec<Input>,
+    validator: F,
+) -> ControlFlow<ValidationError, Vec<ValidatedInput>>
+where
+    F: async Fn(&Input) -> ControlFlow<ValidationError, ValidatedInput>,
+{
+    let mut results = Vec::new();
+    for input in inputs {
+        match validator(&input).await {
+            ControlFlow::Break(e) => return ControlFlow::Break(e),
+            ControlFlow::Continue(v) => results.push(v),
+        }
+    }
+    ControlFlow::Continue(results)
+}
+```
+
+---
+
+### 4. Vec::pop_if - 条件弹出
+
+#### 最佳实践：栈和队列操作
+
+```rust
+// ✅ 推荐：使用 pop_if 进行条件弹出
+pub struct TaskQueue {
+    tasks: Vec<Task>,
+}
+
+impl TaskQueue {
+    // 弹出优先级最高的任务
+    pub fn pop_priority(&mut self, min_priority: Priority) -> Option<Task> {
+        self.tasks.pop_if(|t| t.priority >= min_priority)
+    }
+
+    // 弹出特定类型的任务
+    pub fn pop_by_type(&mut self, task_type: TaskType) -> Option<Task> {
+        self.tasks.pop_if(|t| t.task_type == task_type)
+    }
+
+    // 结合 retain 进行批量过滤
+    pub fn drain_completed(&mut self) -> Vec<Task> {
+        let mut completed = Vec::new();
+        while let Some(task) = self.tasks.pop_if(|t| t.is_completed()) {
+            completed.push(task);
+        }
+        completed
+    }
+}
+
+// ✅ 推荐：LRU 缓存实现
+pub struct LRUCache<K, V> {
+    items: Vec<(K, V)>,
+    capacity: usize,
+}
+
+impl<K: Eq, V> LRUCache<K, V> {
+    pub fn get(&mut self, key: &K) -> Option<&V> {
+        if let Some(pos) = self.items.iter().position(|(k, _)| k == key) {
+            let item = self.items.remove(pos);
+            self.items.push(item);
+            self.items.last().map(|(_, v)| v)
+        } else {
+            None
+        }
+    }
+
+    pub fn insert(&mut self, key: K, value: V) {
+        // 移除已存在的键
+        if let Some(pos) = self.items.iter().position(|(k, _)| k == key) {
+            self.items.remove(pos);
+        }
+
+        // 如果容量不足，弹出最旧的（队首）
+        if self.items.len() >= self.capacity {
+            self.items.pop_if(|_| true);  // 弹出队首
+        }
+
+        self.items.push((key, value));
+    }
+}
+```
+
+---
+
+### 5. 综合性能优化检查清单
+
+#### isqrt 优化
+
+- [ ] 是否替代了 `(n as f64).sqrt() as u64` 模式？
+- [ ] 是否在循环边界中使用以减少迭代次数？
+- [ ] 是否处理了 0 和 1 的特殊情况？
+
+#### get_disjoint_mut 优化
+
+- [ ] 是否避免了多次单独借用？
+- [ ] 是否检查了键的存在性？
+- [ ] 是否在热路径上使用（避免锁竞争）？
+
+#### async Fn 优化
+
+- [ ] 是否移除了不必要的 `#[async_trait]`？
+- [ ] 是否正确地传播了 `ControlFlow`？
+- [ ] 是否避免了在异步闭包中捕获大量数据？
+
+---
+
+### 6. 版本兼容性与迁移指南
+
+#### 从 1.94 迁移到 1.96
+
+```rust
+// 1.94 代码：浮点平方根
+fn old_sqrt(n: u64) -> u64 {
+    (n as f64).sqrt() as u64
+}
+
+// 1.96 迁移：使用 isqrt
+fn new_sqrt(n: u64) -> u64 {
+    n.isqrt()
+}
+
+// 1.94 代码：多次单独可变借用
+fn old_batch_update(map: &mut HashMap<String, i32>) {
+    if let Some(a) = map.get_mut("a") {
+        *a += 1;
+    }
+    if let Some(b) = map.get_mut("b") {
+        *b += 2;
+    }
+}
+
+// 1.96 迁移：使用 get_disjoint_mut
+fn new_batch_update(map: &mut HashMap<String, i32>) {
+    if let [Some(a), Some(b)] = map.get_disjoint_mut(["a", "b"]) {
+        *a += 1;
+        *b += 2;
+    }
+}
+
+// 1.94 代码：async_trait 宏
+#[async_trait]
+trait OldProcessor {
+    async fn process(&self, data: Vec<u8>) -> Result<(), Error>;
+}
+
+// 1.96 迁移：原生 async trait
+trait NewProcessor {
+    async fn process(&self, data: Vec<u8>) -> Result<(), Error>;
+}
+```
+
+---
+
+### 7. 快速参考卡片
+
+```rust
+// isqrt - 整数平方根
+let sqrt = n.isqrt();  // 精确计算，无浮点误差
+
+// get_disjoint_mut - 安全并行可变访问
+let [Some(a), Some(b)] = map.get_disjoint_mut(["key1", "key2"]) else {
+    return;
+};
+
+// async Fn trait - 自然异步抽象
+trait Processor {
+    async fn process(&self, data: Vec<u8>) -> Result<(), Error>;
+}
+
+// pop_if - 条件弹出
+let item = vec.pop_if(|x| x.is_ready());
+
+// 综合：1.94 + 1.96 组合使用
+use std::ops::ControlFlow;
+use std::sync::LazyLock;
+
+static CONFIG: LazyLock<HashMap<String, i32>> = LazyLock::new(|| {
+    let mut map = HashMap::new();
+    map.insert("max_size".to_string(), 100.isqrt());
+    map
+});
+
+fn process_with_control_flow(data: &[i64]) -> ControlFlow<Error, Vec<i64>> {
+    data.array_windows::<2>()
+        .try_fold(ControlFlow::Continue(vec![]), |acc, &[a, b]| {
+            if b > a {
+                ControlFlow::Continue(acc)
+            } else {
+                ControlFlow::Break(Error::InvalidOrder)
+            }
+        })
+}
+```
+
+---
+
+**Rust 1.96 最佳实践** | **最后更新**: 2026-04-10 | **状态**: ✅ 已完成
 
 ---
 

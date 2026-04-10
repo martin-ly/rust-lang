@@ -21,9 +21,7 @@
 // 禁用文档测试，因为这些是示例代码而非可运行测试
 #![cfg(not(doctest))]
 
-use std::fmt::Debug;
-use std::marker::PhantomData;
-use std::ops::Add;
+use std::{fmt::Debug, marker::PhantomData, ops::Add};
 
 /// 基础泛型函数示例
 ///

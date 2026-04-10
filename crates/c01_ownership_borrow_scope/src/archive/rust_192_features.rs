@@ -479,7 +479,8 @@ pub fn run_all_rust_192_features_examples() {
 
     // 5. track_caller 和 no_mangle 组合示例
     println!(
-        "5. #[track_caller] 和 #[no_mangle] 的组合使用 / Combined Use of #[track_caller] and #[no_mangle]:"
+        "5. #[track_caller] 和 #[no_mangle] 的组合使用 / Combined Use of #[track_caller] and \
+         #[no_mangle]:"
     );
     let result = rust_192_tracked_function(21);
     println!("   Result: {}\n", result);
@@ -538,5 +539,6 @@ pub fn run_all_rust_192_features_examples() {
 
 /// 获取 Rust 1.92.0 特性信息 / Get Rust 1.92.0 Features Info
 pub fn get_rust_192_features_info() -> &'static str {
-    "Rust 1.92.0 Features Module - 包含所有权、借用、生命周期相关的新特性和改进 / Contains new features and improvements related to ownership, borrowing, and lifetimes"
+    "Rust 1.92.0 Features Module - 包含所有权、借用、生命周期相关的新特性和改进 / Contains new \
+     features and improvements related to ownership, borrowing, and lifetimes"
 }

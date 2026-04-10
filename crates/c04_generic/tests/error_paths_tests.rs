@@ -59,8 +59,10 @@ fn test_resource_exhaustion() {
 /// 测试并发安全
 #[test]
 fn test_concurrent_safety() {
-    use std::sync::{Arc, Mutex};
-    use std::thread;
+    use std::{
+        sync::{Arc, Mutex},
+        thread,
+    };
 
     let shared = Arc::new(Mutex::new(Vec::<i32>::new()));
     let mut handles = vec![];

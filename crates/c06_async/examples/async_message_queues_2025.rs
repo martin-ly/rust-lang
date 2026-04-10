@@ -900,15 +900,9 @@ impl AsyncMessageRouter {
                         return false;
                     }
                 }
-                FilterCondition::AttributeContains(key, value) => {
-                    if let Some(attr_value) = message.attributes.get(key) {
-                        if !attr_value.contains(value) {
-                            return false;
-                        }
-                    } else {
-                        return false;
-                    }
-                }
+                FilterCondition::AttributeContains(key, value) if let Some(attr_value) = message.attributes.get(key)
+                    => if !attr_value.contains(value) { return false; },
+                FilterCondition::AttributeContains(_, _) => return false,
                 FilterCondition::BodyContains(value) => {
                     if !message.body.contains(value) {
                         return false;

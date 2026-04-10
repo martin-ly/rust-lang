@@ -100,12 +100,11 @@ impl FrameBoundaryDetector {
         for (idx, boundary_type) in boundaries {
             match boundary_type {
                 BoundaryType::Start => start_idx = Some(idx),
-                BoundaryType::End => {
-                    if let Some(start) = start_idx {
-                        frames.push(&data[start + 4..idx]);
-                        start_idx = None;
-                    }
+                BoundaryType::End if let Some(start) = start_idx => {
+                    frames.push(&data[start + 4..idx]);
+                    start_idx = None;
                 }
+                BoundaryType::End => {}
             }
         }
 

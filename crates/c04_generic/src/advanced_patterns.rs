@@ -24,10 +24,12 @@
     clippy::redundant_closure
 )]
 
-use std::collections::HashMap;
-use std::fmt::Debug;
-use std::marker::PhantomData;
-use std::sync::{Arc, RwLock};
+use std::{
+    collections::HashMap,
+    fmt::Debug,
+    marker::PhantomData,
+    sync::{Arc, RwLock},
+};
 
 /// 工厂模式 - 使用泛型创建不同类型的对象
 pub mod factory_pattern {
@@ -903,14 +905,18 @@ pub mod singleton_pattern {
             let manager = SingletonManager::new();
 
             // 第一次获取实例
-            let instance1 = manager.get_instance(|| ConfigManager::new()).expect("获取实例不应失败");
+            let instance1 = manager
+                .get_instance(|| ConfigManager::new())
+                .expect("获取实例不应失败");
             assert_eq!(
                 instance1.get("app_name"),
                 Some(&"Rust 泛型示例".to_string())
             );
 
             // 第二次获取实例（应该是同一个）
-            let instance2 = manager.get_instance(|| ConfigManager::new()).expect("获取实例不应失败");
+            let instance2 = manager
+                .get_instance(|| ConfigManager::new())
+                .expect("获取实例不应失败");
             assert_eq!(instance1.get("app_name"), instance2.get("app_name"));
 
             // 验证是同一个实例
@@ -1092,12 +1098,16 @@ pub mod command_pattern {
 
             // 执行设置值命令
             let set_cmd = SetValueCommand::new(20);
-            invoker.execute_command(set_cmd, &mut value).expect("执行命令不应失败");
+            invoker
+                .execute_command(set_cmd, &mut value)
+                .expect("执行命令不应失败");
             assert_eq!(value, 20);
 
             // 执行数学运算命令
             let add_cmd = MathOperationCommand::new(|x| x + 5, |x| x - 5, "加5".to_string());
-            invoker.execute_command(add_cmd, &mut value).expect("执行命令不应失败");
+            invoker
+                .execute_command(add_cmd, &mut value)
+                .expect("执行命令不应失败");
             assert_eq!(value, 25);
 
             // 撤销操作
@@ -1174,12 +1184,16 @@ pub fn demonstrate_advanced_patterns() {
     let mut value = 10;
 
     let set_cmd = command_pattern::SetValueCommand::new(20);
-    invoker.execute_command(set_cmd, &mut value).expect("执行命令不应失败");
+    invoker
+        .execute_command(set_cmd, &mut value)
+        .expect("执行命令不应失败");
     println!("执行设置命令后: {}", value);
 
     let add_cmd =
         command_pattern::MathOperationCommand::new(|x| x + 5, |x| x - 5, "加5".to_string());
-    invoker.execute_command(add_cmd, &mut value).expect("执行命令不应失败");
+    invoker
+        .execute_command(add_cmd, &mut value)
+        .expect("执行命令不应失败");
     println!("执行加法命令后: {}", value);
 
     invoker.undo(&mut value).unwrap();

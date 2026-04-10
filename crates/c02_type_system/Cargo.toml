@@ -92,6 +92,9 @@ name = "ts"
 path = "src/bin/main.rs"
 
 [dependencies]
+common = { path = "../common" }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
 c01_ownership_borrow_scope = { path = "../c01_ownership_borrow_scope" }
 serde = { workspace = true }
 serde_json = { workspace = true }

@@ -6,16 +6,14 @@
 //! including detailed comments, standardized language usage, and comprehensive explanatory examples.
 // use std::collections::HashMap; // 未使用，已注释 / unused, commented out
 use std::cell::RefCell;
-use std::fmt;
 use std::rc::Rc;
 use std::sync::{Arc, Mutex};
-use std::thread;
+use std::{fmt, thread};
 
 /// # 1. 所有权基础语法 / Ownership Basic Syntax
 ///
 /// 所有权是 Rust 的核心特性，确保内存安全而不需要垃圾回收器。
 /// Ownership is Rust's core feature that ensures memory safety without a garbage collector.
-///
 pub mod ownership_basics {
     // use super::*; // 未使用，已注释 / unused, commented out
 
@@ -100,7 +98,6 @@ pub mod ownership_basics {
 ///
 /// 借用允许在不转移所有权的情况下访问数据。
 /// Borrowing allows accessing data without transferring ownership.
-///
 pub mod borrowing_basics {
     // use super::*; // 未使用，已注释 / unused, commented out
 
@@ -188,7 +185,6 @@ pub mod borrowing_basics {
 ///
 /// 生命周期确保引用在其指向的数据有效期间有效。
 /// Lifetimes ensure that references are valid for as long as the data they point to.
-///
 pub mod lifetime_basics {
     // use super::*; // 未使用，已注释 / unused, commented out
 
@@ -269,7 +265,6 @@ pub mod lifetime_basics {
 ///
 /// 作用域定义了变量的可见性和生命周期。
 /// Scope defines the visibility and lifetime of variables.
-///
 pub mod scope_basics {
     // use super::*; // 未使用，已注释 / unused, commented out
 
@@ -330,7 +325,6 @@ pub mod scope_basics {
 ///
 /// 智能指针提供了额外的功能，如引用计数和内部可变性。
 /// Smart pointers provide additional functionality like reference counting and interior mutability.
-///
 pub mod smart_pointer_basics {
     use super::*;
 
@@ -392,7 +386,6 @@ pub mod smart_pointer_basics {
 ///
 /// Rust 使用 Result 和 Option 类型进行错误处理。
 /// Rust uses Result and Option types for error handling.
-///
 pub mod error_handling_basics {
     // use super::*; // 未使用，已注释 / unused, commented out
 
@@ -443,7 +436,6 @@ pub mod error_handling_basics {
 ///
 /// Rust 提供了安全的并发编程工具。
 /// Rust provides safe concurrency programming tools.
-///
 pub mod concurrency_basics {
     use super::*;
 
@@ -518,7 +510,6 @@ pub mod concurrency_basics {
 ///
 /// Rust 提供了多种性能优化技术。
 /// Rust provides various performance optimization techniques.
-///
 pub mod performance_basics {
     // use super::*; // 未使用，已注释 / unused, commented out
 
@@ -577,7 +568,6 @@ pub mod performance_basics {
 ///
 /// Rust 内置了测试框架。
 /// Rust has a built-in testing framework.
-///
 pub mod testing_basics {
     // use super::*; // 未使用，已注释 / unused, commented out
 
@@ -618,7 +608,6 @@ pub mod testing_basics {
 ///
 /// Rust 的模块系统提供了代码组织功能。
 /// Rust's module system provides code organization functionality.
-///
 pub mod module_basics {
     // use super::*; // 未使用，已注释 / unused, commented out
 
@@ -672,7 +661,6 @@ pub mod module_basics {
 /// - 智能内存管理 / Smart memory management
 /// - 改进的错误处理 / Improved error handling
 /// - 性能优化特性 / Performance optimization features
-///
 pub mod rust_190_basics {
     use super::*;
 
@@ -847,7 +835,10 @@ pub mod rust_190_basics {
             handle.join().expect("等待线程完成失败");
         }
 
-        println!("Final shared data: {:?}", *shared_data.lock().expect("获取锁失败"));
+        println!(
+            "Final shared data: {:?}",
+            *shared_data.lock().expect("获取锁失败")
+        );
 
         // 演示弱引用 / Demonstrate weak references
         let strong = Rc::new(42);
@@ -1477,5 +1468,6 @@ pub fn run_all_basic_syntax_examples() {
 
 /// 获取基础语法模块信息 / Get Basic Syntax Module Information
 pub fn get_basic_syntax_info() -> &'static str {
-    "Rust Basic Syntax Module - Comprehensive examples and explanations of ownership, borrowing, and scope"
+    "Rust Basic Syntax Module - Comprehensive examples and explanations of ownership, borrowing, \
+     and scope"
 }

@@ -109,16 +109,14 @@ pub async fn tcp_stats_stream(
         let mut last_tick = Instant::now();
         loop {
             match rx_dl.next() {
-                Ok(frame) => {
-                    if let Some(eth) = EthernetPacket::new(frame) {
-                        if eth.get_ethertype() == EtherTypes::Ipv4 {
-                            if let Some(ip) = Ipv4Packet::new(eth.payload()) {
-                                if ip.get_next_level_protocol() == IpNextHeaderProtocols::Tcp {
-                                    if let Some(tcp) = TcpPacket::new(ip.payload()) {
-                                        let len = tcp.packet().len() as u64;
-                                        total.packets += 1;
-                                        total.bytes += len;
-                                    }
+                Ok(frame) if let Some(eth) = EthernetPacket::new(frame) => {
+                    if eth.get_ethertype() == EtherTypes::Ipv4 {
+                        if let Some(ip) = Ipv4Packet::new(eth.payload()) {
+                            if ip.get_next_level_protocol() == IpNextHeaderProtocols::Tcp {
+                                if let Some(tcp) = TcpPacket::new(ip.payload()) {
+                                    let len = tcp.packet().len() as u64;
+                                    total.packets += 1;
+                                    total.bytes += len;
                                 }
                             }
                         }

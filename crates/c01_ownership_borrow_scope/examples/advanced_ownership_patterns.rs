@@ -544,13 +544,15 @@ pub fn run_all_advanced_ownership_examples() {
     performance_optimization_patterns::borrow_checker_optimization();
 
     println!(
-        "\n=== 所有高级所有权模式示例运行完成 / All Advanced Ownership Pattern Examples Completed ==="
+        "\n=== 所有高级所有权模式示例运行完成 / All Advanced Ownership Pattern Examples Completed \
+         ==="
     );
 }
 
 /// 获取高级所有权模式信息 / Get Advanced Ownership Pattern Information
 pub fn get_advanced_ownership_info() -> &'static str {
-    "Advanced Ownership Patterns - Complex ownership transfers, advanced borrowing patterns, and sophisticated lifetime management"
+    "Advanced Ownership Patterns - Complex ownership transfers, advanced borrowing patterns, and \
+     sophisticated lifetime management"
 }
 
 /// 主函数 / Main Function

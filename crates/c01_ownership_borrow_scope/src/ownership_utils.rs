@@ -675,7 +675,9 @@ mod tests {
                 BorrowType::Immutable,
             )
             .expect("记录借用失败");
-        tracker.record_borrow_end("owner1", "borrower1").expect("记录借用结束失败");
+        tracker
+            .record_borrow_end("owner1", "borrower1")
+            .expect("记录借用结束失败");
 
         let stats = tracker.get_statistics();
         assert_eq!(stats.total_borrows, 1);
@@ -687,8 +689,12 @@ mod tests {
         let mut tracker = LifetimeTracker::new();
 
         tracker.record_lifetime_start("'a".to_string(), "scope1".to_string());
-        tracker.record_reference_association("'a").expect("记录引用关联失败");
-        tracker.record_lifetime_end("'a").expect("记录生命周期结束失败");
+        tracker
+            .record_reference_association("'a")
+            .expect("记录引用关联失败");
+        tracker
+            .record_lifetime_end("'a")
+            .expect("记录生命周期结束失败");
 
         let stats = tracker.get_statistics();
         assert_eq!(stats.total_lifetimes, 1);

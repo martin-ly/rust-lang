@@ -41,15 +41,15 @@ mod serde_examples {
         // 重命名字段（用于不同命名风格）
         #[serde(rename = "appName")]
         pub app_name: String,
-        
+
         // 默认值
         #[serde(default = "default_port")]
         pub port: u16,
-        
+
         // 可选字段
         #[serde(skip_serializing_if = "Option::is_none")]
         pub description: Option<String>,
-        
+
         // 扁平化嵌套结构
         #[serde(flatten)]
         pub extra: HashMap<String, serde_json::Value>,
@@ -100,10 +100,10 @@ mod serde_examples {
     pub enum Event {
         #[serde(rename = "user_login")]
         UserLogin { user_id: u64, timestamp: String },
-        
+
         #[serde(rename = "user_logout")]
         UserLogout { user_id: u64 },
-        
+
         #[serde(rename = "page_view")]
         PageView { path: String, duration_secs: u32 },
     }
@@ -162,18 +162,18 @@ mod toml_examples {
     pub struct AppConfig {
         /// 应用基本信息
         pub app: AppInfo,
-        
+
         /// 服务器配置
         #[serde(default)]
         pub server: ServerConfig,
-        
+
         /// 数据库配置
         pub database: DatabaseConfig,
-        
+
         /// 日志配置（可选）
         #[serde(default)]
         pub logging: Option<LoggingConfig>,
-        
+
         /// 额外配置（动态键值）
         #[serde(default)]
         pub features: HashMap<String, serde_json::Value>,
@@ -235,10 +235,10 @@ mod toml_examples {
         pub fn from_file(path: &str) -> anyhow::Result<Self> {
             let content = std::fs::read_to_string(path)
                 .map_err(|e| anyhow::anyhow!("Failed to read config file: {}", e))?;
-            
+
             let config: Self = toml::from_str(&content)
                 .map_err(|e| anyhow::anyhow!("Failed to parse TOML: {}", e))?;
-            
+
             config.validate()?;
             Ok(config)
         }
@@ -250,7 +250,7 @@ mod toml_examples {
                     self.server.port = port_num;
                 }
             }
-            
+
             if let Ok(db_url) = std::env::var("DATABASE_URL") {
                 self.database.url = db_url;
             }
@@ -261,11 +261,11 @@ mod toml_examples {
             if self.server.port == 0 {
                 return Err(anyhow::anyhow!("Server port cannot be 0"));
             }
-            
+
             if self.database.url.is_empty() {
                 return Err(anyhow::anyhow!("Database URL cannot be empty"));
             }
-            
+
             Ok(())
         }
     }
@@ -316,7 +316,7 @@ name = "MinimalApp"
 [database]
 url = "sqlite::memory:"
 "#;
-        
+
         let minimal: AppConfig = toml::from_str(partial).unwrap();
         println!("Minimal config with defaults:");
         println!("  Port: {} (default)", minimal.server.port);
@@ -337,7 +337,7 @@ mod chrono_examples {
         // 当前时间
         let now_utc: DateTime<Utc> = Utc::now();
         let now_local: DateTime<Local> = Local::now();
-        
+
         println!("UTC now: {}", now_utc);
         println!("Local now: {}", now_local);
 
@@ -345,10 +345,8 @@ mod chrono_examples {
         let dt = DateTime::parse_from_rfc3339("2024-01-15T10:30:00+08:00").unwrap();
         println!("Parsed RFC3339: {}", dt);
 
-        let dt2 = NaiveDateTime::parse_from_str(
-            "2024-01-15 10:30:00",
-            "%Y-%m-%d %H:%M:%S"
-        ).unwrap();
+        let dt2 =
+            NaiveDateTime::parse_from_str("2024-01-15 10:30:00", "%Y-%m-%d %H:%M:%S").unwrap();
         println!("Parsed custom format: {}", dt2);
 
         // 构造特定日期
@@ -362,7 +360,7 @@ mod chrono_examples {
         println!("\n=== Chrono 时间运算 ===\n");
 
         let now = Utc::now();
-        
+
         // 加减时间
         let tomorrow = now + Duration::days(1);
         let last_week = now - Duration::weeks(1);
@@ -378,7 +376,11 @@ mod chrono_examples {
         // ... 一些操作
         let end = Utc::now();
         let diff = end.signed_duration_since(start);
-        println!("Duration: {:?} ({} nanoseconds)", diff, diff.num_nanoseconds().unwrap_or(0));
+        println!(
+            "Duration: {:?} ({} nanoseconds)",
+            diff,
+            diff.num_nanoseconds().unwrap_or(0)
+        );
     }
 
     /// ## 格式化与显示
@@ -407,7 +409,7 @@ mod chrono_examples {
         println!("\n=== Chrono 时区处理 ===\n");
 
         let utc = Utc::now();
-        
+
         // 转换为本地时间
         let local = utc.with_timezone(&Local);
         println!("UTC: {}", utc);
@@ -439,7 +441,7 @@ mod chrono_examples {
         // 时间戳转换
         let timestamp = Utc::now().timestamp();
         println!("Unix timestamp: {}", timestamp);
-        
+
         let from_ts = DateTime::from_timestamp(timestamp, 0).unwrap();
         println!("From timestamp: {}", from_ts);
     }
@@ -488,28 +490,28 @@ mod regex_examples {
         println!("\n=== Regex 验证示例 ===\n");
 
         // 邮箱验证
-        let email_re = Regex::new(
-            r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-        ).unwrap();
-        
-        let emails = vec![
-            "user@example.com",
-            "invalid.email",
-            "test+tag@domain.co.uk",
-        ];
-        
+        let email_re = Regex::new(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$").unwrap();
+
+        let emails = vec!["user@example.com", "invalid.email", "test+tag@domain.co.uk"];
+
         for email in emails {
             println!("{} is valid email: {}", email, email_re.is_match(email));
         }
 
         // 手机号验证（中国）
         let phone_re = Regex::new(r"^1[3-9]\d{9}$").unwrap();
-        println!("\n13800138000 is valid: {}", phone_re.is_match("13800138000"));
+        println!(
+            "\n13800138000 is valid: {}",
+            phone_re.is_match("13800138000")
+        );
         println!("12345678901 is valid: {}", phone_re.is_match("12345678901"));
 
         // 密码强度验证
         let password_re = Regex::new(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$").unwrap();
-        println!("\n'Password123' is strong: {}", password_re.is_match("Password123"));
+        println!(
+            "\n'Password123' is strong: {}",
+            password_re.is_match("Password123")
+        );
         println!("'weak' is strong: {}", password_re.is_match("weak"));
     }
 
@@ -523,7 +525,7 @@ mod regex_examples {
         ).unwrap();
 
         let log_line = "2024-01-15 10:30:00 [INFO] Application started successfully";
-        
+
         if let Some(caps) = log_re.captures(log_line) {
             println!("Timestamp: {}", &caps["timestamp"]);
             println!("Level: {}", &caps["level"]);
@@ -533,10 +535,8 @@ mod regex_examples {
         // 提取所有匹配
         let text = "Contact us at support@example.com or sales@company.org";
         let email_re = Regex::new(r"\b[\w.-]+@[\w.-]+\.\w+\b").unwrap();
-        
-        let emails: Vec<&str> = email_re.find_iter(text)
-            .map(|m| m.as_str())
-            .collect();
+
+        let emails: Vec<&str> = email_re.find_iter(text).map(|m| m.as_str()).collect();
         println!("\nFound emails: {:?}", emails);
 
         // 替换
@@ -578,13 +578,13 @@ mod error_handling_examples {
     pub enum ConfigError {
         #[error("配置文件未找到: {0}")]
         NotFound(String),
-        
+
         #[error("解析错误: {0}")]
         ParseError(#[from] toml::de::Error),
-        
+
         #[error("验证失败: {field} - {message}")]
         ValidationError { field: String, message: String },
-        
+
         #[error("IO错误: {0}")]
         Io(#[from] std::io::Error),
     }
@@ -592,12 +592,13 @@ mod error_handling_examples {
     /// ## 应用级错误（anyhow）
     pub fn application_function() -> anyhow::Result<()> {
         // 使用 anyhow::Context 添加上下文
-        let config = std::fs::read_to_string("config.toml")
-            .context("Failed to read configuration file")?;
-        
-        let parsed: toml::Value = config.parse()
+        let config =
+            std::fs::read_to_string("config.toml").context("Failed to read configuration file")?;
+
+        let parsed: toml::Value = config
+            .parse()
             .context("Failed to parse TOML configuration")?;
-        
+
         println!("Config loaded: {:?}", parsed);
         Ok(())
     }
@@ -660,7 +661,7 @@ fn main() {
         println!("regex = \"1.10\"");
         println!("anyhow = \"1.0\"");
         println!("thiserror = \"1.0\"");
-        
+
         println!("\n或者启用默认特性运行简化版本。");
     }
 

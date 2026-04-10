@@ -1,4 +1,4 @@
-# Clippy配置文件 - 2026年最佳实践
+# Clippy配置文件 - Rust 1.96 最佳实践
 
 # 限制函数参数数量
 too-many-arguments-threshold = 7
@@ -12,5 +12,14 @@ cognitive-complexity-threshold = 25
 # 忽略的模块
 ignore-interior-mutability = ["bytes::Bytes"]
 
-# MSRV
-msrv = "1.94.1"
+# MSRV - 与 Cargo.toml 保持一致
+msrv = "1.96.0"
+
+# 允许测试中使用某些模式
+allow-dbg-in-tests = true
+allow-expect-in-tests = true
+allow-panic-in-tests = true
+allow-print-in-tests = true
+allow-unwrap-in-tests = true
+allow-useless-vec-in-tests = true
+allow-indexing-slicing-in-tests = true

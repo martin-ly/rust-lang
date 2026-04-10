@@ -8,8 +8,10 @@
 //! - 返回位置 impl Trait (RPITIT) 的改进
 //! - 异步泛型函数的支持
 //! - 共享状态的不同锁策略对比
-use std::sync::{Arc, Mutex, RwLock};
-use std::thread;
+use std::{
+    sync::{Arc, Mutex, RwLock},
+    thread,
+};
 
 /// 数据结构体，用于演示迭代器管道
 pub struct Data<T> {

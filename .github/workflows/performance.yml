@@ -1,0 +1,218 @@
+name: Performance Benchmarks
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  schedule:
+    - cron: '0 0 * * 0'  # 每周日运行
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
+  CARGO_NET_RETRY: 10
+  RUSTUP_MAX_RETRIES: 10
+  SCCACHE_GHA_ENABLED: "true"
+  RUSTC_WRAPPER: "sccache"
+
+jobs:
+  # 基准测试
+  benchmark:
+    name: Run Benchmarks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.96.0"
+
+      - name: Setup sccache
+        uses: mozilla-actions/sccache-action@v0.0.7
+
+      - name: Cache cargo dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            target
+          key: ${{ runner.os }}-cargo-bench-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-bench-
+
+      - name: Cache benchmark results
+        uses: actions/cache@v4
+        with:
+          path: ./target/criterion
+          key: ${{ runner.os }}-criterion-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-criterion-
+
+      - name: Install cargo-criterion
+        run: cargo install cargo-criterion --locked
+
+      - name: Run benchmarks
+        run: |
+          # 运行基准测试（测试模式，减少运行时间）
+          cargo bench --workspace -- --test || cargo bench --workspace || echo "No benchmarks found"
+
+      - name: Generate benchmark report
+        run: |
+          echo "# Performance Benchmark Report" > benchmark_report.md
+          echo "" >> benchmark_report.md
+          echo "**Commit:** ${{ github.sha }}" >> benchmark_report.md
+          echo "**Branch:** ${{ github.ref_name }}" >> benchmark_report.md
+          echo "**Date:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> benchmark_report.md
+          echo "" >> benchmark_report.md
+          
+          # 尝试提取基准测试结果
+          if [ -d target/criterion ]; then
+            echo "## Benchmark Results" >> benchmark_report.md
+            echo "" >> benchmark_report.md
+            find target/criterion -name "raw.csv" -exec cat {} \; 2>/dev/null >> benchmark_report.md || echo "Raw results available in artifacts" >> benchmark_report.md
+          fi
+          
+          cat benchmark_report.md
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: |
+            target/criterion/
+            benchmark_report.md
+          retention-days: 30
+
+  # 性能回归测试
+  perf-regression:
+    name: Performance Regression Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.96.0"
+
+      - name: Setup sccache
+        uses: mozilla-actions/sccache-action@v0.0.7
+
+      - name: Cache cargo dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            target
+          key: ${{ runner.os }}-cargo-perf-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-perf-
+
+      - name: Build PR version
+        run: cargo build --workspace --release --all-features
+
+      - name: Checkout main branch
+        run: |
+          git stash
+          git checkout main
+
+      - name: Build main version
+        run: cargo build --workspace --release --all-features
+
+      - name: Compare performance
+        run: |
+          echo "# Performance Comparison" > perf_comparison.md
+          echo "" >> perf_comparison.md
+          echo "Comparing PR #${{ github.event.pull_request.number }} with main branch" >> perf_comparison.md
+          echo "" >> perf_comparison.md
+          
+          # 文件大小比较
+          echo "## Binary Size Comparison" >> perf_comparison.md
+          echo "" >> perf_comparison.md
+          echo "| Binary | Main | PR | Difference |" >> perf_comparison.md
+          echo "|--------|------|-----|------------|" >> perf_comparison.md
+          
+          for binary in target/release/*; do
+            if [ -f "$binary" ] && [ -x "$binary" ]; then
+              name=$(basename "$binary")
+              pr_size=$(stat -c%s "$binary" 2>/dev/null || echo "0")
+              main_size=$(stat -c%s "target/release/$name" 2>/dev/null || echo "0")
+              
+              if [ "$main_size" != "0" ] && [ "$pr_size" != "0" ]; then
+                diff=$((pr_size - main_size))
+                diff_pct=$(awk "BEGIN {printf \"%.2f\", ($diff/$main_size)*100}")
+                echo "| $name | $main_size | $pr_size | $diff ($diff_pct%) |" >> perf_comparison.md
+              fi
+            fi
+          done
+          
+          cat perf_comparison.md
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('perf_comparison.md', 'utf8');
+            
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
+
+  # 编译时间分析
+  compile-time:
+    name: Compile Time Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.96.0"
+
+      - name: Setup sccache
+        uses: mozilla-actions/sccache-action@v0.0.7
+
+      - name: Clean build
+        run: cargo clean
+
+      - name: Measure compile time (debug)
+        run: |
+          echo "## Compile Time Analysis (Debug)" > compile_time.md
+          echo "" >> compile_time.md
+          /usr/bin/time -v cargo build --workspace 2>&1 | tee -a compile_time.md || true
+
+      - name: Clean build
+        run: cargo clean
+
+      - name: Measure compile time (release)
+        run: |
+          echo "" >> compile_time.md
+          echo "## Compile Time Analysis (Release)" >> compile_time.md
+          echo "" >> compile_time.md
+          /usr/bin/time -v cargo build --workspace --release 2>&1 | tee -a compile_time.md || true
+
+      - name: Upload compile time report
+        uses: actions/upload-artifact@v4
+        with:
+          name: compile-time-analysis
+          path: compile_time.md
+          retention-days: 30

@@ -13,8 +13,7 @@
 
 use std::collections::HashMap;
 use std::fmt::Display;
-use std::ops::ControlFlow;
-use std::ops::Deref;
+use std::ops::{ControlFlow, Deref};
 
 /// # 1. let...else 语法 (Rust 1.65+)
 ///
@@ -197,7 +196,7 @@ mod inline_const {
 /// 允许 trait 中的关联类型带有泛型参数
 mod gat_patterns {
     use std::collections::HashMap;
-    
+
     /// 泛型集合 trait
     pub trait Container {
         type Item<'a>
@@ -208,7 +207,10 @@ mod gat_patterns {
     }
 
     impl<T> Container for Vec<T> {
-        type Item<'a> = &'a T where T: 'a;
+        type Item<'a>
+            = &'a T
+        where
+            T: 'a;
 
         fn get<'a>(&'a self, index: usize) -> Option<&'a T> {
             if index < self.len() {
@@ -220,7 +222,11 @@ mod gat_patterns {
     }
 
     impl<K, V> Container for HashMap<K, V> {
-        type Item<'a> = (&'a K, &'a V) where K: 'a, V: 'a;
+        type Item<'a>
+            = (&'a K, &'a V)
+        where
+            K: 'a,
+            V: 'a;
 
         fn get<'a>(&'a self, _index: usize) -> Option<Self::Item<'a>> {
             self.iter().nth(_index)
@@ -242,10 +248,9 @@ mod gat_patterns {
         let vec = vec![1, 2, 3, 4, 5];
         let _item: Option<&i32> = vec.get(0);
 
-        let map: HashMap<String, i32> =
-            [("a".to_string(), 1), ("b".to_string(), 2)]
-                .into_iter()
-                .collect();
+        let map: HashMap<String, i32> = [("a".to_string(), 1), ("b".to_string(), 2)]
+            .into_iter()
+            .collect();
         // 使用 Container trait 的 get 方法
         let _entry: Option<(&String, &i32)> = Container::get(&map, 0);
 

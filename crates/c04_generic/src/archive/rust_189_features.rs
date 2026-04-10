@@ -125,12 +125,15 @@ pub mod const_generics {
         pub fn capacity(&self) -> usize {
             N
         }
+
         pub fn len(&self) -> usize {
             self.len
         }
+
         pub fn is_empty(&self) -> bool {
             self.len == 0
         }
+
         pub fn is_full(&self) -> bool {
             self.len == N
         }

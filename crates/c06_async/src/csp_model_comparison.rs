@@ -313,15 +313,11 @@ pub mod select_pattern {
 
             // Rust 的 tokio::select! 宏模拟 Go 的 select
             tokio::select! {
-                msg1 = rx1.recv() => {
-                    if let Some(msg1) = msg1 {
-                        println!("  [Select] 收到 ch1: {}", msg1);
-                    }
+                Some(msg1) = rx1.recv() => {
+                    println!("  [Select] 收到 ch1: {}", msg1);
                 }
-                msg2 = rx2.recv() => {
-                    if let Some(msg2) = msg2 {
-                        println!("  [Select] 收到 ch2: {}", msg2);
-                    }
+                Some(msg2) = rx2.recv() => {
+                    println!("  [Select] 收到 ch2: {}", msg2);
                 }
                 _ = sleep(Duration::from_secs(1)) => {
                     println!("  [Select] 超时");

@@ -987,7 +987,10 @@ mod tests {
 
     #[test]
     fn test_parse_and_double() {
-        assert_eq!(error_handling::parse_and_double("21").expect("解析失败"), 42);
+        assert_eq!(
+            error_handling::parse_and_double("21").expect("解析失败"),
+            42
+        );
         assert!(error_handling::parse_and_double("abc").is_err());
     }
 }

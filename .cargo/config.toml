@@ -3,6 +3,18 @@
 # sccache 支持磁盘缓存和远程缓存(S3/Azure/GCS等)
 rustc-wrapper = "sccache"
 
+[env]
+# sccache 配置 - 50GB 缓存大小
+SCCACHE_CACHE_SIZE = "50G"
+# Miri 默认使用 Tree Borrows 模型
+MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = false }
+# Windows 缓存目录 (使用绝对路径避免解析问题)
+SCCACHE_DIR = "D:\\_cache\\sccache"
+# Linux/macOS 缓存目录 (取消注释使用)
+# SCCACHE_DIR = { value = "${HOME}/.cache/sccache", relative = false }
+# 启用 GitHub Actions 缓存支持 (CI环境设为 true)
+SCCACHE_GHA_ENABLED = "true"
+
 # 并行编译作业数 - 默认为CPU核心数，可以显式设置
 # 建议: 物理核心数 - 1，保留一个核心给系统
 # jobs = 16
@@ -10,28 +22,31 @@ rustc-wrapper = "sccache"
 # 通用Rustflags优化
 # - Ctarget-cpu=native: 针对本机CPU优化
 # - Cembed-bitcode=no: 禁用bitcode嵌入(加快编译)
-rustflags = [
-    "-C", "target-cpu=native",
-    "-C", "embed-bitcode=no",
-]
+[env.rustflags]
+value = "-C target-cpu=native -C embed-bitcode=no"
 
 # 链接器优化 - 使用更快的链接器 (Windows)
 [target.x86_64-pc-windows-msvc]
 linker = "rust-lld.exe"
-rustflags = [
-    "-C", "target-cpu=native",
-    "-C", "embed-bitcode=no",
-    "-C", "link-arg=-fuse-ld=lld",
-]
+[env.rustflags.windows]
+value = "-C target-cpu=native -C embed-bitcode=no -C link-arg=-fuse-ld=lld"
 
 # 链接器优化 - 使用更快的链接器 (Linux)
 [target.x86_64-unknown-linux-gnu]
 linker = "clang"
-rustflags = [
-    "-C", "target-cpu=native",
-    "-C", "embed-bitcode=no",
-    "-C", "link-arg=-fuse-ld=lld",
-]
+[env.rustflags.linux]
+value = "-C target-cpu=native -C embed-bitcode=no -C link-arg=-fuse-ld=lld"
+
+# 链接器优化 - macOS
+[target.x86_64-apple-darwin]
+linker = "clang"
+[env.rustflags.macos_x64]
+value = "-C target-cpu=native -C embed-bitcode=no"
+
+[target.aarch64-apple-darwin]
+linker = "clang"
+[env.rustflags.macos_arm]
+value = "-C target-cpu=native -C embed-bitcode=no"
 
 [registries.crates-io]
 # 稀疏索引协议 - 大幅减少索引下载时间
@@ -63,6 +78,8 @@ overflow-checks = true
 codegen-units = 256
 # 使用 unwind panic
 panic = "unwind"
+# Rust 1.96: 开发环境也使用分割调试信息
+split-debuginfo = "unpacked"
 
 [profile.dev.build-override]
 # 构建依赖的优化级别
@@ -76,6 +93,7 @@ opt-level = 0
 debug = 0
 codegen-units = 1024
 panic = "abort"
+incremental = true
 
 [profile.release]
 # 发布构建优化
@@ -85,6 +103,8 @@ codegen-units = 16
 panic = "abort"
 strip = "symbols"
 incremental = false
+# Rust 1.96: packed分割调试信息用于发布构建
+split-debuginfo = "packed"
 
 [profile.release.build-override]
 opt-level = 2
@@ -96,6 +116,7 @@ opt-level = 1
 debug = 1
 codegen-units = 256
 incremental = true
+# 注意: test profile 不支持 panic 设置，使用默认 unwind
 
 [profile.bench]
 # 基准测试
@@ -107,15 +128,37 @@ codegen-units = 4
 [profile.bench.build-override]
 opt-level = 2
 
-# ============ 不稳定特性 (需要nightly工具链) ============
-# 要使用以下特性，运行: rustup default nightly
+# ============ Rust 1.96 稳定特性 ============
+# 注意: 以下特性已在 Rust 1.96 稳定，无需unstable配置:
+# - 稀疏索引 (已稳定)
+# - 流水线编译 (已稳定)
+# - split-debuginfo (已稳定)
 
-[unstable]
-# 并行增量编译
-incremental-parallel = true
-# 快速调试信息生成
-fast-debuginfo = true
-# 优化依赖单元
-dependency-optimizer = true
-# 并行前端 (需要 -Z threads=N)
-parallel-frontend = true
+# ============ 未来unstable特性 (可选) ============
+# 要启用以下特性，取消注释并运行: rustup default nightly
+# [unstable]
+# check-cfg = true
+
+# ============ Miri 配置 ============
+# Miri 是 Rust 的未定义行为检测工具
+# 运行方式: cargo miri test
+# 
+# 环境变量选项:
+# - MIRIFLAGS="-Zmiri-tree-borrows"  使用 Tree Borrows 模型 (推荐)
+# - MIRIFLAGS="-Zmiri-tag-raw-pointers"  标记裸指针
+# - MIRIFLAGS="-Zmiri-disable-isolation"  禁用隔离
+
+# Miri 测试 runner 配置
+[target.x86_64-unknown-linux-gnu.miri]
+runner = "miri"
+
+[target.x86_64-pc-windows-msvc.miri]
+runner = "miri"
+
+[target.x86_64-apple-darwin.miri]
+runner = "miri"
+
+[target.aarch64-apple-darwin.miri]
+runner = "miri"
+
+# Miri 特定环境变量 (已合并到 [env] 部分)

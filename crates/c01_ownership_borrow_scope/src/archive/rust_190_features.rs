@@ -184,7 +184,8 @@ impl ImprovedBorrowChecker {
                         // 共享独占借用可以与某些借用共存
                         if active_borrow.borrow_type == BorrowType::Exclusive {
                             return BorrowCheckResult::Conflict(format!(
-                                "Cannot create shared exclusive borrow while exclusive borrow exists for {}",
+                                "Cannot create shared exclusive borrow while exclusive borrow \
+                                 exists for {}",
                                 owner
                             ));
                         }
@@ -193,7 +194,8 @@ impl ImprovedBorrowChecker {
                         // 共享独占借用存在时的处理
                         if borrow_type == BorrowType::Exclusive {
                             return BorrowCheckResult::Conflict(format!(
-                                "Cannot create exclusive borrow while shared exclusive borrow exists for {}",
+                                "Cannot create exclusive borrow while shared exclusive borrow \
+                                 exists for {}",
                                 owner
                             ));
                         }

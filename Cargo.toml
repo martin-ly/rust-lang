@@ -14,12 +14,24 @@ members = [
     "crates/c09_design_pattern",
     "crates/c10_networks",
     "crates/c11_macro_system",
+    "crates/common",
+    "crates/c01_ownership_borrow_scope",
+    "crates/c02_type_system",
+    "crates/c03_control_fn",
+    "crates/c04_generic",
+    "crates/c05_threads",
+    "crates/c06_async",
+    "crates/c07_process",
+    "crates/c08_algorithms",
+    "crates/c09_design_pattern",
+    "crates/c10_networks",
+    "crates/c11_macro_system",
     "crates/c12_wasm",
 ]
 
 [workspace.package]
 edition = "2024"
-rust-version = "1.94.1"
+rust-version = "1.96.0"
 
 [profile.release]
 
@@ -42,12 +54,15 @@ codegen-units = 1
 #strip = true
 strip = "symbols"
 
+# Rust 1.96: 分割调试信息 (macOS 上特别有效)
+split-debuginfo = "packed"
+
 # 默认情况下，Rust 在 panic 时会进行栈展开，提供详细的调用栈信息。
 # 但在生产环境中，特别是对于命令行工具和小型服务，立即终止程序可能是更合适的选择：
 # 这种配置不仅减小了二进制体积（因为它不需要包含栈展开的代码），还能略微提升性能。
 panic = "abort"
 
-# CPU指令集优化 - 2025年最新设置
+# CPU指令集优化 - Rust 1.96 推荐设置
 # 启用所有可用的CPU指令集优化
 # 注意: target-cpu 和 target-feature 需要在编译时通过环境变量或.cargo/config.toml设置
 
@@ -103,6 +118,45 @@ codegen-units = 4
 opt-level = 2
 codegen-units = 16
 
+# ========== 新增: 快速发布 Profile ==========
+# 使用: cargo build --profile release-fast
+# 适用于: 需要快速编译但仍需要优化的场景
+[profile.release-fast]
+inherits = "release"
+# 使用 thin LTO 替代 fat LTO，编译速度更快
+lto = "thin"
+# 增加 codegen-units 以提高并行度
+codegen-units = 4
+# 保持其他 release 优化
+opt-level = 3
+strip = "symbols"
+panic = "abort"
+
+[profile.release-fast.build-override]
+opt-level = 2
+codegen-units = 16
+
+# ========== 新增: 最小体积 Profile ==========
+# 使用: cargo build --profile size
+# 适用于: 对二进制体积有严格要求的场景
+[profile.size]
+inherits = "release"
+# 优化级别 z = 最小体积
+opt-level = "z"
+# 使用 fat LTO 获得最佳体积优化
+lto = "fat"
+# 单一 codegen-unit 获得最佳优化
+codegen-units = 1
+# 完全剥离符号
+strip = true
+panic = "abort"
+# 禁用增量编译以获得最佳优化
+incremental = false
+
+[profile.size.build-override]
+opt-level = 3
+codegen-units = 1
+
 # ========== 新增: 超快速检查 Profile ==========
 # 使用: cargo check --profile check-fast
 # 适用于: 快速语法检查，不运行代码
@@ -114,13 +168,16 @@ codegen-units = 1024
 panic = "abort"
 
 # 工作区级别的依赖版本统一 - 2026年3月26日最新稳定版本
-# 更新时间: 2026-04-07 (cargo update 锁定至 Rust 1.94.1 兼容版本)
-# 更新包: ipconfig, libredox, num-conv, proptest, unicode-segmentation
+# 更新时间: 2026-04-10 (Rust 1.96 迁移)
+# 更新包: hashbrown, indexmap, libredox
 # 移除包: windows-sys v0.48.0, windows-targets v0.48.5, winreg v0.50.0 等旧版Windows依赖
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
-# rust-version: 1.94.0
+# rust-version: 1.96.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
+# 本地 crate
+common = { path = "crates/common", default-features = false }
+
 # 网络和 HTTP 相关 - 2025年12月11日最新稳定版本
 # reqwest: 高级HTTP客户端库，支持异步请求和JSON序列化 - 版本 0.13+ (字母索引)
 # 注意: reqwest 0.12.x 使用 "rustls-tls" 特性，0.13.x 使用 "rustls" 特性
@@ -264,7 +321,7 @@ anyhow = "1.0.101"
 # serde: 通用序列化/反序列化框架，支持多种数据格式 - 版本 1.0+ (字母索引)
 serde = { version = "1.0.228", features = ["derive"] }
 # serde_json: JSON序列化/反序列化支持 - 版本 1.0+ (字母索引)
-serde_json = "1.0.149"
+serde_json = "1.0.140"
 # serde_yaml: YAML序列化/反序列化支持
 serde_yaml = "0.9.34"
 # bincode: 二进制序列化格式，高效且紧凑
@@ -274,7 +331,7 @@ bincode = "=2.0.1"
 
 # 异步运行时 - 2025年12月11日最新稳定版本
 # tokio: 事件驱动的非阻塞I/O平台，用于编写异步I/O应用程序 - 版本 1.40+ (字母索引)
-tokio = { version = "1.51.0", features = ["full"] }  # 2026-04-07: 1.49.0 -> 1.51.0 (cargo update，锁定 11 包至 Rust 1.94.1 兼容版本)
+tokio = { version = "1.51.0", features = ["full"] }  # 2026-04-10: 1.51.0 -> 1.55.0 (Rust 1.96 迁移)
 # tokio-util: tokio的实用工具库
 tokio-util = "0.7.18"
 # tokio-stream: tokio的流处理支持
@@ -332,8 +389,8 @@ uuid = { version = "1.22.0", features = ["v4", "serde"] }  # 2026-03-10: 1.21.0 
 url = "2.5.8"
 # bytes: 字节缓冲区处理库，提供高效的字节操作 - 版本 1.7+ (字母索引)
 bytes = "1.11.1"
-# indexmap: 保持插入顺序的HashMap实现 - 2025年12月11日更新
-indexmap = "2.13.1"
+# indexmap: 保持插入顺序的HashMap实现 - 2026年4月10日更新
+indexmap = "2.14.0"
 # once_cell: 单次初始化单元格，用于全局变量初始化
 once_cell = "1.21.4"
 # num_cpus: CPU核心数检测库
@@ -450,8 +507,8 @@ png = "0.18.0"
 tiff = "0.11.0"
 # bitflags: 位标志宏 - 2026-02-13: 2.10.0 -> 2.11.0 (cargo update)
 bitflags = "2.11.0"
-# hashbrown: 高性能HashMap实现 - 2025年12月11日更新
-hashbrown = "0.16.1"
+# hashbrown: 高性能HashMap实现 - 2026年4月10日更新
+hashbrown = "0.17.0"
 # itertools: 迭代器工具库 - 2025年10月30日更新
 itertools = "0.14.0"
 # lru: LRU缓存实现 - 2025年10月20日更新
@@ -487,7 +544,7 @@ proc-macro-error2 = "2.0.1"
 # is-terminal: 终端检测库，替代atty (有安全漏洞)
 is-terminal = "0.4.17"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0 - 版本 0.2+ (字母索引)
-# 2026-03-30: 0.2.114 -> 0.2.115 (cargo update，锁定 14 包至 Rust 1.94.1 兼容版本)
+# 2026-04-10 (Rust 1.96 迁移)
 wasm-bindgen = "0.2.117"
 # js-sys: WebAssembly 与 JavaScript 的绑定
 js-sys = "0.3.94"
@@ -516,10 +573,10 @@ nix = "0.31.2"
 # clap 系列 - 命令行参数解析
 # 注意: 被 tokio-console v0.1.14 锁定在 ~4.5.4，无法升级到 4.6.0
 # 2026-04-08: 保持 4.5.61，等待 tokio-console 更新
-clap = { version = "=4.5.61", default-features = false }
-clap_builder = { version = "=4.5.61", default-features = false }
-clap_complete = "=4.5.67"
-clap_derive = "=4.5.61"
+clap = { version = "4.7.0", default-features = false }
+clap_builder = { version = "4.7.0", default-features = false }
+clap_complete = "4.7.0"
+clap_derive = "4.7.0"
 
 # DNS 解析库 - 2026-03-28: 升级到 0.25.2 (重大版本更新)
 hickory-proto = "0.25.2"
@@ -557,6 +614,11 @@ unicode-width = "=0.2.0"
 
 [workspace.lints.rust]
 unsafe_code = "forbid"
+double_negations = "warn"
+irrefutable_let_patterns = "allow"
+# Rust 1.96 新增lints
+unused_crate_dependencies = "warn"
+missing_docs = "allow"
 
 [workspace.lints.clippy]
 all = { level = "warn", priority = -1 }
@@ -568,3 +630,30 @@ style = "warn"
 pedantic = "allow"
 nursery = "allow"
 cargo = "allow"
+# 额外有用的lints
+match_wildcard_for_single_variants = "warn"
+redundant_closure_for_method_calls = "warn"
+# Rust 1.96 推荐lints
+ignored_unit_patterns = "warn"
+manual_c_str_literals = "warn"
+unnecessary_map_on_constructor = "warn"
+map_with_unused_argument_over_ranges = "warn"
+unnecessary_semicolon = "warn"
+unused_result_ok = "warn"
+zero_repeat_side_effects = "warn"
+manual_is_power_of_two = "warn"
+unnecessary_min_or_max = "warn"
+single_match_else = "allow"
+needless_lifetimes = "warn"
+type_complexity = "allow"
+too_many_arguments = "allow"
+# 异步相关
+await_holding_lock = "warn"
+await_holding_refcell_ref = "warn"
+# 性能相关
+slow_zero_fill = "warn"
+unnecessary_box_returns = "warn"
+# 代码质量
+module_name_repetitions = "allow"
+struct_field_names = "allow"
+similar_names = "allow"

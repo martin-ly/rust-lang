@@ -28,6 +28,7 @@ num_cpus = { workspace = true }
 libc = { workspace = true }
 windows = { version = "0.62.1", features = ["Win32_System_Threading"], optional = true }
 once_cell = { workspace = true }
+common = { path = "../common" }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
 

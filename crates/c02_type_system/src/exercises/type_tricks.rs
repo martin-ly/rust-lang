@@ -1,5 +1,5 @@
 //! C02 类型系统练习
-//! 
+//!
 //! 运行: cargo test --package c02_type_system -- exercises::type_tricks
 
 #[cfg(test)]
@@ -15,7 +15,7 @@ mod tests {
     fn test_enum_variants() {
         let int_val = IntOrString::Int(42);
         let str_val = IntOrString::String(String::from("hello"));
-        
+
         assert!(matches!(int_val, IntOrString::Int(42)));
         assert!(matches!(str_val, IntOrString::String(_)));
     }
@@ -63,10 +63,10 @@ mod tests {
     fn test_newtype_pattern() {
         let user_id = UserId(1);
         let product_id = ProductId(1);
-        
+
         // 类型系统阻止了以下错误：
         // find_product(user_id); // 编译错误！
-        
+
         assert_eq!(find_user(user_id), Some(String::from("Alice")));
         assert_eq!(find_product(product_id), Some(String::from("Laptop")));
     }

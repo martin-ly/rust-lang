@@ -335,43 +335,25 @@ impl LifetimeConstraint {
     /// 检查约束是否满足 / Check if Constraint is Satisfied
     pub fn is_satisfied(&self, lifetime_map: &HashMap<String, LifetimeInfo>) -> bool {
         match self.constraint_type {
-            ConstraintType::LifetimeBound => {
-                // 检查生命周期绑定约束
-                if let (Some(left), Some(right)) = (
-                    lifetime_map.get(&self.left_lifetime),
-                    lifetime_map.get(&self.right_lifetime),
-                ) {
-                    left.is_compatible_with(right)
-                } else {
-                    false
-                }
-            }
-            ConstraintType::LifetimeSubtype => {
-                // 检查生命周期子类型约束
-                if let (Some(left), Some(right)) = (
-                    lifetime_map.get(&self.left_lifetime),
-                    lifetime_map.get(&self.right_lifetime),
-                ) {
-                    self.check_subtype_relation(left, right)
-                } else {
-                    false
-                }
-            }
+            ConstraintType::LifetimeBound if let (Some(left), Some(right)) = (
+                lifetime_map.get(&self.left_lifetime),
+                lifetime_map.get(&self.right_lifetime),
+            ) => left.is_compatible_with(right),
+            ConstraintType::LifetimeBound => false,
+            ConstraintType::LifetimeSubtype if let (Some(left), Some(right)) = (
+                lifetime_map.get(&self.left_lifetime),
+                lifetime_map.get(&self.right_lifetime),
+            ) => self.check_subtype_relation(left, right),
+            ConstraintType::LifetimeSubtype => false,
             ConstraintType::LifetimeEquality => {
                 // 检查生命周期相等约束
                 self.left_lifetime == self.right_lifetime
             }
-            ConstraintType::LifetimeInclusion => {
-                // 检查生命周期包含约束
-                if let (Some(left), Some(right)) = (
-                    lifetime_map.get(&self.left_lifetime),
-                    lifetime_map.get(&self.right_lifetime),
-                ) {
-                    self.check_inclusion_relation(left, right)
-                } else {
-                    false
-                }
-            }
+            ConstraintType::LifetimeInclusion if let (Some(left), Some(right)) = (
+                lifetime_map.get(&self.left_lifetime),
+                lifetime_map.get(&self.right_lifetime),
+            ) => self.check_inclusion_relation(left, right),
+            ConstraintType::LifetimeInclusion => false,
         }
     }
     

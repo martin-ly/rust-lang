@@ -403,17 +403,17 @@ fn main() {
     println!("===========================================\n");
 
     // 创建并运行应用
-    match Application::new() {
-        Ok(app) => {
-            if let Err(e) = app.run() {
-                eprintln!("Application error: {}", e);
-                std::process::exit(1);
-            }
-        }
+    let app = match Application::new() {
+        Ok(app) => app,
         Err(e) => {
             eprintln!("Initialization error: {}", e);
             std::process::exit(1);
         }
+    };
+    
+    if let Err(e) = app.run() {
+        eprintln!("Application error: {}", e);
+        std::process::exit(1);
     }
 
     println!("\n===========================================");

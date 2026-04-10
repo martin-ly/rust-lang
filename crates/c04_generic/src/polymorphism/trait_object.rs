@@ -564,8 +564,10 @@ Trait Object 为 Rust 提供了强大的运行时多态能力。
 
 #![allow(clippy::type_complexity)]
 
-use std::collections::HashMap;
-use std::sync::{Arc, Mutex};
+use std::{
+    collections::HashMap,
+    sync::{Arc, Mutex},
+};
 
 use crate::type_aliases::SharedHashMap;
 

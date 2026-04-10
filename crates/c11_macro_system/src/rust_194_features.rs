@@ -174,20 +174,14 @@ impl BlockMatcher {
         for (idx, token) in tokens.iter().enumerate() {
             match token.text.as_str() {
                 "(" | "[" | "{" => stack.push((token.text.chars().next().expect("non-empty bracket token should have a first char"), idx)),
-                ")" => {
-                    if let Some(('(', open_idx)) = stack.pop() {
-                        pairs.push((open_idx, idx));
-                    }
+                ")" if let Some(('(', open_idx)) = stack.pop() => {
+                    pairs.push((open_idx, idx));
                 }
-                "]" => {
-                    if let Some(('[', open_idx)) = stack.pop() {
-                        pairs.push((open_idx, idx));
-                    }
+                "]" if let Some(('[', open_idx)) = stack.pop() => {
+                    pairs.push((open_idx, idx));
                 }
-                "}" => {
-                    if let Some(('{', open_idx)) = stack.pop() {
-                        pairs.push((open_idx, idx));
-                    }
+                "}" if let Some(('{', open_idx)) = stack.pop() => {
+                    pairs.push((open_idx, idx));
                 }
                 _ => {}
             }

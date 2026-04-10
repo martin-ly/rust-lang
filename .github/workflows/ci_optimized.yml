@@ -26,14 +26,14 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: "1.94.0"
+          toolchain: "1.96.0"
           components: rustfmt, clippy
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.4
 
       - name: Cache cargo
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry/index
@@ -60,13 +60,13 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: "1.94.0"
+          toolchain: "1.96.0"
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.4
 
       - name: Cache cargo
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry/index
@@ -111,7 +111,7 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: "1.94.0"
+          toolchain: "1.96.0"
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.4
@@ -130,7 +130,7 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: "1.94.0"
+          toolchain: "1.96.0"
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.4

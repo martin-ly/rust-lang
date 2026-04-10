@@ -322,9 +322,14 @@ Send trait 为 Rust 提供了线程间安全传递的基础。
 
 #![allow(clippy::type_complexity)]
 
-use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
-use std::sync::{Arc, Mutex, mpsc};
-use std::thread;
+use std::{
+    sync::{
+        Arc, Mutex,
+        atomic::{AtomicBool, AtomicUsize, Ordering},
+        mpsc,
+    },
+    thread,
+};
 
 // 基本类型自动实现 Send
 #[derive(Debug)]

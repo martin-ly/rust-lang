@@ -93,6 +93,7 @@ pub mod archive;
 pub use archive::rust_191_features;
 pub use archive::rust_192_features;
 pub mod rust_194_features;
+pub mod rust_196_features;
 
 // LeetCode 分类算法模块（结合 Rust 1.91 特性）
 pub mod leetcode;

@@ -276,9 +276,7 @@
 //!
 //! ```rust
 //! use c01_ownership_borrow_scope::rust_194_features::{
-//!     demonstrate_rust_194_features,
-//!     has_abba,
-//!     sliding_window_averages,
+//!     demonstrate_rust_194_features, has_abba, sliding_window_averages,
 //! };
 //!
 //! fn main() {
@@ -393,7 +391,8 @@ pub use ownership_utils::{
 
 // 从 rust_194_features 模块导出 / Export from rust_194_features module
 pub use rust_194_features::{
-    ConfigManager, GoldenSectionSearch,
+    ConfigManager,
+    GoldenSectionSearch,
     // array_windows 相关
     SingleThreadCache,
     ThreadSafeCache,
@@ -430,7 +429,8 @@ pub const VERSION: &str = "1.0.0";
 /// 如果初始化失败，返回错误。
 pub fn init() -> Result<(), Box<dyn std::error::Error>> {
     println!(
-        "Rust所有权和借用作用域模块已初始化 / Rust Ownership and Borrowing Scope Module Initialized"
+        "Rust所有权和借用作用域模块已初始化 / Rust Ownership and Borrowing Scope Module \
+         Initialized"
     );
     Ok(())
 }

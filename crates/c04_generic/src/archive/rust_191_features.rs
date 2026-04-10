@@ -16,8 +16,7 @@
 //! - 版本: 1.0
 //! - Rust版本: 1.91.0
 //! - Edition: 2024
-use std::collections::HashMap;
-use std::ops::ControlFlow;
+use std::{collections::HashMap, ops::ControlFlow};
 
 // ==================== 1. const 上下文增强在泛型中的应用 ====================
 
@@ -31,15 +30,17 @@ pub mod const_generics {
     impl GenericConfig<i32> {
         // Rust 1.91: const 上下文中使用引用
         pub const DEFAULT_VALUE: i32 = 42;
-        pub const VALUE_REF: &i32 = &Self::DEFAULT_VALUE; // ✅ Rust 1.91
+        // ✅ Rust 1.91
         pub const DOUBLE_VALUE: i32 = *Self::VALUE_REF * 2;
+        pub const VALUE_REF: &i32 = &Self::DEFAULT_VALUE;
     }
 
     impl GenericConfig<usize> {
+        // ✅ Rust 1.91
+        pub const DOUBLE_SIZE: usize = *Self::SIZE_REF * 2;
         // Rust 1.91: const 上下文计算
         pub const MAX_SIZE: usize = 1024;
-        pub const SIZE_REF: &usize = &Self::MAX_SIZE; // ✅ Rust 1.91
-        pub const DOUBLE_SIZE: usize = *Self::SIZE_REF * 2;
+        pub const SIZE_REF: &usize = &Self::MAX_SIZE;
     }
 
     /// 泛型 const 函数示例
@@ -349,8 +350,9 @@ pub mod comprehensive_generic_examples {
 
     impl GenericConfig<i32> {
         pub const DEFAULT: i32 = 100;
-        pub const REF: &i32 = &Self::DEFAULT; // ✅ Rust 1.91
+        // ✅ Rust 1.91
         pub const DOUBLE: i32 = *Self::REF * 2;
+        pub const REF: &i32 = &Self::DEFAULT;
     }
 
     pub fn demonstrate() {
@@ -402,7 +404,6 @@ pub mod generic_associated_types {
             = &'a T
         where
             T: 'a;
-
         type Iterator<'a>
             = std::slice::Iter<'a, T>
         where

@@ -1,10 +1,10 @@
 # Rust系统化学习项目
 
-> **Rust版本**: 1.94.0
+> **Rust版本**: 1.96.0
 > **Edition**: 2024
 > **状态**: 生产就绪 | 权威对齐
 
-[![Rust](https://img.shields.io/badge/rust-1.94.0-blue.svg)](https://www.rust-lang.org)
+[![Rust](https://img.shields.io/badge/rust-1.96.0-blue.svg)](https://www.rust-lang.org)
 [![Edition](https://img.shields.io/badge/edition-2024-purple.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -14,7 +14,7 @@
 
 本项目是一个全面的Rust语言系统化学习资源，专注于：
 
-- **现代化工具链**: Rust 1.94.0 + Edition 2024
+- **现代化工具链**: Rust 1.96.0 + Edition 2024
 - **权威内容对齐**: 引用PLDI 2025、POPL 2026等顶会论文
 - **实践导向**: 12个学习crate覆盖核心概念
 - **生产就绪**: 完整的CI/CD、Miri内存安全检查
@@ -26,8 +26,8 @@
 ### 系统要求
 
 ```bash
-rustc --version  # 需要 1.94.0+
-cargo --version  # 需要 1.94.0+
+rustc --version  # 需要 1.96.0+
+cargo --version  # 需要 1.96.0+
 ```
 
 ### 安装与运行
@@ -56,7 +56,7 @@ cargo test --workspace
 |------|------|
 | [docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md](docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md) | **2026生态梳理** - 含权威引用 |
 | [docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md](docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md) | 学术论文引用 |
-| [docs/MIGRATION_GUIDE_2026.md](docs/MIGRATION_GUIDE_2026.md) | 迁移到Rust 1.94 |
+| [docs/MIGRATION_GUIDE_2026.md](docs/MIGRATION_GUIDE_2026.md) | 迁移到Rust 1.96 |
 | [docs/TERMINOLOGY_STANDARD.md](docs/TERMINOLOGY_STANDARD.md) | 术语标准 |
 
 ### 学习文档
@@ -108,7 +108,7 @@ rust-lang/
 
 ## 核心特性
 
-### Rust 1.94现代化
+### Rust 1.96现代化
 
 | 特性 | 状态 | 文档 |
 |------|------|------|
@@ -137,5 +137,6 @@ rust-lang/
 ---
 
 **维护者**: Rust学习项目团队
-**最后更新**: 2026-03-18
+**最后更新**: 2026-04-10
+**迁移记录**: ✅ Rust 1.96 迁移完成 (2026-04-10)
 **状态**: ✅ 生产就绪

@@ -535,7 +535,9 @@ pub fn demonstrate_wasm_features() {
     let _ = memory_manager.write(offset, data);
     println!("  写入数据: {:?}", data);
 
-    let read_data = memory_manager.read(offset, data.len()).expect("内存读取失败");
+    let read_data = memory_manager
+        .read(offset, data.len())
+        .expect("内存读取失败");
     println!("  读取数据: {:?}", read_data);
 
     let stats = memory_manager.get_usage_stats();

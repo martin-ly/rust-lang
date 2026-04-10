@@ -458,10 +458,8 @@ impl Microservice {
 
             loop {
                 tokio::select! {
-                    _ = interval.tick() => {
-                        if let Err(e) = registry.update_heartbeat(&service_name, &instance_id).await {
-                            println!("      心跳更新失败: {}", e);
-                        }
+                    _ = interval.tick() if let Err(e) = registry.update_heartbeat(&service_name, &instance_id).await => {
+                        println!("      心跳更新失败: {}", e);
                     }
                     _ = shutdown_notify.notified() => {
                         break;

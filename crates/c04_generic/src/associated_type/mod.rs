@@ -426,8 +426,8 @@ pub struct SimpleGraph {
 }
 
 impl Graph for SimpleGraph {
-    type Node = String;
     type Edge = (String, String);
+    type Node = String;
 
     fn nodes(&self) -> Vec<&Self::Node> {
         self.nodes.iter().collect()
@@ -476,8 +476,8 @@ pub struct NumberStream {
 }
 
 impl Stream for NumberStream {
-    type Item = i32;
     type Error = String;
+    type Item = i32;
 
     fn next(&mut self) -> IteratorResult<Self::Item, Self::Error> {
         if self.position < self.numbers.len() {
@@ -570,8 +570,8 @@ pub struct SqliteDatabase;
 
 impl Database for SqliteDatabase {
     type Connection = String;
-    type Transaction = String;
     type Error = String;
+    type Transaction = String;
 
     fn connect(&self) -> ConnectionResult<Self::Connection, Self::Error> {
         Ok("sqlite_connection".to_string())
@@ -800,7 +800,9 @@ mod tests {
         assert_eq!(conn, "sqlite_connection");
 
         let mut conn_mut = conn;
-        let transaction = db.begin_transaction(&mut conn_mut).expect("事务开始不应失败");
+        let transaction = db
+            .begin_transaction(&mut conn_mut)
+            .expect("事务开始不应失败");
         assert_eq!(transaction, "sqlite_transaction");
 
         assert!(db.commit(transaction).is_ok());
