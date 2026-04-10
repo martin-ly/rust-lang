@@ -1,21 +1,13 @@
 use criterion::{Criterion, criterion_group, criterion_main};
+use rayon::prelude::*;
 use std::hint::black_box;
 
 pub fn rayon_parallel_sum_benchmark(c: &mut Criterion) {
     let data: Vec<u64> = (0..1_000_000).collect();
     c.bench_function("rayon_parallel_sum", |b| {
         b.iter(|| {
-            #[cfg(feature = "rayon")] // 允许未来做特性门控
-            {
-                use rayon::prelude::*;
-                let sum: u64 = data.par_iter().cloned().sum();
-                black_box(sum);
-            }
-            #[cfg(not(feature = "rayon"))]
-            {
-                let sum: u64 = data.iter().cloned().sum();
-                black_box(sum);
-            }
+            let sum: u64 = data.par_iter().cloned().sum();
+            black_box(sum);
         })
     });
 }

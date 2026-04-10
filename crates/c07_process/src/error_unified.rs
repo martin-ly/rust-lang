@@ -3,7 +3,7 @@
 //! This module provides crate-specific error types and utilities using
 //! the trait-based error design from the common crate.
 
-use common::{impl_into_unified_error, impl_rust_lang_error, ErrorCode, UnifiedError};
+use common::{impl_into_unified_error, ErrorCode};
 use std::time::Duration;
 use thiserror::Error;
 
@@ -52,7 +52,7 @@ impl common::RustLangError for ProcessError {
     }
     
     fn retry_delay(&self) -> Option<Duration> {
-        if self.is_retryable() {
+        if RustLangError::is_retryable(self) {
             Some(Duration::from_millis(200))
         } else {
             None
@@ -60,7 +60,7 @@ impl common::RustLangError for ProcessError {
     }
     
     fn max_retries(&self) -> Option<u32> {
-        if self.is_retryable() {
+        if RustLangError::is_retryable(self) {
             Some(3)
         } else {
             None
@@ -73,7 +73,6 @@ impl_into_unified_error!(ProcessError);
 /// Re-export common error types for convenience
 pub use common::{
     CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
 };
 
 /// C07 crate's result type (Unified version)
@@ -88,22 +87,23 @@ pub fn process_error_from_existing<T: std::fmt::Display>(e: T) -> ProcessError {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use common::UnifiedError;
 
     #[test]
     fn test_error_creation() {
         let err = ProcessError::CreationFailed("test".to_string());
         assert_eq!(err.error_code(), ErrorCode::Process);
-        assert!(!err.is_retryable());
+        assert!(!common::RustLangError::is_retryable(&err));
     }
 
     #[test]
     fn test_retryable_error() {
         let err = ProcessError::StartFailed("test".to_string());
-        assert!(err.is_retryable());
-        assert_eq!(err.retry_delay(), Some(Duration::from_millis(200)));
+        assert!(common::RustLangError::is_retryable(&err));
+        assert_eq!(common::RustLangError::retry_delay(&err), Some(Duration::from_millis(200)));
         
         let err = ProcessError::AlreadyTerminated;
-        assert!(!err.is_retryable());
+        assert!(!common::RustLangError::is_retryable(&err));
     }
 
     #[test]

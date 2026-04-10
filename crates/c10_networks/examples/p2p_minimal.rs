@@ -46,6 +46,7 @@ use libp2p::{
     swarm::{NetworkBehaviour, SwarmEvent},
     tcp, yamux,
 };
+use libp2p_swarm::NetworkBehaviour;
 use std::time::Duration;
 
 #[derive(NetworkBehaviour)]

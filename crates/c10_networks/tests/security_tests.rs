@@ -4,7 +4,7 @@
 //! 确保各种安全机制和防护措施正常工作。
 use bytes::Bytes;
 use c10_networks::{
-    error::{ErrorRecovery, NetworkError, SecurityError},
+    error::{NetworkError, SecurityError},
     packet::{Packet, PacketType},
     protocol::{
         http::{HttpMethod, HttpStatusCode, HttpVersion},
@@ -213,9 +213,9 @@ fn test_network_error_security() {
         assert!(!error_msg.is_empty());
 
         // 验证错误恢复策略
-        let is_retryable = error.is_retryable();
-        let retry_delay = error.retry_delay();
-        let max_retries = error.max_retries();
+        let is_retryable = common::RustLangError::is_retryable(&error);
+        let retry_delay = common::RustLangError::retry_delay(&error);
+        let max_retries = common::RustLangError::max_retries(&error);
 
         // 若可重试，则应至少给出重试次数或延迟
         if is_retryable {

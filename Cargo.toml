@@ -190,6 +190,8 @@ hyper = { version = "1.9.0", features = ["full"] }
 hyper-util = "0.1.20"
 # hyper-rustls: hyper与rustls的集成，提供安全的TLS连接
 hyper-rustls = "0.28.1"
+# libp2p: P2P网络协议栈 - 2025年12月最新稳定版本 (使用 0.54.1 与 hickory-resolver 0.25.1 兼容)
+libp2p = { version = "0.54.1", features = ["tokio", "tcp", "noise", "yamux", "gossipsub", "kad", "identify"] }
 # hyper-tls: hyper与native-tls的集成，提供TLS支持
 hyper-tls = "0.6.0"
 # hyper-timeout: hyper的超时支持
@@ -457,6 +459,16 @@ toml = "1.1.1+spec-1.1.0"
 # 并发和同步 - 2025年12月11日最新稳定版本
 # crossbeam: 并发编程工具库，提供无锁数据结构和同步原语 - 版本 0.8+ (字母索引)
 crossbeam = "0.8.4"
+# crossbeam-channel: 多生产者多消费者通道 - 2025年12月11日最新稳定版本
+crossbeam-channel = "0.5.15"
+# crossbeam-queue: 无锁队列 - 2025年12月11日最新稳定版本
+crossbeam-queue = "0.3.12"
+# crossbeam-utils: 并发工具 - 2025年12月11日最新稳定版本
+crossbeam-utils = "0.8.21"
+# crossbeam-epoch: 基于epoch的内存回收 - 2025年12月11日最新稳定版本
+crossbeam-epoch = "0.9.18"
+# crossbeam-deque: 工作窃取双端队列 - 2025年12月11日最新稳定版本
+crossbeam-deque = "0.8.6"
 # rayon: 简单的工作窃取并行库，提供数据并行处理 - 版本 1.10+ (字母索引)
 rayon = "1.11.0"
 # dashmap: 高性能并发HashMap，支持多线程安全访问 - 版本 6.1+ (字母索引)
@@ -578,9 +590,9 @@ clap_builder = { version = "4.7.0", default-features = false }
 clap_complete = "4.7.0"
 clap_derive = "4.7.0"
 
-# DNS 解析库 - 2026-03-28: 升级到 0.25.2 (重大版本更新)
-hickory-proto = "0.25.2"
-hickory-resolver = "0.25.2"
+# DNS 解析库 - 2026-04-10: 升级到 0.25.1 以兼容 libp2p
+hickory-proto = "0.25.1"
+hickory-resolver = { version = "0.25.1", features = ["tokio", "system-config"] }
 
 # WebSocket 底层库
 # 2026-03-28: 更新至 0.29.0

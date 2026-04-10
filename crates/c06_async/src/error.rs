@@ -48,7 +48,7 @@ impl common::RustLangError for AsyncError {
     }
     
     fn max_retries(&self) -> Option<u32> {
-        if self.is_retryable() {
+        if common::RustLangError::is_retryable(self) {
             Some(3)
         } else {
             None
@@ -101,6 +101,7 @@ pub fn backpressure_error<T: Into<String>>(msg: T) -> AsyncError {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use common::RustLangError;
 
     #[test]
     fn test_error_creation() {
@@ -112,11 +113,11 @@ mod tests {
     #[test]
     fn test_retryable_error() {
         let err = timeout(Duration::from_secs(1));
-        assert!(err.is_retryable());
-        assert_eq!(err.retry_delay(), Some(Duration::from_millis(100)));
+        assert!(RustLangError::is_retryable(&err));
+        assert_eq!(RustLangError::retry_delay(&err), Some(Duration::from_millis(100)));
         
         let err = runtime_error("test");
-        assert!(!err.is_retryable());
+        assert!(!RustLangError::is_retryable(&err));
     }
 
     #[test]

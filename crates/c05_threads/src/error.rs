@@ -46,7 +46,7 @@ impl common::RustLangError for ThreadError {
     }
     
     fn retry_delay(&self) -> Option<Duration> {
-        if self.is_retryable() {
+        if RustLangError::is_retryable(self) {
             Some(Duration::from_millis(10))
         } else {
             None
@@ -54,7 +54,7 @@ impl common::RustLangError for ThreadError {
     }
     
     fn max_retries(&self) -> Option<u32> {
-        if self.is_retryable() {
+        if RustLangError::is_retryable(self) {
             Some(5)
         } else {
             None
@@ -117,6 +117,7 @@ pub fn lock_free_error<T: Into<String>>(msg: T) -> ThreadError {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use common::RustLangError;
 
     #[test]
     fn test_error_creation() {
@@ -128,11 +129,11 @@ mod tests {
     #[test]
     fn test_retryable_error() {
         let err = lock_acquisition_failed("test");
-        assert!(err.is_retryable());
-        assert_eq!(err.retry_delay(), Some(Duration::from_millis(10)));
+        assert!(common::RustLangError::is_retryable(&err));
+        assert_eq!(common::RustLangError::retry_delay(&err), Some(Duration::from_millis(10)));
         
         let err = thread_panicked("test");
-        assert!(!err.is_retryable());
+        assert!(!common::RustLangError::is_retryable(&err));
     }
 
     #[test]

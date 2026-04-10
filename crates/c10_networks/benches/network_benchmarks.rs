@@ -76,20 +76,16 @@ fn bench_data_serialization(c: &mut Criterion) {
         });
 
         group.bench_with_input(BenchmarkId::new("bincode_serialize", size), size, |b, _| {
-            b.iter(|| bincode::encode_to_vec(&data, bincode::config::standard()).unwrap())
+            b.iter(|| bincode::serialize(&data).unwrap())
         });
 
         group.bench_with_input(
             BenchmarkId::new("bincode_deserialize", size),
             size,
             |b, _| {
-                let binary = bincode::encode_to_vec(&data, bincode::config::standard()).unwrap();
+                let binary = bincode::serialize(&data).unwrap();
                 b.iter(|| {
-                    let (result, _) = bincode::decode_from_slice::<TestData, _>(
-                        &binary,
-                        bincode::config::standard(),
-                    )
-                    .unwrap();
+                    let result: TestData = bincode::deserialize(&binary).unwrap();
                     result
                 })
             },
@@ -398,7 +394,7 @@ fn create_test_data(size: usize) -> TestData {
 }
 
 /// 测试数据结构
-#[derive(serde::Serialize, serde::Deserialize, bincode::Encode, bincode::Decode, Clone)]
+#[derive(serde::Serialize, serde::Deserialize, Clone)]
 struct TestData {
     id: u32,
     name: String,

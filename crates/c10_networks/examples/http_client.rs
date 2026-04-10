@@ -82,9 +82,10 @@
 //! cargo run --example http_client
 //! ```
 use c10_networks::{
-    error::{ErrorRecovery, NetworkResult},
+    error::NetworkResult,
     protocol::http::{HttpMethod, HttpStatusCode, HttpVersion},
 };
+use common::RustLangError;
 use std::time::Duration;
 
 #[tokio::main]
@@ -137,11 +138,11 @@ async fn main() -> NetworkResult<()> {
 
     for error in errors {
         println!("🔍 错误类型: {}", error);
-        println!("   可重试: {}", error.is_retryable());
-        if let Some(delay) = error.retry_delay() {
+        println!("   可重试: {}", RustLangError::is_retryable(&error));
+        if let Some(delay) = RustLangError::retry_delay(&error) {
             println!("   重试延迟: {:?}", delay);
         }
-        if let Some(max_retries) = error.max_retries() {
+        if let Some(max_retries) = RustLangError::max_retries(&error) {
             println!("   最大重试次数: {}", max_retries);
         }
         println!();

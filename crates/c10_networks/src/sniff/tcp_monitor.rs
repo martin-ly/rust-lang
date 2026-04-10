@@ -1,3 +1,9 @@
+//! TCP traffic monitoring using pnet
+//! 
+//! This module requires the `sniff` and `pcap` features to be enabled.
+
+#![cfg(all(feature = "sniff", feature = "pcap"))]
+
 use crate::error::NetworkResult;
 use pnet_datalink::{self as datalink, Channel, Config};
 use pnet_packet::Packet;

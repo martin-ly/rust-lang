@@ -11,11 +11,11 @@ repository = "https://github.com/rust-lang/rust-lang-learning"
 
 [dependencies]
 crossbeam = { workspace = true }
-crossbeam-channel = "0.5.15"
-crossbeam-queue = "0.3.12"
-crossbeam-utils = "0.8.21"
-crossbeam-epoch = "0.9.18"
-crossbeam-deque = "0.8.6"
+crossbeam-channel = { workspace = true }
+crossbeam-queue = { workspace = true }
+crossbeam-utils = { workspace = true }
+crossbeam-epoch = { workspace = true }
+crossbeam-deque = { workspace = true }
 rayon = { workspace = true }
 parking_lot = { workspace = true }
 dashmap = { workspace = true }
@@ -26,6 +26,7 @@ libc = { workspace = true }
 windows = { version = "0.62.1", features = ["Win32_System_Threading"], optional = true }
 once_cell = { workspace = true }
 common = { workspace = true, features = ["error-trait", "async"] }
+thiserror = { workspace = true }
 
 [features]
 default = ["std"]

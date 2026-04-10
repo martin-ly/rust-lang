@@ -229,6 +229,7 @@ fn test_loop_as_goto() {
 /// 预期结果: 应该正确匹配并访问字段
 #[test]
 fn test_pattern_match_safety() {
+    #[allow(dead_code)]
     enum Complex {
         A(i32),
         B { x: i32, y: i32 },

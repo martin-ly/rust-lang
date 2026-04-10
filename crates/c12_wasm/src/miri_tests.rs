@@ -187,7 +187,7 @@ fn test_stack_overflow_protection() {
 
 /// 模块实例结构
 struct ModuleInstance {
-    memory: LinearMemory,
+    _memory: LinearMemory,
     globals: Vec<i32>,
     table: Vec<Option<usize>>,
 }
@@ -195,7 +195,7 @@ struct ModuleInstance {
 impl ModuleInstance {
     fn new() -> Self {
         Self {
-            memory: LinearMemory::new(1),
+            _memory: LinearMemory::new(1),
             globals: vec![0; 10],
             table: vec![None; 100],
         }

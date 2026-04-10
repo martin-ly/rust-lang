@@ -55,7 +55,9 @@ struct ProcessInfo {
 #[test]
 fn test_process_info_layout() {
     use std::mem;
-    assert_eq!(mem::align_of::<ProcessInfo>(), mem::align_of::<c_int>());
+    // ProcessInfo 包含 usize，对齐要求为 max(align_of<c_int>(), align_of<usize>())
+    let expected_align = mem::align_of::<usize>(); // 64位系统上为8
+    assert_eq!(mem::align_of::<ProcessInfo>(), expected_align);
     assert!(mem::size_of::<ProcessInfo>() >= 256);
 }
 

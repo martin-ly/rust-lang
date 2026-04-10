@@ -11,6 +11,7 @@
 use c10_networks::error::{
     ErrorRecovery, ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
 };
+use common::RustLangError;
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::sync::{Arc, Mutex};
@@ -64,7 +65,7 @@ fn bench_error_recovery(c: &mut Criterion) {
     group.bench_function("is_retryable", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
         b.iter(|| {
-            let retryable = black_box(&error).is_retryable();
+            let retryable = RustLangError::is_retryable(black_box(&error));
             black_box(retryable)
         })
     });
@@ -72,7 +73,7 @@ fn bench_error_recovery(c: &mut Criterion) {
     group.bench_function("retry_delay", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
         b.iter(|| {
-            let delay = black_box(&error).retry_delay();
+            let delay = RustLangError::retry_delay(black_box(&error));
             black_box(delay)
         })
     });
@@ -80,7 +81,7 @@ fn bench_error_recovery(c: &mut Criterion) {
     group.bench_function("max_retries", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
         b.iter(|| {
-            let max_retries = black_box(&error).max_retries();
+            let max_retries = RustLangError::max_retries(black_box(&error));
             black_box(max_retries)
         })
     });
@@ -88,8 +89,8 @@ fn bench_error_recovery(c: &mut Criterion) {
     group.bench_function("should_retry", |b| {
         let error = NetworkError::Timeout(Duration::from_secs(5));
         b.iter(|| {
-            let should_retry = black_box(&error).is_retryable()
-                && black_box(&error).max_retries().map_or(false, |max| 3 < max);
+            let should_retry = RustLangError::is_retryable(black_box(&error))
+                && RustLangError::max_retries(black_box(&error)).map_or(false, |max| 3 < max);
             black_box(should_retry)
         })
     });
@@ -169,7 +170,7 @@ fn bench_error_propagation(c: &mut Criterion) {
 
         b.iter(|| match black_box(&result) {
             Ok(_) => black_box(0),
-            Err(e) => black_box(e.max_retries().unwrap_or(0)),
+            Err(e) => black_box(RustLangError::max_retries(e).unwrap_or(0)),
         })
     });
 
@@ -179,7 +180,7 @@ fn bench_error_propagation(c: &mut Criterion) {
         b.iter(|| {
             let mapped = black_box(&result)
                 .as_ref()
-                .map_err(|e| e.max_retries().unwrap_or(0));
+                .map_err(|e| RustLangError::max_retries(e).unwrap_or(0));
             black_box(mapped)
         })
     });
@@ -206,7 +207,7 @@ fn bench_error_handling_chain(c: &mut Criterion) {
                 Err(NetworkError::Timeout(Duration::from_secs(5)));
 
             let processed = result
-                .map_err(|e| e.max_retries().unwrap_or(0))
+                .map_err(|e| RustLangError::max_retries(&e).unwrap_or(0))
                 .and_then(|_| Ok(()))
                 .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries as u64)));
 
@@ -220,11 +221,11 @@ fn bench_error_handling_chain(c: &mut Criterion) {
                 Err(NetworkError::Timeout(Duration::from_secs(5)));
 
             let processed = result
-                .map_err(|e| e.max_retries().unwrap_or(0))
+                .map_err(|e| RustLangError::max_retries(&e).unwrap_or(0))
                 .and_then(|_| Ok(()))
                 .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries as u64)))
                 .and_then(|_| Ok(()))
-                .map_err(|e| e.retry_delay().unwrap_or(Duration::from_millis(100)));
+                .map_err(|e| RustLangError::retry_delay(&e).unwrap_or(Duration::from_millis(100)));
 
             black_box(processed)
         })
@@ -236,11 +237,11 @@ fn bench_error_handling_chain(c: &mut Criterion) {
                 Err(NetworkError::Timeout(Duration::from_secs(5)));
 
             let processed = result
-                .map_err(|e| e.max_retries().unwrap_or(0))
+                .map_err(|e| RustLangError::max_retries(&e).unwrap_or(0))
                 .and_then(|_| {
                     let inner_result: Result<(), NetworkError> =
                         Err(NetworkError::Timeout(Duration::from_secs(3)));
-                    inner_result.map_err(|e| e.max_retries().unwrap_or(0))
+                    inner_result.map_err(|e| RustLangError::max_retries(&e).unwrap_or(0))
                 })
                 .map_err(|retries| NetworkError::Timeout(Duration::from_secs(retries as u64)));
 
@@ -331,9 +332,9 @@ fn bench_error_handling_performance(c: &mut Criterion) {
             match result {
                 Ok(_) => black_box(0),
                 Err(e) => {
-                    let retryable = e.is_retryable();
-                    let delay = e.retry_delay().unwrap_or(Duration::from_millis(100));
-                    let max_retries = e.max_retries().unwrap_or(0);
+                    let retryable = RustLangError::is_retryable(&e);
+                    let delay = RustLangError::retry_delay(&e).unwrap_or(Duration::from_millis(100));
+                    let max_retries = RustLangError::max_retries(&e).unwrap_or(0);
                     black_box(retryable as u64 + delay.as_secs() + max_retries as u64)
                 }
             }
@@ -351,9 +352,9 @@ fn bench_error_handling_performance(c: &mut Criterion) {
                 Ok(_) => black_box(0),
                 Err(e) => {
                     stats.record_error(&e);
-                    let retryable = e.is_retryable();
-                    let delay = e.retry_delay().unwrap_or(Duration::from_millis(100));
-                    let max_retries = e.max_retries().unwrap_or(0);
+                    let retryable = RustLangError::is_retryable(&e);
+                    let delay = RustLangError::retry_delay(&e).unwrap_or(Duration::from_millis(100));
+                    let max_retries = RustLangError::max_retries(&e).unwrap_or(0);
                     black_box(retryable as u64 + delay.as_secs() + max_retries as u64)
                 }
             }
@@ -368,9 +369,9 @@ fn bench_error_handling_performance(c: &mut Criterion) {
             match result {
                 Ok(_) => black_box(0),
                 Err(e) => {
-                    if e.is_retryable() {
-                        let delay = e.retry_delay().unwrap_or(Duration::from_millis(100));
-                        let max_retries = e.max_retries().unwrap_or(0);
+                    if RustLangError::is_retryable(&e) {
+                        let delay = RustLangError::retry_delay(&e).unwrap_or(Duration::from_millis(100));
+                        let max_retries = RustLangError::max_retries(&e).unwrap_or(0);
                         black_box(delay.as_secs() + max_retries as u64)
                     } else {
                         black_box(0)
@@ -420,9 +421,9 @@ fn bench_error_handling_concurrency(c: &mut Criterion) {
             for _thread_id in 0..4 {
                 let handle = thread::spawn(move || {
                     let error = NetworkError::Timeout(Duration::from_secs(5));
-                    let retryable = error.is_retryable();
-                    let delay = error.retry_delay().unwrap_or(Duration::from_millis(100));
-                    let max_retries = error.max_retries().unwrap_or(0);
+                    let retryable = RustLangError::is_retryable(&error);
+                    let delay = RustLangError::retry_delay(&error).unwrap_or(Duration::from_millis(100));
+                    let max_retries = RustLangError::max_retries(&error).unwrap_or(0);
                     retryable as u64 + delay.as_secs() + max_retries as u64
                 });
                 handles.push(handle);

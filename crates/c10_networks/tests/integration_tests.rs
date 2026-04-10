@@ -4,7 +4,7 @@
 //! 确保各个模块能够协同工作。
 use bytes::Bytes;
 use c10_networks::{
-    error::{ErrorRecovery, NetworkError, NetworkResult},
+    error::{NetworkError, NetworkResult},
     packet::buffer::BufferConfig,
     packet::{Packet, PacketBuffer, PacketBuilder, PacketParser, PacketSerializer, PacketType},
     protocol::{
@@ -303,9 +303,9 @@ async fn test_error_handling() -> NetworkResult<()> {
         assert!(!error.to_string().is_empty());
 
         // 验证错误恢复特性（兼容不同错误类型的策略差异）
-        let is_retryable = error.is_retryable();
-        let retry_delay = error.retry_delay();
-        let max_retries = error.max_retries();
+        let is_retryable = common::RustLangError::is_retryable(&error);
+        let retry_delay = common::RustLangError::retry_delay(&error);
+        let max_retries = common::RustLangError::max_retries(&error);
 
         // 若可重试，则应至少给出重试次数或延迟；否则允许均为空
         if is_retryable {

@@ -155,37 +155,22 @@ impl DnsResolver {
     }
 }
 
-/// 常用预设：Cloudflare DoH 与 DoT
+/// 常用预设：Cloudflare, Google, Quad9
 pub mod presets {
     use super::*;
 
-    /// Cloudflare DoH: <https://cloudflare-dns.com/dns-query>
-    pub fn cloudflare_doh() -> (ResolverConfig, ResolverOpts) {
-        (ResolverConfig::cloudflare_https(), ResolverOpts::default())
+    /// Cloudflare DNS: 1.1.1.1 and 1.0.0.1
+    pub fn cloudflare() -> (ResolverConfig, ResolverOpts) {
+        (ResolverConfig::cloudflare(), ResolverOpts::default())
     }
 
-    /// Cloudflare DoT: 1.1.1.1:853 with SNI
-    pub fn cloudflare_dot() -> (ResolverConfig, ResolverOpts) {
-        (ResolverConfig::cloudflare_tls(), ResolverOpts::default())
+    /// Google DNS: 8.8.8.8 and 8.8.4.4
+    pub fn google() -> (ResolverConfig, ResolverOpts) {
+        (ResolverConfig::google(), ResolverOpts::default())
     }
 
-    /// Google DoH: <https://dns.google/dns-query>
-    pub fn google_doh() -> (ResolverConfig, ResolverOpts) {
-        (ResolverConfig::google_https(), ResolverOpts::default())
-    }
-
-    /// Google DoT: 8.8.8.8:853 with SNI dns.google
-    pub fn google_dot() -> (ResolverConfig, ResolverOpts) {
-        (ResolverConfig::google_tls(), ResolverOpts::default())
-    }
-
-    /// Quad9 DoH: <https://dns.quad9.net/dns-query>
-    pub fn quad9_doh() -> (ResolverConfig, ResolverOpts) {
-        (ResolverConfig::quad9_https(), ResolverOpts::default())
-    }
-
-    /// Quad9 DoT: 9.9.9.9:853 with SNI dns.quad9.net
-    pub fn quad9_dot() -> (ResolverConfig, ResolverOpts) {
-        (ResolverConfig::quad9_tls(), ResolverOpts::default())
+    /// Quad9 DNS: 9.9.9.9 and 149.112.112.112
+    pub fn quad9() -> (ResolverConfig, ResolverOpts) {
+        (ResolverConfig::quad9(), ResolverOpts::default())
     }
 }

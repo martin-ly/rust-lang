@@ -6,9 +6,7 @@
 //!   cargo miri test miri_tests
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
-use std::cell::RefCell;
 use std::rc::{Rc, Weak};
-use std::sync::{Arc, Mutex};
 
 // ==================== 单例模式 ====================
 

@@ -4,7 +4,7 @@
 //! 确保各个模块的性能指标符合预期。
 use bytes::Bytes;
 use c10_networks::{
-    error::{ErrorRecovery, NetworkError},
+    error::NetworkError,
     packet::{Packet, PacketBuilder, PacketStats, PacketType},
     protocol::{
         http::{HttpMethod, HttpStatusCode, HttpVersion},
@@ -405,9 +405,9 @@ fn test_error_handling_performance() {
     let start = Instant::now();
     for i in 0..ITERATIONS {
         let error = NetworkError::Protocol(format!("error {}", i));
-        let _is_retryable = error.is_retryable();
-        let _retry_delay = error.retry_delay();
-        let _max_retries = error.max_retries();
+        let _is_retryable = common::RustLangError::is_retryable(&error);
+        let _retry_delay = common::RustLangError::retry_delay(&error);
+        let _max_retries = common::RustLangError::max_retries(&error);
         let _error_string = error.to_string();
     }
     let elapsed = start.elapsed();

@@ -173,6 +173,25 @@ impl ErrorRecovery for NetworkError {
     }
 }
 
+// 实现 RustLangError trait
+impl common::RustLangError for NetworkError {
+    fn error_code(&self) -> common::ErrorCode {
+        common::ErrorCode::Network
+    }
+
+    fn is_retryable(&self) -> bool {
+        ErrorRecovery::is_retryable(self)
+    }
+
+    fn retry_delay(&self) -> Option<Duration> {
+        ErrorRecovery::retry_delay(self)
+    }
+
+    fn max_retries(&self) -> Option<u32> {
+        ErrorRecovery::max_retries(self)
+    }
+}
+
 /// 错误上下文扩展
 pub trait ErrorContext<T> {
     /// 添加上下文信息
@@ -238,9 +257,9 @@ mod tests {
     #[test]
     fn test_error_recovery() {
         let timeout_error = NetworkError::Timeout(Duration::from_secs(5));
-        assert!(timeout_error.is_retryable());
+        assert!(common::RustLangError::is_retryable(&timeout_error));
         assert_eq!(
-            timeout_error.retry_delay(),
+            common::RustLangError::retry_delay(&timeout_error),
             Some(Duration::from_millis(100))
         );
         assert_eq!(timeout_error.max_retries(), Some(3));

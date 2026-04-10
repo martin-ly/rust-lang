@@ -139,12 +139,12 @@ mod tests {
     #[test]
     fn test_retryable_error() {
         let err = network_timeout(Duration::from_secs(1));
-        assert!(err.is_retryable());
-        assert_eq!(err.retry_delay(), Some(Duration::from_millis(100)));
-        assert_eq!(err.max_retries(), Some(3));
+        assert!(common::RustLangError::is_retryable(&err));
+        assert_eq!(common::RustLangError::retry_delay(&err), Some(Duration::from_millis(100)));
+        assert_eq!(common::RustLangError::max_retries(&err), Some(3));
         
         let err = tls_error("test");
-        assert!(!err.is_retryable());
+        assert!(!common::RustLangError::is_retryable(&err));
     }
 
     #[test]

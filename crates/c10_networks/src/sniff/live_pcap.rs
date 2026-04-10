@@ -1,4 +1,9 @@
-#![cfg(feature = "pcap_live")]
+//! Live packet capture using pcap
+//! 
+//! This module requires the `sniff` and `pcap` features to be enabled.
+
+#![cfg(all(feature = "sniff", feature = "pcap"))]
+
 use crate::error::{NetworkError, NetworkResult};
 use crate::sniff::arp::ArpRecord;
 use pcap::{Active, Capture, Device};

@@ -333,7 +333,7 @@ fn test_pin_box_heap() {
 /// Future 状态机
 enum StateMachine {
     Start,
-    Processing { value: i32 },
+    Processing { _value: i32 },
     Complete,
 }
 
@@ -348,10 +348,10 @@ impl Future for StateMachineFuture {
     fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
         match self.state {
             StateMachine::Start => {
-                self.state = StateMachine::Processing { value: 42 };
+                self.state = StateMachine::Processing { _value: 42 };
                 Poll::Pending
             }
-            StateMachine::Processing { value: _ } => {
+            StateMachine::Processing { _value: _ } => {
                 self.state = StateMachine::Complete;
                 Poll::Pending
             }

@@ -1,3 +1,9 @@
+//! TCP/ARP packet capture pipeline using pnet
+//! 
+//! This module requires the `sniff` and `pcap` features to be enabled.
+
+#![cfg(all(feature = "sniff", feature = "pcap"))]
+
 use crate::error::{NetworkError, NetworkResult};
 use crate::sniff::{ArpRecord, ArpSniffConfig};
 use pnet_datalink::{self as datalink, Channel, Config};

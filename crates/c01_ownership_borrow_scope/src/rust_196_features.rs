@@ -247,11 +247,11 @@ mod tests {
             "nested_some"
         );
         assert_eq!(
-            OwnershipGuardExamples::check_optional_ownership(Some(None)),
+            OwnershipGuardExamples::check_optional_ownership(Some(None::<i32>)),
             "inner_none"
         );
         assert_eq!(
-            OwnershipGuardExamples::check_optional_ownership(None),
+            OwnershipGuardExamples::check_optional_ownership::<i32>(None),
             "outer_none"
         );
     }

@@ -25,28 +25,28 @@ async fn main() -> anyhow::Result<()> {
 }
 
 async fn try_cloudflare_doh(domain: &str) -> anyhow::Result<Vec<std::net::IpAddr>> {
-    let (cfg, mut opts) = presets::cloudflare_doh();
+    let (cfg, mut opts) = presets::cloudflare();
     opts.timeout = Duration::from_millis(3000);
     let r = DnsResolver::from_config(cfg, opts).await?;
     Ok(r.lookup_ips(domain).await?)
 }
 
 async fn try_google_doh(domain: &str) -> anyhow::Result<Vec<std::net::IpAddr>> {
-    let (cfg, mut opts) = presets::google_doh();
+    let (cfg, mut opts) = presets::google();
     opts.timeout = Duration::from_millis(3000);
     let r = DnsResolver::from_config(cfg, opts).await?;
     Ok(r.lookup_ips(domain).await?)
 }
 
 async fn try_cloudflare_dot(domain: &str) -> anyhow::Result<Vec<std::net::IpAddr>> {
-    let (cfg, mut opts) = presets::cloudflare_dot();
+    let (cfg, mut opts) = presets::cloudflare();
     opts.timeout = Duration::from_millis(3000);
     let r = DnsResolver::from_config(cfg, opts).await?;
     Ok(r.lookup_ips(domain).await?)
 }
 
 async fn try_google_dot(domain: &str) -> anyhow::Result<Vec<std::net::IpAddr>> {
-    let (cfg, mut opts) = presets::google_dot();
+    let (cfg, mut opts) = presets::google();
     opts.timeout = Duration::from_millis(3000);
     let r = DnsResolver::from_config(cfg, opts).await?;
     Ok(r.lookup_ips(domain).await?)

@@ -18,7 +18,7 @@ thiserror = { workspace = true }
 wasm-bindgen = { workspace = true }
 js-sys = { workspace = true }
 wasm-bindgen-futures = { workspace = true }
-
+web-sys = { version = "0.3.77", features = ["console", "Window", "Document", "HtmlElement", "Storage", "Performance", "Request", "RequestInit", "RequestMode", "Response", "Headers"] }
 
 [dev-dependencies]
 criterion = { workspace = true }

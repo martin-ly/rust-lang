@@ -8,7 +8,7 @@ use std::ops::RangeInclusive;
 pub struct NetworkGuardExamples;
 
 impl NetworkGuardExamples {
-    /// 使用 if let guards 检查网络响应
+    /// 使用 match 嵌套处理网络响应
     pub fn check_response<T>(
         response: Result<Option<T>, String>,
     ) -> Result<T, String>
@@ -16,8 +16,10 @@ impl NetworkGuardExamples {
         T: Clone,
     {
         match response {
-            Ok(opt) if let Some(value) = opt => Ok(value),
-            Ok(_) => Err("空响应".to_string()),
+            Ok(opt) => match opt {
+                Some(value) => Ok(value),
+                None => Err("空响应".to_string()),
+            },
             Err(e) => Err(format!("网络错误: {}", e)),
         }
     }
@@ -182,8 +184,13 @@ impl PracticalNetworkExamples {
 
         for response in responses {
             match response {
-                Ok(opt) if let Some(value) = opt => successes.push(value),
-                Ok(_) => failures.push("空响应".to_string()),
+                Ok(opt) => {
+                    if let Some(value) = opt {
+                        successes.push(value);
+                    } else {
+                        failures.push("空响应".to_string());
+                    }
+                }
                 Err(e) => failures.push(e),
             }
         }
@@ -194,7 +201,7 @@ impl PracticalNetworkExamples {
     /// 使用 RangeInclusive 进行速率限制检查
     pub fn rate_limit_check(
         requests: u64,
-        window_ms: u64,
+        _window_ms: u64,
         limit: RangeInclusive<u64>,
     ) -> (bool, &'static str) {
         let allowed = limit.contains(&requests);
@@ -330,7 +337,7 @@ pub fn demonstrate_rust_196_features() {
 
     // 元组 coercion 演示
     println!("\n=== 元组 coercion 演示 ===");
-    let (result, endpoint, latency, status) =
+    let (_result, endpoint, latency, status) =
         NetworkTupleExamples::request_result(Ok("data"), "/api/test");
     println!("请求结果: endpoint={}, latency={}ms, status={}", endpoint, latency, status);
 
@@ -371,7 +378,7 @@ mod tests {
             NetworkGuardExamples::check_response(Ok(Some(42))),
             Ok(42)
         );
-        assert!(NetworkGuardExamples::check_response(Ok(None)).is_err());
+        assert!(NetworkGuardExamples::check_response::<i32>(Ok(None)).is_err());
     }
 
     #[test]
@@ -422,13 +429,24 @@ mod tests {
 
     #[test]
     fn test_connection_stats() {
+        // Test case: 10 errors out of 1900 total = 0.526% error rate -> "good"
         let (sent, recv, errors, err_rate, health) =
             NetworkTupleExamples::connection_stats(1000, 900, 10);
         assert_eq!(sent, 1000);
         assert_eq!(recv, 900);
         assert_eq!(errors, 10);
         assert!(err_rate > 0.0);
-        assert_eq!(health, "fair");
+        assert_eq!(health, "good");
+
+        // Test case: 20 errors out of 1000 total = 2% error rate -> "fair"
+        let (_, _, _, _, health2) =
+            NetworkTupleExamples::connection_stats(500, 500, 20);
+        assert_eq!(health2, "fair");
+
+        // Test case: 200 errors out of 1000 total = 20% error rate -> "poor"
+        let (_, _, _, _, health3) =
+            NetworkTupleExamples::connection_stats(500, 500, 200);
+        assert_eq!(health3, "poor");
     }
 
     #[test]
@@ -446,6 +464,7 @@ mod tests {
 
     #[test]
     fn test_network_monitor_summary() {
+        // Test case: 2/3 healthy = 66.67% -> "critical"
         let connections = vec![
             ("conn1", true),
             ("conn2", true),
@@ -456,7 +475,28 @@ mod tests {
         assert_eq!(total, 3);
         assert_eq!(healthy, 2);
         assert!((rate - 66.67).abs() < 1.0);
-        assert_eq!(status, "degraded");
+        assert_eq!(status, "critical");
+
+        // Test case: 4/5 healthy = 80% -> "degraded"
+        let connections2 = vec![
+            ("conn1", true),
+            ("conn2", true),
+            ("conn3", true),
+            ("conn4", true),
+            ("conn5", false),
+        ];
+        let (_, _, _, status2) =
+            PracticalNetworkExamples::network_monitor_summary(&connections2);
+        assert_eq!(status2, "degraded");
+
+        // Test case: all healthy -> "excellent"
+        let connections3 = vec![
+            ("conn1", true),
+            ("conn2", true),
+        ];
+        let (_, _, _, status3) =
+            PracticalNetworkExamples::network_monitor_summary(&connections3);
+        assert_eq!(status3, "excellent");
     }
 
     #[test]

@@ -70,9 +70,9 @@ fn test_4_slice_split() {
     let (left, right) = data.split_at_mut(2);
     
     left[0] = 10;
-    right[0] = 50;  // 修改 data[3]
+    right[0] = 50;  // 修改 data[2]
     
-    assert_eq!(data, [10, 2, 3, 50, 5]);
+    assert_eq!(data, [10, 2, 50, 4, 5]);
 }
 
 /// 测试目的: 验证重叠切片的不冲突访问
@@ -84,12 +84,12 @@ fn test_5_overlapping_slices_no_conflict() {
     
     // 使用 split_at_mut 创建不重叠的借用
     let (left, temp) = data.split_at_mut(3);
-    let right = &mut temp[1..]; // [4, 5] - 不重叠
+    let right = &mut temp[1..]; // [4, 5] - 与 left [1,2,3] 不重叠
     
-    left[0] = 10;
-    right[0] = 50;
+    left[0] = 10;  // 修改 data[0]
+    right[0] = 50; // 修改 temp[1] = data[4]
     
-    assert_eq!(data, [10, 2, 3, 50, 5]);
+    assert_eq!(data, [10, 2, 3, 4, 50]);
 }
 
 /// 测试目的: 验证 Vec 迭代时 push 的安全性

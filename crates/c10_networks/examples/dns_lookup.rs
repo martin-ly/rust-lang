@@ -65,7 +65,7 @@ async fn main() -> anyhow::Result<()> {
 
     // 2) 使用 Cloudflare DoH 解析器进行 TXT 记录查询
     println!("\n🔒 使用 Cloudflare DoH 解析器查询 TXT 记录:");
-    let (cfg, opts) = presets::cloudflare_doh();
+    let (cfg, opts) = presets::cloudflare();
     let doh = DnsResolver::from_config(cfg, opts).await?;
     let txt = doh.lookup_txt("example.com").await?;
     println!("   域名: example.com");

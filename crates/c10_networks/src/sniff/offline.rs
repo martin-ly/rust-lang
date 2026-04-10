@@ -1,28 +1,22 @@
-#[cfg(feature = "offline")]
+//! Offline pcap file analysis
+//! 
+//! This module requires the `sniff` and `pcap` features to be enabled.
+
+#![cfg(all(feature = "sniff", feature = "pcap"))]
+
 use crate::error::{NetworkError, NetworkResult};
-#[cfg(feature = "offline")]
 use pcap::Capture;
-#[cfg(feature = "offline")]
 use pnet_packet::Packet;
-#[cfg(feature = "offline")]
 use pnet_packet::arp::{ArpHardwareTypes, ArpOperations, ArpPacket};
-#[cfg(feature = "offline")]
 use pnet_packet::ethernet::{EtherTypes, EthernetPacket};
-#[cfg(feature = "offline")]
 use pnet_packet::ip::IpNextHeaderProtocols;
-#[cfg(feature = "offline")]
 use pnet_packet::ipv4::Ipv4Packet;
-#[cfg(feature = "offline")]
 use pnet_packet::tcp::TcpPacket;
-#[cfg(feature = "offline")]
 use pnet_packet::udp::UdpPacket;
-#[cfg(feature = "offline")]
 use std::net::{IpAddr, Ipv4Addr};
 
-#[cfg(feature = "offline")]
 use super::arp::ArpRecord;
 
-#[cfg(feature = "offline")]
 pub fn parse_pcap_arp(path: &str, limit: Option<usize>) -> NetworkResult<Vec<ArpRecord>> {
     let mut cap = Capture::from_file(path).map_err(|e| NetworkError::Other(e.to_string()))?;
     let mut out = Vec::new();
@@ -64,14 +58,12 @@ pub fn parse_pcap_arp(path: &str, limit: Option<usize>) -> NetworkResult<Vec<Arp
     Ok(out)
 }
 
-#[cfg(feature = "offline")]
 #[derive(Debug, Default, Clone)]
 pub struct TcpOfflineStats {
     pub packets: u64,
     pub bytes: u64,
 }
 
-#[cfg(feature = "offline")]
 pub fn parse_pcap_tcp_stats(path: &str) -> NetworkResult<TcpOfflineStats> {
     let mut cap = Capture::from_file(path).map_err(|e| NetworkError::Other(e.to_string()))?;
     let mut stats = TcpOfflineStats::default();
@@ -93,14 +85,12 @@ pub fn parse_pcap_tcp_stats(path: &str) -> NetworkResult<TcpOfflineStats> {
     Ok(stats)
 }
 
-#[cfg(feature = "offline")]
 #[derive(Debug, Default, Clone)]
 pub struct UdpOfflineStats {
     pub packets: u64,
     pub bytes: u64,
 }
 
-#[cfg(feature = "offline")]
 pub fn parse_pcap_udp_stats(path: &str) -> NetworkResult<UdpOfflineStats> {
     let mut cap = Capture::from_file(path).map_err(|e| NetworkError::Other(e.to_string()))?;
     let mut stats = UdpOfflineStats::default();

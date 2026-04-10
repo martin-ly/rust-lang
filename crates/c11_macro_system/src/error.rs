@@ -9,18 +9,23 @@ use thiserror::Error;
 /// C11 crate-specific error type
 #[derive(Error, Debug, Clone)]
 pub enum MacroError {
+    /// 解析错误
     #[error("parse error: {0}")]
     ParseError(String),
     
+    /// 扩展错误
     #[error("expansion error: {0}")]
     ExpansionError(String),
     
+    /// 过程宏错误
     #[error("proc macro error: {0}")]
     ProcMacro(String),
     
+    /// 声明宏错误
     #[error("decl macro error: {0}")]
     DeclMacro(String),
     
+    /// 卫生性错误
     #[error("hygiene error: {0}")]
     Hygiene(String),
 }

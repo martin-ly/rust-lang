@@ -220,8 +220,14 @@ mod tests {
     #[test]
     fn test_async_task_scheduler() {
         let scheduler = AsyncTaskScheduler::new(100, 4);
-        assert_eq!(scheduler.get_all_ranges().len(), 4);
+        // 100 tasks / batch_size 4 = 25 ranges
+        assert_eq!(scheduler.get_all_ranges().len(), 25);
+        // batch 0 should be in active_range 0..=3
         assert!(scheduler.is_batch_active(0));
+        // batch 4 should also be in active_range 0..=3
+        assert!(scheduler.is_batch_active(3));
+        // batch 4 should NOT be in active_range
+        assert!(!scheduler.is_batch_active(4));
     }
 
     #[test]

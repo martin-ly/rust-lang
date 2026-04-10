@@ -122,8 +122,8 @@ fn test_manually_drop_access() {
     assert_eq!(manual.len(), 3);
     assert_eq!(manual[0], 1);
     
-    // 使用 into_inner 取出值
-    let vec = unsafe { ManuallyDrop::into_inner(manual) };
+    // 使用 into_inner 取出值（该方法已经是安全的，不需要 unsafe）
+    let vec = ManuallyDrop::into_inner(manual);
     assert_eq!(vec, vec![1, 2, 3]);
 }
 
@@ -240,7 +240,7 @@ fn test_union_basic() {
 // ==================== FFI 类型测试 ====================
 
 use std::ffi::c_void;
-use std::os::raw::{c_int, c_char};
+use std::os::raw::c_int;
 
 /// 测试目的: 验证外部类型指针操作
 /// 测试场景: 使用 FFI 类型进行指针转换
@@ -263,6 +263,7 @@ fn test_ffi_pointer() {
 /// 测试场景: 创建对齐类型并验证地址对齐
 /// 预期结果: 地址应该满足对齐要求
 #[repr(align(16))]
+#[allow(dead_code)]
 struct Aligned16(u8);
 
 #[test]
@@ -433,6 +434,7 @@ fn test_out_of_bounds() {
 #[cfg(test)]
 mod utils {
     /// 安全包装：将 &[u8] 转换为 &str（带验证）
+    #[allow(dead_code)]
     pub fn safe_bytes_to_str(bytes: &[u8]) -> Option<&str> {
         std::str::from_utf8(bytes).ok()
     }

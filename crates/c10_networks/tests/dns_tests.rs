@@ -36,7 +36,7 @@ async fn dns_doh_txt() {
         eprintln!("skip dns tests: set C10_DNS_TESTS=1 to run");
         return;
     }
-    let (cfg, opts) = presets::cloudflare_doh();
+    let (cfg, opts) = presets::cloudflare();
     let r = DnsResolver::from_config(cfg, opts).await.expect("resolver");
     let _ = r.lookup_txt("example.com").await.expect("txt");
 }

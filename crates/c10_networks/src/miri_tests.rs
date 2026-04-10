@@ -186,6 +186,7 @@ fn test_uri_parsing() {
 // ==================== 网络状态机 ====================
 
 /// 连接状态枚举
+#[allow(dead_code)]
 enum ConnectionState {
     Closed,
     SynSent,
