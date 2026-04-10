@@ -22,6 +22,7 @@ pub mod asynchronous_communication;
 pub mod diagnostics;
 pub mod epoll;
 pub mod error;
+pub mod error_unified;
 pub mod mac;
 pub mod network_topology;
 pub mod p2p;
@@ -77,3 +78,7 @@ pub const NAME: &str = env!("CARGO_PKG_NAME");
 pub mod hello {
     tonic::include_proto!("hello");
 }
+
+
+#[cfg(test)]
+pub mod miri_tests;

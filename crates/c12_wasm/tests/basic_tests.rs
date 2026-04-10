@@ -105,16 +105,16 @@ fn test_find_max() {
 #[test]
 fn test_reverse_array() {
     assert_eq!(reverse_array(&[1, 2, 3, 4, 5]), vec![5, 4, 3, 2, 1]);
-    assert_eq!(reverse_array(&[]), vec![]);
+    assert_eq!(reverse_array(&[] as &[i32]), Vec::<i32>::new());
     assert_eq!(reverse_array(&[42]), vec![42]);
 }
 
 #[test]
 fn test_filter_even() {
     assert_eq!(filter_even(&[1, 2, 3, 4, 5, 6]), vec![2, 4, 6]);
-    assert_eq!(filter_even(&[1, 3, 5]), vec![]);
+    assert_eq!(filter_even(&[1, 3, 5]), Vec::<i32>::new());
     assert_eq!(filter_even(&[2, 4, 6]), vec![2, 4, 6]);
-    assert_eq!(filter_even(&[]), vec![]);
+    assert_eq!(filter_even(&[] as &[i32]), Vec::<i32>::new());
 }
 
 // ============================================================================

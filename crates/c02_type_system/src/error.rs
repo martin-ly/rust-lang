@@ -1,10 +1,9 @@
-//! # C02: 类型系统错误处理
-//!
-//! 提供类型系统相关的错误类型，集成到统一的错误处理系统中。
+//! C02: 类型系统错误处理
 
-use common::{RustLangError, TypeError, Result};
-
-pub use common::{ErrorContext, ErrorRecovery};
+pub use common::{
+    TypeError, RustLangError, Result,
+    ErrorContext, ErrorRecovery,
+};
 
 /// C02 crate 的结果类型
 pub type C02Result<T> = Result<T>;

@@ -97,6 +97,7 @@ Rust的泛型是一种类型的态射，
 */
 
 pub mod associated_type;
+pub mod error;
 pub mod natural_transformation;
 pub mod polymorphism;
 pub mod trait_bound;
@@ -376,3 +377,7 @@ pub fn project_status_summary() {
 
     println!("\n🎉 Rust Generics 多任务推进完成！");
 }
+
+
+#[cfg(test)]
+pub mod miri_tests;

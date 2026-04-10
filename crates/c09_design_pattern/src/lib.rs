@@ -26,6 +26,7 @@ pub mod web_framework_patterns;
 
 // 错误处理模块
 pub mod error_handling;
+pub mod error_unified;
 
 // Rust 1.89 新特性演示模块
 pub mod archive;
@@ -377,3 +378,7 @@ mod tests {
         assert_eq!(get_version(), "1.0.1");
     }
 }
+
+
+#[cfg(test)]
+pub mod miri_tests;

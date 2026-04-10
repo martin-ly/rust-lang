@@ -6,29 +6,55 @@ on:
     - cron: '0 0 * * 1'
   workflow_dispatch:
 
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_NET_RETRY: 10
+  RUSTUP_MAX_RETRIES: 10
+
 jobs:
   track-version:
+    name: Track Rust Version
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Cache Python dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Python dependencies
+        run: |
+          pip install requests beautifulsoup4
+
       - name: Run version tracker
         id: tracker
         run: |
-          python scripts/rust_version_tracker.py --check --report
-          
-          # 检查是否有新版本
-          if grep -q "⚠️ 需要更新" reports/version_tracking_*.md 2>/dev/null; then
-            echo "has_update=true" >> $GITHUB_OUTPUT
+          if [ -f scripts/rust_version_tracker.py ]; then
+            python scripts/rust_version_tracker.py --check --report
+            
+            # 检查是否有新版本
+            if grep -q "⚠️ 需要更新" reports/version_tracking_*.md 2>/dev/null; then
+              echo "has_update=true" >> $GITHUB_OUTPUT
+            else
+              echo "has_update=false" >> $GITHUB_OUTPUT
+            fi
           else
+            echo "Version tracker script not found"
             echo "has_update=false" >> $GITHUB_OUTPUT
           fi
 
@@ -37,16 +63,22 @@ jobs:
         with:
           name: version-tracking-report
           path: reports/version_tracking_*.md
+          retention-days: 90
 
       - name: Create issue for new version
         if: steps.tracker.outputs.has_update == 'true'
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
             const path = require('path');
             
             const reportsDir = 'reports';
+            if (!fs.existsSync(reportsDir)) {
+              console.log('Reports directory not found');
+              return;
+            }
+            
             const files = fs.readdirSync(reportsDir);
             const latestReport = files
               .filter(f => f.startsWith('version_tracking_'))
@@ -61,6 +93,18 @@ jobs:
                 repo: context.repo.repo,
                 title: '🎉 Rust 新版本可用',
                 body: content,
-                labels: ['enhancement', 'rust-version']
+                labels: ['enhancement', 'rust-version', 'automated']
               });
             }
+
+      - name: Summary
+        run: |
+          echo "## Version Tracking Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Update Available:** ${{ steps.tracker.outputs.has_update }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.tracker.outputs.has_update }}" == "true" ]; then
+            echo "⚠️ A new Rust version is available. An issue has been created." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ Rust version is up to date." >> $GITHUB_STEP_SUMMARY
+          fi

@@ -21,9 +21,9 @@ default = []
 ecosystem = []  # 启用生态库示例模块
 
 [dependencies]
-common = { path = "../common" }
-thiserror = { workspace = true }
+common = { workspace = true, features = ["error-trait"] }
 anyhow = { workspace = true }
+thiserror = { workspace = true }
 wasm-bindgen = { workspace = true }
 wasm-bindgen-futures = { workspace = true }
 js-sys = { workspace = true }

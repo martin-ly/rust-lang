@@ -8,16 +8,22 @@ on:
   schedule:
     # 每周运行一次
     - cron: '0 0 * * 0'
+  workflow_dispatch:
 
 env:
   CARGO_TERM_COLOR: always
+  CARGO_NET_RETRY: 10
+  RUSTUP_MAX_RETRIES: 10
+  # Miri 不使用 sccache，因为 Miri 需要特殊编译
 
 jobs:
+  # Miri 核心测试（并行）
   miri-tree-borrows:
     name: Miri (Tree Borrows)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Install Rust nightly with Miri
         uses: dtolnay/rust-toolchain@nightly
@@ -28,10 +34,13 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ~/.cargo/registry
-            ~/.cargo/git
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
             target
-          key: ${{ runner.os }}-miri-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-miri-tb-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-miri-tb-
 
       - name: Run Miri setup
         run: cargo miri setup
@@ -40,13 +49,13 @@ jobs:
         run: cargo miri test --workspace --all-features
         env:
           MIRIFLAGS: "-Zmiri-tree-borrows -Zmiri-ignore-leaks"
-        continue-on-error: false
 
   miri-stacked-borrows:
     name: Miri (Stacked Borrows - Baseline)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Install Rust nightly with Miri
         uses: dtolnay/rust-toolchain@nightly
@@ -57,10 +66,13 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ~/.cargo/registry
-            ~/.cargo/git
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
             target
           key: ${{ runner.os }}-miri-sb-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-miri-sb-
 
       - name: Run Miri setup
         run: cargo miri setup
@@ -75,7 +87,8 @@ jobs:
     name: Miri (Strict Mode)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Install Rust nightly with Miri
         uses: dtolnay/rust-toolchain@nightly
@@ -91,32 +104,59 @@ jobs:
           MIRIFLAGS: "-Zmiri-tree-borrows -Zmiri-tag-raw-pointers -Zmiri-ignore-leaks"
         continue-on-error: true  # 严格模式可能有更多限制
 
-  miri-specific-crates:
+  # 按 crate 并行测试
+  miri-per-crate:
     name: Miri (Per-Crate)
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         crate:
           - c01_ownership_borrow_scope
           - c02_type_system
+          - c03_structs_enums
+          - c04_collections
           - c05_threads
           - c06_async
+          - c07_error_handling
+          - c08_modules
         include:
           - crate: c01_ownership_borrow_scope
             flags: "-Zmiri-tree-borrows"
           - crate: c02_type_system
             flags: "-Zmiri-tree-borrows"
+          - crate: c03_structs_enums
+            flags: "-Zmiri-tree-borrows"
+          - crate: c04_collections
+            flags: "-Zmiri-tree-borrows"
           - crate: c05_threads
             flags: "-Zmiri-tree-borrows -Zmiri-disable-isolation"
           - crate: c06_async
             flags: "-Zmiri-tree-borrows -Zmiri-disable-isolation"
+          - crate: c07_error_handling
+            flags: "-Zmiri-tree-borrows"
+          - crate: c08_modules
+            flags: "-Zmiri-tree-borrows"
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Install Rust nightly with Miri
         uses: dtolnay/rust-toolchain@nightly
         with:
           components: miri, rust-src
+
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            target
+          key: ${{ runner.os }}-miri-${{ matrix.crate }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-miri-${{ matrix.crate }}-
 
       - name: Run Miri setup
         run: cargo miri setup
@@ -125,3 +165,30 @@ jobs:
         run: cargo miri test -p ${{ matrix.crate }} --all-features
         env:
           MIRIFLAGS: ${{ matrix.flags }}
+
+  # Miri 测试汇总
+  miri-summary:
+    name: Miri Summary
+    runs-on: ubuntu-latest
+    needs: [miri-tree-borrows, miri-stacked-borrows, miri-strict-mode, miri-per-crate]
+    if: always()
+    steps:
+      - name: Generate summary
+        run: |
+          echo "# Miri Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Miri (Tree Borrows) | ${{ needs.miri-tree-borrows.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Miri (Stacked Borrows) | ${{ needs.miri-stacked-borrows.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Miri (Strict Mode) | ${{ needs.miri-strict-mode.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Miri (Per-Crate) | ${{ needs.miri-per-crate.result }} |" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ needs.miri-tree-borrows.result }}" != "success" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ Tree Borrows tests failed" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ All critical Miri tests passed" >> $GITHUB_STEP_SUMMARY

@@ -118,7 +118,7 @@ pub trait ManagedResource {
     fn is_released(&self) -> bool;
     
     /// 释放资源
-    fn release(&mut self) -> Result<(), crate::error::CommonError>;
+    fn release(&mut self) -> Result<(), crate::RustLangError>;
 }
 
 /// 生命周期管理 trait
@@ -126,13 +126,13 @@ pub trait ManagedResource {
 /// 用于具有生命周期的类型
 pub trait Lifecycle {
     /// 初始化
-    fn initialize(&mut self) -> Result<(), crate::error::CommonError>;
+    fn initialize(&mut self) -> Result<(), crate::RustLangError>;
     
     /// 启动
-    fn start(&mut self) -> Result<(), crate::error::CommonError>;
+    fn start(&mut self) -> Result<(), crate::RustLangError>;
     
     /// 停止
-    fn stop(&mut self) -> Result<(), crate::error::CommonError>;
+    fn stop(&mut self) -> Result<(), crate::RustLangError>;
     
     /// 检查是否运行中
     fn is_running(&self) -> bool;
@@ -140,7 +140,6 @@ pub trait Lifecycle {
 
 #[cfg(feature = "async")]
 mod async_traits {
-    use super::*;
     use std::future::Future;
     use std::pin::Pin;
     
@@ -153,9 +152,9 @@ mod async_traits {
     
     /// 异步生命周期管理 trait
     pub trait AsyncLifecycle {
-        fn initialize_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::error::CommonError>> + Send + '_>>;
-        fn start_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::error::CommonError>> + Send + '_>>;
-        fn stop_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::error::CommonError>> + Send + '_>>;
+        fn initialize_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::RustLangError>> + Send + '_>>;
+        fn start_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::RustLangError>> + Send + '_>>;
+        fn stop_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::RustLangError>> + Send + '_>>;
     }
 }
 
@@ -185,6 +184,8 @@ mod tests {
             std::mem::size_of::<Self>() + self.id.len()
         }
     }
+    
+    use super::{Identifiable, Measurable};
     
     #[test]
     fn test_identifiable() {

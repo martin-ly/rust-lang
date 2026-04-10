@@ -1,10 +1,9 @@
-//! # C04: 泛型错误处理
-//!
-//! 提供泛型相关的错误类型，集成到统一的错误处理系统中。
+//! C04: 泛型错误处理
 
-use common::{GenericError, RustLangError, Result};
-
-pub use common::{ErrorContext, ErrorRecovery};
+pub use common::{
+    GenericError, RustLangError, Result,
+    ErrorContext, ErrorRecovery,
+};
 
 /// C04 crate 的结果类型
 pub type C04Result<T> = Result<T>;

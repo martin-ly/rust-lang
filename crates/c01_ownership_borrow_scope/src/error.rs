@@ -1,10 +1,9 @@
-//! # C01: 所有权、借用和作用域错误处理
-//!
-//! 提供所有权相关的错误类型，集成到统一的错误处理系统中。
+//! C01: 所有权、借用和作用域错误处理
 
-use common::{OwnershipError, RustLangError, Result};
-
-pub use common::{ErrorContext, ErrorRecovery};
+pub use common::{
+    OwnershipError, RustLangError, Result,
+    ErrorContext, ErrorRecovery,
+};
 
 /// C01 crate 的结果类型
 pub type C01Result<T> = Result<T>;
@@ -37,24 +36,4 @@ pub fn interior_mutability_error<T: Into<String>>(msg: T) -> RustLangError {
 /// 创建内存安全错误
 pub fn memory_safety_error<T: Into<String>>(msg: T) -> RustLangError {
     RustLangError::Ownership(OwnershipError::MemorySafety(msg.into()))
-}
-
-/// 便捷宏：检查借用冲突
-#[macro_export]
-macro_rules! ensure_no_borrow_conflict {
-    ($condition:expr, $msg:expr) => {
-        if !$condition {
-            return Err($crate::error::borrow_conflict($msg));
-        }
-    };
-}
-
-/// 便捷宏：检查内存安全
-#[macro_export]
-macro_rules! ensure_memory_safe {
-    ($condition:expr, $msg:expr) => {
-        if !$condition {
-            return Err($crate::error::memory_safety_error($msg));
-        }
-    };
 }

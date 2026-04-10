@@ -19,11 +19,11 @@ tokio-stream = { workspace = true }
 tokio-util = { workspace = true }
 
 # 日志和追踪 - 使用工作区统一版本
-common = { path = "../common", features = ["async", "tracing"] }
-tracing = { workspace = true }
-tracing-subscriber = { workspace = true }
+common = { workspace = true, features = ["serde", "error-trait", "async", "tracing"] }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
 
 # 并发原语 - 更新到最新版本
 parking_lot = { workspace = true }

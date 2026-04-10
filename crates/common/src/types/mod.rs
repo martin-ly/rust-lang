@@ -253,7 +253,7 @@ impl<T> Paginated<T> {
     
     /// 获取总页数
     pub fn total_pages(&self) -> usize {
-        (self.total + self.pagination.per_page - 1) / self.pagination.per_page
+        self.total.div_ceil(self.pagination.per_page)
     }
     
     /// 是否有下一页

@@ -18,9 +18,9 @@ path = "src/lib.rs"
 
 [dependencies]
 # 工作空间依赖
-common = { path = "../common" }
-thiserror = { workspace = true }
+common = { workspace = true, features = ["error-trait"] }
 anyhow = { workspace = true }
+thiserror = { workspace = true }
 syn = { workspace = true }
 quote = { workspace = true }
 proc-macro2 = { workspace = true }

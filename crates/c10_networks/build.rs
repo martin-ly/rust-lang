@@ -21,18 +21,17 @@ fn main() {
     let out_dir = std::env::var("OUT_DIR").expect("OUT_DIR not set");
     let generated_file = Path::new(&out_dir).join("hello.rs");
     
-    if let (Ok(proto_meta), Ok(gen_meta)) = (
-        std::fs::metadata(proto_file),
-        std::fs::metadata(&generated_file)
+    #[allow(clippy::collapsible_if)]
+    if let (
+        Ok(proto_time),
+        Ok(gen_time)
+    ) = (
+        std::fs::metadata(proto_file).and_then(|m| m.modified()),
+        std::fs::metadata(&generated_file).and_then(|m| m.modified())
     ) {
-        if let (Ok(proto_time), Ok(gen_time)) = (
-            proto_meta.modified(),
-            gen_meta.modified()
-        ) {
-            if gen_time > proto_time {
-                println!("cargo:warning=Generated code is up to date, skipping protobuf compilation");
-                return;
-            }
+        if gen_time > proto_time {
+            println!("cargo:warning=Generated code is up to date, skipping protobuf compilation");
+            return;
         }
     }
 

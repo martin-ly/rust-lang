@@ -33,9 +33,9 @@ shared_memory = "0.12.4"
 signal-hook = "0.4.3"
 
 # 错误处理
-common = { path = "../common" }
-thiserror = { workspace = true }
+common = { workspace = true, features = ["serde", "error-trait", "async", "tracing"] }
 anyhow = { workspace = true }
+thiserror = { workspace = true }
 
 # 日志记录
 tracing = { workspace = true }

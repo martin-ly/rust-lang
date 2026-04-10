@@ -622,14 +622,14 @@ missing_docs = "allow"
 
 [workspace.lints.clippy]
 all = { level = "warn", priority = -1 }
-correctness = "deny"
-suspicious = "warn"
-complexity = "warn"
-perf = "warn"
-style = "warn"
-pedantic = "allow"
-nursery = "allow"
-cargo = "allow"
+correctness = { level = "deny", priority = -1 }
+suspicious = { level = "warn", priority = -1 }
+complexity = { level = "warn", priority = -1 }
+perf = { level = "warn", priority = -1 }
+style = { level = "warn", priority = -1 }
+pedantic = { level = "allow", priority = -1 }
+nursery = { level = "allow", priority = -1 }
+cargo = { level = "allow", priority = -1 }
 # 额外有用的lints
 match_wildcard_for_single_variants = "warn"
 redundant_closure_for_method_calls = "warn"

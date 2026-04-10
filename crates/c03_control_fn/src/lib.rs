@@ -19,6 +19,7 @@
 //! - **并行前端**: 并行编译支持
 // 导出核心模块
 pub mod async_control_flow;
+pub mod error;
 pub mod rust_194_features; // Rust 1.94 特性
 pub mod rust_196_gen_examples; // Rust 1.96 gen 关键字
 
@@ -143,6 +144,9 @@ pub fn init() {
     );
     println!("📦 支持 Rust {}", ProjectInfo::rust_version());
 }
+
+#[cfg(test)]
+pub mod miri_tests;
 
 #[cfg(test)]
 mod tests {

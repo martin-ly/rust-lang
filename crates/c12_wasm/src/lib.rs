@@ -10,6 +10,7 @@
 //! - WASI 应用示例
 // 引入生态库示例模块
 pub mod ecosystem_examples;
+pub mod error;
 
 // 引入 WasmEdge 示例模块
 pub mod wasmedge_examples;
@@ -485,3 +486,7 @@ mod tests {
         assert!(!string_examples::is_palindrome("hello"));
     }
 }
+
+
+#[cfg(test)]
+pub mod miri_tests;

@@ -7,13 +7,17 @@ on:
     branches: [main]
   schedule:
     - cron: '0 0 * * 0'  # 每周日运行
+  workflow_dispatch:
 
 jobs:
-  check-links:
+  # Markdown 链接检查
+  check-markdown-links:
+    name: Check Markdown Links
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Check Markdown links
         uses: lycheeverse/lychee-action@v1
         with:
@@ -23,15 +27,74 @@ jobs:
             --exclude-path docs/2026_03_reorganization/
             --exclude "https://spec.ferrocene.dev/*"
             --exclude "file:///*"
+            --exclude "http://localhost:*"
+            --exclude "https://localhost:*"
             --timeout 30
             --max-retries 3
+            --retry-wait-time 5
             docs/
+            README.md
+            CHANGELOG.md
+            CONTRIBUTING.md
+            FAQ.md
           fail: false
-        
+
+      - name: Upload link check report
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-check-report
+          path: ./lychee/out.md
+          retention-days: 30
+
       - name: Create issue for broken links
-        if: failure()
-        uses: peter-evans/create-issue-from-file@v4
+        if: failure() && github.event_name == 'schedule'
+        uses: peter-evans/create-issue-from-file@v5
         with:
           title: "🔗 Broken Links Detected"
           content-filepath: ./lychee/out.md
-          labels: "documentation, automated"
+          labels: "documentation, automated, links"
+
+  # 检查内部链接
+  check-internal-links:
+    name: Check Internal Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check internal documentation links
+        run: |
+          echo "# Internal Link Check Report" > internal_links_report.md
+          echo "" >> internal_links_report.md
+          
+          # 检查 Markdown 文件中的相对链接
+          find . -name "*.md" -type f | while read -r file; do
+            grep -oE '\[([^]]+)\]\(([^)]+)\)' "$file" | grep -v "http" | grep -v "mailto" | while read -r link; do
+              target=$(echo "$link" | sed -E 's/\[([^]]+)\]\(([^)]+)\)/\2/')
+              # 处理锚点
+              target=${target%%#*}
+              # 处理查询参数
+              target=${target%%\?*}
+              
+              if [ -n "$target" ] && [ ! -e "$(dirname "$file")/$target" ] && [ ! -e "$target" ]; then
+                echo "- Broken link in $file: $target" >> internal_links_report.md
+              fi
+            done
+          done
+          
+          if [ -s internal_links_report.md ]; then
+            echo "" >> internal_links_report.md
+            echo "## Summary" >> internal_links_report.md
+            echo "Found potential broken internal links. Please review." >> internal_links_report.md
+          else
+            echo "- No broken internal links found!" >> internal_links_report.md
+          fi
+          
+          cat internal_links_report.md
+
+      - name: Upload internal link check report
+        uses: actions/upload-artifact@v4
+        with:
+          name: internal-link-check-report
+          path: internal_links_report.md
+          retention-days: 30

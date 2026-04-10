@@ -1,10 +1,9 @@
-//! # C03: 控制流和函数错误处理
-//!
-//! 提供控制流相关的错误类型，集成到统一的错误处理系统中。
+//! C03: 控制流和函数错误处理
 
-use common::{ControlFlowError, RustLangError, Result};
-
-pub use common::{ErrorContext, ErrorRecovery};
+pub use common::{
+    ControlFlowError, RustLangError, Result,
+    ErrorContext, ErrorRecovery,
+};
 
 /// C03 crate 的结果类型
 pub type C03Result<T> = Result<T>;

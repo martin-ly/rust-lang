@@ -44,6 +44,7 @@ use serde::{Deserialize, Serialize};
 
 // 核心模块
 pub mod error;
+pub mod error_unified;
 pub mod types;
 
 // 进程管理模块
@@ -354,3 +355,7 @@ mod tests {
         assert!(cleanup().is_ok());
     }
 }
+
+
+#[cfg(test)]
+pub mod miri_tests;

@@ -24,39 +24,40 @@
 //! - **异步模式**: Actor/Reactor/CSP三大模式完整实现
 //!
 //! ## 使用示例
-//!
-//! ```rust
-//! use c08_algorithms::topics::sorting::{SortingEngine, SortingAlgorithm};
-//! use c08_algorithms::topics::searching::{SearchingEngine, SearchingAlgorithm};
-//!
-//! // 排序示例
-//! let data = vec![3, 1, 4, 1, 5, 9, 2, 6];
-//! let result = SortingEngine::sort_sync(data, SortingAlgorithm::Quick);
-//! println!("排序结果: {:?}", result.data);
-//!
-//! // 搜索示例
-//! let data = vec![1, 3, 5, 7, 9, 11, 13];
-//! let result = SearchingEngine::binary_search_sync(&data, &7);
-//! println!("搜索结果: {:?}", result);
-//! ```
-//!
-//! ## 形式化验证示例
-//!
-//! ```rust
-//! use c08_algorithms::algorithms::formal_verification_examples::{
-//!     binary_search_verified,
-//!     insertion_sort_verified,
-//! };
-//!
-//! // 带完整证明的二分查找
-//! let arr = vec![1, 3, 5, 7, 9];
-//! assert_eq!(binary_search_verified(&arr, &5), Some(2));
-//!
-//! // 带循环不变量证明的插入排序
-//! let mut arr = vec![3, 1, 4, 1, 5];
-//! insertion_sort_verified(&mut arr);
-//! assert_eq!(arr, vec![1, 1, 3, 4, 5]);
-//! ```
+//
+// ```rust
+// use c08_algorithms::topics::sorting::{SortingEngine, SortingAlgorithm};
+// use c08_algorithms::topics::searching::{SearchingEngine, SearchingAlgorithm};
+//
+// // 排序示例
+// let data = vec![3, 1, 4, 1, 5, 9, 2, 6];
+// let result = SortingEngine::sort_sync(data, SortingAlgorithm::Quick);
+// println!("排序结果: {:?}", result.data);
+//
+// // 搜索示例
+// let data = vec![1, 3, 5, 7, 9, 11, 13];
+// let result = SearchingEngine::binary_search_sync(&data, &7);
+// println!("搜索结果: {:?}", result);
+// ```
+// ## 形式化验证示例
+//
+// ```rust
+// use c08_algorithms::algorithms::formal_verification_examples::{
+//     binary_search_verified,
+//     insertion_sort_verified,
+// };
+//
+// // 带完整证明的二分查找
+// let arr = vec![1, 3, 5, 7, 9];
+// assert_eq!(binary_search_verified(&arr, &5), Some(2));
+//
+// // 带循环不变量证明的插入排序
+// let mut arr = vec![3, 1, 4, 1, 5];
+// insertion_sort_verified(&mut arr);
+// assert_eq!(arr, vec![1, 1, 3, 4, 5]);
+// ```
+pub mod error;
+
 // 核心算法模块（Rust 1.90 特性对齐）
 pub mod algorithms;
 
@@ -235,3 +236,7 @@ mod tests {
         assert_eq!(get_version(), "0.3.0");
     }
 }
+
+
+#[cfg(test)]
+pub mod miri_tests;

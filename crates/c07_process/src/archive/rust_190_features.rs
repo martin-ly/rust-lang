@@ -156,7 +156,7 @@ impl Rust190Features {
         match result {
             Ok(()) => println!("✅ 所有操作成功完成"),
             Err(e) => {
-                println!("❌ 操作失败: {}", e);
+                println!("❌ 操作失败: {:?}", e);
                 // 错误恢复示例
                 self.handle_error_recovery(e)?;
             }
@@ -194,10 +194,10 @@ impl Rust190Features {
 
         // 使用改进的宏
         let error = process_error!(NotFound, 1234);
-        println!("宏生成的错误: {}", error);
+        println!("宏生成的错误: {:?}", error);
 
         let error_with_args = ProcessError::PermissionDenied(format!("用户 {} 权限不足", "admin"));
-        println!("带参数的宏错误: {}", error_with_args);
+        println!("带参数的宏错误: {:?}", error_with_args);
     }
 
     /// 演示新的标准库特性

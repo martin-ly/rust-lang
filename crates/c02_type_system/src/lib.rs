@@ -3,6 +3,7 @@
 #![allow(clippy::duplicated_attributes)]
 
 // 导出所有主要模块
+pub mod error;
 pub mod initial_object;
 pub mod performance;
 pub mod primitive_types;
@@ -47,6 +48,9 @@ pub mod concurrent_async_advanced;
 
 // 导出内存安全高级演示模块
 pub mod memory_safety_advanced;
+
+#[cfg(test)]
+pub mod miri_tests;
 
 // 导出高级宏系统模块
 pub mod advanced_macros;

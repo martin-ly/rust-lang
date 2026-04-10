@@ -218,6 +218,9 @@ pub mod async_semantics_theory;
 /// 异步递归分析 - 递归与迭代等价、尾递归优化、形式证明
 pub mod async_recursion_analysis;
 
+/// 统一错误处理模块
+pub mod error;
+
 /// Actor 与 Reactor 模式 - 并发模型、调度机制、实现对比
 pub mod actor_reactor_patterns;
 
@@ -302,3 +305,7 @@ pub mod async_debugging_advanced;
 
 /// 异步生态系统集成
 pub mod async_ecosystem_integration;
+
+
+#[cfg(test)]
+pub mod miri_tests;

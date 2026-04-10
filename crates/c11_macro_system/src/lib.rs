@@ -38,6 +38,7 @@
 
 // 公共模块导出
 pub mod declarative;
+pub mod error;
 pub mod utils;
 
 /// 过程宏实现模块（文档和示例）

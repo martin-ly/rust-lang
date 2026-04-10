@@ -1,131 +1,319 @@
-//! 公共错误类型模块
-//! 
-//! 提供统一的错误处理类型和 Result 别名，用于整个 Rust 学习项目。
-
-#![cfg(feature = "error-trait")]
-
+//! Unified error handling module
+use std::time::Duration;
 use thiserror::Error;
 
-/// 通用错误类型
 #[derive(Error, Debug, Clone)]
-pub enum CommonError {
-    /// I/O 错误
-    #[error("I/O error: {0}")]
+pub enum RustLangError {
+    #[error("ownership error: {0}")]
+    Ownership(#[from] OwnershipError),
+    #[error("type error: {0}")]
+    Type(#[from] TypeError),
+    #[error("control flow error: {0}")]
+    ControlFlow(#[from] ControlFlowError),
+    #[error("generic error: {0}")]
+    Generic(#[from] GenericError),
+    #[error("thread error: {0}")]
+    Thread(#[from] ThreadError),
+    #[error("async error: {0}")]
+    Async(#[from] AsyncError),
+    #[error("process error: {0}")]
+    Process(#[from] ProcessError),
+    #[error("algorithm error: {0}")]
+    Algorithm(#[from] AlgorithmError),
+    #[error("design pattern error: {0}")]
+    DesignPattern(#[from] DesignPatternError),
+    #[error("network error: {0}")]
+    Network(#[from] NetworkError),
+    #[error("macro error: {0}")]
+    Macro(#[from] MacroError),
+    #[error("wasm error: {0}")]
+    Wasm(#[from] WasmError),
+    #[error("IO error: {0}")]
     Io(String),
-    
-    /// 解析错误
-    #[error("Parse error: {0}")]
-    Parse(String),
-    
-    /// 验证错误
-    #[error("Validation error: {0}")]
-    Validation(String),
-    
-    /// 未找到
-    #[error("Not found: {0}")]
-    NotFound(String),
-    
-    /// 超时
-    #[error("Timeout: {0}")]
-    Timeout(String),
-    
-    /// 取消
-    #[error("Operation cancelled")]
-    Cancelled,
-    
-    /// 无效状态
-    #[error("Invalid state: {0}")]
-    InvalidState(String),
-    
-    /// 配置错误
-    #[error("Configuration error: {0}")]
+    #[error("config error: {0}")]
     Config(String),
-    
-    /// 网络错误
-    #[error("Network error: {0}")]
-    Network(String),
-    
-    /// 序列化错误
-    #[cfg(feature = "serde")]
-    #[error("Serialization error: {0}")]
-    Serialization(String),
-    
-    /// 其他错误
-    #[error("Other error: {0}")]
+    #[error("other error: {0}")]
     Other(String),
 }
 
-/// 通用 Result 类型别名
-pub type Result<T> = std::result::Result<T, CommonError>;
+pub type Result<T> = std::result::Result<T, RustLangError>;
 
-/// 项目错误类型别名（向后兼容）
-pub use CommonError as RustLangError;
-
-/// 可重试错误 trait
-pub trait Retryable {
-    /// 判断是否可重试
-    fn is_retryable(&self) -> bool;
-    
-    /// 获取重试延迟（毫秒）
-    fn retry_delay_ms(&self) -> u64;
+#[derive(Error, Debug, Clone)]
+pub enum OwnershipError {
+    #[error("borrow conflict: {0}")]
+    BorrowConflict(String),
+    #[error("lifetime error: {0}")]
+    Lifetime(String),
+    #[error("move error: {0}")]
+    MoveError(String),
+    #[error("mutable borrow conflict: {0}")]
+    MutableBorrowConflict(String),
+    #[error("interior mutability error: {0}")]
+    InteriorMutability(String),
+    #[error("memory safety error: {0}")]
+    MemorySafety(String),
 }
 
-impl Retryable for CommonError {
+#[derive(Error, Debug, Clone)]
+pub enum TypeError {
+    #[error("type mismatch: expected {expected}, found {found}")]
+    TypeMismatch { expected: String, found: String },
+    #[error("inference failed: {0}")]
+    InferenceFailed(String),
+    #[error("trait bound not satisfied: {0}")]
+    TraitBoundNotSatisfied(String),
+    #[error("conversion error: {0}")]
+    Conversion(String),
+    #[error("null pointer: {0}")]
+    NullPointer(String),
+    #[error("variance error: {0}")]
+    Variance(String),
+}
+
+#[derive(Error, Debug, Clone)]
+pub enum ControlFlowError {
+    #[error("non-exhaustive match: {0}")]
+    NonExhaustiveMatch(String),
+    #[error("stack overflow: {0}")]
+    StackOverflow(String),
+    #[error("interrupted: {0}")]
+    Interrupted(String),
+    #[error("closure capture error: {0}")]
+    ClosureCapture(String),
+    #[error("generator error: {0}")]
+    Generator(String),
+}
+
+#[derive(Error, Debug, Clone)]
+pub enum GenericError {
+    #[error("type parameter mismatch: {0}")]
+    TypeParameterMismatch(String),
+    #[error("associated type error: {0}")]
+    AssociatedType(String),
+    #[error("constraint conflict: {0}")]
+    ConstraintConflict(String),
+    #[error("GAT error: {0}")]
+    GatError(String),
+    #[error("HRTB error: {0}")]
+    HrtbError(String),
+}
+
+#[derive(Error, Debug, Clone)]
+pub enum ThreadError {
+    #[error("creation failed: {0}")]
+    CreationFailed(String),
+    #[error("panicked: {0}")]
+    Panicked(String),
+    #[error("deadlock detected: {0}")]
+    Deadlock(String),
+    #[error("data race: {0}")]
+    DataRace(String),
+    #[error("lock acquisition failed: {0}")]
+    LockAcquisition(String),
+    #[error("send error: {0}")]
+    SendError(String),
+    #[error("receive error: {0}")]
+    ReceiveError(String),
+    #[error("lock-free error: {0}")]
+    LockFree(String),
+}
+
+#[derive(Error, Debug, Clone)]
+pub enum AsyncError {
+    #[error("cancelled: {0}")]
+    Cancelled(String),
+    #[error("timeout: {0:?}")]
+    Timeout(Duration),
+    #[error("runtime error: {0}")]
+    Runtime(String),
+    #[error("scheduler error: {0}")]
+    Scheduler(String),
+    #[error("stream error: {0}")]
+    Stream(String),
+    #[error("backpressure error: {0}")]
+    Backpressure(String),
+}
+
+#[derive(Error, Debug, Clone)]
+pub enum ProcessError {
+    #[error("creation failed: {0}")]
+    CreationFailed(String),
+    #[error("start failed: {0}")]
+    StartFailed(String),
+    #[error("wait failed: {0}")]
+    WaitFailed(String),
+    #[error("termination failed: {0}")]
+    TerminationFailed(String),
+    #[error("not found: {0}")]
+    NotFound(u32),
+    #[error("permission denied: {0}")]
+    PermissionDenied(String),
+    #[error("already terminated")]
+    AlreadyTerminated,
+    #[error("IPC error: {0}")]
+    Ipc(String),
+    #[error("signal error: {0}")]
+    Signal(String),
+    #[error("{0}")]
+    Other(String),
+}
+
+#[derive(Error, Debug, Clone)]
+pub enum AlgorithmError {
+    #[error("invalid input: {0}")]
+    InvalidInput(String),
+    #[error("not implemented: {0}")]
+    NotImplemented(String),
+    #[error("complexity exceeded: {0}")]
+    ComplexityExceeded(String),
+    #[error("numeric overflow: {0}")]
+    NumericOverflow(String),
+    #[error("convergence failed: {0}")]
+    ConvergenceFailed(String),
+    #[error("data structure error: {0}")]
+    DataStructure(String),
+}
+
+#[derive(Error, Debug, Clone)]
+pub enum DesignPatternError {
+    #[error("singleton error: {0}")]
+    Singleton(String),
+    #[error("factory error: {0}")]
+    Factory(String),
+    #[error("proxy error: {0}")]
+    Proxy(String),
+    #[error("flyweight error: {0}")]
+    Flyweight(String),
+    #[error("chain error: {0}")]
+    Chain(String),
+    #[error("observer error: {0}")]
+    Observer(String),
+    #[error("concurrency error: {0}")]
+    Concurrency(String),
+}
+
+#[derive(Error, Debug, Clone)]
+pub enum NetworkError {
+    #[error("connection error: {0}")]
+    Connection(String),
+    #[error("protocol error: {0}")]
+    Protocol(String),
+    #[error("timeout: {0:?}")]
+    Timeout(Duration),
+    #[error("DNS error: {0}")]
+    Dns(String),
+    #[error("TLS error: {0}")]
+    Tls(String),
+    #[error("HTTP error: status={status}, message={message}")]
+    Http { status: u16, message: String },
+    #[error("WebSocket error: {0}")]
+    WebSocket(String),
+    #[error("authentication error: {0}")]
+    Authentication(String),
+    #[error("buffer error: {0}")]
+    Buffer(String),
+}
+
+#[derive(Error, Debug, Clone)]
+pub enum MacroError {
+    #[error("parse error: {0}")]
+    ParseError(String),
+    #[error("expansion error: {0}")]
+    ExpansionError(String),
+    #[error("proc macro error: {0}")]
+    ProcMacro(String),
+    #[error("decl macro error: {0}")]
+    DeclMacro(String),
+    #[error("hygiene error: {0}")]
+    Hygiene(String),
+}
+
+#[derive(Error, Debug, Clone)]
+pub enum WasmError {
+    #[error("compilation error: {0}")]
+    Compilation(String),
+    #[error("runtime error: {0}")]
+    Runtime(String),
+    #[error("memory error: {0}")]
+    Memory(String),
+    #[error("import error: {0}")]
+    Import(String),
+    #[error("export error: {0}")]
+    Export(String),
+    #[error("WASI error: {0}")]
+    Wasi(String),
+    #[error("bindgen error: {0}")]
+    Bindgen(String),
+}
+
+pub trait ErrorRecovery {
+    fn is_retryable(&self) -> bool;
+    fn retry_delay(&self) -> Option<Duration>;
+    fn max_retries(&self) -> Option<u32>;
+}
+
+impl ErrorRecovery for RustLangError {
     fn is_retryable(&self) -> bool {
-        matches!(
-            self,
-            CommonError::Io(_) | 
-            CommonError::Network(_) | 
-            CommonError::Timeout(_) |
-            CommonError::Cancelled
+        matches!(self,
+            RustLangError::Network(NetworkError::Timeout(_) | NetworkError::Connection(_)) |
+            RustLangError::Async(AsyncError::Timeout(_) | AsyncError::Backpressure(_)) |
+            RustLangError::Process(ProcessError::StartFailed(_) | ProcessError::Ipc(_)) |
+            RustLangError::Thread(ThreadError::LockAcquisition(_) | ThreadError::SendError(_))
         )
     }
-    
-    fn retry_delay_ms(&self) -> u64 {
+
+    fn retry_delay(&self) -> Option<Duration> {
         match self {
-            CommonError::Timeout(_) => 100,
-            CommonError::Network(_) => 500,
-            CommonError::Io(_) => 200,
-            _ => 1000,
+            RustLangError::Network(e) => match e {
+                NetworkError::Timeout(_) => Some(Duration::from_millis(100)),
+                NetworkError::Connection(_) => Some(Duration::from_millis(500)),
+                _ => None,
+            },
+            RustLangError::Async(_) => Some(Duration::from_millis(50)),
+            RustLangError::Process(_) => Some(Duration::from_millis(200)),
+            RustLangError::Thread(_) => Some(Duration::from_millis(10)),
+            _ => None,
+        }
+    }
+
+    fn max_retries(&self) -> Option<u32> {
+        match self {
+            RustLangError::Network(e) => match e {
+                NetworkError::Timeout(_) => Some(3),
+                NetworkError::Connection(_) => Some(5),
+                _ => None,
+            },
+            RustLangError::Async(_) => Some(3),
+            RustLangError::Process(_) => Some(3),
+            RustLangError::Thread(_) => Some(5),
+            _ => None,
         }
     }
 }
 
-impl From<std::io::Error> for CommonError {
+pub trait ErrorContext<T> {
+    fn with_context<F>(self, f: F) -> Result<T> where F: FnOnce() -> String;
+}
+
+impl<T, E> ErrorContext<T> for std::result::Result<T, E> where E: Into<RustLangError> {
+    fn with_context<F>(self, _f: F) -> Result<T> where F: FnOnce() -> String {
+        self.map_err(|e| e.into())
+    }
+}
+
+impl From<std::io::Error> for RustLangError {
     fn from(e: std::io::Error) -> Self {
-        CommonError::Io(e.to_string())
+        RustLangError::Io(e.to_string())
     }
 }
 
-#[cfg(feature = "serde")]
-impl From<serde_json::Error> for CommonError {
-    fn from(e: serde_json::Error) -> Self {
-        CommonError::Serialization(e.to_string())
-    }
+impl From<String> for RustLangError {
+    fn from(s: String) -> Self { RustLangError::Other(s) }
 }
 
-/// 错误转换辅助函数
-pub fn to_common_error<E: std::fmt::Display>(e: E) -> CommonError {
-    CommonError::Other(e.to_string())
+impl From<&str> for RustLangError {
+    fn from(s: &str) -> Self { RustLangError::Other(s.to_string()) }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    
-    #[test]
-    fn test_error_display() {
-        let err = CommonError::NotFound("test".to_string());
-        assert!(err.to_string().contains("test"));
-    }
-    
-    #[test]
-    fn test_retryable() {
-        let err = CommonError::Network("connection failed".to_string());
-        assert!(err.is_retryable());
-        assert_eq!(err.retry_delay_ms(), 500);
-        
-        let err = CommonError::Validation("invalid".to_string());
-        assert!(!err.is_retryable());
-    }
-}
+// 向后兼容：Retryable 是 ErrorRecovery 的别名
+pub use ErrorRecovery as Retryable;

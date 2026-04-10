@@ -323,6 +323,7 @@
 // 核心类型定义 / Core Type Definitions
 pub mod archive;
 pub mod basic_syntax;
+pub mod error;
 pub mod copy_move;
 pub mod expression;
 pub mod function;
@@ -331,6 +332,9 @@ pub mod ownership_utils;
 pub mod rust_194_features;
 pub mod scope;
 pub mod variable;
+
+#[cfg(test)]
+pub mod miri_tests;
 
 // 重新导出主要类型 / Re-export main types
 // 使用具体的导出而不是通配符导出以避免名称冲突 / Use specific exports instead of wildcard exports to avoid name conflicts
