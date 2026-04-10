@@ -3,9 +3,7 @@ name = "c04_generic"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.94.1"
-
-
+rust-version = "1.96.0"
 authors = ["Rust Learning Community"]
 description = "Rust generics and trait system learning module"
 license = "MIT OR Apache-2.0"
@@ -24,7 +22,6 @@ futures = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }
-
 
 [lib]
 name = "c04_generic"

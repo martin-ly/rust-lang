@@ -3,108 +3,36 @@ name = "c02_type_system"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.94.1"
-
-
+rust-version = "1.96.0"
 authors = ["Rust Learning Community"]
-description = "Rust type system comprehensive learning module"
+description = "Rust type system learning module"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/rust-lang-learning"
+
+[dependencies]
+common = { workspace = true, features = ["serde", "error-trait", "async"] }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+futures = { workspace = true }
+
+
+[dev-dependencies]
+criterion = { workspace = true }
 
 [lib]
 name = "c02_type_system"
 path = "src/lib.rs"
 
-[[example]]
-name = "type_system_example"
-path = "examples/type_system_example.rs"
-
-[[example]]
-name = "const_eval_assoc_consts"
-path = "examples/const_eval_assoc_consts.rs"
-
-[[example]]
-name = "ffi_abi_repr"
-path = "examples/ffi_abi_repr.rs"
-
-[[example]]
-name = "generics_where_performance"
-path = "examples/generics_where_performance.rs"
-
-[[example]]
-name = "iterators_zero_cost"
-path = "examples/iterators_zero_cost.rs"
-
-[[example]]
-name = "maybeuninit_manuallydrop"
-path = "examples/maybeuninit_manuallydrop.rs"
-
-[[example]]
-name = "never_type_control_flow"
-path = "examples/never_type_control_flow.rs"
-
-[[example]]
-name = "non_exhaustive_compat"
-path = "examples/non_exhaustive_compat.rs"
-
-[[example]]
-name = "nonnull_raw_pointers"
-path = "examples/nonnull_raw_pointers.rs"
-
-[[example]]
-name = "pattern_matching_advanced"
-path = "examples/pattern_matching_advanced.rs"
-
-[[example]]
-name = "pin_self_referential_basics"
-path = "examples/pin_self_referential_basics.rs"
-
-[[example]]
-name = "repr_packed_safety"
-path = "examples/repr_packed_safety.rs"
-
-[[example]]
-name = "trait_objects_safety"
-path = "examples/trait_objects_safety.rs"
-
-[[example]]
-name = "type_definition_examples"
-path = "examples/type_definition_examples.rs"
-
-[[example]]
-name = "type_equivalence_newtype_examples"
-path = "examples/type_equivalence_newtype_examples.rs"
-
-[[example]]
-name = "unsafe_cell_interior_mutability"
-path = "examples/unsafe_cell_interior_mutability.rs"
-
-[[example]]
-name = "variance_examples"
-path = "examples/variance_examples.rs"
-
-[[example]]
-name = "run_all_examples"
-path = "examples/run_all_examples.rs"
-
 [[bin]]
 name = "ts"
 path = "src/bin/main.rs"
 
-[dependencies]
-common = { workspace = true, features = ["serde", "error-trait", "async"] }
-c01_ownership_borrow_scope = { path = "../c01_ownership_borrow_scope" }
-serde = { workspace = true }
-serde_json = { workspace = true }
-tokio = { workspace = true }
-futures = { workspace = true }
-criterion = { workspace = true, optional = true }
+[[bench]]
+name = "performance_benchmarks"
+harness = false
 
-[features]
-default = []
-
-[target.'cfg(not(target_env = "msvc"))'.dependencies]
-jemallocator = "0.5.4"
-
-[dev-dependencies]
-criterion = { workspace = true }
+[[bench]]
+name = "rust_192_benchmarks"
+harness = false

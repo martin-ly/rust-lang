@@ -12,8 +12,10 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 SCCACHE_DIR = "D:\\_cache\\sccache"
 # Linux/macOS 缓存目录 (取消注释使用)
 # SCCACHE_DIR = { value = "${HOME}/.cache/sccache", relative = false }
-# 启用 GitHub Actions 缓存支持 (CI环境设为 true)
-SCCACHE_GHA_ENABLED = "true"
+# 启用 GitHub Actions 缓存支持
+# 注意: 只在 CI 环境 (GitHub Actions) 中设为 true
+# 本地开发应设为 false 或使用环境变量覆盖
+SCCACHE_GHA_ENABLED = { value = "false", force = false }
 
 # 并行编译作业数 - 默认为CPU核心数，可以显式设置
 # 建议: 物理核心数 - 1，保留一个核心给系统

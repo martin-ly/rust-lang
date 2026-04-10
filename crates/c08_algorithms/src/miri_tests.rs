@@ -1,11 +1,18 @@
 //! Miri 测试模块 - 算法内存安全验证
+//!
+//! 本模块包含用于 Miri 测试的算法相关代码示例。
+//!
+//! 运行方式:
+//!   cargo miri test miri_tests
+//!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
 use std::mem::MaybeUninit;
-use std::ptr;
 
 // ==================== 排序算法 ====================
 
-/// 测试 1: 快速排序内存安全
+/// 测试目的: 验证快速排序内存安全
+/// 测试场景: 对数组进行快速排序
+/// 预期结果: 数组应该被正确排序
 #[test]
 fn test_quicksort_safety() {
     fn quicksort<T: Ord>(arr: &mut [T]) {
@@ -37,11 +44,13 @@ fn test_quicksort_safety() {
 
 // ==================== 链表 ====================
 
+/// 链表节点
 struct ListNode<T> {
     data: T,
     next: Option<Box<ListNode<T>>>,
 }
 
+/// 链表结构
 struct LinkedList<T> {
     head: Option<Box<ListNode<T>>>,
 }
@@ -64,7 +73,9 @@ impl<T> LinkedList<T> {
     }
 }
 
-/// 测试 2: 链表内存安全
+/// 测试目的: 验证链表内存安全
+/// 测试场景: push 和 pop 操作
+/// 预期结果: 应该正确管理内存
 #[test]
 fn test_linked_list_safety() {
     let mut list = LinkedList::new();
@@ -78,12 +89,14 @@ fn test_linked_list_safety() {
 
 // ==================== 二叉树 ====================
 
+/// 树节点
 struct TreeNode<T> {
     data: T,
     left: Option<Box<TreeNode<T>>>,
     right: Option<Box<TreeNode<T>>>,
 }
 
+/// 二叉搜索树
 struct BinarySearchTree<T: Ord> {
     root: Option<Box<TreeNode<T>>>,
 }
@@ -121,7 +134,9 @@ impl<T: Ord> BinarySearchTree<T> {
     }
 }
 
-/// 测试 3: 二叉搜索树内存安全
+/// 测试目的: 验证二叉搜索树内存安全
+/// 测试场景: 插入多个节点
+/// 预期结果: 应该正确构建树结构
 #[test]
 fn test_bst_safety() {
     let mut tree = BinarySearchTree::new();
@@ -133,6 +148,7 @@ fn test_bst_safety() {
 
 // ==================== 栈和队列 ====================
 
+/// 栈结构
 struct Stack<T> {
     data: Vec<T>,
 }
@@ -143,7 +159,9 @@ impl<T> Stack<T> {
     fn pop(&mut self) -> Option<T> { self.data.pop() }
 }
 
-/// 测试 4: 栈内存安全
+/// 测试目的: 验证栈内存安全
+/// 测试场景: push 和 pop 操作
+/// 预期结果: 应该正确管理内存
 #[test]
 fn test_stack_safety() {
     let mut stack = Stack::new();
@@ -155,7 +173,9 @@ fn test_stack_safety() {
 
 // ==================== 不安全数组操作 ====================
 
-/// 测试 5: 安全的原地数组反转
+/// 测试目的: 验证安全的原地数组反转
+/// 测试场景: 反转数组元素
+/// 预期结果: 数组应该被正确反转
 #[test]
 fn test_inplace_reverse() {
     fn reverse<T>(arr: &mut [T]) {
@@ -170,7 +190,9 @@ fn test_inplace_reverse() {
     assert_eq!(data, [5, 4, 3, 2, 1]);
 }
 
-/// 测试 6: MaybeUninit 数组处理
+/// 测试目的: 验证 MaybeUninit 数组处理
+/// 测试场景: 使用 MaybeUninit 初始化数组
+/// 预期结果: 应该正确初始化和读取
 #[test]
 fn test_maybeuninit_array() {
     let mut arr: [MaybeUninit<i32>; 5] = unsafe {
@@ -187,5 +209,6 @@ fn test_maybeuninit_array() {
         }
     }
     
-    std::mem::forget(arr);
+    // MaybeUninit 不需要显式 forget
+    let _ = arr;
 }

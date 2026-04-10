@@ -3,48 +3,31 @@ name = "c07_process"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
+rust-version = "1.96.0"
 authors = ["Rust Process Management Team"]
 description = "Comprehensive process management, IPC, and synchronization library for Rust"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/c07_process"
 keywords = ["process", "ipc", "synchronization", "system-programming"]
 categories = ["system-programming", "concurrency"]
-rust-version = "1.94.1"
 
 [dependencies]
-# 核心异步运行时（可选）
 tokio = { workspace = true, optional = true }
 tokio-util = { workspace = true, optional = true }
 futures = { workspace = true, optional = true }
-
-# 序列化支持
 serde = { workspace = true }
 serde_json = { workspace = true }
-
-# 系统调用和平台特定功能
 nix = { workspace = true, features = ["process", "user", "signal"], optional = true }
 libc = { workspace = true }
-
-# 内存映射和共享内存
 memmap2 = "0.9.9"
 shared_memory = "0.12.4"
-
-# 信号处理
 signal-hook = "0.4.3"
-
-# 错误处理
-common = { workspace = true, features = ["serde", "error-trait", "async", "tracing"] }
+common = { workspace = true, features = ["serde", "error-trait", "async"] }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
-
-# 日志记录
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
-
-# 时间处理
 chrono = { workspace = true }
-
-# 配置管理
 config = { workspace = true }
 
 [dev-dependencies]

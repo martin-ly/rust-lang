@@ -3,210 +3,36 @@ name = "c10_networks"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-build = "build.rs"
-rust-version = "1.94.1"
-
-# 网络库CPU指令集优化配置在根Cargo.toml中统一管理
-
-
+rust-version = "1.96.0"
 authors = ["Rust Learning Community"]
-description = "Rust network programming learning module"
+description = "Rust networking learning module"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/rust-lang-learning"
 
 [dependencies]
-# 异步运行时 - 使用工作区统一版本
-# async-std 已移除，使用 tokio 替代 (async-std 已弃用)
+common = { workspace = true, features = ["serde", "error-trait", "async"] }
 tokio = { workspace = true }
-
-# 网络和字节处理 - 使用工作区统一版本
-bytes = { workspace = true, features = ["serde"] }
-mio = { workspace = true }
-
-# 抓包与报文解析（libpnet）- 2025年9月27日最新版本
-pnet = { version = "0.35.0", optional = true }
-pnet_packet = { version = "0.35.0", optional = true }
-pnet_datalink = { version = "0.35.0", optional = true }
-pnet_transport = { version = "0.35.0", optional = true }
-
-# 可选：离线 PCAP 支持 - 2025年12月11日最新版本
-pcap = { version = "2.4.0", optional = true }
-
-# 协议解析 - 2025年9月27日最新版本
-nom = "8.0.0"
-# HTTP解析库 - 2025年9月27日最新版本
-httparse = "1.10.1"
-url = { workspace = true }
-
-# 序列化和反序列化 - 使用工作区统一版本
 serde = { workspace = true }
 serde_json = { workspace = true }
-bincode = { workspace = true }
-
-# 错误处理 - 使用工作区统一版本
-common = { workspace = true, features = ["serde", "error-trait", "async", "tracing"] }
-anyhow = { workspace = true }
-thiserror = { workspace = true }
-
-# 日志和追踪 - 使用工作区统一版本
-tracing = { workspace = true }
-tracing-subscriber = { workspace = true }
-
-# 加密和安全 - 使用工作区统一版本
-ring = { workspace = true }
-rustls = { workspace = true, optional = true }
-tokio-rustls = { workspace = true, optional = true }
-rustls-pemfile = { workspace = true, optional = true }
-sha2 = { workspace = true }
-aes-gcm = "0.10.3"
-generic-array = { workspace = true }
-
-# 测试和基准测试 - 使用工作区统一版本
-criterion = { workspace = true, features = ["html_reports"] }
-futures = { workspace = true }
-futures-util = { workspace = true }
-
-# 异步trait支持
-async-trait = { workspace = true }
-
-# 时间处理
-chrono = { workspace = true }
-
-# 缓存和数据结构
-lru = { workspace = true }
-
-# DNS 解析（Hickory-DNS，原 trust-dns）- 2026-03-28: 升级到 0.25.2
-# 注意: 0.25+ 特性名称变更
-hickory-resolver = { workspace = true, features = ["system-config", "https-ring", "tls-ring"] }
-# DNS协议实现 - 与工作区统一版本
-hickory-proto = { workspace = true }
-
-# P2P 与 QUIC（新增）- 2025年9月27日最新版本
-libp2p = { version = "0.56.0", features = ["tokio", "tcp", "dns", "tls", "gossipsub", "kad", "noise", "yamux", "ping", "identify", "macros"] }
-# QUIC协议实现 - 2025年9月27日最新版本
-quinn = "0.11.9"
-rcgen = { workspace = true }
-# ACME（证书自动签发/续期）- 更新到最新版本
-instant-acme = "0.8.5"
-# WebSocket - 使用工作区统一版本
-tokio-tungstenite = { workspace = true, features = ["rustls-tls-webpki-roots"] }
-tungstenite = { workspace = true }
-
-# Protobuf / gRPC（使用工作区统一版本）
+tonic = { workspace = true }
 prost = { workspace = true }
-tonic = { workspace = true, features = ["transport"] }
-tonic-prost = { workspace = true }
 
 [build-dependencies]
-prost-build = { workspace = true }
+tonic = { workspace = true }
+tonic-build = { workspace = true }
 tonic-prost-build = { workspace = true }
-protoc-bin-vendored = "3"
+protoc-bin-vendored = "3.1.0"
 
 [dev-dependencies]
-tokio-test = { workspace = true }
-axum = { workspace = true }
+criterion = { workspace = true }
 
-[[example]]
-name = "tcp_echo_server"
-path = "examples/tcp_echo_server.rs"
+[lib]
+name = "c10_networks"
+path = "src/lib.rs"
 
-[[example]]
-name = "tcp_client"
-path = "examples/tcp_client.rs"
-
-[[example]]
-name = "http_client"
-path = "examples/http_client.rs"
-
-[[example]]
-name = "websocket_demo"
-path = "examples/websocket_demo.rs"
-
-[[example]]
-name = "p2p_minimal"
-path = "examples/p2p_minimal.rs"
-
-[[example]]
-name = "ws_echo_server"
-path = "examples/ws_echo_server.rs"
-
-[[example]]
-name = "ws_echo_client"
-path = "examples/ws_echo_client.rs"
-
-[[example]]
-name = "udp_echo"
-path = "examples/udp_echo.rs"
-
-[[example]]
-name = "arp_sniff"
-path = "examples/arp_sniff.rs"
-
-[[example]]
-name = "tcp_monitor"
-path = "examples/tcp_monitor.rs"
-
-[[example]]
-name = "udp_custom_demo"
-path = "examples/udp_custom_demo.rs"
-
-[[example]]
-name = "pcap_offline"
-path = "examples/pcap_offline.rs"
-required-features = ["offline"]
-
-[[example]]
-name = "pcap_live_tcp"
-path = "examples/pcap_live_tcp.rs"
-required-features = ["pcap_live"]
-
-[[example]]
-name = "dns_lookup"
-path = "examples/dns_lookup.rs"
-
-[[example]]
-name = "unified_dns"
-path = "examples/unified_dns.rs"
-
-[[example]]
-name = "dns_doh_dot"
-path = "examples/dns_doh_dot.rs"
-
-[[example]]
-name = "dns_custom_ns"
-path = "examples/dns_custom_ns.rs"
-
-[[example]]
-name = "dns_records"
-path = "examples/dns_records.rs"
-
-[[example]]
-name = "dns_ptr"
-path = "examples/dns_ptr.rs"
-
-[[example]]
-name = "dns_negative_cache"
-path = "examples/dns_negative_cache.rs"
-
-[[example]]
-name = "rust_190_async_features_demo"
-path = "examples/rust_190_async_features_demo.rs"
-
-[[example]]
-name = "rust_190_performance_benchmark"
-path = "examples/rust_190_performance_benchmark.rs"
-
-[[example]]
-name = "semantic_verification_demo"
-path = "examples/semantic_verification_demo.rs"
-
-[[example]]
-name = "grpc_server"
-path = "examples/grpc_server.rs"
-
-[[example]]
-name = "grpc_client"
-path = "examples/grpc_client.rs"
+[[bin]]
+name = "net"
+path = "src/bin/main.rs"
 
 [[bench]]
 name = "concurrency_performance"
@@ -221,21 +47,17 @@ name = "memory_performance"
 harness = false
 
 [[bench]]
-name = "protocol_performance"
+name = "network_benchmarks"
 harness = false
 
-[lib]
-name = "c10_networks"
-path = "src/lib.rs"
+[[bench]]
+name = "packet_performance"
+harness = false
 
-[features]
-default = ["base"]
-base = []
-sniff = ["pnet", "pnet_packet", "pnet_datalink", "pnet_transport"]
-offline = ["pcap", "pnet_packet"]
-pcap_live = ["pcap", "pnet_packet"]
-tls = ["rustls", "tokio-rustls", "rustls-pemfile"]
+[[bench]]
+name = "performance_benchmarks"
+harness = false
 
-[[bin]]
-name = "c10_networks"
-path = "src/bin/main.rs"
+[[bench]]
+name = "protocol_performance"
+harness = false

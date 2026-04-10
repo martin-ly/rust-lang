@@ -73,6 +73,7 @@ pub use archive::rust_190_features;
 pub use archive::rust_191_features;
 pub use archive::rust_192_features;
 pub mod rust_194_features;
+pub mod rust_196_features;
 
 // 性能优化模块
 pub mod performance;

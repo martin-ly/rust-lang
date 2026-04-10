@@ -1,88 +1,49 @@
 [package]
 name = "c08_algorithms"
-version = "0.2.0"
+version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.94.1"
-
-# 算法库CPU指令集优化配置在根Cargo.toml中统一管理
-
-
+rust-version = "1.96.0"
 authors = ["Rust Learning Community"]
-description = "Rust algorithms and data structures learning module"
+description = "Rust algorithms learning module"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/rust-lang-learning"
 
 [dependencies]
-
-# 并行与并发 - 使用工作区统一版本
-rayon = { workspace = true }
+common = { workspace = true, features = ["serde", "error-trait", "async"] }
 tokio = { workspace = true }
-tokio-stream = { workspace = true }
-futures = { workspace = true }
-
-# 随机数 - 更新到最新版本
-rand = { workspace = true }
-
-# 性能基准测试 - 更新到最新版本
-criterion = { workspace = true, optional = true }
-
-# 序列化支持 - 使用工作区统一版本
 serde = { workspace = true }
 serde_json = { workspace = true }
-
-# 错误处理 - 使用工作区统一版本
-common = { workspace = true, features = ["serde", "error-trait", "async", "tracing"] }
-anyhow = { workspace = true }
 thiserror = { workspace = true }
 
-# 日志支持 - 使用工作区统一版本
-tracing = { workspace = true }
-tracing-subscriber = { workspace = true }
-
-# 数学计算
-num-traits = "0.2.19"
-num-bigint = "0.4.6"
-
-# 时间测量
-# instant 已移除，使用 std::time::Instant 替代
-
-# 可选成熟库集成 - 更新到最新版本
-petgraph = { workspace = true, optional = true }
-aho-corasick = { version = "1.1.3", optional = true }
-
-# 系统信息
-num_cpus = { workspace = true }
-uuid = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }
-
-[features]
-default = []
-bench = ["criterion"]
-with-petgraph = ["petgraph"]
-with-aho = ["aho-corasick"]
 
 [lib]
 name = "c08_algorithms"
 path = "src/lib.rs"
 
 [[bin]]
-name = "c08_algorithms"
+name = "algo"
 path = "src/bin/main.rs"
+
+[[bench]]
+name = "algorithm_benchmarks"
+harness = false
+
+[[bench]]
+name = "alg_benches"
+harness = false
+
+[[bench]]
+name = "ml_benchmarks"
+harness = false
+
+[[bench]]
+name = "performance_benchmarks"
+harness = false
 
 [[bench]]
 name = "simple_benchmarks"
 harness = false
-path = "benches/simple_benchmarks.rs"
-
-[[example]]
-name = "algorithm_comprehensive_demo"
-path = "examples/algorithm_comprehensive_demo.rs"
-
-[[example]]
-name = "rust_193_features_demo"
-path = "examples/rust_193_features_demo.rs"
-
-#[profile] moved to workspace root

@@ -12,7 +12,9 @@ use std::ptr;
 
 // ==================== 泛型内存操作 ====================
 
-/// 测试 1: 泛型 transmute（安全包装）
+/// 测试目的: 验证泛型 transmute（安全包装）
+/// 测试场景: 将字节数组转换为整数
+/// 预期结果: 应该正确转换并返回
 fn safe_transmute<T, U>(value: T) -> U
 where
     T: Copy,
@@ -22,11 +24,14 @@ where
     
     unsafe {
         let result = ptr::read(&value as *const T as *const U);
-        mem::forget(value);
+        let _ = value;
         result
     }
 }
 
+/// 测试目的: 验证泛型 transmute 功能
+/// 测试场景: 将 [u8; 4] 转换为 u32
+/// 预期结果: 应该正确解析字节序
 #[test]
 fn test_generic_transmute() {
     let bytes: [u8; 4] = [0x01, 0x00, 0x00, 0x00];
@@ -39,7 +44,9 @@ fn test_generic_transmute() {
     }
 }
 
-/// 测试 2: 泛型 MaybeUninit 数组初始化
+/// 测试目的: 验证泛型 MaybeUninit 数组初始化
+/// 测试场景: 使用闭包初始化泛型数组
+/// 预期结果: 应该正确初始化所有元素
 fn init_array_generic<T, const N: usize>(f: impl Fn(usize) -> T) -> [T; N] {
     let mut arr: [MaybeUninit<T>; N] = unsafe {
         MaybeUninit::uninit().assume_init()
@@ -56,6 +63,9 @@ fn init_array_generic<T, const N: usize>(f: impl Fn(usize) -> T) -> [T; N] {
     }
 }
 
+/// 测试目的: 验证泛型数组初始化
+/// 测试场景: 初始化 [i32; 5] 数组
+/// 预期结果: 应该正确初始化并返回
 #[test]
 fn test_generic_array_init() {
     let arr: [i32; 5] = init_array_generic(|i| i as i32 * 10);
@@ -64,7 +74,7 @@ fn test_generic_array_init() {
 
 // ==================== PhantomData ====================
 
-/// 测试 3: PhantomData 标记所有权
+/// 带生命周期的裸指针包装
 struct PtrWithLifetime<'a, T> {
     ptr: *const T,
     _marker: PhantomData<&'a T>,
@@ -79,10 +89,14 @@ impl<'a, T> PtrWithLifetime<'a, T> {
     }
     
     unsafe fn dereference(&self) -> &'a T {
-        &*self.ptr
+        // SAFETY: 调用者保证指针有效
+        unsafe { &*self.ptr }
     }
 }
 
+/// 测试目的: 验证 PhantomData 生命周期标记
+/// 测试场景: 使用 PtrWithLifetime 访问数据
+/// 预期结果: 应该能够安全解引用
 #[test]
 fn test_phantomdata_lifetime() {
     let data = 42;
@@ -93,10 +107,10 @@ fn test_phantomdata_lifetime() {
     }
 }
 
-/// 测试 4: PhantomData 标记 Send/Sync
+/// 使用 PhantomData 禁用 Send
 struct NonSend<T> {
     data: T,
-    _marker: PhantomData<*const ()>, // *const () 不是 Send
+    _marker: PhantomData<*const ()>,
 }
 
 impl<T> NonSend<T> {
@@ -108,6 +122,9 @@ impl<T> NonSend<T> {
     }
 }
 
+/// 测试目的: 验证 NonSend 类型
+/// 测试场景: 创建和使用 NonSend 包装的类型
+/// 预期结果: 应该能够正常使用数据
 #[test]
 fn test_phantomdata_send_sync() {
     let non_send = NonSend::new(42);
@@ -116,17 +133,19 @@ fn test_phantomdata_send_sync() {
 
 // ==================== 泛型 Trait 边界 ====================
 
-/// 测试 5: Sized 边界
+/// 要求类型实现 Sized
 fn require_sized<T: Sized>(value: T) -> T {
     value
 }
 
+/// 测试目的: 验证 Sized 边界约束
+/// 测试场景: 传递 i32 到要求 Sized 的函数
+/// 预期结果: 应该正常工作
 #[test]
 fn test_sized_bound() {
     assert_eq!(require_sized(42), 42);
 }
 
-/// 测试 6: ?Sized 宽松边界
 trait MyTrait {
     fn do_something(&self) -> i32;
 }
@@ -141,12 +160,14 @@ fn use_trait_object<T: MyTrait + ?Sized>(val: &T) -> i32 {
     val.do_something()
 }
 
+/// 测试目的: 验证 ?Sized 边界
+/// 测试场景: 传递具体类型和 trait object
+/// 预期结果: 两者都应该工作
 #[test]
 fn test_unsized_bound() {
     let x = 21;
     assert_eq!(use_trait_object(&x), 42);
     
-    // 使用 trait object
     let obj: &dyn MyTrait = &x;
     assert_eq!(use_trait_object(obj), 42);
 }
@@ -168,7 +189,9 @@ impl<T> Container for Wrapper<T> {
     }
 }
 
-/// 测试 7: 关联类型内存布局
+/// 测试目的: 验证关联类型内存布局
+/// 测试场景: 使用关联类型访问数据
+/// 预期结果: 应该正确获取数据
 #[test]
 fn test_associated_type() {
     let wrapper = Wrapper(42);
@@ -177,7 +200,7 @@ fn test_associated_type() {
 
 // ==================== 泛型生命周期 ====================
 
-/// 测试 8: 复杂生命周期边界
+/// 包含多个生命周期参数的结构体
 struct Borrowed<'a, 'b, T, U>
 where
     T: 'a,
@@ -193,6 +216,9 @@ impl<'a, 'b, T, U> Borrowed<'a, 'b, T, U> {
     }
 }
 
+/// 测试目的: 验证复杂生命周期
+/// 测试场景: 创建包含多个引用的结构体
+/// 预期结果: 应该正确访问两个字段
 #[test]
 fn test_complex_lifetimes() {
     let x = 1;
@@ -205,7 +231,7 @@ fn test_complex_lifetimes() {
 
 // ==================== 泛型常量 ====================
 
-/// 测试 9: 常量泛型
+/// 使用常量泛型的数组包装
 struct ArrayWrapper<T, const N: usize> {
     data: [T; N],
 }
@@ -218,43 +244,52 @@ impl<T: Default + Copy, const N: usize> ArrayWrapper<T, N> {
     }
 }
 
+/// 测试目的: 验证常量泛型
+/// 测试场景: 创建 ArrayWrapper<i32, 5>
+/// 预期结果: 应该创建正确大小的数组
 #[test]
 fn test_const_generic() {
     let arr: ArrayWrapper<i32, 5> = ArrayWrapper::new();
     assert_eq!(arr.data, [0; 5]);
 }
 
-/// 测试 10: 复杂常量泛型表达式
-fn split_array<T, const N: usize>(arr: [T; N]) -> ([T; N/2], [T; N-N/2])
+/// 测试目的: 验证常量泛型数组分割
+/// 测试场景: 分割数组为两部分
+/// 预期结果: 应该正确分割数组
+fn split_array<T, const N: usize>(arr: [T; N]) -> (Vec<T>, Vec<T>)
 where
-    T: Default + Copy,
+    T: Copy,
 {
-    let mut first: [T; N/2] = [T::default(); N/2];
-    let mut second: [T; N-N/2] = [T::default(); N-N/2];
+    let mid = N / 2;
+    let mut first = Vec::with_capacity(mid);
+    let mut second = Vec::with_capacity(N - mid);
     
     for (i, elem) in arr.into_iter().enumerate() {
-        if i < N/2 {
-            first[i] = elem;
+        if i < mid {
+            first.push(elem);
         } else {
-            second[i - N/2] = elem;
+            second.push(elem);
         }
     }
     
     (first, second)
 }
 
+/// 测试目的: 验证数组分割
+/// 测试场景: 分割 [i32; 6] 数组
+/// 预期结果: 应该正确分割为两部分
 #[test]
 fn test_const_generic_expr() {
     let arr = [1, 2, 3, 4, 5, 6];
     let (first, second) = split_array(arr);
     
-    assert_eq!(first, [1, 2, 3]);
-    assert_eq!(second, [4, 5, 6]);
+    assert_eq!(first, vec![1, 2, 3]);
+    assert_eq!(second, vec![4, 5, 6]);
 }
 
 // ==================== 泛型特化模式 ====================
 
-/// 测试 11: Drop 泛型实现
+/// 带泛型的 Drop 实现
 struct GenericDrop<T>(Option<T>);
 
 impl<T> GenericDrop<T> {
@@ -274,6 +309,9 @@ impl<T> Drop for GenericDrop<T> {
     }
 }
 
+/// 测试目的: 验证泛型 Drop
+/// 测试场景: 创建 GenericDrop 并取出值
+/// 预期结果: Drop 时应该安全处理 None
 #[test]
 fn test_generic_drop() {
     {
@@ -298,7 +336,9 @@ where
     }
 }
 
-/// 测试 12: 闭包 Trait 边界
+/// 测试目的: 验证闭包 Trait 边界
+/// 测试场景: 使用 trait object 调用闭包
+/// 预期结果: 应该正确调用并返回结果
 #[test]
 fn test_closure_trait_bound() {
     let double: &dyn Callable = &|x: i32| x * 2;
@@ -307,19 +347,23 @@ fn test_closure_trait_bound() {
 
 // ==================== 泛型与 unsafe ====================
 
-/// 测试 13: 泛型裸指针操作
+/// 泛型裸指针写入
 fn generic_ptr_write<T>(ptr: *mut T, value: T) {
     unsafe {
         ptr::write(ptr, value);
     }
 }
 
+/// 泛型裸指针读取
 fn generic_ptr_read<T: Copy>(ptr: *const T) -> T {
     unsafe {
         ptr::read(ptr)
     }
 }
 
+/// 测试目的: 验证泛型指针操作
+/// 测试场景: 使用泛型函数读写指针
+/// 预期结果: 应该正确读写值
 #[test]
 fn test_generic_ptr_ops() {
     let mut x = 0i32;
@@ -327,7 +371,7 @@ fn test_generic_ptr_ops() {
     assert_eq!(generic_ptr_read(&x), 42);
 }
 
-/// 测试 14: 泛型内存替换
+/// 泛型内存替换
 fn generic_replace<T>(dest: &mut T, src: T) -> T {
     unsafe {
         let result = ptr::read(dest);
@@ -336,6 +380,9 @@ fn generic_replace<T>(dest: &mut T, src: T) -> T {
     }
 }
 
+/// 测试目的: 验证泛型替换
+/// 测试场景: 替换变量的值
+/// 预期结果: 应该返回旧值并设置新值
 #[test]
 fn test_generic_replace() {
     let mut x = 10;
@@ -347,7 +394,7 @@ fn test_generic_replace() {
 
 // ==================== 类型擦除 ====================
 
-/// 测试 15: 类型擦除与 vtable
+/// 类型擦除结构
 struct TypeErased {
     data: *mut (),
     drop_fn: unsafe fn(*mut ()),
@@ -359,7 +406,10 @@ impl TypeErased {
         let data = Box::into_raw(boxed) as *mut ();
         
         unsafe fn drop_fn<T>(ptr: *mut ()) {
-            let _ = Box::from_raw(ptr as *mut T);
+            // SAFETY: ptr 是由 Box::into_raw 创建的
+            unsafe {
+                let _ = Box::from_raw(ptr as *mut T);
+            }
         }
         
         Self {
@@ -377,6 +427,9 @@ impl Drop for TypeErased {
     }
 }
 
+/// 测试目的: 验证类型擦除
+/// 测试场景: 创建 TypeErased 并丢弃
+/// 预期结果: 应该正确调用析构函数
 #[test]
 fn test_type_erasure() {
     let erased = TypeErased::new(42i32);
@@ -385,7 +438,7 @@ fn test_type_erasure() {
 
 // ==================== 默认类型参数 ====================
 
-/// 测试 16: 默认类型参数
+/// 带默认类型参数的 Config
 struct Config<T = i32, const N: usize = 10> {
     data: [T; N],
 }
@@ -398,6 +451,9 @@ impl<T: Default + Copy, const N: usize> Config<T, N> {
     }
 }
 
+/// 测试目的: 验证默认类型参数
+/// 测试场景: 使用默认类型参数创建 Config
+/// 预期结果: 应该使用默认类型 i32 和大小 10
 #[test]
 fn test_default_type_params() {
     let config: Config = Config::new();

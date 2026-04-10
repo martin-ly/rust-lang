@@ -1,0 +1,220 @@
+//! # Rust 1.96.0 泛型系统新特性实现模块
+
+use std::ops::RangeInclusive;
+
+/// RangeInclusive 在泛型代码中的应用
+pub struct GenericRangeExamples;
+
+impl GenericRangeExamples {
+    /// 按范围过滤
+    pub fn filter_by_range<T>(
+        items: &[T],
+        range: RangeInclusive<T>,
+    ) -> Vec<&T>
+    where
+        T: Ord,
+    {
+        items.iter().filter(|item| range.contains(item)).collect()
+    }
+
+    /// 切片
+    pub fn slice_by_range<T, R>(items: &[T], range: R) -> &[T]
+    where
+        R: std::ops::RangeBounds<usize>,
+    {
+        let start = match range.start_bound() {
+            std::ops::Bound::Included(&n) => n,
+            std::ops::Bound::Excluded(&n) => n + 1,
+            std::ops::Bound::Unbounded => 0,
+        };
+
+        let end = match range.end_bound() {
+            std::ops::Bound::Included(&n) => (n + 1).min(items.len()),
+            std::ops::Bound::Excluded(&n) => n.min(items.len()),
+            std::ops::Bound::Unbounded => items.len(),
+        };
+
+        &items[start..end]
+    }
+
+    /// 分页
+    pub fn paginate<T>(items: &[T], page: usize, page_size: usize) -> &[T] {
+        let start = page * page_size;
+        if start >= items.len() {
+            return &[];
+        }
+        let end = (start + page_size).min(items.len());
+        &items[start..end]
+    }
+
+    /// 生成范围列表
+    pub fn generate_ranges(total: usize, batch_size: usize) -> Vec<RangeInclusive<usize>> {
+        let mut ranges = Vec::new();
+        let mut start = 0;
+
+        while start < total {
+            let end = (start + batch_size - 1).min(total - 1);
+            ranges.push(start..=end);
+            start = end + 1;
+        }
+
+        ranges
+    }
+}
+
+/// 元组 coercion 示例
+pub struct GenericTupleExamples;
+
+impl GenericTupleExamples {
+    /// 处理结果
+    pub fn process_with_metadata<T>(value: T) -> (T, usize, &'static str)
+    where
+        T: std::fmt::Display,
+    {
+        let len = format!("{}", value).len();
+        (value, len, "processed")
+    }
+
+    /// 双重结果
+    pub fn dual_result<T, E>(
+        result: Result<T, E>,
+    ) -> (Option<T>, Option<E>, &'static str) {
+        match result {
+            Ok(v) => (Some(v), None, "success"),
+            Err(e) => (None, Some(e), "error"),
+        }
+    }
+}
+
+/// 实际应用
+pub struct PracticalGenericApplications<T> {
+    data: Vec<T>,
+}
+
+impl<T: Clone + Ord> PracticalGenericApplications<T> {
+    /// 创建新实例
+    pub fn new() -> Self {
+        Self { data: Vec::new() }
+    }
+
+    /// 添加元素
+    pub fn add(&mut self, item: T) {
+        self.data.push(item);
+    }
+
+    /// 获取范围
+    pub fn get_range(&self, range: RangeInclusive<usize>) -> Vec<&T> {
+        let start = *range.start();
+        let end = (*range.end()).min(self.data.len().saturating_sub(1));
+
+        if start > end || start >= self.data.len() {
+            return Vec::new();
+        }
+
+        self.data[start..=end].iter().collect()
+    }
+
+    /// 获取统计
+    pub fn get_stats(&self) -> (usize, Option<&T>, Option<&T>) {
+        let len = self.data.len();
+        let min = self.data.iter().min();
+        let max = self.data.iter().max();
+        (len, min, max)
+    }
+}
+
+impl<T: Clone + Ord> Default for PracticalGenericApplications<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+/// 演示函数
+pub fn demonstrate_rust_196_features() {
+    println!("\n========================================");
+    println!("   Rust 1.96.0 泛型新特性演示");
+    println!("========================================\n");
+
+    let items = vec![1, 5, 10, 15, 20, 25, 30];
+    let filtered = GenericRangeExamples::filter_by_range(&items, 10..=25);
+    println!("范围过滤 [10..=25]: {:?}", filtered);
+
+    let sliced = GenericRangeExamples::slice_by_range(&items, 1..=4);
+    println!("切片 [1..=4]: {:?}", sliced);
+
+    let page = GenericRangeExamples::paginate(&items, 1, 3);
+    println!("第2页 (每页3个): {:?}", page);
+
+    println!("\n========================================");
+    println!("   演示完成");
+    println!("========================================\n");
+}
+
+/// 获取特性信息
+pub fn get_rust_196_generic_info() -> String {
+    "Rust 1.96.0 泛型系统新特性:\n\
+        - RangeInclusive / RangeToInclusive with generics\n\
+        - Tuple coercion in generic contexts"
+        .to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_filter_by_range() {
+        let items = vec![1, 5, 10, 15, 20];
+        let filtered = GenericRangeExamples::filter_by_range(&items, 5..=15);
+        assert_eq!(filtered.len(), 3);
+    }
+
+    #[test]
+    fn test_slice_by_range() {
+        let items = vec![1, 2, 3, 4, 5];
+        let sliced = GenericRangeExamples::slice_by_range(&items, 1..=3);
+        assert_eq!(sliced, &[2, 3, 4]);
+    }
+
+    #[test]
+    fn test_paginate() {
+        let items: Vec<i32> = (1..=100).collect();
+        assert_eq!(GenericRangeExamples::paginate(&items, 0, 10).len(), 10);
+        assert_eq!(GenericRangeExamples::paginate(&items, 1, 10).len(), 10);
+    }
+
+    #[test]
+    fn test_generate_ranges() {
+        let ranges = GenericRangeExamples::generate_ranges(100, 20);
+        assert_eq!(ranges.len(), 5);
+    }
+
+    #[test]
+    fn test_dual_result() {
+        let result: Result<i32, &str> = Ok(42);
+        let (ok_val, err_val, status) = GenericTupleExamples::dual_result(result);
+        assert_eq!(ok_val, Some(42));
+        assert_eq!(err_val, None);
+        assert_eq!(status, "success");
+    }
+
+    #[test]
+    fn test_practical_generic_applications() {
+        let mut app = PracticalGenericApplications::<i32>::new();
+        app.add(10);
+        app.add(20);
+        app.add(30);
+
+        let range_items = app.get_range(0..=1);
+        assert_eq!(range_items.len(), 2);
+
+        let (len, _, _) = app.get_stats();
+        assert_eq!(len, 3);
+    }
+
+    #[test]
+    fn test_get_rust_196_generic_info() {
+        let info = get_rust_196_generic_info();
+        assert!(info.contains("Rust 1.96.0"));
+    }
+}

@@ -1,4 +1,10 @@
 //! Miri 测试模块 - 设计模式内存安全验证
+//!
+//! 本模块包含用于 Miri 测试的设计模式相关代码示例。
+//!
+//! 运行方式:
+//!   cargo miri test miri_tests
+//!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
 use std::cell::RefCell;
 use std::rc::{Rc, Weak};
@@ -6,7 +12,9 @@ use std::sync::{Arc, Mutex};
 
 // ==================== 单例模式 ====================
 
-/// 测试 1: 线程不安全单例
+/// 测试目的: 验证线程不安全单例
+/// 测试场景: 创建并使用单例模式
+/// 预期结果: 应该正确初始化和访问单例
 #[test]
 fn test_singleton() {
     use std::cell::UnsafeCell;
@@ -41,10 +49,12 @@ fn test_singleton() {
 
 // ==================== 观察者模式 ====================
 
+/// 观察者 trait
 trait Observer {
     fn update(&self, state: i32);
 }
 
+/// 主题结构
 struct Subject {
     observers: Vec<Weak<dyn Observer>>,
     state: i32,
@@ -68,7 +78,9 @@ impl Subject {
     }
 }
 
-/// 测试 2: 观察者模式内存安全
+/// 测试目的: 验证观察者模式内存安全
+/// 测试场景: 添加观察者并通知
+/// 预期结果: 应该正确管理弱引用
 #[test]
 fn test_observer_pattern() {
     struct ConcreteObserver;
@@ -93,6 +105,7 @@ impl SubjectTrait for RealSubject {
     fn request(&self) -> i32 { 42 }
 }
 
+/// 代理结构
 struct Proxy {
     real_subject: Option<Box<dyn SubjectTrait>>,
 }
@@ -115,7 +128,9 @@ impl SubjectTrait for Proxy {
     }
 }
 
-/// 测试 3: 代理模式
+/// 测试目的: 验证代理模式
+/// 测试场景: 延迟初始化并调用
+/// 预期结果: 应该正确代理请求
 #[test]
 fn test_proxy_pattern() {
     let mut proxy = Proxy::new();
@@ -125,6 +140,7 @@ fn test_proxy_pattern() {
 
 // ==================== 工厂模式 ====================
 
+/// 产品 trait
 trait Product {
     fn operation(&self) -> String;
 }
@@ -141,6 +157,7 @@ impl Product for ConcreteProductB {
 
 enum ProductType { A, B }
 
+/// 工厂结构
 struct Factory;
 
 impl Factory {
@@ -152,7 +169,9 @@ impl Factory {
     }
 }
 
-/// 测试 4: 工厂模式
+/// 测试目的: 验证工厂模式
+/// 测试场景: 创建不同类型产品
+/// 预期结果: 应该正确创建产品实例
 #[test]
 fn test_factory_pattern() {
     let product_a = Factory::create(ProductType::A);
@@ -164,6 +183,7 @@ fn test_factory_pattern() {
 
 // ==================== 建造者模式 ====================
 
+/// 产品建造者
 struct ProductBuilder {
     part_a: Option<String>,
     part_b: Option<i32>,
@@ -192,12 +212,15 @@ impl ProductBuilder {
     }
 }
 
+/// 建造完成的产品
 struct BuiltProduct {
     part_a: String,
     part_b: i32,
 }
 
-/// 测试 5: 建造者模式
+/// 测试目的: 验证建造者模式
+/// 测试场景: 链式调用设置属性
+/// 预期结果: 应该正确构建产品
 #[test]
 fn test_builder_pattern() {
     let product = ProductBuilder::new()
@@ -220,6 +243,7 @@ impl Adaptee {
     fn specific_request(&self) -> String { "Adaptee".to_string() }
 }
 
+/// 适配器结构
 struct Adapter {
     adaptee: Adaptee,
 }
@@ -230,7 +254,9 @@ impl Target for Adapter {
     }
 }
 
-/// 测试 6: 适配器模式
+/// 测试目的: 验证适配器模式
+/// 测试场景: 通过适配器调用被适配者
+/// 预期结果: 应该正确适配接口
 #[test]
 fn test_adapter_pattern() {
     let adapter = Adapter { adaptee: Adaptee };
@@ -248,6 +274,7 @@ impl Component for ConcreteComponent {
     fn operation(&self) -> i32 { 10 }
 }
 
+/// 装饰器结构
 struct Decorator {
     component: Box<dyn Component>,
 }
@@ -258,7 +285,9 @@ impl Component for Decorator {
     }
 }
 
-/// 测试 7: 装饰器模式
+/// 测试目的: 验证装饰器模式
+/// 测试场景: 包装组件并增强功能
+/// 预期结果: 应该正确增强功能
 #[test]
 fn test_decorator_pattern() {
     let decorated = Decorator {

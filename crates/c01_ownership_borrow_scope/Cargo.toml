@@ -3,9 +3,7 @@ name = "c01_ownership_borrow_scope"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.94.1"
-
-
+rust-version = "1.96.0"
 authors = ["Rust Learning Community"]
 description = "Rust ownership, borrowing, and scope system learning module"
 license = "MIT OR Apache-2.0"
@@ -16,6 +14,8 @@ common = { workspace = true, features = ["serde", "error-trait", "async"] }
 tokio = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
+thiserror = { workspace = true }
+
 
 [dev-dependencies]
 criterion = { workspace = true }
@@ -29,5 +29,13 @@ name = "obs"
 path = "src/bin/main.rs"
 
 [[bench]]
+name = "performance_benchmarks"
+harness = false
+
+[[bench]]
 name = "rust_192_benchmarks"
+harness = false
+
+[[bench]]
+name = "rust_194_benchmarks"
 harness = false

@@ -10,8 +10,9 @@ use std::ptr::NonNull;
 
 // ==================== 基本 Unsafe 类型操作测试 ====================
 
-/// 测试 1: MaybeUninit 基本使用
-/// 验证未初始化内存的正确处理
+/// 测试目的: 验证 MaybeUninit 基本使用
+/// 测试场景: 使用 MaybeUninit 处理未初始化内存
+/// 预期结果: 应该正确写入和读取值
 #[test]
 fn test_maybeuninit_basic() {
     let mut x = MaybeUninit::<i32>::uninit();
@@ -22,8 +23,9 @@ fn test_maybeuninit_basic() {
     }
 }
 
-/// 测试 2: MaybeUninit 数组初始化
-/// 逐步初始化数组元素
+/// 测试目的: 验证 MaybeUninit 数组初始化
+/// 测试场景: 逐步初始化数组元素
+/// 预期结果: 应该正确初始化所有元素
 #[test]
 fn test_maybeuninit_array() {
     let mut arr: [MaybeUninit<i32>; 5] = unsafe {
@@ -37,15 +39,17 @@ fn test_maybeuninit_array() {
     
     // 转换为初始化后的数组
     unsafe {
-        let init_arr: [i32; 5] = std::mem::transmute_copy(&arr);
+        let init_arr: [i32; 5] = std::array::from_fn(|i| arr[i].assume_init_read());
         assert_eq!(init_arr, [0, 10, 20, 30, 40]);
     }
     
     // 防止 Drop 调用（i32 无 Drop，但为了模式完整性）
-    std::mem::forget(arr);
+    // arr 包含 MaybeUninit，不需要显式 forget
 }
 
-/// 测试 3: NonNull 指针基本操作
+/// 测试目的: 验证 NonNull 指针基本操作
+/// 测试场景: 使用 NonNull 包装裸指针
+/// 预期结果: 应该正确读写值
 #[test]
 fn test_nonnull_basic() {
     let mut x = 42;
@@ -58,8 +62,9 @@ fn test_nonnull_basic() {
     assert_eq!(x, 100);
 }
 
-/// 测试 4: 裸指针别名规则
-/// Tree Borrows: OK，只要遵循别名规则
+/// 测试目的: 验证裸指针别名规则
+/// 测试场景: 创建两个指向同一位置的裸指针并交替使用
+/// 预期结果: Tree Borrows 下只要遵循别名规则就应该通过
 #[test]
 fn test_raw_pointer_alias() {
     let mut x = 0;
@@ -86,7 +91,9 @@ impl<'a> Drop for DropTracker<'a> {
     }
 }
 
-/// 测试 5: ManuallyDrop 阻止自动 Drop
+/// 测试目的: 验证 ManuallyDrop 阻止自动 Drop
+/// 测试场景: 使用 ManuallyDrop 包装有 Drop 的类型
+/// 预期结果: 离开作用域时不应自动调用 Drop
 #[test]
 fn test_manually_drop() {
     let mut dropped = false;
@@ -105,7 +112,9 @@ fn test_manually_drop() {
     assert!(dropped);
 }
 
-/// 测试 6: ManuallyDrop 内部值访问
+/// 测试目的: 验证 ManuallyDrop 内部值访问
+/// 测试场景: 访问 ManuallyDrop 内部的 Vec
+/// 预期结果: 应该能够正常访问和取出内部值
 #[test]
 fn test_manually_drop_access() {
     let manual = ManuallyDrop::new(vec![1, 2, 3]);
@@ -120,14 +129,15 @@ fn test_manually_drop_access() {
 
 // ==================== 类型转换和内存操作 ====================
 
-/// 测试 7: transmute 基础
-/// 谨慎使用 transmute，确保类型大小相同
+/// 测试目的: 验证 from_ne_bytes 基础使用
+/// 测试场景: 使用 from_ne_bytes 转换字节数组为整数
+/// 预期结果: 应该正确解析字节序
 #[test]
-fn test_transmute_basic() {
+fn test_from_ne_bytes_basic() {
     let bytes: [u8; 4] = [0x00, 0x00, 0x00, 0x01];
     
-    // 小端序系统下，这是 1
-    let value: u32 = unsafe { std::mem::transmute(bytes) };
+    // 使用 from_ne_bytes 替代 transmute
+    let value: u32 = u32::from_ne_bytes(bytes);
     
     // 验证字节序
     if cfg!(target_endian = "little") {
@@ -137,8 +147,9 @@ fn test_transmute_basic() {
     }
 }
 
-/// 测试 8: addr_of! 和 addr_of_mut!
-/// 获取字段地址而不创建引用
+/// 测试目的: 验证 addr_of! 和 addr_of_mut!
+/// 测试场景: 获取 packed struct 字段地址
+/// 预期结果: 应该能够安全获取字段地址而不创建引用
 #[repr(C)]
 struct Packed {
     a: u8,
@@ -193,7 +204,9 @@ impl SelfReferential {
     }
 }
 
-/// 测试 9: 自引用结构通过 Pin 保证安全
+/// 测试目的: 验证自引用结构通过 Pin 保证安全
+/// 测试场景: 创建自引用结构并通过 Pin 访问
+/// 预期结果: 应该能够安全访问自引用数据
 #[test]
 fn test_self_referential() {
     let self_ref = SelfReferential::new(String::from("Hello"));
@@ -211,7 +224,9 @@ union IntOrFloat {
     f: f32,
 }
 
-/// 测试 10: 联合体基本操作
+/// 测试目的: 验证联合体基本操作
+/// 测试场景: 使用联合体解释同一内存为不同类型
+/// 预期结果: 应该能够正确访问不同字段
 #[test]
 fn test_union_basic() {
     let u = IntOrFloat { i: 1065353216 }; // f32::to_bits() for 1.0
@@ -227,7 +242,9 @@ fn test_union_basic() {
 use std::ffi::c_void;
 use std::os::raw::{c_int, c_char};
 
-/// 测试 11: 外部类型指针操作
+/// 测试目的: 验证外部类型指针操作
+/// 测试场景: 使用 FFI 类型进行指针转换
+/// 预期结果: 应该能够正确转换和访问
 #[test]
 fn test_ffi_pointer() {
     let mut value: c_int = 42;
@@ -242,7 +259,9 @@ fn test_ffi_pointer() {
 
 // ==================== 对齐和内存布局 ====================
 
-/// 测试 12: 对齐检查
+/// 测试目的: 验证对齐检查
+/// 测试场景: 创建对齐类型并验证地址对齐
+/// 预期结果: 地址应该满足对齐要求
 #[repr(align(16))]
 struct Aligned16(u8);
 
@@ -254,7 +273,9 @@ fn test_alignment() {
     assert_eq!(ptr as usize % 16, 0); // 16 字节对齐
 }
 
-/// 测试 13: 读取未对齐数据
+/// 测试目的: 验证未对齐数据读取
+/// 测试场景: 从可能未对齐的地址读取数据
+/// 预期结果: 使用 read_unaligned 应该安全
 #[test]
 fn test_unaligned_read() {
     let bytes: [u8; 8] = [0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
@@ -270,7 +291,9 @@ fn test_unaligned_read() {
 
 use std::sync::atomic::{AtomicUsize, Ordering};
 
-/// 测试 14: 原子操作内存序
+/// 测试目的: 验证原子操作内存序
+/// 测试场景: 使用不同内存序进行原子操作
+/// 预期结果: 操作应该正确完成
 #[test]
 fn test_atomic_operations() {
     let atomic = AtomicUsize::new(0);
@@ -288,7 +311,9 @@ fn test_atomic_operations() {
 
 // ==================== 边界情况测试 ====================
 
-/// 测试 15: 零大小类型的指针操作
+/// 测试目的: 验证零大小类型的指针操作
+/// 测试场景: 创建 ZST 指针并解引用
+/// 预期结果: ZST 指针操作应该安全
 #[test]
 fn test_zst_pointers() {
     struct Zst;
@@ -307,7 +332,9 @@ fn test_zst_pointers() {
     }
 }
 
-/// 测试 16: 空指针检查（Miri 会检测）
+/// 测试目的: 验证空指针检查
+/// 测试场景: 检查空指针和非空指针
+/// 预期结果: 应该正确识别空指针
 #[test]
 fn test_null_check() {
     let ptr: *const i32 = std::ptr::null();
@@ -319,8 +346,9 @@ fn test_null_check() {
 
 // ==================== Miri 特定测试 ====================
 
-/// 测试 17: Tree Borrows 与共享引用
-/// 验证共享引用的兼容性
+/// 测试目的: 验证 Tree Borrows 与共享引用
+/// 测试场景: 创建多个共享引用并重新借用
+/// 预期结果: 共享引用应该可以共存
 #[test]
 fn test_tree_borrows_shared_ref() {
     let x = 42;
@@ -336,11 +364,13 @@ fn test_tree_borrows_shared_ref() {
     assert_eq!(*r3, 42);
 }
 
-/// 测试 18: 内部可变性与 Miri
-use std::cell::RefCell;
-
+/// 测试目的: 验证内部可变性与 Miri
+/// 测试场景: 使用 RefCell 进行内部可变性
+/// 预期结果: 应该能够正确借用和修改
 #[test]
 fn test_interior_mutability() {
+    use std::cell::RefCell;
+    
     let cell = RefCell::new(0);
     
     {
@@ -353,7 +383,9 @@ fn test_interior_mutability() {
 
 // ==================== 应该被 Miri 检测的错误（标记为 ignore） ====================
 
-/// 测试 19: 使用已释放内存（应该 UB）
+/// 测试目的: 验证 use-after-free 检测
+/// 测试场景: 使用已释放内存的指针
+/// 预期结果: Miri 应该检测到 UB
 #[test]
 #[ignore = "This test should fail with use-after-free"]
 fn test_use_after_free() {
@@ -367,7 +399,9 @@ fn test_use_after_free() {
     }
 }
 
-/// 测试 20: 双释放（应该 UB）
+/// 测试目的: 验证 double-free 检测
+/// 测试场景: 对同一指针调用两次 Box::from_raw
+/// 预期结果: Miri 应该检测到 UB
 #[test]
 #[ignore = "This test should fail with double-free"]
 fn test_double_free() {
@@ -375,12 +409,14 @@ fn test_double_free() {
     let ptr = Box::into_raw(data);
     
     unsafe {
-        Box::from_raw(ptr); // 第一次释放
-        Box::from_raw(ptr); // 第二次释放 - UB!
+        let _ = Box::from_raw(ptr); // 第一次释放
+        let _ = Box::from_raw(ptr); // 第二次释放 - UB!
     }
 }
 
-/// 测试 21: 越界访问（应该 UB）
+/// 测试目的: 验证越界访问检测
+/// 测试场景: 访问数组越界位置
+/// 预期结果: Miri 应该检测到 UB
 #[test]
 #[ignore = "This test should fail with out-of-bounds"]
 fn test_out_of_bounds() {
@@ -396,20 +432,8 @@ fn test_out_of_bounds() {
 
 #[cfg(test)]
 mod utils {
-    use super::*;
-    
     /// 安全包装：将 &[u8] 转换为 &str（带验证）
     pub fn safe_bytes_to_str(bytes: &[u8]) -> Option<&str> {
         std::str::from_utf8(bytes).ok()
-    }
-    
-    /// 安全包装：MaybeUninit 数组初始化辅助
-    pub fn init_array<T, const N: usize>(
-        arr: &mut [MaybeUninit<T>; N],
-        f: impl Fn(usize) -> T,
-    ) {
-        for (i, elem) in arr.iter_mut().enumerate() {
-            elem.write(f(i));
-        }
     }
 }

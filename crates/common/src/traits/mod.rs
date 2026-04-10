@@ -118,7 +118,7 @@ pub trait ManagedResource {
     fn is_released(&self) -> bool;
     
     /// 释放资源
-    fn release(&mut self) -> Result<(), crate::RustLangError>;
+    fn release(&mut self) -> Result<(), crate::UnifiedError>;
 }
 
 /// 生命周期管理 trait
@@ -126,13 +126,13 @@ pub trait ManagedResource {
 /// 用于具有生命周期的类型
 pub trait Lifecycle {
     /// 初始化
-    fn initialize(&mut self) -> Result<(), crate::RustLangError>;
+    fn initialize(&mut self) -> Result<(), crate::UnifiedError>;
     
     /// 启动
-    fn start(&mut self) -> Result<(), crate::RustLangError>;
+    fn start(&mut self) -> Result<(), crate::UnifiedError>;
     
     /// 停止
-    fn stop(&mut self) -> Result<(), crate::RustLangError>;
+    fn stop(&mut self) -> Result<(), crate::UnifiedError>;
     
     /// 检查是否运行中
     fn is_running(&self) -> bool;
@@ -152,9 +152,9 @@ mod async_traits {
     
     /// 异步生命周期管理 trait
     pub trait AsyncLifecycle {
-        fn initialize_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::RustLangError>> + Send + '_>>;
-        fn start_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::RustLangError>> + Send + '_>>;
-        fn stop_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::RustLangError>> + Send + '_>>;
+        fn initialize_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::UnifiedError>> + Send + '_>>;
+        fn start_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::UnifiedError>> + Send + '_>>;
+        fn stop_async(&mut self) -> Pin<Box<dyn Future<Output = Result<(), crate::UnifiedError>> + Send + '_>>;
     }
 }
 
@@ -168,6 +168,7 @@ mod tests {
     #[derive(Debug, Clone)]
     struct TestItem {
         id: String,
+        #[allow(dead_code)]
         value: i32,
     }
     
@@ -184,8 +185,6 @@ mod tests {
             std::mem::size_of::<Self>() + self.id.len()
         }
     }
-    
-    use super::{Identifiable, Measurable};
     
     #[test]
     fn test_identifiable() {

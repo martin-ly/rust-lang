@@ -3,8 +3,7 @@ name = "c05_threads"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.94.1"
-
+rust-version = "1.96.0"
 authors = ["Rust Learning Community"]
 description = "Rust concurrency and threading learning module"
 license = "MIT OR Apache-2.0"
@@ -20,10 +19,8 @@ crossbeam-deque = "0.8.6"
 rayon = { workspace = true }
 parking_lot = { workspace = true }
 dashmap = { workspace = true }
-# 2025-12-11: 更新至 0.12.0 (最新稳定版本)
 flume = "0.12.0"
 tokio = { workspace = true, optional = true }
-# async-std 已移除，使用 tokio 替代 (async-std 已弃用)
 num_cpus = { workspace = true }
 libc = { workspace = true }
 windows = { version = "0.62.1", features = ["Win32_System_Threading"], optional = true }
@@ -34,10 +31,8 @@ common = { workspace = true, features = ["error-trait", "async"] }
 default = ["std"]
 std = []
 tokio = ["tokio/full"]
-# async-std 特性已移除，使用 tokio 替代
 windows = ["windows/Win32_System_Threading"]
 unstable = []
-# added to satisfy cfg(feature = ...) usage in code
 custom_ring_buffers = []
 work_stealing_examples = []
 

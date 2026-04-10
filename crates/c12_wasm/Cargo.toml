@@ -2,51 +2,43 @@
 name = "c12_wasm"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.94.1"
+resolver = "3"
+rust-version = "1.96.0"
 authors = ["Rust Learning Community"]
-description = "Comprehensive WebAssembly learning module with Rust 1.92+"
+description = "Rust WebAssembly learning module"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/rust-lang-learning"
 
-[[bin]]
-name = "wasi-app"
-path = "src/bin/wasi_app.rs"
-
-[lib]
-crate-type = ["cdylib", "rlib"]
-name = "c12_wasm"
-
-[features]
-default = []
-ecosystem = []  # 启用生态库示例模块
-
 [dependencies]
-common = { workspace = true, features = ["error-trait"] }
-anyhow = { workspace = true }
+common = { workspace = true, features = ["serde", "error-trait", "async"] }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
 thiserror = { workspace = true }
 wasm-bindgen = { workspace = true }
-wasm-bindgen-futures = { workspace = true }
 js-sys = { workspace = true }
-web-sys = { version = "0.3", features = [
-    "console",
-    "Window",
-    "Document",
-    "HtmlElement",
-    "HtmlCanvasElement",
-    "CanvasRenderingContext2d",
-    "Request",
-    "RequestInit",
-    "RequestMode",
-    "Response",
-    "Headers",
-    "Storage",
-    "Performance",
-] }
+wasm-bindgen-futures = { workspace = true }
+
 
 [dev-dependencies]
-wasm-bindgen-test = { workspace = true }
-criterion = { workspace = true, features = ["html_reports"] }
+criterion = { workspace = true }
 
-# 注意: [profile.*] 配置已移至工作区根目录的 Cargo.toml
-# WASM 特定的优化配置（如 opt-level = "z"）在根目录的 [profile.release] 中定义
-# 如需针对 WASM 的特殊构建，请使用: cargo build --release --target wasm32-unknown-unknown
+[lib]
+name = "c12_wasm"
+path = "src/lib.rs"
+
+[[bench]]
+name = "array_processing_bench"
+harness = false
+
+[[bench]]
+name = "design_patterns_bench"
+harness = false
+
+[[bench]]
+name = "performance_benchmarks"
+harness = false
+
+[[bench]]
+name = "string_operations_bench"
+harness = false

@@ -280,6 +280,7 @@ pub mod archive;
 
 /// Rust 1.94 异步特性
 pub mod rust_194_features;
+pub mod rust_196_features;
 
 // ============================================================================
 // 异步生态系统模块 (Async Ecosystem)

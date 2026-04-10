@@ -29,6 +29,7 @@ pub use archive::rust_192_features;
 // Rust 1.93.0 新特性模块
 pub use archive::rust_193_features;
 pub mod rust_194_features;
+pub mod rust_196_features;
 
 /// wasm-bindgen 基础示例
 pub mod basic_examples {

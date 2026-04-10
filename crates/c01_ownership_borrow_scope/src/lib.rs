@@ -330,6 +330,7 @@ pub mod function;
 pub mod internal_mut;
 pub mod ownership_utils;
 pub mod rust_194_features;
+pub mod rust_196_features;
 pub mod scope;
 pub mod variable;
 

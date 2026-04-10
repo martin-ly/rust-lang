@@ -119,6 +119,7 @@ pub mod advanced;
 /// 基础语法模块 - 提供 Rust 泛型编程的基础语法和概念
 pub mod basic_syntax;
 pub mod rust_194_features;
+pub mod rust_196_features;
 
 /// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式
 pub mod advanced_patterns;

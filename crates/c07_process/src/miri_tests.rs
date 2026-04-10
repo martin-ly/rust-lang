@@ -8,12 +8,14 @@
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
 use std::mem::MaybeUninit;
-use std::ffi::{c_void, CStr, CString};
+use std::ffi::{CStr, CString};
 use std::os::raw::{c_char, c_int};
 
 // ==================== FFI 类型安全 ====================
 
-/// 测试 1: CString 内存安全
+/// 测试目的: 验证 CString 内存安全
+/// 测试场景: 创建 CString 并通过指针访问
+/// 预期结果: 应该正确转换和访问
 #[test]
 fn test_cstring_safety() {
     let rust_str = "Hello, FFI!";
@@ -26,7 +28,9 @@ fn test_cstring_safety() {
     }
 }
 
-/// 测试 2: CString 中的 null 字节处理
+/// 测试目的: 验证 CString 中的 null 字节处理
+/// 测试场景: 尝试创建包含 null 字节的 CString
+/// 预期结果: 应该返回错误
 #[test]
 fn test_cstring_null_rejection() {
     let with_null = "Hello\0World";
@@ -35,6 +39,7 @@ fn test_cstring_null_rejection() {
 
 // ==================== 进程状态结构 ====================
 
+/// 进程信息结构
 #[repr(C)]
 struct ProcessInfo {
     pid: c_int,
@@ -44,7 +49,9 @@ struct ProcessInfo {
     name: [c_char; 256],
 }
 
-/// 测试 3: 进程信息结构内存布局
+/// 测试目的: 验证进程信息结构内存布局
+/// 测试场景: 检查对齐和大小
+/// 预期结果: 应该满足 C ABI 要求
 #[test]
 fn test_process_info_layout() {
     use std::mem;
@@ -52,7 +59,9 @@ fn test_process_info_layout() {
     assert!(mem::size_of::<ProcessInfo>() >= 256);
 }
 
-/// 测试 4: 安全的进程信息初始化
+/// 测试目的: 验证安全的进程信息初始化
+/// 测试场景: 使用 MaybeUninit 初始化结构体
+/// 预期结果: 应该正确初始化所有字段
 #[test]
 fn test_process_info_init() {
     let mut info: MaybeUninit<ProcessInfo> = MaybeUninit::uninit();
@@ -63,7 +72,7 @@ fn test_process_info_init() {
         (*ptr).parent_pid = 1;
         (*ptr).status = 0;
         (*ptr).memory_usage = 1024 * 1024;
-        (*ptr).name[0] = 't' as c_char;
+        (*ptr).name[0] = b't' as c_char;
         (*ptr).name[1] = 0;
         
         let info = info.assume_init();
@@ -73,7 +82,9 @@ fn test_process_info_init() {
 
 // ==================== 环境变量处理 ====================
 
-/// 测试 5: 环境变量内存安全
+/// 测试目的: 验证环境变量内存安全
+/// 测试场景: 读取 PATH 环境变量
+/// 预期结果: 应该正确读取值
 #[test]
 fn test_env_var_safety() {
     if let Ok(value) = std::env::var("PATH") {
@@ -81,19 +92,29 @@ fn test_env_var_safety() {
     }
 }
 
-/// 测试 6: 环境变量修改
+/// 测试目的: 验证环境变量修改（跳过 Miri）
+/// 测试场景: 设置和删除环境变量
+/// 预期结果: 应该正确修改环境变量
+/// 
+/// 注意: 此测试在 Miri 下被跳过，因为 set_var/remove_var 在 Miri 下不安全
 #[test]
+#[cfg(not(miri))]
 fn test_env_var_modification() {
     let test_key = "MIRI_TEST_VAR";
     let test_value = "test_value_123";
     
-    std::env::set_var(test_key, test_value);
+    unsafe {
+        std::env::set_var(test_key, test_value);
+    }
     assert_eq!(std::env::var(test_key).unwrap(), test_value);
-    std::env::remove_var(test_key);
+    unsafe {
+        std::env::remove_var(test_key);
+    }
 }
 
 // ==================== 信号处理结构 ====================
 
+/// 信号集合结构
 #[repr(C)]
 struct SigSet {
     bits: [u64; 16],
@@ -123,7 +144,9 @@ impl SigSet {
     }
 }
 
-/// 测试 7: 信号集合操作
+/// 测试目的: 验证信号集合操作
+/// 测试场景: 添加和检查信号
+/// 预期结果: 应该正确管理信号位
 #[test]
 fn test_sigset_operations() {
     let mut sigset = SigSet::new();
@@ -136,13 +159,16 @@ fn test_sigset_operations() {
 
 // ==================== 资源限制结构 ====================
 
+/// 资源限制结构
 #[repr(C)]
 struct RLimit {
     cur: u64,
     max: u64,
 }
 
-/// 测试 8: 资源限制结构
+/// 测试目的: 验证资源限制结构
+/// 测试场景: 创建 RLimit 并检查值
+/// 预期结果: 当前值应该不超过最大值
 #[test]
 fn test_rlimit_struct() {
     let limit = RLimit {

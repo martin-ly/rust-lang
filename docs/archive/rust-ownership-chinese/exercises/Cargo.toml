@@ -7,12 +7,8 @@ rust-version = "1.75"
 [dependencies]
 # 自引用结构支持
 ouroboros = { version = "0.18", optional = true }
-# 并发支持  
-crossbeam = "0.8"
-parking_lot = "0.12"
 # 异步支持
 tokio = { version = "1.35", features = ["full", "test-util"] }
-futures = "0.3"
 
 [features]
 default = ["ouroboros"]

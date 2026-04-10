@@ -1,43 +1,78 @@
-//! # Common - 项目通用工具库
+//! # Common - Project Common Utilities Library
 //!
-//! 提供统一的错误处理机制，使用 thiserror 和 anyhow 模式
+//! Provides unified error handling mechanism using trait-based design.
 //!
-//! ## 使用示例
+//! ## Usage Example
 //!
 //! ```rust
-//! use common::{RustLangError, Result};
+//! use common::{RustLangError, Result, CommonError};
 //!
 //! fn may_fail() -> Result<i32> {
 //!     Ok(42)
 //! }
+//!
+//! fn with_specific_error() -> Result<i32, CommonError> {
+//!     Ok(42)
+//! }
 //! ```
+//!
+//! ## Migration from Old Design
+//!
+//! The error handling has been redesigned to use traits instead of a large enum.
+//! Old crate-specific error types are now deprecated - use your own crate-specific
+//! error types and implement `RustLangError` trait.
 
 #![allow(clippy::empty_line_after_doc_comments)]
+#![allow(deprecated)] // Allow deprecated items for backward compatibility
 
-// 错误处理模块
+// Re-export the error module
 pub mod error;
 
-// 重新导出主要错误类型
+// Primary re-exports - new trait-based design
 pub use error::{
-    RustLangError, Result, ErrorContext, ErrorRecovery,
+    // Core trait and types
+    RustLangError,
+    CommonError,
+    UnifiedError,
+    ErrorCode,
+    
+    // Result types
+    Result,
+    DynamicResult,
+    
+    // Extension traits
+    ErrorContext,
+    ErrorRecovery,
+};
+
+// Macros are exported at crate root via #[macro_export]
+// Use them directly as common::impl_rust_lang_error, etc.
+
+// Legacy re-exports - deprecated, for backward compatibility
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub use error::{
     OwnershipError, TypeError, ControlFlowError, GenericError,
     ThreadError, AsyncError, ProcessError, AlgorithmError,
     DesignPatternError, NetworkError, MacroError, WasmError,
 };
 
-// 向后兼容别名
-pub use error::RustLangError as CommonError;
+// Legacy alias
+#[deprecated(since = "0.2.0", note = "Use UnifiedError instead")]
+pub use error::UnifiedError as RustLangErrorEnum;
 
-// 其他公共模块
+// Backward compatibility alias
+pub use error::UnifiedError as CommonErrorAlias;
+
+// Other public modules
 pub mod traits;
 pub mod types;
 pub mod utils;
 
-// 重新导出常用 trait
+// Re-export commonly used traits
 pub use traits::{Identifiable, Measurable, Validatable};
 
-// 重新导出常用类型
+// Re-export commonly used types
 pub use types::{Pagination, Paginated, Version};
 
-// 重新导出常用工具函数
+// Re-export commonly used utility functions
 pub use utils::{format_duration, format_bytes, truncate_with_ellipsis};

@@ -1,40 +1,128 @@
-//! C06: 异步错误处理
+//! C06: Async Error Handling
+//!
+//! This module provides crate-specific error types and utilities using
+//! the trait-based error design from the common crate.
 
+use common::{impl_into_unified_error, ErrorCode};
 use std::time::Duration;
+use thiserror::Error;
+
+/// C06 crate-specific error type
+#[derive(Error, Debug, Clone)]
+pub enum AsyncError {
+    #[error("cancelled: {0}")]
+    Cancelled(String),
+    
+    #[error("timeout: {0:?}")]
+    Timeout(Duration),
+    
+    #[error("runtime error: {0}")]
+    Runtime(String),
+    
+    #[error("scheduler error: {0}")]
+    Scheduler(String),
+    
+    #[error("stream error: {0}")]
+    Stream(String),
+    
+    #[error("backpressure error: {0}")]
+    Backpressure(String),
+}
+
+// Async timeout and backpressure errors are typically retryable
+impl common::RustLangError for AsyncError {
+    fn error_code(&self) -> ErrorCode {
+        ErrorCode::Async
+    }
+    
+    fn is_retryable(&self) -> bool {
+        matches!(self, AsyncError::Timeout(_) | AsyncError::Backpressure(_))
+    }
+    
+    fn retry_delay(&self) -> Option<Duration> {
+        match self {
+            AsyncError::Timeout(_) => Some(Duration::from_millis(100)),
+            AsyncError::Backpressure(_) => Some(Duration::from_millis(50)),
+            _ => None,
+        }
+    }
+    
+    fn max_retries(&self) -> Option<u32> {
+        if self.is_retryable() {
+            Some(3)
+        } else {
+            None
+        }
+    }
+}
+
+impl_into_unified_error!(AsyncError);
+
+/// Re-export common error types for convenience
 pub use common::{
-    AsyncError, RustLangError, Result,
-    ErrorContext, ErrorRecovery,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
+    UnifiedError,
 };
 
-/// C06 crate 的结果类型
+/// C06 crate's result type
 pub type C06Result<T> = Result<T>;
 
-/// 创建任务取消错误
-pub fn task_cancelled<T: Into<String>>(msg: T) -> RustLangError {
-    RustLangError::Async(AsyncError::Cancelled(msg.into()))
+/// Create task cancelled error
+pub fn task_cancelled<T: Into<String>>(msg: T) -> AsyncError {
+    AsyncError::Cancelled(msg.into())
 }
 
-/// 创建超时错误
-pub fn timeout(duration: Duration) -> RustLangError {
-    RustLangError::Async(AsyncError::Timeout(duration))
+/// Create timeout error
+pub fn timeout(duration: Duration) -> AsyncError {
+    AsyncError::Timeout(duration)
 }
 
-/// 创建运行时错误
-pub fn runtime_error<T: Into<String>>(msg: T) -> RustLangError {
-    RustLangError::Async(AsyncError::Runtime(msg.into()))
+/// Create runtime error
+pub fn runtime_error<T: Into<String>>(msg: T) -> AsyncError {
+    AsyncError::Runtime(msg.into())
 }
 
-/// 创建调度错误
-pub fn scheduler_error<T: Into<String>>(msg: T) -> RustLangError {
-    RustLangError::Async(AsyncError::Scheduler(msg.into()))
+/// Create scheduler error
+pub fn scheduler_error<T: Into<String>>(msg: T) -> AsyncError {
+    AsyncError::Scheduler(msg.into())
 }
 
-/// 创建流处理错误
-pub fn stream_error<T: Into<String>>(msg: T) -> RustLangError {
-    RustLangError::Async(AsyncError::Stream(msg.into()))
+/// Create stream error
+pub fn stream_error<T: Into<String>>(msg: T) -> AsyncError {
+    AsyncError::Stream(msg.into())
 }
 
-/// 创建背压错误
-pub fn backpressure_error<T: Into<String>>(msg: T) -> RustLangError {
-    RustLangError::Async(AsyncError::Backpressure(msg.into()))
+/// Create backpressure error
+pub fn backpressure_error<T: Into<String>>(msg: T) -> AsyncError {
+    AsyncError::Backpressure(msg.into())
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_error_creation() {
+        let err = task_cancelled("test");
+        assert!(matches!(err, AsyncError::Cancelled(_)));
+        assert_eq!(err.error_code(), ErrorCode::Async);
+    }
+
+    #[test]
+    fn test_retryable_error() {
+        let err = timeout(Duration::from_secs(1));
+        assert!(err.is_retryable());
+        assert_eq!(err.retry_delay(), Some(Duration::from_millis(100)));
+        
+        let err = runtime_error("test");
+        assert!(!err.is_retryable());
+    }
+
+    #[test]
+    fn test_error_conversion() {
+        let err = scheduler_error("test");
+        let unified: UnifiedError = err.into();
+        assert!(matches!(unified, UnifiedError::Custom(_)));
+    }
 }

@@ -1,319 +1,541 @@
-//! Unified error handling module
+//! Unified error handling module with trait-based design
+//! 
+//! This module provides:
+//! - `RustLangError` trait: Core trait for all errors in the system
+//! - `CommonError`: Generic error types that don't depend on specific crates
+//! - `UnifiedError`: Minimal unified error type for cross-crate error handling
+//! - Macros for easy trait implementation
+
+use std::fmt::Debug;
 use std::time::Duration;
 use thiserror::Error;
 
+/// Error code for categorizing errors
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum ErrorCode {
+    // Common errors (0-999)
+    Io = 100,
+    Parse = 101,
+    Validation = 102,
+    NotFound = 103,
+    Timeout = 104,
+    Cancelled = 105,
+    Config = 106,
+    Other = 107,
+    
+    // Category-based codes (1000+)
+    Ownership = 1000,
+    Type = 2000,
+    ControlFlow = 3000,
+    Generic = 4000,
+    Thread = 5000,
+    Async = 6000,
+    Process = 7000,
+    Algorithm = 8000,
+    DesignPattern = 9000,
+    Network = 10000,
+    Macro = 11000,
+    Wasm = 12000,
+    
+    // Custom errors (20000+)
+    Custom = 20000,
+}
+
+impl ErrorCode {
+    /// Get the error category based on error code
+    pub fn category(&self) -> &'static str {
+        match self {
+            ErrorCode::Io | ErrorCode::Parse | ErrorCode::Validation |
+            ErrorCode::NotFound | ErrorCode::Timeout | ErrorCode::Cancelled |
+            ErrorCode::Config | ErrorCode::Other => "common",
+            ErrorCode::Ownership => "ownership",
+            ErrorCode::Type => "type",
+            ErrorCode::ControlFlow => "control_flow",
+            ErrorCode::Generic => "generic",
+            ErrorCode::Thread => "thread",
+            ErrorCode::Async => "async",
+            ErrorCode::Process => "process",
+            ErrorCode::Algorithm => "algorithm",
+            ErrorCode::DesignPattern => "design_pattern",
+            ErrorCode::Network => "network",
+            ErrorCode::Macro => "macro",
+            ErrorCode::Wasm => "wasm",
+            ErrorCode::Custom => "custom",
+        }
+    }
+}
+
+/// Core trait for all errors in the rust-lang system
+/// 
+/// This trait provides a unified interface for error handling across all crates,
+/// allowing each crate to define its own error types while maintaining compatibility.
+pub trait RustLangError: std::error::Error + Send + Sync + 'static {
+    /// Get the error code for categorization
+    fn error_code(&self) -> ErrorCode;
+    
+    /// Check if this error is retryable
+    fn is_retryable(&self) -> bool {
+        false
+    }
+    
+    /// Get retry delay if applicable
+    fn retry_delay(&self) -> Option<Duration> {
+        None
+    }
+    
+    /// Get max retry count if applicable
+    fn max_retries(&self) -> Option<u32> {
+        None
+    }
+}
+
+/// Generic error types that don't depend on specific crates
+/// 
+/// These are common errors that can be used across the entire system
+/// without creating circular dependencies.
 #[derive(Error, Debug, Clone)]
-pub enum RustLangError {
-    #[error("ownership error: {0}")]
-    Ownership(#[from] OwnershipError),
-    #[error("type error: {0}")]
-    Type(#[from] TypeError),
-    #[error("control flow error: {0}")]
-    ControlFlow(#[from] ControlFlowError),
-    #[error("generic error: {0}")]
-    Generic(#[from] GenericError),
-    #[error("thread error: {0}")]
-    Thread(#[from] ThreadError),
-    #[error("async error: {0}")]
-    Async(#[from] AsyncError),
-    #[error("process error: {0}")]
-    Process(#[from] ProcessError),
-    #[error("algorithm error: {0}")]
-    Algorithm(#[from] AlgorithmError),
-    #[error("design pattern error: {0}")]
-    DesignPattern(#[from] DesignPatternError),
-    #[error("network error: {0}")]
-    Network(#[from] NetworkError),
-    #[error("macro error: {0}")]
-    Macro(#[from] MacroError),
-    #[error("wasm error: {0}")]
-    Wasm(#[from] WasmError),
+pub enum CommonError {
     #[error("IO error: {0}")]
     Io(String),
+    
+    #[error("parse error: {0}")]
+    Parse(String),
+    
+    #[error("validation error: {0}")]
+    Validation(String),
+    
+    #[error("not found: {0}")]
+    NotFound(String),
+    
+    #[error("operation timed out")]
+    Timeout,
+    
+    #[error("operation cancelled")]
+    Cancelled,
+    
     #[error("config error: {0}")]
     Config(String),
-    #[error("other error: {0}")]
-    Other(String),
-}
-
-pub type Result<T> = std::result::Result<T, RustLangError>;
-
-#[derive(Error, Debug, Clone)]
-pub enum OwnershipError {
-    #[error("borrow conflict: {0}")]
-    BorrowConflict(String),
-    #[error("lifetime error: {0}")]
-    Lifetime(String),
-    #[error("move error: {0}")]
-    MoveError(String),
-    #[error("mutable borrow conflict: {0}")]
-    MutableBorrowConflict(String),
-    #[error("interior mutability error: {0}")]
-    InteriorMutability(String),
-    #[error("memory safety error: {0}")]
-    MemorySafety(String),
-}
-
-#[derive(Error, Debug, Clone)]
-pub enum TypeError {
-    #[error("type mismatch: expected {expected}, found {found}")]
-    TypeMismatch { expected: String, found: String },
-    #[error("inference failed: {0}")]
-    InferenceFailed(String),
-    #[error("trait bound not satisfied: {0}")]
-    TraitBoundNotSatisfied(String),
-    #[error("conversion error: {0}")]
-    Conversion(String),
-    #[error("null pointer: {0}")]
-    NullPointer(String),
-    #[error("variance error: {0}")]
-    Variance(String),
-}
-
-#[derive(Error, Debug, Clone)]
-pub enum ControlFlowError {
-    #[error("non-exhaustive match: {0}")]
-    NonExhaustiveMatch(String),
-    #[error("stack overflow: {0}")]
-    StackOverflow(String),
-    #[error("interrupted: {0}")]
-    Interrupted(String),
-    #[error("closure capture error: {0}")]
-    ClosureCapture(String),
-    #[error("generator error: {0}")]
-    Generator(String),
-}
-
-#[derive(Error, Debug, Clone)]
-pub enum GenericError {
-    #[error("type parameter mismatch: {0}")]
-    TypeParameterMismatch(String),
-    #[error("associated type error: {0}")]
-    AssociatedType(String),
-    #[error("constraint conflict: {0}")]
-    ConstraintConflict(String),
-    #[error("GAT error: {0}")]
-    GatError(String),
-    #[error("HRTB error: {0}")]
-    HrtbError(String),
-}
-
-#[derive(Error, Debug, Clone)]
-pub enum ThreadError {
-    #[error("creation failed: {0}")]
-    CreationFailed(String),
-    #[error("panicked: {0}")]
-    Panicked(String),
-    #[error("deadlock detected: {0}")]
-    Deadlock(String),
-    #[error("data race: {0}")]
-    DataRace(String),
-    #[error("lock acquisition failed: {0}")]
-    LockAcquisition(String),
-    #[error("send error: {0}")]
-    SendError(String),
-    #[error("receive error: {0}")]
-    ReceiveError(String),
-    #[error("lock-free error: {0}")]
-    LockFree(String),
-}
-
-#[derive(Error, Debug, Clone)]
-pub enum AsyncError {
-    #[error("cancelled: {0}")]
-    Cancelled(String),
-    #[error("timeout: {0:?}")]
-    Timeout(Duration),
-    #[error("runtime error: {0}")]
-    Runtime(String),
-    #[error("scheduler error: {0}")]
-    Scheduler(String),
-    #[error("stream error: {0}")]
-    Stream(String),
-    #[error("backpressure error: {0}")]
-    Backpressure(String),
-}
-
-#[derive(Error, Debug, Clone)]
-pub enum ProcessError {
-    #[error("creation failed: {0}")]
-    CreationFailed(String),
-    #[error("start failed: {0}")]
-    StartFailed(String),
-    #[error("wait failed: {0}")]
-    WaitFailed(String),
-    #[error("termination failed: {0}")]
-    TerminationFailed(String),
-    #[error("not found: {0}")]
-    NotFound(u32),
-    #[error("permission denied: {0}")]
-    PermissionDenied(String),
-    #[error("already terminated")]
-    AlreadyTerminated,
-    #[error("IPC error: {0}")]
-    Ipc(String),
-    #[error("signal error: {0}")]
-    Signal(String),
+    
     #[error("{0}")]
     Other(String),
 }
 
-#[derive(Error, Debug, Clone)]
-pub enum AlgorithmError {
-    #[error("invalid input: {0}")]
-    InvalidInput(String),
-    #[error("not implemented: {0}")]
-    NotImplemented(String),
-    #[error("complexity exceeded: {0}")]
-    ComplexityExceeded(String),
-    #[error("numeric overflow: {0}")]
-    NumericOverflow(String),
-    #[error("convergence failed: {0}")]
-    ConvergenceFailed(String),
-    #[error("data structure error: {0}")]
-    DataStructure(String),
+impl RustLangError for CommonError {
+    fn error_code(&self) -> ErrorCode {
+        match self {
+            CommonError::Io(_) => ErrorCode::Io,
+            CommonError::Parse(_) => ErrorCode::Parse,
+            CommonError::Validation(_) => ErrorCode::Validation,
+            CommonError::NotFound(_) => ErrorCode::NotFound,
+            CommonError::Timeout => ErrorCode::Timeout,
+            CommonError::Cancelled => ErrorCode::Cancelled,
+            CommonError::Config(_) => ErrorCode::Config,
+            CommonError::Other(_) => ErrorCode::Other,
+        }
+    }
+    
+    fn is_retryable(&self) -> bool {
+        matches!(self, CommonError::Timeout | CommonError::Io(_))
+    }
+    
+    fn retry_delay(&self) -> Option<Duration> {
+        match self {
+            CommonError::Timeout => Some(Duration::from_millis(100)),
+            CommonError::Io(_) => Some(Duration::from_millis(50)),
+            _ => None,
+        }
+    }
+    
+    fn max_retries(&self) -> Option<u32> {
+        match self {
+            CommonError::Timeout => Some(3),
+            CommonError::Io(_) => Some(3),
+            _ => None,
+        }
+    }
 }
 
-#[derive(Error, Debug, Clone)]
-pub enum DesignPatternError {
-    #[error("singleton error: {0}")]
-    Singleton(String),
-    #[error("factory error: {0}")]
-    Factory(String),
-    #[error("proxy error: {0}")]
-    Proxy(String),
-    #[error("flyweight error: {0}")]
-    Flyweight(String),
-    #[error("chain error: {0}")]
-    Chain(String),
-    #[error("observer error: {0}")]
-    Observer(String),
-    #[error("concurrency error: {0}")]
-    Concurrency(String),
+impl From<std::io::Error> for CommonError {
+    fn from(e: std::io::Error) -> Self {
+        CommonError::Io(e.to_string())
+    }
 }
 
-#[derive(Error, Debug, Clone)]
-pub enum NetworkError {
-    #[error("connection error: {0}")]
-    Connection(String),
-    #[error("protocol error: {0}")]
-    Protocol(String),
-    #[error("timeout: {0:?}")]
-    Timeout(Duration),
-    #[error("DNS error: {0}")]
-    Dns(String),
-    #[error("TLS error: {0}")]
-    Tls(String),
-    #[error("HTTP error: status={status}, message={message}")]
-    Http { status: u16, message: String },
-    #[error("WebSocket error: {0}")]
-    WebSocket(String),
-    #[error("authentication error: {0}")]
-    Authentication(String),
-    #[error("buffer error: {0}")]
-    Buffer(String),
+impl From<String> for CommonError {
+    fn from(s: String) -> Self {
+        CommonError::Other(s)
+    }
 }
 
-#[derive(Error, Debug, Clone)]
-pub enum MacroError {
-    #[error("parse error: {0}")]
-    ParseError(String),
-    #[error("expansion error: {0}")]
-    ExpansionError(String),
-    #[error("proc macro error: {0}")]
-    ProcMacro(String),
-    #[error("decl macro error: {0}")]
-    DeclMacro(String),
-    #[error("hygiene error: {0}")]
-    Hygiene(String),
+impl From<&str> for CommonError {
+    fn from(s: &str) -> Self {
+        CommonError::Other(s.to_string())
+    }
 }
 
+/// Minimal unified error type for cross-crate error handling
+/// 
+/// This enum provides a way to handle errors from multiple crates
+/// when you need a concrete type rather than a trait object.
 #[derive(Error, Debug, Clone)]
-pub enum WasmError {
-    #[error("compilation error: {0}")]
-    Compilation(String),
-    #[error("runtime error: {0}")]
-    Runtime(String),
-    #[error("memory error: {0}")]
-    Memory(String),
-    #[error("import error: {0}")]
-    Import(String),
-    #[error("export error: {0}")]
-    Export(String),
-    #[error("WASI error: {0}")]
-    Wasi(String),
-    #[error("bindgen error: {0}")]
-    Bindgen(String),
+pub enum UnifiedError {
+    #[error("common error: {0}")]
+    Common(CommonError),
+    
+    #[error("custom error: {0}")]
+    Custom(String),
 }
 
+impl RustLangError for UnifiedError {
+    fn error_code(&self) -> ErrorCode {
+        match self {
+            UnifiedError::Common(e) => RustLangError::error_code(e),
+            UnifiedError::Custom(_) => ErrorCode::Custom,
+        }
+    }
+    
+    fn is_retryable(&self) -> bool {
+        match self {
+            UnifiedError::Common(e) => RustLangError::is_retryable(e),
+            UnifiedError::Custom(_) => false,
+        }
+    }
+    
+    fn retry_delay(&self) -> Option<Duration> {
+        match self {
+            UnifiedError::Common(e) => RustLangError::retry_delay(e),
+            UnifiedError::Custom(_) => None,
+        }
+    }
+    
+    fn max_retries(&self) -> Option<u32> {
+        match self {
+            UnifiedError::Common(e) => RustLangError::max_retries(e),
+            UnifiedError::Custom(_) => None,
+        }
+    }
+}
+
+impl From<CommonError> for UnifiedError {
+    fn from(e: CommonError) -> Self {
+        UnifiedError::Common(e)
+    }
+}
+
+impl From<std::io::Error> for UnifiedError {
+    fn from(e: std::io::Error) -> Self {
+        UnifiedError::Common(e.into())
+    }
+}
+
+impl From<String> for UnifiedError {
+    fn from(s: String) -> Self {
+        UnifiedError::Common(s.into())
+    }
+}
+
+impl From<&str> for UnifiedError {
+    fn from(s: &str) -> Self {
+        UnifiedError::Common(s.into())
+    }
+}
+
+/// Generic result type using the UnifiedError
+pub type Result<T, E = UnifiedError> = std::result::Result<T, E>;
+
+/// Result type with boxed dynamic error for maximum flexibility
+pub type DynamicResult<T> = std::result::Result<T, Box<dyn RustLangError>>;
+
+/// Extension trait for error context
+pub trait ErrorContext<T> {
+    /// Add context to an error
+    fn with_context<F>(self, f: F) -> Result<T>
+    where
+        F: FnOnce() -> String;
+}
+
+impl<T, E> ErrorContext<T> for std::result::Result<T, E>
+where
+    E: Into<CommonError>,
+{
+    fn with_context<F>(self, _f: F) -> Result<T>
+    where
+        F: FnOnce() -> String,
+    {
+        self.map_err(|e| UnifiedError::Common(e.into()))
+    }
+}
+
+/// Legacy ErrorRecovery trait - maintained for backward compatibility
+/// 
+/// This trait is implemented for types that implement RustLangError.
+/// For new code, prefer using RustLangError trait directly.
 pub trait ErrorRecovery {
     fn is_retryable(&self) -> bool;
     fn retry_delay(&self) -> Option<Duration>;
     fn max_retries(&self) -> Option<u32>;
 }
 
-impl ErrorRecovery for RustLangError {
+// Implement ErrorRecovery for types that implement RustLangError
+// Use a wrapper to avoid blanket impl conflicts
+impl<T: RustLangError> ErrorRecovery for T {
     fn is_retryable(&self) -> bool {
-        matches!(self,
-            RustLangError::Network(NetworkError::Timeout(_) | NetworkError::Connection(_)) |
-            RustLangError::Async(AsyncError::Timeout(_) | AsyncError::Backpressure(_)) |
-            RustLangError::Process(ProcessError::StartFailed(_) | ProcessError::Ipc(_)) |
-            RustLangError::Thread(ThreadError::LockAcquisition(_) | ThreadError::SendError(_))
-        )
+        RustLangError::is_retryable(self)
     }
-
+    
     fn retry_delay(&self) -> Option<Duration> {
-        match self {
-            RustLangError::Network(e) => match e {
-                NetworkError::Timeout(_) => Some(Duration::from_millis(100)),
-                NetworkError::Connection(_) => Some(Duration::from_millis(500)),
-                _ => None,
-            },
-            RustLangError::Async(_) => Some(Duration::from_millis(50)),
-            RustLangError::Process(_) => Some(Duration::from_millis(200)),
-            RustLangError::Thread(_) => Some(Duration::from_millis(10)),
-            _ => None,
-        }
+        RustLangError::retry_delay(self)
     }
-
+    
     fn max_retries(&self) -> Option<u32> {
-        match self {
-            RustLangError::Network(e) => match e {
-                NetworkError::Timeout(_) => Some(3),
-                NetworkError::Connection(_) => Some(5),
-                _ => None,
-            },
-            RustLangError::Async(_) => Some(3),
-            RustLangError::Process(_) => Some(3),
-            RustLangError::Thread(_) => Some(5),
-            _ => None,
+        RustLangError::max_retries(self)
+    }
+}
+
+/// Macro to simplify RustLangError trait implementation
+/// 
+/// # Examples
+/// 
+/// ```rust,ignore
+/// #[derive(Error, Debug)]
+/// pub enum MyError {
+///     #[error("something failed")]
+///     Failed,
+/// }
+/// 
+/// impl_rust_lang_error!(MyError, ErrorCode::Custom);
+/// ```
+#[macro_export]
+macro_rules! impl_rust_lang_error {
+    // Basic implementation with just error code
+    ($type:ty, $code:expr) => {
+        impl $crate::error::RustLangError for $type {
+            fn error_code(&self) -> $crate::error::ErrorCode {
+                $code
+            }
+            
+            fn is_retryable(&self) -> bool {
+                false
+            }
+        }
+    };
+    
+    // Implementation with custom retryable logic
+    ($type:ty, $code:expr, retryable: $retryable:expr) => {
+        impl $crate::error::RustLangError for $type {
+            fn error_code(&self) -> $crate::error::ErrorCode {
+                $code
+            }
+            
+            fn is_retryable(&self) -> bool {
+                $retryable
+            }
+        }
+    };
+    
+    // Full implementation with all options
+    ($type:ty, $code:expr, retryable: $retryable:expr, retry_delay: $delay:expr, max_retries: $retries:expr) => {
+        impl $crate::error::RustLangError for $type {
+            fn error_code(&self) -> $crate::error::ErrorCode {
+                $code
+            }
+            
+            fn is_retryable(&self) -> bool {
+                $retryable
+            }
+            
+            fn retry_delay(&self) -> Option<std::time::Duration> {
+                $delay
+            }
+            
+            fn max_retries(&self) -> Option<u32> {
+                $retries
+            }
+        }
+    };
+}
+
+/// Macro to implement From<ErrorType> for UnifiedError
+#[macro_export]
+macro_rules! impl_into_unified_error {
+    ($type:ty) => {
+        impl From<$type> for $crate::error::UnifiedError {
+            fn from(e: $type) -> Self {
+                $crate::error::UnifiedError::Custom(e.to_string())
+            }
+        }
+    };
+}
+
+/// Macro to create a crate-specific error module
+/// 
+/// This macro sets up the standard boilerplate for a crate's error handling.
+#[macro_export]
+macro_rules! define_crate_error {
+    (
+        crate_name: $crate_name:ident,
+        error_type: $error_type:ty,
+        error_code: $error_code:expr,
+        result_type: $result_name:ident
+    ) => {
+        pub use $crate::{
+            RustLangError, CommonError, UnifiedError, Result,
+            ErrorContext, ErrorRecovery, ErrorCode,
+            impl_rust_lang_error, impl_into_unified_error,
+        };
+        
+        /// Crate-specific result type
+        pub type $result_name<T> = $crate::Result<T>;
+        
+        // Implement RustLangError for this crate's error type
+        $crate::impl_rust_lang_error!($error_type, $error_code);
+        
+        // Implement conversion to UnifiedError
+        $crate::impl_into_unified_error!($error_type);
+    };
+}
+
+// Legacy type aliases for backward compatibility
+/// Legacy OwnershipError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type OwnershipError = CommonError;
+
+/// Legacy TypeError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type TypeError = CommonError;
+
+/// Legacy ControlFlowError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type ControlFlowError = CommonError;
+
+/// Legacy GenericError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type GenericError = CommonError;
+
+/// Legacy ThreadError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type ThreadError = CommonError;
+
+/// Legacy AsyncError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type AsyncError = CommonError;
+
+/// Legacy ProcessError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type ProcessError = CommonError;
+
+/// Legacy AlgorithmError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type AlgorithmError = CommonError;
+
+/// Legacy DesignPatternError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type DesignPatternError = CommonError;
+
+/// Legacy NetworkError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type NetworkError = CommonError;
+
+/// Legacy MacroError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type MacroError = CommonError;
+
+/// Legacy WasmError - now replaced by trait-based approach
+#[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
+pub type WasmError = CommonError;
+
+/// Legacy Retryable alias - maintained for backward compatibility
+pub use ErrorRecovery as Retryable;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use thiserror::Error;
+    
+    #[derive(Error, Debug, Clone)]
+    enum TestError {
+        #[error("test failed")]
+        Failed,
+        #[error("test retryable")]
+        Retryable,
+    }
+    
+    impl RustLangError for TestError {
+        fn error_code(&self) -> ErrorCode {
+            ErrorCode::Custom
+        }
+        
+        fn is_retryable(&self) -> bool {
+            matches!(self, TestError::Retryable)
+        }
+        
+        fn retry_delay(&self) -> Option<Duration> {
+            if RustLangError::is_retryable(self) {
+                Some(Duration::from_millis(100))
+            } else {
+                None
+            }
         }
     }
-}
-
-pub trait ErrorContext<T> {
-    fn with_context<F>(self, f: F) -> Result<T> where F: FnOnce() -> String;
-}
-
-impl<T, E> ErrorContext<T> for std::result::Result<T, E> where E: Into<RustLangError> {
-    fn with_context<F>(self, _f: F) -> Result<T> where F: FnOnce() -> String {
-        self.map_err(|e| e.into())
+    
+    #[test]
+    fn test_common_error() {
+        let err = CommonError::Io("file not found".to_string());
+        assert_eq!(RustLangError::error_code(&err), ErrorCode::Io);
+        assert!(RustLangError::is_retryable(&err));
+        
+        let err = CommonError::Validation("invalid".to_string());
+        assert_eq!(RustLangError::error_code(&err), ErrorCode::Validation);
+        assert!(!RustLangError::is_retryable(&err));
+    }
+    
+    #[test]
+    fn test_unified_error() {
+        let err = UnifiedError::Common(CommonError::Timeout);
+        assert_eq!(RustLangError::error_code(&err), ErrorCode::Timeout);
+        assert!(RustLangError::is_retryable(&err));
+    }
+    
+    #[test]
+    fn test_trait_impl() {
+        let err = TestError::Failed;
+        assert!(!RustLangError::is_retryable(&err));
+        
+        let err = TestError::Retryable;
+        assert!(RustLangError::is_retryable(&err));
+        assert_eq!(RustLangError::retry_delay(&err), Some(Duration::from_millis(100)));
+    }
+    
+    #[test]
+    fn test_error_code_category() {
+        assert_eq!(ErrorCode::Io.category(), "common");
+        assert_eq!(ErrorCode::Network.category(), "network");
+        assert_eq!(ErrorCode::Custom.category(), "custom");
+    }
+    
+    #[test]
+    fn test_error_recovery_trait() {
+        // Test that ErrorRecovery is correctly implemented via blanket impl
+        fn check_recovery<T: ErrorRecovery>(e: &T) -> bool {
+            ErrorRecovery::is_retryable(e)
+        }
+        
+        let err = CommonError::Timeout;
+        assert!(check_recovery(&err));
+    }
+    
+    #[test]
+    fn test_macro_impl() {
+        #[derive(Error, Debug)]
+        enum MacroTestError {
+            #[error("macro test")]
+            Test,
+        }
+        
+        impl_rust_lang_error!(MacroTestError, ErrorCode::Custom);
+        
+        let err = MacroTestError::Test;
+        assert_eq!(RustLangError::error_code(&err), ErrorCode::Custom);
+        assert!(!RustLangError::is_retryable(&err));
     }
 }
-
-impl From<std::io::Error> for RustLangError {
-    fn from(e: std::io::Error) -> Self {
-        RustLangError::Io(e.to_string())
-    }
-}
-
-impl From<String> for RustLangError {
-    fn from(s: String) -> Self { RustLangError::Other(s) }
-}
-
-impl From<&str> for RustLangError {
-    fn from(s: &str) -> Self { RustLangError::Other(s.to_string()) }
-}
-
-// 向后兼容：Retryable 是 ErrorRecovery 的别名
-pub use ErrorRecovery as Retryable;

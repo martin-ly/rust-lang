@@ -1,47 +1,47 @@
 [package]
 name = "c09_design_pattern"
-version = "1.0.1"
+version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.94.1"
-
-
+rust-version = "1.96.0"
 authors = ["Rust Learning Community"]
 description = "Rust design patterns learning module"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/rust-lang-learning"
 
 [dependencies]
-common = { workspace = true, features = ["error-trait", "async"] }
-anyhow = { workspace = true }
-thiserror = { workspace = true }
-async-trait = { workspace = true }
+common = { workspace = true, features = ["serde", "error-trait", "async"] }
 tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
 rayon = { workspace = true }
-crossbeam = { workspace = true }
-lazy_static = "1.5.0"
-futures = { workspace = true, optional = true }
-tracing = { version = "0.1", optional = true }
-tracing-subscriber = { version = "0.3", optional = true, features = ["fmt", "env-filter"] }
+
+
 
 [dev-dependencies]
 criterion = { workspace = true }
-
-[features]
-default = []
-# 启用 rayon 基准的可选门控（仅用于 benches 内部条件）
-rayon = []
-# 启用 tokio 异步基准的可选门控
-tokio-bench = []
-# 可观测示例所需的 tracing 组件
-obs-tracing = ["tracing", "tracing-subscriber"]
-# 启用 futures 支持
-futures = ["dep:futures"]
 
 [lib]
 name = "c09_design_pattern"
 path = "src/lib.rs"
 
 [[bin]]
-name = "c09_design_pattern"
+name = "dp"
 path = "src/bin/main.rs"
+
+[[bench]]
+name = "async_gats_benches"
+harness = false
+
+[[bench]]
+name = "pattern_benchmarks"
+harness = false
+
+[[bench]]
+name = "pattern_scenarios"
+harness = false
+
+[[bench]]
+name = "performance_benchmarks"
+harness = false

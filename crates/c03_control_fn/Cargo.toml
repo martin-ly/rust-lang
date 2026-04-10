@@ -3,66 +3,32 @@ name = "c03_control_fn"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.94.1"
-authors = ["Rust Control Flow & Functions Research Team"]
-description = "Rust 1.94 控制流与函数特性研究项目 - 包含异步编程、类型系统、性能优化等最新特性"
+rust-version = "1.96.0"
+authors = ["Rust Learning Community"]
+description = "Rust control flow and functions learning module"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/rust-lang/control-flow-functions"
-keywords = ["rust", "control-flow", "functions", "async", "generics", "performance"]
-categories = ["development-tools", "system-programming"]
+repository = "https://github.com/rust-lang/rust-lang-learning"
 
 [dependencies]
-# 异步运行时支持
+common = { workspace = true, features = ["serde", "error-trait", "async"] }
 tokio = { workspace = true }
-# 异步流处理
-tokio-stream = { workspace = true }
-# Future工具
-futures = { workspace = true, optional = true }
-# 性能测试
-fastrace = { version = ">=0.7.0", features = ["enable"] }
-# 序列化支持
 serde = { workspace = true }
-# 错误处理
-common = { workspace = true, features = ["serde", "error-trait", "async", "tracing"] }
-anyhow = { workspace = true }
-# 日志支持
-tracing = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
 tracing-subscriber = { workspace = true }
-# 测试工具
-criterion = { workspace = true, optional = true }
-proptest = { workspace = true, optional = true }
-# 系统信息
-num_cpus = { workspace = true }
-# 随机数生成
-fastrand = "2.3.0"
-# 时间处理
-chrono = { workspace = true }
+
 
 [dev-dependencies]
 criterion = { workspace = true }
-proptest = { workspace = true }
-
-[features]
-default = ["std", "async", "generics"]
-std = []
-async = ["tokio/full", "futures"]
-generics = []
-performance = ["fastrace/enable"]
-bench = ["criterion"]
-test = ["proptest"]
-nightly = []
-custom = []
-debug = []
-dev = []
 
 [lib]
 name = "c03_control_fn"
 path = "src/lib.rs"
 
-[[example]]
-name = "control_flow_example"
-path = "examples/control_flow_example.rs"
-
 [[bin]]
-name = "c03_control_fn"
+name = "cf"
 path = "src/bin/main.rs"
+
+[[bench]]
+name = "performance_benchmarks"
+harness = false
