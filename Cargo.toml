@@ -669,3 +669,9 @@ unnecessary_box_returns = "warn"
 module_name_repetitions = "allow"
 struct_field_names = "allow"
 similar_names = "allow"
+
+# 应急补丁: core2 全版本被 yanked 导致 cargo update 失败
+# multihash -> libp2p-core -> libp2p 传递依赖 core2 ^0.4.0
+# 通过 git 源码覆盖恢复可用
+[patch.crates-io]
+core2 = { git = "https://github.com/technocreatives/core2", rev = "545e84bcb0f235b12e21351e0c69767958efe2a7" }
