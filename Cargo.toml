@@ -31,7 +31,7 @@ members = [
 
 [workspace.package]
 edition = "2024"
-rust-version = "1.96.0"
+rust-version = "1.95.0"
 
 [profile.release]
 
@@ -54,7 +54,7 @@ codegen-units = 1
 #strip = true
 strip = "symbols"
 
-# Rust 1.96: 分割调试信息 (macOS 上特别有效)
+# Rust 1.95+: 分割调试信息 (macOS 上特别有效)
 split-debuginfo = "packed"
 
 # 默认情况下，Rust 在 panic 时会进行栈展开，提供详细的调用栈信息。
@@ -62,7 +62,7 @@ split-debuginfo = "packed"
 # 这种配置不仅减小了二进制体积（因为它不需要包含栈展开的代码），还能略微提升性能。
 panic = "abort"
 
-# CPU指令集优化 - Rust 1.96 推荐设置
+# CPU指令集优化 - Rust 1.95+ 推荐设置
 # 启用所有可用的CPU指令集优化
 # 注意: target-cpu 和 target-feature 需要在编译时通过环境变量或.cargo/config.toml设置
 
@@ -168,11 +168,11 @@ codegen-units = 1024
 panic = "abort"
 
 # 工作区级别的依赖版本统一 - 2026年3月26日最新稳定版本
-# 更新时间: 2026-04-10 (Rust 1.96 迁移)
+# 更新时间: 2026-04-10 (Rust 1.95 稳定版同步)
 # 更新包: hashbrown, indexmap, libredox
 # 移除包: windows-sys v0.48.0, windows-targets v0.48.5, winreg v0.50.0 等旧版Windows依赖
 # 系统时间已同步，所有依赖库版本已更新至最新成熟版本
-# rust-version: 1.96.0
+# rust-version: 1.95.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
 # 本地 crate
@@ -333,7 +333,7 @@ bincode = "=2.0.1"
 
 # 异步运行时 - 2025年12月11日最新稳定版本
 # tokio: 事件驱动的非阻塞I/O平台，用于编写异步I/O应用程序 - 版本 1.40+ (字母索引)
-tokio = { version = "1.51.0", features = ["full"] }  # 2026-04-10: 1.51.0 -> 1.55.0 (Rust 1.96 迁移)
+tokio = { version = "1.51.0", features = ["full"] }  # 2026-04-10: 1.51.0 -> 1.55.0 (Rust 1.95 同步)
 # tokio-util: tokio的实用工具库
 tokio-util = "0.7.18"
 # tokio-stream: tokio的流处理支持
@@ -556,7 +556,7 @@ proc-macro-error2 = "2.0.1"
 # is-terminal: 终端检测库，替代atty (有安全漏洞)
 is-terminal = "0.4.17"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0 - 版本 0.2+ (字母索引)
-# 2026-04-10 (Rust 1.96 迁移)
+# 2026-04-10 (Rust 1.95 稳定版同步)
 wasm-bindgen = "0.2.117"
 # js-sys: WebAssembly 与 JavaScript 的绑定
 js-sys = "0.3.94"
@@ -628,7 +628,7 @@ unicode-width = "=0.2.0"
 unsafe_code = "forbid"
 double_negations = "warn"
 irrefutable_let_patterns = "allow"
-# Rust 1.96 新增lints
+# Rust 1.95+ 新增lints
 unused_crate_dependencies = "warn"
 missing_docs = "allow"
 
@@ -645,7 +645,7 @@ cargo = { level = "allow", priority = -1 }
 # 额外有用的lints
 match_wildcard_for_single_variants = "warn"
 redundant_closure_for_method_calls = "warn"
-# Rust 1.96 推荐lints
+# Rust 1.95+ 推荐lints
 ignored_unit_patterns = "warn"
 manual_c_str_literals = "warn"
 unnecessary_map_on_constructor = "warn"
@@ -670,8 +670,5 @@ module_name_repetitions = "allow"
 struct_field_names = "allow"
 similar_names = "allow"
 
-# 应急补丁: core2 全版本被 yanked 导致 cargo update 失败
-# multihash -> libp2p-core -> libp2p 传递依赖 core2 ^0.4.0
-# 通过 git 源码覆盖恢复可用
-[patch.crates-io]
-core2 = { git = "https://github.com/technocreatives/core2", rev = "545e84bcb0f235b12e21351e0c69767958efe2a7" }
+# 注: core2 补丁已移除
+# multihash 0.19.4+ / libp2p-core 已迁移到 no_std_io2，不再需要 core2 补丁
