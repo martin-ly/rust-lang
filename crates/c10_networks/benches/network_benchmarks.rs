@@ -76,16 +76,16 @@ fn bench_data_serialization(c: &mut Criterion) {
         });
 
         group.bench_with_input(BenchmarkId::new("bincode_serialize", size), size, |b, _| {
-            b.iter(|| bincode::serialize(&data).unwrap())
+            b.iter(|| bincode::serde::encode_to_vec(&data, bincode::config::standard()).unwrap())
         });
 
         group.bench_with_input(
             BenchmarkId::new("bincode_deserialize", size),
             size,
             |b, _| {
-                let binary = bincode::serialize(&data).unwrap();
+                let binary = bincode::serde::encode_to_vec(&data, bincode::config::standard()).unwrap();
                 b.iter(|| {
-                    let result: TestData = bincode::deserialize(&binary).unwrap();
+                    let result: TestData = bincode::serde::decode_from_slice(&binary, bincode::config::standard()).unwrap().0;
                     result
                 })
             },

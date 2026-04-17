@@ -30,7 +30,7 @@ fn main() {
         std::fs::metadata(&generated_file).and_then(|m| m.modified())
     ) {
         if gen_time > proto_time {
-            println!("cargo:warning=Generated code is up to date, skipping protobuf compilation");
+            // Generated code is up to date, skipping protobuf compilation
             return;
         }
     }
@@ -56,7 +56,7 @@ fn main() {
             .compile_protos(&[proto_file], &[proto_dir])
             .expect("failed to compile protobuf files with tonic-prost-build");
             
-        println!("cargo:warning=Protobuf compilation completed successfully");
+        // Protobuf compilation completed successfully
     } else {
         println!("cargo:warning=Proto directory does not exist: {}", proto_dir);
     }
