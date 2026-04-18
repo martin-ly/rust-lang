@@ -2,6 +2,14 @@
 # 使用sccache加速构建 - 需要安装: cargo install sccache
 # sccache 支持磁盘缓存和远程缓存(S3/Azure/GCS等)
 rustc-wrapper = "sccache"
+# 通用Rustflags优化
+# - Ctarget-cpu=native: 针对本机CPU优化
+# - Cembed-bitcode=no: 禁用bitcode嵌入(加快编译)
+rustflags = ["-C", "target-cpu=native", "-C", "embed-bitcode=no"]
+
+# 并行编译作业数 - 默认为CPU核心数，可以显式设置
+# 建议: 物理核心数 - 1，保留一个核心给系统
+# jobs = 16
 
 [env]
 # sccache 配置 - 50GB 缓存大小
@@ -17,38 +25,22 @@ SCCACHE_DIR = "D:\\_cache\\sccache"
 # 本地开发应设为 false 或使用环境变量覆盖
 SCCACHE_GHA_ENABLED = { value = "false", force = false }
 
-# 并行编译作业数 - 默认为CPU核心数，可以显式设置
-# 建议: 物理核心数 - 1，保留一个核心给系统
-# jobs = 16
-
-# 通用Rustflags优化
-# - Ctarget-cpu=native: 针对本机CPU优化
-# - Cembed-bitcode=no: 禁用bitcode嵌入(加快编译)
-[env.rustflags]
-value = "-C target-cpu=native -C embed-bitcode=no"
-
 # 链接器优化 - 使用更快的链接器 (Windows)
 [target.x86_64-pc-windows-msvc]
 linker = "rust-lld.exe"
-[env.rustflags.windows]
-value = "-C target-cpu=native -C embed-bitcode=no -C link-arg=-fuse-ld=lld"
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 
 # 链接器优化 - 使用更快的链接器 (Linux)
 [target.x86_64-unknown-linux-gnu]
 linker = "clang"
-[env.rustflags.linux]
-value = "-C target-cpu=native -C embed-bitcode=no -C link-arg=-fuse-ld=lld"
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 
 # 链接器优化 - macOS
 [target.x86_64-apple-darwin]
 linker = "clang"
-[env.rustflags.macos_x64]
-value = "-C target-cpu=native -C embed-bitcode=no"
 
 [target.aarch64-apple-darwin]
 linker = "clang"
-[env.rustflags.macos_arm]
-value = "-C target-cpu=native -C embed-bitcode=no"
 
 [registries.crates-io]
 # 稀疏索引协议 - 大幅减少索引下载时间

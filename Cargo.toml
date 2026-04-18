@@ -14,24 +14,13 @@ members = [
     "crates/c09_design_pattern",
     "crates/c10_networks",
     "crates/c11_macro_system",
-    "crates/common",
-    "crates/c01_ownership_borrow_scope",
-    "crates/c02_type_system",
-    "crates/c03_control_fn",
-    "crates/c04_generic",
-    "crates/c05_threads",
-    "crates/c06_async",
-    "crates/c07_process",
-    "crates/c08_algorithms",
-    "crates/c09_design_pattern",
-    "crates/c10_networks",
-    "crates/c11_macro_system",
     "crates/c12_wasm",
+    "crates/common",
 ]
 
 [workspace.package]
 edition = "2024"
-rust-version = "1.95.0"
+rust-version = "1.96.0"
 
 [profile.release]
 
