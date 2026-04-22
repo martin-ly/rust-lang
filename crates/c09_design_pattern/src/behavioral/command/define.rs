@@ -57,6 +57,7 @@ impl Light {
         println!("灯已打开");
     }
 
+    #[allow(dead_code)]
     fn turn_off(&mut self) {
         self.is_on = false;
         println!("灯已关闭");
