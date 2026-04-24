@@ -21,6 +21,7 @@
 pub mod async_control_flow;
 pub mod error;
 pub mod rust_194_features; // Rust 1.94 特性
+pub mod rust_196_features; // Rust 2024 Edition let chains
 pub mod rust_196_gen_examples; // Rust 1.96 gen 关键字
 
 // 重新导出Rust 1.94.0新特性

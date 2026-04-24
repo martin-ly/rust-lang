@@ -8,6 +8,8 @@
 #![allow(clippy::manual_range_contains)]
 #![allow(clippy::redundant_closure)]
 #![allow(clippy::cmp_owned)]
+#![feature(gen_blocks, yield_expr)]
+#![cfg_attr(feature = "portable_simd", feature(portable_simd))]
 //! Rust 1.92.0 高级算法实现库
 //!
 //! 本库提供了Rust中各种高级算法的完整实现，完全对齐 Rust 1.92.0 版本特性，
@@ -79,6 +81,9 @@ pub mod advanced_algorithms;
 
 // 机器学习模块
 pub mod machine_learning;
+
+// SIMD 向量化操作
+pub mod simd_operations;
 
 // 性能优化模块
 pub mod geometry;

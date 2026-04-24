@@ -11,6 +11,7 @@
 // 引入生态库示例模块
 pub mod ecosystem_examples;
 pub mod error;
+pub mod ffi_advanced;
 
 // 引入 WasmEdge 示例模块
 pub mod wasmedge_examples;

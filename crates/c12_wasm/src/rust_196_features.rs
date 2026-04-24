@@ -389,3 +389,177 @@ mod tests {
         assert!(info.contains("Rust 1.96.0"));
     }
 }
+
+
+// ==================== Rust 2024 Edition: unsafe extern blocks 安全 FFI ====================
+//
+// Rust 2024 Edition 引入了 `unsafe extern "C" { ... }` 语法，
+// 将 FFI 声明块整体标记为 unsafe，符合 Rust 的安全哲学：
+// 外部函数调用 inherently unsafe，应在调用点显式使用 `unsafe`。
+//
+// ## 语法对比
+// ```rust,ignore
+// // Rust 2021 及之前
+// extern "C" {
+//     fn strlen(s: *const c_char) -> usize;
+// }
+// // 调用时：unsafe { strlen(ptr) }
+//
+// // Rust 2024 Edition
+// unsafe extern "C" {
+//     fn strlen(s: *const c_char) -> usize;
+// }
+// // 调用时仍需：unsafe { strlen(ptr) }
+// // 区别：声明本身明确表达了"这是不安全的接口"
+// ```
+
+// 标准 C 库函数声明（Rust 2024 语法）
+//
+// `unsafe extern "C"` 明确表示这些函数来自外部不安全代码，
+// 调用者必须负责满足前置条件（如有效指针、正确内存布局等）。
+#[cfg(not(target_arch = "wasm32"))]
+unsafe extern "C" {
+    /// 计算 C 字符串长度（以 null 结尾）
+    ///
+    /// # Safety
+    /// - `s` 必须指向以 null 结尾的有效 C 字符串
+    /// - 内存必须可读取直至 null 终止符
+    fn strlen(s: *const std::ffi::c_char) -> usize;
+
+    /// 比较两个内存区域
+    ///
+    /// # Safety
+    /// - `s1` 和 `s2` 必须各指向至少 `n` 字节的有效内存
+    fn memcmp(s1: *const std::ffi::c_void, s2: *const std::ffi::c_void, n: usize) -> i32;
+}
+
+/// 安全的 C 字符串长度包装函数
+///
+/// 将 unsafe FFI 调用封装在安全接口中，由封装函数负责前置条件检查。
+#[cfg(not(target_arch = "wasm32"))]
+pub fn safe_strlen(s: &std::ffi::CStr) -> usize {
+    // 封装层保证了指针有效性，因此内部的 unsafe 块是合理的
+    unsafe { strlen(s.as_ptr()) }
+}
+
+/// WASM 环境下模拟的 C 库函数（用于 host 编译测试）
+#[cfg(target_arch = "wasm32")]
+unsafe extern "C" {
+    /// WASM host 提供的日志函数
+    ///
+    /// # Safety
+    /// - `ptr` 必须指向 WASM 线性内存中的有效 UTF-8 字符串
+    /// - `len` 必须正确表示字符串字节长度
+    fn host_log(ptr: *const u8, len: usize);
+}
+
+/// WASM 内存缓冲区结构
+///
+/// 展示如何在 Rust 2024 中安全地声明和使用外部内存。
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct WasmBuffer {
+    /// 线性内存中的指针
+    pub ptr: *mut u8,
+    /// 缓冲区容量
+    pub capacity: usize,
+    /// 已使用长度
+    pub len: usize,
+}
+
+/// 与 JavaScript 交互的 WASM API 声明（Rust 2024 语法）
+///
+/// 当 WASM 模块需要调用 host 环境（JavaScript）提供的函数时，
+/// 使用 `unsafe extern` 明确标记这些调用的不安全性质。
+#[cfg(target_arch = "wasm32")]
+unsafe extern "C" {
+    /// 从 JavaScript 获取时间戳
+    fn js_performance_now() -> f64;
+
+    /// 向 JavaScript 发送消息
+    ///
+    /// # Safety
+    /// - `ptr` 和 `len` 必须指向 WASM 内存中的有效 UTF-8 数据
+    fn js_send_message(ptr: *const u8, len: usize);
+}
+
+/// 安全的 WASM host 时间戳获取（host 模拟版本）
+#[cfg(not(target_arch = "wasm32"))]
+pub fn safe_performance_now() -> f64 {
+    // 在 host 环境下使用标准库替代
+    std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_secs_f64()
+        * 1000.0
+}
+
+/// 演示 unsafe extern blocks 特性
+pub fn demonstrate_unsafe_extern_blocks() {
+    println!("\n========================================");
+    println!("   Rust 2024 Edition unsafe extern blocks 演示");
+    println!("========================================\n");
+
+    println!("--- 语法说明 ---");
+    println!("Rust 2024: `unsafe extern \"C\" {{ fn foo(); }}`");
+    println!("相比旧语法 `extern \"C\" {{ fn foo(); }}`，新语法更明确地表达了");
+    println!("'此块中的所有声明都是 unsafe 的 FFI 接口'这一语义。");
+
+    println!("\n--- WASM FFI 示例 ---");
+    let now = safe_performance_now();
+    println!("模拟 WASM host 时间戳: {:.2} ms", now);
+
+    println!("\n--- 安全封装模式 ---");
+    let c_string = std::ffi::CString::new("Hello, FFI!").unwrap();
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        let len = safe_strlen(&c_string);
+        println!("C 字符串长度（通过安全封装）: {}", len);
+    }
+
+    println!("\n========================================");
+    println!("   演示完成");
+    println!("========================================\n");
+}
+
+/// 获取 unsafe extern blocks 特性信息
+pub fn get_unsafe_extern_info() -> String {
+    "Rust 2024 Edition unsafe extern blocks 特性:\n\
+        - 语法: unsafe extern \"C\" { fn foo(); }\n\
+        - 声明块整体标记为 unsafe，语义更清晰\n\
+        - 与调用点的 unsafe { foo() } 形成双重明确\n\
+        - 鼓励将 unsafe FFI 封装为安全 API\n\
+        - 适用于 C 库绑定、WASM host 函数、系统调用"
+        .to_string()
+}
+
+#[cfg(test)]
+mod unsafe_extern_tests {
+    use super::*;
+
+    #[test]
+    fn test_safe_performance_now() {
+        let now = safe_performance_now();
+        assert!(now > 0.0);
+    }
+
+    #[test]
+    fn test_wasm_buffer_layout() {
+        // 验证 WASM 缓冲区内存布局
+        assert_eq!(std::mem::size_of::<WasmBuffer>(), 24);
+    }
+
+    #[test]
+    fn test_get_unsafe_extern_info() {
+        let info = get_unsafe_extern_info();
+        assert!(info.contains("unsafe extern"));
+        assert!(info.contains("2024"));
+    }
+
+    #[test]
+    #[cfg(not(target_arch = "wasm32"))]
+    fn test_safe_strlen() {
+        let c_string = std::ffi::CString::new("Hello").unwrap();
+        assert_eq!(safe_strlen(&c_string), 5);
+    }
+}

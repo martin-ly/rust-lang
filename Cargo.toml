@@ -17,6 +17,7 @@ members = [
     "crates/c12_wasm",
     "crates/c13_embedded",
     "crates/common",
+    "exercises",
 ]
 
 [workspace.package]

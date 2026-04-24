@@ -1,6 +1,7 @@
 #![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]
+#![feature(never_type)]
 
 // 导出所有主要模块
 pub mod error;
@@ -24,6 +25,7 @@ pub mod rust_194_features;
 
 // 导出 Rust 1.95/1.96 特性模块
 pub mod rust_196_tuple_coercion;
+pub mod rust_196_features;
 
 // 重新导出Rust 1.94特性
 pub use rust_194_features::*;

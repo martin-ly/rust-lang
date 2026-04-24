@@ -38,3 +38,7 @@ harness = false
 [[bench]]
 name = "rust_192_benchmarks"
 harness = false
+
+[[bench]]
+name = "generic_ecosystem_benchmarks"
+harness = false

@@ -1,0 +1,20 @@
+[package]
+name = "c08_algorithms-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+
+[dependencies.c08_algorithms]
+path = ".."
+
+[[bin]]
+name = "parser_fuzzer"
+path = "src/parser_fuzzer.rs"
+test = false
+doc = false

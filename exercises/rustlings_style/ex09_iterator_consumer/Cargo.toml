@@ -1,0 +1,4 @@
+[package]
+name = "ex09_iterator_consumer"
+version = "0.1.0"
+edition = "2024"

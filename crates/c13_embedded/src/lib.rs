@@ -30,11 +30,13 @@
 
 // 核心模块
 pub mod bare_metal_basics;
+pub mod cxx_interop;
 pub mod ffi_c_interop;
 pub mod hal_design_patterns;
 pub mod interrupt_handling;
 pub mod memory_mapped_registers;
 pub mod no_std_practices;
+pub mod raw_pointers_advanced;
 pub mod uart_driver;
 
 // 库版本信息

@@ -124,7 +124,9 @@ fn test_uart_builder() {
 #[test]
 fn test_zero_cost_abstraction() {
     let mut reg: u32 = 0;
-    ZeroCostAbstraction::set_pin_optimized(&mut reg as *mut u32, 3, true);
+    unsafe {
+        ZeroCostAbstraction::set_pin_optimized(&mut reg as *mut u32, 3, true);
+    }
 }
 
 #[test]

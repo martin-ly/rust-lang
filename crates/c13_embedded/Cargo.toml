@@ -27,6 +27,7 @@ volatile-register = { workspace = true }
 bindgen = "0.71"
 
 [dev-dependencies]
+criterion = { workspace = true }
 
 [lib]
 name = "c13_embedded"
@@ -35,6 +36,10 @@ path = "src/lib.rs"
 [[bin]]
 name = "embedded_demo"
 path = "src/main.rs"
+
+[[bench]]
+name = "embedded_benchmarks"
+harness = false
 
 [features]
 default = []

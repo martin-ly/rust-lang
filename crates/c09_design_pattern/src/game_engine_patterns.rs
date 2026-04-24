@@ -283,27 +283,24 @@ impl AchievementSystem {
 impl Observer for AchievementSystem {
     fn on_event(&mut self, event: &GameEvent) {
         match event {
-            GameEvent::PlayerMoved { entity_id, .. } => {
-                if !self.achievements["first_move"] {
+            GameEvent::PlayerMoved { entity_id, .. }
+                if !self.achievements["first_move"] => {
                     println!("成就解锁: 首次移动 (实体 {})", entity_id);
                     self.achievements.insert("first_move".to_string(), true);
                 }
-            }
-            GameEvent::PlayerDied { entity_id } => {
-                if !self.achievements["first_death"] {
+            GameEvent::PlayerDied { entity_id }
+                if !self.achievements["first_death"] => {
                     println!("成就解锁: 首次死亡 (实体 {})", entity_id);
                     self.achievements.insert("first_death".to_string(), true);
                 }
-            }
-            GameEvent::ItemCollected { entity_id, item_id } => {
-                if !self.achievements["item_collector"] {
+            GameEvent::ItemCollected { entity_id, item_id }
+                if !self.achievements["item_collector"] => {
                     println!(
                         "成就解锁: 物品收集者 (实体 {} 收集了 {})",
                         entity_id, item_id
                     );
                     self.achievements.insert("item_collector".to_string(), true);
                 }
-            }
             _ => {}
         }
     }

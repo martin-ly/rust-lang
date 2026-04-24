@@ -1,0 +1,213 @@
+name: Rust Version Tracking
+
+on:
+  schedule:
+    # 每半年运行一次：6月1日和12月1日
+    - cron: '0 0 1 6,12 *'
+  workflow_dispatch:
+    inputs:
+      force_check:
+        description: '强制运行版本检查（忽略时间表）'
+        required: false
+        default: 'false'
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_NET_RETRY: 10
+  RUSTUP_MAX_RETRIES: 10
+
+jobs:
+  track-rust-version:
+    name: Track Rust Version
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    outputs:
+      stable_version: ${{ steps.check.outputs.stable_version }}
+      current_msrv: ${{ steps.check.outputs.current_msrv }}
+      update_needed: ${{ steps.check.outputs.update_needed }}
+      new_edition: ${{ steps.check.outputs.new_edition }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Check latest Rust versions
+        id: check
+        run: |
+          # 获取最新稳定版
+          STABLE=$(curl -s https://api.github.com/repos/rust-lang/rust/releases/latest | jq -r '.tag_name')
+          echo "stable_version=${STABLE}" >> $GITHUB_OUTPUT
+          echo "Latest stable: ${STABLE}"
+          
+          # 获取当前项目 MSRV
+          CURRENT_MSRV=""
+          if [ -f Cargo.toml ]; then
+            CURRENT_MSRV=$(grep "rust-version" Cargo.toml | head -1 | cut -d'"' -f2)
+          fi
+          if [ -z "$CURRENT_MSRV" ]; then
+            CURRENT_MSRV="未指定"
+          fi
+          echo "current_msrv=${CURRENT_MSRV}" >> $GITHUB_OUTPUT
+          echo "Current MSRV: ${CURRENT_MSRV}"
+          
+          # 检查是否需要更新（简单版本号比较）
+          STABLE_NUM=$(echo "$STABLE" | sed 's/^v//')
+          if [ "$CURRENT_MSRV" != "未指定" ]; then
+            # 提取主版本和次版本
+            STABLE_MAJOR=$(echo "$STABLE_NUM" | cut -d'.' -f1)
+            STABLE_MINOR=$(echo "$STABLE_NUM" | cut -d'.' -f2)
+            CURRENT_MAJOR=$(echo "$CURRENT_MSRV" | cut -d'.' -f1)
+            CURRENT_MINOR=$(echo "$CURRENT_MSRV" | cut -d'.' -f2)
+            
+            if [ "$STABLE_MAJOR" -gt "$CURRENT_MAJOR" ] || ([ "$STABLE_MAJOR" -eq "$CURRENT_MAJOR" ] && [ "$STABLE_MINOR" -gt "$CURRENT_MINOR" ]); then
+              echo "update_needed=true" >> $GITHUB_OUTPUT
+              echo "Update needed: yes"
+            else
+              echo "update_needed=false" >> $GITHUB_OUTPUT
+              echo "Update needed: no"
+            fi
+          else
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+            echo "Update needed: yes (MSRV not set)"
+          fi
+          
+          # 检查是否有新 Edition（从发布说明中检测）
+          echo "new_edition=unknown" >> $GITHUB_OUTPUT
+
+      - name: Generate migration plan report
+        run: |
+          mkdir -p reports
+          REPORT_FILE="reports/rust-version-migration-$(date +%Y%m).md"
+          
+          cat > "$REPORT_FILE" << EOF
+          # Rust 版本对齐报告
+          
+          > **检查时间:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          > **检查周期:** 半年度
+          > **触发方式:** ${{ github.event_name == 'schedule' && '定时触发' || '手动触发' }}
+          
+          ## 版本信息
+          
+          | 项目 | 版本 |
+          |------|------|
+          | 最新稳定版 | ${{ steps.check.outputs.stable_version }} |
+          | 项目当前 MSRV | ${{ steps.check.outputs.current_msrv }} |
+          | 需要更新 | ${{ steps.check.outputs.update_needed == 'true' && '⚠️ 是' || '✅ 否' }} |
+          
+          ## 建议行动
+          
+          EOF
+          
+          if [ "${{ steps.check.outputs.update_needed }}" == "true" ]; then
+            cat >> "$REPORT_FILE" << EOF
+          ### 1. 版本更新评估
+          
+          - [ ] 阅读 [${{ steps.check.outputs.stable_version }} 发布说明](https://github.com/rust-lang/rust/releases/tag/${{ steps.check.outputs.stable_version }})
+          - [ ] 评估新特性对项目的影响
+          - [ ] 检查编译器新警告
+          - [ ] 在 CI 中测试新版本
+          
+          ### 2. MSRV 更新
+          
+          - [ ] 更新所有 Cargo.toml 中的 rust-version
+          - [ ] 更新 CI 工作流中的 Rust 版本
+          - [ ] 更新文档中的版本要求
+          
+          ### 3. 兼容性验证
+          
+          - [ ] 运行 cargo check --workspace --all-features
+          - [ ] 运行 cargo test --workspace --all-features
+          - [ ] 运行 cargo clippy --workspace --all-features
+          - [ ] 运行 cargo doc --workspace --no-deps
+          
+          EOF
+          else
+            cat >> "$REPORT_FILE" << EOF
+          项目当前 MSRV 已是最新或接近最新，无需立即更新。
+          
+          ### 建议
+          
+          - 继续监控 Rust 官方博客和发布说明
+          - 关注新特性，评估是否值得在项目中展示
+          EOF
+          fi
+          
+          cat >> "$REPORT_FILE" << EOF
+          
+          ## 参考链接
+          
+          - [Rust Release Notes](https://github.com/rust-lang/rust/releases)
+          - [Rust 博客](https://blog.rust-lang.org/)
+          - [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
+          - [项目版本对齐检查表](../docs/00_meta/RUST_VERSION_ALIGNMENT_CHECKLIST.md)
+          
+          ---
+          *此报告由 Rust Version Tracking 工作流自动生成。*
+          EOF
+          
+          cat "$REPORT_FILE"
+
+      - name: Upload migration report
+        uses: actions/upload-artifact@v4
+        with:
+          name: rust-version-migration-report
+          path: reports/rust-version-migration-*.md
+          retention-days: 180
+
+      - name: Create migration plan issue
+        if: steps.check.outputs.update_needed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            const reportsDir = 'reports';
+            let reportBody = '';
+            if (fs.existsSync(reportsDir)) {
+              const files = fs.readdirSync(reportsDir)
+                .filter(f => f.startsWith('rust-version-migration-') && f.endsWith('.md'))
+                .sort()
+                .reverse();
+              if (files.length > 0) {
+                reportBody = fs.readFileSync(path.join(reportsDir, files[0]), 'utf8');
+              }
+            }
+            
+            const title = '🦀 Rust 版本对齐计划: 升级至 ${{ steps.check.outputs.stable_version }}';
+            const body = reportBody || '报告文件未找到，请查看工作流产物。';
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['rust-version', 'migration', 'automated', 'enhancement'],
+              assignees: ['${{ github.repository_owner }}']
+            });
+
+      - name: Summary
+        run: |
+          echo "## 🦀 Rust 版本跟踪结果" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 项目 | 值 |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| 最新稳定版 | ${{ steps.check.outputs.stable_version }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 当前 MSRV | ${{ steps.check.outputs.current_msrv }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 需要更新 | ${{ steps.check.outputs.update_needed == 'true' && '⚠️ 是' || '✅ 否' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.check.outputs.update_needed }}" == "true" ]; then
+            echo "⚠️ **检测到新版本，已自动创建 Migration Plan issue。**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "请维护者按照 issue 中的检查表执行版本对齐。" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ **项目版本已对齐，无需操作。**" >> $GITHUB_STEP_SUMMARY
+          fi

@@ -1,0 +1,71 @@
+name: SemVer Checks
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  semver-checks:
+    name: API Compatibility Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # 需要完整的 git 历史以比较 baseline
+          fetch-depth: 0
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.96.0"
+
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+          key: ${{ runner.os }}-cargo-semver-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-semver-
+
+      - name: Install cargo-semver-checks
+        run: cargo install cargo-semver-checks --locked
+
+      - name: Run semver checks (workspace)
+        # 在 PR 中，与目标分支的 baseline 进行比较
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "Running semver checks against baseline: ${{ github.base_ref }}"
+            cargo semver-checks --workspace --baseline-rev ${{ github.base_ref }} || true
+          else
+            echo "Running semver checks against published versions"
+            cargo semver-checks --workspace || true
+          fi
+
+      - name: Generate report
+        if: always()
+        run: |
+          echo "## SemVer Check Results" > semver_report.md
+          echo "" >> semver_report.md
+          echo "- Event: ${{ github.event_name }}" >> semver_report.md
+          echo "- Ref: ${{ github.ref }}" >> semver_report.md
+          echo "" >> semver_report.md
+          echo "> 注意: semver-checks 目前以信息性方式运行，不阻塞合并。" >> semver_report.md
+          echo "> 在准备发布前，请确保手动检查并解决所有报告的兼容性问题。" >> semver_report.md
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semver-check-report
+          path: semver_report.md
+          retention-days: 30

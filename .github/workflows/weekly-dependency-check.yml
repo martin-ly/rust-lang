@@ -1,0 +1,139 @@
+name: Weekly Dependency Check
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # 每周一 UTC 00:00 运行
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
+  CARGO_NET_RETRY: 10
+  RUSTUP_MAX_RETRIES: 10
+  SCCACHE_GHA_ENABLED: "true"
+  RUSTC_WRAPPER: "sccache"
+
+jobs:
+  weekly-check:
+    name: Weekly Dependency Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.96.0"
+
+      - name: Setup sccache
+        uses: mozilla-actions/sccache-action@v0.0.7
+
+      - name: Cache cargo dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            target
+          key: ${{ runner.os }}-cargo-deps-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-deps-
+
+      - name: Install cargo-outdated
+        run: cargo install cargo-outdated --locked
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit --locked
+
+      - name: Run weekly dependency check
+        id: check
+        run: |
+          bash scripts/cargo-update-check.sh --weekly --format markdown
+          
+          # 查找生成的 markdown 报告
+          REPORT_FILE=$(ls -t target/cargo-update-weekly-*.md 2>/dev/null | head -1)
+          if [ -n "$REPORT_FILE" ]; then
+            echo "report_path=${REPORT_FILE}" >> $GITHUB_OUTPUT
+            
+            # 检查是否有可更新依赖或安全问题
+            if grep -q "🔴" "$REPORT_FILE" || grep -q "可更新依赖" "$REPORT_FILE"; then
+              echo "has_updates=true" >> $GITHUB_OUTPUT
+            else
+              echo "has_updates=false" >> $GITHUB_OUTPUT
+            fi
+            
+            # 检查是否有安全漏洞
+            if grep -q "发现.*个安全漏洞" "$REPORT_FILE"; then
+              echo "has_vulns=true" >> $GITHUB_OUTPUT
+            else
+              echo "has_vulns=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "report_path=" >> $GITHUB_OUTPUT
+            echo "has_updates=false" >> $GITHUB_OUTPUT
+            echo "has_vulns=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload weekly report
+        if: steps.check.outputs.report_path != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-dependency-report
+          path: ${{ steps.check.outputs.report_path }}
+          retention-days: 30
+
+      - name: Create issue for important updates
+        if: steps.check.outputs.has_updates == 'true' || steps.check.outputs.has_vulns == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = '${{ steps.check.outputs.report_path }}';
+            let reportBody = '';
+            if (reportPath && fs.existsSync(reportPath)) {
+              reportBody = fs.readFileSync(reportPath, 'utf8');
+            }
+            
+            const hasVulns = '${{ steps.check.outputs.has_vulns }}' === 'true';
+            const title = hasVulns 
+              ? '📦🔴 每周依赖更新检查 - 发现重要更新或安全漏洞' 
+              : '📦 每周依赖更新检查 - 发现依赖更新';
+            
+            const labels = ['dependencies', 'automated', 'weekly-check'];
+            if (hasVulns) {
+              labels.push('security');
+            }
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: reportBody + '\n\n---\n*此 issue 由每周依赖更新检查工作流自动生成。*',
+              labels: labels,
+              assignees: ['${{ github.repository_owner }}']
+            });
+
+      - name: Generate summary
+        run: |
+          echo "## 📦 每周依赖更新检查结果" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 指标 | 状态 |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 发现更新 | ${{ steps.check.outputs.has_updates == 'true' && '⚠️ 是' || '✅ 否' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 安全漏洞 | ${{ steps.check.outputs.has_vulns == 'true' && '🔴 发现' || '✅ 无' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.check.outputs.has_vulns }}" == "true" ]; then
+            echo "⚠️ **发现安全漏洞，已自动创建 issue 并通知维护者。**" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ steps.check.outputs.has_updates }}" == "true" ]; then
+            echo "📦 **发现依赖更新，已自动创建 issue。**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ **本周依赖状态良好，无需处理。**" >> $GITHUB_STEP_SUMMARY
+          fi

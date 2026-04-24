@@ -445,14 +445,13 @@ impl<'a> Lexer<'a> {
         let mut ident = String::new();
 
         // 解析首字符（必须是字母或下划线）
-        if let Some(c) = self.input.peek() {
+        {
+            let c = self.input.peek()?;
             if c.is_alphabetic() || *c == '_' {
                 ident.push(self.input.next().expect("解析标识符首字符失败"));
             } else {
                 return None;
             }
-        } else {
-            return None;
         }
 
         // 解析后续字符（可以是字母、数字或下划线）

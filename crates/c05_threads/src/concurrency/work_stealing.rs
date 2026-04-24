@@ -12,6 +12,7 @@ use crossbeam_deque::{
 };
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
+use std::thread;
 use std::time::{Duration, Instant};
 
 /// 基础工作窃取调度器
@@ -42,11 +43,10 @@ impl<T> WorkStealingScheduler<T> {
 
     /// 推送任务到指定工作线程
     pub fn push_task(&self, worker_index: usize, task: T) {
-        if worker_index < self.workers.len() {
-            if let Ok(worker) = self.workers[worker_index].lock() {
+        if worker_index < self.workers.len()
+            && let Ok(worker) = self.workers[worker_index].lock() {
                 worker.push(task);
             }
-        }
     }
 
     /// 推送任务到全局注入器
@@ -61,11 +61,10 @@ impl<T> WorkStealingScheduler<T> {
         }
 
         // 首先尝试从自己的队列获取任务
-        if let Ok(worker) = self.workers[worker_index].lock() {
-            if let Some(task) = worker.pop() {
+        if let Ok(worker) = self.workers[worker_index].lock()
+            && let Some(task) = worker.pop() {
                 return Some(task);
             }
-        }
 
         // 尝试从全局注入器获取任务
         if let Some(task) = self.injector.steal().success() {
@@ -74,15 +73,14 @@ impl<T> WorkStealingScheduler<T> {
 
         // 尝试从其他工作线程窃取任务
         for i in 0..self.workers.len() {
-            if i != worker_index {
-                if let Ok(worker) = self.workers[i].lock() {
+            if i != worker_index
+                && let Ok(worker) = self.workers[i].lock() {
                     let stealer = worker.stealer();
                     drop(worker); // 释放锁后再窃取，避免死锁
                     if let Some(task) = stealer.steal().success() {
                         return Some(task);
                     }
                 }
-            }
         }
 
         None
@@ -191,11 +189,10 @@ impl<T> PriorityWorkStealingScheduler<T> {
         }
 
         // 首先尝试从自己的队列获取任务
-        if let Ok(worker) = self.workers[worker_index].lock() {
-            if let Some(priority_task) = worker.pop() {
+        if let Ok(worker) = self.workers[worker_index].lock()
+            && let Some(priority_task) = worker.pop() {
                 return Some(priority_task.into_task());
             }
-        }
 
         // 尝试从高优先级注入器获取任务
         if let Some(priority_task) = self.high_priority_injector.steal().success() {
@@ -209,15 +206,14 @@ impl<T> PriorityWorkStealingScheduler<T> {
 
         // 尝试从其他工作线程窃取任务
         for i in 0..self.workers.len() {
-            if i != worker_index {
-                if let Ok(worker) = self.workers[i].lock() {
+            if i != worker_index
+                && let Ok(worker) = self.workers[i].lock() {
                     let stealer = worker.stealer();
                     drop(worker);
                     if let Some(priority_task) = stealer.steal().success() {
                         return Some(priority_task.into_task());
                     }
                 }
-            }
         }
 
         None
@@ -308,11 +304,10 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
         }
 
         // 首先尝试从自己的队列获取任务
-        if let Ok(worker) = self.workers[worker_index].lock() {
-            if let Some(task) = worker.pop() {
+        if let Ok(worker) = self.workers[worker_index].lock()
+            && let Some(task) = worker.pop() {
                 return Some(task);
             }
-        }
 
         // 检查是否需要适应
         self.check_adaptation();
@@ -368,8 +363,8 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
     fn aggressive_steal(&self, worker_index: usize) -> Option<T> {
         // 尝试从所有其他工作线程窃取
         for i in 0..self.workers.len() {
-            if i != worker_index {
-                if let Ok(worker) = self.workers[i].lock() {
+            if i != worker_index
+                && let Ok(worker) = self.workers[i].lock() {
                     let stealer = worker.stealer();
                     drop(worker);
                     if let Some(task) = stealer.steal().success() {
@@ -377,7 +372,6 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
                         return Some(task);
                     }
                 }
-            }
         }
 
         self.record_failed_steal();
@@ -496,11 +490,10 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
         }
 
         // 首先尝试从自己的队列获取任务
-        if let Ok(worker) = self.numa_nodes[node_id][worker_id].lock() {
-            if let Some(task) = worker.pop() {
+        if let Ok(worker) = self.numa_nodes[node_id][worker_id].lock()
+            && let Some(task) = worker.pop() {
                 return Some(task);
             }
-        }
 
         // 尝试从本地NUMA节点的注入器获取任务
         if let Some(task) = self.node_injectors[node_id].steal().success() {
@@ -509,15 +502,14 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
 
         // 尝试从本地NUMA节点的其他工作线程窃取任务
         for i in 0..self.numa_nodes[node_id].len() {
-            if i != worker_id {
-                if let Ok(worker) = self.numa_nodes[node_id][i].lock() {
+            if i != worker_id
+                && let Ok(worker) = self.numa_nodes[node_id][i].lock() {
                     let stealer = worker.stealer();
                     drop(worker);
                     if let Some(task) = stealer.steal().success() {
                         return Some(task);
                     }
                 }
-            }
         }
 
         // 尝试从全局注入器获取任务

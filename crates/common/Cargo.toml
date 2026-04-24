@@ -24,6 +24,10 @@ criterion = { workspace = true }
 name = "common"
 path = "src/lib.rs"
 
+[[bench]]
+name = "common_benchmarks"
+harness = false
+
 [features]
 default = []
 serde = ["dep:serde", "dep:serde_json"]

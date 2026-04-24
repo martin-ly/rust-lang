@@ -20,9 +20,12 @@
 pub mod asynchronous_communication;
 #[path = "diagnostics.rs"]
 pub mod diagnostics;
+pub mod telemetry;
 pub mod epoll;
 pub mod error;
 pub mod error_unified;
+pub mod http3_quic;
+pub mod io_uring_demo;
 pub mod mac;
 pub mod network_topology;
 pub mod p2p;

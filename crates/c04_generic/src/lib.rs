@@ -2,6 +2,7 @@
 #![allow(clippy::type_complexity)]
 #![allow(clippy::assertions_on_constants)]
 #![allow(clippy::missing_const_for_thread_local)]
+#![feature(gen_blocks, yield_expr)]
 
 /*
 从范畴论的视角来看，
@@ -123,6 +124,7 @@ pub mod rust_196_features;
 
 /// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式
 pub mod advanced_patterns;
+pub mod dyn_trait_advanced;
 
 /// 实用示例模块 - 展示实际项目中的泛型编程应用
 pub mod practical_examples;

@@ -384,7 +384,7 @@ async fn demonstrate_error_chain_tracking(manager: &EnhancedErrorManager) -> Res
     // 演示错误链的时序分析
     println!("  错误链时序分析...");
     let mut sorted_history = history.clone();
-    sorted_history.sort_by(|a, b| a.timestamp.cmp(&b.timestamp));
+    sorted_history.sort_by_key(|a| a.timestamp);
 
     for (i, entry) in sorted_history.iter().enumerate() {
         println!(

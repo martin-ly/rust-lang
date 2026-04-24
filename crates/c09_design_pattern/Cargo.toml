@@ -51,3 +51,7 @@ harness = false
 [[bench]]
 name = "performance_benchmarks"
 harness = false
+
+[[bench]]
+name = "pattern_search_benchmarks"
+harness = false

@@ -132,6 +132,9 @@ opt-level = 2
 # 要启用以下特性，取消注释并运行: rustup default nightly
 # [unstable]
 # check-cfg = true
+#
+# [profile.dev]
+# codegen-backend = "cranelift"
 
 # ============ Miri 配置 ============
 # Miri 是 Rust 的未定义行为检测工具

@@ -17,6 +17,11 @@ serde_json = { workspace = true }
 thiserror = { workspace = true }
 
 
+[lints.rust]
+unsafe_code = "allow"
+missing_docs = "allow"
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(polonius)'] }
+
 [dev-dependencies]
 criterion = { workspace = true }
 
