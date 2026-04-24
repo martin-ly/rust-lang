@@ -30,6 +30,8 @@ aho-corasick = { version = "1.0", optional = true }
 default = []
 with-petgraph = ["petgraph"]
 with-aho = ["aho-corasick"]
+# portable_simd 需要 nightly 编译器，默认不启用
+portable_simd = []
 
 
 [dev-dependencies]

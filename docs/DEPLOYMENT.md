@@ -4,9 +4,26 @@
 
 ## 目录
 
-- [Docker 部署](#docker-部署)
-- [Kubernetes 部署](#kubernetes-部署)
-- [Nix 部署](#nix-部署)
+- [部署指南](#部署指南)
+  - [目录](#目录)
+  - [Docker 部署](#docker-部署)
+    - [单机部署](#单机部署)
+    - [使用 Docker Compose](#使用-docker-compose)
+  - [Kubernetes 部署](#kubernetes-部署)
+    - [前置要求](#前置要求)
+    - [部署步骤](#部署步骤)
+    - [扩展副本](#扩展副本)
+    - [更新镜像](#更新镜像)
+    - [查看日志](#查看日志)
+  - [Nix 部署](#nix-部署)
+    - [使用 Nix 构建](#使用-nix-构建)
+    - [运行 Nix 开发 Shell](#运行-nix-开发-shell)
+  - [环境配置](#环境配置)
+    - [生产环境变量](#生产环境变量)
+  - [健康检查](#健康检查)
+  - [监控](#监控)
+  - [安全建议](#安全建议)
+  - [参考](#参考)
 
 ## Docker 部署
 
@@ -42,21 +59,25 @@ docker-compose ps
 ### 部署步骤
 
 1. **应用 ConfigMap**
+
    ```bash
    kubectl apply -f k8s/configmap.yaml
    ```
 
 2. **部署应用**
+
    ```bash
    kubectl apply -f k8s/deployment.yaml
    ```
 
 3. **创建 Service**
+
    ```bash
    kubectl apply -f k8s/service.yaml
    ```
 
 4. **验证部署**
+
    ```bash
    kubectl get pods -l app=rust-lang
    kubectl get svc rust-lang-service

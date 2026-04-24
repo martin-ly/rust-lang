@@ -32,6 +32,9 @@ url = { workspace = true }
 rustls = { workspace = true, optional = true, features = ["ring"] }
 rustls-pemfile = { workspace = true, optional = true }
 
+# QUIC / HTTP3 支持
+quinn = { version = "0.11", optional = true }
+
 # PCAP support (optional)
 pcap = { version = "2.2", optional = true }
 
@@ -40,6 +43,25 @@ pnet_datalink = { version = "0.35", optional = true }
 pnet_packet = { version = "0.35", optional = true }
 pnet_base = { version = "0.35", optional = true }
 pnet_macros_support = { version = "0.35", optional = true }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+# io_uring 仅 Linux 可用
+tokio-uring = { version = "0.5", optional = true }
+io-uring = { version = "0.6", optional = true }
+
+[features]
+default = []
+tls = ["rustls", "rustls-pemfile"]
+quic = ["dep:quinn"]
+# io_uring 仅在 Linux 下有效
+io-uring = ["dep:tokio-uring", "dep:io-uring"]
+# PCAP-related features for conditional compilation
+sniff = ["pcap", "pnet"]
+pcap = ["dep:pcap", "dep:pnet_packet", "dep:pnet_base"]
+pnet = ["dep:pnet_packet", "dep:pnet_base", "dep:pnet_macros_support"]
+# Sub-features for specific pcap functionality
+pcap_live = ["sniff", "pcap"]
+offline = ["sniff", "pcap"]
 
 [features]
 default = []

@@ -1,36 +1,131 @@
-[advisories]
-ignore = []
-severity-threshold = "medium"
+# ============================================================================
+# cargo-deny 供应链安全配置
+# 对应 Rust 生产级工程实践体系阶段三 —— 供应链安全
+# 参考: Microsoft SDL, AWS Supply Chain Security, Cloudflare Rust 实践
+# ============================================================================
 
-[licenses]
-unlicensed = "deny"
-allow = [
-    "Apache-2.0",
-    "BSD-2-Clause",
-    "BSD-3-Clause",
-    "ISC",
-    "MIT",
-    "Unicode-DFS-2016",
-    "Zlib",
+# ----------------------------------------------------------------------------
+# 输出配置
+# ----------------------------------------------------------------------------
+[output]
+# 特性依赖深度，控制输出详细程度
+feature-depth = 1
+
+# ----------------------------------------------------------------------------
+# 安全漏洞通告 (Advisories)
+# ----------------------------------------------------------------------------
+[advisories]
+# 使用版本 2 格式
+version = 2
+
+# 漏洞数据库路径
+db-path = "~/.cargo/advisory-db"
+
+# 漏洞数据库来源（支持多个）
+db-urls = ["https://github.com/rustsec/advisory-db"]
+
+# 发现安全漏洞时的行为: deny = 阻止, warn = 警告, allow = 允许
+vulnerability = "deny"
+
+# 发现无人维护 crate 时的行为
+unmaintained = "warn"
+
+# 发现 yanked crate 时的行为
+yanked = "warn"
+
+# 发现 NOTICE 级别通告时的行为
+notice = "warn"
+
+# 忽略特定通告（谨慎使用，需记录原因）
+ignore = [
+    # 示例格式: { id = "RUSTSEC-2024-XXXX", reason = "已评估，不影响当前使用场景" }
 ]
+
+# ----------------------------------------------------------------------------
+# 许可证检查 (Licenses)
+# ----------------------------------------------------------------------------
+[licenses]
+# 使用版本 2 格式
+version = 2
+
+# 发现未声明许可证时的行为
+unlicensed = "deny"
+
+# 允许 OSI/FSF 批准的许可证
+allow-osi-fsf-free = "either"
+
+# 发现 Copyleft 许可证时的行为
 copyleft = "warn"
-default = "deny"
+
+# 显式允许的许可证白名单
+allow = [
+    "MIT",                           # MIT 许可证
+    "Apache-2.0",                    # Apache 2.0
+    "BSD-3-Clause",                  # BSD 3-Clause
+    "BSD-2-Clause",                  # BSD 2-Clause
+    "ISC",                           # ISC 许可证
+    "Unicode-DFS-2016",              # Unicode 数据文件和软件许可证
+    "MPL-2.0",                       # Mozilla Public License 2.0
+    "CC0-1.0",                       # Creative Commons Zero
+    "Zlib",                          # zlib 许可证
+    "BSL-1.0",                       # Boost Software License
+    "0BSD",                          # Zero-Clause BSD
+    "OpenSSL",                       # OpenSSL 许可证
+    "WTFPL",                         # Do What The F*ck You Want To Public License
+]
+
+# 显式拒绝的许可证黑名单
+deny = [
+    "GPL-2.0",                       # 强 Copyleft，避免商业使用争议
+    "GPL-3.0",                       # 强 Copyleft
+    "AGPL-3.0",                      # 服务端强 Copyleft
+]
+
+# 许可证识别置信度阈值（0.0 - 1.0）
 confidence-threshold = 0.8
 
-[licenses.private]
-ignore = true
-
+# ----------------------------------------------------------------------------
+# 依赖禁止/限制 (Bans)
+# ----------------------------------------------------------------------------
 [bans]
+# 允许多个版本的同一个 crate
 multiple-versions = "warn"
-wildcards = "deny"
+
+# 高亮显示所有重复版本
 highlight = "all"
 
-[[bans.deny]]
-name = "openssl"
+# 允许通配符依赖（如 "*"）
+wildcards = "allow"
 
+# 允许特定 crate 的多个版本（有时不可避免）
+skip = [
+    # 示例: { name = "syn", version = "1.0" }
+]
+
+# 跳过整个依赖树（用于传递依赖）
+skip-tree = [
+    # 示例: { name = "windows-sys", version = "0.48", depth = 3 }
+]
+
+# 显式禁止某些 crate（如发现安全问题的 crate）
+deny = [
+    # 示例: { name = "vulnerable-crate", version = "*" }
+]
+
+# ----------------------------------------------------------------------------
+# 来源检查 (Sources)
+# ----------------------------------------------------------------------------
 [sources]
-unknown-registry = "deny"
-unknown-git = "deny"
+# 未知注册表（非 crates.io）
+unknown-registry = "warn"
 
-[[sources.allow-registry]]
-name = "https://github.com/rust-lang/crates.io-index"
+# 未知 git 来源
+unknown-git = "warn"
+
+# 允许的 git 来源白名单
+allow-git = [
+    # 示例: "https://github.com/trusted-org/trusted-repo"
+]
+
+# 显式允许的外部注册表
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

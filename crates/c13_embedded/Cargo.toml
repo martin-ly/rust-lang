@@ -12,6 +12,8 @@ keywords = ["embedded", "bare-metal", "no-std", "microcontroller"]
 categories = ["embedded", "no-std"]
 
 [dependencies]
+# C++ 互操作（可选）
+cxx = { version = "1.0", optional = true }
 
 # 仅在 ARM 嵌入式目标下启用真实硬件依赖
 # host 环境 (x86_64 Windows) 下不使用这些依赖，确保 cargo check 通过
@@ -20,6 +22,9 @@ cortex-m = { workspace = true }
 cortex-m-rt = { workspace = true }
 panic-halt = { workspace = true }
 volatile-register = { workspace = true }
+
+[build-dependencies]
+bindgen = "0.71"
 
 [dev-dependencies]
 
@@ -35,6 +40,8 @@ path = "src/main.rs"
 default = []
 # embedded feature 用于在 ARM 目标下启用硬件相关代码路径
 embedded = []
+# cxx 互操作支持
+cxx-interop = ["dep:cxx"]
 
 [lints.rust]
 # bare-metal 编程必须允许 unsafe 代码（内存映射寄存器、原始指针操作）
