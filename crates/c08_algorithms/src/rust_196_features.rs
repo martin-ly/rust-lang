@@ -14,6 +14,33 @@
 
 use std::ops::RangeInclusive;
 
+/// Rust 1.96 `if let` guards 在算法中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct AlgorithmIfLetGuardExamples;
+
+impl AlgorithmIfLetGuardExamples {
+    /// 安全地解析数值输入
+    pub fn safe_parse_number(input: Option<&str>) -> Result<i32, &'static str> {
+        match input {
+            Some(s) if let Ok(n) = s.parse::<i32>() => Ok(n),
+            Some(_) => Err("输入不是有效的数字"),
+            None => Err("输入为空"),
+        }
+    }
+
+    /// 验证算法参数
+    pub fn validate_algorithm_param(param: Result<Option<usize>, &'static str>) -> &'static str {
+        match param {
+            Ok(Some(n)) if n > 0 && n.is_power_of_two() => "有效的2的幂参数",
+            Ok(Some(_)) => "有效的非2的幂参数",
+            Ok(None) => "使用默认值",
+            Err(_) => "参数错误",
+        }
+    }
+}
+
 // ==================== 1. RangeInclusive 完整功能展示 ====================
 
 /// # RangeInclusive 完整功能展示
@@ -214,7 +241,7 @@ impl RangeToInclusiveAlgorithms {
         let mut sums = Vec::with_capacity(data.len());
         let mut current_sum = 0;
         
-        for (_i, &val) in data.iter().enumerate() {
+        for &val in data.iter() {
             current_sum += val;
             sums.push(current_sum);
         }
@@ -762,6 +789,42 @@ mod tests {
         // 验证范围是否覆盖所有任务
         let total: usize = ranges.iter().map(|r| r.end() - r.start() + 1).sum();
         assert_eq!(total, 100);
+    }
+
+    #[test]
+    fn test_safe_parse_number() {
+        assert_eq!(
+            AlgorithmIfLetGuardExamples::safe_parse_number(Some("42")),
+            Ok(42)
+        );
+        assert_eq!(
+            AlgorithmIfLetGuardExamples::safe_parse_number(Some("abc")),
+            Err("输入不是有效的数字")
+        );
+        assert_eq!(
+            AlgorithmIfLetGuardExamples::safe_parse_number(None),
+            Err("输入为空")
+        );
+    }
+
+    #[test]
+    fn test_validate_algorithm_param() {
+        assert_eq!(
+            AlgorithmIfLetGuardExamples::validate_algorithm_param(Ok(Some(16))),
+            "有效的2的幂参数"
+        );
+        assert_eq!(
+            AlgorithmIfLetGuardExamples::validate_algorithm_param(Ok(Some(10))),
+            "有效的非2的幂参数"
+        );
+        assert_eq!(
+            AlgorithmIfLetGuardExamples::validate_algorithm_param(Ok(None)),
+            "使用默认值"
+        );
+        assert_eq!(
+            AlgorithmIfLetGuardExamples::validate_algorithm_param(Err("无效")),
+            "参数错误"
+        );
     }
 
     #[test]

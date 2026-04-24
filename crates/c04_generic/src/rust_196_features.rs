@@ -2,6 +2,33 @@
 
 use std::ops::RangeInclusive;
 
+/// Rust 1.96 `if let` guards 在泛型代码中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct GenericIfLetGuardExamples;
+
+impl GenericIfLetGuardExamples {
+    /// 解析泛型数值参数
+    pub fn parse_generic_number(input: Option<&str>) -> Result<i32, &'static str> {
+        match input {
+            Some(s) if let Ok(n) = s.parse::<i32>() => Ok(n),
+            Some(_) => Err("解析失败"),
+            None => Err("输入为空"),
+        }
+    }
+
+    /// 验证泛型结果范围
+    pub fn validate_range(result: Result<Option<usize>, &'static str>) -> &'static str {
+        match result {
+            Ok(Some(n)) if n > 0 && n <= 1024 => "有效范围",
+            Ok(Some(_)) => "超出允许范围",
+            Ok(None) => "使用默认值",
+            Err(e) => e,
+        }
+    }
+}
+
 /// RangeInclusive 在泛型代码中的应用
 pub struct GenericRangeExamples;
 
@@ -210,6 +237,39 @@ mod tests {
 
         let (len, _, _) = app.get_stats();
         assert_eq!(len, 3);
+    }
+
+    #[test]
+    fn test_parse_generic_number() {
+        assert_eq!(GenericIfLetGuardExamples::parse_generic_number(Some("42")), Ok(42));
+        assert_eq!(
+            GenericIfLetGuardExamples::parse_generic_number(Some("abc")),
+            Err("解析失败")
+        );
+        assert_eq!(
+            GenericIfLetGuardExamples::parse_generic_number(None),
+            Err("输入为空")
+        );
+    }
+
+    #[test]
+    fn test_validate_range() {
+        assert_eq!(
+            GenericIfLetGuardExamples::validate_range(Ok(Some(512))),
+            "有效范围"
+        );
+        assert_eq!(
+            GenericIfLetGuardExamples::validate_range(Ok(Some(2048))),
+            "超出允许范围"
+        );
+        assert_eq!(
+            GenericIfLetGuardExamples::validate_range(Ok(None)),
+            "使用默认值"
+        );
+        assert_eq!(
+            GenericIfLetGuardExamples::validate_range(Err("参数错误")),
+            "参数错误"
+        );
     }
 
     #[test]

@@ -17,6 +17,33 @@
 // 注意：此特性目前处于实验阶段
 #![allow(unstable_features)]
 
+/// Rust 1.96 `if let` guards 在控制流中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct ControlIfLetGuardExamples;
+
+impl ControlIfLetGuardExamples {
+    /// 解析命令参数
+    pub fn parse_command_arg(arg: Option<&str>) -> Result<i32, &'static str> {
+        match arg {
+            Some(s) if let Ok(n) = s.parse::<i32>() => Ok(n),
+            Some(_) => Err("参数不是有效的整数"),
+            None => Err("缺少参数"),
+        }
+    }
+
+    /// 处理嵌套结果
+    pub fn handle_nested_result(result: Option<Result<&str, &str>>) -> &'static str {
+        match result {
+            Some(Ok(val)) if val.starts_with("success:") => "成功操作",
+            Some(Ok(_)) => "普通结果",
+            Some(Err(_)) => "操作失败",
+            None => "无结果",
+        }
+    }
+}
+
 // ==================== 1. 基础 gen 块 ====================
 
 /// # 基础 gen 块
@@ -110,7 +137,7 @@ pub mod basic_gen {
         //     }
         // }
 
-        std::iter::repeat(value).take(count)
+        std::iter::repeat_n(value, count)
     }
 
     /// 使用 gen 块创建累积和生成器
@@ -723,6 +750,39 @@ mod tests {
         let mut result: Vec<Vec<i32>> = advanced_gen::permutations_gen(&data).collect();
         result.sort();
         assert_eq!(result.len(), 6);
+    }
+
+    #[test]
+    fn test_parse_command_arg() {
+        assert_eq!(ControlIfLetGuardExamples::parse_command_arg(Some("42")), Ok(42));
+        assert_eq!(
+            ControlIfLetGuardExamples::parse_command_arg(Some("abc")),
+            Err("参数不是有效的整数")
+        );
+        assert_eq!(
+            ControlIfLetGuardExamples::parse_command_arg(None),
+            Err("缺少参数")
+        );
+    }
+
+    #[test]
+    fn test_handle_nested_result() {
+        assert_eq!(
+            ControlIfLetGuardExamples::handle_nested_result(Some(Ok("success:done"))),
+            "成功操作"
+        );
+        assert_eq!(
+            ControlIfLetGuardExamples::handle_nested_result(Some(Ok("other"))),
+            "普通结果"
+        );
+        assert_eq!(
+            ControlIfLetGuardExamples::handle_nested_result(Some(Err("fail"))),
+            "操作失败"
+        );
+        assert_eq!(
+            ControlIfLetGuardExamples::handle_nested_result(None),
+            "无结果"
+        );
     }
 
     #[test]

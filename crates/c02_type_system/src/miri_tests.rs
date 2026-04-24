@@ -361,7 +361,7 @@ fn test_tree_borrows_shared_ref() {
     assert_eq!(*r2, 42);
     
     // 重新借用
-    let r3 = &*r1;
+    let r3 = r1;
     assert_eq!(*r3, 42);
 }
 

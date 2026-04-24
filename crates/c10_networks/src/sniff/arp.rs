@@ -79,6 +79,7 @@ impl ArpSniffer {
                     out.push(rec);
                     count += 1;
                 }
+                Ok(_) => {}
                 Err(_e) => {
                     // ignore transient errors
                 }

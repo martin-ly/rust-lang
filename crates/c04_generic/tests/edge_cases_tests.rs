@@ -69,8 +69,8 @@ fn test_type_inference_boundaries() {
     let inferred_int = 42;
     assert_eq!(inferred_int, 42i32);
 
-    let inferred_float = 3.14;
-    assert_eq!(inferred_float, 3.14f64);
+    let inferred_float = 2.71;
+    assert_eq!(inferred_float, 2.71f64);
 
     // 测试复杂类型推断
     let vec: Vec<i32> = vec![1, 2, 3];

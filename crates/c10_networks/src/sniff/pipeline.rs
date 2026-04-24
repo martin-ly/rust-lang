@@ -128,6 +128,7 @@ pub async fn tcp_stats_stream(
                         }
                     }
                 }
+                Ok(_) => {}
                 Err(_) => { /* ignore */ }
             }
 

@@ -1066,7 +1066,7 @@ mod tests {
         assert!(result_100.is_some(), "F(100) 应该被计算（使用 wrapping）");
         
         // 验证缓存中有多个条目
-        assert!(cache.cache.len() > 0, "缓存应该包含计算过的值");
+        assert!(!cache.cache.is_empty(), "缓存应该包含计算过的值");
     }
 
     /// 测试溢出处理
@@ -1092,7 +1092,8 @@ mod tests {
         
         // 验证没有 panic，程序继续运行
         let f_100 = cache.get(100).expect("获取F(100)失败");
-        assert!(f_100 > 0 || f_100 == 0, "F(100) 应该有一个值（可能已 wrapping）");
+        // f_100 是 u64，自然 >= 0，此处仅验证成功获取到值
+        let _ = f_100;
     }
 
     /// 测试空模式搜索

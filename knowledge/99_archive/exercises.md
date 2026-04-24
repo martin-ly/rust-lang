@@ -34,7 +34,7 @@ fn main() {
     let s = String::from("hello");
     take_ownership(s.clone()); // 方案1: 克隆
     println!("{}", s);
-    
+
     // 方案2: 使用引用
     let s2 = String::from("world");
     borrow_string(&s2);
@@ -144,7 +144,7 @@ impl Person {
     fn new(name: &str, age: u32) -> Self {
         // 实现这里
     }
-    
+
     fn greet(&self) -> String {
         // 实现这里
     }
@@ -172,7 +172,7 @@ impl Person {
             age,
         }
     }
-    
+
     fn greet(&self) -> String {
         format!("你好，我是{}，今年{}岁", self.name, self.age)
     }
@@ -203,7 +203,7 @@ fn first_word(s: &str) -> &str {
 fn main() {
     let s = String::from("hello world");
     assert_eq!(first_word(&s), "hello");
-    
+
     let s2 = "rust programming";
     assert_eq!(first_word(s2), "rust");
 }
@@ -223,10 +223,10 @@ fn first_word(s: &str) -> &str {
 fn main() {
     let s = String::from("hello world");
     assert_eq!(first_word(&s), "hello");
-    
+
     let s2 = "rust programming";
     assert_eq!(first_word(s2), "rust");
-    
+
     println!("✓ 测试通过!");
 }
 ```
@@ -346,7 +346,7 @@ impl Fibonacci {
 
 impl Iterator for Fibonacci {
     type Item = u64;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         // 实现这里
     }
@@ -375,7 +375,7 @@ impl Fibonacci {
 
 impl Iterator for Fibonacci {
     type Item = u64;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         let current = self.curr;
         self.curr = self.next;
@@ -451,11 +451,11 @@ impl GradeBook {
     fn new() -> Self {
         Self { grades: BTreeMap::new() }
     }
-    
+
     fn add(&mut self, name: &str, grade: u32) {
         // 实现这里
     }
-    
+
     fn students_with_grade_between(&self, low: u32, high: u32) -> Vec<&String> {
         // 实现这里
     }
@@ -467,7 +467,7 @@ fn main() {
     book.add("Bob", 92);
     book.add("Carol", 78);
     book.add("David", 88);
-    
+
     let good_students = book.students_with_grade_between(80, 90);
     assert!(good_students.contains(&&"Alice".to_string()));
     assert!(good_students.contains(&&"David".to_string()));
@@ -488,11 +488,11 @@ impl GradeBook {
     fn new() -> Self {
         Self { grades: BTreeMap::new() }
     }
-    
+
     fn add(&mut self, name: &str, grade: u32) {
         self.grades.insert(name.to_string(), grade);
     }
-    
+
     fn students_with_grade_between(&self, low: u32, high: u32) -> Vec<&String> {
         self.grades
             .iter()
@@ -508,7 +508,7 @@ fn main() {
     book.add("Bob", 92);
     book.add("Carol", 78);
     book.add("David", 88);
-    
+
     let good_students = book.students_with_grade_between(80, 90);
     assert!(good_students.contains(&&"Alice".to_string()));
     assert!(good_students.contains(&&"David".to_string()));
@@ -539,7 +539,7 @@ fn main() {
     let nums = vec![1, 3, 5, 7, 9, 11, 13];
     assert_eq!(binary_search(&nums, &7), Some(3));
     assert_eq!(binary_search(&nums, &4), None);
-    
+
     let words = vec!["apple", "banana", "cherry", "date"];
     assert_eq!(binary_search(&words, &"cherry"), Some(2));
 }
@@ -552,7 +552,7 @@ fn main() {
 fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     let mut left = 0;
     let mut right = arr.len();
-    
+
     while left < right {
         let mid = left + (right - left) / 2;
         match arr[mid].cmp(target) {
@@ -568,10 +568,10 @@ fn main() {
     let nums = vec![1, 3, 5, 7, 9, 11, 13];
     assert_eq!(binary_search(&nums, &7), Some(3));
     assert_eq!(binary_search(&nums, &4), None);
-    
+
     let words = vec!["apple", "banana", "cherry", "date"];
     assert_eq!(binary_search(&words, &"cherry"), Some(2));
-    
+
     println!("✓ 测试通过!");
 }
 ```
@@ -704,7 +704,7 @@ impl Drawable for Circle {
     fn draw(&self) {
         println!("绘制圆形，半径: {}", self.radius);
     }
-    
+
     fn area(&self) -> f64 {
         std::f64::consts::PI * self.radius * self.radius
     }
@@ -714,7 +714,7 @@ impl Drawable for Rectangle {
     fn draw(&self) {
         println!("绘制矩形，{} x {}", self.width, self.height);
     }
-    
+
     fn area(&self) -> f64 {
         self.width * self.height
     }
@@ -750,7 +750,7 @@ fn main() {
 trait Graph {
     type Node;
     type Edge;
-    
+
     fn nodes(&self) -> Vec<Self::Node>;
     fn edges(&self) -> Vec<Self::Edge>;
 }
@@ -778,7 +778,7 @@ fn main() {
 trait Graph {
     type Node;
     type Edge;
-    
+
     fn nodes(&self) -> Vec<Self::Node>;
     fn edges(&self) -> Vec<Self::Edge>;
 }
@@ -790,11 +790,11 @@ struct SimpleGraph {
 impl Graph for SimpleGraph {
     type Node = usize;
     type Edge = (usize, usize);
-    
+
     fn nodes(&self) -> Vec<Self::Node> {
         (0..self.adjacency_list.len()).collect()
     }
-    
+
     fn edges(&self) -> Vec<Self::Edge> {
         let mut edges = Vec::new();
         for (from, neighbors) in self.adjacency_list.iter().enumerate() {
@@ -845,7 +845,7 @@ impl Complex {
 fn main() {
     let a = Complex::new(1.0, 2.0);
     let b = Complex::new(3.0, 4.0);
-    
+
     assert_eq!(a + b, Complex::new(4.0, 6.0));
     assert_eq!(a * b, Complex::new(-5.0, 10.0));
 }
@@ -896,7 +896,7 @@ impl Mul for Complex {
 fn main() {
     let a = Complex::new(1.0, 2.0);
     let b = Complex::new(3.0, 4.0);
-    
+
     assert_eq!(a + b, Complex::new(4.0, 6.0));
     assert_eq!(a * b, Complex::new(-5.0, 10.0));
     println!("✓ 测试通过!");
@@ -924,15 +924,15 @@ use std::thread;
 fn main() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         // 创建线程并递增计数器
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     assert_eq!(*counter.lock().unwrap(), 1000);
 }
 ```
@@ -947,7 +947,7 @@ use std::thread;
 fn main() {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
@@ -958,11 +958,11 @@ fn main() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     assert_eq!(*counter.lock().unwrap(), 1000);
     println!("✓ 测试通过!");
 }
@@ -1043,11 +1043,11 @@ use std::time::Duration;
 
 fn main() {
     let (tx, rx) = mpsc::channel();
-    
+
     // 创建多个生产者线程
-    
+
     // 消费者接收所有消息
-    
+
     println!("共接收 {} 条消息", received_count);
 }
 ```
@@ -1062,7 +1062,7 @@ use std::time::Duration;
 
 fn main() {
     let (tx, rx) = mpsc::channel();
-    
+
     // 创建3个生产者
     for i in 0..3 {
         let tx = tx.clone();
@@ -1073,17 +1073,17 @@ fn main() {
             }
         });
     }
-    
+
     // 丢弃原始发送者，否则接收者会无限等待
     drop(tx);
-    
+
     // 消费者接收所有消息
     let mut received_count = 0;
     for msg in rx {
         println!("收到: {}", msg);
         received_count += 1;
     }
-    
+
     println!("共接收 {} 条消息", received_count);
     assert_eq!(received_count, 15);
 }
@@ -1113,11 +1113,11 @@ impl Cache {
     fn new() -> Self {
         Self { data: RwLock::new(HashMap::new()) }
     }
-    
+
     fn get(&self, key: &str) -> Option<String> {
         // 实现这里
     }
-    
+
     fn set(&self, key: String, value: String) {
         // 实现这里
     }
@@ -1125,9 +1125,9 @@ impl Cache {
 
 fn main() {
     let cache = Arc::new(Cache::new());
-    
+
     // 创建读取和写入线程
-    
+
     println!("缓存测试完成");
 }
 ```
@@ -1149,11 +1149,11 @@ impl Cache {
     fn new() -> Self {
         Self { data: RwLock::new(HashMap::new()) }
     }
-    
+
     fn get(&self, key: &str) -> Option<String> {
         self.data.read().unwrap().get(key).cloned()
     }
-    
+
     fn set(&self, key: String, value: String) {
         self.data.write().unwrap().insert(key, value);
     }
@@ -1161,7 +1161,7 @@ impl Cache {
 
 fn main() {
     let cache = Arc::new(Cache::new());
-    
+
     // 写入线程
     let cache_write = Arc::clone(&cache);
     let write_handle = thread::spawn(move || {
@@ -1169,7 +1169,7 @@ fn main() {
             cache_write.set(format!("key{}", i), format!("value{}", i));
         }
     });
-    
+
     // 读取线程
     let cache_read = Arc::clone(&cache);
     let read_handle = thread::spawn(move || {
@@ -1177,10 +1177,10 @@ fn main() {
             let _ = cache_read.get("key1");
         }
     });
-    
+
     write_handle.join().unwrap();
     read_handle.join().unwrap();
-    
+
     println!("缓存测试完成");
 }
 ```
@@ -1212,11 +1212,11 @@ impl TaskQueue {
             cond: Condvar::new(),
         }
     }
-    
+
     fn push(&self, task: i32) {
         // 实现这里
     }
-    
+
     fn pop(&self) -> i32 {
         // 实现这里
     }
@@ -1224,9 +1224,9 @@ impl TaskQueue {
 
 fn main() {
     let queue = Arc::new(TaskQueue::new());
-    
+
     // 创建生产者和消费者线程
-    
+
     println!("任务队列测试完成");
 }
 ```
@@ -1251,13 +1251,13 @@ impl TaskQueue {
             cond: Condvar::new(),
         }
     }
-    
+
     fn push(&self, task: i32) {
         let mut queue = self.queue.lock().unwrap();
         queue.push_back(task);
         self.cond.notify_one();
     }
-    
+
     fn pop(&self) -> i32 {
         let mut queue = self.queue.lock().unwrap();
         while queue.is_empty() {
@@ -1269,7 +1269,7 @@ impl TaskQueue {
 
 fn main() {
     let queue = Arc::new(TaskQueue::new());
-    
+
     // 消费者
     let consumer_queue = Arc::clone(&queue);
     let consumer = thread::spawn(move || {
@@ -1278,7 +1278,7 @@ fn main() {
             println!("处理任务: {}", task);
         }
     });
-    
+
     // 生产者
     let producer_queue = Arc::clone(&queue);
     let producer = thread::spawn(move || {
@@ -1288,10 +1288,10 @@ fn main() {
             producer_queue.push(i);
         }
     });
-    
+
     producer.join().unwrap();
     consumer.join().unwrap();
-    
+
     println!("任务队列测试完成");
 }
 ```
@@ -1324,19 +1324,19 @@ impl<T> MyVec<T> {
     fn new() -> Self {
         // 实现这里
     }
-    
+
     fn push(&mut self, item: T) {
         // 实现这里
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         // 实现这里
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         // 实现这里
     }
-    
+
     fn len(&self) -> usize {
         self.len
     }
@@ -1372,7 +1372,7 @@ impl<T> MyVec<T> {
             cap: 0,
         }
     }
-    
+
     fn push(&mut self, item: T) {
         if self.len == self.cap {
             self.grow();
@@ -1382,7 +1382,7 @@ impl<T> MyVec<T> {
         }
         self.len += 1;
     }
-    
+
     fn pop(&mut self) -> Option<T> {
         if self.len == 0 {
             return None;
@@ -1392,7 +1392,7 @@ impl<T> MyVec<T> {
             Some(ptr::read(self.ptr.as_ptr().add(self.len)))
         }
     }
-    
+
     fn get(&self, index: usize) -> Option<&T> {
         if index >= self.len {
             return None;
@@ -1401,7 +1401,7 @@ impl<T> MyVec<T> {
             Some(&*self.ptr.as_ptr().add(index))
         }
     }
-    
+
     fn grow(&mut self) {
         let new_cap = if self.cap == 0 { 1 } else { self.cap * 2 };
         let new_layout = Layout::array::<T>(new_cap).unwrap();
@@ -1453,12 +1453,12 @@ impl<K: Hash + Eq, V> ConcurrentHashMap<K, V> {
     fn new() -> Self {
         // 实现这里
     }
-    
+
     fn insert(&self, key: K, value: V) -> Option<V> {
         // 实现这里
     }
-    
-    fn get(&self, key: &K) -> Option<V> 
+
+    fn get(&self, key: &K) -> Option<V>
     where V: Clone {
         // 实现这里
     }
@@ -1493,19 +1493,19 @@ impl<K: Hash + Eq, V> ConcurrentHashMap<K, V> {
         }
         Self { shards }
     }
-    
+
     fn shard_index(&self, key: &K) -> usize {
         let mut hasher = DefaultHasher::new();
         key.hash(&mut hasher);
         (hasher.finish() as usize) % SHARD_COUNT
     }
-    
+
     fn insert(&self, key: K, value: V) -> Option<V> {
         let idx = self.shard_index(&key);
         self.shards[idx].lock().unwrap().insert(key, value)
     }
-    
-    fn get(&self, key: &K) -> Option<V> 
+
+    fn get(&self, key: &K) -> Option<V>
     where V: Clone {
         let idx = self.shard_index(key);
         self.shards[idx].lock().unwrap().get(key).cloned()
@@ -1551,12 +1551,12 @@ impl Runtime {
     fn new() -> Self {
         // 实现这里
     }
-    
-    fn spawn<F>(&self, future: F) 
+
+    fn spawn<F>(&self, future: F)
     where F: Future<Output = ()> + 'static {
         // 实现这里
     }
-    
+
     fn run(&self) {
         // 实现这里
     }
@@ -1609,20 +1609,20 @@ impl Runtime {
         let (task_sender, task_queue) = channel();
         Self { task_queue, task_sender }
     }
-    
-    fn spawn<F>(&self, future: F) 
+
+    fn spawn<F>(&self, future: F)
     where F: Future<Output = ()> + 'static {
         let task = Arc::new(Task {
             future: RefCell::new(Box::pin(future)),
         });
         self.task_sender.send(task).unwrap();
     }
-    
+
     fn run(&self) {
         while let Ok(task) = self.task_queue.recv() {
             let waker = dummy_waker();
             let mut context = Context::from_waker(&waker);
-            
+
             match task.future.borrow_mut().as_mut().poll(&mut context) {
                 Poll::Pending => {
                     // 简化版：重新入队

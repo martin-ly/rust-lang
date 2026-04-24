@@ -2,6 +2,33 @@
 
 use std::ops::RangeInclusive;
 
+/// Rust 1.96 `if let` guards 在进程管理中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct ProcessIfLetGuardExamples;
+
+impl ProcessIfLetGuardExamples {
+    /// 解析进程 ID
+    pub fn parse_pid(input: Option<&str>) -> Result<u32, &'static str> {
+        match input {
+            Some(s) if let Ok(pid) = s.parse::<u32>() => Ok(pid),
+            Some(_) => Err("无效的进程 ID"),
+            None => Err("未指定进程 ID"),
+        }
+    }
+
+    /// 检查进程退出状态
+    pub fn interpret_exit_status(status: Option<Result<i32, &'static str>>) -> &'static str {
+        match status {
+            Some(Ok(code)) if code == 0 => "正常退出",
+            Some(Ok(_)) => "异常退出",
+            Some(Err(_)) => "进程被信号终止",
+            None => "仍在运行",
+        }
+    }
+}
+
 /// RangeInclusive 在进程管理中的应用
 pub struct ProcessRangeExamples;
 
@@ -212,6 +239,39 @@ mod tests {
         let manager = ProcessPoolManager::new(12, 4);
         assert_eq!(manager.get_all_ranges().len(), 3);
         assert!(manager.is_group_active(0));
+    }
+
+    #[test]
+    fn test_parse_pid() {
+        assert_eq!(ProcessIfLetGuardExamples::parse_pid(Some("1234")), Ok(1234));
+        assert_eq!(
+            ProcessIfLetGuardExamples::parse_pid(Some("abc")),
+            Err("无效的进程 ID")
+        );
+        assert_eq!(
+            ProcessIfLetGuardExamples::parse_pid(None),
+            Err("未指定进程 ID")
+        );
+    }
+
+    #[test]
+    fn test_interpret_exit_status() {
+        assert_eq!(
+            ProcessIfLetGuardExamples::interpret_exit_status(Some(Ok(0))),
+            "正常退出"
+        );
+        assert_eq!(
+            ProcessIfLetGuardExamples::interpret_exit_status(Some(Ok(1))),
+            "异常退出"
+        );
+        assert_eq!(
+            ProcessIfLetGuardExamples::interpret_exit_status(Some(Err("SIGKILL"))),
+            "进程被信号终止"
+        );
+        assert_eq!(
+            ProcessIfLetGuardExamples::interpret_exit_status(None),
+            "仍在运行"
+        );
     }
 
     #[test]

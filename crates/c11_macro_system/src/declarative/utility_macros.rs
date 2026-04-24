@@ -6,7 +6,7 @@
 ///
 /// # 示例
 ///
-/// ```
+/// ```ignore
 /// # use c11_macro_system::impl_getter_setter;
 /// struct Person {
 ///     name: String,
@@ -18,6 +18,10 @@
 ///     impl_getter_setter! { age: u32 }
 /// }
 /// ```
+///
+/// 注意: 此宏需要 `paste` crate 支持标识符拼接。
+/// `paste` 已被移除（见 workspace Cargo.toml），因此当前不可用。
+/// TODO: 迁移到 `quote` 宏或 Rust 原生标识符拼接方案。
 #[macro_export]
 macro_rules! impl_getter_setter {
     ($field:ident: $type:ty) => {

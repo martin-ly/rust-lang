@@ -1,11 +1,16 @@
 // 需要启用 --features pcap_live
 
 #[cfg(feature = "pcap_live")]
+#[tokio::main]
+async fn main() {
+    run::main().await;
+}
+
+#[cfg(feature = "pcap_live")]
 mod run {
     use c10_networks::sniff::tcp_stats_stream_bpf;
     use std::time::Duration;
 
-    #[tokio::main]
     pub async fn main() {
         let dev = std::env::args()
             .nth(1)

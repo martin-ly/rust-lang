@@ -237,7 +237,7 @@ impl FanOutFanIn {
             let mut results = Vec::new();
             let active_workers = num_workers;
 
-            while active_workers > 0 {
+            loop {
                 for (_i, receiver) in worker_receivers.iter().enumerate() {
                     if let Ok(result) = receiver.try_recv() {
                         results.push(result);

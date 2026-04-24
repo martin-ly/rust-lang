@@ -531,11 +531,10 @@ impl<'a> PeekableMacroParser<'a> {
         let mut ident = String::new();
 
         // 首字符必须是字母或下划线
-        if let Some(c) = self.chars.next_if(|c| c.is_alphabetic() || *c == '_') {
+        {
+            let c = self.chars.next_if(|c| c.is_alphabetic() || *c == '_')?;
             ident.push(c);
             self.position += 1;
-        } else {
-            return None;
         }
 
         // 后续字符可以是字母、数字或下划线
@@ -1303,7 +1302,7 @@ mod tests {
         // 测试多个宏的缓存
         for i in 0..10 {
             store_compile_result(
-                &format!("macro_{}", i),
+                format!("macro_{}", i),
                 CompileResult {
                     expanded_code: format!("code_{}", i),
                     compile_time_ms: i as u64 * 10,

@@ -5,6 +5,7 @@
 ## 什么是 sccache?
 
 `sccache` 是 Mozilla 开发的编译缓存工具，支持:
+
 - **磁盘缓存**: 本地快速重用编译结果
 - **远程缓存**: S3, Azure Blob, GCS, Redis 等
 - **CI/CD 集成**: GitHub Actions 原生支持
@@ -20,16 +21,19 @@ cargo install sccache --locked
 ### 方式 2: 使用包管理器
 
 **Windows (winget):**
+
 ```powershell
 winget install sccache
 ```
 
 **macOS (Homebrew):**
+
 ```bash
 brew install sccache
 ```
 
 **Linux:**
+
 ```bash
 # Ubuntu/Debian
 sudo apt-get install sccache
@@ -43,7 +47,7 @@ sudo pacman -S sccache
 ### 方式 3: GitHub Releases
 
 下载预编译二进制文件:
-https://github.com/mozilla/sccache/releases
+<https://github.com/mozilla/sccache/releases>
 
 ## 验证安装
 

@@ -40,8 +40,8 @@ pub use archive::rust_191_features;
 pub use archive::rust_192_features;
 pub mod rust_194_features;
 pub mod rust_196_features;
-// Note: sniff module requires pcap and pnet_* crates which are not in dependencies
-// pub mod sniff;
+#[cfg(feature = "sniff")]
+pub mod sniff;
 pub mod socket;
 pub mod unified_api;
 

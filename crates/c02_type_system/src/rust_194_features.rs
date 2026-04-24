@@ -730,7 +730,7 @@ where
     ///
     /// Rust 1.94: 闭包返回类型推断改进
     pub fn get_or_init(&self) -> &T {
-        &*self.cell
+        &self.cell
     }
 
     /// 尝试获取可变引用（不触发初始化）
@@ -781,7 +781,7 @@ where
 
     /// 获取或初始化
     pub fn get_or_init(&self) -> &T {
-        &*self.lock
+        &self.lock
     }
 
     /// 检查是否已初始化
@@ -816,7 +816,7 @@ where
 
     /// 获取值（按需初始化）
     pub fn get(&self) -> &T {
-        &*self.cache
+        &self.cache
     }
 
     /// 检查是否已初始化
@@ -1346,7 +1346,7 @@ mod tests {
         let gss2 = GoldenSectionSearch::new(1e-6, 100);
         let flat_min = gss2.find_minimum(|_| 5.0, 0.0, 10.0);
         // 对于平坦函数，结果应该在区间内
-        assert!(flat_min >= 0.0 && flat_min <= 10.0);
+        assert!((0.0..=10.0).contains(&flat_min));
 
         // 测试最大迭代次数限制
         let gss3 = GoldenSectionSearch::new(1e-15, 5); // 很小的容差，很少迭代

@@ -2,6 +2,33 @@
 
 use std::ops::RangeInclusive;
 
+/// Rust 1.96 `if let` guards 在所有权管理中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct OwnershipIfLetGuardExamples;
+
+impl OwnershipIfLetGuardExamples {
+    /// 解析并验证资源句柄
+    pub fn parse_handle(handle: Option<&str>) -> Result<u64, &'static str> {
+        match handle {
+            Some(s) if let Ok(id) = s.parse::<u64>() => Ok(id),
+            Some(_) => Err("无效的资源句柄格式"),
+            None => Err("资源句柄为空"),
+        }
+    }
+
+    /// 检查嵌套所有权转移状态
+    pub fn check_transfer_status(status: Option<Result<&str, &str>>) -> &'static str {
+        match status {
+            Some(Ok(new_owner)) if !new_owner.is_empty() => "转移成功",
+            Some(Ok(_)) => "所有者名为空",
+            Some(Err(_)) => "转移失败",
+            None => "未开始转移",
+        }
+    }
+}
+
 /// if let guards 在所有权管理中的应用
 pub struct OwnershipGuardExamples;
 
@@ -112,9 +139,9 @@ pub struct TupleCoercionExamples;
 
 impl TupleCoercionExamples {
     /// 返回不同类型的引用
-    pub fn get_mixed_references<'a>(
-        data: &'a [i32],
-    ) -> (&'a [i32], &'static str, Option<&'a i32>) {
+    pub fn get_mixed_references(
+        data: &[i32],
+    ) -> (&[i32], &'static str, Option<&i32>) {
         let first = data.first();
         (data, "slice", first)
     }
@@ -128,9 +155,9 @@ impl TupleCoercionExamples {
     }
 
     /// 借用和拥有的混合
-    pub fn mixed_ownership_tuple<'a>(
-        borrowed: &'a str,
-    ) -> (String, &'a str, Option<String>) {
+    pub fn mixed_ownership_tuple(
+        borrowed: &str,
+    ) -> (String, &str, Option<String>) {
         let owned = borrowed.to_uppercase();
         (owned, borrowed, Some(String::from("extra")))
     }
@@ -299,6 +326,39 @@ mod tests {
         assert_eq!(len, 3);
         assert!(result.is_ok());
         assert_eq!(data, vec![1, 2, 3]);
+    }
+
+    #[test]
+    fn test_parse_handle() {
+        assert_eq!(OwnershipIfLetGuardExamples::parse_handle(Some("42")), Ok(42));
+        assert_eq!(
+            OwnershipIfLetGuardExamples::parse_handle(Some("abc")),
+            Err("无效的资源句柄格式")
+        );
+        assert_eq!(
+            OwnershipIfLetGuardExamples::parse_handle(None),
+            Err("资源句柄为空")
+        );
+    }
+
+    #[test]
+    fn test_check_transfer_status() {
+        assert_eq!(
+            OwnershipIfLetGuardExamples::check_transfer_status(Some(Ok("user1"))),
+            "转移成功"
+        );
+        assert_eq!(
+            OwnershipIfLetGuardExamples::check_transfer_status(Some(Ok(""))),
+            "所有者名为空"
+        );
+        assert_eq!(
+            OwnershipIfLetGuardExamples::check_transfer_status(Some(Err("timeout"))),
+            "转移失败"
+        );
+        assert_eq!(
+            OwnershipIfLetGuardExamples::check_transfer_status(None),
+            "未开始转移"
+        );
     }
 
     #[test]

@@ -342,7 +342,7 @@ async fn fetch_user_data(client: &AsyncHttpClient, user_id: u64) -> Result<Strin
         .build();
 
     let response = client.request(request).await?;
-    
+
     if response.status == 200 {
         Ok(String::from_utf8_lossy(&response.body).to_string())
     } else {
@@ -835,7 +835,7 @@ impl CrossPlatformFs {
 
             if path.is_dir() {
                 let entries: Vec<_> = fs::read_dir(path)?.collect::<Result<_, _>>()?;
-                
+
                 // 对子目录进行并行处理
                 entries.par_iter().for_each_with(callback.clone(), |cb, entry| {
                     let _ = walk_recursive(&entry.path(), cb);
@@ -867,16 +867,16 @@ impl PermissionManager {
     #[cfg(unix)]
     pub fn set_executable(path: &Path, executable: bool) -> io::Result<()> {
         use std::os::unix::fs::PermissionsExt;
-        
+
         let mut permissions = fs::metadata(path)?.permissions();
         let mode = permissions.mode();
-        
+
         if executable {
             permissions.set_mode(mode | 0o111); // 添加执行权限
         } else {
             permissions.set_mode(mode & !0o111); // 移除执行权限
         }
-        
+
         fs::set_permissions(path, permissions)
     }
 
@@ -1084,7 +1084,7 @@ impl AsyncLogger {
             match receiver.recv() {
                 Ok(record) => {
                     batch.push(record);
-                    
+
                     // 尝试接收更多消息进行批量处理
                     while batch.len() < 100 {
                         match receiver.try_recv() {
@@ -1099,11 +1099,11 @@ impl AsyncLogger {
                             handler.handle(record);
                         }
                     }
-                    
+
                     for handler in handlers.iter_mut() {
                         handler.flush();
                     }
-                    
+
                     batch.clear();
                 }
                 Err(_) => break, // 发送者已关闭
@@ -1125,7 +1125,7 @@ impl AsyncLogger {
 
 // 全局日志实例
 lazy_static::lazy_static! {
-    static ref LOGGER: Arc<std::sync::Mutex<Option<AsyncLogger>>> = 
+    static ref LOGGER: Arc<std::sync::Mutex<Option<AsyncLogger>>> =
         Arc::new(std::sync::Mutex::new(None));
 }
 
@@ -1147,7 +1147,7 @@ macro_rules! log {
             thread_id: std::thread::current().id(),
             message: Box::new(move |w| write!(w, $($arg)*)),
         };
-        
+
         if let Ok(guard) = $crate::LOGGER.lock() {
             if let Some(ref logger) = *guard {
                 logger.log(record);

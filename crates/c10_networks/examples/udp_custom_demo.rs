@@ -1,8 +1,13 @@
 #[cfg(feature = "sniff")]
+#[tokio::main]
+async fn main() {
+    run::main().await;
+}
+
+#[cfg(feature = "sniff")]
 mod run {
     use c10_networks::sniff::{UdpCustomMessage, udp_custom_roundtrip};
 
-    #[tokio::main]
     pub async fn main() {
         let args: Vec<String> = std::env::args().collect();
         let addr = args
@@ -33,5 +38,4 @@ fn main() {
     );
 }
 
-#[cfg(feature = "sniff")]
-pub use run::main;
+

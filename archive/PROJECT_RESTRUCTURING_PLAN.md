@@ -3,11 +3,13 @@
 ## 当前问题诊断
 
 ### 1. 根目录混乱 (严重)
+
 - 18个报告文件直接放根目录
 - 7个Python脚本散落根目录
 - 难以一眼识别项目结构
 
 ### 2. 文档入口混乱 (严重)
+
 | 目录 | 文件数 | 用途 |
 |------|--------|------|
 | docs/ | 1381 | 旧文档中心 |
@@ -17,12 +19,14 @@
 | RUST_SAFETY_CRITICAL_ECOSYSTEM/ | 大量 | 安全关键生态 |
 
 ### 3. 报告泛滥
+
 - 根目录: 18个报告
 - archive/: 28个报告
 - reports/: 5个报告
 - 总计: 50+ 个报告文件
 
 ### 4. 脚本分散
+
 - scripts/: 30个
 - 根目录: 7个
 - tools/: 4个
@@ -92,11 +96,13 @@ rust-lang/                          ← 项目根目录
 ### 废弃/合并的目录
 
 ```
+
 docs/           → 内容合并到 knowledge/ 后删除
 content/        → 内容合并到 knowledge/06_ecosystem/ 后删除
 guides/         → 内容合并到 knowledge/05_reference/ 后删除
 RUST_SAFETY_CRITICAL_ECOSYSTEM/ → 内容合并到 knowledge/04_expert/ 后删除
 reports/        → 内容移动到 archive/reports/ 后删除
+
 ```
 
 ---

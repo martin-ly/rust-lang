@@ -48,6 +48,7 @@ fn main() {
         }
         total += batch.len();
         // 演示：以限速迭代处理每批元素
+        #[allow(clippy::never_loop)]
         for _v in ReceiverStream::from(mpsc::unbounded::<i32>().1)
             .rate_limit_iter(Duration::from_millis(0))
         {

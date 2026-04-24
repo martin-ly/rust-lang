@@ -28,7 +28,7 @@ mod tests {
     #[test]
     fn test_default_value() {
         assert_eq!(default_value::<i32>(), 0);
-        assert_eq!(default_value::<bool>(), false);
+        assert!(!default_value::<bool>());
         assert_eq!(default_value::<String>(), "");
     }
 

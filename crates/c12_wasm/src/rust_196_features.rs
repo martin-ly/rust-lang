@@ -2,6 +2,32 @@
 
 use std::ops::RangeInclusive;
 
+/// Rust 1.96 `if let` guards 在 WASM 中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct WasmIfLetGuardExamples;
+
+impl WasmIfLetGuardExamples {
+    /// 解析 WASM 内存页数
+    pub fn parse_memory_pages(input: Option<&str>) -> Result<usize, &'static str> {
+        match input {
+            Some(s) if let Ok(pages) = s.parse::<usize>() => Ok(pages),
+            Some(_) => Err("无效的内存页数"),
+            None => Ok(1), // 默认 1 页 (64KB)
+        }
+    }
+
+    /// 解析 WASM 表大小限制
+    pub fn parse_table_limit(input: Option<&str>) -> Result<u32, &'static str> {
+        match input {
+            Some(s) if let Ok(limit) = s.parse::<u32>() => Ok(limit),
+            Some(_) => Err("无效的表大小限制"),
+            None => Ok(1000),
+        }
+    }
+}
+
 /// RangeInclusive 在 WASM 中的应用
 pub struct WasmRangeExamples;
 
@@ -332,6 +358,29 @@ mod tests {
         let manager = WasmModuleManager::new(20, 5);
         assert_eq!(manager.get_all_ranges().len(), 4);
         assert!(manager.is_batch_active(0));
+    }
+
+    #[test]
+    fn test_parse_memory_pages() {
+        assert_eq!(WasmIfLetGuardExamples::parse_memory_pages(Some("16")), Ok(16));
+        assert_eq!(
+            WasmIfLetGuardExamples::parse_memory_pages(Some("abc")),
+            Err("无效的内存页数")
+        );
+        assert_eq!(WasmIfLetGuardExamples::parse_memory_pages(None), Ok(1));
+    }
+
+    #[test]
+    fn test_parse_table_limit() {
+        assert_eq!(
+            WasmIfLetGuardExamples::parse_table_limit(Some("10000")),
+            Ok(10000)
+        );
+        assert_eq!(
+            WasmIfLetGuardExamples::parse_table_limit(Some("abc")),
+            Err("无效的表大小限制")
+        );
+        assert_eq!(WasmIfLetGuardExamples::parse_table_limit(None), Ok(1000));
     }
 
     #[test]

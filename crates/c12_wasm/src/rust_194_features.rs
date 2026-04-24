@@ -699,14 +699,12 @@ impl<'a> WatParser<'a> {
         let mut ident = String::new();
 
         // 解析首字符
-        if let Some(c) = self
-            .chars
-            .next_if(|c| c.is_alphabetic() || "_$".contains(*c))
         {
+            let c = self
+            .chars
+            .next_if(|c| c.is_alphabetic() || "_$".contains(*c))?;
             ident.push(c);
             self.column += 1;
-        } else {
-            return None;
         }
 
         // 解析后续字符

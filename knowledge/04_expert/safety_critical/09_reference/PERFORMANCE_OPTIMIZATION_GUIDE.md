@@ -124,7 +124,7 @@ impl<T: Default + Copy, const N: usize> Buffer<T, N> {
             len: 0,
         }
     }
-    
+
     /// 编译时边界检查
     pub fn push(&mut self, value: T) -> Result<(), BufferError> {
         if self.len >= N {
@@ -217,9 +217,9 @@ use std::simd::*;
 /// SIMD数组加法
 pub fn simd_add(a: &[f32], b: &[f32], result: &mut [f32]) {
     const LANES: usize = 4;
-    
+
     let chunks = a.len() / LANES;
-    
+
     for i in 0..chunks {
         let offset = i * LANES;
         let va = f32x4::from_slice(&a[offset..offset + LANES]);
@@ -227,7 +227,7 @@ pub fn simd_add(a: &[f32], b: &[f32], result: &mut [f32]) {
         let vr = va + vb;
         vr.copy_to_slice(&mut result[offset..offset + LANES]);
     }
-    
+
     // 处理剩余元素
     for i in (chunks * LANES)..a.len() {
         result[i] = a[i] + b[i];
@@ -257,7 +257,7 @@ impl<T, const N: usize> ObjectPool<T, N> {
             free_list: [true; N],
         }
     }
-    
+
     pub fn allocate(&mut self, value: T) -> Option<PoolRef<T>> {
         for i in 0..N {
             if self.free_list[i] {
@@ -295,12 +295,12 @@ impl MinimalCriticalSection {
         // 单条指令，无需禁用中断
         counter.fetch_add(1, Ordering::Relaxed);
     }
-    
+
     /// 批量处理减少临界区
     pub fn process_batch(data: &mut [u8]) {
         // 准备工作(无需保护)
         let processed: Vec<u8> = data.iter().map(|x| x * 2).collect();
-        
+
         // 临界区: 仅复制操作
         cortex_m::interrupt::free(|_| {
             data.copy_from_slice(&processed);
@@ -351,12 +351,12 @@ impl PerformanceCounter {
             name,
         }
     }
-    
+
     #[cfg(target_arch = "x86_64")]
     fn read_cycle_counter() -> u64 {
         unsafe { core::arch::x86_64::_rdtsc() }
     }
-    
+
     #[cfg(target_arch = "arm")]
     fn read_cycle_counter() -> u64 {
         let cycles: u32;
@@ -380,6 +380,7 @@ impl Drop for PerformanceCounter {
 ## 7. 优化检查清单
 
 ### 编译时优化
+
 - [ ] 使用release模式 (`--release`)
 - [ ] 启用LTO (`lto = true`)
 - [ ] 设置codegen-units = 1
@@ -387,6 +388,7 @@ impl Drop for PerformanceCounter {
 - [ ] 启用panic = "abort"
 
 ### 代码优化
+
 - [ ] 避免动态分配
 - [ ] 使用迭代器而非循环
 - [ ] 优化内存布局
@@ -394,6 +396,7 @@ impl Drop for PerformanceCounter {
 - [ ] 内联关键函数
 
 ### 嵌入式优化
+
 - [ ] 使用no_std
 - [ ] 静态分配
 - [ ] 最小化中断延迟
@@ -402,7 +405,7 @@ impl Drop for PerformanceCounter {
 
 ---
 
-**文档版本**: 1.0  
+**文档版本**: 1.0
 **最后更新**: 2026-03-18
 
 ---

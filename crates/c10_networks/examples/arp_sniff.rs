@@ -1,4 +1,9 @@
 #[cfg(feature = "sniff")]
+fn main() {
+    run::main();
+}
+
+#[cfg(feature = "sniff")]
 mod run {
     use c10_networks::sniff::{ArpSniffConfig, ArpSniffer};
     pub fn main() {

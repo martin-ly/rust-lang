@@ -294,7 +294,7 @@ fn test_custom_iterator() {
 
     let iter = CountUp { current: 0, max: 5 };
     let sum: i32 = iter.sum();
-    assert_eq!(sum, 0 + 1 + 2 + 3 + 4);
+    assert_eq!(sum, 1 + 2 + 3 + 4);
 }
 
 /// 测试目的: 验证迭代器与 unsafe

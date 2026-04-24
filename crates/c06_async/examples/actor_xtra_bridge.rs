@@ -12,7 +12,7 @@ async fn main() {
     use std::sync::LazyLock;
     use prometheus::{IntCounter, Opts, Registry};
 
-    use xtra::{Address, prelude::*};
+    use xtra::{Mailbox, spawn_tokio};
 
     // 指标
     static BRIDGE_IN_TOTAL: LazyLock<IntCounter> = LazyLock::new(|| {
@@ -45,13 +45,12 @@ async fn main() {
     }
     struct Inbound(pub String);
 
-    #[async_trait::async_trait]
-    impl Actor for Router {
+    impl xtra::Actor for Router {
         type Stop = ();
+        async fn stopped(self) {}
     }
 
-    #[async_trait::async_trait]
-    impl Handler<Inbound> for Router {
+    impl xtra::Handler<Inbound> for Router {
         type Return = ();
         async fn handle(&mut self, msg: Inbound, _ctx: &mut xtra::Context<Self>) {
             // 简单分类规则（可扩展为优先级映射）
@@ -61,7 +60,8 @@ async fn main() {
         }
     }
 
-    let router_addr: Address<Router> = Router { tx: tx_pipeline }.create(None).spawn_global().await;
+    let (address, mailbox) = Mailbox::unbounded();
+    let router_addr = spawn_tokio(Router { tx: tx_pipeline }, (address, mailbox));
 
     let _ = router_addr.send(Inbound("hello".into())).await;
     let _ = router_addr.send(Inbound("from xtra".into())).await;

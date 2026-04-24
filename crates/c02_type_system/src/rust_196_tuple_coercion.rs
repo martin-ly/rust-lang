@@ -13,6 +13,33 @@
 // use std::any::Any;
 // use std::sync::Arc;
 
+/// Rust 1.96 `if let` guards 在类型系统中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct TypeIfLetGuardExamples;
+
+impl TypeIfLetGuardExamples {
+    /// 安全地解析类型标识符
+    pub fn parse_type_id(input: Option<&str>) -> Result<usize, &'static str> {
+        match input {
+            Some(s) if let Ok(id) = s.parse::<usize>() => Ok(id),
+            Some(_) => Err("类型标识符必须是数字"),
+            None => Err("输入为空"),
+        }
+    }
+
+    /// 验证类型转换结果
+    pub fn validate_conversion(result: Result<Option<i32>, &'static str>) -> &'static str {
+        match result {
+            Ok(Some(v)) if v >= 0 => "非负整数",
+            Ok(Some(_)) => "负数",
+            Ok(None) => "空值",
+            Err(_) => "转换错误",
+        }
+    }
+}
+
 // ==================== 1. 基础元组 Coercion ====================
 
 /// # 基础元组 Coercion
@@ -455,6 +482,12 @@ pub mod type_erasure {
         elements: Vec<Box<dyn Any>>,
     }
 
+    impl Default for HeterogeneousTuple {
+        fn default() -> Self {
+            Self::new()
+        }
+    }
+
     impl HeterogeneousTuple {
         pub fn new() -> Self {
             Self {
@@ -677,6 +710,39 @@ mod tests {
         let (f1, f2) = type_erasure::create_dynamic_functions();
         f1(); // 不应该 panic
         assert_eq!(f2(5), 25);
+    }
+
+    #[test]
+    fn test_parse_type_id() {
+        assert_eq!(TypeIfLetGuardExamples::parse_type_id(Some("42")), Ok(42));
+        assert_eq!(
+            TypeIfLetGuardExamples::parse_type_id(Some("abc")),
+            Err("类型标识符必须是数字")
+        );
+        assert_eq!(
+            TypeIfLetGuardExamples::parse_type_id(None),
+            Err("输入为空")
+        );
+    }
+
+    #[test]
+    fn test_validate_conversion() {
+        assert_eq!(
+            TypeIfLetGuardExamples::validate_conversion(Ok(Some(10))),
+            "非负整数"
+        );
+        assert_eq!(
+            TypeIfLetGuardExamples::validate_conversion(Ok(Some(-5))),
+            "负数"
+        );
+        assert_eq!(
+            TypeIfLetGuardExamples::validate_conversion(Ok(None)),
+            "空值"
+        );
+        assert_eq!(
+            TypeIfLetGuardExamples::validate_conversion(Err("失败")),
+            "转换错误"
+        );
     }
 
     #[test]

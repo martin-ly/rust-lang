@@ -32,7 +32,7 @@ impl NetworkGuardExamples {
         match (established, pending_data) {
             (false, _) => "closed",
             (true, None) => "idle",
-            (true, Some(n)) if let true = n > 0 && n < 1024 => "active",
+            (true, Some(n)) if n > 0 && n < 1024 => "active",
             (true, Some(_)) => "busy",
         }
     }
@@ -43,8 +43,32 @@ impl NetworkGuardExamples {
             (1, Some(1)) => "HTTP/1.1",
             (2, None) => "HTTP/2",
             (3, None) => "HTTP/3",
-            (maj, Some(min)) if let true = maj >= 1 && min <= 9 => "legacy",
+            (maj, Some(min)) if maj >= 1 && min <= 9 => "legacy",
             _ => "unknown",
+        }
+    }
+
+    /// 使用 if let guards 解析网络端口
+    pub fn parse_port(addr: Option<&str>) -> Result<u16, &'static str> {
+        match addr {
+            Some(s) if let Ok(port) = s.parse::<u16>() => {
+                if port > 0 {
+                    Ok(port)
+                } else {
+                    Err("端口不能为0")
+                }
+            }
+            Some(_) => Err("无法解析端口"),
+            None => Err("地址为空"),
+        }
+    }
+
+    /// 使用 if let guards 解析重试次数
+    pub fn parse_retry_count(input: Option<&str>) -> Result<u32, &'static str> {
+        match input {
+            Some(s) if let Ok(count) = s.parse::<u32>() => Ok(count),
+            Some(_) => Err("无效的重试次数"),
+            None => Ok(3), // 默认重试3次
         }
     }
 }
@@ -505,6 +529,39 @@ mod tests {
         assert_eq!(manager.get_all_ranges().len(), 5);
         assert!(manager.is_pool_active(0));
         assert!(manager.get_connection_range(0).is_some());
+    }
+
+    #[test]
+    fn test_parse_port() {
+        assert_eq!(NetworkGuardExamples::parse_port(Some("8080")), Ok(8080));
+        assert_eq!(
+            NetworkGuardExamples::parse_port(Some("0")),
+            Err("端口不能为0")
+        );
+        assert_eq!(
+            NetworkGuardExamples::parse_port(Some("abc")),
+            Err("无法解析端口")
+        );
+        assert_eq!(
+            NetworkGuardExamples::parse_port(None),
+            Err("地址为空")
+        );
+    }
+
+    #[test]
+    fn test_parse_retry_count() {
+        assert_eq!(
+            NetworkGuardExamples::parse_retry_count(Some("5")),
+            Ok(5)
+        );
+        assert_eq!(
+            NetworkGuardExamples::parse_retry_count(Some("abc")),
+            Err("无效的重试次数")
+        );
+        assert_eq!(
+            NetworkGuardExamples::parse_retry_count(None),
+            Ok(3)
+        );
     }
 
     #[test]

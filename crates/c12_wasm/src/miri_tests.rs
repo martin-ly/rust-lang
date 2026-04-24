@@ -109,8 +109,8 @@ fn test_wasm_value_union() {
         let mut val = WasmValue { i32: 42 };
         assert_eq!(val.i32, 42);
         
-        val.f64 = 3.14159;
-        assert!((val.f64 - 3.14159).abs() < 0.0001);
+        val.f64 = std::f64::consts::PI;
+        assert!((val.f64 - std::f64::consts::PI).abs() < 0.0001);
     }
 }
 

@@ -2,6 +2,34 @@
 
 use std::ops::RangeInclusive;
 
+/// Rust 1.96 `if let` guards 在宏系统中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct MacroIfLetGuardExamples;
+
+impl MacroIfLetGuardExamples {
+    /// 解析宏参数数量
+    pub fn parse_macro_arity(input: Option<&str>) -> Result<usize, &'static str> {
+        match input {
+            Some(s) if let Ok(n) = s.parse::<usize>() => Ok(n),
+            Some("variadic") => Ok(usize::MAX),
+            Some(_) => Err("无效的宏参数规格"),
+            None => Ok(0),
+        }
+    }
+
+    /// 检查宏展开深度
+    pub fn check_expansion_depth(depth: Option<Result<usize, &'static str>>) -> &'static str {
+        match depth {
+            Some(Ok(d)) if d <= 64 => "安全深度",
+            Some(Ok(_)) => "警告：展开深度过大",
+            Some(Err(_)) => "无法确定展开深度",
+            None => "使用默认深度限制",
+        }
+    }
+}
+
 /// RangeInclusive 在宏系统中的应用
 pub struct MacroRangeExamples;
 
@@ -295,6 +323,40 @@ mod tests {
         let manager = MacroExpansionManager::new(50, 10);
         assert_eq!(manager.get_all_ranges().len(), 5);
         assert!(manager.is_batch_active(0));
+    }
+
+    #[test]
+    fn test_parse_macro_arity() {
+        assert_eq!(MacroIfLetGuardExamples::parse_macro_arity(Some("4")), Ok(4));
+        assert_eq!(
+            MacroIfLetGuardExamples::parse_macro_arity(Some("variadic")),
+            Ok(usize::MAX)
+        );
+        assert_eq!(
+            MacroIfLetGuardExamples::parse_macro_arity(Some("abc")),
+            Err("无效的宏参数规格")
+        );
+        assert_eq!(MacroIfLetGuardExamples::parse_macro_arity(None), Ok(0));
+    }
+
+    #[test]
+    fn test_check_expansion_depth() {
+        assert_eq!(
+            MacroIfLetGuardExamples::check_expansion_depth(Some(Ok(32))),
+            "安全深度"
+        );
+        assert_eq!(
+            MacroIfLetGuardExamples::check_expansion_depth(Some(Ok(128))),
+            "警告：展开深度过大"
+        );
+        assert_eq!(
+            MacroIfLetGuardExamples::check_expansion_depth(Some(Err("overflow"))),
+            "无法确定展开深度"
+        );
+        assert_eq!(
+            MacroIfLetGuardExamples::check_expansion_depth(None),
+            "使用默认深度限制"
+        );
     }
 
     #[test]

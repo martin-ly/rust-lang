@@ -13,7 +13,7 @@ fn test_basic_type_inference() {
     assert_eq!(std::mem::size_of_val(&x), 4); // i32
 
     // 浮点数类型推断
-    let y = 3.14;
+    let y = 2.71;
     assert_eq!(std::mem::size_of_val(&y), 8); // f64
 
     // 字符串类型推断
@@ -62,9 +62,9 @@ fn test_type_coercion() {
     assert_eq!(y, 42);
 
     // 浮点数转换
-    let f: f64 = 3.14;
+    let f: f64 = 2.71;
     let i: i32 = f as i32;
-    assert_eq!(i, 3);
+    assert_eq!(i, 2);
 }
 
 /// 测试Option<T>类型操作

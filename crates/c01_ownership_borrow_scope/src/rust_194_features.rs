@@ -212,7 +212,7 @@ impl<T> ConfigManager<T> {
         }
 
         // 冷路径：触发初始化
-        &*self.cache
+        &self.cache
     }
 
     /// 检查是否已初始化（无锁）

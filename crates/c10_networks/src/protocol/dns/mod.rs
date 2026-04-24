@@ -143,11 +143,10 @@ impl DnsResolver {
                 return NetworkError::Protocol(format!("DNS NXDOMAIN for {target}: {ctx}"));
             }
             // Check for timeout in the proto error
-            if let Some(proto) = e.proto() {
-                if matches!(proto.kind.as_ref(), ProtoErrorKind::Timeout) {
+            if let Some(proto) = e.proto()
+                && matches!(proto.kind.as_ref(), ProtoErrorKind::Timeout) {
                     return NetworkError::Timeout(Duration::from_secs(5));
                 }
-            }
             NetworkError::Other(format!("DNS resolve {target} failed: {ctx}: {e}"))
         } else {
             NetworkError::Other(format!("DNS resolve {target} failed: {ctx}"))

@@ -2,6 +2,35 @@
 
 use std::ops::RangeInclusive;
 
+/// Rust 1.96 `if let` guards 在设计模式中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct PatternIfLetGuardExamples;
+
+impl PatternIfLetGuardExamples {
+    /// 解析策略配置
+    pub fn parse_strategy_config(input: Option<&str>) -> Result<String, &'static str> {
+        match input {
+            Some(s) if let Ok(size) = s.parse::<usize>() => {
+                Ok(format!("固定大小策略: {}", size))
+            }
+            Some("dynamic") => Ok("动态策略".to_string()),
+            Some(_) => Err("未知的策略配置"),
+            None => Ok("默认策略".to_string()),
+        }
+    }
+
+    /// 解析观察者阈值配置
+    pub fn parse_observer_threshold(input: Option<&str>) -> Result<u8, &'static str> {
+        match input {
+            Some(s) if let Ok(t) = s.parse::<u8>() => Ok(t),
+            Some(_) => Err("无效的阈值"),
+            None => Ok(50), // 默认阈值 50%
+        }
+    }
+}
+
 /// RangeInclusive 在设计模式中的应用
 pub struct PatternRangeExamples;
 
@@ -259,6 +288,42 @@ mod tests {
         let composer = PatternComposer::new(30, 6);
         assert_eq!(composer.get_all_ranges().len(), 5);
         assert!(composer.is_group_active(0));
+    }
+
+    #[test]
+    fn test_parse_strategy_config() {
+        assert_eq!(
+            PatternIfLetGuardExamples::parse_strategy_config(Some("16")),
+            Ok("固定大小策略: 16".to_string())
+        );
+        assert_eq!(
+            PatternIfLetGuardExamples::parse_strategy_config(Some("dynamic")),
+            Ok("动态策略".to_string())
+        );
+        assert_eq!(
+            PatternIfLetGuardExamples::parse_strategy_config(Some("unknown")),
+            Err("未知的策略配置")
+        );
+        assert_eq!(
+            PatternIfLetGuardExamples::parse_strategy_config(None),
+            Ok("默认策略".to_string())
+        );
+    }
+
+    #[test]
+    fn test_parse_observer_threshold() {
+        assert_eq!(
+            PatternIfLetGuardExamples::parse_observer_threshold(Some("75")),
+            Ok(75)
+        );
+        assert_eq!(
+            PatternIfLetGuardExamples::parse_observer_threshold(Some("abc")),
+            Err("无效的阈值")
+        );
+        assert_eq!(
+            PatternIfLetGuardExamples::parse_observer_threshold(None),
+            Ok(50)
+        );
     }
 
     #[test]

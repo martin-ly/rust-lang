@@ -2,6 +2,33 @@
 
 use std::ops::RangeInclusive;
 
+/// Rust 1.96 `if let` guards 在异步编程中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct AsyncIfLetGuardExamples;
+
+impl AsyncIfLetGuardExamples {
+    /// 解析超时配置
+    pub fn parse_timeout_ms(input: Option<&str>) -> Result<u64, &'static str> {
+        match input {
+            Some(s) if let Ok(ms) = s.parse::<u64>() => Ok(ms),
+            Some(_) => Err("无效的超时值"),
+            None => Ok(5000), // 默认 5 秒
+        }
+    }
+
+    /// 评估异步任务结果
+    pub fn evaluate_task_result(result: Result<Option<u32>, &'static str>) -> &'static str {
+        match result {
+            Ok(Some(code)) if code == 0 => "任务成功完成",
+            Ok(Some(_)) => "任务完成但有警告",
+            Ok(None) => "任务结果为空",
+            Err(_) => "任务执行失败",
+        }
+    }
+}
+
 /// RangeInclusive 在异步任务管理中的应用
 pub struct AsyncRangeExamples;
 
@@ -228,6 +255,36 @@ mod tests {
         assert!(scheduler.is_batch_active(3));
         // batch 4 should NOT be in active_range
         assert!(!scheduler.is_batch_active(4));
+    }
+
+    #[test]
+    fn test_parse_timeout_ms() {
+        assert_eq!(AsyncIfLetGuardExamples::parse_timeout_ms(Some("1000")), Ok(1000));
+        assert_eq!(
+            AsyncIfLetGuardExamples::parse_timeout_ms(Some("abc")),
+            Err("无效的超时值")
+        );
+        assert_eq!(AsyncIfLetGuardExamples::parse_timeout_ms(None), Ok(5000));
+    }
+
+    #[test]
+    fn test_evaluate_task_result() {
+        assert_eq!(
+            AsyncIfLetGuardExamples::evaluate_task_result(Ok(Some(0))),
+            "任务成功完成"
+        );
+        assert_eq!(
+            AsyncIfLetGuardExamples::evaluate_task_result(Ok(Some(1))),
+            "任务完成但有警告"
+        );
+        assert_eq!(
+            AsyncIfLetGuardExamples::evaluate_task_result(Ok(None)),
+            "任务结果为空"
+        );
+        assert_eq!(
+            AsyncIfLetGuardExamples::evaluate_task_result(Err("超时")),
+            "任务执行失败"
+        );
     }
 
     #[test]

@@ -4,6 +4,39 @@ use std::ops::RangeInclusive;
 use std::sync::Mutex;
 use std::thread;
 
+/// Rust 1.96 `if let` guards 在线程同步中的应用
+///
+/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// 减少嵌套层级，使代码更扁平、更易读。
+pub struct ThreadIfLetGuardExamples;
+
+impl ThreadIfLetGuardExamples {
+    /// 解析线程优先级
+    pub fn parse_thread_priority(input: Option<&str>) -> Result<u8, &'static str> {
+        match input {
+            Some(s) if let Ok(p) = s.parse::<u8>() => {
+                if p <= 100 {
+                    Ok(p)
+                } else {
+                    Err("优先级超出范围")
+                }
+            }
+            Some(_) => Err("无效的优先级格式"),
+            None => Err("未指定优先级"),
+        }
+    }
+
+    /// 检查线程池配置
+    pub fn check_pool_config(config: Result<Option<usize>, &'static str>) -> &'static str {
+        match config {
+            Ok(Some(size)) if size > 0 && size <= 64 => "有效配置",
+            Ok(Some(_)) => "配置超出支持范围",
+            Ok(None) => "使用默认配置",
+            Err(msg) => msg,
+        }
+    }
+}
+
 /// RangeInclusive 在并发任务管理中的应用
 pub struct ThreadRangeExamples;
 
@@ -254,6 +287,43 @@ mod tests {
         let manager = ThreadPoolRangeManager::new(4, 100);
         assert_eq!(manager.get_all_ranges().len(), 4);
         assert!(manager.is_worker_active(0));
+    }
+
+    #[test]
+    fn test_parse_thread_priority() {
+        assert_eq!(ThreadIfLetGuardExamples::parse_thread_priority(Some("50")), Ok(50));
+        assert_eq!(
+            ThreadIfLetGuardExamples::parse_thread_priority(Some("150")),
+            Err("优先级超出范围")
+        );
+        assert_eq!(
+            ThreadIfLetGuardExamples::parse_thread_priority(Some("abc")),
+            Err("无效的优先级格式")
+        );
+        assert_eq!(
+            ThreadIfLetGuardExamples::parse_thread_priority(None),
+            Err("未指定优先级")
+        );
+    }
+
+    #[test]
+    fn test_check_pool_config() {
+        assert_eq!(
+            ThreadIfLetGuardExamples::check_pool_config(Ok(Some(16))),
+            "有效配置"
+        );
+        assert_eq!(
+            ThreadIfLetGuardExamples::check_pool_config(Ok(Some(128))),
+            "配置超出支持范围"
+        );
+        assert_eq!(
+            ThreadIfLetGuardExamples::check_pool_config(Ok(None)),
+            "使用默认配置"
+        );
+        assert_eq!(
+            ThreadIfLetGuardExamples::check_pool_config(Err("配置解析失败")),
+            "配置解析失败"
+        );
     }
 
     #[test]

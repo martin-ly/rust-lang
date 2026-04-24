@@ -1,6 +1,11 @@
 // 需要启用 `--features offline`
 
 #[cfg(feature = "offline")]
+fn main() {
+    run::main();
+}
+
+#[cfg(feature = "offline")]
 mod run {
     use c10_networks::sniff::{parse_pcap_arp, parse_pcap_tcp_stats, parse_pcap_udp_stats};
 

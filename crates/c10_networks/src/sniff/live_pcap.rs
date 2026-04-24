@@ -34,7 +34,7 @@ fn open_live(
     promisc: bool,
     timeout_ms: i32,
 ) -> NetworkResult<Capture<Active>> {
-    let mut cap = Capture::from_device(name)
+    let cap = Capture::from_device(name)
         .map_err(|e| NetworkError::Other(e.to_string()))?
         .promisc(promisc)
         .snaplen(snaplen)
@@ -119,6 +119,7 @@ pub async fn tcp_stats_stream_bpf(
                         }
                     }
                 }
+                Ok(_) => {}
                 Err(_) => {}
             }
             if last.elapsed() >= interval {

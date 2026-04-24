@@ -6,6 +6,7 @@
 
 - 安装 Nix 包管理器: [https://nixos.org/download.html](https://nixos.org/download.html)
 - 启用 Flakes 功能:
+
   ```bash
   echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
   ```
@@ -23,11 +24,13 @@ nix develop
 ### 使用 direnv（推荐）
 
 1. 安装 `direnv` 和 `nix-direnv`:
+
    ```bash
    nix profile install nixpkgs#direnv nixpkgs#nix-direnv
    ```
 
 2. 在项目根目录执行:
+
    ```bash
    echo "use flake" > .envrc
    direnv allow

@@ -62,7 +62,6 @@ async fn main() {
                         let is_high = msg.contains("urgent");
                         if is_high { let _ = tx_high.send(msg).await; } else { let _ = tx_norm.send(msg).await; }
                     };
-                    _msg => ();
                 }
             }
         })

@@ -272,7 +272,7 @@ pub fn kmeans_fit_parallel(
     let mut centers = kmeans.initialize_centers(data);
 
     // K-means 迭代
-    for iteration in 0..kmeans.max_iterations {
+    for _iteration in 0..kmeans.max_iterations {
         // 并行分配每个点到最近的聚类中心
         let cluster_assignments: Vec<usize> = data
             .par_iter()
