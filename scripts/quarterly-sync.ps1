@@ -152,15 +152,15 @@ Add-Line "## 🔗 外部链接检查"
 Add-Line ""
 Add-Line "请手动运行以下命令检查文档链接有效性:"
 Add-Line ""
-Add-Line "```powershell"
-Add-Line "# PowerShell"
-Add-Line ".\scripts\check_links.ps1"
-Add-Line "```"
+Add-Line '```powershell'
+Add-Line '# PowerShell'
+Add-Line '.\scripts\check_links.ps1'
+Add-Line '```'
 Add-Line ""
-Add-Line "```bash"
-Add-Line "# Bash (Linux CI)"
-Add-Line "./scripts/check_links.sh  # 如果存在"
-Add-Line "```"
+Add-Line '```bash'
+Add-Line '# Bash (Linux CI)'
+Add-Line './scripts/check_links.sh  # 如果存在'
+Add-Line '```'
 Add-Line ""
 
 # ===== 8. 下季度待办提示 =====

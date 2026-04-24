@@ -42,6 +42,6 @@ mod tests {
         let mut s = String::from("test");
         append_greeting(&mut s);
         // 可变借用结束后，可以进行不可变借用
-        assert_eq!(count_chars(&s), 6);
+        assert_eq!(count_chars(&s), 8); // "test，你好！" = 8 chars
     }
 }

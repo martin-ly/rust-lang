@@ -71,7 +71,7 @@ mod tests {
     fn test_scaled() {
         let rect = Rectangle::new(2.0, 3.0);
         let new_rect = rect.scaled(3.0);
-        assert_eq!(new_rect.area(), 18.0);
+        assert_eq!(new_rect.area(), 54.0); // (2*3) * (3*3) = 54
         assert_eq!(rect.area(), 6.0); // 原矩形不变
     }
 }
