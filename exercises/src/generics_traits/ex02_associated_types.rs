@@ -44,6 +44,12 @@ pub struct FixedStack<T, const N: usize> {
     top: usize,
 }
 
+impl<T: Default + Copy, const N: usize> Default for FixedStack<T, N> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T: Default + Copy, const N: usize> FixedStack<T, N> {
     pub fn new() -> Self {
         Self {

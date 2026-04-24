@@ -14,7 +14,7 @@ pub fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 
 /// 返回以空格分割后的第一个字段
-pub fn first_field<'a>(s: &'a str) -> &'a str {
+pub fn first_field(s: &str) -> &str {
     match s.find(' ') {
         Some(idx) => &s[..idx],
         None => s,

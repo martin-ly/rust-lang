@@ -20,7 +20,7 @@ where
 
 /// 并发计算多个数字的平方
 pub async fn concurrent_squares(values: Vec<i32>) -> Vec<i32> {
-    let futures: Vec<_> = values.into_iter().map(|v| async_square(v)).collect();
+    let futures: Vec<_> = values.into_iter().map(async_square).collect();
     futures::future::join_all(futures).await
 }
 

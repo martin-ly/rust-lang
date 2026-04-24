@@ -177,7 +177,7 @@ pub mod wasm_jit_optimizations {
     pub fn calculate_wasm_stats(sizes: &[usize]) -> (usize, usize, usize) {
         let sum: usize = sizes.iter().sum();
         let count = sizes.len();
-        let avg = if count > 0 { sum / count } else { 0 };
+        let avg = sum.checked_div(count).unwrap_or(0);
 
         (sum, count, avg)
     }

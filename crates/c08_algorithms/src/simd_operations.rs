@@ -54,12 +54,11 @@ pub mod portable {
         }
 
         // 剩余元素
-        for i in (chunks * LANES)..arr.len() {
-            if (arr[i] - target).abs() < f32::EPSILON {
-                return Some(i);
-            }
-        }
-        None
+        arr.iter()
+            .enumerate()
+            .skip(chunks * LANES)
+            .find(|&(_, x)| (*x - target).abs() < f32::EPSILON)
+            .map(|(i, _)| i)
     }
 }
 

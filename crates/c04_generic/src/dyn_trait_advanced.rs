@@ -1,3 +1,5 @@
+#![allow(clippy::doc_lazy_continuation)]
+
 //! Dyn Trait 高级用法
 //!
 //! 本模块深入探讨 `dyn Trait` 对象的高级特性，包括：
@@ -254,6 +256,12 @@ pub struct PluginManager {
     plugins: Vec<Box<dyn Plugin>>,
 }
 
+impl Default for PluginManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PluginManager {
     pub fn new() -> Self {
         Self { plugins: Vec::new() }
@@ -331,6 +339,12 @@ pub struct DynamicPipeline {
 pub trait DynProcessor: Debug {
     fn process_dyn(&self, input: &dyn Any) -> Box<dyn Any>;
     fn type_name(&self) -> &'static str;
+}
+
+impl Default for DynamicPipeline {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl DynamicPipeline {

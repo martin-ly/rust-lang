@@ -245,7 +245,9 @@ mod tests {
     fn test_guard_based_borrow() {
         let mut opt = Some(vec![1, 2, 3]);
         guard_based_borrow(&mut opt);
-        assert_eq!(opt.as_ref().unwrap().len(), 3);
+        // guard_based_borrow 在 len < 10 时会 push(42)，所以长度变为 4
+        assert_eq!(opt.as_ref().unwrap().len(), 4);
+        assert_eq!(opt.as_ref().unwrap().last(), Some(&42));
     }
 
     #[test]

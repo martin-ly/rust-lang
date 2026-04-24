@@ -1,3 +1,5 @@
+#![allow(clippy::doc_lazy_continuation)]
+
 //! Rust 1.94.0 所有权与借用特性实现模块
 //!
 //! 本模块展示了 Rust 1.94.0 在所有权、借用和作用域管理方面的增强，包括：

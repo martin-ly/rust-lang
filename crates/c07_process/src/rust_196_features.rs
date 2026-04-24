@@ -21,7 +21,7 @@ impl ProcessIfLetGuardExamples {
     /// 检查进程退出状态
     pub fn interpret_exit_status(status: Option<Result<i32, &'static str>>) -> &'static str {
         match status {
-            Some(Ok(code)) if code == 0 => "正常退出",
+            Some(Ok(0)) => "正常退出",
             Some(Ok(_)) => "异常退出",
             Some(Err(_)) => "进程被信号终止",
             None => "仍在运行",

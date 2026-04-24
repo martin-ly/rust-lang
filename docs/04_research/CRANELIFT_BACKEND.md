@@ -1,8 +1,8 @@
 # Cranelift 后端编译加速跟踪报告
 
-> **最后更新日期**: 2026-04-24  
-> **预计下次复查日期**: 2026-07-24  
-> **跟踪状态**: ⚡ 可用 (unstable，需 nightly)  
+> **最后更新日期**: 2026-04-24
+> **预计下次复查日期**: 2026-07-24
+> **跟踪状态**: ⚡ 可用 (unstable，需 nightly)
 > **相关 Rust 官方目标**: 开发者体验优化 —— 编译时间缩减
 
 ---
@@ -242,15 +242,15 @@ cargo +nightly build
 
 ## 7. 参考文献
 
-1. **Wasmtime Team**. "Cranelift: A Compiled Code Generator". Bytecode Alliance, 2019-present.  
+1. **Wasmtime Team**. "Cranelift: A Compiled Code Generator". Bytecode Alliance, 2019-present.
    <https://github.com/bytecodealliance/wasmtime/tree/main/cranelift>
 
-2. **bjorn3 (Björn Roy Baron)**. "rustc_codegen_cranelift: Cranelift based backend for rustc".  
+2. **bjorn3 (Björn Roy Baron)**. "rustc_codegen_cranelift: Cranelift based backend for rustc".
    <https://github.com/bjorn3/rustc_codegen_cranelift>
 
 3. **Stichert, J.** "Speeding up Rust compile times with Cranelift". RustConf 2023.
 
-4. **Bytecode Alliance**. "Cranelift IR Reference".  
+4. **Bytecode Alliance**. "Cranelift IR Reference".
    <https://docs.rs/cranelift-codegen/latest/cranelift_codegen/ir/index.html>
 
 5. **Rust Compiler Team**. "MCP: Pluggable Codegen Backends". 2022.
@@ -258,5 +258,6 @@ cargo +nightly build
 ---
 
 > 📌 **复查记录**
+>
 > - 2026-04-24: 初始创建，基于 Rust 1.96 + nightly 2026-04 状态
 > - 下次复查: 2026-07-24 (跟踪 codegen-backend 稳定化进展)

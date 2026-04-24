@@ -2,16 +2,17 @@
 
 > **使用说明:** 每季度初（1月、4月、7月、10月）由维护者执行此检查表，确保项目内容与权威来源保持同步。
 >
-> **本季度:** ______年 第 __ 季度  
-> **执行人:** ________________  
-> **执行日期:** ____-__-__  
-> **预计完成日期:** ____-__-__
+> **本季度:** ******年 第 __ 季度
+> **执行人:** ________________
+> **执行日期:** ____-**-**
+> **预计完成日期:** ____-**-__
 
 ---
 
 ## 1️⃣ Rust 官方生态更新
 
 ### Rust 官方博客
+
 - [ ] 阅读 [Rust 官方博客](https://blog.rust-lang.org/) 本季度所有文章
 - [ ] 检查新版本发布说明（如有）
 - [ ] 识别与项目相关的新特性或重大变更
@@ -23,6 +24,7 @@
 | | | | | |
 
 ### crates.io 生态更新
+
 - [ ] 运行 `cargo outdated -R` 检查所有根依赖
 - [ ] 检查是否有主版本号更新（semver-major）
 - [ ] 评估关键依赖（tokio, serde, axum 等）的更新影响
@@ -34,6 +36,7 @@
 | | | | | | |
 
 ### RUSTSEC 安全公告
+
 - [ ] 查阅 [RUSTSEC 数据库](https://rustsec.org/advisories/)
 - [ ] 检查项目依赖是否涉及本季度新公告
 - [ ] 运行 `cargo audit` 确认当前状态
@@ -49,6 +52,7 @@
 ## 2️⃣ 国际权威来源覆盖度
 
 ### Google / Microsoft / AWS 官方更新
+
 - [ ] 检查 [Google Rust 博客/指南](https://opensource.googleblog.com/search/label/Rust) 新内容
 - [ ] 检查 [Microsoft Rust 团队博客](https://devblogs.microsoft.com/rust/) 新文章
 - [ ] 检查 [AWS Rust SDK 更新](https://github.com/awslabs/aws-sdk-rust/releases)
@@ -60,6 +64,7 @@
 | | | | | |
 
 ### 学术与行业标准
+
 - [ ] 检查 [Rust RFC 仓库](https://github.com/rust-lang/rfcs) 本季度合并的 RFC
 - [ ] 检查 [Rust Reference](https://doc.rust-lang.org/reference/) 更新
 - [ ] 关注 [This Week in Rust](https://this-week-in-rust.org/) 中的最佳实践
@@ -74,6 +79,7 @@
 ## 3️⃣ 项目内容同步
 
 ### 代码库对齐
+
 - [ ] 检查各 crate 是否使用推荐的最新 API 模式
 - [ ] 验证示例代码是否仍在最新稳定版上编译通过
 - [ ] 检查是否有已废弃的 API 仍在使用
@@ -94,6 +100,7 @@
 | common | 编译通过 | ⬜ | |
 
 ### 文档完整性
+
 - [ ] 检查 `docs/` 目录是否有需要新增的指南
 - [ ] 验证知识库索引 `knowledge/INDEX.md` 是否最新
 - [ ] 检查 `README.md` 和 `CHANGELOG.md` 是否需要更新
@@ -122,18 +129,19 @@
 ### 本季度决策记录
 <!-- 在此记录本季度做出的重要决策 -->
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ### 下季度关注项
 <!-- 记录需要下季度优先处理的事项 -->
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ### 检查表完成确认
+
 - [ ] 所有检查项已审核
 - [ ] 发现的问题已记录到 Issues
 - [ ] 本季度总结已归档到 `archive/202X/QX/`

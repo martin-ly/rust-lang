@@ -296,7 +296,7 @@ pub fn kmeans_fit_parallel(
         let mut new_centers = Vec::with_capacity(k);
         let mut converged = true;
 
-        for i in 0..k {
+        for (i, center) in centers.iter().enumerate().take(k) {
             let cluster_points: Vec<&DataPoint> = cluster_assignments
                 .iter()
                 .enumerate()
@@ -305,7 +305,7 @@ pub fn kmeans_fit_parallel(
                 .collect();
 
             if cluster_points.is_empty() {
-                new_centers.push(centers[i].clone());
+                new_centers.push(center.clone());
                 continue;
             }
 

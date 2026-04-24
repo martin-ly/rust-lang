@@ -175,7 +175,7 @@ pub mod process_jit_optimizations {
     pub fn calculate_process_stats(process_times: &[u64]) -> (u64, u64, u64) {
         let sum: u64 = process_times.iter().sum();
         let count = process_times.len() as u64;
-        let avg = if count > 0 { sum / count } else { 0 };
+        let avg = sum.checked_div(count).unwrap_or(0);
 
         (sum, count, avg)
     }

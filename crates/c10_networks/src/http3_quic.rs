@@ -36,7 +36,7 @@ pub mod quic_impl {
 
     /// 接受连接并读取数据的示例骨架
     pub async fn handle_incoming(endpoint: Endpoint) -> Result<String, String> {
-        while let Some(incoming) = endpoint.accept().await {
+        if let Some(incoming) = endpoint.accept().await {
             let connection = incoming.await.map_err(|e| format!("{}", e))?;
             println!("QUIC connection established: {}", connection.remote_address());
 

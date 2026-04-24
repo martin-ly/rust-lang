@@ -81,6 +81,9 @@ pub mod ts {
         pub fn len(&self) -> usize {
             self.0.read().expect("LRU缓存读取锁被污染").len()
         }
+        pub fn is_empty(&self) -> bool {
+            self.len() == 0
+        }
     }
 }
 

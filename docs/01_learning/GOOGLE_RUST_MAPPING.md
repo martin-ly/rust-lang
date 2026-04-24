@@ -1,7 +1,7 @@
 # Google Comprehensive Rust 课程映射
 
-> **创建日期**: 2026-04-24  
-> **用途**: 将 Google 4天 Rust 课程与本项目内容对接，标注差异与补充材料  
+> **创建日期**: 2026-04-24
+> **用途**: 将 Google 4天 Rust 课程与本项目内容对接，标注差异与补充材料
 > **课程来源**: <https://google.github.io/comprehensive-rust/>
 
 ---
@@ -92,7 +92,7 @@ Google Comprehensive Rust 分为 4 天：
 - 关联类型
 - 生命周期基础
 - 静态生命周期
--  trait 对象（dyn Trait）
+- trait 对象（dyn Trait）
 
 ### 本项目映射
 

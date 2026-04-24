@@ -151,6 +151,7 @@ pub trait ImprovedTrait<T> {
 
     /// 异步方法支持
     #[cfg(feature = "tokio")]
+    #[allow(async_fn_in_trait)]
     async fn async_process(&self, input: T) -> T;
 }
 

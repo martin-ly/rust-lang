@@ -1,7 +1,7 @@
 # Microsoft Pragmatic Rust Guidelines 代码审查清单
 
-> **创建日期**: 2026-04-24  
-> **来源**: Microsoft Pragmatic Rust Guidelines  
+> **创建日期**: 2026-04-24
+> **来源**: Microsoft Pragmatic Rust Guidelines
 > **用途**: 将指南要点转化为可执行的代码审查清单，每条附带项目内示例链接
 
 ---

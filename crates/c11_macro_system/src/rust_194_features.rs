@@ -1040,8 +1040,9 @@ mod tests {
     fn test_lazylock_macro_registry() {
         let registry = get_macro_registry();
         registry.register("test_macro", "test.rs");
-        let id = registry.record_expansion();
-        assert!(id > 0, "expansion id should be greater than 0");
+        let id1 = registry.record_expansion();
+        let id2 = registry.record_expansion();
+        assert!(id2 > id1, "expansion id should increment");
     }
 
     #[test]

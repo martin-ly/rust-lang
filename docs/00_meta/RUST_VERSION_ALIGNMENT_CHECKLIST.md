@@ -2,9 +2,9 @@
 
 > **使用说明:** 每半年（建议 6月、12月）执行一次 Rust 版本对齐检查，确保项目与 Rust 最新版本保持同步。
 >
-> **本次检查周期:** ______年 __ 月  
-> **执行人:** ________________  
-> **Rust 最新稳定版:** ________________  
+> **本次检查周期:** ______年 __ 月
+> **执行人:** ________________
+> **Rust 最新稳定版:** ________________
 > **项目当前 MSRV:** ________________
 
 ---
@@ -185,6 +185,7 @@ cargo clippy --workspace --all-features -- -D warnings
 > 🔄 **关联工作流:** `.github/workflows/rust-version-tracking.yml`
 >
 > 📚 **参考文档:**
+>
 > - [Rust Release Notes](https://github.com/rust-lang/rust/releases)
 > - [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 > - [Rust RFC Book](https://rust-lang.github.io/rfcs/)

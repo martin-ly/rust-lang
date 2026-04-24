@@ -667,7 +667,6 @@ too_many_arguments = "allow"
 await_holding_lock = "warn"
 await_holding_refcell_ref = "warn"
 # 性能相关
-slow_zero_fill = "warn"
 unnecessary_box_returns = "warn"
 # 代码质量
 module_name_repetitions = "allow"

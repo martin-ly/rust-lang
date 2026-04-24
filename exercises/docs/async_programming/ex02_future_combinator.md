@@ -1,7 +1,7 @@
 # Future 组合
 
-**主题**: Async Programming  
-**难度**: Medium  
+**主题**: Async Programming
+**难度**: Medium
 **练习编号**: ex02_future_combinator
 
 ---

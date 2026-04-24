@@ -892,12 +892,11 @@ impl IpcPerformanceMonitor {
 
                 // 计算平均延迟
                 let total_messages = metric.messages_sent + metric.messages_received;
-                if total_messages > 0 {
-                    metric.average_latency = Duration::from_nanos(
-                        (metric.average_latency.as_nanos() as u64 * (total_messages - 1)
-                            + latency.as_nanos() as u64)
-                            / total_messages,
-                    );
+                let avg_nanos = (metric.average_latency.as_nanos() as u64 * (total_messages - 1)
+                    + latency.as_nanos() as u64)
+                    .checked_div(total_messages);
+                if let Some(avg) = avg_nanos {
+                    metric.average_latency = Duration::from_nanos(avg);
                 }
             }
         }

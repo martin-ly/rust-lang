@@ -1,7 +1,7 @@
 # 超时与重试
 
-**主题**: Async Programming  
-**难度**: Hard  
+**主题**: Async Programming
+**难度**: Hard
 **练习编号**: ex05_timeout_retry
 
 ---

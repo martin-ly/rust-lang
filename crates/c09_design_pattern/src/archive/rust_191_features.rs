@@ -167,7 +167,7 @@ pub mod pattern_jit_optimizations {
     pub fn calculate_factory_stats(object_counts: &[usize]) -> (usize, usize, usize) {
         let sum: usize = object_counts.iter().sum();
         let count = object_counts.len();
-        let avg = if count > 0 { sum / count } else { 0 };
+        let avg = sum.checked_div(count).unwrap_or(0);
 
         (sum, count, avg)
     }

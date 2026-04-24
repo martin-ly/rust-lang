@@ -57,6 +57,12 @@ pub struct RelaxedCounter {
     value: AtomicUsize,
 }
 
+impl Default for RelaxedCounter {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl RelaxedCounter {
     /// 创建新计数器
     pub const fn new() -> Self {
@@ -100,6 +106,12 @@ impl RelaxedCounter {
 pub struct AcqRelFlag {
     ready: AtomicBool,
     data: AtomicUsize,
+}
+
+impl Default for AcqRelFlag {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AcqRelFlag {
@@ -151,6 +163,12 @@ pub struct SimpleSpinlock {
     locked: AtomicBool,
 }
 
+impl Default for SimpleSpinlock {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SimpleSpinlock {
     /// 创建未锁定的自旋锁
     pub const fn new() -> Self {
@@ -199,6 +217,12 @@ impl SimpleSpinlock {
 /// `SeqCst` 需要完整的 `dmb ish` 屏障，比 `ldar`/`stlr` 更重。
 pub struct SeqCstBarrier {
     flag: AtomicBool,
+}
+
+impl Default for SeqCstBarrier {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SeqCstBarrier {

@@ -1,8 +1,8 @@
 # Next-gen Trait Solver 跟踪报告
 
-> **最后更新日期**: 2026-04-24  
-> **预计下次复查日期**: 2026-07-24  
-> **跟踪状态**: 🔬 深度开发中 (nightly 默认已切换)  
+> **最后更新日期**: 2026-04-24
+> **预计下次复查日期**: 2026-07-24
+> **跟踪状态**: 🔬 深度开发中 (nightly 默认已切换)
 > **相关 Rust 官方目标**: 2025H2 Goals —— 类型系统扩展
 
 ---
@@ -355,23 +355,24 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 
 1. **Matsakis, Niko**. "Chalk: From Logic to Rust". Rust Blog, 2017.
 
-2. **Matsakis, Niko, et al.** "A Proposal for the Next-Gen Trait Solver". Rust Compiler Team Design Doc, 2021.  
+2. **Matsakis, Niko, et al.** "A Proposal for the Next-Gen Trait Solver". Rust Compiler Team Design Doc, 2021.
    <https://rust-lang.github.io/compiler-team/>
 
 3. **Rust Compiler Team**. "Trait Solver Refactor". MCP (Major Change Proposal) #529, 2021.
 
-4. **de Moura, Leonardo, et al.** "The Lean Theorem Prover". CoRR abs/1505.05043 (2015).  
+4. **de Moura, Leonardo, et al.** "The Lean Theorem Prover". CoRR abs/1505.05043 (2015).
    (Next-gen solver 的部分设计灵感来源)
 
 5. **Dreyer, Derek, et al.** "Type Systems for Rust: Chalk and Beyond". PLMW @ POPL 2020.
 
 6. **Rust Foundation**. "2025H2 Roadmap: Type System Evolution". 2025.
 
-7. **Vytiniotis, Dimitrios, et al.** "Modular implicits". OCaml Workshop 2014.  
+7. **Vytiniotis, Dimitrios, et al.** "Modular implicits". OCaml Workshop 2014.
    (Rust trait system 的理论前身)
 
 ---
 
 > 📌 **复查记录**
+>
 > - 2026-04-24: 初始创建，基于 nightly 2026-04 状态 (新 solver 已默认启用)
 > - 下次复查: 2026-07-24 (跟踪稳定化 RFC 进展)

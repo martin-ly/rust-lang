@@ -1,7 +1,7 @@
 # Arc + Atomic
 
-**主题**: Concurrency  
-**难度**: Medium  
+**主题**: Concurrency
+**难度**: Medium
 **练习编号**: ex05_arc_atomic
 
 ---

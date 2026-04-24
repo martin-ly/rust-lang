@@ -106,14 +106,10 @@ impl<T> WorkStealingScheduler<T> {
                 let scheduler = scheduler.clone();
                 s.spawn(move || {
                     let mut local_results: Vec<i32> = Vec::new();
-                    loop {
-                        if let Some(task) = scheduler.steal_task(worker_id) {
-                            let result = task * task;
-                            local_results.push(result);
-                            thread::sleep(Duration::from_millis(1));
-                        } else {
-                            break;
-                        }
+                    while let Some(task) = scheduler.steal_task(worker_id) {
+                        let result = task * task;
+                        local_results.push(result);
+                        thread::sleep(Duration::from_millis(1));
                     }
                     results.lock().expect("获取结果锁不应失败").extend(local_results);
                 });
@@ -244,14 +240,10 @@ impl<T> PriorityWorkStealingScheduler<T> {
                 let scheduler = scheduler.clone();
                 s.spawn(move || {
                     let mut local_results: Vec<(u32, i32)> = Vec::new();
-                    loop {
-                        if let Some(task) = scheduler.steal_task(worker_id) {
-                            let result = task * 2;
-                            local_results.push((worker_id as u32, result as i32));
-                            thread::sleep(Duration::from_millis(1));
-                        } else {
-                            break;
-                        }
+                    while let Some(task) = scheduler.steal_task(worker_id) {
+                        let result = task * 2;
+                        local_results.push((worker_id as u32, result as i32));
+                        thread::sleep(Duration::from_millis(1));
                     }
                     results.lock().expect("获取结果锁不应失败").extend(local_results);
                 });
@@ -423,14 +415,10 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
                 let scheduler = scheduler.clone();
                 s.spawn(move || {
                     let mut local_results = Vec::new();
-                    loop {
-                        if let Some(task) = scheduler.steal_task(worker_id) {
-                            let result = task * task;
-                            local_results.push(result);
-                            thread::sleep(Duration::from_millis(1));
-                        } else {
-                            break;
-                        }
+                    while let Some(task) = scheduler.steal_task(worker_id) {
+                        let result = task * task;
+                        local_results.push(result);
+                        thread::sleep(Duration::from_millis(1));
                     }
                     results.lock().expect("获取结果锁不应失败").extend(local_results);
                 });
@@ -562,14 +550,10 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
                     let scheduler = scheduler.clone();
                     s.spawn(move || {
                         let mut local_results: Vec<(usize, usize, i32)> = Vec::new();
-                        loop {
-                            if let Some(task) = scheduler.steal_task(node_id, worker_id) {
-                                let result = task * 3;
-                                local_results.push((node_id, worker_id, result as i32));
-                                thread::sleep(Duration::from_millis(1));
-                            } else {
-                                break;
-                            }
+                        while let Some(task) = scheduler.steal_task(node_id, worker_id) {
+                            let result = task * 3;
+                            local_results.push((node_id, worker_id, result as i32));
+                            thread::sleep(Duration::from_millis(1));
                         }
                         results.lock().expect("获取结果锁不应失败").extend(local_results);
                     });

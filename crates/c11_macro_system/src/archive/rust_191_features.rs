@@ -186,7 +186,7 @@ pub mod macro_jit_optimizations {
     pub fn calculate_macro_stats(token_counts: &[usize]) -> (usize, usize, usize) {
         let sum: usize = token_counts.iter().sum();
         let count = token_counts.len();
-        let avg = if count > 0 { sum / count } else { 0 };
+        let avg = sum.checked_div(count).unwrap_or(0);
 
         (sum, count, avg)
     }

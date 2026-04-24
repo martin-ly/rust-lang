@@ -20,9 +20,8 @@
 ///     // 返回修改后的TokenStream
 /// }
 /// ```
-
+///
 /// 常用的属性宏示例
-
 /// 1. 序列化/反序列化
 /// ```ignore
 /// #[derive(Serialize, Deserialize)]

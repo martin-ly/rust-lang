@@ -21,7 +21,7 @@ impl AsyncIfLetGuardExamples {
     /// 评估异步任务结果
     pub fn evaluate_task_result(result: Result<Option<u32>, &'static str>) -> &'static str {
         match result {
-            Ok(Some(code)) if code == 0 => "任务成功完成",
+            Ok(Some(0)) => "任务成功完成",
             Ok(Some(_)) => "任务完成但有警告",
             Ok(None) => "任务结果为空",
             Err(_) => "任务执行失败",

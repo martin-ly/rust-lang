@@ -83,7 +83,7 @@ pub mod inline_asm_concepts {
     /// 获取当前 CPU 核心 ID（x86_64 概念演示）
     #[cfg(target_arch = "x86_64")]
     pub fn get_cpu_core_id() -> u32 {
-        let result = unsafe { core::arch::x86_64::__cpuid_count(1, 0) };
+        let result = core::arch::x86_64::__cpuid_count(1, 0);
         (result.ebx >> 24) & 0xFF
     }
 

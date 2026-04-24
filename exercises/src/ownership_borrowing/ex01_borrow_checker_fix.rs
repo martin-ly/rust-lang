@@ -14,7 +14,7 @@
 //! - 使用借用而非所有权转移
 
 /// 返回字符串的长度，同时保持原字符串可用
-pub fn get_length(s: &String) -> usize {
+pub fn get_length(s: &str) -> usize {
     s.len()
 }
 

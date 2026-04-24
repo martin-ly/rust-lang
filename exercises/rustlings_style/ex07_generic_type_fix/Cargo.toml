@@ -2,3 +2,6 @@
 name = "ex07_generic_type_fix"
 version = "0.1.0"
 edition = "2024"
+
+[workspace]
+

@@ -164,6 +164,7 @@ pub struct MpscRingBuffer<T> {
     capacity: usize,
     head: CachePadded<AtomicUsize>,
     tail: CachePadded<AtomicUsize>,
+    #[allow(dead_code)]
     producer_count: AtomicUsize,
 }
 

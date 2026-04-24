@@ -1,7 +1,7 @@
 # Tokio 任务
 
-**主题**: Async Programming  
-**难度**: Medium  
+**主题**: Async Programming
+**难度**: Medium
 **练习编号**: ex03_tokio_task
 
 ---

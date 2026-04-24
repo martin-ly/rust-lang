@@ -430,6 +430,7 @@ unsafe extern "C" {
     ///
     /// # Safety
     /// - `s1` 和 `s2` 必须各指向至少 `n` 字节的有效内存
+    #[allow(dead_code)]
     fn memcmp(s1: *const std::ffi::c_void, s2: *const std::ffi::c_void, n: usize) -> i32;
 }
 

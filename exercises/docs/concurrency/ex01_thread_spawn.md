@@ -1,7 +1,7 @@
 # 创建线程
 
-**主题**: Concurrency  
-**难度**: Easy  
+**主题**: Concurrency
+**难度**: Easy
 **练习编号**: ex01_thread_spawn
 
 ---

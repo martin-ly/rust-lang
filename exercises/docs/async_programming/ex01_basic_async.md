@@ -1,7 +1,7 @@
 # 基础 async/await
 
-**主题**: Async Programming  
-**难度**: Easy  
+**主题**: Async Programming
+**难度**: Easy
 **练习编号**: ex01_basic_async
 
 ---

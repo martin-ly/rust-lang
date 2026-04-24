@@ -288,7 +288,7 @@ impl ThreadPoolTaskQueue {
     /// 按优先级排序任务（高优先级在前）
     pub fn sort_by_priority(&mut self) {
         let mut vec: Vec<ThreadTask> = self.tasks.drain(..).collect();
-        vec.sort_by(|a, b| b.priority.cmp(&a.priority));
+        vec.sort_by_key(|a| std::cmp::Reverse(a.priority));
         self.tasks = vec.into_iter().collect();
     }
 

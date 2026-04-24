@@ -1,8 +1,8 @@
 # Rust 形式化验证学术导读
 
-> **最后更新日期**: 2026-04-24  
-> **预计下次复查日期**: 2026-10-24  
-> **文档类型**: 学术导读 + 学习路径  
+> **最后更新日期**: 2026-04-24
+> **预计下次复查日期**: 2026-10-24
+> **文档类型**: 学术导读 + 学习路径
 > **前置知识**: Rust 所有权系统基础、一阶逻辑基础
 
 ---
@@ -101,7 +101,7 @@ RustBelt 将 Rust 类型翻译为 Iris 逻辑断言：
 | 结论 | 含义 |
 |------|------|
 | **类型安全性** | 如果 Rust 程序通过类型检查且不使用 `unsafe`，则程序没有内存安全问题 |
-| ** unsafe 契约 ** | `unsafe` 代码的编写者必须手动维持 Iris 不变式，这是编译器无法检查的 |
+| **unsafe 契约** | `unsafe` 代码的编写者必须手动维持 Iris 不变式，这是编译器无法检查的 |
 | **库正确性** | 标准库的核心 `unsafe` 代码已被 RustBelt 框架形式化验证（部分） |
 
 ### 2.6 RustBelt 的影响
@@ -313,31 +313,32 @@ impl<T> Vec<T> {
 
 ## 7. 参考文献
 
-1. **Jung, R., Jourdan, J.-H., Krebbers, R., & Dreyer, D.** *"RustBelt: Securing the Foundations of the Rust Programming Language"*. POPL 2017.  
+1. **Jung, R., Jourdan, J.-H., Krebbers, R., & Dreyer, D.** *"RustBelt: Securing the Foundations of the Rust Programming Language"*. POPL 2017.
    ACM, 2017. <https://doi.org/10.1145/3009837.3009844>
 
-2. **Jung, R., et al.** *"Safe Systems Programming in Rust: The Promise and the Challenge"*. Communications of the ACM, 64(4), 2021.  
+2. **Jung, R., et al.** *"Safe Systems Programming in Rust: The Promise and the Challenge"*. Communications of the ACM, 64(4), 2021.
    <https://doi.org/10.1145/3418295>
 
-3. **Gäher, L., et al.** *"RefinedRust: A Type System for High-Assurance Verification of Rust Programs"*. PLDI 2024.  
+3. **Gäher, L., et al.** *"RefinedRust: A Type System for High-Assurance Verification of Rust Programs"*. PLDI 2024.
    ACM, 2024.
 
-4. **Krebbers, R., Timany, A., & Birkedal, L.** *"Interactive Proofs in Higher-Order Concurrent Separation Logic"*. POPL 2017.  
+4. **Krebbers, R., Timany, A., & Birkedal, L.** *"Interactive Proofs in Higher-Order Concurrent Separation Logic"*. POPL 2017.
    (Iris 逻辑核心论文)
 
 5. **Jung, R.** *"Understanding and Evolving the Rust Programming Language"*. PhD Thesis, Saarland University, 2020.
 
-6. **Reynolds, J. C.** *"Separation Logic: A Logic for Shared Mutable Data Structures"*. LICS 2002.  
+6. **Reynolds, J. C.** *"Separation Logic: A Logic for Shared Mutable Data Structures"*. LICS 2002.
    IEEE, 2002.
 
-7. **Ralf Jung's Blog**. "The RustBelt Paper and What It Means for Rust".  
+7. **Ralf Jung's Blog**. "The RustBelt Paper and What It Means for Rust".
    <https://ralfj.de/blog/2017/01/20/the-rustbelt-paper.html>
 
-8. **Tree Borrows**. "Tree Borrows: A New Aliasing Model for Rust".  
+8. **Tree Borrows**. "Tree Borrows: A New Aliasing Model for Rust".
    <https://www.ralfj.de/blog/2023/06/02/tree-borrows.html>
 
 ---
 
 > 📌 **复查记录**
+>
 > - 2026-04-24: 初始创建，综合 POPL 2017 和 PLDI 2024 核心成果
 > - 下次复查: 2026-10-24 (跟踪 RefinedRust 工具链成熟度和新论文)

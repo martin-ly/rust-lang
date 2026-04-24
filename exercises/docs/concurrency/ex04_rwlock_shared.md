@@ -1,7 +1,7 @@
 # RwLock 共享状态
 
-**主题**: Concurrency  
-**难度**: Medium  
+**主题**: Concurrency
+**难度**: Medium
 **练习编号**: ex04_rwlock_shared
 
 ---

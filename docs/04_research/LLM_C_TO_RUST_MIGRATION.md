@@ -1,8 +1,8 @@
 # LLM 辅助 C to Rust 迁移工具评估报告
 
-> **最后更新日期**: 2026-04-24  
-> **预计下次复查日期**: 2026-10-24  
-> **评估范围**: C/C++ → Rust 自动/半自动迁移工具  
+> **最后更新日期**: 2026-04-24
+> **预计下次复查日期**: 2026-10-24
+> **评估范围**: C/C++ → Rust 自动/半自动迁移工具
 > **相关领域**: 软件工程、程序语言翻译、形式化验证、LLM 代码生成
 
 ---
@@ -285,9 +285,11 @@ Phase 4: 工程化
 ```
 
 相关上下文:
+
 - 此函数属于 [模块名] 模块
 - 输入参数约束: [约束条件]
 - 返回值语义: [语义说明]
+
 ```
 
 ---
@@ -363,35 +365,36 @@ c2rust transpile compile_commands.json
 
 ## 7. 参考文献
 
-1. **Immunant, Inc.** "C2Rust: Migrating C to Rust".  
+1. **Immunant, Inc.** "C2Rust: Migrating C to Rust".
    <https://c2rust.com/>
 
-2. **Le, K., Heo, J., et al.** *"In Rust We Trust: A Transpiler from Unsafe C to Safer Rust"*. ICSE 2022.  
+2. **Le, K., Heo, J., et al.** *"In Rust We Trust: A Transpiler from Unsafe C to Safer Rust"*. ICSE 2022.
    ACM, 2022. <https://doi.org/10.1145/3510003.3510149>
 
-3. **Liu, Y., et al.** *"SafeNet: Automated Safe Rust Code Generation from C via Neural Program Translation"*. STVR 2024.  
+3. **Liu, Y., et al.** *"SafeNet: Automated Safe Rust Code Generation from C via Neural Program Translation"*. STVR 2024.
    Wiley, 2024.
 
-4. **Chen, X., et al.** *"LLM-based C-to-Rust Translation: How Far Are We?"*. ICSE 2024.  
+4. **Chen, X., et al.** *"LLM-based C-to-Rust Translation: How Far Are We?"*. ICSE 2024.
    ACM, 2024.
 
-5. **Zhang, H., et al.** *"RustGen: Iterative LLM-based Rust Code Generation with Type-Guided Repair"*. ICSE 2025.  
+5. **Zhang, H., et al.** *"RustGen: Iterative LLM-based Rust Code Generation with Type-Guided Repair"*. ICSE 2025.
    ACM, 2025.
 
-6. **Wang, L., et al.** *"SafeTrans: Safety-Aware C-to-Rust Translation using LLMs"*. ICSE 2025.  
+6. **Wang, L., et al.** *"SafeTrans: Safety-Aware C-to-Rust Translation using LLMs"*. ICSE 2025.
    ACM, 2025.
 
-7. **Galois, Inc.** "SAW: Software Analysis Workbench".  
+7. **Galois, Inc.** "SAW: Software Analysis Workbench".
    <https://saw.galois.com/>
 
-8. **Kani Team (AWS)** "Kani Rust Verifier".  
+8. **Kani Team (AWS)** "Kani Rust Verifier".
    <https://github.com/model-checking/kani>
 
-9. **Miri Team**. "Miri: An interpreter for Rust's mid-level intermediate representation".  
+9. **Miri Team**. "Miri: An interpreter for Rust's mid-level intermediate representation".
    <https://github.com/rust-lang/miri>
 
 ---
 
 > 📌 **复查记录**
+>
 > - 2026-04-24: 初始创建，综合 ICSE 2022-2025 最新研究成果
 > - 下次复查: 2026-10-24 (LLM 技术迭代快，需半年复查)

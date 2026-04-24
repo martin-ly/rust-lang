@@ -3,14 +3,13 @@
 // 考点: &String 借用 vs String 所有权转移
 
 pub fn print_and_return_length(s: String) -> usize {
-    let len = get_length(&s);
+    let len = get_length(s);
     println!("长度是: {}", len);
-    // 这里需要返回 s 的长度，但 s 已经被借用了
-    // 提示: get_length 接收 &String，所以 s 应该仍然可用
+    // 错误: s 已经被 move 进 get_length，这里不能再使用
     s.len()
 }
 
-fn get_length(s: &String) -> usize {
+fn get_length(s: String) -> usize {
     s.len()
 }
 
