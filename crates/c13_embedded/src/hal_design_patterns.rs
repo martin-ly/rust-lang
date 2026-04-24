@@ -149,6 +149,11 @@ pub struct ZeroCostAbstraction;
 
 impl ZeroCostAbstraction {
     /// 内联优化的 GPIO 设置函数
+    ///
+    /// # Safety
+    ///
+    /// `gpio_base` 必须是有效的、已映射的 GPIO 寄存器基地址。
+    /// 调用者负责确保内存安全。
     #[inline(always)]
     pub unsafe fn set_pin_optimized(gpio_base: *mut u32, pin: u8, high: bool) {
         let offset = if high { 0 } else { 16 };

@@ -178,7 +178,7 @@ pub mod network_jit_optimizations {
     pub fn calculate_network_stats(packet_sizes: &[usize]) -> (usize, usize, usize) {
         let sum: usize = packet_sizes.iter().sum();
         let count = packet_sizes.len();
-        let avg = if count > 0 { sum / count } else { 0 };
+        let avg = sum.checked_div(count).unwrap_or(0);
 
         (sum, count, avg)
     }

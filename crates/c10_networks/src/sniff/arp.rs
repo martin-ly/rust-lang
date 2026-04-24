@@ -9,7 +9,7 @@ use pnet_datalink::{self as datalink, Channel, Config, NetworkInterface};
 use pnet_packet::Packet;
 use pnet_packet::arp::{ArpHardwareTypes, ArpOperations, ArpPacket};
 use pnet_packet::ethernet::{EtherTypes, EthernetPacket};
-use std::net::{IpAddr, Ipv4Addr};
+use std::net::IpAddr;
 use std::time::SystemTime;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
@@ -62,8 +62,10 @@ impl ArpSniffer {
         let iface = Self::pick_interface(cfg.iface_name.as_deref())
             .ok_or_else(|| NetworkError::Configuration("no suitable interface".into()))?;
 
-        let mut config = Config::default();
-        config.promiscuous = cfg.promiscuous;
+        let config = Config {
+            promiscuous: cfg.promiscuous,
+            ..Default::default()
+        };
 
         let (_tx, mut rx) = match datalink::channel(&iface, config) {
             Ok(Channel::Ethernet(tx, rx)) => (tx, rx),
@@ -101,8 +103,8 @@ fn parse_arp_frame(frame: &[u8]) -> Option<ArpRecord> {
 
     let sender_mac = format!("{}", eth.get_source());
     let target_mac = Some(format!("{}", eth.get_destination()));
-    let sender_ip = IpAddr::V4(Ipv4Addr::from(arp.get_sender_proto_addr()));
-    let target_ip = IpAddr::V4(Ipv4Addr::from(arp.get_target_proto_addr()));
+    let sender_ip = IpAddr::V4(arp.get_sender_proto_addr());
+    let target_ip = IpAddr::V4(arp.get_target_proto_addr());
     let op = match arp.get_operation() {
         ArpOperations::Request => "request",
         ArpOperations::Reply => "reply",

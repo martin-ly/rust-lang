@@ -13,7 +13,7 @@ use pnet_packet::ethernet::{EtherTypes, EthernetPacket};
 use pnet_packet::ip::IpNextHeaderProtocols;
 use pnet_packet::ipv4::Ipv4Packet;
 use pnet_packet::tcp::TcpPacket;
-use std::net::{IpAddr, Ipv4Addr};
+use std::net::IpAddr;
 use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::mpsc;
 
@@ -40,8 +40,10 @@ pub async fn arp_stream(
     let iface = super::arp::ArpSniffer::pick_interface(cfg.iface_name.as_deref())
         .ok_or_else(|| NetworkError::Configuration("no suitable interface".into()))?;
 
-    let mut dl_cfg = Config::default();
-    dl_cfg.promiscuous = cfg.promiscuous;
+    let dl_cfg = Config {
+        promiscuous: cfg.promiscuous,
+        ..Default::default()
+    };
 
     let (tx_dl, mut rx_dl) = match datalink::channel(&iface, dl_cfg) {
         Ok(Channel::Ethernet(tx, rx)) => (tx, rx),
@@ -52,10 +54,10 @@ pub async fn arp_stream(
     tokio::task::spawn_blocking(move || {
         let _ = tx_dl; // 保持发送端在作用域内
         while let Ok(frame) = rx_dl.next() {
-            if let Some(rec) = parse_arp_frame(frame) {
-                if tx.blocking_send(rec).is_err() {
-                    break;
-                }
+            if let Some(rec) = parse_arp_frame(frame)
+                && tx.blocking_send(rec).is_err()
+            {
+                break;
             }
         }
     });
@@ -74,8 +76,8 @@ fn parse_arp_frame(frame: &[u8]) -> Option<ArpRecord> {
     }
     let sender_mac = format!("{}", eth.get_source());
     let target_mac = Some(format!("{}", eth.get_destination()));
-    let sender_ip = IpAddr::V4(Ipv4Addr::from(arp.get_sender_proto_addr()));
-    let target_ip = IpAddr::V4(Ipv4Addr::from(arp.get_target_proto_addr()));
+    let sender_ip = IpAddr::V4(arp.get_sender_proto_addr());
+    let target_ip = IpAddr::V4(arp.get_target_proto_addr());
     let op = match arp.get_operation() {
         ArpOperations::Request => "request",
         ArpOperations::Reply => "reply",
@@ -101,8 +103,10 @@ pub async fn tcp_stats_stream(
     let (tx, rx) = mpsc::channel(channel_size.max(1));
     let iface = super::arp::ArpSniffer::pick_interface(iface_name)
         .ok_or_else(|| NetworkError::Configuration("no suitable interface".into()))?;
-    let mut cfg = Config::default();
-    cfg.promiscuous = true;
+    let cfg = Config {
+        promiscuous: true,
+        ..Default::default()
+    };
 
     let (_tx_dl, mut rx_dl) = match datalink::channel(&iface, cfg) {
         Ok(Channel::Ethernet(tx, rx)) => (tx, rx),
@@ -115,18 +119,15 @@ pub async fn tcp_stats_stream(
         let mut last_tick = Instant::now();
         loop {
             match rx_dl.next() {
-                Ok(frame) if let Some(eth) = EthernetPacket::new(frame) => {
-                    if eth.get_ethertype() == EtherTypes::Ipv4 {
-                        if let Some(ip) = Ipv4Packet::new(eth.payload()) {
-                            if ip.get_next_level_protocol() == IpNextHeaderProtocols::Tcp {
-                                if let Some(tcp) = TcpPacket::new(ip.payload()) {
-                                    let len = tcp.packet().len() as u64;
-                                    total.packets += 1;
-                                    total.bytes += len;
-                                }
-                            }
-                        }
-                    }
+                Ok(frame) if let Some(eth) = EthernetPacket::new(frame)
+                    && eth.get_ethertype() == EtherTypes::Ipv4
+                    && let Some(ip) = Ipv4Packet::new(eth.payload())
+                    && ip.get_next_level_protocol() == IpNextHeaderProtocols::Tcp
+                    && let Some(tcp) = TcpPacket::new(ip.payload()) =>
+                {
+                    let len = tcp.packet().len() as u64;
+                    total.packets += 1;
+                    total.bytes += len;
                 }
                 Ok(_) => {}
                 Err(_) => { /* ignore */ }

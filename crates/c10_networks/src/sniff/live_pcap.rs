@@ -13,7 +13,7 @@ use pnet_packet::ethernet::{EtherTypes, EthernetPacket};
 use pnet_packet::ip::IpNextHeaderProtocols;
 use pnet_packet::ipv4::Ipv4Packet;
 use pnet_packet::tcp::TcpPacket;
-use std::net::{IpAddr, Ipv4Addr};
+use std::net::IpAddr;
 use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::mpsc;
 
@@ -59,28 +59,26 @@ pub async fn arp_stream_bpf(
         };
         let _ = cap.filter(&filter, true);
         while let Ok(p) = cap.next_packet() {
-            if let Some(eth) = EthernetPacket::new(p.data) {
-                if eth.get_ethertype() == EtherTypes::Arp {
-                    if let Some(arp) = ArpPacket::new(eth.payload()) {
-                        if arp.get_hardware_type() == ArpHardwareTypes::Ethernet {
-                            let rec = ArpRecord {
-                                sender_mac: format!("{}", eth.get_source()),
-                                target_mac: Some(format!("{}", eth.get_destination())),
-                                sender_ip: IpAddr::V4(Ipv4Addr::from(arp.get_sender_proto_addr())),
-                                target_ip: IpAddr::V4(Ipv4Addr::from(arp.get_target_proto_addr())),
-                                op: match arp.get_operation() {
-                                    ArpOperations::Request => "request",
-                                    ArpOperations::Reply => "reply",
-                                    _ => "other",
-                                }
-                                .to_string(),
-                                at: SystemTime::now(),
-                            };
-                            if tx.blocking_send(rec).is_err() {
-                                break;
-                            }
-                        }
+            if let Some(eth) = EthernetPacket::new(p.data)
+                && eth.get_ethertype() == EtherTypes::Arp
+                && let Some(arp) = ArpPacket::new(eth.payload())
+                && arp.get_hardware_type() == ArpHardwareTypes::Ethernet
+            {
+                let rec = ArpRecord {
+                    sender_mac: format!("{}", eth.get_source()),
+                    target_mac: Some(format!("{}", eth.get_destination())),
+                    sender_ip: IpAddr::V4(arp.get_sender_proto_addr()),
+                    target_ip: IpAddr::V4(arp.get_target_proto_addr()),
+                    op: match arp.get_operation() {
+                        ArpOperations::Request => "request",
+                        ArpOperations::Reply => "reply",
+                        _ => "other",
                     }
+                    .to_string(),
+                    at: SystemTime::now(),
+                };
+                if tx.blocking_send(rec).is_err() {
+                    break;
                 }
             }
         }
@@ -107,17 +105,14 @@ pub async fn tcp_stats_stream_bpf(
         let mut last = Instant::now();
         loop {
             match cap.next_packet() {
-                Ok(p) if let Some(eth) = EthernetPacket::new(p.data) => {
-                    if eth.get_ethertype() == EtherTypes::Ipv4 {
-                        if let Some(ip) = Ipv4Packet::new(eth.payload()) {
-                            if ip.get_next_level_protocol() == IpNextHeaderProtocols::Tcp {
-                                if let Some(tcp) = TcpPacket::new(ip.payload()) {
-                                    stats.packets += 1;
-                                    stats.bytes += tcp.packet().len() as u64;
-                                }
-                            }
-                        }
-                    }
+                Ok(p) if let Some(eth) = EthernetPacket::new(p.data)
+                    && eth.get_ethertype() == EtherTypes::Ipv4
+                    && let Some(ip) = Ipv4Packet::new(eth.payload())
+                    && ip.get_next_level_protocol() == IpNextHeaderProtocols::Tcp
+                    && let Some(tcp) = TcpPacket::new(ip.payload()) =>
+                {
+                    stats.packets += 1;
+                    stats.bytes += tcp.packet().len() as u64;
                 }
                 Ok(_) => {}
                 Err(_) => {}
