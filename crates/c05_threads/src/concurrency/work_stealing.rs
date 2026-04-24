@@ -12,6 +12,7 @@ use crossbeam_deque::{
 };
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
+#[cfg(feature = "work_stealing_examples")]
 use std::thread;
 use std::time::{Duration, Instant};
 

@@ -11,6 +11,7 @@
 #[macro_export]
 macro_rules! set {
     ($($item:expr),* $(,)?) => {{
+        #[allow(unused_mut)]
         let mut s = ::std::collections::HashSet::new();
         $(s.insert($item);)*
         s

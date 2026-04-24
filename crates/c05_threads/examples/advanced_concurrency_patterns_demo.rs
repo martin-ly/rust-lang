@@ -235,7 +235,7 @@ impl FanOutFanIn {
             println!("扇入聚合器启动");
 
             let mut results = Vec::new();
-            let active_workers = num_workers;
+            let _active_workers = num_workers;
 
             loop {
                 for (_i, receiver) in worker_receivers.iter().enumerate() {
@@ -253,8 +253,6 @@ impl FanOutFanIn {
                 }
                 thread::sleep(Duration::from_millis(1));
             }
-
-            println!("扇入聚合器停止");
         });
 
         Self {

@@ -96,7 +96,7 @@ pub mod fallback {
         for i in 0..chunks {
             let va = unsafe { _mm256_loadu_ps(a.as_ptr().add(i * 8)) };
             let vb = unsafe { _mm256_loadu_ps(b.as_ptr().add(i * 8)) };
-            let vr = unsafe { _mm256_add_ps(va, vb) };
+            let vr = _mm256_add_ps(va, vb);
             unsafe { _mm256_storeu_ps(result.as_mut_ptr().add(i * 8), vr) };
         }
         for i in (chunks * 8)..a.len() {
@@ -117,7 +117,7 @@ pub mod fallback {
         for i in 0..chunks {
             let va = unsafe { _mm_loadu_ps(a.as_ptr().add(i * 4)) };
             let vb = unsafe { _mm_loadu_ps(b.as_ptr().add(i * 4)) };
-            let vr = unsafe { _mm_add_ps(va, vb) };
+            let vr = _mm_add_ps(va, vb);
             unsafe { _mm_storeu_ps(result.as_mut_ptr().add(i * 4), vr) };
         }
         for i in (chunks * 4)..a.len() {

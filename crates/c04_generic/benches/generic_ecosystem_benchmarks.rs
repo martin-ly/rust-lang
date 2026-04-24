@@ -13,14 +13,14 @@ fn bench_parallel_vs_serial_sum(c: &mut Criterion) {
     c.bench_function("serial_square_sum", |b| {
         b.iter(|| {
             let result: i32 = data.iter().map(|x| x * x).sum();
-            std::hint::black_box(result);
+            let _ = std::hint::black_box(result);
         });
     });
 
     c.bench_function("parallel_square_sum", |b| {
         b.iter(|| {
             let result = parallel_square_sum(&data);
-            std::hint::black_box(result);
+            let _ = std::hint::black_box(result);
         });
     });
 }
@@ -34,7 +34,7 @@ fn bench_itertools_pairs(c: &mut Criterion) {
     c.bench_function("sum_of_pairs_itertools", |b| {
         b.iter(|| {
             let result = sum_of_pairs(&data);
-            std::hint::black_box(result);
+            let _ = std::hint::black_box(result);
         });
     });
 }
@@ -73,14 +73,14 @@ fn bench_error_handling_overhead(c: &mut Criterion) {
     c.bench_function("error_handling_success", |b| {
         b.iter(|| {
             let result = find_name(&names, "charlie");
-            std::hint::black_box(result);
+            let _ = std::hint::black_box(result);
         });
     });
 
     c.bench_function("error_handling_failure", |b| {
         b.iter(|| {
             let result = find_name(&names, "zack");
-            std::hint::black_box(result);
+            let _ = std::hint::black_box(result);
         });
     });
 }

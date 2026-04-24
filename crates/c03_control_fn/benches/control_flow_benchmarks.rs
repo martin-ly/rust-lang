@@ -9,14 +9,21 @@ use criterion::{Criterion, criterion_group, criterion_main};
 fn bench_function_composition(c: &mut Criterion) {
     use c03_control_fn::compose_functions;
 
+    fn add_one(x: i32) -> i32 {
+        x + 1
+    }
+    fn double(x: i32) -> i32 {
+        x * 2
+    }
+    fn sub_three(x: i32) -> i32 {
+        x - 3
+    }
+
     c.bench_function("function_composition", |b| {
+        let composed = compose_functions(add_one, double);
         b.iter(|| {
-            let result = compose_functions(
-                |x: i32| x + 1,
-                |x: i32| x * 2,
-                |x: i32| x - 3,
-                10,
-            );
+            let result = composed(10);
+            let result = sub_three(result);
             std::hint::black_box(result);
         });
     });
@@ -31,14 +38,14 @@ fn bench_branch_prediction(c: &mut Criterion) {
 
     c.bench_function("branch_predictor_friendly_sorted", |b| {
         b.iter(|| {
-            let count = branch_predictor_friendly(&sorted_data);
+            let count: i32 = sorted_data.iter().map(|&x| branch_predictor_friendly(x)).sum();
             std::hint::black_box(count);
         });
     });
 
     c.bench_function("branch_predictor_friendly_random", |b| {
         b.iter(|| {
-            let count = branch_predictor_friendly(&random_data);
+            let count: i32 = random_data.iter().map(|&x| branch_predictor_friendly(x)).sum();
             std::hint::black_box(count);
         });
     });
@@ -52,7 +59,7 @@ fn bench_branchless_computation(c: &mut Criterion) {
 
     c.bench_function("branchless_computation", |b| {
         b.iter(|| {
-            let result: Vec<i32> = data.iter().map(|&x| branchless_computation(x)).collect();
+            let result = branchless_computation(&data);
             std::hint::black_box(result);
         });
     });
@@ -62,33 +69,32 @@ fn bench_branchless_computation(c: &mut Criterion) {
 fn bench_vectorizable_loop(c: &mut Criterion) {
     use c03_control_fn::vectorizable_loop;
 
-    let data: Vec<f64> = (0..1000).map(|i| i as f64).collect();
+    let mut data: Vec<f64> = (0..1000).map(|i| i as f64).collect();
 
     c.bench_function("vectorizable_loop", |b| {
         b.iter(|| {
-            let result = vectorizable_loop(&data);
-            std::hint::black_box(result);
+            vectorizable_loop(&mut data, 2.0);
+            std::hint::black_box(&data);
         });
     });
 }
 
 /// 基准测试：状态机解析器
 fn bench_state_machine_parser(c: &mut Criterion) {
-    use c03_control_fn::{StateMachineParser, Token};
+    use c03_control_fn::StateMachineParser;
 
-    let tokens: Vec<Token> = (0..100)
+    let states: Vec<&str> = (0..100)
         .map(|i| match i % 4 {
-            0 => Token::Number(i as i64),
-            1 => Token::Plus,
-            2 => Token::Number(i as i64),
-            _ => Token::Minus,
+            0 => "idle",
+            1 => "running",
+            2 => "stopped",
+            _ => "error",
         })
         .collect();
 
     c.bench_function("state_machine_parser", |b| {
         b.iter(|| {
-            let mut parser = StateMachineParser::new();
-            let result = parser.parse(&tokens);
+            let result = StateMachineParser::detect_transitions(&states);
             std::hint::black_box(result);
         });
     });
@@ -98,9 +104,16 @@ fn bench_state_machine_parser(c: &mut Criterion) {
 fn bench_conditional_execute(c: &mut Criterion) {
     use c03_control_fn::conditional_execute;
 
+    fn if_true() -> i32 {
+        42 * 2
+    }
+    fn if_false() -> i32 {
+        42 + 1
+    }
+
     c.bench_function("conditional_execute", |b| {
         b.iter(|| {
-            let result = conditional_execute(42, |x| x > 10, |x| x * 2, |x| x + 1);
+            let result = conditional_execute(true, if_true, if_false);
             std::hint::black_box(result);
         });
     });

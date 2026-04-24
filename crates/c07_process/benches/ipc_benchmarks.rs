@@ -7,14 +7,17 @@ use c07_process::{
 };
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::collections::HashMap;
+use std::time::Duration;
 
 /// 基准测试：IPC 消息创建与序列化
 fn bench_ipc_message_creation(c: &mut Criterion) {
     c.bench_function("ipc_message_creation", |b| {
         b.iter(|| {
             let msg = Message::new(
+                1u64,
                 "benchmark_channel",
                 b"Hello, IPC Benchmark!".to_vec(),
+                42u32,
             );
             std::hint::black_box(msg);
         });
@@ -50,8 +53,10 @@ fn bench_ipc_manager_init(c: &mut Criterion) {
         b.iter(|| {
             let config = IpcConfig {
                 protocol: IpcProtocol::MessageQueue,
+                timeout: Duration::from_millis(1000),
+                retry_count: 3,
                 buffer_size: 4096,
-                timeout_ms: 1000,
+                encrypted: false,
             };
             let manager = IpcManager::new(config);
             std::hint::black_box(manager);

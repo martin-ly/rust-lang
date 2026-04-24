@@ -2,7 +2,7 @@
 //!
 //! 测试项目中公共工具函数的性能，包括错误处理、类型操作和工具函数。
 
-use common::{CommonError, ErrorCode, RustLangError};
+use common::CommonError;
 use criterion::{Criterion, criterion_group, criterion_main};
 
 /// 基准测试：错误创建与传播性能
@@ -10,10 +10,7 @@ use criterion::{Criterion, criterion_group, criterion_main};
 fn bench_error_creation(c: &mut Criterion) {
     c.bench_function("error_creation", |b| {
         b.iter(|| {
-            let err = CommonError::new(
-                ErrorCode::ValidationFailed,
-                "验证失败：输入数据格式不正确",
-            );
+            let err = CommonError::Validation("验证失败：输入数据格式不正确".to_string());
             std::hint::black_box(err);
         });
     });
@@ -23,17 +20,9 @@ fn bench_error_creation(c: &mut Criterion) {
 fn bench_error_chain(c: &mut Criterion) {
     c.bench_function("error_chain_building", |b| {
         b.iter(|| {
-            let root = CommonError::new(ErrorCode::IoError, "文件读取失败");
-            let mid = CommonError::with_cause(
-                ErrorCode::ValidationFailed,
-                "数据解析失败",
-                Box::new(root),
-            );
-            let top = CommonError::with_cause(
-                ErrorCode::InternalError,
-                "请求处理失败",
-                Box::new(mid),
-            );
+            let root = CommonError::Io("文件读取失败".to_string());
+            let mid = CommonError::Validation(format!("数据解析失败: {}", root));
+            let top = CommonError::Other(format!("请求处理失败: {}", mid));
             std::hint::black_box(top);
         });
     });
@@ -88,11 +77,10 @@ fn bench_version_operations(c: &mut Criterion) {
 
     c.bench_function("version_parse_and_compare", |b| {
         b.iter(|| {
-            let v1 = Version::parse("1.2.3").unwrap();
-            let v2 = Version::parse("1.2.4").unwrap();
-            let _cmp = v1 < v2;
-            let _eq = v1 == Version::parse("1.2.3").unwrap();
-            std::hint::black_box((_cmp, _eq));
+            let v1 = Version::new(1, 2, 3);
+            let _v2 = Version::new(1, 2, 4);
+            let _eq = v1 == Version::new(1, 2, 3);
+            std::hint::black_box(_eq);
         });
     });
 }
@@ -104,7 +92,7 @@ fn bench_pagination_creation(c: &mut Criterion) {
     c.bench_function("pagination_creation", |b| {
         b.iter(|| {
             let items: Vec<i32> = (0..100).collect();
-            let paginated = Paginated::new(items, Pagination::new(1, 20));
+            let paginated = Paginated::new(items, 1000, Pagination::new(1, 20));
             std::hint::black_box(paginated);
         });
     });
