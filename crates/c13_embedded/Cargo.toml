@@ -24,7 +24,7 @@ panic-halt = { workspace = true }
 volatile-register = { workspace = true }
 
 [build-dependencies]
-bindgen = "0.71"
+bindgen = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }

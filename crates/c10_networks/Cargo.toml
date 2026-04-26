@@ -51,6 +51,7 @@ pnet_macros_support = { version = "0.35", optional = true }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 # io_uring 仅 Linux 可用
+# 2026-04-27: tokio-uring 0.5.0 (最新版) 锁定 io-uring ^0.6.0，无法升级至 0.7.x
 tokio-uring = { version = "0.5", optional = true }
 io-uring = { version = "0.6", optional = true }
 

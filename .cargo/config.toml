@@ -57,7 +57,9 @@ git-fetch-with-cli = true
 enabled = true
 
 # ============ Profile 优化 ============
-# 这些配置会覆盖 Cargo.toml 中的同名配置
+# 注意: 以下 profile 仅补充 Cargo.toml 中未定义或需要本地覆盖的配置。
+# [profile.release] 已统一由 Cargo.toml 管理，如需本地快速发布构建请使用:
+#   cargo build --profile release-fast
 
 [profile.dev]
 # 增量编译 - 必须启用
@@ -88,21 +90,6 @@ debug = 0
 codegen-units = 1024
 panic = "abort"
 incremental = true
-
-[profile.release]
-# 发布构建优化
-opt-level = 3
-lto = "thin"
-codegen-units = 16
-panic = "abort"
-strip = "symbols"
-incremental = false
-# Rust 1.96: packed分割调试信息用于发布构建
-split-debuginfo = "packed"
-
-[profile.release.build-override]
-opt-level = 2
-codegen-units = 16
 
 [profile.test]
 # 测试优化 - 平衡速度和调试

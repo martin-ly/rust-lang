@@ -109,6 +109,11 @@ codegen-units = 4
 opt-level = 2
 codegen-units = 16
 
+# ========== release 构建依赖优化 ==========
+[profile.release.build-override]
+opt-level = 2
+codegen-units = 16
+
 # ========== 新增: 快速发布 Profile ==========
 # 使用: cargo build --profile release-fast
 # 适用于: 需要快速编译但仍需要优化的场景
@@ -520,6 +525,10 @@ iced = "0.14.0"
 # glommio: 线程每核心异步运行时，支持高并行异步应用程序
 glommio = "0.9.0"
 
+# bindgen: C/C++ 绑定自动生成工具
+# 2026-04-27: 升级至 0.72.1，统一由工作区管理
+bindgen = "0.72.1"
+
 # 2025-09-27: 安全漏洞修复
 # 替换未维护和有安全漏洞的依赖
 # ahash: 高性能哈希算法实现，替代fxhash (未维护)
@@ -557,7 +566,8 @@ nix = "0.31.2"
 # 传递依赖显式声明 - 用于版本控制和统一管理
 
 # clap 系列 - 命令行参数解析
-# 注意: 被 tokio-console 0.1.14 传递依赖锁定在 4.5.x，无法升级至 4.6.x
+# 2026-04-27: clap 4.6.x 可用，但 tokio-console 0.1.14 (最新版) 和 criterion 0.8.2 (最新版)
+#       传递依赖锁定在 4.5.x，无法升级
 clap = { version = "4.5.61", default-features = false }
 clap_builder = { version = "4.5.61", default-features = false }
 clap_complete = "4.5.67"
@@ -582,19 +592,19 @@ crypto-mac = "=0.10.0"
 # 注意: 存在 universal-hash 0.4.0 和 0.5.1 多个版本
 # 2026-04-08: 保持 0.4.0 以维持兼容性
 universal-hash = "=0.4.0"
-# 2026-03-28: generic-array 0.14.9 有版本冲突，保持 0.14.7
+# 2026-04-27: 0.14.9 可用，但 crypto-common 0.1.7 (digest/aead 等传递依赖)
+#       精确锁定 generic-array = "=0.14.7"，无法升级。需等 crypto-common 新版解锁
 # 注: 此为传递依赖，无子 crate 直接引用，workspace 版本仅作记录
-generic-array = "=0.14.7"
+generic-array = "0.14.9"
 
 # 解析器组合子库
 # 2026-04-18: 升级至 8.0.0
 nom = "8.0.0"
 
 # 其他传递依赖
-# 2026-04-18: 解锁至 0.8.6
-# 被 axum 0.8.9 传递依赖锁定在 0.8.4
+# 2026-04-27: matchit 0.8.6 可用，但 axum 0.8.9 精确锁定 =0.8.4，无法升级
 matchit = "0.8.4"
-# 被 ratatui 0.29.0 (tokio-console 的传递依赖) 锁定在 0.2.0
+# 2026-04-27: unicode-width 0.2.2 可用，但 ratatui 0.29.0 (tokio-console 传递依赖) 锁定在 0.2.0
 unicode-width = "0.2.0"
 
 # 依赖版本约束 - 在工作区依赖中统一版本 end
@@ -603,10 +613,10 @@ unicode-width = "0.2.0"
 # cortex-m: ARM Cortex-M 处理器核心外设访问库
 # cortex-m-rt: Cortex-M 运行时（启动代码、向量表）
 # panic-halt: 最简单的 panic handler（进入无限循环）
-# volatile-register: 类型安全的 volatile 内存映射寄存器访问
+# 2026-04-27: 升级至 1.0.0 (stable)
 cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
-panic-halt = "0.2.0"
+panic-halt = "1.0.0"
 volatile-register = "0.2.2"
 
 # 工作区特性标志配置 - 优化编译时间和依赖管理
@@ -619,13 +629,13 @@ volatile-register = "0.2.2"
 # 2026-04-24: 以下依赖暂时锁定，需在条件成熟时评估升级
 # - libp2p 0.54.1 -> 0.56+: 需同步升级 hickory-resolver 0.25 -> 0.26，c10_networks DNS 模块需适配
 # - sea-orm 2.0.0-rc.18 -> 2.0.0 stable: 等待 SeaORM 2.0 正式版发布
-# - bincode =2.0.1: 保持锁定，等待 3.0 正式版（2.0.1 已被标记为 unmaintained）
+# - bincode =2.0.1: 保持锁定，3.0.0 已发布但 API 不兼容，需代码适配后升级
 # - burn / burn-ndarray: 保持禁用，等待版本兼容问题解决
-# - dashmap 6.1.0 (workspace) vs 7.0.0-rc2 (c06_async): c06_async 独立使用 RC 版本，需评估统一
+# - dashmap: c06_async 已统一使用 workspace 版本 6.1.0
 # - yamux 0.12.1 (libp2p 0.54.1 传递依赖) -> 0.13.10: 随 libp2p 升级解锁
 # - rand 0.8.6 (libp2p 0.54.1 传递依赖) -> 0.9.4: 随 libp2p 升级解锁
 # - getrandom 0.2.17 (libp2p 传递依赖) -> 0.3.4: 随 libp2p 升级解锁
-# - backoff 0.4.0 (c06_async): 已标记为 unmaintained (RUSTSEC-2025-0012)，需替换或移除
+# - backoff 0.4.0 (c06_async): 已标记为 unmaintained (RUSTSEC-2025-0012)，建议替换为 backon 或 tokio-retry
 # - rustls feature "ring": 0.23.39 中 ring 特性已废弃，未来版本将移除，需迁移到 aws-lc-rs 或默认后端
 
 [workspace.lints.rust]

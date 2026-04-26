@@ -41,7 +41,9 @@ bytes = { workspace = true }
 async-io = "2.6.0"
 async-channel = "2.5.0"
 redis = { workspace = true, features = ["tokio-comp", "connection-manager"] }
-dashmap = "7.0.0-rc2"
+dashmap = { workspace = true }
+# 2026-04-27: backoff 0.4.0 已标记为 unmaintained (RUSTSEC-2025-0012)
+#       建议未来替换为 backon 或 tokio-retry
 backoff = { version = "0.4.0", features = ["tokio"] }
 tokio-console = { workspace = true }
 crossterm = { workspace = true, features = ["event-stream"] }
