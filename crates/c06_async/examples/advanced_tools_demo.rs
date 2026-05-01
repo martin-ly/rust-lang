@@ -490,7 +490,7 @@ mod mock_tools {
             };
 
             for subscriber in subscribers {
-                if let Err(_) = subscriber.send(event.clone()) {
+                if subscriber.send(event.clone()).is_err() {
                     // 订阅者已断开连接
                 }
             }

@@ -438,7 +438,7 @@ impl PerformanceDemo {
                 batch.push(format!("data_{}", i));
 
                 if batch.len() >= 10 {
-                    let batch_data = batch.drain(..).collect::<Vec<_>>();
+                    let batch_data = std::mem::take(&mut batch);
                     if tx.send(batch_data).await.is_err() {
                         break;
                     }

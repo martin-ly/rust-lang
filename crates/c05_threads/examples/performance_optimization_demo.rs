@@ -13,10 +13,8 @@
 //! - 工作窃取性能分析
 use rayon::prelude::*;
 use std::collections::VecDeque;
-use std::sync::{
-    Arc, Mutex,
-    atomic::{AtomicUsize, Ordering},
-};
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -93,6 +91,12 @@ pub struct LockFreeQueueBenchmark {
     queue: Arc<crossbeam_queue::SegQueue<usize>>,
 }
 
+impl Default for LockFreeQueueBenchmark {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl LockFreeQueueBenchmark {
     pub fn new() -> Self {
         Self {
@@ -136,6 +140,12 @@ impl LockFreeQueueBenchmark {
 /// 有锁队列性能测试
 pub struct LockedQueueBenchmark {
     queue: Arc<Mutex<VecDeque<usize>>>,
+}
+
+impl Default for LockedQueueBenchmark {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl LockedQueueBenchmark {

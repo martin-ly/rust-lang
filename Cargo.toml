@@ -174,7 +174,7 @@ common = { path = "crates/common", default-features = false }
 # 2025-12-11: 网络和 HTTP 相关最新稳定版本
 # reqwest: 高级HTTP客户端库，支持异步请求和JSON序列化
 # 注意: reqwest 0.12.x 使用 "rustls-tls" 特性，0.13.x 使用 "rustls" 特性
-reqwest = { version = "0.13.2", features = ["json", "rustls"] }
+reqwest = { version = "0.13.3", features = ["json", "rustls"] }
 # hyper: 底层HTTP库，提供高性能的HTTP/1.1和HTTP/2支持
 hyper = { version = "1.9.0", features = ["full"] }
 # hyper-util: hyper的实用工具库，提供连接池和服务器功能
@@ -290,7 +290,7 @@ protobuf = "4.33.2-release" # 修复递归崩溃漏洞
 # 2025-12-11: TLS 和加密最新稳定版本
 # rustls: 现代TLS库，用Rust编写，提供高性能和安全性
 # 2026-04-24: 0.23.38 -> 0.23.39 (cargo update，Rust 1.96.0 compatible)
-rustls = { version = "0.23.39", features = ["ring"] }
+rustls = "0.23.40"
 # rustls-webpki: rustls的WebPKI支持
 rustls-webpki = "0.103.13"
 # rustls-pemfile: rustls的PEM文件解析支持
@@ -544,11 +544,11 @@ proc-macro-error2 = "2.0.1"
 is-terminal = "0.4.17"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0 - 版本 0.2+ (字母索引)
 # 2026-04-24: Rust 1.96.0 同步更新
-wasm-bindgen = "0.2.118"
+wasm-bindgen = "0.2.120"
 # js-sys: WebAssembly 与 JavaScript 的绑定
-js-sys = "0.3.94"
+js-sys = "0.3.97"
 # wasm-bindgen-futures: WebAssembly 异步 Future 支持
-wasm-bindgen-futures = "0.4.67"
+wasm-bindgen-futures = "0.4.70"
 # wasm-bindgen-test: WebAssembly 测试框架
 wasm-bindgen-test = "0.3.67"
 # nix: 系统调用安全封装库
@@ -636,7 +636,7 @@ volatile-register = "0.2.2"
 # - rand 0.8.6 (libp2p 0.54.1 传递依赖) -> 0.9.4: 随 libp2p 升级解锁
 # - getrandom 0.2.17 (libp2p 传递依赖) -> 0.3.4: 随 libp2p 升级解锁
 # - backoff 0.4.0 (c06_async): 已标记为 unmaintained (RUSTSEC-2025-0012)，建议替换为 backon 或 tokio-retry
-# - rustls feature "ring": 0.23.39 中 ring 特性已废弃，未来版本将移除，需迁移到 aws-lc-rs 或默认后端
+# - rustls feature "ring": 0.23.40 中 ring 特性已废弃，未来版本将移除，需迁移到 aws-lc-rs 或默认后端
 
 [workspace.lints.rust]
 unsafe_code = "forbid"

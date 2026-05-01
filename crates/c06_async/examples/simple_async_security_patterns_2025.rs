@@ -7,7 +7,6 @@ use tracing::{error, info, warn};
 
 /// 2025年简化异步安全编程模式演示
 /// 展示实用的异步安全编程最佳实践
-
 /// 1. 简化异步访问控制
 #[derive(Debug, Clone, PartialEq)]
 pub enum Permission {
@@ -25,6 +24,12 @@ pub struct User {
 pub struct SimpleAsyncAccessControl {
     users: Arc<RwLock<HashMap<String, User>>>,
     audit_log: Arc<RwLock<Vec<String>>>,
+}
+
+impl Default for SimpleAsyncAccessControl {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SimpleAsyncAccessControl {
@@ -72,6 +77,12 @@ impl SimpleAsyncAccessControl {
 pub struct SimpleAsyncEncryption {
     key: Arc<RwLock<String>>,
     operation_count: Arc<RwLock<u32>>,
+}
+
+impl Default for SimpleAsyncEncryption {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SimpleAsyncEncryption {
@@ -133,6 +144,12 @@ pub struct SimpleAsyncValidator {
     validation_history: Arc<RwLock<Vec<String>>>,
 }
 
+impl Default for SimpleAsyncValidator {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SimpleAsyncValidator {
     pub fn new() -> Self {
         Self {
@@ -158,13 +175,13 @@ impl SimpleAsyncValidator {
                     }
 
                     // 检查最大长度
-                    if let Some(max_len) = rule.max_length {
-                        if value.len() > max_len {
-                            let error =
-                                format!("字段 '{}' 长度超过限制 ({} 字符)", rule.field, max_len);
-                            self.validation_history.write().await.push(error.clone());
-                            return Err(anyhow::anyhow!(error));
-                        }
+                    if let Some(max_len) = rule.max_length
+                        && value.len() > max_len
+                    {
+                        let error =
+                            format!("字段 '{}' 长度超过限制 ({} 字符)", rule.field, max_len);
+                        self.validation_history.write().await.push(error.clone());
+                        return Err(anyhow::anyhow!(error));
                     }
 
                     // 简单的邮箱格式检查
@@ -249,12 +266,11 @@ impl SimpleAsyncSessionManager {
             }
 
             // 检查IP地址（如果提供）
-            if let Some(ref current_ip) = ip_address {
-                if let Some(ref session_ip) = session.ip_address {
-                    if current_ip != session_ip {
-                        warn!("会话 '{}' IP地址不匹配", session_id);
-                    }
-                }
+            if let Some(ref current_ip) = ip_address
+                && let Some(ref session_ip) = session.ip_address
+                && current_ip != session_ip
+            {
+                warn!("会话 '{}' IP地址不匹配", session_id);
             }
 
             session.last_accessed = Instant::now();

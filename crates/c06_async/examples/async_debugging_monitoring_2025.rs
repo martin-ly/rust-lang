@@ -44,7 +44,9 @@ use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::{Mutex, RwLock};
 use tokio::time::sleep;
 use tracing::{Level, debug, error, info, instrument, span, trace, warn};
-use tracing_subscriber::{EnvFilter, layer::SubscriberExt, util::SubscriberInitExt};
+use tracing_subscriber::EnvFilter;
+use tracing_subscriber::layer::SubscriberExt;
+use tracing_subscriber::util::SubscriberInitExt;
 
 // ============================================================================
 // 第一部分: 结构化日志 - Tracing 框架
@@ -103,6 +105,12 @@ pub struct User {
     id: u64,
     name: String,
     email: String,
+}
+
+impl Default for UserService {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl UserService {
@@ -246,6 +254,12 @@ pub struct MetricsCollector {
     histograms: Arc<RwLock<std::collections::HashMap<String, Vec<f64>>>>,
 }
 
+impl Default for MetricsCollector {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MetricsCollector {
     pub fn new() -> Self {
         info!("初始化指标收集器");
@@ -375,6 +389,12 @@ struct DependencyHealth {
     healthy: bool,
     last_check: SystemTime,
     error_msg: Option<String>,
+}
+
+impl Default for HealthChecker {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl HealthChecker {

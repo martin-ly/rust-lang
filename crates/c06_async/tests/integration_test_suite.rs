@@ -31,6 +31,12 @@ pub struct TestMetrics {
     pub cpu_usage_percent: f64,
 }
 
+impl Default for IntegrationTestManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl IntegrationTestManager {
     pub fn new() -> Self {
         Self {

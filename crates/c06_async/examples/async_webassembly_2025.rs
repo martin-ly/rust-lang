@@ -10,7 +10,6 @@ use tracing::{debug, error, info};
 
 /// 2025年WebAssembly异步支持演示
 /// 展示最新的WebAssembly异步编程模式和最佳实践
-
 /// 1. WebAssembly模块管理器
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WasmModuleConfig {
@@ -149,12 +148,12 @@ impl AsyncWasmModuleManager {
         // 模拟计算
         let result = match input.function_name.as_str() {
             "add" => {
-                let a: i32 = *input.data.get(0).unwrap_or(&0.0) as i32;
+                let a: i32 = *input.data.first().unwrap_or(&0.0) as i32;
                 let b: i32 = *input.data.get(1).unwrap_or(&0.0) as i32;
                 format!("{}", a + b)
             }
             "multiply" => {
-                let a: f64 = *input.data.get(0).unwrap_or(&1.0);
+                let a: f64 = *input.data.first().unwrap_or(&1.0);
                 let b: f64 = *input.data.get(1).unwrap_or(&1.0);
                 format!("{:.2}", a * b)
             }

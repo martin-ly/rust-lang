@@ -4,10 +4,9 @@
 //!
 //! 这个模块包含了 c10_networks 库内存管理相关的性能基准测试
 use bytes::Bytes;
-use c10_networks::{
-    packet::{Packet, PacketStats, PacketType},
-    performance::{cache::Cache, memory_pool::MemoryPool},
-};
+use c10_networks::packet::{Packet, PacketStats, PacketType};
+use c10_networks::performance::cache::Cache;
+use c10_networks::performance::memory_pool::MemoryPool;
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::sync::Arc;
@@ -179,7 +178,7 @@ fn bench_large_memory_blocks(c: &mut Criterion) {
     let sizes = vec![1024, 4096, 16384, 65536, 262144]; // 1KB, 4KB, 16KB, 64KB, 256KB
 
     for size in sizes {
-        group.bench_function(&format!("bytes_{}KB", size / 1024), |b| {
+        group.bench_function(format!("bytes_{}KB", size / 1024), |b| {
             let data = vec![0u8; size];
             b.iter(|| {
                 let bytes = Bytes::copy_from_slice(black_box(&data));
@@ -187,21 +186,21 @@ fn bench_large_memory_blocks(c: &mut Criterion) {
             })
         });
 
-        group.bench_function(&format!("vec_{}KB", size / 1024), |b| {
+        group.bench_function(format!("vec_{}KB", size / 1024), |b| {
             b.iter(|| {
                 let data = vec![0u8; black_box(size)];
                 black_box(data)
             })
         });
 
-        group.bench_function(&format!("boxed_{}KB", size / 1024), |b| {
+        group.bench_function(format!("boxed_{}KB", size / 1024), |b| {
             b.iter(|| {
                 let data = Box::new(vec![0u8; black_box(size)]);
                 black_box(data)
             })
         });
 
-        group.bench_function(&format!("packet_{}KB", size / 1024), |b| {
+        group.bench_function(format!("packet_{}KB", size / 1024), |b| {
             let data = vec![0u8; size];
             b.iter(|| {
                 let packet = Packet::new(

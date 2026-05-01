@@ -1,5 +1,5 @@
 use anyhow::Result;
-use backoff::{ExponentialBackoff, backoff::Backoff};
+use c06_async::utils::backoff::ExponentialBackoff;
 use dashmap::DashMap;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
@@ -67,25 +67,25 @@ impl CircuitBreaker {
         match *state {
             CircuitState::Open => {
                 // 检查是否可以进入半开状态
-                if let Some(last_failure) = *self.last_failure_time.read().await {
-                    if last_failure.elapsed() >= self.recovery_timeout {
-                        drop(state);
-                        self.transition_to_half_open().await;
-                        // 重新检查状态并执行操作
-                        let result = operation.await;
-                        return match result {
-                            Ok(value) => {
-                                self.on_success().await;
-                                Ok(value)
-                            }
-                            Err(e) => {
-                                self.on_failure().await;
-                                Err(e)
-                            }
-                        };
-                    }
+                if let Some(last_failure) = *self.last_failure_time.read().await
+                    && last_failure.elapsed() >= self.recovery_timeout
+                {
+                    drop(state);
+                    self.transition_to_half_open().await;
+                    // 重新检查状态并执行操作
+                    let result = operation.await;
+                    return match result {
+                        Ok(value) => {
+                            self.on_success().await;
+                            Ok(value)
+                        }
+                        Err(e) => {
+                            self.on_failure().await;
+                            Err(e)
+                        }
+                    };
                 }
-                return Err(anyhow::anyhow!("Circuit breaker is open").into());
+                Err(anyhow::anyhow!("Circuit breaker is open").into())
             }
             CircuitState::HalfOpen => {
                 // 半开状态，尝试调用
@@ -267,7 +267,7 @@ impl ServiceDiscovery {
                             let start = Instant::now();
                             let response = timeout(
                                 Duration::from_secs(5),
-                                client.get(&format!("{}/health", instance_url)).send(),
+                                client.get(format!("{}/health", instance_url)).send(),
                             )
                             .await??;
 

@@ -24,17 +24,11 @@ db-path = "~/.cargo/advisory-db"
 # 漏洞数据库来源（支持多个）
 db-urls = ["https://github.com/rustsec/advisory-db"]
 
-# 发现安全漏洞时的行为: deny = 阻止, warn = 警告, allow = 允许
-vulnerability = "deny"
+# 发现无人维护 crate 时的行为: all / workspace / transitive / none
+unmaintained = "workspace"
 
-# 发现无人维护 crate 时的行为
-unmaintained = "warn"
-
-# 发现 yanked crate 时的行为
+# 发现 yanked crate 时的行为: deny / warn / allow
 yanked = "warn"
-
-# 发现 NOTICE 级别通告时的行为
-notice = "warn"
 
 # 忽略特定通告（谨慎使用，需记录原因）
 ignore = [
@@ -47,15 +41,6 @@ ignore = [
 [licenses]
 # 使用版本 2 格式
 version = 2
-
-# 发现未声明许可证时的行为
-unlicensed = "deny"
-
-# 允许 OSI/FSF 批准的许可证
-allow-osi-fsf-free = "either"
-
-# 发现 Copyleft 许可证时的行为
-copyleft = "warn"
 
 # 显式允许的许可证白名单
 allow = [
@@ -72,13 +57,6 @@ allow = [
     "0BSD",                          # Zero-Clause BSD
     "OpenSSL",                       # OpenSSL 许可证
     "WTFPL",                         # Do What The F*ck You Want To Public License
-]
-
-# 显式拒绝的许可证黑名单
-deny = [
-    "GPL-2.0",                       # 强 Copyleft，避免商业使用争议
-    "GPL-3.0",                       # 强 Copyleft
-    "AGPL-3.0",                      # 服务端强 Copyleft
 ]
 
 # 许可证识别置信度阈值（0.0 - 1.0）

@@ -69,7 +69,6 @@ pub mod improved_borrow_checker {
     ///
     /// 新的借用检查器提供更清晰、更有帮助的错误信息。
     /// The new borrow checker provides clearer, more helpful error messages.
-
     /// 改进的错误信息示例 / Improved Error Messages Example
     pub fn improved_error_messages() {
         let mut s = String::from("hello");
@@ -94,7 +93,6 @@ pub mod improved_borrow_checker {
     ///
     /// NLL 的进一步优化，使借用检查更加精确。
     /// Further optimization of NLL, making borrow checking more precise.
-
     /// NLL 优化示例 / NLL Optimization Example
     pub fn nll_optimization() {
         let mut data = vec![1, 2, 3];
@@ -125,7 +123,6 @@ pub mod enhanced_lifetime_inference {
     ///
     /// 编译器能够更智能地推断生命周期，减少样板代码。
     /// The compiler can more intelligently infer lifetimes, reducing boilerplate code.
-
     /// 智能生命周期省略示例 / Smart Lifetime Elision Example
     pub fn smart_lifetime_elision() {
         let s1 = String::from("hello");
@@ -146,7 +143,6 @@ pub mod enhanced_lifetime_inference {
     ///
     /// 新的生命周期约束系统更加灵活和强大。
     /// The new lifetime constraint system is more flexible and powerful.
-
     /// 改进的生命周期约束示例 / Improved Lifetime Constraints Example
     pub fn improved_lifetime_constraints() {
         let data = vec![1, 2, 3, 4, 5];
@@ -170,7 +166,6 @@ pub mod optimized_memory_management {
     ///
     /// 新的堆分配器提供了更好的性能和内存利用率。
     /// The new heap allocator provides better performance and memory utilization.
-
     /// 改进的堆分配示例 / Improved Heap Allocation Example
     pub fn improved_heap_allocation() {
         // 使用 Box 进行堆分配
@@ -188,7 +183,6 @@ pub mod optimized_memory_management {
     ///
     /// 编译器能够更好地优化结构体的内存布局。
     /// The compiler can better optimize struct memory layout.
-
     /// 优化的内存布局示例 / Optimized Memory Layout Example
     pub fn optimized_memory_layout() {
         // 使用 #[repr(C)] 优化内存布局
@@ -217,7 +211,6 @@ pub mod optimized_memory_management {
     ///
     /// 编译器能够更好地优化零成本抽象。
     /// The compiler can better optimize zero-cost abstractions.
-
     /// 零成本抽象优化示例 / Zero-cost Abstraction Optimization Example
     pub fn zero_cost_abstraction_optimization() {
         let numbers = [1, 2, 3, 4, 5];
@@ -241,7 +234,6 @@ pub mod enhanced_concurrency_safety {
     ///
     /// 新的数据竞争检测器能够更准确地识别潜在的数据竞争。
     /// The new data race detector can more accurately identify potential data races.
-
     /// 改进的数据竞争检测示例 / Improved Data Race Detection Example
     pub fn improved_data_race_detection() {
         let shared_data = Arc::new(Mutex::new(vec![1, 2, 3]));
@@ -268,7 +260,6 @@ pub mod enhanced_concurrency_safety {
     ///
     /// 新的锁机制提供了更好的性能和更少的死锁风险。
     /// The new lock mechanisms provide better performance and less deadlock risk.
-
     /// 优化的锁机制示例 / Optimized Lock Mechanisms Example
     pub fn optimized_lock_mechanisms() {
         let data = Arc::new(Mutex::new(0));
@@ -300,7 +291,6 @@ pub mod enhanced_concurrency_safety {
     ///
     /// 异步编程的所有权管理得到了改进。
     /// Ownership management in async programming has been improved.
-
     /// 改进的异步支持示例 / Improved Async Support Example
     pub fn improved_async_support() {
         // 使用 async/await 进行异步编程
@@ -333,7 +323,6 @@ pub mod smart_pointer_enhancements {
     ///
     /// Rc 和 Arc 的性能得到了优化。
     /// Rc and Arc performance has been optimized.
-
     /// 改进的引用计数示例 / Improved Reference Counting Example
     pub fn improved_reference_counting() {
         let data = Rc::new(RefCell::new(vec![1, 2, 3]));
@@ -353,7 +342,6 @@ pub mod smart_pointer_enhancements {
     ///
     /// 智能指针的内存使用得到了优化。
     /// Smart pointer memory usage has been optimized.
-
     /// 优化的内存使用示例 / Optimized Memory Usage Example
     pub fn optimized_memory_usage() {
         // 使用 Box 进行堆分配
@@ -378,7 +366,6 @@ pub mod compiler_optimizations {
     ///
     /// 编译器能够更好地决定何时内联函数。
     /// The compiler can better decide when to inline functions.
-
     /// 改进的内联优化示例 / Improved Inline Optimization Example
     pub fn improved_inline_optimization() {
         let result = optimized_function(10, 20);
@@ -395,7 +382,6 @@ pub mod compiler_optimizations {
     ///
     /// 编译器能够更有效地消除死代码。
     /// The compiler can more effectively eliminate dead code.
-
     /// 更好的死代码消除示例 / Better Dead Code Elimination Example
     pub fn better_dead_code_elimination() {
         let data = [1, 2, 3, 4, 5];
@@ -421,7 +407,6 @@ pub mod toolchain_improvements {
     ///
     /// Clippy 提供了更多的 lint 规则和更好的建议。
     /// Clippy provides more lint rules and better suggestions.
-
     /// 改进的 Clippy 示例 / Improved Clippy Example
     pub fn improved_clippy() {
         let data = vec![1, 2, 3];
@@ -444,7 +429,6 @@ pub mod toolchain_improvements {
     ///
     /// 编译器提供了更好的错误诊断信息。
     /// The compiler provides better error diagnostic information.
-
     /// 更好的错误诊断示例 / Better Error Diagnostics Example
     pub fn better_error_diagnostics() {
         let mut s = String::from("hello");
@@ -467,7 +451,6 @@ pub mod toolchain_improvements {
 }
 
 /// # 主要功能函数 / Main Function Functions
-
 /// 运行所有 Rust 1.89 特性示例 / Run all Rust 1.89 feature examples
 pub fn run_all_rust_189_examples() {
     println!("=== Rust 1.89 新特性示例 / Rust 1.89 New Features Examples ===");

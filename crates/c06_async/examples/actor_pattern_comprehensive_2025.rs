@@ -1,3 +1,4 @@
+#![allow(clippy::empty_line_after_doc_comments)]
 // ============================================================================
 // Actor 模式完整实现与形式化分析 2025
 // Comprehensive Actor Pattern Implementation and Formal Analysis 2025
@@ -150,6 +151,7 @@ use tracing::{Level, debug, info, instrument, warn};
 // Part 2: Core Data Structures
 // ============================================================================
 
+///
 /// Actor 状态枚举
 /// Actor State Enumeration
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -845,7 +847,7 @@ impl Actor for BankAccount {
                 );
 
                 self.balance += amount;
-                self.record_transaction(format!("Deposit"), amount);
+                self.record_transaction("Deposit".to_string(), amount);
                 reply.send(self.balance).ok();
             }
 
@@ -859,7 +861,7 @@ impl Actor for BankAccount {
 
                 if self.balance >= amount {
                     self.balance -= amount;
-                    self.record_transaction(format!("Withdraw"), -amount);
+                    self.record_transaction("Withdraw".to_string(), -amount);
                     reply.send(Ok(self.balance)).ok();
                 } else {
                     warn!(

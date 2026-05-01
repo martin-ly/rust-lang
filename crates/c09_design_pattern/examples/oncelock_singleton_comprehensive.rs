@@ -226,14 +226,14 @@ where
         let mut cache = self.cache.lock().unwrap();
 
         // 如果超过容量，移除最少使用的项
-        if cache.len() >= self.max_size && !cache.contains_key(&key) {
-            if let Some(lru_key) = cache
+        if cache.len() >= self.max_size
+            && !cache.contains_key(&key)
+            && let Some(lru_key) = cache
                 .iter()
                 .min_by_key(|(_, entry)| entry.access_count)
                 .map(|(k, _)| k.clone())
-            {
-                cache.remove(&lru_key);
-            }
+        {
+            cache.remove(&lru_key);
         }
 
         let expires_at = ttl.map(|d| Instant::now() + d);
@@ -253,12 +253,12 @@ where
 
         if let Some(entry) = cache.get_mut(key) {
             // 检查是否过期
-            if let Some(expires_at) = entry.expires_at {
-                if Instant::now() > expires_at {
-                    cache.remove(key);
-                    *self.miss_count.lock().unwrap() += 1;
-                    return None;
-                }
+            if let Some(expires_at) = entry.expires_at
+                && Instant::now() > expires_at
+            {
+                cache.remove(key);
+                *self.miss_count.lock().unwrap() += 1;
+                return None;
             }
 
             // 更新访问计数

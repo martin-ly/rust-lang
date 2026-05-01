@@ -1,3 +1,4 @@
+#![allow(clippy::type_complexity)]
 //! Rust 1.90 GATs 零拷贝观察者模式高级示例
 //!
 //! 本示例展示：
@@ -73,11 +74,7 @@ impl StringStatsObserver {
             total_words: self.total_words,
             total_lines: self.total_lines,
             update_count: self.update_count,
-            avg_chars_per_update: if self.update_count > 0 {
-                self.total_chars / self.update_count
-            } else {
-                0
-            },
+            avg_chars_per_update: self.total_chars.checked_div(self.update_count).unwrap_or(0),
         }
     }
 }
@@ -623,7 +620,7 @@ fn main() {
         vec!["Rust".to_string(), "World".to_string(), "!".to_string()],
     ));
 
-    println!("初始数据: \"{}\"", "Hello Rust World!");
+    println!("初始数据: \"Hello Rust World!\"");
     println!("观察者数量: {}", subject.observer_count());
 
     // 更新数据

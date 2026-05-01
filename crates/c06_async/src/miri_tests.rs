@@ -8,8 +8,8 @@
 
 use std::future::Future;
 use std::pin::Pin;
-use std::task::{Context, Poll, Wake, Waker};
-use std::sync::Arc;
+use std::task::{Context, Poll, Waker};
+
 use std::cell::RefCell;
 
 // ==================== 基本 Future 测试 ====================
@@ -19,7 +19,7 @@ struct SimpleFuture<T>(Option<T>);
 
 impl<T> Future for SimpleFuture<T> {
     type Output = T;
-    
+
     fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
         // SAFETY: 我们拥有 self，并且不会移动 pinning 字段
         match unsafe { self.get_unchecked_mut() }.0.take() {
@@ -37,9 +37,9 @@ fn test_simple_future() {
     let mut future = SimpleFuture(Some(42));
     let waker = dummy_waker();
     let mut context = Context::from_waker(&waker);
-    
+
     let result = Pin::new(&mut future).poll(&mut context);
-    
+
     match result {
         Poll::Ready(val) => assert_eq!(val, 42),
         Poll::Pending => panic!("Expected Ready"),
@@ -64,17 +64,17 @@ impl SelfReferencing {
             ptr: std::ptr::null(),
             _pinned: PhantomPinned,
         });
-        
+
         let ptr = &boxed.data as *const String;
         boxed.ptr = ptr;
-        
+
         Box::into_pin(boxed)
     }
-    
+
     fn get_data(&self) -> &str {
         &self.data
     }
-    
+
     fn get_via_ptr(&self) -> &str {
         unsafe { &*self.ptr }
     }
@@ -86,7 +86,7 @@ impl SelfReferencing {
 #[test]
 fn test_pin_self_referential() {
     let data = SelfReferencing::new(String::from("Hello, Miri!"));
-    
+
     assert_eq!(data.get_data(), "Hello, Miri!");
     assert_eq!(data.get_via_ptr(), "Hello, Miri!");
 }
@@ -100,7 +100,7 @@ fn test_pin_self_referential() {
 fn test_async_block_capture() {
     let x = 42;
     let fut = async { x + 1 };
-    
+
     let result = block_on(fut);
     assert_eq!(result, 43);
 }
@@ -111,11 +111,11 @@ fn test_async_block_capture() {
 #[test]
 fn test_async_block_ref_capture() {
     let x = RefCell::new(0);
-    
+
     let fut = async {
         *x.borrow_mut() = 42;
     };
-    
+
     block_on(fut);
     assert_eq!(*x.borrow(), 42);
 }
@@ -132,7 +132,7 @@ impl CountStream {
     fn new(max: usize) -> Self {
         Self { count: 0, max }
     }
-    
+
     fn poll_next(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Option<usize>> {
         // SAFETY: 我们拥有 self，并且不会移动 pinning 字段
         let this = unsafe { self.get_unchecked_mut() };
@@ -154,11 +154,23 @@ fn test_stream_poll() {
     let mut stream = CountStream::new(3);
     let waker = dummy_waker();
     let mut context = Context::from_waker(&waker);
-    
-    assert_eq!(Pin::new(&mut stream).poll_next(&mut context), Poll::Ready(Some(0)));
-    assert_eq!(Pin::new(&mut stream).poll_next(&mut context), Poll::Ready(Some(1)));
-    assert_eq!(Pin::new(&mut stream).poll_next(&mut context), Poll::Ready(Some(2)));
-    assert_eq!(Pin::new(&mut stream).poll_next(&mut context), Poll::Ready(None));
+
+    assert_eq!(
+        Pin::new(&mut stream).poll_next(&mut context),
+        Poll::Ready(Some(0))
+    );
+    assert_eq!(
+        Pin::new(&mut stream).poll_next(&mut context),
+        Poll::Ready(Some(1))
+    );
+    assert_eq!(
+        Pin::new(&mut stream).poll_next(&mut context),
+        Poll::Ready(Some(2))
+    );
+    assert_eq!(
+        Pin::new(&mut stream).poll_next(&mut context),
+        Poll::Ready(None)
+    );
 }
 
 // ==================== 组合子 Future ====================
@@ -175,7 +187,7 @@ where
     F: FnOnce(T) -> U,
 {
     type Output = U;
-    
+
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
         // SAFETY: 我们不动 func，只动 future
         unsafe {
@@ -200,7 +212,7 @@ fn test_future_combinator() {
         future: SimpleFuture(Some(21)),
         func: Some(|x: i32| x * 2),
     };
-    
+
     let result = block_on(fut);
     assert_eq!(result, 42);
 }
@@ -218,7 +230,7 @@ impl<T> AsyncMutex<T> {
             data: RefCell::new(data),
         }
     }
-    
+
     fn lock(&self) -> Option<std::cell::RefMut<'_, T>> {
         self.data.try_borrow_mut().ok()
     }
@@ -230,12 +242,12 @@ impl<T> AsyncMutex<T> {
 #[test]
 fn test_async_mutex() {
     let mutex = AsyncMutex::new(0);
-    
+
     {
         let mut guard = mutex.lock().unwrap();
         *guard = 42;
     }
-    
+
     assert_eq!(*mutex.data.borrow(), 42);
 }
 
@@ -243,14 +255,7 @@ fn test_async_mutex() {
 
 /// 创建一个虚拟的 Waker
 fn dummy_waker() -> Waker {
-    struct DummyWaker;
-    
-    impl Wake for DummyWaker {
-        fn wake(self: Arc<Self>) {}
-        fn wake_by_ref(self: &Arc<Self>) {}
-    }
-    
-    Waker::from(Arc::new(DummyWaker))
+    std::task::Waker::noop().clone()
 }
 
 /// 简单的执行器，轮询 Future 到完成
@@ -261,7 +266,7 @@ where
     let waker = dummy_waker();
     let mut context = Context::from_waker(&waker);
     let mut future = std::pin::pin!(future);
-    
+
     loop {
         match future.as_mut().poll(&mut context) {
             Poll::Ready(val) => return val,
@@ -293,12 +298,12 @@ impl PinnedData {
         boxed.ptr_to_data = &boxed.data;
         Box::into_pin(boxed)
     }
-    
+
     /// 安全地获取数据引用
     fn data(self: Pin<&Self>) -> &str {
         &self.get_ref().data
     }
-    
+
     /// 通过指针获取数据（unsafe）
     unsafe fn data_via_ptr(&self) -> &str {
         unsafe { &*self.ptr_to_data }
@@ -311,7 +316,7 @@ impl PinnedData {
 #[test]
 fn test_pinned_projection() {
     let data = PinnedData::new(String::from("Pinned"));
-    
+
     assert_eq!(data.as_ref().data(), "Pinned");
     unsafe {
         assert_eq!(data.data_via_ptr(), "Pinned");
@@ -325,7 +330,7 @@ fn test_pinned_projection() {
 fn test_pin_box_heap() {
     let data = [0u8; 1024];
     let pinned = Box::pin(data);
-    
+
     // 验证数据被正确固定
     assert_eq!(pinned[0], 0);
 }
@@ -344,7 +349,7 @@ struct StateMachineFuture {
 
 impl Future for StateMachineFuture {
     type Output = i32;
-    
+
     fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
         match self.state {
             StateMachine::Start => {
@@ -355,9 +360,7 @@ impl Future for StateMachineFuture {
                 self.state = StateMachine::Complete;
                 Poll::Pending
             }
-            StateMachine::Complete => {
-                Poll::Ready(42)
-            }
+            StateMachine::Complete => Poll::Ready(42),
         }
     }
 }
@@ -367,7 +370,9 @@ impl Future for StateMachineFuture {
 /// 预期结果: 应该经过所有状态并返回结果
 #[test]
 fn test_state_machine_future() {
-    let fut = StateMachineFuture { state: StateMachine::Start };
+    let fut = StateMachineFuture {
+        state: StateMachine::Start,
+    };
     let result = block_on(fut);
     assert_eq!(result, 42);
 }
@@ -382,7 +387,7 @@ fn test_unpin_boundaries() {
     // String 是 Unpin
     fn assert_unpin<T: Unpin>(_val: T) {}
     assert_unpin(String::from("test"));
-    
+
     // PhantomPinned 不是 Unpin
     fn assert_not_unpin<T>(_val: T) {}
     assert_not_unpin(PhantomPinned);
@@ -397,7 +402,7 @@ fn test_pin_heap_semantics() {
     {
         let pinned = Box::pin(42);
         let _ptr = &*pinned;
-        
+
         // 数据不会被移动
         assert_eq!(*_ptr, 42);
     }
@@ -416,13 +421,13 @@ fn test_unsafe_pin_projection() {
         data: String,
         ptr: *const String,
     }
-    
+
     let mut bad = BadPin {
         data: String::from("test"),
         ptr: std::ptr::null(),
     };
     bad.ptr = &bad.data;
-    
+
     // 移动结构体 - 指针变悬垂
     let moved = bad;
     unsafe {
@@ -441,13 +446,13 @@ fn test_pin_new_unchecked_ub() {
         data: String,
         ptr: *const String,
     }
-    
+
     let mut not_pinned = NotPinned {
         data: String::from("test"),
         ptr: std::ptr::null(),
     };
     not_pinned.ptr = &not_pinned.data;
-    
+
     unsafe {
         let mut pinned = Pin::new_unchecked(&mut not_pinned);
         // 尝试通过 Pin 修改 - 但如果数据被移动会导致 UB

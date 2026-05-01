@@ -632,7 +632,7 @@ async fn benchmark_comprehensive() {
         let mut buffer = pool.acquire().await;
 
         // 模拟网络数据接收和处理
-        buffer[0..100].copy_from_slice(&vec![i as u8; 100]);
+        buffer[0..100].copy_from_slice(&[i as u8; 100]);
 
         // 零拷贝转换
         let bytes = Bytes::from(buffer.clone());
@@ -646,7 +646,7 @@ async fn benchmark_comprehensive() {
     let start = Instant::now();
     for i in 0..iterations {
         let mut buffer = vec![0u8; 8192];
-        buffer[0..100].copy_from_slice(&vec![i as u8; 100]);
+        buffer[0..100].copy_from_slice(&[i as u8; 100]);
         let copy1 = buffer.clone();
         let _ = copy1[0..100].to_vec();
     }

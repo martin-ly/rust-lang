@@ -135,7 +135,7 @@ fn test_generic_associated_types() {
         where
             Self: 'a;
 
-        fn next<'a>(&'a mut self) -> Option<&'a T> {
+        fn next(&mut self) -> Option<&T> {
             if self.pos < self.data.len() {
                 let item = &self.data[self.pos];
                 self.pos += 1;

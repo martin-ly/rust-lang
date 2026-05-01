@@ -40,7 +40,7 @@ async fn demonstrate_runtime_comparison() -> Result<()> {
 
     // 1. 显示所有运行时的分析
     println!("\n📊 运行时特性分析:");
-    for (_name, analysis) in analyzer.get_all_analyses() {
+    for analysis in analyzer.get_all_analyses().values() {
         println!("\n  🔍 {} 运行时:", analysis.runtime_name);
         println!("    核心特性: {:?}", analysis.core_features);
         println!("    适用场景: {:?}", analysis.use_cases);
@@ -314,7 +314,7 @@ async fn demonstrate_local_async_logging_debugging() -> Result<()> {
 
     // 4. 异步任务跟踪
     println!("\n🔍 异步任务跟踪:");
-    let task_ids = vec![
+    let task_ids = [
         tracker
             .start_task(
                 "task_1".to_string(),

@@ -52,6 +52,12 @@ pub struct ServiceRegistry {
     shutdown_notify: Arc<Notify>,
 }
 
+impl Default for ServiceRegistry {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ServiceRegistry {
     pub fn new() -> Self {
         Self {
@@ -319,6 +325,12 @@ impl std::fmt::Display for LogLevel {
             LogLevel::Warn => write!(f, "Warn"),
             LogLevel::Error => write!(f, "Error"),
         }
+    }
+}
+
+impl Default for DistributedTracer {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

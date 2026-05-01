@@ -42,7 +42,7 @@ fn test_type_parameter() {
 
     assert_eq!(identity(42), 42);
     assert_eq!(identity("hello"), "hello");
-    assert_eq!(identity(true), true);
+    assert!(identity(true));
 }
 
 #[test]

@@ -284,7 +284,7 @@ impl GoldenRatioFactory {
     }
 
     /// 使用黄金分割搜索查找函数最小值
-    /// 
+    ///
     /// # Arguments
     /// * `left` - 搜索区间左边界
     /// * `right` - 搜索区间右边界
@@ -647,7 +647,10 @@ pub fn demonstrate_rust_194_design_patterns() {
     with_config(|config| {
         config.set("theme", "light");
         println!("   配置版本: {}", config.version());
-        println!("   当前主题: {}", config.get("theme").expect("获取主题配置失败"));
+        println!(
+            "   当前主题: {}",
+            config.get("theme").expect("获取主题配置失败")
+        );
     });
 
     // 3. 数学常量 - 工厂模式优化
@@ -704,12 +707,9 @@ pub fn demonstrate_rust_194_design_patterns() {
 
 /// 获取 Rust 1.94.0 设计模式特性信息
 pub fn get_rust_194_design_pattern_info() -> String {
-    "Rust 1.94.0 设计模式特性:\n\
-        - array_windows - 滑动窗口模式\n\
-        - LazyLock 新方法 - 单例模式优化\n\
-        - 数学常量 (EULER_GAMMA, GOLDEN_RATIO) - 工厂模式优化\n\
-        - Peekable 新方法 - 迭代器模式增强\n\
-        - `TryFrom<char>` for usize - 解析器模式"
+    "Rust 1.94.0 设计模式特性:\n- array_windows - 滑动窗口模式\n- LazyLock 新方法 - \
+     单例模式优化\n- 数学常量 (EULER_GAMMA, GOLDEN_RATIO) - 工厂模式优化\n- Peekable 新方法 - \
+     迭代器模式增强\n- `TryFrom<char>` for usize - 解析器模式"
         .to_string()
 }
 
@@ -812,13 +812,9 @@ mod tests {
     #[test]
     fn test_golden_section_search() {
         // 黄金分割搜索寻找 (x - 5)^2 的最小值，在 [0, 10] 区间内最小值应该在 x = 5
-        let min = GoldenRatioFactory::golden_section_search(
-            0.0,
-            10.0,
-            0.01,
-            1000,
-            |x| (x - 5.0) * (x - 5.0),
-        );
+        let min = GoldenRatioFactory::golden_section_search(0.0, 10.0, 0.01, 1000, |x| {
+            (x - 5.0) * (x - 5.0)
+        });
         // 搜索结果应该在 [0, 10] 区间内
         assert!(
             min >= 0.0 && min <= 10.0,
@@ -874,12 +870,18 @@ mod tests {
     #[test]
     fn test_control_flow_matrix_search() {
         let matrix = vec![vec![1, 2], vec![3, 4]];
-        assert!(matches!(search_in_matrix(&matrix, 3), ControlFlow::Break((1, 0))));
+        assert!(matches!(
+            search_in_matrix(&matrix, 3),
+            ControlFlow::Break((1, 0))
+        ));
     }
 
     #[test]
     fn test_control_flow_validate() {
-        assert!(matches!(validate_data("valid123"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("valid123"),
+            ControlFlow::Continue(())
+        ));
         assert!(matches!(validate_data(""), ControlFlow::Break(_)));
     }
 
@@ -893,43 +895,43 @@ mod tests {
     // ==================== 边界测试和反例测试 ====================
 
     /// 测试全局配置线程安全
-    /// 
+    ///
     /// 验证全局配置在多线程环境下能正确工作
     /// 预期行为：多个线程同时读写配置不会导致数据竞争或 panic
     #[test]
     fn test_global_config_thread_safety() {
-        use std::thread;
-        use std::sync::atomic::{AtomicUsize, Ordering};
         use std::sync::Arc;
-        
+        use std::sync::atomic::{AtomicUsize, Ordering};
+        use std::thread;
+
         // 获取初始版本
         let initial_version = with_config_readonly(|config| config.version());
-        
+
         // 在多线程环境中测试配置访问
         let handles: Vec<_> = (0..10)
             .map(|i| {
                 thread::spawn(move || {
                     with_config(|config| {
-                        config.set(&format!("key_{}", i), &format!("value_{}", i));
+                        config.set(format!("key_{}", i), format!("value_{}", i));
                         config.version()
                     })
                 })
             })
             .collect();
-        
+
         // 等待所有线程完成
-        let versions: Vec<_> = handles.into_iter().map(|h| h.join().expect("线程加入失败")).collect();
-        
+        let versions: Vec<_> = handles
+            .into_iter()
+            .map(|h| h.join().expect("线程加入失败"))
+            .collect();
+
         // 验证所有线程都成功执行（返回了有效的版本号）
         assert_eq!(versions.len(), 10, "所有10个线程都应该成功完成");
-        
+
         // 验证最终版本增加了（说明有写操作发生）
         let final_version = with_config_readonly(|config| config.version());
-        assert!(
-            final_version > initial_version,
-            "最终版本应该大于初始版本"
-        );
-        
+        assert!(final_version > initial_version, "最终版本应该大于初始版本");
+
         // 验证只读访问也是线程安全的
         let counter = Arc::new(AtomicUsize::new(0));
         let read_handles: Vec<_> = (0..10)
@@ -943,22 +945,22 @@ mod tests {
                 })
             })
             .collect();
-        
+
         for h in read_handles {
             let _ = h.join().expect("读操作线程加入失败");
         }
         assert_eq!(counter.load(Ordering::Relaxed), 10, "所有读操作都应该完成");
-        
+
         // 清理测试数据
         with_config(|config| {
             for i in 0..10 {
-                config.set(&format!("key_{}", i), "");
+                config.set(format!("key_{}", i), "");
             }
         });
     }
 
     /// 测试缓存淘汰
-    /// 
+    ///
     /// 验证计算缓存的行为和"淘汰"逻辑
     /// 预期行为：缓存应该保持值直到显式重新计算
     #[test]
@@ -969,26 +971,30 @@ mod tests {
             map.insert("key1", "value1");
             map
         });
-        
+
         // 验证缓存值可访问
         let value = cache.get().get("key1");
         assert_eq!(value, Some(&"value1"), "应该能获取缓存值");
-        
+
         // 验证初始重新计算计数为 0
         assert_eq!(cache.recompute_count(), 0, "初始重新计算计数应该为0");
-        
+
         // 测试强制重新计算计数器增加
-        let mut mutable_cache: ComputedCache<std::collections::HashMap<String, String>> = 
-            ComputedCache::new(|| std::collections::HashMap::new());
+        let mut mutable_cache: ComputedCache<std::collections::HashMap<String, String>> =
+            ComputedCache::new(std::collections::HashMap::new);
         mutable_cache.force_recompute();
         assert_eq!(mutable_cache.recompute_count(), 1, "重新计算后计数应该为1");
-        
+
         mutable_cache.force_recompute();
-        assert_eq!(mutable_cache.recompute_count(), 2, "再次重新计算后计数应该为2");
+        assert_eq!(
+            mutable_cache.recompute_count(),
+            2,
+            "再次重新计算后计数应该为2"
+        );
     }
 
     /// 测试无效状态转换
-    /// 
+    ///
     /// 验证状态转换验证器能正确检测无效的状态转换
     /// 预期行为：返回 false 对于无效转换，true 对于有效转换
     #[test]
@@ -1002,7 +1008,7 @@ mod tests {
             !StateTransitionValidator::validate_transitions(&invalid_direct_connect),
             "直接连接应该被标记为无效"
         );
-        
+
         // 测试无效的重连转换
         let invalid_reconnect = vec![
             ConnectionState::Connected,
@@ -1012,7 +1018,7 @@ mod tests {
             !StateTransitionValidator::validate_transitions(&invalid_reconnect),
             "从 Connected 直接到 Connecting 应该被标记为无效"
         );
-        
+
         // 测试无效的 Error 到其他状态（除了 Disconnected）
         let invalid_error_transition = vec![
             ConnectionState::Error,
@@ -1022,21 +1028,21 @@ mod tests {
             !StateTransitionValidator::validate_transitions(&invalid_error_transition),
             "从 Error 到 Connecting 应该被标记为无效"
         );
-        
+
         // 测试空状态序列（应该视为有效）
         let empty_states: Vec<ConnectionState> = vec![];
         assert!(
             StateTransitionValidator::validate_transitions(&empty_states),
             "空状态序列应该被视为有效"
         );
-        
+
         // 测试单元素状态序列（应该视为有效，因为没有转换）
         let single_state = vec![ConnectionState::Disconnected];
         assert!(
             StateTransitionValidator::validate_transitions(&single_state),
             "单元素状态序列应该被视为有效"
         );
-        
+
         // 测试复杂无效序列
         let complex_invalid = vec![
             ConnectionState::Disconnected,
@@ -1051,7 +1057,7 @@ mod tests {
     }
 
     /// 测试黄金比例工厂边界
-    /// 
+    ///
     /// 验证黄金比例工厂能正确处理边界值
     /// 预期行为：正确处理零、负数和极大值输入
     #[test]
@@ -1062,33 +1068,32 @@ mod tests {
         assert_eq!(zero_rect.height, 0.0, "零宽度矩形的高度应该为0");
         // 0/0 是 NaN，is_golden_ratio 会返回 false（NaN != PHI）
         // 但实现可能会特殊处理，我们只验证尺寸正确即可
-        
+
         // 测试极小正数宽度
         let tiny_rect = GoldenRatioFactory::create_golden_rectangle(0.001);
         assert!(
             (tiny_rect.width / tiny_rect.height - GoldenRatioFactory::PHI_F64).abs() < 0.001,
             "极小正数宽度应该保持黄金比例"
         );
-        
+
         // 测试黄金螺旋点的边界
         let zero_points = GoldenRatioFactory::golden_spiral_points(0);
         assert!(zero_points.is_empty(), "0个点应该返回空向量");
-        
+
         let one_point = GoldenRatioFactory::golden_spiral_points(1);
         assert_eq!(one_point.len(), 1, "1个点应该返回单个元素的向量");
         assert_eq!(one_point[0], (0.0, 0.0), "第一个点应该位于原点");
-        
+
         // 测试常规搜索区间
-        let normal_point = GoldenRatioFactory::golden_section_search(
-            0.0,
-            10.0,
-            0.001,
-            1000,
-            |x| (x - 5.0).powi(2),
-        );
+        let normal_point = GoldenRatioFactory::golden_section_search(0.0, 10.0, 0.001, 1000, |x| {
+            (x - 5.0).powi(2)
+        });
         // 结果应该接近5（在0-10范围内）
-        assert!(normal_point >= 0.0 && normal_point <= 10.0, "搜索结果应该在搜索区间内");
-        
+        assert!(
+            normal_point >= 0.0 && normal_point <= 10.0,
+            "搜索结果应该在搜索区间内"
+        );
+
         // 测试极大宽度矩形
         let large_rect = GoldenRatioFactory::create_golden_rectangle(1e10);
         assert!(

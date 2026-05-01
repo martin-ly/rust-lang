@@ -12,7 +12,6 @@ use std::hash::{Hash, Hasher};
 
 /// 2025年异步缓存系统演示
 /// 展示最新的异步缓存编程模式和最佳实践
-
 /// 1. 异步LRU缓存
 #[derive(Debug, Clone)]
 pub struct AsyncLRUCache<K, V>
@@ -202,15 +201,15 @@ where
             }
         };
 
-        if let Some(key) = key_to_evict {
-            if let Some(node) = cache.remove(&key) {
-                access_order.retain(|k| k != &key);
-                stats.current_size -= 1;
-                stats.total_size_bytes -= node.size_bytes;
-                stats.evictions += 1;
+        if let Some(key) = key_to_evict
+            && let Some(node) = cache.remove(&key)
+        {
+            access_order.retain(|k| k != &key);
+            stats.current_size -= 1;
+            stats.total_size_bytes -= node.size_bytes;
+            stats.evictions += 1;
 
-                info!("缓存驱逐: {:?} (大小: {} 字节)", key, node.size_bytes);
-            }
+            info!("缓存驱逐: {:?} (大小: {} 字节)", key, node.size_bytes);
         }
     }
 
@@ -371,12 +370,12 @@ impl AsyncDistributedCache {
         // 首先检查本地缓存
         {
             let local_cache = self.local_cache.read().await;
-            if let Some(entry) = local_cache.get(key) {
-                if entry.expires_at.map_or(true, |exp| Instant::now() < exp) {
-                    stats.local_hits += 1;
-                    info!("本地缓存命中: {}", key);
-                    return Ok(Some(entry.value.clone()));
-                }
+            if let Some(entry) = local_cache.get(key)
+                && entry.expires_at.is_none_or(|exp| Instant::now() < exp)
+            {
+                stats.local_hits += 1;
+                info!("本地缓存命中: {}", key);
+                return Ok(Some(entry.value.clone()));
             }
         }
 
@@ -885,10 +884,10 @@ impl AsyncCacheMonitor {
             }
 
             // 检查冷却期
-            if let Some(last_triggered) = rule.last_triggered {
-                if last_triggered.elapsed() < rule.cooldown {
-                    continue;
-                }
+            if let Some(last_triggered) = rule.last_triggered
+                && last_triggered.elapsed() < rule.cooldown
+            {
+                continue;
             }
 
             let should_alert = match &rule.condition {

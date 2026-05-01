@@ -3,14 +3,10 @@
 //! 本模块包含了 c10_networks 库的性能测试，
 //! 确保各个模块的性能指标符合预期。
 use bytes::Bytes;
-use c10_networks::{
-    error::NetworkError,
-    packet::{Packet, PacketBuilder, PacketStats, PacketType},
-    protocol::{
-        http::{HttpMethod, HttpStatusCode, HttpVersion},
-        websocket::{WebSocketFrame, WebSocketHandshakeRequest},
-    },
-};
+use c10_networks::error::NetworkError;
+use c10_networks::packet::{Packet, PacketBuilder, PacketStats, PacketType};
+use c10_networks::protocol::http::{HttpMethod, HttpStatusCode, HttpVersion};
+use c10_networks::protocol::websocket::{WebSocketFrame, WebSocketHandshakeRequest};
 use std::time::Instant;
 
 /// 测试数据包创建性能
@@ -99,7 +95,7 @@ fn test_http_request_creation_performance() {
     for i in 0..ITERATIONS {
         let mut request = c10_networks::protocol::http::HttpRequest::new(
             HttpMethod::GET,
-            &format!("/api/test/{}", i),
+            format!("/api/test/{}", i),
             HttpVersion::Http1_1,
         );
         request.add_header("User-Agent", "c10_networks-test");
@@ -439,8 +435,8 @@ fn test_packet_type_comparison_performance() {
 
     let start = Instant::now();
     for _ in 0..ITERATIONS {
-        for (_i, type1) in types.iter().enumerate() {
-            for (_j, type2) in types.iter().enumerate() {
+        for type1 in types.iter() {
+            for type2 in types.iter() {
                 let _equal = type1 == type2;
                 let _hash = std::collections::hash_map::DefaultHasher::new();
                 // 模拟哈希计算

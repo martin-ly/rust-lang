@@ -28,6 +28,12 @@ pub struct AsyncCounter {
     operations: Arc<Mutex<Vec<String>>>,
 }
 
+impl Default for AsyncCounter {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncCounter {
     pub fn new() -> Self {
         Self {
@@ -86,6 +92,12 @@ pub struct Task {
     pub name: String,
     pub duration: Duration,
     pub completed: bool,
+}
+
+impl Default for AsyncTaskScheduler {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncTaskScheduler {
@@ -178,6 +190,12 @@ pub struct AsyncDataProcessor {
     buffer: Arc<RwLock<Vec<String>>>,
     processing: Arc<Mutex<bool>>,
     processed_count: Arc<Mutex<usize>>,
+}
+
+impl Default for AsyncDataProcessor {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncDataProcessor {
@@ -287,12 +305,7 @@ pub mod test_utils {
     }
 
     /// 并发执行多个异步操作
-    pub async fn run_concurrent<F, Fut, T>(operations: Vec<F>) -> Vec<T>
-    where
-        F: FnOnce() -> Fut,
-        Fut: std::future::Future<Output = T>,
-    {
-        let futures = operations.into_iter().map(|op| async move { op().await });
+    pub async fn run_concurrent<T>(futures: Vec<std::pin::Pin<Box<dyn std::future::Future<Output = T> + Send>>>) -> Vec<T> {
         futures::future::join_all(futures).await
     }
 
@@ -491,7 +504,7 @@ async fn demo_integration_tests() -> Result<()> {
     scheduler.start_scheduler().await;
 
     // 添加一些任务
-    let _task_ids = vec![
+    let _task_ids = [
         scheduler
             .add_task("任务1".to_string(), Duration::from_millis(100))
             .await,
@@ -518,7 +531,7 @@ async fn demo_integration_tests() -> Result<()> {
     let completed_tasks = scheduler.get_completed_tasks().await;
     let processed_count = processor.get_processed_count().await;
 
-    assert!(completed_tasks.len() > 0);
+    assert!(!completed_tasks.is_empty());
     assert!(processed_count > 0);
 
     println!("    ✅ 集成测试通过");
@@ -731,15 +744,15 @@ mod tests {
 
     #[tokio::test]
     async fn test_run_concurrent() {
-        let operations = vec![
-            || async { 1 },
-            || async { 2 },
-            || async { 3 },
-            || async { 4 },
-            || async { 5 },
+        let futures: Vec<std::pin::Pin<Box<dyn std::future::Future<Output = i32> + Send>>> = vec![
+            Box::pin(async { 1 }),
+            Box::pin(async { 2 }),
+            Box::pin(async { 3 }),
+            Box::pin(async { 4 }),
+            Box::pin(async { 5 }),
         ];
 
-        let results = test_utils::run_concurrent(operations).await;
+        let results = test_utils::run_concurrent(futures).await;
         assert_eq!(results, vec![1, 2, 3, 4, 5]);
     }
 }

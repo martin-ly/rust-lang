@@ -80,8 +80,8 @@ async fn run_basic_demo() -> Result<()> {
     let result1 = task1.await?;
     let result2 = task2.await?;
 
-    println!("  {}: {}", result1, "任务1完成");
-    println!("  {}: {}", result2, "任务2完成");
+    println!("  {}: 任务1完成", result1);
+    println!("  {}: 任务2完成", result2);
 
     Ok(())
 }

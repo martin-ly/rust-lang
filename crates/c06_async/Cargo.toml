@@ -42,16 +42,15 @@ async-io = "2.6.0"
 async-channel = "2.5.0"
 redis = { workspace = true, features = ["tokio-comp", "connection-manager"] }
 dashmap = { workspace = true }
-# 2026-04-27: backoff 0.4.0 已标记为 unmaintained (RUSTSEC-2025-0012)
-#       建议未来替换为 backon 或 tokio-retry
-backoff = { version = "0.4.0", features = ["tokio"] }
+# 2026-05-01: backoff 0.4.0 已替换为内部实现（RUSTSEC-2025-0012）
+# 原 backoff crate 被标记为 unmaintained，现使用 c06_async::utils::backoff 模块替代
 tokio-console = { workspace = true }
 crossterm = { workspace = true, features = ["event-stream"] }
 axum = { workspace = true }
 http = { workspace = true }
 tower = { workspace = true }
 bastion = { version = "0.4.5", optional = true }
-xtra = { version = "0.6", optional = true }
+xtra = { version = "0.6", optional = true, features = ["tokio"] }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 glommio = "0.9.0"

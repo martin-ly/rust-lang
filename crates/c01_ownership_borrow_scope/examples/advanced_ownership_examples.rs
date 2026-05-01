@@ -12,7 +12,6 @@ use std::thread;
 use std::time::Duration;
 
 /// # 1. 复杂所有权模式 / Complex Ownership Patterns
-
 /// ## 1.1 所有权转移链 / Ownership Transfer Chain
 ///
 /// 演示所有权如何在多个函数和结构体之间转移
@@ -218,7 +217,6 @@ pub mod ownership_sharing_patterns {
 }
 
 /// # 2. 高级借用技巧 / Advanced Borrowing Techniques
-
 /// ## 2.1 复杂借用模式 / Complex Borrowing Patterns
 ///
 /// 演示复杂的借用模式和多层借用
@@ -438,7 +436,6 @@ pub mod borrow_lifetime_management {
 }
 
 /// # 3. 并发所有权模式 / Concurrent Ownership Patterns
-
 /// ## 3.1 线程间所有权共享 / Inter-thread Ownership Sharing
 ///
 /// 演示如何在多个线程之间安全地共享所有权
@@ -451,6 +448,12 @@ pub mod inter_thread_ownership_sharing {
         pub data: Arc<Mutex<Vec<String>>>,
         pub counter: Arc<Mutex<u32>>,
         pub metadata: Arc<RwLock<HashMap<String, String>>>,
+    }
+
+    impl Default for ThreadSafeContainer {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl ThreadSafeContainer {
@@ -561,6 +564,12 @@ pub mod atomic_ownership_operations {
         pub active_count: AtomicUsize,
         pub is_processing: AtomicBool,
         pub total_processed: AtomicUsize,
+    }
+
+    impl Default for AtomicOwnershipManager {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl AtomicOwnershipManager {
@@ -678,7 +687,6 @@ pub mod atomic_ownership_operations {
 }
 
 /// # 4. 高级作用域管理 / Advanced Scope Management
-
 /// ## 4.1 动态作用域 / Dynamic Scope
 ///
 /// 演示如何实现动态作用域管理
@@ -741,6 +749,12 @@ pub mod dynamic_scope {
         pub scopes: HashMap<u32, ScopeInfo>,
         pub scope_stack: Vec<u32>,
         pub next_scope_id: u32,
+    }
+
+    impl Default for DynamicScopeManager {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl DynamicScopeManager {
@@ -811,10 +825,10 @@ pub mod dynamic_scope {
         pub fn find_variable(&self, name: &str) -> Option<(u32, String)> {
             // 从当前作用域开始向上查找 / Start from current scope and search upward
             for &scope_id in self.scope_stack.iter().rev() {
-                if let Some(scope) = self.scopes.get(&scope_id) {
-                    if let Some(value) = scope.variables.get(name) {
-                        return Some((scope_id, value.clone()));
-                    }
+                if let Some(scope) = self.scopes.get(&scope_id)
+                    && let Some(value) = scope.variables.get(name)
+                {
+                    return Some((scope_id, value.clone()));
                 }
             }
             None

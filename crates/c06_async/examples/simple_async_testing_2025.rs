@@ -9,7 +9,6 @@ use tracing::{debug, error, info, warn};
 
 /// 2025年简化异步测试框架演示
 /// 展示实用的异步测试技术和最佳实践
-
 /// 1. 简化异步测试运行器
 pub struct SimpleAsyncTestRunner {
     tests: Arc<RwLock<Vec<SimpleTestCase>>>,
@@ -328,6 +327,12 @@ pub struct SimpleAsyncTestFixture {
     cleanup_count: Arc<RwLock<u32>>,
 }
 
+impl Default for SimpleAsyncTestFixture {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SimpleAsyncTestFixture {
     pub fn new() -> Self {
         Self {
@@ -375,6 +380,12 @@ pub struct SimplePerformanceMetrics {
     pub throughput_ops_per_sec: f64,
 }
 
+impl Default for SimpleAsyncPerformanceTester {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SimpleAsyncPerformanceTester {
     pub fn new() -> Self {
         Self {
@@ -419,11 +430,11 @@ impl SimpleAsyncPerformanceTester {
         let total_time = start_time.elapsed();
         let total_ops = successful + failed;
 
-        let average_duration = if successful > 0 {
-            Duration::from_nanos(total_duration.as_nanos() as u64 / successful as u64)
-        } else {
-            Duration::ZERO
-        };
+        let average_duration = total_duration
+            .as_nanos()
+            .checked_div(successful as u128)
+            .map(|n| Duration::from_nanos(n as u64))
+            .unwrap_or(Duration::ZERO);
 
         let throughput = if total_time.as_secs() > 0 {
             total_ops as f64 / total_time.as_secs_f64()
@@ -478,6 +489,12 @@ pub struct SimpleAsyncMockService {
     call_count: Arc<RwLock<HashMap<String, u32>>>,
     return_values: Arc<RwLock<HashMap<String, String>>>,
     call_history: Arc<RwLock<Vec<String>>>,
+}
+
+impl Default for SimpleAsyncMockService {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SimpleAsyncMockService {

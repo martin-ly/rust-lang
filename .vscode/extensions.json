@@ -1,17 +1,23 @@
 {
   "recommendations": [
+    // Rust 语言支持
+    "rust-lang.rust-analyzer",
+
+    // TOML 文件支持
+    "tamasfe.even-better-toml",
+
     // Markdown 格式化和检查
     "DavidAnson.vscode-markdownlint",
-    
+
     // Markdown 预览增强
     "yzhang.markdown-all-in-one",
-    
+
     // Markdown 表格格式化
     "bierner.markdown-mermaid",
-    
+
     // 代码块语法高亮
     "bierner.markdown-preview-github-styles",
-    
+
     // Markdown 链接检查
     "tchayen.markdown-links"
   ]

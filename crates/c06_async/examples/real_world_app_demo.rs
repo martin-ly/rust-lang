@@ -303,7 +303,7 @@ impl RealWorldApp {
                 let upload = UploadRequest {
                     id: Uuid::new_v4(),
                     filename: format!("file_{}.txt", request_id),
-                    size: 1024 * (request_id % 100) as u64,
+                    size: 1024 * (request_id % 100),
                     content_type: "text/plain".to_string(),
                     user_id: Uuid::new_v4(),
                     created_at: SystemTime::now(),

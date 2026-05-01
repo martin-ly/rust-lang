@@ -1,7 +1,6 @@
 #![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]
-#![allow(clippy::vec_init_then_push)]
 #![allow(clippy::assertions_on_constants)]
 
 //! # C11: Rust宏系统 (Macro System)
@@ -35,6 +34,7 @@
 //! - [The Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)
 #![warn(missing_docs)]
 #![warn(clippy::all)]
+#![allow(clippy::vec_init_then_push)]
 
 // 公共模块导出
 pub mod declarative;
@@ -122,7 +122,6 @@ mod tests {
         assert_eq!(MODULE_NAME, "C11: Macro System");
     }
 }
-
 
 // 新增模块
 pub mod attribute_macros;

@@ -206,7 +206,7 @@ impl Blockchain {
             nonce += 1;
 
             // 模拟挖矿延迟
-            if nonce % 10000 == 0 {
+            if nonce.is_multiple_of(10000) {
                 sleep(Duration::from_micros(1)).await;
             }
         }
@@ -343,7 +343,7 @@ impl SmartContract {
                 }
             }
             "getValue" => {
-                if inputs.len() >= 1 {
+                if !inputs.is_empty() {
                     let key = inputs[0].clone();
                     let state = self.state.read().await;
                     Ok(state

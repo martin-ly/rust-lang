@@ -1,3 +1,4 @@
+#![allow(clippy::type_complexity)]
 use anyhow::Result;
 use futures::{Stream, StreamExt, stream};
 use std::pin::Pin;
@@ -12,7 +13,6 @@ use tracing::{debug, info, warn};
 
 /// 2025年高级异步流处理演示
 /// 展示最新的异步流处理技术和模式
-
 /// 1. 异步流处理器基础结构
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamEvent {
@@ -285,7 +285,7 @@ impl<T: Send + 'static> AsyncStreamSharder<T> {
             let mut stream = Box::pin(input_stream);
             while let Some(item) = stream.next().await {
                 let shard_index = shard_function(&item) % shards.len();
-                if let Err(_) = shards[shard_index].send(item) {
+                if shards[shard_index].send(item).is_err() {
                     warn!("Failed to send item to shard {}", shard_index);
                 }
             }
@@ -308,6 +308,12 @@ pub enum MergeStrategy {
     Weighted(Vec<f64>),
 }
 
+impl<T: Send + 'static> Default for AsyncStreamMerger<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T: Send + 'static> AsyncStreamMerger<T> {
     pub fn new() -> Self {
         Self {
@@ -328,29 +334,29 @@ impl<T: Send + 'static> AsyncStreamMerger<T> {
 
     pub async fn merge_streams(self) -> Pin<Box<dyn Stream<Item = T> + Send>> {
         match self.merge_strategy {
-            MergeStrategy::RoundRobin => Box::pin(self.round_robin_merge().await),
+            MergeStrategy::RoundRobin => self.round_robin_merge().await,
             MergeStrategy::Priority(priorities) => {
                 let merger = AsyncStreamMerger {
                     input_streams: self.input_streams,
                     merge_strategy: MergeStrategy::RoundRobin,
                 };
-                Box::pin(merger.priority_merge(priorities).await)
+                merger.priority_merge(priorities).await
             }
             MergeStrategy::Weighted(weights) => {
                 let merger = AsyncStreamMerger {
                     input_streams: self.input_streams,
                     merge_strategy: MergeStrategy::RoundRobin,
                 };
-                Box::pin(merger.weighted_merge(weights).await)
+                merger.weighted_merge(weights).await
             }
         }
     }
 
-    async fn round_robin_merge(self) -> impl Stream<Item = T> {
+    async fn round_robin_merge(self) -> Pin<Box<dyn Stream<Item = T> + Send>> {
         let streams = self.input_streams;
         let current_index = 0;
 
-        stream::unfold(
+        Box::pin(stream::unfold(
             (streams, current_index),
             |(mut streams, mut index)| async move {
                 if streams.is_empty() {
@@ -366,19 +372,19 @@ impl<T: Send + 'static> AsyncStreamMerger<T> {
                         if streams.is_empty() {
                             return None;
                         }
-                        index = index % streams.len();
+                        index %= streams.len();
                     }
                 }
             },
-        )
+        ))
     }
 
-    async fn priority_merge(self, _priorities: Vec<usize>) -> impl Stream<Item = T> {
+    async fn priority_merge(self, _priorities: Vec<usize>) -> Pin<Box<dyn Stream<Item = T> + Send>> {
         // 简化实现：使用轮询
         self.round_robin_merge().await
     }
 
-    async fn weighted_merge(self, _weights: Vec<f64>) -> impl Stream<Item = T> {
+    async fn weighted_merge(self, _weights: Vec<f64>) -> Pin<Box<dyn Stream<Item = T> + Send>> {
         // 简化实现：使用轮询
         self.round_robin_merge().await
     }
@@ -481,6 +487,12 @@ impl StreamTransformImpl for AsyncErrorFilter {
 #[derive(Clone)]
 pub struct AsyncEventEnricher {
     enrichment_data: HashMap<String, String>,
+}
+
+impl Default for AsyncEventEnricher {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncEventEnricher {
@@ -793,7 +805,7 @@ async fn demo_stream_merging() -> Result<()> {
 async fn demo_stream_filtering() -> Result<()> {
     info!("🔍 演示流过滤");
 
-    let filter = AsyncStreamFilter::new(|event: &StreamEvent| event.id % 2 == 0);
+    let filter = AsyncStreamFilter::new(|event: &StreamEvent| event.id.is_multiple_of(2));
 
     let input_stream = stream::iter(0..20).map(|i| StreamEvent {
         id: i,

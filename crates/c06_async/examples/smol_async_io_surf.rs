@@ -23,26 +23,18 @@ async fn producer(tx: Sender<String>) {
 
 async fn consumer(rx: Receiver<String>) -> anyhow::Result<()> {
     let client = reqwest::Client::new();
-    let bodies = futures::stream::unfold(rx, |rx| async move {
-        match rx.recv().await.ok() {
-            Some(url) => Some((url, rx)),
-            None => None,
-        }
-    })
-    .map(|url| {
-        let client = client.clone();
-        async move {
-            client
-                .get(url)
-                .send()
-                .await?
-                .text()
-                .await
-        }
-    })
-    .buffer_unordered(8)
-    .collect::<Vec<_>>()
-    .await;
+    let bodies =
+        futures::stream::unfold(
+            rx,
+            |rx| async move { rx.recv().await.ok().map(|url| (url, rx)) },
+        )
+        .map(|url| {
+            let client = client.clone();
+            async move { client.get(url).send().await?.text().await }
+        })
+        .buffer_unordered(8)
+        .collect::<Vec<_>>()
+        .await;
 
     println!("fetched {} pages", bodies.len());
     Ok(())

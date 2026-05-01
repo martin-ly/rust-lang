@@ -8,6 +8,7 @@
 //! 实现一个泛型函数，要求类型必须实现 Display 和 PartialOrd，
 //! 返回格式化后的最大值描述字符串。
 
+#![allow(clippy::approx_constant)]
 use std::fmt::Display;
 
 /// 返回两个值中较大者的描述

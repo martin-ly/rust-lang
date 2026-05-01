@@ -239,8 +239,16 @@ impl Handler for RateLimitHandler {
 // 示例 4: 路由处理器
 // ============================================================================
 
+type RouteHandler = Box<dyn Fn(&Request) -> Response>;
+
 pub struct Router {
-    routes: HashMap<(Method, String), Box<dyn Fn(&Request) -> Response>>,
+    routes: HashMap<(Method, String), RouteHandler>,
+}
+
+impl Default for Router {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl Router {
@@ -294,6 +302,12 @@ pub struct HandlerChain {
     handlers: Vec<Box<dyn Handler>>,
 }
 
+impl Default for HandlerChain {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl HandlerChain {
     pub fn new() -> Self {
         HandlerChain {
@@ -301,7 +315,7 @@ impl HandlerChain {
         }
     }
 
-    pub fn add<H>(mut self, handler: H) -> Self
+    pub fn with_handler<H>(mut self, handler: H) -> Self
     where
         H: Handler + 'static,
     {
@@ -401,13 +415,13 @@ fn main() {
 
     // 创建责任链
     let chain = HandlerChain::new()
-        .add(AuthHandler::new("secret-token-123"))
-        .add(RateLimitHandler::new(5))
-        .add(ValidationHandler::new(vec![
+        .with_handler(AuthHandler::new("secret-token-123"))
+        .with_handler(RateLimitHandler::new(5))
+        .with_handler(ValidationHandler::new(vec![
             "name".to_string(),
             "email".to_string(),
         ]))
-        .add(router);
+        .with_handler(router);
 
     // 示例 1: 成功的请求
     println!("\n📌 示例 1: 完整的成功请求");

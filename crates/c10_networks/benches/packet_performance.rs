@@ -5,12 +5,11 @@
 //! 数据包性能基准测试
 //!
 //! 这个模块包含了 c10_networks 库数据包处理的性能基准测试
-#![allow(clippy::default_constructed_unit_structs)]
 
 use bytes::Bytes;
-use c10_networks::{
-    packet::buffer::BufferConfig,
-    packet::{Packet, PacketBuffer, PacketBuilder, PacketFilter, PacketStats, PacketType},
+use c10_networks::packet::buffer::BufferConfig;
+use c10_networks::packet::{
+    Packet, PacketBuffer, PacketBuilder, PacketFilter, PacketStats, PacketType,
 };
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
@@ -308,7 +307,7 @@ fn bench_large_packet_performance(c: &mut Criterion) {
     let sizes = vec![1024, 4096, 16384, 65536, 262144]; // 1KB, 4KB, 16KB, 64KB, 256KB
 
     for size in sizes {
-        group.bench_function(&format!("create_{}KB", size / 1024), |b| {
+        group.bench_function(format!("create_{}KB", size / 1024), |b| {
             let data = vec![0u8; size];
             b.iter(|| {
                 let packet = Packet::new(
@@ -319,7 +318,7 @@ fn bench_large_packet_performance(c: &mut Criterion) {
             })
         });
 
-        group.bench_function(&format!("clone_{}KB", size / 1024), |b| {
+        group.bench_function(format!("clone_{}KB", size / 1024), |b| {
             let data = vec![0u8; size];
             let packet = Packet::new(PacketType::Raw, Bytes::from(data));
             b.iter(|| {
@@ -328,7 +327,7 @@ fn bench_large_packet_performance(c: &mut Criterion) {
             })
         });
 
-        group.bench_function(&format!("serialize_{}KB", size / 1024), |b| {
+        group.bench_function(format!("serialize_{}KB", size / 1024), |b| {
             let data = vec![0u8; size];
             let packet = Packet::new(PacketType::Raw, Bytes::from(data));
             b.iter(|| {
@@ -429,7 +428,7 @@ fn bench_packet_type_comparison(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_type_comparison");
 
     group.bench_function("equality", |b| {
-        let types = vec![
+        let types = [
             PacketType::Raw,
             PacketType::Http,
             PacketType::WebSocket,

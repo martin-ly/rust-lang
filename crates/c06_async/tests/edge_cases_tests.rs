@@ -54,15 +54,15 @@ fn test_concurrency_boundaries() {
 fn test_error_paths() {
     // 测试Future失败（模拟）
     let future_failed = false;
-    assert_eq!(future_failed, false);
+    assert!(!future_failed);
 
     // 测试超时情况
     let timeout_occurred = false;
-    assert_eq!(timeout_occurred, false);
+    assert!(!timeout_occurred);
 
     // 测试取消情况
     let cancelled = false;
-    assert_eq!(cancelled, false);
+    assert!(!cancelled);
 }
 
 /// 测试边界值组合
@@ -90,7 +90,7 @@ fn test_resource_exhaustion() {
 
     // 测试内存耗尽（模拟）
     let memory_exhausted = false;
-    assert_eq!(memory_exhausted, false);
+    assert!(!memory_exhausted);
 }
 
 /// 测试异步并发安全
@@ -102,7 +102,7 @@ fn test_async_concurrent_safety() {
 
     // 测试异步互斥（模拟）
     let mutex_locked = false;
-    assert_eq!(mutex_locked, false);
+    assert!(!mutex_locked);
 }
 
 /// 测试异步任务取消边界情况
@@ -110,7 +110,7 @@ fn test_async_concurrent_safety() {
 fn test_async_cancellation_boundaries() {
     // 测试立即取消
     let cancelled_immediately = true;
-    assert_eq!(cancelled_immediately, true);
+    assert!(cancelled_immediately);
 
     // 测试部分完成后的取消
     let partial_completion = 50usize;

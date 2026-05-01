@@ -50,9 +50,7 @@ pub fn vec_comprehensive_examples() {
 
     // 1. 创建方式对比
     // 方式1: new() - 推荐，清晰表达意图
-    let mut v1: Vec<i32> = Vec::new();
-    v1.push(1);
-    v1.push(2);
+    let v1: Vec<i32> = vec![1, 2];
 
     // 方式2: with_capacity() - 预知大小时使用，避免重新分配
     let mut v2 = Vec::with_capacity(1000);
@@ -62,7 +60,7 @@ pub fn vec_comprehensive_examples() {
     println!("Capacity: {}, Len: {}", v2.capacity(), v2.len());
 
     // 方式3: vec![] - 初始值已知时使用
-    let v3 = vec![1, 2, 3, 4, 5];
+    let v3 = [1, 2, 3, 4, 5];
 
     // 方式4: from_iter - 从迭代器创建
     let _v4: Vec<i32> = (0..10).collect();
@@ -85,7 +83,7 @@ pub fn vec_comprehensive_examples() {
 
     // 自定义排序
     let mut words = vec!["apple", "Banana", "cherry", "Date"];
-    words.sort_by(|a, b| a.to_lowercase().cmp(&b.to_lowercase()));
+    words.sort_by_key(|a| a.to_lowercase());
     println!("Case-insensitive sorted: {:?}", words);
 
     // 二分搜索（要求已排序）
@@ -124,7 +122,7 @@ pub fn hashmap_comprehensive_examples() {
 
     // 模式3: or_insert_with - 避免不必要的计算
     map.entry("key3".to_string())
-        .or_insert_with(|| expensive_computation());
+        .or_insert_with(expensive_computation);
 
     // 3. 批量操作
     let keys = vec!["a", "b", "c"];
@@ -279,11 +277,11 @@ fn find_top_k(nums: Vec<i32>, k: usize) -> Vec<i32> {
     for num in nums {
         if heap.len() < k {
             heap.push(Reverse(num));
-        } else if let Some(&Reverse(min)) = heap.peek() {
-            if num > min {
-                heap.pop();
-                heap.push(Reverse(num));
-            }
+        } else if let Some(&Reverse(min)) = heap.peek()
+            && num > min
+        {
+            heap.pop();
+            heap.push(Reverse(num));
         }
     }
 
@@ -555,7 +553,7 @@ pub fn time_comprehensive_examples() {
     println!("In milliseconds: {}", total.as_millis());
 
     // 4. 比较和最小/最大
-    let durations = vec![
+    let durations = [
         Duration::from_millis(100),
         Duration::from_millis(50),
         Duration::from_millis(200),

@@ -161,7 +161,7 @@ fn bench_channel_performance(c: &mut Criterion) {
 
                     let receiver = thread::spawn(move || {
                         let mut received = 0;
-                        while let Ok(_) = rx.recv() {
+                        while rx.recv().is_ok() {
                             received += 1;
                         }
                         received
@@ -194,7 +194,7 @@ fn bench_channel_performance(c: &mut Criterion) {
 
                     let receiver = thread::spawn(move || {
                         let mut received = 0;
-                        while let Ok(_) = rx.recv() {
+                        while rx.recv().is_ok() {
                             received += 1;
                         }
                         received

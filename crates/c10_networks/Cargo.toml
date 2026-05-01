@@ -34,7 +34,7 @@ opentelemetry-stdout = { workspace = true }
 tokio-tungstenite = { workspace = true }
 tonic-prost = { workspace = true }
 url = { workspace = true }
-rustls = { workspace = true, optional = true, features = ["ring"] }
+rustls = { workspace = true, optional = true }
 rustls-pemfile = { workspace = true, optional = true }
 
 # QUIC / HTTP3 支持

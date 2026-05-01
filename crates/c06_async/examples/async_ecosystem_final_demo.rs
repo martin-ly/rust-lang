@@ -80,7 +80,7 @@ async fn performance_comparison_demo() -> Result<()> {
     let runtimes = analyzer.get_all_analyses();
 
     println!("\n  性能特征对比:");
-    for (_name, analysis) in runtimes {
+    for analysis in runtimes.values() {
         println!("    {}:", analysis.runtime_name);
         println!(
             "      内存使用: {}",

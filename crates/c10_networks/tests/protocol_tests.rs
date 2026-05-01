@@ -3,15 +3,13 @@
 //! 本模块包含了 c10_networks 库的协议测试，
 //! 确保各种网络协议的正确实现和互操作性。
 use bytes::Bytes;
-use c10_networks::{
-    packet::{Packet, PacketType},
-    protocol::{
-        http::{HttpMethod, HttpStatusCode, HttpVersion},
-        tcp::{TcpConnection, TcpConnectionConfig, TcpState},
-        websocket::{WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode},
-    },
-    socket::{TcpConfig, UdpConfig, utils},
+use c10_networks::packet::{Packet, PacketType};
+use c10_networks::protocol::http::{HttpMethod, HttpStatusCode, HttpVersion};
+use c10_networks::protocol::tcp::{TcpConnection, TcpConnectionConfig, TcpState};
+use c10_networks::protocol::websocket::{
+    WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode,
 };
+use c10_networks::socket::{TcpConfig, UdpConfig, utils};
 use std::time::Duration;
 
 /// 测试HTTP协议实现
@@ -408,7 +406,7 @@ fn test_protocol_performance() {
     for i in 0..ITERATIONS {
         let _request = c10_networks::protocol::http::HttpRequest::new(
             HttpMethod::GET,
-            &format!("/api/test/{}", i),
+            format!("/api/test/{}", i),
             HttpVersion::Http1_1,
         );
     }

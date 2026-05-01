@@ -322,7 +322,9 @@ impl ApplicationService {
         let metrics = self.metrics.clone();
 
         tokio::spawn(async move {
-            use axum::{Router, response::Html, routing::get};
+            use axum::Router;
+            use axum::response::Html;
+            use axum::routing::get;
 
             let app = Router::new().route(
                 "/metrics",
@@ -372,8 +374,8 @@ async fn main() -> Result<()> {
     info!("Application started. Metrics available at http://localhost:9090/metrics");
 
     // 模拟请求处理
-    let endpoints = vec!["/api/users", "/api/orders", "/api/products", "/api/health"];
-    let methods = vec!["GET", "POST", "PUT", "DELETE"];
+    let endpoints = ["/api/users", "/api/orders", "/api/products", "/api/health"];
+    let methods = ["GET", "POST", "PUT", "DELETE"];
 
     for i in 1..=100 {
         let method = methods[i % methods.len()];

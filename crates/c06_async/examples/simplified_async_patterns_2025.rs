@@ -8,7 +8,6 @@ use tracing::{error, info, warn};
 
 /// 2025年简化异步设计模式演示
 /// 展示实用的异步编程模式和最佳实践
-
 /// 1. 异步状态机模式
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum AsyncState {
@@ -75,6 +74,12 @@ pub struct AsyncEventSystem {
     event_history: Arc<RwLock<Vec<String>>>,
 }
 
+impl Default for AsyncEventSystem {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncEventSystem {
     pub fn new() -> Self {
         Self {
@@ -113,6 +118,12 @@ impl AsyncEventSystem {
 pub struct AsyncCommandInvoker {
     history: Arc<RwLock<Vec<String>>>,
     current_index: Arc<RwLock<isize>>,
+}
+
+impl Default for AsyncCommandInvoker {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncCommandInvoker {
@@ -182,6 +193,14 @@ pub struct AsyncCache<K, V> {
     cache: Arc<RwLock<std::collections::HashMap<K, V>>>,
     hit_count: Arc<RwLock<u64>>,
     miss_count: Arc<RwLock<u64>>,
+}
+
+impl<K: Clone + std::hash::Hash + Eq + Send + Sync, V: Clone + Send + Sync> Default
+    for AsyncCache<K, V>
+{
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<K: Clone + std::hash::Hash + Eq + Send + Sync, V: Clone + Send + Sync> AsyncCache<K, V> {
@@ -385,6 +404,12 @@ pub enum HealthStatus {
     Unknown,
 }
 
+impl Default for AsyncHealthChecker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncHealthChecker {
     pub fn new() -> Self {
         Self {
@@ -440,8 +465,6 @@ impl AsyncHealthChecker {
 
         if unhealthy_count == 0 {
             HealthStatus::Healthy
-        } else if unhealthy_count == checks.len() {
-            HealthStatus::Unhealthy
         } else {
             HealthStatus::Unhealthy // 任何不健康的检查都导致整体不健康
         }

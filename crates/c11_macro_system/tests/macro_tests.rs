@@ -45,7 +45,6 @@ fn test_println_macro() {
 #[test]
 fn test_assert_macro() {
     // 测试 assert! 宏
-    assert!(true);
     assert!(1 + 1 == 2);
     assert!(10 > 5);
 }

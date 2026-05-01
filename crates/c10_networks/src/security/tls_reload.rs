@@ -1,6 +1,6 @@
 use crate::error::{NetworkError, NetworkResult};
 use rustls::ServerConfig;
-use rustls::crypto::ring;
+use rustls::crypto::CryptoProvider;
 use rustls::pki_types::{CertificateDer, PrivateKeyDer};
 use rustls::version::TLS13;
 use std::sync::Arc;
@@ -22,8 +22,10 @@ impl TlsReloader {
     pub async fn reload(&self, cert_chain_pem: &[u8], key_pem: &[u8]) -> NetworkResult<()> {
         let certs: Vec<CertificateDer<'static>> = pemfile_to_certs(cert_chain_pem)?;
         let key: PrivateKeyDer<'static> = pemfile_to_key(key_pem)?;
-        let provider = ring::default_provider();
-        let new = ServerConfig::builder_with_provider(provider.into())
+        let provider = CryptoProvider::get_default()
+            .cloned()
+            .unwrap_or_else(|| Arc::new(rustls::crypto::aws_lc_rs::default_provider()));
+        let new = ServerConfig::builder_with_provider(provider)
             .with_protocol_versions(&[&TLS13])
             .map_err(|e| NetworkError::Other(format!("tls proto: {e}")))?
             .with_no_client_auth()

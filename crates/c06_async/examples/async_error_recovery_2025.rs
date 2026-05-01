@@ -10,7 +10,6 @@ use tracing::{debug, info, warn};
 
 /// 2025年异步错误恢复和重试机制演示
 /// 展示最新的异步错误处理和恢复最佳实践
-
 /// 1. 异步重试策略
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum RetryStrategy {
@@ -73,7 +72,7 @@ impl AsyncRetryManager {
             let attempt_start = Instant::now();
 
             // 执行操作（带超时）
-            let result = if let Some(timeout_duration) = self.config.timeout {
+            if let Some(timeout_duration) = self.config.timeout {
                 match timeout(timeout_duration, operation()).await {
                     Ok(Ok(result)) => {
                         self.update_metrics(true, attempt_start.elapsed()).await;
@@ -472,6 +471,12 @@ pub struct RecoveryMetrics {
     pub successful_recoveries: u64,
     pub failed_recoveries: u64,
     pub recovery_types: HashMap<String, u64>,
+}
+
+impl Default for AsyncErrorRecoveryManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncErrorRecoveryManager {

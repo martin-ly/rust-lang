@@ -2,7 +2,7 @@
 //!
 //! 快速用法示例：
 //! ```no_run
-//! use c06_async::utils::{ExecStrategyBuilder};
+//! use c06_async::utils::ExecStrategyBuilder;
 //! use std::time::Duration;
 //! # async fn run() -> anyhow::Result<()> {
 //! let runner = ExecStrategyBuilder::new()
@@ -12,13 +12,15 @@
 //!     .timeout(Duration::from_secs(2))
 //!     .build();
 //!
-//! let res = runner.run(
-//!     |attempt| async move {
-//!         // 你的异步任务，这里简单返回 Ok，生产中可返回 Err 重试
-//!         Ok::<_, anyhow::Error>(format!("ok on attempt {}", attempt))
-//!     },
-//!     None::<fn(&anyhow::Error)->bool>,
-//! ).await?;
+//! let res = runner
+//!     .run(
+//!         |attempt| async move {
+//!             // 你的异步任务，这里简单返回 Ok，生产中可返回 Err 重试
+//!             Ok::<_, anyhow::Error>(format!("ok on attempt {}", attempt))
+//!         },
+//!         None::<fn(&anyhow::Error) -> bool>,
+//!     )
+//!     .await?;
 //! assert!(res.is_some());
 //! # Ok(()) }
 //! ```
@@ -109,6 +111,7 @@ where
     Abortable::new(fut, reg).await
 }
 
+pub mod backoff;
 pub mod circuit_breaker;
 
 pub mod supervisor {

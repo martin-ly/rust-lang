@@ -17,7 +17,7 @@ use std::ptr;
 #[test]
 fn test_control_flow_init() {
     let mut x = MaybeUninit::<i32>::uninit();
-    
+
     let initialized = unsafe {
         if true {
             x.as_mut_ptr().write(42);
@@ -26,7 +26,7 @@ fn test_control_flow_init() {
             false
         }
     };
-    
+
     if initialized {
         unsafe {
             assert_eq!(x.assume_init(), 42);
@@ -41,17 +41,17 @@ fn test_control_flow_init() {
 fn test_early_return_safety() {
     fn may_return_early(should_return: bool) -> Option<i32> {
         let mut data = MaybeUninit::<i32>::uninit();
-        
+
         if should_return {
             return None; // 安全：data 未被初始化
         }
-        
+
         unsafe {
             data.as_mut_ptr().write(100);
             Some(data.assume_init())
         }
     }
-    
+
     assert_eq!(may_return_early(true), None);
     assert_eq!(may_return_early(false), Some(100));
 }
@@ -61,22 +61,20 @@ fn test_early_return_safety() {
 /// 预期结果: 应该正确完成所有操作
 #[test]
 fn test_loop_memory_operations() {
-    let mut arr: [MaybeUninit<i32>; 5] = unsafe {
-        MaybeUninit::uninit().assume_init()
-    };
-    
+    let mut arr: [MaybeUninit<i32>; 5] = unsafe { MaybeUninit::uninit().assume_init() };
+
     // 初始化
     for (i, elem) in arr.iter_mut().enumerate() {
         elem.write(i as i32 * 10);
     }
-    
+
     // 验证
     unsafe {
         for (i, elem) in arr.iter().enumerate() {
             assert_eq!(elem.assume_init_read(), i as i32 * 10);
         }
     }
-    
+
     // MaybeUninit 不需要显式 forget
 }
 
@@ -90,7 +88,7 @@ fn test_function_pointer() {
     fn add(a: i32, b: i32) -> i32 {
         a + b
     }
-    
+
     let fn_ptr: fn(i32, i32) -> i32 = add;
     assert_eq!(fn_ptr(2, 3), 5);
 }
@@ -103,7 +101,7 @@ fn test_unsafe_fn_pointer() {
     unsafe fn unsafe_add(a: i32, b: i32) -> i32 {
         a + b
     }
-    
+
     let fn_ptr: unsafe fn(i32, i32) -> i32 = unsafe_add;
     unsafe {
         assert_eq!(fn_ptr(2, 3), 5);
@@ -117,7 +115,7 @@ fn test_unsafe_fn_pointer() {
 fn test_closure_capture() {
     let x = 10;
     let closure = |y| x + y;
-    
+
     assert_eq!(closure(5), 15);
 }
 
@@ -131,7 +129,7 @@ fn test_closure_mut_capture() {
         x += 1;
         x
     };
-    
+
     assert_eq!(closure(), 1);
     assert_eq!(closure(), 2);
     assert_eq!(x, 2);
@@ -145,13 +143,9 @@ fn test_closure_mut_capture() {
 #[test]
 fn test_recursion_depth() {
     fn factorial(n: u64) -> u64 {
-        if n <= 1 {
-            1
-        } else {
-            n * factorial(n - 1)
-        }
+        if n <= 1 { 1 } else { n * factorial(n - 1) }
     }
-    
+
     assert_eq!(factorial(5), 120);
 }
 
@@ -167,7 +161,7 @@ fn test_tail_call_concept() {
             sum_tail(n - 1, acc + n)
         }
     }
-    
+
     assert_eq!(sum_tail(100, 0), 5050);
 }
 
@@ -180,7 +174,7 @@ fn test_tail_call_concept() {
 fn test_ptr_read_write() {
     let mut x = 0i32;
     let ptr = &mut x as *mut i32;
-    
+
     unsafe {
         ptr::write(ptr, 42);
         assert_eq!(ptr::read(ptr), 42);
@@ -194,7 +188,7 @@ fn test_ptr_read_write() {
 fn test_conditional_ptr_write() {
     let mut x = MaybeUninit::<i32>::uninit();
     let ptr = x.as_mut_ptr();
-    
+
     unsafe {
         if !ptr.is_null() {
             ptr::write(ptr, 100);
@@ -210,7 +204,7 @@ fn test_conditional_ptr_write() {
 fn test_loop_as_goto() {
     let mut i = 0;
     let mut sum = 0;
-    
+
     'outer: loop {
         if i >= 10 {
             break 'outer;
@@ -218,7 +212,7 @@ fn test_loop_as_goto() {
         sum += i;
         i += 1;
     }
-    
+
     assert_eq!(sum, 45);
 }
 
@@ -235,9 +229,9 @@ fn test_pattern_match_safety() {
         B { x: i32, y: i32 },
         C(Vec<i32>),
     }
-    
+
     let val = Complex::B { x: 1, y: 2 };
-    
+
     match &val {
         Complex::A(n) => assert_eq!(*n, 1),
         Complex::B { x, y } => {
@@ -255,13 +249,10 @@ fn test_pattern_match_safety() {
 fn test_match_reborrow() {
     let mut x = 5;
     let mut r = &mut x;
-    
-    match r {
-        ref mut mr => {
-            **mr = 10;
-        }
-    }
-    
+
+    let mr = &mut r;
+    **mr = 10;
+
     assert_eq!(*r, 10);
     assert_eq!(x, 10);
 }
@@ -280,7 +271,7 @@ fn test_custom_iterator() {
 
     impl Iterator for CountUp {
         type Item = i32;
-        
+
         fn next(&mut self) -> Option<Self::Item> {
             if self.current < self.max {
                 let val = self.current;
@@ -303,14 +294,14 @@ fn test_custom_iterator() {
 #[test]
 fn test_iterator_unsafe() {
     let mut data = [1, 2, 3, 4, 5];
-    
+
     unsafe {
         let ptr = data.as_mut_ptr();
         for i in 0..data.len() {
             *ptr.add(i) *= 2;
         }
     }
-    
+
     assert_eq!(data, [2, 4, 6, 8, 10]);
 }
 
@@ -322,19 +313,15 @@ fn test_iterator_unsafe() {
 #[test]
 fn test_result_control_flow() {
     fn may_fail(x: i32) -> Result<i32, ()> {
-        if x < 0 {
-            Err(())
-        } else {
-            Ok(x * 2)
-        }
+        if x < 0 { Err(()) } else { Ok(x * 2) }
     }
-    
+
     fn compound(x: i32) -> Result<i32, ()> {
         let a = may_fail(x)?;
         let b = may_fail(a)?;
         Ok(b)
     }
-    
+
     assert_eq!(compound(2), Ok(8));
     assert_eq!(compound(-1), Err(()));
 }
@@ -345,20 +332,20 @@ fn test_result_control_flow() {
 #[test]
 fn test_panic_safety() {
     struct Guard<'a>(&'a mut bool);
-    
+
     impl<'a> Drop for Guard<'a> {
         fn drop(&mut self) {
             *self.0 = true;
         }
     }
-    
+
     let mut dropped = false;
-    
+
     {
         let _guard = Guard(&mut dropped);
         // 正常退出，Drop 会被调用
     }
-    
+
     assert!(dropped);
 }
 
@@ -377,7 +364,7 @@ fn test_break_with_value() {
         }
         0
     };
-    
+
     assert_eq!(result, 10);
 }
 
@@ -387,7 +374,7 @@ fn test_break_with_value() {
 #[test]
 fn test_labeled_continue() {
     let mut count = 0;
-    
+
     'outer: for _i in 0..3 {
         for j in 0..3 {
             count += 1;
@@ -396,7 +383,7 @@ fn test_labeled_continue() {
             }
         }
     }
-    
+
     // i=0: j=0, j=1 (continue), i=1: j=0, j=1 (continue), i=2: j=0, j=1 (continue)
     assert_eq!(count, 6);
 }

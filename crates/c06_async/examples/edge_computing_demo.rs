@@ -536,13 +536,8 @@ impl EdgeDataProcessor {
                             }
                         };
 
-                        if condition_met {
-                            match rule.action {
-                                ProcessingAction::Alert => {
-                                    anomaly_score += 0.3;
-                                }
-                                _ => {}
-                            }
+                        if condition_met && let ProcessingAction::Alert = rule.action {
+                            anomaly_score += 0.3;
                         }
                     }
                     ProcessingCondition::Anomaly { threshold } => {
@@ -601,6 +596,12 @@ pub struct InferenceResult {
     pub confidence: f32,
     pub inference_time: Duration,
     pub completed_at: Instant,
+}
+
+impl Default for EdgeAIEngine {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl EdgeAIEngine {
@@ -1092,7 +1093,7 @@ impl EdgeComputingDemo {
         let scheduler = EdgeTaskScheduler::new(10);
 
         // 注册边缘节点
-        let locations = vec![
+        let locations = [
             ("Beijing", 39.9042, 116.4074),
             ("Shanghai", 31.2304, 121.4737),
             ("Guangzhou", 23.1291, 113.2644),

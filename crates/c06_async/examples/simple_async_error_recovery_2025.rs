@@ -8,7 +8,6 @@ use tracing::{debug, info, warn};
 
 /// 2025年简化异步错误恢复和重试机制演示
 /// 展示实用的异步错误处理和恢复最佳实践
-
 /// 1. 简化异步重试管理器
 pub struct SimpleAsyncRetryManager {
     max_attempts: u32,
@@ -426,6 +425,12 @@ pub struct RecoveryMetrics {
     pub recovery_types: HashMap<String, u64>,
 }
 
+impl Default for SimpleAsyncErrorRecoveryManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SimpleAsyncErrorRecoveryManager {
     pub fn new() -> Self {
         Self {
@@ -453,7 +458,7 @@ impl SimpleAsyncErrorRecoveryManager {
         let strategies = self.strategies.read().await;
 
         if let Some(strategy) = strategies.get(operation_name) {
-            self.apply_recovery_strategy(strategy, || operation()).await
+            self.apply_recovery_strategy(strategy, &mut operation).await
         } else {
             // 没有恢复策略，直接执行
             operation()
@@ -472,7 +477,7 @@ impl SimpleAsyncErrorRecoveryManager {
             } => {
                 let retry_manager = SimpleAsyncRetryManager::new(*max_attempts, *base_delay, true);
                 retry_manager
-                    .execute_with_retry("operation", || operation())
+                    .execute_with_retry("operation", &mut operation)
                     .await
             }
             RecoveryStrategyType::CircuitBreaker {

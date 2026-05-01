@@ -1,6 +1,5 @@
 use anyhow::Result;
-use backoff::future::retry;
-use backoff::{Error as BackoffError, ExponentialBackoff};
+use c06_async::utils::backoff::retry_future;
 use redis::Client;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use tokio::time::{sleep, timeout};
@@ -57,24 +56,19 @@ impl DistributedLock {
 
     /// 获取锁（阻塞，带重试）
     pub async fn lock(&self, max_wait: Duration) -> Result<()> {
-        let backoff = ExponentialBackoff {
-            initial_interval: Duration::from_millis(100),
-            max_interval: Duration::from_secs(1),
-            max_elapsed_time: Some(max_wait),
-            ..Default::default()
-        };
-
-        let operation = || async {
-            if self.try_lock().await? {
-                Ok(())
-            } else {
-                Err(BackoffError::transient(anyhow::anyhow!(
-                    "Lock not available"
-                )))
-            }
-        };
-
-        retry(backoff, operation).await?;
+        retry_future(
+            || async {
+                if self.try_lock().await? {
+                    Ok(())
+                } else {
+                    Err(anyhow::anyhow!("Lock not available"))
+                }
+            },
+            Duration::from_millis(100),
+            Duration::from_secs(1),
+            Some(max_wait),
+        )
+        .await?;
         info!(lock_key = %self.lock_key, "Lock acquired successfully");
         Ok(())
     }

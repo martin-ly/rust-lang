@@ -41,9 +41,7 @@ mod let_else_patterns {
     /// 使用 let...else 的现代方式
     pub fn parse_config_modern(input: &str) -> Option<HashMap<String, String>> {
         // 提前返回无效输入
-        let Some(first) = input.lines().next() else {
-            return None;
-        };
+        let first = input.lines().next()?;
         let true = first.starts_with("#CONFIG") else {
             return None;
         };
@@ -127,10 +125,7 @@ mod control_flow_patterns {
         let mut results = Vec::with_capacity(items.len());
 
         for item in items {
-            match processor(item) {
-                Ok(processed) => results.push(processed),
-                Err(e) => return Err(e),
-            }
+            results.push(processor(item)?);
         }
 
         Ok(results)
@@ -212,7 +207,7 @@ mod gat_patterns {
         where
             T: 'a;
 
-        fn get<'a>(&'a self, index: usize) -> Option<&'a T> {
+        fn get(&self, index: usize) -> Option<&T> {
             if index < self.len() {
                 Some(&self[index])
             } else {
@@ -364,11 +359,11 @@ mod type_inference_patterns {
     /// 更智能的类型推导
     pub fn smart_inference() {
         // 编译器现在可以更好地推导类型
-        let numbers = vec![1, 2, 3, 4, 5]; // 无需显式类型标注
+        let numbers = [1, 2, 3, 4, 5]; // 无需显式类型标注
         let doubled: Vec<i32> = numbers.iter().map(|x| x * 2).collect();
 
         // 闭包参数类型推导
-        let sum: i32 = doubled.iter().fold(0, |acc, x| acc + x);
+        let sum: i32 = doubled.iter().sum();
         println!("Sum: {}", sum);
     }
 

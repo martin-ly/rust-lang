@@ -17,7 +17,7 @@ fn test_generic_parameter_boundaries() {
 
     assert_eq!(identity(42), 42);
     assert_eq!(identity("test"), "test");
-    assert_eq!(identity(true), true);
+    assert!(identity(true));
 }
 
 /// 测试Trait边界情况
@@ -54,7 +54,7 @@ fn test_trait_boundaries() {
         CloneAndDisplay::display(x)
     }
 
-    let cloned = value.clone();
+    let cloned = value;
     assert_eq!(cloned, value);
     // 使用 CloneAndDisplay trait 的 display 方法（显式限定语法，使 trait 被判定为已使用）
     assert_eq!(<i32 as CloneAndDisplay>::display(&value), "42");

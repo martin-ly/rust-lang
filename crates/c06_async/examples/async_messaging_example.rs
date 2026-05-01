@@ -153,6 +153,12 @@ pub struct MessageStatistics {
     pub messages_by_priority: HashMap<MessagePriority, u64>,
 }
 
+impl Default for AsyncMessageSystem {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncMessageSystem {
     /// 创建新的消息系统
     pub fn new() -> Self {

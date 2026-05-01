@@ -92,7 +92,7 @@ async fn async_http_client(url: &str) -> Result<String, Box<dyn std::error::Erro
 async fn concurrent_requests() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n⚡ 并发处理多个请求...");
 
-    let urls = vec![
+    let urls = [
         "https://api1.example.com",
         "https://api2.example.com",
         "https://api3.example.com",

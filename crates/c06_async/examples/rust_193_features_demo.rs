@@ -57,7 +57,7 @@ async fn demonstrate_vecdeque_async_task_queue() {
 /// slice::as_array (Rust 1.93) - 异步流中固定大小块
 async fn demonstrate_slice_as_array_async() {
     println!("\n--- slice::as_array 异步数据块处理 ---");
-    let data = vec![1u8, 2, 3, 4, 5, 6, 7, 8];
+    let data = [1u8, 2, 3, 4, 5, 6, 7, 8];
     let mut chunks_processed = 0;
 
     for chunk in data.chunks(4) {

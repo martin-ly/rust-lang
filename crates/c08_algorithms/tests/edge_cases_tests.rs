@@ -61,7 +61,7 @@ fn test_algorithm_edge_cases() {
 
     // 测试重复值
     let duplicates = vec![1, 1, 1, 1, 1];
-    assert_eq!(duplicates.iter().all(|&x| x == 1), true);
+    assert!(duplicates.iter().all(|&x| x == 1));
 
     // 测试已排序数组
     let sorted = vec![1, 2, 3, 4, 5];
@@ -81,12 +81,12 @@ fn test_algorithm_edge_cases() {
 fn test_error_paths() {
     // 测试无效索引访问（应该panic或返回None）
     let vec = vec![1, 2, 3];
-    assert_eq!(vec.get(0), Some(&1));
+    assert_eq!(vec.first(), Some(&1));
     assert_eq!(vec.get(100), None);
 
     // 测试空数组操作
     let empty: Vec<i32> = vec![];
-    assert_eq!(empty.get(0), None);
+    assert_eq!(empty.first(), None);
     assert_eq!(empty.first(), None);
     assert_eq!(empty.last(), None);
 }
@@ -115,6 +115,6 @@ fn test_boundary_value_combinations() {
 
     // 测试零值
     let zeros = vec![0; 100];
-    assert_eq!(zeros.iter().all(|&x| x == 0), true);
+    assert!(zeros.iter().all(|&x| x == 0));
     assert_eq!(zeros.iter().sum::<i32>(), 0);
 }

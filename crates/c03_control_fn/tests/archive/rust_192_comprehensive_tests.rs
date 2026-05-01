@@ -12,14 +12,11 @@
 //! cargo test rust_192_comprehensive_tests
 //! ```
 use c03_control_fn::rust_192_features::{
-    control_flow_check, control_flow_branch, control_flow_loop, control_flow_match,
-    control_flow_with_never, LocatedError, ErrorContext,
-    ControlFlowAnalyzer, ControlFlowOptimizer,
-    ControlFlowMatcher, ControlFlowCombinator, ControlFlowProfiler, ControlFlowValidator,
-    ControlFlowStateMachine, ControlFlowState,
-    IteratorControlFlow,
-    ControlFlowVisualization,
-    get_rust_192_control_flow_info, demonstrate_rust_192_control_flow,
+    ControlFlowAnalyzer, ControlFlowCombinator, ControlFlowMatcher, ControlFlowOptimizer,
+    ControlFlowProfiler, ControlFlowState, ControlFlowStateMachine, ControlFlowValidator,
+    ControlFlowVisualization, ErrorContext, IteratorControlFlow, LocatedError, control_flow_branch,
+    control_flow_check, control_flow_loop, control_flow_match, control_flow_with_never,
+    demonstrate_rust_192_control_flow, get_rust_192_control_flow_info,
 };
 
 /// 测试控制流检查功能
@@ -294,9 +291,7 @@ fn test_concurrent_safety() {
 
     // 测试 ErrorContext 在并发场景下的使用
     let contexts: Vec<_> = (0..10)
-        .map(|_| {
-            thread::spawn(|| ErrorContext::current())
-        })
+        .map(|_| thread::spawn(|| ErrorContext::current()))
         .map(|handle| handle.join().unwrap())
         .collect();
 
@@ -376,7 +371,6 @@ fn test_demonstration_function() {
     demonstrate_rust_192_control_flow();
 
     // 这是一个基本测试，主要验证函数不会崩溃
-    assert!(true);
 }
 
 /// 测试控制流模式匹配器
@@ -427,7 +421,8 @@ fn test_control_flow_combinator() {
 
     // 测试组合分析和优化
     let items = vec![10, 20, 30];
-    let (branches, _loops, _matches, optimized) = ControlFlowCombinator::analyze_and_optimize(&items);
+    let (branches, _loops, _matches, optimized) =
+        ControlFlowCombinator::analyze_and_optimize(&items);
     assert_eq!(branches, 3);
     let _ = optimized; // optimized 是 usize，总是 >= 0
 }
@@ -546,24 +541,16 @@ fn test_iterator_control_flow_comprehensive() {
     let numbers = vec![1, 2, 3, 4, 5];
 
     // 过滤测试
-    let evens: Vec<_> = IteratorControlFlow::filter_with_control_flow(
-        numbers.iter(),
-        |&x| Ok(*x % 2 == 0),
-    );
+    let evens: Vec<_> =
+        IteratorControlFlow::filter_with_control_flow(numbers.iter(), |&x| Ok(*x % 2 == 0));
     assert_eq!(evens.len(), 2);
 
     // 映射测试
-    let doubled = IteratorControlFlow::map_with_control_flow(numbers.iter(), |&x| {
-        Ok(x * 2)
-    });
+    let doubled = IteratorControlFlow::map_with_control_flow(numbers.iter(), |&x| Ok(x * 2));
     assert_eq!(doubled.unwrap(), vec![2, 4, 6, 8, 10]);
 
     // 折叠测试
-    let sum = IteratorControlFlow::fold_with_control_flow(
-        numbers.iter(),
-        0,
-        |acc, &x| Ok(acc + x),
-    );
+    let sum = IteratorControlFlow::fold_with_control_flow(numbers.iter(), 0, |acc, &x| Ok(acc + x));
     assert_eq!(sum.unwrap(), 15);
 }
 

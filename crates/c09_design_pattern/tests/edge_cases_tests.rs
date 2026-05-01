@@ -45,11 +45,11 @@ fn test_error_paths() {
 
     // 测试模式不存在的情况
     let pattern_not_found = false;
-    assert_eq!(pattern_not_found, false);
+    assert!(!pattern_not_found);
 
     // 测试模式组合冲突
     let pattern_conflict = false;
-    assert_eq!(pattern_conflict, false);
+    assert!(!pattern_conflict);
 }
 
 /// 测试边界值组合
@@ -79,7 +79,7 @@ fn test_resource_exhaustion() {
 
     // 测试内存耗尽（模拟）
     let memory_exhausted = false;
-    assert_eq!(memory_exhausted, false);
+    assert!(!memory_exhausted);
 }
 
 /// 测试模式状态边界情况

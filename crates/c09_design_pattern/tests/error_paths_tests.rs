@@ -17,11 +17,11 @@ fn test_error_inputs() {
 fn test_error_states() {
     // 测试模式不存在的情况
     let pattern_not_found = false;
-    assert_eq!(pattern_not_found, false);
+    assert!(!pattern_not_found);
 
     // 测试模式组合冲突
     let pattern_conflict = false;
-    assert_eq!(pattern_conflict, false);
+    assert!(!pattern_conflict);
 }
 
 /// 测试异常情况
@@ -29,11 +29,11 @@ fn test_error_states() {
 fn test_exception_cases() {
     // 测试模式状态异常
     let invalid_state = false;
-    assert_eq!(invalid_state, false);
+    assert!(!invalid_state);
 
     // 测试执行模型异常
     let execution_error = false;
-    assert_eq!(execution_error, false);
+    assert!(!execution_error);
 }
 
 /// 测试资源耗尽情况
@@ -48,7 +48,7 @@ fn test_resource_exhaustion() {
 
     // 测试内存耗尽（模拟）
     let memory_exhausted = false;
-    assert_eq!(memory_exhausted, false);
+    assert!(!memory_exhausted);
 }
 
 /// 测试并发安全

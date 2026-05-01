@@ -54,11 +54,11 @@ fn test_config_defaults() {
     assert_eq!(ipc_config.protocol, IpcProtocol::Pipe);
     assert_eq!(ipc_config.retry_count, 3);
     assert_eq!(ipc_config.buffer_size, 8192);
-    assert_eq!(ipc_config.encrypted, false);
+    assert!(!ipc_config.encrypted);
 
     let sync_config = SyncConfig::default();
     assert_eq!(sync_config.primitive, SyncPrimitive::Mutex);
-    assert_eq!(sync_config.fair, true);
+    assert!(sync_config.fair);
     assert_eq!(sync_config.max_waiters, None);
 }
 

@@ -10,7 +10,6 @@ use tracing::{error, info};
 
 /// 2025年异步机器学习模式演示
 /// 展示最新的异步机器学习编程模式和最佳实践
-
 /// 1. 异步模型训练管理器
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TrainingConfig {
@@ -472,6 +471,12 @@ pub struct PipelineStats {
     pub average_processing_time: Duration,
 }
 
+impl Default for AsyncDataPipeline {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncDataPipeline {
     pub fn new() -> Self {
         Self {
@@ -503,7 +508,7 @@ impl AsyncDataPipeline {
 
         // 按顺序处理每个阶段
         for stage in stages.iter() {
-            current_data = self.execute_stage(&stage, current_data).await?;
+            current_data = self.execute_stage(stage, current_data).await?;
             info!(
                 "阶段 {} 处理完成，输出 {} 条记录",
                 stage.name,

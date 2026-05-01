@@ -252,7 +252,8 @@ async fn benchmark_cache(num_operations: usize, cache_size: usize) {
     }
 
     for handle in handles {
-        black_box(handle.await.unwrap());
+        let _: () = handle.await.unwrap();
+        black_box(());
     }
 }
 

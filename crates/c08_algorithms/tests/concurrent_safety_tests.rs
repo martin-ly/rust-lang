@@ -123,5 +123,4 @@ fn test_synchronization_primitives() {
     }
 
     // 所有线程都已通过屏障
-    assert!(true);
 }

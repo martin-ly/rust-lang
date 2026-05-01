@@ -63,7 +63,7 @@ fn test_generic_enum_integration() {
 
     match none_value {
         Option::Some(_) => panic!("Expected None"),
-        Option::None => assert!(true),
+        Option::None => (),
     }
 }
 

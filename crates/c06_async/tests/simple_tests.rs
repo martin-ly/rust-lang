@@ -74,12 +74,12 @@ async fn test_runtime_type() {
 /// 测试性能指标
 #[tokio::test]
 async fn test_runtime_metrics() {
-    let mut metrics = RuntimeMetrics::default();
-
-    metrics.task_count = 10;
-    metrics.success_count = 8;
-    metrics.failure_count = 2;
-    metrics.average_execution_time = Duration::from_millis(50);
+    let metrics = RuntimeMetrics {
+        task_count: 10,
+        success_count: 8,
+        failure_count: 2,
+        average_execution_time: Duration::from_millis(50),
+    };
 
     assert_eq!(metrics.task_count, 10);
     assert_eq!(metrics.success_count, 8);

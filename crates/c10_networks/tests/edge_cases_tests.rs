@@ -59,11 +59,11 @@ fn test_error_paths() {
 
     // 测试连接失败
     let connection_failed = false;
-    assert_eq!(connection_failed, false);
+    assert!(!connection_failed);
 
     // 测试网络错误
     let network_error = false;
-    assert_eq!(network_error, false);
+    assert!(!network_error);
 }
 
 /// 测试边界值组合
@@ -91,7 +91,7 @@ fn test_resource_exhaustion() {
 
     // 测试内存耗尽（模拟）
     let memory_exhausted = false;
-    assert_eq!(memory_exhausted, false);
+    assert!(!memory_exhausted);
 }
 
 /// 测试网络协议边界情况

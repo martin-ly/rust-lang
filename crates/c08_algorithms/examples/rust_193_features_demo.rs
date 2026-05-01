@@ -53,7 +53,7 @@ fn demonstrate_btreemap_append() {
 /// slice::as_array (Rust 1.93)
 fn demonstrate_slice_as_array() {
     println!("\n--- slice::as_array ---");
-    let v = vec![10, 20, 30, 40];
+    let v = [10, 20, 30, 40];
     let slice: &[i32] = &v[..3];
     if let Some(arr) = slice.as_array::<3>() {
         println!("  as_array::<3>: {:?}", arr);

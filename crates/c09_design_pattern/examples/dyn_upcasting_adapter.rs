@@ -302,6 +302,12 @@ pub struct DeviceManager {
     devices: Vec<Box<dyn SmartDevice>>,
 }
 
+impl Default for DeviceManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl DeviceManager {
     pub fn new() -> Self {
         DeviceManager {

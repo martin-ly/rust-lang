@@ -222,6 +222,12 @@ pub struct SumReducer {
     sum: std::cell::RefCell<i32>,
 }
 
+impl Default for SumReducer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SumReducer {
     pub fn new() -> Self {
         SumReducer {
@@ -426,6 +432,12 @@ pub struct PipelineStats {
     processors: Vec<String>,
     items_processed: usize,
     start_time: std::time::Instant,
+}
+
+impl Default for PipelineStats {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl PipelineStats {

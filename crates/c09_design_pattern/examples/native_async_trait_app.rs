@@ -413,6 +413,12 @@ pub struct MiddlewareChain {
     middlewares: Vec<MiddlewareType>,
 }
 
+impl Default for MiddlewareChain {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MiddlewareChain {
     pub fn new() -> Self {
         MiddlewareChain {
@@ -594,7 +600,10 @@ async fn sleep(duration: Duration) {
     let mut sleep = Sleep::new(duration);
     loop {
         let sleep_pin = unsafe { Pin::new_unchecked(&mut sleep) };
-        if let Poll::Ready(_) = sleep_pin.poll(&mut Context::from_waker(&noop_waker())) {
+        if sleep_pin
+            .poll(&mut Context::from_waker(noop_waker()))
+            .is_ready()
+        {
             break;
         }
     }

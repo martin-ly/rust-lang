@@ -17,11 +17,7 @@ fn bench_http_request_processing(c: &mut Criterion) {
 
     for size in request_sizes.iter() {
         let request = format!(
-            "GET /test HTTP/1.1\r\n\
-             Host: localhost\r\n\
-             Content-Length: {}\r\n\
-             \r\n\
-             {}",
+            "GET /test HTTP/1.1\r\nHost: localhost\r\nContent-Length: {}\r\n\r\n{}",
             size,
             "a".repeat(*size)
         );
@@ -83,9 +79,13 @@ fn bench_data_serialization(c: &mut Criterion) {
             BenchmarkId::new("bincode_deserialize", size),
             size,
             |b, _| {
-                let binary = bincode::serde::encode_to_vec(&data, bincode::config::standard()).unwrap();
+                let binary =
+                    bincode::serde::encode_to_vec(&data, bincode::config::standard()).unwrap();
                 b.iter(|| {
-                    let result: TestData = bincode::serde::decode_from_slice(&binary, bincode::config::standard()).unwrap().0;
+                    let result: TestData =
+                        bincode::serde::decode_from_slice(&binary, bincode::config::standard())
+                            .unwrap()
+                            .0;
                     result
                 })
             },
@@ -221,11 +221,9 @@ fn bench_load_balancing(c: &mut Criterion) {
             |b, _| {
                 b.iter(|| {
                     // 轮询负载均衡
-                    let mut index = 0;
                     let mut selected = Vec::new();
-                    for _ in 0..1000 {
+                    for index in 0..1000 {
                         selected.push(&servers[index % servers.len()]);
-                        index += 1;
                     }
                     selected
                 })
@@ -372,8 +370,7 @@ fn bench_async_operations(c: &mut Criterion) {
                             });
                         }
 
-                        let results = futures::future::join_all(tasks).await;
-                        results
+                        futures::future::join_all(tasks).await
                     })
                 })
             },

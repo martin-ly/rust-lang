@@ -10,7 +10,6 @@ use tracing::{debug, info};
 
 /// 2025年异步数据库模式演示
 /// 展示最新的异步数据库编程模式和最佳实践
-
 /// 1. 异步数据库连接池
 #[derive(Debug, Clone)]
 pub struct AsyncDatabasePool {
@@ -138,20 +137,20 @@ impl AsyncDatabasePool {
         let mut available = self.available_connections.write().await;
         let mut connections = self.connections.write().await;
 
-        if let Some(connection_id) = available.pop() {
-            if let Some(connection) = connections.iter_mut().find(|c| c.id == connection_id) {
-                connection.last_used = Instant::now();
+        if let Some(connection_id) = available.pop()
+            && let Some(connection) = connections.iter_mut().find(|c| c.id == connection_id)
+        {
+            connection.last_used = Instant::now();
 
-                let mut stats = self.pool_stats.write().await;
-                stats.idle_connections -= 1;
-                stats.active_connections += 1;
+            let mut stats = self.pool_stats.write().await;
+            stats.idle_connections -= 1;
+            stats.active_connections += 1;
 
-                info!("获取数据库连接: {}", connection_id);
-                return Ok(PooledConnection {
-                    connection_id: connection_id.clone(),
-                    pool: self.clone(),
-                });
-            }
+            info!("获取数据库连接: {}", connection_id);
+            return Ok(PooledConnection {
+                connection_id: connection_id.clone(),
+                pool: self.clone(),
+            });
         }
 
         // 创建新连接
@@ -733,6 +732,12 @@ pub struct OptimizerStats {
     pub average_optimization_time: Duration,
 }
 
+impl Default for AsyncQueryOptimizer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncQueryOptimizer {
     pub fn new() -> Self {
         let cache_config = CacheConfig {
@@ -1055,7 +1060,8 @@ async fn main() -> Result<()> {
     // 优化查询
     let queries = vec![
         "SELECT * FROM users WHERE age > 25",
-        "SELECT u.name, p.title FROM users u JOIN posts p ON u.id = p.user_id ORDER BY p.created_at",
+        "SELECT u.name, p.title FROM users u JOIN posts p ON u.id = p.user_id ORDER BY \
+         p.created_at",
         "SELECT COUNT(*) FROM orders WHERE status = 'completed'",
     ];
 

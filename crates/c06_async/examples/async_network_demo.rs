@@ -322,7 +322,7 @@ impl NetworkDemo {
         let client_socket = UdpSocket::bind("127.0.0.1:0").await?;
 
         // 发送消息
-        let messages = vec!["Hello UDP Server!", "This is message 2", "Final message"];
+        let messages = ["Hello UDP Server!", "This is message 2", "Final message"];
 
         for (i, message) in messages.iter().enumerate() {
             println!("    📤 发送消息 {}: {}", i + 1, message);

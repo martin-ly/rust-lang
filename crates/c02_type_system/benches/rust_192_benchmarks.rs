@@ -74,7 +74,7 @@ fn benchmark_maybe_uninit(c: &mut Criterion) {
         b.iter(|| {
             let mut manager = TypeSafeUninitManager::<String>::new();
             manager.initialize(black_box(String::from("test")));
-            let result = manager.get().map(|s| s.clone());
+            let result = manager.get().cloned();
             black_box(result)
         });
     });
@@ -265,7 +265,7 @@ fn benchmark_integration(c: &mut Criterion) {
             let input = String::from("integration test");
             let converted = converter.convert(black_box(input));
             manager.initialize(converted);
-            let result = manager.get().map(|s| s.clone());
+            let result = manager.get().cloned();
             black_box(result)
         });
     });

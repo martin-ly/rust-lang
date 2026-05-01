@@ -8,6 +8,7 @@
 //! 定义一个 PrintableComparable 特质，它要求类型同时实现
 //! Display 和 PartialOrd，并在此基础上添加新方法。
 
+#![allow(clippy::approx_constant)]
 use std::fmt::Display;
 
 /// 可打印且可比较的特质

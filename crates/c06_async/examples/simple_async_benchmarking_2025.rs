@@ -9,7 +9,6 @@ use tracing::{info, warn};
 
 /// 2025年简化异步性能基准测试套件
 /// 展示实用的异步性能测试和基准测试最佳实践
-
 /// 1. 简化基准测试配置
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SimpleBenchmarkConfig {
@@ -247,6 +246,12 @@ pub struct SimpleAsyncMemoryBenchmark {
     total_bytes: Arc<AtomicU64>,
 }
 
+impl Default for SimpleAsyncMemoryBenchmark {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SimpleAsyncMemoryBenchmark {
     pub fn new() -> Self {
         Self {
@@ -289,6 +294,12 @@ impl SimpleAsyncMemoryBenchmark {
 pub struct SimpleAsyncNetworkBenchmark {
     request_count: Arc<AtomicUsize>,
     response_times: Arc<RwLock<Vec<Duration>>>,
+}
+
+impl Default for SimpleAsyncNetworkBenchmark {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SimpleAsyncNetworkBenchmark {

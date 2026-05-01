@@ -441,7 +441,11 @@ impl AsyncSyncConverter {
             .ok_or_else(|| anyhow::anyhow!("默认运行时不可用"))?;
 
         runtime
-            .spawn(async move { tokio::task::spawn_blocking(sync_fn).await.expect("阻塞任务不应失败") })
+            .spawn(async move {
+                tokio::task::spawn_blocking(sync_fn)
+                    .await
+                    .expect("阻塞任务不应失败")
+            })
             .await
     }
 
@@ -612,7 +616,6 @@ mod tests {
     fn test_runtime_manager() {
         // 这个测试涉及复杂的运行时管理，在实际使用中会有更好的替代方案
         // 暂时忽略以避免测试环境中的运行时冲突
-        assert!(true);
     }
 
     #[tokio::test]
@@ -633,6 +636,5 @@ mod tests {
     fn test_async_sync_converter() {
         // 这个测试涉及复杂的运行时管理，在实际使用中会有更好的替代方案
         // 暂时忽略以避免测试环境中的运行时冲突
-        assert!(true);
     }
 }

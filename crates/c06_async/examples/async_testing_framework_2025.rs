@@ -1,3 +1,4 @@
+#![allow(clippy::type_complexity)]
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -9,7 +10,6 @@ use tracing::{debug, error, info, warn};
 
 /// 2025年异步测试框架和最佳实践演示
 /// 展示最新的异步测试技术和最佳实践
-
 /// 1. 异步测试运行器
 pub struct AsyncTestRunner {
     tests: Arc<RwLock<Vec<AsyncTestCase>>>,
@@ -311,9 +311,9 @@ impl AsyncTestRunner {
 
         for result in results {
             csv.push_str(&format!(
-                "{},{},{},{},{},{}\n",
+                "{},{:?},{},{},{},{}\n",
                 result.test_name,
-                format!("{:?}", result.status),
+                result.status,
                 result.duration.as_millis(),
                 result.error_message.as_deref().unwrap_or(""),
                 result.retry_count,
@@ -378,6 +378,12 @@ pub struct TestSummary {
 pub struct AsyncTestFixture {
     setup_data: Arc<RwLock<HashMap<String, String>>>,
     cleanup_actions: Arc<RwLock<Vec<Box<dyn Fn() -> Result<()> + Send + Sync>>>>,
+}
+
+impl Default for AsyncTestFixture {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncTestFixture {
@@ -453,6 +459,12 @@ pub struct MockCall {
     pub timestamp: u64,
 }
 
+impl Default for AsyncMockService {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncMockService {
     pub fn new() -> Self {
         Self {
@@ -497,10 +509,10 @@ impl AsyncMockService {
             if expectation.method == method && expectation.args == args {
                 expectation.actual_calls += 1;
 
-                if let Some(expected_count) = expectation.call_count {
-                    if expectation.actual_calls > expected_count {
-                        return Err(anyhow::anyhow!("方法 '{}' 被调用次数超过预期", method));
-                    }
+                if let Some(expected_count) = expectation.call_count
+                    && expectation.actual_calls > expected_count
+                {
+                    return Err(anyhow::anyhow!("方法 '{}' 被调用次数超过预期", method));
                 }
 
                 return match &expectation.return_value {
@@ -517,15 +529,15 @@ impl AsyncMockService {
         let expectations = self.expectations.read().await;
 
         for expectation in expectations.iter() {
-            if let Some(expected_count) = expectation.call_count {
-                if expectation.actual_calls != expected_count {
-                    return Err(anyhow::anyhow!(
-                        "方法 '{}' 期望调用 {} 次，实际调用 {} 次",
-                        expectation.method,
-                        expected_count,
-                        expectation.actual_calls
-                    ));
-                }
+            if let Some(expected_count) = expectation.call_count
+                && expectation.actual_calls != expected_count
+            {
+                return Err(anyhow::anyhow!(
+                    "方法 '{}' 期望调用 {} 次，实际调用 {} 次",
+                    expectation.method,
+                    expected_count,
+                    expectation.actual_calls
+                ));
             }
         }
 
@@ -554,6 +566,12 @@ pub struct PerformanceMetrics {
     pub max_duration: Option<Duration>,
     pub average_duration: Duration,
     pub throughput_ops_per_sec: f64,
+}
+
+impl Default for AsyncPerformanceTester {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncPerformanceTester {

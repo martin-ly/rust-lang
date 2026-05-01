@@ -55,9 +55,9 @@ fn n_queens(n: usize) -> Vec<Vec<usize>> {
     let mut board = vec![0; n];
 
     fn is_valid(board: &[usize], row: usize, col: usize) -> bool {
-        for i in 0..row {
-            if board[i] == col
-                || (board[i] as i32 - col as i32).abs() == (i as i32 - row as i32).abs()
+        for (i, &board_col) in board.iter().take(row).enumerate() {
+            if board_col == col
+                || (board_col as i32 - col as i32).abs() == (i as i32 - row as i32).abs()
             {
                 return false;
             }

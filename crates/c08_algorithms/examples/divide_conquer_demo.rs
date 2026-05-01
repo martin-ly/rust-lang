@@ -105,8 +105,8 @@ fn max_subarray_sum(arr: &[i32]) -> i32 {
 
     let mut right_sum = i32::MIN;
     sum = 0;
-    for i in mid..arr.len() {
-        sum += arr[i];
+    for &val in arr.iter().skip(mid) {
+        sum += val;
         right_sum = right_sum.max(sum);
     }
 

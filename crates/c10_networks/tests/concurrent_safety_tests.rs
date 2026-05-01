@@ -123,7 +123,6 @@ fn test_synchronization_primitives() {
     }
 
     // 所有线程都已通过屏障
-    assert!(true);
 }
 
 /// 测试网络操作并发安全

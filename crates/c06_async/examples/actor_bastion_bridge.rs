@@ -8,9 +8,9 @@ fn main() {
 async fn main() {
     use bastion::prelude::*;
     use c06_async::utils::metrics;
-    use std::sync::LazyLock;
     use prometheus::{IntCounter, Opts, Registry};
-    use tracing::{info, instrument};
+    use std::sync::LazyLock;
+    use tracing::info;
 
     let _ = tracing_subscriber::fmt().with_env_filter("info").try_init();
 
@@ -24,7 +24,7 @@ async fn main() {
     let registry = Registry::new();
     let _ = registry.register(Box::new(BRIDGE_IN_TOTAL.clone()));
     let _ = registry.register(Box::new(PIPELINE_IN_TOTAL.clone()));
-    let _ = tokio::spawn(metrics::serve_metrics(registry.clone(), "127.0.0.1:9896"));
+    let _metrics = tokio::spawn(metrics::serve_metrics(registry.clone(), "127.0.0.1:9896"));
 
     Bastion::init();
 
@@ -52,16 +52,25 @@ async fn main() {
     });
 
     // bastion 子进程：作为 Actor 边界
-    Bastion::children(|children| {
-        children.with_exec(|ctx| async move {
-            loop {
-                msg! { ctx,
-                    msg: String => {
-                        BRIDGE_IN_TOTAL.inc();
-                        // 简单规则：包含 urgent 走高优先级
-                        let is_high = msg.contains("urgent");
-                        if is_high { let _ = tx_high.send(msg).await; } else { let _ = tx_norm.send(msg).await; }
-                    };
+    let tx_high = tx_high.clone();
+    let tx_norm = tx_norm.clone();
+    Bastion::children(move |children| {
+        children.with_exec(move |ctx| {
+            let tx_high = tx_high.clone();
+            let tx_norm = tx_norm.clone();
+            async move {
+                loop {
+                    if let Ok(msg) = ctx.recv().await {
+                        msg! { msg,
+                            msg: String => {
+                                BRIDGE_IN_TOTAL.inc();
+                                // 简单规则：包含 urgent 走高优先级
+                                let is_high = msg.contains("urgent");
+                                if is_high { let _ = tx_high.send(msg).await; } else { let _ = tx_norm.send(msg).await; }
+                            };
+                            _: _ => ();
+                        }
+                    }
                 }
             }
         })

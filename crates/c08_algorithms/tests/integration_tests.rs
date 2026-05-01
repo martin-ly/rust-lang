@@ -33,7 +33,7 @@ fn test_sorting_algorithms_correctness() {
 fn test_searching_algorithms_correctness() {
     // 注意：搜索算法模块结构需要进一步检查
     // 暂时跳过搜索算法测试，直到模块结构明确
-    assert!(true); // 占位测试
+    // 搜索算法测试占位
 }
 
 /// 测试字符串算法的正确性

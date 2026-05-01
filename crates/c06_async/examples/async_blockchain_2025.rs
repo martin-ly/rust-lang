@@ -11,7 +11,6 @@ use tracing::{error, info};
 
 /// 2025年异步区块链模式演示
 /// 展示最新的区块链异步编程模式和最佳实践
-
 /// 1. 异步区块链网络
 #[derive(Debug, Clone)]
 pub struct AsyncBlockchainNetwork {
@@ -81,6 +80,12 @@ pub struct NetworkStats {
     pub pending_transactions: usize,
     pub confirmed_transactions: usize,
     pub total_mining_time: Duration,
+}
+
+impl Default for AsyncBlockchainNetwork {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncBlockchainNetwork {
@@ -200,7 +205,7 @@ impl AsyncBlockchainNetwork {
             }
 
             // 模拟挖矿延迟
-            if block.nonce % 1000 == 0 {
+            if block.nonce.is_multiple_of(1000) {
                 sleep(Duration::from_millis(1)).await;
             }
         }
@@ -394,7 +399,7 @@ impl AsyncSmartContractExecutor {
                 }
             }
             "get_balance" => {
-                if let Some(address) = request.parameters.get(0) {
+                if let Some(address) = request.parameters.first() {
                     let balance = contract
                         .state
                         .get(&format!("balance_{}", address))
@@ -486,6 +491,12 @@ pub struct DAppStats {
     pub total_users: usize,
     pub active_sessions: usize,
     pub total_transactions: usize,
+}
+
+impl Default for AsyncDAppManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncDAppManager {

@@ -1,11 +1,10 @@
-use std::sync::{
-    Arc,
-    atomic::{AtomicBool, Ordering},
-};
+use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::thread;
 use std::time::Duration;
 
-use c05_threads::message_passing::{backpressure_handling as bp, mpsc, stream::ReceiverStream};
+use c05_threads::message_passing::stream::ReceiverStream;
+use c05_threads::message_passing::{backpressure_handling as bp, mpsc};
 
 fn main() {
     // 通过背压通道控制生产速率（多线程共享，需 Arc 包裹）
@@ -46,13 +45,8 @@ fn main() {
         thread::spawn(move || {
             let stream = ReceiverStream::new(rx);
             let mut total = 0u64;
-            loop {
-                if let Some(v) = stream.next_once_with_timeout(Duration::from_millis(10)) {
-                    total = total.wrapping_add(v as u64);
-                } else {
-                    // 超时视为没有新数据，结束
-                    break;
-                }
+            while let Some(v) = stream.next_once_with_timeout(Duration::from_millis(10)) {
+                total = total.wrapping_add(v as u64);
             }
             stop_flag.store(true, Ordering::Relaxed);
             println!("consumer total = {}", total);

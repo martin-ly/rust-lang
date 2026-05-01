@@ -16,12 +16,14 @@ use std::mem::MaybeUninit;
 #[test]
 fn test_quicksort_safety() {
     fn quicksort<T: Ord>(arr: &mut [T]) {
-        if arr.len() <= 1 { return; }
+        if arr.len() <= 1 {
+            return;
+        }
         let pivot_index = partition(arr);
         quicksort(&mut arr[..pivot_index]);
         quicksort(&mut arr[pivot_index + 1..]);
     }
-    
+
     fn partition<T: Ord>(arr: &mut [T]) -> usize {
         let len = arr.len();
         let pivot_index = len / 2;
@@ -36,7 +38,7 @@ fn test_quicksort_safety() {
         arr.swap(store_index, len - 1);
         store_index
     }
-    
+
     let mut data = vec![3, 1, 4, 1, 5, 9, 2, 6];
     quicksort(&mut data);
     assert_eq!(data, vec![1, 1, 2, 3, 4, 5, 6, 9]);
@@ -56,15 +58,17 @@ struct LinkedList<T> {
 }
 
 impl<T> LinkedList<T> {
-    fn new() -> Self { Self { head: None } }
-    
+    fn new() -> Self {
+        Self { head: None }
+    }
+
     fn push_front(&mut self, data: T) {
         self.head = Some(Box::new(ListNode {
             data,
             next: self.head.take(),
         }));
     }
-    
+
     fn pop_front(&mut self) -> Option<T> {
         self.head.take().map(|node| {
             self.head = node.next;
@@ -102,32 +106,44 @@ struct BinarySearchTree<T: Ord> {
 }
 
 impl<T: Ord> BinarySearchTree<T> {
-    fn new() -> Self { Self { root: None } }
-    
+    fn new() -> Self {
+        Self { root: None }
+    }
+
     fn insert(&mut self, data: T) {
         match self.root {
             None => {
                 self.root = Some(Box::new(TreeNode {
-                    data, left: None, right: None,
+                    data,
+                    left: None,
+                    right: None,
                 }));
             }
             Some(ref mut node) => Self::insert_node(node, data),
         }
     }
-    
+
     fn insert_node(node: &mut Box<TreeNode<T>>, data: T) {
         if data < node.data {
             match node.left {
-                None => node.left = Some(Box::new(TreeNode {
-                    data, left: None, right: None,
-                })),
+                None => {
+                    node.left = Some(Box::new(TreeNode {
+                        data,
+                        left: None,
+                        right: None,
+                    }))
+                }
                 Some(ref mut left) => Self::insert_node(left, data),
             }
         } else {
             match node.right {
-                None => node.right = Some(Box::new(TreeNode {
-                    data, left: None, right: None,
-                })),
+                None => {
+                    node.right = Some(Box::new(TreeNode {
+                        data,
+                        left: None,
+                        right: None,
+                    }))
+                }
                 Some(ref mut right) => Self::insert_node(right, data),
             }
         }
@@ -154,9 +170,15 @@ struct Stack<T> {
 }
 
 impl<T> Stack<T> {
-    fn new() -> Self { Self { data: Vec::new() } }
-    fn push(&mut self, item: T) { self.data.push(item); }
-    fn pop(&mut self) -> Option<T> { self.data.pop() }
+    fn new() -> Self {
+        Self { data: Vec::new() }
+    }
+    fn push(&mut self, item: T) {
+        self.data.push(item);
+    }
+    fn pop(&mut self) -> Option<T> {
+        self.data.pop()
+    }
 }
 
 /// 测试目的: 验证栈内存安全
@@ -184,7 +206,7 @@ fn test_inplace_reverse() {
             arr.swap(i, len - 1 - i);
         }
     }
-    
+
     let mut data = [1, 2, 3, 4, 5];
     reverse(&mut data);
     assert_eq!(data, [5, 4, 3, 2, 1]);
@@ -195,20 +217,18 @@ fn test_inplace_reverse() {
 /// 预期结果: 应该正确初始化和读取
 #[test]
 fn test_maybeuninit_array() {
-    let mut arr: [MaybeUninit<i32>; 5] = unsafe {
-        MaybeUninit::uninit().assume_init()
-    };
-    
-    for i in 0..5 {
-        arr[i].write((i * 10) as i32);
+    let mut arr: [MaybeUninit<i32>; 5] = unsafe { MaybeUninit::uninit().assume_init() };
+
+    for (i, slot) in arr.iter_mut().enumerate() {
+        slot.write((i * 10) as i32);
     }
-    
+
     unsafe {
-        for i in 0..5 {
-            assert_eq!(arr[i].assume_init_read(), (i * 10) as i32);
+        for (i, slot) in arr.iter().enumerate() {
+            assert_eq!(slot.assume_init_read(), (i * 10) as i32);
         }
     }
-    
+
     // MaybeUninit 不需要显式 forget
     let _ = arr;
 }

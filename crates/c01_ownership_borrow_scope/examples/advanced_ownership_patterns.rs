@@ -16,7 +16,6 @@ pub mod complex_ownership_transfer {
     ///
     /// 展示所有权在多个函数间的链式转移。
     /// Demonstrates chain transfer of ownership across multiple functions.
-
     /// 所有权链式转移示例 / Ownership Chain Transfer Example
     pub fn ownership_chain_transfer() {
         let data = String::from("initial data");
@@ -53,7 +52,6 @@ pub mod complex_ownership_transfer {
     ///
     /// 根据条件决定是否转移所有权。
     /// Decide whether to transfer ownership based on conditions.
-
     /// 条件所有权转移示例 / Conditional Ownership Transfer Example
     pub fn conditional_ownership_transfer() {
         let data = String::from("test data");
@@ -85,7 +83,6 @@ pub mod complex_ownership_transfer {
     ///
     /// 在所有权转移失败时提供回退机制。
     /// Provide fallback mechanism when ownership transfer fails.
-
     /// 所有权回退模式示例 / Ownership Fallback Pattern Example
     pub fn ownership_fallback_pattern() {
         let data = String::from("fallback test");
@@ -118,7 +115,6 @@ pub mod advanced_borrowing_patterns {
     ///
     /// 展示多个借用之间的链式关系。
     /// Demonstrates chain relationships between multiple borrows.
-
     /// 借用链模式示例 / Borrowing Chain Pattern Example
     pub fn borrowing_chain_pattern() {
         let mut data = vec![1, 2, 3, 4, 5];
@@ -146,7 +142,6 @@ pub mod advanced_borrowing_patterns {
     ///
     /// 通过作用域优化借用模式。
     /// Optimize borrowing patterns through scopes.
-
     /// 借用作用域优化示例 / Borrowing Scope Optimization Example
     pub fn borrowing_scope_optimization() {
         let mut data = vec![1, 2, 3, 4, 5];
@@ -169,7 +164,6 @@ pub mod advanced_borrowing_patterns {
     ///
     /// 使用模式匹配进行借用。
     /// Use pattern matching for borrowing.
-
     /// 借用模式匹配示例 / Borrowing Pattern Matching Example
     pub fn borrowing_pattern_matching() {
         let data = vec![Some(1), Some(2), None, Some(4)];
@@ -196,7 +190,6 @@ pub mod complex_lifetime_management {
     ///
     /// 使用多个生命周期参数管理复杂的关系。
     /// Use multiple lifetime parameters to manage complex relationships.
-
     /// 多生命周期参数示例 / Multiple Lifetime Parameters Example
     pub fn multiple_lifetime_parameters() {
         let s1 = String::from("first string");
@@ -226,7 +219,6 @@ pub mod complex_lifetime_management {
     ///
     /// 使用生命周期约束管理复杂的关系。
     /// Use lifetime constraints to manage complex relationships.
-
     /// 生命周期约束示例 / Lifetime Constraints Example
     pub fn lifetime_constraints() {
         let data = vec![1, 2, 3, 4, 5];
@@ -243,7 +235,6 @@ pub mod complex_lifetime_management {
     ///
     /// 利用编译器生命周期推断优化。
     /// Leverage compiler lifetime inference optimization.
-
     /// 生命周期推断优化示例 / Lifetime Inference Optimization Example
     pub fn lifetime_inference_optimization() {
         let data = vec![1, 2, 3, 4, 5];
@@ -274,7 +265,6 @@ pub mod smart_pointer_advanced_patterns {
     ///
     /// 展示引用计数循环的处理。
     /// Demonstrates handling of reference counting cycles.
-
     /// 引用计数循环示例 / Reference Counting Cycles Example
     pub fn reference_counting_cycles() {
         let data = Rc::new(RefCell::new(vec![1, 2, 3]));
@@ -294,7 +284,6 @@ pub mod smart_pointer_advanced_patterns {
     ///
     /// 展示智能指针的组合使用。
     /// Demonstrates composition of smart pointers.
-
     /// 智能指针组合示例 / Smart Pointer Composition Example
     pub fn smart_pointer_composition() {
         // 使用 Arc<Mutex<T>> 进行线程安全共享
@@ -323,7 +312,6 @@ pub mod smart_pointer_advanced_patterns {
     ///
     /// 展示智能指针的生命周期管理。
     /// Demonstrates lifetime management of smart pointers.
-
     /// 智能指针生命周期管理示例 / Smart Pointer Lifetime Management Example
     pub fn smart_pointer_lifetime_management() {
         let data = Rc::new(RefCell::new(String::from("initial")));
@@ -353,7 +341,6 @@ pub mod concurrent_ownership_patterns {
     ///
     /// 展示线程间的所有权转移。
     /// Demonstrates ownership transfer between threads.
-
     /// 线程间所有权转移示例 / Inter-thread Ownership Transfer Example
     pub fn inter_thread_ownership_transfer() {
         let data = Arc::new(Mutex::new(vec![1, 2, 3]));
@@ -380,7 +367,6 @@ pub mod concurrent_ownership_patterns {
     ///
     /// 展示异步环境下的所有权管理。
     /// Demonstrates ownership management in async environments.
-
     /// 异步所有权管理示例 / Async Ownership Management Example
     pub fn async_ownership_management() {
         let rt = tokio::runtime::Runtime::new().unwrap();
@@ -405,7 +391,6 @@ pub mod concurrent_ownership_patterns {
     ///
     /// 展示锁竞争的优化策略。
     /// Demonstrates lock contention optimization strategies.
-
     /// 锁竞争优化示例 / Lock Contention Optimization Example
     pub fn lock_contention_optimization() {
         let data = Arc::new(Mutex::new(0));
@@ -444,7 +429,6 @@ pub mod performance_optimization_patterns {
     ///
     /// 展示零成本抽象的优化。
     /// Demonstrates optimization of zero-cost abstractions.
-
     /// 零成本抽象优化示例 / Zero-cost Abstraction Optimization Example
     pub fn zero_cost_abstraction_optimization() {
         let numbers = [1, 2, 3, 4, 5];
@@ -460,7 +444,6 @@ pub mod performance_optimization_patterns {
     ///
     /// 展示内存布局的优化。
     /// Demonstrates memory layout optimization.
-
     /// 内存布局优化示例 / Memory Layout Optimization Example
     pub fn memory_layout_optimization() {
         // 使用 #[repr(C)] 优化内存布局
@@ -487,7 +470,6 @@ pub mod performance_optimization_patterns {
     ///
     /// 展示借用检查器的优化。
     /// Demonstrates borrow checker optimization.
-
     /// 借用检查器优化示例 / Borrow Checker Optimization Example
     pub fn borrow_checker_optimization() {
         let mut data = vec![1, 2, 3, 4, 5];
@@ -508,7 +490,6 @@ pub mod performance_optimization_patterns {
 }
 
 /// # 主要功能函数 / Main Function Functions
-
 /// 运行所有高级所有权模式示例 / Run all advanced ownership pattern examples
 pub fn run_all_advanced_ownership_examples() {
     println!("=== 高级所有权模式示例 / Advanced Ownership Patterns Examples ===");

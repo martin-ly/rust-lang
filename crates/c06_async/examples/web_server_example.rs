@@ -42,8 +42,10 @@ impl HttpResponse {
             body: body.to_string(),
         }
     }
+}
 
-    pub fn to_string(&self) -> String {
+impl std::fmt::Display for HttpResponse {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut response = format!("HTTP/1.1 {} {}\r\n", self.status_code, self.status_text);
 
         for (key, value) in &self.headers {
@@ -52,7 +54,7 @@ impl HttpResponse {
 
         response.push_str("\r\n");
         response.push_str(&self.body);
-        response
+        write!(f, "{}", response)
     }
 }
 
@@ -223,7 +225,6 @@ impl AsyncWebServer {
 }
 
 /// 示例路由处理器
-
 /// 首页处理器
 fn home_handler(_request: &HttpRequest) -> Result<HttpResponse> {
     let html = r#"
@@ -332,7 +333,7 @@ async fn main() -> Result<()> {
     println!("  GET  /api/status - API状态");
     println!("  GET  /api/time   - 当前时间");
     println!("  POST /api/echo   - 回显测试");
-    println!("");
+    println!();
     println!("🌐 在浏览器中访问: http://127.0.0.1:8080");
     println!("🛑 按 Ctrl+C 停止服务器");
 

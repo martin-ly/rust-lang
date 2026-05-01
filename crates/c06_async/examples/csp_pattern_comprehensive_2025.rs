@@ -1108,7 +1108,7 @@ pub async fn performance_benchmark() {
 
     let consumer = tokio::spawn(async move {
         let mut count = 0;
-        while let Some(_) = rx.recv().await {
+        while rx.recv().await.is_some() {
             count += 1;
             if count >= num_messages {
                 break;
@@ -1150,7 +1150,7 @@ pub async fn performance_benchmark() {
 
     let consumer = tokio::spawn(async move {
         let mut count = 0;
-        while let Some(_) = rx.recv().await {
+        while rx.recv().await.is_some() {
             count += 1;
         }
         count
@@ -1182,7 +1182,7 @@ pub async fn performance_benchmark() {
         let mut rx = tx.subscribe();
         let receiver = tokio::spawn(async move {
             let mut count = 0;
-            while let Ok(_) = rx.recv().await {
+            while rx.recv().await.is_ok() {
                 count += 1;
             }
             count
@@ -1293,7 +1293,7 @@ mod tests {
         });
 
         let mut count = 0;
-        while let Some(_) = rx.recv().await {
+        while rx.recv().await.is_some() {
             count += 1;
         }
 
@@ -1314,7 +1314,7 @@ mod tests {
 
         let h1 = tokio::spawn(async move {
             let mut count = 0;
-            while let Ok(_) = rx1.recv().await {
+            while rx1.recv().await.is_ok() {
                 count += 1;
             }
             count
@@ -1322,7 +1322,7 @@ mod tests {
 
         let h2 = tokio::spawn(async move {
             let mut count = 0;
-            while let Ok(_) = rx2.recv().await {
+            while rx2.recv().await.is_ok() {
                 count += 1;
             }
             count

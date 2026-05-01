@@ -1,8 +1,8 @@
+#![allow(clippy::type_complexity)]
 use anyhow::Result;
 use c06_async::utils::metrics;
-use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};
-use std::sync::Arc;
+use std::sync::{Arc, LazyLock};
 use std::time::Duration;
 use tokio::sync::{Mutex, RwLock};
 use tokio::time::sleep;
@@ -10,7 +10,6 @@ use tracing::{info, instrument};
 
 /// 2025年高级异步设计模式演示
 /// 包含最新的异步编程模式和最佳实践
-
 /// 1. 异步状态机模式
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum AsyncState {
@@ -107,6 +106,12 @@ pub struct AsyncSubject {
     observers: Arc<RwLock<Vec<AsyncObserver>>>,
 }
 
+impl Default for AsyncSubject {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncSubject {
     pub fn new() -> Self {
         Self {
@@ -178,6 +183,12 @@ impl AsyncCommand {
 pub struct AsyncCommandInvoker {
     history: Arc<RwLock<Vec<AsyncCommand>>>,
     current_index: Arc<RwLock<isize>>,
+}
+
+impl Default for AsyncCommandInvoker {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncCommandInvoker {
@@ -265,6 +276,12 @@ impl AsyncHandler {
 
 pub struct AsyncChainBuilder {
     handlers: Vec<AsyncHandler>,
+}
+
+impl Default for AsyncChainBuilder {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncChainBuilder {
@@ -408,6 +425,12 @@ impl AsyncSubsystemC {
     }
 }
 
+impl Default for AsyncFacade {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncFacade {
     pub fn new() -> Self {
         Self {
@@ -470,6 +493,12 @@ pub struct AsyncBuilder {
     part_a: Option<String>,
     part_b: Option<String>,
     part_c: Option<String>,
+}
+
+impl Default for AsyncBuilder {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncBuilder {
@@ -680,7 +709,7 @@ async fn main() -> Result<()> {
     }
 
     info!("✅ 2025 年高级异步设计模式演示完成!");
-    let _ = metrics_handle.abort();
+    metrics_handle.abort();
     Ok(())
 }
 

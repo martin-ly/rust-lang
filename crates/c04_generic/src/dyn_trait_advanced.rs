@@ -10,8 +10,7 @@
 //!
 //! 注意: 部分特性需要 nightly Rust 或特定版本。
 
-use std::any::Any;
-use std::fmt::Debug;
+use std::{any::Any, fmt::Debug};
 
 // =============================================================================
 // 1. Dyn Upcasting Coercion
@@ -24,7 +23,6 @@ use std::fmt::Debug;
 /// # 示例场景
 /// 当你持有一个 `dyn Display + Debug` 对象，但只需要 `dyn Display` 时，
 /// 可以直接进行 trait 对象向上转换，无需重新包装。
-
 pub trait Animal: Debug {
     fn speak(&self);
 }
@@ -122,7 +120,6 @@ pub fn demo_upcasting_in_api() {
 /// 4. 泛型方法的类型参数必须被具体化（不能保留未绑定的泛型）
 ///
 /// Rust 2024 Edition 放宽了部分限制，允许更多 trait 成为 object-safe。
-
 /// ✅ Object-Safe 示例
 pub trait Drawable: Debug {
     fn draw(&self);
@@ -157,7 +154,6 @@ fn use_constructible(c: &dyn Constructible) {
 /// Rust 2024 Edition 及后续版本增强了自定义接收者类型的支持。
 /// 除了常见的 `&self`、`&mut self`、`self`、`Box<Self>`，
 /// 还可以使用 `Rc<Self>`、`Arc<Self>` 等智能指针作为方法接收者。
-
 use std::rc::Rc;
 use std::sync::Arc;
 
@@ -217,7 +213,6 @@ pub fn demo_custom_receivers() {
 
 /// `dyn Any` 允许在运行时进行类型识别和向下转换。
 /// 这是实现插件系统、事件总线等模式的基础。
-
 pub trait Plugin: Any + Debug {
     fn name(&self) -> &str;
     fn as_any(&self) -> &dyn Any;
@@ -264,7 +259,9 @@ impl Default for PluginManager {
 
 impl PluginManager {
     pub fn new() -> Self {
-        Self { plugins: Vec::new() }
+        Self {
+            plugins: Vec::new(),
+        }
     }
 
     pub fn register(&mut self, plugin: Box<dyn Plugin>) {
@@ -321,7 +318,6 @@ pub fn demo_dyn_any() {
 ///    使得 trait 方法可以返回 `impl Iterator` 等，减少不必要的 dyn 使用
 ///
 /// 4. **Async Fn In Traits 稳定**: 减少手写的 `Pin<Box<dyn Future>>`
-
 /// 演示 Rust 2024 风格: 显式 dyn 和清晰的 trait 对象边界
 pub trait Processor {
     type Input;
@@ -375,10 +371,7 @@ impl DynamicPipeline {
 
 /// 检查两个 trait 对象是否指向同一对象
 pub fn same_object<T: ?Sized>(a: &T, b: &T) -> bool {
-    std::ptr::eq(
-        a as *const T as *const (),
-        b as *const T as *const (),
-    )
+    std::ptr::eq(a as *const T as *const (), b as *const T as *const ())
 }
 
 /// 安全的向下转换包装

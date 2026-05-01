@@ -10,10 +10,8 @@
 //! - 限流器模式
 use crossbeam_channel::{Receiver, Sender, unbounded};
 use std::collections::HashMap;
-use std::sync::{
-    Arc, Mutex,
-    atomic::{AtomicUsize, Ordering},
-};
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -87,6 +85,15 @@ pub struct PubSub<T> {
     publisher: Sender<T>,
 }
 
+impl<T> Default for PubSub<T>
+where
+    T: Clone + Send + 'static,
+{
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T> PubSub<T>
 where
     T: Clone + Send + 'static,
@@ -101,7 +108,7 @@ where
             while let Ok(message) = receiver.recv() {
                 let subs = subscribers_clone.lock().unwrap();
                 for (name, sender) in subs.iter() {
-                    if let Err(_) = sender.send(message.clone()) {
+                    if sender.send(message.clone()).is_err() {
                         println!("订阅者 '{}' 断开连接", name);
                     }
                 }
@@ -138,6 +145,12 @@ where
 pub struct Pipeline {
     input: Sender<String>,
     output: Receiver<String>,
+}
+
+impl Default for Pipeline {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl Pipeline {
@@ -238,7 +251,7 @@ impl FanOutFanIn {
             let _active_workers = num_workers;
 
             loop {
-                for (_i, receiver) in worker_receivers.iter().enumerate() {
+                for receiver in worker_receivers.iter() {
                     if let Ok(result) = receiver.try_recv() {
                         results.push(result);
 
@@ -308,13 +321,13 @@ impl CircuitBreaker {
         match *state {
             CircuitState::Open => {
                 let last_failure = self.last_failure_time.lock().unwrap();
-                if let Some(time) = *last_failure {
-                    if Instant::now() - time > self.timeout {
-                        drop(state);
-                        drop(last_failure);
-                        self.transition_to_half_open();
-                        return self.call(f);
-                    }
+                if let Some(time) = *last_failure
+                    && Instant::now() - time > self.timeout
+                {
+                    drop(state);
+                    drop(last_failure);
+                    self.transition_to_half_open();
+                    return self.call(f);
                 }
                 Err("熔断器开启".to_string())
             }

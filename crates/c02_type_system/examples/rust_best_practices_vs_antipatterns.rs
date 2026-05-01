@@ -369,6 +369,7 @@ mod performance_best_practices {
     /// ## 2. 迭代器 vs 索引循环
     ///
     /// ❌ 反例：索引访问
+    #[allow(clippy::needless_range_loop)]
     pub fn iteration_bad(data: &[i32]) -> i32 {
         let mut sum = 0;
         for i in 0..data.len() {

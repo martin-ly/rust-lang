@@ -3,6 +3,7 @@
 //! 声明宏是Rust中最基础的宏形式，使用macro_rules!定义。
 
 /// 基础示例：创建一个简单的vec!宏等价物
+#[allow(clippy::vec_init_then_push)]
 #[macro_export]
 macro_rules! my_vec {
     // 匹配逗号分隔的表达式
@@ -32,15 +33,13 @@ macro_rules! count_tokens {
 #[macro_export]
 macro_rules! my_vec_with_capacity {
     // 匹配vec![value; count]格式
-    ($elem:expr; $n:expr) => {
-        {
-            let mut temp_vec = Vec::with_capacity($n);
-            for _ in 0..$n {
-                temp_vec.push($elem.clone());
-            }
-            temp_vec
+    ($elem:expr; $n:expr) => {{
+        let mut temp_vec = Vec::with_capacity($n);
+        for _ in 0..$n {
+            temp_vec.push($elem.clone());
         }
-    };
+        temp_vec
+    }};
 }
 
 /// 条件编译宏示例

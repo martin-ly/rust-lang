@@ -1014,9 +1014,9 @@ mod tests {
         // 欧拉-马歇罗尼常数的近似值检查
         assert!((math_consts_f64::EULER_GAMMA - 0.5772).abs() < 0.001);
         // 验证它是正数
-        assert!(math_consts_f64::EULER_GAMMA > 0.0);
+        const { assert!(math_consts_f64::EULER_GAMMA > 0.0) };
         // 验证它小于 1
-        assert!(math_consts_f64::EULER_GAMMA < 1.0);
+        const { assert!(math_consts_f64::EULER_GAMMA < 1.0) };
     }
 
     #[test]
@@ -1043,8 +1043,8 @@ mod tests {
     #[test]
     fn test_math_consts_f32() {
         // f32 常量的基本检查
-        assert!(math_consts_f32::EULER_GAMMA > 0.0);
-        assert!(math_consts_f32::GOLDEN_RATIO > 1.0);
+        const { assert!(math_consts_f32::EULER_GAMMA > 0.0) };
+        const { assert!(math_consts_f32::GOLDEN_RATIO > 1.0) };
         // f64 和 f32 常量应该近似相等
         assert!((math_consts_f64::EULER_GAMMA - math_consts_f32::EULER_GAMMA as f64).abs() < 1e-6);
     }
@@ -1177,8 +1177,8 @@ mod tests {
 
     #[test]
     fn test_type_bool() {
-        assert!(True::VALUE);
-        assert!(!False::VALUE);
+        const { assert!(True::VALUE) };
+        const { assert!(!False::VALUE) };
     }
 
     #[test]

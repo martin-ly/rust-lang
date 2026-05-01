@@ -1,3 +1,4 @@
+#![allow(clippy::empty_line_after_doc_comments)]
 // ============================================================================
 // Reactor 模式完整实现与形式化分析 2025
 // Comprehensive Reactor Pattern Implementation and Formal Analysis 2025
@@ -122,6 +123,7 @@ use tracing::{Level, debug, error, info, instrument, span, warn};
 // Part 2: Core Data Structures
 // ============================================================================
 
+///
 /// 事件类型枚举
 /// Event Type Enumeration
 ///
@@ -345,6 +347,7 @@ impl Default for ReactorConfig {
 ///
 /// 实现了完整的 Reactor 模式
 /// Implements the complete Reactor pattern
+#[derive(Clone)]
 pub struct Reactor {
     /// 配置 (Configuration)
     config: ReactorConfig,
@@ -1031,7 +1034,7 @@ async fn priority_scheduling_example() {
 
     // 提交不同优先级的事件
     // Submit events with different priorities
-    let priorities = vec![
+    let priorities = [
         Priority::Low,
         Priority::Critical,
         Priority::Normal,
@@ -1251,6 +1254,10 @@ mod tests {
             fn name(&self) -> &str {
                 "ReschedulingHandler"
             }
+
+            fn can_handle(&self, _event_type: &EventType) -> bool {
+                true
+            }
         }
 
         let handler = Arc::new(ReschedulingHandler {
@@ -1324,6 +1331,10 @@ mod tests {
 
             fn name(&self) -> &str {
                 "EventGeneratingHandler"
+            }
+
+            fn can_handle(&self, _event_type: &EventType) -> bool {
+                true
             }
         }
 

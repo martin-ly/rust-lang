@@ -86,6 +86,7 @@ mod integration_tests {
 
     /// 测试责任链模式与观察者模式的集成
     #[test]
+    #[allow(clippy::arc_with_non_send_sync)]
     fn test_chain_with_observer_integration() {
         // 创建责任链
         let mut handler_a = Arc::new(ConcreteHandlerA::new());

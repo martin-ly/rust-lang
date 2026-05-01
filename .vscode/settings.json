@@ -28,6 +28,21 @@
     "MD060": false
   },
   
+  // Rust 配置
+  "[rust]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+
+  // rust-analyzer 配置
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.check.features": "all",
+  "rust-analyzer.cargo.features": "all",
+  "rust-analyzer.rustfmt.extraArgs": ["+nightly"],
+
   // 文件保存配置
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,

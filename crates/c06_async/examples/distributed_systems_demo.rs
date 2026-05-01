@@ -50,11 +50,11 @@ impl DistributedLock {
         let mut expiry = self.lock_expiry.lock().await;
 
         // 检查锁是否已过期
-        if let Some(expiry_time) = *expiry {
-            if Instant::now() > expiry_time {
-                *holder = None;
-                *expiry = None;
-            }
+        if let Some(expiry_time) = *expiry
+            && Instant::now() > expiry_time
+        {
+            *holder = None;
+            *expiry = None;
         }
 
         // 尝试获取锁
@@ -192,6 +192,12 @@ pub struct CacheEntry {
     pub created_at: Instant,
 }
 
+impl Default for DistributedCache {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl DistributedCache {
     pub fn new() -> Self {
         Self {
@@ -225,11 +231,11 @@ impl DistributedCache {
 
             if let Some(entry) = node.data.get(key) {
                 // 检查是否过期
-                if let Some(expiry) = entry.expiry {
-                    if Instant::now() > expiry {
-                        node.data.remove(key);
-                        return None;
-                    }
+                if let Some(expiry) = entry.expiry
+                    && Instant::now() > expiry
+                {
+                    node.data.remove(key);
+                    return None;
                 }
                 return Some(entry.value.clone());
             }
@@ -324,6 +330,12 @@ pub struct Consumer {
     pub offset: u64,
 }
 
+impl Default for DistributedMessageQueue {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl DistributedMessageQueue {
     pub fn new() -> Self {
         Self {
@@ -403,11 +415,11 @@ impl DistributedMessageQueue {
 
             // 从分配的分区中消费消息
             for &partition_id in &consumer.partitions {
-                if let Some(partition) = topic_data.partitions.get_mut(partition_id as usize) {
-                    if let Some(message) = partition.messages.pop_front() {
-                        consumer.offset += 1;
-                        return Ok(Some(message));
-                    }
+                if let Some(partition) = topic_data.partitions.get_mut(partition_id as usize)
+                    && let Some(message) = partition.messages.pop_front()
+                {
+                    consumer.offset += 1;
+                    return Ok(Some(message));
                 }
             }
         }
@@ -472,6 +484,12 @@ pub struct Participant {
     pub prepared: bool,
     pub committed: bool,
     pub aborted: bool,
+}
+
+impl Default for DistributedTransactionCoordinator {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl DistributedTransactionCoordinator {

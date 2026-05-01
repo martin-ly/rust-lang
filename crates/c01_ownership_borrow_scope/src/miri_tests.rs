@@ -14,10 +14,10 @@ fn test_1_basic_reborrow() {
     let mut x = 0;
     let y = &mut x;
     let z = &mut *y;
-    
+
     *z = 1;
-    *y = 2;  // Tree Borrows: OK
-    
+    *y = 2; // Tree Borrows: OK
+
     assert_eq!(x, 2);
 }
 
@@ -31,12 +31,12 @@ fn test_2_reborrow_chain() {
     let b = &mut *a;
     let c = &mut *b;
     let d = &mut *c;
-    
+
     *d = 1;
     *c = 2;
     *b = 3;
     *a = 4;
-    
+
     assert_eq!(x, 4);
 }
 
@@ -47,15 +47,14 @@ fn test_2_reborrow_chain() {
 fn test_3_loop_reborrow() {
     let mut data = vec![1, 2, 3, 4, 5];
     let mut_ref = &mut data;
-    
-    for i in 0..mut_ref.len() {
-        let elem = &mut mut_ref[i];
+
+    for elem in mut_ref.iter_mut() {
         *elem *= 2;
     }
-    
+
     // 循环后仍然可以使用 mut_ref
     mut_ref.push(6);
-    
+
     assert_eq!(mut_ref, &[2, 4, 6, 8, 10, 6]);
 }
 
@@ -65,13 +64,13 @@ fn test_3_loop_reborrow() {
 #[test]
 fn test_4_slice_split() {
     let mut data = [1, 2, 3, 4, 5];
-    
+
     // 分割为不重叠的切片
     let (left, right) = data.split_at_mut(2);
-    
+
     left[0] = 10;
-    right[0] = 50;  // 修改 data[2]
-    
+    right[0] = 50; // 修改 data[2]
+
     assert_eq!(data, [10, 2, 50, 4, 5]);
 }
 
@@ -81,14 +80,14 @@ fn test_4_slice_split() {
 #[test]
 fn test_5_overlapping_slices_no_conflict() {
     let mut data = [1, 2, 3, 4, 5];
-    
+
     // 使用 split_at_mut 创建不重叠的借用
     let (left, temp) = data.split_at_mut(3);
     let right = &mut temp[1..]; // [4, 5] - 与 left [1,2,3] 不重叠
-    
-    left[0] = 10;  // 修改 data[0]
+
+    left[0] = 10; // 修改 data[0]
     right[0] = 50; // 修改 temp[1] = data[4]
-    
+
     assert_eq!(data, [10, 2, 3, 4, 50]);
 }
 
@@ -99,13 +98,13 @@ fn test_5_overlapping_slices_no_conflict() {
 fn test_6_vec_push_while_iter() {
     let mut vec = Vec::with_capacity(10);
     vec.extend([1, 2, 3]);
-    
+
     // 先完成迭代
     let sum: i32 = vec.iter().copied().sum();
-    
+
     // 然后再 push
     vec.push(4);
-    
+
     assert_eq!(sum, 6); // 1+2+3
     assert_eq!(vec.len(), 4);
 }
@@ -118,13 +117,13 @@ fn test_6_vec_push_while_iter() {
 fn test_7_raw_pointer_alias() {
     let mut x = 0;
     let ptr = std::ptr::addr_of_mut!(x);
-    
+
     unsafe {
         *ptr = 1;
     }
-    
-    x = 2;  // Tree Borrows: OK
-    
+
+    x = 2; // Tree Borrows: OK
+
     unsafe {
         assert_eq!(*ptr, 2);
     }
@@ -141,17 +140,14 @@ struct Container {
 
 #[test]
 fn test_8_pointer_arithmetic_fields() {
-    let mut container = Container {
-        header: 1,
-        data: 2,
-    };
-    
+    let mut container = Container { header: 1, data: 2 };
+
     unsafe {
         let data_ptr = &mut container.data as *mut u8;
         // 访问相邻的 header (通过负偏移)
-        let header_ptr = (data_ptr as *mut u8).sub(4) as *mut u32;
+        let header_ptr = data_ptr.sub(4) as *mut u32;
         *header_ptr = 100;
-        
+
         assert_eq!(container.header, 100);
     }
 }
@@ -168,10 +164,10 @@ fn test_9_fn_arg_reborrow() {
         // v 仍然有效
         v.push(100);
     }
-    
+
     let mut data = vec![1, 2, 3];
     inner(&mut data);
-    
+
     assert_eq!(data[0], 42);
     assert_eq!(data[3], 100);
 }
@@ -183,13 +179,10 @@ fn test_9_fn_arg_reborrow() {
 fn test_10_match_reborrow() {
     let mut x = 5;
     let mut r = &mut x;
-    
-    match r {
-        ref mut mr => {
-            **mr = 10;
-        }
-    }
-    
+
+    let mr = &mut r;
+    **mr = 10;
+
     assert_eq!(*r, 10);
     assert_eq!(x, 10);
 }
@@ -202,16 +195,16 @@ fn test_10_match_reborrow() {
 #[test]
 fn test_11_zero_sized_types() {
     struct Zst;
-    
+
     let mut x = Zst;
     let r1 = &mut x;
     let r2 = &mut *r1;
-    
+
     // 使用 r2
     let _ = r2;
-    
+
     // 使用 r1 (父引用)
-    let _ = r1;  // Tree Borrows: OK
+    let _ = r1; // Tree Borrows: OK
 }
 
 /// 测试目的: 验证空切片的处理
@@ -232,20 +225,22 @@ fn test_13_nested_struct() {
     struct Outer {
         inner: Inner,
     }
-    
+
     struct Inner {
         value: i32,
     }
-    
-    let mut outer = Outer { inner: Inner { value: 0 } };
+
+    let mut outer = Outer {
+        inner: Inner { value: 0 },
+    };
     let outer_ref = &mut outer;
     let inner_ref = &mut outer_ref.inner;
-    
+
     inner_ref.value = 42;
-    
+
     // outer_ref 仍然有效
-    outer_ref.inner.value = 100;  // Tree Borrows: OK
-    
+    outer_ref.inner.value = 100; // Tree Borrows: OK
+
     assert_eq!(outer.inner.value, 100);
 }
 
@@ -255,12 +250,10 @@ fn test_13_nested_struct() {
 #[test]
 fn test_14_array_windows() {
     let data = [1, 2, 3, 4, 5];
-    
-    let sum: i32 = data.array_windows::<2>()
-        .map(|&[a, b]| a + b)
-        .sum();
-    
-    assert_eq!(sum, (1+2) + (2+3) + (3+4) + (4+5));
+
+    let sum: i32 = data.array_windows::<2>().map(|&[a, b]| a + b).sum();
+
+    assert_eq!(sum, (1 + 2) + (2 + 3) + (3 + 4) + (4 + 5));
 }
 
 /// 测试目的: 验证迭代器与可变引用
@@ -269,11 +262,11 @@ fn test_14_array_windows() {
 #[test]
 fn test_15_iterator_mut() {
     let mut data = vec![1, 2, 3, 4, 5];
-    
+
     for item in data.iter_mut() {
         *item *= 2;
     }
-    
+
     assert_eq!(data, vec![2, 4, 6, 8, 10]);
 }
 
@@ -289,7 +282,7 @@ fn test_16_use_after_free() {
         let x = Box::new(42);
         &*x as *const i32
     };
-    
+
     unsafe {
         // 这是 UB！不要这样做！
         let _ = *ptr;
@@ -302,19 +295,19 @@ fn test_16_use_after_free() {
 #[test]
 #[ignore = "This test should fail with data race"]
 fn test_17_data_race() {
-    use std::thread;
     use std::sync::Arc;
     use std::sync::atomic::{AtomicI32, Ordering};
-    
+    use std::thread;
+
     let x = Arc::new(AtomicI32::new(0));
     let x_clone = Arc::clone(&x);
-    
+
     let handle = thread::spawn(move || {
         x_clone.store(1, Ordering::Relaxed);
     });
-    
-    x.store(2, Ordering::Relaxed);  // 数据竞争！
-    
+
+    x.store(2, Ordering::Relaxed); // 数据竞争！
+
     handle.join().unwrap();
 }
 
@@ -322,14 +315,14 @@ fn test_17_data_race() {
 
 #[cfg(test)]
 mod benchmarks {
-    
+
     /// 测试目的: 重新借用链性能基准
     /// 测试场景: 创建 1000 层重新借用链并操作
     /// 预期结果: 应该快速完成
     #[test]
     fn bench_reborrow_chain() {
         let mut x = 0;
-        
+
         for _ in 0..1000 {
             let a = &mut x;
             let b = &mut *a;
@@ -337,17 +330,17 @@ mod benchmarks {
             let d = &mut *c;
             *d += 1;
         }
-        
+
         assert_eq!(x, 1000);
     }
-    
+
     /// 测试目的: 切片操作性能基准
     /// 测试场景: 多次分割切片并操作
     /// 预期结果: 应该快速完成
     #[test]
     fn bench_slice_operations() {
         let mut data = [0; 1000];
-        
+
         for i in 0..data.len() - 1 {
             let (left, right) = data.split_at_mut(i + 1);
             left[i] = i as i32;

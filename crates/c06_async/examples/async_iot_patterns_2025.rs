@@ -10,7 +10,6 @@ use tracing::{debug, error, info, warn};
 
 /// 2025年异步物联网模式演示
 /// 展示最新的物联网异步编程模式和最佳实践
-
 /// 1. 异步物联网设备管理器
 #[derive(Debug, Clone)]
 pub struct AsyncIoTDeviceManager {
@@ -160,6 +159,12 @@ pub struct DeviceManagerStats {
     pub events_processed: usize,
 }
 
+impl Default for AsyncIoTDeviceManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncIoTDeviceManager {
     pub fn new() -> Self {
         let (event_broadcaster, _) = broadcast::channel(1000);
@@ -286,20 +291,15 @@ impl AsyncIoTDeviceManager {
                 }
 
                 let should_trigger = match &rule.condition {
-                    RuleCondition::SensorValue(device_id, data_type, threshold, op) => {
+                    RuleCondition::SensorValue(device_id, data_type, threshold, op)
                         if device_id == &sensor_data.sensor_id
-                            && data_type == &sensor_data.data_type
-                        {
-                            match op {
-                                ComparisonOp::GreaterThan => sensor_data.value > *threshold,
-                                ComparisonOp::LessThan => sensor_data.value < *threshold,
-                                ComparisonOp::Equal => (sensor_data.value - threshold).abs() < 0.01,
-                                ComparisonOp::NotEqual => {
-                                    (sensor_data.value - threshold).abs() >= 0.01
-                                }
-                            }
-                        } else {
-                            false
+                            && data_type == &sensor_data.data_type =>
+                    {
+                        match op {
+                            ComparisonOp::GreaterThan => sensor_data.value > *threshold,
+                            ComparisonOp::LessThan => sensor_data.value < *threshold,
+                            ComparisonOp::Equal => (sensor_data.value - threshold).abs() < 0.01,
+                            ComparisonOp::NotEqual => (sensor_data.value - threshold).abs() >= 0.01,
                         }
                     }
                     _ => false,
@@ -397,6 +397,12 @@ pub struct PipelineStats {
     pub successful_processing: usize,
     pub failed_processing: usize,
     pub average_processing_time: Duration,
+}
+
+impl Default for AsyncIoTDataPipeline {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncIoTDataPipeline {
@@ -652,6 +658,12 @@ pub struct SurveillanceStats {
     pub critical_alerts: usize,
 }
 
+impl Default for AsyncIoTSurveillanceSystem {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncIoTSurveillanceSystem {
     pub fn new() -> Self {
         let (alert_sender, mut alert_receiver) = mpsc::unbounded_channel();
@@ -692,10 +704,10 @@ impl AsyncIoTSurveillanceSystem {
             }
 
             // 检查冷却期
-            if let Some(last_triggered) = rule.last_triggered {
-                if last_triggered.elapsed() < rule.cooldown {
-                    continue;
-                }
+            if let Some(last_triggered) = rule.last_triggered
+                && last_triggered.elapsed() < rule.cooldown
+            {
+                continue;
             }
 
             let should_alert = match &rule.condition {
@@ -781,9 +793,8 @@ impl AsyncIoTSurveillanceSystem {
         stats.total_alerts += 1;
         stats.active_alerts += 1;
 
-        match alert.severity {
-            AlertSeverity::Critical => stats.critical_alerts += 1,
-            _ => {}
+        if alert.severity == AlertSeverity::Critical {
+            stats.critical_alerts += 1
         }
 
         // 根据严重程度处理告警

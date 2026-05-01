@@ -18,11 +18,11 @@ fn test_error_inputs() {
 fn test_error_states() {
     // 测试进程不存在的情况
     let process_not_found = false;
-    assert_eq!(process_not_found, false);
+    assert!(!process_not_found);
 
     // 测试权限不足的情况
     let permission_denied = false;
-    assert_eq!(permission_denied, false);
+    assert!(!permission_denied);
 }
 
 /// 测试异常情况
@@ -30,11 +30,11 @@ fn test_error_states() {
 fn test_exception_cases() {
     // 测试资源限制异常
     let resource_limit_exceeded = false;
-    assert_eq!(resource_limit_exceeded, false);
+    assert!(!resource_limit_exceeded);
 
     // 测试超时异常
     let timeout_occurred = false;
-    assert_eq!(timeout_occurred, false);
+    assert!(!timeout_occurred);
 }
 
 /// 测试资源耗尽情况
@@ -47,7 +47,7 @@ fn test_resource_exhaustion() {
 
     // 测试内存耗尽（模拟）
     let memory_exhausted = false;
-    assert_eq!(memory_exhausted, false);
+    assert!(!memory_exhausted);
 }
 
 /// 测试并发安全

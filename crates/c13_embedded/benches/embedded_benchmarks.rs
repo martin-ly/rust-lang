@@ -12,8 +12,8 @@ fn bench_mmio_register_access(c: &mut Criterion) {
         b.iter(|| {
             // 模拟 32 位寄存器读写
             let mut regs = [0u32; 16];
-            for i in 0..regs.len() {
-                regs[i] = (i as u32).wrapping_mul(0xDEADBEEF);
+            for (i, reg) in regs.iter_mut().enumerate() {
+                *reg = (i as u32).wrapping_mul(0xDEADBEEF);
             }
             let _sum: u32 = regs.iter().fold(0, |a, b| a.wrapping_add(*b));
             std::hint::black_box(_sum);

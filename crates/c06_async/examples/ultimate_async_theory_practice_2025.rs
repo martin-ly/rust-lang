@@ -1,3 +1,5 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
 //! # Rust 异步编程终极理论与实践指南 2025
 //!
 //! Ultimate Rust Async Programming: Theory and Practice Guide 2025
@@ -422,7 +424,10 @@ mod theory_actor_model {
 
     /// Actor 模式演示函数
     pub async fn demo() {
-        println!("\n╔════════════════════════════════════════════════════════╗");
+        println!(
+            "\n#![allow(clippy::type_complexity)]\\
+             n╔════════════════════════════════════════════════════════╗"
+        );
         println!("║                                                        ║");
         println!("║   🎭 Actor 模型理论与实践                             ║");
         println!("║   Actor Model: Theory and Practice                    ║");
@@ -743,7 +748,7 @@ mod theory_reactor_pattern {
                 }
 
                 // 2. 按优先级排序 (优先级高的先处理)
-                events.sort_by(|a, b| b.priority.cmp(&a.priority));
+                events.sort_by_key(|b| std::cmp::Reverse(b.priority));
 
                 println!(
                     "[Reactor] 📦 迭代 {}: 处理 {} 个事件",

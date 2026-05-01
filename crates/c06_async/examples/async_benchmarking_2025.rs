@@ -9,7 +9,6 @@ use tracing::{error, info, warn};
 
 /// 2025年异步性能基准测试套件
 /// 展示最新的异步性能测试和基准测试最佳实践
-
 /// 1. 异步基准测试配置
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BenchmarkConfig {
@@ -296,6 +295,12 @@ pub struct AsyncMemoryBenchmark {
     total_bytes: Arc<AtomicU64>,
 }
 
+impl Default for AsyncMemoryBenchmark {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncMemoryBenchmark {
     pub fn new() -> Self {
         Self {
@@ -338,6 +343,12 @@ impl AsyncMemoryBenchmark {
 pub struct AsyncNetworkBenchmark {
     request_count: Arc<AtomicUsize>,
     response_times: Arc<RwLock<Vec<Duration>>>,
+}
+
+impl Default for AsyncNetworkBenchmark {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncNetworkBenchmark {

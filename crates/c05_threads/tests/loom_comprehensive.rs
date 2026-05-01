@@ -159,7 +159,7 @@ fn test_producer_consumer() {
 
             let consumer = thread::spawn(move || {
                 let mut received = 0;
-                while let Ok(_) = rx.recv() {
+                while rx.recv().is_ok() {
                     received += 1;
                 }
                 received
@@ -190,7 +190,7 @@ fn test_bounded_channel() {
 
             let consumer = thread::spawn(move || {
                 let mut received = 0;
-                while let Ok(_) = rx.recv() {
+                while rx.recv().is_ok() {
                     received += 1;
                 }
                 received

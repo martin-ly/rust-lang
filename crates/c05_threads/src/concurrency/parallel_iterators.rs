@@ -93,7 +93,10 @@ where
         handle.join().expect("线程应成功完成");
     }
 
-    Arc::try_unwrap(results).expect("Arc 解包不应失败").into_inner().expect("Mutex 解包不应失败")
+    Arc::try_unwrap(results)
+        .expect("Arc 解包不应失败")
+        .into_inner()
+        .expect("Mutex 解包不应失败")
 }
 
 /// 并行过滤函数
@@ -142,7 +145,10 @@ where
         handle.join().expect("线程应成功完成");
     }
 
-    Arc::try_unwrap(results).expect("Arc 解包不应失败").into_inner().expect("Mutex 解包不应失败")
+    Arc::try_unwrap(results)
+        .expect("Arc 解包不应失败")
+        .into_inner()
+        .expect("Mutex 解包不应失败")
 }
 
 /// 并行归约函数
@@ -187,7 +193,10 @@ where
         handle.join().expect("线程应成功完成");
     }
 
-    let partial_results = Arc::try_unwrap(results).expect("Arc 解包不应失败").into_inner().expect("Mutex 解包不应失败");
+    let partial_results = Arc::try_unwrap(results)
+        .expect("Arc 解包不应失败")
+        .into_inner()
+        .expect("Mutex 解包不应失败");
     partial_results
         .into_iter()
         .fold(identity, |acc, item| op(acc, &item))
@@ -294,6 +303,5 @@ mod tests {
     fn test_parallel_iterator_adapter() {
         let _adapter = ParallelIteratorAdapter::new(vec![1, 2, 3].into_iter(), 10);
         // 测试适配器创建
-        assert!(true);
     }
 }

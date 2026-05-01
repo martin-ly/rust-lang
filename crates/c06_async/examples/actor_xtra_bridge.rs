@@ -9,8 +9,8 @@ async fn main() {
     use tracing::info;
     let _ = tracing_subscriber::fmt().with_env_filter("info").try_init();
     use c06_async::utils::metrics;
-    use std::sync::LazyLock;
     use prometheus::{IntCounter, Opts, Registry};
+    use std::sync::LazyLock;
 
     use xtra::{Mailbox, spawn_tokio};
 
@@ -28,7 +28,7 @@ async fn main() {
     let registry = Registry::new();
     let _ = registry.register(Box::new(BRIDGE_IN_TOTAL.clone()));
     let _ = registry.register(Box::new(PIPELINE_IN_TOTAL.clone()));
-    let _ = tokio::spawn(metrics::serve_metrics(registry.clone(), "127.0.0.1:9895"));
+    let _metrics = tokio::spawn(metrics::serve_metrics(registry.clone(), "127.0.0.1:9895"));
 
     // CSP 管线入口
     let (tx_pipeline, mut rx_pipeline) = tokio::sync::mpsc::channel::<String>(64);

@@ -134,7 +134,6 @@ pub fn detect_repeated_pattern<T: PartialEq>(data: &[T], pattern: &[T; 2]) -> Ve
 /// ## 线程安全
 /// - `LazyCell`: 单线程使用
 /// - `LazyLock`: 多线程安全，内部使用原子操作
-
 /// 使用 Rust 1.94 LazyCell 的单线程缓存示例
 ///
 /// 展示了新的 `get()`, `get_mut()`, `force_mut()` 方法
@@ -267,7 +266,6 @@ pub fn get_global_config() -> &'static str {
 /// ## 精度保证
 /// - `f64::consts::EULER_GAMMA`: 精确到 1e-16
 /// - `f64::consts::GOLDEN_RATIO`: 精确到 1e-16
-
 /// 使用 Rust 1.94 标准库数学常量
 pub mod math_consts {
     pub use std::f32::consts::{EULER_GAMMA as EULER_GAMMA_F32, GOLDEN_RATIO as GOLDEN_RATIO_F32};
@@ -427,7 +425,6 @@ use std::ops::ControlFlow;
 /// 相比 `Result`，`ControlFlow` 更轻量，语义更清晰：
 /// - `Result` 暗示操作可能失败
 /// - `ControlFlow` 明确表示提前终止或继续
-
 /// 在嵌套数据结构中使用 ControlFlow 提前退出
 ///
 /// 搜索二维数组中是否存在满足条件的元素

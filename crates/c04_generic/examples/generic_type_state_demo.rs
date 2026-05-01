@@ -28,6 +28,12 @@ pub struct StateMachine<S> {
     value: Option<i32>,
 }
 
+impl Default for StateMachine<Uninitialized> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl StateMachine<Uninitialized> {
     /// 创建未初始化的状态机
     pub fn new() -> Self {

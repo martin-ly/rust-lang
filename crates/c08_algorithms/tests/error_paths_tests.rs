@@ -10,7 +10,7 @@ fn test_error_inputs() {
 
     // 测试空数组操作
     let empty: Vec<i32> = vec![];
-    assert_eq!(empty.get(0), None);
+    assert_eq!(empty.first(), None);
     assert_eq!(empty.first(), None);
     assert_eq!(empty.last(), None);
 }

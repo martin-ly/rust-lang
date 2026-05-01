@@ -11,7 +11,6 @@ use uuid::Uuid;
 
 /// 2025年分布式异步模式演示
 /// 展示最新的分布式系统异步编程模式和最佳实践
-
 /// 1. 分布式服务发现
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ServiceInstance {
@@ -138,15 +137,15 @@ impl ServiceDiscovery {
 
     pub async fn update_heartbeat(&self, service_name: &str, instance_id: &str) -> Result<()> {
         let mut services = self.services.write().await;
-        if let Some(instances) = services.get_mut(service_name) {
-            if let Some(instance) = instances.iter_mut().find(|i| i.id == instance_id) {
-                instance.last_heartbeat = std::time::SystemTime::now()
-                    .duration_since(std::time::UNIX_EPOCH)
-                    .unwrap()
-                    .as_secs();
-                instance.health_status = HealthStatus::Healthy;
-                return Ok(());
-            }
+        if let Some(instances) = services.get_mut(service_name)
+            && let Some(instance) = instances.iter_mut().find(|i| i.id == instance_id)
+        {
+            instance.last_heartbeat = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_secs();
+            instance.health_status = HealthStatus::Healthy;
+            return Ok(());
         }
         Err(anyhow::anyhow!("服务实例 {} 未找到", instance_id))
     }
@@ -202,7 +201,7 @@ impl ServiceDiscovery {
         // 模拟健康检查逻辑
         sleep(Duration::from_millis(10)).await;
         // 90% 的概率返回健康
-        (instance.id.len() % 10) != 0
+        !instance.id.len().is_multiple_of(10)
     }
 
     pub async fn get_stats(&self) -> DiscoveryStats {
@@ -420,6 +419,12 @@ pub struct MessageQueueStats {
     pub queue_sizes: HashMap<String, usize>,
 }
 
+impl Default for DistributedMessageQueue {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl DistributedMessageQueue {
     pub fn new() -> Self {
         let (broadcast_tx, _) = broadcast::channel(1000);
@@ -487,37 +492,36 @@ impl DistributedMessageQueue {
 
     pub async fn consume(&self, topic: &str, subscriber_id: &str) -> Result<Option<Message>> {
         let mut queues = self.queues.write().await;
-        if let Some(queue) = queues.get_mut(topic) {
-            if let Some(message) = queue.pop() {
-                // 检查消息TTL
-                if let Some(ttl) = message.ttl {
-                    if (std::time::SystemTime::now()
-                        .duration_since(std::time::UNIX_EPOCH)
-                        .unwrap()
-                        .as_secs()
-                        - message.created_at)
-                        > ttl.as_secs()
-                    {
-                        return Ok(None);
-                    }
-                }
-
-                let mut stats = self.message_stats.write().await;
-                stats.total_consumed += 1;
-                stats.queue_sizes.insert(topic.to_string(), queue.len());
-
-                // 广播消息消费事件
-                let _ = self.broadcast_tx.send(MessageEvent::MessageConsumed(
-                    topic.to_string(),
-                    message.id.clone(),
-                ));
-
-                info!(
-                    "订阅者 {} 消费消息 {} 从主题 {}",
-                    subscriber_id, message.id, topic
-                );
-                return Ok(Some(message));
+        if let Some(queue) = queues.get_mut(topic)
+            && let Some(message) = queue.pop()
+        {
+            // 检查消息TTL
+            if let Some(ttl) = message.ttl
+                && (std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .unwrap()
+                    .as_secs()
+                    - message.created_at)
+                    > ttl.as_secs()
+            {
+                return Ok(None);
             }
+
+            let mut stats = self.message_stats.write().await;
+            stats.total_consumed += 1;
+            stats.queue_sizes.insert(topic.to_string(), queue.len());
+
+            // 广播消息消费事件
+            let _ = self.broadcast_tx.send(MessageEvent::MessageConsumed(
+                topic.to_string(),
+                message.id.clone(),
+            ));
+
+            info!(
+                "订阅者 {} 消费消息 {} 从主题 {}",
+                subscriber_id, message.id, topic
+            );
+            return Ok(Some(message));
         }
         Ok(None)
     }
@@ -577,6 +581,12 @@ pub struct ConfigStats {
     pub total_configs: usize,
     pub config_updates: usize,
     pub watcher_notifications: usize,
+}
+
+impl Default for DistributedConfigManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl DistributedConfigManager {

@@ -1,11 +1,10 @@
 use anyhow::Result;
 use c06_async::utils::metrics;
-use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, IntCounterVec, Opts, Registry};
 use rand::RngExt;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::sync::Arc;
+use std::sync::{Arc, LazyLock};
 use std::time::{Duration, Instant};
 use tokio::sync::{RwLock, broadcast};
 use tokio::time::sleep;
@@ -14,7 +13,6 @@ use uuid::Uuid;
 
 /// 2025年异步API网关演示
 /// 展示最新的异步API网关编程模式和最佳实践
-
 /// 1. 异步API网关核心
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
@@ -344,12 +342,12 @@ impl AsyncAPIGateway {
     #[instrument(skip(self, context))]
     async fn execute_auth_middleware(&self, context: &mut RequestContext) -> Result<()> {
         // 模拟认证检查
-        if let Some(auth_header) = context.request.headers.get("Authorization") {
-            if auth_header.starts_with("Bearer ") {
-                context.user_id = Some("user_123".to_string());
-                debug!("用户认证成功: {}", context.user_id.as_ref().unwrap());
-                return Ok(());
-            }
+        if let Some(auth_header) = context.request.headers.get("Authorization")
+            && auth_header.starts_with("Bearer ")
+        {
+            context.user_id = Some("user_123".to_string());
+            debug!("用户认证成功: {}", context.user_id.as_ref().unwrap());
+            return Ok(());
         }
 
         Err(anyhow::anyhow!("认证失败"))
@@ -429,7 +427,10 @@ impl AsyncAPIGateway {
         INSTANCE_PICK_TOTAL.with_label_values(&[&instance.id]).inc();
 
         // 模拟转发请求
-        sleep(Duration::from_millis(50 + rand::rng().random::<u64>() % 100)).await;
+        sleep(Duration::from_millis(
+            50 + rand::rng().random::<u64>() % 100,
+        ))
+        .await;
 
         // 模拟响应
         let status_code = if rand::rng().random::<f64>() < 0.95 {

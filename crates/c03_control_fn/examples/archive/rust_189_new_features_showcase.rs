@@ -87,7 +87,10 @@ fn showcase_let_chains() {
     let y = Some("hello");
     let z = Some(std::f64::consts::PI);
 
-    if let Some(value) = x && let Some(text) = y && let Some(pi) = z {
+    if let Some(value) = x
+        && let Some(text) = y
+        && let Some(pi) = z
+    {
         println!("  所有值都存在: x = {}, y = {}, z = {}", value, text, pi);
     }
 
@@ -96,18 +99,23 @@ fn showcase_let_chains() {
     let numbers = vec![1, 2, 3, 4, 5];
     let threshold = 3;
 
-    if let Some(first) = numbers.first() &&
-       let Some(last) = numbers.last() &&
-       *first < threshold &&
-       *last > threshold {
-        println!("  数组满足条件: 首元素 {} < {}, 末元素 {} > {}",
-                first, threshold, last, threshold);
+    if let Some(first) = numbers.first()
+        && let Some(last) = numbers.last()
+        && *first < threshold
+        && *last > threshold
+    {
+        println!(
+            "  数组满足条件: 首元素 {} < {}, 末元素 {} > {}",
+            first, threshold, last, threshold
+        );
     }
 
     // 嵌套 Option 处理
     println!("\n3. 嵌套 Option 处理");
     let nested_option = Some(Some(42));
-    if let Some(inner) = nested_option && let Some(value) = inner {
+    if let Some(inner) = nested_option
+        && let Some(value) = inner
+    {
         println!("  嵌套 Option 值: {}", value);
     }
 
@@ -116,7 +124,10 @@ fn showcase_let_chains() {
     let mut stack = vec![Some(1), Some(2), Some(3), None, Some(4)];
     let mut count = 0;
 
-    while let Some(Some(value)) = stack.pop() && value > 0 && count < 3 {
+    while let Some(Some(value)) = stack.pop()
+        && value > 0
+        && count < 3
+    {
         println!("  处理值: {}", value);
         count += 1;
     }
@@ -176,7 +187,12 @@ fn showcase_enhanced_pattern_matching() {
         [] => println!("  空数组"),
         [single] => println!("  单个元素: {}", single),
         [first, second] => println!("  两个元素: {}, {}", first, second),
-        [first, middle @ .., last] => println!("  多个元素: 首 = {}, 末 = {}, 中间数量 = {}", first, last, middle.len()),
+        [first, middle @ .., last] => println!(
+            "  多个元素: 首 = {}, 末 = {}, 中间数量 = {}",
+            first,
+            last,
+            middle.len()
+        ),
     }
 
     // 改进的守卫条件
@@ -285,11 +301,7 @@ fn showcase_new_control_flow() {
 
     // 嵌套控制流
     println!("\n3. 嵌套控制流");
-    let matrix = vec![
-        vec![1, 2, 3],
-        vec![4, 5, 6],
-        vec![7, 8, 9],
-    ];
+    let matrix = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
 
     'outer: for (row_idx, row) in matrix.iter().enumerate() {
         for (col_idx, &value) in row.iter().enumerate() {
@@ -323,12 +335,7 @@ fn showcase_improved_error_handling() {
 
     // 改进的 Result 处理
     println!("\n1. 改进的 Result 处理");
-    let results = vec![
-        Ok(42),
-        Err("错误1"),
-        Ok(100),
-        Err("错误2"),
-    ];
+    let results = vec![Ok(42), Err("错误1"), Ok(100), Err("错误2")];
 
     for result in results {
         match result {
@@ -385,9 +392,10 @@ fn showcase_comprehensive_usage() {
 
     for (name, age, job) in data {
         // 使用 let_chains 进行复杂条件处理
-        if let Some(age_val) = age &&
-           let Some(job_val) = job &&
-           age_val >= 25 {
+        if let Some(age_val) = age
+            && let Some(job_val) = job
+            && age_val >= 25
+        {
             println!("  {} 是 {} 岁的 {}", name, age_val, job_val);
         }
     }
@@ -413,8 +421,9 @@ fn showcase_comprehensive_usage() {
     complex_data.insert("user3".to_string(), None);
 
     for (_id, user_data) in complex_data {
-        if let Some((name, Some(age))) = user_data &&
-           age >= 18 {
+        if let Some((name, Some(age))) = user_data
+            && age >= 18
+        {
             println!("  用户 {}: {} 岁", name, age);
         }
     }
@@ -494,8 +503,7 @@ fn recoverable_operation(input: &str) -> Result<i32, String> {
 
 /// 错误转换
 fn convert_error(s: &str) -> Result<i32, CustomError> {
-    s.parse::<i32>()
-        .map_err(|e| CustomError::ParseError(e))
+    s.parse::<i32>().map_err(|e| CustomError::ParseError(e))
 }
 
 /// 泛型数据结构
@@ -541,7 +549,9 @@ mod tests {
         let x = Some(42);
         let y = Some("hello");
 
-        if let Some(value) = x && let Some(text) = y {
+        if let Some(value) = x
+            && let Some(text) = y
+        {
             assert_eq!(value, 42);
             assert_eq!(text, "hello");
         }
@@ -579,6 +589,5 @@ mod tests {
         let result = async_operation(10);
         // 注意：这里需要 tokio::test 或类似的异步测试框架
         // 为了简化，我们只测试函数定义
-        assert!(true);
     }
 }

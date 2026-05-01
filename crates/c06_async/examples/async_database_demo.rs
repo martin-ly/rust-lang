@@ -350,7 +350,7 @@ impl DatabaseDemo {
         let connection = self.connection_pool.get_connection().await?;
 
         // 模拟多个并发查询
-        let queries = vec![
+        let queries = [
             "SELECT * FROM users WHERE active = true",
             "SELECT COUNT(*) FROM orders WHERE created_at > NOW() - INTERVAL '1 day'",
             "SELECT product_id, SUM(quantity) FROM order_items GROUP BY product_id",

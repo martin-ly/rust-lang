@@ -1,3 +1,5 @@
+#![allow(clippy::type_complexity)]
+#![allow(clippy::empty_line_after_doc_comments)]
 //! Rust 异步编程综合模式示例 2025
 //! Comprehensive Async Patterns Example 2025
 //!
@@ -194,7 +196,7 @@ mod actor_pattern {
     }
 
     pub async fn demo() {
-        println!("\n╔════════════════════════════════════════╗");
+        println!("\n#![allow(clippy::type_complexity)]\n╔════════════════════════════════════════╗");
         println!("║      Actor 模式示例: 银行账户          ║");
         println!("╚════════════════════════════════════════╝\n");
 
@@ -732,16 +734,13 @@ mod design_patterns {
             // 检查熔断器状态
             {
                 let mut state = self.state.lock().await;
-                match *state {
-                    CircuitState::Open { opened_at } => {
-                        if opened_at.elapsed() < self.timeout {
-                            return Err("熔断器开启，拒绝请求".to_string());
-                        }
-                        // 进入半开状态
-                        *state = CircuitState::HalfOpen { successes: 0 };
-                        println!("  [熔断器] 进入半开状态");
+                if let CircuitState::Open { opened_at } = *state {
+                    if opened_at.elapsed() < self.timeout {
+                        return Err("熔断器开启，拒绝请求".to_string());
                     }
-                    _ => {}
+                    // 进入半开状态
+                    *state = CircuitState::HalfOpen { successes: 0 };
+                    println!("  [熔断器] 进入半开状态");
                 }
             }
 
@@ -832,7 +831,7 @@ mod design_patterns {
         for i in 0..10 {
             let result = breaker
                 .call(async {
-                    if i < 3 || i >= 7 {
+                    if !(3..7).contains(&i) {
                         // 模拟失败
                         sleep(Duration::from_millis(100)).await;
                         Err("服务不可用")

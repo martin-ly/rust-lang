@@ -28,7 +28,7 @@ fn test_resource_limit_boundaries() {
 
     // 测试资源耗尽情况（模拟）
     let resource_exhausted = false; // 模拟资源耗尽标志
-    assert_eq!(resource_exhausted, false);
+    assert!(!resource_exhausted);
 }
 
 /// 测试超时边界情况
@@ -58,11 +58,11 @@ fn test_error_paths() {
 
     // 测试进程不存在的情况
     let process_not_found = false;
-    assert_eq!(process_not_found, false);
+    assert!(!process_not_found);
 
     // 测试权限不足的情况
     let permission_denied = false;
-    assert_eq!(permission_denied, false);
+    assert!(!permission_denied);
 }
 
 /// 测试边界值组合
@@ -90,7 +90,7 @@ fn test_resource_exhaustion() {
 
     // 测试内存耗尽（模拟）
     let memory_exhausted = false;
-    assert_eq!(memory_exhausted, false);
+    assert!(!memory_exhausted);
 }
 
 /// 测试进程生命周期边界情况
@@ -98,15 +98,15 @@ fn test_resource_exhaustion() {
 fn test_process_lifecycle_boundaries() {
     // 测试进程创建
     let process_created = true;
-    assert_eq!(process_created, true);
+    assert!(process_created);
 
     // 测试进程运行
     let process_running = true;
-    assert_eq!(process_running, true);
+    assert!(process_running);
 
     // 测试进程终止
     let process_terminated = true;
-    assert_eq!(process_terminated, true);
+    assert!(process_terminated);
 }
 
 /// 测试IPC边界情况

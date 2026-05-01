@@ -58,7 +58,7 @@ fn demonstrate_duration_from_nanos_u128() {
 /// slice::as_array (Rust 1.93) - 在 worker 中处理固定大小块
 fn demonstrate_slice_as_array_in_worker() {
     println!("\n--- slice::as_array 在并发数据处理中 ---");
-    let data = vec![1u8, 2, 3, 4, 5, 6, 7, 8];
+    let data = [1u8, 2, 3, 4, 5, 6, 7, 8];
     let (tx, rx) = mpsc::channel();
 
     thread::spawn(move || {

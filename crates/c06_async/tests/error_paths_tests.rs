@@ -5,7 +5,7 @@
 fn test_error_inputs() {
     // 测试无效Future配置
     let invalid_config = false;
-    assert_eq!(invalid_config, false);
+    assert!(!invalid_config);
 
     // 测试空Stream
     let empty_stream: Vec<i32> = vec![];
@@ -17,15 +17,15 @@ fn test_error_inputs() {
 fn test_error_states() {
     // 测试Future失败（模拟）
     let future_failed = false;
-    assert_eq!(future_failed, false);
+    assert!(!future_failed);
 
     // 测试超时情况
     let timeout_occurred = false;
-    assert_eq!(timeout_occurred, false);
+    assert!(!timeout_occurred);
 
     // 测试取消情况
     let cancelled = false;
-    assert_eq!(cancelled, false);
+    assert!(!cancelled);
 }
 
 /// 测试异常情况
@@ -33,11 +33,11 @@ fn test_error_states() {
 fn test_exception_cases() {
     // 测试异步panic情况（模拟）
     let async_panicked = false;
-    assert_eq!(async_panicked, false);
+    assert!(!async_panicked);
 
     // 测试背压情况（模拟）
     let backpressure = false;
-    assert_eq!(backpressure, false);
+    assert!(!backpressure);
 }
 
 /// 测试资源耗尽情况
@@ -50,7 +50,7 @@ fn test_resource_exhaustion() {
 
     // 测试内存耗尽（模拟）
     let memory_exhausted = false;
-    assert_eq!(memory_exhausted, false);
+    assert!(!memory_exhausted);
 }
 
 /// 测试并发安全
@@ -62,5 +62,5 @@ fn test_concurrent_safety() {
 
     // 测试异步互斥（模拟）
     let mutex_locked = false;
-    assert_eq!(mutex_locked, false);
+    assert!(!mutex_locked);
 }

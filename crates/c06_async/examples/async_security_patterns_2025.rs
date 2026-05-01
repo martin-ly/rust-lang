@@ -10,7 +10,6 @@ use tracing::{debug, error, info, warn};
 
 /// 2025年异步安全编程模式演示
 /// 展示最新的异步安全编程技术和最佳实践
-
 /// 1. 异步访问控制管理器
 pub struct AsyncAccessControlManager {
     permissions: Arc<RwLock<HashMap<String, Vec<String>>>>,
@@ -34,6 +33,12 @@ pub struct AuditEntry {
     pub resource: String,
     pub success: bool,
     pub ip_address: Option<String>,
+}
+
+impl Default for AsyncAccessControlManager {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl AsyncAccessControlManager {
@@ -62,9 +67,9 @@ impl AsyncAccessControlManager {
 
     pub async fn check_permission(&self, user_id: &str, resource: &str) -> bool {
         let permissions = self.permissions.read().await;
-        permissions.get(user_id).map_or(false, |user_permissions| {
-            user_permissions.contains(&resource.to_string())
-        })
+        permissions
+            .get(user_id)
+            .is_some_and(|user_permissions| user_permissions.contains(&resource.to_string()))
     }
 
     pub async fn set_rate_limit(&self, user_id: String, max_requests: u32, time_window: Duration) {
@@ -272,6 +277,12 @@ pub struct ValidationRecord {
     pub error_message: Option<String>,
 }
 
+impl Default for AsyncInputValidator {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncInputValidator {
     pub fn new() -> Self {
         Self {
@@ -300,38 +311,38 @@ impl AsyncInputValidator {
                     return Err(anyhow::anyhow!("字段 '{}' 是必需的", field_name));
                 }
 
-                if let Some(min_len) = rule.min_length {
-                    if value.len() < min_len {
-                        self.log_validation(
-                            field_name,
-                            value,
-                            false,
-                            Some(format!("最小长度应为 {}", min_len)),
-                        )
-                        .await;
-                        return Err(anyhow::anyhow!(
-                            "字段 '{}' 长度不能少于 {}",
-                            field_name,
-                            min_len
-                        ));
-                    }
+                if let Some(min_len) = rule.min_length
+                    && value.len() < min_len
+                {
+                    self.log_validation(
+                        field_name,
+                        value,
+                        false,
+                        Some(format!("最小长度应为 {}", min_len)),
+                    )
+                    .await;
+                    return Err(anyhow::anyhow!(
+                        "字段 '{}' 长度不能少于 {}",
+                        field_name,
+                        min_len
+                    ));
                 }
 
-                if let Some(max_len) = rule.max_length {
-                    if value.len() > max_len {
-                        self.log_validation(
-                            field_name,
-                            value,
-                            false,
-                            Some(format!("最大长度应为 {}", max_len)),
-                        )
-                        .await;
-                        return Err(anyhow::anyhow!(
-                            "字段 '{}' 长度不能超过 {}",
-                            field_name,
-                            max_len
-                        ));
-                    }
+                if let Some(max_len) = rule.max_length
+                    && value.len() > max_len
+                {
+                    self.log_validation(
+                        field_name,
+                        value,
+                        false,
+                        Some(format!("最大长度应为 {}", max_len)),
+                    )
+                    .await;
+                    return Err(anyhow::anyhow!(
+                        "字段 '{}' 长度不能超过 {}",
+                        field_name,
+                        max_len
+                    ));
                 }
 
                 // 简化的正则表达式验证
@@ -626,17 +637,20 @@ impl AsyncSecureLogger {
     }
 
     fn should_log_level(&self, entry_level: &LogLevel, component_level: &LogLevel) -> bool {
-        match (entry_level, component_level) {
-            (LogLevel::Debug, _) => true,
-            (LogLevel::Info, LogLevel::Debug | LogLevel::Info) => true,
-            (LogLevel::Warning, LogLevel::Debug | LogLevel::Info | LogLevel::Warning) => true,
-            (
-                LogLevel::Error,
-                LogLevel::Debug | LogLevel::Info | LogLevel::Warning | LogLevel::Error,
-            ) => true,
-            (LogLevel::Critical, _) => true,
-            _ => false,
-        }
+        matches!(
+            (entry_level, component_level),
+            (LogLevel::Debug, _)
+                | (LogLevel::Info, LogLevel::Debug | LogLevel::Info)
+                | (
+                    LogLevel::Warning,
+                    LogLevel::Debug | LogLevel::Info | LogLevel::Warning
+                )
+                | (
+                    LogLevel::Error,
+                    LogLevel::Debug | LogLevel::Info | LogLevel::Warning | LogLevel::Error,
+                )
+                | (LogLevel::Critical, _)
+        )
     }
 
     pub async fn get_security_logs(
@@ -649,8 +663,8 @@ impl AsyncSecureLogger {
         entries
             .iter()
             .filter(|entry| {
-                let component_match = component.as_ref().map_or(true, |c| entry.component == *c);
-                let level_match = level.as_ref().map_or(true, |l| {
+                let component_match = component.as_ref().is_none_or(|c| entry.component == *c);
+                let level_match = level.as_ref().is_none_or(|l| {
                     std::mem::discriminant(&entry.level) == std::mem::discriminant(l)
                 });
                 component_match && level_match

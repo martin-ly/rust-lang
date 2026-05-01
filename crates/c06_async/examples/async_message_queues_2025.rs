@@ -11,7 +11,6 @@ use uuid::Uuid;
 
 /// 2025年异步消息队列演示
 /// 展示最新的异步消息队列编程模式和最佳实践
-
 /// 1. 异步消息队列核心
 #[derive(Debug, Clone)]
 pub struct AsyncMessageQueue {
@@ -194,7 +193,7 @@ impl AsyncMessageQueue {
                 // 检查消息是否可见
                 if message
                     .visible_at
-                    .map_or(true, |visible_at| now >= visible_at)
+                    .is_none_or(|visible_at| now >= visible_at)
                 {
                     // 更新消息状态
                     message.receive_count += 1;
@@ -300,20 +299,20 @@ impl AsyncMessageQueue {
             // 移动到死信队列
             for &i in to_dlq.iter().rev() {
                 if let Some(message) = queue.messages.remove(i) {
-                    if let Some(dlq_name) = &queue.dead_letter_queue {
-                        if let Some(dlq) = dlqs.get_mut(dlq_name) {
-                            dlq.push_back(message.clone());
+                    if let Some(dlq_name) = &queue.dead_letter_queue
+                        && let Some(dlq) = dlqs.get_mut(dlq_name)
+                    {
+                        dlq.push_back(message.clone());
 
-                            // 广播事件
-                            let _ = self.event_broadcaster.send(QueueEvent::MessageDeadLettered(
-                                queue_name.clone(),
-                                message.id.clone(),
-                                dlq_name.clone(),
-                            ));
+                        // 广播事件
+                        let _ = self.event_broadcaster.send(QueueEvent::MessageDeadLettered(
+                            queue_name.clone(),
+                            message.id.clone(),
+                            dlq_name.clone(),
+                        ));
 
-                            stats.dead_letter_messages += 1;
-                            info!("消息移动到死信队列: {} -> {}", message.id, dlq_name);
-                        }
+                        stats.dead_letter_messages += 1;
+                        info!("消息移动到死信队列: {} -> {}", message.id, dlq_name);
                     }
                     stats.total_messages -= 1;
                 }
@@ -866,7 +865,7 @@ impl AsyncMessageRouter {
                     .await
                 {
                     // 选择目标队列
-                    let target_queues = self.select_target_queues(&route, &message).await;
+                    let target_queues = self.select_target_queues(route, &message).await;
 
                     for target_queue in target_queues {
                         routed_queues.push(target_queue);
@@ -900,8 +899,13 @@ impl AsyncMessageRouter {
                         return false;
                     }
                 }
-                FilterCondition::AttributeContains(key, value) if let Some(attr_value) = message.attributes.get(key)
-                    => if !attr_value.contains(value) { return false; },
+                FilterCondition::AttributeContains(key, value)
+                    if let Some(attr_value) = message.attributes.get(key) =>
+                {
+                    if !attr_value.contains(value) {
+                        return false;
+                    }
+                }
                 FilterCondition::AttributeContains(_, _) => return false,
                 FilterCondition::BodyContains(value) => {
                     if !message.body.contains(value) {
@@ -940,7 +944,7 @@ impl AsyncMessageRouter {
             RoutingStrategy::Priority => {
                 let target_count = match message.priority {
                     MessagePriority::Critical => route.target_queues.len(),
-                    MessagePriority::High => (route.target_queues.len() + 1) / 2,
+                    MessagePriority::High => route.target_queues.len().div_ceil(2),
                     MessagePriority::Normal => 1,
                     MessagePriority::Low => 1,
                 };
@@ -953,7 +957,7 @@ impl AsyncMessageRouter {
                     .collect()
             }
             RoutingStrategy::Hash => {
-                let hash = self.hash_message(&message);
+                let hash = self.hash_message(message);
                 let index = (hash as usize) % route.target_queues.len();
                 vec![route.target_queues[index].clone()]
             }

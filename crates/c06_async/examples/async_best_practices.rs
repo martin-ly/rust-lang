@@ -468,6 +468,7 @@ enum OperationResult {
 
 #[allow(dead_code)]
 #[derive(Debug)]
+#[allow(clippy::enum_variant_names)]
 enum OperationError {
     NetworkError(String),
     ParseError(String),

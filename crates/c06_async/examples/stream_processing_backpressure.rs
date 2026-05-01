@@ -151,9 +151,9 @@ impl StreamProcessor {
         let start = Instant::now();
 
         // 模拟处理时间（有时会失败）
-        if item.id % 100 == 0 {
+        if item.id.is_multiple_of(100) {
             sleep(Duration::from_millis(50)).await; // 慢处理
-        } else if item.id % 200 == 0 {
+        } else if item.id.is_multiple_of(200) {
             return Err(anyhow::anyhow!("Simulated processing error"));
         } else {
             sleep(Duration::from_millis(5)).await; // 正常处理
@@ -286,23 +286,22 @@ impl StreamProcessor {
                         window_buffer.push(processed_item);
 
                         // 检查是否需要输出窗口
-                        if window_buffer.len() >= config.window_size
-                            || last_window_time.elapsed() >= config.window_duration
+                        if (window_buffer.len() >= config.window_size
+                            || last_window_time.elapsed() >= config.window_duration)
+                            && !window_buffer.is_empty()
                         {
-                            if !window_buffer.is_empty() {
-                                let window_result =
-                                    processor.process_window(window_buffer.clone()).await;
-                                info!(
-                                    window_count = window_result.count,
-                                    window_avg = window_result.avg,
-                                    window_min = window_result.min,
-                                    window_max = window_result.max,
-                                    "Window processed"
-                                );
+                            let window_result =
+                                processor.process_window(window_buffer.clone()).await;
+                            info!(
+                                window_count = window_result.count,
+                                window_avg = window_result.avg,
+                                window_min = window_result.min,
+                                window_max = window_result.max,
+                                "Window processed"
+                            );
 
-                                window_buffer.clear();
-                                last_window_time = Instant::now();
-                            }
+                            window_buffer.clear();
+                            last_window_time = Instant::now();
                         }
                     }
                     Err(e) => {

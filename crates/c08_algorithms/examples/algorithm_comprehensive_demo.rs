@@ -394,10 +394,8 @@ fn dfs_helper(
 
     if let Some(neighbors) = graph.get(&current) {
         for &neighbor in neighbors {
-            if !visited.contains(&neighbor) {
-                if dfs_helper(graph, neighbor, end, visited, path) {
-                    return true;
-                }
+            if !visited.contains(&neighbor) && dfs_helper(graph, neighbor, end, visited, path) {
+                return true;
             }
         }
     }

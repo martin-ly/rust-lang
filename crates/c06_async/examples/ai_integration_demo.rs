@@ -251,6 +251,12 @@ pub struct AIModelManager {
     model_versions: Arc<RwLock<HashMap<String, Vec<String>>>>,
 }
 
+impl Default for AIModelManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AIModelManager {
     pub fn new() -> Self {
         Self {

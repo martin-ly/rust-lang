@@ -6,9 +6,11 @@
 //!   cargo miri test miri_tests
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
-use std::marker::PhantomData;
-use std::mem::{self, MaybeUninit};
-use std::ptr;
+use std::{
+    marker::PhantomData,
+    mem::{self, MaybeUninit},
+    ptr,
+};
 
 // ==================== 泛型内存操作 ====================
 
@@ -21,7 +23,7 @@ where
     U: Copy,
 {
     assert_eq!(mem::size_of::<T>(), mem::size_of::<U>());
-    
+
     unsafe {
         let result = ptr::read(&value as *const T as *const U);
         let _ = value;
@@ -36,7 +38,7 @@ where
 fn test_generic_transmute() {
     let bytes: [u8; 4] = [0x01, 0x00, 0x00, 0x00];
     let val: u32 = safe_transmute(bytes);
-    
+
     if cfg!(target_endian = "little") {
         assert_eq!(val, 1);
     } else {
@@ -48,19 +50,13 @@ fn test_generic_transmute() {
 /// 测试场景: 使用闭包初始化泛型数组
 /// 预期结果: 应该正确初始化所有元素
 fn init_array_generic<T, const N: usize>(f: impl Fn(usize) -> T) -> [T; N] {
-    let mut arr: [MaybeUninit<T>; N] = unsafe {
-        MaybeUninit::uninit().assume_init()
-    };
-    
+    let mut arr: [MaybeUninit<T>; N] = unsafe { MaybeUninit::uninit().assume_init() };
+
     for (i, elem) in arr.iter_mut().enumerate() {
         elem.write(f(i));
     }
-    
-    unsafe {
-        let result = ptr::read(&arr as *const _ as *const [T; N]);
-        mem::forget(arr);
-        result
-    }
+
+    unsafe { ptr::read(&arr as *const _ as *const [T; N]) }
 }
 
 /// 测试目的: 验证泛型数组初始化
@@ -87,7 +83,7 @@ impl<'a, T> PtrWithLifetime<'a, T> {
             _marker: PhantomData,
         }
     }
-    
+
     unsafe fn dereference(&self) -> &'a T {
         // SAFETY: 调用者保证指针有效
         unsafe { &*self.ptr }
@@ -101,7 +97,7 @@ impl<'a, T> PtrWithLifetime<'a, T> {
 fn test_phantomdata_lifetime() {
     let data = 42;
     let ptr = PtrWithLifetime::new(&data);
-    
+
     unsafe {
         assert_eq!(*ptr.dereference(), 42);
     }
@@ -167,7 +163,7 @@ fn use_trait_object<T: MyTrait + ?Sized>(val: &T) -> i32 {
 fn test_unsized_bound() {
     let x = 21;
     assert_eq!(use_trait_object(&x), 42);
-    
+
     let obj: &dyn MyTrait = &x;
     assert_eq!(use_trait_object(obj), 42);
 }
@@ -183,7 +179,7 @@ struct Wrapper<T>(T);
 
 impl<T> Container for Wrapper<T> {
     type Item = T;
-    
+
     fn get(&self) -> Option<&Self::Item> {
         Some(&self.0)
     }
@@ -224,7 +220,7 @@ fn test_complex_lifetimes() {
     let x = 1;
     let y = 2;
     let borrowed = Borrowed::new(&x, &y);
-    
+
     assert_eq!(*borrowed.first, 1);
     assert_eq!(*borrowed.second, 2);
 }
@@ -263,7 +259,7 @@ where
     let mid = N / 2;
     let mut first = Vec::with_capacity(mid);
     let mut second = Vec::with_capacity(N - mid);
-    
+
     for (i, elem) in arr.into_iter().enumerate() {
         if i < mid {
             first.push(elem);
@@ -271,7 +267,7 @@ where
             second.push(elem);
         }
     }
-    
+
     (first, second)
 }
 
@@ -282,7 +278,7 @@ where
 fn test_const_generic_expr() {
     let arr = [1, 2, 3, 4, 5, 6];
     let (first, second) = split_array(arr);
-    
+
     assert_eq!(first, vec![1, 2, 3]);
     assert_eq!(second, vec![4, 5, 6]);
 }
@@ -296,7 +292,7 @@ impl<T> GenericDrop<T> {
     fn new(val: T) -> Self {
         Self(Some(val))
     }
-    
+
     fn take(&mut self) -> Option<T> {
         self.0.take()
     }
@@ -356,9 +352,7 @@ fn generic_ptr_write<T>(ptr: *mut T, value: T) {
 
 /// 泛型裸指针读取
 fn generic_ptr_read<T: Copy>(ptr: *const T) -> T {
-    unsafe {
-        ptr::read(ptr)
-    }
+    unsafe { ptr::read(ptr) }
 }
 
 /// 测试目的: 验证泛型指针操作
@@ -387,7 +381,7 @@ fn generic_replace<T>(dest: &mut T, src: T) -> T {
 fn test_generic_replace() {
     let mut x = 10;
     let old = generic_replace(&mut x, 20);
-    
+
     assert_eq!(old, 10);
     assert_eq!(x, 20);
 }
@@ -404,14 +398,14 @@ impl TypeErased {
     fn new<T>(value: T) -> Self {
         let boxed = Box::new(value);
         let data = Box::into_raw(boxed) as *mut ();
-        
+
         unsafe fn drop_fn<T>(ptr: *mut ()) {
             // SAFETY: ptr 是由 Box::into_raw 创建的
             unsafe {
                 let _ = Box::from_raw(ptr as *mut T);
             }
         }
-        
+
         Self {
             data,
             drop_fn: drop_fn::<T>,

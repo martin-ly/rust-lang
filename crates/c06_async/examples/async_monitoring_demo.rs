@@ -117,6 +117,12 @@ impl std::fmt::Display for AlertSeverity {
     }
 }
 
+impl Default for AsyncMonitor {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AsyncMonitor {
     pub fn new() -> Self {
         Self {
@@ -296,11 +302,12 @@ impl AsyncMonitor {
             }
         }
 
-        if stats.completed_tasks > 0 {
-            stats.avg_execution_time = Duration::from_nanos(
-                stats.total_execution_time.as_nanos() as u64 / stats.completed_tasks as u64,
-            );
-        }
+        stats.avg_execution_time = stats
+            .total_execution_time
+            .as_nanos()
+            .checked_div(stats.completed_tasks as u128)
+            .map(|n| Duration::from_nanos(n as u64))
+            .unwrap_or(Duration::ZERO);
 
         stats
     }
@@ -532,7 +539,7 @@ impl AsyncMonitoringDemo {
         println!("  追踪任务执行...");
 
         // 模拟一些任务
-        let task_names = vec![
+        let task_names = [
             "数据处理任务",
             "文件上传任务",
             "邮件发送任务",

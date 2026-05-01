@@ -129,7 +129,6 @@ fn execute_operation<T: FastOperation>(op: &T, input: T::Input) -> T::Output {
 /// - 改进的结构体布局和打包
 /// - 自动对齐优化
 /// - 缓存友好的数据组织
-
 /// 优化前：可能存在填充的结构体
 #[repr(C)]
 struct UnoptimizedStruct {
@@ -199,7 +198,6 @@ impl<T: Default + Copy, const N: usize> OptimizedArray<T, N> {
 /// - 更强大的const fn
 /// - 编译时求值优化
 /// - 类型级计算增强
-
 /// 编译时常量函数
 const fn compile_time_factorial(n: u32) -> u64 {
     if n <= 1 {
@@ -268,7 +266,6 @@ const FIRST_10_PRIMES: [u64; 10] = find_primes::<10>();
 /// - 更智能的内联决策
 /// - 跨模块内联优化
 /// - 链接时优化增强
-
 /// 内联优化：数学运算
 #[inline(always)]
 fn optimized_math_operations(a: f64, b: f64) -> (f64, f64, f64) {
