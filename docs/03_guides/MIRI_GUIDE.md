@@ -1,531 +1,381 @@
-# Miri 使用指南
+# Miri 使用指南：检测 Rust 未定义行为（UB）
 
-> 本文档对应 Rust 生产级工程实践体系阶段三 —— 内存安全检测。
-> 参考: [Miri 官方文档](https://github.com/rust-lang/miri)、Microsoft Azure 安全编码规范、AWS Rust SDK 实践。
-
----
-
-## 1. Miri 是什么？
-
-**Miri**（Mid-level IR Interpreter）是 Rust 的未定义行为（Undefined Behavior, UB）检测工具。它通过解释执行 Rust 的中间表示（MIR）来检测代码中的内存安全问题。
-
-### 为什么需要 Miri？
-
-Rust 的所有权系统在编译期阻止了大多数内存错误，但 `unsafe` 代码块、原始指针操作、类型转换等仍然可能引入 UB：
-
-| 问题类型 | 编译器能否检测 | Miri 能否检测 |
-|---------|-------------|-------------|
-|  use-after-free | ❌ | ✅ |
-|  数据竞争 | ❌ | ✅ |
-|  越界访问 | ⚠️ 部分（release 模式不检查） | ✅ |
-|  未对齐访问 | ❌ | ✅ |
-|  无效枚举值 | ❌ | ✅ |
-|  违反 Stacked Borrows/Tree Borrows | ❌ | ✅ |
-
-> **生产级要求**: Microsoft 的 Rust 安全指南和 AWS Rust SDK 均建议在 CI 中对包含 `unsafe` 的 crate 运行 Miri 测试。
+> **工具**: Miri（Rust 的解释型 UB 检测器）
+> **适用版本**: Rust nightly（`rustup component add miri`）
+> **权威来源**: [rustc-dev-guide Miri 章节](https://rustc-dev-guide.rust-lang.org/miri.html) | [Miri README](https://github.com/rust-lang/miri)
 
 ---
 
-## 2. 安装和基本使用
+## 一、什么是 Miri？
 
-### 安装 Miri
+Miri 是 Rust 的一个**解释器**，它运行 Rust 的中间表示（MIR）并在执行过程中检测**未定义行为（Undefined Behavior, UB）**。与 Valgrind、ASan 等工具不同，Miri 专注于 Rust 特有的内存模型问题：
+
+- **违反借用规则**（Stacked Borrows / Tree Borrows）
+- **使用未初始化内存**
+- **数据竞争**（实验性支持）
+- **对齐违规**
+- **越界指针算术**
+- **无效枚举判别式**
+- **双重释放 / 使用-after-free**
+
+### Miri vs 其他工具
+
+| 工具 | 检测目标 | Rust 特异性 | 运行时开销 |
+|------|----------|-------------|------------|
+| **Miri** | UB（借用规则、未初始化、对齐等） | ⭐⭐⭐ 极高 | 极慢（解释执行） |
+| **AddressSanitizer (ASan)** | 内存错误（越界、use-after-free） | ⭐ 低 | 中等（2-3x） |
+| **ThreadSanitizer (TSan)** | 数据竞争 | ⭐ 低 | 高（5-15x） |
+| **Valgrind (Memcheck)** | 内存错误 | ⭐ 低 | 极慢（10-50x） |
+| **loom** | 并发执行路径探索 | ⭐⭐ 高 | 指数级 |
+
+---
+
+## 二、安装与基础使用
+
+### 2.1 安装 Miri
 
 ```bash
-# Miri 需要 Rust nightly 工具链
+# 需要 nightly 工具链
+rustup toolchain install nightly
 rustup component add miri --toolchain nightly
 
-# 验证安装
-cargo +nightly miri --version
+# 设置 nightly 为默认（可选）
+rustup default nightly
 ```
 
-### 基本命令
+### 2.2 运行测试
 
 ```bash
-# 在单个 crate 上运行测试
-cargo miri test -p c01_ownership_borrow_scope
-
-# 在整个 workspace 上运行（仅限 Linux CI）
-cargo miri test --workspace
+# 运行当前 crate 的所有测试（通过 Miri 解释器）
+cargo miri test
 
 # 运行特定测试
-cargo miri test -p c10_networks test_name
+cargo miri test test_name
 
-# 运行二进制文件
-cargo miri run -p c10_networks --bin net
+# 运行示例
+cargo miri run --example example_name
+
+# 运行二进制
+cargo miri run --bin bin_name
 ```
 
-### Miri 环境变量
-
-| 环境变量 | 说明 | 推荐值 |
-|---------|------|-------|
-| `MIRIFLAGS` | 传递给 Miri 的选项 | 见下文 |
-| `MIRI_BACKTRACE` |  Miri 错误回溯深度 | `1` |
-| `RUST_MIN_STACK` | 栈大小（递归深度大时增加） | `8388608` |
-
----
-
-## 3. Stacked Borrows vs Tree Borrows
-
-### 3.1 Stacked Borrows（SB）
-
-Rust 历史上使用的别名模型，由 Ralf Jung 提出。核心思想：**借用像栈一样工作**。
-
-```rust
-// Stacked Borrows 会拒绝此代码（即使它在 LLVM 层面是合法的）
-let mut x = 5;
-let raw = &mut x as *mut i32;
-let _ref = &mut x;      // 新的 &mut 使旧的 raw 指针失效
-unsafe { *raw = 10; }   // ❌ UB: 使用已失效的指针
-```
-
-**特点**:
-
-- 更严格，能捕获更多潜在问题
-- 但某些合法的 C 风格代码会被误判
-- 作为基线测试使用，允许失败
-
-### 3.2 Tree Borrows（TB）
-
-Rust 正在过渡的新别名模型。核心思想：**借用像树一样分支**。
-
-```rust
-// Tree Borrows 允许此代码（更贴近实际硬件行为）
-let mut x = 5;
-let raw = &mut x as *mut i32;
-let _ref = &mut x;      // 创建新分支
-unsafe { *raw = 10; }   // ✅ TB 允许：只要没有真正冲突的使用
-```
-
-**特点**:
-
-- 更宽松，减少误报
-- 更精确地反映 LLVM/硬件的实际别名规则
-- **推荐作为 CI 的主要检测模式**
-
-### 3.3 模型对比
-
-```rust
-// 示例: 通过原始指针重新借用
-fn reborrow_via_raw() {
-    let mut data = [0u8; 8];
-    let ptr = data.as_mut_ptr();
-
-    unsafe {
-        let a = std::slice::from_raw_parts_mut(ptr, 4);
-        let b = std::slice::from_raw_parts_mut(ptr.add(4), 4);
-        a[0] = 1;
-        b[0] = 2;
-    }
-}
-
-// SB: 可能需要 -Zmiri-disable-stacked-borrows
-// TB: 无需额外标志即可通过
-```
-
-### 3.4 Miri 标志配置
+### 2.3 常用环境变量
 
 ```bash
-# Tree Borrows（推荐，作为 CI 主要模式）
-MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-ignore-leaks" cargo miri test
+# 启用数据竞争检测（实验性，可能误报）
+MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test
 
-# Stacked Borrows（基线对比）
-MIRIFLAGS="-Zmiri-stacked-borrows -Zmiri-ignore-leaks" cargo miri test
+# 禁用隔离（允许文件系统、环境变量访问）
+MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test
 
-# 严格模式（TB + 原始指针标签）
-MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-tag-raw-pointers -Zmiri-ignore-leaks" cargo miri test
+# 使用 Tree Borrows 代替 Stacked Borrows（更 permissive，推荐）
+MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
-# 禁用隔离（允许文件系统/网络操作，用于测试 IO）
-MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-disable-isolation" cargo miri test
+# 设置预emption 频率（并发测试）
+MIRIFLAGS="-Zmiri-preemption-rate=0.1" cargo miri test
 
-# 检测数据竞争（需要单线程 Miri）
-MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-data-race-detector" cargo miri test
+# 检查内存泄漏
+cargo miri test
 ```
 
 ---
 
-## 4. 10 个 UB 检测示例
+## 三、十大 UB 检测示例
 
-### 示例 1: use-after-free（释放后使用）
+### 示例 1：使用未初始化内存
 
 ```rust
 // ❌ 错误代码
-type BoxedInt = Box<i32>;
+fn use_uninit() -> i32 {
+    let x: i32;
+    unsafe { x } // UB: 读取未初始化值
+}
 
-fn use_after_free() {
+// ✅ 正确代码
+fn use_init() -> i32 {
+    let x: i32 = 0;
+    x
+}
+```
+
+**Miri 报错**：
+
+```
+error: Undefined Behavior: interpreting allocation ... as i32,
+but the data is uninitialized
+```
+
+### 示例 2：违反可变借用唯一性（Stacked Borrows）
+
+```rust
+// ❌ 错误代码
+fn mutable_alias() {
+    let mut x = 5;
+    let r1 = &mut x;
+    let r2 = &mut x; // 与 r1 同时存在！
+    unsafe {
+        println!("{}", *r1); // UB: r1 已被 r2 失效
+    }
+}
+
+// ✅ 正确代码
+fn no_alias() {
+    let mut x = 5;
+    {
+        let r1 = &mut x;
+        *r1 += 1;
+    }
+    let r2 = &mut x;
+    *r2 += 1;
+}
+```
+
+**Miri 报错**（Stacked Borrows 模式）：
+
+```
+error: Undefined Behavior: no item granting read access ...
+```
+
+### 示例 3：通过共享引用修改数据（内部可变性违规）
+
+```rust
+// ❌ 错误代码
+fn modify_via_shared() {
+    let x = 42;
+    let r = &x;
+    unsafe {
+        *(r as *const i32 as *mut i32) = 0; // UB!
+    }
+}
+
+// ✅ 正确代码：使用 Cell/RefCell/Atomic
+fn modify_with_interior_mutability() {
+    use std::cell::Cell;
+    let x = Cell::new(42);
+    x.set(0); // ✅ 合法
+}
+```
+
+### 示例 4：悬空指针解引用
+
+```rust
+// ❌ 错误代码
+fn dangling_pointer() {
     let ptr: *const i32;
     {
-        let boxed = Box::new(42);
-        ptr = &*boxed;  // ptr 指向 boxed 的内容
-    } // boxed 在这里 drop，内存被释放
-
+        let x = 42;
+        ptr = &x;
+    } // x 在此处 drop
     unsafe {
-        println!("{}", *ptr); // ❌ UB: use-after-free
+        println!("{}", *ptr); // UB: 悬空指针
     }
 }
 
 // ✅ 正确代码
-fn safe_access() {
-    let boxed = Box::new(42);
-    let val = *boxed;  // 先复制值
-    drop(boxed);
-    println!("{}", val); // ✅ 安全：访问的是复制的值
-}
-```
-
-**Miri 输出**:
-
-```
-error: Undefined Behavior: pointer to alloc1406 was dereferenced after this allocation got freed
-```
-
-### 示例 2: 数据竞争
-
-```rust
-use std::thread;
-
-// ❌ 错误代码
-fn data_race() {
-    static mut COUNTER: i32 = 0;
-
-    let t1 = thread::spawn(|| unsafe {
-        COUNTER += 1;  // 无同步的写操作
-    });
-    let t2 = thread::spawn(|| unsafe {
-        COUNTER += 1;  // 无同步的写操作
-    });
-
-    t1.join().unwrap();
-    t2.join().unwrap();
-}
-
-// ✅ 正确代码
-use std::sync::atomic::{AtomicI32, Ordering};
-
-fn no_data_race() {
-    static COUNTER: AtomicI32 = AtomicI32::new(0);
-
-    let t1 = thread::spawn(|| {
-        COUNTER.fetch_add(1, Ordering::SeqCst);
-    });
-    let t2 = thread::spawn(|| {
-        COUNTER.fetch_add(1, Ordering::SeqCst);
-    });
-
-    t1.join().unwrap();
-    t2.join().unwrap();
-}
-```
-
-**Miri 输出**:
-
-```
-error: Undefined Behavior: Data race detected between Read on thread `<unnamed>` and Write on thread `<unnamed>`
-```
-
-### 示例 3: 越界访问
-
-```rust
-// ❌ 错误代码
-fn out_of_bounds() {
-    let arr = [1, 2, 3];
-    let ptr = arr.as_ptr();
-
+fn valid_pointer() {
+    let x = Box::new(42);
+    let ptr: *const i32 = &*x;
     unsafe {
-        println!("{}", *ptr.add(100)); // ❌ UB: 越界访问
-    }
-}
-
-// ✅ 正确代码
-fn in_bounds() {
-    let arr = [1, 2, 3];
-    let ptr = arr.as_ptr();
-
-    unsafe {
-        for i in 0..arr.len() {
-            println!("{}", *ptr.add(i)); // ✅ 安全：在边界内
-        }
+        println!("{}", *ptr); // ✅ x 仍然存活
     }
 }
 ```
 
-### 示例 4: 未对齐访问
+### 示例 5：对齐违规
 
 ```rust
 // ❌ 错误代码
-fn unaligned_access() {
+fn misaligned_access() {
     let bytes = [0u8; 8];
-    let ptr = bytes.as_ptr() as *const u64;
-
-    unsafe {
-        println!("{}", *ptr); // ❌ UB: u64 需要 8 字节对齐
-    }
+    let ptr = bytes.as_ptr().offset(1);
+    let _val: &u64 = unsafe { &*(ptr as *const u64) }; // UB: 未对齐
 }
 
 // ✅ 正确代码
 fn aligned_access() {
-    let val: u64 = 42;
+    let val: u64 = 0;
     let ptr = &val as *const u64;
-
     unsafe {
-        println!("{}", *ptr); // ✅ 安全：正确对齐
+        let _ref: &u64 = &*ptr; // ✅ 对齐
     }
 }
 ```
 
-**Miri 输出**:
+### 示例 6：越界指针算术（即使不解引用也是 UB）
 
-```
-error: Undefined Behavior: accessing memory with alignment 1, but alignment 8 is required
+```rust
+// ❌ 错误代码
+fn out_of_bounds_ptr() {
+    let arr = [1, 2, 3];
+    let ptr = arr.as_ptr();
+    let _bad = unsafe { ptr.offset(5) }; // UB: 超出 allocated object 范围
+}
+
+// ✅ 正确代码
+fn in_bounds_ptr() {
+    let arr = [1, 2, 3];
+    let ptr = arr.as_ptr();
+    let _ok = unsafe { ptr.offset(2) }; // ✅ 在范围内
+    let _one_past = unsafe { ptr.offset(3) }; // ✅ 允许指向最后一个元素之后
+}
 ```
 
-### 示例 5: 无效枚举值
+### 示例 7：无效枚举判别式
 
 ```rust
 #[repr(u8)]
-enum Color {
-    Red = 0,
-    Green = 1,
-    Blue = 2,
-}
+enum Color { Red = 1, Green = 2, Blue = 3 }
 
 // ❌ 错误代码
-fn invalid_enum() {
-    let raw: u8 = 100; // 不在枚举范围内的值
-    let color: Color = unsafe { std::mem::transmute(raw) }; // ❌ UB: 无效枚举值
+fn invalid_discriminant() {
+    let raw: u8 = 99;
+    let _color: Color = unsafe { std::mem::transmute(raw) }; // UB: 99 不是有效判别式
+}
 
-    match color {
-        Color::Red => println!("red"),
-        Color::Green => println!("green"),
-        Color::Blue => println!("blue"),
+// ✅ 正确代码
+fn valid_discriminant() {
+    let raw: u8 = 2;
+    let color: Color = unsafe { std::mem::transmute(raw) }; // ✅ Green = 2
+}
+```
+
+### 示例 8：双重释放
+
+```rust
+// ❌ 错误代码
+fn double_free() {
+    let ptr = Box::into_raw(Box::new(42));
+    unsafe {
+        drop(Box::from_raw(ptr));
+        drop(Box::from_raw(ptr)); // UB: 双重释放
     }
 }
 
 // ✅ 正确代码
-fn valid_enum() {
-    let raw: u8 = 1;
-    let color = match raw {
-        0 => Color::Red,
-        1 => Color::Green,
-        2 => Color::Blue,
-        _ => panic!("invalid color value"),
-    };
+fn single_free() {
+    let ptr = Box::into_raw(Box::new(42));
+    unsafe {
+        drop(Box::from_raw(ptr)); // ✅ 仅释放一次
+    }
 }
 ```
 
-### 示例 6: 重叠的 mutable 引用
+### 示例 9：数据竞争（实验性检测）
 
 ```rust
 // ❌ 错误代码
-fn overlapping_mut_refs() {
-    let mut data = [1, 2, 3, 4];
+fn data_race() {
+    use std::thread;
+    let mut x = 0;
+    let ptr = &mut x as *mut i32;
 
-    let a = &mut data[..2];
-    let b = &mut data[1..3]; // ❌ 编译错误：重叠借用
-
-    a[0] = 10;
-    b[0] = 20;
-}
-
-// ❌ 通过 unsafe 绕过编译器检查
-fn overlapping_via_raw() {
-    let mut data = [1, 2, 3, 4];
-
-    let ptr = data.as_mut_ptr();
-    let a = unsafe { std::slice::from_raw_parts_mut(ptr, 2) };
-    let b = unsafe { std::slice::from_raw_parts_mut(ptr.add(1), 2) }; // ❌ UB: 重叠的 mutable 引用
-
-    a[0] = 10;
-    b[0] = 20;
-}
-```
-
-### 示例 7: 违反引用生命周期规则
-
-```rust
-// ❌ 错误代码
-fn dangling_reference() -> &'static i32 {
-    let local = 42;
-    &local // ❌ 编译错误：返回局部变量的引用
-}
-
-// ❌ 通过 unsafe 绕过
-fn dangling_via_raw() -> &'static i32 {
-    let local = 42;
-    let ptr = &local as *const i32;
-    unsafe { &*ptr } // ❌ UB: 返回指向已释放栈帧的引用
-}
-```
-
-### 示例 8: 类型混淆（Type Pun）
-
-```rust
-// ❌ 错误代码
-fn type_pun() {
-    let f: f32 = 1.5;
-    let bits: u32 = unsafe { std::mem::transmute(f) }; // ⚠️ 通常安全，但需要小心
-
-    // 更危险的场景：不同类型大小不同
-    let x: u64 = 0xDEADBEEF;
-    let y: u32 = unsafe { std::mem::transmute(x) }; // ❌ UB: 类型大小不匹配
-}
-
-// ✅ 正确代码
-fn safe_type_conversion() {
-    let f: f32 = 1.5;
-    let bits = f.to_bits(); // ✅ 安全：使用标准库 API
-
-    let x: u64 = 0xDEADBEEF;
-    let y = x as u32; // ✅ 安全：显式截断转换
-}
-```
-
-### 示例 9: 通过共享引用修改数据
-
-```rust
-// ❌ 错误代码
-fn modify_via_shared_ref() {
-    let x = Box::new(42);
-    let shared = &x;
-    let raw = &*x as *const i32 as *mut i32;
+    thread::spawn(move || unsafe {
+        *ptr = 1; // 线程 A 写
+    });
 
     unsafe {
-        *raw = 100; // ❌ UB: 通过共享引用修改数据
+        *ptr = 2; // 线程 B 写（主线程）
     }
-
-    println!("{}", shared);
 }
 
 // ✅ 正确代码
-fn modify_via_interior_mutability() {
-    use std::cell::Cell;
+fn no_data_race() {
+    use std::sync::atomic::{AtomicI32, Ordering};
+    let x = AtomicI32::new(0);
 
-    let x = Cell::new(42);
-    x.set(100); // ✅ 安全：Cell 允许内部可变性
-    println!("{}", x.get());
+    std::thread::scope(|s| {
+        s.spawn(|| x.store(1, Ordering::Relaxed));
+        s.spawn(|| x.store(2, Ordering::Relaxed));
+    });
 }
 ```
 
-### 示例 10: 未初始化的内存读取
+### 示例 10：Strict Provenance 违规（指针<->整数转换）
 
 ```rust
-// ❌ 错误代码
-fn read_uninit() {
-    let x: i32;
-    println!("{}", x); // ❌ 编译错误：使用未初始化变量
+// ❌ 错误代码（在启用 strict provenance 时）
+fn ptr_int_roundtrip() {
+    let x = 42;
+    let ptr: *const i32 = &x;
+    let addr = ptr as usize;
+    let _restored: *const i32 = addr as *const i32; // 语义模糊
 }
 
-// ❌ 通过 MaybeUninit 错误使用
-fn read_uninit_unsafe() {
-    use std::mem::{self, MaybeUninit};
-
-    let x: MaybeUninit<i32> = MaybeUninit::uninit();
-    let val = unsafe { x.assume_init() }; // ❌ UB: 读取未初始化的值
-    println!("{}", val);
-}
-
-// ✅ 正确代码
-fn safe_init() {
-    let mut x = MaybeUninit::<i32>::uninit();
-
-    unsafe {
-        x.as_mut_ptr().write(42); // 先写入
-        let val = x.assume_init(); // ✅ 安全：已初始化
-        println!("{}", val);
-    }
+// ✅ 正确代码（使用 with_exposed_provenance / expose_provenance）
+fn proper_ptr_provenance() {
+    let x = 42;
+    let ptr: *const i32 = &x;
+    let addr = ptr.expose_provenance();
+    let _restored: *const i32 = std::ptr::with_exposed_provenance(addr);
 }
 ```
 
 ---
 
-## 5. CI 集成
+## 四、Stacked Borrows vs Tree Borrows
 
-> ⚠️ **重要限制**: Miri 仅在 Linux 上完整支持。Windows 和 macOS 支持有限，不推荐在 CI 中使用。
+Rust 有两种内存别名模型：
 
-### GitHub Actions 配置
+| 模型 | 特点 | Miri 启动方式 |
+|------|------|---------------|
+| **Stacked Borrows** | 更严格， legacy 默认模型 | `cargo miri test`（默认） |
+| **Tree Borrows** | 更宽松，更符合实际代码直觉 | `MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test` |
 
-参见 `.github/workflows/miri.yml`，本项目已配置：
+### 何时使用 Tree Borrows？
+
+- 代码使用复杂的自引用结构
+- 需要与 C/FFI 代码交互的指针
+- Stacked Borrows 产生看似"不合理"的误报时
+
+**注意**: Tree Borrows 是 Rust 内存模型的未来方向（PLDI 2025 论文），建议新项目优先使用。
+
+---
+
+## 五、在 CI 中集成 Miri
 
 ```yaml
-# 核心配置摘要
+# .github/workflows/miri.yml
+name: Miri
+
+on: [push, pull_request]
+
 jobs:
-  miri-tree-borrows:
+  miri:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@nightly
-        with:
-          components: miri, rust-src
-      - run: cargo miri setup
-      - run: cargo miri test --workspace --all-features
+      - name: Install Miri
+        run: |
+          rustup toolchain install nightly
+          rustup component add miri --toolchain nightly
+          rustup override set nightly
+      - name: Run Miri tests
+        run: cargo miri test
         env:
-          MIRIFLAGS: "-Zmiri-tree-borrows -Zmiri-ignore-leaks"
-```
-
-### 按 crate 配置不同标志
-
-```yaml
-strategy:
-  matrix:
-    crate:
-      - c01_ownership_borrow_scope
-      - c05_threads
-      - c10_networks
-    include:
-      - crate: c05_threads
-        flags: "-Zmiri-tree-borrows -Zmiri-disable-isolation"
-      - crate: c10_networks
-        flags: "-Zmiri-tree-borrows -Zmiri-disable-isolation"
-```
-
-### 本地开发工作流
-
-```bash
-# 提交前快速检查（ Tree Borrows）
-MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test -p YOUR_CRATE
-
-# 全面检查（所有模式）
-./scripts/run_miri_tests.sh  # 如果有此脚本
+          MIRIFLAGS: -Zmiri-tree-borrows -Zmiri-disable-isolation
 ```
 
 ---
 
-## 6. 常见问题与解决方案
+## 六、常见陷阱与解决方案
 
-### Q: Miri 运行太慢怎么办？
-
-A:
-
-- 仅对包含 `unsafe` 的 crate 运行 Miri
-- 使用 `--release` 不会加速 Miri（它解释执行 MIR）
-- 在 CI 中分片运行（按 crate 并行）
-
-### Q: Miri 报告了 "unsupported operation"？
-
-A: 某些系统调用 Miri 不支持：
-
-- 使用 `-Zmiri-disable-isolation` 允许部分系统调用
-- 对于网络操作，考虑使用 mock
-
-### Q: 我的代码在 Miri 中报错但在实际运行正常？
-
-A:
-
-- Stacked Borrows 可能有误报，尝试 Tree Borrows
-- 但大多数 Miri 报错都代表真实的 UB，即使当前未触发崩溃
-
-### Q: 如何处理 Miri 中的内存泄漏报告？
-
-A:
-
-- 使用 `-Zmiri-ignore-leaks` 忽略泄漏（推荐用于测试）
-- 或使用 `-Zmiri-disable-leak-backtraces` 减少输出噪音
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| Miri 运行极慢 | 解释执行 | 仅对 `unsafe` 模块和并发测试运行 Miri |
+| 文件系统访问报错 | Miri 默认隔离 | `MIRIFLAGS="-Zmiri-disable-isolation"` |
+| 时间相关测试失败 | Miri 模拟时间 | 使用 `std::time::Instant` 而非系统时间 |
+| FFI/C 代码报错 | Miri 不理解 C 代码 | 用 `-Zmiri-disable-isolation` 或跳过 FFI 测试 |
+| Stacked Borrows 误报 | 过于严格的别名分析 | 切换到 Tree Borrows |
 
 ---
 
-## 7. 参考资源
+## 七、学习路径建议
 
-- [Miri 官方 README](https://github.com/rust-lang/miri)
-- [Tree Borrows 论文](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)
-- [Rustonomicon - 未定义行为](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)
-- [Microsoft Rust 安全指南](https://docs.microsoft.com/en-us/windows/dev-environment/rust/rust-hardening)
-- [AWS Rust SDK 开发规范](https://github.com/awslabs/aws-sdk-rust/blob/main/CONTRIBUTING.md)
+1. **入门**：对现有 `unsafe` 代码运行 `cargo miri test`
+2. **进阶**：理解 Stacked Borrows / Tree Borrows 输出信息
+3. **深入**：阅读 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 中的内存模型章节
+4. **专家**：阅读 [PLDI 2025 Tree Borrows 论文](https://pldi25.sigplan.org/)
+
+---
+
+> **总结**: Miri 是 Rust `unsafe` 代码的"守门人"。任何包含 `unsafe` 块的 crate 都应该在 CI 中运行 Miri 测试。记住：**Miri 通过不等于没有 Bug，但 Miri 报错一定意味着 UB**。

@@ -19,6 +19,9 @@ tracing-subscriber = { workspace = true }
 anyhow = { workspace = true }
 
 
+[features]
+simd = []
+
 [dev-dependencies]
 criterion = { workspace = true }
 
