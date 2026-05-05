@@ -1,8 +1,8 @@
-//! # Rust 1.96.0 宏系统新特性实现模块
+//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
 
 use std::ops::RangeInclusive;
 
-/// Rust 1.96 `if let` guards 在宏系统中的应用
+/// if let guards (Rust 1.95 稳定，非 1.96 新特性) 在宏系统中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。
@@ -132,10 +132,7 @@ impl MacroTupleExamples {
     }
 
     /// 宏分析
-    pub fn macro_analysis(
-        name: &str,
-        complexity: u8,
-    ) -> (String, u8, &'static str, bool) {
+    pub fn macro_analysis(name: &str, complexity: u8) -> (String, u8, &'static str, bool) {
         let is_complex = complexity > 2;
         let category = if complexity == 1 {
             "simple"
@@ -233,7 +230,7 @@ impl MacroExpansionManager {
 /// 演示函数
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
-    println!("   Rust 1.96.0 宏系统新特性演示");
+    println!("   Rust 宏系统特性演示");
     println!("========================================\n");
 
     let depth_cat = MacroRangeExamples::recursion_depth_category(12);
@@ -252,8 +249,10 @@ pub fn demonstrate_rust_196_features() {
     println!("宏批处理: {:?}", batches);
 
     let (decl, proc, attr, total, dominant) = MacroTupleExamples::macro_stats(10, 5, 3);
-    println!("宏统计: 声明式={}, 过程式={}, 属性式={}, 总计={}, 主导={}",
-             decl, proc, attr, total, dominant);
+    println!(
+        "宏统计: 声明式={}, 过程式={}, 属性式={}, 总计={}, 主导={}",
+        decl, proc, attr, total, dominant
+    );
 
     let manager = MacroExpansionManager::new(50, 10);
     println!("宏展开范围: {:?}", manager.get_all_ranges());
@@ -265,11 +264,8 @@ pub fn demonstrate_rust_196_features() {
 
 /// 获取特性信息
 pub fn get_rust_196_macro_info() -> String {
-    "Rust 1.96.0 宏系统新特性:\n\
-        - RangeInclusive for recursion depth control\n\
-        - Tuple coercion for macro results\n\
-        - Better complexity scoring\n\
-        - Improved batch expansion management"
+    "Rust 宏系统特性:\n- RangeInclusive for recursion depth control\n- Tuple coercion for macro \
+     results\n- Better complexity scoring\n- Improved batch expansion management"
         .to_string()
 }
 
@@ -281,7 +277,10 @@ mod tests {
     fn test_recursion_depth_category() {
         assert_eq!(MacroRangeExamples::recursion_depth_category(5), "normal");
         assert_eq!(MacroRangeExamples::recursion_depth_category(12), "deep");
-        assert_eq!(MacroRangeExamples::recursion_depth_category(50), "excessive");
+        assert_eq!(
+            MacroRangeExamples::recursion_depth_category(50),
+            "excessive"
+        );
     }
 
     #[test]
@@ -293,7 +292,10 @@ mod tests {
     #[test]
     fn test_compilation_time_estimate() {
         assert_eq!(MacroRangeExamples::compilation_time_estimate(5), "fast");
-        assert_eq!(MacroRangeExamples::compilation_time_estimate(30), "moderate");
+        assert_eq!(
+            MacroRangeExamples::compilation_time_estimate(30),
+            "moderate"
+        );
     }
 
     #[test]
@@ -314,7 +316,10 @@ mod tests {
 
     #[test]
     fn test_macro_performance_tier() {
-        assert_eq!(PracticalMacroExamples::macro_performance_tier(50), "instant");
+        assert_eq!(
+            PracticalMacroExamples::macro_performance_tier(50),
+            "instant"
+        );
         assert_eq!(PracticalMacroExamples::macro_performance_tier(500), "fast");
     }
 
@@ -362,6 +367,6 @@ mod tests {
     #[test]
     fn test_get_rust_196_macro_info() {
         let info = get_rust_196_macro_info();
-        assert!(info.contains("Rust 1.96.0"));
+        assert!(!info.is_empty());
     }
 }

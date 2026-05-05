@@ -48,7 +48,7 @@
 | `RangeToInclusive` | ✅ | c08 完整示例 | 大部分 crates |
 | `gen` 关键字 | ✅ | c03 示例 | 大部分 crates |
 | 元组 coercion | ✅ | c02 完整示例 | 大部分 crates |
-| `PinCoerceUnsized` | ⚠️ | 未评估影响 | c06_async |
+| `PinCoerceUnsized` (nightly-only) | ⚠️ | 未评估影响 | c06_async |
 | `split-debuginfo` | ✅ | Profile 配置 | - |
 | 新 lint 规则 | ✅ | 20+ 规则 | - |
 
@@ -277,7 +277,7 @@ done
 **预计时间:** 5 天
 **验收:** 每个 crate 都有 rust_196_features.rs
 
-#### 🟡 P1: 评估 PinCoerceUnsized 影响
+#### 🟡 P1: 评估 PinCoerceUnsized 影响 (nightly-only 前瞻，非 1.96 stable)
 
 - [ ] 检查 c06_async 中 Pin 的使用
 - [ ] 测试是否需要修改

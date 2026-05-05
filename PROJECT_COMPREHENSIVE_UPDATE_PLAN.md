@@ -25,13 +25,13 @@
 | PowerPC 内联汇编稳定化 | ⏳ 待评估 | c11_macro_system | P3 |
 | `irrefutable_let_patterns` lint 调整 | ✅ 已配置 | Cargo.toml | P1 |
 
-### 1.2 Rust 1.96 新特性采用
+### 1.2 Rust 1.95/1.96 特性（含版本勘误）采用
 
 | 特性 | 状态 | 影响范围 | 优先级 |
 |------|------|----------|--------|
 | New Range types | ⏳ 待评估 | c08_algorithms | P2 |
 | `RangeToInclusive` 类型 | ⏳ 待评估 | 类型系统 crate | P2 |
-| PinCoerceUnsized 要求 Deref | ⏳ 待检查 | c06_async | P1 |
+| PinCoerceUnsized (nightly-only) | ⏳ 待检查 | c06_async | P1 |
 | 元组元素 coercion site | ✅ 自动生效 | 全项目 | - |
 | LLVM 21 支持 | ⏳ 待 CI 更新 | CI/CD | P2 |
 
@@ -241,7 +241,7 @@
 
 | 内容 | 更新项 | 优先级 |
 |------|--------|--------|
-| 学习路径指南 | 添加 1.96 新特性学习 | P2 |
+| 学习路径指南 | 添加 1.95/1.96 特性学习 | P2 |
 | 练习题 | 添加新语法练习 | P3 |
 | 速查表 | 更新所有速查表 | P2 |
 
@@ -324,7 +324,7 @@
 ### P1 (高优先级 - 2周内)
 
 - [ ] 全面采用 `if let` guards
-- [ ] 创建 Rust 1.96 特性文档
+- [ ] 创建 Rust 1.95/1.96 特性（含版本勘误）文档
 - [ ] 更新学习路径
 - [ ] 更新速查表
 - [ ] 添加新示例代码

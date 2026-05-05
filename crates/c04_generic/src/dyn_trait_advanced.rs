@@ -158,10 +158,10 @@ use std::rc::Rc;
 use std::sync::Arc;
 
 pub trait SharedResource: Debug {
-    /// 使用 Rc<Self> 作为接收者
+    /// 使用 `Rc<Self>` 作为接收者
     fn shared_operation(self: Rc<Self>);
 
-    /// 使用 Arc<Self> 作为接收者（用于跨线程场景）
+    /// 使用 `Arc<Self>` 作为接收者（用于跨线程场景）
     fn atomic_operation(self: Arc<Self>);
 }
 

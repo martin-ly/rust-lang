@@ -1,8 +1,18 @@
-//! # Rust 1.96.0 WASM 新特性实现模块
+//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
+//!
+//! ## Rust 1.96 真实特性补充：WebAssembly 链接器行为变更
+//!
+//! Rust 1.96 移除了 WebAssembly 目标上 `--allow-undefined` 链接器标志的默认传递。
+//! 这意味着：
+//! - 未定义符号现在会导致链接错误（与原生平台行为一致）
+//! - 需要显式使用 `#[link(wasm_import_module = "...")]` 导入外部符号
+//! - 修复了历史上 `--allow-undefined` 导致的静默故障问题
+//!
+//! 官方公告: <https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/>
 
 use std::ops::RangeInclusive;
 
-/// Rust 1.96 `if let` guards 在 WASM 中的应用
+/// if let guards (Rust 1.95 稳定，非 1.96 新特性) 在 WASM 中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。
@@ -124,10 +134,7 @@ impl WasmTupleExamples {
     }
 
     /// 内存统计
-    pub fn memory_stats(
-        allocated: usize,
-        used: usize,
-    ) -> (usize, usize, f64, &'static str) {
+    pub fn memory_stats(allocated: usize, used: usize) -> (usize, usize, f64, &'static str) {
         let utilization = if allocated > 0 {
             (used as f64 / allocated as f64) * 100.0
         } else {
@@ -146,10 +153,7 @@ impl WasmTupleExamples {
     }
 
     /// 模块信息
-    pub fn module_info(
-        name: &str,
-        version: (u8, u8, u8),
-    ) -> (String, u8, u8, u8, &'static str) {
+    pub fn module_info(name: &str, version: (u8, u8, u8)) -> (String, u8, u8, u8, &'static str) {
         let (major, minor, patch) = version;
         (name.to_string(), major, minor, patch, "loaded")
     }
@@ -161,7 +165,11 @@ impl WasmTupleExamples {
         returns: usize,
     ) -> (String, usize, usize, &'static str, bool) {
         let valid = params <= 10 && returns <= 1;
-        let kind = if returns == 0 { "procedure" } else { "function" };
+        let kind = if returns == 0 {
+            "procedure"
+        } else {
+            "function"
+        };
         (name.to_string(), params, returns, kind, valid)
     }
 }
@@ -255,7 +263,7 @@ impl WasmModuleManager {
 /// 演示函数
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
-    println!("   Rust 1.96.0 WASM 新特性演示");
+    println!("   Rust WASM 特性演示");
     println!("========================================\n");
 
     let pages_cat = WasmRangeExamples::memory_pages_category(32);
@@ -274,8 +282,10 @@ pub fn demonstrate_rust_196_features() {
     println!("50000指令性能等级: {}", perf_tier);
 
     let (alloc, used, util, eff) = WasmTupleExamples::memory_stats(1024, 768);
-    println!("内存统计: 分配={}, 使用={}, 利用率={:.1}%, 效率={}",
-             alloc, used, util, eff);
+    println!(
+        "内存统计: 分配={}, 使用={}, 利用率={:.1}%, 效率={}",
+        alloc, used, util, eff
+    );
 
     let manager = WasmModuleManager::new(20, 5);
     println!("模块范围: {:?}", manager.get_all_ranges());
@@ -287,11 +297,8 @@ pub fn demonstrate_rust_196_features() {
 
 /// 获取特性信息
 pub fn get_rust_196_wasm_info() -> String {
-    "Rust 1.96.0 WASM 新特性:\n\
-        - RangeInclusive for memory and stack management\n\
-        - Tuple coercion for WASM call results\n\
-        - Better performance tier classification\n\
-        - Improved module batch loading"
+    "Rust WASM 特性:\n- RangeInclusive for memory and stack management\n- Tuple coercion for WASM \
+     call results\n- Better performance tier classification\n- Improved module batch loading"
         .to_string()
 }
 
@@ -341,8 +348,7 @@ mod tests {
 
     #[test]
     fn test_memory_budget_check() {
-        let (allowed, status) =
-            PracticalWasmExamples::memory_budget_check(512, 256, 0..=1024);
+        let (allowed, status) = PracticalWasmExamples::memory_budget_check(512, 256, 0..=1024);
         assert!(allowed);
         assert_eq!(status, "approved");
     }
@@ -362,7 +368,10 @@ mod tests {
 
     #[test]
     fn test_parse_memory_pages() {
-        assert_eq!(WasmIfLetGuardExamples::parse_memory_pages(Some("16")), Ok(16));
+        assert_eq!(
+            WasmIfLetGuardExamples::parse_memory_pages(Some("16")),
+            Ok(16)
+        );
         assert_eq!(
             WasmIfLetGuardExamples::parse_memory_pages(Some("abc")),
             Err("无效的内存页数")
@@ -386,10 +395,9 @@ mod tests {
     #[test]
     fn test_get_rust_196_wasm_info() {
         let info = get_rust_196_wasm_info();
-        assert!(info.contains("Rust 1.96.0"));
+        assert!(!info.is_empty());
     }
 }
-
 
 // ==================== Rust 2024 Edition: unsafe extern blocks 安全 FFI ====================
 //
@@ -525,12 +533,9 @@ pub fn demonstrate_unsafe_extern_blocks() {
 
 /// 获取 unsafe extern blocks 特性信息
 pub fn get_unsafe_extern_info() -> String {
-    "Rust 2024 Edition unsafe extern blocks 特性:\n\
-        - 语法: unsafe extern \"C\" { fn foo(); }\n\
-        - 声明块整体标记为 unsafe，语义更清晰\n\
-        - 与调用点的 unsafe { foo() } 形成双重明确\n\
-        - 鼓励将 unsafe FFI 封装为安全 API\n\
-        - 适用于 C 库绑定、WASM host 函数、系统调用"
+    "Rust 2024 Edition unsafe extern blocks 特性:\n- 语法: unsafe extern \"C\" { fn foo(); }\n- \
+     声明块整体标记为 unsafe，语义更清晰\n- 与调用点的 unsafe { foo() } 形成双重明确\n- 鼓励将 \
+     unsafe FFI 封装为安全 API\n- 适用于 C 库绑定、WASM host 函数、系统调用"
         .to_string()
 }
 

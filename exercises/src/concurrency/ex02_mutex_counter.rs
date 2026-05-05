@@ -5,7 +5,7 @@
 //!
 //! ## 题目描述
 //!
-//! 使用 Arc<Mutex<T>> 实现线程安全的计数器。
+//! 使用 `Arc<Mutex<T>>` 实现线程安全的计数器。
 
 use std::sync::{Arc, Mutex};
 use std::thread;

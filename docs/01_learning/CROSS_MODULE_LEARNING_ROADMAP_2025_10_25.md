@@ -31,7 +31,7 @@ C01 → C07 → C08 → C10
 C01 → C06 → C10 → C12
 ```
 
-### 路径 5: Rust 1.96 新特性探索者
+### 路径 5: Rust 1.95/1.96 特性探索者
 
 ```
 isqrt → get_disjoint_mut → async Fn → 综合项目
@@ -39,7 +39,7 @@ isqrt → get_disjoint_mut → async Fn → 综合项目
 
 ---
 
-## 🆕 Rust 1.96 新特性在各模块中的应用
+## 🆕 Rust 1.95/1.96 特性在各模块中的应用
 
 ### C01 所有权与借用 → 1.96 并发安全
 
@@ -54,7 +54,7 @@ fn ownership_with_196_features() {
     map.insert("key1", vec![1, 2, 3]);
     map.insert("key2", vec![4, 5, 6]);
 
-    // Rust 1.96: 编译器确保这些键不重复，安全地获取多个可变引用
+    // Rust ≥1.83: 编译器确保这些键不重复，安全地获取多个可变引用
     let [Some(v1), Some(v2)] = map.get_disjoint_mut(["key1", "key2"]) else {
         panic!("keys not found");
     };
@@ -67,7 +67,7 @@ fn ownership_with_196_features() {
 
 **学习建议**: 结合 C01 的所有权概念理解 `get_disjoint_mut` 的编译时安全检查。
 
-### C04 泛型 → 1.96 async Fn Trait
+### C04 泛型 → async Fn Trait (≥1.85, Ed 2024)
 
 **新特性关联**:
 
@@ -84,7 +84,7 @@ trait OldProcessor {
 }
 ```
 
-**模块关联**: C06 (异步) + C04 (泛型) + 1.96 async Fn
+**模块关联**: C06 (异步) + C04 (泛型) + ≥1.85 async Fn
 
 **学习建议**: 在学习 C04 泛型时，尝试用 1.96 的 `async Fn` 语法重构异步代码。
 
@@ -93,13 +93,13 @@ trait OldProcessor {
 **新特性关联**:
 
 ```rust
-// spawn_unchecked - 高级线程控制 (unsafe)
+// thread::Builder - 高级线程控制
 use std::thread;
 
-unsafe fn advanced_threading() {
-    // 跳过某些运行时检查，用于极端性能场景
+fn advanced_threading() {
     let handle = thread::Builder::new()
-        .spawn_unchecked(|| {
+        .name("worker".into())
+        .spawn(|| {
             // 线程逻辑
         })
         .unwrap();
@@ -110,14 +110,14 @@ unsafe fn advanced_threading() {
 // 结合 1.94 的 LazyLock 实现线程安全延迟初始化
 use std::sync::LazyLock;
 
-static WORKER_POOL: LazyLock<thread::Thread> = LazyLock::new(|| {
-    thread::current() // 示例
+static CONFIG: LazyLock<String> = LazyLock::new(|| {
+    "app_config".to_string()
 });
 ```
 
-**学习建议**: C05 线程基础 → 1.94 LazyLock → 1.96 spawn_unchecked
+**学习建议**: C05 线程基础 → 1.94 LazyLock → thread::Builder 高级控制
 
-### C08 算法 → 1.96 isqrt
+### C08 算法 → isqrt (≥1.84)
 
 **新特性关联**:
 
@@ -150,7 +150,7 @@ fn triangle_inequality(points: &[(f64, f64)]) -> bool {
 }
 ```
 
-**学习建议**: C08 算法基础 → 1.96 isqrt 优化 → 1.94 array_windows 组合应用
+**学习建议**: C08 算法基础 → isqrt (≥1.84) 优化 → 1.94 array_windows 组合应用
 
 ---
 
@@ -163,7 +163,7 @@ C02 (类型系统)
     ↓
 C08 (算法基础)
     ↓
-Rust 1.96 isqrt ─────┐
+Rust ≥1.84 isqrt ───┐
 Rust 1.94 数学常量 ──┼→ 数学计算项目
 C08 高级算法 ────────┘
 ```
@@ -177,7 +177,7 @@ C01 (所有权)
     ↓
 C05 (线程基础)
     ↓
-Rust 1.96 get_disjoint_mut ──┐
+Rust ≥1.83 get_disjoint_mut ─┐
 Rust 1.94 LazyLock ──────────┼→ 并发缓存系统
 C05 高级并发模式 ────────────┘
 ```
@@ -191,7 +191,7 @@ C04 (泛型基础)
     ↓
 C06 (异步基础)
     ↓
-Rust 1.96 async Fn ────┐
+Rust ≥1.85 async Fn ─┐
 Rust 1.94 ControlFlow ─┼→ 异步 Web 服务
 Tokio 生态 ────────────┘
 ```
@@ -205,7 +205,7 @@ C01 (所有权)
     ↓
 C07 (进程管理)
     ↓
-Rust 1.96 spawn_unchecked ───┐
+Rust 1.95 if let guards ───┐
 Rust 1.94 Unsafe 改进 ───────┼→ 系统监控工具
 C07 高级系统编程 ────────────┘
 ```
@@ -221,7 +221,7 @@ C07 高级系统编程 ────────────┘
 | `isqrt` | C08 算法 | 基础数学 | ⭐ 高 |
 | `get_disjoint_mut` | C01/C05 | 所有权、HashMap | ⭐⭐ 中高 |
 | `async Fn` trait | C04/C06 | 泛型、async/await | ⭐⭐ 中 |
-| `spawn_unchecked` | C05 | 线程基础、unsafe | ⭐⭐⭐ 低 |
+| `if let guards` | C03/C05 | 模式匹配、控制流 | ⭐⭐ 中 |
 | never_type (!) | C03/C13 | 错误处理 | ⭐⭐ 中 |
 
 ---

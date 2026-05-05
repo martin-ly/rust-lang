@@ -217,7 +217,7 @@ pub mod smart_pointer_coercion {
 
     /// 展示 Arc 在元组中的 coercion
     ///
-    /// Rust 1.95.0: 支持 Arc<T> 到 Arc<dyn Trait> 的 coercion
+    /// Rust 1.95.0: 支持 `Arc<T>` 到 `Arc<dyn Trait>` 的 coercion
     pub fn arc_coercion() {
         let x = Arc::new(42i32);
         let y = Arc::new("hello");
@@ -252,7 +252,7 @@ pub mod smart_pointer_coercion {
 
     /// 展示 Box 在元组中的 coercion
     ///
-    /// Rust 1.95.0: Box<T> 到 Box<dyn Trait> 的 coercion
+    /// Rust 1.95.0: `Box<T>` 到 `Box<dyn Trait>` 的 coercion
     pub fn box_coercion() {
         trait Drawable {
             fn draw(&self);

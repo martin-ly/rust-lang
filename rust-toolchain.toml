@@ -1,5 +1,5 @@
 [toolchain]
-channel = "nightly"  # Rust 1.96 预计 2026-05-28 发布 stable，当前使用 nightly 预览
+channel = "nightly"  # 项目使用 nightly 1.97.0 预览实验性特性；MSRV 为 1.95.0 stable
 components = [
     "rustfmt",           # 代码格式化
     "clippy",            # 静态分析

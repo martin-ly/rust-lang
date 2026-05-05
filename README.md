@@ -1,10 +1,10 @@
 # Rust系统化学习项目
 
-> **Rust版本**: 1.96.0
+> **Rust版本**: 1.95.0+ (stable)，部分前瞻模块需要 nightly
 > **Edition**: 2024
 > **状态**: 生产就绪 | 权威对齐
 
-[![Rust](https://img.shields.io/badge/rust-1.96.0-blue.svg)](https://www.rust-lang.org)
+[![Rust](https://img.shields.io/badge/rust-1.95.0+-blue.svg)](https://www.rust-lang.org)
 [![Edition](https://img.shields.io/badge/edition-2024-purple.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -14,7 +14,7 @@
 
 本项目是一个全面的Rust语言系统化学习资源，专注于：
 
-- **现代化工具链**: Rust 1.96.0 + Edition 2024
+- **现代化工具链**: Rust 1.95.0+ / nightly + Edition 2024
 - **权威内容对齐**: 引用PLDI 2025、POPL 2026等顶会论文
 - **实践导向**: 12个学习crate覆盖核心概念
 - **生产就绪**: 完整的CI/CD、Miri内存安全检查
@@ -26,8 +26,9 @@
 ### 系统要求
 
 ```bash
-rustc --version  # 需要 1.96.0+
-cargo --version  # 需要 1.96.0+
+rustc --version  # 需要 1.95.0+ (stable)
+cargo --version  # 需要 1.95.0+ (stable)
+# 注意: 部分 crate (c02, c04, c08) 使用 nightly 实验性特性，需 nightly 编译器
 ```
 
 ### 安装与运行

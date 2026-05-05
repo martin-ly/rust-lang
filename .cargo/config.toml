@@ -14,7 +14,7 @@ rustflags = ["-C", "target-cpu=native", "-C", "embed-bitcode=no"]
 [env]
 # sccache 配置 - 50GB 缓存大小
 SCCACHE_CACHE_SIZE = "50G"
-# Miri 默认使用 Tree Borrows 模型
+# Miri 实验性 Tree Borrows 模型（非默认，需显式启用）
 MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = false }
 # Windows 缓存目录 (使用绝对路径避免解析问题)
 SCCACHE_DIR = "D:\\_cache\\sccache"
@@ -26,9 +26,9 @@ SCCACHE_DIR = "D:\\_cache\\sccache"
 SCCACHE_GHA_ENABLED = { value = "false", force = false }
 
 # 链接器优化 - 使用更快的链接器 (Windows)
+# 注意: rust-lld.exe 本身就是 LLD 链接器，不需要 -fuse-ld=lld 参数
 [target.x86_64-pc-windows-msvc]
 linker = "rust-lld.exe"
-rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 
 # 链接器优化 - 使用更快的链接器 (Linux)
 [target.x86_64-unknown-linux-gnu]
@@ -109,11 +109,11 @@ codegen-units = 4
 [profile.bench.build-override]
 opt-level = 2
 
-# ============ Rust 1.96 稳定特性 ============
-# 注意: 以下特性已在 Rust 1.96 稳定，无需unstable配置:
-# - 稀疏索引 (已稳定)
-# - 流水线编译 (已稳定)
-# - split-debuginfo (已稳定)
+# ============ 已稳定特性 ============
+# 注意: 以下特性在较早版本已稳定，无需unstable配置:
+# - 稀疏索引 (Rust 1.70+)
+# - 流水线编译 (Rust 1.70+)
+# - split-debuginfo (平台相关，较早版本已支持)
 
 # ============ 未来unstable特性 (可选) ============
 # 要启用以下特性，取消注释并运行: rustup default nightly
@@ -128,7 +128,7 @@ opt-level = 2
 # 运行方式: cargo miri test
 # 
 # 环境变量选项:
-# - MIRIFLAGS="-Zmiri-tree-borrows"  使用 Tree Borrows 模型 (推荐)
+# - MIRIFLAGS="-Zmiri-tree-borrows"  使用 Tree Borrows 模型 (实验性，非默认)
 # - MIRIFLAGS="-Zmiri-tag-raw-pointers"  标记裸指针
 # - MIRIFLAGS="-Zmiri-disable-isolation"  禁用隔离
 

@@ -1,8 +1,8 @@
-//! # Rust 1.96.0 设计模式新特性实现模块
+//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
 
 use std::ops::RangeInclusive;
 
-/// Rust 1.96 `if let` guards 在设计模式中的应用
+/// if let guards (Rust 1.95 稳定，非 1.96 新特性) 在设计模式中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。
@@ -12,9 +12,7 @@ impl PatternIfLetGuardExamples {
     /// 解析策略配置
     pub fn parse_strategy_config(input: Option<&str>) -> Result<String, &'static str> {
         match input {
-            Some(s) if let Ok(size) = s.parse::<usize>() => {
-                Ok(format!("固定大小策略: {}", size))
-            }
+            Some(s) if let Ok(size) = s.parse::<usize>() => Ok(format!("固定大小策略: {}", size)),
             Some("dynamic") => Ok("动态策略".to_string()),
             Some(_) => Err("未知的策略配置"),
             None => Ok("默认策略".to_string()),
@@ -36,11 +34,7 @@ pub struct PatternRangeExamples;
 
 impl PatternRangeExamples {
     /// 对象池大小控制
-    pub fn object_pool_size_range(
-        current: usize,
-        min: usize,
-        max: usize,
-    ) -> RangeInclusive<usize> {
+    pub fn object_pool_size_range(current: usize, min: usize, max: usize) -> RangeInclusive<usize> {
         let target = if current < min {
             min
         } else if current > max {
@@ -83,10 +77,7 @@ impl PatternRangeExamples {
     }
 
     /// 访问控制
-    pub fn access_level_permission(
-        user_level: u8,
-        required_range: RangeInclusive<u8>,
-    ) -> bool {
+    pub fn access_level_permission(user_level: u8, required_range: RangeInclusive<u8>) -> bool {
         required_range.contains(&user_level)
     }
 }
@@ -205,7 +196,7 @@ impl PatternComposer {
 /// 演示函数
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
-    println!("   Rust 1.96.0 设计模式新特性演示");
+    println!("   Rust 设计模式特性演示");
     println!("========================================\n");
 
     let pool_range = PatternRangeExamples::object_pool_size_range(5, 10, 50);
@@ -233,10 +224,8 @@ pub fn demonstrate_rust_196_features() {
 
 /// 获取特性信息
 pub fn get_rust_196_pattern_info() -> String {
-    "Rust 1.96.0 设计模式新特性:\n\
-        - RangeInclusive for pool and cache management\n\
-        - Tuple coercion for builder and factory results\n\
-        - Improved decorator depth control"
+    "Rust 设计模式特性:\n- RangeInclusive for pool and cache management\n- Tuple coercion for \
+     builder and factory results\n- Improved decorator depth control"
         .to_string()
 }
 
@@ -254,7 +243,10 @@ mod tests {
     fn test_decorator_depth_category() {
         assert_eq!(PatternRangeExamples::decorator_depth_category(1), "简单");
         assert_eq!(PatternRangeExamples::decorator_depth_category(4), "中等");
-        assert_eq!(PatternRangeExamples::decorator_depth_category(15), "过度装饰");
+        assert_eq!(
+            PatternRangeExamples::decorator_depth_category(15),
+            "过度装饰"
+        );
     }
 
     #[test]
@@ -329,6 +321,6 @@ mod tests {
     #[test]
     fn test_get_rust_196_pattern_info() {
         let info = get_rust_196_pattern_info();
-        assert!(info.contains("Rust 1.96.0"));
+        assert!(info.contains("Rust 设计模式特性"));
     }
 }

@@ -1,3 +1,9 @@
+//! # `let chains` 深度专题 (Rust 1.88/1.95 stable, 非 1.96 新特性)
+//!
+//! ⚠️ **版本勘误**: `let chains` 在 Rust 1.88.0 (Edition 2024) 中已稳定，
+//! `if let guards` 在 Rust 1.95.0 中已稳定。本模块用于复习和巩固这些特性，
+//! **并非** Rust 1.96 的新内容。
+//!
 //! # Rust 2024 Edition `let chains` 深度专题
 //!
 //! `let chains` 是 Rust 2024 Edition 中稳定化的重要特性，
@@ -160,9 +166,25 @@ pub fn filter_valid_records(records: &[Option<&str>]) -> (usize, i32, f64) {
 /// 在 match 表达式中结合 let chains 进行复杂条件判断。
 pub fn classify_value(value: Result<Option<&str>, &str>) -> &'static str {
     match value {
-        Ok(Some(s)) if let Ok(n) = s.parse::<i32>() && n > 0 && n % 2 == 0 => "正偶数",
-        Ok(Some(s)) if let Ok(n) = s.parse::<i32>() && n > 0 => "正奇数",
-        Ok(Some(s)) if let Ok(n) = s.parse::<i32>() && n < 0 => "负数",
+        Ok(Some(s))
+            if let Ok(n) = s.parse::<i32>()
+                && n > 0
+                && n % 2 == 0 =>
+        {
+            "正偶数"
+        }
+        Ok(Some(s))
+            if let Ok(n) = s.parse::<i32>()
+                && n > 0 =>
+        {
+            "正奇数"
+        }
+        Ok(Some(s))
+            if let Ok(n) = s.parse::<i32>()
+                && n < 0 =>
+        {
+            "负数"
+        }
         Ok(Some(_)) => "非数字字符串",
         Ok(None) => "空值",
         Err(_) => "错误结果",
@@ -179,15 +201,30 @@ pub fn demonstrate_let_chains() {
 
     // 示例 1: 解析并验证
     println!("--- 示例 1: 解析并验证 ---");
-    println!("parse_and_validate(Some(\"42\")) => {:?}", parse_and_validate(Some("42")));
-    println!("parse_and_validate(Some(\"-5\")) => {:?}", parse_and_validate(Some("-5")));
-    println!("parse_and_validate(Some(\"abc\")) => {:?}", parse_and_validate(Some("abc")));
+    println!(
+        "parse_and_validate(Some(\"42\")) => {:?}",
+        parse_and_validate(Some("42"))
+    );
+    println!(
+        "parse_and_validate(Some(\"-5\")) => {:?}",
+        parse_and_validate(Some("-5"))
+    );
+    println!(
+        "parse_and_validate(Some(\"abc\")) => {:?}",
+        parse_and_validate(Some("abc"))
+    );
     println!("parse_and_validate(None) => {:?}", parse_and_validate(None));
 
     // 示例 2: 多模式组合
     println!("\n--- 示例 2: 多模式组合 ---");
-    println!("combine_options(Some(1), Some(5), Ok(10)) => {:?}", combine_options(Some(1), Some(5), Ok(10)));
-    println!("combine_options(Some(5), Some(1), Ok(10)) => {:?}", combine_options(Some(5), Some(1), Ok(10)));
+    println!(
+        "combine_options(Some(1), Some(5), Ok(10)) => {:?}",
+        combine_options(Some(1), Some(5), Ok(10))
+    );
+    println!(
+        "combine_options(Some(5), Some(1), Ok(10)) => {:?}",
+        combine_options(Some(5), Some(1), Ok(10))
+    );
 
     // 示例 3: 配置解析
     println!("\n--- 示例 3: 配置解析 ---");
@@ -198,9 +235,18 @@ pub fn demonstrate_let_chains() {
 
     // 示例 4: 数据分类
     println!("\n--- 示例 4: 数据分类 ---");
-    println!("classify_value(Ok(Some(\"24\"))) => {}", classify_value(Ok(Some("24"))));
-    println!("classify_value(Ok(Some(\"25\"))) => {}", classify_value(Ok(Some("25"))));
-    println!("classify_value(Ok(Some(\"-3\"))) => {}", classify_value(Ok(Some("-3"))));
+    println!(
+        "classify_value(Ok(Some(\"24\"))) => {}",
+        classify_value(Ok(Some("24")))
+    );
+    println!(
+        "classify_value(Ok(Some(\"25\"))) => {}",
+        classify_value(Ok(Some("25")))
+    );
+    println!(
+        "classify_value(Ok(Some(\"-3\"))) => {}",
+        classify_value(Ok(Some("-3")))
+    );
 
     println!("\n========================================");
     println!("   演示完成");
@@ -209,11 +255,9 @@ pub fn demonstrate_let_chains() {
 
 /// 获取 let chains 特性信息
 pub fn get_let_chains_info() -> String {
-    "Rust 2024 Edition let chains 特性:\n\
-        - 在 if/while 条件中链式组合 let 绑定与布尔表达式\n\
-        - 语法: if let Some(x) = opt && x > 0 && let Ok(y) = parse(x)\n\
-        - 消除嵌套 if let，代码更扁平\n\
-        - 支持 match arm guards"
+    "Rust 2024 Edition let chains 特性:\n- 在 if/while 条件中链式组合 let 绑定与布尔表达式\n- \
+     语法: if let Some(x) = opt && x > 0 && let Ok(y) = parse(x)\n- 消除嵌套 if let，代码更扁平\n- \
+     支持 match arm guards"
         .to_string()
 }
 
@@ -227,11 +271,26 @@ mod tests {
     fn test_parse_and_validate() {
         assert_eq!(parse_and_validate(Some("42")), Ok(42));
         assert_eq!(parse_and_validate(Some("1000")), Ok(1000));
-        assert_eq!(parse_and_validate(Some("0")), Err("输入必须是 1 到 1000 之间的正整数"));
-        assert_eq!(parse_and_validate(Some("-5")), Err("输入必须是 1 到 1000 之间的正整数"));
-        assert_eq!(parse_and_validate(Some("1001")), Err("输入必须是 1 到 1000 之间的正整数"));
-        assert_eq!(parse_and_validate(Some("abc")), Err("输入必须是 1 到 1000 之间的正整数"));
-        assert_eq!(parse_and_validate(None), Err("输入必须是 1 到 1000 之间的正整数"));
+        assert_eq!(
+            parse_and_validate(Some("0")),
+            Err("输入必须是 1 到 1000 之间的正整数")
+        );
+        assert_eq!(
+            parse_and_validate(Some("-5")),
+            Err("输入必须是 1 到 1000 之间的正整数")
+        );
+        assert_eq!(
+            parse_and_validate(Some("1001")),
+            Err("输入必须是 1 到 1000 之间的正整数")
+        );
+        assert_eq!(
+            parse_and_validate(Some("abc")),
+            Err("输入必须是 1 到 1000 之间的正整数")
+        );
+        assert_eq!(
+            parse_and_validate(None),
+            Err("输入必须是 1 到 1000 之间的正整数")
+        );
     }
 
     #[test]
@@ -326,5 +385,140 @@ mod tests {
         let info = get_let_chains_info();
         assert!(info.contains("let chains"));
         assert!(info.contains("2024"));
+    }
+}
+
+/// let chains 反模式与边界情况专题
+pub mod anti_patterns_and_edge_cases {
+    /// 展示 let chains 中的反模式和边界情况
+    pub struct LetChainsAntiPatterns;
+
+    impl LetChainsAntiPatterns {
+        /// ❌ 不推荐：let chain 导致错误信息过于模糊
+        /// 多步解析失败时无法区分具体原因
+        pub fn vague_error_with_let_chain<'a>(
+            host: Option<&'a str>,
+            port: Option<&'a str>,
+        ) -> Result<(&'a str, u16), &'static str> {
+            if let Some(h) = host
+                && !h.is_empty()
+                && let Some(p) = port
+                && let Ok(port_num) = p.parse::<u16>()
+            {
+                Ok((h, port_num))
+            } else {
+                // ❌ 无法区分是 host 为空、port 缺失还是解析失败
+                Err("invalid input")
+            }
+        }
+
+        /// ✅ 推荐：逐步验证以提供精确错误信息
+        pub fn precise_error_step_by_step<'a>(
+            host: Option<&'a str>,
+            port: Option<&'a str>,
+        ) -> Result<(&'a str, u16), &'static str> {
+            let h = host.ok_or("host is required")?;
+            if h.is_empty() {
+                return Err("host cannot be empty");
+            }
+            let p = port.ok_or("port is required")?;
+            let port_num = p.parse::<u16>().map_err(|_| "port must be valid")?;
+            Ok((h, port_num))
+        }
+
+        /// ⚠️ 边界情况：let chain 短路求值导致后续条件不执行
+        pub fn short_circuit_trap(inputs: &[Option<&str>]) -> usize {
+            let mut parsed_count = 0usize;
+            for opt in inputs {
+                // ⚠️ 边界情况：如果 opt 为 None，后面的 parse 不会发生
+                if let Some(s) = opt
+                    && let Ok(_) = s.parse::<i32>()
+                {
+                    parsed_count += 1;
+                }
+            }
+            parsed_count
+        }
+
+        /// ⚠️ 边界情况：let chain 中绑定变量在 else 分支不可用
+        pub fn binding_scope_in_else(opt: Option<i32>) -> String {
+            // ⚠️ 边界情况：x 只在 then 块中可用
+            if let Some(x) = opt
+                && x > 0
+            {
+                format!("positive: {}", x)
+            } else {
+                // 这里不能使用 x
+                "not positive or none".to_string()
+            }
+        }
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_vague_error_with_let_chain() {
+            assert_eq!(
+                LetChainsAntiPatterns::vague_error_with_let_chain(Some("host"), Some("8080")),
+                Ok(("host", 8080))
+            );
+            assert_eq!(
+                LetChainsAntiPatterns::vague_error_with_let_chain(None, Some("8080")),
+                Err("invalid input")
+            );
+            assert_eq!(
+                LetChainsAntiPatterns::vague_error_with_let_chain(Some(""), Some("8080")),
+                Err("invalid input")
+            );
+            assert_eq!(
+                LetChainsAntiPatterns::vague_error_with_let_chain(Some("host"), Some("abc")),
+                Err("invalid input")
+            );
+        }
+
+        #[test]
+        fn test_precise_error_step_by_step() {
+            assert_eq!(
+                LetChainsAntiPatterns::precise_error_step_by_step(Some("host"), Some("8080")),
+                Ok(("host", 8080))
+            );
+            assert_eq!(
+                LetChainsAntiPatterns::precise_error_step_by_step(None, Some("8080")),
+                Err("host is required")
+            );
+            assert_eq!(
+                LetChainsAntiPatterns::precise_error_step_by_step(Some(""), Some("8080")),
+                Err("host cannot be empty")
+            );
+            assert_eq!(
+                LetChainsAntiPatterns::precise_error_step_by_step(Some("host"), Some("abc")),
+                Err("port must be valid")
+            );
+        }
+
+        #[test]
+        fn test_short_circuit_trap() {
+            let inputs = vec![Some("10"), None, Some("abc"), Some("20")];
+            // 只有 "10" 和 "20" 被成功解析，None 和 "abc" 因短路被跳过
+            assert_eq!(LetChainsAntiPatterns::short_circuit_trap(&inputs), 2);
+        }
+
+        #[test]
+        fn test_binding_scope_in_else() {
+            assert_eq!(
+                LetChainsAntiPatterns::binding_scope_in_else(Some(5)),
+                "positive: 5"
+            );
+            assert_eq!(
+                LetChainsAntiPatterns::binding_scope_in_else(Some(-1)),
+                "not positive or none"
+            );
+            assert_eq!(
+                LetChainsAntiPatterns::binding_scope_in_else(None),
+                "not positive or none"
+            );
+        }
     }
 }

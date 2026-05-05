@@ -355,7 +355,7 @@ macro_rules! impl_rust_lang_error {
     };
 }
 
-/// Macro to implement From<ErrorType> for UnifiedError
+/// Macro to implement `From<ErrorType>` for `UnifiedError`
 #[macro_export]
 macro_rules! impl_into_unified_error {
     ($type:ty) => {

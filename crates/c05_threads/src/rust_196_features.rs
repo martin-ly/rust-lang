@@ -1,10 +1,10 @@
-//! # Rust 1.96.0 线程并发新特性实现模块
+//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
 
 use std::ops::RangeInclusive;
 use std::sync::Mutex;
 use std::thread;
 
-/// Rust 1.96 `if let` guards 在线程同步中的应用
+/// `if let` guards (Rust 1.95 稳定，非 1.96 新特性) 在线程同步中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。
@@ -37,15 +37,12 @@ impl ThreadIfLetGuardExamples {
     }
 }
 
-/// RangeInclusive 在并发任务管理中的应用
+/// Range 类型应用（标准库基础特性）
 pub struct ThreadRangeExamples;
 
 impl ThreadRangeExamples {
     /// 任务分配
-    pub fn distribute_tasks(
-        total_tasks: usize,
-        thread_count: usize,
-    ) -> Vec<RangeInclusive<usize>> {
+    pub fn distribute_tasks(total_tasks: usize, thread_count: usize) -> Vec<RangeInclusive<usize>> {
         if thread_count == 0 || total_tasks == 0 {
             return vec![];
         }
@@ -79,15 +76,12 @@ impl ThreadRangeExamples {
     }
 
     /// 负载健康检查
-    pub fn is_load_healthy(
-        current_load: usize,
-        healthy_range: RangeInclusive<usize>,
-    ) -> bool {
+    pub fn is_load_healthy(current_load: usize, healthy_range: RangeInclusive<usize>) -> bool {
         healthy_range.contains(&current_load)
     }
 }
 
-/// 元组 coercion 示例
+/// 元组类型应用（泛型编程基础）
 pub struct ThreadTupleExamples;
 
 impl ThreadTupleExamples {
@@ -208,7 +202,7 @@ impl ThreadPoolRangeManager {
 /// 演示函数
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
-    println!("   Rust 1.96.0 线程并发新特性演示");
+    println!("   Rust 1.95+ 特性跟踪演示");
     println!("========================================\n");
 
     let ranges = ThreadRangeExamples::distribute_tasks(100, 4);
@@ -221,7 +215,10 @@ pub fn demonstrate_rust_196_features() {
     println!("负载健康检查: {}", is_healthy);
 
     let (success, failure, rate, status) = ThreadTupleExamples::concurrent_stats(95, 5);
-    println!("并发统计: 成功={}, 失败={}, 率={:.1}%, 状态={}", success, failure, rate, status);
+    println!(
+        "并发统计: 成功={}, 失败={}, 率={:.1}%, 状态={}",
+        success, failure, rate, status
+    );
 
     let manager = ThreadPoolRangeManager::new(4, 100);
     println!("工作线程范围: {:?}", manager.get_all_ranges());
@@ -233,10 +230,8 @@ pub fn demonstrate_rust_196_features() {
 
 /// 获取特性信息
 pub fn get_rust_196_thread_info() -> String {
-    "Rust 1.96.0 线程并发新特性:\n\
-        - RangeInclusive for task distribution\n\
-        - Tuple coercion for thread results\n\
-        - Improved thread pool range management"
+    "Rust 1.95+ 特性跟踪:\n- RangeInclusive for task distribution\n- Tuple coercion for thread \
+     results\n- Improved thread pool range management"
         .to_string()
 }
 
@@ -248,7 +243,7 @@ mod tests {
     fn test_distribute_tasks() {
         let ranges = ThreadRangeExamples::distribute_tasks(100, 4);
         assert_eq!(ranges.len(), 4);
-        
+
         let total: usize = ranges.iter().map(|r| r.end() - r.start() + 1).sum();
         assert_eq!(total, 100);
     }
@@ -291,7 +286,10 @@ mod tests {
 
     #[test]
     fn test_parse_thread_priority() {
-        assert_eq!(ThreadIfLetGuardExamples::parse_thread_priority(Some("50")), Ok(50));
+        assert_eq!(
+            ThreadIfLetGuardExamples::parse_thread_priority(Some("50")),
+            Ok(50)
+        );
         assert_eq!(
             ThreadIfLetGuardExamples::parse_thread_priority(Some("150")),
             Err("优先级超出范围")
@@ -329,6 +327,132 @@ mod tests {
     #[test]
     fn test_get_rust_196_thread_info() {
         let info = get_rust_196_thread_info();
-        assert!(info.contains("Rust 1.96.0"));
+        assert!(!info.is_empty());
+    }
+}
+
+/// 并发 Range 反模式与边界情况专题
+pub mod anti_patterns_and_edge_cases {
+    use std::ops::RangeInclusive;
+
+    /// 展示并发任务分配中的反模式和边界情况
+    pub struct ThreadRangeAntiPatterns;
+
+    impl ThreadRangeAntiPatterns {
+        /// ❌ 不推荐：使用半开范围且不做余数处理导致任务遗漏
+        pub fn buggy_task_distribution(
+            total: usize,
+            threads: usize,
+        ) -> Vec<std::ops::Range<usize>> {
+            // ❌ 反例：简单均分但不处理余数，最后一个 chunk 会遗漏剩余任务
+            if threads == 0 || total == 0 {
+                return vec![];
+            }
+            let chunk = total / threads;
+            let mut ranges = Vec::new();
+            for i in 0..threads {
+                let start = i * chunk;
+                let end = (i + 1) * chunk; // ❌ 不处理 remainder，最后一个范围可能遗漏
+                ranges.push(start..end);
+            }
+            ranges
+        }
+
+        /// ✅ 推荐：正确的包含性范围分配
+        pub fn correct_task_distribution(
+            total: usize,
+            threads: usize,
+        ) -> Vec<RangeInclusive<usize>> {
+            if threads == 0 || total == 0 {
+                return vec![];
+            }
+            let base = total / threads;
+            let rem = total % threads;
+            let mut ranges = Vec::new();
+            let mut start = 0;
+            for i in 0..threads {
+                let chunk = base + if i < rem { 1 } else { 0 };
+                if chunk == 0 {
+                    continue;
+                }
+                let end = start + chunk - 1;
+                ranges.push(start..=end);
+                start = end + 1;
+            }
+            ranges
+        }
+
+        /// ⚠️ 边界情况：线程数大于任务数
+        pub fn more_threads_than_tasks(tasks: usize, threads: usize) -> Vec<RangeInclusive<usize>> {
+            // ⚠️ 边界情况：当 threads > tasks 时，多余的线程应得到空标记范围
+            if threads == 0 || tasks == 0 {
+                return vec![];
+            }
+            let actual_threads = threads.min(tasks);
+            let mut ranges = Vec::with_capacity(threads);
+            let base = tasks / actual_threads;
+            let rem = tasks % actual_threads;
+            let mut start = 0;
+            for i in 0..actual_threads {
+                let chunk = base + if i < rem { 1 } else { 0 };
+                let end = start + chunk - 1;
+                ranges.push(start..=end);
+                start = end + 1;
+            }
+            for _ in actual_threads..threads {
+                ranges.push(0..=0); // 空范围标记
+            }
+            ranges
+        }
+
+        /// ⚠️ 边界情况：单线程或零任务的安全处理
+        pub fn edge_cases_single_thread(total: usize) -> RangeInclusive<usize> {
+            // ⚠️ 边界情况：始终返回安全的包含范围
+            if total == 0 { 0..=0 } else { 0..=total - 1 }
+        }
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_buggy_vs_correct_distribution() {
+            // ❌ 反例：半开范围的总长度可能不等于 total
+            let buggy = ThreadRangeAntiPatterns::buggy_task_distribution(10, 3);
+            let buggy_total: usize = buggy.iter().map(|r| r.end - r.start).sum();
+            // 注意：10 / 3 = 3，最后一个 range 是 9..10，总长为 3+3+1=7 < 10！
+            assert!(buggy_total < 10);
+
+            // ✅ 正例：包含性范围覆盖全部任务
+            let correct = ThreadRangeAntiPatterns::correct_task_distribution(10, 3);
+            let correct_total: usize = correct.iter().map(|r| r.end() - r.start() + 1).sum();
+            assert_eq!(correct_total, 10);
+        }
+
+        #[test]
+        fn test_correct_task_distribution() {
+            let ranges = ThreadRangeAntiPatterns::correct_task_distribution(10, 3);
+            assert_eq!(ranges.len(), 3);
+            // 边界：不重叠且连续
+            for i in 1..ranges.len() {
+                assert_eq!(*ranges[i].start(), ranges[i - 1].end() + 1);
+            }
+        }
+
+        #[test]
+        fn test_more_threads_than_tasks() {
+            let ranges = ThreadRangeAntiPatterns::more_threads_than_tasks(3, 5);
+            assert_eq!(ranges.len(), 5);
+            // 前 3 个范围覆盖任务，后 2 个是空标记
+            let valid_total: usize = ranges[..3].iter().map(|r| r.end() - r.start() + 1).sum();
+            assert_eq!(valid_total, 3);
+        }
+
+        #[test]
+        fn test_edge_cases_single_thread() {
+            assert_eq!(ThreadRangeAntiPatterns::edge_cases_single_thread(10), 0..=9);
+            assert_eq!(ThreadRangeAntiPatterns::edge_cases_single_thread(0), 0..=0);
+        }
     }
 }

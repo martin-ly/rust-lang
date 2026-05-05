@@ -194,7 +194,7 @@ Google 课程 Day 4 相对简洁，本项目在以下方面有显著扩展：
 | **并发** | 基础线程 + 锁 | 线程、无锁、异步、Actor、SIMD |
 | **生态** | 提及主要 crate | 详细版本管理、workspace 实践 |
 | **认证对接** | 无 | LFRS、Rustlings、Exercism 全对接 |
-| **Rust 版本** | 更新较慢 | 跟踪 1.96+ nightly，包含最新特性 |
+| **Rust 版本** | 更新较慢 | 跟踪 Rust stable + nightly 前沿特性 |
 
 ---
 

@@ -24,8 +24,8 @@ pub mod archive;
 pub mod rust_194_features;
 
 // 导出 Rust 1.95/1.96 特性模块
-pub mod rust_196_tuple_coercion;
 pub mod rust_196_features;
+pub mod rust_196_tuple_coercion;
 
 // 重新导出Rust 1.94特性
 pub use rust_194_features::*;
@@ -63,3 +63,5 @@ pub mod examples;
 // 导出练习模块（仅测试时编译）
 #[cfg(test)]
 pub mod exercises;
+
+// test touch

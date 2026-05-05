@@ -31,12 +31,12 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
    系统工具    数据结构     网络服务     Web 应用
 ```
 
-### 路径 4: Rust 1.96 新特性专题 (2-3 周)
+### 路径 4: Rust 1.95/1.96 特性专题 (2-3 周)
 
 ```
 第1周: 核心新特性
-├── isqrt - 整数平方根运算
-├── async Fn trait 改进
+├── isqrt (≥1.84) - 整数平方根运算
+├── async Fn trait (≥1.85, Ed 2024) 改进
 └── never_type (!) 基础应用
 
 第2周: 标准库增强
@@ -45,22 +45,22 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 └── 迭代器改进
 
 第3周: 高级应用
-├── spawn_unchecked 线程模式
+├── thread::Builder 高级线程控制
 ├── ControlFlow 进阶
 └── LazyLock 生产模式
 ```
 
 ---
 
-## 🆕 Rust 1.96 新特性学习路径
+## 🆕 Rust 1.95/1.96 特性学习路径
 
 ### 阶段 1: 快速上手 (第 1-2 天)
 
 | 特性 | 难度 | 学习资源 | 实践目标 |
 |------|------|----------|----------|
-| `isqrt` | ⭐ 简单 | 标准库文档 | 实现数字处理工具 |
-| `HashMap::get_disjoint_mut` | ⭐⭐ 中等 | API 指南 | 优化并发数据结构 |
-| `async Fn` 改进 | ⭐⭐⭐ 进阶 | 异步编程指南 | 重构异步代码 |
+| `isqrt` (≥1.84) | ⭐ 简单 | 标准库文档 | 实现数字处理工具 |
+| `HashMap::get_disjoint_mut` (≥1.83) | ⭐⭐ 中等 | API 指南 | 优化并发数据结构 |
+| `async closures` (≥1.85, Ed 2024) | ⭐⭐⭐ 进阶 | 异步编程指南 | 重构异步代码 |
 
 ### 阶段 2: 深度理解 (第 3-5 天)
 
@@ -68,7 +68,7 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 // 1. 整数平方根 - 数学计算优化
 fn demonstrate_isqrt() {
     let n: u64 = 1000000;
-    let sqrt = n.isqrt();  // Rust 1.96: 精确整数平方根
+    let sqrt = n.isqrt();  // 精确整数平方根 (≥1.84)
     assert_eq!(sqrt, 1000);
 
     // 应用于质数检测
@@ -89,7 +89,7 @@ fn parallel_map_access() {
     map.insert("a", 1);
     map.insert("b", 2);
 
-    // Rust 1.96: 同时获取多个互斥可变引用
+    // 同时获取多个互斥可变引用 (≥1.83)
     let [ Some(a), Some(b) ] = map.get_disjoint_mut(["a", "b"]) else {
         panic!("keys not found");
     };
@@ -117,9 +117,9 @@ async fn use_async_fn_trait() {
 ```
 项目: 高性能数据处理管道
 ├── 使用 array_windows (1.94) 进行数据窗口分析
-├── 使用 isqrt (1.96) 进行几何计算
-├── 使用 HashMap 新 API (1.96) 管理状态
-└── 使用 async Fn (1.96) 处理异步 I/O
+├── 使用 isqrt (≥1.84) 进行几何计算
+├── 使用 HashMap::get_disjoint_mut (≥1.83) 管理状态
+└── 使用 async Fn (≥1.85, Ed 2024) 处理异步 I/O
 ```
 
 ---
@@ -135,7 +135,7 @@ async fn use_async_fn_trait() {
       ↓
 4. 实践项目: 计算器工具
       ↓
-5. 进阶: async/await + 1.96 async Fn 改进
+5. 进阶: async/await + ≥1.85 async Fn 改进
 ```
 
 ### 对于有经验的开发者
@@ -145,7 +145,7 @@ async fn use_async_fn_trait() {
       ↓
 2. Rust 1.94 特性 (array_windows, ControlFlow, LazyLock)
       ↓
-3. Rust 1.96 特性 (isqrt, get_disjoint_mut, async Fn)
+3. Rust 历史特性复习 (isqrt ≥1.84, get_disjoint_mut ≥1.83, async Fn ≥1.85 Ed 2024)
       ↓
 4. 综合项目: 高性能服务器
 ```
@@ -155,7 +155,7 @@ async fn use_async_fn_trait() {
 ```
 1. C07 (进程管理) ──┐
 2. C08 (算法) ──────┼→ 1.96 系统编程特性
-3. C10 (网络) ──────┘    (spawn_unchecked, 底层优化)
+3. C10 (网络) ──────┘    (线程高级控制, 底层优化)
       ↓
 4. 深入: never_type (!) 在错误处理中的应用
       ↓
@@ -168,7 +168,7 @@ async fn use_async_fn_trait() {
 
 ### 项目 1: 数学工具库 (初级)
 
-**目标**: 掌握 Rust 1.96 数学相关新特性
+**目标**: 掌握 Rust 数学相关 API（isqrt 等，≥1.84）
 
 **功能清单**:
 
@@ -228,13 +228,13 @@ async fn use_async_fn_trait() {
 **功能清单**:
 
 - [ ] 系统资源监控 (CPU、内存)
-- [ ] 使用 `spawn_unchecked` (如适用)
+- [ ] 使用 `thread::Builder` 进行高级线程控制 (如适用)
 - [ ] 高效数据处理管道
 - [ ] 配置热重载
 
 **涉及特性**:
 
-- `spawn_unchecked` - 高级线程控制
+- `thread::Builder` - 高级线程控制
 - `isqrt` - 资源计算
 - `never_type` - 错误处理
 

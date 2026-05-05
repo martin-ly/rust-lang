@@ -1,8 +1,8 @@
-# Rust 1.95 & 1.96 新特性详解
+# Rust 1.95 & 1.96 特性详解（含版本勘误）
 
 ## 目录
 
-- [Rust 1.95 & 1.96 新特性详解](#rust-195-新特性)
+- [Rust 1.95 & 1.96 特性详解](#rust-195-新特性)
 
 ---
 
@@ -81,11 +81,11 @@ for i in 1..=100 {
 
 ---
 
-## Rust 1.96 新特性
+## Rust 1.96 特性与前瞻
 
 ### 1. Range 类型系统重构
 
-Rust 1.96 引入了更严格的 Range 类型系统，明确区分不同类型的范围。
+Rust 的 Range 类型系统（`Range`、`RangeInclusive` 等）已存在多年。1.96 未带来类型系统层面的重大变更。
 
 #### 新的 Range 类型
 
@@ -119,20 +119,20 @@ fn analyze_ranges() {
 }
 ```
 
-### 2. PinCoerceUnsized trait
+### 2. PinCoerceUnsized trait ( nightly-only, 非 stable)
 
-Rust 1.96 引入了 `PinCoerceUnsized` trait，允许对 `Pin<P>` 进行安全的强制类型转换。
+> ⚠️ **注意**: `pin_coerce_unsized` 是 Rust nightly 的实验性特性 (`#![feature(pin_coerce_unsized)]`)，**不是 1.96 stable 特性**。以下内容为前瞻跟踪，当前 stable 编译器无法使用。
+
+`PinCoerceUnsized` 旨在允许对 `Pin<P>` 进行安全的强制类型转换。
 
 #### 基本概念
 
 ```rust
+#![feature(pin_coerce_unsized)]
 use std::pin::Pin;
-use std::marker::Unpin;
 
-// 新的 trait 允许将 Pin<Box<T>> 转换为 Pin<Box<dyn Trait>>
-trait PinCoerceUnsized<Target> {
-    fn pin_coerce_unsized(self) -> Target;
-}
+// nightly 实验性 trait，标准库中尚未稳定
+// trait PinCoerceUnsized<Target> { ... }
 ```
 
 #### 实际应用
@@ -212,7 +212,7 @@ fn main() {
 
 ### 4. 新的 Lint 规则
 
-Rust 1.96 引入了多个新的编译器警告和 lint 规则。
+Rust 各版本持续引入新的编译器警告和 lint 规则。以下列出部分近期新增 lint（不限于 1.96）：
 
 #### 新增的 Lints
 
@@ -298,7 +298,7 @@ cargo doc --no-deps
 | 问题 | 解决方案 |
 |------|----------|
 | Range 类型推断失败 | 明确指定类型注解 |
-| Pin 转换错误 | 使用新的 `PinCoerceUnsized` trait |
+| Pin 转换错误 | 标准库 `Box::pin` 已足够；`PinCoerceUnsized` 为 nightly-only 实验性 |
 | 新的 lint 警告 | 根据情况修复或允许 |
 | 元组 coercion 冲突 | 添加显式类型转换 |
 
@@ -411,7 +411,7 @@ impl<T> Future for DelayedValue<T> {
     }
 }
 
-// 使用 PinCoerceUnsized 特性
+// 标准库 Pin 转换（nightly-only 的 PinCoerceUnsized 未稳定）
 fn boxed_future<T>(value: T) -> Pin<Box<dyn Future<Output = T>>> {
     Box::pin(DelayedValue { value: Some(value) })
 }

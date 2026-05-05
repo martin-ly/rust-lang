@@ -1,7 +1,7 @@
-//! # Rust 1.96.0 范围类型新特性实现模块
+//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
 //!
-//! 本模块展示了 Rust 1.96.0 中范围类型的增强，包括：
-//! - `RangeInclusive` 和 `RangeToInclusive` 的新方法支持
+//! 本模块展示了 Rust 范围类型的应用，包括：
+//! - `RangeInclusive` 和 `RangeToInclusive` 的方法支持
 //! - 范围类型在算法中的高级应用
 //! - 迭代器与范围类型的深度集成
 //!
@@ -9,12 +9,12 @@
 //! - 文件: rust_196_features.rs
 //! - 创建日期: 2026-04-10
 //! - 版本: 1.0
-//! - Rust版本: 1.96.0
+//! - Rust版本: 1.96
 //! - Edition: 2024
 
 use std::ops::RangeInclusive;
 
-/// Rust 1.96 `if let` guards 在算法中的应用
+/// if let guards (Rust 1.95 稳定，非 1.96 新特性) 在算法中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。
@@ -45,7 +45,8 @@ impl AlgorithmIfLetGuardExamples {
 
 /// # RangeInclusive 完整功能展示
 ///
-/// Rust 1.96.0 对 RangeInclusive 提供了完整的标准库支持，
+/// Range 类型应用（标准库基础特性）。
+/// RangeInclusive 提供了完整的标准库支持，
 /// 包括各种 trait 实现和方法支持。
 ///
 /// 包含性范围 `[start..=end]` 在实际编程中非常有用，
@@ -55,29 +56,33 @@ pub struct RangeInclusiveAlgorithms;
 impl RangeInclusiveAlgorithms {
     /// 使用 RangeInclusive 进行斐波那契数列生成
     ///
-    /// Rust 1.96.0: RangeInclusive 完全支持迭代和索引操作
+    /// RangeInclusive 完全支持迭代和索引操作
     pub fn fibonacci_range(n: usize) -> Vec<u64> {
         let mut fib = vec![0u64, 1];
-        
+
         // 使用 RangeInclusive 进行索引迭代
         for i in 2..=n {
             let next = fib[i - 1].wrapping_add(fib[i - 2]);
             fib.push(next);
         }
-        
+
         fib
     }
 
     /// 使用 RangeInclusive 实现闭区间搜索
     ///
-    /// Rust 1.96.0: RangeInclusive 支持包含边界的二分查找
-    pub fn inclusive_binary_search(arr: &[i32], target: i32, range: RangeInclusive<usize>) -> Option<usize> {
+    /// RangeInclusive 支持包含边界的二分查找
+    pub fn inclusive_binary_search(
+        arr: &[i32],
+        target: i32,
+        range: RangeInclusive<usize>,
+    ) -> Option<usize> {
         let (mut left, mut right) = (*range.start(), *range.end());
-        
+
         // RangeInclusive 保证包含 right 边界
         while left <= right {
             let mid = left + (right - left) / 2;
-            
+
             match arr.get(mid) {
                 Some(&val) if val == target => return Some(mid),
                 Some(&val) if val < target => left = mid + 1,
@@ -87,7 +92,7 @@ impl RangeInclusiveAlgorithms {
                 }
             }
         }
-        
+
         None
     }
 
@@ -100,7 +105,7 @@ impl RangeInclusiveAlgorithms {
 
     /// 使用 RangeInclusive 进行数值积分（梯形法则）
     ///
-    /// Rust 1.96.0: RangeInclusive 的步进迭代支持
+    /// RangeInclusive 的步进迭代支持
     pub fn trapezoidal_integral<F>(range: RangeInclusive<f64>, n: usize, f: F) -> f64
     where
         F: Fn(f64) -> f64,
@@ -108,14 +113,14 @@ impl RangeInclusiveAlgorithms {
         let a = *range.start();
         let b = *range.end();
         let h = (b - a) / n as f64;
-        
+
         let mut sum = 0.5 * (f(a) + f(b));
-        
+
         for i in 1..n {
             let x = a + i as f64 * h;
             sum += f(x);
         }
-        
+
         sum * h
     }
 
@@ -126,44 +131,43 @@ impl RangeInclusiveAlgorithms {
         if step == 0 || (start < end && step < 0) || (start > end && step > 0) {
             return vec![];
         }
-        
+
         // 使用 RangeInclusive 的迭代特性
         let mut result = Vec::new();
         let mut current = start;
-        
+
         while (step > 0 && current <= end) || (step < 0 && current >= end) {
             result.push(current);
             current += step;
         }
-        
+
         result
     }
 
     /// 使用 RangeInclusive 进行滑动窗口统计
     ///
-    /// Rust 1.96.0: RangeInclusive 作为窗口边界
+    /// RangeInclusive 作为窗口边界
     pub fn sliding_window_stats(data: &[f64], window_size: usize) -> Vec<(f64, f64)> {
         if window_size == 0 || data.len() < window_size {
             return vec![];
         }
-        
+
         let mut stats = Vec::new();
-        
+
         for start in 0..=data.len() - window_size {
             let end = start + window_size - 1;
             let window = &data[start..=end];
-            
+
             let sum: f64 = window.iter().sum();
             let mean = sum / window.len() as f64;
-            
-            let variance: f64 = window.iter()
-                .map(|&x| (x - mean).powi(2))
-                .sum::<f64>() / window.len() as f64;
+
+            let variance: f64 =
+                window.iter().map(|&x| (x - mean).powi(2)).sum::<f64>() / window.len() as f64;
             let std_dev = variance.sqrt();
-            
+
             stats.push((mean, std_dev));
         }
-        
+
         stats
     }
 
@@ -176,22 +180,22 @@ impl RangeInclusiveAlgorithms {
         if points.len() < 2 || steps == 0 {
             return vec![];
         }
-        
+
         let x_min = *x_range.start();
         let x_max = *x_range.end();
         let step_size = (x_max - x_min) / steps as f64;
-        
+
         let mut result = Vec::with_capacity(steps + 1);
-        
+
         for i in 0..=steps {
             let x = x_min + i as f64 * step_size;
-            
+
             // 找到 x 所在的区间
             let mut y = 0.0;
             for j in 0..points.len() - 1 {
                 let (x1, y1) = points[j];
                 let (x2, y2) = points[j + 1];
-                
+
                 if x >= x1 && x <= x2 {
                     // 线性插值
                     let t = (x - x1) / (x2 - x1);
@@ -199,10 +203,10 @@ impl RangeInclusiveAlgorithms {
                     break;
                 }
             }
-            
+
             result.push((x, y));
         }
-        
+
         result
     }
 }
@@ -211,26 +215,26 @@ impl RangeInclusiveAlgorithms {
 
 /// # RangeToInclusive 功能展示
 ///
-/// Rust 1.96.0 中对 RangeToInclusive (`..=end`) 的完整支持。
+/// Range 类型应用（标准库基础特性）。
 /// RangeToInclusive 表示从起始到指定值（包含）的范围。
 pub struct RangeToInclusiveAlgorithms;
 
 impl RangeToInclusiveAlgorithms {
     /// 使用 RangeToInclusive 获取前缀统计信息
     ///
-    /// Rust 1.96.0: RangeToInclusive 支持切片索引
+    /// RangeToInclusive 支持切片索引
     pub fn prefix_statistics(data: &[i32], end: usize) -> (i32, f64, i32, i32) {
         let prefix = &data[..=end.min(data.len().saturating_sub(1))];
-        
+
         if prefix.is_empty() {
             return (0, 0.0, 0, 0);
         }
-        
+
         let sum: i32 = prefix.iter().sum();
         let mean = sum as f64 / prefix.len() as f64;
         let min = *prefix.iter().min().unwrap_or(&0);
         let max = *prefix.iter().max().unwrap_or(&0);
-        
+
         (sum, mean, min, max)
     }
 
@@ -240,12 +244,12 @@ impl RangeToInclusiveAlgorithms {
     pub fn prefix_sums(data: &[i32]) -> Vec<i32> {
         let mut sums = Vec::with_capacity(data.len());
         let mut current_sum = 0;
-        
+
         for &val in data.iter() {
             current_sum += val;
             sums.push(current_sum);
         }
-        
+
         sums
     }
 
@@ -254,13 +258,13 @@ impl RangeToInclusiveAlgorithms {
         if data.len() <= 1 {
             return data.len();
         }
-        
+
         for i in 0..data.len() - 1 {
             if data[i] > data[i + 1] {
                 return i + 1;
             }
         }
-        
+
         data.len()
     }
 
@@ -268,12 +272,12 @@ impl RangeToInclusiveAlgorithms {
     pub fn cumulative_maximum(data: &[i32]) -> Vec<i32> {
         let mut max_vals = Vec::with_capacity(data.len());
         let mut current_max = i32::MIN;
-        
+
         for &val in data {
             current_max = current_max.max(val);
             max_vals.push(current_max);
         }
-        
+
         max_vals
     }
 
@@ -293,12 +297,12 @@ impl RangeToInclusiveAlgorithms {
     pub fn bucket_values(data: &[f64], bucket_count: usize, max_value: f64) -> Vec<usize> {
         let bucket_size = max_value / bucket_count as f64;
         let mut buckets = vec![0usize; bucket_count];
-        
+
         for &val in data {
             let bucket_idx = ((val / bucket_size).min(bucket_count as f64 - 1.0)) as usize;
             buckets[bucket_idx] += 1;
         }
-        
+
         buckets
     }
 }
@@ -307,7 +311,7 @@ impl RangeToInclusiveAlgorithms {
 
 /// # 范围类型组合使用
 ///
-/// 展示 Rust 1.96.0 中各种范围类型的组合和转换。
+/// 展示 Rust 中各种范围类型的组合和转换。
 pub struct RangeCompositionAlgorithms;
 
 impl RangeCompositionAlgorithms {
@@ -323,23 +327,27 @@ impl RangeCompositionAlgorithms {
             std::ops::Bound::Excluded(&n) => n + 1,
             std::ops::Bound::Unbounded => 0,
         };
-        
+
         let end = match range.end_bound() {
             std::ops::Bound::Included(&n) => n,
             std::ops::Bound::Excluded(&n) => n.saturating_sub(1),
             std::ops::Bound::Unbounded => max_bound,
         };
-        
+
         start..=end
     }
 
     /// 范围裁剪
     ///
     /// 将给定的范围裁剪到有效边界内
-    pub fn clamp_range(range: RangeInclusive<usize>, min: usize, max: usize) -> RangeInclusive<usize> {
+    pub fn clamp_range(
+        range: RangeInclusive<usize>,
+        min: usize,
+        max: usize,
+    ) -> RangeInclusive<usize> {
         let start = (*range.start()).max(min).min(max);
         let end = (*range.end()).max(min).min(max).max(start);
-        
+
         start..=end
     }
 
@@ -352,7 +360,7 @@ impl RangeCompositionAlgorithms {
     ) -> Option<RangeInclusive<usize>> {
         let start = (*a.start()).max(*b.start());
         let end = (*a.end()).min(*b.end());
-        
+
         if start <= end {
             Some(start..=end)
         } else {
@@ -369,7 +377,7 @@ impl RangeCompositionAlgorithms {
     ) -> RangeInclusive<usize> {
         let start = (*a.start()).min(*b.start());
         let end = (*a.end()).max(*b.end());
-        
+
         start..=end
     }
 
@@ -379,11 +387,11 @@ impl RangeCompositionAlgorithms {
     pub fn paginate<T>(data: &[T], page: usize, page_size: usize) -> &[T] {
         let start = page * page_size;
         let end = ((page + 1) * page_size - 1).min(data.len().saturating_sub(1));
-        
+
         if start > end || start >= data.len() {
             return &[];
         }
-        
+
         &data[start..=end]
     }
 
@@ -393,13 +401,13 @@ impl RangeCompositionAlgorithms {
     pub fn generate_ranges(total: usize, chunk_size: usize) -> Vec<RangeInclusive<usize>> {
         let mut ranges = Vec::new();
         let mut start = 0;
-        
+
         while start < total {
             let end = (start + chunk_size - 1).min(total - 1);
             ranges.push(start..=end);
             start = end + 1;
         }
-        
+
         ranges
     }
 }
@@ -428,7 +436,10 @@ impl RangePracticalApplications {
     /// 温度范围监控
     ///
     /// 使用 RangeInclusive 定义安全的温度范围
-    pub fn check_temperature_range(readings: &[f64], safe_range: RangeInclusive<f64>) -> Vec<(usize, f64, &'static str)> {
+    pub fn check_temperature_range(
+        readings: &[f64],
+        safe_range: RangeInclusive<f64>,
+    ) -> Vec<(usize, f64, &'static str)> {
         readings
             .iter()
             .enumerate()
@@ -465,13 +476,13 @@ impl RangePracticalApplications {
         if worker_count == 0 || total_tasks == 0 {
             return vec![];
         }
-        
+
         let base_chunk = total_tasks / worker_count;
         let remainder = total_tasks % worker_count;
-        
+
         let mut ranges = Vec::with_capacity(worker_count);
         let mut start = 0;
-        
+
         for i in 0..worker_count {
             let chunk_size = base_chunk + if i < remainder { 1 } else { 0 };
             if chunk_size == 0 {
@@ -481,7 +492,7 @@ impl RangePracticalApplications {
             ranges.push(start..=end);
             start = end + 1;
         }
-        
+
         ranges
     }
 
@@ -538,7 +549,10 @@ pub fn demonstrate_range_to_inclusive() {
     // 前缀统计
     let data = vec![10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     let (sum, mean, min, max) = RangeToInclusiveAlgorithms::prefix_statistics(&data, 4);
-    println!("前 5 个元素的统计: sum={}, mean={:.2}, min={}, max={}", sum, mean, min, max);
+    println!(
+        "前 5 个元素的统计: sum={}, mean={:.2}, min={}, max={}",
+        sum, mean, min, max
+    );
 
     // 前缀和
     let sums = RangeToInclusiveAlgorithms::prefix_sums(&data);
@@ -576,7 +590,8 @@ pub fn demonstrate_range_composition() {
     // 范围交集
     let a = 10..=50;
     let b = 30..=70;
-    if let Some(intersection) = RangeCompositionAlgorithms::range_intersection(a.clone(), b.clone()) {
+    if let Some(intersection) = RangeCompositionAlgorithms::range_intersection(a.clone(), b.clone())
+    {
         println!("{:?} 和 {:?} 的交集: {:?}", a, b, intersection);
     }
 
@@ -632,13 +647,16 @@ pub fn demonstrate_practical_applications() {
     let cpu_usage = vec![45.2, 52.1, 48.7, 61.3, 55.8];
     let allowed = 20.0..=80.0;
     let is_ok = RangePracticalApplications::check_resource_usage(&cpu_usage, allowed.clone());
-    println!("CPU 使用率 {:?} 是否在允许范围 {:?} 内: {}", cpu_usage, allowed, is_ok);
+    println!(
+        "CPU 使用率 {:?} 是否在允许范围 {:?} 内: {}",
+        cpu_usage, allowed, is_ok
+    );
 }
 
-/// 演示 Rust 1.96.0 范围类型特性
+/// 演示 Rust 范围类型特性
 pub fn demonstrate_rust_196_range_features() {
     println!("\n========================================");
-    println!("   Rust 1.96.0 范围类型特性演示");
+    println!("   Rust 范围类型特性演示");
     println!("========================================\n");
 
     demonstrate_range_inclusive();
@@ -651,14 +669,11 @@ pub fn demonstrate_rust_196_range_features() {
     println!("========================================\n");
 }
 
-/// 获取 Rust 1.96.0 范围类型特性信息
+/// 获取 Rust 范围类型特性信息
 pub fn get_rust_196_range_info() -> String {
-    "Rust 1.96.0 范围类型特性:\n\
-        - RangeInclusive 完整功能支持 [start..=end]\n\
-        - RangeToInclusive 功能支持 [..=end]\n\
-        - 范围类型组合和转换\n\
-        - 范围交集、并集、裁剪操作\n\
-        - 实际应用场景：分页、任务分配、范围查询"
+    "Rust 范围类型特性:\n- RangeInclusive 完整功能支持 [start..=end]\n- RangeToInclusive 功能支持 \
+     [..=end]\n- 范围类型组合和转换\n- 范围交集、并集、裁剪操作\n- \
+     实际应用场景：分页、任务分配、范围查询"
         .to_string()
 }
 
@@ -677,15 +692,24 @@ mod tests {
     #[test]
     fn test_inclusive_binary_search() {
         let arr = vec![1, 3, 5, 7, 9, 11, 13, 15];
-        
+
         // 在范围内查找
-        assert_eq!(RangeInclusiveAlgorithms::inclusive_binary_search(&arr, 7, 1..=5), Some(3));
-        
+        assert_eq!(
+            RangeInclusiveAlgorithms::inclusive_binary_search(&arr, 7, 1..=5),
+            Some(3)
+        );
+
         // 不在范围内
-        assert_eq!(RangeInclusiveAlgorithms::inclusive_binary_search(&arr, 1, 2..=5), None);
-        
+        assert_eq!(
+            RangeInclusiveAlgorithms::inclusive_binary_search(&arr, 1, 2..=5),
+            None
+        );
+
         // 不存在
-        assert_eq!(RangeInclusiveAlgorithms::inclusive_binary_search(&arr, 6, 0..=7), None);
+        assert_eq!(
+            RangeInclusiveAlgorithms::inclusive_binary_search(&arr, 6, 0..=7),
+            None
+        );
     }
 
     #[test]
@@ -693,7 +717,10 @@ mod tests {
         let data = vec![1, 5, 10, 15, 20, 25];
         assert_eq!(RangeInclusiveAlgorithms::count_in_range(&data, &5, &20), 4);
         assert_eq!(RangeInclusiveAlgorithms::count_in_range(&data, &0, &100), 6);
-        assert_eq!(RangeInclusiveAlgorithms::count_in_range(&data, &50, &100), 0);
+        assert_eq!(
+            RangeInclusiveAlgorithms::count_in_range(&data, &50, &100),
+            0
+        );
     }
 
     #[test]
@@ -721,7 +748,7 @@ mod tests {
         let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
         let stats = RangeInclusiveAlgorithms::sliding_window_stats(&data, 3);
         assert_eq!(stats.len(), 3);
-        
+
         // 第一个窗口 [1, 2, 3]: mean=2, std=sqrt(2/3)
         assert!((stats[0].0 - 2.0).abs() < 0.001);
     }
@@ -752,7 +779,7 @@ mod tests {
             RangeCompositionAlgorithms::range_intersection(a, b),
             Some(30..=50)
         );
-        
+
         let c = 60..=80;
         assert_eq!(
             RangeCompositionAlgorithms::range_intersection(10..=20, c),
@@ -770,13 +797,19 @@ mod tests {
     #[test]
     fn test_paginate() {
         let data: Vec<i32> = (1..=100).collect();
-        
+
         // 第一页
-        assert_eq!(RangeCompositionAlgorithms::paginate(&data, 0, 10), &[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-        
+        assert_eq!(
+            RangeCompositionAlgorithms::paginate(&data, 0, 10),
+            &[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        );
+
         // 第二页
-        assert_eq!(RangeCompositionAlgorithms::paginate(&data, 1, 10), &[11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
-        
+        assert_eq!(
+            RangeCompositionAlgorithms::paginate(&data, 1, 10),
+            &[11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        );
+
         // 超出范围
         assert!(RangeCompositionAlgorithms::paginate(&data, 100, 10).is_empty());
     }
@@ -785,7 +818,7 @@ mod tests {
     fn test_distribute_tasks() {
         let ranges = RangePracticalApplications::distribute_tasks(100, 4);
         assert_eq!(ranges.len(), 4);
-        
+
         // 验证范围是否覆盖所有任务
         let total: usize = ranges.iter().map(|r| r.end() - r.start() + 1).sum();
         assert_eq!(total, 100);
@@ -838,11 +871,9 @@ mod tests {
     }
 }
 
-
-// ==================== Rust 2024 Edition: gen blocks 算法专题 ====================
-//
-// 本专题展示 `gen` 块在算法实现中的强大能力，包括自定义迭代器、
-// 懒加载序列和树遍历等场景。gen 块让算法代码更直观、更易维护。
+// ==================== Rust 2024 Edition: gen blocks 算法前瞻 (nightly-only) ====================
+// ⚠️ 注意: 以下代码需要 nightly 编译器和 `#![feature(gen_blocks, yield_expr)]`
+// 本专题展示 `gen` 块在算法实现中的前瞻应用，stable 编译器不可用。
 
 use std::collections::VecDeque;
 
@@ -964,10 +995,7 @@ impl<T: Clone> TreeNode<T> {
 /// 使用 gen 块实现笛卡尔积生成器
 ///
 /// 生成两个集合的所有可能组合。
-pub fn cartesian_product_gen<A, B>(
-    a: Vec<A>,
-    b: Vec<B>,
-) -> impl Iterator<Item = (A, B)>
+pub fn cartesian_product_gen<A, B>(a: Vec<A>, b: Vec<B>) -> impl Iterator<Item = (A, B)>
 where
     A: Clone + 'static,
     B: Clone + 'static,
@@ -1129,5 +1157,103 @@ mod gen_block_algorithm_tests {
     fn test_cartesian_product_gen() {
         let result: Vec<_> = cartesian_product_gen(vec![1, 2], vec!["a", "b"]).collect();
         assert_eq!(result, vec![(1, "a"), (1, "b"), (2, "a"), (2, "b")]);
+    }
+}
+
+/// 算法整数溢出反模式与边界情况专题
+pub mod anti_patterns_and_edge_cases {
+    /// 展示算法中整数溢出的反模式和边界情况
+    pub struct IntegerOverflowAntiPatterns;
+
+    impl IntegerOverflowAntiPatterns {
+        /// ❌ 不推荐：在累加时不检查溢出
+        pub fn dangerous_sum(values: &[u32]) -> u32 {
+            // ❌ 反例：使用 wrapping_add 模拟 release 模式下的静默回绕
+            // 注意：在 debug 模式下，普通的 `sum += v` 会 panic，
+            // 而 release 模式会静默回绕。wrapping_add 始终回绕。
+            let mut sum = 0u32;
+            for &v in values {
+                sum = sum.wrapping_add(v);
+            }
+            sum
+        }
+
+        /// ✅ 推荐：使用 checked_add 进行安全累加
+        pub fn safe_sum(values: &[u32]) -> Result<u32, &'static str> {
+            let mut sum = 0u32;
+            for &v in values {
+                sum = sum.checked_add(v).ok_or("integer overflow in sum")?;
+            }
+            Ok(sum)
+        }
+
+        /// ⚠️ 边界情况：乘法中的溢出（阶乘）
+        pub fn factorial_checked(n: u32) -> Result<u32, &'static str> {
+            // ⚠️ 边界情况：12! = 479001600 (u32::MAX ~ 4.29e9)，13! 溢出
+            if n > 12 {
+                return Err("factorial would overflow u32");
+            }
+            let mut result = 1u32;
+            for i in 2..=n {
+                result = result.checked_mul(i).ok_or("overflow")?;
+            }
+            Ok(result)
+        }
+
+        /// ⚠️ 边界情况：索引运算中的 usize 边界
+        pub fn safe_midpoint(a: usize, b: usize) -> usize {
+            // ⚠️ 边界情况：(a + b) / 2 在 a、b 很大时可能溢出
+            // 应使用 a + (b - a) / 2 或 saturating 运算
+            a + (b.saturating_sub(a) / 2)
+        }
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_dangerous_sum_overflow() {
+            // ❌ 反例：溢出后静默回绕
+            let values = vec![u32::MAX, 1];
+            let result = IntegerOverflowAntiPatterns::dangerous_sum(&values);
+            assert_eq!(result, 0); // 溢出回绕为 0
+        }
+
+        #[test]
+        fn test_safe_sum() {
+            let values = vec![1, 2, 3];
+            assert_eq!(IntegerOverflowAntiPatterns::safe_sum(&values), Ok(6));
+
+            let values = vec![u32::MAX, 1];
+            assert_eq!(
+                IntegerOverflowAntiPatterns::safe_sum(&values),
+                Err("integer overflow in sum")
+            );
+        }
+
+        #[test]
+        fn test_factorial_checked() {
+            assert_eq!(IntegerOverflowAntiPatterns::factorial_checked(0), Ok(1));
+            assert_eq!(IntegerOverflowAntiPatterns::factorial_checked(5), Ok(120));
+            assert_eq!(
+                IntegerOverflowAntiPatterns::factorial_checked(12),
+                Ok(479001600)
+            );
+            assert_eq!(
+                IntegerOverflowAntiPatterns::factorial_checked(13),
+                Err("factorial would overflow u32")
+            );
+        }
+
+        #[test]
+        fn test_safe_midpoint() {
+            assert_eq!(IntegerOverflowAntiPatterns::safe_midpoint(0, 10), 5);
+            // 边界：极大值不会溢出
+            assert_eq!(
+                IntegerOverflowAntiPatterns::safe_midpoint(usize::MAX - 10, usize::MAX),
+                usize::MAX - 5
+            );
+        }
     }
 }

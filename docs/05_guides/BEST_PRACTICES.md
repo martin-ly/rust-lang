@@ -87,7 +87,7 @@
       - [ControlFlow 优化](#controlflow-优化)
       - [LazyLock 优化](#lazylock-优化)
     - [快速参考卡片](#快速参考卡片)
-  - [🆕 Rust 1.96 最佳实践](#-rust-196-最佳实践)
+  - [🆕 新增最佳实践](#-新增最佳实践)
     - [1. isqrt - 整数平方根运算](#1-isqrt---整数平方根运算)
       - [什么时候使用 isqrt？](#什么时候使用-isqrt)
       - [最佳实践示例](#最佳实践示例-1)
@@ -106,7 +106,7 @@
       - [get\_disjoint\_mut 优化](#get_disjoint_mut-优化)
       - [async Fn 优化](#async-fn-优化)
     - [6. 版本兼容性与迁移指南](#6-版本兼容性与迁移指南)
-      - [从 1.94 迁移到 1.96](#从-194-迁移到-196)
+      - [从 1.94 迁移到新版本](#从-194-迁移到新版本)
     - [7. 快速参考卡片](#7-快速参考卡片)
 
 ---
@@ -1485,9 +1485,8 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 🆕 Rust 1.96 最佳实践
+## 🆕 新增最佳实践
 
-> **适用版本**: Rust 1.96.0+
 > **最后更新**: 2026-04-10
 
 ---
@@ -1667,7 +1666,7 @@ fn upsert_and_update(map: &mut HashMap<String, i32>, insert_key: &str, update_ke
 #### 最佳实践：清晰的异步 Trait 定义
 
 ```rust
-// ✅ Rust 1.96: 更自然的异步 trait 定义
+// ✅ Rust 1.85/Edition 2024: 更自然的异步 trait 定义
 pub trait DataProcessor {
     async fn process(&self, data: Vec<u8>) -> Result<ProcessedData, Error>;
     async fn validate(&self, data: &ProcessedData) -> bool;
@@ -1833,7 +1832,7 @@ impl<K: Eq, V> LRUCache<K, V> {
 
 ### 6. 版本兼容性与迁移指南
 
-#### 从 1.94 迁移到 1.96
+#### 从 1.94 迁移到新版本
 
 ```rust
 // 1.94 代码：浮点平方根
@@ -1841,7 +1840,7 @@ fn old_sqrt(n: u64) -> u64 {
     (n as f64).sqrt() as u64
 }
 
-// 1.96 迁移：使用 isqrt
+// ≥1.84 迁移：使用 isqrt
 fn new_sqrt(n: u64) -> u64 {
     n.isqrt()
 }
@@ -1856,7 +1855,7 @@ fn old_batch_update(map: &mut HashMap<String, i32>) {
     }
 }
 
-// 1.96 迁移：使用 get_disjoint_mut
+// ≥1.83 迁移：使用 get_disjoint_mut
 fn new_batch_update(map: &mut HashMap<String, i32>) {
     if let [Some(a), Some(b)] = map.get_disjoint_mut(["a", "b"]) {
         *a += 1;
@@ -1870,7 +1869,7 @@ trait OldProcessor {
     async fn process(&self, data: Vec<u8>) -> Result<(), Error>;
 }
 
-// 1.96 迁移：原生 async trait
+// ≥1.85/Ed 2024 迁移：原生 async trait
 trait NewProcessor {
     async fn process(&self, data: Vec<u8>) -> Result<(), Error>;
 }
@@ -1897,7 +1896,7 @@ trait Processor {
 // pop_if - 条件弹出
 let item = vec.pop_if(|x| x.is_ready());
 
-// 综合：1.94 + 1.96 组合使用
+// 综合：1.94 + 多版本特性组合使用
 use std::ops::ControlFlow;
 use std::sync::LazyLock;
 
@@ -1921,7 +1920,7 @@ fn process_with_control_flow(data: &[i64]) -> ControlFlow<Error, Vec<i64>> {
 
 ---
 
-**Rust 1.96 最佳实践** | **最后更新**: 2026-04-10 | **状态**: ✅ 已完成
+**新增最佳实践** | **最后更新**: 2026-04-10 | **状态**: ✅ 已完成
 
 ---
 

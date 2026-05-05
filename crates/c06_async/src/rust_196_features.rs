@@ -1,8 +1,8 @@
-//! # Rust 1.96.0 异步编程新特性实现模块
+//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
 
 use std::ops::RangeInclusive;
 
-/// Rust 1.96 `if let` guards 在异步编程中的应用
+/// `if let` guards (Rust 1.95 稳定，非 1.96 新特性) 在异步编程中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。
@@ -29,15 +29,12 @@ impl AsyncIfLetGuardExamples {
     }
 }
 
-/// RangeInclusive 在异步任务管理中的应用
+/// Range 类型应用（标准库基础特性）
 pub struct AsyncRangeExamples;
 
 impl AsyncRangeExamples {
     /// 批处理
-    pub fn batch_async_tasks(
-        total_tasks: usize,
-        batch_size: usize,
-    ) -> Vec<RangeInclusive<usize>> {
+    pub fn batch_async_tasks(total_tasks: usize, batch_size: usize) -> Vec<RangeInclusive<usize>> {
         if batch_size == 0 || total_tasks == 0 {
             return vec![];
         }
@@ -78,15 +75,12 @@ impl AsyncRangeExamples {
     }
 
     /// 背压控制
-    pub fn is_back_pressure_needed(
-        queue_depth: usize,
-        threshold: RangeInclusive<usize>,
-    ) -> bool {
+    pub fn is_back_pressure_needed(queue_depth: usize, threshold: RangeInclusive<usize>) -> bool {
         threshold.contains(&queue_depth)
     }
 }
 
-/// 元组 coercion 示例
+/// 元组类型应用（泛型编程基础）
 pub struct AsyncTupleExamples;
 
 impl AsyncTupleExamples {
@@ -163,7 +157,7 @@ impl AsyncTaskScheduler {
 /// 演示函数
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
-    println!("   Rust 1.96.0 异步编程新特性演示");
+    println!("   Rust 1.95+ 特性跟踪演示");
     println!("========================================\n");
 
     let batches = AsyncRangeExamples::batch_async_tasks(100, 10);
@@ -176,8 +170,10 @@ pub fn demonstrate_rust_196_features() {
     println!("500ms超时类别: {}", category);
 
     let (completed, failed, pending, rate, status) = AsyncTupleExamples::async_stats(90, 5, 5);
-    println!("异步统计: 完成={}, 失败={}, 等待={}, 完成率={:.1}%, 状态={}",
-             completed, failed, pending, rate, status);
+    println!(
+        "异步统计: 完成={}, 失败={}, 等待={}, 完成率={:.1}%, 状态={}",
+        completed, failed, pending, rate, status
+    );
 
     let scheduler = AsyncTaskScheduler::new(100, 4);
     println!("任务范围: {:?}", scheduler.get_all_ranges());
@@ -189,10 +185,8 @@ pub fn demonstrate_rust_196_features() {
 
 /// 获取特性信息
 pub fn get_rust_196_async_info() -> String {
-    "Rust 1.96.0 异步编程新特性:\n\
-        - RangeInclusive for batch processing\n\
-        - Tuple coercion for async results\n\
-        - Better async task scheduling"
+    "Rust 1.95+ 特性跟踪:\n- RangeInclusive for batch processing\n- Tuple coercion for async \
+     results\n- Better async task scheduling"
         .to_string()
 }
 
@@ -204,7 +198,7 @@ mod tests {
     fn test_batch_async_tasks() {
         let batches = AsyncRangeExamples::batch_async_tasks(100, 10);
         assert_eq!(batches.len(), 10);
-        
+
         let total: usize = batches.iter().map(|r| r.end() - r.start() + 1).sum();
         assert_eq!(total, 100);
     }
@@ -235,8 +229,7 @@ mod tests {
 
     #[test]
     fn test_async_stats() {
-        let (completed, failed, pending, rate, status) =
-            AsyncTupleExamples::async_stats(90, 5, 5);
+        let (completed, failed, pending, rate, status) = AsyncTupleExamples::async_stats(90, 5, 5);
         assert_eq!(completed, 90);
         assert_eq!(failed, 5);
         assert_eq!(pending, 5);
@@ -259,7 +252,10 @@ mod tests {
 
     #[test]
     fn test_parse_timeout_ms() {
-        assert_eq!(AsyncIfLetGuardExamples::parse_timeout_ms(Some("1000")), Ok(1000));
+        assert_eq!(
+            AsyncIfLetGuardExamples::parse_timeout_ms(Some("1000")),
+            Ok(1000)
+        );
         assert_eq!(
             AsyncIfLetGuardExamples::parse_timeout_ms(Some("abc")),
             Err("无效的超时值")
@@ -290,10 +286,9 @@ mod tests {
     #[test]
     fn test_get_rust_196_async_info() {
         let info = get_rust_196_async_info();
-        assert!(info.contains("Rust 1.96.0"));
+        assert!(!info.is_empty());
     }
 }
-
 
 // ==================== Rust 2024 Edition: async closures 完整指南 ====================
 //
@@ -313,20 +308,20 @@ mod tests {
 // };
 // ```
 
-use std::pin::Pin;
 use futures::executor::block_on;
+use std::pin::Pin;
 
 /// 基础 async closure 示例
 ///
 /// 新的 `async || { }` 语法直接创建异步闭包，无需嵌套。
-pub fn basic_async_closure() -> impl Fn(i32) -> Pin<Box<dyn std::future::Future<Output = i32> + Send>> {
+pub fn basic_async_closure()
+-> impl Fn(i32) -> Pin<Box<dyn std::future::Future<Output = i32> + Send>> {
     // 传统写法：返回一个同步闭包，内部返回 async block
     let _traditional = |x: i32| async move { x * 2 };
 
     // Rust 2024 新写法：直接使用 async closure
     // 注意：当前 stable 版本中 async closures 的 trait 系统支持仍在完善
     // 以下使用等效的 async block 实现以确保兼容性
-    
 
     |x: i32| -> Pin<Box<dyn std::future::Future<Output = i32> + Send>> {
         Box::pin(async move { x * 2 })
@@ -358,14 +353,16 @@ pub async fn run_async_closures_concurrently(inputs: Vec<i32>) -> Vec<i32> {
 pub async fn process_stream_with_async_closure(
     items: Vec<String>,
 ) -> Vec<Result<usize, &'static str>> {
-    let processor = |s: String| Box::pin(async move {
-        // 模拟异步处理（如数据库查询、网络请求）
-        if s.is_empty() {
-            Err("空字符串")
-        } else {
-            Ok(s.len())
-        }
-    });
+    let processor = |s: String| {
+        Box::pin(async move {
+            // 模拟异步处理（如数据库查询、网络请求）
+            if s.is_empty() {
+                Err("空字符串")
+            } else {
+                Ok(s.len())
+            }
+        })
+    };
 
     let mut results = Vec::new();
     for item in items {
@@ -378,9 +375,7 @@ pub async fn process_stream_with_async_closure(
 ///
 /// 当 async closure 在 select! 或超时场景中被取消时，
 /// 需要确保不会产生不一致状态。
-pub async fn cancellation_safe_async_closure(
-    items: Vec<i32>,
-) -> Vec<i32> {
+pub async fn cancellation_safe_async_closure(items: Vec<i32>) -> Vec<i32> {
     let mut results = Vec::new();
 
     for item in items {
@@ -466,7 +461,10 @@ pub fn demonstrate_async_closures() {
 
     println!("\n--- 捕获行为对比 ---");
     let (_traditional_value, _modern_value) = compare_capture_behavior();
-    println!("传统写法结果: {}, 现代写法结果: {}", _traditional_value, _modern_value);
+    println!(
+        "传统写法结果: {}, 现代写法结果: {}",
+        _traditional_value, _modern_value
+    );
 
     println!("\n========================================");
     println!("   演示完成");
@@ -475,12 +473,9 @@ pub fn demonstrate_async_closures() {
 
 /// 获取 async closures 特性信息
 pub fn get_async_closures_info() -> String {
-    "Rust 2024 Edition async closures 特性:\n\
-        - 语法: async |args| { body }，直接创建异步闭包\n\
-        - 相比传统 |args| async move { } 更简洁\n\
-        - 更精确的捕获语义（自动推断 move/ref）\n\
-        - Cancellation Safety: 在 select!/timeout 中安全取消\n\
-        - 适用场景: 异步回调、流处理、并发任务生成"
+    "Rust 2024 Edition async closures 特性:\n- 语法: async |args| { body }，直接创建异步闭包\n- \
+     相比传统 |args| async move { } 更简洁\n- 更精确的捕获语义（自动推断 move/ref）\n- \
+     Cancellation Safety: 在 select!/timeout 中安全取消\n- 适用场景: 异步回调、流处理、并发任务生成"
         .to_string()
 }
 
@@ -528,5 +523,121 @@ mod async_closure_tests {
         let info = get_async_closures_info();
         assert!(info.contains("async closures"));
         assert!(info.contains("Cancellation Safety"));
+    }
+}
+
+/// 异步超时反模式与边界情况专题
+pub mod anti_patterns_and_edge_cases {
+    use std::time::Duration;
+
+    /// 展示异步超时配置中的反模式和边界情况
+    pub struct AsyncTimeoutAntiPatterns;
+
+    impl AsyncTimeoutAntiPatterns {
+        /// ❌ 不推荐：使用极端超时值而不验证
+        pub fn dangerous_timeout_config(millis: u64) -> Duration {
+            // ❌ 反例：直接接受 0 或极大值作为超时，可能导致立即失败或资源长期占用
+            Duration::from_millis(millis)
+        }
+
+        /// ✅ 推荐：对超时值进行边界检查和裁剪
+        pub fn safe_timeout_config(millis: u64) -> Duration {
+            const MIN_TIMEOUT_MS: u64 = 1;
+            const MAX_TIMEOUT_MS: u64 = 300_000; // 5 minutes
+            let clamped = millis.clamp(MIN_TIMEOUT_MS, MAX_TIMEOUT_MS);
+            Duration::from_millis(clamped)
+        }
+
+        /// ⚠️ 边界情况：超时为 0 的行为
+        pub fn zero_timeout_behavior(millis: u64) -> &'static str {
+            // ⚠️ 边界情况：0 毫秒超时意味着立即过期
+            if millis == 0 {
+                "immediately_expires"
+            } else if millis < 10 {
+                "too_short_for_practical_use"
+            } else {
+                "valid"
+            }
+        }
+
+        /// ⚠️ 边界情况：接近 u64::MAX 的超时值
+        pub fn extreme_timeout_behavior(millis: u64) -> &'static str {
+            // ⚠️ 边界情况：超过合理范围的超时可能导致计时器溢出或资源浪费
+            const REASONABLE_MAX_MS: u64 = 86_400_000; // 24 hours
+            if millis > REASONABLE_MAX_MS {
+                "unreasonably_long"
+            } else if millis > 3_600_000 {
+                "very_long"
+            } else {
+                "reasonable"
+            }
+        }
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_dangerous_timeout_config() {
+            // ❌ 反例：0 毫秒超时
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::dangerous_timeout_config(0),
+                Duration::from_millis(0)
+            );
+            // ❌ 反例：极大的超时值
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::dangerous_timeout_config(u64::MAX),
+                Duration::from_millis(u64::MAX)
+            );
+        }
+
+        #[test]
+        fn test_safe_timeout_config() {
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::safe_timeout_config(0),
+                Duration::from_millis(1)
+            );
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::safe_timeout_config(1000),
+                Duration::from_millis(1000)
+            );
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::safe_timeout_config(u64::MAX),
+                Duration::from_millis(300_000)
+            );
+        }
+
+        #[test]
+        fn test_zero_timeout_behavior() {
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::zero_timeout_behavior(0),
+                "immediately_expires"
+            );
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::zero_timeout_behavior(5),
+                "too_short_for_practical_use"
+            );
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::zero_timeout_behavior(100),
+                "valid"
+            );
+        }
+
+        #[test]
+        fn test_extreme_timeout_behavior() {
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::extreme_timeout_behavior(u64::MAX),
+                "unreasonably_long"
+            );
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::extreme_timeout_behavior(4_000_000),
+                "very_long"
+            );
+            assert_eq!(
+                AsyncTimeoutAntiPatterns::extreme_timeout_behavior(1000),
+                "reasonable"
+            );
+        }
     }
 }

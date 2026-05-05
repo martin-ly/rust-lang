@@ -4,6 +4,13 @@
 > **更新日期**: 2026-04-10
 > **适用版本**: stable
 
+> **版本勘误说明**:
+>
+> - `if let guards` 是 Rust **1.95** 稳定特性，本表标题包含 1.96 仅为文档归类便利。
+> - `isqrt`、`get_disjoint_mut`、`Vec::pop_if` 等 API 在更早版本（如 1.84–1.88）已稳定，不属于 1.95/1.96 新特性。
+> - `PinCoerceUnsized` 是 **nightly-only** 实验性特性，当前 stable 不支持。
+> - `gen` blocks 是 **nightly-only** 实验性特性，当前 stable 不支持。
+
 ---
 
 ## 目录
@@ -26,7 +33,7 @@
   - [快速参考示例](#快速参考示例)
     - [if let guards 模板](#if-let-guards-模板)
     - [Range 常用模式](#range-常用模式)
-    - [PinCoerceUnsized 快速使用](#pincoerceunsized-快速使用)
+    - [PinCoerceUnsized 快速使用（nightly 前瞻，实验性）](#pincoerceunsized-快速使用nightly-前瞻实验性)
     - [元组 Coercion 示例](#元组-coercion-示例)
   - [迁移检查清单](#迁移检查清单)
   - [相关链接](#相关链接)
@@ -240,7 +247,9 @@ match age {
 }
 ```
 
-### PinCoerceUnsized 快速使用
+### PinCoerceUnsized 快速使用（nightly 前瞻，实验性）
+
+> ⚠️ `PinCoerceUnsized` 是 **nightly-only** 实验性特性，需要 nightly 编译器和对应 feature gate，当前 stable 不支持。
 
 ```rust
 use std::pin::Pin;
@@ -284,7 +293,6 @@ let wide: (i64, i64) = widen(narrow);
 
 - [ ] 运行 `rustup update` 升级到 1.96
 - [ ] 运行 `cargo check` 检查兼容性
-- [ ] 运行 `cargo fix` 自动修复问题
 - [ ] 检查新的 lint 警告
 - [ ] 运行 `cargo test` 确保测试通过
 - [ ] 更新 CI/CD 配置中的 Rust 版本

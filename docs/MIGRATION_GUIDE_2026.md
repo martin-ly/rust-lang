@@ -94,7 +94,9 @@ redundant_guards = "warn"
 
 ### 概述
 
-Rust 1.95/1.96 引入了多项重要特性，包括 `if let guards`、Range 类型改进、`PinCoerceUnsized` trait 和元组 coercion。本章节指导您从 1.94 平滑迁移到 1.96。
+Rust 1.95/1.96 引入了多项重要特性，包括 `if let guards` (1.95)、Range 类型改进和元组 coercion。本章节指导您从 1.94 平滑迁移到 1.96。
+
+> ⚠️ 迁移提示: `isqrt` (≥1.84)、`HashMap::get_disjoint_mut` (≥1.83)、`Vec::pop_if` (≥1.83) 等 API 在更早版本已稳定，无需等待 1.96。
 
 ### 从 1.94 到 1.96 的完整步骤
 
@@ -185,7 +187,7 @@ for i in 0..=10 {  // 更清晰
 **3.4 更新 Pin 相关代码**
 
 ```rust
-// 使用新的 PinCoerceUnsized trait
+// 标准库 Pin 转换（PinCoerceUnsized 为 nightly-only，stable 不适用）
 use std::pin::Pin;
 use std::future::Future;
 
@@ -329,10 +331,13 @@ let wide: (i32, i32) = (narrow.0 as i32, narrow.1 as i32);
 | 特性 | 最低版本 | 说明 |
 |------|----------|------|
 | if let guards | 1.95 | match 守卫中的嵌套模式匹配 |
-| Range 类型优化 | 1.95 | RangeInclusive 性能改进 |
-| PinCoerceUnsized | 1.96 | Pin 类型的强制转换 |
-| 元组 coercion | 1.96 | 元组类型自动转换 |
-| 新 lint 规则 | 1.96 | 额外的代码质量检查 |
+| isqrt | 1.84 | 整数平方根运算 |
+| HashMap::get_disjoint_mut | 1.83 | 安全并行可变访问 |
+| Vec::pop_if | 1.83 | 条件弹出元素 |
+| async closures (`async \|\|`) | 1.85 (Edition 2024) | 异步闭包 |
+| PinCoerceUnsized | nightly only | Pin 类型强制转换 (实验性) |
+| 元组 coercion | 已存在 | 元组类型自动转换 |
+| WebAssembly `--allow-undefined` 移除 | 1.96 | wasm-ld 链接器行为变更 |
 
 ### 回滚指南
 

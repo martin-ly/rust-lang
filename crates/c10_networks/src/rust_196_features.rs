@@ -1,17 +1,15 @@
-//! # Rust 1.96.0 网络编程新特性实现模块
+//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
 //!
-//! 本模块展示了 Rust 1.96.0 中网络编程相关的关键改进。
+//! 本模块展示了 Rust 网络编程相关的关键改进。
 
 use std::ops::RangeInclusive;
 
-/// if let guards 在网络编程中的应用
+/// if let guards (Rust 1.95 稳定，非 1.96 新特性) 在网络编程中的应用
 pub struct NetworkGuardExamples;
 
 impl NetworkGuardExamples {
     /// 使用 match 嵌套处理网络响应
-    pub fn check_response<T>(
-        response: Result<Option<T>, String>,
-    ) -> Result<T, String>
+    pub fn check_response<T>(response: Result<Option<T>, String>) -> Result<T, String>
     where
         T: Clone,
     {
@@ -25,10 +23,7 @@ impl NetworkGuardExamples {
     }
 
     /// 使用 if let guards 处理连接状态
-    pub fn connection_state(
-        established: bool,
-        pending_data: Option<usize>,
-    ) -> &'static str {
+    pub fn connection_state(established: bool, pending_data: Option<usize>) -> &'static str {
         match (established, pending_data) {
             (false, _) => "closed",
             (true, None) => "idle",
@@ -170,20 +165,14 @@ impl NetworkTupleExamples {
     }
 
     /// 使用元组 coercion 返回数据包信息
-    pub fn packet_info(
-        size: usize,
-        ttl: u8,
-    ) -> (usize, u8, &'static str, bool) {
+    pub fn packet_info(size: usize, ttl: u8) -> (usize, u8, &'static str, bool) {
         let fragment = size > 1500;
         let priority = if ttl > 128 { "high" } else { "normal" };
         (size, ttl, priority, fragment)
     }
 
     /// 使用元组 coercion 返回路由信息
-    pub fn route_info<T>(
-        destination: T,
-        hops: u8,
-    ) -> (T, u8, std::time::Duration, &'static str)
+    pub fn route_info<T>(destination: T, hops: u8) -> (T, u8, std::time::Duration, &'static str)
     where
         T: Clone,
     {
@@ -229,18 +218,12 @@ impl PracticalNetworkExamples {
         limit: RangeInclusive<u64>,
     ) -> (bool, &'static str) {
         let allowed = limit.contains(&requests);
-        let status = if allowed {
-            "allowed"
-        } else {
-            "throttled"
-        };
+        let status = if allowed { "allowed" } else { "throttled" };
         (allowed, status)
     }
 
     /// 使用 RangeInclusive 进行负载均衡权重计算
-    pub fn calculate_weights(
-        server_loads: &[u8],
-    ) -> Vec<RangeInclusive<u8>> {
+    pub fn calculate_weights(server_loads: &[u8]) -> Vec<RangeInclusive<u8>> {
         let total: u8 = server_loads.iter().sum();
         if total == 0 {
             return vec![];
@@ -328,7 +311,7 @@ impl ConnectionPoolManager {
 /// 演示函数
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
-    println!("   Rust 1.96.0 网络编程新特性演示");
+    println!("   Rust 网络编程特性演示");
     println!("========================================\n");
 
     // if let guards 演示
@@ -363,12 +346,17 @@ pub fn demonstrate_rust_196_features() {
     println!("\n=== 元组 coercion 演示 ===");
     let (_result, endpoint, latency, status) =
         NetworkTupleExamples::request_result(Ok("data"), "/api/test");
-    println!("请求结果: endpoint={}, latency={}ms, status={}", endpoint, latency, status);
+    println!(
+        "请求结果: endpoint={}, latency={}ms, status={}",
+        endpoint, latency, status
+    );
 
     let (sent, recv, errors, err_rate, health) =
         NetworkTupleExamples::connection_stats(1000, 950, 5);
-    println!("连接统计: 发送={}, 接收={}, 错误={}, 错误率={:.2}%, 健康={}",
-             sent, recv, errors, err_rate, health);
+    println!(
+        "连接统计: 发送={}, 接收={}, 错误={}, 错误率={:.2}%, 健康={}",
+        sent, recv, errors, err_rate, health
+    );
 
     // 连接池演示
     println!("\n=== 连接池管理演示 ===");
@@ -381,14 +369,11 @@ pub fn demonstrate_rust_196_features() {
     println!("========================================\n");
 }
 
-/// 获取 Rust 1.96.0 网络特性信息
+/// 获取 Rust 网络特性信息
 pub fn get_rust_196_network_info() -> String {
-    "Rust 1.96.0 网络编程新特性:\n\
-        - if let guards for response handling\n\
-        - RangeInclusive for port and MTU management\n\
-        - Tuple coercion for network results\n\
-        - Better rate limiting with ranges\n\
-        - Improved connection pool management"
+    "Rust 1.95+ 网络编程特性:\n- if let guards for response handling\n- RangeInclusive for port \
+     and MTU management\n- Tuple coercion for network results\n- Better rate limiting with \
+     ranges\n- Improved connection pool management"
         .to_string()
 }
 
@@ -398,24 +383,33 @@ mod tests {
 
     #[test]
     fn test_check_response() {
-        assert_eq!(
-            NetworkGuardExamples::check_response(Ok(Some(42))),
-            Ok(42)
-        );
+        assert_eq!(NetworkGuardExamples::check_response(Ok(Some(42))), Ok(42));
         assert!(NetworkGuardExamples::check_response::<i32>(Ok(None)).is_err());
     }
 
     #[test]
     fn test_connection_state() {
-        assert_eq!(NetworkGuardExamples::connection_state(false, None), "closed");
+        assert_eq!(
+            NetworkGuardExamples::connection_state(false, None),
+            "closed"
+        );
         assert_eq!(NetworkGuardExamples::connection_state(true, None), "idle");
-        assert_eq!(NetworkGuardExamples::connection_state(true, Some(500)), "active");
-        assert_eq!(NetworkGuardExamples::connection_state(true, Some(2000)), "busy");
+        assert_eq!(
+            NetworkGuardExamples::connection_state(true, Some(500)),
+            "active"
+        );
+        assert_eq!(
+            NetworkGuardExamples::connection_state(true, Some(2000)),
+            "busy"
+        );
     }
 
     #[test]
     fn test_protocol_version() {
-        assert_eq!(NetworkGuardExamples::protocol_version(1, Some(1)), "HTTP/1.1");
+        assert_eq!(
+            NetworkGuardExamples::protocol_version(1, Some(1)),
+            "HTTP/1.1"
+        );
         assert_eq!(NetworkGuardExamples::protocol_version(2, None), "HTTP/2");
         assert_eq!(NetworkGuardExamples::protocol_version(3, None), "HTTP/3");
         assert_eq!(NetworkGuardExamples::protocol_version(1, Some(0)), "legacy");
@@ -463,25 +457,21 @@ mod tests {
         assert_eq!(health, "good");
 
         // Test case: 20 errors out of 1000 total = 2% error rate -> "fair"
-        let (_, _, _, _, health2) =
-            NetworkTupleExamples::connection_stats(500, 500, 20);
+        let (_, _, _, _, health2) = NetworkTupleExamples::connection_stats(500, 500, 20);
         assert_eq!(health2, "fair");
 
         // Test case: 200 errors out of 1000 total = 20% error rate -> "poor"
-        let (_, _, _, _, health3) =
-            NetworkTupleExamples::connection_stats(500, 500, 200);
+        let (_, _, _, _, health3) = NetworkTupleExamples::connection_stats(500, 500, 200);
         assert_eq!(health3, "poor");
     }
 
     #[test]
     fn test_rate_limit_check() {
-        let (allowed, status) =
-            PracticalNetworkExamples::rate_limit_check(50, 1000, 0..=100);
+        let (allowed, status) = PracticalNetworkExamples::rate_limit_check(50, 1000, 0..=100);
         assert!(allowed);
         assert_eq!(status, "allowed");
 
-        let (allowed, status) =
-            PracticalNetworkExamples::rate_limit_check(150, 1000, 0..=100);
+        let (allowed, status) = PracticalNetworkExamples::rate_limit_check(150, 1000, 0..=100);
         assert!(!allowed);
         assert_eq!(status, "throttled");
     }
@@ -489,11 +479,7 @@ mod tests {
     #[test]
     fn test_network_monitor_summary() {
         // Test case: 2/3 healthy = 66.67% -> "critical"
-        let connections = vec![
-            ("conn1", true),
-            ("conn2", true),
-            ("conn3", false),
-        ];
+        let connections = vec![("conn1", true), ("conn2", true), ("conn3", false)];
         let (total, healthy, rate, status) =
             PracticalNetworkExamples::network_monitor_summary(&connections);
         assert_eq!(total, 3);
@@ -509,17 +495,12 @@ mod tests {
             ("conn4", true),
             ("conn5", false),
         ];
-        let (_, _, _, status2) =
-            PracticalNetworkExamples::network_monitor_summary(&connections2);
+        let (_, _, _, status2) = PracticalNetworkExamples::network_monitor_summary(&connections2);
         assert_eq!(status2, "degraded");
 
         // Test case: all healthy -> "excellent"
-        let connections3 = vec![
-            ("conn1", true),
-            ("conn2", true),
-        ];
-        let (_, _, _, status3) =
-            PracticalNetworkExamples::network_monitor_summary(&connections3);
+        let connections3 = vec![("conn1", true), ("conn2", true)];
+        let (_, _, _, status3) = PracticalNetworkExamples::network_monitor_summary(&connections3);
         assert_eq!(status3, "excellent");
     }
 
@@ -542,31 +523,135 @@ mod tests {
             NetworkGuardExamples::parse_port(Some("abc")),
             Err("无法解析端口")
         );
-        assert_eq!(
-            NetworkGuardExamples::parse_port(None),
-            Err("地址为空")
-        );
+        assert_eq!(NetworkGuardExamples::parse_port(None), Err("地址为空"));
     }
 
     #[test]
     fn test_parse_retry_count() {
-        assert_eq!(
-            NetworkGuardExamples::parse_retry_count(Some("5")),
-            Ok(5)
-        );
+        assert_eq!(NetworkGuardExamples::parse_retry_count(Some("5")), Ok(5));
         assert_eq!(
             NetworkGuardExamples::parse_retry_count(Some("abc")),
             Err("无效的重试次数")
         );
-        assert_eq!(
-            NetworkGuardExamples::parse_retry_count(None),
-            Ok(3)
-        );
+        assert_eq!(NetworkGuardExamples::parse_retry_count(None), Ok(3));
     }
 
     #[test]
     fn test_get_rust_196_network_info() {
         let info = get_rust_196_network_info();
-        assert!(info.contains("Rust 1.96.0"));
+        assert!(!info.is_empty());
+    }
+}
+
+/// 网络端口反模式与边界情况专题
+pub mod anti_patterns_and_edge_cases {
+    /// 展示网络端口处理中的反模式和边界情况
+    pub struct PortValidationAntiPatterns;
+
+    impl PortValidationAntiPatterns {
+        /// ❌ 不推荐：接受 0 作为有效端口或忽略范围检查
+        pub fn dangerous_port_accept(port: u16) -> Result<u16, &'static str> {
+            // ❌ 反例：0 是保留端口（表示让系统分配），不应作为显式目标端口
+            // 但这里不做任何检查，直接接受所有 u16 值
+            Ok(port)
+        }
+
+        /// ✅ 推荐：严格验证端口范围并拒绝 0
+        pub fn safe_port_validation(port: u16) -> Result<u16, &'static str> {
+            match port {
+                0 => Err("port 0 is reserved (ephemeral binding only)"),
+                1..=65535 => Ok(port),
+            }
+        }
+
+        /// ⚠️ 边界情况：知名端口 (1-1023) 需要特权
+        pub fn port_privilege_boundary(port: u16) -> &'static str {
+            // ⚠️ 边界情况：1-1023 通常需要 root/admin 权限
+            match port {
+                0 => "invalid",
+                1..=1023 => "privileged",
+                1024..=49151 => "registered",
+                49152..=65535 => "dynamic/private",
+            }
+        }
+
+        /// ⚠️ 边界情况：端口范围的端点值验证
+        pub fn validate_port_range(
+            start: u16,
+            end: u16,
+        ) -> Result<std::ops::RangeInclusive<u16>, &'static str> {
+            // ⚠️ 边界情况：确保范围有效且不包含 0
+            if start == 0 || end == 0 {
+                return Err("range must not include port 0");
+            }
+            if start > end {
+                return Err("start must be <= end");
+            }
+            Ok(start..=end)
+        }
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_dangerous_port_accept() {
+            // ❌ 反例：错误地接受 0
+            assert_eq!(PortValidationAntiPatterns::dangerous_port_accept(0), Ok(0));
+        }
+
+        #[test]
+        fn test_safe_port_validation() {
+            assert_eq!(
+                PortValidationAntiPatterns::safe_port_validation(0),
+                Err("port 0 is reserved (ephemeral binding only)")
+            );
+            assert_eq!(PortValidationAntiPatterns::safe_port_validation(80), Ok(80));
+            assert_eq!(
+                PortValidationAntiPatterns::safe_port_validation(65535),
+                Ok(65535)
+            );
+        }
+
+        #[test]
+        fn test_port_privilege_boundary() {
+            assert_eq!(
+                PortValidationAntiPatterns::port_privilege_boundary(0),
+                "invalid"
+            );
+            assert_eq!(
+                PortValidationAntiPatterns::port_privilege_boundary(80),
+                "privileged"
+            );
+            assert_eq!(
+                PortValidationAntiPatterns::port_privilege_boundary(8080),
+                "registered"
+            );
+            assert_eq!(
+                PortValidationAntiPatterns::port_privilege_boundary(50000),
+                "dynamic/private"
+            );
+            assert_eq!(
+                PortValidationAntiPatterns::port_privilege_boundary(65535),
+                "dynamic/private"
+            );
+        }
+
+        #[test]
+        fn test_validate_port_range() {
+            assert_eq!(
+                PortValidationAntiPatterns::validate_port_range(80, 443),
+                Ok(80..=443)
+            );
+            assert_eq!(
+                PortValidationAntiPatterns::validate_port_range(0, 100),
+                Err("range must not include port 0")
+            );
+            assert_eq!(
+                PortValidationAntiPatterns::validate_port_range(200, 100),
+                Err("start must be <= end")
+            );
+        }
     }
 }

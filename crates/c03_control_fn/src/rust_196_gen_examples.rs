@@ -1,6 +1,6 @@
-//! # Rust 1.96.0 `gen` 关键字生成器特性示例
+//! # `gen` 关键字生成器特性前瞻 (nightly-only, 非 1.96 stable)
 //!
-//! 本模块展示了 Rust Edition 2024 中引入的 `gen` 关键字，
+//! 本模块前瞻展示 Rust 未来可能引入的 `gen` 关键字生成器语法，
 //! 用于创建生成器（generators），简化迭代器的创建和使用。
 //!
 //! **注意**: `gen` 关键字是 Edition 2024 的实验性功能，
@@ -10,14 +10,16 @@
 //! - 文件: rust_196_gen_examples.rs
 //! - 创建日期: 2026-04-10
 //! - 版本: 1.0
-//! - Rust版本: 1.96.0 (nightly)
+//! - Rust版本: nightly (当前 1.97.0)
 //! - Edition: 2024
 
 // 启用 gen 块特性（在支持的 nightly 版本中）
 // 注意：此特性目前处于实验阶段
 #![allow(unstable_features)]
 
-/// Rust 1.96 `if let` guards 在控制流中的应用
+// ⚠️ 以下代码需要 nightly 编译器和 `#![feature(gen_blocks)]`，当前 stable 不支持
+
+/// `if let` guards 在控制流中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。
@@ -651,10 +653,10 @@ pub fn demonstrate_advanced_gen() {
     println!("层序遍历: {:?}", tree.level_order().collect::<Vec<_>>());
 }
 
-/// 演示 Rust 1.96.0 gen 关键字特性
+/// 演示 gen 关键字特性
 pub fn demonstrate_rust_196_gen_features() {
     println!("\n========================================");
-    println!("   Rust 1.96.0 gen 关键字特性演示");
+    println!("   gen 关键字生成器特性演示");
     println!("   (Edition 2024 实验性功能)");
     println!("========================================\n");
 
@@ -669,9 +671,9 @@ pub fn demonstrate_rust_196_gen_features() {
     println!("      需要 nightly 编译器和 #![feature(gen_blocks)]");
 }
 
-/// 获取 Rust 1.96.0 gen 特性信息
+/// 获取 gen 特性信息
 pub fn get_rust_196_gen_info() -> String {
-    "Rust 1.96.0 gen 关键字特性:\n- gen 块: 使用 yield 创建迭代器\n- async gen: 创建异步生成器\n- \
+    "gen 关键字特性:\n- gen 块: 使用 yield 创建迭代器\n- async gen: 创建异步生成器\n- \
      简化自定义迭代器实现\n- 支持复杂控制流 (loop, if, match)\n- Edition 2024 实验性功能"
         .to_string()
 }
@@ -754,7 +756,10 @@ mod tests {
 
     #[test]
     fn test_parse_command_arg() {
-        assert_eq!(ControlIfLetGuardExamples::parse_command_arg(Some("42")), Ok(42));
+        assert_eq!(
+            ControlIfLetGuardExamples::parse_command_arg(Some("42")),
+            Ok(42)
+        );
         assert_eq!(
             ControlIfLetGuardExamples::parse_command_arg(Some("abc")),
             Err("参数不是有效的整数")

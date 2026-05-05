@@ -1,3 +1,9 @@
+//! # Never 类型 (`!`) 深度专题 (nightly-only, 非 1.96 stable)
+//!
+//! ⚠️ **注意**: 完整的 `!` 类型支持仍需 nightly 编译器 (`#![feature(never_type)]`)。
+//! 在 stable Rust 中，`!` 的部分行为已通过 edition 2024 的 fallback 改进可用，
+//! 但 `Result<T, !>` 等完整用法在 stable 上可能受限。
+//!
 //! # Rust 2024 Edition Never 类型 (`!`) 深度专题
 //!
 //! `!`（never type）是 Rust 中最特殊的类型之一，表示"永远不会返回的值"。
@@ -214,12 +220,18 @@ pub fn demonstrate_never_type() {
 
     // 示例 2: 穷尽性 match
     println!("\n--- 示例 2: 穷尽性 match ---");
-    println!("demonstrate_exhaustive_match => {}", demonstrate_exhaustive_match());
+    println!(
+        "demonstrate_exhaustive_match => {}",
+        demonstrate_exhaustive_match()
+    );
 
     // 示例 3: 不可能出错的流
     println!("\n--- 示例 3: 不可能出错的流事件 ---");
     let event: Event<i32, !> = Event::Data(100);
-    println!("process_infallible_stream => {:?}", process_infallible_stream(event));
+    println!(
+        "process_infallible_stream => {:?}",
+        process_infallible_stream(event)
+    );
 
     // 示例 4: 配置加载
     println!("\n--- 示例 4: 关键配置加载 ---");
@@ -237,12 +249,9 @@ pub fn demonstrate_never_type() {
 
 /// 获取 never 类型特性信息
 pub fn get_never_type_info() -> String {
-    "Rust 2024 Edition Never 类型 (!) 特性:\n\
-        - `!` 可强制转换为任何类型\n\
-        - `Result<T, !>` 表示不可能失败的操作\n\
-        - match 穷尽性检查：无需处理 `Err(!)` 分支\n\
-        - 控制流优化：panic/exit/无限循环返回 `!`\n\
-        - 编译期常量求值的理想错误类型"
+    "Rust 2024 Edition Never 类型 (!) 特性:\n- `!` 可强制转换为任何类型\n- `Result<T, !>` \
+     表示不可能失败的操作\n- match 穷尽性检查：无需处理 `Err(!)` 分支\n- \
+     控制流优化：panic/exit/无限循环返回 `!`\n- 编译期常量求值的理想错误类型"
         .to_string()
 }
 
@@ -281,7 +290,12 @@ mod tests {
 
     #[test]
     fn test_filtered_result() {
-        let values = vec![Ok(1), Err("bad".to_string()), Ok(2), Err("worse".to_string())];
+        let values = vec![
+            Ok(1),
+            Err("bad".to_string()),
+            Ok(2),
+            Err("worse".to_string()),
+        ];
         let filtered = filtered_result(values);
         assert_eq!(filtered.len(), 2);
         assert_eq!(filtered[0], Ok(1));
@@ -323,5 +337,101 @@ mod tests {
         let info = get_never_type_info();
         assert!(info.contains("Never"));
         assert!(info.contains("2024"));
+    }
+}
+
+/// 类型转换反模式与边界情况专题
+pub mod anti_patterns_and_edge_cases {
+    /// 展示类型转换中的反模式和边界情况
+    pub struct TypeConversionAntiPatterns;
+
+    impl TypeConversionAntiPatterns {
+        /// ❌ 不推荐：无检查地将大类型转换为小类型
+        pub fn dangerous_narrowing(value: u64) -> u8 {
+            // ❌ 反例：直接 as 转换，高位截断而不报错
+            value as u8
+        }
+
+        /// ✅ 推荐：使用 try_into 进行安全转换
+        pub fn safe_narrowing(value: u64) -> Result<u8, &'static str> {
+            value.try_into().map_err(|_| "value out of u8 range")
+        }
+
+        /// ⚠️ 边界情况：f64 到整数的精度丢失边界
+        /// 超过 2^53 的 f64 无法精确表示所有整数
+        pub fn f64_to_integer_boundary(value: f64) -> Result<i64, &'static str> {
+            // ⚠️ 边界情况：检查 f64 是否能精确表示目标整数
+            const MAX_EXACT_INTEGER: f64 = 9_007_199_254_740_992.0; // 2^53
+            if value.is_nan() || value.is_infinite() {
+                return Err("f64 is NaN or infinite");
+            }
+            if value.abs() > MAX_EXACT_INTEGER {
+                return Err("f64 cannot precisely represent this integer");
+            }
+            if value.fract() != 0.0 {
+                return Err("value has fractional part");
+            }
+            Ok(value as i64)
+        }
+
+        /// ⚠️ 边界情况：u8 极值边界上的运算
+        pub fn u8_arithmetic_boundary(a: u8, b: u8) -> Result<u8, &'static str> {
+            // ⚠️ 边界情况：在边界值上运算可能静默溢出
+            a.checked_add(b).ok_or("u8 overflow")
+        }
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn test_dangerous_narrowing() {
+            // ❌ 反例：256u64 截断为 0u8
+            assert_eq!(TypeConversionAntiPatterns::dangerous_narrowing(256), 0);
+            // ❌ 反例：u64::MAX 截断为 255u8
+            assert_eq!(
+                TypeConversionAntiPatterns::dangerous_narrowing(u64::MAX),
+                255
+            );
+        }
+
+        #[test]
+        fn test_safe_narrowing() {
+            assert_eq!(TypeConversionAntiPatterns::safe_narrowing(255), Ok(255));
+            assert_eq!(
+                TypeConversionAntiPatterns::safe_narrowing(256),
+                Err("value out of u8 range")
+            );
+        }
+
+        #[test]
+        fn test_f64_to_integer_boundary() {
+            assert_eq!(
+                TypeConversionAntiPatterns::f64_to_integer_boundary(42.0),
+                Ok(42)
+            );
+            assert_eq!(
+                TypeConversionAntiPatterns::f64_to_integer_boundary(42.5),
+                Err("value has fractional part")
+            );
+            let big = 9_007_199_254_740_994.0_f64; // > 2^53
+            assert_eq!(
+                TypeConversionAntiPatterns::f64_to_integer_boundary(big),
+                Err("f64 cannot precisely represent this integer")
+            );
+        }
+
+        #[test]
+        fn test_u8_arithmetic_boundary() {
+            assert_eq!(
+                TypeConversionAntiPatterns::u8_arithmetic_boundary(100, 50),
+                Ok(150)
+            );
+            assert_eq!(
+                TypeConversionAntiPatterns::u8_arithmetic_boundary(200, 100),
+                Err("u8 overflow")
+            );
+        }
     }
 }

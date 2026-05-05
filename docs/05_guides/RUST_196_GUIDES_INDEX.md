@@ -39,17 +39,17 @@
 
 ---
 
-## 🆕 Rust 1.96 新特性指南
+## 🆕 Rust 1.95/1.96 特性指南（含版本勘误）
 
 ### 核心新特性概览
 
 | 特性 | 类别 | 应用场景 | 相关指南 |
 |------|------|----------|----------|
-| `isqrt` | 数学运算 | 质数检测、几何计算 | BEST_PRACTICES.md |
-| `HashMap::get_disjoint_mut` | 数据结构 | 并发缓存、状态管理 | THREADS_CONCURRENCY_USAGE_GUIDE.md |
-| `async Fn` trait | 异步编程 | 异步 trait、回调抽象 | ASYNC_PROGRAMMING_USAGE_GUIDE.md |
-| `spawn_unchecked` | 系统编程 | 高性能线程 | UNSAFE_RUST_GUIDE.md |
-| `Vec::pop_if` | 集合操作 | 条件弹出、栈操作 | BEST_PRACTICES.md |
+| `isqrt` | 数学运算 (≥1.84) | 质数检测、几何计算 | BEST_PRACTICES.md |
+| `HashMap::get_disjoint_mut` | 数据结构 (≥1.83) | 并发缓存、状态管理 | THREADS_CONCURRENCY_USAGE_GUIDE.md |
+| `async Fn` / async closures | 异步编程 (≥1.85, Edition 2024) | 异步 trait、回调抽象 | ASYNC_PROGRAMMING_USAGE_GUIDE.md |
+| `if let guards` | 语言特性 | 模式匹配守卫 | CONTROL_FLOW_GUIDE.md |
+| `Vec::pop_if` | 集合操作 (≥1.83) | 条件弹出、栈操作 | BEST_PRACTICES.md |
 | `const fn` 改进 | 编译时计算 | 常量初始化 | DESIGN_PATTERNS_USAGE_GUIDE.md |
 
 ---
@@ -68,12 +68,12 @@
 - `isqrt` 在数学计算中的应用
 - `HashMap::get_disjoint_mut` 在并发状态管理中的应用
 - `async Fn` trait 在异步抽象中的改进
-- `spawn_unchecked` 在高级线程控制中的应用
+- `if let guards` 在模式匹配中的应用
 
 #### 代码示例 (Rust 1.96)
 
 ```rust
-// 使用 1.96 新特性的示例代码
+// 使用各版本特性的示例代码
 use std::collections::HashMap;
 
 fn demonstrate_196_features() {
@@ -110,7 +110,7 @@ fn demonstrate_196_features() {
 
 #### 🔄 并发编程
 - [HashMap 新 API](./THREADS_CONCURRENCY_USAGE_GUIDE.md)
-- [spawn_unchecked 指南](./UNSAFE_RUST_GUIDE.md)
+- [if let guards 指南](./CONTROL_FLOW_GUIDE.md)
 
 #### ⚡ 异步编程
 - [async Fn trait 改进](./ASYNC_PROGRAMMING_USAGE_GUIDE.md)
@@ -166,7 +166,7 @@ done
 
 ```bash
 # 检查文档中 1.96 特性的提及情况
-grep -r "isqrt\|get_disjoint_mut\|spawn_unchecked\|async Fn" docs/05_guides/ | wc -l
+grep -r "isqrt\|get_disjoint_mut\|if let guards\|async Fn" docs/05_guides/ | wc -l
 ```
 
 ---

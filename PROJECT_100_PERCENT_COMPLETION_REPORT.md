@@ -46,7 +46,7 @@
 | `c11_macro_system/src/rust_194_features.rs` | 3处宏处理 |
 | `c12_wasm/examples/09_wasi_02_component_example.rs` | WASI 组件 |
 
-### 1.2 Rust 1.96 新特性采用 ✅
+### 1.2 Rust 1.95/1.96 特性（含版本勘误）采用 ✅
 
 **创建的新文件:**
 
@@ -256,7 +256,7 @@ unnecessary_map_on_constructor = "warn"
 
 ---
 
-## 🎯 Rust 1.96 特性采用总结
+## 🎯 Rust 1.95/1.96 特性（含版本勘误）采用总结
 
 ### 已稳定采用的特性 ✅
 
@@ -272,7 +272,7 @@ unnecessary_map_on_constructor = "warn"
 
 ### 未来可采用特性 (待稳定) ⏳
 
-- `PinCoerceUnsized` trait (需评估影响)
+- `PinCoerceUnsized` trait (nightly-only 前瞻，需评估影响)
 - PowerPC 内联汇编 (c11_macro_system)
 - 更多 Edition 2024 特性
 
@@ -372,7 +372,7 @@ unnecessary_map_on_constructor = "warn"
 
 项目现在具备：
 
-- 🚀 最新的 Rust 1.96 语言特性
+- 🚀 最新的 Rust 1.95/1.96 特性
 - 📚 完整的文档和学习资源
 - ✅ 全面的测试覆盖
 - ⚡ 优化的构建配置

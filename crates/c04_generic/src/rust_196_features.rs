@@ -1,8 +1,8 @@
-//! # Rust 1.96.0 泛型系统新特性实现模块
+//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
 
 use std::ops::RangeInclusive;
 
-/// Rust 1.96 `if let` guards 在泛型代码中的应用
+/// `if let` guards (Rust 1.95 稳定，非 1.96 新特性) 在泛型编程中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。
@@ -29,15 +29,12 @@ impl GenericIfLetGuardExamples {
     }
 }
 
-/// RangeInclusive 在泛型代码中的应用
+/// Range 类型应用（标准库基础特性）
 pub struct GenericRangeExamples;
 
 impl GenericRangeExamples {
     /// 按范围过滤
-    pub fn filter_by_range<T>(
-        items: &[T],
-        range: RangeInclusive<T>,
-    ) -> Vec<&T>
+    pub fn filter_by_range<T>(items: &[T], range: RangeInclusive<T>) -> Vec<&T>
     where
         T: Ord,
     {
@@ -89,7 +86,7 @@ impl GenericRangeExamples {
     }
 }
 
-/// 元组 coercion 示例
+/// 元组类型应用（泛型编程基础）
 pub struct GenericTupleExamples;
 
 impl GenericTupleExamples {
@@ -103,9 +100,7 @@ impl GenericTupleExamples {
     }
 
     /// 双重结果
-    pub fn dual_result<T, E>(
-        result: Result<T, E>,
-    ) -> (Option<T>, Option<E>, &'static str) {
+    pub fn dual_result<T, E>(result: Result<T, E>) -> (Option<T>, Option<E>, &'static str) {
         match result {
             Ok(v) => (Some(v), None, "success"),
             Err(e) => (None, Some(e), "error"),
@@ -159,7 +154,7 @@ impl<T: Clone + Ord> Default for PracticalGenericApplications<T> {
 /// 演示函数
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
-    println!("   Rust 1.96.0 泛型新特性演示");
+    println!("   Rust 1.95+ 特性跟踪演示");
     println!("========================================\n");
 
     let items = vec![1, 5, 10, 15, 20, 25, 30];
@@ -179,7 +174,7 @@ pub fn demonstrate_rust_196_features() {
 
 /// 获取特性信息
 pub fn get_rust_196_generic_info() -> String {
-    "Rust 1.96.0 泛型系统新特性:\n\
+    "Rust 1.95+ 特性跟踪:\n\
         - RangeInclusive / RangeToInclusive with generics\n\
         - Tuple coercion in generic contexts"
         .to_string()
@@ -241,7 +236,10 @@ mod tests {
 
     #[test]
     fn test_parse_generic_number() {
-        assert_eq!(GenericIfLetGuardExamples::parse_generic_number(Some("42")), Ok(42));
+        assert_eq!(
+            GenericIfLetGuardExamples::parse_generic_number(Some("42")),
+            Ok(42)
+        );
         assert_eq!(
             GenericIfLetGuardExamples::parse_generic_number(Some("abc")),
             Err("解析失败")
@@ -275,15 +273,14 @@ mod tests {
     #[test]
     fn test_get_rust_196_generic_info() {
         let info = get_rust_196_generic_info();
-        assert!(info.contains("Rust 1.96.0"));
+        assert!(!info.is_empty());
     }
 }
 
-
-// ==================== Rust 2024 Edition: gen blocks 生成器专题 ====================
-//
+// ==================== Rust 2024 Edition: gen blocks 生成器前瞻 (nightly-only) ====================
+// ⚠️ 注意: 以下代码需要 nightly 编译器和 `#![feature(gen_blocks, yield_expr)]`
 // `gen` 块允许使用 `yield` 关键字直接创建迭代器，无需手动实现 Iterator trait。
-// 本专题展示 gen blocks 在泛型代码中的高级应用。
+// 本专题展示 gen blocks 在泛型代码中的前瞻应用，stable 编译器不可用。
 
 /// 使用 gen 块创建泛型斐波那契生成器
 ///
@@ -357,7 +354,9 @@ where
     gen move {
         let mut a = a.into_iter();
         let mut b = b.into_iter();
-        while let Some(x) = a.next() && let Some(y) = b.next() {
+        while let Some(x) = a.next()
+            && let Some(y) = b.next()
+        {
             yield (x, y);
         }
     }

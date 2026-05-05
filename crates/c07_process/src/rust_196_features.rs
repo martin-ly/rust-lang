@@ -1,8 +1,8 @@
-//! # Rust 1.96.0 进程管理新特性实现模块
+//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
 
 use std::ops::RangeInclusive;
 
-/// Rust 1.96 `if let` guards 在进程管理中的应用
+/// `if let` guards (Rust 1.95 稳定，非 1.96 新特性) 在进程管理中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。
@@ -29,7 +29,7 @@ impl ProcessIfLetGuardExamples {
     }
 }
 
-/// RangeInclusive 在进程管理中的应用
+/// Range 类型应用（标准库基础特性）
 pub struct ProcessRangeExamples;
 
 impl ProcessRangeExamples {
@@ -45,10 +45,7 @@ impl ProcessRangeExamples {
     }
 
     /// 资源限制检查
-    pub fn check_resource_limit(
-        current: usize,
-        limit: RangeInclusive<usize>,
-    ) -> &'static str {
+    pub fn check_resource_limit(current: usize, limit: RangeInclusive<usize>) -> &'static str {
         if current < *limit.start() {
             "正常"
         } else if limit.contains(&current) {
@@ -59,10 +56,7 @@ impl ProcessRangeExamples {
     }
 
     /// 进程分组
-    pub fn group_processes(
-        processes: &[usize],
-        group_size: usize,
-    ) -> Vec<RangeInclusive<usize>> {
+    pub fn group_processes(processes: &[usize], group_size: usize) -> Vec<RangeInclusive<usize>> {
         if group_size == 0 || processes.is_empty() {
             return vec![];
         }
@@ -80,7 +74,7 @@ impl ProcessRangeExamples {
     }
 }
 
-/// 元组 coercion 示例
+/// 元组类型应用（泛型编程基础）
 pub struct ProcessTupleExamples;
 
 impl ProcessTupleExamples {
@@ -113,10 +107,7 @@ impl ProcessTupleExamples {
     }
 
     /// 资源使用
-    pub fn resource_usage(
-        cpu_percent: f64,
-        memory_mb: usize,
-    ) -> (f64, usize, &'static str) {
+    pub fn resource_usage(cpu_percent: f64, memory_mb: usize) -> (f64, usize, &'static str) {
         let status = if cpu_percent > 90.0 {
             "high_cpu"
         } else if memory_mb > 1024 {
@@ -166,7 +157,7 @@ impl ProcessPoolManager {
 /// 演示函数
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
-    println!("   Rust 1.96.0 进程管理新特性演示");
+    println!("   Rust 1.95+ 特性跟踪演示");
     println!("========================================\n");
 
     let priority = ProcessRangeExamples::priority_range(-5);
@@ -179,8 +170,10 @@ pub fn demonstrate_rust_196_features() {
     println!("进程分组: {:?}", groups);
 
     let (running, zombie, stopped, total, health) = ProcessTupleExamples::process_stats(10, 2, 1);
-    println!("进程统计: 运行={}, 僵尸={}, 停止={}, 总计={}, 健康={}",
-             running, zombie, stopped, total, health);
+    println!(
+        "进程统计: 运行={}, 僵尸={}, 停止={}, 总计={}, 健康={}",
+        running, zombie, stopped, total, health
+    );
 
     let manager = ProcessPoolManager::new(12, 4);
     println!("进程组: {:?}", manager.get_all_ranges());
@@ -192,10 +185,8 @@ pub fn demonstrate_rust_196_features() {
 
 /// 获取特性信息
 pub fn get_rust_196_process_info() -> String {
-    "Rust 1.96.0 进程管理新特性:\n\
-        - RangeInclusive for priority and resource management\n\
-        - Tuple coercion for process results\n\
-        - Better process pool management"
+    "Rust 1.95+ 特性跟踪:\n- RangeInclusive for priority and resource management\n- Tuple \
+     coercion for process results\n- Better process pool management"
         .to_string()
 }
 
@@ -212,9 +203,18 @@ mod tests {
 
     #[test]
     fn test_check_resource_limit() {
-        assert_eq!(ProcessRangeExamples::check_resource_limit(30, 50..=100), "正常");
-        assert_eq!(ProcessRangeExamples::check_resource_limit(75, 50..=100), "警告");
-        assert_eq!(ProcessRangeExamples::check_resource_limit(150, 50..=100), "超限");
+        assert_eq!(
+            ProcessRangeExamples::check_resource_limit(30, 50..=100),
+            "正常"
+        );
+        assert_eq!(
+            ProcessRangeExamples::check_resource_limit(75, 50..=100),
+            "警告"
+        );
+        assert_eq!(
+            ProcessRangeExamples::check_resource_limit(150, 50..=100),
+            "超限"
+        );
     }
 
     #[test]
@@ -277,6 +277,6 @@ mod tests {
     #[test]
     fn test_get_rust_196_process_info() {
         let info = get_rust_196_process_info();
-        assert!(info.contains("Rust 1.96.0"));
+        assert!(!info.is_empty());
     }
 }

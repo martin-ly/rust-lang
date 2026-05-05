@@ -105,7 +105,7 @@ fn process_range(range: RangeInclusive<usize>) {
 - [x] 更新 `c08_algorithms` crate 中的范围处理（已有完整示例）
 - [x] 检查并替换自定义 RangeInclusive 实现（无需替换）
 
-### 2.2 Rust 1.96 新特性采用
+### 2.2 Rust 1.95/1.96 特性（含版本勘误）采用
 
 #### 2.2.1 New Range Types (稳定化)
 
@@ -123,7 +123,7 @@ let range: RangeToInclusive<i32> = ..=10;
 - [x] 评估现有代码中 Range 类型的使用（所有 crate 已有 RangeInclusive 示例）
 - [x] 采用新的 Range 类型优化代码
 
-#### 2.2.2 PinCoerceUnsized 要求 Deref
+#### 2.2.2 PinCoerceUnsized 要求 Deref (nightly-only 前瞻)
 
 **影响:** 使用 `Pin` 和 `CoerceUnsized` 的代码可能需要调整
 
@@ -294,7 +294,7 @@ strategy:
 - [x] 更新 README.md 中的 Rust 版本要求
 - [x] 更新 CONTRIBUTING.md 中的开发环境说明
 - [x] 更新各 crate 文档中的版本信息
-- [x] 添加 Rust 1.96 新特性的使用示例（已为所有 crate 添加 if let guards 示例）
+- [x] 添加 Rust 1.95/1.96 特性的使用示例（已为所有 crate 添加 if let guards 示例）
 
 ### 6.2 示例代码更新
 
@@ -382,7 +382,7 @@ cargo udeps
 - [x] JSON target specs 去稳定化 (Rust 1.95) - 无影响
 - [x] Const blocks 隐式提升行为改变 - 已检查，无问题
 - [x] `Eq::assert_receiver_is_total_eq` 废弃 - 无使用
-- [x] PinCoerceUnsized 现在要求 Deref - 已验证，无手动实现
+- [x] PinCoerceUnsized (nightly-only) 现在要求 Deref - 已验证，无手动实现
 
 ### 安全相关更新
 
