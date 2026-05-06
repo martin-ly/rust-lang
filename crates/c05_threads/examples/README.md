@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-10-20
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.95.0+ (Edition 2024)
 > **状态**: ✅ 100% 完成
 > **概念说明**: 本示例集展示 Rust 线程编程的各种技术，包括作用域线程、消息传递、共享状态、无锁数据结构和高级同步原语。
 
@@ -56,9 +56,17 @@
 | `message_passing_demo.rs` | 消息传递综合 | 多种 channel | `cargo run --example message_passing_demo` |
 | `priority_channels_demo.rs` | 优先级通道 | 优先级队列 | `cargo run --example priority_channels_demo` |
 
-### Rust 1.93.0 特性示例 ⭐ NEW
+### Rust 1.95.0 特性示例 ⭐ NEW
 
-展示最新 Rust 版本的线程相关改进。
+展示 Rust 1.95.0 版本的并发原子操作新 API。
+
+| 示例 | 描述 | 核心概念 | 运行命令 |
+|------|------|----------|----------|
+| `atomic_update_demo.rs` | `Atomic*::update` / `try_update` | CAS 循环封装 | `cargo run --example atomic_update_demo` |
+
+### Rust 1.93.0 特性示例
+
+展示 Rust 1.93.0/1.94.0 版本的线程相关改进。
 
 | 示例 | 描述 | 核心概念 | 运行命令 |
 |------|------|----------|----------|

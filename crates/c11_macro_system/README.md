@@ -212,7 +212,10 @@ cargo run --example 01_macro_rules_basics
 # 模式匹配
 cargo run --example 02_pattern_matching
 
-# Rust 1.93.0 新特性演示 ⭐ NEW!
+# Rust 1.95.0 新特性演示 ⭐ NEW!
+cargo run --example ppc_asm_demo
+
+# Rust 1.93.0 新特性演示
 cargo run --example rust_192_features_demo
 
 # 查看所有示例

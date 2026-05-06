@@ -64,13 +64,13 @@ fn main() {
 ```rust
 fn main() {
     let mut s = String::from("hello");
-    
+
     let r1 = &s;      // 不可变借用
     let r2 = &s;      // 多个不可变借用 OK
     // let r3 = &mut s; // 错误！不能同时拥有可变和不可变借用
-    
+
     println!("{} {}", r1, r2);
-    
+
     let r3 = &mut s;  // 正确，r1, r2 已不再使用
     r3.push_str(" world");
 }
@@ -85,10 +85,10 @@ use std::cell::RefCell;
 fn main() {
     // Rc 用于共享所有权
     let data = Rc::new(RefCell::new(5));
-    
+
     let data2 = Rc::clone(&data);
     *data2.borrow_mut() += 10;
-    
+
     println!("{}", data.borrow()); // 输出: 15
 }
 ```
@@ -96,13 +96,16 @@ fn main() {
 ## 依赖关系
 
 ### 上游依赖
+
 - `common`: 共享错误处理工具
 
 ### 下游依赖
+
 - `c02_type_system`: 基于所有权构建类型系统
 - `c05_threads`: Arc 用于跨线程共享
 
 ### 外部依赖
+
 ```toml
 [dependencies]
 tokio = { workspace = true }
@@ -121,6 +124,11 @@ cargo run -p c01_ownership_borrow_scope --bin obs
 
 # 运行基准测试
 cargo bench -p c01_ownership_borrow_scope
+
+# Rust 1.95.0 新特性示例
+cargo run -p c01_ownership_borrow_scope --example layout_api_demo       # Layout::dangling_ptr / repeat / extend_packed
+cargo run -p c01_ownership_borrow_scope --example raw_ptr_ref_demo      # *const/mut T::as_ref_unchecked / as_mut_unchecked
+cargo run -p c01_ownership_borrow_scope --example maybeuninit_cell_array_demo # MaybeUninit/Cell 数组转换
 ```
 
 ## 学习路径建议

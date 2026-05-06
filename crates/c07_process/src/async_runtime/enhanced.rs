@@ -317,7 +317,7 @@ impl EnhancedAsyncProcessManager {
         let processes = self.processes.read().await;
         let mut stats = PerformanceStats::default();
 
-        for (_pid, process) in processes.iter() {
+        for process in processes.values() {
             let metrics = process.performance_metrics.lock().await;
 
             // 使用 Rust 1.90 改进的模式匹配
@@ -788,7 +788,7 @@ impl EnhancedAsyncProcessManager {
             interval.tick().await;
 
             let processes_guard = processes.read().await;
-            for (_pid, process) in processes_guard.iter() {
+            for process in processes_guard.values() {
                 // 更新性能指标
                 let mut metrics = process.performance_metrics.lock().await;
                 metrics.last_update = Instant::now();

@@ -1203,7 +1203,7 @@ impl DeadlockDetector {
         let wait_graph = self.wait_graph.lock().await;
 
         // 简化的死锁检测算法
-        for (primitive, _) in wait_graph.iter() {
+        for primitive in wait_graph.keys() {
             if self.has_cycle(primitive, &wait_graph).await {
                 return Err(SyncError::DeadlockDetected(format!(
                     "Deadlock detected involving {}",
@@ -1292,7 +1292,7 @@ impl SyncPerformanceMonitor {
         let mut metrics_map = self.metrics.lock().await;
         let now = Instant::now();
 
-        for (_name, m) in metrics_map.iter_mut() {
+        for m in metrics_map.values_mut() {
             // 指标衰减，模拟时间窗口滑动
             m.throughput *= 0.9;
             m.latency = m.latency.saturating_mul(9) / 10;

@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-10-22
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.95.0+ (Edition 2024)
 > **状态**: ✅ 100% 完成
 > **概念说明**: 所有权系统是 Rust 最核心的特性，本示例集展示从基础规则到高级模式的完整所有权管理技术。
 
@@ -57,9 +57,19 @@
 | `aeneas_first_intro.rs` | Aeneas 验证入门 | 形式化验证 | `cargo run --example aeneas_first_intro` |
 | `ownership_verification.rs` | 所有权验证示例 | 定理证明 | `cargo run --example ownership_verification` |
 
-### Rust 1.93.0 特性示例 ⭐ NEW
+### Rust 1.95.0 特性示例 ⭐ NEW
 
-展示最新 Rust 版本的所有权相关改进。
+展示 Rust 1.95.0 版本的所有权与内存相关新 API。
+
+| 示例 | 描述 | 核心概念 | 运行命令 |
+|------|------|----------|----------|
+| `layout_api_demo.rs` | `Layout` 新 API | `dangling_ptr`、`repeat`、`extend_packed` | `cargo run --example layout_api_demo` |
+| `raw_ptr_ref_demo.rs` | 裸指针转引用 | `as_ref_unchecked`、`as_mut_unchecked` | `cargo run --example raw_ptr_ref_demo` |
+| `maybeuninit_cell_array_demo.rs` | `MaybeUninit`/`Cell` 数组转换 | 数组互转、`AsRef` | `cargo run --example maybeuninit_cell_array_demo` |
+
+### Rust 1.93.0 特性示例
+
+展示 Rust 1.93.0/1.94.0 版本的所有权相关改进。
 
 | 示例 | 描述 | 核心概念 | 运行命令 |
 |------|------|----------|----------|

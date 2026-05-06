@@ -79,7 +79,7 @@ fn main() {
 ```rust
 pub trait Summary {
     fn summarize(&self) -> String;
-    
+
     // 默认实现
     fn summarize_author(&self) -> String {
         String::from("(阅读更多...)")
@@ -103,7 +103,7 @@ impl Summary for NewsArticle {
 ```rust
 trait Iterator {
     type Item;  // 关联类型
-    
+
     fn next(&mut self) -> Option<Self::Item>;
 }
 
@@ -113,7 +113,7 @@ struct Counter {
 
 impl Iterator for Counter {
     type Item = u32;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         self.count += 1;
         if self.count < 6 {
@@ -128,14 +128,17 @@ impl Iterator for Counter {
 ## 依赖关系
 
 ### 上游依赖
+
 - `c01_ownership_borrow_scope`: 理解所有权后学习类型
 - `common`: 共享工具
 
 ### 下游依赖
+
 - `c04_generic`: 深入泛型编程
 - `c08_algorithms`: 算法中的类型应用
 
 ### 外部依赖
+
 ```toml
 [dependencies]
 c01_ownership_borrow_scope = { path = "../c01_ownership_borrow_scope" }
@@ -155,6 +158,11 @@ cargo run -p c02_type_system --bin ts
 
 # 运行示例
 cargo run -p c02_type_system --example type_system_example
+
+# Rust 1.95.0 新特性示例
+cargo run -p c02_type_system --example vec_push_mut_demo    # Vec::push_mut / insert_mut
+cargo run -p c02_type_system --example cold_path_demo       # core::hint::cold_path
+cargo run -p c02_type_system --example bool_try_from_demo   # bool: TryFrom<{integer}>
 ```
 
 ## 学习路径建议

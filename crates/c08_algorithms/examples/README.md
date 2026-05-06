@@ -1,7 +1,7 @@
 # C08 Algorithms - 示例程序
 
 > **版本**: 0.2.0
-> **Rust版本**: 1.92.0+
+> **Rust版本**: 1.95.0+
 > **最后更新**: 2025-12-25
 
 ## 📋 概述
@@ -38,6 +38,8 @@ cargo run --example algorithm_comprehensive_demo
 | **searching_algorithms_demo.rs**        | 搜索算法演示     | 线性搜索、二分搜索、并行搜索               |
 | **sorting_algorithms_demo.rs**          | 排序算法演示     | 快速排序、归并排序、堆排序等               |
 | **string_algorithms_demo.rs**           | 字符串算法演示   | KMP、Rabin-Karp、Aho-Corasick              |
+| **core_range_demo.rs**                  | `core::range` 模块演示 | `RangeInclusive` 新模块            |
+| **collections_mut_ref_demo.rs**         | 集合可变引用插入 | `VecDeque`/`LinkedList` `push_*_mut`       |
 
 ## 📖 详细说明
 

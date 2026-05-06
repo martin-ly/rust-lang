@@ -11,6 +11,8 @@
 
 编译期 `cfg` 条件选择，替代 `cfg-if` crate。
 
+> 📎 可运行示例: [`crates/c03_control_fn/examples/cfg_select_demo.rs`](../../../crates/c03_control_fn/examples/cfg_select_demo.rs)
+
 ```rust
 // 函数级条件编译
 cfg_select! {
@@ -37,6 +39,8 @@ let arch_str = cfg_select! {
 
 在 `match` arm 守卫中使用 `if let`：
 
+> 📎 知识文档: [`knowledge/02_intermediate/control_flow/if_let_guards.md`](../../../knowledge/02_intermediate/control_flow/if_let_guards.md)
+
 ```rust
 match value {
     Some(x) if let Ok(y) = parse(x) => println!("{}, {}", x, y),
@@ -53,6 +57,8 @@ use std::keyword as kw;  // 重命名关键字路径段
 
 ### 4. PowerPC/PowerPC64 内联汇编稳定化
 
+> 📎 可运行示例: [`crates/c11_macro_system/examples/ppc_asm_demo.rs`](../../../crates/c11_macro_system/examples/ppc_asm_demo.rs)
+
 ```rust
 #[cfg(any(target_arch = "powerpc", target_arch = "powerpc64"))]
 unsafe {
@@ -65,6 +71,8 @@ unsafe {
 ## 二、标准库新 API
 
 ### `core::range` 模块
+
+> 📎 可运行示例: [`crates/c08_algorithms/examples/core_range_demo.rs`](../../../crates/c08_algorithms/examples/core_range_demo.rs)
 
 | API | 示例 | 说明 |
 |-----|------|------|
@@ -81,6 +89,8 @@ for i in range {
 ```
 
 ### 原子操作 — `update` / `try_update`
+
+> 📎 可运行示例: [`crates/c05_threads/examples/atomic_update_demo.rs`](../../../crates/c05_threads/examples/atomic_update_demo.rs)
 
 封装 CAS 循环的原子更新：
 
@@ -108,6 +118,8 @@ counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 
 ### 集合 — 获取可变引用的插入操作
 
+> 📎 可运行示例: [`crates/c02_type_system/examples/vec_push_mut_demo.rs`](../../../crates/c02_type_system/examples/vec_push_mut_demo.rs) (Vec) | [`crates/c08_algorithms/examples/collections_mut_ref_demo.rs`](../../../crates/c08_algorithms/examples/collections_mut_ref_demo.rs) (VecDeque/LinkedList)
+
 ```rust
 use std::collections::{VecDeque, LinkedList};
 
@@ -130,6 +142,8 @@ head.push_str(" world");
 
 ### 裸指针 — 不安全转引用
 
+> 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/raw_ptr_ref_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/raw_ptr_ref_demo.rs)
+
 ```rust
 let ptr: *const i32 = &42;
 
@@ -141,6 +155,8 @@ let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 ```
 
 ### 布局计算 — `Layout` 新 API
+
+> 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs)
 
 ```rust
 use std::alloc::Layout;
@@ -161,6 +177,8 @@ let extended = layout.extend_packed(Layout::new::<u8>()).unwrap().0;
 
 ### 提示 — `cold_path`
 
+> 📎 可运行示例: [`crates/c02_type_system/examples/cold_path_demo.rs`](../../../crates/c02_type_system/examples/cold_path_demo.rs)
+
 分支预测标注：
 
 ```rust
@@ -176,6 +194,8 @@ fn handle_error(e: Option<&str>) {
 
 ### 布尔转换 — `TryFrom<{integer}>`
 
+> 📎 可运行示例: [`crates/c02_type_system/examples/bool_try_from_demo.rs`](../../../crates/c02_type_system/examples/bool_try_from_demo.rs)
+
 ```rust
 let b: bool = bool::try_from(1u8).unwrap(); // true
 let b0: bool = bool::try_from(0u8).unwrap(); // false
@@ -183,6 +203,8 @@ let err = bool::try_from(2u8); // Err(()) — 仅 0 和 1 有效
 ```
 
 ### `MaybeUninit` 数组互转
+
+> 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs)
 
 ```rust
 use std::mem::MaybeUninit;
@@ -195,6 +217,8 @@ let back: [MaybeUninit<i32>; 3] = uninit_arr.into();
 ```
 
 ### `Cell` 数组引用
+
+> 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs)
 
 ```rust
 use std::cell::Cell;

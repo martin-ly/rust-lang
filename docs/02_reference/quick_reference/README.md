@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-03-06
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.95.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 20 个主题速查；语法/模式可速查
 > **完整结构**: [DOCS_STRUCTURE_OVERVIEW](../../DOCS_STRUCTURE_OVERVIEW.md) § 2.2 quick_reference
@@ -54,7 +54,7 @@
     - [2025-12-11](#2025-12-11)
     - [2025-11-15](#2025-11-15)
     - [2025-10-30](#2025-10-30)
-  - [🆕 Rust 1.94 特性整合](#-rust-194-特性整合)
+  - [🆕 Rust 1.95 特性整合](#-rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
 
 ---
@@ -458,7 +458,7 @@
 - **交叉引用**: ✅ 所有20个速查卡已统一添加"相关资源"部分，包含官方文档、项目内部文档和相关速查卡链接
 - **相关示例代码**: ✅ 20 个速查卡（含 AI/ML，2026-02-13）
 - **反例速查**: ✅ 20/20 速查卡已补全「反例速查」小节（错误示例 + 原因 + 修正），模板见 [ANTI_PATTERN_TEMPLATE.md](./ANTI_PATTERN_TEMPLATE.md)（2026-02-12）
-- **版本一致性**: ✅ 所有速查卡已更新到 Rust 1.93.0+
+- **版本一致性**: ✅ 所有速查卡已更新到 Rust 1.95.0+
 
 ---
 
@@ -567,50 +567,53 @@
 
 **最后更新**: 2026-03-06
 **维护者**: 文档团队
-**状态**: ✅ **20/20 速查卡已更新至 Rust 1.94.0，包含 1.94 新特性章节**
+**状态**: ✅ **20/20 速查卡已更新至 Rust 1.95.0+，包含 1.95 新特性章节**
 
 🎯 **快速参考，高效开发！**
 
 ---
 
-## 🆕 Rust 1.94 特性整合
+## 🆕 Rust 1.95 特性整合
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.95.0+
 
 ### 核心特性速查
 
 ```rust
-// array_windows - 零分配滑动窗口
-data.array_windows::<3>()
-    .map(|[a, b, c]| a + b + c)
-    .collect()
-
-// ControlFlow - 提前终止控制
-use std::ops::ControlFlow;
-fn search(items: &[T]) -> ControlFlow<T, ()> {
-    for item in items {
-        if matches(item) {
-            return ControlFlow::Break(item.clone());
-        }
-    }
-    ControlFlow::Continue(())
+// cfg_select! - 编译期条件选择
+cfg_select! {
+    unix => fn os_specific() -> &'static str { "Unix" }
+    windows => fn os_specific() -> &'static str { "Windows" }
+    _ => fn os_specific() -> &'static str { "Other" }
 }
 
-// LazyLock - 延迟初始化优化
-use std::sync::LazyLock;
-static CONFIG: LazyLock<Config> = LazyLock::new(|| Config::load());
-pub fn get_config() -> Option<&'static Config> {
-    CONFIG.get()  // 热路径优化
+// if let guards on match arms
+match value {
+    Some(x) if let Ok(y) = parse(x) => println!("{}, {}", x, y),
+    Some(_) => println!("parse failed"),
+    None => println!("no value"),
 }
 
-// 数学常量 - 精确计算
-let phi = f64::consts::GOLDEN_RATIO;
-let gamma = f64::consts::EULER_GAMMA;
+// 原子操作 update / try_update
+use std::sync::atomic::{AtomicUsize, Ordering};
+let counter = AtomicUsize::new(5);
+counter.update(Ordering::Relaxed, Ordering::Relaxed, |c| c + 1);
+
+// Vec::push_mut / insert_mut
+let mut v = vec![1, 2];
+let elem: &mut i32 = v.push_mut(3);
+*elem += 10;
+
+// cold_path 分支预测提示
+use std::hint::cold_path;
+if let Some(msg) = e { cold_path(); eprintln!("error: {}", msg); }
 ```
 
-**性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
+**完整速查表**: [`rust_195_features_cheatsheet.md`](./rust_195_features_cheatsheet.md) — 包含所有 1.95 新 API 与示例链接
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+**性能提升**: `cold_path` 优化冷分支预测, `Atomic*::update` 减少 CAS 循环样板, `push_mut` 消除二次查找。
+
+**最后更新**: 2026-05-06 (深度整合 Rust 1.95 特性)
 
 ---
 

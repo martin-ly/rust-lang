@@ -103,7 +103,7 @@ fn demo_linkedlist_push_mut() {
     println!("  push_back_mut 后: {:?}", back);
 
     // 验证链表内容
-    let collected: Vec<_> = list.iter().map(|v| v.clone()).collect();
+    let collected: Vec<_> = list.iter().cloned().collect();
     println!("  链表内容: {:?}", collected);
     assert_eq!(collected, vec![vec![0xDE, 0xAD], vec![0xBE, 0xEF]]);
 }

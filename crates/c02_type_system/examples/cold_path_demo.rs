@@ -12,7 +12,6 @@
 
 use std::collections::HashMap;
 use std::hint::cold_path;
-use std::time::{Duration, Instant};
 
 // ==================== 示例 1: 基础用法 — 错误处理冷路径 ====================
 
@@ -114,6 +113,7 @@ impl RateLimiter {
         }
     }
 
+    #[allow(dead_code)]
     fn reset(&mut self) {
         self.requests = 0;
     }
@@ -129,10 +129,18 @@ fn demo_rate_limiter() {
 
     for i in 1..=5 {
         let allowed = limiter.allow();
-        println!("  请求 {}: {}", i, if allowed { "ALLOWED ✅" } else { "BLOCKED ❌" });
+        println!(
+            "  请求 {}: {}",
+            i,
+            if allowed {
+                "ALLOWED ✅"
+            } else {
+                "BLOCKED ❌"
+            }
+        );
     }
 
-    assert_eq!(limiter.allow(), false);
+    assert!(!limiter.allow());
 }
 
 // ==================== 示例 4: 与 #[cold] 函数的对比 ====================

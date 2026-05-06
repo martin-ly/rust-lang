@@ -517,6 +517,7 @@ cargo llvm-cov test --workspace --html
 ### 使用指南
 
 - **[算法综合演示程序](../../examples/algorithm_comprehensive_demo.rs)** ⭐ NEW! - 排序/搜索/图/动态规划/数据结构综合示例
+- **[Rust 1.95.0 集合可变引用示例](../examples/collections_mut_ref_demo.rs)** ⭐ NEW! - VecDeque/LinkedList push_*_mut
 - **[快速参考卡片](../../docs/02_reference/quick_reference/algorithms_cheatsheet.md)** ⭐ NEW! - 算法与数据结构速查卡
 
 ### 项目文档

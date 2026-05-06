@@ -51,10 +51,21 @@ cargo run --example advanced_type_system
 
 ---
 
+## 🆕 Rust 1.95.0 特性示例
+
+| 示例 | 描述 | 核心概念 | 运行命令 |
+|------|------|----------|----------|
+| `vec_push_mut_demo.rs` | `Vec::push_mut` / `insert_mut` | 获取元素可变引用 | `cargo run --example vec_push_mut_demo` |
+| `cold_path_demo.rs` | `core::hint::cold_path` | 分支预测优化 | `cargo run --example cold_path_demo` |
+| `bool_try_from_demo.rs` | `bool::TryFrom<{integer}>` | 布尔转换 | `cargo run --example bool_try_from_demo` |
+
+---
+
 ## 🔗 相关文档
 
 - [类型系统基础](../docs/tier_01_foundations/)
 - [类型系统概念族谱](../../../docs/research_notes/TYPE_SYSTEM_CONCEPT_MINDMAP.md)
+- [Rust 1.95 特性速查表](../../../docs/02_reference/quick_reference/rust_195_features_cheatsheet.md)
 
 ---
 

@@ -397,7 +397,7 @@ impl CspSystem {
             println!("╚══════════════════════════════════════════════════════════════════╝\n");
 
             let stats = self.stats.lock().await;
-            for (_, stat) in stats.iter() {
+            for stat in stats.values() {
                 stat.print();
                 println!();
             }

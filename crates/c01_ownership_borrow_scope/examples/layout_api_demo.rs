@@ -31,11 +31,11 @@ fn demo_dangling_ptr() {
     let dangling = layout_i32.dangling_ptr().as_ptr();
 
     println!("  Layout::new::<i32>().dangling_ptr() = {:p}", dangling);
-    println!("  指针对齐: {}", dangling as usize % mem::align_of::<i32>() == 0);
+    println!("  指针对齐: {}", (dangling as usize).is_multiple_of(mem::align_of::<i32>()));
 
     // dangling_ptr 返回 NonNull<u8>，保证非空且对齐正确
     assert!(!dangling.is_null());
-    assert_eq!(dangling as usize % mem::align_of::<i32>(), 0);
+    assert!((dangling as usize).is_multiple_of(mem::align_of::<i32>()));
 
     // ZST 场景: Vec<T> 在空时使用 dangling ptr 作为起始指针
     let layout_zst = Layout::new::<()>();
@@ -67,7 +67,7 @@ fn demo_layout_repeat() {
 
     // 验证: 步长 >= Item 大小，且是对齐的倍数
     assert!(item_offset >= mem::size_of::<Item>());
-    assert_eq!(item_offset % mem::align_of::<Item>(), 0);
+    assert!(item_offset.is_multiple_of(mem::align_of::<Item>()));
 }
 
 // ==================== 示例 3: Layout::repeat_packed ====================

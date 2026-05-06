@@ -74,7 +74,7 @@ fn demo_ffi_c_string() {
     println!("\n--- FFI: C 字符串指针转换 ---");
 
     // 模拟从 C 接收的字符串指针（已知非空且有效）
-    let c_str: *const u8 = b"Rust 1.95\0".as_ptr();
+    let c_str: *const u8 = c"Rust 1.95".as_ptr() as *const u8;
 
     unsafe {
         // as_ref_unchecked 将 *const u8 转为 &u8
@@ -103,13 +103,15 @@ fn demo_raw_slice_view() {
 
     struct RawSliceView<T> {
         ptr: *const T,
+        #[allow(dead_code)]
         len: usize,
     }
 
     impl<T> RawSliceView<T> {
         /// 获取指定索引的引用（unsafe: 调用者需保证索引有效）
         unsafe fn get_unchecked(&self, index: usize) -> &T {
-            self.ptr.add(index).as_ref_unchecked()
+            // SAFETY: 调用者保证索引在有效范围内
+            unsafe { self.ptr.add(index).as_ref_unchecked() }
         }
     }
 
@@ -133,14 +135,14 @@ fn demo_raw_slice_view() {
 fn demo_option_vs_unchecked() {
     println!("\n--- as_ref() Option 版 vs as_ref_unchecked() ---");
 
-    let value: f64 = 3.14159;
+    let value: f64 = std::f64::consts::PI;
     let ptr: *const f64 = &value;
     let null_ptr: *const f64 = std::ptr::null();
 
     // Option 版本: 安全，但需要解包
     let opt_ref: Option<&f64> = unsafe { ptr.as_ref() };
     println!("  ptr.as_ref(): {:?}", opt_ref);
-    assert_eq!(opt_ref, Some(&3.14159));
+    assert_eq!(opt_ref, Some(&std::f64::consts::PI));
 
     let null_opt: Option<&f64> = unsafe { null_ptr.as_ref() };
     println!("  null.as_ref(): {:?}", null_opt);
@@ -150,7 +152,7 @@ fn demo_option_vs_unchecked() {
     unsafe {
         let direct_ref: &f64 = ptr.as_ref_unchecked();
         println!("  ptr.as_ref_unchecked(): {}", direct_ref);
-        assert_eq!(*direct_ref, 3.14159);
+        assert_eq!(*direct_ref, std::f64::consts::PI);
     }
 
     println!("  ✅ 性能: as_ref_unchecked 避免 Option 分支");

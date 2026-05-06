@@ -20,18 +20,22 @@
 
 ---
 
-## 🆕 Rust 1.94 新特性索引
+## 🆕 Rust 1.95 新特性索引
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
-| `array_windows` | [01_fundamentals/iterators.md](01_fundamentals/iterators.md) | ✅ |
-| `LazyCell` / `LazyLock` | [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) | ✅ |
-| `char` → `usize` | [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) | ✅ |
-| 数学常量 (E, PI, PHI, LN2...) | [05_reference/math_constants.md](05_reference/math_constants.md) | ✅ |
-| `ControlFlow` | (整合到控制流文档) | ✅ |
-| `Peekable::next_if` | [01_fundamentals/iterators.md](01_fundamentals/iterators.md) | ✅ |
-| Edition 2024 | [06_ecosystem/edition_2024.md](06_ecosystem/edition_2024.md) | ✅ |
-| Miri Tree Borrows | [04_expert/miri/tree_borrows.md](04_expert/miri/tree_borrows.md) | ✅ |
+| `cfg_select!` | [03_advanced/macros/declarative.md](03_advanced/macros/declarative.md) | ✅ |
+| `if let guards` | [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/if_let_guards.md) | ✅ |
+| `Atomic*::update` / `try_update` | [03_advanced/concurrency/atomics.md](03_advanced/concurrency/atomics.md) | ✅ |
+| `Vec::push_mut` / `insert_mut` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ |
+| `VecDeque` / `LinkedList` `push_*_mut` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ |
+| `core::range` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ |
+| `*const/mut T::as_ref_unchecked` | [04_expert/unsafe_audit.md](04_expert/unsafe_audit.md) | ✅ |
+| `Layout::dangling_ptr` / `repeat` / `extend_packed` | [04_expert/unsafe_audit.md](04_expert/unsafe_audit.md) | ✅ |
+| `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/performance_optimization.md) | ✅ |
+| `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) | ✅ |
+| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/maybe_uninit.md) | ✅ |
+| PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/inline_asm.md) | ✅ |
 
 ---
 
@@ -89,6 +93,7 @@
 
 ### I
 
+- **if let guards** - [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/if_let_guards.md) - Rust 1.95
 - **installation** - [00_start/installation.md](00_start/installation.md)
 - **iterators** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md)
 
@@ -238,5 +243,5 @@
 ---
 
 **索引生成时间**: 2026-03-19
-**版本**: Rust 1.94.0
+**版本**: Rust 1.95.0+
 **状态**: ✅ 100% 完成

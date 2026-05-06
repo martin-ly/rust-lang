@@ -1,5 +1,6 @@
 # Content 与 Crates 映射指南
 
+> **Rust 版本**: 1.95.0+ (Edition 2024)
 > 连接前沿内容与核心学习模块
 
 ---
@@ -25,7 +26,7 @@ representations/ ────────▶  (知识表示)
 
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
-| `rust_195_roadmap.md` | C04 泛型 | 新泛型特性预览 |
+| [`rust_1_95_preview.md`](./emerging/rust_1_95_preview.md) | C04 泛型 | Rust 1.95 特性预览 |
 | `generic_const_items.md` | C04 泛型 | 泛型常量项目 |
 | `async_closures.md` | C06 异步 | 异步闭包 |
 | `coroutines.md` | C03 控制流 | 协程底层 |

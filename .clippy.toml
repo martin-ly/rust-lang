@@ -13,7 +13,7 @@ cognitive-complexity-threshold = 25
 ignore-interior-mutability = ["bytes::Bytes"]
 
 # MSRV - 与 Cargo.toml 保持一致
-msrv = "1.96.0"
+msrv = "1.95.0"
 
 # 允许测试中使用某些模式
 allow-dbg-in-tests = true

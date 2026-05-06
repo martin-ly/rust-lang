@@ -280,7 +280,7 @@ impl AsyncMessageSystem {
         let handlers = self.handlers.read().await;
         let mut processed = false;
 
-        for (_, handler) in handlers.iter() {
+        for handler in handlers.values() {
             if self.should_handle_message(handler.as_ref(), &message) {
                 match handler.handle_message(message.clone()).await {
                     Ok(_) => {

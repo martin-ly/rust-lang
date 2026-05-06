@@ -108,6 +108,7 @@ fn read_timestamp() -> u64 {
 
 /// 无操作（NOP）
 #[inline(always)]
+#[allow(dead_code)]
 fn arch_nop() {
     cfg_select! {
         any(target_arch = "powerpc", target_arch = "powerpc64") => {
@@ -150,10 +151,7 @@ fn read_processor_version() -> u32 {
 fn demo_memory_fence() {
     println!("--- 内存屏障 (Memory Fence) ---");
 
-    let mut data = 0u64;
-
-    // 写入数据
-    data = 42;
+    let data = 42u64;
 
     // 发出内存屏障，确保写入对其他 CPU 可见
     memory_fence();

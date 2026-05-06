@@ -1,6 +1,6 @@
 # Rust 知识中心
 
-> **Rust 版本**: 1.94.0
+> **Rust 版本**: 1.95.0
 > **Edition**: 2024
 > **更新策略**: 跟随官方稳定版，每版本更新
 
@@ -24,23 +24,26 @@
      └──────────────── 05_reference/ ←────────────────────┘
 ```
 
-## 🆕 最新更新 (Rust 1.94.0)
+## 🆕 最新更新 (Rust 1.95.0)
 
 | 特性 | 文档位置 | 状态 |
 |------|---------|------|
-| `array_windows` | [01_fundamentals/iterators.md](01_fundamentals/iterators.md) | ✅ 已更新 |
-| `LazyCell/LazyLock` | [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) | ✅ 已更新 |
-| `char` → `usize` | [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) | ✅ 已更新 |
-| 数学常量 | [05_reference/math_constants.md](05_reference/math_constants.md) | ✅ 已更新 |
-| `Peekable::next_if` | [01_fundamentals/iterators.md](01_fundamentals/iterators.md) | ✅ 已更新 |
-| Edition 2024 | [06_ecosystem/edition_2024.md](06_ecosystem/edition_2024.md) | 🔄 持续更新 |
+| `cfg_select!` | [03_advanced/macros/declarative.md](03_advanced/macros/declarative.md) | ✅ 已更新 |
+| `if let guards` | [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/if_let_guards.md) | ✅ 已更新 |
+| `Atomic*::update/try_update` | [03_advanced/concurrency/atomics.md](03_advanced/concurrency/atomics.md) | ✅ 已更新 |
+| `Vec::push_mut` / `insert_mut` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ 已更新 |
+| `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/performance_optimization.md) | ✅ 已更新 |
+| `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) | ✅ 已更新 |
+| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/maybe_uninit.md) | ✅ 已更新 |
+| PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/inline_asm.md) | ✅ 已更新 |
+| `core::range` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ 已更新 |
 
 ## 🔮 预览版本跟踪
 
 | 版本 | 预计发布 | 关键特性 | 准备状态 |
 |------|---------|---------|----------|
-| 1.95.0 | 2025-10 | `gen` 关键字 | 🔄 准备中 |
-| 1.96.0 | 2025-12 | TBD | ⏳ 等待 |
+| 1.96.0 | 2026-05-28 | 新 Range 类型, cargo script | 🔄 准备中 |
+| 1.97.0 | 2026-07 | TBD | ⏳ 等待 |
 
 ## 📖 如何使用
 
@@ -55,5 +58,5 @@
 
 ---
 
-**最后更新**: 2026-03-19
+**最后更新**: 2026-05-06
 **维护者**: Rust 学习项目团队

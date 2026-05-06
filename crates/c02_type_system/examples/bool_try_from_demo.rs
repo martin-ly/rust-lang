@@ -119,9 +119,9 @@ fn demo_config_parsing() {
     }
 
     println!("  解析结果: {:?}", config);
-    assert_eq!(config.debug_mode, true);
-    assert_eq!(config.enable_cache, false);
-    assert_eq!(config.strict_validation, true);
+    assert!(config.debug_mode);
+    assert!(!config.enable_cache);
+    assert!(config.strict_validation);
 }
 
 // ==================== 示例 4: 网络协议 — 二进制标志位 ====================
@@ -134,7 +134,7 @@ fn demo_network_protocol() {
     let flags: u8 = 0b0000_0101; // bits 0 和 2 被设置
 
     // 提取单个位并安全转换
-    let bit0 = bool::try_from((flags >> 0) & 1).unwrap();
+    let bit0 = bool::try_from(flags & 1).unwrap();
     let bit1 = bool::try_from((flags >> 1) & 1).unwrap();
     let bit2 = bool::try_from((flags >> 2) & 1).unwrap();
     let bit7 = bool::try_from((flags >> 7) & 1).unwrap();

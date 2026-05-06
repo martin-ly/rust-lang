@@ -145,7 +145,7 @@ impl ServiceRegistry {
         let mut services_guard = services.write().await;
         let now = SystemTime::now();
 
-        for (_, instances) in services_guard.iter_mut() {
+        for instances in services_guard.values_mut() {
             for instance in instances.iter_mut() {
                 if now
                     .duration_since(instance.last_heartbeat)

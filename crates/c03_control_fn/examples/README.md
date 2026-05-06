@@ -41,10 +41,19 @@ cargo run --example iterator_adapters
 
 ---
 
-## 🔗 相关文档
+## 🆕 Rust 1.95.0 特性示例
 
-- [控制流与函数指南](../docs/README.md)
+| 示例 | 描述 | 核心概念 | 运行命令 |
+|------|------|----------|----------|
+| `cfg_select_demo.rs` | `cfg_select!` 宏 | 编译期条件选择 | `cargo run --example cfg_select_demo` |
 
 ---
 
-*示例基于 Rust 1.94+，Edition 2024*
+## 🔗 相关文档
+
+- [控制流与函数指南](../docs/README.md)
+- [Rust 1.95 特性速查表](../../../docs/02_reference/quick_reference/rust_195_features_cheatsheet.md)
+
+---
+
+*示例基于 Rust 1.95.0+，Edition 2024*

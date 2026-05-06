@@ -320,7 +320,7 @@ impl ThreadAffinityManager {
         // 模拟收集性能统计
         let mut performance_stats = self.performance_stats.lock().expect("获取性能统计锁不应失败");
 
-        for (_thread_id, stats) in performance_stats.iter_mut() {
+        for stats in performance_stats.values_mut() {
             // 模拟更新CPU使用率
             stats.cpu_usage = (stats.cpu_usage + 0.1) % 1.0;
             stats.memory_usage = (stats.memory_usage + 0.05) % 1.0;

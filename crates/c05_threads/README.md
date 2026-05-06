@@ -403,7 +403,10 @@ demo::run_memory_analysis();
 ### 运行 Rust 1.93.0 特性演示
 
 ```bash
-# 运行 Rust 1.93.0 特性演示 ⭐ NEW
+# 运行 Rust 1.95.0 特性演示 ⭐ NEW
+cargo run -p c05_threads --example atomic_update_demo
+
+# 运行 Rust 1.93.0 特性演示
 cargo run -p c05_threads --example rust_192_features_demo
 
 # 运行 Rust 1.90 特性演示（历史参考）

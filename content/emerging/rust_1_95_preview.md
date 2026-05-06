@@ -1,14 +1,19 @@
-# Rust 1.95 预览特性
+# Rust 1.95 稳定特性
 
-> **版本**: Rust 1.95.0 (Beta)
-> **预计发布**: 2026年4月17日
-> **状态**: 🧪 Beta 测试阶段
+> **版本**: Rust 1.95.0 (Stable)
+> **发布日期**: 2026-04-16
+> **状态**: ✅ 已稳定
+
+---
+
+> ⚠️ 本文档最初为预览版，现已随 1.95.0 进入 stable 而更新。
+> 完整速查表请见 [`docs/02_reference/quick_reference/rust_195_features_cheatsheet.md`](../../docs/02_reference/quick_reference/rust_195_features_cheatsheet.md)。
 
 ---
 
 ## 📋 目录
 
-- [Rust 1.95 预览特性](#rust-195-预览特性)
+- [Rust 1.95 稳定特性](#rust-195-稳定特性)
   - [📋 目录](#-目录)
   - [🎯 版本概览](#-版本概览)
   - [🚀 主要新特性](#-主要新特性)

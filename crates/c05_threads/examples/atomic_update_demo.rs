@@ -77,7 +77,7 @@ fn demo_atomic_bool_update() {
     // 原子翻转
     let old = flag.update(Ordering::SeqCst, Ordering::SeqCst, |current| !current);
     println!("  翻转前: {}, 翻转后: {}", old, flag.load(Ordering::SeqCst));
-    assert_eq!(old, false);
+    assert!(!old);
     assert!(flag.load(Ordering::SeqCst));
 
     // try_update: 仅在当前为 true 时设为 false
