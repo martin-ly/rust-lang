@@ -334,7 +334,7 @@ mod tests {
         assert_eq!(count, 3);
         // 注意：不能 assume_init，因为只初始化了 3/5 元素
         // 这里仅验证不 panic
-        drop(uninit);
+        let _ = uninit;
     }
 
     #[test]
