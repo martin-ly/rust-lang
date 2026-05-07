@@ -98,7 +98,7 @@ pub mod quic_full {
 
         /// 运行服务器（阻塞）
         pub async fn run(&self) -> Result<(), String> {
-            println!("QUIC server listening on {}", self.endpoint.local_addr()?);
+            println!("QUIC server listening on {}", self.endpoint.local_addr().map_err(|e| e.to_string())?);
 
             while let Some(incoming) = self.endpoint.accept().await {
                 tokio::spawn(async move {
@@ -125,12 +125,16 @@ pub mod quic_full {
     }
 
     /// 处理单个 QUIC 连接
-    async fn handle_connection(connection: Connection) -> Result<(), Box<dyn std::error::Error>> {
+    async fn handle_connection(connection: Connection) -> Result<(), String> {
         loop {
             // 接受双向流
             match connection.accept_bi().await {
                 Ok((send, recv)) => {
-                    tokio::spawn(handle_stream(send, recv));
+                    tokio::spawn(async move {
+                        if let Err(e) = handle_stream(send, recv).await {
+                            eprintln!("流处理错误: {}", e);
+                        }
+                    });
                 }
                 Err(quinn::ConnectionError::ApplicationClosed(_)) => {
                     println!("连接正常关闭");
@@ -149,21 +153,19 @@ pub mod quic_full {
     async fn handle_stream(
         mut send: SendStream,
         mut recv: RecvStream,
-    ) -> Result<(), Box<dyn std::error::Error>> {
-        use tokio::io::{AsyncReadExt, AsyncWriteExt};
-
+    ) -> Result<(), String> {
         let mut buf = vec![0u8; 4096];
         loop {
-            match recv.read(&mut buf).await? {
+            match recv.read(&mut buf).await.map_err(|e| e.to_string())? {
                 Some(0) => break, // 流结束
                 Some(n) => {
                     // Echo 回传
-                    send.write_all(&buf[..n]).await?;
+                    send.write_all(&buf[..n]).await.map_err(|e| e.to_string())?;
                 }
                 None => break,
             }
         }
-        send.finish()?;
+        send.finish().map_err(|e| e.to_string())?;
         Ok(())
     }
 
@@ -179,7 +181,8 @@ pub mod quic_full {
     impl QuicEchoClient {
         /// 创建客户端
         pub fn new() -> Result<Self, String> {
-            let client_config = ClientConfig::with_platform_verifier();
+            let client_config = ClientConfig::try_with_platform_verifier()
+                .map_err(|e| format!("client config: {}", e))?;
 
             let mut endpoint = Endpoint::client("0.0.0.0:0".parse().unwrap())
                 .map_err(|e| format!("client endpoint: {}", e))?;
@@ -209,14 +212,12 @@ pub mod quic_full {
                 .map_err(|e| format!("open stream: {}", e))?;
 
             // 发送数据
-            use tokio::io::AsyncWriteExt;
             send.write_all(data).await.map_err(|e| e.to_string())?;
             send.finish().map_err(|e| e.to_string())?;
 
             // 读取响应
-            use tokio::io::AsyncReadExt;
-            let mut response = Vec::new();
-            recv.read_to_end(&mut response)
+            let response = recv
+                .read_to_end(64 * 1024)
                 .await
                 .map_err(|e| e.to_string())?;
 

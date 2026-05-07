@@ -41,6 +41,7 @@ rustls-pemfile = { workspace = true, optional = true }
 
 # QUIC / HTTP3 支持
 quinn = { version = "0.11", optional = true }
+rcgen = { version = "0.13", optional = true }
 
 # PCAP support (optional)
 pcap = { version = "2.2", optional = true }
@@ -60,7 +61,7 @@ io-uring = { version = "0.6", optional = true }
 [features]
 default = []
 tls = ["rustls", "rustls-pemfile"]
-quic = ["dep:quinn"]
+quic = ["dep:quinn", "dep:rcgen"]
 # io_uring 仅在 Linux 下有效
 io-uring = ["dep:tokio-uring", "dep:io-uring"]
 # PCAP-related features for conditional compilation

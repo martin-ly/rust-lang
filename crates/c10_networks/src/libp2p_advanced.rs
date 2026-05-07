@@ -102,21 +102,12 @@ pub mod swarm_builder {
         Ok(swarm)
     }
 
-    /// 构建内存传输 Swarm（测试用）
-    ///
-    /// # 注意
-    /// libp2p 0.54.1 中 `MemoryTransport` 的输出类型为 `Channel<Vec<u8>>`，
-    /// 需要经过 upgrade 才能与 `with_other_transport` 的 `(PeerId, Muxer)` 约束匹配。
-    /// 此处保留 API 签名，实际实现需配合 `libp2p::core::upgrade` 使用。
-    pub fn build_memory_swarm<B>(
-        _keypair: &libp2p::identity::Keypair,
-        _behaviour: B,
-    ) -> Result<Swarm<B>, String>
-    where
-        B: libp2p::swarm::NetworkBehaviour,
-    {
-        Err("MemoryTransport 在 libp2p 0.54.1 中需配合 upgrade 使用，详见文档".to_string())
-    }
+    // 构建内存传输 Swarm（测试用）
+    //
+    // # 注意
+    // libp2p 0.54.1 中 `MemoryTransport` 需经过 upgrade + authenticate + multiplex
+    // 才能满足 `Transport<Output = (PeerId, Muxer)>` 约束。教学代码中推荐使用
+    // `build_tcp_swarm` 配合回环地址 (`/ip4/127.0.0.1/tcp/0`) 进行本地测试。
 }
 
 // =========================================================================
