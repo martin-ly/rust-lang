@@ -1,7 +1,7 @@
 # 延迟初始化 (Lazy Initialization)
 
-> **版本**: Rust 1.94.0
-> **特性**: `LazyCell`, `LazyLock`
+> **版本**: Rust 1.96.0+ (accessors), `LazyCell`/`LazyLock` 类型稳定于 1.80
+> **特性**: `LazyCell`, `LazyLock`, `get`, `get_mut`, `force_mut`
 > **权威来源**: [Rust RFC](https://rust-lang.github.io/rfcs/2788-lazy-cell.html), [PLDI 2025 Tree Borrows](https://pldi25.sigplan.org/)
 
 ## 🎯 学习目标
@@ -413,5 +413,5 @@ fn main() {
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.94.0
-**最后更新**: 2026-03-19
+**对应 Rust 版本**: 1.96.0 (accessors) / 1.80.0 (types)
+**最后更新**: 2026-05-08

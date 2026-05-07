@@ -38,7 +38,7 @@
     - [陷阱 3: 忘记内存屏障](#陷阱-3-忘记内存屏障)
     - [陷阱 4: 平台假设](#陷阱-4-平台假设)
   - [总结](#总结)
-  - [🆕 Rust 1.94 在内联汇编中的应用](#-rust-194-在内联汇编中的应用)
+  - [Rust 1.95+ 在内联汇编中的应用](#-rust-194-在内联汇编中的应用)
     - [LazyLock 在汇编优化缓存中的应用](#lazylock-在汇编优化缓存中的应用)
     - [ControlFlow 在汇编错误处理中的应用](#controlflow-在汇编错误处理中的应用)
     - [数学常量在 SIMD 优化中的应用](#数学常量在-simd-优化中的应用)
@@ -646,14 +646,14 @@ pub fn get_cycle_count() -> u64 {
 
 ---
 
-**最后更新**: 2026-02-28
+**最后更新**: 2026-05-08
 **参考**: [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)
 
 ---
 
-## 🆕 Rust 1.94 在内联汇编中的应用
+## Rust 1.95+ 在内联汇编中的应用
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.95.0+
 
 ### LazyLock 在汇编优化缓存中的应用
 
@@ -716,7 +716,7 @@ pub fn aligned_buffer_size(min_size: usize) -> usize {
 
 **最佳实践**: 在内联汇编中使用 LazyLock 缓存 CPU 特性检测结果，避免重复执行 cpuid 指令。
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.95+ 特性)
+**最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
 
 ---
 

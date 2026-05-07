@@ -2,8 +2,8 @@
 
 **模块**: C06 Async
 **创建日期**: 2025-12-11
-**最后更新**: 2026-02-15
-**Rust 版本**: 1.94.0+ (Edition 2024)
+**最后更新**: 2026-05-08
+**Rust 版本**: 1.95.0+ (Edition 2024)
 **状态**: ✅ 已完成
 
 ---
@@ -32,7 +32,7 @@
     - [3. 背压处理](#3-背压处理)
   - [🔧 错误处理](#-错误处理)
     - [异步错误传播](#异步错误传播)
-    - [Rust 1.94 ControlFlow API 高级错误控制](#rust-194-controlflow-api-高级错误控制)
+    - [Rust 1.95+ ControlFlow API 高级错误控制](#rust-194-controlflow-api-高级错误控制)
       - [为什么使用 ControlFlow？](#为什么使用-controlflow)
       - [异步流控制：批量任务处理](#异步流控制批量任务处理)
       - [递归遍历与短路求值](#递归遍历与短路求值)
@@ -355,7 +355,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
-### Rust 1.94 ControlFlow API 高级错误控制
+### Rust 1.95+ ControlFlow API 高级错误控制
 
 Rust 1.94 标准库大幅增强了 `std::ops::ControlFlow<B, C>` 类型，使其成为异步错误处理和流控制的强大工具。与 `Result` 只能表示成功/失败不同，`ControlFlow` 可以显式表达三种语义：
 
@@ -688,7 +688,7 @@ impl Response {
 }
 ```
 
-> **Rust 1.94 重要更新**：`ControlFlow` 现在实现了 `Iterator::try_fold` 的更高效版本，在迭代器链中使用 `ControlFlow` 进行短路操作不再分配额外内存，性能比 `Result` 方案提升 15-20%。
+> **Rust 1.95+ 重要更新**：`ControlFlow` 现在实现了 `Iterator::try_fold` 的更高效版本，在迭代器链中使用 `ControlFlow` 进行短路操作不再分配额外内存，性能比 `Result` 方案提升 15-20%。
 
 ---
 
@@ -1491,7 +1491,7 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 
 ## 🆕 Rust 1.95+ 特性
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.95.0+
 
 ### ControlFlow 在异步编程中的应用
 
@@ -1544,7 +1544,7 @@ async fn parse_number(chars: &mut Peekable<impl Iterator<Item = char>>) -> Optio
 }
 ```
 
-**最后更新**: 2026-03-14 (添加 Rust 1.95+ 特性)
+**最后更新**: 2026-05-08 (添加 Rust 1.95+ 特性)
 
 ---
 
@@ -1567,4 +1567,4 @@ async fn parse_number(chars: &mut Peekable<impl Iterator<Item = char>>) -> Optio
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 完整实现 (Week 15 形式化引用补全)
-**最后更新**: 2026-02-27
+**最后更新**: 2026-05-08

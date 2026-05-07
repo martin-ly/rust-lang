@@ -2,8 +2,8 @@
 
 **模块**: C12 WASM
 **创建日期**: 2025-12-11
-**最后更新**: 2026-02-15
-**Rust 版本**: 1.94.0+ (Edition 2024)
+**最后更新**: 2026-05-08
+**Rust 版本**: 1.95.0+ (Edition 2024)
 **状态**: ✅ 已完成
 
 ---
@@ -41,7 +41,7 @@
     - [场景4: 插件系统](#场景4-插件系统)
   - [形式化链接](#形式化链接)
   - [📚 相关文档](#-相关文档)
-  - [🆕 Rust 1.94 在 WASM 开发中的应用](#-rust-194-在-wasm-开发中的应用)
+  - [Rust 1.95+ 在 WASM 开发中的应用](#-rust-194-在-wasm-开发中的应用)
     - [array\_windows 在图像处理中的应用](#array_windows-在图像处理中的应用)
     - [LazyLock 在 WASM 状态管理中的应用](#lazylock-在-wasm-状态管理中的应用)
 
@@ -390,9 +390,9 @@ pub fn process(data: &str) -> String {
 - [WASM 指南](../../crates/c12_wasm/docs/tier_02_guides/01_wasm_基础指南.md)
 - [JavaScript 互操作](../../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
 
-## 🆕 Rust 1.94 在 WASM 开发中的应用
+## Rust 1.95+ 在 WASM 开发中的应用
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.95.0+
 
 ### array_windows 在图像处理中的应用
 
@@ -433,10 +433,10 @@ pub fn get_state_json() -> String {
 
 **性能提示**: WASM 环境下，`array_windows` 的零分配特性尤为重要。
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.95+ 特性)
+**最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 完整实现
-**最后更新**: 2026-01-26
+**最后更新**: 2026-05-08

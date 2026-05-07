@@ -449,6 +449,27 @@ impl CollectionMutMethodsExamples {
 // 测试
 // ============================================================================
 
+// ============================================================================
+// cfg_select! 宏 — 编译时平台选择 (Rust 1.95 stable)
+// ============================================================================
+
+/// # `cfg_select!` 宏
+///
+/// `cfg_select!` 是 Rust 1.95.0 稳定的编译时条件选择宏。
+/// 在类型系统中，它可用于编译期选择平台相关的常量。
+pub struct CfgSelectTypeExamples;
+
+impl CfgSelectTypeExamples {
+    /// 平台相关的最大数组长度提示
+    pub fn platform_array_hint() -> usize {
+        cfg_select! {
+            target_pointer_width = "64" => { usize::MAX / 16 }
+            target_pointer_width = "32" => { usize::MAX / 8 }
+            _ => { 1024 * 1024 }
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

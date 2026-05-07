@@ -2,8 +2,8 @@
 
 **模块**: C05 Threads
 **创建日期**: 2025-12-11
-**最后更新**: 2026-02-15
-**Rust 版本**: 1.94.0+ (Edition 2024)
+**最后更新**: 2026-05-08
+**Rust 版本**: 1.95.0+ (Edition 2024)
 **状态**: ✅ 已完成
 
 ---
@@ -1219,7 +1219,7 @@ let counter = Arc::new(Mutex::new(0));
 
 ## 🆕 Rust 1.95+ 特性
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.95.0+
 
 ### LazyLock 深度应用（Rust 1.94 增强）
 
@@ -1379,7 +1379,7 @@ static RUNTIME_CONFIG: LazyLock<HashMap<String, String>> = LazyLock::new(|| {
     map
 });
 
-/// 高效配置读取（Rust 1.94 模式）
+/// 高效配置读取（Rust 1.95+ 模式）
 pub fn get_config(key: &str) -> Option<&'static str> {
     // 先检查运行时配置（热路径）
     if let Some(value) = LazyLock::get(&RUNTIME_CONFIG)
@@ -1484,7 +1484,7 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
 2. **缓存友好**: 固定大小窗口允许编译器生成更高效的 SIMD 指令
 3. **线程安全**: 返回的值是 Copy 类型，可安全在线程间传递
 
-**最后更新**: 2026-03-14 (添加 Rust 1.95+ 特性)
+**最后更新**: 2026-05-08 (添加 Rust 1.95+ 特性)
 
 ---
 

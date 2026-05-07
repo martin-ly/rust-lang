@@ -1,20 +1,107 @@
-//! # Never 类型 (`!`) 深度专题 (nightly-only, 非 1.96 stable)
+//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
 //!
-//! ⚠️ **注意**: 完整的 `!` 类型支持仍需 nightly 编译器 (`#![feature(never_type)]`)。
-//! 在 stable Rust 中，`!` 的部分行为已通过 edition 2024 的 fallback 改进可用，
-//! 但 `Result<T, !>` 等完整用法在 stable 上可能受限。
+//! 本模块包含 Rust 1.96.0 稳定版的类型系统增强：
+//! - `impl From<bool> for {f32, f64}` — 布尔到浮点安全转换 ⭐
+//! - `VecDeque::new` 的 const 上下文支持 — 常量初始化集合 ⭐
 //!
-//! # Rust 2024 Edition Never 类型 (`!`) 深度专题
+//! 以及 nightly-only 的 Never 类型 (`!`) 深度专题（供前瞻学习）。
 //!
-//! `!`（never type）是 Rust 中最特殊的类型之一，表示"永远不会返回的值"。
-//! 在 Rust 2024 Edition 中，never 类型的使用场景进一步扩展，
-//! 配合更完善的类型推导和穷尽性检查，使代码更安全、更简洁。
+//! # 版本信息
+//! - Rust版本: 1.96.0+ (stable features) / nightly (`!` type)
+//! - 稳定日期: 2026-05-XX
+//! - Edition: 2024
 //!
-//! ## 核心特性
-//! - `!` 可以强制转换为任何类型（coerce to any type）
-//! - 在 `match` 中启用更精确的穷尽性检查
-//! - `Result<T, !>` 表示"不可能出错"的操作
-//! - `Option<!>` 表示"不可能存在"的值
+//! # Rust 1.96.0 类型系统新特性
+
+// ============================================================================
+// 1. `impl From<bool> for {f32, f64}` — 布尔到浮点转换 (1.96 stable)
+// ============================================================================
+
+/// # 布尔到浮点转换 (`From<bool> for f32/f64`)
+///
+/// Rust 1.96.0 稳定了 `impl From<bool> for f32` 和 `impl From<bool> for f64`，
+/// 允许将 `bool` 直接转换为 `0.0` (false) 或 `1.0` (true)。
+///
+/// ## 类型系统意义
+/// 这是 Rust 类型一致性 (type coherence) 的进一步完善：
+/// - `bool` 已实现 `From<bool> for {integer}` (1.75 stable)
+/// - 1.96 补全了对浮点类型的对称转换
+/// - 统一了数值类型从 `bool` 的转换接口
+///
+/// ## 应用场景
+/// - 机器学习特征向量构建 (0.0/1.0 特征)
+/// - 概率计算中的指示函数
+/// - 传感器数据处理 (布尔状态 → 浮点信号)
+pub struct BoolToFloatConversionExamples;
+
+impl BoolToFloatConversionExamples {
+    /// 将布尔数组转换为 f64 特征向量
+    pub fn bool_vector_to_features(flags: &[bool]) -> Vec<f64> {
+        flags.iter().map(|&b| f64::from(b)).collect()
+    }
+
+    /// 条件概率指示函数: P(A) ≈ mean(indicator_A)
+    pub fn indicator(probability: f64, condition: bool) -> f64 {
+        if condition { probability } else { f64::from(false) }
+    }
+
+    /// 传感器布尔状态转换为模拟信号强度
+    pub fn sensor_status_to_signal(active: bool, base_strength: f64) -> f64 {
+        f64::from(active) * base_strength
+    }
+}
+
+// ============================================================================
+// 2. `VecDeque::new` 的 const 上下文支持 (1.96 stable)
+// ============================================================================
+
+use std::collections::VecDeque;
+
+/// # `VecDeque::new` const 支持
+///
+/// Rust 1.96.0 使 `VecDeque::new` 可在 `const` 上下文中调用，
+/// 允许在编译期初始化双端队列常量。
+///
+/// ## 类型系统意义
+/// 这是 `const fn` 能力向标准库集合的持续扩展，
+/// 使得更多数据结构可以在编译期构造，减少运行时初始化开销。
+///
+/// ## 限制
+/// - 仅 `new()` 为 const，其他操作（push/pop）仍非常量
+/// - 需要 `const Mutex` 或 `static` + `LazyLock` 才能实现真正的编译期全局队列
+pub struct ConstVecDequeExamples;
+
+impl ConstVecDequeExamples {
+    /// 编译期初始化的空 VecDeque 常量
+    pub const EMPTY_QUEUE: VecDeque<i32> = VecDeque::new();
+
+    /// 使用 const VecDeque 构建静态配置
+    pub fn build_static_config() -> VecDeque<&'static str> {
+        // 注意: 在 stable Rust 中，const VecDeque 只能初始化，
+        // 修改需要结合 LazyLock 或运行时初始化
+        VecDeque::new()
+    }
+}
+
+// ============================================================================
+// Never 类型 (`!`) 深度专题 (nightly-only, 非 1.96 stable)
+// ============================================================================
+
+// ⚠️ **注意**: 完整的 `!` 类型支持仍需 nightly 编译器 (`#![feature(never_type)]`)。
+// 在 stable Rust 中，`!` 的部分行为已通过 edition 2024 的 fallback 改进可用，
+// 但 `Result<T, !>` 等完整用法在 stable 上可能受限。
+//
+// # Rust 2024 Edition Never 类型 (`!`) 深度专题
+//
+// `!`（never type）是 Rust 中最特殊的类型之一，表示"永远不会返回的值"。
+// 在 Rust 2024 Edition 中，never 类型的使用场景进一步扩展，
+// 配合更完善的类型推导和穷尽性检查，使代码更安全、更简洁。
+//
+// ## 核心特性
+// - `!` 可以强制转换为任何类型（coerce to any type）
+// - 在 `match` 中启用更精确的穷尽性检查
+// - `Result<T, !>` 表示"不可能出错"的操作
+// - `Option<!>` 表示"不可能存在"的值
 
 // ==================== 示例 1: 基础 Never 类型 ====================
 

@@ -379,6 +379,24 @@ impl NamedTaskExamples {
 // 测试
 // ============================================================================
 
+// ============================================================================
+// cfg_select! 宏 — 编译时平台选择 (Rust 1.95 stable)
+// ============================================================================
+
+/// # `cfg_select!` 宏
+///
+/// `cfg_select!` 是 Rust 1.95.0 稳定的编译时条件选择宏。
+/// 在异步编程中，可用于编译期选择平台相关的运行时配置。
+pub struct CfgSelectAsyncExamples;
+
+impl CfgSelectAsyncExamples {
+    /// 平台相关的默认异步任务通道容量
+    pub const DEFAULT_CHANNEL_CAPACITY: usize = cfg_select! {
+        target_arch = "wasm32" => { 4 }
+        _ => { 1024 }
+    };
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

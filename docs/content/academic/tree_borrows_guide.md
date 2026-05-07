@@ -220,5 +220,5 @@ MIRIFLAGS="-Zmiri-stacked-borrows" cargo miri test
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
+**最后更新**: 2026-05-08
 **状态**: 🔄 学术前沿跟踪中

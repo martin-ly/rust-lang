@@ -155,5 +155,5 @@ impl MyAsyncTrait for MyStruct {
 
 ---
 
-**最后更新**: 2026-03-15
+**最后更新**: 2026-05-08
 **状态**: 🧪 Beta 预览

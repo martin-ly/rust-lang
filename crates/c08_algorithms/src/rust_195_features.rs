@@ -143,6 +143,28 @@ impl AlgorithmColdPathExamples {
 // 测试
 // ============================================================================
 
+// ============================================================================
+// cfg_select! 宏 — 编译时平台选择 (Rust 1.95 stable)
+// ============================================================================
+
+/// # `cfg_select!` 宏
+///
+/// `cfg_select!` 是 Rust 1.95.0 稳定的编译时条件选择宏。
+/// 在算法优化中，可用于编译期选择平台相关的缓存行大小，
+/// 指导伪共享 (false sharing) 避免策略。
+pub struct CfgSelectAlgorithmExamples;
+
+impl CfgSelectAlgorithmExamples {
+    /// 平台相关的缓存行大小 (bytes)
+    ///
+    /// 用于对齐并发数据结构以避免伪共享。
+    pub const CACHE_LINE_SIZE: usize = cfg_select! {
+        any(target_arch = "x86_64", target_arch = "aarch64") => { 64 }
+        target_arch = "powerpc64" => { 128 }
+        _ => { 64 }
+    };
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

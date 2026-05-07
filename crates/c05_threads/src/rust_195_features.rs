@@ -373,6 +373,26 @@ impl ScopeTlsExamples {
 // 测试
 // ============================================================================
 
+// ============================================================================
+// cfg_select! 宏 — 编译时平台选择 (Rust 1.95 stable)
+// ============================================================================
+
+/// # `cfg_select!` 宏
+///
+/// `cfg_select!` 是 Rust 1.95.0 稳定的编译时条件选择宏。
+/// 在线程编程中，可用于编译期选择平台相关的线程栈大小默认值。
+pub struct CfgSelectThreadExamples;
+
+impl CfgSelectThreadExamples {
+    /// 平台相关的默认线程栈大小 (bytes)
+    pub const DEFAULT_STACK_SIZE: usize = cfg_select! {
+        target_os = "linux" => { 2 * 1024 * 1024 }
+        target_os = "macos" => { 2 * 1024 * 1024 }
+        target_os = "windows" => { 1 * 1024 * 1024 }
+        _ => { 512 * 1024 }
+    };
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

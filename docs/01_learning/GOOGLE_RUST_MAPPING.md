@@ -40,7 +40,7 @@ Google Comprehensive Rust 分为 4 天：
 | 标量类型 | `crates/c02_type_system/src/primitive_types/scalar_types/` | 额外包含位操作、字节操作、增强整数类型 |
 | 复合类型 | `crates/c02_type_system/src/primitive_types/compound_types/` | 额外包含数组高级用法、元组解构 |
 | 函数 | `crates/c03_control_fn/src/function/` | 额外包含泛型函数、const fn、async fn |
-| 控制流 | `crates/c03_control_fn/src/control_struct/` | 额外包含 Rust 1.94+ 控制流新特性 |
+| 控制流 | `crates/c03_control_fn/src/control_struct/` | 额外包含 Rust 1.95+ 控制流新特性 |
 | 所有权 | `crates/c01_ownership_borrow_scope/src/ownership/` | **核心差异**: 本项目包含更深入的内存布局分析 |
 | 借用 | `crates/c01_ownership_borrow_scope/src/borrow_checker/` | 额外包含 NLL、Polonius 概念介绍 |
 | 字符串 | `crates/c02_type_system/src/primitive_types/scalar_types/string/` | 额外包含 String 性能优化指南 |

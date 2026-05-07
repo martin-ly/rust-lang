@@ -1,8 +1,8 @@
 ﻿# Rust 项目最佳实践指南
 
 > **创建日期**: 2025-12-11
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **最后更新**: 2026-05-08
+> **Rust 版本**: 1.95.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 >
 > **研究笔记写作最佳实践** → [research_notes/BEST_PRACTICES.md](../research_notes/BEST_PRACTICES.md)
@@ -68,7 +68,7 @@
     - [官方资源](#官方资源)
     - [在线课程 (Coursera)](#在线课程-coursera)
     - [项目资源](#项目资源)
-  - [🆕 Rust 1.94 最佳实践（深度指南）](#-rust-194-最佳实践深度指南)
+  - [Rust 1.95+ 最佳实践（深度指南）](#-rust-194-最佳实践深度指南)
     - [1. array\_windows - 零开销滑动窗口](#1-array_windows---零开销滑动窗口)
       - [什么时候使用 array\_windows？](#什么时候使用-array_windows)
       - [最佳实践示例](#最佳实践示例)
@@ -1186,9 +1186,9 @@ println!("运行时长: {:?}", stopped.duration());
 - [C05 线程与并发](../../crates/c05_threads/docs/00_MASTER_INDEX.md)
 - [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md)
 
-## 🆕 Rust 1.94 最佳实践（深度指南）
+## Rust 1.95+ 最佳实践（深度指南）
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.95.0+
 
 ---
 
@@ -1476,7 +1476,7 @@ let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.94 最佳实践)
+**最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 最佳实践)
 
 ---
 
@@ -1487,7 +1487,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ## 🆕 新增最佳实践
 
-> **最后更新**: 2026-04-10
+> **最后更新**: 2026-05-08
 
 ---
 
@@ -1920,7 +1920,7 @@ fn process_with_control_flow(data: &[i64]) -> ControlFlow<Error, Vec<i64>> {
 
 ---
 
-**新增最佳实践** | **最后更新**: 2026-04-10 | **状态**: ✅ 已完成
+**新增最佳实践** | **最后更新**: 2026-05-08 | **状态**: ✅ 已完成
 
 ---
 

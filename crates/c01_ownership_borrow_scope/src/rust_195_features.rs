@@ -464,6 +464,27 @@ impl<const N: usize, const SIZE: usize> Default for BufferPool<N, SIZE> {
 // 测试
 // ============================================================================
 
+// ============================================================================
+// cfg_select! 宏 — 编译时平台选择 (Rust 1.95 stable)
+// ============================================================================
+
+/// # `cfg_select!` 宏
+///
+/// `cfg_select!` 是 Rust 1.95.0 稳定的编译时条件选择宏，
+/// 用于在编译期根据 `cfg` 条件选择不同实现。
+pub struct CfgSelectOwnershipExamples;
+
+impl CfgSelectOwnershipExamples {
+    /// 平台相关的默认内存对齐要求
+    pub fn default_alignment() -> usize {
+        std::hint::black_box(cfg_select! {
+            target_pointer_width = "64" => { 8 }
+            target_pointer_width = "32" => { 4 }
+            _ => { 4 }
+        })
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

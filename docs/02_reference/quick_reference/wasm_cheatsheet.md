@@ -2,8 +2,8 @@
 
 > **快速参考** | [完整文档](../../../crates/c12_wasm/docs/README.md) | [代码示例](../../../crates/c12_wasm/examples/README.md)
 > **创建日期**: 2026-01-27
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **最后更新**: 2026-05-08
+> **Rust 版本**: 1.95.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -44,7 +44,7 @@
     - [相关速查卡](#相关速查卡)
   - [🆕 Rust 1.95+ 特性整合](#-rust-194-特性整合)
     - [核心特性速查](#核心特性速查)
-  - [🆕 Rust 1.94 在WASM中的深度应用](#-rust-194-在wasm中的深度应用)
+  - [Rust 1.95+ 在WASM中的深度应用](#-rust-194-在wasm中的深度应用)
     - [array\_windows 在 WASM 图像处理中的应用](#array_windows-在-wasm-图像处理中的应用)
     - [LazyLock 在 WASM 状态管理中的应用](#lazylock-在-wasm-状态管理中的应用)
     - [性能提升总结](#性能提升总结)
@@ -426,7 +426,7 @@ pub fn process_task(task_json: &str) -> String {
 
 ---
 
-**最后更新**: 2026-02-20
+**最后更新**: 2026-05-08
 **Rust 版本**: 1.93.1+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档
 
@@ -434,7 +434,7 @@ pub fn process_task(task_json: &str) -> String {
 
 ## 🆕 Rust 1.95+ 特性整合
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.95.0+
 
 ### 核心特性速查
 
@@ -469,7 +469,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.95+ 特性)
+**最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
 
 ---
 
@@ -477,9 +477,9 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 🆕 Rust 1.94 在WASM中的深度应用
+## Rust 1.95+ 在WASM中的深度应用
 
-> **适用版本**: Rust 1.94.0+ | **实际场景**: WASM开发
+> **适用版本**: Rust 1.95.0+ | **实际场景**: WASM开发
 
 ### array_windows 在 WASM 图像处理中的应用
 
@@ -523,7 +523,7 @@ pub fn get_state() -> String {
 | `LazyLock` | 延迟初始化、缓存 | 启动-80%，热路径优化 |
 | `f64::consts` | 数值计算 | 精度保证 |
 
-**最后更新**: 2026-03-14 (WASM场景深度整合)
+**最后更新**: 2026-05-08 (WASM场景深度整合)
 
 ---
 

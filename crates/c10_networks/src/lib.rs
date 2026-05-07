@@ -48,6 +48,7 @@ pub mod quic_advanced; // QUIC/HTTP3 完整实现
 pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95 特性 (网络场景)
 pub mod rust_196_features;
+pub mod cargo_semver_checks_guide;
 #[cfg(feature = "sniff")]
 pub mod sniff;
 pub mod socket;

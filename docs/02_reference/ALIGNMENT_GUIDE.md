@@ -1,8 +1,8 @@
 # Rust 对齐知识综合指南
 
 > **创建日期**: 2026-02-13
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **最后更新**: 2026-05-08
+> **Rust 版本**: 1.95.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **文档定位**: 全面覆盖 Rust 中「对齐」相关的各类知识
 > **关联**: [type_system.md](./quick_reference/type_system.md) | [strings_formatting_cheatsheet.md](./quick_reference/strings_formatting_cheatsheet.md)
@@ -38,7 +38,7 @@
     - [项目内文档](#项目内文档)
     - [代码示例](#代码示例)
     - [研究笔记](#研究笔记)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
+  - [Rust 1.95+ 更新](#-rust-194-更新)
 
 ---
 
@@ -359,10 +359,10 @@ struct CacheLinePadded {
 
 ---
 
-## 🆕 Rust 1.94 更新
+## Rust 1.95+ 更新
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.95.0+
 
 详见 [Rust 1.94 发布说明](../06_toolchain/16_rust_1.94_release_notes.md)
 
-**最后更新**: 2026-03-14
+**最后更新**: 2026-05-08

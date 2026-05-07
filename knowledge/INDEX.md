@@ -103,8 +103,8 @@
 
 ### L
 
-- **LazyCell** - [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) - Rust 1.94
-- **LazyLock** - [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) - Rust 1.94
+- **LazyCell** - [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) - Rust 1.96 (`get`, `get_mut`, `force_mut` accessors)
+- **LazyLock** - [03_advanced/lazy_initialization.md](03_advanced/lazy_initialization.md) - Rust 1.96 (`get`, `get_mut`, `force_mut` accessors)
 - **learning roadmap** - [00_start/learning_roadmap.md](00_start/learning_roadmap.md)
 - **lifetimes** - [01_fundamentals/lifetimes.md](01_fundamentals/lifetimes.md)
 - **LRU Cache** - [99_archive/case_studies.md](99_archive/case_studies.md)
@@ -199,7 +199,7 @@
 04_expert/miri/tree_borrows.md
 ```
 
-### Rust 1.94 特性追踪 🆕
+### Rust 1.95+ 特性追踪 🆕
 
 ```
 01_fundamentals/iterators.md (array_windows, next_if) →
@@ -238,10 +238,10 @@
 - **总文档数**: 43 篇
 - **总代码行数**: 16,425 行
 - **总字符数**: 333,668 字符
-- **Rust 1.94 特性**: 100% 覆盖
+- **Rust 1.95+ 特性**: 100% 覆盖
 
 ---
 
-**索引生成时间**: 2026-03-19
+**索引生成时间**: 2026-05-08
 **版本**: Rust 1.95.0+
 **状态**: ✅ 100% 完成

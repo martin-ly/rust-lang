@@ -3,7 +3,7 @@
 > **当前活跃版本**: Rust 1.95.0+ (Edition 2024)
 > **最后更新**: 2026-05-08
 > **文档性质**: 活文档 (Living Document)
-> **对齐状态**: ⚠️ 1.95 特性补充中
+> **对齐状态**: 🟢 1.95/1.96 特性对齐完成
 
 ---
 
@@ -12,7 +12,7 @@
 | 版本 | 状态 | 发布日期 | 特性数量 | 归档位置 |
 |------|------|----------|----------|----------|
 | 1.95 | 🟢 活跃维护 | 2026-04 | 8+ | crates/*/src/rust_195_features.rs |
-| 1.94 | 🟡 已归档 | 2026-02 | 5+ | crates/*/src/archive/ |
+| 1.96 | 🟢 活跃维护 | 2026-05 | 5+ | crates/*/src/rust_196_features.rs |
 | 1.93 | 🟡 已归档 | 2025-12 | 8+ | crates/*/src/archive/ |
 | 1.92 | 🟡 已归档 | 2025-11 | 6+ | crates/*/src/archive/ |
 | 1.91 | 🟡 已归档 | 2025-10 | 4+ | crates/*/src/archive/ |
@@ -67,7 +67,16 @@ rust-lang/
 
 ### 按版本导航
 
-#### Rust 1.94 (当前版本)
+#### Rust 1.96 (当前版本)
+
+- [1.96 完整发布说明](docs/06_toolchain/16_rust_1.96_release_notes.md)
+- [1.95 迁移指南](docs/05_guides/RUST_195_MIGRATION_GUIDE.md)
+- [1.96 研究笔记](docs/research_notes/RUST_196_RESEARCH_UPDATE.md)
+- [1.95+ 综合应用指南](guides/RUST_195_COMPREHENSIVE_GUIDE.md)
+- [1.96 对齐完成报告](RUST_196_ALIGNMENT_COMPLETE_REPORT.md)
+- [1.95 vs 1.96 对比](docs/06_toolchain/17_rust_1.95_vs_1.96_comparison.md)
+
+#### Rust 1.94 (已归档)
 
 - [1.94 完整发布说明](docs/06_toolchain/16_rust_1.94_release_notes.md)
 - [1.94 迁移指南](docs/05_guides/RUST_194_MIGRATION_GUIDE.md)
