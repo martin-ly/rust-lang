@@ -1,0 +1,4 @@
+warning: the MSRV in `clippy.toml` and `Cargo.toml` differ; using `1.95.0` from `clippy.toml`
+
+warning: `c07_process` (lib) generated 1 warning
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s

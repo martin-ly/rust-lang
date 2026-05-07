@@ -65,6 +65,12 @@ pub mod quic_full {
         Ok(certs)
     }
 
+    /// 解析 SocketAddr 字符串
+    pub fn parse_socket_addr(addr: &str) -> Result<SocketAddr, String> {
+        addr.parse::<SocketAddr>()
+            .map_err(|e| format!("parse socket addr: {}", e))
+    }
+
     // =====================================================================
     // 2. QUIC 服务器
     // =====================================================================
@@ -98,7 +104,10 @@ pub mod quic_full {
 
         /// 运行服务器（阻塞）
         pub async fn run(&self) -> Result<(), String> {
-            println!("QUIC server listening on {}", self.endpoint.local_addr().map_err(|e| e.to_string())?);
+            println!(
+                "QUIC server listening on {}",
+                self.endpoint.local_addr().map_err(|e| e.to_string())?
+            );
 
             while let Some(incoming) = self.endpoint.accept().await {
                 tokio::spawn(async move {
@@ -150,10 +159,7 @@ pub mod quic_full {
     }
 
     /// 处理单个双向流
-    async fn handle_stream(
-        mut send: SendStream,
-        mut recv: RecvStream,
-    ) -> Result<(), String> {
+    async fn handle_stream(mut send: SendStream, mut recv: RecvStream) -> Result<(), String> {
         let mut buf = vec![0u8; 4096];
         loop {
             match recv.read(&mut buf).await.map_err(|e| e.to_string())? {
@@ -306,7 +312,7 @@ QUIC 连接迁移:
         #![forbid(unsafe_code)]
 
         use bytes::Bytes;
-        use quinn::{Connection, Connecting, ZeroRttAccepted};
+        use quinn::{Connecting, Connection, ZeroRttAccepted};
         use std::net::SocketAddr;
         use std::time::Duration;
         use tokio::time::interval;
@@ -478,6 +484,88 @@ QUIC 连接迁移:
         }
 
         // -----------------------------------------------------------------
+        // 5.4 配置结构体（用于编译期测试与参数传递）
+        // -----------------------------------------------------------------
+
+        /// 数据报配置
+        #[derive(Debug, Clone, PartialEq, Eq)]
+        pub struct DatagramConfig {
+            max_size: usize,
+            enabled: bool,
+        }
+
+        impl DatagramConfig {
+            /// 创建数据报配置
+            pub fn new(max_size: usize, enabled: bool) -> Self {
+                Self { max_size, enabled }
+            }
+
+            /// 获取最大数据报尺寸
+            pub fn max_size(&self) -> usize {
+                self.max_size
+            }
+
+            /// 是否启用数据报
+            pub fn enabled(&self) -> bool {
+                self.enabled
+            }
+        }
+
+        /// 0-RTT 配置
+        #[derive(Debug, Clone, PartialEq, Eq)]
+        pub struct ZeroRttConfig {
+            enabled: bool,
+            max_early_data: usize,
+        }
+
+        impl ZeroRttConfig {
+            /// 创建 0-RTT 配置
+            pub fn new(enabled: bool, max_early_data: usize) -> Self {
+                Self {
+                    enabled,
+                    max_early_data,
+                }
+            }
+
+            /// 是否启用 0-RTT
+            pub fn enabled(&self) -> bool {
+                self.enabled
+            }
+
+            /// 获取最大早期数据量
+            pub fn max_early_data(&self) -> usize {
+                self.max_early_data
+            }
+        }
+
+        /// 连接迁移配置
+        #[derive(Debug, Clone, PartialEq, Eq)]
+        pub struct MigrationConfig {
+            enabled: bool,
+            idle_timeout_ms: u64,
+        }
+
+        impl MigrationConfig {
+            /// 创建连接迁移配置
+            pub fn new(enabled: bool, idle_timeout_ms: u64) -> Self {
+                Self {
+                    enabled,
+                    idle_timeout_ms,
+                }
+            }
+
+            /// 是否启用连接迁移
+            pub fn enabled(&self) -> bool {
+                self.enabled
+            }
+
+            /// 获取空闲超时时间（毫秒）
+            pub fn idle_timeout_ms(&self) -> u64 {
+                self.idle_timeout_ms
+            }
+        }
+
+        // -----------------------------------------------------------------
         // Tests
         // -----------------------------------------------------------------
 
@@ -541,6 +629,125 @@ QUIC 连接迁移:
             }
         }
     }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use std::net::SocketAddr;
+
+        /// 测试生成自签名证书成功并返回非空数据
+        #[test]
+        fn test_generate_self_signed_cert_ok() {
+            let (certs, key) = generate_self_signed_cert(vec!["localhost".to_string()]).unwrap();
+            assert!(!certs.is_empty(), "证书列表不应为空");
+            assert!(!certs[0].is_empty(), "证书数据不应为空");
+
+            let key_bytes = match &key {
+                PrivateKeyDer::Pkcs8(k) => k.secret_pkcs8_der(),
+                _ => panic!("unexpected key type"),
+            };
+            assert!(!key_bytes.is_empty(), "私钥数据不应为空");
+        }
+
+        /// 测试空主题别名时生成证书不 panic
+        #[test]
+        fn test_generate_self_signed_cert_empty_sans() {
+            let result = generate_self_signed_cert(vec![]);
+            // rcgen 0.13 允许空列表，行为视实现而定，此处仅验证不 panic
+            let _ = result;
+        }
+
+        /// 测试从有效 PEM 加载证书成功
+        #[test]
+        fn test_load_certs_from_pem_valid() {
+            let cert = rcgen::generate_simple_self_signed(vec!["test.example.com".into()]).unwrap();
+            let pem = cert.cert.pem();
+            let loaded = load_certs_from_pem(pem.as_bytes()).unwrap();
+            assert_eq!(loaded.len(), 1, "应解析出 1 张证书");
+            assert!(!loaded[0].is_empty(), "加载的证书不应为空");
+        }
+
+        /// 测试加载无效 PEM 数据应返回错误
+        #[test]
+        fn test_load_certs_from_pem_invalid() {
+            let result = load_certs_from_pem(b"this is not a pem");
+            assert!(result.is_err(), "无效 PEM 应返回错误");
+        }
+
+        /// 测试加载空 PEM 数据应返回错误
+        #[test]
+        fn test_load_certs_from_pem_empty() {
+            let result = load_certs_from_pem(b"");
+            assert!(result.is_err(), "空 PEM 应返回错误");
+        }
+
+        /// 测试解析有效的 IPv4 地址
+        #[test]
+        fn test_parse_socket_addr_valid_ipv4() {
+            let addr = parse_socket_addr("127.0.0.1:8080").unwrap();
+            assert_eq!(addr, SocketAddr::from(([127, 0, 0, 1], 8080)));
+        }
+
+        /// 测试解析有效的 IPv6 地址
+        #[test]
+        fn test_parse_socket_addr_valid_ipv6() {
+            let addr = parse_socket_addr("[::1]:443").unwrap();
+            assert_eq!(addr, SocketAddr::from(([0, 0, 0, 0, 0, 0, 0, 1], 443)));
+        }
+
+        /// 测试解析无效地址应返回错误
+        #[test]
+        fn test_parse_socket_addr_invalid() {
+            let result = parse_socket_addr("not-an-address");
+            assert!(result.is_err(), "无效地址应返回错误");
+
+            let result = parse_socket_addr("127.0.0.1");
+            assert!(result.is_err(), "缺少端口应返回错误");
+        }
+
+        /// 测试 Http3OverQuicConcept 帧类型说明文本非空
+        #[test]
+        fn test_http3_over_quic_concept_frame_types() {
+            let text = Http3OverQuicConcept::frame_types();
+            assert!(!text.is_empty(), "帧类型说明不应为空");
+            assert!(text.contains("HEADERS"), "应包含 HEADERS 帧说明");
+        }
+
+        /// 测试 Http3OverQuicConcept 连接迁移说明文本非空
+        #[test]
+        fn test_http3_over_quic_concept_migration() {
+            let text = Http3OverQuicConcept::connection_migration_concept();
+            assert!(!text.is_empty(), "连接迁移说明不应为空");
+            assert!(
+                text.contains("PATH_CHALLENGE"),
+                "应包含 PATH_CHALLENGE 说明"
+            );
+        }
+
+        /// 测试 DatagramConfig 创建与 getter
+        #[test]
+        fn test_datagram_config_creation_and_getters() {
+            let cfg = quic_advanced_features::DatagramConfig::new(1200, true);
+            assert_eq!(cfg.max_size(), 1200);
+            assert!(cfg.enabled());
+        }
+
+        /// 测试 ZeroRttConfig 创建与 getter
+        #[test]
+        fn test_zero_rtt_config_creation_and_getters() {
+            let cfg = quic_advanced_features::ZeroRttConfig::new(true, 65536);
+            assert!(cfg.enabled());
+            assert_eq!(cfg.max_early_data(), 65536);
+        }
+
+        /// 测试 MigrationConfig 创建与 getter
+        #[test]
+        fn test_migration_config_creation_and_getters() {
+            let cfg = quic_advanced_features::MigrationConfig::new(true, 30000);
+            assert!(cfg.enabled());
+            assert_eq!(cfg.idle_timeout_ms(), 30000);
+        }
+    }
 }
 
 // =====================================================================
@@ -585,5 +792,4 @@ pub mod quic_full {
     }
 }
 
-pub use quic_full::*;
-pub use quic_full::quic_advanced_features;
+pub use quic_full::{quic_advanced_features, *};

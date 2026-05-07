@@ -40,6 +40,7 @@ pub mod no_std_practices;
 pub mod raw_pointers_advanced;
 pub mod rtic_framework;
 pub mod rust_195_features; // Rust 1.95 特性 (裸指针 unchecked, PowerPC asm, cfg_select 嵌入式)
+pub mod rust_196_features; // Rust 1.96+ 特性 (pin! 宏, const VecDeque, bool→float, const NonNull)
 pub mod uart_driver; // RTIC 实时中断驱动并发
 
 // 库版本信息

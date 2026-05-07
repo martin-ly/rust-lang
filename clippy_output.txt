@@ -1,0 +1,28 @@
+﻿cargo : warning: the MSRV in `clippy.toml` and `Cargo.toml` differ; using `1.95.0` from `clippy.toml`
+At line:1 char:23
++ ... \rust-lang; cargo clippy --package c07_process --package c13_embedded ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (warning: the MS...m `clippy.toml`:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+warning: `c07_process` (lib) generated 1 warning
+warning: `c07_process` (bin "stdio_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "group_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "rust_192_features_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "enhanced_error_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "timeout_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "process_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "c07_process") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "enhanced_ipc_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "enhanced_sync_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "enhanced_async_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "supervisor_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "sync_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "ipc_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "async_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "rust_190_features_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "async_stdio_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "process_pool_demo") generated 1 warning (1 duplicate)
+warning: `c07_process` (bin "group_control_demo") generated 1 warning (1 duplicate)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s

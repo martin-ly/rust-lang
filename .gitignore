@@ -40,5 +40,7 @@ Cargo.lock
 # 忽略所有obj文件
 **/*.obj
 
+**/*.o
+
 # mdBook build output
 book/book/

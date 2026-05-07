@@ -185,9 +185,59 @@ pub fn demonstrate_rust_196_features() {
 
 /// 获取特性信息
 pub fn get_rust_196_process_info() -> String {
-    "Rust 1.95+ 特性跟踪:\n- RangeInclusive for priority and resource management\n- Tuple \
-     coercion for process results\n- Better process pool management"
+    "Rust 1.95+ 特性跟踪:\n- RangeInclusive for priority and resource management\n- Tuple coercion \
+     for process results\n- Better process pool management"
         .to_string()
+}
+
+/// Rust 1.96 新特性在进程管理中的应用
+///
+/// 本结构体演示了 Rust 1.96 中稳定化的以下特性：
+/// - `core::pin::pin!` 宏：在栈上固定异步任务
+/// - `VecDeque::new` 可在 const 上下文中使用：编译期初始化进程队列
+/// - `impl From<bool> for {f32, f64}`：将进程成功/失败标志转换为浮点指标
+/// - `std::path::MAIN_SEPARATOR_STR`：跨平台路径分隔符
+/// - `impl DerefMut for PathBuf`：可变路径操作
+pub struct ProcessRust196Features;
+
+impl ProcessRust196Features {
+    /// 使用 `core::pin::pin!` 在栈上固定异步进程任务
+    ///
+    /// 适用于进程池中需要对 Future 进行原地固定的场景。
+    pub async fn pinned_async_task() -> u32 {
+        let future = async { 42 };
+        let pinned = core::pin::pin!(future);
+        pinned.await
+    }
+
+    /// 在 const 上下文中创建空的进程队列
+    ///
+    /// `VecDeque::new` 在 Rust 1.96 中可在 const 上下文中稳定使用。
+    pub const fn const_process_queue() -> std::collections::VecDeque<u32> {
+        std::collections::VecDeque::new()
+    }
+
+    /// 将进程执行结果（成功/失败）转换为浮点指标
+    ///
+    /// `true` 对应 `1.0`，`false` 对应 `0.0`。
+    pub fn success_to_metric(success: bool) -> (f32, f64) {
+        (f32::from(success), f64::from(success))
+    }
+
+    /// 使用跨平台路径分隔符拼接进程路径
+    ///
+    /// 利用 `std::path::MAIN_SEPARATOR_STR` 避免硬编码 `/` 或 `\`。
+    pub fn join_process_path(dir: &str, file: &str) -> String {
+        format!("{}{}{}", dir, std::path::MAIN_SEPARATOR_STR, file)
+    }
+
+    /// 通过可变引用修改进程工作目录路径
+    ///
+    /// Rust 1.96 为 `PathBuf` 实现了 `DerefMut`，
+    /// 使其能够更好地与需要 `&mut Path` 的泛型代码协同。
+    pub fn update_working_dir(path: &mut std::path::PathBuf, subdir: &str) {
+        path.push(subdir);
+    }
 }
 
 #[cfg(test)]
@@ -278,5 +328,43 @@ mod tests {
     fn test_get_rust_196_process_info() {
         let info = get_rust_196_process_info();
         assert!(!info.is_empty());
+    }
+
+    #[tokio::test]
+    async fn test_pinned_async_task() {
+        assert_eq!(ProcessRust196Features::pinned_async_task().await, 42);
+    }
+
+    #[test]
+    fn test_const_process_queue() {
+        let queue = ProcessRust196Features::const_process_queue();
+        assert!(queue.is_empty());
+    }
+
+    #[test]
+    fn test_success_to_metric() {
+        assert_eq!(
+            ProcessRust196Features::success_to_metric(true),
+            (1.0_f32, 1.0_f64)
+        );
+        assert_eq!(
+            ProcessRust196Features::success_to_metric(false),
+            (0.0_f32, 0.0_f64)
+        );
+    }
+
+    #[test]
+    fn test_join_process_path() {
+        let joined = ProcessRust196Features::join_process_path("var", "log");
+        assert!(joined.contains(std::path::MAIN_SEPARATOR_STR));
+        assert!(joined.starts_with("var"));
+        assert!(joined.ends_with("log"));
+    }
+
+    #[test]
+    fn test_update_working_dir() {
+        let mut path = std::path::PathBuf::from("/tmp");
+        ProcessRust196Features::update_working_dir(&mut path, "logs");
+        assert_eq!(path, std::path::PathBuf::from("/tmp/logs"));
     }
 }

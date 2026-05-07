@@ -116,7 +116,6 @@ where
 }
 "#
     }
-
 }
 
 // ============================================================================
@@ -161,15 +160,14 @@ impl AsyncClosureWorkarounds {
         // 当前生态库的主要模式
     }
 
-    /// Workaround 3：Box<dyn Future> 类型擦除
+    /// Workaround 3：`Box<dyn Future>` 类型擦除
     ///
     /// 当需要在集合中存储不同异步闭包时使用。
     pub fn workaround_type_erasure() {
-        let _closures: Vec<Box<dyn Fn(i32) -> Box<dyn Future<Output = i32> + Send> + Send>> =
-            vec![
-                Box::new(|x| Box::new(async move { x + 1 })),
-                Box::new(|x| Box::new(async move { x * 2 })),
-            ];
+        let _closures: Vec<Box<dyn Fn(i32) -> Box<dyn Future<Output = i32> + Send> + Send>> = vec![
+            Box::new(|x| Box::new(async move { x + 1 })),
+            Box::new(|x| Box::new(async move { x * 2 })),
+        ];
     }
 
     /// Workaround 4：手动 struct + Future impl
@@ -470,8 +468,8 @@ mod tests {
     fn test_manual_async_closure_poll() {
         use std::future::Future;
         use std::pin::Pin;
-        use std::task::{Context, Poll, Waker};
         use std::sync::Arc;
+        use std::task::{Context, Poll, Waker};
 
         let mut fut = ManualAsyncClosure::new(42);
         struct DummyWake;

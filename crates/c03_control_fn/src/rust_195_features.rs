@@ -92,7 +92,12 @@ impl IfLetGuardExamples {
     /// 这里展示了 `if let` guard 与常规 guard (`&&`) 的组合使用。
     pub fn parse_priority_fully_flat(input: Option<&str>) -> Result<u8, &'static str> {
         match input {
-            Some(s) if let Ok(p) = s.parse::<u8>() && p <= 100 => Ok(p),
+            Some(s)
+                if let Ok(p) = s.parse::<u8>()
+                    && p <= 100 =>
+            {
+                Ok(p)
+            }
             Some(s) if let Ok(_) = s.parse::<u8>() => Err("优先级超出范围"),
             Some(_) => Err("无效的优先级格式"),
             None => Err("未指定优先级"),
@@ -110,12 +115,13 @@ impl IfLetGuardExamples {
             },
 
             // 连接失败但可重试
-            (
-                ConnectionState::Connecting { attempt },
-                NetworkEvent::ConnectFailed,
-            ) if attempt < 3 => ConnectionState::Connecting {
-                attempt: attempt + 1,
-            },
+            (ConnectionState::Connecting { attempt }, NetworkEvent::ConnectFailed)
+                if attempt < 3 =>
+            {
+                ConnectionState::Connecting {
+                    attempt: attempt + 1,
+                }
+            }
 
             // 连接失败且超过重试次数
             (ConnectionState::Connecting { .. }, NetworkEvent::ConnectFailed) => {
@@ -126,16 +132,14 @@ impl IfLetGuardExamples {
             }
 
             // 断开连接后回到 Idle
-            (ConnectionState::Connected { .. }, NetworkEvent::Disconnect) => {
-                ConnectionState::Idle
-            }
+            (ConnectionState::Connected { .. }, NetworkEvent::Disconnect) => ConnectionState::Idle,
 
             // 其他组合：状态不变
             (state, _) => state,
         }
     }
 
-    /// 错误处理扁平化：Result<Option<T>> 解包
+    /// 错误处理扁平化：`Result<Option<T>>` 解包
     ///
     /// 这是 Rust 中常见的"嵌套 Result-Option"场景，`if let` guard 使其清晰可读。
     pub fn evaluate_task_result<T>(result: Result<Option<T>, &'static str>) -> &'static str
@@ -156,10 +160,18 @@ impl IfLetGuardExamples {
     /// 展示了 `if let` guard 与元组解构、多个条件组合的强大能力。
     pub fn parse_config_entry(key: &str, value: &str) -> ConfigValue {
         match (key, value) {
-            ("timeout", v) if let Ok(ms) = v.parse::<u64>() && ms > 0 && ms <= 300_000 => {
+            ("timeout", v)
+                if let Ok(ms) = v.parse::<u64>()
+                    && ms > 0
+                    && ms <= 300_000 =>
+            {
                 ConfigValue::Timeout(std::time::Duration::from_millis(ms))
             }
-            ("threads", v) if let Ok(n) = v.parse::<usize>() && n > 0 && n <= 64 => {
+            ("threads", v)
+                if let Ok(n) = v.parse::<usize>()
+                    && n > 0
+                    && n <= 64 =>
+            {
                 ConfigValue::Threads(n)
             }
             ("enabled", v) if let Ok(b) = v.parse::<bool>() => ConfigValue::Enabled(b),
@@ -386,10 +398,7 @@ mod tests {
             session_id: "valid-1234".to_string(),
         };
         let new_state = IfLetGuardExamples::transition_state(state, event);
-        assert!(matches!(
-            new_state,
-            ConnectionState::Connected { .. }
-        ));
+        assert!(matches!(new_state, ConnectionState::Connected { .. }));
 
         let state = ConnectionState::Connecting { attempt: 1 };
         let event = NetworkEvent::ConnectSuccess {
@@ -397,10 +406,7 @@ mod tests {
         };
         let new_state = IfLetGuardExamples::transition_state(state, event);
         // 无效 session_id 导致状态不变（fallback 到 (state, _) => state）
-        assert!(matches!(
-            new_state,
-            ConnectionState::Connecting { .. }
-        ));
+        assert!(matches!(new_state, ConnectionState::Connecting { .. }));
     }
 
     #[test]

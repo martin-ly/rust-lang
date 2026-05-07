@@ -29,14 +29,20 @@ impl AsyncIfLetGuardExamples {
     /// 解析超时配置字符串
     pub fn parse_timeout_ms(input: Option<&str>) -> Result<u64, &'static str> {
         match input {
-            Some(s) if let Ok(ms) = s.parse::<u64>() && ms > 0 && ms <= 3_600_000 => Ok(ms),
+            Some(s)
+                if let Ok(ms) = s.parse::<u64>()
+                    && ms > 0
+                    && ms <= 3_600_000 =>
+            {
+                Ok(ms)
+            }
             Some(s) if let Ok(_) = s.parse::<u64>() => Err("超时值必须在 1ms 到 1 小时之间"),
             Some(_) => Err("无效的超时值格式"),
             None => Ok(5000), // 默认 5 秒
         }
     }
 
-    /// 评估异步任务结果：Result<Option<T>> 扁平化处理
+    /// 评估异步任务结果：`Result<Option<T>>` 扁平化处理
     pub fn evaluate_task_result(result: Result<Option<u32>, &'static str>) -> &'static str {
         match result {
             Ok(Some(0)) => "任务成功完成",
@@ -52,10 +58,17 @@ impl AsyncIfLetGuardExamples {
     /// 异步配置解析：多字段组合 guard
     pub fn parse_async_config(key: &str, value: &str) -> AsyncConfigValue {
         match (key, value) {
-            ("timeout", v) if let Ok(ms) = v.parse::<u64>() && ms > 0 => {
+            ("timeout", v)
+                if let Ok(ms) = v.parse::<u64>()
+                    && ms > 0 =>
+            {
                 AsyncConfigValue::Timeout(std::time::Duration::from_millis(ms))
             }
-            ("concurrency", v) if let Ok(n) = v.parse::<usize>() && n > 0 && n <= 1000 => {
+            ("concurrency", v)
+                if let Ok(n) = v.parse::<usize>()
+                    && n > 0
+                    && n <= 1000 =>
+            {
                 AsyncConfigValue::Concurrency(n)
             }
             ("retry", v) if let Ok(b) = v.parse::<bool>() => AsyncConfigValue::Retry(b),
@@ -71,22 +84,26 @@ impl AsyncIfLetGuardExamples {
         event: PoolEvent,
     ) -> PoolConnectionState {
         match (state, event) {
-            (
-                PoolConnectionState::Idle,
-                PoolEvent::ConnectRequest { timeout_ms },
-            ) if timeout_ms > 0 => {
+            (PoolConnectionState::Idle, PoolEvent::ConnectRequest { timeout_ms })
+                if timeout_ms > 0 =>
+            {
                 PoolConnectionState::Connecting {
                     attempt: 1,
                     since: std::time::Instant::now(),
                 }
             }
             (
-                PoolConnectionState::Connecting { attempt: _, since: _ },
+                PoolConnectionState::Connecting {
+                    attempt: _,
+                    since: _,
+                },
                 PoolEvent::ConnectSuccess { conn_id },
-            ) if let Some(valid_id) = validate_conn_id(&conn_id) => PoolConnectionState::Connected {
-                id: valid_id,
-                created_at: std::time::Instant::now(),
-            },
+            ) if let Some(valid_id) = validate_conn_id(&conn_id) => {
+                PoolConnectionState::Connected {
+                    id: valid_id,
+                    created_at: std::time::Instant::now(),
+                }
+            }
             (
                 PoolConnectionState::Connecting { attempt, since: _ },
                 PoolEvent::ConnectFailed { error: _ },
@@ -94,13 +111,12 @@ impl AsyncIfLetGuardExamples {
                 attempt: attempt + 1,
                 since: std::time::Instant::now(),
             },
-            (
-                PoolConnectionState::Connecting { .. },
-                PoolEvent::ConnectFailed { error },
-            ) => PoolConnectionState::Failed {
-                error,
-                retry_after: std::time::Instant::now() + std::time::Duration::from_secs(30),
-            },
+            (PoolConnectionState::Connecting { .. }, PoolEvent::ConnectFailed { error }) => {
+                PoolConnectionState::Failed {
+                    error,
+                    retry_after: std::time::Instant::now() + std::time::Duration::from_secs(30),
+                }
+            }
             (PoolConnectionState::Connected { .. }, PoolEvent::Disconnect) => {
                 PoolConnectionState::Idle
             }
@@ -121,9 +137,18 @@ pub enum AsyncConfigValue {
 #[derive(Debug, Clone, PartialEq)]
 pub enum PoolConnectionState {
     Idle,
-    Connecting { attempt: u32, since: std::time::Instant },
-    Connected { id: String, created_at: std::time::Instant },
-    Failed { error: String, retry_after: std::time::Instant },
+    Connecting {
+        attempt: u32,
+        since: std::time::Instant,
+    },
+    Connected {
+        id: String,
+        created_at: std::time::Instant,
+    },
+    Failed {
+        error: String,
+        retry_after: std::time::Instant,
+    },
 }
 
 #[derive(Debug, Clone)]
@@ -140,7 +165,7 @@ fn validate_conn_id(id: &str) -> Option<String> {
     } else {
         None
     }
-    }
+}
 
 // ============================================================================
 // 2. ControlFlow 在异步状态机中的应用
@@ -162,9 +187,7 @@ impl AsyncControlFlowExamples {
     }
 
     /// 异步流处理：使用 ControlFlow 实现提前终止
-    pub async fn process_with_early_termination<
-        S: futures::Stream<Item = i32> + Unpin,
-    >(
+    pub async fn process_with_early_termination<S: futures::Stream<Item = i32> + Unpin>(
         stream: &mut S,
         threshold: i32,
     ) -> Option<i32> {
@@ -179,7 +202,9 @@ impl AsyncControlFlowExamples {
     }
 
     /// 批量任务处理：部分成功模式
-    pub fn process_batch_results(results: &[Result<i32, String>]) -> ControlFlow<Vec<String>, Vec<i32>> {
+    pub fn process_batch_results(
+        results: &[Result<i32, String>],
+    ) -> ControlFlow<Vec<String>, Vec<i32>> {
         let mut successes = Vec::new();
         let mut errors = Vec::new();
 
@@ -360,18 +385,39 @@ mod tests {
 
     #[test]
     fn test_parse_timeout_ms() {
-        assert_eq!(AsyncIfLetGuardExamples::parse_timeout_ms(Some("1000")), Ok(1000));
-        assert_eq!(AsyncIfLetGuardExamples::parse_timeout_ms(Some("0")), Err("超时值必须在 1ms 到 1 小时之间"));
-        assert_eq!(AsyncIfLetGuardExamples::parse_timeout_ms(Some("abc")), Err("无效的超时值格式"));
+        assert_eq!(
+            AsyncIfLetGuardExamples::parse_timeout_ms(Some("1000")),
+            Ok(1000)
+        );
+        assert_eq!(
+            AsyncIfLetGuardExamples::parse_timeout_ms(Some("0")),
+            Err("超时值必须在 1ms 到 1 小时之间")
+        );
+        assert_eq!(
+            AsyncIfLetGuardExamples::parse_timeout_ms(Some("abc")),
+            Err("无效的超时值格式")
+        );
         assert_eq!(AsyncIfLetGuardExamples::parse_timeout_ms(None), Ok(5000));
     }
 
     #[test]
     fn test_evaluate_task_result() {
-        assert_eq!(AsyncIfLetGuardExamples::evaluate_task_result(Ok(Some(0))), "任务成功完成");
-        assert_eq!(AsyncIfLetGuardExamples::evaluate_task_result(Ok(Some(50))), "任务完成，轻微警告");
-        assert_eq!(AsyncIfLetGuardExamples::evaluate_task_result(Ok(Some(200))), "任务完成，需要关注");
-        assert_eq!(AsyncIfLetGuardExamples::evaluate_task_result(Err("timeout")), "任务执行超时");
+        assert_eq!(
+            AsyncIfLetGuardExamples::evaluate_task_result(Ok(Some(0))),
+            "任务成功完成"
+        );
+        assert_eq!(
+            AsyncIfLetGuardExamples::evaluate_task_result(Ok(Some(50))),
+            "任务完成，轻微警告"
+        );
+        assert_eq!(
+            AsyncIfLetGuardExamples::evaluate_task_result(Ok(Some(200))),
+            "任务完成，需要关注"
+        );
+        assert_eq!(
+            AsyncIfLetGuardExamples::evaluate_task_result(Err("timeout")),
+            "任务执行超时"
+        );
     }
 
     #[test]
@@ -429,8 +475,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_spawn_named_pool() {
-        let handles =
-            NamedTaskExamples::spawn_named_pool(3, "worker", |i| async move { i * 2 });
+        let handles = NamedTaskExamples::spawn_named_pool(3, "worker", |i| async move { i * 2 });
         assert_eq!(handles.len(), 3);
 
         let mut results = Vec::new();

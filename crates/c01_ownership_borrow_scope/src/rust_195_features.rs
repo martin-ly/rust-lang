@@ -96,7 +96,7 @@ impl MaybeUninitArrayExamples {
         unsafe { uninit_array.assume_init() }
     }
 
-    /// 反向转换：从 [MaybeUninit<T>; N] 到 MaybeUninit<[T; N]>
+    /// 反向转换：从 `[MaybeUninit<T>; N]` 到 `MaybeUninit<[T; N]>`
     ///
     /// 这在需要将分散的未初始化槽位组合为统一数组类型时有用。
     pub fn combine_slots<T, const N: usize>(slots: [MaybeUninit<T>; N]) -> MaybeUninit<[T; N]> {
@@ -202,7 +202,7 @@ impl MaybeUninitArrayExamples {
 pub struct CellArrayExamples;
 
 impl CellArrayExamples {
-    /// 基础示例：将 Cell<[i32; 4]> 作为 Cell<i32> 数组访问
+    /// 基础示例：将 `Cell<[i32; 4]>` 作为 `Cell<i32>` 数组访问
     pub fn cell_array_access() {
         let cell_array: Cell<[i32; 4]> = Cell::new([10, 20, 30, 40]);
 
@@ -216,7 +216,7 @@ impl CellArrayExamples {
         assert_eq!(cell_array.get(), [100, 20, 300, 40]);
     }
 
-    /// 切片视角：Cell<[T]> 作为 [Cell<T>]
+    /// 切片视角：`Cell<[T]>` 作为 `[Cell<T>]`
     ///
     /// 对于动态大小的数组切片同样适用。
     pub fn cell_slice_access() {
