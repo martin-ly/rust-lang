@@ -254,11 +254,8 @@ mod tests {
     #[test]
     fn test_cfg_select_syscall_wrapper() {
         let wrapper = CfgSelectExamples::select_syscall_wrapper();
-        assert_eq!(
-            wrapper(10),
-            10 + wrapper as usize as i32 - wrapper as usize as i32 + wrapper(10) - 10 + 10
-        );
         // 简化：只要调用不 panic 即可，具体值取决于平台
+        let _ = wrapper(10);
         let _ = wrapper(42);
     }
 
