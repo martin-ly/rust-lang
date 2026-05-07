@@ -61,7 +61,7 @@ io-uring = { version = "0.6", optional = true }
 [features]
 default = []
 tls = ["rustls", "rustls-pemfile"]
-quic = ["dep:quinn", "dep:rcgen"]
+quic = ["dep:quinn", "dep:rcgen", "tls"]
 # io_uring 仅在 Linux 下有效
 io-uring = ["dep:tokio-uring", "dep:io-uring"]
 # PCAP-related features for conditional compilation

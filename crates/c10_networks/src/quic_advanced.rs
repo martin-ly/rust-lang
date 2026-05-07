@@ -47,7 +47,7 @@ pub mod quic_full {
         let cert_der = cert.cert.der().clone();
         let key_der = PrivateKeyDer::Pkcs8(cert.key_pair.serialize_der().into());
 
-        Ok((vec![cert_der.into()], key_der))
+        Ok((vec![cert_der], key_der))
     }
 
     /// 加载 PEM 格式证书
@@ -55,7 +55,7 @@ pub mod quic_full {
         let mut certs = Vec::new();
         for cert in rustls_pemfile::certs(&mut &*cert_pem) {
             match cert {
-                Ok(c) => certs.push(c.into()),
+                Ok(c) => certs.push(c),
                 Err(e) => return Err(format!("cert parse: {}", e)),
             }
         }

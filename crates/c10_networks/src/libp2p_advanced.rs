@@ -141,25 +141,20 @@ pub mod dht {
     pub fn handle_kademlia_event(event: KademliaEvent) {
         match event {
             KademliaEvent::OutboundQueryProgressed { result, .. } => match result {
-                QueryResult::GetProviders(res) => {
-                    if let Ok(GetProvidersOk::FoundProviders { providers, .. }) = res {
-                        println!("找到 {} 个提供者", providers.len());
-                    }
+                QueryResult::GetProviders(Ok(GetProvidersOk::FoundProviders {
+                    providers,
+                    ..
+                })) => {
+                    println!("找到 {} 个提供者", providers.len());
                 }
-                QueryResult::GetRecord(res) => {
-                    if let Ok(GetRecordOk::FoundRecord(peer_record)) = res {
-                        println!("记录找到: {:?}", peer_record.record.key);
-                    }
+                QueryResult::GetRecord(Ok(GetRecordOk::FoundRecord(peer_record))) => {
+                    println!("记录找到: {:?}", peer_record.record.key);
                 }
-                QueryResult::PutRecord(res) => {
-                    if let Ok(ok) = res {
-                        println!("记录已存储: {:?}", ok.key);
-                    }
+                QueryResult::PutRecord(Ok(ok)) => {
+                    println!("记录已存储: {:?}", ok.key);
                 }
-                QueryResult::Bootstrap(res) => {
-                    if let Ok(ok) = res {
-                        println!("引导完成，peer: {:?}", ok.peer);
-                    }
+                QueryResult::Bootstrap(Ok(ok)) => {
+                    println!("引导完成，peer: {:?}", ok.peer);
                 }
                 _ => {}
             },
