@@ -249,7 +249,7 @@ impl ColdPathExamples {
     }
 
     /// 并发场景：锁竞争失败路径
-    pub fn try_lock_with_cold_hint<T>(lock: &std::sync::Mutex<T>) -> Option<std::sync::MutexGuard<T>> {
+    pub fn try_lock_with_cold_hint<T>(lock: &std::sync::Mutex<T>) -> Option<std::sync::MutexGuard<'_, T>> {
         match lock.try_lock() {
             Ok(guard) => Some(guard),
             Err(_) => {

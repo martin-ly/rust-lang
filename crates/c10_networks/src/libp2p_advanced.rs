@@ -25,8 +25,6 @@
 //! - [libp2p 官方文档](https://docs.rs/libp2p)
 //! - [libp2p 规范](https://github.com/libp2p/specs)
 
-use std::time::Duration;
-
 // =========================================================================
 // 1. 节点身份与密钥管理
 // =========================================================================
@@ -96,8 +94,6 @@ pub mod swarm_builder {
                 yamux::Config::default,
             )
             .map_err(|e| e.to_string())?
-            .with_quic()
-            .map_err(|e| e.to_string())?
             .with_behaviour(|_| behaviour)
             .map_err(|e| e.to_string())?
             .with_swarm_config(|c| c.with_idle_connection_timeout(Duration::from_secs(60)))
@@ -107,22 +103,19 @@ pub mod swarm_builder {
     }
 
     /// 构建内存传输 Swarm（测试用）
+    ///
+    /// # 注意
+    /// libp2p 0.54.1 中 `MemoryTransport` 的输出类型为 `Channel<Vec<u8>>`，
+    /// 需要经过 upgrade 才能与 `with_other_transport` 的 `(PeerId, Muxer)` 约束匹配。
+    /// 此处保留 API 签名，实际实现需配合 `libp2p::core::upgrade` 使用。
     pub fn build_memory_swarm<B>(
-        keypair: &libp2p::identity::Keypair,
-        behaviour: B,
+        _keypair: &libp2p::identity::Keypair,
+        _behaviour: B,
     ) -> Result<Swarm<B>, String>
     where
         B: libp2p::swarm::NetworkBehaviour,
     {
-        let swarm = SwarmBuilder::with_existing_identity(keypair.clone())
-            .with_tokio()
-            .with_other_transport(|_| Ok(libp2p::core::transport::MemoryTransport::default()))
-            .map_err(|e| e.to_string())?
-            .with_behaviour(|_| behaviour)
-            .map_err(|e| e.to_string())?
-            .build();
-
-        Ok(swarm)
+        Err("MemoryTransport 在 libp2p 0.54.1 中需配合 upgrade 使用，详见文档".to_string())
     }
 }
 
@@ -137,19 +130,19 @@ pub mod swarm_builder {
 /// - 内容路由（Content Routing）
 /// - 记录存储（Record Store）
 pub mod dht {
-    use libp2p::Multiaddr;
     use libp2p::kad::store::MemoryStore;
     use libp2p::kad::{
         Behaviour as KademliaBehaviour, Config as KademliaConfig, Event as KademliaEvent,
-        QueryResult,
+        GetProvidersOk, GetRecordOk, QueryResult,
     };
+    use libp2p::{Multiaddr, StreamProtocol};
 
     /// 创建 Kademlia 行为
     pub fn create_kademlia_behaviour(
         local_peer_id: libp2p::PeerId,
     ) -> KademliaBehaviour<MemoryStore> {
         let store = MemoryStore::new(local_peer_id);
-        let config = KademliaConfig::default();
+        let config = KademliaConfig::new(StreamProtocol::new("/ipfs/kad/1.0.0"));
         KademliaBehaviour::with_config(local_peer_id, store, config)
     }
 
@@ -158,13 +151,13 @@ pub mod dht {
         match event {
             KademliaEvent::OutboundQueryProgressed { result, .. } => match result {
                 QueryResult::GetProviders(res) => {
-                    if let Ok(ok) = res {
-                        println!("找到 {} 个提供者", ok.providers.len());
+                    if let Ok(GetProvidersOk::FoundProviders { providers, .. }) = res {
+                        println!("找到 {} 个提供者", providers.len());
                     }
                 }
                 QueryResult::GetRecord(res) => {
-                    if let Ok(ok) = res {
-                        println!("记录找到: {:?}", ok.record.key);
+                    if let Ok(GetRecordOk::FoundRecord(peer_record)) = res {
+                        println!("记录找到: {:?}", peer_record.record.key);
                     }
                 }
                 QueryResult::PutRecord(res) => {
@@ -212,7 +205,7 @@ pub mod dht {
 pub mod pubsub {
     use libp2p::gossipsub::{
         Behaviour as GossipsubBehaviour, Config as GossipsubConfig, Event as GossipsubEvent,
-        IdentTopic as Topic, MessageAuthenticity, ValidationMode,
+        MessageAuthenticity,
     };
     use libp2p::identity::Keypair;
 
@@ -226,12 +219,11 @@ pub mod pubsub {
     }
 
     /// 创建带验证策略的 GossipSub
+    ///
+    /// libp2p 0.54.1 中 `GossipsubConfig` 默认即为 `ValidationMode::Strict`，
+    /// 如需自定义需使用 `ConfigBuilder`。
     pub fn create_validated_gossipsub(keypair: &Keypair) -> Result<GossipsubBehaviour, String> {
-        let message_authenticity = MessageAuthenticity::Signed(keypair.clone());
-        let config = GossipsubConfig::default().validation_mode(ValidationMode::Strict);
-
-        GossipsubBehaviour::new(message_authenticity, config)
-            .map_err(|e| format!("gossipsub init: {}", e))
+        create_gossipsub_behaviour(keypair)
     }
 
     /// 处理 GossipSub 事件
@@ -346,6 +338,7 @@ pub mod nat_traversal {
             (NatType::RestrictedCone, true) => "DCUtR 通过 Relay 建立直连",
             (NatType::PortRestricted, true) => "DCUtR + 端口预测",
             (NatType::Symmetric, true) => "长期 Relay 转发（无法直连）",
+            (NatType::Unknown, true) => "尝试 DCUtR，若失败则使用 Relay",
             (_, false) => "需要部署 Relay 服务器",
         }
     }
@@ -380,7 +373,7 @@ pub mod patterns {
     /// 模式 4：IoT 设备网络
     pub struct IotMesh {
         pub device_type: String,
-        pub heartbeat_interval: Duration,
+        pub heartbeat_interval: std::time::Duration,
     }
 }
 

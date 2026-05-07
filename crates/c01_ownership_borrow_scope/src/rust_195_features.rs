@@ -117,8 +117,8 @@ impl MaybeUninitArrayExamples {
         let slots: &mut [MaybeUninit<T>; N] = uninit_array.as_mut();
 
         let mut initialized = 0;
-        for i in 0..count {
-            slots[i] = MaybeUninit::new(init(i));
+        for (i, slot) in slots.iter_mut().enumerate().take(count) {
+            *slot = MaybeUninit::new(init(i));
             initialized += 1;
         }
 
@@ -137,10 +137,8 @@ impl MaybeUninitArrayExamples {
         let slots: &mut [MaybeUninit<T>; N] = uninit_array.as_mut();
 
         for (i, slot) in slots.iter_mut().enumerate() {
-            match init(i) {
-                Some(value) => *slot = MaybeUninit::new(value),
-                None => return None, // 安全：未初始化的 MaybeUninit 不会 Drop
-            }
+            let value = init(i)?;
+            *slot = MaybeUninit::new(value);
         }
 
         Some(unsafe { uninit_array.assume_init() })
@@ -157,9 +155,9 @@ impl MaybeUninitArrayExamples {
         let mut uninit_array: MaybeUninit<[T; N]> = MaybeUninit::uninit();
         let slots: &mut [MaybeUninit<T>; N] = uninit_array.as_mut();
 
-        for i in 0..N {
+        for (i, slot) in slots.iter_mut().enumerate().take(N) {
             let value = init(i).await;
-            slots[i] = MaybeUninit::new(value);
+            *slot = MaybeUninit::new(value);
         }
 
         unsafe { uninit_array.assume_init() }

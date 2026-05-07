@@ -28,7 +28,7 @@ impl AsyncIfLetGuardExamples {
     /// 解析超时配置字符串
     pub fn parse_timeout_ms(input: Option<&str>) -> Result<u64, &'static str> {
         match input {
-            Some(s) if let Ok(ms) = s.parse::<u64>() && ms > 0 && ms <= 3600_000 => Ok(ms),
+            Some(s) if let Ok(ms) = s.parse::<u64>() && ms > 0 && ms <= 3_600_000 => Ok(ms),
             Some(s) if let Ok(_) = s.parse::<u64>() => Err("超时值必须在 1ms 到 1 小时之间"),
             Some(_) => Err("无效的超时值格式"),
             None => Ok(5000), // 默认 5 秒
@@ -80,21 +80,21 @@ impl AsyncIfLetGuardExamples {
                 }
             }
             (
-                PoolConnectionState::Connecting { attempt, since },
+                PoolConnectionState::Connecting { attempt: _, since: _ },
                 PoolEvent::ConnectSuccess { conn_id },
             ) if let Some(valid_id) = validate_conn_id(&conn_id) => PoolConnectionState::Connected {
                 id: valid_id,
                 created_at: std::time::Instant::now(),
             },
             (
-                PoolConnectionState::Connecting { attempt, since },
-                PoolEvent::ConnectFailed { error },
+                PoolConnectionState::Connecting { attempt, since: _ },
+                PoolEvent::ConnectFailed { error: _ },
             ) if attempt < 3 => PoolConnectionState::Connecting {
                 attempt: attempt + 1,
                 since: std::time::Instant::now(),
             },
             (
-                PoolConnectionState::Connecting { attempt, .. },
+                PoolConnectionState::Connecting { .. },
                 PoolEvent::ConnectFailed { error },
             ) => PoolConnectionState::Failed {
                 error,

@@ -244,12 +244,17 @@ impl PowerPcAsmExamples {
     }
 
     /// Host 目标上的模拟（仅用于文档编译）
+    ///
+    /// # Safety
+    /// 此函数在 non-PowerPC 目标上为空操作，无安全约束。
     #[cfg(not(any(target_arch = "powerpc", target_arch = "powerpc64")))]
     pub unsafe fn ppc_nop() {
         // 在 non-PowerPC 目标上，内联汇编不可用
         // 此处仅为概念占位
     }
 
+    /// # Safety
+    /// 此函数在 non-PowerPC 目标上使用系统时间模拟，无安全约束。
     #[cfg(not(any(target_arch = "powerpc", target_arch = "powerpc64")))]
     pub unsafe fn ppc_read_timebase() -> u64 {
         // 模拟：返回系统时间纳秒数
@@ -310,18 +315,23 @@ impl EmbeddedCfgSelect {
     };
 }
 
+#[allow(dead_code)]
 fn arm_barrier() {
     // ARM DMB 指令占位
 }
+#[allow(dead_code)]
 fn aarch64_barrier() {
     // AArch64 DMB 指令占位
 }
+#[allow(dead_code)]
 fn riscv_barrier() {
     // RISC-V FENCE 指令占位
 }
+#[allow(dead_code)]
 fn x86_barrier() {
     // x86 mfence 指令占位
 }
+#[allow(dead_code)]
 fn generic_barrier() {
     // 通用内存屏障（编译器屏障）
     std::sync::atomic::fence(std::sync::atomic::Ordering::SeqCst);

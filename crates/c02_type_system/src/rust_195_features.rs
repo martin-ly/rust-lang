@@ -161,7 +161,7 @@ impl NewRangeTypesExamples {
         let total_pages = if total_items == 0 {
             1
         } else {
-            (total_items + items_per_page - 1) / items_per_page
+            total_items.div_ceil(items_per_page)
         };
         core::range::RangeInclusive { start: 1, last: total_pages }
     }

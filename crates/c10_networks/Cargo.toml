@@ -19,8 +19,9 @@ prost = { workspace = true }
 futures = { workspace = true }
 futures-util = { workspace = true }
 bytes = { workspace = true, features = ["serde"] }
-# async-trait 已迁移至原生 AFIT (1.75+)，保留 workspace 定义供其他 crate 使用
-# async-trait = { workspace = true }
+# async-trait 已迁移至原生 AFIT (1.75+)
+# libp2p 为可选依赖，通过 feature 启用
+libp2p = { workspace = true, features = ["ping", "macros"], optional = true }
 hickory-resolver = { workspace = true }
 hickory-proto = { workspace = true }
 nom = { workspace = true }
@@ -69,6 +70,7 @@ pnet = ["dep:pnet_packet", "dep:pnet_base", "dep:pnet_macros_support"]
 # Sub-features for specific pcap functionality
 pcap_live = ["sniff", "pcap"]
 offline = ["sniff", "pcap"]
+libp2p = ["dep:libp2p"]
 
 [build-dependencies]
 tonic = { workspace = true }
@@ -80,7 +82,6 @@ protoc-bin-vendored = "3.1.0"
 criterion = { workspace = true }
 anyhow = { workspace = true }
 axum = { workspace = true }
-libp2p = { workspace = true, features = ["ping", "macros"] }
 bincode = { workspace = true }
 aes-gcm = "0.10"
 sha2 = { workspace = true }
@@ -94,6 +95,10 @@ path = "src/lib.rs"
 [[bin]]
 name = "net"
 path = "src/bin/main.rs"
+
+[[example]]
+name = "p2p_minimal"
+required-features = ["libp2p"]
 
 [[bench]]
 name = "concurrency_performance"

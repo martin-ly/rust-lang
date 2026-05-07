@@ -1,3 +1,5 @@
+#![allow(async_fn_in_trait)]
+
 //! 原生 AFIT (async fn in trait) 实现 —— Rust 1.75+ 稳定特性
 //!
 //! 本模块展示了如何使用**原生** `async fn` 在 trait 中定义异步接口。

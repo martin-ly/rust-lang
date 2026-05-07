@@ -46,6 +46,7 @@ pub mod io_uring_advanced; // io_uring 深度实践
 pub mod libp2p_advanced; // libp2p 深度集成
 pub mod quic_advanced; // QUIC/HTTP3 完整实现
 pub mod rust_194_features;
+pub mod rust_195_features; // Rust 1.95 特性 (网络场景)
 pub mod rust_196_features;
 #[cfg(feature = "sniff")]
 pub mod sniff;

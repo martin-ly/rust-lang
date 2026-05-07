@@ -103,7 +103,7 @@ impl IfLetGuardExamples {
         match (state, event) {
             // 从 Connecting 状态，如果收到 ConnectSuccess 且 session_id 有效，进入 Connected
             (
-                ConnectionState::Connecting { attempt },
+                ConnectionState::Connecting { attempt: _ },
                 NetworkEvent::ConnectSuccess { session_id },
             ) if let Some(valid_id) = validate_session(&session_id) => ConnectionState::Connected {
                 session_id: valid_id,

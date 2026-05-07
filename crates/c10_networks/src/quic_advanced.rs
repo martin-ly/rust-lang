@@ -300,8 +300,6 @@ QUIC 连接迁移:
 
 #[cfg(not(feature = "quic"))]
 pub mod quic_full {
-    use std::io;
-
     pub fn generate_self_signed_cert(_sans: Vec<String>) -> Result<(Vec<u8>, Vec<u8>), String> {
         Err("'quic' feature required".to_string())
     }

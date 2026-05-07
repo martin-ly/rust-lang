@@ -1,3 +1,5 @@
+#![allow(unexpected_cfgs)]
+
 //! Rust 1.95.0 宏系统新特性实现模块
 //!
 //! 本模块展示了 Rust 1.95.0 在宏系统方面的关键增强：
@@ -79,6 +81,9 @@ impl CfgSelectExamples {
         }
     }
 
+    /// 现代方式获取最大路径长度
+    ///
+    /// 使用 `cfg_select!` 扁平化条件选择。
     pub fn max_path_length_modern() -> usize {
         // 现代方式：cfg_select! 扁平化
         cfg_select! {
@@ -158,19 +163,24 @@ impl CfgSelectExamples {
     }
 }
 
+#[allow(dead_code)]
 fn linux_wrapper(fd: i32) -> i32 {
     fd + 1
 }
+#[allow(dead_code)]
 fn macos_wrapper(fd: i32) -> i32 {
     fd + 2
 }
+#[allow(dead_code)]
 fn windows_wrapper(fd: i32) -> i32 {
     fd + 3
 }
+#[allow(dead_code)]
 fn generic_wrapper(fd: i32) -> i32 {
     fd
 }
 
+#[allow(dead_code)]
 fn unix_error_name(code: i32) -> &'static str {
     match code {
         2 => "ENOENT",
@@ -179,6 +189,7 @@ fn unix_error_name(code: i32) -> &'static str {
     }
 }
 
+#[allow(dead_code)]
 fn windows_error_name(code: i32) -> &'static str {
     match code {
         2 => "ERROR_FILE_NOT_FOUND",
@@ -187,6 +198,7 @@ fn windows_error_name(code: i32) -> &'static str {
     }
 }
 
+#[allow(dead_code)]
 fn unknown_error_name(_code: i32) -> &'static str {
     "UNKNOWN"
 }
@@ -226,7 +238,7 @@ impl CrossPlatformPatterns {
     pub const DEFAULT_STACK_SIZE: usize = cfg_select! {
         target_os = "linux" => 2 * 1024 * 1024,    // 2MB
         target_os = "macos" => 2 * 1024 * 1024,    // 2MB
-        target_os = "windows" => 1 * 1024 * 1024,  // 1MB
+        target_os = "windows" => 1024 * 1024,  // 1MB
         _ => 2 * 1024 * 1024,
     };
 }
