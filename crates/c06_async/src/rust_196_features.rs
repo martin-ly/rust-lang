@@ -190,6 +190,66 @@ pub fn get_rust_196_async_info() -> String {
         .to_string()
 }
 
+// ============================================================================
+// Rust 1.96 新特性：`core::pin::pin!` 宏 — 异步栈上固定 (1.96 stable)
+// ============================================================================
+
+/// # `core::pin::pin!` 与异步编程
+///
+/// Rust 1.96.0 稳定了 `core::pin::pin!` 宏。
+/// 在异步编程中，`pin!` 消除了将 Future 固定到堆上的需要，
+/// 对高性能异步运行时尤为重要。
+///
+/// ## 异步场景
+/// - `select!` 宏中的多个 future 可以在栈上固定
+/// - 递归异步函数减少 `Box::pin` 分配
+/// - 嵌入式/实时异步场景避免堆分配
+pub struct AsyncPinMacroExamples;
+
+impl AsyncPinMacroExamples {
+    /// 在栈上固定 future 并执行
+    pub fn stack_pin_future() {
+        let future = async { 42 };
+        let _pinned = std::pin::pin!(future);
+        // _pinned 现在是 Pin<&mut impl Future<Output = i32>>
+    }
+
+    /// 模拟 async block 的栈上固定模式
+    pub fn pin_async_block<F>(_f: F) -> std::pin::Pin<&'static mut F>
+    where
+        F: std::future::Future,
+    {
+        todo!("使用 pin!(f) 在调用点固定")
+    }
+}
+
+// ============================================================================
+// Rust 1.96 新特性：`VecDeque::new` const 支持 (1.96 stable)
+// ============================================================================
+
+use std::collections::VecDeque;
+
+/// # `VecDeque::new` 的 `const` 支持
+///
+/// Rust 1.96.0 使 `VecDeque::new` 成为 `const fn`，
+/// 允许在编译期初始化双端队列。
+///
+/// ## 异步场景
+/// 异步运行时的任务队列、消息通道的缓冲区可在编译期初始化，
+/// 减少运行时启动延迟。
+pub struct ConstVecDequeAsyncExamples;
+
+impl ConstVecDequeAsyncExamples {
+    /// 编译期初始化的异步任务队列
+    pub const TASK_QUEUE: VecDeque<&'static str> = VecDeque::new();
+
+    /// 演示常量 VecDeque 在异步上下文中的应用
+    pub fn async_task_buffer() -> VecDeque<Box<dyn std::future::Future<Output = ()>>> {
+        // 实际异步运行时中，结合 UnsafeCell 或 Mutex 实现静态队列
+        VecDeque::new()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

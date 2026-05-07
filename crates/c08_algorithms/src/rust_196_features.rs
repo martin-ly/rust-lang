@@ -1271,7 +1271,9 @@ pub struct ElementOffsetExamples;
 impl ElementOffsetExamples {
     /// 计算两个元素在数组中的距离
     pub fn distance_between(arr: &[i32], a: &i32, b: &i32) -> Option<usize> {
-        arr.element_offset(a).zip(arr.element_offset(b)).map(|(ia, ib)| ia.abs_diff(ib))
+        arr.element_offset(a)
+            .zip(arr.element_offset(b))
+            .map(|(ia, ib)| ia.abs_diff(ib))
     }
 
     /// 检查元素是否在另一个元素之前
@@ -1293,7 +1295,9 @@ pub struct PeekableNextIfMapExamples;
 
 impl PeekableNextIfMapExamples {
     /// 从迭代器中消费满足条件的元素并映射
-    pub fn consume_while_even(iter: &mut std::iter::Peekable<impl Iterator<Item = i32>>) -> Vec<i32> {
+    pub fn consume_while_even(
+        iter: &mut std::iter::Peekable<impl Iterator<Item = i32>>,
+    ) -> Vec<i32> {
         let mut result = Vec::new();
         while let Some(n) = iter.next_if(|x| x % 2 == 0) {
             result.push(n * 2);
@@ -1308,13 +1312,13 @@ impl PeekableNextIfMapExamples {
         loop {
             // 消费数字字符并构建数字
             let mut num_str = String::new();
-            while chars.peek().map_or(false, |c| c.is_ascii_digit()) {
+            while chars.peek().is_some_and(|c| c.is_ascii_digit()) {
                 num_str.push(chars.next().unwrap());
             }
-            if !num_str.is_empty() {
-                if let Ok(n) = num_str.parse() {
-                    nums.push(n);
-                }
+            if !num_str.is_empty()
+                && let Ok(n) = num_str.parse()
+            {
+                nums.push(n);
             }
             // 消费逗号或空白
             if chars.next_if(|c| *c == ',' || c.is_whitespace()).is_none() {
@@ -1369,7 +1373,10 @@ mod rust_196_real_features_tests {
     #[test]
     fn test_element_offset() {
         let arr = [10, 20, 30, 40, 50];
-        assert_eq!(ElementOffsetExamples::distance_between(&arr, &arr[1], &arr[3]), Some(2));
+        assert_eq!(
+            ElementOffsetExamples::distance_between(&arr, &arr[1], &arr[3]),
+            Some(2)
+        );
         assert!(ElementOffsetExamples::is_before(&arr, &arr[1], &arr[4]));
         assert!(!ElementOffsetExamples::is_before(&arr, &arr[4], &arr[1]));
     }
@@ -1377,7 +1384,10 @@ mod rust_196_real_features_tests {
     #[test]
     fn test_next_if_map() {
         let input = "1, 2, 3, 4";
-        assert_eq!(PeekableNextIfMapExamples::parse_csv_numbers(input), vec![1, 2, 3, 4]);
+        assert_eq!(
+            PeekableNextIfMapExamples::parse_csv_numbers(input),
+            vec![1, 2, 3, 4]
+        );
     }
 
     #[test]

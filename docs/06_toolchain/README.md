@@ -43,7 +43,7 @@ cargo doc --open
 name = "my-project"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.94"
+rust-version = "1.95"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
@@ -267,11 +267,15 @@ lto = true
 - **Edition 2024 默认**: 现代 Rust 开发体验
 - **性能优化**: 增量编译 +15-20%，HashMap +10-15%
 
+> **以下 1.94 文档已归档，当前活跃版本为 1.95.0+**
+>
+> 如需查看 Rust 1.94 历史文档，请参阅归档目录。
+
 **文档**:
 
-- [Rust 1.94 完整发布说明](./16_rust_1.94_release_notes.md) 🆕
-- [Rust 1.93 vs 1.94 对比](./17_rust_1.93_vs_1.94_comparison.md) 🆕
-- [Rust 1.94 采用指南](./18_rust_1.94_adoption_guide.md) 🆕
+- [Rust 1.94 完整发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md) 🆕
+- [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md) 🆕
+- [Rust 1.94 采用指南](../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md) 🆕
 
 ---
 
@@ -416,9 +420,9 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](./11_rust_1.93_cargo_rustdoc_changes.md) 🆕
 - [Rust 1.93.1 vs 1.93.0 补丁版本对比](./12_rust_1.93.1_vs_1.93.0_comparison.md) 🆕
 - [Rust 1.93 语言特性全面分析（92 项设计论证）](../research_notes/RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 🆕
-- [Rust 1.94 完整发布说明](./16_rust_1.94_release_notes.md) 🆕
-- [Rust 1.93 vs 1.94 对比](./17_rust_1.93_vs_1.94_comparison.md) 🆕
-- [Rust 1.94 采用指南](./18_rust_1.94_adoption_guide.md) 🆕
+- [Rust 1.94 完整发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md) 🆕
+- [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md) 🆕
+- [Rust 1.94 采用指南](../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md) 🆕
 - [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md) 🆕
 - [Rust 1.94 研究笔记](../research_notes/RUST_194_RESEARCH_UPDATE.md) 🆕
 - [Rust 1.94 速查卡](../02_reference/quick_reference/rust_194_features_cheatsheet.md) 🆕
@@ -581,7 +585,6 @@ tokio = { version = "1.0", features = ["full"] }
 **最后更新**: 2026-05-08
 **下次审查**: 2026-05-06
 **最后对照 releases.rs**: 2026-03-06
-
 
 ---
 

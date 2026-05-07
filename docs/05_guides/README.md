@@ -230,5 +230,10 @@ let v = vec_mac![1, 2, 3];
 
 ---
 
+> **以下 1.94 文档已归档，当前活跃版本为 1.95.0+**
+>
+> - [Rust 1.94 指南索引](../archive/2026_05_historical_docs/RUST_194_GUIDES_INDEX.md)（已归档）
+> - 如需查看 Rust 1.94 历史文档，请参阅 `docs/archive/2026_05_historical_docs/` 目录。
+
 **维护者**: Rust 学习项目团队
 **状态**: ✅✅✅ **100% 深度整合完成**

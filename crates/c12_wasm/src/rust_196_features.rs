@@ -302,6 +302,57 @@ pub fn get_rust_196_wasm_info() -> String {
         .to_string()
 }
 
+// ============================================================================
+// Rust 1.96 新特性：`impl From<bool> for f32/f64` (1.96 stable)
+// ============================================================================
+
+/// # 布尔到浮点转换在 WASM 中的应用
+///
+/// Rust 1.96.0 稳定了 `impl From<bool> for f32` 和 `impl From<bool> for f64`。
+/// 在 WebAssembly 中，这种转换常用于：
+/// - 条件标志到数值的转换（0.0/1.0）
+/// - 与 JavaScript 的互操作（JS 中 `true` 有时需要转为 `1.0`）
+/// - 图形/音频 WASM 模块中的开关信号
+pub struct WasmBoolToFloatExamples;
+
+impl WasmBoolToFloatExamples {
+    /// 将 WASM 功能标志数组转换为浮点掩码
+    pub fn feature_flags_to_mask(flags: &[bool]) -> Vec<f32> {
+        flags.iter().map(|&b| f32::from(b)).collect()
+    }
+
+    /// 音频 WASM：静音开关转换为增益系数
+    pub fn mute_to_gain(mute: bool) -> f32 {
+        f32::from(!mute) // mute=true → 0.0, mute=false → 1.0
+    }
+
+    /// 图形 WASM：可见性到透明度
+    pub fn visible_to_alpha(visible: bool) -> f64 {
+        f64::from(visible) // true → 1.0, false → 0.0
+    }
+}
+
+// ============================================================================
+// Rust 1.96 新特性：`core::pin::pin!` 宏 (1.96 stable)
+// ============================================================================
+
+/// # `core::pin::pin!` 在 WASM 异步中的应用
+///
+/// `pin!` 允许在栈上固定值，对 WASM 目标尤为重要：
+/// - WASM 的堆分配性能开销高于原生平台
+/// - `pin!` 消除了 `Box::pin` 的分配，减少 JS 垃圾回收压力
+/// - 在 `wasm32-unknown-unknown` 目标中节省代码体积
+pub struct WasmPinMacroExamples;
+
+impl WasmPinMacroExamples {
+    /// WASM 中栈上固定 future
+    pub fn wasm_stack_pin() {
+        let future = async { "WASM async result" };
+        let _pinned = std::pin::pin!(future);
+        // 无需 Box::pin，无堆分配
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

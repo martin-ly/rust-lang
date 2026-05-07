@@ -15,10 +15,8 @@
 //! # 参考
 //! - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
 
-use std::sync::atomic::{
-    AtomicBool, AtomicI32, AtomicPtr, AtomicUsize, Ordering,
-};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, AtomicI32, AtomicPtr, AtomicUsize, Ordering};
 use std::thread;
 
 // ============================================================================
@@ -75,21 +73,14 @@ impl AtomicUpdateExamples {
     /// 展示了 `try_update` 的强大能力：原子性条件更新。
     pub fn try_increment_if_even(counter: &AtomicI32) -> Result<i32, i32> {
         counter.try_update(Ordering::SeqCst, Ordering::SeqCst, |old| {
-            if old % 2 == 0 {
-                Some(old + 1)
-            } else {
-                None
-            }
+            if old % 2 == 0 { Some(old + 1) } else { None }
         })
     }
 
     /// 原子指针更新：CAS 循环简化
     ///
     /// `AtomicPtr::update` 极大地简化了指针级别的原子操作。
-    pub fn update_shared_config<T>(
-        ptr: &AtomicPtr<T>,
-        updater: impl Fn(&T) -> T,
-    ) -> *mut T {
+    pub fn update_shared_config<T>(ptr: &AtomicPtr<T>, updater: impl Fn(&T) -> T) -> *mut T {
         ptr.update(Ordering::Acquire, Ordering::Relaxed, |old_ptr| {
             // SAFETY: 假设 old_ptr 是有效的，且我们拥有更新权
             let old_ref = unsafe { &*old_ptr };
@@ -103,11 +94,7 @@ impl AtomicUpdateExamples {
     /// 仅当当前为 `false` 时设为 `true`（一次性触发）。
     pub fn try_set_flag(flag: &AtomicBool) -> Result<bool, bool> {
         flag.try_update(Ordering::SeqCst, Ordering::SeqCst, |current| {
-            if current {
-                None
-            } else {
-                Some(true)
-            }
+            if current { None } else { Some(true) }
         })
     }
 
@@ -249,7 +236,9 @@ impl ColdPathExamples {
     }
 
     /// 并发场景：锁竞争失败路径
-    pub fn try_lock_with_cold_hint<T>(lock: &std::sync::Mutex<T>) -> Option<std::sync::MutexGuard<'_, T>> {
+    pub fn try_lock_with_cold_hint<T>(
+        lock: &std::sync::Mutex<T>,
+    ) -> Option<std::sync::MutexGuard<'_, T>> {
         match lock.try_lock() {
             Ok(guard) => Some(guard),
             Err(_) => {
@@ -261,20 +250,11 @@ impl ColdPathExamples {
     }
 
     /// 状态机：非法状态转换
-    pub fn state_transition_safe(
-        current: ConnectionState,
-        event: &str,
-    ) -> ConnectionState {
+    pub fn state_transition_safe(current: ConnectionState, event: &str) -> ConnectionState {
         match (current, event) {
-            (ConnectionState::Idle, "connect") => {
-                ConnectionState::Connecting
-            }
-            (ConnectionState::Connecting, "success") => {
-                ConnectionState::Connected
-            }
-            (ConnectionState::Connected, "disconnect") => {
-                ConnectionState::Idle
-            }
+            (ConnectionState::Idle, "connect") => ConnectionState::Connecting,
+            (ConnectionState::Connecting, "success") => ConnectionState::Connected,
+            (ConnectionState::Connected, "disconnect") => ConnectionState::Idle,
             _ => {
                 // 非法转换在正确程序中不应发生
                 std::hint::cold_path();
@@ -388,7 +368,7 @@ impl CfgSelectThreadExamples {
     pub const DEFAULT_STACK_SIZE: usize = cfg_select! {
         target_os = "linux" => { 2 * 1024 * 1024 }
         target_os = "macos" => { 2 * 1024 * 1024 }
-        target_os = "windows" => { 1 * 1024 * 1024 }
+        target_os = "windows" => { 1024 * 1024 }
         _ => { 512 * 1024 }
     };
 }

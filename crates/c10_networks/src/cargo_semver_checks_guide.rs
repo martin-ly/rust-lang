@@ -172,7 +172,7 @@ pub trait ProtocolHandler {
 /// - 使用 type alias 渐进迁移。
 /// - 使用 newtype 模式封装。
 /// - 保留旧类型并标记 `#[deprecated]`。
-
+///
 /// 旧类型（已废弃）
 #[deprecated(since = "0.2.0", note = "请使用 `PacketId` 替代")]
 pub type OldPacketId = u32;
@@ -234,7 +234,7 @@ impl InternalTrait for String {
 /// 1. **MAJOR 版本前至少保留一个 MINOR 周期的 deprecated API**。
 /// 2. **在文档中提供 before/after 代码对比**。
 /// 3. **若涉及类型变更，提供 `From` / `Into` 转换**。
-
+///
 /// 已废弃的 legacy 连接函数
 #[deprecated(since = "0.3.0", note = "请使用 `connect_async` 替代")]
 pub fn connect_legacy(_addr: &str) -> std::io::Result<()> {
@@ -296,7 +296,7 @@ impl From<LegacyConfig> for NewConfig {
 /// 1. **PR 检查**: 与 `main` 分支对比，阻止无意的 breaking change。
 /// 2. **发布前检查**: 与上一个发布的版本对比。
 /// 3. **允许失败模式**: 对于实验性 crate，可设置 `continue-on-error: true`。
-
+///
 /// Mermaid: CI 流水线中的 SemVer 检查
 ///
 /// ```mermaid

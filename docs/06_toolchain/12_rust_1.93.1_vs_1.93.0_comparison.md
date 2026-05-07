@@ -30,7 +30,7 @@
     - [ICE 修复的工程意义](#ice-修复的工程意义)
     - [Clippy 误报与 Deref 语义](#clippy-误报与-deref-语义)
     - [wasm32-wasip2 与资源安全](#wasm32-wasip2-与资源安全)
-  - [Rust 1.95+ 更新](#-rust-194-更新)
+  - [Rust 1.95+ 更新](#rust-195-更新)
 
 ---
 
@@ -207,8 +207,8 @@ rust-version = "1.93.1"  # 或 "1.93" 以兼容 1.93.x
 
 本文档基于 Rust 1.93/1.92，最新版本请参见：
 
-- [Rust 1.94 完整发布说明](./16_rust_1.94_release_notes.md)
-- [Rust 1.94 采用指南](./18_rust_1.94_adoption_guide.md)
-- [Rust 1.93 vs 1.94 对比](./17_rust_1.93_vs_1.94_comparison.md)
+- [Rust 1.94 完整发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
+- [Rust 1.94 采用指南](../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md)
+- [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md)
 
 **最后更新**: 2026-05-08 (添加 1.94 引用)

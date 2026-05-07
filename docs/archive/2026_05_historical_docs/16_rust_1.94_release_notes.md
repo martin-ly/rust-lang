@@ -26,14 +26,31 @@
   - [📦 Cargo 改进](#-cargo-改进)
     - [TOML 1.1 支持](#toml-11-支持)
     - [Cargo 配置文件 Include](#cargo-配置文件-include)
-  - [⚡ 性能改进](#-性能改进)
+  - [⚡ 性能改进深度分析](#-性能改进深度分析)
     - [编译器性能](#编译器性能)
     - [运行时性能](#运行时性能)
+      - [1. `array_windows` - 零开销抽象](#1-array_windows---零开销抽象)
+      - [2. `LazyLock::get()` - 热路径优化](#2-lazylockget---热路径优化)
+      - [3. `ControlFlow` - 迭代器短路优化](#3-controlflow---迭代器短路优化)
+      - [4. 数学常量 - 精确计算](#4-数学常量---精确计算)
   - [🔄 迁移指南](#-迁移指南)
     - [升级步骤](#升级步骤)
     - [兼容性说明](#兼容性说明)
+    - [代码迁移示例](#代码迁移示例)
+      - [迁移 1: 从 `windows()` 到 `array_windows()`](#迁移-1-从-windows-到-array_windows)
+      - [迁移 2: 优化 `LazyLock` 热路径](#迁移-2-优化-lazylock-热路径)
+      - [迁移 3: 使用 `ControlFlow` 改进流控制](#迁移-3-使用-controlflow-改进流控制)
+      - [迁移 4: 使用新的数学常量](#迁移-4-使用新的数学常量)
+    - [迁移检查清单](#迁移检查清单)
+      - [性能优化机会](#性能优化机会)
+      - [兼容性检查](#兼容性检查)
   - [📊 版本对比](#-版本对比)
     - [Rust 1.93 vs 1.94 对比](#rust-193-vs-194-对比)
+  - [🎯 实际应用场景](#-实际应用场景)
+    - [场景 1: 金融数据分析（股票技术分析）](#场景-1-金融数据分析股票技术分析)
+    - [场景 2: 高频交易连接池](#场景-2-高频交易连接池)
+    - [场景 3: 数据验证管道](#场景-3-数据验证管道)
+    - [场景 4: 科学计算（数值优化）](#场景-4-科学计算数值优化)
   - [🔗 相关资源](#-相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
@@ -343,6 +360,7 @@ include = [
 | 泛型实例化 | 基准 | 缓存优化 | **10-15%** |
 
 **关键优化**:
+
 - LLVM 后端更新至 19.x，带来更好的代码生成
 - 增量编译缓存算法改进，减少重复工作
 - 宏扩展性能优化，特别是复杂宏嵌套场景
@@ -362,11 +380,13 @@ include = [
 | **`array_windows::<3>()`** | **2.4M ops/s** | **0** | **2.1%** |
 
 **优化原理**:
+
 - 编译期确定的窗口大小允许 **循环展开**
 - 返回 `[T; N]` 而非 `&[T]` 消除 **动态边界检查**
 - 连续的内存访问模式提高 **缓存命中率**
 
 **建议应用场景**:
+
 - ✅ 时间序列分析（滑动平均、MACD 计算）
 - ✅ 信号处理（卷积、滤波器）
 - ✅ 字符串处理（模式检测）
@@ -382,11 +402,13 @@ include = [
 | `LAZY_LOCK.get()` | **8-15** | **无** | 热路径检查 |
 
 **优化原理**:
+
 - `get()` 使用 **无锁读取** 检查初始化状态
 - 避免不必要的 **原子操作** 和 **内存屏障**
 - 适合高频调用的 **热路径**
 
 **建议应用模式**:
+
 ```rust
 // 热路径优化模式
 if let Some(config) = LazyLock::get(&CONFIG) {
@@ -408,6 +430,7 @@ if let Some(config) = LazyLock::get(&CONFIG) {
 | `ControlFlow` | **+10-15%** | ✅ 清晰 | 基准 |
 
 **优化原理**:
+
 - 与 `Iterator::try_fold` 深度集成
 - 避免 `Result` 的 **错误处理开销**
 - 更精确的控制流允许编译器 **更好地优化**
@@ -422,6 +445,7 @@ if let Some(config) = LazyLock::get(&CONFIG) {
 | `EULER_GAMMA` | 0.5772156649015329 | 精确值 | 消除舍入误差 |
 
 **应用场景**:
+
 - 数值优化算法（黄金比例搜索）
 - 数论计算（调和级数估计）
 - 科学计算（高精度要求）
@@ -568,12 +592,14 @@ fn optimize_new(f: impl Fn(f64) -> f64, a: f64, b: f64) -> f64 {
 ### 迁移检查清单
 
 #### 性能优化机会
+
 - [ ] 是否有固定大小的滑动窗口操作？→ 考虑 `array_windows()`
 - [ ] 是否有全局配置延迟初始化？→ 考虑 `LazyLock::get()` 优化
 - [ ] 是否有提前终止的迭代器操作？→ 考虑 `ControlFlow`
 - [ ] 是否使用了硬编码数学常量？→ 考虑 `f64::consts`
 
 #### 兼容性检查
+
 - [ ] 运行 `cargo check` 检查编译错误
 - [ ] 运行 `cargo test` 验证测试通过
 - [ ] 检查是否有 `dyn Trait` 生命周期转换
@@ -622,7 +648,7 @@ impl TechnicalAnalyzer {
             _ => panic!("不支持的周期: {}", period),
         }
     }
-    
+
     /// 检测 MACD 交叉信号
     pub fn detect_macd_signals(
         short_term: &[f64],
@@ -661,7 +687,7 @@ use std::sync::LazyLock;
 use std::sync::atomic::{AtomicU64, Ordering};
 
 /// 全局连接池（延迟初始化）
-static TRADING_CONNECTION_POOL: LazyLock<ConnectionPool> = 
+static TRADING_CONNECTION_POOL: LazyLock<ConnectionPool> =
     LazyLock::new(|| {
         ConnectionPool::new(
             std::env::var("TRADING_API_ENDPOINT").unwrap(),
@@ -680,7 +706,7 @@ pub async fn submit_order(order: Order) -> Result<OrderId, TradingError> {
         let conn = pool.acquire().await?;
         return conn.submit(order).await;
     }
-    
+
     // 冷路径：触发初始化
     let pool = &*TRADING_CONNECTION_POOL;
     let conn = pool.acquire().await?;
@@ -723,7 +749,7 @@ pub fn validate_registration(
             )
         );
     }
-    
+
     // 验证邮箱格式
     if !data.email.contains('@') || !data.email.contains('.') {
         return ControlFlow::Break(
@@ -732,7 +758,7 @@ pub fn validate_registration(
             )
         );
     }
-    
+
     // 验证密码强度
     if data.password.len() < 8 {
         return ControlFlow::Break(
@@ -741,14 +767,14 @@ pub fn validate_registration(
             )
         );
     }
-    
+
     // 验证年龄
     if data.age < 18 {
         return ControlFlow::Break(
             ValidationError::UnderAge(data.age)
         );
     }
-    
+
     ControlFlow::Continue(())
 }
 
@@ -781,12 +807,12 @@ where
 {
     let phi = f64::consts::GOLDEN_RATIO;  // Rust 1.94
     let resphi = 2.0 - phi;
-    
+
     let mut x1 = left + resphi * (right - left);
     let mut x2 = right - resphi * (right - left);
     let mut f1 = f(x1);
     let mut f2 = f(x2);
-    
+
     while (right - left).abs() > epsilon {
         if f1 < f2 {
             right = x2;
@@ -802,7 +828,7 @@ where
             f2 = f(x2);
         }
     }
-    
+
     (left + right) / 2.0
 }
 
@@ -810,7 +836,7 @@ where
 pub fn harmonic_number(n: u64) -> f64 {
     let n_f64 = n as f64;
     // H_n ≈ ln(n) + γ + 1/(2n) - 1/(12n²)
-    n_f64.ln() 
+    n_f64.ln()
         + f64::consts::EULER_GAMMA  // Rust 1.94
         + 1.0 / (2.0 * n_f64)
         - 1.0 / (12.0 * n_f64 * n_f64)

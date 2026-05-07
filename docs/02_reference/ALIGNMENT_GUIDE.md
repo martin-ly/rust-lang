@@ -38,7 +38,7 @@
     - [项目内文档](#项目内文档)
     - [代码示例](#代码示例)
     - [研究笔记](#研究笔记)
-  - [Rust 1.95+ 更新](#-rust-194-更新)
+  - [Rust 1.95+ 更新](#rust-195-更新)
 
 ---
 
@@ -363,6 +363,6 @@ struct CacheLinePadded {
 
 > **适用版本**: Rust 1.95.0+
 
-详见 [Rust 1.94 发布说明](../06_toolchain/16_rust_1.94_release_notes.md)
+详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
 **最后更新**: 2026-05-08

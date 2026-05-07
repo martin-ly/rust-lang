@@ -8,7 +8,7 @@
 
 ## 📋 目录
 
-- [Rust 1.95+ 特性速查卡 / Rust 1.94 Features Cheatsheet](#rust-194-特性速查卡--rust-194-features-cheatsheet)
+- [Rust 1.95+ 特性速查卡 / Rust 1.94 Features Cheatsheet](#rust-195-特性速查卡--rust-194-features-cheatsheet)
   - [📋 目录](#-目录)
   - [🎯 快速参考](#-快速参考)
   - [1. Array Windows（数组窗口）](#1-array-windows数组窗口)
@@ -31,7 +31,7 @@
   - [🔧 完整示例](#-完整示例)
     - [综合示例：数据处理器](#综合示例数据处理器)
   - [📚 相关资源](#-相关资源)
-  - [Rust 1.95+ 特性速查 - 完整版](#rust-194-特性速查---完整版)
+  - [Rust 1.95+ 特性速查 - 完整版](#rust-195-特性速查---完整版)
     - [array\_windows](#array_windows)
     - [ControlFlow](#controlflow)
     - [LazyLock](#lazylock)
@@ -359,7 +359,7 @@ impl DataProcessor {
 | 资源 | 链接 |
 |------|------|
 | **官方发布说明** | [Rust 1.94.0](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/) |
-| **完整发布说明** | [16_rust_1.94_release_notes.md](../../06_toolchain/16_rust_1.94_release_notes.md) |
+| **完整发布说明** | [16_rust_1.94_release_notes.md](../../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md) |
 | **迁移指南** | [RUST_194_MIGRATION_GUIDE.md](../../05_guides/RUST_194_MIGRATION_GUIDE.md) |
 | **C01 示例** | [c01 rust_194_features.rs](../../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs) |
 | **C02 示例** | [c02 rust_194_features.rs](../../../crates/c02_type_system/src/rust_194_features.rs) |

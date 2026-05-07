@@ -319,7 +319,7 @@ cargo build --timings -Zsection-timings
 
 | 文档 | 说明 |
 | :--- | :--- |
-| [13_rust_1.94_preview](./13_rust_1.94_preview.md) | 1.94 Beta 预览 |
+| [13_rust_1.94_preview](../archive/2026_05_historical_docs/13_rust_1.94_preview.md) | 1.94 Beta 预览 |
 | [next-solver 倡议](https://github.com/rust-lang/trait-system-refactor-initiative) | 下一代 trait 求解器 |
 | [async-drop 追踪](https://github.com/rust-lang/rust/issues/126482) | Async Drop 进度 |
 | [生成器 RFC](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) | 生成器设计 |
@@ -338,8 +338,8 @@ cargo build --timings -Zsection-timings
 
 本文档基于 Rust 1.93/1.92，最新版本请参见：
 
-- [Rust 1.94 完整发布说明](./16_rust_1.94_release_notes.md)
-- [Rust 1.94 采用指南](./18_rust_1.94_adoption_guide.md)
-- [Rust 1.93 vs 1.94 对比](./17_rust_1.93_vs_1.94_comparison.md)
+- [Rust 1.94 完整发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
+- [Rust 1.94 采用指南](../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md)
+- [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md)
 
 **最后更新**: 2026-05-08 (添加 1.94 引用)

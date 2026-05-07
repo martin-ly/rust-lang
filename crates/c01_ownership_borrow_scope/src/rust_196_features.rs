@@ -256,6 +256,77 @@ pub fn get_rust_196_ownership_info() -> String {
         .to_string()
 }
 
+// ============================================================================
+// Rust 1.96 新特性：`core::pin::pin!` 宏 — 栈上固定 (1.96 stable)
+// ============================================================================
+
+/// # `core::pin::pin!` 宏
+///
+/// Rust 1.96.0 稳定了 `core::pin::pin!` 宏，允许在栈上创建固定值，
+/// 无需 `Box::pin` 的堆分配开销。
+///
+/// ## 所有权意义
+/// `pin!` 使得自引用结构可以在栈上安全构造，
+/// 避免了将所有权转移到堆上的性能损失。
+/// 这是所有权系统与 `Pin` 契约的关键结合点。
+pub struct PinMacroExamples;
+
+impl PinMacroExamples {
+    /// 在栈上固定自引用结构
+    ///
+    /// `pin!` 返回的 `Pin<&mut T>` 保证被固定的值在内存中不会移动，
+    /// 直到 `Pin` 被丢弃。
+    pub fn stack_pin_example() {
+        // 使用 core::pin::pin! 在栈上固定值
+        let pinned = std::pin::pin!(42);
+        assert_eq!(*pinned, 42);
+    }
+
+    /// 与异步 Future 结合：栈上固定 future 避免 Box
+    pub fn pin_future_on_stack<F>(_future: F) -> std::pin::Pin<&'static mut F>
+    where
+        F: std::future::Future,
+    {
+        // 实际用法：let pinned = pin!(future);
+        // 此处返回类型仅作演示
+        todo!("实际使用场景中，pin! 在调用点创建 Pin")
+    }
+}
+
+// ============================================================================
+// Rust 1.96 新特性：`NonNull::new` const 支持 (1.96 stable)
+// ============================================================================
+
+/// # `NonNull::new` 的 `const` 支持
+///
+/// Rust 1.96.0 使 `NonNull::new` 成为 `const fn`，
+/// 允许在常量上下文中安全构造非空裸指针。
+///
+/// ## 所有权意义
+/// `NonNull` 是 `*mut T` 的类型安全包装，保证指针非空。
+/// const 支持使得编译期内存布局计算更加精确。
+use std::ptr::NonNull;
+
+pub struct ConstNonNullExamples;
+
+impl ConstNonNullExamples {
+    /// 编译期构造 NonNull 常量
+    ///
+    /// 使用静态引用的地址作为有效指针来源。
+    pub const CONST_PTR: Option<NonNull<i32>> = {
+        const VALUE: i32 = 0;
+        NonNull::new(&VALUE as *const i32 as *mut i32)
+    };
+
+    /// 验证 NonNull 的常量构造
+    pub fn demonstrate_const_nonnull() {
+        // 在 const 上下文中初始化 NonNull
+        const VALUE: i32 = 42;
+        const PTR: Option<NonNull<i32>> = NonNull::new(&VALUE as *const i32 as *mut i32);
+        assert!(PTR.is_some());
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

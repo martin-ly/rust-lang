@@ -685,7 +685,7 @@
 ### 学习资源
 
 - [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
-- [Rust 1.94 发布说明](../06_toolchain/16_rust_1.94_release_notes.md)
+- [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 学习路径)
 

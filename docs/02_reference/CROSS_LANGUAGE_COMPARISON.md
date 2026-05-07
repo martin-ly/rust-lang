@@ -31,7 +31,7 @@
     - [Rust 形式化基础](#rust-形式化基础)
     - [其他语言参考](#其他语言参考)
   - [相关文档](#相关文档)
-  - [Rust 1.95+ 更新](#-rust-194-更新)
+  - [Rust 1.95+ 更新](#rust-195-更新)
 
 ---
 
@@ -550,6 +550,6 @@ $ python -m pytest
 
 > **适用版本**: Rust 1.95.0+
 
-详见 [Rust 1.94 发布说明](../06_toolchain/16_rust_1.94_release_notes.md)
+详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
 **最后更新**: 2026-05-08

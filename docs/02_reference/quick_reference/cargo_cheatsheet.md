@@ -72,7 +72,7 @@
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-194-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
 
 ---
@@ -376,7 +376,7 @@ tokio = { version = "1.0", features = ["full"] }
 name = "my_project"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.94"
+rust-version = "1.95"
 
 [dependencies]
 serde = "1.0"
@@ -756,7 +756,7 @@ version = "0.1.0"
 edition = "2024"
 authors = ["Team <team@example.com>"]
 license = "MIT OR Apache-2.0"
-rust-version = "1.94"
+rust-version = "1.95"
 
 [workspace.dependencies]
 # 内部依赖
