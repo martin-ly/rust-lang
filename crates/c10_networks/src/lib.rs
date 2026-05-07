@@ -20,7 +20,6 @@
 pub mod asynchronous_communication;
 #[path = "diagnostics.rs"]
 pub mod diagnostics;
-pub mod telemetry;
 pub mod epoll;
 pub mod error;
 pub mod error_unified;
@@ -34,6 +33,7 @@ pub mod performance;
 pub mod protocol;
 pub mod security;
 pub mod semantics;
+pub mod telemetry;
 
 // Rust 1.91 新特性模块
 pub mod archive;
@@ -41,6 +41,10 @@ pub use archive::rust_191_features;
 
 // Rust 1.92.0 新特性模块
 pub use archive::rust_192_features;
+pub mod io_uring_advanced; // io_uring 深度实践
+#[cfg(feature = "libp2p")]
+pub mod libp2p_advanced; // libp2p 深度集成
+pub mod quic_advanced; // QUIC/HTTP3 完整实现
 pub mod rust_194_features;
 pub mod rust_196_features;
 #[cfg(feature = "sniff")]
@@ -50,8 +54,7 @@ pub mod unified_api;
 
 // 重新导出常用类型
 pub use error::{NetworkError, NetworkResult, PerformanceError, ProtocolError, SecurityError};
-pub use security::acme::AcmeManager;
-pub use security::acme::Http01MemoryStore;
+pub use security::acme::{AcmeManager, Http01MemoryStore};
 #[cfg(feature = "tls")]
 pub use security::tls_reload::TlsReloader;
 pub use unified_api::NetClient;
@@ -82,7 +85,6 @@ pub const NAME: &str = env!("CARGO_PKG_NAME");
 pub mod hello {
     tonic::include_proto!("hello");
 }
-
 
 #[cfg(test)]
 pub mod miri_tests;

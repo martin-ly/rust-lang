@@ -179,13 +179,14 @@ pub mod attribute_macros {
     #[macro_export]
     macro_rules! cached {
         ($key:expr, $value:expr) => {{
-            static mut CACHE: Option<HashMap<String, i32>> = None;
-            unsafe {
-                if CACHE.is_none() {
-                    CACHE = Some(HashMap::new());
-                }
-                let cache = CACHE.as_mut().unwrap();
-                let key_str = $key.to_string();
+            use std::cell::RefCell;
+            use std::collections::HashMap;
+            thread_local! {
+                static CACHE: RefCell<HashMap<String, i32>> = RefCell::new(HashMap::new());
+            }
+            let key_str = $key.to_string();
+            CACHE.with(|cache| {
+                let mut cache = cache.borrow_mut();
                 if let Some(&cached_value) = cache.get(&key_str) {
                     cached_value
                 } else {
@@ -193,7 +194,7 @@ pub mod attribute_macros {
                     cache.insert(key_str, result);
                     result
                 }
-            }
+            })
         }};
     }
 

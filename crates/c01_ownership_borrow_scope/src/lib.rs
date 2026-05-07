@@ -323,8 +323,8 @@
 // 核心类型定义 / Core Type Definitions
 pub mod archive;
 pub mod basic_syntax;
-pub mod error;
 pub mod copy_move;
+pub mod error;
 pub mod expression;
 pub mod function;
 pub mod internal_mut;
@@ -332,6 +332,7 @@ pub mod layout_guarantees;
 pub mod ownership_utils;
 pub mod polonius_examples;
 pub mod rust_194_features;
+pub mod rust_195_features; // Rust 1.95 特性 (MaybeUninit 数组互转, Cell AsRef)
 pub mod rust_196_features;
 pub mod scope;
 pub mod variable;

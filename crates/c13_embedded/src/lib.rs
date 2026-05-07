@@ -31,13 +31,16 @@
 // 核心模块
 pub mod bare_metal_basics;
 pub mod cxx_interop;
+pub mod embassy_framework; // Embassy 异步嵌入式框架
 pub mod ffi_c_interop;
 pub mod hal_design_patterns;
 pub mod interrupt_handling;
 pub mod memory_mapped_registers;
 pub mod no_std_practices;
 pub mod raw_pointers_advanced;
-pub mod uart_driver;
+pub mod rtic_framework;
+pub mod rust_195_features; // Rust 1.95 特性 (裸指针 unchecked, PowerPC asm, cfg_select 嵌入式)
+pub mod uart_driver; // RTIC 实时中断驱动并发
 
 // 库版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

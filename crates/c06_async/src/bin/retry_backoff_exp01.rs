@@ -2,14 +2,13 @@ use c06_async::utils::retry_with_backoff;
 use std::time::Duration;
 
 async fn flaky(op_ok_after: u32) -> Result<&'static str, &'static str> {
-    static mut COUNT: u32 = 0;
-    unsafe {
-        COUNT += 1;
-        if COUNT >= op_ok_after {
-            Ok("ok")
-        } else {
-            Err("err")
-        }
+    use std::sync::atomic::{AtomicU32, Ordering};
+    static COUNT: AtomicU32 = AtomicU32::new(0);
+    let current = COUNT.fetch_add(1, Ordering::Relaxed) + 1;
+    if current >= op_ok_after {
+        Ok("ok")
+    } else {
+        Err("err")
     }
 }
 

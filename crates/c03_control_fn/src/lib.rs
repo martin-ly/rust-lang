@@ -21,6 +21,7 @@
 pub mod async_control_flow;
 pub mod error;
 pub mod rust_194_features; // Rust 1.94 特性
+pub mod rust_195_features; // Rust 1.95 特性 (if let guards, bool TryFrom)
 pub mod rust_196_features; // Rust 2024 Edition let chains
 pub mod rust_196_gen_examples; // gen blocks 前瞻 (nightly-only, 非 1.96 stable)
 

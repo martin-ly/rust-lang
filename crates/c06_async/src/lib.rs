@@ -57,10 +57,10 @@
 //! ### 理论学习路径
 //!
 //! ```no_run
-//! use c06_async::async_semantics_theory;
-//! use c06_async::async_recursion_analysis;
-//! use c06_async::actor_reactor_patterns;
-//! use c06_async::csp_model_comparison;
+//! use c06_async::{
+//!     actor_reactor_patterns, async_recursion_analysis, async_semantics_theory,
+//!     csp_model_comparison,
+//! };
 //!
 //! #[tokio::main]
 //! async fn main() {
@@ -95,13 +95,15 @@
 //!         .build();
 //!
 //!     // 执行任务
-//!     let result = runner.run(
-//!         |attempt| async move {
-//!             // 您的异步任务
-//!             Ok::<_, anyhow::Error>(format!("成功于第 {} 次尝试", attempt))
-//!         },
-//!         None::<fn(&anyhow::Error) -> bool>,
-//!     ).await?;
+//!     let result = runner
+//!         .run(
+//!             |attempt| async move {
+//!                 // 您的异步任务
+//!                 Ok::<_, anyhow::Error>(format!("成功于第 {} 次尝试", attempt))
+//!             },
+//!             None::<fn(&anyhow::Error) -> bool>,
+//!         )
+//!         .await?;
 //!
 //!     Ok(())
 //! }
@@ -278,9 +280,11 @@ pub mod advanced_tools;
 
 pub mod archive;
 
+pub mod async_closures_preview;
 /// Rust 1.94 异步特性
 pub mod rust_194_features;
-pub mod rust_196_features;
+pub mod rust_195_features; // Rust 1.95 特性 (async 场景 if let guards)
+pub mod rust_196_features; // Async Closures 预研 (RFC 3668, nightly)
 
 // ============================================================================
 // 异步生态系统模块 (Async Ecosystem)
@@ -306,7 +310,6 @@ pub mod async_debugging_advanced;
 
 /// 异步生态系统集成
 pub mod async_ecosystem_integration;
-
 
 #[cfg(test)]
 pub mod miri_tests;

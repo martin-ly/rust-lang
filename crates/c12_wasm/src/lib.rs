@@ -30,7 +30,9 @@ pub use archive::rust_192_features;
 // Rust 1.93.0 新特性模块
 pub use archive::rust_193_features;
 pub mod rust_194_features;
+pub mod rust_195_features; // Rust 1.95 特性 (WASM 场景)
 pub mod rust_196_features;
+pub mod wasi_migration; // WASI p1/p2 迁移指南
 
 /// wasm-bindgen 基础示例
 pub mod basic_examples {
@@ -488,7 +490,6 @@ mod tests {
         assert!(!string_examples::is_palindrome("hello"));
     }
 }
-
 
 #[cfg(test)]
 pub mod miri_tests;

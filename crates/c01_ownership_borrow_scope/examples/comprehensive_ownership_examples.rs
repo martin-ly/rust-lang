@@ -500,17 +500,11 @@ struct Singleton {
 #[allow(static_mut_refs)]
 impl Singleton {
     fn get_instance() -> &'static Singleton {
-        static INIT: std::sync::Once = std::sync::Once::new();
-        static mut INSTANCE: Option<Singleton> = None;
-
-        unsafe {
-            INIT.call_once(|| {
-                INSTANCE = Some(Singleton {
-                    data: "Singleton data".to_string(),
-                });
-            });
-            INSTANCE.as_ref().unwrap()
-        }
+        use std::sync::OnceLock;
+        static INSTANCE: OnceLock<Singleton> = OnceLock::new();
+        INSTANCE.get_or_init(|| Singleton {
+            data: "Singleton data".to_string(),
+        })
     }
 }
 

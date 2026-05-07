@@ -25,19 +25,19 @@ mod tests {
 }
 pub mod advanced_concurrency;
 pub mod archive;
-pub mod error;
 pub mod concurrency;
 pub mod demo;
 pub mod demo_simple;
+pub mod error;
 pub mod lockfree;
 pub mod message_passing;
 pub mod paralelism;
 pub mod performance_benchmarks;
 pub mod rust_194_features;
+pub mod rust_195_features; // Rust 1.95 特性 (Atomic update, cold_path)
 pub mod rust_196_features;
 pub mod synchronization;
 pub mod threads;
-
 
 #[cfg(test)]
 pub mod miri_tests;
