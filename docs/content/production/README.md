@@ -107,7 +107,7 @@
 
 ```dockerfile
 # 构建阶段
-FROM rust:1.94-slim as builder
+FROM rust:1.95-slim as builder
 
 WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
@@ -141,7 +141,7 @@ ENTRYPOINT ["/app/myapp"]
 
 ```dockerfile
 # 使用 cargo-chef 优化缓存
-FROM lukemathwalker/cargo-chef:latest-rust-1.94 as chef
+FROM lukemathwalker/cargo-chef:latest-rust-1.95 as chef
 WORKDIR /app
 
 FROM chef as planner

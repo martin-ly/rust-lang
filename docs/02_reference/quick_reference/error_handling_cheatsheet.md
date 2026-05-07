@@ -316,7 +316,7 @@ let mut uninit = MaybeUninit::<String>::uninit();
 
 ## Rust 1.95+ ControlFlow 深度错误控制
 
-Rust 1.94 大幅增强了 `std::ops::ControlFlow`，使其成为错误处理和流控制的强大工具。
+Rust 1.95+ 大幅增强了 `std::ops::ControlFlow`，使其成为错误处理和流控制的强大工具。
 
 ### ControlFlow vs Result：语义对比
 

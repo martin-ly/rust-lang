@@ -57,7 +57,7 @@
     - [分组](#分组)
     - [去重](#去重)
     - [窗口操作](#窗口操作)
-      - [Rust 1.94 `array_windows()` - 零开销固定大小窗口](#rust-194-array_windows---零开销固定大小窗口)
+      - [Rust 1.95+ `array_windows()` - 零开销固定大小窗口](#rust-194-array_windows---零开销固定大小窗口)
       - [动态窗口 `windows()`](#动态窗口-windows)
   - [💡 代码示例](#-代码示例)
     - [示例 1: 自定义迭代器](#示例-1-自定义迭代器)
@@ -735,7 +735,7 @@ Rust 1.94 引入了 `array_windows<const N: usize>()`，为滑动窗口操作带
 ```rust
 let data = vec![1, 2, 3, 4, 5];
 
-// ✅ Rust 1.94: array_windows - 返回 [T; N] 数组，零分配
+// ✅ Rust 1.95+: array_windows - 返回 [T; N] 数组，零分配
 let sums: Vec<i32> = data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
     .collect();

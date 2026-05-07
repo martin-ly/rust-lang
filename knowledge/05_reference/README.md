@@ -6,7 +6,7 @@
 
 | 文档 | 用途 |
 |------|------|
-| [math_constants.md](math_constants.md) | Rust 1.94 数学常量 |
+| [math_constants.md](math_constants.md) | Rust 1.96 数学常量 (`EULER_GAMMA`, `GOLDEN_RATIO`) |
 | [cheatsheet.md](cheatsheet.md) | 语法速查表 |
 | [keywords.md](keywords.md) | 关键字列表 |
 | [operators.md](operators.md) | 运算符参考 |

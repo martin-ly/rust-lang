@@ -52,7 +52,7 @@
     - [数据竞争](#数据竞争)
   - [📚 相关文档](#-相关文档)
   - [🆕 Rust 1.95+ 特性](#-rust-194-特性)
-    - [LazyLock 深度应用（Rust 1.94 增强）](#lazylock-深度应用rust-194-增强)
+    - [LazyLock 深度应用（Rust 1.95+ 增强）](#lazylock-深度应用rust-194-增强)
       - [核心 API 对比](#核心-api-对比)
       - [生产场景 1: 连接池热路径优化](#生产场景-1-连接池热路径优化)
       - [生产场景 2: 单线程延迟初始化 + 可变更新](#生产场景-2-单线程延迟初始化--可变更新)
@@ -1221,18 +1221,18 @@ let counter = Arc::new(Mutex::new(0));
 
 > **适用版本**: Rust 1.95.0+
 
-### LazyLock 深度应用（Rust 1.94 增强）
+### LazyLock 深度应用（Rust 1.95+ 增强）
 
-Rust 1.94 大幅增强了 `LazyLock` 和 `LazyCell`，新增了 `get()`、`get_mut()` 和 `force_mut()` 方法，为延迟初始化提供了更灵活、更高效的访问模式。
+Rust 1.95+ 大幅增强了 `LazyLock` 和 `LazyCell`，新增了 `get()`、`get_mut()` 和 `force_mut()` 方法，为延迟初始化提供了更灵活、更高效的访问模式。
 
 #### 核心 API 对比
 
 | 方法 | 返回值 | 触发初始化 | 适用场景 |
 |------|--------|-----------|----------|
 | `Deref` (`*CONFIG`) | `&T` | ✅ 是 | 标准访问 |
-| `get()` (1.94) | `Option<&T>` | ❌ 否 | **热路径检查** |
-| `force()` (1.94) | `&T` | ✅ 是 | 强制初始化 |
-| `force_mut()` (1.94) | `&mut T` | ✅ 是 | 可变访问 |
+| `get()` (1.95+) | `Option<&T>` | ❌ 否 | **热路径检查** |
+| `force()` (1.95+) | `&T` | ✅ 是 | 强制初始化 |
+| `force_mut()` (1.95+) | `&mut T` | ✅ 是 | 可变访问 |
 
 #### 生产场景 1: 连接池热路径优化
 
@@ -1321,7 +1321,7 @@ impl LocalCache {
         &*self.data
     }
 
-    /// 更新缓存（Rust 1.94：force_mut）
+    /// 更新缓存（Rust 1.95+：force_mut）
     ///
     /// 注意：这会触发初始化（如果尚未初始化）
     pub fn update(&mut self, new_data: Vec<u8>) {
@@ -1396,7 +1396,7 @@ pub fn get_config(key: &str) -> Option<&'static str> {
 
 ### array_windows 在并发流处理中的应用
 
-Rust 1.94 的 `array_windows` 在并发数据流处理中具有独特优势：
+Rust 1.95+ 的 `array_windows` 在并发数据流处理中具有独特优势：
 
 #### 场景：并行滑动窗口分析
 

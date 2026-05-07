@@ -357,7 +357,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
 ### Rust 1.95+ ControlFlow API 高级错误控制
 
-Rust 1.94 标准库大幅增强了 `std::ops::ControlFlow<B, C>` 类型，使其成为异步错误处理和流控制的强大工具。与 `Result` 只能表示成功/失败不同，`ControlFlow` 可以显式表达三种语义：
+Rust 1.95+ 标准库大幅增强了 `std::ops::ControlFlow<B, C>` 类型，使其成为异步错误处理和流控制的强大工具。与 `Result` 只能表示成功/失败不同，`ControlFlow` 可以显式表达三种语义：
 
 ```rust
 pub enum ControlFlow<B, C = ()> {
@@ -1495,7 +1495,7 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 
 ### ControlFlow 在异步编程中的应用
 
-Rust 1.94 的 `ControlFlow` 类型可以用于异步流的提前终止：
+Rust 1.95+ 的 `ControlFlow` 类型可以用于异步流的提前终止：
 
 ```rust
 use std::ops::ControlFlow;
@@ -1528,7 +1528,7 @@ async fn find_negative(items: &[i32]) -> Option<i32> {
 
 ### Peekable 迭代器增强
 
-Rust 1.94 为 `Peekable` 添加了 `next_if_map`，可用于异步解析器：
+Rust 1.95+ 为 `Peekable` 添加了 `next_if_map`，可用于异步解析器：
 
 ```rust
 use std::iter::Peekable;

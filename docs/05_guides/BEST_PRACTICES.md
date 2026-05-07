@@ -106,7 +106,7 @@
       - [get\_disjoint\_mut 优化](#get_disjoint_mut-优化)
       - [async Fn 优化](#async-fn-优化)
     - [6. 版本兼容性与迁移指南](#6-版本兼容性与迁移指南)
-      - [从 1.94 迁移到新版本](#从-194-迁移到新版本)
+      - [从 1.95+ 迁移到新版本](#从-195-迁移到新版本)
     - [7. 快速参考卡片](#7-快速参考卡片)
 
 ---
@@ -1370,7 +1370,7 @@ impl<T> LocalCache<T> {
         &*self.data
     }
 
-    /// 更新缓存值（Rust 1.94：force_mut）
+    /// 更新缓存值（Rust 1.96：force_mut）
     pub fn update(&mut self, new_value: T) {
         let data = self.data.force_mut();
         *data = new_value;
@@ -1386,7 +1386,7 @@ impl<T> LocalCache<T> {
 #### 使用标准库常量的好处
 
 ```rust
-// ✅ 推荐：使用 Rust 1.94 标准库常量
+// ✅ 推荐：使用 Rust 1.96 标准库常量
 use std::f64::consts::{E, LN_2, LN_10, LOG2_E, LOG10_E};
 use std::f64::consts::{EULER_GAMMA, GOLDEN_RATIO, PI};
 
@@ -1468,7 +1468,7 @@ fn search(items: &[T]) -> ControlFlow<T, ()> {
 static CONFIG: LazyLock<Config> = LazyLock::new(|| Config::new());
 
 pub fn get_config() -> Option<&'static Config> {
-    CONFIG.get()  // Rust 1.94：无锁快速检查
+    CONFIG.get()  // Rust 1.96：无锁快速检查
 }
 
 // 数学常量 - 精确计算
@@ -1525,7 +1525,7 @@ fn integer_distance_squared(p1: (i64, i64), p2: (i64, i64)) -> i64 {
     (dx * dx + dy * dy).isqrt()  // 精确的整数距离
 }
 
-// ✅ 推荐：结合 1.94 array_windows 的模式检测
+// ✅ 推荐：结合 1.96 array_windows 的模式检测
 fn has_square_pattern(points: &[(i64, i64)]) -> bool {
     points.array_windows::<4>().any(|&[a, b, c, d]| {
         let ab = integer_distance_squared(a, b);
@@ -1832,10 +1832,10 @@ impl<K: Eq, V> LRUCache<K, V> {
 
 ### 6. 版本兼容性与迁移指南
 
-#### 从 1.94 迁移到新版本
+#### 从 1.95+ 迁移到新版本
 
 ```rust
-// 1.94 代码：浮点平方根
+// 1.95+ 代码：浮点平方根
 fn old_sqrt(n: u64) -> u64 {
     (n as f64).sqrt() as u64
 }
@@ -1845,7 +1845,7 @@ fn new_sqrt(n: u64) -> u64 {
     n.isqrt()
 }
 
-// 1.94 代码：多次单独可变借用
+// 1.95+ 代码：多次单独可变借用
 fn old_batch_update(map: &mut HashMap<String, i32>) {
     if let Some(a) = map.get_mut("a") {
         *a += 1;
@@ -1863,7 +1863,7 @@ fn new_batch_update(map: &mut HashMap<String, i32>) {
     }
 }
 
-// 1.94 代码：async_trait 宏
+// 1.95+ 代码：async_trait 宏
 #[async_trait]
 trait OldProcessor {
     async fn process(&self, data: Vec<u8>) -> Result<(), Error>;
@@ -1896,7 +1896,7 @@ trait Processor {
 // pop_if - 条件弹出
 let item = vec.pop_if(|x| x.is_ready());
 
-// 综合：1.94 + 多版本特性组合使用
+// 综合：1.95+ + 多版本特性组合使用
 use std::ops::ControlFlow;
 use std::sync::LazyLock;
 

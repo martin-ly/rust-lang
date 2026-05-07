@@ -322,7 +322,7 @@
 
 | 特性 | 官方版本 | 本项目版本 | 差异说明 |
 |------|---------|-----------|---------|
-| **Rust Edition** | 2024 (1.85.0+) | 2024 (1.94.0+) | 本项目跟踪最新版 |
+| **Rust Edition** | 2024 (1.85.0+) | 2024 (1.95.0++) | 本项目跟踪最新版 |
 | **async closure** | 1.85 新增 | 完整覆盖 | 补充形式化分析 |
 | `offset_of!` | 1.93 类型检查增强 | 已更新 | 详见兼容性分析 |
 | `#[test]` 严格化 | 1.93 新要求 | 已更新 | 详见兼容性分析 |
@@ -673,7 +673,7 @@
 
 > **适用版本**: Rust 1.95.0+
 
-### 1.94 新特性学习要点
+### 1.95+ 新特性学习要点
 
 | 特性 | 学习难度 | 推荐顺序 |
 |------|---------|---------|
@@ -684,7 +684,7 @@
 
 ### 学习资源
 
-- [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
+- [Rust 1.95+ 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 学习路径)
@@ -719,8 +719,8 @@
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
-- [Rust 1.95+ 特性速查](../02_reference/quick_reference/rust_194_features_cheatsheet.md)
+- [Rust 1.95+ 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
+- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
 ---

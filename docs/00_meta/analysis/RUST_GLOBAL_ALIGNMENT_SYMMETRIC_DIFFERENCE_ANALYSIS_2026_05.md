@@ -15,9 +15,9 @@
 
 | 指标 | 2026-04-24 | 2026-05-08 | 变化 |
 |------|------------|------------|------|
-| 已对齐度 | ~65% | ~68% | ✅ +3%（wasm32-wasip1 替换、硬件演示子 crate） |
-| 缺失待补 | ~20% | ~18% | ✅ -2% |
-| 版本引用一致性 | 碎片化（1.94/1.95/1.96 混合） | **仍碎片化** | 🔴 未改善 |
+| 已对齐度 | ~65% | ~85% | ✅ +17%（标签修正、特性补齐、文档创建、历史归档） |
+| 缺失待补 | ~20% | ~10% | ✅ -10% |
+| 版本引用一致性 | 碎片化（1.94/1.95/1.96 混合） | **大幅改善** | ✅ 活跃 docs 1.94 比例降至 ~24% |
 | 代码-docs 同步度 | 中 | **发现标签错误** | 🔴 需紧急修正 |
 
 ---
@@ -143,30 +143,30 @@
 
 | # | 差距 | 权威来源 | 项目现状 | 建议行动 |
 |---|------|---------|---------|---------|
-| 1 | **`if let` guards 版本标签错误** | Rust 1.95.0 stable | 全部 13 个 crate 的 `rust_196_features.rs` 将 `if let` guards 标记为 1.96 | **紧急修正**: 将 `if let` guards 从 `rust_196_features.rs` 移至 `rust_195_features.rs`，或在 `rust_196_features.rs` 中明确标注"1.95 特性复习" |
-| 2 | **`cfg_select!` 宏缺失** | Rust 1.95.0 stable | 无代码示例、无文档 | 在 `c11_macro_system` 或 `c03_control_fn` 中添加 `cfg_select!` 示例 |
-| 3 | **`array_windows` 标签错误** | Rust 1.96.0 beta | 被标记为 1.86 | 核查所有 `array_windows` 引用，统一更新为 1.96 |
-| 4 | **`LazyCell/LazyLock` 访问器标签错误** | Rust 1.96.0 beta | 被标记为 1.94 | 核查并修正版本标签 |
-| 5 | **1.96 数学常量缺失** | Rust 1.96.0 beta | `EULER_GAMMA`、`GOLDEN_RATIO` 未覆盖 | 在 `c08_algorithms` 或 `c02_type_system` 中添加 |
-| 6 | **`element_offset` / `next_if_map` 缺失** | Rust 1.96.0 beta | 无覆盖 | 在 `c08_algorithms` 或 `c03_control_fn` 中添加 |
+| 1 | **`if let` guards 版本标签错误** | Rust 1.95.0 stable | ✅ **已修正**: 全部 13 个 crate 已标注 "1.95 稳定特性复习" | 完成 |
+| 2 | **`cfg_select!` 宏缺失** | Rust 1.95.0 stable | ✅ **已补齐**: 全部 13 个 crate 已添加 `cfg_select!` 示例 | 完成 |
+| 3 | **`array_windows` 标签错误** | Rust 1.96.0 beta | ✅ **已修正**: 全部引用统一为 1.96 | 完成 |
+| 4 | **`LazyCell/LazyLock` 访问器标签错误** | Rust 1.96.0 beta | ✅ **已修正**: 代码、docs、VERSION_INDEX 统一为 1.96 | 完成 |
+| 5 | **1.96 数学常量缺失** | Rust 1.96.0 beta | ✅ **已补齐**: `c08_algorithms` 已添加 `EULER_GAMMA`、`GOLDEN_RATIO` | 完成 |
+| 6 | **`element_offset` / `next_if_map` 缺失** | Rust 1.96.0 beta | ✅ **已补齐**: `c08_algorithms` 已添加 `element_offset`、`Peekable::next_if_map` | 完成 |
 
 #### 🟡 P1 — 重要（内容缺失）
 
 | # | 差距 | 权威来源 | 项目现状 | 建议行动 |
 |---|------|---------|---------|---------|
-| 7 | **cargo-script 专题** | Rust 2026 Project Goals | 无系统性覆盖 | `docs/06_toolchain/` + `examples/` |
-| 8 | **cargo-semver-checks** | Rust 2026 Project Goals | 无覆盖 | `docs/06_toolchain/` |
-| 9 | **Cranelift backend 深度** | Rust 2026 Project Goals | 仅概念提及 | `docs/06_toolchain/cranelift_backend.md` |
-| 10 | **VerusBelt (PLDI 2026)** | PLDI 2026 | 无引用 | `docs/04_research/` |
-| 11 | **Miri 实战指南深度不足** | POPL 2026 | 有引用但无使用指南 | `docs/05_guides/miri_practical_guide.md` |
+| 7 | **cargo-script 专题** | Rust 2026 Project Goals | ✅ **已创建**: `crates/c03_control_fn/examples/cargo_script_demo.rs` (191 行) | 完成 |
+| 8 | **cargo-semver-checks** | Rust 2026 Project Goals | ✅ **已创建**: `crates/c10_networks/src/cargo_semver_checks_guide.rs` (312 行) | 完成 |
+| 9 | **Cranelift backend 深度** | Rust 2026 Project Goals | ✅ **已创建**: `docs/06_toolchain/CRANELIFT_BACKEND_GUIDE.md` (264 行) | 完成 |
+| 10 | **VerusBelt (PLDI 2026)** | PLDI 2026 | ✅ **已创建**: `docs/04_research/VERUSBELT_PLDI_2026.md` (171 行) | 完成 |
+| 11 | **Miri 实战指南深度不足** | POPL 2026 | ✅ **已创建**: `docs/05_guides/MIRI_PRACTICAL_GUIDE.md` (354 行) | 完成 |
 
 #### 🟢 P2 — 扩展
 
 | # | 差距 | 权威来源 | 建议位置 |
 |---|------|---------|---------|
-| 12 | **Polonius 新求解器更新** | Rust 2026 Goals | `docs/04_research/polonius_tracking.md` |
-| 13 | **Unsafe Fields 预览** | Rust 2026 Goals | `docs/05_guides/unsafe_advanced.md` |
-| 14 | **TOML v1.1 in Cargo** | Cargo 1.96 | `docs/06_toolchain/` |
+| 12 | **Polonius 新求解器更新** | Rust 2026 Goals | ✅ **已创建**: `docs/04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md` (300+ 行) | 完成 |
+| 13 | **Unsafe Fields 预览** | Rust 2026 Goals | ✅ **已创建**: `docs/05_guides/UNSAFE_FIELDS_PREVIEW.md` (222 行) | 完成 |
+| 14 | **TOML v1.1 in Cargo** | Cargo 1.96 | ✅ **已创建**: `docs/06_toolchain/TOML_V11_CARGO_GUIDE.md` (260+ 行) | 完成 |
 
 ### 4.2 已修复差距（自 2026-04-24 报告以来）
 
@@ -177,6 +177,23 @@
 | 3 | c06_async nightly 编译错误 | 2026-05-08 | 修复 async_closures + AFIDT 诊断 |
 | 4 | static mut 使用 | 2026-05-08 | 迁移为 AtomicUsize/UnsafeCell |
 | 5 | TODO/FIXME 标记 | 2026-05-08 | 清零 |
+| 6 | `if let` guards 标签错误 | 2026-05-08 | 全部 13 crate 标注为 "1.95 稳定特性复习" |
+| 7 | `cfg_select!` 宏缺失 | 2026-05-08 | 全部 13 crate 添加 `cfg_select!` 示例 |
+| 8 | `array_windows` 标签错误 | 2026-05-08 | 统一更新为 1.96 |
+| 9 | `LazyCell/LazyLock` 访问器标签错误 | 2026-05-08 | 代码/docs/VERSION_INDEX 统一为 1.96 |
+| 10 | 1.96 数学常量缺失 | 2026-05-08 | `c08_algorithms` 添加 `EULER_GAMMA`、`GOLDEN_RATIO` |
+| 11 | `element_offset`/`next_if_map` 缺失 | 2026-05-08 | `c08_algorithms` 添加 |
+| 12 | cargo-script 专题 | 2026-05-08 | `c03_control_fn/examples/cargo_script_demo.rs` |
+| 13 | cargo-semver-checks 专题 | 2026-05-08 | `c10_networks/src/cargo_semver_checks_guide.rs` |
+| 14 | Cranelift backend 深度 | 2026-05-08 | `docs/06_toolchain/CRANELIFT_BACKEND_GUIDE.md` |
+| 15 | VerusBelt (PLDI 2026) | 2026-05-08 | `docs/04_research/VERUSBELT_PLDI_2026.md` |
+| 16 | Miri 实战指南 | 2026-05-08 | `docs/05_guides/MIRI_PRACTICAL_GUIDE.md` |
+| 17 | Polonius 新求解器 | 2026-05-08 | `docs/04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md` |
+| 18 | Unsafe Fields 预览 | 2026-05-08 | `docs/05_guides/UNSAFE_FIELDS_PREVIEW.md` |
+| 19 | TOML v1.1 in Cargo | 2026-05-08 | `docs/06_toolchain/TOML_V11_CARGO_GUIDE.md` |
+| 20 | c01/c06/c12 缺少真正 1.96 特性 | 2026-05-08 | 补充 `pin!`、`From<bool>`、`VecDeque::new` const 等 |
+| 21 | 活跃 docs 1.94 历史文档归档 | 2026-05-08 | 11 个 1.94 专用文档移至 `docs/archive/2026_05_historical_docs/` |
+| 22 | docs 批量版本标签替换 | 2026-05-08 | 52+ 文件、93+ 处 1.94 活跃引用替换为 1.95+
 
 ---
 

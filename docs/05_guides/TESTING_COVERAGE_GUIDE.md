@@ -432,7 +432,7 @@ exclude-files = [
 
 ### 新特性概览
 
-Rust 1.94 带来了以下重要更新：
+Rust 1.95+ 带来了以下重要更新：
 
 - **rray_windows** - 固定大小的数组窗口迭代器
 - **ControlFlow** - 控制流抽象类型

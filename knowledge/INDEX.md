@@ -43,7 +43,7 @@
 
 ### A
 
-- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md) - Rust 1.94
+- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md) - Rust 1.96
 - **async/await** - [03_advanced/async/async_await.md](03_advanced/async/async_await.md)
 - **async closure** - [03_advanced/async/async_closure.md](03_advanced/async/async_closure.md) - Rust 1.85+
 - **atomics** - [03_advanced/concurrency/atomics.md](03_advanced/concurrency/atomics.md)

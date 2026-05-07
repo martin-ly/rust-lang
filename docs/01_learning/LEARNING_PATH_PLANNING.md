@@ -56,7 +56,7 @@
     - [学习支持](#学习支持)
     - [形式化研究（研究者路径）](#形式化研究研究者路径)
   - [Rust 1.95+ 学习路径](#rust-195-学习路径)
-    - [1.94 新特性学习要点](#194-新特性学习要点)
+    - [1.95+ 新特性学习要点](#195-新特性学习要点)
     - [学习资源](#学习资源)
   - [Rust 1.95+ 持续更新更新](#rust-195-持续更新更新)
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
@@ -671,7 +671,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 > **适用版本**: Rust 1.95.0+
 
-### 1.94 新特性学习要点
+### 1.95+ 新特性学习要点
 
 | 特性 | 学习难度 | 推荐顺序 |
 |------|---------|---------|
@@ -682,7 +682,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 ### 学习资源
 
-- [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
+- [Rust 1.95+ 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 学习路径)
@@ -717,8 +717,8 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
-- [Rust 1.95+ 特性速查](../02_reference/quick_reference/rust_194_features_cheatsheet.md)
+- [Rust 1.95+ 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
+- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
 ---

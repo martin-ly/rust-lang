@@ -116,7 +116,7 @@ async fn use_async_fn_trait() {
 
 ```
 项目: 高性能数据处理管道
-├── 使用 array_windows (1.94) 进行数据窗口分析
+├── 使用 array_windows (1.95+) 进行数据窗口分析
 ├── 使用 isqrt (≥1.84) 进行几何计算
 ├── 使用 HashMap::get_disjoint_mut (≥1.83) 管理状态
 └── 使用 async Fn (≥1.85, Ed 2024) 处理异步 I/O
@@ -179,7 +179,7 @@ async fn use_async_fn_trait() {
 **涉及特性**:
 
 - `isqrt` - 整数平方根
-- `array_windows` (1.94) - 滑动窗口统计
+- `array_windows` (1.95+) - 滑动窗口统计
 
 **预计时间**: 2-3 天
 
@@ -197,8 +197,8 @@ async fn use_async_fn_trait() {
 **涉及特性**:
 
 - `HashMap::get_disjoint_mut`
-- `LazyLock::get` 热路径优化 (1.94+)
-- `ControlFlow` 错误处理 (1.94+)
+- `LazyLock::get` 热路径优化 (1.95+)
+- `ControlFlow` 错误处理 (1.95+)
 
 **预计时间**: 4-5 天
 
@@ -223,7 +223,7 @@ async fn use_async_fn_trait() {
 
 ### 项目 4: 系统监控工具 (专家)
 
-**目标**: 综合应用 1.94-1.96 特性
+**目标**: 综合应用 1.95+-1.96 特性
 
 **功能清单**:
 

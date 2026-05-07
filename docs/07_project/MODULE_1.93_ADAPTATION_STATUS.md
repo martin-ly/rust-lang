@@ -37,8 +37,8 @@
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
-- [Rust 1.95+ 特性速查](../02_reference/quick_reference/rust_194_features_cheatsheet.md)
+- [Rust 1.95+ 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
+- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
 ---

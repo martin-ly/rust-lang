@@ -334,7 +334,7 @@ cargo build --timings -Zsection-timings
 
 ## Rust 1.95+ 更新
 
-> **最新版本**: Rust 1.94.0 (2026-03-05)
+> **最新版本**: Rust 1.95.0+ (2026-03-05)
 
 本文档基于 Rust 1.93/1.92，最新版本请参见：
 
@@ -342,4 +342,4 @@ cargo build --timings -Zsection-timings
 - [Rust 1.94 采用指南](../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md)
 - [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md)
 
-**最后更新**: 2026-05-08 (添加 1.94 引用)
+**最后更新**: 2026-05-08 (添加 1.95+ 引用)

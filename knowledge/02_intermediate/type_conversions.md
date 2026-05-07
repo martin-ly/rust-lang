@@ -16,7 +16,7 @@ Rust 中的类型转换是系统编程的核心技能。与许多动态语言不
 - 理解安全转换与可能失败转换的区别
 - 实现自定义类型的转换 trait
 - 处理复杂的字符串类型转换场景
-- 使用 Rust 1.94 新增的 `char` 到 `usize` 转换特性
+- 使用 `char` 到 `usize` 的类型转换
 
 ---
 
@@ -388,13 +388,13 @@ fn main() {
 
 ---
 
-### 7. Rust 1.94 新特性：`char` 转 `usize`
+### 7. `char` 转 `usize`
 
-Rust 1.94 引入了一个实用的新转换：`char` 可以直接转换为 `usize`，返回该字符的 Unicode 标量值。
+`char` 可以通过 `as` 关键字转换为 `usize`，返回该字符的 Unicode 标量值。这是 Rust 的基础类型转换，并非特定版本新增特性。
 
 ```rust
 fn main() {
-    // Rust 1.94+ 新特性
+    // char 到 usize 的 as 转换
     let c = 'A';
     let code: usize = c as usize;  // 65
     println!("'A' 的 Unicode 码点: {}", code);  // 65
@@ -663,7 +663,7 @@ enum Temperature {
 
 ### 练习 4：Unicode 工具
 
-使用 Rust 1.94 的 `char` 转 `usize` 特性，实现一个工具函数，分析文本中每个 Unicode 码点的频率分布。
+使用 `char` 转 `usize` 的转换，实现一个工具函数，分析文本中每个 Unicode 码点的频率分布。
 
 ---
 
@@ -679,4 +679,4 @@ enum Temperature {
 
 > 💡 **进阶提示**: 在实际项目中，可以考虑使用 [derive_more](https://crates.io/crates/derive_more) crate 来自动生成 `From`、`Into` 等 trait 的实现，减少样板代码。
 
-> 📌 **版本注意**: 本文档中的 Rust 1.94 `char` 转 `usize` 特性需要 Rust 1.94 或更高版本。使用 `rustc --version` 检查你的版本。
+> 📌 **版本注意**: `char as usize` 是 Rust 的基础类型转换，自 Rust 1.0 起即支持。

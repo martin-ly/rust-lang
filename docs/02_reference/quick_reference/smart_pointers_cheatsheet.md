@@ -51,7 +51,7 @@
     - [示例 1: 实现链表](#示例-1-实现链表)
     - [示例 2: 带父指针的树结构（避免循环引用）](#示例-2-带父指针的树结构避免循环引用)
     - [示例 3: 自定义智能指针](#示例-3-自定义智能指针)
-    - [示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.94 增强）](#示例-4-lazycell-和-lazylockrust-180rust-194-增强)
+    - [示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.95+ 增强）](#示例-4-lazycell-和-lazylockrust-180rust-194-增强)
       - [Rust 1.95+ 新增 API](#rust-194-新增-api)
       - [性能对比](#性能对比)
       - [使用建议](#使用建议)
@@ -784,7 +784,7 @@ let m = MyBox::new(String::from("Rust"));
 hello(&m);  // 自动解引用 &MyBox<String> -> &String -> &str
 ```
 
-### 示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.94 增强）
+### 示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.95+ 增强）
 
 ```rust
 use std::sync::LazyLock;
@@ -813,7 +813,7 @@ fn main() {
 
 #### Rust 1.95+ 新增 API
 
-Rust 1.94 大幅增强了 `LazyCell` 和 `LazyLock`，新增了安全访问方法：
+Rust 1.95+ 大幅增强了 `LazyCell` 和 `LazyLock`，新增了安全访问方法：
 
 ```rust
 use std::sync::LazyLock;
@@ -823,7 +823,7 @@ static CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
     AppConfig::load_from_file().expect("Failed to load config")
 });
 
-/// ✅ Rust 1.94: get() 方法 - 安全获取已初始化值
+/// ✅ Rust 1.95+: get() 方法 - 安全获取已初始化值
 ///
 /// 优势：
 /// 1. 返回 Option<&T>，不会触发初始化
@@ -833,7 +833,7 @@ pub fn get_config_safe() -> Option<&'static AppConfig> {
     CONFIG.get()  // 如果已初始化返回 Some，否则返回 None
 }
 
-/// ✅ Rust 1.94: 性能关键路径优化模式
+/// ✅ Rust 1.95+: 性能关键路径优化模式
 ///
 /// 在热路径上先检查是否已初始化，避免锁竞争
 pub struct DatabaseConnection;
@@ -872,12 +872,12 @@ impl SingleThreadCache {
         }
     }
 
-    /// ✅ Rust 1.94: get() - 安全读取
+    /// ✅ Rust 1.95+: get() - 安全读取
     pub fn read(&self) -> Option<&Vec<u8>> {
         self.data.get()
     }
 
-    /// ✅ Rust 1.94: force_mut() - 强制初始化并获取可变引用
+    /// ✅ Rust 1.95+: force_mut() - 强制初始化并获取可变引用
     ///
     /// 注意：这会触发初始化（如果尚未初始化）
     pub fn clear(&mut self) {
@@ -903,7 +903,7 @@ impl AppConfig {
 
 #### 性能对比
 
-| 操作 | `LazyLock` (标准访问) | `LazyLock::get()` (Rust 1.94) | 提升 |
+| 操作 | `LazyLock` (标准访问) | `LazyLock::get()` (Rust 1.96) | 提升 |
 |------|----------------------|------------------------------|------|
 | 已初始化读取 | 原子操作检查 | 直接读取 | **15-20%** |
 | 未初始化读取 | 触发初始化 | 返回 None | 避免不必要初始化 |

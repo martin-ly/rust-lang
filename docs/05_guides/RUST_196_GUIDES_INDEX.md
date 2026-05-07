@@ -136,10 +136,10 @@ fn demonstrate_196_features() {
 - `LazyCell/LazyLock` 新方法的使用
 - `Peekable::next_if_map` 的应用
 
-#### 代码示例 (Rust 1.94)
+#### 代码示例 (Rust 1.95+)
 
 ```rust
-// 使用 1.94 新特性的示例代码
+// 使用 1.95+ 新特性的示例代码
 ```
 
 #### 迁移注意事项

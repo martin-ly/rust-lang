@@ -1,4 +1,4 @@
-﻿# Rust 1.94.0 思维表征方式文档 / Thinking Representation Methods Documentation
+﻿# Rust 思维表征方式文档 / Thinking Representation Methods Documentation
 
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
@@ -9,7 +9,7 @@
 
 ## 📋 目录
 
-- [Rust 1.94.0 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-1940-思维表征方式文档--thinking-representation-methods-documentation)
+- [Rust 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-思维表征方式文档--thinking-representation-methods-documentation)
   - [📋 目录](#-目录)
   - [🎯 文档概述](#-文档概述)
   - [🗺️ 1. 思维导图 (Mind Map)](#️-1-思维导图-mind-map)
@@ -1604,7 +1604,7 @@ impl DecisionEngine {
 #### 相关文档
 
 - [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
-- [Rust 1.95+ 特性速查](../02_reference/quick_reference/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
 ---

@@ -107,7 +107,7 @@ fn advanced_threading() {
     handle.join().unwrap();
 }
 
-// 结合 1.94 的 LazyLock 实现线程安全延迟初始化
+// 结合 1.95+ 的 LazyLock 实现线程安全延迟初始化
 use std::sync::LazyLock;
 
 static CONFIG: LazyLock<String> = LazyLock::new(|| {
@@ -115,7 +115,7 @@ static CONFIG: LazyLock<String> = LazyLock::new(|| {
 });
 ```
 
-**学习建议**: C05 线程基础 → 1.94 LazyLock → thread::Builder 高级控制
+**学习建议**: C05 线程基础 → 1.95+ LazyLock → thread::Builder 高级控制
 
 ### C08 算法 → isqrt (≥1.84)
 
@@ -137,7 +137,7 @@ fn is_prime(n: u64) -> bool {
     true
 }
 
-// 2. 结合 1.94 array_windows 的几何算法
+// 2. 结合 1.95+ array_windows 的几何算法
 fn triangle_inequality(points: &[(f64, f64)]) -> bool {
     points.array_windows::<3>().all(|&[(x1, y1), (x2, y2), (x3, y3)]| {
         let a = ((x2 - x1).powi(2) + (y2 - y1).powi(2)).sqrt();
@@ -150,7 +150,7 @@ fn triangle_inequality(points: &[(f64, f64)]) -> bool {
 }
 ```
 
-**学习建议**: C08 算法基础 → isqrt (≥1.84) 优化 → 1.94 array_windows 组合应用
+**学习建议**: C08 算法基础 → isqrt (≥1.84) 优化 → 1.95+ array_windows 组合应用
 
 ---
 
