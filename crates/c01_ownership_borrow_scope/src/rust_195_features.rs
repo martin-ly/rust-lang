@@ -3,6 +3,7 @@
 //! 本模块展示了 Rust 1.95.0 在所有权、借用和内存安全方面的关键增强：
 //! - `MaybeUninit<[T; N]>` ↔ `[MaybeUninit<T>; N]` 互转 ⭐
 //! - `Cell<[T; N]>` AsRef traits ⭐
+//! - `Layout` 辅助方法：`dangling_ptr`、`repeat`、`repeat_packed`、`extend_packed` ⭐
 //!
 //! # 版本信息
 //! - Rust版本: 1.95.0
@@ -12,8 +13,10 @@
 //! # 参考
 //! - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
 
+use std::alloc::Layout;
 use std::cell::Cell;
 use std::mem::MaybeUninit;
+use std::ptr::NonNull;
 
 // ============================================================================
 // 1. MaybeUninit 数组互转
@@ -252,7 +255,164 @@ impl CellArrayExamples {
 }
 
 // ============================================================================
-// 3. 综合模式：安全数组初始化 + 内部可变性
+// 3. Layout 辅助方法
+// ============================================================================
+
+/// # `Layout` 辅助方法
+///
+/// Rust 1.95.0 稳定了 `std::alloc::Layout` 上的以下实用方法：
+/// - `Layout::dangling_ptr`
+/// - `Layout::repeat`
+/// - `Layout::repeat_packed`
+/// - `Layout::extend_packed`
+///
+/// 这些方法使得**手动内存布局计算**更加安全、明确，无需借助 `unsafe` 即可在类型系统内
+/// 验证布局约束。
+///
+/// ## 概念定义
+/// - **Memory Layout**: 内存中数据类型的排列方式，包括大小（size）和对齐（alignment）
+/// - **Padding**: 编译器插入的填充字节，以满足对齐要求；`repeat` 保留填充，`repeat_packed` 消除填充
+/// - **Dangling Pointer**: 指向有效对齐地址但不指向实际分配内存的指针，可用于零大小类型占位
+///
+/// ## Wikipedia 概念对齐
+/// - **Data Structure Alignment**: 数据在内存中的排列方式，影响访问效率和硬件兼容性
+/// - **Packed Data Structure**: 紧密排列的数据结构，无填充字节，常用于网络协议或文件格式
+///
+/// ## 决策树
+/// ```text
+/// 需要计算内存布局？
+/// ├── 数组布局，需要自然对齐（含填充）？ → Layout::repeat
+/// ├── 数组布局，需要紧密排列（无填充）？ → Layout::repeat_packed
+/// ├── 结构体布局，需要紧密排列？ → Layout::extend_packed
+/// └── 需要占位指针（零大小或未初始化）？ → Layout::dangling_ptr
+/// ```
+///
+/// ## 反例 / 常见错误
+/// - **混淆 `repeat` 与 `repeat_packed`**: `repeat` 保留元素间填充，适用于硬件对齐要求；
+///   `repeat_packed` 消除填充，适用于序列化/反序列化场景
+/// - **忽略 `LayoutError`**: 这些方法在溢出或对齐不匹配时返回 `Err`，必须处理
+/// - **将 `dangling_ptr` 用于非零大小访问**: 该指针仅保证零字节访问有效，解引用实际数据是 UB
+pub struct LayoutHelpersExamples;
+
+impl LayoutHelpersExamples {
+    /// `dangling_ptr`：获取对齐有效的占位指针
+    ///
+    /// 返回一个**对齐有效但无实际分配**的非空指针。
+    /// 适用于：
+    /// - 零大小类型（ZST）的占位
+    /// - 未初始化内存的临时句柄
+    /// - 需要满足 `NonNull<u8>` 约束但尚无实际分配的场景
+    ///
+    /// # 安全性说明
+    /// 该指针保证**零字节读写**是安全的，但解引用以访问实际数据是未定义行为。
+    pub fn placeholder_pointer<T>() -> NonNull<u8> {
+        let layout = Layout::new::<T>();
+        layout.dangling_ptr()
+    }
+
+    /// `repeat`：计算 `[T; N]` 的自然对齐布局
+    ///
+    /// 返回包含元素间填充的数组布局，以及单个元素之间的偏移量。
+    /// 这与编译器为 `[T; N]` 生成的实际布局一致。
+    pub fn array_layout<T>(count: usize) -> Option<(Layout, usize)> {
+        let elem_layout = Layout::new::<T>();
+        elem_layout.repeat(count).ok()
+    }
+
+    /// `repeat_packed`：计算紧密排列的数组布局
+    ///
+    /// 消除元素间的填充字节，总大小严格等于 `size_of::<T>() * N`。
+    /// 适用于网络协议、文件格式等需要紧凑表示的场景。
+    ///
+    /// # 注意
+    /// 紧密排列可能违反硬件对齐要求，实际访问 packed 数据时需要使用
+    /// `std::ptr::read_unaligned` / `write_unaligned`。
+    pub fn packed_array_layout<T>(count: usize) -> Option<Layout> {
+        let elem_layout = Layout::new::<T>();
+        elem_layout.repeat_packed(count).ok()
+    }
+
+    /// `extend_packed`：计算紧密排列的结构体布局
+    ///
+    /// 将两个 `Layout` 紧密拼接，不插入填充字节。
+    /// 适用于自定义序列化格式中字段紧密排列的场景。
+    ///
+    /// # 示例场景
+    /// 假设有一个协议头：`[u8; 3]`（标志） + `u16`（长度），紧密排列时总大小为 5 字节。
+    pub fn packed_struct_layout(fields: &[Layout]) -> Option<Layout> {
+        fields
+            .iter()
+            .copied()
+            .try_fold(Layout::new::<()>(), |acc, field| {
+                acc.extend_packed(field).ok()
+            })
+    }
+
+    /// 对比：自然对齐布局 vs 紧密排列布局
+    ///
+    /// 展示同一类型在不同布局策略下的尺寸差异。
+    pub fn compare_layouts<T>(count: usize) -> (Option<(Layout, usize)>, Option<Layout>)
+    where
+        T: Copy,
+    {
+        let natural = Self::array_layout::<T>(count);
+        let packed = Self::packed_array_layout::<T>(count);
+        (natural, packed)
+    }
+
+    /// 实际应用：计算动态数组的分配大小
+    ///
+    /// 在不实际分配内存的情况下，预先验证数组布局是否合法。
+    pub fn validate_array_allocation<T>(count: usize) -> Result<Layout, String> {
+        let elem = Layout::new::<T>();
+        let (layout, _offset) = elem
+            .repeat(count)
+            .map_err(|_| format!("布局溢出或无效: [T; {}]", count))?;
+        Ok(layout)
+    }
+
+    /// 实际应用：协议消息头布局计算
+    ///
+    /// 模拟一个网络协议头：版本(u8) + 标志(u8) + 长度(u16) + 校验和(u32)。
+    /// 使用 `extend_packed` 计算紧密排列时的总大小。
+    pub fn protocol_header_layout_packed() -> Option<Layout> {
+        let version = Layout::new::<u8>();
+        let flags = Layout::new::<u8>();
+        let length = Layout::new::<u16>();
+        let checksum = Layout::new::<u32>();
+
+        version
+            .extend_packed(flags)
+            .ok()?
+            .extend_packed(length)
+            .ok()?
+            .extend_packed(checksum)
+            .ok()
+    }
+
+    /// 实际应用：协议消息头自然对齐布局计算
+    ///
+    /// 使用标准 `Layout::extend`（Rust 已有 API）计算含填充的自然对齐布局，
+    /// 与 `extend_packed` 形成对比。
+    pub fn protocol_header_layout_aligned() -> Option<Layout> {
+        let version = Layout::new::<u8>();
+        let flags = Layout::new::<u8>();
+        let length = Layout::new::<u16>();
+        let checksum = Layout::new::<u32>();
+
+        version
+            .extend(flags)
+            .ok()
+            .map(|(l, _)| l)
+            .and_then(|l| l.extend(length).ok())
+            .map(|(l, _)| l)
+            .and_then(|l| l.extend(checksum).ok())
+            .map(|(l, _)| l)
+    }
+}
+
+// ============================================================================
+// 4. 综合模式：安全数组初始化 + 内部可变性
 // ============================================================================
 
 /// 生产级模式：缓冲区池
@@ -344,7 +504,8 @@ mod tests {
         });
         assert_eq!(result, None); // 因为 i=3 时返回 None
 
-        let result = MaybeUninitArrayExamples::conditional_initialize::<usize, _, 5>(|i| Some(i * 10));
+        let result =
+            MaybeUninitArrayExamples::conditional_initialize::<usize, _, 5>(|i| Some(i * 10));
         assert_eq!(result, Some([0, 10, 20, 30, 40]));
     }
 
@@ -377,5 +538,98 @@ mod tests {
     async fn test_async_initialize_array() {
         let arr = MaybeUninitArrayExamples::async_initialize_array(|i| async move { i * 3 }).await;
         assert_eq!(arr, [0, 3, 6, 9, 12]);
+    }
+
+    // ------------------------------------------------------------------------
+    // Layout 辅助方法测试
+    // ------------------------------------------------------------------------
+
+    #[test]
+    fn test_dangling_ptr_alignment() {
+        let ptr = LayoutHelpersExamples::placeholder_pointer::<u64>();
+        // dangling_ptr 返回的指针对齐于类型的对齐要求
+        assert_eq!(ptr.as_ptr() as usize % align_of::<u64>(), 0);
+    }
+
+    #[test]
+    fn test_array_layout_natural() {
+        let (layout, offset) = LayoutHelpersExamples::array_layout::<u32>(4).unwrap();
+        // [u32; 4] 每个元素 4 字节，无额外填充（因为 align=4 已满足）
+        assert_eq!(layout.size(), 16);
+        assert_eq!(layout.align(), 4);
+        assert_eq!(offset, 4);
+    }
+
+    #[test]
+    fn test_array_layout_with_padding() {
+        // 使用一个对齐大于大小的类型来观察填充效果较困难，
+        // 这里验证 repeat 与 repeat_packed 在 u64 上的差异（通常无差异）
+        let (natural, _) = LayoutHelpersExamples::array_layout::<u64>(2).unwrap();
+        let packed = LayoutHelpersExamples::packed_array_layout::<u64>(2).unwrap();
+        // u64 的自然对齐数组通常无填充
+        assert_eq!(natural.size(), packed.size());
+    }
+
+    #[test]
+    fn test_packed_array_layout() {
+        let layout = LayoutHelpersExamples::packed_array_layout::<u8>(10).unwrap();
+        // 紧密排列：10 * 1 = 10 字节，对齐为 1
+        assert_eq!(layout.size(), 10);
+        assert_eq!(layout.align(), 1);
+    }
+
+    #[test]
+    fn test_packed_struct_layout() {
+        let fields = vec![
+            Layout::new::<u8>(),
+            Layout::new::<u8>(),
+            Layout::new::<u16>(),
+            Layout::new::<u32>(),
+        ];
+        let layout = LayoutHelpersExamples::packed_struct_layout(&fields).unwrap();
+        // 紧密排列：1 + 1 + 2 + 4 = 8
+        assert_eq!(layout.size(), 8);
+        assert_eq!(layout.align(), 1);
+    }
+
+    #[test]
+    fn test_compare_layouts() {
+        let (natural, packed) = LayoutHelpersExamples::compare_layouts::<u8>(5);
+        assert!(natural.is_some());
+        assert!(packed.is_some());
+        // u8 数组自然对齐和紧密排列通常一致（因为 align=1）
+        assert_eq!(natural.unwrap().0.size(), packed.unwrap().size());
+    }
+
+    #[test]
+    fn test_validate_array_allocation() {
+        let layout = LayoutHelpersExamples::validate_array_allocation::<u64>(100);
+        assert!(layout.is_ok());
+        assert_eq!(layout.unwrap().size(), 800);
+    }
+
+    #[test]
+    fn test_validate_array_allocation_overflow() {
+        // usize::MAX 元素必然导致溢出
+        let result = LayoutHelpersExamples::validate_array_allocation::<u64>(usize::MAX);
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_protocol_header_layout_packed() {
+        let layout = LayoutHelpersExamples::protocol_header_layout_packed().unwrap();
+        // 紧密排列：u8 + u8 + u16 + u32 = 8 字节
+        assert_eq!(layout.size(), 8);
+        assert_eq!(layout.align(), 1);
+    }
+
+    #[test]
+    fn test_protocol_header_layout_aligned() {
+        let layout = LayoutHelpersExamples::protocol_header_layout_aligned().unwrap();
+        // 自然对齐通常会有填充：u8 + [pad1] + u8 + [pad1] + u16 + u32
+        // 实际布局取决于 extend 的实现，但 align 至少为 4
+        assert!(layout.align() >= 4);
+        // 大小应大于等于紧密排列的 8 字节
+        assert!(layout.size() >= 8);
     }
 }

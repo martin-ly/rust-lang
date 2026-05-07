@@ -293,6 +293,254 @@ QUIC 连接迁移:
 "#
         }
     }
+
+    // =====================================================================
+    // 5. QUIC 高级特性
+    // =====================================================================
+
+    /// QUIC 高级特性：不可靠数据报、0-RTT、连接迁移
+    ///
+    /// 本模块展示 quinn 0.11 提供的超越基础 Echo 的高级 QUIC 能力。
+    /// 所有代码均为概念骨架，展示 API 的正确使用方式。
+    pub mod quic_advanced_features {
+        #![forbid(unsafe_code)]
+
+        use bytes::Bytes;
+        use quinn::{Connection, Connecting, ZeroRttAccepted};
+        use std::net::SocketAddr;
+        use std::time::Duration;
+        use tokio::time::interval;
+
+        // -----------------------------------------------------------------
+        // 5.1 Datagram (不可靠传输)
+        // -----------------------------------------------------------------
+
+        /// QUIC Datagram —— 不可靠、无顺序保证的应用层数据报
+        ///
+        /// 适合场景：
+        /// - 游戏状态同步（位置、朝向，丢帧可容忍）
+        /// - 实时音视频（RTP over QUIC）
+        /// - 高频遥测上报（允许部分丢失）
+        ///
+        /// 与流(Stream)的区别：
+        /// | 特性 | Stream | Datagram |
+        /// |------|--------|----------|
+        /// | 可靠性 | 可靠、有序 | 不可靠、无序 |
+        /// | 分片 | 自动 | 须单包容纳 |
+        /// | 流控 | 有 | 无 |
+        /// | 拥塞控制 | 有（不丢弃）| 有（可丢弃旧报）|
+        pub struct UnreliableDatagramChannel {
+            connection: Connection,
+        }
+
+        impl UnreliableDatagramChannel {
+            /// 基于已有连接创建数据报通道
+            pub fn new(connection: Connection) -> Self {
+                Self { connection }
+            }
+
+            /// 发送不可靠数据报
+            ///
+            /// 数据须小于 `max_datagram_size()`，否则返回 `TooLarge` 错误。
+            /// 若发送缓冲区满，旧数据报可能被丢弃（按 FIFO）。
+            pub fn send(&self, data: &[u8]) -> Result<(), quinn::SendDatagramError> {
+                self.connection.send_datagram(Bytes::copy_from_slice(data))
+            }
+
+            /// 异步发送（等待拥塞窗口，优先保留旧数据报）
+            pub async fn send_wait(&self, data: &[u8]) -> Result<(), quinn::SendDatagramError> {
+                self.connection
+                    .send_datagram_wait(Bytes::copy_from_slice(data))
+                    .await
+            }
+
+            /// 接收一个数据报
+            pub async fn recv(&self) -> Result<Bytes, quinn::ConnectionError> {
+                self.connection.read_datagram().await
+            }
+
+            /// 当前可发送的最大数据报尺寸
+            pub fn max_size(&self) -> Option<usize> {
+                self.connection.max_datagram_size()
+            }
+
+            /// 发送缓冲区剩余空间
+            pub fn send_buffer_space(&self) -> usize {
+                self.connection.datagram_send_buffer_space()
+            }
+        }
+
+        // -----------------------------------------------------------------
+        // 5.2 0-RTT (Zero Round Trip Time)
+        // -----------------------------------------------------------------
+
+        /// 0-RTT —— 会话恢复时的零往返延迟
+        ///
+        /// QUIC 基于 TLS 1.3 的会话恢复机制，允许客户端在首次握手中附带应用数据，
+        /// 将延迟从 1-RTT 降至 0-RTT。
+        ///
+        /// 安全警告：
+        /// - 0-RTT 数据可能被重放攻击，因此只能用于幂等操作。
+        /// - 服务器可能拒绝 0-RTT，此时数据不会送达。
+        ///
+        /// quinn API 说明：
+        /// - 客户端：`Connecting::into_0rtt()` 在持有先前会话票据时返回 `Ok`。
+        ///   返回的 `ZeroRttAccepted` Future 在握手完成后解析为 `bool`：
+        ///   `true` 表示服务器接受了 0-RTT，`false` 表示被拒绝。
+        /// - 服务器：`Incoming::accept()` 得到 `Connecting` 后，`into_0rtt()` 总是返回
+        ///   `Ok`（即 0.5-RTT），且 `ZeroRttAccepted` 永远解析为 `true`。
+        pub struct ZeroRttSession;
+
+        impl ZeroRttSession {
+            /// 客户端尝试 0-RTT 发送
+            ///
+            /// 须在 `ClientConfig` 中配置会话恢复（如 rustls 的 `enable_early_data`）。
+            pub fn client_try_0rtt(
+                connecting: Connecting,
+            ) -> Result<(Connection, ZeroRttAccepted), Connecting> {
+                connecting.into_0rtt()
+            }
+
+            /// 服务器接受 0.5-RTT 连接
+            ///
+            /// 服务器端可在握手完成前就开始发送数据（0.5-RTT）。
+            pub fn server_accept_0rtt(
+                connecting: Connecting,
+            ) -> Result<(Connection, ZeroRttAccepted), Connecting> {
+                // 服务器端总是成功
+                connecting.into_0rtt()
+            }
+
+            /// 检查 0-RTT 是否最终被接受
+            pub async fn check_accepted(accepted: ZeroRttAccepted) -> bool {
+                accepted.await
+            }
+        }
+
+        // -----------------------------------------------------------------
+        // 5.3 Connection Migration (连接迁移)
+        // -----------------------------------------------------------------
+
+        /// 连接迁移 —— WiFi ↔ 蜂窝网络无缝切换
+        ///
+        /// QUIC 使用连接 ID 而非四元组（源IP、源端口、目的IP、目的端口）标识连接，
+        /// 因此客户端 IP/端口变化不会导致连接中断。
+        ///
+        /// quinn 0.11 API 现状：
+        /// - `ServerConfig::migration(true)` 默认已启用，协议层自动处理 PATH_CHALLENGE/RESPONSE。
+        /// - `Connection::remote_address()` 会在迁移完成后返回新地址。
+        /// - **quinn 目前不暴露应用层迁移事件**（如 `on_path_changed` 回调），
+        ///   应用只能通过轮询 `remote_address()` 或观察 RTT 变化间接感知。
+        ///
+        /// 若需更细粒度的路径控制，可考虑 `quinn-proto` 底层 API。
+        pub struct ConnectionMigrationMonitor {
+            connection: Connection,
+        }
+
+        impl ConnectionMigrationMonitor {
+            /// 创建迁移监控器
+            pub fn new(connection: Connection) -> Self {
+                Self { connection }
+            }
+
+            /// 轮询检测地址是否发生变化
+            ///
+            /// 返回 `(old, new)` 若检测到变更。
+            pub async fn watch_address_change(
+                &self,
+                check_interval: Duration,
+            ) -> (SocketAddr, SocketAddr) {
+                let initial = self.connection.remote_address();
+                let mut ticker = interval(check_interval);
+                loop {
+                    ticker.tick().await;
+                    let current = self.connection.remote_address();
+                    if current != initial {
+                        return (initial, current);
+                    }
+                }
+            }
+
+            /// 获取当前对端地址
+            pub fn current_remote_address(&self) -> SocketAddr {
+                self.connection.remote_address()
+            }
+
+            /// 获取当前连接 RTT（可用于判断路径质量）
+            pub fn current_rtt(&self) -> Duration {
+                self.connection.rtt()
+            }
+
+            /// 获取连接统计信息
+            pub fn stats(&self) -> quinn::ConnectionStats {
+                self.connection.stats()
+            }
+        }
+
+        // -----------------------------------------------------------------
+        // Tests
+        // -----------------------------------------------------------------
+
+        #[cfg(test)]
+        mod tests {
+            use super::*;
+
+            /// 验证 Datagram API 类型签名正确
+            #[test]
+            fn test_datagram_api_surface() {
+                fn _assert_send(
+                    c: &Connection,
+                    data: &[u8],
+                ) -> Result<(), quinn::SendDatagramError> {
+                    c.send_datagram(Bytes::copy_from_slice(data))
+                }
+                fn _assert_recv(c: &Connection) -> quinn::ReadDatagram<'_> {
+                    c.read_datagram()
+                }
+                fn _assert_max_size(c: &Connection) -> Option<usize> {
+                    c.max_datagram_size()
+                }
+
+                let _ = _assert_send as fn(&Connection, &[u8]) -> _;
+                let _ = _assert_max_size as fn(&Connection) -> _;
+                // `_assert_recv` 返回带有生命周期的 `ReadDatagram<'_>`，无法做裸函数指针转换，
+                // 此处仅验证其定义可被编译器接受即可。
+                let _ = _assert_recv;
+            }
+
+            /// 验证 0-RTT API 类型签名正确
+            #[test]
+            fn test_zero_rtt_api_surface() {
+                fn _assert_into_0rtt(
+                    c: Connecting,
+                ) -> Result<(Connection, ZeroRttAccepted), Connecting> {
+                    c.into_0rtt()
+                }
+                let _ = _assert_into_0rtt as fn(Connecting) -> _;
+            }
+
+            /// 验证连接迁移相关 API 存在
+            #[test]
+            fn test_migration_api_surface() {
+                fn _assert_remote_address(c: &Connection) -> SocketAddr {
+                    c.remote_address()
+                }
+                fn _assert_rtt(c: &Connection) -> Duration {
+                    c.rtt()
+                }
+                let _ = _assert_remote_address as fn(&Connection) -> _;
+                let _ = _assert_rtt as fn(&Connection) -> _;
+            }
+
+            /// 验证结构体可实例化（需要 Connection，故用 PhantomData 做编译检查）
+            #[test]
+            fn test_structs_compilable() {
+                let _ = std::marker::PhantomData::<UnreliableDatagramChannel>;
+                let _ = std::marker::PhantomData::<ConnectionMigrationMonitor>;
+                let _ = ZeroRttSession;
+            }
+        }
+    }
 }
 
 // =====================================================================
@@ -329,6 +577,13 @@ pub mod quic_full {
             Err("'quic' feature required".to_string())
         }
     }
+
+    pub mod quic_advanced_features {
+        pub struct UnreliableDatagramChannel;
+        pub struct ZeroRttSession;
+        pub struct ConnectionMigrationMonitor;
+    }
 }
 
 pub use quic_full::*;
+pub use quic_full::quic_advanced_features;

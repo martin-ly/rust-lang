@@ -13,6 +13,7 @@
 //! - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
 //! - [RFC 3550: New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)
 
+use std::collections::{LinkedList, VecDeque};
 use std::ops::RangeInclusive;
 
 // ============================================================================
@@ -75,7 +76,10 @@ impl NewRangeTypesExamples {
     /// `RangeInclusiveIter` 是 `RangeInclusive` 的迭代器表示，
     /// 允许将区间作为迭代器类型传递，而不暴露具体的范围值。
     pub fn range_inclusive_iter() {
-        let range = core::range::RangeInclusive { start: 10, last: 15 };
+        let range = core::range::RangeInclusive {
+            start: 10,
+            last: 15,
+        };
         let iter: core::range::RangeInclusiveIter<i32> = range.into_iter();
 
         let values: Vec<i32> = iter.collect();
@@ -163,7 +167,10 @@ impl NewRangeTypesExamples {
         } else {
             total_items.div_ceil(items_per_page)
         };
-        core::range::RangeInclusive { start: 1, last: total_pages }
+        core::range::RangeInclusive {
+            start: 1,
+            last: total_pages,
+        }
     }
 }
 
@@ -223,7 +230,10 @@ pub struct RangeInterop;
 impl RangeInterop {
     /// 从旧类型转换为新类型
     pub fn from_old(old: RangeInclusive<i32>) -> core::range::RangeInclusive<i32> {
-        core::range::RangeInclusive { start: *old.start(), last: *old.end() }
+        core::range::RangeInclusive {
+            start: *old.start(),
+            last: *old.end(),
+        }
     }
 
     /// 从新类型转换为旧类型
@@ -235,6 +245,203 @@ impl RangeInterop {
     pub fn slice_with_range(data: &[i32], range: core::range::RangeInclusive<usize>) -> &[i32] {
         let old_range = range.start..=range.last;
         &data[old_range]
+    }
+}
+
+// ============================================================================
+// 4. 集合可变插入方法 (Collection Mutable Insertion Methods)
+// ============================================================================
+
+/// # 集合可变插入方法
+///
+/// Rust 1.95.0 为 `Vec`、`VecDeque` 和 `LinkedList` 新增了返回 `&mut T` 的
+/// 插入/推送方法。这些方法解决了"插入后需要立即修改元素"的常见问题，
+/// 避免了不必要的 `unwrap()` 或索引回查。
+///
+/// ## 新增 API 列表
+///
+/// | 集合类型 | 新方法 | 返回值 |
+/// |---------|--------|--------|
+/// | `Vec<T>` | `push_mut` | `&mut T` |
+/// | `Vec<T>` | `insert_mut` | `&mut T` |
+/// | `VecDeque<T>` | `push_front_mut` | `&mut T` |
+/// | `VecDeque<T>` | `push_back_mut` | `&mut T` |
+/// | `VecDeque<T>` | `insert_mut` | `&mut T` |
+/// | `LinkedList<T>` | `push_front_mut` | `&mut T` |
+/// | `LinkedList<T>` | `push_back_mut` | `&mut T` |
+///
+/// ## 设计动机
+/// 在 1.95 之前，如果需要在插入元素后立即修改它，开发者必须：
+/// 1. 先调用 `push` / `insert` / `push_front` 等
+/// 2. 再调用 `last_mut().unwrap()` 或按索引 `get_mut(index).unwrap()` 获取可变引用
+/// 3. 这不仅增加了样板代码，而且在某些情况下编译器难以证明引用的安全性
+///
+/// 1.95 的新方法将插入和获取可变引用合二为一，提高了代码的 ergonomics。
+pub struct CollectionMutMethodsExamples;
+
+impl CollectionMutMethodsExamples {
+    /// `Vec::push_mut` —— 推送并立即修改
+    ///
+    /// ## 1.95 之前
+    /// ```ignore
+    /// let mut v = Vec::new();
+    /// v.push(String::new());
+    /// let last = v.last_mut().unwrap();
+    /// last.push_str("hello");
+    /// ```
+    ///
+    /// ## 1.95 方式
+    /// `push_mut` 直接返回刚插入元素的可变引用。
+    pub fn vec_push_mut() {
+        let mut names: Vec<String> = Vec::new();
+
+        // 推送一个空字符串，并立即获取其可变引用进行填充
+        let last = names.push_mut(String::new());
+        last.push_str("Rust");
+        last.push_str(" 1.95");
+
+        assert_eq!(names[0], "Rust 1.95");
+    }
+
+    /// `Vec::insert_mut` —— 插入并立即修改
+    ///
+    /// ## 1.95 之前
+    /// ```ignore
+    /// let mut v = vec![1, 3];
+    /// v.insert(1, 0);
+    /// let inserted = v.get_mut(1).unwrap();
+    /// *inserted = 2;
+    /// ```
+    ///
+    /// ## 1.95 方式
+    /// `insert_mut` 在指定位置插入元素并返回其可变引用。
+    pub fn vec_insert_mut() {
+        let mut scores = vec![85, 92];
+
+        // 在索引 1 处插入一个新分数，并立即加分
+        let inserted = scores.insert_mut(1, 88);
+        *inserted += 5; //  bonus
+
+        assert_eq!(scores, vec![85, 93, 92]);
+    }
+
+    /// `VecDeque::push_front_mut` —— 队首插入并修改
+    ///
+    /// ## 1.95 之前
+    /// ```ignore
+    /// let mut dq = VecDeque::from([2, 3]);
+    /// dq.push_front(0);
+    /// let head = dq.front_mut().unwrap();
+    /// *head += 1;
+    /// ```
+    ///
+    /// ## 1.95 方式
+    pub fn vecdeque_push_front_mut() {
+        let mut queue = VecDeque::from([200, 300]);
+
+        // 在队首插入元素并立即修改
+        let head = queue.push_front_mut(100);
+        *head += 50; // 调整为 150
+
+        assert_eq!(queue, VecDeque::from([150, 200, 300]));
+    }
+
+    /// `VecDeque::push_back_mut` —— 队尾插入并修改
+    ///
+    /// ## 1.95 之前
+    /// ```ignore
+    /// let mut dq = VecDeque::from([1, 2]);
+    /// dq.push_back(3);
+    /// let back = dq.back_mut().unwrap();
+    /// *back += 1;
+    /// ```
+    ///
+    /// ## 1.95 方式
+    pub fn vecdeque_push_back_mut() {
+        let mut queue = VecDeque::from([1, 2]);
+
+        // 在队尾插入元素并立即修改
+        let back = queue.push_back_mut(3);
+        *back *= 10; // 调整为 30
+
+        assert_eq!(queue, VecDeque::from([1, 2, 30]));
+    }
+
+    /// `VecDeque::insert_mut` —— 任意位置插入并修改
+    ///
+    /// ## 1.95 之前
+    /// ```ignore
+    /// let mut dq = VecDeque::from([1, 3]);
+    /// dq.insert(1, 2);
+    /// let mid = dq.get_mut(1).unwrap();
+    /// *mid = 20;
+    /// ```
+    ///
+    /// ## 1.95 方式
+    pub fn vecdeque_insert_mut() {
+        let mut queue = VecDeque::from([10, 30]);
+
+        // 在中间插入并立即加倍
+        let mid = queue.insert_mut(1, 20);
+        *mid *= 2; // 20 -> 40
+
+        assert_eq!(queue, VecDeque::from([10, 40, 30]));
+    }
+
+    /// `LinkedList::push_front_mut` —— 链表头部插入并修改
+    ///
+    /// ## 1.95 之前
+    /// ```ignore
+    /// let mut list = LinkedList::from([2, 3]);
+    /// list.push_front(1);
+    /// let front = list.front_mut().unwrap();
+    /// *front += 1;
+    /// ```
+    ///
+    /// ## 1.95 方式
+    pub fn linkedlist_push_front_mut() {
+        let mut list = LinkedList::from([20, 30]);
+
+        // 在链表头部插入并立即调整
+        let front = list.push_front_mut(10);
+        *front += 5; // 10 -> 15
+
+        assert_eq!(list, LinkedList::from([15, 20, 30]));
+    }
+
+    /// `LinkedList::push_back_mut` —— 链表尾部插入并修改
+    ///
+    /// ## 1.95 之前
+    /// ```ignore
+    /// let mut list = LinkedList::from([1, 2]);
+    /// list.push_back(3);
+    /// let back = list.back_mut().unwrap();
+    /// *back += 1;
+    /// ```
+    ///
+    /// ## 1.95 方式
+    pub fn linkedlist_push_back_mut() {
+        let mut list = LinkedList::from([1, 2]);
+
+        // 在链表尾部插入并立即调整
+        let back = list.push_back_mut(3);
+        *back += 7; // 3 -> 10
+
+        assert_eq!(list, LinkedList::from([1, 2, 10]));
+    }
+
+    /// 综合示例：使用 `push_mut` 构建复杂对象
+    ///
+    /// 展示了在构建嵌套结构时，新方法如何减少样板代码。
+    pub fn comprehensive_build_example() {
+        let mut buffers: Vec<Vec<u8>> = Vec::new();
+
+        // 创建一个新的缓冲区并立即写入数据
+        let buf = buffers.push_mut(Vec::with_capacity(16));
+        buf.extend_from_slice(b"Hello");
+        buf.extend_from_slice(b", World!");
+
+        assert_eq!(buffers[0], b"Hello, World!");
     }
 }
 
@@ -261,9 +468,15 @@ mod tests {
         let a = core::range::RangeInclusive { start: 1, last: 10 };
         let b = core::range::RangeInclusive { start: 5, last: 15 };
         let inter = NewRangeTypesExamples::range_intersection(a, b);
-        assert_eq!(inter, Some(core::range::RangeInclusive { start: 5, last: 10 }));
+        assert_eq!(
+            inter,
+            Some(core::range::RangeInclusive { start: 5, last: 10 })
+        );
 
-        let c = core::range::RangeInclusive { start: 20, last: 30 };
+        let c = core::range::RangeInclusive {
+            start: 20,
+            last: 30,
+        };
         let no_inter = NewRangeTypesExamples::range_intersection(a, c);
         assert_eq!(no_inter, None);
     }
@@ -276,14 +489,20 @@ mod tests {
         assert_eq!(union.len(), 1);
         assert_eq!(union[0], core::range::RangeInclusive { start: 1, last: 8 });
 
-        let c = core::range::RangeInclusive { start: 10, last: 12 };
+        let c = core::range::RangeInclusive {
+            start: 10,
+            last: 12,
+        };
         let disjoint = NewRangeTypesExamples::range_union(a, c);
         assert_eq!(disjoint.len(), 2);
     }
 
     #[test]
     fn test_sum_range() {
-        let range = core::range::RangeInclusive { start: 1u32, last: 5 };
+        let range = core::range::RangeInclusive {
+            start: 1u32,
+            last: 5,
+        };
         let sum = NewRangeTypesExamples::sum_range(range);
         assert_eq!(sum, 15);
     }
@@ -296,7 +515,10 @@ mod tests {
         );
         assert_eq!(
             NewRangeTypesExamples::parse_range("10..=20"),
-            Some(core::range::RangeInclusive { start: 10, last: 20 })
+            Some(core::range::RangeInclusive {
+                start: 10,
+                last: 20
+            })
         );
         assert_eq!(NewRangeTypesExamples::parse_range("invalid"), None);
     }
@@ -322,7 +544,10 @@ mod tests {
         let mut tree = IntervalTree::new();
         tree.insert(core::range::RangeInclusive { start: 1, last: 5 });
         tree.insert(core::range::RangeInclusive { start: 3, last: 7 });
-        tree.insert(core::range::RangeInclusive { start: 10, last: 15 });
+        tree.insert(core::range::RangeInclusive {
+            start: 10,
+            last: 15,
+        });
 
         let query = core::range::RangeInclusive { start: 4, last: 6 };
         let results = tree.find_overlapping(&query);
@@ -347,5 +572,48 @@ mod tests {
         let slice = RangeInterop::slice_with_range(&data, range);
         assert_eq!(slice, &[20, 30, 40]);
     }
-}
 
+    // ------------------------------------------------------------------------
+    // 集合可变插入方法测试
+    // ------------------------------------------------------------------------
+
+    #[test]
+    fn test_vec_push_mut() {
+        CollectionMutMethodsExamples::vec_push_mut();
+    }
+
+    #[test]
+    fn test_vec_insert_mut() {
+        CollectionMutMethodsExamples::vec_insert_mut();
+    }
+
+    #[test]
+    fn test_vecdeque_push_front_mut() {
+        CollectionMutMethodsExamples::vecdeque_push_front_mut();
+    }
+
+    #[test]
+    fn test_vecdeque_push_back_mut() {
+        CollectionMutMethodsExamples::vecdeque_push_back_mut();
+    }
+
+    #[test]
+    fn test_vecdeque_insert_mut() {
+        CollectionMutMethodsExamples::vecdeque_insert_mut();
+    }
+
+    #[test]
+    fn test_linkedlist_push_front_mut() {
+        CollectionMutMethodsExamples::linkedlist_push_front_mut();
+    }
+
+    #[test]
+    fn test_linkedlist_push_back_mut() {
+        CollectionMutMethodsExamples::linkedlist_push_back_mut();
+    }
+
+    #[test]
+    fn test_comprehensive_build_example() {
+        CollectionMutMethodsExamples::comprehensive_build_example();
+    }
+}

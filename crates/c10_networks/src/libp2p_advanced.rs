@@ -1,4 +1,4 @@
-﻿//! libp2p 深度集成 —— 点对点网络协议栈
+//! libp2p 深度集成 —— 点对点网络协议栈
 //!
 //! # 概述
 //!
@@ -142,8 +142,7 @@ pub mod dht {
         match event {
             KademliaEvent::OutboundQueryProgressed { result, .. } => match result {
                 QueryResult::GetProviders(Ok(GetProvidersOk::FoundProviders {
-                    providers,
-                    ..
+                    providers, ..
                 })) => {
                     println!("找到 {} 个提供者", providers.len());
                 }
@@ -331,7 +330,243 @@ pub mod nat_traversal {
 }
 
 // =========================================================================
-// 7. 应用模式
+// 7. Relay 协议
+// =========================================================================
+
+/// # Relay 中继协议（Circuit Relay v2）
+///
+/// 当两个节点均位于 NAT 后方且无法直接建立连接时，可通过 publicly reachable 的
+/// **Relay 节点**转发流量，实现 NAT 穿透。
+///
+/// ## 核心概念
+/// - **Reservation**: 客户端向 Relay Server 申请预留一个中继槽位，使得其他节点
+///   可以通过该 Relay 与自己建立 circuit。
+/// - **Circuit**: 经过 Relay 转发的虚拟连接。Relay Server 负责将来自源节点的数据
+///   转发给目标节点。
+///
+/// ## 角色划分
+/// - `Relay Server`: 接受 reservation、转发 circuit 流量。
+/// - `Relay Client`: 申请 reservation 并监听通过 Relay 到达的连接，
+///   或主动通过 Relay 拨号其他节点。
+///
+/// ## 与 DCUtR 的协作
+/// Relay 通常是 DCUtR 的前置步骤：先通过 Relay 建立 relayed 连接，
+/// 再尝试升级为直连（hole punching）。
+pub mod relay {
+    use libp2p::relay::{Behaviour as RelayBehaviour, Config as RelayConfig, Event as RelayEvent};
+
+    /// 创建 Relay Server 行为（使用默认配置）
+    ///
+    /// 默认配置包含针对 reservation 和 circuit 的速率限制，
+    /// 适合大多数公开中继节点的场景。
+    pub fn create_relay_behaviour(local_peer_id: libp2p::PeerId) -> RelayBehaviour {
+        let config = RelayConfig::default();
+        RelayBehaviour::new(local_peer_id, config)
+    }
+
+    /// 处理 Relay 事件的概念框架
+    ///
+    /// 实际生产环境中应将这些事件接入 tracing/metrics 系统，
+    /// 而非直接打印到标准输出。
+    pub fn handle_relay_event(event: RelayEvent) {
+        match event {
+            RelayEvent::ReservationReqAccepted {
+                src_peer_id,
+                renewed,
+            } => {
+                println!(
+                    "Relay: 接受来自 {} 的 reservation 请求 (renewed={})",
+                    src_peer_id, renewed
+                );
+            }
+            RelayEvent::ReservationReqDenied { src_peer_id } => {
+                println!("Relay: 拒绝来自 {} 的 reservation 请求", src_peer_id);
+            }
+            RelayEvent::ReservationTimedOut { src_peer_id } => {
+                println!("Relay: 来自 {} 的 reservation 已超时", src_peer_id);
+            }
+            RelayEvent::CircuitReqAccepted {
+                src_peer_id,
+                dst_peer_id,
+            } => {
+                println!(
+                    "Relay: 接受 circuit 请求 {} -> {}",
+                    src_peer_id, dst_peer_id
+                );
+            }
+            RelayEvent::CircuitReqDenied {
+                src_peer_id,
+                dst_peer_id,
+            } => {
+                println!(
+                    "Relay: 拒绝 circuit 请求 {} -> {}",
+                    src_peer_id, dst_peer_id
+                );
+            }
+            _ => {
+                // 包含已废弃或内部事件，可在日志中忽略
+            }
+        }
+    }
+
+    /// 概念：将 Relay 集成到组合 Behaviour
+    ///
+    /// 在实际项目中，可通过 `#[derive(NetworkBehaviour)]` 将 `relay::Behaviour`
+    /// 与其他协议行为组合在一起：
+    ///
+    /// ```ignore
+    /// #[derive(libp2p::swarm::NetworkBehaviour)]
+    /// pub struct RelayEnabledBehaviour {
+    ///     pub relay: libp2p::relay::Behaviour,
+    ///     pub identify: libp2p::identify::Behaviour,
+    ///     pub ping: libp2p::ping::Behaviour,
+    ///     // ... 其他 behaviour
+    /// }
+    /// ```
+    pub struct RelayIntegrationConcept;
+}
+
+// =========================================================================
+// 8. AutoNAT
+// =========================================================================
+
+/// # AutoNAT 自动 NAT 检测
+///
+/// AutoNAT 让节点能够自动探测自身是否处于公网可访问状态，
+/// 无需手动配置或依赖外部 STUN 服务。
+///
+/// ## 工作原理
+/// 1. 节点向已连接的 peers（或指定的 probe servers）发送 dial-back 请求。
+/// 2. 对方尝试回连本节点公布的监听地址。
+/// 3. 根据回连结果，节点状态在 `Public`、`Private`、`Unknown` 之间切换。
+///
+/// ## 应用场景
+/// - 动态决定是否需要寻找 Relay 节点（`Private` 时启用 Relay Client）。
+/// - 为 DCUtR 决策提供依据（`Public` 或 `FullCone` 时更容易打洞成功）。
+/// - 在监控面板中展示节点的网络可达性。
+pub mod autonat {
+    use libp2p::autonat::{
+        Behaviour as AutonatBehaviour, Config as AutonatConfig, Event as AutonatEvent, NatStatus,
+    };
+
+    /// 创建 AutoNAT 行为（使用默认配置）
+    ///
+    /// 默认配置下，AutoNAT 会在启动 15 秒后发起首次探测，
+    /// 并在状态变化时通过事件通知调用方。
+    pub fn create_autonat_behaviour(local_peer_id: libp2p::PeerId) -> AutonatBehaviour {
+        let config = AutonatConfig::default();
+        AutonatBehaviour::new(local_peer_id, config)
+    }
+
+    /// 处理 AutoNAT 事件
+    ///
+    /// `StatusChanged` 是最关键的事件，直接决定节点的 NAT 策略。
+    pub fn handle_autonat_event(event: AutonatEvent) {
+        match event {
+            AutonatEvent::StatusChanged { old, new } => {
+                println!("AutoNAT: 状态变更 {:?} -> {:?}", old, new);
+                match new {
+                    NatStatus::Public(addr) => {
+                        println!("AutoNAT: 公网可达，地址 {}", addr);
+                    }
+                    NatStatus::Private => {
+                        println!("AutoNAT: 位于 NAT 后方，建议启用 Relay");
+                    }
+                    NatStatus::Unknown => {
+                        println!("AutoNAT: 探测不足，状态未知");
+                    }
+                }
+            }
+            AutonatEvent::OutboundProbe(event) => {
+                println!("AutoNAT: 出站探测事件 {:?}", event);
+            }
+            AutonatEvent::InboundProbe(event) => {
+                println!("AutoNAT: 入站探测事件 {:?}", event);
+            }
+        }
+    }
+
+    /// 概念：在 `SwarmBuilder` 中使用 AutoNAT
+    ///
+    /// ```ignore
+    /// let behaviour = FullNodeBehaviour {
+    ///     autonat: autonat::create_autonat_behaviour(local_peer_id),
+    ///     // ... 其他 behaviour
+    /// };
+    /// let swarm = swarm_builder::build_tcp_swarm(&keypair, behaviour).unwrap();
+    /// ```
+    pub struct AutonatIntegrationConcept;
+}
+
+// =========================================================================
+// 9. DCUtR 直连升级
+// =========================================================================
+
+/// # DCUtR (Direct Connection Upgrade through Relay)
+///
+/// DCUtR 协议用于将已有的 relayed 连接升级为直连（hole punching）。
+/// 当两个节点通过 Relay 初次握手后，双方同时向对方已观察到的地址发起拨号，
+/// 利用 NAT 的端口映射机制尝试“打洞”，从而建立一条不经过中继的直接路径。
+///
+/// ## 前提条件
+/// 1. 双方已通过 Relay 建立连接（至少一方持有有效的 reservation）。
+/// 2. 至少有一方能够发起出站连接（或双方均为锥形 NAT）。
+/// 3. 已启用 `identify` 协议，以便交换 observed addresses。
+///
+/// ## 与 Relay 的协同
+/// DCUtR 本身不建立连接，而是依赖 Relay 提供的初始连接通道。
+/// 成功升级后，应用层应优先使用新的直连，并可选择关闭 relayed 连接。
+pub mod dcutr {
+    use libp2p::dcutr::{Behaviour as DcutrBehaviour, Event as DcutrEvent};
+
+    /// 创建 DCUtR 行为
+    ///
+    /// DCUtR 行为维护已知的直连与 relayed 连接映射，
+    /// 并在适当时机自动发起 hole punching 尝试。
+    pub fn create_dcutr_behaviour(local_peer_id: libp2p::PeerId) -> DcutrBehaviour {
+        DcutrBehaviour::new(local_peer_id)
+    }
+
+    /// 处理 DCUtR 事件
+    ///
+    /// 成功升级后，`ConnectionId` 可用于在 `Swarm` 事件循环中识别新直连。
+    pub fn handle_dcutr_event(event: DcutrEvent) {
+        match event.result {
+            Ok(connection_id) => {
+                println!(
+                    "DCUtR: 与 {} 的直连升级成功，连接 ID {:?}",
+                    event.remote_peer_id, connection_id
+                );
+            }
+            Err(ref e) => {
+                println!(
+                    "DCUtR: 与 {} 的直连升级失败: {}",
+                    event.remote_peer_id, e
+                );
+            }
+        }
+    }
+
+    /// 概念：DCUtR 与 Relay 协同工作的组合 Behaviour
+    ///
+    /// ```ignore
+    /// #[derive(libp2p::swarm::NetworkBehaviour)]
+    /// pub struct HolePunchBehaviour {
+    ///     pub relay: libp2p::relay::Behaviour,
+    ///     pub dcutr: libp2p::dcutr::Behaviour,
+    ///     pub identify: libp2p::identify::Behaviour,
+    /// }
+    ///
+    /// // 1. 通过 Relay 发现对方并建立 relayed 连接
+    /// // 2. identify 交换 observed addresses
+    /// // 3. DCUtR 自动触发 hole punching
+    /// // 4. 成功后 Swarm 产生 ConnectionEstablished 事件（新直连）
+    /// ```
+    pub struct DcutrIntegrationConcept;
+}
+
+// =========================================================================
+// 10. 应用模式
 // =========================================================================
 
 /// # libp2p 应用模式
@@ -364,7 +599,7 @@ pub mod patterns {
 }
 
 // =========================================================================
-// 测试
+// 11. 测试
 // =========================================================================
 
 #[cfg(test)]
@@ -406,3 +641,4 @@ mod tests {
         assert_eq!(topic, "/myapp/v1/mainnet");
     }
 }
+

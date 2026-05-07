@@ -16,28 +16,28 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// # 区间算法增强
 ///
-/// `std::range::RangeInclusive` 提供了统一闭区间类型，适用于区间覆盖、调度等算法。
+/// `core::range::RangeInclusive` 提供了统一闭区间类型，适用于区间覆盖、调度等算法。
 pub struct RangeAlgorithmExamples;
 
 impl RangeAlgorithmExamples {
     /// 判断两个闭区间是否重叠
     pub fn ranges_overlap(
-        a: std::range::RangeInclusive<i32>,
-        b: std::range::RangeInclusive<i32>,
+        a: core::range::RangeInclusive<i32>,
+        b: core::range::RangeInclusive<i32>,
     ) -> bool {
         a.start <= b.last && b.start <= a.last
     }
 
     /// 合并重叠区间（简化版：假设输入已排序）
     pub fn merge_overlapping(
-        ranges: &[std::range::RangeInclusive<i32>],
-    ) -> Vec<std::range::RangeInclusive<i32>> {
+        ranges: &[core::range::RangeInclusive<i32>],
+    ) -> Vec<core::range::RangeInclusive<i32>> {
         let mut merged = Vec::new();
         for range in ranges {
             if let Some(last) = merged.last_mut()
                 && Self::ranges_overlap(*last, *range)
             {
-                *last = std::range::RangeInclusive {
+                *last = core::range::RangeInclusive {
                     start: last.start.min(range.start),
                     last: last.last.max(range.last),
                 };
@@ -49,10 +49,7 @@ impl RangeAlgorithmExamples {
     }
 
     /// 检查点是否在任意区间内（区间覆盖查询）
-    pub fn point_in_any(
-        point: i32,
-        ranges: &[std::range::RangeInclusive<i32>],
-    ) -> bool {
+    pub fn point_in_any(point: i32, ranges: &[core::range::RangeInclusive<i32>]) -> bool {
         ranges.iter().any(|r| r.start <= point && point <= r.last)
     }
 }
@@ -68,10 +65,7 @@ pub struct SearchAlgorithmExamples;
 
 impl SearchAlgorithmExamples {
     /// 查找第一个满足复合条件的元素
-    pub fn find_first_valid<T>(
-        items: &[&str],
-        min: T,
-    ) -> Option<T>
+    pub fn find_first_valid<T>(items: &[&str], min: T) -> Option<T>
     where
         T: std::str::FromStr + PartialOrd,
     {
@@ -82,10 +76,7 @@ impl SearchAlgorithmExamples {
     }
 
     /// 二分搜索变体：查找满足谓词的边界
-    pub fn partition_point_with_guard<T>(
-        arr: &[T],
-        predicate: impl Fn(&T) -> bool,
-    ) -> usize {
+    pub fn partition_point_with_guard<T>(arr: &[T], predicate: impl Fn(&T) -> bool) -> usize {
         arr.iter().position(|x| !predicate(x)).unwrap_or(arr.len())
     }
 }
@@ -158,24 +149,24 @@ mod tests {
 
     #[test]
     fn test_range_overlap() {
-        let a = std::range::RangeInclusive { start: 1, last: 5 };
-        let b = std::range::RangeInclusive { start: 3, last: 7 };
+        let a = core::range::RangeInclusive { start: 1, last: 5 };
+        let b = core::range::RangeInclusive { start: 3, last: 7 };
         assert!(RangeAlgorithmExamples::ranges_overlap(a, b));
 
-        let c = std::range::RangeInclusive { start: 6, last: 10 };
+        let c = core::range::RangeInclusive { start: 6, last: 10 };
         assert!(!RangeAlgorithmExamples::ranges_overlap(a, c));
     }
 
     #[test]
     fn test_merge_overlapping() {
         let ranges = vec![
-            std::range::RangeInclusive { start: 1, last: 3 },
-            std::range::RangeInclusive { start: 2, last: 6 },
-            std::range::RangeInclusive { start: 8, last: 10 },
+            core::range::RangeInclusive { start: 1, last: 3 },
+            core::range::RangeInclusive { start: 2, last: 6 },
+            core::range::RangeInclusive { start: 8, last: 10 },
         ];
         let merged = RangeAlgorithmExamples::merge_overlapping(&ranges);
         assert_eq!(merged.len(), 2);
-        assert_eq!(merged[0], std::range::RangeInclusive { start: 1, last: 6 });
+        assert_eq!(merged[0], core::range::RangeInclusive { start: 1, last: 6 });
     }
 
     #[test]

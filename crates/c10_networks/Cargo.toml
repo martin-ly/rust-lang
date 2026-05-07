@@ -21,7 +21,7 @@ futures-util = { workspace = true }
 bytes = { workspace = true, features = ["serde"] }
 # async-trait 已迁移至原生 AFIT (1.75+)
 # libp2p 为可选依赖，通过 feature 启用
-libp2p = { workspace = true, features = ["ping", "macros"], optional = true }
+libp2p = { workspace = true, features = ["ping", "macros", "relay", "autonat", "dcutr"], optional = true }
 hickory-resolver = { workspace = true }
 hickory-proto = { workspace = true }
 nom = { workspace = true }

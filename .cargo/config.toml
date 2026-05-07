@@ -5,7 +5,7 @@ rustc-wrapper = "sccache"
 # 通用Rustflags优化
 # - Ctarget-cpu=native: 针对本机CPU优化
 # - Cembed-bitcode=no: 禁用bitcode嵌入(加快编译)
-rustflags = ["-C", "target-cpu=native", "-C", "embed-bitcode=no"]
+rustflags = ["-C", "target-cpu=native", "-C", "embed-bitcode=no", "--cfg", "tokio_unstable"]
 
 # 并行编译作业数 - 默认为CPU核心数，可以显式设置
 # 建议: 物理核心数 - 1，保留一个核心给系统

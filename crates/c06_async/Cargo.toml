@@ -10,7 +10,7 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/rust-lang-learning"
 
 [dependencies]
-tokio = { workspace = true }
+tokio = { workspace = true, features = ["tracing"] }
 futures = { workspace = true }
 tokio-stream = { workspace = true }
 tokio-util = { workspace = true }

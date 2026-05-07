@@ -3,6 +3,7 @@
 //! 本模块展示了 Rust 1.95.0 在异步编程场景中的应用，包括：
 //! - `if let` guards 在异步流处理中的应用 ⭐
 //! - `ControlFlow::is_break` / `is_continue` (const) 在异步状态机中的应用
+//! - Tokio 1.52 `task::Builder` 命名任务 API (需 `tokio_unstable`)
 //!
 //! # 版本信息
 //! - Rust版本: 1.95.0
@@ -198,6 +199,158 @@ impl AsyncControlFlowExamples {
 }
 
 // ============================================================================
+// 3. Tokio 1.52 task::Builder 命名任务 API
+// ============================================================================
+
+/// # Tokio 1.52 `task::Builder` 命名任务演示
+///
+/// `tokio::task::Builder` 提供了为异步任务命名的能力，极大提升了：
+/// - **可观测性**: 在 tokio-console 中清晰识别每个任务
+/// - **调试效率**: tracing 日志中直接显示任务名称
+/// - **性能分析**: 性能分析工具可按任务名聚合数据
+///
+/// # 使用前提
+/// - tokio 需启用 `rt` 和 `tracing` 相关特性（`full` 已包含）
+/// - 编译时需启用 `tokio_unstable` cfg 标志
+///
+/// # 与 tokio-console 集成
+/// 启动应用时设置 `TOKIO_CONSOLE_BIND=127.0.0.1:6669`，
+/// 然后使用 `tokio-console` 命令连接，即可在任务列表中看到命名。
+///
+/// ```bash
+/// # 编译时启用 tokio_unstable
+/// RUSTFLAGS="--cfg tokio_unstable" cargo run
+/// ```
+pub struct NamedTaskExamples;
+
+impl NamedTaskExamples {
+    /// 基础命名任务创建
+    ///
+    /// 使用 `task::Builder::new().name(...)` 为单个异步任务赋予可读名称。
+    /// 命名任务在 tokio-console 和 tracing 输出中均可识别。
+    pub async fn spawn_named_task<F>(
+        name: &str,
+        future: F,
+    ) -> Result<tokio::task::JoinHandle<F::Output>, std::io::Error>
+    where
+        F: std::future::Future + Send + 'static,
+        F::Output: Send + 'static,
+    {
+        tokio::task::Builder::new().name(name).spawn(future)
+    }
+
+    /// 批量创建命名任务池
+    ///
+    /// 为一批同类任务按序号命名，便于在 tokio-console 中区分和监控。
+    /// 典型应用场景：连接池、工作线程池、批处理任务。
+    pub fn spawn_named_pool<F, Fut>(
+        count: usize,
+        prefix: &str,
+        mut factory: F,
+    ) -> Vec<Result<tokio::task::JoinHandle<Fut::Output>, std::io::Error>>
+    where
+        F: FnMut(usize) -> Fut,
+        Fut: std::future::Future + Send + 'static,
+        Fut::Output: Send + 'static,
+    {
+        (0..count)
+            .map(|i| {
+                let name = format!("{}-{}", prefix, i);
+                tokio::task::Builder::new().name(&name).spawn(factory(i))
+            })
+            .collect()
+    }
+
+    /// 模拟 HTTP 请求处理器：为不同后台任务命名
+    ///
+    /// 在实际 Web 服务中，可为日志写入、缓存更新、指标上报等后台任务分别命名，
+    /// 从而在生产环境通过 tokio-console 快速定位问题任务。
+    pub async fn handle_request(request_id: &str) -> Result<String, &'static str> {
+        // 后台任务1: 异步记录访问日志
+        let log_task = tokio::task::Builder::new()
+            .name(&format!("request-{}/log", request_id))
+            .spawn(async {
+                tracing::debug!("记录访问日志");
+                // 模拟日志写入延迟
+                tokio::time::sleep(std::time::Duration::from_millis(10)).await;
+                "log_ok"
+            })
+            .map_err(|_| "日志任务启动失败")?;
+
+        // 后台任务2: 更新缓存
+        let cache_task = tokio::task::Builder::new()
+            .name(&format!("request-{}/cache", request_id))
+            .spawn(async {
+                tracing::debug!("更新缓存");
+                tokio::time::sleep(std::time::Duration::from_millis(5)).await;
+                "cache_ok"
+            })
+            .map_err(|_| "缓存任务启动失败")?;
+
+        // 后台任务3: 上报指标
+        let metrics_task = tokio::task::Builder::new()
+            .name(&format!("request-{}/metrics", request_id))
+            .spawn(async {
+                tracing::debug!("上报 Prometheus 指标");
+                tokio::time::sleep(std::time::Duration::from_millis(3)).await;
+                "metrics_ok"
+            })
+            .map_err(|_| "指标任务启动失败")?;
+
+        // 等待所有后台任务完成
+        let log_result = log_task.await.map_err(|_| "日志任务 panic")?;
+        let cache_result = cache_task.await.map_err(|_| "缓存任务 panic")?;
+        let metrics_result = metrics_task.await.map_err(|_| "指标任务 panic")?;
+
+        Ok(format!(
+            "请求 {} 处理完成: log={}, cache={}, metrics={}",
+            request_id, log_result, cache_result, metrics_result
+        ))
+    }
+
+    /// 使用 tracing span 增强命名任务的可观测性
+    ///
+    /// 结合 `tracing::info_span!` 与任务命名，可在日志中同时看到
+    /// 任务名和 span 上下文，实现双层追踪。这在分布式系统中尤其有用。
+    pub async fn named_task_with_tracing<F>(
+        name: &str,
+        future: F,
+    ) -> Result<tokio::task::JoinHandle<F::Output>, std::io::Error>
+    where
+        F: std::future::Future + Send + 'static,
+        F::Output: Send + 'static,
+    {
+        let span = tracing::info_span!("named_task", task_name = %name);
+        tokio::task::Builder::new().name(name).spawn(async move {
+            let _enter = span.enter();
+            future.await
+        })
+    }
+
+    /// 获取命名任务在 tokio-console 中的展示说明
+    ///
+    /// 返回一段文档字符串，说明如何在 tokio-console 中查看命名任务。
+    pub fn tokio_console_guide() -> &'static str {
+        r#"tokio-console 命名任务查看指南:
+
+1. 编译时启用 tokio_unstable:
+   RUSTFLAGS="--cfg tokio_unstable" cargo run
+
+2. 启动时设置环境变量:
+   TOKIO_CONSOLE_BIND=127.0.0.1:6669 cargo run
+
+3. 连接 tokio-console:
+   tokio-console http://127.0.0.1:6669
+
+4. 在任务列表中，'NAME' 列将显示通过 task::Builder 设置的名称。
+   例如: request-42/log, worker-pool-3, cache-updater
+
+5. 结合 tracing 使用可获得更丰富的上下文信息。
+"#
+    }
+}
+
+// ============================================================================
 // 测试
 // ============================================================================
 
@@ -259,5 +412,58 @@ mod tests {
         let some_err = vec![Ok(1), Err("fail".to_string()), Ok(3)];
         let result = AsyncControlFlowExamples::process_batch_results(&some_err);
         assert!(result.is_break());
+    }
+
+    // ------------------------------------------------------------------------
+    // NamedTaskExamples 测试
+    // ------------------------------------------------------------------------
+
+    #[tokio::test]
+    async fn test_spawn_named_task() {
+        let handle = NamedTaskExamples::spawn_named_task("test-task", async { 42 })
+            .await
+            .expect("命名任务启动失败");
+        let result = handle.await.expect("任务执行 panic");
+        assert_eq!(result, 42);
+    }
+
+    #[tokio::test]
+    async fn test_spawn_named_pool() {
+        let handles =
+            NamedTaskExamples::spawn_named_pool(3, "worker", |i| async move { i * 2 });
+        assert_eq!(handles.len(), 3);
+
+        let mut results = Vec::new();
+        for handle in handles {
+            results.push(handle.expect("任务启动失败").await.expect("任务 panic"));
+        }
+        assert_eq!(results, vec![0, 2, 4]);
+    }
+
+    #[tokio::test]
+    async fn test_handle_request() {
+        let result = NamedTaskExamples::handle_request("req-001")
+            .await
+            .expect("请求处理失败");
+        assert!(result.contains("req-001"));
+        assert!(result.contains("log=log_ok"));
+        assert!(result.contains("cache=cache_ok"));
+        assert!(result.contains("metrics=metrics_ok"));
+    }
+
+    #[tokio::test]
+    async fn test_named_task_with_tracing() {
+        let handle = NamedTaskExamples::named_task_with_tracing("traced-task", async { "done" })
+            .await
+            .expect("命名任务启动失败");
+        let result = handle.await.expect("任务执行 panic");
+        assert_eq!(result, "done");
+    }
+
+    #[test]
+    fn test_tokio_console_guide() {
+        let guide = NamedTaskExamples::tokio_console_guide();
+        assert!(guide.contains("tokio-console"));
+        assert!(guide.contains("task::Builder"));
     }
 }
