@@ -377,6 +377,102 @@ pub fn get_rust_196_network_info() -> String {
         .to_string()
 }
 
+// ============================================================================
+// Rust 1.96 稳定新特性
+// ============================================================================
+
+use std::path::MAIN_SEPARATOR_STR;
+
+/// `std::path::MAIN_SEPARATOR_STR` 在网络配置路径处理中的应用
+///
+/// Rust 1.96 稳定了 `MAIN_SEPARATOR_STR`，它是平台主路径分隔符的字符串字面量。
+/// 在跨平台网络服务中，可用于构建配置文件路径字符串。
+pub struct CrossPlatformConfigPath;
+
+impl CrossPlatformConfigPath {
+    /// 构建跨平台配置文件路径字符串
+    ///
+    /// 使用 `MAIN_SEPARATOR_STR` 替代硬编码的 `/` 或 `\\`，
+    /// 确保路径在 Windows 和 Unix 系统上都能正确显示。
+    pub fn config_path(service: &str, filename: &str) -> String {
+        format!(
+            "etc{}{}{}{}",
+            MAIN_SEPARATOR_STR, service, MAIN_SEPARATOR_STR, filename
+        )
+    }
+
+    /// 构建跨平台日志目录路径
+    pub fn log_dir(service: &str) -> String {
+        format!(
+            "var{}log{}{}",
+            MAIN_SEPARATOR_STR, MAIN_SEPARATOR_STR, service
+        )
+    }
+
+    /// 获取当前平台分隔符
+    pub fn separator() -> &'static str {
+        MAIN_SEPARATOR_STR
+    }
+}
+
+/// `impl From<bool> for {f32, f64}` 在网络协议标志中的应用
+///
+/// Rust 1.96 为 `f32` 和 `f64` 实现了 `From<bool>`：
+/// - `true` 转换为 `1.0`
+/// - `false` 转换为 `0.0`
+///
+/// 在网络编程中，布尔协议标志可快速转换为浮点权重，用于负载均衡算法。
+pub struct ProtocolFlagConverter;
+
+impl ProtocolFlagConverter {
+    /// 将压缩标志转换为带宽权重系数
+    pub fn compression_weight(enabled: bool) -> f32 {
+        f32::from(enabled)
+    }
+
+    /// 将加密标志转换为延迟权重系数
+    pub fn encryption_weight(enabled: bool) -> f64 {
+        f64::from(enabled)
+    }
+
+    /// 根据多个布尔标志计算综合协议权重
+    pub fn combined_protocol_weight(flags: &[bool]) -> f64 {
+        if flags.is_empty() {
+            return 0.0;
+        }
+        let sum: f64 = flags.iter().copied().map(f64::from).sum();
+        sum / flags.len() as f64
+    }
+}
+
+/// 演示 Rust 1.96 新特性
+pub fn demonstrate_rust_196_new_features() {
+    println!("\n=== Rust 1.96 新特性演示 ===");
+
+    // MAIN_SEPARATOR_STR
+    println!(
+        "配置文件路径: {}",
+        CrossPlatformConfigPath::config_path("httpd", "config.toml")
+    );
+    println!("日志目录: {}", CrossPlatformConfigPath::log_dir("httpd"));
+    println!("平台分隔符: {:?}", CrossPlatformConfigPath::separator());
+
+    // From<bool> for f32/f64
+    println!(
+        "压缩权重(true): {}",
+        ProtocolFlagConverter::compression_weight(true)
+    );
+    println!(
+        "加密权重(false): {}",
+        ProtocolFlagConverter::encryption_weight(false)
+    );
+    let flags = vec![true, false, true];
+    println!(
+        "综合协议权重: {}",
+        ProtocolFlagConverter::combined_protocol_weight(&flags)
+    );
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -540,6 +636,36 @@ mod tests {
     fn test_get_rust_196_network_info() {
         let info = get_rust_196_network_info();
         assert!(!info.is_empty());
+    }
+
+    // Rust 1.96 新特性测试
+    #[test]
+    fn test_cross_platform_config_path() {
+        let path = CrossPlatformConfigPath::config_path("httpd", "config.toml");
+        assert!(path.contains("httpd"));
+        assert!(path.contains("config.toml"));
+        assert_eq!(CrossPlatformConfigPath::separator(), MAIN_SEPARATOR_STR);
+    }
+
+    #[test]
+    fn test_protocol_flag_converter() {
+        assert_eq!(ProtocolFlagConverter::compression_weight(true), 1.0_f32);
+        assert_eq!(ProtocolFlagConverter::compression_weight(false), 0.0_f32);
+        assert_eq!(ProtocolFlagConverter::encryption_weight(true), 1.0_f64);
+        assert_eq!(ProtocolFlagConverter::encryption_weight(false), 0.0_f64);
+    }
+
+    #[test]
+    fn test_combined_protocol_weight() {
+        assert_eq!(
+            ProtocolFlagConverter::combined_protocol_weight(&[true, true]),
+            1.0
+        );
+        assert_eq!(
+            ProtocolFlagConverter::combined_protocol_weight(&[true, false]),
+            0.5
+        );
+        assert_eq!(ProtocolFlagConverter::combined_protocol_weight(&[]), 0.0);
     }
 }
 

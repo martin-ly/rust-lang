@@ -229,6 +229,116 @@ pub fn get_rust_196_pattern_info() -> String {
         .to_string()
 }
 
+// ============================================================================
+// Rust 1.96 稳定新特性
+// ============================================================================
+
+use std::marker::PhantomPinned;
+use std::path::{Path, PathBuf};
+
+/// `core::pin::pin!` 宏在构建者模式中的应用
+///
+/// Rust 1.96 稳定了 `core::pin::pin!` 宏，允许在栈上固定值，
+/// 无需 `Box::pin` 的堆分配。这在构建自引用结构时非常有用。
+pub struct PinnedConfig {
+    name: String,
+    _pin: PhantomPinned,
+}
+
+impl PinnedConfig {
+    /// 创建新的配置（未固定）
+    pub fn new(name: &str) -> Self {
+        Self {
+            name: name.to_string(),
+            _pin: PhantomPinned,
+        }
+    }
+
+    /// 使用 `pin!` 在栈上固定配置并返回名称长度
+    ///
+    /// `pin!` 宏避免了将数据移动到堆上的开销，适合短期存在的固定对象。
+    pub fn name_len_pinned(self) -> usize {
+        let pinned = std::pin::pin!(self);
+        pinned.name.len()
+    }
+}
+
+/// `core::pin::pin!` 宏在观察者模式中的应用
+///
+/// 观察者模式中的事件通知可以使用 `pin!` 固定临时状态，
+/// 避免为短期观察任务分配堆内存。
+pub struct PinnedNotification {
+    message: String,
+    _pin: PhantomPinned,
+}
+
+impl PinnedNotification {
+    /// 创建新通知
+    pub fn new(message: &str) -> Self {
+        Self {
+            message: message.to_string(),
+            _pin: PhantomPinned,
+        }
+    }
+
+    /// 在栈上固定通知并获取消息内容
+    pub fn message_pinned(self) -> String {
+        let pinned = std::pin::pin!(self);
+        pinned.message.clone()
+    }
+}
+
+/// `impl DerefMut for PathBuf` 在代理模式中的应用
+///
+/// Rust 1.96 为 `PathBuf` 实现了 `DerefMut<Target = Path>`，
+/// 使得代理模式中可以更方便地获取内部路径的可变引用。
+pub struct ConfigPathProxy {
+    inner: PathBuf,
+}
+
+impl ConfigPathProxy {
+    /// 创建新的路径代理
+    pub fn new<P: AsRef<Path>>(path: P) -> Self {
+        Self {
+            inner: path.as_ref().to_path_buf(),
+        }
+    }
+
+    /// 获取内部路径的可变引用（利用 PathBuf 的 DerefMut）
+    pub fn path_mut(&mut self) -> &mut Path {
+        &mut self.inner
+    }
+
+    /// 获取内部路径的不可变引用
+    pub fn path(&self) -> &Path {
+        &self.inner
+    }
+
+    /// 替换内部路径
+    pub fn set_path<P: AsRef<Path>>(&mut self, path: P) {
+        self.inner = path.as_ref().to_path_buf();
+    }
+}
+
+/// 演示 Rust 1.96 新特性
+pub fn demonstrate_rust_196_new_features() {
+    println!("\n=== Rust 1.96 新特性演示 ===");
+
+    // pin! 在构建者模式中的应用
+    let config = PinnedConfig::new("database_pool");
+    println!("固定配置名称长度: {}", config.name_len_pinned());
+
+    // pin! 在观察者模式中的应用
+    let notification = PinnedNotification::new("observer_update");
+    println!("固定通知消息: {}", notification.message_pinned());
+
+    // DerefMut for PathBuf 在代理模式中的应用
+    let mut proxy = ConfigPathProxy::new("/etc/app");
+    println!("代理路径: {:?}", proxy.path());
+    proxy.set_path("/var/lib/app");
+    println!("更新后路径: {:?}", proxy.path());
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -322,5 +432,34 @@ mod tests {
     fn test_get_rust_196_pattern_info() {
         let info = get_rust_196_pattern_info();
         assert!(info.contains("Rust 设计模式特性"));
+    }
+
+    // Rust 1.96 新特性测试
+    #[test]
+    fn test_pinned_config() {
+        let config = PinnedConfig::new("test_config");
+        assert_eq!(config.name_len_pinned(), 11);
+    }
+
+    #[test]
+    fn test_pinned_notification() {
+        let notification = PinnedNotification::new("hello_observer");
+        assert_eq!(notification.message_pinned(), "hello_observer");
+    }
+
+    #[test]
+    fn test_config_path_proxy() {
+        let mut proxy = ConfigPathProxy::new("/etc/app");
+        assert_eq!(proxy.path(), Path::new("/etc/app"));
+        proxy.set_path("/var/lib/app");
+        assert_eq!(proxy.path(), Path::new("/var/lib/app"));
+    }
+
+    #[test]
+    fn test_path_buf_deref_mut() {
+        let mut pb = PathBuf::from("/tmp/test");
+        let path_mut: &mut Path = &mut pb;
+        // DerefMut 允许从 &mut PathBuf 获取 &mut Path，这是 1.96 新增的实现
+        assert_eq!(path_mut, Path::new("/tmp/test"));
     }
 }

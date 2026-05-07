@@ -403,8 +403,8 @@ QUIC 连接迁移:
             /// 须在 `ClientConfig` 中配置会话恢复（如 rustls 的 `enable_early_data`）。
             pub fn client_try_0rtt(
                 connecting: Connecting,
-            ) -> Result<(Connection, ZeroRttAccepted), Connecting> {
-                connecting.into_0rtt()
+            ) -> Result<(Connection, ZeroRttAccepted), Box<Connecting>> {
+                connecting.into_0rtt().map_err(Box::new)
             }
 
             /// 服务器接受 0.5-RTT 连接
@@ -412,9 +412,9 @@ QUIC 连接迁移:
             /// 服务器端可在握手完成前就开始发送数据（0.5-RTT）。
             pub fn server_accept_0rtt(
                 connecting: Connecting,
-            ) -> Result<(Connection, ZeroRttAccepted), Connecting> {
+            ) -> Result<(Connection, ZeroRttAccepted), Box<Connecting>> {
                 // 服务器端总是成功
-                connecting.into_0rtt()
+                connecting.into_0rtt().map_err(Box::new)
             }
 
             /// 检查 0-RTT 是否最终被接受
@@ -601,8 +601,8 @@ QUIC 连接迁移:
             fn test_zero_rtt_api_surface() {
                 fn _assert_into_0rtt(
                     c: Connecting,
-                ) -> Result<(Connection, ZeroRttAccepted), Connecting> {
-                    c.into_0rtt()
+                ) -> Result<(Connection, ZeroRttAccepted), Box<Connecting>> {
+                    c.into_0rtt().map_err(Box::new)
                 }
                 let _ = _assert_into_0rtt as fn(Connecting) -> _;
             }

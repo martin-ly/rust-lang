@@ -260,7 +260,7 @@ mod tests {
 
     #[test]
     fn test_cfg_select_page_size() {
-        assert!(CfgSelectExamples::COMPILE_TIME_PAGE_SIZE > 0);
+        const { assert!(CfgSelectExamples::COMPILE_TIME_PAGE_SIZE > 0) };
     }
 
     #[test]
@@ -291,8 +291,8 @@ mod tests {
             CrossPlatformPatterns::LINE_ENDING == "\r\n"
                 || CrossPlatformPatterns::LINE_ENDING == "\n"
         );
-        assert!(CrossPlatformPatterns::FD_LIMIT_HINT > 0);
-        assert!(CrossPlatformPatterns::DEFAULT_STACK_SIZE >= 1024 * 1024);
+        const { assert!(CrossPlatformPatterns::FD_LIMIT_HINT > 0) };
+        const { assert!(CrossPlatformPatterns::DEFAULT_STACK_SIZE >= 1024 * 1024) };
     }
 
     #[test]

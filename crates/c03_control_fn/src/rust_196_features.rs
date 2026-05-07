@@ -263,6 +263,88 @@ pub fn get_let_chains_info() -> String {
 
 // ==================== 测试 ====================
 
+// ==================== Rust 1.96 新特性 ====================
+
+/// Rust 1.96 `core::pin::pin!` 在控制流中的应用
+///
+/// `pin!` 宏允许在栈上直接创建固定引用，无需 `Box::pin` 或 unsafe 代码。
+/// 在控制流场景中，`pin!` 可以简化条件分支中的固定操作。
+pub struct Rust196PinControlFlow;
+
+impl Rust196PinControlFlow {
+    /// 条件性地固定数据：根据输入选择不同的处理路径
+    ///
+    /// 在 if-else 分支中使用 `pin!` 分别固定不同值，避免堆分配。
+    pub fn conditional_pin<T>(use_default: bool, default: T, alternate: T) -> i32
+    where
+        T: std::fmt::Display,
+    {
+        if use_default {
+            let pinned = core::pin::pin!(default);
+            format!("{pinned}").len() as i32
+        } else {
+            let pinned = core::pin::pin!(alternate);
+            -(format!("{pinned}").len() as i32)
+        }
+    }
+
+    /// 循环中的栈固定：批量处理时避免重复堆分配
+    ///
+    /// 在 while 循环内使用 `pin!` 固定临时数据，每次迭代都在栈上完成。
+    #[allow(clippy::while_let_on_iterator)]
+    pub fn pin_in_loop(inputs: &[String]) -> Vec<usize> {
+        let mut results = Vec::new();
+        let mut iter = inputs.iter();
+
+        while let Some(s) = iter.next() {
+            // 在循环体内栈固定当前字符串切片
+            let pinned = core::pin::pin!(s.as_str());
+            results.push(pinned.len());
+        }
+
+        results
+    }
+}
+
+/// Rust 1.96 `impl From<bool> for {f32, f64}` 在错误处理中的应用
+///
+/// 布尔值到浮点数的转换简化了成功/失败率的计算，特别是在错误统计场景中。
+pub struct Rust196BoolFloatConversion;
+
+impl Rust196BoolFloatConversion {
+    /// 将布尔结果转换为浮点指标
+    ///
+    /// `true` 转换为 `1.0f32`，`false` 转换为 `0.0f32`，
+    /// 便于在错误处理流程中直接计算成功率。
+    pub fn bool_to_float_metric(success: bool) -> f32 {
+        f32::from(success)
+    }
+
+    /// 批量计算成功率
+    ///
+    /// 利用 `From<bool>` 将每个布尔结果转为 `f32`，然后求平均值。
+    pub fn compute_success_rate(results: &[bool]) -> f64 {
+        if results.is_empty() {
+            return 0.0;
+        }
+        let sum: f64 = results.iter().map(|&b| f64::from(b)).sum();
+        sum / results.len() as f64
+    }
+
+    /// 与阈值比较的错误处理模式
+    ///
+    /// 将布尔条件转换为浮点权重，用于加权错误评分。
+    pub fn weighted_error_score(errors: &[(bool, f64)]) -> f64 {
+        errors
+            .iter()
+            .map(|(critical, weight)| {
+                let multiplier = f64::from(*critical) * 2.0 + 1.0;
+                weight * multiplier
+            })
+            .sum()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -385,6 +467,56 @@ mod tests {
         let info = get_let_chains_info();
         assert!(info.contains("let chains"));
         assert!(info.contains("2024"));
+    }
+
+    // ----- Rust 1.96 新特性测试 -----
+
+    #[test]
+    fn test_conditional_pin() {
+        assert_eq!(
+            Rust196PinControlFlow::conditional_pin(true, "hello", "world"),
+            5
+        );
+        assert_eq!(
+            Rust196PinControlFlow::conditional_pin(false, "hello", "world"),
+            -5
+        );
+    }
+
+    #[test]
+    fn test_pin_in_loop() {
+        let inputs = vec!["a".to_string(), "bb".to_string(), "ccc".to_string()];
+        assert_eq!(Rust196PinControlFlow::pin_in_loop(&inputs), vec![1, 2, 3]);
+    }
+
+    #[test]
+    fn test_bool_to_float_metric() {
+        assert_eq!(
+            Rust196BoolFloatConversion::bool_to_float_metric(true),
+            1.0_f32
+        );
+        assert_eq!(
+            Rust196BoolFloatConversion::bool_to_float_metric(false),
+            0.0_f32
+        );
+    }
+
+    #[test]
+    fn test_compute_success_rate() {
+        assert_eq!(
+            Rust196BoolFloatConversion::compute_success_rate(&[true, true, false]),
+            2.0 / 3.0
+        );
+        assert_eq!(Rust196BoolFloatConversion::compute_success_rate(&[]), 0.0);
+    }
+
+    #[test]
+    fn test_weighted_error_score() {
+        let errors = vec![(true, 1.0), (false, 2.0)];
+        // true -> multiplier = 3.0, false -> multiplier = 1.0
+        // 1.0 * 3.0 + 2.0 * 1.0 = 5.0
+        let score = Rust196BoolFloatConversion::weighted_error_score(&errors);
+        assert!((score - 5.0).abs() < 0.001);
     }
 }
 

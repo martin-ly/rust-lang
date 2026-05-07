@@ -269,6 +269,81 @@ pub fn get_rust_196_macro_info() -> String {
         .to_string()
 }
 
+// ============================================================================
+// Rust 1.96 稳定新特性
+// ============================================================================
+
+use std::collections::VecDeque;
+use std::marker::PhantomPinned;
+
+/// `VecDeque::new` 在 const 上下文中的应用
+///
+/// Rust 1.96 稳定了 `VecDeque::new` 的 const 特性，
+/// 允许在编译期创建空的宏展开缓冲区。
+pub struct ConstMacroBuffer;
+
+impl ConstMacroBuffer {
+    /// 编译期初始化的空令牌缓冲区
+    pub const TOKEN_BUFFER: VecDeque<String> = VecDeque::new();
+
+    /// 编译期初始化的空深度跟踪队列
+    pub const DEPTH_TRACKER: VecDeque<usize> = VecDeque::new();
+
+    /// 创建新的展开缓冲区（运行时填充）
+    pub fn create_expansion_buffer() -> VecDeque<String> {
+        let mut buffer = VecDeque::new();
+        buffer.push_back("macro_start".to_string());
+        buffer
+    }
+}
+
+/// `core::pin::pin!` 宏在过程宏状态机中的应用
+///
+/// 过程宏的展开状态机可以使用 `pin!` 固定中间状态，
+/// 避免为临时状态机节点分配堆内存。
+pub struct MacroStateMachine {
+    state: String,
+    _pin: PhantomPinned,
+}
+
+impl MacroStateMachine {
+    /// 创建新状态机
+    pub fn new(initial: &str) -> Self {
+        Self {
+            state: initial.to_string(),
+            _pin: PhantomPinned,
+        }
+    }
+
+    /// 在栈上固定状态机并转换到下一状态
+    pub fn transition(self, next: &str) -> String {
+        let pinned = std::pin::pin!(self);
+        // 在真实场景中，这里会基于固定状态进行安全的状态转换
+        format!("{} -> {}", pinned.state, next)
+    }
+
+    /// 获取当前状态（通过 pin! 固定后读取）
+    pub fn current_state(self) -> String {
+        let pinned = std::pin::pin!(self);
+        pinned.state.clone()
+    }
+}
+
+/// 演示 Rust 1.96 新特性
+pub fn demonstrate_rust_196_new_features() {
+    println!("\n=== Rust 1.96 新特性演示 ===");
+
+    // VecDeque::new in const
+    let buffer = ConstMacroBuffer::create_expansion_buffer();
+    println!("宏展开缓冲区: {:?}", buffer);
+
+    // pin! in proc-macro state machine
+    let sm = MacroStateMachine::new("parsing");
+    println!("状态机状态: {}", sm.current_state());
+    let sm2 = MacroStateMachine::new("expanding");
+    println!("状态转换: {}", sm2.transition("done"));
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -368,5 +443,34 @@ mod tests {
     fn test_get_rust_196_macro_info() {
         let info = get_rust_196_macro_info();
         assert!(!info.is_empty());
+    }
+
+    // Rust 1.96 新特性测试
+    #[test]
+    fn test_const_macro_buffer() {
+        let buffer = ConstMacroBuffer::TOKEN_BUFFER;
+        assert!(buffer.is_empty());
+
+        let tracker = ConstMacroBuffer::DEPTH_TRACKER;
+        assert!(tracker.is_empty());
+    }
+
+    #[test]
+    fn test_create_expansion_buffer() {
+        let buffer = ConstMacroBuffer::create_expansion_buffer();
+        assert_eq!(buffer.len(), 1);
+        assert_eq!(buffer.front().unwrap(), "macro_start");
+    }
+
+    #[test]
+    fn test_macro_state_machine() {
+        let sm = MacroStateMachine::new("parsing");
+        assert_eq!(sm.current_state(), "parsing");
+    }
+
+    #[test]
+    fn test_macro_state_machine_transition() {
+        let sm = MacroStateMachine::new("expanding");
+        assert_eq!(sm.transition("done"), "expanding -> done");
     }
 }

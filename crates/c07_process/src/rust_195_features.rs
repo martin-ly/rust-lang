@@ -194,7 +194,7 @@ mod tests {
 
     #[test]
     fn test_cfg_select_process_limits() {
-        assert!(ProcessCfgSelectExamples::DEFAULT_STACK_SIZE >= 1024 * 1024);
-        assert!(ProcessCfgSelectExamples::MAX_PROCESSES_RECOMMENDED > 0);
+        const { assert!(ProcessCfgSelectExamples::DEFAULT_STACK_SIZE >= 1024 * 1024) };
+        const { assert!(ProcessCfgSelectExamples::MAX_PROCESSES_RECOMMENDED > 0) };
     }
 }

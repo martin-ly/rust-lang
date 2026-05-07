@@ -870,6 +870,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::reversed_empty_ranges)]
     fn test_ports_in_range_empty() {
         let ports = ports_in_range(&(82..=80).into());
         assert!(ports.is_empty());
@@ -955,12 +956,12 @@ mod tests {
             let cf: ControlFlow<i32, ()> = ControlFlow::Break(1);
             is_break_const(&cf)
         };
-        assert!(B);
+        const { assert!(B) };
 
         const C: bool = {
             let cf: ControlFlow<i32, ()> = ControlFlow::Continue(());
             is_continue_const(&cf)
         };
-        assert!(C);
+        const { assert!(C) };
     }
 }

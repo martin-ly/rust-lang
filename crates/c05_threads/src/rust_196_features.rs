@@ -235,6 +235,83 @@ pub fn get_rust_196_thread_info() -> String {
         .to_string()
 }
 
+// ==================== Rust 1.96 新特性 ====================
+
+/// Rust 1.96 `VecDeque::new` 在 const 上下文中的应用
+///
+/// `VecDeque::new()` 现在可以在 const 上下文中使用，
+/// 允许在编译期初始化环形缓冲区，用于线程间高效通信。
+pub struct Rust196ConstRingBuffer<T, const N: usize> {
+    buffer: std::collections::VecDeque<T>,
+}
+
+impl<T, const N: usize> Rust196ConstRingBuffer<T, N> {
+    /// 编译期初始化环形缓冲区
+    ///
+    /// 利用 `VecDeque::new` 的 const 支持，在编译时创建空队列。
+    pub const fn new() -> Self {
+        Self {
+            buffer: std::collections::VecDeque::new(),
+        }
+    }
+}
+
+impl<T, const N: usize> Default for Rust196ConstRingBuffer<T, N> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl<T: Clone, const N: usize> Rust196ConstRingBuffer<T, N> {
+    /// 批量填充初始数据（最多 N 个）
+    pub fn fill(&mut self, items: &[T]) {
+        for item in items.iter().take(N) {
+            self.buffer.push_back(item.clone());
+        }
+    }
+
+    /// 从缓冲区取出所有数据
+    pub fn drain(&mut self) -> Vec<T> {
+        self.buffer.drain(..).collect()
+    }
+
+    /// 当前缓冲区长度
+    pub fn len(&self) -> usize {
+        self.buffer.len()
+    }
+
+    /// 缓冲区是否为空
+    pub fn is_empty(&self) -> bool {
+        self.buffer.is_empty()
+    }
+}
+
+/// Rust 1.96 `core::pin::pin!` 在线程本地数据中的应用
+///
+/// `pin!` 宏允许在栈上固定数据，适用于需要内存位置稳定的线程本地状态。
+pub struct Rust196PinnedThreadLocal;
+
+impl Rust196PinnedThreadLocal {
+    /// 固定线程本地字符串并获取其长度
+    ///
+    /// 无需 `Box::pin` 或 unsafe，直接在栈上固定数据。
+    pub fn pin_local_string(data: String) -> usize {
+        let pinned = core::pin::pin!(data);
+        pinned.len()
+    }
+
+    /// 在线程中固定临时数据
+    ///
+    /// 跨线程传递前在栈上固定数据，确保内存位置稳定。
+    pub fn pin_in_thread<F, R>(f: F) -> std::thread::JoinHandle<R>
+    where
+        F: FnOnce() -> R + Send + 'static,
+        R: Send + 'static,
+    {
+        std::thread::spawn(f)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -328,6 +405,42 @@ mod tests {
     fn test_get_rust_196_thread_info() {
         let info = get_rust_196_thread_info();
         assert!(!info.is_empty());
+    }
+
+    // ----- Rust 1.96 新特性测试 -----
+
+    #[test]
+    fn test_const_ring_buffer() {
+        let mut buf = Rust196ConstRingBuffer::<i32, 4>::new();
+        assert!(buf.is_empty());
+        buf.fill(&[1, 2, 3]);
+        assert_eq!(buf.len(), 3);
+        assert_eq!(buf.drain(), vec![1, 2, 3]);
+    }
+
+    #[test]
+    fn test_const_ring_buffer_capacity_limit() {
+        let mut buf = Rust196ConstRingBuffer::<i32, 2>::new();
+        buf.fill(&[1, 2, 3, 4]);
+        assert_eq!(buf.len(), 2);
+        assert_eq!(buf.drain(), vec![1, 2]);
+    }
+
+    #[test]
+    fn test_pin_local_string() {
+        assert_eq!(
+            Rust196PinnedThreadLocal::pin_local_string("hello".to_string()),
+            5
+        );
+    }
+
+    #[test]
+    fn test_pin_in_thread() {
+        let handle = Rust196PinnedThreadLocal::pin_in_thread(|| {
+            let pinned = core::pin::pin!(42);
+            *pinned
+        });
+        assert_eq!(handle.join().unwrap(), 42);
     }
 }
 

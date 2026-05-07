@@ -180,6 +180,71 @@ pub fn get_rust_196_generic_info() -> String {
         .to_string()
 }
 
+// ==================== Rust 1.96 新特性 ====================
+
+/// Rust 1.96 `impl DerefMut for PathBuf` 泛型特征演示
+///
+/// `PathBuf` 现在实现了 `DerefMut<Target = Path>`，允许在泛型上下文中
+/// 通过 `&mut PathBuf` 获取 `&mut Path`，无需显式转换。
+pub struct Rust196PathBufDerefMut;
+
+impl Rust196PathBufDerefMut {
+    /// 向路径追加组件
+    ///
+    /// 展示 `DerefMut` 使得 `PathBuf` 可以直接作为可变路径引用使用，
+    /// 泛型地接受任何实现 `AsRef<Path>` 的类型。
+    pub fn append_component<P: AsRef<std::path::Path>>(
+        path: &mut std::path::PathBuf,
+        component: P,
+    ) {
+        path.push(component);
+    }
+
+    /// 移除路径的最后一个组件
+    ///
+    /// 利用 `DerefMut` 在泛型函数中操作 `PathBuf` 的可变引用。
+    pub fn truncate_to_parent(path: &mut std::path::PathBuf) -> bool {
+        path.pop()
+    }
+
+    /// 使用 `MAIN_SEPARATOR_STR` 构建跨平台路径
+    ///
+    /// Rust 1.96 引入 `std::path::MAIN_SEPARATOR_STR`，
+    /// 提供平台相关的路径分隔符字符串。
+    pub fn build_cross_platform_path(components: &[&str]) -> std::path::PathBuf {
+        components.join(std::path::MAIN_SEPARATOR_STR).into()
+    }
+}
+
+/// Rust 1.96 `core::pin::pin!` 在泛型异步代码中的应用
+///
+/// `pin!` 宏允许在栈上固定泛型 Future，无需 `Box::pin` 或 unsafe。
+pub struct Rust196GenericPin;
+
+impl Rust196GenericPin {
+    /// 固定并执行泛型 Future
+    ///
+    /// 对任意实现 `Future` 的类型使用 `pin!` 进行栈固定。
+    pub fn execute_generic_future<F>(future: F) -> F::Output
+    where
+        F: std::future::Future,
+    {
+        let pinned = core::pin::pin!(future);
+        futures::executor::block_on(pinned)
+    }
+
+    /// 条件固定：泛型值复制
+    ///
+    /// 展示在泛型上下文中 `pin!` 的使用。
+    pub fn conditional_pin<T>(value: T) -> T
+    where
+        T: Clone,
+    {
+        let pinned = core::pin::pin!(value.clone());
+        pinned.clone()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -274,6 +339,46 @@ mod tests {
     fn test_get_rust_196_generic_info() {
         let info = get_rust_196_generic_info();
         assert!(!info.is_empty());
+    }
+
+    // ----- Rust 1.96 新特性测试 -----
+
+    #[test]
+    fn test_append_component() {
+        let mut path = std::path::PathBuf::from("base");
+        Rust196PathBufDerefMut::append_component(&mut path, "child");
+        assert_eq!(path.file_name(), Some(std::ffi::OsStr::new("child")));
+    }
+
+    #[test]
+    fn test_truncate_to_parent() {
+        let mut path = std::path::PathBuf::from("parent");
+        path.push("child");
+        assert!(Rust196PathBufDerefMut::truncate_to_parent(&mut path));
+        assert_eq!(path, std::path::PathBuf::from("parent"));
+    }
+
+    #[test]
+    fn test_build_cross_platform_path() {
+        let path = Rust196PathBufDerefMut::build_cross_platform_path(&["foo", "bar"]);
+        let s = path.to_str().unwrap();
+        assert!(s.contains("foo"));
+        assert!(s.contains("bar"));
+    }
+
+    #[test]
+    fn test_execute_generic_future() {
+        let future = async { 42 };
+        assert_eq!(Rust196GenericPin::execute_generic_future(future), 42);
+    }
+
+    #[test]
+    fn test_conditional_pin_generic() {
+        assert_eq!(Rust196GenericPin::conditional_pin(100), 100);
+        assert_eq!(
+            Rust196GenericPin::conditional_pin(String::from("pin")),
+            "pin"
+        );
     }
 }
 

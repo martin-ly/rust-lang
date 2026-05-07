@@ -468,16 +468,11 @@ mod tests {
     fn test_manual_async_closure_poll() {
         use std::future::Future;
         use std::pin::Pin;
-        use std::sync::Arc;
         use std::task::{Context, Poll, Waker};
 
         let mut fut = ManualAsyncClosure::new(42);
-        struct DummyWake;
-        impl std::task::Wake for DummyWake {
-            fn wake(self: Arc<Self>) {}
-        }
-        let waker = Waker::from(Arc::new(DummyWake));
-        let mut cx = Context::from_waker(&waker);
+        let waker = Waker::noop();
+        let mut cx = Context::from_waker(waker);
 
         // 前三次 poll 返回 Pending
         assert_eq!(Pin::new(&mut fut).poll(&mut cx), Poll::Pending);

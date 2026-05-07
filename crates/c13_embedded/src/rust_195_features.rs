@@ -380,9 +380,9 @@ mod tests {
 
     #[test]
     fn test_embedded_cfg_select() {
-        assert!(EmbeddedCfgSelect::DEFAULT_SYSCLK_HZ > 0);
-        assert!(EmbeddedCfgSelect::STACK_ALIGNMENT >= 8);
-        assert!(EmbeddedCfgSelect::IRQ_VECTOR_COUNT > 0);
+        const { assert!(EmbeddedCfgSelect::DEFAULT_SYSCLK_HZ > 0) };
+        const { assert!(EmbeddedCfgSelect::STACK_ALIGNMENT >= 8) };
+        const { assert!(EmbeddedCfgSelect::IRQ_VECTOR_COUNT > 0) };
     }
 
     #[test]

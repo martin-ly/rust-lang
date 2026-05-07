@@ -282,8 +282,8 @@ mod tests {
 
     #[test]
     fn test_cfg_select_buffer_sizes() {
-        assert!(NetworkCfgSelectExamples::DEFAULT_TCP_SEND_BUFFER > 0);
-        assert!(NetworkCfgSelectExamples::DEFAULT_TCP_RECV_BUFFER > 0);
-        assert!(NetworkCfgSelectExamples::MAX_CONNECTIONS_RECOMMENDED > 0);
+        const { assert!(NetworkCfgSelectExamples::DEFAULT_TCP_SEND_BUFFER > 0) };
+        const { assert!(NetworkCfgSelectExamples::DEFAULT_TCP_RECV_BUFFER > 0) };
+        const { assert!(NetworkCfgSelectExamples::MAX_CONNECTIONS_RECOMMENDED > 0) };
     }
 }

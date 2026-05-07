@@ -58,7 +58,9 @@ impl ConcurrentPatternExamples {
 
     /// 对象池引用计数递减
     pub fn pool_borrow_count_decrement(counter: &AtomicUsize) -> usize {
-        counter.update(Ordering::Release, Ordering::Relaxed, |old| old.saturating_sub(1))
+        counter.update(Ordering::Release, Ordering::Relaxed, |old| {
+            old.saturating_sub(1)
+        })
     }
 
     /// 尝试获取对象池中的对象（享元模式）
@@ -89,7 +91,11 @@ pub struct StateMachinePatternExamples;
 
 impl StateMachinePatternExamples {
     /// 订单状态机转换
-    pub fn order_state_transition(state: &str, event: &str, payment_ok: bool) -> Option<&'static str> {
+    pub fn order_state_transition(
+        state: &str,
+        event: &str,
+        payment_ok: bool,
+    ) -> Option<&'static str> {
         match (state, event) {
             ("created", "pay") if payment_ok => Some("paid"),
             ("created", "cancel") => Some("cancelled"),
@@ -101,7 +107,11 @@ impl StateMachinePatternExamples {
     }
 
     /// 命令模式：条件执行
-    pub fn execute_command(cmd: &str, args: Option<&str>, authorized: bool) -> Result<(), &'static str> {
+    pub fn execute_command(
+        cmd: &str,
+        args: Option<&str>,
+        authorized: bool,
+    ) -> Result<(), &'static str> {
         match (cmd, args) {
             ("delete", Some(_)) if authorized => Ok(()),
             ("delete", Some(_)) => Err("unauthorized"),
@@ -155,7 +165,7 @@ mod tests {
 
     #[test]
     fn test_platform_factory() {
-        assert!(PlatformAbstractFactory::DEFAULT_THREAD_POOL_SIZE >= 2);
+        const { assert!(PlatformAbstractFactory::DEFAULT_THREAD_POOL_SIZE >= 2) };
     }
 
     #[test]
@@ -188,7 +198,9 @@ mod tests {
     fn test_command_pattern() {
         assert!(StateMachinePatternExamples::execute_command("read", Some("file"), false).is_ok());
         assert!(StateMachinePatternExamples::execute_command("delete", Some("file"), true).is_ok());
-        assert!(StateMachinePatternExamples::execute_command("delete", Some("file"), false).is_err());
+        assert!(
+            StateMachinePatternExamples::execute_command("delete", Some("file"), false).is_err()
+        );
     }
 
     #[test]
