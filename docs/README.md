@@ -28,6 +28,17 @@
 | 跨模块学习路线图 | 详细学习路线 | [01_learning/](01_learning/) |
 | 跨模块实战项目 | 实践项目指南 | [03_practice/](03_practice/) |
 
+### 前沿特性文档 (Rust 1.95–1.96+)
+
+| 文档 | 描述 | 版本 |
+|------|------|------|
+| Miri 实战指南 | UB 检测与内存安全验证 | [05_guides/MIRI_PRACTICAL_GUIDE.md](05_guides/MIRI_PRACTICAL_GUIDE.md) |
+| Cranelift 后端指南 | 快速调试编译后端 | [06_toolchain/CRANELIFT_BACKEND_GUIDE.md](06_toolchain/CRANELIFT_BACKEND_GUIDE.md) |
+| TOML v1.1 Cargo 指南 | Cargo.toml 新语法 | [06_toolchain/TOML_V11_CARGO_GUIDE.md](06_toolchain/TOML_V11_CARGO_GUIDE.md) |
+| Polonius 下一代 Borrow Checker | 基于 Datalog 的生命周期推断 | [04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md](04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md) |
+| VerusBelt (PLDI 2026) | 形式化验证语义基础 | [04_research/VERUSBELT_PLDI_2026.md](04_research/VERUSBELT_PLDI_2026.md) |
+| Unsafe Fields 预览 | 更细粒度的 unsafe 声明 | [05_guides/UNSAFE_FIELDS_PREVIEW.md](05_guides/UNSAFE_FIELDS_PREVIEW.md) |
+
 ### 子目录分类
 
 | 目录 | 内容类型 | 文件数 |

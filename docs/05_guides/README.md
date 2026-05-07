@@ -91,6 +91,8 @@ impl ConfigBuilder {
 | [TROUBLESHOOTING_GUIDE.md](./TROUBLESHOOTING_GUIDE.md) | 故障排查 | ⭐⭐ |
 | [BEST_PRACTICES.md](./BEST_PRACTICES.md) | 最佳实践 | ⭐⭐⭐ |
 | [workflow/](./workflow/README.md) | 工作流理论与模型 | ⭐⭐⭐ |
+| [MIRI_PRACTICAL_GUIDE.md](./MIRI_PRACTICAL_GUIDE.md) | Miri 实战：UB 检测与内存安全 | ⭐⭐⭐⭐ |
+| [UNSAFE_FIELDS_PREVIEW.md](./UNSAFE_FIELDS_PREVIEW.md) | Unsafe Fields 预览（Rust 2026 目标） | ⭐⭐⭐⭐ |
 
 ---
 

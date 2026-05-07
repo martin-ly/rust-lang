@@ -420,6 +420,8 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.95+ 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md) 🆕
 - [Rust 1.94 研究笔记](../research_notes/RUST_194_RESEARCH_UPDATE.md) 🆕
 - [Rust 1.94 速查卡](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)（已归档）
+- [Cranelift 后端指南](./CRANELIFT_BACKEND_GUIDE.md) ⭐ (Rust 1.96+)
+- [TOML v1.1 Cargo 指南](./TOML_V11_CARGO_GUIDE.md) ⭐ (Cargo 1.96+)
 
 ### 官方资源
 
