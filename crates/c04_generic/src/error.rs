@@ -65,12 +65,13 @@ pub fn hrtb_error<T: Into<String>>(msg: T) -> GenericError {
 
 #[cfg(test)]
 mod tests {
+    use std::assert_matches;
     use super::*;
 
     #[test]
     fn test_error_creation() {
         let err = type_parameter_mismatch("test");
-        assert!(matches!(err, GenericError::TypeParameterMismatch(_)));
+        assert_matches!(err, GenericError::TypeParameterMismatch(_));
         assert_eq!(err.error_code(), ErrorCode::Generic);
     }
 
@@ -78,6 +79,6 @@ mod tests {
     fn test_error_conversion() {
         let err = constraint_conflict("test");
         let unified: UnifiedError = err.into();
-        assert!(matches!(unified, UnifiedError::Custom(_)));
+        assert_matches!(unified, UnifiedError::Custom(_));
     }
 }

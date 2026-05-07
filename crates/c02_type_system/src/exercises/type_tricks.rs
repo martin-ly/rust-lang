@@ -4,6 +4,7 @@
 
 #[cfg(test)]
 mod tests {
+    use std::assert_matches;
     /// 练习 1: 实现一个类型，它可以是整数或字符串
     #[derive(Debug, PartialEq)]
     enum IntOrString {
@@ -16,8 +17,8 @@ mod tests {
         let int_val = IntOrString::Int(42);
         let str_val = IntOrString::String(String::from("hello"));
 
-        assert!(matches!(int_val, IntOrString::Int(42)));
-        assert!(matches!(str_val, IntOrString::String(_)));
+        assert_matches!(int_val, IntOrString::Int(42));
+        assert_matches!(str_val, IntOrString::String(_));
     }
 
     /// 练习 2: 实现一个泛型函数，返回类型的默认值

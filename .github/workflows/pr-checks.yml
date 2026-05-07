@@ -113,9 +113,19 @@ jobs:
 
       - name: Build
         run: cargo build --workspace --all-features
+        if: matrix.os != 'windows-latest'
 
       - name: Run tests
         run: cargo test --workspace --all-features --verbose
+        if: matrix.os != 'windows-latest'
+
+      - name: Build (Windows)
+        run: cargo build --workspace --features tls,quic,libp2p
+        if: matrix.os == 'windows-latest'
+
+      - name: Run tests (Windows)
+        run: cargo test --workspace --features tls,quic,libp2p --verbose
+        if: matrix.os == 'windows-latest'
 
   # 测试覆盖率
   coverage:

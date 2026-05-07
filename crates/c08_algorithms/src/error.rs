@@ -73,12 +73,13 @@ pub fn data_structure_error<T: Into<String>>(msg: T) -> AlgorithmError {
 
 #[cfg(test)]
 mod tests {
+    use std::assert_matches;
     use super::*;
 
     #[test]
     fn test_error_creation() {
         let err = invalid_input("test");
-        assert!(matches!(err, AlgorithmError::InvalidInput(_)));
+        assert_matches!(err, AlgorithmError::InvalidInput(_));
         assert_eq!(err.error_code(), ErrorCode::Algorithm);
     }
 
@@ -86,6 +87,6 @@ mod tests {
     fn test_error_conversion() {
         let err = complexity_exceeded("test");
         let unified: UnifiedError = err.into();
-        assert!(matches!(unified, UnifiedError::Custom(_)));
+        assert_matches!(unified, UnifiedError::Custom(_));
     }
 }

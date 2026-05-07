@@ -44,7 +44,7 @@ pub enum EnhancedConnection {
     Tcp(tokio::sync::Mutex<TcpStream>),
     #[cfg(unix)]
     Unix(tokio::sync::Mutex<UnixStream>),
-    NamedPipe(NamedPipeConnection),
+    NamedPipe(Box<NamedPipeConnection>),
     SharedMemory(SharedMemoryConnection),
     MessageQueue(MessageQueueConnection),
 }

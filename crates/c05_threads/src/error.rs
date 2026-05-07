@@ -116,13 +116,14 @@ pub fn lock_free_error<T: Into<String>>(msg: T) -> ThreadError {
 
 #[cfg(test)]
 mod tests {
+    use std::assert_matches;
     use super::*;
     use common::RustLangError;
 
     #[test]
     fn test_error_creation() {
         let err = thread_creation_failed("test");
-        assert!(matches!(err, ThreadError::CreationFailed(_)));
+        assert_matches!(err, ThreadError::CreationFailed(_));
         assert_eq!(err.error_code(), ErrorCode::Thread);
     }
 
@@ -140,6 +141,6 @@ mod tests {
     fn test_error_conversion() {
         let err = deadlock_detected("test");
         let unified: UnifiedError = err.into();
-        assert!(matches!(unified, UnifiedError::Custom(_)));
+        assert_matches!(unified, UnifiedError::Custom(_));
     }
 }

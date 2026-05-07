@@ -94,9 +94,19 @@ jobs:
 
       - name: Build workspace (${{ matrix.mode }})
         run: cargo build --workspace --all-features ${{ matrix.profile }} --verbose
+        if: matrix.os != 'windows-latest'
 
       - name: Run tests (${{ matrix.mode }})
         run: cargo test --workspace --all-features ${{ matrix.profile }} --verbose
+        if: matrix.os != 'windows-latest'
+
+      - name: Build workspace (Windows, ${{ matrix.mode }})
+        run: cargo build --workspace --features tls,quic,libp2p ${{ matrix.profile }} --verbose
+        if: matrix.os == 'windows-latest'
+
+      - name: Run tests (Windows, ${{ matrix.mode }})
+        run: cargo test --workspace --features tls,quic,libp2p ${{ matrix.profile }} --verbose
+        if: matrix.os == 'windows-latest'
 
   # 文档构建
   documentation:

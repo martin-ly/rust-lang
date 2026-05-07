@@ -65,12 +65,13 @@ pub fn generator_error<T: Into<String>>(msg: T) -> ControlFlowError {
 
 #[cfg(test)]
 mod tests {
+    use std::assert_matches;
     use super::*;
 
     #[test]
     fn test_error_creation() {
         let err = non_exhaustive_match("test");
-        assert!(matches!(err, ControlFlowError::NonExhaustiveMatch(_)));
+        assert_matches!(err, ControlFlowError::NonExhaustiveMatch(_));
         assert_eq!(err.error_code(), ErrorCode::ControlFlow);
     }
 
@@ -78,6 +79,6 @@ mod tests {
     fn test_error_conversion() {
         let err = stack_overflow("test");
         let unified: UnifiedError = err.into();
-        assert!(matches!(unified, UnifiedError::Custom(_)));
+        assert_matches!(unified, UnifiedError::Custom(_));
     }
 }
