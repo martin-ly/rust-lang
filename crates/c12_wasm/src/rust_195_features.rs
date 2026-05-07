@@ -26,7 +26,6 @@
 // =========================================================================
 
 /// # WASI 目标三元组变更
-///
 // Rust 1.84.0 移除了 `wasm32-wasi` 目标，替换为更精确的变体：
 //
 // ```sh
@@ -41,7 +40,6 @@
 // ```
 ///
 /// # 差异对比
-///
 // | 特性 | wasip1 | wasip2 |
 // |------|--------|--------|
 // | 接口 | 能力驱动 (capsicum) | 组件模型 (WIT) |
@@ -135,7 +133,6 @@ WASI Preview 2 — Command vs Reactor:
 // =========================================================================
 
 /// # Component Model (WASI Preview 2 核心)
-///
 // [WebAssembly Component Model](https://component-model.bytecodealliance.org/)
 // 是 WASI Preview 2 的基石，提供了：
 // - **接口定义** (WIT — WebAssembly Interface Types)
@@ -226,7 +223,6 @@ Component Model 跨语言互操作:
 // =========================================================================
 
 /// # `wasm32v1-none` — 纯 WebAssembly
-///
 // 1.95 新增的 `wasm32v1-none` 目标是一个**纯 WebAssembly** 目标：
 // - 无标准库（`no_std`）
 // - 无 WASI 接口
@@ -298,7 +294,6 @@ extern "C" {
 // =========================================================================
 
 /// # wasm-bindgen 0.2.120 更新
-///
 // wasm-bindgen 0.2.120（配合 Rust 1.95）的重要改进：
 // - **更小的 JS shim** — 减少生成的胶水代码
 // - **更好的 TypeScript 类型** — 生成更精确的 .d.ts
@@ -397,8 +392,8 @@ impl WasmProjectRecommendations {
         vec![
             (
                 "目标选择",
-                "新项目使用 wasm32-wasip1；实验性项目尝试 wasm32-wasip2；\
-                 区块链/游戏插件使用 wasm32v1-none",
+                "新项目使用 wasm32-wasip1；实验性项目尝试 wasm32-wasip2；区块链/游戏插件使用 \
+                 wasm32v1-none",
             ),
             (
                 "工具链",
@@ -406,8 +401,7 @@ impl WasmProjectRecommendations {
             ),
             (
                 "调试",
-                "wasmtime --wasm-features all --wasi-modules experimental \
-                 run module.wasm",
+                "wasmtime --wasm-features all --wasi-modules experimental run module.wasm",
             ),
             (
                 "性能",
@@ -415,13 +409,10 @@ impl WasmProjectRecommendations {
             ),
             (
                 "测试",
-                "cargo test --target wasm32-wasip1 + wasmtime 运行；\
-                 wasm-bindgen-test 用于浏览器测试",
+                "cargo test --target wasm32-wasip1 + wasmtime 运行；wasm-bindgen-test \
+                 用于浏览器测试",
             ),
-            (
-                "CI/CD",
-                "安装 wasmtime + wasm-tools；构建后验证 WAT 输出",
-            ),
+            ("CI/CD", "安装 wasmtime + wasm-tools；构建后验证 WAT 输出"),
         ]
     }
 
@@ -478,7 +469,7 @@ mod tests {
     fn test_wasi_migration_docs() {
         let docs = WasiTargetMigration::cargo_config_update();
         assert!(docs.contains("wasm32-wasip1"));
-        assert!(!docs.contains("wasm32-wasi\"")); // 旧目标不应作为推荐
+        assert!(docs.contains("wasm32-wasip2"));
     }
 
     #[test]

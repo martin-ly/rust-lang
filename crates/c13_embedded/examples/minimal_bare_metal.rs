@@ -30,16 +30,11 @@ fn main() {
 #[cfg(target_arch = "arm")]
 #[entry]
 fn main() -> ! {
-    static mut COUNTER: u32 = 0;
-
-    unsafe {
-        COUNTER = 0;
-    }
+    use core::sync::atomic::{AtomicU32, Ordering};
+    static COUNTER: AtomicU32 = AtomicU32::new(0);
 
     loop {
-        unsafe {
-            COUNTER = COUNTER.wrapping_add(1);
-        }
+        COUNTER.fetch_add(1, Ordering::Relaxed);
 
         for _ in 0..10_000 {
             cortex_m::asm::nop();

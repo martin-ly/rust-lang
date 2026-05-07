@@ -162,7 +162,9 @@ pub unsafe fn hot_path_access_unchecked(ptr: *const u32) -> u32 {
     unsafe { *ptr.as_ref_unchecked() }
 }
 
-pub fn hot_path_access_checked(ptr: *const u32) -> Option<u32> {
+/// # Safety
+/// 调用者必须确保 `ptr` 指向有效内存或为空。
+pub unsafe fn hot_path_access_checked(ptr: *const u32) -> Option<u32> {
     // 有分支（null 检查）
     unsafe { ptr.as_ref().copied() }
 }

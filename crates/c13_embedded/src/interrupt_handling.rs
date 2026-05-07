@@ -42,12 +42,13 @@ impl NvicConcept {
 ///
 /// ```rust,ignore
 /// use cortex_m::interrupt;
+/// use core::sync::atomic::{AtomicU32, Ordering};
 ///
-/// static mut COUNTER: u32 = 0;
+/// static COUNTER: AtomicU32 = AtomicU32::new(0);
 ///
 /// interrupt::free(|_cs| {
 ///     // 此处中断被全局禁用
-///     unsafe { COUNTER += 1; }
+///     COUNTER.fetch_add(1, Ordering::Relaxed);
 /// });
 /// ```
 ///

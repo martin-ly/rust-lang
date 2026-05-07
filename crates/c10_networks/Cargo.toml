@@ -19,7 +19,8 @@ prost = { workspace = true }
 futures = { workspace = true }
 futures-util = { workspace = true }
 bytes = { workspace = true, features = ["serde"] }
-async-trait = { workspace = true }
+# async-trait 已迁移至原生 AFIT (1.75+)，保留 workspace 定义供其他 crate 使用
+# async-trait = { workspace = true }
 hickory-resolver = { workspace = true }
 hickory-proto = { workspace = true }
 nom = { workspace = true }

@@ -1,12 +1,25 @@
-//! Rust 1.90 异步Trait优化实现
+//! 原生 AFIT (async fn in trait) 实现 —— Rust 1.75+ 稳定特性
 //!
-//! 本模块展示了如何使用Rust 1.90的异步trait特性来改进网络编程
+//! 本模块展示了如何使用**原生** `async fn` 在 trait 中定义异步接口。
+//! 自 Rust 1.75 起，`async fn` 在 trait 中已稳定，无需 `#[async_trait]` 宏。
+//!
+//! # 迁移收益
+//! - 零宏开销：无需 `async-trait` crate 的代码生成
+//! - 更自然的语法：直接使用 `async fn`，无需 `Box<dyn Future>` 包装
+//! - 更精确的类型：返回 `impl Future` 而非统一装箱
+//!
+//! # 限制
+//! - 暂不支持 `dyn Trait`（需等待 AFIDT — async fn in dyn trait）
+//! - 如需 `Send` bound，当前需显式使用 `impl Future<Output = T> + Send`
+//!
+//! # 参考
+//! - [Rust 1.75 Release Notes](https://releases.rs/docs/1.75.0/)
+//! - [Tracking Issue: AFIDT](https://github.com/rust-lang/rust/issues/133119)
 use crate::error::{NetworkError, NetworkResult};
 use bytes::Bytes;
 use std::time::Duration;
 
-/// Rust 1.90 优化的异步网络客户端trait
-#[async_trait::async_trait]
+/// 异步网络客户端 trait（原生 AFIT）
 pub trait AsyncNetworkClient {
     /// 异步连接到指定地址
     async fn connect(&self, address: &str) -> NetworkResult<()>;
@@ -38,8 +51,7 @@ pub struct ConnectionStats {
     pub last_activity: Duration,
 }
 
-/// Rust 1.90 优化的异步协议处理器trait
-#[async_trait::async_trait]
+/// 异步协议处理器 trait（原生 AFIT）
 pub trait AsyncProtocolHandler {
     /// 异步处理协议消息
     async fn handle_message<'a>(&'a self, message: &'a [u8]) -> NetworkResult<Bytes>;
@@ -54,8 +66,7 @@ pub trait AsyncProtocolHandler {
     async fn deserialize_message(&self, data: &[u8]) -> NetworkResult<Vec<u8>>;
 }
 
-/// Rust 1.90 优化的异步缓存trait
-#[async_trait::async_trait]
+/// 异步缓存 trait（原生 AFIT）
 pub trait AsyncCache<K, V>
 where
     K: Send + Sync + Clone + 'static,
@@ -88,8 +99,7 @@ pub struct CacheStats {
     pub hit_rate: f64,
 }
 
-/// Rust 1.90 优化的异步流处理器trait
-#[async_trait::async_trait]
+/// 异步流处理器 trait（原生 AFIT）
 pub trait AsyncStreamProcessor {
     /// 异步处理数据流
     async fn process_stream<F, Fut>(&self, stream: F) -> NetworkResult<()>
@@ -120,8 +130,7 @@ pub trait AsyncStreamProcessor {
         F: futures::StreamExt<Item = Result<Bytes, NetworkError>>;
 }
 
-/// Rust 1.90 优化的异步错误处理器trait
-#[async_trait::async_trait]
+/// 异步错误处理器 trait（原生 AFIT）
 pub trait AsyncErrorHandler {
     /// 异步处理错误
     async fn handle_error(&self, error: NetworkError) -> NetworkResult<()>;
@@ -141,8 +150,7 @@ pub trait AsyncErrorHandler {
     async fn recover_from_error(&self, error: &NetworkError) -> NetworkResult<bool>;
 }
 
-/// Rust 1.90 优化的异步监控trait
-#[async_trait::async_trait]
+/// 异步监控 trait（原生 AFIT）
 pub trait AsyncMonitor {
     /// 异步记录指标
     async fn record_metric(
@@ -291,7 +299,6 @@ mod tests {
         }
     }
 
-    #[async_trait::async_trait]
     impl AsyncNetworkClient for TestAsyncNetworkClient {
         async fn connect(&self, _address: &str) -> NetworkResult<()> {
             tokio::time::sleep(Duration::from_millis(10)).await;
