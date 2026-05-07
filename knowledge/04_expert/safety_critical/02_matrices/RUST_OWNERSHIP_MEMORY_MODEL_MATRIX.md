@@ -438,4 +438,4 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 
 **文档版本**: 1.0
 **最后更新**: 2026-03-18
-**基于**: Rust 1.94.0
+**基于**: Rust 1.95.0+

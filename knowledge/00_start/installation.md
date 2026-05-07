@@ -1,6 +1,6 @@
 # 安装 Rust
 
-> **版本**: Rust 1.94.0
+> **版本**: Rust 1.95.0+
 > **预计时间**: 15-30 分钟
 
 ## 🎯 学习目标
@@ -52,8 +52,8 @@ source $HOME/.cargo/env  # Linux/macOS
 ### 3. 验证安装
 
 ```bash
-rustc --version   # 应显示: rustc 1.94.0 (xxxxxx)
-cargo --version   # 应显示: cargo 1.94.0
+rustc --version   # 应显示: rustc 1.95.0 (xxxxxx)
+cargo --version   # 应显示: cargo 1.95.0
 rustup --version  # 应显示: rustup 1.x.x
 ```
 
@@ -185,5 +185,5 @@ rustup default stable  # 切回稳定版
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.94.0
+**对应 Rust 版本**: 1.95.0+
 **最后更新**: 2026-03-19

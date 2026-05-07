@@ -4,7 +4,7 @@
 > **会议**: PLDI 2025 (Distinguished Paper Award)
 > **作者**: Neven Villani, Ralf Jung, et al.
 > **状态**: ✅ **已在 Miri 中可用** (默认即将切换)
-> **Rust 版本**: 1.94.0+
+> **Rust 版本**: 1.95.0+
 > **最后更新**: 2026-03-18
 
 ---

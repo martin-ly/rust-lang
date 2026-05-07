@@ -1,7 +1,7 @@
 # Rust Edition 2024 完整指南
 
 > **版本**: Edition 2024
-> **Rust 版本**: 1.94.0+
+> **Rust 版本**: 1.82.0+ (Edition 2024 稳定版)
 > **权威来源**: [Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
 
 ## 🎯 学习目标
@@ -58,7 +58,7 @@ cargo test
 
 ### Cargo.toml 更新
 - [ ] 更新 `edition = "2024"`
-- [ ] 更新 `rust-version = "1.94.0"`
+- [ ] 更新 `rust-version = "1.82.0"`
 - [ ] 检查依赖兼容性
 
 ### 代码变更
@@ -159,7 +159,7 @@ cargo fix --edition --allow-dirty
 name = "my-project"
 version = "1.0.0"
 edition = "2024"
-rust-version = "1.94.0"
+rust-version = "1.82.0"
 
 [dependencies]
 # 确保依赖支持 Edition 2024
@@ -275,7 +275,7 @@ fn fibonacci() -> impl Iterator<Item = u64> {
 
 | 版本 | 发布日期 | Edition 状态 |
 |------|---------|-------------|
-| 1.94.0 | 2025-08 | Edition 2024 稳定 |
+| 1.82.0 | 2024-10 | Edition 2024 稳定 |
 | 1.95.0 | 2025-10 | gen 关键字启用（预计） |
 | 1.96.0 | 2025-12 | TBD |
 
@@ -294,5 +294,5 @@ fn fibonacci() -> impl Iterator<Item = u64> {
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.94.0 (Edition 2024)
+**对应 Rust 版本**: 1.82.0+ (Edition 2024)
 **最后更新**: 2026-03-19

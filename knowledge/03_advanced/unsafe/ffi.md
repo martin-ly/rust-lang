@@ -1,6 +1,6 @@
 # Rust FFI (Foreign Function Interface)
 
-> **版本**: Rust 1.94.0
+> **版本**: Rust 1.95.0+
 > **难度**: 高级
 > **预计学习时间**: 3-4 小时
 > **权威来源**: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/), [nomicon](https://doc.rust-lang.org/nomicon/ffi.html)
@@ -495,5 +495,5 @@ pub unsafe extern "C" fn calculator_add(calc: *mut Calculator, n: c_int) -> c_in
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.94.0
-**最后更新**: 2026-03-19
+**对应 Rust 版本**: 1.95.0+
+**最后更新**: 2026-05-08

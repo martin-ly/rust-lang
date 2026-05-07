@@ -324,8 +324,6 @@ mod tests {
         let _desc = match evt {
             NetworkEvent::Connected => "connected",
             NetworkEvent::Disconnected => "disconnected",
-            // 必须保留通配分支以演示兼容性
-            _ => "unknown",
         };
         assert!(!_desc.is_empty());
     }

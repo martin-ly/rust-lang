@@ -88,7 +88,7 @@
 # ==========================================
 # 构建阶段
 # ==========================================
-FROM rust:1.94-slim AS builder
+FROM rust:1.95-slim AS builder
 
 WORKDIR /app
 
@@ -135,7 +135,7 @@ ENTRYPOINT ["/app/myapp"]
 
 ```dockerfile
 # 更安全的 distroless 变体
-FROM rust:1.94-slim AS builder
+FROM rust:1.95-slim AS builder
 WORKDIR /app
 COPY . .
 RUN cargo build --release

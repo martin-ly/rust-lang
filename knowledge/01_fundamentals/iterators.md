@@ -1,6 +1,6 @@
 # 迭代器 (Iterators)
 
-> **版本**: Rust 1.94.0
+> **版本**: Rust 1.96.0 (`array_windows`) / 1.80.0 (`Peekable::next_if`)
 > **特性**: `array_windows`, `Peekable::next_if`
 > **权威来源**: [Rust 官方文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 
@@ -23,7 +23,7 @@
 
 ### 1. array_windows - 滑动窗口迭代
 
-`array_windows` 是 Rust 1.94 引入的新方法，用于在数组/切片上以固定大小的窗口进行迭代。
+`array_windows` 是 Rust 1.96 引入的新方法，用于在数组/切片上以固定大小的窗口进行迭代。
 
 #### 1.1 基础用法
 
@@ -286,7 +286,7 @@ fn parse_args(input: &str) -> Vec<String> {
 
 ## 📖 延伸阅读
 
-- [Rust 1.94 Release Notes](https://blog.rust-lang.org/2025/08/...)
+- [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)
 - [Iterator trait 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 - [array_windows API](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows)
 
@@ -299,5 +299,5 @@ fn parse_args(input: &str) -> Vec<String> {
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.94.0
+**对应 Rust 版本**: 1.96.0 (`array_windows`) / 1.80.0 (`Peekable::next_if`)
 **最后更新**: 2026-03-19

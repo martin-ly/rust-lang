@@ -102,7 +102,7 @@ where
 ```rust
 fn returns_summarizable() -> impl Summary {
     Article {
-        headline: String::from("Rust 1.94 Released"),
+        headline: String::from("Rust 1.96 Released"),
         content: String::from("..."),
     }
 }
@@ -294,5 +294,5 @@ fn max<T: PartialOrd>(list: &[T]) -> Option<&T> {
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.94.0
-**最后更新**: 2026-03-19
+**对应 Rust 版本**: 1.95.0+
+**最后更新**: 2026-05-08

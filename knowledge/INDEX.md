@@ -57,7 +57,7 @@
 
 - **Cargo** - [06_ecosystem/cargo_basics.md](06_ecosystem/cargo_basics.md)
 - **case studies** - [99_archive/case_studies.md](99_archive/case_studies.md)
-- **char → usize** - [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) - Rust 1.94
+- **char → usize** - [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) - Rust 基础转换 (非特定版本)
 - **collections** - [02_intermediate/collections.md](02_intermediate/collections.md)
 - **compiler internals** - [04_expert/compiler_internals.md](04_expert/compiler_internals.md)
 - **concurrency** - [03_advanced/concurrency/](03_advanced/concurrency/)
@@ -122,7 +122,7 @@
 
 ### P
 
-- **Peekable::next_if** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md) - Rust 1.94
+- **Peekable::next_if** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md) - Rust 1.80.0
 - **procedural macros** - [03_advanced/macros/procedural.md](03_advanced/macros/procedural.md)
 
 ### R

@@ -670,7 +670,7 @@ enum Temperature {
 ## 📖 延伸阅读
 
 - [Rust 官方文档 - std::convert](https://doc.rust-lang.org/std/convert/index.html)
-- [Rust 1.94 发布说明](https://blog.rust-lang.org/)
+- [Rust 1.95 发布说明](https://releases.rs/docs/1.95.0/)
 - [The Rust Programming Language - 类型转换章节](https://doc.rust-lang.org/book/ch03-02-data-types.html)
 - [Rust by Example - 类型转换](https://doc.rust-lang.org/rust-by-example/types/cast.html)
 - [RFC 2484 - TryFrom/TryInto](https://rust-lang.github.io/rfcs/2484-tryfrom-tryinto.html)

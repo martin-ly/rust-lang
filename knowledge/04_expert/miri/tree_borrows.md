@@ -1,7 +1,7 @@
 # Miri Tree Borrows 深度解析
 
 > **权威来源**: "Tree Borrows" - Villani et al., PLDI 2025 Distinguished Paper
-> **Rust 版本**: 1.94.0+
+> **Rust 版本**: 1.95.0+
 > **相关**: Miri 内存模型检查器
 
 ## 🎯 学习目标

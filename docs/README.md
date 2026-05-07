@@ -38,6 +38,10 @@
 | Polonius 下一代 Borrow Checker | 基于 Datalog 的生命周期推断 | [04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md](04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md) |
 | VerusBelt (PLDI 2026) | 形式化验证语义基础 | [04_research/VERUSBELT_PLDI_2026.md](04_research/VERUSBELT_PLDI_2026.md) |
 | Unsafe Fields 预览 | 更细粒度的 unsafe 声明 | [05_guides/UNSAFE_FIELDS_PREVIEW.md](05_guides/UNSAFE_FIELDS_PREVIEW.md) |
+| 下一代 Trait Solver | 基于逻辑编程的类型推断 | [04_research/NEXT_GENERATION_TRAIT_SOLVER.md](04_research/NEXT_GENERATION_TRAIT_SOLVER.md) |
+| C++ ↔ Rust 互操作评估 | `cxx`/`bindgen` 安全 FFI 实践 | [05_guides/CXX_RUST_INTEROP_EVALUATION.md](05_guides/CXX_RUST_INTEROP_EVALUATION.md) |
+| Rust for Linux 工具链 | 内核模块开发与工具链 | [06_toolchain/RUST_FOR_LINUX_TOOLING_GUIDE.md](06_toolchain/RUST_FOR_LINUX_TOOLING_GUIDE.md) |
+| Endangered by Language (POPL 2026) | 编译器如何"拯救"危险语言模式 | [04_research/ENDANGERED_BY_LANGUAGE_SAVED_BY_COMPILER_POPL_2026.md](04_research/ENDANGERED_BY_LANGUAGE_SAVED_BY_COMPILER_POPL_2026.md) |
 
 ### 子目录分类
 

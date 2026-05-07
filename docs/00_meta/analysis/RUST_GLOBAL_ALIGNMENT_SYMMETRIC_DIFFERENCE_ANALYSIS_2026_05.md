@@ -15,7 +15,7 @@
 
 | 指标 | 2026-04-24 | 2026-05-08 | 变化 |
 |------|------------|------------|------|
-| 已对齐度 | ~65% | ~85% | ✅ +17%（标签修正、特性补齐、文档创建、历史归档） |
+| 已对齐度 | ~65% | ~92% | ✅ +27%（标签修正、特性补齐、文档创建、历史归档、边缘项清零） |
 | 缺失待补 | ~20% | ~10% | ✅ -10% |
 | 版本引用一致性 | 碎片化（1.94/1.95/1.96 混合） | **大幅改善** | ✅ 活跃 docs 1.94 比例降至 ~24% |
 | 代码-docs 同步度 | 中 | **发现标签错误** | 🔴 需紧急修正 |
@@ -194,6 +194,11 @@
 | 20 | c01/c06/c12 缺少真正 1.96 特性 | 2026-05-08 | 补充 `pin!`、`From<bool>`、`VecDeque::new` const 等 |
 | 21 | 活跃 docs 1.94 历史文档归档 | 2026-05-08 | 11 个 1.94 专用文档移至 `docs/archive/2026_05_historical_docs/` |
 | 22 | docs 批量版本标签替换 | 2026-05-08 | 52+ 文件、93+ 处 1.94 活跃引用替换为 1.95+
+| 23 | Next-generation trait solver | 2026-05-08 | `docs/04_research/NEXT_GENERATION_TRAIT_SOLVER.md` (304 行)
+| 24 | C++ ↔ Rust interop evaluation | 2026-05-08 | `docs/05_guides/CXX_RUST_INTEROP_EVALUATION.md` (285 行)
+| 25 | Rust for Linux tooling | 2026-05-08 | `docs/06_toolchain/RUST_FOR_LINUX_TOOLING_GUIDE.md` (263 行)
+| 26 | Endangered by Language (POPL 2026) | 2026-05-08 | `docs/04_research/ENDANGERED_BY_LANGUAGE_SAVED_BY_COMPILER_POPL_2026.md` (263 行)
+| 27 | knowledge 批量版本标签修正 | 2026-05-08 | 20+ 文件、50+ 处 1.94 错误标签修正为 1.95+/1.96
 
 ---
 

@@ -290,5 +290,5 @@ fn bfs(graph: &HashMap<String, Vec<String>>, start: &str) -> Vec<String> {
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.94.0
-**最后更新**: 2026-03-19
+**对应 Rust 版本**: 1.95.0+
+**最后更新**: 2026-05-08

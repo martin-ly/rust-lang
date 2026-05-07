@@ -51,7 +51,7 @@ cargo tree
 name = "my_project"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.94.0"
+rust-version = "1.95.0"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
