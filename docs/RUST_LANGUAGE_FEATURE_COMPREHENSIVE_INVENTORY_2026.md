@@ -264,7 +264,7 @@ static COUNTER_CELL: UnsafeCell<u32> = UnsafeCell::new(0);
 |------|---------|-------------|
 | Ownership System | Rust Book Ch.4, PLDI 2025 Tree Borrows | ✅ 已引用 |
 | Borrow Checker | Niko Matsakis blog, POPL 2026 Aliasing | ✅ 已引用 |
-| MaybeUninit | RFC 1892, std API docs | ⚠️ 1.95 新增未覆盖 |
+| MaybeUninit | RFC 1892, std API docs | ✅ 已覆盖 |
 | Pin / Immovable Types | RFC 2349, Rust Project Goals 2026 | ⚠️ Immovable Types 演进未提及 |
 
 ---
@@ -617,7 +617,7 @@ fn if_let_guards_example(opt: Option<Option<i32>>) -> i32 {
 | Control Flow | Rust Book Ch.3 | ✅ 已引用 |
 | Pattern Matching | Rust Reference Ch.8 | ✅ 已引用 |
 | let chains | 1.88, 2024 Edition | ⚠️ 部分覆盖 |
-| if let guards | 1.95, RFC 3637 | 🔴 **未覆盖** |
+| if let guards | 1.95, RFC 3637 | ✅ 已覆盖 |
 
 ---
 
@@ -1011,8 +1011,8 @@ fn wrong_usage(x: bool) {
 | Threads | Rust Book Ch.16 | ✅ 已引用 |
 | Sync Primitives | std API docs | ✅ 已引用 |
 | Atomic / Ordering | Rust Atomics and Locks (Mara Bos) | ✅ 已引用 |
-| Atomic*::update | 1.95, rust-lang/rust#135294 | 🔴 **未覆盖** |
-| cold_path | 1.95, rust-lang/rust#134229 | 🔴 **未覆盖** |
+| Atomic*::update | 1.95, rust-lang/rust#135294 | ✅ 已覆盖 |
+| cold_path | 1.95, rust-lang/rust#134229 | ✅ 已覆盖 |
 
 ---
 
@@ -1228,7 +1228,7 @@ async fn migrated() {
 | Tokio | tokio.rs docs | ✅ 已引用 |
 | AFIT | RFC 3185, 1.75 | ⚠️ 部分覆盖 |
 | Async Closures | RFC 3668, FCP | 🔴 **未覆盖** |
-| AsyncFn traits | 1.94, prelude | 🔴 **未覆盖** |
+| AsyncFn traits | 1.94, prelude | ✅ 已覆盖 (c06_async) |
 | AFIDT | rust-lang/rust#133119 | 🔴 **未覆盖** |
 | RTN | RFC 3654 | 🔴 **未覆盖** |
 
@@ -1426,7 +1426,7 @@ fn window_ranges(total: i32, window_size: i32) -> impl Iterator<Item = RangeIncl
 | Iterators | Rust Book Ch.13 | ✅ 已引用 |
 | Collections | std API docs | ✅ 已引用 |
 | array_windows | 1.94 | ✅ 已覆盖 |
-| core::range | 1.95 | 🔴 **未覆盖** |
+| core::range | 1.95 | ✅ 已覆盖 |
 
 ---
 
@@ -1710,7 +1710,7 @@ fn bad_runtime(x: bool) {
 |------|---------|-------------|
 | Macros | Rust Book Ch.19 | ✅ 已引用 |
 | Procedural Macros | The Little Book of Rust Macros | ✅ 已引用 |
-| cfg_select! | 1.95, rust-lang/rust#131038 | 🔴 **未覆盖** |
+| cfg_select! | 1.95, rust-lang/rust#131038 | ✅ 已覆盖 |
 
 ---
 
@@ -1940,7 +1940,7 @@ Not:    不是通用 OS！没有堆分配器也能运行 (stack-based futures)
 | embedded-hal 1.0 | github.com/rust-embedded | 🔴 **未更新** |
 | Embassy | embassy.dev | 🔴 **未覆盖** |
 | RTIC | rtic.rs | 🔴 **未覆盖** |
-| as_ref_unchecked | 1.95 | 🔴 **未覆盖** |
+| as_ref_unchecked | 1.95 | ✅ 已覆盖 |
 
 ---
 

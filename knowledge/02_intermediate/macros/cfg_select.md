@@ -1,0 +1,146 @@
+# `cfg_select!` 宏（Rust 1.95.0）
+
+> **稳定版本**: Rust 1.95.0 (2026-04-16)
+> **Edition**: 2024
+> **模块**: `core::macros`
+
+---
+
+## 一、概念定义
+
+`cfg_select!` 是 Rust 1.95.0 引入的标准宏，用于在**编译期**根据 `cfg` 条件选择第一个满足条件的表达式。它是嵌套 `cfg!` 或 `#[cfg]` 属性的简洁替代方案。
+
+### 语法
+
+```rust
+cfg_select! {
+    condition1 => expr1,
+    condition2 => expr2,
+    _ => fallback_expr,
+}
+```
+
+### 与现有方案对比
+
+| 方案 | 适用层级 | 语法复杂度 | 默认分支 |
+|------|---------|-----------|---------|
+| `#[cfg]` | 项级别 (item) | 高（需重复定义） | ❌ 不支持 |
+| `cfg!` | 表达式级别 | 中（嵌套 if） | ❌ 需显式 else |
+| `cfg_select!` | 表达式级别 | 低（类 match） | ✅ `_ =>` |
+
+---
+
+## 二、基本用法
+
+### 2.1 平台特定常量
+
+```rust
+const PAGE_SIZE: usize = cfg_select! {
+    target_os = "macos" => 16384,
+    target_os = "windows" => 4096,
+    _ => 4096,
+};
+```
+
+### 2.2 特性标志选择
+
+```rust
+fn hasher_name() -> &'static str {
+    cfg_select! {
+        feature = "blake3" => "blake3",
+        feature = "sha256" => "sha256",
+        _ => "default",
+    }
+}
+```
+
+### 2.3 架构特定优化
+
+```rust
+fn simd_lanes() -> usize {
+    cfg_select! {
+        target_feature = "avx512f" => 16,
+        target_feature = "avx2" => 8,
+        target_feature = "sse2" => 4,
+        _ => 1,
+    }
+}
+```
+
+---
+
+## 三、应用场景
+
+### 3.1 跨平台路径分隔符
+
+```rust
+const PATH_SEP: char = cfg_select! {
+    target_os = "windows" => '\\',
+    _ => '/',
+};
+```
+
+### 3.2 嵌入式目标选择
+
+```rust
+fn max_priority() -> u8 {
+    cfg_select! {
+        target_arch = "arm" => 255,
+        target_arch = "riscv32" => 7,
+        _ => 127,
+    }
+}
+```
+
+---
+
+## 四、限制与反例
+
+### ❌ 不能用于模块/函数声明
+
+```rust
+// 错误：cfg_select! 是表达式级宏
+cfg_select! {
+    target_os = "linux" => mod linux_impl;
+    _ => mod generic_impl;
+}
+```
+
+### ❌ 所有分支类型必须一致
+
+```rust
+// 错误：分支类型不一致
+let x = cfg_select! {
+    target_os = "linux" => 42,
+    _ => "fallback",  // 类型不匹配
+};
+```
+
+### ❌ 运行时条件无效
+
+```rust
+let runtime_flag = true;
+// 错误：runtime_flag 不是 cfg 条件
+// cfg_select! { runtime_flag => ... }
+```
+
+---
+
+## 五、决策树
+
+```text
+需要根据 cfg 条件选择代码？
+├── 选择整个函数/结构体/模块？ → #[cfg]
+├── 选择语句块内的不同实现？
+│   ├── 条件简单（1-2个）→ cfg! + if/else
+│   └── 条件复杂或多分支？ → cfg_select!
+└── 需要表达式值？ → cfg_select!
+```
+
+---
+
+## 六、参考
+
+- [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
+- [core::macros::cfg_select](https://doc.rust-lang.org/core/macro.cfg_select.html)
+- [rust-lang/rust#131038](https://github.com/rust-lang/rust/pull/131038)
