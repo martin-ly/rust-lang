@@ -379,7 +379,7 @@
 
 | 旧目标 | 新目标 | 状态 |
 |--------|--------|------|
-| `wasm32-wasi` | `wasm32-wasip1` | Tier 2 |
+| `wasm32-wasip1` | `wasm32-wasip1` | Tier 2 |
 | - | `wasm32-wasip2` | Tier 3 |
 | - | WASIp3（开发中） | 原生async支持 |
 

@@ -410,12 +410,12 @@ curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/insta
   bash -s -- --plugins wasi_nn-pytorch wasi_nn-ggml wasi_crypto
 
 # 运行 AI 推理示例
-cargo build --example 10_ai_inference_wasinn --target wasm32-wasi --release
-wasmedge target/wasm32-wasi/release/examples/10_ai_inference_wasinn.wasm
+cargo build --example 10_ai_inference_wasinn --target wasm32-wasip1 --release
+wasmedge target/wasm32-wasip1/release/examples/10_ai_inference_wasinn.wasm
 
 # 运行加密操作示例
-cargo build --example 11_crypto_operations --target wasm32-wasi --release
-wasmedge target/wasm32-wasi/release/examples/11_crypto_operations.wasm
+cargo build --example 11_crypto_operations --target wasm32-wasip1 --release
+wasmedge target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
 ```
 
 #### 3. 应用性能优化技术

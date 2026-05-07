@@ -71,13 +71,13 @@ echo ""
 
 # 6. 构建 WASI
 print_step "构建 WASI 模块..."
-cargo build --target wasm32-wasi --release
+cargo build --target wasm32-wasip1 --release
 print_success "WASI 模块构建完成"
 echo ""
 
 # 7. 运行 WASI 测试
 print_step "运行 WASI 测试..."
-cargo test --target wasm32-wasi
+cargo test --target wasm32-wasip1
 print_success "WASI 测试通过"
 echo ""
 
@@ -150,9 +150,9 @@ if [ -d "pkg/nodejs" ]; then
 fi
 
 # WASI 目标
-if [ -f "target/wasm32-wasi/release/c12_wasm.wasm" ]; then
+if [ -f "target/wasm32-wasip1/release/c12_wasm.wasm" ]; then
     echo "WASI 目标:" >> BUILD_REPORT.txt
-    ls -lh target/wasm32-wasi/release/*.wasm | awk '{print "  " $9 ": " $5}' >> BUILD_REPORT.txt
+    ls -lh target/wasm32-wasip1/release/*.wasm | awk '{print "  " $9 ": " $5}' >> BUILD_REPORT.txt
     echo "" >> BUILD_REPORT.txt
 fi
 
@@ -167,7 +167,7 @@ echo "📦 构建产物:"
 echo "  - pkg/web/          - 浏览器 WASM"
 echo "  - pkg/nodejs/       - Node.js WASM"
 echo "  - pkg/bundler/      - Bundler WASM"
-echo "  - target/wasm32-wasi/ - WASI 模块"
+echo "  - target/wasm32-wasip1/ - WASI 模块"
 echo "  - target/doc/       - API 文档"
 echo ""
 echo "📊 查看构建报告: cat BUILD_REPORT.txt"

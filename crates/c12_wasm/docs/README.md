@@ -339,8 +339,8 @@ wasm-pack --version  # 确保已安装
 
 # 2. 运行示例
 cd crates/c12_wasm
-cargo build --target wasm32-wasi --release
-wasmedge target/wasm32-wasi/release/wasi-app.wasm input.txt
+cargo build --target wasm32-wasip1 --release
+wasmedge target/wasm32-wasip1/release/wasi-app.wasm input.txt
 
 # 3. 运行测试
 cargo test -p c12_wasm

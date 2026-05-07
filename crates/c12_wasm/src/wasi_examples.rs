@@ -189,10 +189,10 @@ pub mod text_processor {
 /// # 使用方法
 /// ```bash
 /// # 编译
-/// cargo build --target wasm32-wasi --release
+/// cargo build --target wasm32-wasip1 --release
 ///
 /// # 运行
-/// wasmedge --dir .:/app target/wasm32-wasi/release/your_app.wasm input.txt
+/// wasmedge --dir .:/app target/wasm32-wasip1/release/your_app.wasm input.txt
 /// ```
 pub fn main_example() {
     // 获取命令行参数

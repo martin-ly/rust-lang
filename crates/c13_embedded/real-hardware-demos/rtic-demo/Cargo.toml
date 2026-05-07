@@ -1,0 +1,28 @@
+[package]
+name = "rtic-demo"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+authors = ["Rust Embedded Learning Community"]
+description = "RTIC real-time framework demo for STM32F4"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+# RTIC 实时框架
+rtic = { version = "2.1", features = ["thumbv7-backend"] }
+
+# STM32F4 HAL (支持 STM32F407, STM32F446 等)
+stm32f4xx-hal = { version = "0.21", features = ["stm32f407", "rtic2"] }
+
+# 嵌入式基础
+cortex-m = { version = "0.7.6", features = ["inline-asm"] }
+cortex-m-rt = "0.7"
+panic-halt = "0.2"
+
+# 可移植原子操作
+portable-atomic = { version = "1.6", features = ["critical-section"] }
+
+[profile.release]
+debug = 2
+lto = true
+opt-level = 'z'

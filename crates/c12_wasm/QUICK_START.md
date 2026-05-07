@@ -159,7 +159,7 @@ cargo test test_add
 cargo test -- --nocapture
 
 # WASI 测试
-cargo test --target wasm32-wasi
+cargo test --target wasm32-wasip1
 ```
 
 ### WASM 构建

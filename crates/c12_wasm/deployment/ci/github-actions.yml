@@ -101,7 +101,7 @@ jobs:
           profile: minimal
           toolchain: ${{ env.RUST_VERSION }}
           override: true
-          target: wasm32-wasi
+          target: wasm32-wasip1
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -114,8 +114,8 @@ jobs:
 
       - name: Build Wasm
         run: |
-          cargo build --target wasm32-wasi --release
-          ls -lh target/wasm32-wasi/release/*.wasm
+          cargo build --target wasm32-wasip1 --release
+          ls -lh target/wasm32-wasip1/release/*.wasm
 
       - name: Install wasm-opt
         run: |
@@ -126,10 +126,10 @@ jobs:
       - name: Optimize Wasm
         run: |
           wasm-opt -Oz --strip-debug --strip-producers \
-            target/wasm32-wasi/release/*.wasm \
+            target/wasm32-wasip1/release/*.wasm \
             -o app-optimized.wasm
           echo "Original size:"
-          ls -lh target/wasm32-wasi/release/*.wasm
+          ls -lh target/wasm32-wasip1/release/*.wasm
           echo "Optimized size:"
           ls -lh app-optimized.wasm
 

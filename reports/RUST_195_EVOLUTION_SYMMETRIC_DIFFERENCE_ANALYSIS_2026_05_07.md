@@ -245,7 +245,7 @@ timeline
 | **io_uring 深度实践** | c10_networks | 仅为 Linux feature 占位 | Linux 5.1+ 成熟 | 🔴 极高 |
 | **QUIC/HTTP3 完整实现** | c10_networks | quinn 依赖仅为占位 | 生态成熟 (quinn/h3) | 🟡 高 |
 | **libp2p 深度集成** | c10_networks | 依赖已添加但缺少示例 | 0.54.1 已集成 | 🟡 高 |
-| **WASI 目标迁移** (wasm32-wasip1/p2) | c12_wasm | 仍使用旧 wasm32-wasi | 1.84 已移除旧目标 | 🔴 极高 |
+| **WASI 目标迁移** (wasm32-wasip1/p2) | c12_wasm | ✅ 已全量替换 wasm32-wasi | 1.84 已移除旧目标 | 🟢 已完成 |
 | **Rust for Linux 内核编程** | c07_process, c13_embedded | **完全缺失** | 内核 6.1+ 实验 | 🔴 极高 |
 | **eBPF + Rust** (Aya) | c07_process | **完全缺失** | 生态快速成熟 | 🟡 高 |
 | **Windows ARM64 Tier 1** | c05_threads, c10_networks | 缺少平台特定优化说明 | 1.91.0 已 Tier 1 | 🟢 中 |
@@ -284,7 +284,7 @@ timeline
 | 内容 | 位置 | 问题 | 建议处理 |
 |------|------|------|---------|
 | **async-std 运行时示例** | c06_async/src/async_std/ | async-std 已于 **2025年3月停止维护** | 迁移至 Tokio/smoltcp 示例，添加弃用说明 |
-| **旧 WASI 目标** | c12_wasm | `wasm32-wasi` 已于 **1.84.0 移除** | 更新为 `wasm32-wasip1` / `wasm32-wasip2` |
+| **旧 WASI 目标** | c12_wasm | `wasm32-wasi` 已于 **1.84.0 移除** | ✅ 已更新为 `wasm32-wasip1` / `wasm32-wasip2` |
 | **`static mut` 引用示例** | 可能存在于 c05_threads, c13_embedded | 2024 Edition 已 **deny-by-default** | 审计并迁移至 `UnsafeCell` 或 `sync::atomic` |
 | **旧版 `async_trait` 依赖** | c10_networks/src/protocol/async_traits.rs | Axum 0.8+ 已不需要；原生 AFIT 1.75+ 已稳定 | 更新为原生 async fn in trait，保留 `async_trait` 作为 dyn trait fallback |
 | **Rust 1.90-1.92 归档文件** | crates/*/src/archive/ | 部分文件仍被引用；内容可能重复 | 清理重复，建立版本化归档策略 |
@@ -337,7 +337,7 @@ graph TD
 | Tokio 生态进一步集中 | async-std 已归档；smol 作为轻量替代；Axum 0.8+ 原生 async | **95%** | 清理 async-std 内容，强化 Tokio 深度 |
 | Embassy 主导嵌入式异步 | 1400+ STM32 HALs；Nordic/RP 支持；stable Rust 运行 | **90%** | 需要大幅扩展 c13_embedded 异步内容 |
 | 并行前端缩短编译时间 | `-Z threads=N` 持续改进；nightly 可用；计划稳定 | **85%** | 需要更新构建优化指南 |
-| WASIp2 成为 WASM 服务端标准 | wasm32-wasi 已移除；WASIp1 Tier 2；WASIp2 Tier 3；组件模型推进 | **80%** | 需要重构 c12_wasm 目标体系 |
+| WASIp2 成为 WASM 服务端标准 | wasm32-wasi 已移除；WASIp1 Tier 2；WASIp2 Tier 3；组件模型推进 | **100%** | ✅ c12_wasm 目标体系已重构 |
 
 ---
 

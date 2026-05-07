@@ -57,7 +57,7 @@
 
    ```bash
    rustup target add wasm32-unknown-unknown
-   rustup target add wasm32-wasi
+   rustup target add wasm32-wasip1
    ```
 
 3. **安装 wasm-pack**
@@ -387,7 +387,7 @@ cargo test test_add
 cargo test -- --nocapture
 
 # WASI 测试
-cargo test --target wasm32-wasi
+cargo test --target wasm32-wasip1
 ```
 
 ### 4. 基准测试

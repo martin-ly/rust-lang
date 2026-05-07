@@ -86,7 +86,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: ${{ matrix.toolchain }}
-          target: wasm32-wasi
+          target: wasm32-wasip1
           override: true
 
       - name: Cache cargo
@@ -101,16 +101,16 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Build
-        run: cargo build --target wasm32-wasi --release
+        run: cargo build --target wasm32-wasip1 --release
 
       - name: Run tests
-        run: cargo test --target wasm32-wasi
+        run: cargo test --target wasm32-wasip1
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: wasm-${{ matrix.os }}-${{ matrix.toolchain }}
-          path: target/wasm32-wasi/release/*.wasm
+          path: target/wasm32-wasip1/release/*.wasm
 ```
 
 ### 多语言构建
@@ -226,16 +226,16 @@ jobs:
 
       - name: Validate Wasm
         run: |
-          wasm-validate target/wasm32-wasi/release/*.wasm
+          wasm-validate target/wasm32-wasip1/release/*.wasm
 
       - name: Rust lint
         run: |
-          cargo clippy --target wasm32-wasi -- -D warnings
+          cargo clippy --target wasm32-wasip1 -- -D warnings
           cargo fmt -- --check
 
       - name: Size check
         run: |
-          SIZE=$(stat -f%z target/wasm32-wasi/release/module.wasm)
+          SIZE=$(stat -f%z target/wasm32-wasip1/release/module.wasm)
           if [ $SIZE -gt 1048576 ]; then
             echo "Error: Wasm module exceeds 1MB limit"
             exit 1
@@ -259,7 +259,7 @@ jobs:
 
       - name: Generate coverage
         run: |
-          cargo tarpaulin --target wasm32-wasi \
+          cargo tarpaulin --target wasm32-wasip1 \
             --out Xml --out Html --output-dir coverage
 
       - name: Upload coverage to Codecov
@@ -294,12 +294,12 @@ jobs:
           fetch-depth: 0 # 获取完整历史
 
       - name: Run benchmarks
-        run: cargo bench --target wasm32-wasi -- --save-baseline current
+        run: cargo bench --target wasm32-wasip1 -- --save-baseline current
 
       - name: Compare with main
         run: |
           git checkout main
-          cargo bench --target wasm32-wasi -- --save-baseline main
+          cargo bench --target wasm32-wasip1 -- --save-baseline main
           git checkout -
 
           # 比较结果
@@ -400,7 +400,7 @@ jobs:
 FROM rust:1.70 as builder
 
 # 安装 wasm 工具链
-RUN rustup target add wasm32-wasi
+RUN rustup target add wasm32-wasip1
 RUN cargo install wasm-pack wasm-bindgen-cli
 
 WORKDIR /app
@@ -408,13 +408,13 @@ COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 
 # 构建 Wasm
-RUN cargo build --target wasm32-wasi --release
+RUN cargo build --target wasm32-wasip1 --release
 
 # 优化阶段
 FROM debian:bullseye-slim as optimizer
 RUN apt-get update && apt-get install -y binaryen
 
-COPY --from=builder /app/target/wasm32-wasi/release/*.wasm /wasm/
+COPY --from=builder /app/target/wasm32-wasip1/release/*.wasm /wasm/
 RUN wasm-opt -Oz /wasm/module.wasm -o /wasm/module.opt.wasm
 
 # 最终镜像（仅运行时）
@@ -474,12 +474,12 @@ build:wasm:
   stage: build
   image: rust:1.70
   before_script:
-    - rustup target add wasm32-wasi
+    - rustup target add wasm32-wasip1
   script:
-    - cargo build --target wasm32-wasi --release
+    - cargo build --target wasm32-wasip1 --release
   artifacts:
     paths:
-      - target/wasm32-wasi/release/*.wasm
+      - target/wasm32-wasip1/release/*.wasm
     expire_in: 1 week
   cache:
     key: ${CI_COMMIT_REF_SLUG}
@@ -491,8 +491,8 @@ test:unit:
   stage: test
   image: rust:1.70
   script:
-    - rustup target add wasm32-wasi
-    - cargo test --target wasm32-wasi
+    - rustup target add wasm32-wasip1
+    - cargo test --target wasm32-wasip1
   coverage: '/^\d+\.\d+% coverage/'
 
 test:integration:
@@ -516,7 +516,7 @@ optimize:wasm:
     - tar xzf binaryen-*.tar.gz
     - export PATH="$PWD/binaryen-*/bin:$PATH"
   script:
-    - wasm-opt -Oz target/wasm32-wasi/release/*.wasm -o optimized.wasm
+    - wasm-opt -Oz target/wasm32-wasip1/release/*.wasm -o optimized.wasm
     - brotli -9 optimized.wasm
   artifacts:
     paths:
@@ -562,7 +562,7 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh 'rustup target add wasm32-wasi'
+                sh 'rustup target add wasm32-wasip1'
                 sh 'cargo install wasm-pack |
 | true'
             }
@@ -572,7 +572,7 @@ pipeline {
             parallel {
                 stage('Build Wasm') {
                     steps {
-                        sh 'cargo build --target wasm32-wasi --release'
+                        sh 'cargo build --target wasm32-wasip1 --release'
                     }
                 }
                 stage('Build npm package') {
@@ -587,7 +587,7 @@ pipeline {
             parallel {
                 stage('Unit Tests') {
                     steps {
-                        sh 'cargo test --target wasm32-wasi'
+                        sh 'cargo test --target wasm32-wasip1'
                     }
                 }
                 stage('Integration Tests') {
@@ -601,7 +601,7 @@ pipeline {
         stage('Quality Gates') {
             steps {
                 script {
-                    def size = sh(returnStdout: true, script: 'stat -c%s target/wasm32-wasi/release/module.wasm').trim().toInteger()
+                    def size = sh(returnStdout: true, script: 'stat -c%s target/wasm32-wasip1/release/module.wasm').trim().toInteger()
                     if (size > 1048576) {
                         error("Wasm size ${size} exceeds 1MB limit")
                     }
@@ -621,7 +621,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'target/wasm32-wasi/release/*.wasm', fingerprint: true
+            archiveArtifacts artifacts: 'target/wasm32-wasip1/release/*.wasm', fingerprint: true
             junit 'target/test-results/*.xml'
         }
         failure {
@@ -666,13 +666,13 @@ jobs:
           sed -i "s/^version = .*/version = \"${{ steps.version.outputs.VERSION }}\"/" Cargo.toml
 
       - name: Build release
-        run: cargo build --target wasm32-wasi --release
+        run: cargo build --target wasm32-wasip1 --release
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: target/wasm32-wasi/release/*.wasm
+          files: target/wasm32-wasip1/release/*.wasm
 ```
 
 ### npm 包发布
@@ -837,7 +837,7 @@ CHANGED_FILES=$(git diff --name-only HEAD~1)
 
 if echo "$CHANGED_FILES" | grep -q "^rust/"; then
   echo "Building Rust module..."
-  cargo build --target wasm32-wasi --release
+  cargo build --target wasm32-wasip1 --release
 fi
 
 if echo "$CHANGED_FILES" | grep -q "^cpp/"; then
@@ -858,7 +858,7 @@ jobs:
         module: [auth, compute, storage, ui]
     steps:
       - name: Build ${{ matrix.module }}
-        run: cargo build -p ${{ matrix.module }} --target wasm32-wasi
+        run: cargo build -p ${{ matrix.module }} --target wasm32-wasip1
 ```
 
 ---

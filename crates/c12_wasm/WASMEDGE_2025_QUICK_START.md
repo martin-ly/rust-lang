@@ -34,7 +34,7 @@
 ```bash
 # 1. 构建 Wasm 应用
 cd crates/c12_wasm
-cargo build --target wasm32-wasi --release
+cargo build --target wasm32-wasip1 --release
 
 # 2. 构建 Docker 镜像
 docker build --platform wasi/wasm \
@@ -345,7 +345,7 @@ kubectl describe pod/wasm-microservice-xxx -n wasm-prod
 ### 开发环境
 
 - [ ] Rust 1.92.0+ 安装
-- [ ] wasm32-wasi 目标安装
+- [ ] wasm32-wasip1 目标安装
 - [ ] WasmEdge 安装
 - [ ] Docker 安装（支持 Wasm）
 

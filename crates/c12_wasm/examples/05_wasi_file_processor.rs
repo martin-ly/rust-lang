@@ -28,20 +28,20 @@
 //!
 //! ```bash
 //! # 添加 WASI 目标
-//! rustup target add wasm32-wasi
+//! rustup target add wasm32-wasip1
 //!
 //! # 编译示例
-//! cargo build --example 05_wasi_file_processor --target wasm32-wasi --release
+//! cargo build --example 05_wasi_file_processor --target wasm32-wasip1 --release
 //! ```
 //!
 //! ## 运行方式
 //!
 //! ```bash
 //! # 使用 WasmEdge 运行
-//! wasmedge target/wasm32-wasi/release/examples/05_wasi_file_processor.wasm input.txt
+//! wasmedge target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm input.txt
 //!
 //! # 或使用 wasmtime 运行
-//! wasmtime target/wasm32-wasi/release/examples/05_wasi_file_processor.wasm input.txt
+//! wasmtime target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm input.txt
 //! ```
 //!
 //! ## 功能说明

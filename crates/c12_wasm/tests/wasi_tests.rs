@@ -5,7 +5,7 @@
 //! 注意：这些测试只能在 WASI 环境中运行
 //! 运行方式：
 //! ```bash
-//! cargo test --target wasm32-wasi
+//! cargo test --target wasm32-wasip1
 //! ```
 #[cfg(target_family = "wasm")]
 use c12_wasm::wasi_examples::*;
@@ -252,6 +252,6 @@ fn test_file_processing_workflow() {
 #[cfg(not(target_family = "wasm"))]
 fn wasi_tests_skip_on_non_wasi() {
     // 这个测试在非 WASI 环境中会被跳过
-    println!("WASI tests are only available when targeting wasm32-wasi");
-    println!("Run with: cargo test --target wasm32-wasi");
+    println!("WASI tests are only available when targeting wasm32-wasip1");
+    println!("Run with: cargo test --target wasm32-wasip1");
 }

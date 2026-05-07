@@ -11,12 +11,12 @@
 //!
 //! ## 编译
 //! ```bash
-//! cargo build --example 08_container_microservice --target wasm32-wasi --release
+//! cargo build --example 08_container_microservice --target wasm32-wasip1 --release
 //! ```
 //!
 //! ## 运行（使用 WasmEdge）
 //! ```bash
-//! wasmedge --dir .:. target/wasm32-wasi/release/examples/08_container_microservice.wasm
+//! wasmedge --dir .:. target/wasm32-wasip1/release/examples/08_container_microservice.wasm
 //! ```
 //!
 //! ## Docker 运行
@@ -384,7 +384,7 @@ impl App {
 fn main() {
     println!("[INFO] Starting Wasm Microservice...");
     println!("[INFO] Runtime: WasmEdge");
-    println!("[INFO] Platform: wasm32-wasi");
+    println!("[INFO] Platform: wasm32-wasip1");
 
     let app = App::new();
 

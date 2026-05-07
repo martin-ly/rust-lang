@@ -802,8 +802,8 @@ fn compose_components() -> anyhow::Result<()> {
 # 安装最新的工具链
 rustup update
 
-# 安装 wasm32-wasip2 target (WASI 0.2)
-rustup target add wasm32-wasip2
+# 安装 wasm32-wasip1p2 target (WASI 0.2)
+rustup target add wasm32-wasip1p2
 
 # 安装 wit-bindgen
 cargo install wit-bindgen-cli
@@ -893,7 +893,7 @@ crate-type = ["cdylib"]
 cargo component build --release
 
 # 使用 wasmtime 运行
-wasmtime run target/wasm32-wasip2/release/my_app.wasm
+wasmtime run target/wasm32-wasip1p2/release/my_app.wasm
 ```
 
 #### 3. API 映射表
@@ -1107,10 +1107,10 @@ cargo component new my-component
 cargo component build --release
 
 # 检查组件
-wasm-tools component wit target/wasm32-wasip2/release/my_component.wasm
+wasm-tools component wit target/wasm32-wasip1p2/release/my_component.wasm
 
 # 验证组件
-wasm-tools validate target/wasm32-wasip2/release/my_component.wasm
+wasm-tools validate target/wasm32-wasip1p2/release/my_component.wasm
 
 # 组合组件
 wasm-tools compose component-a.wasm component-b.wasm -o composed.wasm

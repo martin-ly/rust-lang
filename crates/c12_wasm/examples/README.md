@@ -64,13 +64,13 @@ ls -lh target/wasm32-unknown-unknown/release/examples/
 curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
 
 # 2. 添加 WASI 目标
-rustup target add wasm32-wasi
+rustup target add wasm32-wasip1
 
 # 3. 编译示例
-cargo build --example 05_wasi_file_processor --target wasm32-wasi --release
+cargo build --example 05_wasi_file_processor --target wasm32-wasip1 --release
 
 # 4. 运行
-wasmedge target/wasm32-wasi/release/examples/05_wasi_file_processor.wasm count test.txt
+wasmedge target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm count test.txt
 ```
 
 #### 使用 Wasmtime
@@ -80,10 +80,10 @@ wasmedge target/wasm32-wasi/release/examples/05_wasi_file_processor.wasm count t
 curl https://wasmtime.dev/install.sh -sSf | bash
 
 # 2. 编译（同上）
-cargo build --example 05_wasi_file_processor --target wasm32-wasi --release
+cargo build --example 05_wasi_file_processor --target wasm32-wasip1 --release
 
 # 3. 运行
-wasmtime target/wasm32-wasi/release/examples/05_wasi_file_processor.wasm count test.txt
+wasmtime target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm count test.txt
 ```
 
 ## 📝 详细说明
@@ -148,11 +148,11 @@ wasm-pack build --target web
 
 ```bash
 # 编译
-cargo build --example 05_wasi_file_processor --target wasm32-wasi --release
+cargo build --example 05_wasi_file_processor --target wasm32-wasip1 --release
 
 # 使用示例
-wasmedge target/wasm32-wasi/release/examples/05_wasi_file_processor.wasm count test.txt
-wasmedge target/wasm32-wasi/release/examples/05_wasi_file_processor.wasm search test.txt "hello"
+wasmedge target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm count test.txt
+wasmedge target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm search test.txt "hello"
 ```
 
 **学习要点**：
@@ -259,7 +259,7 @@ wasmedge target/wasm32-wasi/release/examples/05_wasi_file_processor.wasm search 
 ```bash
 # 解决方案：添加 WASM 目标
 rustup target add wasm32-unknown-unknown
-rustup target add wasm32-wasi
+rustup target add wasm32-wasip1
 ```
 
 ### Q: 二进制文件太大

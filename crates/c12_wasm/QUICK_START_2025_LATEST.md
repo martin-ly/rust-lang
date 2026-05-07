@@ -67,10 +67,10 @@ curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/insta
   bash -s -- --plugins wasi_nn-pytorch wasi_nn-ggml
 
 # 编译
-cargo build --example 10_ai_inference_wasinn --target wasm32-wasi --release
+cargo build --example 10_ai_inference_wasinn --target wasm32-wasip1 --release
 
 # 运行
-wasmedge target/wasm32-wasi/release/examples/10_ai_inference_wasinn.wasm
+wasmedge target/wasm32-wasip1/release/examples/10_ai_inference_wasinn.wasm
 ```
 
 ### 3. 加密操作
@@ -81,10 +81,10 @@ curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/insta
   bash -s -- --plugins wasi_crypto
 
 # 编译
-cargo build --example 11_crypto_operations --target wasm32-wasi --release
+cargo build --example 11_crypto_operations --target wasm32-wasip1 --release
 
 # 运行
-wasmedge target/wasm32-wasi/release/examples/11_crypto_operations.wasm
+wasmedge target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
 ```
 
 ---

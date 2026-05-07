@@ -285,12 +285,12 @@ main (production)
 
 ```yaml
 - name: Build Wasm
-  run: cargo build --target wasm32-wasi --release
+  run: cargo build --target wasm32-wasip1 --release
 
 - name: Optimize with wasm-opt
   run: |
     wasm-opt -Oz --strip-debug --strip-producers \
-      target/wasm32-wasi/release/*.wasm \
+      target/wasm32-wasip1/release/*.wasm \
       -o app-optimized.wasm
 ```
 
@@ -413,17 +413,17 @@ build:wasm:
   stage: build
   image: rust:${RUST_VERSION}-slim
   before_script:
-    - rustup target add wasm32-wasi
+    - rustup target add wasm32-wasip1
     - apt-get update && apt-get install -y wget
     - wget https://github.com/WebAssembly/binaryen/releases/download/version_116/binaryen-version_116-x86_64-linux.tar.gz
     - tar -xzf binaryen-version_116-x86_64-linux.tar.gz
     - cp binaryen-version_116/bin/wasm-opt /usr/local/bin/
   script:
     # 构建
-    - cargo build --target wasm32-wasi --release
+    - cargo build --target wasm32-wasip1 --release
     # 优化
     - wasm-opt -Oz --strip-debug --strip-producers
-      target/wasm32-wasi/release/*.wasm
+      target/wasm32-wasip1/release/*.wasm
       -o app-optimized.wasm
     - ls -lh app-optimized.wasm
   artifacts:

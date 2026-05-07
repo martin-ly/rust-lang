@@ -23,7 +23,7 @@
 **功能特点**:
 
 - 自动检查和安装 Rust 工具链
-- 自动安装 WASM 目标 (wasm32-unknown-unknown, wasm32-wasi)
+- 自动安装 WASM 目标 (wasm32-unknown-unknown, wasm32-wasip1)
 - 自动安装 wasm-pack
 - 自动安装开发工具 (rustfmt, clippy)
 - 自动构建和测试项目

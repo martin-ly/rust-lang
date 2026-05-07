@@ -12,13 +12,13 @@
 //!
 //! ## 编译
 //! ```bash
-//! cargo build --example 11_crypto_operations --target wasm32-wasi --release
+//! cargo build --example 11_crypto_operations --target wasm32-wasip1 --release
 //! ```
 //!
 //! ## 运行
 //! ```bash
 //! # 使用 WasmEdge（需要安装 WASI-Crypto 插件）
-//! wasmedge --dir .:. target/wasm32-wasi/release/examples/11_crypto_operations.wasm
+//! wasmedge --dir .:. target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
 //! ```
 //!
 //! ## 安装 WASI-Crypto 插件

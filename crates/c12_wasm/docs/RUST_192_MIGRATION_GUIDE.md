@@ -75,7 +75,7 @@ cargo --version
 ```bash
 # 确保 WASM 目标已安装
 rustup target add wasm32-unknown-unknown
-rustup target add wasm32-wasi
+rustup target add wasm32-wasip1
 
 # 验证安装
 rustup target list --installed | grep wasm32

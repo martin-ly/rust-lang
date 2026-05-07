@@ -59,7 +59,7 @@
 | `aarch64-linux-android` | Android ARM64 |
 | `arm-linux-androideabi` | Android ARMv7 |
 | `armv7-linux-androideabi` | Android ARMv7 (NEON) |
-| `wasm32-wasi` / `wasm32-wasip1` | WebAssembly System Interface |
+| `wasm32-wasip1` / `wasm32-wasip2` | WebAssembly System Interface |
 | `wasm32-unknown-unknown` | WebAssembly (浏览器/无主机) |
 | `powerpc64-unknown-linux-gnu` | PowerPC64 Linux |
 | **`powerpc64-unknown-linux-musl`** | **PowerPC64 Linux musl (1.95.0 新增)** |

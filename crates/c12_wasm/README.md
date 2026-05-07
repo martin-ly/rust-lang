@@ -211,8 +211,8 @@ cat src/lib.rs
 cat src/wasi_examples.rs
 
 # 编译并运行示例
-cargo build --target wasm32-wasi --release
-wasmedge target/wasm32-wasi/release/wasi-app.wasm input.txt
+cargo build --target wasm32-wasip1 --release
+wasmedge target/wasm32-wasip1/release/wasi-app.wasm input.txt
 ```
 
 ---

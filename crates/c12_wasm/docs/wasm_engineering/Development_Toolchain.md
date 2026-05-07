@@ -102,7 +102,7 @@ Rust Source → rustc (LLVM IR) → wasm32-unknown-unknown → Wasm 模块
 rustup target add wasm32-unknown-unknown
 
 # WASI 支持（服务器端）
-rustup target add wasm32-wasi
+rustup target add wasm32-wasip1
 
 # Emscripten 兼容
 rustup target add wasm32-unknown-emscripten
@@ -580,7 +580,7 @@ license = "MIT"
 
 [[module]]
 name = "mylib"
-source = "target/wasm32-wasi/release/mylib.wasm"
+source = "target/wasm32-wasip1/release/mylib.wasm"
 abi = "wasi"
 
 [[command]]
@@ -775,7 +775,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 安装 WASM 工具
-RUN rustup target add wasm32-wasi wasm32-unknown-unknown && \
+RUN rustup target add wasm32-wasip1 wasm32-unknown-unknown && \
     cargo install wasm-pack wasm-bindgen-cli
 
 # 安装 WABT 工具套件

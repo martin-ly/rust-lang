@@ -176,7 +176,7 @@ opt-level = 0
 cargo install cargo-tarpaulin
 
 # 生成 HTML 覆盖率报告
-cargo tarpaulin --target wasm32-wasi --out Html --output-dir coverage
+cargo tarpaulin --target wasm32-wasip1 --out Html --output-dir coverage
 
 # 查看报告
 open coverage/index.html
@@ -437,7 +437,7 @@ jobs:
 # scripts/test_runtime.sh
 
 RUNTIME=$1
-WASM_MODULE="target/wasm32-wasi/release/myapp.wasm"
+WASM_MODULE="target/wasm32-wasip1/release/myapp.wasm"
 
 case $RUNTIME in
   wasmtime)
@@ -745,16 +745,16 @@ criterion_main!(benches);
 
 ```bash
 # 运行所有基准测试
-cargo bench --target wasm32-wasi
+cargo bench --target wasm32-wasip1
 
 # 运行特定基准测试
 cargo bench --bench benchmark -- fibonacci
 
 # 生成 HTML 报告
-cargo bench --target wasm32-wasi -- --save-baseline current
+cargo bench --target wasm32-wasip1 -- --save-baseline current
 
 # 对比基线
-cargo bench --target wasm32-wasi -- --baseline current
+cargo bench --target wasm32-wasip1 -- --baseline current
 ```
 
 **Criterion.toml 配置**:
@@ -940,7 +940,7 @@ def run_in_runtime(wasm_file, runtime, input_data):
 
 def test_cross_runtime_consistency():
     """测试不同运行时的一致性"""
-    wasm_file = 'target/wasm32-wasi/release/myapp.wasm'
+    wasm_file = 'target/wasm32-wasip1/release/myapp.wasm'
     test_inputs = [
         b'{"value": 42}',
         b'{"value": -1}',
@@ -1080,20 +1080,20 @@ fn test_json_transformation() {
 # scripts/perf_regression.sh
 
 # 运行基准测试并保存结果
-cargo bench --target wasm32-wasi -- --save-baseline current
+cargo bench --target wasm32-wasip1 -- --save-baseline current
 
 # 切换到基线分支
 git checkout main
-cargo bench --target wasm32-wasi -- --save-baseline baseline
+cargo bench --target wasm32-wasip1 -- --save-baseline baseline
 
 # 回到当前分支
 git checkout -
 
 # 对比结果
-cargo bench --target wasm32-wasi -- --baseline baseline
+cargo bench --target wasm32-wasip1 -- --baseline baseline
 
 # 检查回归
-if cargo bench --target wasm32-wasi -- --baseline baseline 2>&1 | grep "regressed"; then
+if cargo bench --target wasm32-wasip1 -- --baseline baseline 2>&1 | grep "regressed"; then
     echo "❌ Performance regression detected!"
     exit 1
 else
@@ -1241,7 +1241,7 @@ fn test_with_mock_filesystem() -> Result<()> {
     let mut store = Store::new(&engine, wasi);
 
     // 加载模块
-    let module = Module::from_file(&engine, "target/wasm32-wasi/release/myapp.wasm")?;
+    let module = Module::from_file(&engine, "target/wasm32-wasip1/release/myapp.wasm")?;
 
     // 创建 Linker
     let mut linker = Linker::new(&engine);
@@ -1298,7 +1298,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: ${{ matrix.rust }}
-          target: wasm32-wasi
+          target: wasm32-wasip1
           override: true
 
       - name: Cache cargo
@@ -1312,7 +1312,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          cargo test --target wasm32-wasi
+          cargo test --target wasm32-wasip1
           cargo test --lib
 
       - name: Upload test results
@@ -1374,17 +1374,17 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Run benchmarks
-        run: cargo bench --target wasm32-wasi
+        run: cargo bench --target wasm32-wasip1
 
       - name: Compare with baseline
         run: |
-          cargo bench --target wasm32-wasi -- --save-baseline current
+          cargo bench --target wasm32-wasip1 -- --save-baseline current
           # 与主分支对比
           git fetch origin main
           git checkout origin/main
-          cargo bench --target wasm32-wasi -- --save-baseline main
+          cargo bench --target wasm32-wasip1 -- --save-baseline main
           git checkout -
-          cargo bench --target wasm32-wasi -- --baseline main
+          cargo bench --target wasm32-wasip1 -- --baseline main
 
   coverage:
     name: Code Coverage
@@ -1399,7 +1399,7 @@ jobs:
 
       - name: Generate coverage
         run: |
-          cargo tarpaulin --target wasm32-wasi \
+          cargo tarpaulin --target wasm32-wasip1 \
             --out Xml \
             --output-dir ./coverage
 

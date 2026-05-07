@@ -49,15 +49,15 @@
 | 编译目标                      | 系统接口      | 适用场景          | 性能       | 兼容性     | 推荐度     |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **wasm32-unknown-unknown**    | 无            | 浏览器/Node.js    | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **wasm32-wasi**               | WASI          | 命令行工具/服务器 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ |
-| **wasm32-wasi-preview1**      | WASI Preview1 | 旧版兼容          | ⭐⭐⭐     | ⭐⭐⭐     | ⭐⭐⭐     |
+| **wasm32-wasip1**               | WASI          | 命令行工具/服务器 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ |
+| **wasm32-wasip1-preview1**      | WASI Preview1 | 旧版兼容          | ⭐⭐⭐     | ⭐⭐⭐     | ⭐⭐⭐     |
 | **wasm32-unknown-emscripten** | Emscripten    | 移植 C/C++ 代码   | ⭐⭐⭐     | ⭐⭐⭐     | ⭐⭐       |
 
 **详细说明**:
 
 - **wasm32-unknown-unknown**: 标准 WASM 目标，无系统接口，适合纯计算任务和浏览器应用
-- **wasm32-wasi**: 提供 WASI 系统接口，适合需要文件系统、网络等系统功能的场景
-- **wasm32-wasi-preview1**: WASI Preview1 版本，用于兼容旧版代码
+- **wasm32-wasip1**: 提供 WASI 系统接口，适合需要文件系统、网络等系统功能的场景
+- **wasm32-wasip1-preview1**: WASI Preview1 版本，用于兼容旧版代码
 - **wasm32-unknown-emscripten**: Emscripten 目标，用于移植现有 C/C++ 代码
 
 ---

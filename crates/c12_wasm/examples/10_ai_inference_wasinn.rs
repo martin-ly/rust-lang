@@ -16,14 +16,14 @@
 //!
 //! ## 编译
 //! ```bash
-//! cargo build --example 10_ai_inference_wasinn --target wasm32-wasi --release
+//! cargo build --example 10_ai_inference_wasinn --target wasm32-wasip1 --release
 //! ```
 //!
 //! ## 运行
 //! ```bash
 //! # 使用 WasmEdge 运行（需要安装 WASI-NN 插件）
 //! wasmedge --dir .:. \
-//!   target/wasm32-wasi/release/examples/10_ai_inference_wasinn.wasm \
+//!   target/wasm32-wasip1/release/examples/10_ai_inference_wasinn.wasm \
 //!   model.onnx
 //! ```
 //!

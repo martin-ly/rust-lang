@@ -181,17 +181,17 @@ WASI 是 WebAssembly 的系统接口，提供了：
 
 ### 编译到 WASI 目标
 
-要在本地操作系统运行 WASM 程序，需要编译到 `wasm32-wasi` 目标：
+要在本地操作系统运行 WASM 程序，需要编译到 `wasm32-wasip1` 目标：
 
 ```bash
 # 添加 WASI 目标
-rustup target add wasm32-wasi
+rustup target add wasm32-wasip1
 
 # 编译到 WASI
-cargo build --target wasm32-wasi --release
+cargo build --target wasm32-wasip1 --release
 
 # 输出文件
-# target/wasm32-wasi/release/your_app.wasm
+# target/wasm32-wasip1/release/your_app.wasm
 ```
 
 ### Cargo.toml 配置
@@ -245,16 +245,16 @@ fn main() {
 
 ```bash
 # 编译
-cargo build --target wasm32-wasi --release
+cargo build --target wasm32-wasip1 --release
 
 # 使用 WasmEdge 运行
-wasmedge target/wasm32-wasi/release/my_app.wasm input.txt
+wasmedge target/wasm32-wasip1/release/my_app.wasm input.txt
 
 # 使用 wasmtime 运行
-wasmtime run target/wasm32-wasi/release/my_app.wasm -- input.txt
+wasmtime run target/wasm32-wasip1/release/my_app.wasm -- input.txt
 
 # 使用 wasmer 运行
-wasmer run target/wasm32-wasi/release/my_app.wasm -- input.txt
+wasmer run target/wasm32-wasip1/release/my_app.wasm -- input.txt
 ```
 
 ---
@@ -366,10 +366,10 @@ fn main() {
 
 ```bash
 # 编译
-cargo build --target wasm32-wasi --release
+cargo build --target wasm32-wasip1 --release
 
 # 运行（需要网络权限）
-wasmedge --allow-net target/wasm32-wasi/release/server.wasm
+wasmedge --allow-net target/wasm32-wasip1/release/server.wasm
 ```
 
 ### 示例 3: 环境变量和命令行参数
@@ -398,7 +398,7 @@ fn main() {
 
 ```bash
 # 设置环境变量并运行
-MY_VAR=hello wasmedge target/wasm32-wasi/release/my_app.wasm arg1 arg2
+MY_VAR=hello wasmedge target/wasm32-wasip1/release/my_app.wasm arg1 arg2
 ```
 
 ### 示例 4: 文件系统操作
@@ -433,7 +433,7 @@ fn main() {
 
 ```bash
 # 挂载目录
-wasmedge --dir .:/app target/wasm32-wasi/release/my_app.wasm
+wasmedge --dir .:/app target/wasm32-wasip1/release/my_app.wasm
 ```
 
 ---
@@ -446,17 +446,17 @@ wasmedge --dir .:/app target/wasm32-wasi/release/my_app.wasm
 
 ```bash
 # 挂载多个目录
-wasmedge --dir .:/app --dir /tmp:/tmp target/wasm32-wasi/release/app.wasm
+wasmedge --dir .:/app --dir /tmp:/tmp target/wasm32-wasip1/release/app.wasm
 ```
 
 **网络访问**:
 
 ```bash
 # 允许所有网络访问
-wasmedge --allow-net target/wasm32-wasi/release/app.wasm
+wasmedge --allow-net target/wasm32-wasip1/release/app.wasm
 
 # 只允许特定域名
-wasmedge --allow-net=example.com target/wasm32-wasi/release/app.wasm
+wasmedge --allow-net=example.com target/wasm32-wasip1/release/app.wasm
 ```
 
 **环境变量**:
@@ -510,7 +510,7 @@ wasmer compile app.wasm -o app.bin
 
 ```dockerfile
 FROM scratch
-COPY target/wasm32-wasi/release/app.wasm /app.wasm
+COPY target/wasm32-wasip1/release/app.wasm /app.wasm
 ENTRYPOINT ["wasmedge", "/app.wasm"]
 ```
 
@@ -522,7 +522,7 @@ services:
   wasm-app:
     image: wasmedge/wasmedge:latest
     volumes:
-      - ./target/wasm32-wasi/release:/app
+      - ./target/wasm32-wasip1/release:/app
     command: wasmedge /app/app.wasm
     environment:
       - MY_VAR=value

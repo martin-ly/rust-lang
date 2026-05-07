@@ -76,7 +76,7 @@
 ```mermaid
 graph TD
     Start[开始: 确定需求] --> Q1{需要系统接口?}
-    Q1 -->|是| D1[选择 wasm32-wasi]
+    Q1 -->|是| D1[选择 wasm32-wasip1]
     Q1 -->|否| Q2{需要浏览器运行?}
     Q2 -->|是| D2[选择 wasm32-unknown-unknown]
     Q2 -->|否| Q3{需要高性能?}
@@ -108,16 +108,16 @@ graph TD
 ├── 需要系统接口?
 │   ├── 是
 │   │   ├── 需要文件系统?
-│   │   │   ├── 是 → wasm32-wasi
+│   │   │   ├── 是 → wasm32-wasip1
 │   │   │   └── 否
 │   │   │       ├── 需要网络?
-│   │   │       │   ├── 是 → wasm32-wasi
+│   │   │       │   ├── 是 → wasm32-wasip1
 │   │   │       │   └── 否 → wasm32-unknown-unknown
 │   │   │       └── 需要命令行参数?
-│   │   │           ├── 是 → wasm32-wasi
+│   │   │           ├── 是 → wasm32-wasip1
 │   │   │           └── 否 → wasm32-unknown-unknown
 │   │   └── 需要环境变量?
-│   │       ├── 是 → wasm32-wasi
+│   │       ├── 是 → wasm32-wasip1
 │   │       └── 否 → wasm32-unknown-unknown
 │   └── 否
 │       ├── 浏览器运行?
@@ -125,17 +125,17 @@ graph TD
 │       │   └── 否
 │       │       ├── Node.js 运行?
 │       │       │   ├── 是 → wasm32-unknown-unknown
-│       │       │   └── 否 → wasm32-wasi
+│       │       │   └── 否 → wasm32-wasip1
 │       │       └── 边缘计算?
-│       │           ├── 是 → wasm32-wasi (WasmEdge)
+│       │           ├── 是 → wasm32-wasip1 (WasmEdge)
 │       │           └── 否 → wasm32-unknown-unknown
 ```
 
 **决策规则**:
 
 - **wasm32-unknown-unknown**: 浏览器/Node.js 应用，无需系统接口
-- **wasm32-wasi**: 需要文件系统、网络、命令行参数等系统接口
-- **wasm32-wasi-preview1**: 兼容旧版 WASI 代码
+- **wasm32-wasip1**: 需要文件系统、网络、命令行参数等系统接口
+- **wasm32-wasip1-preview1**: 兼容旧版 WASI 代码
 
 ---
 
@@ -419,9 +419,9 @@ Rust 1.92.0 特性选择
 | 需求           | 推荐方案                              | Rust 1.92.0 特性      |
 | :--- | :--- | :--- |
 | **浏览器应用** | wasm32-unknown-unknown + wasm-bindgen | Iterator::eq 特化     |
-| **命令行工具** | wasm32-wasi                           | NonZero::div_ceil     |
-| **服务器应用** | wasm32-wasi + wasmtime                | rotate_right          |
-| **边缘计算**   | wasm32-wasi + WasmEdge                | MaybeUninit 优化      |
+| **命令行工具** | wasm32-wasip1                           | NonZero::div_ceil     |
+| **服务器应用** | wasm32-wasip1 + wasmtime                | rotate_right          |
+| **边缘计算**   | wasm32-wasip1 + WasmEdge                | MaybeUninit 优化      |
 | **高性能计算** | opt-level = 3 + lto                   | 所有 Rust 1.92.0 特性 |
 | **小二进制**   | opt-level = "z" + wasm-opt -Oz        | 代码优化              |
 

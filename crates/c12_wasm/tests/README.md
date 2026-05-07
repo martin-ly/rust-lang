@@ -38,17 +38,17 @@ cargo test -- --test-threads=1 --nocapture
 
 ```bash
 # 添加 WASI 目标（首次运行）
-rustup target add wasm32-wasi
+rustup target add wasm32-wasip1
 
 # 运行 WASI 测试
-cargo test --target wasm32-wasi --test wasi_tests
+cargo test --target wasm32-wasip1 --test wasi_tests
 
 # 使用 WasmEdge 运行
-cargo build --target wasm32-wasi --tests
-wasmedge target/wasm32-wasi/debug/deps/wasi_tests-*.wasm
+cargo build --target wasm32-wasip1 --tests
+wasmedge target/wasm32-wasip1/debug/deps/wasi_tests-*.wasm
 
 # 使用 Wasmtime 运行
-wasmtime target/wasm32-wasi/debug/deps/wasi_tests-*.wasm
+wasmtime target/wasm32-wasip1/debug/deps/wasi_tests-*.wasm
 ```
 
 ### 运行浏览器测试（wasm-bindgen-test）
@@ -133,7 +133,7 @@ cargo test --test basic_tests
 **运行命令**：
 
 ```bash
-cargo test --target wasm32-wasi --test wasi_tests
+cargo test --target wasm32-wasip1 --test wasi_tests
 ```
 
 **重点测试用例**：
@@ -145,7 +145,7 @@ cargo test --target wasm32-wasi --test wasi_tests
 
 **注意事项**：
 
-- WASI 测试只能在 wasm32-wasi 目标下运行
+- WASI 测试只能在 wasm32-wasip1 目标下运行
 - 需要文件系统访问权限
 - 测试会创建临时文件，运行后会自动清理
 
@@ -326,10 +326,10 @@ jobs:
 
       # WASI 测试
       - name: Add WASI target
-        run: rustup target add wasm32-wasi
+        run: rustup target add wasm32-wasip1
 
       - name: Run WASI tests
-        run: cargo test --target wasm32-wasi
+        run: cargo test --target wasm32-wasip1
 
       # 覆盖率
       - name: Generate coverage

@@ -402,12 +402,12 @@ fn prepare_input(image_path: &str) -> Result<Vec<u8>, Box<dyn std::error::Error>
 
 ```bash
 # 编译到 WASI
-cargo build --target wasm32-wasi --release
+cargo build --target wasm32-wasip1 --release
 
 # 使用 WasmEdge 运行（启用 WASI-NN）
 wasmedge --enable-wasi-nn \
   --enable-wasi-nn-tensorflow \
-  target/wasm32-wasi/release/ai_app.wasm \
+  target/wasm32-wasip1/release/ai_app.wasm \
   input.jpg
 ```
 
@@ -660,7 +660,7 @@ pub extern "C" fn wasmedge_plugin_init() -> i32 {
 FROM wasmedge/wasmedge:latest
 
 # 复制 WASM 应用
-COPY target/wasm32-wasi/release/app.wasm /app.wasm
+COPY target/wasm32-wasip1/release/app.wasm /app.wasm
 
 # 设置入口点
 ENTRYPOINT ["wasmedge", "/app.wasm"]
@@ -705,7 +705,7 @@ services:
   wasm-service:
     image: wasmedge/wasmedge:latest
     volumes:
-      - ./target/wasm32-wasi/release:/app
+      - ./target/wasm32-wasip1/release:/app
     command: wasmedge --enable-wasi-nn /app/app.wasm
     environment:
       - WASM_LOG_LEVEL=info
@@ -784,12 +784,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ```bash
 # 编译
-cargo build --target wasm32-wasi --release
+cargo build --target wasm32-wasip1 --release
 
 # 使用 WasmEdge 运行
 wasmedge --enable-wasi-nn \
   --enable-wasi-nn-tensorflow \
-  target/wasm32-wasi/release/image_service.wasm
+  target/wasm32-wasip1/release/image_service.wasm
 ```
 
 ### 示例 2: 边缘计算数据处理

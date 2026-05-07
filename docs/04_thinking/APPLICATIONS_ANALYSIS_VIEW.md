@@ -176,7 +176,7 @@
 
 **公理 / 定理 → 论证**：WASM 选型遵循「无 host 假设」公理——目标环境无 OS、无 std。定理：`no_std` 剔除标准库；所有权保证无 GC；与 JS 互操作需 `wasm-bindgen`。无浮点、无 alloc 可减小体积；确定性重要时避免随机/时间依赖。
 
-**决策树**：需 std？→ wasm32-wasi；纯前端？→ wasm32-unknown-unknown；需 alloc？→ `extern crate alloc`。
+**决策树**：需 std？→ wasm32-wasip1；纯前端？→ wasm32-unknown-unknown；需 alloc？→ `extern crate alloc`。
 
 ---
 
