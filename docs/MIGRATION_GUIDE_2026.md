@@ -332,8 +332,8 @@ let wide: (i32, i32) = (narrow.0 as i32, narrow.1 as i32);
 |------|----------|------|
 | if let guards | 1.95 | match 守卫中的嵌套模式匹配 |
 | isqrt | 1.84 | 整数平方根运算 |
-| HashMap::get_disjoint_mut | 1.83 | 安全并行可变访问 |
-| Vec::pop_if | 1.83 | 条件弹出元素 |
+| HashMap::get_disjoint_mut | 1.86 | 安全并行可变访问 |
+| Vec::pop_if | 1.86 | 条件弹出元素 |
 | async closures (`async \|\|`) | 1.85 (Edition 2024) | 异步闭包 |
 | PinCoerceUnsized | nightly only | Pin 类型强制转换 (实验性) |
 | 元组 coercion | 已存在 | 元组类型自动转换 |

@@ -364,15 +364,14 @@ pub async fn demonstrate_async_control_flow_190() -> Result<()> {
     println!("\n3. 异步错误处理演示:");
     let error_handler = AsyncErrorHandler190::new(3, 10);
     
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    static COUNTER: AtomicUsize = AtomicUsize::new(0);
     let result = error_handler.execute_with_retry(|| {
-        static mut COUNTER: usize = 0;
-        unsafe {
-            COUNTER += 1;
-            if COUNTER < 3 {
-                Err(anyhow!("模拟错误"))
-            } else {
-                Ok("成功")
-            }
+        let count = COUNTER.fetch_add(1, Ordering::SeqCst) + 1;
+        if count < 3 {
+            Err(anyhow!("模拟错误"))
+        } else {
+            Ok("成功")
         }
     }).await?;
     
@@ -417,15 +416,14 @@ mod tests {
     async fn test_async_error_handler() {
         let handler = AsyncErrorHandler190::new(3, 1);
         
+        use std::sync::atomic::{AtomicUsize, Ordering};
+        static COUNTER2: AtomicUsize = AtomicUsize::new(0);
         let result = handler.execute_with_retry(|| {
-            static mut COUNTER: usize = 0;
-            unsafe {
-                COUNTER += 1;
-                if COUNTER < 2 {
-                    Err(anyhow!("test error"))
-                } else {
-                    Ok("success")
-                }
+            let count = COUNTER2.fetch_add(1, Ordering::SeqCst) + 1;
+            if count < 2 {
+                Err(anyhow!("test error"))
+            } else {
+                Ok("success")
             }
         }).await;
         

@@ -62,15 +62,14 @@ async fn test_async_control_flow_enhancements() -> Result<()> {
     
     // 测试异步错误处理
     let error_handler = async_control_flow_190::AsyncErrorHandler190::new(3, 1);
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    static COUNTER: AtomicUsize = AtomicUsize::new(0);
     let result = error_handler.execute_with_retry(|| {
-        static mut COUNTER: usize = 0;
-        unsafe {
-            COUNTER += 1;
-            if COUNTER < 2 {
-                Err(anyhow::anyhow!("test error"))
-            } else {
-                Ok("success")
-            }
+        let count = COUNTER.fetch_add(1, Ordering::SeqCst) + 1;
+        if count < 2 {
+            Err(anyhow::anyhow!("test error"))
+        } else {
+            Ok("success")
         }
     }).await?;
     assert_eq!(result, "success");
@@ -166,15 +165,14 @@ async fn test_error_handling() -> Result<()> {
     let error_handler = async_control_flow_190::AsyncErrorHandler190::new(3, 1);
     
     // 测试成功重试
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    static COUNTER2: AtomicUsize = AtomicUsize::new(0);
     let result = error_handler.execute_with_retry(|| {
-        static mut COUNTER: usize = 0;
-        unsafe {
-            COUNTER += 1;
-            if COUNTER < 2 {
-                Err(anyhow::anyhow!("retry error"))
-            } else {
-                Ok("success")
-            }
+        let count = COUNTER2.fetch_add(1, Ordering::SeqCst) + 1;
+        if count < 2 {
+            Err(anyhow::anyhow!("retry error"))
+        } else {
+            Ok("success")
         }
     }).await?;
     assert_eq!(result, "success");

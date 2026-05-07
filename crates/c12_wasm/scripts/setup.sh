@@ -71,11 +71,11 @@ else
     print_warning "wasm32-unknown-unknown 可能已经安装"
 fi
 
-echo "  安装 wasm32-wasi..."
-if rustup target add wasm32-wasi 2>/dev/null; then
-    print_success "wasm32-wasi 已安装"
+echo "  安装 wasm32-wasip1..."
+if rustup target add wasm32-wasip1 2>/dev/null; then
+    print_success "wasm32-wasip1 已安装"
 else
-    print_warning "wasm32-wasi 可能已经安装"
+    print_warning "wasm32-wasip1 可能已经安装"
 fi
 
 # 4. 安装 wasm-pack

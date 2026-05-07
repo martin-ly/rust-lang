@@ -46,10 +46,10 @@
 | 特性 | 类别 | 应用场景 | 相关指南 |
 |------|------|----------|----------|
 | `isqrt` | 数学运算 (≥1.84) | 质数检测、几何计算 | BEST_PRACTICES.md |
-| `HashMap::get_disjoint_mut` | 数据结构 (≥1.83) | 并发缓存、状态管理 | THREADS_CONCURRENCY_USAGE_GUIDE.md |
+| `HashMap::get_disjoint_mut` | 数据结构 (≥1.86) | 并发缓存、状态管理 | THREADS_CONCURRENCY_USAGE_GUIDE.md |
 | `async Fn` / async closures | 异步编程 (≥1.85, Edition 2024) | 异步 trait、回调抽象 | ASYNC_PROGRAMMING_USAGE_GUIDE.md |
 | `if let guards` | 语言特性 | 模式匹配守卫 | CONTROL_FLOW_GUIDE.md |
-| `Vec::pop_if` | 集合操作 (≥1.83) | 条件弹出、栈操作 | BEST_PRACTICES.md |
+| `Vec::pop_if` | 集合操作 (≥1.86) | 条件弹出、栈操作 | BEST_PRACTICES.md |
 | `const fn` 改进 | 编译时计算 | 常量初始化 | DESIGN_PATTERNS_USAGE_GUIDE.md |
 
 ---

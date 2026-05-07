@@ -113,17 +113,24 @@ impl StackPinningExamples {
 /// - 首次 `push_back` 时会触发堆分配（如使用 alloc）
 /// - 对于 `no_std` 无 alloc 场景，仍需使用固定大小的数组环形缓冲区
 ///
-/// ## no_std + alloc 用法
+/// ## no_std + alloc 用法（Rust 2024 Edition 兼容）
 /// ```ignore
 /// use alloc::collections::VecDeque;
-/// static mut UART_RX: VecDeque<u8> = VecDeque::new();
+/// use core::cell::UnsafeCell;
+///
+/// // Rust 2024 Edition 中 static mut 引用已弃用，推荐使用 UnsafeCell
+/// static UART_RX: UnsafeCell<VecDeque<u8>> = UnsafeCell::new(VecDeque::new());
+///
+/// // 访问时需要 unsafe 块，但语义更清晰
+/// unsafe { (*UART_RX.get()).push_back(b'A'); }
 /// ```
 pub struct ConstVecDequeExamples;
 
 impl ConstVecDequeExamples {
     /// 常量初始化的 UART 接收环形缓冲区（host 目标演示）
     ///
-    /// 在嵌入式目标上，可声明为 `static mut` 或封装在 Mutex 中。
+    /// 在嵌入式目标上，推荐封装在 Mutex 或 UnsafeCell 中。
+    /// Rust 2024 Edition 已弃用 `static mut` 引用。
     #[cfg(not(target_arch = "arm"))]
     pub const UART_RX_BUFFER: std::collections::VecDeque<u8> = std::collections::VecDeque::new();
 

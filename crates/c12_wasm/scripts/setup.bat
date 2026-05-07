@@ -33,12 +33,12 @@ if %ERRORLEVEL% EQU 0 (
     echo ⚠ wasm32-unknown-unknown 可能已经安装
 )
 
-echo   安装 wasm32-wasi...
-rustup target add wasm32-wasi >nul 2>&1
+echo   安装 wasm32-wasip1...
+rustup target add wasm32-wasip1 >nul 2>&1
 if %ERRORLEVEL% EQU 0 (
-    echo ✓ wasm32-wasi 已安装
+    echo ✓ wasm32-wasip1 已安装
 ) else (
-    echo ⚠ wasm32-wasi 可能已经安装
+    echo ⚠ wasm32-wasip1 可能已经安装
 )
 
 REM 3. 检查 wasm-pack
