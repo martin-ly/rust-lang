@@ -49,7 +49,7 @@ impl ProcessMetricsAnalyzer {
 
     /// 检测指标异常（使用 3 点窗口）
     ///
-    /// Rust 1.94.0: array_windows::<3>() 返回 [&f64; 3]
+    /// Rust 1.96.0: array_windows::<3>() 返回 [&f64; 3]
     pub fn detect_anomalies(data: &[f64], threshold: f64) -> Vec<(usize, f64)> {
         let mut anomalies = Vec::new();
 
@@ -68,7 +68,7 @@ impl ProcessMetricsAnalyzer {
 
     /// 计算指标变化率
     ///
-    /// Rust 1.94.0: array_windows::<2>() 返回 [&f64; 2]
+    /// Rust 1.96.0: array_windows::<2>() 返回 [&f64; 2]
     pub fn calculate_change_rates(data: &[f64]) -> Vec<f64> {
         // Rust 1.94.0: for [prev, curr] in data.array_windows::<2>()
         data.array_windows::<2>()
@@ -84,7 +84,7 @@ impl ProcessMetricsAnalyzer {
 
     /// 检测趋势转折点（使用 5 点窗口）
     ///
-    /// Rust 1.94.0: array_windows::<5>() 返回 [&f64; 5]
+    /// Rust 1.96.0: array_windows::<5>() 返回 [&f64; 5]
     pub fn detect_trend_reversals(data: &[f64]) -> Vec<usize> {
         let mut reversals = Vec::new();
 
@@ -104,7 +104,7 @@ impl ProcessMetricsAnalyzer {
 
     /// 平滑数据（使用加权移动平均）
     ///
-    /// Rust 1.94.0: array_windows::<3>() 配合权重
+    /// Rust 1.96.0: array_windows::<3>() 配合权重
     pub fn weighted_moving_average(data: &[f64]) -> Vec<f64> {
         // 权重: [0.25, 0.5, 0.25]
         data.array_windows::<3>()
@@ -138,7 +138,7 @@ pub struct LogAnalyzer;
 impl LogAnalyzer {
     /// 检测连续的错误模式
     ///
-    /// Rust 1.94.0: array_windows::<3>() 用于检测连续错误
+    /// Rust 1.96.0: array_windows::<3>() 用于检测连续错误
     pub fn detect_error_patterns(entries: &[LogEntry]) -> Vec<usize> {
         let mut patterns = Vec::new();
 
@@ -158,7 +158,7 @@ impl LogAnalyzer {
 
     /// 分析日志时间间隔
     ///
-    /// Rust 1.94.0: array_windows::<2>() 用于计算时间差
+    /// Rust 1.96.0: array_windows::<2>() 用于计算时间差
     pub fn analyze_time_intervals(entries: &[LogEntry]) -> Vec<u64> {
         entries
             .array_windows::<2>()

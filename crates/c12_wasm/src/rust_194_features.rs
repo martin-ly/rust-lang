@@ -37,7 +37,7 @@ impl<'a> WasmMemoryView<'a> {
 
     /// 读取 32 位整数（小端序）
     ///
-    /// Rust 1.94.0: array_windows<4> 用于读取 4 字节值
+    /// Rust 1.96.0: array_windows<4> 用于读取 4 字节值
     pub fn read_i32_le(&self, offset: usize) -> Option<i32> {
         let bytes = self.data.get(offset..offset + 4)?;
         Some(i32::from_le_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]))
@@ -54,7 +54,7 @@ impl<'a> WasmMemoryView<'a> {
 
     /// 查找字节序列
     ///
-    /// Rust 1.94.0: array_windows 用于滑动窗口搜索
+    /// Rust 1.96.0: array_windows 用于滑动窗口搜索
     pub fn find_sequence(&self, pattern: &[u8]) -> Option<usize> {
         if pattern.is_empty() || pattern.len() > self.data.len() {
             return None;
@@ -105,7 +105,7 @@ impl<'a> WasmMemoryView<'a> {
 
     /// 验证内存对齐
     ///
-    /// Rust 1.94.0: array_windows 验证 4 字节对齐
+    /// Rust 1.96.0: array_windows 验证 4 字节对齐
     pub fn verify_4byte_alignment(&self) -> bool {
         if self.data.len() < 4 {
             return true;
@@ -117,7 +117,7 @@ impl<'a> WasmMemoryView<'a> {
 
     /// 计算校验和（简化版）
     ///
-    /// Rust 1.94.0: array_windows<2> 用于 16 位校验和计算
+    /// Rust 1.96.0: array_windows<2> 用于 16 位校验和计算
     pub fn checksum_16bit(&self) -> u16 {
         let mut sum: u32 = 0;
 
@@ -148,7 +148,7 @@ pub struct WasmPacketParser;
 impl WasmPacketParser {
     /// 以太网帧头解析
     ///
-    /// Rust 1.94.0: array_windows<6> 用于 MAC 地址
+    /// Rust 1.96.0: array_windows<6> 用于 MAC 地址
     pub fn parse_ethernet_header(data: &[u8]) -> Option<EthernetHeader> {
         if data.len() < 14 {
             return None;
@@ -177,7 +177,7 @@ impl WasmPacketParser {
 
     /// 查找 IP 头部
     ///
-    /// Rust 1.94.0: array_windows<20> 用于 IP 头部检测
+    /// Rust 1.96.0: array_windows<20> 用于 IP 头部检测
     pub fn find_ip_packet(data: &[u8]) -> Option<usize> {
         // 查找 0x45 (IPv4, IHL=5) 模式
         for (idx, window) in data.array_windows::<2>().enumerate() {
@@ -205,7 +205,7 @@ pub struct WasmImageProcessor;
 impl WasmImageProcessor {
     /// 计算 RGB 像素的平均颜色
     ///
-    /// Rust 1.94.0: array_windows<3> 用于 RGB 像素处理
+    /// Rust 1.96.0: array_windows<3> 用于 RGB 像素处理
     pub fn average_rgb(data: &[u8]) -> Option<(u8, u8, u8)> {
         if data.len() < 3 {
             return None;
@@ -236,7 +236,7 @@ impl WasmImageProcessor {
 
     /// 检测边缘（简化 Sobel 算子）
     ///
-    /// Rust 1.94.0: array_windows<3> 用于 3x3 卷积
+    /// Rust 1.96.0: array_windows<3> 用于 3x3 卷积
     pub fn detect_edges_simple(data: &[u8], width: usize) -> Vec<u8> {
         if data.len() < width * 3 || width < 3 {
             return vec![0; data.len() / 3];

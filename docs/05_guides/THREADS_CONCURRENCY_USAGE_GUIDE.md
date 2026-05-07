@@ -51,7 +51,7 @@
     - [死锁](#死锁)
     - [数据竞争](#数据竞争)
   - [📚 相关文档](#-相关文档)
-  - [🆕 Rust 1.94 特性](#-rust-194-特性)
+  - [🆕 Rust 1.95+ 特性](#-rust-194-特性)
     - [LazyLock 深度应用（Rust 1.94 增强）](#lazylock-深度应用rust-194-增强)
       - [核心 API 对比](#核心-api-对比)
       - [生产场景 1: 连接池热路径优化](#生产场景-1-连接池热路径优化)
@@ -1217,7 +1217,7 @@ let counter = Arc::new(Mutex::new(0));
 - [无锁数据结构](../../crates/c05_threads/docs/tier_03_references/02_无锁编程参考.md)
 - [Send/Sync 形式化](../research_notes/formal_methods/send_sync_formalization.md) - Send/Sync Trait 形式化定义与安全保证
 
-## 🆕 Rust 1.94 特性
+## 🆕 Rust 1.95+ 特性
 
 > **适用版本**: Rust 1.94.0+
 
@@ -1484,7 +1484,7 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
 2. **缓存友好**: 固定大小窗口允许编译器生成更高效的 SIMD 指令
 3. **线程安全**: 返回的值是 Copy 类型，可安全在线程间传递
 
-**最后更新**: 2026-03-14 (添加 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (添加 Rust 1.95+ 特性)
 
 ---
 

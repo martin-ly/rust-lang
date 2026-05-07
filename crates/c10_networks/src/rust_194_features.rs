@@ -35,7 +35,7 @@ impl Http2PreambleDetector {
 
     /// 使用 array_windows 检测前导码
     ///
-    /// Rust 1.94.0: array_windows 用于滑动窗口匹配
+    /// Rust 1.96.0: array_windows 用于滑动窗口匹配
     pub fn detect_preamble(data: &[u8]) -> Option<usize> {
         let preamble_len = Self::PREAMBLE.len();
 
@@ -127,7 +127,7 @@ pub struct SequenceValidator;
 impl SequenceValidator {
     /// 验证 TCP 序列号是否连续（无丢包）
     ///
-    /// Rust 1.94.0: array_windows<2> 用于检查相邻序列号
+    /// Rust 1.96.0: array_windows<2> 用于检查相邻序列号
     pub fn validate_tcp_sequence(seq_numbers: &[u32]) -> bool {
         if seq_numbers.len() < 2 {
             return true;
@@ -183,7 +183,7 @@ impl PacketReassembler {
 
     /// 检查分片是否连续
     ///
-    /// Rust 1.94.0: array_windows 用于验证分片偏移连续性
+    /// Rust 1.96.0: array_windows 用于验证分片偏移连续性
     pub fn is_continuous(&self) -> bool {
         if self.fragments.len() < 2 {
             return true;

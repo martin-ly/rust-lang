@@ -55,7 +55,7 @@
     - [问题 4: 忘记处理 Cancel Safety](#问题-4-忘记处理-cancel-safety)
     - [问题 5: 递归 async 函数](#问题-5-递归-async-函数)
   - [📚 相关文档](#-相关文档)
-  - [🆕 Rust 1.94 特性](#-rust-194-特性)
+  - [🆕 Rust 1.95+ 特性](#-rust-194-特性)
     - [ControlFlow 在异步编程中的应用](#controlflow-在异步编程中的应用)
     - [Peekable 迭代器增强](#peekable-迭代器增强)
   - [🔗 形式化引用](#-形式化引用)
@@ -1489,7 +1489,7 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 
 ---
 
-## 🆕 Rust 1.94 特性
+## 🆕 Rust 1.95+ 特性
 
 > **适用版本**: Rust 1.94.0+
 
@@ -1544,7 +1544,7 @@ async fn parse_number(chars: &mut Peekable<impl Iterator<Item = char>>) -> Optio
 }
 ```
 
-**最后更新**: 2026-03-14 (添加 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (添加 Rust 1.95+ 特性)
 
 ---
 

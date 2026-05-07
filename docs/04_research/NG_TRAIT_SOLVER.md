@@ -9,7 +9,8 @@
 
 ## 1. Rust 当前 Trait Solver 的局限
 
-Rust 的类型系统核心之一是 **trait solver**（特征求解器），负责在编译时判断某个类型是否实现了特定 trait，并解决相关的类型约束。当前稳定版使用的 trait solver 是围绕 **SLG (Selective Linear Generalized)  resolution** 构建的，自 Rust 1.0 以来基本架构未变。
+Rust 的类型系统核心之一是 **trait solver**（特征求解器），负责在编译时判断某个类型是否实现了特定 trait，并解决相关的类型约束。
+当前稳定版使用的 trait solver 是围绕 **SLG (Selective Linear Generalized)  resolution** 构建的，自 Rust 1.0 以来基本架构未变。
 
 ### 1.1 主要技术局限
 

@@ -1,7 +1,7 @@
 # Cargo Script 单文件脚本指南
 
-> **最后更新日期**: 2026-04-24  
-> **适用版本**: Rust 1.79+ (cargo script 功能已稳定)  
+> **最后更新日期**: 2026-04-24
+> **适用版本**: Rust 1.79+ (cargo script 功能已稳定)
 > **文档类型**: 实用指南
 
 ---
@@ -48,16 +48,17 @@ cargo run --manifest-path my_script.rs
 ### 2.1 基本结构
 
 ```rust
-#!/usr/bin/env cargo
-```cargo
-[dependencies]
-clap = "4"
-```
+    #!/usr/bin/env cargo
+    ```cargo
+    [dependencies]
+    clap = "4"
+    ```
 
-// 正常的 Rust 代码
-fn main() {
-    println!("Hello from cargo script!");
-}
+    // 正常的 Rust 代码
+    fn main() {
+        println!("Hello from cargo script!");
+    }
+
 ```
 
 ### 2.2 格式要求
@@ -79,29 +80,31 @@ fn main() {
 ### 2.3 完整清单示例
 
 ```rust
-#!/usr/bin/env cargo
-```cargo
-[package]
-name = "my-script"
-version = "1.0.0"
-edition = "2021"
-authors = ["Your Name <you@example.com>"]
+    #!/usr/bin/env cargo
+    ```cargo
+    [package]
+    name = "my-script"
+    version = "1.0.0"
+    edition = "2021"
+    authors = ["Your Name <you@example.com>"]
 
-[dependencies]
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
-reqwest = { version = "0.11", features = ["blocking"] }
+    [dependencies]
+    serde = { version = "1", features = ["derive"] }
+    serde_json = "1"
+    reqwest = { version = "0.11", features = ["blocking"] }
 
-[profile.release]
-opt-level = 3
-```
-//! 文档注释...
+    [profile.release]
+    opt-level = 3
+    ```
 
-use serde::{Deserialize, Serialize};
+    //! 文档注释...
 
-fn main() {
-    // 代码...
-}
+    use serde::{Deserialize, Serialize};
+
+    fn main() {
+        // 代码...
+    }
+
 ```
 
 ---
@@ -202,7 +205,8 @@ serde_json = "1"
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+# [derive(Debug, Serialize, Deserialize)]
+
 struct User {
     name: String,
     age: u32,
@@ -213,6 +217,7 @@ fn main() {
     let user: User = serde_json::from_str(json).unwrap();
     println!("{:?}", user);
 }
+
 ```
 
 ### 示例 2: HTTP 请求
@@ -225,11 +230,12 @@ reqwest = { version = "0.11", features = ["blocking"] }
 ```
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let body = reqwest::blocking::get("https://api.github.com/users/rust-lang")?
+    let body = reqwest::blocking::get("<https://api.github.com/users/rust-lang>")?
         .text()?;
     println!("{}", body);
     Ok(())
 }
+
 ```
 
 ### 示例 3: 本项目的演示文件
@@ -254,11 +260,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 Cargo Script 会自动缓存编译结果。缓存位置：
 
 ```
+
 # Unix/Linux
+
 ~/.cargo/target/
 
 # Windows
+
 %USERPROFILE%\.cargo\target\
+
 ```
 
 ### 6.3 性能提示
@@ -294,16 +304,17 @@ cargo run --manifest-path script.rs --release
 
 ## 8. 参考文献
 
-1. **Rust Official Documentation**. "Cargo Script".  
+1. **Rust Official Documentation**. "Cargo Script".
    <https://doc.rust-lang.org/cargo/reference/unstable.html#script>
 
 2. **The Rust Programming Language Blog**. "Rust 1.79.0 Release Notes". 2024.
 
-3. **cargo-script Community**. "cargo-run-script: Enhanced script support".  
+3. **cargo-script Community**. "cargo-run-script: Enhanced script support".
    <https://github.com/fornwall/rust-script>
 
 ---
 
 > 📌 **复查记录**
+>
 > - 2026-04-24: 初始创建，基于 Rust 1.96 的 cargo script 稳定功能
 > - 下次复查: 随 Rust 版本更新时复查

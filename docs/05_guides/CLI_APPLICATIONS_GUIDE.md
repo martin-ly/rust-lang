@@ -388,7 +388,7 @@ pub fn get_config() -> Option<&'static CliConfig> {
 }
 ```
 
-**最后更新**: 2026-03-14 (添加 Rust 1.94 深度整合)
+**最后更新**: 2026-03-14 (添加 Rust 1.95+ 持续更新)
 
 ---
 

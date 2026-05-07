@@ -1826,7 +1826,7 @@ fn is_bad_version(_version: i32) -> bool {
     }
     dp[m][n]
 }"#.to_string(),
-        _ => format!("// Problem {} implementation\n// TODO: Implement this problem", problem_id),
+        _ => format!("// Problem {} implementation\n// Placeholder: algorithm not yet implemented", problem_id),
     }
 }
 
@@ -1857,13 +1857,11 @@ fn generate_test_cases(problem_id: u32) -> Vec<TestCase> {
                 explanation: None,
             },
         ],
-        15 => vec![
-            TestCase {
-                input: "nums = [-1,0,1,2,-1,-4]".to_string(),
-                expected_output: "[[-1,-1,2],[-1,0,1]]".to_string(),
-                explanation: Some("三数之和为0的组合".to_string()),
-            },
-        ],
+        15 => vec![TestCase {
+            input: "nums = [-1,0,1,2,-1,-4]".to_string(),
+            expected_output: "[[-1,-1,2],[-1,0,1]]".to_string(),
+            explanation: Some("三数之和为0的组合".to_string()),
+        }],
         20 => vec![
             TestCase {
                 input: "s = \"()\"".to_string(),
@@ -1881,13 +1879,11 @@ fn generate_test_cases(problem_id: u32) -> Vec<TestCase> {
                 explanation: None,
             },
         ],
-        53 => vec![
-            TestCase {
-                input: "nums = [-2,1,-3,4,-1,2,1,-5,4]".to_string(),
-                expected_output: "6".to_string(),
-                explanation: Some("最大子数组和是 [4,-1,2,1] = 6".to_string()),
-            },
-        ],
+        53 => vec![TestCase {
+            input: "nums = [-2,1,-3,4,-1,2,1,-5,4]".to_string(),
+            expected_output: "6".to_string(),
+            explanation: Some("最大子数组和是 [4,-1,2,1] = 6".to_string()),
+        }],
         70 => vec![
             TestCase {
                 input: "n = 2".to_string(),
@@ -1900,454 +1896,328 @@ fn generate_test_cases(problem_id: u32) -> Vec<TestCase> {
                 explanation: Some("有三种方法：1+1+1, 1+2, 2+1".to_string()),
             },
         ],
-        121 => vec![
-            TestCase {
-                input: "prices = [7,1,5,3,6,4]".to_string(),
-                expected_output: "5".to_string(),
-                explanation: Some("在第2天买入，第5天卖出，利润为 6-1=5".to_string()),
-            },
-        ],
-        238 => vec![
-            TestCase {
-                input: "nums = [1,2,3,4]".to_string(),
-                expected_output: "[24,12,8,6]".to_string(),
-                explanation: None,
-            },
-        ],
-        283 => vec![
-            TestCase {
-                input: "nums = [0,1,0,3,12]".to_string(),
-                expected_output: "[1,3,12,0,0]".to_string(),
-                explanation: None,
-            },
-        ],
-        3 => vec![
-            TestCase {
-                input: "s = \"abcabcbb\"".to_string(),
-                expected_output: "3".to_string(),
-                explanation: Some("最长无重复子串是 \"abc\"".to_string()),
-            },
-        ],
-        14 => vec![
-            TestCase {
-                input: "strs = [\"flower\",\"flow\",\"flight\"]".to_string(),
-                expected_output: "\"fl\"".to_string(),
-                explanation: None,
-            },
-        ],
-        26 => vec![
-            TestCase {
-                input: "nums = [1,1,2]".to_string(),
-                expected_output: "2".to_string(),
-                explanation: Some("删除重复项后长度为2".to_string()),
-            },
-        ],
-        27 => vec![
-            TestCase {
-                input: "nums = [3,2,2,3], val = 3".to_string(),
-                expected_output: "2".to_string(),
-                explanation: None,
-            },
-        ],
-        42 => vec![
-            TestCase {
-                input: "height = [0,1,0,2,1,0,1,3,2,1,2,1]".to_string(),
-                expected_output: "6".to_string(),
-                explanation: None,
-            },
-        ],
-        46 => vec![
-            TestCase {
-                input: "nums = [1,2,3]".to_string(),
-                expected_output: "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]".to_string(),
-                explanation: None,
-            },
-        ],
-        49 => vec![
-            TestCase {
-                input: "strs = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]".to_string(),
-                expected_output: "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]".to_string(),
-                explanation: None,
-            },
-        ],
-        54 => vec![
-            TestCase {
-                input: "matrix = [[1,2,3],[4,5,6],[7,8,9]]".to_string(),
-                expected_output: "[1,2,3,6,9,8,7,4,5]".to_string(),
-                explanation: None,
-            },
-        ],
-        56 => vec![
-            TestCase {
-                input: "intervals = [[1,3],[2,6],[8,10],[15,18]]".to_string(),
-                expected_output: "[[1,6],[8,10],[15,18]]".to_string(),
-                explanation: None,
-            },
-        ],
-        69 => vec![
-            TestCase {
-                input: "x = 4".to_string(),
-                expected_output: "2".to_string(),
-                explanation: None,
-            },
-        ],
-        75 => vec![
-            TestCase {
-                input: "nums = [2,0,2,1,1,0]".to_string(),
-                expected_output: "[0,0,1,1,2,2]".to_string(),
-                explanation: None,
-            },
-        ],
-        78 => vec![
-            TestCase {
-                input: "nums = [1,2,3]".to_string(),
-                expected_output: "[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]".to_string(),
-                explanation: None,
-            },
-        ],
-        88 => vec![
-            TestCase {
-                input: "nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3".to_string(),
-                expected_output: "[1,2,2,3,5,6]".to_string(),
-                explanation: None,
-            },
-        ],
-        98 => vec![
-            TestCase {
-                input: "root = [2,1,3]".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        100 => vec![
-            TestCase {
-                input: "p = [1,2,3], q = [1,2,3]".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        101 => vec![
-            TestCase {
-                input: "root = [1,2,2,3,4,4,3]".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        102 => vec![
-            TestCase {
-                input: "root = [3,9,20,null,null,15,7]".to_string(),
-                expected_output: "[[3],[9,20],[15,7]]".to_string(),
-                explanation: None,
-            },
-        ],
-        104 => vec![
-            TestCase {
-                input: "root = [3,9,20,null,null,15,7]".to_string(),
-                expected_output: "3".to_string(),
-                explanation: None,
-            },
-        ],
-        125 => vec![
-            TestCase {
-                input: "s = \"A man, a plan, a canal: Panama\"".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        136 => vec![
-            TestCase {
-                input: "nums = [2,2,1]".to_string(),
-                expected_output: "1".to_string(),
-                explanation: None,
-            },
-        ],
-        141 => vec![
-            TestCase {
-                input: "head = [3,2,0,-4], pos = 1".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        198 => vec![
-            TestCase {
-                input: "nums = [2,7,9,3,1]".to_string(),
-                expected_output: "12".to_string(),
-                explanation: None,
-            },
-        ],
-        200 => vec![
-            TestCase {
-                input: "grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]".to_string(),
-                expected_output: "1".to_string(),
-                explanation: None,
-            },
-        ],
-        202 => vec![
-            TestCase {
-                input: "n = 19".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        215 => vec![
-            TestCase {
-                input: "nums = [3,2,1,5,6,4], k = 2".to_string(),
-                expected_output: "5".to_string(),
-                explanation: None,
-            },
-        ],
-        217 => vec![
-            TestCase {
-                input: "nums = [1,2,3,1]".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        226 => vec![
-            TestCase {
-                input: "root = [4,2,7,1,3,6,9]".to_string(),
-                expected_output: "[4,7,2,9,6,3,1]".to_string(),
-                explanation: None,
-            },
-        ],
-        234 => vec![
-            TestCase {
-                input: "head = [1,2,2,1]".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        235 => vec![
-            TestCase {
-                input: "root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8".to_string(),
-                expected_output: "6".to_string(),
-                explanation: None,
-            },
-        ],
-        242 => vec![
-            TestCase {
-                input: "s = \"anagram\", t = \"nagaram\"".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        268 => vec![
-            TestCase {
-                input: "nums = [3,0,1]".to_string(),
-                expected_output: "2".to_string(),
-                explanation: None,
-            },
-        ],
-        300 => vec![
-            TestCase {
-                input: "nums = [10,9,2,5,3,7,101,18]".to_string(),
-                expected_output: "4".to_string(),
-                explanation: Some("最长递增子序列是 [2,3,7,101]".to_string()),
-            },
-        ],
-        322 => vec![
-            TestCase {
-                input: "coins = [1,2,5], amount = 11".to_string(),
-                expected_output: "3".to_string(),
-                explanation: Some("11 = 5 + 5 + 1".to_string()),
-            },
-        ],
-        344 => vec![
-            TestCase {
-                input: "s = [\"h\",\"e\",\"l\",\"l\",\"o\"]".to_string(),
-                expected_output: "[\"o\",\"l\",\"l\",\"e\",\"h\"]".to_string(),
-                explanation: None,
-            },
-        ],
-        347 => vec![
-            TestCase {
-                input: "nums = [1,1,1,2,2,3], k = 2".to_string(),
-                expected_output: "[1,2]".to_string(),
-                explanation: None,
-            },
-        ],
-        349 => vec![
-            TestCase {
-                input: "nums1 = [1,2,2,1], nums2 = [2,2]".to_string(),
-                expected_output: "[2]".to_string(),
-                explanation: None,
-            },
-        ],
-        350 => vec![
-            TestCase {
-                input: "nums1 = [1,2,2,1], nums2 = [2,2]".to_string(),
-                expected_output: "[2,2]".to_string(),
-                explanation: None,
-            },
-        ],
-        367 => vec![
-            TestCase {
-                input: "num = 16".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        371 => vec![
-            TestCase {
-                input: "a = 1, b = 2".to_string(),
-                expected_output: "3".to_string(),
-                explanation: None,
-            },
-        ],
-        383 => vec![
-            TestCase {
-                input: "ransomNote = \"a\", magazine = \"b\"".to_string(),
-                expected_output: "false".to_string(),
-                explanation: None,
-            },
-        ],
-        387 => vec![
-            TestCase {
-                input: "s = \"leetcode\"".to_string(),
-                expected_output: "0".to_string(),
-                explanation: None,
-            },
-        ],
-        392 => vec![
-            TestCase {
-                input: "s = \"ace\", t = \"abcde\"".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        409 => vec![
-            TestCase {
-                input: "s = \"abccccdd\"".to_string(),
-                expected_output: "7".to_string(),
-                explanation: None,
-            },
-        ],
-        415 => vec![
-            TestCase {
-                input: "num1 = \"11\", num2 = \"123\"".to_string(),
-                expected_output: "\"134\"".to_string(),
-                explanation: None,
-            },
-        ],
-        438 => vec![
-            TestCase {
-                input: "s = \"cbaebabacd\", p = \"abc\"".to_string(),
-                expected_output: "[0,6]".to_string(),
-                explanation: None,
-            },
-        ],
-        448 => vec![
-            TestCase {
-                input: "nums = [4,3,2,7,8,2,3,1]".to_string(),
-                expected_output: "[5,6]".to_string(),
-                explanation: None,
-            },
-        ],
-        461 => vec![
-            TestCase {
-                input: "x = 1, y = 4".to_string(),
-                expected_output: "2".to_string(),
-                explanation: None,
-            },
-        ],
-        485 => vec![
-            TestCase {
-                input: "nums = [1,1,0,1,1,1]".to_string(),
-                expected_output: "3".to_string(),
-                explanation: None,
-            },
-        ],
-        509 => vec![
-            TestCase {
-                input: "n = 2".to_string(),
-                expected_output: "1".to_string(),
-                explanation: None,
-            },
-        ],
-        543 => vec![
-            TestCase {
-                input: "root = [1,2,3,4,5]".to_string(),
-                expected_output: "3".to_string(),
-                explanation: None,
-            },
-        ],
-        567 => vec![
-            TestCase {
-                input: "s1 = \"ab\", s2 = \"eidbaooo\"".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        617 => vec![
-            TestCase {
-                input: "root1 = [1,3,2,5], root2 = [2,1,3,null,4,null,7]".to_string(),
-                expected_output: "[3,4,5,5,4,null,7]".to_string(),
-                explanation: None,
-            },
-        ],
-        647 => vec![
-            TestCase {
-                input: "s = \"abc\"".to_string(),
-                expected_output: "3".to_string(),
-                explanation: Some("三个回文子串: \"a\", \"b\", \"c\"".to_string()),
-            },
-        ],
-        739 => vec![
-            TestCase {
-                input: "temperatures = [73,74,75,71,69,72,76,73]".to_string(),
-                expected_output: "[1,1,4,2,1,1,0,0]".to_string(),
-                explanation: None,
-            },
-        ],
-        771 => vec![
-            TestCase {
-                input: "jewels = \"aA\", stones = \"aAAbbbb\"".to_string(),
-                expected_output: "3".to_string(),
-                explanation: None,
-            },
-        ],
-        844 => vec![
-            TestCase {
-                input: "s = \"ab#c\", t = \"ad#c\"".to_string(),
-                expected_output: "true".to_string(),
-                explanation: None,
-            },
-        ],
-        905 => vec![
-            TestCase {
-                input: "nums = [3,1,2,4]".to_string(),
-                expected_output: "[2,4,3,1]".to_string(),
-                explanation: None,
-            },
-        ],
-        977 => vec![
-            TestCase {
-                input: "nums = [-4,-1,0,3,10]".to_string(),
-                expected_output: "[0,1,9,16,100]".to_string(),
-                explanation: None,
-            },
-        ],
-        994 => vec![
-            TestCase {
-                input: "grid = [[2,1,1],[1,1,0],[0,1,1]]".to_string(),
-                expected_output: "4".to_string(),
-                explanation: None,
-            },
-        ],
-        1046 => vec![
-            TestCase {
-                input: "stones = [2,7,4,1,8,1]".to_string(),
-                expected_output: "1".to_string(),
-                explanation: None,
-            },
-        ],
-        1143 => vec![
-            TestCase {
-                input: "text1 = \"abcde\", text2 = \"ace\"".to_string(),
-                expected_output: "3".to_string(),
-                explanation: Some("最长公共子序列是 \"ace\"".to_string()),
-            },
-        ],
+        121 => vec![TestCase {
+            input: "prices = [7,1,5,3,6,4]".to_string(),
+            expected_output: "5".to_string(),
+            explanation: Some("在第2天买入，第5天卖出，利润为 6-1=5".to_string()),
+        }],
+        238 => vec![TestCase {
+            input: "nums = [1,2,3,4]".to_string(),
+            expected_output: "[24,12,8,6]".to_string(),
+            explanation: None,
+        }],
+        283 => vec![TestCase {
+            input: "nums = [0,1,0,3,12]".to_string(),
+            expected_output: "[1,3,12,0,0]".to_string(),
+            explanation: None,
+        }],
+        3 => vec![TestCase {
+            input: "s = \"abcabcbb\"".to_string(),
+            expected_output: "3".to_string(),
+            explanation: Some("最长无重复子串是 \"abc\"".to_string()),
+        }],
+        14 => vec![TestCase {
+            input: "strs = [\"flower\",\"flow\",\"flight\"]".to_string(),
+            expected_output: "\"fl\"".to_string(),
+            explanation: None,
+        }],
+        26 => vec![TestCase {
+            input: "nums = [1,1,2]".to_string(),
+            expected_output: "2".to_string(),
+            explanation: Some("删除重复项后长度为2".to_string()),
+        }],
+        27 => vec![TestCase {
+            input: "nums = [3,2,2,3], val = 3".to_string(),
+            expected_output: "2".to_string(),
+            explanation: None,
+        }],
+        42 => vec![TestCase {
+            input: "height = [0,1,0,2,1,0,1,3,2,1,2,1]".to_string(),
+            expected_output: "6".to_string(),
+            explanation: None,
+        }],
+        46 => vec![TestCase {
+            input: "nums = [1,2,3]".to_string(),
+            expected_output: "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]".to_string(),
+            explanation: None,
+        }],
+        49 => vec![TestCase {
+            input: "strs = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]".to_string(),
+            expected_output: "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]".to_string(),
+            explanation: None,
+        }],
+        54 => vec![TestCase {
+            input: "matrix = [[1,2,3],[4,5,6],[7,8,9]]".to_string(),
+            expected_output: "[1,2,3,6,9,8,7,4,5]".to_string(),
+            explanation: None,
+        }],
+        56 => vec![TestCase {
+            input: "intervals = [[1,3],[2,6],[8,10],[15,18]]".to_string(),
+            expected_output: "[[1,6],[8,10],[15,18]]".to_string(),
+            explanation: None,
+        }],
+        69 => vec![TestCase {
+            input: "x = 4".to_string(),
+            expected_output: "2".to_string(),
+            explanation: None,
+        }],
+        75 => vec![TestCase {
+            input: "nums = [2,0,2,1,1,0]".to_string(),
+            expected_output: "[0,0,1,1,2,2]".to_string(),
+            explanation: None,
+        }],
+        78 => vec![TestCase {
+            input: "nums = [1,2,3]".to_string(),
+            expected_output: "[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]".to_string(),
+            explanation: None,
+        }],
+        88 => vec![TestCase {
+            input: "nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3".to_string(),
+            expected_output: "[1,2,2,3,5,6]".to_string(),
+            explanation: None,
+        }],
+        98 => vec![TestCase {
+            input: "root = [2,1,3]".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        100 => vec![TestCase {
+            input: "p = [1,2,3], q = [1,2,3]".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        101 => vec![TestCase {
+            input: "root = [1,2,2,3,4,4,3]".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        102 => vec![TestCase {
+            input: "root = [3,9,20,null,null,15,7]".to_string(),
+            expected_output: "[[3],[9,20],[15,7]]".to_string(),
+            explanation: None,
+        }],
+        104 => vec![TestCase {
+            input: "root = [3,9,20,null,null,15,7]".to_string(),
+            expected_output: "3".to_string(),
+            explanation: None,
+        }],
+        125 => vec![TestCase {
+            input: "s = \"A man, a plan, a canal: Panama\"".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        136 => vec![TestCase {
+            input: "nums = [2,2,1]".to_string(),
+            expected_output: "1".to_string(),
+            explanation: None,
+        }],
+        141 => vec![TestCase {
+            input: "head = [3,2,0,-4], pos = 1".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        198 => vec![TestCase {
+            input: "nums = [2,7,9,3,1]".to_string(),
+            expected_output: "12".to_string(),
+            explanation: None,
+        }],
+        200 => vec![TestCase {
+            input: "grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\"\
+                    ,\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]"
+                .to_string(),
+            expected_output: "1".to_string(),
+            explanation: None,
+        }],
+        202 => vec![TestCase {
+            input: "n = 19".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        215 => vec![TestCase {
+            input: "nums = [3,2,1,5,6,4], k = 2".to_string(),
+            expected_output: "5".to_string(),
+            explanation: None,
+        }],
+        217 => vec![TestCase {
+            input: "nums = [1,2,3,1]".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        226 => vec![TestCase {
+            input: "root = [4,2,7,1,3,6,9]".to_string(),
+            expected_output: "[4,7,2,9,6,3,1]".to_string(),
+            explanation: None,
+        }],
+        234 => vec![TestCase {
+            input: "head = [1,2,2,1]".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        235 => vec![TestCase {
+            input: "root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8".to_string(),
+            expected_output: "6".to_string(),
+            explanation: None,
+        }],
+        242 => vec![TestCase {
+            input: "s = \"anagram\", t = \"nagaram\"".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        268 => vec![TestCase {
+            input: "nums = [3,0,1]".to_string(),
+            expected_output: "2".to_string(),
+            explanation: None,
+        }],
+        300 => vec![TestCase {
+            input: "nums = [10,9,2,5,3,7,101,18]".to_string(),
+            expected_output: "4".to_string(),
+            explanation: Some("最长递增子序列是 [2,3,7,101]".to_string()),
+        }],
+        322 => vec![TestCase {
+            input: "coins = [1,2,5], amount = 11".to_string(),
+            expected_output: "3".to_string(),
+            explanation: Some("11 = 5 + 5 + 1".to_string()),
+        }],
+        344 => vec![TestCase {
+            input: "s = [\"h\",\"e\",\"l\",\"l\",\"o\"]".to_string(),
+            expected_output: "[\"o\",\"l\",\"l\",\"e\",\"h\"]".to_string(),
+            explanation: None,
+        }],
+        347 => vec![TestCase {
+            input: "nums = [1,1,1,2,2,3], k = 2".to_string(),
+            expected_output: "[1,2]".to_string(),
+            explanation: None,
+        }],
+        349 => vec![TestCase {
+            input: "nums1 = [1,2,2,1], nums2 = [2,2]".to_string(),
+            expected_output: "[2]".to_string(),
+            explanation: None,
+        }],
+        350 => vec![TestCase {
+            input: "nums1 = [1,2,2,1], nums2 = [2,2]".to_string(),
+            expected_output: "[2,2]".to_string(),
+            explanation: None,
+        }],
+        367 => vec![TestCase {
+            input: "num = 16".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        371 => vec![TestCase {
+            input: "a = 1, b = 2".to_string(),
+            expected_output: "3".to_string(),
+            explanation: None,
+        }],
+        383 => vec![TestCase {
+            input: "ransomNote = \"a\", magazine = \"b\"".to_string(),
+            expected_output: "false".to_string(),
+            explanation: None,
+        }],
+        387 => vec![TestCase {
+            input: "s = \"leetcode\"".to_string(),
+            expected_output: "0".to_string(),
+            explanation: None,
+        }],
+        392 => vec![TestCase {
+            input: "s = \"ace\", t = \"abcde\"".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        409 => vec![TestCase {
+            input: "s = \"abccccdd\"".to_string(),
+            expected_output: "7".to_string(),
+            explanation: None,
+        }],
+        415 => vec![TestCase {
+            input: "num1 = \"11\", num2 = \"123\"".to_string(),
+            expected_output: "\"134\"".to_string(),
+            explanation: None,
+        }],
+        438 => vec![TestCase {
+            input: "s = \"cbaebabacd\", p = \"abc\"".to_string(),
+            expected_output: "[0,6]".to_string(),
+            explanation: None,
+        }],
+        448 => vec![TestCase {
+            input: "nums = [4,3,2,7,8,2,3,1]".to_string(),
+            expected_output: "[5,6]".to_string(),
+            explanation: None,
+        }],
+        461 => vec![TestCase {
+            input: "x = 1, y = 4".to_string(),
+            expected_output: "2".to_string(),
+            explanation: None,
+        }],
+        485 => vec![TestCase {
+            input: "nums = [1,1,0,1,1,1]".to_string(),
+            expected_output: "3".to_string(),
+            explanation: None,
+        }],
+        509 => vec![TestCase {
+            input: "n = 2".to_string(),
+            expected_output: "1".to_string(),
+            explanation: None,
+        }],
+        543 => vec![TestCase {
+            input: "root = [1,2,3,4,5]".to_string(),
+            expected_output: "3".to_string(),
+            explanation: None,
+        }],
+        567 => vec![TestCase {
+            input: "s1 = \"ab\", s2 = \"eidbaooo\"".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        617 => vec![TestCase {
+            input: "root1 = [1,3,2,5], root2 = [2,1,3,null,4,null,7]".to_string(),
+            expected_output: "[3,4,5,5,4,null,7]".to_string(),
+            explanation: None,
+        }],
+        647 => vec![TestCase {
+            input: "s = \"abc\"".to_string(),
+            expected_output: "3".to_string(),
+            explanation: Some("三个回文子串: \"a\", \"b\", \"c\"".to_string()),
+        }],
+        739 => vec![TestCase {
+            input: "temperatures = [73,74,75,71,69,72,76,73]".to_string(),
+            expected_output: "[1,1,4,2,1,1,0,0]".to_string(),
+            explanation: None,
+        }],
+        771 => vec![TestCase {
+            input: "jewels = \"aA\", stones = \"aAAbbbb\"".to_string(),
+            expected_output: "3".to_string(),
+            explanation: None,
+        }],
+        844 => vec![TestCase {
+            input: "s = \"ab#c\", t = \"ad#c\"".to_string(),
+            expected_output: "true".to_string(),
+            explanation: None,
+        }],
+        905 => vec![TestCase {
+            input: "nums = [3,1,2,4]".to_string(),
+            expected_output: "[2,4,3,1]".to_string(),
+            explanation: None,
+        }],
+        977 => vec![TestCase {
+            input: "nums = [-4,-1,0,3,10]".to_string(),
+            expected_output: "[0,1,9,16,100]".to_string(),
+            explanation: None,
+        }],
+        994 => vec![TestCase {
+            input: "grid = [[2,1,1],[1,1,0],[0,1,1]]".to_string(),
+            expected_output: "4".to_string(),
+            explanation: None,
+        }],
+        1046 => vec![TestCase {
+            input: "stones = [2,7,4,1,8,1]".to_string(),
+            expected_output: "1".to_string(),
+            explanation: None,
+        }],
+        1143 => vec![TestCase {
+            input: "text1 = \"abcde\", text2 = \"ace\"".to_string(),
+            expected_output: "3".to_string(),
+            explanation: Some("最长公共子序列是 \"ace\"".to_string()),
+        }],
         _ => vec![],
     }
 }

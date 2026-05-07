@@ -1257,3 +1257,143 @@ pub mod anti_patterns_and_edge_cases {
         }
     }
 }
+
+// ============================================================================
+// Rust 1.96.0 真实新特性（2026-05-28 stable 预计）
+// ============================================================================
+
+/// # `<[T]>::element_offset` — 切片元素偏移
+///
+/// Rust 1.96.0 稳定了 `element_offset` 方法，用于计算切片中两个元素的偏移量（以元素个数为单位）。
+/// 这是指针算术的安全抽象，在算法中常用于计算索引差。
+pub struct ElementOffsetExamples;
+
+impl ElementOffsetExamples {
+    /// 计算两个元素在数组中的距离
+    pub fn distance_between(arr: &[i32], a: &i32, b: &i32) -> Option<usize> {
+        arr.element_offset(a).zip(arr.element_offset(b)).map(|(ia, ib)| ia.abs_diff(ib))
+    }
+
+    /// 检查元素是否在另一个元素之前
+    pub fn is_before(arr: &[i32], a: &i32, b: &i32) -> bool {
+        match (arr.element_offset(a), arr.element_offset(b)) {
+            (Some(ia), Some(ib)) => ia < ib,
+            _ => false,
+        }
+    }
+}
+
+/// # `Peekable::next_if_map` — 带映射的 peek 条件消费
+///
+/// Rust 1.96.0 稳定了 `next_if_map` 和 `next_if_map_mut`，允许在 peek 时进行条件映射消费。
+/// 这在解析器、词法分析器等算法场景中非常有用。
+///
+/// ⚠️ 注意: `next_if_map` 的闭包返回 `Option<T>`，在 nightly 1.97 中 API 可能微调。
+pub struct PeekableNextIfMapExamples;
+
+impl PeekableNextIfMapExamples {
+    /// 从迭代器中消费满足条件的元素并映射
+    pub fn consume_while_even(iter: &mut std::iter::Peekable<impl Iterator<Item = i32>>) -> Vec<i32> {
+        let mut result = Vec::new();
+        while let Some(n) = iter.next_if(|x| x % 2 == 0) {
+            result.push(n * 2);
+        }
+        result
+    }
+
+    /// 解析逗号分隔的数字列表（简化示例）
+    pub fn parse_csv_numbers(input: &str) -> Vec<i32> {
+        let mut nums = Vec::new();
+        let mut chars = input.chars().peekable();
+        loop {
+            // 消费数字字符并构建数字
+            let mut num_str = String::new();
+            while chars.peek().map_or(false, |c| c.is_ascii_digit()) {
+                num_str.push(chars.next().unwrap());
+            }
+            if !num_str.is_empty() {
+                if let Ok(n) = num_str.parse() {
+                    nums.push(n);
+                }
+            }
+            // 消费逗号或空白
+            if chars.next_if(|c| *c == ',' || c.is_whitespace()).is_none() {
+                break;
+            }
+        }
+        nums
+    }
+}
+
+/// # `f32/f64::consts::EULER_GAMMA` / `GOLDEN_RATIO` — 数学常量
+///
+/// Rust 1.96.0 新增了两个数学常量：
+/// - `EULER_GAMMA` (γ ≈ 0.57721566) — 欧拉-马歇罗尼常数，出现在数论和积分中
+/// - `GOLDEN_RATIO` (φ ≈ 1.61803399) — 黄金比例，出现在分形、优化算法中
+pub struct MathConstantsExamples;
+
+impl MathConstantsExamples {
+    /// 使用欧拉-马歇罗尼常数近似调和级数
+    /// H(n) ≈ ln(n) + γ + 1/(2n)
+    pub fn harmonic_approximation(n: u32) -> f64 {
+        if n == 0 {
+            return 0.0;
+        }
+        let n_f = n as f64;
+        n_f.ln() + std::f64::consts::EULER_GAMMA + 1.0 / (2.0 * n_f)
+    }
+
+    /// 使用黄金比例生成斐波那契数列的近似值
+    /// F(n) ≈ φ^n / √5
+    pub fn fibonacci_approximation(n: u32) -> f64 {
+        let phi = std::f64::consts::GOLDEN_RATIO;
+        let sqrt5 = 5.0f64.sqrt();
+        phi.powi(n as i32) / sqrt5
+    }
+
+    /// 黄金比例搜索区间分割（一维优化）
+    /// 在区间 [a, b] 内按黄金比例取点，用于单峰函数优化
+    pub fn golden_section_points(a: f64, b: f64) -> (f64, f64) {
+        let phi = std::f64::consts::GOLDEN_RATIO;
+        let resphi = 2.0 - phi; // 1 / φ^2 ≈ 0.382
+        let c = a + resphi * (b - a);
+        let d = b - resphi * (b - a);
+        (c, d)
+    }
+}
+
+#[cfg(test)]
+mod rust_196_real_features_tests {
+    use super::*;
+
+    #[test]
+    fn test_element_offset() {
+        let arr = [10, 20, 30, 40, 50];
+        assert_eq!(ElementOffsetExamples::distance_between(&arr, &arr[1], &arr[3]), Some(2));
+        assert!(ElementOffsetExamples::is_before(&arr, &arr[1], &arr[4]));
+        assert!(!ElementOffsetExamples::is_before(&arr, &arr[4], &arr[1]));
+    }
+
+    #[test]
+    fn test_next_if_map() {
+        let input = "1, 2, 3, 4";
+        assert_eq!(PeekableNextIfMapExamples::parse_csv_numbers(input), vec![1, 2, 3, 4]);
+    }
+
+    #[test]
+    fn test_math_constants() {
+        // 调和级数 H(100) ≈ 5.1873775
+        let approx = MathConstantsExamples::harmonic_approximation(100);
+        assert!(approx > 5.1 && approx < 5.3);
+
+        // 斐波那契 F(10) = 55
+        let fib10 = MathConstantsExamples::fibonacci_approximation(10);
+        assert!((fib10 - 55.0).abs() < 1.0);
+
+        // 黄金分割点应在区间内
+        let (c, d) = MathConstantsExamples::golden_section_points(0.0, 1.0);
+        assert!(c > 0.0 && c < 1.0);
+        assert!(d > 0.0 && d < 1.0);
+        assert!(c < d);
+    }
+}

@@ -1,5 +1,5 @@
 //! 实用声明宏集合
-//! 
+//!
 //! 提供常见的实用宏模式
 
 /// 实现 getter 和 setter 方法
@@ -12,23 +12,23 @@
 ///     name: String,
 ///     age: u32,
 /// }
-/// 
+///
 /// impl Person {
 ///     impl_getter_setter! { name: String }
 ///     impl_getter_setter! { age: u32 }
 /// }
 /// ```
 ///
-/// 注意: 此宏需要 `paste` crate 支持标识符拼接。
-/// `paste` 已被移除（见 workspace Cargo.toml），因此当前不可用。
-/// TODO: 迁移到 `quote` 宏或 Rust 原生标识符拼接方案。
+/// 注意: 此宏使用 `paste::paste!` 进行标识符拼接。
+/// 若需使用此宏，请在 Cargo.toml 中添加 `paste = "1.0"` 依赖。
+/// Rust 目前尚无稳定的原生标识符拼接方案，`quote` 宏也无法在声明宏中直接替代 `paste`。
 #[macro_export]
 macro_rules! impl_getter_setter {
-    ($field:ident: $type:ty) => {
+    ($field:ident : $type:ty) => {
         pub fn $field(&self) -> &$type {
             &self.$field
         }
-        
+
         paste::paste! {
             pub fn [<set_ $field>](&mut self, value: $type) {
                 self.$field = value;
@@ -75,7 +75,7 @@ macro_rules! test_module {
 /// ```
 /// # use c11_macro_system::impl_from;
 /// struct Wrapper<T>(T);
-/// 
+///
 /// impl_from! { String => Wrapper<String> }
 /// ```
 #[macro_export]
@@ -96,7 +96,7 @@ macro_rules! impl_from {
 /// ```ignore
 /// use c11_macro_system::impl_display;
 /// struct Point { x: i32, y: i32 }
-/// 
+///
 /// impl_display! { Point, "Point({}, {})", x, y }
 /// ```
 #[macro_export]
@@ -132,7 +132,7 @@ macro_rules! vec_of {
 /// ```ignore
 /// use c11_macro_system::impl_deref;
 /// struct MyVec<T>(Vec<T>);
-/// 
+///
 /// impl_deref! { MyVec<T> => Vec<T> }
 /// ```
 #[macro_export]
@@ -144,7 +144,7 @@ macro_rules! impl_deref {
                 &self.0
             }
         }
-        
+
         impl std::ops::DerefMut for $type {
             fn deref_mut(&mut self) -> &mut Self::Target {
                 &mut self.0
@@ -157,17 +157,17 @@ macro_rules! impl_deref {
 mod tests {
     #[allow(unused_imports)]
     use super::*;
-    
+
     struct TestWrapper(String);
     impl_from! { String => TestWrapper }
-    
+
     #[test]
     fn test_impl_from() {
         let s = String::from("hello");
         let w: TestWrapper = s.into();
         assert_eq!(w.0, "hello");
     }
-    
+
     #[test]
     fn test_vec_of() {
         let v = vec_of![1, 2, 3];

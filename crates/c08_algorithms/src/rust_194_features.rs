@@ -59,7 +59,7 @@ impl SlidingWindowAlgorithms {
 
     /// 最长连续递增子序列（使用窗口检测）
     ///
-    /// Rust 1.94.0: array_windows::<2>() 返回 [&T; 2] 便于比较相邻元素
+    /// Rust 1.96.0: array_windows::<2>() 返回 [&T; 2] 便于比较相邻元素
     pub fn longest_increasing_subsequence(data: &[i32]) -> (usize, usize) {
         if data.len() <= 1 {
             return (0, data.len());
@@ -94,7 +94,7 @@ impl SlidingWindowAlgorithms {
 
     /// 检测模式重复（使用 KMP 算法的窗口版本）
     ///
-    /// Rust 1.94.0: array_windows 简化模式匹配
+    /// Rust 1.96.0: array_windows 简化模式匹配
     pub fn find_pattern_occurrences(pattern: &[i32], data: &[i32]) -> Vec<usize> {
         if pattern.is_empty() || data.len() < pattern.len() {
             return Vec::new();
@@ -114,7 +114,7 @@ impl SlidingWindowAlgorithms {
 
     /// 移动中位数算法（使用 3 点窗口）
     ///
-    /// Rust 1.94.0: array_windows::<3>() 便于计算中位数
+    /// Rust 1.96.0: array_windows::<3>() 便于计算中位数
     pub fn moving_median(data: &[i32]) -> Vec<f64> {
         data.array_windows::<3>()
             .map(|[a, b, c]| {
@@ -127,7 +127,7 @@ impl SlidingWindowAlgorithms {
 
     /// 计算变化点（使用二阶差分窗口）
     ///
-    /// Rust 1.94.0: array_windows::<3>() 用于计算二阶差分
+    /// Rust 1.96.0: array_windows::<3>() 用于计算二阶差分
     pub fn detect_change_points(data: &[f64], threshold: f64) -> Vec<usize> {
         let mut change_points = Vec::new();
 
@@ -147,7 +147,7 @@ impl SlidingWindowAlgorithms {
 
     /// 最大子数组和（Kadane 算法的窗口优化）
     ///
-    /// Rust 1.94.0: array_windows::<2>() 用于相邻元素比较
+    /// Rust 1.96.0: array_windows::<2>() 用于相邻元素比较
     pub fn max_subarray_sum(data: &[i32]) -> (i32, usize, usize) {
         if data.is_empty() {
             return (0, 0, 0);
@@ -187,7 +187,7 @@ pub struct StringWindowAlgorithms;
 impl StringWindowAlgorithms {
     /// 查找所有长度为 n 的不同子串
     ///
-    /// Rust 1.94.0: array_windows 返回字符数组
+    /// Rust 1.96.0: array_windows 返回字符数组
     pub fn find_distinct_substrings(s: &str, window_size: usize) -> Vec<String> {
         let chars: Vec<char> = s.chars().collect();
         let mut seen = HashMap::new();
@@ -202,7 +202,7 @@ impl StringWindowAlgorithms {
 
     /// 查找回文子串（使用窗口检测）
     ///
-    /// Rust 1.94.0: array_windows 便于对称性检查
+    /// Rust 1.96.0: array_windows 便于对称性检查
     pub fn find_palindromic_windows(s: &str, window_size: usize) -> Vec<(usize, String)> {
         let chars: Vec<char> = s.chars().collect();
         let mut palindromes = Vec::new();
@@ -219,7 +219,7 @@ impl StringWindowAlgorithms {
 
     /// 编辑距离窗口分析
     ///
-    /// Rust 1.94.0: array_windows::<2>() 用于比较相邻字符串片段
+    /// Rust 1.96.0: array_windows::<2>() 用于比较相邻字符串片段
     pub fn analyze_string_transitions(s: &str, window_size: usize) -> Vec<f64> {
         let chars: Vec<char> = s.chars().collect();
         let mut transitions = Vec::new();
@@ -292,7 +292,7 @@ pub fn demonstrate_array_windows_algorithms() {
 
 /// # 2. LazyCell 在算法缓存中的应用 / LazyCell in Algorithm Caching
 ///
-/// Rust 1.94.0 为 LazyCell 添加了新方法，使其在算法缓存中更加灵活。
+/// Rust 1.96.0 为 LazyCell 添加了新方法，使其在算法缓存中更加灵活。
 /// 斐波那契缓存
 ///
 /// Rust 1.94.0: 使用 HashMap 实现真正的斐波那契数缓存
@@ -341,7 +341,7 @@ impl FibonacciCache {
 
 /// 算法结果缓存
 ///
-/// Rust 1.94.0: 使用 LazyLock 实现线程安全缓存
+/// Rust 1.96.0: 使用 LazyLock 实现线程安全缓存
 pub struct AlgorithmResultCache<K, V> {
     #[allow(dead_code)]
     cache: LazyLock<HashMap<K, V>>,

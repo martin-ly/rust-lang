@@ -716,7 +716,7 @@ pub fn aligned_buffer_size(min_size: usize) -> usize {
 
 **最佳实践**: 在内联汇编中使用 LazyLock 缓存 CPU 特性检测结果，避免重复执行 cpuid 指令。
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (深度整合 Rust 1.95+ 特性)
 
 ---
 

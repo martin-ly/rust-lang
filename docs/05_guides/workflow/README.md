@@ -66,7 +66,7 @@ pub fn get_workflow_config() -> Option<&'static WorkflowConfig> {
 }
 ```
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (深度整合 Rust 1.95+ 特性)
 
 ---
 

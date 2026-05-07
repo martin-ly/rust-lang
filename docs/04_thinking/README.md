@@ -98,7 +98,7 @@ fn verify_memory_safety() -> bool {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## Rust 1.95+ 持续更新更新
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -127,10 +127,10 @@ fn verify_memory_safety() -> bool {
 #### 相关文档
 
 - [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
-- [Rust 1.94 特性速查](../02_reference/quick_reference/rust_194_features_cheatsheet.md)
+- [Rust 1.95+ 特性速查](../02_reference/quick_reference/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+**最后更新**: 2026-03-14 (Rust 1.95+ 持续更新)

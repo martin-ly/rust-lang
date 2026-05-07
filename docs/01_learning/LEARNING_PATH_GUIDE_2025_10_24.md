@@ -143,7 +143,7 @@ async fn use_async_fn_trait() {
 ```
 1. 快速复习 C04 (泛型) + C05 (并发)
       ↓
-2. Rust 1.94 特性 (array_windows, ControlFlow, LazyLock)
+2. Rust 1.95+ 特性 (array_windows, ControlFlow, LazyLock)
       ↓
 3. Rust 历史特性复习 (isqrt ≥1.84, get_disjoint_mut ≥1.83, async Fn ≥1.85 Ed 2024)
       ↓

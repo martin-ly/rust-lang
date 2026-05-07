@@ -58,7 +58,7 @@
     - [3. 类型状态模式 (Type State)](#3-类型状态模式-type-state)
     - [4. Builder 模式（消耗型 vs 非消耗型）](#4-builder-模式消耗型-vs-非消耗型)
   - [📚 相关文档](#-相关文档)
-  - [🆕 Rust 1.94 特性在设计模式中的应用](#-rust-194-特性在设计模式中的应用)
+  - [🆕 Rust 1.95+ 特性在设计模式中的应用](#-rust-194-特性在设计模式中的应用)
     - [1. rray\_windows() 在滑动窗口模式中的应用](#1-rray_windows-在滑动窗口模式中的应用)
       - [传统实现 vs Rust 1.94 实现](#传统实现-vs-rust-194-实现)
       - [生产示例：股票价格趋势检测](#生产示例股票价格趋势检测)
@@ -2131,7 +2131,7 @@ let req2 = builder.build()?; // 可以重用
 - [Rust 特有模式](../../crates/c09_design_pattern/docs/tier_02_guides/05_最佳实践与反模式.md)
 - [设计模式形式化文档](../research_notes/software_design_theory/01_design_patterns_formal/README.md) - 23种设计模式的形式化定义与分析
 
-## 🆕 Rust 1.94 特性在设计模式中的应用
+## 🆕 Rust 1.95+ 特性在设计模式中的应用
 
 > **适用版本**: Rust 1.94.0+
 

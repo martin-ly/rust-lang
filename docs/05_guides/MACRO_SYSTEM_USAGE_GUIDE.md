@@ -52,7 +52,7 @@
     - [3. 错误处理](#3-错误处理)
     - [4. 可见性控制](#4-可见性控制)
   - [📚 相关文档](#-相关文档)
-  - [🆕 Rust 1.94 特性](#-rust-194-特性)
+  - [🆕 Rust 1.95+ 特性](#-rust-194-特性)
     - [新特性概览](#新特性概览)
     - [代码示例](#代码示例)
   - [🆕 Rust 1.94 在宏系统中的应用](#-rust-194-在宏系统中的应用)
@@ -811,7 +811,7 @@ macro_rules! public_macro {
 - [过程宏指南](../../crates/c11_macro_system/docs/tier_02_guides/02_Derive宏开发指南.md)
 - [宏系统思维导图](../research_notes/formal_methods/MACRO_SYSTEM_MINDMAP.md) - 宏扩展过程的形式化分析
 
-## 🆕 Rust 1.94 特性
+## 🆕 Rust 1.95+ 特性
 
 > **适用版本**: Rust 1.94.0+
 
@@ -843,7 +843,7 @@ let result = items.iter().try_for_each(|&n| {
 });
 `
 
-**最后更新**: 2026-03-14 (添加 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (添加 Rust 1.95+ 特性)
 
 ---
 
@@ -914,7 +914,7 @@ fn validate_macro_rules(rules: &[MacroRule]) -> ControlFlow<MacroError, ()> {
 
 **最佳实践**: 在过程宏中使用 `LazyLock` 管理全局状态，使用 `ControlFlow` 处理多阶段验证。
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (深度整合 Rust 1.95+ 特性)
 
 ---
 

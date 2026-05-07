@@ -435,3 +435,57 @@ mod tests {
         );
     }
 }
+
+// ============================================================================
+// 3. cfg_select! 宏（Rust 1.95.0 稳定）
+// ============================================================================
+
+/// # `cfg_select!` 宏
+///
+/// `cfg_select!` 是 Rust 1.95.0 稳定的新宏，提供编译期条件选择，
+/// 功能类似于流行的 `cfg-if` crate，但语法更直观。
+///
+/// ## 语法
+/// ```ignore
+/// cfg_select! {
+///     condition => { expression }
+///     _ => { fallback_expression }
+/// }
+/// ```
+///
+/// ## 与 `cfg!` 的区别
+/// | 特性 | `cfg!` | `cfg_select!` |
+/// |------|--------|---------------|
+/// | 返回值 | `bool` | 任意表达式 |
+/// | 分支 | 无（仅判断） | 多分支选择 |
+/// | 使用场景 | 运行时条件判断 | 编译期代码/值选择 |
+pub struct CfgSelectExamples;
+
+impl CfgSelectExamples {
+    /// 使用 `cfg_select!` 选择平台特定的路径分隔符
+    pub fn path_separator() -> &'static str {
+        std::cfg_select! {
+            windows => "\\",
+            unix => "/",
+            _ => "/",
+        }
+    }
+
+    /// 使用 `cfg_select!` 选择平台特定的换行符
+    pub fn line_ending() -> &'static str {
+        std::cfg_select! {
+            windows => "\r\n",
+            _ => "\n",
+        }
+    }
+
+    /// 使用 `cfg_select!` 选择架构特定的缓存行大小
+    pub fn cache_line_size() -> usize {
+        std::cfg_select! {
+            target_arch = "x86_64" => 64,
+            target_arch = "aarch64" => 64,
+            target_arch = "riscv64" => 64,
+            _ => 32,
+        }
+    }
+}

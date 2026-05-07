@@ -585,7 +585,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ---
 
-## 🆕 Rust 1.94 特性整合
+## 🆕 Rust 1.95+ 特性整合
 
 > **适用版本**: Rust 1.94.0+
 
@@ -622,7 +622,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (深度整合 Rust 1.95+ 特性)
 
 ---
 

@@ -99,7 +99,7 @@ use std::cell::UnsafeCell;
 ///
 /// ## 注意
 /// 在 Rust 1.94 之前的版本中，使用 OnceCell/OnceLock 实现类似功能。
-/// Rust 1.94 引入了 LazyCell::get(), get_mut(), force_mut() 方法。
+/// Rust 1.96 引入了 LazyCell::get(), get_mut(), force_mut() 方法。
 /// 泛型延迟初始化容器
 ///
 /// 支持单线程和多线程两种模式
@@ -131,7 +131,7 @@ impl<T, F> LazyContainer<T, F> {
         LazyContainer::Lock(OnceLock::new())
     }
 
-    /// 尝试获取值（不触发初始化）- 对应 Rust 1.94 LazyCell::get()
+    /// 尝试获取值（不触发初始化）- 对应 Rust 1.96 LazyCell::get()
     pub fn try_get(&self) -> Option<&T> {
         match self {
             LazyContainer::Cell(cell) => unsafe { LazyCell::get(&*cell.get()) },
@@ -199,12 +199,12 @@ impl<T, F> LazyCellContainer<T, F> {
         }
     }
 
-    /// 尝试获取值（不触发初始化）- 对应 Rust 1.94 LazyCell::get()
+    /// 尝试获取值（不触发初始化）- 对应 Rust 1.96 LazyCell::get()
     pub fn try_get(&self) -> Option<&T> {
         unsafe { LazyCell::get(&*self.cell.get()) }
     }
 
-    /// 尝试获取可变引用（不触发初始化）- 对应 Rust 1.94 LazyCell::get_mut()
+    /// 尝试获取可变引用（不触发初始化）- 对应 Rust 1.96 LazyCell::get_mut()
     pub fn try_get_mut(&mut self) -> Option<&mut T> {
         unsafe { LazyCell::get_mut(&mut *self.cell.get()) }
     }
@@ -217,7 +217,7 @@ impl<T, F> LazyCellContainer<T, F> {
         unsafe { LazyCell::force(&*self.cell.get()) }
     }
 
-    /// 强制获取可变引用 - 对应 Rust 1.94 LazyCell::force_mut()
+    /// 强制获取可变引用 - 对应 Rust 1.96 LazyCell::force_mut()
     pub fn force_get_mut(&mut self) -> &mut T
     where
         F: FnOnce() -> T,

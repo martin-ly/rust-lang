@@ -42,7 +42,7 @@
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.94 特性整合](#-rust-194-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#-rust-194-特性整合)
     - [核心特性速查](#核心特性速查)
   - [🆕 Rust 1.94 在WASM中的深度应用](#-rust-194-在wasm中的深度应用)
     - [array\_windows 在 WASM 图像处理中的应用](#array_windows-在-wasm-图像处理中的应用)
@@ -432,7 +432,7 @@ pub fn process_task(task_json: &str) -> String {
 
 ---
 
-## 🆕 Rust 1.94 特性整合
+## 🆕 Rust 1.95+ 特性整合
 
 > **适用版本**: Rust 1.94.0+
 
@@ -469,7 +469,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (深度整合 Rust 1.95+ 特性)
 
 ---
 

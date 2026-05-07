@@ -640,7 +640,7 @@ pub fn log_complexity_analysis(n: usize, base: f64) -> Complexity {
 
 **性能提示**: 在高级应用中，结合 `array_windows` 的编译期优化和 `LazyLock` 的运行时优化，可实现极致性能。
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (深度整合 Rust 1.95+ 特性)
 
 ---
 

@@ -63,7 +63,7 @@ pub struct TokenStreamAnalyzer;
 impl TokenStreamAnalyzer {
     /// 检测连续的重复标记
     ///
-    /// Rust 1.94.0: array_windows 用于滑动窗口检测
+    /// Rust 1.96.0: array_windows 用于滑动窗口检测
     pub fn detect_consecutive_duplicates(tokens: &[Token]) -> Vec<usize> {
         let mut duplicates = Vec::new();
 
@@ -78,7 +78,7 @@ impl TokenStreamAnalyzer {
 
     /// 检测特定标记模式（如 `let mut`）
     ///
-    /// Rust 1.94.0: array_windows<2> 用于检测2标记模式
+    /// Rust 1.96.0: array_windows<2> 用于检测2标记模式
     pub fn detect_let_mut_pattern(tokens: &[Token]) -> Vec<usize> {
         let mut positions = Vec::new();
 
@@ -93,7 +93,7 @@ impl TokenStreamAnalyzer {
 
     /// 检测三元操作符模式（如 `condition ? true_expr : false_expr`）
     ///
-    /// Rust 1.94.0: array_windows<5> 用于检测5标记模式
+    /// Rust 1.96.0: array_windows<5> 用于检测5标记模式
     pub fn detect_ternary_pattern(tokens: &[Token]) -> Vec<usize> {
         let mut positions = Vec::new();
 
@@ -130,7 +130,7 @@ pub struct MacroExpansionAnalyzer;
 impl MacroExpansionAnalyzer {
     /// 分析宏展开的嵌套模式
     ///
-    /// Rust 1.94.0: array_windows 用于分析嵌套层级变化
+    /// Rust 1.96.0: array_windows 用于分析嵌套层级变化
     pub fn analyze_nesting_depth(depths: &[usize]) -> Vec<(usize, usize)> {
         let mut changes = Vec::new();
 
@@ -166,7 +166,7 @@ pub struct BlockMatcher;
 impl BlockMatcher {
     /// 查找匹配的括号对
     ///
-    /// Rust 1.94.0: array_windows 用于快速检测相邻括号
+    /// Rust 1.96.0: array_windows 用于快速检测相邻括号
     pub fn find_bracket_pairs(tokens: &[Token]) -> Vec<(usize, usize)> {
         let mut pairs = Vec::new();
         let mut stack: Vec<(char, usize)> = Vec::new();
@@ -192,7 +192,7 @@ impl BlockMatcher {
 
     /// 使用 array_windows 快速检测空块 `{}`
     ///
-    /// Rust 1.94.0: array_windows<2> 检测相邻的开闭括号
+    /// Rust 1.96.0: array_windows<2> 检测相邻的开闭括号
     pub fn find_empty_blocks(tokens: &[Token]) -> Vec<usize> {
         let mut empty_blocks = Vec::new();
 

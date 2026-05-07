@@ -37,7 +37,7 @@
     - [形式化资源](#形式化资源)
   - [🔗 推荐学习路径](#-推荐学习路径)
   - [📖 Rustonomicon 逐章对标表](#-rustonomicon-逐章对标表)
-  - [🆕 Rust 1.94 特性](#-rust-194-特性)
+  - [🆕 Rust 1.95+ 特性](#-rust-194-特性)
     - [新特性概览](#新特性概览)
     - [代码示例](#代码示例)
   - [🆕 Rust 1.94 在 Unsafe Rust 中的应用](#-rust-194-在-unsafe-rust-中的应用)
@@ -877,7 +877,7 @@ Miri 可以检测：
 
 > **官方入口**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · 与 Rust 1.93 对应见 [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 
-## 🆕 Rust 1.94 特性
+## 🆕 Rust 1.95+ 特性
 
 > **适用版本**: Rust 1.94.0+
 
@@ -909,7 +909,7 @@ let result = items.iter().try_for_each(|&n| {
 });
 `
 
-**最后更新**: 2026-03-14 (添加 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (添加 Rust 1.95+ 特性)
 
 ---
 
@@ -968,7 +968,7 @@ fn validate_pointer_range<T>(
 
 **安全提示**: 即使使用 `LazyLock`，unsafe 块仍需仔细审查。`get()` 方法提供了一种在不触发初始化的情况下检查状态的安全方式。
 
-**最后更新**: 2026-03-14 (深度整合 Rust 1.94 特性)
+**最后更新**: 2026-03-14 (深度整合 Rust 1.95+ 特性)
 
 ---
 

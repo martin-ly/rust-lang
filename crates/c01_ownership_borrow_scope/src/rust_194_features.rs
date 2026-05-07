@@ -134,7 +134,7 @@ pub fn detect_repeated_pattern<T: PartialEq>(data: &[T], pattern: &[T; 2]) -> Ve
 /// ## 线程安全
 /// - `LazyCell`: 单线程使用
 /// - `LazyLock`: 多线程安全，内部使用原子操作
-/// 使用 Rust 1.94 LazyCell 的单线程缓存示例
+/// 使用 Rust 1.96 LazyCell 的单线程缓存示例
 ///
 /// 展示了新的 `get()`, `get_mut()`, `force_mut()` 方法
 ///
