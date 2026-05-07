@@ -75,6 +75,8 @@ pub use archive::rust_192_features;
 pub mod rust_194_features;
 pub mod rust_195_features;
 pub mod rust_196_features;
+pub mod rust_for_linux_preview; // Rust for Linux 预研 (kernel.org)
+pub mod ebpf_aya; // eBPF + Aya 预研 (aya-rs.dev)
 
 // 性能优化模块
 pub mod performance;

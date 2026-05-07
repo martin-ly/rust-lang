@@ -1,463 +1,223 @@
-//! Async Closures 预研模块 —— Rust 异步编程的下一代范式
+//! Async Closures 预研模块（Nightly）
 //!
-//! # ⚠️ 预览状态说明
+//! ⚠️ **警告**: 本模块需要 nightly Rust 编译器和 `#![feature(async_closures)]`。
+//! 预计稳定版本: **1.96-1.97** (FCP 流程中)。
 //!
-//! 本模块基于 **RFC 3668** 和 nightly 实现编写。
-//! Async Closures 预计将在 **Rust 1.96 或 1.97** 中稳定化。
-//! 当前代码需要 nightly 编译器和 `#![feature(async_closure)]`。
+//! # 概念定义
 //!
-//! # 版本信息
-//! - 目标 Rust版本: 1.96.0 - 1.97.0 (预计)
-//! - 当前状态: Nightly 实验中 / FCP 流程中
-//! - RFC: [3668-async-closures](https://rust-lang.github.io/rfcs/3668-async-closures.html)
+//! Async Closures (`async || {}`) 是 RFC 3668 定义的新语法，允许创建**真正的异步闭包**。
+//! 与旧范式 `|x| async move { ... }` 不同，async closures 可以捕获环境变量的引用，
+//! 并在异步操作中保持这些引用有效。
 //!
-//! # 参考
-//! - [Tracking Issue](https://github.com/rust-lang/rust/issues/132922)
-//! - [Async Fn in Trait Initiative](https://rust-lang.github.io/async-fundamentals-initiative/)
+//! # 核心差异
+//!
+//! | 维度 | 旧范式 `\|x\| async move { ... }` | Async Closure `async \|x\| { ... }` |
+//! |------|----------------------------------|-----------------------------------|
+//! | 捕获方式 | `move`（所有权转移） | 借用（与常规闭包一致） |
+//! | 返回类型 | `impl Future` | `impl AsyncFn`（关联类型） |
+//! | Send 推断 | 复杂（需显式 bound） | 自动推断 |
+//! | dyn 兼容 | ❌ 不支持 | ❌ 不支持（当前限制） |
+//!
+//! # 权威来源
+//! - RFC: [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html)
+//! - 跟踪: [rust-lang/rust#132706](https://github.com/rust-lang/rust/pull/132706)
+//! - AsyncFn traits: **1.94.0** 已入 prelude
 
-// #![feature(async_closure)] // 稳定后移除
-// #![feature(async_fn_traits)] // 稳定后移除
+#![allow(unstable_features)]
+#![feature(async_closures)]
 
 use std::future::Future;
 
 // ============================================================================
-// 1. Async Closures 概念与理论基础
+// 1. 基础语法与旧范式对比
 // ============================================================================
 
-/// # Async Closures 深度解析
+/// # 基础语法
 ///
-/// ## 概念定义
-/// Async Closure（异步闭包）是支持在闭包体内直接使用 `.await` 的闭包。
-/// 它通过新的 `AsyncFn` trait family 实现，解决了传统闭包在异步上下文中的
-/// 生命周期和类型推断问题。
-///
-/// ## Wikipedia 概念对齐
-/// - **Closure (Computer Science)**: 带有捕获环境的函数对象，async closure 扩展了可暂停语义
-/// - **Continuation**: 异步闭包的调用返回 Future，是 continuation-passing style 的具体化
-/// - **Coroutine**: 可暂停/恢复的计算单元，async closure 是匿名 coroutine
-///
-/// ## 核心语法
+/// ## 旧范式（Rust 1.75-1.95）
 /// ```ignore
-/// // 异步闭包（未来稳定）
-/// let f = async |x: i32| -> i32 {
-///     tokio::time::sleep(Duration::from_millis(x as u64)).await;
-///     x * 2
+/// let old = |s: String| async move {
+///     println!("{}", s);
+///     s.len()
 /// };
-///
-/// // 调用时返回 Future
-/// let result: i32 = f(42).await;
+/// // s 被 move 进 Future，调用时所有权转移
 /// ```
 ///
-/// ## AsyncFn Trait Family
-///
-/// | Trait | 类比 | 特性 |
-/// |-------|------|------|
-/// | `AsyncFn` | `Fn` | 可多次调用，不可变借用捕获 |
-/// | `AsyncFnMut` | `FnMut` | 可多次调用，可变借用捕获 |
-/// | `AsyncFnOnce` | `FnOnce` | 消耗性调用，获取捕获所有权 |
-///
-/// ## 关键关联类型
-/// - `CallRefFuture<'a>`: 从 `&self` 调用产生的 Future（可能借用捕获）
-/// - `CallOnceFuture`: 从 `self` 调用产生的 Future（消耗性）
-///
-/// ## 对比：传统 workaround vs Async Closures
-///
-/// | 维度 | `\|x\| async move { ... }` (旧) | `async \|x\| { ... }` (新) |
-/// |------|-------------------------------|--------------------------|
-/// | 返回类型 | `impl Future` (不透明) | `impl AsyncFn` |
-/// | 生命周期 | 复杂，常需显式标注 | 自动推断，支持自借用 |
-/// | Send bound | 难以表达 | 通过 RTN (Return Type Notation) 表达 |
-/// | 迭代器适配 | 无法直接使用 | `filter(async \|x\| ...)` |
-/// | 类型擦除 | 困难 | 理论上更清晰（dyn 支持待完善） |
-///
-/// ## 反例 / 当前限制
-/// - **非 dyn compatible**: `AsyncFn` trait 目前不支持 `dyn AsyncFn`（类似 `Fn` 的限制）
-/// - **Send bound 复杂**: `AsyncFn() -> impl Future + Send` 的表达仍在演进（RTN 相关）
-/// - **与旧生态的兼容性**: 接受 `Fn() -> impl Future` 的 API 需要适配才能接受 `async || {}`
-/// - **不稳定的 feature gate**: 当前需要 nightly，且语法可能微调
-///
-/// ## 设计决策树
-/// ```text
-/// 需要异步闭包？
-/// ├── 仅需单次异步操作？ → async { block } 或 async fn
-/// ├── 需要捕获环境 + 异步？
-/// │   ├── 生态库已支持 AsyncFn？ → async || {}
-/// │   └── 生态库仅支持 Fn() -> Future？ → \|x\| async move { ... } (兼容模式)
-/// └── 需要存储在结构体中？ → 泛型 bound AsyncFn / Box<dyn AsyncFn> (待 dyn 支持)
+/// ## 新范式（Nightly, 预计 1.96+）
+/// ```ignore
+/// let new = async |s: &str| {
+///     println!("{}", s);
+///     s.len()
+/// };
+/// // s 被借用而非 move，生命周期推断更精确
 /// ```
-pub struct AsyncClosuresConcept;
+pub struct AsyncClosureSyntaxExamples;
 
-impl AsyncClosuresConcept {
-    /// 概念性语法示例（未来稳定后可直接编译）
+impl AsyncClosureSyntaxExamples {
+    /// 旧范式概念说明：返回 Future，无法表达 borrow-from-capture
     ///
-    /// ```ignore
-    /// let middleware = async |req: Request| -> Response {
-    ///     // 可直接 .await
-    ///     let auth = verify_token(&req.headers).await?;
-    ///     let body = fetch_body(&req).await?;
-    ///     process(auth, body).await
-    /// };
-    /// ```
-    pub fn syntax_preview() -> &'static str {
-        r#"
-// 异步闭包语法（预览）
-let handler = async |req: Request| -> Result<Response, Error> {
-    let db = get_db_pool().await?;
-    let user = db.query_user(req.user_id).await?;
-    Ok(Response::json(user))
-};
+    /// 注意：旧范式 `|s| async move { ... }` 的返回类型难以在 trait bound 中表达，
+    /// 这是推动 async closures 诞生的核心动机之一。
+    pub fn old_style_closure_concept() -> &'static str {
+        "旧范式: |s: String| async move { s.len() }\n\
+         问题: s 被 move 进 Future，无法借用"
+    }
 
-// 泛型约束
-fn register_handler<H>(handler: H)
-where
-    H: AsyncFn(Request) -> Result<Response, Error>,
-{
-    // ...
-}
-"#
+    /// 新范式（nightly）：真正的异步闭包
+    ///
+    /// ⚠️ 需要 `#![feature(async_closures)]`
+    #[cfg(feature = "nightly_async_closures")]
+    pub fn new_style_closure() -> impl AsyncFn(&str) -> usize {
+        async |s: &str| s.len()
     }
 }
 
 // ============================================================================
-// 2. 模拟实现：当前稳定 Rust 中的等效模式
+// 2. AsyncFn trait family
 // ============================================================================
 
-/// # 当前稳定 Rust 中的异步闭包 workaround
+/// # `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` Traits
 ///
-/// 在 Async Closures 稳定前，使用 `impl Future` + 手动闭包是主要方式。
-/// 本模块展示了这些 workaround，并与未来的 `async || {}` 语法对比。
-pub struct AsyncClosureWorkarounds;
+/// 这些 traits 已在 **Rust 1.94.0** 的 prelude 中稳定。
+/// 它们定义了异步闭包的调用契约：
+///
+/// ```ignore
+/// pub trait AsyncFn<Args> {
+///     type Output;
+///     type CallRefFuture<'a>: Future<Output = Self::Output>
+///     where Self: 'a;
+///     fn async_call(&self, args: Args) -> Self::CallRefFuture<'_>;
+/// }
+/// ```
+///
+/// ## 使用场景：接受异步回调的函数
+pub struct AsyncFnTraitExamples;
 
-impl AsyncClosureWorkarounds {
-    /// Workaround 1：返回 async block 的常规闭包
+impl AsyncFnTraitExamples {
+    /// 使用 `AsyncFn` trait 接受异步回调
     ///
-    /// ```ignore
-    /// // 未来语法
-    /// let f = async |x: i32| { x + 1 };
-    ///
-    /// // 当前 workaround
-    /// let f = |x: i32| async move { x + 1 };
-    /// ```
-    pub fn workaround_return_async_block() {
-        let _f = |x: i32| async move { x + 1 };
-        // 调用：f(42).await
-    }
-
-    /// Workaround 2：泛型接受 Future 返回闭包
-    ///
-    /// ```ignore
-    /// // 未来：接受 AsyncFn
-    /// fn process<F>(f: F) where F: AsyncFn(i32) -> i32 { ... }
-    ///
-    /// // 当前：接受 Fn() -> impl Future
-    /// fn process<F, Fut>(f: F) where F: Fn(i32) -> Fut, Fut: Future<Output = i32> { ... }
-    /// ```
-    pub fn workaround_generic_bound<F, Fut>(_f: F)
+    /// 这是 async closures 的核心应用场景：泛型函数接受异步谓词。
+    #[cfg(feature = "nightly_async_closures")]
+    pub async fn process_items<T, F>(items: Vec<T>, handler: F) -> Vec<T>
     where
-        F: Fn(i32) -> Fut,
-        Fut: Future<Output = i32>,
+        F: AsyncFn(T) -> bool,
     {
-        // 当前生态库的主要模式
-    }
-
-    /// Workaround 3：`Box<dyn Future>` 类型擦除
-    ///
-    /// 当需要在集合中存储不同异步闭包时使用。
-    pub fn workaround_type_erasure() {
-        let _closures: Vec<Box<dyn Fn(i32) -> Box<dyn Future<Output = i32> + Send> + Send>> = vec![
-            Box::new(|x| Box::new(async move { x + 1 })),
-            Box::new(|x| Box::new(async move { x * 2 })),
-        ];
-    }
-
-    /// Workaround 4：手动 struct + Future impl
-    ///
-    /// 最繁琐但最灵活的方式，完全控制状态机。
-    pub fn workaround_manual_future() {
-        // 参见本模块下方的 ManualAsyncClosure 示例
-    }
-}
-
-/// 手动实现的异步闭包状态机（教学用途）
-///
-/// 展示了编译器如何将 `async || {}` 转换为状态机。
-pub struct ManualAsyncClosure<T> {
-    captured: T,
-    state: AsyncClosureState,
-}
-
-// SAFETY: 所有字段都是 Unpin（T: Copy 意味着 T: Unpin）
-impl<T: Copy> Unpin for ManualAsyncClosure<T> {}
-
-enum AsyncClosureState {
-    Start,
-    WaitingForStep1,
-    WaitingForStep2,
-    Done,
-}
-
-impl<T: Copy> ManualAsyncClosure<T> {
-    pub fn new(captured: T) -> Self {
-        Self {
-            captured,
-            state: AsyncClosureState::Start,
-        }
-    }
-}
-
-impl<T: Copy + std::fmt::Display> Future for ManualAsyncClosure<T> {
-    type Output = String;
-
-    fn poll(
-        mut self: std::pin::Pin<&mut Self>,
-        _cx: &mut std::task::Context<'_>,
-    ) -> std::task::Poll<Self::Output> {
-        match self.state {
-            AsyncClosureState::Start => {
-                self.state = AsyncClosureState::WaitingForStep1;
-                std::task::Poll::Pending
-            }
-            AsyncClosureState::WaitingForStep1 => {
-                self.state = AsyncClosureState::WaitingForStep2;
-                std::task::Poll::Pending
-            }
-            AsyncClosureState::WaitingForStep2 => {
-                self.state = AsyncClosureState::Done;
-                std::task::Poll::Pending
-            }
-            AsyncClosureState::Done => {
-                std::task::Poll::Ready(format!("Result with captured: {}", self.captured))
+        let mut results = Vec::new();
+        for item in items {
+            if handler.async_call((item,)).await {
+                results.push(item);
             }
         }
+        results
+    }
+
+    /// 中间件模式：HTTP 处理链
+    #[cfg(feature = "nightly_async_closures")]
+    pub async fn middleware<F, Fut>(req: String, next: F) -> String
+    where
+        F: AsyncFn(String) -> String,
+    {
+        // 前置处理
+        let modified = format!("[pre] {}", req);
+        let resp = next.async_call((modified,)).await;
+        // 后置处理
+        format!("{} [post]", resp)
     }
 }
 
 // ============================================================================
-// 3. 设计模式：异步闭包的应用场景
+// 3. 反例与限制
 // ============================================================================
 
-/// # Async Closures 设计模式预览
+/// # Async Closures 的限制
 ///
-/// 展示了 Async Closures 稳定后将带来的设计模式变革。
-pub struct AsyncClosurePatterns;
-
-impl AsyncClosurePatterns {
-    /// 模式 1：异步中间件链
-    ///
-    /// ```ignore
-    /// // 未来：简洁的异步中间件
-    /// let middleware_chain = vec![
-    ///     async |req| { log_request(&req).await; req },
-    ///     async |req| { auth_check(&req).await?; req },
-    ///     async |req| { rate_limit(&req).await?; req },
-    /// ];
-    /// ```
-    pub fn middleware_chain_concept() -> &'static str {
-        r#"
-// 异步中间件链（未来语法概念）
-async fn apply_middleware<H>(handler: H) -> Response
-where
-    H: AsyncFn(Request) -> Response,
-{
-    let logged = async |req| { log_request(&req).await; req };
-    let authed = async |req| { auth_check(&req).await?; req };
-    let limited = async |req| { rate_limit(&req).await?; req };
-
-    let pipeline = compose(logged, compose(authed, limited));
-    pipeline(request).await
-}
-"#
-    }
-
-    /// 模式 2：异步迭代器适配
-    ///
-    /// ```ignore
-    /// // 未来：异步闭包直接用于迭代器
-    /// let results: Vec<_> = stream
-    ///     .filter(async |item| item.is_valid().await)
-    ///     .map(async |item| item.transform().await)
-    ///     .collect()
-    ///     .await;
-    /// ```
-    pub fn async_iterator_adapters() -> &'static str {
-        r#"
-// 异步迭代器适配（未来语法概念）
-let active_users = user_stream
-    .filter(async |user| user.is_active().await)
-    .map(async |user| {
-        let profile = db.load_profile(user.id).await;
-        (user, profile)
-    })
-    .buffer_unordered(10)
-    .collect::<Vec<_>>()
-    .await;
-"#
-    }
-
-    /// 模式 3：事件驱动回调
-    ///
-    /// ```ignore
-    /// // GUI / 游戏事件处理
-    /// button.on_click(async |event| {
-    ///     let data = fetch_data(event.target_id).await;
-    ///     update_ui(data).await;
-    /// });
-    /// ```
-    pub fn event_driven_callbacks() -> &'static str {
-        r#"
-// 事件驱动异步回调（未来语法概念）
-event_bus.subscribe(async |event: NetworkEvent| {
-    match event {
-        NetworkEvent::Connected => {
-            let config = load_config().await;
-            apply_config(config).await;
-        }
-        NetworkEvent::Message(data) => {
-            let parsed = parse_message(data).await?;
-            broadcast(parsed).await;
-        }
-        _ => {}
-    }
-});
-"#
-    }
-
-    /// 模式 4：资源获取即初始化 (RAII) 的异步扩展
-    ///
-    /// ```ignore
-    /// // 异步作用域守卫
-    /// let guard = async |scope| {
-    ///     let conn = pool.acquire().await?;
-    ///     scope.on_exit(async || conn.release().await);
-    ///     process(conn).await
-    /// };
-    /// ```
-    pub fn async_rai_extensions() -> &'static str {
-        r#"
-// 异步 RAII 模式（未来语法概念）
-async fn with_resource<R, F, Fut>(
-    acquire: impl AsyncFn() -> R,
-    release: impl AsyncFn(R),
-    f: F,
-) -> Fut::Output
-where
-    F: AsyncFn(&R) -> Fut,
-{
-    let resource = acquire().await;
-    let result = f(&resource).await;
-    release(resource).await;
-    result
-}
-"#
-    }
-}
-
-// ============================================================================
-// 4. 限制、风险与迁移策略
-// ============================================================================
-
-/// # Async Closures 限制与迁移指南
+/// ## ❌ 不是 dyn-compatible
+/// `AsyncFn` trait 目前不是 dyn-compatible，因此不能构造 `Box<dyn AsyncFn(...)>`。
 ///
-/// ## 当前限制（截至 2026-05-07）
-///
-/// 1. **Nightly Only**: 需要 `#![feature(async_closure)]`
-/// 2. **非 Dyn Compatible**: `AsyncFn` 不能用于 `dyn Trait`（与 `Fn` 相同限制）
-/// 3. **Send Bound 表达困难**: 无法直接约束 `async || {}` 返回的 Future 是 Send
-/// 4. **生态系统适配中**: 主流库（Tokio、Axum）尚未全面支持 `AsyncFn` bound
-///
-/// ## 迁移策略
-///
-/// ```text
-/// 现有代码使用 Fn() -> impl Future？
-/// ├── 稳定优先？ → 保持现状，添加注释标记未来迁移点
-/// ├── 追求最新特性？ → 使用 nightly + feature gate 逐步迁移
-/// └── 库作者？ → 同时提供两种 bound（兼容性层）
+/// ```ignore
+/// // 错误：AsyncFn 不是 dyn-compatible
+/// fn make_dyn() -> Box<dyn AsyncFn(i32) -> bool> {
+///     Box::new(async |x| x > 0)
+/// }
 /// ```
+///
+/// ## ❌ 与 `Fn() -> impl Future` 的互操作
+/// 旧式闭包和 async closures 的 trait 实现不同，直接互操作需要适配。
+///
+/// ## ❌ 发送性约束复杂
+/// `AsyncFn() -> impl Future + Send` 的表达仍需要 RTN (Return Type Notation)。
 pub struct AsyncClosureLimitations;
 
 impl AsyncClosureLimitations {
-    /// Send bound 问题说明
+    /// 说明：为什么不能直接用 `Box<dyn AsyncFn>`
+    pub fn explain_dyn_incompatibility() -> &'static str {
+        "AsyncFn 的关联类型 CallRefFuture 使其不是 dyn-compatible。需要使用泛型或 impl trait 代替 \
+         dyn trait。"
+    }
+}
+
+// ============================================================================
+// 4. 场景化示例：异步迭代器适配
+// ============================================================================
+
+/// # 场景：异步过滤迭代器
+///
+/// 展示了 async closures 在流处理中的应用。
+pub struct AsyncIteratorAdapterExamples;
+
+impl AsyncIteratorAdapterExamples {
+    /// 异步过滤：只保留满足异步谓词的元素
     ///
-    /// 当前无法在 `AsyncFn` bound 中要求返回的 Future 是 Send。
-    /// Return Type Notation (RTN, RFC 3654) 是解决此问题的潜在方案。
-    pub fn send_bound_problem() -> &'static str {
-        r#"
-// ❌ 当前无法直接表达：
-fn spawn_task<F>(f: F)
-where
-    F: AsyncFn() -> impl Future<Output = ()> + Send, // 不合法！
-{}
-
-// ✅ Workaround 1：继续使用旧的 Fn bound
-fn spawn_task_old<F, Fut>(f: F)
-where
-    F: Fn() -> Fut,
-    Fut: Future<Output = ()> + Send,
-{}
-
-// ✅ Workaround 2：使用 RTN（未来）
-fn spawn_task_rtn<F>(f: F)
-where
-    F: AsyncFn() -> Send, // RTN 语法（预览）
-{}
-"#
+    /// ⚠️ 需要 nightly feature `async_closures`
+    #[cfg(feature = "nightly_async_closures")]
+    pub async fn async_filter<T, F>(items: Vec<T>, predicate: F) -> Vec<T>
+    where
+        F: AsyncFn(&T) -> bool,
+    {
+        let mut results = Vec::new();
+        for item in &items {
+            if predicate.async_call((item,)).await {
+                results.push(items.remove(0)); // 简化示例
+            }
+        }
+        results
     }
 
-    /// 兼容性层设计（库作者参考）
-    pub fn compatibility_layer_concept() -> &'static str {
-        r#"
-// 库作者兼容性层设计（概念）
-pub trait AsyncHandler<Req, Res> {
-    type Future: Future<Output = Res> + Send;
-    fn call(&self, req: Req) -> Self::Future;
-}
-
-// 为 async closure 实现（未来）
-impl<T, Req, Res, Fut> AsyncHandler<Req, Res> for T
-where
-    T: AsyncFn(Req) -> Res,
-    Fut: Future<Output = Res> + Send,
-{
-    type Future = Fut;
-    fn call(&self, req: Req) -> Self::Future {
-        self.async_call(req)
-    }
-}
-
-// 为传统 closure 实现（当前兼容）
-impl<T, Req, Res, Fut> AsyncHandler<Req, Res> for T
-where
-    T: Fn(Req) -> Fut,
-    Fut: Future<Output = Res> + Send,
-{
-    type Future = Fut;
-    fn call(&self, req: Req) -> Self::Future {
-        self(req)
-    }
-}
-"#
+    /// 异步 map：转换每个元素
+    #[cfg(feature = "nightly_async_closures")]
+    pub async fn async_map<T, U, F>(items: Vec<T>, transform: F) -> Vec<U>
+    where
+        F: AsyncFn(T) -> U,
+    {
+        let mut results = Vec::new();
+        for item in items {
+            results.push(transform.async_call((item,)).await);
+        }
+        results
     }
 }
 
 // ============================================================================
-// 5. 与项目现有内容的对比和演进路径
+// 5. 演进脉络
 // ============================================================================
 
-/// # 本项目异步闭包演进检查清单
+/// # Async Rust 范式演进
 ///
-/// 当 Async Closures 稳定后，以下模块需要更新：
-///
-/// | 模块 | 当前模式 | 未来迁移目标 |
-/// |------|---------|------------|
-/// | `c06_async/src/await/` | 基础 async/await | 添加 async closure 章节 |
-/// | `c06_async/src/futures/` | Future 组合子 | 添加 AsyncFn trait 详解 |
-/// | `c06_async/src/tokio/` | Tokio 任务 spawn | 更新为 AsyncFn bound |
-/// | `c10_networks/src/protocol/async_traits.rs` | `#[async_trait]` | 原生 async fn + async closure |
-/// | `c09_design_pattern/` | 回调模式 | 异步回调模式 |
-pub struct AsyncClosureMigrationChecklist;
+/// ```text
+/// Future trait (1.36)
+///   → async/await 语法糖 (1.39)
+///     → Future/IntoFuture in prelude (1.85)
+///       → AFIT: async fn in trait (1.75)
+///         → AsyncFn traits in prelude (1.94)
+///           → Async Closures: async || {} (1.96 FCP)
+///             → AFIDT: async fn in dyn trait (1.97+ nightly)
+///               → RTN: Return Type Notation (1.97+ RFC)
+///                 → Gen blocks / AsyncIterator (1.98+)
+/// ```
+pub struct AsyncEvolutionTimeline;
 
 // ============================================================================
-// 测试（概念性，需 nightly 启用 feature）
+// 测试
 // ============================================================================
 
 #[cfg(test)]
@@ -465,36 +225,15 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_manual_async_closure_poll() {
-        use std::future::Future;
-        use std::pin::Pin;
-        use std::task::{Context, Poll, Waker};
-
-        let mut fut = ManualAsyncClosure::new(42);
-        let waker = Waker::noop();
-        let mut cx = Context::from_waker(waker);
-
-        // 前三次 poll 返回 Pending
-        assert_eq!(Pin::new(&mut fut).poll(&mut cx), Poll::Pending);
-        assert_eq!(Pin::new(&mut fut).poll(&mut cx), Poll::Pending);
-        assert_eq!(Pin::new(&mut fut).poll(&mut cx), Poll::Pending);
-
-        // 第四次返回 Ready
-        match Pin::new(&mut fut).poll(&mut cx) {
-            Poll::Ready(result) => {
-                assert!(result.contains("42"));
-            }
-            Poll::Pending => panic!("Expected Ready"),
-        }
+    fn test_explain_dyn_incompatibility() {
+        assert!(!AsyncClosureLimitations::explain_dyn_incompatibility().is_empty());
     }
 
-    #[test]
-    fn test_concept_async_fn_traits() {
-        // 概念性验证：确认 trait 定义可编译
-        fn _check_traits<T>()
-        where
-            T: AsyncFn(i32) -> i32,
-        {
-        }
+    // nightly 测试需要 feature gate
+    #[cfg(feature = "nightly_async_closures")]
+    #[tokio::test]
+    async fn test_async_closure_basic() {
+        // let closure = async |x: i32| x * 2;
+        // assert_eq!(closure.async_call((21,)).await, 42);
     }
 }
