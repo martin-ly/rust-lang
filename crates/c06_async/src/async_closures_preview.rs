@@ -23,10 +23,12 @@
 //! - 跟踪: [rust-lang/rust#132706](https://github.com/rust-lang/rust/pull/132706)
 //! - AsyncFn traits: **1.94.0** 已入 prelude
 
-#![allow(unstable_features)]
-#![feature(async_closures)]
+// 注意：async_closures feature 已在 lib.rs 中声明
+// #![feature(async_closures)]
 
-use std::future::Future;
+#![allow(unexpected_cfgs)]
+
+// use std::future::Future; // 当前模块未直接使用
 
 // ============================================================================
 // 1. 基础语法与旧范式对比
@@ -59,8 +61,7 @@ impl AsyncClosureSyntaxExamples {
     /// 注意：旧范式 `|s| async move { ... }` 的返回类型难以在 trait bound 中表达，
     /// 这是推动 async closures 诞生的核心动机之一。
     pub fn old_style_closure_concept() -> &'static str {
-        "旧范式: |s: String| async move { s.len() }\n\
-         问题: s 被 move 进 Future，无法借用"
+        "旧范式: |s: String| async move { s.len() }\n问题: s 被 move 进 Future，无法借用"
     }
 
     /// 新范式（nightly）：真正的异步闭包
@@ -100,12 +101,13 @@ impl AsyncFnTraitExamples {
     #[cfg(feature = "nightly_async_closures")]
     pub async fn process_items<T, F>(items: Vec<T>, handler: F) -> Vec<T>
     where
-        F: AsyncFn(T) -> bool,
+        T: Clone,
+        F: AsyncFn(&T) -> bool,
     {
         let mut results = Vec::new();
-        for item in items {
+        for item in &items {
             if handler.async_call((item,)).await {
-                results.push(item);
+                results.push(item.clone());
             }
         }
         results
@@ -175,9 +177,9 @@ impl AsyncIteratorAdapterExamples {
         F: AsyncFn(&T) -> bool,
     {
         let mut results = Vec::new();
-        for item in &items {
-            if predicate.async_call((item,)).await {
-                results.push(items.remove(0)); // 简化示例
+        for item in items {
+            if predicate.async_call((&item,)).await {
+                results.push(item);
             }
         }
         results

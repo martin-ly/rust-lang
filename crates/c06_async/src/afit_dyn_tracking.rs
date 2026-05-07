@@ -21,10 +21,13 @@
 //! - 跟踪: [rust-lang/rust#133119](https://github.com/rust-lang/rust/issues/133119)
 //! - 设计文档: [AFIDT Design Doc](https://rust-lang.github.io/async-fundamentals-initiative/)
 
-#![allow(unstable_features)]
-#![feature(async_fn_in_dyn_trait)]
+// 注意：async_fn_in_dyn_trait feature 已在 lib.rs 中声明
+// #![feature(async_fn_in_dyn_trait)]
 
-use std::future::Future;
+#![allow(unexpected_cfgs)]
+#![allow(async_fn_in_trait)]
+
+// use std::future::Future; // 当前模块未直接使用
 
 // ============================================================================
 // 1. AFIDT 基础示例
@@ -93,12 +96,36 @@ impl DataSource for Cache {
 }
 
 #[cfg(feature = "nightly_afidt")]
+/// 运行时分发枚举（AFIDT 当前限制：async trait 尚不支持 dyn）
+pub enum DataSourceKind {
+    Database(Database),
+    Cache(Cache),
+}
+
+#[cfg(feature = "nightly_afidt")]
+impl DataSource for DataSourceKind {
+    async fn fetch(&self, key: &str) -> Option<String> {
+        match self {
+            DataSourceKind::Database(db) => db.fetch(key).await,
+            DataSourceKind::Cache(c) => c.fetch(key).await,
+        }
+    }
+
+    async fn exists(&self, key: &str) -> bool {
+        match self {
+            DataSourceKind::Database(db) => db.exists(key).await,
+            DataSourceKind::Cache(c) => c.exists(key).await,
+        }
+    }
+}
+
+#[cfg(feature = "nightly_afidt")]
 impl AfidtExamples {
-    /// 使用 dyn Trait 进行运行时分发
-    pub fn create_source(kind: &str) -> Box<dyn DataSource> {
+    /// 使用枚举进行运行时分发（AFIDT 尚不完全支持 dyn Trait）
+    pub fn create_source(kind: &str) -> DataSourceKind {
         match kind {
-            "db" => Box::new(Database),
-            _ => Box::new(Cache),
+            "db" => DataSourceKind::Database(Database),
+            _ => DataSourceKind::Cache(Cache),
         }
     }
 

@@ -69,3 +69,5 @@ path = "src/bin/main.rs"
 [features]
 bastion = ["dep:bastion"]
 xtra = ["dep:xtra"]
+nightly_async_closures = []
+nightly_afidt = []
