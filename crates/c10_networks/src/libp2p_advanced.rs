@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 //! libp2p 深度集成 —— 点对点网络协议栈
 //!
 //! # 概述
@@ -102,12 +104,25 @@ pub mod swarm_builder {
         Ok(swarm)
     }
 
-    // 构建内存传输 Swarm（测试用）
-    //
-    // # 注意
-    // libp2p 0.54.1 中 `MemoryTransport` 需经过 upgrade + authenticate + multiplex
-    // 才能满足 `Transport<Output = (PeerId, Muxer)>` 约束。教学代码中推荐使用
-    // `build_tcp_swarm` 配合回环地址 (`/ip4/127.0.0.1/tcp/0`) 进行本地测试。
+    /// 构建内存传输 Swarm（测试用）
+    ///
+    /// # 注意
+    /// libp2p 0.54.1 中 `MemoryTransport` 需经过 upgrade + authenticate + multiplex
+    /// 才能满足 `Transport<Output = (PeerId, Muxer)>` 约束。教学代码中推荐使用
+    /// `build_tcp_swarm` 配合回环地址 (`/ip4/127.0.0.1/tcp/0`) 进行本地测试。
+    pub fn build_memory_swarm<B>(
+        _keypair: &libp2p::identity::Keypair,
+        _behaviour: B,
+    ) -> Result<libp2p::Swarm<B>, String>
+    where
+        B: libp2p::swarm::NetworkBehaviour,
+    {
+        Err(
+            "MemoryTransport 在 libp2p 0.54.1 中需显式 upgrade + authenticate + multiplex \
+             才能满足 Transport 约束，教学代码推荐使用 build_tcp_swarm 配合回环地址进行本地测试"
+                .to_string(),
+        )
+    }
 }
 
 // =========================================================================
@@ -539,10 +554,7 @@ pub mod dcutr {
                 );
             }
             Err(ref e) => {
-                println!(
-                    "DCUtR: 与 {} 的直连升级失败: {}",
-                    event.remote_peer_id, e
-                );
+                println!("DCUtR: 与 {} 的直连升级失败: {}", event.remote_peer_id, e);
             }
         }
     }
@@ -606,16 +618,19 @@ pub mod patterns {
 mod tests {
     use super::*;
 
+    /// 测试生成节点身份，并验证 PeerId 与公钥一致
     #[test]
     fn test_generate_identity() {
         let (keypair, peer_id) = identity::generate_identity();
         assert_eq!(peer_id, libp2p::PeerId::from(keypair.public()));
     }
 
+    /// 测试密钥对的序列化与反序列化往返
     #[test]
     fn test_keypair_serialization() {
         let (keypair, _) = identity::generate_identity();
         let bytes = identity::serialize_keypair(&keypair);
+        assert!(!bytes.is_empty());
         let restored = identity::deserialize_keypair(&bytes).unwrap();
         assert_eq!(
             libp2p::PeerId::from(keypair.public()),
@@ -623,22 +638,175 @@ mod tests {
         );
     }
 
+    /// 测试从公钥恢复 PeerId
     #[test]
-    fn test_nat_traversal_strategy() {
+    fn test_peer_id_from_public_key() {
+        let (keypair, peer_id) = identity::generate_identity();
+        let recovered = identity::peer_id_from_public_key(&keypair.public());
+        assert_eq!(peer_id, recovered);
+    }
+
+    /// 测试创建 Kademlia 行为不 panic
+    #[test]
+    fn test_create_kademlia_behaviour() {
+        let (_, peer_id) = identity::generate_identity();
+        let _behaviour = dht::create_kademlia_behaviour(peer_id);
+    }
+
+    /// 测试创建 GossipSub 行为成功
+    #[test]
+    fn test_create_gossipsub_behaviour() {
+        let (keypair, _) = identity::generate_identity();
+        let behaviour = pubsub::create_gossipsub_behaviour(&keypair);
+        assert!(behaviour.is_ok());
+    }
+
+    /// 测试 NAT 穿透策略在不同 NAT 类型组合下的输出
+    #[test]
+    fn test_select_traversal_strategy_all_combinations() {
+        use nat_traversal::NatType;
+
+        // Public: 始终直接监听
         assert_eq!(
-            nat_traversal::select_traversal_strategy(nat_traversal::NatType::Public, false),
+            nat_traversal::select_traversal_strategy(NatType::Public, false),
             "直接监听公网地址"
         );
         assert_eq!(
-            nat_traversal::select_traversal_strategy(nat_traversal::NatType::Symmetric, true),
+            nat_traversal::select_traversal_strategy(NatType::Public, true),
+            "直接监听公网地址"
+        );
+
+        // FullCone: 始终直接拨号
+        assert_eq!(
+            nat_traversal::select_traversal_strategy(NatType::FullCone, false),
+            "直接拨号（预测映射）"
+        );
+        assert_eq!(
+            nat_traversal::select_traversal_strategy(NatType::FullCone, true),
+            "直接拨号（预测映射）"
+        );
+
+        // RestrictedCone: 有 relay 时使用 DCUtR，否则需要部署 Relay
+        assert_eq!(
+            nat_traversal::select_traversal_strategy(NatType::RestrictedCone, true),
+            "DCUtR 通过 Relay 建立直连"
+        );
+        assert_eq!(
+            nat_traversal::select_traversal_strategy(NatType::RestrictedCone, false),
+            "需要部署 Relay 服务器"
+        );
+
+        // PortRestricted: 有 relay 时使用 DCUtR + 端口预测，否则需要部署 Relay
+        assert_eq!(
+            nat_traversal::select_traversal_strategy(NatType::PortRestricted, true),
+            "DCUtR + 端口预测"
+        );
+        assert_eq!(
+            nat_traversal::select_traversal_strategy(NatType::PortRestricted, false),
+            "需要部署 Relay 服务器"
+        );
+
+        // Symmetric: 有 relay 时长期转发，否则需要部署 Relay
+        assert_eq!(
+            nat_traversal::select_traversal_strategy(NatType::Symmetric, true),
             "长期 Relay 转发（无法直连）"
+        );
+        assert_eq!(
+            nat_traversal::select_traversal_strategy(NatType::Symmetric, false),
+            "需要部署 Relay 服务器"
+        );
+
+        // Unknown: 有 relay 时尝试 DCUtR，否则需要部署 Relay
+        assert_eq!(
+            nat_traversal::select_traversal_strategy(NatType::Unknown, true),
+            "尝试 DCUtR，若失败则使用 Relay"
+        );
+        assert_eq!(
+            nat_traversal::select_traversal_strategy(NatType::Unknown, false),
+            "需要部署 Relay 服务器"
         );
     }
 
+    /// 测试 NatType 的所有变体均可在 match 中被完整覆盖
+    #[test]
+    fn test_nat_type_coverage() {
+        let variants = [
+            nat_traversal::NatType::Public,
+            nat_traversal::NatType::FullCone,
+            nat_traversal::NatType::RestrictedCone,
+            nat_traversal::NatType::PortRestricted,
+            nat_traversal::NatType::Symmetric,
+            nat_traversal::NatType::Unknown,
+        ];
+        for nat in &variants {
+            // 确保每个变体都能进入 match 分支且不 panic
+            let strategy = nat_traversal::select_traversal_strategy(*nat, true);
+            assert!(!strategy.is_empty());
+            let strategy = nat_traversal::select_traversal_strategy(*nat, false);
+            assert!(!strategy.is_empty());
+        }
+    }
+
+    /// 测试 build_memory_swarm 返回预期的错误信息
+    #[test]
+    fn test_build_memory_swarm_returns_err() {
+        let (keypair, _) = identity::generate_identity();
+        let behaviour = libp2p::ping::Behaviour::default();
+        let result = swarm_builder::build_memory_swarm(&keypair, behaviour);
+        match result {
+            Err(err) => {
+                assert!(
+                    err.contains("MemoryTransport") || err.contains("build_tcp_swarm"),
+                    "错误信息应提示 MemoryTransport 限制或推荐 build_tcp_swarm: {}",
+                    err
+                );
+            }
+            Ok(_) => panic!("build_memory_swarm 应返回错误"),
+        }
+    }
+
+    /// 测试 build_tcp_swarm 能成功构建 Swarm
+    #[test]
+    fn test_build_tcp_swarm() {
+        let (keypair, peer_id) = identity::generate_identity();
+        let behaviour = dht::create_kademlia_behaviour(peer_id);
+        let result = swarm_builder::build_tcp_swarm(&keypair, behaviour);
+        assert!(result.is_ok());
+    }
+
+    /// 测试 FullNodeBehaviour 能成功初始化
+    #[test]
+    fn test_full_node_behaviour_new() {
+        let (keypair, peer_id) = identity::generate_identity();
+        let behaviour = FullNodeBehaviour::new(&keypair, peer_id);
+        assert!(behaviour.is_ok());
+    }
+
+    /// 测试创建 Relay 行为不 panic
+    #[test]
+    fn test_create_relay_behaviour() {
+        let (_, peer_id) = identity::generate_identity();
+        let _behaviour = relay::create_relay_behaviour(peer_id);
+    }
+
+    /// 测试创建 AutoNAT 行为不 panic
+    #[test]
+    fn test_create_autonat_behaviour() {
+        let (_, peer_id) = identity::generate_identity();
+        let _behaviour = autonat::create_autonat_behaviour(peer_id);
+    }
+
+    /// 测试创建 DCUtR 行为不 panic
+    #[test]
+    fn test_create_dcutr_behaviour() {
+        let (_, peer_id) = identity::generate_identity();
+        let _behaviour = dcutr::create_dcutr_behaviour(peer_id);
+    }
+
+    /// 测试主题名称格式
     #[test]
     fn test_topic_name() {
         let topic = pubsub::topic_name("myapp", "v1", "mainnet");
         assert_eq!(topic, "/myapp/v1/mainnet");
     }
 }
-

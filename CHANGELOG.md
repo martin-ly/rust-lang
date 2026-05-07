@@ -1,6 +1,52 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-04-10
+> **最后更新**: 2026-05-07
+
+---
+
+## [1.2.0] - 2026-05-07
+
+### 🚀 Rust 1.95 特性补全
+
+- **c12_wasm**: 完全重写 `rust_195_features.rs`，从纯文档升级为 760 行可执行代码，覆盖：
+  - `cfg_select!` — 编译时 WASI p1/p2、浏览器或原生平台选择
+  - `bool::TryFrom<{integer}>` — FFI 边界整数标志安全转布尔
+  - `core::hint::cold_path` — WASM 错误路径分支预测优化
+  - `if let` guards — `match` 表达式中的模式守卫
+  - `core::range::RangeInclusive` — 端口范围与内存页范围验证
+  - `ControlFlow::is_break` / `is_continue` (const) — 编译期评估的提前退出
+- **c02_type_system**: 新增 Collection Mutable Methods 章节（`Vec::push_mut`、`VecDeque::*_mut`、`LinkedList::*_mut`）
+- **c01_ownership_borrow_scope**: 新增 Layout Helpers 章节（`dangling_ptr`、`repeat`、`repeat_packed`、`extend_packed`）
+- **assert_matches! 推广**: 在 5 个 crate 中替换 10 处 `assert!(matches!(...))` 为 `assert_matches!`
+
+### 🌐 网络生态对齐
+
+- **c10_networks/quic_advanced.rs**: 新增 Datagram（不可靠传输）、0-RTT、Connection Migration 三大高级特性模块，含配置结构体与 API 类型签名验证
+- **c10_networks/libp2p_advanced.rs**: 新增 Relay v2、AutoNAT、DCUtR 三大 NAT 穿透模块；更新 libp2p feature flags
+- **c06_async**: 新增 tokio `task::Builder` 演示（命名任务、tokio-console 可观测性）
+
+### 🔮 Rust 1.96+ 特性跟踪
+
+- **c13_embedded**: 新建 `rust_196_features.rs`，实现：
+  - `core::pin::pin!` — 无 alloc 环境下的栈上固定
+  - `const VecDeque::new` — 常量初始化环形缓冲区
+  - `From<bool> for f32/f64` — 布尔传感器数据到浮点转换
+  - `NonNull::new` const 支持 — 裸指针常量初始化
+- **c07_process**: 新增 `pin!`、`const VecDeque`、`MAIN_SEPARATOR_STR`、`DerefMut for PathBuf` 演示
+
+### 🔧 工程改进
+
+- 修复 c08 模块 `std::range` → `core::range` 路径错误
+- 移除 5 个未使用的依赖（c01 serde/serde_json、c03 serde_json、c04 array-init、c05 flume）
+- 重构 c10_networks `build.rs`，使用 `protoc_executable()` API 替代 `unsafe` 块
+- 修复 6 处 rustdoc HTML/链接警告
+- 修复 c07_process `EnhancedConnection` 枚举 clippy 警告（`Box<NamedPipeConnection>`）
+- Windows CI: `--all-features` 改为 `--features tls,quic,libp2p`，避免 pcap 链接失败
+
+### ✅ 测试覆盖
+
+- **quic_advanced.rs**: 新增 13 个测试
+- **libp2p_advanced.rs**: 新增 14 个测试
 
 ---
 
