@@ -34,8 +34,10 @@
 
 - 修复 c06_async `unused_features` 警告（移除 `async_fn_traits` feature 声明）
 - 修复 c10_networks `items_after_test_module` clippy 警告（移动 `mod tests` 到文件末尾）
-- 全 workspace `cargo clippy` 通过，0 errors；修复 `approx_constant`、`const_is_empty`、`non_canonical_clone_impl`、`collapsible_if`、`should_implement_trait` 等 style 警告
+- 全 workspace `cargo clippy` 通过，**0 errors, 0 warnings**
 - 修复 15 个 example 文件名冲突（`rust_193_features_demo.rs` 等重复名，统一加 crate 前缀）
+- 修复 `approx_constant`、`const_is_empty`、`non_canonical_clone_impl`、`collapsible_if`、`should_implement_trait`、`redundant_guards`、`needless_range_loop`、`items_after_test_module` 等全部 style 警告
+- 修复 c13_embedded 模块结构（test 模块移至文件末尾）
 
 ### 🏗️ Common Crate 扩展
 
@@ -95,7 +97,7 @@
 
 ### ✅ 测试覆盖
 
-- 全 workspace 测试通过: **2000+ tests**，0 failures
+- 全 workspace 测试通过: **3049 tests**，0 failures
 
 ---
 

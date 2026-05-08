@@ -87,6 +87,7 @@ impl ConstMetaprogramming {
         impl<T: core::ops::Add<Output = T> + Copy, const N: usize> core::ops::Add for Vector<T, N> {
             type Output = Self;
 
+            #[allow(clippy::needless_range_loop)]
             fn add(self, rhs: Self) -> Self::Output {
                 let mut result = self.0;
                 for i in 0..N {

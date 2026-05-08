@@ -106,6 +106,7 @@ impl IfLetGuardsExercises {
     ///     // TODO: 使用 if let 守卫
     /// }
     /// ```
+    #[allow(clippy::redundant_guards)]
     pub fn exercise_03_nested_result_option(values: &[Result<Option<i32>, &str>]) -> Vec<i32> {
         let mut result = Vec::new();
         for value in values {

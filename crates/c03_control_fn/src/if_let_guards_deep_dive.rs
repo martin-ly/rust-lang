@@ -63,7 +63,7 @@ impl IfLetGuardsSyntax {
         };
 
         // 现代写法：if let guard（单层 match）
-        let modern = match input {
+        match input {
             Some(s)
                 if let Ok(n) = s.parse::<u32>()
                     && n > 0
@@ -74,9 +74,7 @@ impl IfLetGuardsSyntax {
             Some(s) if let Ok(_) = s.parse::<u32>() => Err("数值超出范围"),
             Some(_) => Err("解析失败"),
             None => Err("输入为空"),
-        };
-
-        modern
+        }
     }
 
     /// 演示绑定作用域限制：guard 中的绑定在 arm body 中不可见
@@ -322,7 +320,7 @@ impl IfLetGuardsMigrationGuide {
         };
 
         // 迁移后（if let guard）
-        let after = match input {
+        match input {
             Some(s)
                 if let Ok(n) = s.parse::<i32>()
                     && n > 0 =>
@@ -331,9 +329,7 @@ impl IfLetGuardsMigrationGuide {
             }
             Some(_) => Err("解析失败或非正数"),
             None => Err("无输入"),
-        };
-
-        after
+        }
     }
 
     /// 何时**不应**使用 `if let` guard

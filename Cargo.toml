@@ -263,17 +263,17 @@ tempfile = "3.27.0"
 
 # 2025-12-11: gRPC 相关最新稳定版本
 # tonic: 高性能的gRPC over HTTP/2实现，专注于互操作性和灵活性
-tonic = { version = "0.14.5", features = [
+tonic = { version = "0.14.6", features = [
     "transport",        # 传输层支持
     "tls-ring",         # 使用ring的TLS支持
     "tls-webpki-roots", # WebPKI根证书支持
     "channel",          # 客户端通道支持
 ] }
 # tonic-build: tonic的构建工具，用于生成gRPC代码
-tonic-build = "0.14.5"
+tonic-build = "0.14.6"
 # tonic-prost: tonic与prost的集成
-tonic-prost = "0.14.5"
-tonic-prost-build = "0.14.5"
+tonic-prost = "0.14.6"
+tonic-prost-build = "0.14.6"
 # prost: Protocol Buffers的Rust实现
 prost = "0.14.3"
 # prost-build: prost的构建工具
@@ -544,11 +544,11 @@ proc-macro-error2 = "2.0.1"
 is-terminal = "0.4.17"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0 - 版本 0.2+ (字母索引)
 # 2026-04-24: Rust 1.96.0 同步更新
-wasm-bindgen = "0.2.120"
+wasm-bindgen = "0.2.121"
 # js-sys: WebAssembly 与 JavaScript 的绑定
-js-sys = "0.3.97"
+js-sys = "0.3.98"
 # wasm-bindgen-futures: WebAssembly 异步 Future 支持
-wasm-bindgen-futures = "0.4.70"
+wasm-bindgen-futures = "0.4.71"
 # wasm-bindgen-test: WebAssembly 测试框架
 wasm-bindgen-test = "0.3.67"
 # nix: 系统调用安全封装库

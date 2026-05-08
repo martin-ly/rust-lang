@@ -118,6 +118,12 @@ pub struct ConstVecDequeRingBuffer<T, const N: usize> {
     buffer: VecDeque<T>,
 }
 
+impl<T, const N: usize> Default for ConstVecDequeRingBuffer<T, N> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T, const N: usize> ConstVecDequeRingBuffer<T, N> {
     /// 编译期初始化
     pub const fn new() -> Self {
@@ -181,8 +187,7 @@ impl ConstNonNullExercises {
     /// ## 练习 01: 编译期初始化空 NonNull
     ///
     /// 定义一个 const 常量，表示未初始化的 `NonNull<u8>`。
-    pub const EXERCISE_01_UNINITIALIZED: Option<NonNull<u8>> =
-        NonNull::new(std::ptr::null_mut());
+    pub const EXERCISE_01_UNINITIALIZED: Option<NonNull<u8>> = NonNull::new(std::ptr::null_mut());
 
     /// ## 练习 02: 从栈引用创建 NonNull
     ///
@@ -262,7 +267,10 @@ mod tests {
     #[test]
     fn test_exercise_02_bool_duty_cycle_empty() {
         let flags: &[bool] = &[];
-        assert_eq!(BoolToFloatExercises::exercise_02_bool_duty_cycle(flags), 0.0);
+        assert_eq!(
+            BoolToFloatExercises::exercise_02_bool_duty_cycle(flags),
+            0.0
+        );
     }
 
     // --------------------------------------------------------
