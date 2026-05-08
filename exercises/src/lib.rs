@@ -1,3 +1,5 @@
+#![feature(gen_blocks, yield_expr)]
+
 //! # Rust 编程练习库
 //!
 //! 本库提供按主题分类的编程练习题，覆盖 Rust 核心概念：
@@ -21,3 +23,4 @@ pub mod error_handling;
 pub mod macros;
 pub mod unsafe_rust;
 pub mod rust_195_feature_exercises;
+pub mod rust_196_feature_exercises;

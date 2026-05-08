@@ -4,8 +4,8 @@
 //! 每道练习题包含：题目描述、起始代码（stub）、参考实现、测试用例。
 
 use std::collections::VecDeque;
-use std::sync::atomic::{AtomicIsize, AtomicUsize, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicIsize, AtomicUsize, Ordering};
 use std::thread;
 
 // ============================================================
@@ -82,7 +82,9 @@ impl IfLetGuardsExercises {
         let mut result = Vec::new();
         for input in inputs {
             match input {
-                s if let Ok(n) = s.parse::<i32>() && (10..=100).contains(&n) => {
+                s if let Ok(n) = s.parse::<i32>()
+                    && (10..=100).contains(&n) =>
+                {
                     result.push(n);
                 }
                 _ => {}
@@ -136,7 +138,8 @@ impl IfLetGuardsExercises {
     pub fn exercise_04_state_machine(state: DoorState, event: &Event) -> DoorState {
         match (state, event) {
             (DoorState::Closed, Event::PressButton(pass))
-                if let Some(p) = pass && p == "secret" =>
+                if let Some(p) = pass
+                    && p == "secret" =>
             {
                 DoorState::Opened
             }
@@ -297,9 +300,9 @@ impl AtomicUpdateExercises {
             }
 
             pub fn acquire(&self) -> bool {
-                let result = self
-                    .0
-                    .update(Ordering::SeqCst, Ordering::SeqCst, |old| if old > 0 { old - 1 } else { old });
+                let result = self.0.update(Ordering::SeqCst, Ordering::SeqCst, |old| {
+                    if old > 0 { old - 1 } else { old }
+                });
                 result > 0
             }
         }
@@ -326,11 +329,9 @@ impl AtomicUpdateExercises {
     /// ```
     pub fn exercise_03_try_update(counter: &AtomicUsize, max: usize) -> bool {
         counter
-            .try_update(
-                Ordering::Relaxed,
-                Ordering::Relaxed,
-                |old| if old < max { Some(old + 1) } else { None },
-            )
+            .try_update(Ordering::Relaxed, Ordering::Relaxed, |old| {
+                if old < max { Some(old + 1) } else { None }
+            })
             .is_ok()
     }
 }

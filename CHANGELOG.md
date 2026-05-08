@@ -34,7 +34,8 @@
 
 - 修复 c06_async `unused_features` 警告（移除 `async_fn_traits` feature 声明）
 - 修复 c10_networks `items_after_test_module` clippy 警告（移动 `mod tests` 到文件末尾）
-- 全 workspace `cargo clippy` 通过，0 errors 0 warnings
+- 全 workspace `cargo clippy` 通过，0 errors；修复 `approx_constant`、`const_is_empty`、`non_canonical_clone_impl`、`collapsible_if`、`should_implement_trait` 等 style 警告
+- 修复 15 个 example 文件名冲突（`rust_193_features_demo.rs` 等重复名，统一加 crate 前缀）
 
 ### 🏗️ Common Crate 扩展
 
@@ -73,6 +74,19 @@
 - **c04**: 新增 `type_state_machine.rs` — HTTP 构建器和文件句柄的类型状态模式（8 个测试）
 - **c08**: 新增 `AlgorithmSkeletons` — 二分查找、快速排序、BFS 的可运行骨架实现（3 个测试）
 - **c09**: 新增 `functional_patterns.rs` — 高阶函数、迭代器管道、Monoid、组合子（11 个测试）
+
+### 📚 Content 中心扩充（本轮 +3）
+
+- **content/production/performance_tuning.md**: 生产级性能调优深度指南（11KB），覆盖内存布局、缓存优化、SIMD、火焰图分析
+- **content/emerging/const_generics_advanced.md**: 常量泛型表达式高级指南（9.7KB），含 `generic_const_exprs` 特性跟踪、类型级整数运算、与 `typenum` 对比矩阵
+- **content/academic/formal_verification_landscape.md**: 形式化验证全景指南（12.5KB），覆盖 Prusti/Kani/Miri/RustBelt 四大工具选型决策树
+- **content/README.md**: 统计更新至 29 文档 / 145+ 示例 / 83% 完成度
+
+### 🏗️ Crate 代码深化（本轮 +3）
+
+- **c05_threads**: 新建 `thread_pool_patterns.rs`（829 行），覆盖线程池设计模式、工作窃取队列、scoped threads、无锁数据结构概念；27 个测试
+- **c10_networks**: 新建 `libp2p_advanced.rs`（734 行），覆盖 libp2p 深度集成（Relay v2 / AutoNAT / DCUtR）；条件编译于 `libp2p` feature
+- **c12_wasm**: 新建 `component_model.rs`（707 行），覆盖 WASI Preview 2 组件模型、wit-bindgen、wasm-tools、jco 桥接；22 个测试
 
 ### 🏗️ Common Crate 扩展（续）
 

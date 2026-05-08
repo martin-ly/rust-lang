@@ -301,6 +301,9 @@ pub mod rust_196_features;
 /// 异步运行时示例
 pub mod async_runtime_examples;
 
+/// 异步运行时内部原理概念
+pub mod async_runtime_internals;
+
 /// 异步集成框架
 pub mod async_integration_framework;
 

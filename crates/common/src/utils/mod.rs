@@ -288,10 +288,8 @@ impl<T: Clone + PartialEq, R: Clone> Memoize<T, R> {
     where
         F: FnOnce(&T) -> R,
     {
-        if let Some(ref last) = self.last_input {
-            if last == &input {
-                return self.last_result.clone().unwrap();
-            }
+        if let Some(ref last) = self.last_input && last == &input {
+            return self.last_result.clone().unwrap();
         }
 
         let result = f(&input);

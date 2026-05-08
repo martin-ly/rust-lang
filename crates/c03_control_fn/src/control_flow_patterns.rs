@@ -13,7 +13,7 @@ impl MatchPatterns {
     pub fn classify_number(n: i32) -> &'static str {
         match n {
             0 => "zero",
-            1 | 2 | 3 => "small",
+            1..=3 => "small",
             4..=10 => "medium",
             n if n < 0 => "negative",
             n if n > 100 => "large",
@@ -60,14 +60,8 @@ impl LetChainPatterns {
     }
 
     /// while let 遍历迭代器
-    pub fn sum_even_numbers(mut iter: impl Iterator<Item = i32>) -> i32 {
-        let mut sum = 0;
-        while let Some(n) = iter.next() {
-            if n % 2 == 0 {
-                sum += n;
-            }
-        }
-        sum
+    pub fn sum_even_numbers(iter: impl Iterator<Item = i32>) -> i32 {
+        iter.filter(|n| n % 2 == 0).sum()
     }
 }
 
@@ -83,9 +77,9 @@ impl LoopPatterns {
         result.copied()
     }
 
-    /// 使用 loop 标签跳出嵌套循环
+    /// 使用嵌套循环查找数对
     pub fn find_pair_sum(target: i32, arr: &[i32]) -> Option<(usize, usize)> {
-        'outer: for (i, &a) in arr.iter().enumerate() {
+        for (i, &a) in arr.iter().enumerate() {
             for (j, &b) in arr.iter().enumerate().skip(i + 1) {
                 if a + b == target {
                     return Some((i, j));
@@ -137,19 +131,13 @@ mod tests {
             Some("HELLO".to_string())
         );
         assert_eq!(LetChainPatterns::process_user_data(None), None);
-        assert_eq!(
-            LetChainPatterns::process_user_data(Some("   ")),
-            None
-        );
+        assert_eq!(LetChainPatterns::process_user_data(Some("   ")), None);
     }
 
     #[test]
     fn test_sum_even_numbers() {
         let nums = vec![1, 2, 3, 4, 5, 6];
-        assert_eq!(
-            LetChainPatterns::sum_even_numbers(nums.into_iter()),
-            12
-        );
+        assert_eq!(LetChainPatterns::sum_even_numbers(nums.into_iter()), 12);
     }
 
     #[test]
@@ -162,9 +150,6 @@ mod tests {
         assert!(i < j);
         assert_eq!(arr[i] + arr[j], 7);
 
-        assert_eq!(
-            LoopPatterns::find_pair_sum(100, &arr),
-            None
-        );
+        assert_eq!(LoopPatterns::find_pair_sum(100, &arr), None);
     }
 }

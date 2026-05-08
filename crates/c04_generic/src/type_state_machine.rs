@@ -23,6 +23,12 @@ pub struct UrlSet;
 /// 已设置 method + url + body（可发送）
 pub struct Ready;
 
+impl Default for HttpRequestBuilder<Init> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl HttpRequestBuilder<Init> {
     /// 创建新的请求构建器
     pub fn new() -> Self {

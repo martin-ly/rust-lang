@@ -485,21 +485,25 @@ impl Expr {
     }
 
     /// 创建加法表达式
+    #[allow(clippy::should_implement_trait)]
     pub fn add(lhs: Self, rhs: Self) -> Self {
         Self::Add(Box::new(lhs), Box::new(rhs))
     }
 
     /// 创建乘法表达式
+    #[allow(clippy::should_implement_trait)]
     pub fn mul(lhs: Self, rhs: Self) -> Self {
         Self::Mul(Box::new(lhs), Box::new(rhs))
     }
 
     /// 创建除法表达式
+    #[allow(clippy::should_implement_trait)]
     pub fn div(lhs: Self, rhs: Self) -> Self {
         Self::Div(Box::new(lhs), Box::new(rhs))
     }
 
     /// 创建取负表达式
+    #[allow(clippy::should_implement_trait)]
     pub fn neg(inner: Self) -> Self {
         Self::Neg(Box::new(inner))
     }
@@ -1170,7 +1174,8 @@ mod tests {
     #[test]
     fn test_error_accumulator() {
         let mut acc = ErrorAccumulator::new();
-        acc.validate("name", !"".is_empty(), "名称不能为空");
+        let empty = String::new();
+        acc.validate("name", !empty.is_empty(), "名称不能为空");
         acc.validate("age", 20 >= 18, "年龄必须大于等于18");
         acc.validate("email", false, "邮箱格式错误");
 

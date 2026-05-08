@@ -198,8 +198,7 @@ impl SelfReferentialPatterns {
         let shared = Arc::new(100);
         let clone = Arc::clone(&shared);
         // 模拟跨作用域/线程传递
-        let v = *clone;
-        v
+        *clone
     }
 }
 

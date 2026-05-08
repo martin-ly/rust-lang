@@ -235,9 +235,7 @@ impl ContainerFamily for VecFamily {
     type Member<T> = Vec<T>;
 
     fn create<T>(value: T) -> Self::Member<T> {
-        let mut v = Vec::new();
-        v.push(value);
-        v
+        vec![value]
     }
 }
 
@@ -655,7 +653,7 @@ mod tests {
         assert_eq!(TypeDispatcher::dispatch(&42i32), "i32");
         assert_eq!(TypeDispatcher::dispatch(&"hello".to_string()), "String");
         assert_eq!(TypeDispatcher::dispatch(&"hello"), "&str");
-        assert_eq!(TypeDispatcher::dispatch(&3.14f64), "unknown");
+        assert_eq!(TypeDispatcher::dispatch(&2.5f64), "unknown");
     }
 
     // --- GenericSpecializationConcept 测试 ---

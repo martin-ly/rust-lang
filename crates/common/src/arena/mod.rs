@@ -38,10 +38,7 @@ pub struct Handle<T> {
 // 手动实现 Clone 和 Copy，不依赖 T 的 trait bounds
 impl<T> Clone for Handle<T> {
     fn clone(&self) -> Self {
-        Self {
-            index: self.index,
-            _marker: PhantomData,
-        }
+        *self
     }
 }
 

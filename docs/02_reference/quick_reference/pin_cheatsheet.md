@@ -1,0 +1,97 @@
+# Pin 与自引用结构速查卡
+
+> **适用场景**: 异步 Future、自引用结构、侵入式数据结构
+> **版本**: Rust 1.68+ (`pin!` 宏稳定)
+
+---
+
+## 🎯 核心概念
+
+```text
+Pin<P> 的核心保证:
+┌─────────────────────────────────────────┐
+│  如果 T: !Unpin，则 Pin<&mut T> 保证:    │
+│  1. T 的内存地址不会变（不被移动）        │
+│  2. 直到 Drop 前，T 始终在同一位置         │
+└─────────────────────────────────────────┘
+```
+
+| 概念 | 说明 | 典型类型 |
+|------|------|---------|
+| `Pin<P>` | 固定指针包装器 | `Pin<&mut T>`, `Pin<Box<T>>` |
+| `Unpin` | Auto trait，99% 类型自动实现 | `i32`, `String`, `Vec<T>` |
+| `!Unpin` | 显式 `PhantomPinned` 标记 | 自引用结构 |
+| `pin!` | 栈固定宏（1.68+） | `let p = pin!(data);` |
+| `Box::pin` | 堆固定 | `Pin<Box<T>>` |
+
+---
+
+## ⚡ 代码模式
+
+### 栈固定
+
+```rust
+use std::pin::pin;
+
+let data = MyStruct::new();
+let pinned: Pin<&mut MyStruct> = pin!(data);
+```
+
+### 堆固定
+
+```rust
+let pinned: Pin<Box<MyStruct>> = Box::pin(MyStruct::new());
+```
+
+### 自引用结构（概念）
+
+```rust
+use std::marker::PhantomPinned;
+
+struct SelfRef {
+    data: String,
+    // 这个字段指向 data，所以结构不能移动
+    _pin: PhantomPinned,
+}
+```
+
+### 安全投影规则
+
+```rust
+impl MyStruct {
+    // ✅ 安全: 投影到不包含自引用的字段
+    fn get_name(self: Pin<&Self>) -> &str {
+        &self.name
+    }
+
+    // ❌ 不安全: 投影到包含自引用的字段
+    // fn get_ptr(self: Pin<&Self>) -> &String { &self.data }
+}
+```
+
+---
+
+## 📊 Pin 使用决策树
+
+```text
+需要固定值?
+├── 生命周期短（函数内）──→ pin! 宏（栈固定）
+├── 需要长期存储 ─────────→ Box::pin（堆固定）
+└── 不需要固定 ───────────→ 普通 &mut T
+
+结构体包含自引用?
+├── 是 ───────────────────→ PhantomPinned + Pin<&mut Self>
+└── 否 ───────────────────→ 不需要 Pin
+```
+
+---
+
+## 🔗 参考
+
+- [c01_pin_and_self_referential](../../../crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs)
+- [Rust Pin 文档](https://doc.rust-lang.org/std/pin/)
+
+---
+
+**维护者**: Rust 学习项目团队
+**最后更新**: 2026-05-08

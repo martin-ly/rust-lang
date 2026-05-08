@@ -232,8 +232,7 @@ impl IfLetGuardsPatterns {
             .filter_map(|entry| match entry {
                 Some(s)
                     if let Ok(n) = s.parse::<u32>()
-                        && n >= 10
-                        && n <= 100
+                        && (10..=100).contains(&n)
                         && n % 2 == 0 =>
                 {
                     Some(n)

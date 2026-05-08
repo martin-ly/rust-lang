@@ -373,6 +373,11 @@ impl<T> NonEmptyVec<T> {
         1 + self.tail.len()
     }
 
+    /// 是否为空（NonEmptyVec 永远不为空）
+    pub fn is_empty(&self) -> bool {
+        false
+    }
+
     /// 迭代器
     pub fn iter(&self) -> impl Iterator<Item = &T> {
         std::iter::once(&self.head).chain(self.tail.iter())

@@ -46,15 +46,30 @@ content/
 ├── ecosystem/                # 生态系统深度
 │   ├── README.md
 │   ├── web_frameworks/
-│   │   └── axum_deep_dive.md
+│   │   ├── axum_deep_dive.md
+│   │   ├── actix_web_vs_axum.md
+│   │   ├── grpc_microservices_guide.md
+│   │   └── rocket_guide.md
 │   ├── database/
+│   │   ├── sea_orm_deep_dive.md
+│   │   └── sqlx_deep_dive.md
 │   ├── async_runtimes/
 │   └── flutter_rust_bridge.md
 ├── production/               # 生产实践
 │   ├── README.md
-│   └── serverless_deployment_guide.md
+│   ├── performance_tuning.md
+│   ├── serverless_deployment_guide.md
+│   ├── kubernetes_deployment_guide.md
+│   ├── observability_guide.md
+│   ├── security_best_practices.md
+│   └── ci_cd_guide.md
 └── academic/                 # 学术研究
-    └── README.md
+    ├── README.md
+    ├── formal_verification_landscape.md
+    ├── prusti_verification_tutorial.md
+    ├── tree_borrows_guide.md
+    ├── tree_borrows_authoritative_guide.md
+    └── coq_formalization_guide.md
 ```
 
 ---
@@ -63,11 +78,11 @@ content/
 
 | 类别 | 文档数 | 代码示例 | 完成度 |
 |------|--------|----------|--------|
-| emerging | 6 | 40+ | 90% |
-| ecosystem | 9 | 55+ | 75% |
-| production | 4 | 28+ | 78% |
-| academic | 4 | 18+ | 75% |
-| **总计** | **23** | **145+** | **80%** |
+| emerging | 7 | 45+ | 90% |
+| ecosystem | 11 | 68+ | 78% |
+| production | 6 | 38+ | 80% |
+| academic | 5 | 22+ | 78% |
+| **总计** | **29** | **165+** | **81%** |
 
 ---
 
@@ -108,23 +123,34 @@ content/
 
 - [Rust 1.95 预览](emerging/rust_1_95_preview.md)
 - [Generic Const Expressions](emerging/generic_const_exprs.md)
+- [常量泛型高级特性](emerging/const_generics_advanced.md)
 - [Async Closures](emerging/async_closures.md)
 - [WASM 高级主题](emerging/wasm_advanced_topics.md)
 
 ### 生态系统
 
 - [Axum 深度解析](ecosystem/web_frameworks/axum_deep_dive.md)
+- [Actix-web vs Axum](ecosystem/web_frameworks/actix_web_vs_axum.md)
+- [Rocket 框架指南](ecosystem/web_frameworks/rocket_guide.md)
+- [SQLx 深度解析](ecosystem/database/sqlx_deep_dive.md)
+- [Sea-ORM 深度解析](ecosystem/database/sea_orm_deep_dive.md)
 - [Flutter + Rust 跨平台开发](ecosystem/flutter_rust_bridge.md)
 
 ### 生产实践
 
 - [生产就绪检查清单](production/README.md)
+- [性能调优实战指南](production/performance_tuning.md)
 - [Serverless 部署指南](production/serverless_deployment_guide.md)
 - [Kubernetes 部署指南](production/kubernetes_deployment_guide.md)
+- [CI/CD 指南](production/ci_cd_guide.md)
+- [可观测性指南](production/observability_guide.md)
+- [安全最佳实践](production/security_best_practices.md)
 
 ### 学术研究
 
 - [RustBelt 项目](academic/README.md)
+- [形式化验证工具全景](academic/formal_verification_landscape.md)
+- [Prusti 验证教程](academic/prusti_verification_tutorial.md)
 
 ---
 

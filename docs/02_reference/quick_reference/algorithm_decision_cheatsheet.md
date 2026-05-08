@@ -1,0 +1,74 @@
+# 算法选择决策树速查卡
+
+> **适用场景**: 面试准备、算法选型、性能优化
+> **版本**: 通用
+
+---
+
+## 📊 排序算法
+
+| 算法 | 平均 | 最坏 | 空间 | 稳定 | Rust 标准库 |
+|------|------|------|------|------|------------|
+| QuickSort | O(n log n) | O(n²) | O(log n) | ❌ | `sort_unstable` |
+| MergeSort | O(n log n) | O(n log n) | O(n) | ✅ | `sort` (Timsort) |
+| HeapSort | O(n log n) | O(n log n) | O(1) | ❌ | - |
+| Counting | O(n + k) | O(n + k) | O(k) | ✅ | - |
+| Insertion | O(n²) | O(n²) | O(1) | ✅ | 小数组优化 |
+
+**Rust 选择**:
+
+- `slice.sort()` → Timsort（稳定）
+- `slice.sort_unstable()` → Pattern-defeating QuickSort（更快）
+
+---
+
+## 📊 搜索算法
+
+| 场景 | 算法 | 时间 | Rust 实现 |
+|------|------|------|----------|
+| 有序数组 | 二分查找 | O(log n) | `slice.binary_search` |
+| 哈希查找 | HashMap | O(1) 平均 | `std::collections::HashMap` |
+| 前缀匹配 | Trie | O(m) | `radix_trie` crate |
+| 字符串 | KMP / Boyer-Moore | O(n + m) | `memchr` crate |
+
+---
+
+## 📊 图算法
+
+| 问题 | 算法 | 时间 | 适用 |
+|------|------|------|------|
+| 最短路径（无权） | BFS | O(V + E) | 层级遍历 |
+| 最短路径（正权） | Dijkstra | O((V + E) log V) | 路由、导航 |
+| 最短路径（负权） | Bellman-Ford | O(VE) | 金融检测 |
+| 全源最短路径 | Floyd-Warshall | O(V³) | 小型稠密图 |
+| 最小生成树 | Kruskal / Prim | O(E log E) | 网络设计 |
+| 拓扑排序 | Kahn / DFS | O(V + E) | 任务调度 |
+
+---
+
+## 📊 动态规划
+
+| 特征 | 适用 DP | 不适用（尝试贪心） |
+|------|---------|------------------|
+| 最优子结构 | ✅ | - |
+| 重叠子问题 | ✅ | - |
+| 局部最优 = 全局最优 | - | ✅ |
+
+**经典问题**:
+
+- 背包问题 → DP
+- 硬币找零 → DP（一般情况）
+- 活动选择 → 贪心
+- 区间调度 → 贪心
+
+---
+
+## 🔗 参考
+
+- [c08_algorithm_decision_trees](../../../crates/c08_algorithms/src/algorithm_decision_trees.rs)
+- [c08_AlgorithmSkeletons](../../../crates/c08_algorithms/src/algorithm_decision_trees.rs)
+
+---
+
+**维护者**: Rust 学习项目团队
+**最后更新**: 2026-05-08

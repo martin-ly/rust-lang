@@ -33,6 +33,7 @@ pub mod component_model;
 pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95 特性 (WASM 场景)
 pub mod rust_196_features;
+pub mod wasm_performance;
 pub mod wasi_migration; // WASI p1/p2 迁移指南 // WebAssembly Component Model (WASI Preview 2)
 
 /// wasm-bindgen 基础示例

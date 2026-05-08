@@ -22,6 +22,7 @@ use wasm_bindgen::prelude::*;
 /// WebAssembly Component Model 是 WASI Preview 2 的核心创新，
 /// 它将 WASM 从低级的模块（Module）抽象提升到组件（Component）级别，
 /// 实现了真正的语言无关、类型安全的跨组件互操作。
+#[derive(Default)]
 pub struct ComponentModelOverview;
 
 impl ComponentModelOverview {
@@ -202,6 +203,7 @@ wasm-tools validate combined.wasm --features component-model
 ///
 /// 为已有 WASI Preview 1 应用提供向组件模型迁移的路径和注意事项。
 /// WASI Preview 1 到 Preview 2 迁移指南
+#[derive(Default)]
 pub struct WasiPreview2Migration;
 
 impl WasiPreview2Migration {
@@ -367,6 +369,7 @@ Preview 2: wasi:clocks/wall-clock@0.2.0 + wasi:clocks/monotonic-clock@0.2.0
 ///
 /// 构建、组合、运行和分发 WebAssembly 组件所需的工具集。
 /// 组件模型工具链
+#[derive(Default)]
 pub struct WasmComponentTooling;
 
 impl WasmComponentTooling {
@@ -575,6 +578,7 @@ pub fn simulate_component_call(interface: &str, function: &str) -> String {
 ///
 /// 展示如何从 JS 获取当前 WASM 目标的组件模型支持状态。
 #[wasm_bindgen]
+#[derive(Default)]
 pub struct ComponentModelJsBridge;
 
 #[wasm_bindgen]

@@ -402,63 +402,6 @@ RTIC 可调度性分析:
 }
 
 // =========================================================================
-// 测试
-// =========================================================================
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_rtic_structure_concepts() {
-        let explanation = RticAppStructure::explain_structure();
-        assert!(explanation.contains("#[rtic::app]"));
-        assert!(explanation.contains("#[shared]"));
-    }
-
-    #[test]
-    fn test_priority_ceiling_concept() {
-        let lock = RticResourceModel::locking_mechanism();
-        assert!(lock.contains("Priority Ceiling"));
-    }
-
-    #[test]
-    fn test_rtic_vs_embassy_interop() {
-        let pattern = RticEmbassyInterop::interop_pattern();
-        assert!(pattern.contains(" Embassy "));
-    }
-
-    #[test]
-    fn test_rtic_vs_embassy_matrix() {
-        let matrix = RticVsEmbassy::comparison_matrix();
-        assert!(matrix.contains("RTIC"));
-        assert!(matrix.contains("Embassy"));
-        assert!(matrix.contains("Hard real-time"));
-    }
-
-    #[test]
-    fn test_rtic2_async_tasks() {
-        let text = RticVsEmbassy::rtic2_async_tasks();
-        assert!(text.contains("async/await"));
-        assert!(text.contains("NVIC"));
-    }
-
-    #[test]
-    fn test_temperature_controller_arch() {
-        let arch = RticTemperatureController::system_architecture();
-        assert!(arch.contains("PID"));
-        assert!(arch.contains("ADC"));
-        assert!(arch.contains("RTIC guarantees"));
-    }
-
-    #[test]
-    fn test_interrupt_latency() {
-        let latency = RticTemperatureController::interrupt_latency_analysis();
-        assert!(latency.contains("Cortex-M4"));
-        assert!(latency.contains("FreeRTOS"));
-    }
-}
-
 // =========================================================================
 // 4. RTIC vs Embassy Decision Matrix
 // =========================================================================
@@ -564,3 +507,60 @@ vs FreeRTOS: typical 1-5us (full context save required)
 "#
     }
 }
+// 测试
+// =========================================================================
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_rtic_structure_concepts() {
+        let explanation = RticAppStructure::explain_structure();
+        assert!(explanation.contains("#[rtic::app]"));
+        assert!(explanation.contains("#[shared]"));
+    }
+
+    #[test]
+    fn test_priority_ceiling_concept() {
+        let lock = RticResourceModel::locking_mechanism();
+        assert!(lock.contains("Priority Ceiling"));
+    }
+
+    #[test]
+    fn test_rtic_vs_embassy_interop() {
+        let pattern = RticEmbassyInterop::interop_pattern();
+        assert!(pattern.contains(" Embassy "));
+    }
+
+    #[test]
+    fn test_rtic_vs_embassy_matrix() {
+        let matrix = RticVsEmbassy::comparison_matrix();
+        assert!(matrix.contains("RTIC"));
+        assert!(matrix.contains("Embassy"));
+        assert!(matrix.contains("Hard real-time"));
+    }
+
+    #[test]
+    fn test_rtic2_async_tasks() {
+        let text = RticVsEmbassy::rtic2_async_tasks();
+        assert!(text.contains("async/await"));
+        assert!(text.contains("NVIC"));
+    }
+
+    #[test]
+    fn test_temperature_controller_arch() {
+        let arch = RticTemperatureController::system_architecture();
+        assert!(arch.contains("PID"));
+        assert!(arch.contains("ADC"));
+        assert!(arch.contains("RTIC guarantees"));
+    }
+
+    #[test]
+    fn test_interrupt_latency() {
+        let latency = RticTemperatureController::interrupt_latency_analysis();
+        assert!(latency.contains("Cortex-M4"));
+        assert!(latency.contains("FreeRTOS"));
+    }
+}
+
