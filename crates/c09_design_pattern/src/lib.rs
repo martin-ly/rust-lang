@@ -50,6 +50,9 @@ pub mod formal_verification_examples;
 // 组合模式工程案例
 pub mod pattern_combinations;
 
+// Rust 特定设计惯用法
+pub mod rust_idioms;
+
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误
 
@@ -380,7 +383,6 @@ mod tests {
         assert_eq!(get_version(), "1.0.1");
     }
 }
-
 
 #[cfg(test)]
 pub mod miri_tests;

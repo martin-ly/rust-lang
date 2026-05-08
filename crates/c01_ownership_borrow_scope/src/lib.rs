@@ -330,6 +330,7 @@ pub mod function;
 pub mod internal_mut;
 pub mod layout_guarantees;
 pub mod ownership_utils;
+pub mod pin_and_self_referential;
 pub mod polonius_examples;
 pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95 特性 (MaybeUninit 数组互转, Cell AsRef)

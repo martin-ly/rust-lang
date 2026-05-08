@@ -125,7 +125,10 @@ pub mod rust_196_features;
 
 /// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式
 pub mod advanced_patterns;
+
 pub mod dyn_trait_advanced;
+/// 高级泛型编程模式模块 - GAT、HRTB、类型族、特化概念
+pub mod generic_advanced_patterns;
 
 /// 实用示例模块 - 展示实际项目中的泛型编程应用
 pub mod practical_examples;
@@ -381,7 +384,6 @@ pub fn project_status_summary() {
 
     println!("\n🎉 Rust Generics 多任务推进完成！");
 }
-
 
 #[cfg(test)]
 pub mod miri_tests;

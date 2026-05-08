@@ -126,6 +126,7 @@ mod tests {
 
 // 新增模块
 pub mod attribute_macros;
+pub mod compile_time_metaprogramming;
 pub mod declarative_macros;
 pub mod macro_hygiene;
 pub mod macro_patterns;
