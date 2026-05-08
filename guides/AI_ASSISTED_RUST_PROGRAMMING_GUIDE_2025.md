@@ -1,5 +1,6 @@
-# AI 辅助 Rust 编程指南
+# AI 辅助 Rust 编程指南 2025 版 (已归档)
 
+> **⚠️ 已更新**: 请查看最新版本 [AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md](./AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 > **最后更新**: 2026-03-14 (更新 Rust 1.94 特性)
 > **Rust 版本**: 1.94.0+
 > **目的**: 结合 AI 工具高效学习 Rust 与构建项目

@@ -58,6 +58,9 @@ pub mod miri_tests;
 // 导出高级宏系统模块
 pub mod advanced_macros;
 
+// 导出 use<..> precise capturing 深度指南
+pub mod precise_capturing_guide;
+
 // 导出示例模块
 pub mod examples;
 

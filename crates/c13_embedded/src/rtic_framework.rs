@@ -433,4 +433,140 @@ mod tests {
         let pattern = RticEmbassyInterop::interop_pattern();
         assert!(pattern.contains(" Embassy "));
     }
+
+    #[test]
+    fn test_rtic_vs_embassy_matrix() {
+        let matrix = RticVsEmbassy::comparison_matrix();
+        assert!(matrix.contains("RTIC"));
+        assert!(matrix.contains("Embassy"));
+        assert!(matrix.contains("Hard real-time"));
+    }
+
+    #[test]
+    fn test_rtic2_async_tasks() {
+        let text = RticVsEmbassy::rtic2_async_tasks();
+        assert!(text.contains("async/await"));
+        assert!(text.contains("NVIC"));
+    }
+
+    #[test]
+    fn test_temperature_controller_arch() {
+        let arch = RticTemperatureController::system_architecture();
+        assert!(arch.contains("PID"));
+        assert!(arch.contains("ADC"));
+        assert!(arch.contains("RTIC guarantees"));
+    }
+
+    #[test]
+    fn test_interrupt_latency() {
+        let latency = RticTemperatureController::interrupt_latency_analysis();
+        assert!(latency.contains("Cortex-M4"));
+        assert!(latency.contains("FreeRTOS"));
+    }
+}
+
+// =========================================================================
+// 4. RTIC vs Embassy Decision Matrix
+// =========================================================================
+
+/// RTIC vs Embassy decision matrix for embedded async frameworks.
+pub struct RticVsEmbassy;
+
+impl RticVsEmbassy {
+    /// Comparison matrix
+    pub fn comparison_matrix() -> &'static str {
+        r#"
+| Dimension | RTIC | Embassy |
+|-----------|------|---------|
+| Scheduling model | Preemptive priority (NVIC) | Cooperative + interrupt wake |
+| Real-time guarantee | Hard real-time (computable WCET) | Soft real-time (best-effort) |
+| Memory overhead | Minimal (no heap) | Small (configurable static alloc) |
+| Context switch | Hardware interrupt (zero-cost) | Software Waker (small overhead) |
+| Async support | RTIC 2.x async tasks | Native async/await |
+| Protocol stack | Integrate manually | Built-in TCP/IP, USB, BLE |
+| Learning curve | Steep (NVIC knowledge) | Gentle (familiar async) |
+| Use case | Hard real-time control | Complex protocol stacks (IoT, gateway) |
+"#
+    }
+
+    /// RTIC 2.x async task support
+    pub fn rtic2_async_tasks() -> &'static str {
+        r#"
+RTIC 2.x introduces experimental async/await support:
+
+```rust
+// RTIC 2.x async task example
+#[task]
+async fn network_task(cx: network_task::Context) {
+    let mut socket = cx.local.socket;
+    loop {
+        let data = socket.receive().await;  // async receive
+        process_packet(data).await;
+    }
+}
+```
+
+Note: RTIC async tasks are still constrained by NVIC priorities.
+Higher-priority tasks can preempt lower-priority async tasks.
+"#
+    }
+}
+
+// =========================================================================
+// 5. RTIC Real-World Project: Temperature Controller
+// =========================================================================
+
+/// Complete RTIC project concept: industrial temperature control system.
+pub struct RticTemperatureController;
+
+impl RticTemperatureController {
+    /// System architecture concept
+    pub fn system_architecture() -> &'static str {
+        r#"
+Temperature control system architecture:
+
+Hardware tasks (high priority):
++-- ADC sampling interrupt (Prio 4): read sensor every 1ms
++-- PWM update interrupt (Prio 3): update heater PWM every 10ms
++-- Emergency stop interrupt (Prio 5): hardware e-stop button
+
+Software tasks (low/medium priority):
++-- PID compute task (Prio 2): calculate control output every 100ms
++-- Communication task (Prio 1): handle Modbus/RS-485 commands
++-- Logging task (Prio 0): record temperature curve to Flash
+
+Shared resources:
++-- target_temperature: f32
++-- current_temperature: f32
++-- pid_output: f32
++-- system_state: StateMachine
+
+RTIC guarantees:
+- ADC sampling never delayed (highest priority)
+- Emergency stop responds immediately (preempts all tasks)
+- Data consistency during PID compute (priority-ceiling lock)
+- Deadlock-free (compile-time proof)
+"#
+    }
+
+    /// Interrupt latency analysis
+    pub fn interrupt_latency_analysis() -> &'static str {
+        r#"
+RTIC interrupt latency breakdown (Cortex-M4 @ 168MHz):
+
+1. Hardware latency: 12 clock cycles (~71ns)
+   - NVIC response + vector table fetch
+
+2. RTIC overhead: 0 cycles
+   - No runtime scheduler
+   - Direct jump to task handler
+
+3. Context save: variable (depends on task)
+   - Only clobbered registers saved (compile-time optimization)
+   - Lazy FP state preservation (if FPU enabled)
+
+Total latency: typical 100-200ns (hard real-time guarantee)
+vs FreeRTOS: typical 1-5us (full context save required)
+"#
+    }
 }

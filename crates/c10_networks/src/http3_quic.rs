@@ -92,6 +92,61 @@ pub mod quic_impl {
          | 流控 | 连接级 + 流级窗口 | 连接级 + 流级 + 可插拔 |\n\
          | 优先级 | 依赖树 (复杂) | 简单优先级 (RFC 9218) |"
     }
+
+    /// HTTP/3 over QUIC 架构概念
+    pub fn http3_over_quic_concept() -> &'static str {
+        r#"
+HTTP/3 关键设计：
+
+1. 流映射
+   - 每个请求/响应对占用一个独立的 QUIC 双向流
+   - 取消了 HTTP/2 的流 ID 概念（QUIC 流天然有序）
+
+2. QPACK 头部压缩
+   - 替代 HTTP/2 的 HPACK（HPACK 对乱序敏感）
+   - 使用独立的单向流传输动态表更新
+
+3. 与 QUIC 的协同
+   - SETTINGS 帧在控制流上发送
+   - GOAWAY 使用 CONNECTION_CLOSE 帧
+   - 流控由 QUIC 的 transport 层统一管理
+"#
+    }
+
+    /// QUIC Echo 服务器骨架
+    pub fn quic_echo_server_skeleton() -> &'static str {
+        r#"
+// 基于 quinn 的 QUIC echo 服务器骨架
+use quinn::{Endpoint, ServerConfig};
+use std::sync::Arc;
+
+async fn run_server(addr: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let bind_addr: std::net::SocketAddr = addr.parse()?;
+
+    // TLS 配置（生产环境使用真实证书）
+    let crypto = rustls::ServerConfig::builder()
+        .with_no_client_auth()
+        .with_single_cert(cert_chain, private_key)?;
+
+    let server_config = ServerConfig::with_crypto(Arc::new(
+        quinn::crypto::rustls::QuicServerConfig::try_from(crypto)?
+    ));
+
+    let endpoint = Endpoint::server(server_config, bind_addr)?;
+    println!("QUIC server listening on {}", addr);
+
+    while let Some(incoming) = endpoint.accept().await {
+        tokio::spawn(async move {
+            if let Ok(connection) = incoming.await {
+                println!("Connected: {}", connection.remote_address());
+                // 处理双向流...
+            }
+        });
+    }
+    Ok(())
+}
+"#
+    }
 }
 
 #[cfg(not(feature = "quic"))]

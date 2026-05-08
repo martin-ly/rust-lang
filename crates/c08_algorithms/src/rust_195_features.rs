@@ -165,6 +165,79 @@ impl CfgSelectAlgorithmExamples {
     };
 }
 
+// ============================================================================
+// 5. Vec / VecDeque / LinkedList — push_mut / insert_mut 新 API
+// ============================================================================
+
+/// # 集合可变引用插入 API
+///
+/// Rust 1.95.0 为 Vec, VecDeque, LinkedList 稳定了一组新方法，
+/// 允许在插入元素后直接获取其可变引用，避免了二次查找。
+use std::collections::{LinkedList, VecDeque};
+
+pub struct PushMutExamples;
+
+impl PushMutExamples {
+    pub fn vec_push_and_initialize() -> Vec<String> {
+        let mut buffers = Vec::new();
+        let slot: &mut String = buffers.push_mut(String::new());
+        slot.push_str("initialized in-place");
+        let slot2 = buffers.push_mut(String::new());
+        slot2.push_str("second element");
+        buffers
+    }
+
+    pub fn vec_insert_at_position() -> Vec<i32> {
+        let mut values = vec![10, 30, 40];
+        let inserted = values.insert_mut(1, 0);
+        *inserted = 20;
+        values
+    }
+
+    pub fn deque_push_front_lru() -> VecDeque<u64> {
+        let mut cache = VecDeque::with_capacity(4);
+        cache.push_back(100);
+        cache.push_back(200);
+        cache.push_back(300);
+        let front = cache.push_front_mut(999);
+        *front = 0;
+        cache
+    }
+
+    pub fn deque_push_back_batch() -> VecDeque<String> {
+        let mut queue = VecDeque::new();
+        for i in 0..3 {
+            let item = queue.push_back_mut(format!("task-{i}-placeholder"));
+            item.push_str("-completed");
+        }
+        queue
+    }
+
+    pub fn deque_insert_ordered() -> VecDeque<i32> {
+        let mut sorted = VecDeque::from([1, 3, 5, 7]);
+        let slot = sorted.insert_mut(2, 0);
+        *slot = 4;
+        sorted
+    }
+
+    pub fn list_push_front_build() -> LinkedList<String> {
+        let mut list = LinkedList::new();
+        let first = list.push_front_mut(String::new());
+        first.push_str("head");
+        let second = list.push_front_mut(String::new());
+        second.push_str("new head");
+        list
+    }
+
+    pub fn list_push_back_build() -> LinkedList<i32> {
+        let mut list = LinkedList::new();
+        for i in 0..3 {
+            let item = list.push_back_mut(0);
+            *item = i * 10;
+        }
+        list
+    }
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -212,5 +285,53 @@ mod tests {
     fn test_safe_divide() {
         assert_eq!(AlgorithmColdPathExamples::safe_divide(10, 2), Some(5));
         assert_eq!(AlgorithmColdPathExamples::safe_divide(10, 0), None);
+    }
+
+    #[test]
+    fn test_vec_push_mut() {
+        let v = PushMutExamples::vec_push_and_initialize();
+        assert_eq!(v.len(), 2);
+        assert_eq!(v[0], "initialized in-place");
+        assert_eq!(v[1], "second element");
+    }
+
+    #[test]
+    fn test_vec_insert_mut() {
+        let v = PushMutExamples::vec_insert_at_position();
+        assert_eq!(v, vec![10, 20, 30, 40]);
+    }
+
+    #[test]
+    fn test_deque_push_front_mut() {
+        let d = PushMutExamples::deque_push_front_lru();
+        assert_eq!(d.front(), Some(&0));
+    }
+
+    #[test]
+    fn test_deque_push_back_mut() {
+        let d = PushMutExamples::deque_push_back_batch();
+        assert_eq!(d.len(), 3);
+        assert!(d.iter().all(|s| s.ends_with("-completed")));
+    }
+
+    #[test]
+    fn test_deque_insert_mut() {
+        let d = PushMutExamples::deque_insert_ordered();
+        let vec: Vec<_> = d.iter().copied().collect();
+        assert_eq!(vec, vec![1, 3, 4, 5, 7]);
+    }
+
+    #[test]
+    fn test_list_push_front_mut() {
+        let list = PushMutExamples::list_push_front_build();
+        let vec: Vec<_> = list.iter().collect();
+        assert_eq!(vec, vec!["new head", "head"]);
+    }
+
+    #[test]
+    fn test_list_push_back_mut() {
+        let list = PushMutExamples::list_push_back_build();
+        let vec: Vec<_> = list.iter().copied().collect();
+        assert_eq!(vec, vec![0, 10, 20]);
     }
 }

@@ -810,3 +810,101 @@ mod tests {
         assert_eq!(topic, "/myapp/v1/mainnet");
     }
 }
+
+// =========================================================================
+// libp2p 高级模式：DHT、PubSub、NAT 穿透
+// =========================================================================
+
+/// # Kademlia DHT 使用概念
+///
+/// Kademlia 是 libp2p 的分布式哈希表实现，用于节点发现和内容路由。
+pub struct KademliaConcepts;
+
+impl KademliaConcepts {
+    /// DHT 路由表维护概念
+    pub fn dht_routing_concept() -> &'static str {
+        r#"
+Kademlia DHT 在 libp2p 中的使用：
+
+1. 启动时加入网络
+   - 配置 bootstrap 节点列表
+   - 执行 bootstrap() 填充路由表
+
+2. 提供内容
+   - 计算内容 CID 的 XOR 距离
+   - 将提供记录存储到最近的 k 个节点
+
+3. 发现内容
+   - get_providers(CID) 查询 DHT
+   - 返回存储该内容的节点列表
+
+4. 节点发现
+   - get_closest_peers(PeerId) 查找网络中最近的节点
+   - 用于 NAT 穿透的协调节点发现
+"#
+    }
+
+    /// NAT 穿透概念：AutoNAT + Circuit Relay + DCUtR
+    pub fn nat_traversal_concept() -> &'static str {
+        r#"
+libp2p NAT 穿透三件套：
+
+1. AutoNAT
+   - 节点自动检测自己是否位于 NAT 后
+   - 通过向多个对等节点询问自己的外部地址
+
+2. Circuit Relay (中继)
+   - 无法直接连接的节点通过中继节点转发流量
+   - Relay 节点只转发加密流量，无法窥探内容
+   - 分为 Relay v1 (静态) 和 v2 ( reservation-based)
+
+3. DCUtR (Direct Connection Upgrade through Relay)
+   - 通过中继建立初始连接后，尝试打洞建立直连
+   - 使用 Simultaneous Open (TCP) 或 UDP hole punching
+   - 成功率：~60-80% (取决于 NAT 类型)
+
+决策流程：
+  A 想连接 B
+  ├── B 有公网 IP？ → 直接连接
+  ├── B 有 Relay 地址？ → 通过 Relay 连接 → 尝试 DCUtR 升级
+  └── B 只有私有地址？ → 需要第三方协调打洞
+"#
+    }
+}
+
+/// # GossipSub 发布订阅概念
+///
+/// GossipSub 是 libp2p 的默认消息路由协议，结合了：
+/// - FloodSub 的可靠性（直接转发给所有邻居）
+/// - Gossip 的可扩展性（随机传播元数据）
+pub struct GossipSubConcepts;
+
+impl GossipSubConcepts {
+    /// GossipSub v1.1 增强特性
+    pub fn gossipsub_v1_1_features() -> &'static str {
+        r#"
+GossipSub v1.1 关键特性：
+
+1. 网状网络 (Mesh)
+   - 每个 topic 维护一个 mesh 邻居子集 (D = 6)
+   - 消息在 mesh 内 flood 传播
+   - 超出 mesh 用 gossip 传播元数据
+
+2. 修剪与嫁接 (Prune / Graft)
+   - 动态调整 mesh 成员以适应节点 Churn
+   - 基于节点分数（应用层可定制）决定保留/移除
+
+3. 消息 ID 追踪
+   - 每个消息有唯一 ID (IHAVE / IWANT 控制消息)
+   - 防止重复传播，支持消息拉取
+
+4. 反垃圾机制
+   - P4 (Peer Pressure for Publish-Prune Protection)
+   - 灰名单：行为异常节点被临时忽略
+
+5. 发布者优化
+   - 发布者自动加入该 topic 的 mesh
+   - 直接邻居优先转发，减少延迟
+"#
+    }
+}

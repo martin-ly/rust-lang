@@ -99,11 +99,7 @@ pub mod linux_impl {
                 std::io::Error::new(std::io::ErrorKind::Other, "completion queue incomplete")
             })?;
             let ret = cqe.result();
-            results.push(if ret < 0 {
-                0
-            } else {
-                ret as usize
-            });
+            results.push(if ret < 0 { 0 } else { ret as usize });
         }
 
         Ok(results)
@@ -148,14 +144,87 @@ pub mod linux_impl {
         }
     }
 
+    /// 使用 Registered Buffers（固定缓冲区）
+    ///
+    /// io_uring 允许预先注册缓冲区，避免每次 I/O 的内存锁定开销。
+    /// 这对高频小 I/O 场景（如数据库、缓存）有显著性能提升。
+    pub fn registered_buffers_concept() -> &'static str {
+        r#"
+// 1. 注册缓冲区池
+let mut buf_pool = vec![vec![0u8; 4096]; 128];
+let mut iovecs: Vec<_> = buf_pool.iter_mut()
+    .map(|b| libc::iovec { iov_base: b.as_mut_ptr() as _, iov_len: b.len() })
+    .collect();
+
+// 2. 向内核注册（只需一次）
+ring.submitter()
+    .register_buffers(&iovecs)
+    .expect("register buffers failed");
+
+// 3. 使用 REGISTERED_BUFFER 标志提交 I/O
+let read_e = opcode::Read::new(fd, buf_ptr, buf_len)
+    .buf_index(buf_index) // 使用已注册缓冲区的索引
+    .build();
+"#
+    }
+
+    /// 操作链（Linked Operations）
+    ///
+    /// io_uring 支持将多个操作链接为原子序列：
+    /// 前一个操作完成后自动触发下一个，无需用户态干预。
+    pub fn linked_operations_concept() -> &'static str {
+        r#"
+// 链式操作：先打开文件，然后读取，最后关闭
+// 所有操作按顺序自动执行
+
+let open_e = opcode::OpenAt::new(dir_fd, path.as_ptr())
+    .flags(libc::O_RDONLY)
+    .build()
+    .user_data(1);
+
+let read_e = opcode::Read::new(types::Fd(0), buf.as_mut_ptr(), buf.len() as _)
+    .build()
+    .flags(squeue::Flags::IO_LINK) // 链接到前一个操作
+    .user_data(2);
+
+let close_e = opcode::Close::new(types::Fd(0))
+    .build()
+    .flags(squeue::Flags::IO_LINK)
+    .user_data(3);
+"#
+    }
+
+    /// io_uring 与 epoll 的决策树
+    pub fn when_to_use_io_uring() -> &'static str {
+        r#"
+何时使用 io_uring？
+
+1. 你的应用是 I/O 密集型的？
+   ├── 否 → 使用 epoll 或同步 I/O 即可
+   └── 是 → 继续 2
+
+2. 主要 I/O 类型？
+   ├── 网络 I/O（大量连接）→ io_uring (polling mode) 或 epoll
+   ├── 文件 I/O（批量读写）→ io_uring (核心优势)
+   └── 混合 I/O → io_uring (统一接口)
+
+3. 目标平台？
+   ├── Linux 5.19+（支持 multi-shot accept/recv）→ io_uring 首选
+   ├── Linux 5.10+（基础功能完整）→ io_uring 可用
+   ├── Linux 5.1+（基础支持）→ io_uring 有限功能
+   └── 非 Linux → 不可用（使用 epoll/kqueue/IOCP）
+
+4. 是否需要可移植性？
+   ├── 是 → 使用 Tokio（底层自动选择 epoll/io_uring/kqueue/IOCP）
+   └── 否（仅 Linux）→ 直接使用 io-uring crate
+"#
+    }
     /// io_uring 性能对比说明
     pub fn performance_comparison() -> &'static str {
-        "| 场景 | epoll | io_uring | 提升 |\n\
-         |------|-------|----------|------|\n\
-         | 单文件读取 | 1 syscall | 1 syscall | 相当 |\n\
-         | 100 文件批量读 | 100 syscalls | 1 syscall | ~100x |\n\
-         | 网络 echo | 2 syscalls/rq | 0 syscalls (polling) | 显著 |\n\
-         | 随机小 I/O | 同步 fallback | 真正异步 | 2-5x |"
+        "| 场景 | epoll | io_uring | 提升 |\n|------|-------|----------|------|\n| 单文件读取 | 1 \
+         syscall | 1 syscall | 相当 |\n| 100 文件批量读 | 100 syscalls | 1 syscall | ~100x |\n| \
+         网络 echo | 2 syscalls/rq | 0 syscalls (polling) | 显著 |\n| 随机小 I/O | 同步 fallback | \
+         真正异步 | 2-5x |"
     }
 }
 
@@ -166,8 +235,8 @@ pub mod stub {
     /// io_uring 概念说明
     pub fn io_uring_concept() {
         println!(
-            "[stub] io_uring 是 Linux 5.1+ 的高性能异步 I/O 接口。\n\
-             启用 'io-uring' feature 并在 Linux 上运行以查看真实实现。"
+            "[stub] io_uring 是 Linux 5.1+ 的高性能异步 I/O 接口。\n启用 'io-uring' feature 并在 \
+             Linux 上运行以查看真实实现。"
         );
     }
 

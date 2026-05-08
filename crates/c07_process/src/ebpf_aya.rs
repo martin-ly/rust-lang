@@ -303,3 +303,105 @@ mod tests {
         assert!(!EbpfLimitations::verifier_rejections().is_empty());
     }
 }
+
+// ============================================================================
+// 2. Tracepoint 系统调用追踪（概念代码）
+// ============================================================================
+
+/// # Tracepoint 追踪
+///
+/// Tracepoint 是内核预定义的静态探针点，覆盖关键系统调用和内核事件。
+/// 相比 kprobe，tracepoint 具有稳定的 ABI（内核版本间不变）。
+pub struct TracepointConcepts;
+
+impl TracepointConcepts {
+    /// sys_enter_openat tracepoint 概念
+    pub fn trace_openat_concept() -> &'static str {
+        r#"
+// eBPF 程序（内核态）
+#[tracepoint]
+pub fn trace_sys_enter_openat(ctx: TracePointContext) -> u32 {
+    // 读取系统调用参数
+    let filename_ptr: u64 = unsafe { ctx.read_at(16).unwrap() };
+    
+    // 将事件发送到用户态 ring buffer
+    let event = OpenEvent {
+        pid: bpf_get_current_pid_tgid() as u32,
+        filename: read_str(filename_ptr),
+    };
+    
+    unsafe {
+        EVENTS.output(&ctx, &event, 0);
+    }
+    
+    0
+}
+
+// 用户态加载程序
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut bpf = Bpf::load(include_bytes_aligned!("../../target/bpfel-unknown-none/debug/trace_open"))?;
+    
+    let program: &mut TracePoint = bpf.program_mut("trace_sys_enter_openat")
+        .unwrap()
+        .try_into()?;
+    program.load()?;
+    program.attach("syscalls", "sys_enter_openat")?;
+    
+    // 读取 ring buffer 事件
+    let mut events = AsyncPerfEventArray::try_from(bpf.map_mut("EVENTS")?)?;
+    // ... 处理事件
+    
+    Ok(())
+}
+"#
+    }
+
+    /// Ring Buffer vs Perf Buffer 对比
+    pub fn ring_buffer_vs_perf_buffer() -> &'static str {
+        r#"
+| 特性 | Perf Buffer (legacy) | Ring Buffer (推荐) |
+|------|---------------------|-------------------|
+| 内存布局 | 每 CPU 一个 buffer | 共享 ring buffer |
+| 顺序保证 | 仅同 CPU 内有序 | 全局有序 |
+| 溢出处理 | 丢包 | 可配置策略 |
+| 用户态 API | PerfEventArray | RingBuf / AsyncPerfEventArray |
+| 最小内核 | 4.3 | 5.8 |
+
+建议：新代码统一使用 Ring Buffer。
+"#
+    }
+}
+
+// ============================================================================
+// 3. eBPF 开发工作流
+// ============================================================================
+
+/// # Aya 开发工具链
+///
+/// eBPF 开发需要特定的工具链配置。
+pub struct AyaToolchainRequirements;
+
+impl AyaToolchainRequirements {
+    /// 开发工具链要求说明
+    pub fn requirements() -> &'static str {
+        r#"
+Aya 开发环境要求：
+
+1. Rust 工具链
+   - stable Rust（用户态程序）
+   - LLVM BPF target（eBPF 程序编译）
+
+2. 系统依赖
+   - Linux 内核 5.7+（XDP 程序）
+   - Linux 内核 5.8+（Ring Buffer）
+   - clang + LLVM（BPF 后端）
+
+3. 权限要求
+   - root 或 CAP_BPF + CAP_PERFMON + CAP_NET_ADMIN
+
+4. 调试工具
+   - bpftool：查看已加载的 eBPF 程序
+   - /sys/kernel/debug/tracing/trace_pipe：内核日志
+"#
+    }
+}

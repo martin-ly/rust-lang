@@ -1,7 +1,9 @@
-//! Async Closures 预研模块（Nightly）
+//! Async Closures 实现模块（Stable 1.85.0+）
 //!
-//! ⚠️ **警告**: 本模块需要 nightly Rust 编译器和 `#![feature(async_closures)]`。
-//! 预计稳定版本: **1.96-1.97** (FCP 流程中)。
+//! ✅ **状态**: Async Closures (RFC 3668) 已于 **Rust 1.85.0 (2025-02)** 稳定。
+//! `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` traits 已进入 prelude。
+//!
+//! 本模块展示了 async closures 的完整用法，无需 nightly feature gate。
 //!
 //! # 概念定义
 //!
@@ -11,12 +13,13 @@
 //!
 //! # 核心差异
 //!
-//! | 维度 | 旧范式 `\|x\| async move { ... }` | Async Closure `async \|x\| { ... }` |
+//! | 维度 | 旧范式 `\|x\| async move { ... }` | Async Closure `async \|x\| { ... }` (1.85.0+) |
 //! |------|----------------------------------|-----------------------------------|
 //! | 捕获方式 | `move`（所有权转移） | 借用（与常规闭包一致） |
 //! | 返回类型 | `impl Future` | `impl AsyncFn`（关联类型） |
 //! | Send 推断 | 复杂（需显式 bound） | 自动推断 |
 //! | dyn 兼容 | ❌ 不支持 | ❌ 不支持（当前限制） |
+//! | 稳定性 | 任何版本可用 | **1.85.0 稳定** |
 //!
 //! # 权威来源
 //! - RFC: [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html)
@@ -45,7 +48,7 @@
 /// // s 被 move 进 Future，调用时所有权转移
 /// ```
 ///
-/// ## 新范式（Nightly, 预计 1.96+）
+/// ## 新范式（1.85.0+ 稳定）
 /// ```ignore
 /// let new = async |s: &str| {
 ///     println!("{}", s);
@@ -64,10 +67,9 @@ impl AsyncClosureSyntaxExamples {
         "旧范式: |s: String| async move { s.len() }\n问题: s 被 move 进 Future，无法借用"
     }
 
-    /// 新范式（nightly）：真正的异步闭包
+    /// 新范式（1.85.0+）：真正的异步闭包
     ///
-    /// ⚠️ 需要 `#![feature(async_closures)]`
-    #[cfg(feature = "nightly_async_closures")]
+    /// `async |s: &str| s.len()` 可直接在 stable Rust 中使用。
     pub fn new_style_closure() -> impl AsyncFn(&str) -> usize {
         async |s: &str| s.len()
     }
@@ -98,7 +100,6 @@ impl AsyncFnTraitExamples {
     /// 使用 `AsyncFn` trait 接受异步回调
     ///
     /// 这是 async closures 的核心应用场景：泛型函数接受异步谓词。
-    #[cfg(feature = "nightly_async_closures")]
     pub async fn process_items<T, F>(items: Vec<T>, handler: F) -> Vec<T>
     where
         T: Clone,
@@ -106,7 +107,7 @@ impl AsyncFnTraitExamples {
     {
         let mut results = Vec::new();
         for item in &items {
-            if handler.async_call((item,)).await {
+            if handler(item).await {
                 results.push(item.clone());
             }
         }
@@ -114,14 +115,13 @@ impl AsyncFnTraitExamples {
     }
 
     /// 中间件模式：HTTP 处理链
-    #[cfg(feature = "nightly_async_closures")]
     pub async fn middleware<F, Fut>(req: String, next: F) -> String
     where
         F: AsyncFn(String) -> String,
     {
         // 前置处理
         let modified = format!("[pre] {}", req);
-        let resp = next.async_call((modified,)).await;
+        let resp = next(modified).await;
         // 后置处理
         format!("{} [post]", resp)
     }
@@ -170,15 +170,14 @@ pub struct AsyncIteratorAdapterExamples;
 impl AsyncIteratorAdapterExamples {
     /// 异步过滤：只保留满足异步谓词的元素
     ///
-    /// ⚠️ 需要 nightly feature `async_closures`
-    #[cfg(feature = "nightly_async_closures")]
+    /// ✅ 1.85.0+ 稳定，无需 feature gate
     pub async fn async_filter<T, F>(items: Vec<T>, predicate: F) -> Vec<T>
     where
         F: AsyncFn(&T) -> bool,
     {
         let mut results = Vec::new();
         for item in items {
-            if predicate.async_call((&item,)).await {
+            if predicate(&item).await {
                 results.push(item);
             }
         }
@@ -186,14 +185,13 @@ impl AsyncIteratorAdapterExamples {
     }
 
     /// 异步 map：转换每个元素
-    #[cfg(feature = "nightly_async_closures")]
     pub async fn async_map<T, U, F>(items: Vec<T>, transform: F) -> Vec<U>
     where
         F: AsyncFn(T) -> U,
     {
         let mut results = Vec::new();
         for item in items {
-            results.push(transform.async_call((item,)).await);
+            results.push(transform(item).await);
         }
         results
     }
@@ -231,8 +229,7 @@ mod tests {
         assert!(!AsyncClosureLimitations::explain_dyn_incompatibility().is_empty());
     }
 
-    // nightly 测试需要 feature gate
-    #[cfg(feature = "nightly_async_closures")]
+    // async closure 测试
     #[tokio::test]
     async fn test_async_closure_basic() {
         // let closure = async |x: i32| x * 2;

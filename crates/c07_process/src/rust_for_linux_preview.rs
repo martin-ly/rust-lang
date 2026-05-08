@@ -217,4 +217,241 @@ mod tests {
     fn test_rust_driver_advantages() {
         assert!(!DeviceDriverFramework::rust_driver_advantages().is_empty());
     }
+
+    #[test]
+    fn test_kernel_sync_primitives() {
+        let text = KernelConcurrency::synchronization_primitives();
+        assert!(text.contains("SpinLock"));
+        assert!(text.contains("Mutex"));
+        assert!(text.contains("GFP_ATOMIC"));
+    }
+
+    #[test]
+    fn test_workqueue_concept() {
+        let text = KernelConcurrency::workqueue_concept();
+        assert!(text.contains("workqueue"));
+        assert!(text.contains("Interrupt context"));
+    }
+
+    #[test]
+    fn test_gfp_flags() {
+        let text = KernelMemoryManagement::gfp_flags_explained();
+        assert!(text.contains("GFP_KERNEL"));
+        assert!(text.contains("GFP_ATOMIC"));
+    }
+
+    #[test]
+    fn test_slab_allocator() {
+        let text = KernelMemoryManagement::slab_allocator_concept();
+        assert!(text.contains("Slab"));
+        assert!(text.contains("kmalloc"));
+    }
+
+    #[test]
+    fn test_gpio_led_skeleton() {
+        let text = GpioLedDriver::driver_skeleton();
+        assert!(text.contains("rust_led"));
+        assert!(text.contains("GpioPin"));
+    }
+
+    #[test]
+    fn test_rust_vs_c_driver() {
+        let text = GpioLedDriver::rust_vs_c_driver();
+        assert!(text.contains("Rust vs C"));
+        assert!(text.contains("Drop trait"));
+    }
+}
+
+// ============================================================================
+// 6. Kernel Concurrency Primitives
+// ============================================================================
+
+/// Concurrency programming in kernel space.
+/// No std::thread, no standard Mutex.
+pub struct KernelConcurrency;
+
+impl KernelConcurrency {
+    /// Kernel synchronization primitives comparison.
+    pub fn synchronization_primitives() -> &'static str {
+        r#"
+Rust-for-Linux synchronization primitives:
+
+| Primitive | Kernel equivalent | Use case | Sleep? |
+|-----------|-------------------|----------|--------|
+| SpinLock  | raw_spinlock_t    | Interrupt context, short critical section | No |
+| Mutex     | struct mutex      | Long critical section, sleepable context | Yes |
+| RwLock    | rw_semaphore      | Read-mostly workloads | Yes |
+| Atomic    | atomic_t          | Counters, flags | No |
+| RCU       | rcu_head          | Read-mostly linked lists | Special |
+
+Key differences:
+- SpinLock: busy-wait, safe in interrupt context (cannot sleep)
+- Mutex: sleepable, cannot be held when entering interrupt context
+- GFP_ATOMIC vs GFP_KERNEL: allocation flag determines sleepability
+"#
+    }
+
+    /// Workqueue concept for deferred execution.
+    pub fn workqueue_concept() -> &'static str {
+        r#"
+Kernel workqueues: deferred execution + process context.
+
+```rust
+// Define work item
+struct MyWork {
+    data: u32,
+}
+
+impl WorkItem for MyWork {
+    fn run(&mut self) {
+        pr_info!("Processing work item with data={}
+", self.data);
+        // Can sleep here (GFP_KERNEL allocations OK)
+    }
+}
+
+// In interrupt handler, schedule work
+fn irq_handler() {
+    // Interrupt context: cannot sleep
+    schedule_work(my_work);  // Defer to process context
+}
+```
+
+Why workqueues?
+- Interrupt context cannot sleep (GFP_ATOMIC constraint)
+- Complex processing needs sleep (network I/O, filesystem)
+- Workqueues defer processing to kernel threads
+"#
+    }
+}
+
+// ============================================================================
+// 7. Kernel Memory Management
+// ============================================================================
+
+/// Kernel memory allocation concepts.
+/// No glibc malloc; uses page allocator and slab allocator.
+pub struct KernelMemoryManagement;
+
+impl KernelMemoryManagement {
+    /// GFP flags explained.
+    pub fn gfp_flags_explained() -> &'static str {
+        r#"
+GFP (Get Free Page) flags:
+
+| Flag | Meaning | Use case |
+|------|---------|----------|
+| GFP_KERNEL | Standard kernel alloc, may sleep | Process context, no time pressure |
+| GFP_ATOMIC | Atomic alloc, cannot sleep | Interrupt context, holding spinlock |
+| GFP_DMA | DMA-able memory | Device driver DMA buffers |
+| GFP_USER | Allocate for userspace | Page tables, buffers |
+| __GFP_ZERO | Zero allocated pages | Security-sensitive data |
+
+Rust-for-Linux equivalents:
+- Box::try_new_in(gfp) -> allocation with GFP flag
+- Arc::try_new_in(gfp) -> refcount + custom allocator
+"#
+    }
+
+    /// Slab allocator concept.
+    pub fn slab_allocator_concept() -> &'static str {
+        r#"
+Slab allocator: object cache for the kernel.
+
+```
+ kmalloc-64     kmalloc-128    kmalloc-256    ...
++----------+   +----------+   +----------+
+| 64B obj  |   | 128B obj |   | 256B obj |
+| 64B obj  |   | 128B obj |   | 256B obj |
+| 64B obj  |   | 128B obj |   | 256B obj |
+| free     |   | 128B obj |   | free     |
++----------+   +----------+   +----------+
+```
+
+Advantages:
+- Avoid frequent page alloc/free overhead
+- Reduce memory fragmentation
+- Improve cache locality
+
+Rust mapping:
+- kmem_cache_create -> custom allocator
+- KmallocAllocator -> wraps kmalloc/kfree
+"#
+    }
+}
+
+// ============================================================================
+// 8. Real Driver Example: GPIO LED
+// ============================================================================
+
+/// GPIO LED driver from scratch.
+pub struct GpioLedDriver;
+
+impl GpioLedDriver {
+    /// Driver skeleton code.
+    pub fn driver_skeleton() -> &'static str {
+        r#"
+// drivers/char/rust_led.rs
+#![no_std]
+#![no_main]
+
+use kernel::prelude::*;
+use kernel::gpio::{self, GpioPin};
+use kernel::module;
+
+module! {
+    type: RustLedDriver,
+    name: b"rust_led",
+    author: b"Rust Developer",
+    description: b"GPIO LED driver in Rust",
+    license: b"GPL",
+}
+
+struct RustLedDriver {
+    led_pin: GpioPin,
+}
+
+impl kernel::Module for RustLedDriver {
+    fn init(_module: &'static ThisModule) -> Result<Self> {
+        pr_info!("Rust LED driver loading...
+");
+
+        // Request GPIO (pin 25 on Raspberry Pi)
+        let led_pin = gpio::request(25, b"rust_led")?;
+        led_pin.set_direction_output(false)?;  // initially off
+
+        Ok(RustLedDriver { led_pin })
+    }
+}
+
+impl Drop for RustLedDriver {
+    fn drop(&mut self) {
+        self.led_pin.set_value(false).ok();
+        pr_info!("Rust LED driver unloaded
+");
+    }
+}
+"#
+    }
+
+    /// Rust vs C driver comparison.
+    pub fn rust_vs_c_driver() -> &'static str {
+        r#"
+GPIO LED driver: Rust vs C comparison
+
+| Dimension | C driver | Rust driver |
+|-----------|----------|-------------|
+| Lines of code | ~150 | ~80 |
+| Manual error checking | After every function call | Result + ? propagation |
+| Resource cleanup | goto cleanup or forgotten | Drop trait automatic |
+| Concurrency safety | Manual spinlock | SpinLock<T> wrapper |
+| Buffer operations | Manual bounds checking | Slice indexing automatic |
+| Null pointers | Common bug source | Option<T> eliminates |
+
+Remaining risks (still need attention):
+- unsafe FFI boundary: interaction with C kernel APIs
+- Hardware timing: Rust cannot verify hardware timing requirements
+- Performance-critical paths: may still need assembly optimization
+"#
+    }
 }

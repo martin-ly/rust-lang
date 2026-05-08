@@ -1,4 +1,4 @@
-﻿//! Embassy 异步嵌入式框架 —— Async/Await on Bare Metal
+//! Embassy 异步嵌入式框架 —— Async/Await on Bare Metal
 //!
 //! # 概述
 //!
@@ -388,6 +388,132 @@ impl EmbassyIntegrationChecklist {
             ("[ ] 实现 #[embassy_executor::main]", "main.rs"),
             ("[ ] 定义硬件任务并 spawn", "main.rs / tasks.rs"),
             ("[ ] 配置 probe-run / probe-rs 调试", ".cargo/config.toml"),
+        ]
+    }
+}
+
+// =========================================================================
+// 2. Embassy 任务与通信模式
+// =========================================================================
+
+/// # Embassy 任务模型
+///
+/// Embassy 使用 #[embassy_executor::task] 属性定义异步任务：
+/// `ignore
+/// #[embassy_executor::task]
+/// async fn blink_led(mut led: Output<'static, PIN>) {
+///     loop {
+///         led.set_high();
+///         Timer::after(Duration::from_millis(300)).await;
+///         led.set_low();
+///         Timer::after(Duration::from_millis(300)).await;
+///     }
+/// }
+/// `
+pub struct EmbassyTaskModel;
+
+impl EmbassyTaskModel {
+    /// 任务创建概念说明
+    pub fn task_spawn_concept() -> &'static str {
+        r#"
+// main.rs
+#[embassy_executor::main]
+async fn main(spawner: Spawner) {
+    // 创建硬件外设实例
+    let p = embassy_stm32::init(Default::default());
+    
+    // 启动多个并发任务
+    spawner.spawn(blink_led(Output::new(p.PA5, Level::Low, Speed::Low))).unwrap();
+    spawner.spawn(read_sensor(Adc::new(p.ADC1))).unwrap();
+    spawner.spawn(network_task(p.ETH)).unwrap();
+    
+    // main 函数本身也可以执行异步操作
+    loop {
+        Timer::after(Duration::from_secs(1)).await;
+        defmt::info!("heartbeat");
+    }
+}
+"#
+    }
+
+    /// 任务间通信：Channel
+    pub fn channel_concept() -> &'static str {
+        r#"
+// 静态 Channel（无堆分配）
+use embassy_sync::channel::Channel;
+use embassy_sync::blocking_mutex::raw::ThreadModeRawMutex;
+
+static SENSOR_CHANNEL: Channel<ThreadModeRawMutex, SensorData, 3> = Channel::new();
+
+#[embassy_executor::task]
+async fn sensor_task() {
+    loop {
+        let data = read_sensor().await;
+        SENSOR_CHANNEL.send(data).await;
+    }
+}
+
+#[embassy_executor::task]
+async fn processing_task() {
+    loop {
+        let data = SENSOR_CHANNEL.receive().await;
+        process(data).await;
+    }
+}
+"#
+    }
+
+    /// Embassy 与 RTIC 的对比决策
+    pub fn embassy_vs_rtic() -> &'static str {
+        r#"
+Embassy vs RTIC 决策树：
+
+1. 是否需要硬实时保证（确定性延迟）？
+   ├── 是（< 10us 抖动要求）→ RTIC
+   └── 否 → 继续 2
+
+2. 是否需要复杂协议栈（TCP/IP, USB, BLE）？
+   ├── 是 → Embassy（成熟的异步协议实现）
+   └── 否 → 继续 3
+
+3. 团队 Rust 异步经验？
+   ├── 丰富 → Embassy（async/await 更自然）
+   └── 有限 → RTIC（基于硬件任务，概念更简单）
+
+4. 内存预算？
+   ├── < 16KB RAM → 裸机轮询或 RTIC
+   ├── 16-64KB RAM → RTIC 或 Embassy
+   └── > 64KB RAM → Embassy（协议栈需要更多内存）
+"#
+    }
+}
+
+// =========================================================================
+// 3. Embassy 网络协议栈概览
+// =========================================================================
+
+/// # Embassy 网络生态
+///
+/// Embassy 提供了完整的异步网络协议栈：
+///
+/// | 协议层 | Crate | 说明 |
+/// |--------|-------|------|
+/// | TCP/IP | embassy-net | 基于 smoltcp 的异步 TCP/UDP |
+/// | DHCP | embassy-net | 内置 DHCP 客户端 |
+/// | DNS | embassy-net | 内置 DNS 解析 |
+/// | HTTP | reqwless | 嵌入式 HTTP 客户端 |
+/// | MQTT | rust-mqtt | 异步 MQTT 客户端 |
+/// | BLE | nrf-softdevice / trouble | 蓝牙低功耗 |
+pub struct EmbassyNetworking;
+
+impl EmbassyNetworking {
+    pub fn available_crates() -> &'static [(&'static str, &'static str)] {
+        &[
+            ("embassy-net", "异步 TCP/IP 协议栈"),
+            ("embassy-usb", "USB 设备协议栈"),
+            ("embassy-boot", "安全引导加载程序"),
+            ("reqwless", "嵌入式 HTTP 客户端"),
+            ("trouble-host", "BLE 主机栈"),
         ]
     }
 }
