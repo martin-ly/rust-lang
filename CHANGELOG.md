@@ -4,6 +4,87 @@
 
 ---
 
+## [1.3.0] - 2026-05-08
+
+### 🚀 模块深度扩展（13 个 crate）
+
+- **c13_embedded/rtic_framework.rs**: 新增 RTIC vs Embassy 决策矩阵、RTIC 2.x async 任务支持、工业温度控制器架构、中断延迟分析（100-200ns vs FreeRTOS 1-5μs）
+- **c07_process/rust_for_linux_preview.rs**: 新增内核同步原语（SpinLock/Mutex/RwLock/RCU）、工作队列（Workqueue）、GFP 标志详解、Slab 分配器、GPIO LED 驱动骨架、Rust vs C 驱动对比
+- **guides/**: 新建 `AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md`（7.4KB），新增 if let guards / cfg_select! / Atomic::update / use<..> / async closures 专项提示词模板；2025 版标记为归档
+- **c12_wasm**: 新建 `component_model.rs`，覆盖 WASI Preview 2 组件模型、wit-bindgen、wasm-tools、wasmtime、jco；22 个新测试
+- **c11_macro_system**: 新建 `compile_time_metaprogramming.rs`，覆盖 const fn 元编程、宏与 const 协同、tt muncher 递归宏模式；16 个新测试
+- **c05_threads**: 新建 `thread_pool_patterns.rs`，覆盖线程池设计、工作窃取（Chase-Lev deque）、scoped threads 深入、无锁数据结构概念（Treiber 栈 / Michael-Scott 队列）；27 个新测试
+- **c03_control_fn**: 新建 `if_let_guards_deep_dive.rs`，15 个测试，全部可运行代码示例
+- **c04_generic**: 新建 `generic_advanced_patterns.rs`，覆盖 GAT 深入（LendingIterator）、HRTB 模式、类型族（Type Families）、泛型特化概念；21 个新测试
+- **c09_design_pattern**: 新建 `rust_idioms.rs`，覆盖类型状态模式、新类型模式、访者模式（枚举 vs trait object）、RAII ScopeGuard、内部可变性决策树；15 个新测试
+- **c01_ownership_borrow_scope**: 新建 `pin_and_self_referential.rs`，覆盖 Pin/Unpin/PhantomPinned、自引用结构安全 workaround、Pin Projection、所有权决策树（Cow/Rc/Arc）；22 个新测试
+- **c02_type_system**: 新建 `type_system_frontier.rs`，覆盖 Never Type (!)、TAIT 概念、RPITIT/AFIT 实战、Auto Traits 深入、Coherence/Orphan Rules；28 个新测试
+- **c08_algorithms**: 新建 `algorithm_decision_trees.rs`，覆盖排序/搜索/图/DP/并发算法选择决策树；22 个新测试
+- **exercises**: 新建 `rust_195_feature_exercises.rs`，13 个 1.95 特性专项练习（if let guards、cfg_select!、Atomic::update、push_mut、cold_path）
+
+### 📚 内容中心扩展
+
+- **content/emerging/rust_1_95_preview.md**: 完全重写为 1.95 稳定特性全景（9.4KB），含语言特性、标准库 API、迁移指南、项目内示例索引
+- **content/ecosystem/async_runtimes/tokio_deep_dive.md**: 新建 Tokio 运行时深度解析（8.1KB）
+- **content/academic/tree_borrows_guide.md**: 新建 Tree Borrows 权威指南（6.2KB），含权限树、状态机、SB 对比、Miri 用法
+- **content/production/kubernetes_deployment_guide.md**: 新建 K8s 部署指南（6.8KB），含 Dockerfile、Deployment、HPA、安全最佳实践
+- **content/README.md**: 更新统计（11 文档 / 83+ 示例 / 65% 完成度）
+
+### 🔧 工程修复
+
+- 修复 c06_async `unused_features` 警告（移除 `async_fn_traits` feature 声明）
+- 修复 c10_networks `items_after_test_module` clippy 警告（移动 `mod tests` 到文件末尾）
+- 全 workspace `cargo clippy` 通过，0 errors 0 warnings
+
+### 🏗️ Common Crate 扩展
+
+- **arena 模块**: 新增 `Arena<T>` 类型安全分配器 + `Handle<T>` 索引句柄，支持嵌套数据结构，7 个测试
+- **traits 模块**: 新增 `Comparable` trait（范围检查），`Serializable` trait（serde feature 下）
+- **types 模块**: 新增 `Id<T>` 新类型（编译期 ID 类型安全）、`NonEmptyVec<T>`（保证非空的 Vec 包装）
+- **工程修复**: `default-features` 加入 `error-trait` + `async`，解决单独编译 common 的依赖问题
+
+### 📚 Content 中心扩充
+
+- **content/ecosystem/database/sea_orm_deep_dive.md**: Sea-ORM 深度解析（7.2KB）
+- **content/ecosystem/error_handling/anyhow_vs_thiserror.md**: anyhow/thiserror/miette 对比指南（5.3KB）
+- **content/ecosystem/web_frameworks/actix_web_vs_axum.md**: Actix-web vs Axum 决策指南（4.0KB）
+- **content/ecosystem/web_frameworks/grpc_microservices_guide.md**: gRPC + Tonic 微服务指南（6.7KB）
+- **content/production/observability_guide.md**: 可观测性三大支柱实战指南（8.3KB）
+- **content/production/security_best_practices.md**: Rust 生产安全最佳实践（6.0KB）
+- **content/emerging/gen_blocks_guide.md**: `gen` blocks / `yield` 表达式前瞻指南（4.2KB）
+- **content/emerging/wasm_advanced_topics.md**: WASM 高级主题（11KB）
+- **content/academic/prusti_verification_tutorial.md**: Prusti 形式化验证教程（6.4KB）
+- **content/production/serverless_deployment_guide.md**: Serverless 部署指南（10KB）
+- **content/ecosystem/flutter_rust_bridge.md**: Flutter + Rust 跨平台指南（10KB）
+- **content/ecosystem/serialization/serde_best_practices.md**: Serde 最佳实践（5.6KB）
+- **content/README.md**: 统计更新至 23 文档 / 145+ 示例 / 82% 完成度
+- **content/ecosystem/README.md**: 更新链接、日期、完成度标记
+
+### 📚 Docs 文档更新
+
+- `docs/01_learning/LEARNING_PATH_PLANNING.md`: 添加本轮新增模块学习路径指引
+- `docs/05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md`: 补充 async closures、`cfg_select!` 内容
+
+### 🏗️ Crate 代码深化
+
+- **c01**: 新增 `AsyncStateMachineConcept` — 解释 Pin 在 async/await 状态机中的核心作用
+- **c02**: 新增 `TypeFamilyDemo` — 类型族（Type Families）实际代码演示，含 `ListFamily` / `TreeFamily`
+- **c03**: 新增 `control_flow_patterns.rs` — match 高级模式、let chain、loop 标签（12 个测试）
+- **c04**: 新增 `type_state_machine.rs` — HTTP 构建器和文件句柄的类型状态模式（8 个测试）
+- **c08**: 新增 `AlgorithmSkeletons` — 二分查找、快速排序、BFS 的可运行骨架实现（3 个测试）
+- **c09**: 新增 `functional_patterns.rs` — 高阶函数、迭代器管道、Monoid、组合子（11 个测试）
+
+### 🏗️ Common Crate 扩展（续）
+
+- **utils 模块**: 新增 `retry()` 同步重试函数、`Memoize<T, R>` 单值缓存结构
+- **lib.rs re-export**: 更新所有新类型的公开导出
+
+### ✅ 测试覆盖
+
+- 全 workspace 测试通过: **2000+ tests**，0 failures
+
+---
+
 ## [1.2.0] - 2026-05-07
 
 ### 🚀 Rust 1.95 特性补全

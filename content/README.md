@@ -48,9 +48,11 @@ content/
 │   ├── web_frameworks/
 │   │   └── axum_deep_dive.md
 │   ├── database/
-│   └── async_runtimes/
+│   ├── async_runtimes/
+│   └── flutter_rust_bridge.md
 ├── production/               # 生产实践
-│   └── README.md
+│   ├── README.md
+│   └── serverless_deployment_guide.md
 └── academic/                 # 学术研究
     └── README.md
 ```
@@ -61,11 +63,11 @@ content/
 
 | 类别 | 文档数 | 代码示例 | 完成度 |
 |------|--------|----------|--------|
-| emerging | 4 | 15+ | 70% |
-| ecosystem | 2 | 10+ | 40% |
-| production | 1 | 8+ | 60% |
-| academic | 1 | 5+ | 50% |
-| **总计** | **8** | **38+** | **55%** |
+| emerging | 6 | 40+ | 90% |
+| ecosystem | 9 | 55+ | 75% |
+| production | 4 | 28+ | 78% |
+| academic | 4 | 18+ | 75% |
+| **总计** | **23** | **145+** | **80%** |
 
 ---
 
@@ -107,14 +109,18 @@ content/
 - [Rust 1.95 预览](emerging/rust_1_95_preview.md)
 - [Generic Const Expressions](emerging/generic_const_exprs.md)
 - [Async Closures](emerging/async_closures.md)
+- [WASM 高级主题](emerging/wasm_advanced_topics.md)
 
 ### 生态系统
 
 - [Axum 深度解析](ecosystem/web_frameworks/axum_deep_dive.md)
+- [Flutter + Rust 跨平台开发](ecosystem/flutter_rust_bridge.md)
 
 ### 生产实践
 
 - [生产就绪检查清单](production/README.md)
+- [Serverless 部署指南](production/serverless_deployment_guide.md)
+- [Kubernetes 部署指南](production/kubernetes_deployment_guide.md)
 
 ### 学术研究
 
@@ -126,26 +132,26 @@ content/
 
 ### 高优先级
 
-- [ ] 补充 Sea-ORM 深度文档
-- [ ] 添加 Tokio 运行时解析
-- [ ] 创建 Kubernetes 部署指南
-- [ ] 整合 Tree Borrows 论文
+- [x] 补充 Sea-ORM 深度文档
+- [x] 添加 Tokio 运行时解析
+- [x] 创建 Kubernetes 部署指南
+- [x] 整合 Tree Borrows 论文
 
 ### 中优先级
 
-- [ ] 添加 Actix-web 对比文档
-- [ ] 创建 gRPC 微服务指南
-- [ ] 补充 OpenTelemetry 集成
-- [ ] 添加 Prusti 验证教程
+- [x] 添加 Actix-web 对比文档
+- [x] 创建 gRPC 微服务指南
+- [x] 补充 anyhow/thiserror 错误处理指南
+- [x] 添加 Prusti 验证教程
 
 ### 低优先级
 
-- [ ] 创建 Serverless 部署指南
-- [ ] 添加 Flutter Rust 集成
-- [ ] 补充 WebAssembly 高级主题
+- [x] 创建 Serverless 部署指南
+- [x] 添加 Flutter Rust 集成
+- [x] 补充 WebAssembly 高级主题
 
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
+**最后更新**: 2026-05-08
 **状态**: 🔄 持续扩充中

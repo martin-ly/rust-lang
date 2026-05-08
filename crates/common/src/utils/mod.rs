@@ -238,6 +238,75 @@ impl Default for OnceGuard {
     }
 }
 
+/// 同步重试函数
+///
+/// 对可能失败的操作进行固定次数重试。
+pub fn retry<T, E, F>(mut f: F, max_retries: u32, delay: Duration) -> Result<T, E>
+where
+    F: FnMut() -> Result<T, E>,
+    E: std::fmt::Debug,
+{
+    let mut last_error = None;
+
+    for attempt in 0..max_retries {
+        match f() {
+            Ok(result) => return Ok(result),
+            Err(e) => {
+                tracing::warn!(attempt = attempt + 1, "retry failed: {:?}", e);
+                last_error = Some(e);
+            }
+        }
+
+        if attempt < max_retries - 1 {
+            std::thread::sleep(delay);
+        }
+    }
+
+    Err(last_error.expect("至少执行了一次重试"))
+}
+
+/// 记忆化包装（单值缓存）
+///
+/// 缓存函数结果，仅在输入变化时重新计算。
+#[derive(Debug)]
+pub struct Memoize<T, R> {
+    last_input: Option<T>,
+    last_result: Option<R>,
+}
+
+impl<T: Clone + PartialEq, R: Clone> Memoize<T, R> {
+    /// 创建新的记忆化缓存
+    pub fn new() -> Self {
+        Self {
+            last_input: None,
+            last_result: None,
+        }
+    }
+
+    /// 获取或计算结果
+    pub fn get_or_compute<F>(&mut self, input: T, f: F) -> R
+    where
+        F: FnOnce(&T) -> R,
+    {
+        if let Some(ref last) = self.last_input {
+            if last == &input {
+                return self.last_result.clone().unwrap();
+            }
+        }
+
+        let result = f(&input);
+        self.last_input = Some(input);
+        self.last_result = Some(result.clone());
+        result
+    }
+}
+
+impl<T: Clone + PartialEq, R: Clone> Default for Memoize<T, R> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -279,5 +348,53 @@ mod tests {
         assert!(guard.try_execute(|| count += 1));
         assert!(!guard.try_execute(|| count += 1));
         assert_eq!(count, 1);
+    }
+
+    #[test]
+    fn test_retry_success() {
+        let mut attempts = 0;
+        let result = retry(
+            || {
+                attempts += 1;
+                if attempts >= 2 {
+                    Ok(42)
+                } else {
+                    Err("not yet")
+                }
+            },
+            3,
+            Duration::from_millis(1),
+        );
+        assert_eq!(result, Ok(42));
+        assert_eq!(attempts, 2);
+    }
+
+    #[test]
+    fn test_memoize() {
+        let mut memo: Memoize<i32, i32> = Memoize::new();
+        let mut compute_count = 0;
+
+        let r1 = memo.get_or_compute(5, |x| {
+            compute_count += 1;
+            x * 2
+        });
+        assert_eq!(r1, 10);
+        assert_eq!(compute_count, 1);
+
+        // 相同输入，不重新计算
+        let r2 = memo.get_or_compute(5, |x| {
+            compute_count += 1;
+            x * 2
+        });
+        assert_eq!(r2, 10);
+        assert_eq!(compute_count, 1);
+
+        // 不同输入，重新计算
+        let r3 = memo.get_or_compute(7, |x| {
+            compute_count += 1;
+            x * 2
+        });
+        assert_eq!(r3, 14);
+        assert_eq!(compute_count, 2);
     }
 }

@@ -20,3 +20,4 @@ pub mod async_programming;
 pub mod error_handling;
 pub mod macros;
 pub mod unsafe_rust;
+pub mod rust_195_feature_exercises;

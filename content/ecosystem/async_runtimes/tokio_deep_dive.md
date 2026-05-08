@@ -1,452 +1,261 @@
-# Tokio 运行时深度解析
+# Tokio 异步运行时深度解析
 
-> **版本**: Tokio 1.49.0+
-> **Rust 版本**: 1.94.0+
-> **难度**: 高级
-> **关键词**: 异步运行时、任务调度、I/O驱动
+> **定位**: Rust 生态核心 — 异步运行时
+> **版本**: Tokio 1.40+ (兼容 Rust 1.95.0+)
+> **适用场景**: 高并发网络服务、实时数据处理、微服务架构
 
 ---
 
 ## 📋 目录
 
-- [Tokio 运行时深度解析](#tokio-运行时深度解析)
+- [Tokio 异步运行时深度解析](#tokio-异步运行时深度解析)
   - [📋 目录](#-目录)
-  - [🎯 概述](#-概述)
-    - [对比其他运行时](#对比其他运行时)
-  - [🏗️ 架构设计](#️-架构设计)
-    - [运行时组件](#运行时组件)
-    - [任务调度](#任务调度)
-  - [💡 核心概念](#-核心概念)
-    - [任务 (Task)](#任务-task)
-    - [执行器 (Executor)](#执行器-executor)
-    - [I/O 驱动](#io-驱动)
-    - [定时器](#定时器)
-  - [🚀 高级用法](#-高级用法)
-    - [运行时配置](#运行时配置)
-    - [任务管理](#任务管理)
-    - [并发模式](#并发模式)
-  - [⚡ 性能优化](#-性能优化)
-    - [最佳实践](#最佳实践)
-    - [性能调优参数](#性能调优参数)
+  - [🎯 架构概览](#-架构概览)
+  - [⚙️ 核心组件](#️-核心组件)
+    - [1. 运行时 (Runtime)](#1-运行时-runtime)
+    - [2. 任务调度器 (Scheduler)](#2-任务调度器-scheduler)
+    - [3. I/O 驱动 (I/O Driver)](#3-io-驱动-io-driver)
+    - [4. 时间驱动 (Time Driver)](#4-时间驱动-time-driver)
+  - [🔧 工作线程模型](#-工作线程模型)
+  - [📊 与其他运行时对比](#-与其他运行时对比)
+  - [🚀 性能调优](#-性能调优)
+    - [工作线程数](#工作线程数)
+    - [阻塞操作](#阻塞操作)
+    - [批处理 I/O](#批处理-io)
   - [🔗 参考资源](#-参考资源)
 
 ---
 
-## 🎯 概述
+## 🎯 架构概览
 
-Tokio 是 Rust 最流行的异步运行时，提供：
+```
+┌─────────────────────────────────────────┐
+│           Application Layer             │
+│  (axum / tonic / reqwest / sqlx ...)   │
+├─────────────────────────────────────────┤
+│              Tokio Runtime              │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ │
+│  │ Task    │ │ I/O     │ │ Timer   │ │
+│  │ Scheduler│ │ Driver  │ │ Driver  │ │
+│  └────┬────┘ └────┬────┘ └────┬────┘ │
+│       └─────────────┴─────────────┘   │
+│              Work Stealing Queue        │
+├─────────────────────────────────────────┤
+│         OS / epoll / kqueue / IOCP      │
+└─────────────────────────────────────────┘
+```
 
-- **任务调度**: 多线程任务调度
-- **I/O 驱动**: 基于 epoll/kqueue/IOCP 的异步 I/O
-- **定时器**: 高性能定时器
-- **同步原语**: 异步版本的 Mutex、Channel 等
+Tokio 是 Rust 生态中最广泛使用的异步运行时，提供：
 
-### 对比其他运行时
-
-| 特性 | Tokio | async-std | smol |
-|------|-------|-----------|------|
-| **性能** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **生态** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
-| **易用性** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
-| **适用场景** | 生产环境 | 简单项目 | 嵌入式 |
+- **多线程任务调度**: 工作窃取 (work-stealing) 调度器
+- **非阻塞 I/O**: 基于 epoll/kqueue/IOCP 的统一抽象
+- **定时器**: 高效的时间轮 (timing wheel) 实现
+- **同步原语**: async Mutex, RwLock, Semaphore, Barrier
+- **通道**: mpsc, broadcast, watch, oneshot
 
 ---
 
-## 🏗️ 架构设计
+## ⚙️ 核心组件
 
-### 运行时组件
+### 1. 运行时 (Runtime)
 
-```mermaid
-graph TD
-    A[Tokio Runtime]
-    A --> B[任务调度器]
-    A --> C[I/O驱动器]
-    A --> D[定时器]
-    A --> E[阻塞线程池]
+```rust
+use tokio::runtime::{Builder, Runtime};
 
-    B --> B1[工作线程1]
-    B --> B2[工作线程2]
-    B --> B3[工作线程N]
+// 多线程运行时 (默认)
+let rt = tokio::runtime::Runtime::new().unwrap();
 
-    C --> C1[epoll/kqueue]
-    C --> C2[事件队列]
-
-    D --> D1[时间轮]
-
-    E --> E1[阻塞任务1]
-    E --> E2[阻塞任务2]
+// 自定义配置
+let rt = Builder::new_multi_thread()
+    .worker_threads(8)
+    .max_blocking_threads(512)
+    .thread_stack_size(3 * 1024 * 1024)
+    .enable_all()
+    .build()
+    .unwrap();
 ```
 
-### 任务调度
+| 运行时类型 | 适用场景 | 线程模型 |
+|-----------|---------|---------|
+| `new_multi_thread()` | 高并发网络服务 | N 工作线程 + M 阻塞线程 |
+| `new_current_thread()` | 单线程/嵌入式 | 仅主线程 |
 
-```text
-调度流程:
+---
 
-1. 任务创建
-   spawn(async { ... })
-      ↓
-2. 任务入队
-   全局队列 / 本地队列
-      ↓
-3. 工作线程窃取
-   其他线程的本地队列
-      ↓
-4. 执行
-   轮询 Future 到完成
+### 2. 任务调度器 (Scheduler)
+
+Tokio 使用 **work-stealing** 调度器：
+
+- **全局队列**: 所有线程可访问，用于跨线程任务分发
+- **本地队列**: 每个工作线程一个，LIFO 顺序执行（缓存友好）
+- **窃取**: 当本地队列为空时，从其他线程的队列尾部 FIFO 窃取任务
+
+```rust
+// 任务生成方式对比
+
+// spawn: 进入全局队列，可能被任意线程执行
+let handle = tokio::spawn(async_task());
+
+// spawn_local (current_thread runtime): 仅当前线程执行
+tokio::task::spawn_local(async_task());
+
+// block_in_place: 将当前任务转为阻塞，释放线程
+let result = tokio::task::block_in_place(|| heavy_cpu_work());
 ```
 
 ---
 
-## 💡 核心概念
+### 3. I/O 驱动 (I/O Driver)
 
-### 任务 (Task)
+Tokio 的 I/O 基于操作系统异步接口：
 
-```rust
-use tokio::task;
-
-async fn task_example() {
-    // 创建任务
-    let handle = task::spawn(async {
-        println!("Hello from task");
-        42
-    });
-
-    // 等待结果
-    let result = handle.await.unwrap();
-    println!("Result: {}", result);
-}
-
-// 命名任务 (便于调试)
-async fn named_task() {
-    let handle = task::Builder::new()
-        .name("my-task")
-        .spawn(async {
-            // ...
-        })
-        .unwrap();
-}
-```
-
-### 执行器 (Executor)
-
-```rust
-use tokio::runtime::{Runtime, Builder};
-
-// 单线程运行时 (用于测试或嵌入式)
-fn single_threaded() {
-    let rt = Builder::new_current_thread()
-        .enable_all()
-        .build()
-        .unwrap();
-
-    rt.block_on(async {
-        // 异步代码
-    });
-}
-
-// 多线程运行时 (生产环境)
-fn multi_threaded() {
-    let rt = Builder::new_multi_thread()
-        .worker_threads(8)
-        .max_blocking_threads(128)
-        .thread_stack_size(2 * 1024 * 1024)
-        .thread_name("tokio-worker")
-        .enable_all()
-        .build()
-        .unwrap();
-
-    rt.block_on(async {
-        // 异步代码
-    });
-}
-```
-
-### I/O 驱动
+| 操作系统 | 后端 | 特性 |
+|---------|------|------|
+| Linux | epoll | 高效，O(1) 事件通知 |
+| macOS/BSD | kqueue | 支持文件描述符和进程事件 |
+| Windows | IOCP | 真正的异步 I/O，无轮询 |
+| Linux 5.1+ | io_uring (可选) | 零系统调用批量提交 |
 
 ```rust
 use tokio::net::TcpListener;
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
-async fn tcp_server() -> tokio::io::Result<()> {
-    let listener = TcpListener::bind("127.0.0.1:8080").await?;
-
-    loop {
-        let (mut socket, addr) = listener.accept().await?;
-        println!("New connection from: {:?}", addr);
-
-        // 为每个连接生成任务
-        tokio::spawn(async move {
-            let mut buf = [0u8; 1024];
-
-            loop {
-                match socket.read(&mut buf).await {
-                    Ok(0) => return,  // 连接关闭
-                    Ok(n) => {
-                        // 回显
-                        if socket.write_all(&buf[..n]).await.is_err() {
-                            return;
-                        }
-                    }
-                    Err(_) => return,
-                }
-            }
-        });
-    }
+// TcpListener 是非阻塞的，背后注册到 epoll/kqueue/IOCP
+let listener = TcpListener::bind("127.0.0.1:8080").await?;
+loop {
+    let (socket, addr) = listener.accept().await?;
+    tokio::spawn(handle_connection(socket, addr));
 }
 ```
 
-### 定时器
+---
+
+### 4. 时间驱动 (Time Driver)
+
+Tokio 使用 **分层时间轮 (Hierarchical Timing Wheel)**:
 
 ```rust
 use tokio::time::{sleep, interval, timeout, Duration};
 
-async fn timer_examples() {
-    // 简单延迟
-    sleep(Duration::from_secs(1)).await;
+// sleep: 任务挂起直到时间到达
+sleep(Duration::from_millis(100)).await;
 
-    // 间隔定时器
-    let mut interval = interval(Duration::from_secs(5));
-    for _ in 0..3 {
-        interval.tick().await;
-        println!("Tick!");
-    }
+// interval: 周期性触发
+let mut tick = interval(Duration::from_secs(1));
+tick.tick().await; // 首次触发
 
-    // 超时
-    let result = timeout(
-        Duration::from_secs(5),
-        slow_operation()
-    ).await;
+// timeout: 包装 Future，超时取消
+let result = timeout(Duration::from_secs(5), fetch_data()).await;
+```
 
-    match result {
-        Ok(data) => println!("Success: {:?}", data),
-        Err(_) => println!("Timeout!"),
-    }
-}
+**时间轮层级**:
 
-async fn slow_operation() -> String {
-    sleep(Duration::from_secs(10)).await;
-    "Done".to_string()
-}
+- 毫秒级轮: 256 槽，每槽 1ms
+- 秒级轮: 64 槽，每槽 1s
+- 分钟级轮: 60 槽
+- 效率: O(1) 插入，O(1) 到期检查
+
+---
+
+## 🔧 工作线程模型
+
+```
+Thread 1          Thread 2          Thread 3
+┌─────────┐       ┌─────────┐       ┌─────────┐
+│ Local   │       │ Local   │       │ Local   │
+│ Queue   │       │ Queue   │       │ Queue   │
+│ [A,B,C] │       │ [D,E]   │       │ []      │
+└────┬────┘       └────┬────┘       └────┬────┘
+     │ LIFO execution   │ LIFO execution  │  steal from T1/T2
+     ▼                  ▼                 ▼
+   run A              run D            steal C (FIFO)
+```
+
+**调度规则**:
+
+1. 优先执行本地队列任务（LIFO — 缓存局部性最佳）
+2. 本地为空 → 检查全局队列
+3. 全局为空 → 从其他线程窃取（FIFO — 减少竞争）
+
+---
+
+## 📊 与其他运行时对比
+
+| 特性 | Tokio | async-std | smol | embassy |
+|------|-------|-----------|------|---------|
+| 调度模型 | 工作窃取 | 工作窃取 | 单队列 | 协作式 |
+| 默认线程数 | num_cpus | num_cpus | 单线程 | 单线程 |
+| 生态成熟度 | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐ |
+| 网络协议栈 | 完整 | 基础 | 基础 | 嵌入式 |
+| 适用场景 | 通用服务端 | 通用 | 小型应用 | 嵌入式/IoT |
+| 与 std 兼容 | 独立生态 | 接近 std | 接近 std | no_std |
+
+**选择决策树**:
+
+```
+需要 no_std? ──是──→ Embassy
+                └──否──→ 需要成熟生态? ──是──→ Tokio
+                                      └──否──→ 追求简洁? ──是──→ smol
+                                                            └──否──→ async-std
 ```
 
 ---
 
-## 🚀 高级用法
+## 🚀 性能调优
 
-### 运行时配置
+### 工作线程数
 
 ```rust
-use tokio::runtime::Builder;
+// 默认 = CPU 核心数，通常最优
+// CPU 密集型任务: 略少于核心数 (留核心给 OS)
+// I/O 密集型任务: 等于或略多于核心数
 
-fn optimized_runtime() {
-    let rt = Builder::new_multi_thread()
-        // 工作线程数 (默认 CPU 核心数)
-        .worker_threads(num_cpus::get())
-        // 最大阻塞线程数
-        .max_blocking_threads(512)
-        // 线程栈大小
-        .thread_stack_size(4 * 1024 * 1024)
-        // 线程名称前缀
-        .thread_name_fn(|| {
-            static ATOMIC_ID: AtomicUsize = AtomicUsize::new(0);
-            let id = ATOMIC_ID.fetch_add(1, Ordering::SeqCst);
-            format!("tokio-worker-{}", id)
-        })
-        // 启用 I/O 驱动
-        .enable_io()
-        // 启用定时器
-        .enable_time()
-        // 捕获 panic
-        .on_thread_start(|| {
-            println!("Thread started");
-        })
-        .on_thread_stop(|| {
-            println!("Thread stopped");
-        })
-        .build()
-        .unwrap();
-
-    rt.block_on(async_main());
-}
+let rt = tokio::runtime::Builder::new_multi_thread()
+    .worker_threads(num_cpus::get())
+    .build()?;
 ```
 
-### 任务管理
+### 阻塞操作
 
 ```rust
-use tokio::task::{JoinSet, AbortHandle};
-
-// 管理多个任务
-async fn manage_tasks() {
-    let mut set = JoinSet::new();
-
-    // 添加任务
-    for i in 0..10 {
-        set.spawn(async move {
-            println!("Task {}", i);
-            i * i
-        });
-    }
-
-    // 收集结果
-    while let Some(result) = set.join_next().await {
-        match result {
-            Ok(value) => println!("Completed: {}", value),
-            Err(e) => println!("Task panicked: {}", e),
-        }
-    }
-}
-
-// 取消任务
-async fn cancel_task() {
-    let handle = tokio::spawn(async {
-        loop {
-            tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
-            println!("Working...");
-        }
-    });
-
-    // 稍后取消
-    tokio::time::sleep(tokio::time::Duration::from_secs(5)).await;
-    handle.abort();
-
-    match handle.await {
-        Ok(_) => println!("Task completed"),
-        Err(e) if e.is_cancelled() => println!("Task cancelled"),
-        Err(e) => println!("Task failed: {}", e),
-    }
-}
-```
-
-### 并发模式
-
-```rust
-use tokio::sync::{Semaphore, RwLock};
-use std::sync::Arc;
-
-// 限制并发数
-async fn limited_concurrency() {
-    let semaphore = Arc::new(Semaphore::new(10));  // 最多10个并发
-
-    let mut handles = vec![];
-
-    for i in 0..100 {
-        let sem = semaphore.clone();
-        handles.push(tokio::spawn(async move {
-            let _permit = sem.acquire().await.unwrap();
-            // 执行受限操作
-            println!("Task {} running", i);
-            tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
-        }));
-    }
-
-    for handle in handles {
-        handle.await.unwrap();
-    }
-}
-
-// 共享状态
-async fn shared_state() {
-    let counter = Arc::new(RwLock::new(0));
-
-    let mut handles = vec![];
-
-    for _ in 0..10 {
-        let counter = counter.clone();
-        handles.push(tokio::spawn(async move {
-            for _ in 0..100 {
-                let mut guard = counter.write().await;
-                *guard += 1;
-            }
-        }));
-    }
-
-    for handle in handles {
-        handle.await.unwrap();
-    }
-
-    println!("Final count: {}", *counter.read().await);
-}
-```
-
----
-
-## ⚡ 性能优化
-
-### 最佳实践
-
-```rust
-// 1. 避免在异步代码中阻塞
-// ❌ 错误
+// ❌ 错误: 在工作线程中执行阻塞操作
 async fn bad() {
-    std::thread::sleep(Duration::from_secs(1));  // 阻塞整个线程!
+    std::thread::sleep(Duration::from_secs(1)); // 阻塞整个线程！
 }
 
-// ✅ 正确
+// ✅ 正确: 使用 spawn_blocking
 async fn good() {
-    tokio::time::sleep(Duration::from_secs(1)).await;  // 让出控制
-}
-
-// 2. 使用 spawn_blocking 执行阻塞操作
-async fn blocking_op() {
-    let result = tokio::task::spawn_blocking(|| {
-        // 阻塞操作
-        std::fs::read_to_string("file.txt")
+    tokio::task::spawn_blocking(|| {
+        std::thread::sleep(Duration::from_secs(1));
     }).await.unwrap();
 }
-
-// 3. 批量处理减少系统调用
-async fn batch_io() {
-    let mut file = tokio::fs::File::open("data.txt").await.unwrap();
-    let mut buf = Vec::with_capacity(1024 * 1024);  // 1MB 缓冲
-
-    tokio::io::AsyncReadExt::read_to_end(&mut file, &mut buf).await.unwrap();
-}
-
-// 4. 使用本地任务避免跨线程同步
-use tokio::task::LocalSet;
-
-async fn local_tasks() {
-    let local = LocalSet::new();
-
-    local.run_until(async {
-        // !Send 任务可以在这里运行
-        let rc = std::rc::Rc::new(42);
-
-        tokio::task::spawn_local(async move {
-            println!("{}", rc);
-        }).await.unwrap();
-    }).await;
-}
 ```
 
-### 性能调优参数
+### 批处理 I/O
 
 ```rust
-// 根据工作负载调整
-let rt = tokio::runtime::Builder::new_multi_thread()
-    // CPU 密集型: worker_threads = CPU 核心数
-    // I/O 密集型: worker_threads 可以更多
-    .worker_threads(8)
+// 使用 JoinSet 并发处理多个请求
+use tokio::task::JoinSet;
 
-    // 大量阻塞操作时增加
-    .max_blocking_threads(512)
-
-    // 递归深度大的任务增加栈大小
-    .thread_stack_size(8 * 1024 * 1024)
-    .build()
-    .unwrap();
+let mut set = JoinSet::new();
+for url in urls {
+    set.spawn(fetch(url));
+}
+while let Some(result) = set.join_next().await {
+    process(result?);
+}
 ```
 
 ---
 
 ## 🔗 参考资源
 
-- [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/)
-- [Tokio 教程](https://tokio.rs/tokio/tutorial)
-- [Async Rust 书籍](https://rust-lang.github.io/async-book/)
+- [Tokio 官方文档](https://tokio.rs/)
+- [Tokio 内部原理](https://tokio.rs/blog/2019-10-scheduler)
+- [项目 C06 异步模块](../../crates/c06_async/src/lib.rs)
+- [项目 Async Closures 指南](../../crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 100% 完成
+**最后更新**: 2026-05-08
+**状态**: ✅ 已完善

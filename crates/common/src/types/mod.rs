@@ -276,6 +276,117 @@ impl<T> Paginated<T> {
     }
 }
 
+/// 类型安全的 ID 新类型
+///
+/// 防止不同实体的 ID 被错误混用。
+///
+/// # 示例
+///
+/// ```
+/// use common::types::Id;
+///
+/// type UserId = Id<User>;
+/// type OrderId = Id<Order>;
+///
+/// struct User;
+/// struct Order;
+///
+/// // UserId 和 OrderId 是不同类型，编译期防止混用
+/// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub struct Id<T>(u64, std::marker::PhantomData<T>);
+
+impl<T> Id<T> {
+    /// 创建新 ID
+    pub const fn new(id: u64) -> Self {
+        Self(id, std::marker::PhantomData)
+    }
+
+    /// 获取内部值
+    pub const fn value(&self) -> u64 {
+        self.0
+    }
+}
+
+impl<T> Default for Id<T> {
+    fn default() -> Self {
+        Self::new(0)
+    }
+}
+
+impl<T> std::fmt::Display for Id<T> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
+/// 保证非空的 Vec 包装
+///
+/// 在类型层面保证至少有一个元素。
+#[derive(Debug, Clone)]
+pub struct NonEmptyVec<T> {
+    head: T,
+    tail: Vec<T>,
+}
+
+impl<T> NonEmptyVec<T> {
+    /// 创建非空向量（至少一个元素）
+    pub fn new(first: T) -> Self {
+        Self {
+            head: first,
+            tail: Vec::new(),
+        }
+    }
+
+    /// 尝试从 Vec 创建
+    pub fn from_vec(vec: Vec<T>) -> Option<Self> {
+        let mut iter = vec.into_iter();
+        let head = iter.next()?;
+        Some(Self {
+            head,
+            tail: iter.collect(),
+        })
+    }
+
+    /// 获取首元素
+    pub fn first(&self) -> &T {
+        &self.head
+    }
+
+    /// 获取首元素（可变）
+    pub fn first_mut(&mut self) -> &mut T {
+        &mut self.head
+    }
+
+    /// 获取最后一个元素
+    pub fn last(&self) -> &T {
+        self.tail.last().unwrap_or(&self.head)
+    }
+
+    /// 压入元素
+    pub fn push(&mut self, item: T) {
+        self.tail.push(item);
+    }
+
+    /// 长度（总是 >= 1）
+    pub fn len(&self) -> usize {
+        1 + self.tail.len()
+    }
+
+    /// 迭代器
+    pub fn iter(&self) -> impl Iterator<Item = &T> {
+        std::iter::once(&self.head).chain(self.tail.iter())
+    }
+
+    /// 转换为 Vec
+    pub fn into_vec(self) -> Vec<T> {
+        let mut vec = Vec::with_capacity(self.len());
+        vec.push(self.head);
+        vec.extend(self.tail);
+        vec
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -302,10 +413,51 @@ mod tests {
         let items: Vec<i32> = vec![1, 2, 3];
         let p = Pagination::new(1, 10);
         let result = Paginated::new(items, 100, p);
-        
+
         assert_eq!(result.total(), 100);
         assert_eq!(result.total_pages(), 10);
         assert!(result.has_next());
         assert!(!result.has_prev());
+    }
+
+    #[test]
+    fn test_id_newtype() {
+        struct User;
+        struct Order;
+
+        let user_id = Id::<User>::new(42);
+        let order_id = Id::<Order>::new(42);
+
+        assert_eq!(user_id.value(), 42);
+        assert_eq!(user_id.to_string(), "42");
+
+        // 值相同（都是 42），但编译期类型不同
+        assert_eq!(user_id.value(), order_id.value());
+    }
+
+    #[test]
+    fn test_non_empty_vec() {
+        let mut nev = NonEmptyVec::new(10);
+        assert_eq!(nev.len(), 1);
+        assert_eq!(*nev.first(), 10);
+
+        nev.push(20);
+        nev.push(30);
+        assert_eq!(nev.len(), 3);
+        assert_eq!(*nev.last(), 30);
+
+        let collected: Vec<i32> = nev.iter().copied().collect();
+        assert_eq!(collected, vec![10, 20, 30]);
+    }
+
+    #[test]
+    fn test_non_empty_vec_from_vec() {
+        let Some(nev) = NonEmptyVec::from_vec(vec![1, 2, 3]) else {
+            panic!("expected Some");
+        };
+        assert_eq!(nev.len(), 3);
+
+        let none = NonEmptyVec::<i32>::from_vec(vec![]);
+        assert!(none.is_none());
     }
 }

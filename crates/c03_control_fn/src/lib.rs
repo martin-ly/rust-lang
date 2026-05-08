@@ -20,6 +20,7 @@
 // 导出核心模块
 pub mod async_control_flow;
 pub mod error;
+pub mod control_flow_patterns;
 pub mod if_let_guards_deep_dive;
 pub mod rust_194_features; // Rust 1.94 特性
 pub mod rust_195_features; // Rust 1.95 特性 (if let guards, bool TryFrom)

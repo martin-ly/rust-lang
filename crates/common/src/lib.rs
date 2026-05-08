@@ -64,15 +64,16 @@ pub use error::UnifiedError as RustLangErrorEnum;
 pub use error::UnifiedError as CommonErrorAlias;
 
 // Other public modules
+pub mod arena;
 pub mod traits;
 pub mod types;
 pub mod utils;
 
 // Re-export commonly used traits
-pub use traits::{Identifiable, Measurable, Validatable};
+pub use traits::{Comparable, Identifiable, Measurable, Validatable};
 
 // Re-export commonly used types
-pub use types::{Pagination, Paginated, Version};
+pub use types::{Id, NonEmptyVec, Pagination, Paginated, Timestamped, Version};
 
 // Re-export commonly used utility functions
-pub use utils::{format_duration, format_bytes, truncate_with_ellipsis};
+pub use utils::{format_duration, format_bytes, truncate_with_ellipsis, retry, Memoize, OnceGuard};

@@ -608,6 +608,95 @@ makes C++ template specialization so fragile."#
 }
 
 // ============================================================================
+// 6. Type Family Demo — 类型族在 Rust 中的实际应用
+// ============================================================================
+
+/// 类型族（Type Families）概念演示
+///
+/// 类型族允许根据一个类型参数选择另一个相关类型。
+/// Rust 中通过关联类型（associated types）实现。
+pub struct TypeFamilyDemo;
+
+/// 容器类型族 trait
+pub trait ContainerFamily {
+    type Container<T>: Container<T>;
+}
+
+/// 容器 trait
+pub trait Container<T> {
+    fn new(items: Vec<T>) -> Self;
+    fn len(&self) -> usize;
+    fn is_empty(&self) -> bool;
+}
+
+/// 列表容器族
+pub struct ListFamily;
+
+impl ContainerFamily for ListFamily {
+    type Container<T> = Vec<T>;
+}
+
+impl<T> Container<T> for Vec<T> {
+    fn new(items: Vec<T>) -> Self {
+        items
+    }
+    fn len(&self) -> usize {
+        self.len()
+    }
+    fn is_empty(&self) -> bool {
+        self.is_empty()
+    }
+}
+
+/// 树形容器族（简化版）
+pub struct TreeFamily;
+
+pub struct SimpleTree<T> {
+    root: Option<T>,
+    children: Vec<SimpleTree<T>>,
+}
+
+impl ContainerFamily for TreeFamily {
+    type Container<T> = SimpleTree<T>;
+}
+
+impl<T> Container<T> for SimpleTree<T> {
+    fn new(items: Vec<T>) -> Self {
+        let mut iter = items.into_iter();
+        Self {
+            root: iter.next(),
+            children: iter.map(|item| SimpleTree { root: Some(item), children: vec![] }).collect(),
+        }
+    }
+    fn len(&self) -> usize {
+        1 + self.children.iter().map(|c| c.len()).sum::<usize>()
+    }
+    fn is_empty(&self) -> bool {
+        self.root.is_none()
+    }
+}
+
+impl TypeFamilyDemo {
+    /// 使用类型族创建容器
+    pub fn create_container<F, T>(items: Vec<T>) -> F::Container<T>
+    where
+        F: ContainerFamily,
+    {
+        F::Container::new(items)
+    }
+
+    /// 展示同一份代码对不同类型族工作
+    pub fn add_i32(a: i32, b: i32) -> i32 {
+        a + b
+    }
+
+    /// 展示同一份代码对不同类型族工作
+    pub fn add_f64(a: f64, b: f64) -> f64 {
+        a + b
+    }
+}
+
+// ============================================================================
 // Tests
 // ============================================================================
 
@@ -778,5 +867,24 @@ mod tests {
     #[test]
     fn test_why_coherence_matters() {
         assert!(!CoherenceAndOrphanRules::why_coherence_matters().is_empty());
+    }
+
+    // ------------------------------------------------------------------------
+    // TypeFamilyDemo tests
+    // ------------------------------------------------------------------------
+
+    #[test]
+    fn test_type_family_add() {
+        assert_eq!(TypeFamilyDemo::add_i32(3, 4), 7);
+        assert_eq!(TypeFamilyDemo::add_f64(3.0, 4.0), 7.0);
+    }
+
+    #[test]
+    fn test_type_family_container() {
+        let list = TypeFamilyDemo::create_container::<ListFamily, _>(vec![1, 2, 3]);
+        assert_eq!(list.len(), 3);
+
+        let tree = TypeFamilyDemo::create_container::<TreeFamily, _>(vec![1, 2, 3]);
+        assert_eq!(tree.len(), 3);
     }
 }

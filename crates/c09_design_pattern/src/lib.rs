@@ -51,6 +51,7 @@ pub mod formal_verification_examples;
 pub mod pattern_combinations;
 
 // Rust 特定设计惯用法
+pub mod functional_patterns;
 pub mod rust_idioms;
 
 // 示例程序

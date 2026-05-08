@@ -1,224 +1,226 @@
-# Tree Borrows 详解
+# Tree Borrows 模型权威指南
 
-> **论文**: Tree Borrows: An Aliasing Model for Rust
-> **会议**: PLDI 2025 (Distinguished Paper Award)
-> **作者**: Neven Villani, Ralf Jung, et al.
-> **状态**: 🔄 正在整合到 Rust 编译器
+> **定位**: Rust 内存模型前沿 — Tree Borrows
+> **作者**: Neven Villani (RustBelt / Miri 团队)
+> **状态**: 实验性 (Miri `-Zmiri-tree-borrows`)
+> **适用**: 理解 `unsafe` Rust 的别名规则、Miri 诊断解释
 
 ---
 
 ## 📋 目录
 
-- [Tree Borrows 详解](#tree-borrows-详解)
+- [Tree Borrows 模型权威指南](#tree-borrows-模型权威指南)
   - [📋 目录](#-目录)
-  - [🎯 概述](#-概述)
-    - [核心改进](#核心改进)
-  - [📊 与 Stacked Borrows 对比](#-与-stacked-borrows-对比)
-    - [关键区别示例](#关键区别示例)
+  - [🎯 为什么需要 Tree Borrows](#-为什么需要-tree-borrows)
   - [🌳 核心概念](#-核心概念)
-    - [树结构](#树结构)
-    - [权限模型](#权限模型)
-    - [状态转换](#状态转换)
-  - [💡 实际影响](#-实际影响)
-    - [更多代码合法](#更多代码合法)
-    - [直观性提升](#直观性提升)
-  - [🔄 迁移指南](#-迁移指南)
-    - [测试代码兼容性](#测试代码兼容性)
-    - [常见问题](#常见问题)
+    - [1. 权限树 (Permission Tree)](#1-权限树-permission-tree)
+    - [2. 指针状态机](#2-指针状态机)
+    - [3. 转换规则](#3-转换规则)
+  - [📊 Tree Borrows vs Stacked Borrows](#-tree-borrows-vs-stacked-borrows)
+  - [🔧 Miri 中使用 Tree Borrows](#-miri-中使用-tree-borrows)
+  - [⚠️ 常见模式与陷阱](#️-常见模式与陷阱)
+    - [模式 1: 手动迭代器 (safe under TB)](#模式-1-手动迭代器-safe-under-tb)
+    - [模式 2: 双指针技巧](#模式-2-双指针技巧)
+    - [陷阱: 父指针在子指针活跃时被使用](#陷阱-父指针在子指针活跃时被使用)
   - [🔗 参考资源](#-参考资源)
 
 ---
 
-## 🎯 概述
+## 🎯 为什么需要 Tree Borrows
 
-Tree Borrows 是 Rust 内存模型的最新研究成果，旨在替代 Stacked Borrows 成为 Rust 的标准别名模型。
-
-### 核心改进
-
-```
-Stacked Borrows (旧模型)
-├─ 基于栈的内存访问跟踪
-├─ 严格的访问规则
-└─ 拒绝某些直觉上合法的代码
-
-Tree Borrows (新模型)
-├─ 基于树的内存访问跟踪
-├─ 更灵活的访问规则
-└─ 接受更多合法的代码模式
-```
-
----
-
-## 📊 与 Stacked Borrows 对比
-
-| 特性 | Stacked Borrows | Tree Borrows |
-|------|-----------------|--------------|
-| **数据结构** | 栈 | 树 |
-| **兼容性** | 30K crates | 30K + 54% 通过 |
-| **形式化** | 已验证 | Rocq 形式化 |
-| **拒绝率** | 较高 | 降低 54% |
-| **直观性** | 一般 | 更好 |
-
-### 关键区别示例
+Stacked Borrows (SB) 是 Rust 的第一个正式内存模型，但它对以下场景过于严格：
 
 ```rust
-// 示例: 通过引用重新借用
-fn example() {
-    let mut x = 0;
-    let y = &mut x;
-    let z = &mut *y;  // 通过 y 重新借用
+// 在 Stacked Borrows 下这是 UB！
+let mut data = [0u8; 16];
+let ptr1: *mut u8 = data.as_mut_ptr();
+let ptr2: *mut u8 = ptr1.wrapping_add(1);
 
-    *z = 1;
-    *y = 2;  // Stacked Borrows: 可能 UB
-             // Tree Borrows: OK
+unsafe {
+    *ptr1 = 1;  // 使用 ptr1
+    *ptr2 = 2;  // 使用 ptr2 — SB 认为这是 UB
 }
 ```
+
+**原因**: SB 将指针视为一个栈，任何使用都需要重新验证整个栈。当 `ptr1` 被使用后，`ptr2`（从 ptr1 派生）被视为无效。
+
+**Tree Borrows 的解决思路**: 将指针关系建模为**树结构**，兄弟节点之间不互相影响。
 
 ---
 
 ## 🌳 核心概念
 
-### 树结构
+### 1. 权限树 (Permission Tree)
+
+当创建一个指针时，它成为树的根节点。派生指针成为子节点：
 
 ```
-Stacked Borrows 视图:
-    [ Unique(0) ]
-    [ Unique(1) ]
-    [ Unique(2) ]
-    └─ 严格的栈顺序
-
-Tree Borrows 视图:
-           [ Unique(0) ] (根)
-           /           \
-    [ Shared(1) ]  [ Unique(2) ] (子节点)
-    └─ 允许分支和共存
+&mut data (根 — 独占写权限)
+    ├── ptr1 = as_mut_ptr() (子 — 原始指针，无别名约束)
+    │       └── ptr2 = ptr1.wrapping_add(1) (孙 — 不重叠区域)
+    └── ptr3 = data.as_mut_ptr().add(8) (子 — 后半部分)
 ```
 
-### 权限模型
+**关键规则**: 兄弟节点（同一父节点的不同子节点）在访问不重叠内存时是独立的。
 
-```rust
-// 每种借用都有权限标签
-enum Permission {
-    Unique,      // 独占读写
-    SharedRead,  // 共享只读
-    SharedWrite, // 共享写入
-    Disabled,    // 禁用
-}
+---
+
+### 2. 指针状态机
+
+每个指针有四种权限状态：
+
+| 状态 | 读 | 写 | 说明 |
+|------|----|----|------|
+| **Reserved** | ✅ | ✅ (延迟) | 新派生的共享/原始指针 |
+| **Active** | ✅ | ✅ | 当前正在使用的独占指针 |
+| **Frozen** | ✅ | ❌ | 冻结的共享指针 (&T) |
+| **Disabled** | ❌ | ❌ | 已失效的指针 |
+
 ```
-
-### 状态转换
-
-```
-状态转换图:
-
-  Unique
-    │
-    ├─ 创建子借用 ──→ SharedRead/SharedWrite
-    │
-    ├─ 读取访问 ──→ 保持 Unique
-    │
-    └─ 写入访问 ──→ 禁用子借用
-
-  SharedRead
-    │
-    ├─ 创建子借用 ──→ SharedRead
-    │
-    └─ 读取访问 ──→ 保持 SharedRead
-
-  SharedWrite
-    │
-    ├─ 创建子借用 ──→ SharedWrite/SharedRead
-    │
-    └─ 写入访问 ──→ 转换为 SharedRead
+Reserved ──写访问──→ Active
+   │                    │
+   ├──读访问──→ Frozen ←─┤
+   │              │      │
+   └──子指针写──→ Disabled
 ```
 
 ---
 
-## 💡 实际影响
+### 3. 转换规则
 
-### 更多代码合法
+**规则 1: 子指针写操作不影响兄弟指针**
 
 ```rust
-// 示例1: 重叠借用
-fn overlapping_borrows() {
-    let mut data = [1, 2, 3, 4, 5];
+let mut data = [0u8; 16];
+let ptr1 = data.as_mut_ptr();
+let ptr2 = ptr1.wrapping_add(1);
 
-    let left = &mut data[..2];
-    let right = &mut data[3..];
-
-    // 两个不重叠的切片同时可变借用
-    left[0] = 10;
-    right[0] = 50;
-}
-
-// 示例2: 迭代器与可变借用
-fn iterator_with_mutable() {
-    let mut vec = vec![1, 2, 3, 4, 5];
-
-    // 获取迭代器
-    let mut iter = vec.iter();
-
-    // 同时可以修改其他元素
-    vec.push(6);  // Tree Borrows: OK
-}
-
-// 示例3: 自引用结构
-struct SelfReferential<'a> {
-    data: String,
-    ptr: &'a str,  // 指向 data
+unsafe {
+    *ptr1 = 1;  // ptr1 变为 Active
+    *ptr2 = 2;  // ptr2 也是 Active — 兄弟关系，互不干扰 ✅
 }
 ```
 
-### 直观性提升
+**规则 2: 共享引用 (&T) 冻结子树**
 
 ```rust
-// 程序员直觉上认为合法的代码
-fn intuitive_code() {
-    let mut x = 0;
-    let y = &mut x;
+let mut data = 42;
+let raw = &mut data as *mut i32;
 
-    // 使用 y 获取新的引用
-    let z = &mut *y;
-    *z = 1;
-
-    // 重新使用 y
-    *y = 2;  // Tree Borrows 认为这完全合法
+unsafe {
+    let shared = &*raw;      // 创建共享引用，raw 的子树被 Frozen
+    let _ = *shared;         // ✅ 可以读
+    // *raw = 0;              // ❌ UB: raw 已被 Frozen，不能写
 }
+```
+
+**规则 3: 重新借用保持父子关系**
+
+```rust
+let mut data = 0;
+let r1 = &mut data;
+let r2 = &mut *r1;  // r2 是 r1 的子节点
+
+*r2 = 1;  // r2 Active，r1 暂时挂起
+*r1 = 2;  // r1 重新 Active，r2 必须不再使用
 ```
 
 ---
 
-## 🔄 迁移指南
+## 📊 Tree Borrows vs Stacked Borrows
 
-### 测试代码兼容性
+| 场景 | Stacked Borrows | Tree Borrows | 结果 |
+|------|----------------|--------------|------|
+| 相邻字段通过不同指针写入 | ❌ UB | ✅ 允许 | TB 更宽松 |
+| `&mut T` 转 `*mut T` 再转 `&mut T` | ❌ UB | ✅ 允许 | TB 更实用 |
+| 内联汇编后使用指针 | ❌ UB | ⚠️ 谨慎 | 两者都困难 |
+| 严格别名分析精度 | ⭐⭐⭐ | ⭐⭐ | SB 更精确 |
+| 与 LLVM `noalias` 兼容 | 好 | 更好 | TB 更贴近编译器 |
+
+**选择建议**:
+
+- 新项目使用 Tree Borrows (`-Zmiri-tree-borrows`)
+- 需要与 SB 行为对比时使用双重验证
+- 最终 Rust 官方内存模型可能融合两者优点
+
+---
+
+## 🔧 Miri 中使用 Tree Borrows
 
 ```bash
-# 使用 Miri 测试 Tree Borrows
+# 使用 Tree Borrows 运行 Miri
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
 # 对比 Stacked Borrows
-MIRIFLAGS="-Zmiri-stacked-borrows" cargo miri test
+cargo miri test  # 默认 SB
 ```
 
-### 常见问题
+**项目中的 Miri 测试**: `crates/*/src/miri_tests.rs`
 
-| 问题 | 原因 | 解决方案 |
-|------|------|----------|
-| 代码在新模型下 UB | 依赖旧的别名规则 | 重构借用模式 |
-| 性能下降 | 额外的权限检查 | 等待编译器优化 |
-| 不确定性 | 模型边界情况 | 避免模糊代码模式 |
+---
+
+## ⚠️ 常见模式与陷阱
+
+### 模式 1: 手动迭代器 (safe under TB)
+
+```rust
+let mut arr = [1, 2, 3, 4];
+let ptr = arr.as_mut_ptr();
+
+unsafe {
+    for i in 0..4 {
+        *ptr.add(i) *= 2;  // TB: 同一指针的连续访问 ✅
+    }
+}
+```
+
+### 模式 2: 双指针技巧
+
+```rust
+fn partition<T: Ord>(arr: &mut [T]) -> usize {
+    let ptr = arr.as_mut_ptr();
+    let len = arr.len();
+    unsafe {
+        let mut left = ptr;
+        let mut right = ptr.add(len - 1);
+        // left 和 right 是兄弟节点，访问不重叠区域 ✅ (TB)
+        while left < right {
+            while *left < pivot { left = left.add(1); }
+            while *right > pivot { right = right.sub(1); }
+            std::ptr::swap(left, right);
+        }
+    }
+}
+```
+
+### 陷阱: 父指针在子指针活跃时被使用
+
+```rust
+let mut data = [0u8; 16];
+let parent = data.as_mut_ptr();
+let child = parent.wrapping_add(1);
+
+unsafe {
+    *child = 1;      // child Active
+    *parent = 2;     // ❌ TB: parent 重新 Active，child 变为 Disabled！
+    *child = 3;      // UB: child 已 Disabled
+}
+```
+
+**修复**: 确保父子指针的使用不交叉，或全部使用原始指针（无 &mut 中间层）。
 
 ---
 
 ## 🔗 参考资源
 
-- [论文 PDF](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
-- [Iris 形式化](https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf)
-- [Ralf Jung 博客](https://www.ralfj.de/blog/2025/07/07/tree-borrows-paper.html)
-- [Miri Tree Borrows](https://github.com/rust-lang/miri)
+- [Tree Borrows 论文 (Neven Villani, 2023)](https://hal.science/hal-04196935/document)
+- [Miri Tree Borrows 文档](https://github.com/rust-lang/miri#tree-borrows)
+- [RustBelt 项目](https://plv.mpi-sws.org/rustbelt/)
+- [项目 Miri 测试集](../../crates/c01_ownership_borrow_scope/src/miri_tests.rs)
+- [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: 🔄 学术前沿跟踪中
+**最后更新**: 2026-05-08
+**状态**: ✅ 已完善

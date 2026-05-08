@@ -161,6 +161,25 @@ mod async_traits {
 #[cfg(feature = "async")]
 pub use async_traits::*;
 
+/// 可比较 trait
+///
+/// 用于可以与其他同类型实例比较的类型
+pub trait Comparable: PartialEq + PartialOrd {
+    /// 是否在范围内 [min, max]
+    fn in_range(&self, min: &Self, max: &Self) -> bool {
+        self >= min && self <= max
+    }
+}
+
+impl<T: PartialEq + PartialOrd> Comparable for T {}
+
+/// 可序列化 trait (需启用 serde feature)
+#[cfg(feature = "serde")]
+pub trait Serializable: serde::Serialize + for<'de> serde::Deserialize<'de> {}
+
+#[cfg(feature = "serde")]
+impl<T: serde::Serialize + for<'de> serde::Deserialize<'de>> Serializable for T {}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -203,5 +222,12 @@ mod tests {
         };
         assert!(item.size_bytes() > 0);
         assert!(!item.is_empty());
+    }
+
+    #[test]
+    fn test_comparable() {
+        let x = 5;
+        assert!(x.in_range(&1, &10));
+        assert!(!x.in_range(&10, &20));
     }
 }

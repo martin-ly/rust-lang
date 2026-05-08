@@ -53,7 +53,7 @@
 | | Rocket | 📝 | ⚠️ | ✅ | ⚠️ |
 | **数据库** | SQLx | 📝 | 📝 | ✅ | 📝 |
 | | Diesel | 📝 | ⚠️ | ✅ | 📝 |
-| | Sea-ORM | 📝 | ⚠️ | ⚠️ | ⚠️ |
+| | Sea-ORM | ✅ | ⚠️ | ⚠️ | ⚠️ |
 | **ORM** | Diesel | 📝 | ⚠️ | ✅ | 📝 |
 | | Sea-ORM | 📝 | ⚠️ | ⚠️ | ⚠️ |
 | **序列化** | Serde | 📝 | 📝 | ✅ | ✅ |
@@ -336,6 +336,8 @@ fn create_user(conn: &mut PgConnection, name: &str, email: &str) -> QueryResult<
 
 **定位**: 异步动态的 ORM，面向现代 Rust
 
+[→ Sea-ORM 深度解析](./database/sea_orm_deep_dive.md)
+
 ```rust
 use sea_orm::{entity::*, query::*, DatabaseConnection};
 use crate::entities::user;
@@ -364,6 +366,8 @@ async fn find_user_with_posts(db: &DatabaseConnection, user_id: i32) -> Result<O
 ## ⚡ 异步运行时
 
 ### Tokio
+
+[→ Tokio 运行时深度解析](../async_runtimes/tokio_deep_dive.md)
 
 **核心组件**:
 
@@ -536,5 +540,5 @@ fn init_tracing() {
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
+**最后更新**: 2026-05-08
 **状态**: 🔄 持续扩充中

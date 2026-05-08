@@ -29,7 +29,7 @@ name = "common_benchmarks"
 harness = false
 
 [features]
-default = []
+default = ["error-trait", "async"]
 serde = ["dep:serde", "dep:serde_json"]
 error-trait = ["dep:thiserror", "dep:anyhow"]
 async = ["dep:tokio"]

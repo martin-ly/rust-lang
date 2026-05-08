@@ -26,6 +26,7 @@
       - [网络 I/O](#网络-io)
     - [4. Reactor 模式](#4-reactor-模式)
     - [5. Actor 模式](#5-actor-模式)
+    - [6. Async Closures](#6-async-closures)
   - [⚡ 性能优化](#-性能优化)
     - [1. 使用 select! 宏](#1-使用-select-宏)
     - [2. 使用 Stream](#2-使用-stream)
@@ -58,6 +59,7 @@
   - [🆕 Rust 1.95+ 特性](#-rust-194-特性)
     - [ControlFlow 在异步编程中的应用](#controlflow-在异步编程中的应用)
     - [Peekable 迭代器增强](#peekable-迭代器增强)
+    - [`cfg_select!` 在异步配置中的应用](#cfg_select-在异步配置中的应用)
   - [🔗 形式化引用](#-形式化引用)
 
 ---
@@ -271,6 +273,71 @@ async fn main() {
     actor_ref.send(3).await;
 }
 ```
+
+### 6. Async Closures
+
+> **Rust 版本**: 1.85.0+ Stable
+> **相关文档**: [Async Closures 深度指南](../../crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md)
+
+Rust 1.85 稳定了 async closures，引入了 `AsyncFn`、`AsyncFnMut`、`AsyncFnOnce` trait family，
+解决了旧范式 `|| async move { ... }` 的三大痛点：强制 move、Send bound 表达困难、类型系统不统一。
+
+#### 基础语法
+
+```rust
+use std::time::Duration;
+
+// 最简单的 async closure
+let simple = async |x: i32| x * 2;
+let result = simple(21).await; // 42
+
+// 带类型注解的参数
+let typed = async |name: &str| -> String {
+    format!("Hello, {name}")
+};
+
+// move 捕获
+let prefix = String::from("Result: ");
+let moved = async move |x: i32| {
+    format!("{prefix}{}", x * 2)
+};
+```
+
+#### 与旧范式对比
+
+| 维度 | 旧范式 `\|x\| async move { ... }` | Async Closure `async \|x\| { ... }` (1.85.0+) |
+|------|----------------------------------|-----------------------------------------------|
+| **语法** | 闭包返回 async block | `async` 关键字修饰闭包 |
+| **捕获方式** | 强制 `move`（所有权转移） | 支持借用（与常规闭包一致） |
+| **返回类型** | `impl Future<Output = T>` | `impl AsyncFn(...) -> T` |
+| **Trait 实现** | `FnOnce` / `Fn` / `FnMut` | `AsyncFnOnce` / `AsyncFn` / `AsyncFnMut` |
+| **Send bound** | 复杂（需显式标注） | 自动推断（通过关联类型） |
+
+#### 在异步编程中的应用
+
+```rust
+/// 接受异步谓词的过滤函数
+async fn async_filter<T, F>(items: Vec<T>, predicate: F) -> Vec<T>
+where
+    F: AsyncFn(&T) -> bool,
+{
+    let mut results = Vec::new();
+    for item in items {
+        if predicate(&item).await {
+            results.push(item);
+        }
+    }
+    results
+}
+
+// 使用
+let numbers = vec![1, 2, 3, 4, 5];
+let evens = async_filter(numbers, async |x: &i32| *x % 2 == 0).await;
+assert_eq!(evens, vec![2, 4]);
+```
+
+> **与 Tokio 生态集成**：async closures 与 Tokio 的任务系统、通道系统天然配合。
+> 详见 [Tokio 异步运行时深度解析](../../content/ecosystem/async_runtimes/tokio_deep_dive.md)。
 
 ---
 
@@ -1544,7 +1611,64 @@ async fn parse_number(chars: &mut Peekable<impl Iterator<Item = char>>) -> Optio
 }
 ```
 
-**最后更新**: 2026-05-08 (添加 Rust 1.95+ 特性)
+### `cfg_select!` 在异步配置中的应用
+
+Rust 1.95 稳定的 `cfg_select!` 宏可以在表达式位置进行多分支条件编译，
+在异步编程中常用于跨平台运行时配置和特性门控。
+
+#### 跨平台异步运行时配置
+
+```rust
+/// 根据目标平台选择最优的线程池大小
+const DEFAULT_WORKER_THREADS: usize = cfg_select! {
+    target_os = "windows" => 4,
+    target_os = "linux" => 8,
+    target_os = "macos" => 4,
+    _ => 4,
+};
+
+/// 根据目标平台选择 TCP keepalive 间隔
+const KEEPALIVE_INTERVAL_SECS: u64 = cfg_select! {
+    target_os = "windows" => 60,
+    target_os = "linux" => 45,
+    target_os = "macos" => 75,
+    _ => 60,
+};
+
+async fn create_runtime() -> tokio::runtime::Runtime {
+    tokio::runtime::Builder::new_multi_thread()
+        .worker_threads(DEFAULT_WORKER_THREADS)
+        .max_blocking_threads(cfg_select! {
+            target_os = "linux" => 512,
+            _ => 256,
+        })
+        .enable_all()
+        .build()
+        .unwrap()
+}
+```
+
+#### 特性门控的异步模块加载
+
+```rust
+/// 根据编译特性选择不同的 HTTP 客户端后端
+type HttpClient = cfg_select! {
+    feature = "reqwest" => reqwest::Client,
+    feature = "hyper" => hyper::Client<hyper::client::HttpConnector>,
+    _ => surf::Client,
+};
+
+async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
+    let client = HttpClient::new();
+    // ...
+    Ok(String::new())
+}
+```
+
+> **项目示例**: `crates/c08_algorithms/src/rust_195_features.rs` 中展示了 `cfg_select!` 与异步代码的更多结合模式。
+> **相关文档**: [Rust 1.95 稳定特性全景](../../content/emerging/rust_1_95_preview.md)
+
+**最后更新**: 2026-05-08 (添加 Rust 1.95+ 特性、Async Closures、`cfg_select!`)
 
 ---
 
@@ -1566,5 +1690,5 @@ async fn parse_number(chars: &mut Peekable<impl Iterator<Item = char>>) -> Optio
 ---
 
 **维护者**: Rust 学习项目团队
-**状态**: ✅ 完整实现 (Week 15 形式化引用补全)
+**状态**: ✅ 完整实现 (Week 15 形式化引用补全 + Async Closures / `cfg_select!` 增补)
 **最后更新**: 2026-05-08

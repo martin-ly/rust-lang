@@ -54,7 +54,7 @@ impl PinFundamentals {
     pub fn demonstrate_stack_pinning() -> String {
         let data = PinnedBuffer::new(String::from("stack-pinned"));
         let pinned: Pin<&mut PinnedBuffer> = std::pin::pin!(data);
-        pinned.as_ref().get_content().to_string()
+        pinned.as_ref().get_content()
     }
 
     /// 演示 `Box::pin` 进行堆固定
@@ -63,14 +63,13 @@ impl PinFundamentals {
     pub fn demonstrate_heap_pinning() -> String {
         let pinned: Pin<Box<PinnedBuffer>> =
             Box::pin(PinnedBuffer::new(String::from("heap-pinned")));
-        pinned.as_ref().get_content().to_string()
+        pinned.as_ref().get_content()
     }
 
     /// 解释固定契约：一旦 pinned，内存地址不得改变
     pub fn pin_contract() -> &'static str {
-        "固定契约：当值被 Pin<&mut T> 或 Pin<Box<T>> 包裹后，\
-         其实际内存地址不得改变，除非 T: Unpin。\
-         违反此契约会导致自引用指针悬垂，属于未定义行为。"
+        "固定契约：当值被 Pin<&mut T> 或 Pin<Box<T>> 包裹后，其实际内存地址不得改变，除非 T: \
+         Unpin。违反此契约会导致自引用指针悬垂，属于未定义行为。"
     }
 
     /// 演示 `Unpin` 类型可以从 `Pin<&mut T>` 中获取可变引用
@@ -113,8 +112,11 @@ impl PinnedBuffer {
     }
 
     /// 通过 `Pin<&Self>` 只读访问内容
-    pub fn get_content<'a>(self: Pin<&'a Self>) -> &'a str {
-        &self.content
+    ///
+    /// 由于 `!Unpin` 类型无法从 `Pin<&Self>` 安全返回字段引用（生命周期限制），
+    /// 这里返回克隆后的 `String`。
+    pub fn get_content(self: Pin<&Self>) -> String {
+        self.as_ref().content.clone()
     }
 }
 
@@ -134,10 +136,9 @@ pub struct SelfReferentialPatterns;
 impl SelfReferentialPatterns {
     /// 解释自引用结构在 safe Rust 中不安全的原因
     pub fn why_self_referential_is_unsafe() -> &'static str {
-        "自引用结构包含指向自身的引用。当结构体被移动时，\
-         其内存地址改变，但内部引用仍指向旧地址，导致悬垂指针。\
-         Rust 的借用检查器无法在编译时证明这种自引用是安全的，\
-         因此禁止在 safe Rust 中直接构造。"
+        "自引用结构包含指向自身的引用。当结构体被移动时，其内存地址改变，但内部引用仍指向旧地址，\
+         导致悬垂指针。Rust 的借用检查器无法在编译时证明这种自引用是安全的，因此禁止在 safe Rust \
+         中直接构造。"
     }
 
     /// 模式 1：侵入式链表节点（概念性）
@@ -145,8 +146,8 @@ impl SelfReferentialPatterns {
     /// C/C++ 中常见：节点包含指向同一块内存中其他节点的指针。
     /// Safe Rust 替代方案：使用 `Vec<Node>` + `usize` 索引，或 `Rc<RefCell<Node>>` + `Weak`。
     pub fn intrusive_linked_list_concept() -> &'static str {
-        "侵入式链表：节点包含指向同一块内存中其他节点的指针。\
-         Safe Rust 替代：使用 Vec<Node> + usize 索引，或 Rc<RefCell<Node>> + Weak。"
+        "侵入式链表：节点包含指向同一块内存中其他节点的指针。Safe Rust 替代：使用 Vec<Node> + \
+         usize 索引，或 Rc<RefCell<Node>> + Weak。"
     }
 
     /// 模式 2：解析器引用自身缓冲区（概念性 + 安全替代）
@@ -155,8 +156,8 @@ impl SelfReferentialPatterns {
     /// 安全替代：存储 `(buffer: String, token_start: usize, token_end: usize)`，
     /// 在需要时通过索引动态获取切片。
     pub fn parser_own_buffer_concept() -> &'static str {
-        "解析器持有 String 缓冲区并引用其中切片：移动解析器后切片悬垂。\
-         安全替代：存储 (buffer: String, token_start: usize, token_end: usize)。"
+        "解析器持有 String 缓冲区并引用其中切片：移动解析器后切片悬垂。安全替代：存储 (buffer: \
+         String, token_start: usize, token_end: usize)。"
     }
 
     /// 模式 3：生成器状态机（async/await 脱糖概念）
@@ -165,9 +166,8 @@ impl SelfReferentialPatterns {
     /// 状态机可能包含跨 `await` 点的局部变量引用，形成自引用。
     /// `Pin` 保证 `Future` 在轮询时不会被移动，从而使这些引用有效。
     pub fn generator_state_machine_concept() -> &'static str {
-        "async fn 编译后会脱糖为实现了 Future 的状态机。\
-         状态机可能包含跨 await 点的局部变量引用，形成自引用。\
-         Pin 保证 Future 在轮询时不会被移动，从而使这些引用有效。"
+        "async fn 编译后会脱糖为实现了 Future 的状态机。状态机可能包含跨 await \
+         点的局部变量引用，形成自引用。Pin 保证 Future 在轮询时不会被移动，从而使这些引用有效。"
     }
 
     /// 安全替代方案：使用索引代替指针
@@ -225,17 +225,15 @@ pub struct PinProjectConcept;
 impl PinProjectConcept {
     /// 解释 pin projection 的定义
     pub fn what_is_pin_projection() -> &'static str {
-        "Pin projection 是指从 Pin<&mut Struct> 获取到其某个字段的 Pin<&mut Field>。\
-         这是实现自引用结构时必不可少的操作。"
+        "Pin projection 是指从 Pin<&mut Struct> 获取到其某个字段的 Pin<&mut \
+         Field>。这是实现自引用结构时必不可少的操作。"
     }
 
     /// 安全 pin projection 规则说明
     pub fn safe_projection_rules() -> &'static str {
-        "安全规则：\
-         1. 只有被显式标记为固定的字段才能被投影为 Pin。\
-         2. 被投影的字段不能实现 Unpin（否则无需固定）。\
-         3. Drop 实现必须尊重固定状态（Drop 被调用时值可能仍处于 pinned 状态）。\
-         4. 不能为被固定字段提供 &mut T 访问（会打破固定契约）。"
+        "安全规则：1. 只有被显式标记为固定的字段才能被投影为 Pin。2. 被投影的字段不能实现 \
+         Unpin（否则无需固定）。3. Drop 实现必须尊重固定状态（Drop 被调用时值可能仍处于 pinned \
+         状态）。4. 不能为被固定字段提供 &mut T 访问（会打破固定契约）。"
     }
 
     /// `pin-project` / `pin-project-lite` crate 概念
@@ -243,9 +241,9 @@ impl PinProjectConcept {
     /// 这些 crate 通过过程宏自动生成安全的 pin projection 方法，
     /// 避免手写 `unsafe` 代码。
     pub fn pin_project_crate_concept() -> &'static str {
-        "pin-project 和 pin-project-lite 通过过程宏自动生成安全的 pin projection 方法。\
-         它们会检查字段属性，确保只有标记 #[pin] 的字段才被投影为 Pin，\
-         并生成符合 Rust 安全要求的代码，避免手写 unsafe。"
+        "pin-project 和 pin-project-lite 通过过程宏自动生成安全的 pin projection \
+         方法。它们会检查字段属性，确保只有标记 #[pin] 的字段才被投影为 Pin，并生成符合 Rust \
+         安全要求的代码，避免手写 unsafe。"
     }
 
     /// 何时安全 vs 何时不安全
@@ -284,13 +282,14 @@ impl ProjectDemo {
     /// 通过 `Pin<&Self>` 安全读取 name
     ///
     /// 只读借用不会破坏固定契约，因此可以在 safe Rust 中完成。
-    pub fn get_name<'a>(self: Pin<&'a Self>) -> &'a str {
-        &self.name
+    /// 返回克隆后的 `String` 以绕过 `!Unpin` 字段引用的生命周期限制。
+    pub fn get_name(self: Pin<&Self>) -> String {
+        self.as_ref().name.clone()
     }
 
     /// 通过 `Pin<&Self>` 安全读取 pinned_data
-    pub fn get_pinned_data<'a>(self: Pin<&'a Self>) -> &'a str {
-        &self.pinned_data
+    pub fn get_pinned_data(self: Pin<&Self>) -> String {
+        self.as_ref().pinned_data.clone()
     }
 }
 
@@ -367,9 +366,63 @@ impl OwnershipDecisionTree {
             ("需要单线程共享所有权？", "使用 Rc<T>"),
             ("需要多线程共享所有权？", "使用 Arc<T>"),
             ("需要单线程共享可变性？", "使用 Rc<RefCell<T>>"),
-            ("需要多线程共享可变性？", "使用 Arc<Mutex<T>> 或 Arc<RwLock<T>>"),
+            (
+                "需要多线程共享可变性？",
+                "使用 Arc<Mutex<T>> 或 Arc<RwLock<T>>",
+            ),
             ("读多写少且需要克隆优化？", "使用 Cow<'a, T>"),
         ]
+    }
+}
+
+// ---------------------------------------------------------------------------
+// AsyncStateMachineConcept — Pin 在异步状态机中的核心作用
+// ---------------------------------------------------------------------------
+
+/// 展示 `Pin` 在 async/await 状态机中的必要性
+///
+/// async fn 编译后变成实现 `Future` 的状态机结构体，
+/// 该结构体可能自引用（保存 .await 点的局部变量指针），
+/// 因此 `Future::poll` 接收 `Pin<&mut Self>`。
+pub struct AsyncStateMachineConcept;
+
+impl AsyncStateMachineConcept {
+    /// 解释为什么 Future::poll 需要 Pin
+    pub fn why_future_uses_pin() -> &'static str {
+        r#"async fn 编译后的状态机可能包含自引用：
+
+```rust
+// 源代码
+async fn example() {
+    let x = 42;
+    let ptr = &x;          // 自引用!
+    some_async().await;    // 可能挂起，状态机被移动后再恢复
+    println!("{}", *ptr);  // 如果移动过，ptr 悬垂!
+}
+```
+
+编译器生成的状态机：
+```rust
+enum ExampleFuture {
+    Start,
+    WaitingOnSomeAsync { x: i32, ptr: *const i32 }, // 自引用!
+    Done,
+}
+```
+
+因此 `Future::poll` 签名是：
+```rust
+fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<T>;
+```
+
+`Pin` 保证状态机在 .await 点之间不会被移动，
+从而自引用指针始终有效。"#
+    }
+
+    /// 返回 async/await → Pin 的关系总结
+    pub fn async_await_pin_summary() -> &'static str {
+        "async/await 语法糖 → 编译器生成状态机 → 状态机可能自引用 → \
+         必须用 Pin 保证不移动 → Future::poll 接收 Pin<&mut Self>"
     }
 }
 
@@ -545,6 +598,25 @@ mod tests {
     fn test_decision_tree_advice() {
         let advice = OwnershipDecisionTree::decision_tree_advice();
         assert!(!advice.is_empty());
-        assert!(advice.iter().any(|(k, _)| k.contains("Cow")));
+        assert!(advice.iter().any(|(_, v)| v.contains("Cow")));
+    }
+
+    // -----------------------------------------------------------------------
+    // AsyncStateMachineConcept
+    // -----------------------------------------------------------------------
+
+    #[test]
+    fn test_why_future_uses_pin() {
+        let s = AsyncStateMachineConcept::why_future_uses_pin();
+        assert!(s.contains("Pin"));
+        assert!(s.contains("Future"));
+        assert!(s.contains("状态机"));
+    }
+
+    #[test]
+    fn test_async_await_pin_summary() {
+        let s = AsyncStateMachineConcept::async_await_pin_summary();
+        assert!(s.contains("Pin"));
+        assert!(s.contains("Future"));
     }
 }

@@ -130,15 +130,21 @@
    - 实践: 网络服务器项目
 
 4. **第 7-8 周: 专业领域**
-   - C08: 算法与数据结构
+   - C08: 算法与数据结构（含 [算法决策树](../../crates/c08_algorithms/src/algorithm_decision_trees.rs)）
    - C09: 设计模式
    - 实践: 综合项目
+
+5. **第 9-10 周: 进阶专题（本轮新增）**
+   - c01: [Pin 与自引用结构](../../crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs)（高级所有权深入）
+   - exercises: [Rust 1.95 特性练习](../../exercises/src/rust_195_feature_exercises.rs)
+   - 实践: 理解异步状态机底层与自引用安全
 
 **推荐资源**:
 
 - [线程并发使用指南](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md)
 - [异步编程使用指南](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)
 - [网络编程速查卡](../02_reference/quick_reference/network_programming_cheatsheet.md)
+- [Pin 与自引用结构形式化](../research_notes/formal_methods/pin_self_referential.md)
 
 ---
 
@@ -168,9 +174,18 @@
 4. **第 7-8 周: 高级主题**
    - C11: 宏系统
    - C12: WASM
-   - 实践: 宏和 WASM 项目
+   - c01: [Pin 与自引用结构](../../crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs)（深入 `Pin<P>`、`Unpin`、自引用安全）
+   - c02: [类型系统前沿](../../crates/c02_type_system/src/type_system_frontier.rs)（Never type `!`、TAIT、RPITIT/AFIT）
+   - c08: [算法决策树](../../crates/c08_algorithms/src/algorithm_decision_trees.rs)（根据场景选择最优算法）
+   - 实践: 宏、WASM、高性能算法与类型系统结合项目
 
-5. **第 9-12 周: 综合项目**
+5. **第 9-10 周: 新特性巩固**
+   - exercises: [Rust 1.95 特性练习](../../exercises/src/rust_195_feature_exercises.rs)（`if let` guards、`cfg_select!`、`Atomic::update` 等）
+   - content/emerging/: [前沿特性跟踪](../../content/emerging/README.md)（Generic Const Expressions、Async Closures 等）
+   - content/ecosystem/: [生态深度](../../content/ecosystem/README.md)（Tokio、Axum、SQLx 内部原理）
+   - 实践: 综合运用新特性重构旧代码
+
+6. **第 11-12 周: 综合项目**
    - 完成大型综合项目
    - 性能优化实践
    - 代码审查和重构
@@ -206,7 +221,12 @@
    - 区块链开发
    - 系统编程
 
-4. **形式化与验证（研究者路径）**
+4. **前沿特性跟踪（本轮新增）**
+   - content/emerging/: [前沿特性跟踪](../../content/emerging/README.md)（Async Closures、Generic Const Expressions、TAIT 等）
+   - content/ecosystem/: [生态深度](../../content/ecosystem/README.md)（Tokio 运行时、Axum 服务抽象、SQLx 编译时检查）
+   - 跟踪最新稳定版本特性，保持技术敏锐度
+
+5. **形式化与验证（研究者路径）**
    - [形式化证明系统指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
    - [核心定理完整证明](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)
    - [国际对标索引](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
@@ -253,6 +273,14 @@
 - [ ] 能够编写 WASM 应用
 - [ ] 理解 Rust 内部机制
 - [ ] 完成专业领域项目
+
+#### 新特性与前沿阶段（本轮新增）
+
+- [ ] 掌握 `Pin<P>` 与自引用结构（c01 `pin_and_self_referential.rs`）
+- [ ] 理解 Never type `!` 与类型系统前沿（c02 `type_system_frontier.rs`）
+- [ ] 能够根据场景选择合适算法（c08 `algorithm_decision_trees.rs`）
+- [ ] 完成 Rust 1.95 特性练习（exercises `rust_195_feature_exercises.rs`）
+- [ ] 了解前沿特性跟踪（content/emerging/）与生态深度（content/ecosystem/）
 
 ---
 
@@ -663,7 +691,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 持续更新
-**最后更新**: 2026-05-08
+**最后更新**: 2026-05-08 (本轮新增: c01 pin, c02 frontier, c08 decision_trees, 1.95 exercises, emerging, ecosystem)
 
 ---
 
@@ -679,6 +707,54 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 | ControlFlow | ⭐⭐ | 第2周 |
 | LazyCell/LazyLock 新方法 | ⭐⭐ | 第3周 |
 | Peekable::next_if_map | ⭐ | 第4周 |
+| `if let` guards | ⭐⭐ | 第5周 |
+| `cfg_select!` | ⭐⭐ | 第6周 |
+| `Atomic::update` | ⭐⭐ | 第7周 |
+| `use<..>` precise capturing | ⭐⭐⭐ | 第8周 |
+
+### 本轮新增模块学习路径
+
+| 模块 | 定位 | 前置要求 | 推荐路径 | 文档位置 |
+|------|------|----------|----------|----------|
+| **c01 `pin_and_self_referential.rs`** | 高级所有权 | 掌握基础所有权与生命周期 | 路径 2+ 第 9 周起 | [`crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs`](../../crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs) |
+| **c02 `type_system_frontier.rs`** | 类型系统前沿 | 掌握泛型与 Trait | 路径 3+ 第 7 周起 | [`crates/c02_type_system/src/type_system_frontier.rs`](../../crates/c02_type_system/src/type_system_frontier.rs) |
+| **c08 `algorithm_decision_trees.rs`** | 算法选择 | 掌握基础算法 | 路径 2+ 第 7 周起 | [`crates/c08_algorithms/src/algorithm_decision_trees.rs`](../../crates/c08_algorithms/src/algorithm_decision_trees.rs) |
+| **exercises `rust_195_feature_exercises.rs`** | 1.95 特性练习 | 完成基础学习 | 所有路径巩固阶段 | [`exercises/src/rust_195_feature_exercises.rs`](../../exercises/src/rust_195_feature_exercises.rs) |
+| **content/emerging/** | 前沿特性跟踪 | 中级以上 | 路径 3+ 持续学习 | [`content/emerging/README.md`](../../content/emerging/README.md) |
+| **content/ecosystem/** | 生态深度 | 中级以上 | 路径 3+ 持续学习 | [`content/ecosystem/README.md`](../../content/ecosystem/README.md) |
+
+#### 学习路径递进关系
+
+```text
+初级 ──────────────────────────────────────────────────────────> 高级
+
+基础阶段 (C01-C03)
+  └── 所有权基础 ──> 生命周期基础 ──> 借用规则
+       └── 进阶: Pin 与自引用结构 (c01 pin_and_self_referential.rs)
+
+类型阶段 (C02/C04)
+  └── 基础类型 ──> 泛型与 Trait ──> 生命周期标注
+       └── 进阶: 类型系统前沿 (c02 type_system_frontier.rs: Never type, TAIT, RPITIT)
+
+算法阶段 (C08)
+  └── 基础算法 ──> 数据结构
+       └── 进阶: 算法决策树 (c08 algorithm_decision_trees.rs: 根据场景选型)
+
+新特性巩固
+  └── Rust 1.95 特性练习 (exercises rust_195_feature_exercises.rs)
+       ├── if let guards ──> cfg_select! ──> Atomic::update
+       └── use<..> precise capturing
+
+前沿与生态
+  └── 前沿特性跟踪 (content/emerging/)
+       ├── Async Closures
+       ├── Generic Const Expressions
+       └── TAIT / RPITIT 演进
+  └── 生态深度 (content/ecosystem/)
+       ├── Tokio 运行时原理
+       ├── Axum 服务抽象
+       └── SQLx 编译时检查
+```
 
 ### 学习资源
 

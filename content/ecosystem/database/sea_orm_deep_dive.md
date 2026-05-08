@@ -1,9 +1,8 @@
 # Sea-ORM 深度解析
 
-> **版本**: Sea-ORM 1.x
-> **Rust 版本**: 1.94.0+
-> **难度**: 中级
-> **预计阅读时间**: 40分钟
+> **定位**: Rust 异步 ORM 生态标杆
+> **版本**: Sea-ORM 1.x (兼容 Rust 1.95.0+)
+> **适用场景**: 异步数据库访问、类型安全查询、迁移管理
 
 ---
 
@@ -11,456 +10,246 @@
 
 - [Sea-ORM 深度解析](#sea-orm-深度解析)
   - [📋 目录](#-目录)
-  - [🎯 概述](#-概述)
-    - [核心特性](#核心特性)
-    - [适用场景](#适用场景)
-  - [🏗️ 架构设计](#️-架构设计)
-    - [核心概念](#核心概念)
-    - [与 Diesel/SQLx 对比](#与-dieselsqlx-对比)
-  - [🚀 快速开始](#-快速开始)
-    - [安装配置](#安装配置)
-    - [CLI 工具](#cli-工具)
-  - [📐 实体定义](#-实体定义)
-    - [基本实体](#基本实体)
-    - [关系定义](#关系定义)
-    - [复合主键](#复合主键)
-  - [💾 CRUD 操作](#-crud-操作)
-    - [Create](#create)
-    - [Read](#read)
-    - [Update](#update)
-    - [Delete](#delete)
-  - [🔗 关联查询](#-关联查询)
-    - [Eager Loading](#eager-loading)
-    - [Lazy Loading](#lazy-loading)
-  - [⚡ 性能优化](#-性能优化)
-    - [连接池](#连接池)
-    - [查询优化](#查询优化)
-  - [🧪 测试策略](#-测试策略)
+  - [🎯 架构概览](#-架构概览)
+  - [⚙️ 核心概念](#️-核心概念)
+    - [1. Entity (实体)](#1-entity-实体)
+    - [2. Model (模型)](#2-model-模型)
+    - [3. ActiveModel (活跃模型)](#3-activemodel-活跃模型)
+    - [4. Relation (关系)](#4-relation-关系)
+  - [🔧 查询构建器](#-查询构建器)
+    - [类型安全查询](#类型安全查询)
+    - [原始 SQL（逃生舱）](#原始-sql逃生舱)
+  - [🔄 迁移系统](#-迁移系统)
+  - [📊 与 SQLx 对比](#-与-sqlx-对比)
   - [🔗 参考资源](#-参考资源)
 
 ---
 
-## 🎯 概述
-
-Sea-ORM 是一个异步、动态的 Rust ORM，专为现代 Rust 生态系统设计。
-
-### 核心特性
-
-| 特性 | 说明 |
-|------|------|
-| **异步原生** | 基于 `async/await`，无需阻塞线程 |
-| **类型安全** | 编译时实体校验，运行时动态查询 |
-| **多数据库** | 支持 PostgreSQL、MySQL、SQLite |
-| **代码生成** | CLI 工具自动生成实体代码 |
-| **关系支持** | 完整的一对多、多对多关系 |
-
-### 适用场景
+## 🎯 架构概览
 
 ```
-Sea-ORM 适用场景:
-├── ✅ 异步 Web 应用 (Axum/Actix/Rocket)
-├── ✅ 微服务架构
-├── ✅ 需要动态查询的场景
-├── ✅ 快速原型开发
-└── ❌ 极致性能要求的场景 (考虑 SQLx/Diesel)
+┌─────────────────────────────────────────┐
+│           Application Layer             │
+│  (Axum / Actix-web / Poem / Tauri)     │
+├─────────────────────────────────────────┤
+│              Sea-ORM Layer              │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ │
+│  │ Entity  │ │ Query   │ │ Migrator│ │
+│  │ (类型)  │ │ Builder │ │ (迁移)  │ │
+│  └────┬────┘ └────┬────┘ └────┬────┘ │
+│       └─────────────┴─────────────┘   │
+│              SeaQuery (SQL 生成)        │
+├─────────────────────────────────────────┤
+│         SQLx / native-tls / rustls      │
+├─────────────────────────────────────────┤
+│      PostgreSQL / MySQL / SQLite        │
+└─────────────────────────────────────────┘
 ```
+
+**设计哲学**:
+
+- **类型安全**: 查询在编译期验证（通过 Entity 代码生成）
+- **异步优先**: 所有数据库操作均为 `async`
+- **数据库无关**: 同一套 API 支持 PG/MySQL/SQLite
+- **灵活查询**: 从类型安全的链式 API 到原始 SQL
 
 ---
 
-## 🏗️ 架构设计
+## ⚙️ 核心概念
 
-### 核心概念
+### 1. Entity (实体)
 
-```rust
-// 实体 (Entity) - 对应数据库表
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
-#[sea_orm(table_name = "posts")]
-pub struct Model {
-    #[sea_orm(primary_key)]
-    pub id: i32,
-    pub title: String,
-    pub content: Option<String>,
-}
-
-// 关系 (Relation) - 定义表间关联
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(has_many = "super::comment::Entity")]
-    Comments,
-}
-```
-
-### 与 Diesel/SQLx 对比
-
-| 特性 | Sea-ORM | Diesel | SQLx |
-|------|---------|--------|------|
-| **同步/异步** | 异步 | 同步 | 异步 |
-| **查询类型** | 动态 | 编译时 | 编译时 |
-| **类型安全** | 中等 | 高 | 高 |
-| **学习曲线** | 平缓 | 陡峭 | 中等 |
-| **性能** | 中等 | 高 | 高 |
-| **灵活性** | 高 | 中 | 中 |
-
----
-
-## 🚀 快速开始
-
-### 安装配置
-
-```toml
-[dependencies]
-sea-orm = { version = "1.0", features = [
-    "sqlx-postgres",
-    "runtime-tokio-rustls",
-    "macros"
-] }
-tokio = { version = "1", features = ["full"] }
-```
-
-### CLI 工具
-
-```bash
-# 安装 Sea-ORM CLI
-cargo install sea-orm-cli
-
-# 生成实体代码
-sea-orm-cli generate entity \
-    -u postgres://user:pass@localhost/db \
-    -o src/entities
-```
-
----
-
-## 📐 实体定义
-
-### 基本实体
+Entity 是数据库表的 Rust 类型表示：
 
 ```rust
-use sea_orm::entity::prelude::*;
+// 由 sea-orm-cli generate entity 生成
+pub mod cake {
+    use sea_orm::entity::prelude::*;
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
-#[sea_orm(table_name = "users")]
-pub struct Model {
-    #[sea_orm(primary_key)]
-    pub id: i32,
-
-    #[sea_orm(column_type = "Text")]
-    pub username: String,
-
-    #[sea_orm(column_type = "Text", nullable)]
-    pub email: Option<String>,
-
-    #[sea_orm(default_value = "CURRENT_TIMESTAMP")]
-    pub created_at: DateTimeWithTimeZone,
-}
-
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {}
-
-impl ActiveModelBehavior for ActiveModel {}
-```
-
-### 关系定义
-
-```rust
-// user.rs - 用户实体
-#[derive(DeriveEntityModel)]
-#[sea_orm(table_name = "users")]
-pub struct Model {
-    #[sea_orm(primary_key)]
-    pub id: i32,
-    pub username: String,
-}
-
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(has_many = "super::post::Entity")]
-    Posts,
-}
-
-impl Related<super::post::Entity> for Entity {
-    fn to() -> RelationDef {
-        Relation::Posts.def()
+    #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+    #[sea_orm(table_name = "cake")]
+    pub struct Model {
+        #[sea_orm(primary_key)]
+        pub id: i32,
+        pub name: String,
     }
-}
 
-// post.rs - 文章实体
-#[derive(DeriveEntityModel)]
-#[sea_orm(table_name = "posts")]
-pub struct Model {
-    #[sea_orm(primary_key)]
-    pub id: i32,
-    pub title: String,
-    pub user_id: i32,  // 外键
-}
-
-#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-    #[sea_orm(
-        belongs_to = "super::user::Entity",
-        from = "Column::UserId",
-        to = "super::user::Column::Id"
-    )]
-    User,
-}
-
-impl Related<super::user::Entity> for Entity {
-    fn to() -> RelationDef {
-        Relation::User.def()
+    #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+    pub enum Relation {
+        #[sea_orm(has_many = "super::fruit::Entity")]
+        Fruit,
     }
-}
-```
 
-### 复合主键
+    impl Related<super::fruit::Entity> for Entity {
+        fn to() -> RelationDef {
+            Relation::Fruit.def()
+        }
+    }
 
-```rust
-#[derive(DeriveEntityModel)]
-#[sea_orm(table_name = "order_items")]
-pub struct Model {
-    #[sea_orm(primary_key)]
-    pub order_id: i32,
-    #[sea_orm(primary_key)]
-    pub product_id: i32,
-    pub quantity: i32,
+    impl ActiveModelBehavior for ActiveModel {}
 }
 ```
 
 ---
 
-## 💾 CRUD 操作
+### 2. Model (模型)
 
-### Create
+`Model` 是查询返回的不可变数据结构：
 
 ```rust
-use sea_orm::{ActiveModelTrait, Set};
+let cake: Option<cake::Model> = Cake::find_by_id(1).one(&db).await?;
 
-// 插入单条记录
-let user = user::ActiveModel {
-    username: Set("alice".to_owned()),
-    email: Set(Some("alice@example.com".to_owned())),
+if let Some(cake) = cake {
+    println!("Cake: {}", cake.name);
+    // cake.name = "new".to_string(); // ❌ 编译错误: Model 不可变
+}
+```
+
+---
+
+### 3. ActiveModel (活跃模型)
+
+`ActiveModel` 用于插入和更新：
+
+```rust
+// 插入
+let apple = fruit::ActiveModel {
+    name: Set("Apple".to_owned()),
+    cake_id: Set(Some(1)),
     ..Default::default()
 };
+let apple: fruit::Model = apple.insert(&db).await?;
 
-let result = user.insert(&db).await?;
-println!("Inserted user id: {}", result.id);
+// 更新
+let mut apple: fruit::ActiveModel = apple.into();
+apple.name = Set("Green Apple".to_owned());
+let apple: fruit::Model = apple.update(&db).await?;
 
-// 批量插入
-let users = vec![
-    user::ActiveModel {
-        username: Set("bob".to_owned()),
-        ..Default::default()
-    },
-    user::ActiveModel {
-        username: Set("charlie".to_owned()),
-        ..Default::default()
-    },
-];
-
-user::Entity::insert_many(users)
-    .exec(&db)
-    .await?;
+// 删除
+apple.delete(&db).await?;
 ```
 
-### Read
+**关键区别**:
 
-```rust
-use sea_orm::{EntityTrait, QueryFilter, ColumnTrait};
-
-// 查询所有
-let users: Vec<user::Model> = user::Entity::find()
-    .all(&db)
-    .await?;
-
-// 根据主键查询
-let user: Option<user::Model> = user::Entity::find_by_id(1)
-    .one(&db)
-    .await?;
-
-// 条件查询
-let users: Vec<user::Model> = user::Entity::find()
-    .filter(user::Column::Username.contains("alice"))
-    .filter(user::Column::Email.is_not_null())
-    .all(&db)
-    .await?;
-
-// 分页查询
-let paginator = user::Entity::find()
-    .paginate(&db, 10);  // 每页10条
-
-let users = paginator.fetch_page(0).await?;  // 第1页
-let num_pages = paginator.num_pages().await?;
-```
-
-### Update
-
-```rust
-use sea_orm::{ActiveModelTrait, Set, ModelTrait};
-
-// 方式1: 通过 ActiveModel
-let mut user: user::ActiveModel = user::Entity::find_by_id(1)
-    .one(&db)
-    .await?
-    .ok_or("User not found")?
-    .into();
-
-user.username = Set("alice_updated".to_owned());
-user.update(&db).await?;
-
-// 方式2: 批量更新
-user::Entity::update_many()
-    .col_expr(user::Column::Email, Expr::value(None::<String>))
-    .filter(user::Column::Username.contains("test"))
-    .exec(&db)
-    .await?;
-```
-
-### Delete
-
-```rust
-use sea_orm::{ModelTrait, EntityTrait};
-
-// 删除单条
-let user: user::Model = user::Entity::find_by_id(1)
-    .one(&db)
-    .await?
-    .ok_or("User not found")?;
-
-user.delete(&db).await?;
-
-// 批量删除
-user::Entity::delete_many()
-    .filter(user::Column::Username.contains("temp"))
-    .exec(&db)
-    .await?;
-```
+| | Model | ActiveModel |
+|---|-------|-------------|
+| 用途 | 查询结果 | 插入/更新/删除 |
+| 可变性 | 不可变 | 字段级可变 |
+| 字段类型 | `T` | `ActiveValue<T>` |
 
 ---
 
-## 🔗 关联查询
-
-### Eager Loading
+### 4. Relation (关系)
 
 ```rust
-use sea_orm::{EntityTrait, Related};
-
-// 加载用户及其所有文章
-let users_with_posts: Vec<(user::Model, Vec<post::Model>)> = user::Entity::find()
-    .find_with_related(post::Entity)
-    .all(&db)
-    .await?;
-
-for (user, posts) in users_with_posts {
-    println!("User: {}", user.username);
-    for post in posts {
-        println!("  - {}", post.title);
-    }
-}
-
-// 嵌套 Eager Loading
-let result: Vec<(user::Model, Vec<(post::Model, Vec<comment::Model>)>)> =
-    user::Entity::find()
-        .find_with_related(post::Entity)
+// 一对多: Cake → Fruit
+let cake_with_fruits: Vec<(cake::Model, Vec<fruit::Model>)> =
+    Cake::find()
+        .find_with_related(Fruit)
         .all(&db)
         .await?;
-```
 
-### Lazy Loading
+// 多对一: Fruit → Cake
+let fruits_with_cakes: Vec<(fruit::Model, Option<cake::Model>)> =
+    Fruit::find()
+        .find_also_related(Cake)
+        .all(&db)
+        .await?;
 
-```rust
-// 先查询用户
-let user: user::Model = user::Entity::find_by_id(1)
-    .one(&db)
-    .await?
-    .ok_or("User not found")?;
-
-// 按需加载文章
-let posts: Vec<post::Model> = user.find_related(post::Entity)
-    .all(&db)
-    .await?;
+// 懒加载
+let cake: cake::Model = Cake::find_by_id(1).one(&db).await?.unwrap();
+let fruits: Vec<fruit::Model> = cake.find_related(Fruit).all(&db).await?;
 ```
 
 ---
 
-## ⚡ 性能优化
+## 🔧 查询构建器
 
-### 连接池
-
-```rust
-use sea_orm::{Database, DatabaseOptions, ConnectOptions};
-use std::time::Duration;
-
-let mut opt = ConnectOptions::new("postgres://user:pass@localhost/db".to_owned());
-opt.max_connections(100)
-    .min_connections(5)
-    .connect_timeout(Duration::from_secs(8))
-    .acquire_timeout(Duration::from_secs(8))
-    .idle_timeout(Duration::from_secs(8))
-    .max_lifetime(Duration::from_secs(8));
-
-let db = Database::connect(opt).await?;
-```
-
-### 查询优化
+### 类型安全查询
 
 ```rust
-use sea_orm::{QuerySelect, QueryOrder};
-
-// 只选择需要的列
-let users: Vec<user::Model> = user::Entity::find()
-    .select_only()
-    .column(user::Column::Id)
-    .column(user::Column::Username)
-    .all(&db)
-    .await?;
-
-// 使用索引的排序
-let users: Vec<user::Model> = user::Entity::find()
-    .order_by_asc(user::Column::CreatedAt)
+// 条件查询
+let cakes: Vec<cake::Model> = Cake::find()
+    .filter(cake::Column::Name.contains("Chocolate"))
+    .filter(cake::Column::Id.gte(10))
+    .order_by_asc(cake::Column::Name)
     .limit(10)
+    .offset(20)
     .all(&db)
     .await?;
 
-// 原始 SQL 查询（复杂查询）
-let results = db.query_all(
-    Statement::from_sql_and_values(
-        DbBackend::Postgres,
-        r#"SELECT * FROM users WHERE id = $1"#,
-        [1.into()]
-    )
-).await?;
+// 聚合
+let count: i64 = Cake::find().count(&db).await?;
+
+// 分页
+let paginator = Cake::find()
+    .filter(cake::Column::Name.like("%cake%"))
+    .paginate(&db, 50);
+
+let num_pages = paginator.num_pages().await?;
+for page in paginator.fetch_page(0).await? {
+    println!("{:?}", page);
+}
+```
+
+### 原始 SQL（逃生舱）
+
+```rust
+use sea_orm::{ConnectionTrait, Statement};
+
+let stmt = Statement::from_sql_and_values(
+    DbBackend::Postgres,
+    r#"SELECT * FROM cake WHERE id = $1"#,
+    [1.into()],
+);
+let cake = Cake::find_by_statement(stmt).one(&db).await?;
 ```
 
 ---
 
-## 🧪 测试策略
+## 🔄 迁移系统
 
 ```rust
-#[cfg(test)]
-mod tests {
-    use sea_orm::{Database, DatabaseBackend, MockDatabase, Transaction};
-    use super::*;
+// migration/src/lib.rs
+use sea_orm_migration::prelude::*;
 
-    #[tokio::test]
-    async fn test_find_user() {
-        let db = MockDatabase::new(DatabaseBackend::Postgres)
-            .append_query_results([
-                vec![user::Model {
-                    id: 1,
-                    username: "alice".to_owned(),
-                    email: Some("alice@example.com".to_owned()),
-                    created_at: chrono::Utc::now().into(),
-                }],
-            ])
-            .into_connection();
+pub struct Migrator;
 
-        let user = user::Entity::find_by_id(1)
-            .one(&db)
-            .await
-            .unwrap();
-
-        assert_eq!(user.unwrap().username, "alice");
+#[async_trait::async_trait]
+impl MigratorTrait for Migrator {
+    fn migrations() -> Vec<Box<dyn MigrationTrait>> {
+        vec![
+            Box::new(m20220101_000001_create_cake_table::Migration),
+            Box::new(m20220101_000002_create_fruit_table::Migration),
+        ]
     }
 }
+
+// 运行迁移
+Migrator::up(&db, None).await?;  // 升级
+Migrator::down(&db, Some(1)).await?;  // 回退 1 步
+```
+
+---
+
+## 📊 与 SQLx 对比
+
+| 维度 | Sea-ORM | SQLx |
+|------|---------|------|
+| 抽象层级 | 高 (ORM) | 低 (查询构建器) |
+| 类型安全 | 编译期 (代码生成) | 编译期 (宏检查) |
+| 查询灵活性 | 中等 (结构化) | 高 (原始 SQL) |
+| 迁移系统 | 内置 | 需配合 sqlx-migrate |
+| 学习曲线 | 中等 | 较低 |
+| 运行时开销 | 略高 | 较低 |
+| 适用场景 | CRUD 密集型 | 复杂查询 / 性能敏感 |
+
+**选择决策树**:
+
+```
+需要复杂查询 / 性能优先? ──是──→ SQLx
+                └──否──→ 需要关系映射 / 快速开发? ──是──→ Sea-ORM
+                                      └──否──→ diesel (同步)
 ```
 
 ---
@@ -468,12 +257,12 @@ mod tests {
 ## 🔗 参考资源
 
 - [Sea-ORM 官方文档](https://www.sea-ql.org/SeaORM/)
-- [Sea-ORM GitHub](https://github.com/SeaQL/sea-orm)
-- [Sea-ORM 示例](https://github.com/SeaQL/sea-orm/tree/master/examples)
-- [SeaORM Recipes](https://www.sea-ql.org/sea-orm-cookbook/)
+- [Sea-ORM Cookbook](https://www.sea-ql.org/sea-orm-cookbook/)
+- [项目 C10 网络模块](../../crates/c10_networks/)
+- [SQLx 深度解析](./sqlx_deep_dive.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-19
-**状态**: ✅ 已完成
+**最后更新**: 2026-05-08
+**状态**: ✅ 已完善

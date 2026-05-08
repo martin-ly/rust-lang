@@ -129,6 +129,7 @@ pub mod advanced_patterns;
 pub mod dyn_trait_advanced;
 /// 高级泛型编程模式模块 - GAT、HRTB、类型族、特化概念
 pub mod generic_advanced_patterns;
+pub mod type_state_machine;
 
 /// 实用示例模块 - 展示实际项目中的泛型编程应用
 pub mod practical_examples;
