@@ -350,6 +350,30 @@ fn collect_results(n: usize) -> Vec<i32> {
 }
 ```
 
+#### 5.4 Rust 1.95+ `push_mut` / `insert_mut`
+
+插入元素并直接获取可变引用，避免二次查找：
+
+```rust
+use std::collections::{VecDeque, LinkedList};
+
+// Vec: push 并修改新元素
+let mut vec = vec![1, 2, 3];
+*vec.push_mut(4) += 10;           // vec = [1, 2, 3, 14]
+*vec.insert_mut(0, 100) *= 2;     // vec = [200, 1, 2, 3, 14]
+
+// VecDeque: 双端 push 并修改
+let mut deque = VecDeque::new();
+*deque.push_front_mut(1) += 1;
+*deque.push_back_mut(10) -= 1;
+assert_eq!(deque, [2, 9]);
+
+// LinkedList
+let mut list = LinkedList::new();
+*list.push_front_mut(1) += 1;
+*list.push_back_mut(3) -= 1;
+```
+
 ---
 
 ### 模块 6: 反例集

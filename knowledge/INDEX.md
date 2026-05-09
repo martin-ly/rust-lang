@@ -24,18 +24,26 @@
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
-| `cfg_select!` | [02_intermediate/cfg_select.md](02_intermediate/cfg_select.md) | ✅ |
-| `if let guards` | [02_intermediate/if_let_guards.md](02_intermediate/if_let_guards.md) | ✅ |
+| `cfg_select!` | [02_intermediate/macros/cfg_select.md](02_intermediate/macros/cfg_select.md) | ✅ |
+| `if let guards` | [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/if_let_guards.md) | ✅ |
 | `Atomic*::update` / `try_update` | [03_advanced/concurrency/atomics.md](03_advanced/concurrency/atomics.md) | ✅ |
 | `Vec::push_mut` / `insert_mut` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ |
 | `VecDeque` / `LinkedList` `push_*_mut` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ |
-| `core::range` | [02_intermediate/core_range.md](02_intermediate/core_range.md) | ✅ |
+| `core::range` | [02_intermediate/type_system/core_range.md](02_intermediate/type_system/core_range.md) | ✅ |
 | `*const/mut T::as_ref_unchecked` | [04_expert/unsafe_audit.md](04_expert/unsafe_audit.md) | ✅ |
 | `Layout::dangling_ptr` / `repeat` / `extend_packed` | [04_expert/unsafe_audit.md](04_expert/unsafe_audit.md) | ✅ |
 | `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/performance_optimization.md) | ✅ |
 | `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) | ✅ |
 | `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/maybe_uninit.md) | ✅ |
 | PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/inline_asm.md) | ✅ |
+| `assert_matches!` / `debug_assert_matches!` | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/rust_1_95.md) | ✅ |
+| `VecDeque::push_*_mut` / `insert_mut` | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/rust_1_95.md) | ✅ |
+| `LinkedList::push_*_mut` | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/rust_1_95.md) | ✅ |
+| `fmt::from_fn` / `ControlFlow` (const) | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/rust_1_95.md) | ✅ |
+| `--remap-path-scope` | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/rust_1_95.md) | ✅ |
+| `irrefutable_let_patterns` lint | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/rust_1_95.md) | ✅ |
+| 路径段关键字导入重命名 | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/rust_1_95.md) | ✅ |
+| Apple 平台 Tier 2 | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/rust_1_95.md) | ✅ |
 
 ---
 
@@ -105,7 +113,7 @@
 
 ### I
 
-- **if let guards** - [02_intermediate/if_let_guards.md](02_intermediate/if_let_guards.md) - Rust 1.95
+- **if let guards** - [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/if_let_guards.md) - Rust 1.95
 - **inline assembly** - [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/inline_asm.md)
 - **installation** - [00_start/installation.md](00_start/installation.md)
 - **iterators** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md)
@@ -221,10 +229,10 @@
 ```text
 01_fundamentals/iterators.md (array_windows, next_if) →
 02_intermediate/type_conversions.md (bool::TryFrom, char→usize) →
-02_intermediate/let_chains.md →
-02_intermediate/if_let_guards.md →
-02_intermediate/cfg_select.md →
-02_intermediate/core_range.md →
+02_intermediate/control_flow/let_chains.md →
+02_intermediate/control_flow/if_let_guards.md →
+02_intermediate/macros/cfg_select.md →
+02_intermediate/type_system/core_range.md →
 03_advanced/lazy_initialization.md (LazyCell/LazyLock) →
 03_advanced/concurrency/atomics.md (Atomic*::update) →
 03_advanced/performance_optimization.md (cold_path) →
@@ -262,8 +270,8 @@
 ## 📊 统计数据
 
 - **总文档数**: 74 篇（含索引/入口）
-- **总代码行数**: 33,921 行
-- **总字符数**: 788,600 字符
+- **总代码行数**: 34,493 行
+- **总字符数**: 798,614 字符
 - **重构文档**: 28 篇核心文档按 10 模块标准重构
 - **Rust 1.95+ 特性**: 100% 覆盖
 

@@ -41,15 +41,15 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [let_chains.md](let_chains.md) | let chains | ⭐⭐⭐ |
-| [if_let_guards.md](if_let_guards.md) | if let guards | ⭐⭐⭐ |
-| [cfg_select.md](cfg_select.md) | cfg_select! 宏 | ⭐⭐⭐ |
+| [let_chains.md](control_flow/let_chains.md) | let chains | ⭐⭐⭐ |
+| [if_let_guards.md](control_flow/if_let_guards.md) | if let guards | ⭐⭐⭐ |
+| [cfg_select.md](macros/cfg_select.md) | cfg_select! 宏 | ⭐⭐⭐ |
 
 ### 集合与范围
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [core_range.md](core_range.md) | core::range 模块 | ⭐⭐⭐ |
+| [core_range.md](type_system/core_range.md) | core::range 模块 | ⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 

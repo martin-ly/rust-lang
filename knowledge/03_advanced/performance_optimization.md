@@ -215,6 +215,24 @@ fn simd_dot_product(a: &[f32], b: &[f32]) -> f32 {
 }
 ```
 
+#### 5.4 `str::contains` aarch64 Neon 加速 (Rust 1.95+)
+
+在启用 `neon` target feature 的 aarch64 目标上，标准库自动使用 SIMD 加速字符串搜索：
+
+```rust
+// 无需手动使用 SIMD，标准库自动优化
+let text = "The quick brown fox jumps over the lazy dog";
+assert!(text.contains("fox")); // aarch64 + neon 下使用 SIMD 加速
+
+// 自定义 target feature 确保优化生效
+#[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
+fn fast_search(haystack: &str, needle: &str) -> bool {
+    haystack.contains(needle)
+}
+```
+
+> **性能**: 在 Apple Silicon 和 ARM64 服务器上，`str::contains` 的吞吐量提升可达 **2-4x**。
+
 ### 模块 6: 反例集
 
 #### 6.1 过早优化

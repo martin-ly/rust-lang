@@ -243,4 +243,4 @@ knowledge/
 
 **知识库已准备就绪，可供学习者使用！**
 
-**访问入口**: [knowledge/INDEX.md](INDEX.md)
+**访问入口**: [knowledge/INDEX.md](../INDEX.md)

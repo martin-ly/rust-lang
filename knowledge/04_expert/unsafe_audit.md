@@ -979,6 +979,28 @@ fn main() {
 
 ---
 
+### 补充: Rust 1.95+ Layout API 更新
+
+Rust 1.95 为 `std::alloc::Layout` 新增多个辅助方法，简化自定义分配器实现：
+
+```rust
+use std::alloc::Layout;
+
+// dangling_ptr: 获取对齐的悬空指针（用于占位，不实际分配）
+let ptr = Layout::new::<i32>().dangling_ptr();
+
+// repeat: 计算 N 个副本的布局（含填充）
+let (layout, offset) = Layout::new::<u64>().repeat(10).unwrap();
+
+// repeat_packed / extend_packed: 紧凑排列（无填充）
+let packed = Layout::new::<u8>().repeat_packed(100);
+let combined = Layout::new::<u32>().extend_packed(Layout::new::<u8>()).unwrap();
+```
+
+> 详见 [Rust 1.95 新特性 - Layout API](../06_ecosystem/emerging/rust_1_95.md)
+
+---
+
 ## 📖 延伸阅读
 
 ### 必读资料

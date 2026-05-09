@@ -4,11 +4,11 @@
 
 | 类别 | 数量 |
 |:---|:---:|
-| 总链接数 | 35622 |
-| 有效链接 | 30454 |
-| 损坏链接 | 2478 |
+| 总链接数 | 35643 |
+| 有效链接 | 30515 |
+| 损坏链接 | 2438 |
 | 外部链接 | 2689 |
-| 仅锚点链接 | 23891 |
+| 仅锚点链接 | 23912 |
 
 ## 损坏链接清单（按问题类型分组）
 
@@ -32,14 +32,1492 @@
 | docs\00_master_index.md | archive/process_reports/ | `./archive/process_reports/README.md` | 文件不存在: docs\archive\process_reports\README.md |
 | docs\00_master_index.md | archive/process_reports/ | `./archive/process_reports/README.md` | 文件不存在: docs\archive\process_reports\README.md |
 | docs\00_master_index.md | DOCS_STRUCTURE_OVERVIEW | `./DOCS_STRUCTURE_OVERVIEW.md` | 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md |
-| docs\LINK_CHECK_REPORT.md | formal-foundations/semantics/ | `formal-found... \\|
+| docs\LINK_CHECK_REPORT.md | formal-foundations/proofs/ | `formal-foundations... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `coq-formalization/` \\\| 56 \\\| \\\\| Coq Formalization \\\\| [coq-formalization/](coq-formalizati... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations/models/ownership-types.md` \\\| 73 \\\| - **Theory**: [ownership-types.md](formal-foundations/models... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations/models/borrow-semantics.md` \\\| 79 \\\| - **Theory**: [borrow-semantics.md](formal-foundations/model... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations/models/lifetime-logic.md` \\\| 85 \\\| - **Theory**: [lifetime-logic.md](formal-foundations/models/... \\\|
+\\\| README.md \\\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\\| 56 \\\| \\\\| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_... \\\|
+\\\| README.md \\\| `formal-foundations/README.md` \\\| 65 \\\| \\\\| 形式化理论 \\\\| [形式化基础](formal-foundations/README.md` \\| 文件不存在: docs\rust-ownership-decidability\formal-foun... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\semantics\` \\\| 54 \\\| \\\\| Semantics \\\\| [formal-foundations\semantics\](formal-found... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\proofs\` \\\| 55 \\\| \\\\| Proofs \\\\| [formal-foundations\proofs\](formal-foundations... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `coq-formalization\` \\\| 56 \\\| \\\\| Coq Formalization \\\\| [coq-formalization\](coq-formalizati... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\models\ownership-types.md` \\\| 73 \\\| - **Theory**: [ownership-types.md](formal-foundations\models... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\models\borrow-semantics.md` \\\| 79 \\\| - **Theory**: [borrow-semantics.md](formal-foundations\model... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\models\lifetime-logic.md` \\\| 85 \\\| - **Theory**: [lifetime-logic.md](formal-foundations\models\... \\\|
+\\\| README.md \\\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\\| 56 \\\| \\\\| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_... \\\|
+\\\| README.md \\\| `formal-foundations\README.md` \\\| 65 \\\| \\\\| 形式化理论 \\\\| [形式化基础](formal-foundations\README.md \\|
+\\| docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md \\| Coq代码 \\| `... \\\|
+\\\| README.md \\\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\\| 243 \\\| - [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md... \\\|
+<!-- markdown-link-check-enable -->
+
+## Missing Cross-References
+
+Files that mention key concepts but don't link to them:
+
+\\\| Source File \\\| Concept \\\| Suggested Link \\\|
+\\\|-------------\\\|---------\\\|----------------\\\|
+\\\| 00-foundations/00-03-separation-logic.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 00-foundations/00-04-theory-connections.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 00-foundations/README.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 01-core-concepts/01-01-ownership-rules.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 01-core-concepts/01-02-borrowing-system.md \\\| borrowing \\\| 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md \\\|
+\\\| 01-core-concepts/01-02-borrowing-system.md \\\| lifetimes \\\| 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md \\\|
+\\\| 01-core-concepts/01-03-lifetimes.md \\\| lifetimes \\\| 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md \\\|
+\\\| 01-core-concepts/01-04-runtime-vs-compile-time.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 01-core-concepts/README.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 01-core-concepts/README.md \\\| borrowing \\\| 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md \\\|
+\\\| 01-core-concepts/README.md \\\| lifetimes \\\| 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md \\\|
+\\\| 01-core-concepts/detailed-concepts/borrowing-in-depth.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 01-core-concepts/ownership-counterexamples.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 01-core-concepts/ownership-counterexamples.md \\\| examples \\\| COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md \\\|
+\\\| 01-core-concepts/short-concepts/borrowing-concept-card.md \\\| lifetimes \\\| 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md \\\|
+\\\| 03-verification-tools/03-01-verification-overview.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 03-verification-tools/03-01-verification-overview.md \\\| coq \\\| coq-formalization/README.md \\\|
+\\\| 03-verification-tools/03-02-creusot-deep-dive.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 04-decidability-analysis/04-01-type-inference.md \\\| lifetimes \\\| 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md \\\|
+\\\| 04-decidability-analysis/04-01-type-inference.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 04-decidability-analysis/04-02-borrow-checking.md \\\| lifetimes \\\| 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md \\\|
+\\\| 04-decidability-analysis/04-02-borrow-checking.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 06-visualizations/06-01-concept-matrix.md \\\| coq \\\| coq-formalization/README.md \\\|
+\\\| 06-visualizations/06-03-architecture-diagrams.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 06-visualizations/06-03-architecture-diagrams.md \\\| borrowing \\\| 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md \\\|
+\\\| 06-visualizations/06-03-architecture-diagrams.md \\\| coq \\\| coq-formalization/README.md \\\|
+\\\| 07-references/README.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 07-references/academic-papers.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 07-references/academic-papers.md \\\| borrowing \\\| 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md \\\|
+\\\| 07-references/academic-papers.md \\\| lifetimes \\\| 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md \\\|
+\\\| 07-references/academic-papers.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 07-references/bibliography.md \\\| borrowing \\\| 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md \\\|
+\\\| 07-references/bibliography.md \\\| lifetimes \\\| 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md \\\|
+\\\| 07-references/bibliography.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 07-references/books-resources.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 07-references/books-resources.md \\\| coq \\\| coq-formalization/README.md \\\|
+\\\| 07-references/online-courses.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 07-references/online-courses.md \\\| coq \\\| coq-formalization/README.md \\\|
+\\\| 07-references/tools-libraries.md \\\| coq \\\| coq-formalization/README.md \\\|
+\\\| 08-advanced-topics/08-04-proc-macros.md \\\| lifetimes \\\| 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md \\\|
+\\\| 08-advanced-topics/RUST_1.94_UPDATE_REPORT.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 10-research-frontiers/10-01-future-directions.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 10-research-frontiers/10-01-future-directions.md \\\| borrowing \\\| 01-core-concepts/detailed-concepts/borrowing-in-depth.md, 01-core-concepts/short-concepts/borrowing-concept-card.md \\\|
+\\\| 10-research-frontiers/10-01-future-directions.md \\\| formal \\\| formal-foundations/README.md \\\|
+\\\| 10-research-frontiers/10-01-future-directions.md \\\| coq \\\| coq-formalization/README.md \\\|
+\\\| 10-research-frontiers/10-02-type-system-extensions.md \\\| coq \\\| coq-formalization/README.md \\\|
+\\\| 10-research-frontiers/10-03-verification-advancements.md \\\| coq \\\| coq-formalization/README.md \\\|
+\\\| 10-research-frontiers/10-04-ownership-variations.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+\\\| 10-research-frontiers/10-04-ownership-variations.md \\\| lifetimes \\\| 01-core-concepts/detailed-concepts/lifetimes-mastery.md, 01-core-concepts/short-concepts/lifetime-concept-card.md \\\|
+\\\| 10-research-frontiers/10-05-ai-integration.md \\\| ownership \\\| 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md \\\|
+
+## Recommendations
+
+### For Improving Navigation
+
+1. **Add 'See Also' sections** to key documents linking related concepts
+2. **Create topic hubs** for major themes (ownership, borrowing, lifetimes` \\| 文件不存在: docs\rust-ownership-decidability\... \\\|
+\\\| README.md \\\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\\| 243 \\\| - [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md... \\\|
+<!-- markdown-link-check-enable -->
+
+ \\|
+\\| docs\rust-ownership-decidability\05-comparative-study\05-03-rust-vs-go.md \\| T Number \\| `values []T` \\| 文件不存在: docs\rust-ownership-decidability\05-comparative-study\values []T \\|
+\\| docs\rust-ownership-decidability\11-design-patterns\structural\decorator.md \\| B_behavior \\| `ConcreteDecoratorA[A](ConcreteComponent` \\| 文件不存在: docs\rust-ownership-decidability\11-design-patterns\structural\ConcreteDecoratorA[A](ConcreteComponent \\|
+\\| docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\08-multi-merge.md \\| i \\| `Branch(i` \\| 文件不存在: docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\Branch(i \\|
+\\| docs\RUST_SAFETY_CRITICAL_ECOSYSTEM\09_reference\FAQ_AND_TROUBLESHOOTING.md \\| Ferrocene支持 \\| `mailto:support@ferrous-systems.com` \\| 文件不存在: docs\RUST_SAFETY_CRITICAL_ECOSYSTEM\09_reference\mailto:support@ferrous-systems.com \\|
+\\| docs\templates\versioned_doc_template.md \\| 归档列表 \\| `../../VERSION_INDEX.md` \\| 文件不存在: VERSION_INDEX.md \\|
+\\| docs\templates\versioned_doc_template.md \\| 版本化索引 \\| `../../VERSION_INDEX.md` \\| 文件不存在: VERSION_INDEX.md \\|
+\\| docs\templates\versioned_doc_template.md \\| Rust 学习项目版本化规范 \\| `../../VERSION_INDEX.md` \\| 文件不存在: VERSION_INDEX.md \\|
+
+### 锚点不存在 (1091个` \| 文件不存在: docs\formal-found... \\\|
+
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\proofs\` \\\| 55 \\\| \\\| Proofs \\\| [formal-foundations\proofs\](formal-foundations... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `coq-formalization\` \\\| 56 \\\| \\\| Coq Formalization \\\| [coq-formalization\](coq-formalizati... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\models\ownership-types.md` \\\| 73 \\\| - **Theory**: [ownership-types.md](formal-foundations\models... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\models\borrow-semantics.md` \\\| 79 \\\| - **Theory**: [borrow-semantics.md](formal-foundations\model... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\models\lifetime-logic.md` \\\| 85 \\\| - **Theory**: [lifetime-logic.md](formal-foundations\models\... \\\|
+\\\| README.md \\\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\\| 56 \\\| \\\| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_... \\\|
+\\\| README.md \\\| `formal-foundations\README.md` \\\| 65 \\\| \\\| 形式化理论 \\\| [形式化基础](formal-foundations\README.md` \\| 文件不存在: docs\rust-ownership-decidability\formal-foun... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\semantics\` \\\| 54 \\\| \\\| Semantics \\\| [formal-foundations\semantics\](formal-found... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\proofs\` \\\| 55 \\\| \\\| Proofs \\\| [formal-foundations\proofs\](formal-foundations... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `coq-formalization\` \\\| 56 \\\| \\\| Coq Formalization \\\| [coq-formalization\](coq-formalizati... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\models\ownership-types.md` \\\| 73 \\\| - **Theory**: [ownership-types.md](formal-foundations\models... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\models\borrow-semantics.md` \\\| 79 \\\| - **Theory**: [borrow-semantics.md](formal-foundations\model... \\\|
+\\\| MASTER_INDEX_AUTO.md \\\| `formal-foundations\models\lifetime-logic.md` \\\| 85 \\\| - **Theory**: [lifetime-logic.md](formal-foundations\models\... \\\|
+\\\| README.md \\\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\\| 56 \\\| \\\| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_... \\\|
+\\\| README.md \\\| `formal-foundations\README.md` \\\| 65 \\\| \\\| 形式化理论 \\\| [形式化基础](formal-foundations\README.md \\|
+\\| docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md \\| Coq代码 \\| `... \\\|
+\\\| README.md \\\|`CROSS_REFERENCE_VERIFICATION_REPORT.md` \\\| 243 \\\| - [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md... \\\|
+<!-- markdown-link-check-enable -->
+
+ \|
+\| docs\MIGRATION_GUIDE_2026.md \| 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW.md \| `./2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW.md` \| 文件不存在: docs\2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW.md \|
+\| docs\00_meta\ANNUAL_REVIEW_TEMPLATE.md \| 年度评估 - 上一年 \| `./history/annual-review-YYYY-1.md` \| 文件不存在: docs\00_meta\history\annual-review-YYYY-1.md \|
+\| docs\00_meta\PDCA_TEMPLATE.md \| PDCA - 上季度 \| `./history/pdca-cycle-YYYY-QN-1.md` \| 文件不存在: docs\00_meta\history\pdca-cycle-YYYY-QN-1.md \|
+\| docs\00_meta\REORGANIZATION_COMPLETE.md \| 文档索引 \| `../01_docs/00_index.md` \| 文件不存在: docs\01_docs\00_index.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md` \| `../04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md` \| 文件不存在: docs\00_meta\04_research\POLONIUS_NEXT_GEN_BORROW_CHECKER.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/05_guides/UNSAFE_FIELDS_PREVIEW.md` \| `../05_guides/UNSAFE_FIELDS_PREVIEW.md` \| 文件不存在: docs\00_meta\05_guides\UNSAFE_FIELDS_PREVIEW.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/06_toolchain/CRANELIFT_BACKEND_GUIDE.md` \| `../06_toolchain/CRANELIFT_BACKEND_GUIDE.md` \| 文件不存在: docs\00_meta\06_toolchain\CRANELIFT_BACKEND_GUIDE.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/05_guides/MIRI_PRACTICAL_GUIDE.md` \| `../05_guides/MIRI_PRACTICAL_GUIDE.md` \| 文件不存在: docs\00_meta\05_guides\MIRI_PRACTICAL_GUIDE.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/06_toolchain/TOML_V11_CARGO_GUIDE.md` \| `../06_toolchain/TOML_V11_CARGO_GUIDE.md` \| 文件不存在: docs\00_meta\06_toolchain\TOML_V11_CARGO_GUIDE.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `crates/c03_control_fn/examples/cargo_script_demo.rs` \| `../../crates/c03_control_fn/examples/cargo_script_demo.rs` \| 文件不存在: docs\crates\c03_control_fn\examples\cargo_script_demo.rs \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `crates/c10_networks/src/cargo_semver_checks_guide.rs` \| `../../crates/c10_networks/src/cargo_semver_checks_guide.rs` \| 文件不存在: docs\crates\c10_networks\src\cargo_semver_checks_guide.rs \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `reports/COMPILATION_OPTIMIZATION_REPORT.md` \| `../../reports/COMPILATION_OPTIMIZATION_REPORT.md` \| 文件不存在: docs\reports\COMPILATION_OPTIMIZATION_REPORT.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `reports/sccache-benchmark.md` \| `../../reports/sccache-benchmark.md` \| 文件不存在: docs\reports\sccache-benchmark.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/03_guides/CXX_INTEROP_GUIDE.md` \| `../03_guides/CXX_INTEROP_GUIDE.md` \| 文件不存在: docs\00_meta\03_guides\CXX_INTEROP_GUIDE.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `CONTRIBUTING.md` \| `../../CONTRIBUTING.md` \| 文件不存在: docs\CONTRIBUTING.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `knowledge/INDEX.md` \| `../../knowledge/INDEX.md` \| 文件不存在: docs\knowledge\INDEX.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/04_research/RUST_FOR_LINUX.md` \| `../04_research/RUST_FOR_LINUX.md` \| 文件不存在: docs\00_meta\04_research\RUST_FOR_LINUX.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/04_research/VERUSBELT_PLDI_2026.md` \| `../04_research/VERUSBELT_PLDI_2026.md` \| 文件不存在: docs\00_meta\04_research\VERUSBELT_PLDI_2026.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| 编译优化报告 \| `../../reports/COMPILATION_OPTIMIZATION_REPORT.md` \| 文件不存在: docs\reports\COMPILATION_OPTIMIZATION_REPORT.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| sccache 基准测试 \| `../../reports/sccache-benchmark.md` \| 文件不存在: docs\reports\sccache-benchmark.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/05_guides/MIRI_PRACTICAL_GUIDE.md` \| `../05_guides/MIRI_PRACTICAL_GUIDE.md` \| 文件不存在: docs\00_meta\05_guides\MIRI_PRACTICAL_GUIDE.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/06_toolchain/CRANELIFT_BACKEND_GUIDE.md` \| `../06_toolchain/CRANELIFT_BACKEND_GUIDE.md` \| 文件不存在: docs\00_meta\06_toolchain\CRANELIFT_BACKEND_GUIDE.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md` \| `../04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md` \| 文件不存在: docs\00_meta\04_research\POLONIUS_NEXT_GEN_BORROW_CHECKER.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/06_toolchain/TOML_V11_CARGO_GUIDE.md` \| `../06_toolchain/TOML_V11_CARGO_GUIDE.md` \| 文件不存在: docs\00_meta\06_toolchain\TOML_V11_CARGO_GUIDE.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/05_guides/UNSAFE_FIELDS_PREVIEW.md` \| `../05_guides/UNSAFE_FIELDS_PREVIEW.md` \| 文件不存在: docs\00_meta\05_guides\UNSAFE_FIELDS_PREVIEW.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/04_research/VERUSBELT_PLDI_2026.md` \| `../04_research/VERUSBELT_PLDI_2026.md` \| 文件不存在: docs\00_meta\04_research\VERUSBELT_PLDI_2026.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/03_guides/CXX_INTEROP_GUIDE.md` \| `../03_guides/CXX_INTEROP_GUIDE.md` \| 文件不存在: docs\00_meta\03_guides\CXX_INTEROP_GUIDE.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `docs/04_research/RUST_FOR_LINUX.md` \| `../04_research/RUST_FOR_LINUX.md` \| 文件不存在: docs\00_meta\04_research\RUST_FOR_LINUX.md \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `crates/c03_control_fn/examples/cargo_script_demo.rs` \| `../../crates/c03_control_fn/examples/cargo_script_demo.rs` \| 文件不存在: docs\crates\c03_control_fn\examples\cargo_script_demo.rs \|
+\| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md \| `crates/c10_networks/src/cargo_semver_checks_guide.rs` \| `../../crates/c10_networks/src/cargo_semver_checks_guide.rs` \| 文件不存在: docs\crates\c10_networks\src\cargo_semver_checks_guide.rs \|
+\| docs\00_meta\history\2026_reorganization.md \| PROJECT_REORGANIZATION_PLAN.md \| `../../PROJECT_REORGANIZATION_PLAN.md` \| 文件不存在: docs\PROJECT_REORGANIZATION_PLAN.md \|
+\| docs\00_meta\history\2026_reorganization.md \| COMPLETION_REPORT_FINAL.md \| `../../06_archive/2026_03_reorganization/COMPLETION_REPORT_FINAL.md` \| 文件不存在: docs\06_archive\2026_03_reorganization\COMPLETION_REPORT_FINAL.md \|
+\| docs\01_learning\CROSS_MODULE_NAVIGATION.md \| 00_MASTER_INDEX.md \| `00_MASTER_INDEX.md` \| 文件不存在: docs\01_learning\00_MASTER_INDEX.md \|
+\| docs\01_learning\CROSS_MODULE_NAVIGATION.md \| 01_learning/LEARNING_PATH_PLANNING.md \| `01_learning/LEARNING_PATH_PLANNING.md` \| 文件不存在: docs\01_learning\01_learning\LEARNING_PATH_PLANNING.md \|
+\| docs\01_learning\CROSS_MODULE_NAVIGATION.md \| 02_reference/quick_reference/ \| `02_reference/quick_reference/` \| 文件不存在: docs\01_learning\02_reference\quick_reference \|
+\| docs\01_learning\CROSS_MODULE_NAVIGATION.md \| 03_practice/ \| `03_practice/` \| 文件不存在: docs\01_learning\03_practice \|
+\| docs\01_learning\CROSS_MODULE_NAVIGATION.md \| 04_thinking/ \| `04_thinking/` \| 文件不存在: docs\01_learning\04_thinking \|
+\| docs\01_learning\CROSS_MODULE_NAVIGATION.md \| 05_guides/BEST_PRACTICES.md \| `05_guides/BEST_PRACTICES.md` \| 文件不存在: docs\01_learning\05_guides\BEST_PRACTICES.md \|
+\| docs\01_learning\LEARNING_PATH_GUIDE_2025_10_24.md \| QUICK_REFERENCE \| `./research_notes/QUICK_REFERENCE.md` \| 文件不存在: docs\01_learning\research_notes\QUICK_REFERENCE.md \|
+\| docs\01_learning\LEARNING_PATH_GUIDE_2025_10_24.md \| crates/c01_ownership_borrow_scope \| `../crates/c01_ownership_borrow_scope/README.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\README.md \|
+\| docs\01_learning\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\01_learning\quizzes\README.md \| Rust 1.95+ 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\01_learning\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\01_learning\quizzes\README.md \| Rust 1.94 特性速查（已归档） \| `../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md` \| 文件不存在: docs\01_learning\archive\2026_05_historical_docs\rust_194_features_cheatsheet.md \|
+\| docs\01_learning\quizzes\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\01_learning\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 所有权规则 \| `../crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_01_foundations\02_主索引导航.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 移动语义 \| `../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_所有权规则参考.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_03_references\01_所有权规则参考.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 部分移动 \| `../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_所有权规则参考.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_03_references\01_所有权规则参考.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 结构体所有权 \| `../crates/c02_type_system/docs/tier_02_guides/02_复合类型指南.md` \| 文件不存在: docs\crates\c02_type_system\docs\tier_02_guides\02_复合类型指南.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 可变借用规则 \| `../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_03_references\02_借用检查器详解.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| NLL \| `../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_03_references\02_借用检查器详解.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 借用规则 \| `../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_03_references\02_借用检查器详解.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 读写锁原理 \| `../crates/c05_threads/docs/tier_02_guides/02_同步原语实践.md` \| 文件不存在: docs\crates\c05_threads\docs\tier_02_guides\02_同步原语实践.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 所有权转移 \| `../crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_所有权快速入门.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_02_guides\01_所有权快速入门.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| Trait Bound \| `../crates/c04_generic/docs/tier_02_guides/02_Trait系统指南.md` \| 文件不存在: docs\crates\c04_generic\docs\tier_02_guides\02_Trait系统指南.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 标准库 Trait \| `../crates/c02_type_system/docs/tier_03_references/01_类型系统规范.md` \| 文件不存在: docs\crates\c02_type_system\docs\tier_03_references\01_类型系统规范.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 类型转换 \| `../crates/c02_type_system/docs/tier_03_references/01_类型转换参考.md` \| 文件不存在: docs\crates\c02_type_system\docs\tier_03_references\01_类型转换参考.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 生命周期标注 \| `../crates/c01_ownership_borrow_scope/docs/tier_02_guides/03_生命周期实践.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_02_guides\03_生命周期实践.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 生命周期省略规则 \| `../crates/c01_ownership_borrow_scope/docs/tier_03_references/03_生命周期参考.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_03_references\03_生命周期参考.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 悬垂引用 \| `../crates/c01_ownership_borrow_scope/docs/tier_02_guides/03_生命周期实践.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_02_guides\03_生命周期实践.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 作用域规则 \| `../crates/c01_ownership_borrow_scope/docs/tier_03_references/04_Drop与RAII参考.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_03_references\04_Drop与RAII参考.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 可变性 \| `../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_所有权规则参考.md` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\docs\tier_03_references\01_所有权规则参考.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 模式匹配 \| `../crates/c03_control_fn/docs/tier_02_guides/04_模式匹配指南.md` \| 文件不存在: docs\crates\c03_control_fn\docs\tier_02_guides\04_模式匹配指南.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 穷尽性检查 \| `../crates/c03_control_fn/docs/tier_04_advanced/01_高级模式匹配.md` \| 文件不存在: docs\crates\c03_control_fn\docs\tier_04_advanced\01_高级模式匹配.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 闭包 \| `../crates/c03_control_fn/docs/tier_03_references/04_闭包参考.md` \| 文件不存在: docs\crates\c03_control_fn\docs\tier_03_references\04_闭包参考.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| move 闭包 \| `../crates/c05_threads/docs/tier_02_guides/01_线程基础与生命周期.md` \| 文件不存在: docs\crates\c05_threads\docs\tier_02_guides\01_线程基础与生命周期.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| Send/Sync \| `../crates/c05_threads/docs/tier_01_foundations/03_术语表.md` \| 文件不存在: docs\crates\c05_threads\docs\tier_01_foundations\03_术语表.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 线程安全 \| `../crates/c05_threads/docs/tier_02_guides/01_线程基础与生命周期.md` \| 文件不存在: docs\crates\c05_threads\docs\tier_02_guides\01_线程基础与生命周期.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 异步借用 \| `../crates/c06_async/docs/tier_02_guides/04_异步设计模式实践.md` \| 文件不存在: docs\crates\c06_async\docs\tier_02_guides\04_异步设计模式实践.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| Pin \| `../crates/c06_async/docs/tier_03_references/04_Pin与Unsafe参考.md` \| 文件不存在: docs\crates\c06_async\docs\tier_03_references\04_Pin与Unsafe参考.md \|
+\| docs\02_reference\ERROR_CODE_MAPPING.md \| 递归异步 \| `../crates/c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md` \| 文件不存在: docs\crates\c09_design_pattern\docs\ASYNC_RECURSION_ANALYSIS.md \|
+\| docs\02_reference\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\02_reference\quick_reference\process_management_cheatsheet.md \| performance_optimization_demo.rs \| `../../../crates/c07_process/examples/performance_optimization_demo.rs` \| 文件不存在: crates\c07_process\examples\performance_optimization_demo.rs \|
+\| docs\02_reference\quick_reference\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md \| performance_optimization_demo.rs \| `../../../crates/c05_threads/examples/performance_optimization_demo.rs` \| 文件不存在: crates\c05_threads\examples\performance_optimization_demo.rs \|
+\| docs\02_reference\quick_reference\wasm_cheatsheet.md \| Rust 1.91/1.92 特性演示 \| `../../../crates/c12_wasm/examples/rust_191_features_demo.rs` \| 文件不存在: crates\c12_wasm\examples\rust_191_features_demo.rs \|
+\| docs\02_reference\quick_reference\wasm_cheatsheet.md \| rust_192_features_demo.rs \| `../../../crates/c12_wasm/examples/rust_192_features_demo.rs` \| 文件不存在: crates\c12_wasm\examples\rust_192_features_demo.rs \|
+\| docs\04_thinking\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\05_guides\RUST_196_GUIDES_INDEX.md \| if let guards 指南 \| `./CONTROL_FLOW_GUIDE.md` \| 文件不存在: docs\05_guides\CONTROL_FLOW_GUIDE.md \|
+\| docs\06_toolchain\09_rust_1.93_compatibility_deep_dive.md \| 12_rust_1.93.1_vs_1.93.0_comparison \| `./12_rust_1.93.1_vs_1.93.0_comparison.md` \| 文件不存在: docs\06_toolchain\12_rust_1.93.1_vs_1.93.0_comparison.md \|
+\| docs\07_project\ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md \| archive/process_reports/2026_02/project/ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md \| `../archive/process_reports/2026_02/project/ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md` \| 文件不存在: docs\archive\process_reports\2026_02\project\ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md \|
+\| docs\07_project\DOCUMENTATION_THEME_ORGANIZATION_PLAN.md \| archive/process_reports/2026_02/project/DOCUMENTATION_THEME_ORGANIZATION_PLAN.md \| `../archive/process_reports/2026_02/project/DOCUMENTATION_THEME_ORGANIZATION_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\project\DOCUMENTATION_THEME_ORGANIZATION_PLAN.md \|
+\| docs\07_project\INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md \| archive/process_reports/2026_02/project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md \| `../archive/process_reports/2026_02/project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md` \| 文件不存在: docs\archive\process_reports\2026_02\project\INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md \|
+\| docs\07_project\MODULE_1.93_ADAPTATION_STATUS.md \| archive/process_reports/2026_02/project/MODULE_1.93_ADAPTATION_STATUS.md \| `../archive/process_reports/2026_02/project/MODULE_1.93_ADAPTATION_STATUS.md` \| 文件不存在: docs\archive\process_reports\2026_02\project\MODULE_1.93_ADAPTATION_STATUS.md \|
+\| docs\07_project\ONE_PAGE_SUMMARY_TEMPLATE.md \| archive/process_reports/2026_02/project/ONE_PAGE_SUMMARY_TEMPLATE.md \| `../archive/process_reports/2026_02/project/ONE_PAGE_SUMMARY_TEMPLATE.md` \| 文件不存在: docs\archive\process_reports\2026_02\project\ONE_PAGE_SUMMARY_TEMPLATE.md \|
+\| docs\07_project\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\07_project\README.md \| RUST_RELEASE_TRACKING_CHECKLIST.md \| `../archive/process_reports/2026_02/project/RUST_RELEASE_TRACKING_CHECKLIST.md` \| 文件不存在: docs\archive\process_reports\2026_02\project\RUST_RELEASE_TRACKING_CHECKLIST.md \|
+\| docs\07_project\README.md \| DOCUMENTATION_THEME_ORGANIZATION_PLAN.md \| `../archive/process_reports/2026_02/project/DOCUMENTATION_THEME_ORGANIZATION_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\project\DOCUMENTATION_THEME_ORGANIZATION_PLAN.md \|
+\| docs\07_project\README.md \| RUST_RELEASE_TRACKING_CHECKLIST.md \| `../archive/process_reports/2026_02/project/RUST_RELEASE_TRACKING_CHECKLIST.md` \| 文件不存在: docs\archive\process_reports\2026_02\project\RUST_RELEASE_TRACKING_CHECKLIST.md \|
+\| docs\07_project\README.md \| ARCHIVE_COMPLETION_REPORT.md \| `../ARCHIVE_COMPLETION_REPORT.md` \| 文件不存在: docs\ARCHIVE_COMPLETION_REPORT.md \|
+\| docs\07_project\RUST_RELEASE_TRACKING_CHECKLIST.md \| archive/process_reports/2026_02/project/RUST_RELEASE_TRACKING_CHECKLIST.md \| `../archive/process_reports/2026_02/project/RUST_RELEASE_TRACKING_CHECKLIST.md` \| 文件不存在: docs\archive\process_reports\2026_02\project\RUST_RELEASE_TRACKING_CHECKLIST.md \|
+\| docs\07_project\TASK_INDEX.md \| archive/process_reports/2026_02/project/TASK_INDEX.md \| `../archive/process_reports/2026_02/project/TASK_INDEX.md` \| 文件不存在: docs\archive\process_reports\2026_02\project\TASK_INDEX.md \|
+\| docs\archive\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\README.md \| FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md \| `root_completion_reports/FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md` \| 文件不存在: docs\archive\root_completion_reports\FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md \|
+\| docs\archive\2026_03_reorganization\BEST_PRACTICES.md \| README.md \| `./README.md` \| 文件不存在: docs\archive\2026_03_reorganization\README.md \|
+\| docs\archive\2026_03_reorganization\BEST_PRACTICES.md \| CONTRIBUTING.md \| `./CONTRIBUTING.md` \| 文件不存在: docs\archive\2026_03_reorganization\CONTRIBUTING.md \|
+\| docs\archive\2026_03_reorganization\BEST_PRACTICES.md \| TROUBLESHOOTING.md \| `./TROUBLESHOOTING.md` \| 文件不存在: docs\archive\2026_03_reorganization\TROUBLESHOOTING.md \|
+\| docs\archive\2026_03_reorganization\FINAL_LINK_FIX_REPORT_2026_03_13.md \| T Drawable \| `item T` \| 文件不存在: docs\archive\2026_03_reorganization\item T \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| README.md \| `README.md` \| 文件不存在: docs\archive\2026_03_reorganization\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| READING_GUIDE.md \| `READING_GUIDE.md` \| 文件不存在: docs\archive\2026_03_reorganization\READING_GUIDE.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| FINAL_MASTER_INDEX.md \| `FINAL_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\FINAL_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| MASTER_COMPREHENSIVE_ANALYSIS.md \| `MASTER_COMPREHENSIVE_ANALYSIS.md` \| 文件不存在: docs\archive\2026_03_reorganization\MASTER_COMPREHENSIVE_ANALYSIS.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| ownership-deep-dive.md \| `01-core-concepts/detailed-concepts/ownership-deep-dive.md` \| 文件不存在: docs\archive\2026_03_reorganization\01-core-concepts\detailed-concepts\ownership-deep-dive.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| ownership-concept-card.md \| `01-core-concepts/short-concepts/ownership-concept-card.md` \| 文件不存在: docs\archive\2026_03_reorganization\01-core-concepts\short-concepts\ownership-concept-card.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| borrowing-in-depth.md \| `01-core-concepts/detailed-concepts/borrowing-in-depth.md` \| 文件不存在: docs\archive\2026_03_reorganization\01-core-concepts\detailed-concepts\borrowing-in-depth.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| borrowing-concept-card.md \| `01-core-concepts/short-concepts/borrowing-concept-card.md` \| 文件不存在: docs\archive\2026_03_reorganization\01-core-concepts\short-concepts\borrowing-concept-card.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| lifetimes-mastery.md \| `01-core-concepts/detailed-concepts/lifetimes-mastery.md` \| 文件不存在: docs\archive\2026_03_reorganization\01-core-concepts\detailed-concepts\lifetimes-mastery.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| lifetime-concept-card.md \| `01-core-concepts/short-concepts/lifetime-concept-card.md` \| 文件不存在: docs\archive\2026_03_reorganization\01-core-concepts\short-concepts\lifetime-concept-card.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| formal-foundations/models/ \| `formal-foundations/models/` \| 文件不存在: docs\archive\2026_03_reorganization\formal-foundations\models \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| formal-foundations/semantics/ \| `formal-foundations/semantics/` \| 文件不存在: docs\archive\2026_03_reorganization\formal-foundations\semantics \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| formal-foundations/proofs/ \| `formal-foundations/proofs/` \| 文件不存在: docs\archive\2026_03_reorganization\formal-foundations\proofs \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| coq-formalization/ \| `coq-formalization/` \| 文件不存在: docs\archive\2026_03_reorganization\coq-formalization \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| case-studies/README.md \| `case-studies/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| case-studies/embedded/README.md \| `case-studies/embedded/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\embedded\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| case-studies/blockchain/README.md \| `case-studies/blockchain/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\blockchain\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| case-studies/wasm/README.md \| `case-studies/wasm/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\wasm\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| ownership-types.md \| `formal-foundations/models/ownership-types.md` \| 文件不存在: docs\archive\2026_03_reorganization\formal-foundations\models\ownership-types.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| ownership-deep-dive.md \| `01-core-concepts/detailed-concepts/ownership-deep-dive.md` \| 文件不存在: docs\archive\2026_03_reorganization\01-core-concepts\detailed-concepts\ownership-deep-dive.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md \| `COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md` \| 文件不存在: docs\archive\2026_03_reorganization\COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| borrow-semantics.md \| `formal-foundations/models/borrow-semantics.md` \| 文件不存在: docs\archive\2026_03_reorganization\formal-foundations\models\borrow-semantics.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| borrowing-in-depth.md \| `01-core-concepts/detailed-concepts/borrowing-in-depth.md` \| 文件不存在: docs\archive\2026_03_reorganization\01-core-concepts\detailed-concepts\borrowing-in-depth.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| ReborrowComplete.v \| `coq-formalization/theories/Advanced/ReborrowComplete.v` \| 文件不存在: docs\archive\2026_03_reorganization\coq-formalization\theories\Advanced\ReborrowComplete.v \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| lifetime-logic.md \| `formal-foundations/models/lifetime-logic.md` \| 文件不存在: docs\archive\2026_03_reorganization\formal-foundations\models\lifetime-logic.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| lifetimes-mastery.md \| `01-core-concepts/detailed-concepts/lifetimes-mastery.md` \| 文件不存在: docs\archive\2026_03_reorganization\01-core-concepts\detailed-concepts\lifetimes-mastery.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| MetatheoryTermination.v \| `coq-formalization/theories/Advanced/MetatheoryTermination.v` \| 文件不存在: docs\archive\2026_03_reorganization\coq-formalization\theories\Advanced\MetatheoryTermination.v \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| type-system-formalization.md \| `formal-foundations/semantics/type-system-formalization.md` \| 文件不存在: docs\archive\2026_03_reorganization\formal-foundations\semantics\type-system-formalization.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| TypeSystem.v \| `coq-formalization/theories/Typing/TypeSystem.v` \| 文件不存在: docs\archive\2026_03_reorganization\coq-formalization\theories\Typing\TypeSystem.v \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| THEOREM_INTUITIONS.md \| `THEOREM_INTUITIONS.md` \| 文件不存在: docs\archive\2026_03_reorganization\THEOREM_INTUITIONS.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| MetatheoryTermination.v \| `coq-formalization/theories/Advanced/MetatheoryTermination.v` \| 文件不存在: docs\archive\2026_03_reorganization\coq-formalization\theories\Advanced\MetatheoryTermination.v \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| decidability_theorems.md \| `theorems/decidability_theorems.md` \| 文件不存在: docs\archive\2026_03_reorganization\theorems\decidability_theorems.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| MetatheoryDecidability.v \| `coq-formalization/theories/Advanced/MetatheoryDecidability.v` \| 文件不存在: docs\archive\2026_03_reorganization\coq-formalization\theories\Advanced\MetatheoryDecidability.v \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| memory-safety-proof.md \| `formal-foundations/proofs/memory-safety-proof.md` \| 文件不存在: docs\archive\2026_03_reorganization\formal-foundations\proofs\memory-safety-proof.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| MetatheoryKeyProofs.v \| `coq-formalization/theories/Advanced/MetatheoryKeyProofs.v` \| 文件不存在: docs\archive\2026_03_reorganization\coq-formalization\theories\Advanced\MetatheoryKeyProofs.v \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| std-vec-formal-analysis.md \| `case-studies/std-vec-formal-analysis.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\std-vec-formal-analysis.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| std-string-formal-analysis.md \| `case-studies/std-string-formal-analysis.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\std-string-formal-analysis.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| std-hashmap-formal-analysis.md \| `case-studies/std-hashmap-formal-analysis.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\std-hashmap-formal-analysis.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| std-iterator-formal-analysis.md \| `case-studies/std-iterator-formal-analysis.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\std-iterator-formal-analysis.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| std-smart-pointers-formal-analysis.md \| `case-studies/std-smart-pointers-formal-analysis.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\std-smart-pointers-formal-analysis.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| tokio-runtime-formal-analysis.md \| `case-studies/tokio-runtime-formal-analysis.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\tokio-runtime-formal-analysis.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| async-std-formal-analysis.md \| `case-studies/async-std-formal-analysis.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\async-std-formal-analysis.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| futures-crate-formal-analysis.md \| `case-studies/futures-crate-formal-analysis.md` \| 文件不存在: docs\archive\2026_03_reorganization\case-studies\futures-crate-formal-analysis.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/01_learning/LEARNING_PATH_PLANNING.md \| `docs/01_learning/LEARNING_PATH_PLANNING.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/ONE_PAGE_SUMMARY.md \| `crates/c02_type_system/docs/ONE_PAGE_SUMMARY.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\ONE_PAGE_SUMMARY.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/ONE_PAGE_SUMMARY.md \| `crates/c04_generic/docs/ONE_PAGE_SUMMARY.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\ONE_PAGE_SUMMARY.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/rust-ownership-decidability/CROSS_REFERENCE_VERIFICATION_SUMMARY.md \| `docs/rust-ownership-decidability/CROSS_REFERENCE_VERIFICATION_SUMMARY.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_SUMMARY.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/rust-ownership-decidability/MASTER_INDEX_AUTO.md \| `docs/rust-ownership-decidability/MASTER_INDEX_AUTO.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\rust-ownership-decidability\MASTER_INDEX_AUTO.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/rust-ownership-decidability/MASTER_INDEX_AUTO.md \| `docs/rust-ownership-decidability/MASTER_INDEX_AUTO.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\rust-ownership-decidability\MASTER_INDEX_AUTO.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/rust-ownership-decidability/MASTER_INDEX_AUTO.md \| `docs/rust-ownership-decidability/MASTER_INDEX_AUTO.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\rust-ownership-decidability\MASTER_INDEX_AUTO.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/rust-ownership-decidability/MASTER_INDEX_AUTO.md \| `docs/rust-ownership-decidability/MASTER_INDEX_AUTO.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\rust-ownership-decidability\MASTER_INDEX_AUTO.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/COMPREHENSIVE_COMPLETION_STATUS_2026_02_23.md \| `docs/COMPREHENSIVE_COMPLETION_STATUS_2026_02_23.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\COMPREHENSIVE_COMPLETION_STATUS_2026_02_23.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| README.en.md \| `README.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\README.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| README.en.md \| `README.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\README.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| README.en.md \| `README.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\README.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c07_process/docs/tier_01_foundations/02_主索引导航.md \| `crates/c07_process/docs/tier_01_foundations/02_主索引导航.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c07_process\docs\tier_01_foundations\02_主索引导航.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c09_design_pattern/README.md \| `crates/c09_design_pattern/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c09_design_pattern\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| BROKEN_LINKS_REPORT.md \| `BROKEN_LINKS_REPORT.md` \| 文件不存在: docs\archive\2026_03_reorganization\BROKEN_LINKS_REPORT.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_内存布局优化.md \| `crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_内存布局优化.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\tier_04_advanced\04_内存布局优化.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/00_MASTER_INDEX.en.md \| `crates/c02_type_system/docs/00_MASTER_INDEX.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\00_MASTER_INDEX.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/ONE_PAGE_SUMMARY.md \| `crates/c02_type_system/docs/ONE_PAGE_SUMMARY.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\ONE_PAGE_SUMMARY.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/tier_04_advanced/README.md \| `crates/c02_type_system/docs/tier_04_advanced/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\tier_04_advanced\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/README.md \| `crates/c01_ownership_borrow_scope/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/README.md \| `crates/c01_ownership_borrow_scope/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c03_control_fn/README.md \| `crates/c03_control_fn/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c03_control_fn\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/README.md \| `crates/c04_generic/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/README.md \| `crates/c04_generic/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/README.md \| `crates/c01_ownership_borrow_scope/docs/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \| `docs/archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/FAQ.md \| `docs/research_notes/FAQ.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\FAQ.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/GETTING_STARTED.md \| `docs/research_notes/GETTING_STARTED.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\GETTING_STARTED.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/ONE_PAGE_SUMMARY.md \| `crates/c01_ownership_borrow_scope/docs/ONE_PAGE_SUMMARY.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\ONE_PAGE_SUMMARY.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/FINAL_LINK_REPAIR_REPORT.md \| `docs/FINAL_LINK_REPAIR_REPORT.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\FINAL_LINK_REPAIR_REPORT.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/LINK_REPAIR_STRATEGY.md \| `docs/LINK_REPAIR_STRATEGY.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\LINK_REPAIR_STRATEGY.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/01_learning/LEARNING_PATH_PLANNING.md \| `docs/01_learning/LEARNING_PATH_PLANNING.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/01_learning/LEARNING_PATH_PLANNING.md \| `docs/01_learning/LEARNING_PATH_PLANNING.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/README.md \| `crates/c01_ownership_borrow_scope/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/00_MASTER_INDEX.md \| `crates/c04_generic/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c05_threads/README.md \| `crates/c05_threads/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c05_threads\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c05_threads/docs/00_MASTER_INDEX.md \| `crates/c05_threads/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c05_threads\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/README.md \| `docs/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/archive/process_reports/2026_02/CONTENT_IMPROVEMENT_PLAN.md \| `docs/archive/process_reports/2026_02/CONTENT_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\2026_02\CONTENT_IMPROVEMENT_PLAN.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/archive/process_reports/2026_02/DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md \| `docs/archive/process_reports/2026_02/DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\2026_02\DOCS_STRUCTURE_AND_FORMAT_AUDIT_REPORT.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/README.md \| `crates/c01_ownership_borrow_scope/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/00_MASTER_INDEX.md \| `crates/c04_generic/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c05_threads/README.md \| `crates/c05_threads/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c05_threads\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c05_threads/docs/00_MASTER_INDEX.md \| `crates/c05_threads/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c05_threads\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/01_learning/LEARNING_PATH_PLANNING.md \| `docs/01_learning/LEARNING_PATH_PLANNING.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/01_learning/LEARNING_PATH_PLANNING.md \| `docs/01_learning/LEARNING_PATH_PLANNING.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/01_learning/LEARNING_PATH_PLANNING.md \| `docs/01_learning/LEARNING_PATH_PLANNING.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md \| `docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\OFFICIAL_RESOURCES_MAPPING.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/06_toolchain/README.md \| `docs/06_toolchain/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \| `docs/archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \| `docs/archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \| `docs/archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/README.md \| `crates/c01_ownership_borrow_scope/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/CONTENT_ENHANCEMENT.md \| `docs/research_notes/CONTENT_ENHANCEMENT.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\CONTENT_ENHANCEMENT.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/FAQ.md \| `docs/research_notes/FAQ.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\FAQ.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/FAQ.md \| `docs/research_notes/FAQ.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\FAQ.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/FAQ.md \| `docs/research_notes/FAQ.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\FAQ.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/FAQ.md \| `docs/research_notes/FAQ.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\FAQ.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/00_MASTER_INDEX.en.md \| `crates/c02_type_system/docs/00_MASTER_INDEX.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\00_MASTER_INDEX.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/00_MASTER_INDEX.md \| `crates/c02_type_system/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md \| `crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\tier_01_foundations\01_项目概览.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/02_reference/ALIGNMENT_GUIDE.md \| `docs/02_reference/ALIGNMENT_GUIDE.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\02_reference\ALIGNMENT_GUIDE.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \| `docs/archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/GLOSSARY.md \| `docs/research_notes/GLOSSARY.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\GLOSSARY.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/GLOSSARY.md \| `docs/research_notes/GLOSSARY.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\GLOSSARY.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/00_MASTER_INDEX.en.md \| `crates/c02_type_system/docs/00_MASTER_INDEX.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\00_MASTER_INDEX.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/00_MASTER_INDEX.md \| `crates/c02_type_system/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md \| `crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\tier_01_foundations\01_项目概览.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md \| `crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\tier_01_foundations\01_项目概览.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/04_thinking/APPLICATIONS_ANALYSIS_VIEW.md \| `docs/04_thinking/APPLICATIONS_ANALYSIS_VIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\04_thinking\APPLICATIONS_ANALYSIS_VIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/00_MASTER_INDEX.md \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \| `docs/archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/GLOSSARY.md \| `docs/research_notes/GLOSSARY.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\GLOSSARY.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/INDEX.md \| `docs/research_notes/INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/INDEX.md \| `docs/research_notes/INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/04_thinking/DECISION_GRAPH_NETWORK.md \| `docs/04_thinking/DECISION_GRAPH_NETWORK.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\04_thinking\DECISION_GRAPH_NETWORK.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md \| `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\04_thinking\MULTI_DIMENSIONAL_CONCEPT_MATRIX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/04_thinking/README.md \| `docs/04_thinking/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\04_thinking\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/ARGUMENTATION_GAP_INDEX.md \| `docs/research_notes/ARGUMENTATION_GAP_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\ARGUMENTATION_GAP_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/ARGUMENTATION_GAP_INDEX.md \| `docs/research_notes/ARGUMENTATION_GAP_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\ARGUMENTATION_GAP_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| BROKEN_LINKS_REPORT.md \| `BROKEN_LINKS_REPORT.md` \| 文件不存在: docs\archive\2026_03_reorganization\BROKEN_LINKS_REPORT.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c12_wasm/README.md \| `crates/c12_wasm/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c12_wasm\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c12_wasm/README.md \| `crates/c12_wasm/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c12_wasm\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c12_wasm/RUST_192_UPDATE_SUMMARY.md \| `crates/c12_wasm/RUST_192_UPDATE_SUMMARY.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c12_wasm\RUST_192_UPDATE_SUMMARY.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c12_wasm/docs/RUST_192_BEST_PRACTICES.md \| `crates/c12_wasm/docs/RUST_192_BEST_PRACTICES.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c12_wasm\docs\RUST_192_BEST_PRACTICES.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/00_MASTER_INDEX.en.md \| `crates/c02_type_system/docs/00_MASTER_INDEX.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\00_MASTER_INDEX.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/00_MASTER_INDEX.md \| `crates/c02_type_system/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md \| `crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\tier_01_foundations\01_项目概览.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md \| `crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\tier_01_foundations\01_项目概览.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/README.md \| `crates/c02_type_system/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md \| `crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\tier_01_foundations\01_项目概览.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md \| `crates/c02_type_system/docs/tier_01_foundations/01_项目概览.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\docs\tier_01_foundations\01_项目概览.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/README.md \| `crates/c04_generic/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/tier_01_foundations/01_项目概览.md \| `crates/c04_generic/docs/tier_01_foundations/01_项目概览.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\tier_01_foundations\01_项目概览.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/tier_01_foundations/01_项目概览.md \| `crates/c04_generic/docs/tier_01_foundations/01_项目概览.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\tier_01_foundations\01_项目概览.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/tier_01_foundations/02_主索引导航.md \| `crates/c04_generic/docs/tier_01_foundations/02_主索引导航.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\tier_01_foundations\02_主索引导航.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/tier_01_foundations/02_主索引导航.md \| `crates/c04_generic/docs/tier_01_foundations/02_主索引导航.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\tier_01_foundations\02_主索引导航.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `docs/DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/README.md \| `docs/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/README.md \| `docs/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/archive/temp/FORMAL_AND_PRACTICAL_NAVIGATION.md \| `docs/archive/temp/FORMAL_AND_PRACTICAL_NAVIGATION.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\temp\FORMAL_AND_PRACTICAL_NAVIGATION.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/README.md \| `crates/c01_ownership_borrow_scope/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| README.md \| `README.md` \| 文件不存在: docs\archive\2026_03_reorganization\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c03_control_fn/README.md \| `crates/c03_control_fn/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c03_control_fn\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c03_control_fn/docs/00_MASTER_INDEX.md \| `crates/c03_control_fn/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c03_control_fn\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c03_control_fn/docs/DOCUMENTATION_INDEX.md \| `crates/c03_control_fn/docs/DOCUMENTATION_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c03_control_fn\docs\DOCUMENTATION_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c03_control_fn/docs/tier_01_foundations/01_项目概览.md \| `crates/c03_control_fn/docs/tier_01_foundations/01_项目概览.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c03_control_fn\docs\tier_01_foundations\01_项目概览.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/README.md \| `crates/c01_ownership_borrow_scope/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/00_MASTER_INDEX.en.md \| `crates/c04_generic/docs/00_MASTER_INDEX.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\00_MASTER_INDEX.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/00_MASTER_INDEX.md \| `crates/c04_generic/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/00_MASTER_INDEX.md \| `crates/c04_generic/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/00_MASTER_INDEX.md \| `crates/c04_generic/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c04_generic/docs/00_MASTER_INDEX.md \| `crates/c04_generic/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/02_reference/quick_reference/generics_cheatsheet.md \| `docs/02_reference/quick_reference/generics_cheatsheet.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\02_reference\quick_reference\generics_cheatsheet.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/02_reference/quick_reference/modules_cheatsheet.md \| `docs/02_reference/quick_reference/modules_cheatsheet.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\02_reference\quick_reference\modules_cheatsheet.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/02_reference/quick_reference/type_system.md \| `docs/02_reference/quick_reference/type_system.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\02_reference\quick_reference\type_system.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/archive/process_reports/2026_02/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md \| `docs/archive/process_reports/2026_02/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\2026_02\FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| docs/research_notes/ARGUMENTATION_GAP_INDEX.md \| `docs/research_notes/ARGUMENTATION_GAP_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\ARGUMENTATION_GAP_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| README.en.md \| `README.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\README.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/README.md \| `crates/c01_ownership_borrow_scope/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.en.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md \| `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md \| crates/c01_ownership_borrow_scope/docs/FAQ.md \| `crates/c01_ownership_borrow_scope/docs/FAQ.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\FAQ.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| guides/README.md \| `./guides/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\guides\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md \| `./guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md` \| 文件不存在: docs\archive\2026_03_reorganization\guides\AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| docs/05_guides/UNSAFE_RUST_GUIDE.md \| `./docs/05_guides/UNSAFE_RUST_GUIDE.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\05_guides\UNSAFE_RUST_GUIDE.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| guides/README.md \| `./guides/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\guides\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| archive/reports/ \| `./archive/reports/` \| 文件不存在: docs\archive\2026_03_reorganization\archive\reports \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| docs/archive/reports/ \| `./docs/archive/reports/` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\reports \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| docs/archive/root_completion_reports/ \| `./docs/archive/root_completion_reports/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\root_completion_reports\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md \| `./docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\PLAN_IMPLEMENTATION_COMPLETION_2026_02.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| exercises/README.md \| `./exercises/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\exercises\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| README.md \| `./README.md` \| 文件不存在: docs\archive\2026_03_reorganization\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| C01模块 \| `./crates/c01_ownership_borrow_scope/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| 学习路径 \| `./README.md#学习路径推荐` \| 文件不存在: docs\archive\2026_03_reorganization\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| 学习指南 \| `./guides/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\guides\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| QUICK_REFERENCE.md \| `./QUICK_REFERENCE.md` \| 文件不存在: docs\archive\2026_03_reorganization\QUICK_REFERENCE.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| 速查卡目录 \| `./docs/02_reference/quick_reference/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\02_reference\quick_reference\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| 文档中心 \| `./docs/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| TROUBLESHOOTING.md \| `./TROUBLESHOOTING.md#编译错误` \| 文件不存在: docs\archive\2026_03_reorganization\TROUBLESHOOTING.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| TROUBLESHOOTING.md \| `./TROUBLESHOOTING.md#运行时错误` \| 文件不存在: docs\archive\2026_03_reorganization\TROUBLESHOOTING.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| TROUBLESHOOTING.md \| `./TROUBLESHOOTING.md#性能问题` \| 文件不存在: docs\archive\2026_03_reorganization\TROUBLESHOOTING.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| C09 设计模式 \| `./crates/c09_design_pattern/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c09_design_pattern\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| archive/reports/ \| `./archive/reports/` \| 文件不存在: docs\archive\2026_03_reorganization\archive\reports \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| archive/reports/ \| `./archive/reports/` \| 文件不存在: docs\archive\2026_03_reorganization\archive\reports \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| CHANGELOG.md \| `./CHANGELOG.md` \| 文件不存在: docs\archive\2026_03_reorganization\CHANGELOG.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| ROADMAP.md \| `./ROADMAP.md` \| 文件不存在: docs\archive\2026_03_reorganization\ROADMAP.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| CONTRIBUTING.md \| `./CONTRIBUTING.md` \| 文件不存在: docs\archive\2026_03_reorganization\CONTRIBUTING.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| ROADMAP.md \| `./ROADMAP.md` \| 文件不存在: docs\archive\2026_03_reorganization\ROADMAP.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| README.md \| `./README.md` \| 文件不存在: docs\archive\2026_03_reorganization\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| guides/ \| `./guides/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\guides\README.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| archive/reports/ \| `./archive/reports/` \| 文件不存在: docs\archive\2026_03_reorganization\archive\reports \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| CONTRIBUTING.md \| `./CONTRIBUTING.md` \| 文件不存在: docs\archive\2026_03_reorganization\CONTRIBUTING.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| ROADMAP.md \| `./ROADMAP.md` \| 文件不存在: docs\archive\2026_03_reorganization\ROADMAP.md \|
+\| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md \| RESOURCES.md \| `./RESOURCES.md` \| 文件不存在: docs\archive\2026_03_reorganization\RESOURCES.md \|
+\| docs\archive\2026_03_reorganization\TASK_ORCHESTRATION_MASTER_PLAN.md \| docs/TASK_ORCHESTRATION_MASTER_PLAN.md \| `docs/TASK_ORCHESTRATION_MASTER_PLAN.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\TASK_ORCHESTRATION_MASTER_PLAN.md \|
+\| docs\archive\2026_03_reorganization\TASK_ORCHESTRATION_MASTER_PLAN.md \| 项目文档 \| `docs/README.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\README.md \|
+\| docs\archive\2026_03_reorganization\TASK_ORCHESTRATION_MASTER_PLAN.md \| 主索引 \| `docs/00_MASTER_INDEX.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.96 完整发布说明 \| `docs/06_toolchain/16_rust_1.96_release_notes.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\16_rust_1.96_release_notes.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.95 迁移指南 \| `docs/05_guides/RUST_195_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\05_guides\RUST_195_MIGRATION_GUIDE.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.96 研究笔记 \| `docs/research_notes/RUST_196_RESEARCH_UPDATE.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\RUST_196_RESEARCH_UPDATE.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.95+ 综合应用指南 \| `guides/RUST_195_COMPREHENSIVE_GUIDE.md` \| 文件不存在: docs\archive\2026_03_reorganization\guides\RUST_195_COMPREHENSIVE_GUIDE.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.96 对齐完成报告 \| `RUST_196_ALIGNMENT_COMPLETE_REPORT.md` \| 文件不存在: docs\archive\2026_03_reorganization\RUST_196_ALIGNMENT_COMPLETE_REPORT.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.95 vs 1.96 对比 \| `docs/06_toolchain/17_rust_1.95_vs_1.96_comparison.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\17_rust_1.95_vs_1.96_comparison.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.94 完整发布说明 \| `docs/06_toolchain/16_rust_1.94_release_notes.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\16_rust_1.94_release_notes.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.94 迁移指南 \| `docs/05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.94 研究笔记 \| `docs/research_notes/RUST_194_RESEARCH_UPDATE.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\research_notes\RUST_194_RESEARCH_UPDATE.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.94 综合应用指南 \| `guides/RUST_194_COMPREHENSIVE_GUIDE.md` \| 文件不存在: docs\archive\2026_03_reorganization\guides\RUST_194_COMPREHENSIVE_GUIDE.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.94 对齐完成报告 \| `RUST_194_ALIGNMENT_COMPLETE_REPORT.md` \| 文件不存在: docs\archive\2026_03_reorganization\RUST_194_ALIGNMENT_COMPLETE_REPORT.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.93 vs 1.94 对比 \| `docs/06_toolchain/17_rust_1.93_vs_1.94_comparison.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\17_rust_1.93_vs_1.94_comparison.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.93 vs 1.92 对比 \| `docs/06_toolchain/05_rust_1.93_vs_1.92_comparison.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\05_rust_1.93_vs_1.92_comparison.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.93 兼容说明 \| `docs/06_toolchain/06_rust_1.93_compatibility_notes.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\06_rust_1.93_compatibility_notes.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.93 完整变更日志 \| `docs/06_toolchain/07_rust_1.93_full_changelog.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\07_rust_1.93_full_changelog.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.91 vs 1.90 对比 \| `docs/06_toolchain/04_rust_1.91_vs_1.90_comparison.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\04_rust_1.91_vs_1.90_comparison.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| 1.89-1.93 累积特性 \| `docs/06_toolchain/10_rust_1.89_to_1.93_cumulative_features_overview.md` \| 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\10_rust_1.89_to_1.93_cumulative_features_overview.md \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c01_ownership_borrow_scope/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c01_ownership_borrow_scope/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c02_type_system/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c02_type_system/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c02_type_system\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c03_control_fn/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c03_control_fn\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c03_control_fn/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c03_control_fn\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c04_generic/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c04_generic/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c04_generic\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c05_threads/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c05_threads\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c05_threads/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c05_threads\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c06_async/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c06_async\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c06_async/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c06_async\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c07_process/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c07_process\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c07_process/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c07_process\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c08_algorithms/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c08_algorithms\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c08_algorithms/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c08_algorithms\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c09_design_pattern/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c09_design_pattern\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c09_design_pattern/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c09_design_pattern\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c10_networks/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c10_networks\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c10_networks/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c10_networks\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c11_macro_system/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c11_macro_system\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c11_macro_system/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c11_macro_system\src\archive \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| rust_194_features \| `crates/c12_wasm/src/rust_194_features.rs` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c12_wasm\src\rust_194_features.rs \|
+\| docs\archive\2026_03_reorganization\VERSION_INDEX.md \| archive/ \| `crates/c12_wasm/src/archive/` \| 文件不存在: docs\archive\2026_03_reorganization\crates\c12_wasm\src\archive \|
+\| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md \| 05_rust_1.93_vs_1.92_comparison.md \| `./05_rust_1.93_vs_1.92_comparison.md` \| 文件不存在: docs\archive\2026_05_historical_docs\05_rust_1.93_vs_1.92_comparison.md \|
+\| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md \| 06_rust_1.93_compatibility_notes.md \| `./06_rust_1.93_compatibility_notes.md` \| 文件不存在: docs\archive\2026_05_historical_docs\06_rust_1.93_compatibility_notes.md \|
+\| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md \| Rust 1.93 vs 1.92 对比 \| `./05_rust_1.93_vs_1.92_comparison.md` \| 文件不存在: docs\archive\2026_05_historical_docs\05_rust_1.93_vs_1.92_comparison.md \|
+\| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md \| Rust 1.93 兼容性注意事项 \| `./06_rust_1.93_compatibility_notes.md` \| 文件不存在: docs\archive\2026_05_historical_docs\06_rust_1.93_compatibility_notes.md \|
+\| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md \| Rust 1.93 完整变更清单 \| `./07_rust_1.93_full_changelog.md` \| 文件不存在: docs\archive\2026_05_historical_docs\07_rust_1.93_full_changelog.md \|
+\| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md \| Rust 1.94 完整发布说明 \| `../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md` \| 文件不存在: docs\archive\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \|
+\| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md \| Rust 1.94 采用指南 \| `../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md` \| 文件不存在: docs\archive\archive\2026_05_historical_docs\18_rust_1.94_adoption_guide.md \|
+\| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md \| Rust 1.93 vs 1.94 对比 \| `../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md` \| 文件不存在: docs\archive\archive\2026_05_historical_docs\17_rust_1.93_vs_1.94_comparison.md \|
+\| docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md \| 05_rust_1.93_vs_1.92_comparison.md \| `./05_rust_1.93_vs_1.92_comparison.md` \| 文件不存在: docs\archive\2026_05_historical_docs\05_rust_1.93_vs_1.92_comparison.md \|
+\| docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md \| 09_rust_1.93_compatibility_deep_dive.md \| `./09_rust_1.93_compatibility_deep_dive.md` \| 文件不存在: docs\archive\2026_05_historical_docs\09_rust_1.93_compatibility_deep_dive.md \|
+\| docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md \| 07_rust_1.93_full_changelog.md \| `./07_rust_1.93_full_changelog.md` \| 文件不存在: docs\archive\2026_05_historical_docs\07_rust_1.93_full_changelog.md \|
+\| docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md \| ../07_project/RUST_RELEASE_TRACKING_CHECKLIST.md \| `../07_project/RUST_RELEASE_TRACKING_CHECKLIST.md` \| 文件不存在: docs\archive\07_project\RUST_RELEASE_TRACKING_CHECKLIST.md \|
+\| docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md \| Rust 1.94 完整发布说明 \| `../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md` \| 文件不存在: docs\archive\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \|
+\| docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md \| Rust 1.94 采用指南 \| `../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md` \| 文件不存在: docs\archive\archive\2026_05_historical_docs\18_rust_1.94_adoption_guide.md \|
+\| docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md \| Rust 1.93 vs 1.94 对比 \| `../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md` \| 文件不存在: docs\archive\archive\2026_05_historical_docs\17_rust_1.93_vs_1.94_comparison.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| borrow_checker_proof \| `../research_notes/formal_methods/borrow_checker_proof.md` \| 文件不存在: docs\archive\research_notes\formal_methods\borrow_checker_proof.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| ownership_model \| `../research_notes/formal_methods/ownership_model.md` \| 文件不存在: docs\archive\research_notes\formal_methods\ownership_model.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| borrow_checker_proof \| `../research_notes/formal_methods/borrow_checker_proof.md` \| 文件不存在: docs\archive\research_notes\formal_methods\borrow_checker_proof.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| WASM_USAGE_GUIDE \| `../05_guides/WASM_USAGE_GUIDE.md` \| 文件不存在: docs\archive\05_guides\WASM_USAGE_GUIDE.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| wasm_cheatsheet \| `../02_reference/quick_reference/wasm_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\wasm_cheatsheet.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| type_system_foundations \| `../research_notes/type_theory/type_system_foundations.md` \| 文件不存在: docs\archive\research_notes\type_theory\type_system_foundations.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| ownership_model \| `../research_notes/formal_methods/ownership_model.md` \| 文件不存在: docs\archive\research_notes\formal_methods\ownership_model.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| borrow_checker_proof \| `../research_notes/formal_methods/borrow_checker_proof.md` \| 文件不存在: docs\archive\research_notes\formal_methods\borrow_checker_proof.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| lifetime_formalization \| `../research_notes/formal_methods/lifetime_formalization.md` \| 文件不存在: docs\archive\research_notes\formal_methods\lifetime_formalization.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| async_state_machine \| `../research_notes/formal_methods/async_state_machine.md` \| 文件不存在: docs\archive\research_notes\formal_methods\async_state_machine.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| pin_self_referential \| `../research_notes/formal_methods/pin_self_referential.md` \| 文件不存在: docs\archive\research_notes\formal_methods\pin_self_referential.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| send_sync_formalization \| `../research_notes/formal_methods/send_sync_formalization.md` \| 文件不存在: docs\archive\research_notes\formal_methods\send_sync_formalization.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| 09_rust_1.93_compatibility_deep_dive \| `./09_rust_1.93_compatibility_deep_dive.md` \| 文件不存在: docs\archive\2026_05_historical_docs\09_rust_1.93_compatibility_deep_dive.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| 05_rust_1.93_vs_1.92_comparison \| `./05_rust_1.93_vs_1.92_comparison.md` \| 文件不存在: docs\archive\2026_05_historical_docs\05_rust_1.93_vs_1.92_comparison.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| WASM_USAGE_GUIDE \| `../05_guides/WASM_USAGE_GUIDE.md` \| 文件不存在: docs\archive\05_guides\WASM_USAGE_GUIDE.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| ownership_model \| `../research_notes/formal_methods/ownership_model.md` \| 文件不存在: docs\archive\research_notes\formal_methods\ownership_model.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| ownership_model \| `../research_notes/formal_methods/ownership_model.md` \| 文件不存在: docs\archive\research_notes\formal_methods\ownership_model.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| Rust 1.94 完整发布说明 \| `../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md` \| 文件不存在: docs\archive\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| Rust 1.94 采用指南 \| `../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md` \| 文件不存在: docs\archive\archive\2026_05_historical_docs\18_rust_1.94_adoption_guide.md \|
+\| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md \| Rust 1.93 vs 1.94 对比 \| `../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md` \| 文件不存在: docs\archive\archive\2026_05_historical_docs\17_rust_1.93_vs_1.94_comparison.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| type_system_foundations \| `../research_notes/type_theory/type_system_foundations.md` \| 文件不存在: docs\archive\research_notes\type_theory\type_system_foundations.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| ownership_model \| `../research_notes/formal_methods/ownership_model.md` \| 文件不存在: docs\archive\research_notes\formal_methods\ownership_model.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| type_system_foundations \| `../research_notes/type_theory/type_system_foundations.md` \| 文件不存在: docs\archive\research_notes\type_theory\type_system_foundations.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| ownership_model \| `../research_notes/formal_methods/ownership_model.md` \| 文件不存在: docs\archive\research_notes\formal_methods\ownership_model.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| type_system_foundations \| `../research_notes/type_theory/type_system_foundations.md` \| 文件不存在: docs\archive\research_notes\type_theory\type_system_foundations.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| ownership_model \| `../research_notes/formal_methods/ownership_model.md` \| 文件不存在: docs\archive\research_notes\formal_methods\ownership_model.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| type_system_foundations \| `../research_notes/type_theory/type_system_foundations.md` \| 文件不存在: docs\archive\research_notes\type_theory\type_system_foundations.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| type_system_foundations \| `../research_notes/type_theory/type_system_foundations.md` \| 文件不存在: docs\archive\research_notes\type_theory\type_system_foundations.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| ownership_model \| `../research_notes/formal_methods/ownership_model.md` \| 文件不存在: docs\archive\research_notes\formal_methods\ownership_model.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| FORMAL_CONCEPTS_ENCYCLOPEDIA \| `../research_notes/FORMAL_CONCEPTS_ENCYCLOPEDIA.md` \| 文件不存在: docs\archive\research_notes\FORMAL_CONCEPTS_ENCYCLOPEDIA.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| COUNTER_EXAMPLES_COMPENDIUM \| `../research_notes/COUNTER_EXAMPLES_COMPENDIUM.md` \| 文件不存在: docs\archive\research_notes\COUNTER_EXAMPLES_COMPENDIUM.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| RUST_193_FEATURE_MATRIX \| `../research_notes/RUST_193_FEATURE_MATRIX.md` \| 文件不存在: docs\archive\research_notes\RUST_193_FEATURE_MATRIX.md \|
+\| docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md \| 07_rust_1.93_full_changelog \| `./07_rust_1.93_full_changelog.md` \| 文件不存在: docs\archive\2026_05_historical_docs\07_rust_1.93_full_changelog.md \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| Rust 1.94 速查卡 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C01 所有权与借用 \| `../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C02 类型系统 \| `../../crates/c02_type_system/src/rust_194_features.rs` \| 文件不存在: docs\crates\c02_type_system\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C03 控制流与函数 \| `../../crates/c03_control_fn/src/rust_194_features.rs` \| 文件不存在: docs\crates\c03_control_fn\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C04 泛型编程 \| `../../crates/c04_generic/src/rust_194_features.rs` \| 文件不存在: docs\crates\c04_generic\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C05 线程与并发 \| `../../crates/c05_threads/src/rust_194_features.rs` \| 文件不存在: docs\crates\c05_threads\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C06 异步编程 \| `../../crates/c06_async/src/rust_194_features.rs` \| 文件不存在: docs\crates\c06_async\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C07 进程管理 \| `../../crates/c07_process/src/rust_194_features.rs` \| 文件不存在: docs\crates\c07_process\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C08 算法与数据结构 \| `../../crates/c08_algorithms/src/rust_194_features.rs` \| 文件不存在: docs\crates\c08_algorithms\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C09 设计模式 \| `../../crates/c09_design_pattern/src/rust_194_features.rs` \| 文件不存在: docs\crates\c09_design_pattern\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C10 网络编程 \| `../../crates/c10_networks/src/rust_194_features.rs` \| 文件不存在: docs\crates\c10_networks\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C11 宏系统 \| `../../crates/c11_macro_system/src/rust_194_features.rs` \| 文件不存在: docs\crates\c11_macro_system\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md \| C12 WebAssembly \| `../../crates/c12_wasm/src/rust_194_features.rs` \| 文件不存在: docs\crates\c12_wasm\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\17_rust_1.93_vs_1.94_comparison.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\2026_05_historical_docs\18_rust_1.94_adoption_guide.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\2026_05_historical_docs\RUST_194_COMPREHENSIVE_GUIDE.md \| 所有权与借用 1.94特性 \| `../crates/c01_ownership_borrow_scope/src/rust_194_features.rs` \| 文件不存在: docs\archive\crates\c01_ownership_borrow_scope\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\RUST_194_COMPREHENSIVE_GUIDE.md \| 类型系统 1.94特性 \| `../crates/c02_type_system/src/rust_194_features.rs` \| 文件不存在: docs\archive\crates\c02_type_system\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\RUST_194_COMPREHENSIVE_GUIDE.md \| 控制流 1.94特性 \| `../crates/c03_control_fn/src/rust_194_features.rs` \| 文件不存在: docs\archive\crates\c03_control_fn\src\rust_194_features.rs \|
+\| docs\archive\2026_05_historical_docs\RUST_194_COMPREHENSIVE_GUIDE.md \| 版本索引 \| `../VERSION_INDEX.md` \| 文件不存在: docs\archive\VERSION_INDEX.md \|
+\| docs\archive\deprecated\README.md \| TASK_ORCHESTRATION_MASTER_PLAN \| `../../../TASK_ORCHESTRATION_MASTER_PLAN.md` \| 文件不存在: TASK_ORCHESTRATION_MASTER_PLAN.md \|
+\| docs\archive\deprecated_20260318\00_rust_2024_edition_learning_impact.md \| Rust 1.93 vs 1.92 对比 \| `./05_rust_1.93_vs_1.92_comparison.md` \| 文件不存在: docs\archive\deprecated_20260318\05_rust_1.93_vs_1.92_comparison.md \|
+\| docs\archive\deprecated_20260318\00_rust_2024_edition_learning_impact.md \| Rust 1.93 兼容性深度解析 \| `./09_rust_1.93_compatibility_deep_dive.md` \| 文件不存在: docs\archive\deprecated_20260318\09_rust_1.93_compatibility_deep_dive.md \|
+\| docs\archive\deprecated_20260318\00_rust_2024_edition_learning_impact.md \| Unsafe Rust 指南 \| `../05_guides/UNSAFE_RUST_GUIDE.md` \| 文件不存在: docs\archive\05_guides\UNSAFE_RUST_GUIDE.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| factory_method \| `../01_design_patterns_formal/01_creational/factory_method.md` \| 文件不存在: docs\archive\01_design_patterns_formal\01_creational\factory_method.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| abstract_factory \| `../01_design_patterns_formal/01_creational/abstract_factory.md` \| 文件不存在: docs\archive\01_design_patterns_formal\01_creational\abstract_factory.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| builder \| `../01_design_patterns_formal/01_creational/builder.md` \| 文件不存在: docs\archive\01_design_patterns_formal\01_creational\builder.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| prototype \| `../01_design_patterns_formal/01_creational/prototype.md` \| 文件不存在: docs\archive\01_design_patterns_formal\01_creational\prototype.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| singleton \| `../01_design_patterns_formal/01_creational/singleton.md` \| 文件不存在: docs\archive\01_design_patterns_formal\01_creational\singleton.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| adapter \| `../01_design_patterns_formal/02_structural/adapter.md` \| 文件不存在: docs\archive\01_design_patterns_formal\02_structural\adapter.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| bridge \| `../01_design_patterns_formal/02_structural/bridge.md` \| 文件不存在: docs\archive\01_design_patterns_formal\02_structural\bridge.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| composite \| `../01_design_patterns_formal/02_structural/composite.md` \| 文件不存在: docs\archive\01_design_patterns_formal\02_structural\composite.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| decorator \| `../01_design_patterns_formal/02_structural/decorator.md` \| 文件不存在: docs\archive\01_design_patterns_formal\02_structural\decorator.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| facade \| `../01_design_patterns_formal/02_structural/facade.md` \| 文件不存在: docs\archive\01_design_patterns_formal\02_structural\facade.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| flyweight \| `../01_design_patterns_formal/02_structural/flyweight.md` \| 文件不存在: docs\archive\01_design_patterns_formal\02_structural\flyweight.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| proxy \| `../01_design_patterns_formal/02_structural/proxy.md` \| 文件不存在: docs\archive\01_design_patterns_formal\02_structural\proxy.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| chain_of_responsibility \| `../01_design_patterns_formal/03_behavioral/chain_of_responsibility.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\chain_of_responsibility.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| command \| `../01_design_patterns_formal/03_behavioral/command.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\command.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| interpreter \| `../01_design_patterns_formal/03_behavioral/interpreter.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\interpreter.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| iterator \| `../01_design_patterns_formal/03_behavioral/iterator.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\iterator.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| mediator \| `../01_design_patterns_formal/03_behavioral/mediator.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\mediator.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| memento \| `../01_design_patterns_formal/03_behavioral/memento.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\memento.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| observer \| `../01_design_patterns_formal/03_behavioral/observer.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\observer.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| state \| `../01_design_patterns_formal/03_behavioral/state.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\state.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| strategy \| `../01_design_patterns_formal/03_behavioral/strategy.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\strategy.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| template_method \| `../01_design_patterns_formal/03_behavioral/template_method.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\template_method.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| visitor \| `../01_design_patterns_formal/03_behavioral/visitor.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\visitor.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| singleton \| `../01_design_patterns_formal/01_creational/singleton.md` \| 文件不存在: docs\archive\01_design_patterns_formal\01_creational\singleton.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| builder \| `../01_design_patterns_formal/01_creational/builder.md` \| 文件不存在: docs\archive\01_design_patterns_formal\01_creational\builder.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| prototype \| `../01_design_patterns_formal/01_creational/prototype.md` \| 文件不存在: docs\archive\01_design_patterns_formal\01_creational\prototype.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| ownership_model \| `../../formal_methods/ownership_model.md` \| 文件不存在: docs\formal_methods\ownership_model.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| composite \| `../01_design_patterns_formal/02_structural/composite.md` \| 文件不存在: docs\archive\01_design_patterns_formal\02_structural\composite.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| async_state_machine \| `../../formal_methods/async_state_machine.md` \| 文件不存在: docs\formal_methods\async_state_machine.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| borrow_checker_proof \| `../../formal_methods/borrow_checker_proof.md` \| 文件不存在: docs\formal_methods\borrow_checker_proof.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| mediator \| `../01_design_patterns_formal/03_behavioral/mediator.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\mediator.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| chain_of_responsibility \| `../01_design_patterns_formal/03_behavioral/chain_of_responsibility.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\chain_of_responsibility.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| memento \| `../01_design_patterns_formal/03_behavioral/memento.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\memento.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| borrow_checker_proof \| `../../formal_methods/borrow_checker_proof.md` \| 文件不存在: docs\formal_methods\borrow_checker_proof.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| ownership_model \| `../../formal_methods/ownership_model.md` \| 文件不存在: docs\formal_methods\ownership_model.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| 01_creational \| `../01_design_patterns_formal/01_creational/README.md` \| 文件不存在: docs\archive\01_design_patterns_formal\01_creational\README.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| borrow_checker_proof \| `../../formal_methods/borrow_checker_proof.md` \| 文件不存在: docs\formal_methods\borrow_checker_proof.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| 02_structural \| `../01_design_patterns_formal/02_structural/README.md` \| 文件不存在: docs\archive\01_design_patterns_formal\02_structural\README.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| async_state_machine \| `../../formal_methods/async_state_machine.md` \| 文件不存在: docs\formal_methods\async_state_machine.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| 03_behavioral \| `../01_design_patterns_formal/03_behavioral/README.md` \| 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\README.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| 02_complete_43_catalog \| `02_complete_43_catalog.md` \| 文件不存在: docs\archive\deprecated_20260318\02_complete_43_catalog.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE \| `../../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md` \| 文件不存在: docs\THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| ownership_model \| `../../formal_methods/ownership_model.md` \| 文件不存在: docs\formal_methods\ownership_model.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| borrow_checker_proof \| `../../formal_methods/borrow_checker_proof.md` \| 文件不存在: docs\formal_methods\borrow_checker_proof.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| type_system_foundations \| `../../type_theory/type_system_foundations.md` \| 文件不存在: docs\type_theory\type_system_foundations.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\01_safe_23_catalog.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\deprecated_20260318\01_workflow_state_machine.md \| 工作流概念族谱 \| `../../WORKFLOW_CONCEPT_MINDMAP.md` \| 文件不存在: docs\WORKFLOW_CONCEPT_MINDMAP.md \|
+\| docs\archive\deprecated_20260318\01_workflow_state_machine.md \| Saga 模式 \| `../05_distributed/01_saga_pattern.md` \| 文件不存在: docs\archive\05_distributed\01_saga_pattern.md \|
+\| docs\archive\deprecated_20260318\01_workflow_state_machine.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\01_workflow_state_machine.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\01_workflow_state_machine.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\deprecated_20260318\02_cargo_workspace_guide.md \| 01_compiler_features.md \| `./01_compiler_features.md` \| 文件不存在: docs\archive\deprecated_20260318\01_compiler_features.md \|
+\| docs\archive\deprecated_20260318\02_cargo_workspace_guide.md \| 03_rustdoc_advanced.md \| `./03_rustdoc_advanced.md` \| 文件不存在: docs\archive\deprecated_20260318\03_rustdoc_advanced.md \|
+\| docs\archive\deprecated_20260318\02_cargo_workspace_guide.md \| Rust 1.94 完整发布说明 \| `./16_rust_1.94_release_notes.md` \| 文件不存在: docs\archive\deprecated_20260318\16_rust_1.94_release_notes.md \|
+\| docs\archive\deprecated_20260318\02_cargo_workspace_guide.md \| Rust 1.94 采用指南 \| `./18_rust_1.94_adoption_guide.md` \| 文件不存在: docs\archive\deprecated_20260318\18_rust_1.94_adoption_guide.md \|
+\| docs\archive\deprecated_20260318\02_cargo_workspace_guide.md \| Rust 1.93 vs 1.94 对比 \| `./17_rust_1.93_vs_1.94_comparison.md` \| 文件不存在: docs\archive\deprecated_20260318\17_rust_1.93_vs_1.94_comparison.md \|
+\| docs\archive\deprecated_20260318\02_compensation_chain.md \| Saga 模式 \| `../05_distributed/01_saga_pattern.md` \| 文件不存在: docs\archive\05_distributed\01_saga_pattern.md \|
+\| docs\archive\deprecated_20260318\02_compensation_chain.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\02_compensation_chain.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\02_compensation_chain.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\deprecated_20260318\03_long_running_transaction.md \| Saga 模式 \| `../05_distributed/01_saga_pattern.md` \| 文件不存在: docs\archive\05_distributed\01_saga_pattern.md \|
+\| docs\archive\deprecated_20260318\03_long_running_transaction.md \| 工作流概念族谱 \| `../../WORKFLOW_CONCEPT_MINDMAP.md` \| 文件不存在: docs\WORKFLOW_CONCEPT_MINDMAP.md \|
+\| docs\archive\deprecated_20260318\03_long_running_transaction.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\03_long_running_transaction.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\03_long_running_transaction.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS \| `../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md` \| 文件不存在: docs\SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| 05_boundary_system \| `../05_boundary_system/README.md` \| 文件不存在: docs\archive\05_boundary_system\README.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS \| `../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md` \| 文件不存在: docs\SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| supported_unsupported_matrix \| `../05_boundary_system/supported_unsupported_matrix.md` \| 文件不存在: docs\archive\05_boundary_system\supported_unsupported_matrix.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| expressive_inexpressive_matrix \| `../05_boundary_system/expressive_inexpressive_matrix.md` \| 文件不存在: docs\archive\05_boundary_system\expressive_inexpressive_matrix.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS \| `../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md` \| 文件不存在: docs\SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| 01_design_patterns_formal §23 模式多维对比矩阵 \| `../01_design_patterns_formal/README.md#23-模式多维对比矩阵` \| 文件不存在: docs\archive\01_design_patterns_formal\README.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| ownership_model \| `../../formal_methods/ownership_model.md` \| 文件不存在: docs\formal_methods\ownership_model.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| borrow_checker_proof \| `../../formal_methods/borrow_checker_proof.md` \| 文件不存在: docs\formal_methods\borrow_checker_proof.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| LANGUAGE_SEMANTICS_EXPRESSIVENESS \| `../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md` \| 文件不存在: docs\LANGUAGE_SEMANTICS_EXPRESSIVENESS.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| 05_boundary_system \| `../05_boundary_system/README.md` \| 文件不存在: docs\archive\05_boundary_system\README.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| 执行模型边界 \| `../03_execution_models/06_boundary_analysis.md` \| 文件不存在: docs\archive\03_execution_models\06_boundary_analysis.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\03_semantic_boundary_map.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\deprecated_20260318\04_rust_1.91_vs_1.90_comparison.md \| Rust 1.94 完整发布说明 \| `./16_rust_1.94_release_notes.md` \| 文件不存在: docs\archive\deprecated_20260318\16_rust_1.94_release_notes.md \|
+\| docs\archive\deprecated_20260318\04_rust_1.91_vs_1.90_comparison.md \| Rust 1.94 采用指南 \| `./18_rust_1.94_adoption_guide.md` \| 文件不存在: docs\archive\deprecated_20260318\18_rust_1.94_adoption_guide.md \|
+\| docs\archive\deprecated_20260318\04_rust_1.91_vs_1.90_comparison.md \| Rust 1.93 vs 1.94 对比 \| `./17_rust_1.93_vs_1.94_comparison.md` \| 文件不存在: docs\archive\deprecated_20260318\17_rust_1.93_vs_1.94_comparison.md \|
+\| docs\archive\deprecated_20260318\06_rust_1.93_compatibility_notes.md \| 12_rust_1.93.1_vs_1.93.0_comparison \| `./12_rust_1.93.1_vs_1.93.0_comparison.md` \| 文件不存在: docs\archive\deprecated_20260318\12_rust_1.93.1_vs_1.93.0_comparison.md \|
+\| docs\archive\deprecated_20260318\06_rust_1.93_compatibility_notes.md \| Rust 1.93 vs 1.92 对比 \| `./05_rust_1.93_vs_1.92_comparison.md` \| 文件不存在: docs\archive\deprecated_20260318\05_rust_1.93_vs_1.92_comparison.md \|
+\| docs\archive\deprecated_20260318\08_fallback_pattern.md \| Circuit Breaker \| `./03_circuit_breaker.md` \| 文件不存在: docs\archive\deprecated_20260318\03_circuit_breaker.md \|
+\| docs\archive\deprecated_20260318\08_fallback_pattern.md \| 超时模式 \| `./06_timeout_pattern.md` \| 文件不存在: docs\archive\deprecated_20260318\06_timeout_pattern.md \|
+\| docs\archive\deprecated_20260318\08_fallback_pattern.md \| 重试模式 \| `./07_retry_pattern.md` \| 文件不存在: docs\archive\deprecated_20260318\07_retry_pattern.md \|
+\| docs\archive\deprecated_20260318\08_fallback_pattern.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\08_fallback_pattern.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\08_fallback_pattern.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\deprecated_20260318\ANTI_PATTERN_TEMPLATE.md \| testing_cheatsheet \| `./testing_cheatsheet.md` \| 文件不存在: docs\archive\deprecated_20260318\testing_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\DEEP_DIVE_COMPLETION_REPORT.md \| README.md \| `./12-concurrency-patterns/README.md` \| 文件不存在: docs\archive\deprecated_20260318\12-concurrency-patterns\README.md \|
+\| docs\archive\deprecated_20260318\DEEP_DIVE_COMPLETION_REPORT.md \| RUST_1.94_UPDATE_REPORT.md \| `./08-advanced-topics/RUST_1.94_UPDATE_REPORT.md` \| 文件不存在: docs\archive\deprecated_20260318\08-advanced-topics\RUST_1.94_UPDATE_REPORT.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| singleton.md \| `01_creational/singleton.md` \| 文件不存在: docs\archive\deprecated_20260318\01_creational\singleton.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| factory_method.md \| `01_creational/factory_method.md` \| 文件不存在: docs\archive\deprecated_20260318\01_creational\factory_method.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| abstract_factory.md \| `01_creational/abstract_factory.md` \| 文件不存在: docs\archive\deprecated_20260318\01_creational\abstract_factory.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| builder.md \| `01_creational/builder.md` \| 文件不存在: docs\archive\deprecated_20260318\01_creational\builder.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| prototype.md \| `01_creational/prototype.md` \| 文件不存在: docs\archive\deprecated_20260318\01_creational\prototype.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| adapter.md \| `02_structural/adapter.md` \| 文件不存在: docs\archive\deprecated_20260318\02_structural\adapter.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| bridge.md \| `02_structural/bridge.md` \| 文件不存在: docs\archive\deprecated_20260318\02_structural\bridge.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| composite.md \| `02_structural/composite.md` \| 文件不存在: docs\archive\deprecated_20260318\02_structural\composite.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| decorator.md \| `02_structural/decorator.md` \| 文件不存在: docs\archive\deprecated_20260318\02_structural\decorator.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| facade.md \| `02_structural/facade.md` \| 文件不存在: docs\archive\deprecated_20260318\02_structural\facade.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| flyweight.md \| `02_structural/flyweight.md` \| 文件不存在: docs\archive\deprecated_20260318\02_structural\flyweight.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| proxy.md \| `02_structural/proxy.md` \| 文件不存在: docs\archive\deprecated_20260318\02_structural\proxy.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| observer.md \| `03_behavioral/observer.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\observer.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| strategy.md \| `03_behavioral/strategy.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\strategy.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| state.md \| `03_behavioral/state.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\state.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| command.md \| `03_behavioral/command.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\command.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| iterator.md \| `03_behavioral/iterator.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\iterator.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| template_method.md \| `03_behavioral/template_method.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\template_method.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| mediator.md \| `03_behavioral/mediator.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\mediator.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| memento.md \| `03_behavioral/memento.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\memento.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| chain_of_responsibility.md \| `03_behavioral/chain_of_responsibility.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\chain_of_responsibility.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| visitor.md \| `03_behavioral/visitor.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\visitor.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| interpreter.md \| `03_behavioral/interpreter.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\interpreter.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| 01_creational \| `01_creational/README.md` \| 文件不存在: docs\archive\deprecated_20260318\01_creational\README.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| 02_structural \| `02_structural/README.md` \| 文件不存在: docs\archive\deprecated_20260318\02_structural\README.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| 03_behavioral \| `03_behavioral/README.md` \| 文件不存在: docs\archive\deprecated_20260318\03_behavioral\README.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| ANTI_PATTERN_TEMPLATE \| `../../../02_reference/quick_reference/ANTI_PATTERN_TEMPLATE.md` \| 文件不存在: 02_reference\quick_reference\ANTI_PATTERN_TEMPLATE.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| Rust 设计模式实践指南 \| `../../../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md` \| 文件不存在: 05_guides\DESIGN_PATTERNS_USAGE_GUIDE.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| 所有权系统详解 \| `../../../research_notes/formal_methods/ownership_model.md` \| 文件不存在: research_notes\formal_methods\ownership_model.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| 类型状态模式指南 \| `../06_rust_idioms.md` \| 文件不存在: docs\archive\06_rust_idioms.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| 零成本抽象实践 \| `../../../02_reference/quick_reference/generics_cheatsheet.md` \| 文件不存在: 02_reference\quick_reference\generics_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\deprecated_20260318\design_patterns_cheatsheet.md \| 类型系统速查卡 \| `./type_system.md` \| 文件不存在: docs\archive\deprecated_20260318\type_system.md \|
+\| docs\archive\deprecated_20260318\design_patterns_cheatsheet.md \| 所有权系统速查卡 \| `./ownership_cheatsheet.md` \| 文件不存在: docs\archive\deprecated_20260318\ownership_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\design_patterns_cheatsheet.md \| 泛型编程速查卡 \| `./generics_cheatsheet.md` \| 文件不存在: docs\archive\deprecated_20260318\generics_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\design_patterns_cheatsheet.md \| 智能指针速查卡 \| `./smart_pointers_cheatsheet.md` \| 文件不存在: docs\archive\deprecated_20260318\smart_pointers_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\DESIGN_PATTERNS_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\deprecated_20260318\FORMAL_VERIFICATION_PRACTICAL_GUIDE.md \| RUST_194_RESEARCH_UPDATE \| `./RUST_194_RESEARCH_UPDATE.md` \| 文件不存在: docs\archive\deprecated_20260318\RUST_194_RESEARCH_UPDATE.md \|
+\| docs\archive\deprecated_20260318\FORMAL_VERIFICATION_PRACTICAL_GUIDE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\FORMAL_VERIFICATION_PRACTICAL_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\FORMAL_VERIFICATION_PRACTICAL_GUIDE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\deprecated_20260318\macros_cheatsheet.md \| Rust 1.91 特性演示 \| `../../../crates/c11_macro_system/examples/rust_191_features_demo.rs` \| 文件不存在: crates\c11_macro_system\examples\rust_191_features_demo.rs \|
+\| docs\archive\deprecated_20260318\macros_cheatsheet.md \| Rust 1.92 特性演示 \| `../../../crates/c11_macro_system/examples/rust_192_features_demo.rs` \| 文件不存在: crates\c11_macro_system\examples\rust_192_features_demo.rs \|
+\| docs\archive\deprecated_20260318\macros_cheatsheet.md \| 类型系统速查卡 \| `./type_system.md` \| 文件不存在: docs\archive\deprecated_20260318\type_system.md \|
+\| docs\archive\deprecated_20260318\macros_cheatsheet.md \| 泛型编程速查卡 \| `./generics_cheatsheet.md` \| 文件不存在: docs\archive\deprecated_20260318\generics_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\macros_cheatsheet.md \| 模块系统速查卡 \| `./modules_cheatsheet.md` \| 文件不存在: docs\archive\deprecated_20260318\modules_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\macros_cheatsheet.md \| 测试速查卡 \| `./testing_cheatsheet.md` \| 文件不存在: docs\archive\deprecated_20260318\testing_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\MIND_REPRESENTATION_COMPLETION_PLAN.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\MIND_REPRESENTATION_COMPLETION_PLAN.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\MIND_REPRESENTATION_COMPLETION_PLAN.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\deprecated_20260318\RUST_194_MIGRATION_GUIDE.md \| Rust 1.94 发布说明 \| `../06_toolchain/16_rust_1.94_release_notes.md` \| 文件不存在: docs\archive\06_toolchain\16_rust_1.94_release_notes.md \|
+\| docs\archive\deprecated_20260318\RUST_194_MIGRATION_GUIDE.md \| Rust 1.94 采用指南 \| `../06_toolchain/18_rust_1.94_adoption_guide.md` \| 文件不存在: docs\archive\06_toolchain\18_rust_1.94_adoption_guide.md \|
+\| docs\archive\deprecated_20260318\RUST_194_MIGRATION_GUIDE.md \| Rust 1.94 速查卡 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\RUST_194_MIGRATION_GUIDE.md \| Rust 1.94 特性示例 \| `../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs` \| 文件不存在: docs\crates\c01_ownership_borrow_scope\src\rust_194_features.rs \|
+\| docs\archive\deprecated_20260318\UNSAFE_PATTERNS_GUIDE.md \| UNSAFE_RUST_GUIDE.md \| `./UNSAFE_RUST_GUIDE.md` \| 文件不存在: docs\archive\deprecated_20260318\UNSAFE_RUST_GUIDE.md \|
+\| docs\archive\deprecated_20260318\UNSAFE_PATTERNS_GUIDE.md \| INLINE_ASSEMBLY_GUIDE.md \| `./INLINE_ASSEMBLY_GUIDE.md` \| 文件不存在: docs\archive\deprecated_20260318\INLINE_ASSEMBLY_GUIDE.md \|
+\| docs\archive\deprecated_20260318\WORKFLOW_ENGINE_DECISION_TREE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\deprecated_20260318\WORKFLOW_ENGINE_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\deprecated_20260318\WORKFLOW_ENGINE_DECISION_TREE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\archive\reports\rust_194\RUST_194_COMPLETION_REPORT.md \| 发布说明 \| `./06_toolchain/16_rust_1.94_release_notes.md` \| 文件不存在: docs\archive\reports\rust_194\06_toolchain\16_rust_1.94_release_notes.md \|
+\| docs\archive\reports\rust_194\RUST_194_COMPLETION_REPORT.md \| 版本对比 \| `./06_toolchain/17_rust_1.93_vs_1.94_comparison.md` \| 文件不存在: docs\archive\reports\rust_194\06_toolchain\17_rust_1.93_vs_1.94_comparison.md \|
+\| docs\archive\reports\rust_194\RUST_194_COMPLETION_REPORT.md \| 采用指南 \| `./06_toolchain/18_rust_1.94_adoption_guide.md` \| 文件不存在: docs\archive\reports\rust_194\06_toolchain\18_rust_1.94_adoption_guide.md \|
+\| docs\archive\reports\rust_194\RUST_194_COMPLETION_REPORT.md \| 迁移指南 \| `./05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\reports\rust_194\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\reports\rust_194\RUST_194_COMPLETION_REPORT.md \| 速查卡 \| `./02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\reports\rust_194\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\reports\rust_194\RUST_194_COMPLETION_REPORT.md \| 研究笔记 \| `./research_notes/RUST_194_RESEARCH_UPDATE.md` \| 文件不存在: docs\archive\reports\rust_194\research_notes\RUST_194_RESEARCH_UPDATE.md \|
+\| docs\archive\reports\rust_194\RUST_194_COMPLETION_REPORT.md \| c01 rust_194_features.rs \| `../crates/c01_ownership_borrow_scope/src/rust_194_features.rs` \| 文件不存在: docs\archive\reports\crates\c01_ownership_borrow_scope\src\rust_194_features.rs \|
+\| docs\archive\reports\rust_194\RUST_194_COMPLETION_REPORT.md \| c02 rust_194_features.rs \| `../crates/c02_type_system/src/rust_194_features.rs` \| 文件不存在: docs\archive\reports\crates\c02_type_system\src\rust_194_features.rs \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_COMPLETION_REPORT.md \| 16_rust_1.94_release_notes.md \| `./06_toolchain/16_rust_1.94_release_notes.md` \| 文件不存在: docs\archive\reports\rust_194\06_toolchain\16_rust_1.94_release_notes.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_COMPLETION_REPORT.md \| 17_rust_1.93_vs_1.94_comparison.md \| `./06_toolchain/17_rust_1.93_vs_1.94_comparison.md` \| 文件不存在: docs\archive\reports\rust_194\06_toolchain\17_rust_1.93_vs_1.94_comparison.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_COMPLETION_REPORT.md \| 18_rust_1.94_adoption_guide.md \| `./06_toolchain/18_rust_1.94_adoption_guide.md` \| 文件不存在: docs\archive\reports\rust_194\06_toolchain\18_rust_1.94_adoption_guide.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_COMPLETION_REPORT.md \| README.md \| `./06_toolchain/README.md` \| 文件不存在: docs\archive\reports\rust_194\06_toolchain\README.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_COMPLETION_REPORT.md \| RUST_194_MIGRATION_GUIDE.md \| `./05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\reports\rust_194\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_COMPLETION_REPORT.md \| RUST_194_RESEARCH_UPDATE.md \| `./research_notes/RUST_194_RESEARCH_UPDATE.md` \| 文件不存在: docs\archive\reports\rust_194\research_notes\RUST_194_RESEARCH_UPDATE.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_COMPLETION_REPORT.md \| rust_194_features_cheatsheet.md \| `./02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\reports\rust_194\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_COMPLETION_REPORT.md \| README.md \| `./02_reference/quick_reference/README.md` \| 文件不存在: docs\archive\reports\rust_194\02_reference\quick_reference\README.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_UPDATE_REPORT.md \| Rust 1.94 发布说明 \| `./06_toolchain/16_rust_1.94_release_notes.md` \| 文件不存在: docs\archive\reports\rust_194\06_toolchain\16_rust_1.94_release_notes.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_UPDATE_REPORT.md \| Rust 1.93 vs 1.94 对比 \| `./06_toolchain/17_rust_1.93_vs_1.94_comparison.md` \| 文件不存在: docs\archive\reports\rust_194\06_toolchain\17_rust_1.93_vs_1.94_comparison.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_UPDATE_REPORT.md \| Rust 1.94 采用指南 \| `./06_toolchain/18_rust_1.94_adoption_guide.md` \| 文件不存在: docs\archive\reports\rust_194\06_toolchain\18_rust_1.94_adoption_guide.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_UPDATE_REPORT.md \| Rust 1.94 迁移指南 \| `./05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\archive\reports\rust_194\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_UPDATE_REPORT.md \| Rust 1.94 研究笔记 \| `./research_notes/RUST_194_RESEARCH_UPDATE.md` \| 文件不存在: docs\archive\reports\rust_194\research_notes\RUST_194_RESEARCH_UPDATE.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_UPDATE_REPORT.md \| Rust 1.94 速查卡 \| `./02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\archive\reports\rust_194\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_UPDATE_REPORT.md \| c01 Rust 1.94 特性 \| `../crates/c01_ownership_borrow_scope/src/rust_194_features.rs` \| 文件不存在: docs\archive\reports\crates\c01_ownership_borrow_scope\src\rust_194_features.rs \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_UPDATE_REPORT.md \| c02 Rust 1.94 特性 \| `../crates/c02_type_system/src/rust_194_features.rs` \| 文件不存在: docs\archive\reports\crates\c02_type_system\src\rust_194_features.rs \|
+\| docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_UPDATE_REPORT.md \| c06 Rust 1.94 特性 \| `../crates/c06_async/src/rust_194_features.rs` \| 文件不存在: docs\archive\reports\crates\c06_async\src\rust_194_features.rs \|
+\| docs\archive\rust-ownership-chinese\rust_go_cpp_c_comprehensive_comparison.md \| T Drawable \| `item T` \| 文件不存在: docs\archive\rust-ownership-chinese\item T \|
+\| docs\archive\rust-ownership-chinese\rust_vs_go_comprehensive_analysis.md \| T any \| `x T` \| 文件不存在: docs\archive\rust-ownership-chinese\x T \|
+\| docs\archive\rust-ownership-chinese\rust_vs_go_comprehensive_analysis.md \| T Drawable \| `item T` \| 文件不存在: docs\archive\rust-ownership-chinese\item T \|
+\| docs\archive\rust-ownership-chinese\rust_vs_go_comprehensive_analysis.md \| T Cloneable \| `item T` \| 文件不存在: docs\archive\rust-ownership-chinese\item T \|
+\| docs\archive\rust-ownership-chinese\rust_vs_go_comprehensive_analysis.md \| T Number \| `numbers []T` \| 文件不存在: docs\archive\rust-ownership-chinese\numbers []T \|
+\| docs\archive\temp\FORMAL_AND_PRACTICAL_NAVIGATION.md \| 完整度报告 \| `../../archive/root_completion_reports/FINAL_100_PERCENT_COMPLETION_REPORT_2026_01_27.md` \| 文件不存在: docs\archive\root_completion_reports\FINAL_100_PERCENT_COMPLETION_REPORT_2026_01_27.md \|
+\| docs\archive\temp\QUICK_START_SPELL_CHECK.md \| SPELL_CHECK_CONFIGURATION.md \| `../spell_check/SPELL_CHECK_CONFIGURATION.md` \| 文件不存在: docs\archive\spell_check\SPELL_CHECK_CONFIGURATION.md \|
+\| docs\content\ecosystem\README.md \| Axum 基础 \| `axum_deep_dive.md#基础` \| 文件不存在: docs\content\ecosystem\axum_deep_dive.md \|
+\| docs\content\ecosystem\README.md \| 提取器详解 \| `axum_deep_dive.md#提取器` \| 文件不存在: docs\content\ecosystem\axum_deep_dive.md \|
+\| docs\content\ecosystem\README.md \| 中间件系统 \| `axum_deep_dive.md#中间件` \| 文件不存在: docs\content\ecosystem\axum_deep_dive.md \|
+\| docs\content\ecosystem\README.md \| 错误处理 \| `axum_deep_dive.md#错误处理` \| 文件不存在: docs\content\ecosystem\axum_deep_dive.md \|
+\| docs\content\ecosystem\README.md \| 性能优化 \| `axum_deep_dive.md#性能优化` \| 文件不存在: docs\content\ecosystem\axum_deep_dive.md \|
+\| docs\research_notes\00_COMPREHENSIVE_SUMMARY.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\research_notes\00_COMPREHENSIVE_SUMMARY.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\00_COMPREHENSIVE_SUMMARY.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN \| `../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\00_COMPREHENSIVE_SUMMARY.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\research_notes\00_COMPREHENSIVE_SUMMARY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\00_ORGANIZATION_AND_NAVIGATION.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\00_ORGANIZATION_AND_NAVIGATION.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN \| `../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\00_ORGANIZATION_AND_NAVIGATION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\100_PERCENT_COMPLETION_VERIFICATION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\ACTUAL_COMPLETION_STATUS_2026_02_28.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\AENEAS_INTEGRATION_PLAN.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\APPLICATION_TREES.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\ARGUMENTATION_CHAIN_AND_FLOW.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\ARGUMENTATION_GAP_INDEX.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\ARGUMENTATION_GAP_INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\AUTHORITATIVE_ALIGNMENT_GUIDE.md \| 100_PERCENT_AUTHORITATIVE_ALIGNMENT_COMPLETE_REPORT \| `../archive/process_reports/2026_02/100_PERCENT_AUTHORITATIVE_ALIGNMENT_COMPLETE_REPORT.md` \| 文件不存在: docs\archive\process_reports\2026_02\100_PERCENT_AUTHORITATIVE_ALIGNMENT_COMPLETE_REPORT.md \|
+\| docs\research_notes\AUTHORITATIVE_ALIGNMENT_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\AUTHORITATIVE_ALIGNMENT_STATUS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\AUTHORITATIVE_CONTENT_ALIGNMENT_REPORT.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\BEST_PRACTICES.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CARGO_194_FEATURES.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CHANGELOG.md \| docs/DOCS_STRUCTURE_OVERVIEW.md \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\research_notes\CHANGELOG.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CLASSIFICATION.md \| TASK_ORCHESTRATION_AND_EXECUTION_PLAN \| `../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\research_notes\CLASSIFICATION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\COGNITIVE_ARGUMENTATION_FRAMEWORK.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\COMPREHENSIVE_PROJECT_REPORT.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\COMPREHENSIVE_TASK_ORCHESTRATION_100_PERCENT.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\COMPREHENSIVE_TASK_ORCHESTRATION_2026_03_01.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CONCEPT_AXIOM_THEOREM_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CONCEPT_COMPARISON_TABLES.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CONCEPT_HIERARCHY_FRAMEWORK.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CONCEPT_RELATIONSHIP_NETWORK.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CONCURRENCY_CHEATSHEET.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CONST_EVAL_FORMALIZATION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CONTENT_ENHANCEMENT.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\CONTENT_ENHANCEMENT.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\CONTENT_ENHANCEMENT.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CONTRIBUTING.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN \| `../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\CONTRIBUTING.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\COQ_ISABELLE_PROOF_SCAFFOLDING.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\COQ_OF_RUST_INTEGRATION_PLAN.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CORE_FEATURES_FULL_CHAIN.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CORE_THEOREMS_EN_SUMMARY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CORE_THEOREMS_FULL_PROOFS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\COUNTER_EXAMPLES_COMPENDIUM.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\CROSS_REFERENCE_INDEX.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\research_notes\CROSS_REFERENCE_INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\DESIGN_MECHANISM_RATIONALE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\DISTRIBUTED_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\DISTRIBUTED_PATTERNS_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\DISTRIBUTED_PATTERN_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\DOMAIN_ANALYSIS_FRAMEWORK.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\ERROR_HANDLING_CHEATSHEET.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\EXAMPLE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\EXECUTABLE_SEMANTICS_ROADMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FAQ.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FAQ_COMPREHENSIVE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FEATURE_TEMPLATE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FINAL_100_PERCENT_COMPLETION_REPORT.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FINAL_100_PERCENT_COMPLETION_REPORT_2026_02_28.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FINAL_COMPLETION_PROGRESS_REPORT_2026_02_28.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FINAL_VERIFICATION_CHECKLIST.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FORMAL_CONCEPTS_ENCYCLOPEDIA.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FORMAL_FULL_MODEL_EN_SUMMARY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FORMAL_FULL_MODEL_OVERVIEW.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FORMAL_LANGUAGE_AND_PROOFS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FORMAL_METHODS_MASTER_INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FORMAL_PROOF_SYSTEM_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\FORMAL_VERIFICATION_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\GETTING_STARTED.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\GLOSSARY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\INCREMENTAL_UPDATE_FLOW.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\INDEX.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\INDEX.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \| `../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\INDEX.md \| COMPREHENSIVE_REVIEW_REPORT_2026_02.md \| `../archive/process_reports/2026_02/COMPREHENSIVE_REVIEW_REPORT_2026_02.md` \| 文件不存在: docs\archive\process_reports\2026_02\COMPREHENSIVE_REVIEW_REPORT_2026_02.md \|
+\| docs\research_notes\INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\INTERVIEW_QUESTIONS_COLLECTION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\L3_MACHINE_PROOF_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\LANGUAGE_SEMANTICS_EXPRESSIVENESS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\LEARNING_PATH_COMPREHENSIVE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\LIFETIME_CHEATSHEET.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\MACROS_CHEATSHEET.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\MAINTENANCE_GUIDE.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\MAINTENANCE_GUIDE.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN \| `../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\MAINTENANCE_GUIDE.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN \| `../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\MAINTENANCE_GUIDE.md \| TOC_AND_CONTENT_DEEPENING_PLAN \| `../archive/process_reports/2026_02/TOC_AND_CONTENT_DEEPENING_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\TOC_AND_CONTENT_DEEPENING_PLAN.md \|
+\| docs\research_notes\MAINTENANCE_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\OWNERSHIP_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\practical_applications.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\PROGRESS_TRACKING.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\PROJECT_COMPLETION_SUMMARY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\PROJECT_MAINTENANCE_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\PROOF_INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\PROOF_TECHNIQUES_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\PROOF_TREE_BORROW.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\PROOF_TREE_OWNERSHIP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\PROOF_TREE_TYPE_SAFETY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\QUALITY_CHECKLIST.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN \| `../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\QUALITY_CHECKLIST.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\QUALITY_CHECKLIST.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\QUICK_FIND.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\QUICK_FIND.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\QUICK_REFERENCE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\README.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\README.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN \| `../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\research_notes\README.md \| TOC_AND_CONTENT_DEEPENING_PLAN \| `../archive/process_reports/2026_02/TOC_AND_CONTENT_DEEPENING_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\TOC_AND_CONTENT_DEEPENING_PLAN.md \|
+\| docs\research_notes\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\README_100_PERCENT_COMPLETION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\research_methodology.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RESEARCH_NOTES_ORGANIZATION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RESEARCH_ROADMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RESOURCES.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUSTBELT_ALIGNMENT.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUSTSEM_SEMANTICS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_191_RESEARCH_UPDATE_2025_11_15.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_192_RESEARCH_UPDATE_2025_12_11.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_193_COUNTEREXAMPLES_INDEX.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN \| `../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\RUST_193_COUNTEREXAMPLES_INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_193_FEATURE_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN \| `../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md \| toolchain/10_rust_1.89_to_1.93_cumulative_features_overview \| `../06_toolchain/10_rust_1.89_to_1.93_cumulative_features_overview.md` \| 文件不存在: docs\06_toolchain\10_rust_1.89_to_1.93_cumulative_features_overview.md \|
+\| docs\research_notes\RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_194_195_FEATURE_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_194_COMPREHENSIVE_ANALYSIS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_194_COMPREHENSIVE_SEMANTICS_FRAMEWORK.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_194_CORE_NOTES_INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_194_DEEP_SEMANTIC_ANALYSIS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_194_MIND_REPRESENTATIONS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_194_RESEARCH_UPDATE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_BOOK_ALIGNMENT.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\RUST_FORMAL_METHODS_CHEATSHEET.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\STATISTICS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\SYSTEM_INTEGRATION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\SYSTEM_SUMMARY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\TASK_CHECKLIST.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\TEMPLATE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\THEOREMS_AND_PROOF_STRATEGIES.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\THEOREM_RUST_EXAMPLE_MAPPING.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\TOOLS_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\TUTORIAL_BORROW_CHECKER.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\TUTORIAL_CONCURRENCY_MODELS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\TUTORIAL_LIFETIMES.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\TUTORIAL_OWNERSHIP_SAFETY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\TUTORIAL_TYPE_SYSTEM.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\UNIFIED_SYSTEMATIC_FRAMEWORK.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\USER_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\VERIFICATION_TOOLS_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\VERIFICATION_TOOLS_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\VISUALIZATION_INDEX.md \| TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \| `../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#思维导图任务关系网络` \| 文件不存在: docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\research_notes\VISUALIZATION_INDEX.md \| TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \| `../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵` \| 文件不存在: docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\research_notes\VISUALIZATION_INDEX.md \| TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \| `../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵` \| 文件不存在: docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\research_notes\VISUALIZATION_INDEX.md \| TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \| `../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵` \| 文件不存在: docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\research_notes\VISUALIZATION_INDEX.md \| TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \| `../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#决策树任务优先级决策` \| 文件不存在: docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\research_notes\VISUALIZATION_INDEX.md \| TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \| `../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#进度跟踪矩阵` \| 文件不存在: docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\research_notes\VISUALIZATION_INDEX.md \| TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \| `../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#进度跟踪矩阵` \| 文件不存在: docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\research_notes\VISUALIZATION_INDEX.md \| 任务编排与执行计划 \| `../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md \|
+\| docs\research_notes\VISUALIZATION_INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\WORKFLOW_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\WORKFLOW_ENGINE_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\WRITING_GUIDE.md \| TOC_AND_CONTENT_DEEPENING_PLAN \| `../archive/process_reports/2026_02/TOC_AND_CONTENT_DEEPENING_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\TOC_AND_CONTENT_DEEPENING_PLAN.md \|
+\| docs\research_notes\WRITING_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\coq_skeleton\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\coq_skeleton\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\coq_skeleton\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\coq_skeleton\WEEK1_COMPLETION_SUMMARY.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\coq_skeleton\WEEK1_COMPLETION_SUMMARY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\coq_skeleton\WEEK1_COMPLETION_SUMMARY.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\experiments\compiler_optimizations.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\experiments\compiler_optimizations.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\experiments\compiler_optimizations.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\experiments\concurrency_performance.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\experiments\concurrency_performance.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\experiments\concurrency_performance.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\experiments\macro_expansion_performance.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\experiments\macro_expansion_performance.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\experiments\macro_expansion_performance.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\experiments\memory_analysis.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\experiments\memory_analysis.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\experiments\memory_analysis.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\experiments\performance_benchmarks.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\experiments\performance_benchmarks.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\experiments\performance_benchmarks.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\experiments\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\research_notes\experiments\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\experiments\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\experiments\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\00_completeness_gaps.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\00_completeness_gaps.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\00_completeness_gaps.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\APPLICATION_TREES.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\APPLICATION_TREES.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\APPLICATION_TREES.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\ASYNC_CONCEPT_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\ASYNC_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\ASYNC_CONCEPT_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\ASYNC_RUNTIME_DECISION_TREE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\ASYNC_RUNTIME_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\ASYNC_RUNTIME_DECISION_TREE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\async_state_machine.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\async_state_machine.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\async_state_machine.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\AXIOMATIC_SEMANTICS.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\AXIOMATIC_SEMANTICS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\AXIOMATIC_SEMANTICS.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\borrow_checker_proof.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\borrow_checker_proof.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\borrow_checker_proof.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\CASE_STUDIES.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\CASE_STUDIES.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\CASE_STUDIES.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\CONCEPT_AXIOM_THEOREM_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\CONCEPT_AXIOM_THEOREM_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\CONCEPT_AXIOM_THEOREM_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\CONCURRENCY_CONCEPT_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\CONCURRENCY_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\CONCURRENCY_CONCEPT_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\CONCURRENCY_SAFETY_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\CONCURRENCY_SAFETY_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\CONCURRENCY_SAFETY_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\CONTROL_FLOW_DECISION_TREE.md \| ControlFlow 示例 \| `../../../../examples/rust_194_control_flow_demo.rs` \| 文件不存在: E:\_src\examples\rust_194_control_flow_demo.rs \|
+\| docs\research_notes\formal_methods\COQ_FORMALIZATION_GUIDE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\COQ_FORMALIZATION_GUIDE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\COQ_FORMALIZATION_GUIDE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\COQ_FORMALIZATION_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\COQ_FORMALIZATION_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\COQ_FORMALIZATION_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\DESIGN_PATTERN_CONCEPT_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\DESIGN_PATTERN_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\DESIGN_PATTERN_CONCEPT_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\DESIGN_PATTERN_SELECTION_DECISION_TREE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\DESIGN_PATTERN_SELECTION_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\DESIGN_PATTERN_SELECTION_DECISION_TREE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\DISTRIBUTED_CONCEPT_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\DISTRIBUTED_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\DISTRIBUTED_CONCEPT_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\DISTRIBUTED_PATTERNS_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\DISTRIBUTED_PATTERNS_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\DISTRIBUTED_PATTERNS_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\ERROR_HANDLING_DECISION_TREE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\ERROR_HANDLING_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\ERROR_HANDLING_DECISION_TREE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\ERROR_HANDLING_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\ERROR_HANDLING_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\ERROR_HANDLING_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\ERROR_TYPE_SELECTION_DECISION_TREE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\ERROR_TYPE_SELECTION_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\ERROR_TYPE_SELECTION_DECISION_TREE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\FIVE_DIMENSIONAL_CONCEPT_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\FIVE_DIMENSIONAL_CONCEPT_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\FIVE_DIMENSIONAL_CONCEPT_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\FORMAL_FOUNDATIONS_INDEX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\FORMAL_FOUNDATIONS_INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\FORMAL_FOUNDATIONS_INDEX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_100_PERCENT_COMPLETION_REPORT.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_100_PERCENT_COMPLETION_REPORT.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_100_PERCENT_COMPLETION_REPORT.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_COMPARISON.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_COMPARISON.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_COMPARISON.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_COMPLETENESS_CHECKLIST.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_COMPLETENESS_CHECKLIST.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_COMPLETENESS_CHECKLIST.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_COMPLETION_PLAN.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_COMPLETION_PLAN.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\FORMAL_METHODS_COMPLETION_PLAN.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\GENERICS_TRAITS_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\GENERICS_TRAITS_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\GENERICS_TRAITS_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\IMPLEMENTATION_PROGRESS_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\IMPLEMENTATION_PROGRESS_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\IMPLEMENTATION_PROGRESS_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\LEARNING_PROGRESSION_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\LEARNING_PROGRESSION_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\LEARNING_PROGRESSION_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\LIFETIME_CONCEPT_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\LIFETIME_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\LIFETIME_CONCEPT_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\lifetime_formalization.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\lifetime_formalization.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\lifetime_formalization.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\LOGICAL_FOUNDATIONS.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\LOGICAL_FOUNDATIONS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\LOGICAL_FOUNDATIONS.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\MACRO_HYGIENE_DEEP_DIVE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\MACRO_HYGIENE_DEEP_DIVE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\MACRO_HYGIENE_DEEP_DIVE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\MACRO_SYSTEM_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\MACRO_SYSTEM_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\MACRO_SYSTEM_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\MEMORY_MODEL_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\MEMORY_MODEL_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\MEMORY_MODEL_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\OPERATIONAL_SEMANTICS.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\OPERATIONAL_SEMANTICS.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\OPERATIONAL_SEMANTICS.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\OWNERSHIP_CONCEPT_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\OWNERSHIP_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\OWNERSHIP_CONCEPT_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\ownership_model.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\ownership_model.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\ownership_model.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\OWNERSHIP_TRANSFER_DECISION_TREE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\OWNERSHIP_TRANSFER_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\OWNERSHIP_TRANSFER_DECISION_TREE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PARADIGM_COMPARISON_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PARADIGM_COMPARISON_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PARADIGM_COMPARISON_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\pin_self_referential.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\pin_self_referential.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\pin_self_referential.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_COMPLETION_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_COMPLETION_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_COMPLETION_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_STRATEGIES.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_STRATEGIES.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_STRATEGIES.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TECHNIQUES_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TECHNIQUES_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_TECHNIQUES_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_ADDITIONAL.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_ADDITIONAL.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_ADDITIONAL.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_ENHANCED.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_ENHANCED.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_ENHANCED.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_VISUALIZATION.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_VISUALIZATION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_VISUALIZATION.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_VISUAL_COMPLETION.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_VISUAL_COMPLETION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_TREES_VISUAL_COMPLETION.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_ASYNC_CONCURRENCY.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_ASYNC_CONCURRENCY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_ASYNC_CONCURRENCY.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_SEND_SYNC.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_SEND_SYNC.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_SEND_SYNC.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_TYPE_SAFETY.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_TYPE_SAFETY.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_TYPE_SAFETY.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_VARIANCE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_VARIANCE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\PROOF_TREE_VARIANCE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\research_notes\formal_methods\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\reference_cycles_formalization.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\reference_cycles_formalization.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\reference_cycles_formalization.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\RISK_ASSESSMENT_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\RISK_ASSESSMENT_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\RISK_ASSESSMENT_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\send_sync_formalization.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\send_sync_formalization.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\send_sync_formalization.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\SEPARATION_LOGIC.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\SEPARATION_LOGIC.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\SEPARATION_LOGIC.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\SERIALIZATION_DECISION_TREE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\SERIALIZATION_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\SERIALIZATION_DECISION_TREE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\slice_formalization.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\slice_formalization.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\slice_formalization.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\TESTING_STRATEGY_DECISION_TREE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\TESTING_STRATEGY_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\TESTING_STRATEGY_DECISION_TREE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\TYPE_SYSTEM_CONCEPT_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\TYPE_SYSTEM_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\TYPE_SYSTEM_CONCEPT_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\UNSAFE_CONCEPT_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\UNSAFE_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\UNSAFE_CONCEPT_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\VARIANCE_CONCEPT_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\VARIANCE_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\VARIANCE_CONCEPT_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\VERIFICATION_TOOLS_DECISION_TREE.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\VERIFICATION_TOOLS_DECISION_TREE.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\VERIFICATION_TOOLS_DECISION_TREE.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\VERIFICATION_TOOLS_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\VERIFICATION_TOOLS_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\VERIFICATION_TOOLS_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\WORKFLOW_CONCEPT_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\WORKFLOW_CONCEPT_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\WORKFLOW_CONCEPT_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_methods\WORKFLOW_ENGINES_MATRIX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_methods\WORKFLOW_ENGINES_MATRIX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_methods\WORKFLOW_ENGINES_MATRIX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\formal_modules\FORMALIZATION_ECOLOGY_MINDMAP.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\formal_modules\FORMALIZATION_ECOLOGY_MINDMAP.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\formal_modules\FORMALIZATION_ECOLOGY_MINDMAP.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\00_MASTER_INDEX.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\00_MASTER_INDEX.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\00_MASTER_INDEX.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\06_rust_idioms.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\06_rust_idioms.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\06_rust_idioms.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\07_anti_patterns.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\07_anti_patterns.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\07_anti_patterns.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md \| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN \| `../../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md \|
+\| docs\research_notes\software_design_theory\COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md \| FORMAT_AND_CONTENT_ALIGNMENT_PLAN \| `../../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md` \| 文件不存在: docs\archive\process_reports\2026_02\FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md \|
+\| docs\research_notes\software_design_theory\COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\research_notes\software_design_theory\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\abstract_factory.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\abstract_factory.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\abstract_factory.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\builder.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\builder.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\builder.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\factory_method.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\factory_method.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\factory_method.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\prototype.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\prototype.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\prototype.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\singleton.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\singleton.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\singleton.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\adapter.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\adapter.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\adapter.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\bridge.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\bridge.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\bridge.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\composite.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\composite.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\composite.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\decorator.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\decorator.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\decorator.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\facade.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\facade.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\facade.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\flyweight.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\flyweight.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\flyweight.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\proxy.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\proxy.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\proxy.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\chain_of_responsibility.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\chain_of_responsibility.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\chain_of_responsibility.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\command.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\command.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\command.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\interpreter.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\interpreter.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\interpreter.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\iterator.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\iterator.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\iterator.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\mediator.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\mediator.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\mediator.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\memento.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\memento.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\memento.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\observer.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\observer.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\observer.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\state.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\state.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\state.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\strategy.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\strategy.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\strategy.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\template_method.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\template_method.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\template_method.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\visitor.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\visitor.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\visitor.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\01_design_patterns_formal\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\02_workflow\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\02_workflow\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\02_workflow\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\01_synchronous.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\01_synchronous.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\01_synchronous.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\02_async.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\02_async.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\02_async.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\04_parallel.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\04_parallel.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\04_parallel.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\05_distributed.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\05_distributed.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\05_distributed.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\06_boundary_analysis.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\06_boundary_analysis.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\06_boundary_analysis.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\03_execution_models\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\02_effectiveness_proofs.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\02_effectiveness_proofs.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\02_effectiveness_proofs.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\03_integration_theory.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\03_integration_theory.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\03_integration_theory.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\README.md \| ../../../archive/process_reports/ \| `../../../archive/process_reports/README.md` \| 文件不存在: docs\archive\process_reports\README.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\04_compositional_engineering\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\expressive_inexpressive_matrix.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\expressive_inexpressive_matrix.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\expressive_inexpressive_matrix.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\safe_unsafe_matrix.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\safe_unsafe_matrix.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\safe_unsafe_matrix.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\supported_unsupported_matrix.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\supported_unsupported_matrix.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_boundary_system\supported_unsupported_matrix.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\software_design_theory\05_distributed\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\software_design_theory\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\software_design_theory\05_distributed\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\software_design_theory\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\type_theory\00_completeness_gaps.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\type_theory\00_completeness_gaps.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\type_theory\00_completeness_gaps.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\type_theory\advanced_types.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\type_theory\advanced_types.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\type_theory\advanced_types.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\type_theory\construction_capability.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\type_theory\construction_capability.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\type_theory\construction_capability.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\type_theory\CONST_EVALUATION.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\type_theory\CONST_EVALUATION.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\type_theory\CONST_EVALUATION.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\type_theory\lifetime_formalization.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\type_theory\lifetime_formalization.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\type_theory\lifetime_formalization.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\type_theory\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\research_notes\type_theory\README.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\type_theory\README.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\type_theory\README.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\type_theory\trait_system_formalization.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\type_theory\trait_system_formalization.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\type_theory\trait_system_formalization.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\type_theory\type_system_foundations.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\type_theory\type_system_foundations.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\type_theory\type_system_foundations.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\research_notes\type_theory\variance_theory.md \| Rust 1.94 迁移指南 \| `../05_guides/RUST_194_MIGRATION_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\RUST_194_MIGRATION_GUIDE.md \|
+\| docs\research_notes\type_theory\variance_theory.md \| Rust 1.94 特性速查 \| `../02_reference/quick_reference/rust_194_features_cheatsheet.md` \| 文件不存在: docs\research_notes\02_reference\quick_reference\rust_194_features_cheatsheet.md \|
+\| docs\research_notes\type_theory\variance_theory.md \| 性能调优指南 \| `../05_guides/PERFORMANCE_TUNING_GUIDE.md` \| 文件不存在: docs\research_notes\05_guides\PERFORMANCE_TUNING_GUIDE.md \|
+\| docs\rust-formal-engineering-system\README.md \| DOCS_STRUCTURE_OVERVIEW \| `../DOCS_STRUCTURE_OVERVIEW.md` \| 文件不存在: docs\DOCS_STRUCTURE_OVERVIEW.md \|
+\| docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md \| formal-foundations/models/ \| `formal-foun... \\|
+\\| MASTER_INDEX_AUTO.md \\|`formal-foundations/semantics/` \\| 54 \\| \\\| Semantics \\\| [formal-foundations/semantics/](formal-found... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations/proofs/` \\| 55 \\| \\\| Proofs \\\| [formal-foundations/proofs/](formal-foundations... \\|
 \\| MASTER_INDEX_AUTO.md \\| `coq-formalization/` \\| 56 \\| \\\| Coq Formalization \\\| [coq-formalization/](coq-formalizati... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations/models/ownership-types.md` \\| 73 \\| - **Theory**: [ownership-types.md](formal-foundations/models... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations/models/borrow-semantics.md` \\| 79 \\| - **Theory**: [borrow-semantics.md](formal-foundations/model... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations/models/lifetime-logic.md` \\| 85 \\| - **Theory**: [lifetime-logic.md](formal-foundations/models/... \\|
 \\| README.md \\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\| 56 \\| \\\| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_... \\|
-\\| README.md \\| `formal-foundations/README.md` \\| 65 \\| \\\| 形式化理论 \\\| [形式化基础](formal-foundations/README.md` \| 文件不存在: docs\rust-ownership-decidability\formal-foun... \\|
+\\| README.md \\| `formal-foundations/README.md`\\| 65 \\| \\\| 形式化理论 \\\| [形式化基础](formal-foundations/README.md` \| 文件不存在: docs\rust-ownership-decidability\formal-foun... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations\semantics\` \\| 54 \\| \\\| Semantics \\\| [formal-foundations\semantics\](formal-found... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations\proofs\` \\| 55 \\| \\\| Proofs \\\| [formal-foundations\proofs\](formal-foundations... \\|
 \\| MASTER_INDEX_AUTO.md \\| `coq-formalization\` \\| 56 \\| \\\| Coq Formalization \\\| [coq-formalization\](coq-formalizati... \\|
@@ -49,7 +1527,7 @@
 \\| README.md \\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\| 56 \\| \\\| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_... \\|
 \\| README.md \\| `formal-foundations\README.md` \\| 65 \\| \\\| 形式化理论 \\\| [形式化基础](formal-foundations\README.md \|
 \| docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md \| Coq代码 \| `... \\|
-\\| README.md \\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\| 243 \\| - [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md... \\|
+\\| README.md \\|`CROSS_REFERENCE_VERIFICATION_REPORT.md` \\| 243 \\| - [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md... \\|
 <!-- markdown-link-check-enable -->
 
 ## Missing Cross-References
@@ -127,15 +1605,14 @@ Files that mention key concepts but don't link to them:
 \| docs\templates\versioned_doc_template.md \| 版本化索引 \| `../../VERSION_INDEX.md` \| 文件不存在: VERSION_INDEX.md \|
 \| docs\templates\versioned_doc_template.md \| Rust 学习项目版本化规范 \| `../../VERSION_INDEX.md` \| 文件不存在: VERSION_INDEX.md \|
 
-### 锚点不存在 (1091个` | 文件不存在: docs\formal-found... \\|
+### 锚点不存在 (1091个` | 文件不存在: docs\formal-foundations... \\|
 
-\\| MASTER_INDEX_AUTO.md \\| `formal-foundations\proofs\` \\| 55 \\| \\| Proofs \\| [formal-foundations\proofs\](formal-foundations... \\|
 \\| MASTER_INDEX_AUTO.md \\| `coq-formalization\` \\| 56 \\| \\| Coq Formalization \\| [coq-formalization\](coq-formalizati... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations\models\ownership-types.md` \\| 73 \\| - **Theory**: [ownership-types.md](formal-foundations\models... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations\models\borrow-semantics.md` \\| 79 \\| - **Theory**: [borrow-semantics.md](formal-foundations\model... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations\models\lifetime-logic.md` \\| 85 \\| - **Theory**: [lifetime-logic.md](formal-foundations\models\... \\|
 \\| README.md \\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\| 56 \\| \\| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_... \\|
-\\| README.md \\| `formal-foundations\README.md` \\| 65 \\| \\| 形式化理论 \\| [形式化基础](formal-foundations\README.md` \| 文件不存在: docs\rust-ownership-decidability\formal-foun... \\|
+\\| README.md \\| `formal-foundations\README.md` \\| 65 \\| \\| 形式化理论 \\| [形式化基础](formal-foundations\README.md` \\| 文件不存在: docs\rust-ownership-decidability\formal-foun... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations\semantics\` \\| 54 \\| \\| Semantics \\| [formal-foundations\semantics\](formal-found... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations\proofs\` \\| 55 \\| \\| Proofs \\| [formal-foundations\proofs\](formal-foundations... \\|
 \\| MASTER_INDEX_AUTO.md \\| `coq-formalization\` \\| 56 \\| \\| Coq Formalization \\| [coq-formalization\](coq-formalizati... \\|
@@ -143,8 +1620,8 @@ Files that mention key concepts but don't link to them:
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations\models\borrow-semantics.md` \\| 79 \\| - **Theory**: [borrow-semantics.md](formal-foundations\model... \\|
 \\| MASTER_INDEX_AUTO.md \\| `formal-foundations\models\lifetime-logic.md` \\| 85 \\| - **Theory**: [lifetime-logic.md](formal-foundations\models\... \\|
 \\| README.md \\| `CROSS_REFERENCE_VERIFICATION_REPORT.md` \\| 56 \\| \\| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_... \\|
-\\| README.md \\| `formal-foundations\README.md` \\| 65 \\| \\| 形式化理论 \\| [形式化基础](formal-foundations\README.md \|
-\| docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md \| Coq代码 \| `... \\|
+\\| README.md \\| `formal-foundations\README.md` \\| 65 \\| \\| 形式化理论 \\| [形式化基础](formal-foundations\README.md \\|
+\\| docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md \\| Coq代码 \\| `... \\|
 \\| README.md \\|`CROSS_REFERENCE_VERIFICATION_REPORT.md` \\| 243 \\| - [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md... \\|
 <!-- markdown-link-check-enable -->
 
@@ -1606,10 +3083,14 @@ Files that mention key concepts but don't link to them:
 | docs\templates\versioned_doc_template.md | 版本化索引 | `../../VERSION_INDEX.md` | 文件不存在: VERSION_INDEX.md |
 | docs\templates\versioned_doc_template.md | Rust 学习项目版本化规范 | `../../VERSION_INDEX.md` | 文件不存在: VERSION_INDEX.md |
 
-### 锚点不存在 (1091个)
+### 锚点不存在 (1051个)
 
 | 源文件 | 链接文本 | 链接路径 | 问题 |
 |:---|:---|:---|:---|
+| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md | Rust 2026 Project Goals — 月度跟踪报告 | `#rust-2026-project-goals--月度跟踪报告` | 同文件锚点不存在: #rust-2026-project-goals--月度跟踪报告 |
+| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md | 🔴 P0 — 紧急（高影响力 + 官方里程碑临近或社区需求迫切） | `#-p0--紧急高影响力--官方里程碑临近或社区需求迫切` | 同文件锚点不存在: #-p0--紧急高影响力--官方里程碑临近或社区需求迫切 |
+| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md | 🟡 P1 — 重要（中等影响力 + 持续社区关注） | `#-p1--重要中等影响力--持续社区关注` | 同文件锚点不存在: #-p1--重要中等影响力--持续社区关注 |
+| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md | 🟢 P2 — 规划（长期价值 + 资源允许时推进） | `#-p2--规划长期价值--资源允许时推进` | 同文件锚点不存在: #-p2--规划长期价值--资源允许时推进 |
 | docs\01_core\README.md | 2. 借用与引用 (Borrowing \& References) | `#2-借用与引用-borrowing--references` | 同文件锚点不存在: #2-借用与引用-borrowing--references |
 | docs\02_reference\CROSS_LANGUAGE_COMPARISON.md | 所有权唯一性定理 | `../research_notes/formal_methods/ownership_model.md#定理-2-所有权唯一性` | 锚点不存在: #定理-2-所有权唯一性 |
 | docs\02_reference\CROSS_LANGUAGE_COMPARISON.md | 内存安全定理 | `../research_notes/formal_methods/ownership_model.md#定理-3-内存安全框架` | 锚点不存在: #定理-3-内存安全框架 |
@@ -1678,34 +3159,28 @@ Files that mention key concepts but don't link to them:
 | docs\02_reference\quick_reference\ai_ml_cheatsheet.md | 🤖 Rust AI/ML 速查卡 | `#-rust-aiml-速查卡` | 同文件锚点不存在: #-rust-aiml-速查卡 |
 | docs\02_reference\quick_reference\ai_ml_cheatsheet.md | 反例 4: 内存泄漏 - 循环引用张量缓存 | `#反例-4-内存泄漏---循环引用张量缓存` | 同文件锚点不存在: #反例-4-内存泄漏---循环引用张量缓存 |
 | docs\02_reference\quick_reference\ai_ml_cheatsheet.md | 反例 5: 边界情况 - 空张量操作 | `#反例-5-边界情况---空张量操作` | 同文件锚点不存在: #反例-5-边界情况---空张量操作 |
-| docs\02_reference\quick_reference\ai_ml_cheatsheet.md | Rust 1.95+ 在 AI/ML 中的深度应用 | `#-rust-194-在-aiml-中的深度应用` | 同文件锚点不存在: #-rust-194-在-aiml-中的深度应用 |
 | docs\02_reference\quick_reference\algorithms_cheatsheet.md | 算法与数据结构快速参考卡片 | `#算法与数据结构快速参考卡片` | 同文件锚点不存在: #算法与数据结构快速参考卡片 |
 | docs\02_reference\quick_reference\algorithms_cheatsheet.md | 示例 3: 动态规划 - 最长公共子序列 | `#示例-3-动态规划---最长公共子序列` | 同文件锚点不存在: #示例-3-动态规划---最长公共子序列 |
-| docs\02_reference\quick_reference\algorithms_cheatsheet.md | Rust 1.95+ 在算法中的深度应用 | `#-rust-194-在算法中的深度应用` | 同文件锚点不存在: #-rust-194-在算法中的深度应用 |
 | docs\02_reference\quick_reference\async_patterns.md | ⚡ Rust 异步编程速查卡 | `#-rust-异步编程速查卡` | 同文件锚点不存在: #-rust-异步编程速查卡 |
 | docs\02_reference\quick_reference\async_patterns.md | 🏗️ 运行时对比 | `#️-运行时对比` | 同文件锚点不存在: #️-运行时对比 |
 | docs\02_reference\quick_reference\async_patterns.md | 模式 1: Arc + Mutex | `#模式-1-arc--mutex` | 同文件锚点不存在: #模式-1-arc--mutex |
 | docs\02_reference\quick_reference\async_patterns.md | 模式 2: Arc + RwLock（读多写少） | `#模式-2-arc--rwlock读多写少` | 同文件锚点不存在: #模式-2-arc--rwlock读多写少 |
 | docs\02_reference\quick_reference\async_patterns.md | ⚠️ 常见陷阱 | `#️-常见陷阱` | 同文件锚点不存在: #️-常见陷阱 |
 | docs\02_reference\quick_reference\async_patterns.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
-| docs\02_reference\quick_reference\async_patterns.md | Rust 1.95+ 异步模式 | `#-rust-194-异步模式` | 同文件锚点不存在: #-rust-194-异步模式 |
 | docs\02_reference\quick_reference\cargo_cheatsheet.md | 📦 Cargo 速查卡 {#-cargo-速查卡} | `#-cargo-速查卡--cargo-速查卡` | 同文件锚点不存在: #-cargo-速查卡--cargo-速查卡 |
 | docs\02_reference\quick_reference\cargo_cheatsheet.md | ⚙️ 配置文件 {#️-配置文件} | `#️-配置文件-️-配置文件` | 同文件锚点不存在: #️-配置文件-️-配置文件 |
 | docs\02_reference\quick_reference\cargo_cheatsheet.md | 🛠️ 常用工具 {#️-常用工具} | `#️-常用工具-️-常用工具` | 同文件锚点不存在: #️-常用工具-️-常用工具 |
 | docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 📦 Rust 集合与迭代器速查卡 | `#-rust-集合与迭代器速查卡` | 同文件锚点不存在: #-rust-集合与迭代器速查卡 |
 | docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 🗺️ HashMap（哈希映射） | `#️-hashmap哈希映射` | 同文件锚点不存在: #️-hashmap哈希映射 |
 | docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 🍽️ 迭代器消费者 | `#️-迭代器消费者` | 同文件锚点不存在: #️-迭代器消费者 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | Rust 1.95+ `array_windows()` - 零开销固定大小窗口 | `#rust-194-array_windows---零开销固定大小窗口` | 同文件锚点不存在: #rust-194-array_windows---零开销固定大小窗口 |
+| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | Rust 1.95+ `array_windows()` - 零开销固定大小窗口 | `#rust-195-array_windows---零开销固定大小窗口` | 同文件锚点不存在: #rust-195-array_windows---零开销固定大小窗口 |
 | docs\02_reference\quick_reference\control_flow_functions_cheatsheet.md | 🔄 Rust 控制流与函数速查卡 | `#-rust-控制流与函数速查卡` | 同文件锚点不存在: #-rust-控制流与函数速查卡 |
 | docs\02_reference\quick_reference\control_flow_functions_cheatsheet.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
-| docs\02_reference\quick_reference\control_flow_functions_cheatsheet.md | 🆕 Rust 1.95+ 特性整合 | `#-rust-194-特性整合` | 同文件锚点不存在: #-rust-194-特性整合 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | ⚠️ Rust 错误处理速查卡 | `#️-rust-错误处理速查卡` | 同文件锚点不存在: #️-rust-错误处理速查卡 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | 模式 3: ? 操作符 | `#模式-3--操作符` | 同文件锚点不存在: #模式-3--操作符 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | anyhow - 灵活的错误处理 | `#anyhow---灵活的错误处理` | 同文件锚点不存在: #anyhow---灵活的错误处理 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | thiserror - 自定义错误类型 | `#thiserror---自定义错误类型` | 同文件锚点不存在: #thiserror---自定义错误类型 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | 反例 2: 在非 Result 返回类型函数中使用 ? | `#反例-2-在非-result-返回类型函数中使用-` | 同文件锚点不存在: #反例-2-在非-result-返回类型函数中使用- |
-| docs\02_reference\quick_reference\error_handling_cheatsheet.md | Rust 1.95+ ControlFlow 深度错误控制 | `#-rust-194-controlflow-深度错误控制` | 同文件锚点不存在: #-rust-194-controlflow-深度错误控制 |
-| docs\02_reference\quick_reference\error_handling_cheatsheet.md | Rust 1.95+ ControlFlow 核心 API | `#rust-194-controlflow-核心-api` | 同文件锚点不存在: #rust-194-controlflow-核心-api |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | 生产场景 1：批量任务处理（超时 + 错误阈值） | `#生产场景-1批量任务处理超时--错误阈值` | 同文件锚点不存在: #生产场景-1批量任务处理超时--错误阈值 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | 📚 相关资源 | `#-相关资源-1` | 同文件锚点不存在: #-相关资源-1 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
@@ -1713,16 +3188,11 @@ Files that mention key concepts but don't link to them:
 | docs\02_reference\quick_reference\generics_cheatsheet.md | 🔷 Rust 泛型编程速查卡 | `#-rust-泛型编程速查卡` | 同文件锚点不存在: #-rust-泛型编程速查卡 |
 | docs\02_reference\quick_reference\generics_cheatsheet.md | 📚 相关资源 | `#-相关资源-1` | 同文件锚点不存在: #-相关资源-1 |
 | docs\02_reference\quick_reference\generics_cheatsheet.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
-| docs\02_reference\quick_reference\generics_cheatsheet.md | 🆕 Rust 1.95+ 特性整合 | `#-rust-194-特性整合` | 同文件锚点不存在: #-rust-194-特性整合 |
-| docs\02_reference\quick_reference\generics_cheatsheet.md | Rust 1.95+ 在泛型中的深度应用 | `#-rust-194-在泛型中的深度应用` | 同文件锚点不存在: #-rust-194-在泛型中的深度应用 |
 | docs\02_reference\quick_reference\generics_cheatsheet.md | 生命周期速查卡 | `./type_system.md#生命周期` | 锚点不存在: #生命周期 |
 | docs\02_reference\quick_reference\modules_cheatsheet.md | 📦 Rust 模块系统速查卡 | `#-rust-模块系统速查卡` | 同文件锚点不存在: #-rust-模块系统速查卡 |
 | docs\02_reference\quick_reference\modules_cheatsheet.md | 🛤️ 路径系统 | `#️-路径系统` | 同文件锚点不存在: #️-路径系统 |
 | docs\02_reference\quick_reference\modules_cheatsheet.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
-| docs\02_reference\quick_reference\modules_cheatsheet.md | 🆕 Rust 1.95+ 特性整合 | `#-rust-194-特性整合` | 同文件锚点不存在: #-rust-194-特性整合 |
 | docs\02_reference\quick_reference\network_programming_cheatsheet.md | 网络编程快速参考卡片 | `#网络编程快速参考卡片` | 同文件锚点不存在: #网络编程快速参考卡片 |
-| docs\02_reference\quick_reference\network_programming_cheatsheet.md | 🆕 Rust 1.95+ 特性整合 | `#-rust-194-特性整合` | 同文件锚点不存在: #-rust-194-特性整合 |
-| docs\02_reference\quick_reference\network_programming_cheatsheet.md | Rust 1.95+ 在网络编程中的深度应用 | `#-rust-194-在网络编程中的深度应用` | 同文件锚点不存在: #-rust-194-在网络编程中的深度应用 |
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | 🦀 所有权系统速查卡 | `#-所有权系统速查卡` | 同文件锚点不存在: #-所有权系统速查卡 |
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | 🏗️ 智能指针速查 | `#️-智能指针速查` | 同文件锚点不存在: #️-智能指针速查 |
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | `Box<T>` - 堆分配 | `#boxt---堆分配` | 同文件锚点不存在: #boxt---堆分配 |
@@ -1732,11 +3202,9 @@ Files that mention key concepts but don't link to them:
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | `Mutex<T>` - 互斥锁（多线程） | `#mutext---互斥锁多线程` | 同文件锚点不存在: #mutext---互斥锁多线程 |
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | ⚠️ 低效模式 | `#️-低效模式` | 同文件锚点不存在: #️-低效模式 |
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
-| docs\02_reference\quick_reference\ownership_cheatsheet.md | 🆕 Rust 1.95+ 特性整合 | `#-rust-194-特性整合` | 同文件锚点不存在: #-rust-194-特性整合 |
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | 生命周期速查卡 | `./type_system.md#生命周期` | 锚点不存在: #生命周期 |
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | 借用检查器速查卡 | `./ownership_cheatsheet.md#借用规则` | 锚点不存在: #借用规则 |
 | docs\02_reference\quick_reference\process_management_cheatsheet.md | 进程管理快速参考卡片 | `#进程管理快速参考卡片` | 同文件锚点不存在: #进程管理快速参考卡片 |
-| docs\02_reference\quick_reference\process_management_cheatsheet.md | 🆕 Rust 1.95+ 特性整合 | `#-rust-194-特性整合` | 同文件锚点不存在: #-rust-194-特性整合 |
 | docs\02_reference\quick_reference\README.md | Rust 快速参考指南 {#-rust-快速参考指南} | `#rust-快速参考指南--rust-快速参考指南` | 同文件锚点不存在: #rust-快速参考指南--rust-快速参考指南 |
 | docs\02_reference\quick_reference\README.md | 15. 进程管理速查卡 ⭐ NEW | `#15-进程管理速查卡--new` | 同文件锚点不存在: #15-进程管理速查卡--new |
 | docs\02_reference\quick_reference\README.md | 16. 网络编程速查卡 ⭐ NEW | `#16-网络编程速查卡--new` | 同文件锚点不存在: #16-网络编程速查卡--new |
@@ -1756,22 +3224,16 @@ Files that mention key concepts but don't link to them:
 | docs\02_reference\quick_reference\smart_pointers_cheatsheet.md | `Arc<Mutex<T>>` - 多线程共享可变数据 | `#arcmutext---多线程共享可变数据` | 同文件锚点不存在: #arcmutext---多线程共享可变数据 |
 | docs\02_reference\quick_reference\smart_pointers_cheatsheet.md | `Arc<RwLock<T>>` - 多线程读写锁 | `#arcrwlockt---多线程读写锁` | 同文件锚点不存在: #arcrwlockt---多线程读写锁 |
 | docs\02_reference\quick_reference\smart_pointers_cheatsheet.md | `Rc<RefCell<Vec<T>>>` - 共享可变向量 | `#rcrefcellvect---共享可变向量` | 同文件锚点不存在: #rcrefcellvect---共享可变向量 |
-| docs\02_reference\quick_reference\smart_pointers_cheatsheet.md | 示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.95+ 增强） | `#示例-4-lazycell-和-lazylockrust-180rust-194-增强` | 同文件锚点不存在: #示例-4-lazycell-和-lazylockrust-180rust-194-增强 |
-| docs\02_reference\quick_reference\smart_pointers_cheatsheet.md | Rust 1.95+ 新增 API | `#rust-194-新增-api` | 同文件锚点不存在: #rust-194-新增-api |
 | docs\02_reference\quick_reference\strings_formatting_cheatsheet.md | 📝 Rust 字符串与格式化速查卡 | `#-rust-字符串与格式化速查卡` | 同文件锚点不存在: #-rust-字符串与格式化速查卡 |
 | docs\02_reference\quick_reference\strings_formatting_cheatsheet.md | ✂️ 字符串操作 | `#️-字符串操作` | 同文件锚点不存在: #️-字符串操作 |
 | docs\02_reference\quick_reference\strings_formatting_cheatsheet.md | String ↔ \&str | `#string--str` | 同文件锚点不存在: #string--str |
 | docs\02_reference\quick_reference\strings_formatting_cheatsheet.md | 🖨️ 格式化输出 | `#️-格式化输出` | 同文件锚点不存在: #️-格式化输出 |
 | docs\02_reference\quick_reference\strings_formatting_cheatsheet.md | 反例 4: format!  panic 导致的拒绝服务 | `#反例-4-format--panic-导致的拒绝服务` | 同文件锚点不存在: #反例-4-format--panic-导致的拒绝服务 |
-| docs\02_reference\quick_reference\strings_formatting_cheatsheet.md | 🆕 Rust 1.95+ 特性整合 | `#-rust-194-特性整合` | 同文件锚点不存在: #-rust-194-特性整合 |
 | docs\02_reference\quick_reference\testing_cheatsheet.md | 🧪 Rust 测试速查卡 | `#-rust-测试速查卡` | 同文件锚点不存在: #-rust-测试速查卡 |
 | docs\02_reference\quick_reference\testing_cheatsheet.md | 🛠️ 测试工具和库 | `#️-测试工具和库` | 同文件锚点不存在: #️-测试工具和库 |
-| docs\02_reference\quick_reference\testing_cheatsheet.md | 🆕 Rust 1.95+ 特性整合 | `#-rust-194-特性整合` | 同文件锚点不存在: #-rust-194-特性整合 |
-| docs\02_reference\quick_reference\testing_cheatsheet.md | Rust 1.95+ 在测试中的深度应用 | `#-rust-194-在测试中的深度应用` | 同文件锚点不存在: #-rust-194-在测试中的深度应用 |
 | docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 🔀 Rust 线程与并发速查卡 | `#-rust-线程与并发速查卡` | 同文件锚点不存在: #-rust-线程与并发速查卡 |
 | docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 反例 2: 死锁 - 重复获取同一 Mutex | `#反例-2-死锁---重复获取同一-mutex` | 同文件锚点不存在: #反例-2-死锁---重复获取同一-mutex |
 | docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 📚 相关资源 | `#-相关资源-1` | 同文件锚点不存在: #-相关资源-1 |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | Rust 1.95+ 并发特性 | `#-rust-194-并发特性` | 同文件锚点不存在: #-rust-194-并发特性 |
 | docs\02_reference\quick_reference\type_system.md | 🔷 Rust 类型系统速查卡 | `#-rust-类型系统速查卡` | 同文件锚点不存在: #-rust-类型系统速查卡 |
 | docs\02_reference\quick_reference\type_system.md | 🏗️ Trait 系统 | `#️-trait-系统` | 同文件锚点不存在: #️-trait-系统 |
 | docs\02_reference\quick_reference\type_system.md | 协变（Covariant）- \&T | `#协变covariant--t` | 同文件锚点不存在: #协变covariant--t |
@@ -1782,10 +3244,7 @@ Files that mention key concepts but don't link to them:
 | docs\02_reference\quick_reference\type_system.md | PartialEq \& Eq | `#partialeq--eq` | 同文件锚点不存在: #partialeq--eq |
 | docs\02_reference\quick_reference\type_system.md | PartialOrd \& Ord | `#partialord--ord` | 同文件锚点不存在: #partialord--ord |
 | docs\02_reference\quick_reference\type_system.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
-| docs\02_reference\quick_reference\type_system.md | Rust 1.95+ 更新 | `#-rust-194-更新` | 同文件锚点不存在: #-rust-194-更新 |
 | docs\02_reference\quick_reference\wasm_cheatsheet.md | WASM 快速参考卡片 | `#wasm-快速参考卡片` | 同文件锚点不存在: #wasm-快速参考卡片 |
-| docs\02_reference\quick_reference\wasm_cheatsheet.md | 🆕 Rust 1.95+ 特性整合 | `#-rust-194-特性整合` | 同文件锚点不存在: #-rust-194-特性整合 |
-| docs\02_reference\quick_reference\wasm_cheatsheet.md | Rust 1.95+ 在WASM中的深度应用 | `#-rust-194-在wasm中的深度应用` | 同文件锚点不存在: #-rust-194-在wasm中的深度应用 |
 | docs\04_research\VERUSBELT_PLDI_2026.md | ⚖️ 与相关工作的对比 | `#️-与相关工作的对比` | 同文件锚点不存在: #️-与相关工作的对比 |
 | docs\04_thinking\DECISION_GRAPH_NETWORK.md | Rust 决策图网 / Decision Graph Network | `#rust-决策图网--decision-graph-network` | 同文件锚点不存在: #rust-决策图网--decision-graph-network |
 | docs\04_thinking\MIND_MAP_COLLECTION.md | 🗺️ 核心概念思维导图 {#️-核心概念思维导图} | `#️-核心概念思维导图-️-核心概念思维导图` | 同文件锚点不存在: #️-核心概念思维导图-️-核心概念思维导图 |
@@ -1799,14 +3258,9 @@ Files that mention key concepts but don't link to them:
 | docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 🗺️ 1. 思维导图 (Mind Map) | `#️-1-思维导图-mind-map` | 同文件锚点不存在: #️-1-思维导图-mind-map |
 | docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 3.9.1 借用 ↔ 所有权转换树 | `#391-借用--所有权转换树` | 同文件锚点不存在: #391-借用--所有权转换树 |
 | docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 3.9.2 Option ↔ Result 转换树 | `#392-option--result-转换树` | 同文件锚点不存在: #392-option--result-转换树 |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | Rust 1.95+ 持续更新更新 | `#-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新 |
-| docs\05_guides\ADVANCED_TOPICS_DEEP_DIVE.md | Rust 1.95+ 高级特性深度解析 | `#-rust-194-高级特性深度解析` | 同文件锚点不存在: #-rust-194-高级特性深度解析 |
-| docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | Rust 1.95+ ControlFlow API 高级错误控制 | `#rust-194-controlflow-api-高级错误控制` | 同文件锚点不存在: #rust-194-controlflow-api-高级错误控制 |
 | docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | ControlFlow 与 Try  trait 集成 | `#controlflow-与-try--trait-集成` | 同文件锚点不存在: #controlflow-与-try--trait-集成 |
 | docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | 🏗️ 异步编程模式（5+ 完整示例） | `#️-异步编程模式5-完整示例` | 同文件锚点不存在: #️-异步编程模式5-完整示例 |
-| docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | 🆕 Rust 1.95+ 特性 | `#-rust-194-特性` | 同文件锚点不存在: #-rust-194-特性 |
 | docs\05_guides\BEST_PRACTICES.md | Rust 项目最佳实践指南 | `#rust-项目最佳实践指南` | 同文件锚点不存在: #rust-项目最佳实践指南 |
-| docs\05_guides\BEST_PRACTICES.md | Rust 1.95+ 最佳实践（深度指南） | `#-rust-194-最佳实践深度指南` | 同文件锚点不存在: #-rust-194-最佳实践深度指南 |
 | docs\05_guides\BEST_PRACTICES.md | 1. array\_windows - 零开销滑动窗口 | `#1-array_windows---零开销滑动窗口` | 同文件锚点不存在: #1-array_windows---零开销滑动窗口 |
 | docs\05_guides\BEST_PRACTICES.md | 2. ControlFlow - 清晰的提前终止语义 | `#2-controlflow---清晰的提前终止语义` | 同文件锚点不存在: #2-controlflow---清晰的提前终止语义 |
 | docs\05_guides\BEST_PRACTICES.md | 3. LazyLock/LazyCell - 延迟初始化优化 | `#3-lazylocklazycell---延迟初始化优化` | 同文件锚点不存在: #3-lazylocklazycell---延迟初始化优化 |
@@ -1817,26 +3271,16 @@ Files that mention key concepts but don't link to them:
 | docs\05_guides\BEST_PRACTICES.md | 4. Vec::pop\_if - 条件弹出 | `#4-vecpop_if---条件弹出` | 同文件锚点不存在: #4-vecpop_if---条件弹出 |
 | docs\05_guides\CLI_APPLICATIONS_GUIDE.md | 超时处理 | `#错误处理最佳实践` | 同文件锚点不存在: #错误处理最佳实践 |
 | docs\05_guides\CROSS_MODULE_INTEGRATION_EXAMPLES.md | 场景3: 嵌入式 + 云端协同 | `#场景3-嵌入式--云端协同` | 同文件锚点不存在: #场景3-嵌入式--云端协同 |
-| docs\05_guides\CROSS_MODULE_INTEGRATION_EXAMPLES.md | Rust 1.95+ 跨模块集成最佳实践 | `#-rust-194-跨模块集成最佳实践` | 同文件锚点不存在: #-rust-194-跨模块集成最佳实践 |
 | docs\05_guides\CXX_RUST_INTEROP_EVALUATION.md | C++ ↔ Rust 互操作评估 | `#c--rust-互操作评估` | 同文件锚点不存在: #c--rust-互操作评估 |
-| docs\05_guides\DESIGN_PATTERNS_USAGE_GUIDE.md | 🆕 Rust 1.95+ 特性在设计模式中的应用 | `#-rust-194-特性在设计模式中的应用` | 同文件锚点不存在: #-rust-194-特性在设计模式中的应用 |
-| docs\05_guides\DESIGN_PATTERNS_USAGE_GUIDE.md | 传统实现 vs Rust 1.95+ 实现 | `#传统实现-vs-rust-194-实现` | 同文件锚点不存在: #传统实现-vs-rust-194-实现 |
 | docs\05_guides\FINAL_DOCUMENTATION_COMPLETION_GUIDE.md | 📚 文档完善最终指南 - 2026-01-27 {#-文档完善最终指南---2026-01-27} | `#-文档完善最终指南---2026-01-27--文档完善最终指南---2026-01-27` | 同文件锚点不存在: #-文档完善最终指南---2026-01-27--文档完善最终指南---2026-01-27 |
-| docs\05_guides\FINAL_DOCUMENTATION_COMPLETION_GUIDE.md | Rust 1.95+ 文档完成指南更新 | `#-rust-194-文档完成指南更新` | 同文件锚点不存在: #-rust-194-文档完成指南更新 |
-| docs\05_guides\FINAL_DOCUMENTATION_COMPLETION_GUIDE.md | Rust 1.95+ 文档整合检查清单 | `#rust-194-文档整合检查清单` | 同文件锚点不存在: #rust-194-文档整合检查清单 |
 | docs\05_guides\FINAL_DOCUMENTATION_COMPLETION_GUIDE.md | 可选后续 | `#3-可选后续非阻塞-100` | 同文件锚点不存在: #3-可选后续非阻塞-100 |
 | docs\05_guides\FORMAL_VERIFICATION_INTEGRATION_GUIDE.md | 🧪 Miri - 内存安全验证 | `#-miri---内存安全验证` | 同文件锚点不存在: #-miri---内存安全验证 |
 | docs\05_guides\FORMAL_VERIFICATION_INTEGRATION_GUIDE.md | 🔍 Kani - 模型检查 | `#-kani---模型检查` | 同文件锚点不存在: #-kani---模型检查 |
 | docs\05_guides\FORMAL_VERIFICATION_INTEGRATION_GUIDE.md | 📐 Prusti - 契约编程 | `#-prusti---契约编程` | 同文件锚点不存在: #-prusti---契约编程 |
-| docs\05_guides\INLINE_ASSEMBLY_GUIDE.md | Rust 1.95+ 在内联汇编中的应用 | `#-rust-194-在内联汇编中的应用` | 同文件锚点不存在: #-rust-194-在内联汇编中的应用 |
 | docs\05_guides\MACRO_SYSTEM_USAGE_GUIDE.md | ⚠️ 宏的常见陷阱与调试技巧 | `#️-宏的常见陷阱与调试技巧` | 同文件锚点不存在: #️-宏的常见陷阱与调试技巧 |
-| docs\05_guides\MACRO_SYSTEM_USAGE_GUIDE.md | 🆕 Rust 1.95+ 特性 | `#-rust-194-特性` | 同文件锚点不存在: #-rust-194-特性 |
-| docs\05_guides\MACRO_SYSTEM_USAGE_GUIDE.md | Rust 1.95+ 在宏系统中的应用 | `#-rust-194-在宏系统中的应用` | 同文件锚点不存在: #-rust-194-在宏系统中的应用 |
 | docs\05_guides\MIRI_PRACTICAL_GUIDE.md | ⚙️ 安装与运行 | `#️-安装与运行` | 同文件锚点不存在: #️-安装与运行 |
 | docs\05_guides\MIRI_PRACTICAL_GUIDE.md | ✍️ 编写 Miri 友好测试的实战流程 | `#️-编写-miri-友好测试的实战流程` | 同文件锚点不存在: #️-编写-miri-友好测试的实战流程 |
 | docs\05_guides\MIRI_PRACTICAL_GUIDE.md | ⚠️ Miri 的局限性 | `#️-miri-的局限性` | 同文件锚点不存在: #️-miri-的局限性 |
-| docs\05_guides\PERFORMANCE_TESTING_REPORT.md | Rust 1.95+ 性能测试与基准 | `#-rust-194-性能测试与基准` | 同文件锚点不存在: #-rust-194-性能测试与基准 |
-| docs\05_guides\PERFORMANCE_TUNING_GUIDE.md | 🆕 Rust 1.95+ 特性 | `#-rust-194-特性` | 同文件锚点不存在: #-rust-194-特性 |
 | docs\05_guides\PERFORMANCE_TUNING_GUIDE.md | 1. `array_windows()` - 零开销滑动窗口迭代 | `#1-array_windows---零开销滑动窗口迭代` | 同文件锚点不存在: #1-array_windows---零开销滑动窗口迭代 |
 | docs\05_guides\PERFORMANCE_TUNING_GUIDE.md | 2. `ControlFlow<B, C>` - 流控制的零成本抽象 | `#2-controlflowb-c---流控制的零成本抽象` | 同文件锚点不存在: #2-controlflowb-c---流控制的零成本抽象 |
 | docs\05_guides\RUST_196_GUIDES_INDEX.md | isqrt 最佳实践 | `./BEST_PRACTICES.md#rust-196-最佳实践` | 锚点不存在: #rust-196-最佳实践 |
@@ -1856,7 +3300,6 @@ Files that mention key concepts but don't link to them:
 | docs\05_guides\UNSAFE_RUST_GUIDE.md | Rust 1.95+ 在 Unsafe Rust 中的应用 | `#-rust-194-在-unsafe-rust-中的应用` | 同文件锚点不存在: #-rust-194-在-unsafe-rust-中的应用 |
 | docs\05_guides\WASM_USAGE_GUIDE.md | Rust 1.95+ 在 WASM 开发中的应用 | `#-rust-194-在-wasm-开发中的应用` | 同文件锚点不存在: #-rust-194-在-wasm-开发中的应用 |
 | docs\05_guides\workflow\01_workflow_theory.md | 14. 工作流理论与形式化模型 | `#14-工作流理论与形式化模型` | 同文件锚点不存在: #14-工作流理论与形式化模型 |
-| docs\05_guides\workflow\01_workflow_theory.md | Rust 1.95+ 工作流理论应用 | `#-rust-194-工作流理论应用` | 同文件锚点不存在: #-rust-194-工作流理论应用 |
 | docs\06_toolchain\01_compiler_features.md | Rust 历史版本文档索引 | `../README.md#相关资源` | 锚点不存在: #相关资源 |
 | docs\06_toolchain\03_rustdoc_advanced.md | ⚠️ 避免 | `#️-避免` | 同文件锚点不存在: #️-避免 |
 | docs\06_toolchain\03_rustdoc_advanced.md | Rust 历史版本文档索引 | `../README.md#相关资源` | 锚点不存在: #相关资源 |
@@ -1864,16 +3307,12 @@ Files that mention key concepts but don't link to them:
 | docs\06_toolchain\07_rust_1.93_full_changelog.md | Rust 1.93 完整变更清单 | `#rust-193-完整变更清单` | 同文件锚点不存在: #rust-193-完整变更清单 |
 | docs\06_toolchain\07_rust_1.93_full_changelog.md | cargo tree --format 长格式 | `#cargo-tree---format-长格式` | 同文件锚点不存在: #cargo-tree---format-长格式 |
 | docs\06_toolchain\07_rust_1.93_full_changelog.md | cargo clean --workspace | `#cargo-clean---workspace` | 同文件锚点不存在: #cargo-clean---workspace |
-| docs\06_toolchain\07_rust_1.93_full_changelog.md | Rust 1.95+ 更新 | `#-rust-194-更新` | 同文件锚点不存在: #-rust-194-更新 |
 | docs\06_toolchain\09_rust_1.93_compatibility_deep_dive.md | Rust 1.93 兼容性深度解析 | `#rust-193-兼容性深度解析` | 同文件锚点不存在: #rust-193-兼容性深度解析 |
-| docs\06_toolchain\09_rust_1.93_compatibility_deep_dive.md | Rust 1.95+ 更新 | `#-rust-194-更新` | 同文件锚点不存在: #-rust-194-更新 |
 | docs\06_toolchain\11_rust_1.93_cargo_rustdoc_changes.md | Rust 1.93 Cargo 与 Rustdoc 变更详解 | `#rust-193-cargo-与-rustdoc-变更详解` | 同文件锚点不存在: #rust-193-cargo-与-rustdoc-变更详解 |
 | docs\06_toolchain\11_rust_1.93_cargo_rustdoc_changes.md | cargo tree --format 长格式 | `#cargo-tree---format-长格式` | 同文件锚点不存在: #cargo-tree---format-长格式 |
 | docs\06_toolchain\11_rust_1.93_cargo_rustdoc_changes.md | cargo clean --workspace | `#cargo-clean---workspace` | 同文件锚点不存在: #cargo-clean---workspace |
-| docs\06_toolchain\11_rust_1.93_cargo_rustdoc_changes.md | Rust 1.95+ 更新 | `#-rust-194-更新` | 同文件锚点不存在: #-rust-194-更新 |
 | docs\06_toolchain\14_rust_1.95_nightly_preview.md | 1. `-Zinstrument-mcount` | `#1--zinstrument-mcount` | 同文件锚点不存在: #1--zinstrument-mcount |
 | docs\06_toolchain\14_rust_1.95_nightly_preview.md | 2. `-Cdebuginfo-compression` | `#2--cdebuginfo-compression` | 同文件锚点不存在: #2--cdebuginfo-compression |
-| docs\06_toolchain\14_rust_1.95_nightly_preview.md | Rust 1.95+ 更新 | `#-rust-194-更新` | 同文件锚点不存在: #-rust-194-更新 |
 | docs\06_toolchain\cargo_script_guide.md | Cargo Script / Frontmatter 指南 | `#cargo-script--frontmatter-指南` | 同文件锚点不存在: #cargo-script--frontmatter-指南 |
 | docs\06_toolchain\CRANELIFT_BACKEND_GUIDE.md | ⏱️ 为什么 Cranelift 重要 | `#️-为什么-cranelift-重要` | 同文件锚点不存在: #️-为什么-cranelift-重要 |
 | docs\06_toolchain\CRANELIFT_BACKEND_GUIDE.md | ⚙️ 安装与配置 | `#️-安装与配置` | 同文件锚点不存在: #️-安装与配置 |
@@ -1907,12 +3346,10 @@ Files that mention key concepts but don't link to them:
 | docs\07_project\DOCUMENTATION_CROSS_REFERENCE_GUIDE.md | 速查卡 ↔ 研究笔记映射 | `#速查卡--研究笔记映射` | 同文件锚点不存在: #速查卡--研究笔记映射 |
 | docs\07_project\KNOWLEDGE_STRUCTURE_FRAMEWORK.md | Rust 知识结构框架文档 | `#rust-知识结构框架文档` | 同文件锚点不存在: #rust-知识结构框架文档 |
 | docs\07_project\KNOWLEDGE_STRUCTURE_FRAMEWORK.md | 🗺️ 思维表征方式 | `#️-思维表征方式` | 同文件锚点不存在: #️-思维表征方式 |
-| docs\07_project\KNOWLEDGE_STRUCTURE_FRAMEWORK.md | Rust 1.95+ 持续更新更新 | `#-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新 |
 | docs\07_project\MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md | 模块知识结构补充指南 | `#模块知识结构补充指南` | 同文件锚点不存在: #模块知识结构补充指南 |
 | docs\07_project\MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md | 🗺️ 思维表征方式补充 | `#️-思维表征方式补充` | 同文件锚点不存在: #️-思维表征方式补充 |
 | docs\07_project\PROJECT_ARCHITECTURE_GUIDE.md | 项目架构指南 | `#项目架构指南` | 同文件锚点不存在: #项目架构指南 |
 | docs\07_project\PROJECT_ARCHITECTURE_GUIDE.md | 🏗️ 项目结构 | `#️-项目结构` | 同文件锚点不存在: #️-项目结构 |
-| docs\07_project\PROJECT_ARCHITECTURE_GUIDE.md | Rust 1.95+ 持续更新更新 | `#-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新 |
 | docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | crates/ - 学习模块 | `#crates---学习模块` | 同文件锚点不存在: #crates---学习模块 |
 | docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | 🏗️ 模块标准结构 | `#️-模块标准结构` | 同文件锚点不存在: #️-模块标准结构 |
 | docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | guides/ - 学习指南 | `#guides---学习指南` | 同文件锚点不存在: #guides---学习指南 |
@@ -2732,7 +4169,7 @@ Files that mention key concepts but don't link to them:
 | docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | 40 |
 | docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 38 |
 | docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md | 34 |
-| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md | 26 |
+| docs\00_meta\analysis\RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md | 30 |
 | docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md | 20 |
 | docs\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md | 19 |
 | docs\archive\deprecated_20260318\03_semantic_boundary_map.md | 18 |
@@ -2743,7 +4180,6 @@ Files that mention key concepts but don't link to them:
 | docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md | 15 |
 | docs\research_notes\PROOF_INDEX.md | 15 |
 | docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md | 15 |
-| docs\02_reference\quick_reference\smart_pointers_cheatsheet.md | 14 |
 | docs\archive\deprecated_20260318\axum-formal-analysis.md | 14 |
 | docs\archive\version_reports\RUST_192_EXAMPLE_COMPATIBILITY_REPORT.md | 14 |
 | docs\rust-ownership-decidability\case-studies\chrono-formal-analysis.md | 14 |
@@ -2754,27 +4190,28 @@ Files that mention key concepts but don't link to them:
 | docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md | 13 |
 | docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md | 13 |
 | docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md | 13 |
-| docs\02_reference\quick_reference\ownership_cheatsheet.md | 12 |
+| docs\02_reference\quick_reference\smart_pointers_cheatsheet.md | 12 |
 | docs\rust-ownership-decidability\case-studies\clap-formal-analysis.md | 12 |
 | docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md | 12 |
 | docs\rust-ownership-decidability\case-studies\rtic-formal-analysis.md | 12 |
 | docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md | 12 |
 | docs\rust-ownership-decidability\case-studies\usb-device-formal-analysis.md | 12 |
-| docs\02_reference\quick_reference\error_handling_cheatsheet.md | 11 |
-| docs\02_reference\quick_reference\type_system.md | 11 |
+| docs\02_reference\quick_reference\ownership_cheatsheet.md | 11 |
 | docs\archive\deprecated_20260318\async-trait-formal-analysis.md | 11 |
 | docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md | 11 |
 | docs\rust-ownership-decidability\case-studies\wasm-bindgen-formal-analysis.md | 11 |
-| docs\05_guides\BEST_PRACTICES.md | 10 |
+| docs\02_reference\quick_reference\type_system.md | 10 |
 | docs\research_notes\software_design_theory\03_execution_models\README.md | 10 |
 | docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md | 10 |
 | docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md | 10 |
 | docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md | 10 |
+| docs\02_reference\quick_reference\error_handling_cheatsheet.md | 9 |
+| docs\05_guides\BEST_PRACTICES.md | 9 |
 | docs\archive\reports\rust_194\RUST_194_DOCUMENTATION_UPDATE_REPORT.md | 9 |
 | docs\research_notes\VISUALIZATION_INDEX.md | 9 |
 | docs\research_notes\software_design_theory\04_compositional_engineering\03_integration_theory.md | 9 |
 | docs\rust-ownership-decidability\README.md | 9 |
 | docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md | 9 |
-| ... 还有 495 个文件 | |
+| ... 还有 491 个文件 | |
 
-**总计 545 个文件包含损坏链接**
+**总计 541 个文件包含损坏链接**
