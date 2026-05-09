@@ -139,6 +139,97 @@ let runtime_flag = true;
 
 ---
 
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[Conditional Compilation] --> B[#[cfg] Attribute]
+    A --> C[cfg! Macro]
+    C --> D[Runtime Branching]
+    A --> E[cfg_select! Macro]
+    E --> F[Compile-time Expression Selection]
+    F --> G[Platform Abstraction]
+    F --> H[Feature Flags]
+    
+    style E fill:#f9f,stroke:#333,stroke-width:2px
+    style F fill:#bfb,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **Macros** | `03_advanced/macros/declarative.md` | `cfg_select!` 是声明式宏 |
+| **cfg** | `02_intermediate/cfg.md` | `cfg` 条件的基础语法 |
+| **Conditional Compilation** | `01_fundamentals/conditional_compilation.md` | `#[cfg]` 属性 |
+
+---
+
+### 模块 7: 思维表征
+
+### 表征: cfg 条件编译工具选择矩阵
+
+| 需求 | `#[cfg]` | `cfg!` | `cfg_select!` |
+|------|---------|--------|--------------|
+| 条件编译整个函数/模块 | ✅ | ❌ | ❌ |
+| 运行时检查条件 | ❌ | ✅ | ❌（编译期） |
+| 表达式级值选择 | ❌ | ⚠️（需 if/else） | ✅ |
+| 多分支选择 | ⚠️（重复定义） | ⚠️（嵌套 if） | ✅ |
+| 默认/兜底分支 | ❌ | ⚠️ | ✅ |
+| 代码简洁度 | 中 | 中 | **高** |
+
+---
+
+## 📚 模块 8: 国际化对齐
+
+| 来源 | 类型 | 说明 |
+|------|------|------|
+| [Rust 1.95.0 Release](https://releases.rs/docs/1.95.0/) | 官方 | `cfg_select!` 稳定化公告 |
+| [core::macros::cfg_select](https://doc.rust-lang.org/core/macro.cfg_select.html) | 官方 | API 文档 |
+
+---
+
+## ⚖️ 模块 9: 设计权衡
+
+### 为什么需要 cfg_select!？
+
+`#[cfg]` 只能作用于**项级别**（函数、结构体、模块），`cfg!` 只能在**表达式级别**返回布尔值。`cfg_select!` 填补了"表达式级多分支选择"的空白，使平台相关常量和函数体的编写更简洁。
+
+限制：`cfg_select!` 是表达式级宏，不能用于声明项（如 `mod`、`fn` 签名）。
+
+---
+
+## 📝 模块 10: 自我检测
+
+1. **`cfg_select!` 与 `#[cfg]` 的根本区别是什么？** 为什么 `cfg_select!` 不能用于条件编译整个函数？
+
+2. **以下代码有什么问题？如何修复？**
+
+```rust
+let x = cfg_select! {
+    target_os = "linux" => 42,
+    target_os = "macos" => 100,
+};
+```
+
+<details>
+<summary>参考答案</summary>
+
+**问题**: 缺少 `_ =>` 默认分支。如果目标 OS 既不是 linux 也不是 macos（如 Windows），编译会失败。
+
+**修复**:
+```rust
+let x = cfg_select! {
+    target_os = "linux" => 42,
+    target_os = "macos" => 100,
+    _ => 0,  // 默认分支
+};
+```
+
+</details>
+
+---
+
 ## 六、参考
 
 - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)

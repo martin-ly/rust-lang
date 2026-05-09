@@ -276,6 +276,51 @@ fuzz_target!(|data: &[u8]| {
 - 关注 FFI 边界
 - 结合 AddressSanitizer 使用
 
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[Safe Rust Code] --> B[Unsafe Block]
+    B --> C[Raw Pointers]
+    B --> D[FFI Calls]
+    B --> E[Union Access]
+    C --> F[Aliasing Rules]
+    C --> G[Uninit Memory]
+    D --> H[ABI Mismatch]
+    D --> I[Lifetime Bridging]
+    F --> J[Miri UB Detection]
+    G --> J
+    H --> K[Sanitizers]
+    I --> K
+    J --> L[Systematic Audit]
+    K --> L
+    L --> M[Safety Documentation]
+    M --> N[CI Integration]
+    
+    style B fill:#f9f,stroke:#333,stroke-width:2px
+    style J fill:#bbf,stroke:#333,stroke-width:2px
+    style L fill:#bfb,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **Unsafe Rust** | `03_advanced/unsafe/unsafe_rust.md` | `unsafe` 块的 5 种能力、SAFETY 注释规范 |
+| **Tree Borrows** | `04_expert/miri/tree_borrows.md` | Miri 使用 TB 模型检测别名违规 |
+| **FFI** | `03_advanced/ffi/ffi.md` | FFI 边界的不变量验证是审计重点 |
+| **Send/Sync** | `03_advanced/concurrency/threads.md` | `unsafe impl Send/Sync` 的 soundness 论证 |
+
+#### 启下（后续延伸预告）
+
+| 后续概念 | 所在文档 | 掌握本章后方可理解 |
+|----------|----------|-------------------|
+| **Safety Critical** | `04_expert/safety_critical/` | 高完整性系统的审计流程与认证 |
+| **Compiler Internals** | `04_expert/compiler_internals.md` | 理解 MIR 以分析 unsafe 代码的编译器视角 |
+| **Safety Critical Audit** | `04_expert/safety_critical/09_reference/SECURITY_AUDIT_GUIDE.md` | 高完整性系统的系统化安全审计流程与认证标准 |
+
+---
+
 ### Safety 文档规范
 
 清晰的安全文档是审计的基础：
@@ -451,6 +496,103 @@ impl<T> Initialized<T> {
 
 ---
 
+## 🗺️ 模块 7: 思维表征套件
+
+### 表征 A: Unsafe 审计决策树
+
+```text
+开始审计 unsafe 代码
+│
+├─► 1. 定位所有 unsafe 边界
+│   ├─► 统计 unsafe fn / unsafe block / unsafe impl
+│   │   └── 工具: cargo-geiger
+│   │
+│   └─► 评估 unsafe 密度 (unsafe LOC / total LOC)
+│       └── 阈值: > 5% 需重点审计
+│
+├─► 2. 静态分析检查
+│   ├─► 每个 unsafe block 是否有 SAFETY 注释?
+│   │   ├─► 否 → 要求补充 ← 阻塞项
+│   │   └─► 是 → 验证注释是否覆盖所有前提条件
+│   │
+│   ├─► 裸指针使用检查
+│   │   ├─► 解引用前是否验证非空?
+│   │   ├─► 是否验证对齐?
+│   │   ├─► 是否验证生命周期?
+│   │   └─► 是否有数据竞争风险?
+│   │
+│   └─► FFI 边界检查
+│       ├─► C 结构体布局是否匹配 #[repr(C)]?
+│       ├─► 字符串是否验证 null 终止?
+│       └─► 回调函数生命周期是否安全?
+│
+├─► 3. 动态验证
+│   ├─► Miri 测试
+│   │   ├─► `cargo miri test` 通过?
+│   │   ├─► 覆盖所有 unsafe 路径?
+│   │   └─► Tree Borrows 模式?
+│   │
+│   ├─► Fuzzing
+│   │   ├─► 针对解析/转换函数
+│   │   ├─► 运行时间: ≥ 1小时或 ≥ 100万次输入
+│   │   └─► 结合 AddressSanitizer?
+│   │
+│   └─► Sanitizers
+│       ├─► AddressSanitizer (内存错误)
+│       ├─► MemorySanitizer (未初始化读取)
+│       └─► ThreadSanitizer (数据竞争)
+│
+└─► 4. 审计结论
+    ├─► 通过 → 记录审计日志，集成 CI
+    ├─► 有条件通过 → 标记风险，制定修复计划
+    └─► 不通过 → 重构或增加安全防护层
+```
+
+### 表征 B: Unsoundness 模式严重度矩阵
+
+| 模式 | 发生频率 | 检测难度 | 影响范围 | 修复成本 | 综合风险 |
+|------|---------|---------|---------|---------|---------|
+| **别名规则违反** | 高 | 中（Miri 可捕） | 局部/全局 | 中 | 🔴 严重 |
+| **未初始化内存读取** | 中 | 低（MSan 可捕） | 局部 | 低 | 🟠 高 |
+| **类型混淆（FFI）** | 中 | 高（需人工审计） | 全局 | 高 | 🔴 严重 |
+| **Send/Sync 错误实现** | 低 | 高（并发 bug 难复现） | 全局 | 中 | 🔴 严重 |
+| **悬垂指针** | 中 | 中（Miri/ASan 可捕） | 局部 | 低 | 🟠 高 |
+| **双重释放** | 低 | 中（ASan 可捕） | 局部 | 低 | 🟠 高 |
+| **整数溢出（release）** | 中 | 高（需特定输入） | 局部 | 低 | 🟡 中 |
+
+### 表征 C: 工具覆盖范围维恩图（ASCII）
+
+```text
+UB 检测工具覆盖范围
+═══════════════════════════════════════════════════════════════════
+
+  ┌─────────────────────────────────────────────────────────┐
+  │                    所有可能的行为                        │
+  │  ┌─────────────────────────────────────────────────┐   │
+  │  │              编译器可检测的错误                    │   │
+  │  │  ┌─────────────┐  ┌─────────────────────────┐  │   │
+  │  │  │  Miri (TB)  │  │      Sanitizers         │  │   │
+  │  │  │             │  │  ┌─────┐  ┌───────────┐ │  │   │
+  │  │  │ • 悬垂指针  │  │  │ ASan│  │   MSan    │ │  │   │
+  │  │  │ • 别名违规  │──┤  │     │  │           │ │  │   │
+  │  │  │ • 双重释放  │  │  │ • 越界│  │ • 未初始化│ │  │   │
+  │  │  │ • 未对齐访问│  │  │ • UAF│  │ • 未定义  │ │  │   │
+  │  │  │             │  │  └─────┘  └───────────┘ │  │   │
+  │  │  └─────────────┘  └─────────────────────────┘  │   │
+  │  │           │                                    │   │
+  │  │           └─────── 重叠: 内存错误 ──────────────┘   │
+  │  └─────────────────────────────────────────────────┘   │
+  │                                                         │
+  │  外部: Fuzzing（扩大输入空间覆盖）                        │
+  │  外部: 人工审计（逻辑错误、业务规则）                      │
+  └─────────────────────────────────────────────────────────┘
+
+关键洞察: 没有单一工具能覆盖所有 UB。Miri 检测 Rust 特有的别名规则违规，
+ASan/MSan 检测底层内存错误，Fuzzing 扩大输入空间，人工审计覆盖逻辑漏洞。
+```
+
+---
+
 ## ⚠️ 常见陷阱
 
 ### 1. 误用 `as` 转换指针
@@ -496,6 +638,233 @@ pub unsafe fn process_c_struct_safe(ptr: *const CStruct) -> Option<&'static CStr
     Some(&*ptr)
 }
 ```
+
+---
+
+## 📚 模块 8: 国际化对齐
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 对应章节/条目 | 本文档对应点 |
+|------|------|---------------|--------------|
+| [The Rustonomicon](https://doc.rust-lang.org/nomicon/) | 官方 | 全书 | 模块 1-2 |
+| [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | 官方 | Stacked Borrows, validity invariants | 模块 2（别名规则） |
+| [Miri 文档](https://github.com/rust-lang/miri) | 官方 | UB 检测范围 | 模块 3.2 |
+
+### 8.2 学术来源
+
+| 论文/来源 | 会议/机构 | 核心论证 | 本文档对应点 |
+|-----------|-----------|----------|--------------|
+| **"Stacked Borrows"** | POPL 2019 (Jung et al.) | Rust 别名模型的形式化定义，为 Miri 提供理论基础 | 模块 2.1 |
+| **"Tree Borrows"** | PLDI 2025 (Villani et al.) | 下一代别名模型，降低 54% 误报 | 模块 3.2 |
+| **"RustBelt"** | POPL 2018 | 用 Iris 证明 Rust 类型系统安全性 | 模块 2（unsafe 代码的证明责任） |
+
+### 8.3 社区权威
+
+| 作者 | 文章/演讲 | 核心观点 | 本文档对应点 |
+|------|-----------|----------|--------------|
+| **Ralf Jung** | [Miri 与内存模型](https://www.ralfj.de/blog/) | Miri 的设计哲学与内存模型演进 | 模块 3.2 |
+| **Rust Secure Code WG** | [cargo-geiger, cargo-audit](https://github.com/rust-secure-code) | unsafe 代码审计工具链的最佳实践 | 模块 3.4 |
+| **Mara Bos** | [Rust 安全实践](https://marabos.nl/) | 生产环境 unsafe 代码的审计经验 | 模块 5 |
+
+### 8.4 跨语言对比
+
+| 维度 | Rust (unsafe audit) | C/C++ (code review) | Go (unsafe package) | Swift |
+|------|---------------------|---------------------|---------------------|-------|
+| **审计工具** | Miri + sanitizers + fuzzing | Valgrind/ASan/UBSan | 有限（无 Miri 等价物） | Address Sanitizer |
+| **别名模型** | Stacked/Tree Borrows（形式化） | 无（依赖开发者） | 无 | 无 |
+| **UB 定义** | 明确（Unsafe Code Guidelines） | 部分定义（C11 后改进） | 有限定义 | 明确 |
+| **社区审计文化** | 强（RustSec, Safety Dance） | 中（CVE 数据库） | 弱 | 弱 |
+| **形式化验证** | RustBelt + Miri | 无 | 无 | 无 |
+
+> **关键差异**: Rust 是唯一围绕 unsafe 代码建立了**系统化审计文化**和**专用工具链**（Miri + cargo-geiger + RustSec）的语言。C/C++ 虽有 AddressSanitizer，但缺少针对语言特有 UB（如别名规则）的精确检测工具。
+
+---
+
+## ⚖️ 模块 9: 设计权衡分析
+
+### 9.1 为什么 Rust 采用 "unsafe 块" 而非 "安全子集" 设计？
+
+替代方案是像 SPARK Ada 那样定义一个可证明安全的子集，禁止所有不安全操作。Rust 选择保留 `unsafe` 关键字的原因：
+
+1. **系统编程需求**: 操作系统、嵌入式、性能关键代码需要直接内存操作，完全禁止不现实。
+2. **FFI 必要性**: 与 C/C++ 生态的互操作是系统语言的刚需。
+3. **抽象能力**: `unsafe` 允许库作者实现零成本抽象（如 `Vec`、`HashMap`），用户以安全 API 使用。
+
+代价：审计负担落在 unsafe 代码的作者和维护者身上。
+
+### 9.2 该设计的成本
+
+**审计成本**: 每个 unsafe 块都需要 SAFETY 注释、不变量文档和工具验证。对于大型 unsafe 代码库（如 `std` 内部），审计成本极高。
+
+**工具限制**: Miri 不支持所有平台 API，执行速度慢，无法替代所有测试。Sanitizers 需要 nightly 编译器，增加了 CI 复杂度。
+
+**知识门槛**: 理解 Tree Borrows、validity invariant、niche optimization 等概念需要深厚的 Rust 知识，新手难以参与 unsafe 代码审计。
+
+### 9.3 什么场景下 "最小化 unsafe" 策略是次优的？
+
+1. **极端性能优化**: 某些算法（如无锁数据结构、SIMD 优化）必须用 unsafe 才能达到理论最优性能。过度封装可能引入额外开销。
+2. **操作系统内核**: 内核代码大量涉及裸指针、内存映射、中断处理，unsafe 密度天然很高。此时重点是**系统化审计**而非**最小化 unsafe**。
+3. **FFI 密集项目**: 与大型 C 库（如 OpenSSL、TensorFlow）绑定时，unsafe 代码量与 C API 表面积成正比，无法避免。
+
+---
+
+## 📝 模块 10: 自我检测与练习
+
+### 概念性问题
+
+1. **Miri 与 AddressSanitizer (ASan) 的检测范围有何重叠和差异？** 为什么两者都需要在审计流程中使用？
+
+2. **Tree Borrows 相比 Stacked Borrows 对 Miri 审计的影响是什么？** 如果项目之前用 SB 通过了 Miri，切换到 TB 后可能需要修复哪些"新发现"的代码？
+
+3. **为什么说 `unsafe impl Send/Sync` 是"最危险的 unsafe 操作"之一？** 它与 alias violation、uninit read 等模式在检测难度上有何不同？
+
+### 代码修复题
+
+**题 1**: 以下代码存在多个安全问题。请识别所有问题并用 Miri + SAFETY 注释修复：
+
+```rust
+pub struct Buffer {
+    ptr: *mut u8,
+    len: usize,
+}
+
+impl Buffer {
+    pub fn new(len: usize) -> Self {
+        let layout = std::alloc::Layout::array::<u8>(len).unwrap();
+        let ptr = unsafe { std::alloc::alloc(layout) };
+        Self { ptr, len }
+    }
+
+    pub fn as_slice(&self) -> &[u8] {
+        unsafe { std::slice::from_raw_parts(self.ptr, self.len) }
+    }
+
+    pub fn resize(&mut self, new_len: usize) {
+        self.len = new_len;
+    }
+}
+```
+
+<details>
+<summary>参考答案</summary>
+
+**问题识别**:
+1. `alloc` 可能返回 null，未检查
+2. `len` 可能为 0，`Layout::array` 可能 panic
+3. `as_slice` 未检查 ptr 是否为 null
+4. `resize` 改变 len 但不重新分配，可能导致越界访问
+5. 缺少 `Drop` 实现，内存泄漏
+
+**修复版本**:
+```rust
+use std::alloc::{alloc, dealloc, Layout};
+use std::ptr::NonNull;
+
+pub struct Buffer {
+    ptr: NonNull<u8>,
+    len: usize,
+    capacity: usize,
+}
+
+impl Buffer {
+    /// # Errors
+    /// 如果 `len == 0` 或内存分配失败，返回 `None`
+    pub fn new(len: usize) -> Option<Self> {
+        if len == 0 {
+            return None;
+        }
+        let layout = Layout::array::<u8>(len).ok()?;
+        // SAFETY: layout 非零大小，已验证
+        let ptr = unsafe { NonNull::new(alloc(layout))? };
+        Some(Self { ptr, len: 0, capacity: len })
+    }
+
+    /// # Safety
+    /// `self.ptr` 必须指向有效内存且 `self.len` 不超过分配大小
+    pub unsafe fn as_slice_unchecked(&self) -> &[u8] {
+        // SAFETY: 调用者保证 ptr 有效且 len 正确
+        std::slice::from_raw_parts(self.ptr.as_ptr(), self.len)
+    }
+
+    pub fn as_slice(&self) -> Option<&[u8]> {
+        if self.len == 0 {
+            return Some(&[]);
+        }
+        // SAFETY: ptr 由 alloc 分配，len 已验证
+        Some(unsafe { self.as_slice_unchecked() })
+    }
+}
+
+impl Drop for Buffer {
+    fn drop(&mut self) {
+        let layout = Layout::array::<u8>(self.capacity).unwrap();
+        // SAFETY: ptr 由 alloc 分配，layout 匹配
+        unsafe { dealloc(self.ptr.as_ptr(), layout) };
+    }
+}
+```
+
+</details>
+
+**题 2**: 以下 FFI 绑定存在类型安全问题。请分析并修复：
+
+```rust
+extern "C" {
+    fn process_data(data: *const u8, len: usize) -> i32;
+}
+
+pub fn safe_process(data: &[u8]) -> i32 {
+    unsafe { process_data(data.as_ptr(), data.len()) }
+}
+```
+
+<details>
+<summary>参考答案</summary>
+
+**问题**: C 函数 `process_data` 的返回值 `i32` 被假设为"成功/失败"码，但 Rust 侧未验证。C 函数可能通过返回值传递指针（如错误码指针），导致类型混淆。此外，C 函数可能在内部修改数据（尽管签名是 `*const`）。
+
+**修复**:
+```rust
+use std::ffi::c_int;
+
+extern "C" {
+    /// 处理数据，返回 0 表示成功，负值表示错误码
+    fn process_data(data: *const u8, len: usize) -> c_int;
+}
+
+#[derive(Debug)]
+pub enum ProcessError {
+    InvalidInput,
+    CError(i32),
+}
+
+pub fn safe_process(data: &[u8]) -> Result<(), ProcessError> {
+    if data.is_empty() {
+        return Err(ProcessError::InvalidInput);
+    }
+    // SAFETY: data.as_ptr() 非空，len 匹配，C 函数签名正确
+    let ret = unsafe { process_data(data.as_ptr(), data.len()) };
+    if ret == 0 {
+        Ok(())
+    } else {
+        Err(ProcessError::CError(ret))
+    }
+}
+```
+
+</details>
+
+### 开放设计题
+
+**题 3**: 你的团队维护一个包含 50,000 行 Rust 代码的 crate，其中 3%（1,500 行）是 unsafe 代码，分布在 12 个 `unsafe` 块中。你刚加入团队，需要建立 unsafe 代码审计流程。请设计一个可持续的审计策略，考虑：
+
+- **工具链**: Miri、Sanitizers、Fuzzing、cargo-geiger 的优先级和使用频率
+- **CI 集成**: 哪些检查必须阻塞合并？哪些可以异步运行？
+- **人力审计**: 如何分配审计责任？新提交的 unsafe 代码与存量代码的不同策略？
+- **度量指标**: 如何跟踪审计覆盖率和 unsafe 代码质量？
+
+> 💡 提示：参考模块 7 的审计决策树和模块 3 的工具矩阵。
 
 ---
 

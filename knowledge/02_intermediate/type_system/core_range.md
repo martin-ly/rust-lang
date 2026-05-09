@@ -126,6 +126,90 @@ let from_old = core::range::RangeInclusive { start: *old.start(), last: *old.end
 
 ---
 
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[Range Types] --> B[std::ops::Range]
+    A --> C[std::ops::RangeInclusive]
+    A --> D[core::range::RangeInclusive]
+    B --> E[Half-open [a, b)]
+    C --> F[Closed [a, b]]
+    D --> F
+    F --> G[Iterator]
+    F --> H[contains]
+    F --> I[is_empty]
+    
+    style D fill:#f9f,stroke:#333,stroke-width:2px
+    style F fill:#bfb,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **Range 语法** | `01_fundamentals/range.md` | `a..b`、`a..=b` 的基础用法 |
+| **Iterator** | `03_advanced/iterators.md` | Range 实现 `IntoIterator` |
+| **Generic Types** | `02_intermediate/generics.md` | `RangeInclusive<T>` 的类型参数 |
+
+---
+
+### 模块 7: 思维表征
+
+### 表征: Range 类型对比
+
+```text
+Range 类型家族
+═══════════════════════════════════════════════════════════════════
+
+半开区间 [a, b):                    闭区间 [a, b]:
+std::ops::Range                     std::ops::RangeInclusive
+  a..b                                 a..=b
+  包含 a, 不包含 b                     包含 a, 包含 b
+  迭代: a, a+1, ..., b-1               迭代: a, a+1, ..., b
+  空区间: a >= b                       空区间: a > b（但 a..=a 含一个元素）
+
+core::range::RangeInclusive (1.95+):
+  与 std::ops::RangeInclusive 语义相同
+  位于 core::range 模块，为未来的 range 统一提供命名空间
+```
+
+---
+
+## 📚 模块 8: 国际化对齐
+
+| 来源 | 类型 | 说明 |
+|------|------|------|
+| [Rust 1.95.0 Release](https://releases.rs/docs/1.95.0/) | 官方 | `core::range` 模块稳定化 |
+| [RFC 3550](https://rust-lang.github.io/rfcs/3550-rangeful.html) | 官方 | Range 类型系统改进提案 |
+
+---
+
+## ⚖️ 模块 9: 设计权衡
+
+### 为什么引入 core::range 模块？
+
+`core::range` 为未来统一所有 range 类型（`Range`、`RangeInclusive`、`RangeFrom`、`RangeTo` 等）提供了命名空间，使标准库能够逐步演进 range API 而不破坏现有代码。
+
+代价：短期内 `std::ops::RangeInclusive` 与 `core::range::RangeInclusive` 共存，增加了学习成本。
+
+---
+
+## 📝 模块 10: 自我检测
+
+1. **`core::range::RangeInclusive` 与 `std::ops::RangeInclusive` 在语义上有何异同？** 为什么 Rust 1.95 引入前者而不直接替换后者？
+
+2. **`RangeInclusive::new(5, 3)` 创建的是什么区间？** 迭代时会产生什么结果？
+
+<details>
+<summary>参考答案</summary>
+
+`RangeInclusive::new(5, 3)` 创建 start=5、end=3 的区间。由于 start > end，这是一个**空区间**，迭代时不产生任何元素。
+
+</details>
+
+---
+
 ## 六、参考
 
 - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)

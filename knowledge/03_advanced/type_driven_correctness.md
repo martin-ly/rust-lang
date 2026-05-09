@@ -493,6 +493,53 @@ pub fn demo_lifecycle_management() {
 
 ---
 
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[Runtime State Machine] --> B{编译时 vs 运行时检查?}
+    B -->|编译时| C[Type-State Pattern]
+    B -->|运行时| D[Enum + Match]
+    C --> E[PhantomData<State>]
+    E --> F[Zero-cost Abstraction]
+    C --> G[State Transition as Type Change]
+    G --> H[Illegal States Unrepresentable]
+    
+    I[Domain Semantics] --> J[Phantom Types]
+    J --> K[Unit Safety]
+    J --> L[Format Encoding]
+    
+    M[Access Control] --> N[Capability Tokens]
+    N --> O[Permission as Type]
+    O --> P[Compile-time Authorization]
+    
+    C -.-> Q[Type-Driven Correctness]
+    J -.-> Q
+    N -.-> Q
+    
+    style Q fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#bfb,stroke:#333,stroke-width:2px
+    style H fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **PhantomData** | `02_intermediate/generics.md` | `PhantomData<State>` 用于在类型层面编码状态 |
+| **Ownership & Move** | `01_fundamentals/ownership.md` | Type-State 的状态转换依赖 move 语义 |
+| **Trait Bounds** | `02_intermediate/traits.md` | Capability Token 的方法通过 bounds 控制权限 |
+
+#### 启下（后续延伸预告）
+
+| 后续概念 | 所在文档 | 掌握本章后方可理解 |
+|----------|----------|-------------------|
+| **Type-Level Programming** | `04_expert/` | 更复杂的类型级计算（如 Peano 数、HList） |
+| **Formal Verification** | `04_expert/safety_critical/04_axiomatic_reasoning/FORMAL_VERIFICATION_PRACTICAL_GUIDE.md` | 类型驱动正确性与形式化验证工具（Kani、Verus）的结合 |
+| **GAT** | `02_intermediate/generics.md` | 将 Type-State 与泛型关联类型结合 |
+
+---
+
 ## 6. 模式对比与选择指南
 
 | 模式 | 核心机制 | 适用场景 | 运行时成本 |
@@ -506,6 +553,245 @@ pub fn demo_lifecycle_management() {
 - **使用 Type-State**: 当对象有明确的生命周期阶段，且某些操作只在特定阶段合法时
 - **使用 Phantom Types**: 当需要在类型层面编码额外的语义信息（单位、格式、协议版本）时
 - **使用 Capability Tokens**: 当需要细粒度的访问控制，且权限应在编译时验证时
+
+---
+
+## 模块 6: 反例集
+
+#### 反例 1: Type-State 状态转换缺失导致编译错误
+
+**错误代码**:
+```rust
+use std::marker::PhantomData;
+
+struct Open;
+struct Closed;
+struct File<State> { _state: PhantomData<State> }
+
+impl File<Closed> {
+    fn open(self) -> File<Open> { 
+        File { _state: PhantomData } 
+    }
+}
+
+impl File<Open> {
+    fn read(&self) -> Vec<u8> { vec![] }
+    // ❌ 忘记实现 close() → Closed!
+}
+
+fn main() {
+    let f = File::<Closed> { _state: PhantomData };
+    let f = f.open();
+    let data = f.read();
+    // f 是 File<Open>，但无法关闭！
+    // let f = f.close(); // ❌ 编译错误: File<Open> 没有 close 方法
+}
+```
+
+**编译器错误**:
+```text
+error[E0599]: no method named `close` found for struct `File<Open>`
+```
+
+**根因推导**: Type-State 模式要求**每个状态**都必须有**完整的转换方法**。如果 `Open` 状态缺少 `close()` 方法，`File<Open>` 就无法转换回 `File<Closed>`，导致对象"卡住"。
+
+**修复方案**:
+```rust
+impl File<Open> {
+    fn read(&self) -> Vec<u8> { vec![] }
+    
+    fn close(self) -> File<Closed> {  // ✅ 补全状态转换
+        File { _state: PhantomData }
+    }
+}
+```
+
+**抽象原则**: **"状态图完整性"**：Type-State 的设计必须对应一个**完全连通的状态图**。每个状态都必须有入边和出边（除非是终止状态）。缺失转换会导致类型系统层面的"死胡同"。
+
+---
+
+#### 反例 2: Phantom Type 的单位混淆
+
+**错误代码**:
+```rust
+use std::marker::PhantomData;
+
+struct Meter;
+struct Second;
+struct Quantity<T, Unit>(T, PhantomData<Unit>);
+
+impl<T: std::ops::Add<Output = T>, U> Quantity<T, U> {
+    fn add(self, other: Quantity<T, U>) -> Quantity<T, U> {
+        Quantity(self.0 + other.0, PhantomData)
+    }
+}
+
+fn main() {
+    let d1 = Quantity(100.0, PhantomData::<Meter>);
+    let d2 = Quantity(10.0, PhantomData::<Second>);
+    // ❌ 以下代码无法编译（正确行为），但错误信息晦涩
+    // let sum = d1.add(d2);
+}
+```
+
+**根因推导**: 虽然类型系统正确地阻止了 `Meter + Second` 的操作，但错误信息仅显示类型不匹配（`Quantity<f64, Meter>` vs `Quantity<f64, Second>`），对用户的提示不够友好。
+
+**修复方案**:
+```rust
+// 使用描述性类型名和清晰的文档
+/// 长度量，单位: 米
+pub type Length = Quantity<f64, Meter>;
+/// 时间量，单位: 秒  
+pub type Time = Quantity<f64, Second>;
+
+// 为每种类型提供专用构造函数，增强错误信息
+impl Length {
+    pub fn meters(val: f64) -> Self { Quantity(val, PhantomData) }
+}
+impl Time {
+    pub fn seconds(val: f64) -> Self { Quantity(val, PhantomData) }
+}
+
+// 使用:
+let d1 = Length::meters(100.0);
+let d2 = Time::seconds(10.0);
+// d1.add(d2) 的错误现在更友好:
+// expected `Length`, found `Time`
+```
+
+---
+
+#### 反例 3: Capability Token 的权限泄露
+
+**错误代码**:
+```rust
+struct Read;
+struct Write;
+struct Capability<P>(PhantomData<P>);
+
+impl Capability<Read> {
+    fn new() -> Self { Capability(PhantomData) }
+}
+
+// ❌ 危险: Clone 允许无限制复制权限
+trait Clone { fn clone(&self) -> Self; }
+impl Clone for Capability<Read> {
+    fn clone(&self) -> Self { Capability(PhantomData) }
+}
+
+fn main() {
+    let cap = Capability::<Read>::new();
+    let cap2 = cap.clone();
+    let cap3 = cap.clone();  // 权限无限复制，失去控制意义
+}
+```
+
+**根因推导**: 如果 `Capability` 实现 `Clone`，任何持有 `Read` 权限的人都可以无限复制并分发该权限。Capability 安全模型的核心假设是"持有即权限"，但无限复制破坏了这一假设。
+
+**修复方案**:
+```rust
+// 方案 1: 不实现 Clone，限制为移动语义
+struct Capability<P> {
+    _marker: PhantomData<P>,
+    _private: (),  // 阻止外部构造
+}
+
+// 方案 2: 使用引用计数限制复制次数
+use std::sync::Arc;
+struct LimitedCapability<P> {
+    _marker: PhantomData<P>,
+    _token: Arc<()>,  // Arc 的引用计数即为权限副本数
+}
+```
+
+---
+
+## 🗺️ 模块 7: 思维表征套件
+
+### 表征 A: Type-Driven Correctness 模式选择决策树
+
+```text
+需要类型驱动的正确性?
+       │
+       ├─► 对象有明确的状态生命周期?
+       │   │
+       │   ├─► 是 ───────────────────────► Type-State Pattern
+       │   │   • 状态 → 类型参数
+       │   │   • 转换 → 消费 + 返回新类型
+       │   │   • 适用: 文件句柄、连接池、请求构建器
+       │   │
+       │   └─► 否
+       │       │
+       │       ├─► 需要编码领域语义（单位、格式）?
+       │       │   │
+       │       │   ├─► 是 ───────────────► Phantom Types
+       │       │   │   • 单位标签 → 零大小类型
+       │       │   │   • 运算 → 类型级推导
+       │       │   │   • 适用: 物理计算、货币、协议版本
+       │       │   │
+       │       │   └─► 否
+       │       │       │
+       │       │       ├─► 需要编译时权限控制?
+       │       │       │   │
+       │       │       │   ├─► 是 ───────► Capability Tokens
+       │       │       │   │   • 权限 → 类型持有
+       │       │       │   │   • 能力安全模型
+       │       │       │   │   • 适用: 文件系统、API 访问控制
+       │       │       │   │
+       │       │       │   └─► 否
+       │       │       │       └── 可能不需要类型驱动
+       │       │       │
+       │       │       └── 考虑运行时检查（简单、灵活）
+```
+
+### 表征 B: 编译时检查 vs 运行时检查成本对比矩阵
+
+| 检查维度 | Type-State (编译时) | Enum+Match (运行时) | 运行时 Assert |
+|---------|-------------------|-------------------|-------------|
+| **错误发现时机** | 编译期 | 运行期（测试/生产） | 运行期（panic） |
+| **运行时开销** | 零 | match 分支判断 | assert 判断 |
+| **二进制体积** | 可能膨胀（单态化） | 紧凑 | 紧凑 |
+| **错误信息质量** | 编译错误（可能晦涩） | 可定制错误消息 | 可定制 panic 消息 |
+| **状态扩展性** | 需修改类型签名 | 添加枚举变体即可 | 添加条件判断 |
+| **动态状态** | 不支持 | 支持 | 支持 |
+| **适用状态数** | 少（2-5 个） | 任意 | 任意 |
+| ** FFI 友好度** | 低（C 无此概念） | 高 | 高 |
+
+### 表征 C: Type-State 状态转换正确性验证流程
+
+```text
+设计 Type-State API 时的正确性检查流程
+═══════════════════════════════════════════════════════════════════
+
+1. 列出所有状态
+   ┌─────────┐  ┌─────────┐  ┌─────────┐
+   │ Closed  │  │  Open   │  │ Reading │
+   └────┬────┘  └────┬────┘  └────┬────┘
+        │            │            │
+
+2. 绘制合法转换
+   Closed ──open()──► Open ──start_read()──► Reading
+      ▲                │                         │
+      │                │                         │
+      └────close()─────┘◄────finish_read()──────┘
+
+3. 检查状态图完整性
+   ✓ 每个状态至少有一个入边（起始状态除外）
+   ✓ 每个非终止状态至少有一个出边
+   ✓ 无孤立状态
+   ✓ 非法转换在代码中不存在
+
+4. 实现验证
+   ✓ 每个状态有独立的 impl 块
+   ✓ 转换方法消费 self（move 语义）
+   ✓ 非法操作不在对应 impl 块中
+   ✓ 终止状态（如 Closed）无进一步转换
+
+5. 编译测试
+   ✓ 合法代码编译通过
+   ✓ 非法代码编译失败
+   ✓ 错误信息可理解
+```
 
 ---
 
@@ -535,6 +821,192 @@ pub fn demo_lifecycle_management() {
 
 5. **The Rust Programming Language (TRPL) Chapter 19**. "Advanced Traits".  
    (PhantomData 和高级泛型模式)
+
+---
+
+## ⚖️ 模块 9: 设计权衡分析
+
+### 9.1 为什么 Rust 适合 Type-Driven Correctness？
+
+Rust 的类型系统结合了以下特性，使其成为 Type-Driven Correctness 的理想载体：
+
+1. **Move 语义**: 状态转换天然通过 `self` 消费实现，旧状态自动不可用。
+2. **Zero-cost Abstractions**: `PhantomData` 是零大小类型，类型层面的编码不产生运行时开销。
+3. **强大的泛型**: 类型参数可以编码任意状态信息，结合 trait bounds 实现复杂约束。
+4. **无空值**: `Option<T>` 和 `Result<T, E>` 强制显式处理缺失值，与 Type-State 互补。
+
+### 9.2 该设计的成本
+
+**API 表面积膨胀**: Type-State 为每个状态提供独立的 `impl` 块，API 文档复杂度显著增加。一个 3 状态的文件句柄可能有 15+ 个方法分布在 3 个 `impl` 块中。
+
+**编译错误晦涩**: 初学者看到 `File<Closed>` 没有 `read` 方法时，可能无法理解状态机的意图。需要精心设计类型名和文档。
+
+**与 FFI 的冲突**: C API 没有类型状态概念，跨 FFI 边界时需要"退化"为运行时检查。
+
+**状态爆炸**: 如果状态空间很大（如 TCP 状态机的 11 个状态），Type-State 会产生大量样板代码。
+
+### 9.3 什么场景下 Type-Driven Correctness 是次优的？
+
+1. **快速原型**: 类型层面的编码增加了设计时间。原型阶段应优先使用运行时检查，成熟后再重构。
+2. **高度动态状态**: 如果状态在运行时才确定（如用户配置的插件系统），编译时类型无法编码。
+3. **简单状态机**: 2 状态（开/关）的简单场景，Type-State 的 boilerplate 可能超过收益。
+4. **跨语言 API**: 暴露给 C/Python/JS 的 API 需要运行时状态，Type-State 的优势无法传递。
+
+---
+
+## 📝 模块 10: 自我检测与练习
+
+### 概念性问题
+
+1. **Type-State 模式与 GoF 状态模式（State Pattern）有何本质区别？** 为什么 Rust 的 Type-State 是"零成本"的，而传统的状态模式不是？
+
+2. **Phantom Types 与 Newtype 模式（如 `struct Meters(f64)`）有何异同？** 什么场景下应该选择 Phantom Types 而不是 Newtype？
+
+3. **Capability Tokens 与 RBAC（基于角色的访问控制）在编译时验证方面有何优势？** 它的局限性是什么？
+
+### 代码修复题
+
+**题 1**: 以下 Type-State 实现有缺陷，某些非法状态转换未被阻止。请修复：
+
+```rust
+use std::marker::PhantomData;
+
+struct Uninitialized;
+struct Ready;
+struct Running;
+
+struct Service<State> {
+    name: String,
+    _state: PhantomData<State>,
+}
+
+impl Service<Uninitialized> {
+    fn new(name: &str) -> Self {
+        Service { name: name.to_string(), _state: PhantomData }
+    }
+    
+    fn init(self) -> Service<Ready> {
+        Service { name: self.name, _state: PhantomData }
+    }
+}
+
+impl Service<Ready> {
+    fn start(self) -> Service<Running> {
+        Service { name: self.name, _state: PhantomData }
+    }
+}
+
+impl Service<Running> {
+    fn stop(self) -> Service<Ready> {
+        Service { name: self.name, _state: PhantomData }
+    }
+}
+
+// ❌ 以下代码应该被阻止但没有：
+fn bad_usage() {
+    let s = Service::<Uninitialized>::new("test");
+    let s = s.init();
+    let s = s.stop();  // Ready → ??? 不应该允许！
+}
+```
+
+<details>
+<summary>参考答案</summary>
+
+**问题**: `Service<Ready>` 有 `start()` 但没有阻止从其他状态直接进入 `Ready` 的方法。`stop()` 返回 `Service<Ready>`，但 `Ready` 状态没有 `stop()` 方法，所以 `s.stop()` 实际上会编译失败——但错误信息不够清晰。
+
+更根本的问题是：`Service<Ready>` 从 `stop()` 返回是合法的，但上述代码 `s.stop()` 中 `s` 是 `Service<Ready>`，`stop()` 在 `Service<Running>` 上。编译器会报 `Service<Ready>` 没有 `stop()`。这个例子实际上已经阻止了非法转换！
+
+但如果存在以下代码则有漏洞：
+```rust
+impl Service<Ready> {
+    fn stop(self) -> Service<Uninitialized> { ... }  // 如果存在这个就有问题
+}
+```
+
+**更准确的修复**: 确保每个状态的转换只存在于正确的源状态：
+
+```rust
+impl Service<Running> {
+    fn stop(self) -> Service<Ready> {
+        println!("Stopping {}", self.name);
+        Service { name: self.name, _state: PhantomData }
+    }
+    
+    fn restart(self) -> Service<Running> {
+        println!("Restarting {}", self.name);
+        self.stop().start()  // 通过 Ready 中转
+    }
+}
+```
+
+</details>
+
+**题 2**: 以下 Capability Token 实现允许权限提升攻击。请分析并修复：
+
+```rust
+struct Read;
+struct Write;
+struct Admin;
+struct Capability<P>(PhantomData<P>);
+
+impl Capability<Read> {
+    fn new() -> Self { Capability(PhantomData) }
+}
+
+// ❌ 危险: 任何 Read 权限都可以提升为 Write！
+impl From<Capability<Read>> for Capability<Write> {
+    fn from(_: Capability<Read>) -> Self {
+        Capability(PhantomData)
+    }
+}
+```
+
+<details>
+<summary>参考答案</summary>
+
+**问题**: `From<Capability<Read>> for Capability<Write>` 允许任何持有 `Read` 权限的人自动获得 `Write` 权限，完全破坏了权限隔离。
+
+**修复**: 移除危险的 `From` 实现，权限提升应通过受控的认证流程：
+
+```rust
+// 权限提升只能通过 AuthManager 完成
+pub struct AuthManager;
+
+impl AuthManager {
+    /// 需要 Admin 权限才能提升他人权限
+    pub fn upgrade_to_write(
+        &self,
+        _admin: &Capability<Admin>,
+        _read: Capability<Read>,
+    ) -> Capability<Write> {
+        // 验证逻辑...
+        Capability(PhantomData)
+    }
+}
+```
+
+</details>
+
+### 开放设计题
+
+**题 3**: 你正在设计一个数据库连接库。连接有以下状态：
+
+- `Disconnected`: 初始状态
+- `Connecting`: 正在建立连接（异步操作）
+- `Connected`: 连接就绪，可执行查询
+- `InTransaction`: 事务中
+- `Closed`: 连接已关闭
+
+**挑战**:
+1. 某些操作在特定状态下不可用（如 `query()` 只能在 `Connected` 或 `InTransaction` 时调用）
+2. 异步状态转换（`Connecting → Connected`）如何在 Type-State 中表示？
+3. 连接可能因网络错误从任何状态进入 `Disconnected`
+4. 事务可以嵌套（`InTransaction` 中再开始事务）
+
+请分析 Type-State 模式在此场景下的适用性。哪些状态适合编译时编码，哪些适合运行时检查？如果混合使用两种策略，如何设计边界？
+
+> 💡 提示：参考模块 7 的决策树和模块 9 的成本分析。
 
 ---
 

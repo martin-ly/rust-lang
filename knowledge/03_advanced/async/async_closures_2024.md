@@ -153,6 +153,142 @@ pub async fn cancellation_safe_async_closure(items: Vec<i32>) -> Vec<i32> {
 - **并发任务生成**：动态创建异步任务
 - **API 封装**：将同步参数验证与异步调用结合
 
+---
+
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[Closures] --> B[Sync Closures ||]
+    A --> C[Async Closures]
+    C --> D[Traditional: |x| async move {}]
+    D --> E[Nesting Problem]
+    E --> F[Async Closures 2024]
+    F --> G[async |x| {}]
+    G --> H[AsyncFn Traits]
+    G --> I[Auto Capture Inference]
+    G --> J[Cancellation Safety]
+    
+    style F fill:#f9f,stroke:#333,stroke-width:2px
+    style G fill:#bfb,stroke:#333,stroke-width:2px
+    style J fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **Closures** | `02_intermediate/closures.md` | 闭包的捕获语义与 Fn trait |
+| **Async/Await** | `03_advanced/async/async_await.md` | async 块的执行模型 |
+| **Pin/Unpin** | `03_advanced/async/async_await.md` | async 闭包返回 `Pin<Box<dyn Future>>` |
+
+---
+
+### 模块 7: 思维表征
+
+### 表征: 传统 vs 2024 async closures 语法对比
+
+```text
+传统写法（Rust 1.84-）:
+═══════════════════════════════════════════════════════════════════
+let fetch = |url: &str| async move {
+    reqwest::get(url).await?.text().await
+};
+
+结构: 闭包 + 内部 async 块
+      │
+      ├── 闭包捕获: 需要显式 move
+      └── async 块: 内部再捕获一次
+
+问题:
+• 两层嵌套，语法冗余
+• 强制 move，无法自动推断引用捕获
+• 调试栈追踪较深
+
+2024 写法（Rust 1.85+）:
+═══════════════════════════════════════════════════════════════════
+let fetch = async |url: &str| -> Result<String, Error> {
+    reqwest::get(url).await?.text().await
+};
+
+结构: 单一 async 闭包
+      │
+      └── 自动推断捕获方式
+
+优势:
+• 扁平语法，一层结构
+• 智能捕获推断
+• 实现 AsyncFn trait，类型系统更精确
+```
+
+---
+
+## 📚 模块 8: 国际化对齐
+
+| 来源 | 类型 | 说明 |
+|------|------|------|
+| [Rust 1.85 Release](https://blog.rust-lang.org/2026/01/15/Rust-1.85.0/) | 官方 | async closures 稳定化 |
+| [AsyncFn Traits RFC](https://rust-lang.github.io/rfcs/3668-async-fn.html) | 官方 | AsyncFn trait 家族设计 |
+
+---
+
+## ⚖️ 模块 9: 设计权衡
+
+### 为什么 async closures 花了这么久才稳定？
+
+Rust 的 async 闭包需要解决三个核心问题：
+
+1. **AsyncFn trait 家族**: `async || {}` 需要实现 `AsyncFn`、`AsyncFnMut`、`AsyncFnOnce`，这是全新的 trait 体系。
+2. **捕获语义**: 同步闭包和异步闭包的捕获规则不同。`async || {}` 需要更智能的推断机制。
+3. **生命周期**: async 闭包返回 `Future`，其生命周期与捕获变量的生命周期复杂交织。
+
+### 迁移成本
+
+- **语法层面**: 从 `|x| async move {}` 到 `async |x| {}` 的迁移机械且安全。
+- **语义层面**: 捕获语义可能变化（从强制 `move` 到自动推断），需要验证行为一致性。
+- **兼容性**: 需要 Rust >= 1.85，旧项目可能需要 MSRV 评估。
+
+---
+
+## 📝 模块 10: 自我检测
+
+1. **传统 `|x| async move {}` 与 `async |x| {}` 在捕获语义上有何差异？** 为什么后者更灵活？
+
+2. **Cancellation Safety 为什么对 async closures 特别重要？** 给出一个 Cancellation Safe 和一个非 Cancellation Safe 的 async closure 例子。
+
+3. **以下代码用传统写法实现。请改写为 2024 async closure 语法：**
+
+```rust
+let process = |items: Vec<i32>| {
+    Box::pin(async move {
+        let mut sum = 0;
+        for item in items {
+            sum += item;
+        }
+        sum
+    })
+};
+```
+
+<details>
+<summary>参考答案</summary>
+
+```rust
+let process = async |items: Vec<i32>| -> i32 {
+    let mut sum = 0;
+    for item in items {
+        sum += item;
+    }
+    sum
+};
+```
+
+注意：`async |items|` 会自动处理 `move` 语义，`items` 被 move 进闭包。
+
+</details>
+
+---
+
 ## 迁移建议
 
 1. **新项目**：直接使用 `async || {}` 语法

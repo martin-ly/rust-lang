@@ -231,6 +231,119 @@ match opt {
 
 ---
 
+---
+
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[Pattern Matching] --> B[match Expression]
+    B --> C[Match Arms]
+    C --> D[Pattern]
+    C --> E[Guard]
+    E --> F[if guard]
+    F --> G[Boolean Condition]
+    E --> H[if let guard]
+    H --> I[Pattern Binding in Guard]
+    I --> J[let chains]
+    J --> K[Flattened Guards]
+    
+    style H fill:#f9f,stroke:#333,stroke-width:2px
+    style I fill:#bfb,stroke:#333,stroke-width:2px
+    style K fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **match 表达式** | `01_fundamentals/pattern_matching.md` | `if let` guards 是 match arm guards 的扩展 |
+| **let chains** | `02_intermediate/control_flow/let_chains.md` | `if let` guards 共享 let chains 的语法和语义 |
+| **穷尽性检查** | `01_fundamentals/pattern_matching.md` | guards 不参与 exhaustiveness checking |
+
+---
+
+### 模块 7: 思维表征
+
+### 表征: if let guard 在 match 中的位置
+
+```text
+match value {
+    ┌─────────────────────────────────────────────────────────────┐
+    │ Pattern              Guard                    Body          │
+    │ ─────────────────────────────────────────────────────────── │
+    │ Some(x)     if let Ok(y) = f(x) && y > 0  => { ... }      │
+    │ ────────    ────────────────────────────      ─────       │
+    │   │                      │                      │         │
+    │   │                      │                      │         │
+    │ 模式匹配            if let guard              arm 体      │
+    │ (编译期)            (运行时)                  (运行时)    │
+    │                                                     │     │
+    │ 变量可用性: x ──────────────────────────────────────┘     │
+    │             y ────────────────────────────► 仅在 guard 和 body 中可用 │
+    └─────────────────────────────────────────────────────────────┘
+
+关键规则:
+• 模式变量 (x) → guard 和 body 都可用
+• guard 绑定变量 (y) → 仅在 guard 后续条件和 body 中可用
+• guard 是运行时求值 → 不参与穷尽性检查
+```
+
+---
+
+## 📚 模块 8: 国际化对齐
+
+| 来源 | 类型 | 说明 |
+|------|------|------|
+| [Rust 1.95.0 Release](https://releases.rs/docs/1.95.0/) | 官方 | `if let` guards 稳定化公告 |
+| [Rust Reference: Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html) | 官方 | match guards 语法规范 |
+
+---
+
+## ⚖️ 模块 9: 设计权衡
+
+### 为什么 if let guards 不参与穷尽性检查？
+
+Guard 条件在**运行时求值**，编译器无法静态确定哪些值会通过 guard。例如 `Some(x) if x > 0` 中，编译器不知道 `x` 的具体值，因此无法判断 `Some(0)` 是否需要单独处理。
+
+这与普通 `if` guards 的行为一致，保持了语言的一致性。
+
+代价：开发者需要手动确保 `_ =>` 兜底分支覆盖所有未处理情况。
+
+---
+
+## 📝 模块 10: 自我检测
+
+1. **`if let` guards 中的绑定变量（如 `if let Ok(y) = ...` 中的 `y`）在哪些位置可用？** 如果 guard 条件失败（如 `Err`），`y` 是否存在？
+
+2. **以下代码是否安全？如果不安全，如何修复？**
+
+```rust
+enum Status { Active(i32), Inactive }
+match status {
+    Active(n) if let Some(x) = extra_info(n) => println!("{}", x),
+    Inactive => println!("inactive"),
+}
+```
+
+<details>
+<summary>参考答案</summary>
+
+**不安全**。`Active(n)` 在 `extra_info(n)` 返回 `None` 时没有被处理，而编译器不会报错（guard 不参与穷尽性检查）。
+
+**修复**:
+```rust
+match status {
+    Active(n) if let Some(x) = extra_info(n) => println!("{}", x),
+    Active(_) => println!("active but no extra info"),
+    Inactive => println!("inactive"),
+}
+```
+
+</details>
+
+---
+
 ## 八、参考链接
 
 - [Rust 1.95.0 发布公告](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)

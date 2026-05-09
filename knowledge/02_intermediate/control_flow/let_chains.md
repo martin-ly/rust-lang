@@ -141,6 +141,160 @@ pub fn classify_value(value: Result<Option<&str>, &str>) -> &'static str {
 - **流处理**：从异步流或迭代器中按条件提取数据
 - **命令解析**：CLI 参数的多阶段验证
 
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[Pattern Matching] --> B[if let]
+    A --> C[while let]
+    B --> D[Nested Conditions]
+    C --> D
+    D --> E[Rightward Drift Problem]
+    E --> F[let chains]
+    F --> G[Flattened Conditions]
+    G --> H[if let chains]
+    G --> I[while let chains]
+    H --> J[Boolean + Pattern Mixing]
+    I --> J
+    J --> K[Match Guards]
+    K --> L[if let guards]
+    
+    style F fill:#f9f,stroke:#333,stroke-width:2px
+    style H fill:#bfb,stroke:#333,stroke-width:2px
+    style I fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **if let** | `01_fundamentals/pattern_matching.md` | `let chains` 是 `if let` 的链式扩展 |
+| **布尔短路** | `01_fundamentals/operators.md` | `&&` 的短路求值与 `let` 的绑定传播 |
+| **Option/Result** | `02_intermediate/error_handling.md` | `let chains` 最常见的使用场景 |
+
+#### 启下（后续延伸预告）
+
+| 后续概念 | 所在文档 | 掌握本章后方可理解 |
+|----------|----------|-------------------|
+| **if let guards** | `02_intermediate/control_flow/if_let_guards.md` | `let chains` 在 `match` arm guards 中的应用 |
+| **Async Patterns** | `03_advanced/async/async_await.md` | `while let chains` 与异步流的结合 |
+
+---
+
+### 模块 7: 思维表征
+
+### 表征 A: let chains 扁平化效果对比
+
+```text
+嵌套 if let（传统写法）:
+═══════════════════════════════════════════════════════════════════
+if let Some(x) = opt {
+    if x > 0 {
+        if let Ok(y) = parse(x) {
+            if y.is_valid() {
+                process(y);
+            }
+        }
+    }
+}
+
+代码形状:
+    if
+      if
+        if
+          if
+            process  ← 深层嵌套，"右漂移"
+
+let chains（扁平化）:
+═══════════════════════════════════════════════════════════════════
+if let Some(x) = opt
+    && x > 0
+    && let Ok(y) = parse(x)
+    && y.is_valid()
+{
+    process(y);
+}
+
+代码形状:
+    if condition1
+       && condition2
+       && let binding
+       && condition3
+    {
+        process  ← 单层结构，所有条件一目了然
+    }
+```
+
+### 表征 B: 传统 vs let chains 复杂度矩阵
+
+| 场景 | 嵌套 if let | let chains | 代码行数 | 可读性 |
+|------|------------|-----------|---------|--------|
+| 单层 Option | 3 行 | 1 行 | -67% | ⭐⭐⭐ |
+| Option + Result | 5 行 | 1 行 | -80% | ⭐⭐⭐⭐ |
+| 多条件验证 | 7 行 | 2 行 | -71% | ⭐⭐⭐⭐⭐ |
+| while 流处理 | 5 行 | 2 行 | -60% | ⭐⭐⭐⭐ |
+
+---
+
+## 📚 模块 8: 国际化对齐
+
+| 来源 | 类型 | 说明 |
+|------|------|------|
+| [RFC 2497](https://rust-lang.github.io/rfcs/2497-if-let-chains.html) | 官方 RFC | `let chains` 的原始设计提案 |
+| [Rust Reference](https://doc.rust-lang.org/reference/expressions/if-expr.html) | 官方 | `if` 表达式中的 let chains 语法 |
+| [Rust 1.95 Release](https://releases.rs/docs/1.95.0/) | 官方 | 稳定化公告 |
+
+---
+
+## ⚖️ 模块 9: 设计权衡
+
+### 为什么需要 let chains？
+
+Rust 的 `if let` 解决了 `match` 的冗长问题，但多层 `if let` 仍导致"右漂移"。`let chains` 的核心价值是**保持模式匹配的表达能力，同时恢复布尔表达式的扁平组合性**。
+
+代价：条件链过长时（>4 个条件），可读性反而下降。此时应拆分为辅助函数。
+
+---
+
+## 📝 模块 10: 自我检测
+
+1. **`let chains` 中的 `&&` 和 `||` 可以混用吗？** 如果不行，原因是什么？
+
+2. **`while let chains` 与 `if let chains` 在语义上的关键差异是什么？** 为什么 `while let Some(x) = iter.next() && x > 0` 在 `x <= 0` 时终止循环而非跳过？
+
+3. 将以下嵌套代码改写为 `let chains`：
+
+```rust
+if let Some(headers) = response.headers() {
+    if let Some(auth) = headers.get("Authorization") {
+        if let Ok(token) = auth.to_str() {
+            if token.starts_with("Bearer ") {
+                return Some(&token[7..]);
+            }
+        }
+    }
+}
+None
+```
+
+<details>
+<summary>参考答案</summary>
+
+```rust
+if let Some(headers) = response.headers()
+    && let Some(auth) = headers.get("Authorization")
+    && let Ok(token) = auth.to_str()
+    && token.starts_with("Bearer ")
+{
+    return Some(&token[7..]);
+}
+None
+```
+
+</details>
+
+---
+
 ## 注意事项
 
 1. **while 语义**：`while let chains` 中任一条件失败会终止整个循环

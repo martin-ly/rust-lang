@@ -304,6 +304,53 @@ cargo expand
 
 ---
 
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[Source Code .rs] --> B[Lexing]
+    B --> C[Parsing]
+    C --> D[AST]
+    D --> E[Name Resolution & Macro Expansion]
+    E --> F[HIR]
+    F --> G[Type Check & Trait Solving]
+    G --> H[MIR]
+    H --> I[Borrow Checker NLL]
+    H --> J[MIR Optimizations]
+    J --> K[LLVM IR]
+    K --> L[LLVM Optimizations]
+    L --> M[Codegen]
+    M --> N[Binary]
+    
+    O[Monomorphization] --> G
+    O --> H
+    P[Const Evaluation] --> F
+    
+    style H fill:#f9f,stroke:#333,stroke-width:2px
+    style I fill:#bbf,stroke:#333,stroke-width:2px
+    style G fill:#bfb,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **Ownership & Borrowing** | `01_fundamentals/ownership.md` | 所有权规则如何在 MIR 中编码为 move/borrow 语义 |
+| **Generics & Traits** | `02_intermediate/generics.md`, `traits.md` | 单态化和 trait solving 的编译器实现 |
+| **Unsafe Rust** | `03_advanced/unsafe/unsafe_rust.md` | MIR 中 `*ptr` 解引用如何被编译器处理 |
+| **Async/Await** | `03_advanced/async/async_await.md` | async fn 脱糖为状态机的过程在 HIR→MIR 阶段完成 |
+
+#### 启下（后续延伸预告）
+
+| 后续概念 | 所在文档 | 掌握本章后方可理解 |
+|----------|----------|-------------------|
+| **Tree Borrows** | `04_expert/miri/tree_borrows.md` | MIR 的内存操作如何被 Miri 用 TB 模型验证 |
+| **Unsafe Audit** | `04_expert/unsafe_audit.md` | 理解编译器 MIR 输出以审计 unsafe 代码 |
+| **Compiler Plugins** | `05_reference/` | 基于 rustc 内部 API 开发编译器插件 |
+| **Safety Critical Toolchain** | `04_expert/safety_critical/09_reference/TOOLCHAIN_SETUP_GUIDE.md` | 高完整性系统的 rustc 工具链配置与认证 |
+
+---
+
 ### Const Evaluation
 
 Rust 支持强大的编译期计算，包括 `const fn` 和 `const` 泛型。
@@ -440,6 +487,94 @@ let sum: i32 = (0..100)
 
 ---
 
+## 🗺️ 模块 7: 思维表征套件
+
+### 表征 A: 编译器管道状态图
+
+```text
+Rust 编译器管道 —— 数据流与转换阶段
+═══════════════════════════════════════════════════════════════════
+
+  源代码 (.rs)
+       │
+       ▼
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   Lexing    │───▶│   Parsing   │───▶│     AST     │
+│  (libsyntax)│    │ (递归下降)   │    │ (丰富语法树)│
+└─────────────┘    └─────────────┘    └──────┬──────┘
+                                              │
+                                              ▼
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   LLVM IR   │◀───│  MIR优化后  │◀───│    MIR      │
+│  (SSA形式)  │    │ (常量传播等) │    │(借用检查层) │
+└──────┬──────┘    └─────────────┘    └──────┬──────┘
+       │                                      │
+       │  类型检查 & Trait求解                 │  借用检查器 (NLL)
+       │  ┌─────────────┐                     │  ┌─────────────┐
+       │  │ Hindley-    │                     │  │ 区域约束系统 │
+       │  │ Milner扩展  │                     │  │ 非词法生命周期│
+       │  └─────────────┘                     │  └─────────────┘
+       │                                      │
+       ▼                                      ▼
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│ LLVM优化    │───▶│  代码生成   │───▶│  目标文件   │
+│ (O0→O3)     │    │ (Backend)   │    │ (.o/.obj)   │
+└─────────────┘    └─────────────┘    └─────────────┘
+
+关键决策点:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• AST vs HIR: HIR 去除了语法糖（如 `for` 循环→`loop`+`match`）
+• HIR vs MIR: MIR 显式控制流 + SSA，是借用检查的工作层
+• MIR vs LLVM IR: MIR 保留 Rust 语义（如 Panic、Drop），LLVM IR 更底层
+• 优化级别: O0(调试) → O1(平衡) → O2(默认发布) → O3(极致性能) → Os/Oz(体积)
+```
+
+### 表征 B: 单态化 vs 动态分发决策矩阵
+
+| 维度 | 单态化 `fn foo<T>()` | 动态分发 `&dyn Trait` | `impl Trait` |
+|------|----------------------|----------------------|-------------|
+| **运行时性能** | 最优（零成本抽象） | 间接调用 + vtable 查找 | 同单态化 |
+| **二进制体积** | 膨胀（每个 T 一份代码） | 紧凑（一份代码） | 同单态化 |
+| **编译时间** | 长（代码膨胀） | 短 | 中等 |
+| **类型擦除** | 否 | 是 | 部分（API 边界） |
+| **适用场景** | 性能关键、泛型算法 | 集合存储、插件系统 | API 隐藏实现细节 |
+| **典型反模式** | `fn log<T: Display>(t: T)` 每个调用点膨胀 | 高频调用的热点路径 | 过度使用导致编译慢 |
+
+### 表征 C: 编译期错误 vs 运行时错误防护层级
+
+```text
+Rust 编译器的多层防护体系
+═══════════════════════════════════════════════════════════════════
+
+  源代码
+     │
+     ├─► 词法/语法错误 ───────────────► 编译失败（绝对阻止）
+     │
+     ├─► 名称解析错误 ─────────────────► 编译失败
+     │
+     ├─► 类型错误 / Trait求解失败 ─────► 编译失败
+     │       │
+     │       └── 如: `let x: String = 42;`
+     │
+     ├─► 借用检查错误 ─────────────────► 编译失败
+     │       │
+     │       └── 如: `let r = &mut x; let r2 = &x;`
+     │
+     ├─► MIR 优化期常量检测 ───────────► 编译失败（如数组越界常量索引）
+     │
+     ├─► LLVM 优化期 ──────────────────► 可能编译失败（如无限递归检测）
+     │
+     └─► 二进制运行 ───────────────────► 运行时 Panic（边界检查、溢出检查）
+                 │
+                 └── Miri 可检测的 UB: 悬垂指针、数据竞争、未初始化读取
+
+安全层级递进:
+  编译期错误 > 运行时 Panic > Miri 检测 UB > 生产环境静默 UB
+  （最安全）                              （最危险）
+```
+
+---
+
 ## ⚠️ 常见陷阱
 
 ### 1. 过度单态化
@@ -482,6 +617,156 @@ where
 
 // 始终测试多个编译器版本
 ```
+
+---
+
+## 📚 模块 8: 国际化对齐
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 对应章节/条目 | 本文档对应点 |
+|------|------|---------------|--------------|
+| [Rust Compiler Development Guide](https://rustc-dev-guide.rust-lang.org/) | 官方 | 全书 | 模块 4（MIR、HIR、类型检查） |
+| [Rust Reference - Type System](https://doc.rust-lang.org/reference/type-system.html) | 官方 | Type inference, trait bounds | 模块 4（Trait Solving） |
+| [MIR Design Docs](https://github.com/rust-lang/rust/tree/master/compiler/rustc_middle/src/mir) | 官方 | MIR 数据结构定义 | 模块 4.1 |
+
+### 8.2 学术来源
+
+| 论文/来源 | 会议/机构 | 核心论证 | 本文档对应点 |
+|-----------|-----------|----------|--------------|
+| **"Oxide: The Essence of Rust"** | arXiv 2019 (Weiss et al.) | Rust 类型系统的形式化描述， ownership 作为资源的代数效应 | 模块 4.1 |
+| **"Non-Lexical Lifetimes"** | Rust Blog 2016 (Niko Matsakis) | NLL 的基于数据流的区域推断算法 | 模块 4.2 |
+| **"Polonius: The Future of Borrow Checking"** | Rust Blog 2018+ | 基于逻辑编程的借用检查器，替代 NLL 的下一步 | 模块 4.2 |
+| **"RustBelt"** | POPL 2018 | Iris 分离逻辑证明 Rust 类型系统的 soundness | 模块 4（编译器保证的底层逻辑） |
+
+### 8.3 社区权威
+
+| 作者 | 文章/演讲 | 核心观点 | 本文档对应点 |
+|------|-----------|----------|--------------|
+| **Niko Matsakis** | [Rust 编译器设计系列](https://smallcultfollowing.com/babysteps/) | 编译器架构决策的演进（如 Chalk 替换旧 trait solver） | 模块 4.4 |
+| **MIR 团队** | [MIR 优化通行证文档](https://rustc-dev-guide.rust-lang.org/mir/optimizations.html) | MIR 优化管道的具体实现 | 模块 4.5 |
+| **Jon Gjengset** | [Crust of Rust: 编译器](https://www.youtube.com/c/JonGjengset) | 深入 rustc 内部的实操指南 | 模块 5 |
+
+### 8.4 跨语言对比
+
+| 维度 | Rust (rustc) | GCC (C/C++) | Go (gc) | Swift |
+|------|-------------|-------------|---------|-------|
+| **中间表示** | HIR → MIR → LLVM IR | GIMPLE → RTL | SSA IR | SIL → LLVM IR |
+| **所有权检查** | 编译期（MIR 借用检查） | 无 | GC（运行时） | ARC + 编译期检查 |
+| **单态化** | 全单态化 | 模板实例化 | 接口值（iface） | 泛型特化 |
+| **后端** | LLVM | 自研 | 自研 | LLVM |
+| **编译期计算** | const fn + const 泛型 | constexpr (C++11+) | 无（编译期执行有限） | 无 |
+| **形式化验证** | RustBelt + Miri | 无 | 无 | 无 |
+
+> **关键差异**: Rust 是唯一在编译器中嵌入**形式化内存模型验证工具**（Miri）的主流系统语言。MIR 层的设计使得借用检查、优化和 UB 检测共享同一中间表示，这是 Rust 编译器架构的独特优势。
+
+---
+
+## ⚖️ 模块 9: 设计权衡分析
+
+### 9.1 为什么 Rust 需要 MIR？
+
+Rust 编译器在 AST/HIR 和 LLVM IR 之间引入 MIR 的核心原因是：**借用检查需要比 AST 更精确的控制流，但比 LLVM IR 更高的语义层次**。
+
+- **AST 太高层**: `for` 循环、模式匹配等语法糖掩盖了真实的内存操作顺序。
+- **LLVM IR 太低层**: 丢失了 Rust 特有的语义（如 Panic 边界、Drop 标志、所有权转移）。
+- **MIR 恰到好处**: 显式基本块 + SSA 变量 + Rust 语义原语（`SwitchInt`、`Call`、`Drop`）。
+
+### 9.2 该设计的成本
+
+**编译时间**: 多级 IR（AST → HIR → MIR → LLVM IR）增加了编译管道的长度。Rust 的编译速度常受批评，部分原因正是这些丰富的中间表示。
+
+**内存占用**: 编译过程中同时维护多棵 IR 树，对大型 crate 的内存压力显著。
+
+**工具链复杂度**: `rustc` 的代码库超过 300 万行，新手贡献者门槛极高。
+
+### 9.3 什么场景下 rustc 是次优的？
+
+1. **快速迭代开发**: Rust 的编译速度在大型项目中可能成为瓶颈。`cargo check`（只到 HIR 类型检查）和 `sccache` 是缓解方案，但无法根本解决。
+2. **脚本/快速原型**: 相比 Go 或 Python 的即时编译，Rust 的完整编译管道过重。`cargo-script` 和未来的 `rustc` 增量编译改进正在解决。
+3. **极端嵌入式**: 对于 < 8KB Flash 的 MCU，Rust 的运行时（即使 `no_std`）和单态化膨胀可能超出预算。此时 C 仍是更轻量选择。
+
+---
+
+## 📝 模块 10: 自我检测与练习
+
+### 概念性问题
+
+1. **为什么 MIR 使用 SSA（静态单赋值）形式？** SSA 如何简化借用检查器的实现？
+
+2. **NLL（非词法生命周期）与早期的词法生命周期相比，核心改进是什么？** 这种改进如何在 MIR 层面实现？
+
+3. **单态化与 `&dyn Trait` 动态分发在编译器层面的本质差异是什么？** 为什么 Rust 的 trait objects 需要 vtable？
+
+### 代码修复题
+
+**题 1**: 以下代码编译失败。请分析编译器在哪个阶段（词法/语法/类型检查/借用检查）报错，并修复：
+
+```rust
+fn main() {
+    let v = vec![1, 2, 3];
+    let r1 = &v[0];
+    v.push(4);
+    println!("{}", r1);
+}
+```
+
+<details>
+<summary>参考答案</summary>
+
+**阶段**: 借用检查（MIR 层 NLL）
+
+**分析**: `v.push(4)` 需要 `&mut v`，但 `r1 = &v[0]` 持有对 `v` 的共享引用。在 NLL 下，`r1` 的生命周期延伸到 `println!`，因此与 `v.push` 冲突。
+
+**修复**:
+```rust
+fn main() {
+    let v = vec![1, 2, 3];
+    {
+        let r1 = &v[0];
+        println!("{}", r1);  // r1 在此处后不再使用
+    }
+    v.push(4);  // ✅ 现在合法
+}
+```
+
+</details>
+
+**题 2**: 分析以下泛型代码的单态化结果。如果使用 `nm` 查看符号表，会看到哪些具体函数？
+
+```rust
+fn identity<T>(x: T) -> T { x }
+
+fn main() {
+    let _ = identity(5i32);
+    let _ = identity(3.14f64);
+    let _ = identity("hello");
+}
+```
+
+<details>
+<summary>参考答案</summary>
+
+`nm` 输出会包含：
+- `identity::<i32>`
+- `identity::<f64>`
+- `identity::<&str>`
+
+三个不同的函数符号。这是单态化的核心特征：每个具体类型实例生成独立代码。
+
+</details>
+
+### 开放设计题
+
+**题 3**: 你正在设计一个高性能图形渲染库。库中有一个 `draw<T: Drawable>` 函数被数百种不同类型调用（`Circle`、`Rectangle`、`Text`、`Mesh` 等）。你面临选择：
+
+1. **全单态化**: `fn draw<T: Drawable>(item: T)` — 性能最优，但代码膨胀
+2. **混合策略**: 高频类型单态化，低频类型动态分发
+3. **全动态分发**: `fn draw(item: &dyn Drawable)` — 代码紧凑，但有间接开销
+
+请从编译时间、二进制体积、运行时性能三个维度分析 trade-off，并给出你的推荐方案。
+
+> 💡 提示：参考模块 7 的单态化 vs 动态分发矩阵。
 
 ---
 

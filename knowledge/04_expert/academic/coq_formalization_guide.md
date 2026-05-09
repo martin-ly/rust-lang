@@ -82,7 +82,124 @@ rust_formalization/
 
 ---
 
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[Rust Type System] --> B[Operational Semantics]
+    B --> C[Coq Formalization]
+    C --> D[Inductive Types]
+    C --> E[Heap Model]
+    E --> F[Ownership Rules]
+    F --> G[Ownership Transfer Theorem]
+    F --> H[Borrowing Rules]
+    H --> I[Borrow Check Soundness]
+    D --> J[Progress Theorem]
+    D --> K[Preservation Theorem]
+    J --> L[Type Safety]
+    K --> L
+    E --> M[Separating Logic / Iris]
+    M --> N[Concurrent Verification]
+    N --> O[Data Race Freedom]
+    
+    style C fill:#f9f,stroke:#333,stroke-width:2px
+    style L fill:#bfb,stroke:#333,stroke-width:2px
+    style M fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **Ownership** | `01_fundamentals/ownership.md` | 所有权的数学定义（唯一性、转移） |
+| **Borrowing** | `01_fundamentals/borrowing.md` | 可变/不可变借用的互斥规则 |
+| **Type System** | `02_intermediate/type_system.md` | 类型判断、进展性、保持性 |
+| **Send/Sync** | `03_advanced/concurrency/threads.md` | 并发安全的形式化定义 |
+
+#### 启下（后续延伸预告）
+
+| 后续概念 | 所在文档 | 掌握本章后方可理解 |
+|----------|----------|-------------------|
+| **Tree Borrows** | `04_expert/miri/tree_borrows.md` | 内存模型的形式化验证目标 |
+| **RustBelt** | `04_expert/safety_critical/` | Iris 分离逻辑在高完整性系统中的应用 |
+
+---
+
 ## 💡 核心概念
+
+### 模块 1: 概念定义
+
+#### 1.1 直观定义
+
+**形式化验证（Formal Verification）** 是用数学方法证明程序满足其规范的过程。Coq 是一种**交互式定理证明器**，允许用户：
+
+1. 定义形式化语言（Rust 子集的语法和语义）
+2. 陈述定理（如"类型安全的程序不会陷入 stuck 状态"）
+3. 逐步构建机器可检查的证明
+
+**Rust 形式化的核心目标**：证明 Rust 的类型系统确实保证了内存安全和线程安全——不是通过测试，而是通过数学证明。
+
+#### 1.2 操作定义
+
+**形式化验证的三层结构**：
+
+```
+┌─────────────────────────────────────────┐
+│  第一层: 语法 (Syntax)                   │
+│  • 定义合法的 Rust 程序结构              │
+│  • Coq: Inductive expr / Inductive value │
+└─────────────────────────────────────────┘
+                    │
+                    ▼
+┌─────────────────────────────────────────┐
+│  第二层: 语义 (Semantics)                │
+│  • 定义程序的执行行为                    │
+│  • Coq: Inductive step (小步语义)        │
+│  • 堆模型: Definition heap               │
+└─────────────────────────────────────────┘
+                    │
+                    ▼
+┌─────────────────────────────────────────┐
+│  第三层: 元理论 (Metatheory)             │
+│  • 证明类型系统的性质                    │
+│  • Progress: 良类型的程序不会 stuck      │
+│  • Preservation: 求值保持类型            │
+│  • Type Safety = Progress + Preservation │
+└─────────────────────────────────────────┘
+```
+
+#### 1.3 形式化直觉
+
+> ⚠️ **标注**: 本节与 Programming Languages 的形式语义理论对齐。
+
+**类型安全的经典定义（Wright & Felleisen, 1994）**：
+
+```
+Progress:    ⊢ e : T  →  value(e)  ∨  ∃e'. e ⟶ e'
+             （良类型的表达式要么是值，要么可以进一步求值）
+
+Preservation: ⊢ e : T ∧ e ⟶ e'  →  ⊢ e' : T
+             （求值保持类型）
+
+Type Safety: Progress ∧ Preservation
+             （良类型的程序永远不会 stuck）
+```
+
+Rust 的形式化在此基础上增加了**所有权**和**借用**的约束，使得"stuck"不仅包括类型错误，还包括内存错误（use-after-free、数据竞争等）。
+
+---
+
+### 模块 2: 属性清单
+
+| 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
+|--------|------|-----------|------|----------|
+| **Progress** | 元定理 | 可证明 | 良类型程序不会 stuck | 仅对形式化子集成立 |
+| **Preservation** | 元定理 | 可证明 | 求值保持类型 | 需归纳于类型推导 |
+| **所有权唯一性** | 语义规则 | 编译期检查 | 同一时刻只有一个所有者 | `Rc`/`Arc` 引入共享 |
+| **借用互斥** | 语义规则 | 编译期检查 | `&mut T` 与 `&T` 互斥 | `unsafe` 可绕过 |
+| **分离逻辑** | 证明技术 | Iris 框架 | 模块化推理堆资源 | 学习曲线陡峭 |
+
+---
 
 ### 所有权形式化
 
@@ -347,6 +464,83 @@ Qed.
 
 ---
 
+## 🗺️ 模块 7: 思维表征
+
+### 表征: 形式化验证 vs 测试的完备性对比
+
+```text
+验证方法完备性对比
+═══════════════════════════════════════════════════════════════════
+
+测试（Testing）:
+  输入空间 ─────────────────────────────────────────────►
+  │ ✓ tested    │ ? untested  │ ? untested  │ ? ...    │
+  └─────────────┴─────────────┴─────────────┴──────────┘
+  
+  • 只能证明 bug 存在（找到反例）
+  • 无法证明 bug 不存在（未测试的输入可能失败）
+  • 成本低，易于实施
+
+形式化验证（Formal Verification）:
+  输入空间 ─────────────────────────────────────────────►
+  │ ✓ proven    │ ✓ proven    │ ✓ proven    │ ✓ ...    │
+  └─────────────┴─────────────┴─────────────┴──────────┘
+  
+  • 证明对所有输入都正确
+  • 覆盖无限输入空间（通过数学归纳）
+  • 成本高，需要专业知识和大量时间
+  • RustBelt: ~3人年证明 Rust 核心子集
+
+关键洞察: 形式化验证不是替代测试，而是对核心安全属性的终极保证。
+         实际项目中，测试覆盖 95% 场景，形式化验证覆盖最关键的 5%。
+```
+
+---
+
+## 📚 模块 8: 国际化对齐
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|------|------|------|
+| [Coq 官方](https://coq.inria.fr/) | 官方 | Coq 证明助手 |
+| [Iris 项目](https://iris-project.org/) | 学术 | 分离逻辑框架 |
+| [Software Foundations](https://softwarefoundations.cis.upenn.edu/) | 教材 | Coq 入门教材 |
+
+### 8.2 学术来源
+
+| 论文/来源 | 会议/机构 | 核心论证 |
+|-----------|-----------|----------|
+| **"RustBelt: Securing the Foundations of the Rust Programming Language"** | POPL 2018 (Jung et al.) | 用 Iris 证明 Rust 类型系统，首次形式化验证系统语言的 ownership + borrowing |
+| **"Oxide: The Essence of Rust"** | arXiv 2019 (Weiss et al.) | Rust 类型系统的形式化描述，algebraic effects 视角 |
+| **"Types and Programming Languages"** (Pierce) | 教材 | 类型系统形式化的标准教材，Progress + Preservation 的经典阐述 |
+
+---
+
+## ⚖️ 模块 9: 设计权衡分析
+
+### 为什么 Rust 需要形式化验证？
+
+Rust 的安全承诺（"如果它编译，它安全"）是极其强的。形式化验证是验证这一承诺的终极手段：
+
+1. **信任根基**: 编译器是复杂的软件，可能包含 bug。形式化证明提供了不依赖编译器实现的独立保证。
+2. **标准化**: 形式化规范是语言语义的精确定义，消除了自然语言规范的歧义。
+3. **扩展验证**: 新的语言特性（如 async、const generics）需要证明不与现有安全保证冲突。
+
+代价：形式化验证目前仅覆盖了 Rust 的**核心子集**。完整的 Rust（包括 `unsafe`、FFI、宏）的形式化仍然是一个开放的研究问题。
+
+---
+
+## 📝 模块 10: 自我检测
+
+1. **Progress 定理和 Preservation 定理分别解决什么问题？** 为什么两者合起来构成类型安全？
+
+2. **分离逻辑（Separation Logic）相比传统的 Hoare 逻辑，在验证 Rust 所有权时有什么优势？**
+
+3. **RustBelt 为什么使用 Iris 框架而不是基础的 Coq？** Iris 提供了哪些对 Rust 验证至关重要的特性？
+
+---
+
 ## 🔗 参考资源
 
 - [Coq 官方文档](https://coq.inria.fr/documentation)
@@ -357,5 +551,5 @@ Qed.
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 100% 完成
+**最后更新**: 2026-05-09
+**状态**: ✅ 按 10 模块标准重构完成

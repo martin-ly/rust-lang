@@ -6,6 +6,26 @@
 
 ---
 
+## 📋 前置知识映射
+
+安全关键系统开发要求扎实的 Rust 核心知识基础。以下映射表将本生态系统的文档与核心知识文档关联：
+
+| 核心知识主题 | 前置文档 | 关联的安全关键文档 |
+|-------------|---------|-------------------|
+| **Unsafe Rust** | `../../03_advanced/unsafe/unsafe_rust.md` | [编码规范](09_reference/RUST_SAFETY_CRITICAL_CODING_GUIDELINES.md)、[安全审计](09_reference/SECURITY_AUDIT_GUIDE.md) |
+| **Send/Sync 与线程** | `../../03_advanced/concurrency/threads.md` | [编码规范](09_reference/RUST_SAFETY_CRITICAL_CODING_GUIDELINES.md) |
+| **原子操作与内存序** | `../../03_advanced/concurrency/atomics.md` | [编码规范](09_reference/RUST_SAFETY_CRITICAL_CODING_GUIDELINES.md) |
+| **同步原语** | `../../03_advanced/concurrency/synchronization.md` | [编码规范](09_reference/RUST_SAFETY_CRITICAL_CODING_GUIDELINES.md) |
+| **FFI 与 C 互操作** | `../../03_advanced/unsafe/ffi.md` | [FFI 集成指南](09_reference/FFI_INTEGRATION_GUIDE.md) |
+| **Tree Borrows / Miri** | `../miri/tree_borrows.md` | [形式化验证实战](04_axiomatic_reasoning/FORMAL_VERIFICATION_PRACTICAL_GUIDE.md) |
+| **编译器内部** | `../compiler_internals.md` | [工具链配置](09_reference/TOOLCHAIN_SETUP_GUIDE.md) |
+| **Unsafe 代码审计** | `../unsafe_audit.md` | [安全审计指南](09_reference/SECURITY_AUDIT_GUIDE.md) |
+| **类型驱动正确性** | `../../03_advanced/type_driven_correctness.md` | [形式化验证实战](04_axiomatic_reasoning/FORMAL_VERIFICATION_PRACTICAL_GUIDE.md) |
+
+> 💡 **学习路径建议**: 按上表从左到右阅读。先掌握核心知识文档，再深入安全关键系统的特殊要求。
+
+---
+
 ## 📚 文档结构
 
 ### 01. 思维导图 (Mind Maps) - 全局视角
