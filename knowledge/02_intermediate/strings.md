@@ -119,14 +119,14 @@ graph TD
     F --> G[AsRef<str>]
     B --> H[Vec<u8> Wrapper]
     H --> I[UTF-8 Validation]
-    
+
     C --> J[Slice of String]
     C --> K[String Literal]
     C --> L[Static Lifetime]
-    
+
     B --> M[OsString / CString]
     M --> N[FFI Boundaries]
-    
+
     style B fill:#f9f,stroke:#333,stroke-width:2px
     style C fill:#bfb,stroke:#333,stroke-width:2px
     style F fill:#bbf,stroke:#333,stroke-width:2px
@@ -247,12 +247,12 @@ fn main() {
 fn build_csv(items: &[&str]) -> String {
     let total: usize = items.iter().map(|s| s.len()).sum();
     let mut result = String::with_capacity(total + items.len());
-    
+
     for (i, item) in items.iter().enumerate() {
         if i > 0 { result.push(','); }
         result.push_str(item);
     }
-    
+
     result
 }
 ```
@@ -264,12 +264,14 @@ fn build_csv(items: &[&str]) -> String {
 #### 反例 1: 字符串字面索引
 
 **错误代码**:
+
 ```rust
 let s = "你好";
 let first = s[0];  // ❌ 编译错误！
 ```
 
 **编译器错误**:
+
 ```text
 error[E0277]: the type `str` cannot be indexed by `{integer}`
 ```
@@ -277,6 +279,7 @@ error[E0277]: the type `str` cannot be indexed by `{integer}`
 **根因推导**: `s[0]` 返回第一个字节（`0xE4`），但 "你" 由三个字节 `[0xE4, 0xBD, 0xA0]` 组成。返回不完整的 UTF-8 序列会破坏字符串有效性。
 
 **修复方案**:
+
 ```rust
 let s = "你好";
 let first_char = s.chars().next().unwrap();  // '你'
@@ -288,6 +291,7 @@ let first_byte = s.as_bytes()[0];             // 0xE4（如果确实需要字节
 #### 反例 2: `+` 运算符的所有权陷阱
 
 **错误代码**:
+
 ```rust
 let s1 = String::from("Hello");
 let s2 = String::from("World");
@@ -298,6 +302,7 @@ println!("{}", s1);  // ❌ 编译错误！s1 已被移动
 **根因推导**: `String` 的 `Add` 实现消耗左操作数（`self` 是 `String` 而非 `&String`），因为追加可能需要重新分配，旧缓冲区无效。
 
 **修复方案**:
+
 ```rust
 let s1 = String::from("Hello");
 let s2 = String::from("World");
@@ -310,12 +315,14 @@ println!("s1 still usable: {}", s1);
 #### 反例 3: 不安全的字符串切片
 
 **错误代码**:
+
 ```rust
 let s = "你好世界";
 let slice = &s[0..2];  // ❌ 运行时 panic！
 ```
 
 **运行时错误**:
+
 ```text
 thread 'main' panicked at 'byte index 2 is not a char boundary'
 ```
@@ -323,6 +330,7 @@ thread 'main' panicked at 'byte index 2 is not a char boundary'
 **根因推导**: `s[0..2]` 切在 "你"（3字节）的中间，产生无效的 UTF-8 子串。
 
 **修复方案**:
+
 ```rust
 let s = "你好世界";
 if let Some(slice) = s.get(0..3) {
@@ -519,7 +527,7 @@ fn build(items: &[&str]) -> String {
 fn build(items: &[&str]) -> String {
     let total: usize = items.iter().map(|s| s.len()).sum();
     let mut result = String::with_capacity(total + items.len());
-    
+
     for (i, item) in items.iter().enumerate() {
         if i > 0 { result.push(','); }
         result.push_str(item);
@@ -540,6 +548,7 @@ fn build(items: &[&str]) -> String {
 4. 输出到文件或终端
 
 请分析：
+
 - 内部表示应该用 `String`、`Vec<char>` 还是 `Vec<u8>`？
 - 单词分割如何处理不同语言的边界（英文空格、中文无空格）？
 - 是否需要引入 `Cow` 来优化只读场景？

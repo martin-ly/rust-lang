@@ -321,11 +321,11 @@ graph TD
     K --> L[LLVM Optimizations]
     L --> M[Codegen]
     M --> N[Binary]
-    
+
     O[Monomorphization] --> G
     O --> H
     P[Const Evaluation] --> F
-    
+
     style H fill:#f9f,stroke:#333,stroke-width:2px
     style I fill:#bbf,stroke:#333,stroke-width:2px
     style G fill:#bfb,stroke:#333,stroke-width:2px
@@ -719,6 +719,7 @@ fn main() {
 **分析**: `v.push(4)` 需要 `&mut v`，但 `r1 = &v[0]` 持有对 `v` 的共享引用。在 NLL 下，`r1` 的生命周期延伸到 `println!`，因此与 `v.push` 冲突。
 
 **修复**:
+
 ```rust
 fn main() {
     let v = vec![1, 2, 3];
@@ -748,6 +749,7 @@ fn main() {
 <summary>参考答案</summary>
 
 `nm` 输出会包含：
+
 - `identity::<i32>`
 - `identity::<f64>`
 - `identity::<&str>`

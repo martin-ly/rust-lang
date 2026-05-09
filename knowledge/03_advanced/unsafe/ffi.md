@@ -64,6 +64,7 @@ pub struct Point {
 ```
 
 边界操作：
+
 - `extern "C"`：使用 C 调用约定
 - `#[no_mangle]`：禁止 Rust 的名称修饰（name mangling），使 C 可以找到该符号
 - `repr(C)`：按 C 规则排列结构体字段
@@ -89,6 +90,7 @@ Rust 调用 C 函数:
 ```
 
 关键问题：
+
 - **谁分配内存？谁释放？** 必须约定所有权规则
 - **结构体布局是否一致？** `repr(C)` 保证字段顺序，但填充（padding）可能因平台而异
 - **panic 如何传播？** Rust panic 跨越 FFI 边界是 UB，必须 `catch_unwind`
@@ -131,7 +133,7 @@ graph TD
     K --> L[catch_unwind]
     C --> M[bindgen]
     M --> N[Auto-generated Bindings]
-    
+
     style C fill:#f9f,stroke:#333,stroke-width:2px
     style K fill:#bbf,stroke:#333,stroke-width:2px
     style F fill:#bfb,stroke:#333,stroke-width:2px
@@ -210,6 +212,7 @@ struct CLayout {
 ```
 
 `repr(C)` 保证：
+
 - 字段顺序与声明一致
 - 布局与 C 编译器兼容（同平台）
 
@@ -237,6 +240,7 @@ Rust 函数被 C 调用:
 ```
 
 修复：
+
 ```rust
 pub extern "C" fn safe_rust_function() -> c_int {
     match std::panic::catch_unwind(|| {
@@ -292,7 +296,7 @@ extern "C" {
 fn call_process_name(name: &str) -> Result<i32, String> {
     let c_name = CString::new(name)
         .map_err(|e| format!("Invalid string: {}", e))?;
-    
+
     let result = unsafe { process_name(c_name.as_ptr()) };
     Ok(result)
 }
@@ -302,12 +306,12 @@ fn get_version_safe() -> Result<String, String> {
     if ptr.is_null() {
         return Err("Failed to get version".to_string());
     }
-    
+
     let c_str = unsafe { CStr::from_ptr(ptr) };
     let result = c_str.to_str()
         .map_err(|e| format!("Invalid UTF-8: {}", e))?
         .to_string();
-    
+
     unsafe { free_string(ptr); }
     Ok(result)
 }
@@ -339,7 +343,7 @@ impl Context {
         let ptr = unsafe { context_create() };
         NonNull::new(ptr).map(|p| Context { ptr: p })
     }
-    
+
     pub fn process(&mut self, data: &[u8]) -> Result<(), &'static str> {
         let result = unsafe {
             context_process(self.ptr.as_ptr(), data.as_ptr(), data.len())
@@ -370,6 +374,7 @@ impl !Sync for Context {}
 #### 反例 1: 忘记 `catch_unwind` 导致 UB
 
 **错误代码**:
+
 ```rust
 #[no_mangle]
 pub extern "C" fn process(data: *const u8, len: usize) -> i32 {
@@ -382,6 +387,7 @@ pub extern "C" fn process(data: *const u8, len: usize) -> i32 {
 **根因推导**: 如果 `len <= 100`，`slice[100]` 会 panic。panic 从 Rust 传播到 C 调用栈，C 没有 Rust 的 panic 运行时信息，栈展开将破坏 C 的栈帧，导致 UB。
 
 **修复方案**:
+
 ```rust
 #[no_mangle]
 pub extern "C" fn process(data: *const u8, len: usize) -> i32 {
@@ -389,7 +395,7 @@ pub extern "C" fn process(data: *const u8, len: usize) -> i32 {
         let slice = unsafe { std::slice::from_raw_parts(data, len) };
         slice[100] as i32
     });
-    
+
     match result {
         Ok(val) => val,
         Err(_) => -1,  // 返回错误码
@@ -404,6 +410,7 @@ pub extern "C" fn process(data: *const u8, len: usize) -> i32 {
 #### 反例 2: 结构体布局不匹配
 
 **错误代码**:
+
 ```rust
 // Rust 侧
 struct Config {
@@ -423,6 +430,7 @@ struct Config {
 **根因推导**: Rust 默认使用 `repr(Rust)`，允许编译器重排字段以优化大小。C 结构体顺序与声明一致。两者布局可能不一致，导致字段错位。
 
 **修复方案**:
+
 ```rust
 #[repr(C)]
 struct Config {
@@ -438,6 +446,7 @@ struct Config {
 #### 反例 3: 所有权混淆导致双重释放
 
 **错误代码**:
+
 ```rust
 extern "C" {
     fn create_buffer() -> *mut u8;
@@ -453,6 +462,7 @@ fn bad() {
 ```
 
 **修复方案** — 明确所有权：
+
 ```rust
 pub struct Buffer {
     ptr: *mut u8,
@@ -476,8 +486,6 @@ impl Drop for Buffer {
 **抽象原则**: **"FFI 的每个指针都必须有明确的所有者"**：使用 Rust 的类型系统（`Box`、`struct`、`Drop`）封装 C 指针，将所有权规则编码到 API 中。
 
 ---
-
-
 
 ---
 
@@ -637,6 +645,7 @@ C 调用 Rust 函数的标准防护层:
 ### 9.1 为什么 Rust 的 FFI 基于 C ABI？
 
 C ABI 是操作系统层面的事实标准：
+
 1. **普遍性**: 几乎所有语言都可以导出/导入 C ABI。
 2. **简单性**: C 的调用约定是已知的最小公分母。
 3. **稳定性**: C ABI 比 C++ ABI 更稳定，更适合跨语言边界。
@@ -688,24 +697,26 @@ fn use_data() -> Vec<u8> {
 <summary>参考答案</summary>
 
 **问题**:
+
 1. `ptr` 可能为 null
 2. `len` 可能过大或与 `ptr` 不匹配
 3. `get_data` 和 `get_len` 之间可能状态变化（TOCTOU）
 
 **修复**:
+
 ```rust
 fn use_data() -> Option<Vec<u8>> {
     let ptr = unsafe { get_data() };
     if ptr.is_null() {
         return None;
     }
-    
+
     let len = unsafe { get_len() };
     // 假设有最大合理长度限制
     if len > 10_000_000 {
         return None;
     }
-    
+
     Some(unsafe { std::slice::from_raw_parts(ptr, len).to_vec() })
 }
 ```
@@ -730,18 +741,20 @@ pub extern "C" fn process_string(s: *mut c_char) {
 <summary>参考答案</summary>
 
 **问题**:
+
 1. `unwrap()` 在 FFI 边界 panic 是 UB
 2. `CStr::from_ptr` 要求 s 非空且有效，未检查
 3. 假设了 `s` 是由 `malloc` 分配的，但可能不是
 
 **修复**:
+
 ```rust
 #[no_mangle]
 pub extern "C" fn process_string(s: *mut c_char) -> c_int {
     if s.is_null() {
         return -1;
     }
-    
+
     let result = std::panic::catch_unwind(|| {
         let c_str = unsafe { CStr::from_ptr(s) };
         match c_str.to_str() {
@@ -752,7 +765,7 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
             Err(_) => -2,
         }
     });
-    
+
     match result {
         Ok(code) => code,
         Err(_) => -3,
@@ -767,12 +780,14 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
 ### 开放设计题
 
 **题 3**: 你正在将一个大型的 C 数学库（如 BLAS/LAPACK）包装为安全的 Rust API。C API 的特点是：
+
 - 大量使用原始指针表示矩阵/向量
 - 函数通常接收 `*mut f64` + `len` + `stride`
 - 部分函数分配临时工作空间
 - 不是线程安全的
 
 请从以下维度设计 Rust wrapper：
+
 1. 类型设计：如何用 Rust 类型保证指针+长度的一致性？
 2. 所有权：C 的临时分配如何与 Rust 的 RAII 结合？
 3. 线程安全：如何在 API 层面标记非线程安全？

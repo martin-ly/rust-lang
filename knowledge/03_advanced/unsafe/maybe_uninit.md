@@ -74,6 +74,7 @@ assert_eq!(value, 42);
 | `.assume_init_drop()` | ⚠️ Unsafe | 断言已初始化，执行 Drop |
 
 > **Rust 1.95 新增**: `MaybeUninit<[T; N]>` 与 `[MaybeUninit<T>; N]` 之间的双向转换已稳定：
+>
 > - `MaybeUninit<[T; N]>: From<[MaybeUninit<T>; N]>`
 > - `[MaybeUninit<T>; N]: From<MaybeUninit<[T; N]>>`
 > - `AsRef`/`AsMut` 实现支持数组视图访问

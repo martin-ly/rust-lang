@@ -1,7 +1,7 @@
 # MPSC 通道
 
-**主题**: Concurrency  
-**难度**: Easy  
+**主题**: Concurrency
+**难度**: Easy
 **练习编号**: ex03_channel_mpsc
 
 ---

@@ -1,7 +1,7 @@
 # Type-Driven Correctness：类型驱动的正确性
 
-> **最后更新日期**: 2026-04-24  
-> **难度级别**: 高级  
+> **最后更新日期**: 2026-04-24
+> **难度级别**: 高级
 > **前置知识**: 泛型、Trait、PhantomData、所有权系统
 
 ---
@@ -504,19 +504,19 @@ graph TD
     E --> F[Zero-cost Abstraction]
     C --> G[State Transition as Type Change]
     G --> H[Illegal States Unrepresentable]
-    
+
     I[Domain Semantics] --> J[Phantom Types]
     J --> K[Unit Safety]
     J --> L[Format Encoding]
-    
+
     M[Access Control] --> N[Capability Tokens]
     N --> O[Permission as Type]
     O --> P[Compile-time Authorization]
-    
+
     C -.-> Q[Type-Driven Correctness]
     J -.-> Q
     N -.-> Q
-    
+
     style Q fill:#f9f,stroke:#333,stroke-width:2px
     style C fill:#bfb,stroke:#333,stroke-width:2px
     style H fill:#bbf,stroke:#333,stroke-width:2px
@@ -561,6 +561,7 @@ graph TD
 #### 反例 1: Type-State 状态转换缺失导致编译错误
 
 **错误代码**:
+
 ```rust
 use std::marker::PhantomData;
 
@@ -569,8 +570,8 @@ struct Closed;
 struct File<State> { _state: PhantomData<State> }
 
 impl File<Closed> {
-    fn open(self) -> File<Open> { 
-        File { _state: PhantomData } 
+    fn open(self) -> File<Open> {
+        File { _state: PhantomData }
     }
 }
 
@@ -589,6 +590,7 @@ fn main() {
 ```
 
 **编译器错误**:
+
 ```text
 error[E0599]: no method named `close` found for struct `File<Open>`
 ```
@@ -596,10 +598,11 @@ error[E0599]: no method named `close` found for struct `File<Open>`
 **根因推导**: Type-State 模式要求**每个状态**都必须有**完整的转换方法**。如果 `Open` 状态缺少 `close()` 方法，`File<Open>` 就无法转换回 `File<Closed>`，导致对象"卡住"。
 
 **修复方案**:
+
 ```rust
 impl File<Open> {
     fn read(&self) -> Vec<u8> { vec![] }
-    
+
     fn close(self) -> File<Closed> {  // ✅ 补全状态转换
         File { _state: PhantomData }
     }
@@ -613,6 +616,7 @@ impl File<Open> {
 #### 反例 2: Phantom Type 的单位混淆
 
 **错误代码**:
+
 ```rust
 use std::marker::PhantomData;
 
@@ -637,11 +641,12 @@ fn main() {
 **根因推导**: 虽然类型系统正确地阻止了 `Meter + Second` 的操作，但错误信息仅显示类型不匹配（`Quantity<f64, Meter>` vs `Quantity<f64, Second>`），对用户的提示不够友好。
 
 **修复方案**:
+
 ```rust
 // 使用描述性类型名和清晰的文档
 /// 长度量，单位: 米
 pub type Length = Quantity<f64, Meter>;
-/// 时间量，单位: 秒  
+/// 时间量，单位: 秒
 pub type Time = Quantity<f64, Second>;
 
 // 为每种类型提供专用构造函数，增强错误信息
@@ -664,6 +669,7 @@ let d2 = Time::seconds(10.0);
 #### 反例 3: Capability Token 的权限泄露
 
 **错误代码**:
+
 ```rust
 struct Read;
 struct Write;
@@ -689,6 +695,7 @@ fn main() {
 **根因推导**: 如果 `Capability` 实现 `Clone`，任何持有 `Read` 权限的人都可以无限复制并分发该权限。Capability 安全模型的核心假设是"持有即权限"，但无限复制破坏了这一假设。
 
 **修复方案**:
+
 ```rust
 // 方案 1: 不实现 Clone，限制为移动语义
 struct Capability<P> {
@@ -755,7 +762,7 @@ struct LimitedCapability<P> {
 | **状态扩展性** | 需修改类型签名 | 添加枚举变体即可 | 添加条件判断 |
 | **动态状态** | 不支持 | 支持 | 支持 |
 | **适用状态数** | 少（2-5 个） | 任意 | 任意 |
-| ** FFI 友好度** | 低（C 无此概念） | 高 | 高 |
+| **FFI 友好度** | 低（C 无此概念） | 高 | 高 |
 
 ### 表征 C: Type-State 状态转换正确性验证流程
 
@@ -806,20 +813,20 @@ struct LimitedCapability<P> {
 
 ## 8. 参考文献
 
-1. **Aldrich, J.** *"Typestate-Oriented Programming"*. Onward! 2009.  
+1. **Aldrich, J.** *"Typestate-Oriented Programming"*. Onward! 2009.
    (Type-State 模式的奠基论文)
 
-2. **Clarke, D., & Drossopoulou, S.** *"Ownership, Encapsulation and the Disjointness of Type and Effect"*. OOPSLA 2002.  
+2. **Clarke, D., & Drossopoulou, S.** *"Ownership, Encapsulation and the Disjointness of Type and Effect"*. OOPSLA 2002.
    (Capability 安全模型的类型系统基础)
 
-3. **Rust RFC 0738: Variance**.  
-   <https://rust-lang.github.io/rfcs/0738-variance.html>  
+3. **Rust RFC 0738: Variance**.
+   <https://rust-lang.github.io/rfcs/0738-variance.html>
    (PhantomData 与变型的关系)
 
-4. **Rust By Example: Phantom Types**.  
+4. **Rust By Example: Phantom Types**.
    <https://doc.rust-lang.org/rust-by-example/generics/phantom.html>
 
-5. **The Rust Programming Language (TRPL) Chapter 19**. "Advanced Traits".  
+5. **The Rust Programming Language (TRPL) Chapter 19**. "Advanced Traits".
    (PhantomData 和高级泛型模式)
 
 ---
@@ -884,7 +891,7 @@ impl Service<Uninitialized> {
     fn new(name: &str) -> Self {
         Service { name: name.to_string(), _state: PhantomData }
     }
-    
+
     fn init(self) -> Service<Ready> {
         Service { name: self.name, _state: PhantomData }
     }
@@ -918,6 +925,7 @@ fn bad_usage() {
 更根本的问题是：`Service<Ready>` 从 `stop()` 返回是合法的，但上述代码 `s.stop()` 中 `s` 是 `Service<Ready>`，`stop()` 在 `Service<Running>` 上。编译器会报 `Service<Ready>` 没有 `stop()`。这个例子实际上已经阻止了非法转换！
 
 但如果存在以下代码则有漏洞：
+
 ```rust
 impl Service<Ready> {
     fn stop(self) -> Service<Uninitialized> { ... }  // 如果存在这个就有问题
@@ -932,7 +940,7 @@ impl Service<Running> {
         println!("Stopping {}", self.name);
         Service { name: self.name, _state: PhantomData }
     }
-    
+
     fn restart(self) -> Service<Running> {
         println!("Restarting {}", self.name);
         self.stop().start()  // 通过 Ready 中转
@@ -999,6 +1007,7 @@ impl AuthManager {
 - `Closed`: 连接已关闭
 
 **挑战**:
+
 1. 某些操作在特定状态下不可用（如 `query()` 只能在 `Connected` 或 `InTransaction` 时调用）
 2. 异步状态转换（`Connecting → Connected`）如何在 Type-State 中表示？
 3. 连接可能因网络错误从任何状态进入 `Disconnected`
@@ -1011,5 +1020,6 @@ impl AuthManager {
 ---
 
 > 📌 **复查记录**
+>
 > - 2026-04-24: 初始创建
 > - 下次复查: 随 Rust 版本更新时复查

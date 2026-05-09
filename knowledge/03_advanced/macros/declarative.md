@@ -99,6 +99,7 @@ macro_rules! vec_str {
 ```
 
 边界操作：
+
 - `$(...)*`：零次或多次重复
 - `$(...)+`：一次或多次重复
 - `$(...)?`：零次或一次重复（Rust 1.32+）
@@ -199,7 +200,7 @@ graph TD
     L --> M[Syntax Context]
     D --> N[macro_export]
     N --> O[Cross-module Macros]
-    
+
     style D fill:#f9f,stroke:#333,stroke-width:2px
     style L fill:#bbf,stroke:#333,stroke-width:2px
     style J fill:#bfb,stroke:#333,stroke-width:2px
@@ -370,6 +371,7 @@ fn main() {
 #### 反例 1: 参数多次求值
 
 **错误代码**:
+
 ```rust
 macro_rules! bad_max {
     ($a:expr, $b:expr) => {
@@ -388,6 +390,7 @@ fn main() {
 ```
 
 **输出**:
+
 ```text
 expensive called!
 expensive called!
@@ -396,6 +399,7 @@ expensive called!
 **根因推导**: `expensive()` 在 `if $a > $b` 和 `{ $a }` 中各出现一次，因此被调用两次。
 
 **修复方案**:
+
 ```rust
 macro_rules! good_max {
     ($a:expr, $b:expr) => {{
@@ -413,6 +417,7 @@ macro_rules! good_max {
 #### 反例 2: 贪婪匹配导致的歧义
 
 **错误代码**:
+
 ```rust
 macro_rules! bad_parse {
     ($a:expr, $b:expr) => {
@@ -426,6 +431,7 @@ fn main() {
 ```
 
 **编译器错误**:
+
 ```text
 error: no rules expected the token `,`
    |
@@ -438,6 +444,7 @@ error: no rules expected the token `,`
 实际上更准确地说：`1` 匹配 `$a:expr`，然后期望 `,`，然后 `2, 3` 作为整体无法匹配 `$b:expr`（因为 `2, 3` 不是表达式）。
 
 **修复方案**:
+
 ```rust
 macro_rules! good_parse {
     ($($a:expr),+ $(,)?) => {
@@ -453,6 +460,7 @@ macro_rules! good_parse {
 #### 反例 3: 卫生性导致的意外行为
 
 **错误代码**:
+
 ```rust
 macro_rules! make_fn {
     ($name:ident) => {
@@ -474,6 +482,7 @@ fn main() {
 **根因推导**: 宏内定义的 `x` 与外部的 `x` 是不同的标识符（不同 syntax context）。这通常是**期望的行为**，但有时开发者希望宏使用外部变量。
 
 **修复方案** — 通过参数传递外部标识符:
+
 ```rust
 macro_rules! make_fn_using {
     ($name:ident, $var:ident) => {
@@ -493,8 +502,6 @@ fn main() {
 **抽象原则**: **"卫生性是默认保护，可通过参数显式穿透"**：如果需要宏与外部作用域交互，通过 `ident` 捕获显式传递标识符。
 
 ---
-
-
 
 ---
 
@@ -607,7 +614,7 @@ fn main() {
 | **编译速度** | 快 | 慢（需编译 proc-macro crate） |
 | **错误信息** | 一般（指向展开代码） | 可控（可自定义 Span） |
 | **适用场景** | 简单 DSL、重复代码 | 复杂 derive、自定义语法 |
-| ** hygiene 控制** | 自动 | 需手动处理 |
+| **hygiene 控制** | 自动 | 需手动处理 |
 | **学习曲线** | 陡峭（模式匹配逻辑） | 更陡峭（Token 操作 API） |
 | **调试难度** | 难（展开结果不可见） | 中等（可用 cargo-expand） |
 
@@ -659,11 +666,13 @@ fn main() {
 ### 9.1 为什么 Rust 有两种宏系统？
 
 `macro_rules!` 的设计目标是**常见模式的快速抽象**：
+
 - 简单、声明式、无需额外 crate
 - 编译速度快
 - 适合 `vec!`、`println!` 等标准宏
 
 过程宏的设计目标是**无限表达能力**：
+
 - 操作任意 TokenStream
 - 可访问外部数据（文件、网络）
 - 适合 `derive`、自定义属性
@@ -721,6 +730,7 @@ macro_rules! sum {
 ```
 
 或更简洁：
+
 ```rust
 macro_rules! sum {
     ($($x:expr),* $(,)?) => {
@@ -760,6 +770,7 @@ impl Person {
 **根因**: `fn $field(&self) -> &String` 中，`$field` 作为函数名和字段名同时出现，但 `age` 的类型是 `u32`，不是 `String`。宏需要同时捕获字段名和类型。
 
 **修复**:
+
 ```rust
 macro_rules! make_getters {
     ($($field:ident: $ty:ty),* $(,)?) => {
@@ -784,11 +795,13 @@ impl Person {
 ### 开放设计题
 
 **题 3**: 你正在设计一个测试框架的 `assert_eq!` 宏增强版。要求：
+
 - 显示左右两边的实际值
 - 支持自定义错误消息
 - 只在调试构建中计算值（发布构建中保持高效）
 
 请分析以下实现选择的 trade-off：
+
 1. `macro_rules!` 实现
 2. 过程宏实现
 3. 泛型函数 + `cfg(debug_assertions)`

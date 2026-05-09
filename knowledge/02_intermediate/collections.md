@@ -139,19 +139,19 @@ graph TD
     C --> G[Custom Key Types]
     G --> H[Eq + Hash Traits]
     H --> I[Derive Macros]
-    
+
     C --> J[HashSet<T>]
     J --> K[Set Operations]
     B --> L[VecDeque<T>]
     L --> M[Ring Buffer]
-    
+
     C --> N[BTreeMap<K, V>]
     N --> O[Ordered Iteration]
     N --> P[BTreeSet<T>]
-    
+
     B --> Q[BinaryHeap<T>]
     Q --> R[Priority Queue]
-    
+
     style B fill:#f9f,stroke:#333,stroke-width:2px
     style C fill:#bfb,stroke:#333,stroke-width:2px
     style F fill:#bbf,stroke:#333,stroke-width:2px
@@ -198,6 +198,7 @@ map.insert(Point { x: 0, y: 0 }, "origin");
 ```
 
 **为什么需要同时派生 `Eq` 和 `Hash`**？
+
 - `Hash` 将键映射为 `u64`
 - 不同键可能映射到相同哈希值（碰撞）
 - `Eq` 在碰撞时区分真实相等 vs 哈希巧合
@@ -297,25 +298,25 @@ use std::collections::VecDeque;
 fn sliding_window_max(nums: &[i32], k: usize) -> Vec<i32> {
     let mut result = Vec::new();
     let mut deque: VecDeque<usize> = VecDeque::new();
-    
+
     for (i, &num) in nums.iter().enumerate() {
         // 移除窗口外的元素
         while deque.front().map_or(false, |&j| j + k <= i) {
             deque.pop_front();
         }
-        
+
         // 维护单调递减队列
         while deque.back().map_or(false, |&j| nums[j] <= num) {
             deque.pop_back();
         }
-        
+
         deque.push_back(i);
-        
+
         if i >= k - 1 {
             result.push(nums[*deque.front().unwrap()]);
         }
     }
-    
+
     result
 }
 ```
@@ -331,11 +332,11 @@ use std::collections::HashMap;
 fn build_user_index(users: &[User]) -> HashMap<u64, &User> {
     // 预分配 exact 容量，避免任何 rehash
     let mut index = HashMap::with_capacity(users.len());
-    
+
     for user in users {
         index.insert(user.id, user);
     }
-    
+
     index
 }
 
@@ -356,6 +357,7 @@ fn collect_results(n: usize) -> Vec<i32> {
 #### 反例 1: 在迭代时修改集合
 
 **错误代码**:
+
 ```rust
 let mut nums = vec![1, 2, 3, 4, 5];
 
@@ -367,6 +369,7 @@ for num in &nums {
 ```
 
 **编译器错误**:
+
 ```text
 error[E0502]: cannot borrow `nums` as mutable because it is also borrowed as immutable
 ```
@@ -374,6 +377,7 @@ error[E0502]: cannot borrow `nums` as mutable because it is also borrowed as imm
 **根因推导**: `for num in &nums` 创建了不可变借用 `&nums`，而 `nums.push()` 需要可变借用 `&mut nums`。Rust 的借用检查器阻止了迭代器失效。
 
 **修复方案**:
+
 ```rust
 let mut nums = vec![1, 2, 3, 4, 5];
 let to_add: Vec<i32> = nums.iter()
@@ -390,6 +394,7 @@ nums.extend(to_add);  // ✅ 先收集，再批量添加
 #### 反例 2: 自定义键类型未实现 `Hash` + `Eq`
 
 **错误代码**:
+
 ```rust
 use std::collections::HashMap;
 
@@ -400,6 +405,7 @@ map.insert(Point { x: 0, y: 0 }, "origin");  // ❌ 编译错误！
 ```
 
 **编译器错误**:
+
 ```text
 error[E0599]: `Point` is not Hash
 ```
@@ -407,6 +413,7 @@ error[E0599]: `Point` is not Hash
 **根因推导**: `HashMap` 的键需要 `Eq + Hash` trait 来确定元素位置和比较相等性。自定义结构体默认不实现这些 trait。
 
 **修复方案**:
+
 ```rust
 use std::collections::HashMap;
 use std::hash::Hash;
@@ -423,6 +430,7 @@ map.insert(Point { x: 0, y: 0 }, "origin");
 #### 反例 3: 使用 `Vec` 进行频繁头部插入
 
 **错误代码**:
+
 ```rust
 let mut queue = Vec::new();
 queue.insert(0, "task1");  // O(n) —— 所有元素后移
@@ -433,6 +441,7 @@ queue.insert(0, "task3");  // O(n)
 **根因推导**: `Vec::insert(0, ...)` 需要将所有现有元素向后移动一位。对 `n` 个元素的 `n` 次头部插入，总时间复杂度为 `O(n²)`。
 
 **修复方案**:
+
 ```rust
 use std::collections::VecDeque;
 
@@ -650,7 +659,7 @@ use std::collections::HashSet;
 fn process_items(items: &[String]) -> Vec<String> {
     let mut seen = HashSet::with_capacity(items.len());
     let mut result = Vec::new();
-    
+
     for item in items {
         if seen.insert(item.clone()) {  // O(1)，返回 true 如果是新元素
             result.push(item.clone());

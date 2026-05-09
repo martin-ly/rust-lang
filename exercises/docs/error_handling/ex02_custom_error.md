@@ -1,7 +1,7 @@
 # 自定义错误类型
 
-**主题**: Error Handling  
-**难度**: Medium  
+**主题**: Error Handling
+**难度**: Medium
 **练习编号**: ex02_custom_error
 
 ---

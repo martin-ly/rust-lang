@@ -84,6 +84,7 @@ let f = async move |x: i32| -> String {
 ```
 
 边界操作：
+
 - `async || {}` 可以像普通闭包一样**多次调用**（若环境允许），每次调用返回新的 `Future`
 - `async move || {}` 的**第一次调用**会消耗捕获变量，后续调用可能编译错误（类似 `FnOnce`）
 - `async || {}` 的捕获方式遵循闭包三族规则，但作用于 **AsyncFn/AsyncFnMut/AsyncFnOnce**
@@ -103,7 +104,7 @@ pub trait AsyncFn<Args> {
     type CallRefFuture<'a>: Future<Output = Self::Output>
     where
         Self: 'a;
-    
+
     fn async_call(&self, args: Args) -> Self::CallRefFuture<'_>;
 }
 
@@ -118,6 +119,7 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 ```
 
 关键设计：
+
 - `AsyncFn` 的关联类型 `CallRefFuture<'a>` 是一个带有生命周期的 `Future`。这意味着异步闭包返回的 `Future` 可以**借用闭包自身**（通过 `&self`）。
 - 这与 `|| async {}`（返回 `impl Future` 的普通闭包）不同：后者的 `Future` 不借用闭包，而是捕获闭包捕获的环境。
 - `AsyncFn` 继承关系：`AsyncFnOnce` → `AsyncFnMut` → `AsyncFn`（与 `FnOnce` → `FnMut` → `Fn` 同构）。
@@ -150,7 +152,7 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 |--------|------|-----------|------|----------|
 | **调用即返回 Future** | 固有属性 | true | `async || {}()` 返回 Future，不立即执行体 | 与 `fn() -> impl Future` 的行为混淆 |
 | **AsyncFn 借用性** | 固有属性 | `&self` | `AsyncFn` 返回的 Future 可借用闭包捕获 | `AsyncFnOnce` 返回的 Future 不借用 |
-| **捕获语义继承** | 关系属性 | 同 Fn 三族 | `async ||` 默认按引用捕获，`async move ||` 按值捕获 | 误以为 `async ||` 等价于 `async move ||` |
+| **捕获语义继承** | 关系属性 | 同 Fn 三族 | `async ||`默认按引用捕获，`async move ||` 按值捕获 | 误以为 `async ||` 等价于 `async move ||` |
 | **Send 传染性** | 关系属性 | 依赖捕获 | `async move ||` 的 Future 是 Send 当且仅当所有捕获是 Send | `Rc` 在 `async move ||` 中导致 `!Send` |
 | **生命周期投影** | 关系属性 | 闭包 ≤ Future | `AsyncFn` 返回的 Future 的 lifetime 受闭包捕获的生命周期限制 | 闭包在 Future 完成前 drop |
 | **可调用次数** | 关系属性 | AsyncFn/AsyncFnMut: 多次; AsyncFnOnce: 一次 | 与 Fn 三族的调用语义完全一致 | `async move ||` 首次调用后捕获被消耗 |
@@ -175,12 +177,12 @@ graph TD
     F --> G[Pin<&mut Future>]
     G --> H[.await]
     H --> I[Executor]
-    
+
     C --> J[async move || {}]
     J --> K[AsyncFnOnce]
     K --> L[Future: 'static]
     L --> M[tokio::spawn]
-    
+
     style D fill:#f9f,stroke:#333,stroke-width:2px
     style E fill:#bbf,stroke:#333,stroke-width:2px
     style M fill:#bfb,stroke:#333,stroke-width:2px
@@ -218,7 +220,7 @@ pub trait AsyncFn<Args>: AsyncFnMut<Args> {
     type CallRefFuture<'a>: Future<Output = Self::Output>
     where
         Self: 'a;
-    
+
     extern "rust-call" fn async_call(&self, args: Args) -> Self::CallRefFuture<'_>;
 }
 ```
@@ -257,7 +259,7 @@ struct AsyncClosure<'a> {
 
 impl<'a> AsyncClosure<'a> {
     type Output = String;
-    
+
     // 每次调用生成一个新的 Future，该 Future 借用 'a
     fn async_call(&self, x: i32) -> impl Future<Output = String> + 'a {
         async move {
@@ -288,6 +290,7 @@ let f = async || { ... };
 ```
 
 运行时成本差异：
+
 - `|| async {}`：每次调用**分配**一个新的 async 块状态机（捕获 move 进状态机）
 - `async || {}`：状态机在闭包内部，每次调用**借用**已有状态，可能减少分配
 
@@ -325,13 +328,13 @@ where
 #[tokio::main]
 async fn main() {
     let urls = vec!["https://a.com", "https://b.com"];
-    
+
     let fetch = async |url: &str| -> String {
         // 模拟异步请求
         tokio::time::sleep(std::time::Duration::from_millis(100)).await;
         format!("Response from {}", url)
     };
-    
+
     let responses = async_map(urls, fetch).await;
     for resp in responses {
         println!("{}", resp);
@@ -361,20 +364,20 @@ where
 {
     let semaphore = Arc::new(Semaphore::new(concurrency));
     let processor = Arc::new(processor);
-    
+
     let mut handles = Vec::with_capacity(items.len());
-    
+
     for item in items {
         let permit = semaphore.clone().acquire_owned().await.unwrap();
         let proc = Arc::clone(&processor);
-        
+
         handles.push(tokio::spawn(async move {
             let result = proc(item).await;
             drop(permit);  // 释放并发许可
             result
         }));
     }
-    
+
     let mut results = Vec::with_capacity(handles.len());
     for handle in handles {
         results.push(handle.await.unwrap());
@@ -392,16 +395,17 @@ where
 #### 反例 1: 混淆 `async || {}` 与 `|| async {}`
 
 **错误代码**:
+
 ```rust
 async fn bad_closure_type() {
     let mut counter = 0;
-    
+
     // 误以为这是异步闭包
     let f = || async {
         counter += 1;  // ❌ 编译错误！counter 不可变捕获
         counter
     };
-    
+
     // f 是 Fn() -> impl Future，不是 AsyncFn
     // 返回的 Future 按引用捕获 counter，但 counter 未被声明 mut
 }
@@ -411,30 +415,32 @@ async fn bad_closure_type() {
 `|| async {}` 是一个**普通闭包**，它返回一个 `async` 块。`async` 块按引用捕获 `counter`，因此 `counter` 必须声明为 `mut` 才能在块内修改。
 
 **修复方案 A** — 使用 `async || {}`（真正的异步闭包）：
+
 ```rust
 async fn good_async_closure() {
     let mut counter = 0;
-    
+
     let mut f = async || -> i32 {
         counter += 1;  // ✅ AsyncFnMut 允许修改捕获
         counter
     };
-    
+
     let val = f().await;
     println!("{}", val);
 }
 ```
 
 **修复方案 B** — 使用 `move || async move {}`：
+
 ```rust
 async fn good_move_closure() {
     let mut counter = 0;
-    
+
     let mut f = move || async move {
         counter += 1;
         counter
     };
-    
+
     let val = f().await;
     println!("{}", val);
 }
@@ -448,14 +454,15 @@ async fn good_move_closure() {
 #### 反例 2: `AsyncFn` 闭包返回的 Future 非 `'static`，无法 spawn
 
 **错误代码**:
+
 ```rust
 async fn bad_spawn_async_closure() {
     let local = String::from("hello");
-    
+
     let f = async |x: i32| {
         format!("{} {}", local, x)  // 按引用捕获 local
     };
-    
+
     // ❌ 编译错误！f(42) 返回的 Future 借用 local，不是 'static
     tokio::spawn(async {
         let result = f(42).await;
@@ -468,14 +475,15 @@ async fn bad_spawn_async_closure() {
 `AsyncFn` 返回的 `Future` 的生命周期与闭包捕获的生命周期绑定。由于 `local` 是局部变量，`f(42)` 返回的 `Future` 不是 `'static`。`tokio::spawn` 要求任务可能超越当前作用域，因此要求 `'static`。
 
 **修复方案 A** — 使用 `async move ||`：
+
 ```rust
 async fn good_spawn_move() {
     let local = String::from("hello");
-    
+
     let f = async move |x: i32| {  // move 捕获
         format!("{} {}", local, x)
     };
-    
+
     // ✅ f 的捕获全部 move，Future 是 'static
     tokio::spawn(async {
         let result = f(42).await;
@@ -485,17 +493,18 @@ async fn good_spawn_move() {
 ```
 
 **修复方案 B** — 使用 `Arc` 共享：
+
 ```rust
 async fn good_spawn_arc() {
     let local = Arc::new(String::from("hello"));
-    
+
     let f = {
         let local = Arc::clone(&local);
         async move |x: i32| {
             format!("{} {}", local, x)
         }
     };
-    
+
     tokio::spawn(async {
         let result = f(42).await;
         println!("{}", result);
@@ -511,21 +520,23 @@ async fn good_spawn_arc() {
 #### 反例 3: `async move ||` 的 `FnOnce` 语义导致二次调用失败
 
 **错误代码**:
+
 ```rust
 async fn bad_once() {
     let data = vec![1, 2, 3];
-    
+
     let f = async move |x: i32| {
         data.push(x);  // data 被 move 捕获
         data.len()
     };
-    
+
     let len1 = f(4).await;  // ✅ 第一次调用
     let len2 = f(5).await;  // ❌ 编译错误！f 已被消耗
 }
 ```
 
 **编译器错误**:
+
 ```text
 error[E0382]: use of moved value: `f`
    |
@@ -543,9 +554,9 @@ error[E0382]: use of moved value: `f`
 async fn good_multiple() {
     use std::sync::Arc;
     use tokio::sync::Mutex;
-    
+
     let data = Arc::new(Mutex::new(vec![1, 2, 3]));
-    
+
     let f = {
         let data = Arc::clone(&data);
         async move |x: i32| {
@@ -553,7 +564,7 @@ async fn good_multiple() {
             data.lock().await.len()
         }
     };
-    
+
     let len1 = f(4).await;  // ✅
     let len2 = f(5).await;  // ✅ Arc 的 Clone 允许多次调用
 }
@@ -563,8 +574,6 @@ async fn good_multiple() {
 > **`async move ||` 的 `FnOnce` 语义与 `move ||` 一致**：如果闭包捕获非 Copy 类型且按值捕获，该闭包只能调用一次。需要多次调用时，要么使用引用捕获（`async ||`），要么使用共享所有权（`Arc`）。
 
 ---
-
-
 
 ---
 
@@ -748,15 +757,18 @@ trait AsyncFn<Args> {
 ### 9.2 该设计的成本
 
 **生态系统迁移成本**:
+
 - `AsyncFn` 是 Rust 1.85 的新特性，大量现有库使用 `F: Fn() -> impl Future` 的泛型约束。迁移到 `F: AsyncFn` 需要 Breaking Change。
 - 编译器需要支持 `rust-call` ABI 的异步变体，增加了编译器复杂度。
 
 **学习曲线成本**:
+
 - `async || {}` 与 `|| async {}` 的区分对初学者极其困惑。
 - `AsyncFnOnce`/`AsyncFnMut`/`AsyncFn` 的继承关系增加了类型系统的认知负担。
 - 错误信息在涉及 GAT 和闭包捕获时可能非常冗长。
 
 **编译时间成本**:
+
 - GAT 的 monomorphization 比简单泛型更复杂，异步闭包的编译时间可能较长。
 
 ### 9.3 什么场景下异步闭包是次优的？
@@ -784,12 +796,12 @@ trait AsyncFn<Args> {
 ```rust
 async fn process_items(items: Vec<i32>) {
     let mut results = vec![];
-    
+
     let processor = async |x: i32| {
         tokio::time::sleep(std::time::Duration::from_millis(10)).await;
         x * 2
     };
-    
+
     for item in items {
         tokio::spawn(async {
             let result = processor(item).await;
@@ -803,11 +815,13 @@ async fn process_items(items: Vec<i32>) {
 <summary>参考答案</summary>
 
 **问题分析**:
+
 1. `processor` 是 `async ||`，返回的 `Future` 借用 `processor` 自身，不是 `'static`
 2. `tokio::spawn` 要求 `'static`
 3. `results` 是局部变量，在 `spawn` 闭包中按引用捕获，不是 `'static`
 
 **修复**:
+
 ```rust
 use std::sync::Arc;
 use tokio::sync::Mutex;
@@ -815,21 +829,21 @@ use tokio::sync::Mutex;
 async fn process_items(items: Vec<i32>) -> Vec<i32> {
     let results = Arc::new(Mutex::new(vec![]));
     let mut handles = vec![];
-    
+
     for item in items {
         let results = Arc::clone(&results);
-        
+
         // 使用 async move 块 + move item
         handles.push(tokio::spawn(async move {
             tokio::time::sleep(std::time::Duration::from_millis(10)).await;
             results.lock().await.push(item * 2);
         }));
     }
-    
+
     for handle in handles {
         handle.await.unwrap();
     }
-    
+
     Arc::try_unwrap(results).unwrap().into_inner()
 }
 ```
@@ -854,6 +868,7 @@ fn make_predicate(threshold: i32) -> impl AsyncFn(i32) -> bool {
 实际上上述代码在 Rust 1.85+ 中**应该可以编译**，因为 `async move ||` 如果捕获的是 `Copy` 类型，编译器可能生成 `AsyncFn`。
 
 如果捕获非 `Copy` 类型：
+
 ```rust
 fn make_predicate(threshold: String) -> impl AsyncFnOnce(i32) -> bool {
     async move |x: i32| x.to_string() > threshold
@@ -861,6 +876,7 @@ fn make_predicate(threshold: String) -> impl AsyncFnOnce(i32) -> bool {
 ```
 
 若确实需要返回 `AsyncFn`（可多次调用）：
+
 ```rust
 fn make_predicate(threshold: i32) -> impl AsyncFn(i32) -> bool {
     async move |x: i32| x > threshold  // threshold 是 Copy，可多次调用
@@ -872,12 +888,14 @@ fn make_predicate(threshold: i32) -> impl AsyncFn(i32) -> bool {
 ### 开放设计题
 
 **题 3**: 你正在设计一个异步事件处理框架。事件处理器需要：
+
 - 接受异步闭包作为回调
 - 支持闭包在多次事件间保持状态（如计数器）
 - 回调可能被 spawn 到线程池执行
 - 框架本身不知道闭包的具体类型
 
 你面临选择：
+
 1. 使用 `F: Fn(Event) -> impl Future`（旧风格）
 2. 使用 `F: AsyncFn(Event)`（新风格，Rust 1.85+）
 3. 使用 trait object：`Box<dyn AsyncFn(Event) + Send>`

@@ -71,6 +71,7 @@ struct Array<T, const N: usize> {
 ```
 
 边界操作：
+
 - `T: Trait`：约束类型参数必须实现某 trait
 - `where` 子句：复杂约束的清晰表达
 - `impl Trait`：存在类型（调用者不必知道具体类型）
@@ -152,7 +153,7 @@ graph TD
     L --> M[Existential Types]
     M --> N[Return Position]
     M --> O[Argument Position]
-    
+
     style C fill:#f9f,stroke:#333,stroke-width:2px
     style F fill:#bbf,stroke:#333,stroke-width:2px
     style L fill:#bfb,stroke:#333,stroke-width:2px
@@ -191,6 +192,7 @@ let first = iter.next();
 ```
 
 推断过程：
+
 1. `vec![1, 2, 3]` → `Vec<{integer}>`（未确定整数类型）
 2. `v.iter()` → `std::slice::Iter<'_, {integer}>`
 3. `iter.next()` → `Option<&'a {integer}>`
@@ -285,11 +287,11 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, CO
             data: [[T::default(); COLS]; ROWS],
         }
     }
-    
+
     fn get(&self, row: usize, col: usize) -> Option<&T> {
         self.data.get(row)?.get(col)
     }
-    
+
     fn transpose(&self) -> Matrix<T, COLS, ROWS> {
         let mut result = Matrix::new();
         for i in 0..ROWS {
@@ -321,7 +323,7 @@ use serde::{Serialize, Deserialize};
 pub trait DataSource {
     type Item;
     type Error;
-    
+
     fn fetch(&self) -> impl Future<Output = Result<Vec<Self::Item>, Self::Error>>;
 }
 
@@ -329,7 +331,7 @@ pub trait DataSource {
 pub trait DataSourceExplicit {
     type Item;
     type Error;
-    
+
     fn fetch(&self) -> BoxFuture<Result<Vec<Self::Item>, Self::Error>>;
 }
 
@@ -353,12 +355,12 @@ where
     pub fn new(source: S) -> Self {
         CachedSource { source, cache: None }
     }
-    
+
     pub async fn get(&mut self) -> Result<Vec<T>, S::Error> {
         if let Some(ref cache) = self.cache {
             return Ok(cache.clone());
         }
-        
+
         let data = self.source.fetch().await?;
         self.cache = Some(data.clone());
         Ok(data)
@@ -373,6 +375,7 @@ where
 #### 反例 1: 缺少 Trait Bound
 
 **错误代码**:
+
 ```rust
 fn print_largest<T>(list: &[T]) {
     let largest = list.iter().max();  // ❌ 编译错误！
@@ -381,6 +384,7 @@ fn print_largest<T>(list: &[T]) {
 ```
 
 **编译器错误**:
+
 ```text
 error[E0277]: the trait bound `T: Ord` is not satisfied
    |
@@ -392,6 +396,7 @@ error[E0277]: the trait bound `T: Ord` is not satisfied
 `Iterator::max` 要求 `Item: Ord`，但 `T` 未约束为 `Ord`。
 
 **修复方案**:
+
 ```rust
 fn print_largest<T: Ord + std::fmt::Debug>(list: &[T]) {
     let largest = list.iter().max();
@@ -407,6 +412,7 @@ fn print_largest<T: Ord + std::fmt::Debug>(list: &[T]) {
 #### 反例 2: 类型推断失败
 
 **错误代码**:
+
 ```rust
 fn main() {
     let v = Vec::new();  // ❌ 编译错误！无法推断 T
@@ -415,6 +421,7 @@ fn main() {
 ```
 
 **编译器错误**:
+
 ```text
 error[E0282]: type annotations needed for `Vec<T>`
    |
@@ -426,22 +433,26 @@ error[E0282]: type annotations needed for `Vec<T>`
 `Vec::new()` 的返回类型是 `Vec<T>`，但 `T` 没有任何信息可供推断。`v.push(1)` 发生在声明之后，Rust 的局部类型推断不"向前看"。
 
 **修复方案 A** — 显式标注类型:
+
 ```rust
 let v: Vec<i32> = Vec::new();
 ```
 
 **修复方案 B** — 使用 turbofish:
+
 ```rust
 let v = Vec::<i32>::new();
 ```
 
 **修复方案 C** — 从上下文推断:
+
 ```rust
 let v = vec![];  // 仍无法推断
 v.push(1i32);    // 但这里可以！如果 v 的声明和 push 在同一作用域
 ```
 
 实际上最佳实践：
+
 ```rust
 let mut v = Vec::new();
 v.push(1);  // Rust 可以向后推断 v 的类型为 Vec<i32>
@@ -457,6 +468,7 @@ v.push(1);  // Rust 可以向后推断 v 的类型为 Vec<i32>
 #### 反例 3: 单态化导致的代码膨胀
 
 **问题代码**:
+
 ```rust
 fn process<T: Display>(items: &[T]) {
     for item in items {
@@ -476,6 +488,7 @@ process(&[true, false]);
 每个调用点生成一份 `process::<T>` 的代码。如果有 20 种类型调用 `process`，最终二进制中包含 20 份几乎相同的循环代码，只是 `Display::fmt` 的调用点不同。
 
 **修复方案** — 使用 trait 对象减少膨胀:
+
 ```rust
 fn process_dyn(items: &[&dyn Display]) {
     for item in items {
@@ -494,8 +507,6 @@ process_dyn(&[&1.0, &2.0, &3.0]);
 > **"泛型是空间换时间"**：当类型种类有限时，单态化的性能优势显著；当类型种类极多（如日志库处理任意 `Display` 类型）时，代码膨胀可能超过收益，应考虑 `dyn Trait`。
 
 ---
-
-
 
 ---
 
@@ -649,6 +660,7 @@ dyn Trait 替代后:
 ### 9.1 为什么 Rust 选择了单态化而非类型擦除？
 
 Rust 的零成本抽象哲学要求泛型没有运行时开销。单态化在编译期为每个具体类型生成代码，消除了：
+
 - 装箱（boxing）开销
 - 类型检查开销
 - 方法分发的间接层
@@ -726,6 +738,7 @@ fn process(items: &[impl Display]) {
 **根因**: `impl Trait` 在参数位置是泛型语法糖，但要求所有元素是同一具体类型。`&[impl Display]` 等价于 `<T: Display>(items: &[T])`，要求切片内所有元素类型相同。
 
 **修复**（异构集合）：
+
 ```rust
 fn process(items: &[&dyn Display]) {
     for item in items {
@@ -739,12 +752,14 @@ fn process(items: &[&dyn Display]) {
 ### 开放设计题
 
 **题 3**: 设计一个缓存系统，要求：
+
 - 支持任意键值类型
 - 支持 LRU 淘汰策略
 - 支持内存限制（按条目数或总字节数）
 - 需要线程安全
 
 请从以下泛型设计选择中分析 trade-off：
+
 1. `Cache<K, V>` — 全泛型
 2. `Cache<K, V, const MAX_SIZE: usize>` — Const Generics
 3. `Cache<K: Hash + Eq, V: Clone>` — Trait Bound

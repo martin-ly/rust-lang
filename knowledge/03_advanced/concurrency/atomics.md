@@ -78,9 +78,10 @@ AcqRel:     读-改-写操作同时建立两端
 SeqCst:     全局全序（所有 SeqCst 操作对所有线程可见顺序一致）
 ```
 
-** happens-before 关系的形式化**:
+**happens-before 关系的形式化**:
 
 若线程 A 执行 `store(x, Release)`，线程 B 执行 `load(x, Acquire)` 并读取到该值，则：
+
 - A 中 `store(x)` **之前的所有操作** happens-before B 中 `load(x)` **之后的所有操作**
 - 这保证了 B 能看到 A 在 `store(x)` 之前的所有内存写入
 
@@ -121,7 +122,7 @@ graph TD
     J --> K[Tagged Pointers]
     F --> L[happens-before]
     L --> M[Correctness Proof]
-    
+
     style C fill:#f9f,stroke:#333,stroke-width:2px
     style D fill:#bbf,stroke:#333,stroke-width:2px
     style H fill:#bfb,stroke:#333,stroke-width:2px
@@ -960,6 +961,7 @@ fn consumer() {
 **根因**: `Relaxed` 不建立 happens-before 关系。编译器和 CPU 可能重排 `DATA.store` 和 `FLAG.store`，导致消费者看到 `FLAG=true` 但 `DATA` 仍为 0。
 
 **修复**:
+
 ```rust
 fn producer() {
     DATA.store(42, Ordering::Relaxed);
@@ -994,11 +996,13 @@ fn increment(counter: &AtomicUsize) {
 <summary>参考答案</summary>
 
 **问题**:
+
 1. 使用 `SeqCst` 过度（计数器不需要全局序）
 2. 使用 `compare_exchange` 而非 `compare_exchange_weak`（循环中 weak 更高效）
 3. 失败时使用 `SeqCst` 浪费（失败时不需要强顺序）
 
 **修复**:
+
 ```rust
 fn increment(counter: &AtomicUsize) {
     let mut current = counter.load(Ordering::Relaxed);
@@ -1019,12 +1023,14 @@ fn increment(counter: &AtomicUsize) {
 ### 开放设计题
 
 **题 3**: 你正在设计一个高并发计数器系统。要求：
+
 - 支持多个线程同时递增
 - 需要定期读取总计数（最终一致性即可）
 - 延迟敏感（< 1μs）
 - 不需要跨计数器的顺序保证
 
 请从以下方案中选择并论证：
+
 1. `Arc<AtomicUsize>` + `Relaxed` fetch_add
 2. 每个线程本地计数器 + 定期合并
 3. `Mutex<usize>`

@@ -96,6 +96,7 @@ regex = ">=1.0, <2.0" # 显式范围
 ```
 
 Cargo 使用 **SemVer** 解析依赖版本：
+
 - `MAJOR.MINOR.PATCH`
 - `MAJOR` 变更 → 不兼容 API 变更
 - `MINOR` 变更 → 向后兼容的功能添加
@@ -130,16 +131,16 @@ graph TD
     E --> H[crates.io Registry]
     F --> I[Conditional Compilation]
     G --> J[Debug vs Release]
-    
+
     B --> K[Workspace]
     K --> L[Multiple Crates]
     K --> M[Shared Dependencies]
-    
+
     B --> N[Quality Tools]
     N --> O[cargo fmt]
     N --> P[cargo clippy]
     N --> Q[cargo test]
-    
+
     style B fill:#f9f,stroke:#333,stroke-width:2px
     style C fill:#bfb,stroke:#333,stroke-width:2px
     style K fill:#bbf,stroke:#333,stroke-width:2px
@@ -309,6 +310,7 @@ lto = "thin"
 #### 反例 1: 忽略 Cargo.lock 导致构建不可复现
 
 **错误做法**:
+
 ```bash
 # .gitignore 中错误地包含了 Cargo.lock
 # 团队成员拉取代码后，可能安装不同版本的依赖
@@ -321,12 +323,14 @@ lto = "thin"
 #### 反例 2: 过度依赖 `cargo build` 而忽略 `cargo check`
 
 **错误做法**:
+
 ```bash
 # 开发期每次修改都运行 cargo build
 # 编译时间 30s+，严重拖慢迭代速度
 ```
 
 **修复**:
+
 ```bash
 # 开发期主要使用 cargo check（5s）
 cargo check
@@ -457,10 +461,12 @@ tokio = { version = "1.0", features = ["full", "rt-multi-thread"] }
 <summary>参考答案</summary>
 
 **问题**:
+
 1. `serde = "*"` 允许任何版本，包括不兼容的 major 版本更新，极其危险
 2. `"full"` feature 通常已包含 `"rt-multi-thread"`，重复指定冗余
 
 **修复**:
+
 ```toml
 [package]
 name = "my-app"

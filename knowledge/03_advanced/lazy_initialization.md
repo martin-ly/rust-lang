@@ -266,10 +266,10 @@ graph TD
     G --> H[后续访问直接返回 &T]
     D --> I[全局静态变量]
     C --> J[局部/成员变量]
-    
+
     K[OnceLock<T>] --> L[显式 get_or_init]
     D --> M[自动 Deref 语义]
-    
+
     style C fill:#f9f,stroke:#333,stroke-width:2px
     style D fill:#bfb,stroke:#333,stroke-width:2px
     style G fill:#bbf,stroke:#333,stroke-width:2px
@@ -374,6 +374,7 @@ fn main() {
 #### 反例 1: 在 LazyLock 中存储 `!Sync` 类型
 
 **错误代码**:
+
 ```rust
 use std::sync::LazyLock;
 use std::cell::RefCell;
@@ -383,6 +384,7 @@ static BAD: LazyLock<RefCell<i32>> = LazyLock::new(|| RefCell::new(0));
 ```
 
 **编译器错误**:
+
 ```text
 error[E0277]: `RefCell<i32>` cannot be shared between threads safely
 ```
@@ -390,6 +392,7 @@ error[E0277]: `RefCell<i32>` cannot be shared between threads safely
 **根因推导**: `LazyLock<T>` 要求 `T: Sync`，因为它允许多线程共享访问。`RefCell<T>` 使用内部可变性但**不是线程安全**的（无原子操作），因此不是 `Sync`。
 
 **修复方案**:
+
 ```rust
 use std::sync::LazyLock;
 use std::sync::Mutex;
@@ -405,6 +408,7 @@ static GOOD: LazyLock<Mutex<i32>> = LazyLock::new(|| Mutex::new(0));
 #### 反例 2: 初始化闭包 panic 导致永久 poison
 
 **错误代码**:
+
 ```rust
 use std::sync::LazyLock;
 
@@ -415,7 +419,7 @@ static CONFIG: LazyLock<String> = LazyLock::new(|| {
 fn main() {
     // 第一次访问触发 panic
     println!("{}", *CONFIG);  // panic!
-    
+
     // 即使捕获 panic，后续访问也无法恢复
     // LazyLock 的内部状态已被破坏
 }
@@ -424,6 +428,7 @@ fn main() {
 **根因推导**: `LazyLock` 使用 `OnceLock` 实现，初始化闭包 panic 会导致 `OnceLock` 进入**poisoned 状态**。后续访问会触发新的 panic（`OnceLock` 不缓存 panic，而是每次重新尝试初始化并 panic）。
 
 **修复方案**:
+
 ```rust
 use std::sync::LazyLock;
 
@@ -444,6 +449,7 @@ fn main() {
 #### 反例 3: 循环依赖导致死锁
 
 **错误代码**:
+
 ```rust
 use std::sync::LazyLock;
 
@@ -465,6 +471,7 @@ fn main() {
 **根因推导**: `LazyLock` 的初始化是**惰性**的且通常持有锁。如果 `A` 的初始化闭包访问 `B`，而 `B` 的初始化又访问 `A`，形成循环依赖，可能导致死锁（线程 A 持有 A 的锁等待 B，线程 B 持有 B 的锁等待 A）。
 
 **修复方案**:
+
 ```rust
 use std::sync::LazyLock;
 
@@ -741,6 +748,7 @@ fn increment() {
 **分析**: `Cell<u32>` 不是 `Sync`（它使用内部可变性但没有原子操作），因此不能放入 `LazyLock`。
 
 **修复方案**:
+
 ```rust
 use std::sync::LazyLock;
 use std::sync::atomic::{AtomicU32, Ordering};
@@ -775,6 +783,7 @@ fn reload_config() {
 **分析**: `LazyLock` 一旦初始化不可变，无法支持热重载。
 
 **修复方案**:
+
 ```rust
 use std::sync::RwLock;
 
@@ -792,6 +801,7 @@ fn get_config() -> String {
 ```
 
 或使用 `arc-swap` crate 实现无锁热重载：
+
 ```rust
 use arc_swap::ArcSwap;
 use std::sync::Arc;

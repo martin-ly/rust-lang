@@ -1,7 +1,7 @@
 # Result 与 Option
 
-**主题**: Error Handling  
-**难度**: Easy  
+**主题**: Error Handling
+**难度**: Easy
 **练习编号**: ex01_result_option
 
 ---

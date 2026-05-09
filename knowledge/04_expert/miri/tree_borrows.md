@@ -153,7 +153,7 @@ graph TD
     G --> M[Miri Integration]
     M --> N[UB Detection]
     N --> O[CI/CD Validation]
-    
+
     style G fill:#f9f,stroke:#333,stroke-width:2px
     style H fill:#bbf,stroke:#333,stroke-width:2px
     style I fill:#bfb,stroke:#333,stroke-width:2px
@@ -216,12 +216,12 @@ fn tree_construction() {
         // data (allocation)
         // └── x (Active)
         //     └── y (Reserved)
-        
+
         *x = 1;             // ✅ x 仍 Active，y 是 Reserved
-        
+
         *y = 2;             // y: Reserved → Active
         // 现在 y 是 Active，x 的子树权限受限
-        
+
         let z = &*y;        // 子节点: z (Frozen)
         // data
         // └── x (Active, but subtree restricted)
@@ -241,7 +241,7 @@ fn frozen_propagation(x: &mut i32) {
     let z = &*y;        // z: Frozen
     // z 是 y 的子节点，y 是 x 的子节点
     // 整个分支都是 Frozen
-    
+
     // unsafe { *x = 1; }  // ❌ TB: x 的子树有 Frozen 节点，写是 UB！
 }
 ```
@@ -348,11 +348,12 @@ jobs:
 #### 反例 1: 通过 &mut 写 Frozen 分支
 
 **错误代码**:
+
 ```rust
 fn bad_write_through_frozen(x: &mut i32) {
     let y = &*x;        // y: Frozen
     let z = &*y;        // z: Frozen
-    
+
     unsafe {
         *x = 42;        // ❌ TB: x 的子树包含 Frozen 节点，写是 UB！
     }
@@ -360,6 +361,7 @@ fn bad_write_through_frozen(x: &mut i32) {
 ```
 
 **Miri 错误**:
+
 ```text
 error: Undefined Behavior: attempting to write through a pointer with Frozen permission
   |
@@ -370,6 +372,7 @@ error: Undefined Behavior: attempting to write through a pointer with Frozen per
 **根因推导**: `y = &*x` 创建了共享引用，使 `x` 的子树进入 Frozen 状态。Frozen 分支禁止任何写入。这是**真实的 UB**，编译器可能基于"无别名写入"假设进行优化。
 
 **修复方案**:
+
 ```rust
 fn good_write(x: &mut i32) {
     *x = 42;  // ✅ 直接写，无需创建共享引用
@@ -383,6 +386,7 @@ fn good_write(x: &mut i32) {
 #### 反例 2: 悬垂引用的使用
 
 **错误代码**:
+
 ```rust
 fn bad_dangling() -> i32 {
     let ptr: *mut i32;
@@ -395,6 +399,7 @@ fn bad_dangling() -> i32 {
 ```
 
 **Miri 错误**:
+
 ```text
 error: Undefined Behavior: dereferencing pointer to deallocated memory
 ```
@@ -402,6 +407,7 @@ error: Undefined Behavior: dereferencing pointer to deallocated memory
 **根因推导**: `x` 在作用域结束时被 drop，对应的内存分配被释放。`ptr` 成为悬垂指针，解引用是 UB。
 
 **修复方案**:
+
 ```rust
 fn good_value() -> i32 {
     let x = 42;
@@ -414,6 +420,7 @@ fn good_value() -> i32 {
 #### 反例 3: 双重释放（Double Free）
 
 **错误代码**:
+
 ```rust
 fn bad_double_free() {
     let ptr = Box::into_raw(Box::new(42));
@@ -425,6 +432,7 @@ fn bad_double_free() {
 ```
 
 **Miri 错误**:
+
 ```text
 error: Undefined Behavior: double-free of heap allocation
 ```
@@ -432,6 +440,7 @@ error: Undefined Behavior: double-free of heap allocation
 **根因推导**: `Box::from_raw(ptr)` 重建了 `Box`，第一次 `drop` 释放了内存。第二次 `drop` 时，该分配已不存在，构成双重释放。
 
 **修复方案**:
+
 ```rust
 fn good_drop() {
     let ptr = Box::into_raw(Box::new(42));
@@ -596,6 +605,7 @@ Tree Borrows (树形模型):
 核心驱动力是**误报率**：SB 的线性栈模型对常见的 reborrow 模式过于严格，导致 54% 的 Miri 报告是误报。这使得开发者倾向于忽略 Miri 警告，降低了工具的实用性。
 
 TB 通过树形模型解决了这个问题：
+
 1. **Reserved 状态**：允许父引用在子引用创建后继续使用，直到子引用首次写入。
 2. **树的局部性**：冲突检查限定在子树范围内，不影响兄弟引用。
 3. **更自然的语义**：与程序员的直觉（"reborrow 是子引用，不应立即禁用父引用"）一致。
@@ -647,6 +657,7 @@ fn process(data: &mut [i32]) {
 **分析**: 此代码在 TB 下通常**不会**报告 UB，因为 `as_mut_ptr()` 创建的原始指针与 `data` 的借用是兼容的（`addr_of_mut!` 语义）。但如果 Miri 的精确检查认为 `ptr` 的使用与 `data` 的活跃借用冲突，可能需要显式分离。
 
 **更安全的写法**:
+
 ```rust
 fn process(data: &mut [i32]) {
     for item in data.iter_mut() {
@@ -665,7 +676,7 @@ fn process(data: &mut [i32]) {
 fn mixed_refs(x: &mut i32) {
     let y = &*x;        // 共享引用
     println!("{}", y);
-    
+
     let z = &mut *x;    // 新的可变引用
     *z = 42;
 }
@@ -674,7 +685,8 @@ fn mixed_refs(x: &mut i32) {
 <details>
 <summary>参考答案</summary>
 
-**分析**: 
+**分析**:
+
 1. `y = &*x`：`y` 是 Frozen，`x` 的子树变为 Frozen
 2. `println!("{}", y)`：合法，Frozen 允许读
 3. `z = &mut *x`：尝试创建可变引用，但 `x` 的子树是 Frozen
@@ -688,12 +700,14 @@ fn mixed_refs(x: &mut i32) {
 ### 开放设计题
 
 **题 3**: 你正在维护一个使用大量 `unsafe` 的 crate（如自定义集合库）。你面临选择：
+
 1. 在 CI 中运行 Miri + Stacked Borrows（保守，可能有很多误报）
 2. 在 CI 中运行 Miri + Tree Borrows（较新，误报少）
 3. 不运行 Miri，依赖人工代码审查
 4. 使用 `cargo-fuzz` + `address-sanitizer` 替代
 
 请从以下维度分析 trade-off：
+
 - 检测覆盖率（能发现多少类 bug？）
 - 开发者体验（误报率、运行时间）
 - CI 成本（执行时间、基础设施）

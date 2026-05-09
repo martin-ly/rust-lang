@@ -105,7 +105,8 @@
 
 ### I
 
-- **if let guards** - [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/if_let_guards.md) - Rust 1.95
+- **if let guards** - [02_intermediate/if_let_guards.md](02_intermediate/if_let_guards.md) - Rust 1.95
+- **inline assembly** - [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/inline_asm.md)
 - **installation** - [00_start/installation.md](00_start/installation.md)
 - **iterators** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md)
 
@@ -125,6 +126,7 @@
 
 - **macros** - [03_advanced/macros/](03_advanced/macros/)
 - **math constants** - [05_reference/math_constants.md](05_reference/math_constants.md)
+- **MaybeUninit** - [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/maybe_uninit.md)
 - **Miri** - [04_expert/miri/tree_borrows.md](04_expert/miri/tree_borrows.md)
 - **Mutex** - [03_advanced/concurrency/synchronization.md](03_advanced/concurrency/synchronization.md)
 
@@ -135,12 +137,15 @@
 ### P
 
 - **Peekable::next_if** - [01_fundamentals/iterators.md](01_fundamentals/iterators.md) - Rust 1.80.0
+- **performance optimization** - [03_advanced/performance_optimization.md](03_advanced/performance_optimization.md)
 - **procedural macros** - [03_advanced/macros/procedural.md](03_advanced/macros/procedural.md)
 
 ### R
 
 - **Rc/Arc** - [02_intermediate/smart_pointers.md](02_intermediate/smart_pointers.md)
 - **Result/Option** - [02_intermediate/error_handling.md](02_intermediate/error_handling.md)
+- **Rust 1.95** - [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/rust_1_95.md)
+- **Rust 1.96 preview** - [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/rust_1_96_preview.md)
 - **Rust philosophy** - [00_start/rust_philosophy.md](00_start/rust_philosophy.md)
 - **RwLock** - [03_advanced/concurrency/synchronization.md](03_advanced/concurrency/synchronization.md)
 
@@ -256,9 +261,9 @@
 
 ## 📊 统计数据
 
-- **总文档数**: 73 篇（含索引/入口）
-- **总代码行数**: 33,715 行
-- **总字符数**: 783,401 字符
+- **总文档数**: 74 篇（含索引/入口）
+- **总代码行数**: 33,921 行
+- **总字符数**: 788,600 字符
 - **重构文档**: 28 篇核心文档按 10 模块标准重构
 - **Rust 1.95+ 特性**: 100% 覆盖
 

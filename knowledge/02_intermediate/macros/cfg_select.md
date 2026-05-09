@@ -150,7 +150,7 @@ graph TD
     E --> F[Compile-time Expression Selection]
     F --> G[Platform Abstraction]
     F --> H[Feature Flags]
-    
+
     style E fill:#f9f,stroke:#333,stroke-width:2px
     style F fill:#bfb,stroke:#333,stroke-width:2px
 ```
@@ -218,6 +218,7 @@ let x = cfg_select! {
 **问题**: 缺少 `_ =>` 默认分支。如果目标 OS 既不是 linux 也不是 macos（如 Windows），编译会失败。
 
 **修复**:
+
 ```rust
 let x = cfg_select! {
     target_os = "linux" => 42,

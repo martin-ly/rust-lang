@@ -74,6 +74,7 @@ struct Borrowed<'a> {
 ```
 
 边界操作：
+
 - `'a: 'b`（outlives）：`'a` 的生命周期至少覆盖 `'b`
 - `&'a mut T`：在 `'a` 期间，`T` 只能被这一个可变引用访问
 - HRTB：`for<'a>` 表示"对于所有生命周期 `'a`"
@@ -103,6 +104,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
 
 约束系统：
+
 ```
 参数 x 的生命周期 ≥ 'a
 参数 y 的生命周期 ≥ 'a
@@ -110,6 +112,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
 
 在调用点 `let result = longest(&s1, &s2)`：
+
 ```
 s1 的生命周期 = 's1
 s2 的生命周期 = 's2
@@ -171,7 +174,7 @@ graph TD
     I --> J[Higher-Ranked Trait Bounds]
     C --> K[NLL]
     K --> L[Polonius]
-    
+
     style C fill:#f9f,stroke:#333,stroke-width:2px
     style E fill:#bbf,stroke:#333,stroke-width:2px
     style K fill:#bfb,stroke:#333,stroke-width:2px
@@ -270,6 +273,7 @@ fn use_ref(r: &i32) {
 **NLL 的编译期实现**：
 
 NLL 使用**基于数据流的借用检查**：
+
 1. 构建控制流图（CFG）
 2. 在每个程序点跟踪活跃的借用
 3. 检查是否存在冲突的活跃借用
@@ -333,7 +337,7 @@ impl<'a> Arena<'a> {
     fn new(buffer: &'a mut [u8]) -> Self {
         Arena { buffer, offset: 0 }
     }
-    
+
     fn alloc(&mut self, size: usize) -> Option<&'a mut [u8]> {
         let new_offset = self.offset + size;
         if new_offset > self.buffer.len() {
@@ -348,13 +352,13 @@ impl<'a> Arena<'a> {
 fn main() {
     let mut buffer = vec![0u8; 4096];
     let mut arena = Arena::new(&mut buffer);
-    
+
     let block1 = arena.alloc(100).unwrap();
     let block2 = arena.alloc(200).unwrap();
-    
+
     block1[0] = 1;
     block2[0] = 2;
-    
+
     // buffer 仍存活，arena 的分配保证有效
 }
 ```
@@ -366,6 +370,7 @@ fn main() {
 #### 反例 1: 悬垂引用（Dangling Reference）
 
 **错误代码**:
+
 ```rust
 fn dangle() -> &String {
     let s = String::from("hello");
@@ -374,6 +379,7 @@ fn dangle() -> &String {
 ```
 
 **编译器错误**:
+
 ```text
 error[E0106]: missing lifetime specifier
    |
@@ -384,6 +390,7 @@ error[E0106]: missing lifetime specifier
 **根因推导**: `s` 的生命周期局限于函数体。返回 `&s` 意味着返回值的 lifetime 必须 ≤ `s` 的 lifetime，但函数返回后 `s` 已不存在。
 
 **修复方案**:
+
 ```rust
 fn no_dangle() -> String {
     String::from("hello")  // 返回所有权
@@ -397,18 +404,20 @@ fn no_dangle() -> String {
 #### 反例 2: &mut T 的 Reborrow 冲突
 
 **错误代码**:
+
 ```rust
 fn reborrow_conflict() {
     let mut x = 5;
     let r1 = &mut x;
     let r2 = &mut *r1;  // reborrow
-    
+
     *r1 = 10;  // ❌ 编译错误！r1 在 r2 存活期间被冻结
     *r2 = 20;
 }
 ```
 
 **编译器错误**:
+
 ```text
 error[E0506]: cannot assign to `*r1` because it is borrowed
    |
@@ -419,6 +428,7 @@ error[E0506]: cannot assign to `*r1` because it is borrowed
 ```
 
 **修复方案**:
+
 ```rust
 fn reborrow_fixed() {
     let mut x = 5;
@@ -438,11 +448,12 @@ fn reborrow_fixed() {
 #### 反例 3: Variance 误用（通过 &mut 缩短生命周期）
 
 **错误代码**:
+
 ```rust
 fn variance_violation() {
     let mut vec: Vec<&'static str> = vec!["hello"];
     let local = String::from("world");
-    
+
     // 试图将 &mut Vec<&'static str> 当作 &mut Vec<&'local str>
     let short_vec: &mut Vec<&str> = &mut vec;  // ❌ 编译错误！
     short_vec.push(&local);
@@ -450,6 +461,7 @@ fn variance_violation() {
 ```
 
 **编译器错误**:
+
 ```text
 error[E0308]: mismatched types
    |
@@ -462,8 +474,6 @@ error[E0308]: mismatched types
 **抽象原则**: **`&mut T` 的不变性保护类型系统一致性**：任何通过 `&mut` 修改容器的操作都不能破坏容器原有的类型契约。
 
 ---
-
-
 
 ---
 
@@ -649,7 +659,7 @@ impl<'a> Parser<'a> {
         }
         &self.text[start..self.pos]
     }
-    
+
     fn parse_two_words(&mut self) -> (&str, &str) {
         let w1 = self.parse_word();
         self.pos += 1;  // skip space
@@ -675,7 +685,7 @@ impl<'a> Parser<'a> {
         }
         &self.text[start..self.pos]
     }
-    
+
     fn parse_two_words(&mut self) -> (&'a str, &'a str) {
         let w1 = self.parse_word();
         self.pos += 1;
@@ -703,6 +713,7 @@ fn foo(x: &mut Vec<&'static str>, y: &str) {
 **根因**: `x: &mut Vec<&'static str>` 要求所有元素是 `'static`。`y: &str` 的生命周期是某个 `'a`，且 `'a` 不一定等于 `'static`。将 `y` push 进 `x` 会尝试将短生命周期引用存入长生命周期容器。
 
 **修复方案 A** — 使容器生命周期参数化：
+
 ```rust
 fn foo<'a>(x: &mut Vec<&'a str>, y: &'a str) {
     x.push(y);
@@ -710,6 +721,7 @@ fn foo<'a>(x: &mut Vec<&'a str>, y: &'a str) {
 ```
 
 **修复方案 B** — 如果确实需要 'static，确保输入是 'static：
+
 ```rust
 fn foo(x: &mut Vec<&'static str>, y: &'static str) {
     x.push(y);
@@ -721,11 +733,13 @@ fn foo(x: &mut Vec<&'static str>, y: &'static str) {
 ### 开放设计题
 
 **题 3**: 你正在设计一个字符串解析库。核心需求：
+
 - 解析器持有输入字符串的引用（避免拷贝）
 - 解析出的 token 也是输入字符串的切片（零拷贝）
 - 支持回溯（保存解析状态，失败后恢复）
 
 请分析以下设计方案的 trade-off：
+
 1. `struct Parser<'a> { input: &'a str, pos: usize }` — 生命周期标注
 2. `struct Parser { input: Rc<str>, pos: usize }` — 引用计数
 3. `struct Parser { input: String, pos: usize }` — 拥有输入

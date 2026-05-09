@@ -89,10 +89,12 @@ println!("{}", *borrow2);
 > ⚠️ **标注**: 本节与 Rust 所有权系统的形式化模型对齐。
 
 Rust 的所有权规则在编译期检查：
+
 - 任意时刻，要么有一个可变引用，要么有任意数量的不可变引用
 - 引用必须始终有效
 
 `RefCell<T>` 将**部分检查从编译期推迟到运行时**：
+
 - `borrow()` → 检查当前无可变借用 → 返回 `Ref<T>`
 - `borrow_mut()` → 检查当前无活跃借用 → 返回 `RefMut<T>`
 - 违反规则 → **运行时 panic**（而非编译错误）
@@ -139,10 +141,10 @@ graph TD
     K --> L[Thread-safe Interior Mutability]
     I --> M[Runtime Borrow Check]
     M --> N[Ref / RefMut Guards]
-    
+
     B --> O[Recursive Types]
     B --> P[Heap Allocation]
-    
+
     style B fill:#f9f,stroke:#333,stroke-width:2px
     style C fill:#bfb,stroke:#333,stroke-width:2px
     style I fill:#bbf,stroke:#333,stroke-width:2px
@@ -189,6 +191,7 @@ hello(&b);  // &Box<String> → &String → &str（两次 Deref 转换）
 ```
 
 编译器自动应用 `Deref`：
+
 - `&Box<T>` → `&T`
 - `&Rc<T>` → `&T`
 - `&String` → `&str`
@@ -209,7 +212,7 @@ Rc<T> 的堆分配结构:
     ┌────┴────┐
     │ Rc ptr  │  (栈上，多个 Rc 指向同一块内存)
     └─────────┘
-    
+
 释放条件: strong_count == 0
 数据清理后，如果 weak_count == 0，释放整个堆块
 ```
@@ -301,7 +304,7 @@ impl Node {
             neighbors: RefCell::new(vec![]),
         })
     }
-    
+
     fn add_neighbor(&self, node: &Rc<Node>) {
         self.neighbors.borrow_mut().push(Rc::clone(node));
     }
@@ -310,10 +313,10 @@ impl Node {
 fn main() {
     let a = Node::new(1);
     let b = Node::new(2);
-    
+
     a.add_neighbor(&b);
     b.add_neighbor(&a);  // 循环引用！需要用 Weak 打破
-    
+
     println!("a = {:?}", a);
 }
 ```
@@ -347,7 +350,7 @@ impl Directory {
             subdirs: RefCell::new(vec![]),
         })
     }
-    
+
     fn add_file(&self, name: &str) -> Rc<File> {
         let file = Rc::new(File {
             name: name.to_string(),
@@ -366,6 +369,7 @@ impl Directory {
 #### 反例 1: `Rc` 循环引用导致内存泄漏
 
 **错误代码**:
+
 ```rust
 use std::rc::Rc;
 use std::cell::RefCell;
@@ -378,10 +382,10 @@ struct Node {
 fn main() {
     let a = Rc::new(Node { value: 1, next: RefCell::new(None) });
     let b = Rc::new(Node { value: 2, next: RefCell::new(None) });
-    
+
     *a.next.borrow_mut() = Some(Rc::clone(&b));
     *b.next.borrow_mut() = Some(Rc::clone(&a));  // 循环引用！
-    
+
     // a 和 b 的引用计数都是 2
     // 离开作用域后，引用计数降为 1，内存永不释放！
 }
@@ -407,6 +411,7 @@ struct Node {
 #### 反例 2: `RefCell` 运行时 panic
 
 **错误代码**:
+
 ```rust
 use std::cell::RefCell;
 
@@ -418,6 +423,7 @@ let borrow3 = cell.borrow_mut();  // ❌ 运行时 panic！
 ```
 
 **运行时错误**:
+
 ```text
 thread 'main' panicked at 'already borrowed: BorrowMutError'
 ```
@@ -425,6 +431,7 @@ thread 'main' panicked at 'already borrowed: BorrowMutError'
 **根因推导**: `RefCell` 在运行时检查借用规则。当前已有 2 个不可变借用，尝试获取可变借用违反了规则。
 
 **修复方案**:
+
 ```rust
 use std::cell::RefCell;
 
@@ -445,6 +452,7 @@ let borrow3 = cell.borrow_mut();  // ✅ 现在可以获取可变借用
 #### 反例 3: 跨线程使用 `Rc`
 
 **错误代码**:
+
 ```rust
 use std::rc::Rc;
 use std::thread;
@@ -457,6 +465,7 @@ let handle = thread::spawn(move || {
 ```
 
 **编译器错误**:
+
 ```text
 error[E0277]: `Rc<i32>` cannot be sent between threads safely
 ```
@@ -464,6 +473,7 @@ error[E0277]: `Rc<i32>` cannot be sent between threads safely
 **根因推导**: `Rc` 使用非原子的引用计数，多线程同时修改会导致数据竞争。
 
 **修复方案**:
+
 ```rust
 use std::sync::Arc;
 use std::thread;
@@ -691,10 +701,10 @@ use std::cell::RefCell;
 
 fn main() {
     let cell = RefCell::new(vec![1, 2, 3]);
-    
+
     let first = cell.borrow()[0];
     cell.borrow_mut().push(4);  // ❌ panic!
-    
+
     println!("{}", first);
 }
 ```
@@ -711,12 +721,12 @@ use std::cell::RefCell;
 
 fn main() {
     let cell = RefCell::new(vec![1, 2, 3]);
-    
+
     {
         let first = cell.borrow()[0];
         println!("first = {}", first);
     } // borrow 在此处释放
-    
+
     cell.borrow_mut().push(4);  // ✅ 现在可以获取可变借用
 }
 ```
@@ -731,7 +741,7 @@ use std::thread;
 
 fn main() {
     let counter = Rc::new(RefCell::new(0));
-    
+
     let mut handles = vec![];
     for _ in 0..10 {
         let counter = Rc::clone(&counter);
@@ -739,7 +749,7 @@ fn main() {
             *counter.borrow_mut() += 1;
         }));
     }
-    
+
     for h in handles { h.join().unwrap(); }
     println!("{}", *counter.borrow());
 }
@@ -756,7 +766,7 @@ use std::thread;
 
 fn main() {
     let counter = Arc::new(Mutex::new(0));
-    
+
     let mut handles = vec![];
     for _ in 0..10 {
         let counter = Arc::clone(&counter);
@@ -765,7 +775,7 @@ fn main() {
             *num += 1;
         }));
     }
-    
+
     for h in handles { h.join().unwrap(); }
     println!("{}", *counter.lock().unwrap());
 }
@@ -783,6 +793,7 @@ fn main() {
 4. 某些操作需要修改节点属性（如 `id`、`class`）
 
 请设计节点的所有权和引用结构：
+
 - 父节点引用应该用 `Rc` 还是 `Weak`？为什么？
 - 子节点列表应该用什么类型存储？
 - 节点属性修改需要 `RefCell` 吗？

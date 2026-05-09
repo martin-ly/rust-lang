@@ -1,7 +1,7 @@
 # 特质约束
 
-**主题**: Generics Traits  
-**难度**: Easy  
+**主题**: Generics Traits
+**难度**: Easy
 **练习编号**: ex01_trait_bounds
 
 ---

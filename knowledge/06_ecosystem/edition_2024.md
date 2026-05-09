@@ -85,11 +85,11 @@ graph TD
     D --> H[Macro Hygiene]
     E --> I[Lifetime Capture]
     F --> J[Feature Unification]
-    
+
     K[Cargo.toml] --> L[edition = "2024"]
     K --> M[rust-version = "1.82.0"]
     L --> B
-    
+
     style B fill:#f9f,stroke:#333,stroke-width:2px
     style C fill:#bfb,stroke:#333,stroke-width:2px
     style F fill:#bbf,stroke:#333,stroke-width:2px

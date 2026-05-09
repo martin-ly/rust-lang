@@ -22,6 +22,14 @@
   - [五、与 `if` guards 的行为一致性](#五与-if-guards-的行为一致性)
   - [六、兼容性说明](#六兼容性说明)
   - [七、练习](#七练习)
+    - [模块 3: 概念依赖图](#模块-3-概念依赖图)
+      - [承上（前置知识回溯）](#承上前置知识回溯)
+    - [模块 7: 思维表征](#模块-7-思维表征)
+    - [表征: if let guard 在 match 中的位置](#表征-if-let-guard-在-match-中的位置)
+  - [📚 模块 8: 国际化对齐](#-模块-8-国际化对齐)
+  - [⚖️ 模块 9: 设计权衡](#️-模块-9-设计权衡)
+    - [为什么 if let guards 不参与穷尽性检查？](#为什么-if-let-guards-不参与穷尽性检查)
+  - [📝 模块 10: 自我检测](#-模块-10-自我检测)
   - [八、参考链接](#八参考链接)
 
 ---
@@ -247,7 +255,7 @@ graph TD
     H --> I[Pattern Binding in Guard]
     I --> J[let chains]
     J --> K[Flattened Guards]
-    
+
     style H fill:#f9f,stroke:#333,stroke-width:2px
     style I fill:#bfb,stroke:#333,stroke-width:2px
     style K fill:#bbf,stroke:#333,stroke-width:2px
@@ -332,6 +340,7 @@ match status {
 **不安全**。`Active(n)` 在 `extra_info(n)` 返回 `None` 时没有被处理，而编译器不会报错（guard 不参与穷尽性检查）。
 
 **修复**:
+
 ```rust
 match status {
     Active(n) if let Some(x) = extra_info(n) => println!("{}", x),

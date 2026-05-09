@@ -59,7 +59,7 @@ use syn::{parse_macro_input, DeriveInput};
 pub fn my_debug_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     let expanded = quote! {
         impl std::fmt::Debug for #name {
             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -67,7 +67,7 @@ pub fn my_debug_derive(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     expanded.into()
 }
 
@@ -87,6 +87,7 @@ pub fn my_function_like(input: TokenStream) -> TokenStream {
 ```
 
 边界操作：
+
 - `proc-macro = true`：必须在独立的 crate 中定义
 - `syn::parse`：将 TokenStream 解析为结构化 AST
 - `quote!`：使用模板语法生成 TokenStream
@@ -159,7 +160,7 @@ graph TD
     C --> J[Where 子句]
     E --> K[Span 保留]
     K --> L[错误定位]
-    
+
     style B fill:#f9f,stroke:#333,stroke-width:2px
     style E fill:#bbf,stroke:#333,stroke-width:2px
     style K fill:#bfb,stroke:#333,stroke-width:2px
@@ -265,7 +266,7 @@ use syn::{parse_macro_input, DeriveInput};
 pub fn hello_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     let expanded = quote! {
         impl #name {
             fn hello(&self) {
@@ -273,7 +274,7 @@ pub fn hello_derive(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     expanded.into()
 }
 ```
@@ -291,16 +292,16 @@ use syn::{parse_macro_input, Data, DeriveInput, Fields};
 pub fn display_enum_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     let variants = match &input.data {
         Data::Enum(data) => &data.variants,
         _ => panic!("DisplayEnum only works on enums"),
     };
-    
+
     let display_arms = variants.iter().map(|variant| {
         let variant_name = &variant.ident;
         let variant_str = variant_name.to_string();
-        
+
         match &variant.fields {
             Fields::Unit => quote! {
                 #name::#variant_name => write!(f, #variant_str)
@@ -313,7 +314,7 @@ pub fn display_enum_derive(input: TokenStream) -> TokenStream {
             },
         }
     });
-    
+
     let expanded = quote! {
         impl std::fmt::Display for #name {
             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -323,7 +324,7 @@ pub fn display_enum_derive(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     expanded.into()
 }
 ```
@@ -343,18 +344,18 @@ pub fn builder_derive(input: TokenStream) -> TokenStream {
     let name = &input.ident;
     let builder_name = quote::format_ident!("{}Builder", name);
     let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
-    
+
     let fields = match &input.data {
         Data::Struct(data) => &data.fields,
         _ => panic!("Builder only works on structs"),
     };
-    
+
     let builder_fields = fields.iter().map(|f| {
         let name = &f.ident;
         let ty = &f.ty;
         quote! { #name: std::option::Option<#ty> }
     });
-    
+
     let builder_methods = fields.iter().map(|f| {
         let name = &f.ident;
         let ty = &f.ty;
@@ -365,12 +366,12 @@ pub fn builder_derive(input: TokenStream) -> TokenStream {
             }
         }
     });
-    
+
     let build_assigns = fields.iter().map(|f| {
         let name = &f.ident;
         quote! { #name: self.#name.ok_or(concat!(stringify!(#name), " is not set"))? }
     });
-    
+
     let expanded = quote! {
         impl #impl_generics #builder_name #ty_generics #where_clause {
             pub fn build(self) -> Result<#name #ty_generics, Box<dyn std::error::Error>> {
@@ -379,11 +380,11 @@ pub fn builder_derive(input: TokenStream) -> TokenStream {
                 })
             }
         }
-        
+
         pub struct #builder_name #ty_generics #where_clause {
             #(#builder_fields,)*
         }
-        
+
         impl #impl_generics #name #ty_generics #where_clause {
             pub fn builder() -> #builder_name #ty_generics {
                 #builder_name {
@@ -392,7 +393,7 @@ pub fn builder_derive(input: TokenStream) -> TokenStream {
             }
         }
     };
-    
+
     expanded.into()
 }
 ```
@@ -404,12 +405,13 @@ pub fn builder_derive(input: TokenStream) -> TokenStream {
 #### 反例 1: 忽略泛型参数导致编译错误
 
 **错误代码**:
+
 ```rust
 #[proc_macro_derive(CloneMy)]
 pub fn clone_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     let expanded = quote! {
         impl Clone for #name {  // ❌ 忽略了泛型参数！
             fn clone(&self) -> Self {
@@ -422,6 +424,7 @@ pub fn clone_derive(input: TokenStream) -> TokenStream {
 ```
 
 **编译器错误**（在使用点）：
+
 ```text
 error[E0107]: missing generics for struct `MyStruct<T>`
 ```
@@ -429,6 +432,7 @@ error[E0107]: missing generics for struct `MyStruct<T>`
 **根因推导**: `quote! { impl Clone for #name { ... } }` 没有包含泛型参数。对于 `MyStruct<T>`，需要生成 `impl<T> Clone for MyStruct<T>`。
 
 **修复方案**:
+
 ```rust
 let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
 
@@ -448,12 +452,13 @@ let expanded = quote! {
 #### 反例 2: Span 丢失导致错误定位不准
 
 **错误代码**:
+
 ```rust
 #[proc_macro_derive(BadDebug)]
 pub fn bad_debug(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     // 生成的代码有错误，但错误指向宏调用点而非具体字段
     let expanded = quote! {
         impl std::fmt::Debug for #name {
@@ -468,6 +473,7 @@ pub fn bad_debug(input: TokenStream) -> TokenStream {
 ```
 
 **编译器错误**:
+
 ```text
 error[E0609]: no field `nonexistent_field` on type `MyStruct`
   --> src/main.rs:3:10
@@ -479,6 +485,7 @@ error[E0609]: no field `nonexistent_field` on type `MyStruct`
 **根因推导**: 默认 `quote!` 使用宏调用点的 Span。编译器无法知道错误实际来自宏内部的哪一行。
 
 **修复方案** — 使用 `quote_spanned!`：
+
 ```rust
 let field = /* 获取某个字段 */;
 let field_span = field.span();
@@ -495,6 +502,7 @@ let expanded = quote_spanned! { field_span =>
 #### 反例 3: 过程宏中的 panic 导致编译器崩溃
 
 **错误代码**:
+
 ```rust
 #[proc_macro_derive(PanicDerive)]
 pub fn panic_derive(input: TokenStream) -> TokenStream {
@@ -505,11 +513,12 @@ pub fn panic_derive(input: TokenStream) -> TokenStream {
 **根因推导**: 过程宏中的 panic 会传播到编译器，导致编译器以非优雅方式终止。用户看到的是 Rust 编译器的 backtrace，而非友好的错误信息。
 
 **修复方案**:
+
 ```rust
 #[proc_macro_derive(SafeDerive)]
 pub fn safe_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     if !input.generics.params.is_empty() {
         // 使用 syn::Error 生成编译错误
         return syn::Error::new(
@@ -517,7 +526,7 @@ pub fn safe_derive(input: TokenStream) -> TokenStream {
             "SafeDerive does not support generics yet"
         ).to_compile_error().into();
     }
-    
+
     // 正常展开
     TokenStream::new()
 }
@@ -526,8 +535,6 @@ pub fn safe_derive(input: TokenStream) -> TokenStream {
 **抽象原则**: **"过程宏中永不 panic"**：使用 `syn::Error::to_compile_error()` 将错误转换为 `compile_error!` 宏调用，让编译器优雅地报告错误。
 
 ---
-
-
 
 ---
 
@@ -712,7 +719,7 @@ pub fn safe_derive(input: TokenStream) -> TokenStream {
 pub fn my_default(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
-    
+
     let expanded = quote! {
         impl Default for #name {
             fn default() -> Self {
@@ -733,7 +740,7 @@ pub fn my_default(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
     let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
-    
+
     let expanded = quote! {
         impl #impl_generics Default for #name #ty_generics #where_clause {
             fn default() -> Self {
@@ -755,11 +762,11 @@ pub fn my_default(input: TokenStream) -> TokenStream {
 #[proc_macro_derive(Check)]
 pub fn check(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     if let syn::Data::Enum(_) = input.data {
         panic!("Check does not support enums");
     }
-    
+
     TokenStream::new()
 }
 ```
@@ -771,14 +778,14 @@ pub fn check(input: TokenStream) -> TokenStream {
 #[proc_macro_derive(Check)]
 pub fn check(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    
+
     if let syn::Data::Enum(data) = &input.data {
         return syn::Error::new(
             data.enum_token.span,
             "Check does not support enums"
         ).to_compile_error().into();
     }
-    
+
     TokenStream::new()
 }
 ```
@@ -788,12 +795,14 @@ pub fn check(input: TokenStream) -> TokenStream {
 ### 开放设计题
 
 **题 3**: 你正在设计一个 `derive(CustomJson)` 宏，要求：
+
 - 支持结构体和枚举
 - 支持重命名字段（`#[json(name = "user_name")]`）
 - 支持跳过字段（`#[json(skip)]`）
 - 生成的 `to_json` 方法返回 `String`
 
 请从以下维度设计宏的实现策略：
+
 1. 如何解析自定义属性（`#[json(...)]`）？
 2. 如何处理泛型结构体的 `to_json` 实现？
 3. 如何为错误信息提供准确的 Span？

@@ -158,7 +158,7 @@ graph TD
     I --> J
     J --> K[Match Guards]
     K --> L[if let guards]
-    
+
     style F fill:#f9f,stroke:#333,stroke-width:2px
     style H fill:#bfb,stroke:#333,stroke-width:2px
     style I fill:#bbf,stroke:#333,stroke-width:2px

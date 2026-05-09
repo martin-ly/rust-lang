@@ -1,7 +1,7 @@
 # Rust 项目编译时间和二进制大小优化报告
 
-**日期**: 2026-04-10  
-**Rust 版本**: 1.96.0  
+**日期**: 2026-04-10
+**Rust 版本**: 1.96.0
 **项目**: rust-lang
 
 ---
@@ -19,6 +19,7 @@
 在 `Cargo.toml` 中新增了两个优化 profile:
 
 #### `release-fast` - 快速发布
+
 ```toml
 [profile.release-fast]
 inherits = "release"
@@ -29,10 +30,11 @@ strip = "symbols"
 panic = "abort"
 ```
 
-**适用场景**: 需要优化但要求快速编译的场景  
+**适用场景**: 需要优化但要求快速编译的场景
 **使用方法**: `cargo build --profile release-fast`
 
 #### `size` - 最小体积
+
 ```toml
 [profile.size]
 inherits = "release"
@@ -44,12 +46,13 @@ panic = "abort"
 incremental = false   # 禁用增量编译
 ```
 
-**适用场景**: 对二进制体积有严格要求的场景  
+**适用场景**: 对二进制体积有严格要求的场景
 **使用方法**: `cargo build --profile size`
 
 ### 1.2 修复 `.cargo/config.toml`
 
 修复了 `rustflags` 配置的语法错误:
+
 - 将数组格式改为 TOML 表格式
 - 修复了 `env.rustflags` 的类型问题
 - 禁用了非 GitHub Actions 环境下的 sccache GitHub Actions 缓存
@@ -74,11 +77,13 @@ incremental = false   # 禁用增量编译
 ### 2.2 优化建议
 
 重复依赖主要由以下原因导致:
+
 1. **surf 2.3.2** 依赖旧版 HTTP 栈 (http-types, http-client, async-std)
 2. **actix-web** 内部依赖不同版本的 actix-router
 3. **libp2p** 生态系统依赖不同版本的加密库
 
 **建议措施**:
+
 - 考虑移除 surf，统一使用 reqwest (已在 workspace 依赖中)
 - 监控 actix-web 更新以解决内部重复依赖
 - 使用 `cargo-deny` 定期检查重复依赖
@@ -99,6 +104,7 @@ incremental = false   # 禁用增量编译
 ### 3.2 构建优化配置
 
 `.cargo/config.toml` 中已配置:
+
 - 稀疏索引协议 (sparse registry)
 - 流水线编译 (pipeline)
 - LLD 链接器 (Windows/Linux)
@@ -150,6 +156,7 @@ incremental = false   # 禁用增量编译
 ## 推荐的开发工作流
 
 ### 日常开发
+
 ```bash
 # 快速语法检查
 cargo check
@@ -159,12 +166,14 @@ cargo check --profile check-fast
 ```
 
 ### 测试
+
 ```bash
 # 运行测试（优化级别 1，平衡速度和质量）
 cargo test
 ```
 
 ### 发布构建
+
 ```bash
 # 标准发布构建（推荐）
 cargo build --release
@@ -177,6 +186,7 @@ cargo build --profile size
 ```
 
 ### 基准测试
+
 ```bash
 # 使用 bench profile 进行基准测试
 cargo bench
@@ -187,16 +197,19 @@ cargo bench
 ## 进一步优化建议
 
 ### 短期
+
 1. 安装 sccache: `cargo install sccache`
 2. 使用 `cargo machete` 查找未使用的依赖
 3. 考虑使用 `cargo-deny` 管理重复依赖
 
 ### 中期
+
 1. 评估移除 surf 依赖，统一使用 reqwest
 2. 考虑使用 mold 链接器替代 LLD (Linux)
 3. 对大型 crate 进行代码分割
 
 ### 长期
+
 1. 监控依赖更新，解决版本冲突
 2. 考虑使用 workspace-hack crate 统一依赖版本
 3. 评估使用 Cranelift 后端进行 debug 构建

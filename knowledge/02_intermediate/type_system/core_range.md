@@ -139,7 +139,7 @@ graph TD
     F --> G[Iterator]
     F --> H[contains]
     F --> I[is_empty]
-    
+
     style D fill:#f9f,stroke:#333,stroke-width:2px
     style F fill:#bfb,stroke:#333,stroke-width:2px
 ```

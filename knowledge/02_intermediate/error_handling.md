@@ -103,7 +103,7 @@ expr?: T
 | **must_use** | 固有属性 | 编译器警告 | `Result` 和 `Option` 都标记了 `#[must_use]` | `let _ = ...` 可显式忽略 |
 | **零成本抽象** | 固有属性 | true | `Result<T, E>` 的内存布局与 `T` 或 `E` 相同（tagged union 优化） | `E` 很大时可能膨胀 |
 | **? 运算符自动转换** | 关系属性 | `From<E>` | `?` 自动调用 `From::from` 转换错误类型 | 未实现 `From` 时编译失败 |
-| ** panic = 不可恢复** | 固有属性 | true | `panic` 不跨线程传播，可由 `catch_unwind` 捕获 | `catch_unwind` 不捕获所有 panic |
+| **panic = 不可恢复** | 固有属性 | true | `panic` 不跨线程传播，可由 `catch_unwind` 捕获 | `catch_unwind` 不捕获所有 panic |
 | **main 可返回 Result** | 固有属性 | Rust 1.26+ | `fn main() -> Result<(), E>` 自动打印错误 | `E` 需实现 `Debug` |
 
 #### 关键推论
@@ -130,7 +130,7 @@ graph TD
     H --> I[catch_unwind]
     F --> J[Error Trait]
     J --> K[Display + Debug]
-    
+
     style B fill:#f9f,stroke:#333,stroke-width:2px
     style D fill:#bbf,stroke:#333,stroke-width:2px
     style F fill:#bfb,stroke:#333,stroke-width:2px
@@ -249,13 +249,13 @@ use std::io;
 pub enum AppError {
     #[error("IO error: {0}")]
     Io(#[from] io::Error),
-    
+
     #[error("parse error: {0}")]
     Parse(#[from] std::num::ParseIntError),
-    
+
     #[error("invalid config: {key} = {value}")]
     InvalidConfig { key: String, value: String },
-    
+
     #[error("not found: {0}")]
     NotFound(String),
 }
@@ -277,15 +277,15 @@ use anyhow::{Context, Result};
 fn main() -> Result<()> {
     let config = std::fs::read_to_string("app.conf")
         .with_context(|| "failed to read configuration file")?;
-    
+
     let port = config
         .trim()
         .parse::<u16>()
         .with_context(|| format!("invalid port number in config: {:?}", config))?;
-    
+
     start_server(port)
         .with_context(|| format!("failed to start server on port {}", port))?;
-    
+
     Ok(())
 }
 ```
@@ -297,6 +297,7 @@ fn main() -> Result<()> {
 #### 反例 1: 滥用 `unwrap()` 处理用户输入
 
 **错误代码**:
+
 ```rust
 fn parse_user_input(input: &str) -> i32 {
     input.parse::<i32>().unwrap()  // ❌ 用户输入不可信！
@@ -306,6 +307,7 @@ fn parse_user_input(input: &str) -> i32 {
 **根因推导**: `unwrap()` 在 `Err` 时 panic。用户输入不可控，这会导致生产环境崩溃。
 
 **修复方案**:
+
 ```rust
 fn parse_user_input(input: &str) -> Result<i32, String> {
     input.parse::<i32>()
@@ -320,6 +322,7 @@ fn parse_user_input(input: &str) -> Result<i32, String> {
 #### 反例 2: 错误类型不匹配导致 `?` 编译失败
 
 **错误代码**:
+
 ```rust
 #[derive(Debug)]
 struct MyError;
@@ -331,6 +334,7 @@ fn may_fail() -> Result<(), MyError> {
 ```
 
 **编译器错误**:
+
 ```text
 error[E0277]: `?` couldn't convert the error to `MyError`
 ```
@@ -338,6 +342,7 @@ error[E0277]: `?` couldn't convert the error to `MyError`
 **根因推导**: `?` 运算符要求当前函数返回的错误类型实现 `From<被调用函数的错误类型>`。`MyError` 没有实现 `From<io::Error>`。
 
 **修复方案**:
+
 ```rust
 use std::io;
 
@@ -361,6 +366,7 @@ fn may_fail() -> Result<(), MyError> {
 #### 反例 3: `Option` 误用为 `Result`
 
 **错误代码**:
+
 ```rust
 fn open_file(path: &str) -> Option<File> {
     File::open(path).ok()  // ❌ 丢弃了错误原因！
@@ -377,6 +383,7 @@ fn main() {
 **根因推导**: `Result::ok()` 将 `Err` 转换为 `None`，丢失了所有错误信息。调用者无法区分"文件不存在"、"权限不足"还是"路径无效"。
 
 **修复方案**:
+
 ```rust
 fn open_file(path: &str) -> Result<File, io::Error> {
     File::open(path)  // ✅ 保留完整错误信息
@@ -535,7 +542,7 @@ Rust 选择 `Result` 而非异常的核心原因：
 
 1. **极端深层嵌套调用**: 如果调用链非常深且每层都可能失败，`?` 的显式传播比异常的隐式传播更冗长。
 2. **需要跨线程传播错误**: `?` 不跨线程。线程间的错误传播需要显式通道（`join().unwrap()` 或 `crossbeam`）。
-3. ** FFI 边界**: C 代码不理解 `Result`，返回错误码需要手动转换。
+3. **FFI 边界**: C 代码不理解 `Result`，返回错误码需要手动转换。
 
 ---
 
@@ -566,11 +573,13 @@ fn process_data(path: &str) -> Vec<i32> {
 <summary>参考答案</summary>
 
 **问题**:
+
 1. `read_to_string(path).unwrap()` —— 文件不存在时 panic
 2. `parse::<i32>().unwrap()` —— 格式错误时 panic
 3. 返回 `Vec<i32>` 丢失了所有错误信息
 
 **修复**:
+
 ```rust
 use std::io;
 
@@ -586,7 +595,7 @@ impl From<io::Error> for DataError {
 
 fn process_data(path: &str) -> Result<Vec<i32>, DataError> {
     let content = std::fs::read_to_string(path)?;
-    
+
     let mut result = Vec::new();
     for (i, line) in content.lines().enumerate() {
         let num = line.parse::<i32>()
@@ -596,7 +605,7 @@ fn process_data(path: &str) -> Result<Vec<i32>, DataError> {
             })?;
         result.push(num);
     }
-    
+
     Ok(result)
 }
 ```
@@ -625,6 +634,7 @@ fn load_port(path: &str) -> Result<u16, AppError> {
 **问题**: `AppError` 未实现 `From<std::io::Error>` 和 `From<std::num::ParseIntError>`，`?` 无法自动转换。
 
 **修复**:
+
 ```rust
 use std::io;
 use std::num::ParseIntError;
@@ -651,6 +661,7 @@ fn load_port(path: &str) -> Result<u16, AppError> {
 ```
 
 或使用 `thiserror`:
+
 ```rust
 use thiserror::Error;
 
@@ -658,7 +669,7 @@ use thiserror::Error;
 enum AppError {
     #[error("IO error: {0}")]
     Io(#[from] io::Error),
-    
+
     #[error("parse error: {0}")]
     Parse(#[from] ParseIntError),
 }
@@ -676,6 +687,7 @@ enum AppError {
 4. 内部 bug（如不应该到达的分支）
 
 请设计错误处理策略：
+
 - 哪些场景应该返回 `Result`，哪些应该 `panic`？
 - 错误类型应该自定义还是使用 `anyhow`？
 - 如何在用户界面中展示不同严重度的错误？
