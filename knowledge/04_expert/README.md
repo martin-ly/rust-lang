@@ -17,9 +17,9 @@
 |------|------|------|
 | [compiler_internals.md](compiler_internals.md) | 编译器内部机制 | ⭐⭐⭐⭐⭐ |
 | [unsafe_audit.md](unsafe_audit.md) | Unsafe 代码审计方法论 | ⭐⭐⭐⭐⭐ |
-| [tree_borrows.md](tree_borrows.md) | Tree Borrows 别名模型 | ⭐⭐⭐⭐⭐ |
-| [tree_borrows_authoritative_guide.md](tree_borrows_authoritative_guide.md) | Tree Borrows 权威指南 | ⭐⭐⭐⭐⭐ |
-| [coq_formalization_guide.md](coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
+| [miri/tree_borrows.md](miri/tree_borrows.md) | Tree Borrows 别名模型 | ⭐⭐⭐⭐⭐ |
+| [academic/tree_borrows_authoritative_guide.md](academic/tree_borrows_authoritative_guide.md) | Tree Borrows 权威指南 | ⭐⭐⭐⭐⭐ |
+| [academic/coq_formalization_guide.md](academic/coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 

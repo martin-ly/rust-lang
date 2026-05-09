@@ -37,7 +37,7 @@
 |------|------|------|
 | [emerging/generic_const_exprs.md](emerging/generic_const_exprs.md) | 泛型常量表达式 | ⭐⭐⭐⭐ |
 | [emerging/async_closures.md](emerging/async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ |
-| [emerging/rust_1_95_preview.md](emerging/rust_1_95_preview.md) | Rust 1.95 预览特性 | ⭐⭐⭐ |
+| [emerging/rust_1_95.md](emerging/rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 

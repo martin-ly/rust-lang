@@ -165,7 +165,7 @@
 
 ### 新手路径 ⭐
 
-```
+```text
 00_start/installation.md → 00_start/hello_world.md →
 00_start/rust_philosophy.md → 00_start/learning_roadmap.md →
 01_fundamentals/ownership.md → 01_fundamentals/borrowing.md →
@@ -174,7 +174,7 @@
 
 ### 进阶路径 ⭐⭐
 
-```
+```text
 02_intermediate/generics.md → 02_intermediate/traits.md →
 02_intermediate/error_handling.md → 02_intermediate/collections.md →
 02_intermediate/smart_pointers.md → 02_intermediate/type_conversions.md →
@@ -183,7 +183,7 @@
 
 ### 高级路径 ⭐⭐⭐
 
-```
+```text
 03_advanced/lazy_initialization.md →
 03_advanced/async/async_await.md → 03_advanced/async/async_closure.md →
 03_advanced/concurrency/threads.md → 03_advanced/concurrency/atomics.md →
@@ -194,14 +194,14 @@
 
 ### 专家路径 ⭐⭐⭐⭐
 
-```
+```text
 04_expert/compiler_internals.md → 04_expert/unsafe_audit.md →
 04_expert/miri/tree_borrows.md
 ```
 
 ### Rust 1.95+ 特性追踪 🆕
 
-```
+```text
 01_fundamentals/iterators.md (array_windows, next_if) →
 02_intermediate/type_conversions.md (bool::TryFrom, char→usize) →
 02_intermediate/let_chains.md →
@@ -244,9 +244,9 @@
 
 ## 📊 统计数据
 
-- **总文档数**: 71 篇（含索引/入口）
-- **总代码行数**: 33,647 行
-- **总字符数**: 781,606 字符
+- **总文档数**: 73 篇（含索引/入口）
+- **总代码行数**: 33,715 行
+- **总字符数**: 783,401 字符
 - **重构文档**: 28 篇核心文档按 10 模块标准重构
 - **Rust 1.95+ 特性**: 100% 覆盖
 

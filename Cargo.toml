@@ -503,7 +503,7 @@ tiff = "0.11.0"
 # bitflags: 位标志宏 - 2026-02-13: 2.10.0 -> 2.11.0 (cargo update)
 bitflags = "2.11.1"  # 2026-04-23: 同步至实际解析版本
 # hashbrown: 高性能HashMap实现
-hashbrown = "0.17.0"
+hashbrown = "0.17.1"  # 2026-05-09: cargo update
 # itertools: 迭代器工具库
 itertools = "0.14.0"
 # lru: LRU缓存实现 - 2026-04-18: 升级至 0.17.0
