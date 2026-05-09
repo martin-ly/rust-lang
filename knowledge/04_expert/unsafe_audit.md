@@ -42,6 +42,73 @@ cargo install miri  # 或 rustup component add miri
 
 ---
 
+### 模块 1: 概念定义
+
+#### 1.1 直观定义
+
+**Unsafe Code Auditing（不安全代码审计）** 是对 Rust 代码中 `unsafe` 块及其周边安全契约进行系统性审查的工程实践。其目标是识别可能导致未定义行为（Undefined Behavior, UB）的代码模式，验证 `SAFETY` 注释中的假设是否成立，并确保 unsafe 抽象对外暴露的 API 保持内存安全与线程安全。
+
+直观上，审计如同为代码中的"安全漏洞"做体检——不是检查代码能否编译（编译器已做），而是检查代码在运行时的假设是否始终成立。
+
+#### 1.2 操作定义
+
+| 维度 | 审计 (Auditing) | 代码审查 (Code Review) | 测试 (Testing) |
+|------|-----------------|------------------------|----------------|
+| **目标** | 发现潜在的 UB 和 unsoundness | 发现逻辑错误、风格问题 | 验证功能正确性 |
+| **范围** | 聚焦 `unsafe` 块及边界 | 全代码库 | 全代码库（可执行路径） |
+| **方法** | 静态分析 + 形式化推理 + 工具验证 | 人工阅读 + 讨论 | 运行时执行 + 断言 |
+| **完备性** | 理论上可证明无 UB（结合 Miri） | 无法保证无 UB | 无法覆盖所有执行路径 |
+
+#### 1.3 形式化直觉
+
+Rust 的安全保证基于一个核心契约：**编译器保证 safe 代码不会触发 UB，前提是所有 `unsafe` 块的实现者正确维护了类型系统和内存模型的不变量。**
+
+审计的本质就是验证这个契约的右侧——即 `unsafe` 实现者是否确实维护了这些不变量。形式化地说，审计试图回答：
+
+> 对于每一个 `unsafe` 块，是否存在一组前置条件 `P` 和后置条件 `Q`，使得当 `P` 成立时执行该块，结束时 `Q` 必然成立，且整个过程不违反 Rust 的内存模型？
+
+---
+
+### 模块 2: 核心原理
+
+#### 原理一：不变量（Invariant）是审计的锚点
+
+Rust 的安全建立在**不变量**之上。审计的核心不是找 "bug"，而是验证不变量：
+
+- **类型不变量**：`T` 的位模式始终合法（如 `bool` 只能是 0 或 1）
+- **生命周期不变量**：引用始终指向有效内存
+- **别名不变量**：`&mut T` 独占访问，`&T` 共享只读访问
+- **线程安全不变量**：`Send`/`Sync` 的实现与类型的实际并发行为一致
+
+#### 原理二：`unsafe` 是信任边界
+
+`unsafe` 块是一个**信任边界**（Trust Boundary）：
+
+```rust
+// 边界内侧（unsafe）：实现者承担安全责任
+pub fn safe_wrapper(data: &[u8]) -> Option<u8> {
+    if data.is_empty() {
+        return None;
+    }
+    // 边界外侧（safe）：调用者无需关心内部 unsafe
+    unsafe { Some(*data.as_ptr()) }
+}
+```
+
+审计必须验证：**边界内侧的实现是否对得起边界外侧的信任。**
+
+#### 原理三：局部化原则
+
+Rust 的 unsafe 设计遵循**局部化原则**：unsafe 的影响应当被限制在最小范围内，且通过安全 API 封装后，外部无法通过 safe 代码触发 UB。
+
+审计时遵循"洋葱模型"——从外向内逐层验证：
+
+```
+Safe API 层 → 安全契约检查 → Unsafe 实现层 → 不变量验证 → 底层操作
+```
+
+---
+
 ## 🧠 核心概念
 
 ### 不安全代码审计流程
@@ -116,7 +183,76 @@ pub unsafe fn c_string_to_rust_safe(ptr: *const c_char) -> Option<String> {
 }
 ```
 
-### 常见 Unsoundness 模式
+### 模块 5: 正例集
+
+#### 5.1 Minimal（最小正例）
+
+正确使用 `unsafe` 的最小示例——通过裸指针读取已知有效的内存：
+
+```rust
+fn get_first_byte(data: &[u8]) -> Option<u8> {
+    if data.is_empty() {
+        return None;
+    }
+    // SAFETY: 前面已检查 data 非空，as_ptr() 返回的指针有效
+    unsafe { Some(*data.as_ptr()) }
+}
+```
+
+#### 5.2 Realistic（真实场景）
+
+安全地封装 FFI 调用，将 C 接口转换为 Rust 安全 API：
+
+```rust
+use std::ffi::CStr;
+use std::os::raw::c_char;
+
+/// 将 C 字符串安全地转换为 Rust `&str`
+///
+/// # Safety
+/// - `ptr` 必须指向以 null 结尾的有效 UTF-8 字节序列
+/// - `ptr` 在函数执行期间保持有效
+pub unsafe fn c_str_to_str<'a>(ptr: *const c_char) -> Option<&'a str> {
+    if ptr.is_null() {
+        return None;
+    }
+    CStr::from_ptr(ptr).to_str().ok()
+}
+
+// Safe 包装：调用者无需写 unsafe
+pub fn get_config_name(ptr: *const c_char) -> Option<String> {
+    unsafe { c_str_to_str(ptr).map(|s| s.to_owned()) }
+}
+```
+
+#### 5.3 Production-grade（生产级）
+
+标准库中 `Vec::set_len` 的安全封装——`truncate` 和 `split_off` 的实现：
+
+```rust
+impl<T> Vec<T> {
+    /// 安全地截断 Vec 到指定长度，丢弃多余元素
+    pub fn truncate(&mut self, len: usize) {
+        if len > self.len {
+            return;
+        }
+        // 先 drop 多余元素（安全操作）
+        while self.len > len {
+            self.len -= 1;
+            // SAFETY: self.len 始终指向已初始化元素
+            unsafe {
+                std::ptr::drop_in_place(self.as_mut_ptr().add(self.len));
+            }
+        }
+    }
+}
+```
+
+---
+
+### 模块 6: 反例集
+
+#### 6.1 别名规则违反 (Aliasing Violation)
 
 #### 1. 别名规则违反 (Aliasing Violation)
 
@@ -145,7 +281,7 @@ pub fn no_aliasing() {
 }
 ```
 
-#### 2. 未初始化内存读取
+#### 6.2 未初始化内存读取
 
 ```rust
 // ❌ 危险：读取未初始化值
@@ -164,7 +300,7 @@ pub fn properly_init() -> i32 {
 }
 ```
 
-#### 3. 类型混淆 (Type Confusion)
+#### 6.3 类型混淆 (Type Confusion)
 
 ```rust
 // ❌ 严重错误：错误解释内存布局
@@ -192,7 +328,7 @@ pub unsafe fn parse_header_safe(bytes: &[u8]) -> Option<&Header> {
 }
 ```
 
-#### 4. Send/Sync 错误实现
+#### 6.4 Send/Sync 错误实现
 
 ```rust
 // ❌ 危险：错误标记 Send/Sync
@@ -275,6 +411,81 @@ fuzz_target!(|data: &[u8]| {
 - 针对解析函数和数据结构
 - 关注 FFI 边界
 - 结合 AddressSanitizer 使用
+
+### 模块 4: 语法规则
+
+#### 4.1 `unsafe` 块的语法边界
+
+`unsafe` 关键字在 Rust 中有两种用法，审计时必须区分：
+
+| 用法 | 语法 | 审计重点 |
+|------|------|----------|
+| `unsafe` 块 | `unsafe { ... }` | 块内操作的安全性 |
+| `unsafe` 函数 | `unsafe fn foo() { ... }` | 调用者契约 + 实现安全性 |
+| `unsafe` trait | `unsafe trait Foo {}` | 实现者的不变量保证 |
+| `unsafe impl` | `unsafe impl Foo for Bar {}` | 实现是否满足 trait 的不变量 |
+
+**关键规则**：`unsafe` 块的语义边界是**词法作用域**，不是控制流边界：
+
+```rust
+// ❌ 错误：unsafe 块跨分支，难以审计
+unsafe {
+    if condition {
+        *ptr = 1;
+    }
+    // ptr 可能在此已被释放，但仍在 unsafe 块内
+    *ptr2 = 2;
+}
+
+// ✅ 正确：每个 unsafe 操作独立成块，明确边界
+if condition {
+    unsafe { *ptr = 1; }
+}
+unsafe { *ptr2 = 2; }
+```
+
+#### 4.2 `SAFETY` 注释规范
+
+每个 `unsafe` 块**必须**包含 `// SAFETY:` 注释，说明为什么该操作是安全的。标准格式：
+
+```rust
+// SAFETY: [前提条件] + [推理过程] → [安全结论]
+unsafe { *ptr.add(offset) }
+```
+
+**审计检查清单**：
+
+- [ ] `SAFETY` 注释是否明确列出了所有前置条件？
+- [ ] 前置条件是否可由调用者验证？
+- [ ] 是否有后置条件需要调用者遵守？
+- [ ] 注释中的假设是否在代码中得到了验证？
+
+#### 4.3 FFI 声明语法
+
+FFI 边界是审计的重点区域，函数声明必须精确匹配 C 端的 ABI：
+
+```rust
+// ❌ 危险：缺少 repr(C) 且类型不匹配
+extern "C" {
+    fn c_api(data: *mut u8, len: usize) -> i32;
+}
+
+// ✅ 正确：精确匹配 C 签名，使用合适的类型
+#[repr(C)]
+pub struct Buffer {
+    ptr: *mut u8,
+    len: usize,
+}
+
+extern "C" {
+    /// # Safety
+    /// - `buf.ptr` 必须指向至少 `buf.len` 字节的有效内存
+    /// - `buf.ptr` 必须对 C 端写入操作有效
+    fn c_api(buf: *mut Buffer) -> c_int;
+}
+```
+
+---
 
 ### 模块 3: 概念依赖图
 
