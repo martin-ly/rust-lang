@@ -97,6 +97,61 @@ graph TD
 
 ---
 
+### 模块 1: 概念定义
+
+#### 1.1 直观定义
+
+**Tokio** 是 Rust 的异步运行时（Async Runtime），负责执行 `async fn` 产生的 `Future`。它将异步任务调度到线程池上，提供非阻塞 I/O、定时器和同步原语。
+
+> 💡 关键直觉：`async fn` 只是"任务描述"，Tokio 是"任务执行器"。没有运行时，`Future` 不会被轮询。
+
+#### 1.2 操作定义
+
+| 组件 | 功能 | 类比 |
+|------|------|------|
+| **Executor** | 调度 `Future` 到工作线程 | Node.js Event Loop |
+| **Reactor** | 监听 I/O 事件（epoll/kqueue/IOCP） | libuv |
+| **Timer** | 管理定时器和超时 | `setTimeout` |
+| **Blocking Pool** | 执行阻塞操作 | Worker Threads |
+
+#### 1.3 形式化直觉
+
+Tokio 使用**工作窃取（Work-Stealing）**调度模型：每个工作线程有本地队列（无锁），空闲线程从其他线程"窃取"任务。
+
+---
+
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[async fn] --> B[Future]
+    B --> C[Tokio Executor]
+    C --> D[Work Stealing]
+    C --> E[Reactor]
+    E --> F[epoll / kqueue / IOCP]
+    C --> G[Timer]
+    C --> H[Blocking Pool]
+    
+    style C fill:#f9f,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **Async/Await** | `03_advanced/async/async_await.md` | `async fn` 产生 `Future`，需要运行时执行 |
+| **Future** | `03_advanced/async/async_await.md` | `Future::poll` 是 Tokio 调度的核心 |
+| **Send/Sync** | `03_advanced/concurrency/threads.md` | `tokio::spawn` 要求 `Future: Send` |
+
+#### 启下（后续延伸预告）
+
+| 后续概念 | 所在文档 | 掌握本章后方可理解 |
+|----------|----------|-------------------|
+| **Axum/Web** | `06_ecosystem/deep_dives/axum_deep_dive.md` | Tokio 是 Axum Web 框架的底层运行时 |
+| **Async Patterns** | `03_advanced/async/async_await.md` | 高级并发模式（select!、join!）在 Tokio 上的应用 |
+
+---
+
 ## 💡 核心概念
 
 ### 任务 (Task)
@@ -439,6 +494,104 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 
 ---
 
+## 🗺️ 模块 7: 思维表征
+
+### 表征: Tokio 运行时选择决策矩阵
+
+| 场景 | 运行时类型 | 工作线程 | 说明 |
+|------|-----------|---------|------|
+| **简单脚本/测试** | `#[tokio::main]` 默认 | CPU 核心数 | 最常用，自动配置 |
+| **CPU 密集型服务** | `new_multi_thread` | CPU 核心数 | 充分使用多核 |
+| **I/O 密集型服务** | `new_multi_thread` | CPU 核心数 × 2 | 更多并发 |
+| **嵌入式/低资源** | `new_current_thread` | 1 | 单线程，低内存 |
+| **阻塞操作多** | `new_multi_thread` | 默认 + 增加 blocking_threads | 避免工作线程阻塞 |
+
+### 表征: 异步代码阻塞陷阱
+
+```text
+错误: 在工作线程中执行阻塞操作
+  async fn bad() {
+      std::thread::sleep(10s);  // 阻塞整个工作线程！
+  }
+
+修复 1: 使用异步等价物
+  async fn good() {
+      tokio::time::sleep(10s).await;  // 让出线程
+  }
+
+修复 2: 使用 spawn_blocking
+  async fn also_good() {
+      tokio::task::spawn_blocking(|| {
+          std::thread::sleep(10s);  // 在独立线程池执行
+      }).await.unwrap();
+  }
+```
+
+---
+
+## 📚 模块 8: 国际化对齐
+
+| 来源 | 类型 | 说明 |
+|------|------|------|
+| [Tokio 官方](https://tokio.rs/) | 官方 | 文档、教程、API |
+| [Async Rust Book](https://rust-lang.github.io/async-book/) | 官方 | Rust 异步编程权威指南 |
+
+---
+
+## ⚖️ 模块 9: 设计权衡
+
+### 为什么 Tokio 使用多线程运行时？
+
+单线程运行时（如 `async-std` 的早期版本）简单但无法利用多核。Tokio 的工作窃取模型：
+
+1. **负载均衡**: 自动将任务分布到所有 CPU 核心
+2. **无锁本地队列**: 线程优先从本地队列取任务，减少同步开销
+3. **全局队列兜底**: 新任务先入全局队列，再分发
+
+代价：多线程运行时有更高的内存开销（每个线程的栈空间），且跨线程任务切换有缓存失效成本。
+
+---
+
+## 📝 模块 10: 自我检测
+
+1. **Tokio 的 `spawn` 与 `spawn_blocking` 有何根本区别？** 在什么场景下必须使用 `spawn_blocking`？
+
+2. **以下代码有什么问题？如何修复？**
+
+```rust
+#[tokio::main]
+async fn main() {
+    let handle = tokio::spawn(async {
+        let data = std::fs::read_to_string("file.txt").unwrap();
+        data.len()
+    });
+    println!("{}", handle.await.unwrap());
+}
+```
+
+<details>
+<summary>参考答案</summary>
+
+**问题**: `std::fs::read_to_string` 是阻塞操作，在工作线程中执行会阻塞 Tokio 的调度器。
+
+**修复**:
+```rust
+#[tokio::main]
+async fn main() {
+    let handle = tokio::spawn(async {
+        let data = tokio::task::spawn_blocking(|| {
+            std::fs::read_to_string("file.txt").unwrap()
+        }).await.unwrap();
+        data.len()
+    });
+    println!("{}", handle.await.unwrap());
+}
+```
+
+</details>
+
+---
+
 ## 🔗 参考资源
 
 - [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/)
@@ -447,6 +600,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 
 ---
 
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 100% 完成
+**文档版本**: 2.0
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-09
+**状态**: ✅ 按 10 模块标准增强完成

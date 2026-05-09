@@ -25,10 +25,10 @@
 
 在开始学习本章之前，请确保你已掌握：
 
-- [Unsafe Rust](../02_intermediate/unsafe_rust.md) - 深入理解 `unsafe` 块、裸指针、FFI
-- [内存模型与布局](../03_advanced/memory_model.md) - 理解 Rust 的内存模型
-- [FFI 与外部调用](../03_advanced/ffi_bindings.md) - 了解 C 互操作基础
-- [生命周期与借用检查](../../guides/ownership_lifetime.md) - 掌握生命周期系统
+- [Unsafe Rust](../03_advanced/unsafe/unsafe_rust.md) - 深入理解 `unsafe` 块、裸指针、FFI
+- [内存模型与 Tree Borrows](../04_expert/miri/tree_borrows.md) - 理解 Rust 的内存模型
+- [FFI 与外部调用](../03_advanced/unsafe/ffi.md) - 了解 C 互操作基础
+- [生命周期与借用检查](../01_fundamentals/lifetimes.md) - 掌握生命周期系统
 
 **推荐工具准备**:
 
@@ -296,7 +296,7 @@ graph TD
     K --> L
     L --> M[Safety Documentation]
     M --> N[CI Integration]
-    
+
     style B fill:#f9f,stroke:#333,stroke-width:2px
     style J fill:#bbf,stroke:#333,stroke-width:2px
     style L fill:#bfb,stroke:#333,stroke-width:2px
@@ -750,6 +750,7 @@ impl Buffer {
 <summary>参考答案</summary>
 
 **问题识别**:
+
 1. `alloc` 可能返回 null，未检查
 2. `len` 可能为 0，`Layout::array` 可能 panic
 3. `as_slice` 未检查 ptr 是否为 null
@@ -757,6 +758,7 @@ impl Buffer {
 5. 缺少 `Drop` 实现，内存泄漏
 
 **修复版本**:
+
 ```rust
 use std::alloc::{alloc, dealloc, Layout};
 use std::ptr::NonNull;
@@ -825,6 +827,7 @@ pub fn safe_process(data: &[u8]) -> i32 {
 **问题**: C 函数 `process_data` 的返回值 `i32` 被假设为"成功/失败"码，但 Rust 侧未验证。C 函数可能通过返回值传递指针（如错误码指针），导致类型混淆。此外，C 函数可能在内部修改数据（尽管签名是 `*const`）。
 
 **修复**:
+
 ```rust
 use std::ffi::c_int;
 
