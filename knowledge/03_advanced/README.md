@@ -18,17 +18,17 @@
 | 文档 | 主题 | 难度 |
 |------|------|------|
 | [async/async_await.md](async/async_await.md) | async/await 基础 | ⭐⭐⭐⭐ |
-| [async/futures.md](async/futures.md) | Future 和 Pin | ⭐⭐⭐⭐ |
-| [async/tokio.md](async/tokio.md) | Tokio 运行时 | ⭐⭐⭐⭐ |
+| [async/async_closure.md](async/async_closure.md) | Async Closures | ⭐⭐⭐⭐ |
+| [async/async_closures_2024.md](async/async_closures_2024.md) | Async Closures 2024 | ⭐⭐⭐⭐ |
 
 ### 并发编程
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
 | [concurrency/threads.md](concurrency/threads.md) | 线程基础 | ⭐⭐⭐ |
-| [concurrency/message_passing.md](concurrency/message_passing.md) | 消息传递 | ⭐⭐⭐⭐ |
-| [concurrency/shared_state.md](concurrency/shared_state.md) | 共享状态 | ⭐⭐⭐⭐ |
-| [concurrency/send_sync.md](concurrency/send_sync.md) | Send 和 Sync | ⭐⭐⭐⭐⭐ |
+| [concurrency/atomics.md](concurrency/atomics.md) | 原子操作 | ⭐⭐⭐⭐ |
+| [concurrency/synchronization.md](concurrency/synchronization.md) | 同步原语 | ⭐⭐⭐⭐ |
+| [type_driven_correctness.md](type_driven_correctness.md) | 类型驱动正确性 | ⭐⭐⭐⭐⭐ |
 
 ### 高级特性
 
@@ -36,7 +36,8 @@
 |------|------|------|
 | [lazy_initialization.md](lazy_initialization.md) | 延迟初始化 | ⭐⭐⭐ |
 | [macros/declarative.md](macros/declarative.md) | 声明宏 | ⭐⭐⭐⭐ |
-| [unsafe/basics.md](unsafe/basics.md) | Unsafe 基础 | ⭐⭐⭐⭐ |
+| [unsafe/unsafe_rust.md](unsafe/unsafe_rust.md) | Unsafe 基础 | ⭐⭐⭐⭐ |
+| [unsafe/ffi.md](unsafe/ffi.md) | FFI | ⭐⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 

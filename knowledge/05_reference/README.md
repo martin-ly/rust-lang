@@ -7,10 +7,8 @@
 | 文档 | 用途 |
 |------|------|
 | [math_constants.md](math_constants.md) | Rust 1.96 数学常量 (`EULER_GAMMA`, `GOLDEN_RATIO`) |
-| [cheatsheet.md](cheatsheet.md) | 语法速查表 |
+| [std_library_cheatsheet.md](std_library_cheatsheet.md) | 标准库速查表 |
 | [keywords.md](keywords.md) | 关键字列表 |
-| [operators.md](operators.md) | 运算符参考 |
-| [stdlib_modules.md](stdlib_modules.md) | 标准库模块 |
 
 ## 🎯 使用方式
 

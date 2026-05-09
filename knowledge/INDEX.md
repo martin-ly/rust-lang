@@ -32,10 +32,10 @@
 | `core::range` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ |
 | `*const/mut T::as_ref_unchecked` | [04_expert/unsafe_audit.md](04_expert/unsafe_audit.md) | ✅ |
 | `Layout::dangling_ptr` / `repeat` / `extend_packed` | [04_expert/unsafe_audit.md](04_expert/unsafe_audit.md) | ✅ |
-| `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/performance_optimization.md) | ✅ |
+| `core::hint::cold_path` | 性能优化相关 | ⏳ 待创建 |
 | `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) | ✅ |
-| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/maybe_uninit.md) | ✅ |
-| PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/inline_asm.md) | ✅ |
+| `MaybeUninit` / `Cell` 数组转换 | unsafe 相关 | ⏳ 待创建 |
+| PowerPC/PowerPC64 内联汇编 | 内联汇编相关 | ⏳ 待创建 |
 
 ---
 

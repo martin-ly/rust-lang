@@ -36,6 +36,7 @@
 **同步原语（Synchronization Primitives）** 是协调多个线程对共享资源访问的机制。Rust 标准库提供的同步原语基于 OS 内核对象（如 POSIX mutex、Windows CRITICAL_SECTION），但通过类型系统封装为**安全抽象**。
 
 核心原语：
+
 - **`Mutex<T>`**：互斥锁，提供独占访问
 - **`RwLock<T>`**：读写锁，支持多读单写
 - **`Condvar`**：条件变量，允许线程等待某个条件
@@ -90,6 +91,7 @@ barrier.wait();  // 阻塞直到 3 个线程都调用 wait
 ```
 
 `Mutex<T>` 的 `Sync` 实现：
+
 ```rust
 unsafe impl<T: Send> Sync for Mutex<T> {}
 ```
@@ -153,7 +155,7 @@ graph TD
     K --> L[Spurious Wakeup]
     A --> M[Barrier]
     M --> N[Thread Rendezvous]
-    
+
     style C fill:#f9f,stroke:#333,stroke-width:2px
     style D fill:#bbf,stroke:#333,stroke-width:2px
     style J fill:#bfb,stroke:#333,stroke-width:2px
@@ -973,6 +975,7 @@ fn reader_writer_pattern() {
 ### 9.1 为什么 Rust 的标准库同步原语基于 OS 内核对象？
 
 OS 内核对象（如 POSIX pthread_mutex）提供：
+
 1. **阻塞而非自旋**：当锁不可用时，线程进入休眠，不消耗 CPU。
 2. **公平性选项**：某些实现支持 FIFO 等待队列。
 3. **与现有生态集成**：调试工具（如 TSan、GDB）识别标准锁。
@@ -1028,6 +1031,7 @@ fn transfer(from: Arc<Account>, to: Arc<Account>, amount: i64) {
 **根因**: 如果线程 A 执行 `transfer(a, b)` 同时线程 B 执行 `transfer(b, a)`，可能 A 获取 `a.lock` 后 B 获取 `b.lock`，然后双方互相等待。
 
 **修复** — 全局锁顺序：
+
 ```rust
 fn transfer(from: Arc<Account>, to: Arc<Account>, amount: i64) {
     // 总是先锁地址较小的那个
@@ -1036,10 +1040,10 @@ fn transfer(from: Arc<Account>, to: Arc<Account>, amount: i64) {
     } else {
         (&to, &from)
     };
-    
+
     let mut first_balance = first.balance.lock().unwrap();
     let mut second_balance = second.balance.lock().unwrap();
-    
+
     // 注意: 这里需要区分 from/to 的逻辑
     if Arc::as_ptr(&from) < Arc::as_ptr(&to) {
         *first_balance -= amount;
@@ -1081,10 +1085,12 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 <summary>参考答案</summary>
 
 **问题**:
+
 1. `notify_one` 在 `wait` 之前调用时，唤醒信号丢失
 2. 使用 `if` 而非 `while`，虚假唤醒时可能出错
 
 **修复**:
+
 ```rust
 fn producer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
     let (lock, cvar) = &*queue;
@@ -1108,12 +1114,14 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 ### 开放设计题
 
 **题 3**: 你正在设计一个高并发缓存系统。要求：
+
 - 支持多线程并发读取
 - 写操作较少但必须线程安全
 - 读操作延迟敏感（< 10μs）
 - 需要定期淘汰过期条目
 
 请从以下方案中分析 trade-off：
+
 1. `RwLock<HashMap<K, V>>` — 标准库读写锁
 2. `Mutex<HashMap<K, V>>` — 简单互斥锁
 3. `dashmap::DashMap<K, V>` — 分片锁哈希表
@@ -1147,8 +1155,8 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 ### 相关主题
 
 - [Rust 内存模型与原子操作](./atomics.md)
-- [异步编程与并发](./async-concurrency.md)
-- [并行迭代器与数据并行](./data-parallelism.md)
+- [异步编程与并发](../async/async_await.md)
+- [线程基础](../concurrency/threads.md)
 
 ---
 

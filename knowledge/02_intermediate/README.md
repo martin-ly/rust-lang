@@ -20,7 +20,7 @@
 |------|------|------|
 | [generics.md](generics.md) | 泛型编程 | ⭐⭐⭐ |
 | [traits.md](traits.md) | Trait 系统 | ⭐⭐⭐⭐ |
-| [lifetimes_advanced.md](lifetimes_advanced.md) | 高级生命周期 | ⭐⭐⭐⭐ |
+| [lifetimes.md](../01_fundamentals/lifetimes.md) | 生命周期 | ⭐⭐⭐⭐ |
 
 ### 数据处理
 
@@ -35,8 +35,8 @@
 | 文档 | 主题 | 难度 |
 |------|------|------|
 | [smart_pointers.md](smart_pointers.md) | 智能指针 | ⭐⭐⭐⭐ |
-| [interior_mutability.md](interior_mutability.md) | 内部可变性 | ⭐⭐⭐⭐ |
-| [trait_objects.md](trait_objects.md) | Trait 对象 | ⭐⭐⭐ |
+| [smart_pointers.md](smart_pointers.md) | 智能指针（含 RefCell） | ⭐⭐⭐⭐ |
+| [traits.md](traits.md) | Trait 对象 | ⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 

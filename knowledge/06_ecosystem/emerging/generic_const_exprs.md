@@ -13,6 +13,12 @@
   - [📋 目录](#-目录)
   - [🎯 概述](#-概述)
     - [为什么需要这个特性？](#为什么需要这个特性)
+    - [模块 1: 概念定义](#模块-1-概念定义)
+      - [1.1 直观定义](#11-直观定义)
+      - [1.2 操作定义](#12-操作定义)
+      - [1.3 形式化直觉](#13-形式化直觉)
+    - [模块 3: 概念依赖图](#模块-3-概念依赖图)
+      - [承上（前置知识回溯）](#承上前置知识回溯)
   - [💡 核心概念](#-核心概念)
     - [常量表达式泛型](#常量表达式泛型)
   - [📐 语法详解](#-语法详解)
@@ -28,6 +34,14 @@
     - [递归限制](#递归限制)
   - [🔄 与现有方案对比](#-与现有方案对比)
     - [对比: 使用 const generics vs generic\_const\_exprs](#对比-使用-const-generics-vs-generic_const_exprs)
+  - [🗺️ 模块 7: 思维表征](#️-模块-7-思维表征)
+    - [表征: 常量表达式方案对比矩阵](#表征-常量表达式方案对比矩阵)
+    - [表征: generic\_const\_exprs 能力边界](#表征-generic_const_exprs-能力边界)
+  - [📚 模块 8: 国际化对齐](#-模块-8-国际化对齐)
+  - [⚖️ 模块 9: 设计权衡](#️-模块-9-设计权衡)
+    - [为什么 generic\_const\_exprs 还未稳定？](#为什么-generic_const_exprs-还未稳定)
+    - [当前 workaround](#当前-workaround)
+  - [📝 模块 10: 自我检测](#-模块-10-自我检测)
   - [🔗 参考资源](#-参考资源)
 
 ---
@@ -52,6 +66,82 @@ where
     data: [T; N * M],
 }
 ```
+
+---
+
+### 模块 1: 概念定义
+
+#### 1.1 直观定义
+
+**Generic Const Expressions** 扩展了 `const generics` 的能力，允许在泛型参数的 `where` 子句中使用**常量表达式**（如 `N * M`、`1 << N`）。
+
+> 💡 关键直觉：普通的 `const generics` 只能使用简单的常量值（如 `const N: usize`），而 `generic_const_exprs` 允许在类型层面进行"编译时计算"。
+
+#### 1.2 操作定义
+
+**普通 const generics（已稳定）**:
+
+```rust
+struct Array<T, const N: usize> {
+    data: [T; N],  // N 必须是简单的常量参数
+}
+```
+
+**generic_const_exprs（不稳定）**:
+
+```rust
+struct Matrix<T, const N: usize, const M: usize>
+where
+    [T; N * M]: Sized,  // ✅ 使用表达式 N * M
+{
+    data: [T; N * M],
+}
+```
+
+**允许的操作**: `+`、`-`、`*`、`/`、`<<`、`>>`、比较运算符，以及 `const fn` 调用。
+
+#### 1.3 形式化直觉
+
+`generic_const_exprs` 将 Rust 的类型系统从**简单参数化**提升到**依赖类型（Dependent Types）**的边缘。类型现在可以依赖于通过表达式计算的值：
+
+```
+Matrix<i32, 3, 4> 的完整类型:
+  • N = 3, M = 4
+  • where [i32; 3 * 4]: Sized
+  • 即 [i32; 12]: Sized ✅
+
+Matrix<i32, 3, 4> 的 transpose() 返回 Matrix<i32, 4, 3>:
+  • N' = M = 4, M' = N = 3
+  • where [i32; 4 * 3]: Sized
+  • 即 [i32; 12]: Sized ✅
+```
+
+编译器在单态化时求值这些表达式，确保类型正确性。
+
+---
+
+### 模块 3: 概念依赖图
+
+```mermaid
+graph TD
+    A[Const Generics] --> B[Generic Const Expressions]
+    B --> C[where [T; N * M]: Sized]
+    B --> D[Const Eval in Types]
+    D --> E[Compile-time Computation]
+    E --> F[Matrix<N, M>]
+    E --> G[Type-level Factorial]
+
+    style B fill:#f9f,stroke:#333,stroke-width:2px
+    style D fill:#bfb,stroke:#333,stroke-width:2px
+```
+
+#### 承上（前置知识回溯）
+
+| 前置概念 | 所在文档 | 本章中使用的具体点 |
+|----------|----------|-------------------|
+| **Const Generics** | `02_intermediate/generics.md` | `const N: usize` 类型参数 |
+| **Array Types** | `01_fundamentals/arrays.md` | `[T; N]` 的编译期大小要求 |
+| **Where Clauses** | `02_intermediate/generics.md` | 类型约束的语法 |
 
 ---
 
@@ -385,6 +475,93 @@ where
 
 ---
 
+## 🗺️ 模块 7: 思维表征
+
+### 表征: 常量表达式方案对比矩阵
+
+| 方案 | 编译时验证 | 运行时开销 | 类型安全 | 实现复杂度 | 稳定状态 |
+|------|-----------|-----------|---------|-----------|---------|
+| **普通 const generics** | 尺寸 | 零 | 高 | 低 | ✅ 稳定 |
+| **generic_const_exprs** | 表达式 | 零 | 高 | 中 | 🧪 不稳定 |
+| **宏（macro_rules）** | 无 | 零 | 中 | 高 | ✅ 稳定 |
+| **Vec（运行时）** | 无 | 有 | 低 | 低 | ✅ 稳定 |
+
+### 表征: generic_const_exprs 能力边界
+
+```text
+generic_const_exprs 允许的操作:
+═══════════════════════════════════════════════════════════════════
+
+✅ 允许:
+  • 算术: N + M, N - M, N * M, N / M
+  • 位运算: 1 << N, N >> 1
+  • 比较: N == M, N < M (用于类型选择)
+  • const fn 调用: factorial(N)::VALUE
+
+❌ 不允许:
+  • 类型参数: size_of::<T>()
+  • 运行时函数: random(), time()
+  • 浮点数: const N: f32
+  • 复杂控制流: 循环、match（在 where 子句中）
+
+边界案例:
+  • [T; N - 1]: Sized — 当 N = 0 时数组大小为 -1，编译错误
+  • 需要 N > 0 的额外约束
+```
+
+---
+
+## 📚 模块 8: 国际化对齐
+
+| 来源 | 类型 | 说明 |
+|------|------|------|
+| [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html) | 官方 | Const Generics 原始 RFC |
+| [Tracking Issue #76560](https://github.com/rust-lang/rust/issues/76560) | 官方 | generic_const_exprs 跟踪 Issue |
+
+---
+
+## ⚖️ 模块 9: 设计权衡
+
+### 为什么 generic_const_exprs 还未稳定？
+
+1. **编译器复杂度**: 常量表达式求值与类型检查的交织增加了编译器的复杂性。
+2. **错误信息**: 复杂的类型级表达式失败时，错误信息难以理解和调试。
+3. **边界情况**: 如 `[T; N - 1]` 当 `N = 0` 时的处理需要精心设计。
+
+### 当前 workaround
+
+在 `generic_const_exprs` 稳定之前，可以使用：
+
+- **typenum crate**: 类型级数值计算
+- **generic-array crate**: 泛型大小的数组
+- **宏**: 为常用尺寸生成代码
+
+---
+
+## 📝 模块 10: 自我检测
+
+1. **`generic_const_exprs` 与普通 `const generics` 的根本区别是什么？** 为什么 `[T; N * M]: Sized` 在普通 const generics 下是编译错误？
+
+2. **以下代码有什么问题？**
+
+```rust
+struct Bad<T, const N: usize>
+where
+    [T; std::mem::size_of::<T>()]: Sized,
+{}
+```
+
+<details>
+<summary>参考答案</summary>
+
+**问题**: `std::mem::size_of::<T>()` 包含类型参数 `T`，而 `generic_const_exprs` 不允许表达式中包含类型参数。表达式必须是纯粹的常量表达式。
+
+</details>
+
+1. **设计一个 `Matrix<T, N, M>` 类型，要求支持 `transpose()` 返回 `Matrix<T, M, N>`。使用 `generic_const_exprs` 需要哪些 where 子句？**
+
+---
+
 ## 🔗 参考资源
 
 - [RFC: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)
@@ -393,5 +570,7 @@ where
 
 ---
 
-**最后更新**: 2026-03-15
-**状态**: 🧪 不稳定特性，需要 nightly
+**文档版本**: 2.0
+**对应 Rust 版本**: 1.95.0+ (nightly)
+**最后更新**: 2026-05-09
+**状态**: 🧪 按 10 模块标准增强完成
