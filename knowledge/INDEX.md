@@ -16,7 +16,7 @@
 | **05_reference** | 4 | ✅ 完成 |
 | **06_ecosystem** | 13 | ✅ 完成 |
 | **99_archive** | 3 | ✅ 完成 |
-| **总计** | **71 篇** | ✅ **100%** |
+| **总计** | **73 篇** | ✅ **100%** |
 
 ---
 
@@ -36,6 +36,18 @@
 | `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) | ✅ |
 | `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/maybe_uninit.md) | ✅ |
 | PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/inline_asm.md) | ✅ |
+
+---
+
+## 🔮 Rust 1.96 预览特性索引
+
+| 特性 | 文档 | 状态 |
+|------|------|------|
+| `VecDeque::truncate_front` | [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/rust_1_96_preview.md) | 🧪 Beta |
+| `int_format_into` | [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/rust_1_96_preview.md) | 🧪 Beta |
+| `RefCell::try_map` | [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/rust_1_96_preview.md) | 🧪 Beta |
+| `cargo script` / frontmatter | [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/rust_1_96_preview.md) | 🧪 Beta |
+| 新 Range 类型 (RFC 3550) | [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/rust_1_96_preview.md) | 🧪 Beta |
 
 ---
 

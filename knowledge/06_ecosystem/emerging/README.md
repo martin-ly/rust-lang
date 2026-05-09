@@ -9,6 +9,7 @@
 | [generic_const_exprs.md](generic_const_exprs.md) | 泛型常量表达式 | ⭐⭐⭐⭐ | 🧪 不稳定 |
 | [async_closures.md](async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ | 🧪 不稳定 |
 | [rust_1_95.md](rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ | ✅ 已发布 |
+| [rust_1_96_preview.md](rust_1_96_preview.md) | Rust 1.96 预览 | ⭐⭐⭐ | 🧪 Beta |
 
 ## ⚠️ 使用警告
 
