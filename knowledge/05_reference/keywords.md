@@ -650,3 +650,134 @@ macro_rules! say_hello {
 ---
 
 > 💡 **提示**: 编写代码时，现代 IDE 会自动高亮关键字。如果遇到 "expected identifier, found keyword" 错误，说明使用了关键字作为标识符。
+
+---
+
+## 🧠 模块补充: 10 模块标准
+
+### 模块 3: 概念依赖图
+
+```text
+Rust 关键字体系
+├── 严格关键字 (编译器保留)
+│   ├── 控制流 (if, else, match, loop, while, for, break, continue, return)
+│   ├── 函数与闭包 (fn, async, await, move, return, yield)
+│   ├── 类型系统 (struct, enum, trait, impl, type, dyn, where)
+│   ├── 所有权与生命周期 (let, mut, const, static, ref, self, Self)
+│   ├── 模块与可见性 (mod, use, crate, super, pub, extern)
+│   └── 特殊 (unsafe, as, in)
+├── 保留关键字 (未来可能使用)
+│   ├── abstract, become, box, do, final, macro, override, priv, typeof, unsized, virtual, yield (部分已启用)
+│   └── 原始标识符: r#keyword 可绕过
+└── 特殊标识符
+    ├── 生命周期 ('static)
+    ├── 布尔值 (true, false)
+    └── 空值 (None, Some, Ok, Err 是 enum variant 非关键字)
+```
+
+### 模块 6: 反例集
+
+#### 6.1 使用关键字作为标识符
+
+```rust
+// ❌ 编译错误
+let fn = 5;       // error: expected identifier, found keyword `fn`
+let match = 6;    // error
+
+// ✅ 使用原始标识符（不推荐，除非 FFI）
+let r#fn = 5;
+println!("{}", r#fn);
+
+// ✅ 更好的做法：选择不同名称
+let func = 5;
+let pattern = 6;
+```
+
+#### 6.2 混淆 `const` 与 `static`
+
+```rust
+// ❌ 错误: 尝试获取 const 的引用并修改其值
+const ARRAY: [i32; 3] = [1, 2, 3];
+let ptr = ARRAY.as_ptr();
+// ARRAY 可能被内联到每个使用点，修改行为未定义
+
+// ✅ 使用 static 获取确定地址
+static mut ARRAY: [i32; 3] = [1, 2, 3];
+unsafe {
+    ARRAY[0] = 42; // 明确使用 unsafe
+}
+```
+
+#### 6.3 `ref` 绑定误用
+
+```rust
+// ❌ 不必要的 ref 绑定
+let ref x = 5;
+// x 类型为 &i32，但值复制仍发生
+
+// ✅ 直接使用引用
+let x = &5;
+
+// ✅ ref 在模式匹配中的合理用法
+let opt = Some(String::from("hello"));
+if let Some(ref s) = opt {
+    // s 为 &String，不获取所有权
+}
+```
+
+### 模块 7: 思维表征
+
+#### 关键字选择速查
+
+```text
+需要... → 关键字
+├── 条件执行 → if / else / match
+├── 循环 → loop / while / for
+├── 定义函数 → fn / async fn
+├── 定义类型 → struct / enum / trait / type
+├── 实现 trait → impl
+├── 动态分发 → dyn
+├── 变量绑定 → let / mut
+├── 常量 → const / static
+├── 模块组织 → mod / use / pub
+├── 类型转换 → as
+├── 不安全代码 → unsafe
+├── 生命周期标注 → 'a ( lifetime 语法 )
+└── 原始指针解引用 → *ptr ( unsafe 内 )
+```
+
+### 模块 8: 国际化对齐
+
+| 中文 | 英文 | 备注 |
+|------|------|------|
+| 严格关键字 | Strict Keywords | 不能用作任何标识符 |
+| 保留关键字 | Reserved Keywords | 当前未使用，未来可能启用 |
+| 原始标识符 | Raw Identifiers | `r#keyword` 语法 |
+| 关联常量 | Associated Constants | `Self::CONST` |
+| 生命周期参数 | Lifetime Parameters | `'a`, `'static` |
+
+### 模块 9: 设计权衡
+
+| 关键字相关决策 | 权衡 |
+|--------------|------|
+| `const` vs `static` | const 内联无固定地址；static 有固定地址但需 unsafe 修改 |
+| `let` vs `const` | let 运行时绑定；const 编译期求值 |
+| `fn` vs `const fn` | fn 任意操作；const fn 受限但可在编译期执行 |
+| `unsafe` 块大小 | 越小越容易审计；但过度拆分降低可读性 |
+| `async fn` vs `fn` + `impl Future` | async fn 语法糖更简洁；显式 Future 类型更灵活 |
+
+### 模块 10: 自我检测
+
+| 问题 | 答案 |
+|------|------|
+| `const` 和 `static` 的最大区别？ | const 可被内联复制；static 有唯一内存地址 |
+| `Self` 和 `self` 的区别？ | `self` 是实例引用；`Self` 是当前类型 |
+| `dyn Trait` 和 `impl Trait` 的区别？ | `dyn` 动态分发，有运行时开销；`impl` 静态分发，零开销 |
+| `loop` 和 `while true` 哪个更好？ | `loop` 更语义化，编译器可更好地分析 |
+| `ref` 在什么场景下有用？ | 模式匹配中避免所有权转移 |
+
+---
+
+**文档版本**: 2.0
+**对应 Rust 版本**: Edition 2024
+**最后更新**: 2026-05-09

@@ -411,6 +411,26 @@ let result = value.compare_exchange(
 );
 ```
 
+> **Rust 1.95 新增**: `Atomic*::update` 和 `try_update` 方法封装了 CAS 循环，简化常见模式：
+
+```rust
+use std::sync::atomic::{AtomicU32, Ordering};
+
+let counter = AtomicU32::new(5);
+
+// update: 读取 → 计算 → CAS 循环，返回旧值
+let prev = counter.update(Ordering::Relaxed, |x| x * 2);
+assert_eq!(prev, 5);
+assert_eq!(counter.load(Ordering::Relaxed), 10);
+
+// try_update: 条件更新，仅在闭包返回 Some 时执行
+let did_update = counter.try_update(Ordering::Relaxed, |x| {
+    if x > 8 { Some(x - 3) } else { None }
+});
+assert!(did_update.is_some());
+assert_eq!(counter.load(Ordering::Relaxed), 7);
+```
+
 ### 无锁数据结构基础
 
 #### 自旋锁实现

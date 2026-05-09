@@ -73,6 +73,11 @@ assert_eq!(value, 42);
 | `.assume_init_mut()` | ⚠️ Unsafe | 断言已初始化，返回 `&mut T` |
 | `.assume_init_drop()` | ⚠️ Unsafe | 断言已初始化，执行 Drop |
 
+> **Rust 1.95 新增**: `MaybeUninit<[T; N]>` 与 `[MaybeUninit<T>; N]` 之间的双向转换已稳定：
+> - `MaybeUninit<[T; N]>: From<[MaybeUninit<T>; N]>`
+> - `[MaybeUninit<T>; N]: From<MaybeUninit<[T; N]>>`
+> - `AsRef`/`AsMut` 实现支持数组视图访问
+
 ### 模块 3: 概念依赖图
 
 ```text
@@ -193,7 +198,28 @@ where
 }
 ```
 
-#### 5.3 与 `Box::new_uninit` 结合使用
+#### 5.3 `MaybeUninit` 数组转换 (Rust 1.95+)
+
+```rust
+use std::mem::MaybeUninit;
+
+// [MaybeUninit<T>; N] → MaybeUninit<[T; N]>
+let arr: [MaybeUninit<i32>; 4] = [
+    MaybeUninit::new(1),
+    MaybeUninit::new(2),
+    MaybeUninit::new(3),
+    MaybeUninit::new(4),
+];
+let uninit_array = MaybeUninit::from(arr);
+
+// 反向转换
+let arr_back: [MaybeUninit<i32>; 4] = uninit_array.into();
+
+// AsRef 获取视图
+let view: &[MaybeUninit<i32>] = uninit_array.as_ref();
+```
+
+#### 5.4 与 `Box::new_uninit` 结合使用
 
 ```rust
 use std::alloc::{alloc, Layout};

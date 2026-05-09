@@ -1,32 +1,121 @@
 # 数学常量
 
-> **Rust 1.96 新增** (此前误标为 1.94，已修正)
+> **📌 简介**: Rust 标准库 `std::f64::consts` 和 `std::f32::consts` 提供了一组常用的数学常量。Rust 1.96 新增 `EULER_GAMMA`、`GOLDEN_RATIO` 及其共轭，补充了数值计算和科学计算场景的基础工具。
+>
+> **Rust 版本**: 1.96.0+
 > **权威来源**: [std::f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html)
 
-## 🆕 新增常量 (Rust 1.96)
+---
+
+## 🎯 学习目标
+
+阅读本章后，你将能够：
+
+- [x] 使用标准库数学常量替代硬编码的浮点字面量
+- [x] 理解 `f64::consts` 和 `f32::consts` 的完整常量列表
+- [x] 在算法实现中正确选择和应用数学常量
+- [x] 识别 f32/f64 精度差异对数值计算的影响
+
+---
+
+## 📋 先决条件
+
+- [01_fundamentals/ownership.md](../01_fundamentals/ownership.md) - 基础 Rust 语法
+- [02_intermediate/type_conversions.md](../02_intermediate/type_conversions.md) - 类型转换
+
+---
+
+## 🧠 核心概念
+
+### 模块 1: 概念定义
+
+#### 1.1 标准库数学常量
+
+Rust 将常用数学常量定义为关联常量（associated constants），挂载在 `f32` 和 `f64` 类型上：
+
+```rust
+// 编译时常量，零运行时开销
+const PI: f64 = f64::consts::PI;
+const E: f64 = f64::consts::E;
+```
+
+这些常量在编译期求值，具有精确到浮点表示极限的精度，避免了手写字面量带来的舍入误差。
+
+#### 1.2 Rust 1.96 新增常量
+
+| 常量 | 值 | 数学意义 | 应用领域 |
+|------|-----|---------|---------|
+| `EULER_GAMMA` | γ ≈ 0.57721566 | 欧拉-马歇罗尼常数 | 调和级数、数论、Gamma 函数 |
+| `GOLDEN_RATIO` | φ ≈ 1.61803399 | 黄金比例 | 优化算法、美学设计、数据结构 |
+| `GOLDEN_RATIO_CONJUGATE` | Φ ≈ -0.61803399 | 黄金比例共轭 | 黄金分割搜索、Fibonacci 数列 |
+
+### 模块 2: 属性清单
+
+#### 完整常量表 (f64::consts)
 
 | 常量 | 值 | 说明 |
 |------|-----|------|
-| `EULER_GAMMA` | γ ≈ 0.5772 | 欧拉-马歇罗尼常数 |
-| `GOLDEN_RATIO` | φ ≈ 1.6180 | 黄金比例 |
-| `GOLDEN_RATIO_CONJUGATE` | Φ ≈ -0.6180 | 黄金比例共轭 |
+| `PI` | 3.1415926535... | 圆周率 |
+| `TAU` | 6.2831853071... | 整圆弧度 (2π) |
+| `FRAC_PI_2` | 1.5707963267... | π/2 |
+| `FRAC_PI_3` | 1.0471975511... | π/3 |
+| `FRAC_PI_4` | 0.7853981633... | π/4 |
+| `FRAC_PI_6` | 0.5235987755... | π/6 |
+| `FRAC_PI_8` | 0.3926990816... | π/8 |
+| `E` | 2.7182818284... | 自然对数底数 |
+| `LOG2_E` | 1.4426950408... | log₂(e) |
+| `LOG10_E` | 0.4342944819... | log₁₀(e) |
+| `LN_2` | 0.6931471805... | ln(2) |
+| `LN_10` | 2.3025850929... | ln(10) |
+| `SQRT_2` | 1.4142135623... | √2 |
+| `FRAC_1_PI` | 0.3183098861... | 1/π |
+| `FRAC_2_PI` | 0.6366197723... | 2/π |
+| `FRAC_2_SQRT_PI` | 1.1283791670... | 2/√π |
+| `SQRT_3` | 1.7320508075... | √3 (Rust 1.96+) |
+| `EULER_GAMMA` | 0.5772156649... | 欧拉-马歇罗尼常数 (Rust 1.96+) |
+| `GOLDEN_RATIO` | 1.6180339887... | 黄金比例 (Rust 1.96+) |
+| `GOLDEN_RATIO_CONJUGATE` | -0.6180339887... | 黄金比例共轭 (Rust 1.96+) |
 
-## 使用示例
+> **注意**: `f32::consts` 提供相同名称的常量，但精度为单精度浮点。
 
-```rust
-fn main() {
-    // f64 常量
-    println!("Euler's Gamma: {}", f64::EULER_GAMMA);
-    println!("Golden Ratio: {}", f64::GOLDEN_RATIO);
+### 模块 3: 概念依赖图
 
-    // f32 常量
-    println!("Euler's Gamma (f32): {}", f32::EULER_GAMMA);
-}
+```text
+数学常量
+├── 几何常量
+│   ├── PI / TAU (圆相关)
+│   ├── FRAC_PI_n (常用分数)
+│   └── SQRT_2 / SQRT_3
+├── 对数常量
+│   ├── E (自然对数)
+│   ├── LN_2 / LN_10
+│   └── LOG2_E / LOG10_E
+├── 数值算法常量
+│   ├── EULER_GAMMA (调和级数)
+│   ├── GOLDEN_RATIO (搜索/优化)
+│   └── GOLDEN_RATIO_CONJUGATE
+└── 精度选择
+    ├── f32::consts (内存小、SIMD 友好)
+    └── f64::consts (高精度计算)
 ```
 
-## 应用示例
+### 模块 4: 机制解释
 
-### 黄金比例搜索
+#### 4.1 编译时常量 vs 硬编码
+
+```rust
+// ❌ 硬编码: 精度受限、可读性差、易出错
+let area = 3.14159 * r * r;
+
+// ✅ 标准库常量: 最大精度、语义清晰、可维护
+let area = f64::consts::PI * r * r;
+```
+
+标准库常量使用浮点类型的最大可表示精度，通常比手写 6-10 位小数更精确。
+
+### 模块 5: 正例集
+
+#### 5.1 黄金比例搜索
 
 ```rust
 fn golden_section_search<F>(f: F, a: f64, b: f64, epsilon: f64) -> f64
@@ -47,21 +136,14 @@ where
         } else {
             a = c;
         }
-
         c = b - resphi * (b - a);
         d = a + resphi * (b - a);
     }
-
     (b + a) / 2.0
-}
-
-fn main() {
-    let min = golden_section_search(|x| x * x - 2.0 * x + 1.0, -10.0, 10.0, 1e-6);
-    println!("Minimum at: {}", min);  // 约 1.0
 }
 ```
 
-### 欧拉-马歇罗尼近似
+#### 5.2 欧拉-马歇罗尼近似验证
 
 ```rust
 fn harmonic_number(n: u64) -> f64 {
@@ -69,18 +151,103 @@ fn harmonic_number(n: u64) -> f64 {
 }
 
 fn main() {
-    let n = 10000;
+    let n = 100_000;
     let h_n = harmonic_number(n);
     let approx = f64::ln(n as f64) + f64::EULER_GAMMA;
-
-    println!("H({}) = {}", n, h_n);
-    println!("ln(n) + γ = {}", approx);
-    println!("Difference: {}", (h_n - approx).abs());
+    println!("H({}) = {:.10}", n, h_n);
+    println!("ln(n) + γ = {:.10}", approx);
+    println!("Difference: {:.2e}", (h_n - approx).abs());
 }
 ```
 
+#### 5.3 斐波那契闭式公式 (Binet)
+
+```rust
+fn fibonacci(n: u32) -> f64 {
+    let phi = f64::GOLDEN_RATIO;
+    let psi = f64::GOLDEN_RATIO_CONJUGATE;
+    (phi.powi(n as i32) - psi.powi(n as i32)) / f64::consts::SQRT_5
+}
+```
+
+### 模块 6: 反例集
+
+#### 6.1 f32/f64 精度混淆
+
+```rust
+// ❌ 混合精度导致意外截断
+let precise = f64::consts::PI;
+let coarse: f32 = precise as f32; // 精度损失
+let result = precise * (coarse as f64); // 非预期精度
+
+// ✅ 统一精度，显式转换
+let result = f64::consts::PI * 2.0f64;
+```
+
+#### 6.2 使用 f64 常量进行 f32 计算
+
+```rust
+// ❌ 隐式升级然后降级
+let x: f32 = 1.0;
+let bad = x * f64::consts::PI; // 编译错误：类型不匹配
+
+// ✅ 使用对应精度常量
+let good = x * f32::consts::PI;
+```
+
+### 模块 7: 思维表征
+
+#### 常量选择速查
+
+```text
+计算场景 → 推荐常量
+├── 圆/角度 → PI, TAU, FRAC_PI_n
+├── 指数/对数 → E, LN_2, LOG2_E
+├── 优化搜索 → GOLDEN_RATIO, GOLDEN_RATIO_CONJUGATE
+├── 数论/级数 → EULER_GAMMA
+├── 几何距离 → SQRT_2, SQRT_3
+└── 快速倒数 → FRAC_1_PI, FRAC_2_PI
+```
+
+### 模块 8: 国际化对齐
+
+| 中文 | 英文 | 符号 |
+|------|------|------|
+| 圆周率 | Pi | π |
+| 自然常数 | Euler's Number | e |
+| 欧拉-马歇罗尼常数 | Euler-Mascheroni Constant | γ |
+| 黄金比例 | Golden Ratio | φ |
+| 共轭黄金比例 | Golden Ratio Conjugate | Φ |
+
+### 模块 9: 设计权衡
+
+| 方案 | 优点 | 缺点 |
+|------|------|------|
+| `f64::consts::PI` | 最高精度、语义清晰 | 输入较长 |
+| `std::f64::consts::PI` | 完全限定路径 | 冗长 |
+| `use std::f64::consts::PI;` + `PI` | 简洁 | 可能与其他常量冲突 |
+| 硬编码 `3.14159` | 最短 | 精度损失、可读性差 |
+
+> **推荐**: 在模块级别 `use std::f64::consts::{PI, E, ...};` 或直接使用 `f64::consts::PI`。
+
+### 模块 10: 自我检测
+
+| 问题 | 答案 |
+|------|------|
+| `f32` 和 `f64` 的常量是否可以混用？ | 否，需显式转换 |
+| `TAU` 和 `2.0 * PI` 哪个更精确？ | `TAU`（避免一次乘法舍入）|
+| 黄金比例搜索为什么优于二分搜索？ | 每次迭代只计算一个函数值 |
+| Euler's Gamma 用于什么场景？ | 调和级数近似、Gamma 函数 |
+
 ---
 
-**文档版本**: 1.0
-**对应 Rust 版本**: 1.96.0
-**最后更新**: 2026-03-19
+## 🔗 参考资源
+
+- [std::f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html)
+- [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)
+
+---
+
+**文档版本**: 2.0
+**对应 Rust 版本**: 1.96.0+
+**最后更新**: 2026-05-09

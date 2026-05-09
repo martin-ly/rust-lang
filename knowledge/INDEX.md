@@ -9,14 +9,14 @@
 | 层级 | 文档数 | 状态 |
 |------|--------|------|
 | **00_start** | 5 | ✅ 完成 |
-| **01_fundamentals** | 4 | ✅ 完成 |
-| **02_intermediate** | 8 | ✅ 完成 |
-| **03_advanced** | 9 | ✅ 完成 |
-| **04_expert** | 3 | ✅ 完成 |
+| **01_fundamentals** | 5 | ✅ 完成 |
+| **02_intermediate** | 13 | ✅ 完成 |
+| **03_advanced** | 15 | ✅ 完成 |
+| **04_expert** | 6 | ✅ 完成 |
 | **05_reference** | 4 | ✅ 完成 |
-| **06_ecosystem** | 2 | ✅ 完成 |
+| **06_ecosystem** | 13 | ✅ 完成 |
 | **99_archive** | 3 | ✅ 完成 |
-| **总计** | **43 篇** | ✅ **100%** |
+| **总计** | **71 篇** | ✅ **100%** |
 
 ---
 
@@ -24,18 +24,18 @@
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
-| `cfg_select!` | [03_advanced/macros/declarative.md](03_advanced/macros/declarative.md) | ✅ |
-| `if let guards` | [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/if_let_guards.md) | ✅ |
+| `cfg_select!` | [02_intermediate/cfg_select.md](02_intermediate/cfg_select.md) | ✅ |
+| `if let guards` | [02_intermediate/if_let_guards.md](02_intermediate/if_let_guards.md) | ✅ |
 | `Atomic*::update` / `try_update` | [03_advanced/concurrency/atomics.md](03_advanced/concurrency/atomics.md) | ✅ |
 | `Vec::push_mut` / `insert_mut` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ |
 | `VecDeque` / `LinkedList` `push_*_mut` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ |
-| `core::range` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ |
+| `core::range` | [02_intermediate/core_range.md](02_intermediate/core_range.md) | ✅ |
 | `*const/mut T::as_ref_unchecked` | [04_expert/unsafe_audit.md](04_expert/unsafe_audit.md) | ✅ |
 | `Layout::dangling_ptr` / `repeat` / `extend_packed` | [04_expert/unsafe_audit.md](04_expert/unsafe_audit.md) | ✅ |
-| `core::hint::cold_path` | 性能优化相关 | ⏳ 待创建 |
+| `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/performance_optimization.md) | ✅ |
 | `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) | ✅ |
-| `MaybeUninit` / `Cell` 数组转换 | unsafe 相关 | ⏳ 待创建 |
-| PowerPC/PowerPC64 内联汇编 | 内联汇编相关 | ⏳ 待创建 |
+| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/maybe_uninit.md) | ✅ |
+| PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/inline_asm.md) | ✅ |
 
 ---
 
@@ -203,10 +203,19 @@
 
 ```
 01_fundamentals/iterators.md (array_windows, next_if) →
-02_intermediate/type_conversions.md (char→usize) →
+02_intermediate/type_conversions.md (bool::TryFrom, char→usize) →
+02_intermediate/let_chains.md →
+02_intermediate/if_let_guards.md →
+02_intermediate/cfg_select.md →
+02_intermediate/core_range.md →
 03_advanced/lazy_initialization.md (LazyCell/LazyLock) →
-05_reference/math_constants.md →
+03_advanced/concurrency/atomics.md (Atomic*::update) →
+03_advanced/performance_optimization.md (cold_path) →
+03_advanced/unsafe/maybe_uninit.md (数组转换) →
+03_advanced/unsafe/inline_asm.md (PowerPC) →
+05_reference/math_constants.md (SQRT_3, EULER_GAMMA) →
 06_ecosystem/edition_2024.md →
+06_ecosystem/emerging/rust_1_95.md →
 04_expert/miri/tree_borrows.md
 ```
 
@@ -235,9 +244,9 @@
 
 ## 📊 统计数据
 
-- **总文档数**: 56 篇（含索引/入口）
-- **总代码行数**: 31,242 行
-- **总字符数**: 727,569 字符
+- **总文档数**: 71 篇（含索引/入口）
+- **总代码行数**: 33,647 行
+- **总字符数**: 781,606 字符
 - **重构文档**: 28 篇核心文档按 10 模块标准重构
 - **Rust 1.95+ 特性**: 100% 覆盖
 

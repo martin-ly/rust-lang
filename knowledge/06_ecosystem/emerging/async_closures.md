@@ -427,8 +427,9 @@ let f = async || {
 
 - [Tracking Issue](https://github.com/rust-lang/rust/issues/62290)
 - [RFC: Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html)
+- [03_advanced/async/async_closure.md](../../03_advanced/async/async_closure.md) - 异步闭包完整教学（10 模块深度解析）
 
 ---
 
-**最后更新**: 2026-03-15
+**最后更新**: 2026-05-09
 **状态**: 🧪 不稳定特性，需要 nightly

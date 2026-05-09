@@ -28,23 +28,39 @@
 | [concurrency/threads.md](concurrency/threads.md) | 线程基础 | ⭐⭐⭐ |
 | [concurrency/atomics.md](concurrency/atomics.md) | 原子操作 | ⭐⭐⭐⭐ |
 | [concurrency/synchronization.md](concurrency/synchronization.md) | 同步原语 | ⭐⭐⭐⭐ |
-| [type_driven_correctness.md](type_driven_correctness.md) | 类型驱动正确性 | ⭐⭐⭐⭐⭐ |
 
-### 高级特性
+### Unsafe 与底层
+
+| 文档 | 主题 | 难度 |
+|------|------|------|
+| [unsafe/unsafe_rust.md](unsafe/unsafe_rust.md) | Unsafe 基础 | ⭐⭐⭐⭐ |
+| [unsafe/ffi.md](unsafe/ffi.md) | FFI | ⭐⭐⭐⭐ |
+| [unsafe/maybe_uninit.md](unsafe/maybe_uninit.md) | MaybeUninit | ⭐⭐⭐⭐ |
+| [unsafe/inline_asm.md](unsafe/inline_asm.md) | 内联汇编 | ⭐⭐⭐⭐⭐ |
+
+### 类型与元编程
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
 | [lazy_initialization.md](lazy_initialization.md) | 延迟初始化 | ⭐⭐⭐ |
+| [type_driven_correctness.md](type_driven_correctness.md) | 类型驱动正确性 | ⭐⭐⭐⭐⭐ |
 | [macros/declarative.md](macros/declarative.md) | 声明宏 | ⭐⭐⭐⭐ |
-| [unsafe/unsafe_rust.md](unsafe/unsafe_rust.md) | Unsafe 基础 | ⭐⭐⭐⭐ |
-| [unsafe/ffi.md](unsafe/ffi.md) | FFI | ⭐⭐⭐⭐ |
+| [macros/procedural.md](macros/procedural.md) | 过程宏 | ⭐⭐⭐⭐ |
+
+### 性能
+
+| 文档 | 主题 | 难度 |
+|------|------|------|
+| [performance_optimization.md](performance_optimization.md) | 性能优化 | ⭐⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 
 - 异步编程: 25-30 小时
 - 并发编程: 20-25 小时
-- 高级特性: 15-20 小时
-- **总计**: 60-75 小时
+- Unsafe 与底层: 15-25 小时
+- 类型与元编程: 15-20 小时
+- 性能: 5-8 小时
+- **总计**: 80-108 小时
 
 ## 🎯 完成标准
 
@@ -61,4 +77,4 @@
 ---
 
 **维护者**: Rust 学习项目
-**最后更新**: 2026-03-19
+**最后更新**: 2026-05-09

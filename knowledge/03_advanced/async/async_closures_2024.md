@@ -1,5 +1,7 @@
 # Rust 2024 Edition Async Closures 完整指南
 
+> **提示**: 本文档为快速参考。如需完整教学（概念定义、反例集、自我检测等），请参阅 [async_closure.md](async_closure.md)。
+
 ## 概述
 
 Async closures 是 Rust 1.85+ 中稳定化的重要特性，允许直接使用 `async || { }` 语法创建异步闭包。相比传统的 `async move { }` 闭包，新语法更简洁、语义更清晰。
@@ -168,7 +170,7 @@ graph TD
     G --> H[AsyncFn Traits]
     G --> I[Auto Capture Inference]
     G --> J[Cancellation Safety]
-    
+
     style F fill:#f9f,stroke:#333,stroke-width:2px
     style G fill:#bfb,stroke:#333,stroke-width:2px
     style J fill:#bbf,stroke:#333,stroke-width:2px

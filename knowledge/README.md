@@ -2,7 +2,7 @@
 
 > > **Rust 版本**: 1.95.0 (Edition 2024)
 > **更新策略**: 跟随官方稳定版，每版本更新
-> **文档规模**: 52 篇核心文档，31,242 行，28 篇按 10 模块标准重构
+> **文档规模**: 71 篇核心文档，33,647 行，36 篇按 10 模块标准重构
 
 ## 🎯 快速导航
 
@@ -32,10 +32,10 @@
 | `if let guards` | [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/if_let_guards.md) | ✅ 已更新 |
 | `Atomic*::update/try_update` | [03_advanced/concurrency/atomics.md](03_advanced/concurrency/atomics.md) | ✅ 已更新 |
 | `Vec::push_mut` / `insert_mut` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ 已更新 |
-| `core::hint::cold_path` | 性能优化相关 | ⏳ 待创建 |
+| `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/performance_optimization.md) | ✅ 已更新 |
 | `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) | ✅ 已更新 |
-| `MaybeUninit` / `Cell` 数组转换 | unsafe 相关 | ⏳ 待创建 |
-| PowerPC/PowerPC64 内联汇编 | 内联汇编相关 | ⏳ 待创建 |
+| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/maybe_uninit.md) | ✅ 已更新 |
+| PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/inline_asm.md) | ✅ 已更新 |
 | `core::range` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ 已更新 |
 
 ## 🔮 预览版本跟踪
