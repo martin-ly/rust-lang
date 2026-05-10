@@ -45,7 +45,7 @@ pub mod quic_full {
             .map_err(|e| format!("cert generation: {}", e))?;
 
         let cert_der = cert.cert.der().clone();
-        let key_der = PrivateKeyDer::Pkcs8(cert.key_pair.serialize_der().into());
+        let key_der = PrivateKeyDer::Pkcs8(cert.signing_key.serialize_der().into());
 
         Ok((vec![cert_der], key_der))
     }

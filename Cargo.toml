@@ -507,7 +507,7 @@ hashbrown = "0.17.1"  # 2026-05-09: cargo update
 # itertools: 迭代器工具库
 itertools = "0.14.0"
 # lru: LRU缓存实现 - 2026-04-18: 升级至 0.17.0
-lru = "0.17.0"
+lru = "0.18.0"
 
 # Web 和 GUI 框架 - 2025年12月11日最新稳定版本
 # tauri 已移除，使用 egui/iced 替代 (解决 GTK3 安全漏洞)

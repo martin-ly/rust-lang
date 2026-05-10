@@ -41,7 +41,7 @@ rustls-pemfile = { workspace = true, optional = true }
 
 # QUIC / HTTP3 支持
 quinn = { version = "0.11", optional = true }
-rcgen = { version = "0.13", optional = true }
+rcgen = { workspace = true, optional = true }
 
 # PCAP support (optional)
 pcap = { version = "2.2", optional = true }
