@@ -1,7 +1,7 @@
 # Rust 所有权系统可判定性 - 完整知识库
 
 [![Completion](https://img.shields.io/badge/Completion-100%25-brightgreen)](FINAL_100_PERCENT_COMPLETION_REPORT.md)
-[![Rust Version](https://img.shields.io/badge/Rust-1.94-blue)](meta-model/RUST_194_COMPREHENSIVE_GUIDE.md)
+[![Rust Version](https://img.shields.io/badge/Rust-1.95-blue)](meta-model/RUST_195_COMPREHENSIVE_GUIDE.md)
 [![Documentation](https://img.shields.io/badge/Docs-586%20files%20|%20600K%2B%20words-informational)](FINAL_MASTER_INDEX.md)
 [![Coq](https://img.shields.io/badge/Coq-11%2C980%2B%20lines%20%7C%20300%20Qed-orange)](coq-formalization/README.md)
 [![Status](https://img.shields.io/badge/Status-Network%20Aligned%20100%25-success)](AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md)
@@ -530,7 +530,8 @@ cat coq-formalization/theories/Advanced/MetatheoryDecidability.v
 **状态**: ✅ **100% 完成**
 **负责人**: Rust-Ownership-Decidability Team
 **最后更新**: 2026-03-07
-**Rust版本**: 1.94
+**Rust版本**: 1.95
+**对齐日期**: 2026-05-12
 
 ---
 

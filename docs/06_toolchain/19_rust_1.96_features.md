@@ -1,8 +1,14 @@
+> **⚠️ 版本状态声明**: 本文档包含 Rust 1.95 **稳定版** 和 1.96 **前瞻跟踪** 内容。
+> - Rust 1.95.0 已于 2026-04-16 发布，内容已稳定。
+> - Rust 1.96.0 预计于 2026-05-28 发布，以下 1.96 内容基于 **Beta/Nightly** 跟踪，可能在正式发布时变更。
+> - 标注 `🔴 nightly-only` 的特性**不是** 1.96 stable 内容。
+> **最后更新**: 2026-05-12
+
 # Rust 1.95 & 1.96 特性详解（含版本勘误）
 
 ## 目录
 
-- [Rust 1.95 & 1.96 特性详解](#rust-195-新特性)
+- [Rust 1.95 & 1.96 特性详解](#rust-195--196-特性详解含版本勘误)
 
 ---
 
@@ -175,38 +181,39 @@ impl AsyncProcessor for MyProcessor {
 }
 ```
 
-### 3. 元组 Coercion
+### 3. 元组解构增强（Rust 1.95 稳定）
 
-Rust 1.96 允许元组类型之间的自动强制转换（coercion），简化了某些泛型代码。
+Rust 1.95 对元组模式匹配和解构进行了改进，与 `if let guards` 结合使用更加灵活。
 
 #### 基本规则
 
 ```rust
-// 元组 coercion 允许类型自动转换
-fn process_tuple(t: (i32, i32)) {
-    // 处理逻辑
+// 在 if let guards 中使用元组解构
+match result {
+    (code, msg) if code == 200 && let Some(m) = msg => {
+        println!("Success: {}", m);
+    }
+    (code, _) if code >= 500 => {
+        println!("Server error");
+    }
+    _ => {}
 }
-
-// 现在支持更多灵活的转换
-let pair: (i8, i8) = (1, 2);
-// 在适当情况下可以自动转换为 (i32, i32)
 ```
 
 #### 实际示例
 
 ```rust
-// 使用元组 coercion 简化泛型代码
-fn sum_tuple<T, U>((a, b): (T, U)) -> T
-where
-    T: std::ops::Add<Output = T> + From<U>,
-{
-    a + T::from(b)
-}
-
-fn main() {
-    // 自动类型转换
-    let result: i32 = sum_tuple((10i32, 20i8));
-    assert_eq!(result, 30);
+// 使用元组与 if let guards 结合
+fn process_api_response(result: (u16, Option<String>)) -> Result<(), Error> {
+    match result {
+        (200, data) if let Some(json) = data => {
+            serde_json::from_str::<Config>(&json)?;
+            Ok(())
+        }
+        (200, None) => Err(Error::MissingBody),
+        (code, _) if (400..500).contains(&code) => Err(Error::ClientError(code)),
+        (code, _) => Err(Error::ServerError(code)),
+    }
 }
 ```
 
@@ -427,7 +434,7 @@ async fn demo() {
 
 ## 参考链接
 
-- [Rust 1.95 Release Notes](https://blog.rust-lang.org/2024/XX/XX/Rust-1.95.0.html)
-- [Rust 1.96 Release Notes](https://blog.rust-lang.org/2025/XX/XX/Rust-1.96.0.html)
+- [Rust 1.95 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0.html)
+- [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html) （待发布）
 - [RFC: if let guards](https://rust-lang.github.io/rfcs/2294-if-let-guard.html)
 - [PinCoerceUnsized Documentation](https://doc.rust-lang.org/std/pin/struct.Pin.html)

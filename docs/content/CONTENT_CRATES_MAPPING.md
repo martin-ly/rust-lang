@@ -7,14 +7,18 @@
 ## 🗺️ 映射关系概览
 
 ```text
-content/                    crates/
-─────────                   ───────
-emerging/        ────────▶  C04, C11
-ecosystem/       ────────▶  C05, C06, C10
-production/      ────────▶  C07, C12
-academic/        ────────▶  C01, C04
-scenarios/       ────────▶  C09, C10
-representations/ ────────▶  (知识表示)
+content/                    crates/                     docs/05_guides/
+─────────                   ───────                     ──────────────
+emerging/        ────────▶  C04, C11                   ─
+ecosystem/       ────────▶  C05, C06, C10               ─
+production/      ────────▶  C07, C12                   ─
+academic/        ────────▶  C01, C04                   ─
+scenarios/       ────────▶  C09, C10                   ─
+representations/ ────────▶  (知识表示)                 ─
+                                ↑                          ↑
+                         C02: TYPE_SYSTEM_USAGE_GUIDE.md ✅
+                         C03: CONTROL_FLOW_FUNCTIONS_USAGE_GUIDE.md ✅
+                         C08: ALGORITHMS_USAGE_GUIDE.md ✅
 ```
 
 ---
