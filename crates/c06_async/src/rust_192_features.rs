@@ -41,7 +41,7 @@ pub unsafe fn assume_init_array<T, const N: usize>(arr: [MaybeUninit<T>; N]) -> 
 
 #[test]
 fn test_maybe_uninit_docs() {
-    let mut arr: [MaybeUninit<i32>; 3] = std::array::from_fn(|i| MaybeUninit::new(i as i32 * 10));
+    let arr: [MaybeUninit<i32>; 3] = std::array::from_fn(|i| MaybeUninit::new(i as i32 * 10));
     let initialized = unsafe { assume_init_array(arr) };
     assert_eq!(initialized, [0, 10, 20]);
 }

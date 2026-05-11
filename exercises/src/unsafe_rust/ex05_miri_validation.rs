@@ -41,6 +41,7 @@
 /// # 修复思路
 ///
 /// 使用 `Box::into_raw` 将数据分配到堆上，或者让调用者提供存储空间。
+#[allow(dangling_pointers_from_locals)]
 pub fn get_dangling_pointer_bad() -> *const i32 {
     let x = 42;
     &x as *const i32

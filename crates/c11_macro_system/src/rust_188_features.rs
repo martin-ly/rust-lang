@@ -39,6 +39,7 @@ pub fn process_option_chain(opt: Option<i32>) -> Option<i32> {
     }
 }
 
+/// while let chains 示例函数
 pub fn while_let_chain_example() -> usize {
     let mut count = 0;
     let mut iter = [Some(1), Some(2), None, Some(3)].into_iter();

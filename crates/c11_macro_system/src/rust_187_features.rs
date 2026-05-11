@@ -21,10 +21,13 @@
 /// ## 背景
 /// 在 2024 Edition 中，`impl Trait` 的隐式生命周期捕获规则更严格。
 /// `use<'a>` 语法允许显式声明需要捕获哪些生命周期。
+/// 字符串解析器 trait 示例
 pub trait Parser<'a> {
+    /// 将输入字符串解析为单词迭代器
     fn parse(&self, input: &'a str) -> impl Iterator<Item = &'a str> + use<'a, Self>;
 }
 
+/// 简单的空白分词解析器
 pub struct WordParser;
 impl<'a> Parser<'a> for WordParser {
     fn parse(&self, input: &'a str) -> impl Iterator<Item = &'a str> + use<'a> {

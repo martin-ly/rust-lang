@@ -141,6 +141,7 @@ mod tests {
     fn test_drop_safety_on_panic() {
         static DROP_COUNT: AtomicUsize = AtomicUsize::new(0);
 
+        #[allow(dead_code)]
         struct DropCounter(i32);
         impl Drop for DropCounter {
             fn drop(&mut self) {

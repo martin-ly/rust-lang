@@ -22,10 +22,22 @@
 /// ## 使用场景
 /// - 抽象层解耦：在运行时根据具体类型降级到更通用的 trait 对象
 /// - 插件系统：将特定插件接口转换为通用接口
-pub trait Animal { fn name(&self) -> &'static str; }
-pub trait Dog: Animal { fn bark(&self); }
+/// 动物 trait 示例
+pub trait Animal {
+    /// 返回动物名称
+    fn name(&self) -> &'static str;
+}
 
-pub fn animal_name(animal: &dyn Animal) -> &'static str { animal.name() }
+/// 狗 trait 示例，继承自 Animal
+pub trait Dog: Animal {
+    /// 让狗叫
+    fn bark(&self);
+}
+
+/// 获取动物名称的辅助函数
+pub fn animal_name(animal: &dyn Animal) -> &'static str {
+    animal.name()
+}
 
 #[cfg(test)]
 mod tests {
