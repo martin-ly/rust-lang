@@ -73,6 +73,12 @@ pub struct HazardPointerRegistry {
 unsafe impl Sync for HazardPointerRegistry {}
 unsafe impl Send for HazardPointerRegistry {}
 
+impl Default for HazardPointerRegistry {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl HazardPointerRegistry {
     /// 创建新的 Hazard Pointer 注册表
     pub const fn new() -> Self {
@@ -156,7 +162,12 @@ impl MemoryReclaimer {
         self.registry.increment_retired();
 
         // 当退役节点达到一定数量时尝试扫描回收
-        if self.registry.retired_count.load(Ordering::Relaxed) % 32 == 0 {
+        if self
+            .registry
+            .retired_count
+            .load(Ordering::Relaxed)
+            .is_multiple_of(32)
+        {
             self.try_reclaim();
         }
     }
@@ -215,8 +226,7 @@ impl ThreadLocalHP {
     /// 注册所有 Hazard Pointer
     pub fn register(&self) {
         for hp in &self.hazards {
-            self.registry
-                .register(&raw const *hp as *mut HazardPointer);
+            self.registry.register(&raw const *hp as *mut HazardPointer);
         }
     }
 

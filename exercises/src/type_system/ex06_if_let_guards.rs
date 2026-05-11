@@ -63,8 +63,8 @@ pub fn classify_message(msg: Option<String>) -> String {
 /// - `Err(e)` → `"error: {e}"`
 pub fn describe_nested_value(value: Result<Option<i32>, &'static str>) -> String {
     match value {
-        // 使用单个 if let guard 匹配 Ok(Some(n))，然后在内部根据 n 的值分支
-        Ok(opt) if let Some(n) = opt => {
+        // 使用 Ok(Some(n)) 直接匹配，然后在内部根据 n 的值分支
+        Ok(Some(n)) => {
             if n > 0 {
                 format!("positive: {n}")
             } else {

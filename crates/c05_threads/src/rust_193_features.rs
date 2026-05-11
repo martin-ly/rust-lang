@@ -13,7 +13,7 @@ pub fn thread_safe_buffer_init() -> [i32; 4] {
         .map(|i| {
             let mut slot = MaybeUninit::uninit();
             thread::spawn(move || {
-                slot.write(i as i32 * 10);
+                slot.write(i * 10);
                 slot
             })
         })
@@ -33,15 +33,15 @@ pub fn string_cross_thread(s: String) -> String {
     let (ptr, len, cap) = s.into_raw_parts();
     let ptr = ptr as usize;
 
-    let result = thread::spawn(move || {
+    
+
+    thread::spawn(move || {
         // SAFETY: ptr 来自合法 String，且在同一进程内传递
         let s = unsafe { String::from_raw_parts(ptr as *mut u8, len, cap) };
         s.to_uppercase()
     })
     .join()
-    .unwrap();
-
-    result
+    .unwrap()
 }
 
 /// 使用 `Arc<Vec<T>>` 结合 `into_raw_parts` 演示共享内存布局

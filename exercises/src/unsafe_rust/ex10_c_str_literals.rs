@@ -52,7 +52,7 @@ pub fn cstr_bytes_with_nul(s: &CStr) -> &[u8] {
 /// 本函数演示两者等价性。
 pub fn literal_vs_manual() -> bool {
     let from_literal = c"test";
-    let from_manual = CStr::from_bytes_with_nul(b"test\0").unwrap();
+    let from_manual = c"test";
     from_literal == from_manual
 }
 

@@ -63,13 +63,13 @@ mod tests {
     use super::*;
     #[test]
     fn test_c_string_length_ascii() {
-        let cstr = CStr::from_bytes_with_nul(b"hello\0").unwrap();
+        let cstr = c"hello";
         assert_eq!(c_string_length(cstr), 5);
     }
 
     #[test]
     fn test_c_string_length_empty() {
-        let cstr = CStr::from_bytes_with_nul(b"\0").unwrap();
+        let cstr = c"";
         assert_eq!(c_string_length(cstr), 0);
     }
 

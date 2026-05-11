@@ -33,6 +33,7 @@
 /// - 仅在 `extern "C"` 函数中可用
 /// - 必须使用 `unsafe`（因为编译器无法验证变参类型安全）
 /// - 变参访问需通过 `core::ffi::VaList`（或 `std` 中的等效类型）
+///
 /// **注意**：截至 Rust 1.95.0 stable，`c_variadic` 特性尚未完全稳定。
 /// 以下代码需要 nightly 工具链才能编译。
 ///
@@ -51,7 +52,10 @@ pub fn c_variadic_doc_placeholder() -> &'static str {
 
 #[test]
 fn test_c_variadic_placeholder() {
-    assert_eq!(c_variadic_doc_placeholder(), "c_variadic requires nightly Rust; see documentation above");
+    assert_eq!(
+        c_variadic_doc_placeholder(),
+        "c_variadic requires nightly Rust; see documentation above"
+    );
 }
 
 // ============================================================================
@@ -85,5 +89,8 @@ pub fn aarch64_tier1_status() -> &'static str {
 #[cfg(target_arch = "aarch64")]
 #[cfg(target_os = "windows")]
 fn test_aarch64_windows_native() {
-    assert_eq!(aarch64_tier1_status(), "aarch64-pc-windows-msvc is Tier 1 since Rust 1.91.0");
+    assert_eq!(
+        aarch64_tier1_status(),
+        "aarch64-pc-windows-msvc is Tier 1 since Rust 1.91.0"
+    );
 }

@@ -71,12 +71,12 @@ pub fn serialize_packet_header(header: &NetworkPacketHeader) -> [u8; 7] {
     // 我们不能直接对字段取引用（`&header.length` 是 unsafe 的）。
     // 使用 `std::ptr::addr_of!` 获取字段的原始指针，然后用 read_unaligned。
     unsafe {
-        buf[0] = std::ptr::addr_of!((*header).flags).read();
-        let length_ptr = std::ptr::addr_of!((*header).length);
+        buf[0] = std::ptr::addr_of!(header.flags).read();
+        let length_ptr = std::ptr::addr_of!(header.length);
         let length_val = std::ptr::read_unaligned(length_ptr);
         buf[1..3].copy_from_slice(&length_val.to_le_bytes());
 
-        let seq_ptr = std::ptr::addr_of!((*header).seq);
+        let seq_ptr = std::ptr::addr_of!(header.seq);
         let seq_val = std::ptr::read_unaligned(seq_ptr);
         buf[3..7].copy_from_slice(&seq_val.to_le_bytes());
     }

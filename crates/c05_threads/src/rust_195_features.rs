@@ -503,6 +503,10 @@ impl RealRust195Features {
     ///
     /// Even inside an `unsafe fn`, `unsafe` operations must be wrapped
     /// in explicit `unsafe {}` blocks.
+    ///
+    /// # Safety
+    ///
+    /// `counter` must be a valid, properly aligned pointer to an `AtomicU32`.
     pub unsafe fn rust_2024_atomic_unsafe_fn(counter: *mut std::sync::atomic::AtomicU32) -> u32 {
         unsafe { (*counter).fetch_add(1, std::sync::atomic::Ordering::Relaxed) }
     }

@@ -316,6 +316,10 @@ impl RealRust195Features {
     /// Rust 2024 风格的 `unsafe fn`
     ///
     /// 在 `unsafe fn` 内部，不安全操作仍需显式包裹在 `unsafe {}` 中。
+    ///
+    /// # Safety
+    ///
+    /// `ptr` 必须是有效的、正确对齐的指向已初始化 `u32` 的指针。
     pub unsafe fn macro_generated_unsafe_fn(ptr: *const u32) -> u32 {
         // Rust 2024: 必须显式使用 unsafe 块
         unsafe { *ptr }
@@ -335,7 +339,7 @@ impl RealRust195Features {
             {
                 Ok("positive integer")
             }
-            Some(t) if t.is_empty() => Ok("empty token"),
+            Some("") => Ok("empty token"),
             Some(_) => Ok("other token"),
             None => Err("missing token"),
         }

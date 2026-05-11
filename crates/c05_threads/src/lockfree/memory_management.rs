@@ -32,6 +32,12 @@ pub struct EpochManager {
     local_epoch: AtomicUsize,
 }
 
+impl Default for EpochManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl EpochManager {
     /// 创建新的 Epoch 管理器
     pub const fn new() -> Self {

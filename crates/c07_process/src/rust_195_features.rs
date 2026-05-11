@@ -242,7 +242,7 @@ mod real_rust_195_tests {
     #[test]
     fn test_c_string_literal() {
         let cstr = RealRust195Features::c_string_literal_demo();
-        assert_eq!(cstr, CStr::from_bytes_with_nul(b"hello\0").unwrap());
+        assert_eq!(cstr, c"hello");
     }
 
     #[test]

@@ -4,7 +4,7 @@
 //! - `VecDeque::resize`
 //! - `std::iter::repeat_n`
 
-#![allow(clippy::incompatible_msrv)]
+#![allow(clippy::incompatible_msrv, dead_code)]
 
 use std::collections::VecDeque;
 

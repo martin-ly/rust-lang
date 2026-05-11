@@ -1,5 +1,5 @@
 //! Rust 1.97 特性跟踪模块 —— 过程宏
-#![allow(clippy::incompatible_msrv)]
+#![allow(clippy::incompatible_msrv, dead_code)]
 
 /// # Rust 1.97 特性演示
 ///

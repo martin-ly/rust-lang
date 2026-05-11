@@ -655,7 +655,6 @@ mod tests {
     }
 }
 
-
 // ============================================================================
 // Real Rust 1.95 Features — Ownership, Borrowing, Memory Safety
 // ============================================================================
@@ -678,6 +677,10 @@ impl RealRust195Features {
     ///
     /// In Rust 2024 edition, unsafe operations inside `unsafe fn`
     /// require explicit `unsafe {}` blocks.
+    ///
+    /// # Safety
+    ///
+    /// `ptr` must be a valid, properly aligned pointer to an initialized `u32`.
     pub unsafe fn rust_2024_unsafe_fn(ptr: *const u32) -> u32 {
         // Explicit unsafe block required inside unsafe fn in Rust 2024
         unsafe { *ptr }
@@ -709,7 +712,10 @@ mod real_rust_195_tests {
         let value: u32 = 99;
         // SAFETY: pointer derived from a live local variable
         unsafe {
-            assert_eq!(RealRust195Features::rust_2024_unsafe_fn(&raw const value), 99);
+            assert_eq!(
+                RealRust195Features::rust_2024_unsafe_fn(&raw const value),
+                99
+            );
         }
     }
 }

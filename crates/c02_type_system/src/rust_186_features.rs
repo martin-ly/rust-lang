@@ -22,17 +22,29 @@
 /// ## 使用场景
 /// - 抽象层解耦：在运行时根据具体类型降级到更通用的 trait 对象
 /// - 插件系统：将特定插件接口转换为通用接口
-pub trait Animal { fn name(&self) -> &'static str; }
-pub trait Dog: Animal { fn bark(&self); }
+pub trait Animal {
+    fn name(&self) -> &'static str;
+}
+pub trait Dog: Animal {
+    fn bark(&self);
+}
 
-pub fn animal_name(animal: &dyn Animal) -> &'static str { animal.name() }
+pub fn animal_name(animal: &dyn Animal) -> &'static str {
+    animal.name()
+}
 
 #[cfg(test)]
 mod tests {
     use super::*;
     struct MyDog;
-    impl Animal for MyDog { fn name(&self) -> &'static str { "Buddy" } }
-    impl Dog for MyDog { fn bark(&self) {} }
+    impl Animal for MyDog {
+        fn name(&self) -> &'static str {
+            "Buddy"
+        }
+    }
+    impl Dog for MyDog {
+        fn bark(&self) {}
+    }
 
     #[test]
     fn test_trait_upcasting() {
@@ -58,6 +70,11 @@ mod tests {
 ///
 /// ## 现在
 /// 安全函数 + `#[target_feature]` 组合允许，但调用点必须在 `unsafe` 块中。
+///
+/// # Safety
+///
+/// 调用者必须通过 `is_x86_feature_detected!("sse2")` 等方式
+/// 确保目标平台支持 SSE2 特性，否则调用此函数是未定义行为。
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
 pub fn safe_simd_add(a: [f64; 2], b: [f64; 2]) -> [f64; 2] {

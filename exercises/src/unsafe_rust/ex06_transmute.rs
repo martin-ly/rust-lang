@@ -1,4 +1,4 @@
-#![allow(unnecessary_transmutes)]
+#![allow(unnecessary_transmutes, clippy::approx_constant)]
 
 //! # 练习 6: `mem::transmute` 与类型双关
 //!

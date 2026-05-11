@@ -58,6 +58,11 @@ mod tests {
 ///
 /// ## 现在
 /// 安全函数 + `#[target_feature]` 组合允许，但调用点必须在 `unsafe` 块中。
+///
+/// # Safety
+///
+/// 调用者必须通过 `is_x86_feature_detected!("sse2")` 等方式
+/// 确保目标平台支持 SSE2 特性，否则调用此函数是未定义行为。
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
 pub fn safe_simd_add(a: [f64; 2], b: [f64; 2]) -> [f64; 2] {

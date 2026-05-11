@@ -502,7 +502,7 @@ impl RealRust195Features {
     pub fn parse_with_if_let_guard(input: Result<Option<i32>, &str>) -> i32 {
         match input {
             Ok(Some(n)) if n > 0 => n,
-            Ok(Some(n)) if n == 0 => 0,
+            Ok(Some(0)) => 0,
             Ok(Some(_)) => -1,
             Ok(None) => 0,
             Err(msg) if msg.contains("empty") => -100,

@@ -85,7 +85,8 @@ impl RawBuffer {
         unsafe {
             std::alloc::dealloc(self.ptr, layout);
         }
-        // 防止 Drop 后继续使用
+        // 防止 Drop 后继续使用（RawBuffer 当前无 Drop，forget 显式标记所有权转移意图）
+        #[allow(clippy::forget_non_drop)]
         std::mem::forget(self);
     }
 }
@@ -117,6 +118,10 @@ pub fn unsafe_fn_quiz_answers() -> [bool; 4] {
 ///     unsafe { *ptr } // 显式 unsafe 块
 /// }
 /// ```
+///
+/// # Safety
+///
+/// `ptr` 必须是有效的、正确对齐的指向已初始化 `u32` 的指针。
 pub unsafe fn rust_2024_style_deref(ptr: *const u32) -> u32 {
     // TODO: 将解引用操作包裹在 unsafe 块中
     unsafe { *ptr }
