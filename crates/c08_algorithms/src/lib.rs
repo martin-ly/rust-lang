@@ -96,17 +96,17 @@ pub mod string_algorithms;
 // pub mod bin; // 暂时注释掉，避免编译错误
 
 pub mod archive;
-pub use archive::rust_191_features;
-pub use archive::rust_192_features;
-pub mod rust_194_features;
+pub use archive::{rust_191_features, rust_192_features};
+pub mod rust_186_features;
+pub mod rust_187_features;
+pub mod rust_188_features;
+pub mod rust_189_features;
+pub mod rust_190_features;
 pub mod rust_193_features;
+pub mod rust_194_features;
 pub mod rust_195_features;
 pub mod rust_196_features;
-pub mod rust_190_features;
-pub mod rust_189_features;
-pub mod rust_188_features;
-pub mod rust_187_features;
-pub mod rust_186_features;
+pub mod rust_197_features;
 
 pub mod algorithm_decision_trees;
 
@@ -250,7 +250,6 @@ mod tests {
         assert_eq!(get_version(), "0.3.0");
     }
 }
-
 
 #[cfg(test)]
 pub mod miri_tests;

@@ -45,22 +45,23 @@ pub mod io_uring_advanced; // io_uring 深度实践
 #[cfg(feature = "libp2p")]
 pub mod libp2p_advanced; // libp2p 深度集成
 pub mod quic_advanced; // QUIC/HTTP3 完整实现
-pub mod rust_194_features;
+pub mod rust_186_features;
+pub mod rust_187_features;
+pub mod rust_188_features;
+pub mod rust_189_features;
+pub mod rust_190_features;
 pub mod rust_193_features;
+pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95 特性 (网络场景)
 pub mod rust_196_features;
-pub mod rust_190_features;
-pub mod rust_189_features;
-pub mod rust_188_features;
-pub mod rust_187_features;
-pub mod rust_186_features;
+pub mod rust_197_features;
 
-pub mod zero_copy_networking;
 pub mod cargo_semver_checks_guide;
 #[cfg(feature = "sniff")]
 pub mod sniff;
 pub mod socket;
 pub mod unified_api;
+pub mod zero_copy_networking;
 
 // 重新导出常用类型
 pub use error::{NetworkError, NetworkResult, PerformanceError, ProtocolError, SecurityError};

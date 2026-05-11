@@ -69,20 +69,19 @@ pub mod fork;
 pub mod async_runtime;
 
 pub mod archive;
-pub use archive::rust_190_features;
-pub use archive::rust_191_features;
-pub use archive::rust_192_features;
-pub mod rust_194_features;
+pub use archive::{rust_190_features, rust_191_features, rust_192_features};
+pub mod rust_186_features;
+pub mod rust_187_features;
+pub mod rust_188_features;
+pub mod rust_189_features;
 pub mod rust_193_features;
+pub mod rust_194_features;
 pub mod rust_195_features;
 pub mod rust_196_features;
-pub mod rust_189_features;
-pub mod rust_188_features;
-pub mod rust_187_features;
-pub mod rust_186_features;
+pub mod rust_197_features;
 
-pub mod rust_for_linux_preview; // Rust for Linux 预研 (kernel.org)
-pub mod ebpf_aya; // eBPF + Aya 预研 (aya-rs.dev)
+pub mod ebpf_aya;
+pub mod rust_for_linux_preview; // Rust for Linux 预研 (kernel.org) // eBPF + Aya 预研 (aya-rs.dev)
 
 // 性能优化模块
 pub mod performance;
@@ -103,10 +102,8 @@ pub use error::enhanced::{
     RecoveryResult, RecoveryStrategy,
 };
 
-pub use process::{
-    ProcessBuilder, ProcessGroupManager, ProcessManager,
-    pool::{AutoScalingConfig, LoadBalancingStrategy, ProcessPool, ProcessPoolConfig},
-};
+pub use process::pool::{AutoScalingConfig, LoadBalancingStrategy, ProcessPool, ProcessPoolConfig};
+pub use process::{ProcessBuilder, ProcessGroupManager, ProcessManager};
 
 #[cfg(feature = "async")]
 pub use async_runtime::{AsyncProcessManager, AsyncProcessPool, AsyncTask, AsyncTaskScheduler};
@@ -186,7 +183,7 @@ pub fn init() -> Result<()> {
 /// # Examples
 ///
 /// ```
-/// use c07_process::{init, cleanup};
+/// use c07_process::{cleanup, init};
 ///
 /// init().expect("进程管理初始化失败");
 /// let result = cleanup();
@@ -365,7 +362,6 @@ mod tests {
         assert!(cleanup().is_ok());
     }
 }
-
 
 #[cfg(test)]
 pub mod miri_tests;

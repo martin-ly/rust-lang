@@ -37,14 +37,14 @@ pub use archive::rust_190_features;
 pub use archive::rust_191_features;
 // Rust 1.92.0 新特性演示模块
 pub use archive::rust_192_features;
-pub mod rust_194_features;
+pub mod rust_186_features;
+pub mod rust_187_features;
+pub mod rust_188_features;
 pub mod rust_193_features;
+pub mod rust_194_features;
 pub mod rust_195_features;
 pub mod rust_196_features;
-pub mod rust_188_features;
-pub mod rust_187_features;
-pub mod rust_186_features;
-
+pub mod rust_197_features;
 
 // 性能基准测试模块
 pub mod performance_benchmarks;

@@ -1,4 +1,5 @@
 //! Rust 1.95 特性 —— 过程宏场景
+#![allow(dead_code)]
 
 use std::ffi::CStr;
 

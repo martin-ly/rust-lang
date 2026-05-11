@@ -332,17 +332,18 @@ pub mod layout_guarantees;
 pub mod ownership_utils;
 pub mod pin_and_self_referential;
 pub mod polonius_examples;
-pub mod rust_194_features;
+pub mod rust_186_features;
+pub mod rust_187_features;
+pub mod rust_188_features;
+pub mod rust_189_features;
+pub mod rust_190_features;
+pub mod rust_191_features;
+pub mod rust_192_features;
 pub mod rust_193_features;
+pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95 特性 (MaybeUninit 数组互转, Cell AsRef)
 pub mod rust_196_features;
-pub mod rust_192_features;
-pub mod rust_191_features;
-pub mod rust_190_features;
-pub mod rust_189_features;
-pub mod rust_188_features;
-pub mod rust_187_features;
-pub mod rust_186_features;
+pub mod rust_197_features;
 
 pub mod scope;
 pub mod variable;

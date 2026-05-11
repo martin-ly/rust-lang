@@ -32,6 +32,8 @@
 //! }
 //! ```
 mod rust_195_features;
+mod rust_196_features;
+mod rust_197_features;
 
 use proc_macro::TokenStream;
 use quote::quote;

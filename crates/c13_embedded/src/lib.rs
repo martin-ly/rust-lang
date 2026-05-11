@@ -39,16 +39,17 @@ pub mod memory_mapped_registers;
 pub mod no_std_practices;
 pub mod raw_pointers_advanced;
 pub mod rtic_framework;
+pub mod rust_186_features;
+pub mod rust_187_features;
+pub mod rust_188_features;
+pub mod rust_189_features;
+pub mod rust_190_features;
+pub mod rust_191_features;
+pub mod rust_192_features;
 pub mod rust_193_features;
 pub mod rust_195_features; // Rust 1.95 特性 (裸指针 unchecked, PowerPC asm, cfg_select 嵌入式)
 pub mod rust_196_features; // Rust 1.96+ 特性 (pin! 宏, const VecDeque, bool→float, const NonNull)
-pub mod rust_192_features;
-pub mod rust_191_features;
-pub mod rust_190_features;
-pub mod rust_189_features;
-pub mod rust_188_features;
-pub mod rust_187_features;
-pub mod rust_186_features;
+pub mod rust_197_features;
 
 pub mod uart_driver; // RTIC 实时中断驱动并发
 

@@ -1,3 +1,5 @@
+#![allow(unnecessary_transmutes)]
+
 //! # 练习 6: `mem::transmute` 与类型双关
 //!
 //! **难度**: Medium  

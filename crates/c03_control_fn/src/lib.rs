@@ -19,20 +19,21 @@
 //! - **并行前端**: 并行编译支持
 // 导出核心模块
 pub mod async_control_flow;
-pub mod error;
 pub mod control_flow_patterns;
+pub mod error;
 pub mod if_let_guards_deep_dive;
-pub mod rust_194_features; // Rust 1.94 特性
+pub mod rust_186_features;
+pub mod rust_187_features;
+pub mod rust_188_features;
+pub mod rust_189_features;
+pub mod rust_190_features;
+pub mod rust_191_features;
+pub mod rust_192_features;
 pub mod rust_193_features;
+pub mod rust_194_features; // Rust 1.94 特性
 pub mod rust_195_features; // Rust 1.95 特性 (if let guards, bool TryFrom)
 pub mod rust_196_features; // Rust 2024 Edition let chains
-pub mod rust_192_features;
-pub mod rust_191_features;
-pub mod rust_190_features;
-pub mod rust_189_features;
-pub mod rust_188_features;
-pub mod rust_187_features;
-pub mod rust_186_features;
+pub mod rust_197_features;
 
 pub mod rust_196_gen_examples; // gen blocks 前瞻 (nightly-only, 非 1.96 stable) // if let guards 深度解析 (Rust 1.95 stable)
 
