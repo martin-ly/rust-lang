@@ -1,6 +1,6 @@
 //! # Unsafe Rust 练习
 //!
-//! 本模块包含 5 道练习题，涵盖 Rust 不安全代码的核心概念：
+//! 本模块包含 7 道练习题，涵盖 Rust 不安全代码的核心概念：
 //!
 //! | 编号 | 主题 | 难度 | 考点 |
 //! |------|------|------|------|
@@ -9,6 +9,10 @@
 //! | ex03 | MaybeUninit 与避免不必要的初始化 | Medium | `MaybeUninit<T>`、假设初始化、Drop 安全 |
 //! | ex04 | UnsafeCell 与内部可变性 | Medium | `UnsafeCell<T>`、内部可变性、`*const`/`*mut` |
 //! | ex05 | Miri 验证与未定义行为识别 | Hard | Miri 工具、Tree Borrows、UB 识别与修复 |
+//! | ex06 | `mem::transmute` 与类型双关 | Medium | `transmute`、`transmute_copy`、union、对齐约束 |
+//! | ex07 | 内存对齐与未对齐访问 | Hard | `read_unaligned`、`write_unaligned`、`#[repr(packed)]`、`align_offset` |
+//! | ex08 | 原始引用操作符 `&raw const`/`&raw mut` | Medium | `&raw const`、避免中间引用 UB、packed/union 安全访问 (Rust 1.95) |
+//! | ex09 | `unsafe_op_in_unsafe_fn` 规范 | Medium | Rust 2024 unsafe fn 语义、`unsafe {}` 粒度控制 (Rust 1.95) |
 //!
 //! ## 运行测试
 //!
@@ -21,6 +25,7 @@
 //!
 //! ```bash
 //! rustup run nightly cargo miri test unsafe_rust::ex05_miri_validation
+//! rustup run nightly cargo miri test unsafe_rust::ex07_align_offset
 //! ```
 
 pub mod ex01_raw_pointers;
@@ -28,3 +33,7 @@ pub mod ex02_ffi_basics;
 pub mod ex03_maybe_uninit;
 pub mod ex04_unsafe_cell;
 pub mod ex05_miri_validation;
+pub mod ex06_transmute;
+pub mod ex07_align_offset;
+pub mod ex08_raw_references;
+pub mod ex09_unsafe_op_in_unsafe_fn;

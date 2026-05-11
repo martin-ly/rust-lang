@@ -194,7 +194,15 @@ mod tests {
     fn test_epoch_advance() {
         let manager = EpochManager::new();
         manager.pin();
-        assert!(manager.try_advance_epoch());
+        // compare_exchange_weak 可能有 spurious failure，循环重试
+        let mut advanced = false;
+        for _ in 0..10 {
+            if manager.try_advance_epoch() {
+                advanced = true;
+                break;
+            }
+        }
+        assert!(advanced);
         manager.unpin();
     }
 
