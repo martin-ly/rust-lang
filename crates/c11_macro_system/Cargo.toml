@@ -18,6 +18,7 @@ thiserror = { workspace = true }
 proc-macro2 = { workspace = true }
 quote = { workspace = true }
 syn = { workspace = true }
+c11_macro_system_proc = { path = "../c11_macro_system_proc" }
 
 
 [dev-dependencies]

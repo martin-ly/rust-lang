@@ -33,7 +33,7 @@
 //! ```
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{parse_macro_input, DeriveInput, ItemFn};
+use syn::{DeriveInput, ItemFn, parse_macro_input};
 
 /// 自动生成Builder模式的派生宏
 ///
@@ -204,16 +204,8 @@ pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
 /// ```
 #[proc_macro]
 pub fn conditional(input: TokenStream) -> TokenStream {
-    let input_str = input.to_string();
-
-    // 简单的条件编译实现
-    let expanded = quote! {
-        {
-            #input
-        }
-    };
-
-    TokenStream::from(expanded)
+    // 简单的条件编译实现：直接透传输入
+    input
 }
 
 /// 自动实现Clone trait的派生宏
@@ -239,10 +231,13 @@ pub fn derive_auto_clone(input: TokenStream) -> TokenStream {
         _ => panic!("AutoClone宏只支持结构体"),
     };
 
-    let field_clones: Vec<_> = fields.iter().map(|f| {
-        let field_name = &f.ident;
-        quote! { #field_name: self.#field_name.clone() }
-    }).collect();
+    let field_clones: Vec<_> = fields
+        .iter()
+        .map(|f| {
+            let field_name = &f.ident;
+            quote! { #field_name: self.#field_name.clone() }
+        })
+        .collect();
 
     let expanded = quote! {
         impl Clone for #name {
@@ -274,13 +269,6 @@ pub fn derive_auto_clone(input: TokenStream) -> TokenStream {
 /// ```
 #[proc_macro]
 pub fn serializable(input: TokenStream) -> TokenStream {
-    let input_str = input.to_string();
-
-    // 这里可以实现更复杂的序列化逻辑
-    let expanded = quote! {
-        // 序列化实现
-        #input
-    };
-
-    TokenStream::from(expanded)
+    // 这里可以实现更复杂的序列化逻辑；目前直接透传输入
+    input
 }
