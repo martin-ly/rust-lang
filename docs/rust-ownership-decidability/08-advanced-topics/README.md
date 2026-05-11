@@ -11,8 +11,9 @@
 ├── README.md                      # 本文件 - 导航与概览
 ├── 08-01-const-generics.md        # 常量泛型
 ├── 08-02-async-rust.md           # 异步Rust深度解析
-├── 08-03-ffi-patterns.md         # FFI模式与C互操作
-├── 08-04-proc-macros.md          # 过程宏开发
+├── 08-03-ffi-patterns.md         # FFI模式与C互操作 (已归档)
+├── 08-04-proc-macros.md          # 过程宏开发 (已归档)
+├── 08-05-rust-195-features-formal.md # Rust 1.95 特性形式化分析 ⭐ 新增
 ├── 08-05-unsafe-patterns.md      # Unsafe Rust模式
 ├── 08-06-zero-cost-abstractions.md # 零成本抽象
 └── 08-07-custom-allocators.md    # 自定义分配器
@@ -28,7 +29,8 @@
 
 1. **08-01-const-generics.md** - 理解编译时计算能力
 2. **08-02-async-rust.md** - 掌握异步编程的核心概念
-3. **08-06-zero-cost-abstractions.md** - 学习如何写出高效的抽象代码
+3. **08-05-rust-195-features-formal.md** - Rust 1.95 新特性的形式化语义（if let guards、use<..> 精确捕获）
+4. **08-06-zero-cost-abstractions.md** - 学习如何写出高效的抽象代码
 
 ### 进阶路径
 

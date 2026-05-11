@@ -96,6 +96,7 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
 | `08-02-async-rust.md` | 异步Rust深度解析 | 🟡 | 2小时 | 所有权基础 |
 | `08-03-ffi-patterns.md` | FFI模式与C互操作 | 🔴 已归档 | 2小时 | Unsafe Rust | 见 `archive/deprecated_20260318/` |
 | `08-04-proc-macros.md` | 过程宏开发 | 🔴 已归档 | 2.5小时 | 宏基础 | 见 `archive/deprecated_20260318/` |
+| `08-05-rust-195-features-formal.md` | Rust 1.95 特性形式化 | 🔴 | 3小时 | 类型理论 | ⭐ 新增 |
 
 **Rust 1.95 新特性**:
 
