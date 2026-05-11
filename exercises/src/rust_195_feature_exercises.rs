@@ -588,3 +588,98 @@ mod tests {
         assert_eq!(ColdPathExercises::exercise_02_boundary_case(""), None);
     }
 }
+
+
+// ============================================================
+// GenBlockExercises — gen blocks (Rust 1.95)
+// ============================================================
+
+/// # `gen` blocks 练习 (Rust 1.95)
+///
+/// `gen { yield expr; }` 允许直接编写生成器，无需手动实现 `Iterator` trait。
+/// 编译器会自动将 gen block 转换为实现 `Iterator` 的类型。
+pub struct GenBlockExercises;
+
+impl GenBlockExercises {
+    /// 使用 `gen` block 实现斐波那契数列生成器
+    ///
+    /// 返回一个 `Iterator<Item = u64>`，产生斐波那契数列的前 `n` 项。
+    pub fn exercise_01_fibonacci_gen(n: usize) -> impl Iterator<Item = u64> {
+        // TODO: 使用 gen block 实现斐波那契数列生成器
+        gen move {
+            let mut a = 0u64;
+            let mut b = 1u64;
+            for _ in 0..n {
+                yield a;
+                let next = a.wrapping_add(b);
+                a = b;
+                b = next;
+            }
+        }
+    }
+
+    /// 使用 `gen` block 实现过滤+映射
+    ///
+    /// 输入一个整数列表，只保留偶数，然后将每个数乘以 2。
+    pub fn exercise_02_filter_map_gen(inputs: Vec<i32>) -> impl Iterator<Item = i32> {
+        // TODO: 使用 gen block 实现过滤偶数并乘以 2
+        gen {
+            for x in inputs {
+                if x % 2 == 0 {
+                    yield x * 2;
+                }
+            }
+        }
+    }
+
+    /// 使用 `gen` block 实现扁平化（flat_map）
+    ///
+    /// 将 `Vec<Vec<T>>` 扁平化为单个迭代器。
+    pub fn exercise_03_flatten_gen<T>(nested: Vec<Vec<T>>) -> impl Iterator<Item = T> {
+        // TODO: 使用 gen block 实现扁平化
+        gen {
+            for inner in nested {
+                for item in inner {
+                    yield item;
+                }
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+mod gen_block_tests {
+    use super::GenBlockExercises;
+
+    #[test]
+    fn test_exercise_01_fibonacci_gen() {
+        let fib: Vec<u64> = GenBlockExercises::exercise_01_fibonacci_gen(10).collect();
+        assert_eq!(fib, vec![0, 1, 1, 2, 3, 5, 8, 13, 21, 34]);
+    }
+
+    #[test]
+    fn test_exercise_01_fibonacci_gen_empty() {
+        let fib: Vec<u64> = GenBlockExercises::exercise_01_fibonacci_gen(0).collect();
+        assert!(fib.is_empty());
+    }
+
+    #[test]
+    fn test_exercise_02_filter_map_gen() {
+        let inputs = vec![1, 2, 3, 4, 5, 6];
+        let result: Vec<i32> = GenBlockExercises::exercise_02_filter_map_gen(inputs).collect();
+        assert_eq!(result, vec![4, 8, 12]);
+    }
+
+    #[test]
+    fn test_exercise_02_filter_map_gen_empty() {
+        let result: Vec<i32> = GenBlockExercises::exercise_02_filter_map_gen(vec![]).collect();
+        assert!(result.is_empty());
+    }
+
+    #[test]
+    fn test_exercise_03_flatten_gen() {
+        let nested = vec![vec![1, 2], vec![], vec![3, 4, 5]];
+        let result: Vec<i32> = GenBlockExercises::exercise_03_flatten_gen(nested).collect();
+        assert_eq!(result, vec![1, 2, 3, 4, 5]);
+    }
+}
