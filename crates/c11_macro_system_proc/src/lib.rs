@@ -31,6 +31,8 @@
 //!     println!("Hello from macro!");
 //! }
 //! ```
+mod rust_195_features;
+
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{DeriveInput, ItemFn, parse_macro_input};

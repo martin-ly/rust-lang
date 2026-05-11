@@ -391,3 +391,58 @@ mod tests {
         // 只要不出错即通过
     }
 }
+
+// ============================================================================
+// 4. RealRust195Features — &raw const, const blocks, C string literals
+// ============================================================================
+
+use std::ffi::CStr;
+
+/// # 真实 Rust 1.95 特性演示
+///
+/// 展示 `&raw const`、 `const {}` 以及 `c"..."` 在嵌入式场景中的应用。
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// 使用 `&raw const` 模拟寄存器访问
+    ///
+    /// `&raw const` 避免创建中间引用，适合 MMIO 和寄存器操作。
+    pub fn register_raw_ptr(value: u32) -> u32 {
+        let ptr = &raw const value;
+        // SAFETY: &raw const 直接创建裸指针，适用于已验证有效的寄存器地址
+        unsafe { *ptr }
+    }
+
+    /// 使用 `const {}` 定义寄存器掩码
+    pub const fn const_block_register_mask() -> u32 {
+        const { 0b1111 }
+    }
+
+    /// 使用 `c"embedded"` C 字符串字面量
+    pub fn c_str_for_embedded() -> &'static CStr {
+        c"embedded"
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_register_raw_ptr() {
+        assert_eq!(RealRust195Features::register_raw_ptr(0xABCD), 0xABCD);
+    }
+
+    #[test]
+    fn test_const_block_register_mask() {
+        const { assert!(RealRust195Features::const_block_register_mask() == 0b1111) };
+    }
+
+    #[test]
+    fn test_c_str_for_embedded() {
+        assert_eq!(
+            RealRust195Features::c_str_for_embedded().to_str(),
+            Ok("embedded")
+        );
+    }
+}

@@ -965,3 +965,56 @@ mod tests {
         const { assert!(C) };
     }
 }
+
+// ============================================================================
+// 7. RealRust195Features — &raw const, const blocks, C string literals
+// ============================================================================
+
+use std::ffi::CStr;
+
+/// # 真实 Rust 1.95 特性演示
+///
+/// 展示 `&raw const`、 `const {}` 以及 `c"..."` 在 WASM 场景中的应用。
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// 使用 `&raw const` 获取 WASM 内存指针
+    ///
+    /// `&raw const` 避免了创建中间引用，适合 FFI 和 WASM 边界。
+    pub fn wasm_safe_raw_ptr(value: u32) -> usize {
+        let ptr = &raw const value;
+        // 将裸指针转为地址，演示 &raw const 的用法（无需 unsafe 块）
+        ptr as usize
+    }
+
+    /// 使用 `const {}` 计算 WASM 页面大小
+    pub const fn const_block_wasm_page() -> usize {
+        const { 64 * 1024 }
+    }
+
+    /// 使用 `c"wasm"` C 字符串字面量
+    pub fn c_str_for_wasm() -> &'static CStr {
+        c"wasm"
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_wasm_safe_raw_ptr() {
+        let addr = RealRust195Features::wasm_safe_raw_ptr(0x12345678);
+        assert!(addr != 0);
+    }
+
+    #[test]
+    fn test_const_block_wasm_page() {
+        const { assert!(RealRust195Features::const_block_wasm_page() == 65536) };
+    }
+
+    #[test]
+    fn test_c_str_for_wasm() {
+        assert_eq!(RealRust195Features::c_str_for_wasm().to_str(), Ok("wasm"));
+    }
+}

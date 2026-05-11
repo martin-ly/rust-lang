@@ -5,7 +5,7 @@
 //! ## Usage Example
 //!
 //! ```rust
-//! use common::{RustLangError, Result, CommonError};
+//! use common::{CommonError, Result, RustLangError};
 //!
 //! fn may_fail() -> Result<i32> {
 //!     Ok(42)
@@ -30,19 +30,19 @@ pub mod error;
 
 // Primary re-exports - new trait-based design
 pub use error::{
-    // Core trait and types
-    RustLangError,
     CommonError,
-    UnifiedError,
-    ErrorCode,
-    
-    // Result types
-    Result,
     DynamicResult,
-    
+
+    ErrorCode,
+
     // Extension traits
     ErrorContext,
     ErrorRecovery,
+    // Result types
+    Result,
+    // Core trait and types
+    RustLangError,
+    UnifiedError,
 };
 
 // Macros are exported at crate root via #[macro_export]
@@ -51,9 +51,8 @@ pub use error::{
 // Legacy re-exports - deprecated, for backward compatibility
 #[deprecated(since = "0.2.0", note = "Use your crate's specific error type instead")]
 pub use error::{
-    OwnershipError, TypeError, ControlFlowError, GenericError,
-    ThreadError, AsyncError, ProcessError, AlgorithmError,
-    DesignPatternError, NetworkError, MacroError, WasmError,
+    AlgorithmError, AsyncError, ControlFlowError, DesignPatternError, GenericError, MacroError,
+    NetworkError, OwnershipError, ProcessError, ThreadError, TypeError, WasmError,
 };
 
 // Legacy alias
@@ -66,6 +65,7 @@ pub use error::UnifiedError as CommonErrorAlias;
 // Other public modules
 pub mod arena;
 pub mod rust_193_features;
+pub mod rust_195_features;
 pub mod traits;
 pub mod types;
 pub mod utils;
@@ -74,8 +74,7 @@ pub mod utils;
 pub use traits::{Comparable, Identifiable, Measurable, Validatable};
 
 // Re-export commonly used types
-pub use types::{Id, NonEmptyVec, Pagination, Paginated, Timestamped, Version};
+pub use types::{Id, NonEmptyVec, Paginated, Pagination, Timestamped, Version};
 
 // Re-export commonly used utility functions
-pub use utils::{format_duration, format_bytes, truncate_with_ellipsis, retry, Memoize, OnceGuard};
-
+pub use utils::{Memoize, OnceGuard, format_bytes, format_duration, retry, truncate_with_ellipsis};

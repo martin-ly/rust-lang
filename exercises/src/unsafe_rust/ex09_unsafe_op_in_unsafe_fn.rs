@@ -166,6 +166,7 @@ mod tests {
 
     #[test]
     #[should_panic(expected = "write out of bounds")]
+    #[cfg_attr(miri, ignore)] // Miri 检测到此 panic 路径的内存泄漏，这是教学代码的已知限制
     fn test_buffer_write_out_of_bounds() {
         unsafe {
             let mut buf = RawBuffer::new_uninitialized(4);

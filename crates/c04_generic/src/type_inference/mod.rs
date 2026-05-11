@@ -667,6 +667,22 @@ mod tests {
         assert_eq!(iterator.count(), 0);
     }
 
+    /// `gen` block 重构：编译器自动生成 Iterator 状态机
+    #[test]
+    fn test_gen_number_iterator() {
+        let gen_iter = gen move {
+            let mut current = 1i32;
+            let max = 4;
+            while current < max {
+                yield current;
+                current += 1;
+            }
+        };
+
+        let values: Vec<i32> = gen_iter.collect();
+        assert_eq!(values, vec![1, 2, 3]);
+    }
+
     #[test]
     fn test_find_max() {
         let numbers = vec![3, 1, 4, 1, 5];

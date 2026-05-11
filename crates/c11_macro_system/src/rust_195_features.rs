@@ -301,3 +301,81 @@ mod tests {
         assert!(lanes == 1 || lanes == 4 || lanes == 8 || lanes == 16);
     }
 }
+
+// ============================================================================
+// 3. RealRust195Features — unsafe_op_in_unsafe_fn, const blocks, if let guards
+// ============================================================================
+
+/// # 真实 Rust 1.95 特性演示
+///
+/// 展示 Rust 2024 中 `unsafe fn` 需要显式 `unsafe {}` 块，
+/// `const {}` 在数组大小计算中的应用，以及 `if let` guards。
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// Rust 2024 风格的 `unsafe fn`
+    ///
+    /// 在 `unsafe fn` 内部，不安全操作仍需显式包裹在 `unsafe {}` 中。
+    pub unsafe fn macro_generated_unsafe_fn(ptr: *const u32) -> u32 {
+        // Rust 2024: 必须显式使用 unsafe 块
+        unsafe { *ptr }
+    }
+
+    /// 使用 `const {}` 计算宏生成的数组大小
+    pub fn const_block_macro_output() -> [u8; 8] {
+        [0u8; const { 4 + 4 }]
+    }
+
+    /// 使用 `if let` guard 分类宏标记
+    pub fn classify_macro_token(token: Option<&str>) -> Result<&'static str, &'static str> {
+        match token {
+            Some(t)
+                if let Ok(n) = t.parse::<i32>()
+                    && n > 0 =>
+            {
+                Ok("positive integer")
+            }
+            Some(t) if t.is_empty() => Ok("empty token"),
+            Some(_) => Ok("other token"),
+            None => Err("missing token"),
+        }
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_macro_generated_unsafe_fn() {
+        let value = 0xDEADBEEF_u32;
+        let result = unsafe { RealRust195Features::macro_generated_unsafe_fn(&value) };
+        assert_eq!(result, 0xDEADBEEF);
+    }
+
+    #[test]
+    fn test_const_block_macro_output() {
+        let arr = RealRust195Features::const_block_macro_output();
+        assert_eq!(arr.len(), 8);
+    }
+
+    #[test]
+    fn test_classify_macro_token() {
+        assert_eq!(
+            RealRust195Features::classify_macro_token(Some("42")),
+            Ok("positive integer")
+        );
+        assert_eq!(
+            RealRust195Features::classify_macro_token(Some("")),
+            Ok("empty token")
+        );
+        assert_eq!(
+            RealRust195Features::classify_macro_token(Some("hello")),
+            Ok("other token")
+        );
+        assert_eq!(
+            RealRust195Features::classify_macro_token(None),
+            Err("missing token")
+        );
+    }
+}

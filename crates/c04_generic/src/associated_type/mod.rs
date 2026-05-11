@@ -768,6 +768,25 @@ mod tests {
         assert_eq!(counter.count(), 3);
     }
 
+    /// 使用 `gen` block 实现与 Counter 等价的迭代器
+    ///
+    /// `gen` block 将手动状态机（struct Counter + impl Iterator）
+    /// 简化为直观的命令式代码，编译器自动处理状态转换。
+    #[test]
+    fn test_gen_counter() {
+        let gen_counter = gen move {
+            let mut count = 0u32;
+            let max = 3;
+            while count < max {
+                count += 1;
+                yield count;
+            }
+        };
+
+        let values: Vec<u32> = gen_counter.collect();
+        assert_eq!(values, vec![1, 2, 3]);
+    }
+
     #[test]
     fn test_simple_graph() {
         let mut graph = SimpleGraph::new();

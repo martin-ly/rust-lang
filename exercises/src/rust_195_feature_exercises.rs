@@ -645,6 +645,67 @@ impl GenBlockExercises {
             }
         }
     }
+
+    /// 使用 `gen` block 实现 K-way 有序序列合并
+    ///
+    /// 输入多个已排序序列，返回合并后的有序迭代器。
+    /// 使用 `Peekable` 在 `gen` block 内部实现最小值选择。
+    pub fn exercise_04_merge_sorted_gen(sequences: Vec<Vec<i32>>) -> impl Iterator<Item = i32> {
+        gen move {
+            let mut iters: Vec<_> = sequences
+                .into_iter()
+                .map(|v| v.into_iter().peekable())
+                .collect();
+
+            loop {
+                let min_val = iters
+                    .iter_mut()
+                    .filter_map(|iter| iter.peek().copied())
+                    .min();
+
+                if let Some(min) = min_val {
+                    for iter in &mut iters {
+                        if iter.peek() == Some(&min) {
+                            iter.next();
+                        }
+                    }
+                    yield min;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
+    /// 使用 `gen` block 实现有序序列去重
+    ///
+    /// 输入一个已排序序列，返回去重后的迭代器。
+    pub fn exercise_05_dedup_sorted_gen(data: Vec<i32>) -> impl Iterator<Item = i32> {
+        gen move {
+            let mut iter = data.into_iter().peekable();
+            while let Some(current) = iter.next() {
+                while iter.peek() == Some(&current) {
+                    iter.next();
+                }
+                yield current;
+            }
+        }
+    }
+
+    /// 使用 `gen` block 实现滑动窗口求和
+    ///
+    /// 返回输入数组中每个大小为 `window_size` 的连续窗口的和。
+    pub fn exercise_06_window_sum_gen(data: Vec<i32>, window_size: usize) -> impl Iterator<Item = i32> {
+        gen move {
+            if window_size == 0 || data.len() < window_size {
+                return;
+            }
+            for i in 0..=data.len() - window_size {
+                let sum: i32 = data[i..i + window_size].iter().sum();
+                yield sum;
+            }
+        }
+    }
 }
 
 #[cfg(test)]
@@ -681,5 +742,52 @@ mod gen_block_tests {
         let nested = vec![vec![1, 2], vec![], vec![3, 4, 5]];
         let result: Vec<i32> = GenBlockExercises::exercise_03_flatten_gen(nested).collect();
         assert_eq!(result, vec![1, 2, 3, 4, 5]);
+    }
+
+    #[test]
+    fn test_exercise_04_merge_sorted_gen() {
+        let a = vec![1, 3, 5];
+        let b = vec![2, 4, 6];
+        let c = vec![0, 7];
+        let merged: Vec<i32> =
+            GenBlockExercises::exercise_04_merge_sorted_gen(vec![a, b, c]).collect();
+        assert_eq!(merged, vec![0, 1, 2, 3, 4, 5, 6, 7]);
+    }
+
+    #[test]
+    fn test_exercise_04_merge_sorted_gen_empty() {
+        let merged: Vec<i32> =
+            GenBlockExercises::exercise_04_merge_sorted_gen(vec![]).collect();
+        assert!(merged.is_empty());
+    }
+
+    #[test]
+    fn test_exercise_05_dedup_sorted_gen() {
+        let data = vec![1, 1, 2, 2, 2, 3, 3, 4, 5, 5];
+        let deduped: Vec<i32> =
+            GenBlockExercises::exercise_05_dedup_sorted_gen(data).collect();
+        assert_eq!(deduped, vec![1, 2, 3, 4, 5]);
+    }
+
+    #[test]
+    fn test_exercise_05_dedup_sorted_gen_empty() {
+        let deduped: Vec<i32> =
+            GenBlockExercises::exercise_05_dedup_sorted_gen(vec![]).collect();
+        assert!(deduped.is_empty());
+    }
+
+    #[test]
+    fn test_exercise_06_window_sum_gen() {
+        let data = vec![1, 2, 3, 4, 5];
+        let sums: Vec<i32> =
+            GenBlockExercises::exercise_06_window_sum_gen(data, 3).collect();
+        assert_eq!(sums, vec![6, 9, 12]);
+    }
+
+    #[test]
+    fn test_exercise_06_window_sum_gen_empty() {
+        let sums: Vec<i32> =
+            GenBlockExercises::exercise_06_window_sum_gen(vec![], 3).collect();
+        assert!(sums.is_empty());
     }
 }

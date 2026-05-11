@@ -336,7 +336,6 @@ mod tests {
     }
 }
 
-
 // ============================================================================
 // Real Rust 1.95 Features — Algorithms, data structures
 // ============================================================================
@@ -358,15 +357,25 @@ impl RealRust195Features {
                 ControlFlow::Continue(())
             }
         });
-        flow.map(|()| items.len())
+        flow.map_continue(|()| items.len())
     }
 
     /// Classify data using `if let` guard on `Option<&[u8]>`
     pub fn classify_data_with_guard(data: Option<&[u8]>) -> &'static str {
         match data {
-            Some(bytes) if let Some(&first) = bytes.first() && first == 0xFF => "header marker",
-            Some(bytes) if let Some(&last) = bytes.last() && last == 0x00 => "null terminated",
+            Some(bytes)
+                if let Some(&first) = bytes.first()
+                    && first == 0xFF =>
+            {
+                "header marker"
+            }
             Some(bytes) if bytes.len() > 100 => "large payload",
+            Some(bytes)
+                if let Some(&last) = bytes.last()
+                    && last == 0x00 =>
+            {
+                "null terminated"
+            }
             Some(_) => "generic data",
             None => "no data",
         }
@@ -374,11 +383,76 @@ impl RealRust195Features {
 
     /// `gen` block yielding even numbers from a slice
     pub fn gen_even_numbers(items: &[i32]) -> impl Iterator<Item = i32> + '_ {
-        gen {
+        gen move {
             for &item in items {
                 if item % 2 == 0 {
                     yield item;
                 }
+            }
+        }
+    }
+
+    /// `gen` block: 合并 K 个已排序序列（K-way merge）
+    ///
+    /// 使用 `gen` block 将传统的手动状态机（维护 K 个 Peekable 迭代器）
+    /// 简化为直观的命令式循环。
+    pub fn gen_merge_sorted(sequences: Vec<Vec<i32>>) -> impl Iterator<Item = i32> {
+        gen move {
+            let mut iters: Vec<_> = sequences
+                .into_iter()
+                .map(|v| v.into_iter().peekable())
+                .collect();
+
+            loop {
+                // 找到当前所有迭代器中的最小值
+                let min_val = iters
+                    .iter_mut()
+                    .filter_map(|iter| iter.peek().copied())
+                    .min();
+
+                if let Some(min) = min_val {
+                    // 从所有包含最小值的迭代器中取出该值
+                    for iter in &mut iters {
+                        if iter.peek() == Some(&min) {
+                            iter.next();
+                        }
+                    }
+                    yield min;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
+    /// `gen` block: 已排序序列去重
+    ///
+    /// 等价于 `SequenceDeduplicator` 的手动 Iterator 实现，
+    /// 但 `gen` block 的源码更直观。
+    pub fn gen_dedup_sorted(data: Vec<i32>) -> impl Iterator<Item = i32> {
+        gen move {
+            let mut iter = data.into_iter().peekable();
+            while let Some(current) = iter.next() {
+                // 跳过重复值
+                while iter.peek() == Some(&current) {
+                    iter.next();
+                }
+                yield current;
+            }
+        }
+    }
+
+    /// `gen` block: 滑动窗口求和
+    ///
+    /// 返回输入数组中每个大小为 `window_size` 的连续窗口的和。
+    pub fn gen_window_sum(data: Vec<i32>, window_size: usize) -> impl Iterator<Item = i32> {
+        gen move {
+            if window_size == 0 || data.len() < window_size {
+                return;
+            }
+            for i in 0..=data.len() - window_size {
+                let sum: i32 = data[i..i + window_size].iter().sum();
+                yield sum;
             }
         }
     }
@@ -404,11 +478,26 @@ mod real_rust_195_tests {
 
     #[test]
     fn test_classify_data_with_guard() {
-        assert_eq!(RealRust195Features::classify_data_with_guard(Some(&[0xFF, 0xAB])), "header marker");
-        assert_eq!(RealRust195Features::classify_data_with_guard(Some(&[0xAB, 0x00])), "null terminated");
-        assert_eq!(RealRust195Features::classify_data_with_guard(Some(&[0u8; 200])), "large payload");
-        assert_eq!(RealRust195Features::classify_data_with_guard(Some(&[1, 2, 3])), "generic data");
-        assert_eq!(RealRust195Features::classify_data_with_guard(None), "no data");
+        assert_eq!(
+            RealRust195Features::classify_data_with_guard(Some(&[0xFF, 0xAB])),
+            "header marker"
+        );
+        assert_eq!(
+            RealRust195Features::classify_data_with_guard(Some(&[0xAB, 0x00])),
+            "null terminated"
+        );
+        assert_eq!(
+            RealRust195Features::classify_data_with_guard(Some(&[0u8; 200])),
+            "large payload"
+        );
+        assert_eq!(
+            RealRust195Features::classify_data_with_guard(Some(&[1, 2, 3])),
+            "generic data"
+        );
+        assert_eq!(
+            RealRust195Features::classify_data_with_guard(None),
+            "no data"
+        );
     }
 
     #[test]
@@ -416,5 +505,47 @@ mod real_rust_195_tests {
         let items = vec![1, 2, 3, 4, 5, 6];
         let evens: Vec<i32> = RealRust195Features::gen_even_numbers(&items).collect();
         assert_eq!(evens, vec![2, 4, 6]);
+    }
+
+    #[test]
+    fn test_gen_merge_sorted() {
+        let a = vec![1, 3, 5];
+        let b = vec![2, 4, 6];
+        let c = vec![0, 7];
+        let merged: Vec<i32> =
+            RealRust195Features::gen_merge_sorted(vec![a, b, c]).collect();
+        assert_eq!(merged, vec![0, 1, 2, 3, 4, 5, 6, 7]);
+    }
+
+    #[test]
+    fn test_gen_merge_sorted_empty() {
+        let merged: Vec<i32> = RealRust195Features::gen_merge_sorted(vec![]).collect();
+        assert!(merged.is_empty());
+    }
+
+    #[test]
+    fn test_gen_dedup_sorted() {
+        let data = vec![1, 1, 2, 2, 2, 3, 3, 4, 5, 5];
+        let deduped: Vec<i32> = RealRust195Features::gen_dedup_sorted(data).collect();
+        assert_eq!(deduped, vec![1, 2, 3, 4, 5]);
+    }
+
+    #[test]
+    fn test_gen_dedup_sorted_empty() {
+        let deduped: Vec<i32> = RealRust195Features::gen_dedup_sorted(vec![]).collect();
+        assert!(deduped.is_empty());
+    }
+
+    #[test]
+    fn test_gen_window_sum() {
+        let data = vec![1, 2, 3, 4, 5];
+        let sums: Vec<i32> = RealRust195Features::gen_window_sum(data, 3).collect();
+        assert_eq!(sums, vec![6, 9, 12]); // 1+2+3, 2+3+4, 3+4+5
+    }
+
+    #[test]
+    fn test_gen_window_sum_empty() {
+        let sums: Vec<i32> = RealRust195Features::gen_window_sum(vec![], 3).collect();
+        assert!(sums.is_empty());
     }
 }
