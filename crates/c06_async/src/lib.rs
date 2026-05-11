@@ -295,6 +295,7 @@ pub mod async_closures_preview;
 pub mod async_ecosystem_comprehensive;
 /// Rust 1.94 异步特性
 pub mod rust_194_features;
+pub mod rust_193_features;
 pub mod rust_195_features; // Rust 1.95 特性 (async 场景 if let guards)
 pub mod rust_196_features;
 pub mod rust_192_features;

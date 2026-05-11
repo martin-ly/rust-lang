@@ -335,3 +335,86 @@ mod tests {
         assert_eq!(vec, vec![0, 10, 20]);
     }
 }
+
+
+// ============================================================================
+// Real Rust 1.95 Features — Algorithms, data structures
+// ============================================================================
+
+use std::ops::ControlFlow;
+
+/// # Real Rust 1.95 Features
+///
+/// Demonstrates `gen` blocks, `ControlFlow::map`, and `if let` guards.
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// Search using `ControlFlow::Break` and `map` for early-exit
+    pub fn search_with_control_flow(items: &[i32], target: i32) -> ControlFlow<i32, usize> {
+        let flow = items.iter().try_fold((), |_acc, &item| {
+            if item == target {
+                ControlFlow::Break(item)
+            } else {
+                ControlFlow::Continue(())
+            }
+        });
+        flow.map(|()| items.len())
+    }
+
+    /// Classify data using `if let` guard on `Option<&[u8]>`
+    pub fn classify_data_with_guard(data: Option<&[u8]>) -> &'static str {
+        match data {
+            Some(bytes) if let Some(&first) = bytes.first() && first == 0xFF => "header marker",
+            Some(bytes) if let Some(&last) = bytes.last() && last == 0x00 => "null terminated",
+            Some(bytes) if bytes.len() > 100 => "large payload",
+            Some(_) => "generic data",
+            None => "no data",
+        }
+    }
+
+    /// `gen` block yielding even numbers from a slice
+    pub fn gen_even_numbers(items: &[i32]) -> impl Iterator<Item = i32> + '_ {
+        gen {
+            for &item in items {
+                if item % 2 == 0 {
+                    yield item;
+                }
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_search_with_control_flow() {
+        let items = vec![10, 20, 30, 40, 50];
+        let found = RealRust195Features::search_with_control_flow(&items, 30);
+        assert!(found.is_break());
+        assert_eq!(found.break_value(), Some(30));
+
+        let missing = RealRust195Features::search_with_control_flow(&items, 99);
+        assert!(missing.is_continue());
+        if let ControlFlow::Continue(len) = missing {
+            assert_eq!(len, 5);
+        }
+    }
+
+    #[test]
+    fn test_classify_data_with_guard() {
+        assert_eq!(RealRust195Features::classify_data_with_guard(Some(&[0xFF, 0xAB])), "header marker");
+        assert_eq!(RealRust195Features::classify_data_with_guard(Some(&[0xAB, 0x00])), "null terminated");
+        assert_eq!(RealRust195Features::classify_data_with_guard(Some(&[0u8; 200])), "large payload");
+        assert_eq!(RealRust195Features::classify_data_with_guard(Some(&[1, 2, 3])), "generic data");
+        assert_eq!(RealRust195Features::classify_data_with_guard(None), "no data");
+    }
+
+    #[test]
+    fn test_gen_even_numbers() {
+        let items = vec![1, 2, 3, 4, 5, 6];
+        let evens: Vec<i32> = RealRust195Features::gen_even_numbers(&items).collect();
+        assert_eq!(evens, vec![2, 4, 6]);
+    }
+}

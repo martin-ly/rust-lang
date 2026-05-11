@@ -467,3 +467,66 @@ mod tests {
         // 只要不出错即通过
     }
 }
+
+
+// ============================================================================
+// Real Rust 1.95 Features — Concurrency, threads, lock-free
+// ============================================================================
+
+/// # Real Rust 1.95 Features
+///
+/// Demonstrates `&raw const`, `unsafe_op_in_unsafe_fn`, and `const {}` blocks.
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// `const {}` block to compute alignment at compile time
+    pub fn const_block_align_demo() -> usize {
+        const { std::mem::align_of::<usize>() }
+    }
+
+    /// Safe raw reference to a packed struct field using `&raw const`
+    pub fn safe_raw_ref_in_packed() -> u32 {
+        #[repr(C, packed)]
+        struct Packed {
+            a: u8,
+            b: u32,
+        }
+
+        let p = Packed { a: 1, b: 0xDEADBEEF };
+        // SAFETY: &raw const avoids creating an intermediate unaligned reference
+        let raw = &raw const p.b;
+        // SAFETY: read via raw pointer from a valid local
+        unsafe { std::ptr::read_unaligned(raw) }
+    }
+
+    /// Rust 2024 `unsafe_op_in_unsafe_fn` lint demonstration
+    ///
+    /// Even inside an `unsafe fn`, `unsafe` operations must be wrapped
+    /// in explicit `unsafe {}` blocks.
+    pub unsafe fn rust_2024_atomic_unsafe_fn(counter: *mut std::sync::atomic::AtomicU32) -> u32 {
+        unsafe { (*counter).fetch_add(1, std::sync::atomic::Ordering::Relaxed) }
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_const_block_align() {
+        assert_eq!(RealRust195Features::const_block_align_demo(), std::mem::align_of::<usize>());
+    }
+
+    #[test]
+    fn test_safe_raw_ref_in_packed() {
+        assert_eq!(RealRust195Features::safe_raw_ref_in_packed(), 0xDEADBEEF);
+    }
+
+    #[test]
+    fn test_rust_2024_atomic_unsafe_fn() {
+        let mut value = std::sync::atomic::AtomicU32::new(10);
+        let result = unsafe { RealRust195Features::rust_2024_atomic_unsafe_fn(&mut value) };
+        assert_eq!(result, 10);
+        assert_eq!(value.load(std::sync::atomic::Ordering::Relaxed), 11);
+    }
+}

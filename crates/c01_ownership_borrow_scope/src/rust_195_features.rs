@@ -654,3 +654,62 @@ mod tests {
         assert!(layout.size() >= 8);
     }
 }
+
+
+// ============================================================================
+// Real Rust 1.95 Features — Ownership, Borrowing, Memory Safety
+// ============================================================================
+
+/// Demonstrates real Rust 1.95 features related to ownership and memory safety.
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// `const {}` blocks in more positions (Rust 1.95)
+    pub fn const_block_size_demo() -> usize {
+        const { std::mem::size_of::<u64>() }
+    }
+
+    /// `&raw const` operator — safe raw pointer from reference (Rust 1.95)
+    pub fn safe_raw_ref_demo(value: &u32) -> *const u32 {
+        &raw const *value
+    }
+
+    /// `unsafe_op_in_unsafe_fn` lint (Rust 2024 / 1.95)
+    ///
+    /// In Rust 2024 edition, unsafe operations inside `unsafe fn`
+    /// require explicit `unsafe {}` blocks.
+    pub unsafe fn rust_2024_unsafe_fn(ptr: *const u32) -> u32 {
+        // Explicit unsafe block required inside unsafe fn in Rust 2024
+        unsafe { *ptr }
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_const_block_size_demo() {
+        assert_eq!(RealRust195Features::const_block_size_demo(), 8);
+    }
+
+    #[test]
+    fn test_safe_raw_ref_demo() {
+        let value: u32 = 42;
+        let ptr = RealRust195Features::safe_raw_ref_demo(&value);
+        assert!(!ptr.is_null());
+        // SAFETY: pointer derived from a live local variable
+        unsafe {
+            assert_eq!(*ptr, 42);
+        }
+    }
+
+    #[test]
+    fn test_rust_2024_unsafe_fn() {
+        let value: u32 = 99;
+        // SAFETY: pointer derived from a live local variable
+        unsafe {
+            assert_eq!(RealRust195Features::rust_2024_unsafe_fn(&raw const value), 99);
+        }
+    }
+}

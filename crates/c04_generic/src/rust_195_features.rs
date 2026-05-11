@@ -139,3 +139,49 @@ mod tests {
         assert_eq!(filtered, vec![10, 20]);
     }
 }
+
+
+// ============================================================================
+// Real Rust 1.95 Features — Generics, Traits
+// ============================================================================
+
+/// Demonstrates real Rust 1.95 features related to generics and traits.
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// `AsyncFn` trait bounds with async closure (Rust 1.95)
+    pub async fn apply_async_generic<F>(f: F, input: i32) -> i32
+    where
+        F: AsyncFn(i32) -> i32,
+    {
+        f(input).await
+    }
+
+    /// `gen` blocks — lazy iterator generation (Rust 1.95 nightly)
+    pub fn gen_block_demo() -> impl Iterator<Item = i32> {
+        gen {
+            for i in 0..5 {
+                yield i * 2;
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_apply_async_generic() {
+        let result = futures::executor::block_on(
+            RealRust195Features::apply_async_generic(async |x| x * 2, 21)
+        );
+        assert_eq!(result, 42);
+    }
+
+    #[test]
+    fn test_gen_block_demo() {
+        let values: Vec<i32> = RealRust195Features::gen_block_demo().collect();
+        assert_eq!(values, vec![0, 2, 4, 6, 8]);
+    }
+}

@@ -530,3 +530,53 @@ mod tests {
         assert!(guide.contains("task::Builder"));
     }
 }
+
+
+// ============================================================================
+// Real Rust 1.95 Features — Async programming
+// ============================================================================
+
+/// # Real Rust 1.95 Features
+///
+/// Demonstrates `AsyncFn`, `AsyncFnMut`, and async closures.
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// Apply an async closure using the `AsyncFn` trait bound
+    pub async fn apply_async_fn<F>(f: F, input: i32) -> i32
+    where
+        F: AsyncFn(i32) -> i32,
+    {
+        f(input).await
+    }
+
+    /// Map over a vector using an `AsyncFnMut` closure
+    pub async fn map_async_closure<F>(items: Vec<i32>, mut f: F) -> Vec<i32>
+    where
+        F: AsyncFnMut(i32) -> i32,
+    {
+        let mut results = Vec::with_capacity(items.len());
+        for item in items {
+            results.push(f(item).await);
+        }
+        results
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[tokio::test]
+    async fn test_apply_async_fn() {
+        let result = RealRust195Features::apply_async_fn(async |x| x * 2, 21).await;
+        assert_eq!(result, 42);
+    }
+
+    #[tokio::test]
+    async fn test_map_async_closure() {
+        let items = vec![1, 2, 3, 4];
+        let result = RealRust195Features::map_async_closure(items, async |x| x * x).await;
+        assert_eq!(result, vec![1, 4, 9, 16]);
+    }
+}

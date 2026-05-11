@@ -65,6 +65,7 @@ pub use error::UnifiedError as CommonErrorAlias;
 
 // Other public modules
 pub mod arena;
+pub mod rust_193_features;
 pub mod traits;
 pub mod types;
 pub mod utils;

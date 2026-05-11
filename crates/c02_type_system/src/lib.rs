@@ -22,6 +22,7 @@ pub mod archive;
 
 // 导出 Rust 1.94 特性模块
 pub mod rust_194_features;
+pub mod rust_193_features;
 
 // 导出 Rust 1.95/1.96 特性模块
 pub mod rust_195_features;

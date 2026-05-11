@@ -488,3 +488,55 @@ mod tests {
         );
     }
 }
+
+
+// ============================================================================
+// Real Rust 1.95 Features — Control Flow, Functions
+// ============================================================================
+
+/// Demonstrates real Rust 1.95 features related to control flow and functions.
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// `if let` guards in match arms (Rust 1.95)
+    pub fn parse_with_if_let_guard(input: Result<Option<i32>, &str>) -> i32 {
+        match input {
+            Ok(Some(n)) if n > 0 => n,
+            Ok(Some(n)) if n == 0 => 0,
+            Ok(Some(_)) => -1,
+            Ok(None) => 0,
+            Err(msg) if msg.contains("empty") => -100,
+            Err(_) => -1,
+        }
+    }
+
+    /// `ControlFlow::map_break` (Rust 1.95)
+    pub fn control_flow_transform() -> ControlFlow<i32, ()> {
+        let flow: ControlFlow<i32, ()> = ControlFlow::Break(42);
+        flow.map_break(|e: i32| e * 2)
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_parse_with_if_let_guard() {
+        assert_eq!(RealRust195Features::parse_with_if_let_guard(Ok(Some(10))), 10);
+        assert_eq!(RealRust195Features::parse_with_if_let_guard(Ok(Some(0))), 0);
+        assert_eq!(RealRust195Features::parse_with_if_let_guard(Ok(Some(-5))), -1);
+        assert_eq!(RealRust195Features::parse_with_if_let_guard(Ok(None)), 0);
+        assert_eq!(
+            RealRust195Features::parse_with_if_let_guard(Err("empty input")),
+            -100
+        );
+        assert_eq!(RealRust195Features::parse_with_if_let_guard(Err("other")), -1);
+    }
+
+    #[test]
+    fn test_control_flow_transform() {
+        let result = RealRust195Features::control_flow_transform();
+        assert!(matches!(result, ControlFlow::Break(84)));
+    }
+}

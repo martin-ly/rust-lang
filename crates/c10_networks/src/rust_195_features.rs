@@ -287,3 +287,77 @@ mod tests {
         const { assert!(NetworkCfgSelectExamples::MAX_CONNECTIONS_RECOMMENDED > 0) };
     }
 }
+
+
+// ============================================================================
+// 5. RealRust195Features — C string literals, if let guards, const blocks
+// ============================================================================
+
+use std::ffi::CStr;
+
+/// # 真实 Rust 1.95 特性演示
+///
+/// 展示 `c"..."` C 字符串字面量、`if let` guards 以及 `const {}` 块。
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// 使用 `c"HTTP/1.1"` 表示协议版本
+    pub fn protocol_cstr_literal() -> &'static CStr {
+        c"HTTP/1.1"
+    }
+
+    /// 使用 `if let` guard 解析数据包
+    ///
+    /// 在 match 臂中直接解构 `Option` 并检查条件。
+    pub fn parse_packet_with_guard(packet: Option<Vec<u8>>) -> Result<usize, &'static str> {
+        match packet {
+            Some(data)
+                if let Some(first) = data.first()
+                    && *first == 0xAB =>
+            {
+                Ok(data.len())
+            }
+            Some(_) => Err("invalid packet header"),
+            None => Err("no packet"),
+        }
+    }
+
+    /// 使用 `const {}` 计算协议头大小
+    pub const fn const_block_header_size() -> usize {
+        const { 4 + 2 + 2 }
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_protocol_cstr_literal() {
+        assert_eq!(
+            RealRust195Features::protocol_cstr_literal().to_str(),
+            Ok("HTTP/1.1")
+        );
+    }
+
+    #[test]
+    fn test_parse_packet_with_guard() {
+        assert_eq!(
+            RealRust195Features::parse_packet_with_guard(Some(vec![0xAB, 0x01, 0x02])),
+            Ok(3)
+        );
+        assert_eq!(
+            RealRust195Features::parse_packet_with_guard(Some(vec![0x00])),
+            Err("invalid packet header")
+        );
+        assert_eq!(
+            RealRust195Features::parse_packet_with_guard(None),
+            Err("no packet")
+        );
+    }
+
+    #[test]
+    fn test_const_block_header_size() {
+        const { assert!(RealRust195Features::const_block_header_size() == 8) };
+    }
+}

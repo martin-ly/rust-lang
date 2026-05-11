@@ -198,3 +198,65 @@ mod tests {
         const { assert!(ProcessCfgSelectExamples::MAX_PROCESSES_RECOMMENDED > 0) };
     }
 }
+
+
+// ============================================================================
+// Real Rust 1.95 Features — Process, FFI, performance
+// ============================================================================
+
+use std::ffi::CStr;
+
+/// # Real Rust 1.95 Features
+///
+/// Demonstrates `c"..."` C strings, `const {}`, and `if let` guards.
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// C string literal demonstration
+    pub fn c_string_literal_demo() -> &'static CStr {
+        c"hello"
+    }
+
+    /// `const {}` block to compute buffer size at compile time
+    pub fn const_block_buffer_size() -> usize {
+        const { 1024 * std::mem::size_of::<u64>() }
+    }
+
+    /// Parse a protocol string using `if let` guard
+    pub fn parse_protocol_with_guard(input: &str) -> &'static str {
+        match input.split_once(':') {
+            Some(("http", port_str)) if let Ok(80) = port_str.parse::<u16>() => "HTTP standard",
+            Some(("https", port_str)) if let Ok(443) = port_str.parse::<u16>() => "HTTPS standard",
+            Some(("http" | "https", _)) => "HTTP variant",
+            Some(("ftp", port_str)) if let Ok(21) = port_str.parse::<u16>() => "FTP standard",
+            Some(("ftp", _)) => "FTP variant",
+            _ => "unknown protocol",
+        }
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_c_string_literal() {
+        let cstr = RealRust195Features::c_string_literal_demo();
+        assert_eq!(cstr, CStr::from_bytes_with_nul(b"hello\0").unwrap());
+    }
+
+    #[test]
+    fn test_const_block_buffer_size() {
+        assert_eq!(RealRust195Features::const_block_buffer_size(), 1024 * 8);
+    }
+
+    #[test]
+    fn test_parse_protocol_with_guard() {
+        assert_eq!(RealRust195Features::parse_protocol_with_guard("http:80"), "HTTP standard");
+        assert_eq!(RealRust195Features::parse_protocol_with_guard("https:443"), "HTTPS standard");
+        assert_eq!(RealRust195Features::parse_protocol_with_guard("http:8080"), "HTTP variant");
+        assert_eq!(RealRust195Features::parse_protocol_with_guard("ftp:21"), "FTP standard");
+        assert_eq!(RealRust195Features::parse_protocol_with_guard("ftp:1000"), "FTP variant");
+        assert_eq!(RealRust195Features::parse_protocol_with_guard("ssh:22"), "unknown protocol");
+    }
+}

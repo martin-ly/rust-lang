@@ -638,3 +638,64 @@ mod tests {
         CollectionMutMethodsExamples::comprehensive_build_example();
     }
 }
+
+
+// ============================================================================
+// Real Rust 1.95 Features — Type System, Pattern Matching
+// ============================================================================
+
+use std::ops::ControlFlow;
+
+/// Demonstrates real Rust 1.95 features related to type system and pattern matching.
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// `if let` guards in match arms (Rust 1.95)
+    pub fn classify_with_if_let_guard(input: Option<String>) -> &'static str {
+        match input {
+            Some(s) if let Ok(n) = s.parse::<i32>() && n > 0 => "positive number",
+            Some(s) if let Ok(n) = s.parse::<i32>() && n < 0 => "negative number",
+            Some(s) if s.parse::<i32>().is_ok() => "zero",
+            Some(_) => "not a number",
+            None => "missing",
+        }
+    }
+
+    /// `ControlFlow::map_break` (Rust 1.95)
+    pub fn control_flow_map_demo() -> ControlFlow<i32, ()> {
+        let flow: ControlFlow<i32, ()> = ControlFlow::Break(21);
+        flow.map_break(|e| e * 2)
+    }
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_classify_with_if_let_guard() {
+        assert_eq!(
+            RealRust195Features::classify_with_if_let_guard(Some("42".to_string())),
+            "positive number"
+        );
+        assert_eq!(
+            RealRust195Features::classify_with_if_let_guard(Some("-5".to_string())),
+            "negative number"
+        );
+        assert_eq!(
+            RealRust195Features::classify_with_if_let_guard(Some("0".to_string())),
+            "zero"
+        );
+        assert_eq!(
+            RealRust195Features::classify_with_if_let_guard(Some("abc".to_string())),
+            "not a number"
+        );
+        assert_eq!(RealRust195Features::classify_with_if_let_guard(None), "missing");
+    }
+
+    #[test]
+    fn test_control_flow_map_demo() {
+        let result = RealRust195Features::control_flow_map_demo();
+        assert!(matches!(result, ControlFlow::Break(42)));
+    }
+}

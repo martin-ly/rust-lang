@@ -23,6 +23,7 @@ pub mod error;
 pub mod control_flow_patterns;
 pub mod if_let_guards_deep_dive;
 pub mod rust_194_features; // Rust 1.94 特性
+pub mod rust_193_features;
 pub mod rust_195_features; // Rust 1.95 特性 (if let guards, bool TryFrom)
 pub mod rust_196_features; // Rust 2024 Edition let chains
 pub mod rust_192_features;

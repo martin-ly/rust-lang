@@ -209,3 +209,58 @@ mod tests {
         assert!(!PatternColdPathExamples::validate_strategy("unknown"));
     }
 }
+
+
+// ============================================================================
+// 5. RealRust195Features — AsyncFn strategy pattern + ControlFlow::map_continue
+// ============================================================================
+
+use std::ops::ControlFlow;
+
+/// # 真实 Rust 1.95 特性演示
+///
+/// 展示 `AsyncFn` 在策略模式中的应用以及 `ControlFlow::map_continue` 的访问者模式。
+pub struct RealRust195Features;
+
+impl RealRust195Features {
+    /// 使用 `AsyncFn` 实现异步策略模式
+    ///
+    /// `async |x| x * 2` 闭包实现了 `AsyncFn` trait，可作为策略注入。
+    pub async fn async_strategy_pattern() -> i32 {
+        run_strategy(async |x: i32| -> i32 { x * 2 }, 21).await
+    }
+
+    /// 使用 `ControlFlow::map_continue` 实现访问者模式
+    ///
+    /// 在遍历过程中对 `Continue` 值进行映射转换。
+    pub fn control_flow_visitor() -> ControlFlow<&'static str, i32> {
+        let intermediate = ControlFlow::Continue(5);
+        intermediate.map_continue(|v| v + 10)
+    }
+}
+
+async fn run_strategy<F>(strategy: F, input: i32) -> i32
+where
+    F: AsyncFn(i32) -> i32,
+{
+    strategy(input).await
+}
+
+#[cfg(test)]
+mod real_rust_195_tests {
+    use super::*;
+
+    #[test]
+    fn test_async_strategy_pattern() {
+        let result = futures::executor::block_on(RealRust195Features::async_strategy_pattern());
+        assert_eq!(result, 42);
+    }
+
+    #[test]
+    fn test_control_flow_visitor() {
+        assert_eq!(
+            RealRust195Features::control_flow_visitor(),
+            ControlFlow::Continue(15)
+        );
+    }
+}

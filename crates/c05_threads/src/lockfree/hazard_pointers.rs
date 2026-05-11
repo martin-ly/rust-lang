@@ -216,7 +216,7 @@ impl ThreadLocalHP {
     pub fn register(&self) {
         for hp in &self.hazards {
             self.registry
-                .register(hp as *const HazardPointer as *mut HazardPointer);
+                .register(&raw const *hp as *mut HazardPointer);
         }
     }
 
@@ -224,7 +224,7 @@ impl ThreadLocalHP {
     pub fn unregister(&self) {
         for hp in &self.hazards {
             self.registry
-                .unregister(hp as *const HazardPointer as *mut HazardPointer);
+                .unregister(&raw const *hp as *mut HazardPointer);
         }
     }
 }
