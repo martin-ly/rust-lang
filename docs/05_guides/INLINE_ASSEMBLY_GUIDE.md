@@ -567,6 +567,10 @@ unsafe {
 }
 ```
 
+> ⚠️ **警告**: 以下示例使用 `static mut` 仅为演示"忘记内存屏障"的错误。
+> `static mut` 在 Rust 2024 Edition 中引用已被禁止。
+> 即使配合内联汇编，也应优先使用 `AtomicU64` 或 `UnsafeCell`。
+
 ### 陷阱 3: 忘记内存屏障
 
 ```rust

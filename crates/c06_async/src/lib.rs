@@ -297,6 +297,14 @@ pub mod async_ecosystem_comprehensive;
 pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95 特性 (async 场景 if let guards)
 pub mod rust_196_features;
+pub mod rust_192_features;
+pub mod rust_191_features;
+pub mod rust_190_features;
+pub mod rust_189_features;
+pub mod rust_188_features;
+pub mod rust_187_features;
+pub mod rust_186_features;
+
 
 /// 异步运行时示例
 pub mod async_runtime_examples;

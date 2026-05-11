@@ -449,28 +449,19 @@ for h in handles {
 }
 ```
 
-### 示例 4: Once 初始化
+### 示例 4: OnceLock 初始化（Rust 1.70+ 推荐）
 
 ```rust
-use std::sync::Once;
+use std::sync::OnceLock;
 use std::thread;
 
-static INIT: Once = Once::new();
-static mut GLOBAL_DATA: Option<String> = None;
-
-fn init_global_data() {
-    unsafe {
-        GLOBAL_DATA = Some("Initialized".to_string());
-    }
-}
+static GLOBAL_DATA: OnceLock<String> = OnceLock::new();
 
 let mut handles = vec![];
 for _ in 0..5 {
     handles.push(thread::spawn(|| {
-        INIT.call_once(init_global_data);
-        unsafe {
-            println!("Data: {:?}", GLOBAL_DATA);
-        }
+        let data = GLOBAL_DATA.get_or_init(|| "Initialized".to_string());
+        println!("Data: {:?}", data);
     }));
 }
 

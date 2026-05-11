@@ -483,12 +483,12 @@ static CONFIG: LazyLock<(i32, i32)> = LazyLock::new(|| {
 });
 
 // 方案 2: 使用显式初始化而非 LazyLock
-static mut CONFIG: Option<(i32, i32)> = None;
+use std::sync::OnceLock;
+
+static CONFIG: OnceLock<(i32, i32)> = OnceLock::new();
 
 fn init_config() {
-    unsafe {
-        CONFIG = Some((42, 100));
-    }
+    CONFIG.get_or_init(|| (42, 100));
 }
 ```
 

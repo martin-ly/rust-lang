@@ -552,6 +552,10 @@ let my_box = MyBox::new(42);
 println!("{}", *my_box);
 ```
 
+> ⚠️ **警告**: `static mut` 在 Rust 2024 Edition 中引用已被禁止。
+> 本案例仅用于教学，演示无同步并发访问导致的 UB 本质。
+> 实际代码应使用 `AtomicI32` 或 `Mutex<u32>`。
+
 ### 案例 3: 数据竞争
 
 ```rust

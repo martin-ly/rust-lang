@@ -1,4 +1,4 @@
-//! # Common - Project Common Utilities Library
+﻿//! # Common - Project Common Utilities Library
 //!
 //! Provides unified error handling mechanism using trait-based design.
 //!
@@ -77,3 +77,4 @@ pub use types::{Id, NonEmptyVec, Pagination, Paginated, Timestamped, Version};
 
 // Re-export commonly used utility functions
 pub use utils::{format_duration, format_bytes, truncate_with_ellipsis, retry, Memoize, OnceGuard};
+

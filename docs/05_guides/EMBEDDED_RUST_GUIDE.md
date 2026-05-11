@@ -175,8 +175,10 @@ unsafe impl GlobalAlloc for EmbeddedAllocator {
 #[global_allocator]
 static ALLOCATOR: EmbeddedAllocator = EmbeddedAllocator;
 
-// 静态内存池
-static mut BUFFER: [u8; 1024] = [0; 1024];
+use core::cell::UnsafeCell;
+
+// 静态内存池（使用 UnsafeCell 替代 static mut）
+static BUFFER: UnsafeCell<[u8; 1024]> = UnsafeCell::new([0; 1024]);
 
 struct StaticPool {
     used: [bool; 32], // 32 个 32 字节的块
@@ -195,7 +197,7 @@ impl StaticPool {
                 for i in start..start + blocks_needed {
                     self.used[i] = true;
                 }
-                return Some(unsafe { &mut BUFFER[start * 32..start * 32 + size] });
+                return Some(unsafe { &mut (*BUFFER.get())[start * 32..start * 32 + size] });
             }
         }
         None
@@ -277,17 +279,21 @@ mod app {
 ### 1. 使用 `const` 进行编译时计算
 
 ```rust
+use core::cell::UnsafeCell;
+
 const BUFFER_SIZE: usize = 1024;
 const SAMPLE_RATE: u32 = 48_000;
 
-static mut BUFFER: [u8; BUFFER_SIZE] = [0; BUFFER_SIZE];
+static BUFFER: UnsafeCell<[u8; BUFFER_SIZE]> = UnsafeCell::new([0; BUFFER_SIZE]);
 ```
 
 ### 2. 避免动态分配（无堆环境）
 
 ```rust
-// 推荐：使用静态缓冲区
-static mut TX_BUFFER: [u8; 256] = [0; 256];
+use core::cell::UnsafeCell;
+
+// 推荐：使用静态缓冲区（UnsafeCell 封装）
+static TX_BUFFER: UnsafeCell<[u8; 256]> = UnsafeCell::new([0; 256]);
 
 // 不推荐（无堆环境）
 // let buffer = vec![0; 256];

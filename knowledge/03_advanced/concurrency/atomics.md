@@ -233,6 +233,9 @@ fn increment() {
 
 #### 2. Acquire / Release —— 成对使用
 
+> ⚠️ **注意**: 本示例使用 `static mut` 展示底层 Acquire/Release 的 happens-before 语义。
+> `static mut` 在 Rust 2024 Edition 中引用已被禁止。生产代码中，非原子数据应封装在 `UnsafeCell` 中，或使用 `Mutex` / `RwLock` 访问。
+
 **Acquire**（获取）用于**读**操作，**Release**（释放）用于**写**操作。它们共同建立 **happens-before** 关系。
 
 ```rust

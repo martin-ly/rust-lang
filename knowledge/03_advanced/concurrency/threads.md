@@ -564,6 +564,10 @@ async fn good_async_mutex() {
 
 ---
 
+> ⚠️ **警告**: `static mut` 在 Rust 2024 Edition 中引用已被禁止（`unsafe_code = "forbid"` 默认启用）。
+> 本反例仅用于展示数据竞争与 UB 的关系，现代 Rust 应使用 `AtomicUsize` 或 `Mutex<u32>`。
+> 仅在 `no_std` 嵌入式裸机场景中，才考虑使用 `UnsafeCell` 配合中断屏蔽。
+
 #### 反例 3: `static mut` — 未定义行为的地雷
 
 **错误代码**:

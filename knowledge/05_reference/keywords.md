@@ -405,11 +405,15 @@ const fn square(x: i32) -> i32 {
 静态生命周期变量，整个程序运行期间存在。
 
 ```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::cell::UnsafeCell;
+
 static GLOBAL_COUNTER: AtomicUsize = AtomicUsize::new(0);
 
-static mut MUTABLE_STATIC: i32 = 0;  // 需要 unsafe
+// 可变静态变量使用 UnsafeCell（替代 static mut）
+static MUTABLE_STATIC: UnsafeCell<i32> = UnsafeCell::new(0);
 unsafe {
-    MUTABLE_STATIC += 1;
+    *MUTABLE_STATIC.get() += 1;
 }
 ```
 
@@ -701,10 +705,11 @@ const ARRAY: [i32; 3] = [1, 2, 3];
 let ptr = ARRAY.as_ptr();
 // ARRAY 可能被内联到每个使用点，修改行为未定义
 
-// ✅ 使用 static 获取确定地址
-static mut ARRAY: [i32; 3] = [1, 2, 3];
+// ✅ 使用 static + UnsafeCell 获取确定地址
+use std::cell::UnsafeCell;
+static ARRAY: UnsafeCell<[i32; 3]> = UnsafeCell::new([1, 2, 3]);
 unsafe {
-    ARRAY[0] = 42; // 明确使用 unsafe
+    (*ARRAY.get())[0] = 42; // 明确使用 unsafe
 }
 ```
 

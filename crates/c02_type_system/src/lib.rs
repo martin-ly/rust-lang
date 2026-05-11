@@ -26,6 +26,14 @@ pub mod rust_194_features;
 // 导出 Rust 1.95/1.96 特性模块
 pub mod rust_195_features;
 pub mod rust_196_features;
+pub mod rust_192_features;
+pub mod rust_191_features;
+pub mod rust_190_features;
+pub mod rust_189_features;
+pub mod rust_188_features;
+pub mod rust_187_features;
+pub mod rust_186_features;
+
 pub mod rust_196_tuple_coercion; // Rust 1.95 特性 (core::range, RangeInclusive)
 
 // 重新导出Rust 1.94特性

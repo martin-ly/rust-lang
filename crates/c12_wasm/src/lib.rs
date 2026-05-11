@@ -1,4 +1,4 @@
-#![allow(clippy::type_complexity)]
+﻿#![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]
 //! # C12 WASM - 核心示例代码
@@ -33,6 +33,12 @@ pub mod component_model;
 pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95 特性 (WASM 场景)
 pub mod rust_196_features;
+pub mod rust_190_features;
+pub mod rust_189_features;
+pub mod rust_188_features;
+pub mod rust_187_features;
+pub mod rust_186_features;
+
 pub mod wasm_performance;
 pub mod wasi_migration; // WASI p1/p2 迁移指南 // WebAssembly Component Model (WASI Preview 2)
 

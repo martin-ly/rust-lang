@@ -178,6 +178,9 @@ unsafe {
 }
 ```
 
+> ⚠️ **注意**: 以下 `static mut` 示例仅用于展示 Miri 检测数据竞争的能力。
+> `static mut` 在 Rust 2024 Edition 中引用已被禁止。实际代码应使用 `AtomicI32` 或 `Mutex`。
+
 ### 数据竞争
 
 ```rust

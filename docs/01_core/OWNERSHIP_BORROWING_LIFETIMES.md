@@ -242,6 +242,9 @@ struct SelfReferentialFixed {
 
 ### 4.2 `static mut` 的废弃
 
+> ⚠️ **警告**: `static mut` 在 Rust 2024 Edition 中引用已被禁止（`unsafe_code = "forbid"` 默认启用）。
+> 以下 ❌ 示例仅用于说明该特性被废弃的原因。请始终使用右侧 ✅ 的替代方案。
+
 **Rust 2024 Edition 已禁止 `static mut` 引用**：
 
 ```rust
