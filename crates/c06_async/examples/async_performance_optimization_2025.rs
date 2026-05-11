@@ -431,20 +431,22 @@ impl SimdHasher {
         hash
     }
 
-    /// 向量化版本 - 一次处理 8 个字节
+    /// 向量化版本 - 编译器自动向量化优化
     ///
-    /// 在 Release 模式下,编译器可能会自动向量化
+    /// 在 Release 模式下,编译器可能会自动向量化循环。
+    /// 保持与标量版本完全相同的计算结果。
     #[inline(always)]
     pub fn hash_vectorized(data: &[u8]) -> u64 {
         let mut hash: u64 = 0;
 
-        // 处理 8 字节对齐的块
+        // 处理 8 字节对齐的块（编译器可能自动向量化此循环）
         let chunks = data.chunks_exact(8);
         let remainder = chunks.remainder();
 
         for chunk in chunks {
-            let value = u64::from_ne_bytes(chunk.try_into().unwrap());
-            hash = hash.wrapping_mul(31).wrapping_add(value);
+            for &byte in chunk {
+                hash = hash.wrapping_mul(31).wrapping_add(byte as u64);
+            }
         }
 
         // 处理剩余字节

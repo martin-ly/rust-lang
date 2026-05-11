@@ -464,44 +464,49 @@ mod tests {
         let cb = CircuitBreaker::new(2, Duration::from_millis(100));
 
         // 第一次失败
-        let result = cb.call(async { Err::<(), _>("error 1") }).await;
+        let result: Result<(), anyhow::Error> =
+            cb.call(async { Err(anyhow::anyhow!("error 1")) }).await;
         assert!(result.is_err());
 
         // 第二次失败，应该打开熔断器
-        let result = cb.call(async { Err::<(), _>("error 2") }).await;
+        let result: Result<(), anyhow::Error> =
+            cb.call(async { Err(anyhow::anyhow!("error 2")) }).await;
         assert!(result.is_err());
 
         // 熔断器应该打开
-        let result = cb.call(async { Ok::<(), _>(()) }).await;
+        let result: Result<(), anyhow::Error> = cb.call(async { Ok(()) }).await;
         assert!(result.is_err());
 
         // 等待恢复时间
         sleep(Duration::from_millis(150)).await;
 
         // 应该进入半开状态
-        let result = cb.call(async { Ok::<(), _>(()) }).await;
+        let result: Result<(), anyhow::Error> = cb.call(async { Ok(()) }).await;
         assert!(result.is_ok());
     }
 
     #[tokio::test]
     async fn test_retry_policy() {
-        let policy = RetryPolicy::new(2);
-        let mut attempts = 0;
+        let mut policy = RetryPolicy::new(2);
+        let attempts = std::sync::Arc::new(std::sync::atomic::AtomicUsize::new(0));
 
         let result = policy
-            .execute(|| {
-                attempts += 1;
-                Box::pin(async move {
-                    if attempts < 3 {
-                        Err::<(), _>("temporary error")
-                    } else {
-                        Ok(())
-                    }
-                })
+            .execute({
+                let attempts = attempts.clone();
+                move || {
+                    let n = attempts.fetch_add(1, std::sync::atomic::Ordering::SeqCst) + 1;
+                    Box::pin(async move {
+                        if n < 3 {
+                            Err::<(), _>(anyhow::anyhow!("temporary error"))
+                        } else {
+                            Ok(())
+                        }
+                    })
+                }
             })
             .await;
 
         assert!(result.is_ok());
-        assert_eq!(attempts, 3);
+        assert_eq!(attempts.load(std::sync::atomic::Ordering::SeqCst), 3);
     }
 }

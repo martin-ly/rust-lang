@@ -1276,7 +1276,7 @@ mod tests {
         let handle = tokio::spawn(async move {
             // 运行一小段时间以处理事件
             tokio::time::sleep(Duration::from_millis(100)).await;
-            reactor_clone.stop().await;
+            reactor_clone.shutdown().await;
         });
 
         // 启动 reactor（在后台运行）
@@ -1311,7 +1311,7 @@ mod tests {
 
         #[async_trait::async_trait]
         impl EventHandler for EventGeneratingHandler {
-            async fn handle(&self, event: &Event) -> HandleResult {
+            async fn handle(&self, _event: &Event) -> HandleResult {
                 let mut count = self.generated_count.lock().unwrap();
 
                 if *count == 0 {
@@ -1361,7 +1361,7 @@ mod tests {
         let reactor_clone = reactor.clone();
         let handle = tokio::spawn(async move {
             tokio::time::sleep(Duration::from_millis(100)).await;
-            reactor_clone.stop().await;
+            reactor_clone.shutdown().await;
         });
 
         let reactor_run = reactor.clone();

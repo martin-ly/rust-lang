@@ -379,7 +379,10 @@ impl<T: Send + 'static> AsyncStreamMerger<T> {
         ))
     }
 
-    async fn priority_merge(self, _priorities: Vec<usize>) -> Pin<Box<dyn Stream<Item = T> + Send>> {
+    async fn priority_merge(
+        self,
+        _priorities: Vec<usize>,
+    ) -> Pin<Box<dyn Stream<Item = T> + Send>> {
         // 简化实现：使用轮询
         self.round_robin_merge().await
     }
@@ -922,6 +925,7 @@ mod tests {
         assert!(result.is_none()); // 窗口未满，不应返回结果
 
         // 填充窗口
+        let mut last_result = None;
         for i in 1..5 {
             let event = StreamEvent {
                 id: i,
@@ -929,12 +933,12 @@ mod tests {
                 data: "test".to_string(),
                 event_type: EventType::Data,
             };
-            aggregator.process_item(event).await;
+            last_result = aggregator.process_item(event).await;
         }
 
-        let result = aggregator.force_flush().await;
-        assert!(result.is_some());
-        assert_eq!(result.unwrap(), 10 + 1 + 2 + 3 + 4);
+        // 第5个 item (i=4) 应触发窗口刷新
+        assert!(last_result.is_some());
+        assert_eq!(last_result.unwrap(), 10 + 1 + 2 + 3 + 4);
     }
 
     #[tokio::test]
