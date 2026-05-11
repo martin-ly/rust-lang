@@ -58,37 +58,37 @@
 │   【支柱 1: 公理判定系统】                                                    │
 │   ┌─────────────────────────────────────────────────────────────────────┐   │
 │   │  formal_methods/              type_theory/                          │   │
-│   │  ├── ownership_model.md       ├── type_system_foundations.md       │   │
-│   │  ├── borrow_checker_proof.md  ├── trait_system_formalization.md    │   │
-│   │  ├── lifetime_formalization.md├── lifetime_formalization.md        │   │
-│   │  ├── async_state_machine.md   ├── variance_theory.md               │   │
-│   │  ├── pin_self_referential.md  └── advanced_types.md                │   │
-│   │  └── send_sync_formalization.md                                    │   │
-│   │                                                                    │   │
-│   │  交叉: 生命周期在 formal_methods 和 type_theory 双重定义             │   │
-│   │  引用: 六篇并表 ↔ PROOF_INDEX ↔ CORE_THEOREMS_FULL_PROOFS          │   │
+│   │  ├── ownership_model.md       ├── type_system_foundations.md        │   │
+│   │  ├── borrow_checker_proof.md  ├── trait_system_formalization.md     │   │
+│   │  ├── lifetime_formalization.md├── lifetime_formalization.md         │   │
+│   │  ├── async_state_machine.md   ├── variance_theory.md                │   │
+│   │  ├── pin_self_referential.md  └── advanced_types.md                 │   │
+│   │  └── send_sync_formalization.md                                     │   │
+│   │                                                                     │   │
+│   │  交叉: 生命周期在 formal_methods 和 type_theory 双重定义              │   │
+│   │  引用: 六篇并表 ↔ PROOF_INDEX ↔ CORE_THEOREMS_FULL_PROOFS            │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
 │                              ↕ ↕ ↕                                          │
-│   【支柱 2: 语言表达力】                      【支柱 3: 组件组合法则】          │
-│   ┌─────────────────────────┐              ┌─────────────────────────┐     │
+│   【支柱 2: 语言表达力】                      【支柱 3: 组件组合法则】         │
+│   ┌─────────────────────────┐              ┌─────────────────────────┐      │
 │   │ software_design_theory/ │◄────────────►│ 04_compositional_engineering/│ │
 │   │ ├── 01_design_patterns  │              │ ├── 01_formal_composition.md   │ │
 │   │ ├── 02_workflow_models  │              │ ├── 02_effectiveness_proofs.md │ │
 │   │ ├── 03_execution_models │              │ └── 03_integration_theory.md   │ │
 │   │ └── 05_boundary_system  │              └─────────────────────────┘     │
-│   └─────────────────────────┘                                              │
+│   └─────────────────────────┘                                               │
 │                              ↕ ↕ ↕                                          │
 │   【交叉层: 论证与框架】                                                      │
 │   ┌─────────────────────────────────────────────────────────────────────┐   │
 │   │ 00_COMPREHENSIVE_SUMMARY • ARGUMENTATION_CHAIN_AND_FLOW             │   │
 │   │ HIERARCHICAL_MAPPING_AND_SUMMARY • FORMAL_PROOF_SYSTEM_GUIDE        │   │
-│   │ PROOF_INDEX • CROSS_REFERENCE_INDEX (本文件)                        │   │
+│   │ PROOF_INDEX • CROSS_REFERENCE_INDEX (本文件)                         │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
 │                              ↕ ↕ ↕                                          │
 │   【应用层: 速查与指南】                                                      │
 │   ┌─────────────────────────────────────────────────────────────────────┐   │
 │   │ 02_reference/quick_reference/ • 05_guides/                          │   │
-│   │ 20个速查卡 ↔ 研究笔记 ↔ 形式化定义                                   │   │
+│   │ 20个速查卡 ↔ 研究笔记 ↔ 形式化定义                                    │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -114,30 +114,30 @@
 
 | formal_methods 文档 | 正向链接 → | ← 反向链接来源 |
 | :--- | :--- | :--- |
-| [ownership_model](./formal_methods/ownership_model.md) | → [type_system_foundations](./type_theory/type_system_foundations.md) 定理T3<br>→ [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 借用规则前提<br>→ [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) T-OW2证明 | ← [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 所有权规则引用<br>← [software_design_theory/01_design_patterns](./software_design_theory/01_design_patterns_formal/README.md) 各模式引用<br>← [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) CE-T1依赖 |
-| [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) | → [ownership_model](./formal_methods/ownership_model.md) 规则1-3前提<br>→ [lifetime_formalization](./formal_methods/lifetime_formalization.md) 生命周期关联<br>→ [PROOF_INDEX](./PROOF_INDEX.md) T-BR1索引 | ← [ownership_model](./formal_methods/ownership_model.md) 控制流A-CF1<br>← [type_system_foundations](./type_theory/type_system_foundations.md) 类型保持性引用<br>← [async_state_machine](./formal_methods/async_state_machine.md) 借用检查衔接 |
-| [lifetime_formalization](./formal_methods/lifetime_formalization.md) | → [type_theory/lifetime_formalization](./type_theory/lifetime_formalization.md) 理论对应<br>→ [variance_theory](./type_theory/variance_theory.md) 型变组合<br>→ [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) 证明引用 | ← [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 生命周期检查<br>← [trait_system_formalization](./type_theory/trait_system_formalization.md) 生命周期约束<br>← [async_state_machine](./formal_methods/async_state_machine.md) 'static生命周期 |
-| [async_state_machine](./formal_methods/async_state_machine.md) | → [pin_self_referential](./formal_methods/pin_self_referential.md) Pin依赖<br>→ [send_sync_formalization](./formal_methods/send_sync_formalization.md) Send/Sync要求<br>→ [software_design_theory/03_execution_models](./software_design_theory/03_execution_models/02_async.md) 执行模型 | ← [pin_self_referential](./formal_methods/pin_self_referential.md) Future+Pin组合<br>← [send_sync_formalization](./formal_methods/send_sync_formalization.md) 跨线程spawn<br>← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) 实践指南 |
-| [pin_self_referential](./formal_methods/pin_self_referential.md) | → [async_state_machine](./formal_methods/async_state_machine.md) 自引用Future<br>→ [type_theory/advanced_types](./type_theory/advanced_types.md) PhantomData<br>→ [PROOF_INDEX](./PROOF_INDEX.md) 证明引用 | ← [async_state_machine](./formal_methods/async_state_machine.md) Pin使用场景<br>← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) Pin实践<br>← [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) 安全机制 |
-| [send_sync_formalization](./formal_methods/send_sync_formalization.md) | → [async_state_machine](./formal_methods/async_state_machine.md) 跨线程执行<br>→ [software_design_theory/06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md) 并发选型<br>→ [PROOF_INDEX](./PROOF_INDEX.md) 证明索引 | ← [async_state_machine](./formal_methods/async_state_machine.md) Send要求<br>← [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) CHAN/MUTEX<br>← [05_guides/THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) 并发指南 |
+| [ownership_model](./formal_methods/ownership_model.md) | → [type_system_foundations](./type_theory/type_system_foundations.md) 定理T3→ [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 借用规则前提→ [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) T-OW2证明 | ← [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 所有权规则引用← [software_design_theory/01_design_patterns](./software_design_theory/01_design_patterns_formal/README.md) 各模式引用← [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) CE-T1依赖 |
+| [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) | → [ownership_model](./formal_methods/ownership_model.md) 规则1-3前提→ [lifetime_formalization](./formal_methods/lifetime_formalization.md) 生命周期关联→ [PROOF_INDEX](./PROOF_INDEX.md) T-BR1索引 | ← [ownership_model](./formal_methods/ownership_model.md) 控制流A-CF1← [type_system_foundations](./type_theory/type_system_foundations.md) 类型保持性引用← [async_state_machine](./formal_methods/async_state_machine.md) 借用检查衔接 |
+| [lifetime_formalization](./formal_methods/lifetime_formalization.md) | → [type_theory/lifetime_formalization](./type_theory/lifetime_formalization.md) 理论对应→ [variance_theory](./type_theory/variance_theory.md) 型变组合→ [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) 证明引用 | ← [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 生命周期检查← [trait_system_formalization](./type_theory/trait_system_formalization.md) 生命周期约束← [async_state_machine](./formal_methods/async_state_machine.md) 'static生命周期 |
+| [async_state_machine](./formal_methods/async_state_machine.md) | → [pin_self_referential](./formal_methods/pin_self_referential.md) Pin依赖→ [send_sync_formalization](./formal_methods/send_sync_formalization.md) Send/Sync要求→ [software_design_theory/03_execution_models](./software_design_theory/03_execution_models/02_async.md) 执行模型 | ← [pin_self_referential](./formal_methods/pin_self_referential.md) Future+Pin组合← [send_sync_formalization](./formal_methods/send_sync_formalization.md) 跨线程spawn← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) 实践指南 |
+| [pin_self_referential](./formal_methods/pin_self_referential.md) | → [async_state_machine](./formal_methods/async_state_machine.md) 自引用Future→ [type_theory/advanced_types](./type_theory/advanced_types.md) PhantomData→ [PROOF_INDEX](./PROOF_INDEX.md) 证明引用 | ← [async_state_machine](./formal_methods/async_state_machine.md) Pin使用场景← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) Pin实践← [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) 安全机制 |
+| [send_sync_formalization](./formal_methods/send_sync_formalization.md) | → [async_state_machine](./formal_methods/async_state_machine.md) 跨线程执行→ [software_design_theory/06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md) 并发选型→ [PROOF_INDEX](./PROOF_INDEX.md) 证明索引 | ← [async_state_machine](./formal_methods/async_state_machine.md) Send要求← [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) CHAN/MUTEX← [05_guides/THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) 并发指南 |
 
 ### type_theory ↔ 其他文档
 
 | type_theory 文档 | 正向链接 → | ← 反向链接来源 |
 | :--- | :--- | :--- |
-| [type_system_foundations](./type_theory/type_system_foundations.md) | → [trait_system_formalization](./type_theory/trait_system_formalization.md) Trait系统<br>→ [variance_theory](./type_theory/variance_theory.md) 型变理论<br>→ [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) T-TY3证明 | ← [ownership_model](./formal_methods/ownership_model.md) 类型安全引用<br>← [trait_system_formalization](./type_theory/trait_system_formalization.md) 类型基础<br>← [construction_capability](./type_theory/construction_capability.md) 类型构造 |
-| [trait_system_formalization](./type_theory/trait_system_formalization.md) | → [type_system_foundations](./type_theory/type_system_foundations.md) 类型基础<br>→ [advanced_types](./type_theory/advanced_types.md) GAT/特化<br>→ [software_design_theory/01_design_patterns](./software_design_theory/01_design_patterns_formal/README.md) 模式实现 | ← [type_system_foundations](./type_theory/type_system_foundations.md) Trait对象<br>← [async_state_machine](./formal_methods/async_state_machine.md) Future Trait<br>← [software_design_theory/04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) 组合法则 |
-| [variance_theory](./type_theory/variance_theory.md) | → [lifetime_formalization](./type_theory/lifetime_formalization.md) 生命周期型变<br>→ [advanced_types](./type_theory/advanced_types.md) 高级类型<br>→ [PROOF_INDEX](./PROOF_INDEX.md) 型变定理 | ← [type_system_foundations](./type_theory/type_system_foundations.md) 子类型<br>← [lifetime_formalization](./type_theory/lifetime_formalization.md) 型变规则<br>← [04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) 型变矩阵 |
-| [advanced_types](./type_theory/advanced_types.md) | → [type_system_foundations](./type_theory/type_system_foundations.md) 基础类型<br>→ [trait_system_formalization](./type_theory/trait_system_formalization.md) GAT<br>→ [formal_methods/pin_self_referential](./formal_methods/pin_self_referential.md) PhantomData | ← [trait_system_formalization](./type_theory/trait_system_formalization.md) 关联类型<br>← [pin_self_referential](./formal_methods/pin_self_referential.md) 高级类型技术<br>← [05_guides/ADVANCED_TOPICS_DEEP_DIVE](../05_guides/ADVANCED_TOPICS_DEEP_DIVE.md) 高级主题 |
-| [lifetime_formalization](./type_theory/lifetime_formalization.md) | → [variance_theory](./type_theory/variance_theory.md) 型变组合<br>→ [formal_methods/lifetime_formalization](./formal_methods/lifetime_formalization.md) 形式化对应<br>→ [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) 证明引用 | ← [type_system_foundations](./type_theory/type_system_foundations.md) 生命周期参数<br>← [trait_system_formalization](./type_theory/trait_system_formalization.md) 生命周期约束<br>← [02_reference/quick_reference/type_system.md](../02_reference/quick_reference/type_system.md) 速查 |
+| [type_system_foundations](./type_theory/type_system_foundations.md) | → [trait_system_formalization](./type_theory/trait_system_formalization.md) Trait系统→ [variance_theory](./type_theory/variance_theory.md) 型变理论→ [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) T-TY3证明 | ← [ownership_model](./formal_methods/ownership_model.md) 类型安全引用← [trait_system_formalization](./type_theory/trait_system_formalization.md) 类型基础← [construction_capability](./type_theory/construction_capability.md) 类型构造 |
+| [trait_system_formalization](./type_theory/trait_system_formalization.md) | → [type_system_foundations](./type_theory/type_system_foundations.md) 类型基础→ [advanced_types](./type_theory/advanced_types.md) GAT/特化→ [software_design_theory/01_design_patterns](./software_design_theory/01_design_patterns_formal/README.md) 模式实现 | ← [type_system_foundations](./type_theory/type_system_foundations.md) Trait对象← [async_state_machine](./formal_methods/async_state_machine.md) Future Trait← [software_design_theory/04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) 组合法则 |
+| [variance_theory](./type_theory/variance_theory.md) | → [lifetime_formalization](./type_theory/lifetime_formalization.md) 生命周期型变→ [advanced_types](./type_theory/advanced_types.md) 高级类型→ [PROOF_INDEX](./PROOF_INDEX.md) 型变定理 | ← [type_system_foundations](./type_theory/type_system_foundations.md) 子类型← [lifetime_formalization](./type_theory/lifetime_formalization.md) 型变规则← [04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) 型变矩阵 |
+| [advanced_types](./type_theory/advanced_types.md) | → [type_system_foundations](./type_theory/type_system_foundations.md) 基础类型→ [trait_system_formalization](./type_theory/trait_system_formalization.md) GAT→ [formal_methods/pin_self_referential](./formal_methods/pin_self_referential.md) PhantomData | ← [trait_system_formalization](./type_theory/trait_system_formalization.md) 关联类型← [pin_self_referential](./formal_methods/pin_self_referential.md) 高级类型技术← [05_guides/ADVANCED_TOPICS_DEEP_DIVE](../05_guides/ADVANCED_TOPICS_DEEP_DIVE.md) 高级主题 |
+| [lifetime_formalization](./type_theory/lifetime_formalization.md) | → [variance_theory](./type_theory/variance_theory.md) 型变组合→ [formal_methods/lifetime_formalization](./formal_methods/lifetime_formalization.md) 形式化对应→ [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) 证明引用 | ← [type_system_foundations](./type_theory/type_system_foundations.md) 生命周期参数← [trait_system_formalization](./type_theory/trait_system_formalization.md) 生命周期约束← [02_reference/quick_reference/type_system.md](../02_reference/quick_reference/type_system.md) 速查 |
 
 ### software_design_theory ↔ 其他文档
 
 | software_design_theory 子目录 | 正向链接 → | ← 反向链接来源 |
 | :--- | :--- | :--- |
-| [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md) | → [ownership_model](./formal_methods/ownership_model.md) 所有权实现<br>→ [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 借用模式<br>→ [software_design_theory/05_boundary_system](./software_design_theory/05_boundary_system/README.md) 安全边界 | ← [05_guides/DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) 实践指南<br>← [04_thinking/MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) 模式导图<br>← [02_reference/quick_reference/design_patterns_cheatsheet.md](../02_reference/quick_reference/design_patterns_cheatsheet.md) 速查 |
-| [03_execution_models](./software_design_theory/03_execution_models/README.md) | → [async_state_machine](./formal_methods/async_state_machine.md) 异步形式化<br>→ [send_sync_formalization](./formal_methods/send_sync_formalization.md) 并发安全<br>→ [software_design_theory/06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md) 边界分析 | ← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) 异步实践<br>← [05_guides/THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) 并发实践<br>← [02_reference/quick_reference/async_patterns.md](../02_reference/quick_reference/async_patterns.md) 速查 |
-| [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | → [ownership_model](./formal_methods/ownership_model.md) CE-T1依赖<br>→ [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) CE-T2依赖<br>→ [type_system_foundations](./type_theory/type_system_foundations.md) CE-T3依赖 | ← [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md) 模式组合<br>← [03_execution_models](./software_design_theory/03_execution_models/README.md) 执行组合<br>← [05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md) 集成示例 |
+| [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md) | → [ownership_model](./formal_methods/ownership_model.md) 所有权实现→ [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 借用模式→ [software_design_theory/05_boundary_system](./software_design_theory/05_boundary_system/README.md) 安全边界 | ← [05_guides/DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) 实践指南← [04_thinking/MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) 模式导图← [02_reference/quick_reference/design_patterns_cheatsheet.md](../02_reference/quick_reference/design_patterns_cheatsheet.md) 速查 |
+| [03_execution_models](./software_design_theory/03_execution_models/README.md) | → [async_state_machine](./formal_methods/async_state_machine.md) 异步形式化→ [send_sync_formalization](./formal_methods/send_sync_formalization.md) 并发安全→ [software_design_theory/06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md) 边界分析 | ← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) 异步实践← [05_guides/THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) 并发实践← [02_reference/quick_reference/async_patterns.md](../02_reference/quick_reference/async_patterns.md) 速查 |
+| [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | → [ownership_model](./formal_methods/ownership_model.md) CE-T1依赖→ [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) CE-T2依赖→ [type_system_foundations](./type_theory/type_system_foundations.md) CE-T3依赖 | ← [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md) 模式组合← [03_execution_models](./software_design_theory/03_execution_models/README.md) 执行组合← [05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md) 集成示例 |
 
 ### 速查卡 ↔ 指南/研究笔记
 
@@ -366,13 +366,13 @@ graph TD
 
 | 验证项 | 检查方法 | 验证文档 |
 | :--- | :--- | :--- |
-| 所有权规则一致性 | 对比 ownership_model ↔ borrow_checker_proof 规则定义 | [ownership_model](./formal_methods/ownership_model.md) §规则1-3<br>[borrow_checker_proof](./formal_methods/borrow_checker_proof.md) §规则5-8 |
-| 生命周期定义一致性 | 对比 formal_methods/lifetime ↔ type_theory/lifetime | [fm/lifetime](./formal_methods/lifetime_formalization.md)<br>[tt/lifetime](./type_theory/lifetime_formalization.md) |
-| Send/Sync 与 async 衔接 | 验证 async_state_machine 中 Send 要求与 send_sync 定义 | [async_state_machine](./formal_methods/async_state_machine.md) §跨线程<br>[send_sync_formalization](./formal_methods/send_sync_formalization.md) §Def SEND1 |
+| 所有权规则一致性 | 对比 ownership_model ↔ borrow_checker_proof 规则定义 | [ownership_model](./formal_methods/ownership_model.md) §规则1-3[borrow_checker_proof](./formal_methods/borrow_checker_proof.md) §规则5-8 |
+| 生命周期定义一致性 | 对比 formal_methods/lifetime ↔ type_theory/lifetime | [fm/lifetime](./formal_methods/lifetime_formalization.md)[tt/lifetime](./type_theory/lifetime_formalization.md) |
+| Send/Sync 与 async 衔接 | 验证 async_state_machine 中 Send 要求与 send_sync 定义 | [async_state_machine](./formal_methods/async_state_machine.md) §跨线程[send_sync_formalization](./formal_methods/send_sync_formalization.md) §Def SEND1 |
 | 型变与生命周期组合 | 验证 variance_theory 中生命周期型变规则 | [variance_theory](./type_theory/variance_theory.md) §生命周期型变 |
 | 组合定理依赖链 | 验证 CE-T1/T2/T3 与 ownership/borrow/type 定理的依赖 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md) |
 | 速查卡与形式化对齐 | 验证速查卡中的概念与形式化定义一致 | 各速查卡 ↔ 对应形式化文档 |
-| 思维表征完整性 | 验证 04_thinking 中的导图/矩阵覆盖所有核心概念 | [MIND_MAP](../04_thinking/MIND_MAP_COLLECTION.md)<br>[MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) |
+| 思维表征完整性 | 验证 04_thinking 中的导图/矩阵覆盖所有核心概念 | [MIND_MAP](../04_thinking/MIND_MAP_COLLECTION.md)[MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) |
 
 ---
 

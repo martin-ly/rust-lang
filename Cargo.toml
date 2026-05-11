@@ -254,7 +254,8 @@ mio = "1.2.0"
 # 2026-03-28: 0.28.0 -> 0.29.0 (cargo update)
 tungstenite = "0.29.0"
 # rcgen: X.509证书生成库
-rcgen = "0.14.7"
+# 2026-05-12: cargo update 0.14.7 -> 0.14.8
+rcgen = "0.14.8"
 
 # 2025-10-06: 基础依赖统一
 # dotenvy: 环境变量管理库，dotenv的维护良好的分支
@@ -553,7 +554,8 @@ wasm-bindgen-futures = "0.4.71"
 # wasm-bindgen-test: WebAssembly 测试框架
 wasm-bindgen-test = "0.3.67"
 # nix: 系统调用安全封装库
-nix = "0.31.2"
+# 2026-05-12: cargo update 0.31.2 -> 0.31.3
+nix = "0.31.3"
 # pingora 已移除，存在安全漏洞 (RUSTSEC-2025-0037, RUSTSEC-2025-0070)
 
 # 2025-09-27: 安全更新 - 修复已知安全漏洞
