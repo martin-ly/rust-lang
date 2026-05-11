@@ -1,6 +1,7 @@
 # Rust 线程安全模式
 
-> **Rust版本**: 1.94
+> **Rust版本**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **覆盖范围**: Send/Sync trait、内部可变性、锁类型、死锁预防
 > **权威参考**: The Rust Programming Language (第16章), Rust Atomics and Locks
 

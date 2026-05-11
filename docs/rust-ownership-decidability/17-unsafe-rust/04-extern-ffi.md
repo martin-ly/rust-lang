@@ -1,7 +1,8 @@
 # FFI 与外部代码交互
 
 > **权威来源**: The Rustonomicon (FFI), The Rust Reference
-> **Rust 版本**: 1.94.0
+> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12.0
 > **难度**: 🔴 高级
 > **前置知识**: Unsafe Rust, Data Layout
 

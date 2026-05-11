@@ -1,6 +1,7 @@
 # Concurrency Architecture: Formal Deep Dive
 
-> **Rust Version**: 1.94
+> **Rust Version**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **Scope**: Formal concurrency models, thread safety theorems, memory ordering semantics
 > **Prerequisites**: Understanding of ownership, borrowing, and trait system
 > **Estimated Reading Time**: 3-4 hours

@@ -1,6 +1,7 @@
 # Async Patterns: Formal Semantics and Ownership Analysis
 
-> **Rust Version**: 1.94
+> **Rust Version**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **Scope**: Formal async/await semantics, ownership in async contexts, safety theorems
 > **Prerequisites**: Core ownership concepts, trait system, Pin semantics
 > **Reading Time**: ~3 hours
@@ -3832,7 +3833,7 @@ async fn update_db_safe(state: &AppState) {
 
 > **Document Version**: 2.0
 > **Last Updated**: 2026-03-06
-> **Rust Version**: 1.94
+> **Rust Version**: 1.95.0+ (Edition 2024) | Aligned: 2026-05-12
 > **Word Count**: ~15,000 words
 
 ---

@@ -15,6 +15,7 @@
 | 目标 | 入口 |
 | :--- | :--- |
 | 理解形式化证明 | [FORMAL_FULL_MODEL_OVERVIEW](./FORMAL_FULL_MODEL_OVERVIEW.md) → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) |
+| Rust 所有权系统深度形式化 | [`rust-ownership-decidability/`](../rust-ownership-decidability/) — 600K+ 字完整知识库 |
 | 查概念/证明 | [QUICK_FIND](./QUICK_FIND.md) |
 | 选设计模式/并发模型 | [software_design_theory/00_MASTER_INDEX](./software_design_theory/00_MASTER_INDEX.md) |
 | 理解三大支柱 | [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） |

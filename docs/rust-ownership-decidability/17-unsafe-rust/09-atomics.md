@@ -1,7 +1,8 @@
 # 原子操作与内存序
 
 > **权威来源**: std::sync::atomic, The Rustonomicon
-> **Rust 版本**: 1.94.0
+> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12.0
 > **难度**: 🔴 高级
 > **前置知识**: 并发基础、Unsafe Rust
 

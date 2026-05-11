@@ -7,7 +7,7 @@
 
 //! # C06 Async - Rust 异步编程全面解析
 //!
-//! 本 crate 提供 Rust 1.94 异步编程的全面、深入的理论与实践指南。
+//! 本 crate 提供 Rust 1.95.0 异步编程的全面、深入的理论与实践指南。
 //!
 //! ## 模块组织
 //!
@@ -37,9 +37,16 @@
 //! - [`utils`] - 重试、超时、限流、熔断、监督树
 //! - [`advanced_tools`] - 批处理、任务管理、重试引擎
 //!
-//! ### Rust 1.94 特性 (Rust 1.94 Features)
+//! ### Rust 1.95 特性 (Rust 1.95 Features)
 //!
-//! - [`rust_194_features`] - Rust 1.94 异步新特性
+//! - [`rust_195_features`] - Rust 1.95 异步新特性
+//!   - if let guards 用于异步状态机匹配
+//!   - bool 转浮点数用于异步数值计算
+//!   - RangeInclusive 优化用于异步迭代
+//!
+//! ### Rust 1.94 历史特性 (Rust 1.94 Historical Features)
+//!
+//! - [`rust_194_features`] - Rust 1.94 异步历史特性
 //!   - array_windows 用于异步数据流处理
 //!   - LazyCell/LazyLock 用于异步缓存
 //!   - 数学常量用于异步算法
@@ -277,7 +284,7 @@ pub mod utils;
 pub mod advanced_tools;
 
 // ============================================================================
-// Rust 1.94 特性模块 (Rust 1.94 Features)
+// Rust 1.94 历史特性模块 (Rust 1.94 Historical Features)
 // ============================================================================
 
 pub mod archive;
@@ -301,7 +308,8 @@ pub mod rust_190_features;
 pub mod rust_191_features;
 pub mod rust_192_features;
 pub mod rust_193_features;
-/// Rust 1.94 异步特性
+/// Rust 1.95 异步特性 (if let guards 场景)
+/// 注: 1.94 历史特性见 rust_194_features 模块
 pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95 特性 (async 场景 if let guards)
 pub mod rust_196_features;

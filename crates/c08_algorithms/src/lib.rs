@@ -10,14 +10,15 @@
 #![allow(clippy::cmp_owned)]
 #![feature(gen_blocks, yield_expr)]
 #![cfg_attr(feature = "portable_simd", feature(portable_simd))]
-//! Rust 1.92.0 高级算法实现库
+//! Rust 1.95.0 高级算法实现库
 //!
-//! 本库提供了Rust中各种高级算法的完整实现，完全对齐 Rust 1.92.0 版本特性，
+//! 本库提供了Rust中各种高级算法的完整实现，完全对齐 Rust 1.95.0 版本特性，
 //! 包括排序、搜索、图算法、机器学习算法、密码学算法等。
 //!
 //! ## 特性
 //!
-//! - **Rust 1.92.0 特性对齐**: 完全支持最新语言特性
+//! - **Rust 1.95.0+ 特性对齐**: 完全支持最新语言特性 (Edition 2024)
+//! - **对齐日期**: 2026-05-12
 //! - **LeetCode 分类组织**: 按照 LeetCode 官方分类组织算法
 //! - **主题化组织**: 按算法主题分类组织
 //! - **多实现方式**: 同步、并行、异步实现
@@ -60,7 +61,7 @@
 // ```
 pub mod error;
 
-// 核心算法模块（Rust 1.90 特性对齐）
+// 核心算法模块（Rust 1.95 特性对齐）
 pub mod algorithms;
 
 // 主题化算法模块
@@ -110,7 +111,7 @@ pub mod rust_197_features;
 
 pub mod algorithm_decision_trees;
 
-// LeetCode 分类算法模块（结合 Rust 1.91 特性）
+// LeetCode 分类算法模块（结合 Rust 1.95 特性）
 pub mod leetcode;
 
 /// 算法库版本信息

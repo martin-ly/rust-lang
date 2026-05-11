@@ -94,10 +94,17 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
 |:-----|:-----|:----:|:--------:|:---------|
 | `08-01-const-generics.md` | 常量泛型 | 🟡 | 1小时 | 泛型基础 |
 | `08-02-async-rust.md` | 异步Rust深度解析 | 🟡 | 2小时 | 所有权基础 |
-| `08-03-ffi-patterns.md` | FFI模式与C互操作 | 🔴 | 2小时 | Unsafe Rust |
-| `08-04-proc-macros.md` | 过程宏开发 | 🔴 | 2.5小时 | 宏基础 |
+| `08-03-ffi-patterns.md` | FFI模式与C互操作 | 🔴 已归档 | 2小时 | Unsafe Rust | 见 `archive/deprecated_20260318/` |
+| `08-04-proc-macros.md` | 过程宏开发 | 🔴 已归档 | 2.5小时 | 宏基础 | 见 `archive/deprecated_20260318/` |
 
-**Rust 1.94 新特性**:
+**Rust 1.95 新特性**:
+
+- ✅ if let guards: match 守卫中的嵌套模式匹配
+- ✅ `use<..>` 精确捕获: `impl Trait` 返回类型生命周期控制
+- ✅ `impl From<bool> for {f32, f64}`
+- ✅ `RangeInclusive` 迭代性能优化
+
+**Rust 1.94 历史特性**:
 
 - ✅ 常量泛型默认值: `struct Buffer<T, const N: usize = 1024>`
 - ✅ 原生 async trait 支持（稳定版）
@@ -260,7 +267,7 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 | `theories/Typing/` | 类型系统 | ~800 | 🔴 |
 | `theories/Metatheory/` | 元理论证明 (保持性、进展性) | ~1200 | 🔴 |
 | `theories/Decidability/` | 可判定性证明 | ~800 | 🔴 |
-| `theories/Advanced/` | Rust 1.94 特性形式化 | ~900 | 🔴 |
+| `theories/Advanced/` | Rust 1.95 特性形式化 (含 1.94 历史) | ~900 | 🔴 |
 
 **核心定理证明状态** (100% 完成):
 
@@ -272,14 +279,15 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 | 终止性 (Termination) | ✅ | `MetatheoryTermination.v` |
 | 可判定性 (Decidability) | ✅ | `MetatheoryDecidability.v` |
 
-**Rust 1.94 特性形式化**:
+**Rust 1.95 特性形式化**:
 
 | 特性 | 状态 | 证明文件 |
 |:-----|:----:|:---------|
 | Reborrow Trait | ✅ | `ReborrowComplete.v` |
 | CoerceShared Trait | ✅ | `CoerceSharedComplete.v` |
 | Const Generics | ✅ | `ConstGenerics.v` |
-| Precise Capturing | ✅ | `PreciseCapturingComplete.v` |
+| Precise Capturing (`use<..>`) | ✅ | `PreciseCapturingComplete.v` |
+| If Let Guards | 🟡 | `IfLetGuardsFormal.v` |
 | 2024 Edition | ✅ | `Edition2024.v` |
 | Async Basics | ✅ | `AsyncBasicsComplete.v` |
 
@@ -321,7 +329,7 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 | 2 | 借用概念卡片 | 15分钟 | `01-core-concepts/short-concepts/borrowing-concept-card.md` |
 | 3 | 生命周期概念卡片 | 15分钟 | `01-core-concepts/short-concepts/lifetime-concept-card.md` |
 | 4 | 基础练习 | 45分钟 | `exercises/` |
-| 5 | 设计模式概览 | 30分钟 | `11-design-patterns/README.md` |
+| 5 | 设计模式概览 | 30分钟 | `11-design-patterns/README.md` (已归档) |
 
 **成果**: 理解所有权、借用、生命周期的基本概念，能阅读简单Rust代码
 
@@ -453,7 +461,7 @@ Async专题:    ████████████████████ 100
 | 借用系统 | [借用深入](01-core-concepts/detailed-concepts/borrowing-in-depth.md) / [速查卡](01-core-concepts/short-concepts/borrowing-concept-card.md) |
 | 生命周期 | [生命周期精通](01-core-concepts/detailed-concepts/lifetimes-mastery.md) / [速查卡](01-core-concepts/short-concepts/lifetime-concept-card.md) |
 | 形式化理论 | [形式化基础](00-foundations/README.md) / [Coq代码](coq-formalization/README.md) / [定理到编译器](THEOREM_TO_COMPILER_BRIDGE.md) |
-| 设计模式 | [模式指南](11-design-patterns/README.md) / [理论到模式](THEORY_TO_PATTERN_BRIDGE.md) |
+| 设计模式 | [模式指南](11-design-patterns/README.md) (已归档) / [理论到模式](THEORY_TO_PATTERN_BRIDGE.md) |
 | 案例研究 | [案例索引](case-studies/README.md) / [现代crate](case-studies/MODERN_CRATES_INDEX.md) |
 
 ---
@@ -499,6 +507,22 @@ cat coq-formalization/theories/Advanced/MetatheoryDecidability.v
 - ⚠️ **Reborrow/CoerceShared**: 理论形式化（非真实Rust trait）
 - ⚠️ **验证工具**: Prusti处于维护模式，建议使用Verus
 - ⚠️ **Async专题**: 部分内容仍在持续更新中
+
+---
+
+## 🔗 相关研究笔记
+
+本项目与 `docs/research_notes/` 中的形式化内容存在主题交叉，以下是对应关系：
+
+| 本知识库主题 | `research_notes/` 对应内容 | 说明 |
+|-------------|---------------------------|------|
+| 所有权形式化 (`01-core-concepts/`) | [`formal_methods/ownership_model.md`](../research_notes/formal_methods/ownership_model.md) | 本知识库更深入、更系统 |
+| 借用检查器证明 (`formal-foundations/proofs/`) | [`formal_methods/borrow_checker_proof.md`](../research_notes/formal_methods/borrow_checker_proof.md) | 本知识库包含完整 Coq 证明 |
+| 类型理论 (`01-core-concepts/`) | [`type_theory/`](../research_notes/type_theory/) | `research_notes/` 侧更侧重类型系统基础理论 |
+| 设计模式形式化 (`11-design-patterns/`) | [`software_design_theory/01_design_patterns_formal/`](../research_notes/software_design_theory/01_design_patterns_formal/) | 两者互补，本知识库侧重 Rust 特定模式 |
+| 并发形式化 (`12-concurrency-patterns/`) | [`formal_methods/async_state_machine.md`](../research_notes/formal_methods/async_state_machine.md) | 本知识库涵盖更多并发模型 |
+
+**建议阅读路径**: 若需 Rust 所有权系统的**最完整形式化理论**，以本知识库为主；若需**类型理论通用基础**或**软件设计理论**，参考 `research_notes/`。
 
 ---
 

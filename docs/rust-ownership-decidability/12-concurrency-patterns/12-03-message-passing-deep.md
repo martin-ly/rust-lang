@@ -1,6 +1,7 @@
 # Message Passing Patterns: Formal Deep Dive
 
-> **Rust Version**: 1.94
+> **Rust Version**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **Scope**: Channel semantics, ownership transfer theorems, message passing patterns, async channels
 > **Prerequisites**: Understanding of ownership, Send/Sync traits, async/await basics
 > **Estimated Reading Time**: 3-4 hours

@@ -1,7 +1,8 @@
 # Actor Model in Rust: Formal Deep Dive
 
 > **Comprehensive Analysis with Formal Semantics, Proofs, and Counter-Examples**
-> **Rust Version**: 1.94.0+ (Edition 2024)
+> **Rust Version**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12.0+ (Edition 2024)
 > **Target Audience**: Systems Architects, Formal Methods Researchers, Advanced Rust Developers
 
 ---

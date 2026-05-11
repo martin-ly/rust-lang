@@ -1,6 +1,7 @@
 # Rust所有权系统深度解析：形式语义、定理与反例
 
-> **版本**: Rust 1.94.0+ (Edition 2024)
+> **版本**: Rust 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **权威来源**: The Rust Programming Language (TRPL), Rust Reference, RustBelt (POPL 2018)
 > **形式化参考**: Jung et al. (2018). RustBelt: Securing the Foundations of the Rust Programming Language. POPL
 > **状态**: 深度分析文档 | 形式化完备

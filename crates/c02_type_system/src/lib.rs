@@ -36,7 +36,9 @@ pub mod rust_195_features;
 pub mod rust_196_features;
 pub mod rust_197_features;
 
-pub mod rust_196_tuple_coercion; // Rust 1.95 特性 (core::range, RangeInclusive)
+// 注意: rust_196_tuple_coercion 模块包含的内容与 Rust 实际稳定特性不符，
+// 将在后续版本中清理或重命名。当前保留仅为兼容性。
+pub mod rust_196_tuple_coercion; // 待清理: 非标准特性模块
 
 // 重新导出Rust 1.94特性
 pub use rust_194_features::*;

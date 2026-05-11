@@ -1,6 +1,7 @@
 # Rust 异步并发模式
 
-> **Rust版本**: 1.94
+> **Rust版本**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **覆盖范围**: async/await原理、任务调度、背压控制、超时处理
 > **权威参考**: The Rust Async Book, Tokio Documentation
 

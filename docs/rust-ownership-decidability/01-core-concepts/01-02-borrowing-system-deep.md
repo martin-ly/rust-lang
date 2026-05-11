@@ -2422,5 +2422,5 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 ---
 
 *Document Version: 1.0*
-*Target Rust Version: 1.94*
+*Target Rust Version: 1.95.0+ (Edition 2024) | Aligned: 2026-05-12*
 *Last Updated: 2026*

@@ -1,6 +1,7 @@
 # Rust 无锁编程模式
 
-> **Rust版本**: 1.94
+> **Rust版本**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **覆盖范围**: CAS操作、原子内存序、无锁数据结构、内存回收
 > **权威参考**: Rust Atomics and Locks by Mara Bos, C++ Concurrency in Action
 

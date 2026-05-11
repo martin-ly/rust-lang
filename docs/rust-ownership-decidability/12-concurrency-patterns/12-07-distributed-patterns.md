@@ -1,6 +1,7 @@
 # Rust 分布式模式
 
-> **Rust版本**: 1.94
+> **Rust版本**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **覆盖范围**: 一致性模型、共识算法、分布式事务、容错设计
 > **权威参考**: Designing Data-Intensive Applications (Martin Kleppmann), Raft Paper
 

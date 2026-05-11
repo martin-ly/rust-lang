@@ -1,6 +1,7 @@
 # Data Parallelism Patterns: Formal Deep Dive
 
-> **Rust Version**: 1.94
+> **Rust Version**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **Scope**: Data parallelism fundamentals, parallel iterator theorems, safety guarantees, performance optimization
 > **Prerequisites**: Understanding of ownership, `Send`/`Sync` traits, and basic Rayon usage
 > **Estimated Reading Time**: 3-4 hours

@@ -1,6 +1,7 @@
 # Rust设计模式全面指南
 
-> **Rust版本**: 1.93.1
+> **Rust版本**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **覆盖范围**: 创建型、结构型、行为型设计模式在Rust中的实现
 > **权威参考**: Rust Design Patterns Book, Rust API Guidelines, Effective Rust
 

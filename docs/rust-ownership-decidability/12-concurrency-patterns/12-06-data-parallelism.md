@@ -1,6 +1,7 @@
 # Rust 数据并行模式
 
-> **Rust版本**: 1.94
+> **Rust版本**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12
 > **覆盖范围**: Rayon并行计算、SIMD向量化、GPU加速、矩阵运算
 > **权威参考**: Rayon Documentation, packed_simd crate, Rust-GPU
 

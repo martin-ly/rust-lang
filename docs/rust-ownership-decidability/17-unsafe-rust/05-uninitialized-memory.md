@@ -1,7 +1,8 @@
 # 未初始化内存处理
 
 > **权威来源**: The Rustonomicon, std::mem::MaybeUninit
-> **Rust 版本**: 1.94.0
+> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **对齐日期**: 2026-05-12.0
 > **难度**: 🔴 高级
 > **前置知识**: Unsafe Rust 概述、原始指针
 
