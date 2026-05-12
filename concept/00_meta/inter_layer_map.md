@@ -52,6 +52,8 @@ graph TB
     subgraph L6["L6 生态工程层"]
         TOOL[工具链]
         PAT[设计模式]
+        CRATES[核心库谱系]
+        APP[应用主题]
     end
 
     subgraph L7["L7 前沿趋势层"]
@@ -93,6 +95,8 @@ graph TB
     %% L6 生态层：实现依赖
     TOOL ==>|"编译器实现"| L1 & L2 & L3
     PAT ==>|"工程模式实例"| TR & MM & EH
+    CRATES ==>|"核心库依赖概念"| TR & G & AS & UN
+    APP ==>|"领域工程映射"| TR & G & AS & CON & UN
 
     %% L7 前沿层：反向反馈（关键！）
     AI -.->|"AI 代码生成需求 → 约束"| UN & MAC

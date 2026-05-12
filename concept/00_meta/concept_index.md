@@ -187,6 +187,16 @@
 | **Trait Bounds** | [L2: Trait](../02_intermediate/01_traits.md) | L2 泛型、L4 约束求解 | 应用 | ← Trait + 泛型 → where 子句 |
 | **Trait Objects (dyn)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 Trait、L4 存在类型 | 分析 | ⊘ 泛型 → 动态分发 |
 | **Typestate Pattern** | [L6: 设计模式](../06_ecosystem/02_patterns.md) | L1 所有权、L2 泛型 | 分析 | ← 所有权 → 编译期状态机 |
+| **Core Crates** | [L6: 核心库谱系](../06_ecosystem/03_core_crates.md) | L1-L5 全部 | 应用 | ← 概念 → 工程选型 |
+| **serde** | [L6: 核心库谱系](../06_ecosystem/03_core_crates.md) | L2 Trait、L1 类型系统 | 应用 | ← derive → 序列化 |
+| **tokio** | [L6: 核心库谱系](../06_ecosystem/03_core_crates.md) | L3 async、L1 Send/Sync | 应用 | ← 运行时 → 异步生态 |
+| **axum** | [L6: 核心库谱系](../06_ecosystem/03_core_crates.md) | L2 Trait、L3 async | 应用 | ← Handler → Web 后端 |
+| **clap** | [L6: 核心库谱系](../06_ecosystem/03_core_crates.md) | L2 Trait、L1 类型系统 | 应用 | ← Parser → CLI |
+| **Application Domains** | [L6: 应用主题](../06_ecosystem/04_application_domains.md) | L1-L5、L6 Crates | 评价 | ← 概念+crate → 工程落地 |
+| **Web Backend** | [L6: 应用主题](../06_ecosystem/04_application_domains.md) | L3 async、L2 Trait | 应用 | ← axum+tokio → 微服务 |
+| **Embedded Rust** | [L6: 应用主题](../06_ecosystem/04_application_domains.md) | L3 unsafe、L1 no_std | 应用 | ← embassy → 裸机 |
+| **Blockchain** | [L6: 应用主题](../06_ecosystem/04_application_domains.md) | L1 类型安全、L3 unsafe | 应用 | ← solana → 智能合约 |
+| **Game Engine** | [L6: 应用主题](../06_ecosystem/04_application_domains.md) | L3 unsafe、L2 泛型 | 应用 | ← bevy → ECS |
 | **Type System** | [L1: 类型系统](../01_foundation/04_type_system.md) | 所有层 | 理解 | → 所有类型相关概念 |
 
 ### U

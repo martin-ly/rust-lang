@@ -62,6 +62,8 @@
 | `Borrow(&mut T)` | ❌ | ❌ | ❌ | `let r = &mut s` 期间的 `s` |
 | `Dropped` | ❌ | ❌ | ❌ | 作用域结束后的状态 |
 
+> **过渡**: 属性矩阵展示了所有权规则的静态特征，接下来需要深入其形式化根基——线性逻辑、仿射逻辑与区域类型——以理解这些规则为何能构成完备的内存安全证明。
+
 ---
 
 ## 三、形式化理论根基（Formal Foundation）
@@ -107,6 +109,8 @@ Rust 更接近**仿射逻辑**而非严格线性逻辑：
 
 > **[来源: RustBelt: POPL 2018]** 所有权唯一性保证资源的单一入口点，区域类型保证入口点的有效期可静态确定，二者合起来构成 Safe Rust 内存安全的完整形式化基础。 ✅
 
+> **过渡**: 形式化根基从逻辑公理角度解释了所有权系统的正确性，而思维导图则从知识结构角度帮助读者建立概念之间的关联网络。
+
 ---
 
 ## 四、思维导图（Mind Map）
@@ -142,6 +146,8 @@ graph TD
     B3 --> B3a[原变量标记 moved]
 ```
 
+> **过渡**: 思维导图呈现了所有权的静态知识结构，而决策树则将这种知识转化为动态的判断流程——面对具体问题时"如何决策"。
+
 ---
 
 ## 五、决策/边界判定树（Decision / Boundary Tree）
@@ -171,6 +177,8 @@ graph TD
     B4[返回局部变量的引用] -->|编译期| E4[E0106: missing lifetime specifier]
     B5[在 unsafe 中破坏所有权规则] -->|运行时| E5[UB: use-after-free / data race]
 ```
+
+> **过渡**: 决策树回答"怎么做"的问题，而定理推理链回答"为什么能这么做"——通过引理、定理、推论的层层演绎，建立所有权系统的形式化保证。
 
 ---
 
@@ -209,21 +217,36 @@ fn produce() -> T {}   // ∅ → Own(T)      （资源被产生）
 
 ### 6.3 定理一致性矩阵
 
-| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
+> **推理链全景**: 引理 L1（所有权唯一性）⟹ 引理 L2（Move 语义一致性）⟹ 定理 T1（RAII 资源释放）⟹ 定理 T2（无 Double-Free）⟹ 定理 T3（无 Use-After-Free）⟹ 定理 T4（所有权唯一性 ⟹ mutable borrow 唯一性）⟹ 定理 T5（mutable borrow 唯一性 ⟹ 无数据竞争）⟹ 推论 C1（无所有权 ⟹ 无 Drop 责任）⟹ 推论 C2（无所有权 ⟹ 裸指针危险）⟹ 推论 C3（Safe Rust 内存安全完备性）
+
+| 定理/引理/推论 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
 |:---|:---|:---|:---|:---|:---|:---|
-| 所有权唯一性 | 每个值有唯一 owner | 无 double-free | 线性逻辑 ⊗ | Move 语义、借用规则 | `Rc` 循环引用、`mem::forget` | — |
-| Move 语义安全 | 非 Copy 类型赋值 | 原变量不可访问 | 仿射逻辑 (无 weakening) | 借用检查、并发安全 | 隐式 Copy 误判、手动 `ptr::read` | E0382 |
-| RAII 资源释放 | owner 离开作用域 | Drop 被调用一次 | 资源消耗公理 | 内存安全定理 | `mem::forget`、`ManuallyDrop` | — |
-| Copy trait 例外 | 类型实现 Copy | 赋值不产生 Move | 仿射逻辑 weakening | — | 意外的 Copy（大结构体） | — |
+| **L1: 所有权唯一性** | 每个值有且仅有一个 owner | 资源单一入口点，无别名写冲突 | 线性逻辑 ⊗（张量积资源唯一性） | L2, T2, T4, C3 | `Rc`/`Arc` 循环引用、裸指针别名 | — |
+| **L2: Move 语义一致性** | 非 Copy 类型发生赋值/传参 | 原变量标记为 moved，不可再访问 | 仿射逻辑: 禁止 contraction（资源不可复制） | T3, T5, C3 | 隐式 Copy 误判、`unsafe { ptr::read(&x) }` | E0382 |
+| **T1: RAII 资源释放** | owner 离开词法作用域 | `Drop::drop` 被自动调用且仅一次 | 资源消耗公理: owner 释放 ⇒ 资源被消耗 | T2, C1 | `mem::forget`、`ManuallyDrop`、`Box::leak` | — |
+| **T2: 无 Double-Free** | L1 + T1 | 同一堆内存不会被释放两次 | 线性逻辑资源代数 (Iris RA) | C3 | `Rc` 循环引用导致的悬垂释放（理论不触发，但逻辑上计数器泄漏） | — |
+| **T3: 无 Use-After-Free** | L2 + 区域类型（生命周期） | 引用不会指向已释放内存 | 区域类型: 引用生命周期 ⊆ 数据存活期 | C3 | `unsafe` 中手动释放后继续使用、自引用结构 move | E0597 |
+| **T4: 所有权唯一性 ⟹ mutable borrow 唯一性** | L1 + 借用检查器接受 | 同一时间对同一数据仅存在一个 `&mut T` | 分离逻辑: 独占权限完整传递 | T5, C3 | `unsafe` 构造多个 `&mut T`、内部可变性 `UnsafeCell` | E0499 |
+| **T5: mutable borrow 唯一性 ⟹ 无数据竞争** | T4 + `T: Send`/`T: Sync` | Safe Rust 中不存在数据竞争 | 分离逻辑分数权限: 1.0 = 独占 | C3 | `UnsafeCell`、裸指针别名跨线程、FFI | E0502/E0520 |
+| **T6: Copy trait 安全** | 类型实现 `Copy` + 仅含标量 | 按位复制语义等价于原值，无资源重复释放 | 仿射逻辑 weakening: 可复制资源不受 contraction 限制 | — | 含堆指针却误实现 Copy（如自定义指针）、大结构体隐式复制开销 | — |
+| **C1: 无所有权 ⟹ 无 Drop 责任** | 值被 `mem::forget` 或 `ManuallyDrop` | 程序员手动承担资源释放责任 | 资源消耗公理的逆否: ¬Drop ⇒ 所有权未正常终结 | C2 | `forget` 后仍通过裸指针访问、重复释放 | — |
+| **C2: 无所有权 ⟹ 裸指针危险** | C1 + 裸指针 `*const T`/`*mut T` | 无编译器保护，UB 风险完全由程序员承担 | 无（超出 Safe Rust 公理） | — | 悬垂指针、类型混淆、未对齐访问、UAF | — |
+| **C3: Safe Rust 内存安全完备性** | L1+L2+T1+T2+T3+T4+T5 | 无 UAF + 无 DF + 无数据竞争（模循环引用/`forget`） | 全部 L4 公理集合 | — | `unsafe` 块突破公理、FFI 边界、循环引用泄漏 | — |
 
-> **[来源: RustBelt: POPL 2018]** 所有权唯一性定理 — 基于 Iris 框架中的资源代数 (Resource Algebra)。 ✅
-> **[来源: Girard 1987 (线性逻辑)]** Move 语义安全 — 对应仿射逻辑中 contraction 的禁止。 ✅
-> **[来源: TRPL: Ch4.1]** RAII 资源释放 — Rust 核心设计，编译器自动插入 drop。 ✅
-> **[来源: Rust Reference: Copy]** Copy trait 例外 — 显式标记的按位复制语义。 ✅
+> **[来源: RustBelt: POPL 2018]** L1/L2/T4/T5 — 基于 Iris 框架中的资源代数 (Resource Algebra) 与分离逻辑分数权限。 ✅
+> **[来源: Girard 1987 (线性逻辑)]** L1/L2 — 线性逻辑 ⊗ 与仿射逻辑 contraction 禁止。 ✅
+> **[来源: TRPL: Ch4.1]** T1 — Rust 核心设计，编译器自动插入 drop。 ✅
+> **[来源: RustBelt: POPL 2018]** T2/T3 — Safe Rust 不存在 double-free 和 use-after-free 的形式化定理。 ✅
+> **[来源: Rust Reference: Copy]** T6 — 显式标记的按位复制语义。 ✅
+> **[来源: Rustonomicon]** C1/C2 — `mem::forget` 与裸指针突破 Safe Rust 保证。 ⚠️
+> **[来源: 💡 原创分析]** C3 — "内存安全完备性" 是各定理的合取，模 `unsafe` 与循环引用。 💡
 
-> **一致性检查**: 上述定理之间无矛盾。所有权唯一性 ⟹ Move 语义安全 ⟹ RAII 资源释放，形成**闭合推理链**。
+> **一致性检查**: 上述 11 个定理/引理/推论之间无矛盾。完整推理链:
+> `L1(所有权唯一性) ⟹ L2(Move一致) ⟹ T1(RAII释放) ⟹ T2(无DF) + T3(无UAF) + T4(&mut唯一) ⟹ T5(无数据竞争) ⟹ C3(Safe Rust完备性)`；`C1(无所有权⇒无Drop) ⟹ C2(裸指针危险)`
 >
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性"
+
+> **过渡**: 定理链提供了自上而下的形式化保证，而示例与反例则提供自下而上的直觉验证——通过正确代码与错误代码的对比，将抽象定理落地为具体可感知的编译器行为。
 
 ---
 
@@ -303,37 +326,80 @@ fn borrow_string(s: &String) {
 
 ### 7.5 反命题与边界分析
 
-#### 命题: "Rust 所有权系统保证无内存泄漏"
+> **四层分析框架**: 反命题按编译期（编译器能否捕获）、运行时（执行期行为）、语义（概念定义边界）、工程（实践代价）四个维度系统分类。
+
+#### 命题 1（编译期层）: "所有权规则在编译期捕获所有内存错误"
 
 ```mermaid
 graph TD
-    P["命题: 所有权保证内存最终释放"] --> Q1{"Rc&lt;RefCell&lt;T&gt;&gt; 循环引用?"}
-    Q1 -->|是| F1["反例: 引用计数永不为0<br/>→ 内存泄漏"]
-    Q1 -->|否| Q2{"mem::forget / ManuallyDrop?"}
-    Q2 -->|是| F2["反例: 阻止 Drop 调用<br/>→ 资源不释放"]
-    Q2 -->|否| Q3{"unsafe 代码?"}
-    Q3 -->|是| F3["反例: 手动分配不释放<br/>→ 传统内存泄漏"]
-    Q3 -->|否| T["定理成立: 内存最终释放<br/>✅ 线性逻辑保证"]
+    P1["命题: 编译期捕获所有内存错误"] --> Q1{"代码包含 unsafe 块?"}
+    Q1 -->|是| F1["反例: unsafe 中的裸指针操作编译通过<br/>→ 运行时 UAF/DF 完全可能<br/>E.g. ptr::read after drop"]
+    Q1 -->|否| Q2{"使用 FFI / extern C?"}
+    Q2 -->|是| F2["反例: C 代码破坏 Rust 所有权约定<br/>→ 编译器无法跨语言检查"]
+    Q2 -->|否| T1["定理成立: Safe Rust 编译期捕获<br/>✅ 线性逻辑保证"]
 
     style F1 fill:#f66
     style F2 fill:#f66
-    style F3 fill:#f66
-    style T fill:#6f6
+    style T1 fill:#6f6
 ```
 
-#### 命题: "Move 后原变量不可访问"
+#### 命题 2（运行时层）: "Move 后原变量绝对不可访问"
 
-| 条件 | 结果 | 错误码 | 说明 |
-|:---|:---|:---|:---|
-| `let b = a;` 后使用 `a` | 编译错误 | E0382 | ✅ 定理成立 |
-| 类型实现 `Copy` | 允许访问 | — | Copy = weakening 例外 |
-| `unsafe { ptr::read(&a) }` | 允许（unsafe） | — | 突破 safe 保证 |
-| `mem::replace(&mut a, new)` | 允许 | — | 安全封装的原语 |
+```mermaid
+graph TD
+    P2["命题: Move 后原变量绝对不可访问"] --> Q3{"使用 unsafe ptr::read?"}
+    Q3 -->|是| F3["反例: unsafe { ptr::read(&moved_var) }<br/>→ 按位复制值，原变量逻辑上已 move<br/>→ 若原变量仍被 drop → double-free"]
+    Q3 -->|否| Q4{"使用 mem::replace?"}
+    Q4 -->|是| N1["注意: mem::replace 是安全原语<br/>→ 用新值替换旧值并返回旧值<br/>→ 所有权仍唯一，非真正反例"]
+    Q4 -->|否| Q5{"类型实现 Copy?"}
+    Q5 -->|是| N2["注意: Copy = 仿射逻辑 weakening 例外<br/>→ 赋值不产生 move，原变量仍可用<br/>→ 属于定理设计，非反例"]
+    Q5 -->|否| T2["定理成立: Move 后原变量不可访问<br/>✅ 仿射逻辑保证"]
 
-#### 边界极限测试
+    style F3 fill:#f66
+    style T2 fill:#6f6
+```
+
+#### 命题 3（语义层）: "所有权 = RAII = 自动释放"
+
+```mermaid
+graph TD
+    P3["命题: 所有权语义上等价于自动释放"] --> Q6{"使用 mem::forget?"}
+    Q6 -->|是| F4["反例: mem::forget(v) 阻止 Drop<br/>→ 资源不释放，所有权'消失'在黑洞中<br/>→ 这是安全函数，语义上允许"]
+    Q6 -->|否| Q7{"使用 ManuallyDrop?"}
+    Q7 -->|是| F5["反例: ManuallyDrop::new(v)<br/>→ 编译器不自动插入 drop<br/>→ 程序员手动控制释放时机"]
+    Q7 -->|否| Q8{"使用 Box::leak?"}
+    Q8 -->|是| F6["反例: Box::leak(v) 返回 &'static T<br/>→ 所有权转移给'静态生命周期'<br/>→ 程序结束前永不释放"]
+    Q8 -->|否| T3["定理成立: 正常 owner 离开作用域 ⇒ 自动释放<br/>✅ RAII 公理保证"]
+
+    style F4 fill:#f66
+    style F5 fill:#f66
+    style F6 fill:#f66
+    style T3 fill:#6f6
+```
+
+#### 命题 4（工程层）: "所有权系统完全零成本抽象"
+
+```mermaid
+graph TD
+    P4["命题: 所有权系统零运行时成本"] --> Q9{"使用 Rc/Arc?"}
+    Q9 -->|是| F7["反例: Rc 每次 clone/drop 原子操作计数器<br/>→ 引用计数有运行时开销<br/>→ 非所有权本身开销，而是共享语义代价"]
+    Q9 -->|否| Q10{"使用 RefCell/Mutex?"}
+    Q10 -->|是| F8["反例: RefCell 运行时借用检查<br/>→ borrow() 维护借用状态位<br/>→ 运行时 panic 而非编译错误"]
+    Q10 -->|否| Q11{"大量 Drop 调用?"}
+    Q11 -->|是| N3["注意: 嵌套结构体逐字段 drop 有函数调用开销<br/>→ 属于正常析构语义，非所有权额外成本"]
+    Q11 -->|否| T4["定理成立: 纯所有权转移/借用无运行时成本<br/>✅ 编译期检查零开销"]
+
+    style F7 fill:#f66
+    style F8 fill:#f66
+    style T4 fill:#6f6
+```
+
+---
+
+### 7.6 边界极限测试代码
 
 ```rust
-// 边界: Rc 循环引用导致泄漏
+// 边界测试 1: Rc 循环引用导致泄漏
 use std::rc::Rc;
 use std::cell::RefCell;
 
@@ -344,45 +410,137 @@ struct Node {
 fn main() {
     let a = Rc::new(RefCell::new(Node { next: None }));
     let b = Rc::new(RefCell::new(Node { next: Some(a.clone()) }));
-    // 循环引用: a ↔ b，引用计数永不为 0
-    // 这不是编译错误，也不是 UAF，是安全定义外的泄漏
+    // a ↔ b 循环引用，引用计数永不为 0
+    // 安全定义外的泄漏，验证 T2 的失效条件
 }
 ```
 
+```rust
+// 边界测试 2: mem::forget 阻止 Drop
+use std::mem;
+
+struct LoudDrop(&'static str);
+impl Drop for LoudDrop {
+    fn drop(&mut self) { println!("Dropping: {}", self.0); }
+}
+
+fn main() {
+    let v = LoudDrop("leaked");
+    mem::forget(v);  // Drop 永不执行
+    // 验证 C1: 无所有权 ⇒ 无 Drop 责任
+}
+```
+
+```rust
+// 边界测试 3: unsafe 中构造 double-free 风险
+use std::ptr;
+
+fn main() {
+    let s = String::from("danger");
+    let ptr = &s as *const String;
+    let s2 = unsafe { ptr::read(ptr) };  // 按位复制
+    drop(s);   // s 的 Drop
+    drop(s2);  // s2 的 Drop → double-free! (UB)
+    // 验证 C2: 裸指针危险
+}
+```
+
+> **过渡**: 示例与反例展示了所有权规则在具体代码中的表现，而认知路径则将这些碎片整合为一条从直觉困惑到形式化理解的渐进式学习曲线。
+
 ---
 
-## 零、认知路径（Cognitive Path）
+## 八、认知路径（Cognitive Path）
 
-> 本章节为读者提供从**直觉困惑**到**形式化理解**的渐进式桥梁。
+> 本章节为读者提供从**直觉困惑**到**形式化理解**的六步渐进式桥梁。每步之间的过渡解释说明了"为什么需要这下一步"。
+
+### 8.1 六步递进框架
 
 ```text
-直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
-    │                         │                       │                     │                    │                    │
-    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
-"为什么 s1 赋值后            "函数调用后              "所有权转移           "Affine Logic:       "编译器检查           "Rc 循环、
- 不能用了？"                  原变量不能用了？"        就是消耗"             资源不可复用"         move 后访问报错"      mem::forget"
+Step 1: 直觉困惑 ──────────────────────────────────────────────────────────────
+  "为什么 s1 赋值后不能用了？"
+  "为什么 String 不能像整数那样随意复制？"
+  "变量离开作用域时到底发生了什么？"
+  "所有权转移和函数传参有什么关系？"
+  "Rust 承诺无内存泄漏，为什么还有 Rc 循环泄漏？"
 
-"为什么 String               "大对象复制              "Move = 默认          "线性逻辑 ⊗:        "编译器自动           "Copy trait
- 不能像整数那样               开销很大？"              转移（非复制）"       资源组合"            选择 Move/Copy"      覆盖默认"
+  ↓ 过渡: 直觉上的"不能用了"需要具体化为可复现的场景，
+  ↓       才能从模糊感受转变为明确问题。
 
-"变量离开作用域              "文件句柄怎么             "RAII = 资源           "资源消耗公理:       "Drop trait          "ManuallyDrop
- 会发生什么？"                自动关闭？"              生命周期绑定"         owner 释放时        自动调用"            阻止释放"
-                                                              资源被消耗"
+Step 2: 具体场景 ──────────────────────────────────────────────────────────────
+  "函数调用后原变量不能用了（take_string 后 s 失效）"
+  "大对象按位复制开销很大（String 深拷贝 vs Move 转移）"
+  "文件句柄在作用域结束时自动关闭（Drop 调用）"
+  "函数返回被 move 的值归还所有权（take_and_return）"
+  "父子节点互相持有 Rc 导致无法释放"
+
+  ↓ 过渡: 具体场景需要提炼为跨案例的通用模式，
+  ↓       才能理解 Rust 的设计意图而非死记规则。
+
+Step 3: 模式抽象 ──────────────────────────────────────────────────────────────
+  "所有权转移 = 资源消耗（原变量被标记 moved）"
+  "Move = 默认语义，Copy = 显式例外"
+  "RAII = 资源生命周期绑定到所有者作用域"
+  "函数传参默认 move，借用 &T/&mut T 保留所有权"
+  "共享所有权（Rc）引入运行时计数，非编译期保证"
+
+  ↓ 过渡: 模式抽象需要匹配到已有的形式化理论体系，
+  ↓       才能证明这些模式不是特例而是通用公理。
+
+Step 4: 形式规则 ──────────────────────────────────────────────────────────────
+  "Affine Logic: 资源不可复制（禁止 contraction）"
+  "线性逻辑 ⊗: 资源组合与唯一性"
+  "资源消耗公理: owner 释放时资源被消耗"
+  "分离逻辑: Own(T) ⊸ (&T ⊗ Own_rest)"
+  "区域类型: 引用生命周期 ⊆ 数据存活期"
+
+  ↓ 过渡: 形式规则必须能在实际代码中被验证，
+  ↓       否则只是理论空想。
+
+Step 5: 代码验证 ──────────────────────────────────────────────────────────────
+  "编译器检查 move 后访问报错 E0382"
+  "编译器自动选择 Move/Copy 基于 trait 实现"
+  "Drop trait 自动调用验证 RAII"
+  "借用检查器 &mut/&T 共存时报错 E0502"
+  "Rc 循环引用: 编译通过，运行时泄漏"
+
+  ↓ 过渡: 代码验证需要推向极端边界，
+  ↓       才能发现公理体系的覆盖范围与失效条件。
+
+Step 6: 边界测试 ──────────────────────────────────────────────────────────────
+  "Rc<RefCell<Node>> 循环引用导致内存泄漏"
+  "mem::forget 阻止 Drop，验证无所有权 ⇒ 无 Drop"
+  "unsafe ptr::read 构造 double-free 风险"
+  "ManuallyDrop 手动控制释放时机"
+  "Box::leak 将所有权转移给 'static"
 ```
+
+### 8.2 概念认知的 5 条主线
+
+| 主线 | Step 1 直觉 | Step 2 场景 | Step 3 模式 | Step 4 形式规则 | Step 5 验证 | Step 6 边界 |
+|:---|:---|:---|:---|:---|:---|:---|
+| **赋值后失效** | "为什么 s1 赋值后不能用了？" | `let s2 = s1;` 后 `s1` 失效 | 所有权转移 = 资源消耗 | Affine Logic: 禁止 contraction | E0382: borrow of moved value | `unsafe { ptr::read }` 突破 |
+| **复制 vs 转移** | "为什么 String 不能像 i32 复制？" | 大对象深拷贝开销 vs 按位复制 | Move 默认，Copy 显式例外 | 仿射逻辑 weakening vs 线性 ⊗ | `#[derive(Copy)]` 编译器检查 | 含指针类型误实现 Copy |
+| **作用域释放** | "变量结束会发生什么？" | 文件句柄自动关闭 | RAII = 资源绑定作用域 | 资源消耗公理 | `Drop` trait 自动调用 | `ManuallyDrop` 阻止释放 |
+| **函数传参** | "传参后原变量还能用吗？" | `take_string(s)` 后 `s` 失效 | 传参 = 所有权转移 | Own(T) ⊸ ∅ （线性消耗） | 编译器 move 检查 | `Box::leak` 永不分发 |
+| **内存泄漏** | "Rust 承诺无泄漏？" | Rc 父子循环引用 | 共享所有权 = 运行时计数 | 超出线性逻辑公理（需额外证明） | 编译通过，valgrind 检测泄漏 | `mem::forget` 显式放弃 |
 
 > **[来源: Girard 1987 (线性逻辑)]** "Affine Logic: 资源不可复用" — 仿射逻辑允许 weakening（丢弃）但禁止 contraction（复制）。 ✅
 > **[来源: Girard 1987 (线性逻辑)]** "线性逻辑 ⊗: 资源组合" — 张量积表示多个资源同时存在。 ✅
 > **[来源: Tofte & Talpin 1994]** "资源消耗公理: owner 释放时资源被消耗" — 区域类型中资源与区域绑定，区域结束时资源释放。 ✅
+> **[来源: RustBelt: POPL 2018]** "分离逻辑: Own(T) ⊸ (&T ⊗ Own_rest)" — 借用的形式化为权限分割。 ✅
+> **[来源: 💡 原创分析]** "5 条主线的 6 步递进" — 认知脚手架设计。 💡
 
 **认知脚手架**:
 
 - **类比**: 所有权像"图书馆借书"——同一时间一本书只能被一个人拥有（借阅）。
 - **反直觉点**: 多数语言中赋值是复制，Rust 中赋值是**转移**（除非 Copy）。
-- **形式化过渡**: 从"不能用了" → "资源被消耗了" → "仿射逻辑中的 weakening 限制"。
+- **形式化过渡**: 从"不能用了" → "资源被消耗了" → "仿射逻辑中的 contraction 禁止"。
+
+> **过渡**: 认知路径梳理了学习的心理过程，而知识来源关系则梳理了每一条论断的可信度——区分权威来源、形式化证明与原创分析。
 
 ---
 
-## 八、知识来源关系（Provenance）
+## 九、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -393,9 +551,28 @@ fn main() {
 | RustBelt 在 Iris 中形式化验证 Rust | [RustBelt: POPL 2018] | ✅ |
 | COR 形式化 Rust 核心语言 | [COR: ETH Zurich] | ✅ |
 
+> **过渡**: 知识来源关系确保了单文件内的论断可信度，而相关概念链接则将读者的视野扩展到整个知识网络——所有权不是孤立概念，它与借用、生命周期、并发、FFI 等形成有机整体。
+
 ---
 
-## 九、待补充与演进方向（TODOs）
+## 十、相关概念链接
+
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| **借用** | [`./02_borrowing.md`](./02_borrowing.md) | 所有权临时授权，不转移归属 |
+| **生命周期** | [`./03_lifetimes.md`](./03_lifetimes.md) | 引用有效期约束，与所有权互补 |
+| **类型系统** | [`./04_type_system.md`](./04_type_system.md) | Copy/Move 语义由类型系统决定 |
+| **Traits** | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | `Drop`、`Copy`、`Clone`、`Send` 等 trait |
+| **智能指针** | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | `Rc`、`Arc`、`Box` 扩展所有权语义 |
+| **并发** | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | `Send`/`Sync` + 所有权 = 无数据竞争 |
+| **FFI / Unsafe** | [`../03_advanced/02_unsafe_rust.md`](../03_advanced/02_unsafe_rust.md) | 所有权公理缺口与程序员责任 |
+| **内部可变性** | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | `RefCell` 运行时替代编译期检查 |
+| **Pin 与自引用** | [`../03_advanced/04_pin_unpin.md`](../03_advanced/04_pin_unpin.md) | 位置不变性约束下的所有权 |
+| **C++ 对比** | [`../05_comparative/cpp_comparison.md`](../05_comparative/cpp_comparison.md) | `unique_ptr` vs Rust 所有权 |
+
+---
+
+## 十一、待补充与演进方向（TODOs）
 
 - [ ] **TODO**: 补充 `Drop` 的 `std::mem::forget` 边界分析 —— 优先级: 中 —— 预计: Phase 2
 - [ ] **TODO**: 补充 `ManuallyDrop` 和 `MaybeUninit` 的所有权例外 —— 优先级: 中 —— 预计: Phase 2

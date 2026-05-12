@@ -10,9 +10,11 @@
 
 ```mermaid
 graph TB
-    subgraph L6_Core["L6 核心两文件"]
+    subgraph L6_Core["L6 核心四文件"]
         TOOL[01 Toolchain]
         PAT[02 Patterns]
+        CRATES[03 Core Crates]
+        APP[04 Application Domains]
     end
 
     %% L1-L5 输入
@@ -21,15 +23,19 @@ graph TB
     L2_MM[↳ L2 Memory] -.->|"智能指针选择"| PAT
     L3_UN[↳ L3 Unsafe] -.->|"unsafe 代码规范"| TOOL
     L4_TT[↳ L4 Type Theory] -.->|"类型系统工具化"| TOOL
-    L5_CP[↳ L5 Rust vs C++] -.->|"工程模式选型"| PAT
+    L5_CP[↳ L5 Rust vs C++] -.->|"工程模式选型"| PAT & APP
 
     %% 内部
     TOOL -.->|"Clippy lint 模式"| PAT
     PAT -.->|"Cargo 工作空间"| TOOL
+    CRATES -.->|"选型支撑"| APP
+    APP -.->|"需求反馈"| CRATES
 
     %% L7 输出
     TOOL ==>|"工具链支撑语言演进"| L7_EV[→ L7 Evolution]
     PAT ==>|"模式库支撑 AI 生成"| L7_AI[→ L7 AI]
+    CRATES ==>|"生态数据驱动演进"| L7_EV
+    APP ==>|"工业需求反馈形式化"| L7_AI
 
     %% 内部结构
     TOOL --> TOOL1[Cargo & SemVer]
@@ -65,6 +71,8 @@ graph TB
 |:---|:---|:---|:---|:---|:---|
 | [01_toolchain.md](./01_toolchain.md) | 工具链 | Cargo、SemVer、Clippy、交叉编译、Miri | ✅ v1.0 | L4 类型论(编译器)、L3 Unsafe(Miri) | 可复现构建、质量门禁 |
 | [02_patterns.md](./02_patterns.md) | 设计模式 | Typestate、Builder、Newtype、RAII、Zero-cost | ✅ v1.0 | L1 Ownership、L2 Trait、L5 对比 | 可维护代码结构 |
+| [03_core_crates.md](./03_core_crates.md) | 核心库谱系 | serde、tokio、axum、clap、tracing、sqlx 等 40+ crate | ✅ v1.0 | L1-L5 全部概念 | 工程选型决策 |
+| [04_application_domains.md](./04_application_domains.md) | 应用主题 | Web、CLI、嵌入式、游戏、区块链、数据工程、系统、GUI | ✅ v1.0 | L1-L5 全部概念 + 核心 crate | 领域工程落地 |
 
 ---
 
@@ -77,9 +85,13 @@ graph TB
 | Trait | `derive` 宏、接口设计 | 代码生成 + 模块化 |
 | 泛型 | 零成本抽象模式 | 库设计中的性能保证 |
 | Send/Sync | `crossbeam`、`rayon` 设计 | 并发库的安全封装 |
+| async/await | `tokio`、`axum` 异步生态 | Web 后端与网络服务 |
 | unsafe | Miri 动态检测、审计规范 | 安全关键代码验证 |
 | 形式化方法 | Kani 集成测试、契约注释 | 工业级验证流程 |
 | 对比分析 | 技术选型决策矩阵 | 架构设计文档 |
+| 生命周期 | `sqlx` 编译期查询检查 | 数据库类型安全 |
+| 过程宏 | `serde`、`clap` derive | 声明式代码生成 |
+| Pin | `tokio` 自引用任务 | 异步状态机安全 |
 
 ---
 
