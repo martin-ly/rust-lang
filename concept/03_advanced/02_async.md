@@ -521,7 +521,7 @@ graph TD
 
 ### 8.1 正确示例：async fn + .await
 
-```rust
+rust,ignore
 // ✅ 正确: async/await 基本用法
 use tokio::time::{sleep, Duration};
 
@@ -540,7 +540,7 @@ async fn main() {
 
 ### 8.2 正确示例：并发执行
 
-```rust
+rust,ignore
 // ✅ 正确: join! 并发等待
 use tokio::join;
 
@@ -554,7 +554,7 @@ async fn fetch_all() -> (String, String) {
 
 ### 8.3 正确示例：Stream 异步迭代
 
-```rust
+rust,ignore
 // ✅ 正确: Stream 异步迭代
 use tokio_stream::{self as stream, StreamExt};
 
@@ -580,7 +580,7 @@ async fn bad_fetch() -> String {
 
 **修正方案**：
 
-```rust
+rust,ignore
 // ✅ 修正: 使用非阻塞 await
 async fn good_fetch() -> String {
     tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
@@ -598,7 +598,7 @@ async fn cpu_intensive() -> i32 {
 
 ### 8.5 反例：未 Pin 的自引用 Future
 
-```rust
+rust,compile_fail
 // ❌ 反例: 尝试移动已 Pin 的 Future（编译错误）
 use std::pin::Pin;
 

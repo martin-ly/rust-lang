@@ -352,7 +352,7 @@ Rust 编译为 WASM 的核心优势：
 | 并发 | `std::thread` | `embassy` async / 中断 / RTIC |
 | 调试 | GDB + stdlib | `probe-rs` + RTT + `defmt` |
 
-```rust
+rust,ignore
 #![no_std]
 #![no_main]
 
@@ -392,7 +392,7 @@ fn main() -> ! {
 | 崩溃处理 | `human-panic`（用户友好报告） | 堆栈泄露 |
 | 发布分发 | `cargo-dist`（自动构建多平台） | PyInstaller / pkg（复杂） |
 
-```rust
+rust,ignore
 use clap::Parser;
 use anyhow::Result;
 

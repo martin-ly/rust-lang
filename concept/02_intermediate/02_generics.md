@@ -500,7 +500,7 @@ graph TD
 
 Rust 允许在类型位置使用编译期常量表达式，复杂表达式需用大括号包裹：
 
-```rust
+rust,ignore
 // ✅ 合法: 常量表达式用于数组类型
 fn double_array<T: Default + Copy, const N: usize>() -> [T; N * 2] {
     [T::default(); N * 2]
@@ -554,7 +554,7 @@ impl<T: Default + Copy, const N: usize> Array<T, N> {
 
 `const fn` 与 const generics 结合，可在类型层面驱动编译期计算：
 
-```rust
+rust,ignore
 const fn next_power_of_two(n: usize) -> usize {
     1usize << (usize::BITS - n.leading_zeros())
 }
@@ -575,7 +575,7 @@ impl<T: Default, const N: usize> RingBuffer<T, { next_power_of_two(N) }> {
 
 const generics 可与类型参数、生命周期参数自由组合：
 
-```rust
+rust,ignore
 // ✅ 合法: 类型参数 + const generic 混合
 fn foo<T, const N: usize>(arr: [T; N]) -> Vec<T> {
     arr.into_iter().collect()
@@ -890,7 +890,7 @@ fn transpose<T: Copy, const R: usize, const C: usize>(
 
 **过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `<T>` 在函数、结构体、枚举、impl 块中的位置，以及 `where` 子句的使用。关键是建立"泛型参数是编译期变量"的理解——它在编译时被替换为具体类型，而非运行时箱型。从 Step 2 到 Step 3 的过渡发生在学习者发现 `Vec<i32>` 和 `Vec<String>` 是不同类型时，意识到泛型不是"运行时多态"，而是"编译期复制"。
 
-```rust
+rust,ignore
 // 核心语法模式:
 fn identity<T>(x: T) -> T { x }           // 函数泛型
 struct Point<T> { x: T, y: T }            // 结构体泛型

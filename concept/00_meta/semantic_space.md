@@ -136,7 +136,7 @@ trait Drawable { fn draw(&self); }
 
 **非法组合**（编译器拒绝）：
 
-```rust,compile_fail
+rust,compile_fail
 fn illegal_combinations() {
     let mut s = String::from("hello");
 
@@ -364,7 +364,7 @@ fn main() {
 }
 ```
 
-```rust,compile_fail
+rust,ignore
 // const generics 的当前边界：泛型常量表达式不稳定
 fn concat<const M: usize, const N: usize>(a: [i32; M], b: [i32; N]) -> [i32; M + N] {
     // error: generic parameters may not be used in const operations

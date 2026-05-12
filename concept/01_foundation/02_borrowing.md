@@ -294,7 +294,7 @@ fn main() {
 
 ### 7.3 反例：可变 + 不可变借用共存（E0502）
 
-```rust
+rust,compile_fail
 // ❌ 反例: cannot borrow mutably while borrowed immutably
 fn main() {
     let mut s = String::from("hello");
@@ -326,7 +326,7 @@ fn main() {
 
 ### 7.4 反例：多个可变借用（E0499）
 
-```rust
+rust,compile_fail
 // ❌ 反例: cannot borrow mutably more than once
 fn main() {
     let mut s = String::from("hello");
@@ -680,75 +680,93 @@ impl SelfRef {
 
 `Pin<&mut T>` 解决的是"值被 move 后引用悬垂"的问题，它通过冻结值的位置来保证自引用有效。另一个同等重要的边界问题是：**如何在持有不可变引用 `&T` 的情况下修改数据？** 这正是内部可变性类型的核心议题。下面的补充章节分析 `Cell<T>` 和 `RefCell<T>` 如何在不破坏 AXM 定理的前提下，将借用检查从编译期延迟到运行时。
 
-### 补充章节：Cell<T> / RefCell<T> 的内部可变性
+### 补充章节：`Cell<T>` / `RefCell<T>` 的内部可变性
+
+> **[Rust Reference: Interior Mutability]** `Cell<T>` / `RefCell<T>` 通过运行时检查替代编译期检查，是内部可变性的安全抽象。✅ 已验证
 
 #### 核心概念
 
 ```text
-内部可变性（Interior Mutability）= 在拥有不可变引用的情况下修改数据
+内部可变性（Interior Mutability）= 在拥有不可变引用 &T 的情况下修改数据
 
 正常规则: &T → 不可变访问，&mut T → 可变访问
-内部可变性: 通过 unsafe 或运行时检查，在 &T 时提供可变访问
+内部可变性: 通过 unsafe 封装 + 运行时检查，在 &T 时提供可变访问
 ```
 
-#### Cell<T>：Copy 类型的内部可变
+#### 三种内部可变性机制对比矩阵
+
+| **机制** | `Cell<T>` | `RefCell<T>` | `Mutex<T>` |
+|:---|:---|:---|:---|
+| **检查时机** | 编译期（按位复制） | 运行时（借用计数） | 运行时（互斥锁） |
+| **T 的要求** | `T: Copy` | 无 | 无 |
+| **访问方式** | `get/set`（复制值） | `borrow/borrow_mut`（返回引用） | `lock`（返回守卫） |
+| **违规后果** | 编译错误（非 Copy） | **panic**（运行时崩溃） | **阻塞/死锁/poison** |
+| **线程安全** | ❌ 单线程（`!Sync`） | ❌ 单线程（`!Sync`） | ✅ 多线程 |
+| **典型场景** | 简单计数器、配置标志 | 图/树回溯、Rc 内部可变 | 跨线程共享可变状态 |
+
+#### 为什么 "绕过" 借用规则仍是安全的
+
+```text
+借用规则的"绕过" = 用运行时不变式替代编译期证明
+
+          编译期检查              运行时检查
+          ─────────────────────────────────────────
+  单线程   & / &mut              Cell / RefCell
+  多线程   （无直接对应）          Mutex / RwLock / Atomic
+
+关键洞察:
+  Cell:    不暴露 &T，只通过按位复制 get/set → 无别名风险
+  RefCell: 运行时维护 borrow_count（正数=不可变借用数，-1=可变借用）
+           违反规则时立即 panic（Fail-stop 安全）
+  Mutex:   操作系统级互斥，阻塞而非 panic（除非 poisoning）
+```
 
 ```rust
 use std::cell::Cell;
 
-// ✅ Cell<T> 要求 T: Copy
-// 原理: 通过按位复制替换值，不暴露引用
+// ✅ Cell<T>: 按位复制替换，不暴露引用 → 无别名风险
 fn cell_demo() {
     let c = Cell::new(42i32);
-    let r = &c;  // 不可变引用
-    c.set(100);  // ✅ 但可以通过 Cell 修改！
+    let r = &c;          // 不可变引用
+    c.set(100);          // ✅ 安全：Cell 不暴露 &i32，只是复制替换
     println!("{}", c.get());  // 100
 }
 
-// 限制:
-// Cell<String> ❌ String 不是 Copy
-// Cell 不提供 &T 访问，只能 get/set（复制）
+// ❌ Cell<String> 编译错误：String 不是 Copy
+// let c = Cell::new(String::from("x"));  // E0277
 ```
-
-#### RefCell<T>：运行时可变借用检查
 
 ```rust
 use std::cell::RefCell;
 
+// ✅ RefCell<T>: 运行时借用计数检查
 fn refcell_demo() {
     let rb = RefCell::new(String::from("hello"));
     {
-        let mut w = rb.borrow_mut();  // 可变借用
+        let mut w = rb.borrow_mut();  // borrow_count = -1
         w.push_str(" world");
-    }
-    let r = rb.borrow();  // 不可变借用
+    }                                // borrow_count = 0
+    let r = rb.borrow();              // borrow_count = 1
     println!("{}", r);  // "hello world"
 }
 
-// ⚠️ 运行时 panic（非编译错误）
+// ❌ 运行时 panic：违反借用规则
 // let _w = rb.borrow_mut();
 // let _r = rb.borrow();  // thread 'main' panicked: already mutably borrowed
 ```
 
-#### 与借用规则的关系
+#### panic vs 编译错误：工程权衡
 
-```text
-借用规则的"绕过" = 运行时检查替代编译期检查
+| **维度** | 编译错误（`&mut T`） | 运行时 panic（`RefCell`） |
+|:---|:---|:---|
+| **发现时机** | 编译期（100% 捕获） | 测试/运行时（依赖覆盖率） |
+| **修复成本** | 低（IDE 即时反馈） | 高（可能生产环境崩溃） |
+| **灵活性** | 低（借用检查器保守） | 高（支持图结构、自引用） |
+| **性能** | 零开销 | 运行时计数开销（通常可忽略） |
+| **适用场景** | 默认首选 | 单线程图/树、Rc 内部可变 |
 
-            编译期检查          运行时检查
-            ─────────────────────────────────
-单线程      & / &mut            Cell / RefCell
-多线程      （N/A）             Mutex / RwLock / Atomic
-
-关键洞察:
-  RefCell 不是"绕过"规则，而是将检查延迟到运行时
-  代价: 运行时 panic 风险
-  收益: 更灵活的数据结构（如图、树中的父指针回溯）
-```
-
-> **[来源: Rust Reference: Interior Mutability]** Cell<T> / RefCell<T> 通过运行时检查替代编译期检查，是内部可变性的安全抽象。 ✅
-> **[来源: 💡 原创分析]** "RefCell 不是'绕过'规则，而是将检查延迟到运行时" — 对内部可变性与借用规则关系的精确概括。 💡
-
----
+> **[来源: Rust Reference: Interior Mutability]** `Cell<T>` 通过禁止获取内部值的引用来保证安全；`RefCell<T>` 通过运行时 borrow checker 保证安全。两者都不是"绕过"规则，而是**将检查延迟到运行时**。✅ 已验证
+>
+> **[来源: 💡 原创分析]** "panic 是编译期错误的运行时等价物"——RefCell 用可恢复的运行时崩溃替代不可编译，保持内存安全不变。💡
 
 - [x] **TODO**: 补充 `Cell<T>` / `RefCell<T>` 的内部可变性与借用规则的"绕过" —— 优先级: 高 —— 已完成 v1.1

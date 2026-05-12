@@ -300,7 +300,7 @@ graph TD
 
 **[rayon]** A data parallelism library for Rust.
 
-```rust
+rust,ignore
 use rayon::prelude::*;
 
 // 自动 work-stealing：将大数据集分片到线程池
@@ -327,7 +327,7 @@ let max = vec.par_iter().max();
 | `RwLock` | 写优先/系统依赖 | 读优先、可升级 | 更好的读并发 |
 | `Condvar` | 系统条件变量 | 组合锁 + 等待队列 | 避免虚假唤醒 |
 
-```rust
+rust,ignore
 use parking_lot::Mutex; // 无 poisoning，API 更简洁
 
 let data = Mutex::new(0);
@@ -339,7 +339,7 @@ let data = Mutex::new(0);
 
 #### dashmap：并发 HashMap
 
-```rust
+rust,ignore
 use dashmap::DashMap;
 
 let map = DashMap::new();

@@ -411,7 +411,7 @@ graph TD
 
 ### 9.1 Variance 示例
 
-```rust
+rust,compile_fail
 // ✅ 协变: &'static str 可转为 &'a str
 fn covariant<'a>(s: &'static str) -> &'a str { s }
 

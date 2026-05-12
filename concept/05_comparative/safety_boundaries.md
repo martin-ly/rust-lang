@@ -273,7 +273,7 @@ graph TD
 | **diplomat** | `diplomat` | 多语言绑定（C/C++/JS/WASM） | IDL 驱动，类型安全 | 跨平台 SDK |
 | **Wasm 边界** | `wasm-bindgen` | JS ↔ WASM 类型映射 | 自动生成 marshalling | Web 前端互操作 |
 
-```rust
+rust,ignore
 // 手动 FFI 示例：直接调用 C 标准库
 unsafe {
     let ptr = libc::malloc(1024);

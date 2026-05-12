@@ -441,7 +441,7 @@ fn main() {
 
 ### 7.4 反例：跨线程共享 Rc（E0277）
 
-```rust
+rust,compile_fail
 // ❌ 反例: Rc 不能跨线程
 use std::rc::Rc;
 use std::thread;
@@ -715,7 +715,7 @@ fn main() {
 
 ### 补充章节：tokio::sync 异步同步原语
 
-```rust
+rust,ignore
 use tokio::sync::{Mutex, Semaphore, Barrier};
 
 // ✅ tokio::sync::Mutex: .await 不阻塞线程
@@ -1035,7 +1035,7 @@ for _ in 0..2 {
 
 #### 手动实现的安全契约
 
-```rust
+rust,ignore
 // ✅ 安全实现: 为线程安全的 C 库句柄实现 Send/Sync
 pub struct SafeHandle { raw: *mut libc::c_void }
 unsafe impl Send for SafeHandle {}

@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 39,
+    "total_files": 37,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
@@ -787,375 +787,6 @@
       "matrix_rows": 49
     },
     {
-      "path": "concept\\00_meta\\self_assessment_append.md",
-      "layer": "L0",
-      "title": "Unknown",
-      "positioning": "",
-      "line_count": 631,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "fn take(s: String) -> String { s } fn main() {     let s = String::from(\"hello\")..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "struct Point(i32, i32); struct Wrapper(String); enum Opt { Some(i32), None } ..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "fn longest(x: &str, y: &str) -> &str {     if x.len() > y.len() { x } else { y }..."
-        },
-        {
-          "flags": [],
-          "lines": 2,
-          "should_fail": false,
-          "code_preview": "fn longest<'a>(x: &'a str, y: &'a str) -> &'a str ..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "fn first_char(s: &String) -> &str {     &s[0..1] } ..."
-        },
-        {
-          "flags": [],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "enum Message {     Quit,     Move { x: i32, y: i32 },     Write(String), } ..."
-        },
-        {
-          "flags": [],
-          "lines": 3,
-          "should_fail": false,
-          "code_preview": "let v = Vec::new(); v.push(1); ..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "let v: Vec<i32> = Vec::new(); // 或 let v = Vec::<i32>::new();  // turbofish // 或..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "let x = Some(String::from(\"hello\")); match x {     Some(ref s) => println!(\"{}\",..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "const fn sum(a: i32, b: i32) -> i32 {     let v = vec![a, b];     v.iter().sum()..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "fn process<T>(item: T) where     T: Clone + Send + 'static, {} ..."
-        },
-        {
-          "flags": [],
-          "lines": 9,
-          "should_fail": false,
-          "code_preview": "trait Container {     type Item;     fn get(&self) -> Option<Self::Item>; }  fn ..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "struct Parser<'a> {     text: &'a str,     pos: usize, } ..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "let text = \"hello\"; let p = Parser { text, pos: 0 }; // p 的生命周期不能超过 text ..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "struct Guard(Vec<i32>); impl Drop for Guard {     fn drop(&mut self) {         s..."
-        },
-        {
-          "flags": [],
-          "lines": 9,
-          "should_fail": false,
-          "code_preview": "use std::borrow::Cow; fn maybe_uppercase(s: &str) -> Cow<'_, str> {     if s.cha..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "use std::error::Error; fn cause_chain(e: &dyn Error) {     // 如何打印 e 及其所有 source..."
-        },
-        {
-          "flags": [],
-          "lines": 8,
-          "should_fail": false,
-          "code_preview": "fn cause_chain(e: &dyn Error) {     let mut current: Option<&dyn Error> = Some(e..."
-        },
-        {
-          "flags": [],
-          "lines": 3,
-          "should_fail": false,
-          "code_preview": "std::iter::successors(Some(e), |e| e.source())     .for_each(|e| println!(\"{}\", ..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "struct Unit; struct Pair(Unit, Unit); enum Void {} ..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "use futures::StreamExt; while let Some(item) = stream.next().await {     // 处理 i..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "loop {     tokio::select! {         val = rx.recv() => { println!(\"{:?}\", val); ..."
-        },
-        {
-          "flags": [],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "use std::cell::UnsafeCell; let cell = UnsafeCell::new(5); unsafe {     *cell.get..."
-        },
-        {
-          "flags": [],
-          "lines": 3,
-          "should_fail": false,
-          "code_preview": "let addr = ptr.addr(); let new_ptr = ptr.with_addr(addr + 4); ..."
-        },
-        {
-          "flags": [],
-          "lines": 10,
-          "should_fail": false,
-          "code_preview": "// proc macro quote! {     let x = 42;     println!(\"{}\", x); } // 调用处 let x = 1..."
-        },
-        {
-          "flags": [],
-          "lines": 13,
-          "should_fail": false,
-          "code_preview": "struct MyFuture {     data: String,     pointer: *const String, } impl Future fo..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {     ..."
-        },
-        {
-          "flags": [],
-          "lines": 3,
-          "should_fail": false,
-          "code_preview": "struct Wrapper<T>(T); struct BadWrapper(*const u8); ..."
-        }
-      ],
-      "sources": [],
-      "cross_references": [],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 10
-    },
-    {
-      "path": "concept\\00_meta\\self_assessment_new.md",
-      "layer": "L0",
-      "title": "Rust 知识体系自测题库（Self-Assessment）",
-      "positioning": "每个层级配套的自测题，用于验证知识掌握程度。答案和解析附在每题之后（可折叠）。",
-      "line_count": 840,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [
-        {
-          "flags": [
-            "compile_fail",
-            "E0382"
-          ],
-          "lines": 4,
-          "should_fail": true,
-          "code_preview": "let s1 = String::from(\"hello\"); let s2 = s1; println!(\"{}\", s1); ..."
-        },
-        {
-          "flags": [
-            "compile_fail",
-            "E0502"
-          ],
-          "lines": 5,
-          "should_fail": true,
-          "code_preview": "let mut x = 5; let r1 = &x; let r2 = &mut x; println!(\"{}\", r1); ..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "fn first_word(s: &str) -> &str {     &s[0..1] } ..."
-        },
-        {
-          "flags": [],
-          "lines": 2,
-          "should_fail": false,
-          "code_preview": "fn first_word<'a>(s: &'a str) -> &'a str ..."
-        },
-        {
-          "flags": [
-            "compile_fail",
-            "E0004"
-          ],
-          "lines": 8,
-          "should_fail": true,
-          "code_preview": "enum Color { Red, Green, Blue } fn describe(c: Color) -> &'static str {     matc..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "trait Drawable {     fn draw(&self);     fn new() -> Self where Self: Sized; } ..."
-        },
-        {
-          "flags": [
-            "compile_fail",
-            "E0277"
-          ],
-          "lines": 5,
-          "should_fail": true,
-          "code_preview": "fn read_config(path: &str) -> String {     let contents = std::fs::read_to_strin..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "fn read_config(path: &str) -> Result<String, std::io::Error> {     let contents ..."
-        },
-        {
-          "flags": [],
-          "lines": 10,
-          "should_fail": false,
-          "code_preview": "struct A(&'static str); impl Drop for A {     fn drop(&mut self) { println!(\"{}\"..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "fn identity<T>(x: T) -> T { x } let a = identity(5i32); let b = identity(3.14f64..."
-        },
-        {
-          "flags": [
-            "compile_fail",
-            "E0277"
-          ],
-          "lines": 4,
-          "should_fail": true,
-          "code_preview": "fn print_debug<T>(x: T) {     println!(\"{:?}\", x); } ..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "struct MyPtr<T> {     ptr: *mut (),     _marker: std::marker::PhantomData<T>, } ..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "use std::cell::RefCell; let cell = RefCell::new(0); let _b1 = cell.borrow(); let..."
-        },
-        {
-          "flags": [
-            "compile_fail",
-            "E0277"
-          ],
-          "lines": 4,
-          "should_fail": true,
-          "code_preview": "fn foo() -> Result<(), MyError> {     std::fs::read_to_string(\"file.txt\")?;  // ..."
-        },
-        {
-          "flags": [],
-          "lines": 2,
-          "should_fail": false,
-          "code_preview": "impl From<std::io::Error> for MyError { ... } ..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "fn process<T>(data: T) {     let size = std::mem::size_of::<T>(); } ..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "let x = String::from(\"hello\"); let f = || println!(\"{}\", x);  // 捕获方式？ let g = m..."
-        },
-        {
-          "flags": [
-            "compile_fail",
-            "E0277"
-          ],
-          "lines": 5,
-          "should_fail": true,
-          "code_preview": "async fn fetch_and_update(data: &Mutex<i32>) {     let mut guard = data.lock().u..."
-        },
-        {
-          "flags": [],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "async fn fetch_and_update(data: &Mutex<i32>) {     let value = fetch_from_networ..."
-        },
-        {
-          "flags": [],
-          "lines": 11,
-          "should_fail": false,
-          "code_preview": "let a = Mutex::new(0); let b = Mutex::new(0); let a2 = Arc::clone(&a); let b2 = ..."
-        },
-        {
-          "flags": [],
-          "lines": 11,
-          "should_fail": false,
-          "code_preview": "macro_rules! make_var {     ($name:ident, $val:expr) => {         let $name = $v..."
-        },
-        {
-          "flags": [],
-          "lines": 2,
-          "should_fail": false,
-          "code_preview": "unsafe impl Send for MyType {} ..."
-        },
-        {
-          "flags": [],
-          "lines": 2,
-          "should_fail": false,
-          "code_preview": "fn identity<T>(x: T) -> T { ... } ..."
-        },
-        {
-          "flags": [],
-          "lines": 3,
-          "should_fail": false,
-          "code_preview": "fn process<F>(f: F) where F: for<'a> Fn(&'a str) -> &'a str, ..."
-        }
-      ],
-      "sources": [],
-      "cross_references": [
-        "./learning_guide.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0
-    },
-    {
       "path": "concept\\00_meta\\semantic_space.md",
       "layer": "L0",
       "title": "Rust 表征空间（Semantic / Representational Space）",
@@ -1534,7 +1165,7 @@
       "layer": "L1",
       "title": "Borrowing（借用）",
       "positioning": "",
-      "line_count": 755,
+      "line_count": 773,
       "theorem_chains": [
         {
           "text": "> **推理链全景**: 引理 L1（&T 共享读安全）⟹ 引理 L2（&mut T 独占写安全）⟹ 定理 T1（AXM: Alias-XOR-Mutation）⟹ 定理 T2（引用有效性）⟹ 定理 T3（Reborrow 安全）⟹ 定理 T4（NLL 流敏感安全）⟹ 定理 T5（借用 ⟹ 无数据竞争）⟹ 定理 T6（Two-Phase Borrow 安全）⟹ 推论 C1（内部可变性安全）",
@@ -1629,15 +1260,15 @@
         },
         {
           "flags": [],
-          "lines": 15,
+          "lines": 13,
           "should_fail": false,
-          "code_preview": "use std::cell::Cell;  // ✅ Cell<T> 要求 T: Copy // 原理: 通过按位复制替换值，不暴露引用 fn cell_dem..."
+          "code_preview": "use std::cell::Cell;  // ✅ Cell<T>: 按位复制替换，不暴露引用 → 无别名风险 fn cell_demo() {     le..."
         },
         {
           "flags": [],
-          "lines": 16,
+          "lines": 17,
           "should_fail": false,
-          "code_preview": "use std::cell::RefCell;  fn refcell_demo() {     let rb = RefCell::new(String::f..."
+          "code_preview": "use std::cell::RefCell;  // ✅ RefCell<T>: 运行时借用计数检查 fn refcell_demo() {     let ..."
         }
       ],
       "sources": [
@@ -1711,11 +1342,11 @@
         },
         {
           "source": "Rust Reference: Interior Mutability",
-          "context": "Cell<T> / RefCell<T> 通过运行时检查替代编译期检查，是内部可变性的安全抽象。 ✅"
+          "context": "`Cell<T>` 通过禁止获取内部值的引用来保证安全；`RefCell<T>` 通过运行时 borrow checker 保证安全。两者都不是\"绕过\"规则，而是**将检查延迟到运行时**。✅ 已验证"
         },
         {
           "source": "💡 原创分析",
-          "context": "\"RefCell 不是'绕过'规则，而是将检查延迟到运行时\" — 对内部可变性与借用规则关系的精确概括。 💡"
+          "context": "\"panic 是编译期错误的运行时等价物\"——RefCell 用可恢复的运行时崩溃替代不可编译，保持内存安全不变。💡"
         }
       ],
       "cross_references": [
@@ -1734,7 +1365,7 @@
       "transitions": 20,
       "has_cognitive_path": true,
       "mermaid_blocks": 6,
-      "matrix_rows": 64
+      "matrix_rows": 77
     },
     {
       "path": "concept\\01_foundation\\03_lifetimes.md",
@@ -1972,7 +1603,7 @@
       "layer": "L1",
       "title": "Type System Basics（类型系统基础）",
       "positioning": "",
-      "line_count": 687,
+      "line_count": 778,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡、相关概念链接",
@@ -2080,6 +1711,12 @@
           "lines": 17,
           "should_fail": false,
           "code_preview": "// 测试: 验证 Option<&T> 与 &T 大小相同（NPO） use std::mem::size_of;  fn npo_boundary() { ..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// ✅ impl Trait: 隐藏实现，零成本 fn make_iter() -> impl Iterator<Item = u32> {     vec!..."
         }
       ],
       "sources": [
@@ -2142,15 +1779,15 @@
       ],
       "transitions": 16,
       "has_cognitive_path": true,
-      "mermaid_blocks": 4,
-      "matrix_rows": 65
+      "mermaid_blocks": 5,
+      "matrix_rows": 79
     },
     {
       "path": "concept\\02_intermediate\\01_traits.md",
       "layer": "L2",
       "title": "Traits（Trait 系统）",
       "positioning": "",
-      "line_count": 909,
+      "line_count": 998,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -2338,6 +1975,26 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "// 核心语法模式: trait Summary { fn summarize(&self) -> String; } impl Summary for New..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// ✅ AFIT: trait 定义中直接使用 -> impl Trait（Rust 1.75+） trait Drawable {     fn draw(..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// 显式关联类型版本（等价但冗长） trait DrawableExplicit {     type Output: std::fmt::Display; ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "trait Factory {     fn create() -> impl Product;  // AFIT }  // ❌ 错误：AFIT 不能构造 t..."
         }
       ],
       "sources": [],
@@ -2353,7 +2010,7 @@
       "transitions": 10,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 86
+      "matrix_rows": 93
     },
     {
       "path": "concept\\02_intermediate\\02_generics.md",
@@ -2564,7 +2221,7 @@
       "layer": "L2",
       "title": "Memory Management（内存管理）",
       "positioning": "",
-      "line_count": 795,
+      "line_count": 879,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -2692,9 +2349,32 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "// 核心语法模式: let b = Box::new(5);                  // 堆分配 let r = Rc::new(vec![1, ..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  // ✅ 安全地分配未初始化的数组 let mut buf: [MaybeUninit<u8>; 102..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use std::mem;  // ❌ 危险：uninitialized 立即产生无效 T（bool 可能不是 0/1） // let x: bool = un..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  // ✅ 模式：安全初始化固定大小数组，避免默认构造开销 fn init_array<F, T, con..."
         }
       ],
-      "sources": [],
+      "sources": [
+        {
+          "source": "Rust Reference: MaybeUninit",
+          "context": "`assume_init` 的安全契约是 Rust unsafe 边界的典型模式：Safe API 要求调用方通过外部证明满足前置条件。✅ 已验证"
+        }
+      ],
       "cross_references": [
         "../00_meta/inter_layer_map.md",
         "../01_foundation/01_ownership.md",
@@ -2709,7 +2389,7 @@
       "transitions": 7,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 74
+      "matrix_rows": 80
     },
     {
       "path": "concept\\02_intermediate\\04_error_handling.md",
@@ -3267,7 +2947,7 @@
       "layer": "L3",
       "title": "Unsafe Rust",
       "positioning": "",
-      "line_count": 973,
+      "line_count": 982,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -3387,15 +3067,21 @@
         },
         {
           "flags": [],
-          "lines": 16,
+          "lines": 11,
           "should_fail": false,
           "code_preview": "// extern \"C\" = 使用 C 调用约定 extern \"C\" {     fn c_function(x: i32) -> i32;  // 声明 ..."
         },
         {
           "flags": [],
-          "lines": 24,
+          "lines": 23,
           "should_fail": false,
-          "code_preview": "// ✅ repr(C): 与 C 结构体互操作 #[repr(C)] pub struct Point {     pub x: f64,     pub y..."
+          "code_preview": "use std::mem::{size_of, align_of};  // 默认 Rust 布局：编译器可重排字段 struct RustLayout { a..."
+        },
+        {
+          "flags": [],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "// ✅ repr(C) + 指针传递：C 结构体互操作 #[repr(C)] pub struct Point {     pub x: f64,     p..."
         }
       ],
       "sources": [],
@@ -3413,7 +3099,7 @@
       "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 9,
-      "matrix_rows": 108
+      "matrix_rows": 111
     },
     {
       "path": "concept\\03_advanced\\04_macros.md",

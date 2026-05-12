@@ -280,7 +280,7 @@ fn main() {
 
 ### 5.3 反例：返回局部引用（E0106 / E0716）
 
-```rust
+rust,compile_fail
 // ❌ 反例: 返回悬垂引用
 fn dangling() -> &String {
     let s = String::from("hello");  // s 是局部变量
@@ -314,7 +314,7 @@ fn borrow_from_input<'a>(s: &'a str) -> &'a str {
 
 ### 5.4 反例：生命周期不匹配（E0597）
 
-```rust
+rust,compile_fail
 // ❌ 反例: 结构体引用比数据活得长
 fn main() {
     let excerpt;
@@ -776,7 +776,7 @@ $$
 
 这保证了 Elision 不会引入额外的 outlives 约束，也不会遗漏必要的约束。其证明依赖于**生命周期偏序的可判定性**（引理 L2）和**单输入单输出的函数式依赖**（函数返回值的生命周期必须源自某个输入，防止悬垂引用）。
 
-```rust
+rust,ignore
 // Rule 1: 每个输入引用获得独立生命周期
 fn print(s: &str);           // ⟹ fn print<'a>(s: &'a str)
 
@@ -902,7 +902,7 @@ trait Iterator {
 2. **HRTB 失效**：即使尝试用 `for<'a> Iterator<Item = &'a T>`，也无法关联 `'a` 与 `self` 的借用周期
 3. **编译期拒绝**：若强行实现 `Iterator<Item = &str>` 并返回 `self.source` 的切片，编译器会报 E0495（生命周期不匹配），因为返回引用的生命周期必须比 `next` 的 `&mut self` 短，但 `Iterator` trait 无法表达这种依赖
 
-```rust
+rust,compile_fail
 // ❌ 编译错误: 标准 Iterator 无法自引用
 impl<'s> Iterator for Words<'s> {
     type Item = &str;  // 隐含 'static 或独立生命周期

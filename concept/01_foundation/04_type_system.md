@@ -327,7 +327,7 @@ fn main() {
 
 ### 5.3 反例：未覆盖的 match 分支（E0004）
 
-```rust
+rust,compile_fail
 // ❌ 反例: non-exhaustive pattern
 enum Color {
     Red,
@@ -374,7 +374,7 @@ fn print_color(c: Color) {
 
 ### 5.4 反例：递归类型需要间接层（E0072）
 
-```rust
+rust,compile_fail
 // ❌ 反例: 递归类型直接自包含
 enum List<T> {
     Cons(T, List<T>),  // E0072: recursive type has infinite size
@@ -676,7 +676,98 @@ fn main() {
 
 ---
 
+### 补充章节：`impl Trait` 与 `dyn Trait` 的类型论差异
+
+> **[Rust Reference: Impl Trait]** `impl Trait` 是**存在类型**（existential type）：调用方知道值满足某 Trait，但不知道具体类型。✅ 已验证
+>
+> **[Rust Reference: Trait Objects]** `dyn Trait` 是**动态分发**（dynamic dispatch）：通过胖指针（数据指针 + vtable 指针）在运行时解析方法调用。✅ 已验证
+
+#### 存在类型 vs 全称类型
+
+```text
+类型论视角:
+  impl Trait  ≈  ∃T. Trait(T)   （存在类型：某个满足 Trait 的类型）
+  <T: Trait>  ≈  ∀T. Trait(T)   （全称类型：所有满足 Trait 的类型）
+  dyn Trait   ≈  ∃T. Trait(T) + 运行时擦除  （存在类型 + 延迟解析）
+```
+
+| **维度** | `impl Trait`（返回位置） | `dyn Trait` | `<T: Trait>`（泛型） |
+|:---|:---|:---|:---|
+| **类型论** | 存在类型 ∃T | 存在类型 + 运行时擦除 | 全称类型 ∀T |
+| **分发方式** | 静态分发（单态化） | 动态分发（vtable） | 静态分发（单态化） |
+| **大小信息** | 编译期已知（单态化后） | 编译期未知（胖指针） | 编译期已知 |
+| **vtable 开销** | ❌ 无 | ✅ 双指针 + 间接调用 | ❌ 无 |
+| **异构集合** | ❌ 不支持 `Vec<impl Trait>` | ✅ `Vec<Box<dyn Trait>>` | ❌ 单一类型 |
+| **trait object** | ❌ 不能构造 `dyn` | ✅ 本身就是 `dyn` | ❌ 不能构造 `dyn` |
+| **隐藏实现** | ✅ 返回类型抽象 | ❌ 暴露为动态分发 | ❌ 编译期实例化 |
+
+#### 单态化 vs 动态分发：性能对比
+
+| **指标** | `impl Trait` / `<T: Trait>` | `dyn Trait` |
+|:---|:---|:---|
+| **调用开销** | 零成本（直接调用） | vtable 间接调用（1 次指针解引用） |
+| **内联优化** | ✅ 编译器可内联 | ❌ 通常无法内联 |
+| **二进制体积** | 每个实例化膨胀一份代码 | 一份代码，运行时分发 |
+| **缓存友好性** | 高（单一类型连续内存） | 低（vtable 指针跳跃访问） |
+| **编译时间** | 较长（单态化） | 较短 |
+
+#### vtable 内存开销
+
+```text
+dyn Trait 的胖指针布局:
+  胖指针 = [数据指针 | vtable 指针]
+         16 bytes（64 位系统）
+
+vtable 内容:
+  [drop_in_place | size | align | method_1 | method_2 | ...]
+
+开销分析:
+  - 每个 dyn Trait 值：额外 8 bytes（vtable 指针）
+  - 每个 vtable：每 Trait + 每类型 一份，方法数 × 8 bytes
+  - 间接调用：CPU 分支预测失败率更高
+```
+
+#### 选择决策树
+
+```mermaid
+graph TD
+    Q1[需要返回具体类型且隐藏实现细节?] -->|是| A1[返回 impl Trait]
+    Q1 -->|否| Q2[需要异构集合或运行时多态?]
+    Q2 -->|是| Q3[Trait 满足对象安全?]
+    Q3 -->|是| A2[使用 dyn Trait / Box<dyn Trait>]
+    Q3 -->|否| A3[拆分为对象安全子 Trait + Sized 方法]
+    Q2 -->|否| Q4[性能敏感且类型编译期已知?]
+    Q4 -->|是| A4[使用 <T: Trait> 泛型约束]
+    Q4 -->|否| A1
+
+    A1[impl Trait<br/>零成本 + 抽象]
+    A2[dyn Trait<br/>运行时灵活 + vtable 开销]
+    A3[重构 Trait 设计]
+    A4[泛型约束<br/>零成本 + 类型参数暴露]
+```
+
+```rust
+// ✅ impl Trait: 隐藏实现，零成本
+fn make_iter() -> impl Iterator<Item = u32> {
+    vec![1, 2, 3].into_iter()
+}
+
+// ✅ dyn Trait: 异构集合
+fn process_all(items: &[Box<dyn Drawable>]) {
+    for item in items { item.draw(); }
+}
+
+// ✅ 泛型：性能敏感路径
+fn max<T: Ord>(a: T, b: T) -> T { if a > b { a } else { b } }
+```
+
+> **[TRPL: Ch10.2]** `impl Trait` 适用于"返回某种 Iterator/Display，但不想暴露具体类型"；`dyn Trait` 适用于"需要运行时异构集合"。✅ 已验证
+
+---
+
 ## 十二、待补充与演进方向（TODOs）
+
+- [x] **TODO**: 补充 `impl Trait` 与 `dyn Trait` 的类型论差异 —— 优先级: 高 —— 已完成 v1.2
 
 - [ ] **TODO**: 补充 `!` (Never type) 的完整形式化分析与控制流图交互 —— 优先级: 中 —— 预计: Phase 1
 - [ ] **TODO**: 补充 Const Generics（常量泛型）的类型系统扩展 —— 优先级: 中 —— 预计: Phase 2

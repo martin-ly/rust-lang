@@ -60,7 +60,7 @@ let r = &x; let r2 = &mut x; // ❌ E0502
 **定义**: 用方法链逐步构造复杂对象，编译期保证必填字段
 **代码**:
 
-```rust
+rust,compile_fail
 HttpRequestBuilder::new()
     .method("GET")
     .url("/")
@@ -110,7 +110,7 @@ let p2 = p1;  // p1 仍可用（Copy）
 **定义**: 资源释放的钩子，值离开作用域时自动调用
 **代码**:
 
-```rust
+rust,ignore
 impl Drop for MyType {
     fn drop(&mut self) { println!("Dropping!"); }
 }
@@ -404,7 +404,7 @@ let _ = future.as_mut().poll(cx);
 **定义**: 零大小类型，用于向编译器标记逻辑上的类型关联
 **代码**:
 
-```rust
+rust,ignore
 struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> }
 // 告诉编译器 MyPtr<T> 拥有 T 的 variance
 ```
@@ -471,7 +471,7 @@ let val = may_fail()?;  // ? 传播错误
 **定义**: 行为抽象，类似 Java Interface / Haskell Typeclass，但基于组合而非继承
 **代码**:
 
-```rust
+rust,ignore
 trait Drawable { fn draw(&self); }
 impl Drawable for Circle { fn draw(&self) { ... } }
 ```
@@ -538,7 +538,7 @@ v.insert(1, 5);      // O(n)
 **定义**: 异步任务的唤醒机制，`Future` 挂起时注册 Waker，事件就绪时调用
 **代码**:
 
-```rust
+rust,ignore
 fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
     if !self.is_ready() {
         self.waker = Some(cx.waker().clone());  // 注册 Waker

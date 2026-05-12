@@ -277,7 +277,7 @@ fn main() {
 
 ### 7.3 反例：使用已 move 的值（编译错误 E0382）
 
-```rust
+rust,compile_fail
 // ❌ 反例: use of moved value
 fn main() {
     let s = String::from("hello");
@@ -294,7 +294,7 @@ fn main() {
 
 ### 7.4 反例：在函数间错误地假设所有权保留
 
-```rust
+rust,compile_fail
 // ❌ 反例: 期望函数调用后仍拥有值
 fn take_string(s: String) {
     println!("{}", s);

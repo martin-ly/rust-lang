@@ -334,7 +334,7 @@ impl Iterator for Counter {
 
 ### 5.3 反例：违反 Orphan Rule（E0117）
 
-```rust
+rust,compile_fail
 // ❌ 反例: 为外部类型实现外部 Trait
 use std::fmt::Display;
 
@@ -353,7 +353,7 @@ impl Display for Vec<u8> {  // E0117!
 
 **修正方案**：
 
-```rust
+rust,ignore
 // ✅ 方案 1: Newtype 模式
 struct MyVec(pub Vec<u8>);
 
@@ -370,7 +370,7 @@ impl MyDisplay for Vec<u8> { ... }  // Trait 是本地的，允许
 
 ### 5.4 反例：重叠实现（E0119）
 
-```rust
+rust,compile_fail
 // ❌ 反例: 重叠 blanket impl
 trait Foo {}
 
@@ -783,7 +783,7 @@ fn test_auto_trait() {
 
 **过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `trait` 定义、`impl` 实现、`where` 约束、关联类型等核心语法。关键是建立"Trait 是编译器检查契约的工具"这一操作性理解。从 Step 2 到 Step 3 的过渡自然发生：当学习者尝试为外部类型实现外部 Trait 时，会遇到 E0117——这恰好引出"自由并非无限"的规则层认知，语法实践自然驱动规则探索。
 
-```rust
+rust,ignore
 // 核心语法模式:
 trait Summary { fn summarize(&self) -> String; }
 impl Summary for NewsArticle { ... }
@@ -896,6 +896,95 @@ fn notify<T: Summary>(item: &T) { ... }
 | 形式化验证 | [04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) | Trait 系统的逻辑基础 |
 
 > **过渡到待补充方向**: 相关概念链接描绘了 Trait 在知识体系中的坐标，但任何文档都有演进空间。最后一节记录已识别的待补充项和优先级，为后续迭代提供明确的路线图。
+
+---
+
+### 补充章节：`impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）
+
+> **[Rust Reference: Return Position Impl Trait In Traits]** Rust 1.75 稳定了 RPITIT（Return Position Impl Trait In Traits），允许在 trait 方法签名中使用 `-> impl Trait`，编译器自动为每个实现者推导具体的关联类型。✅ 已验证
+>
+> **[RFC 2289]** AFIT（Abstracted Function In Trait）将 `impl Trait` 从函数参数/返回位置扩展到 trait 定义内部，简化关联类型的使用。✅ 已验证
+
+#### Rust 1.75+ AFIT 语法
+
+```rust
+// ✅ AFIT: trait 定义中直接使用 -> impl Trait（Rust 1.75+）
+trait Drawable {
+    fn draw(&self) -> impl std::fmt::Display;  // 编译器自动推导具体类型
+}
+
+struct Point { x: i32, y: i32 }
+
+impl Drawable for Point {
+    // 不需要显式指定关联类型
+    fn draw(&self) -> impl std::fmt::Display {
+        format!("({}, {})", self.x, self.y)
+    }
+}
+```
+
+#### 与显式关联类型的对比
+
+| **维度** | 显式关联类型 | AFIT (`-> impl Trait`) |
+|:---|:---|:---|
+| **语法** | `type Output; fn foo() -> Self::Output;` | `fn foo() -> impl Trait;` |
+| **实现者负担** | 需显式 `type Output = T;` | 编译器自动推断 |
+| **类型可见性** | 调用方可通过 `T::Output` 引用 | 隐藏具体类型，仅知满足 Trait |
+| **多返回类型** | 不同实现者可返回不同类型 | 不同实现者可返回不同类型 |
+| **trait object** | ✅ 支持 `dyn Trait` | ❌ **不能用于 trait object** |
+| **生命周期表达** | 可精确标注 | 需 `impl Trait + 'a` 形式 |
+
+```rust
+// 显式关联类型版本（等价但冗长）
+trait DrawableExplicit {
+    type Output: std::fmt::Display;
+    fn draw(&self) -> Self::Output;
+}
+
+impl DrawableExplicit for Point {
+    type Output = String;  // 必须显式指定
+    fn draw(&self) -> Self::Output {
+        format!("({}, {})", self.x, self.y)
+    }
+}
+```
+
+#### 编译器如何处理 `impl Trait` 返回
+
+```text
+AFIT 的编译器内部转换:
+  trait Drawable {
+      fn draw(&self) -> impl Display;
+  }
+  ↓ 去糖（desugar）
+  trait Drawable {
+      type __draw_ret: Display;  // 编译器生成的隐式关联类型
+      fn draw(&self) -> Self::__draw_ret;
+  }
+```
+
+编译器为每个 `impl` 自动生成一个**匿名关联类型**，其约束为 `impl` 后跟随的 Trait bounds。这保持了零成本抽象——调用点仍然单态化。
+
+#### 限制：不能用于 trait object
+
+```rust,ignore
+trait Factory {
+    fn create() -> impl Product;  // AFIT
+}
+
+// ❌ 错误：AFIT 不能构造 trait object
+let f: Box<dyn Factory> = ...;  // E0038: `create` 返回 impl Product，vtable 无法确定大小
+
+// ✅ 修正：显式关联类型允许 trait object
+trait FactoryFixed {
+    type Output: Product;
+    fn create() -> Self::Output;
+}
+```
+
+**原因**：`dyn Factory` 的 vtable 需要知道 `create` 返回类型的**大小**才能正确分配栈空间。AFIT 的返回类型由每个实现者独立决定，vtables 无法统一表示。
+
+> **[Rust Reference: Object Safety]** 含 RPITIT 的方法使 trait 不满足对象安全（object safety），因为 vtable 无法存储异构返回类型的大小信息。✅ 已验证
 
 ---
 

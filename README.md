@@ -1,77 +1,130 @@
-# Rust系统化学习项目
+# Rust 分层概念知识体系 v1.0
 
-> **Rust版本**: 1.95.0+ (stable)，部分前瞻模块需要 nightly
+> **Rust版本**: 1.97.0-nightly (2026-05-10)
 > **Edition**: 2024
-> **状态**: 生产就绪 | 权威对齐
+> **状态**: v1.0 正式发布 | 0 风险文件 | 100% 认知路径覆盖
 
-[![Rust](https://img.shields.io/badge/rust-1.95.0+-blue.svg)](https://www.rust-lang.org)
+[![Rust](https://img.shields.io/badge/rust-1.97.0+-blue.svg)](https://www.rust-lang.org)
 [![Edition](https://img.shields.io/badge/edition-2024-purple.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![KB Quality](https://img.shields.io/badge/kb_quality-0_risk_files-brightgreen.svg)](reports/kb_quality_dashboard.md)
 
 ---
 
-## 项目简介
+## 什么是这个项目？
 
-本项目是一个全面的Rust语言系统化学习资源，专注于：
+一个**分层、可验证、可搜索**的 Rust 概念知识库，覆盖从入门到形式化验证的完整学习路径。
 
-- **现代化工具链**: Rust 1.95.0+ / nightly + Edition 2024
-- **权威内容对齐**: 引用PLDI 2025、POPL 2026等顶会论文
-- **实践导向**: 13个学习crate覆盖核心概念 + exercises练习
-- **生产就绪**: 完整的CI/CD、Miri内存安全检查
+区别于传统的"代码示例集合"，本体系采用**七层认知架构**（L0-L7），每个概念都有：**定义 → 代码 → 反例 → 形式化 → 跨语言对比 → 工程实践 → 未来演进**。
+
+```text
+L0 元层 ──→ 学习指南、速查卡片、自测题库、质量仪表盘
+L1 基础 ──→ 所有权、借用、生命周期、类型系统
+L2 进阶 ──→ Trait、泛型、内存管理、错误处理
+L3 高级 ──→ 并发、异步、unsafe、宏
+L4 形式化 ─→ 线性逻辑、类型论、所有权形式化、RustBelt
+L5 对比 ──→ 多语言范式对比、安全边界分析
+L6 生态 ──→ 工具链、设计模式、核心 crate、应用领域
+L7 未来 ──→ AI 集成、形式化方法、语言演进
+```
 
 ---
 
 ## 快速开始
 
-### 系统要求
+### 学习路径
+
+| 目标 | 起点 | 预计时长 |
+|:---|:---|:---|
+| 🎯 **系统掌握** | [`learning_guide.md`](concept/00_meta/learning_guide.md) → L1 → L2 → L3 | 40-60h |
+| 💼 **面试准备** | [`quick_reference.md`](concept/00_meta/quick_reference.md) + [`self_assessment.md`](concept/00_meta/self_assessment.md) | 8-12h |
+| 🎓 **学术深入** | L4 形式化层 + [`semantic_space.md`](concept/00_meta/semantic_space.md) | 20-30h |
+| 🔧 **问题驱动** | [`self_assessment.md`](concept/00_meta/self_assessment.md) 错题 → 对应章节 | 按需 |
+
+### 质量审计
 
 ```bash
-rustc --version  # 需要 1.95.0+ (stable)
-cargo --version  # 需要 1.95.0+ (stable)
-# 注意: 部分 crate (c02, c04, c08) 使用 nightly 实验性特性，需 nightly 编译器
-```
+# 运行自动化质量审计
+python scripts/kb_auditor.py
 
-### 安装与运行
+# 查看仪表盘
+cat reports/kb_quality_dashboard.md
 
-```bash
-# 克隆项目
-git clone <repo-url>
-cd rust-lang
-
-# 安装工具链
-rustup show  # 会自动读取rust-toolchain.toml
-
-# 运行测试
-cargo test --workspace
+# 构建概念搜索索引
+python scripts/build_search_index.py
 ```
 
 ---
 
-## 文档导航
+## 核心文件导航
 
-所有文档位于 [`docs/`](docs/) 目录：
+### L0 元层：学习工具
 
-### 核心文档（根目录）
+| 文件 | 用途 | 规模 |
+|:---|:---|:---|
+| [`learning_guide.md`](concept/00_meta/learning_guide.md) | 4条学习路径 + 每级关键概念 + 前置依赖 | ~300行 |
+| [`quick_reference.md`](concept/00_meta/quick_reference.md) | A-Z概念速查 + 17个错误码 + 模式决策树 | ~630行 |
+| [`self_assessment.md`](concept/00_meta/self_assessment.md) | **80道自测题**（L1-L6，含折叠答案） | ~850行 |
+| [`semantic_space.md`](concept/00_meta/semantic_space.md) | 表征空间理论 + 等价表达 + 机制组合代数 | ~1000行 |
 
-| 文档 | 描述 |
-|------|------|
-| [docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md](docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md) | **2026生态梳理** - 含权威引用 |
-| [docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md](docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md) | 学术论文引用 |
-| [docs/MIGRATION_GUIDE_2026.md](docs/MIGRATION_GUIDE_2026.md) | 迁移到Rust 1.96 |
-| [docs/TERMINOLOGY_STANDARD.md](docs/TERMINOLOGY_STANDARD.md) | 术语标准 |
+### L1-L3：核心概念
 
-### 学习文档
+| 层级 | 文件 | 核心内容 |
+|:---|:---|:---|
+| L1 | [`01_ownership.md`](concept/01_foundation/01_ownership.md) | Move/Copy/Drop、RAII、所有权转移规则 |
+| L1 | [`02_borrowing.md`](concept/01_foundation/02_borrowing.md) | 借用规则、分离逻辑、分数权限 |
+| L1 | [`03_lifetimes.md`](concept/01_foundation/03_lifetimes.md) | 生命周期、NLL、Polonius、Elision形式化 |
+| L1 | [`04_type_system.md`](concept/01_foundation/04_type_system.md) | enum/impl Trait/dyn Trait、类型论差异 |
+| L2 | [`01_traits.md`](concept/02_intermediate/01_traits.md) | Auto trait、GATs、RPITIT、对象安全 |
+| L2 | [`02_generics.md`](concept/02_intermediate/02_generics.md) | Const Generics、单态化、HRTB |
+| L2 | [`03_memory_management.md`](concept/02_intermediate/03_memory_management.md) | Box/Rc/Arc、内部可变性、MaybeUninit |
+| L2 | [`04_error_handling.md`](concept/02_intermediate/04_error_handling.md) | Result/Option、?运算符、错误传播 |
+| L3 | [`01_concurrency.md`](concept/03_advanced/01_concurrency.md) | Send/Sync、Atomic内存序、死锁分析 |
+| L3 | [`02_async.md`](concept/03_advanced/02_async.md) | Future/Pin/Waker、async/await状态机 |
+| L3 | [`03_unsafe.md`](concept/03_advanced/03_unsafe.md) | FFI、repr属性、Miri、原始指针 |
+| L3 | [`04_macros.md`](concept/03_advanced/04_macros.md) | macro_rules!/过程宏、卫生性 |
 
-| 目录 | 内容 |
-|------|------|
-| [docs/01_learning/](docs/01_learning/) | 学习规划、路径指南 |
-| [docs/03_practice/](docs/03_practice/) | 实践项目 |
-| [docs/05_guides/](docs/05_guides/) | 主题使用指南 |
+### L4：形式化
 
-### 更多文档
+| 文件 | 核心内容 |
+|:---|:---|
+| [`01_linear_logic.md`](concept/04_formal/01_linear_logic.md) | ⊗/⊸/! 对应 Rust 所有权/Copy/借用 |
+| [`02_type_theory.md`](concept/04_formal/02_type_theory.md) | System F、HM算法、参数性定理 |
+| [`03_ownership_formal.md`](concept/04_formal/03_ownership_formal.md) | Oxide、Tree Borrows、Polonius |
+| [`04_rustbelt.md`](concept/04_formal/04_rustbelt.md) | Iris分离逻辑、CSL、验证工具链 |
 
-- [docs/00_MASTER_INDEX.md](docs/00_MASTER_INDEX.md) - 完整索引
-- [docs/README.md](docs/README.md) - 文档中心
+### L5-L7：对比、生态、未来
+
+| 层级 | 文件 | 核心内容 |
+|:---|:---|:---|
+| L5 | [`01_rust_vs_cpp.md`](concept/05_comparative/01_rust_vs_cpp.md) | RAII语义差异、性能对比 |
+| L5 | [`02_rust_vs_go.md`](concept/05_comparative/02_rust_vs_go.md) | 并发模型、错误处理、GC对比 |
+| L5 | [`03_paradigm_matrix.md`](concept/05_comparative/03_paradigm_matrix.md) | 多语言范式谱系 |
+| L5 | [`safety_boundaries.md`](concept/05_comparative/safety_boundaries.md) | unsafe边界、供应链安全 |
+| L6 | [`01_toolchain.md`](concept/06_ecosystem/01_toolchain.md) | Cargo、Workspace、Features |
+| L6 | [`02_patterns.md`](concept/06_ecosystem/02_patterns.md) | 类型状态、Builder、Newtype |
+| L6 | [`03_core_crates.md`](concept/06_ecosystem/03_core_crates.md) | serde/tokio/rayon等核心crate |
+| L6 | [`04_application_domains.md`](concept/06_ecosystem/04_application_domains.md) | WASM/嵌入式/CLI/游戏 |
+| L7 | [`01_ai_integration.md`](concept/07_future/01_ai_integration.md) | AI辅助编程、RL on编译错误 |
+| L7 | [`02_formal_methods.md`](concept/07_future/02_formal_methods.md) | Kani/Miri/CI集成 |
+| L7 | [`03_evolution.md`](concept/07_future/03_evolution.md) | Edition系统、Effects System |
+
+---
+
+## 质量基线
+
+| 指标 | 数值 | 状态 |
+|:---|:---|:---|
+| 总文件数 | 37 | ✅ |
+| 定理链 (⟹) | 277 | ✅ |
+| 反命题 | 98 | ✅ |
+| Mermaid图 | 178 | ✅ |
+| 代码块 | 319 | ✅ |
+| 死链 | 0 | ✅ |
+| 风险文件（非L0）| 0 | ✅ |
+| 认知路径覆盖率 | 100% | ✅ |
+| 自测题 | 80题 | ✅ |
+| 概念搜索索引 | 452概念 | ✅ |
 
 ---
 
@@ -79,63 +132,40 @@ cargo test --workspace
 
 ```
 rust-lang/
-├── README.md              # 📄 本文件
-├── CONTRIBUTING.md        # 🤝 贡献指南
-├── CHANGELOG.md           # 📝 变更日志
-├── FAQ.md                 # ❓ 常见问题
-├── Cargo.toml             # 📦 Workspace配置
-├── rust-toolchain.toml    # ⚙️ 工具链配置
-│
-├── docs/                  # 📚 文档中心
-│   ├── 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md
-│   ├── AUTHORITATIVE_SOURCES_AND_CITATIONS.md
-│   ├── MIGRATION_GUIDE_2026.md
-│   ├── 01_learning/       # 学习规划
-│   ├── 05_guides/         # 使用指南
-│   └── ...
-│
-├── crates/                # 📦 学习crate (c01-c13)
-│   ├── c01_ownership/     # 所有权与借用
-│   ├── c02_type_system/   # 类型系统
-│   ├── ...
-│   └── c13_embedded/      # 嵌入式系统
-│
-├── content/               # 📚 内容中心（前沿特性、生态、生产实践）
-│   ├── emerging/          # 前沿特性跟踪
-│   ├── ecosystem/         # 生态深度解析
-│   ├── production/        # 生产实践指南
-│   └── academic/          # 学术研究
-│
-├── exercises/             # 🏋️ 专项练习
-│
-├── examples/              # 💡 示例代码
-├── scripts/               # 🛠️ 脚本工具
-└── tests/                 # 🧪 测试套件
+├── concept/                    # 📚 知识体系核心（37个md文件）
+│   ├── 00_meta/                # L0: 学习工具 + 质量基础设施
+│   ├── 01_foundation/          # L1: 所有权/借用/生命周期/类型系统
+│   ├── 02_intermediate/        # L2: Trait/泛型/内存管理/错误处理
+│   ├── 03_advanced/            # L3: 并发/异步/unsafe/宏
+│   ├── 04_formal/              # L4: 线性逻辑/类型论/形式化
+│   ├── 05_comparative/         # L5: 多语言对比
+│   ├── 06_ecosystem/           # L6: 工具链/模式/crate/应用
+│   └── 07_future/              # L7: AI/形式化/演进
+├── scripts/
+│   ├── kb_auditor.py           # 质量审计脚本
+│   ├── build_search_index.py   # 概念搜索索引
+│   └── fix_code_blocks.py      # 代码块标记修复
+├── reports/
+│   └── kb_quality_dashboard.md # 质量仪表盘
+├── .github/workflows/
+│   └── kb_audit.yml            # CI自动审计
+├── concept_kb.json             # 结构化知识导出
+├── concept_search_index.json   # 概念搜索索引
+├── CHANGELOG.md                # 变更日志
+├── RELEASE_v1.0.md             # v1.0发布说明
+└── README.md                   # 本文件
 ```
 
 ---
 
-## 核心特性
+## 自动化 CI
 
-### Rust 1.96现代化
+每次 PR 自动运行：
 
-| 特性 | 状态 | 文档 |
-|------|------|------|
-| `array_windows` | ✅ 已集成 | [生态梳理](docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md) |
-| `LazyCell/LazyLock` API | ✅ 已迁移 | [迁移指南](docs/MIGRATION_GUIDE_2026.md) |
-| Edition 2024 | ✅ 已准备 | [工具链](docs/06_toolchain/) |
-| Miri Tree Borrows | ✅ CI配置 | [权威来源](docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md) |
-
-### 学术权威对齐
-
-- **Tree Borrows**: 引用PLDI 2025 Distinguished Paper
-- **Miri**: 引用POPL 2026顶会论文
-
----
-
-## 贡献指南
-
-请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 了解如何参与。
+- ✅ 死链检测
+- ✅ 风险文件识别
+- ✅ 定理链/代码块统计
+- ✅ 质量仪表盘更新
 
 ---
 
@@ -145,8 +175,7 @@ rust-lang/
 
 ---
 
-**维护者**: Rust学习项目团队
-**最后更新**: 2026-05-08
-**内容统计**: 23 文档 / 145+ 示例 / 80% 完成度
-**迁移记录**: ✅ Rust 1.96 迁移完成 (2026-04-10) | 深度扩展完成 (2026-05-08)
-**状态**: ✅ 生产就绪 | 🔄 持续扩充中
+**维护者**: rust-lang 知识体系项目组
+**最后更新**: 2026-05-13
+**版本**: v1.0.0
+**状态**: ✅ v1.0 正式发布

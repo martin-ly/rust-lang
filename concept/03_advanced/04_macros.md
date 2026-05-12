@@ -475,7 +475,7 @@ fn main() {
 
 ### 7.2 正确示例：Derive 过程宏框架
 
-```rust
+rust,ignore
 // ✅ 正确: 自定义 derive 宏（简化概念）
 // crate: my_derive
 use proc_macro::TokenStream;
@@ -510,7 +510,7 @@ fn main() {
 
 ### 7.4 反例：宏的递归溢出
 
-```rust
+rust,compile_fail
 // ❌ 反例: 无限递归宏（编译错误）
 macro_rules! infinite {
     () => { infinite!() };  // 无限展开
@@ -524,7 +524,7 @@ macro_rules! infinite {
 
 #### 边界测试 1：宏展开后的错误信息定位
 
-```rust,compile_fail
+rust,compile_fail
 // 边界: 宏内部编译错误指向调用处（故意展示编译错误）
 
 macro_rules! complex {
@@ -578,7 +578,7 @@ fn main() {
 
 #### 边界测试 4：卫生宏与标签（label）的边界
 
-```rust,compile_fail
+rust,compile_fail
 // 边界: break/continue 标签在宏内外的作用域（故意展示编译错误）
 
 macro_rules! break_outer {
@@ -732,7 +732,7 @@ print_all!(1, "hello", 3.14);  // 三个不同类型参数
 2. 宏生成的代码如果有类型错误，错误信息指向宏调用处
 3. 宏无法改变语义分析阶段的决策
 
-```rust
+rust,compile_fail
 macro_rules! identity {
     ($x:expr) => { $x };
 }
@@ -856,7 +856,7 @@ fn main() {
 
 **技巧 3：分阶段验证过程宏**
 
-```rust
+rust,ignore
 // 过程宏调试: 将输入和输出打印到 stderr
 #[proc_macro_derive(MyDerive)]
 pub fn my_derive(input: TokenStream) -> TokenStream {

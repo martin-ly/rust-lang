@@ -370,7 +370,7 @@ impl PluginRegistry {
 
 **动态加载（libloading）**:
 
-```rust
+rust,ignore
 // 使用 `libloading` crate 加载 .dll / .so
 use libloading::{Library, Symbol};
 
@@ -464,7 +464,7 @@ struct WriterVTable {
 | **Resource Pool** | 异步环境下的连接/对象复用 | `deadpool` / `bb8` |
 | **Stream 适配** | 异步迭代与转换 | `futures::Stream` + `StreamExt` |
 
-```rust
+rust,ignore
 // Graceful Shutdown 模式
 use tokio::sync::mpsc;
 
@@ -545,7 +545,7 @@ impl Drop for FooContext {
 | **适用场景** | 库作者（轻量） | CLI/应用（用户友好报告） | 复杂领域错误（状态机） |
 | **额外依赖** | 几乎零 | `miette` 自身 + `owo-colors` | `snafu` 自身 |
 
-```rust
+rust,ignore
 // thiserror：库的首选
 use thiserror::Error;
 

@@ -776,6 +776,90 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 | 所有权 / Drop | [01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | 内存管理根基 |
 | 借用规则 | [01_foundation/02_borrowing.md](../01_foundation/02_borrowing.md) | 内部可变性前提 |
 | 类型系统基础 | [01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | 智能指针的类型约束 |
+
+### 补充章节：`MaybeUninit<T>` 的内存安全边界
+
+> **[Rust Reference: MaybeUninit]** `MaybeUninit<T>` 是 Rust 提供的**未初始化内存的安全抽象**。它包装一块 `size_of::<T>()` 字节的内存，但**不假设该内存已包含有效的 T 值**，从而避免编译器基于 Validity Invariant 做出错误优化。✅ 已验证
+>
+> **[Rustonomicon: Untyped Memory]** 读取未初始化内存在 Rust 中是 UB，`MaybeUninit` 是 Safe Rust 中唯一合法处理未初始化堆栈/堆内存的方式。✅ 已验证
+
+#### 用途：未初始化内存的安全抽象
+
+```rust
+use std::mem::MaybeUninit;
+
+// ✅ 安全地分配未初始化的数组
+let mut buf: [MaybeUninit<u8>; 1024] = [MaybeUninit::uninit(); 1024];
+
+// 逐元素初始化（无需 unsafe 直到 assume_init）
+for i in 0..1024 {
+    buf[i] = MaybeUninit::new(i as u8);
+}
+
+// ✅ 安全：所有元素已初始化
+let initialized: [u8; 1024] = unsafe {
+    // Safety: buf 的每个 MaybeUninit 都已通过 new() 写入有效值
+    std::mem::transmute_copy(&buf)
+};
+```
+
+#### 与 `mem::uninitialized` 的区别
+
+| **维度** | `mem::uninitialized<T>()`（已废弃） | `MaybeUninit<T>` |
+|:---|:---|:---|
+| **安全性** | ⚠️ 立即产生无效 `T` 值（UB 风险） | ✅ 不假设内存有效 |
+| **编译器优化** | 编译器可能假设值为有效 → 危险优化 | 编译器知道可能未初始化 |
+| **数组创建** | 无法安全创建大数组 | ✅ `MaybeUninit::uninit()` |
+| **`assume_init`** | 隐式在返回值中发生 | 显式、需 unsafe、契约明确 |
+| **状态** | ❌ 已废弃（Rust 1.39+） | ✅ 标准方式 |
+
+```rust
+use std::mem;
+
+// ❌ 危险：uninitialized 立即产生无效 T（bool 可能不是 0/1）
+// let x: bool = unsafe { mem::uninitialized() };  // UB!
+
+// ✅ 安全：MaybeUninit 不假设值有效
+let x: MaybeUninit<bool> = MaybeUninit::uninit();
+```
+
+#### `assume_init` 的安全契约
+
+```text
+契约（Safety Contract）:
+  调用 MaybeUninit::assume_init() 之前，必须保证：
+    1. 内存已被写入一个合法的 T 值
+    2. 该值满足 T 的 Validity Invariant（如 bool 必须是 0/1，引用必须非空）
+    3. 不会重复调用 assume_init（避免 use-after-move）
+
+违反契约 = 立即 UB（编译器优化可能基于"值有效"假设产生任意行为）
+```
+
+#### 数组初始化示例
+
+```rust
+use std::mem::MaybeUninit;
+
+// ✅ 模式：安全初始化固定大小数组，避免默认构造开销
+fn init_array<F, T, const N: usize>(mut f: F) -> [T; N]
+where F: FnMut(usize) -> T
+{
+    let mut arr: [MaybeUninit<T>; N] = [const { MaybeUninit::uninit() }; N];
+    for i in 0..N {
+        arr[i] = MaybeUninit::new(f(i));
+    }
+    // Safety: 每个元素都已通过 new() 初始化
+    unsafe { std::mem::transmute_copy(&arr) }
+}
+
+let squares: [i32; 5] = init_array(|i| (i * i) as i32);
+assert_eq!(squares, [0, 1, 4, 9, 16]);
+```
+
+> **[来源: Rust Reference: MaybeUninit]** `assume_init` 的安全契约是 Rust unsafe 边界的典型模式：Safe API 要求调用方通过外部证明满足前置条件。✅ 已验证
+
+---
+
 | Trait 系统 | [01_traits.md](./01_traits.md) | Drop/Deref trait 的实现基础 |
 | 并发与 Send/Sync | [03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | Arc/Mutex 的线程安全 |
 | Pin 与自引用 | [03_advanced/02_async.md](../03_advanced/02_async.md) | 堆内存语义 |

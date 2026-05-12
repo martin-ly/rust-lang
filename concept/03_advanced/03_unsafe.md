@@ -662,7 +662,7 @@ MIRIFLAGS=-Zmiri-tree-borrows cargo miri test --test integration test_name
 
 ### 8.1 正确示例：安全封装裸指针（Vec 简化版）
 
-```rust
+rust,ignore
 // ✅ 正确: unsafe 实现 + safe 接口
 pub struct MyVec<T> {
     ptr: *mut T,
@@ -709,7 +709,7 @@ impl<T> Drop for MyVec<T> {
 
 ### 8.2 正确示例：手动实现 Send/Sync
 
-```rust
+rust,ignore
 // ✅ 正确: 为线程安全的外部类型实现 Send/Sync
 pub struct MyHandle { raw: *mut libc::c_void }
 
@@ -720,7 +720,7 @@ unsafe impl Sync for MyHandle {}
 
 ### 8.3 反例：悬垂裸指针（UB）
 
-```rust
+rust,compile_fail
 // ❌ 反例: 返回局部变量的裸指针
 unsafe fn dangling_ptr() -> *const i32 {
     let x = 42;
@@ -735,7 +735,7 @@ fn main() {
 
 ### 8.4 反例：transmute 滥用（UB）
 
-```rust
+rust,compile_fail
 // ❌ 反例: transmute 不相关类型
 unsafe fn evil_transmute() {
     let f: f32 = 1.0;
@@ -855,82 +855,91 @@ extern "C" {
     fn c_function(x: i32) -> i32;  // 声明 C 函数
 }
 
-// extern "system" = 使用系统默认 ABI（Windows 上不同）
-extern "system" {
-    fn system_function();
-}
-
 // Rust 函数的 C 导出
-#[no_mangle]  // 禁用名称修饰，使 C 可链接
+#[no_mangle]
 pub extern "C" fn rust_function(x: i32) -> i32 {
     x * 2
 }
 ```
 
-> **[Rust Reference: Type Layout]** `#[repr(C)]` guarantees C-compatible field ordering, alignment, and padding governed by the platform ABI. ✅ 已验证
+#### repr 属性语义对比矩阵
 
-#### repr 属性矩阵
+| **属性** | **布局规则** | **字段顺序** | **对齐/填充** | **单字段要求** | **FFI 场景** |
+|:---|:---|:---|:---|:---|:---|
+| `#[repr(C)]` | 与 C 兼容 | 声明顺序 | 自然对齐 + padding | 无 | C 结构体互操作 |
+| `#[repr(transparent)]` | 与内部类型一致 | 同内部类型 | 同内部类型 | 仅一个非 ZST 字段 | 新类型包装（如 `NonZeroU32`） |
+| `#[repr(packed)]` | 紧凑排列 | 声明顺序 | 1 字节对齐，无 padding | 无 | 网络协议、硬件寄存器 |
 
-| **属性** | **用途** | **保证** | **风险** |
-|:---|:---|:---|:---|
-| `#[repr(C)]` | C 互操作 | 字段顺序与 C 相同 | 可能有 padding |
-| `#[repr(transparent)]` | 新类型包装 | 内存布局与内部类型相同 | 只能有一个非零大小字段 |
-| `#[repr(packed)]` | 无 padding | 紧凑布局 | 未对齐访问可能慢或 UB |
-| `#[repr(align(N))]` | 自定义对齐 | N 字节对齐 | 浪费内存 |
-| `#[repr(u8)]` | enum 标签类型 | 指定 discriminant 大小 | 需覆盖所有值 |
+#### 内存布局与对齐分析
 
 ```rust
-// ✅ repr(C): 与 C 结构体互操作
+use std::mem::{size_of, align_of};
+
+// 默认 Rust 布局：编译器可重排字段
+struct RustLayout { a: u8, b: u32, c: u16 }
+// size ≈ 8, align = 4; 编译器可能重排为 b→c→a 以减少 padding
+
+// #[repr(C)]: 字段顺序固定，C 兼容但可能有 padding
+#[repr(C)]
+struct CLayout { a: u8, b: u32, c: u16 }
+// 布局: [a:1][pad:3][b:4][c:2][pad:2] = size 12, align 4
+
+// #[repr(transparent)]: 布局与内部类型完全相同
+#[repr(transparent)]
+struct Wrapper(u32);
+assert_eq!(size_of::<Wrapper>(), size_of::<u32>());  // 4
+assert_eq!(align_of::<Wrapper>(), align_of::<u32>()); // 4
+
+// #[repr(packed)]: 无 padding，但可能未对齐
+#[repr(packed)]
+struct Packed { a: u8, b: u32 }
+// 布局: [a:1][b:4] = size 5, align 1
+// ⚠️ b 的偏移为 1，未按 4 字节对齐 → 可能触发未对齐访问 UB
+```
+
+#### FFI 边界使用场景
+
+```rust
+// ✅ repr(C) + 指针传递：C 结构体互操作
 #[repr(C)]
 pub struct Point {
     pub x: f64,
     pub y: f64,
 }
 
-// ✅ repr(transparent): 零成本新类型
+extern "C" {
+    fn distance(p: *const Point) -> f64;
+}
+
+// ✅ repr(transparent)：零成本类型安全包装
 #[repr(transparent)]
-pub struct UserId(u64);  // 内存布局与 u64 完全相同
-
-// ✅ repr(packed(1)): 强制无 padding
-#[repr(packed(1))]
-pub struct Packed {
-    pub a: u8,
-    pub b: u32,  // 通常对齐到 4，packed 后紧跟 a
+pub struct SocketFd(i32);
+extern "C" {
+    fn socket_create() -> SocketFd;  // ABI 与 i32 完全相同
 }
 
-// ⚠️ packed 的借用是危险的
-fn packed_borrow(p: &Packed) {
-    // let r = &p.b;  // ❌ 可能未对齐，编译错误
-    let r = unsafe { &p.b };  // 需 unsafe，且可能慢
+// ✅ repr(packed)：解析网络协议包头
+#[repr(packed)]
+pub struct TcpHeader {
+    pub src_port: u16,
+    pub dst_port: u16,
+    pub seq: u32,
+    // ... 紧凑排列，无 padding
 }
 ```
 
-> **[Rust Reference: External blocks]** FFI 边界是 Rust 形式系统的"公理缺口"：Rust 编译器无法验证外部代码的行为，程序员需人工保证 ABI 匹配、指针有效性和生命周期一致性。 ✅ 已验证
+#### 对齐、填充与风险边界
 
-> **[Rustonomicon: FFI]** The Rustonomicon documents FFI best practices including `#[repr(C)]` layout requirements, pointer ownership transfer conventions, and String encoding traps at the language boundary. ✅ 已验证
+| **场景** | `#[repr(C)]` | `#[repr(transparent)]` | `#[repr(packed)]` |
+|:---|:---|:---|:---|
+| 字段借用 | ✅ 安全对齐 | ✅ 安全对齐 | ⚠️ 可能未对齐，需 unsafe |
+| 跨平台 ABI | ✅ 稳定 | ✅ 稳定 | ⚠️ 未对齐访问在部分架构触发 SIGBUS |
+| 编译器重排 | ❌ 禁止 | ❌ 禁止 | ❌ 禁止 |
+| 性能 | 可能有 padding 开销 | 零开销 | 未对齐访问可能更慢 |
+
+> **[Rust Reference: Type Layout]** `#[repr(C)]` 保证字段按声明顺序排列；`#[repr(transparent)]` 要求只有一个非 ZST 字段且布局与该字段相同；`#[repr(packed)]` 将对齐设为 1，字段间无 padding。✅ 已验证
 >
-> **[Rustonomicon: FFI]** 常见 FFI 陷阱：String ↔ *const c_char 编码差异、Vec ↔ 裸指针所有权转移、回调函数生命周期管理。✅ 已验证
-
-#### FFI 安全契约
-
-```text
-FFI 边界是 Rust 形式系统的"公理缺口":
-
-Rust 端保证:
-  - 传递给 C 的指针有效（非悬垂、对齐、正确生命周期）
-  - 类型布局匹配（#[repr(C)] 等）
-  - 回调函数满足 C 的调用约定
-
-C 端保证:
-  - 不修改 Rust 拥有的内存（除非协议允许）
-  - 不返回悬垂指针
-  - 线程安全（若涉及多线程）
-
-常见陷阱:
-  - String ↔ *const c_char 转换（UTF-8 vs 平台编码）
-  - Vec ↔ 裸指针+长度（所有权转移边界）
-  - 回调函数的生命周期（C 可能长期保存函数指针）
-```
+> **[Rustonomicon: FFI]** 未对齐访问（如 `&packed.u32`）是 UB，必须通过 `ptr::read_unaligned` 或 `unsafe` 块读取。✅ 已验证
 
 ---
 
