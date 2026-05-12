@@ -234,7 +234,7 @@
 | [L3: 异步](../03_advanced/02_async.md) | Pin 的核心定义：自引用安全 | ✅ 主定义 |
 | [L1: 借用](../01_foundation/02_borrowing.md) | Pin 与借用规则的交互 | ⚠️ 需链接到主定义 |
 | [L2: 内存管理](../02_intermediate/03_memory_management.md) | Pin 在堆内存中的使用 | ⚠️ 需链接到主定义 |
-| [L4: 形式化](../04_formal/03_ownership_formal.md) | Pin 的形式化语义 | 🔍 待补充精确对应 |
+| [L4: 形式化](../04_formal/03_ownership_formal.md) | Pin 的形式化语义 | ✅ 已添加 🔍 待补充标记，链接到 L3 §8 |
 
 **一致性要求**: 所有文件中对 Pin 的定义必须以 L3 为准，差异处需显式标注。
 
@@ -243,16 +243,16 @@
 | 文件 | 定义侧重点 | 一致性检查 |
 |:---|:---|:---|
 | [L3: 并发](../03_advanced/01_concurrency.md) | Send/Sync 的完整定义与规则 | ✅ 主定义 |
-| [L2: Trait](../02_intermediate/01_traits.md) | Send/Sync 作为 Auto Trait 的特性 | ⚠️ 需链接到主定义 |
-| [L4: RustBelt](../04_formal/04_rustbelt.md) | Send/Sync 的并发分离逻辑语义 | ⚠️ 需显式映射 |
+| [L2: Trait](../02_intermediate/01_traits.md) | Send/Sync 作为 Auto Trait 的特性 | ✅ 已链接 |
+| [L4: RustBelt](../04_formal/04_rustbelt.md) | Send/Sync 的并发分离逻辑语义 | ✅ 已显式映射 |
 
 ### 3.3 Unsafe（出现在 3+ 个文件中）
 
 | 文件 | 定义侧重点 | 一致性检查 |
 |:---|:---|:---|
 | [L3: Unsafe](../03_advanced/03_unsafe.md) | Unsafe 的完整定义与安全契约 | ✅ 主定义 |
-| [L1: 所有权](../01_foundation/01_ownership.md) | Unsafe 突破所有权 | ⚠️ 需标注为"边界条件" |
-| [L5: Rust vs C++](../05_comparative/01_rust_vs_cpp.md) | Unsafe 在对比语境中的意义 | ⚠️ 需与 L3 定义对齐 |
+| [L1: 所有权](../01_foundation/01_ownership.md) | Unsafe 突破所有权 | ✅ 已标注边界条件 |
+| [L5: Rust vs C++](../05_comparative/01_rust_vs_cpp.md) | Unsafe 在对比语境中的意义 | ✅ 已对齐 |
 | [L4: RustBelt](../04_formal/04_rustbelt.md) | Unsafe 在形式化中的范围 | ✅ 一致: unsafe 在证明范围外 |
 
 ### 3.4 生命周期（出现在 4+ 个文件中）

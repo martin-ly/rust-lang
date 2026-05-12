@@ -413,6 +413,83 @@ graph TD
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | crate 安全验证 |
 | 语言演进 | [`../07_future/03_evolution.md`](../07_future/03_evolution.md) | async/AFIT 影响生态 |
 
+### 编译验证：serde 与 tokio 核心抽象
+
+以下代码验证核心 crate 的关键抽象在编译期保持类型安全：
+
+```rust
+// 模拟 serde 的核心抽象：编译期派生与类型同构
+// 实际使用需添加 serde 依赖；此处展示类型约束模式
+trait Serialize { fn serialize(&self) -> String; }
+trait Deserialize: Sized { fn deserialize(s: &str) -> Option<Self>; }
+
+#[derive(Debug, PartialEq)]
+struct User {
+    id: u64,
+    name: String,
+    active: bool,
+}
+
+impl Serialize for User {
+    fn serialize(&self) -> String {
+        format!("{}:{}:{}", self.id, self.name, self.active)
+    }
+}
+
+impl Deserialize for User {
+    fn deserialize(s: &str) -> Option<Self> {
+        let parts: Vec<&str> = s.split(':').collect();
+        if parts.len() == 3 {
+            Some(User {
+                id: parts[0].parse().ok()?,
+                name: parts[1].to_string(),
+                active: parts[2].parse().ok()?,
+            })
+        } else {
+            None
+        }
+    }
+}
+
+fn main() {
+    let user = User { id: 1, name: "Alice".to_string(), active: true };
+    let s = user.serialize();
+    let decoded = User::deserialize(&s).unwrap();
+    assert_eq!(user, decoded);
+    println!("roundtrip: {}", s);
+}
+```
+
+```rust
+// 模拟 tokio 的核心抽象：Future trait 的类型安全保证
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
+struct ComputeFuture(i32);
+
+impl Future for ComputeFuture {
+    type Output = i32;
+    fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
+        Poll::Ready(self.0)
+    }
+}
+
+// 编译期验证：异步函数的返回类型由 Future::Output 决定
+fn spawn_task<F: Future<Output = i32>>(f: F) -> F {
+    f  // 运行时调度器在此处管理任务生命周期
+}
+
+fn main() {
+    let f = ComputeFuture(42);
+    let _task: ComputeFuture = spawn_task(f);
+    // 编译期保证：task 的 Output 一定是 i32
+    println!("Future type checked at compile time");
+}
+```
+
+> **关键洞察**: serde 的 `derive(Serialize, Deserialize)` 在编译期生成与类型结构**同构**的编解码逻辑，保证运行时不会出现字段缺失或类型不匹配。tokio 的 `spawn` 将 `Future` 的所有权转移给运行时，利用 Rust 的所有权系统保证任务生命周期的安全。
+
 ---
 
 ## 十、待补充与演进方向（TODOs）

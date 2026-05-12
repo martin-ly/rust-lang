@@ -898,6 +898,29 @@ Java ⊂ Rust（系统编程能力）
 
 > **深入阅读**: const generics 的能力边界详见 [`02_generics.md`](../02_intermediate/02_generics.md) §3；类型论基础详见 [`04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §2。
 
+### 6.4 知识体系导航：从元层到实践层
+
+本文件从"表征空间"的元视角分析了 Rust 的表达能力边界。
+以下映射指引读者从元概念深入到各层的具体机制：
+
+| 元概念（本文件） | 实践层文件 | 对应章节 | 映射关系 |
+|:---|:---|:---|:---|
+| **所有权算子 Own(T)** | [`01_ownership.md`](../01_foundation/01_ownership.md) | §1-§3 | 元定义 → 权威定义 + 形式化根基 |
+| **借用算子 Borrow(T, m)** | [`02_borrowing.md`](../01_foundation/02_borrowing.md) | §1-§3 | 元定义 → AXM 规则 + 分数权限 |
+| **生命周期算子 Lifetime('a)** | [`03_lifetimes.md`](../01_foundation/03_lifetimes.md) | §1-§4 | 元定义 → 区域类型 + 约束推导 |
+| **Trait 算子 Trait(B)** | [`01_traits.md`](../02_intermediate/01_traits.md) | §1-§3 | 元定义 → 行为抽象 + Orphan Rule |
+| **泛型算子 `Generic<T>`** | [`02_generics.md`](../02_intermediate/02_generics.md) | §1-§4 | 元定义 → 单态化 + 参数性定理 |
+| **异步算子 Async** | [`02_async.md`](../03_advanced/02_async.md) | §1-§8 | 元定义 → Future + Pin + 调度模型 |
+| **Unsafe 算子** | [`03_unsafe.md`](../03_advanced/03_unsafe.md) | §1-§7 | 元定义 → 逃逸舱口 + 别名模型 |
+| **宏算子 Macro** | [`04_macros.md`](../03_advanced/04_macros.md) | §1-§5 | 元定义 → 语法扩展 + 卫生宏 |
+| **语义封闭性** | [`04_rustbelt.md`](../04_formal/04_rustbelt.md) | §1-§6 | 元定理 → Iris 分离逻辑证明 |
+| **等价表达（继承→Trait）** | [`01_traits.md`](../02_intermediate/01_traits.md) §5 | 默认方法 + 组合 | 元分析 → 工程实践 |
+| **等价表达（异常→Result）** | [`04_error_handling.md`](../02_intermediate/04_error_handling.md) | §1-§4 | 元分析 → `?` 运算符 + 错误类型 |
+| **等价表达（虚函数→dyn）** | [`04_type_system.md`](../01_foundation/04_type_system.md) §4 | dyn Trait + enum | 元分析 → 类型系统实现 |
+| **并发安全** | [`01_concurrency.md`](../03_advanced/01_concurrency.md) | §1-§7 | 元分析 → Send/Sync + happens-before |
+| **跨语言对比** | [`01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | §1-§6 | 元分析 → 本体论差异 |
+| **依赖类型边界** | [`02_type_theory.md`](../04_formal/02_type_theory.md) | §1-§3 | 元分析 → HM 类型系统扩展 |
+
 ---
 
 ## 七、反命题分析（Anti-Propositions）
@@ -985,9 +1008,9 @@ graph TD
 
 ## 十、待补充与演进方向（TODOs）
 
-- [ ] **高**: 补充 effects system / algebraic effects 对表征空间的潜在影响
-- [ ] **高**: 补充 const trait 和 generic const items 的表征能力扩展分析
-- [ ] **中**: 补充 Rust 与 dependent types（Idris、Agda）的表征空间对比
-- [ ] **中**: 补充 Miri / Kani 在验证等价表达语义保持中的应用
+- [x] **高**: 补充 effects system / algebraic effects 对表征空间的潜在影响 — v1.1 §3.5.2
+- [x] **高**: 补充 const trait 和 generic const items 的表征能力扩展分析 — v1.1 §3.5.1
+- [x] **中**: 补充 Rust 与 dependent types（Idris、Agda）的表征空间对比 — v1.1 §6.3
+- [x] **中**: 补充 Miri / Kani 在验证等价表达语义保持中的应用 — v1.1 §4.6
 - [ ] **低**: 建立表征空间的机器可解析模型（JSON/YAML 导出）
-- [ ] **低**: 与 `concept_index.md` 和 `inter_layer_map.md` 同步更新
+- [x] **低**: 与 `concept_index.md` 和 `inter_layer_map.md` 同步更新 — v1.1 Phase 4

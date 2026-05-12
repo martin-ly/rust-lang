@@ -602,6 +602,49 @@ quadrantChart
 | 分离逻辑 O'Hearn 2007 | [O'Hearn, Reynolds, Yang — CSL 2001/2007] | ✅ |
 | RustBelt safe 子集证明 | [Jung et al., POPL 2018] | ✅ |
 
+### 编译验证：契约式编程与断言
+
+以下代码展示 Rust 中可通过类型系统和断言实现的轻量级形式化验证模式：
+
+```rust
+// 编译期断言：const assert 验证类型属性
+const fn assert_send_sync<T: Send + Sync>() {}
+
+struct ThreadSafeData {
+    value: std::sync::Arc<std::sync::Mutex<i32>>,
+}
+
+// 编译期验证 ThreadSafeData 是 Send + Sync
+const _: () = {
+    assert_send_sync::<ThreadSafeData>();
+};
+
+// 运行时契约：debug_assert 作为可验证的规范
+fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
+    debug_assert!(arr.is_sorted(), "binary_search requires sorted input");
+    let mut lo = 0;
+    let mut hi = arr.len();
+    while lo < hi {
+        let mid = (lo + hi) / 2;
+        match arr[mid].cmp(&target) {
+            std::cmp::Ordering::Less => lo = mid + 1,
+            std::cmp::Ordering::Greater => hi = mid,
+            std::cmp::Ordering::Equal => return Some(mid),
+        }
+    }
+    None
+}
+
+fn main() {
+    let arr = [1, 3, 5, 7, 9];
+    assert_eq!(binary_search(&arr, 5), Some(2));
+    assert_eq!(binary_search(&arr, 4), None);
+    println!("Contracts verified!");
+}
+```
+
+> **关键洞察**: Rust 的 `const` 上下文允许编译期验证类型属性（如 `Send + Sync`），而 `debug_assert` 提供了运行时可检查的规范。这两种机制分别是**轻量级形式化方法**的编译期和运行时维度——虽然不如 Kani/RustBelt 强大，但零额外依赖、零学习成本。
+
 ---
 
 ## 十三、相关概念链接

@@ -352,6 +352,40 @@ timeline
 | Aeneas 函数式翻译验证 | [Ho & Protzenko — ICFP 2022] | ✅ |
 | RefinedRust 自动化验证 | [PLDI 2024] | ✅ |
 
+### 编译验证：RFC 流程与 API 稳定性
+
+以下代码验证 Rust 的 API 稳定性契约——公开 Trait 的变更如何通过版本控制保持向后兼容：
+
+```rust
+// 模拟 Rust 标准库的 API 稳定性：Trait 默认方法保证向后兼容
+pub trait Processable {
+    // 稳定的核心方法
+    fn process(&self) -> String;
+
+    // Edition 2024 新增：默认方法不破坏现有实现
+    fn process_verbose(&self) -> String {
+        format!("[VERBOSE] {}", self.process())
+    }
+}
+
+struct MyData;
+
+impl Processable for MyData {
+    fn process(&self) -> String {
+        "processed".to_string()
+    }
+    // 不需要实现 process_verbose！默认方法自动可用
+}
+
+fn main() {
+    let data = MyData;
+    println!("{}", data.process());
+    println!("{}", data.process_verbose());
+}
+```
+
+> **关键洞察**: Rust 的 Trait 默认方法是**API 演化的核心机制**。新增默认方法不会破坏现有实现（Orphan Rule 保证无冲突），同时为新代码提供功能扩展。这是 Rust 能够每三年发布新 Edition 而不分裂生态的语法基础。
+
 ---
 
 ## 八、相关概念链接

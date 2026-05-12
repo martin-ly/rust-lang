@@ -1,7 +1,7 @@
 # AI × Rust：生成-验证闭环与确定性容器
 
 > **层级**: L7 前沿趋势
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Traits](./02_intermediate/01_traits.md) · [Formal Methods](./02_formal_methods.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Formal Methods](./02_formal_methods.md)
 > **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus/Creusot + LLM] · [Wikipedia]
 
 ---
@@ -376,6 +376,38 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 | 确定性容器与 Nix 关联 | [NixOS Wiki] · [Reproducible Builds] | ✅ |
 | Kiro 规约驱动生成 | [Amazon Kiro Blog] | ✅ |
 | Compiler-Guided Decoding | [PLDI 2024/2025] | ⚠️ 前沿 |
+
+### 编译验证：AI 生成代码的契约边界
+
+以下代码展示如何用 Rust 类型系统约束 AI 生成代码的安全边界：
+
+```rust
+// 用类型系统标记 AI 生成代码的 unsafe 边界
+struct AiGenerated<T>(T);
+
+impl AiGenerated<String> {
+    // AI 生成的解析函数必须在 safe 上下文中验证输入
+    fn parse_safe(s: &str) -> Option<Self> {
+        if s.len() < 1000 && s.is_ascii() {
+            Some(AiGenerated(s.to_string()))
+        } else {
+            None
+        }
+    }
+}
+
+// 编译期验证：AI 生成的函数不能绕过类型系统
+fn process_ai_output(input: AiGenerated<String>) -> String {
+    input.0.to_uppercase()
+}
+
+fn main() {
+    let data = AiGenerated::parse_safe("hello ai").unwrap();
+    println!("{}", process_ai_output(data));
+}
+```
+
+> **关键洞察**: AI 生成代码的主要风险在于**隐式假设**（如输入格式、内存布局）。Rust 的类型系统通过**显式契约**（如 `parse_safe` 的返回类型 `Option<Self>`）将这些假设转化为编译期可检查的约束。
 
 ---
 

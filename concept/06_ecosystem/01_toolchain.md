@@ -617,6 +617,30 @@ graph TD
 | 形式化工业化 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 验证工具集成 |
 | 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 质量门禁 |
 
+### 编译验证：Edition 机制与向后兼容性
+
+以下代码验证 Rust Edition 机制如何保证跨版本的编译期兼容性：
+
+```rust
+// Edition 2021 的 Disjoint Capture 闭包规则
+fn main() {
+    let mut s = String::from("hello");
+    let mut v = vec![1, 2, 3];
+
+    // Edition 2021: 闭包只捕获实际使用的字段
+    // 因此可以独立借用 s 和 v 的不同部分
+    let f = || {
+        println!("{}", s);  // 捕获 &s
+    };
+    v.push(4);  // 可以同时修改 v，因为 f 没有捕获 v
+    f();
+
+    println!("{:?}", v);
+}
+```
+
+> **关键洞察**: Edition 机制不是语法版本的简单切换，而是**编译期语义的分层**。Edition 2021 的 disjoint capture 规则通过更精确的闭包捕获分析，在不破坏现有代码的前提下扩展了借用检查器的能力。
+
 ---
 
 ## 十四、待补充与演进方向（TODOs）

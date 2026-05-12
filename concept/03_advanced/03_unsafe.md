@@ -396,10 +396,25 @@ Tree Borrows 用**树形结构**替代线性栈：
 | 特性 | Stacked Borrows | Tree Borrows |
 |:---|:---|:---|
 | 结构 | 线性栈（LIFO） | 树（父子路径） |
+| 节点类型 | `Unique`/`SharedReadOnly`/`SharedReadWrite`/`Foreign` | `Reserved`/`Active`/`Frozen`/`Disabled` |
 | 重叠读取 | 严格时序依赖 | 支持来自不同路径的多个 `&T` |
 | 裸指针宽容度 | 低（容易弹栈失效） | 高（保留更多合法模式） |
 | 链表/自引用 | 常被误判为 UB | 覆盖更多合法模式 |
+| 重借用（reborrow） | 按时间顺序失效 | 按路径兼容性判断 |
+| `UnsafeCell` 交互 | Foreign 标签限制 | 更精确的路径追踪 |
 | Miri 默认 | ❌（曾默认） | ✅（2023 年后默认） |
+| RustBelt 验证 | 已部分证明 | 🔍 待完整证明 |
+
+**精确对比：代码模式覆盖**
+
+| 代码模式 | Stacked Borrows | Tree Borrows | 状态 |
+|:---|:---|:---|:---|
+| 交替使用两个 `&T`（同一原始指针）| ❌ UB | ✅ 安全 | Tree Borrows 更精确 |
+| `get_or_insert` 模式（先读后备变）| ❌ UB | ✅ 安全 | Polonius + Tree Borrows |
+| Lending Iterator（自引用迭代器）| ❌ UB | ✅ 安全 | GATs + Tree Borrows |
+| 链表内部可变性 | ⚠️ 受限 | ✅ 更宽松 | 路径兼容 |
+| 简单 `Box::into_raw`/`from_raw` | ✅ 安全 | ✅ 安全 | 两者一致 |
+| `mem::swap` 两个 `&mut T` | ✅ 安全 | ✅ 安全 | 两者一致 |
 
 **与 RustBelt 的关系**
 

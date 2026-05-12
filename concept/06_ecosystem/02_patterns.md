@@ -1,7 +1,7 @@
 # Design Patterns（设计模式）
 
 > **层级**: L6 生态工程
-> **前置概念**: [Traits](./02_intermediate/01_traits.md) · [Generics](./02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md)
 > **主要来源**: [Rust API Guidelines] · [Rust Design Patterns] · [TRPL]
 
 ---
@@ -514,6 +514,95 @@ graph TD
     style T3 fill:#6f6
 ```
 
+### 编译验证：Typestate 与 Builder 模式
+
+以下代码验证 Rust 类型系统如何在编译期强制执行状态转换规则：
+
+```rust
+// Typestate 模式：编译期状态机验证
+struct Door<State> {
+    _state: std::marker::PhantomData<State>,
+}
+
+struct Closed;
+struct Open;
+
+impl Door<Closed> {
+    fn new() -> Self {
+        Door { _state: std::marker::PhantomData }
+    }
+    fn open(self) -> Door<Open> {
+        Door { _state: std::marker::PhantomData }
+    }
+}
+
+impl Door<Open> {
+    fn close(self) -> Door<Closed> {
+        Door { _state: std::marker::PhantomData }
+    }
+    fn pass_through(&self) -> &'static str {
+        "You passed through the open door!"
+    }
+}
+
+fn main() {
+    let door = Door::new();
+    let door = door.open();
+    println!("{}", door.pass_through());
+    let _door = door.close();
+    // let door = door.close(); // 编译错误：door 已 move
+}
+```
+
+```rust
+// Builder 模式：编译期强制逐步构造
+struct HttpRequest {
+    method: String,
+    url: String,
+    headers: Vec<(String, String)>,
+}
+
+struct HttpRequestBuilder {
+    method: Option<String>,
+    url: Option<String>,
+    headers: Vec<(String, String)>,
+}
+
+impl HttpRequestBuilder {
+    fn new() -> Self {
+        Self { method: None, url: None, headers: vec![] }
+    }
+    fn method(mut self, m: &str) -> Self {
+        self.method = Some(m.to_string()); self
+    }
+    fn url(mut self, u: &str) -> Self {
+        self.url = Some(u.to_string()); self
+    }
+    fn header(mut self, k: &str, v: &str) -> Self {
+        self.headers.push((k.to_string(), v.to_string())); self
+    }
+    fn build(self) -> Result<HttpRequest, &'static str> {
+        Ok(HttpRequest {
+            method: self.method.ok_or("method required")?,
+            url: self.url.ok_or("url required")?,
+            headers: self.headers,
+        })
+    }
+}
+
+fn main() {
+    let req = HttpRequestBuilder::new()
+        .method("GET")
+        .url("https://example.com")
+        .header("Accept", "application/json")
+        .build()
+        .unwrap();
+    println!("{} {}", req.method, req.url);
+}
+```
+
+> **关键洞察**: Typestate 模式利用泛型将运行时状态检查转化为编译期类型约束；Builder 模式利用所有权转移保证构造过程的原子性。两者都是 Rust 类型系统的**零成本抽象**——编译后无运行时开销。
+
 ---
 
 ## 七、与 L1-L3 的概念映射 {L6}
@@ -523,12 +612,12 @@ graph TD
 | RAII | L1 所有权 + Drop trait | `01_foundation/01_ownership.md` | 线性逻辑资源消耗 |
 | Typestate | L1 所有权 + L2 泛型 | `01_foundation/`, `02_intermediate/02_generics.md` | 编译期状态机验证 |
 | Newtype | L1 类型系统 | `01_foundation/04_type_system.md` | 零大小类型包装 |
-| Builder | L2 Trait + 方法链 | `02_intermediate/01_traits.md` | fluent API 构造 |
+| Builder | L2 Trait + 方法链 | `../02_intermediate/01_traits.md` | fluent API 构造 |
 | Zero-cost Abstraction | L2 单态化 | `02_intermediate/02_generics.md` | 参数多态的编译期消除 |
 | Interior Mutability | L1 借用 + L2 内存 | `01_foundation/02_borrowing.md`, `02_intermediate/03_memory_management.md` | 运行时权限检查替代编译期 |
-| Command | L2 Trait + L1 所有权 | `02_intermediate/01_traits.md` | 行为参数化 |
-| Visitor | L2 Trait + enum | `02_intermediate/01_traits.md` | 结构归纳 |
-| Strategy | L2 Trait + 泛型 | `02_intermediate/01_traits.md` | 多态分发 |
+| Command | L2 Trait + L1 所有权 | `../02_intermediate/01_traits.md` | 行为参数化 |
+| Visitor | L2 Trait + enum | `../02_intermediate/01_traits.md` | 结构归纳 |
+| Strategy | L2 Trait + 泛型 | `../02_intermediate/01_traits.md` | 多态分发 |
 | State Machine | L1 enum + match | `01_foundation/04_type_system.md` | 代数数据类型穷尽性 |
 
 ---

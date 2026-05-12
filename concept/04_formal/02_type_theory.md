@@ -454,6 +454,53 @@ enum List<T> {
 | 递归类型 (μα.A) | 递归 enum/struct | **近似** | 需 `Box` 解除无限大小 [来源: Pierce 2002, Ch.20] 💡 |
 | 依赖类型 | Const Generics（有限） | **部分** | 仅限编译期常量 [来源: 原创分析] ⚠️ |
 
+### 9.3 HRTB 与全称量词的形式化语义
+
+> **[学术来源: System F_ω]** · **[Rust Reference: Higher-Ranked Trait Bounds]** `for<'a> T: Trait<'a>` 是 Rust 类型系统中**高阶 Trait Bound**的语法，其形式化语义对应于一阶逻辑中的受限全称量词。✅
+
+**语法与逻辑对应**
+
+| Rust 语法 | 逻辑形式 | 类型论对应 | 限制 |
+|:---|:---|:---|:---|
+| `for<'a> T: Trait<'a>` | `∀'a. Trait(T, 'a)` | System F 的 `∀α.τ`（α 限定为生命周期）| 仅量化生命周期，不量化类型 |
+| `fn foo<'a>(x: &'a T)` | `λ'a.λx:&'a T. ...` | HM 推断 + 区域参数 | 生命周期参数不参与类型推断的多解歧义 |
+| `dyn for<'a> Fn(&'a T)` | `∃f. ∀'a. f: Fn(&'a T)` | 存在类型 + 全称量化 | 对象安全限制：不能出现在返回位置 |
+
+**与 System F 的精确关系**
+
+System F（Girard 1972, Reynolds 1974）的通用类型 `∀α.τ` 允许量化任意类型变量。Rust 的 HRTB 是 System F 的一个**受限子集**：
+
+```text
+System F:        ∀α.τ   where α ∈ Type
+Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
+
+关键区别:
+  1. 量化域不同: System F 量化类型；HRTB 量化生命周期
+  2. 消去规则不同: System F 的 ∀ 消去是类型应用（τ[σ/α]）
+                   HRTB 的 ∀ 消去是生命周期求解（'a ⊆ 'b）
+  3. 可满足性: System F 的类型 inhabitation 不可判定
+                HRTB 的生命周期约束可满足性是多项式时间可判定的
+```
+
+**可满足性分析**
+
+生命周期约束系统是一个**偏序约束系统**：
+
+```text
+约束形式:  'a: 'b   （'a 包含 'b，即 'a 比 'b 长）
+求解算法:  图可达性（Graph Reachability）
+复杂度:    O(V + E)  其中 V = 生命周期变量数, E = 约束数
+
+对比:
+  HM 类型推断:     O(n³) 最坏情况（n = 表达式大小）
+  GATs 约束求解:   不可判定（无限制时）
+  HRTB 约束求解:   O(V + E) — 多项式时间
+```
+
+> **关键洞察**: HRTB 的**可判定性**来自生命周期量化域的结构性——生命周期是偏序关系上的点，而非任意类型。这使得 Rust 可以在编译期高效求解高阶生命周期约束，而无需面对 System F 的不可判定性噩梦。
+
+> **深入阅读**: 生命周期约束求解详见 [`03_lifetimes.md`](../01_foundation/03_lifetimes.md) §4；泛型约束系统详见 [`02_generics.md`](../02_intermediate/02_generics.md) §3。
+
 ---
 
 ## 十、知识来源与国际课程对齐
