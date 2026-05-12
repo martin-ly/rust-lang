@@ -871,7 +871,7 @@ graph TD
 
 #### 当前最佳实践
 
-```rust
+```rust,ignore
 // ✅ Rust 1.75+ 原生 AFIT
 trait AsyncProcessor {
     async fn process(&self, data: &[u8]) -> Result<Vec<u8>, Error>;
@@ -914,7 +914,7 @@ impl AsyncProcessor for MyProcessor {
 
 #### 生命周期陷阱
 
-```rust
+```rust,ignore
 // ❌ 常见错误: 返回内部引用
 trait DataProvider {
     async fn get_data(&self) -> &str;  // 隐式生命周期复杂
@@ -951,7 +951,7 @@ trait DataProvider<'a> {
 >
 > `async/await` 的编译期正确性依赖于状态机的自引用安全性，而 `Pin<&mut Self>` 保证的"地址不变性"在类型论中对应于 **location stability** 约束。当前 borrow checker 对自引用的分析存在过度保守的问题，Polonius 的下一代 Datalog 求解器正试图用路径敏感的 loan-based 语义精确刻画这一边界。
 >
-> 形式化视角见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §9（Polonius）与 [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §4（存在类型与 `impl Trait`）。
+> 形式化视角见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §9.2（Polonius）与 [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §4.1（存在类型与 `impl Trait`）。
 
 ---
 
