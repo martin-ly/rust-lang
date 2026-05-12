@@ -12,7 +12,7 @@ Enter the new date: (yy-mm-dd)
 | 总定理链 (⟹) | 259 | ≥270 | ⚠️ |
 | 总反命题 | 98 | ≥40 | ✅ |
 | 总 Mermaid 图 | 180 | ≥50 | ✅ |
-| 编译验证代码块 | 290 | ≥150 | ✅ |
+| 编译验证代码块 | 292 | ≥150 | ✅ |
 | 定理矩阵总行 | 3621 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 
@@ -52,7 +52,7 @@ Enter the new date: (yy-mm-dd)
 | concept\00_meta\sources.md | L0 | 302 | 0 | 0 | 2 | 0 | 0 | ❌ |
 | concept\00_meta\todos.md | L0 | 205 | 0 | 0 | 0 | 0 | 0 | ❌ |
 | concept\01_foundation\01_ownership.md | L1 | 702 | 6 | 3 | 7 | 10 | 16 | ✅ |
-| concept\01_foundation\02_borrowing.md | L1 | 775 | 3 | 3 | 6 | 11 | 20 | ✅ |
+| concept\01_foundation\02_borrowing.md | L1 | 775 | 3 | 3 | 6 | 13 | 20 | ✅ |
 | concept\01_foundation\03_lifetimes.md | L1 | 928 | 11 | 3 | 4 | 18 | 16 | ✅ |
 | concept\01_foundation\04_type_system.md | L1 | 780 | 10 | 3 | 5 | 9 | 16 | ✅ |
 | concept\02_intermediate\01_traits.md | L2 | 1002 | 10 | 7 | 5 | 23 | 10 | ✅ |

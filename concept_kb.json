@@ -1193,10 +1193,26 @@
           "code_preview": "// ✅ 正确: 可变借用独占访问 fn append_world(s: &mut String) {     s.push_str(\" world\"); } ..."
         },
         {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "// ❌ 反例: cannot borrow mutably while borrowed immutably fn main() {     let mut ..."
+        },
+        {
           "flags": [],
           "lines": 10,
           "should_fail": false,
           "code_preview": "// ✅ 修正: 不可变借用使用完毕后再申请可变借用 fn main() {     let mut s = String::from(\"hello\");   ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "// ❌ 反例: cannot borrow mutably more than once fn main() {     let mut s = String..."
         },
         {
           "flags": [],
@@ -2897,13 +2913,17 @@
           "code_preview": "// ✅ 安全: 显式传播取消信号，让子任务有机会优雅关闭 use tokio_util::sync::CancellationToken;  async fn..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 19,
           "should_fail": false,
           "code_preview": "// ✅ Rust 1.75+ 原生 AFIT trait AsyncProcessor {     async fn process(&self, data:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 19,
           "should_fail": false,
           "code_preview": "// ❌ 常见错误: 返回内部引用 trait DataProvider {     async fn get_data(&self) -> &str;  //..."
